@@ -84,18 +84,19 @@ class Planet : public StelObject
 public:
 	friend class SolarSystem;
 	Planet(const QString& englishName,
-		   int flagLighting,
-		   double radius,
-		   double oblateness,
-		   Vec3f color,
-		   float albedo,
-		   const QString& texMapName,
-		   posFuncType _coordFunc,
-		   void* userDataPtr,
-		   OsculatingFunctType *osculatingFunc,
-		   bool closeOrbit,
-		   bool hidden,
-		   bool hasAtmosphere);
+	       int flagLighting,
+	       double radius,
+	       double oblateness,
+	       Vec3f color,
+	       float albedo,
+	       const QString& texMapName,
+	       posFuncType _coordFunc,
+	       void* userDataPtr,
+	       OsculatingFunctType *osculatingFunc,
+	       bool closeOrbit,
+	       bool hidden,
+	       bool hasAtmosphere,
+	       const QString &pType);
 
 	~Planet();
 
@@ -110,8 +111,7 @@ public:
 	//! - Distance
 	//! - Size
 	//! - PlainText
-	//! - Extra1: Heliocentric Ecliptical Coordinates & Observer-planetocentric Ecliptical Coordinates
-	//! - Extra2: Phase, illumination, phase angle & elongation from the Sun
+	//! - Extra: Heliocentric Ecliptical Coordinates & Observer-planetocentric Ecliptical Coordinates, Phase, illumination, phase angle & elongation from the Sun
 	//! @param core the StelCore object
 	//! @param flags a set of InfoStringGroup items to include in the return value.
 	//! @return a QString containing an HMTL encoded description of the Planet.

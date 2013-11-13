@@ -36,6 +36,7 @@
 #include "SolarSystem.hpp"
 #include "LandscapeMgr.hpp"
 #include "StelTranslator.hpp"
+#include "StelActionMgr.hpp"
 
 #include <QSettings>
 #include <QDebug>
@@ -76,6 +77,8 @@ StelCore::StelCore() : movementMgr(NULL), geodesicGrid(NULL), currentProjectionT
 	currentProjectorParams.flipVert = conf->value("projection/flip_vert",false).toBool();
 
 	currentProjectorParams.gravityLabels = conf->value("viewing/flag_gravity_labels").toBool();
+	
+	currentProjectorParams.devicePixelsPerPixel = StelApp::getInstance().getDevicePixelsPerPixel();
 }
 
 
@@ -150,6 +153,55 @@ void StelCore::init()
 
 	QString tmpstr = conf->value("projection/type", "ProjectionStereographic").toString();
 	setCurrentProjectionTypeKey(tmpstr);
+
+	// Register all the core actions.
+	QString timeGroup = N_("Date and Time");
+	QString movementGroup = N_("Movement and Selection");
+	QString displayGroup = N_("Display Options");
+	StelActionMgr* actionsMgr = StelApp::getInstance().getStelActionManager();
+	actionsMgr->addAction("actionIncrease_Time_Speed", timeGroup, N_("Increase time speed"), this, "increaseTimeSpeed()", "L");
+	actionsMgr->addAction("actionDecrease_Time_Speed", timeGroup, N_("Decrease time speed"), this, "decreaseTimeSpeed()", "J");
+	actionsMgr->addAction("actionIncrease_Time_Speed_Less", timeGroup, N_("Increase time speed (a little)"), this, "increaseTimeSpeedLess()", "Shift+L");
+	actionsMgr->addAction("actionDecrease_Time_Speed_Less", timeGroup, N_("Decrease time speed (a little)"), this, "decreaseTimeSpeedLess()", "Shift+J");
+	actionsMgr->addAction("actionSet_Real_Time_Speed", timeGroup, N_("Set normal time rate"), this, "toggleRealTimeSpeed()", "K");
+	actionsMgr->addAction("actionSet_Time_Rate_Zero", timeGroup, N_("Set time rate to zero"), this, "setZeroTimeSpeed()", "7");
+	actionsMgr->addAction("actionReturn_To_Current_Time", timeGroup, N_("Set time to now"), this, "setTimeNow()", "8");
+	actionsMgr->addAction("actionAdd_Solar_Hour", timeGroup, N_("Add 1 solar hour"), this, "addHour()", "Ctrl+=");
+	actionsMgr->addAction("actionAdd_Solar_Day", timeGroup, N_("Add 1 solar day"), this, "addDay()", "=");
+	actionsMgr->addAction("actionAdd_Solar_Week", timeGroup, N_("Add 1 solar week"), this, "addWeek()", "]");
+	actionsMgr->addAction("actionSubtract_Solar_Hour", timeGroup, N_("Subtract 1 solar hour"), this, "subtractHour()", "Ctrl+-");
+	actionsMgr->addAction("actionSubtract_Solar_Day", timeGroup, N_("Subtract 1 solar day"), this, "subtractDay()", "-");
+	actionsMgr->addAction("actionSubtract_Solar_Week", timeGroup, N_("Subtract 1 solar week"), this, "subtractWeek()", "[");
+	actionsMgr->addAction("actionAdd_Sidereal_Day", timeGroup, N_("Add 1 sidereal day"), this, "addSiderealDay()", "Alt+=");
+	actionsMgr->addAction("actionAdd_Sidereal_Week", timeGroup, N_("Add 1 sidereal week"), this, "addSiderealWeek()", "Alt+]");
+	actionsMgr->addAction("actionAdd_Sidereal_Month", timeGroup, N_("Add 1 sidereal month"), this, "addSiderealMonth()", "Alt+Shift+]");
+	actionsMgr->addAction("actionAdd_Sidereal_Year", timeGroup, N_("Add 1 sidereal year"), this, "addSiderealYear()", "Ctrl+Alt+Shift+]");
+	actionsMgr->addAction("actionAdd_Sidereal_Century", timeGroup, N_("Add 1 sidereal century"), this, "addSiderealCentury()");
+	actionsMgr->addAction("actionAdd_Synodic_Month", timeGroup, N_("Add 1 synodic month"), this, "addSynodicMonth()");
+	actionsMgr->addAction("actionAdd_Draconic_Month", timeGroup, N_("Add 1 draconic month"), this, "addDraconicMonth()");
+	actionsMgr->addAction("actionAdd_Draconic_Year", timeGroup, N_("Add 1 draconic year"), this, "addDraconicYear()");
+	actionsMgr->addAction("actionAdd_Anomalistic_Month", timeGroup, N_("Add 1 anomalistic month"), this, "addAnomalisticMonth()");
+	actionsMgr->addAction("actionAdd_Tropical_Month", timeGroup, N_("Add 1 mean tropical month"), this, "addTropicalMonth()");
+	actionsMgr->addAction("actionAdd_Tropical_Year", timeGroup, N_("Add 1 mean tropical year"), this, "addTropicalYear()");
+	actionsMgr->addAction("actionAdd_Tropical_Century", timeGroup, N_("Add 1 mean tropical century"), this, "addTropicalCentury()");
+	actionsMgr->addAction("actionSubtract_Sidereal_Day", timeGroup, N_("Subtract 1 sidereal day"), this, "subtractSiderealDay()", "Alt+-");
+	actionsMgr->addAction("actionSubtract_Sidereal_Week", timeGroup, N_("Subtract 1 sidereal week"), this, "subtractSiderealWeek()", "Alt+[");
+	actionsMgr->addAction("actionSubtract_Sidereal_Month", timeGroup, N_("Subtract 1 sidereal month"), this, "subtractSiderealMonth()", "Alt+Shift+[");
+	actionsMgr->addAction("actionSubtract_Sidereal_Year", timeGroup, N_("Subtract 1 sidereal year"), this, "subtractSiderealYear()", "Ctrl+Alt+Shift+[");
+	actionsMgr->addAction("actionSubtract_Sidereal_Century", timeGroup, N_("Subtract 1 sidereal century"), this, "subtractSiderealCentury()");
+	actionsMgr->addAction("actionSubtract_Synodic_Month", timeGroup, N_("Subtract 1 synodic month"), this, "subtractSynodicMonth()");
+	actionsMgr->addAction("actionSubtract_Draconic_Month", timeGroup, N_("Subtract 1 draconic month"), this, "subtractDraconicMonth()");
+	actionsMgr->addAction("actionSubtract_Draconic_Year", timeGroup, N_("Subtract 1 draconic year"), this, "subtractDraconicYear()");
+	actionsMgr->addAction("actionSubtract_Anomalistic_Month", timeGroup, N_("Subtract 1 anomalistic month"), this, "subtractAnomalisticMonth()");
+	actionsMgr->addAction("actionSubtract_Tropical_Month", timeGroup, N_("Subtract 1 mean tropical month"), this, "subtractTropicalMonth()");
+	actionsMgr->addAction("actionSubtract_Tropical_Year", timeGroup, N_("Subtract 1 mean tropical year"), this, "subtractTropicalYear()");
+	actionsMgr->addAction("actionSubtract_Tropical_Century", timeGroup, N_("Subtract 1 mean tropical century"), this, "subtractTropicalCentury()");
+
+	actionsMgr->addAction("actionSet_Home_Planet_To_Selected", movementGroup, N_("Set home planet to selected planet"), this, "moveObserverToSelected()", "Ctrl+G");
+	actionsMgr->addAction("actionGo_Home_Global", movementGroup, N_("Go to home"), this, "returnToHome()", "Ctrl+H");
+	actionsMgr->addAction("actionHorizontal_Flip", displayGroup, N_("Flip scene horizontally"), this, "flipHorz", "Ctrl+Shift+H", "", true);
+	actionsMgr->addAction("actionVertical_Flip", displayGroup, N_("Flip scene vertically"), this, "flipVert", "Ctrl+Shift+V", "", true);
+	
 }
 
 
@@ -269,6 +321,19 @@ StelMovementMgr* StelCore::getMovementMgr()
 const StelMovementMgr* StelCore::getMovementMgr() const
 {
 	return movementMgr;
+}
+
+SphericalCap StelCore::getVisibleSkyArea() const
+{
+	const LandscapeMgr* landscapeMgr = GETSTELMODULE(LandscapeMgr);
+	Vec3d up(0, 0, 1);
+	up = altAzToJ2000(up, RefractionOff);
+	
+	if (landscapeMgr->getIsLandscapeFullyVisible())
+	{
+		return SphericalCap(up, -0.035f);
+	}
+	return SphericalCap(up, -1.f);
 }
 
 void StelCore::setClippingPlanes(double znear, double zfar)

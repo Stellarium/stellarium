@@ -52,7 +52,6 @@
 #include "StelGuiBase.hpp"
 #include "MilkyWay.hpp"
 
-#include <QAction>
 #include <QDateTime>
 #include <QDebug>
 #include <QDir>
@@ -484,14 +483,10 @@ void StelMainScriptAPI::removeSkyImage(const QString& id)
 
 void StelMainScriptAPI::loadSound(const QString& filename, const QString& id)
 {
-	QString path;
-	try
+	QString path = StelFileMgr::findFile("scripts/" + filename);
+	if (path.isEmpty())
 	{
-		path = StelFileMgr::findFile("scripts/" + filename);
-	}
-	catch(std::runtime_error& e)
-	{
-		qWarning() << "cannot play sound" << QDir::toNativeSeparators(filename) << ":" << e.what();
+		qWarning() << "cannot play sound" << QDir::toNativeSeparators(filename);
 		return;
 	}
 
@@ -520,14 +515,10 @@ void StelMainScriptAPI::dropSound(const QString& id)
 
 void StelMainScriptAPI::loadVideo(const QString& filename, const QString& id, float x, float y, bool show, float alpha)
 {
-	QString path;
-	try
+	QString path = StelFileMgr::findFile("scripts/" + filename);
+	if (path.isEmpty())
 	{
-		path = StelFileMgr::findFile("scripts/" + filename);
-	}
-	catch(std::runtime_error& e)
-	{
-		qWarning() << "cannot play video" << QDir::toNativeSeparators(filename) << ":" << e.what();
+		qWarning() << "cannot play video" << QDir::toNativeSeparators(filename);
 		return;
 	}
 
@@ -768,8 +759,8 @@ QVariantMap StelMainScriptAPI::getObjectInfo(const QString& name)
 	map.insert("altitude-geometric", alt*180./M_PI);
 	map.insert("azimuth-geometric", azi*180./M_PI);
 
-	// galactic long/lat in J2000
-	pos = obj->getJ2000GalacticPos(core);
+	// galactic long/lat
+	pos = obj->getGalacticPos(core);
 	StelUtils::rectToSphe(&glong, &glat, pos);
 	map.insert("glong", alt*180./M_PI);
 	map.insert("glat", azi*180./M_PI);
@@ -840,8 +831,8 @@ QVariantMap StelMainScriptAPI::getSelectedObjectInfo()
 	map.insert("altitude-geometric", alt*180./M_PI);
 	map.insert("azimuth-geometric", azi*180./M_PI);
 
-	// galactic long/lat in J2000
-	pos = obj->getJ2000GalacticPos(core);
+	// galactic long/lat
+	pos = obj->getGalacticPos(core);
 	StelUtils::rectToSphe(&glong, &glat, pos);
 	map.insert("glong", alt*180./M_PI);
 	map.insert("glat", azi*180./M_PI);

@@ -46,6 +46,7 @@ typedef QSharedPointer<Exoplanet> ExoplanetP;
 class Exoplanets : public StelObjectModule
 {
 	Q_OBJECT
+	Q_PROPERTY(bool showExoplanets READ getFlagShowExoplanets WRITE setFlagShowExoplanets)
 public:	
 	//! @enum UpdateState
 	//! Used for keeping for track of the download/update status
@@ -199,6 +200,10 @@ private:
 	//! Get the version of catalog format from the "version of the format" value in the exoplanets.json file
 	//! @return version string, e.g. "1"
 	int getJsonFileFormatVersion(void);
+
+	//! Check format of the catalog of exoplanets
+	//! @return valid boolean, e.g. "true"
+	bool checkJsonFileFormat(void);
 
 	//! parse JSON file and load exoplanets to map
 	QVariantMap loadEPMap(QString path=QString());

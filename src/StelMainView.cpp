@@ -27,21 +27,28 @@
 #include "StelGuiBase.hpp"
 #include "StelTranslator.hpp"
 #include "StelUtils.hpp"
+#include "StelActionMgr.hpp"
 
+#include <QDeclarativeItem>
+#include <QDebug>
+#include <QDir>
 #include <QGLWidget>
 #include <QGuiApplication>
-#include <QSettings>
-#include <QDebug>
 #include <QFileInfo>
+#include <QIcon>
+#include <QMoveEvent>
+#include <QOpenGLFunctions>
 #include <QPluginLoader>
+#include <QScreen>
+#include <QSettings>
 #include <QtPlugin>
 #include <QThread>
 #include <QTimer>
-#include <QDir>
-#include <QIcon>
-#include <QDeclarativeItem>
-#include <QOpenGLFunctions>
+#include <QWidget>
+#include <QWindow>
+#include <QDeclarativeContext>
 
+#include <clocale>
 
 // Initialize static variables
 StelMainView* StelMainView::singleton = NULL;
@@ -108,7 +115,7 @@ void StelSkyItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *optio
 	StelApp::getInstance().draw();
 
 	painter->endNativePainting();
-	// update();
+	update();
 }
 
 void StelSkyItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
@@ -117,7 +124,11 @@ void StelSkyItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
 	// XXX: to reintroduce
 	//distortPos(&pos);
 	pos.setY(height() - 1 - pos.y());
-	QMouseEvent newEvent(QEvent::MouseButtonPress, QPoint(pos.x(),pos.y()), event->button(), event->buttons(), event->modifiers());
+	QMouseEvent newEvent(QEvent::MouseButtonPress,
+								QPoint(pos.x(), pos.y()),
+								event->button(),
+								event->buttons(),
+								event->modifiers());
 	StelApp::getInstance().handleClick(&newEvent);
 }
 
@@ -127,7 +138,11 @@ void StelSkyItem::mouseReleaseEvent(QGraphicsSceneMouseEvent* event)
 	// XXX: to reintroduce
 	// distortPos(&pos);
 	pos.setY(height() - 1 - pos.y());
-	QMouseEvent newEvent(QEvent::MouseButtonRelease, QPoint(pos.x(),pos.y()), event->button(), event->buttons(), event->modifiers());
+	QMouseEvent newEvent(QEvent::MouseButtonRelease,
+								QPoint(pos.x(), pos.y()),
+								event->button(),
+								event->buttons(),
+								event->modifiers());
 	StelApp::getInstance().handleClick(&newEvent);
 }
 
@@ -166,6 +181,7 @@ StelGuiItem::StelGuiItem(QDeclarativeItem* parent) : QDeclarativeItem(parent)
 	connect(this, &StelGuiItem::widthChanged, this, &StelGuiItem::onSizeChanged);
 	connect(this, &StelGuiItem::heightChanged, this, &StelGuiItem::onSizeChanged);
 	widget = new QGraphicsWidget(this);
+	StelMainView::getInstance().guiWidget = widget;
 	StelApp::getInstance().getGui()->init(widget);
 }
 
@@ -201,6 +217,7 @@ protected:
 		if (!format().doubleBuffer())
 			qWarning("Could not get double buffer; results will be suboptimal");
 	}
+
 };
 
 StelMainView::StelMainView(QWidget* parent)
@@ -276,18 +293,29 @@ void StelMainView::init(QSettings* conf)
 	stelApp= new StelApp();
 	stelApp->setGui(gui);
 	stelApp->init(conf);
+	StelActionMgr *actionMgr = stelApp->getStelActionManager();
+	actionMgr->addAction("actionSave_Screenshot_Global", N_("Miscellaneous"), N_("Save screenshot"), this, "saveScreenShot()", "Ctrl+S");
+	actionMgr->addAction("actionSet_Full_Screen_Global", N_("Display Options"), N_("Full-screen mode"), this, "fullScreen", "F11");
+	
+
 	StelPainter::initGLShaders();
 
 	setViewportUpdateMode(QGraphicsView::FullViewportUpdate);
 	setResizeMode(QDeclarativeView::SizeRootObjectToView);
 	qmlRegisterType<StelSkyItem>("Stellarium", 1, 0, "StelSky");
 	qmlRegisterType<StelGuiItem>("Stellarium", 1, 0, "StelGui");
+	rootContext()->setContextProperty("stelApp", stelApp);
 	setSource(QUrl("qrc:/qml/qml/main.qml"));
 	
-	int width = conf->value("video/screen_w", 800).toInt();
-	int height = conf->value("video/screen_h", 600).toInt();
+	QScreen* screen = glWidget->windowHandle()->screen();
+	int width = conf->value("video/screen_w", screen->size().width()).toInt();
+	int height = conf->value("video/screen_h", screen->size().height()).toInt();
 	if (conf->value("video/fullscreen", true).toBool())
 	{
+#ifdef Q_OS_MAC
+		// Without this, the screen is not shown on a Mac.
+		resize(width, height);
+#endif
 		setFullScreen(true);
 	}
 	else
@@ -414,9 +442,23 @@ void StelMainView::wheelEvent(QWheelEvent* event)
 	QDeclarativeView::wheelEvent(event);
 }
 
+void StelMainView::moveEvent(QMoveEvent * event)
+{
+	Q_UNUSED(event);
+
+	// We use the glWidget instead of the even, as we want the screen that shows most of the widget.
+	StelApp::getInstance().setDevicePixelsPerPixel(glWidget->windowHandle()->devicePixelRatio());
+}
+
 void StelMainView::keyPressEvent(QKeyEvent* event)
 {
 	thereWasAnEvent(); // Refresh screen ASAP
+	// Try to trigger a gobal shortcut.
+	StelActionMgr* actionMgr = StelApp::getInstance().getStelActionManager();
+	if (actionMgr->pushKey(event->key() + event->modifiers(), true)) {
+		event->setAccepted(true);
+		return;
+	}
 	QDeclarativeView::keyPressEvent(event);
 }
 

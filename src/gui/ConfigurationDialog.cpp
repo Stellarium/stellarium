@@ -30,6 +30,7 @@
 #include "StelLocaleMgr.hpp"
 #include "StelProjector.hpp"
 #include "StelObjectMgr.hpp"
+#include "StelActionMgr.hpp"
 #include "StelProgressController.hpp"
 
 #include "StelCore.hpp"
@@ -47,6 +48,7 @@
 #include "StarMgr.hpp"
 #include "NebulaMgr.hpp"
 #include "GridLinesMgr.hpp"
+#include "MilkyWay.hpp"
 #ifndef DISABLE_SCRIPTING
 #include "StelScriptMgr.hpp"
 #endif
@@ -63,7 +65,7 @@
 #include <QComboBox>
 #include <QDir>
 
-ConfigurationDialog::ConfigurationDialog(StelGui* agui) : StelDialog(agui), starCatalogDownloadReply(NULL), currentDownloadFile(NULL), progressBar(NULL), gui(agui)
+ConfigurationDialog::ConfigurationDialog(StelGui* agui, QObject* parent) : StelDialog(parent), starCatalogDownloadReply(NULL), currentDownloadFile(NULL), progressBar(NULL), gui(agui)
 {
 	ui = new Ui_configurationDialogForm;
 	customDeltaTEquationDialog = NULL;
@@ -114,25 +116,6 @@ void ConfigurationDialog::styleChanged()
 	// Nothing for now
 }
 
-void ConfigurationDialog::updateIconsColor()
-{
-	QPixmap pixmap(50, 50);
-	QStringList icons;
-	icons << "main" << "info" << "navigation" << "tools" << "scripts" << "plugins";
-	bool redIcon = false;
-	if (StelApp::getInstance().getVisionModeNight())
-		redIcon = true;
-
-	foreach(const QString &iconName, icons)
-	{
-		pixmap.load(":/graphicGui/tabicon-" + iconName +".png");
-		if (redIcon)
-			pixmap = StelButton::makeRed(pixmap);
-
-		ui->stackListWidget->item(icons.indexOf(iconName))->setIcon(QIcon(pixmap));
-	}
-}
-
 void ConfigurationDialog::createDialogContent()
 {
 	const StelProjectorP proj = StelApp::getInstance().getCore()->getProjection(StelCore::FrameJ2000);
@@ -142,11 +125,9 @@ void ConfigurationDialog::createDialogContent()
 
 	ui->setupUi(dialog);
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
-	connect(&StelApp::getInstance(), SIGNAL(colorSchemeChanged(QString)), this, SLOT(updateIconsColor()));
 
 	// Set the main tab activated by default
 	ui->configurationStackedWidget->setCurrentIndex(0);
-	updateIconsColor();
 	ui->stackListWidget->setCurrentRow(0);
 
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
@@ -327,13 +308,9 @@ void ConfigurationDialog::setStartupTimeMode()
 
 void ConfigurationDialog::showShortcutsWindow()
 {
-	QAction* action = gui->getGuiAction("actionShow_Shortcuts_Window_Global");
+	StelAction* action = StelApp::getInstance().getStelActionManager()->findAction("actionShow_Shortcuts_Window_Global");
 	if (action)
-	{
-		if (action->isChecked())
-			action->setChecked(false);
 		action->setChecked(true);
-	}
 }
 
 void ConfigurationDialog::setDiskViewport(bool b)
@@ -388,7 +365,7 @@ void ConfigurationDialog::setSelectedInfoFromCheckBoxes()
 		ui->customSelectedInfoRadio->setChecked(true);
 	
 	StelObject::InfoStringGroup flags(0);
-	
+
 	if (ui->checkBoxName->isChecked())
 		flags |= StelObject::Name;
 	if (ui->checkBoxCatalogNumbers->isChecked())
@@ -409,15 +386,11 @@ void ConfigurationDialog::setSelectedInfoFromCheckBoxes()
 		flags |= StelObject::Distance;
 	if (ui->checkBoxSize->isChecked())
 		flags |= StelObject::Size;
-	if (ui->checkBoxExtra1->isChecked())
-		flags |= StelObject::Extra1;
-	if (ui->checkBoxExtra2->isChecked())
-		flags |= StelObject::Extra2;
-	if (ui->checkBoxExtra3->isChecked())
-		flags |= StelObject::Extra3;	
-	if (ui->checkBoxGalacticCoordJ2000->isChecked())
-		flags |= StelObject::GalCoordJ2000;
-	
+	if (ui->checkBoxExtra->isChecked())
+		flags |= StelObject::Extra;
+	if (ui->checkBoxGalacticCoordinates->isChecked())
+		flags |= StelObject::GalacticCoord;
+
 	gui->setInfoTextFilters(flags);
 }
 
@@ -510,6 +483,7 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	conf->setValue("astro/flag_light_travel_time", ssmgr->getFlagLightTravelTime());
 	conf->setValue("viewing/flag_moon_scaled", ssmgr->getFlagMoonScale());
 	conf->setValue("astro/meteor_rate", mmgr->getZHR());
+	conf->setValue("astro/milky_way_intensity", GETSTELMODULE(MilkyWay)->getIntensity());
 
 	// view dialog / markings tab settings
 	conf->setValue("viewing/flag_azimuthal_grid", glmgr->getFlagAzimuthalGrid());
@@ -544,6 +518,7 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	conf->setValue("landscape/flag_landscape_sets_location", lmgr->getFlagLandscapeSetsLocation());
 	conf->setValue("landscape/flag_landscape", lmgr->getFlagLandscape());
 	conf->setValue("landscape/flag_atmosphere", lmgr->getFlagAtmosphere());
+	conf->setValue("landscape/flag_brightness", lmgr->getFlagLandscapeNightBrightness());
 	conf->setValue("landscape/flag_fog", lmgr->getFlagFog());
 	conf->setValue("stars/init_bortle_scale", core->getSkyDrawer()->getBortleScale());
         conf->setValue("landscape/atmospheric_extinction_coefficient", core->getSkyDrawer()->getExtinctionCoefficient());
@@ -594,14 +569,10 @@ void ConfigurationDialog::saveCurrentViewOptions()
 		               (bool) (flags & StelObject::Distance));
 		conf->setValue("flag_show_size",
 		               (bool) (flags & StelObject::Size));
-		conf->setValue("flag_show_extra1",
-		               (bool) (flags & StelObject::Extra1));
-		conf->setValue("flag_show_extra2",
-		               (bool) (flags & StelObject::Extra2));
-		conf->setValue("flag_show_extra3",
-		               (bool) (flags & StelObject::Extra3));
-		conf->setValue("flag_show_galcoordj2000",
-			       (bool) (flags & StelObject::GalCoordJ2000));
+		conf->setValue("flag_show_extra",
+			       (bool) (flags & StelObject::Extra));
+		conf->setValue("flag_show_galcoord",
+			       (bool) (flags & StelObject::GalacticCoord));
 		conf->endGroup();
 	}
 
@@ -1078,10 +1049,8 @@ void ConfigurationDialog::updateSelectedInfoCheckBoxes()
 	ui->checkBoxAltAz->setChecked(flags & StelObject::AltAzi);
 	ui->checkBoxDistance->setChecked(flags & StelObject::Distance);
 	ui->checkBoxSize->setChecked(flags & StelObject::Size);
-	ui->checkBoxExtra1->setChecked(flags & StelObject::Extra1);
-	ui->checkBoxExtra2->setChecked(flags & StelObject::Extra2);
-	ui->checkBoxExtra3->setChecked(flags & StelObject::Extra3);
-	ui->checkBoxGalacticCoordJ2000->setChecked(flags & StelObject::GalCoordJ2000);
+	ui->checkBoxExtra->setChecked(flags & StelObject::Extra);
+	ui->checkBoxGalacticCoordinates->setChecked(flags & StelObject::GalacticCoord);
 }
 
 void ConfigurationDialog::updateTabBarListWidgetWidth()

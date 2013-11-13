@@ -453,6 +453,8 @@ QDateTime jdToQDateTime(const double& jd)
 
 void getDateFromJulianDay(const double jd, int *yy, int *mm, int *dd)
 {
+	//WARNING: Algorithm below give wrong data for dates before 1582 year (before Gregorian calendar) with Qt5 --AW
+
 	/*
 	 * This algorithm is taken from
 	 * "Numerical Recipes in c, 2nd Ed." (1992), pp. 14-15
@@ -511,7 +513,7 @@ void getDateFromJulianDay(const double jd, int *yy, int *mm, int *dd)
 	if (julian < 0)
 	{
 		*yy -= 100 * (1 - julian / 36525);
-	}
+	}	
 }
 
 void getTimeFromJulianDay(const double julianDay, int *hour, int *minute, int *second)
@@ -1052,8 +1054,8 @@ double calculateSiderealPeriod(const double SemiMajorAxis)
 QString hoursToHmsStr(const double hours)
 {
 	int h = (int)hours;
-	int m = (int)((std::abs(hours)-std::abs(h))*60);
-	float s = (((std::abs(hours)-std::abs(h))*60)-m)*60;
+	int m = (int)((std::abs(hours)-std::abs(double(h)))*60);
+	float s = (((std::abs(hours)-std::abs(double(h)))*60)-m)*60;
 
 	return QString("%1h%2m%3s").arg(h).arg(m).arg(QString::number(s, 'f', 1));
 }

@@ -229,17 +229,17 @@ StelViewportDistorterFisheyeToSphericMirror::StelViewportDistorterFisheyeToSpher
 	{
 		QFile file;
 		QTextStream in;
-		try
+		QString fName = StelFileMgr::findFile(custom_distortion_file);
+		if (fName.isEmpty())
+			qWarning() << "WARNING: could not open custom_distortion_file:" << custom_distortion_file;
+		else
 		{
-			file.setFileName(StelFileMgr::findFile(custom_distortion_file));
+			file.setFileName(fName);
 			file.open(QIODevice::ReadOnly);
 			if (file.error() != QFile::NoError)
-				throw("failed to open file");
-			in.setDevice(&file);
-		}
-		catch (std::runtime_error& e)
-		{
-			qWarning() << "WARNING: could not open custom_distortion_file:" << custom_distortion_file << e.what();
+				qWarning() << "WARNING: could not open custom_distortion_file:" << custom_distortion_file;
+			else
+				in.setDevice(&file);
 		}
 		Q_ASSERT(file.error()!=QFile::NoError);
 		in >> max_x >> max_y;

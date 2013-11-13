@@ -48,13 +48,17 @@ class CustomProxy : public QGraphicsProxyWidget
 
 		virtual bool event(QEvent* event)
 		{
-			if (event->type()==QEvent::WindowDeactivate)
+			switch (event->type())
 			{
-				widget()->setWindowOpacity(0.4);
-			}
-			if (event->type()==QEvent::WindowActivate)
-			{
-				widget()->setWindowOpacity(0.9);
+				case QEvent::WindowDeactivate:
+					widget()->setWindowOpacity(0.4);
+					break;
+				case QEvent::WindowActivate:
+				case QEvent::GrabMouse:
+					widget()->setWindowOpacity(0.9);
+					break;
+				default:
+					break;
 			}
 			return QGraphicsProxyWidget::event(event);
 		}
@@ -62,6 +66,8 @@ class CustomProxy : public QGraphicsProxyWidget
 
 StelDialog::StelDialog(QObject* parent) : QObject(parent), dialog(NULL)
 {
+	if (parent == NULL)
+		setParent(StelMainView::getInstance().getGuiWidget());
 }
 
 StelDialog::~StelDialog()
@@ -72,7 +78,6 @@ StelDialog::~StelDialog()
 void StelDialog::close()
 {
 	setVisible(false);
-	StelMainView::getInstance().focusSky();
 }
 
 bool StelDialog::visible() const
@@ -103,8 +108,10 @@ void StelDialog::setVisible(bool v)
 			proxy->setFocus();
 			return;
 		}
-		
+
+		QGraphicsWidget* parent = qobject_cast<QGraphicsWidget*>(this->parent());
 		dialog = new QDialog(NULL);
+		// dialog->setParent(parent);
 		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 		Q_ASSERT(gui);
 		//dialog->setAttribute(Qt::WA_OpaquePaintEvent, true);
@@ -112,7 +119,7 @@ void StelDialog::setVisible(bool v)
 		createDialogContent();
 		dialog->setStyleSheet(gui->getStelStyle().qtStyleSheet);
 
-		proxy = new CustomProxy(NULL, Qt::Tool);
+		proxy = new CustomProxy(parent, Qt::Tool);
 		proxy->setWidget(dialog);
 		QSizeF size = proxy->size();
 
@@ -123,7 +130,6 @@ void StelDialog::setVisible(bool v)
 		if (newY <-0)
 			newY = 0;
 		proxy->setPos(newX, newY);
-		StelMainView::getInstance().scene()->addItem(proxy);
 		proxy->setWindowFrameMargins(2,0,2,2);
 		// (this also changes the bounding rectangle size)
 
@@ -139,6 +145,6 @@ void StelDialog::setVisible(bool v)
 		dialog->hide();
 		emit visibleChanged(false);
 		//proxy->clearFocus();
-		StelMainView::getInstance().scene()->setActiveWindow(0);
+		StelMainView::getInstance().focusSky();
 	}
 }

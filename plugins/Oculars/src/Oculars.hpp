@@ -20,21 +20,22 @@
 #ifndef _OCULARS_HPP_
 #define _OCULARS_HPP_
 
-#include "VecMath.hpp"
-#include "StelModule.hpp"
-#include "OcularDialog.hpp"
 #include "CCD.hpp"
-#include "Ocular.hpp"
-#include "Telescope.hpp"
 #include "Lens.hpp"
+#include "Ocular.hpp"
+#include "OcularDialog.hpp"
+#include "StelModule.hpp"
+#include "StelTexture.hpp"
+#include "Telescope.hpp"
+#include "VecMath.hpp"
 
 #include <QFont>
+#include <QOpenGLFunctions_1_2>
 #include <QSettings>
 
-#define MIN_OCULARS_INI_VERSION 0.12
+#define MIN_OCULARS_INI_VERSION 2
 
 QT_BEGIN_NAMESPACE
-class QAction;
 class QKeyEvent;
 class QMenu;
 class QMouseEvent;
@@ -44,9 +45,10 @@ class QSignalMapper;
 QT_END_NAMESPACE
 
 class StelButton;
+class StelAction;
 
 //! Main class of the Oculars plug-in.
-class Oculars : public StelModule
+class Oculars : public StelModule, protected QOpenGLFunctions_1_2
 {
 	Q_OBJECT
 	//BM: Temporary, until the GUI is finalized and some other method of getting
@@ -134,6 +136,7 @@ private slots:
 	void setScreenFOVForCCD();
 	void retranslateGui();
 	void setStelStyle(const QString& style);
+	void updateOcularReticle(void);
 
 private:
 	//! Set up the Qt actions needed to activate the plugin.
@@ -147,14 +150,14 @@ private:
 	//! Renders crosshairs into the viewport.
 	void paintCrosshairs();
 	//! Paint the mask into the viewport.
-	void paintOcularMask();
+	void paintOcularMask(const StelCore * core);
 	//! Renders the three Telrad circles, but only if not in ocular mode.
 	void paintTelrad();
 
 
 	//! Paints the text about the current object selections to the upper right hand of the screen.
 	//! Should only be called from a 'ready' state; currently from the draw() method.
-	void paintText(const StelCore* core);
+	void paintText(const StelCore * core);
 
 	//! This method is called by the zoom() method, when this plugin is toggled off; it resets to the default view.
 	void unzoomOcular();
@@ -230,37 +233,42 @@ private:
 	bool guiPanelEnabled;
 	bool flagDecimalDegrees;
 
-	QSignalMapper* ccdRotationSignalMapper;  //!< Used to rotate the CCD. */
-	QSignalMapper* ccdsSignalMapper; //!< Used to determine which CCD was selected from the popup navigator. */
-	QSignalMapper* ocularsSignalMapper; //!< Used to determine which ocular was selected from the popup navigator. */
-	QSignalMapper* telescopesSignalMapper; //!< Used to determine which telescope was selected from the popup navigator. */
-	QSignalMapper* lenseSignalMapper; //!< Used to determine which lens was selected from the popup navigator */
+	QSignalMapper * ccdRotationSignalMapper;  //!< Used to rotate the CCD. */
+	QSignalMapper * ccdsSignalMapper; //!< Used to determine which CCD was selected from the popup navigator. */
+	QSignalMapper * ocularsSignalMapper; //!< Used to determine which ocular was selected from the popup navigator. */
+	QSignalMapper * telescopesSignalMapper; //!< Used to determine which telescope was selected from the popup navigator. */
+	QSignalMapper * lenseSignalMapper; //!< Used to determine which lens was selected from the popup navigator */
 
 	// for toolbar button
-	QPixmap* pxmapGlow;
-	QPixmap* pxmapOnIcon;
-	QPixmap* pxmapOffIcon;
-	StelButton* toolbarButton;
+	QPixmap * pxmapGlow;
+	QPixmap * pxmapOnIcon;
+	QPixmap * pxmapOffIcon;
+	StelButton * toolbarButton;
 
 	OcularDialog *ocularDialog;
 	bool ready; //!< A flag that determines that this module is usable.  If false, we won't open.
 
-	QAction* actionShowOcular;
-	QAction* actionShowCrosshairs;
-	QAction* actionShowSensor;
-	QAction* actionShowTelrad;
-	QAction* actionConfiguration;
-	QAction* actionMenu;
-	QAction* actionTelescopeIncrement;
-	QAction* actionTelescopeDecrement;
-	QAction* actionOcularIncrement;
-	QAction* actionOcularDecrement;
+	StelAction * actionShowOcular;
+	StelAction * actionShowCrosshairs;
+	StelAction * actionShowSensor;
+	StelAction * actionShowTelrad;
+	StelAction * actionConfiguration;
+	StelAction * actionMenu;
+	StelAction * actionTelescopeIncrement;
+	StelAction * actionTelescopeDecrement;
+	StelAction * actionOcularIncrement;
+	StelAction * actionOcularDecrement;
 
-	class OcularsGuiPanel* guiPanel;
+	class OcularsGuiPanel * guiPanel;
 
 	//Styles
 	QByteArray normalStyleSheet;
 	QByteArray nightStyleSheet;
+
+	//Reticle
+	StelTextureSP reticleTexture;
+	double actualFOV; //!< Holds the FOV of the ocular/tescope/lens cobination; what the screen is zoomed to.
+	double reticleRotation;
 };
 
 

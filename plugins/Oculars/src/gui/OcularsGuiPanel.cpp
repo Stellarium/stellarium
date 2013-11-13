@@ -23,8 +23,8 @@ Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 #include "StelGui.hpp"
 #include "StelGuiItems.hpp"
 #include "StelTranslator.hpp"
+#include "StelActionMgr.hpp"
 
-#include <QAction>
 #include <QGridLayout>
 #include <QGraphicsLinearLayout>
 #include <QGraphicsPathItem>
@@ -44,25 +44,16 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 	parentWidget(parent),
 	borderPath(0)
 {
-	//setVisible(false);
-	//setMinimumSize(0, 0);
 	setMaximumSize(300, 400);
-	//setPreferredSize(230, 100);
 	setContentsMargins(0, 0, 0, 0);
 	//TODO: set font?
 
 	//First create the layout and populate it, then set it?
 	mainLayout = new QGraphicsLinearLayout(Qt::Vertical);
-	//layout->setContentsMargins(0, 0, 0, 0);
-	//layout->setSpacing(0);
 
 	//Button bar
 	buttonBar = new QGraphicsWidget();
 	mainLayout->addItem(buttonBar);
-
-	//QPixmap leftBackground(":/graphicGui/btbg-left.png");
-	//QPixmap middleBackground(":/graphicGui/btbg-middle.png");
-	//QPixmap rightBackground(":/graphicGui/btbg-right.png");
 
 	StelApp& stelApp = StelApp::getInstance();
 	Q_ASSERT(ocularsPlugin->actionShowOcular);
@@ -72,8 +63,7 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 	                              QPixmap(),
 	                              ocularsPlugin->actionShowOcular,
 	                              true); //No background
-	buttonOcular->setToolTip(ocularsPlugin->actionShowOcular->text());
-	//buttonOcular->setBackgroundPixmap(leftBackground);
+	buttonOcular->setToolTip(ocularsPlugin->actionShowOcular->getText());
 	buttonOcular->setParentItem(buttonBar);
 
 	//Hack to avoid buttonOcular being left "checked" if it has been toggled
@@ -90,7 +80,7 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 	                                  QPixmap(),
 	                                  ocularsPlugin->actionShowCrosshairs,
 	                                  true);
-	buttonCrosshairs->setToolTip(ocularsPlugin->actionShowCrosshairs->text());
+	buttonCrosshairs->setToolTip(ocularsPlugin->actionShowCrosshairs->getText());
 	buttonCrosshairs->setVisible(false);
 
 	Q_ASSERT(ocularsPlugin->actionShowSensor);
@@ -100,7 +90,7 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 	                           QPixmap(),
 	                           ocularsPlugin->actionShowSensor,
 	                           true);
-	buttonCcd->setToolTip(ocularsPlugin->actionShowSensor->text());
+	buttonCcd->setToolTip(ocularsPlugin->actionShowSensor->getText());
 
 	Q_ASSERT(ocularsPlugin->actionShowTelrad);
 	buttonTelrad = new StelButton(buttonBar,
@@ -109,7 +99,7 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 	                              QPixmap(),
 	                              ocularsPlugin->actionShowTelrad,
 	                              true);
-	buttonTelrad->setToolTip(ocularsPlugin->actionShowTelrad->text());
+	buttonTelrad->setToolTip(ocularsPlugin->actionShowTelrad->getText());
 
 	Q_ASSERT(ocularsPlugin->actionConfiguration);
 	buttonConfiguration = new StelButton(buttonBar,
@@ -118,7 +108,7 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 	                                     QPixmap(),
 	                                     ocularsPlugin->actionConfiguration,
 	                                     true);
-	buttonConfiguration->setToolTip(ocularsPlugin->actionConfiguration->text());
+	buttonConfiguration->setToolTip(ocularsPlugin->actionConfiguration->getText());
 
 	qreal buttonHeight = buttonOcular->boundingRect().height();
 	buttonBar->setMinimumHeight(buttonHeight);
@@ -185,7 +175,7 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 	QPixmap naOff(":/graphicGui/btTimeForward-off.png");
 	QPixmap nextArrowOff = naOff.scaledToHeight(lineHeight, Qt::SmoothTransformation);
 
-	QAction* defaultAction = new QAction(this);
+	StelAction* defaultAction = new StelAction(this);
 	defaultAction->setCheckable(false);
 	prevOcularButton = new StelButton(ocularControls,
 	                                  prevArrow,
@@ -425,7 +415,7 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 
 	//Night mode
 	connect(&stelApp, SIGNAL(colorSchemeChanged(const QString&)),
-	        this, SLOT(setColorScheme(const QString&)));
+		this, SLOT(setColorScheme(const QString&)));
 	setColorScheme(stelApp.getCurrentStelStyle());
 }
 
@@ -577,11 +567,8 @@ void OcularsGuiPanel::updateOcularControls()
 
 void OcularsGuiPanel::updateLensControls()
 {
-	int index = ocularsPlugin->selectedOcularIndex;
-	//Ocular* ocular = ocularsPlugin->oculars[index];
-
 	Lens* lens = ocularsPlugin->selectedLens();
-	index = ocularsPlugin->selectedLensIndex;
+	int index = ocularsPlugin->selectedLensIndex;
 
 	QString fullName;
 	QString multiplerString;
@@ -869,7 +856,7 @@ void OcularsGuiPanel::setLensControlsVisible(bool show)
 		if (!lensControls->isVisible())
 		{
 			lensControls->setVisible(true);
-			mainLayout->insertItem(2, lensControls);
+			mainLayout->insertItem(3, lensControls);
 		}
 	}
 	else
@@ -893,7 +880,7 @@ void OcularsGuiPanel::setOcularControlsVisible(bool show)
 		if (!ocularControls->isVisible())
 		{
 			ocularControls->setVisible(true);
-			mainLayout->insertItem(0, ocularControls);
+			mainLayout->insertItem(1, ocularControls);
 		}
 	}
 	else
@@ -915,7 +902,7 @@ void OcularsGuiPanel::setCcdControlsVisible(bool show)
 		if (!ccdControls->isVisible())
 		{
 			ccdControls->setVisible(true);
-			mainLayout->insertItem(0, ccdControls);
+			mainLayout->insertItem(1, ccdControls);
 		}
 	}
 	else
@@ -935,7 +922,7 @@ void OcularsGuiPanel::setTelescopeControlsVisible(bool show)
 		if (!telescopeControls->isVisible())
 		{
 			telescopeControls->setVisible(true);
-			mainLayout->insertItem(1, telescopeControls);
+			mainLayout->insertItem(2, telescopeControls);
 		}
 	}
 	else
@@ -976,7 +963,6 @@ void OcularsGuiPanel::updateMainButtonsPositions()
 	{
 		qreal parentWidth = buttonOcular->parentItem()->boundingRect().width();
 		int nGaps = n - 1;//n buttons have n-1 gaps
-		//posX = round((parentWidth-width)/2.0);//Centering, deprecated
 		spacing = round((parentWidth-width)/nGaps);
 	}
 	buttonOcular->setPos(posX, posY);
@@ -1047,36 +1033,12 @@ void OcularsGuiPanel::setControlsFont(const QFont& font)
 	fieldLensMultipler->setFont(font);
 }
 
-void OcularsGuiPanel::setButtonsNightMode(bool nightMode)
-{
-	//Reused from SkyGui, with modifications
-	foreach (QGraphicsItem *child, QGraphicsItem::childItems())
-	{
-		foreach (QGraphicsItem *grandchild, child->childItems())
-		{
-			StelButton* button = qgraphicsitem_cast<StelButton*>(grandchild);
-			if (button)
-				button->setRedMode(nightMode);
-		}
-	}
-}
-
 void OcularsGuiPanel::setColorScheme(const QString &schemeName)
 {
-	if (schemeName == "night_color")
-	{
-		borderPath->setPen(QColor::fromRgbF(0.7,0.2,0.2,0.5));
-		borderPath->setBrush(QColor::fromRgbF(0.23, 0.13, 0.03, 0.2));
-		setControlsColor(QColor::fromRgbF(0.9, 0.33, 0.33, 0.9));
-		setButtonsNightMode(true);
-	}
-	else
-	{
-		borderPath->setPen(QColor::fromRgbF(0.7,0.7,0.7,0.5));
-		borderPath->setBrush(QColor::fromRgbF(0.15, 0.16, 0.19, 0.2));
-		setControlsColor(QColor::fromRgbF(0.9, 0.91, 0.95, 0.9));
-		setButtonsNightMode(false);
-	}
+	Q_UNUSED(schemeName);
+	borderPath->setPen(QColor::fromRgbF(0.7,0.7,0.7,0.5));
+	borderPath->setBrush(QColor::fromRgbF(0.15, 0.16, 0.19, 0.2));
+	setControlsColor(QColor::fromRgbF(0.9, 0.91, 0.95, 0.9));
 }
 
 QPixmap OcularsGuiPanel::createPixmapFromText(const QString& text,
@@ -1086,14 +1048,16 @@ QPixmap OcularsGuiPanel::createPixmapFromText(const QString& text,
                                               const QColor& textColor,
                                               const QColor& backgroundColor)
 {
-	if (width <= 0 || height <=0)
+	if (width <= 0 || height <=0) {
 		return QPixmap();
+	}
 
 	QPixmap pixmap(width, height);
 	pixmap.fill(backgroundColor);
 
-	if (text.isEmpty())
+	if (text.isEmpty()) {
 		return pixmap;
+	}
 
 	QPainter painter(&pixmap);
 	painter.setFont(font);

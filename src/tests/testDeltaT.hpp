@@ -21,7 +21,7 @@
 #define _TESTDELTAT_HPP_
 
 #include <QObject>
-#include <QtTest>
+#include <QTest>
 #include <QVector>
 #include <QString>
 

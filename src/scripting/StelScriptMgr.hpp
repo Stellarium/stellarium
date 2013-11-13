@@ -154,6 +154,10 @@ private:
 	QMap<QString, QString> mappify(const QStringList& args, bool lowerKey=false);
 	bool strToBool(const QString& str);
 
+	//! Generate one StelAction per script.
+	//! The name of the action is of the form: "actionScript/<script-path>"
+	void initActions();
+
 #ifdef ENABLE_STRATOSCRIPT_COMPAT
 	bool preprocessStratoScript(QFile& input, QString& output, const QString& scriptDir);
 #endif

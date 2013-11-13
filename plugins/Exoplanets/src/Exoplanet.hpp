@@ -41,7 +41,10 @@ typedef struct
 	float eccentricity;	//! Exoplanet orbit eccentricity
 	float inclination;	//! Exoplanet orbit inclination
 	float angleDistance;	//! Exoplanet angle distance
-	int discovered;		//! Exoplanet discovered year	
+	int discovered;		//! Exoplanet discovered year
+	QString hclass;		//! Exoplanet habitable class
+	int MSTemp;		//! Exoplanet mean surface temperature (Kelvin)
+	int ESI;		//! Exoplanet Earth Similarity Index
 } exoplanetData;
 
 class StelPainter;

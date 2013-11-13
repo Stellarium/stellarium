@@ -47,6 +47,7 @@ typedef QSharedPointer<Pulsar> PulsarP;
 class Pulsars : public StelObjectModule
 {
 	Q_OBJECT
+	Q_PROPERTY(bool pulsarsVisible READ getFlagShowPulsars WRITE setFlagShowPulsars)
 public:	
 	//! @enum UpdateState
 	//! Used for keeping for track of the download/update status
@@ -195,6 +196,10 @@ private:
 	//! Get the version from the "version of the format" value in the pulsars.json file
 	//! @return version string, e.g. "2"
 	int getJsonFileFormatVersion(void);
+
+	//! Check format of the catalog of pulsars
+	//! @return valid boolean, e.g. "true"
+	bool checkJsonFileFormat(void);
 
 	//! parse JSON file and load pulsars to map
 	QVariantMap loadPSRMap(QString path=QString());

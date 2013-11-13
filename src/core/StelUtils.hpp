@@ -260,7 +260,7 @@ namespace StelUtils
 	//! The taylor serie is not accurate around x=1 and x=-1
 	inline float fastAcos(const float x)
 	{
-		return M_PI_2 - (x + x*x*x * (1.f/6.f + x*x * (3.f/40.f + 5.f/112.f * x*x)) );
+		return static_cast<float>(M_PI_2) - (x + x*x*x * (1.f/6.f + x*x * (3.f/40.f + 5.f/112.f * x*x)) );
 	}
 
 	//! Compute exp(x) for small exponents x

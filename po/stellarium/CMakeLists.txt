@@ -9,7 +9,7 @@ IF(${XGETTEXT_FOUND})
 	ADD_CUSTOM_TARGET(
 		generate-pot-stellarium
 		${GETTEXT_XGETTEXT_EXECUTABLE}
-			-o ${CMAKE_CURRENT_SOURCE_DIR}/stellarium.pot}
+			-o ${CMAKE_CURRENT_SOURCE_DIR}/stellarium.pot
 			-C
 			--qt
 			--keyword=_

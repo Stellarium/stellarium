@@ -96,50 +96,24 @@ void Landscape::loadCommon(const QSettings& landscapeIni, const QString& landsca
 	else defaultBortleIndex=-1; // mark "invalid/no change".
 	if (defaultBortleIndex<=0) defaultBortleIndex=-1; // also allow neg. values in ini file, signalling "no change".
 	if (defaultBortleIndex>9) defaultBortleIndex=9; // correct bad values.
-	if (landscapeIni.contains("location/display_fog"))
-		defaultFogSetting = landscapeIni.value("location/display_fog").toInt();
-	else defaultFogSetting=-1;
-	if (landscapeIni.contains("location/atmospheric_extinction_coefficient"))
-		defaultExtinctionCoefficient = landscapeIni.value("location/atmospheric_extinction_coefficient").toDouble();
-	else defaultExtinctionCoefficient=-1.0;
-	if (landscapeIni.contains("location/atmospheric_temperature"))
-		defaultTemperature = landscapeIni.value("location/atmospheric_temperature").toDouble();
-	else defaultTemperature=-1000.0;
-	if (landscapeIni.contains("location/atmospheric_pressure"))
-		defaultPressure = landscapeIni.value("location/atmospheric_pressure").toDouble();
-	else defaultPressure=-2.0; // "no change"
+
+
+	defaultFogSetting = landscapeIni.value("location/display_fog", -1).toInt();
+	defaultExtinctionCoefficient = landscapeIni.value("location/atmospheric_extinction_coefficient", -1.0).toDouble();
+	defaultTemperature = landscapeIni.value("location/atmospheric_temperature", -1000.0).toDouble();
+	defaultPressure = landscapeIni.value("location/atmospheric_pressure", -2.0).toDouble();
+	// Set night brightness for landscape
+	defaultBrightness = landscapeIni.value("landscape/initial_brightness", -1.0).toDouble();
 }
 
 #include <iostream>
 const QString Landscape::getTexturePath(const QString& basename, const QString& landscapeId)
 {
 	// look in the landscape directory first, and if not found default to global textures directory
-	QString path;
-	try
-	{
-		path = StelFileMgr::findFile("landscapes/" + landscapeId + "/" + basename);
-		return path;
-	}
-	catch (std::runtime_error& e)
-	{
-#ifdef BUILD_FOR_MAEMO
-		if (!basename.endsWith(".pvr"))
-		{
-			QString tmp = basename;
-			tmp.replace(".png", ".pvr");
-			try
-			{
-				tmp = getTexturePath(tmp, landscapeId);
-				tmp.replace(".pvr", ".png");
-				return tmp;
-			}
-			catch (std::runtime_error& e)
-			{;}
-		}
-#endif
+	QString path = StelFileMgr::findFile("landscapes/" + landscapeId + "/" + basename);
+	if (path.isEmpty())
 		path = StelFileMgr::findFile("textures/" + basename);
-		return path;
-	}
+	return path;
 }
 
 LandscapeOldStyle::LandscapeOldStyle(float _radius) : Landscape(_radius), sideTexs(NULL), sides(NULL), tanMode(false), calibrated(false)
@@ -377,10 +351,9 @@ void LandscapeOldStyle::drawFog(StelCore* core, StelPainter& sPainter) const
 	transfo->combine(Mat4d::translation(Vec3d(0.,0.,vpos)));
 	sPainter.setProjector(core->getProjection(transfo));
 	glBlendFunc(GL_ONE, GL_ONE);
-	const float nightModeFilter = StelApp::getInstance().getVisionModeNight() ? 0.f : 1.f;
 	sPainter.setColor(fogFader.getInterstate()*(0.1f+0.1f*skyBrightness),
-			  fogFader.getInterstate()*(0.1f+0.1f*skyBrightness)*nightModeFilter,
-			  fogFader.getInterstate()*(0.1f+0.1f*skyBrightness)*nightModeFilter);
+			  fogFader.getInterstate()*(0.1f+0.1f*skyBrightness),
+			  fogFader.getInterstate()*(0.1f+0.1f*skyBrightness));
 	fogTex->bind();
 	const float height = (tanMode||calibrated) ? radius*std::tan(fogAltAngle*M_PI/180.) : radius*std::sin(fogAltAngle*M_PI/180.);
 	sPainter.sCylinder(radius, height, 64, 1);
@@ -405,10 +378,7 @@ void LandscapeOldStyle::drawDecor(StelCore* core, StelPainter& sPainter) const
 
 	if (!landFader.getInterstate())
 		return;
-	if (StelApp::getInstance().getVisionModeNight())
-		sPainter.setColor(skyBrightness*nightBrightness, 0.0, 0.0, landFader.getInterstate());
-	else
-		sPainter.setColor(skyBrightness, skyBrightness, skyBrightness, landFader.getInterstate());
+	sPainter.setColor(skyBrightness, skyBrightness, skyBrightness, landFader.getInterstate());
 
 	foreach (const LOSSide& side, precomputedSides)
 	{
@@ -430,10 +400,7 @@ void LandscapeOldStyle::drawGround(StelCore* core, StelPainter& sPainter) const
 	transfo->combine(Mat4d::zrotation((groundAngleRotateZ-angleRotateZOffset)*M_PI/180.f) * Mat4d::translation(Vec3d(0,0,vshift)));
 
 	sPainter.setProjector(core->getProjection(transfo));
-	if (StelApp::getInstance().getVisionModeNight())
-		sPainter.setColor(skyBrightness*nightBrightness, 0.0, 0.0, landFader.getInterstate());
-	else
-		sPainter.setColor(skyBrightness, skyBrightness, skyBrightness, landFader.getInterstate());
+	sPainter.setColor(skyBrightness, skyBrightness, skyBrightness, landFader.getInterstate());
 
 	groundTex->bind();
 	sPainter.setArrays((Vec3d*)groundVertexArr.constData(), (Vec2f*)groundTexCoordArr.constData());
@@ -488,10 +455,7 @@ void LandscapeFisheye::draw(StelCore* core)
 
 	// Normal transparency mode
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	if (StelApp::getInstance().getVisionModeNight())
-		sPainter.setColor(skyBrightness*nightBrightness, 0.0, 0.0, landFader.getInterstate());
-	else
-		sPainter.setColor(skyBrightness, skyBrightness, skyBrightness, landFader.getInterstate());
+	sPainter.setColor(skyBrightness, skyBrightness, skyBrightness, landFader.getInterstate());
 
 
 	glEnable(GL_CULL_FACE);
@@ -556,11 +520,7 @@ void LandscapeSpherical::draw(StelCore* core)
 
 	// Normal transparency mode
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	if (StelApp::getInstance().getVisionModeNight())
-		sPainter.setColor(skyBrightness*nightBrightness, 0.0, 0.0, landFader.getInterstate());
-	else
-		sPainter.setColor(skyBrightness, skyBrightness, skyBrightness, landFader.getInterstate());
-
+	sPainter.setColor(skyBrightness, skyBrightness, skyBrightness, landFader.getInterstate());
 
 	glEnable(GL_CULL_FACE);
 	sPainter.enableTexture2d(true);

@@ -30,6 +30,8 @@
 #include "OctahedronPolygon.hpp"
 #include "StelVertexArray.hpp"
 
+#include <stdio.h>
+
 class SphericalRegion;
 class SphericalPolygon;
 class SphericalConvexPolygon;

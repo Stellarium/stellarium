@@ -39,7 +39,6 @@
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
 #include <QKeyEvent>
-#include <QAction>
 #include <QDebug>
 #include <QFileInfo>
 #include <QFile>
@@ -148,12 +147,15 @@ void Pulsars::init()
 		readSettingsFromConfig();
 
 		jsonCatalogPath = StelFileMgr::findFile("modules/Pulsars", (StelFileMgr::Flags)(StelFileMgr::Directory|StelFileMgr::Writable)) + "/pulsars.json";
+		if (jsonCatalogPath.isEmpty())
+			return;
 
-		texPointer = StelApp::getInstance().getTextureManager().createTexture("textures/pointeur2.png");
+		texPointer = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/pointeur2.png");
 		Pulsar::markerTexture = StelApp::getInstance().getTextureManager().createTexture(":/Pulsars/pulsar.png");
 
 		// key bindings and other actions
-		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+		addAction("actionShow_Pulsars", N_("Pulsars"), N_("Show pulsars"), "pulsarsVisible", "Ctrl+Alt+P");
+		addAction("actionShow_Pulsars_ConfigDialog", N_("Pulsars"), N_("Pulsars configuration window"), configDialog, "visible");
 
 		GlowIcon = new QPixmap(":/graphicsGui/glow32x32.png");
 		OnIcon = new QPixmap(":/Pulsars/btPulsars-on.png");
@@ -161,10 +163,6 @@ void Pulsars::init()
 
 		setFlagShowPulsars(getEnableAtStartup());
 		setFlagShowPulsarsButton(flagShowPulsarsButton);
-
-		connect(gui->getGuiAction("actionShow_Pulsars_ConfigDialog"), SIGNAL(toggled(bool)), configDialog, SLOT(setVisible(bool)));
-		connect(configDialog, SIGNAL(visibleChanged(bool)), gui->getGuiAction("actionShow_Pulsars_ConfigDialog"), SLOT(setChecked(bool)));
-		connect(gui->getGuiAction("actionShow_Pulsars"), SIGNAL(toggled(bool)), this, SLOT(setFlagShowPulsars(bool)));
 	}
 	catch (std::runtime_error &e)
 	{
@@ -182,7 +180,7 @@ void Pulsars::init()
 	// If the json file does not already exist, create it from the resource in the Qt resource
 	if(QFileInfo(jsonCatalogPath).exists())
 	{
-		if (getJsonFileFormatVersion() < CATALOG_FORMAT_VERSION)
+		if (!checkJsonFileFormat() || getJsonFileFormatVersion()<CATALOG_FORMAT_VERSION)
 		{
 			restoreDefaultJsonFile();
 		}
@@ -543,6 +541,31 @@ int Pulsars::getJsonFileFormatVersion(void)
 	return jsonVersion;
 }
 
+bool Pulsars::checkJsonFileFormat()
+{
+	QFile jsonPSRCatalogFile(jsonCatalogPath);
+	if (!jsonPSRCatalogFile.open(QIODevice::ReadOnly))
+	{
+		qWarning() << "Pulsars::checkJsonFileFormat(): cannot open " << QDir::toNativeSeparators(jsonCatalogPath);
+		return false;
+	}
+
+	QVariantMap map;
+	try
+	{
+		map = StelJsonParser::parse(&jsonPSRCatalogFile).toMap();
+		jsonPSRCatalogFile.close();
+	}
+	catch (std::runtime_error& e)
+	{
+		qDebug() << "Pulsars::checkJsonFileFormat(): file format is wrong!";
+		qDebug() << "Pulsars::checkJsonFileFormat() error:" << e.what();
+		return false;
+	}
+
+	return true;
+}
+
 PulsarP Pulsars::getByID(const QString& id)
 {
 	foreach(const PulsarP& pulsar, psr)
@@ -556,11 +579,7 @@ PulsarP Pulsars::getByID(const QString& id)
 bool Pulsars::configureGui(bool show)
 {
 	if (show)
-	{
-		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-		gui->getGuiAction("actionShow_Pulsars_ConfigDialog")->setChecked(true);
-	}
-
+		configDialog->setVisible(true);
 	return true;
 }
 
@@ -674,22 +693,19 @@ void Pulsars::updateDownloadComplete(QNetworkReply* reply)
 	else
 	{
 		// download completed successfully.
-		try
+		QString jsonFilePath = StelFileMgr::findFile("modules/Pulsars", StelFileMgr::Flags(StelFileMgr::Writable|StelFileMgr::Directory)) + "/pulsars.json";
+		if (jsonFilePath.isEmpty())
 		{
-			QString jsonFilePath = StelFileMgr::findFile("modules/Pulsars", StelFileMgr::Flags(StelFileMgr::Writable|StelFileMgr::Directory)) + "/pulsars.json";
-			QFile jsonFile(jsonFilePath);
-			if (jsonFile.exists())
-				jsonFile.remove();
-
-			jsonFile.open(QIODevice::WriteOnly | QIODevice::Text);
-			jsonFile.write(reply->readAll());
-			jsonFile.close();
+			qWarning() << "Pulsars::updateDownloadComplete: cannot write JSON data to file modules/Pulsars/pulsars.json";
+			return;
 		}
-		catch (std::runtime_error &e)
-		{
-			qWarning() << "Pulsars::updateDownloadComplete: cannot write JSON data to file:" << e.what();
-		}
+		QFile jsonFile(jsonFilePath);
+		if (jsonFile.exists())
+			jsonFile.remove();
 
+		jsonFile.open(QIODevice::WriteOnly | QIODevice::Text);
+		jsonFile.write(reply->readAll());
+		jsonFile.close();
 	}
 
 	if (progressBar)
@@ -733,8 +749,7 @@ void Pulsars::setFlagShowPulsarsButton(bool b)
 	if (b==true) {
 		if (toolbarButton==NULL) {
 			// Create the pulsars button
-			gui->getGuiAction("actionShow_Pulsars")->setChecked(flagShowPulsars);
-			toolbarButton = new StelButton(NULL, *OnIcon, *OffIcon, *GlowIcon, gui->getGuiAction("actionShow_Pulsars"));
+			toolbarButton = new StelButton(NULL, *OnIcon, *OffIcon, *GlowIcon, "actionShow_Pulsars");
 		}
 		gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
 	} else {

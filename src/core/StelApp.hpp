@@ -30,7 +30,6 @@ class StelObjectMgr;
 class StelLocaleMgr;
 class StelModuleMgr;
 class StelSkyCultureMgr;
-class StelShortcutMgr;
 class QSettings;
 class QNetworkAccessManager;
 class QNetworkReply;
@@ -43,6 +42,7 @@ class StelVideoMgr;
 class StelGuiBase;
 class StelMainScriptAPIProxy;
 class StelScriptMgr;
+class StelActionMgr;
 class StelProgressController;
 
 //! @class StelApp
@@ -59,6 +59,7 @@ class StelProgressController;
 class StelApp : public QObject
 {
 	Q_OBJECT
+	Q_PROPERTY(bool nightMode READ getVisionModeNight WRITE setVisionModeNight NOTIFY visionNightModeChanged)
 
 public:
 	friend class StelAppGraphicsWidget;
@@ -115,8 +116,8 @@ public:
 	//! Get the audio manager
 	StelAudioMgr* getStelAudioMgr() {return audioMgr;}
 
-	//! Get the shortcuts manager to use for managing and editing shortcuts
-	StelShortcutMgr* getStelShortcutManager() {return shortcutMgr;}
+	//! Get the actions manager to use for managing and editing actions
+	StelActionMgr* getStelActionManager() {return actionMgr;}
 
 	//! Get the video manager
 	StelVideoMgr* getStelVideoMgr() {return videoMgr;}
@@ -139,7 +140,7 @@ public:
 	QSettings* getSettings() {return confSettings;}
 
 	//! Return the currently used style
-	QString getCurrentStelStyle() {return flagNightVision ? "night_color" : "color";}
+	QString getCurrentStelStyle() {return "color";}
 
 	//! Update all object according to the deltaTime in seconds.
 	void update(double deltaTime);
@@ -157,6 +158,17 @@ public:
 	//! Call this when the size of the GL window has changed.
 	void glWindowHasBeenResized(float x, float y, float w, float h);
 
+	//! Get the ratio between real device pixel and "Device Independent Pixel".
+	//! Usually this value is 1, but for a mac with retina screen this will be value 2.
+	float getDevicePixelsPerPixel() const {return devicePixelsPerPixel;}
+	void setDevicePixelsPerPixel(float dppp);
+	
+	//! Get the scaling ratio to apply on all display elements, like GUI, text etc..
+	//! When this ratio is 1, all pixel sizes used in Stellarium will look OK on a regular
+	//! computer screen with 96 pixel per inch (reference for tuning sizes).
+	float getGlobalScalingRatio() const {return globalScalingRatio;}
+	void setGlobalScalingRatio(float r) {globalScalingRatio=r;}
+	
 	//! Get the GUI instance implementing the abstract GUI interface.
 	StelGuiBase* getGui() const {return stelGui;}
 	//! Tell the StelApp instance which GUI si currently being used.
@@ -200,6 +212,7 @@ public slots:
 	void reportFileDownloadFinished(QNetworkReply* reply);
 	
 signals:
+	void visionNightModeChanged(bool);
 	void colorSchemeChanged(const QString&);
 	void languageChanged();
 	void skyCultureChanged(const QString&);
@@ -237,8 +250,8 @@ private:
 	// Sky cultures manager for the application
 	StelSkyCultureMgr* skyCultureMgr;
 
-	//Shortcuts manager for the application
-	StelShortcutMgr* shortcutMgr;
+	//Actions manager fot the application.  Will replace shortcutMgr.
+	StelActionMgr* actionMgr;
 
 	// Textures manager for the application
 	StelTextureMgr* textureMgr;
@@ -274,7 +287,14 @@ private:
 
 
 	StelGuiBase* stelGui;
+	
+	// Store the ratio between real device pixel in "Device Independent Pixel"
+	// Usually this value is 1, but for a mac with retina screen this will be value 2.
+	float devicePixelsPerPixel;
 
+	// The scaling ratio to apply on all display elements, like GUI, text etc..
+	float globalScalingRatio;
+	
 	// Used to collect wheel events
 	QTimer * wheelEventTimer;
 
@@ -284,7 +304,7 @@ private:
 
 	//! Define whether we are in night vision mode
 	bool flagNightVision;
-
+	
 	QSettings* confSettings;
 
 	// Define whether the StelApp instance has completed initialization
