@@ -37,4 +37,12 @@ static inline double trunc(const double x)
 }
 #endif
 
+#ifndef HAS_ROUND
+#include <cmath>
+static inline double round(const double x)
+{
+	return (x < 0 ? std::ceil(x - 0.5) : std::floor(x + 0.5));  
+}
+#endif
+
 #endif // _CONFIG_H_
