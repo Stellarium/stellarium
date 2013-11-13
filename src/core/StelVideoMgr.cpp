@@ -26,7 +26,7 @@ StelVideoMgr::StelVideoMgr()
 {
 }
 
-#ifdef HAVE_QT_PHONON
+#if 0
 StelVideoMgr::~StelVideoMgr()
 {
 	foreach(QString id, videoObjects.keys())
@@ -178,7 +178,7 @@ void StelVideoMgr::showVideo(const QString& id, bool show)
 	}
 }
 
-#else  // HAVE_QT_PHONON
+#else 
 void StelVideoMgr::loadVideo(const QString& filename, const QString& id, float x, float y, bool show, float alpha)
 {
 	qWarning() << "[StelVideoMgr] This build of Stellarium does not support video - cannot load video" << QDir::toNativeSeparators(filename) << id << x << y << show << alpha;

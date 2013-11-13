@@ -46,7 +46,8 @@ typedef QSharedPointer<Quasar> QuasarP;
 class Quasars : public StelObjectModule
 {
 	Q_OBJECT
-public:	
+	Q_PROPERTY(bool quasarsVisible READ getFlagShowQuasars WRITE setFlagShowQuasars)
+public:
 	//! @enum UpdateState
 	//! Used for keeping for track of the download/update status
 	enum UpdateState {
@@ -194,6 +195,10 @@ private:
 	//! Get the version from the "version of the format" value in the catalog.json file
 	//! @return version string, e.g. "1"
 	int getJsonFileFormatVersion(void);
+
+	//! Check format of the catalog of quasars
+	//! @return valid boolean, e.g. "true"
+	bool checkJsonFileFormat(void);
 
 	//! parse JSON file and load quasars to map
 	QVariantMap loadQSOMap(QString path=QString());

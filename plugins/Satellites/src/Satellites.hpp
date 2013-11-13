@@ -29,6 +29,7 @@
 #include <QDateTime>
 #include <QFile>
 #include <QDir>
+#include <QOpenGLFunctions_1_2>
 #include <QUrl>
 #include <QVariantMap>
 
@@ -120,9 +121,15 @@ file.
 //! Main class of the %Satellites plugin.
 //! @author Matthew Gates
 //! @author Bogdan Marinov
-class Satellites : public StelObjectModule
+class Satellites : public StelObjectModule, protected QOpenGLFunctions_1_2
 {
 	Q_OBJECT
+	Q_PROPERTY(bool hintsVisible
+	           READ getFlagHints
+	           WRITE setFlagHints)
+	Q_PROPERTY(bool labelsVisible
+	           READ getFlagLabels
+	           WRITE setFlagLabels)
 	Q_PROPERTY(bool autoAddEnabled
 	           READ isAutoAddEnabled
 	           WRITE enableAutoAdd
@@ -291,11 +298,6 @@ public:
 	//! Saves the current list of update URLs to the configuration file.
 	void saveTleSources(const QStringList& urls);
 	
-	//! Returns the module-specific style sheet.
-	//! The main StelStyle instance should be passed.
-	// TODO: Plugin-specific styles are no longer necessary?
-	const StelStyle getModuleStyleSheet(const StelStyle& style);
-
 	//! Reads update file(s) in celestrak's .txt format, and updates
 	//! the TLE elements for exisiting satellites from them.
 	//! Indirectly emits signals updateStateChanged() and tleUpdateComplete(),
@@ -428,7 +430,6 @@ public slots:
 	void saveCatalog(QString path=QString());
 
 private slots:
-	void setStelStyle(const QString& section);
 
 private:
 	//! Add to the current collection the satellite described by the data.
@@ -549,9 +550,7 @@ private:
 	//@}
 
 	// GUI
-	SatellitesDialog* configDialog;
-	QByteArray normalStyleSheet;
-	QByteArray nightStyleSheet;
+	SatellitesDialog* configDialog;	
 
 private slots:
 	//! check to see if an update is required.  This is called periodically by a timer

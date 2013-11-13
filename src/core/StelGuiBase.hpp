@@ -54,12 +54,6 @@ public:
 	//! Show wether the Gui is currently used.
 	//! This can then be used to optimize the rendering to increase reactivity.
 	virtual bool isCurrentlyUsed() const =0;
-
-
-protected:
-	//! Translate all texts to the new Locale.
-	void updateI18n();
-	
 };
 
 //! @class StelGuiPluginInterface

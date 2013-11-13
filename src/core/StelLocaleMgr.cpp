@@ -39,14 +39,10 @@ StelLocaleMgr::StelLocaleMgr() : skyTranslator(NULL), GMTShift(0)
 	//generateCountryList();
 
 	// Load from file
-	QString path;
-	try
+	QString path = StelFileMgr::findFile("data/countryCodes.dat");
+	if (path.isEmpty())
 	{
-		path = StelFileMgr::findFile("data/countryCodes.dat");
-	}
-	catch (std::runtime_error& e)
-	{
-		qWarning() << "ERROR - could not find country code data file." << e.what();
+		qWarning() << "ERROR - could not find country code data file.";
 		return;
 	}
 

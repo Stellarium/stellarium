@@ -72,6 +72,9 @@ Exoplanet::Exoplanet(const QVariantMap& map)
 			p.inclination = exoplanetMap.value("inclination", -1.f).toFloat();
 			p.angleDistance = exoplanetMap.value("angleDistance", -1.f).toFloat();
 			p.discovered = exoplanetMap.value("discovered", 0).toInt();
+			p.hclass = exoplanetMap.value("hclass", "").toString();
+			p.MSTemp = exoplanetMap.value("MSTemp", -1).toInt();
+			p.ESI = exoplanetMap.value("ESI", -1).toInt();
 			exoplanets.append(p);
 		}
 	}
@@ -110,7 +113,10 @@ QVariantMap Exoplanet::getMap(void)
 		if (p.inclination > -1.f) explMap["inclination"] = p.inclination;
 		if (p.eccentricity > -1.f) explMap["eccentricity"] = p.eccentricity;
 		if (p.angleDistance > -1.f) explMap["angleDistance"] = p.angleDistance;
-		if (p.discovered > 0) explMap["discovered"] = p.discovered;		
+		if (p.discovered > 0) explMap["discovered"] = p.discovered;
+		if (!p.hclass.isEmpty()) explMap["hclass"] = p.hclass;
+		if (p.MSTemp > 0) explMap["MSTemp"] = p.MSTemp;
+		if (p.ESI > 0) explMap["ESI"] = p.ESI;
 		exoplanetList << explMap;
 	}
 	map["exoplanets"] = exoplanetList;
@@ -167,7 +173,7 @@ QString Exoplanet::getInfoString(const StelCore* core, const InfoStringGroup& fl
 	// Ra/Dec etc.
 	oss << getPositionInfoString(core, flags);
 
-	if (flags&Extra1)
+	if (flags&Extra)
 	{
 		oss << q_("Spectral Type: %1").arg(stype) << "<br>";
 	}
@@ -177,7 +183,7 @@ QString Exoplanet::getInfoString(const StelCore* core, const InfoStringGroup& fl
 		oss << q_("Distance: %1 Light Years").arg(QString::number(distance/0.306601, 'f', 2)) << "<br>";
 	}
 
-	if (flags&Extra1)
+	if (flags&Extra)
 	{
 		if (smetal!=0)
 		{
@@ -195,105 +201,139 @@ QString Exoplanet::getInfoString(const StelCore* core, const InfoStringGroup& fl
 		{
 			oss << q_("Effective temperature: %1 K").arg(effectiveTemp) << "<br>";
 		}
-	}
-
-	if (flags&Extra1 && exoplanets.size() > 0)
-	{
-		QString planetNameLabel = QString("<td style=\"padding: 0 2px 0 0;\">%1</td>").arg(q_("Exoplanet"));
-		QString periodLabel = QString("<td style=\"padding: 0 2px 0 0;\">%1 (%2)</td>").arg(q_("Period")).arg(q_("days"));
-		QString massLabel = QString("<td style=\"padding: 0 2px 0 0;\">%1 (M<sub>%2</sub>)</td>").arg(q_("Mass")).arg(q_("Jup"));
-		QString radiusLabel = QString("<td style=\"padding: 0 2px 0 0;\">%1 (R<sub>%2</sub>)</td>").arg(q_("Radius")).arg(q_("Jup"));
-		QString semiAxisLabel = QString("<td style=\"padding: 0 2px 0 0;\">%1 (%2)</td>").arg(q_("Semi-Major Axis")).arg(q_("AU"));
-		QString eccentricityLabel = QString("<td style=\"padding: 0 2px 0 0;\">%1</td>").arg(q_("Eccentricity"));
-		QString inclinationLabel = QString("<td style=\"padding: 0 2px 0 0;\">%1 (%2)</td>").arg(q_("Inclination")).arg(QChar(0x00B0));		
-		QString angleDistanceLabel = QString("<td style=\"padding: 0 2px 0 0;\">%1 (\")</td>").arg(q_("Angle Distance"));
-		QString discoveredLabel = QString("<td style=\"padding: 0 2px 0 0;\">%1</td>").arg(q_("Discovered year"));		
-		foreach(const exoplanetData &p, exoplanets)
+		if (exoplanets.size() > 0)
 		{
-			if (!p.planetName.isEmpty())
+			QString planetNameLabel = QString("<td style=\"padding: 0 2px 0 0;\">%1</td>").arg(q_("Exoplanet"));
+			QString periodLabel = QString("<td style=\"padding: 0 2px 0 0;\">%1 (%2)</td>").arg(q_("Period")).arg(q_("days"));
+			QString massLabel = QString("<td style=\"padding: 0 2px 0 0;\">%1 (M<sub>%2</sub>)</td>").arg(q_("Mass")).arg(q_("Jup"));
+			QString radiusLabel = QString("<td style=\"padding: 0 2px 0 0;\">%1 (R<sub>%2</sub>)</td>").arg(q_("Radius")).arg(q_("Jup"));
+			QString semiAxisLabel = QString("<td style=\"padding: 0 2px 0 0;\">%1 (%2)</td>").arg(q_("Semi-Major Axis")).arg(q_("AU"));
+			QString eccentricityLabel = QString("<td style=\"padding: 0 2px 0 0;\">%1</td>").arg(q_("Eccentricity"));
+			QString inclinationLabel = QString("<td style=\"padding: 0 2px 0 0;\">%1 (%2)</td>").arg(q_("Inclination")).arg(QChar(0x00B0));
+			QString angleDistanceLabel = QString("<td style=\"padding: 0 2px 0 0;\">%1 (\")</td>").arg(q_("Angle Distance"));
+			QString discoveredLabel = QString("<td style=\"padding: 0 2px 0 0;\">%1</td>").arg(q_("Discovered year"));
+			QString hClassLabel = QString("<td style=\"padding: 0 2px 0 0;\">%1</td>").arg(q_("Habitable class"));
+			//TRANSLATORS: Full phrase is "Mean Surface Temperature"
+			QString meanSurfaceTempLabel = QString("<td style=\"padding: 0 2px 0 0;\">%1 (%2C)</td>").arg(q_("Mean surface temp.")).arg(QChar(0x00B0));
+			//TRANSLATORS: ESI = Earth Similarity Index
+			QString ESILabel = QString("<td style=\"padding: 0 2px 0 0;\">%1</td>").arg(q_("ESI"));
+			foreach(const exoplanetData &p, exoplanets)
 			{
-				planetNameLabel.append("<td style=\"padding:0 2px;\">").append(p.planetName).append("</td>");
+				if (!p.planetName.isEmpty())
+				{
+					planetNameLabel.append("<td style=\"padding:0 2px;\">").append(p.planetName).append("</td>");
+				}
+				else
+				{
+					planetNameLabel.append("<td style=\"padding:0 2px;\">&mdash;</td>");
+				}
+				if (p.period > -1.f)
+				{
+					periodLabel.append("<td style=\"padding:0 2px;\">").append(QString::number(p.period, 'f', 2)).append("</td>");
+				}
+				else
+				{
+					periodLabel.append("<td style=\"padding:0 2px;\">&mdash;</td>");
+				}
+				if (p.mass > -1.f)
+				{
+					massLabel.append("<td style=\"padding:0 2px;\">").append(QString::number(p.mass, 'f', 2)).append("</td>");
+				}
+				else
+				{
+					massLabel.append("<td style=\"padding:0 2px;\">&mdash;</td>");
+				}
+				if (p.radius > -1.f)
+				{
+					radiusLabel.append("<td style=\"padding:0 2px;\">").append(QString::number(p.radius, 'f', 1)).append("</td>");
+				}
+				else
+				{
+					radiusLabel.append("<td style=\"padding:0 2px;\">&mdash;</td>");
+				}
+				if (p.eccentricity > -1.f)
+				{
+					eccentricityLabel.append("<td style=\"padding:0 2px;\">").append(QString::number(p.eccentricity, 'f', 3)).append("</td>");
+				}
+				else
+				{
+					eccentricityLabel.append("<td style=\"padding:0 2px;\">&mdash;</td>");
+				}
+				if (p.inclination > -1.f)
+				{
+					inclinationLabel.append("<td style=\"padding:0 2px;\">").append(QString::number(p.inclination, 'f', 1)).append("</td>");
+				}
+				else
+				{
+					inclinationLabel.append("<td style=\"padding:0 2px;\">&mdash;</td>");
+				}
+				if (p.semiAxis > -1.f)
+				{
+					semiAxisLabel.append("<td style=\"padding:0 2px;\">").append(QString::number(p.semiAxis, 'f', 4)).append("</td>");
+				}
+				else
+				{
+					semiAxisLabel.append("<td style=\"padding:0 2px;\">&mdash;</td>");
+				}
+				if (p.angleDistance > -1.f)
+				{
+					angleDistanceLabel.append("<td style=\"padding:0 2px;\">").append(QString::number(p.angleDistance, 'f', 6)).append("</td>");
+				}
+				else
+				{
+					angleDistanceLabel.append("<td style=\"padding:0 2px;\">&mdash;</td>");
+				}
+				if (p.discovered > 0)
+				{
+					discoveredLabel.append("<td style=\"padding:0 2px;\">").append(QString::number(p.discovered)).append("</td>");
+				}
+				else
+				{
+					discoveredLabel.append("<td style=\"padding:0 2px;\">&mdash;</td>");
+				}
+				if (!p.hclass.isEmpty())
+				{
+					hClassLabel.append("<td style=\"padding:0 2px;\">").append(p.hclass).append("</td>");
+				}
+				else
+				{
+					hClassLabel.append("<td style=\"padding:0 2px;\">&mdash;</td>");
+				}
+				if (p.MSTemp > 0)
+				{
+					meanSurfaceTempLabel.append("<td style=\"padding:0 2px;\">").append(QString::number(p.MSTemp - 273.15, 'f', 2)).append("</td>");
+				}
+				else
+				{
+					meanSurfaceTempLabel.append("<td style=\"padding:0 2px;\">&mdash;</td>");
+				}
+				if (p.ESI > 0)
+				{
+					ESILabel.append("<td style=\"padding:0 2px;\">").append(QString::number(p.ESI * 0.01, 'f', 2)).append("</td>");
+				}
+				else
+				{
+					ESILabel.append("<td style=\"padding:0 2px;\">&mdash;</td>");
+				}
 			}
-			else
+			oss << "<table>";
+			oss << "<tr>" << planetNameLabel << "</tr>";
+			oss << "<tr>" << periodLabel << "</tr>";
+			oss << "<tr>" << massLabel << "</tr>";
+			oss << "<tr>" << radiusLabel << "</tr>";
+			oss << "<tr>" << semiAxisLabel << "</tr>";
+			oss << "<tr>" << eccentricityLabel << "</tr>";
+			oss << "<tr>" << inclinationLabel << "</tr>";
+			oss << "<tr>" << angleDistanceLabel << "</tr>";
+			oss << "<tr>" << discoveredLabel << "</tr>";
+			if (hasHabitableExoplanets)
 			{
-				planetNameLabel.append("<td style=\"padding:0 2px;\">&mdash;</td>");
+				oss << "<tr>" << hClassLabel << "</tr>";
+				oss << "<tr>" << meanSurfaceTempLabel << "</tr>";
+				oss << "<tr>" << ESILabel << "</tr>";
 			}
-			if (p.period > -1.f)
-			{
-				periodLabel.append("<td style=\"padding:0 2px;\">").append(QString::number(p.period, 'f', 2)).append("</td>");
-			}
-			else
-			{
-				periodLabel.append("<td style=\"padding:0 2px;\">&mdash;</td>");
-			}
-			if (p.mass > -1.f)
-			{
-				massLabel.append("<td style=\"padding:0 2px;\">").append(QString::number(p.mass, 'f', 2)).append("</td>");
-			}
-			else
-			{
-				massLabel.append("<td style=\"padding:0 2px;\">&mdash;</td>");
-			}
-			if (p.radius > -1.f)
-			{
-				radiusLabel.append("<td style=\"padding:0 2px;\">").append(QString::number(p.radius, 'f', 1)).append("</td>");
-			}
-			else
-			{
-				radiusLabel.append("<td style=\"padding:0 2px;\">&mdash;</td>");
-			}
-			if (p.eccentricity > -1.f)
-			{
-				eccentricityLabel.append("<td style=\"padding:0 2px;\">").append(QString::number(p.eccentricity, 'f', 3)).append("</td>");
-			}
-			else
-			{
-				eccentricityLabel.append("<td style=\"padding:0 2px;\">&mdash;</td>");
-			}
-			if (p.inclination > -1.f)
-			{
-				inclinationLabel.append("<td style=\"padding:0 2px;\">").append(QString::number(p.inclination, 'f', 1)).append("</td>");
-			}
-			else
-			{
-				inclinationLabel.append("<td style=\"padding:0 2px;\">&mdash;</td>");
-			}
-			if (p.semiAxis > -1.f)
-			{
-				semiAxisLabel.append("<td style=\"padding:0 2px;\">").append(QString::number(p.semiAxis, 'f', 4)).append("</td>");
-			}
-			else
-			{
-				semiAxisLabel.append("<td style=\"padding:0 2px;\">&mdash;</td>");
-			}			
-			if (p.angleDistance > -1.f)
-			{
-				angleDistanceLabel.append("<td style=\"padding:0 2px;\">").append(QString::number(p.angleDistance, 'f', 6)).append("</td>");
-			}
-			else
-			{
-				angleDistanceLabel.append("<td style=\"padding:0 2px;\">&mdash;</td>");
-			}
-			if (p.discovered > 0)
-			{
-				discoveredLabel.append("<td style=\"padding:0 2px;\">").append(QString::number(p.discovered)).append("</td>");
-			}
-			else
-			{
-				discoveredLabel.append("<td style=\"padding:0 2px;\">&mdash;</td>");
-			}
+			oss << "</table>";
 		}
-		oss << "<table>";
-		oss << "<tr>" << planetNameLabel << "</tr>";
-		oss << "<tr>" << periodLabel << "</tr>";
-		oss << "<tr>" << massLabel << "</tr>";
-		oss << "<tr>" << radiusLabel << "</tr>";
-		oss << "<tr>" << semiAxisLabel << "</tr>";
-		oss << "<tr>" << eccentricityLabel << "</tr>";
-		oss << "<tr>" << inclinationLabel << "</tr>";
-		oss << "<tr>" << angleDistanceLabel << "</tr>";
-		oss << "<tr>" << discoveredLabel << "</tr>";
-		oss << "</table>";
 	}
 
 	postProcessInfoString(str, flags);
@@ -302,11 +342,12 @@ QString Exoplanet::getInfoString(const StelCore* core, const InfoStringGroup& fl
 
 Vec3f Exoplanet::getInfoColor(void) const
 {
-	return StelApp::getInstance().getVisionModeNight() ? Vec3f(0.6, 0.0, 0.0) : Vec3f(1.0, 1.0, 1.0);
+	return Vec3f(1.0, 1.0, 1.0);
 }
 
 float Exoplanet::getVMagnitude(const StelCore* core) const
 {
+	Q_UNUSED(core);
 	if (GETSTELMODULE(Exoplanets)->getDisplayMode())
 	{
 		return 4.f;
@@ -363,11 +404,12 @@ void Exoplanet::update(double deltaTime)
 void Exoplanet::draw(StelCore* core, StelPainter& painter)
 {
 	bool visible;
-	StelSkyDrawer* sd = core->getSkyDrawer();	
+	StelSkyDrawer* sd = core->getSkyDrawer();
 
-	Vec3f color = Vec3f(0.4f,1.2f,0.5f);
-	if (StelApp::getInstance().getVisionModeNight())
-		color = StelUtils::getNightColor(color);
+	//TODO: Store color of markers into config.ini file
+	Vec3f color = Vec3f(0.4f,0.9f,0.5f);
+	if (hasHabitableExoplanets)
+		color = Vec3f(1.f,0.5f,0.f);
 
 	double mag = getVMagnitudeWithExtinction(core);
 
@@ -395,8 +437,15 @@ void Exoplanet::draw(StelCore* core, StelPainter& painter)
 		float shift = 5.f + size/1.6f;
 		if (labelsFader.getInterstate()<=0.f)
 		{
-			painter.drawSprite2dMode(XYZ, 5);
-			painter.drawText(XYZ, designation, 0, shift, shift, false);
+			if (GETSTELMODULE(Exoplanets)->getDisplayMode())
+			{
+				painter.drawSprite2dMode(XYZ, 4);
+			}
+			else
+			{
+				painter.drawSprite2dMode(XYZ, 5);
+				painter.drawText(XYZ, designation, 0, shift, shift, false);
+			}
 		}
 	}
 }

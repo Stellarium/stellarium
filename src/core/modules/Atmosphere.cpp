@@ -34,8 +34,9 @@ inline bool myisnan(double value)
 	return value != value;
 }
 
-Atmosphere::Atmosphere(void) :viewport(0,0,0,0), posGrid(NULL), colorGrid(NULL), indices(NULL),
-					   averageLuminance(0.f), eclipseFactor(1.f), lightPollutionLuminance(0)
+Atmosphere::Atmosphere(void) :viewport(0,0,0,0), posGrid(NULL), posGridBuffer(QOpenGLBuffer::VertexBuffer), 
+	indicesBuffer(QOpenGLBuffer::IndexBuffer), colorGrid(NULL), colorGridBuffer(QOpenGLBuffer::VertexBuffer),
+	averageLuminance(0.f), eclipseFactor(1.f), lightPollutionLuminance(0)
 {
 	setFadeDuration(1.5f);
 
@@ -51,10 +52,10 @@ Atmosphere::Atmosphere(void) :viewport(0,0,0,0), posGrid(NULL), colorGrid(NULL),
 	}
 	QOpenGLShader fShader(QOpenGLShader::Fragment);
 	if (!fShader.compileSourceCode(
-					"varying mediump vec4 resultSkyColor;\n"
+					"varying mediump vec3 resultSkyColor;\n"
 					"void main()\n"
 					"{\n"
-					 "   gl_FragColor = resultSkyColor;\n"
+					 "   gl_FragColor = vec4(resultSkyColor, 1.);\n"
 					 "}"))
 	{
 		qFatal("Error while compiling atmosphere fragment shader: %s", fShader.log().toLatin1().constData());
@@ -101,22 +102,12 @@ Atmosphere::Atmosphere(void) :viewport(0,0,0,0), posGrid(NULL), colorGrid(NULL),
 
 Atmosphere::~Atmosphere(void)
 {
-	if (posGrid)
-	{
-		delete[] posGrid;
-		posGrid = NULL;
-	}
-	if (colorGrid)
-	{
-		delete[] colorGrid;
-		colorGrid = NULL;
-	}
-	if (indices)
-	{
-		delete[] indices;
-		indices = NULL;
-	}
+	delete [] posGrid;
+	posGrid = NULL;
+	delete[] colorGrid;
+	colorGrid = NULL;
 	delete atmoShaderProgram;
+	atmoShaderProgram = NULL;
 }
 
 void Atmosphere::computeColor(double JD, Vec3d _sunPos, Vec3d moonPos, float moonPhase,
@@ -127,12 +118,8 @@ void Atmosphere::computeColor(double JD, Vec3d _sunPos, Vec3d moonPos, float moo
 	{
 		// The viewport changed: update the number of point of the grid
 		viewport = prj->getViewport();
-		if (posGrid)
-			delete[] posGrid;
-		if (colorGrid)
-			delete[] colorGrid;
-		if (indices)
-			delete[] indices;
+		delete[] colorGrid;
+		delete [] posGrid;
 		skyResolutionY = StelApp::getInstance().getSettings()->value("landscape/atmosphereybin", 44).toInt();
 		skyResolutionX = (int)floor(0.5+skyResolutionY*(0.5*sqrt(3.0))*prj->getViewportWidth()/prj->getViewportHeight());
 		posGrid = new Vec2f[(1+skyResolutionX)*(1+skyResolutionY)];
@@ -151,9 +138,17 @@ void Atmosphere::computeColor(double JD, Vec3d _sunPos, Vec3d moonPos, float moo
 				v[1] = viewport_bottom+y*stepY;
 			}
 		}
-
+		posGridBuffer.destroy();
+		//posGridBuffer = QOpenGLBuffer(QOpenGLBuffer::VertexBuffer);
+		Q_ASSERT(posGridBuffer.type()==QOpenGLBuffer::VertexBuffer);
+		posGridBuffer.setUsagePattern(QOpenGLBuffer::StaticDraw);
+		posGridBuffer.create();
+		posGridBuffer.bind();
+		posGridBuffer.allocate(posGrid, (1+skyResolutionX)*(1+skyResolutionY)*8);
+		posGridBuffer.release();
+		
 		// Generate the indices used to draw the quads
-		indices = new unsigned short[(skyResolutionX+1)*skyResolutionY*2];
+		unsigned short* indices = new unsigned short[(skyResolutionX+1)*skyResolutionY*2];
 		int i=0;
 		for (int y2=0; y2<skyResolutionY; ++y2)
 		{
@@ -165,6 +160,23 @@ void Atmosphere::computeColor(double JD, Vec3d _sunPos, Vec3d moonPos, float moo
 				indices[i++]=g1++;
 			}
 		}
+		indicesBuffer.destroy();
+		//indicesBuffer = QOpenGLBuffer(QOpenGLBuffer::IndexBuffer);
+		Q_ASSERT(indicesBuffer.type()==QOpenGLBuffer::IndexBuffer);
+		indicesBuffer.setUsagePattern(QOpenGLBuffer::StaticDraw);
+		indicesBuffer.create();
+		indicesBuffer.bind();
+		indicesBuffer.allocate(indices, (skyResolutionX+1)*skyResolutionY*2*2);
+		indicesBuffer.release();
+		delete[] indices;
+		indices=NULL;
+		
+		colorGridBuffer.destroy();
+		colorGridBuffer.setUsagePattern(QOpenGLBuffer::DynamicDraw);
+		colorGridBuffer.create();
+		colorGridBuffer.bind();
+		colorGridBuffer.allocate(posGrid, (1+skyResolutionX)*(1+skyResolutionY)*4*4);
+		colorGridBuffer.release();
 	}
 
 	if (myisnan(_sunPos.length()))
@@ -237,7 +249,7 @@ void Atmosphere::computeColor(double JD, Vec3d _sunPos, Vec3d moonPos, float moo
 	skyb.setDate(year, month, moonPhase);
 
 	// Variables used to compute the average sky luminance
-	double sum_lum = 0.;
+	float sum_lum = 0.f;
 
 	Vec3d point(1., 0., 0.);
 	float lumi;
@@ -263,7 +275,7 @@ void Atmosphere::computeColor(double JD, Vec3d _sunPos, Vec3d moonPos, float moo
 				sunPos[2]*point[2], point[2]);
 		lumi *= eclipseFactor;
 		// Add star background luminance
-		lumi += 0.0001;
+		lumi += 0.0001f;
 		// Multiply by the input scale of the ToneConverter (is not done automatically by the xyYtoRGB method called later)
 		//lumi*=eye->getInputScale();
 
@@ -279,7 +291,11 @@ void Atmosphere::computeColor(double JD, Vec3d _sunPos, Vec3d moonPos, float moo
 		// Store the back projected position + luminance in the input color to the shader
 		colorGrid[i].set(point[0], point[1], point[2], lumi);
 	}
-
+	
+	colorGridBuffer.bind();
+	colorGridBuffer.write(0, colorGrid, (1+skyResolutionX)*(1+skyResolutionY)*4*4);
+	colorGridBuffer.release();
+	
 	// Update average luminance
 	averageLuminance = sum_lum/((1+skyResolutionX)*(1+skyResolutionY));
 }
@@ -330,18 +346,26 @@ void Atmosphere::draw(StelCore* core)
 	const Mat4f& m = sPainter.getProjector()->getProjectionMatrix();
 	atmoShaderProgram->setUniformValue(shaderAttribLocations.projectionMatrix,
 		QMatrix4x4(m[0], m[4], m[8], m[12], m[1], m[5], m[9], m[13], m[2], m[6], m[10], m[14], m[3], m[7], m[11], m[15]));
-	atmoShaderProgram->enableAttributeArray(shaderAttribLocations.skyVertex);
+	
+	colorGridBuffer.bind();
+	atmoShaderProgram->setAttributeBuffer(shaderAttribLocations.skyColor, GL_FLOAT, 0, 4, 0);
+	colorGridBuffer.release();
 	atmoShaderProgram->enableAttributeArray(shaderAttribLocations.skyColor);
-	atmoShaderProgram->setAttributeArray(shaderAttribLocations.skyVertex, (const GLfloat*)posGrid, 2, 0);
-	atmoShaderProgram->setAttributeArray(shaderAttribLocations.skyColor, (const GLfloat*)colorGrid, 4, 0);
+	posGridBuffer.bind();
+	atmoShaderProgram->setAttributeBuffer(shaderAttribLocations.skyVertex, GL_FLOAT, 0, 2, 0);
+	posGridBuffer.release();
+	atmoShaderProgram->enableAttributeArray(shaderAttribLocations.skyVertex);
 
 	// And draw everything at once
-	unsigned short* shift=indices;
+	indicesBuffer.bind();
+	int shift=0;
 	for (int y=0;y<skyResolutionY;++y)
 	{
-		glDrawElements(GL_TRIANGLE_STRIP, (skyResolutionX+1)*2, GL_UNSIGNED_SHORT, shift);
-		shift += (skyResolutionX+1)*2;
+		glDrawElements(GL_TRIANGLE_STRIP, (skyResolutionX+1)*2, GL_UNSIGNED_SHORT, reinterpret_cast<void*>(shift));
+		shift += (skyResolutionX+1)*2*2;
 	}
+	indicesBuffer.release();
+	
 	atmoShaderProgram->disableAttributeArray(shaderAttribLocations.skyVertex);
 	atmoShaderProgram->disableAttributeArray(shaderAttribLocations.skyColor);
 	atmoShaderProgram->release();

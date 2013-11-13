@@ -37,13 +37,12 @@
 #include "StelProjector.hpp"
 #include "StelLocationMgr.hpp"
 #include "ToastMgr.hpp"
-
+#include "StelActionMgr.hpp"
 #include "StelProgressController.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelSkyCultureMgr.hpp"
 #include "StelFileMgr.hpp"
-#include "StelShortcutMgr.hpp"
 #include "StelJsonParser.hpp"
 #include "StelSkyLayerMgr.hpp"
 #include "StelAudioMgr.hpp"
@@ -61,7 +60,6 @@
 #include <QDebug>
 #include <QFile>
 #include <QFileInfo>
-#include <QMessageBox>
 #include <QMouseEvent>
 #include <QNetworkAccessManager>
 #include <QNetworkDiskCache>
@@ -74,6 +72,7 @@
 #include <QTimer>
 #include <QDir>
 #include <QCoreApplication>
+#include <QScreen>
 
 Q_IMPORT_PLUGIN(StelStandardGuiPluginInterface)
 
@@ -129,6 +128,10 @@ Q_IMPORT_PLUGIN(SolarSystemEditorStelPluginInterface)
 Q_IMPORT_PLUGIN(TimeZoneConfigurationStelPluginInterface)
 #endif
 
+#ifdef USE_STATIC_PLUGIN_NOVAE
+Q_IMPORT_PLUGIN(NovaeStelPluginInterface)
+#endif
+
 #ifdef USE_STATIC_PLUGIN_SUPERNOVAE
 Q_IMPORT_PLUGIN(SupernovaeStelPluginInterface)
 #endif
@@ -173,7 +176,7 @@ StelApp::StelApp(QObject* parent)
 #ifndef DISABLE_SCRIPTING
 	  scriptAPIProxy(NULL), scriptMgr(NULL),
 #endif
-	  stelGui(NULL), fps(0),
+	  stelGui(NULL), devicePixelsPerPixel(1.f), globalScalingRatio(1.f), fps(0),
 	  frame(0), timefr(0.), timeBase(0.), flagNightVision(false),
 	  confSettings(NULL), initialized(false), saveProjW(-1), saveProjH(-1), drawState(0)
 
@@ -192,7 +195,7 @@ StelApp::StelApp(QObject* parent)
 	textureMgr=NULL;
 	moduleMgr=NULL;
 	networkAccessManager=NULL;
-	shortcutMgr = NULL;
+	actionMgr = NULL;
 
 	// Can't create 2 StelApp instances
 	Q_ASSERT(!singleton);
@@ -228,7 +231,7 @@ StelApp::~StelApp()
 	delete textureMgr; textureMgr=NULL;
 	delete planetLocationMgr; planetLocationMgr=NULL;
 	delete moduleMgr; moduleMgr=NULL; // Delete the secondary instance
-	delete shortcutMgr; shortcutMgr = NULL;
+	delete actionMgr; actionMgr = NULL;
 
 	Q_ASSERT(singleton);
 	singleton = NULL;
@@ -326,6 +329,8 @@ void StelApp::init(QSettings* conf)
 {
 	confSettings = conf;
 
+	devicePixelsPerPixel = QOpenGLContext::currentContext()->screen()->devicePixelRatio();
+	
 	core = new StelCore();
 	if (saveProjW!=-1 && saveProjH!=-1)
 		core->windowHasBeenResized(0, 0, saveProjW, saveProjH);
@@ -352,7 +357,7 @@ void StelApp::init(QSettings* conf)
 	localeMgr = new StelLocaleMgr();
 	skyCultureMgr = new StelSkyCultureMgr();
 	planetLocationMgr = new StelLocationMgr();
-	shortcutMgr = new StelShortcutMgr();
+	actionMgr = new StelActionMgr();
 
 	localeMgr->init();
 
@@ -423,9 +428,8 @@ void StelApp::init(QSettings* conf)
 	initScriptMgr(conf);
 
 	// Initialisation of the color scheme
-	bool tmp = confSettings->value("viewing/flag_night").toBool();
-	flagNightVision=!tmp;  // fool caching
-	setVisionModeNight(tmp);
+	emit colorSchemeChanged("color");
+	setVisionModeNight(confSettings->value("viewing/flag_night").toBool());
 
 	// Initialisation of the render of solar shadows
 	//setRenderSolarShadows(confSettings->value("viewing/flag_render_solar_shadows", true).toBool());
@@ -433,6 +437,9 @@ void StelApp::init(QSettings* conf)
 	// Proxy Initialisation
 	setupHttpProxy();
 	updateI18n();
+
+	// Init actions.
+	actionMgr->addAction("actionShow_Night_Mode", N_("Display Options"), N_("Night mode"), this, "nightMode");
 
 	initialized = true;
 }
@@ -499,7 +506,7 @@ void StelApp::update(double deltaTime)
 		frame = 0;
 		timeBase+=1.;
 	}
-
+		
 	core->update(deltaTime);
 
 	moduleMgr->update();
@@ -562,15 +569,22 @@ void StelApp::glWindowHasBeenResized(float x, float y, float w, float h)
 }
 
 // Handle mouse clics
-void StelApp::handleClick(QMouseEvent* event)
+void StelApp::handleClick(QMouseEvent* inputEvent)
 {
-	event->setAccepted(false);
+	inputEvent->setAccepted(false);
+	
+	QMouseEvent event(inputEvent->type(), QPoint(inputEvent->pos().x()*devicePixelsPerPixel, inputEvent->pos().y()*devicePixelsPerPixel), inputEvent->button(), inputEvent->buttons(), inputEvent->modifiers());
+	event.setAccepted(false);
+	
 	// Send the event to every StelModule
 	foreach (StelModule* i, moduleMgr->getCallOrders(StelModule::ActionHandleMouseClicks))
 	{
-		i->handleMouseClicks(event);
-		if (event->isAccepted())
+		i->handleMouseClicks(&event);
+		if (event.isAccepted())
+		{
+			inputEvent->setAccepted(true);
 			return;
+		}
 	}
 }
 
@@ -582,29 +596,35 @@ void StelApp::handleWheel(QWheelEvent* event)
 	static int delta = 0;
 
 	event->setAccepted(false);
+	
 	if (wheelEventTimer->isActive()) {
-		// Collect the values; we only care about the fianl position values, but we want to accumalate the delta.
+		// Collect the values. If delta is small enough we wait for more values or the end
+		// of the timer period to process them.
 		delta += event->delta();
-	} else {
-		// The first time in, the values will not have been set.
-		if (delta == 0) {
-			delta += event->delta();
-		}
-
-		wheelEventTimer->start();
-		QWheelEvent deltaEvent(event->pos(), event->globalPos(), delta, event->buttons(), event->modifiers(), event->orientation());
-		deltaEvent.setAccepted(false);
-		// Send the event to every StelModule
-		foreach (StelModule* i, moduleMgr->getCallOrders(StelModule::ActionHandleMouseClicks)) {
-			i->handleMouseWheel(&deltaEvent);
-			if (deltaEvent.isAccepted()) {
-				event->accept();
-				break;
-			}
-		}
-		// Reset the collected values
-		delta = 0;
+		if (qAbs(delta) < 120)
+			return;
 	}
+
+	// The first time in, the values will not have been set.
+	if (delta == 0) {
+		delta += event->delta();
+	}
+
+	wheelEventTimer->start();
+	QWheelEvent deltaEvent(QPoint(event->pos().x()*devicePixelsPerPixel, event->pos().y()*devicePixelsPerPixel),
+						   QPoint(event->globalPos().x()*devicePixelsPerPixel, event->globalPos().y()*devicePixelsPerPixel),
+						   delta, event->buttons(), event->modifiers(), event->orientation());
+	deltaEvent.setAccepted(false);
+	// Send the event to every StelModule
+	foreach (StelModule* i, moduleMgr->getCallOrders(StelModule::ActionHandleMouseClicks)) {
+		i->handleMouseWheel(&deltaEvent);
+		if (deltaEvent.isAccepted()) {
+			event->accept();
+			break;
+		}
+	}
+	// Reset the collected values
+	delta = 0;
 }
 
 // Handle mouse move
@@ -613,7 +633,7 @@ void StelApp::handleMove(int x, int y, Qt::MouseButtons b)
 	// Send the event to every StelModule
 	foreach (StelModule* i, moduleMgr->getCallOrders(StelModule::ActionHandleMouseMoves))
 	{
-		if (i->handleMouseMoves(x, y, b))
+		if (i->handleMouseMoves(x*devicePixelsPerPixel, y*devicePixelsPerPixel, b))
 			return;
 	}
 }
@@ -622,6 +642,15 @@ void StelApp::handleMove(int x, int y, Qt::MouseButtons b)
 void StelApp::handleKeys(QKeyEvent* event)
 {
 	event->setAccepted(false);
+	// First try to trigger a shortcut.
+	if (event->type() == QEvent::KeyPress)
+	{
+		if (getStelActionManager()->pushKey(event->key() + event->modifiers()))
+		{
+			event->setAccepted(true);
+			return;
+		}
+	}
 	// Send the event to every StelModule
 	foreach (StelModule* i, moduleMgr->getCallOrders(StelModule::ActionHandleKeys))
 	{
@@ -638,7 +667,7 @@ void StelApp::setVisionModeNight(bool b)
 	if (flagNightVision!=b)
 	{
 		flagNightVision=b;
-		emit(colorSchemeChanged(b ? "night_color" : "color"));
+		emit(visionNightModeChanged(b));
 	}
 }
 
@@ -676,5 +705,17 @@ void StelApp::reportFileDownloadFinished(QNetworkReply* reply)
 	{
 		++nbDownloadedFiles;
 		totalDownloadedSize+=reply->bytesAvailable();
+	}
+}
+
+void StelApp::setDevicePixelsPerPixel(float dppp)
+{
+	// Check that the device-independent pixel size didn't change
+	if (devicePixelsPerPixel!=dppp)
+	{
+		devicePixelsPerPixel = dppp;
+		StelProjector::StelProjectorParams params = core->getCurrentStelProjectorParams();
+		params.devicePixelsPerPixel = devicePixelsPerPixel;
+		core->setCurrentStelProjectorParams(params);
 	}
 }

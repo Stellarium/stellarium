@@ -32,6 +32,7 @@ class StelButton;
 class AngleMeasure : public StelModule
 {
 	Q_OBJECT
+	Q_PROPERTY(bool enabled READ isEnabled WRITE enableAngleMeasure)
 public:
 	AngleMeasure();
 	virtual ~AngleMeasure();
@@ -45,6 +46,7 @@ public:
 	virtual void handleKeys(class QKeyEvent* event);
 	virtual void handleMouseClicks(class QMouseEvent* event);
 	virtual bool handleMouseMoves(int x, int y, Qt::MouseButtons b);
+	bool isEnabled() const {return flagShowAngleMeasure;}
 
 public slots:
 	void enableAngleMeasure(bool b);

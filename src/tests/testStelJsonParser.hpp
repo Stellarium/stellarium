@@ -21,7 +21,7 @@
 #define _TESTSTELJSONPARSER_HPP_
 
 #include <QObject>
-#include <QtTest>
+#include <QTest>
 
 class TestStelJsonParser : public QObject
 {

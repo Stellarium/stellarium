@@ -32,7 +32,6 @@
 
 #include <QDebug>
 #include <QTimer>
-#include <QAction>
 #include <QPixmap>
 #include <QtNetwork>
 #include <QSettings>
@@ -78,7 +77,7 @@ AngleMeasure::AngleMeasure()
 	if (!conf->contains("AngleMeasure/angle_format_dms"))
 	{
 		// Create the "AngleMeasure" section and set default parameters
-		conf->setValue("AngleMeasure/angle_format_dms", true);
+		conf->setValue("AngleMeasure/angle_format_dms", false);
 		conf->setValue("AngleMeasure/text_color", "0,0.5,1");
 		conf->setValue("AngleMeasure/line_color", "0,0.5,1");
 	}
@@ -117,9 +116,7 @@ void AngleMeasure::init()
 	// Create action for enable/disable & hook up signals
 	StelGui* gui = dynamic_cast<StelGui*>(app.getGui());
 	Q_ASSERT(gui);
-	QAction* action = gui->getGuiAction("actionShow_Angle_Measure");
-	action->setChecked(flagShowAngleMeasure);
-	connect(action, SIGNAL(toggled(bool)), this, SLOT(enableAngleMeasure(bool)));
+	addAction("actionShow_Angle_Measure", N_("Angle Measure"), N_("Angle measure"), "enabled", "Ctrl+A");
 
 	// Initialize the message strings and make sure they are translated when
 	// the language changes.
@@ -130,7 +127,7 @@ void AngleMeasure::init()
 	try
 	{
 		toolbarButton = new StelButton(NULL, QPixmap(":/angleMeasure/bt_anglemeasure_on.png"), QPixmap(":/angleMeasure/bt_anglemeasure_off.png"),
-																	 QPixmap(":/graphicGui/glow32x32.png"), gui->getGuiAction("actionShow_Angle_Measure"));
+																	 QPixmap(":/graphicGui/glow32x32.png"), "actionShow_Angle_Measure");
 		gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
 	}
 	catch (std::runtime_error& e)
@@ -154,17 +151,6 @@ void AngleMeasure::draw(StelCore* core)
 	const StelProjectorP prj = core->getProjection(StelCore::FrameEquinoxEqu);
 	StelPainter painter(prj);
 	painter.setFont(font);
-	Vec3f tColor, lColor;
-	if (StelApp::getInstance().getVisionModeNight())
-	{
-		tColor = StelUtils::getNightColor(textColor);
-		lColor = StelUtils::getNightColor(lineColor);
-	}
-	else
-	{
-		tColor = textColor;
-		lColor = lineColor;
-	}
 
 	if (lineVisible.getInterstate() > 0.000001f)
 	{
@@ -175,7 +161,7 @@ void AngleMeasure::draw(StelCore* core)
 		Vec3d xy;
 		if (prj->project(perp1EndPoint,xy))
 		{
-			painter.setColor(tColor[0], tColor[1], tColor[2], lineVisible.getInterstate());
+			painter.setColor(textColor[0], textColor[1], textColor[2], lineVisible.getInterstate());
 			painter.drawText(xy[0], xy[1], angleText, 0, 15, 15);
 		}
 
@@ -184,7 +170,7 @@ void AngleMeasure::draw(StelCore* core)
 		glEnable(GL_BLEND);
 		
 		// main line is a great circle		
-		painter.setColor(lColor[0], lColor[1], lColor[2], lineVisible.getInterstate());
+		painter.setColor(lineColor[0], lineColor[1], lineColor[2], lineVisible.getInterstate());
 		painter.drawGreatCircleArc(startPoint, endPoint, NULL);
 
 		// End lines
@@ -194,7 +180,7 @@ void AngleMeasure::draw(StelCore* core)
 
 	if (messageFader.getInterstate() > 0.000001f)
 	{
-		painter.setColor(tColor[0], tColor[1], tColor[2], messageFader.getInterstate());
+		painter.setColor(textColor[0], textColor[1], textColor[2], messageFader.getInterstate());
 		int x = 83;
 		int y = 120;
 		int ls = painter.getFontMetrics().lineSpacing();

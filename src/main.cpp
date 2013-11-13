@@ -28,24 +28,34 @@
 
 #include <QDebug>
 
-#ifndef Q_OS_ANDROID
+#ifndef USE_QUICKVIEW
 	#include <QApplication>
+	#include <QMessageBox>
+	#include <QStyleFactory>
 #else
 	#include <QGuiApplication>
 #endif
-#include <QMessageBox>
-#include <QStyleFactory>
-#include <QTranslator>
-#include <QGLFormat>
+#include <QCoreApplication>
+#include <QDir>
+#include <QFile>
 #include <QFileInfo>
 #include <QFontDatabase>
-#include <QDir>
+#include <QGLFormat>
+#include <QGuiApplication>
+#include <QSettings>
+#include <QString>
+#include <QStringList>
+#include <QTextStream>
+#include <QTranslator>
+
+#include <clocale>
+
 #ifdef Q_OS_WIN
-#include <windows.h>
-#ifdef _MSC_BUILD
-	#include <MMSystem.h>
-	#pragma comment(lib,"Winmm.lib")
-#endif
+	#include <windows.h>
+	#ifdef _MSC_BUILD
+		#include <MMSystem.h>
+		#pragma comment(lib,"Winmm.lib")
+	#endif
 #endif //Q_OS_WIN
 
 //! @class GettextStelTranslator
@@ -75,15 +85,9 @@ public:
 //! name specified on the command line located in the user data directory.
 void copyDefaultConfigFile(const QString& newPath)
 {
-	QString defaultConfigFilePath;
-	try
-	{
-		defaultConfigFilePath = StelFileMgr::findFile("data/default_config.ini");
-	}
-	catch (std::runtime_error& e)
-	{
+	QString defaultConfigFilePath = StelFileMgr::findFile("data/default_config.ini");
+	if (defaultConfigFilePath.isEmpty())
 		qFatal("ERROR copyDefaultConfigFile failed to locate data/default_config.ini. Please check your installation.");
-	}
 	QFile::copy(defaultConfigFilePath, newPath);
 	if (!StelFileMgr::exists(newPath))
 	{
@@ -109,6 +113,26 @@ int main(int argc, char **argv)
 			timerGrain = 0;
 	}
 #endif
+#ifdef Q_OS_MAC
+	// This block does not currently work
+//	 QDir dir(argv[0]);
+//	 dir.cdUp();
+//	 dir.cdUp();
+//	 dir.cd("plugins");
+//	 qDebug() << dir.absolutePath();
+//	 QCoreApplication::setLibraryPaths(QStringList(dir.absolutePath()));
+
+	 char ** newArgv = (char**) malloc((argc + 2) * sizeof(*newArgv));
+	 memmove(newArgv, argv, sizeof(*newArgv) * argc);
+	 char * option = new char[20];
+	 char * value = new char[21];
+	 strcpy( option, "-platformpluginpath");
+	 strcpy( value, "../plugins/platforms");
+	 newArgv[argc++] = option;
+	 newArgv[argc++] = value;
+	 argv = newArgv;
+
+#endif
 
 	QCoreApplication::setApplicationName("stellarium");
 	QCoreApplication::setApplicationVersion(StelUtils::getApplicationVersion());
@@ -116,8 +140,8 @@ int main(int argc, char **argv)
 	QCoreApplication::setOrganizationName("stellarium");
 	
 	QGuiApplication::setDesktopSettingsAware(false);
-	
-#ifndef Q_OS_ANDROID
+
+#ifndef USE_QUICKVIEW
 	QApplication::setStyle(QStyleFactory::create("Fusion"));
 	// The QApplication MUST be created before the StelFileMgr is initialized.
 	QApplication app(argc, argv);
@@ -162,7 +186,7 @@ int main(int argc, char **argv)
 	qDebug() << "Writing log file to:" << QDir::toNativeSeparators(StelLogger::getLogFileName());
 	qDebug() << "File search paths:";
 	int n=0;
-	foreach (QString i, StelFileMgr::getSearchPaths())
+	foreach (const QString& i, StelFileMgr::getSearchPaths())
 	{
 		qDebug() << " " << n << ". " << QDir::toNativeSeparators(i);
 		++n;
@@ -180,21 +204,12 @@ int main(int argc, char **argv)
 		configName = "config.ini";
 	}
 
-	QString configFileFullPath;
-	try
+	QString configFileFullPath = StelFileMgr::findFile(configName, StelFileMgr::Flags(StelFileMgr::Writable|StelFileMgr::File));
+	if (configFileFullPath.isEmpty())
 	{
-		configFileFullPath = StelFileMgr::findFile(configName, StelFileMgr::Flags(StelFileMgr::Writable|StelFileMgr::File));
-	}
-	catch (std::runtime_error& e)
-	{
-		try
-		{
-			configFileFullPath = StelFileMgr::findFile(configName, StelFileMgr::New);
-		}
-		catch (std::runtime_error& e)
-		{
+		configFileFullPath = StelFileMgr::findFile(configName, StelFileMgr::New);
+		if (configFileFullPath.isEmpty())
 			qFatal("Could not create configuration file %s.", qPrintable(configName));
-		}
 	}
 
 	QSettings* confSettings = NULL;
@@ -262,33 +277,22 @@ int main(int argc, char **argv)
 	// Override config file values from CLI.
 	CLIProcessor::parseCLIArgsPostConfig(argList, confSettings);
 
-	// Add the DejaVu font that we use everywhere in the program
-	try
-	{
-		const QString& fName = StelFileMgr::findFile("data/DejaVuSans.ttf");
-		if (!fName.isEmpty())
-			QFontDatabase::addApplicationFont(fName);
-	}
-	catch (std::runtime_error& e)
-	{
-		// Removed this warning practically allowing to package the program without the font file.
-		// This is useful for distribution having already a package for DejaVu font.
-		// qWarning() << "ERROR while loading font DejaVuSans : " << e.what();
-	}
+	// Support hi-dpi pixmaps
+	app.setAttribute(Qt::AA_UseHighDpiPixmaps);
 
+	// Add the DejaVu font that we use everywhere in the program
+	const QString& fName = StelFileMgr::findFile("data/DejaVuSans.ttf");
+	if (!fName.isEmpty())
+		QFontDatabase::addApplicationFont(fName);
+	
 	QString fileFont = confSettings->value("gui/base_font_file", "").toString();
 	if (!fileFont.isEmpty())
 	{
-		try
-		{
-			const QString& afName = StelFileMgr::findFile(QString("data/%1").arg(fileFont));
-			if (!afName.isEmpty() && !afName.contains("file not found"))
-				QFontDatabase::addApplicationFont(afName);
-		}
-		catch (std::runtime_error& e)
-		{
-			qWarning() << "ERROR while loading custom font " << QDir::toNativeSeparators(fileFont) << " : " << e.what();
-		}
+		const QString& afName = StelFileMgr::findFile(QString("data/%1").arg(fileFont));
+		if (!afName.isEmpty() && !afName.contains("file not found"))
+			QFontDatabase::addApplicationFont(afName);
+		else
+			qWarning() << "ERROR while loading custom font " << QDir::toNativeSeparators(fileFont);
 	}
 
 	QString baseFont = confSettings->value("gui/base_font_name", "DejaVu Sans").toString();
@@ -305,19 +309,19 @@ int main(int argc, char **argv)
 	QGuiApplication::setFont(tmpFont);
 
 	// Initialize translator feature
-	try
-	{
-		StelTranslator::init(StelFileMgr::findFile("data/iso639-1.utf8"));
-	}
-	catch (std::runtime_error& e)
-	{
-		qWarning() << "ERROR while loading translations: " << e.what() << endl;
-	}
+	StelTranslator::init(StelFileMgr::getInstallationDir() + "/data/iso639-1.utf8");
+	
 	// Use our custom translator for Qt translations as well
 	CustomQTranslator trans;
 	app.installTranslator(&trans);
 
 	StelMainView mainWin;
+	// some basic diagnostics
+	if (!QGLFormat::hasOpenGL()){
+	  QMessageBox::warning(0, "Stellarium", q_("This system does not support OpenGL."));
+	}
+
+	qDebug() << "OpenGLVersionFlags: " << QGLFormat::openGLVersionFlags();
 	mainWin.init(confSettings);
 	app.exec();
 	mainWin.deinit();
@@ -325,10 +329,15 @@ int main(int argc, char **argv)
 	delete confSettings;
 	StelLogger::deinit();
 
-	#ifdef Q_OS_WIN
+#ifdef Q_OS_WIN
 	if(timerGrain)
 		timeEndPeriod(timerGrain);
-	#endif //Q_OS_WIN
+#endif //Q_OS_WIN
+#ifdef Q_OS_MAC
+	delete(newArgv);
+	delete(option);
+	delete(value);
+#endif
 
 	return 0;
 }

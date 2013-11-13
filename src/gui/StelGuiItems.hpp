@@ -27,7 +27,6 @@
 
 class QGraphicsSceneMouseEvent;
 class QTimeLine;
-class QAction;
 class QGraphicsTextItem;
 class QTimer;
 class StelProgressController;
@@ -78,19 +77,24 @@ public:
 	//! @param noBackground define whether the button background image have to be used
 	StelButton(QGraphicsItem* parent, const QPixmap& pixOn, const QPixmap& pixOff,
 			   const QPixmap& pixHover=QPixmap(),
-			   QAction* action=NULL, bool noBackground=false);
+			   class StelAction* action=NULL, bool noBackground=false);
+	
+	StelButton(QGraphicsItem* parent, const QPixmap& pixOn, const QPixmap& pixOff,
+			   const QPixmap& pixHover=QPixmap(),
+			   const QString& actionId=QString(), bool noBackground=false);
 	//! Constructor
 	//! @param parent the parent item
 	//! @param pixOn the pixmap to display when the button is toggled
 	//! @param pixOff the pixmap to display when the button is not toggled
 	//! @param pixNoChange the pixmap to display when the button state of a tristate is not changed
 	//! @param pixHover a pixmap slowly blended when mouse is over the button
-	//! @param action the associated action. Connections are automatically done with the signals if relevant.
+	//! @param actionId the associated action. Connections are automatically done with the signals if relevant.
 	//! @param noBackground define whether the button background image have to be used
 	//! @param isTristate define whether the button is a tristate or an on/off button
 	StelButton(QGraphicsItem* parent, const QPixmap& pixOn, const QPixmap& pixOff, const QPixmap& pixNoChange,
 			   const QPixmap& pixHover=QPixmap(),
-			   QAction* action=NULL, bool noBackground=false, bool isTristate=true);
+			   const QString& actionId=QString(), bool noBackground=false, bool isTristate=true);
+	
 	//! Button states
 	enum {ButtonStateOff = 0, ButtonStateOn = 1, ButtonStateNoChange = 2};
 
@@ -104,16 +108,8 @@ public:
 	//! Set the button opacity
 	void setOpacity(double v) {opacity=v; updateIcon();}
 
-	//! Activate red mode for this button, i.e. will reduce the non red color component of the icon
-	void setRedMode(bool b) {redMode=b; updateIcon();}
-
 	//! Set the background pixmap of the button.
-	//! A variant for night vision mode (pixBackgroundRed) is automatically
-	//! generated from the new background.
 	void setBackgroundPixmap(const QPixmap& newBackground);
-
-	//! Transform the pixmap so that it look red for night vision mode
-	static QPixmap makeRed(const QPixmap& p);
 
 signals:
 	//! Triggered when the button state changes
@@ -137,6 +133,13 @@ protected:
 private slots:
 	void animValueChanged(qreal value);
 private:
+	void initCtor(const QPixmap& apixOn,
+                  const QPixmap& apixOff,
+                  const QPixmap& apixNoChange,
+                  const QPixmap& apixHover,
+                  StelAction* aaction,
+                  bool noBackground,
+                  bool isTristate);
 	void updateIcon();
 	int toggleChecked(int);
 
@@ -146,22 +149,14 @@ private:
 	QPixmap pixHover;
 	QPixmap pixBackground;
 
-	QPixmap pixOnRed;
-	QPixmap pixOffRed;
-	QPixmap pixNoChangeRed;
-	QPixmap pixHoverRed;
-	QPixmap pixBackgroundRed;
-
 	int checked;
 
 	QTimeLine* timeLine;
-	QAction* action;
+	class StelAction* action;
 	bool noBckground;
 	bool isTristate_;
 	double opacity;
 	double hoverOpacity;
-
-	bool redMode;
 };
 
 // The button bar on the left containing windows toggle buttons
@@ -178,8 +173,6 @@ public:
 	QRectF boundingRectNoHelpLabel() const;
 	//! Set the color for all the sub elements
 	void setColor(const QColor& c);
-	//! Activate red mode for the buttons, i.e. will reduce the non red color component of the icon
-	void setRedMode(bool b);
 private slots:
 	//! Update the help label when a button is hovered
 	void buttonHoverChanged(bool b);
@@ -218,9 +211,6 @@ public:
 
 	//! Set the color for all the sub elements
 	void setColor(const QColor& c);
-
-	//! Activate red mode for the buttons, i.e. will reduce the non red color component of the icon
-	void setRedMode(bool b);
 
 	//! Set whether time must be displayed in the bottom bar
 	void setFlagShowTime(bool b) {flagShowTime=b;}

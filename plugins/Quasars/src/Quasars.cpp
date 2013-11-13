@@ -39,7 +39,6 @@
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
 #include <QKeyEvent>
-#include <QAction>
 #include <QDebug>
 #include <QFileInfo>
 #include <QFile>
@@ -148,12 +147,15 @@ void Quasars::init()
 		readSettingsFromConfig();
 
 		catalogJsonPath = StelFileMgr::findFile("modules/Quasars", (StelFileMgr::Flags)(StelFileMgr::Directory|StelFileMgr::Writable)) + "/quasars.json";
+		if (catalogJsonPath.isEmpty())
+			return;
 
-		texPointer = StelApp::getInstance().getTextureManager().createTexture("textures/pointeur2.png");
+		texPointer = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/pointeur2.png");
 		Quasar::markerTexture = StelApp::getInstance().getTextureManager().createTexture(":/Quasars/quasar.png");
 
 		// key bindings and other actions
-		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+		addAction("actionShow_Quasars", N_("Quasars"), N_("Show quasars"), "quasarsVisible", "Ctrl+Alt+Q");
+		addAction("actionShow_Quasars_ConfigDialog", N_("Quasars"), N_("Quasars configuration window"), configDialog, "visible");
 
 		GlowIcon = new QPixmap(":/graphicsGui/glow32x32.png");
 		OnIcon = new QPixmap(":/Quasars/btQuasars-on.png");
@@ -161,10 +163,6 @@ void Quasars::init()
 
 		setFlagShowQuasars(getEnableAtStartup());
 		setFlagShowQuasarsButton(flagShowQuasarsButton);
-
-		connect(gui->getGuiAction("actionShow_Quasars_ConfigDialog"), SIGNAL(toggled(bool)), configDialog, SLOT(setVisible(bool)));
-		connect(configDialog, SIGNAL(visibleChanged(bool)), gui->getGuiAction("actionShow_Quasars_ConfigDialog"), SLOT(setChecked(bool)));
-		connect(gui->getGuiAction("actionShow_Quasars"), SIGNAL(toggled(bool)), this, SLOT(setFlagShowQuasars(bool)));
 	}
 	catch (std::runtime_error &e)
 	{
@@ -182,7 +180,7 @@ void Quasars::init()
 	// If the json file does not already exist, create it from the resource in the Qt resource
 	if(QFileInfo(catalogJsonPath).exists())
 	{
-		if (getJsonFileFormatVersion() < CATALOG_FORMAT_VERSION)
+		if (!checkJsonFileFormat() || getJsonFileFormatVersion()<CATALOG_FORMAT_VERSION)
 		{
 			restoreDefaultJsonFile();
 		}
@@ -545,6 +543,31 @@ int Quasars::getJsonFileFormatVersion(void)
 	return jsonVersion;
 }
 
+bool Quasars::checkJsonFileFormat()
+{
+	QFile catalogJsonFile(catalogJsonPath);
+	if (!catalogJsonFile.open(QIODevice::ReadOnly))
+	{
+		qWarning() << "Quasars::checkJsonFileFormat(): cannot open " << QDir::toNativeSeparators(catalogJsonPath);
+		return false;
+	}
+
+	QVariantMap map;
+	try
+	{
+		map = StelJsonParser::parse(&catalogJsonFile).toMap();
+		catalogJsonFile.close();
+	}
+	catch (std::runtime_error& e)
+	{
+		qDebug() << "Quasars::checkJsonFileFormat(): file format is wrong!";
+		qDebug() << "Quasars::checkJsonFileFormat() error:" << e.what();
+		return false;
+	}
+
+	return true;
+}
+
 QuasarP Quasars::getByID(const QString& id)
 {
 	foreach(const QuasarP& quasar, QSO)
@@ -558,11 +581,7 @@ QuasarP Quasars::getByID(const QString& id)
 bool Quasars::configureGui(bool show)
 {
 	if (show)
-	{
-		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-		gui->getGuiAction("actionShow_Quasars_ConfigDialog")->setChecked(true);
-	}
-
+		configDialog->setVisible(true);
 	return true;
 }
 
@@ -676,22 +695,19 @@ void Quasars::updateDownloadComplete(QNetworkReply* reply)
 	else
 	{
 		// download completed successfully.
-		try
+		QString jsonFilePath = StelFileMgr::findFile("modules/Quasars", StelFileMgr::Flags(StelFileMgr::Writable|StelFileMgr::Directory)) + "/quasars.json";
+		if (jsonFilePath.isEmpty())
 		{
-			QString jsonFilePath = StelFileMgr::findFile("modules/Quasars", StelFileMgr::Flags(StelFileMgr::Writable|StelFileMgr::Directory)) + "/quasars.json";
-			QFile jsonFile(jsonFilePath);
-			if (jsonFile.exists())
-				jsonFile.remove();
-
-			jsonFile.open(QIODevice::WriteOnly | QIODevice::Text);
-			jsonFile.write(reply->readAll());
-			jsonFile.close();
+			qWarning() << "Quasars::updateDownloadComplete: cannot write JSON data to file: modules/Quasars/quasars.json";
+			return;
 		}
-		catch (std::runtime_error &e)
-		{
-			qWarning() << "Quasars::updateDownloadComplete: cannot write JSON data to file:" << e.what();
-		}
+		QFile jsonFile(jsonFilePath);
+		if (jsonFile.exists())
+			jsonFile.remove();
 
+		jsonFile.open(QIODevice::WriteOnly | QIODevice::Text);
+		jsonFile.write(reply->readAll());
+		jsonFile.close();
 	}
 
 	if (progressBar)
@@ -735,8 +751,7 @@ void Quasars::setFlagShowQuasarsButton(bool b)
 	if (b==true) {
 		if (toolbarButton==NULL) {
 			// Create the quasars button
-			gui->getGuiAction("actionShow_Quasars")->setChecked(flagShowQuasars);
-			toolbarButton = new StelButton(NULL, *OnIcon, *OffIcon, *GlowIcon, gui->getGuiAction("actionShow_Quasars"));
+			toolbarButton = new StelButton(NULL, *OnIcon, *OffIcon, *GlowIcon, "actionShow_Quasars");
 		}
 		gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
 	} else {

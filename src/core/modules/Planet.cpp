@@ -25,6 +25,7 @@
 
 #include "StelApp.hpp"
 #include "StelCore.hpp"
+#include "StelFileMgr.hpp"
 #include "StelTexture.hpp"
 #include "StelSkyDrawer.hpp"
 #include "SolarSystem.hpp"
@@ -45,18 +46,19 @@ Vec3f Planet::orbitColor = Vec3f(1,0.6,1);
 StelTextureSP Planet::hintCircleTex;
 StelTextureSP Planet::texEarthShadow;
 Planet::Planet(const QString& englishName,
-			   int flagLighting,
-			   double radius,
-			   double oblateness,
-			   Vec3f color,
-			   float albedo,
-			   const QString& atexMapName,
-			   posFuncType coordFunc,
-			   void* auserDataPtr,
-			   OsculatingFunctType *osculatingFunc,
-			   bool acloseOrbit,
-			   bool hidden,
-			   bool hasAtmosphere)
+	       int flagLighting,
+	       double radius,
+	       double oblateness,
+	       Vec3f color,
+	       float albedo,
+	       const QString& atexMapName,
+	       posFuncType coordFunc,
+	       void* auserDataPtr,
+	       OsculatingFunctType *osculatingFunc,
+	       bool acloseOrbit,
+	       bool hidden,
+	       bool hasAtmosphere,
+	       const QString& pType)
 	: englishName(englishName),
 	  flagLighting(flagLighting),
 	  radius(radius), oneMinusOblateness(1.0-oblateness),
@@ -68,7 +70,8 @@ Planet::Planet(const QString& englishName,
 	  osculatingFunc(osculatingFunc),
 	  parent(NULL),
 	  hidden(hidden),
-	  atmosphere(hasAtmosphere)
+	  atmosphere(hasAtmosphere),
+	  pType(pType)
 {
 	texMapName = atexMapName;
 	lastOrbitJD =0;
@@ -78,7 +81,7 @@ Planet::Planet(const QString& englishName,
 
 	eclipticPos=Vec3d(0.,0.,0.);
 	rotLocalToParent = Mat4d::identity();
-	texMap = StelApp::getInstance().getTextureManager().createTextureThread("textures/"+texMapName, StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT));
+	texMap = StelApp::getInstance().getTextureManager().createTextureThread(StelFileMgr::getInstallationDir()+"/textures/"+texMapName, StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT));
 
 	nameI18 = englishName;
 	if (englishName!="Pluto")
@@ -115,7 +118,7 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 		oss << "</h2>";
 	}
 
-	if (flags&Extra1)
+	if (flags&Extra)
 	{
 		if (pType.length()>0)
 			oss << q_("Type: <b>%1</b>").arg(q_(pType)) << "<br />";
@@ -134,7 +137,7 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 
 	oss << getPositionInfoString(core, flags);
 
-	if ((flags&Extra1) && (core->getCurrentLocation().planetName=="Earth"))
+	if ((flags&Extra) && (core->getCurrentLocation().planetName=="Earth"))
 	{
 		//static SolarSystem *ssystem=GETSTELMODULE(SolarSystem);
 		//double ecl= -(ssystem->getEarth()->getRotObliquity()); // BUG DETECTED! Earth's obliquity is apparently reported constant.
@@ -185,24 +188,26 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 
 	double siderealPeriod = getSiderealPeriod();
 	double siderealDay = getSiderealDay();
-	if ((flags&Extra1) && (siderealPeriod>0))
+	if (flags&Extra)
 	{
-		// TRANSLATORS: Sidereal (orbital) period for solar system bodies in days and in Julian years (symbol: a)
-		oss << q_("Sidereal period: %1 days (%2 a)").arg(QString::number(siderealPeriod, 'f', 2)).arg(QString::number(siderealPeriod/365.25, 'f', 3)) << "<br>";
-		if (std::abs(siderealDay)>0)
-		{			
-			oss << q_("Sidereal day: %1").arg(StelUtils::hoursToHmsStr(std::abs(siderealDay*24))) << "<br>";			
-			oss << q_("Mean solar day: %1").arg(StelUtils::hoursToHmsStr(std::abs(getMeanSolarDay()*24))) << "<br>";
+		if (siderealPeriod>0)
+		{
+			// TRANSLATORS: Sidereal (orbital) period for solar system bodies in days and in Julian years (symbol: a)
+			oss << q_("Sidereal period: %1 days (%2 a)").arg(QString::number(siderealPeriod, 'f', 2)).arg(QString::number(siderealPeriod/365.25, 'f', 3)) << "<br>";
+			if (std::abs(siderealDay)>0)
+			{
+				oss << q_("Sidereal day: %1").arg(StelUtils::hoursToHmsStr(std::abs(siderealDay*24))) << "<br>";
+				oss << q_("Mean solar day: %1").arg(StelUtils::hoursToHmsStr(std::abs(getMeanSolarDay()*24))) << "<br>";
+			}
 		}
-	}
-
-	if ((flags&Extra2) && (englishName.compare("Sun")!=0))
-	{
-		const Vec3d& observerHelioPos = core->getObserverHeliocentricEclipticPos();		
-		oss << QString(q_("Phase Angle: %1")).arg(StelUtils::radToDmsStr(getPhaseAngle(observerHelioPos))) << "<br>";
-		oss << QString(q_("Elongation: %1")).arg(StelUtils::radToDmsStr(getElongation(observerHelioPos))) << "<br>";
-		oss << QString(q_("Phase: %1")).arg(getPhase(observerHelioPos), 0, 'f', 2) << "<br>";
-		oss << QString(q_("Illuminated: %1%")).arg(getPhase(observerHelioPos) * 100, 0, 'f', 1) << "<br>";
+		if (englishName.compare("Sun")!=0)
+		{
+			const Vec3d& observerHelioPos = core->getObserverHeliocentricEclipticPos();
+			oss << QString(q_("Phase Angle: %1")).arg(StelUtils::radToDmsStr(getPhaseAngle(observerHelioPos))) << "<br>";
+			oss << QString(q_("Elongation: %1")).arg(StelUtils::radToDmsStr(getElongation(observerHelioPos))) << "<br>";
+			oss << QString(q_("Phase: %1")).arg(getPhase(observerHelioPos), 0, 'f', 2) << "<br>";
+			oss << QString(q_("Illuminated: %1%")).arg(getPhase(observerHelioPos) * 100, 0, 'f', 1) << "<br>";
+		}
 	}
 
 	postProcessInfoString(str, flags);
@@ -240,10 +245,7 @@ float Planet::getSelectPriority(const StelCore* core) const
 
 Vec3f Planet::getInfoColor(void) const
 {
-	Vec3f col = ((SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("SolarSystem"))->getLabelsColor();
-	if (StelApp::getInstance().getVisionModeNight())
-		col = StelUtils::getNightColor(col);
-	return col;
+	return ((SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("SolarSystem"))->getLabelsColor();
 }
 
 
@@ -417,6 +419,7 @@ void Planet::computePosition(const double date)
 	{
 		// calculate actual Planet position
 		coordFunc(date, eclipticPos, userDataPtr);
+		// XXX: do we need to do that even when the orbit is not visible?
 		for( int d=0; d<ORBIT_SEGMENTS; d++ )
 			orbit[d]=getHeliocentricPos(orbitP[d]);
 		lastJD = date;
@@ -486,6 +489,10 @@ double Planet::getSiderealTime(double jd) const
 double Planet::getMeanSolarDay() const
 {
 	double msd = 0.;
+
+	if (englishName=="Sun")
+		return msd;
+
 	double sday = getSiderealDay();	
 	double coeff = std::abs(sday/getSiderealPeriod());
 	float sign = 1;
@@ -530,14 +537,16 @@ Vec3d Planet::getHeliocentricEclipticPos() const
 // Return heliocentric coordinate of p
 Vec3d Planet::getHeliocentricPos(Vec3d p) const
 {
+	// Note: using shared copies is too slow here.  So we use direct access
+	// instead.
 	Vec3d pos = p;
-	PlanetP pp = parent;
+	const Planet* pp = parent.data();
 	if (pp)
 	{
-		while (pp->parent)
+		while (pp->parent.data())
 		{
 			pos += pp->eclipticPos;
-			pp = pp->parent;
+			pp = pp->parent.data();
 		}
 	}
 	return pos;
@@ -861,16 +870,8 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 			static Vec4f diffuse = Vec4f(2.f,2.f,2.f,1.f);
 			static Vec4f zero = Vec4f(0.f,0.f,0.f,0.f);
 			static Vec4f ambient = Vec4f(0.02f,0.02f,0.02f,0.02f);
-			if (StelApp::getInstance().getVisionModeNight())
-			{
-				diffuse[1] = 0.; diffuse[2] = 0.;
-				ambient[1] = 0.; ambient[2] = 0.;
-			}
-			else
-			{
-				diffuse[1] = 2.; diffuse[2] = 2.;
-				ambient[1] = 0.02; ambient[2] = 0.02;
-			}
+			diffuse[1] = 2.; diffuse[2] = 2.;
+			ambient[1] = 0.02; ambient[2] = 0.02;
 			sPainter->getLight().setAmbient(ambient);
 			sPainter->getLight().setDiffuse(diffuse);
 			sPainter->getLight().setSpecular(zero);
@@ -939,7 +940,7 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 
 	StelPainter sPainter(core->getProjection(StelCore::FrameJ2000));
 	Vec3d tmp = getJ2000EquatorialPos(core);
-	core->getSkyDrawer()->postDrawSky3dModel(&sPainter, tmp, surfArcMin2, getVMagnitudeWithExtinction(core), color);
+	core->getSkyDrawer()->postDrawSky3dModel(&sPainter, Vec3f(tmp[0], tmp[1], tmp[2]), surfArcMin2, getVMagnitudeWithExtinction(core), color);
 }
 
 
@@ -954,10 +955,7 @@ void Planet::drawSphere(StelPainter* painter, float screenSz)
 		}
 	}
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	if (StelApp::getInstance().getVisionModeNight())
-		painter->setColor(1.f, 0.f, 0.f);
-	else
-		painter->setColor(1.f, 1.f, 1.f);
+	painter->setColor(1.f, 1.f, 1.f);
 
 	painter->enableTexture2d(true);
 	glDisable(GL_BLEND);
@@ -1101,7 +1099,7 @@ void Planet::drawHints(const StelCore* core, const QFont& planetNameFont)
 Ring::Ring(double radiusMin,double radiusMax,const QString &texname)
 	 :radiusMin(radiusMin),radiusMax(radiusMax)
 {
-	tex = StelApp::getInstance().getTextureManager().createTexture("textures/"+texname);
+	tex = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/"+texname);
 }
 
 Ring::~Ring(void)
@@ -1119,11 +1117,7 @@ void Ring::draw(StelPainter* sPainter,StelProjector::ModelViewTranformP transfo,
 
 	// Normal transparency mode
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	if (StelApp::getInstance().getVisionModeNight())
-		sPainter->setColor(1.f, 0.f, 0.f);
-	else
-		sPainter->setColor(1.f, 1.f, 1.f);
-
+	sPainter->setColor(1.f, 1.f, 1.f);
 	sPainter->enableTexture2d(true);
 	glEnable(GL_CULL_FACE);
 	glEnable(GL_BLEND);

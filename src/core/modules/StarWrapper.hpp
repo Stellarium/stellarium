@@ -28,8 +28,6 @@
 #include "Star.hpp"
 #include "StelSkyDrawer.hpp"
 
-namespace BigStarCatalogExtension {
-
 template <class Star> class SpecialZoneArray;
 template <class Star> struct SpecialZoneData;
 
@@ -83,7 +81,7 @@ protected:
 	}
 	Vec3f getInfoColor(void) const
 	{
-		return StelApp::getInstance().getVisionModeNight() ? Vec3f(0.8, 0.0, 0.0) : StelSkyDrawer::indexToColor(s->bV);
+		return StelSkyDrawer::indexToColor(s->bV);
 	}
 	float getVMagnitude(const StelCore* core) const
 	{
@@ -116,9 +114,8 @@ public:
 	//! <li> RaDecJ2000
 	//! <li> RaDec
 	//! <li> AltAzi
-	//! <li> Extra1 (spectral type)
-	//! <li> Distance
-	//! <li> Extra2 (parallax)
+	//! <li> Extra (spectral type, parallax)
+	//! <li> Distance	
 	//! <li> PlainText </ul>
 	//! @param core the StelCore object.
 	//! @param flags a set of InfoStringGroup items to include in the return value.
@@ -143,6 +140,5 @@ public:
 			   const Star3 *s) : StarWrapper<Star3>(a,z,s) {;}
 };
 
-} // namespace BigStarCatalogExtension
 
 #endif // _STARWRAPPER_HPP_

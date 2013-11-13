@@ -25,16 +25,21 @@
 #include <QEventLoop>
 
 class QGLWidget;
+class QMoveEvent;
 class QResizeEvent;
 class StelGuiBase;
 class StelQGLWidget;
+class QMoveEvent;
 
 //! @class StelMainView
 //! Reimplement a QGraphicsView for Stellarium.
 //! It is the class creating the singleton GL Widget, the main StelApp instance as well as the main GUI.
 class StelMainView : public QDeclarativeView
 {
-Q_OBJECT
+	friend class StelGuiItem;
+	Q_OBJECT
+	Q_PROPERTY(bool fullScreen READ isFullScreen WRITE setFullScreen)
+
 public:
 	StelMainView(QWidget* parent = NULL);
 	virtual ~StelMainView();
@@ -54,7 +59,9 @@ public:
 	void deinitGL();
 	//! Return focus to the sky item.  To be used when we close a dialog.
 	void focusSky();
-
+	//! Return the parent gui widget, this should be used as parent to all
+	//! the StelDialog instances.
+	QGraphicsWidget* getGuiWidget() const {return guiWidget;}
 public slots:
 
 	//!	Set whether fullscreen is activated or not
@@ -109,6 +116,7 @@ protected:
 	virtual void keyPressEvent(QKeyEvent* event);
 	virtual void keyReleaseEvent(QKeyEvent* event);
 	virtual void wheelEvent(QWheelEvent* wheelEvent);
+	virtual void moveEvent(QMoveEvent* event);
 
 	//! Update the mouse pointer state and schedule next redraw.
 	//! This method is called automatically by Qt.
@@ -132,6 +140,10 @@ private:
 
 	//! The StelMainView singleton
 	static StelMainView* singleton;
+
+	//! This is created by the StelGuiItem, but need to be publicly
+	//! accessible so that StelDialog instances can reparent to it.
+	QGraphicsWidget *guiWidget;
 
 	//! The openGL window
 	StelQGLWidget* glWidget;

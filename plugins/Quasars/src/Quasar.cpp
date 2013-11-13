@@ -90,7 +90,7 @@ QString Quasar::getInfoString(const StelCore* core, const InfoStringGroup& flags
 	{
 		oss << "<h2>" << designation << "</h2>";
 	}
-	if (flags&Extra1)
+	if (flags&Extra)
 		oss << q_("Type: <b>%1</b>").arg(q_("quasar")) << "<br />";
 
 	if (flags&Magnitude)
@@ -129,7 +129,7 @@ QString Quasar::getInfoString(const StelCore* core, const InfoStringGroup& flags
 	// Ra/Dec etc.
 	oss << getPositionInfoString(core, flags);
 
-	if (flags&Extra1)
+	if (flags&Extra)
 	{
 		if (redshift>0)
 		{
@@ -143,7 +143,7 @@ QString Quasar::getInfoString(const StelCore* core, const InfoStringGroup& flags
 
 Vec3f Quasar::getInfoColor(void) const
 {
-	return StelApp::getInstance().getVisionModeNight() ? Vec3f(0.6, 0.0, 0.0) : Vec3f(1.0, 1.0, 1.0);
+	return Vec3f(1.0, 1.0, 1.0);
 }
 
 float Quasar::getVMagnitude(const StelCore* core) const
@@ -167,15 +167,13 @@ void Quasar::draw(StelCore* core, StelPainter& painter)
 	StelSkyDrawer* sd = core->getSkyDrawer();
 
 	Vec3f color = sd->indexToColor(BvToColorIndex(bV))*0.75f;
-	Vec3f dcolor = Vec3f(1.2f,0.5f,0.4f);
-	if (StelApp::getInstance().getVisionModeNight())
-		dcolor = StelUtils::getNightColor(dcolor);
-
-	float rcMag[2], size, shift=0;
+	Vec3f dcolor = Vec3f(1.0f,0.5f,0.4f);
+	RCMag rcMag;
+	float size, shift=0;
 	double mag;
 
 	StelUtils::spheToRect(qRA, qDE, XYZ);
-        mag = getVMagnitudeWithExtinction(core);	
+	mag = getVMagnitudeWithExtinction(core);	
 
 	if (GETSTELMODULE(Quasars)->getDisplayMode())
 	{
@@ -187,8 +185,7 @@ void Quasar::draw(StelCore* core, StelPainter& painter)
 		//size = getAngularSize(NULL)*M_PI/180.*painter.getProjector()->getPixelPerRadAtCenter();
 		if (labelsFader.getInterstate()<=0.f)
 		{
-			painter.drawSprite2dMode(XYZ, 4);
-			//painter.drawText(XYZ, " ", 0, shift, shift, false);
+			painter.drawSprite2dMode(XYZ, 4);			
 		}
 	}
 	else
@@ -197,9 +194,8 @@ void Quasar::draw(StelCore* core, StelPainter& painter)
 	
 		if (mag <= sd->getLimitMagnitude())
 		{
-			sd->computeRCMag(mag, rcMag);
-			//sd->drawPointSource(&painter, Vec3f(XYZ[0], XYZ[1], XYZ[2]), rcMag, sd->indexToColor(BvToColorIndex(bV)), false);
-			sd->drawPointSource(&painter, XYZ, rcMag, sd->indexToColor(BvToColorIndex(bV)), false);
+			sd->computeRCMag(mag, &rcMag);
+			sd->drawPointSource(&painter, Vec3f(XYZ[0], XYZ[1], XYZ[2]), rcMag, sd->indexToColor(BvToColorIndex(bV)), false);
 			painter.setColor(color[0], color[1], color[2], 1);
 			size = getAngularSize(NULL)*M_PI/180.*painter.getProjector()->getPixelPerRadAtCenter();
 			shift = 6.f + size/1.8f;

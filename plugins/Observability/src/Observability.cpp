@@ -21,7 +21,6 @@
 #include <QTimer>
 #include <QString>
 #include <QDebug>
-#include <QAction>
 #include <QKeyEvent>
 #include <QtNetwork>
 #include <QKeyEvent>
@@ -44,7 +43,6 @@
 #include "StelVertexArray.hpp"
 #include "StelCore.hpp"
 #include "StelPainter.hpp"
-#include "ZoneArray.hpp"
 #include "StelSkyDrawer.hpp"
 #include "Observability.hpp"
 #include "ObservabilityDialog.hpp"
@@ -261,12 +259,10 @@ void Observability::init()
 		OnIcon = new QPixmap(":/observability/bt_observab_on.png");
 		OffIcon = new QPixmap(":/observability/bt_observab_off.png");
 
-		gui->getGuiAction("actionShow_Observability")->setChecked(flagShowObservability);
-		toolbarButton = new StelButton(NULL, *OnIcon, *OffIcon, *GlowIcon, gui->getGuiAction("actionShow_Observability"));
+		addAction("actionShow_Observability", N_("Observability"), N_("Observability"), "enabled");
+		addAction("actionShow_Observability_ConfigDialog", N_("Observability"), N_("Observability configuration window"), configDialog, "visible");
+		toolbarButton = new StelButton(NULL, *OnIcon, *OffIcon, *GlowIcon, "actionShow_Observability");
 		gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
-		connect(gui->getGuiAction("actionShow_Observability"), SIGNAL(toggled(bool)), this, SLOT(enableObservability(bool)));
-		connect(gui->getGuiAction("actionShow_Observability_ConfigDialog"), SIGNAL(toggled(bool)), configDialog, SLOT(setVisible(bool)));
-		connect(configDialog, SIGNAL(visibleChanged(bool)), gui->getGuiAction("actionShow_Observability_ConfigDialog"), SLOT(setChecked(bool)));
 	}
 	catch (std::exception &e)
 	{
@@ -1587,11 +1583,7 @@ bool Observability::SolarSystemSolve(StelCore* core, int Kind)
 bool Observability::configureGui(bool show)
 {
 	if (show)
-	{
-		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-		gui->getGuiAction("actionShow_Observability_ConfigDialog")->setChecked(true);
-	}
-
+		configDialog->setVisible(true);
 	return true;
 }
 

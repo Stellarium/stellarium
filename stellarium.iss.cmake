@@ -35,13 +35,19 @@ Source: "AUTHORS"; DestDir: "{app}"; DestName: "AUTHORS.rtf"
 Source: "ChangeLog"; DestDir: "{app}"; DestName: "ChangeLog.rtf"
 Source: "@ZLIB_INCLUDE_DIR@/../bin/zlib1.dll"; DestDir: "{app}";
 @ISS_ARCH_SPECIFIC_MINGW_LIBS@
-Source: "@QT_BINARY_DIR@\Qt5Core.dll"; DestDir: "{app}";
-Source: "@QT_BINARY_DIR@\Qt5Gui.dll"; DestDir: "{app}";
-Source: "@QT_BINARY_DIR@\Qt5OpenGL.dll"; DestDir: "{app}";
-Source: "@QT_BINARY_DIR@\Qt5Network.dll"; DestDir: "{app}";
-Source: "@QT_BINARY_DIR@\Qt5Script.dll"; DestDir: "{app}";
-Source: "@QT_BINARY_DIR@\Qt5Widgets.dll"; DestDir: "{app}";
-Source: "@QT_BINARY_DIR@\Qt5Declarative.dll"; DestDir: "{app}";
+Source: "@QtCore_location@"; DestDir: "{app}";
+Source: "@QtGui_location@"; DestDir: "{app}";
+Source: "@QtOpenGL_location@"; DestDir: "{app}";
+Source: "@QtSvg_location@"; DestDir: "{app}";
+Source: "@QtNetwork_location@"; DestDir: "{app}";
+Source: "@QtWidgets_location@"; DestDir: "{app}";
+Source: "@QtDeclarative_location@"; DestDir: "{app}";
+Source: "@QtSql_location@"; DestDir: "{app}";
+Source: "@QtXmlPatterns_location@"; DestDir: "{app}";
+Source: "@QtConcurrent_location@"; DestDir: "{app}";
+@ISS_QT_SCRIPT@
+@ISS_QT_MULTIMEDIA@
+@ISS_ICU_LIBS@
 Source: "@CMAKE_INSTALL_PREFIX@\share\stellarium\*"; DestDir: "{app}\"; Flags: recursesubdirs
 
 [Tasks]
