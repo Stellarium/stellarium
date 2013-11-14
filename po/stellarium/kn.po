@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2013-11-03 18:05+0700\n"
-"PO-Revision-Date: 2013-06-13 18:04+0000\n"
-"Last-Translator: N.SHANKARAPPA <shankarappa.toranagallu@gmail.com>\n"
+"PO-Revision-Date: 2013-11-13 06:22+0000\n"
+"Last-Translator: Jayasimha <Unknown>\n"
 "Language-Team: Kannada <kn@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-11-04 05:24+0000\n"
+"X-Launchpad-Export-Date: 2013-11-14 05:21+0000\n"
 "X-Generator: Launchpad (build 16820)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:106 src/core/modules/StarMgr.cpp:335
@@ -53,7 +53,7 @@ msgstr "ತಾರೆಗಳು"
 
 #: src/core/modules/StarMgr.cpp:337
 msgid "Stars labels"
-msgstr ""
+msgstr "ತಾರೆಗಳ ಹೆಸರು"
 
 #: src/core/modules/GridLinesMgr.cpp:530 src/ui_viewDialog.h:1285
 msgid "Meridian"
@@ -61,7 +61,7 @@ msgstr "ಮೆರಿಡಿಯನ್"
 
 #: src/core/modules/GridLinesMgr.cpp:534 src/ui_viewDialog.h:1293
 msgid "Ecliptic"
-msgstr ""
+msgstr "ಕ್ರಾಂತಿವೃತ್ತ"
 
 #: src/core/modules/GridLinesMgr.cpp:538 src/ui_viewDialog.h:1281
 msgid "Equator"
@@ -88,7 +88,7 @@ msgstr "ದಿಗಾಂಶ ಜಾಲ"
 #: src/core/modules/GridLinesMgr.cpp:682
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:340
 msgid "Ecliptic line"
-msgstr ""
+msgstr "ಕ್ರಾಂತಿವೃತ್ತ ರೇಖೆ"
 
 #: src/core/modules/GridLinesMgr.cpp:683
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:335
@@ -103,7 +103,7 @@ msgstr "ಮಧ್ಯ ರೇಖೆ"
 #: src/core/modules/GridLinesMgr.cpp:685
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:354
 msgid "Horizon line"
-msgstr ""
+msgstr "ದಿಗಂತ ರೇಖೆ"
 
 #: src/core/modules/GridLinesMgr.cpp:686 src/ui_viewDialog.h:1273
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:330
@@ -134,7 +134,7 @@ msgstr "ಮಂಜು/ಕಾವಳ"
 #: src/core/modules/LandscapeMgr.cpp:317 src/ui_viewDialog.h:1298
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:297
 msgid "Cardinal points"
-msgstr ""
+msgstr "ಪ್ರಧಾನ ಬಿಂದುಗಳು"
 
 #: src/core/modules/LandscapeMgr.cpp:318
 msgid "Ground"
@@ -1368,7 +1368,7 @@ msgstr "ಸಹಾಯದ ಪುಟ"
 
 #: src/gui/StelGui.cpp:192
 msgid "Configuration window"
-msgstr ""
+msgstr "ಸಂರಚನಾ ಕಿಂಡಿ"
 
 #: src/gui/StelGui.cpp:193
 msgid "Search window"
@@ -8087,14 +8087,8 @@ msgstr ""
 #~ msgid "Star Value Multiplier: "
 #~ msgstr "ತಾರಾ ಮೌಲ್ಯ ಗುಣಕ "
 
-#~ msgid "Maximum Magnitude to Label: "
-#~ msgstr "ಗರಿಷ್ತ ಕಾಂತಿಮಾನ ಪಟ್ಟಿ (ಲೇಬಲ್) "
-
 #~ msgid "Constellation Lines"
 #~ msgstr "ತಾರಾಪುಂಜ ರೇಖೆ"
-
-#~ msgid "Constellation Names"
-#~ msgstr "ತಾರಾಪುಂಜ ಹೆಸರುಗಳು"
 
 #~ msgid "Constellation Art Intensity"
 #~ msgstr "ತಾರಾಪುಂಜದ ಚಿತ್ರಕಲೆಯ ತೀಕ್ಷ್ಣತೆ"
@@ -8113,15 +8107,6 @@ msgstr ""
 
 #~ msgid "Magnitude Scaling Multiplier: "
 #~ msgstr "ಕಾಂತಿಮಾನ ಮಾಪನ ಗುಣಕ "
-
-#~ msgid "Maximum Nebula Magnitude to Label: "
-#~ msgstr "ಗರಿಷ್ಟ ನೀಹಾರಿಕ ಕಾಂತಿಮಾನ -ಪಟ್ಟಿ (ಲೇಬಲ್) ಮಾಡಲು "
-
-#~ msgid "Zoom Duration: "
-#~ msgstr "ಝೂಮಿಸುವ ಕಾಲ : "
-
-#~ msgid "Cursor Timeout: "
-#~ msgstr "ಮಿಣುಕ (ಕರ್ಸರ್) ಕಾಲಾಂತ "
 
 #~ msgid "Local Script: "
 #~ msgstr "ಸ್ಥಳೀಯ ಕ್ರಿಯಾ ಬರಹ : "
@@ -8142,3 +8127,21 @@ msgstr ""
 
 #~ msgid "USB Script: "
 #~ msgstr "ಯು.ಎಸ್.ಬಿ. ಕ್ರಿಯಾಬರಹ (ಸ್ಕ್ರಿಪ್ಟ್): "
+
+#~ msgid "Maximum Magnitude to Label: "
+#~ msgstr "ಪಟ್ಟಿಮಾಡಬಬೇಕಾದ ಗರಿಷ್ಟ ಕಾಂತಿಮಾನ: "
+
+#~ msgid "Magnitude Sizing Multiplier: "
+#~ msgstr "ಕಾಂತಿಮಾನ ಗಾತ್ರ ಗುಣಕ: "
+
+#~ msgid "Constellation Names"
+#~ msgstr "ತಾರಾಪುಂಜದ ಹೆಸರುಗಳು"
+
+#~ msgid "Maximum Nebula Magnitude to Label: "
+#~ msgstr "ಪಟ್ಟಿಮಾಡಬೇಕಾದ ಗರಿಷ್ಟ ನಿಹಾರಿಕಾ ಕಾಂತಿಮಾನ: "
+
+#~ msgid "Zoom Duration: "
+#~ msgstr "ದೊಡ್ದದಾಗಿಸುವ ಕಾಲಾವಧಿ: "
+
+#~ msgid "Cursor Timeout: "
+#~ msgstr "ಕರ್ಸರ್ ಕಾಲಾಂತ: "
