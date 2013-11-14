@@ -26,6 +26,7 @@ SOURCES += main.cpp \
     ../../src/core/StelJsonParser.cpp \
     ../../src/core/OctahedronPolygon.cpp \
     ../../src/core/StelUtils.cpp \
+    ../../src/core/StelProjector.cpp \
     ../../src/core/external/glues_stel/source/glues_error.c \
     ../../src/core/external/glues_stel/source/libtess/tessmono.c \
     ../../src/core/external/glues_stel/source/libtess/tess.c \
@@ -37,7 +38,9 @@ SOURCES += main.cpp \
     ../../src/core/external/glues_stel/source/libtess/memalloc.c \
     ../../src/core/external/glues_stel/source/libtess/geom.c \
     ../../src/core/external/glues_stel/source/libtess/dict.c \
-    ../../src/core/StelVertexArray.cpp
+    ../../src/core/StelVertexArray.cpp \
+    ../../src/core/StelTranslator.cpp \
+    ../../src/core/StelFileMgr.cpp
 
 HEADERS += \
     ../../src/core/VecMath.hpp \
@@ -61,7 +64,8 @@ HEADERS += \
     ../../src/core/external/glues_stel/source/libtess/geom.h \
     ../../src/core/external/glues_stel/source/libtess/dict.h \
     ../../src/core/external/glues_stel/source/libtess/dict-list.h \
-    ../../src/core/StelVertexArray.hpp
+    ../../src/core/StelVertexArray.hpp \
+    ../../src/core/StelTranslator.hpp
 
 OTHER_FILES += \
     ../../src/core/external/glues_stel/source/libtess/README \
