@@ -110,7 +110,7 @@ void Refraction::updatePrecomputed()
 	press_temp_corr_Saemundson=1.02f*press_temp_corr_Bennett;
 }
 
-void Refraction::innerRefractionForward(Vec3f& altAzPos) const
+void Refraction::innerRefractionForward(Vec3d& altAzPos) const
 {
 	static const float M_PIf = static_cast<float>(M_PI);
 	const float length = altAzPos.length();
@@ -133,7 +133,7 @@ void Refraction::innerRefractionForward(Vec3f& altAzPos) const
 	}
 }
 
-void Refraction::innerRefractionBackward(Vec3f& altAzPos) const
+void Refraction::innerRefractionBackward(Vec3d& altAzPos) const
 {
 	static const float M_PIf = static_cast<float>(M_PI);
 	// going from observed position/magnitude to geometrical position and atmosphere-free mag.
@@ -169,9 +169,7 @@ void Refraction::innerRefractionBackward(Vec3f& altAzPos) const
 void Refraction::forward(Vec3d& altAzPos) const
 {
 	altAzPos.transfo4d(preTransfoMat);
-	Vec3f vf(altAzPos[0], altAzPos[1], altAzPos[2]);
-	innerRefractionForward(vf);
-	altAzPos.set(vf[0], vf[1], vf[2]);
+	innerRefractionForward(altAzPos);
 	altAzPos.transfo4d(postTransfoMat);
 }
 
@@ -181,23 +179,25 @@ void Refraction::forward(Vec3d& altAzPos) const
 void Refraction::backward(Vec3d& altAzPos) const
 {
 	altAzPos.transfo4d(invertPostTransfoMat);
-	Vec3f vf(altAzPos[0], altAzPos[1], altAzPos[2]);
-	innerRefractionBackward(vf);
-	altAzPos.set(vf[0], vf[1], vf[2]);
+	innerRefractionBackward(altAzPos);
 	altAzPos.transfo4d(invertPreTransfoMat);
 }
 
 void Refraction::forward(Vec3f& altAzPos) const
 {
 	altAzPos.transfo4d(preTransfoMatf);
-	innerRefractionForward(altAzPos);
+	Vec3d vf(altAzPos[0], altAzPos[1], altAzPos[2]);
+	innerRefractionForward(vf);
+	altAzPos.set(vf[0], vf[1], vf[2]);
 	altAzPos.transfo4d(postTransfoMatf);
 }
 
 void Refraction::backward(Vec3f& altAzPos) const
 {
 	altAzPos.transfo4d(invertPostTransfoMatf);
-	innerRefractionBackward(altAzPos);
+	Vec3d vf(altAzPos[0], altAzPos[1], altAzPos[2]);
+	innerRefractionBackward(vf);
+	altAzPos.set(vf[0], vf[1], vf[2]);
 	altAzPos.transfo4d(invertPreTransfoMatf);
 }
 
