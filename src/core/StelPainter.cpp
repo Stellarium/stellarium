@@ -614,6 +614,9 @@ struct StringTexture
 
 QOpenGLTexture* StelPainter::getTexTexture(const QString& str, int pixelSize)
 {
+	// Render first the text into a QPixmap, then create a QOpenGLTexture
+	// from it.  We could optimize by directly using a QImage, but for some
+	// reason the result is not exactly the same than with a QPixmap.
 	static const int cacheLimitByte = 7000000;
 	static QCache<QByteArray, QOpenGLTexture> texCache(cacheLimitByte);
 	QByteArray hash = str.toUtf8() + QByteArray::number(pixelSize);
@@ -625,7 +628,7 @@ QOpenGLTexture* StelPainter::getTexTexture(const QString& str, int pixelSize)
 	QRect strRect = getFontMetrics().boundingRect(str);
 	int w = strRect.width()+1+(int)(0.02f*strRect.width());
 	int h = strRect.height();
-	QImage strImage(w, h, QImage::Format_ARGB32);
+	QPixmap strImage(w, h);
 	strImage.fill(Qt::transparent);
 	QPainter painter(&strImage);
 	QFont tmpFont = currentFont;
@@ -634,7 +637,7 @@ QOpenGLTexture* StelPainter::getTexTexture(const QString& str, int pixelSize)
 	painter.setRenderHints(QPainter::TextAntialiasing);
 	painter.setPen(Qt::white);
 	painter.drawText(-strRect.x(), -strRect.y(), str);
-	QOpenGLTexture* newTex = new QOpenGLTexture(strImage);
+	QOpenGLTexture* newTex = new QOpenGLTexture(strImage.toImage());
 	texCache.insert(hash, newTex, 3*w*h);
 	return newTex;
 }
