@@ -690,6 +690,7 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 	setTexCoordPointer(2, GL_FLOAT, texCoordData);
 	drawFromArray(TriangleStrip, 4, 0, false);
 	enableClientStates(false, false);
+	tex->release();
 }
 
 // Recursive method cutting a small circle in small segments
