@@ -29,6 +29,7 @@
 #include <QOpenGLFunctions>
 
 class QOpenGLShaderProgram;
+class QOpenGLTexture;
 
 class StelPainterLight
 {
@@ -298,6 +299,7 @@ private:
 		int blendSrcRGB, blendDstRGB, blendSrcAlpha, blendDstAlpha;
 	};
 
+	static QCache<QByteArray, QOpenGLTexture> texCache;
 	class QOpenGLTexture* getTexTexture(const QString& str, int pixelSize);
 
 	//! Struct describing one opengl array

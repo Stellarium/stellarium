@@ -38,11 +38,13 @@
 #include <QOpenGLShader>
 #include <QOpenGLTexture>
 
+static const int TEX_CACHE_LIMIT = 7000000;
 
 #ifndef NDEBUG
 QMutex* StelPainter::globalMutex = new QMutex();
 #endif
 
+QCache<QByteArray, QOpenGLTexture> StelPainter::texCache(TEX_CACHE_LIMIT);
 QOpenGLShaderProgram* StelPainter::texturesShaderProgram=NULL;
 QOpenGLShaderProgram* StelPainter::basicShaderProgram=NULL;
 QOpenGLShaderProgram* StelPainter::colorShaderProgram=NULL;
@@ -617,8 +619,6 @@ QOpenGLTexture* StelPainter::getTexTexture(const QString& str, int pixelSize)
 	// Render first the text into a QPixmap, then create a QOpenGLTexture
 	// from it.  We could optimize by directly using a QImage, but for some
 	// reason the result is not exactly the same than with a QPixmap.
-	static const int cacheLimitByte = 7000000;
-	static QCache<QByteArray, QOpenGLTexture> texCache(cacheLimitByte);
 	QByteArray hash = str.toUtf8() + QByteArray::number(pixelSize);
 	QOpenGLTexture* cachedTex = texCache.object(hash);
 	if (cachedTex)
@@ -1878,6 +1878,7 @@ void StelPainter::deinitGLShaders()
 	texturesShaderProgram = NULL;
 	delete texturesColorShaderProgram;
 	texturesColorShaderProgram = NULL;
+	texCache.clear();
 }
 
 
