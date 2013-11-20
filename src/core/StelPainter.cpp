@@ -625,14 +625,14 @@ QOpenGLTexture* StelPainter::getTexTexture(const QString& str, int pixelSize)
 		return cachedTex;
 	if (!QOpenGLTexture::hasFeature(QOpenGLTexture::NPOTTextures))
 		qDebug() << "XXXX warning no NPOTTextures!";
-	QRect strRect = getFontMetrics().boundingRect(str);
+	QFont tmpFont = currentFont;
+	tmpFont.setPixelSize(currentFont.pixelSize()*prj->getDevicePixelsPerPixel()*StelApp::getInstance().getGlobalScalingRatio());
+	QRect strRect = QFontMetrics(tmpFont).boundingRect(str);
 	int w = strRect.width()+1+(int)(0.02f*strRect.width());
 	int h = strRect.height();
 	QPixmap strImage(w, h);
 	strImage.fill(Qt::transparent);
 	QPainter painter(&strImage);
-	QFont tmpFont = currentFont;
-	tmpFont.setPixelSize(currentFont.pixelSize()*prj->getDevicePixelsPerPixel()*StelApp::getInstance().getGlobalScalingRatio());
 	painter.setFont(tmpFont);
 	painter.setRenderHints(QPainter::TextAntialiasing);
 	painter.setPen(Qt::white);
