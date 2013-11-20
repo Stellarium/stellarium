@@ -36,6 +36,7 @@
 #include <QCache>
 #include <QOpenGLPaintDevice>
 #include <QOpenGLShader>
+#include <QOpenGLTexture>
 
 
 #ifndef NDEBUG
@@ -611,55 +612,81 @@ struct StringTexture
 	}
 };
 
+QOpenGLTexture* StelPainter::getTexTexture(const QString& str, int pixelSize)
+{
+	static const int cacheLimitByte = 7000000;
+	static QCache<QByteArray, QOpenGLTexture> texCache(cacheLimitByte);
+	QByteArray hash = str.toUtf8() + QByteArray::number(pixelSize);
+	QOpenGLTexture* cachedTex = texCache.object(hash);
+	if (cachedTex)
+		return cachedTex;
+	if (!QOpenGLTexture::hasFeature(QOpenGLTexture::NPOTTextures))
+		qDebug() << "XXXX warning no NPOTTextures!";
+	QRect strRect = getFontMetrics().boundingRect(str);
+	int w = strRect.width()+1+(int)(0.02f*strRect.width());
+	int h = strRect.height();
+	QImage strImage(w, h, QImage::Format_ARGB32);
+	strImage.fill(Qt::transparent);
+	QPainter painter(&strImage);
+	QFont tmpFont = currentFont;
+	tmpFont.setPixelSize(currentFont.pixelSize()*prj->getDevicePixelsPerPixel()*StelApp::getInstance().getGlobalScalingRatio());
+	painter.setFont(tmpFont);
+	painter.setRenderHints(QPainter::TextAntialiasing);
+	painter.setPen(Qt::white);
+	painter.drawText(-strRect.x(), -strRect.y(), str);
+	QOpenGLTexture* newTex = new QOpenGLTexture(strImage);
+	texCache.insert(hash, newTex, 3*w*h);
+	return newTex;
+}
+
 void StelPainter::drawText(float x, float y, const QString& str, float angleDeg, float xshift, float yshift, bool noGravity)
 {
-	StelPainter::GLState state; // Will restore the opengl state at the end of the function.
 	if (prj->gravityLabels && !noGravity)
 	{
 		drawTextGravity180(x, y, str, xshift, yshift);
+		return;
+	}
+	QOpenGLTexture* tex = getTexTexture(str, currentFont.pixelSize());
+	Q_ASSERT(tex);
+	if (!noGravity)
+		angleDeg += prj->defautAngleForGravityText;
+	tex->bind();
+
+	enableTexture2d(true);
+	static float vertexData[8];
+	static const float texCoordData[] = {0.,1., 1.,1., 0.,0., 1.,0.};
+	// compute the vertex coordinates applying the translation and the rotation
+	static const float vertexBase[] = {0., 0., 1., 0., 0., 1., 1., 1.};
+	if (std::fabs(angleDeg)>1.f*M_PI/180.f)
+	{
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+		const float cosr = std::cos(angleDeg * M_PI/180.);
+		const float sinr = std::sin(angleDeg * M_PI/180.);
+		for (int i = 0; i < 8; i+=2)
+		{
+			vertexData[i] = int(x + (tex->width()*vertexBase[i]+xshift) * cosr - (tex->height()*vertexBase[i+1]+yshift) * sinr);
+			vertexData[i+1] = int(y  + (tex->width()*vertexBase[i]+xshift) * sinr + (tex->height()*vertexBase[i+1]+yshift) * cosr);
+		}
 	}
 	else
 	{
-		QOpenGLPaintDevice device;
-		device.setSize(QSize(prj->getViewportWidth(), prj->getViewportHeight()));
-		// This doesn't seem to work correctly, so implement the hack below instead.
-		// Maybe check again later, or check on mac with retina..
-		// device.setDevicePixelRatio(prj->getDevicePixelsPerPixel());
-		// painter.setFont(currentFont);
-		
-		QPainter painter(&device);
-		painter.beginNativePainting();
-		
-		QFont tmpFont = currentFont;
-		tmpFont.setPixelSize(currentFont.pixelSize()*prj->getDevicePixelsPerPixel()*StelApp::getInstance().getGlobalScalingRatio());
-		painter.setFont(tmpFont);
-		painter.setPen(QColor(currentColor[0]*255, currentColor[1]*255, currentColor[2]*255, currentColor[3]*255));
-		
-		xshift*=StelApp::getInstance().getGlobalScalingRatio();
-		yshift*=StelApp::getInstance().getGlobalScalingRatio();
-		
-		y = prj->getViewportHeight()-y;
-		yshift = -yshift;
-
-		// Translate/rotate
-		if (!noGravity)
-			angleDeg += prj->defautAngleForGravityText;
-
-		if (std::fabs(angleDeg)>1.f)
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+		for (int i = 0; i < 8; i+=2)
 		{
-			QTransform m;
-			m.translate(x, y);
-			m.rotate(-angleDeg);
-			painter.setTransform(m);
-			painter.drawText(xshift, yshift, str);
+			vertexData[i] = int(x + tex->width()*vertexBase[i]+xshift);
+			vertexData[i+1] = int(y  + tex->height()*vertexBase[i+1]+yshift);
 		}
-		else
-		{
-			painter.drawText(x+xshift, y+yshift, str);
-		}
-		
-		painter.endNativePainting();
 	}
+
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	glEnable(GL_BLEND);
+	enableClientStates(true, true);
+	setVertexPointer(2, GL_FLOAT, vertexData);
+	setTexCoordPointer(2, GL_FLOAT, texCoordData);
+	drawFromArray(TriangleStrip, 4, 0, false);
+	enableClientStates(false, false);
 }
 
 // Recursive method cutting a small circle in small segments

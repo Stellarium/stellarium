@@ -298,6 +298,8 @@ private:
 		int blendSrcRGB, blendDstRGB, blendSrcAlpha, blendDstAlpha;
 	};
 
+	class QOpenGLTexture* getTexTexture(const QString& str, int pixelSize);
+
 	//! Struct describing one opengl array
 	typedef struct
 	{
