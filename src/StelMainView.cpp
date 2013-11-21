@@ -305,7 +305,7 @@ void StelMainView::init(QSettings* conf)
 	qmlRegisterType<StelSkyItem>("Stellarium", 1, 0, "StelSky");
 	qmlRegisterType<StelGuiItem>("Stellarium", 1, 0, "StelGui");
 	rootContext()->setContextProperty("stelApp", stelApp);
-	setSource(QUrl("qrc:/qml/qml/main.qml"));
+	setSource(QUrl("qrc:/qml/main.qml"));
 	
 	QScreen* screen = glWidget->windowHandle()->screen();
 	int width = conf->value("video/screen_w", screen->size().width()).toInt();
