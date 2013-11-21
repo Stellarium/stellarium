@@ -74,6 +74,14 @@ StelPainter::GLState::~GLState()
 	}
 }
 
+bool StelPainter::linkProg(QOpenGLShaderProgram* prog, const QString& name)
+{
+	bool ret = prog->link();
+	if (!ret || (!prog->log().isEmpty() && !prog->log().contains("Link was successful")))
+		qWarning() << QString("StelPainter: Warnings while linking %1 shader program:\n%2").arg(name, prog->log());
+	return ret;
+}
+
 
 StelPainter::StelPainter(const StelProjectorP& proj) : prj(proj)
 {
@@ -1701,11 +1709,7 @@ void StelPainter::initGLShaders()
 	basicShaderProgram = new QOpenGLShaderProgram(QOpenGLContext::currentContext());
 	basicShaderProgram->addShader(&vshader3);
 	basicShaderProgram->addShader(&fshader3);
-	basicShaderProgram->link();
-	if (!basicShaderProgram->log().isEmpty()) {
-	  qWarning() << "StelPainter: Warnings while linking basicShaderProgram: " << basicShaderProgram->log();
-	}
-
+	linkProg(basicShaderProgram, "basicShaderProgram");
 	basicShaderVars.projectionMatrix = basicShaderProgram->uniformLocation("projectionMatrix");
 	basicShaderVars.color = basicShaderProgram->uniformLocation("color");
 	basicShaderVars.vertex = basicShaderProgram->attributeLocation("vertex");
@@ -1741,10 +1745,7 @@ void StelPainter::initGLShaders()
 	colorShaderProgram = new QOpenGLShaderProgram(QOpenGLContext::currentContext());
 	colorShaderProgram->addShader(&vshaderInterpolatedColor);
 	colorShaderProgram->addShader(&fshaderInterpolatedColor);
-	colorShaderProgram->link();
-	if (!colorShaderProgram->log().isEmpty()) {
-	  qWarning() << "StelPainter: Warnings while linking colorShaderProgram: " << colorShaderProgram->log();
-	}
+	linkProg(colorShaderProgram, "colorShaderProgram");
 	colorShaderVars.projectionMatrix = colorShaderProgram->uniformLocation("projectionMatrix");
 	colorShaderVars.color = colorShaderProgram->attributeLocation("color");
 	colorShaderVars.vertex = colorShaderProgram->attributeLocation("vertex");
@@ -1779,10 +1780,7 @@ void StelPainter::initGLShaders()
 	texturesShaderProgram = new QOpenGLShaderProgram(QOpenGLContext::currentContext());
 	texturesShaderProgram->addShader(&vshader2);
 	texturesShaderProgram->addShader(&fshader2);
-	texturesShaderProgram->link();
-	if (!texturesShaderProgram->log().isEmpty()) {
-	  qWarning() << "StelPainter: Warnings while linking texturesShaderProgram: " << texturesShaderProgram->log();
-	}
+	linkProg(texturesShaderProgram, "texturesShaderProgram");
 	texturesShaderVars.projectionMatrix = texturesShaderProgram->uniformLocation("projectionMatrix");
 	texturesShaderVars.texCoord = texturesShaderProgram->attributeLocation("texCoord");
 	texturesShaderVars.vertex = texturesShaderProgram->attributeLocation("vertex");
@@ -1822,11 +1820,7 @@ void StelPainter::initGLShaders()
 	texturesColorShaderProgram = new QOpenGLShaderProgram(QOpenGLContext::currentContext());
 	texturesColorShaderProgram->addShader(&vshader4);
 	texturesColorShaderProgram->addShader(&fshader4);
-	texturesColorShaderProgram->link();
-	if (!texturesColorShaderProgram->log().isEmpty()) {
-	  qWarning() << "StelPainter: Warnings while linking texturesColorShaderProgram: " << texturesColorShaderProgram->log();
-	}
-
+	linkProg(texturesColorShaderProgram, "texturesColorShaderProgram");
 	texturesColorShaderVars.projectionMatrix = texturesColorShaderProgram->uniformLocation("projectionMatrix");
 	texturesColorShaderVars.texCoord = texturesColorShaderProgram->attributeLocation("texCoord");
 	texturesColorShaderVars.vertex = texturesColorShaderProgram->attributeLocation("vertex");
