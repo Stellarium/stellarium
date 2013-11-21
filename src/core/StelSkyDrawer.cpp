@@ -182,11 +182,7 @@ void StelSkyDrawer::init()
 	starShaderProgram = new QOpenGLShaderProgram(QOpenGLContext::currentContext());
 	starShaderProgram->addShader(&vshader);
 	starShaderProgram->addShader(&fshader);
-	starShaderProgram->link();
-	if (!starShaderProgram->log().isEmpty()) {
-	  qWarning() << "StelSkyDrawer::init(): Warnings while linking starShaderProgram: " << starShaderProgram->log();
-	}
-
+	StelPainter::linkProg(starShaderProgram, "starShader");
 	starShaderVars.projectionMatrix = starShaderProgram->uniformLocation("projectionMatrix");
 	starShaderVars.texCoord = starShaderProgram->attributeLocation("texCoord");
 	starShaderVars.pos = starShaderProgram->attributeLocation("pos");
