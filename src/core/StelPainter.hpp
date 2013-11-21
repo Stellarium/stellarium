@@ -281,6 +281,10 @@ public:
 	//! @param checkDiscontinuity will check and suppress discontinuities if necessary.
 	void drawStelVertexArray(const StelVertexArray& arr, bool checkDiscontinuity=true);
 
+	//! Link an opengl program and show a message in case of error or warnings.
+	//! @return true if the link was successful.
+	static bool linkProg(class QOpenGLShaderProgram* prog, const QString& name);
+
 private:
 
 	friend class StelTextureMgr;
