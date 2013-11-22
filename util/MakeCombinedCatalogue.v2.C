@@ -1538,7 +1538,7 @@ int ReadHipTycFile(Accumulator &accu) {
   while (14==fscanf(f,"%d%d%d%d%s%d%lf%lf%lf%lf%lf%d%d%s",
                     &hip,&tyc1,&tyc2,&tyc3,cids,&VarFlag,
                     &ra,&dec,&Plx,&pm_ra,&pm_dec,&mag,&b_v,sp)) {
-      if (b_v>-500 && b_v<3500) {
+      if (b_v>-500 && b_v<3450) {
       const int rc = accu.addStar(tyc1,tyc2,tyc3,hip,
                                   cids[0]=='?'?"":cids,
                                   ra, // degrees
@@ -1636,7 +1636,7 @@ void ReadNOMADFile(const char *fname,Accumulator &accu) {
       if (buff[i].v < 30000) nr_of_measurements++;
       if (buff[i].r < 30000) nr_of_measurements++;
 
-      if (mag < 19500 && b_v>-500 && b_v<3500 &&
+      if (mag < 19500 && b_v>-500 && b_v<3450 &&
           ((buff[i].flags&SHORT_USEME) ||
            (
            ((buff[i].flags&(SHORT_ASTSRCBIT0|SHORT_ASTSRCBIT1|SHORT_ASTSRCBIT2))!=1 ||
