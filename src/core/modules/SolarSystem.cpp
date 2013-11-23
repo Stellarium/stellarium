@@ -186,7 +186,9 @@ void SolarSystem::drawPointer(const StelCore* core)
 		sPainter.setColor(color[0],color[1],color[2]);
 
 		float size = obj->getAngularSize(core)*M_PI/180.*prj->getPixelPerRadAtCenter()*2.;
-		size+=40.f + 10.f*std::sin(2.f * StelApp::getInstance().getTotalRunTime());
+		
+		const float scale = prj->getDevicePixelsPerPixel()*StelApp::getInstance().getGlobalScalingRatio();
+		size+= scale * (45.f + 10.f*std::sin(2.f * StelApp::getInstance().getTotalRunTime()));
 
 		texPointer->bind();
 
