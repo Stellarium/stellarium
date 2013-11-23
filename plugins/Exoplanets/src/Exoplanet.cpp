@@ -124,18 +124,6 @@ QVariantMap Exoplanet::getMap(void)
 	return map;
 }
 
-float Exoplanet::getSelectPriority(const StelCore* core) const
-{
-	if (getVMagnitude(core)>20.f)
-	{
-		return 20.f;
-	}
-	else
-	{
-		return getVMagnitude(core) - 1.f;
-	}
-}
-
 QString Exoplanet::getNameI18n(void) const
 {
 	// Use SkyTranslator for translation star names

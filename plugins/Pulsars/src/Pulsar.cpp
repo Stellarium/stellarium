@@ -107,12 +107,6 @@ QVariantMap Pulsar::getMap(void)
 	return map;
 }
 
-float Pulsar::getSelectPriority(const StelCore* core) const
-{
-	//Same as StarWrapper::getSelectPriority()
-        return getVMagnitude(core);
-}
-
 QString Pulsar::getInfoString(const StelCore* core, const InfoStringGroup& flags) const
 {
 	QString str;

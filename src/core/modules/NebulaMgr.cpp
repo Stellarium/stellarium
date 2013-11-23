@@ -152,6 +152,11 @@ struct DrawNebulaFuncObject
 	bool checkMaxMagHints;
 };
 
+float NebulaMgr::computeMaxMagHint(const StelSkyDrawer* skyDrawer) const
+{
+	return skyDrawer->getLimitMagnitude()*1.2f-2.f+(hintsAmount *1.2f)-2.f;
+}
+
 // Draw all the Nebulae
 void NebulaMgr::draw(StelCore* core)
 {
@@ -171,7 +176,7 @@ void NebulaMgr::draw(StelCore* core)
 	const SphericalRegionP& p = prj->getViewportConvexPolygon(margin, margin);
 
 	// Print all the nebulae of all the selected zones
-	float maxMagHints  = skyDrawer->getLimitMagnitude()*1.2f-2.f+(hintsAmount *1.2f)-2.f;
+	float maxMagHints  = computeMaxMagHint(skyDrawer);
 	float maxMagLabels = skyDrawer->getLimitMagnitude()     -2.f+(labelsAmount*1.2f)-2.f;
 	sPainter.setFont(nebulaFont);
 	DrawNebulaFuncObject func(maxMagHints, maxMagLabels, &sPainter, core, hintsFader.getInterstate()>0.0001);

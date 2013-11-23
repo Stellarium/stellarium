@@ -235,11 +235,11 @@ float Planet::getSelectPriority(const StelCore* core) const
 	if( ((SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("SolarSystem"))->getFlagHints() )
 	{
 	// easy to select, especially pluto
-		return getVMagnitude(core)-15.f;
+		return getVMagnitudeWithExtinction(core)-15.f;
 	}
 	else
 	{
-		return getVMagnitude(core) - 8.f;
+		return getVMagnitudeWithExtinction(core) - 8.f;
 	}
 }
 
