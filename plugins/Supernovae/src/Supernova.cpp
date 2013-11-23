@@ -113,7 +113,7 @@ QString Supernova::getInfoString(const StelCore* core, const InfoStringGroup& fl
 		oss << "</h2>";
 	}
 
-	if (flags&Extra)
+	if (flags&Type)
 		oss << q_("Type: <b>%1</b>").arg(q_("supernova")) << "<br />";
 
 	if (flags&Magnitude && mag <= core->getSkyDrawer()->getLimitMagnitude())

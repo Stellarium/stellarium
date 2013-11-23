@@ -117,7 +117,7 @@ QString Pulsar::getInfoString(const StelCore* core, const InfoStringGroup& flags
 		oss << "<h2>" << designation << "</h2>";
 	}
 
-	if (flags&Extra)
+	if (flags&Type)
 	{
 		oss << q_("Type: <b>%1</b>").arg(q_("pulsar")) << "<br />";
 	}
