@@ -55,7 +55,6 @@ public:
 	{
 		return "Pulsar";
 	}
-	virtual float getSelectPriority(const StelCore* core) const;
 
 	//! Get an HTML string to describe the object
 	//! @param core A pointer to the core

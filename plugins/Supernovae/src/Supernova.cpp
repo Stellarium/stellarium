@@ -75,12 +75,6 @@ QVariantMap Supernova::getMap(void)
 	return map;
 }
 
-float Supernova::getSelectPriority(const StelCore* core) const
-{
-	//Same as StarWrapper::getSelectPriority()
-        return getVMagnitude(core);
-}
-
 QString Supernova::getNameI18n(void) const
 {
 	QString name = designation;
