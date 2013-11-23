@@ -439,7 +439,7 @@ bool StelSkyDrawer::drawPointSource(StelPainter* sPainter, const Vec3f& v, const
 		glBlendFunc(GL_ONE, GL_ONE);
 		glEnable(GL_BLEND);				
 		sPainter->setColor(color[0]*cmag, color[1]*cmag, color[2]*cmag);
-		sPainter->drawSprite2dMode(win[0], win[1], rmag);
+		sPainter->drawSprite2dModeNoDeviceScale(win[0], win[1], rmag);
 	}
 
 	unsigned char starColor[3] = {0, 0, 0};
@@ -490,7 +490,7 @@ void StelSkyDrawer::postDrawSky3dModel(StelPainter* painter, const Vec3f& v, flo
 		Vec3f win;
 		painter->getProjector()->project(v, win);
 		painter->setColor(color[0]*cmag, color[1]*cmag, color[2]*cmag);
-		painter->drawSprite2dMode(win[0], win[1], rmag);
+		painter->drawSprite2dModeNoDeviceScale(win[0], win[1], rmag);
 		noStarHalo = true;
 	}
 
