@@ -236,18 +236,7 @@ IF(ENABLE_SOUND)
 ENDIF()
 
 FIND_PACKAGE(OpenGL REQUIRED)
-
-# On msvc it is easier to just compile zlib along with the code.
-IF(MSVC) 
-    SET(USE_SYSTEM_ZLIB 0) 
-ELSE()
-    SET(USE_SYSTEM_ZLIB 1 CACHE BOOL "Define whether we use the system zlib.")
-ENDIF()
-IF(USE_SYSTEM_ZLIB)
-    FIND_PACKAGE(ZLIB)
-ELSE()
-    SET(ZLIB_INCLUDE_DIR "src/core/external/zlib")
-ENDIF()
+FIND_PACKAGE(ZLIB)
 
 FIND_PACKAGE(Qt5Test)
 INCLUDE_DIRECTORIES(${Qt5Test_INCLUDE_DIRS})
