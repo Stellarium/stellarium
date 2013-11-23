@@ -43,7 +43,7 @@ public:
 	enum InfoStringGroupFlags
 	{
 		Name			= 0x00000001, //!< An object's name
-		CatalogNumber		= 0x00000002, //!< Catalog numbers
+		CatalogNumber	= 0x00000002, //!< Catalog numbers
 		Magnitude		= 0x00000004, //!< Magnitude related data
 		RaDecJ2000		= 0x00000008, //!< The equatorial position (J2000 ref)
 		RaDecOfDate		= 0x00000010, //!< The equatorial position (of date)
@@ -54,13 +54,14 @@ public:
 		PlainText		= 0x00000200, //!< Strip HTML tags from output
 		HourAngle		= 0x00000400, //!< The hour angle + DE (of date)
 		AbsoluteMagnitude	= 0x00000800, //!< The absolute magnitude
-		GalacticCoord		= 0x00001000  //!< The galactic position
+		GalacticCoord	= 0x00001000, //!< The galactic position
+		Type			= 0x00002000  //!< The type of the object (star, planete etc..)
 	};
 	typedef QFlags<InfoStringGroupFlags> InfoStringGroup;
 	Q_FLAGS(InfoStringGroup)
 
 	//! A pre-defined set of specifiers for the getInfoString flags argument to getInfoString
-	static const InfoStringGroupFlags AllInfo = (InfoStringGroupFlags)(Name|CatalogNumber|Magnitude|RaDecJ2000|RaDecOfDate|AltAzi|Distance|Size|Extra|HourAngle|AbsoluteMagnitude|GalacticCoord);
+	static const InfoStringGroupFlags AllInfo = (InfoStringGroupFlags)(Name|CatalogNumber|Magnitude|RaDecJ2000|RaDecOfDate|AltAzi|Distance|Size|Extra|Type|HourAngle|AbsoluteMagnitude|GalacticCoord);
 	//! A pre-defined set of specifiers for the getInfoString flags argument to getInfoString
 	static const InfoStringGroupFlags ShortInfo = (InfoStringGroupFlags)(Name|CatalogNumber|Magnitude|RaDecJ2000);
 

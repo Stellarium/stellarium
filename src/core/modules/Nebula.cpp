@@ -98,7 +98,7 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 	if ((flags&Name) || (flags&CatalogNumber))
 		oss << "</h2>";
 
-	if (flags&Extra)
+	if (flags&Type)
 		oss << q_("Type: <b>%1</b>").arg(getTypeString()) << "<br>";
 
 	if (mag < 50 && flags&Magnitude)

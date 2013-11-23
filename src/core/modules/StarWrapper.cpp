@@ -45,7 +45,7 @@ QString StarWrapperBase::getInfoString(const StelCore *core, const InfoStringGro
 	QString str;
 	QTextStream oss(&str);
 
-	if (flags&Extra)
+	if (flags&Type)
 	{
 		oss << q_("Type: <b>%1</b>").arg(q_("star")) << "<br />";
 	}
@@ -129,7 +129,7 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 	}
 
 	bool ebsFlag = false;
-	if (flags&Extra)
+	if (flags&Type)
 	{
 		QString varstartype = "";
 		QString startype = "";

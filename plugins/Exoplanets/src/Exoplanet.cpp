@@ -137,9 +137,13 @@ QString Exoplanet::getInfoString(const StelCore* core, const InfoStringGroup& fl
 	QTextStream oss(&str);
 
 	if (flags&Name)
-	{		
-
+	{
 		oss << "<h2>" << getNameI18n() << "</h2>";
+	}
+	
+	if (flags&Type)
+	{
+		oss << q_("Type: <b>%1</b>").arg(q_("exoplanete")) << "<br />";
 	}
 
 	if (flags&Magnitude)
