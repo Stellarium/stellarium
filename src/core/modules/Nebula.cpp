@@ -134,7 +134,7 @@ float Nebula::getSelectPriority(const StelCore* core) const
 	
 	const float maxMagHint = nebMgr->computeMaxMagHint(core->getSkyDrawer());
 	// make very easy to select if labeled
-	if (getVMagnitude(core)<maxMagHint)
+	if (std::min(15.f, getVMagnitude(core))<maxMagHint)
 		return -10.f;
 	else
 		return StelObject::getSelectPriority(core);
