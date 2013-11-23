@@ -1369,6 +1369,10 @@ void StelPainter::drawSprite2dMode(float x, float y, float radius)
 {
 	static float vertexData[] = {-10.,-10.,10.,-10., 10.,10., -10.,10.};
 	static const float texCoordData[] = {0.,0., 1.,0., 0.,1., 1.,1.};
+	
+	// Takes into account device pixel density and global scale ratio, as we are drawing 2D stuff.
+	radius *= prj->getDevicePixelsPerPixel()*StelApp::getInstance().getGlobalScalingRatio();
+	
 	vertexData[0]=x-radius; vertexData[1]=y-radius;
 	vertexData[2]=x+radius; vertexData[3]=y-radius;
 	vertexData[4]=x-radius; vertexData[5]=y+radius;
@@ -1378,6 +1382,11 @@ void StelPainter::drawSprite2dMode(float x, float y, float radius)
 	setTexCoordPointer(2, GL_FLOAT, texCoordData);
 	drawFromArray(TriangleStrip, 4, 0, false);
 	enableClientStates(false);
+}
+
+void StelPainter::drawSprite2dModeNoDeviceScale(float x, float y, float radius)
+{
+	drawSprite2dMode(x, y, radius/(prj->getDevicePixelsPerPixel()*StelApp::getInstance().getGlobalScalingRatio()));
 }
 
 void StelPainter::drawSprite2dMode(const Vec3d& v, float radius)
@@ -1396,6 +1405,10 @@ void StelPainter::drawSprite2dMode(float x, float y, float radius, float rotatio
 	static const float vertexBase[] = {-1., -1., 1., -1., -1., 1., 1., 1.};
 	const float cosr = std::cos(rotation / 180 * M_PI);
 	const float sinr = std::sin(rotation / 180 * M_PI);
+	
+	// Takes into account device pixel density and global scale ratio, as we are drawing 2D stuff.
+	radius *= prj->getDevicePixelsPerPixel()*StelApp::getInstance().getGlobalScalingRatio();
+	
 	for (int i = 0; i < 8; i+=2)
 	{
 		vertexData[i] = x + radius * vertexBase[i] * cosr - radius * vertexBase[i+1] * sinr;
