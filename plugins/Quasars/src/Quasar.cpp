@@ -74,12 +74,6 @@ QVariantMap Quasar::getMap(void)
 	return map;
 }
 
-float Quasar::getSelectPriority(const StelCore* core) const
-{
-	//Same as StarWrapper::getSelectPriority()
-        return getVMagnitude(core);
-}
-
 QString Quasar::getInfoString(const StelCore* core, const InfoStringGroup& flags) const
 {
 	QString str;

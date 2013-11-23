@@ -84,12 +84,6 @@ QVariantMap Nova::getMap(void)
 	return map;
 }
 
-float Nova::getSelectPriority(const StelCore* core) const
-{
-	//Same as StarWrapper::getSelectPriority()
-	return getVMagnitude(core);
-}
-
 QString Nova::getEnglishName() const
 {
 	return novaName;
