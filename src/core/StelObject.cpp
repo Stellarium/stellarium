@@ -86,8 +86,8 @@ float StelObject::getVMagnitude(const StelCore* core) const
 float StelObject::getSelectPriority(const StelCore* core) const
 {
 	float extMag = getVMagnitudeWithExtinction(core);
-	if (extMag>20.f)
-		extMag=20.f;
+	if (extMag>15.f)
+		extMag=15.f;
 	return extMag;
 }
 
