@@ -431,23 +431,20 @@ void Exoplanet::draw(StelCore* core, StelPainter& painter)
 
 	if(!visible) {return;}
 
-	if (mag <= sd->getLimitMagnitude())
-	{
+	bool displaymode = GETSTELMODULE(Exoplanets)->getDisplayMode();
+	float mlimit = sd->getLimitMagnitude();
 
+	if (mag <= mlimit)
+	{
 		Exoplanet::markerTexture->bind();
 		float size = getAngularSize(NULL)*M_PI/180.*painter.getProjector()->getPixelPerRadAtCenter();
 		float shift = 5.f + size/1.6f;
-		if (labelsFader.getInterstate()<=0.f)
+
+		painter.drawSprite2dMode(XYZ, displaymode ? 4.f : 5.f);
+
+		if (labelsFader.getInterstate()<=0.f && !displaymode && (mag+1.f)<mlimit)
 		{
-			if (GETSTELMODULE(Exoplanets)->getDisplayMode())
-			{
-				painter.drawSprite2dMode(XYZ, 4);
-			}
-			else
-			{
-				painter.drawSprite2dMode(XYZ, 5);
-				painter.drawText(XYZ, designation, 0, shift, shift, false);
-			}
+			painter.drawText(XYZ, designation, 0, shift, shift, false);
 		}
 	}
 }
