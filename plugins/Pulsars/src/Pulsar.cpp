@@ -336,7 +336,6 @@ void Pulsar::draw(StelCore* core, StelPainter& painter)
 
 	Vec3f color = Vec3f(0.4f,0.5f,1.0f);
 	double mag = getVMagnitudeWithExtinction(core);
-	bool mode = GETSTELMODULE(Pulsars)->getDisplayMode();
 
 	StelUtils::spheToRect(RA, DE, XYZ);			
 	glEnable(GL_BLEND);
@@ -346,7 +345,7 @@ void Pulsar::draw(StelCore* core, StelPainter& painter)
 
 	if (mag <= mlimit)
 	{
-
+		bool mode = GETSTELMODULE(Pulsars)->getDisplayMode();
 		Pulsar::markerTexture->bind();
 		float size = getAngularSize(NULL)*M_PI/180.*painter.getProjector()->getPixelPerRadAtCenter();
 		float shift = 5.f + size/1.6f;		
