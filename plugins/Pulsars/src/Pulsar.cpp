@@ -107,6 +107,11 @@ QVariantMap Pulsar::getMap(void)
 	return map;
 }
 
+float Pulsar::getSelectPriority(const StelCore* core) const
+{
+	return StelObject::getSelectPriority(core)-2.f;
+}
+
 QString Pulsar::getInfoString(const StelCore* core, const InfoStringGroup& flags) const
 {
 	QString str;

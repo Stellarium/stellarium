@@ -124,6 +124,11 @@ QVariantMap Exoplanet::getMap(void)
 	return map;
 }
 
+float Exoplanet::getSelectPriority(const StelCore *core) const
+{
+	return StelObject::getSelectPriority(core)-2.f;
+}
+
 QString Exoplanet::getNameI18n(void) const
 {
 	// Use SkyTranslator for translation star names
