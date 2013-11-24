@@ -336,29 +336,26 @@ void Pulsar::draw(StelCore* core, StelPainter& painter)
 
 	Vec3f color = Vec3f(0.4f,0.5f,1.0f);
 	double mag = getVMagnitudeWithExtinction(core);
+	bool mode = GETSTELMODULE(Pulsars)->getDisplayMode();
 
 	StelUtils::spheToRect(RA, DE, XYZ);			
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_ONE, GL_ONE);
 	painter.setColor(color[0], color[1], color[2], 1);
+	float mlimit = sd->getLimitMagnitude();
 
-	if (mag <= sd->getLimitMagnitude())
+	if (mag <= mlimit)
 	{
 
 		Pulsar::markerTexture->bind();
 		float size = getAngularSize(NULL)*M_PI/180.*painter.getProjector()->getPixelPerRadAtCenter();
-		float shift = 5.f + size/1.6f;
-		if (labelsFader.getInterstate()<=0.f)
+		float shift = 5.f + size/1.6f;		
+
+		painter.drawSprite2dMode(XYZ, mode ? 4.f : 5.f);
+
+		if (labelsFader.getInterstate()<=0.f && !mode && (mag+2.f)<mlimit)
 		{
-			if (GETSTELMODULE(Pulsars)->getDisplayMode())
-			{
-				painter.drawSprite2dMode(XYZ, 4);				
-			}
-			else
-			{
-				painter.drawSprite2dMode(XYZ, 5);
-				painter.drawText(XYZ, designation, 0, shift, shift, false);
-			}
+			painter.drawText(XYZ, designation, 0, shift, shift, false);
 		}
 	}
 }
