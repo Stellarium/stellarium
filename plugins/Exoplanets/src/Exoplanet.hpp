@@ -72,6 +72,8 @@ public:
 		return "Exoplanet";
 	}
 
+	virtual float getSelectPriority(const StelCore* core) const;
+
 	//! Get an HTML string to describe the object
 	//! @param core A pointer to the core
 	//! @flags a set of flags with information types to include.
