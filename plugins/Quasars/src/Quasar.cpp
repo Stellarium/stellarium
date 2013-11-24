@@ -121,7 +121,7 @@ QString Quasar::getInfoString(const StelCore* core, const InfoStringGroup& flags
 
 	if (flags&Extra)
 	{
-		oss << q_("Color Index (B-V): <b>%2</b>)").arg(QString::number(bV, 'f', 2)) << "<br>";
+		oss << q_("Color Index (B-V): <b>%2</b>").arg(QString::number(bV, 'f', 2)) << "<br>";
 	}
 	
 	// Ra/Dec etc.
