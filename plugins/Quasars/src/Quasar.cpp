@@ -151,6 +151,14 @@ double Quasar::getAngularSize(const StelCore*) const
 	return 0.00001;
 }
 
+float Quasar::getSelectPriority(const StelCore* core) const
+{
+	float mag = getVMagnitudeWithExtinction(core);
+	if (GETSTELMODULE(Quasars)->getDisplayMode())
+		mag = 4.f;
+	return mag;
+}
+
 void Quasar::update(double deltaTime)
 {
 	labelsFader.update((int)(deltaTime*1000));
