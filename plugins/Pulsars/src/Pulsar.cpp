@@ -246,6 +246,11 @@ float Pulsar::getVMagnitude(const StelCore* core) const
 	}
 }
 
+float Pulsar::getVMagnitudeWithExtinction(const StelCore *core) const
+{
+	return getVMagnitude(core);
+}
+
 double Pulsar::getEdot(double p0, double p1) const
 {
 	if (p0>0 && p1!=0)
