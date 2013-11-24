@@ -431,11 +431,11 @@ void Exoplanet::draw(StelCore* core, StelPainter& painter)
 
 	if(!visible) {return;}
 
-	bool displaymode = GETSTELMODULE(Exoplanets)->getDisplayMode();
 	float mlimit = sd->getLimitMagnitude();
 
 	if (mag <= mlimit)
 	{
+		bool displaymode = GETSTELMODULE(Exoplanets)->getDisplayMode();
 		Exoplanet::markerTexture->bind();
 		float size = getAngularSize(NULL)*M_PI/180.*painter.getProjector()->getPixelPerRadAtCenter();
 		float shift = 5.f + size/1.6f;
