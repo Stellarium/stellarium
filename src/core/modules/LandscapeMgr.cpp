@@ -203,6 +203,7 @@ void LandscapeMgr::update(double deltaTime)
 	core->getSkyDrawer()->reportLuminanceInFov(3.75+atmosphere->getAverageLuminance()*3.5, true);
 
 	// Compute the ground luminance based on every planets around
+	// TBD: Reactivate and verify this code!? Source, reference?
 //	float groundLuminance = 0;
 //	const vector<Planet*>& allPlanets = ssystem->getAllPlanets();
 //	for (vector<Planet*>::const_iterator i=allPlanets.begin();i!=allPlanets.end();++i)
@@ -229,31 +230,30 @@ void LandscapeMgr::update(double deltaTime)
 //	qDebug() << "Adapted Atmosphere lum=" << eye->adaptLuminance(atmosphere->getAverageLuminance()) << " Adapted ground lum=" << eye->adaptLuminance(groundLuminance);
 
 	// compute global ground brightness in a simplistic way, directly in RGB
-	float landscapeBrightness = 0;
 	sunPos.normalize();
 	moonPos.normalize();
 
-	// We define the brigthness zero when the sun is 8 degrees below the horizon.
-	float sinSunAngleRad = sin(qMin(M_PI_2, asin(sunPos[2])+8.*M_PI/180.));
-	float initBrightness = getInitialLandscapeBrightness();
+	float landscapeBrightness; // Maybe set default 0.025?
 	// Setting for landscapes has priority if it enabled
-	if (landscape->getLandscapeNightBrightness()>0 && getFlagLandscapeNightBrightness())
-		initBrightness = landscape->getLandscapeNightBrightness();
-
-	if(sinSunAngleRad < -0.1/1.5 )
-		landscapeBrightness = initBrightness;
+	if (landscape->getLandscapeMinimalBrightness()>=0 && getFlagLandscapeMinimalBrightness())
+		landscapeBrightness = landscape->getLandscapeMinimalBrightness();
 	else
-		landscapeBrightness = (initBrightness + 1.5*(sinSunAngleRad+0.1/1.5));
+		landscapeBrightness = getDefaultMinimalBrightness();
+
+	// We define the solar brightness contribution zero when the sun is 8 degrees below the horizon.
+	float sinSunAngle = sin(qMin(M_PI_2, asin(sunPos[2])+8.*M_PI/180.));
+	if(sinSunAngle > -0.1/1.5 )
+		landscapeBrightness +=  1.5*(sinSunAngle+0.1/1.5);
 
 
 	// GZ: 2013-09-25 Take light pollution into account!
 	StelSkyDrawer* drawer=StelApp::getInstance().getCore()->getSkyDrawer();
-	float pollutionBrightness=(drawer->getBortleScale()-1.0f)*0.025f; // 0..8, so we assume empirical linear brightening 0..0.02
+	float pollutionAddonBrightness=(drawer->getBortleScaleIndex()-1.0f)*0.025f; // 0..8, so we assume empirical linear brightening 0..0.02
 	float lunarAddonBrightness;
 	if (moonPos[2] > -0.1/1.5)
 		lunarAddonBrightness = qMax(0.2/-12.*ssystem->getMoon()->getVMagnitudeWithExtinction(core),0.)*moonPos[2];
 
-	landscapeBrightness += qMax(lunarAddonBrightness, pollutionBrightness);
+	landscapeBrightness += qMax(lunarAddonBrightness, pollutionAddonBrightness);
 
 	// TODO make this more generic for non-atmosphere planets
 	if(atmosphere->getFadeIntensity() == 1)
@@ -262,12 +262,12 @@ void LandscapeMgr::update(double deltaTime)
 		// otherwise we just use the sun position calculation above
 		landscapeBrightness *= (atmosphere->getRealDisplayIntensityFactor()+0.1);
 	}
+	// TODO: should calculate dimming with solar eclipse even without atmosphere on
 
 	// Brightness can't be over 1.f (see https://bugs.launchpad.net/stellarium/+bug/1115364)
 	if (landscapeBrightness>0.95)
 		landscapeBrightness = 0.95;
 
-	// TODO: should calculate dimming with solar eclipse even without atmosphere on
 	if (core->getCurrentLocation().planetName.contains("Sun"))
 	{
 		// NOTE: Simple workaround for brightness of landscape when observing from the Sun.
@@ -278,7 +278,7 @@ void LandscapeMgr::update(double deltaTime)
 		// night pollution brightness is mixed in at -3...-8 degrees.
 		if (sunPos[2]<-0.14f) lightscapeBrightness=1.0f;
 		else if (sunPos[2]<-0.05f) lightscapeBrightness = 1.0f-(sunPos[2]+0.14)/(-0.05+0.14);
-		landscape->setBrightness(landscapeBrightness+0.025, lightscapeBrightness);
+		landscape->setBrightness(landscapeBrightness, lightscapeBrightness);
 	}
 }
 
@@ -312,9 +312,9 @@ void LandscapeMgr::init()
 	cardinalsPoints->setFlagShow(conf->value("viewing/flag_cardinal_points",true).toBool());
 	setFlagLandscapeSetsLocation(conf->value("landscape/flag_landscape_sets_location",false).toBool());
 	setFlagLandscapeAutoSelection(conf->value("viewing/flag_landscape_autoselection", false).toBool());
-	// Set initial brightness for landscape. This feature has been added for folks which say "landscape is super dark, please add light". --AW
-	setInitialLandscapeBrightness(conf->value("landscape/initial_brightness", 0.01).toFloat());
-	setFlagLandscapeNightBrightness(conf->value("landscape/flag_brightness",false).toBool());
+	// Set minimal brightness for landscape. This feature has been added for folks which say "landscape is super dark, please add light". --AW
+	setDefaultMinimalBrightness(conf->value("landscape/minimal_brightness", 0.01).toFloat());
+	setFlagLandscapeMinimalBrightness(conf->value("landscape/flag_minimal_brightness",false).toBool());
 
 	bool ok =true;
 	setAtmosphereBortleLightPollution(conf->value("stars/init_bortle_scale",3).toInt(&ok));
@@ -384,7 +384,7 @@ bool LandscapeMgr::setCurrentLandscapeID(const QString& id)
 		if (landscape->getDefaultBortleIndex() > 0)
 		{
 			setAtmosphereBortleLightPollution(landscape->getDefaultBortleIndex());
-			drawer->setBortleScale(landscape->getDefaultBortleIndex());
+			drawer->setBortleScaleIndex(landscape->getDefaultBortleIndex());
 		}
 		if (landscape->getDefaultAtmosphericExtinction() >= 0.0)
 		{

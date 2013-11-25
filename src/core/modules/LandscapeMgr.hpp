@@ -170,10 +170,10 @@ public slots:
 	//! Set the value of the flag determining if a change of landscape will update the observer location.
 	void setFlagLandscapeSetsLocation(bool b) {flagLandscapeSetsLocation=b;}
 
-	//! Return the value of the flag determining if an using brightness for night landscape.
-	bool getFlagLandscapeNightBrightness() const {return flagLandscapeNightBrightness;}
-	//! Set the value of the flag determining if an using brightness for night landscape.
-	void setFlagLandscapeNightBrightness(bool b) {flagLandscapeNightBrightness=b;}
+	//! Return the value of the flag determining if a minimal brightness should be used to keep landscape visible.
+	bool getFlagLandscapeMinimalBrightness() const {return flagLandscapeMinimalBrightness;}
+	//! Set the value of the flag determining if a minimal brightness should be used to keep landscape visible.
+	void setFlagLandscapeMinimalBrightness(bool b) {flagLandscapeMinimalBrightness=b;}
 
 
 	//! Get flag for displaying Cardinals Points.
@@ -327,9 +327,9 @@ private slots:
 	void updateI18n();	
 
 	//! Return the value of the initial brightness of landscape
-	float getInitialLandscapeBrightness() const {return initialLandscapeBrightness;}
+	float getDefaultMinimalBrightness() const {return defaultMinimalBrightness;}
 	//! Set the value of the initial brightness of landscape.
-	void setInitialLandscapeBrightness(const float b) {initialLandscapeBrightness=b;}
+	void setDefaultMinimalBrightness(const float b) {defaultMinimalBrightness=b;}
 
 private:
 	//! Get light pollution luminance level.
@@ -360,7 +360,10 @@ private:
 
 	bool flagLandscapeAutoSelection;
 
-	bool flagLandscapeNightBrightness;
+	//! A minimal brightness value to keep landscape visible.
+	float defaultMinimalBrightness;
+	//! Indicate use of the minimal brightness value specified in the current landscape.ini, if present.
+	bool flagLandscapeMinimalBrightness;
 
 	// The ID of the currently loaded landscape
 	QString currentLandscapeID;
@@ -375,7 +378,6 @@ private:
 	//! @todo Find a way to update it automatically.
 	QStringList packagedLandscapeIDs;
 
-	float initialLandscapeBrightness;
 };
 
 #endif // _LANDSCAPEMGR_HPP_
