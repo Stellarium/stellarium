@@ -7,21 +7,21 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-03 18:05+0700\n"
+"POT-Creation-Date: 2013-11-24 14:46+0700\n"
 "PO-Revision-Date: 2013-11-05 08:29+0000\n"
 "Last-Translator: LEE E. S. <Unknown>\n"
 "Language-Team: Korean <ko@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-11-06 05:17+0000\n"
-"X-Generator: Launchpad (build 16820)\n"
+"X-Launchpad-Export-Date: 2013-11-25 05:23+0000\n"
+"X-Generator: Launchpad (build 16831)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:106 src/core/modules/StarMgr.cpp:335
 #: src/core/modules/GridLinesMgr.cpp:679 src/core/modules/LandscapeMgr.cpp:314
 #: src/core/modules/NebulaMgr.cpp:123 src/core/modules/SolarSystem.cpp:150
 #: src/core/StelApp.cpp:437 src/core/StelCore.cpp:160
-#: src/core/StelSkyLayerMgr.cpp:87 src/StelMainView.cpp:296
+#: src/core/StelSkyLayerMgr.cpp:87 src/StelMainView.cpp:298
 msgid "Display Options"
 msgstr "화면 표시 설정"
 
@@ -159,27 +159,27 @@ msgstr "행성: "
 
 #: src/core/modules/Nebula.cpp:102 src/core/modules/Planet.cpp:124
 #: src/core/modules/MinorPlanet.cpp:213 src/core/modules/Comet.cpp:123
-#: src/core/modules/StarWrapper.cpp:50 src/core/modules/StarWrapper.cpp:163
-#: src/core/modules/StarWrapper.cpp:166
+#: src/core/modules/StarWrapper.cpp:50 src/core/modules/StarWrapper.cpp:165
+#: src/core/modules/StarWrapper.cpp:168
 #: plugins/Satellites/src/Satellite.cpp:240
-#: plugins/Supernovae/src/Supernova.cpp:123 plugins/Quasars/src/Quasar.cpp:94
-#: plugins/Pulsars/src/Pulsar.cpp:128
+#: plugins/Supernovae/src/Supernova.cpp:117 plugins/Quasars/src/Quasar.cpp:88
+#: plugins/Pulsars/src/Pulsar.cpp:122 plugins/Exoplanets/src/Exoplanet.cpp:146
 #, qt-format
 msgid "Type: <b>%1</b>"
 msgstr "유형: <b>%1</b>"
 
 #: src/core/modules/Nebula.cpp:107 src/core/modules/Planet.cpp:130
 #: src/core/modules/MinorPlanet.cpp:219 src/core/modules/Comet.cpp:129
-#: plugins/Supernovae/src/Supernova.cpp:128 plugins/Novae/src/Nova.cpp:131
-#: plugins/Quasars/src/Quasar.cpp:108 plugins/Exoplanets/src/Exoplanet.cpp:163
+#: plugins/Supernovae/src/Supernova.cpp:122 plugins/Novae/src/Nova.cpp:125
+#: plugins/Quasars/src/Quasar.cpp:102 plugins/Exoplanets/src/Exoplanet.cpp:155
 #, qt-format
 msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>)"
 msgstr "등급: <b>%1</b> (멸종한:  <b>%2</b>)"
 
 #: src/core/modules/Nebula.cpp:110 src/core/modules/Planet.cpp:133
 #: src/core/modules/MinorPlanet.cpp:222 src/core/modules/Comet.cpp:132
-#: plugins/Supernovae/src/Supernova.cpp:131 plugins/Novae/src/Nova.cpp:134
-#: plugins/Quasars/src/Quasar.cpp:120 plugins/Exoplanets/src/Exoplanet.cpp:168
+#: plugins/Supernovae/src/Supernova.cpp:125 plugins/Novae/src/Nova.cpp:128
+#: plugins/Quasars/src/Quasar.cpp:114 plugins/Exoplanets/src/Exoplanet.cpp:160
 #, qt-format
 msgid "Magnitude: <b>%1</b>"
 msgstr "등급: <b>%1</b>"
@@ -189,39 +189,39 @@ msgstr "등급: <b>%1</b>"
 msgid "Size: %1"
 msgstr "크기: %1"
 
-#: src/core/modules/Nebula.cpp:341
+#: src/core/modules/Nebula.cpp:342
 msgid "Galaxy"
 msgstr "은하"
 
-#: src/core/modules/Nebula.cpp:344
+#: src/core/modules/Nebula.cpp:345
 msgid "Open cluster"
 msgstr "산개성단"
 
-#: src/core/modules/Nebula.cpp:347
+#: src/core/modules/Nebula.cpp:348
 msgid "Globular cluster"
 msgstr "구상성단"
 
-#: src/core/modules/Nebula.cpp:350
+#: src/core/modules/Nebula.cpp:351
 msgid "Nebula"
 msgstr "성운"
 
-#: src/core/modules/Nebula.cpp:353
+#: src/core/modules/Nebula.cpp:354
 msgid "Planetary nebula"
 msgstr "행성상성운"
 
-#: src/core/modules/Nebula.cpp:356
+#: src/core/modules/Nebula.cpp:357
 msgid "Dark Nebula"
 msgstr "암흑성운"
 
-#: src/core/modules/Nebula.cpp:359
+#: src/core/modules/Nebula.cpp:360
 msgid "Cluster associated with nebulosity"
 msgstr "성운과 관련된 성단"
 
-#: src/core/modules/Nebula.cpp:362
+#: src/core/modules/Nebula.cpp:363
 msgid "Unknown"
 msgstr "알 수 없음"
 
-#: src/core/modules/Nebula.cpp:365
+#: src/core/modules/Nebula.cpp:366
 msgid "Undocumented type"
 msgstr "자료 없는 유형"
 
@@ -231,7 +231,7 @@ msgstr "딥스카이 천체"
 
 #: src/core/modules/Planet.cpp:136 src/core/modules/MinorPlanet.cpp:232
 #: src/core/modules/MinorPlanet.cpp:236 src/core/modules/Comet.cpp:141
-#: src/core/modules/StarWrapper.cpp:182 plugins/Quasars/src/Quasar.cpp:125
+#: src/core/modules/StarWrapper.cpp:184 plugins/Quasars/src/Quasar.cpp:119
 #, qt-format
 msgid "Absolute Magnitude: %1"
 msgstr "절대등급: %1"
@@ -326,123 +326,115 @@ msgid "Planet trails"
 msgstr "행성 궤적"
 
 #. TRANSLATORS: Type of object
-#: src/core/modules/StarWrapper.cpp:50 src/core/modules/StarWrapper.cpp:156
+#: src/core/modules/StarWrapper.cpp:50 src/core/modules/StarWrapper.cpp:158
 #: src/translations.h:156
 msgid "star"
 msgstr "항성"
 
-#: src/core/modules/StarWrapper.cpp:55
-#, qt-format
-msgid "Magnitude: <b>%1</b> (B-V: %2)"
-msgstr "등급: <b>%1</b>(B-V: %2)"
-
-#: src/core/modules/StarWrapper.cpp:58
-#, qt-format
-msgid "Apparent Magnitude: <b>%1</b> (by extinction)"
-msgstr "절대 등급: <b>%1</b> (by extinction)"
-
-#: src/core/modules/StarWrapper.cpp:137
-msgid "eruptive variable star"
-msgstr "폭발성 변광성"
-
-#: src/core/modules/StarWrapper.cpp:139
-msgid "pulsating variable star"
-msgstr "맥동성 변광성"
-
-#: src/core/modules/StarWrapper.cpp:141
-msgid "rotating variable star"
-msgstr "회전성 변광성"
-
-#: src/core/modules/StarWrapper.cpp:143
-msgid "cataclysmic variable star"
-msgstr "격변성 변광성"
-
-#: src/core/modules/StarWrapper.cpp:146
-msgid "eclipsing binary system"
-msgstr "식 이중성"
-
-#: src/core/modules/StarWrapper.cpp:150
-msgid "variable star"
-msgstr "변광성"
-
-#: src/core/modules/StarWrapper.cpp:154
-msgid "double star"
-msgstr "쌍성"
-
-#: src/core/modules/StarWrapper.cpp:161
-#, qt-format
-msgid "Type: <b>%1, %2</b>"
-msgstr "형태: <b>%1, %2</b>"
-
-#: src/core/modules/StarWrapper.cpp:173 plugins/Quasars/src/Quasar.cpp:102
+#: src/core/modules/StarWrapper.cpp:56 src/core/modules/StarWrapper.cpp:175
+#: plugins/Quasars/src/Quasar.cpp:96
 #, qt-format
 msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>. B-V: <b>%3</b>)"
 msgstr "등급: <b>%1</b> (extincted to: <b>%2</b>. B-V: <b>%3</b>)"
 
-#: src/core/modules/StarWrapper.cpp:177 plugins/Quasars/src/Quasar.cpp:116
+#: src/core/modules/StarWrapper.cpp:60 src/core/modules/StarWrapper.cpp:179
+#: plugins/Quasars/src/Quasar.cpp:110
 #, qt-format
 msgid "Magnitude: <b>%1</b> (B-V: <b>%2</b>)"
 msgstr "등급: <b>%1</b> (B-V: <b>%2</b>)"
 
-#: src/core/modules/StarWrapper.cpp:197
+#: src/core/modules/StarWrapper.cpp:139
+msgid "eruptive variable star"
+msgstr "폭발성 변광성"
+
+#: src/core/modules/StarWrapper.cpp:141
+msgid "pulsating variable star"
+msgstr "맥동성 변광성"
+
+#: src/core/modules/StarWrapper.cpp:143
+msgid "rotating variable star"
+msgstr "회전성 변광성"
+
+#: src/core/modules/StarWrapper.cpp:145
+msgid "cataclysmic variable star"
+msgstr "격변성 변광성"
+
+#: src/core/modules/StarWrapper.cpp:148
+msgid "eclipsing binary system"
+msgstr "식 이중성"
+
+#: src/core/modules/StarWrapper.cpp:152
+msgid "variable star"
+msgstr "변광성"
+
+#: src/core/modules/StarWrapper.cpp:156
+msgid "double star"
+msgstr "쌍성"
+
+#: src/core/modules/StarWrapper.cpp:163
+#, qt-format
+msgid "Type: <b>%1, %2</b>"
+msgstr "형태: <b>%1, %2</b>"
+
+#: src/core/modules/StarWrapper.cpp:199
 #, qt-format
 msgid "Magnitude range: <b>%1</b>%2<b>%3</b> (Photometric system: %4)"
 msgstr "등급 범위: <b>%1</b>%2<b>%3</b> (Photometric system: %4)"
 
-#: src/core/modules/StarWrapper.cpp:199
+#: src/core/modules/StarWrapper.cpp:201
 #, qt-format
 msgid "Magnitude range: <b>%1</b>%2<b>%3/%4</b> (Photometric system: %5)"
 msgstr "등급 범위: <b>%1</b>%2<b>%3/%4</b> (Photometric system: %5)"
 
-#: src/core/modules/StarWrapper.cpp:206
-#: plugins/Supernovae/src/Supernova.cpp:142 plugins/Novae/src/Nova.cpp:144
-#: plugins/Exoplanets/src/Exoplanet.cpp:183
+#: src/core/modules/StarWrapper.cpp:208
+#: plugins/Supernovae/src/Supernova.cpp:136 plugins/Novae/src/Nova.cpp:138
+#: plugins/Exoplanets/src/Exoplanet.cpp:175
 #, qt-format
 msgid "Distance: %1 Light Years"
 msgstr "거리: %1 광년"
 
-#: src/core/modules/StarWrapper.cpp:211
-#: plugins/Exoplanets/src/Exoplanet.cpp:178
+#: src/core/modules/StarWrapper.cpp:213
+#: plugins/Exoplanets/src/Exoplanet.cpp:170
 #, qt-format
 msgid "Spectral Type: %1"
 msgstr "스펙트럼형: %1"
 
-#: src/core/modules/StarWrapper.cpp:214
+#: src/core/modules/StarWrapper.cpp:216
 #, qt-format
 msgid "Parallax: %1\""
 msgstr "시차: %1\""
 
-#: src/core/modules/StarWrapper.cpp:220
+#: src/core/modules/StarWrapper.cpp:222
 #, qt-format
 msgid "Epoch for minimum light: %1 JD"
 msgstr "최소 조명을 위한 기준 시점: %1 JD"
 
-#: src/core/modules/StarWrapper.cpp:222
+#: src/core/modules/StarWrapper.cpp:224
 #, qt-format
 msgid "Epoch for maximum light: %1 JD"
 msgstr "최대 조명을 위한 기준 시점: %1 JD"
 
-#: src/core/modules/StarWrapper.cpp:226
+#: src/core/modules/StarWrapper.cpp:228
 #, qt-format
 msgid "Period: %1 days"
 msgstr "주기: %1 일"
 
-#: src/core/modules/StarWrapper.cpp:236
+#: src/core/modules/StarWrapper.cpp:238
 #, qt-format
 msgid "Next minimum light: %1 UTC"
 msgstr "다음 최소 조명: %1 UTC"
 
-#: src/core/modules/StarWrapper.cpp:238
+#: src/core/modules/StarWrapper.cpp:240
 #, qt-format
 msgid "Next maximum light: %1 UTC"
 msgstr "다음 최대 조명: %1 UTC"
 
-#: src/core/modules/StarWrapper.cpp:244
+#: src/core/modules/StarWrapper.cpp:246
 #, qt-format
 msgid "Duration of eclipse: %1%"
 msgstr "식의 기간: %1%"
 
-#: src/core/modules/StarWrapper.cpp:246
+#: src/core/modules/StarWrapper.cpp:248
 #, qt-format
 msgid "Rising time: %1%"
 msgstr "떠오르는 시간: %1%"
@@ -1015,31 +1007,31 @@ msgid ""
 "of perspective is set to an infinite distance."
 msgstr "정사도법은 투시도법과 비슷하나, 원근점을 무한한 거리에 놓습니다."
 
-#: src/core/StelObject.cpp:104
+#: src/core/StelObject.cpp:112
 #, qt-format
 msgid "RA/DE (J2000): %1/%2"
 msgstr "적경/적위 (J2000): %1/%2"
 
-#: src/core/StelObject.cpp:111
+#: src/core/StelObject.cpp:119
 #, qt-format
 msgid "RA/DE (of date): %1/%2"
 msgstr "적경/적위 (날짜): %1/%2"
 
-#: src/core/StelObject.cpp:118
+#: src/core/StelObject.cpp:126
 #, qt-format
 msgid "Galactic longitude/latitude: %1/%2"
 msgstr "은경/은위: %1/%2"
 
-#: src/core/StelObject.cpp:130 src/core/StelObject.cpp:134
+#: src/core/StelObject.cpp:138 src/core/StelObject.cpp:142
 #, qt-format
 msgid "Hour angle/DE: %1/%2"
 msgstr "시간각/적위: %1/%2"
 
-#: src/core/StelObject.cpp:130 src/core/StelObject.cpp:152
+#: src/core/StelObject.cpp:138 src/core/StelObject.cpp:160
 msgid "(apparent)"
 msgstr "(겉보기)"
 
-#: src/core/StelObject.cpp:152 src/core/StelObject.cpp:156
+#: src/core/StelObject.cpp:160 src/core/StelObject.cpp:164
 #, qt-format
 msgid "Az/Alt: %1/%2"
 msgstr "방위/고도: %1/%2"
@@ -1049,7 +1041,7 @@ msgid "Deep-sky objects background images"
 msgstr "딥스카이 천체 배경이미지"
 
 #: src/core/StelMovementMgr.cpp:106 src/gui/StelGui.cpp:178
-#: src/StelMainView.cpp:295
+#: src/StelMainView.cpp:297
 msgid "Miscellaneous"
 msgstr "기타"
 
@@ -1093,31 +1085,31 @@ msgstr "찾을 수 없음"
 msgid "Found"
 msgstr "찾음"
 
-#: src/gui/ConfigurationDialog.cpp:409 src/gui/ConfigurationDialog.cpp:411
+#: src/gui/ConfigurationDialog.cpp:411 src/gui/ConfigurationDialog.cpp:413
 msgid "Select screenshot directory"
 msgstr "스크린샷 경로 선택"
 
-#: src/gui/ConfigurationDialog.cpp:634
+#: src/gui/ConfigurationDialog.cpp:638
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr "시작시 화각: %1%2"
 
-#: src/gui/ConfigurationDialog.cpp:642
+#: src/gui/ConfigurationDialog.cpp:646
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "시작시 시야 방향 방위/고도: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:685
+#: src/gui/ConfigurationDialog.cpp:689
 #: plugins/Oculars/src/gui/OcularDialog.cpp:498
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:380
 msgid "Authors"
 msgstr "저작자"
 
-#: src/gui/ConfigurationDialog.cpp:686 src/gui/ViewDialog.cpp:364
+#: src/gui/ConfigurationDialog.cpp:690 src/gui/ViewDialog.cpp:364
 msgid "Contact"
 msgstr "연락처"
 
-#: src/gui/ConfigurationDialog.cpp:769
+#: src/gui/ConfigurationDialog.cpp:773
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:108
 #: plugins/Novae/src/gui/NovaeDialog.cpp:107
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:114
@@ -1127,19 +1119,19 @@ msgstr "연락처"
 msgid "Author"
 msgstr "작성자"
 
-#: src/gui/ConfigurationDialog.cpp:773
+#: src/gui/ConfigurationDialog.cpp:777
 msgid "License"
 msgstr "라이선스"
 
-#: src/gui/ConfigurationDialog.cpp:797
+#: src/gui/ConfigurationDialog.cpp:801
 msgid "Running script: "
 msgstr "실행 중인 스크립트: "
 
-#: src/gui/ConfigurationDialog.cpp:804
+#: src/gui/ConfigurationDialog.cpp:808
 msgid "Running script: [none]"
 msgstr "실행 중인 스크립트: [없음]"
 
-#: src/gui/ConfigurationDialog.cpp:869
+#: src/gui/ConfigurationDialog.cpp:873
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
@@ -1147,16 +1139,16 @@ msgstr ""
 "새 별 목록을 모두 내려받았습니다!\n"
 "내려받은 별을 표시하려면 스텔라리움을 재시작하세요."
 
-#: src/gui/ConfigurationDialog.cpp:873
+#: src/gui/ConfigurationDialog.cpp:877
 msgid "All available star catalogs have been installed."
 msgstr "사용할 수 있는 모든 별 카탈로그가 설치되었습니다."
 
-#: src/gui/ConfigurationDialog.cpp:878
+#: src/gui/ConfigurationDialog.cpp:882
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "%2개 중 %1번 목록 받기"
 
-#: src/gui/ConfigurationDialog.cpp:885
+#: src/gui/ConfigurationDialog.cpp:889
 #, qt-format
 msgid ""
 "Downloading %1...\n"
@@ -1165,7 +1157,7 @@ msgstr ""
 "내려받는 중... %1\n"
 "(창을 닫아도 됩니다.)"
 
-#: src/gui/ConfigurationDialog.cpp:892
+#: src/gui/ConfigurationDialog.cpp:896
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -1176,7 +1168,7 @@ msgstr ""
 "별 갯수: %2 100만\n"
 "광도 범위: %3 - %4"
 
-#: src/gui/ConfigurationDialog.cpp:935 src/gui/ConfigurationDialog.cpp:970
+#: src/gui/ConfigurationDialog.cpp:939 src/gui/ConfigurationDialog.cpp:974
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -1185,11 +1177,11 @@ msgstr ""
 "%1을 내려받는 중 오류 발생:\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:1022
+#: src/gui/ConfigurationDialog.cpp:1026
 msgid "Verifying file integrity..."
 msgstr "파일 무결성 검사 중..."
 
-#: src/gui/ConfigurationDialog.cpp:1026
+#: src/gui/ConfigurationDialog.cpp:1030
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -1199,123 +1191,123 @@ msgstr ""
 "파일이 손상되었습니다."
 
 #. TRANSLATORS: Full phrase is "Algorithm of DeltaT"
-#: src/gui/ConfigurationDialog.cpp:1097
+#: src/gui/ConfigurationDialog.cpp:1102
 msgid "Algorithm of"
 msgstr "알고리즘의"
 
-#: src/gui/ConfigurationDialog.cpp:1108
+#: src/gui/ConfigurationDialog.cpp:1113
 msgid "Without correction"
 msgstr "보정 없이"
 
-#: src/gui/ConfigurationDialog.cpp:1109
+#: src/gui/ConfigurationDialog.cpp:1114
 msgid "Schoch (1931)"
 msgstr "Schoch (1931)"
 
-#: src/gui/ConfigurationDialog.cpp:1110
+#: src/gui/ConfigurationDialog.cpp:1115
 msgid "Clemence (1948)"
 msgstr "Clemence (1948)"
 
-#: src/gui/ConfigurationDialog.cpp:1111
+#: src/gui/ConfigurationDialog.cpp:1116
 msgid "IAU (1952)"
 msgstr "국제천문연맹(1952)"
 
-#: src/gui/ConfigurationDialog.cpp:1112
+#: src/gui/ConfigurationDialog.cpp:1117
 msgid "Astronomical Ephemeris (1960)"
 msgstr "천문력(1960)"
 
-#: src/gui/ConfigurationDialog.cpp:1113
+#: src/gui/ConfigurationDialog.cpp:1118
 msgid "Tuckerman (1962, 1964) & Goldstine (1973)"
 msgstr "Tuckerman (1962, 1964) & Goldstine (1973)"
 
-#: src/gui/ConfigurationDialog.cpp:1114
+#: src/gui/ConfigurationDialog.cpp:1119
 msgid "Muller & Stephenson (1975)"
 msgstr "Muller & Stephenson (1975)"
 
-#: src/gui/ConfigurationDialog.cpp:1115
+#: src/gui/ConfigurationDialog.cpp:1120
 msgid "Stephenson (1978)"
 msgstr "Stephenson (1978)"
 
-#: src/gui/ConfigurationDialog.cpp:1116
+#: src/gui/ConfigurationDialog.cpp:1121
 msgid "Schmadel & Zech (1979)"
 msgstr "Schmadel & Zech (1979)"
 
-#: src/gui/ConfigurationDialog.cpp:1117
+#: src/gui/ConfigurationDialog.cpp:1122
 msgid "Morrison & Stephenson (1982)"
 msgstr "Morrison & Stephenson (1982)"
 
-#: src/gui/ConfigurationDialog.cpp:1118
+#: src/gui/ConfigurationDialog.cpp:1123
 msgid "Stephenson & Morrison (1984)"
 msgstr "Stephenson & Morrison (1984)"
 
-#: src/gui/ConfigurationDialog.cpp:1119
+#: src/gui/ConfigurationDialog.cpp:1124
 msgid "Stephenson & Houlden (1986)"
 msgstr "Stephenson & Houlden (1986)"
 
-#: src/gui/ConfigurationDialog.cpp:1120
+#: src/gui/ConfigurationDialog.cpp:1125
 msgid "Espenak (1987, 1989)"
 msgstr "Espenak (1987, 1989)"
 
-#: src/gui/ConfigurationDialog.cpp:1121
+#: src/gui/ConfigurationDialog.cpp:1126
 msgid "Borkowski (1988)"
 msgstr "Borkowski (1988)"
 
-#: src/gui/ConfigurationDialog.cpp:1122
+#: src/gui/ConfigurationDialog.cpp:1127
 msgid "Schmadel & Zech (1988)"
 msgstr "Schmadel & Zech (1988)"
 
-#: src/gui/ConfigurationDialog.cpp:1123
+#: src/gui/ConfigurationDialog.cpp:1128
 msgid "Chapront-Touze & Chapront (1991)"
 msgstr "Chapront-Touze & Chapront (1991)"
 
-#: src/gui/ConfigurationDialog.cpp:1124
+#: src/gui/ConfigurationDialog.cpp:1129
 msgid "Stephenson & Morrison (1995)"
 msgstr "Stephenson & Morrison (1995)"
 
-#: src/gui/ConfigurationDialog.cpp:1125
+#: src/gui/ConfigurationDialog.cpp:1130
 msgid "Stephenson (1997)"
 msgstr "Stephenson (1997)"
 
-#: src/gui/ConfigurationDialog.cpp:1127
+#: src/gui/ConfigurationDialog.cpp:1132
 msgid "Meeus (1998) (with Chapront, Chapront-Touze & Francou (1997))"
 msgstr "Meeus (1998) (with Chapront, Chapront-Touze & Francou (1997))"
 
-#: src/gui/ConfigurationDialog.cpp:1128
+#: src/gui/ConfigurationDialog.cpp:1133
 msgid "JPL Horizons"
 msgstr "JPL Horizons"
 
-#: src/gui/ConfigurationDialog.cpp:1129
+#: src/gui/ConfigurationDialog.cpp:1134
 msgid "Meeus & Simons (2000)"
 msgstr "Meeus & Simons (2000)"
 
-#: src/gui/ConfigurationDialog.cpp:1130
+#: src/gui/ConfigurationDialog.cpp:1135
 msgid "Montenbruck & Pfleger (2000)"
 msgstr "Montenbruck & Pfleger (2000)"
 
-#: src/gui/ConfigurationDialog.cpp:1131
+#: src/gui/ConfigurationDialog.cpp:1136
 msgid "Reingold & Dershowitz (2002, 2007)"
 msgstr "Reingold & Dershowitz (2002, 2007)"
 
-#: src/gui/ConfigurationDialog.cpp:1132
+#: src/gui/ConfigurationDialog.cpp:1137
 msgid "Morrison & Stephenson (2004, 2005)"
 msgstr "Morrison & Stephenson (2004, 2005)"
 
-#: src/gui/ConfigurationDialog.cpp:1134
+#: src/gui/ConfigurationDialog.cpp:1139
 msgid "Espenak & Meeus (2006)"
 msgstr "Espenak & Meeus (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:1135
+#: src/gui/ConfigurationDialog.cpp:1140
 msgid "Reijs (2006)"
 msgstr "Reijs (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:1136
+#: src/gui/ConfigurationDialog.cpp:1141
 msgid "Banjevic (2006)"
 msgstr "Banjevic (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:1137
+#: src/gui/ConfigurationDialog.cpp:1142
 msgid "Islam, Sadiq & Qureshi (2008, 2013)"
 msgstr "Islam, Sadiq & Qureshi (2008, 2013)"
 
-#: src/gui/ConfigurationDialog.cpp:1138
+#: src/gui/ConfigurationDialog.cpp:1143
 #, qt-format
 msgid "Custom equation of %1T"
 msgstr "%1T의 사용자 정의 방정식"
@@ -1647,25 +1639,25 @@ msgstr "어디서"
 msgid "year"
 msgstr "년"
 
-#: src/main.cpp:319
+#: src/main.cpp:321
 msgid "This system does not support OpenGL."
 msgstr "이 시스템은 OpenGL을 지원하지 않습니다."
 
-#: src/StelMainView.cpp:295
+#: src/StelMainView.cpp:297
 msgid "Save screenshot"
 msgstr "스크린샷 저장"
 
-#: src/StelMainView.cpp:296
+#: src/StelMainView.cpp:298
 msgid "Full-screen mode"
 msgstr "전체 화면 모드"
 
-#: src/StelMainView.cpp:353
+#: src/StelMainView.cpp:355
 #, qt-format
 msgid "Stellarium %1"
 msgstr "스텔라리움 %1"
 
-#: src/translations.h:33 plugins/Exoplanets/src/Exoplanet.cpp:194
-#: plugins/Exoplanets/src/Exoplanet.cpp:198
+#: src/translations.h:33 plugins/Exoplanets/src/Exoplanet.cpp:186
+#: plugins/Exoplanets/src/Exoplanet.cpp:190
 msgid "Sun"
 msgstr "태양"
 
@@ -3389,7 +3381,7 @@ msgstr "프로그램 정보"
 msgid "Log"
 msgstr "로그"
 
-#: src/ui_helpDialogGui.h:290 src/ui_configurationDialog.h:1039
+#: src/ui_helpDialogGui.h:290 src/ui_configurationDialog.h:1049
 msgid "Edit keyboard shortcuts..."
 msgstr "키보드 단축키 편집..."
 
@@ -3629,7 +3621,7 @@ msgstr "단어의 처음부터 자동 완성 사용"
 
 #: src/ui_searchDialogGui.h:656 src/ui_viewDialog.h:1301
 #: src/ui_viewDialog.h:1307 src/ui_viewDialog.h:1309
-#: src/ui_configurationDialog.h:1119 src/ui_configurationDialog.h:1130
+#: src/ui_configurationDialog.h:1129 src/ui_configurationDialog.h:1140
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:416
 msgid "Options"
 msgstr "설정"
@@ -3870,38 +3862,38 @@ msgstr "이 하늘 문화를 기본값으로 사용"
 msgid "Visible"
 msgstr "표시하기"
 
-#: src/ui_configurationDialog.h:963
+#: src/ui_configurationDialog.h:969
 msgid "Configuration"
 msgstr "설정"
 
-#: src/ui_configurationDialog.h:965
+#: src/ui_configurationDialog.h:971
 msgid "Program language"
 msgstr "프로그램 언어"
 
-#: src/ui_configurationDialog.h:966
+#: src/ui_configurationDialog.h:972
 msgid "Default options"
 msgstr "설정 기본값"
 
-#: src/ui_configurationDialog.h:968
+#: src/ui_configurationDialog.h:974
 msgid ""
 "Save the settings you've changed this session to be the same the next time "
 "you start Stellarium"
 msgstr "사용 중 변경한 사항을 스텔라리움을 시작할 때에 적용되도록 저장합니다."
 
-#: src/ui_configurationDialog.h:970
+#: src/ui_configurationDialog.h:976
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:390
 msgid "Save settings"
 msgstr "설정 저장"
 
-#: src/ui_configurationDialog.h:972
+#: src/ui_configurationDialog.h:978
 msgid "Restore the default settings that came with Stellarium"
 msgstr "스텔라리움의 기본 설정으로 되돌립니다."
 
-#: src/ui_configurationDialog.h:974
+#: src/ui_configurationDialog.h:980
 msgid "Restore defaults"
 msgstr "기본값 복원"
 
-#: src/ui_configurationDialog.h:975
+#: src/ui_configurationDialog.h:981
 msgid ""
 "Restoring default settings requires a restart of Stellarium. Saving all the "
 "current options includes the current FOV and direction of view for use at "
@@ -3909,364 +3901,373 @@ msgid ""
 msgstr ""
 "기본값 복원 설정은 스텔라리움을 재시작해야 합니다. 모든 설정 저장은 화각과 시야 방향을 포함하여 다음에 프로그램을 시작할 때 반영합니다."
 
-#: src/ui_configurationDialog.h:977
+#: src/ui_configurationDialog.h:983
 msgid "The width of your view when Stellarium starts"
 msgstr "스텔라리움을 시작할 때의 시야폭"
 
-#: src/ui_configurationDialog.h:980
+#: src/ui_configurationDialog.h:986
 msgid "The direction you're looking when Stellarium starts"
 msgstr "스텔라리움을 시작할 때의 시야 방향"
 
-#: src/ui_configurationDialog.h:982 src/ui_configurationDialog.h:1141
+#: src/ui_configurationDialog.h:988 src/ui_configurationDialog.h:1151
 msgid "Selected object information"
 msgstr "선택한 천체 정보"
 
-#: src/ui_configurationDialog.h:984
+#: src/ui_configurationDialog.h:990
 msgid "Display all information available"
 msgstr "가능한 모든 정보 보기"
 
-#: src/ui_configurationDialog.h:986
+#: src/ui_configurationDialog.h:992
 msgid "All available"
 msgstr "가능한 모든 것"
 
-#: src/ui_configurationDialog.h:988
+#: src/ui_configurationDialog.h:994
 msgid "Display no information"
 msgstr "정보 보이지 않음"
 
-#: src/ui_configurationDialog.h:990 plugins/Oculars/src/Oculars.cpp:1888
+#: src/ui_configurationDialog.h:996 plugins/Oculars/src/Oculars.cpp:1888
 #: plugins/Observability/src/Observability.cpp:230
 msgid "None"
 msgstr "없음"
 
-#: src/ui_configurationDialog.h:992
+#: src/ui_configurationDialog.h:998
 msgid "Display less information"
 msgstr "정보 줄여 보기"
 
-#: src/ui_configurationDialog.h:994
+#: src/ui_configurationDialog.h:1000
 msgid "Short"
 msgstr "짧게"
 
-#: src/ui_configurationDialog.h:996
+#: src/ui_configurationDialog.h:1002
 msgid "Display user settings information"
 msgstr "사용자가 설정한 정보 보기"
 
-#: src/ui_configurationDialog.h:998
+#: src/ui_configurationDialog.h:1004
 msgid "Customized"
 msgstr "사용자 정의"
 
-#: src/ui_configurationDialog.h:999
+#: src/ui_configurationDialog.h:1005
 msgid "Displayed fields"
 msgstr "표시된 영역"
 
-#: src/ui_configurationDialog.h:1001
-msgid "Spectral class, nebula type, etc."
-msgstr "스펙트럼 등급, 성운 형태, etc."
-
-#: src/ui_configurationDialog.h:1003
-msgid "Additional information"
-msgstr "추가 정보"
-
-#: src/ui_configurationDialog.h:1004
-msgid "Distance"
-msgstr "거리"
-
-#: src/ui_configurationDialog.h:1006
-msgid "Topocentric equatorial coordinates"
-msgstr "관측자중심 적도 좌표계"
-
-#: src/ui_configurationDialog.h:1008
-msgid "Hour angle/Declination"
-msgstr "시간각/ 적위"
-
-#: src/ui_configurationDialog.h:1009
-msgid "Absolute magnitude"
-msgstr "절대등급"
-
-#: src/ui_configurationDialog.h:1011
-msgid "Geocentric equatorial coordinates, equinox of J2000.0"
-msgstr "지구중심 적도좌표계, J2000.0 분점"
-
-#: src/ui_configurationDialog.h:1013
-msgid "Right ascension/Declination (J2000)"
-msgstr "적경/적위(J2000)"
-
-#: src/ui_configurationDialog.h:1014
-msgid "Galactic coordinates"
-msgstr "은하좌표계"
-
-#: src/ui_configurationDialog.h:1016
+#: src/ui_configurationDialog.h:1007
 msgid "Geocentric equatorial coordinates, equinox of date"
 msgstr "지구중심 적도좌표계, 날짜의 분점(춘분)"
 
-#: src/ui_configurationDialog.h:1018
+#: src/ui_configurationDialog.h:1009
 msgid "Right ascension/Declination (of date)"
 msgstr "적경/적위(날짜의)"
 
-#: src/ui_configurationDialog.h:1019
-msgid "Visual magnitude"
-msgstr "겉보기등급"
+#: src/ui_configurationDialog.h:1010
+msgid "Distance"
+msgstr "거리"
 
-#: src/ui_configurationDialog.h:1020
+#: src/ui_configurationDialog.h:1011
 msgid "Catalog number(s)"
 msgstr "카달로그 번호"
 
-#: src/ui_configurationDialog.h:1022
-msgid "Horizontal coordinates"
-msgstr "지평좌표계"
+#: src/ui_configurationDialog.h:1013
+msgid "Geocentric equatorial coordinates, equinox of J2000.0"
+msgstr "지구중심 적도좌표계, J2000.0 분점"
 
-#: src/ui_configurationDialog.h:1024
-msgid "Altitude/Azimuth"
-msgstr "위도/경도"
+#: src/ui_configurationDialog.h:1015
+msgid "Right ascension/Declination (J2000)"
+msgstr "적경/적위(J2000)"
+
+#: src/ui_configurationDialog.h:1016
+msgid "Absolute magnitude"
+msgstr "절대등급"
+
+#: src/ui_configurationDialog.h:1017
+msgid "Galactic coordinates"
+msgstr "은하좌표계"
+
+#: src/ui_configurationDialog.h:1019
+msgid "Spectral class, nebula type, etc."
+msgstr "스펙트럼 등급, 성운 형태, etc."
+
+#: src/ui_configurationDialog.h:1021
+msgid "Additional information"
+msgstr "추가 정보"
+
+#: src/ui_configurationDialog.h:1023
+msgid "Topocentric equatorial coordinates"
+msgstr "관측자중심 적도 좌표계"
+
+#: src/ui_configurationDialog.h:1025
+msgid "Hour angle/Declination"
+msgstr "시간각/ 적위"
 
 #: src/ui_configurationDialog.h:1026
-msgid "Angular or physical size"
-msgstr "각지름 또는 물리적 크기"
-
-#: src/ui_configurationDialog.h:1028
-msgid "Size"
-msgstr "크기"
-
-#: src/ui_configurationDialog.h:1029
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:269
 msgid "Name"
 msgstr "이름"
 
-#: src/ui_configurationDialog.h:1030
+#: src/ui_configurationDialog.h:1027
+msgid "Visual magnitude"
+msgstr "겉보기등급"
+
+#: src/ui_configurationDialog.h:1029
+msgid "Horizontal coordinates"
+msgstr "지평좌표계"
+
+#: src/ui_configurationDialog.h:1031
+msgid "Altitude/Azimuth"
+msgstr "위도/경도"
+
+#: src/ui_configurationDialog.h:1033
+msgid "Angular or physical size"
+msgstr "각지름 또는 물리적 크기"
+
+#: src/ui_configurationDialog.h:1035
+msgid "Size"
+msgstr "크기"
+
+#: src/ui_configurationDialog.h:1037
+msgid "The type of the object (star, planet, etc.)"
+msgstr ""
+
+#: src/ui_configurationDialog.h:1039
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:268
+msgid "Type"
+msgstr "종류"
+
+#: src/ui_configurationDialog.h:1040
 msgid "Control"
 msgstr "제어"
 
-#: src/ui_configurationDialog.h:1032
+#: src/ui_configurationDialog.h:1042
 msgid "Allow keyboard to pan and zoom"
 msgstr "키보드로 회전과 줌을 가능하게 합니다"
 
-#: src/ui_configurationDialog.h:1034
+#: src/ui_configurationDialog.h:1044
 msgid "Enable keyboard navigation"
 msgstr "키보드 탐색 활성화"
 
-#: src/ui_configurationDialog.h:1036
+#: src/ui_configurationDialog.h:1046
 msgid "Allow mouse to pan (drag) and zoom (mousewheel)"
 msgstr "마우스로 회전(끌기)과 줌(마우스 휠)을 가능하게 합니다"
 
-#: src/ui_configurationDialog.h:1038
+#: src/ui_configurationDialog.h:1048
 msgid "Enable mouse navigation"
 msgstr "마우스 탐색 활성화"
 
-#: src/ui_configurationDialog.h:1041
+#: src/ui_configurationDialog.h:1051
 msgid "Hides the mouse cursor when inactive"
 msgstr "멈췄을 때 마우스 커서 숨기기"
 
-#: src/ui_configurationDialog.h:1043
+#: src/ui_configurationDialog.h:1053
 msgid "Mouse cursor timeout:"
 msgstr "마우스 커서 타임아웃:"
 
-#: src/ui_configurationDialog.h:1045
+#: src/ui_configurationDialog.h:1055
 msgid "seconds"
 msgstr "초"
 
-#: src/ui_configurationDialog.h:1047
+#: src/ui_configurationDialog.h:1057
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:185
 msgid "Startup date and time"
 msgstr "시작시 날짜 및 시각"
 
-#: src/ui_configurationDialog.h:1049
+#: src/ui_configurationDialog.h:1059
 msgid "Use a specific date and time when Stellarium starts up"
 msgstr "스텔라리움을 시작할 때 특정한 날짜 및 시각을 사용합니다"
 
-#: src/ui_configurationDialog.h:1051
+#: src/ui_configurationDialog.h:1061
 msgid "Other:"
 msgstr "기타:"
 
-#: src/ui_configurationDialog.h:1053
+#: src/ui_configurationDialog.h:1063
 msgid "Use current local date and time"
 msgstr "현재 지방일과 지방시 사용하기"
 
-#: src/ui_configurationDialog.h:1055
+#: src/ui_configurationDialog.h:1065
 msgid "use current"
 msgstr "현재 설정 유지"
 
-#: src/ui_configurationDialog.h:1057
+#: src/ui_configurationDialog.h:1067
 msgid "Starts Stellarium at system clock date and time"
 msgstr "시스템 날짜 및 시각으로 스텔라리움을 시작합니다."
 
-#: src/ui_configurationDialog.h:1059
+#: src/ui_configurationDialog.h:1069
 msgid "System date and time"
 msgstr "시스템 날짜 및 시각"
 
-#: src/ui_configurationDialog.h:1061
+#: src/ui_configurationDialog.h:1071
 msgid ""
 "Sets the simulation time to the next instance of this time of day when "
 "Stellarium starts"
 msgstr "스텔라리움을 시작할 때 시뮬레이션 시각을 다음의 시각으로 맞춥니다."
 
-#: src/ui_configurationDialog.h:1063
+#: src/ui_configurationDialog.h:1073
 msgid "System date at:"
 msgstr "시각 지정:"
 
-#: src/ui_configurationDialog.h:1064
+#: src/ui_configurationDialog.h:1074
 msgid "Time correction"
 msgstr "시간 보정"
 
-#: src/ui_configurationDialog.h:1067
+#: src/ui_configurationDialog.h:1077
 msgid "Edit equation"
 msgstr "식 편집"
 
-#: src/ui_configurationDialog.h:1069
+#: src/ui_configurationDialog.h:1079
 msgid "Planetarium options"
 msgstr "플라네타리움 설정"
 
-#: src/ui_configurationDialog.h:1071
+#: src/ui_configurationDialog.h:1081
 msgid ""
 "Spheric mirror distortion is used when projecting Stellarium onto a spheric "
 "mirror for low-cost planetarium systems."
 msgstr "구면경 왜곡은 저가형 플라네타리움 시스템에서 구면경에 스텔라리움을 투영할 때 사용합니다."
 
-#: src/ui_configurationDialog.h:1073
+#: src/ui_configurationDialog.h:1083
 msgid "Spheric mirror distortion"
 msgstr "구면경 왜곡"
 
-#: src/ui_configurationDialog.h:1075
+#: src/ui_configurationDialog.h:1085
 msgid "Mask out everything outside a central circle in the main view"
 msgstr "화면 중심의 원 바깥쪽에 있는 모든 것을 표시하지 않습니다"
 
-#: src/ui_configurationDialog.h:1077
+#: src/ui_configurationDialog.h:1087
 msgid "Disc viewport"
 msgstr "원형 뷰포트"
 
-#: src/ui_configurationDialog.h:1079
+#: src/ui_configurationDialog.h:1089
 msgid "Hide other constellations when you click one"
 msgstr "별자리를 클릭할 때에 다른 별자리 감추기"
 
-#: src/ui_configurationDialog.h:1081
+#: src/ui_configurationDialog.h:1091
 msgid "Select single constellation"
 msgstr "하나의 별자리 선택"
 
-#: src/ui_configurationDialog.h:1083
+#: src/ui_configurationDialog.h:1093
 msgid "Align labels with the horizon"
 msgstr "수평으로 이름표를 정렬합니다"
 
-#: src/ui_configurationDialog.h:1085
+#: src/ui_configurationDialog.h:1095
 msgid "Gravity labels"
 msgstr "중력 이름표"
 
-#: src/ui_configurationDialog.h:1087
+#: src/ui_configurationDialog.h:1097
 msgid "Toggle display backgrounds of the nebulae."
 msgstr "성운의 디스플레이 배경을 전환하기"
 
-#: src/ui_configurationDialog.h:1089
+#: src/ui_configurationDialog.h:1099
 msgid "Show nebula background button"
 msgstr "성운 배경 버튼 보여주기"
 
-#: src/ui_configurationDialog.h:1091
+#: src/ui_configurationDialog.h:1101
 msgid "Toggle vertical and horizontal image flip buttons."
 msgstr "수직과 수평 화면 반전 단추를 켜고 끕니다."
 
-#: src/ui_configurationDialog.h:1093
+#: src/ui_configurationDialog.h:1103
 msgid "Show flip buttons"
 msgstr "반전 단추 보기"
 
-#: src/ui_configurationDialog.h:1095
+#: src/ui_configurationDialog.h:1105
 msgid ""
 "When enabled, the \"auto zoom out\" key will also set the initial viewing "
 "direction"
 msgstr "활성화되면 \"자동 축소\" 키를 눌렀을 때 초기 시야 방향으로도 돌아갑니다"
 
-#: src/ui_configurationDialog.h:1097
+#: src/ui_configurationDialog.h:1107
 msgid "Auto zoom out returns to initial direction of view"
 msgstr "자동 축소 키로 초기 시야 방향으로 돌아가기"
 
-#: src/ui_configurationDialog.h:1099
+#: src/ui_configurationDialog.h:1109
 msgid ""
 "Display solar shadows on planets and moons (For that feature needed OpenGL "
 "version 2 or higher)"
 msgstr "행성과 달 위에 태양 그림자 표시하기(OpenGL 버젼 2 이상 요구됨)"
 
-#: src/ui_configurationDialog.h:1101
+#: src/ui_configurationDialog.h:1111
 msgid "Render Solar Shadows"
 msgstr "태양그림자 표현하기"
 
-#: src/ui_configurationDialog.h:1102
+#: src/ui_configurationDialog.h:1112
 msgid "Screenshots"
 msgstr "스크린샷"
 
-#: src/ui_configurationDialog.h:1103
+#: src/ui_configurationDialog.h:1113
 msgid "Screenshot Directory"
 msgstr "스크린샷 경로"
 
-#: src/ui_configurationDialog.h:1105
+#: src/ui_configurationDialog.h:1115
 msgid "Invert colors"
 msgstr "색 반전"
 
-#: src/ui_configurationDialog.h:1106
+#: src/ui_configurationDialog.h:1116
 msgid "Star catalog updates"
 msgstr "별 목록 업데이트"
 
-#: src/ui_configurationDialog.h:1108
+#: src/ui_configurationDialog.h:1118
 msgid "Click here to start downloading"
 msgstr "내려받으려면 클릭하세요."
 
-#: src/ui_configurationDialog.h:1110
+#: src/ui_configurationDialog.h:1120
 msgid "Download this file to view even more stars"
 msgstr "더 많은 별을 볼 수 있게 파일 내려받기"
 
-#: src/ui_configurationDialog.h:1112
+#: src/ui_configurationDialog.h:1122
 msgid "Restart the download"
 msgstr "내려받기 재기동"
 
-#: src/ui_configurationDialog.h:1114
+#: src/ui_configurationDialog.h:1124
 msgid "Retry"
 msgstr "다시 시도"
 
-#: src/ui_configurationDialog.h:1116
+#: src/ui_configurationDialog.h:1126
 msgid "Stop the download. You can always restart it later"
 msgstr "내려받기 중단. 이후 언제라도 다시 받을 수 있습니다."
 
-#: src/ui_configurationDialog.h:1118
+#: src/ui_configurationDialog.h:1128
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:516
 msgid "Cancel"
 msgstr "취소"
 
-#: src/ui_configurationDialog.h:1121
+#: src/ui_configurationDialog.h:1131
 msgid "Close window when script runs"
 msgstr "스크립트 실행 중에 창 닫기"
 
-#: src/ui_configurationDialog.h:1123
+#: src/ui_configurationDialog.h:1133
 msgid "Run the selected script"
 msgstr "선택한 스크립트 실행"
 
-#: src/ui_configurationDialog.h:1127
+#: src/ui_configurationDialog.h:1137
 msgid "Stop a running script"
 msgstr "실행 중인 스크립트 정지"
 
-#: src/ui_configurationDialog.h:1131
+#: src/ui_configurationDialog.h:1141
 msgid "Load at startup"
 msgstr "시작시 불러오기"
 
-#: src/ui_configurationDialog.h:1132
+#: src/ui_configurationDialog.h:1142
 msgid "configure"
 msgstr "설정"
 
-#: src/ui_configurationDialog.h:1137
+#: src/ui_configurationDialog.h:1147
 msgid "Main"
 msgstr "주 설정"
 
-#: src/ui_configurationDialog.h:1139
+#: src/ui_configurationDialog.h:1149
 msgid "Information"
 msgstr "정보"
 
-#: src/ui_configurationDialog.h:1144
+#: src/ui_configurationDialog.h:1154
 msgid "Navigation"
 msgstr "탐색"
 
-#: src/ui_configurationDialog.h:1146
+#: src/ui_configurationDialog.h:1156
 msgid "Tools"
 msgstr "도구"
 
-#: src/ui_configurationDialog.h:1148
+#: src/ui_configurationDialog.h:1158
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:446
 msgid "Scripts"
 msgstr "스크립트"
 
-#: src/ui_configurationDialog.h:1150
+#: src/ui_configurationDialog.h:1160
 msgid "Plugins"
 msgstr "플러그인"
 
@@ -5813,10 +5814,6 @@ msgstr "#"
 msgid "Status"
 msgstr "상태"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:268
-msgid "Type"
-msgstr "종류"
-
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:284
 #, qt-format
 msgid ""
@@ -6771,16 +6768,16 @@ msgstr "이 플러그인은 역사적으로 몇개의 밝은 초신성을 볼 �
 msgid "Historical Supernovae configuration window"
 msgstr "역대 초신성 구성창"
 
-#: plugins/Supernovae/src/Supernova.cpp:123
+#: plugins/Supernovae/src/Supernova.cpp:117
 msgid "supernova"
 msgstr "초신성"
 
-#: plugins/Supernovae/src/Supernova.cpp:139
+#: plugins/Supernovae/src/Supernova.cpp:133
 #, qt-format
 msgid "Type of supernova: %1"
 msgstr "초신성의 형태:%1"
 
-#: plugins/Supernovae/src/Supernova.cpp:140 plugins/Novae/src/Nova.cpp:142
+#: plugins/Supernovae/src/Supernova.cpp:134 plugins/Novae/src/Nova.cpp:136
 #, qt-format
 msgid "Maximum brightness: %1"
 msgstr "최대 밝기:%1"
@@ -6908,12 +6905,12 @@ msgstr "은하계의 일부 밝은 신성을 보기위해 플러그인."
 msgid "Bright Novae configuration window"
 msgstr "밝은 신성 구성창"
 
-#: plugins/Novae/src/Nova.cpp:126
+#: plugins/Novae/src/Nova.cpp:120
 #, qt-format
 msgid "Type: <b>%1</b> (%2)"
 msgstr "형태:<b>%1</b>(%2)"
 
-#: plugins/Novae/src/Nova.cpp:126
+#: plugins/Novae/src/Nova.cpp:120
 msgid "nova"
 msgstr "신성"
 
@@ -6992,11 +6989,11 @@ msgstr "퀘이사 보여주기"
 msgid "Quasars configuration window"
 msgstr "퀘이사 구성창"
 
-#: plugins/Quasars/src/Quasar.cpp:94
+#: plugins/Quasars/src/Quasar.cpp:88
 msgid "quasar"
 msgstr "퀘이사"
 
-#: plugins/Quasars/src/Quasar.cpp:136
+#: plugins/Quasars/src/Quasar.cpp:130
 #, qt-format
 msgid "Z (redshift): %1"
 msgstr "Z(적색편이):%1"
@@ -7070,115 +7067,115 @@ msgstr "펄사 보여주기"
 msgid "Pulsars configuration window"
 msgstr "펄사 구성창"
 
-#: plugins/Pulsars/src/Pulsar.cpp:128
+#: plugins/Pulsars/src/Pulsar.cpp:122
 msgid "pulsar"
 msgstr "펄사"
 
 #. TRANSLATORS: Unit of measure for period - seconds
-#: plugins/Pulsars/src/Pulsar.cpp:139
+#: plugins/Pulsars/src/Pulsar.cpp:133
 #, qt-format
 msgid "Barycentric period: %1 s"
 msgstr "중심궤도 주기:%1s"
 
-#: plugins/Pulsars/src/Pulsar.cpp:143
+#: plugins/Pulsars/src/Pulsar.cpp:137
 #, qt-format
 msgid "Time derivative of barycentric period: %1"
 msgstr "중심궤도 주기의 시간 도함수:%1"
 
-#: plugins/Pulsars/src/Pulsar.cpp:148
+#: plugins/Pulsars/src/Pulsar.cpp:142
 msgid "Dispersion measure:"
 msgstr "분광 측정:"
 
 #. TRANSLATORS: Unit of measure for distance - centimeters
-#: plugins/Pulsars/src/Pulsar.cpp:151
+#: plugins/Pulsars/src/Pulsar.cpp:145
 msgid "cm"
 msgstr "cm"
 
 #. TRANSLATORS: Unit of measure for distance - parsecs
-#: plugins/Pulsars/src/Pulsar.cpp:154
+#: plugins/Pulsars/src/Pulsar.cpp:148
 msgid "pc"
 msgstr "파섹(pc)"
 
-#: plugins/Pulsars/src/Pulsar.cpp:160
+#: plugins/Pulsars/src/Pulsar.cpp:154
 #, qt-format
 msgid "Spin down energy loss rate: %1 ergs/s"
 msgstr "회전 저하에 따른 에너지 손실 비율:%1 ergs/s"
 
-#: plugins/Pulsars/src/Pulsar.cpp:164
+#: plugins/Pulsars/src/Pulsar.cpp:158
 #, qt-format
 msgid "Binary period of pulsar: %1 days"
 msgstr "펄사의 이진 주기:%1 일"
 
-#: plugins/Pulsars/src/Pulsar.cpp:168
+#: plugins/Pulsars/src/Pulsar.cpp:162
 #, qt-format
 msgid "Eccentricity: %1"
 msgstr "이심률:%1"
 
 #. TRANSLATORS: Unit of measure for annual parallax - milliarcseconds
-#: plugins/Pulsars/src/Pulsar.cpp:173
+#: plugins/Pulsars/src/Pulsar.cpp:167
 #, qt-format
 msgid "Annual parallax: %1 mas"
 msgstr "연간 시차:%1 mas"
 
-#: plugins/Pulsars/src/Pulsar.cpp:177
+#: plugins/Pulsars/src/Pulsar.cpp:171
 #, qt-format
 msgid "Distance based on electron density model: %1 kpc (%2 ly)"
 msgstr "거리는 전자 밀도 모델을 기초로 합니다 : %1 kpc(%2 ly)"
 
-#: plugins/Pulsars/src/Pulsar.cpp:181
+#: plugins/Pulsars/src/Pulsar.cpp:175
 #, qt-format
 msgid "Profile width at 50% of peak: %1 ms"
 msgstr "최대의 50%의 윤곽폭 : %1 ms"
 
 #. TRANSLATORS: Full phrase is "Time averaged flux density at XXXMHz"
-#: plugins/Pulsars/src/Pulsar.cpp:187 plugins/Pulsars/src/Pulsar.cpp:199
-#: plugins/Pulsars/src/Pulsar.cpp:211
+#: plugins/Pulsars/src/Pulsar.cpp:181 plugins/Pulsars/src/Pulsar.cpp:193
+#: plugins/Pulsars/src/Pulsar.cpp:205
 msgid "Time averaged flux density at"
 msgstr "시간에서 자속밀도를 평균"
 
 #. TRANSLATORS: Unit of measurement of frequency
-#: plugins/Pulsars/src/Pulsar.cpp:190 plugins/Pulsars/src/Pulsar.cpp:202
-#: plugins/Pulsars/src/Pulsar.cpp:214
+#: plugins/Pulsars/src/Pulsar.cpp:184 plugins/Pulsars/src/Pulsar.cpp:196
+#: plugins/Pulsars/src/Pulsar.cpp:208
 msgid "MHz"
 msgstr "MHz"
 
 #. TRANSLATORS: mJy is milliJansky(10-26W/m2/Hz)
-#: plugins/Pulsars/src/Pulsar.cpp:193 plugins/Pulsars/src/Pulsar.cpp:205
-#: plugins/Pulsars/src/Pulsar.cpp:217
+#: plugins/Pulsars/src/Pulsar.cpp:187 plugins/Pulsars/src/Pulsar.cpp:199
+#: plugins/Pulsars/src/Pulsar.cpp:211
 msgid "mJy"
 msgstr "mJy"
 
-#: plugins/Pulsars/src/Pulsar.cpp:221
+#: plugins/Pulsars/src/Pulsar.cpp:215
 #, qt-format
 msgid "Notes: %1"
 msgstr "공지:%1"
 
-#: plugins/Pulsars/src/Pulsar.cpp:283
+#: plugins/Pulsars/src/Pulsar.cpp:277
 msgid ""
 "anomalous X-ray pulsar or soft gamma-ray repeater with detected pulsations"
 msgstr "비정상적인 X-선 펄사 또는 발견된 맥동을 가진 SGR(저에너지 감마선의 섬광을 반복해서 방출하는 특이한 별)"
 
-#: plugins/Pulsars/src/Pulsar.cpp:288
+#: plugins/Pulsars/src/Pulsar.cpp:282
 msgid "has one or more binary companions"
 msgstr "하나 이상의 이중 동반자를 가지고 있다."
 
-#: plugins/Pulsars/src/Pulsar.cpp:293
+#: plugins/Pulsars/src/Pulsar.cpp:287
 msgid "with pulsed emission from radio to infrared or higher frequencies"
 msgstr "전파에서 적외선 또는 더 높은 주파수로 펄스 방출을 가지고"
 
-#: plugins/Pulsars/src/Pulsar.cpp:298
+#: plugins/Pulsars/src/Pulsar.cpp:292
 msgid "with pulsed emission only at infrared or higher frequencies"
 msgstr "단지 적외선 또는 더 높은 주파수로 펄스 방출을 가지고"
 
-#: plugins/Pulsars/src/Pulsar.cpp:303
+#: plugins/Pulsars/src/Pulsar.cpp:297
 msgid "with pulsed emission in the radio band"
 msgstr "전파영역에서 펄스 방출을 가지고"
 
-#: plugins/Pulsars/src/Pulsar.cpp:308
+#: plugins/Pulsars/src/Pulsar.cpp:302
 msgid "with intermittently pulsed radio emission"
 msgstr "간헐적 펄스 전파 방출을 가지고"
 
-#: plugins/Pulsars/src/Pulsar.cpp:313
+#: plugins/Pulsars/src/Pulsar.cpp:307
 msgid ""
 "isolated neutron star with pulsed thermal X-ray emission but no detectable "
 "radio emission"
@@ -7276,77 +7273,78 @@ msgstr "외계 행성 보기"
 msgid "Exoplanets configuration window"
 msgstr "외계행성 구성창"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:190
+#: plugins/Exoplanets/src/Exoplanet.cpp:146
+#: plugins/Exoplanets/src/Exoplanet.cpp:198
+msgid "Exoplanet"
+msgstr "외계행성"
+
+#: plugins/Exoplanets/src/Exoplanet.cpp:182
 msgid "Metallicity"
 msgstr "금속성"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:194
-#: plugins/Exoplanets/src/Exoplanet.cpp:208
+#: plugins/Exoplanets/src/Exoplanet.cpp:186
+#: plugins/Exoplanets/src/Exoplanet.cpp:200
 msgid "Mass"
 msgstr "질량"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:198
-#: plugins/Exoplanets/src/Exoplanet.cpp:209
+#: plugins/Exoplanets/src/Exoplanet.cpp:190
+#: plugins/Exoplanets/src/Exoplanet.cpp:201
 msgid "Radius"
 msgstr "반지름"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:202
+#: plugins/Exoplanets/src/Exoplanet.cpp:194
 #, qt-format
 msgid "Effective temperature: %1 K"
 msgstr "유효온도:%1K"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:206
-msgid "Exoplanet"
-msgstr "외계행성"
-
-#: plugins/Exoplanets/src/Exoplanet.cpp:207
+#: plugins/Exoplanets/src/Exoplanet.cpp:199
 msgid "Period"
 msgstr "주기"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:207
+#: plugins/Exoplanets/src/Exoplanet.cpp:199
 msgid "days"
 msgstr "날짜"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:208
-#: plugins/Exoplanets/src/Exoplanet.cpp:209
+#: plugins/Exoplanets/src/Exoplanet.cpp:200
+#: plugins/Exoplanets/src/Exoplanet.cpp:201
 msgid "Jup"
 msgstr "목성"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:210
+#: plugins/Exoplanets/src/Exoplanet.cpp:202
 msgid "Semi-Major Axis"
 msgstr "반-주요축"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:210
+#: plugins/Exoplanets/src/Exoplanet.cpp:202
 msgid "AU"
 msgstr "AU"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:211
+#: plugins/Exoplanets/src/Exoplanet.cpp:203
 msgid "Eccentricity"
 msgstr "이심률"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:212
+#: plugins/Exoplanets/src/Exoplanet.cpp:204
 msgid "Inclination"
 msgstr "궤도 경사각"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:213
+#: plugins/Exoplanets/src/Exoplanet.cpp:205
 msgid "Angle Distance"
 msgstr "각거리"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:214
+#: plugins/Exoplanets/src/Exoplanet.cpp:206
 msgid "Discovered year"
 msgstr "발견된 년도"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:215
+#: plugins/Exoplanets/src/Exoplanet.cpp:207
 msgid "Habitable class"
 msgstr "생명체 거주 등급"
 
 #. TRANSLATORS: Full phrase is "Mean Surface Temperature"
-#: plugins/Exoplanets/src/Exoplanet.cpp:217
+#: plugins/Exoplanets/src/Exoplanet.cpp:209
 msgid "Mean surface temp."
 msgstr "평균 표면 온도"
 
 #. TRANSLATORS: ESI = Earth Similarity Index
-#: plugins/Exoplanets/src/Exoplanet.cpp:219
+#: plugins/Exoplanets/src/Exoplanet.cpp:211
 msgid "ESI"
 msgstr "지구유사성지수(ESI)"
 
@@ -8114,6 +8112,10 @@ msgstr "박명에서 태양고도: 0도."
 #~ msgid "Select object"
 #~ msgstr "천체 찾기"
 
+#, qt-format
+#~ msgid "Magnitude: <b>%1</b> (B-V: %2)"
+#~ msgstr "등급: <b>%1</b>(B-V: %2)"
+
 #~ msgid "Correct for light travel time: "
 #~ msgstr "빛의 여행 시간에 맞게 고치세요: "
 
@@ -8306,6 +8308,10 @@ msgstr "박명에서 태양고도: 0도."
 
 #~ msgid "(geometric)"
 #~ msgstr "(기하학적)"
+
+#, qt-format
+#~ msgid "Apparent Magnitude: <b>%1</b> (by extinction)"
+#~ msgstr "절대 등급: <b>%1</b> (by extinction)"
 
 #~ msgid "Show and zoom Moon"
 #~ msgstr "보여주고 달 확대하기"
