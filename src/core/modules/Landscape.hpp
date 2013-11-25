@@ -60,7 +60,6 @@ public:
 	//! Load landscape.
 	//! @param landscapeIni A reference to an existing QSettings object which describes the landscape
 	//! @param landscapeId The name of the directory for the landscape files (e.g. "ocean")
-	//         TBD: Is this really only last part of directory? Or fullPath?
 	virtual void load(const QSettings& landscapeIni, const QString& landscapeId) = 0;
 	virtual void draw(StelCore* core) = 0;
 	void update(double deltaTime)
@@ -94,17 +93,16 @@ public:
 	int getDefaultBortleIndex() const {return defaultBortleIndex;}
 	//! Return default fog setting (0/1) or -1 (no change)
 	int getDefaultFogSetting() const {return defaultFogSetting;}
-  	//! Return default atmosperic extinction, mag/airmass, or -1 (no change)
+	//! Return default atmosperic extinction [mag/airmass], or -1 (no change)
 	float getDefaultAtmosphericExtinction() const {return defaultExtinctionCoefficient;}
-	//! Return configured atmospheric temperature, for refraction computation, or -1000 for "unknown/no change".
+	//! Return configured atmospheric temperature [degrees Celsius], for refraction computation, or -1000 for "unknown/no change".
 	float getDefaultAtmosphericTemperature() const {return defaultTemperature;}
-	//! Return configured atmospheric pressure, for refraction computation.
+	//! Return configured atmospheric pressure [mbar], for refraction computation.
 	//! returns -1 to signal "standard conditions" [compute from altitude], or -2 for "unknown/invalid/no change"
 	float getDefaultAtmosphericPressure() const {return defaultPressure;}
-	//! Return default brightness for landscape
+	//! Return minimal brightness for landscape
 	//! returns -1 to signal "standard conditions" (use default value from config.ini)
-	float getLandscapeNightBrightness() const {return defaultBrightness;}
-	// GZ: RENAME TO getLandscapeMinBrightness()?
+	float getLandscapeMinimalBrightness() const {return minBrightness;}
 
 	//! Set an additional z-axis (azimuth) rotation after landscape has been loaded.
 	//! This is intended for special uses such as when the landscape consists of
@@ -117,7 +115,7 @@ public:
 	//! Get whether the landscape is currently fully visible (i.e. opaque).
 	bool getIsFullyVisible() const {return landFader.getInterstate() >= 0.999f;}
 
-	// GZ: NEW FUNCTION: USEFUL IF ALL SUBCLASSES IMPLEMENT THIS TEXTURE LOOKUP.
+	// GZ: NEW FUNCTION: USEFUL IF ALL SUBCLASSES IMPLEMENT THIS.
 	//! can be used to find sunrise or visibility questions on the real-world landscape horizon.
 	//! Default implementation indicated the horizon never blocks view, i.e. sunrise etc.
 	//! can be computed on the math horizon without interfering.
@@ -128,6 +126,11 @@ protected:
 	//! @param landscapeIni A reference to an existing QSettings object which describes the landscape
 	//! @param landscapeId The name of the directory for the landscape files (e.g. "ocean")
 	void loadCommon(const QSettings& landscapeIni, const QString& landscapeId);
+	//! Create a StelSphericalPolygon that describes a measured horizon line. If present, this can be used to draw a horizon line
+	//! or simplify the functionality to discern if an object is below the horizon.
+	//! @param _lineFileName A text file with lines that are either empty or comment lines starting with # or azimuth altitude [degrees]
+	//! @param _polyAngleRotateZ possibility to set some final calibration offset like meridian convergence correction.
+	void createPolygonalHorizon(const QString& _lineFileName, const float _polyAngleRotateZ);
 
 	//! search for a texture in landscape directory, else global textures directory
 	//! @param basename The name of a texture file, e.g. "fog.png"
@@ -135,12 +138,12 @@ protected:
 	//! @exception misc possibility of throwing "file not found" exceptions
 	const QString getTexturePath(const QString& basename, const QString& landscapeId);
 	float radius;
-	QString name;          //! GZ:  Given in landscape.ini:[landscape]name TBD: VERIFY
-	QString author;        //! GZ:  Given in landscape.ini:[landscape]author TBD: VERIFY
-	QString description;   //! GZ:  Given in landscape.ini:[landscape]description TBD: VERIFY
+	QString name;          //! GZ:  Given in landscape.ini:[landscape]name
+	QString author;        //! GZ:  Given in landscape.ini:[landscape]author
+	QString description;   //! GZ:  Given in landscape.ini:[landscape]description
 	float skyBrightness;
 	float nightBrightness;
-	float defaultBrightness; //! GZ: some small brightness, allows minimum visibility that cannot be underpowered. VERIFY
+	float minBrightness; //! GZ: some small brightness, allows minimum visibility that cannot be underpowered. VERIFY
 	float lightScapeBrightness; //! can be used to draw nightscape texture (e.g. city light pollution), if available.
 	bool validLandscape;   //! was a landscape loaded properly?
 	LinearFader landFader; //! Used to slowly fade in/out landscape painting.
@@ -166,11 +169,12 @@ protected:
 	float angleRotateZOffset; //! [radians] This is a rotation changeable at runtime via setZRotation (called by LandscapeMgr::setZRotation).
 							  //! Not in landscape.ini: Used in special cases where the horizon may rotate, e.g. on a ship.
 	// GZ NEW: Optional elements which, if present, describe a horizon polygon. They can be used to render a line or a filled region, esp. in LandscapePolygonal
-	QString horizonFileName; //! GZ NEW: optional filename (within landscape dir) with a definition of the horizon line.
-	SphericalPolygon *horizonPolygon; //! Optional element describing the horizon line.
+	//QString horizonFileName; //! GZ NEW: optional filename (within landscape dir) with a definition of the horizon line.
+	float polygonAngleRotateZ; // [radians] GZ NEW: rotation (may fall back to angleRotateZ, but allows individual rotation of the polygonal horizon line)
+	SphericalRegionP horizonPolygon; //! Optional element describing the horizon line.
 									  //! Data shall be read from the file given as landscape.ini[landscape]horizon_list
 									  //! For LandscapePolygonal, this is the only horizon data item.
-	Vec3f horizonLineColor ;    //! for all horizon types, the horizonPolygon line, if specified, will be drawn in this color
+	Vec3f horizonPolygonLineColor ;    //! for all horizon types, the horizonPolygon line, if specified, will be drawn in this color
 								//! specified in landscape.ini[landscape]horizon_line_color. TBD: Default?
 };
 
@@ -232,8 +236,13 @@ private:
 /////////////////////////////////////////////////////////
 ///
 //! @class LandscapePolygonal
-//! This uses the list of (usually measured) horizon altitudes to define the horizon. It will be colored
-// GZ TODO: Implement...
+//! This uses the list of (usually measured) horizon altitudes to define the horizon.
+//! Define it with the following names in landscape.ini:
+//! @param landscape/ground_color use this color below horizon
+//! @param landscape/polygonal_horizon_list filename containing azimuths/altitudes, compatible with Carte du Ciel.
+//! @param landscape/polygonal_angle_rotatez offset for the polygonal measurement
+//!        (defaults to landscape/angle_rotatez in mixed panos, in case photo and line are aligned.)
+//!        TBD: MOVE THAT TO loadCommon()!
 class LandscapePolygonal : public Landscape
 {
 public:
@@ -241,11 +250,11 @@ public:
 	virtual ~LandscapePolygonal();
 	virtual void load(const QSettings& landscapeIni, const QString& landscapeId);
 	virtual void draw(StelCore* core);
-	void create(const QString _name, const QString& _lineFileName, const float _angleRotateZ=0.0f);
+//	void create(const QString _name, const QString& _lineFileName, const float _polyAngleRotateZ=0.0f);
 	virtual float getOpacity(const Vec3d azalt) const;
 private:
-	// we have inherited: horizonFileName, horizonPolygon, horizonPolygonColor
-	Vec3f groundColor; //! specified in landscape.ini[landscape]ground_color.
+	// we have inherited: horizonFileName, horizonPolygon, horizonPolygonLineColor
+	Vec3f horizonPolygonGroundColor; //! specified in landscape.ini[landscape]ground_color.
 };
 
 ///////////////////////////////////////////////////////////////
