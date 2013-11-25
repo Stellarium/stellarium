@@ -39,14 +39,7 @@ Landscape::Landscape(float _radius) : radius(_radius), skyBrightness(1.), nightB
 }
 
 Landscape::~Landscape()
-{
-	if (horizonPolygon)
-	{
-		delete horizonPolygon;
-		horizonPolygon=NULL;
-	}
-
-}
+{}
 
 
 // Load attributes common to all landscapes
@@ -101,13 +94,67 @@ void Landscape::loadCommon(const QSettings& landscapeIni, const QString& landsca
 	defaultExtinctionCoefficient = landscapeIni.value("location/atmospheric_extinction_coefficient", -1.0).toDouble();
 	defaultTemperature = landscapeIni.value("location/atmospheric_temperature", -1000.0).toDouble();
 	defaultPressure = landscapeIni.value("location/atmospheric_pressure", -2.0).toDouble(); // -2=no change! [-1=computeFromAltitude]
-	// Set night (minimal) brightness for landscape
-	defaultBrightness = landscapeIni.value("landscape/initial_brightness", -1.0).toDouble();
+	// Set minimal brightness for landscape
+	minBrightness = landscapeIni.value("landscape/minimal_brightness", -1.0).toDouble();
 
-	//TODO: If a list of horizon altitudes is present, we must load this also here.
-	// This line can then be drawn in all classes with the color specified here:
-	horizonLineColor=StelUtils::strToVec3f( landscapeIni.value("landscape/horizon_line_color", "0.5,0,0" ).toString() );
+	// This is now optional for all classes, for mixing with a photo horizon:
+	// they may have different offsets, like a south-centered pano and a geographically-oriented polygon.
+	// In case they are aligned, we can use one value angle_rotatez, or define the polygon rotation individually.
+	if (landscapeIni.contains("landscape/polygonal_horizon_list"))
+	{
+		createPolygonalHorizon(
+					StelFileMgr::findFile("landscapes/" + landscapeId + "/" + landscapeIni.value("landscape/polygonal_horizon_list").toString()),
+					landscapeIni.value("landscape/polygonal_angle_rotatez", 0.f).toFloat());
+		// This line can then be drawn in all classes with the color specified here. If not specified, don't draw it! (flagged by negative red)
+		horizonPolygonLineColor=StelUtils::strToVec3f( landscapeIni.value("landscape/horizon_line_color", "-1,0,0" ).toString());
+	}
+}
 
+void Landscape::createPolygonalHorizon(const QString& _lineFileName, const float _polyAngleRotateZ)
+{
+	// qDebug() << _name << " " << _fullpath << " " << _lineFileName ;
+
+	QVector<Vec3d> horiPoints(0);
+	QFile file(_lineFileName);
+
+	if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
+	{
+		qWarning() << "Landscape Horizon line data file" << QDir::toNativeSeparators(_lineFileName) << "not found.";
+		return;
+	}
+	QRegExp emptyLine("^\\s*$");
+	QTextStream in(&file);
+	while (!in.atEnd())
+	{
+		// Build list of vertices. The checks can certainly become more robust.
+		QString line = in.readLine();
+		//line=line.trimmed(); // crash?
+		if (line.length()==0) continue;
+		if (emptyLine.exactMatch((line))) continue;
+		if (line.at(0)=='#') continue; // skip comment lines.
+		//if (line.isEmpty()) continue;
+		QStringList list = line.split(QRegExp("\\b\\s+\\b"));
+		if (list.count() != 2)
+		{
+			qWarning() << "Landscape polygon file" << QDir::toNativeSeparators(_lineFileName) << "has bad line:" << line << "with" << list.count() << "elements";
+			continue;
+		}
+		Vec3d point;
+		//qDebug() << "Creating point for az=" << list.at(0) << " alt=" << list.at(1);
+		StelUtils::spheToRect((180.0f - _polyAngleRotateZ - list.at(0).toFloat())*M_PI/180.f, list.at(1).toFloat()*M_PI/180.f, point);
+		horiPoints.append(point);
+	}
+	qDebug() << "closing file" ;
+	file.close();
+	horiPoints.append(horiPoints.at(0)); // close loop? Apparently not necessary.
+
+	//qDebug() << "created horiPoints with " << horiPoints.count() << "points:";
+	//for (int i=0; i<horiPoints.count(); ++i)
+	//	qDebug() << horiPoints.at(i)[0] << "/" << horiPoints.at(i)[1] << "/" << horiPoints.at(i)[2] ;
+	AllSkySphericalRegion allskyRegion;
+	SphericalPolygon aboveHorizonPolygon;
+	aboveHorizonPolygon.setContour(horiPoints);
+	horizonPolygon = allskyRegion.getSubtraction(aboveHorizonPolygon);
 }
 
 #include <iostream>
@@ -410,6 +457,13 @@ void LandscapeOldStyle::drawGround(StelCore* core, StelPainter& sPainter) const
 
 float LandscapeOldStyle::getOpacity(const Vec3d azalt) const
 {
+	// in case we also have a horizon polygon defined, this is trivial and fast.
+	if (horizonPolygon)
+	{
+		if (horizonPolygon->contains(azalt)	) return 1.0f; else return 0.0f;
+	}
+	// Else, sample the image...
+
 	const float alt_rad = std::asin(azalt[2]);  // sampled altitude, radians
 	if (alt_rad < decorAngleShift*M_PI/180.0f) return 1.0f; // below decor, i.e. certainly soil.
 	if (alt_rad > (decorAltAngle+decorAngleShift)*M_PI/180.0f) return 0.0f; // above decor, i.e. certainly sky.
@@ -430,19 +484,13 @@ LandscapePolygonal::LandscapePolygonal(float _radius) : Landscape(_radius)
 {}
 
 LandscapePolygonal::~LandscapePolygonal()
-{
-	if (horizonPolygon)
-	{
-		delete horizonPolygon;
-		horizonPolygon=NULL;
-	}
-}
+{}
 
 void LandscapePolygonal::load(const QSettings& landscapeIni, const QString& landscapeId)
 {
-	loadCommon(landscapeIni, landscapeId);
-	groundColor=StelUtils::strToVec3f( landscapeIni.value("landscape/ground_color", "0,0,0" ).toString() );
+	// loading the polygon has been moved to Landscape::loadCommon(), so that all Landscape classes can use a polygon line.
 
+	loadCommon(landscapeIni, landscapeId);
 	QString type = landscapeIni.value("landscape/type").toString();
 	if(type != "polygonal")
 	{
@@ -450,78 +498,17 @@ void LandscapePolygonal::load(const QSettings& landscapeIni, const QString& land
 		validLandscape = 0;
 		return;
 	}
-	create(name,
-		   StelFileMgr::findFile("landscapes/" + landscapeId + "/" + landscapeIni.value("landscape/horizon_list").toString()),
-			landscapeIni.value("landscape/angle_rotatez", 0.f).toFloat());
-}
 
-
-void LandscapePolygonal::create(const QString _name, const QString& _lineFileName, const float _angleRotateZ)
-{
-	// qDebug() << _name << " " << _fullpath << " " << _lineFileName ;
-	validLandscape = 1;  // assume ok...
-	name = _name;
-	angleRotateZ = _angleRotateZ*M_PI/180.f;
-	// TODO: Load&parse _linefilename, create SphericalPolygon. Note that loading the polygon may be moved to Landscape::loadCommon()!
-	Q_UNUSED(_lineFileName); // FOR NOW...
-
-
-	QVector<Vec3d> horiPoints(0);
-	QFile file(_lineFileName);
-
-	if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
+	if (horizonPolygon.isNull())
 	{
-		qWarning() << "Landscape Horizon line data file" << QDir::toNativeSeparators(_lineFileName) << "not found.";
+		qWarning() << "Landscape " << landscapeId << " does not declare a valid polygonal_horizon_list.  No landscape in use.\n";
+		validLandscape = 0;
 		return;
 	}
-	QRegExp emptyLine("^\\s*$");
-	QTextStream in(&file);
-	while (!in.atEnd())
-	{
-		// Build list of vertices. The checks can certainly become more robust.
-		QString line = in.readLine();
-		//line=line.trimmed(); // crash?
-		if (line.at(0)=='#') continue; // skip comment lines.
-		//if (line.isEmpty()) continue;
-		if (emptyLine.exactMatch((line))) continue;
-		QStringList list = line.split(QRegExp("\\b\\s+\\b"));
-		if (list.count() != 2)
-		{
-			qWarning() << "Landscape Horizon data file" << QDir::toNativeSeparators(_lineFileName) << "has bad line:" << line << "with" << list.count() << "elements";
-			continue;
-		}
-		Vec3d point;
-		qDebug() << "Creating point for az=" << list.at(0) << " alt=" << list.at(1);
-		// It is possible that the azimuths have to be subtracted from 360! (or some other rotation)
-		//StelUtils::spheToRect((90.0f-list.at(0).toFloat())*M_PI/180.f, list.at(1).toFloat()*M_PI/180.f, point);
-		//StelUtils::spheToRect(list.at(0).toFloat()*M_PI/180.f, list.at(1).toFloat()*M_PI/180.f, point);
-		float az_enws= 180.0f - list.at(0).toFloat();
-		//az_enws=fmodf(az_enws, 360.0f); if (az_enws<0.0f) az_enws+=360.0f;
-		StelUtils::spheToRect(az_enws*M_PI/180.f, list.at(1).toFloat()*M_PI/180.f, point);
 
-		horiPoints.append(point);
-	}
-	file.close();
-	//horiPoints.append(horiPoints.at(0)); // close loop. Is this necessary?
-	horiPoints.append(horiPoints.at(0)); // close loop. Is this necessary?
-
-	qDebug() << "created horiPoints with " << horiPoints.count() << "points:";
-	for (int i=0; i<horiPoints.count(); ++i)
-		qDebug() << horiPoints.at(i)[0] << "/" << horiPoints.at(i)[1] << "/" << horiPoints.at(i)[2] ;
-	//horiPoints.
-	horizonPolygon = new SphericalPolygon(horiPoints);
-
-//	QVector<Vec3d> cpole(4);
-//	StelUtils::spheToRect(0.1,M_PI/2.-0.1, cpole[3]);
-//	StelUtils::spheToRect(0.1+M_PI/2., M_PI/2.-0.1, cpole[2]);
-//	StelUtils::spheToRect(0.1+M_PI, M_PI/2.-0.1, cpole[1]);
-//	StelUtils::spheToRect(0.1+M_PI+M_PI/2.,M_PI/2.-0.1, cpole[0]);
-//	//northPoleSquare.setContour(cpole);
-//	horizonPolygon=new SphericalPolygon(cpole);
-
-
+	horizonPolygonGroundColor=StelUtils::strToVec3f( landscapeIni.value("landscape/ground_color", "0,0,0" ).toString() );
+	validLandscape = 1;  // assume ok...
 }
-
 
 void LandscapePolygonal::draw(StelCore* core)
 {
@@ -529,30 +516,25 @@ void LandscapePolygonal::draw(StelCore* core)
 	if(!landFader.getInterstate()) return;
 
 	StelProjector::ModelViewTranformP transfo = core->getAltAzModelViewTransform(StelCore::RefractionOff);
-	transfo->combine(Mat4d::zrotation(-(angleRotateZ+angleRotateZOffset)));
+	transfo->combine(Mat4d::zrotation(-angleRotateZOffset));
 	const StelProjectorP prj = core->getProjection(transfo);
 	StelPainter sPainter(prj);
 
 	// Normal transparency mode for the transition blending
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	//glEnable(GL_CULL_FACE);
-	//sPainter.enableTexture2d(true);
+	glEnable(GL_CULL_FACE);
 	glEnable(GL_BLEND);
-	//mapTex->bind();
-	//sPainter.sSphereMap(radius,cols,rows,texFov,1);
-	// TODO: DRAW POLYGON HERE. What has to be done here?
-
-	//StelVertexArray vertices=horizonPolygon->getOctahedronPolygon().getFillVertexArray();
-	// TODO: Draw landscape BELOW, not above...
-	sPainter.setColor(skyBrightness*groundColor[0], skyBrightness*groundColor[1], skyBrightness*groundColor[2], landFader.getInterstate());
-	sPainter.drawSphericalRegion(horizonPolygon, StelPainter::SphericalPolygonDrawModeFill);
+	sPainter.setColor(skyBrightness*horizonPolygonGroundColor[0], skyBrightness*horizonPolygonGroundColor[1], skyBrightness*horizonPolygonGroundColor[2], landFader.getInterstate());
+	sPainter.drawSphericalRegion(horizonPolygon.data(), StelPainter::SphericalPolygonDrawModeFill);
 
 	// This line may be available in all landscape types if horizonPolygon is present. Currently only here:
-	// TODO: remove spurious line towards zenith.
-	sPainter.setColor(skyBrightness*horizonLineColor[0], skyBrightness*horizonLineColor[1], skyBrightness*horizonLineColor[2], landFader.getInterstate());
-	sPainter.drawSphericalRegion(horizonPolygon, StelPainter::SphericalPolygonDrawModeBoundary);
-
-	//glDisable(GL_CULL_FACE);
+	// TODO: remove spurious line at begin of the octahedronPolygon's cachedVertexArray.
+	if (horizonPolygonLineColor[0] >= 0)
+	{
+		sPainter.setColor(horizonPolygonLineColor[0], horizonPolygonLineColor[1], horizonPolygonLineColor[2], landFader.getInterstate());
+		sPainter.drawSphericalRegion(horizonPolygon.data(), StelPainter::SphericalPolygonDrawModeBoundary);
+	}
+	glDisable(GL_CULL_FACE);
 }
 
 float LandscapePolygonal::getOpacity(const Vec3d azalt) const
@@ -560,10 +542,7 @@ float LandscapePolygonal::getOpacity(const Vec3d azalt) const
 	//	qDebug() << "Landscape sampling: az=" << (az+angleRotateZ)/M_PI*180.0f << "° alt=" << alt_rad/M_PI*180.f
 	//			 << "°, w=" << mapImage->width() << " h=" << mapImage->height()
 	//			 << " --> x:" << x << " y:" << y << " alpha:" << qAlpha(pixVal)/255.0f;
-	// TODO: Make sure azalt is oriented properly...
 	if (horizonPolygon->contains(azalt)	) return 1.0f; else return 0.0f;
-
-
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////
@@ -660,6 +639,13 @@ void LandscapeFisheye::draw(StelCore* core)
 
 float LandscapeFisheye::getOpacity(const Vec3d azalt) const
 {
+	// in case we also have a horizon polygon defined, this is trivial and fast.
+	if (horizonPolygon)
+	{
+		if (horizonPolygon->contains(azalt)	) return 1.0f; else return 0.0f;
+	}
+	// Else, sample the image...
+
 	// QImage has pixel 0/0 in top left corner.
 	// The texture is taken from the center circle in the square texture.
 	// It is possible that sample position is outside. in this case, assume full opacity and exit early.
@@ -695,6 +681,10 @@ LandscapeSpherical::~LandscapeSpherical()
 void LandscapeSpherical::load(const QSettings& landscapeIni, const QString& landscapeId)
 {
 	loadCommon(landscapeIni, landscapeId);
+	if (horizonPolygon)
+		qDebug() << "This landscape, " << landscapeId << ", has a polygon defined!" ;
+	else
+		qDebug() << "This landscape, " << landscapeId << ", has no polygon defined!" ;
 
 	QString type = landscapeIni.value("landscape/type").toString();
 	if (type != "spherical")
@@ -765,9 +755,10 @@ void LandscapeSpherical::draw(StelCore* core)
 	mapTex->bind();
 
 	// TODO: verify that this works correctly for custom projections [comment not by GZ]
-	// seam is at East, except angleRotateZ has been given.
+	// seam is at East, except if angleRotateZ has been given.
 	sPainter.sSphere(radius, 1.0, cols, rows, 1, true, mapTexTop, mapTexBottom);
-	// GZ: NEW PARTS: Fog also for sphericals...
+	// GZ: NEW PARTS:
+	// Fog also for sphericals...
 	if (mapTexFog)
 	{
 		//glBlendFunc(GL_ONE, GL_ONE); // GZ: blending mode as found in the old_style landscapes...
@@ -779,15 +770,32 @@ void LandscapeSpherical::draw(StelCore* core)
 		sPainter.sSphere(radius, 1.0, cols, (int) ceil(rows*(fogTexTop-fogTexBottom)/(mapTexTop-mapTexBottom)), 1, true, fogTexTop, fogTexBottom);
 	}
 
-	// GZ new feature. This looks striking!
+	// Self-luminous layer (Light pollution etc). This looks striking!
 	if (mapTexIllum && lightScapeBrightness>0.0f)
 	{
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE);
 		sPainter.setColor(lightScapeBrightness, lightScapeBrightness, lightScapeBrightness, landFader.getInterstate());
 		mapTexIllum->bind();
 		sPainter.sSphere(radius, 1.0, cols, (int) ceil(rows*(illumTexTop-illumTexBottom)/(mapTexTop-mapTexBottom)), 1, true, illumTexTop, illumTexBottom);
+	}	
+	//qDebug() << "before drawing line";
+
+	// If a horizon line also has been defined, draw it.
+	if (horizonPolygon && (horizonPolygonLineColor[0] >= 0))
+	{
+		//qDebug() << "drawing line";
+		transfo = core->getAltAzModelViewTransform(StelCore::RefractionOff);
+		transfo->combine(Mat4d::zrotation(-angleRotateZOffset));
+		const StelProjectorP prj = core->getProjection(transfo);
+		sPainter.setProjector(prj);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		// TODO: remove spurious line at begin of the octahedronPolygon's cachedVertexArray.
+		sPainter.setColor(horizonPolygonLineColor[0], horizonPolygonLineColor[1], horizonPolygonLineColor[2], landFader.getInterstate());
+		sPainter.drawSphericalRegion(horizonPolygon.data(), StelPainter::SphericalPolygonDrawModeBoundary);
 	}
+	//else qDebug() << "no polygon defined";
 	glDisable(GL_CULL_FACE);
+
 }
 
 //! Sample landscape texture for transparency. May be used for advanced visibility, sunrise on the visible horizon etc.
@@ -795,6 +803,14 @@ void LandscapeSpherical::draw(StelCore* core)
 //! @retval alpha (0..1), where 0=fully transparent.
 float LandscapeSpherical::getOpacity(const Vec3d azalt) const
 {
+
+	// in case we also have a horizon polygon defined, this is trivial and fast.
+	if (horizonPolygon)
+	{
+		if (horizonPolygon->contains(azalt)	) return 1.0f; else return 0.0f;
+	}
+	// Else, sample the image...
+
 	// QImage has pixel 0/0 in top left corner. We must first find image Y for optionally cropped images.
 	// It is possible that sample position is outside cropped texture. in this case, assume full transparency and exit early.
 	const float alt_pm1 = 2.0f * std::asin(azalt[2])  / M_PI;  // sampled altitude, -1...+1 linear in altitude angle
