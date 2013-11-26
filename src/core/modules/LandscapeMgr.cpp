@@ -233,12 +233,15 @@ void LandscapeMgr::update(double deltaTime)
 	sunPos.normalize();
 	moonPos.normalize();
 
-	float landscapeBrightness; // Maybe set default 0.025?
-	// Setting for landscapes has priority if it enabled
-	if (landscape->getLandscapeMinimalBrightness()>=0 && getFlagLandscapeMinimalBrightness())
-		landscapeBrightness = landscape->getLandscapeMinimalBrightness();
-	else
-		landscapeBrightness = getDefaultMinimalBrightness();
+	float landscapeBrightness=0.0f;
+	if (getFlagLandscapeUseMinimalBrightness())
+	{
+		// Setting from landscape.ini has priority if enabled
+		if (getFlagLandscapeSetsMinimalBrightness() && landscape->getLandscapeMinimalBrightness()>=0)
+			landscapeBrightness = landscape->getLandscapeMinimalBrightness();
+		else
+			landscapeBrightness = getDefaultMinimalBrightness();
+	}
 
 	// We define the solar brightness contribution zero when the sun is 8 degrees below the horizon.
 	float sinSunAngle = sin(qMin(M_PI_2, asin(sunPos[2])+8.*M_PI/180.));
@@ -314,7 +317,8 @@ void LandscapeMgr::init()
 	setFlagLandscapeAutoSelection(conf->value("viewing/flag_landscape_autoselection", false).toBool());
 	// Set minimal brightness for landscape. This feature has been added for folks which say "landscape is super dark, please add light". --AW
 	setDefaultMinimalBrightness(conf->value("landscape/minimal_brightness", 0.01).toFloat());
-	setFlagLandscapeMinimalBrightness(conf->value("landscape/flag_minimal_brightness",false).toBool());
+	setFlagLandscapeUseMinimalBrightness(conf->value("landscape/flag_minimal_brightness", false).toBool());
+	setFlagLandscapeSetsMinimalBrightness(conf->value("landscape/flag_landscape_sets_minimal_brightness",false).toBool());
 
 	bool ok =true;
 	setAtmosphereBortleLightPollution(conf->value("stars/init_bortle_scale",3).toInt(&ok));

@@ -527,8 +527,6 @@ void LandscapePolygonal::draw(StelCore* core)
 	sPainter.setColor(skyBrightness*horizonPolygonGroundColor[0], skyBrightness*horizonPolygonGroundColor[1], skyBrightness*horizonPolygonGroundColor[2], landFader.getInterstate());
 	sPainter.drawSphericalRegion(horizonPolygon.data(), StelPainter::SphericalPolygonDrawModeFill);
 
-	// This line may be available in all landscape types if horizonPolygon is present. Currently only here:
-	// TODO: remove spurious line at begin of the octahedronPolygon's cachedVertexArray.
 	if (horizonPolygonLineColor[0] >= 0)
 	{
 		sPainter.setColor(horizonPolygonLineColor[0], horizonPolygonLineColor[1], horizonPolygonLineColor[2], landFader.getInterstate());
@@ -539,9 +537,6 @@ void LandscapePolygonal::draw(StelCore* core)
 
 float LandscapePolygonal::getOpacity(const Vec3d azalt) const
 {
-	//	qDebug() << "Landscape sampling: az=" << (az+angleRotateZ)/M_PI*180.0f << "° alt=" << alt_rad/M_PI*180.f
-	//			 << "°, w=" << mapImage->width() << " h=" << mapImage->height()
-	//			 << " --> x:" << x << " y:" << y << " alpha:" << qAlpha(pixVal)/255.0f;
 	if (horizonPolygon->contains(azalt)	) return 1.0f; else return 0.0f;
 }
 
