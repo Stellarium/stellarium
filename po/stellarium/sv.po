@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-11-24 14:46+0700\n"
-"PO-Revision-Date: 2013-07-21 15:57+0000\n"
-"Last-Translator: Jonas Persson <jonas.persson@physics.org>\n"
+"PO-Revision-Date: 2013-11-26 04:21+0000\n"
+"Last-Translator: Julius Grantén <jgranten@gmail.com>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-11-25 05:27+0000\n"
-"X-Generator: Launchpad (build 16831)\n"
+"X-Launchpad-Export-Date: 2013-11-26 05:26+0000\n"
+"X-Generator: Launchpad (build 16840)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:106 src/core/modules/StarMgr.cpp:335
 #: src/core/modules/GridLinesMgr.cpp:679 src/core/modules/LandscapeMgr.cpp:314
@@ -227,7 +227,7 @@ msgstr "Odokumenterad typ"
 
 #: src/core/modules/NebulaMgr.cpp:123
 msgid "Deep-sky objects"
-msgstr ""
+msgstr "Djuprymdsobjekt"
 
 #: src/core/modules/Planet.cpp:136 src/core/modules/MinorPlanet.cpp:232
 #: src/core/modules/MinorPlanet.cpp:236 src/core/modules/Comet.cpp:141
@@ -361,7 +361,7 @@ msgstr "Kataklysmisk variabel stjärna"
 
 #: src/core/modules/StarWrapper.cpp:148
 msgid "eclipsing binary system"
-msgstr ""
+msgstr "Förmörkelsebinärt system"
 
 #: src/core/modules/StarWrapper.cpp:152
 msgid "variable star"
@@ -432,12 +432,12 @@ msgstr ""
 #: src/core/modules/StarWrapper.cpp:246
 #, qt-format
 msgid "Duration of eclipse: %1%"
-msgstr ""
+msgstr "Förmörkelsens varaktighet: %1%"
 
 #: src/core/modules/StarWrapper.cpp:248
 #, qt-format
 msgid "Rising time: %1%"
-msgstr ""
+msgstr "Uppgångstid: %1%"
 
 #: src/core/StelApp.cpp:437
 msgid "Night mode"
@@ -1104,7 +1104,7 @@ msgstr "Az/Alt: %1/%2"
 
 #: src/core/StelSkyLayerMgr.cpp:87
 msgid "Deep-sky objects background images"
-msgstr ""
+msgstr "Bakgrundsbilder för djuprymdsobjekt"
 
 #: src/core/StelMovementMgr.cpp:106 src/gui/StelGui.cpp:178
 #: src/StelMainView.cpp:297
@@ -1549,7 +1549,7 @@ msgstr "Standard-Perseid-mängd"
 
 #: src/gui/ViewDialog.cpp:531
 msgid "Meteor storm rate"
-msgstr ""
+msgstr "Meteorfrekvens"
 
 #: src/gui/ViewDialog.cpp:534
 msgid "Exceptional Leonid rate"
@@ -2042,7 +2042,7 @@ msgstr "Hygiea"
 #. TRANSLATORS: Asteroid (41) Daphne
 #: src/translations.h:123
 msgid "Daphne"
-msgstr ""
+msgstr "41 Daphne"
 
 #. TRANSLATORS: Asteroid (1221) Amor
 #: src/translations.h:125
@@ -2082,7 +2082,7 @@ msgstr "Makemake"
 #. TRANSLATORS: Proper name of comet C/1680 V1
 #: src/translations.h:140
 msgid "Great Comet of 1680 (C/1680 V1)"
-msgstr ""
+msgstr "1680 års stora komet"
 
 #. TRANSLATORS: Name of supernova SN 1572A and script name
 #: src/translations.h:143
@@ -2428,6 +2428,9 @@ msgid ""
 "occultations of both on the same day are very rare. Here's one that takes "
 "place 1/23/2048. In real speed."
 msgstr ""
+"Phobosförmörkelser av jorden är vanliga och det är också förmörkelser av "
+"Jupiter. Men förmörkelser av båda på samma dag är väldigt sällsynta. Här är "
+"en som inträffar 2048-01-23, i verklig hastighet."
 
 #: src/translations.h:279
 msgid ""
@@ -2438,11 +2441,19 @@ msgid ""
 "emerges from Mars it is still eclipsed and dimmed in Mars' shadow, only to "
 "light up later."
 msgstr ""
+"Phobos är långt framför Mars och gör en solpassage, därefter gör den en "
+"retrograd rörelse tillbaka mot solen och gör en partiell solpassage till, "
+"detta kan bara ses från Deimos södra hemisfär. Sedan förmörkas solen helt av "
+"Mars och under tiden passerar  Phobos mellan Mars och Deimos i mörker. När "
+"Phobos framträder från Mars är den fortfarande förmörkad och kan ses svagt i "
+"Mars skugga, den lyser inte upp förrän senare."
 
 #: src/translations.h:280
 msgid ""
 "Screensaver of various happenings in the Solar System. 187 events in all!"
 msgstr ""
+"Skärmsläckare med bilder på olika företeelser i solsystemet. Totalt 187 "
+"händelser!"
 
 #: src/translations.h:281
 msgid "A tour of the western constellations."
@@ -3554,7 +3565,7 @@ msgstr "Hitta objekt eller position"
 
 #: src/ui_searchDialogGui.h:561 src/ui_searchDialogGui.h:565
 msgid "Use tab key for select of found items"
-msgstr ""
+msgstr "Använd tab för att välja bland hittade objekt"
 
 #: src/ui_searchDialogGui.h:570
 msgid "iota"
@@ -3699,7 +3710,7 @@ msgstr "Server:"
 
 #: src/ui_searchDialogGui.h:654
 msgid "Search options"
-msgstr ""
+msgstr "Alternativ för sökning"
 
 #: src/ui_searchDialogGui.h:655
 msgid "Use autofill only from the beginning of words"
@@ -3746,6 +3757,8 @@ msgstr "Planeter"
 msgid ""
 "Labels and markers for deep-sky objects (star clusters, galaxies and nebulas)"
 msgstr ""
+"Etiketter och markörer för djuprymdsobjekt (stjärnhopar, galaxer och "
+"nebulosor)"
 
 #: src/ui_viewDialog.h:1220 src/ui_viewDialog.h:1265
 msgctxt "Deep-sky objects"
@@ -3778,11 +3791,11 @@ msgstr "Ändra skala på månen"
 
 #: src/ui_viewDialog.h:1228
 msgid "Automatic change of landscape when planet is changed"
-msgstr ""
+msgstr "Automatisk förändring av landskap vid planetbyte"
 
 #: src/ui_viewDialog.h:1230
 msgid "Auto select landscapes"
-msgstr ""
+msgstr "Automatiskt landskapsval"
 
 #: src/ui_viewDialog.h:1232
 msgid "Show atmosphere"
@@ -3843,24 +3856,25 @@ msgstr "ZHR:"
 
 #: src/ui_viewDialog.h:1252
 msgid "1000"
-msgstr ""
+msgstr "1.000"
 
 #: src/ui_viewDialog.h:1255
 msgid "Limit Magnitudes (for unaided/binocular observers)"
-msgstr ""
+msgstr "Begränsa magnitud (för betraktare utan hjälpmedel eller med kikare)"
 
 #: src/ui_viewDialog.h:1257
 msgid "Limit Magnitudes"
-msgstr ""
+msgstr "Begränsa magnitud"
 
 #: src/ui_viewDialog.h:1259
 msgid "Limit the magnitude of stars"
-msgstr ""
+msgstr "Begränsa magnitud för stjärnor"
 
 #: src/ui_viewDialog.h:1263
 msgid ""
 "Limit the magnitude of deep-sky objects (star clusters, galaxies and nebulas)"
 msgstr ""
+"Begränsa magnitud för djuprymdsobjekt (stjärnhopar, galaxer och nebulosor)"
 
 #: src/ui_viewDialog.h:1266
 msgid "Constellations"
@@ -4070,7 +4084,7 @@ msgstr "Absolut magnitud"
 
 #: src/ui_configurationDialog.h:1017
 msgid "Galactic coordinates"
-msgstr ""
+msgstr "Galaktiska koordinater"
 
 #: src/ui_configurationDialog.h:1019
 msgid "Spectral class, nebula type, etc."
@@ -4078,7 +4092,7 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:1021
 msgid "Additional information"
-msgstr ""
+msgstr "Ytterligare information"
 
 #: src/ui_configurationDialog.h:1023
 msgid "Topocentric equatorial coordinates"
@@ -4276,6 +4290,7 @@ msgid ""
 "Display solar shadows on planets and moons (For that feature needed OpenGL "
 "version 2 or higher)"
 msgstr ""
+"Visa solskuggor på planeter och månar (kräver OpenGL version 2 eller högre)"
 
 #: src/ui_configurationDialog.h:1111
 msgid "Render Solar Shadows"
@@ -4849,7 +4864,7 @@ msgstr "Multiplicitet: i.u."
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:596
 msgid "Focal length of eyepiece"
-msgstr ""
+msgstr "Okularets fokallängd"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:690
 #, qt-format
@@ -4867,6 +4882,7 @@ msgstr ""
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:809
 msgid "Magnification provided by this ocular/lens/telescope combination"
 msgstr ""
+"Grad av förstoring som denna kombination av okular, lins och teleskop ger"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:810
 msgid ""
@@ -5063,11 +5079,11 @@ msgstr "Sensorer"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1076
 msgid "Resolution x (pixels):"
-msgstr "Upplösning x (pixels):"
+msgstr "Upplösning x (pixlar):"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1077
 msgid "Resolution y (pixels):"
-msgstr "Upplösning y (pixels):"
+msgstr "Upplösning y (pixlar):"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1078
 msgid "Chip width (mm):"
@@ -5117,7 +5133,7 @@ msgstr ""
 #: plugins/Observability/src/ui_ObservabilityDialog.h:378
 msgctxt "tab in plugin windows"
 msgid "About"
-msgstr ""
+msgstr "Om Oculars"
 
 #: plugins/Satellites/src/Satellites.cpp:66
 #: plugins/Satellites/src/Satellites.cpp:139
@@ -5155,62 +5171,62 @@ msgstr ""
 #. TRANSLATORS: Satellite group: Bright/naked-eye-visible satellites
 #: plugins/Satellites/src/Satellites.cpp:1544
 msgid "visual"
-msgstr ""
+msgstr "synliga med blotta ögat"
 
 #. TRANSLATORS: Satellite group: Scientific satellites
 #: plugins/Satellites/src/Satellites.cpp:1546
 msgid "scientific"
-msgstr ""
+msgstr "vetenskapliga"
 
 #. TRANSLATORS: Satellite group: Communication satellites
 #: plugins/Satellites/src/Satellites.cpp:1548
 msgid "communications"
-msgstr ""
+msgstr "kommunikation"
 
 #. TRANSLATORS: Satellite group: Navigation satellites
 #: plugins/Satellites/src/Satellites.cpp:1550
 msgid "navigation"
-msgstr ""
+msgstr "navigation"
 
 #. TRANSLATORS: Satellite group: Amateur radio (ham) satellites
 #: plugins/Satellites/src/Satellites.cpp:1552
 msgid "amateur"
-msgstr ""
+msgstr "amatörradio"
 
 #. TRANSLATORS: Satellite group: Weather (meteorological) satellites
 #: plugins/Satellites/src/Satellites.cpp:1554
 msgid "weather"
-msgstr ""
+msgstr "väder (meteorologiska)"
 
 #. TRANSLATORS: Satellite group: Satellites in geostationary orbit
 #: plugins/Satellites/src/Satellites.cpp:1556
 msgid "geostationary"
-msgstr ""
+msgstr "geostationära"
 
 #. TRANSLATORS: Satellite group: Satellites that are no longer functioning
 #: plugins/Satellites/src/Satellites.cpp:1558
 msgid "non-operational"
-msgstr ""
+msgstr "ej i bruk"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GPS constellation (the Global Positioning System)
 #: plugins/Satellites/src/Satellites.cpp:1560
 msgid "gps"
-msgstr ""
+msgstr "GPS"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Iridium constellation (Iridium is a proper name)
 #: plugins/Satellites/src/Satellites.cpp:1562
 msgid "iridium"
-msgstr ""
+msgstr "Iridium"
 
 #. TRANSLATORS: Satellite description. "Hubble" is a person's name.
 #: plugins/Satellites/src/Satellites.cpp:1573
 msgid "The Hubble Space Telescope"
-msgstr ""
+msgstr "Rymdteleskopet Hubble"
 
 #. TRANSLATORS: Satellite description.
 #: plugins/Satellites/src/Satellites.cpp:1575
 msgid "The International Space Station"
-msgstr ""
+msgstr "Internationella rymdstationen (ISS)"
 
 #: plugins/Satellites/src/Satellite.cpp:227
 #: plugins/Satellites/src/Satellite.cpp:231
@@ -5223,7 +5239,7 @@ msgstr ""
 
 #: plugins/Satellites/src/Satellite.cpp:240
 msgid "artificial satellite"
-msgstr ""
+msgstr "Artificiell satellit"
 
 #. TRANSLATORS: Slant range: distance between the satellite and the observer
 #: plugins/Satellites/src/Satellite.cpp:250
@@ -5253,17 +5269,17 @@ msgstr ""
 #: plugins/Satellites/src/Satellite.cpp:273
 #, qt-format
 msgid "TEME coordinates (km): %1"
-msgstr "TEME koordinater (km): %1"
+msgstr "TEME-koordinater (km): %1"
 
 #. TRANSLATORS: TEME is an Earth-centered inertial coordinate system
 #: plugins/Satellites/src/Satellite.cpp:281
 #, qt-format
 msgid "TEME velocity (km/s): %1"
-msgstr "TEME hastighet (km/s): %1"
+msgstr "TEME-hastighet (km/s): %1"
 
 #: plugins/Satellites/src/Satellite.cpp:289
 msgid "The satellite and the observer are in sunlight."
-msgstr "Sateliten och observatören är i solljus."
+msgstr "Satelliten och observatören är solbelysta."
 
 #: plugins/Satellites/src/Satellite.cpp:292
 msgid "The satellite is visible."
@@ -5310,10 +5326,10 @@ msgid ""
 "days, weeks or perhaps a month into the past and future). Expect high "
 "weirdness when looking at dates outside this range."
 msgstr ""
-"De förutsagda positionerna stämmer bara för en relativt kort tidsperiod ( i "
+"De förutsagda positionerna stämmer bara för en relativt kort tidsperiod (i "
 "storleksordningen dagar, veckor eller kanske en månad in i framtiden eller "
-"den gångna tiden). Förvänta stora avvik när man observerar utanför denna "
-"tidsperioden."
+"förfluten tid). Förvänta dig stora avvikelser om du väljer datum utanför "
+"detta tidsspann."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:389
 msgid ""
@@ -5351,9 +5367,9 @@ msgid ""
 "sources, and by default the plugin will do this if the existing data is more "
 "than 72 hours old. "
 msgstr ""
-"Satellitprogramtillägget kan lasta ned TLE-data automatiskt från internet, "
-"och programtillägget har som standard att göra detta om de existerande data "
-"är mer än 72 timer. "
+"Satellitsprogramtillägget kan ladda ner TLE-data från internet automatiskt, "
+"och har som standard att göra det om existerande data är mer än 72 timmar "
+"gammal. "
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:403
 #, qt-format
@@ -5362,9 +5378,9 @@ msgid ""
 "computer.  This file must be in the same format as the Celestrak updates "
 "(see %1 for an example)."
 msgstr ""
-"Omdu deaktiverar internetuppdateringar, kan du oppdatera från en fil på din "
-"datamaskin. Denna filen måste vara i samma format som Celestrak-"
-"uppdateringarna (se %1 för ett exempel)."
+"Om du stänger av internetuppdateringar, kan du uppdatera från en fil på din "
+"dator. Filen måste vara i samma format som Celestrak-uppdateringarna (se %1 "
+"för ett exempel)."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:404
 msgid ""
@@ -5483,7 +5499,7 @@ msgstr "Internet-uppdatering deaktiverad"
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:205
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:261
 msgid "Updating now..."
-msgstr "UppdaterAr..."
+msgstr "Uppdaterar..."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:453
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:157
