@@ -171,10 +171,17 @@ public slots:
 	void setFlagLandscapeSetsLocation(bool b) {flagLandscapeSetsLocation=b;}
 
 	//! Return the value of the flag determining if a minimal brightness should be used to keep landscape visible.
-	bool getFlagLandscapeMinimalBrightness() const {return flagLandscapeMinimalBrightness;}
+	bool getFlagLandscapeUseMinimalBrightness() const {return flagLandscapeUseMinimalBrightness; }
 	//! Set the value of the flag determining if a minimal brightness should be used to keep landscape visible.
-	void setFlagLandscapeMinimalBrightness(bool b) {flagLandscapeMinimalBrightness=b;}
-
+	void setFlagLandscapeUseMinimalBrightness(bool b) {flagLandscapeUseMinimalBrightness=b; }
+	//! Return the value of the flag determining if the minimal brightness should be taken from landscape.ini
+	bool getFlagLandscapeSetsMinimalBrightness() const {return flagLandscapeSetsMinimalBrightness;}
+	//! Sets the value of the flag determining if the minimal brightness should be taken from landscape.ini
+	void setFlagLandscapeSetsMinimalBrightness(bool b) {flagLandscapeSetsMinimalBrightness=b;}
+	//! Return the value of the initial brightness of landscape
+	float getDefaultMinimalBrightness() const {return defaultMinimalBrightness;}
+	//! Set the value of the initial brightness of landscape.
+	void setDefaultMinimalBrightness(const float b) {defaultMinimalBrightness=b;}
 
 	//! Get flag for displaying Cardinals Points.
 	bool getFlagCardinalsPoints() const;
@@ -326,11 +333,6 @@ private slots:
 	//! Translate labels to new language settings.
 	void updateI18n();	
 
-	//! Return the value of the initial brightness of landscape
-	float getDefaultMinimalBrightness() const {return defaultMinimalBrightness;}
-	//! Set the value of the initial brightness of landscape.
-	void setDefaultMinimalBrightness(const float b) {defaultMinimalBrightness=b;}
-
 private:
 	//! Get light pollution luminance level.
 	float getAtmosphereLightPollutionLuminance() const;
@@ -360,10 +362,12 @@ private:
 
 	bool flagLandscapeAutoSelection;
 
+	//! Indicate use of the default minimal brightness value specified in config.ini.
+	bool flagLandscapeUseMinimalBrightness;
 	//! A minimal brightness value to keep landscape visible.
 	float defaultMinimalBrightness;
 	//! Indicate use of the minimal brightness value specified in the current landscape.ini, if present.
-	bool flagLandscapeMinimalBrightness;
+	bool flagLandscapeSetsMinimalBrightness;
 
 	// The ID of the currently loaded landscape
 	QString currentLandscapeID;
