@@ -96,6 +96,7 @@ public:
 	       bool closeOrbit,
 	       bool hidden,
 	       bool hasAtmosphere,
+	       bool hasHalo,
 	       const QString &pType);
 
 	~Planet();
@@ -128,6 +129,7 @@ public:
 	virtual QString getNameI18n(void) const {return nameI18;}
 	virtual double getAngularSize(const StelCore* core) const;
 	virtual bool hasAtmosphere(void) {return atmosphere;}
+	virtual bool hasHalo(void) {return halo;}
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods of SolarSystem object
@@ -289,6 +291,7 @@ protected:
 	bool flagLabels;                 // Define whether labels should be displayed
 	bool hidden;                     // useful for fake planets used as observation positions - not drawn or labeled
 	bool atmosphere;                 // Does the planet have an atmosphere?
+	bool halo;                       // Does the planet have a halo?
 	QString pType;			 // Type of body
 
 	static Vec3f labelColor;

@@ -58,11 +58,16 @@ Planet::Planet(const QString& englishName,
 	       bool acloseOrbit,
 	       bool hidden,
 	       bool hasAtmosphere,
+	       bool hasHalo,
 	       const QString& pType)
 	: englishName(englishName),
 	  flagLighting(flagLighting),
-	  radius(radius), oneMinusOblateness(1.0-oblateness),
-	  color(color), albedo(albedo), axisRotation(0.), rings(NULL),
+	  radius(radius),
+	  oneMinusOblateness(1.0-oblateness),
+	  color(color),
+	  albedo(albedo),
+	  axisRotation(0.),
+	  rings(NULL),
 	  sphereScale(1.f),
 	  lastJD(J2000),
 	  coordFunc(coordFunc),
@@ -71,6 +76,7 @@ Planet::Planet(const QString& englishName,
 	  parent(NULL),
 	  hidden(hidden),
 	  atmosphere(hasAtmosphere),
+	  halo(hasHalo),
 	  pType(pType)
 {
 	texMapName = atexMapName;
@@ -934,13 +940,16 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 
 	// Draw the halo
 
-	// Prepare openGL lighting parameters according to luminance
-	float surfArcMin2 = getSpheroidAngularSize(core)*60;
-	surfArcMin2 = surfArcMin2*surfArcMin2*M_PI; // the total illuminated area in arcmin^2
+	if (hasHalo())
+	{
+		// Prepare openGL lighting parameters according to luminance
+		float surfArcMin2 = getSpheroidAngularSize(core)*60;
+		surfArcMin2 = surfArcMin2*surfArcMin2*M_PI; // the total illuminated area in arcmin^2
 
-	StelPainter sPainter(core->getProjection(StelCore::FrameJ2000));
-	Vec3d tmp = getJ2000EquatorialPos(core);
-	core->getSkyDrawer()->postDrawSky3dModel(&sPainter, Vec3f(tmp[0], tmp[1], tmp[2]), surfArcMin2, getVMagnitudeWithExtinction(core), color);
+		StelPainter sPainter(core->getProjection(StelCore::FrameJ2000));
+		Vec3d tmp = getJ2000EquatorialPos(core);
+		core->getSkyDrawer()->postDrawSky3dModel(&sPainter, Vec3f(tmp[0], tmp[1], tmp[2]), surfArcMin2, getVMagnitudeWithExtinction(core), color);
+	}
 }
 
 

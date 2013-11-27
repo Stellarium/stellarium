@@ -58,6 +58,7 @@ MinorPlanet::MinorPlanet(const QString& englishName,
 		  acloseOrbit,
 		  hidden,
 		  false, //No atmosphere
+		  true,  //Halo
 		  pType)
 {
 	texMapName = atexMapName;
