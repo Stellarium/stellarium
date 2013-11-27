@@ -704,7 +704,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 		}
 
 		// Create the Solar System body and add it to the list
-		QString type = pd.value(secname+"/type").toString();
+		QString type = pd.value(secname+"/type").toString();		
 		PlanetP p;
 		// New class objects, named "plutoid", has properties similar asteroids and we should calculate their
 		// positions like for asteroids. Plutoids having one exception - Pluto - we should use special
@@ -722,7 +722,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 						    userDataPtr,
 						    osculatingFunc,
 						    closeOrbit,
-						    pd.value(secname+"/hidden", 0).toBool(),
+						    pd.value(secname+"/hidden", 0).toBool(),						    
 						    type));
 
 			QSharedPointer<MinorPlanet> mp =  p.dynamicCast<MinorPlanet>();
@@ -773,7 +773,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 			               userDataPtr,
 			               osculatingFunc,
 			               closeOrbit,
-				       pd.value(secname+"/hidden", 0).toBool(),
+				       pd.value(secname+"/hidden", 0).toBool(),				       
 				       type));
 
 			QSharedPointer<Comet> mp =  p.dynamicCast<Comet>();
@@ -811,6 +811,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 					       closeOrbit,
 					       pd.value(secname+"/hidden", 0).toBool(),
 					       pd.value(secname+"/atmosphere", false).toBool(),
+					       pd.value(secname+"/halo", 0).toBool(),
 					       type));
 		}
 
