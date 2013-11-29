@@ -310,12 +310,12 @@ void StelMainView::init(QSettings* conf)
 	QScreen* screen = glWidget->windowHandle()->screen();
 	int width = conf->value("video/screen_w", screen->size().width()).toInt();
 	int height = conf->value("video/screen_h", screen->size().height()).toInt();
+
+	// Without this, the screen is not shown on a Mac + we should use resize() for correct work of fullscreen/windowed mode switch. --AW WTF???
+	resize(width, height);
+
 	if (conf->value("video/fullscreen", true).toBool())
 	{
-#ifdef Q_OS_MAC
-		// Without this, the screen is not shown on a Mac.
-		resize(width, height);
-#endif
 		setFullScreen(true);
 	}
 	else
@@ -324,7 +324,6 @@ void StelMainView::init(QSettings* conf)
 		int x = conf->value("video/screen_x", 0).toInt();
 		int y = conf->value("video/screen_y", 0).toInt();
 		move(x, y);
-		resize(width, height);
 	}
 	show();
 
