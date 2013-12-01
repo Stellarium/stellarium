@@ -217,7 +217,7 @@ public:
 	//! The number of slices of the outmost circle is (innerFanSlices<<level).
 	//! @param radius the radius of the disk.
 	//! @param innerFanSlices the number of slices.
-	//! @param level the numbe of concentric circles.
+	//! @param level the number of concentric circles.
 	//! @param vertexArr the vertex array in which the resulting vertices are returned.
 	//! @param texCoordArr the vertex array in which the resulting texture coordinates are returned.
 	static void computeFanDisk(float radius, int innerFanSlices, int level, QVector<double>& vertexArr, QVector<float>& texCoordArr);
