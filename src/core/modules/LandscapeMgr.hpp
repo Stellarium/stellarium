@@ -178,9 +178,9 @@ public slots:
 	bool getFlagLandscapeSetsMinimalBrightness() const {return flagLandscapeSetsMinimalBrightness;}
 	//! Sets the value of the flag determining if the minimal brightness should be taken from landscape.ini
 	void setFlagLandscapeSetsMinimalBrightness(bool b) {flagLandscapeSetsMinimalBrightness=b;}
-	//! Return the value of the initial brightness of landscape
+	//! Return the minimal brightness value of the landscape
 	float getDefaultMinimalBrightness() const {return defaultMinimalBrightness;}
-	//! Set the value of the initial brightness of landscape.
+	//! Set the minimal brightness value of the landscape.
 	void setDefaultMinimalBrightness(const float b) {defaultMinimalBrightness=b;}
 
 	//! Get flag for displaying Cardinals Points.
