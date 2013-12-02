@@ -288,13 +288,15 @@ void LandscapeOldStyle::load(const QSettings& landscapeIni, const QString& lands
 		// In r4598 the precomputing was put in place and caused a problem for
 		// old_style landscapes which had a z rotation on the side textures
 		// and where side0 did not map to tex0
-		// texToSide is a nasty hack to replace the old behaviour
+		// texToSide is a nasty hack to replace the old behaviour.
+		// GZ for V0.13: I put the zrotation to the draw call (like for all other landscapes).
+		// Maybe this can be again simplified?
 		texToSide[i] = texnum;
 	}
 	QString groundTexName = landscapeIni.value("landscape/groundtex").toString();
 	QString groundTexPath = getTexturePath(groundTexName, landscapeId);
 	groundTex = StelApp::getInstance().getTextureManager().createTexture(groundTexPath, StelTexture::StelTextureParams(true));
-	// GZ: I don't see any use of this:
+	// GZ 2013/11: I don't see any use of this:
 //	QString description = landscapeIni.value("landscape/ground").toString();
 //	//sscanf(description.toLocal8Bit(),"groundtex:%f:%f:%f:%f",&a,&b,&c,&d);
 //	QStringList parameters = description.split(':');
@@ -307,7 +309,7 @@ void LandscapeOldStyle::load(const QSettings& landscapeIni, const QString& lands
 	QString fogTexName = landscapeIni.value("landscape/fogtex").toString();
 	QString fogTexPath = getTexturePath(fogTexName, landscapeId);
 	fogTex = StelApp::getInstance().getTextureManager().createTexture(fogTexPath, StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT));
-	// GZ: I don't see any use of this:
+	// GZ 2013/11: I don't see any use of this:
 //	QString description = landscapeIni.value("landscape/fog").toString();
 //	//sscanf(description.toLocal8Bit(),"fogtex:%f:%f:%f:%f",&a,&b,&c,&d);
 //	QStringList parameters = description.split(':');
@@ -571,9 +573,11 @@ float LandscapeOldStyle::getOpacity(Vec3d azalt) const
 	az_phot=fmodf(az_phot, 1.0f);
 	if (az_phot<0) az_phot+=1.0f;                                //  0..1 = image-X for a non-repeating pano photo
 
-	float az_panel =  nbSide*nbDecorRepeat * az_phot; // azimuth in "panel space"
-	int currentSide = (int) floor(az_panel);
-	int x= (sides[currentSide].texCoords[0] + fmodf(az_panel, 1.0f)*(sides[currentSide].texCoords[2]-sides[currentSide].texCoords[0]))
+	float az_panel =  nbSide*nbDecorRepeat * az_phot; // azimuth in "panel space". Ex for nbS=4, nbDR=3: [0..[12, say 11.4
+	float x_in_panel=fmodf(az_panel, 1.0f);
+	int currentSide = (int) floor(fmodf(az_panel, nbSide)); // must become 3
+	Q_ASSERT(currentSide<=nbSideTexs);
+	int x= (sides[currentSide].texCoords[0] + x_in_panel*(sides[currentSide].texCoords[2]-sides[currentSide].texCoords[0]))
 			* sidesImages[currentSide]->width(); // pixel X from left.
 
 	// QImage has pixel 0/0 in top left corner. We must find image Y for optionally cropped images.
