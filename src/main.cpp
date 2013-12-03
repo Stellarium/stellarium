@@ -51,7 +51,6 @@
 #include <clocale>
 
 #ifdef Q_OS_WIN
-	#include <winsock2.h>
 	#include <windows.h>
 	#ifdef _MSC_BUILD
 		#include <MMSystem.h>
@@ -323,6 +322,10 @@ int main(int argc, char **argv)
 	}
 
 	qDebug() << "OpenGLVersionFlags: " << QGLFormat::openGLVersionFlags();
+	// http://qt-project.org/forums/viewthread/35584: clarify: Why is the string empty? (at least Win7/64 NVidia)
+	//QString versionString(QLatin1String(reinterpret_cast<const char *>(glGetString(GL_VERSION))));
+	QString versionString((char *)glGetString(GL_VERSION));
+	qDebug() << "Driver version string: " << versionString;
 	mainWin.init(confSettings);
 	app.exec();
 	mainWin.deinit();
