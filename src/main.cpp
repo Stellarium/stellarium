@@ -51,6 +51,7 @@
 #include <clocale>
 
 #ifdef Q_OS_WIN
+	#include <winsock2.h>
 	#include <windows.h>
 	#ifdef _MSC_BUILD
 		#include <MMSystem.h>

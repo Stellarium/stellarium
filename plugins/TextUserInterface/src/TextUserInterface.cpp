@@ -829,5 +829,5 @@ void TextUserInterface::setBortleScale(int bortle)
 	LandscapeMgr* landscapeMgr = GETSTELMODULE(LandscapeMgr);
 	StelSkyDrawer* skyDrawer = StelApp::getInstance().getCore()->getSkyDrawer();
 	landscapeMgr->setAtmosphereBortleLightPollution(bortle);
-	skyDrawer->setBortleScale(bortle);
+	skyDrawer->setBortleScaleIndex(bortle);
 }

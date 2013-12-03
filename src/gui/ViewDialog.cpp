@@ -215,12 +215,12 @@ void ViewDialog::createDialogContent()
 	ui->landscapePositionCheckBox->setChecked(lmgr->getFlagLandscapeSetsLocation());
 	connect(ui->landscapePositionCheckBox, SIGNAL(toggled(bool)), lmgr, SLOT(setFlagLandscapeSetsLocation(bool)));
 
-	ui->landscapeBrightnessCheckBox->setChecked(lmgr->getFlagLandscapeNightBrightness());
-	connect(ui->landscapeBrightnessCheckBox, SIGNAL(toggled(bool)), lmgr, SLOT(setFlagLandscapeNightBrightness(bool)));
+	ui->landscapeBrightnessCheckBox->setChecked(lmgr->getFlagLandscapeSetsMinimalBrightness());
+	connect(ui->landscapeBrightnessCheckBox, SIGNAL(toggled(bool)), lmgr, SLOT(setFlagLandscapeSetsMinimalBrightness(bool)));
 
-	ui->lightPollutionSpinBox->setValue(StelApp::getInstance().getCore()->getSkyDrawer()->getBortleScale());
+	ui->lightPollutionSpinBox->setValue(StelApp::getInstance().getCore()->getSkyDrawer()->getBortleScaleIndex());
 	connect(ui->lightPollutionSpinBox, SIGNAL(valueChanged(int)), lmgr, SLOT(setAtmosphereBortleLightPollution(int)));
-	connect(ui->lightPollutionSpinBox, SIGNAL(valueChanged(int)), StelApp::getInstance().getCore()->getSkyDrawer(), SLOT(setBortleScale(int)));
+	connect(ui->lightPollutionSpinBox, SIGNAL(valueChanged(int)), StelApp::getInstance().getCore()->getSkyDrawer(), SLOT(setBortleScaleIndex(int)));
 
 	ui->autoChangeLandscapesCheckBox->setChecked(lmgr->getFlagLandscapeAutoSelection());
 	connect(ui->autoChangeLandscapesCheckBox, SIGNAL(toggled(bool)), lmgr, SLOT(setFlagLandscapeAutoSelection(bool)));
@@ -319,17 +319,18 @@ void ViewDialog::populateLists()
 	l->clear();
 	LandscapeMgr* lmgr = GETSTELMODULE(LandscapeMgr);
 	QStringList landscapeList = lmgr->getAllLandscapeNames();
-	foreach (const QString landscapeId, landscapeList)
+	foreach (const QString landscapeName, landscapeList)
 	{
-		QString label = q_(landscapeId);
+		QString label = q_(landscapeName);
 		QListWidgetItem* item = new QListWidgetItem(label);
-		item->setData(Qt::UserRole, landscapeId);
+		item->setData(Qt::UserRole, landscapeName);
 		l->addItem(item);
 	}
-	QString selectedLandscapeId = lmgr->getCurrentLandscapeName();
+	l->sortItems(); // they may have been translated!
+	QString selectedLandscapeName = lmgr->getCurrentLandscapeName();
 	for (int i = 0; i < l->count(); i++)
 	{
-		if (l->item(i)->data(Qt::UserRole).toString() == selectedLandscapeId)
+		if (l->item(i)->data(Qt::UserRole).toString() == selectedLandscapeName)
 		{
 			l->setCurrentRow(i);
 			break;
@@ -443,7 +444,7 @@ void ViewDialog::landscapeChanged(QListWidgetItem* item)
 	//StelSkyDrawer *drawer=StelApp::getInstance().getSkyDrawer();
 	// GZ: Reset values that might have changed.
 	ui->showFogCheckBox->setChecked(lmgr->getFlagFog());
-	ui->lightPollutionSpinBox->setValue(StelApp::getInstance().getCore()->getSkyDrawer()->getBortleScale());
+	ui->lightPollutionSpinBox->setValue(StelApp::getInstance().getCore()->getSkyDrawer()->getBortleScaleIndex());
 }
 
 void ViewDialog::showAddRemoveLandscapesDialog()

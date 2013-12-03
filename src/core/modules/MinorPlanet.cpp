@@ -243,18 +243,20 @@ QString MinorPlanet::getInfoString(const StelCore *core, const InfoStringGroup &
 	if (flags&Distance)
 	{
 		double distanceAu = getJ2000EquatorialPos(core).length();
+		double distanceKm = AU * distanceAu;
 		if (distanceAu < 0.1)
 		{
-			double distanceKm = AU * distanceAu;
 			// xgettext:no-c-format
 			oss << QString(q_("Distance: %1AU (%2 km)"))
-			       .arg(distanceAu, 0, 'f', 8)
-			       .arg(distanceKm, 0, 'f', 0);
+				   .arg(distanceAu, 0, 'f', 6)
+				   .arg(distanceKm, 0, 'f', 3);
 		}
 		else
 		{
 			// xgettext:no-c-format
-			oss << q_("Distance: %1AU").arg(distanceAu, 0, 'f', 8);
+			oss << QString(q_("Distance: %1AU (%2 Mio km)"))
+				   .arg(distanceAu, 0, 'f', 3)
+				   .arg(distanceKm / 1.0e6, 0, 'f', 3);
 		}
 		oss << "<br>";
 	}
