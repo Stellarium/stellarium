@@ -1012,20 +1012,40 @@ quint64 LandscapeMgr::loadLandscapeSize(const QString landscapeID) const
 
 QString LandscapeMgr::getDescription() const
 {
-	QString lang = StelApp::getInstance().getLocaleMgr().getAppLanguage();
-	// GZ found in 20130926: The next line seems very ad-hoc.
-	// TODO: Find a general solution for all locales, like en_CA, fr_CA, en_AU, de_AT, de_CH, etc.
-	// Optimally, description files may have all variants. Only if e.g. en_CA not found, fallback to en.
-	if (!QString("pt_BR zh_CN zh_HK zh_TW").contains(lang))
+	QString lang, desc, descFile, locDescriptionFile, engDescriptionFile;
+	bool hasFile = true;
+
+	lang = StelApp::getInstance().getLocaleMgr().getAppLanguage();
+	locDescriptionFile = StelFileMgr::findFile("landscapes/" + getCurrentLandscapeID(), StelFileMgr::Directory) + "/description." + lang + ".utf8";
+	engDescriptionFile = StelFileMgr::findFile("landscapes/" + getCurrentLandscapeID(), StelFileMgr::Directory) + "/description.en.utf8";
+
+	// OK. Check the file with full name of locale
+	if (!QFileInfo(locDescriptionFile).exists())
 	{
+		// Oops...  File not exists! What about short name of locale?
 		lang = lang.split("_").at(0);
+		locDescriptionFile = StelFileMgr::findFile("landscapes/" + getCurrentLandscapeID(), StelFileMgr::Directory) + "/description." + lang + ".utf8";
 	}
-	QString descriptionFile = StelFileMgr::findFile("landscapes/" + getCurrentLandscapeID(), StelFileMgr::Directory) + "/description." + lang + ".utf8";
-	
-	QString desc;
-	if (!descriptionFile.isEmpty() && QFileInfo(descriptionFile).exists())
+
+	// Check localized description for landscape
+	if (!locDescriptionFile.isEmpty() && QFileInfo(locDescriptionFile).exists())
+	{		
+		descFile = locDescriptionFile;
+	}
+	// OK. Localized description of landscape not exists. What about english description of its?
+	else if (!engDescriptionFile.isEmpty() && QFileInfo(engDescriptionFile).exists())
 	{
-		QFile file(descriptionFile);
+		descFile = engDescriptionFile;
+	}
+	// That file not exists too? OK. Will be used description from landscape.ini file.
+	else
+	{
+		hasFile = false;
+	}
+
+	if (hasFile)
+	{
+		QFile file(descFile);
 		file.open(QIODevice::ReadOnly | QIODevice::Text);
 		QTextStream in(&file);
 		in.setCodec("UTF-8");
