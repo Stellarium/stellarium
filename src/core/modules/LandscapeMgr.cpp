@@ -372,7 +372,7 @@ bool LandscapeMgr::setCurrentLandscapeID(const QString& id)
 	}
 	currentLandscapeID = id;
 
-	if (getFlagLandscapeSetsLocation())
+	if (getFlagLandscapeSetsLocation() && landscape->hasLocation())
 	{
 		StelApp::getInstance().getCore()->moveObserverTo(landscape->getLocation());
 		// GZ Patch: allow change in fog, extinction, refraction parameters and light pollution
@@ -411,6 +411,7 @@ bool LandscapeMgr::setCurrentLandscapeID(const QString& id)
 			drawer->setAtmospherePressure(p);
 		}
 	}
+	else qDebug() << "Will not set new location; Landscape location: planet: " << landscape->getLocation().planetName << "name: " << landscape->getLocation().name;
 	return true;
 }
 

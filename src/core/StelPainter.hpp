@@ -155,9 +155,12 @@ public:
 	//! @param y y position in the viewport in pixel.
 	//! @param radius the half size of a square side in pixel.
 	//! @param v direction vector of object to draw. GZ20120826: Will draw only if this is in the visible hemisphere.
-	void drawSprite2dMode(const float x, const float y, const float radius);
+	void drawSprite2dMode(const float x, const float y, float radius);
 	void drawSprite2dMode(const Vec3d& v, const float radius);
 
+	//! Same as drawSprite2dMode but don't scale according to display device scaling. 
+	void drawSprite2dModeNoDeviceScale(const float x, const float y, const float radius);
+	
 	//! Draw a rotated square using the current texture at the given projected 2d position.
 	//! This method is not thread safe.
 	//! @param x x position in the viewport in pixel.
@@ -296,6 +299,10 @@ public:
 	//! Draws the primitives defined in the StelVertexArray.
 	//! @param checkDiscontinuity will check and suppress discontinuities if necessary.
 	void drawStelVertexArray(const StelVertexArray& arr, const bool checkDiscontinuity=true);
+
+	//! Link an opengl program and show a message in case of error or warnings.
+	//! @return true if the link was successful.
+	static bool linkProg(class QOpenGLShaderProgram* prog, const QString& name);
 
 private:
 

@@ -319,17 +319,18 @@ void ViewDialog::populateLists()
 	l->clear();
 	LandscapeMgr* lmgr = GETSTELMODULE(LandscapeMgr);
 	QStringList landscapeList = lmgr->getAllLandscapeNames();
-	foreach (const QString landscapeId, landscapeList)
+	foreach (const QString landscapeName, landscapeList)
 	{
-		QString label = q_(landscapeId);
+		QString label = q_(landscapeName);
 		QListWidgetItem* item = new QListWidgetItem(label);
-		item->setData(Qt::UserRole, landscapeId);
+		item->setData(Qt::UserRole, landscapeName);
 		l->addItem(item);
 	}
-	QString selectedLandscapeId = lmgr->getCurrentLandscapeName();
+	l->sortItems(); // they may have been translated!
+	QString selectedLandscapeName = lmgr->getCurrentLandscapeName();
 	for (int i = 0; i < l->count(); i++)
 	{
-		if (l->item(i)->data(Qt::UserRole).toString() == selectedLandscapeId)
+		if (l->item(i)->data(Qt::UserRole).toString() == selectedLandscapeName)
 		{
 			l->setCurrentRow(i);
 			break;
