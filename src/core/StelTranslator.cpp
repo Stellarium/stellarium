@@ -24,6 +24,7 @@
 #include <clocale>
 #include <cstdlib>
 #ifdef WIN32
+#include <winsock2.h>
 #include <windows.h>
 #endif
 
