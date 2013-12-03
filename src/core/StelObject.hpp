@@ -54,13 +54,14 @@ public:
 		PlainText		= 0x00000200, //!< Strip HTML tags from output
 		HourAngle		= 0x00000400, //!< The hour angle + DE (of date)
 		AbsoluteMagnitude	= 0x00000800, //!< The absolute magnitude
-		GalacticCoord		= 0x00001000  //!< The galactic position
+		GalacticCoord		= 0x00001000, //!< The galactic position
+		Type			= 0x00002000  //!< The type of the object (star, planet, etc.)
 	};
 	typedef QFlags<InfoStringGroupFlags> InfoStringGroup;
 	Q_FLAGS(InfoStringGroup)
 
 	//! A pre-defined set of specifiers for the getInfoString flags argument to getInfoString
-	static const InfoStringGroupFlags AllInfo = (InfoStringGroupFlags)(Name|CatalogNumber|Magnitude|RaDecJ2000|RaDecOfDate|AltAzi|Distance|Size|Extra|HourAngle|AbsoluteMagnitude|GalacticCoord);
+	static const InfoStringGroupFlags AllInfo = (InfoStringGroupFlags)(Name|CatalogNumber|Magnitude|RaDecJ2000|RaDecOfDate|AltAzi|Distance|Size|Extra|Type|HourAngle|AbsoluteMagnitude|GalacticCoord);
 	//! A pre-defined set of specifiers for the getInfoString flags argument to getInfoString
 	static const InfoStringGroupFlags ShortInfo = (InfoStringGroupFlags)(Name|CatalogNumber|Magnitude|RaDecJ2000);
 
@@ -135,7 +136,7 @@ public:
 
 	//! Return a priority value which is used to discriminate objects by priority
 	//! As for magnitudes, the lower is the higher priority
-	virtual float getSelectPriority(const StelCore*) const {return 99;}
+	virtual float getSelectPriority(const StelCore*) const;
 
 	//! Get a color used to display info about the object
 	virtual Vec3f getInfoColor() const {return Vec3f(1,1,1);}

@@ -67,34 +67,37 @@ void Landscape::loadCommon(const QSettings& landscapeIni, const QString& landsca
 	rows = landscapeIni.value("landscape/tesselate_rows", 20).toInt();
 	cols = landscapeIni.value("landscape/tesselate_cols", 40).toInt();
 
-	if (landscapeIni.contains("location/planet"))
-		location.planetName = landscapeIni.value("location/planet").toString();
-	else
-		location.planetName = "Earth";
-	if (landscapeIni.contains("location/altitude"))
-		location.altitude = landscapeIni.value("location/altitude").toInt();
-	if (landscapeIni.contains("location/latitude"))
-		location.latitude = StelUtils::getDecAngle(landscapeIni.value("location/latitude").toString())*180./M_PI;
-	if (landscapeIni.contains("location/longitude"))
-		location.longitude = StelUtils::getDecAngle(landscapeIni.value("location/longitude").toString())*180./M_PI;
-	if (landscapeIni.contains("location/country"))
-		location.country = landscapeIni.value("location/country").toString();
-	if (landscapeIni.contains("location/state"))
-		location.state = landscapeIni.value("location/state").toString();
-	if (landscapeIni.contains("location/name"))
-		location.name = landscapeIni.value("location/name").toString();
-	else
-		location.name = name;
-	location.landscapeKey = name;
-	// New entries by GZ.
-	defaultBortleIndex = landscapeIni.value("location/light_pollution", -1).toInt();
-	if (defaultBortleIndex<=0) defaultBortleIndex=-1; // neg. values in ini file signal "no change".
-	if (defaultBortleIndex>9) defaultBortleIndex=9; // correct bad values.
+	if (landscapeIni.childGroups().contains("location"))
+	{
+		if (landscapeIni.contains("location/planet"))
+			location.planetName = landscapeIni.value("location/planet").toString();
+		else
+			location.planetName = "Earth";
+		if (landscapeIni.contains("location/altitude"))
+			location.altitude = landscapeIni.value("location/altitude").toInt();
+		if (landscapeIni.contains("location/latitude"))
+			location.latitude = StelUtils::getDecAngle(landscapeIni.value("location/latitude").toString())*180./M_PI;
+		if (landscapeIni.contains("location/longitude"))
+			location.longitude = StelUtils::getDecAngle(landscapeIni.value("location/longitude").toString())*180./M_PI;
+		if (landscapeIni.contains("location/country"))
+			location.country = landscapeIni.value("location/country").toString();
+		if (landscapeIni.contains("location/state"))
+			location.state = landscapeIni.value("location/state").toString();
+		if (landscapeIni.contains("location/name"))
+			location.name = landscapeIni.value("location/name").toString();
+		else
+			location.name = name;
+		location.landscapeKey = name;
+		defaultBortleIndex = landscapeIni.value("location/light_pollution", -1).toInt();
+		if (defaultBortleIndex<=0) defaultBortleIndex=-1; // neg. values in ini file signal "no change".
+		if (defaultBortleIndex>9) defaultBortleIndex=9; // correct bad values.
 
-	defaultFogSetting = landscapeIni.value("location/display_fog", -1).toInt();
-	defaultExtinctionCoefficient = landscapeIni.value("location/atmospheric_extinction_coefficient", -1.0).toDouble();
-	defaultTemperature = landscapeIni.value("location/atmospheric_temperature", -1000.0).toDouble();
-	defaultPressure = landscapeIni.value("location/atmospheric_pressure", -2.0).toDouble(); // -2=no change! [-1=computeFromAltitude]
+		defaultFogSetting = landscapeIni.value("location/display_fog", -1).toInt();
+		defaultExtinctionCoefficient = landscapeIni.value("location/atmospheric_extinction_coefficient", -1.0).toDouble();
+		defaultTemperature = landscapeIni.value("location/atmospheric_temperature", -1000.0).toDouble();
+		defaultPressure = landscapeIni.value("location/atmospheric_pressure", -2.0).toDouble(); // -2=no change! [-1=computeFromAltitude]
+	}
+
 	// Set minimal brightness for landscape
 	minBrightness = landscapeIni.value("landscape/minimal_brightness", -1.0).toDouble();
 

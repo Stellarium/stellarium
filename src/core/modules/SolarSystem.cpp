@@ -129,6 +129,7 @@ void SolarSystem::init()
 	setLabelsAmount(conf->value("astro/labels_amount", 3.).toFloat());
 	setFlagOrbits(conf->value("astro/flag_planets_orbits").toBool());
 	setFlagLightTravelTime(conf->value("astro/flag_light_travel_time", false).toBool());
+	setFlagMarkers(conf->value("astro/flag_planets_markers", true).toBool());
 
 	recreateTrails();
 
@@ -185,7 +186,9 @@ void SolarSystem::drawPointer(const StelCore* core)
 		sPainter.setColor(color[0],color[1],color[2]);
 
 		float size = obj->getAngularSize(core)*M_PI/180.*prj->getPixelPerRadAtCenter()*2.;
-		size+=40.f + 10.f*std::sin(2.f * StelApp::getInstance().getTotalRunTime());
+		
+		const float scale = prj->getDevicePixelsPerPixel()*StelApp::getInstance().getGlobalScalingRatio();
+		size+= scale * (45.f + 10.f*std::sin(2.f * StelApp::getInstance().getTotalRunTime()));
 
 		texPointer->bind();
 
@@ -526,7 +529,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 					} else {
 						// in case of parent=sun: use Gaussian gravitational constant
 						// for calculating meanMotion:
-						meanMotion = (eccentricity == 1.0)
+						meanMotion = (eccentricity >= 0.9999 && eccentricity <= 1.0)
 									? 0.01720209895 * (1.5/pericenterDistance) * sqrt(0.5/pericenterDistance)
 									: (semi_major_axis > 0.0)
 									? 0.01720209895 / (semi_major_axis*sqrt(semi_major_axis))
@@ -701,7 +704,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 		}
 
 		// Create the Solar System body and add it to the list
-		QString type = pd.value(secname+"/type").toString();
+		QString type = pd.value(secname+"/type").toString();		
 		PlanetP p;
 		// New class objects, named "plutoid", has properties similar asteroids and we should calculate their
 		// positions like for asteroids. Plutoids having one exception - Pluto - we should use special
@@ -719,7 +722,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 						    userDataPtr,
 						    osculatingFunc,
 						    closeOrbit,
-						    pd.value(secname+"/hidden", 0).toBool(),
+						    pd.value(secname+"/hidden", 0).toBool(),						    
 						    type));
 
 			QSharedPointer<MinorPlanet> mp =  p.dynamicCast<MinorPlanet>();
@@ -770,7 +773,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 			               userDataPtr,
 			               osculatingFunc,
 			               closeOrbit,
-				       pd.value(secname+"/hidden", 0).toBool(),
+				       pd.value(secname+"/hidden", 0).toBool(),				       
 				       type));
 
 			QSharedPointer<Comet> mp =  p.dynamicCast<Comet>();
@@ -808,6 +811,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 					       closeOrbit,
 					       pd.value(secname+"/hidden", 0).toBool(),
 					       pd.value(secname+"/atmosphere", false).toBool(),
+					       pd.value(secname+"/halo", 0).toBool(),
 					       type));
 		}
 
@@ -972,7 +976,7 @@ void SolarSystem::draw(StelCore* core)
 		p->draw(core, maxMagLabel, planetNameFont);
 	}
 
-	if (GETSTELMODULE(StelObjectMgr)->getFlagSelectedObjectPointer())
+	if (GETSTELMODULE(StelObjectMgr)->getFlagSelectedObjectPointer() && getFlagMarkers())
 		drawPointer(core);
 }
 
