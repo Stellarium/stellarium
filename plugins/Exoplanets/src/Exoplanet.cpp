@@ -124,16 +124,9 @@ QVariantMap Exoplanet::getMap(void)
 	return map;
 }
 
-float Exoplanet::getSelectPriority(const StelCore* core) const
+float Exoplanet::getSelectPriority(const StelCore *core) const
 {
-	if (getVMagnitude(core)>20.f)
-	{
-		return 20.f;
-	}
-	else
-	{
-		return getVMagnitude(core) - 1.f;
-	}
+	return StelObject::getSelectPriority(core)-2.f;
 }
 
 QString Exoplanet::getNameI18n(void) const
@@ -149,9 +142,13 @@ QString Exoplanet::getInfoString(const StelCore* core, const InfoStringGroup& fl
 	QTextStream oss(&str);
 
 	if (flags&Name)
-	{		
-
+	{
 		oss << "<h2>" << getNameI18n() << "</h2>";
+	}
+	
+	if (flags&Type)
+	{
+		oss << q_("Type: <b>%1</b>").arg(q_("Exoplanet")) << "<br />";
 	}
 
 	if (flags&Magnitude)
@@ -365,6 +362,11 @@ float Exoplanet::getVMagnitude(const StelCore* core) const
 	}
 }
 
+float Exoplanet::getVMagnitudeWithExtinction(const StelCore *core) const
+{
+	return getVMagnitude(core);
+}
+
 double Exoplanet::getAngularSize(const StelCore*) const
 {
 	return 0.0001;
@@ -429,23 +431,20 @@ void Exoplanet::draw(StelCore* core, StelPainter& painter)
 
 	if(!visible) {return;}
 
-	if (mag <= sd->getLimitMagnitude())
-	{
+	float mlimit = sd->getLimitMagnitude();
 
+	if (mag <= mlimit)
+	{
+		bool displaymode = GETSTELMODULE(Exoplanets)->getDisplayMode();
 		Exoplanet::markerTexture->bind();
 		float size = getAngularSize(NULL)*M_PI/180.*painter.getProjector()->getPixelPerRadAtCenter();
 		float shift = 5.f + size/1.6f;
-		if (labelsFader.getInterstate()<=0.f)
+
+		painter.drawSprite2dMode(XYZ, displaymode ? 4.f : 5.f);
+
+		if (labelsFader.getInterstate()<=0.f && !displaymode && (mag+1.f)<mlimit)
 		{
-			if (GETSTELMODULE(Exoplanets)->getDisplayMode())
-			{
-				painter.drawSprite2dMode(XYZ, 4);
-			}
-			else
-			{
-				painter.drawSprite2dMode(XYZ, 5);
-				painter.drawText(XYZ, designation, 0, shift, shift, false);
-			}
+			painter.drawText(XYZ, designation, 0, shift, shift, false);
 		}
 	}
 }

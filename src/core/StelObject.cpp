@@ -83,6 +83,14 @@ float StelObject::getVMagnitude(const StelCore* core) const
 	return 99;
 }
 
+float StelObject::getSelectPriority(const StelCore* core) const
+{
+	float extMag = getVMagnitudeWithExtinction(core);
+	if (extMag>15.f)
+		extMag=15.f;
+	return extMag;
+}
+
 float StelObject::getVMagnitudeWithExtinction(const StelCore* core) const
 {
 	Vec3d altAzPos = getAltAzPosGeometric(core);

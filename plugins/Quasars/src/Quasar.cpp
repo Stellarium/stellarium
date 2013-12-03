@@ -74,12 +74,6 @@ QVariantMap Quasar::getMap(void)
 	return map;
 }
 
-float Quasar::getSelectPriority(const StelCore* core) const
-{
-	//Same as StarWrapper::getSelectPriority()
-        return getVMagnitude(core);
-}
-
 QString Quasar::getInfoString(const StelCore* core, const InfoStringGroup& flags) const
 {
 	QString str;
@@ -90,35 +84,19 @@ QString Quasar::getInfoString(const StelCore* core, const InfoStringGroup& flags
 	{
 		oss << "<h2>" << designation << "</h2>";
 	}
-	if (flags&Extra)
+	if (flags&Type)
 		oss << q_("Type: <b>%1</b>").arg(q_("quasar")) << "<br />";
 
 	if (flags&Magnitude)
 	{
 		if (core->getSkyDrawer()->getFlagHasAtmosphere())
 		{
-			if (bV!=0)
-			{
-				oss << q_("Magnitude: <b>%1</b> (extincted to: <b>%2</b>. B-V: <b>%3</b>)").arg(QString::number(mag, 'f', 2),
-														QString::number(getVMagnitudeWithExtinction(core),  'f', 2),
-														QString::number(bV, 'f', 2)) << "<br />";
-			}
-			else
-			{
-				oss << q_("Magnitude: <b>%1</b> (extincted to: <b>%2</b>)").arg(QString::number(mag, 'f', 2),
-												QString::number(getVMagnitudeWithExtinction(core),  'f', 2)) << "<br />";
-			}
+			oss << q_("Magnitude: <b>%1</b> (extincted to: <b>%2</b>)").arg(QString::number(mag, 'f', 2),
+											QString::number(getVMagnitudeWithExtinction(core),  'f', 2)) << "<br />";
 		}
 		else
 		{
-			if (bV!=0)
-			{
-				oss << q_("Magnitude: <b>%1</b> (B-V: <b>%2</b>)").arg(mag, 0, 'f', 2).arg(bV, 0, 'f', 2) << "<br />";
-			}
-			else
-			{
-				oss << q_("Magnitude: <b>%1</b>").arg(mag, 0, 'f', 2) << "<br />";
-			}
+			oss << q_("Magnitude: <b>%1</b>").arg(mag, 0, 'f', 2) << "<br />";
 		}
 		if (AMagnitude!=0)
 		{
@@ -126,6 +104,11 @@ QString Quasar::getInfoString(const StelCore* core, const InfoStringGroup& flags
 		}
 	}
 
+	if (flags&Extra)
+	{
+		oss << q_("Color Index (B-V): <b>%1</b>").arg(QString::number(bV, 'f', 2)) << "<br>";
+	}
+	
 	// Ra/Dec etc.
 	oss << getPositionInfoString(core, flags);
 
@@ -155,6 +138,14 @@ float Quasar::getVMagnitude(const StelCore* core) const
 double Quasar::getAngularSize(const StelCore*) const
 {
 	return 0.00001;
+}
+
+float Quasar::getSelectPriority(const StelCore* core) const
+{
+	float mag = getVMagnitudeWithExtinction(core);
+	if (GETSTELMODULE(Quasars)->getDisplayMode())
+		mag = 4.f;
+	return mag;
 }
 
 void Quasar::update(double deltaTime)

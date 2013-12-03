@@ -182,11 +182,7 @@ void StelSkyDrawer::init()
 	starShaderProgram = new QOpenGLShaderProgram(QOpenGLContext::currentContext());
 	starShaderProgram->addShader(&vshader);
 	starShaderProgram->addShader(&fshader);
-	starShaderProgram->link();
-	if (!starShaderProgram->log().isEmpty()) {
-	  qWarning() << "StelSkyDrawer::init(): Warnings while linking starShaderProgram: " << starShaderProgram->log();
-	}
-
+	StelPainter::linkProg(starShaderProgram, "starShader");
 	starShaderVars.projectionMatrix = starShaderProgram->uniformLocation("projectionMatrix");
 	starShaderVars.texCoord = starShaderProgram->attributeLocation("texCoord");
 	starShaderVars.pos = starShaderProgram->attributeLocation("pos");
@@ -443,7 +439,7 @@ bool StelSkyDrawer::drawPointSource(StelPainter* sPainter, const Vec3f& v, const
 		glBlendFunc(GL_ONE, GL_ONE);
 		glEnable(GL_BLEND);				
 		sPainter->setColor(color[0]*cmag, color[1]*cmag, color[2]*cmag);
-		sPainter->drawSprite2dMode(win[0], win[1], rmag);
+		sPainter->drawSprite2dModeNoDeviceScale(win[0], win[1], rmag);
 	}
 
 	unsigned char starColor[3] = {0, 0, 0};
@@ -494,7 +490,7 @@ void StelSkyDrawer::postDrawSky3dModel(StelPainter* painter, const Vec3f& v, flo
 		Vec3f win;
 		painter->getProjector()->project(v, win);
 		painter->setColor(color[0]*cmag, color[1]*cmag, color[2]*cmag);
-		painter->drawSprite2dMode(win[0], win[1], rmag);
+		painter->drawSprite2dModeNoDeviceScale(win[0], win[1], rmag);
 		noStarHalo = true;
 	}
 
@@ -625,19 +621,19 @@ void StelSkyDrawer::preDraw()
 }
 
 
-// Set the parameters so that the stars disapear at about the limit given by the bortle scale
+// Set the parameters so that the stars disappear at about the limit given by the bortle scale
 // See http://en.wikipedia.org/wiki/Bortle_Dark-Sky_Scale
 void StelSkyDrawer::setBortleScaleIndex(int bIndex)
 {
 	// Associate the Bortle index (1 to 9) to inScale value
 	if (bIndex<1)
 	{
-		qWarning() << "WARING: Bortle scale index range is [1;9], given" << bIndex;
+		qWarning() << "WARNING: Bortle scale index range is [1;9], given" << bIndex;
 		bIndex = 1;
 	}
 	if (bIndex>9)
 	{
-		qWarning() << "WARING: Bortle scale index range is [1;9], given" << bIndex;
+		qWarning() << "WARNING: Bortle scale index range is [1;9], given" << bIndex;
 		bIndex = 9;
 	}
 

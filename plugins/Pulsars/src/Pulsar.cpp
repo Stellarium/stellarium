@@ -109,8 +109,7 @@ QVariantMap Pulsar::getMap(void)
 
 float Pulsar::getSelectPriority(const StelCore* core) const
 {
-	//Same as StarWrapper::getSelectPriority()
-        return getVMagnitude(core);
+	return StelObject::getSelectPriority(core)-2.f;
 }
 
 QString Pulsar::getInfoString(const StelCore* core, const InfoStringGroup& flags) const
@@ -123,7 +122,7 @@ QString Pulsar::getInfoString(const StelCore* core, const InfoStringGroup& flags
 		oss << "<h2>" << designation << "</h2>";
 	}
 
-	if (flags&Extra)
+	if (flags&Type)
 	{
 		oss << q_("Type: <b>%1</b>").arg(q_("pulsar")) << "<br />";
 	}
@@ -247,6 +246,11 @@ float Pulsar::getVMagnitude(const StelCore* core) const
 	}
 }
 
+float Pulsar::getVMagnitudeWithExtinction(const StelCore *core) const
+{
+	return getVMagnitude(core);
+}
+
 double Pulsar::getEdot(double p0, double p1) const
 {
 	if (p0>0 && p1!=0)
@@ -337,24 +341,20 @@ void Pulsar::draw(StelCore* core, StelPainter& painter)
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_ONE, GL_ONE);
 	painter.setColor(color[0], color[1], color[2], 1);
+	float mlimit = sd->getLimitMagnitude();
 
-	if (mag <= sd->getLimitMagnitude())
+	if (mag <= mlimit)
 	{
-
+		bool mode = GETSTELMODULE(Pulsars)->getDisplayMode();
 		Pulsar::markerTexture->bind();
 		float size = getAngularSize(NULL)*M_PI/180.*painter.getProjector()->getPixelPerRadAtCenter();
-		float shift = 5.f + size/1.6f;
-		if (labelsFader.getInterstate()<=0.f)
+		float shift = 5.f + size/1.6f;		
+
+		painter.drawSprite2dMode(XYZ, mode ? 4.f : 5.f);
+
+		if (labelsFader.getInterstate()<=0.f && !mode && (mag+2.f)<mlimit)
 		{
-			if (GETSTELMODULE(Pulsars)->getDisplayMode())
-			{
-				painter.drawSprite2dMode(XYZ, 4);				
-			}
-			else
-			{
-				painter.drawSprite2dMode(XYZ, 5);
-				painter.drawText(XYZ, designation, 0, shift, shift, false);
-			}
+			painter.drawText(XYZ, designation, 0, shift, shift, false);
 		}
 	}
 }

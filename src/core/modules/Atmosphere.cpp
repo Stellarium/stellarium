@@ -67,14 +67,7 @@ Atmosphere::Atmosphere(void) :viewport(0,0,0,0), posGrid(NULL), posGridBuffer(QO
 	atmoShaderProgram = new QOpenGLShaderProgram();
 	atmoShaderProgram->addShader(&vShader);
 	atmoShaderProgram->addShader(&fShader);
-	if (!atmoShaderProgram->link())
-	{
-		qFatal("Error while linking atmosphere shader program: %s", atmoShaderProgram->log().toLatin1().constData());
-	}
-	if (!atmoShaderProgram->log().isEmpty())
-	{
-		qWarning() << "Warnings while linking atmosphere shader: " << atmoShaderProgram->log();
-	}
+	StelPainter::linkProg(atmoShaderProgram, "atmosphere");
 
 	atmoShaderProgram->bind();
 	shaderAttribLocations.alphaWaOverAlphaDa = atmoShaderProgram->uniformLocation("alphaWaOverAlphaDa");

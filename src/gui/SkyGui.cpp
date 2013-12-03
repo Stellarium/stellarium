@@ -78,6 +78,8 @@ InfoPanel::InfoPanel(QGraphicsItem* parent) : QGraphicsTextItem("", parent)
 			infoTextFilters |= StelObject::Size;
 		if (conf->value("flag_show_extra", false).toBool())
 			infoTextFilters |= StelObject::Extra;
+		if (conf->value("flag_show_type", false).toBool())
+			infoTextFilters |= StelObject::Type;
 		if (conf->value("flag_show_galcoord", false).toBool())
 			infoTextFilters |= StelObject::GalacticCoord;
 		conf->endGroup();
