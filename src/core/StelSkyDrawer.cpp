@@ -83,9 +83,9 @@ StelSkyDrawer::StelSkyDrawer(StelCore* acore) : core(acore)
 
 	bool ok=true;
 
-	setBortleScale(conf->value("stars/init_bortle_scale",2).toInt(&ok));
+	setBortleScaleIndex(conf->value("stars/init_bortle_scale",2).toInt(&ok));
 	if (!ok)
-		setBortleScale(2);
+		setBortleScaleIndex(2);
 
 	setRelativeStarScale(conf->value("stars/relative_scale",1.0).toFloat(&ok));
 	if (!ok)
@@ -621,19 +621,19 @@ void StelSkyDrawer::preDraw()
 }
 
 
-// Set the parameters so that the stars disapear at about the limit given by the bortle scale
+// Set the parameters so that the stars disappear at about the limit given by the bortle scale
 // See http://en.wikipedia.org/wiki/Bortle_Dark-Sky_Scale
-void StelSkyDrawer::setBortleScale(int bIndex)
+void StelSkyDrawer::setBortleScaleIndex(int bIndex)
 {
 	// Associate the Bortle index (1 to 9) to inScale value
 	if (bIndex<1)
 	{
-		qWarning() << "WARING: Bortle scale index range is [1;9], given" << bIndex;
+		qWarning() << "WARNING: Bortle scale index range is [1;9], given" << bIndex;
 		bIndex = 1;
 	}
 	if (bIndex>9)
 	{
-		qWarning() << "WARING: Bortle scale index range is [1;9], given" << bIndex;
+		qWarning() << "WARNING: Bortle scale index range is [1;9], given" << bIndex;
 		bIndex = 9;
 	}
 

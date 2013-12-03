@@ -88,7 +88,7 @@ public:
 	///////////////////////////////////////////////////////////////////////////
 	// Method specific to the landscape manager
 	//! Return the global landscape luminance, for being used e.g for setting eye adaptation.
-	float getLuminance();
+	float getLuminance() const;
 
 	//! Load a landscape based on a hash of parameters mirroring the landscape.ini
 	//! file and make it the current landscape.
@@ -103,6 +103,10 @@ public:
 	//! directory in which the files (textures and so on) for the landscape reside.
 	//! @return A pointer to the newly created landscape object.
 	Landscape* createFromFile(const QString& landscapeFile, const QString& landscapeId);
+
+	// GZ: implement StelModule's method. For test purposes only, we implement a manual transparency sampler.
+	// TODO: comment this away for final builds
+	// virtual void handleMouseClicks(class QMouseEvent*);
 
 public slots:
 	///////////////////////////////////////////////////////////////////////////
@@ -166,11 +170,18 @@ public slots:
 	//! Set the value of the flag determining if a change of landscape will update the observer location.
 	void setFlagLandscapeSetsLocation(bool b) {flagLandscapeSetsLocation=b;}
 
-	//! Return the value of the flag determining if an using brightness for night landscape.
-	bool getFlagLandscapeNightBrightness() const {return flagLandscapeNightBrightness;}
-	//! Set the value of the flag determining if an using brightness for night landscape.
-	void setFlagLandscapeNightBrightness(bool b) {flagLandscapeNightBrightness=b;}
-
+	//! Return the value of the flag determining if a minimal brightness should be used to keep landscape visible.
+	bool getFlagLandscapeUseMinimalBrightness() const {return flagLandscapeUseMinimalBrightness; }
+	//! Set the value of the flag determining if a minimal brightness should be used to keep landscape visible.
+	void setFlagLandscapeUseMinimalBrightness(bool b) {flagLandscapeUseMinimalBrightness=b; }
+	//! Return the value of the flag determining if the minimal brightness should be taken from landscape.ini
+	bool getFlagLandscapeSetsMinimalBrightness() const {return flagLandscapeSetsMinimalBrightness;}
+	//! Sets the value of the flag determining if the minimal brightness should be taken from landscape.ini
+	void setFlagLandscapeSetsMinimalBrightness(bool b) {flagLandscapeSetsMinimalBrightness=b;}
+	//! Return the minimal brightness value of the landscape
+	float getDefaultMinimalBrightness() const {return defaultMinimalBrightness;}
+	//! Set the minimal brightness value of the landscape.
+	void setDefaultMinimalBrightness(const float b) {defaultMinimalBrightness=b;}
 
 	//! Get flag for displaying Cardinals Points.
 	bool getFlagCardinalsPoints() const;
@@ -190,18 +201,18 @@ public slots:
 	//! Get atmosphere fade duration in s.
 	float getAtmosphereFadeDuration() const;
 	//! Set atmosphere fade duration in s.
-	void setAtmosphereFadeDuration(float f);
+	void setAtmosphereFadeDuration(const float f);
 
 	//! Set the light pollution following the Bortle Scale
-	void setAtmosphereBortleLightPollution(int bIndex);
+	void setAtmosphereBortleLightPollution(const int bIndex);
 	//! Get the light pollution following the Bortle Scale
-	int getAtmosphereBortleLightPollution();
+	int getAtmosphereBortleLightPollution() const;
 
 	//! Set the rotation of the landscape about the z-axis.
 	//! This is intended for special uses such as when the landscape consists of
 	//! a vehicle which might change orientation over time (e.g. a ship).
 	//! @param d the rotation angle in degrees as an offset from the originally loaded value.
-	void setZRotation(float d);
+	void setZRotation(const float d);
 
 	//! Install a landscape from a ZIP archive.
 	//! This function searches for a file named "landscape.ini" in the root
@@ -233,8 +244,9 @@ public slots:
 	//! @returns the installed landscape's identifier, or
 	//! an empty string on failure.
 	//! @todo Find a better way to pass error messages.
-	QString installLandscapeFromArchive(QString pathToSourceArchive, bool display = false, bool forAllUsers = false);
+	QString installLandscapeFromArchive(QString pathToSourceArchive, const bool display = false, const bool forAllUsers = false);
 
+	/* GZ: leaving doc without the method confuses Doxygen. Commenting out completely.
 	//! Install a landscape from a directory.
 	//! Expected directory structure: the name of the directory that contains
 	//! a landscape.ini file is assumed to be the landscape ID and should be
@@ -253,6 +265,7 @@ public slots:
 	//! @returns the installed landscape's identifier (the folder name), or
 	//! an empty string on failure.
 	//QString installLandscapeFromDirectory(QString pathToSourceLandscapeIni, bool display = false, bool forAllUsers = false);
+	*/
 
 	//! This function removes a landscape from the user data directory.
 	//! It tries to recursively delete all files in the landscape directory
@@ -263,19 +276,19 @@ public slots:
 	//! thanks to the #packagedtLandscapeIDs list.
 	//! @param landscapeID an installed landscape's identifier (the folder name)
 	//! @todo Find a better way to pass error messages.
-	bool removeLandscape(QString landscapeID);
+	bool removeLandscape(const QString landscapeID);
 
 	//! This function reads a landscape's name from its configuration file.
 	//! @param landscapeID an installed landscape's identifier (the folder name)
 	//! @returns an empty string if there is no such landscape or some other
 	//! error occurs
-	QString loadLandscapeName(QString landscapeID);
+	QString loadLandscapeName(const QString landscapeID);
 
 	//! This function calculates and returns a landscape's disc size in bytes.
 	//! It adds up the sizes of all files in the landscape's folder. It assumes
 	//! that there are no sub-directories. (There shouldn't be any anyway.)
 	//! @param landscapeID an installed landscape's identifier (the folder name)
-	quint64 loadLandscapeSize(QString landscapeID);
+	quint64 loadLandscapeSize(const QString landscapeID) const;
 
 	//! Get flag for autoselect of landscapes for planets.
 	bool getFlagLandscapeAutoSelection() const;
@@ -320,21 +333,16 @@ private slots:
 	//! Translate labels to new language settings.
 	void updateI18n();	
 
-	//! Return the value of the initial brightness of landscape
-	float getInitialLandscapeBrightness() const {return initialLandscapeBrightness;}
-	//! Set the value of the initial brightness of landscape.
-	void setInitialLandscapeBrightness(float b) {initialLandscapeBrightness=b;}
-
 private:
 	//! Get light pollution luminance level.
 	float getAtmosphereLightPollutionLuminance() const;
 	//! Set light pollution luminance level.
-	void setAtmosphereLightPollutionLuminance(float f);
+	void setAtmosphereLightPollutionLuminance(const float f);
 
 	//! For a given landscape name, return the landscape ID.
 	//! This takes a name of the landscape, as described in the landscape:name item in the
 	//! landscape.ini, and returns the landscape ID which corresponds to that name.
-	QString nameToID(const QString& name);
+	QString nameToID(const QString& name) const;
 
 	//! Return a map of landscape name to landscape ID (directory name).
 	QMap<QString,QString> getNameToDirMap() const;
@@ -343,7 +351,7 @@ private:
 	//! It uses StelFileMgr to look for it in the possible directories.
 	//! @param landscapeID an installed landscape's identifier (the folder name)
 	//! @returns an empty string, if no such landscape was found.
-	QString getLandscapePath(QString landscapeID);
+	QString getLandscapePath(const QString landscapeID) const;
 
 	Atmosphere* atmosphere;			// Atmosphere
 	Cardinals* cardinalsPoints;		// Cardinals points
@@ -354,7 +362,12 @@ private:
 
 	bool flagLandscapeAutoSelection;
 
-	bool flagLandscapeNightBrightness;
+	//! Indicate use of the default minimal brightness value specified in config.ini.
+	bool flagLandscapeUseMinimalBrightness;
+	//! A minimal brightness value to keep landscape visible.
+	float defaultMinimalBrightness;
+	//! Indicate use of the minimal brightness value specified in the current landscape.ini, if present.
+	bool flagLandscapeSetsMinimalBrightness;
 
 	// The ID of the currently loaded landscape
 	QString currentLandscapeID;
@@ -369,7 +382,6 @@ private:
 	//! @todo Find a way to update it automatically.
 	QStringList packagedLandscapeIDs;
 
-	float initialLandscapeBrightness;
 };
 
 #endif // _LANDSCAPEMGR_HPP_

@@ -378,7 +378,8 @@ void StelMovementMgr::handleMouseClicks(QMouseEvent* event)
 					{
 						setFlagTracking(false);
 					}
-					event->accept();
+					//GZ: You must comment out this line for testing Landscape transparency debug prints.
+					//event->accept();
 					return;
 				}
 			}
