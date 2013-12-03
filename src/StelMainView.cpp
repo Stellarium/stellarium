@@ -206,10 +206,13 @@ public:
 protected:
 	virtual void initializeGL()
 	{
+		qDebug() << "It appears this is never called?";
+		Q_ASSERT(0);
 		qDebug() << "OpenGL supported version: " << QString((char*)glGetString(GL_VERSION));
 
 		QGLWidget::initializeGL();
 
+		qDebug() << "Current Context: " << this->format();
 		if (!format().stencil())
 			qWarning("Could not get stencil buffer; results will be suboptimal");
 		if (!format().depth())
