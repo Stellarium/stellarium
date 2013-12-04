@@ -7,21 +7,21 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-27 20:36+0700\n"
+"POT-Creation-Date: 2013-12-03 22:47+0700\n"
 "PO-Revision-Date: 2012-10-22 02:33+0000\n"
 "Last-Translator: Bryan Nguyen <bryan.nguy@gmail.com>\n"
 "Language-Team: Chinese (Taiwan) <zh_TW@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-11-28 05:28+0000\n"
-"X-Generator: Launchpad (build 16847)\n"
+"X-Launchpad-Export-Date: 2013-12-04 05:31+0000\n"
+"X-Generator: Launchpad (build 16861)\n"
 
-#: src/core/modules/ConstellationMgr.cpp:106 src/core/modules/StarMgr.cpp:335
-#: src/core/modules/GridLinesMgr.cpp:679 src/core/modules/LandscapeMgr.cpp:314
+#: src/core/modules/ConstellationMgr.cpp:106 src/core/modules/StarMgr.cpp:336
+#: src/core/modules/GridLinesMgr.cpp:679 src/core/modules/LandscapeMgr.cpp:335
 #: src/core/modules/NebulaMgr.cpp:123 src/core/modules/SolarSystem.cpp:150
 #: src/core/StelApp.cpp:437 src/core/StelCore.cpp:160
-#: src/core/StelSkyLayerMgr.cpp:87 src/StelMainView.cpp:298
+#: src/core/StelSkyLayerMgr.cpp:87 src/StelMainView.cpp:301
 msgid "Display Options"
 msgstr "顯示選項"
 
@@ -45,13 +45,13 @@ msgstr "星座名稱"
 msgid "Constellation boundaries"
 msgstr "星座界線"
 
-#: src/core/modules/StarMgr.cpp:336 src/ui_viewDialog.h:1215
+#: src/core/modules/StarMgr.cpp:337 src/ui_viewDialog.h:1215
 #: src/ui_viewDialog.h:1238 src/ui_viewDialog.h:1261
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:239
 msgid "Stars"
 msgstr "恆星"
 
-#: src/core/modules/StarMgr.cpp:337
+#: src/core/modules/StarMgr.cpp:338
 msgid "Stars labels"
 msgstr "恆星標籤"
 
@@ -123,37 +123,37 @@ msgstr "銀河座標"
 msgid "Galactic plane"
 msgstr "銀河平面"
 
-#: src/core/modules/LandscapeMgr.cpp:315 src/ui_viewDialog.h:1231
+#: src/core/modules/LandscapeMgr.cpp:336 src/ui_viewDialog.h:1231
 msgid "Atmosphere"
 msgstr "大氣"
 
-#: src/core/modules/LandscapeMgr.cpp:316
+#: src/core/modules/LandscapeMgr.cpp:337
 msgid "Fog"
 msgstr "霧"
 
-#: src/core/modules/LandscapeMgr.cpp:317 src/ui_viewDialog.h:1298
+#: src/core/modules/LandscapeMgr.cpp:338 src/ui_viewDialog.h:1298
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:297
 msgid "Cardinal points"
 msgstr "基點"
 
-#: src/core/modules/LandscapeMgr.cpp:318
+#: src/core/modules/LandscapeMgr.cpp:339
 msgid "Ground"
 msgstr "地面"
 
-#: src/core/modules/LandscapeMgr.cpp:523
+#: src/core/modules/LandscapeMgr.cpp:542
 msgid "Author: "
 msgstr "作者: "
 
-#: src/core/modules/LandscapeMgr.cpp:526
+#: src/core/modules/LandscapeMgr.cpp:545
 msgid "Location: "
 msgstr "位置: "
 
-#: src/core/modules/LandscapeMgr.cpp:531
+#: src/core/modules/LandscapeMgr.cpp:550
 #, qt-format
 msgid ", %1 m"
 msgstr ", %1 m"
 
-#: src/core/modules/LandscapeMgr.cpp:535
+#: src/core/modules/LandscapeMgr.cpp:554
 msgid "Planet: "
 msgstr "行星: "
 
@@ -257,52 +257,52 @@ msgstr "距離: %1AU (%2 km)"
 #: src/core/modules/Planet.cpp:173 src/core/modules/MinorPlanet.cpp:257
 #: src/core/modules/Comet.cpp:161
 #, no-c-format, qt-format
-msgid "Distance: %1AU"
-msgstr "距離: %1AU (天文單位)"
+msgid "Distance: %1AU (%2 Mio km)"
+msgstr ""
 
-#: src/core/modules/Planet.cpp:184
+#: src/core/modules/Planet.cpp:186
 #, qt-format
 msgid "Apparent diameter: %1, with rings: %2"
 msgstr "視直徑r: %1, 含環: %2"
 
-#: src/core/modules/Planet.cpp:190 src/core/modules/MinorPlanet.cpp:263
+#: src/core/modules/Planet.cpp:192 src/core/modules/MinorPlanet.cpp:265
 #, qt-format
 msgid "Apparent diameter: %1"
 msgstr "視直徑: %1"
 
 #. TRANSLATORS: Sidereal (orbital) period for solar system bodies in days and in Julian years (symbol: a)
-#: src/core/modules/Planet.cpp:202 src/core/modules/MinorPlanet.cpp:270
-#: src/core/modules/Comet.cpp:176
+#: src/core/modules/Planet.cpp:204 src/core/modules/MinorPlanet.cpp:272
+#: src/core/modules/Comet.cpp:178
 #, qt-format
 msgid "Sidereal period: %1 days (%2 a)"
 msgstr "恆星周期: %1日 (%2 a)"
 
-#: src/core/modules/Planet.cpp:205
+#: src/core/modules/Planet.cpp:207
 #, qt-format
 msgid "Sidereal day: %1"
 msgstr "恆星日: %1"
 
-#: src/core/modules/Planet.cpp:206
+#: src/core/modules/Planet.cpp:208
 #, qt-format
 msgid "Mean solar day: %1"
 msgstr "平太陽日: %1"
 
-#: src/core/modules/Planet.cpp:212
+#: src/core/modules/Planet.cpp:214
 #, qt-format
 msgid "Phase Angle: %1"
 msgstr "相角: %1"
 
-#: src/core/modules/Planet.cpp:213
+#: src/core/modules/Planet.cpp:215
 #, qt-format
 msgid "Elongation: %1"
 msgstr "距角: %1"
 
-#: src/core/modules/Planet.cpp:214
+#: src/core/modules/Planet.cpp:216
 #, qt-format
 msgid "Phase: %1"
 msgstr "相: %1"
 
-#: src/core/modules/Planet.cpp:215
+#: src/core/modules/Planet.cpp:217
 #, qt-format
 msgid "Illuminated: %1%"
 msgstr "照明: %1%"
@@ -994,7 +994,7 @@ msgid "Deep-sky objects background images"
 msgstr ""
 
 #: src/core/StelMovementMgr.cpp:106 src/gui/StelGui.cpp:178
-#: src/StelMainView.cpp:297
+#: src/StelMainView.cpp:300
 msgid "Miscellaneous"
 msgstr "其他"
 
@@ -1058,7 +1058,7 @@ msgstr "啟動時的地平坐標方位角/高度角: %1/%2"
 msgid "Authors"
 msgstr "作者群"
 
-#: src/gui/ConfigurationDialog.cpp:690 src/gui/ViewDialog.cpp:364
+#: src/gui/ConfigurationDialog.cpp:690 src/gui/ViewDialog.cpp:365
 msgid "Contact"
 msgstr "聯絡"
 
@@ -1414,31 +1414,31 @@ msgstr "空白鍵"
 msgid "%1m"
 msgstr "%1m"
 
-#: src/gui/ViewDialog.cpp:412
+#: src/gui/ViewDialog.cpp:413
 msgid "No description"
 msgstr "沒有描述"
 
-#: src/gui/ViewDialog.cpp:522
+#: src/gui/ViewDialog.cpp:523
 msgid "No shooting stars"
 msgstr "無流星"
 
-#: src/gui/ViewDialog.cpp:525
+#: src/gui/ViewDialog.cpp:526
 msgid "Normal rate"
 msgstr "日常頻率"
 
-#: src/gui/ViewDialog.cpp:528
+#: src/gui/ViewDialog.cpp:529
 msgid "Standard Perseids rate"
 msgstr "標準英仙座流星雨頻率"
 
-#: src/gui/ViewDialog.cpp:531
+#: src/gui/ViewDialog.cpp:532
 msgid "Meteor storm rate"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:534
+#: src/gui/ViewDialog.cpp:535
 msgid "Exceptional Leonid rate"
 msgstr "超量獅子座流星雨"
 
-#: src/gui/ViewDialog.cpp:537
+#: src/gui/ViewDialog.cpp:538
 msgid "Highest rate ever (1966 Leonids)"
 msgstr "至今最高頻率 (1966 獅子座流星雨)"
 
@@ -1595,15 +1595,15 @@ msgstr ""
 msgid "This system does not support OpenGL."
 msgstr "系統不支援 OpenGL。"
 
-#: src/StelMainView.cpp:297
+#: src/StelMainView.cpp:300
 msgid "Save screenshot"
 msgstr "儲存螢幕擷取圖片"
 
-#: src/StelMainView.cpp:298
+#: src/StelMainView.cpp:301
 msgid "Full-screen mode"
 msgstr "全螢幕模式"
 
-#: src/StelMainView.cpp:355
+#: src/StelMainView.cpp:357
 #, qt-format
 msgid "Stellarium %1"
 msgstr ""
@@ -2105,200 +2105,210 @@ msgstr ""
 msgid "Garching"
 msgstr ""
 
+#. TRANSLATORS: Name of landscape
+#: src/translations.h:207
+msgid "Geneve"
+msgstr ""
+
+#. TRANSLATORS: Name of landscape
+#: src/translations.h:209
+msgid "Grossmugl"
+msgstr ""
+
 #. TRANSLATORS: Name of script
-#: src/translations.h:211
+#: src/translations.h:216
 msgid "Landscape Tour"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:213
+#: src/translations.h:218
 msgid "Partial Lunar Eclipse"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:215
+#: src/translations.h:220
 msgid "Total Lunar Eclipse"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:217
+#: src/translations.h:222
 msgid "Screensaver"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:219
+#: src/translations.h:224
 msgid "Solar Eclipse 2009"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:221
+#: src/translations.h:226
 msgid "Startup Script"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:223
+#: src/translations.h:228
 msgid "Zodiac"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:225
+#: src/translations.h:230
 msgid "Mercury Triple Sunrise and Sunset"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:227
+#: src/translations.h:232
 msgid "Double eclipse from Deimos in 2017"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:229
+#: src/translations.h:234
 msgid "Double eclipse from Deimos in 2031"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:231
+#: src/translations.h:236
 msgid "Eclipse from Olympus Mons Jan 10 2068"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:233
+#: src/translations.h:238
 msgid "Occultation of Earth and Jupiter 2048"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:235
+#: src/translations.h:240
 msgid "3 Transits and 2 Eclipses from Deimos 2027"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:237
+#: src/translations.h:242
 msgid "Solar System Screensaver"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:239
+#: src/translations.h:244
 msgid "Constellations Tour"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:241
+#: src/translations.h:246
 msgid "Sun from different planets"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:243
+#: src/translations.h:248
 msgid "Earth best views from other bodies"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:245
+#: src/translations.h:250
 msgid "Transit of Venus"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:247
+#: src/translations.h:252
 msgid "Analemma"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:249
+#: src/translations.h:254
 msgid "Sky Culture Tour"
 msgstr ""
 
 #. TRANSLATORS: Name and description of script
-#: src/translations.h:251
+#: src/translations.h:256
 msgid "Earth Events from Mercury"
 msgstr ""
 
 #. TRANSLATORS: Name and description of script
-#: src/translations.h:253
+#: src/translations.h:258
 msgid "Earth Events from Venus"
 msgstr ""
 
 #. TRANSLATORS: Name and description of script
-#: src/translations.h:255
+#: src/translations.h:260
 msgid "Earth Events from Mars"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:257
+#: src/translations.h:262
 msgid "Earth Greatest Elongations and Brilliancies from Mars"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:259
+#: src/translations.h:264
 msgid "Earth and Mars Greatest Elongations from Jupiter"
 msgstr ""
 
 #. TRANSLATORS: Description of the landscape tour script.
-#: src/translations.h:265
+#: src/translations.h:270
 msgid "Look around each installed landscape."
 msgstr ""
 
 #. TRANSLATORS: Description of the sky culture tour script.
-#: src/translations.h:267
+#: src/translations.h:272
 msgid "Look at each installed sky culture."
 msgstr ""
 
-#: src/translations.h:268
+#: src/translations.h:273
 msgid "Script to demonstrate a partial lunar eclipse."
 msgstr ""
 
-#: src/translations.h:269
+#: src/translations.h:274
 msgid "Script to demonstrate a total lunar eclipse."
 msgstr ""
 
-#: src/translations.h:270
+#: src/translations.h:275
 msgid "A slow, infinite tour of the sky, looking at random objects."
 msgstr ""
 
-#: src/translations.h:271
+#: src/translations.h:276
 msgid ""
 "Script to demonstrate a total solar eclipse which has happened in 2009 "
 "(location=Rangpur, Bangladesh)."
 msgstr ""
 
-#: src/translations.h:272
+#: src/translations.h:277
 msgid "Script which runs automatically at startup"
 msgstr ""
 
-#: src/translations.h:273
+#: src/translations.h:278
 msgid ""
 "This script displays the constellations of the Zodiac. That means the "
 "constellations which lie along the line which the Sun traces across the "
 "celestial sphere over the course of a year."
 msgstr ""
 
-#: src/translations.h:274
+#: src/translations.h:279
 msgid ""
 "Due to the quirks in Mercury's orbit and rotation at certain spots the sun "
 "will rise & set 3 different times in one Mercury day."
 msgstr ""
 
-#: src/translations.h:275
+#: src/translations.h:280
 msgid ""
 "Just before Mars eclipses the sun, Phobos pops out from behind and eclipses "
 "it first. Takes place between Scorpio and Sagittarius on April 26, 2017."
 msgstr ""
 
-#: src/translations.h:276
+#: src/translations.h:281
 msgid ""
 "Just before Mars eclipses the sun, Phobos pops out from behind and eclipses "
 "it first. Takes place between Taurus and Gemini on July 23, 2031."
 msgstr ""
 
-#: src/translations.h:277
+#: src/translations.h:282
 msgid "Phobos eclipsing the Sun as seen from Olympus Mons on Jan 10, 2068."
 msgstr ""
 
-#: src/translations.h:278
+#: src/translations.h:283
 msgid ""
 "Phobos occultations of Earth are common, as are occultations of Jupiter. But "
 "occultations of both on the same day are very rare. Here's one that takes "
 "place 1/23/2048. In real speed."
 msgstr ""
 
-#: src/translations.h:279
+#: src/translations.h:284
 msgid ""
 "Phobos races ahead of Mars and transits the sun, passes through it and then "
 "retrogrades back towards the sun and just partially transits it again (only "
@@ -2308,1009 +2318,1009 @@ msgid ""
 "light up later."
 msgstr ""
 
-#: src/translations.h:280
+#: src/translations.h:285
 msgid ""
 "Screensaver of various happenings in the Solar System. 187 events in all!"
 msgstr ""
 
-#: src/translations.h:281
+#: src/translations.h:286
 msgid "A tour of the western constellations."
 msgstr ""
 
-#: src/translations.h:282
+#: src/translations.h:287
 msgid "Look at the Sun from big planets of Solar System and Pluto."
 msgstr ""
 
-#: src/translations.h:283
+#: src/translations.h:288
 msgid ""
 "Best views of Earth from other Solar System bodies in the 21st Century."
 msgstr ""
 
-#: src/translations.h:284
+#: src/translations.h:289
 msgid "Transit of Venus as seen from Sydney Australia, 6th June 2012."
 msgstr ""
 
-#: src/translations.h:285
+#: src/translations.h:290
 msgid ""
 "A demonstration of the analemma - the path of the Sun across the sky during "
 "the year."
 msgstr ""
 
-#: src/translations.h:286
+#: src/translations.h:291
 msgid ""
 "Flash of the supernova observed by Tycho Brahe in 1572. The Supernovae "
 "plugin has to be enabled."
 msgstr ""
 
-#: src/translations.h:287
+#: src/translations.h:292
 msgid "Earth Greatest Elongations and Brilliancies from Mars 2000-3000"
 msgstr ""
 
-#: src/translations.h:288
+#: src/translations.h:293
 msgid "Earth Greatest Elongations from Jupiter 2000-3000"
 msgstr ""
 
-#: src/translations.h:292
+#: src/translations.h:297
 msgid "Andorra"
 msgstr "安道爾"
 
-#: src/translations.h:293
+#: src/translations.h:298
 msgid "United Arab Emirates"
 msgstr "阿聯"
 
-#: src/translations.h:294
+#: src/translations.h:299
 msgid "Afghanistan"
 msgstr "阿富汗"
 
-#: src/translations.h:295
+#: src/translations.h:300
 msgid "Antigua and Barbuda"
 msgstr "安地卡及巴布達"
 
-#: src/translations.h:296
+#: src/translations.h:301
 msgid "Anguilla"
 msgstr "英屬安圭拉"
 
-#: src/translations.h:297
+#: src/translations.h:302
 msgid "Albania"
 msgstr "阿爾巴尼亞"
 
-#: src/translations.h:298
+#: src/translations.h:303
 msgid "Armenia"
 msgstr "亞美尼亞"
 
-#: src/translations.h:299
+#: src/translations.h:304
 msgid "Netherlands Antilles"
 msgstr "荷屬安地列斯"
 
-#: src/translations.h:300
+#: src/translations.h:305
 msgid "Angola"
 msgstr "安哥拉"
 
-#: src/translations.h:301
+#: src/translations.h:306
 msgid "Antarctica"
 msgstr "南極洲"
 
-#: src/translations.h:302
+#: src/translations.h:307
 msgid "Argentina"
 msgstr "阿根廷"
 
-#: src/translations.h:303
+#: src/translations.h:308
 msgid "American Samoa"
 msgstr "美屬薩摩亞"
 
-#: src/translations.h:304
+#: src/translations.h:309
 msgid "Austria"
 msgstr "奧地利"
 
-#: src/translations.h:305
+#: src/translations.h:310
 msgid "Australia"
 msgstr "澳洲"
 
-#: src/translations.h:306
+#: src/translations.h:311
 msgid "Aruba"
 msgstr "阿魯巴"
 
-#: src/translations.h:307
+#: src/translations.h:312
 msgid "Azerbaijan"
 msgstr "亞塞拜然"
 
-#: src/translations.h:308
+#: src/translations.h:313
 msgid "Bosnia and Herzegowina"
 msgstr "波赫"
 
-#: src/translations.h:309
+#: src/translations.h:314
 msgid "Barbados"
 msgstr "巴貝多"
 
-#: src/translations.h:310
+#: src/translations.h:315
 msgid "Bangladesh"
 msgstr "孟加拉"
 
-#: src/translations.h:311
+#: src/translations.h:316
 msgid "Belgium"
 msgstr "比利時"
 
-#: src/translations.h:312
+#: src/translations.h:317
 msgid "Burkina Faso"
 msgstr "布吉納法索"
 
-#: src/translations.h:313
+#: src/translations.h:318
 msgid "Bulgaria"
 msgstr "保加利亞"
 
-#: src/translations.h:314
+#: src/translations.h:319
 msgid "Bahrain"
 msgstr "巴林"
 
-#: src/translations.h:315
+#: src/translations.h:320
 msgid "Burundi"
 msgstr "蒲隆地"
 
-#: src/translations.h:316
+#: src/translations.h:321
 msgid "Benin"
 msgstr "貝南"
 
-#: src/translations.h:317
+#: src/translations.h:322
 msgid "Bermuda"
 msgstr "百慕達"
 
-#: src/translations.h:318
+#: src/translations.h:323
 msgid "Brunei Darussalam"
 msgstr "汶萊"
 
-#: src/translations.h:319
+#: src/translations.h:324
 msgid "Bolivia"
 msgstr "玻利維亞"
 
-#: src/translations.h:320
+#: src/translations.h:325
 msgid "Brazil"
 msgstr "巴西"
 
-#: src/translations.h:321
+#: src/translations.h:326
 msgid "Bahamas"
 msgstr "巴哈馬"
 
-#: src/translations.h:322
+#: src/translations.h:327
 msgid "Bhutan"
 msgstr "不丹"
 
-#: src/translations.h:323
+#: src/translations.h:328
 msgid "Bouvet Island"
 msgstr "布威島"
 
-#: src/translations.h:324
+#: src/translations.h:329
 msgid "Botswana"
 msgstr "波札那"
 
-#: src/translations.h:325
+#: src/translations.h:330
 msgid "Belarus"
 msgstr "白俄羅斯"
 
-#: src/translations.h:326
+#: src/translations.h:331
 msgid "Belize"
 msgstr "貝里斯"
 
-#: src/translations.h:327
+#: src/translations.h:332
 msgid "Canada"
 msgstr "加拿大"
 
-#: src/translations.h:328
+#: src/translations.h:333
 msgid "Cocos Islands"
 msgstr "可可斯群島"
 
-#: src/translations.h:329
+#: src/translations.h:334
 msgid "Democratic Republic of the Congo"
 msgstr "民主剛果"
 
-#: src/translations.h:330
+#: src/translations.h:335
 msgid "Central African Republic"
 msgstr "中非"
 
-#: src/translations.h:331
+#: src/translations.h:336
 msgid "Republic of the Congo"
 msgstr "剛果"
 
-#: src/translations.h:332
+#: src/translations.h:337
 msgid "Switzerland"
 msgstr "瑞士"
 
-#: src/translations.h:333
+#: src/translations.h:338
 msgid "Cote d'Ivoire"
 msgstr "象牙海岸"
 
-#: src/translations.h:334
+#: src/translations.h:339
 msgid "Cook Islands"
 msgstr "庫克群島"
 
-#: src/translations.h:335
+#: src/translations.h:340
 msgid "Chile"
 msgstr "智利"
 
-#: src/translations.h:336
+#: src/translations.h:341
 msgid "Cameroon"
 msgstr "喀麥隆"
 
-#: src/translations.h:337
+#: src/translations.h:342
 msgid "China"
 msgstr "中國"
 
-#: src/translations.h:338
+#: src/translations.h:343
 msgid "Colombia"
 msgstr "哥倫比亞"
 
-#: src/translations.h:339
+#: src/translations.h:344
 msgid "Costa Rica"
 msgstr "哥斯達黎加"
 
-#: src/translations.h:340
+#: src/translations.h:345
 msgid "Serbia and Montenegro"
 msgstr "塞爾維亞與蒙特內哥羅"
 
-#: src/translations.h:341
+#: src/translations.h:346
 msgid "Cuba"
 msgstr "古巴"
 
-#: src/translations.h:342
+#: src/translations.h:347
 msgid "Cape Verde"
 msgstr "維德角"
 
-#: src/translations.h:343
+#: src/translations.h:348
 msgid "Christmas Island"
 msgstr "庫拉索"
 
-#: src/translations.h:344
+#: src/translations.h:349
 msgid "Cyprus"
 msgstr "賽普勒斯"
 
-#: src/translations.h:345
+#: src/translations.h:350
 msgid "Czech Republic"
 msgstr "捷克"
 
-#: src/translations.h:346
+#: src/translations.h:351
 msgid "Germany"
 msgstr "德國"
 
-#: src/translations.h:347
+#: src/translations.h:352
 msgid "Djibouti"
 msgstr "吉布地"
 
-#: src/translations.h:348
+#: src/translations.h:353
 msgid "Denmark"
 msgstr "丹麥"
 
-#: src/translations.h:349
+#: src/translations.h:354
 msgid "Dominica"
 msgstr "多米尼克"
 
-#: src/translations.h:350
+#: src/translations.h:355
 msgid "Dominican Republic"
 msgstr "多米尼加"
 
-#: src/translations.h:351
+#: src/translations.h:356
 msgid "Algeria"
 msgstr "阿爾及利亞"
 
-#: src/translations.h:352
+#: src/translations.h:357
 msgid "Ecuador"
 msgstr "厄瓜多"
 
-#: src/translations.h:353
+#: src/translations.h:358
 msgid "Estonia"
 msgstr "愛沙尼亞"
 
-#: src/translations.h:354
+#: src/translations.h:359
 msgid "Egypt"
 msgstr "埃及"
 
-#: src/translations.h:355
+#: src/translations.h:360
 msgid "Western Sahara"
 msgstr "西撒哈拉"
 
-#: src/translations.h:356
+#: src/translations.h:361
 msgid "Eritrea"
 msgstr "厄立垂亞"
 
-#: src/translations.h:357
+#: src/translations.h:362
 msgid "Spain"
 msgstr "西班牙"
 
-#: src/translations.h:358
+#: src/translations.h:363
 msgid "Ethiopia"
 msgstr "衣索比亞"
 
-#: src/translations.h:359
+#: src/translations.h:364
 msgid "Finland"
 msgstr "芬蘭"
 
-#: src/translations.h:360
+#: src/translations.h:365
 msgid "Fiji"
 msgstr "斐濟"
 
-#: src/translations.h:361
+#: src/translations.h:366
 msgid "Falkland Islands"
 msgstr "福克蘭群島"
 
-#: src/translations.h:362
+#: src/translations.h:367
 msgid "Micronesia"
 msgstr "密克羅尼西亞聯邦"
 
-#: src/translations.h:363
+#: src/translations.h:368
 msgid "Faroe Islands"
 msgstr "法羅群島"
 
-#: src/translations.h:364
+#: src/translations.h:369
 msgid "France"
 msgstr "法國"
 
-#: src/translations.h:365
+#: src/translations.h:370
 msgid "Gabon"
 msgstr "加彭"
 
-#: src/translations.h:366
+#: src/translations.h:371
 msgid "United Kingdom"
 msgstr "英國"
 
-#: src/translations.h:367
+#: src/translations.h:372
 msgid "Grenada"
 msgstr "格瑞那達"
 
-#: src/translations.h:368
+#: src/translations.h:373
 msgid "Georgia"
 msgstr "喬治亞"
 
-#: src/translations.h:369
+#: src/translations.h:374
 msgid "French Guiana"
 msgstr "法屬格亞那"
 
-#: src/translations.h:370
+#: src/translations.h:375
 msgid "Ghana"
 msgstr "迦納"
 
-#: src/translations.h:371
+#: src/translations.h:376
 msgid "Gibraltar"
 msgstr "直布羅陀"
 
-#: src/translations.h:372
+#: src/translations.h:377
 msgid "Greenland"
 msgstr "格陵蘭"
 
-#: src/translations.h:373
+#: src/translations.h:378
 msgid "Gambia"
 msgstr "甘比亞"
 
-#: src/translations.h:374
+#: src/translations.h:379
 msgid "Guinea"
 msgstr "幾內亞"
 
-#: src/translations.h:375
+#: src/translations.h:380
 msgid "Guadeloupe"
 msgstr "瓜德魯普島"
 
-#: src/translations.h:376
+#: src/translations.h:381
 msgid "Equatorial Guinea"
 msgstr "赤道幾內亞"
 
-#: src/translations.h:377
+#: src/translations.h:382
 msgid "Greece"
 msgstr "希臘"
 
-#: src/translations.h:378
+#: src/translations.h:383
 msgid "South Georgia and the South Sandwich Islands"
 msgstr "南喬治亞與南三明治群島"
 
-#: src/translations.h:379
+#: src/translations.h:384
 msgid "Guatemala"
 msgstr "瓜地馬拉"
 
-#: src/translations.h:380
+#: src/translations.h:385
 msgid "Guam"
 msgstr "管道"
 
-#: src/translations.h:381
+#: src/translations.h:386
 msgid "Guinea-Bissau"
 msgstr "幾內亞比索"
 
-#: src/translations.h:382
+#: src/translations.h:387
 msgid "Guyana"
 msgstr "蓋亞那"
 
-#: src/translations.h:383
+#: src/translations.h:388
 msgid "Hong Kong"
 msgstr "香港"
 
-#: src/translations.h:384
+#: src/translations.h:389
 msgid "Heard Island and McDonald Islands"
 msgstr "赫德及麥當勞群島"
 
-#: src/translations.h:385
+#: src/translations.h:390
 msgid "Honduras"
 msgstr "宏都拉斯"
 
-#: src/translations.h:386
+#: src/translations.h:391
 msgid "Croatia"
 msgstr "克羅埃西亞"
 
-#: src/translations.h:387
+#: src/translations.h:392
 msgid "Haiti"
 msgstr "海地"
 
-#: src/translations.h:388
+#: src/translations.h:393
 msgid "Hungary"
 msgstr "匈牙利"
 
-#: src/translations.h:389
+#: src/translations.h:394
 msgid "Indonesia"
 msgstr "印尼"
 
-#: src/translations.h:390
+#: src/translations.h:395
 msgid "Ireland"
 msgstr "愛爾蘭"
 
-#: src/translations.h:391
+#: src/translations.h:396
 msgid "Israel"
 msgstr "以色列"
 
-#: src/translations.h:392
+#: src/translations.h:397
 msgid "India"
 msgstr "印度"
 
-#: src/translations.h:393
+#: src/translations.h:398
 msgid "British Indian Ocean Territory"
 msgstr "英屬印度海地區"
 
-#: src/translations.h:394
+#: src/translations.h:399
 msgid "Iraq"
 msgstr "伊拉克"
 
-#: src/translations.h:395
+#: src/translations.h:400
 msgid "Iran"
 msgstr "伊朗"
 
-#: src/translations.h:396
+#: src/translations.h:401
 msgid "Iceland"
 msgstr "冰島"
 
-#: src/translations.h:397
+#: src/translations.h:402
 msgid "Italy"
 msgstr "意大利"
 
-#: src/translations.h:398
+#: src/translations.h:403
 msgid "Jamaica"
 msgstr "牙買加"
 
-#: src/translations.h:399
+#: src/translations.h:404
 msgid "Jordan"
 msgstr "約旦"
 
-#: src/translations.h:400
+#: src/translations.h:405
 msgid "Japan"
 msgstr "日本"
 
-#: src/translations.h:401
+#: src/translations.h:406
 msgid "Kenya"
 msgstr "肯亞"
 
-#: src/translations.h:402
+#: src/translations.h:407
 msgid "Kyrgyzstan"
 msgstr "吉爾吉斯"
 
-#: src/translations.h:403
+#: src/translations.h:408
 msgid "Cambodia"
 msgstr "柬埔寨"
 
-#: src/translations.h:404
+#: src/translations.h:409
 msgid "Kiribati"
 msgstr "吉里巴斯"
 
-#: src/translations.h:405
+#: src/translations.h:410
 msgid "Comoros"
 msgstr "葛摩"
 
-#: src/translations.h:406
+#: src/translations.h:411
 msgid "Saint Kitts and Nevis"
 msgstr "聖克里斯多福及尼維斯"
 
-#: src/translations.h:407
+#: src/translations.h:412
 msgid "Democratic People's Republic of Korea"
 msgstr "北韓"
 
-#: src/translations.h:408
+#: src/translations.h:413
 msgid "Republic of Korea"
 msgstr "韓國"
 
-#: src/translations.h:409
+#: src/translations.h:414
 msgid "Kuwait"
 msgstr "科威特"
 
-#: src/translations.h:410
+#: src/translations.h:415
 msgid "Cayman Islands"
 msgstr "開曼群島"
 
-#: src/translations.h:411
+#: src/translations.h:416
 msgid "Kazakhstan"
 msgstr "哈薩克"
 
-#: src/translations.h:412
+#: src/translations.h:417
 msgid "Lao"
 msgstr "遼國"
 
-#: src/translations.h:413
+#: src/translations.h:418
 msgid "Lebanon"
 msgstr "黎巴嫩"
 
-#: src/translations.h:414
+#: src/translations.h:419
 msgid "Saint Lucia"
 msgstr "聖露西亞"
 
-#: src/translations.h:415
+#: src/translations.h:420
 msgid "Liechtenstein"
 msgstr "列支敦司登"
 
-#: src/translations.h:416
+#: src/translations.h:421
 msgid "Sri Lanka"
 msgstr "斯里蘭卡"
 
-#: src/translations.h:417
+#: src/translations.h:422
 msgid "Liberia"
 msgstr "賴比瑞亞"
 
-#: src/translations.h:418
+#: src/translations.h:423
 msgid "Lesotho"
 msgstr "賴索托"
 
-#: src/translations.h:419
+#: src/translations.h:424
 msgid "Lithuania"
 msgstr "立陶宛"
 
-#: src/translations.h:420
+#: src/translations.h:425
 msgid "Luxembourg"
 msgstr "盧森堡"
 
-#: src/translations.h:421
+#: src/translations.h:426
 msgid "Latvia"
 msgstr "拉脫維亞"
 
-#: src/translations.h:422
+#: src/translations.h:427
 msgid "Libyan Arab Jamahiriya"
 msgstr "利比亞"
 
-#: src/translations.h:423
+#: src/translations.h:428
 msgid "Morocco"
 msgstr "摩洛哥"
 
-#: src/translations.h:424
+#: src/translations.h:429
 msgid "Monaco"
 msgstr "摩納哥"
 
-#: src/translations.h:425
+#: src/translations.h:430
 msgid "Moldova"
 msgstr "摩爾多瓦"
 
-#: src/translations.h:426
+#: src/translations.h:431
 msgid "Madagascar"
 msgstr "馬達加斯加"
 
-#: src/translations.h:427
+#: src/translations.h:432
 msgid "Marshall Islands"
 msgstr "馬紹爾群島"
 
-#: src/translations.h:428
+#: src/translations.h:433
 msgid "Macedonia"
 msgstr "馬其頓"
 
-#: src/translations.h:429
+#: src/translations.h:434
 msgid "Mali"
 msgstr "馬利"
 
-#: src/translations.h:430
+#: src/translations.h:435
 msgid "Myanmar"
 msgstr "緬甸"
 
-#: src/translations.h:431
+#: src/translations.h:436
 msgid "Mongolia"
 msgstr "蒙古"
 
-#: src/translations.h:432
+#: src/translations.h:437
 msgid "Macau"
 msgstr "澳門"
 
-#: src/translations.h:433
+#: src/translations.h:438
 msgid "Northern Mariana Islands"
 msgstr "北馬里亞納群島"
 
-#: src/translations.h:434
+#: src/translations.h:439
 msgid "Martinique"
 msgstr "法屬馬丁尼克"
 
-#: src/translations.h:435
+#: src/translations.h:440
 msgid "Mauritania"
 msgstr "茅利塔尼亞"
 
-#: src/translations.h:436
+#: src/translations.h:441
 msgid "Montserrat"
 msgstr "夢塞拉特島"
 
-#: src/translations.h:437
+#: src/translations.h:442
 msgid "Malta"
 msgstr "馬耳他"
 
-#: src/translations.h:438
+#: src/translations.h:443
 msgid "Mauritius"
 msgstr "模里西斯"
 
-#: src/translations.h:439
+#: src/translations.h:444
 msgid "Maldives"
 msgstr "馬爾地夫"
 
-#: src/translations.h:440
+#: src/translations.h:445
 msgid "Malawi"
 msgstr "馬拉威"
 
-#: src/translations.h:441
+#: src/translations.h:446
 msgid "Mexico"
 msgstr "墨西哥"
 
-#: src/translations.h:442
+#: src/translations.h:447
 msgid "Malaysia"
 msgstr "馬來西亞"
 
-#: src/translations.h:443
+#: src/translations.h:448
 msgid "Mozambique"
 msgstr "莫三比克"
 
-#: src/translations.h:444
+#: src/translations.h:449
 msgid "Namibia"
 msgstr "奈米比亞"
 
-#: src/translations.h:445
+#: src/translations.h:450
 msgid "New Caledonia"
 msgstr "新喀裡多尼亞到"
 
-#: src/translations.h:446
+#: src/translations.h:451
 msgid "Niger"
 msgstr "尼日"
 
-#: src/translations.h:447
+#: src/translations.h:452
 msgid "Norfolk Island"
 msgstr "諾福克到"
 
-#: src/translations.h:448
+#: src/translations.h:453
 msgid "Nigeria"
 msgstr "奈及利亞"
 
-#: src/translations.h:449
+#: src/translations.h:454
 msgid "Nicaragua"
 msgstr "尼加拉瓜"
 
-#: src/translations.h:450
+#: src/translations.h:455
 msgid "Netherlands"
 msgstr "荷蘭"
 
-#: src/translations.h:451
+#: src/translations.h:456
 msgid "Norway"
 msgstr "挪威"
 
-#: src/translations.h:452
+#: src/translations.h:457
 msgid "Nepal"
 msgstr "尼泊爾"
 
-#: src/translations.h:453
+#: src/translations.h:458
 msgid "Nauru"
 msgstr "諾魯"
 
-#: src/translations.h:454
+#: src/translations.h:459
 msgid "Niue"
 msgstr "紐埃"
 
-#: src/translations.h:455
+#: src/translations.h:460
 msgid "New Zealand"
 msgstr "紐西蘭"
 
-#: src/translations.h:456
+#: src/translations.h:461
 msgid "Oman"
 msgstr "阿曼"
 
-#: src/translations.h:457
+#: src/translations.h:462
 msgid "Panama"
 msgstr "巴拿馬"
 
-#: src/translations.h:458
+#: src/translations.h:463
 msgid "Peru"
 msgstr "秘魯"
 
-#: src/translations.h:459
+#: src/translations.h:464
 msgid "French Polynesia"
 msgstr "法屬玻里尼西亞"
 
-#: src/translations.h:460
+#: src/translations.h:465
 msgid "Papua New Guinea"
 msgstr "巴布亞新幾內亞"
 
-#: src/translations.h:461
+#: src/translations.h:466
 msgid "Philippines"
 msgstr "菲律賓"
 
-#: src/translations.h:462
+#: src/translations.h:467
 msgid "Pakistan"
 msgstr "巴基斯坦"
 
-#: src/translations.h:463
+#: src/translations.h:468
 msgid "Poland"
 msgstr "波蘭"
 
-#: src/translations.h:464
+#: src/translations.h:469
 msgid "Saint Pierre and Miquelon"
 msgstr "聖皮耶與密克隆群島"
 
-#: src/translations.h:465
+#: src/translations.h:470
 msgid "Pitcairn"
 msgstr "皮特康島"
 
-#: src/translations.h:466
+#: src/translations.h:471
 msgid "Puerto Rico"
 msgstr "波多黎各"
 
-#: src/translations.h:467
+#: src/translations.h:472
 msgid "Palestinian Territories"
 msgstr "巴勒斯坦"
 
-#: src/translations.h:468
+#: src/translations.h:473
 msgid "Portugal"
 msgstr "葡萄牙"
 
-#: src/translations.h:469
+#: src/translations.h:474
 msgid "Palau"
 msgstr "帛琉"
 
-#: src/translations.h:470
+#: src/translations.h:475
 msgid "Paraguay"
 msgstr "巴拉圭"
 
-#: src/translations.h:471
+#: src/translations.h:476
 msgid "Qatar"
 msgstr "卡達"
 
-#: src/translations.h:472
+#: src/translations.h:477
 msgid "Réunion"
 msgstr "留尼旺"
 
-#: src/translations.h:473
+#: src/translations.h:478
 msgid "Romania"
 msgstr "羅馬尼亞"
 
-#: src/translations.h:474
+#: src/translations.h:479
 msgid "Serbia"
 msgstr "塞爾維亞"
 
-#: src/translations.h:475
+#: src/translations.h:480
 msgid "Russian Federation"
 msgstr "俄羅斯"
 
-#: src/translations.h:476
+#: src/translations.h:481
 msgid "Rwanda"
 msgstr "盧安達"
 
-#: src/translations.h:477
+#: src/translations.h:482
 msgid "Saudi Arabia"
 msgstr "沙烏地阿拉伯"
 
-#: src/translations.h:478
+#: src/translations.h:483
 msgid "Solomon Islands"
 msgstr "索羅門群島"
 
-#: src/translations.h:479
+#: src/translations.h:484
 msgid "Seychelles"
 msgstr "塞席爾"
 
-#: src/translations.h:480
+#: src/translations.h:485
 msgid "Sudan"
 msgstr "蘇丹"
 
-#: src/translations.h:481
+#: src/translations.h:486
 msgid "Sweden"
 msgstr "瑞典"
 
-#: src/translations.h:482
+#: src/translations.h:487
 msgid "Singapore"
 msgstr "新加坡"
 
-#: src/translations.h:483
+#: src/translations.h:488
 msgid "Saint Helena"
 msgstr "聖赫勒那島"
 
-#: src/translations.h:484
+#: src/translations.h:489
 msgid "Slovenia"
 msgstr "斯洛維尼亞"
 
-#: src/translations.h:485
+#: src/translations.h:490
 msgid "Svalbard and Jan Mayen"
 msgstr "斯瓦巴及尖棉島"
 
-#: src/translations.h:486
+#: src/translations.h:491
 msgid "Slovakia"
 msgstr "斯洛伐克"
 
-#: src/translations.h:487
+#: src/translations.h:492
 msgid "Sierra Leone"
 msgstr "獅子山"
 
-#: src/translations.h:488
+#: src/translations.h:493
 msgid "San Marino"
 msgstr "聖馬利諾"
 
-#: src/translations.h:489
+#: src/translations.h:494
 msgid "Senegal"
 msgstr "塞內加爾"
 
-#: src/translations.h:490
+#: src/translations.h:495
 msgid "Somalia"
 msgstr "索馬利亞"
 
-#: src/translations.h:491
+#: src/translations.h:496
 msgid "Suriname"
 msgstr "蘇里南"
 
-#: src/translations.h:492
+#: src/translations.h:497
 msgid "Sao Tome and Principe"
 msgstr "聖多美普林西比"
 
-#: src/translations.h:493
+#: src/translations.h:498
 msgid "El Salvador"
 msgstr "薩爾瓦多"
 
-#: src/translations.h:494
+#: src/translations.h:499
 msgid "Syrian Arab Republic"
 msgstr "敘利亞"
 
-#: src/translations.h:495
+#: src/translations.h:500
 msgid "Swaziland"
 msgstr "史瓦濟蘭"
 
-#: src/translations.h:496
+#: src/translations.h:501
 msgid "Turks and Caicos Islands"
 msgstr "土克斯及開科斯群島"
 
-#: src/translations.h:497
+#: src/translations.h:502
 msgid "Chad"
 msgstr "查德"
 
-#: src/translations.h:498
+#: src/translations.h:503
 msgid "French Southern Territories"
 msgstr "法屬南部屬地"
 
-#: src/translations.h:499
+#: src/translations.h:504
 msgid "Togo"
 msgstr "多哥"
 
-#: src/translations.h:500
+#: src/translations.h:505
 msgid "Thailand"
 msgstr "泰國"
 
-#: src/translations.h:501
+#: src/translations.h:506
 msgid "Tajikistan"
 msgstr "塔吉克"
 
-#: src/translations.h:502
+#: src/translations.h:507
 msgid "Tokelau"
 msgstr "托克勞群島"
 
-#: src/translations.h:503
+#: src/translations.h:508
 msgid "East Timor"
 msgstr "東帝汶"
 
-#: src/translations.h:504
+#: src/translations.h:509
 msgid "Turkmenistan"
 msgstr "土庫曼"
 
-#: src/translations.h:505
+#: src/translations.h:510
 msgid "Tunisia"
 msgstr "突尼西亞"
 
-#: src/translations.h:506
+#: src/translations.h:511
 msgid "Tonga"
 msgstr "東加"
 
-#: src/translations.h:507
+#: src/translations.h:512
 msgid "Turkey"
 msgstr "土耳其"
 
-#: src/translations.h:508
+#: src/translations.h:513
 msgid "Trinidad and Tobago"
 msgstr "千里達及托巴哥"
 
-#: src/translations.h:509
+#: src/translations.h:514
 msgid "Tuvalu"
 msgstr "吐瓦魯"
 
-#: src/translations.h:510
+#: src/translations.h:515
 msgid "Taiwan"
 msgstr "台灣"
 
-#: src/translations.h:511
+#: src/translations.h:516
 msgid "Tanzania"
 msgstr "坦尚尼亞"
 
-#: src/translations.h:512
+#: src/translations.h:517
 msgid "Ukraine"
 msgstr "烏克蘭"
 
-#: src/translations.h:513
+#: src/translations.h:518
 msgid "Uganda"
 msgstr "烏干達"
 
-#: src/translations.h:514
+#: src/translations.h:519
 msgid "United States Minor Outlying Islands"
 msgstr "美國邊疆小島"
 
-#: src/translations.h:515
+#: src/translations.h:520
 msgid "United States"
 msgstr "美國"
 
-#: src/translations.h:516
+#: src/translations.h:521
 msgid "Uruguay"
 msgstr "烏拉圭"
 
-#: src/translations.h:517
+#: src/translations.h:522
 msgid "Uzbekistan"
 msgstr "烏茲別克"
 
-#: src/translations.h:518
+#: src/translations.h:523
 msgid "Vatican City State"
 msgstr "梵蒂岡"
 
-#: src/translations.h:519
+#: src/translations.h:524
 msgid "Saint Vincent and the Grenadines"
 msgstr "聖文森基格瑞那丁"
 
-#: src/translations.h:520
+#: src/translations.h:525
 msgid "Venezuela"
 msgstr "委內瑞拉"
 
-#: src/translations.h:521
+#: src/translations.h:526
 msgid "British Virgin Islands"
 msgstr "英屬維京群島"
 
-#: src/translations.h:522
+#: src/translations.h:527
 msgid "United States Virgin Islands"
 msgstr "美屬維京群島"
 
-#: src/translations.h:523
+#: src/translations.h:528
 msgid "Viet Nam"
 msgstr "越南"
 
-#: src/translations.h:524
+#: src/translations.h:529
 msgid "Vanuatu"
 msgstr "萬那杜"
 
-#: src/translations.h:525
+#: src/translations.h:530
 msgid "Wallis and Futuna"
 msgstr "沃里斯與伏塔那島"
 
-#: src/translations.h:526
+#: src/translations.h:531
 msgid "Samoa"
 msgstr "薩摩亞"
 
-#: src/translations.h:527
+#: src/translations.h:532
 msgid "Yemen"
 msgstr "葉門"
 
-#: src/translations.h:528
+#: src/translations.h:533
 msgid "Mayotte"
 msgstr "美亞特"
 
-#: src/translations.h:529
+#: src/translations.h:534
 msgid "Yugoslavia"
 msgstr "南斯拉夫"
 
-#: src/translations.h:530
+#: src/translations.h:535
 msgid "South Africa"
 msgstr "南非"
 
-#: src/translations.h:531
+#: src/translations.h:536
 msgid "Zambia"
 msgstr "尚比亞"
 
-#: src/translations.h:532
+#: src/translations.h:537
 msgid "Zimbabwe"
 msgstr "辛巴威"
 
@@ -8084,6 +8094,10 @@ msgstr ""
 
 #~ msgid "Mouse cursor timeout (seconds):"
 #~ msgstr "指定時間後隱藏滑鼠指標 (秒):"
+
+#, no-c-format, qt-format
+#~ msgid "Distance: %1AU"
+#~ msgstr "距離: %1AU (天文單位)"
 
 #~ msgid "Limiting Magnitude: "
 #~ msgstr "顯示星等極限: "
