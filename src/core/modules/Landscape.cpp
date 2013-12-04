@@ -257,12 +257,12 @@ void LandscapeOldStyle::load(const QSettings& landscapeIni, const QString& lands
 		sideTexs[i] = StelApp::getInstance().getTextureManager().createTexture(texturePath);
 		// GZ: To query the textures, also fill an array of QImage*, but only
 		// if that query is not going to be prevented by the polygon that already has been loaded at that point...
-		if (!horizonPolygon) {
+		if ( (!horizonPolygon) && calibrated ) { // for uncalibrated landscapes the texture is currently never queried, so no need to store.
 			QImage *image = new QImage(texturePath);
 			sidesImages.append(image); // indices identical to those in sideTexs
 		}
 	}
-	if (!horizonPolygon)
+	if ( (!horizonPolygon) && calibrated )
 	{
 		Q_ASSERT(sidesImages.size()==nbSideTexs);
 	}
@@ -720,7 +720,8 @@ void LandscapeFisheye::create(const QString _name, float _texturefov, const QStr
 	name = _name;
 	texFov = _texturefov*M_PI/180.f;
 	angleRotateZ = _angleRotateZ*M_PI/180.f;
-	mapImage = new QImage(_maptex);
+	if (!horizonPolygon)
+		mapImage = new QImage(_maptex);
 	mapTex = StelApp::getInstance().getTextureManager().createTexture(_maptex, StelTexture::StelTextureParams(true));
 
 	if (_maptexIllum.length())
@@ -761,7 +762,6 @@ void LandscapeFisheye::draw(StelCore* core)
 		sPainter.sSphereMap(radius,cols,rows,texFov,1);
 	}
 
-	// GZ new:
 	if (mapTexIllum && lightScapeBrightness>0.0f)
 	{
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE);
@@ -866,7 +866,8 @@ void LandscapeSpherical::create(const QString _name, const QString& _maptex, con
 	fogTexBottom  = (90.f-_fogTexBottom)  *M_PI/180.f;
 	illumTexTop   = (90.f-_illumTexTop)   *M_PI/180.f;
 	illumTexBottom= (90.f-_illumTexBottom)*M_PI/180.f;
-	mapImage = new QImage(_maptex);
+	if (!horizonPolygon)
+		mapImage = new QImage(_maptex);
 	mapTex = StelApp::getInstance().getTextureManager().createTexture(_maptex, StelTexture::StelTextureParams(true));
 
 	if (_maptexIllum.length())
