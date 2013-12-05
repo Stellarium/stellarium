@@ -1,0 +1,445 @@
+{
+    "version": "0.2.0",
+    "shortName": "meteor showers data",
+    "showers":
+	{
+		"QUA":
+		{
+            "designation": "Quadrantids",
+            "activity":
+            [
+                {
+                    "year": "generic",
+                    "zhr": 100,
+                    "start": "12.28",
+                    "finish": "01.12",
+                    "peak": "01.04"
+                },
+                {
+                    "year": "2011",
+                    "zhr": 120
+                }
+            ],
+			"speed": 41,
+			"radiantAlpha": "230",
+			"radiantDelta": "49",
+			"driftAlpha": "1",
+			"driftDelta": "-0.3",
+			"parentObj": "Asteroid 2003 EH1",
+			"pidx": 2.1,
+			"slong": 283.16
+		},
+        "ACE":
+        {
+            "designation": "α-Centaurids",
+            "activity":
+            [
+                {
+                    "year": "generic",
+                    "zhr": 6,
+                    "start": "01.28",
+                    "finish": "02.21",
+                    "peak": "02.08"
+                },
+                {
+                    "year": "2011",
+                    "zhr": 6
+                }
+            ],
+            "speed": 56,
+            "radiantAlpha": "210",
+            "radiantDelta": "-59",
+            "driftAlpha": "0",
+            "driftDelta": "0",
+            "pidx": 2.0,
+            "slong": 319.2
+        },
+        "GNO":
+        {
+            "designation": "γ-Normids",
+            "activity":
+            [
+                {
+                    "year": "generic",
+                    "zhr": 6,
+                    "start": "02.25",
+                    "finish": "03.22",
+                    "peak": "03.15"
+                },
+                {
+                    "year": "2011",
+                    "zhr": 6
+                }
+
+            ],
+            "speed": 56,
+            "radiantAlpha": "239",
+            "radiantDelta": "-50",
+            "driftAlpha": "0",
+            "driftDelta": "0",
+            "pidx": 2.4,
+            "slong": 354
+        },
+        "ETA":
+        {
+            "designation": "η-Aquariids",
+            "activity":
+            [
+                {
+                    "year": "generic",
+                    "zhr": 70,
+                    "start": "04.19",
+                    "finish": "05.28",
+                    "peak": "05.06"
+                },
+                {
+                    "year": "2011"
+                }
+
+            ],
+            "speed": 66,
+            "radiantAlpha": "338",
+            "radiantDelta": "-1",
+            "driftAlpha": "0",
+            "driftDelta": "0",
+            "parentObj": "Comet 1P/Halley",
+            "pidx": 2.4,
+            "slong": 45.5
+        },
+        "PAU":
+        {
+            "designation": "Piscis Austrinids",
+            "activity":
+            [
+                {
+                    "year": "generic",
+                    "zhr": 5,
+                    "start": "06.15",
+                    "finish": "08.10",
+                    "peak": "07.28"
+                },
+                {
+                    "year": "2011"
+                }
+
+            ],
+            "speed": 35,
+            "radiantAlpha": "341",
+            "radiantDelta": "-30",
+            "driftAlpha": "0",
+            "driftDelta": "0",
+            "pidx": 3.2,
+            "slong": 125
+        },
+		"LYR":
+		{
+			"designation": "Lyrids",
+            "activity":
+            [
+                {
+                    "year": "generic",
+                    "zhr": 18,
+                    "start": "04.16",
+                    "finish": "04.25",
+                    "peak": "04.22"
+                },
+                {
+                    "year": "2011",
+                    "zhr": 20
+                }
+
+            ],
+			"speed": 49,
+			"radiantAlpha": "271",
+			"radiantDelta": "34",
+			"driftAlpha": "1",
+			"driftDelta": "0",
+			"parentObj": "Comet Thatcher (1861 I)",
+			"pidx": 2.1,
+			"slong": 32.32
+        },
+        "JBO":
+        {
+            "designation": "June Bootids",
+            "activity":
+            [
+                {
+                    "year": "generic",
+                    "zhr": -1,
+                    "variable": "0-100",
+                    "start": "06.22",
+                    "finish": "07.02",
+                    "peak": "06.27"
+                },
+                {
+                    "year": "2011"
+                }
+
+            ],
+            "speed": 18,
+            "radiantAlpha": "224",
+            "radiantDelta": "48",
+            "driftAlpha": "0",
+            "driftDelta": "0",
+            "parentObj": "Comet 7P/Pons-Winnecke",
+            "pidx": 2.2,
+            "slong": 95.7
+        },
+        "SDA":
+        {
+            "designation": "Southern δ-Aquariids",
+            "activity":
+            [
+                {
+                    "year": "generic",
+                    "zhr": 16,
+                    "start": "07.12",
+                    "finish": "08.23",
+                    "peak": "07.30"
+                },
+                {
+                    "year": "2011"
+                }
+
+            ],
+            "speed": 41,
+            "radiantAlpha": "339",
+            "radiantDelta": "-16",
+            "driftAlpha": "0",
+            "driftDelta": "0",
+            "parentObj": "Comet 96P/Machholz",
+            "pidx": 3.2,
+            "slong": 127
+        },
+        "CAP":
+        {
+            "designation": "α-Capricornids",
+            "activity":
+            [
+                {
+                    "year": "generic",
+                    "zhr": 5,
+                    "start": "07.03",
+                    "finish": "08.15",
+                    "peak": "07.30"
+                },
+                {
+                    "year": "2011"
+                }
+
+            ],
+            "speed": 23,
+            "radiantAlpha": "307",
+            "radiantDelta": "-10",
+            "driftAlpha": "0",
+            "driftDelta": "0",
+            "pidx": 2.5,
+            "slong": 127
+        },
+        "AUR":
+        {
+            "designation": "α-Aurigids",
+            "activity":
+            [
+                {
+                    "year": "generic",
+                    "zhr": 6,
+                    "start": "08.28",
+                    "finish": "09.05",
+                    "peak": "09.01"
+                },
+                {
+                    "year": "2011"
+                }
+
+            ],
+            "speed": 66,
+            "radiantAlpha": "91",
+            "radiantDelta": "+39",
+            "driftAlpha": "0",
+            "driftDelta": "0",
+            "pidx": 2.6,
+            "slong": 158.6
+        },
+        "SPE":
+        {
+            "designation": "September ε-Perseids",
+            "activity":
+            [
+                {
+                    "year": "generic",
+                    "zhr": 5,
+                    "start": "09.04",
+                    "finish": "09.14",
+                    "peak": "09.09"
+                },
+                {
+                    "year": "2011"
+                }
+
+            ],
+            "speed": 64,
+            "radiantAlpha": "47",
+            "radiantDelta": "+40",
+            "driftAlpha": "0",
+            "driftDelta": "0",
+            "pidx": 3.0,
+            "slong": 166.7
+        },
+        "DRA":
+        {
+            "designation": "Draconids",
+            "activity":
+            [
+                {
+                    "year": "generic",
+                    "zhr": -1,
+                    "variable": "20-700",
+                    "start": "10.06",
+                    "finish": "10.10",
+                    "peak": "10.08"
+                },
+                {
+                    "year": "2011"
+                }
+
+            ],
+            "speed": 20,
+            "radiantAlpha": "262",
+            "radiantDelta": "+54",
+            "driftAlpha": "0",
+            "driftDelta": "0",
+            "pidx": 2.6
+        },
+        "LEO":
+        {
+            "designation": "Leonids",
+            "activity":
+            [
+                {
+                    "year": "generic",
+                    "zhr": -1,
+                    "variable": "5-20*",
+                    "start": "11.06",
+                    "finish": "11.30",
+                    "peak": "11.18"
+                },
+                {
+                    "year": "2011"
+                }
+
+            ],
+            "speed": 71,
+            "radiantAlpha": "152",
+            "radiantDelta": "+22",
+            "driftAlpha": "0",
+            "driftDelta": "0",
+            "parentObj": "Comet 55P/Tempel-Tuttle",
+            "pidx": 2.5,
+            "slong": 235.7
+        },
+        "PHO":
+        {
+            "designation": "Phoenicids",
+            "activity":
+            [
+                {
+                    "year": "generic",
+                    "zhr": -1,
+                    "variable": "0-100",
+                    "start": "11.28",
+                    "finish": "12.09",
+                    "peak": "12.06"
+                },
+                {
+                    "year": "2011"
+                }
+
+            ],
+            "speed": 18,
+            "radiantAlpha": "18",
+            "radiantDelta": "-53",
+            "driftAlpha": "0",
+            "driftDelta": "0",
+            "pidx": 2.8,
+            "slong": 254.25
+        },
+        "PUP":
+        {
+            "designation": "Puppid-Velids",
+            "activity":
+            [
+                {
+                    "year": "generic",
+                    "zhr": 10,
+                    "start": "12.01",
+                    "finish": "12.15",
+                    "peak": "12.07"
+                },
+                {
+                    "year": "2011"
+                }
+
+            ],
+            "speed": 40,
+            "radiantAlpha": "123",
+            "radiantDelta": "-45",
+            "driftAlpha": "0",
+            "driftDelta": "0",
+            "pidx": 2.9,
+            "slong": 255
+        },
+        "URS":
+        {
+            "designation": "Ursids",
+            "activity":
+            [
+                {
+                    "year": "generic",
+                    "zhr": -1,
+                    "variable": "10-50",
+                    "start": "12.17",
+                    "finish": "12.26",
+                    "peak": "12.23"
+                },
+                {
+                    "year": "2011"
+                }
+
+            ],
+            "speed": 33,
+            "radiantAlpha": "217",
+            "radiantDelta": "+76",
+            "driftAlpha": "0",
+            "driftDelta": "0",
+            "pidx": 3.0,
+            "slong": 270.7
+        },
+        "PER":
+        {
+            "designation": "Perseids",
+            "activity":
+            [
+                {
+                    "year": "generic",
+                    "zhr": 100,
+                    "start": "07.17",
+                    "finish": "08.24",
+                    "peak": "08.13"
+                },
+                {
+                    "year": "2011"
+                }
+
+            ],
+            "speed": 59,
+            "radiantAlpha": "48",
+            "radiantDelta": "+58",
+            "driftAlpha": "0",
+            "driftDelta": "0",
+            "parentObj": "Comet 109P/Swift-Tuttle",
+            "pidx": 2.2,
+            "slong": 140
+        }
+    }
+}
