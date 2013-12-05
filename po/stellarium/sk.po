@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-12-03 22:47+0700\n"
-"PO-Revision-Date: 2013-11-28 09:16+0000\n"
+"PO-Revision-Date: 2013-12-05 00:52+0000\n"
 "Last-Translator: Miroslav Remák <Unknown>\n"
 "Language-Team: Slovak <sk@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-12-04 05:28+0000\n"
-"X-Generator: Launchpad (build 16861)\n"
+"X-Launchpad-Export-Date: 2013-12-05 05:27+0000\n"
+"X-Generator: Launchpad (build 16863)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:106 src/core/modules/StarMgr.cpp:336
 #: src/core/modules/GridLinesMgr.cpp:679 src/core/modules/LandscapeMgr.cpp:335
@@ -258,7 +258,7 @@ msgstr "Vzdialenosť: %1AU (%2 km)"
 #: src/core/modules/Comet.cpp:161
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 Mio km)"
-msgstr ""
+msgstr "Vzdialenosť: %1AU (%2 mil. km)"
 
 #: src/core/modules/Planet.cpp:186
 #, qt-format
@@ -2215,12 +2215,12 @@ msgstr "Garching"
 #. TRANSLATORS: Name of landscape
 #: src/translations.h:207
 msgid "Geneve"
-msgstr ""
+msgstr "Ženeva"
 
 #. TRANSLATORS: Name of landscape
 #: src/translations.h:209
 msgid "Grossmugl"
-msgstr ""
+msgstr "Grossmugl"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:216
