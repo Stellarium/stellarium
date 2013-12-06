@@ -172,49 +172,47 @@ QString MeteorShower::getMonthName(int number) const
 int MeteorShower::checkActiveDate() const
 {
     StelCore* core = StelApp::getInstance().getCore();
+
+    //get the current sky date
     double JD = core->getJDay();
     QDateTime skyDate = StelUtils::jdToQDateTime(JD+StelUtils::getGMTShiftFromQT(JD)/24-core->getDeltaT(JD)/86400);
 
-    //Check if the current sky year
-    bool exists = checkYear(skyDate.toString("yyyy"));
-    int index = 0;
-    foreach(const activityData &p, activity)
+    //Check if we have real data for the current sky year
+    int index = checkYear(skyDate.toString("yyyy"));
+
+    QString dateStart = activity[index].start.isEmpty() ? activity[0].start : activity[index].start;
+    QString dateFinish = activity[index].finish.isEmpty() ? activity[0].finish : activity[index].finish;
+    QString yearBase = activity[index].year == "generic" ? skyDate.toString("yyyy") : activity[index].year;
+    QString yearS, yearF;
+
+    int monthStart = getMonthFromJSON(dateStart);
+
+    if (monthStart > getMonthFromJSON(dateFinish))
     {
-        if (!exists && index>0)
-            break;
-        index++;
-        QString dateStart = p.start.isEmpty() ? activity[0].start : p.start;
-        QString dateFinish = p.finish.isEmpty() ? activity[0].finish : p.finish;
-        QString yearBase = p.year == "generic" ? skyDate.toString("yyyy") : p.year;
-        QString yearS, yearF;
-
-        int monthStart = getMonthFromJSON(dateStart);
-        if (monthStart > getMonthFromJSON(dateFinish))
-        {
-            if (monthStart == skyDate.toString("MM").toInt()) {
-                yearS = yearBase;
-                yearF = QString("%1").arg(yearBase.toInt() + 1);
-            } else {
-                yearS = QString("%1").arg(yearBase.toInt() - 1);
-                yearF = yearBase;
-            }
-        }
-        else
-        {
-            yearS = yearF = yearBase;
-        }
-
-        QDateTime start = QDateTime::fromString(dateStart + " " + yearS, "MM.dd yyyy");
-        QDateTime finish = QDateTime::fromString(dateFinish + " " + yearF, "MM.dd yyyy");;
-
-        if(skyDate.operator >=(start) && skyDate.operator <=(finish))
-        {
-            if (exists)
-                return 1; // real data
-            else
-                return 2; // generic data
+        if (monthStart == skyDate.toString("MM").toInt()) {
+            yearS = yearBase;
+            yearF = QString("%1").arg(yearBase.toInt() + 1);
+        } else {
+            yearS = QString("%1").arg(yearBase.toInt() - 1);
+            yearF = yearBase;
         }
     }
+    else
+    {
+        yearS = yearF = yearBase;
+    }
+
+    QDateTime start = QDateTime::fromString(dateStart + " " + yearS, "MM.dd yyyy");
+    QDateTime finish = QDateTime::fromString(dateFinish + " " + yearF, "MM.dd yyyy");;
+
+    if(skyDate.operator >=(start) && skyDate.operator <=(finish))
+    {
+        if (index)
+            return 1; // real data
+        else
+            return 2; // generic data
+    }
+
     return 0; // isn't active
 }
 
