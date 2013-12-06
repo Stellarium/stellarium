@@ -155,7 +155,7 @@ LandscapeMgr::LandscapeMgr() : atmosphere(NULL), cardinalsPoints(NULL), landscap
 
 	//TODO: Find a way to obtain this list automatically.
 	//Note: The first entry in the list is used as the default 'default landscape' in removeLandscape().
-	packagedLandscapeIDs = (QStringList() << "guereins" << "grossmugl" << "geneve" << "trees" << "moon" << "hurricane" << "ocean" << "garching" << "mars" << "saturn");
+	packagedLandscapeIDs = (QStringList() << "guereins" << "grossmugl" << "geneva" << "trees" << "moon" << "hurricane" << "ocean" << "garching" << "mars" << "saturn");
 }
 
 LandscapeMgr::~LandscapeMgr()
