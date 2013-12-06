@@ -153,7 +153,7 @@ void Landscape::createPolygonalHorizon(const QString& lineFileName, const float 
 		//}
 		Vec3d point;
 		//qDebug() << "Creating point for az=" << list.at(0) << " alt/zd=" << list.at(1);
-		float az, alt;
+		float az = 0.f, alt = 0.f;
 
 		switch (coordMode)
 		{
@@ -534,7 +534,7 @@ void LandscapeOldStyle::drawGround(StelCore* core, StelPainter& sPainter) const
 {
 	if (!landFader.getInterstate())
 		return;
-	const float vshift = radius * (tanMode || calibrated) ? std::tan(groundAngleShift) : std::sin(groundAngleShift);
+	const float vshift = radius * ((tanMode || calibrated) ? std::tan(groundAngleShift) : std::sin(groundAngleShift));
 	StelProjector::ModelViewTranformP transfo = core->getAltAzModelViewTransform(StelCore::RefractionOff);
 	transfo->combine(Mat4d::zrotation(groundAngleRotateZ-angleRotateZOffset) * Mat4d::translation(Vec3d(0,0,vshift)));
 
