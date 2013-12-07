@@ -28,7 +28,6 @@
 #include <QDebug>
 #include <QFile>
 #include <QFileInfo>
-#include <QHttp>
 #include <QUrl>
 #include <QDir>
 #include <QBuffer>
@@ -37,6 +36,7 @@
 #include <QNetworkRequest>
 #include <QNetworkReply>
 #include <stdexcept>
+#include <stdio.h>
 
 // #include <QNetworkDiskCache>
 
@@ -115,22 +115,19 @@ void MultiLevelJsonBase::initFromUrl(const QString& url)
 	if (!url.startsWith("http://") && (parent==NULL || !parent->getBaseUrl().startsWith("http://")))
 	{
 		// Assume a local file
-		QString fileName;
-		try
+		QString fileName = StelFileMgr::findFile(url);
+		if (fileName.isEmpty())
 		{
-			fileName = StelFileMgr::findFile(url);
-		}
-		catch (std::runtime_error e)
-		{
-			try
+			if (parent==NULL)
 			{
-				if (parent==NULL)
-					throw std::runtime_error("NULL parent");
-				fileName = StelFileMgr::findFile(parent->getBaseUrl()+url);
+				qWarning() << "NULL parent";
+				errorOccured = true;
+				return;
 			}
-			catch (std::runtime_error e)
+			fileName = StelFileMgr::findFile(parent->getBaseUrl()+url);
+			if (fileName.isEmpty())
 			{
-				qWarning() << "WARNING : Can't find JSON description: " << url << ": " << e.what();
+				qWarning() << "WARNING : Can't find JSON description: " << url;
 				errorOccured = true;
 				return;
 			}
@@ -171,7 +168,7 @@ void MultiLevelJsonBase::initFromUrl(const QString& url)
 		}
 		Q_ASSERT(httpReply==NULL);
 		QNetworkRequest req(qurl);
-		req.setRawHeader("User-Agent", StelUtils::getApplicationName().toAscii());
+		req.setRawHeader("User-Agent", StelUtils::getApplicationName().toLatin1());
 		httpReply = getNetworkAccessManager().get(req);
 		//qDebug() << "Started downloading " << httpReply->request().url().path();
 		Q_ASSERT(httpReply->error()==QNetworkReply::NoError);

@@ -48,7 +48,7 @@ public:
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelModule class
 	virtual bool configureGui(bool show=true);
-	virtual void draw(StelCore* core, class StelRenderer* renderer);
+	virtual void draw(StelCore* core);
 	virtual double getCallOrder(StelModuleActionName actionName) const;
 	//! Returns the module-specific style sheet.
 	//! The main StelStyle instance should be passed.
@@ -114,6 +114,7 @@ private:
 class LogBookStelPluginInterface : public QObject, public StelPluginInterface
 {
 	Q_OBJECT
+	Q_PLUGIN_METADATA(IID "stellarium.StelGuiPluginInterface/1.0")
 	Q_INTERFACES(StelPluginInterface)
 public:
 	virtual StelModule* getStelModule() const;

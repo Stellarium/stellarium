@@ -38,7 +38,8 @@ public:
     Q_INVOKABLE Lens(const QObject& other);
     virtual ~Lens();
     static Lens* lensFromSettings(QSettings* theSettings, int lensIndex);
-    static Lens* lensModel();
+	 void writeToSettings(QSettings * settings, const int index);
+	 static Lens* lensModel();
 
     double multipler() const;
     void setMultipler(double theValue);

@@ -27,9 +27,11 @@
 #include <QDateTime>
 
 #include "StelObject.hpp"
+#include "StelTextureTypes.hpp"
+#include "StelPainter.hpp"
 #include "StelFader.hpp"
-#include "StelProjectorType.hpp"
 
+class StelPainter;
 
 //! @class Supernova
 //! A Supernova object represents one supernova on the sky.
@@ -52,7 +54,6 @@ public:
 	{
 		return "Supernova";
 	}
-	virtual float getSelectPriority(const StelCore* core) const;
 
 	//! Get an HTML string to describe the object
 	//! @param core A pointer to the core
@@ -63,7 +64,7 @@ public:
 	{
 		return XYZ;
 	}
-	virtual float getVMagnitude(const StelCore* core, bool withExtinction=false) const;
+	virtual float getVMagnitude(const StelCore* core) const;
 	virtual double getAngularSize(const StelCore* core) const;
 	virtual QString getNameI18n(void) const;
 	virtual QString getEnglishName(void) const;
@@ -75,7 +76,9 @@ private:
 
 	Vec3d XYZ;                         // holds J2000 position
 
-	void draw(StelCore* core, class StelRenderer* renderer, StelProjectorP projector);
+	static StelTextureSP hintTexture;
+
+	void draw(StelCore* core, StelPainter& painter);
 
 	// Supernova
 	QString designation;               //! The ID of the supernova
@@ -88,6 +91,8 @@ private:
 	double distance;		   //! Distance to supernova (10^3 ly)
 
 	LinearFader labelsFader;
+
+	QString getMaxBrightnessDate(const double JD) const;
 };
 
 #endif // _SUPERNOVA_HPP_

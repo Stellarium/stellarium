@@ -22,19 +22,20 @@
 
 #include <QFont>
 #include <QVariantMap>
+#include <QVector>
 #include "StelFader.hpp"
 #include "StelObjectModule.hpp"
+#include "StelTextureTypes.hpp"
 #include "StelProjectorType.hpp"
 
 class StelObject;
 class StelToneReproducer;
 class StelProjector;
+class StelPainter;
 class QSettings;
 
-namespace BigStarCatalogExtension {
-  class ZoneArray;
-  struct HipIndexStruct;
-}
+class ZoneArray;
+struct HipIndexStruct;
 
 static const int RCMAG_TABLE_SIZE = 4096;
 
@@ -79,6 +80,12 @@ typedef struct
 class StarMgr : public StelObjectModule
 {
 	Q_OBJECT
+	Q_PROPERTY(bool flagStarsDisplayed
+			   READ getFlagStars
+			   WRITE setFlagStars)
+	Q_PROPERTY(bool flagLabelsDisplayed
+			   READ getFlagLabels
+			   WRITE setFlagLabels)
 
 public:
 	StarMgr(void);
@@ -96,7 +103,7 @@ public:
 	virtual void init();
 
 	//! Draw the stars and the star selection indicator if necessary.
-	virtual void draw(StelCore* core, class StelRenderer* renderer);
+	virtual void draw(StelCore* core);
 
 	//! Update any time-dependent features.
 	//! Includes fading in and out stars and labels when they are turned on and off.
@@ -162,7 +169,7 @@ public slots:
 	float getLabelsAmount(void) const {return labelsAmount;}
 
 	//! Define font size to use for star names display.
-	void setFontSize(double newFontSize);
+	void setFontSize(float newFontSize);
 
 	//! Show scientific or catalog names on stars without common names.
 	static void setFlagSciNames(bool f) {flagSciNames = f;}
@@ -233,7 +240,7 @@ public:
 	//! Try to load the given catalog, even if it is marched as unchecked.
 	//! Mark it as checked if checksum is correct.
 	//! @return false in case of failure.
-	bool checkAndLoadCatalog(QVariantMap m);
+	bool checkAndLoadCatalog(const QVariantMap& m);
 
 private slots:
 	void setStelStyle(const QString& section);
@@ -273,7 +280,7 @@ private:
 	void loadData(QVariantMap starsConfigFile);
 
 	//! Draw a nice animated pointer around the object.
-	void drawPointer(class StelRenderer* renderer, StelProjectorP projector, const StelCore* core);
+	void drawPointer(StelPainter& sPainter, const StelCore* core);
 
 	LinearFader labelsFader;
 	LinearFader starsFader;
@@ -284,8 +291,9 @@ private:
 
 	int maxGeodesicGridLevel;
 	int lastMaxSearchLevel;
-	typedef QHash<int,BigStarCatalogExtension::ZoneArray*> ZoneArrayMap;
-	ZoneArrayMap zoneArrays; // index is the grid level
+	
+	// A ZoneArray per grid level
+	QVector<ZoneArray*> gridLevels;
 	static void initTriangleFunc(int lev, int index,
 								 const Vec3f &c0,
 								 const Vec3f &c1,
@@ -300,7 +308,7 @@ private:
 					  const Vec3f &c1,
 					  const Vec3f &c2);
 
-	BigStarCatalogExtension::HipIndexStruct *hipIndex; // array of hiparcos stars
+	HipIndexStruct *hipIndex; // array of hiparcos stars
 
 	static QHash<int, QString> commonNamesMap;
 	static QHash<int, QString> commonNamesMapI18n;
@@ -320,7 +328,7 @@ private:
 	static bool flagSciNames;
 	Vec3f labelColor;
 
-	class StelTextureNew* texPointer;		// The selection pointer texture
+	StelTextureSP texPointer;		// The selection pointer texture
 
 	class StelObjectMgr* objectMgr;
 

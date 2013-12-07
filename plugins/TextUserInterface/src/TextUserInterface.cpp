@@ -28,6 +28,7 @@
 #include "TuiNodeEnum.hpp"
 
 #include "StelProjector.hpp"
+#include "StelPainter.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelLocaleMgr.hpp"
@@ -43,7 +44,7 @@
 #include "GridLinesMgr.hpp"
 #include "MilkyWay.hpp"
 #include "StelLocation.hpp"
-#include "StelMainGraphicsView.hpp"
+#include "StelMainView.hpp"
 #include "StelSkyCultureMgr.hpp"
 #include "StelFileMgr.hpp"
 #include "StelUtils.hpp"
@@ -52,8 +53,6 @@
 #endif
 #include "StelGui.hpp"
 #include "StelGuiItems.hpp"// Funny thing to include in a TEXT user interface...
-#include "renderer/StelRenderer.hpp"
-
 
 #include <QKeyEvent>
 #include <QDebug>
@@ -93,8 +92,6 @@ StelPluginInfo TextUserInterfaceStelPluginInterface::getPluginInfo() const
 	info.description = N_("Plugin implementation of 0.9.x series Text User Interface (TUI), used in planetarium systems");
 	return info;
 }
-
-Q_EXPORT_PLUGIN2(TextUserInterface, TextUserInterfaceStelPluginInterface)
 
 
 /*************************************************************************
@@ -231,7 +228,7 @@ void TextUserInterface::init()
 	TuiNode* m3_2 = new TuiNodeEnum(N_("Language"),
 	                                this, 
 	                                SLOT(setAppLanguage(QString)), 
-									StelTranslator::globalTranslator.getAvailableLanguagesNamesNative(StelFileMgr::getLocaleDir()),
+									StelTranslator::globalTranslator->getAvailableLanguagesNamesNative(StelFileMgr::getLocaleDir()),
 					StelTranslator::iso639_1CodeToNativeName(localeMgr.getAppLanguage()),
 	                                m3, m3_1);
 	m3_1->setNextNode(m3_2);
@@ -448,7 +445,7 @@ void TextUserInterface::init()
 	#ifndef DISABLE_SCRIPTING
 	TuiNode* m7 = new TuiNode(N_("Scripts"), NULL, m6);
 	m6->setNextNode(m7);	
-	StelScriptMgr& scriptMgr = StelMainGraphicsView::getInstance().getScriptMgr();
+	StelScriptMgr& scriptMgr = StelApp::getInstance().getScriptMgr();
 	TuiNode* m7_1 = new TuiNodeEnum(N_("Run local script"),
 	                                &scriptMgr,
 	                                SLOT(runScript(QString)),
@@ -508,7 +505,7 @@ void TextUserInterface::loadConfiguration(void)
 /*************************************************************************
  Draw our module.
 *************************************************************************/
-void TextUserInterface::draw(StelCore* core, StelRenderer* renderer)
+void TextUserInterface::draw(StelCore* core)
 {
 	if (!tuiActive && !tuiDateTime && !tuiObjInfo)
 		return;
@@ -556,12 +553,10 @@ void TextUserInterface::draw(StelCore* core, StelRenderer* renderer)
 			tuiText = currentNode->getDisplayText();
 		}
 
-		renderer->setFont(font);
-		renderer->setGlobalColor(0.3f, 1.0f, 0.3f);
-		TextParams params = TextParams(text_x, text_y, tuiText)
-		                    .projector(core->getProjection(StelCore::FrameJ2000));
-		if(tuiGravityUi){params.useGravity();}
-		renderer->drawText(params);
+		StelPainter painter(core->getProjection(StelCore::FrameJ2000));
+		painter.setFont(font);
+		painter.setColor(0.3,1,0.3);
+		painter.drawText(text_x, text_y, tuiText, 0, 0, 0, !tuiGravityUi);
 	}
 
 	if (tuiDateTime) 
@@ -577,12 +572,10 @@ void TextUserInterface::draw(StelCore* core, StelRenderer* renderer)
 			text_y = yVc - fovOffsetX + pixOffset;
 		}
 
-		renderer->setFont(font);
-		renderer->setGlobalColor(0.3f, 1.0f, 0.3f);
-		TextParams params = TextParams(text_x, text_y, newDate)
-		                    .projector(core->getProjection(StelCore::FrameAltAz));
-		if(tuiGravityUi){params.useGravity();}
-		renderer->drawText(params);
+		StelPainter painter(core->getProjection(StelCore::FrameAltAz));
+		painter.setFont(font);
+		painter.setColor(0.3,1,0.3);
+		painter.drawText(text_x, text_y, newDate, 0, 0, 0, !tuiGravityUi);
 	}
 
 	if (tuiObjInfo) 
@@ -607,12 +600,10 @@ void TextUserInterface::draw(StelCore* core, StelRenderer* renderer)
 			text_y = yVc + fovOffsetY - pixOffset;
 		}
 
-		renderer->setFont(font);
-		renderer->setGlobalColor(0.3f, 1.0f, 0.3f);
-		TextParams params = TextParams(text_x, text_y, objInfo)
-		                    .projector(core->getProjection(StelCore::FrameJ2000));
-		if(tuiGravityUi){params.useGravity();}
-		renderer->drawText(params);
+		StelPainter painter(core->getProjection(StelCore::FrameJ2000));
+		painter.setFont(font);
+		painter.setColor(0.3,1,0.3);
+		painter.drawText(text_x, text_y, objInfo, 0, 0, 0, !tuiGravityUi);
 	}
 }
 
@@ -838,5 +829,5 @@ void TextUserInterface::setBortleScale(int bortle)
 	LandscapeMgr* landscapeMgr = GETSTELMODULE(LandscapeMgr);
 	StelSkyDrawer* skyDrawer = StelApp::getInstance().getCore()->getSkyDrawer();
 	landscapeMgr->setAtmosphereBortleLightPollution(bortle);
-	skyDrawer->setBortleScale(bortle);
+	skyDrawer->setBortleScaleIndex(bortle);
 }

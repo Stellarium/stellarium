@@ -33,23 +33,22 @@ Source: "INSTALL"; DestDir: "{app}"; DestName: "INSTALL.rtf"
 Source: "COPYING"; DestDir: "{app}"; DestName: "GPL.rtf"
 Source: "AUTHORS"; DestDir: "{app}"; DestName: "AUTHORS.rtf"
 Source: "ChangeLog"; DestDir: "{app}"; DestName: "ChangeLog.rtf"
-Source: "@ICONV_INCLUDE_DIR@/../bin/libiconv*.dll"; DestDir: "{app}";
-Source: "@INTL_INCLUDE_DIR@/../bin/libintl*.dll"; DestDir: "{app}";
 Source: "@ZLIB_INCLUDE_DIR@/../bin/zlib1.dll"; DestDir: "{app}";
 @ISS_ARCH_SPECIFIC_MINGW_LIBS@
-Source: "@QT_BINARY_DIR@\phonon4.dll"; DestDir: "{app}";
-Source: "@QT_BINARY_DIR@\QtSql4.dll"; DestDir: "{app}";
-Source: "@QT_BINARY_DIR@\QtSvg4.dll"; DestDir: "{app}";
-Source: "@QT_BINARY_DIR@\QtCore4.dll"; DestDir: "{app}";
-Source: "@QT_BINARY_DIR@\QtGui4.dll"; DestDir: "{app}";
-Source: "@QT_BINARY_DIR@\QtOpenGL4.dll"; DestDir: "{app}";
-Source: "@QT_BINARY_DIR@\QtNetwork4.dll"; DestDir: "{app}";
-Source: "@QT_BINARY_DIR@\QtScript4.dll"; DestDir: "{app}";
-Source: "@QT_BINARY_DIR@\QtXml4.dll"; DestDir: "{app}";
-;Source: "@QT_PLUGINS_DIR@\sqldrivers\qsqlite4.dll"; DestDir: "{app}\sqldrivers\";
+Source: "@QtCore_location@"; DestDir: "{app}";
+Source: "@QtGui_location@"; DestDir: "{app}";
+Source: "@QtOpenGL_location@"; DestDir: "{app}";
+Source: "@QtSvg_location@"; DestDir: "{app}";
+Source: "@QtNetwork_location@"; DestDir: "{app}";
+Source: "@QtWidgets_location@"; DestDir: "{app}";
+Source: "@QtDeclarative_location@"; DestDir: "{app}";
+Source: "@QtSql_location@"; DestDir: "{app}";
+Source: "@QtXmlPatterns_location@"; DestDir: "{app}";
+Source: "@QtConcurrent_location@"; DestDir: "{app}";
+@ISS_QT_SCRIPT@
+@ISS_QT_MULTIMEDIA@
+@ISS_ICU_LIBS@
 Source: "@CMAKE_INSTALL_PREFIX@\share\stellarium\*"; DestDir: "{app}\"; Flags: recursesubdirs
-; Locales
-Source: "@CMAKE_INSTALL_PREFIX@\share\locale\*"; DestDir: "{app}\locale\"; Flags: recursesubdirs
 
 [Tasks]
 Name: desktopicon; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"
