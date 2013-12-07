@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-03 22:47+0700\n"
-"PO-Revision-Date: 2013-12-02 02:20+0000\n"
-"Last-Translator: khtuan <khtuan@126.com>\n"
+"POT-Creation-Date: 2013-12-06 13:19+0700\n"
+"PO-Revision-Date: 2013-12-06 17:46+0000\n"
+"Last-Translator: Yao Chengyun <skystaryy@163.com>\n"
 "Language-Team: Chinese (Hong Kong) <zh_HK@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-12-04 05:32+0000\n"
-"X-Generator: Launchpad (build 16861)\n"
+"X-Launchpad-Export-Date: 2013-12-07 05:35+0000\n"
+"X-Generator: Launchpad (build 16869)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:106 src/core/modules/StarMgr.cpp:336
 #: src/core/modules/GridLinesMgr.cpp:679 src/core/modules/LandscapeMgr.cpp:335
@@ -337,7 +337,7 @@ msgstr "恒星"
 #: plugins/Quasars/src/Quasar.cpp:109
 #, qt-format
 msgid "Color Index (B-V): <b>%1</b>"
-msgstr ""
+msgstr "色指数（B-V）：<b>%1</b>"
 
 #: src/core/modules/StarWrapper.cpp:144
 msgid "eruptive variable star"
@@ -764,7 +764,7 @@ msgid ""
 "This formula was adopted by M. Chapront-Touze & J. Chapront in the shortened "
 "version of the ELP 2000-85 lunar theory in their <em>Lunar Tables and "
 "Programs from 4000 B.C. to A.D. 8000</em> (1991)."
-msgstr ""
+msgstr "该公式是"
 
 #: src/core/StelCore.cpp:1503
 #, qt-format
@@ -886,13 +886,13 @@ msgstr "错误"
 
 #: src/core/StelCore.cpp:1591
 msgid "with meaningless values outside this range"
-msgstr ""
+msgstr "超出范围的无意义数值"
 
 #: src/core/StelCore.cpp:1617
 msgid ""
 "with a mean error of less than one second, max. error 1.9s, and meaningless "
 "values outside this range"
-msgstr ""
+msgstr "平均误差小于1秒，最大误差1.9秒，其余都是超出范围的无意义数值"
 
 #: src/core/StelCore.cpp:1639 src/core/StelCore.cpp:1644
 #: src/core/StelCore.cpp:1671 src/core/StelCore.cpp:1676
@@ -901,7 +901,7 @@ msgstr ""
 
 #: src/core/StelCore.cpp:1649
 msgid "with a typical 1-second accuracy and zero values outside this range"
-msgstr ""
+msgstr "精确度一般在一秒内，超出该范围的数据无价值"
 
 #: src/core/StelCore.cpp:1686
 #, qt-format
@@ -1199,7 +1199,7 @@ msgstr "Schoch（1931年）"
 
 #: src/gui/ConfigurationDialog.cpp:1115
 msgid "Clemence (1948)"
-msgstr ""
+msgstr "克莱曼斯"
 
 #: src/gui/ConfigurationDialog.cpp:1116
 msgid "IAU (1952)"
@@ -1211,15 +1211,15 @@ msgstr "星历表（1960年）"
 
 #: src/gui/ConfigurationDialog.cpp:1118
 msgid "Tuckerman (1962, 1964) & Goldstine (1973)"
-msgstr ""
+msgstr "塔克曼（1962, 1964）和哥斯廷（1973）"
 
 #: src/gui/ConfigurationDialog.cpp:1119
 msgid "Muller & Stephenson (1975)"
-msgstr ""
+msgstr "穆勒和斯蒂芬森（1975）"
 
 #: src/gui/ConfigurationDialog.cpp:1120
 msgid "Stephenson (1978)"
-msgstr ""
+msgstr "斯蒂芬森（1978）"
 
 #: src/gui/ConfigurationDialog.cpp:1121
 msgid "Schmadel & Zech (1979)"
@@ -1227,15 +1227,15 @@ msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:1122
 msgid "Morrison & Stephenson (1982)"
-msgstr ""
+msgstr "莫里森和斯蒂芬森（1982）"
 
 #: src/gui/ConfigurationDialog.cpp:1123
 msgid "Stephenson & Morrison (1984)"
-msgstr ""
+msgstr "斯蒂芬森和莫里森（1984）"
 
 #: src/gui/ConfigurationDialog.cpp:1124
 msgid "Stephenson & Houlden (1986)"
-msgstr ""
+msgstr "斯蒂芬森和胡尔登（1986）"
 
 #: src/gui/ConfigurationDialog.cpp:1125
 msgid "Espenak (1987, 1989)"
@@ -1243,7 +1243,7 @@ msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:1126
 msgid "Borkowski (1988)"
-msgstr ""
+msgstr "博尔科夫斯基（1988）"
 
 #: src/gui/ConfigurationDialog.cpp:1127
 msgid "Schmadel & Zech (1988)"
@@ -1255,11 +1255,11 @@ msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:1129
 msgid "Stephenson & Morrison (1995)"
-msgstr ""
+msgstr "斯蒂芬森和莫里森（1995）"
 
 #: src/gui/ConfigurationDialog.cpp:1130
 msgid "Stephenson (1997)"
-msgstr ""
+msgstr "斯蒂芬森（1997）"
 
 #: src/gui/ConfigurationDialog.cpp:1132
 msgid "Meeus (1998) (with Chapront, Chapront-Touze & Francou (1997))"
@@ -1283,7 +1283,7 @@ msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:1137
 msgid "Morrison & Stephenson (2004, 2005)"
-msgstr ""
+msgstr "莫里森和斯蒂芬森（2004, 2005）"
 
 #: src/gui/ConfigurationDialog.cpp:1139
 msgid "Espenak & Meeus (2006)"
@@ -1647,7 +1647,7 @@ msgstr "全屏模式"
 #: src/StelMainView.cpp:357
 #, qt-format
 msgid "Stellarium %1"
-msgstr ""
+msgstr "Stellarium %1"
 
 #: src/translations.h:33 plugins/Exoplanets/src/Exoplanet.cpp:191
 #: plugins/Exoplanets/src/Exoplanet.cpp:195
@@ -2148,13 +2148,13 @@ msgstr "慕尼黑"
 
 #. TRANSLATORS: Name of landscape
 #: src/translations.h:207
-msgid "Geneve"
-msgstr ""
+msgid "Geneva"
+msgstr "日内瓦"
 
 #. TRANSLATORS: Name of landscape
 #: src/translations.h:209
 msgid "Grossmugl"
-msgstr ""
+msgstr "大穆格尔"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:216
@@ -3755,7 +3755,7 @@ msgstr "ZHR(每小时天顶流星数)："
 
 #: src/ui_viewDialog.h:1252
 msgid "1000"
-msgstr ""
+msgstr "1000"
 
 #: src/ui_viewDialog.h:1255
 msgid "Limit Magnitudes (for unaided/binocular observers)"
@@ -3850,7 +3850,7 @@ msgstr "将此背景设定为预设值"
 
 #: src/ui_viewDialog.h:1306
 msgid "Use brightness settings for landscapes"
-msgstr ""
+msgstr "为地景使用亮度设定"
 
 #: src/ui_viewDialog.h:1308
 msgid "Use this sky culture as default"
@@ -4022,7 +4022,7 @@ msgstr "大小"
 
 #: src/ui_configurationDialog.h:1037
 msgid "The type of the object (star, planet, etc.)"
-msgstr ""
+msgstr "目标的类型（恒星，行星，其他）"
 
 #: src/ui_configurationDialog.h:1039
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:268
@@ -6915,7 +6915,7 @@ msgstr "您可以使用搜索工具通过新星的名称或者通用名来找到
 msgid ""
 "This plugin uses a very simple model for calculation of light curves for "
 "novae stars."
-msgstr ""
+msgstr "该插件为新星使用了非常简单的光变曲线模型。"
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:115
 #, qt-format
@@ -7411,7 +7411,7 @@ msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:167
 msgid "General professional Web sites relevant to extrasolar planets"
-msgstr ""
+msgstr "全面专业的关于太阳系外行星的网站"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:168
 msgid "Exoplanets: an interactive version of XKCD 1071"
@@ -7419,11 +7419,11 @@ msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:169
 msgid "HEK (The Hunt for Exomoons with Kepler)"
-msgstr ""
+msgstr "HEK（用开普勒望远镜寻找系外卫星）"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:170
 msgid "Exoplanets in binaries and multiple systems (Richard Schwarz)"
-msgstr ""
+msgstr "双星和聚星系统中的地外行星（理查德·施瓦兹）"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:171
 msgid "Naming exoplanets (IAU)"
