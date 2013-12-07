@@ -243,7 +243,6 @@ QString MeteorShower::getInfoString(const StelCore* core, const InfoStringGroup&
 
     if (flags&Extra)
 	{
-        oss << "<p>";
 		oss << QString("%1: %2/%3")
 		       .arg(q_("Radiant drift"))
 		       .arg(StelUtils::radToHmsStr(driftAlpha))
@@ -260,11 +259,9 @@ QString MeteorShower::getInfoString(const StelCore* core, const InfoStringGroup&
         {
             oss << q_("Parent body: %1").arg(parentObj) << "<br />";
         }
-        oss << "</p>";
 
         double JD = core->getJDay();
         QString skyYear = StelUtils::jdToQDateTime(JD+StelUtils::getGMTShiftFromQT(JD)/24-core->getDeltaT(JD)/86400).toString("yyyy");
-        oss << "<p>";
 
         if (activity.size() > 0)
         {
@@ -315,7 +312,6 @@ QString MeteorShower::getInfoString(const StelCore* core, const InfoStringGroup&
                 oss << "<br />";
             }
         }
-        oss << "</p>";
     }
 
 	postProcessInfoString(str, flags);
