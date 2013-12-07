@@ -22,6 +22,8 @@
 #include "StelObjectModule.hpp"
 #include "StelObject.hpp"
 #include "StelFader.hpp"
+#include "StelTextureTypes.hpp"
+#include "StelPainter.hpp"
 #include "Pulsar.hpp"
 #include <QFont>
 #include <QVariantMap>
@@ -31,13 +33,13 @@
 
 class QNetworkAccessManager;
 class QNetworkReply;
-class QProgressBar;
 class QSettings;
 class QTimer;
 class QPixmap;
 class StelButton;
 class PulsarsDialog;
 
+class StelPainter;
 
 typedef QSharedPointer<Pulsar> PulsarP;
 
@@ -45,6 +47,7 @@ typedef QSharedPointer<Pulsar> PulsarP;
 class Pulsars : public StelObjectModule
 {
 	Q_OBJECT
+	Q_PROPERTY(bool pulsarsVisible READ getFlagShowPulsars WRITE setFlagShowPulsars)
 public:	
 	//! @enum UpdateState
 	//! Used for keeping for track of the download/update status
@@ -64,8 +67,8 @@ public:
 	virtual void init();
 	virtual void deinit();
 	virtual void update(double) {;}
-	virtual void draw(StelCore* core, class StelRenderer* renderer);
-	virtual void drawPointer(StelCore* core, class StelRenderer* renderer, StelProjectorP projector);
+	virtual void draw(StelCore* core);
+	virtual void drawPointer(StelCore* core, StelPainter& painter);
 	virtual double getCallOrder(StelModuleActionName actionName) const;
 
 	///////////////////////////////////////////////////////////////////////////
@@ -194,6 +197,10 @@ private:
 	//! @return version string, e.g. "2"
 	int getJsonFileFormatVersion(void);
 
+	//! Check format of the catalog of pulsars
+	//! @return valid boolean, e.g. "true"
+	bool checkJsonFileFormat(void);
+
 	//! parse JSON file and load pulsars to map
 	QVariantMap loadPSRMap(QString path=QString());
 
@@ -202,8 +209,7 @@ private:
 
 	QString jsonCatalogPath;
 
-	class StelTextureNew* texPointer;
-	class StelTextureNew* markerTexture;
+	StelTextureSP texPointer;
 	QList<PulsarP> psr;
 
 	// variables and functions for the updater
@@ -229,7 +235,7 @@ private:
 	QPixmap* OffIcon;
 	QPixmap* GlowIcon;
 	StelButton* toolbarButton;
-	QProgressBar* progressBar;
+	class StelProgressController* progressBar;
 
 
 private slots:
@@ -242,7 +248,7 @@ private slots:
 };
 
 
-#include "fixx11h.h"
+
 #include <QObject>
 #include "StelPluginInterface.hpp"
 
@@ -250,6 +256,7 @@ private slots:
 class PulsarsStelPluginInterface : public QObject, public StelPluginInterface
 {
 	Q_OBJECT
+	Q_PLUGIN_METADATA(IID "stellarium.StelGuiPluginInterface/1.0")
 	Q_INTERFACES(StelPluginInterface)
 public:
 	virtual StelModule* getStelModule() const;

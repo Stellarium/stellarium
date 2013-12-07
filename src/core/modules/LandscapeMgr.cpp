@@ -26,9 +26,11 @@
 #include <QDir>
 #include <QFile>
 #include <QTemporaryFile>
+#include <QMouseEvent>
 
 #include <stdexcept>
 
+#include "StelActionMgr.hpp"
 #include "LandscapeMgr.hpp"
 #include "Landscape.hpp"
 #include "Atmosphere.hpp"
@@ -41,7 +43,7 @@
 #include "Planet.hpp"
 #include "StelIniParser.hpp"
 #include "StelSkyDrawer.hpp"
-#include "renderer/StelRenderer.hpp"
+#include "StelPainter.hpp"
 #include "karchive.h"
 #include "kzip.h"
 
@@ -51,7 +53,7 @@ class Cardinals
 public:
 	Cardinals(float _radius = 1.);
 	virtual ~Cardinals();
-	void draw(const StelCore* core, StelRenderer* renderer, double latitude) const;
+	void draw(const StelCore* core, double latitude) const;
 	void setColor(const Vec3f& c) {color = c;}
 	Vec3f get_color() {return color;}
 	void updateI18n();
@@ -85,10 +87,11 @@ Cardinals::~Cardinals()
 
 // Draw the cardinals points : N S E W
 // handles special cases at poles
-void Cardinals::draw(const StelCore* core, StelRenderer* renderer, double latitude) const
+void Cardinals::draw(const StelCore* core, double latitude) const
 {
 	const StelProjectorP prj = core->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
-	renderer->setFont(font);
+	StelPainter sPainter(prj);
+	sPainter.setFont(font);
 
 	if (!fader.getInterstate()) return;
 
@@ -104,53 +107,41 @@ void Cardinals::draw(const StelCore* core, StelRenderer* renderer, double latitu
 	if (latitude ==  90.0 ) d[0] = d[1] = d[2] = d[3] = sSouth;
 	if (latitude == -90.0 ) d[0] = d[1] = d[2] = d[3] = sNorth;
 
-	renderer->setGlobalColor(color[0], color[1], color[2], fader.getInterstate());
-	renderer->setBlendMode(BlendMode_Alpha);
+	sPainter.setColor(color[0],color[1],color[2],fader.getInterstate());
+	glEnable(GL_BLEND);
+	sPainter.enableTexture2d(true);
+	// Normal transparency mode
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 	Vec3f pos;
 	Vec3f xy;
 
-	float shift = QFontMetrics(font).width(sNorth)/2;
+	float shift = sPainter.getFontMetrics().width(sNorth)/2;
 	if (core->getProjection(StelCore::FrameJ2000)->getMaskType() == StelProjector::MaskDisk)
 		shift = 0;
 
 	// N for North
 	pos.set(-1.f, 0.f, 0.f);
-	if (prj->project(pos, xy)) 
-	{
-		renderer->drawText(TextParams(xy[0], xy[1], d[0])
-		                  .shift(-shift, -shift).useGravity());
-	}
+	if (prj->project(pos,xy)) sPainter.drawText(xy[0], xy[1], d[0], 0., -shift, -shift, false);
 
 	// S for South
 	pos.set(1.f, 0.f, 0.f);
-	if (prj->project(pos, xy)) 
-	{
-		renderer->drawText(TextParams(xy[0], xy[1], d[1])
-		                  .shift(-shift, -shift).useGravity());
-	}
+	if (prj->project(pos,xy)) sPainter.drawText(xy[0], xy[1], d[1], 0., -shift, -shift, false);
 
 	// E for East
 	pos.set(0.f, 1.f, 0.f);
-	if (prj->project(pos, xy)) 
-	{
-		renderer->drawText(TextParams(xy[0], xy[1], d[2])
-		                  .shift(-shift, -shift).useGravity());
-	}
+	if (prj->project(pos,xy)) sPainter.drawText(xy[0], xy[1], d[2], 0., -shift, -shift, false);
 
 	// W for West
 	pos.set(0.f, -1.f, 0.f);
-	if (prj->project(pos, xy)) 
-	{
-		renderer->drawText(TextParams(xy[0], xy[1], d[3])
-		                  .shift(-shift, -shift).useGravity());
-	}
+	if (prj->project(pos,xy)) sPainter.drawText(xy[0], xy[1], d[3], 0., -shift, -shift, false);
+
 }
 
 // Translate cardinal labels with gettext to current sky language and update font for the language
 void Cardinals::updateI18n()
 {
-	StelTranslator& trans = StelApp::getInstance().getLocaleMgr().getAppStelTranslator();
+	const StelTranslator& trans = StelApp::getInstance().getLocaleMgr().getAppStelTranslator();
 	sNorth = trans.qtranslate("N");
 	sSouth = trans.qtranslate("S");
 	sEast = trans.qtranslate("E");
@@ -164,7 +155,7 @@ LandscapeMgr::LandscapeMgr() : atmosphere(NULL), cardinalsPoints(NULL), landscap
 
 	//TODO: Find a way to obtain this list automatically.
 	//Note: The first entry in the list is used as the default 'default landscape' in removeLandscape().
-	packagedLandscapeIDs = (QStringList() << "guereins" << "trees" << "moon" << "hurricane" << "ocean" << "garching" << "mars" << "saturn");
+	packagedLandscapeIDs = (QStringList() << "guereins" << "grossmugl" << "geneva" << "trees" << "moon" << "hurricane" << "ocean" << "garching" << "mars" << "saturn");
 }
 
 LandscapeMgr::~LandscapeMgr()
@@ -184,6 +175,9 @@ double LandscapeMgr::getCallOrder(StelModuleActionName actionName) const
 		return StelApp::getInstance().getModuleMgr().getModule("MeteorMgr")->getCallOrder(actionName)+20;
 	if (actionName==StelModule::ActionUpdate)
 		return StelApp::getInstance().getModuleMgr().getModule("SolarSystem")->getCallOrder(actionName)+10;
+	// GZ The next 2 lines are only required to test landscape transparency. They should be commented away for releases.
+	if (actionName==StelModule::ActionHandleMouseClicks)
+		return StelApp::getInstance().getModuleMgr().getModule("StelMovementMgr")->getCallOrder(actionName)-1;
 	return 0;
 }
 
@@ -203,12 +197,13 @@ void LandscapeMgr::update(double deltaTime)
 	Vec3d moonPos = ssystem->getMoon()->getAltAzPosApparent(core);
 	atmosphere->computeColor(core->getJDay(), sunPos, moonPos,
 		ssystem->getMoon()->getPhaseAngle(ssystem->getEarth()->getHeliocentricEclipticPos()),
-		core, ssystem->getEclipseFactor(core), core->getCurrentLocation().latitude, core->getCurrentLocation().altitude,
+		core, core->getCurrentLocation().latitude, core->getCurrentLocation().altitude,
 		15.f, 40.f);	// Temperature = 15c, relative humidity = 40%
 
 	core->getSkyDrawer()->reportLuminanceInFov(3.75+atmosphere->getAverageLuminance()*3.5, true);
 
 	// Compute the ground luminance based on every planets around
+	// TBD: Reactivate and verify this code!? Source, reference?
 //	float groundLuminance = 0;
 //	const vector<Planet*>& allPlanets = ssystem->getAllPlanets();
 //	for (vector<Planet*>::const_iterator i=allPlanets.begin();i!=allPlanets.end();++i)
@@ -235,20 +230,33 @@ void LandscapeMgr::update(double deltaTime)
 //	qDebug() << "Adapted Atmosphere lum=" << eye->adaptLuminance(atmosphere->getAverageLuminance()) << " Adapted ground lum=" << eye->adaptLuminance(groundLuminance);
 
 	// compute global ground brightness in a simplistic way, directly in RGB
-	float landscapeBrightness = 0;
 	sunPos.normalize();
 	moonPos.normalize();
 
-	// We define the brigthness zero when the sun is 8 degrees below the horizon.
-	float sinSunAngleRad = sin(qMin(M_PI_2, asin(sunPos[2])+8.*M_PI/180.));
-	float initBrightness = getInitialLandscapeBrightness();
+	float landscapeBrightness=0.0f;
+	if (getFlagLandscapeUseMinimalBrightness())
+	{
+		// Setting from landscape.ini has priority if enabled
+		if (getFlagLandscapeSetsMinimalBrightness() && landscape->getLandscapeMinimalBrightness()>=0)
+			landscapeBrightness = landscape->getLandscapeMinimalBrightness();
+		else
+			landscapeBrightness = getDefaultMinimalBrightness();
+	}
 
-	if(sinSunAngleRad < -0.1/1.5 )
-		landscapeBrightness = initBrightness;
-	else
-		landscapeBrightness = (initBrightness + 1.5*(sinSunAngleRad+0.1/1.5));
+	// We define the solar brightness contribution zero when the sun is 8 degrees below the horizon.
+	float sinSunAngle = sin(qMin(M_PI_2, asin(sunPos[2])+8.*M_PI/180.));
+	if(sinSunAngle > -0.1/1.5 )
+		landscapeBrightness +=  1.5*(sinSunAngle+0.1/1.5);
+
+
+	// GZ: 2013-09-25 Take light pollution into account!
+	StelSkyDrawer* drawer=StelApp::getInstance().getCore()->getSkyDrawer();
+	float pollutionAddonBrightness=(drawer->getBortleScaleIndex()-1.0f)*0.025f; // 0..8, so we assume empirical linear brightening 0..0.02
+	float lunarAddonBrightness;
 	if (moonPos[2] > -0.1/1.5)
-		landscapeBrightness += qMax(0.2/-12.*ssystem->getMoon()->getVMagnitude(core, true),0.)*moonPos[2];
+		lunarAddonBrightness = qMax(0.2/-12.*ssystem->getMoon()->getVMagnitudeWithExtinction(core),0.)*moonPos[2];
+
+	landscapeBrightness += qMax(lunarAddonBrightness, pollutionAddonBrightness);
 
 	// TODO make this more generic for non-atmosphere planets
 	if(atmosphere->getFadeIntensity() == 1)
@@ -257,31 +265,36 @@ void LandscapeMgr::update(double deltaTime)
 		// otherwise we just use the sun position calculation above
 		landscapeBrightness *= (atmosphere->getRealDisplayIntensityFactor()+0.1);
 	}
+	// TODO: should calculate dimming with solar eclipse even without atmosphere on
 
 	// Brightness can't be over 1.f (see https://bugs.launchpad.net/stellarium/+bug/1115364)
 	if (landscapeBrightness>0.95)
 		landscapeBrightness = 0.95;
 
-	// TODO: should calculate dimming with solar eclipse even without atmosphere on
 	if (core->getCurrentLocation().planetName.contains("Sun"))
 	{
 		// NOTE: Simple workaround for brightness of landscape when observing from the Sun.
-		landscape->setBrightness(1.f);
+		landscape->setBrightness(1.f, 0.0f);
 	}
 	else
-		landscape->setBrightness(landscapeBrightness+0.05);
+	{   float lightscapeBrightness=0.0f;
+		// night pollution brightness is mixed in at -3...-8 degrees.
+		if (sunPos[2]<-0.14f) lightscapeBrightness=1.0f;
+		else if (sunPos[2]<-0.05f) lightscapeBrightness = 1.0f-(sunPos[2]+0.14)/(-0.05+0.14);
+		landscape->setBrightness(landscapeBrightness, lightscapeBrightness);
+	}
 }
 
-void LandscapeMgr::draw(StelCore* core, class StelRenderer* renderer)
+void LandscapeMgr::draw(StelCore* core)
 {
 	// Draw the atmosphere
-	atmosphere->draw(core, renderer);
+	atmosphere->draw(core);
 
 	// Draw the landscape
-	landscape->draw(core, renderer);
+	landscape->draw(core);
 
 	// Draw the cardinal points
-	cardinalsPoints->draw(core, renderer, StelApp::getInstance().getCore()->getCurrentLocation().latitude);
+	cardinalsPoints->draw(core, StelApp::getInstance().getCore()->getCurrentLocation().latitude);
 }
 
 void LandscapeMgr::init()
@@ -302,8 +315,10 @@ void LandscapeMgr::init()
 	cardinalsPoints->setFlagShow(conf->value("viewing/flag_cardinal_points",true).toBool());
 	setFlagLandscapeSetsLocation(conf->value("landscape/flag_landscape_sets_location",false).toBool());
 	setFlagLandscapeAutoSelection(conf->value("viewing/flag_landscape_autoselection", false).toBool());
-	// Set initial brightness for landscape. This feature has been added for folks which say "landscape is super dark, please add light". --AW
-	setInitialLandscapeBrightness(conf->value("landscape/initial_brightness", 0.01).toFloat());
+	// Set minimal brightness for landscape. This feature has been added for folks which say "landscape is super dark, please add light". --AW
+	setDefaultMinimalBrightness(conf->value("landscape/minimal_brightness", 0.01).toFloat());
+	setFlagLandscapeUseMinimalBrightness(conf->value("landscape/flag_minimal_brightness", false).toBool());
+	setFlagLandscapeSetsMinimalBrightness(conf->value("landscape/flag_landscape_sets_minimal_brightness",false).toBool());
 
 	bool ok =true;
 	setAtmosphereBortleLightPollution(conf->value("stars/init_bortle_scale",3).toInt(&ok));
@@ -316,6 +331,12 @@ void LandscapeMgr::init()
 	StelApp *app = &StelApp::getInstance();
 	connect(app, SIGNAL(languageChanged()), this, SLOT(updateI18n()));
 	connect(app, SIGNAL(colorSchemeChanged(const QString&)), this, SLOT(setStelStyle(const QString&)));
+
+	QString displayGroup = N_("Display Options");
+	addAction("actionShow_Atmosphere", displayGroup, N_("Atmosphere"), "atmosphereDisplayed", "A");
+	addAction("actionShow_Fog", displayGroup, N_("Fog"), "fogDisplayed", "F");
+	addAction("actionShow_Cardinal_Points", displayGroup, N_("Cardinal points"), "cardinalsPointsDisplayed", "Q");
+	addAction("actionShow_Ground", displayGroup, N_("Ground"), "landscapeDisplayed", "G");
 }
 
 void LandscapeMgr::setStelStyle(const QString& section)
@@ -333,18 +354,13 @@ bool LandscapeMgr::setCurrentLandscapeID(const QString& id)
 		return false;
 
 	// We want to lookup the landscape ID (dir) from the name.
-	Landscape* newLandscape = NULL;
-	try
-	{
-		newLandscape = createFromFile(StelFileMgr::findFile("landscapes/" + id + "/landscape.ini"), id);
-	}
-	catch (std::runtime_error& e)
-	{
-		qWarning() << "ERROR while loading default landscape " << "landscapes/" + id + "/landscape.ini" << ", (" << e.what() << ")";
-	}
-
+	Landscape* newLandscape = createFromFile(StelFileMgr::findFile("landscapes/" + id + "/landscape.ini"), id);
+	
 	if (!newLandscape)
+	{
+		qWarning() << "ERROR while loading default landscape " << "landscapes/" + id + "/landscape.ini";
 		return false;
+	}
 
 	if (landscape)
 	{
@@ -356,12 +372,9 @@ bool LandscapeMgr::setCurrentLandscapeID(const QString& id)
 	}
 	currentLandscapeID = id;
 
-	if (getFlagLandscapeSetsLocation())
+	if (getFlagLandscapeSetsLocation() && landscape->hasLocation())
 	{
 		StelApp::getInstance().getCore()->moveObserverTo(landscape->getLocation());
-		// GZ Patch: allow change in fog, extinction, refraction parameters and light pollution
-		//QSettings* conf = StelApp::getInstance().getSettings();
-		//Q_ASSERT(conf);
 		StelSkyDrawer* drawer=StelApp::getInstance().getCore()->getSkyDrawer();
 
 		if (landscape->getDefaultFogSetting() >-1)
@@ -372,7 +385,7 @@ bool LandscapeMgr::setCurrentLandscapeID(const QString& id)
 		if (landscape->getDefaultBortleIndex() > 0)
 		{
 			setAtmosphereBortleLightPollution(landscape->getDefaultBortleIndex());
-			drawer->setBortleScale(landscape->getDefaultBortleIndex());
+			drawer->setBortleScaleIndex(landscape->getDefaultBortleIndex());
 		}
 		if (landscape->getDefaultAtmosphericExtinction() >= 0.0)
 		{
@@ -395,6 +408,7 @@ bool LandscapeMgr::setCurrentLandscapeID(const QString& id)
 			drawer->setAtmospherePressure(p);
 		}
 	}
+	// else qDebug() << "Will not set new location; Landscape location: planet: " << landscape->getLocation().planetName << "name: " << landscape->getLocation().name;
 	return true;
 }
 
@@ -443,6 +457,11 @@ void LandscapeMgr::setFlagLandscape(const bool displayed)
 bool LandscapeMgr::getFlagLandscape() const
 {
 	return landscape->getFlagShow();
+}
+
+bool LandscapeMgr::getIsLandscapeFullyVisible() const
+{
+	return landscape->getIsFullyVisible();
 }
 
 void LandscapeMgr::setFlagFog(const bool displayed)
@@ -585,7 +604,7 @@ bool LandscapeMgr::getFlagAtmosphere() const
 }
 
 //! Set atmosphere fade duration in s
-void LandscapeMgr::setAtmosphereFadeDuration(float f)
+void LandscapeMgr::setAtmosphereFadeDuration(const float f)
 {
 	atmosphere->setFadeDuration(f);
 }
@@ -597,7 +616,7 @@ float LandscapeMgr::getAtmosphereFadeDuration() const
 }
 
 //! Set light pollution luminance level
-void LandscapeMgr::setAtmosphereLightPollutionLuminance(float f)
+void LandscapeMgr::setAtmosphereLightPollutionLuminance(const float f)
 {
 	atmosphere->setLightPollutionLuminance(f);
 }
@@ -609,25 +628,25 @@ float LandscapeMgr::getAtmosphereLightPollutionLuminance() const
 }
 
 //! Set the light pollution following the Bortle Scale
-void LandscapeMgr::setAtmosphereBortleLightPollution(int bIndex)
+void LandscapeMgr::setAtmosphereBortleLightPollution(const int bIndex)
 {
 	// This is an empirical formula
-	setAtmosphereLightPollutionLuminance(qMax(0.,0.0020*std::pow(bIndex-1, 2.1)));
+	setAtmosphereLightPollutionLuminance(qMax(0.,0.0004*std::pow(bIndex-1, 2.1)));
 }
 
 //! Get the light pollution following the Bortle Scale
-int LandscapeMgr::getAtmosphereBortleLightPollution()
+int LandscapeMgr::getAtmosphereBortleLightPollution() const
 {
-	return (int)std::pow(getAtmosphereLightPollutionLuminance()/0.0020, 1./2.1) + 1;
+	return (int)std::pow(getAtmosphereLightPollutionLuminance()/0.0004, 1./2.1) + 1;
 }
 
-void LandscapeMgr::setZRotation(float d)
+void LandscapeMgr::setZRotation(const float d)
 {
 	if (landscape)
 		landscape->setZRotation(d);
 }
 
-float LandscapeMgr::getLuminance()
+float LandscapeMgr::getLuminance() const
 {
 	return atmosphere->getRealDisplayIntensityFactor();
 }
@@ -651,6 +670,8 @@ Landscape* LandscapeMgr::createFromFile(const QString& landscapeFile, const QStr
 		ldscp = new LandscapeSpherical();
 	else if (s=="fisheye")
 		ldscp = new LandscapeFisheye();
+	else if (s=="polygonal")
+		ldscp = new LandscapePolygonal();
 	else
 	{
 		qDebug() << "Unknown landscape type: \"" << s << "\"";
@@ -665,7 +686,7 @@ Landscape* LandscapeMgr::createFromFile(const QString& landscapeFile, const QStr
 }
 
 
-QString LandscapeMgr::nameToID(const QString& name)
+QString LandscapeMgr::nameToID(const QString& name) const
 {
 	QMap<QString,QString> nameToDirMap = getNameToDirMap();
 
@@ -685,35 +706,24 @@ QString LandscapeMgr::nameToID(const QString& name)
  ****************************************************************************/
 QMap<QString,QString> LandscapeMgr::getNameToDirMap() const
 {
-	QSet<QString> landscapeDirs;
 	QMap<QString,QString> result;
-	try
-	{
-		landscapeDirs = StelFileMgr::listContents("landscapes",StelFileMgr::Directory);
-	}
-	catch (std::runtime_error& e)
-	{
-		qDebug() << "ERROR while trying list landscapes:" << e.what();
-	}
+	QSet<QString> landscapeDirs = StelFileMgr::listContents("landscapes",StelFileMgr::Directory);
 
 	foreach (const QString& dir, landscapeDirs)
 	{
-		try
+		QString fName = StelFileMgr::findFile("landscapes/" + dir + "/landscape.ini");
+		if (!fName.isEmpty())
 		{
-			QSettings landscapeIni(StelFileMgr::findFile("landscapes/" + dir + "/landscape.ini"), StelIniFormat);
+			QSettings landscapeIni(fName, StelIniFormat);
 			QString k = landscapeIni.value("landscape/name").toString();
 			result[k] = dir;
-		}
-		catch (std::runtime_error& e)
-		{
-			//qDebug << "WARNING: unable to successfully read landscape.ini file from landscape " << dir;
 		}
 	}
 	return result;
 }
 
 
-QString LandscapeMgr::installLandscapeFromArchive(QString sourceFilePath, bool display, bool toMainDirectory)
+QString LandscapeMgr::installLandscapeFromArchive(QString sourceFilePath, const bool display, const bool toMainDirectory)
 {
 	Q_UNUSED(toMainDirectory);
 	if (!QFile::exists(sourceFilePath))
@@ -845,7 +855,7 @@ QString LandscapeMgr::installLandscapeFromArchive(QString sourceFilePath, bool d
 	destinationDir.cd(landscapeID);
 	QString destinationDirPath = destinationDir.absolutePath();
 	QStringList landscapeFileEntries = archiveTopDirectory->entries();
-	foreach (QString entry, landscapeFileEntries)
+	foreach (const QString entry, landscapeFileEntries)
 	{
 		const KArchiveEntry * archEntry = archiveTopDirectory->entry(entry);
 		if(archEntry->isFile())
@@ -869,7 +879,7 @@ QString LandscapeMgr::installLandscapeFromArchive(QString sourceFilePath, bool d
 	return landscapeID;
 }
 
-bool LandscapeMgr::removeLandscape(QString landscapeID)
+bool LandscapeMgr::removeLandscape(const QString landscapeID)
 {
 	if (landscapeID.isEmpty())
 	{
@@ -932,27 +942,24 @@ bool LandscapeMgr::removeLandscape(QString landscapeID)
 	return true;
 }
 
-QString LandscapeMgr::getLandscapePath(QString landscapeID)
+QString LandscapeMgr::getLandscapePath(const QString landscapeID) const
 {
 	QString result;
 	//Is this necessary? This function is private.
 	if (landscapeID.isEmpty())
 		return result;
 
-	try
+	result = StelFileMgr::findFile("landscapes/" + landscapeID, StelFileMgr::Directory);
+	if (result.isEmpty())
 	{
-		result = StelFileMgr::findFile("landscapes/" + landscapeID, StelFileMgr::Directory);
-	}
-	catch (std::runtime_error &e)
-	{
-		qWarning() << "LandscapeMgr: Error! Unable to find" << landscapeID << ":" << e.what();
+		qWarning() << "LandscapeMgr: Error! Unable to find" << landscapeID;
 		return result;
 	}
 
 	return result;
 }
 
-QString LandscapeMgr::loadLandscapeName(QString landscapeID)
+QString LandscapeMgr::loadLandscapeName(const QString landscapeID)
 {
 	QString landscapeName;
 	if (landscapeID.isEmpty())
@@ -980,7 +987,7 @@ QString LandscapeMgr::loadLandscapeName(QString landscapeID)
 	return landscapeName;
 }
 
-quint64 LandscapeMgr::loadLandscapeSize(QString landscapeID)
+quint64 LandscapeMgr::loadLandscapeSize(const QString landscapeID) const
 {
 	quint64 landscapeSize = 0;
 	if (landscapeID.isEmpty())
@@ -1005,17 +1012,40 @@ quint64 LandscapeMgr::loadLandscapeSize(QString landscapeID)
 
 QString LandscapeMgr::getDescription() const
 {
-        QString lang = StelApp::getInstance().getLocaleMgr().getAppLanguage();
-        if (!QString("pt_BR zh_CN zh_HK zh_TW").contains(lang))
-        {
-                lang = lang.split("_").at(0);
-        }
-	QString descriptionFile = StelFileMgr::findFile("landscapes/" + getCurrentLandscapeID(), StelFileMgr::Directory) + "/description." + lang + ".utf8";
-	QString desc;
+	QString lang, desc, descFile, locDescriptionFile, engDescriptionFile;
+	bool hasFile = true;
 
-	if(QFileInfo(descriptionFile).exists())
+	lang = StelApp::getInstance().getLocaleMgr().getAppLanguage();
+	locDescriptionFile = StelFileMgr::findFile("landscapes/" + getCurrentLandscapeID(), StelFileMgr::Directory) + "/description." + lang + ".utf8";
+	engDescriptionFile = StelFileMgr::findFile("landscapes/" + getCurrentLandscapeID(), StelFileMgr::Directory) + "/description.en.utf8";
+
+	// OK. Check the file with full name of locale
+	if (!QFileInfo(locDescriptionFile).exists())
 	{
-		QFile file(descriptionFile);
+		// Oops...  File not exists! What about short name of locale?
+		lang = lang.split("_").at(0);
+		locDescriptionFile = StelFileMgr::findFile("landscapes/" + getCurrentLandscapeID(), StelFileMgr::Directory) + "/description." + lang + ".utf8";
+	}
+
+	// Check localized description for landscape
+	if (!locDescriptionFile.isEmpty() && QFileInfo(locDescriptionFile).exists())
+	{		
+		descFile = locDescriptionFile;
+	}
+	// OK. Localized description of landscape not exists. What about english description of its?
+	else if (!engDescriptionFile.isEmpty() && QFileInfo(engDescriptionFile).exists())
+	{
+		descFile = engDescriptionFile;
+	}
+	// That file not exists too? OK. Will be used description from landscape.ini file.
+	else
+	{
+		hasFile = false;
+	}
+
+	if (hasFile)
+	{
+		QFile file(descFile);
 		file.open(QIODevice::ReadOnly | QIODevice::Text);
 		QTextStream in(&file);
 		in.setCodec("UTF-8");
@@ -1030,3 +1060,28 @@ QString LandscapeMgr::getDescription() const
 
 	return desc;
 }
+
+/*
+// GZ: Addition to identify landscape transparency. Used for development and debugging only, should be commented out in release builds.
+// Also, StelMovementMgr l.382 event->accept() must be commented out for this here to work!
+void LandscapeMgr::handleMouseClicks(QMouseEvent *event)
+{
+	switch (event->button())
+	{
+	case Qt::LeftButton :
+		if (event->type()==QEvent::MouseButtonRelease)
+		{
+			Vec3d v;
+			StelApp::getInstance().getCore()->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff)->unProject(event->x(),event->y(),v);
+			v.normalize();
+			float trans=landscape->getOpacity(v);
+			qDebug() << "Landscape opacity at screen X=" << event->x() << ", Y=" << event->y() << ": " << trans;
+		}
+		break;
+	default: break;
+
+	}
+	// do not event->accept(), so that it is forwarded to other modules.
+	return;
+}
+*/

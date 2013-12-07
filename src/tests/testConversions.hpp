@@ -21,7 +21,7 @@
 #define _TESTCONVERSIONS_HPP_
 
 #include <QObject>
-#include <QtTest>
+#include <QTest>
 
 class TestConversions : public QObject
 {

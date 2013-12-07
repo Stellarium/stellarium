@@ -1,10 +1,11 @@
 // Author: Qam1
 // Name: Solar system screensaver
 // License: Public Domain
-// Version: 177-1
-// Description: Screensaver of various happenings in the Solar System. 177 events in all!
+// Version: 187-1
+// Description: Screensaver of various happenings in the Solar System. 187 events in all!
 
-// Made on Stellarium Version 0.12.1
+
+// Made on Stellarium Version 12.2
 
 // This is the pause in seconds between each event
 // feel free to change to your likeing
@@ -13,8 +14,12 @@ spd = 8;
 
 // 
 
+core.setDeltaTAlgorithm("WithoutCorrection"); 
+
+
+
 // Number of Events
-l = 177;
+l = 187;
 
 
 degstring = "\u00B0";
@@ -24,7 +29,11 @@ SolarSystem.setLabelsAmount(20);
 SolarSystem.setFlagMoonScale(4);  
 LandscapeMgr.setFlagAtmosphere(true);
 
- 
+
+
+y = core.getScreenHeight()/768;
+x = core.getScreenWidth()/1024;
+
 
 eg = GridLinesMgr.getFlagEquatorGrid();
 
@@ -35,7 +44,7 @@ ob = SolarSystem.getFlagOrbits();
 id = new Array(length=l);
 for(i=1; i<l+1; i++)
 {
-id[i] = 172//i; 
+id[i] = i; 
 }
 
 // mix 'em up - A Swap command would be nice
@@ -81,7 +90,7 @@ var pick = Math.floor(Math.random()*4)+1;
 StelMovementMgr.zoomTo(pick, 1);
 
 d = "Venus passes through the Pleiades cluster 4/4/2036"
-txt1 = LabelMgr.labelScreen(d, 280, 20, false, 20, "#05A8F4");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#05A8F4");
 LabelMgr.setLabelShow(txt1, true);
 
 }
@@ -104,7 +113,7 @@ StelMovementMgr.setFlagTracking(true);
 StelMovementMgr.zoomTo(32, 1);
 
 d = "Jupiter - Saturn Conjunction 12/21/2020"
-txt1 = LabelMgr.labelScreen(d, 280, 20, false, 20, "#96AA22");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#96AA22");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -124,7 +133,7 @@ StelMovementMgr.zoomTo(61, 1);
 
 
 d = "Mars - Closest Approach in 65000 Years 08/27/2003"
-txt1 = LabelMgr.labelScreen(d, 280, 20, false, 20, "#FF0000");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#FF0000");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -145,7 +154,7 @@ StelMovementMgr.zoomTo(61, 1);
 
 
 d = "Jupiter - Closest opposition of 21st Century 10/07/2046"
-txt1 = LabelMgr.labelScreen(d, 280, 20, false, 20, "#CC7802");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#CC7802");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -170,7 +179,7 @@ StelMovementMgr.zoomTo(22, 1);
 
 
 d = "Jupiter - Uranus come into Opposition on the same day 9/21/2010"
-txt1 = LabelMgr.labelScreen(d, 280, 20, false, 20, "#74A82C");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#74A82C");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -189,7 +198,7 @@ StelMovementMgr.setFlagTracking(true);
 StelMovementMgr.zoomTo(22, 1);
 
 d = "Neptune's Closest Opposition of 21st Century 10/29/2041"
-txt1 = LabelMgr.labelScreen(d, 280, 20, false, 20, "#0E2FFC");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#0E2FFC");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -208,7 +217,7 @@ StelMovementMgr.setFlagTracking(true);
 StelMovementMgr.zoomTo(22, 1);
 
 d = "Mars comes within 0.8 degrees of Antares 08/02/2127"
-txt1 = LabelMgr.labelScreen(d, 280, 20, false, 20, "#D81B0B");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#D81B0B");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -227,7 +236,7 @@ StelMovementMgr.setFlagTracking(true);
 StelMovementMgr.zoomTo(32, 1);
 
 d = "Uranus' Closest Opposition of the 21st Century 03/14/2051"
-txt1 = LabelMgr.labelScreen(d, 280, 20, false, 20, "#41BA17");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#41BA17");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -247,7 +256,7 @@ StelMovementMgr.setFlagTracking(true);
 StelMovementMgr.zoomTo(0.03, 1);
 
 d = "Saturn's best ring view of the 21st century 12/24/2032"
-txt1 = LabelMgr.labelScreen(d, 280, 20, false, 20, "#DEE267");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#DEE267");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -266,7 +275,7 @@ StelMovementMgr.setFlagTracking(true);
 StelMovementMgr.zoomTo(38, 1);
 
 d = "Pluto's Next Perihelion 9/15/2237"
-txt1 = LabelMgr.labelScreen(d, 280, 20, false, 20, "#2677DE");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#2677DE");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -289,7 +298,7 @@ StelMovementMgr.setFlagTracking(true);
 StelMovementMgr.zoomTo(17, 1);
 
 d = "Uranus - Neptune Conjunction 8/19/1993"
-txt1 = LabelMgr.labelScreen(d, 280, 20, false, 20, "#2F04FA");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#2F04FA");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -310,7 +319,7 @@ var pick = Math.floor(Math.random()*4)+3;
 StelMovementMgr.zoomTo(pick*5, 1);
 
 d = "The Sydney Smile --> Venus-Jupiter-Moon 12/1/2008"
-txt1 = LabelMgr.labelScreen(d, 280, 20, false, 20, "#FFFFFF");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#FFFFFF");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -329,7 +338,7 @@ StelMovementMgr.setFlagTracking(true);
 StelMovementMgr.zoomTo(28, 1);
 
 d = "Pluto's Next Aphelion 2/19/2114"
-txt1 = LabelMgr.labelScreen(d, 280, 20, false, 20, "#52D1FC");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#52D1FC");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -368,7 +377,7 @@ StelMovementMgr.setFlagTracking(true);
 StelMovementMgr.zoomTo(31, 1);
 
 d = "Five planet and Moon Grouping 9/8/2040"
-txt1 = LabelMgr.labelScreen(d, 280, 20, false, 20, "#C6CCFA");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#C6CCFA");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -386,7 +395,7 @@ StelMovementMgr.setFlagTracking(true);
 StelMovementMgr.zoomTo(10, 1);
 
 d = "Jupiter and Regulus Conjunction 11/20/2038"
-txt1 = LabelMgr.labelScreen(d, 280, 20, false, 20, "#E6B823");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#E6B823");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -406,7 +415,7 @@ var pick = Math.floor(Math.random()*4)+3
 StelMovementMgr.zoomTo(pick, 1);
 
 d = "Brightest Full Moon of the 21st Century 12/6/2052"
-txt1 = LabelMgr.labelScreen(d, 280, 20, false, 20, "#FAFAFF");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#FAFAFF");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -446,7 +455,7 @@ core.selectObjectByName("Saturn", pointer = true);
 StelMovementMgr.zoomTo(60, 1);
 
 d = "Planetary Grouping 5/6/2002"
-txt1 = LabelMgr.labelScreen(d, 280, 20, false, 20, "#791BC9");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#791BC9");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -485,7 +494,7 @@ core.selectObjectByName("Ganymede", pointer = true);
 StelMovementMgr.zoomTo(0.355, 1);
 
 d = "All 4 Galilean Satellites at their Extreme Elongations at the same time 11/23/2012"
-txt1 = LabelMgr.labelScreen(d, 170, 20, false, 20, "#791B77");
+txt1 = LabelMgr.labelScreen(d, 170 * x, 20 * y, false, 20 * x, "#791B77");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -509,7 +518,7 @@ StelMovementMgr.setFlagTracking(true);
 StelMovementMgr.zoomTo(32, 1);
 
 d = "The Next Neptune - Pluto Conjunction 9/16/2383"
-txt1 = LabelMgr.labelScreen(d, 280, 20, false, 20, "#616898");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#616898");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -536,7 +545,7 @@ StelMovementMgr.setFlagTracking(true);
 StelMovementMgr.zoomTo(14, 1);
 
 d = "Just a nice grouping of Venus, Jupiter, Saturn and the Pleiades 4/5/2060"
-txt1 = LabelMgr.labelScreen(d, 280, 20, false, 20, "#BD2CB0");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#BD2CB0");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -565,7 +574,7 @@ StelMovementMgr.zoomTo(31, 1);
 
 SolarSystem.setLabelsAmount(18);   	
 d = "Uranus, Neptune and Pluto Conjunction 9/17/3367"
-txt1 = LabelMgr.labelScreen(d, 280, 20, false, 20, "#0CDDFC");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#0CDDFC");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -589,7 +598,7 @@ StelMovementMgr.zoomTo(0.02,1);
 
 SolarSystem.setLabelsAmount(18);   	
 d = "Venus  Occultation of Jupiter 9/14/2123"
-txt1 = LabelMgr.labelScreen(d, 280, 20, false, 20, "#CCDDFF");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#CCDDFF");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -620,7 +629,7 @@ if (pick == 3)
 core.selectObjectByName("Callisto", pointer = true);
 }
 d = "Triple Jupiter Moon Transit 1/17/2003"
-txt1 = LabelMgr.labelScreen(d, 280, 20, false, 20, "#CC7802");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#CC7802");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -651,16 +660,16 @@ StelMovementMgr.zoomTo(0.0136,1);
 }
 SolarSystem.setLabelsAmount(18);   	
 d = "Mars Occultation of Jupiter 12/02/2223"
-txt1 = LabelMgr.labelScreen(d, 280, 20, false, 20, "#FF0700");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#FF0700");
 LabelMgr.setLabelShow(txt1, true);
-
-
 }
+
+
 
 if (id[r] == 25)
 {
 // Saturn - Mars   07/09/3332
-core.setObserverLocation(-19.3, 44.50, 26, 1, "", "Earth");
+core.setObserverLocation(-50.00, 44.50, 26, 1, "", "Earth");
 core.setDate("3332-07-10T00:37:15", "utc");
 
 core.selectObjectByName("Saturn", pointer = false);
@@ -684,11 +693,12 @@ StelMovementMgr.zoomTo(0.0136,1);
 }
 SolarSystem.setLabelsAmount(18);   	
 d = "Mars Occultation of Saturn 07/09/3332"
-txt1 = LabelMgr.labelScreen(d, 280, 20, false, 20, "#FFAA00");
+txt1 = LabelMgr.labelScreen(d, 300 * x, 20 * y, false, 20 * x, "#FFAA00");
 LabelMgr.setLabelShow(txt1, true);
 
-
 }
+
+
 
 if (id[r] == 26)
 {
@@ -719,7 +729,7 @@ if (pick == 4)
 core.selectObjectByName("Mimas", pointer = true);
 }
 d = "An Incredible Quadruple Saturn Moon Transit 2/24/2009"
-txt1 = LabelMgr.labelScreen(d, 280, 20, false, 20, "#F1FBD9");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#F1FBD9");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -742,16 +752,18 @@ pick = pick/100;
 StelMovementMgr.zoomTo(pick, 1);
 
 d = "Venus Occultation of Regulus 10/01/2044"
-txt1 = LabelMgr.labelScreen(d, 280, 20, false, 20, "#FFDDFF");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#FFDDFF");
 LabelMgr.setLabelShow(txt1, true);
 
 
 }
 
+
+
 if (id[r] == 28)
 {
 // Jupiter - Saturn 4523
-core.setObserverLocation(110.33, -26.00, 26, 1, "", "Earth");
+core.setObserverLocation(-337.33, -20.00, 26, 1, "", "Earth");
 core.setDate("4523-03-09T03:34:07", "utc");
 
 core.selectObjectByName("Jupiter", pointer = false);
@@ -769,11 +781,12 @@ pick = pick /10;
 StelMovementMgr.zoomTo(pick, 1);
 
 d = "Jupiter - Saturn Closest Great Conjunction in 5000 years 3/09/4523"
-txt1 = LabelMgr.labelScreen(d, 280, 20, false, 20, "#A29165");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#A29165");
 LabelMgr.setLabelShow(txt1, true);
 
 
 }
+
 
 
 if (id[r]  == 29)
@@ -804,7 +817,7 @@ StelMovementMgr.setFlagTracking(true);
 StelMovementMgr.zoomTo(37, 1);
 
 d = "Saturn - Mars - Pluto - Jupiter Grouping 3/26/2020"
-txt1 = LabelMgr.labelScreen(d, 280, 20, false, 20, "#47B75D");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#47B75D");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -840,7 +853,7 @@ var pick = Math.floor(Math.random()*30)+44;
 StelMovementMgr.zoomTo(pick, 1);
 
 d = "Four planet and Moon Grouping 8/13/2010"
-txt1 = LabelMgr.labelScreen(d, 280, 20, false, 20, "#A95F3A");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#A95F3A");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -869,7 +882,7 @@ StelMovementMgr.setFlagTracking(true);
 StelMovementMgr.zoomTo(44, 1);
 
 d = "Mars and Jupiter oppositions within 10 days of each other 02/10/2027 + 02/19/2027"
-txt1 = LabelMgr.labelScreen(d, 200, 20, false, 18, "#FF2F00");
+txt1 = LabelMgr.labelScreen(d, 300 * x, 20 * y, false, 18 * x, "#FF2F00");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -905,7 +918,7 @@ SolarSystem.setLabelsAmount(20);
 StelMovementMgr.zoomTo(163, 1);
 
 d = "Planets at Voyager II launch 8/20/1977"
-txt1 = LabelMgr.labelScreen(d, 280, 20, false, 20, "#002F00");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#002F00");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -933,7 +946,7 @@ StelMovementMgr.setFlagTracking(true);
 StelMovementMgr.zoomTo(42, 1);
 
 d = "Mars - Saturn - Antares 8/24/2024"
-txt1 = LabelMgr.labelScreen(d, 280, 20, false, 20, "#FF1B00");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#FF1B00");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -954,7 +967,7 @@ StelMovementMgr.zoomTo(51, 1);
 
 
 d = "Mars closest (although not as close) to Earth since 2003 - 7/27/2018"
-txt1 = LabelMgr.labelScreen(d, 280, 20, false, 20, "#FF0F00");
+txt1 = LabelMgr.labelScreen(d, 320 * x, 20 * y, false, 20 * x, "#FF0F00");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -974,7 +987,7 @@ StelMovementMgr.setFlagTracking(true);
 StelMovementMgr.zoomTo(0.0145, 1);
 
 d = "Earth Occultation of Mars from Mercury 11/29/2022"
-txt1 = LabelMgr.labelScreen(d, 280, 20, false, 20, "#0AAFFF");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#0AAFFF");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -994,7 +1007,7 @@ var pick = Math.floor(Math.random()*3)+1.5;
 StelMovementMgr.zoomTo(pick, 1);
 
 d = "Total Eclipse of the sun by Europa from Ganymede 3/28/2015"
-txt1 = LabelMgr.labelScreen(d, 280, 20, false, 20, "#FFFF07");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#FFFF07");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -1014,7 +1027,7 @@ var pick = Math.floor(Math.random()*6)+2;
 StelMovementMgr.zoomTo(pick*pick, 1);
 
 d = "Earth's Brightest 21st Century opposition from Venus "
-txt1 = LabelMgr.labelScreen(d, 280, 20, false, 20, "#0070FF");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#0070FF");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -1040,11 +1053,11 @@ StelMovementMgr.zoomTo(7.39, 1);
 
 }
 d = "Earth's Greatest Illumination of the 21st Century as seen from Mars"
-txt1 = LabelMgr.labelScreen(d, 280, 20, false, 20, "#1170FF");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#1170FF");
 LabelMgr.setLabelShow(txt1, true);
 
 d = "Mag -2.393       07/26/2099"
-txt1 = LabelMgr.labelScreen(d, 480, 45, false, 20, "#1170FF");
+txt1 = LabelMgr.labelScreen(d, 480 * x, 45 * y, false, 20 * x, "#1170FF");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -1075,7 +1088,7 @@ StelMovementMgr.setFlagTracking(true);
 StelMovementMgr.zoomTo(41, 1);
 
 d = "Mars - Jupiter and Regulus 09/29/2062"
-txt1 = LabelMgr.labelScreen(d, 350, 20, false, 20, "#BF9150");
+txt1 = LabelMgr.labelScreen(d, 400 * x, 20 * y, false, 20 * x, "#BF9150");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -1106,7 +1119,7 @@ SolarSystem.setLabelsAmount(20);
 StelMovementMgr.zoomTo(63, 1);
 
 d = "Nice little morning planet Grouping 2015"
-txt1 = LabelMgr.labelScreen(d, 280, 20, false, 20, "#F2FFFF");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#F2FFFF");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -1133,10 +1146,10 @@ SolarSystem.setLabelsAmount(-20);
 SolarSystem.setFlagOrbits(false);
 }
 d = "Earth's Greatest Elongation of the 21st Century as seen from Saturn"
-txt1 = LabelMgr.labelScreen(d, 280, 20, false, 20, "#A0FF07");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#A0FF07");
 LabelMgr.setLabelShow(txt1, true);
 
-txt1 = LabelMgr.labelScreen("Elongation: 6.382 degrees", 280, 45, false, 20, "#A0FF07");
+txt1 = LabelMgr.labelScreen("Elongation: 6.382 degrees", 280 *x, 45*y, false, 20, "#A0FF07");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -1166,9 +1179,9 @@ SolarSystem.setLabelsAmount(-20);
 SolarSystem.setFlagOrbits(false);
 }
 d = "Earth's Greatest Elongation as seen from Pluto during it's next perihelion"
-txt1 = LabelMgr.labelScreen(d, 280, 15, false, 15, "#00FFFF");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 15 * y, false, 20 * x, "#00FFFF");
 LabelMgr.setLabelShow(txt1, true);
-txt1 = LabelMgr.labelScreen("Elongation 1.944 Degrees", 280, 45, false, 15, "#00FFFF");
+txt1 = LabelMgr.labelScreen("Elongation 1.944 Degrees", 280 * x, 45 * y, false, 20, "#00FFFF");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -1200,7 +1213,7 @@ StelMovementMgr.setFlagTracking(true);
 StelMovementMgr.zoomTo(10, 1);
 
 d = "Earth, Jupiter, Saturn and the Pleiades from Mars 9/30/2913"
-txt1 = LabelMgr.labelScreen(d, 280, 20, false, 20, "#AD2CF0");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#AD2CF0");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -1221,7 +1234,7 @@ pick = pick/10;
 StelMovementMgr.zoomTo(pick, 1);
 
 d = "Venus and Antares 0.050 degrees apart 10/17/2117"
-txt1 = LabelMgr.labelScreen(d, 280, 20, false, 20, "#F1FFF8");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#F1FFF8");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -1240,7 +1253,7 @@ StelMovementMgr.setFlagTracking(true);
 StelMovementMgr.zoomTo(34.2, 1);
 
 d = "Venus in Hyades 7/11/2028"
-txt1 = LabelMgr.labelScreen(d, 280, 20, false, 20, "#F1AFF8");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#F1AFF8");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -1268,7 +1281,7 @@ pick = pick /100;
 StelMovementMgr.zoomTo(pick, 1);
 
 d = "Jupiter Occults Saturn as seen from Neptune 4/29/2046"
-txt1 = LabelMgr.labelScreen(d, 280, 20, false, 20, "#A291FF");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#A291FF");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -1307,7 +1320,7 @@ SolarSystem.setLabelsAmount(18);
 StelMovementMgr.setFlagTracking(true);
 
 d = "Earth Occultation of Saturn from Venus 1/12/2032"
-txt1 = LabelMgr.labelScreen(d, 280, 20, false, 20, "#AAAAFF");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#AAAAFF");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -1339,7 +1352,7 @@ core.selectObjectByName("Moon", pointer = true);
 StelMovementMgr.zoomTo(20.1, 1);
 
 d = "Mercury - Venus - Uranus Triple Conjunction and Moon 8/11/2048"
-txt1 = LabelMgr.labelScreen(d, 280, 20, false, 20, "#79FFC9");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#79FFC9");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -1372,7 +1385,7 @@ StelMovementMgr.setFlagTracking(true);
 StelMovementMgr.zoomTo(56.1, 1);
 
 d = "An extremely close (0.8 degrees) Venus - Mars - Jupiter Triple Conjunction 5/14/3066"
-txt1 = LabelMgr.labelScreen(d, 280, 18, false, 17, "#F9FFCF");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 18 * y, false, 17, "#F9FFCF");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -1395,7 +1408,7 @@ pick = pick/100;
 StelMovementMgr.zoomTo(pick, 1);
 
 d = "Venus Occultation of Spica 9/02/2197"
-txt1 = LabelMgr.labelScreen(d, 280, 20, false, 20, "#77DDFF");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#77DDFF");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -1405,7 +1418,7 @@ if (id[r] == 51)
 {
 // 5 Planet Grouping 3194
 core.setObserverLocation(-69.23, 8.50, 26, 1, "", "Earth");
-core.setDate("3194-06-04T11:08:44", "utc");
+core.setDate("3194-06-04T09:28:44", "utc");
 
 core.selectObjectByName("Moon", pointer = true);
 var pick = Math.floor(Math.random()*5);
@@ -1434,7 +1447,7 @@ StelMovementMgr.setFlagTracking(true);
 StelMovementMgr.zoomTo(23, 1);
 
 d = " 5 Planet Conjunction 6/4/3194"
-txt1 = LabelMgr.labelScreen(d, 280, 20, false, 20, "#AAAAFF");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#AAAAFF");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -1467,7 +1480,7 @@ StelMovementMgr.setFlagTracking(true);
 StelMovementMgr.zoomTo(17.6, 1);
 
 d = "Solar Eclipse with Saturn and Jupiter near by 05/11/2059"
-txt1 = LabelMgr.labelScreen(d, 280, 20, false, 20, "#FFDAFF");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#FFDAFF");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -1521,7 +1534,7 @@ core.selectObjectByName("Pluto", pointer = true);
 StelMovementMgr.zoomTo(51, 1);
 
 d = "All planets lined up within 40 Degrees 4/3/8335"
-txt1 = LabelMgr.labelScreen(d, 280, 20, false, 20, "#FFFFFF");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#FFFFFF");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -1547,7 +1560,7 @@ core.selectObjectByName("Moon", pointer = false);
 }
 d = "Moon Transits Earth as seen from Mars 7/06/2014"
 SolarSystem.setFlagMoonScale(0);   	
-txt1 = LabelMgr.labelScreen(d, 280, 20, false, 20, "#0F0FFF");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#0F0FFF");
 LabelMgr.setLabelShow(txt1, true);
 	
 }
@@ -1575,7 +1588,7 @@ StelMovementMgr.zoomTo(pick/100, 1);
 
 SolarSystem.setLabelsAmount(20);   	
 d = "Earth Occultation of Jupiter 12/17/2331 from Mars"
-txt1 = LabelMgr.labelScreen(d, 280, 20, false, 20, "#2C66FF");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#2C66FF");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -1601,7 +1614,7 @@ SolarSystem.setFlagOrbits(true);
 StelMovementMgr.zoomTo(41.9, 1);
 
 d = "Earth's Brightest 21st Century illumination from Ceres"
-txt1 = LabelMgr.labelScreen(d, 280, 20, false, 20, "#70707F");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#70707F");
 LabelMgr.setLabelShow(txt1, true);
 SolarSystem.setFlagOrbits(false);
 ;
@@ -1623,7 +1636,7 @@ StelMovementMgr.setFlagTracking(true);
 StelMovementMgr.zoomTo(12.9, 1);
 
 d = "Brightest Full Earth from the Moon 1/21/2023"
-txt1 = LabelMgr.labelScreen(d, 220, 18, false, 15, "#FFFFFF");
+txt1 = LabelMgr.labelScreen(d, 220 * x, 18 * y, false, 25, "#FFFFFF");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -1642,7 +1655,7 @@ StelMovementMgr.setFlagTracking(true);
 StelMovementMgr.zoomTo(14.9, 1);
 
 d = "Mars Near the Pleiades 2/5/2038"
-txt1 = LabelMgr.labelScreen(d, 280, 20, false, 20, "#FF1101");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#FF1101");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -1671,7 +1684,7 @@ SolarSystem.setLabelsAmount(20);
 StelMovementMgr.zoomTo(14.9, 1);
 	
 d = "Mars - Jupiter - Spica 07/29/2029"
-txt1 = LabelMgr.labelScreen(d, 280, 20, false, 20, "#FFEE07");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#FFEE07");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -1690,7 +1703,7 @@ core.selectObjectByName("Uranus", pointer = true);
 StelMovementMgr.zoomTo(94.9, 1);
 
 d = "Urauns Opposition from Saturn 7/23/2032";
-txt1 = LabelMgr.labelScreen(d, 280, 20, false, 20, "#11FF01");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#11FF01");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -1709,7 +1722,7 @@ StelMovementMgr.setFlagTracking(true);
 StelMovementMgr.zoomTo(124, 1);
 
 d = "Neptune Opposition from Uranus 12/31/2164";
-txt1 = LabelMgr.labelScreen(d, 280, 20, false, 20, "#010FFF");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#010FFF");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -1728,7 +1741,7 @@ StelMovementMgr.setFlagTracking(true);
 StelMovementMgr.zoomTo(74, 1);
 
 d = "Jupiter closest 21st century opposition from Mars 5/19/2011";
-txt1 = LabelMgr.labelScreen(d, 280, 20, false, 20, "#F7714F");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#F7714F");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -1747,7 +1760,7 @@ StelMovementMgr.setFlagTracking(true);
 StelMovementMgr.zoomTo(14, 1);
 
 d = "Earth closest 21st century opposition from Mercury 5/31/2061";
-txt1 = LabelMgr.labelScreen(d, 280, 20, false, 20, "#E03857");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#E03857");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -1772,7 +1785,7 @@ StelMovementMgr.setFlagTracking(true);
 StelMovementMgr.zoomTo(24.7, 1);
 
 d = "The Next Mercury - Pluto conjunction 1/30/2016";
-txt1 = LabelMgr.labelScreen(d, 280, 20, false, 20, "#BB4234");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#BB4234");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -1798,7 +1811,7 @@ StelMovementMgr.zoomTo(0.0135, 1);
 
 d = "Venus Occults Earth as seen from Mercury 12/2/2223"
 SolarSystem.setFlagMoonScale(0);   	
-txt1 = LabelMgr.labelScreen(d, 280, 20, false, 20, "#A2C9FA");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#A2C9FA");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -1826,7 +1839,7 @@ StelMovementMgr.setFlagTracking(true);
 StelMovementMgr.zoomTo(9.2, 1);
 
 d = "Venus - Saturn and Regulus 10/2/2036"
-txt1 = LabelMgr.labelScreen(d, 280, 20, false, 20, "#BF9150");
+txt1 = LabelMgr.labelScreen(d, 380 * x, 20 * y, false, 20 * x, "#BF9150");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -1850,7 +1863,7 @@ StelMovementMgr.setFlagTracking(true);
 StelMovementMgr.zoomTo(15, 1);
 
 d = "Jupiter - Saturn - Full Moon - Spica Grouping 4/16/2041"
-txt1 = LabelMgr.labelScreen(d, 280, 20, false, 20, "#9FAA92");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#9FAA92");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -1874,7 +1887,7 @@ StelMovementMgr.setFlagTracking(true);
 StelMovementMgr.zoomTo(82, 1);
 
 d = "Jupiter - Venus Conjunction 3/13/2012"
-txt1 = LabelMgr.labelScreen(d, 280, 20, false, 20, "#FFAFF2");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#FFAFF2");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -1898,7 +1911,7 @@ StelMovementMgr.setFlagTracking(true);
 StelMovementMgr.zoomTo(0.0387, 1);
 
 d = "Venus - Zavijava Occultation 8/11/2069"
-txt1 = LabelMgr.labelScreen(d, 280, 20, false, 20, "#AAAAFF");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#AAAAFF");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -1921,7 +1934,7 @@ StelMovementMgr.setFlagTracking(true);
 StelMovementMgr.zoomTo(15, 1);
 
 d = "The Next Uranus - Neptune Conjunction 1/17/2165"
-txt1 = LabelMgr.labelScreen(d, 280, 20, false, 20, "#2104FF");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#2104FF");
 LabelMgr.setLabelShow(txt1, true);
 }
 
@@ -1952,8 +1965,8 @@ core.selectObjectByName("Jupiter", pointer = true);
 StelMovementMgr.setFlagTracking(true);
 StelMovementMgr.zoomTo(52, 1);
 
-d = " 4 Planet cross Grouping 8/30/2020"
-txt1 = LabelMgr.labelScreen(d, 280, 20, false, 20, "#AFAAFF");
+d = " 4 Planet cross Grouping 8/30/2020 from Venus"
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#AFAAFF");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -1984,8 +1997,12 @@ StelMovementMgr.setFlagTracking(true);
 SolarSystem.setLabelsAmount(20);   
 StelMovementMgr.zoomTo(44.9, 1);
 	
-d = "Mars - Jupiter - Saturn in Opposition within 11 days of each other 09/30/2556 + 10/07/2556 +10/11/2556"
-txt1 = LabelMgr.labelScreen(d, 200, 20, false, 15, "#EFEE01");
+d = "Mars - Jupiter - Saturn in Opposition within 11 days of each other"
+txt1 = LabelMgr.labelScreen(d, 300 * x, 20 * y, false, 20 * x, "#EFEE01");
+LabelMgr.setLabelShow(txt1, true);
+
+d = "09/30/2556 + 10/07/2556 +10/11/2556"
+txt1 = LabelMgr.labelScreen(d, 300 * x, 45 * y, false, 20 * x, "#EFEE01");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -2004,7 +2021,7 @@ StelMovementMgr.setFlagTracking(true);
 StelMovementMgr.zoomTo(5.43, 1);
 
 d = "Phobos transits the sun before Mars eclipses it - from Deimos 4/26/2017"
-txt1 = LabelMgr.labelScreen(d, 280, 20, false, 15, "#F0F0F0");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#F0F0F0");
 LabelMgr.setLabelShow(txt1, true);
 }
 
@@ -2036,7 +2053,7 @@ StelMovementMgr.setFlagTracking(true);
 StelMovementMgr.zoomTo(52, 1);
 
 d = " 4 Planet and Moon Grouping 4/25/2025"
-txt1 = LabelMgr.labelScreen(d, 280, 20, false, 20, "#FFAAFF");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#FFAAFF");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -2057,7 +2074,7 @@ StelMovementMgr.setFlagTracking(true);
 StelMovementMgr.zoomTo(2, 1);
 
 d = "Phobos Eclipse from the summit of Olympus Mons 1/10/2068"
-txt1 = LabelMgr.labelScreen(d, 280, 45, false, 20, "#FF7071");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 45 * y, false, 20 * x, "#FF7071");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -2079,7 +2096,7 @@ var pick = Math.floor(Math.random()*4+1);
 StelMovementMgr.zoomTo(pick, 1);
 	
 d = "Moon Occultation of Mars during it's closest approach 02/05/2042"
-txt1 = LabelMgr.labelScreen(d, 280, 20, false, 20, "#FF7AA7");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#FF7AA7");
 LabelMgr.setLabelShow(txt1, true);
 
  	
@@ -2100,7 +2117,7 @@ var pick = Math.floor(Math.random()*7)*0.57+0.7;
 StelMovementMgr.zoomTo(pick, 1);
 	
 d = "Sun through Saturn rings from Titan  02/06/2042"
-txt1 = LabelMgr.labelScreen(d, 280, 20, false, 20, "#000070");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#000070");
 LabelMgr.setLabelShow(txt1, true);
 
 SolarSystem.setFlagMoonScale(4);   	
@@ -2128,7 +2145,7 @@ var pick = Math.floor(Math.random()*15+16)/10;
 StelMovementMgr.zoomTo(pick, 1);
 	
 d = "Earth and Moon in the Pleiades from Venus 10/08/2125"
-txt1 = LabelMgr.labelScreen(d, 280, 20, false, 20, "#77AAFF");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#77AAFF");
 LabelMgr.setLabelShow(txt1, true);
 
 SolarSystem.setFlagMoonScale(4);   	
@@ -2157,13 +2174,13 @@ StelMovementMgr.zoomTo(pick, 1);
 
 
 d = "Earth Greatest Brillancy and Jupiter and Regulus Conjunction" 
-txt1 = LabelMgr.labelScreen(d, 280, 20, false, 20, "#7777FF");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#7777FF");
 
 LabelMgr.setLabelShow(txt1, true);
 
 
 d = "on Mars 11/05/2050"
-txt1 = LabelMgr.labelScreen(d, 480, 50, false, 20, "#7777FF");
+txt1 = LabelMgr.labelScreen(d, 480 * x, 50 * y, false, 20 * x, "#7777FF");
 
 
 LabelMgr.setLabelShow(txt1, true);
@@ -2194,7 +2211,7 @@ var pick = Math.floor(Math.random()*5+7)*10;
 StelMovementMgr.zoomTo(pick, 1);
 	
 d = "Venus and Earth Opposition when they are closest from Mercury 06/01/2028"
-txt1 = LabelMgr.labelScreen(d, 200, 20, false, 20, "#F7F8AA");
+txt1 = LabelMgr.labelScreen(d, 200 * x, 20 * y, false, 20 * x, "#F7F8AA");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -2217,7 +2234,7 @@ SolarSystem.setLabelsAmount(20);
 core.selectObjectByName("Jupiter", pointer = true);
 
 d = "Jupiter Greatest Elongation (32.92 Degrees) from Saturn 8/24/2017"
-txt1 = LabelMgr.labelScreen(d, 280, 20, false, 20, "#B5FFA7");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#B5FFA7");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -2229,8 +2246,8 @@ SolarSystem.setFlagOrbits(false);
 if (id[r] == 82)
 {
 // Jupiter from Saturn Gi
-core.setObserverLocation(-74.5, 45.5, 200000, 1, "", "Saturn");
-core.setDate("2035-05-18T12:24:43", "utc");
+core.setObserverLocation(-13.5, 39.0, 200000, 1, "", "Saturn");
+core.setDate("2035-07-16T12:24:43", "utc");
 LandscapeMgr.setFlagAtmosphere(false);
 
 core.selectObjectByName("HIP 108036", pointer = true);
@@ -2242,8 +2259,8 @@ SolarSystem.setFlagOrbits(false);
 SolarSystem.setLabelsAmount(20);   
 core.selectObjectByName("Jupiter", pointer = true);
 
-d = "Jupiter Greatest 21st Century illumination from Saturn 5/18/2035"
-txt1 = LabelMgr.labelScreen(d, 280, 20, false, 20, "#B5FFA7");
+d = "Jupiter Greatest 21st Century illumination from Saturn 7/16/2035"
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#B5FFA7");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -2266,7 +2283,7 @@ var pick = Math.floor(Math.random()*2+1)*6
 StelMovementMgr.zoomTo(pick, 1);
 	
 d = "Earth as the Apollo 11 Astronauts viewed it  07/20/1969"
-txt1 = LabelMgr.labelScreen(d, 280, 20, false, 20, "#F1FAFF");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#F1FAFF");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -2295,10 +2312,10 @@ StelMovementMgr.setFlagTracking(true);
 pick = pick/5;
 StelMovementMgr.zoomTo(pick, 1);
 d = "Earth and Moon and Antares 0.082 degrees apart 04/15/2020"
-txt1 = LabelMgr.labelScreen(d, 280, 20, false, 20, "#771FFF");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#771FFF");
 LabelMgr.setLabelShow(txt1, true);
 d = "from Venus";
-txt1 = LabelMgr.labelScreen(d, 280, 40, false, 20, "#771FFF");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 45 * y, false, 20 * x, "#771FFF");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -2327,17 +2344,16 @@ StelMovementMgr.zoomTo(pick, 1);
 
 
 d = "Mars - Jupiter come into Opposition on the same day 5/10/2599"
-txt1 = LabelMgr.labelScreen(d, 280, 20, false, 20, "#E63118");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#E63118");
 LabelMgr.setLabelShow(txt1, true);
-
-
 }
+
 
 if (id[r] == 86)
 {
 // Arcturus and Spica 
 core.setObserverLocation(-73.71, -44.24, 1126, 1, "", "Earth");
-core.setDate("76451-01-06T09:44:07", "utc");
+core.setDate("76451-07-19T09:44:07", "utc");
 
 core.selectObjectByName("HIP 65474", pointer = false);
 var pick = Math.floor(Math.random()*2);
@@ -2346,16 +2362,19 @@ if (pick == 0)
 core.selectObjectByName("HIP 65474", pointer = false);
 }
 StelMovementMgr.setFlagTracking(true);
-var pick = Math.floor(Math.random()*5+1);
+var pick = Math.floor(Math.random()*30+30);
 StelMovementMgr.zoomTo(pick, 1);
 	
 
 d = "Arcturus and Spica conjunction (0.253 Degrees)  7/19/76451"
-txt1 = LabelMgr.labelScreen(d, 280, 20, false, 20, "#FA3118");
+txt1 = LabelMgr.labelScreen(d, 380 * x, 40 * y, false, 20 * x, "#FA3118");
 LabelMgr.setLabelShow(txt1, true);
 
 
 }
+
+
+
 
 
 if (id[r] == 87)
@@ -2372,7 +2391,7 @@ pick = pick/100;
 StelMovementMgr.zoomTo(pick, 1);
 
 d = "Earth Occultation of Antares from Venus 04/24/2506"
-txt1 = LabelMgr.labelScreen(d, 280, 20, false, 20, "#F1FFF8");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#F1FFF8");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -2396,7 +2415,7 @@ pick = pick * 10;
 StelMovementMgr.zoomTo(pick, 1);
 
 d = "Vega as the North Star Year 13676"
-txt1 = LabelMgr.labelScreen(d, 380, 20, false, 20, "#AAAAF8");
+txt1 = LabelMgr.labelScreen(d, 380 * x, 20 * y, false, 20 * x, "#AAAAF8");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -2420,7 +2439,7 @@ StelMovementMgr.setFlagTracking(true);
 StelMovementMgr.zoomTo(6, 1);
 
 d = "Mars - Saturn - Beehive 10/16/2152"
-txt1 = LabelMgr.labelScreen(d, 280, 20, false, 20, "#BF1B0B");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#BF1B0B");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -2459,7 +2478,7 @@ core.selectObjectByName("Ganymede", pointer = true);
 StelMovementMgr.zoomTo(0.333, 1);
 
 d = "Galileo Galilei Discovers his namesake Satellites 1/7/1610"
-txt1 = LabelMgr.labelScreen(d, 200, 20, false, 20, "#19AF77");
+txt1 = LabelMgr.labelScreen(d, 300 * x, 20 * y, false, 20 * x, "#19AF77");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -2479,7 +2498,7 @@ StelMovementMgr.setFlagTracking(true);
 StelMovementMgr.zoomTo(32, 1);
 
 d = "Pluto opposition from Neptune 1/29/2386"
-txt1 = LabelMgr.labelScreen(d, 280, 20, false, 20, "#4100AA");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#4100AA");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -2504,11 +2523,11 @@ pick = Math.floor(Math.random()*6)+1;
 StelMovementMgr.zoomTo(pick, 1);
 
 d = "Moon's Greatest Elongation away from Earth (0.158 Degrees) in the"; 
-txt1 = LabelMgr.labelScreen(d, 280, 20, false, 20, "#FF1177");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#FF1177");
 LabelMgr.setLabelShow(txt1, true);
 
 d = "21st century during Greatest Elongation as seen from Mars 6/06/2020";
-txt1 = LabelMgr.labelScreen(d, 280, 45, false, 20, "#FF1177");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 45 * y, false, 20 * x, "#FF1177");
 LabelMgr.setLabelShow(txt1, true);
 SolarSystem.setFlagOrbits(true);
 
@@ -2542,7 +2561,7 @@ core.setDate("+2 hours");
 }
 
 d = "Saturn Double Ring Occultation of 15 (105?) Tauri 4/7/2032"
-txt1 = LabelMgr.labelScreen(d, 280, 20, false, 20, "#FFDDFF");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#FFDDFF");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -2568,7 +2587,7 @@ StelMovementMgr.zoomTo(pick, 1);
 
 
 d = "Pluto Occultation of some 10 mag star in Capicorn 9/3/2031"
-txt1 = LabelMgr.labelScreen(d, 280, 20, false, 20, "#AADDFF");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#AADDFF");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -2614,11 +2633,11 @@ core.selectObjectByName("Jupiter", pointer = true);
 }
 
 d = "Inner planets pop out just before the sun";
-txt1 = LabelMgr.labelScreen(d, 280, 20, false, 15, "#FFF3AF");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#FFF3AF");
 LabelMgr.setLabelShow(txt1, true);
 
 d = "during a total eclipse by Charon on Pluto 2/1/2108";
-txt1 = LabelMgr.labelScreen(d, 280, 45, false, 15, "#FFF3AF");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 45 * y, false, 20 * x, "#FFF3AF");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -2650,7 +2669,7 @@ core.selectObjectByName("Saturn", pointer = true);
 StelMovementMgr.zoomTo(38, 1);
 
 d = "Mars- Jupiter - Saturn - Antares 8/28/2458"
-txt1 = LabelMgr.labelScreen(d, 200, 20, false, 20, "#F9AF77");
+txt1 = LabelMgr.labelScreen(d, 00 * x, 20 * y, false, 20 * x, "#F9AF77");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -2674,7 +2693,7 @@ pick = pick * 10;
 StelMovementMgr.zoomTo(pick, 1);
 
 d = "Cepheus on top of world 6016"
-txt1 = LabelMgr.labelScreen(d, 380, 20, false, 20, "#AAAAF8");
+txt1 = LabelMgr.labelScreen(d, 380 * x, 20 * y, false, 20 * x, "#AAAAF8");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -2706,11 +2725,11 @@ pick = pick + 5;
 StelMovementMgr.zoomTo(pick, 1);
 
 d = "Moon's Greatest Elongation away from Earth (0.569 Degrees)"; 
-txt1 = LabelMgr.labelScreen(d, 280, 20, false, 20, "#AADAFF");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#AADAFF");
 LabelMgr.setLabelShow(txt1, true);
 
 d = "in the 21st century as seen from Venus 1/10/2030";
-txt1 = LabelMgr.labelScreen(d, 280, 45, false, 20, "#AADAFF");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 45 * y, false, 20 * x, "#AADAFF");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -2741,11 +2760,11 @@ var pick = Math.floor(Math.random()*12)+1;
 StelMovementMgr.zoomTo(pick, 1);
 
 d = "Moon's Greatest Elongation away from Earth (0.282 Degrees)"; 
-txt1 = LabelMgr.labelScreen(d, 280, 20, false, 20, "#DADAFF");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#DADAFF");
 LabelMgr.setLabelShow(txt1, true);
 
 d = "in the 21st century as seen from Mercury 6/6/2041";
-txt1 = LabelMgr.labelScreen(d, 280, 45, false, 20, "#DAAAFF");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 45 * y, false, 20 * x, "#DAAAFF");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -2768,7 +2787,7 @@ pick = pick / 10;
 StelMovementMgr.zoomTo(pick, 1);
 
 d = "Neptune 0.03 Degrees from Regulus 10/08/2092"
-txt1 = LabelMgr.labelScreen(d, 380, 20, false, 20, "#0A0AFF");
+txt1 = LabelMgr.labelScreen(d, 380 * x, 20 * y, false, 20 * x, "#0A0AFF");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -2779,7 +2798,7 @@ if (id[r] == 101)
 {
 // Alpha Centauri rises in New York City
 core.setObserverLocation(-73.98592, 40.74831, 381, 1, "", "Earth");
-core.setDate("8743-07-11T00:11:12", "utc");
+core.setDate("8743-07-12T08:29:12", "utc");
 
 core.selectObjectByName("HIP 71683", pointer = true);
 StelMovementMgr.setFlagTracking(true);
@@ -2788,9 +2807,8 @@ var pick = Math.floor(Math.random()*30)+7;
 StelMovementMgr.zoomTo(pick, 1);
 
 d = "Alpha Centuri is visible from the Empire State Building for the 1st time 7/12/8743"
-txt1 = LabelMgr.labelScreen(d, 280, 40, false, 15, "#0AAAFA");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 40 * y, false, 20 * x, "#0AAAFA");
 LabelMgr.setLabelShow(txt1, true);
-
 
 }
 
@@ -2815,7 +2833,7 @@ StelMovementMgr.setFlagTracking(true);
 StelMovementMgr.zoomTo(30, 1);
 
 d = "Jupiter & Venus in Taurus 7/9/2012"
-txt1 = LabelMgr.labelScreen(d, 280, 35, false, 20, "#FFFFFF");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 35 * y, false, 20 * x, "#FFFFFF");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -2842,7 +2860,7 @@ StelMovementMgr.zoomTo(pick/100, 1);
 
 SolarSystem.setLabelsAmount(20);   	
 d = "Earth Occultation of Jupiter 4/24/2230 from Venus"
-txt1 = LabelMgr.labelScreen(d, 280, 20, false, 20, "#2C66FF");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#2C66FF");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -2861,11 +2879,11 @@ var pick = Math.floor(Math.random()*4)+2;
 StelMovementMgr.zoomTo(pick/10, 1);
 
 d = "Gandymede Greatest Elongation away from Jupiter (0.108 Degrees)"; 
-txt1 = LabelMgr.labelScreen(d, 280, 20, false, 20, "#7ADAFF");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#7ADAFF");
 LabelMgr.setLabelShow(txt1, true);
 
 d = "in the 21st century as seen from Earth 12/07/2024";
-txt1 = LabelMgr.labelScreen(d, 280, 45, false, 20, "#7ADAFF");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 45 * y, false, 20 * x, "#7ADAFF");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -2887,11 +2905,11 @@ var pick = Math.floor(Math.random()*2)+3;
 StelMovementMgr.zoomTo(pick/10, 1);
 
 d = "Callisto Greatest Elongation away from Jupiter (0.187 Degrees)"; 
-txt1 = LabelMgr.labelScreen(d, 280, 20, false, 20, "#7ADAFF");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#7ADAFF");
 LabelMgr.setLabelShow(txt1, true);
 
 d = "in the 21st century as seen from Earth 11/26/2048";
-txt1 = LabelMgr.labelScreen(d, 280, 45, false, 20, "#7ADAFF");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 45 * y, false, 20 * x, "#7ADAFF");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -2920,11 +2938,11 @@ StelMovementMgr.zoomTo(pick, 1);
 
 
 d = "Uranus and Saturn come into opposition 1 day apart"; 
-txt1 = LabelMgr.labelScreen(d, 280, 20, false, 20, "#71FF11");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#71FF11");
 LabelMgr.setLabelShow(txt1, true);
 
 d = "7/22/2079 and 7/23/2079";
-txt1 = LabelMgr.labelScreen(d, 280, 45, false, 20, "#71FF11");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 45 * y, false, 20 * x, "#71FF11");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -2946,11 +2964,11 @@ var pick = Math.floor(Math.random()*3)+1;
 StelMovementMgr.zoomTo(pick/10, 1);
 
 d = "Titan's Greatest Elongation away from Saturn (0.065 Degrees)"; 
-txt1 = LabelMgr.labelScreen(d, 280, 20, false, 20, "#7ADA01");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#7ADA01");
 LabelMgr.setLabelShow(txt1, true);
 
 d = "in the 21st century as seen from Earth 12/28/2091";
-txt1 = LabelMgr.labelScreen(d, 280, 45, false, 20, "#AADA0F");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 45 * y, false, 20 * x, "#AADA0F");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -2972,10 +2990,10 @@ StelMovementMgr.zoomTo(pick, 1);
 SolarSystem.setFlagOrbits(true);
 
 d = "Venus' Farthest Greatest Elongation (47.293 Degrees)";
-txt1 = LabelMgr.labelScreen(d, 280, 20, false, 20, "#B5FFA7");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#B5FFA7");
 LabelMgr.setLabelShow(txt1, true);
 d = "of the 21st century";
-txt1 = LabelMgr.labelScreen(d, 280, 45, false, 20, "#B5FFA7");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 45 * y, false, 20 * x, "#B5FFA7");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -3003,7 +3021,7 @@ pick = pick/100;
 StelMovementMgr.zoomTo(pick+.02, 1);
 
 d = "Jupiter and its moons Occultation of Acrab and Beta2 Scorpio 03/03/2564"
-txt1 = LabelMgr.labelScreen(d, 250, 20, false, 20, "#FFDD7A");
+txt1 = LabelMgr.labelScreen(d, 250 * x, 20 * y, false, 20 * x, "#FFDD7A");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -3025,7 +3043,7 @@ var pick = Math.floor(Math.random()*14)+2;
 StelMovementMgr.zoomTo(pick, 1);
 
 d = "Polaris closest to Celestial North Pole 3/24/2100"
-txt1 = LabelMgr.labelScreen(d, 380, 20, false, 20, "#AAAAF8");
+txt1 = LabelMgr.labelScreen(d, 380, 20, false, 20 * x, "#AAAAF8");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -3054,7 +3072,7 @@ StelMovementMgr.setFlagTracking(true);
 pick = pick/10 + 0.7;
 StelMovementMgr.zoomTo(pick, 1);
 d = "Earth in Orion's Nebula from Pallas 01/31/2029"
-txt1 = LabelMgr.labelScreen(d, 280, 20, false, 20, "#F700FF");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#F700FF");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -3075,7 +3093,7 @@ core.selectObjectByName("Saturn", pointer = false);
 var pick = Math.floor(Math.random()*10)+30;
 StelMovementMgr.zoomTo(pick, 1);
 
-txt1 = LabelMgr.labelScreen("Saturn in Orion from Iapetus 6/24/2033", 200, 10, false, 20, "#0AAAFA");
+txt1 = LabelMgr.labelScreen("Saturn in Orion from Iapetus 6/24/2033", 200, 10, false, 20 * x, "#0AAAFA");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -3094,7 +3112,7 @@ StelMovementMgr.setFlagTracking(true);
 var pick = Math.random()*1.5+.1;
 StelMovementMgr.zoomTo(pick, 1);
 
-txt1 = LabelMgr.labelScreen("Dione Eclipses the sun at the edge of Saturn's rings from Titan 4/21/2025", 180, 10, false, 20, "#0AAA0A");
+txt1 = LabelMgr.labelScreen("Dione Eclipses the sun at the edge of Saturn's rings from Titan 4/21/2025", 180, 10, false, 20 * x, "#0AAA0A");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -3114,10 +3132,10 @@ StelMovementMgr.zoomTo(pick, 1);
 SolarSystem.setFlagOrbits(true);
 
 d = "Mercury Greatest Greatest Elongation (27.8298 Degrees)";
-txt1 = LabelMgr.labelScreen(d, 280, 20, false, 20, "#78FF17");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#78FF17");
 LabelMgr.setLabelShow(txt1, true);
 d = "of the 21st century 4/2/2059";
-txt1 = LabelMgr.labelScreen(d, 280, 45, false, 20, "#78FF17");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 45 * y, false, 20 * x, "#78FF17");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -3141,7 +3159,7 @@ StelMovementMgr.zoomTo(pick/100, 1);
 SolarSystem.setFlagOrbits(false);
 
 d = "Jupiter and its moons Transit the Sun as seen from Neptune 8/8/2188";
-txt1 = LabelMgr.labelScreen(d, 200, 20, false, 20, "#78A1F7");
+txt1 = LabelMgr.labelScreen(d, 300 * x, 20 * y, false, 20 * x, "#78A1F7");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -3162,7 +3180,7 @@ StelMovementMgr.zoomTo(pick/100, 1);
 SolarSystem.setFlagOrbits(false);
 
 d = "Saturn Transits the Sun as seen from Uranus 4/8/2669";
-txt1 = LabelMgr.labelScreen(d, 200, 20, false, 20, "#78FF17");
+txt1 = LabelMgr.labelScreen(d, 300 * x, 20 * y, false, 20 * x, "#78FF17");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -3178,13 +3196,12 @@ LandscapeMgr.setFlagAtmosphere(false);
 core.selectObjectByName("Jupiter", pointer = false);
 StelMovementMgr.setFlagTracking(true);
 
-var pick = Math.floor(Math.random()*6)+1;
-pick = pick /50
-StelMovementMgr.zoomTo(pick, 1);
+
+StelMovementMgr.zoomTo(.1, 1);
 SolarSystem.setFlagOrbits(false);
 
 d = "Jupiter Transits the Sun as seen from Titan 3/17/7541"; // Stellarium is 6 days off
-txt1 = LabelMgr.labelScreen(d, 200, 20, false, 20, "#78FF17");
+txt1 = LabelMgr.labelScreen(d, 300 * x, 20 * y, false, 20 * x, "#78FF17");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -3203,8 +3220,8 @@ StelMovementMgr.setFlagTracking(true);
 var pick = Math.floor(Math.random()*4)+1
 StelMovementMgr.zoomTo(pick, 1);
 
-d = "Columbus predicts lunar eclipse for Jamaicans 2/29/1504"
-txt1 = LabelMgr.labelScreen(d, 280, 20, false, 20, "#FAFAFF");
+d = "Columbus predicts lunar eclipse for the Jamaicans 2/29/1504"
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#FAFAFF");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -3234,10 +3251,12 @@ StelMovementMgr.setFlagTracking(true);
 SolarSystem.setLabelsAmount(20);   
 StelMovementMgr.zoomTo(44.9, 1);
 	
-d = "Jupiter Opposition and then Mars + Saturn same day Oppositions 4 days later 12/22/1503 and 12/26/1503"
-txt1 = LabelMgr.labelScreen(d, 200, 20, false, 15, "#EFEE01");
+d = "Jupiter Opposition and then Mars + Saturn same day Oppositions"
+txt1 = LabelMgr.labelScreen(d, 250 * x, 20 * y, false, 20 * x, "#EFEE01");
 LabelMgr.setLabelShow(txt1, true);
-
+d = "4 days later 12/22/1503 and 12/26/1503"
+txt1 = LabelMgr.labelScreen(d, 250 * x, 50, false, 20 * x, "#EFEE01");
+LabelMgr.setLabelShow(txt1, true);
 
 }
 
@@ -3265,10 +3284,10 @@ StelMovementMgr.setFlagTracking(true);
 StelMovementMgr.zoomTo(44, 1);
 
 d = "Earth and Mars oppositions within 2 days of each other 12/16/2101 + 12/14/2101"
-txt1 = LabelMgr.labelScreen(d, 200, 20, false, 18, "#FF2F00");
+txt1 = LabelMgr.labelScreen(d, 300 * x, 20 * x, false, 18 * x, "#FF2F00");
 LabelMgr.setLabelShow(txt1, true);
 d = "From Venus"
-txt1 = LabelMgr.labelScreen(d, 200, 40, false, 18, "#FF2F00");
+txt1 = LabelMgr.labelScreen(d, 300 * x, 40 * x, false, 18 * x, "#FF2F00");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -3296,7 +3315,7 @@ var pick = Math.floor(Math.random()*4+2);
 StelMovementMgr.zoomTo(pick/10000, 1);
 	
 d = "Europa occults Titan from Uranus 10/27/2875"
-txt1 = LabelMgr.labelScreen(d, 280, 20, false, 20, "#17AAF7");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#17AAF7");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -3315,7 +3334,7 @@ StelMovementMgr.zoomTo(28, 1);
 SolarSystem.setFlagOrbits(true);
 
 d = "Brightest Venus of the 21st Century  12/10/2005 (-4.885 mag)";
-txt1 = LabelMgr.labelScreen(d, 280, 20, false, 20, "#B5FFA7");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#B5FFA7");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -3338,7 +3357,7 @@ StelMovementMgr.zoomTo(41, 1);
 
 
 d = "Jupiter - Closest opposition of 21st Century from Ceres 02/01/2035"
-txt1 = LabelMgr.labelScreen(d, 280, 20, false, 20, "#CC7802");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#CC7802");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -3348,7 +3367,7 @@ LabelMgr.setLabelShow(txt1, true);
 
 if (id[r] == 124)
 {
-// Venus brightest 21st century
+// Venus brightest Millennium
 core.setObserverLocation(-24.5, 40.5, 1738, 1, "", "Earth");
 core.setDate("2192-12-29T19:59:36", "utc");
 
@@ -3359,7 +3378,7 @@ StelMovementMgr.zoomTo(28, 1);
 SolarSystem.setFlagOrbits(true);
 
 d = "Brightest Venus of the Millennium 12/29/2192 (-4.88839 mag)";
-txt1 = LabelMgr.labelScreen(d, 280, 20, false, 20, "#B5FFA7");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#B5FFA7");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -3396,7 +3415,7 @@ SolarSystem.setLabelsAmount(20);
 StelMovementMgr.zoomTo(29, 1);
 
 d = "Nice little morning planet Grouping 2011"
-txt1 = LabelMgr.labelScreen(d, 280, 20, false, 20, "#B22FAA");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#B22FAA");
 LabelMgr.setLabelShow(txt1, true);
 
 }
@@ -3408,6 +3427,7 @@ core.setObserverLocation(-14, 34.48, 17, 1, "", "Mars");
 core.setDate("2084-07-15T19:30:00", "utc");
 
 core.selectObjectByName("Earth", pointer = true);
+SolarSystem.setFlagOrbits(true);  
 StelMovementMgr.setFlagTracking(true);
 
 StelMovementMgr.zoomTo(67, 1);
@@ -3419,10 +3439,10 @@ StelMovementMgr.zoomTo(67.39, 1);
 
 }
 d = "Earth's farthest greatest elongation of the 21st Century as seen from Mars"
-txt1 = LabelMgr.labelScreen(d, 280, 20, false, 20, "#1170FF");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#1170FF");
 LabelMgr.setLabelShow(txt1, true);
 d = "47.378" + degstring +"       07/15/2084";
-txt1 = LabelMgr.labelScreen(d, 480, 45, false, 20, "#1170FF");
+txt1 = LabelMgr.labelScreen(d, 480, 45, false, 20 * x, "#1170FF");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -3457,10 +3477,12 @@ StelMovementMgr.setFlagTracking(true);
 
 }
 d = "Full Moon cuts across a full opposition Earth from Venus";
-txt1 = LabelMgr.labelScreen(d, 240, 20, false, 20, "#11F1FF");
+txt1 = LabelMgr.labelScreen(d, 240 * x, 20 * y, false, 20 * x, "#11F1FF");
 LabelMgr.setLabelShow(txt1, true);
 
-
+d = "During a Total Eclipse";
+txt1 = LabelMgr.labelScreen(d, 240 * x, 45 * y, false, 20 * x, "#11F1FF");
+LabelMgr.setLabelShow(txt1, true);
 
 
 }
@@ -3481,7 +3503,7 @@ StelMovementMgr.zoomTo(pick, 1);
 
 
 d = "Mars - Lamest Opposition of the 21st Century 2/19/27"
-txt1 = LabelMgr.labelScreen(d, 280, 20, false, 20, "#FF0000");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#FF0000");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -3503,7 +3525,7 @@ StelMovementMgr.zoomTo(pick/10, 1);
 
 
 d = "Neptune in the Crab Nebula 03/31/2061"
-txt1 = LabelMgr.labelScreen(d, 280, 20, false, 20, "#1234FF");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#1234FF");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -3524,7 +3546,7 @@ StelMovementMgr.zoomTo(pick, 1);
 
 
 d = "Extremely close Vesta Opposition 8/1/2011"
-txt1 = LabelMgr.labelScreen(d, 280, 20, false, 20, "#A0A0A0");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#A0A0A0");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -3557,7 +3579,7 @@ core.selectObjectByName("Uranus", pointer = true);
 
 
 d = "Triple Conjunction / Coquadrature 5/15/2038"
-txt1 = LabelMgr.labelScreen(d, 280, 20, false, 20, "#FAA0A0");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#FAA0A0");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -3598,7 +3620,7 @@ StelMovementMgr.setFlagTracking(true);
 StelMovementMgr.zoomTo(91, 1);
 
 d = "Opposition Grouping 3/5/2217"
-txt1 = LabelMgr.labelScreen(d, 280, 20, false, 20, "#AAAAFF");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#AAAAFF");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -3612,14 +3634,14 @@ if (id[r] == 133)
 core.setObserverLocation(-131.3, 27.5, 1126, 1, "", "Earth");
 core.setDate("2040-01-22T07:00:00", "utc");
 
-core.selectObjectByName("HIP 27989", pointer = true);
+core.selectObjectByName("HIP 25606", pointer = true);
 StelMovementMgr.setFlagTracking(true);
 core.selectObjectByName("Mars", pointer = true);
-var pick = Math.floor(Math.random()*70)+70;
+var pick = Math.floor(Math.random()*70)+100;
 StelMovementMgr.zoomTo(pick, 1);
 
 d = "Mars - Highest Declination 27.207" + degstring +" of the 21st Century 1/22/2040"
-txt1 = LabelMgr.labelScreen(d, 280, 20, false, 20, "#FF0000");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#FF0000");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -3630,7 +3652,7 @@ if (id[r] == 134)
 {
 // Lowest Mars 
 
-core.setObserverLocation(95.3, -28.6, 1126, 1, "", "Earth");
+core.setObserverLocation(95.3, 57.6, 1126, 1, "", "Earth");
 core.setDate("2033-07-22T15:36:00", "utc");
 
 core.selectObjectByName("HIP 86742", pointer = true);
@@ -3640,7 +3662,7 @@ var pick = Math.floor(Math.random()*70)+70;
 StelMovementMgr.zoomTo(pick, 1);
 
 d = "Mars - Lowest Declination -28.632" + degstring + " of the 21st Century 7/22/2033"
-txt1 = LabelMgr.labelScreen(d, 280, 20, false, 20, "#FF0000");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#FF0000");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -3662,7 +3684,7 @@ StelMovementMgr.zoomTo(114, 1);
 SolarSystem.setFlagOrbits(true);
 
 d = "High above the solar system from Eris during Perhelion 6/23/2208"
-txt1 = LabelMgr.labelScreen(d, 280, 20, false, 20, "#A1AFA0");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#A1AFA0");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -3706,7 +3728,7 @@ StelMovementMgr.setFlagTracking(true);
 StelMovementMgr.zoomTo(61, 1);
 
 d = "Five planet and Moon Grouping 5/20/2034"
-txt1 = LabelMgr.labelScreen(d, 280, 20, false, 20, "#C6CCFA");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#C6CCFA");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -3730,7 +3752,7 @@ var pick = Math.floor(Math.random()*6)+1
 StelMovementMgr.zoomTo(pick, 1);
 
 d = "Solar eclipse proves Einstein's Theroy of Reletivity 5/29/1919"
-txt1 = LabelMgr.labelScreen(d, 280, 20, false, 20, "#FAFAFF");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#FAFAFF");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -3753,11 +3775,11 @@ StelMovementMgr.zoomTo(pick, 1);
 
 
 d = "Mars Ends retograde Motion after 81 Days 12 Hours 34 Minutes"
-txt1 = LabelMgr.labelScreen(d, 240, 20, false, 20, "#FF3118");
+txt1 = LabelMgr.labelScreen(d, 240 * x, 20 * y, false, 20 * x, "#FF3118");
 LabelMgr.setLabelShow(txt1, true);
 
 d = "4/23/2044 - Longest of the 21st century"
-txt1 = LabelMgr.labelScreen(d, 340, 45, false, 20, "#FF3118");
+txt1 = LabelMgr.labelScreen(d, 340 * x, 45 * y, false, 20 * x, "#FF3118");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -3783,7 +3805,7 @@ var pick = Math.floor(Math.random()*70)+10;
 StelMovementMgr.zoomTo(pick, 1);
 
 d = "A very close 0.04" + degstring + " Ceres - Vesta Conjunction 07/13/2014"
-txt1 = LabelMgr.labelScreen(d, 250, 20, false, 20, "#F0F0F0");
+txt1 = LabelMgr.labelScreen(d, 250 * x, 20 * y, false, 20 * x, "#F0F0F0");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -3807,11 +3829,11 @@ StelMovementMgr.zoomTo(47, 1);
 	
 
 d = "Mars Shortest Coquadrature Angle of 21st century"
-txt1 = LabelMgr.labelScreen(d, 240, 20, false, 20, "#FF3118");
+txt1 = LabelMgr.labelScreen(d, 240 * x, 20 * y, false, 20 * x, "#FF3118");
 LabelMgr.setLabelShow(txt1, true);
 
 d = "5/31/2039 - 53.7 Degrees"
-txt1 = LabelMgr.labelScreen(d, 340, 45, false, 20, "#FF3118");
+txt1 = LabelMgr.labelScreen(d, 340 * x, 45 * y, false, 20 * x, "#FF3118");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -3836,7 +3858,7 @@ StelMovementMgr.zoomTo(72, 1);
 
 
 d = "The Next Pluto and Eris Conjunction 05/26/2587";
-txt1 = LabelMgr.labelScreen(d, 240, 20, false, 20, "#7F31FF");
+txt1 = LabelMgr.labelScreen(d, 240 * x, 20 * y, false, 20 * x, "#7F31FF");
 LabelMgr.setLabelShow(txt1, true);
 
 }
@@ -3858,7 +3880,7 @@ StelMovementMgr.zoomTo(pick, 1);
 
 
 d = "Moon Occultation of Saturn 05/31/2024 - 1st of two in this year"
-txt1 = LabelMgr.labelScreen(d, 240, 20, false, 20, "#FFA1A7");
+txt1 = LabelMgr.labelScreen(d, 240 * x, 20 * y, false, 20 * x, "#FFA1A7");
 LabelMgr.setLabelShow(txt1, true);
 
 }
@@ -3879,7 +3901,7 @@ StelMovementMgr.zoomTo(pick, 1);
 
 
 d = "Moon Occultation of Saturn 08/21/2024 - 2nd of year"
-txt1 = LabelMgr.labelScreen(d, 240, 20, false, 20, "#FFA118");
+txt1 = LabelMgr.labelScreen(d, 240 * x, 20 * y, false, 20 * x, "#FFA118");
 LabelMgr.setLabelShow(txt1, true);
 
 }
@@ -3899,7 +3921,7 @@ StelMovementMgr.zoomTo(34, 1);
 
 
 d = "Uranus Greatest Elongation from Neptune 09/20/2018 - 41.50" + degstring; 
-txt1 = LabelMgr.labelScreen(d, 240, 20, false, 20, "#11FF18");
+txt1 = LabelMgr.labelScreen(d, 240 * x, 20 * y, false, 20 * x, "#11FF18");
 LabelMgr.setLabelShow(txt1, true);
 
 SolarSystem.setFlagOrbits(false);
@@ -3926,7 +3948,7 @@ var pick = Math.floor(Math.random()*70)+10;
 StelMovementMgr.zoomTo(pick, 1);
 
 d = "Extremely Close (0.09 Degrees) Mars and Jupiter Conjunction 12/18/2064";
-txt1 = LabelMgr.labelScreen(d, 240, 20, false, 20, "#FF31F1");
+txt1 = LabelMgr.labelScreen(d, 240 * x, 20 * y, false, 20 * x, "#FF31F1");
 LabelMgr.setLabelShow(txt1, true);
 
 }
@@ -3962,7 +3984,7 @@ var pick = Math.floor(Math.random()*50)+10;
 StelMovementMgr.zoomTo(pick, 1);
 
 d = "Moon, Mars, Jupiter, Uranus and Spica 6/16/2646"
-txt1 = LabelMgr.labelScreen(d, 280, 20, false, 20, "#1611FA");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#1611FA");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -3972,7 +3994,7 @@ LabelMgr.setLabelShow(txt1, true);
 
 if (id[r] == 147)
 {
-// Crab Neptune 
+// Saturn Crab Neptune 
 
 core.setObserverLocation(23.3, 40.24, 36, 1, "", "Earth");
 core.setDate("2208-08-15T01:48:07", "utc");
@@ -3985,7 +4007,7 @@ StelMovementMgr.zoomTo(0.122, 1);
 
 
 d = "Saturn in the Crab Nebula 08/15/2208"
-txt1 = LabelMgr.labelScreen(d, 280, 20, false, 20, "#F3F34F");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#F3F34F");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -4011,7 +4033,7 @@ StelMovementMgr.zoomTo(pick, 1);
 
 
 d = "Venus Transits the SuN 6/6/2012"
-txt1 = LabelMgr.labelScreen(d, 280, 20, false, 20, "#000007");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#000007");
 LabelMgr.setLabelShow(txt1, true);
 
 }
@@ -4032,7 +4054,7 @@ StelMovementMgr.zoomTo(pick/10, 1);
 
 
 d = "Jupiter in Trifid Nebula 03/11/2043 - 1st of 2 in 2043"
-txt1 = LabelMgr.labelScreen(d, 280, 20, false, 20, "#9FAA92");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#9FAA92");
 LabelMgr.setLabelShow(txt1, true);
 
 }
@@ -4054,7 +4076,7 @@ StelMovementMgr.zoomTo(pick/10+.2, 1);
 
 
 d = "Jupiter in Trifid Nebula 05/30/2043 - 2nd of 2 in 2043"
-txt1 = LabelMgr.labelScreen(d, 280, 20, false, 20, "#FFFF9F");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#FFFF9F");
 LabelMgr.setLabelShow(txt1, true);
 
 }
@@ -4077,7 +4099,7 @@ pick = pick * 0.001;
 StelMovementMgr.zoomTo(pick);
 
 d = "Uranus Occults some 9th Mag Star in Pisces  05/23/2013"
-txt1 = LabelMgr.labelScreen(d, 280, 20, false, 20, "#33FF4F");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#33FF4F");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -4101,7 +4123,7 @@ pick = pick * 0.002;
 StelMovementMgr.zoomTo(pick);
 
 d = "Uranus Occults HIP 16271 (in Taurus)   04/08/2025"
-txt1 = LabelMgr.labelScreen(d, 280, 20, false, 20, "#33FF4F");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#33FF4F");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -4125,7 +4147,7 @@ pick = pick * 10;
 StelMovementMgr.zoomTo(pick);
 
 d = "Venus in Circlet  04/07/2025"
-txt1 = LabelMgr.labelScreen(d, 280, 20, false, 20, "#BBBBFF");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#BBBBFF");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -4145,7 +4167,7 @@ StelMovementMgr.setFlagTracking(true);
 StelMovementMgr.zoomTo(124, 1);
 
 d = "Eris Opposition from Pluto 12/28/2115";
-txt1 = LabelMgr.labelScreen(d, 280, 20, false, 20, "#A1A1FF");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#A1A1FF");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -4167,13 +4189,14 @@ StelMovementMgr.zoomTo(67, 1);
 var pick = Math.floor(Math.random()*37+40);
 StelMovementMgr.zoomTo(pick, 1);
 
+SolarSystem.setFlagOrbits(true); 
 
 d = "Venus best Greatest Elongation of the 21st Century as seen from Mars"
-txt1 = LabelMgr.labelScreen(d, 280, 20, false, 20, "#FFF7FF");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#FFF7FF");
 LabelMgr.setLabelShow(txt1, true);
 
 d = "Elongation 31.776 Degrees       12/02/2078"
-txt1 = LabelMgr.labelScreen(d, 320, 45, false, 20, "#DFF7FF");
+txt1 = LabelMgr.labelScreen(d, 320 * x, 45 * y, false, 20 * x, "#DFF7FF");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -4197,13 +4220,14 @@ StelMovementMgr.setFlagTracking(true);
 var pick = Math.floor(Math.random()*17+10);
 StelMovementMgr.zoomTo(pick, 1);
 
+SolarSystem.setFlagOrbits(true); 
 
 d = "Jupiter's best Greatest Elongation of the 21st Century as seen from Uranus"
-txt1 = LabelMgr.labelScreen(d, 280, 20, false, 18, "#FF7700");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 18 * x, "#FF7700");
 LabelMgr.setLabelShow(txt1, true);
 
 d = "Elongation 16.80 Degrees       06/04/2063"
-txt1 = LabelMgr.labelScreen(d, 320, 45, false, 20, "#DFF7FF");
+txt1 = LabelMgr.labelScreen(d, 320 * x, 45 * y, false, 20 * x, "#DFF7FF");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -4231,11 +4255,11 @@ StelMovementMgr.zoomTo(pick, 1);
 
 
 d = "Mars best Opposition of the 21st Century as seen from Venus"
-txt1 = LabelMgr.labelScreen(d, 280, 20, false, 20, "#FF0700");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#FF0700");
 LabelMgr.setLabelShow(txt1, true);
 
 d = "07/20/2052"
-txt1 = LabelMgr.labelScreen(d, 320, 45, false, 20, "#FF0700");
+txt1 = LabelMgr.labelScreen(d, 320 * x, 45 * y, false, 20 * x, "#FF0700");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -4260,11 +4284,11 @@ StelMovementMgr.zoomTo(pick, 1);
 
 
 d = "Mercury's best Greatest Elongation of the 21st Century as seen from Venus"
-txt1 = LabelMgr.labelScreen(d, 280, 20, false, 18, "#FF7700");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 18 * x, "#FF7700");
 LabelMgr.setLabelShow(txt1, true);
 
 d = "Elongation 40.26 Degrees       12/15/2020"
-txt1 = LabelMgr.labelScreen(d, 320, 45, false, 20, "#FF7700");
+txt1 = LabelMgr.labelScreen(d, 320 * x, 45 * y, false, 20 * x, "#FF7700");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -4290,7 +4314,7 @@ pick = pick * 0.0001;
 StelMovementMgr.zoomTo(pick);
 
 d = "Saturn Occults Dubhe from Eris  03/11/2934"
-txt1 = LabelMgr.labelScreen(d, 280, 20, false, 20, "#FF4F11");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#FF4F11");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -4324,7 +4348,7 @@ var pick = Math.floor(Math.random()*50)+10;
 StelMovementMgr.zoomTo(pick, 1);
 
 d = "Close 0.06" + degstring + " Jupiter and Venus Conjunction with Mercury nearby 8/27/2016"
-txt1 = LabelMgr.labelScreen(d, 270, 20, false, 18, "#F611FA");
+txt1 = LabelMgr.labelScreen(d, 270 * x, 20 * y, false, 20*x, "#F611FA");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -4345,7 +4369,7 @@ var pick = Math.random()*30+30;
 StelMovementMgr.zoomTo(pick);
 
 d = "Jupiter closest 21st century opposition from Venus 5/19/2011";
-txt1 = LabelMgr.labelScreen(d, 280, 20, false, 20, "#FFFF4F");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#FFFF4F");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -4367,7 +4391,7 @@ StelMovementMgr.setFlagTracking(true);
 StelMovementMgr.zoomTo(0.00613);
 
 d = "Earth Transits Sun as seen from Pluto 7/12/2018";
-txt1 = LabelMgr.labelScreen(d, 280, 20, false, 20, "#11777F");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#11777F");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -4391,13 +4415,14 @@ SolarSystem.setFlagOrbits(true);
 var pick = Math.floor(Math.random()*20+15);
 StelMovementMgr.zoomTo(pick, 1);
 
+SolarSystem.setFlagOrbits(true);   
 
 d = "Mercury's best Greatest Elongation of the 21st Century as seen from Mars"
-txt1 = LabelMgr.labelScreen(d, 280, 20, false, 18, "#FF7700");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 18 * x, "#FF7700");
 LabelMgr.setLabelShow(txt1, true);
 
 d = "Elongation 19.73 Degrees       09/21/2033"
-txt1 = LabelMgr.labelScreen(d, 320, 45, false, 20, "#FF7700");
+txt1 = LabelMgr.labelScreen(d, 320 * x, 45 * y, false, 20 * x, "#FF7700");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -4421,7 +4446,7 @@ StelMovementMgr.zoomTo(0.108, 1);
 
 
 d = "Venus Between Atlas and Pleione 4/4/2028"
-txt1 = LabelMgr.labelScreen(d, 280, 20, false, 18, "#FFFFFF");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 18 * x, "#FFFFFF");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -4443,13 +4468,14 @@ SolarSystem.setFlagOrbits(true);
 var pick = Math.floor(Math.random()*20+35);
 StelMovementMgr.zoomTo(pick, 1);
 
+SolarSystem.setFlagOrbits(true);   
 
 d = "Saturns's best Greatest Elongation of the 21st Century as seen from Uranus"
-txt1 = LabelMgr.labelScreen(d, 280, 20, false, 18, "#777700");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 18 * x, "#777700");
 LabelMgr.setLabelShow(txt1, true);
 
 d = "Elongation 30.77 Degrees       02/13/2040"
-txt1 = LabelMgr.labelScreen(d, 320, 45, false, 20, "#777700");
+txt1 = LabelMgr.labelScreen(d, 320 * x, 45 * y, false, 20 * x, "#777700");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -4516,7 +4542,7 @@ SolarSystem.setLabelsAmount(20);
 StelMovementMgr.zoomTo(79, 1);
 
 d = "7 Planets, The Moon and 3 Asteroids lined up - 1/12/2081"
-txt1 = LabelMgr.labelScreen(d, 280, 20, false, 20, "#FF2FF0");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#FF2FF0");
 LabelMgr.setLabelShow(txt1, true);
 
 }
@@ -4528,7 +4554,7 @@ if (id[r] == 167)
 core.setObserverLocation(120.60, 7.24, 6, 1, "", "Earth");
 core.setDate("2428-03-01T21:15:07", "utc");
 
-core.selectObjectByName("Venus", pointer = false);
+core.selectObjectByName("Venus", pointer = true);
 StelMovementMgr.setFlagTracking(true);
 
 StelMovementMgr.zoomTo(0.02, 1);
@@ -4539,11 +4565,11 @@ pick = pick/10;
 StelMovementMgr.zoomTo(pick, 1);
 
 d = "Venus Closest Conjunction of Alpha-Alpha Capicorn";
-txt1 = LabelMgr.labelScreen(d, 280, 20, false, 20, "#FFDDFF");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#FFDDFF");
 LabelMgr.setLabelShow(txt1, true);
 
 d = "of the Millennium 03/01/2428";
-txt1 = LabelMgr.labelScreen(d, 280, 45, false, 20, "#FFDDFF");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 45 * y, false, 20 * x, "#FFDDFF");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -4564,11 +4590,11 @@ StelMovementMgr.setFlagTracking(true);
 StelMovementMgr.zoomTo(2.57, 1);
 
 d = "Earth Closest Conjunction of Alpha-Alpha Capicorn";
-txt1 = LabelMgr.labelScreen(d, 280, 20, false, 20, "#11D2FF");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#11D2FF");
 LabelMgr.setLabelShow(txt1, true);
 
-d = "of the 20th century 08/03/2071   0.168"+degstring;
-txt1 = LabelMgr.labelScreen(d, 280, 45, false, 20, "#11D2FF");
+d = "of the 20th century 08/03/2071 from Venus  0.168"+degstring;
+txt1 = LabelMgr.labelScreen(d, 280 * x, 45 * y, false, 20 * x, "#11D2FF");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -4593,7 +4619,7 @@ pick = pick/50;
 StelMovementMgr.zoomTo(pick, 1);
 
 d = "Earth in the Lagoon Nebulea from Venus 6/3/2021";
-txt1 = LabelMgr.labelScreen(d, 280, 20, false, 20, "#1122FF");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#1122FF");
 LabelMgr.setLabelShow(txt1, true);
 LandscapeMgr.setFlagAtmosphere(false);
 
@@ -4622,7 +4648,7 @@ StelMovementMgr.setFlagTracking(true);
 StelMovementMgr.zoomTo(35, 1);
 
 d = "Venus, Earth, Jupiter and Spica from Mars 03/01/2017"
-txt1 = LabelMgr.labelScreen(d, 280, 20, false, 20, "#AD2CF0");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#AD2CF0");
 LabelMgr.setLabelShow(txt1, true);
 
 
@@ -4646,12 +4672,10 @@ pick = (pick +1)*10;
 StelMovementMgr.zoomTo(pick, 1);
 
 d = "Earth in Circlet from Venus 10/14/2114";
-txt1 = LabelMgr.labelScreen(d, 280, 20, false, 20, "#11DDFF");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#11DDFF");
 LabelMgr.setLabelShow(txt1, true);
 
 }
-
-
 
 
 
@@ -4661,7 +4685,7 @@ if (id[r] == 172)
 core.setObserverLocation(144.60, 42, 6, 1, "", "Venus");
 core.setDate("2768-09-06T20:30:07", "utc");
 
-core.selectObjectByName("Earth", pointer = false);
+core.selectObjectByName("Earth", pointer = true);
 StelMovementMgr.setFlagTracking(true);
 
 StelMovementMgr.zoomTo(0.02, 1);
@@ -4671,83 +4695,17 @@ pick = pick +1;
 StelMovementMgr.zoomTo(pick, 1);
 
 d = "Alpha-Alpha Capicorn pass between Earth & moon";
-txt1 = LabelMgr.labelScreen(d, 280, 20, false, 20, "#11DDFF");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#11DDFF");
 LabelMgr.setLabelShow(txt1, true);
 
 d = "From Venus 09/06/2768";
-txt1 = LabelMgr.labelScreen(d, 280, 45, false, 20, "#11DDFF");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 45 * y, false, 20 * x, "#11DDFF");
 LabelMgr.setLabelShow(txt1, true);
-
-
 }
-
-
-
-
-
-// Jupiter events
-
-
 
 
 
 if (id[r] == 173)
-{
-// Earth from Jupiter 
-core.setObserverLocation(-54.71, 44.24, 71492000, 1, "", "Jupiter");
-core.setDate("2058-07-15T06:59:07", "utc");
-LandscapeMgr.setFlagAtmosphere(false);
-
-core.selectObjectByName("Earth", pointer = true);
-StelMovementMgr.setFlagTracking(true);
-
-StelMovementMgr.zoomTo(34, 1);
-SolarSystem.setFlagOrbits(true);
-
-var pick = Math.floor(Math.random()*2);
-if (pick == 0)
-{
-core.selectObjectByName("Earth", pointer = false);
-SolarSystem.setLabelsAmount(-20);   
-SolarSystem.setFlagOrbits(false);
-}
-d = "Earth's Greatest Elongation of the 21st Century as seen from Jupiter"
-txt1 = LabelMgr.labelScreen(d, 280, 20, false, 20, "#A0FFFF");
-LabelMgr.setLabelShow(txt1, true);
-
-txt1 = LabelMgr.labelScreen("11.849 Degrees", 280, 45, false, 20, "#A0FFFF");
-LabelMgr.setLabelShow(txt1, true);
-
-
-SolarSystem.setLabelsAmount(20);
-
-
-
-
-}
-
-if (id[r] == 174)
-{
-// Saturn from Jupiter 11/2/2020
-core.setObserverLocation(-73.71, 44.24, 1126, 1, "", "Jupiter");
-core.setDate("2020-11-02T16:32:07", "utc");
-
-core.selectObjectByName("Saturn", pointer = true);
-StelMovementMgr.setFlagTracking(true);
-
-StelMovementMgr.zoomTo(96.5, 1);
-
-d = "Saturn Opposition from Jupiter 11/02/2020"
-txt1 = LabelMgr.labelScreen(d, 280, 20, false, 20, "#FFF6F8");
-LabelMgr.setLabelShow(txt1, true);
-
-
-}
-
-
-
-
-if (id[r] == 175)
 {
 // Mars Transits Earth 12/2/2223
 core.setObserverLocation(-74.3, 56.50, 12, 1, "", "Callisto");
@@ -4766,16 +4724,194 @@ StelMovementMgr.zoomTo(0.003, 1);
 
 d = "Mars Transits of Earth as seen from Callisto 12/2/2223"
 SolarSystem.setFlagMoonScale(0);   	
-txt1 = LabelMgr.labelScreen(d, 280, 20, false, 20, "#7F0007");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#FF0007");
 LabelMgr.setLabelShow(txt1, true);
  	
 }
 
 
+if (id[r] == 174)
+{
+// Mars & Jup & Saturn & Moon  3/01/2017
+core.setObserverLocation(21.6, -40.6, 26, 1, "", "Earth");
+core.setDate("2279-10-09T18:14:20", "utc");
+
+core.selectObjectByName("Moon", pointer = true);
+var pick = Math.floor(Math.random()*4);
+if (pick == 0)
+{
+core.selectObjectByName("Jupiter", pointer = true);
+}
+if (pick == 1)
+{
+core.selectObjectByName("Saturn", pointer = true);
+}
+if (pick == 2)
+{
+core.selectObjectByName("Mars", pointer = true);
+}
+
+
+StelMovementMgr.setFlagTracking(true);
+
+StelMovementMgr.zoomTo(35, 1);
+
+d = "Moon, Mars, Jupiter and Saturn all in Libra's Box 10/09/2279"
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#AD2CF0");
+LabelMgr.setLabelShow(txt1, true);
+
+
+}
+
+
+if (id[r] == 175)
+{
+// Jup Ple from Callisto 08/28/2017
+core.setObserverLocation(-120.5, 30, 0, 1, "", "Callisto");
+core.setDate("2017-08-28T22:57:37", "utc");
+LandscapeMgr.setFlagAtmosphere(false);
+
+core.selectObjectByName("Jupiter", pointer = false);
+var pick = (Math.random()*2);
+
+StelMovementMgr.setFlagTracking(true);
+
+StelMovementMgr.zoomTo(pick*7+7, 1);
+
+d = "Pleiades above a cresent Jupiter from Callisto 08/28/2017"
+SolarSystem.setFlagMoonScale(0);   	
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#FF0007");
+LabelMgr.setLabelShow(txt1, true);
+ 	
+}
+
+
+
 if (id[r] == 176)
 {
+// Jupiter from Saturn Gi
+core.setObserverLocation(-13.5, 39.0, 200000, 1, "", "Saturn");
+core.setDate("2592-08-02T17:57:43", "utc");
+LandscapeMgr.setFlagAtmosphere(false);
+
+core.selectObjectByName("Jupiter", pointer = true);
+StelMovementMgr.setFlagTracking(true);
+
+StelMovementMgr.zoomTo(50.3, 1);
+SolarSystem.setFlagOrbits(false);
+
+SolarSystem.setLabelsAmount(20);   
+core.selectObjectByName("Jupiter", pointer = true);
+
+d = "Jupiter Greatest illumination of the Millennium from Saturn 08/02/2592"
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#B5FFA7");
+LabelMgr.setLabelShow(txt1, true);
+
+
+d = "0.165 Magnitude"
+txt1 = LabelMgr.labelScreen(d, 280 * x, 45 * y, false, 20 * x, "#B5FFA7");
+LabelMgr.setLabelShow(txt1, true);
+
+SolarSystem.setFlagOrbits(false);   
+}
+
+
+
+if (id[r] == 177)
+{
+// Jup Ple from Callisto 08/25/2024
+core.setObserverLocation(159.5, 40, 0, 1, "", "Callisto");
+core.setDate("2024-08-25T09:04:37", "utc");
+LandscapeMgr.setFlagAtmosphere(false);
+
+core.selectObjectByName("Jupiter", pointer = false);
+var pick = (Math.random()*2);
+
+StelMovementMgr.setFlagTracking(true);
+
+StelMovementMgr.zoomTo(pick*7+7, 1);
+
+d = "Pleiades above a Full Jupiter from Callisto 08/25/2024"
+SolarSystem.setFlagMoonScale(0);   	
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#FF0007");
+LabelMgr.setLabelShow(txt1, true);
+ 	
+}
+
+
+
+
+if (id[r] == 178)
+{
+// Venus from Mercury 
+core.setObserverLocation(-74.80, 40.50, 7, 1, "", "Mercury");
+core.setDate("2079-06-24T10:40:30", "utc");
+
+core.selectObjectByName("Venus", pointer = true);
+StelMovementMgr.setFlagTracking(true);
+
+StelMovementMgr.zoomTo(60, 1);
+
+d = "Venus closest 21st century approach to Mercury 6/24/2079";
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#E03857");
+LabelMgr.setLabelShow(txt1, true);
+
+d = "Magnitude -7.9387 - The Brightest of any planet seen from another";
+txt1 = LabelMgr.labelScreen(d, 280 * x, 45 * y, false, 20 * x, "#E03857");
+LabelMgr.setLabelShow(txt1, true);
+
+}
+
+
+
+
+if (id[r] == 179)
+{
+// Jupiter Aries 
+core.setObserverLocation(44.80, 45.50, 7, 1, "", "Earth");
+core.setDate("2023-08-21T22:44:49", "utc");
+
+core.selectObjectByName("Jupiter", pointer = true);
+StelMovementMgr.setFlagTracking(true);
+
+
+var pick = (Math.random()*10+1);
+
+StelMovementMgr.zoomTo(pick/100, 1);
+
+d = "Jupiter Occultation of Sigma Aries 08/21/2023";
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#B5FFA7");
+LabelMgr.setLabelShow(txt1, true);
+
+
+}
+
+
+if (id[r] == 180)
+{
+// Uranus Greatest Brillancy
+core.setObserverLocation(-160.25, 20.25, 126, 1, "", "Neptune");
+core.setDate("2017-05-01T07:07:11", "UTC");
+
+core.selectObjectByName("Uranus", pointer = true);
+StelMovementMgr.setFlagTracking(true);
+SolarSystem.setFlagOrbits(true);
+
+StelMovementMgr.zoomTo(43, 1);
+
+
+d = "Uranus Greatest Brillancy of the 21st century from Neptune 05/01/2017  +7.4711 Mag"; 
+txt1 = LabelMgr.labelScreen(d, 240 * x, 20 * y, false, 20 * x, "#11FF18");
+LabelMgr.setLabelShow(txt1, true);
+
+}
+
+
+
+if (id[r] == 181)
+{
 // Saturn from Jupiter 2/6/2060
-core.setObserverLocation(178.71, 44.24, 1126, 1, "", "Jupiter");
+core.setObserverLocation(-33.9, 30, 16, 1, "", "Callisto");
 core.setDate("2060-02-01T06:20:07", "utc");
 
 core.selectObjectByName("Saturn", pointer = true);
@@ -4784,16 +4920,34 @@ StelMovementMgr.setFlagTracking(true);
 StelMovementMgr.zoomTo(66.5, 1);
 
 d = "Saturn Opposition from Jupiter 2/1/2060 (Closest of 21st century)"
-txt1 = LabelMgr.labelScreen(d, 280, 20, false, 20, "#FFF6AA");
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#FFF6AA");
 LabelMgr.setLabelShow(txt1, true);
 
 }
 
 
-if (id[r] == 177)
+if (id[r] == 182)
+{
+// Saturn from Jupiter 11/2/2020
+core.setObserverLocation(153.9, 34.5, 1, 1, "", "Europa");
+core.setDate("2020-11-02T16:32:07", "utc");
+
+core.selectObjectByName("Saturn", pointer = true);
+StelMovementMgr.setFlagTracking(true);
+
+StelMovementMgr.zoomTo(96.5, 1);
+
+d = "The next Saturn Opposition from Jupiter 11/02/2020"
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#FFF6F8");
+LabelMgr.setLabelShow(txt1, true);
+}
+
+
+
+if (id[r] == 183)
 {
 //  Mars from Jupiter
-core.setObserverLocation(90.00, 10.5, 71492000, 1, "", "Jupiter");
+core.setObserverLocation(120.5, -17.25, 7, 1, "", "Europa");
 core.setDate("2036-06-17T09:51:00", "utc");
 LandscapeMgr.setFlagAtmosphere(false);
 
@@ -4805,7 +4959,7 @@ StelMovementMgr.zoomTo(31, 1);
 StelMovementMgr.setFlagTracking(true);
 
 d = "Mars Farthest Greatest Elongation from Jupiter 19.20 degrees  6/17/2036 "  
-txt1 = LabelMgr.labelScreen(d, 250, 20, false, 20, "#FFF0F1");
+txt1 = LabelMgr.labelScreen(d, 250 * x, 20 * y, false, 20 * x, "#FFF0F1");
 LabelMgr.setLabelShow(txt1, true);
 SolarSystem.setFlagOrbits(true);
 
@@ -4813,11 +4967,118 @@ SolarSystem.setFlagOrbits(true);
 }
 
 
+if (id[r] == 184)
+{
+//  Venus Crab
+core.setObserverLocation(17.1, 35.25, 70, 1, "", "Earth");
+core.setDate("2137-07-22T02:37:00", "utc");
+LandscapeMgr.setFlagAtmosphere(false);
+
+core.selectObjectByName("Venus", pointer = true);
+
+var pick = (Math.random()*8+3);
+StelMovementMgr.zoomTo(pick/100, 1);
 
 
+StelMovementMgr.setFlagTracking(true);
 
-txt1 = LabelMgr.labelScreen(id[r], 500, 500, false, 50, "#FFFFFF");
+d = "Venus in the Crab Nebula 7/22/2137"  
+txt1 = LabelMgr.labelScreen(d, 250 * x, 20 * y, false, 20 * x, "#0FF001");
 LabelMgr.setLabelShow(txt1, true);
+
+
+}
+
+
+
+if (id[r] == 185)
+{
+// Neptune Greatest Brillancy
+core.setObserverLocation(-160.25, 20.25, 126, 1, "", "Pluto");
+core.setDate("2496-06-26T23:38:03", "UTC");
+
+core.selectObjectByName("Neptune", pointer = true);
+StelMovementMgr.setFlagTracking(true);
+SolarSystem.setFlagOrbits(true);
+
+
+var pick = (Math.random()*20+20);
+StelMovementMgr.zoomTo(pick, 1);
+
+
+
+
+
+d = "Neptune Greatest Brillancy of the Millennium from Pluto 06/26/2496   +8.439 Mag"; 
+txt1 = LabelMgr.labelScreen(d, 240 * x, 20 * y, false, 20 * x, "#11FFF8");
+LabelMgr.setLabelShow(txt1, true);
+
+}
+
+
+
+if (id[r] == 186)
+{
+//  Neptune orion
+core.setObserverLocation(17.1, 35.25, 70, 1, "", "Pluto");
+core.setDate("10169-12-25T12:20:00", "utc");
+LandscapeMgr.setFlagAtmosphere(false);
+
+SolarSystem.setFlagOrbits(false);
+
+core.selectObjectByName("Neptune", pointer = true);
+
+var pick = (Math.random()*3+1);
+StelMovementMgr.zoomTo(pick, 1);
+
+
+StelMovementMgr.setFlagTracking(true);
+
+d = "Neptune in the Orion Nebula from Pluto, Xmas 10169"  
+txt1 = LabelMgr.labelScreen(d, 250 * x, 20 * y, false, 20 * x, "#0FFFF1");
+LabelMgr.setLabelShow(txt1, true);
+
+
+}
+
+
+ 
+if (id[r] == 187)
+{
+// Earth from Jupiter 
+core.setObserverLocation(101.00, 22.24, 7, 1, "", "Europa");
+core.setDate("2058-07-15T01:59:22", "utc");
+LandscapeMgr.setFlagAtmosphere(false);
+
+core.selectObjectByName("Earth", pointer = true);
+StelMovementMgr.setFlagTracking(true);
+
+StelMovementMgr.zoomTo(34, 1);
+SolarSystem.setFlagOrbits(true);
+
+var pick = Math.floor(Math.random()*2);
+if (pick == 0)
+{
+SolarSystem.setLabelsAmount(-20);   
+}
+d = "Earth's Greatest Elongation of the 21st Century as seen from Jupiter"
+txt1 = LabelMgr.labelScreen(d, 280 * x, 20 * y, false, 20 * x, "#A0FFFF");
+LabelMgr.setLabelShow(txt1, true);
+
+txt1 = LabelMgr.labelScreen("11.849 Degrees", 280 * x, 45 * y, false, 20 * x, "#A0FFFF");
+LabelMgr.setLabelShow(txt1, true);
+
+
+SolarSystem.setLabelsAmount(20);
+
+}
+
+
+
+
+
+
+
 
 core.wait(spd);
 

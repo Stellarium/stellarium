@@ -39,7 +39,7 @@ public:
 	static void deinit();
 
 	//! Handler for qDebug() and friends. Writes message to log file at $USERDIR/log.txt and echoes to stderr.
-	static void debugLogHandler(QtMsgType, const char*);
+	static void debugLogHandler(QtMsgType, const QMessageLogContext&, const QString& str);
 
 	//! Return a copy of text of the log file.
 	static const QString& getLog() {return log;}

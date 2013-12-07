@@ -34,7 +34,7 @@ void StelLogger::init(const QString& logFilePath)
 	logFile.setFileName(logFilePath);
 
 	if (logFile.open(QIODevice::WriteOnly | QIODevice::Truncate | QIODevice::Text | QIODevice::Unbuffered))
-		qInstallMsgHandler(StelLogger::debugLogHandler);
+		qInstallMessageHandler(StelLogger::debugLogHandler);
 
 	// write timestamp
 	writeLog(QString("%1").arg(QDateTime::currentDateTime().toString(Qt::ISODate)));
@@ -340,13 +340,13 @@ void StelLogger::init(const QString& logFilePath)
 
 void StelLogger::deinit()
 {
-	qInstallMsgHandler(0);
+	qInstallMessageHandler(0);
 	logFile.close();
 }
 
-void StelLogger::debugLogHandler(QtMsgType, const char* msg)
+void StelLogger::debugLogHandler(QtMsgType, const QMessageLogContext&, const QString& msg)
 {
-	fprintf(stderr, "%s\n", msg);
+	fprintf(stderr, "%s\n", msg.toUtf8().constData());
 	writeLog(QString(msg));
 }
 
