@@ -32,6 +32,7 @@ class StelButton;
 class AngleMeasure : public StelModule
 {
 	Q_OBJECT
+	Q_PROPERTY(bool enabled READ isEnabled WRITE enableAngleMeasure)
 public:
 	AngleMeasure();
 	virtual ~AngleMeasure();
@@ -40,11 +41,12 @@ public:
 	// Methods defined in the StelModule class
 	virtual void init();
 	virtual void update(double deltaTime);
-	virtual void draw(StelCore* core, class StelRenderer* renderer);
+	virtual void draw(StelCore* core);
 	virtual double getCallOrder(StelModuleActionName actionName) const;
 	virtual void handleKeys(class QKeyEvent* event);
 	virtual void handleMouseClicks(class QMouseEvent* event);
 	virtual bool handleMouseMoves(int x, int y, Qt::MouseButtons b);
+	bool isEnabled() const {return flagShowAngleMeasure;}
 
 public slots:
 	void enableAngleMeasure(bool b);
@@ -79,7 +81,7 @@ private:
 };
 
 
-#include "fixx11h.h"
+
 #include <QObject>
 #include "StelPluginInterface.hpp"
 
@@ -87,6 +89,7 @@ private:
 class AngleMeasureStelPluginInterface : public QObject, public StelPluginInterface
 {
 	Q_OBJECT
+	Q_PLUGIN_METADATA(IID "stellarium.StelGuiPluginInterface/1.0")
 	Q_INTERFACES(StelPluginInterface)
 public:
 	virtual StelModule* getStelModule() const;

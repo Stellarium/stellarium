@@ -36,7 +36,6 @@ public:
 	virtual const StelObject::InfoStringGroup& getInfoTextFilters() const {return dummyInfoTextFilter;}
 	virtual class QProgressBar* addProgressBar();
 	virtual QAction* addGuiActions(const QString& actionName, const QString& text, const QString& shortCut, const QString& helpGroup, bool checkable=true, bool autoRepeat=false) {return NULL;}
-	virtual QAction* getGuiActions(const QString& actionName) {return NULL;}
 	virtual void forceRefreshGui() {;}	
 	virtual void setVisible(bool b) {visible=b;}
 	virtual bool getVisible() const {return visible;}
@@ -49,8 +48,8 @@ private:
 //! An example GUI plugin with an empty GUI.
 class StelNoGuiPluginInterface : public QObject, public StelGuiPluginInterface
 {
-	Q_OBJECT;
-	Q_INTERFACES(StelGuiPluginInterface);
+	Q_OBJECT
+	Q_INTERFACES(StelGuiPluginInterface)
 public:
 	virtual class StelGuiBase* getStelGuiBase() const;
 };

@@ -29,6 +29,7 @@
 #include <QDateTime>
 #include <QFile>
 #include <QDir>
+#include <QOpenGLFunctions_1_2>
 #include <QUrl>
 #include <QVariantMap>
 
@@ -37,7 +38,6 @@ class Planet;
 class QNetworkAccessManager;
 class QNetworkReply;
 class QPixmap;
-class QProgressBar;
 class QSettings;
 class QTimer;
 
@@ -120,9 +120,15 @@ file.
 //! Main class of the %Satellites plugin.
 //! @author Matthew Gates
 //! @author Bogdan Marinov
-class Satellites : public StelObjectModule
+class Satellites : public StelObjectModule, protected QOpenGLFunctions_1_2
 {
 	Q_OBJECT
+	Q_PROPERTY(bool hintsVisible
+	           READ getFlagHints
+	           WRITE setFlagHints)
+	Q_PROPERTY(bool labelsVisible
+	           READ getFlagLabels
+	           WRITE setFlagLabels)
 	Q_PROPERTY(bool autoAddEnabled
 	           READ isAutoAddEnabled
 	           WRITE enableAutoAdd
@@ -162,8 +168,8 @@ public:
 	virtual void init();
 	virtual void deinit();
 	virtual void update(double deltaTime);
-	virtual void draw(StelCore* core, class StelRenderer* renderer);
-	virtual void drawPointer(StelCore* core, class StelRenderer* renderer);
+	virtual void draw(StelCore* core);
+	virtual void drawPointer(StelCore* core, StelPainter& painter);
 	virtual double getCallOrder(StelModuleActionName actionName) const;
 
 	///////////////////////////////////////////////////////////////////////////
@@ -291,11 +297,6 @@ public:
 	//! Saves the current list of update URLs to the configuration file.
 	void saveTleSources(const QStringList& urls);
 	
-	//! Returns the module-specific style sheet.
-	//! The main StelStyle instance should be passed.
-	// TODO: Plugin-specific styles are no longer necessary?
-	const StelStyle getModuleStyleSheet(const StelStyle& style);
-
 	//! Reads update file(s) in celestrak's .txt format, and updates
 	//! the TLE elements for exisiting satellites from them.
 	//! Indirectly emits signals updateStateChanged() and tleUpdateComplete(),
@@ -433,7 +434,6 @@ public slots:
 	void saveCatalog(QString path=QString());
 
 private slots:
-	void setStelStyle(const QString& section);
 
 private:
 	//! Add to the current collection the satellite described by the data.
@@ -506,8 +506,7 @@ private:
 	QSet<QString> groups;
 	
 	LinearFader hintFader;
-	class StelTextureNew* hintTexture;
-	class StelTextureNew* texPointer;
+	StelTextureSP texPointer;
 	
 	//! @name Bottom toolbar button
 	//@{
@@ -541,7 +540,7 @@ private:
 	//! As a side effect it prevents problems if the user calls
 	//! setTleSources() while an update is in progress.
 	TleSourceList updateSources;
-	QProgressBar* progressBar;
+	class StelProgressController* progressBar;
 	int numberDownloadsComplete;
 	QTimer* updateTimer;
 	//! Flag enabling automatic Internet updates.
@@ -562,9 +561,7 @@ private:
 	//@}
 
 	// GUI
-	SatellitesDialog* configDialog;
-	QByteArray normalStyleSheet;
-	QByteArray nightStyleSheet;
+	SatellitesDialog* configDialog;	
 
 private slots:
 	//! check to see if an update is required.  This is called periodically by a timer
@@ -585,7 +582,7 @@ private slots:
 };
 
 
-#include "fixx11h.h"
+
 #include <QObject>
 #include "StelPluginInterface.hpp"
 
@@ -593,6 +590,7 @@ private slots:
 class SatellitesStelPluginInterface : public QObject, public StelPluginInterface
 {
 	Q_OBJECT
+	Q_PLUGIN_METADATA(IID "stellarium.StelGuiPluginInterface/1.0")
 	Q_INTERFACES(StelPluginInterface)
 public:
 	virtual StelModule* getStelModule() const;

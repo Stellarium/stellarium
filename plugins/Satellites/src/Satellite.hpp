@@ -23,18 +23,21 @@
 #include <QDateTime>
 #include <QFont>
 #include <QList>
+#include <QOpenGLFunctions_1_2>
 #include <QSharedPointer>
 #include <QString>
 #include <QStringList>
 #include <QVariant>
 
 #include "StelObject.hpp"
+#include "StelTextureTypes.hpp"
 #include "StelSphereGeometry.hpp"
-#include "StelProjectorType.hpp"
 
+#include "StelPainter.hpp"
 #include "gSatWrapper.hpp"
 
 
+class StelPainter;
 class StelLocation;
 
 //! Radio communication channel properties.
@@ -83,7 +86,7 @@ Q_DECLARE_METATYPE(SatFlags)
 //! 
 //! Thanks to operator<() overloading, container classes (QList, QMap, etc)
 //! with Satellite or SatelliteP objects can be sorted by satellite name/ID.
-class Satellite : public StelObject
+class Satellite : public StelObject, protected QOpenGLFunctions_1_2
 {
 	friend class Satellites;
 	friend class SatellitesDialog;
@@ -112,12 +115,11 @@ public:
 	//! Supported types for Satellite objects:
 	//! - Name: designation in large type with the description underneath
 	//! - RaDecJ2000, RaDecOfDate, HourAngle, AltAzi
-	//! - Extra1: range, rage rate and altitude of satellite above the Earth
-	//! - Extra2: Comms frequencies, modulation types and so on.
+	//! - Extra: range, rage rate and altitude of satellite above the Earth, comms frequencies, modulation types and so on.
 	virtual QString getInfoString(const StelCore *core, const InfoStringGroup& flags) const;
 	virtual Vec3f getInfoColor(void) const;
 	virtual Vec3d getJ2000EquatorialPos(const StelCore*) const;
-	virtual float getVMagnitude(const StelCore* core=NULL, bool withExtinction=false) const;
+	virtual float getVMagnitude(const StelCore* core) const;
 	virtual double getAngularSize(const StelCore* core) const;
 	virtual QString getNameI18n(void) const
 	{
@@ -166,11 +168,10 @@ public:
 private:
 	//draw orbits methods
 	void computeOrbitPoints();
-	void drawOrbit(class StelRenderer* renderer, StelProjectorP projector);
+	void drawOrbit(StelPainter& painter);
 	//! returns 0 - 1.0 for the DRAWORBIT_FADE_NUMBER segments at
 	//! each end of an orbit, with 1 in the middle.
 	float calculateOrbitSegmentIntensity(int segNum);
-	void setNightColors(bool night);
 
 private:
 	bool initialized;
@@ -217,6 +218,7 @@ private:
 	GroupSet groups;
 	QDateTime lastUpdated;
 
+	static StelTextureSP hintTexture;
 	static SphericalCap  viewportHalfspace;
 	static float hintBrightness;
 	static float hintScale;
@@ -227,8 +229,7 @@ private:
 	//! Mask controlling which info display flags should be honored.
 	static StelObject::InfoStringGroupFlags flagsMask;
 
-	void draw(const StelCore* core, class StelRenderer* renderer, 
-	          StelProjectorP projector, class StelTextureNew* hintTexture);
+	void draw(const StelCore* core, StelPainter& painter, float maxMagHints);
 
 	//Satellite Orbit Position calculation
 	gSatWrapper *pSatWrapper;
@@ -241,9 +242,7 @@ private:
 
 	//Satellite Orbit Draw
 	QFont     font;
-	Vec3f     orbitColorNormal;
-	Vec3f     orbitColorNight;
-	Vec3f*    orbitColor;
+	Vec3f    orbitColor;
 	double    lastEpochCompForOrbit; //measured in Julian Days
 	double    epochTime;  //measured in Julian Days
 	QList<Vec3d> orbitPoints; //orbit points represented by ElAzPos vectors

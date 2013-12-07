@@ -31,7 +31,6 @@
 #include "StelApp.hpp"
 #include "StelFileMgr.hpp"
 #include "StelModuleMgr.hpp"
-#include "StelUtils.hpp"
 //#include "StelTranslator.hpp"
 
 
@@ -166,29 +165,13 @@ void ManualImportWindow::selectTextureFile(QLineEdit * filePathLineEdit)
 	QString currentFileName = filePathLineEdit->text();
 	if (currentFileName.isEmpty())
 	{
-		try
-		{
-			texturesDirectoryPath = StelFileMgr::findFile("textures", StelFileMgr::Directory);
-		}
-		catch (std::runtime_error &e)
-		{
-			qDebug() << e.what();
+		texturesDirectoryPath = StelFileMgr::findFile("textures", StelFileMgr::Directory);
+		if (texturesDirectoryPath.isEmpty())
 			return;
-		}
 	}
 	else
 	{
-		QString currentFilePath;
-		try
-		{
-			currentFilePath = StelFileMgr::findFile("textures/" + currentFileName, StelFileMgr::File);
-		}
-		catch (std::runtime_error &e)
-		{
-			qDebug() << e.what();
-			filePathLineEdit->clear();
-			return;
-		}
+		QString currentFilePath = StelFileMgr::findFile("textures/" + currentFileName, StelFileMgr::File);
 		if (currentFilePath.isEmpty())
 		{
 			filePathLineEdit->clear();
@@ -236,13 +219,13 @@ bool ManualImportWindow::verifyTextureFile(QString filePath)
 		return false;
 	}
 
-	if (!StelUtils::isPowerOfTwo(texture.height()))
+	if (!verifyPowerOfTwo(texture.height()))
 	{
 		qDebug() << "Invalid texure height:" << texture.height()
 				<< "for file" << filePath;
 		return false;
 	}
-	if (!StelUtils::isPowerOfTwo(texture.width()))
+	if (!verifyPowerOfTwo(texture.width()))
 	{
 		qDebug() << "Invalid texture width:" << texture.width()
 				<< "for file" << filePath;
@@ -250,4 +233,12 @@ bool ManualImportWindow::verifyTextureFile(QString filePath)
 	}
 
 	return true;
+}
+
+bool ManualImportWindow::verifyPowerOfTwo(int value)
+{
+	if (value > 0 && (value & (value-1)) == 0)
+		return true;
+	else
+		return false;
 }

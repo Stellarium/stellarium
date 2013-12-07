@@ -35,34 +35,33 @@ class StelCore;
 class StelObject : public StelRegionObject
 {
 public:
-	//! @enum InfoStringGroupFlags used as named bitfield flags as specifiers to
+	//! @enum InfoStringGroup used as named bitfield flags as specifiers to
 	//! filter results of getInfoString. The precise definition of these should
 	//! be documented in the getInfoString documentation for the derived classes
 	//! for all specifiers which are defined in that derivative.
 	//! Use InfoStringGroup instead.
 	enum InfoStringGroupFlags
 	{
-		Name          = 0x00000001, //!< An object's name
-		CatalogNumber = 0x00000002, //!< Catalog numbers
-		Magnitude     = 0x00000004, //!< Magnitude related data
-		RaDecJ2000    = 0x00000008, //!< The equatorial position (J2000 ref)
-		RaDecOfDate   = 0x00000010, //!< The equatorial position (of date)
-		AltAzi        = 0x00000020, //!< The position (Altitude/Azimuth)
-		Distance      = 0x00000040, //!< Info about an object's distance
-		Size          = 0x00000080, //!< Info about an object's size
-		Extra1        = 0x00000100, //!< Derived class-specific extra fields
-		Extra2        = 0x00000200, //!< Derived class-specific extra fields
-		Extra3        = 0x00000400, //!< Derived class-specific extra fields
-		PlainText     = 0x00000800, //!< Strip HTML tags from output
-		HourAngle     = 0x00001000,  //!< The hour angle + DE (of date)
-		AbsoluteMagnitude = 0x00002000,  //!< The absolute magnitude
-		GalCoordJ2000 = 0x00004000	//!< The galactic position (J2000 ref) GZ: HEY STOP! GalCoords are DEFINED in B1950 coordinates! What we have here is a transformation matrix preconfigured to do precession J2000->B1950 and Equ.B1950->Gal. But "GalCoord for J2000" does not make sense.
+		Name			= 0x00000001, //!< An object's name
+		CatalogNumber		= 0x00000002, //!< Catalog numbers
+		Magnitude		= 0x00000004, //!< Magnitude related data
+		RaDecJ2000		= 0x00000008, //!< The equatorial position (J2000 ref)
+		RaDecOfDate		= 0x00000010, //!< The equatorial position (of date)
+		AltAzi			= 0x00000020, //!< The position (Altitude/Azimuth)
+		Distance		= 0x00000040, //!< Info about an object's distance
+		Size			= 0x00000080, //!< Info about an object's size
+		Extra			= 0x00000100, //!< Derived class-specific extra fields
+		PlainText		= 0x00000200, //!< Strip HTML tags from output
+		HourAngle		= 0x00000400, //!< The hour angle + DE (of date)
+		AbsoluteMagnitude	= 0x00000800, //!< The absolute magnitude
+		GalacticCoord		= 0x00001000, //!< The galactic position
+		Type			= 0x00002000  //!< The type of the object (star, planet, etc.)
 	};
 	typedef QFlags<InfoStringGroupFlags> InfoStringGroup;
 	Q_FLAGS(InfoStringGroup)
 
 	//! A pre-defined set of specifiers for the getInfoString flags argument to getInfoString
-	static const InfoStringGroupFlags AllInfo = (InfoStringGroupFlags)(Name|CatalogNumber|Magnitude|RaDecJ2000|RaDecOfDate|AltAzi|Distance|Size|Extra1|Extra2|Extra3|HourAngle|AbsoluteMagnitude|GalCoordJ2000);
+	static const InfoStringGroupFlags AllInfo = (InfoStringGroupFlags)(Name|CatalogNumber|Magnitude|RaDecJ2000|RaDecOfDate|AltAzi|Distance|Size|Extra|Type|HourAngle|AbsoluteMagnitude|GalacticCoord);
 	//! A pre-defined set of specifiers for the getInfoString flags argument to getInfoString
 	static const InfoStringGroupFlags ShortInfo = (InfoStringGroupFlags)(Name|CatalogNumber|Magnitude|RaDecJ2000);
 
@@ -72,6 +71,10 @@ public:
 	//! Return the spatial region of the object.
 	virtual SphericalRegionP getRegion() const {return SphericalRegionP(new SphericalPoint(getJ2000EquatorialPos(NULL)));}
 
+	//! Default implementation of the getPointInRegion method.
+	//! Return the J2000 Equatorial Position of the object.
+	virtual Vec3d getPointInRegion() const {return getJ2000EquatorialPos(NULL);}
+	
 	//! Write I18n information about the object in QString.
 	//! @param core the StelCore object to use
 	//! @param flags a set of InfoStringGroup flags which are used to
@@ -97,8 +100,8 @@ public:
 	//! At time 2000-01-01 this frame is almost the same as J2000, but ONLY if the observer is on earth
 	Vec3d getEquinoxEquatorialPos(const StelCore* core) const;
 
-	//! Get observer-centered galactic coordinates at equinox J2000
-	Vec3d getJ2000GalacticPos(const StelCore* core) const;
+	//! Get observer-centered galactic coordinates
+	Vec3d getGalacticPos(const StelCore* core) const;
 
 	//! Get observer-centered hour angle + declination (at current equinox)
 	//! It is the geometric position, i.e. without taking refraction effect into account.
@@ -125,12 +128,15 @@ public:
 	//! The frame has it's Z axis at the zenith
 	Vec3d getAltAzPosAuto(const StelCore* core) const;
 
-	//! Return object's apparent V magnitude as seen from observer
-	virtual float getVMagnitude(const StelCore* core, bool withExtinction=false) const;
+	//! Return object's apparent V magnitude as seen from observer, without including extinction.
+	virtual float getVMagnitude(const StelCore* core) const;
+	
+	//! Return object's apparent V magnitude as seen from observer including extinction.
+	float getVMagnitudeWithExtinction(const StelCore* core) const;
 
 	//! Return a priority value which is used to discriminate objects by priority
 	//! As for magnitudes, the lower is the higher priority
-	virtual float getSelectPriority(const StelCore*) const {return 99;}
+	virtual float getSelectPriority(const StelCore*) const;
 
 	//! Get a color used to display info about the object
 	virtual Vec3f getInfoColor() const {return Vec3f(1,1,1);}

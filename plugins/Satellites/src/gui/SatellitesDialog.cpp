@@ -38,9 +38,10 @@
 #include "StelMovementMgr.hpp"
 #include "StelStyle.hpp"
 #include "StelGui.hpp"
-#include "StelMainGraphicsView.hpp"
+#include "StelMainView.hpp"
 #include "StelFileMgr.hpp"
 #include "StelTranslator.hpp"
+#include "StelActionMgr.hpp"
 
 SatellitesDialog::SatellitesDialog() :
     updateTimer(0),
@@ -117,7 +118,7 @@ void SatellitesDialog::createDialogContent()
 
 	// Settings tab / General settings group
 	// This does call Satellites::setFlagLabels() indirectly.
-	QAction* action = dynamic_cast<StelGui*>(StelApp::getInstance().getGui())->getGuiAction("actionShow_Satellite_Labels");
+	StelAction* action = StelApp::getInstance().getStelActionManager()->findAction("actionShow_Satellite_Labels");
 	connect(ui->labelsGroup, SIGNAL(clicked(bool)),
 	        action, SLOT(setChecked(bool)));
 	connect(ui->fontSizeSpinBox, SIGNAL(valueChanged(int)),
@@ -859,8 +860,7 @@ void SatellitesDialog::trackSatellite(const QModelIndex& index)
 	// If Satellites are not currently displayed, make them visible.
 	if (!SatellitesMgr->getFlagHints())
 	{
-		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-		QAction* setHintsAction = gui->getGuiAction("actionShow_Satellite_Hints");
+		StelAction* setHintsAction = StelApp::getInstance().getStelActionManager()->findAction("actionShow_Satellite_Hints");
 		Q_ASSERT(setHintsAction);
 		setHintsAction->setChecked(true);
 	}
@@ -890,7 +890,7 @@ void SatellitesDialog::updateTLEs(void)
 	}
 	else
 	{
-		QStringList updateFiles = QFileDialog::getOpenFileNames(&StelMainGraphicsView::getInstance(),
+		QStringList updateFiles = QFileDialog::getOpenFileNames(&StelMainView::getInstance(),
 									q_("Select TLE Update File"),
 									StelFileMgr::getDesktopDir(),
 									"*.*");

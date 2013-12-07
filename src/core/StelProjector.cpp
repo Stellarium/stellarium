@@ -104,16 +104,22 @@ StelProjector::StelProjectorMaskType StelProjector::stringToMaskType(const QStri
 
 void StelProjector::init(const StelProjectorParams& params)
 {
+	devicePixelsPerPixel = params.devicePixelsPerPixel;
 	maskType = (StelProjectorMaskType)params.maskType;
 	zNear = params.zNear;
 	oneOverZNearMinusZFar = 1.f/(zNear-params.zFar);
 	viewportXywh = params.viewportXywh;
+	viewportXywh[0] *= devicePixelsPerPixel;
+	viewportXywh[1] *= devicePixelsPerPixel;
+	viewportXywh[2] *= devicePixelsPerPixel;
+	viewportXywh[3] *= devicePixelsPerPixel;
 	viewportCenter = params.viewportCenter;
+	viewportCenter *= devicePixelsPerPixel;
 	gravityLabels = params.gravityLabels;
 	defautAngleForGravityText = params.defautAngleForGravityText;
 	flipHorz = params.flipHorz ? -1.f : 1.f;
 	flipVert = params.flipVert ? -1.f : 1.f;
-	viewportFovDiameter = params.viewportFovDiameter;
+	viewportFovDiameter = params.viewportFovDiameter * devicePixelsPerPixel;
 	pixelPerRad = 0.5f * viewportFovDiameter / fovToViewScalingFactor(params.fov*(M_PI/360.f));
 	computeBoundingCap();
 }
@@ -202,7 +208,7 @@ SphericalRegionP StelProjector::getViewportConvexPolygon(float marginX, float ma
 	e1.normalize();
 	e2.normalize();
 	e3.normalize();
-	if (flipFrontBackFace())
+	if (needGlFrontFaceCW())
 	{
 		Vec3d v = e0;
 		e0 = e3;
@@ -240,6 +246,12 @@ float StelProjector::getPixelPerRadAtCenter() const
 //! Get the current FOV diameter in degrees
 float StelProjector::getFov() const {
 	return 360.f/M_PI*viewScalingFactorToFov(0.5f*viewportFovDiameter/pixelPerRad);
+}
+
+//! Get whether front faces need to be oriented in the clockwise direction
+bool StelProjector::needGlFrontFaceCW() const
+{
+	return (flipHorz*flipVert < 0.f);
 }
 
 bool StelProjector::checkInViewport(const Vec3d& pos) const
@@ -449,6 +461,12 @@ bool StelProjector::projectLineCheck(const Vec3d& v1, Vec3d& win1, const Vec3d& 
 StelProjector::ModelViewTranformP StelProjector::getModelViewTransform() const
 {
 	return modelViewTransform;
+}
+
+//! Get the current projection matrix.
+Mat4f StelProjector::getProjectionMatrix() const
+{
+	return Mat4f(2.f/viewportXywh[2], 0, 0, 0, 0, 2.f/viewportXywh[3], 0, 0, 0, 0, -1., 0., -(2.f*viewportXywh[0] + viewportXywh[2])/viewportXywh[2], -(2.f*viewportXywh[1] + viewportXywh[3])/viewportXywh[3], 0, 1);
 }
 
 StelProjector::StelProjectorMaskType StelProjector::getMaskType(void) const

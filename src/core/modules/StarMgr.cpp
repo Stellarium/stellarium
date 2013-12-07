@@ -20,21 +20,20 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#include <QCryptographicHash>
-#include <QDebug>
+#include <QTextStream>
 #include <QFile>
-#include <QFileInfo>
-#include <QRegExp>
 #include <QSettings>
 #include <QString>
-#include <QTextStream>
+#include <QRegExp>
+#include <QDebug>
+#include <QFileInfo>
 #include <QDir>
+#include <QCryptographicHash>
 
 #include "StelProjector.hpp"
 #include "StarMgr.hpp"
 #include "StelObject.hpp"
-#include "renderer/StelRenderer.hpp"
-#include "renderer/StelTextureNew.hpp"
+#include "StelTexture.hpp"
 
 #include "StelUtils.hpp"
 #include "StelToneReproducer.hpp"
@@ -42,6 +41,7 @@
 #include "StelGeodesicGrid.hpp"
 #include "StelTranslator.hpp"
 #include "StelApp.hpp"
+#include "StelTextureMgr.hpp"
 #include "StelObjectMgr.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelSkyCultureMgr.hpp"
@@ -49,6 +49,7 @@
 #include "StelModuleMgr.hpp"
 #include "StelCore.hpp"
 #include "StelIniParser.hpp"
+#include "StelPainter.hpp"
 #include "StelJsonParser.hpp"
 #include "ZoneArray.hpp"
 #include "StelSkyDrawer.hpp"
@@ -58,10 +59,9 @@
 #ifndef Q_OS_WIN
 #include <unistd.h>
 #else
+#include <winsock2.h>
 #include "kdewin32/unistd.h"
 #endif
-
-using namespace BigStarCatalogExtension;
 
 static QStringList spectral_array;
 static QStringList component_array;
@@ -69,7 +69,7 @@ static QStringList component_array;
 // This number must be incremented each time the content or file format of the stars catalogs change
 // It can also be incremented when the defaultStarsConfig.json file change.
 // It should always matchs the version field of the defaultStarsConfig.json file
-static const int StarCatalogFormatVersion = 4;
+static const int StarCatalogFormatVersion = 5;
 
 // Initialise statics
 bool StarMgr::flagSciNames = true;
@@ -124,15 +124,11 @@ QString StarMgr::convertToComponentIds(int index)
 
 void StarMgr::initTriangle(int lev,int index, const Vec3f &c0, const Vec3f &c1, const Vec3f &c2)
 {
-	ZoneArrayMap::const_iterator it(zoneArrays.find(lev));
-	if (it!=zoneArrays.constEnd())
-		it.value()->initTriangle(index,c0,c1,c2);
+	gridLevels[lev]->initTriangle(index,c0,c1,c2);
 }
 
 
-StarMgr::StarMgr(void) 
-	: hipIndex(new HipIndexStruct[NR_OF_HIP+1])
-	, texPointer(NULL)
+StarMgr::StarMgr(void) : hipIndex(new HipIndexStruct[NR_OF_HIP+1])
 {
 	setObjectName("StarMgr");
 	if (hipIndex == 0)
@@ -159,20 +155,11 @@ double StarMgr::getCallOrder(StelModuleActionName actionName) const
 
 StarMgr::~StarMgr(void)
 {
-	ZoneArrayMap::iterator it(zoneArrays.end());
-	while (it!=zoneArrays.begin())
-	{
-		--it;
-		delete it.value();
-		it.value() = NULL;
-	}
-	zoneArrays.clear();
+	foreach(ZoneArray* z, gridLevels)
+		delete z;
+	gridLevels.clear();
 	if (hipIndex)
 		delete[] hipIndex;
-	if(NULL != texPointer)
-	{
-		delete texPointer;
-	}
 }
 
 QString StarMgr::getCommonName(int hip)
@@ -289,7 +276,8 @@ void StarMgr::copyDefaultConfigFile()
 		StelFileMgr::makeSureDirExistsAndIsWritable(StelFileMgr::getUserDir()+"/stars/default");
 		starConfigFileFullPath = StelFileMgr::getUserDir()+"/stars/default/starsConfig.json";
 		qDebug() << "Creates file " << QDir::toNativeSeparators(starConfigFileFullPath);
-		QFile::copy(StelFileMgr::findFile("stars/default/defaultStarsConfig.json"), starConfigFileFullPath);
+		QFile::copy(StelFileMgr::getInstallationDir()+"/stars/default/defaultStarsConfig.json", starConfigFileFullPath);
+		QFile::setPermissions(starConfigFileFullPath, QFile::permissions(starConfigFileFullPath) | QFileDevice::WriteOwner);
 	}
 	catch (std::runtime_error& e)
 	{
@@ -303,11 +291,8 @@ void StarMgr::init()
 	QSettings* conf = StelApp::getInstance().getSettings();
 	Q_ASSERT(conf);
 
-	try
-	{
-		starConfigFileFullPath = StelFileMgr::findFile("stars/default/starsConfig.json", StelFileMgr::Flags(StelFileMgr::Writable|StelFileMgr::File));
-	}
-	catch (std::runtime_error& e)
+	starConfigFileFullPath = StelFileMgr::findFile("stars/default/starsConfig.json", StelFileMgr::Flags(StelFileMgr::Writable|StelFileMgr::File));
+	if (starConfigFileFullPath.isEmpty())
 	{
 		qWarning() << "Could not find the starsConfig.json file: will copy the default one.";
 		copyDefaultConfigFile();
@@ -338,20 +323,23 @@ void StarMgr::init()
 	setLabelsAmount(conf->value("stars/labels_amount",3.f).toFloat());
 
 	objectMgr->registerStelObjectMgr(this);
+	texPointer = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/pointeur2.png");   // Load pointer texture
 
 	StelApp::getInstance().getCore()->getGeodesicGrid(maxGeodesicGridLevel)->visitTriangles(maxGeodesicGridLevel,initTriangleFunc,this);
-	for (ZoneArrayMap::const_iterator it(zoneArrays.begin()); it!=zoneArrays.end();it++)
-	{
-		it.value()->scaleAxis();
-	}
+	foreach(ZoneArray* z, gridLevels)
+		z->scaleAxis();
 	StelApp *app = &StelApp::getInstance();
 	connect(app, SIGNAL(languageChanged()), this, SLOT(updateI18n()));
 	connect(app, SIGNAL(skyCultureChanged(const QString&)), this, SLOT(updateSkyCulture(const QString&)));
 	connect(app, SIGNAL(colorSchemeChanged(const QString&)), this, SLOT(setStelStyle(const QString&)));
+
+	QString displayGroup = N_("Display Options");
+	addAction("actionShow_Stars", displayGroup, N_("Stars"), "flagStarsDisplayed", "S");
+	addAction("actionShow_Stars_Labels", displayGroup, N_("Stars labels"), "flagLabelsDisplayed", "Alt+S");
 }
 
 
-void StarMgr::drawPointer(StelRenderer* renderer, StelProjectorP projector, const StelCore* core)
+void StarMgr::drawPointer(StelPainter& sPainter, const StelCore* core)
 {
 	const QList<StelObjectP> newSelected = objectMgr->getSelectedObject("Star");
 	if (!newSelected.empty())
@@ -359,28 +347,18 @@ void StarMgr::drawPointer(StelRenderer* renderer, StelProjectorP projector, cons
 		const StelObjectP obj = newSelected[0];
 		Vec3d pos=obj->getJ2000EquatorialPos(core);
 
-		Vec3d win;
+		Vec3d screenpos;
 		// Compute 2D pos and return if outside screen
-		if (!projector->project(pos, win))
-		{
+		if (!sPainter.getProjector()->project(pos, screenpos))
 			return;
-		}
-
-		if(NULL == texPointer)
-		{
-			texPointer = renderer->createTexture("textures/pointeur2.png");   // Load pointer texture
-		}
 
 		Vec3f c(obj->getInfoColor());
-		if (StelApp::getInstance().getVisionModeNight())
-			c = StelUtils::getNightColor(c);
-
-		renderer->setGlobalColor(c[0], c[1], c[2]);
-
+		sPainter.setColor(c[0], c[1], c[2]);
 		texPointer->bind();
-		renderer->setBlendMode(BlendMode_Alpha);
-		const float angle = StelApp::getInstance().getTotalRunTime() * 40.0f;
-		renderer->drawTexturedRect(win[0] - 13.0f, win[1] - 13.0f, 26.0f, 26.0f, angle);
+		sPainter.enableTexture2d(true);
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
+		sPainter.drawSprite2dMode(screenpos[0], screenpos[1], 13.f, StelApp::getInstance().getTotalRunTime()*40.);
 	}
 }
 
@@ -393,7 +371,7 @@ void StarMgr::setStelStyle(const QString& section)
 	setLabelColor(StelUtils::strToVec3f(conf->value(section+"/star_label_color", defaultColor).toString()));
 }
 
-bool StarMgr::checkAndLoadCatalog(QVariantMap catDesc)
+bool StarMgr::checkAndLoadCatalog(const QVariantMap& catDesc)
 {
 	const bool checked = catDesc.value("checked").toBool();
 	QString catalogFileName = catDesc.value("fileName").toString();
@@ -402,12 +380,8 @@ bool StarMgr::checkAndLoadCatalog(QVariantMap catDesc)
 	if (!(StelFileMgr::isAbsolute(catalogFileName)))
 		catalogFileName = "stars/default/"+catalogFileName;
 
-	QString catalogFilePath;
-	try
-	{
-		catalogFilePath = StelFileMgr::findFile(catalogFileName);
-	}
-	catch (std::runtime_error e)
+	QString catalogFilePath = StelFileMgr::findFile(catalogFileName);
+	if (catalogFilePath.isEmpty())
 	{
 		// The file is supposed to be checked, but we can't find it
 		if (checked)
@@ -464,24 +438,19 @@ bool StarMgr::checkAndLoadCatalog(QVariantMap catDesc)
 		setCheckFlag(catDesc.value("id").toString(), true);
 	}
 
-	ZoneArray* const z = ZoneArray::create(catalogFilePath, true);
+	ZoneArray* z = ZoneArray::create(catalogFilePath, true);
 	if (z)
 	{
-		if (maxGeodesicGridLevel < z->level)
-		{
-			maxGeodesicGridLevel = z->level;
-		}
-		ZoneArray *pos(zoneArrays[z->level]);
-		if (pos)
+		if (z->level<gridLevels.size())
 		{
 			qWarning() << QDir::toNativeSeparators(catalogFileName) << ", " << z->level << ": duplicate level";
 			delete z;
+			return true;
 		}
-		else
-		{
-			zoneArrays[z->level] = z;
-			pos = z;
-		}
+		Q_ASSERT(z->level==maxGeodesicGridLevel+1);
+		Q_ASSERT(z->level==gridLevels.size());
+		++maxGeodesicGridLevel;
+		gridLevels.append(z);
 	}
 	return true;
 }
@@ -529,10 +498,8 @@ void StarMgr::loadData(QVariantMap starsConfig)
 		hipIndex[i].z = 0;
 		hipIndex[i].s = 0;
 	}
-	for (ZoneArrayMap::const_iterator it(zoneArrays.constBegin()); it != zoneArrays.constEnd();++it)
-	{
-		it.value()->updateHipIndex(hipIndex);
-	}
+	foreach(ZoneArray* z, gridLevels)
+		z->updateHipIndex(hipIndex);
 
 	const QString cat_hip_sp_file_name = starsConfig.value("hipSpectralFile").toString();
 	if (cat_hip_sp_file_name.isEmpty())
@@ -541,16 +508,11 @@ void StarMgr::loadData(QVariantMap starsConfig)
 	}
 	else
 	{
-		try
-		{
-			spectral_array = initStringListFromFile(StelFileMgr::findFile("stars/default/" + cat_hip_sp_file_name));
-		}
-		catch (std::runtime_error& e)
-		{
-			qWarning() << "ERROR while loading data from "
-					   << QDir::toNativeSeparators(("stars/default/" + cat_hip_sp_file_name))
-					   << ": " << e.what();
-		}
+		QString tmpFic = StelFileMgr::findFile("stars/default/" + cat_hip_sp_file_name);
+		if (tmpFic.isEmpty())
+			qWarning() << "ERROR while loading data from " << QDir::toNativeSeparators(("stars/default/" + cat_hip_sp_file_name));
+		else
+			spectral_array = initStringListFromFile(tmpFic);
 	}
 
 	const QString cat_hip_cids_file_name = starsConfig.value("hipComponentsIdsFile").toString();
@@ -560,15 +522,11 @@ void StarMgr::loadData(QVariantMap starsConfig)
 	}
 	else
 	{
-		try
-		{
-			component_array = initStringListFromFile(StelFileMgr::findFile("stars/default/" + cat_hip_cids_file_name));
-		}
-		catch (std::runtime_error& e)
-		{
-			qWarning() << "ERROR while loading data from "
-					   << QDir::toNativeSeparators(("stars/default/" + cat_hip_cids_file_name)) << ": " << e.what();
-		}
+		QString tmpFic = StelFileMgr::findFile("stars/default/" + cat_hip_cids_file_name);
+		if (tmpFic.isEmpty())
+			qWarning() << "ERROR while loading data from " << QDir::toNativeSeparators(("stars/default/" + cat_hip_cids_file_name));
+		else
+			component_array = initStringListFromFile(tmpFic);
 	}
 
 	lastMaxSearchLevel = maxGeodesicGridLevel;
@@ -804,20 +762,20 @@ void StarMgr::loadGcvs(const QString& GcvsFile)
 int StarMgr::getMaxSearchLevel() const
 {
 	int rval = -1;
-	for (ZoneArrayMap::const_iterator it(zoneArrays.constBegin());it!=zoneArrays.constEnd();++it)
+	foreach(const ZoneArray* z, gridLevels)
 	{
-		const float mag_min = 0.001f*it.value()->mag_min;
-		float rcmag[2];
-		if (StelApp::getInstance().getCore()->getSkyDrawer()->computeRCMag(mag_min,rcmag)==false)
+		const float mag_min = 0.001f*z->mag_min;
+		RCMag rcmag;
+		if (StelApp::getInstance().getCore()->getSkyDrawer()->computeRCMag(mag_min, &rcmag)==false)
 			break;
-		rval = it.key();
+		rval = z->level;
 	}
 	return rval;
 }
 
 
 // Draw all the stars
-void StarMgr::draw(StelCore* core, StelRenderer* renderer)
+void StarMgr::draw(StelCore* core)
 {
 	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
 	StelSkyDrawer* skyDrawer = core->getSkyDrawer();
@@ -827,44 +785,50 @@ void StarMgr::draw(StelCore* core, StelRenderer* renderer)
 		return;
 
 	int maxSearchLevel = getMaxSearchLevel();
-	const GeodesicSearchResult* geodesic_search_result = core->getGeodesicGrid(maxSearchLevel)->search(prj->getViewportConvexPolygon()->getBoundingSphericalCaps(),maxSearchLevel);
+	QVector<SphericalCap> viewportCaps = prj->getViewportConvexPolygon()->getBoundingSphericalCaps();
+	viewportCaps.append(core->getVisibleSkyArea());
+	const GeodesicSearchResult* geodesic_search_result = core->getGeodesicGrid(maxSearchLevel)->search(viewportCaps,maxSearchLevel);
 
 	// Set temporary static variable for optimization
 	const float names_brightness = labelsFader.getInterstate() * starsFader.getInterstate();
 
-	// Prepare for drawing many stars
-	renderer->setFont(starFont);
-	skyDrawer->preDrawPointSource();
+	// Prepare openGL for drawing many stars
+	StelPainter sPainter(prj);
+	sPainter.setFont(starFont);
+	skyDrawer->preDrawPointSource(&sPainter);
 
-	// draw all the stars of all the selected zones
-	// GZ: This table must be enlarged from 2x256 to many more entries. CORRELATE IN Zonearray.cpp!
-	//float rcmag_table[2*256];
-	//float rcmag_table[2*16384];
-	float rcmag_table[2 * RCMAG_TABLE_SIZE];
-
-	for (ZoneArrayMap::const_iterator it(zoneArrays.constBegin()); it!=zoneArrays.constEnd();++it)
+	// Prepare a table for storing precomputed RCMag for all ZoneArrays
+	RCMag rcmag_table[RCMAG_TABLE_SIZE];
+	
+	// Draw all the stars of all the selected zones
+	foreach(const ZoneArray* z, gridLevels)
 	{
-		const float mag_min = 0.001f*it.value()->mag_min;
-		const float k = (0.001f*it.value()->mag_range)/it.value()->mag_steps; // MagStepIncrement
-		// GZ: add a huge number of entries to rcMag
-		//for (int i=it.value()->mag_steps-1;i>=0;--i)
-		for (int i=RCMAG_TABLE_SIZE-1;i>=0;--i)
+		int limitMagIndex=RCMAG_TABLE_SIZE;
+		const float mag_min = 0.001f*z->mag_min;
+		const float k = (0.001f*z->mag_range)/z->mag_steps; // MagStepIncrement
+		for (int i=0;i<RCMAG_TABLE_SIZE;++i)
 		{
 			const float mag = mag_min+k*i;
-			if (skyDrawer->computeRCMag(mag,rcmag_table + 2*i)==false)
+			if (skyDrawer->computeRCMag(mag, &rcmag_table[i])==false)
 			{
-				if (i==0) goto exit_loop;
+				if (i==0)
+					goto exit_loop;
+				
+				// The last magnitude at which the star is visible
+				limitMagIndex = i-1;
+				
+				// We reached the point where stars are not visible anymore
+				// Fill the rest of the table with zero and leave.
+				for (;i<RCMAG_TABLE_SIZE;++i)
+				{
+					rcmag_table[i].luminance=0;
+					rcmag_table[i].radius=0;
+				}
+				break;
 			}
-			if (skyDrawer->getDrawStarsAsPoints())
-			{
-				rcmag_table[2*i+1] *= starsFader.getInterstate();
-			}
-			else
-			{
-				rcmag_table[2*i] *= starsFader.getInterstate();
-			}
+			rcmag_table[i].radius *= starsFader.getInterstate();
 		}
-		lastMaxSearchLevel = it.key();
+		lastMaxSearchLevel = z->level;
 
 		unsigned int maxMagStarName = 0;
 		if (labelsFader.getInterstate()>0.f)
@@ -876,17 +840,19 @@ void StarMgr::draw(StelCore* core, StelRenderer* renderer)
 				maxMagStarName = x;
 		}
 		int zone;
-		for (GeodesicSearchInsideIterator it1(*geodesic_search_result,it.key());(zone = it1.next()) >= 0;)
-			it.value()->draw(prj, renderer, zone, true, rcmag_table, core, maxMagStarName, names_brightness);
-		for (GeodesicSearchBorderIterator it1(*geodesic_search_result,it.key());(zone = it1.next()) >= 0;)
-			it.value()->draw(prj, renderer, zone, false, rcmag_table, core, maxMagStarName,names_brightness);
+		
+		for (GeodesicSearchInsideIterator it1(*geodesic_search_result,z->level);(zone = it1.next()) >= 0;)
+			z->draw(&sPainter, zone, true, rcmag_table, limitMagIndex, core, maxMagStarName, names_brightness, viewportCaps);
+		for (GeodesicSearchBorderIterator it1(*geodesic_search_result,z->level);(zone = it1.next()) >= 0;)
+			z->draw(&sPainter, zone, false, rcmag_table, limitMagIndex, core, maxMagStarName,names_brightness, viewportCaps);
 	}
 	exit_loop:
+
 	// Finish drawing many stars
-	skyDrawer->postDrawPointSource(prj);
+	skyDrawer->postDrawPointSource(&sPainter);
 
 	if (objectMgr->getFlagSelectedObjectPointer())
-		drawPointer(renderer, prj, core);
+		drawPointer(sPainter, core);
 }
 
 
@@ -944,19 +910,19 @@ QList<StelObjectP > StarMgr::searchAround(const Vec3d& vv, double limFov, const 
 
 	// Iterate over the stars inside the triangles
 	f = cos(limFov * M_PI/180.);
-	for (ZoneArrayMap::const_iterator it(zoneArrays.constBegin());it!=zoneArrays.constEnd();it++)
+	foreach(ZoneArray* z, gridLevels)
 	{
 		//qDebug() << "search inside(" << it->first << "):";
 		int zone;
-		for (GeodesicSearchInsideIterator it1(*geodesic_search_result,it.key());(zone = it1.next()) >= 0;)
+		for (GeodesicSearchInsideIterator it1(*geodesic_search_result,z->level);(zone = it1.next()) >= 0;)
 		{
-			it.value()->searchAround(core, zone,v,f,result);
+			z->searchAround(core, zone,v,f,result);
 			//qDebug() << " " << zone;
 		}
 		//qDebug() << endl << "search border(" << it->first << "):";
-		for (GeodesicSearchBorderIterator it1(*geodesic_search_result,it.key()); (zone = it1.next()) >= 0;)
+		for (GeodesicSearchBorderIterator it1(*geodesic_search_result,z->level); (zone = it1.next()) >= 0;)
 		{
-			it.value()->searchAround(core, zone,v,f,result);
+			z->searchAround(core, zone,v,f,result);
 			//qDebug() << " " << zone;
 		}
 	}
@@ -969,7 +935,7 @@ QList<StelObjectP > StarMgr::searchAround(const Vec3d& vv, double limFov, const 
 void StarMgr::updateI18n()
 {
 	QRegExp transRx("_[(]\"(.*)\"[)]");
-	StelTranslator trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
+	const StelTranslator& trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
 	commonNamesMapI18n.clear();
 	commonNamesIndexI18n.clear();
 	for (QHash<int,QString>::ConstIterator it(commonNamesMap.constBegin());it!=commonNamesMap.constEnd();it++)
@@ -1082,17 +1048,34 @@ QStringList StarMgr::listMatchingObjectsI18n(const QString& objPrefix, int maxNb
 	QString objw = objPrefix.toUpper();
 
 	// Search for common names
-	for (QMap<QString,int>::const_iterator it(commonNamesIndexI18n.lowerBound(objw)); it!=commonNamesIndexI18n.end(); ++it)
-	{
-		if (it.key().startsWith(objw))
+	if (useStartOfWords) {
+		for (QMap<QString,int>::const_iterator it(commonNamesIndexI18n.lowerBound(objw)); it!=commonNamesIndexI18n.end(); ++it)
 		{
-			if (maxNbItem==0)
+			if (it.key().startsWith(objw))
+			{
+				if (maxNbItem==0)
+					break;
+				result << getCommonName(it.value());
+				--maxNbItem;
+			}
+			else
 				break;
-			result << getCommonName(it.value());
-			--maxNbItem;
 		}
-		else
-			break;
+	}
+	else
+	{
+		QMapIterator<QString, int> i(commonNamesIndexI18n);
+		while (i.hasNext())
+		{
+			i.next();
+			if (i.key().contains(objw))
+			{
+				if (maxNbItem==0)
+					break;
+				result << getCommonName(i.value());
+				--maxNbItem;
+			}
+		}
 	}
 
 	// Search for sci names
@@ -1175,17 +1158,35 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 	QString objw = objPrefix.toUpper();
 
 	// Search for common names
-	for (QMap<QString,int>::const_iterator it(commonNamesIndex.lowerBound(objw)); it!=commonNamesIndex.end(); ++it)
+	if (useStartOfWords)
 	{
-		if (it.key().startsWith(objw))
+		for (QMap<QString,int>::const_iterator it(commonNamesIndex.lowerBound(objw)); it!=commonNamesIndex.end(); ++it)
 		{
-			if (maxNbItem==0)
+			if (it.key().startsWith(objw))
+			{
+				if (maxNbItem==0)
+					break;
+				result << getCommonName(it.value());
+				--maxNbItem;
+			}
+			else
 				break;
-			result << getCommonName(it.value());
-			--maxNbItem;
 		}
-		else
-			break;
+	}
+	else
+	{
+		QMapIterator<QString, int> i(commonNamesIndex);
+		while (i.hasNext())
+		{
+			i.next();
+			if (i.key().contains(objw))
+			{
+				if (maxNbItem==0)
+					break;
+				result << getCommonName(i.value());
+				--maxNbItem;
+			}
+		}
 	}
 
 	// Search for sci names
@@ -1261,7 +1262,7 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 
 
 //! Define font file name and size to use for star names display
-void StarMgr::setFontSize(double newFontSize)
+void StarMgr::setFontSize(float newFontSize)
 {
 	starFont.setPixelSize(newFontSize);
 }
@@ -1269,32 +1270,23 @@ void StarMgr::setFontSize(double newFontSize)
 void StarMgr::updateSkyCulture(const QString& skyCultureDir)
 {
 	// Load culture star names in english
-	try
-	{
-		loadCommonNames(StelFileMgr::findFile("skycultures/" + skyCultureDir + "/star_names.fab"));
-	}
-	catch(std::runtime_error& e)
-	{
-		qDebug() << "Could not load star_names.fab for sky culture " << QDir::toNativeSeparators(skyCultureDir) << ": " << e.what();
-	}
+	QString fic = StelFileMgr::findFile("skycultures/" + skyCultureDir + "/star_names.fab");
+	if (fic.isEmpty())
+		qDebug() << "Could not load star_names.fab for sky culture " << QDir::toNativeSeparators(skyCultureDir);
+	else
+		loadCommonNames(fic);
 
-	try
-	{
-		loadSciNames(StelFileMgr::findFile("stars/default/name.fab"));
-	}
-	catch (std::runtime_error& e)
-	{
-		qWarning() << "WARNING: could not load scientific star names file: " << e.what();
-	}
-
-	try
-	{
-		loadGcvs(StelFileMgr::findFile("stars/default/gcvs_hip_part.dat"));
-	}
-	catch (std::runtime_error& e)
-	{
-		qWarning() << "WARNING: could not load variable stars file: " << e.what();
-	}
+	fic = StelFileMgr::findFile("stars/default/name.fab");
+	if (fic.isEmpty())
+		qWarning() << "WARNING: could not load scientific star names file: stars/default/name.fab";
+	else
+		loadSciNames(fic);
+	
+	fic = StelFileMgr::findFile("stars/default/gcvs_hip_part.dat");
+	if (fic.isEmpty())
+		qWarning() << "WARNING: could not load variable stars file: stars/default/gcvs_hip_part.dat";
+	else
+		loadGcvs(fic);
 
 	// Turn on sci names/catalog names for western culture only
 	setFlagSciNames(skyCultureDir.startsWith("western"));

@@ -18,15 +18,15 @@
  */
 
 #include <QObject>
-#include <QtDebug>
-#include <QtTest>
+#include <QDebug>
+#include <QTest>
 #include <stdexcept>
 
 #include "StelSphereGeometry.hpp"
 #include "StelUtils.hpp"
 #include "tests/testStelSphericalIndex.hpp"
 
-QTEST_MAIN(TestStelSphericalIndex);
+QTEST_MAIN(TestStelSphericalIndex)
 
 class TestRegionObject : public StelRegionObject
 {

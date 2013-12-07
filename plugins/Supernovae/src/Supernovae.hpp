@@ -22,6 +22,8 @@
 #include "StelObjectModule.hpp"
 #include "StelObject.hpp"
 #include "StelFader.hpp"
+#include "StelTextureTypes.hpp"
+#include "StelPainter.hpp"
 #include "Supernova.hpp"
 #include <QFont>
 #include <QVariantMap>
@@ -32,10 +34,11 @@
 
 class QNetworkAccessManager;
 class QNetworkReply;
-class QProgressBar;
 class QSettings;
 class QTimer;
 class SupernovaeDialog;
+
+class StelPainter;
 
 typedef QSharedPointer<Supernova> SupernovaP;
 
@@ -80,8 +83,8 @@ public:
 	virtual void init();
 	virtual void deinit();
 	virtual void update(double) {;}
-	virtual void draw(StelCore* core, class StelRenderer* renderer);
-	virtual void drawPointer(StelCore* core, class StelRenderer* renderer, StelProjectorP projector);
+	virtual void draw(StelCore* core);
+	virtual void drawPointer(StelCore* core, StelPainter& painter);
 	virtual double getCallOrder(StelModuleActionName actionName) const;
 
 	///////////////////////////////////////////////////////////////////////////
@@ -158,6 +161,9 @@ public:
 	//! Get list of supernovae
 	QString getSupernovaeList();
 
+	//! Get lower limit of  brightness for displayed supernovae
+	float getLowerLimitBrightness();
+
 signals:
 	//! @param state the new update state.
 	void updateStateChanged(Supernovae::UpdateState state);
@@ -198,6 +204,10 @@ private:
 	//! @return version string, e.g. "1"
 	int getJsonFileVersion(void);
 
+	//! Check format of the catalog of supernovae
+	//! @return valid boolean, e.g. "true"
+	bool checkJsonFileFormat(void);
+
 	//! Parse JSON file and load supernovaes to map
 	QVariantMap loadSNeMap(QString path=QString());
 
@@ -206,7 +216,7 @@ private:
 
 	QString sneJsonPath;
 
-	class StelTextureNew* texPointer;
+	StelTextureSP texPointer;
 	QList<SupernovaP> snstar;
 	QHash<QString, double> snlist;
 
@@ -214,7 +224,7 @@ private:
 	UpdateState updateState;
 	QNetworkAccessManager* downloadMgr;
 	QString updateUrl;	
-	QProgressBar* progressBar;
+	class StelProgressController* progressBar;
 	QTimer* updateTimer;
 	QTimer* messageTimer;
 	QList<int> messageIDs;
@@ -237,7 +247,7 @@ private slots:
 };
 
 
-#include "fixx11h.h"
+
 #include <QObject>
 #include "StelPluginInterface.hpp"
 
@@ -245,6 +255,7 @@ private slots:
 class SupernovaeStelPluginInterface : public QObject, public StelPluginInterface
 {
 	Q_OBJECT
+	Q_PLUGIN_METADATA(IID "stellarium.StelGuiPluginInterface/1.0")
 	Q_INTERFACES(StelPluginInterface)
 public:
 	virtual StelModule* getStelModule() const;

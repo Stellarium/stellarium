@@ -77,7 +77,7 @@ public:
 	//! Dialog windows don't need explicit drawing, it's done automatically.
 	//! If a plug-in draws on the screen, it should be able to respect
 	//! the night vision mode.
-	virtual void draw(StelCore * core, class StelRenderer* renderer);
+	virtual void draw(StelCore * core);
 	virtual double getCallOrder(StelModuleActionName actionName) const;
 	//! called when the "configure" button in the "Plugins" tab is pressed
 	virtual bool configureGui(bool show);
@@ -297,7 +297,7 @@ private:
 };
 
 
-#include "fixx11h.h"
+
 #include <QObject>
 #include "StelPluginInterface.hpp"
 
@@ -305,6 +305,7 @@ private:
 class SolarSystemEditorStelPluginInterface : public QObject, public StelPluginInterface
 {
 	Q_OBJECT
+	Q_PLUGIN_METADATA(IID "stellarium.StelGuiPluginInterface/1.0")
 	Q_INTERFACES(StelPluginInterface)
 public:
 	virtual StelModule* getStelModule() const;
