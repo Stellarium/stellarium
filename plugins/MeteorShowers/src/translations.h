@@ -47,8 +47,12 @@ class MeteorShowerTranslations
         N_("Perseids");
 
         // List of parent objects for meteor showers
-        N_("Comet Thatcher");
+        N_("Asteroid 2003 EH1");
         N_("Comet 1P/Halley");
         N_("Comet 7P/Pons-Winnecke");
+        N_("Comet 55P/Tempel-Tuttle");
+        N_("Comet 96P/Machholz");
+        N_("Comet 109P/Swift-Tuttle");
+        N_("Comet Thatcher");
 	}
 };
