@@ -132,8 +132,6 @@ void MeteorShowers::init()
 
         texPointer = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/pointeur5.png");
 		MeteorShower::radiantTexture = StelApp::getInstance().getTextureManager().createTexture(":/MeteorShowers/radiant.png");
-        MeteorShower::radiantActiveTexture = StelApp::getInstance().getTextureManager().createTexture(":/MeteorShowers/radiantActive.png");
-        MeteorShower::radiantActiveTexture2 = StelApp::getInstance().getTextureManager().createTexture(":/MeteorShowers/radiantActive2.png");
 
         // key bindings and other actions
         addAction("actionShow_MeteorShower", N_("Meteor Shower"), N_("Show Meteor Showers"), "showMeteorShowers", "Ctrl+Alt+S");
@@ -188,8 +186,6 @@ void MeteorShowers::init()
 void MeteorShowers::deinit()
 {
     MeteorShower::radiantTexture.clear();
-    MeteorShower::radiantActiveTexture.clear();
-    MeteorShower::radiantActiveTexture2.clear();
     texPointer.clear();
 }
 
@@ -279,7 +275,7 @@ void MeteorShowers::drawPointer(StelCore* core, StelPainter& painter)
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
 
 		float size = obj->getAngularSize(core)*M_PI/180.*prj->getPixelPerRadAtCenter();
-		size+=20.f + 10.f*std::sin(2.f * StelApp::getInstance().getTotalRunTime());
+        size+=20.f + 10.f*std::sin(2.f * StelApp::getInstance().getTotalRunTime());
 
 		painter.drawSprite2dMode(screenpos[0]-size/2, screenpos[1]-size/2, 10.f, 90);
 		painter.drawSprite2dMode(screenpos[0]-size/2, screenpos[1]+size/2, 10.f, 0);
@@ -305,7 +301,7 @@ void MeteorShowers::updateActiveInfo(StelCore* core)
             if (changedDate)
             {
                 //if the meteor shower is active, get data
-                if (ms->checkActiveDate())
+                if (ms->isActive())
                 {
                     //First, check if there is already data about the constellation in "activeInfo"
                     //The var "index" will be updated to show the correct place do put the new information

@@ -80,9 +80,7 @@ private:
 	Vec3d XYZ;                      // Cartesian equatorial position
 	Vec3d XY;                       // Store temporary 2D position
 
-    static StelTextureSP radiantTexture;          //white
-    static StelTextureSP radiantActiveTexture;    //yellow
-    static StelTextureSP radiantActiveTexture2;   //blue
+    static StelTextureSP radiantTexture;
 
     LinearFader labelsFader;
 
@@ -133,7 +131,7 @@ private:
 
     //! Check if the radiant is active for the current sky date
     //! @return if is active, return 1 to real data OR 2 to generic data
-    int checkActiveDate() const;
+    int isActive() const;
 
     //! Check if the JSON file has real data to a given year
     //! @param yyyy year to check

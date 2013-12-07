@@ -36,8 +36,6 @@
 #include <QList>
 
 StelTextureSP MeteorShower::radiantTexture;
-StelTextureSP MeteorShower::radiantActiveTexture;
-StelTextureSP MeteorShower::radiantActiveTexture2;
 
 MeteorShower::MeteorShower(const QVariantMap& map)
         : initialized(false)
@@ -169,7 +167,7 @@ QString MeteorShower::getMonthName(int number) const
 	return q_(monthList.at(number-1));
 }
 
-int MeteorShower::checkActiveDate() const
+int MeteorShower::isActive() const
 {
     StelCore* core = StelApp::getInstance().getCore();
 
@@ -347,24 +345,27 @@ void MeteorShower::draw(StelPainter& painter)
 
 	Vec3f color = getInfoColor();
     glEnable(GL_BLEND);
-    glBlendFunc(GL_ONE, GL_ONE);
-    painter.setColor(color[0], color[1], color[2], 1);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE);
 
-    switch (checkActiveDate()){
-    case 1:
-        MeteorShower::radiantActiveTexture->bind();
+    float alpha = 0.85f + ((double) rand() / (RAND_MAX))/10;
+
+    switch (isActive()){
+    case 1: //Active, real data
+        painter.setColor(1.0f, 0.94f, 0.0f, alpha);
         break;
-    case 2:
-        MeteorShower::radiantActiveTexture2->bind();
+    case 2: //Active, generic data
+        painter.setColor(0.0f, 1.0f, 0.94f, alpha);
         break;
-    default:
-        MeteorShower::radiantTexture->bind();
+    default: //Inactive
+        painter.setColor(1.0f, 1.0f, 1.0f, alpha);
     }
 
-	float size = getAngularSize(NULL)*M_PI/180.*painter.getProjector()->getPixelPerRadAtCenter();
-	float shift = 8.f + size/1.8f;
+    MeteorShower::radiantTexture->bind();
+    painter.drawSprite2dMode(XY[0], XY[1], 10);
 
-	painter.drawSprite2dMode(XY[0], XY[1], 10);
+    float size = getAngularSize(NULL)*M_PI/180.*painter.getProjector()->getPixelPerRadAtCenter();
+    float shift = 8.f + size/1.8f;
+    painter.setColor(color[0], color[1], color[2], 1.0f);
     painter.drawText(XY[0]+shift, XY[1]+shift, getNameI18n(), 0, 0, 0, false);
     painter.setColor(1,1,1,0);
 }
