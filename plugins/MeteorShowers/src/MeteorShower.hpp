@@ -60,7 +60,7 @@ public:
 	//! @flags a set of flags with information types to include.
 	virtual QString getInfoString(const StelCore* core, const InfoStringGroup& flags) const;
 	virtual Vec3f getInfoColor(void) const;
-	virtual Vec3d getJ2000EquatorialPos(const StelCore*) const	
+	virtual Vec3d getJ2000EquatorialPos(const StelCore*) const
 	{
 		return XYZ;
 	}
@@ -73,39 +73,39 @@ public:
 	{
 		return designation;
 	}
-    QString getDesignation(void) const;
+	QString getDesignation(void) const;
 	void update(double deltaTime);
 
 private:
 	Vec3d XYZ;                      // Cartesian equatorial position
 	Vec3d XY;                       // Store temporary 2D position
 
-    static StelTextureSP radiantTexture;
+	static StelTextureSP radiantTexture;
 
-    LinearFader labelsFader;
+	LinearFader labelsFader;
 
-    typedef struct
-    {
-        QString year;		   //! Value of year for actual data
-        int zhr;			   //! ZHR of shower
-        QString variable;      //! value of variable for ZHR
-        QString start;		   //! First day for activity
-        QString finish;		   //! Latest day for activity
-        QString peak;		   //! Day with maximum for activity
-    } activityData;
+	typedef struct
+	{
+		QString year;		   //! Value of year for actual data
+		int zhr;			   //! ZHR of shower
+		QString variable;      //! value of variable for ZHR
+		QString start;		   //! First day for activity
+		QString finish;		   //! Latest day for activity
+		QString peak;		   //! Day with maximum for activity
+	} activityData;
 
-    bool initialized;
-    QString showerID;		        //! The ID of the meteor shower
-    QString designation;            //! The designation of the meteor shower
-    QList<activityData> activity;	//! List of activity
-    int speed;                      //! Speed of meteors
-    double radiantAlpha;            //! R.A. for radiant of meteor shower
-    double radiantDelta;            //! Dec. for radiant of meteor shower
-    double driftAlpha;		   //! Drift of R.A.
-    double driftDelta;		   //! Drift of Dec.
-    QString parentObj;		   //! Parent object for meteor shower
-    float pidx;			       //! The population index
-    float slong;			   //! Solar longitude
+	bool initialized;
+	QString showerID;		        //! The ID of the meteor shower
+	QString designation;            //! The designation of the meteor shower
+	QList<activityData> activity;	//! List of activity
+	int speed;                      //! Speed of meteors
+	double radiantAlpha;            //! R.A. for radiant of meteor shower
+	double radiantDelta;            //! Dec. for radiant of meteor shower
+	double driftAlpha;		   //! Drift of R.A.
+	double driftDelta;		   //! Drift of Dec.
+	QString parentObj;		   //! Parent object for meteor shower
+	float pidx;			       //! The population index
+	float slong;			   //! Solar longitude
 
 	void draw(StelPainter &painter);
 
@@ -117,26 +117,26 @@ private:
 	//! @param jsondate A string from JSON file
 	QString getDayFromJSON(QString jsondate) const;
 
-    //! Get a month string from JSON file and parse it for display in info corner
-    //! @param jsondate A string from JSON file
-    int getMonthFromJSON(QString jsondate) const;
+	//! Get a month string from JSON file and parse it for display in info corner
+	//! @param jsondate A string from JSON file
+	int getMonthFromJSON(QString jsondate) const;
 
 	//! Get a month string from JSON file and parse it for display in info corner
 	//! @param jsondate A string from JSON file
-    QString getMonthNameFromJSON(QString jsondate) const;
+	QString getMonthNameFromJSON(QString jsondate) const;
 
 	//! Get a month name from month number
 	//! @param jsondate A string from JSON file
 	QString getMonthName(int number) const;
 
-    //! Check if the radiant is active for the current sky date
-    //! @return if is active, return 1 to real data OR 2 to generic data
-    int isActive() const;
+	//! Check if the radiant is active for the current sky date
+	//! @return if is active, return 1 to real data OR 2 to generic data
+	int isActive() const;
 
-    //! Check if the JSON file has real data to a given year
-    //! @param yyyy year to check
-    //! @return index of the year or 0 to generic data
-    int checkYear(QString yyyy) const;
+	//! Check if the JSON file has real data to a given year
+	//! @param yyyy year to check
+	//! @return index of the year or 0 to generic data
+	int checkYear(QString yyyy) const;
 };
 
 #endif // _METEORSHOWER_HPP_
