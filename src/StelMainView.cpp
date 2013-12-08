@@ -115,7 +115,6 @@ void StelSkyItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *optio
 	StelApp::getInstance().draw();
 
 	painter->endNativePainting();
-	update();
 }
 
 void StelSkyItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
