@@ -83,7 +83,11 @@ StelPluginInfo MeteorShowersStelPluginInterface::getPluginInfo() const
  Constructor
 */
 MeteorShowers::MeteorShowers()
-    : texPointer(NULL)
+    : flagShowMS(false)
+    , OnIcon(NULL)
+    , OffIcon(NULL)
+    , GlowIcon(NULL)
+    , toolbarButton(NULL)
     , progressBar(NULL)
 {
 	setObjectName("MeteorShowers");
@@ -98,6 +102,14 @@ MeteorShowers::MeteorShowers()
 MeteorShowers::~MeteorShowers()
 {
 	delete configDialog;
+
+    if (GlowIcon)
+        delete GlowIcon;
+    if (OnIcon)
+        delete OnIcon;
+    if (OffIcon)
+        delete OffIcon;
+
     active.clear();
     activeInfo.clear();
 }
@@ -134,8 +146,15 @@ void MeteorShowers::init()
 		MeteorShower::radiantTexture = StelApp::getInstance().getTextureManager().createTexture(":/MeteorShowers/radiant.png");
 
         // key bindings and other actions
-        addAction("actionShow_MeteorShower", N_("Meteor Shower"), N_("Show Meteor Showers"), "showMeteorShowers", "Ctrl+Alt+S");
+        addAction("actionShow_MeteorShower", N_("Meteor Shower"), N_("Show meteor showers"), "msVisible", "Ctrl+Alt+M");
         addAction("actionShow_MeteorShower_ConfigDialog", N_("Meteor Shower"), N_("Meteor Shower configuration window"), configDialog, "visible");
+
+        GlowIcon = new QPixmap(":/graphicsGui/glow32x32.png");
+        OnIcon = new QPixmap(":/MeteorShowers/btMS-on.png");
+        OffIcon = new QPixmap(":/MeteorShowers/btMS-off.png");
+
+        setFlagShowMS(getEnableAtStartup());
+        setFlagShowMSButton(flagShowMSButton);
 	}
 	catch (std::runtime_error &e)
 	{
@@ -189,6 +208,22 @@ void MeteorShowers::deinit()
     texPointer.clear();
 }
 
+// Define whether the button toggling meteor showers should be visible
+void MeteorShowers::setFlagShowMSButton(bool b)
+{
+    StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+    if (b==true) {
+        if (toolbarButton==NULL) {
+            // Create the MeteorShowers button
+            toolbarButton = new StelButton(NULL, *OnIcon, *OffIcon, *GlowIcon, "actionShow_MeteorShower");
+        }
+        gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
+    } else {
+        gui->getButtonBar()->hideButton("actionShow_MeteorShower");
+    }
+    flagShowMSButton = b;
+}
+
 bool MeteorShowers::changedSkyDate(StelCore* core)
 {
     double JD = core->getJDay();
@@ -201,6 +236,9 @@ bool MeteorShowers::changedSkyDate(StelCore* core)
 
 void MeteorShowers::draw(StelCore* core)
 {
+    if (!flagShowMS)
+        return;
+
     StelPainter painter(core->getProjection(StelCore::FrameJ2000));
     drawMarker(core, painter);
 
@@ -347,6 +385,9 @@ void MeteorShowers::updateActiveInfo(StelCore* core)
 
 void MeteorShowers::update(double deltaTime)
 {
+    if (!flagShowMS)
+        return;
+
     StelCore* core = StelApp::getInstance().getCore();
 
     double timeRate = core->getTimeRate();
@@ -459,6 +500,9 @@ QList<StelObjectP> MeteorShowers::searchAround(const Vec3d& av, double limitFov,
 {
 	QList<StelObjectP> result;
 
+    if (!flagShowMS)
+        return result;
+
 	Vec3d v(av);
 	v.normalize();
 	double cosLimFov = cos(limitFov * M_PI/180.);
@@ -482,6 +526,9 @@ QList<StelObjectP> MeteorShowers::searchAround(const Vec3d& av, double limitFov,
 
 StelObjectP MeteorShowers::searchByName(const QString& englishName) const
 {
+    if (!flagShowMS)
+        return NULL;
+
 	QString objw = englishName.toUpper();
 	foreach(const MeteorShowerP& ms, mShowers)
 	{
@@ -494,7 +541,8 @@ StelObjectP MeteorShowers::searchByName(const QString& englishName) const
 
 StelObjectP MeteorShowers::searchByNameI18n(const QString& nameI18n) const
 {
-	QString objw = nameI18n.toUpper();
+    if (!flagShowMS)
+        return NULL;
 
 	foreach(const MeteorShowerP& ms, mShowers)
 	{
@@ -508,6 +556,9 @@ StelObjectP MeteorShowers::searchByNameI18n(const QString& nameI18n) const
 QStringList MeteorShowers::listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem, bool useStartOfWords) const
 {
 	QStringList result;
+    if (!flagShowMS)
+        return result;
+
     if (maxNbItem==0)
         return result;
 
@@ -530,6 +581,9 @@ QStringList MeteorShowers::listMatchingObjectsI18n(const QString& objPrefix, int
 QStringList MeteorShowers::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords) const
 {
     QStringList result;
+    if (!flagShowMS)
+        return result;
+
     if (maxNbItem==0)
         return result;
 
@@ -661,6 +715,7 @@ void MeteorShowers::restoreDefaultConfigIni(void)
 	conf->setValue("updates_enabled", true);
     conf->setValue("url", "http://stellarium.org/json/showers.json");
     conf->setValue("update_frequency_hours", 100);
+    conf->setValue("flag_show_ms_button", true);
 	conf->endGroup();
 }
 
@@ -756,8 +811,9 @@ void MeteorShowers::readSettingsFromConfig(void)
 
 	updateUrl = conf->value("url", "http://stellarium.astro.uni-altai.ru/showers.json").toString();
 	updateFrequencyHours = conf->value("update_frequency_hours", 720).toInt();
-    lastUpdate = QDateTime::fromString(conf->value("last_update", "2013-12-31T12:00:00").toString(), Qt::ISODate);
+    lastUpdate = QDateTime::fromString(conf->value("last_update", "2013-12-10T12:00:00").toString(), Qt::ISODate);
 	updatesEnabled = conf->value("updates_enabled", true).toBool();
+    flagShowMSButton = conf->value("flag_show_ms_button", true).toBool();
 
 	conf->endGroup();
 }
@@ -769,6 +825,7 @@ void MeteorShowers::saveSettingsToConfig(void)
 	conf->setValue("url", updateUrl);
 	conf->setValue("update_frequency_hours", updateFrequencyHours);
 	conf->setValue("updates_enabled", updatesEnabled );
+    conf->setValue("flag_show_ms_button", flagShowMSButton);
 
 	conf->endGroup();
 }

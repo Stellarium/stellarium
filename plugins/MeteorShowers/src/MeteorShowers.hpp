@@ -38,6 +38,7 @@ class QProgressBar;
 class QSettings;
 class QTimer;
 class MeteorShowerDialog;
+class StelButton;
 class StelPainter;
 
 typedef QSharedPointer<MeteorShower> MeteorShowerP;
@@ -46,6 +47,7 @@ typedef QSharedPointer<MeteorShower> MeteorShowerP;
 class MeteorShowers : public StelObjectModule
 {
 	Q_OBJECT
+    Q_PROPERTY(bool msVisible READ getFlagShowMS WRITE setFlagShowMS)
 public:
 	//! @enum UpdateState
 	//! Used for keeping track of the download/update status
@@ -100,7 +102,7 @@ public:
     virtual QStringList listAllObjects(bool inEnglish) const;
     virtual QString getName() const { return "Meteor Showers"; }
 
-	//! get a supernova object by identifier
+    //! get a ms object by identifier
 	MeteorShowerP getByID(const QString& id);
 
 	//! Implment this to tell the main Stellarium GUI that there is a GUI element to configure this
@@ -125,6 +127,9 @@ public:
 	//! set whether or not the plugin will try to update TLE data from the internet
 	//! @param b if true, updates will be enabled, else they will be disabled
 	void setUpdatesEnabled(bool b) {updatesEnabled=b;}
+
+    void setEnableAtStartup(bool b) { enableAtStartup=b; }
+    bool getEnableAtStartup(void) { return enableAtStartup; }
 
 	//! get the date and time the TLE elements were updated
 	QDateTime getLastUpdate(void) {return lastUpdate;}
@@ -151,9 +156,16 @@ public slots:
 	//! module.ini file and update the local JSON file.
 	void updateJSON(void);
 
+    void setFlagShowMS(bool b) { flagShowMS=b; }
+    bool getFlagShowMS(void) { return flagShowMS; }
+
 	//! Display a message. This is used for plugin-specific warnings and such
 	void displayMessage(const QString& message, const QString hexColor="#999999");
 	void messageTimeout(void);
+
+    //! Define whether the button toggling meteor showers should be visible
+    void setFlagShowMSButton(bool b);
+    bool getFlagShowMSButton(void) { return flagShowMSButton; }
 
 private:
     //! Check if the sky date was changed
@@ -209,13 +221,18 @@ private:
 	bool updatesEnabled;
 	QDateTime lastUpdate;
 	int updateFrequencyHours;
+    bool enableAtStartup;
 
     QSettings* conf;
 
 	// GUI
 	MeteorShowerDialog* configDialog;
-	QByteArray normalStyleSheet;
-	QByteArray nightStyleSheet;
+    bool flagShowMS;
+    bool flagShowMSButton;
+    QPixmap* OnIcon;
+    QPixmap* OffIcon;
+    QPixmap* GlowIcon;
+    StelButton* toolbarButton;
 
     //MS
     std::vector<std::vector<MeteorStream*> > active;		// Matrix containing all active meteors
