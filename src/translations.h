@@ -204,7 +204,7 @@ class Translations
 		// TRANSLATORS: Name of landscape and planet
 		N_("Saturn");
 		// TRANSLATORS: Name of landscape
-		N_("Geneve");
+		N_("Geneva");
 		// TRANSLATORS: Name of landscape
 		N_("Grossmugl");
 
