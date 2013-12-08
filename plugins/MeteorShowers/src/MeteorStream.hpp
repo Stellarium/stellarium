@@ -38,50 +38,50 @@ class StelPainter;
 class MeteorStream
 {
 public:
-    //! Create a Meteor object.
-    //! @param velocity the speed of the meteor in km/s.
-    //! @param rAlpha the radiant alpha in rad
-    //! @param rDelta the radiant delta in rad
-    MeteorStream(const StelCore*, double velocity, double rAlpha, double rDelta);
-    virtual ~MeteorStream();
+	//! Create a Meteor object.
+	//! @param velocity the speed of the meteor in km/s.
+	//! @param rAlpha the radiant alpha in rad
+	//! @param rDelta the radiant delta in rad
+	MeteorStream(const StelCore*, double velocity, double rAlpha, double rDelta);
+	virtual ~MeteorStream();
 
-    //! Updates the position of the meteor, and expires it if necessary.
-    //! @return true of the meteor is still alive, else false.
-    bool update(double deltaTime);
+	//! Updates the position of the meteor, and expires it if necessary.
+	//! @return true of the meteor is still alive, else false.
+	bool update(double deltaTime);
 
-    //! Draws the meteor.
-    void draw(const StelCore* core, StelPainter& sPainter);
+	//! Draws the meteor.
+	void draw(const StelCore* core, StelPainter& sPainter);
 
-    //! Determine if a meteor is alive or has burned out.
-    //! @return true if alive, else false.
-    bool isAlive(void);
+	//! Determine if a meteor is alive or has burned out.
+	//! @return true if alive, else false.
+	bool isAlive(void);
 
 private:
-    double speed;           //! Velocity of meteor in km/s
-    double radiantAlpha;    //! R.A. for radiant of meteor
-    double radiantDelta;    //! Dec. for radiant of meteor
+	double speed;           //! Velocity of meteor in km/s
+	double radiantAlpha;    //! R.A. for radiant of meteor
+	double radiantDelta;    //! Dec. for radiant of meteor
 
-    bool alive;             //! Indicate if the meteor it still visible
-    bool train;             //! Indicate if the point or train is visible
+	bool alive;             //! Indicate if the meteor it still visible
+	bool train;             //! Indicate if the point or train is visible
 
-    Mat4d viewMatrix;       //! View Matrix
-    Vec3d obs;              //! Observer position
-    Vec3d position;         //! Equatorial coordinate position
-    Vec3d posInternal;      //! Middle of train
-    Vec3d posTrain;         //! End of train
+	Mat4d viewMatrix;       //! View Matrix
+	Vec3d obs;              //! Observer position
+	Vec3d position;         //! Equatorial coordinate position
+	Vec3d posInternal;      //! Middle of train
+	Vec3d posTrain;         //! End of train
 
-    double xydistance;      //! Distance in XY plane (orthogonal to meteor path) from observer to meteor
-    double initDist;        //! Initial distance from observer
-    double minDist;         //! Nearest point to observer along path
-    double distMultiplier;  //! Scale magnitude due to changes in distance
+	double xydistance;      //! Distance in XY plane (orthogonal to meteor path) from observer to meteor
+	double initDist;        //! Initial distance from observer
+	double minDist;         //! Nearest point to observer along path
+	double distMultiplier;  //! Scale magnitude due to changes in distance
 
-    double startH;          //! Start height above center of earth
-    double endH;            //! End height
+	double startH;          //! Start height above center of earth
+	double endH;            //! End height
 
-    float mag;              //! Apparent magnitude at head, 0-1
-    float maxMag;           //! 0-1
-    float absMag;           //! Absolute magnitude
-    float visMag;           //! Visual magnitude at observer
+	float mag;              //! Apparent magnitude at head, 0-1
+	float maxMag;           //! 0-1
+	float absMag;           //! Absolute magnitude
+	float visMag;           //! Visual magnitude at observer
 };
 
 #endif // _METEORSTREAM_HPP_

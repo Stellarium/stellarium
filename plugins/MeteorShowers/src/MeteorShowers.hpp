@@ -47,7 +47,7 @@ typedef QSharedPointer<MeteorShower> MeteorShowerP;
 class MeteorShowers : public StelObjectModule
 {
 	Q_OBJECT
-    Q_PROPERTY(bool msVisible READ getFlagShowMS WRITE setFlagShowMS)
+	Q_PROPERTY(bool msVisible READ getFlagShowMS WRITE setFlagShowMS)
 public:
 	//! @enum UpdateState
 	//! Used for keeping track of the download/update status
@@ -69,11 +69,11 @@ public:
 	//! called before the plug-in is un-loaded.
 	//! Useful for stopping processes, unloading textures, etc.
 	virtual void deinit();
-    virtual void update(double deltaTime);
+	virtual void update(double deltaTime);
 	virtual void draw(StelCore* core);
-    virtual void drawMarker(StelCore* core, StelPainter& painter);
-    virtual void drawPointer(StelCore* core, StelPainter& painter);
-    virtual void drawStream(StelCore* core, StelPainter& painter);
+	virtual void drawMarker(StelCore* core, StelPainter& painter);
+	virtual void drawPointer(StelCore* core, StelPainter& painter);
+	virtual void drawStream(StelCore* core, StelPainter& painter);
 	virtual double getCallOrder(StelModuleActionName actionName) const;
 
 	///////////////////////////////////////////////////////////////////////////
@@ -97,12 +97,15 @@ public:
 	//! @param objPrefix the case insensitive first letters of the searched object
 	//! @param maxNbItem the maximum number of returned object names
 	//! @return a list of matching object name by order of relevance, or an empty list if nothing match
-    virtual QStringList listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false) const;
-    virtual QStringList listMatchingObjects(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false) const;
-    virtual QStringList listAllObjects(bool inEnglish) const;
-    virtual QString getName() const { return "Meteor Showers"; }
+	virtual QStringList listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false) const;
+	virtual QStringList listMatchingObjects(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false) const;
+	virtual QStringList listAllObjects(bool inEnglish) const;
+	virtual QString getName() const
+	{
+		return "Meteor Showers";
+	}
 
-    //! get a ms object by identifier
+	//! get a ms object by identifier
 	MeteorShowerP getByID(const QString& id);
 
 	//! Implment this to tell the main Stellarium GUI that there is a GUI element to configure this
@@ -123,26 +126,50 @@ public:
 
 	//! get whether or not the plugin will try to update TLE data from the internet
 	//! @return true if updates are set to be done, false otherwise
-	bool getUpdatesEnabled(void) {return updatesEnabled;}
+	bool getUpdatesEnabled(void)
+	{
+		return updatesEnabled;
+	}
 	//! set whether or not the plugin will try to update TLE data from the internet
 	//! @param b if true, updates will be enabled, else they will be disabled
-	void setUpdatesEnabled(bool b) {updatesEnabled=b;}
+	void setUpdatesEnabled(bool b)
+	{
+		updatesEnabled=b;
+	}
 
-    void setEnableAtStartup(bool b) { enableAtStartup=b; }
-    bool getEnableAtStartup(void) { return enableAtStartup; }
+	void setEnableAtStartup(bool b)
+	{
+		enableAtStartup=b;
+	}
+	bool getEnableAtStartup(void)
+	{
+		return enableAtStartup;
+	}
 
 	//! get the date and time the TLE elements were updated
-	QDateTime getLastUpdate(void) {return lastUpdate;}
+	QDateTime getLastUpdate(void)
+	{
+		return lastUpdate;
+	}
 
 	//! get the update frequency in hours
-	int getUpdateFrequencyHours(void) {return updateFrequencyHours;}
-	void setUpdateFrequencyHours(int hours) {updateFrequencyHours = hours;}
+	int getUpdateFrequencyHours(void)
+	{
+		return updateFrequencyHours;
+	}
+	void setUpdateFrequencyHours(int hours)
+	{
+		updateFrequencyHours = hours;
+	}
 
 	//! get the number of seconds till the next update
 	int getSecondsToUpdate(void);
 
 	//! Get the current updateState
-	UpdateState getUpdateState(void) {return updateState;}
+	UpdateState getUpdateState(void)
+	{
+		return updateState;
+	}
 
 signals:
 	//! @param state the new update state.
@@ -156,28 +183,37 @@ public slots:
 	//! module.ini file and update the local JSON file.
 	void updateJSON(void);
 
-    void setFlagShowMS(bool b) { flagShowMS=b; }
-    bool getFlagShowMS(void) { return flagShowMS; }
+	void setFlagShowMS(bool b)
+	{
+		flagShowMS=b;
+	}
+	bool getFlagShowMS(void)
+	{
+		return flagShowMS;
+	}
 
 	//! Display a message. This is used for plugin-specific warnings and such
 	void displayMessage(const QString& message, const QString hexColor="#999999");
 	void messageTimeout(void);
 
-    //! Define whether the button toggling meteor showers should be visible
-    void setFlagShowMSButton(bool b);
-    bool getFlagShowMSButton(void) { return flagShowMSButton; }
+	//! Define whether the button toggling meteor showers should be visible
+	void setFlagShowMSButton(bool b);
+	bool getFlagShowMSButton(void)
+	{
+		return flagShowMSButton;
+	}
 
 private:
-    //! Check if the sky date was changed
-    //! @param core
-    //! @return if changed, return true
-    bool changedSkyDate(StelCore* core);
+	//! Check if the sky date was changed
+	//! @param core
+	//! @return if changed, return true
+	bool changedSkyDate(StelCore* core);
 
-    //! Update the list with information about active meteors
-    //! @param core
-    void updateActiveInfo(StelCore *core);
+	//! Update the list with information about active meteors
+	//! @param core
+	void updateActiveInfo(StelCore *core);
 
-    //! Set up the plugin with default values.
+	//! Set up the plugin with default values.
 	void restoreDefaultConfigIni(void);
 
 	//! replace the json file with the default from the compiled-in resource
@@ -186,7 +222,7 @@ private:
 	//! read the json file and create the meteor Showers.
 	void readJsonFile(void);
 
-    //! Creates a backup of the showers.json file called meteors.json.old
+	//! Creates a backup of the showers.json file called meteors.json.old
 	//! @param deleteOriginal if true, the original file is removed, else not
 	//! @return true on OK, false on failure
 	bool backupJsonFile(bool deleteOriginal=false);
@@ -195,14 +231,14 @@ private:
 	//! @return version string, e.g. "0.1.0"
 	const QString getJsonFileVersion(void);
 
-    //! Parse JSON file and load showers to map
+	//! Parse JSON file and load showers to map
 	QVariantMap loadShowersMap(QString path=QString());
 
-    //! Set items for list of struct from data map
+	//! Set items for list of struct from data map
 	void setShowersMap(const QVariantMap& map);
 
-    //! Font used for displaying our text
-    QFont font;
+	//! Font used for displaying our text
+	QFont font;
 
 	QString showersJsonPath;
 
@@ -214,49 +250,49 @@ private:
 	QNetworkAccessManager* downloadMgr;
 	QString updateUrl;
 	QString updateFile;
-    class StelProgressController* progressBar;
+	class StelProgressController* progressBar;
 	QTimer* updateTimer;
 	QTimer* messageTimer;
 	QList<int> messageIDs;
 	bool updatesEnabled;
 	QDateTime lastUpdate;
 	int updateFrequencyHours;
-    bool enableAtStartup;
+	bool enableAtStartup;
 
-    QSettings* conf;
+	QSettings* conf;
 
 	// GUI
 	MeteorShowerDialog* configDialog;
-    bool flagShowMS;
-    bool flagShowMSButton;
-    QPixmap* OnIcon;
-    QPixmap* OffIcon;
-    QPixmap* GlowIcon;
-    StelButton* toolbarButton;
+	bool flagShowMS;
+	bool flagShowMSButton;
+	QPixmap* OnIcon;
+	QPixmap* OffIcon;
+	QPixmap* GlowIcon;
+	StelButton* toolbarButton;
 
-    //MS
-    std::vector<std::vector<MeteorStream*> > active;		// Matrix containing all active meteors
-    int ZHR;
-    const static double zhrToWsr = 1.6667f/3600.f;  // factor to convert from zhr to whole earth per second rate
-    bool flagShow;
+	//MS
+	std::vector<std::vector<MeteorStream*> > active;		// Matrix containing all active meteors
+	int ZHR;
+	const static double zhrToWsr = 1.6667f/3600.f;  // factor to convert from zhr to whole earth per second rate
+	bool flagShow;
 
-    typedef struct
-    {
-        QString showerID;		    //! The ID of the meteor shower
-        QString year;		        //! Value of year for actual data
-        QString start;			    //! First day for activity
-        QString finish;			    //! Latest day for activity
-        int zhr;		    	    //! ZHR of shower
-        QString variable;           //! value of variable for ZHR
-        int speed;                  //! Speed of meteors
-        QString peak;			    //! Day with maximum for activity
-        double radiantAlpha;        //! R.A. for radiant of meteor shower
-        double radiantDelta;        //! Dec. for radiant of meteor shower
-    } activeData;
+	typedef struct
+	{
+		QString showerID;		    //! The ID of the meteor shower
+		QString year;		        //! Value of year for actual data
+		QString start;			    //! First day for activity
+		QString finish;			    //! Latest day for activity
+		int zhr;		    	    //! ZHR of shower
+		QString variable;           //! value of variable for ZHR
+		int speed;                  //! Speed of meteors
+		QString peak;			    //! Day with maximum for activity
+		double radiantAlpha;        //! R.A. for radiant of meteor shower
+		double radiantDelta;        //! Dec. for radiant of meteor shower
+	} activeData;
 
-    QList<activeData> activeInfo;	//! List of active meteors
-    QDateTime skyDate;              //! Current sky date
-    QDateTime lastSkyDate;          //! Last sky date
+	QList<activeData> activeInfo;	//! List of active meteors
+	QDateTime skyDate;              //! Current sky date
+	QDateTime lastSkyDate;          //! Last sky date
 
 private slots:
 	//! check to see if an update is required.  This is called periodically by a timer
@@ -277,7 +313,7 @@ private slots:
 class MeteorShowersStelPluginInterface : public QObject, public StelPluginInterface
 {
 	Q_OBJECT
-    Q_PLUGIN_METADATA(IID "stellarium.StelGuiPluginInterface/1.0")
+	Q_PLUGIN_METADATA(IID "stellarium.StelGuiPluginInterface/1.0")
 	Q_INTERFACES(StelPluginInterface)
 public:
 	virtual StelModule* getStelModule() const;
