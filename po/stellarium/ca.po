@@ -11,13 +11,13 @@ msgstr ""
 "Project-Id-Version: ca\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-12-06 13:19+0700\n"
-"PO-Revision-Date: 2013-11-05 17:50+0000\n"
+"PO-Revision-Date: 2013-12-07 20:15+0000\n"
 "Last-Translator: Daniel Alomar i Claramonte <daniel.adastra@gmail.com>\n"
 "Language-Team: Català <ca@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-12-07 05:25+0000\n"
+"X-Launchpad-Export-Date: 2013-12-08 05:22+0000\n"
 "X-Generator: Launchpad (build 16869)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:106 src/core/modules/StarMgr.cpp:336
@@ -261,7 +261,7 @@ msgstr "Distància: %1UA (%2 km)"
 #: src/core/modules/Comet.cpp:161
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 Mio km)"
-msgstr ""
+msgstr "Distancia: %1UA (%2 Milions km)"
 
 #: src/core/modules/Planet.cpp:186
 #, qt-format
@@ -340,7 +340,7 @@ msgstr "estrella"
 #: plugins/Quasars/src/Quasar.cpp:109
 #, qt-format
 msgid "Color Index (B-V): <b>%1</b>"
-msgstr ""
+msgstr "Índex de color (B-V): <b>%1</b>"
 
 #: src/core/modules/StarWrapper.cpp:144
 msgid "eruptive variable star"
@@ -2231,12 +2231,12 @@ msgstr "Garching"
 #. TRANSLATORS: Name of landscape
 #: src/translations.h:207
 msgid "Geneva"
-msgstr ""
+msgstr "Ginebra"
 
 #. TRANSLATORS: Name of landscape
 #: src/translations.h:209
 msgid "Grossmugl"
-msgstr ""
+msgstr "Grossmugl"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:216
@@ -4145,7 +4145,7 @@ msgstr "Mida"
 
 #: src/ui_configurationDialog.h:1037
 msgid "The type of the object (star, planet, etc.)"
-msgstr ""
+msgstr "Tipus d'objecte (estel, planeta, etc.)"
 
 #: src/ui_configurationDialog.h:1039
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:268
