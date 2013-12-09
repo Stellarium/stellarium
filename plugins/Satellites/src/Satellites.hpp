@@ -333,10 +333,11 @@ public:
 	                         TleDataHash& tleList,
 	                         bool addFlagValue = false);
 
-	//! Reads mcnames file and its parsing for getting id and standard magnitude
+	//! Reads qs.mag file and its parsing for getting id and standard magnitude
 	//! for satellites.
+	//! @note We are having permissions for use this file from Mike McCants.
 	//! @param name of file
-	void parseMcNamesFile(QString mcNameFile);
+	void parseQSMagFile(QString qsMagFile);
 	
 	bool getFlagHints() {return hintFader;}
 	//! get the label font size.
@@ -458,8 +459,8 @@ private:
 	//! Read the version number from the "creator" value in the catalog file.
 	//! @return version string, e.g. "0.6.1"
 	const QString readCatalogVersion();
-	//! Replace the mcnames file with the default one.
-	void restoreDefaultMcNamesFile();
+	//! Replace the qs.mag file with the default one.
+	void restoreDefaultQSMagFile();
 
 
 	//! Save a structure representing a satellite catalog to a JSON file.
@@ -484,8 +485,8 @@ private:
 	//! place.)
 	static void translations();
 
-	//! Path to the mcnames file.
-	QString mcNamesFilePath;
+	//! Path to the qs.mag file.
+	QString qsMagFilePath;
 	//! Path to the satellite catalog file.
 	QString catalogPath;
 	//! Plug-in data directory.
@@ -497,7 +498,7 @@ private:
 	QList<SatelliteP> satellites;
 	SatellitesListModel* satelliteListModel;
 
-	QHash<QString, double> mcNamesList;
+	QHash<QString, double> qsMagList;
 	
 	//! Union of the groups used by all loaded satellites - see @ref groups.
 	//! For simplicity, it can only grow until the plug-in is unloaded -
