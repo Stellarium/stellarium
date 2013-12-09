@@ -130,8 +130,8 @@ void Satellites::init()
 
 		// absolute file name for inner catalog of the satellites
 		catalogPath = dataDir.absoluteFilePath("satellites.json");
-		// absolute file name for mcnames file
-		mcNamesFilePath = dataDir.absoluteFilePath("mcnames");
+		// absolute file name for qs.mag file
+		qsMagFilePath = dataDir.absoluteFilePath("qs.mag");
 
 		// Load and find resources used in the plugin
 		texPointer = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/pointeur5.png");
@@ -179,9 +179,9 @@ void Satellites::init()
 		restoreDefaultCatalog();
 	}
 	
-	if(!QFileInfo(mcNamesFilePath).exists())
+	if(!QFileInfo(qsMagFilePath).exists())
 	{
-		restoreDefaultMcNamesFile();
+		restoreDefaultQSMagFile();
 	}
 
 	qDebug() << "Satellites: loading catalog file:" << QDir::toNativeSeparators(catalogPath);
@@ -488,7 +488,7 @@ void Satellites::restoreDefaults(void)
 {
 	restoreDefaultSettings();
 	restoreDefaultCatalog();
-	restoreDefaultMcNamesFile();
+	restoreDefaultQSMagFile();
 	loadCatalog();
 	loadSettings();
 }
@@ -558,19 +558,19 @@ void Satellites::restoreDefaultCatalog()
 	}
 }
 
-void Satellites::restoreDefaultMcNamesFile()
+void Satellites::restoreDefaultQSMagFile()
 {
-	QFile src(":/satellites/mcnames");
-	if (!src.copy(mcNamesFilePath))
+	QFile src(":/satellites/qs.mag");
+	if (!src.copy(qsMagFilePath))
 	{
-		qWarning() << "Satellites::restoreDefaultMcNamesFile cannot copy mcnames resource to " + QDir::toNativeSeparators(mcNamesFilePath);
+		qWarning() << "Satellites::restoreDefaultQSMagFile cannot copy qs.mag resource to " + QDir::toNativeSeparators(qsMagFilePath);
 	}
 	else
 	{
-		qDebug() << "Satellites::init copied default mcnames to " << QDir::toNativeSeparators(mcNamesFilePath);
+		qDebug() << "Satellites::init copied default qs.mag to " << QDir::toNativeSeparators(qsMagFilePath);
 		// The resource is read only, and the new file inherits this...  make sure the new file
 		// is writable by the Stellarium process so that updates can be done.
-		QFile dest(mcNamesFilePath);
+		QFile dest(qsMagFilePath);
 		dest.setPermissions(dest.permissions() | QFile::WriteOwner);
 	}
 }
@@ -779,8 +779,8 @@ void Satellites::setDataMap(const QVariantMap& map)
 		if (!satData.contains("orbitColor"))
 			satData["orbitColor"] = satData["hintColor"];
 
-		if (!satData.contains("stdMag") && mcNamesList.contains(satId))
-			satData["stdMag"] = mcNamesList[satId];
+		if (!satData.contains("stdMag") && qsMagList.contains(satId))
+			satData["stdMag"] = qsMagList[satId];
 
 		SatelliteP sat(new Satellite(satId, satData));
 		if (sat->initialized)
@@ -928,8 +928,8 @@ bool Satellites::add(const TleData& tleData)
 	//TODO: Decide if newly added satellites are visible by default --BM
 	satProperties.insert("visible", true);
 	satProperties.insert("orbitVisible", false);
-	if (mcNamesList.contains(tleData.id))
-		satProperties.insert("stdMag", mcNamesList[tleData.id]);
+	if (qsMagList.contains(tleData.id))
+		satProperties.insert("stdMag", qsMagList[tleData.id]);
 	
 	SatelliteP sat(new Satellite(tleData.id, satProperties));
 	if (sat->initialized)
@@ -1256,7 +1256,7 @@ void Satellites::saveDownloadedUpdate(QNetworkReply* reply)
 		}
 	}
 	updateSources.clear();	
-	parseMcNamesFile(mcNamesFilePath);
+	parseQSMagFile(qsMagFilePath);
 	updateSatellites(newData);
 }
 
@@ -1319,7 +1319,7 @@ void Satellites::updateFromFiles(QStringList paths, bool deleteFiles)
 				tleFile.remove();
 		}
 	}
-	parseMcNamesFile(mcNamesFilePath);
+	parseQSMagFile(qsMagFilePath);
 	updateSatellites(newTleSets);
 }
 
@@ -1379,8 +1379,8 @@ void Satellites::updateSatellites(TleDataHash& newTleSets)
 				sat->lastUpdated = lastUpdate;
 				updatedCount++;
 			}
-			if (mcNamesList.contains(id))
-				sat->stdMag = mcNamesList[id];
+			if (qsMagList.contains(id))
+				sat->stdMag = qsMagList[id];
 
 		}
 		else
@@ -1501,28 +1501,31 @@ void Satellites::parseTleFile(QFile& openFile,
 	}
 }
 
-void Satellites::parseMcNamesFile(QString mcNameFile)
+void Satellites::parseQSMagFile(QString qsMagFile)
 {
-	if (mcNameFile.isEmpty())
+	// Description of file and some additional information you can find here:
+	// 1) http://www.prismnet.com/~mmccants/tles/mccdesc.html
+	// 2) http://www.prismnet.com/~mmccants/tles/intrmagdef.html
+	if (qsMagFile.isEmpty())
 		return;
 
-	QFile mcnFile(mcNameFile);
-	if (!mcnFile.open(QIODevice::ReadOnly))
+	QFile qsmFile(qsMagFile);
+	if (!qsmFile.open(QIODevice::ReadOnly))
 	{
-		qWarning() << "Satellites: oops... cannot open " << QDir::toNativeSeparators(mcNameFile);
+		qWarning() << "Satellites: oops... cannot open " << QDir::toNativeSeparators(qsMagFile);
 		return;
 	}
 
-	mcNamesList.clear();
-	while (!mcnFile.atEnd())
+	qsMagList.clear();
+	while (!qsmFile.atEnd())
 	{
-		QString line = QString(mcnFile.readLine());
+		QString line = QString(qsmFile.readLine());
 		QString id   = line.mid(0,5).trimmed();
-		QString smag = line.mid(37,4).trimmed();
+		QString smag = line.mid(33,4).trimmed();
 		if (!smag.isEmpty())
-			mcNamesList.insert(id, smag.toDouble());
+			qsMagList.insert(id, smag.toDouble());
 	}
-	mcnFile.close();
+	qsmFile.close();
 }
 
 void Satellites::update(double deltaTime)
