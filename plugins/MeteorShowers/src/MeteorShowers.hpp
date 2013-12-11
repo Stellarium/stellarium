@@ -239,6 +239,15 @@ private:
 	StelTextureSP texPointer;
 	QList<MeteorShowerP> mShowers;
 
+	// GUI
+	MeteorShowerDialog* configDialog;
+	bool flagShowMS;
+	bool flagShowMSButton;
+	QPixmap* OnIcon;
+	QPixmap* OffIcon;
+	QPixmap* GlowIcon;
+	StelButton* toolbarButton;
+
 	// variables and functions for the updater
 	UpdateState updateState;
 	QNetworkAccessManager* downloadMgr;
@@ -254,15 +263,6 @@ private:
 	bool enableAtStartup;
 
 	QSettings* conf;
-
-	// GUI
-	MeteorShowerDialog* configDialog;
-	bool flagShowMS;
-	bool flagShowMSButton;
-	QPixmap* OnIcon;
-	QPixmap* OffIcon;
-	QPixmap* GlowIcon;
-	StelButton* toolbarButton;
 
 	//MS
 	std::vector<std::vector<MeteorStream*> > active;		// Matrix containing all active meteors
