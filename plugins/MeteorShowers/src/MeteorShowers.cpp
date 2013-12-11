@@ -126,6 +126,8 @@ double MeteorShowers::getCallOrder(StelModuleActionName actionName) const
 
 void MeteorShowers::init()
 {
+	upgradeConfigIni();
+
 	try
 	{
 		StelFileMgr::makeSureDirExistsAndIsWritable(StelFileMgr::getUserDir()+"/modules/MeteorShowers");
@@ -153,8 +155,8 @@ void MeteorShowers::init()
 		OnIcon = new QPixmap(":/MeteorShowers/btMS-on.png");
 		OffIcon = new QPixmap(":/MeteorShowers/btMS-off.png");
 
-		setFlagShowMS(getEnableAtStartup());
 		setFlagShowMSButton(flagShowMSButton);
+		setFlagShowMS(getEnableAtStartup());
 	}
 	catch(std::runtime_error &e)
 	{
@@ -206,6 +208,26 @@ void MeteorShowers::deinit()
 {
 	MeteorShower::radiantTexture.clear();
 	texPointer.clear();
+}
+
+void MeteorShowers::upgradeConfigIni(void)
+{
+	// Upgrade settings for MeteorShower plugin
+	if (conf->contains("MeteorShowers/flag_show_ms"))
+	{
+		bool b = conf->value("MeteorShowers/flag_show_ms", false).toBool();
+		if (!conf->contains("MeteorShowers/enable_at_startup"))
+			conf->setValue("MeteorShowers/enable_at_startup", b);
+		conf->remove("MeteorShowers/flag_show_ms");
+	}
+}
+
+void MeteorShowers::setFlagShowMS(bool b)
+{
+	if(toolbarButton != NULL)
+		toolbarButton->setChecked(b);
+
+	flagShowMS=b;
 }
 
 // Define whether the button toggling meteor showers should be visible
@@ -717,6 +739,7 @@ void MeteorShowers::restoreDefaultConfigIni(void)
 	// delete all existing MeteorShower settings...
 	conf->remove("");
 
+	conf->setValue("enable_at_startup", false);
 	conf->setValue("updates_enabled", true);
 	conf->setValue("url", "http://stellarium.org/json/showers.json");
 	conf->setValue("update_frequency_hours", 100);
@@ -818,6 +841,7 @@ void MeteorShowers::readSettingsFromConfig(void)
 	updateFrequencyHours = conf->value("update_frequency_hours", 720).toInt();
 	lastUpdate = QDateTime::fromString(conf->value("last_update", "2013-12-10T12:00:00").toString(), Qt::ISODate);
 	updatesEnabled = conf->value("updates_enabled", true).toBool();
+	enableAtStartup = conf->value("enable_at_startup", false).toBool();
 	flagShowMSButton = conf->value("flag_show_ms_button", true).toBool();
 
 	conf->endGroup();
@@ -830,6 +854,7 @@ void MeteorShowers::saveSettingsToConfig(void)
 	conf->setValue("url", updateUrl);
 	conf->setValue("update_frequency_hours", updateFrequencyHours);
 	conf->setValue("updates_enabled", updatesEnabled);
+	conf->setValue("enable_at_startup", enableAtStartup);
 	conf->setValue("flag_show_ms_button", flagShowMSButton);
 
 	conf->endGroup();
