@@ -57,7 +57,11 @@ MeteorShowerDialog::~MeteorShowerDialog()
 void MeteorShowerDialog::retranslate()
 {
 	if (dialog)
+	{
 		ui->retranslateUi(dialog);
+		refreshUpdateValues();
+		setAboutHtml();
+	}
 }
 
 // Initialize the dialog widgets and connect the signals/slots
@@ -68,6 +72,12 @@ void MeteorShowerDialog::createDialogContent()
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(languageChanged()));
 
 	// Settings tab / updates group
+	ui->displayModeCheckBox->setChecked(GETSTELMODULE(MeteorShowers)->getFlagShowMS());
+	connect(ui->displayModeCheckBox, SIGNAL(stateChanged(int)), this, SLOT(setDistributionEnabled(int)));
+	ui->displayAtStartupCheckBox->setChecked(GETSTELMODULE(MeteorShowers)->getEnableAtStartup());
+	connect(ui->displayAtStartupCheckBox, SIGNAL(stateChanged(int)), this, SLOT(setDisplayAtStartupEnabled(int)));
+	ui->displayShowMeteorShowerButton->setChecked(GETSTELMODULE(MeteorShowers)->getFlagShowMSButton());
+	connect(ui->displayShowMeteorShowerButton, SIGNAL(stateChanged(int)), this, SLOT(setDisplayShowMeteorShowerButton(int)));
 	connect(ui->internetUpdatesCheckbox, SIGNAL(stateChanged(int)), this, SLOT(setUpdatesEnabled(int)));
 	connect(ui->updateButton, SIGNAL(clicked()), this, SLOT(updateJSON()));
 	connect(GETSTELMODULE(MeteorShowers), SIGNAL(updateStateChanged(MeteorShowers::UpdateState)), this, SLOT(updateStateReceiver(MeteorShowers::UpdateState)));
@@ -101,7 +111,7 @@ void MeteorShowerDialog::setAboutHtml(void)
 	QString html = "<html><head></head><body>";
 	html += "<h2>" + q_("Meteor Showers Plugin") + "</h2><table width=\"90%\">";
 	html += "<tr width=\"30%\"><td>" + q_("Version:") + "</td><td>" + METEORSHOWERS_PLUGIN_VERSION + "</td></tr>";
-    html += "<tr><td>" + q_("Author:") + "</td><td>Marcos Cardinot &lt;mcardinot@gmail.com&gt;</td></tr></table>";
+	html += "<tr><td>" + q_("Author:") + "</td><td>Marcos Cardinot &lt;mcardinot@gmail.com&gt;</td></tr></table>";
 
 	html += "<p>" + q_("The Meteor Showers plugin show markers of radiants and information for general meteor showers.") + "</p>";
 	html += "</body></html>";
@@ -144,6 +154,24 @@ void MeteorShowerDialog::setUpdatesEnabled(int checkState)
 		ui->updateButton->setText(q_("Update from files"));
 
 	refreshUpdateValues();
+}
+
+void MeteorShowerDialog::setDistributionEnabled(int checkState)
+{
+	bool b = checkState != Qt::Unchecked;
+	GETSTELMODULE(MeteorShowers)->setFlagShowMS(b);
+}
+
+void MeteorShowerDialog::setDisplayAtStartupEnabled(int checkState)
+{
+	bool b = checkState != Qt::Unchecked;
+	GETSTELMODULE(MeteorShowers)->setEnableAtStartup(b);
+}
+
+void MeteorShowerDialog::setDisplayShowMeteorShowerButton(int checkState)
+{
+	bool b = checkState != Qt::Unchecked;
+	GETSTELMODULE(MeteorShowers)->setFlagShowMSButton(b);
 }
 
 void MeteorShowerDialog::updateStateReceiver(MeteorShowers::UpdateState state)

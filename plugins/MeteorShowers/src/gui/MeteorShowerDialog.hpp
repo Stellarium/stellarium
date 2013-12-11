@@ -48,6 +48,9 @@ public slots:
 private slots:
 	void setUpdateValues(int hours);
 	void setUpdatesEnabled(int checkState);
+	void setDistributionEnabled(int checkState);
+	void setDisplayAtStartupEnabled(int checkState);
+	void setDisplayShowMeteorShowerButton(int checkState);
 	void updateStateReceiver(MeteorShowers::UpdateState state);
         void updateCompleteReceiver();
 	void restoreDefaults(void);
