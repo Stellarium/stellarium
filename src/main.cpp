@@ -43,6 +43,7 @@
 #include <QGLFormat>
 #include <QGuiApplication>
 #include <QSettings>
+#include <QSplashScreen>
 #include <QString>
 #include <QStringList>
 #include <QTextStream>
@@ -149,6 +150,10 @@ int main(int argc, char **argv)
 	QGuiApplication::setDesktopSettingsAware(false);
 	QGuiApplication app(argc, argv);
 #endif
+	QPixmap pixmap(":/splash.png");
+	QSplashScreen splash(pixmap);
+	splash.show();
+	app.processEvents();
 
 	// QApplication sets current locale, but
 	// we need scanf()/printf() and friends to always work in the C locale,
@@ -327,6 +332,7 @@ int main(int argc, char **argv)
 	QString versionString((char *)glGetString(GL_VERSION));
 	qDebug() << "Driver version string: " << versionString;
 	mainWin.init(confSettings);
+	splash.finish(&mainWin);
 	app.exec();
 	mainWin.deinit();
 
