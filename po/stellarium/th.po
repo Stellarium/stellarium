@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: Thai for stellarium 0.8.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-12-06 13:19+0700\n"
-"PO-Revision-Date: 2013-10-21 03:28+0000\n"
+"PO-Revision-Date: 2013-12-10 09:12+0000\n"
 "Last-Translator: Worachate Boonplod <Unknown>\n"
 "Language-Team: MicKi Alone <Need24Get@msn.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-12-07 05:34+0000\n"
+"X-Launchpad-Export-Date: 2013-12-11 05:28+0000\n"
 "X-Generator: Launchpad (build 16869)\n"
 "X-Poedit-Country: THAILAND\n"
 "X-Poedit-Language: Thai\n"
@@ -260,7 +260,7 @@ msgstr "ระยะห่าง: %1 หน่วยดาราศาสตร�
 #: src/core/modules/Comet.cpp:161
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 Mio km)"
-msgstr ""
+msgstr "ระยะห่าง : %1AU (%2 ล้าน กม.)"
 
 #: src/core/modules/Planet.cpp:186
 #, qt-format
@@ -339,7 +339,7 @@ msgstr "ดาวฤกษ์"
 #: plugins/Quasars/src/Quasar.cpp:109
 #, qt-format
 msgid "Color Index (B-V): <b>%1</b>"
-msgstr ""
+msgstr "ดัชนีสี (B-V): <b>%1</b>"
 
 #: src/core/modules/StarWrapper.cpp:144
 msgid "eruptive variable star"
@@ -1678,7 +1678,7 @@ msgstr "โหมดเต็มจอ"
 #: src/StelMainView.cpp:357
 #, qt-format
 msgid "Stellarium %1"
-msgstr ""
+msgstr "Stellarium %1"
 
 #: src/translations.h:33 plugins/Exoplanets/src/Exoplanet.cpp:191
 #: plugins/Exoplanets/src/Exoplanet.cpp:195
@@ -2180,7 +2180,7 @@ msgstr "การ์ชิง"
 #. TRANSLATORS: Name of landscape
 #: src/translations.h:207
 msgid "Geneva"
-msgstr ""
+msgstr "เจนีวา"
 
 #. TRANSLATORS: Name of landscape
 #: src/translations.h:209
@@ -3676,7 +3676,7 @@ msgstr "เซิร์ฟเวอร์:"
 
 #: src/ui_searchDialogGui.h:654
 msgid "Search options"
-msgstr ""
+msgstr "ตัวเลือกการค้นหา"
 
 #: src/ui_searchDialogGui.h:655
 msgid "Use autofill only from the beginning of words"
@@ -4049,7 +4049,7 @@ msgstr "โชติมาตรสัมบูรณ์"
 
 #: src/ui_configurationDialog.h:1017
 msgid "Galactic coordinates"
-msgstr ""
+msgstr "พิกัดดาราจักร"
 
 #: src/ui_configurationDialog.h:1019
 msgid "Spectral class, nebula type, etc."
@@ -4057,7 +4057,7 @@ msgstr "ชนิดสเปกตรัม, ชนิดเนบิวลา,
 
 #: src/ui_configurationDialog.h:1021
 msgid "Additional information"
-msgstr ""
+msgstr "รายละเอียดเพิ่มเติม"
 
 #: src/ui_configurationDialog.h:1023
 msgid "Topocentric equatorial coordinates"
@@ -4094,7 +4094,7 @@ msgstr "ขนาด"
 
 #: src/ui_configurationDialog.h:1037
 msgid "The type of the object (star, planet, etc.)"
-msgstr ""
+msgstr "ชนิดของวัตถุ (ดาวฤกษ์, ดาวเคราะห์ ฯลฯ)"
 
 #: src/ui_configurationDialog.h:1039
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:268
@@ -4953,7 +4953,7 @@ msgstr ""
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1047
 msgid "Limit stellar magnitude"
-msgstr ""
+msgstr "ขีดจำกัดโชติมาตรของดาว"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1048
 msgid "Key mappings"
@@ -6918,7 +6918,7 @@ msgstr "ชนิดของซูเปอร์โนวา: %1"
 #: plugins/Supernovae/src/Supernova.cpp:134 plugins/Novae/src/Nova.cpp:136
 #, qt-format
 msgid "Maximum brightness: %1"
-msgstr ""
+msgstr "ความสว่างสูงสุด: %1"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:106
 msgid "Historical Supernovae Plug-in"
@@ -7038,7 +7038,7 @@ msgstr "[ข้อมูลการปรับปรุงถัดไป]"
 
 #: plugins/Novae/src/Novae.cpp:72 plugins/Novae/src/Novae.cpp:135
 msgid "Bright Novae"
-msgstr ""
+msgstr "โนวาสว่าง"
 
 #: plugins/Novae/src/Novae.cpp:75 plugins/Novae/src/gui/NovaeDialog.cpp:110
 msgid "A plugin that shows some bright novae in the Milky Way galaxy."
@@ -7051,15 +7051,15 @@ msgstr ""
 #: plugins/Novae/src/Nova.cpp:120
 #, qt-format
 msgid "Type: <b>%1</b> (%2)"
-msgstr ""
+msgstr "ชนิด: <b>%1</b> (%2)"
 
 #: plugins/Novae/src/Nova.cpp:120
 msgid "nova"
-msgstr ""
+msgstr "โนวา"
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:105
 msgid "Bright Novae Plug-in"
-msgstr ""
+msgstr "โปรแกรมเสริมโนวาสว่าง"
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:111
 msgid ""
@@ -7096,7 +7096,7 @@ msgstr ""
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:193
 msgid "Novae is updated"
-msgstr ""
+msgstr "ข้อมูลโนวาได้รับการปรับปรุง"
 
 #: plugins/Novae/src/ui_novaeDialog.h:232
 msgid "Bright Novae Configuration"
@@ -7496,7 +7496,7 @@ msgstr ""
 #. TRANSLATORS: ESI = Earth Similarity Index
 #: plugins/Exoplanets/src/Exoplanet.cpp:216
 msgid "ESI"
-msgstr ""
+msgstr "ESI"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:120
 msgid "Exoplanets Plug-in"
@@ -7586,7 +7586,7 @@ msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:169
 msgid "HEK (The Hunt for Exomoons with Kepler)"
-msgstr ""
+msgstr "HEK (The Hunt for Exomoons with Kepler)"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:170
 msgid "Exoplanets in binaries and multiple systems (Richard Schwarz)"
@@ -7618,7 +7618,7 @@ msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:176
 msgid "OLBIN (Optical Long-Baseline Interferometry News)"
-msgstr ""
+msgstr "OLBIN (Optical Long-Baseline Interferometry News)"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:177
 msgid "NASA's Exoplanet Exploration Program"
