@@ -137,14 +137,8 @@ public:
 		updatesEnabled=b;
 	}
 
-	void setEnableAtStartup(bool b)
-	{
-		enableAtStartup=b;
-	}
-	bool getEnableAtStartup(void)
-	{
-		return enableAtStartup;
-	}
+	bool getEnableAtStartup(void) {return enableAtStartup;}
+	void setEnableAtStartup(bool b)	{enableAtStartup=b;}
 
 	//! get the date and time the TLE elements were updated
 	QDateTime getLastUpdate(void)
@@ -183,10 +177,7 @@ public slots:
 	//! module.ini file and update the local JSON file.
 	void updateJSON(void);
 
-	void setFlagShowMS(bool b)
-	{
-		flagShowMS=b;
-	}
+	void setFlagShowMS(bool b);
 	bool getFlagShowMS(void)
 	{
 		return flagShowMS;
@@ -204,6 +195,9 @@ public slots:
 	}
 
 private:
+	// Upgrade config.ini: rename old key settings to new
+	void upgradeConfigIni(void);
+
 	//! Check if the sky date was changed
 	//! @param core
 	//! @return if changed, return true

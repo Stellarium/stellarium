@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>528</width>
-    <height>497</height>
+    <width>531</width>
+    <height>459</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,13 +17,22 @@
    <property name="spacing">
     <number>0</number>
    </property>
-   <property name="margin">
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
     <number>0</number>
    </property>
    <item>
     <widget class="BarFrame" name="TitleBar">
      <property name="sizePolicy">
-      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+      <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
        <horstretch>0</horstretch>
        <verstretch>0</verstretch>
       </sizepolicy>
@@ -36,7 +45,7 @@
      </property>
      <property name="maximumSize">
       <size>
-       <width>530</width>
+       <width>16777215</width>
        <height>25</height>
       </size>
      </property>
@@ -81,7 +90,7 @@
       <item>
        <widget class="QLabel" name="stelWindowTitle">
         <property name="text">
-         <string>Meteor Showers Configuration</string>
+         <string>Meteor Showers Plug-in Configuration</string>
         </property>
        </widget>
       </item>
@@ -139,7 +148,7 @@
        <item>
         <widget class="QGroupBox" name="updatesGroup">
          <property name="title">
-          <string>Update meteor showers data from Internet</string>
+          <string>Update catalog from Internet</string>
          </property>
          <property name="flat">
           <bool>true</bool>
@@ -151,7 +160,7 @@
           <item>
            <widget class="QCheckBox" name="internetUpdatesCheckbox">
             <property name="text">
-             <string>Update from Internet</string>
+             <string>Update from Internet sources</string>
             </property>
            </widget>
           </item>
@@ -230,6 +239,42 @@
         </widget>
        </item>
        <item>
+        <widget class="QGroupBox" name="displayBox">
+         <property name="title">
+          <string>Settings for meteor showers</string>
+         </property>
+         <property name="flat">
+          <bool>true</bool>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout">
+          <item>
+           <widget class="QCheckBox" name="displayModeCheckBox">
+            <property name="toolTip">
+             <string/>
+            </property>
+            <property name="text">
+             <string>Enable display of distribution for meteor showers</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="displayAtStartupCheckBox">
+            <property name="text">
+             <string>Enable display at startup</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="displayShowMeteorShowerButton">
+            <property name="text">
+             <string>Show meteor showers button on toolbar</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
         <spacer name="verticalSpacer_3">
          <property name="orientation">
           <enum>Qt::Vertical</enum>
@@ -276,7 +321,7 @@
      </widget>
      <widget class="QWidget" name="aboutTab">
       <attribute name="title">
-       <string>About</string>
+       <string comment="tab in plugin windows">About</string>
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_11">
        <property name="spacing">
