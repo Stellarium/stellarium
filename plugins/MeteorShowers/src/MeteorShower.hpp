@@ -105,7 +105,6 @@ private:
 	double driftDelta;		   //! Drift of Dec.
 	QString parentObj;		   //! Parent object for meteor shower
 	float pidx;			       //! The population index
-	float slong;			   //! Solar longitude
 
 	void draw(StelPainter &painter);
 
