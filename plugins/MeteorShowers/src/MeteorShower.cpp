@@ -228,6 +228,19 @@ int MeteorShower::checkYear(QString yyyy) const
 	return 0;
 }
 
+float MeteorShower::getSolarLongitude(QDateTime QDT) const
+{
+	//The number of days (positive or negative) since Greenwich noon,
+	//Terrestrial Time, on 1 January 2000 (J2000.0)
+	double n = StelUtils::qDateTimeToJd(QDT) - 2451545.0;
+
+	//The mean longitude of the Sun, corrected for the aberration of light
+	float slong = (280.460 + 0.9856474*n) / 360;
+	slong = (slong - (int) slong) * 360 - 1;
+
+	return slong;
+}
+
 QString MeteorShower::getInfoString(const StelCore* core, const InfoStringGroup& flags) const
 {
 	QString str;
@@ -295,6 +308,8 @@ QString MeteorShower::getInfoString(const StelCore* core, const InfoStringGroup&
 			}
 			oss << "<br />";
 			oss << q_("Maximum: %1").arg(getDateFromJSON(c_peak));
+			QString slong = QString::number(MeteorShower::getSolarLongitude(QDateTime::fromString(c_peak + " " + skyYear, "MM.dd yyyy")), 'f', 2);
+			oss << QString(" (%1 %2&deg;)").arg(q_("Solar longitude is")).arg(slong);
 			oss << "<br />";
 			if(c_zhr>0)
 			{

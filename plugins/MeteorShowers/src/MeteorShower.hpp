@@ -136,6 +136,11 @@ private:
 	//! @param yyyy year to check
 	//! @return index of the year or 0 to generic data
 	int checkYear(QString yyyy) const;
+
+	//! Get the solar longitude for a specified date
+	//! @param QDT QDateTime
+	//! @return solar longitude in degree
+	float getSolarLongitude(QDateTime QDT) const;
 };
 
 #endif // _METEORSHOWER_HPP_
