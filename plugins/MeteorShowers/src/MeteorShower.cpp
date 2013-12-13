@@ -53,7 +53,6 @@ MeteorShower::MeteorShower(const QVariantMap& map)
 	driftDelta = StelUtils::getDecAngle(map.value("driftDelta").toString());
 	parentObj = map.value("parentObj").toString();
 	pidx = map.value("pidx").toFloat();
-	slong = map.value("slong").toFloat();
 
 	if(map.contains("activity"))
 	{
@@ -91,7 +90,6 @@ QVariantMap MeteorShower::getMap(void)
 	map["driftDelta"] = driftDelta;
 	map["parentObj"] = parentObj;
 	map["pidx"] = pidx;
-	map["slong"] = slong;
 
 	QVariantList activityList;
 	foreach(const activityData &p, activity)
@@ -297,10 +295,6 @@ QString MeteorShower::getInfoString(const StelCore* core, const InfoStringGroup&
 			}
 			oss << "<br />";
 			oss << q_("Maximum: %1").arg(getDateFromJSON(c_peak));
-			if(slong>0)
-			{
-				oss << QString(" (%1 %2&deg;)").arg(q_("Solar longitude is")).arg(slong);
-			}
 			oss << "<br />";
 			if(c_zhr>0)
 			{
