@@ -204,7 +204,7 @@ int MeteorShower::isActive() const
 	}
 
 	QDateTime start = QDateTime::fromString(dateStart + " " + yearS, "MM.dd yyyy");
-	QDateTime finish = QDateTime::fromString(dateFinish + " " + yearF, "MM.dd yyyy");;
+	QDateTime finish = QDateTime::fromString(dateFinish + " " + yearF, "MM.dd yyyy");
 
 	if(skyDate.operator >=(start) && skyDate.operator <=(finish))
 	{
