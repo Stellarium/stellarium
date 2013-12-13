@@ -203,6 +203,14 @@ private:
 	//! @return if changed, return true
 	bool changedSkyDate(StelCore* core);
 
+	//! Calculate value of ZHR using normal distribution
+	//! @param zhr
+	//! @param variable
+	//! @param start
+	//! @param finish
+	//! @param peak
+	int calculateZHR(int zhr, QString variable, QString start, QString finish, QString peak);
+
 	//! Update the list with information about active meteors
 	//! @param core
 	void updateActiveInfo(StelCore *core);

@@ -350,6 +350,83 @@ void MeteorShowers::drawPointer(StelCore* core, StelPainter& painter)
 	}
 }
 
+int MeteorShowers::calculateZHR(int zhr, QString variable, QString start, QString finish, QString peak)
+{
+	/***************************************
+	 * Get ZHR ranges
+	 ***************************************/
+	int highZHR;
+	int lowZHR;
+	//bool multPeak = false; //multiple peaks
+	if(zhr != -1)  //isn't variable
+	{
+		highZHR = zhr;
+		lowZHR = 0;
+	}
+	else
+	{
+		QStringList varZHR = variable.split("-");
+		lowZHR = varZHR.at(0).toInt();
+		if(varZHR.at(1).contains("*"))
+		{
+			//multPeak = true;
+			highZHR = varZHR[1].replace("*", "").toInt();
+		}
+		else
+		{
+			highZHR = varZHR.at(1).toInt();
+		}
+	}
+
+	/***************************************
+	 * Calculate time intervals
+	 ***************************************/
+	QString yearBase = skyDate.toString("yyyy");
+	QString yearS, yearF;
+
+	int monthStart = start.split(".").at(0).toInt();
+	int monthFinish = finish.split(".").at(0).toInt();
+
+	if(monthStart > monthFinish)
+	{
+		if(monthStart == skyDate.toString("MM").toInt())
+		{
+			yearS = yearBase;
+			yearF = QString("%1").arg(yearBase.toInt() + 1);
+		}
+		else
+		{
+			yearS = QString("%1").arg(yearBase.toInt() - 1);
+			yearF = yearBase;
+		}
+	}
+	else
+	{
+		yearS = yearF = yearBase;
+	}
+
+	double startJD = StelUtils::qDateTimeToJd(QDateTime::fromString(start + " " + yearS, "MM.dd yyyy"));
+	double finishJD = StelUtils::qDateTimeToJd(QDateTime::fromString(finish + " " + yearF, "MM.dd yyyy"));
+	double peakJD = StelUtils::qDateTimeToJd(QDateTime::fromString(peak + " " + yearS, "MM.dd yyyy"));
+	double currentJD = StelUtils::qDateTimeToJd(skyDate);
+
+	if (peakJD < startJD || peakJD > finishJD)
+		peakJD = StelUtils::qDateTimeToJd(QDateTime::fromString(peak + " " + yearF, "MM.dd yyyy"));
+
+	/***************************************
+	 * Gaussian distribution
+	 ***************************************/
+	double sd; //standard deviation
+	if (currentJD >= startJD && currentJD < peakJD) //left side of gaussian
+		sd = (peakJD - startJD)/2;
+	else
+		sd = (finishJD - peakJD)/2;
+
+	double gaussian = highZHR * std::exp( - std::pow(currentJD - peakJD, 2) / (sd*sd) ) + lowZHR;
+
+	return (int) ((int) ((gaussian - (int) gaussian) * 10) >= 5 ? gaussian+1 : gaussian);
+}
+
 void MeteorShowers::updateActiveInfo(StelCore* core)
 {
 	//check if the sky date changed
@@ -455,39 +532,7 @@ void MeteorShowers::update(double deltaTime)
 	index = 0;
 	foreach(const activeData &a, activeInfo)
 	{
-		bool multPeak = false; //multiple peaks
-		int highZHR;
-		if(a.zhr != -1)  //isn't variable
-		{
-			ZHR = highZHR = a.zhr;
-		}
-		else
-		{
-			QStringList varZHR = a.variable.split("-");
-			int lowZHR = varZHR.at(0).toInt();
-			if(varZHR.at(1).contains("*"))
-			{
-				multPeak = true;
-				highZHR = varZHR[1].replace("*", "").toInt();
-			}
-			else
-			{
-				highZHR = varZHR.at(1).toInt();
-			}
-
-			if(a.peak == skyDate.toString("MM.dd"))
-			{
-				ZHR = highZHR;
-			}
-			else //randomly selection
-			{
-				int k = ((double) rand() / ((double)RAND_MAX + 1)) * (highZHR - lowZHR + 1);
-				ZHR = lowZHR + k;
-			}
-		}
-
-		if(a.zhr == -1 && !multPeak && ZHR >= (int)highZHR*0.9) //doesn't allow selection of peak value
-			ZHR -= (int)ZHR*0.1;
+		ZHR = calculateZHR(a.zhr, a.variable, a.start, a.finish, a.peak);
 
 		// only makes sense given lifetimes of meteors to draw when timeSpeed is realtime
 		// otherwise high overhead of large numbers of meteors
