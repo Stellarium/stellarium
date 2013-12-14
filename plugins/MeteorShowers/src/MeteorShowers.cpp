@@ -350,7 +350,7 @@ void MeteorShowers::drawPointer(StelCore* core, StelPainter& painter)
 	}
 }
 
-int MeteorShowers::calculateZHR(int zhr, QString variable, QString start, QString finish, QString peak)
+int MeteorShowers::calculateZHR(int zhr, QString variable, QDateTime start, QDateTime finish, QDateTime peak)
 {
 	/***************************************
 	 * Get ZHR ranges
@@ -379,39 +379,12 @@ int MeteorShowers::calculateZHR(int zhr, QString variable, QString start, QStrin
 	}
 
 	/***************************************
-	 * Calculate time intervals
+	 * Convert time intervals
 	 ***************************************/
-	QString yearBase = skyDate.toString("yyyy");
-	QString yearS, yearF;
-
-	int monthStart = start.split(".").at(0).toInt();
-	int monthFinish = finish.split(".").at(0).toInt();
-
-	if(monthStart > monthFinish)
-	{
-		if(monthStart == skyDate.toString("MM").toInt())
-		{
-			yearS = yearBase;
-			yearF = QString("%1").arg(yearBase.toInt() + 1);
-		}
-		else
-		{
-			yearS = QString("%1").arg(yearBase.toInt() - 1);
-			yearF = yearBase;
-		}
-	}
-	else
-	{
-		yearS = yearF = yearBase;
-	}
-
-	double startJD = StelUtils::qDateTimeToJd(QDateTime::fromString(start + " " + yearS, "MM.dd yyyy"));
-	double finishJD = StelUtils::qDateTimeToJd(QDateTime::fromString(finish + " " + yearF, "MM.dd yyyy"));
-	double peakJD = StelUtils::qDateTimeToJd(QDateTime::fromString(peak + " " + yearS, "MM.dd yyyy"));
+	double startJD = StelUtils::qDateTimeToJd(start);
+	double finishJD = StelUtils::qDateTimeToJd(finish);
+	double peakJD = StelUtils::qDateTimeToJd(peak);
 	double currentJD = StelUtils::qDateTimeToJd(skyDate);
-
-	if (peakJD < startJD || peakJD > finishJD)
-		peakJD = StelUtils::qDateTimeToJd(QDateTime::fromString(peak + " " + yearF, "MM.dd yyyy"));
 
 	/***************************************
 	 * Gaussian distribution
@@ -443,7 +416,7 @@ void MeteorShowers::updateActiveInfo(StelCore* core)
 			if(changedDate)
 			{
 				//if the meteor shower is active, get data
-				if(ms->isActive(ms->getSkyQDateTime()))
+				if(ms->isActive)
 				{
 					//First, check if there is already data about the constellation in "activeInfo"
 					//The var "index" will be updated to show the correct place do put the new information
@@ -455,8 +428,6 @@ void MeteorShowers::updateActiveInfo(StelCore* core)
 						index++;
 					}
 
-					int indexActivity = ms->searchRealData(skyDate.toString("yyyy"));
-
 					if(activeInfo.size() < index + 1) //new?, put in the end
 					{
 						activeData newData;
@@ -464,21 +435,20 @@ void MeteorShowers::updateActiveInfo(StelCore* core)
 						newData.speed = ms->speed;
 						newData.radiantAlpha = ms->radiantAlpha;
 						newData.radiantDelta = ms->radiantDelta;
-						newData.year = ms->activity[indexActivity].year;
-						newData.start = ms->activity[indexActivity].start;
-						newData.finish = ms->activity[indexActivity].finish;
-						newData.zhr = ms->activity[indexActivity].zhr;
-						newData.variable = ms->activity[indexActivity].variable;
-						newData.peak = ms->activity[indexActivity].peak;
+						newData.zhr = ms->zhr;
+						newData.variable = ms->variable;
+						newData.start = ms->start;
+						newData.finish = ms->finish;
+						newData.peak = ms->peak;
 						activeInfo.append(newData);
 					}
 					else //just overwrites
 					{
-						activeInfo[index].year = ms->activity[indexActivity].year;
-						activeInfo[index].start = ms->activity[indexActivity].start;
-						activeInfo[index].finish = ms->activity[indexActivity].finish;
-						activeInfo[index].zhr = ms->activity[indexActivity].zhr;
-						activeInfo[index].peak = ms->activity[indexActivity].peak;
+						activeInfo[index].zhr = ms->zhr;
+						activeInfo[index].variable = ms->variable;
+						activeInfo[index].start = ms->start;
+						activeInfo[index].finish = ms->finish;
+						activeInfo[index].peak = ms->peak;
 					}
 				}
 			}

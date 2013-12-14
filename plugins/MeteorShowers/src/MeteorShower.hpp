@@ -100,8 +100,6 @@ private:
 	QString designation;            //! The designation of the meteor shower
 	QList<activityData> activity;	//! List of activity
 	int speed;                      //! Speed of meteors
-	double radiantAlpha;            //! Current R.A. for radiant of meteor shower
-	double radiantDelta;            //! Current Dec. for radiant of meteor shower
 	double rAlphaPeak;              //! R.A. for radiant of meteor shower on the peak day
 	double rDeltaPeak;              //! Dec. for radiant of meteor shower on the peak day
 	double driftAlpha;		//! Drift of R.A.
@@ -109,9 +107,17 @@ private:
 	QString parentObj;		//! Parent object for meteor shower
 	float pidx;			//! The population index
 
-	QDateTime start;		   //! First day for activity
-	QDateTime finish;		   //! Latest day for activity
-	QDateTime peak;			   //! Day with maximum for activity
+	//current information
+	double radiantAlpha;            //! Current R.A. for radiant of meteor shower
+	double radiantDelta;            //! Current Dec. for radiant of meteor shower
+	int zhr;			//! ZHR of shower
+	QString variable;		//! value of variable for ZHR
+	QDateTime start;		//! First day for activity
+	QDateTime finish;		//! Latest day for activity
+	QDateTime peak;			//! Day with maximum for activity
+
+	int isActive;		        //! Check if the radiant is active for the current sky date
+					//! 0=inactive; 1=realData 2=genericData
 
 	void draw(StelPainter &painter);
 
@@ -139,14 +145,9 @@ private:
 	//! @return Current QDateTime of sky
 	QDateTime getSkyQDateTime() const;
 
-	//! Update value of stat, finish and peak dates
+	//! Update value of current information(zhr, variable, stat, finish and peak)
 	//! @param current sky QDateTime
-	void updateAllQDateTime(QDateTime skyDate);
-
-	//! Check if the radiant is active for the current sky date
-	//! @param current sky QDateTime
-	//! @return if is active, return 1 to real data OR 2 to generic data
-	int isActive(QDateTime skyDate) const;
+	void updateCurrentData(QDateTime skyDate);
 
 	//! Check if the JSON file has real data to a given year
 	//! @param yyyy year to check

@@ -209,7 +209,7 @@ private:
 	//! @param start
 	//! @param finish
 	//! @param peak
-	int calculateZHR(int zhr, QString variable, QString start, QString finish, QString peak);
+	int calculateZHR(int zhr, QString variable, QDateTime start, QDateTime finish, QDateTime peak);
 
 	//! Update the list with information about active meteors
 	//! @param core
@@ -281,13 +281,12 @@ private:
 	typedef struct
 	{
 		QString showerID;		    //! The ID of the meteor shower
-		QString year;		        //! Value of year for actual data
-		QString start;			    //! First day for activity
-		QString finish;			    //! Latest day for activity
+		QDateTime start;			    //! First day for activity
+		QDateTime finish;			    //! Latest day for activity
+		QDateTime peak;			    //! Day with maximum for activity
 		int zhr;		    	    //! ZHR of shower
 		QString variable;           //! value of variable for ZHR
 		int speed;                  //! Speed of meteors
-		QString peak;			    //! Day with maximum for activity
 		double radiantAlpha;        //! R.A. for radiant of meteor shower
 		double radiantDelta;        //! Dec. for radiant of meteor shower
 	} activeData;
