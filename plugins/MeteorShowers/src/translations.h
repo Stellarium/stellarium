@@ -48,6 +48,22 @@ class MeteorShowerTranslations
 		N_("Puppid-Velids");
 		N_("Ursids");
 		N_("Perseids");
+		N_("δ-Leonids");
+		N_("π-Puppids");
+		N_("June Lyrids");
+		N_("κ-Cygnids");
+		N_("ε-Lyrids");
+		N_("δ-Aurigids");
+		N_("ε-Geminids");
+		N_("Southern Taurids");
+		N_("Northern Taurids");
+		N_("Monocerotids");
+		N_("σ-Hydrids");
+		N_("Geminids");
+		N_("Leonis Minorids");
+		N_("December Leonis Minorids");
+		N_("Comae Berenicids");
+		N_("Orionids");
 
 		// List of parent objects for meteor showers
 		N_("Asteroid 2003 EH1");
@@ -56,6 +72,8 @@ class MeteorShowerTranslations
 		N_("Comet 55P/Tempel-Tuttle");
 		N_("Comet 96P/Machholz");
 		N_("Comet 109P/Swift-Tuttle");
-		N_("Comet Thatcher");
+		N_("Comet Thatcher (1861 I)");
+		N_("Asteroid (4450) Pan");
+		N_("Comet 26P/Grigg-Skjellerup");
 	}
 };
