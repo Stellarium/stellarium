@@ -455,7 +455,7 @@ void MeteorShowers::updateActiveInfo(StelCore* core)
 						index++;
 					}
 
-					int indexActivity = ms->checkYear(skyDate.toString("yyyy"));
+					int indexActivity = ms->searchRealData(skyDate.toString("yyyy"));
 
 					if(activeInfo.size() < index + 1) //new?, put in the end
 					{
