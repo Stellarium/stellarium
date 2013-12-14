@@ -882,7 +882,7 @@ void MeteorShowers::readSettingsFromConfig(void)
 {
 	conf->beginGroup("MeteorShowers");
 
-	updateUrl = conf->value("url", "http://stellarium.astro.uni-altai.ru/showers.json").toString();
+	updateUrl = conf->value("url", "http://stellarium.org/json/showers.json").toString();
 	updateFrequencyHours = conf->value("update_frequency_hours", 720).toInt();
 	lastUpdate = QDateTime::fromString(conf->value("last_update", "2013-12-10T12:00:00").toString(), Qt::ISODate);
 	updatesEnabled = conf->value("updates_enabled", true).toBool();
