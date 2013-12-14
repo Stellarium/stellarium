@@ -102,6 +102,8 @@ private:
 	int speed;                      //! Speed of meteors
 	double radiantAlpha;            //! Current R.A. for radiant of meteor shower
 	double radiantDelta;            //! Current Dec. for radiant of meteor shower
+	double rAlphaPeak;              //! R.A. for radiant of meteor shower on the peak day
+	double rDeltaPeak;              //! Dec. for radiant of meteor shower on the peak day
 	double driftAlpha;		//! Drift of R.A.
 	double driftDelta;		//! Drift of Dec.
 	QString parentObj;		//! Parent object for meteor shower
