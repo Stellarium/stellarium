@@ -47,8 +47,8 @@ MeteorShower::MeteorShower(const QVariantMap& map)
 	showerID = map.value("showerID").toString();
 	designation  = map.value("designation").toString();
 	speed = map.value("speed").toInt();
-	radiantAlpha = StelUtils::getDecAngle(map.value("radiantAlpha").toString());
-	radiantDelta = StelUtils::getDecAngle(map.value("radiantDelta").toString());
+	rAlphaPeak = radiantAlpha = StelUtils::getDecAngle(map.value("radiantAlpha").toString());
+	rDeltaPeak = radiantDelta = StelUtils::getDecAngle(map.value("radiantDelta").toString());
 	driftAlpha = StelUtils::getDecAngle(map.value("driftAlpha").toString());
 	driftDelta = StelUtils::getDecAngle(map.value("driftDelta").toString());
 	parentObj = map.value("parentObj").toString();
@@ -84,8 +84,8 @@ QVariantMap MeteorShower::getMap(void)
 	map["showerID"] = showerID;
 	map["designation"] = designation;
 	map["speed"] = speed;
-	map["radiantAlpha"] = radiantAlpha;
-	map["radiantDelta"] = radiantDelta;
+	map["radiantAlpha"] = rAlphaPeak;
+	map["radiantDelta"] = rDeltaPeak;
 	map["driftAlpha"] = driftAlpha;
 	map["driftDelta"] = driftDelta;
 	map["parentObj"] = parentObj;
