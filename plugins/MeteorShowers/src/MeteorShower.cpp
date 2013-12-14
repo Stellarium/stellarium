@@ -176,7 +176,7 @@ QDateTime MeteorShower::getSkyQDateTime() const
 void MeteorShower::updateAllQDateTime(QDateTime skyDate)
 {
 	//Check if we have real data for the current sky year
-	int index = checkYear(skyDate.toString("yyyy"));
+	int index = searchRealData(skyDate.toString("yyyy"));
 
 	QString dateStart = activity[index].start.isEmpty() ? activity[0].start : activity[index].start;
 	QString dateFinish = activity[index].finish.isEmpty() ? activity[0].finish : activity[index].finish;
@@ -216,7 +216,7 @@ void MeteorShower::updateAllQDateTime(QDateTime skyDate)
 int MeteorShower::isActive(QDateTime skyDate) const
 {
 	//Check if we have real data for the current sky year
-	int index = checkYear(skyDate.toString("yyyy"));
+	int index = searchRealData(skyDate.toString("yyyy"));
 
 	if(skyDate.operator >=(start) && skyDate.operator <=(finish))
 	{
@@ -229,7 +229,7 @@ int MeteorShower::isActive(QDateTime skyDate) const
 	return 0; // isn't active
 }
 
-int MeteorShower::checkYear(QString yyyy) const
+int MeteorShower::searchRealData(QString yyyy) const
 {
 	int index = -1;
 	foreach(const activityData &p, activity)
@@ -288,12 +288,11 @@ QString MeteorShower::getInfoString(const StelCore* core, const InfoStringGroup&
 			oss << q_("Parent body: %1").arg(parentObj) << "<br />";
 		}
 
-		double JD = core->getJDay();
-		QString skyYear = StelUtils::jdToQDateTime(JD+StelUtils::getGMTShiftFromQT(JD)/24-core->getDeltaT(JD)/86400).toString("yyyy");
+		QString skyYear = getSkyQDateTime().toString("yyyy");
 
 		if(activity.size() > 0)
 		{
-			int index = checkYear(skyYear);
+			int index = searchRealData(skyYear);
 
 			if(index == 0)
 				oss << "<b>" << q_("Generic data for the year %1").arg(skyYear) << "</b> <br />";

@@ -151,7 +151,7 @@ private:
 	//! Check if the JSON file has real data to a given year
 	//! @param yyyy year to check
 	//! @return index of the year or 0 to generic data
-	int checkYear(QString yyyy) const;
+	int searchRealData(QString yyyy) const;
 
 	//! Get the solar longitude for a specified date
 	//! @param QDT QDateTime
