@@ -70,6 +70,8 @@ MeteorShower::MeteorShower(const QVariantMap& map)
 		}
 	}
 
+	updateCurrentData(getSkyQDateTime());
+
 	initialized = true;
 }
 
@@ -173,11 +175,24 @@ QDateTime MeteorShower::getSkyQDateTime() const
 	return StelUtils::jdToQDateTime(JD+StelUtils::getGMTShiftFromQT(JD)/24-core->getDeltaT(JD)/86400);
 }
 
-void MeteorShower::updateAllQDateTime(QDateTime skyDate)
+void MeteorShower::updateCurrentData(QDateTime skyDate)
 {
 	//Check if we have real data for the current sky year
 	int index = searchRealData(skyDate.toString("yyyy"));
 
+	/**************************
+	 *ZHR info
+	 **************************/
+	zhr = activity[index].zhr == 0 ? activity[0].zhr : activity[index].zhr;
+
+	if (zhr == -1)
+		variable = activity[index].variable.isEmpty() ? activity[0].variable : activity[index].variable;
+	else
+		variable = "";
+
+	/***************************
+	 *Dates - start/finish/peak
+	 ***************************/
 	QString dateStart = activity[index].start.isEmpty() ? activity[0].start : activity[index].start;
 	QString dateFinish = activity[index].finish.isEmpty() ? activity[0].finish : activity[index].finish;
 	QString datePeak = activity[index].peak.isEmpty() ? activity[0].peak : activity[index].peak;
@@ -211,22 +226,21 @@ void MeteorShower::updateAllQDateTime(QDateTime skyDate)
 
 	if (peak.operator <(start) || peak.operator >(finish))
 		peak = QDateTime::fromString(datePeak + " " + yearF, "MM.dd yyyy");
-}
 
-int MeteorShower::isActive(QDateTime skyDate) const
-{
-	//Check if we have real data for the current sky year
-	int index = searchRealData(skyDate.toString("yyyy"));
-
+	/***************************
+	 *Activity - is active?
+	 ***************************/
 	if(skyDate.operator >=(start) && skyDate.operator <=(finish))
 	{
 		if(index)
-			return 1; // real data
+			isActive = 1; // real data
 		else
-			return 2; // generic data
+			isActive = 2; // generic data
 	}
-
-	return 0; // isn't active
+	else
+	{
+		isActive = 0; // isn't active
+	}
 }
 
 int MeteorShower::searchRealData(QString yyyy) const
@@ -289,54 +303,45 @@ QString MeteorShower::getInfoString(const StelCore* core, const InfoStringGroup&
 		}
 
 		QString skyYear = getSkyQDateTime().toString("yyyy");
+		if(isActive == 1)
+			oss << "<b>" << q_("Real data for the year %1").arg(skyYear) << "</b> <br />";
+		else
+			oss << "<b>" << q_("Generic data for the year %1").arg(skyYear) << "</b> <br />";
 
-		if(activity.size() > 0)
+		if(start.fromString("MM") == finish.fromString("MM"))
 		{
-			int index = searchRealData(skyYear);
+			oss << QString("%1: %2 - %3 %4")
+			       .arg(q_("Active"))
+			       .arg(start.toString("dd"))
+			       .arg(finish.toString("dd"))
+			       .arg(start.toString("MMMM"));
+		}
+		else
+		{
+			oss << QString("%1: %2 - %3")
+			       .arg(q_("Active"))
+			       .arg(start.toString("dd MMMM"))
+			       .arg(finish.toString("dd MMMM"));
+		}
+		oss << "<br />";
+		oss << q_("Maximum: %1").arg(peak.toString("dd MMMM"));
 
-			if(index == 0)
-				oss << "<b>" << q_("Generic data for the year %1").arg(skyYear) << "</b> <br />";
-			else
-				oss << "<b>" << q_("Real data for the year %1").arg(activity[index].year) << "</b> <br />";
+		QString slong = QString::number( MeteorShower::getSolarLongitude(peak), 'f', 2 );
+		oss << QString(" (%1 %2&deg;)").arg(q_("Solar longitude is")).arg(slong);
+		oss << "<br />";
 
-			QString c_start = activity[index].start.isEmpty() ? activity[0].start : activity[index].start;
-			QString c_finish = activity[index].finish.isEmpty() ? activity[0].finish : activity[index].finish;
-			QString c_peak = activity[index].peak.isEmpty() ? activity[0].peak : activity[index].peak;
-			int c_zhr = activity[index].zhr;
-
-			if(getMonthNameFromJSON(c_start)==getMonthNameFromJSON(c_finish))
+		if(zhr>0)
+		{
+			oss << QString("ZHR<sub>max</sub>: %1").arg(zhr) << "<br />";
+		}
+		else
+		{
+			oss << QString("ZHR<sub>max</sub>: %1").arg(q_("variable"));
+			if(!variable.isEmpty())
 			{
-				oss << QString("%1: %2 - %3 %4")
-				    .arg(q_("Active"))
-				    .arg(getDayFromJSON(c_start))
-				    .arg(getDayFromJSON(c_finish))
-				    .arg(getMonthNameFromJSON(c_finish));
-			}
-			else
-			{
-				oss << QString("%1: %2 - %3")
-				    .arg(q_("Active"))
-				    .arg(getDateFromJSON(c_start))
-				    .arg(getDateFromJSON(c_finish));
+				oss << "; " << variable;
 			}
 			oss << "<br />";
-			oss << q_("Maximum: %1").arg(getDateFromJSON(c_peak));
-			QString slong = QString::number(MeteorShower::getSolarLongitude(QDateTime::fromString(c_peak + " " + skyYear, "MM.dd yyyy")), 'f', 2);
-			oss << QString(" (%1 %2&deg;)").arg(q_("Solar longitude is")).arg(slong);
-			oss << "<br />";
-			if(c_zhr>0)
-			{
-				oss << QString("ZHR<sub>max</sub>: %1").arg(c_zhr) << "<br />";
-			}
-			else
-			{
-				oss << QString("ZHR<sub>max</sub>: %1").arg(q_("variable"));
-				if(!activity[index].variable.isEmpty())
-				{
-					oss << "; " << activity[index].variable;
-				}
-				oss << "<br />";
-			}
 		}
 	}
 
@@ -358,12 +363,12 @@ double MeteorShower::getAngularSize(const StelCore*) const
 void MeteorShower::update(double deltaTime)
 {
 	labelsFader.update((int)(deltaTime*1000));
+	updateCurrentData(getSkyQDateTime());
 }
 
 void MeteorShower::draw(StelPainter& painter)
 {
-	QDateTime skyDate = getSkyQDateTime();
-	updateAllQDateTime(skyDate);
+	updateCurrentData(getSkyQDateTime());
 
 	StelUtils::spheToRect(radiantAlpha, radiantDelta, XYZ);
 	painter.getProjector()->project(XYZ, XY);
@@ -374,7 +379,7 @@ void MeteorShower::draw(StelPainter& painter)
 
 	float alpha = 0.85f + ((double) rand() / (RAND_MAX))/10;
 
-	switch(isActive(skyDate))
+	switch(isActive)
 	{
 	case 1: //Active, real data
 		painter.setColor(1.0f, 0.94f, 0.0f, alpha);
