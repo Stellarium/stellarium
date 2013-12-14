@@ -443,7 +443,7 @@ void MeteorShowers::updateActiveInfo(StelCore* core)
 			if(changedDate)
 			{
 				//if the meteor shower is active, get data
-				if(ms->isActive())
+				if(ms->isActive(ms->getSkyQDateTime()))
 				{
 					//First, check if there is already data about the constellation in "activeInfo"
 					//The var "index" will be updated to show the correct place do put the new information
