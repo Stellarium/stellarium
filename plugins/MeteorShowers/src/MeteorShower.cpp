@@ -110,7 +110,7 @@ QVariantMap MeteorShower::getMap(void)
 
 float MeteorShower::getSelectPriority(const StelCore*) const
 {
-	return 5.0;
+	return 3.0;
 }
 
 QString MeteorShower::getDesignation() const
@@ -247,7 +247,7 @@ QString MeteorShower::getInfoString(const StelCore* core, const InfoStringGroup&
 	QTextStream oss(&str);
 
 	if(flags&Name)
-		oss << "<h2>" << getNameI18n() << "</h2>";
+		oss << "<h2>" << getNameI18n() << " (" << showerID  <<")</h2>";
 
 	if(flags&Extra)
 		oss << q_("Type: <b>%1</b>").arg(q_("meteor shower")) << "<br />";
