@@ -135,7 +135,7 @@ void ConfigurationDialog::createDialogContent()
 	// Main tab
 	// Fill the language list widget from the available list
 	QString appLang = StelApp::getInstance().getLocaleMgr().getAppLanguage();
-	QComboBox* cb = ui->programLanguageComboBox;
+	QComboBox* cb = ui->programLanguageComboBox;	
 	cb->clear();
 	cb->addItems(StelTranslator::globalTranslator->getAvailableLanguagesNamesNative(StelFileMgr::getLocaleDir()));
 	cb->model()->sort(0);
