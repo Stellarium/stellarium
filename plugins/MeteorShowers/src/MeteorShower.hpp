@@ -20,6 +20,7 @@
 #ifndef _METEORSHOWER_HPP_
 #define _METEORSHOWER_HPP_ 1
 
+#include <QDateTime>
 #include <QVariantMap>
 #include <QString>
 
@@ -87,8 +88,8 @@ private:
 	typedef struct
 	{
 		QString year;		   //! Value of year for actual data
-		int zhr;			   //! ZHR of shower
-		QString variable;      //! value of variable for ZHR
+		int zhr;		   //! ZHR of shower
+		QString variable;	   //! value of variable for ZHR
 		QString start;		   //! First day for activity
 		QString finish;		   //! Latest day for activity
 		QString peak;		   //! Day with maximum for activity
@@ -99,12 +100,16 @@ private:
 	QString designation;            //! The designation of the meteor shower
 	QList<activityData> activity;	//! List of activity
 	int speed;                      //! Speed of meteors
-	double radiantAlpha;            //! R.A. for radiant of meteor shower
-	double radiantDelta;            //! Dec. for radiant of meteor shower
-	double driftAlpha;		   //! Drift of R.A.
-	double driftDelta;		   //! Drift of Dec.
-	QString parentObj;		   //! Parent object for meteor shower
-	float pidx;			       //! The population index
+	double radiantAlpha;            //! Current R.A. for radiant of meteor shower
+	double radiantDelta;            //! Current Dec. for radiant of meteor shower
+	double driftAlpha;		//! Drift of R.A.
+	double driftDelta;		//! Drift of Dec.
+	QString parentObj;		//! Parent object for meteor shower
+	float pidx;			//! The population index
+
+	QDateTime start;		   //! First day for activity
+	QDateTime finish;		   //! Latest day for activity
+	QDateTime peak;			   //! Day with maximum for activity
 
 	void draw(StelPainter &painter);
 
@@ -128,9 +133,18 @@ private:
 	//! @param jsondate A string from JSON file
 	QString getMonthName(int number) const;
 
+	//! Get the current sky QDateTime
+	//! @return Current QDateTime of sky
+	QDateTime getSkyQDateTime() const;
+
+	//! Update value of stat, finish and peak dates
+	//! @param current sky QDateTime
+	void updateAllQDateTime(QDateTime skyDate);
+
 	//! Check if the radiant is active for the current sky date
+	//! @param current sky QDateTime
 	//! @return if is active, return 1 to real data OR 2 to generic data
-	int isActive() const;
+	int isActive(QDateTime skyDate) const;
 
 	//! Check if the JSON file has real data to a given year
 	//! @param yyyy year to check

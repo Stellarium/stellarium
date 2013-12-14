@@ -165,25 +165,29 @@ QString MeteorShower::getMonthName(int number) const
 	return q_(monthList.at(number-1));
 }
 
-int MeteorShower::isActive() const
+QDateTime MeteorShower::getSkyQDateTime() const
 {
 	StelCore* core = StelApp::getInstance().getCore();
-
 	//get the current sky date
 	double JD = core->getJDay();
-	QDateTime skyDate = StelUtils::jdToQDateTime(JD+StelUtils::getGMTShiftFromQT(JD)/24-core->getDeltaT(JD)/86400);
+	return StelUtils::jdToQDateTime(JD+StelUtils::getGMTShiftFromQT(JD)/24-core->getDeltaT(JD)/86400);
+}
 
+void MeteorShower::updateAllQDateTime(QDateTime skyDate)
+{
 	//Check if we have real data for the current sky year
 	int index = checkYear(skyDate.toString("yyyy"));
 
 	QString dateStart = activity[index].start.isEmpty() ? activity[0].start : activity[index].start;
 	QString dateFinish = activity[index].finish.isEmpty() ? activity[0].finish : activity[index].finish;
+	QString datePeak = activity[index].peak.isEmpty() ? activity[0].peak : activity[index].peak;
 	QString yearBase = activity[index].year == "generic" ? skyDate.toString("yyyy") : activity[index].year;
 	QString yearS, yearF;
 
 	int monthStart = getMonthFromJSON(dateStart);
+	int monthFinish = getMonthFromJSON(dateFinish);
 
-	if(monthStart > getMonthFromJSON(dateFinish))
+	if(monthStart > monthFinish)
 	{
 		if(monthStart == skyDate.toString("MM").toInt())
 		{
@@ -201,8 +205,18 @@ int MeteorShower::isActive() const
 		yearS = yearF = yearBase;
 	}
 
-	QDateTime start = QDateTime::fromString(dateStart + " " + yearS, "MM.dd yyyy");
-	QDateTime finish = QDateTime::fromString(dateFinish + " " + yearF, "MM.dd yyyy");
+	start = QDateTime::fromString(dateStart + " " + yearS, "MM.dd yyyy");
+	finish = QDateTime::fromString(dateFinish + " " + yearF, "MM.dd yyyy");
+	peak = QDateTime::fromString(datePeak + " " + yearS, "MM.dd yyyy");
+
+	if (peak.operator <(start) || peak.operator >(finish))
+		peak = QDateTime::fromString(datePeak + " " + yearF, "MM.dd yyyy");
+}
+
+int MeteorShower::isActive(QDateTime skyDate) const
+{
+	//Check if we have real data for the current sky year
+	int index = checkYear(skyDate.toString("yyyy"));
 
 	if(skyDate.operator >=(start) && skyDate.operator <=(finish))
 	{
@@ -349,6 +363,9 @@ void MeteorShower::update(double deltaTime)
 
 void MeteorShower::draw(StelPainter& painter)
 {
+	QDateTime skyDate = getSkyQDateTime();
+	updateAllQDateTime(skyDate);
+
 	StelUtils::spheToRect(radiantAlpha, radiantDelta, XYZ);
 	painter.getProjector()->project(XYZ, XY);
 
@@ -358,7 +375,7 @@ void MeteorShower::draw(StelPainter& painter)
 
 	float alpha = 0.85f + ((double) rand() / (RAND_MAX))/10;
 
-	switch(isActive())
+	switch(isActive(skyDate))
 	{
 	case 1: //Active, real data
 		painter.setColor(1.0f, 0.94f, 0.0f, alpha);
