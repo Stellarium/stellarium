@@ -37,6 +37,10 @@
 #include <QList>
 
 StelTextureSP Exoplanet::markerTexture;
+bool Exoplanet::distributionMode = false;
+bool Exoplanet::timelineMode = false;
+Vec3f Exoplanet::exoplanetMarkerColor = Vec3f(0.4f,0.9f,0.5f);
+Vec3f Exoplanet::habitableExoplanetMarkerColor = Vec3f(1.f,0.5f,0.f);
 
 Exoplanet::Exoplanet(const QVariantMap& map)
 		: initialized(false)
@@ -153,7 +157,7 @@ QString Exoplanet::getInfoString(const StelCore* core, const InfoStringGroup& fl
 
 	if (flags&Magnitude)
 	{
-		if (Vmag<99 && !GETSTELMODULE(Exoplanets)->getDisplayMode())
+		if (Vmag<99 && !distributionMode)
 		{
 			if (core->getSkyDrawer()->getFlagHasAtmosphere())
 			{
@@ -345,7 +349,7 @@ Vec3f Exoplanet::getInfoColor(void) const
 float Exoplanet::getVMagnitude(const StelCore* core) const
 {
 	Q_UNUSED(core);
-	if (GETSTELMODULE(Exoplanets)->getDisplayMode())
+	if (distributionMode)
 	{
 		return 4.f;
 	}
@@ -408,10 +412,9 @@ void Exoplanet::draw(StelCore* core, StelPainter& painter)
 	bool visible;
 	StelSkyDrawer* sd = core->getSkyDrawer();
 
-	//TODO: Store color of markers into config.ini file
-	Vec3f color = Vec3f(0.4f,0.9f,0.5f);
+	Vec3f color = exoplanetMarkerColor;
 	if (hasHabitableExoplanets)
-		color = Vec3f(1.f,0.5f,0.f);
+		color = habitableExoplanetMarkerColor;
 
 	double mag = getVMagnitudeWithExtinction(core);
 
@@ -420,7 +423,7 @@ void Exoplanet::draw(StelCore* core, StelPainter& painter)
 	glBlendFunc(GL_ONE, GL_ONE);
 	painter.setColor(color[0], color[1], color[2], 1);
 
-	if (GETSTELMODULE(Exoplanets)->getTimelineMode())
+	if (timelineMode)
 	{
 		visible = isDiscovered(core);
 	}
@@ -434,15 +437,14 @@ void Exoplanet::draw(StelCore* core, StelPainter& painter)
 	float mlimit = sd->getLimitMagnitude();
 
 	if (mag <= mlimit)
-	{
-		bool displaymode = GETSTELMODULE(Exoplanets)->getDisplayMode();
+	{		
 		Exoplanet::markerTexture->bind();
 		float size = getAngularSize(NULL)*M_PI/180.*painter.getProjector()->getPixelPerRadAtCenter();
 		float shift = 5.f + size/1.6f;
 
-		painter.drawSprite2dMode(XYZ, displaymode ? 4.f : 5.f);
+		painter.drawSprite2dMode(XYZ, distributionMode ? 4.f : 5.f);
 
-		if (labelsFader.getInterstate()<=0.f && !displaymode && (mag+1.f)<mlimit)
+		if (labelsFader.getInterstate()<=0.f && !distributionMode && (mag+1.f)<mlimit)
 		{
 			painter.drawText(XYZ, designation, 0, shift, shift, false);
 		}

@@ -39,6 +39,9 @@
 
 StelTextureSP Pulsar::markerTexture;
 
+bool Pulsar::distributionMode = false;
+Vec3f Pulsar::markerColor = Vec3f(0.4f,0.5f,1.0f);
+
 Pulsar::Pulsar(const QVariantMap& map)
 		: initialized(false)
 {
@@ -236,7 +239,7 @@ float Pulsar::getVMagnitude(const StelCore* core) const
 	// Calculate fake visual magnitude as function by distance - minimal magnitude is 6
 	float vmag = distance + 6.f;
 
-	if (GETSTELMODULE(Pulsars)->getDisplayMode())
+	if (distributionMode)
 	{
 		return 3.f;
 	}
@@ -334,25 +337,23 @@ void Pulsar::draw(StelCore* core, StelPainter& painter)
 {
 	StelSkyDrawer* sd = core->getSkyDrawer();	
 
-	Vec3f color = Vec3f(0.4f,0.5f,1.0f);
 	double mag = getVMagnitudeWithExtinction(core);
 
 	StelUtils::spheToRect(RA, DE, XYZ);			
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_ONE, GL_ONE);
-	painter.setColor(color[0], color[1], color[2], 1);
+	painter.setColor(markerColor[0], markerColor[1], markerColor[2], 1);
 	float mlimit = sd->getLimitMagnitude();
 
 	if (mag <= mlimit)
-	{
-		bool mode = GETSTELMODULE(Pulsars)->getDisplayMode();
+	{		
 		Pulsar::markerTexture->bind();
 		float size = getAngularSize(NULL)*M_PI/180.*painter.getProjector()->getPixelPerRadAtCenter();
 		float shift = 5.f + size/1.6f;		
 
-		painter.drawSprite2dMode(XYZ, mode ? 4.f : 5.f);
+		painter.drawSprite2dMode(XYZ, distributionMode ? 4.f : 5.f);
 
-		if (labelsFader.getInterstate()<=0.f && !mode && (mag+2.f)<mlimit)
+		if (labelsFader.getInterstate()<=0.f && !distributionMode && (mag+2.f)<mlimit)
 		{
 			painter.drawText(XYZ, designation, 0, shift, shift, false);
 		}
