@@ -241,6 +241,19 @@ void MeteorShower::updateCurrentData(QDateTime skyDate)
 	{
 		isActive = 0; // isn't active
 	}
+
+	/**************************
+	 *Radiant drift
+	 *************************/
+	radiantAlpha = rAlphaPeak;
+	radiantDelta = rDeltaPeak;
+
+	if (isActive)
+	{
+		double time = (StelUtils::qDateTimeToJd(skyDate) - StelUtils::qDateTimeToJd(peak))*24;
+		radiantAlpha += (driftAlpha/120)*time;
+		radiantDelta += (driftDelta/120)*time;
+	}
 }
 
 int MeteorShower::searchRealData(QString yyyy) const
@@ -285,12 +298,6 @@ QString MeteorShower::getInfoString(const StelCore* core, const InfoStringGroup&
 
 	if(flags&Extra)
 	{
-		oss << QString("%1: %2/%3")
-		    .arg(q_("Radiant drift"))
-		    .arg(StelUtils::radToHmsStr(driftAlpha))
-		    .arg(StelUtils::radToDmsStr(driftDelta));
-		oss << "<br />";
-
 		oss << q_("Geocentric meteoric velocity: %1 km/s").arg(speed) << "<br />";
 		if(pidx>0)
 		{
