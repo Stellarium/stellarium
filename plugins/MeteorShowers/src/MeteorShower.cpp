@@ -298,6 +298,12 @@ QString MeteorShower::getInfoString(const StelCore* core, const InfoStringGroup&
 
 	if(flags&Extra)
 	{
+		oss << QString("%1: %2/%3")
+			.arg(q_("Radiant drift (per day)"))
+			.arg(StelUtils::radToHmsStr(driftAlpha/5))
+			.arg(StelUtils::radToDmsStr(driftDelta/5));
+		oss << "<br />";
+
 		oss << q_("Geocentric meteoric velocity: %1 km/s").arg(speed) << "<br />";
 		if(pidx>0)
 		{
