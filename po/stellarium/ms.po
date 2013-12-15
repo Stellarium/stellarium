@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-12-06 13:19+0700\n"
-"PO-Revision-Date: 2013-09-13 02:51+0000\n"
+"PO-Revision-Date: 2013-12-14 06:16+0000\n"
 "Last-Translator: abuyop <Unknown>\n"
 "Language-Team: Malay <ms@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-12-07 05:30+0000\n"
+"X-Launchpad-Export-Date: 2013-12-15 05:21+0000\n"
 "X-Generator: Launchpad (build 16869)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:106 src/core/modules/StarMgr.cpp:336
@@ -258,7 +258,7 @@ msgstr "Jarak: %1AU (%2 km)"
 #: src/core/modules/Comet.cpp:161
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 Mio km)"
-msgstr ""
+msgstr "Jarak: %1AU (%2 Mio km)"
 
 #: src/core/modules/Planet.cpp:186
 #, qt-format
@@ -337,7 +337,7 @@ msgstr "bintang"
 #: plugins/Quasars/src/Quasar.cpp:109
 #, qt-format
 msgid "Color Index (B-V): <b>%1</b>"
-msgstr ""
+msgstr "Indeks Warna (B-V): <b>%1</b>"
 
 #: src/core/modules/StarWrapper.cpp:144
 msgid "eruptive variable star"
@@ -1105,7 +1105,7 @@ msgstr "Az/Alt: %1/%2"
 
 #: src/core/StelSkyLayerMgr.cpp:87
 msgid "Deep-sky objects background images"
-msgstr ""
+msgstr "Imej latar belakang objek langit"
 
 #: src/core/StelMovementMgr.cpp:106 src/gui/StelGui.cpp:178
 #: src/StelMainView.cpp:300
@@ -1727,7 +1727,7 @@ msgstr "Mod Skrin penuh"
 #: src/StelMainView.cpp:357
 #, qt-format
 msgid "Stellarium %1"
-msgstr ""
+msgstr "Stellarium %1"
 
 #: src/translations.h:33 plugins/Exoplanets/src/Exoplanet.cpp:191
 #: plugins/Exoplanets/src/Exoplanet.cpp:195
@@ -2044,7 +2044,7 @@ msgstr "Hygiea"
 #. TRANSLATORS: Asteroid (41) Daphne
 #: src/translations.h:123
 msgid "Daphne"
-msgstr ""
+msgstr "Daphne"
 
 #. TRANSLATORS: Asteroid (1221) Amor
 #: src/translations.h:125
@@ -2084,7 +2084,7 @@ msgstr "Makemake"
 #. TRANSLATORS: Proper name of comet C/1680 V1
 #: src/translations.h:140
 msgid "Great Comet of 1680 (C/1680 V1)"
-msgstr ""
+msgstr "Komet Besar 1680 (C/1680 V1)"
 
 #. TRANSLATORS: Name of supernova SN 1572A and script name
 #: src/translations.h:143
@@ -2229,12 +2229,12 @@ msgstr "Garching"
 #. TRANSLATORS: Name of landscape
 #: src/translations.h:207
 msgid "Geneva"
-msgstr ""
+msgstr "Geneva"
 
 #. TRANSLATORS: Name of landscape
 #: src/translations.h:209
 msgid "Grossmugl"
-msgstr ""
+msgstr "Grossmugl"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:216
@@ -4095,7 +4095,7 @@ msgstr "Magnitud mutlak"
 
 #: src/ui_configurationDialog.h:1017
 msgid "Galactic coordinates"
-msgstr ""
+msgstr "Koordinat bima sakti"
 
 #: src/ui_configurationDialog.h:1019
 msgid "Spectral class, nebula type, etc."
@@ -4103,7 +4103,7 @@ msgstr "Kelas spektral, jenis nebula, dll."
 
 #: src/ui_configurationDialog.h:1021
 msgid "Additional information"
-msgstr ""
+msgstr "Maklumat tambahan"
 
 #: src/ui_configurationDialog.h:1023
 msgid "Topocentric equatorial coordinates"
@@ -4140,7 +4140,7 @@ msgstr "Saiz"
 
 #: src/ui_configurationDialog.h:1037
 msgid "The type of the object (star, planet, etc.)"
-msgstr ""
+msgstr "Jenis objek (bintang, planet, dll.)"
 
 #: src/ui_configurationDialog.h:1039
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:268
@@ -7589,17 +7589,17 @@ msgstr "Tahun ditemui"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:212
 msgid "Habitable class"
-msgstr ""
+msgstr "Kelas boleh didiami"
 
 #. TRANSLATORS: Full phrase is "Mean Surface Temperature"
 #: plugins/Exoplanets/src/Exoplanet.cpp:214
 msgid "Mean surface temp."
-msgstr ""
+msgstr "Suhu permukaan min."
 
 #. TRANSLATORS: ESI = Earth Similarity Index
 #: plugins/Exoplanets/src/Exoplanet.cpp:216
 msgid "ESI"
-msgstr ""
+msgstr "ESI"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:120
 msgid "Exoplanets Plug-in"
@@ -7621,6 +7621,9 @@ msgid ""
 "\"%1The Habitable Exoplanets Catalog%3\" by %2Planetary Habitability "
 "Laboratory%3."
 msgstr ""
+"Senarai ekso-planet boleh didiami berpotensi dan data mengenainya diambil "
+"dari \"%1The Habitable Exoplanets Catalog%3\" oleh %2Planetary Habitability "
+"Laboratory%3."
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:137
@@ -7634,7 +7637,7 @@ msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:150
 msgid "Potential habitable exoplanets"
-msgstr ""
+msgstr "Ekso-planet boleh didiami berpotensi"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:151
 msgid ""
@@ -7642,10 +7645,13 @@ msgid ""
 "some information about those planets - habitable class, mean surface "
 "temperature and Earth Similarity Index."
 msgstr ""
+"Pemalam ini boleh paparkan ekso-planet boleh didiami berpotensi (penanda "
+"jingga) dan beberapa maklumat mengenai planet tersebut - kelas boleh "
+"didiami, suhu permukaan min dan Indeks Keserupaan Bumi."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:152
 msgid "Habitable Class"
-msgstr ""
+msgstr "Kelas Boleh Didiami"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:152
 msgid ""
@@ -7656,10 +7662,16 @@ msgid ""
 "life, whereas class O or E would only support extremophilic life. Non-"
 "habitable planets are simply given the class X (or NH)."
 msgstr ""
+"Kelaskan planet boleh didiami berdasarkan suhu: hipopsikoplanet (O atau hP) "
+"= sangat sejuk (kurang - 50°C); psikoplanet (P) = sejuk; mesoplanet (M) = "
+"suhu-sederhana (0–50°C); termoplanet (T) = panas; hipertermoplanet (E atau "
+"hT) = sangat panas (diatas 100°C). Mesoplanet adalah sesuai untuk hidupan "
+"kompleks, manakala kelas O atau E hanya menyokong hidupan ektremofilik. "
+"Planet tidak boleh didiami hanya dikelaskan dengan kelas X (atau NH)."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:153
 msgid "Mean Surface Temperature"
-msgstr ""
+msgstr "Suhu Permukaan Min"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:153
 msgid ""
@@ -7667,10 +7679,13 @@ msgid ""
 "ratio and a greenhouse effect due to 1 percent of CO2 (assuming an albedo of "
 "0.3 in all cases)."
 msgstr ""
+"Suhu dalam (°C) berdasarkan atmosfera bumi yang serupa terhadap nisbah jisim "
+"planet dan kesan rumah hijau disebabkan 1 peratus CO2 (menganggap albedo 0.3 "
+"dalam semua situasi)."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:154
 msgid "Earth Similarity Index (ESI)"
-msgstr ""
+msgstr "Indeks Keserupaan Bumi (ESI)"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:154
 msgid ""
@@ -7678,6 +7693,9 @@ msgid ""
 "like. ESI depends on the planet's radius, density, escape velocity, and "
 "surface temperature."
 msgstr ""
+"Keserupaan dengan Bumi pada skala dari 0 hingga 1, dengan 1 paling menyamai-"
+"Bumi. ESI bergantung pada jejari, ketumpatan, halaju keluar, dan suhu "
+"permukaan planet."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:167
 msgid "General professional Web sites relevant to extrasolar planets"
@@ -7809,7 +7827,7 @@ msgstr "Maklumat"
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:321
 msgctxt "tab in plugin windows"
 msgid "Websites"
-msgstr ""
+msgstr "Laman Sesawang"
 
 #: plugins/Observability/src/Observability.cpp:65
 msgid "Observability analysis"
