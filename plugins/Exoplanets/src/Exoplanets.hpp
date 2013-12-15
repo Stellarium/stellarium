@@ -131,11 +131,14 @@ public:
 	//! @param b if true, updates will be enabled, else they will be disabled
 	void setUpdatesEnabled(bool b) {updatesEnabled=b;}
 
-	bool getDisplayMode(void) {return distributionEnabled;}
-	void setDisplayMode(bool b) {distributionEnabled=b;}
+	bool getDisplayMode(void);
+	void setDisplayMode(bool b);
 
-	bool getTimelineMode(void) {return timelineEnabled;}
-	void setTimelineMode(bool b) {timelineEnabled=b;}
+	bool getTimelineMode(void);
+	void setTimelineMode(bool b);
+
+	QString getMarkerColor(bool habitable);
+	void setMarkerColor(QString c, bool h);
 
 	void setEnableAtStartup(bool b) { enableAtStartup=b; }
 	bool getEnableAtStartup(void) { return enableAtStartup; }
@@ -225,9 +228,7 @@ private:
 	QList<int> messageIDs;
 	bool updatesEnabled;
 	QDateTime lastUpdate;
-	int updateFrequencyHours;
-	bool distributionEnabled;
-	bool timelineEnabled;
+	int updateFrequencyHours;	
 	bool enableAtStartup;
 
 	QSettings* conf;

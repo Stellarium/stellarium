@@ -107,6 +107,10 @@ private:
 
 	static StelTextureSP hintTexture;
 	static StelTextureSP markerTexture;
+	static Vec3f habitableExoplanetMarkerColor;
+	static Vec3f exoplanetMarkerColor;
+	static bool distributionMode;
+	static bool timelineMode;
 
 	void draw(StelCore* core, StelPainter& painter);
 
