@@ -86,6 +86,8 @@ private:
 
 	static StelTextureSP hintTexture;
 	static StelTextureSP markerTexture;
+	static bool distributionMode;
+	static Vec3f markerColor;
 
 	void draw(StelCore* core, StelPainter& painter);
 	//! Calculate a color of quasar
