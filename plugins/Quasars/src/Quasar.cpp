@@ -37,6 +37,9 @@
 
 StelTextureSP Quasar::markerTexture;
 
+bool Quasar::distributionMode = false;
+Vec3f Quasar::markerColor = Vec3f(1.0f,0.5f,0.4f);
+
 Quasar::Quasar(const QVariantMap& map)
 		: initialized(false)
 {
@@ -143,7 +146,7 @@ double Quasar::getAngularSize(const StelCore*) const
 float Quasar::getSelectPriority(const StelCore* core) const
 {
 	float mag = getVMagnitudeWithExtinction(core);
-	if (GETSTELMODULE(Quasars)->getDisplayMode())
+	if (distributionMode)
 		mag = 4.f;
 	return mag;
 }
@@ -157,8 +160,7 @@ void Quasar::draw(StelCore* core, StelPainter& painter)
 {
 	StelSkyDrawer* sd = core->getSkyDrawer();
 
-	Vec3f color = sd->indexToColor(BvToColorIndex(bV))*0.75f;
-	Vec3f dcolor = Vec3f(1.0f,0.5f,0.4f);
+	Vec3f color = sd->indexToColor(BvToColorIndex(bV))*0.75f;	
 	RCMag rcMag;
 	float size, shift=0;
 	double mag;
@@ -166,11 +168,11 @@ void Quasar::draw(StelCore* core, StelPainter& painter)
 	StelUtils::spheToRect(qRA, qDE, XYZ);
 	mag = getVMagnitudeWithExtinction(core);	
 
-	if (GETSTELMODULE(Quasars)->getDisplayMode())
+	if (distributionMode)
 	{
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_ONE, GL_ONE);
-		painter.setColor(dcolor[0], dcolor[1], dcolor[2], 1);
+		painter.setColor(markerColor[0], markerColor[1], markerColor[2], 1);
 
 		Quasar::markerTexture->bind();
 		//size = getAngularSize(NULL)*M_PI/180.*painter.getProjector()->getPixelPerRadAtCenter();
