@@ -114,7 +114,7 @@ public:
 
 	//! Set up the plugin with default values.  This means clearing out the MeteorShower section in the
 	//! main config.ini (if one already exists), and populating it with default values.  It also
-	//! creates the default meteors.json file from the resource embedded in the plugin lib/dll file.
+	//! creates the default showers.json file from the resource embedded in the plugin lib/dll file.
 	void restoreDefaults(void);
 
 	//! Read (or re-read) settings from the main config file.  This will be called from init and also
@@ -224,14 +224,18 @@ private:
 	//! read the json file and create the meteor Showers.
 	void readJsonFile(void);
 
-	//! Creates a backup of the showers.json file called meteors.json.old
+	//! Creates a backup of the showers.json file called showers.json.old
 	//! @param deleteOriginal if true, the original file is removed, else not
 	//! @return true on OK, false on failure
 	bool backupJsonFile(bool deleteOriginal=false);
 
-	//! Get the version from the "version" value in the meteors.json file
-	//! @return version string, e.g. "0.1.0"
-	const QString getJsonFileVersion(void);
+	//! Get the version from the "version of format" value in the showers.json file
+	//! @return version, e.g. "1"
+	int getJsonFileFormatVersion(void);
+	
+	//! Check format of the catalog of meteor showers
+	//! @return valid boolean, e.g. "true"
+	bool checkJsonFileFormat(void);
 
 	//! Parse JSON file and load showers to map
 	QVariantMap loadShowersMap(QString path=QString());

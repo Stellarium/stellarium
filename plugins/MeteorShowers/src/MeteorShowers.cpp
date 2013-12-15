@@ -56,6 +56,8 @@
 #include <QStringList>
 #include <QDir>
 
+#define CATALOG_FORMAT_VERSION 1 /* Version of format of catalog */
+
 /*
  This method is the one called automatically by the StelModuleMgr just
  after loading the dynamic library
@@ -174,7 +176,7 @@ void MeteorShowers::init()
 	// If the json file does not already exist, create it from the resource in the QT resource
 	if(!QFileInfo(showersJsonPath).exists())
 	{
-		if(getJsonFileVersion() != METEORSHOWERS_PLUGIN_VERSION)
+		if(!checkJsonFileFormat() || getJsonFileFormatVersion()<CATALOG_FORMAT_VERSION)
 		{
 			displayMessage(q_("The old showers.json file is no longer compatible - using default file"), "#bb0000");
 			restoreDefaultJsonFile();
@@ -821,9 +823,9 @@ bool MeteorShowers::backupJsonFile(bool deleteOriginal)
 	return true;
 }
 
-const QString MeteorShowers::getJsonFileVersion(void)
+int MeteorShowers::getJsonFileFormatVersion(void)
 {
-	QString jsonVersion("unknown");
+	int jsonVersion = -1;
 	QFile showersJsonFile(showersJsonPath);
 	if(!showersJsonFile.open(QIODevice::ReadOnly))
 	{
@@ -835,17 +837,37 @@ const QString MeteorShowers::getJsonFileVersion(void)
 	map = StelJsonParser::parse(&showersJsonFile).toMap();
 	if(map.contains("version"))
 	{
-		QString version = map.value("version").toString();
-		QRegExp vRx(".*(\\d+\\.\\d+\\.\\d+).*");
-		if(vRx.exactMatch(version))
-		{
-			jsonVersion = vRx.capturedTexts().at(1);
-		}
+		jsonVersion = map.value("version").toInt();
 	}
 
 	showersJsonFile.close();
-	qDebug() << "MeteorShowers::getJsonFileVersion() version from file:" << jsonVersion;
+	qDebug() << "MeteorShowers::getJsonFileFormatVersion() version from file:" << jsonVersion;
 	return jsonVersion;
+}
+
+bool MeteorShowers::checkJsonFileFormat()
+{
+	QFile showersJsonFile(showersJsonPath);
+	if(!showersJsonFile.open(QIODevice::ReadOnly))
+	{
+		qWarning() << "MeteorShowers::init cannot open " << QDir::toNativeSeparators(showersJsonPath);
+		return false;
+	}
+	
+	QVariantMap map;
+	try
+	{
+		map = StelJsonParser::parse(&showersJsonFile).toMap();
+		showersJsonFile.close();
+	}
+	catch(std::runtime_error& e)
+	{
+		qDebug() << "MeteorShowers::checkJsonFileFormat(): file format is wrong!";
+		qDebug() << "MeteorShowers::checkJsonFileFormat() error:" << e.what();
+		return false;
+	}
+	
+	return true;
 }
 
 void MeteorShowers::readSettingsFromConfig(void)
