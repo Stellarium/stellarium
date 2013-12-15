@@ -606,6 +606,7 @@ void Quasars::restoreDefaultConfigIni(void)
 	conf->setValue("url", "http://stellarium.org/json/quasars.json");
 	conf->setValue("update_frequency_days", 100);
 	conf->setValue("flag_show_quasars_button", true);
+	conf->setValue("marker_color", "1.0,0.5,0.4");
 	conf->endGroup();
 }
 
@@ -617,7 +618,8 @@ void Quasars::readSettingsFromConfig(void)
 	updateFrequencyDays = conf->value("update_frequency_days", 100).toInt();
 	lastUpdate = QDateTime::fromString(conf->value("last_update", "2012-05-24T12:00:00").toString(), Qt::ISODate);
 	updatesEnabled = conf->value("updates_enabled", true).toBool();
-	distributionEnabled = conf->value("distribution_enabled", false).toBool();
+	setDisplayMode(conf->value("distribution_enabled", false).toBool());
+	setMarkerColor(conf->value("marker_color", "1.0,0.5,0.4").toString());
 	enableAtStartup = conf->value("enable_at_startup", false).toBool();
 	flagShowQuasarsButton = conf->value("flag_show_quasars_button", true).toBool();
 
@@ -631,9 +633,10 @@ void Quasars::saveSettingsToConfig(void)
 	conf->setValue("url", updateUrl);
 	conf->setValue("update_frequency_days", updateFrequencyDays);
 	conf->setValue("updates_enabled", updatesEnabled );
-	conf->setValue("distribution_enabled", distributionEnabled);
+	conf->setValue("distribution_enabled", getDisplayMode());
 	conf->setValue("enable_at_startup", enableAtStartup);
 	conf->setValue("flag_show_quasars_button", flagShowQuasarsButton);
+	conf->setValue("marker_color", getMarkerColor());
 
 	conf->endGroup();
 }
@@ -758,4 +761,25 @@ void Quasars::setFlagShowQuasarsButton(bool b)
 		gui->getButtonBar()->hideButton("actionShow_Quasars");
 	}
 	flagShowQuasarsButton = b;
+}
+
+bool Quasars::getDisplayMode()
+{
+	return Quasar::distributionMode;
+}
+
+void Quasars::setDisplayMode(bool b)
+{
+	Quasar::distributionMode=b;
+}
+
+QString Quasars::getMarkerColor()
+{
+	Vec3f c = Quasar::markerColor;
+	return QString("%1,%2,%3").arg(c[0]).arg(c[1]).arg(c[2]);
+}
+
+void Quasars::setMarkerColor(QString c)
+{
+	Quasar::markerColor = StelUtils::strToVec3f(c);
 }
