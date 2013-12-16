@@ -414,44 +414,40 @@ void MeteorShowers::updateActiveInfo(StelCore* core)
 	{
 		if(ms && ms->initialized)
 		{
-			//if the sky date changed
-			if(changedDate)
+			//if the meteor shower is active, get data
+			if(ms->isActive)
 			{
-				//if the meteor shower is active, get data
-				if(ms->isActive)
+				//First, check if there is already data about the constellation in "activeInfo"
+				//The var "index" will be updated to show the correct place do put the new information
+				int index = 0;
+				foreach(const activeData &a, activeInfo)
 				{
-					//First, check if there is already data about the constellation in "activeInfo"
-					//The var "index" will be updated to show the correct place do put the new information
-					int index = 0;
-					foreach(const activeData &a, activeInfo)
-					{
-						if(a.showerID == ms->showerID)  //exists
-							break;
-						index++;
-					}
+					if(a.showerID == ms->showerID)  //exists
+						break;
+					index++;
+				}
 
-					if(activeInfo.size() < index + 1) //new?, put in the end
-					{
-						activeData newData;
-						newData.showerID = ms->showerID;
-						newData.speed = ms->speed;
-						newData.radiantAlpha = ms->radiantAlpha;
-						newData.radiantDelta = ms->radiantDelta;
-						newData.zhr = ms->zhr;
-						newData.variable = ms->variable;
-						newData.start = ms->start;
-						newData.finish = ms->finish;
-						newData.peak = ms->peak;
-						activeInfo.append(newData);
-					}
-					else //just overwrites
-					{
-						activeInfo[index].zhr = ms->zhr;
-						activeInfo[index].variable = ms->variable;
-						activeInfo[index].start = ms->start;
-						activeInfo[index].finish = ms->finish;
-						activeInfo[index].peak = ms->peak;
-					}
+				if(activeInfo.size() < index + 1) //new?, put in the end
+				{
+					activeData newData;
+					newData.showerID = ms->showerID;
+					newData.speed = ms->speed;
+					newData.radiantAlpha = ms->radiantAlpha;
+					newData.radiantDelta = ms->radiantDelta;
+					newData.zhr = ms->zhr;
+					newData.variable = ms->variable;
+					newData.start = ms->start;
+					newData.finish = ms->finish;
+					newData.peak = ms->peak;
+					activeInfo.append(newData);
+				}
+				else //just overwrites
+				{
+					activeInfo[index].zhr = ms->zhr;
+					activeInfo[index].variable = ms->variable;
+					activeInfo[index].start = ms->start;
+					activeInfo[index].finish = ms->finish;
+					activeInfo[index].peak = ms->peak;
 				}
 			}
 		}
