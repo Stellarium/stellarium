@@ -26,10 +26,8 @@
 #include "StelMovementMgr.hpp"
 #include "StelPainter.hpp"
 
-MeteorStream::MeteorStream(const StelCore* core, double velocity, double rAlpha, double rDelta)
+MeteorStream::MeteorStream(const StelCore* core, double velocity, double radiantAlpha, double radiantDelta)
 {
-	radiantAlpha = rAlpha;
-	radiantDelta = rDelta;
 	speed = velocity;
 
 	maxMag = 1; //start with the maximum mag
@@ -45,7 +43,7 @@ MeteorStream::MeteorStream(const StelCore* core, double velocity, double rAlpha,
 	viewMatrix = Mat4d::zrotation(radiantAlpha) * Mat4d::yrotation(M_PI_2 - radiantDelta);
 
 	// find observer position in meteor coordinate system
-	obs = core->altAzToEquinoxEqu(Vec3d(0,0,EARTH_RADIUS));
+	obs = core->altAzToJ2000(Vec3d(0,0,EARTH_RADIUS));
 	obs.transfo4d(viewMatrix.transpose());
 
 	// select random trajectory using polar coordinates in XY plane, centered on observer
@@ -133,7 +131,8 @@ MeteorStream::~MeteorStream()
 // returns true if alive
 bool MeteorStream::update(double deltaTime)
 {
-	if(!alive) return(0);
+	if(!alive)
+		return(0);
 
 	if(position[2] < endH)
 	{
@@ -141,7 +140,8 @@ bool MeteorStream::update(double deltaTime)
 		// assume linear fade out
 
 		mag -= maxMag * deltaTime/500.0f;
-		if(mag < 0) alive=0;    // no longer visible
+		if(mag < 0)
+			alive=0;    // no longer visible
 
 	}
 
@@ -178,9 +178,6 @@ void MeteorStream::draw(const StelCore* core, StelPainter& sPainter)
 
 	const StelProjectorP proj = sPainter.getProjector();
 
-	Vec3d XYZ;
-	StelUtils::spheToRect(radiantAlpha, radiantDelta, XYZ);
-
 	Vec3d spos = position;
 	Vec3d epos = posTrain;
 
@@ -190,8 +187,8 @@ void MeteorStream::draw(const StelCore* core, StelPainter& sPainter)
 
 	// convert to local and correct for earth radius
 	//[since equ and local coordinates in stellarium use same 0 point!]
-	spos = core->equinoxEquToAltAz(spos);
-	epos = core->equinoxEquToAltAz(epos);
+	spos = core->j2000ToAltAz(spos);
+	epos = core->j2000ToAltAz(epos);
 	spos[2] -= EARTH_RADIUS;
 	epos[2] -= EARTH_RADIUS;
 	// 1216 is to scale down under 1 for desktop version
@@ -207,7 +204,7 @@ void MeteorStream::draw(const StelCore* core, StelPainter& sPainter)
 		Vec3d posi = posInternal;
 		posi[2] = position[2] + (posTrain[2] - position[2])/2;
 		posi.transfo4d(viewMatrix);
-		posi = core->equinoxEquToAltAz(posi);
+		posi = core->j2000ToAltAz(posi);
 		posi[2] -= EARTH_RADIUS;
 		posi/=1216;
 
