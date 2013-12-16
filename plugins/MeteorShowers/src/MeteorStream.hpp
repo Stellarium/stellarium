@@ -42,7 +42,7 @@ public:
 	//! @param velocity the speed of the meteor in km/s.
 	//! @param rAlpha the radiant alpha in rad
 	//! @param rDelta the radiant delta in rad
-	MeteorStream(const StelCore*, double velocity, double rAlpha, double rDelta);
+	MeteorStream(const StelCore*, double velocity, double radiantAlpha, double radiantDelta);
 	virtual ~MeteorStream();
 
 	//! Updates the position of the meteor, and expires it if necessary.
@@ -57,10 +57,6 @@ public:
 	bool isAlive(void);
 
 private:
-	double speed;           //! Velocity of meteor in km/s
-	double radiantAlpha;    //! R.A. for radiant of meteor
-	double radiantDelta;    //! Dec. for radiant of meteor
-
 	bool alive;             //! Indicate if the meteor it still visible
 	bool train;             //! Indicate if the point or train is visible
 
@@ -70,6 +66,7 @@ private:
 	Vec3d posInternal;      //! Middle of train
 	Vec3d posTrain;         //! End of train
 
+	double speed;           //! Velocity of meteor in km/s
 	double xydistance;      //! Distance in XY plane (orthogonal to meteor path) from observer to meteor
 	double initDist;        //! Initial distance from observer
 	double minDist;         //! Nearest point to observer along path
