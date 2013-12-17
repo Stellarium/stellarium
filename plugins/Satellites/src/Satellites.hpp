@@ -76,7 +76,6 @@ struct TleSource
 
 typedef QList<TleSource> TleSourceList;
 
-
 /*! @mainpage notitle
 @section overview Plugin Overview
 
@@ -333,6 +332,12 @@ public:
 	static void parseTleFile(QFile& openFile,
 	                         TleDataHash& tleList,
 	                         bool addFlagValue = false);
+
+	//! Reads qs.mag file and its parsing for getting id and standard magnitude
+	//! for satellites.
+	//! @note We are having permissions for use this file from Mike McCants.
+	//! @param name of file
+	void parseQSMagFile(QString qsMagFile);
 	
 	bool getFlagHints() {return hintFader;}
 	//! get the label font size.
@@ -454,6 +459,9 @@ private:
 	//! Read the version number from the "creator" value in the catalog file.
 	//! @return version string, e.g. "0.6.1"
 	const QString readCatalogVersion();
+	//! Replace the qs.mag file with the default one.
+	void restoreDefaultQSMagFile();
+
 
 	//! Save a structure representing a satellite catalog to a JSON file.
 	//! If no path is specified, catalogPath is used.
@@ -477,6 +485,8 @@ private:
 	//! place.)
 	static void translations();
 
+	//! Path to the qs.mag file.
+	QString qsMagFilePath;
 	//! Path to the satellite catalog file.
 	QString catalogPath;
 	//! Plug-in data directory.
@@ -487,6 +497,8 @@ private:
 	
 	QList<SatelliteP> satellites;
 	SatellitesListModel* satelliteListModel;
+
+	QHash<QString, double> qsMagList;
 	
 	//! Union of the groups used by all loaded satellites - see @ref groups.
 	//! For simplicity, it can only grow until the plug-in is unloaded -
