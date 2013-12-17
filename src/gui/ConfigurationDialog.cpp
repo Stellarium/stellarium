@@ -134,21 +134,12 @@ void ConfigurationDialog::createDialogContent()
 
 	// Main tab
 	// Fill the language list widget from the available list
-	QString appLang = StelApp::getInstance().getLocaleMgr().getAppLanguage();
-	QComboBox* cb = ui->programLanguageComboBox;	
+	QComboBox* cb = ui->programLanguageComboBox;
 	cb->clear();
 	cb->addItems(StelTranslator::globalTranslator->getAvailableLanguagesNamesNative(StelFileMgr::getLocaleDir()));
 	cb->model()->sort(0);
-	QString l2 = StelTranslator::iso639_1CodeToNativeName(appLang);
-	int lt = cb->findText(l2, Qt::MatchExactly);
-	if (lt == -1 && appLang.contains('_'))
-	{
-		l2 = appLang.left(appLang.indexOf('_'));
-		l2=StelTranslator::iso639_1CodeToNativeName(l2);
-		lt = cb->findText(l2, Qt::MatchExactly);
-	}
-	if (lt!=-1)
-		cb->setCurrentIndex(lt);
+	updateCurrentLanguage();
+	connect(cb->lineEdit(), SIGNAL(editingFinished()), this, SLOT(updateCurrentLanguage()));
 	connect(cb, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(selectLanguage(const QString&)));
 
 	connect(ui->getStarsButton, SIGNAL(clicked()), this, SLOT(downloadStars()));
@@ -283,6 +274,26 @@ void ConfigurationDialog::createDialogContent()
 
 	updateConfigLabels();
 	updateTabBarListWidgetWidth();
+}
+
+void ConfigurationDialog::updateCurrentLanguage()
+{
+	QComboBox* cb = ui->programLanguageComboBox;
+	QString appLang = StelApp::getInstance().getLocaleMgr().getAppLanguage();
+	QString l2 = StelTranslator::iso639_1CodeToNativeName(appLang);
+
+	if (cb->currentText() == l2)
+		return;
+
+	int lt = cb->findText(l2, Qt::MatchExactly);
+	if (lt == -1 && appLang.contains('_'))
+	{
+		l2 = appLang.left(appLang.indexOf('_'));
+		l2=StelTranslator::iso639_1CodeToNativeName(l2);
+		lt = cb->findText(l2, Qt::MatchExactly);
+	}
+	if (lt!=-1)
+		cb->setCurrentIndex(lt);
 }
 
 void ConfigurationDialog::selectLanguage(const QString& langName)
