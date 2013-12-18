@@ -110,6 +110,8 @@ public:
         //!   David A. Vallado
         int getVisibilityPredict();
 
+	double getPhaseAngle();
+
 
 private:
         // Operation calcObserverECIPosition
