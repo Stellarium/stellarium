@@ -351,6 +351,7 @@ Vec3f Satellite::getInfoColor(void) const
 
 float Satellite::getVMagnitude(const StelCore* core) const
 {	
+	Q_UNUSED(core);
 	float vmag = 5.0;
 	if (stdMag!=99.f)
 	{
