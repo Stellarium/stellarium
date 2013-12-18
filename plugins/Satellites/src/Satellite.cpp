@@ -243,15 +243,7 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 	
 	if ((flags & Magnitude) && (stdMag!=99.f))
 	{
-		if (visibility==VISIBLE)
-		{
-			oss << q_("Approx. magnitude: <b>%1</b>").arg(QString::number(getVMagnitude(core), 'f', 2));
-		}
-		else
-		{
-			oss << q_("Approx. magnitude: <b>%1</b>").arg(q_("too faint"));
-		}
-		oss  << "<br/>";
+		oss << q_("Approx. magnitude: <b>%1</b>").arg(QString::number(getVMagnitude(core), 'f', 2)) << "<br/>";
 	}
 
 	// Ra/Dec etc.
@@ -362,12 +354,18 @@ float Satellite::getVMagnitude(const StelCore* core) const
 	float vmag = 5.0;
 	if (stdMag!=99.f)
 	{
-		// Calculation of approx. visual magnitude for artifical satellites
-		// described here: http://www.prismnet.com/~mmccants/tles/mccdesc.html
-		double fracil = calculateIlluminatedFraction();		
-		if (fracil==0)
-			fracil = 0.000001;
-		vmag = stdMag - 15.75 + 2.5 * std::log10(range * range / fracil);
+		// OK, artifical satellite has value for standard magnitude
+		if (visibility==VISIBLE)
+		{
+			// Calculation of approx. visual magnitude for artifical satellites
+			// described here: http://www.prismnet.com/~mmccants/tles/mccdesc.html
+			double fracil = calculateIlluminatedFraction();
+			if (fracil==0)
+				fracil = 0.000001;
+			vmag = stdMag - 15.75 + 2.5 * std::log10(range * range / fracil);
+		}
+		else
+			vmag = 17.f; // Artifical satellite is invisible and 17 is hypothetical value of magnitude
 	}
 	return vmag;
 }
