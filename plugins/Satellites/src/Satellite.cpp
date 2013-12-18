@@ -49,6 +49,7 @@ int Satellite::orbitLineSegments = 90;
 int Satellite::orbitLineFadeSegments = 4;
 int Satellite::orbitLineSegmentDuration = 20;
 bool Satellite::orbitLinesFlag = true;
+bool Satellite::realisticModeFlag = false;
 
 
 Satellite::Satellite(const QString& identifier, const QVariantMap& map)
@@ -352,7 +353,10 @@ Vec3f Satellite::getInfoColor(void) const
 float Satellite::getVMagnitude(const StelCore* core) const
 {	
 	Q_UNUSED(core);
-	float vmag = 5.0;
+	float vmag;
+	if (!realisticModeFlag)
+		vmag = 5.0;
+
 	if (stdMag!=99.f)
 	{
 		// OK, artifical satellite has value for standard magnitude
@@ -521,29 +525,56 @@ bool Satellite::operator <(const Satellite& another) const
 		return false;
 }
 
-void Satellite::draw(const StelCore* core, StelPainter& painter, float)
+void Satellite::draw(StelCore* core, StelPainter& painter, float)
 {
 	if (core->getJDay() < jdLaunchYearJan1) return;
 
 	XYZ = getJ2000EquatorialPos(core);
+	StelSkyDrawer* sd = core->getSkyDrawer();
 	Vec3f drawColor;
 	(visibility==RADAR_NIGHT) ? drawColor = Vec3f(0.2f,0.2f,0.2f) : drawColor = hintColor;
 	glColor4f(drawColor[0],drawColor[1],drawColor[2], Satellite::hintBrightness);
 
 	StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
 
-	Vec3d xy;
-	if (prj->project(XYZ,xy))
+	if (realisticModeFlag)
 	{
-		if (Satellite::showLabels)
-		{
-			painter.drawText(xy[0], xy[1], name, 0, 10, 10, false);
-			Satellite::hintTexture->bind();
-		}
-		painter.drawSprite2dMode(xy[0], xy[1], 11);
+		double mag = getVMagnitude(core);
+		RCMag rcMag;
+		Vec3f color = Vec3f(1.f,1.f,1.f);
 
-		if (orbitDisplayed && Satellite::orbitLinesFlag) drawOrbit(painter);
+		StelProjectorP origP = painter.getProjector(); // Save projector state
+		painter.setProjector(prj);
+
+		sd->preDrawPointSource(&painter);
+		if (mag <= sd->getLimitMagnitude())
+		{
+			sd->computeRCMag(mag, &rcMag);
+			sd->drawPointSource(&painter, Vec3f(XYZ[0], XYZ[1], XYZ[2]), rcMag, color, true);
+			painter.setColor(color[0], color[1], color[2], 1);
+
+			if (Satellite::showLabels)
+				painter.drawText(XYZ, name, 0, 10, 10, false);
+
+		}
+
+		sd->postDrawPointSource(&painter);
+
+		painter.setProjector(origP); // Restrore projector state
 	}
+	else
+	{
+		Vec3d xy;
+		if (prj->project(XYZ,xy))
+		{
+			if (Satellite::showLabels)
+				painter.drawText(xy[0], xy[1], name, 0, 10, 10, false);
+
+			Satellite::hintTexture->bind();
+			painter.drawSprite2dMode(xy[0], xy[1], 11);
+		}
+	}
+	if (orbitDisplayed && Satellite::orbitLinesFlag) drawOrbit(painter);
 }
 
 
