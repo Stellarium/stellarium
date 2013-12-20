@@ -485,6 +485,10 @@ private:
 	
 	//! Sets lastUpdate to the current date/time and saves it to the settings.
 	void markLastUpdate();
+
+	//! Check format of the catalog of satellites
+	//! @return valid boolean, e.g. "true"
+	bool checkJsonFileFormat();
 	
 	//! A fake method for strings marked for translation.
 	//! Use it instead of translations.h for N_() strings, except perhaps for

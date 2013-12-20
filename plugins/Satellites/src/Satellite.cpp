@@ -353,16 +353,16 @@ Vec3f Satellite::getInfoColor(void) const
 float Satellite::getVMagnitude(const StelCore* core) const
 {	
 	Q_UNUSED(core);
-	float vmag = 10.f;
+	float vmag = 7.f; // Optimistic value of magnitude for artificial satellite without data for standard magnitude
 	if (!realisticModeFlag)
 		vmag = 5.0;
 
 	if (stdMag!=99.f)
 	{
-		// OK, artifical satellite has value for standard magnitude
+		// OK, artificial satellite has value for standard magnitude
 		if (visibility==VISIBLE)
 		{
-			// Calculation of approx. visual magnitude for artifical satellites
+			// Calculation of approx. visual magnitude for artificial satellites
 			// described here: http://www.prismnet.com/~mmccants/tles/mccdesc.html
 			double fracil = calculateIlluminatedFraction();
 			if (fracil==0)
@@ -370,7 +370,7 @@ float Satellite::getVMagnitude(const StelCore* core) const
 			vmag = stdMag - 15.75 + 2.5 * std::log10(range * range / fracil);
 		}
 		else
-			vmag = 17.f; // Artifical satellite is invisible and 17 is hypothetical value of magnitude
+			vmag = 17.f; // Artificial satellite is invisible and 17 is hypothetical value of magnitude
 	}
 	return vmag;
 }
