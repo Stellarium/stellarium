@@ -10,14 +10,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 20130131_stellarium_stellarium-is\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-19 00:53+0700\n"
+"POT-Creation-Date: 2013-12-20 22:08+0700\n"
 "PO-Revision-Date: 2013-05-17 23:23+0000\n"
 "Last-Translator: Sverrir Gudmundsson <Unknown>\n"
 "Language-Team: Icelandic <translation-team-is@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-12-19 05:19+0000\n"
+"X-Launchpad-Export-Date: 2013-12-21 05:20+0000\n"
 "X-Generator: Launchpad (build 16872)\n"
 "Language: is\n"
 
@@ -7267,9 +7267,8 @@ msgid "Exoplanets configuration window"
 msgstr "Stillingagluggi fyrir fjarreikistjörnur"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:155
-#: plugins/Exoplanets/src/Exoplanet.cpp:207
-msgid "Exoplanet"
-msgstr "Fjarreikistjarna"
+msgid "planetary system"
+msgstr ""
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:191
 msgid "Metallicity"
@@ -7289,6 +7288,10 @@ msgstr "Radíus"
 #, qt-format
 msgid "Effective temperature: %1 K"
 msgstr "Raunhitastig: %1 K"
+
+#: plugins/Exoplanets/src/Exoplanet.cpp:207
+msgid "Exoplanet"
+msgstr "Fjarreikistjarna"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:208
 msgid "Period"

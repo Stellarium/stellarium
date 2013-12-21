@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-19 00:53+0700\n"
+"POT-Creation-Date: 2013-12-20 22:08+0700\n"
 "PO-Revision-Date: 2012-11-24 19:42+0000\n"
 "Last-Translator: Alexander Mackinnon Jansen <alexander.jansen@hesbynett.no>\n"
 "Language-Team: Norwegian Nynorsk <nn@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-12-19 05:21+0000\n"
+"X-Launchpad-Export-Date: 2013-12-21 05:23+0000\n"
 "X-Generator: Launchpad (build 16872)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:106 src/core/modules/StarMgr.cpp:336
@@ -7398,9 +7398,8 @@ msgid "Exoplanets configuration window"
 msgstr "Innstillingsvindu for eksoplanetar"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:155
-#: plugins/Exoplanets/src/Exoplanet.cpp:207
-msgid "Exoplanet"
-msgstr "Eksoplanet"
+msgid "planetary system"
+msgstr ""
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:191
 msgid "Metallicity"
@@ -7420,6 +7419,10 @@ msgstr "Radius"
 #, qt-format
 msgid "Effective temperature: %1 K"
 msgstr "Effektiv temperatur: %1 K"
+
+#: plugins/Exoplanets/src/Exoplanet.cpp:207
+msgid "Exoplanet"
+msgstr "Eksoplanet"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:208
 msgid "Period"
