@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-19 00:53+0700\n"
-"PO-Revision-Date: 2013-12-19 03:05+0000\n"
+"POT-Creation-Date: 2013-12-20 22:08+0700\n"
+"PO-Revision-Date: 2013-12-20 19:17+0000\n"
 "Last-Translator: Alexander Wolf <Unknown>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-12-20 04:42+0000\n"
+"X-Launchpad-Export-Date: 2013-12-21 05:24+0000\n"
 "X-Generator: Launchpad (build 16872)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:106 src/core/modules/StarMgr.cpp:336
@@ -7546,9 +7546,8 @@ msgid "Exoplanets configuration window"
 msgstr "Окно настройки плагина \"Экзопланеты\""
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:155
-#: plugins/Exoplanets/src/Exoplanet.cpp:207
-msgid "Exoplanet"
-msgstr "Экзопланета"
+msgid "planetary system"
+msgstr "планетная система"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:191
 msgid "Metallicity"
@@ -7568,6 +7567,10 @@ msgstr "Радиус"
 #, qt-format
 msgid "Effective temperature: %1 K"
 msgstr "Эффективная температура: %1 K"
+
+#: plugins/Exoplanets/src/Exoplanet.cpp:207
+msgid "Exoplanet"
+msgstr "Экзопланета"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:208
 msgid "Period"

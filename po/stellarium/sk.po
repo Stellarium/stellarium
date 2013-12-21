@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-19 00:53+0700\n"
+"POT-Creation-Date: 2013-12-20 22:08+0700\n"
 "PO-Revision-Date: 2013-12-19 16:56+0000\n"
 "Last-Translator: Juraj Kubica <Juraj.Kubica@seznam.cz>\n"
 "Language-Team: Slovak <sk@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-12-20 04:42+0000\n"
+"X-Launchpad-Export-Date: 2013-12-21 05:25+0000\n"
 "X-Generator: Launchpad (build 16872)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:106 src/core/modules/StarMgr.cpp:336
@@ -7518,9 +7518,8 @@ msgid "Exoplanets configuration window"
 msgstr "Okno nastavení exoplanét"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:155
-#: plugins/Exoplanets/src/Exoplanet.cpp:207
-msgid "Exoplanet"
-msgstr "Exoplanéta"
+msgid "planetary system"
+msgstr ""
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:191
 msgid "Metallicity"
@@ -7540,6 +7539,10 @@ msgstr "Polomer"
 #, qt-format
 msgid "Effective temperature: %1 K"
 msgstr "Efektívna teplota: %1 K"
+
+#: plugins/Exoplanets/src/Exoplanet.cpp:207
+msgid "Exoplanet"
+msgstr "Exoplanéta"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:208
 msgid "Period"

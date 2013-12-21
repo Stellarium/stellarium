@@ -8,14 +8,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Stellarium 0.10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-19 00:53+0700\n"
-"PO-Revision-Date: 2013-12-15 00:03+0000\n"
+"POT-Creation-Date: 2013-12-20 22:08+0700\n"
+"PO-Revision-Date: 2013-12-20 20:56+0000\n"
 "Last-Translator: misibacsi <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-12-19 05:19+0000\n"
+"X-Launchpad-Export-Date: 2013-12-21 05:20+0000\n"
 "X-Generator: Launchpad (build 16872)\n"
 "X-Poedit-Language: Hungarian\n"
 
@@ -260,7 +260,7 @@ msgstr "Távolság: %1 CSE (%2 km)"
 #: src/core/modules/Comet.cpp:161
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 Mio km)"
-msgstr ""
+msgstr "Távolság: %1CsE (%2 millió km)"
 
 #: src/core/modules/Planet.cpp:186
 #, qt-format
@@ -339,7 +339,7 @@ msgstr "csillag"
 #: plugins/Quasars/src/Quasar.cpp:112
 #, qt-format
 msgid "Color Index (B-V): <b>%1</b>"
-msgstr ""
+msgstr "Színindex (B-V): <b>%1</b>"
 
 #: src/core/modules/StarWrapper.cpp:144
 msgid "eruptive variable star"
@@ -652,9 +652,9 @@ msgid ""
 "<em>Astronomical Formulae for Calculators</em>. It was also adopted in the "
 "PC program SunTracker Pro."
 msgstr ""
-"Ez a képlet a Nap, a Hold és a bolygók 1650 utáni megfigyelésein alapszik.  "
+"Ez a képlet a Nap, a Hold és a bolygók 1650 utáni megfigyelésein alapszik. "
 "Spencer Jones (%1) adta meg, és Jean Meeus felhasználta az <em>Astronomical "
-"Formulae for Calculators</em> című munkájában. Az eljárást az PC-re írt "
+"Formulae for Calculators</em> című munkájában. Az eljárást a PC-re írt "
 "SunTracker Pro program is használja."
 
 #: src/core/StelCore.cpp:1465
@@ -881,6 +881,12 @@ msgid ""
 "Solar Eclipses: -1900 to +3000</em> (2006). This formula is also used in the "
 "solar, lunar and planetary ephemeris program SOLEX."
 msgstr ""
+"F. Espenak és J. Meeus megoldása Morrison & Stephenson (2004) munkáján "
+"alapul. Az 1600-2000 közötti adatokra polinomiális illesztést végez. Ezt a "
+"módszert használja a %1NASA Eclipse Web Site%2 a <em>Five Millennium Canon "
+"of Solar Eclipses: -1900 to +3000</em> (2006)-ban. Ugyanezt a képletet "
+"alkalmazza a Nap, a Hold és a bolygók efemeriszét számító SOLEX "
+"csillagászati program is."
 
 #: src/core/StelCore.cpp:1530
 msgid "Used by default."
@@ -1238,7 +1244,7 @@ msgstr ""
 #. TRANSLATORS: Full phrase is "Algorithm of DeltaT"
 #: src/gui/ConfigurationDialog.cpp:1113
 msgid "Algorithm of"
-msgstr "Algoritmus"
+msgstr "DeltaT algoritmusa,"
 
 #: src/gui/ConfigurationDialog.cpp:1124
 msgid "Without correction"
@@ -2020,7 +2026,7 @@ msgstr "Hygiea"
 #. TRANSLATORS: Asteroid (41) Daphne
 #: src/translations.h:123
 msgid "Daphne"
-msgstr ""
+msgstr "Daphne kisbolygó"
 
 #. TRANSLATORS: Asteroid (1221) Amor
 #: src/translations.h:125
@@ -5717,7 +5723,7 @@ msgstr "Halványodás hossza"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:713
 msgid "Realistic mode for the artificial satellites"
-msgstr ""
+msgstr "Műholdak realisztikus módja"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:714
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:238
@@ -6554,7 +6560,7 @@ msgstr "Időzóna beállítása"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:174
 msgid "Day keys"
-msgstr ""
+msgstr "Napok gombja"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:175
 msgid "Startup date/time preset"
@@ -7445,9 +7451,8 @@ msgid "Exoplanets configuration window"
 msgstr "Exobolygó beállító ablak"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:155
-#: plugins/Exoplanets/src/Exoplanet.cpp:207
-msgid "Exoplanet"
-msgstr "Exobolygó"
+msgid "planetary system"
+msgstr ""
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:191
 msgid "Metallicity"
@@ -7468,6 +7473,10 @@ msgstr "Sugár"
 msgid "Effective temperature: %1 K"
 msgstr "Effektív hőmérséklet: %1 K"
 
+#: plugins/Exoplanets/src/Exoplanet.cpp:207
+msgid "Exoplanet"
+msgstr "Exobolygó"
+
 #: plugins/Exoplanets/src/Exoplanet.cpp:208
 msgid "Period"
 msgstr "Periódus"
@@ -7479,7 +7488,7 @@ msgstr "nap"
 #: plugins/Exoplanets/src/Exoplanet.cpp:209
 #: plugins/Exoplanets/src/Exoplanet.cpp:210
 msgid "Jup"
-msgstr ""
+msgstr "Jup"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:211
 msgid "Semi-Major Axis"
@@ -7507,7 +7516,7 @@ msgstr "Felfedezés éve"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:216
 msgid "Habitable class"
-msgstr ""
+msgstr "Lakhatósági osztály"
 
 #. TRANSLATORS: Full phrase is "Mean Surface Temperature"
 #: plugins/Exoplanets/src/Exoplanet.cpp:218
@@ -7539,6 +7548,9 @@ msgid ""
 "\"%1The Habitable Exoplanets Catalog%3\" by %2Planetary Habitability "
 "Laboratory%3."
 msgstr ""
+"A lehetséges lakható exobolygók listája és adatai a \"%1The Habitable "
+"Exoplanets Catalog%3\" nevű katalógusból származnak (készítő: %2Planetary "
+"Habitability Laboratory%3)."
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:137
@@ -7675,7 +7687,7 @@ msgstr "PlanetQuest - The Search for Another Earth"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:184
 msgid "Open Exoplanet Catalogue"
-msgstr ""
+msgstr "Exoplanet Catalogue megnyitása"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:185
 msgid "The Habitable Exoplanets Catalog"
@@ -7959,9 +7971,9 @@ msgstr ""
 "tudja a felkelési, az áthaladási és lenyugvási időt, az időszakot, amikor az "
 "objektum éjszaka a horizont fölött van, az akronikus és kozmikus "
 "kelést/nyugvást. <br>A naprendszer objektumainak efemerisze és a parallax-"
-"hatás figyelembe van véve.br><br> A szerző köszönetet mond Alexander Wolfnak "
-"és Georg Zottinak a tanácsaikért.<br><br>Ivan Marti-Vidal (Onsala Space "
-"Observatory)"
+"hatás figyelembe van véve.<br><br> A szerző köszönetet mond Alexander "
+"Wolfnak és Georg Zottinak a tanácsaikért.<br><br>Ivan Marti-Vidal (Onsala "
+"Space Observatory)"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:103
 msgid "Explanation of some parameters"
