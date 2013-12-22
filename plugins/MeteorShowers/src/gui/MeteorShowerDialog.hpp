@@ -22,6 +22,8 @@
 #ifndef _METEORSHOWERDIALOG_HPP_
 #define _METEORSHOWERDIALOG_HPP_
 
+#include <QColor>
+#include <QLabel>
 #include <QObject>
 #include "StelDialog.hpp"
 #include "MeteorShowers.hpp"
@@ -44,6 +46,7 @@ protected:
 public slots:
 	void retranslate();
 	void refreshUpdateValues(void);
+	void refreshColorMarkers(void);
 
 private slots:
 	void setUpdateValues(int hours);
@@ -65,7 +68,7 @@ private:
 	void setAboutHtml(void);
 	void updateGuiFromSettings(void);
 	QTimer* updateTimer;
-
+	void setTextureColor(QLabel* texture, QColor color);
 };
 
 #endif // _METEORSHOWERDIALOG_HPP_
