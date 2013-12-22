@@ -104,6 +104,7 @@ void MeteorShowerDialog::createDialogContent()
 	connect(ui->changeColorARR, SIGNAL(clicked()), this, SLOT(setColorARR()));
 	connect(ui->changeColorIR, SIGNAL(clicked()), this, SLOT(setColorIR()));
 
+	connect(ui->labelsGroup, SIGNAL(clicked(bool)), GETSTELMODULE(MeteorShowers), SLOT(setFlagLabels(bool)));
 	connect(ui->fontSizeSpinBox, SIGNAL(valueChanged(int)), GETSTELMODULE(MeteorShowers), SLOT(setLabelFontSize(int)));
 
 	// About tab
@@ -216,6 +217,7 @@ void MeteorShowerDialog::restoreDefaults(void)
 void MeteorShowerDialog::updateGuiFromSettings(void)
 {
 	ui->internetUpdatesCheckbox->setChecked(GETSTELMODULE(MeteorShowers)->getUpdatesEnabled());
+	ui->labelsGroup->setChecked(GETSTELMODULE(MeteorShowers)->getFlagLabels());
 	ui->fontSizeSpinBox->setValue(GETSTELMODULE(MeteorShowers)->getLabelFontSize());
 	refreshUpdateValues();
 	refreshColorMarkers();

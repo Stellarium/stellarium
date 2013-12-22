@@ -151,8 +151,10 @@ void MeteorShowers::init()
 		MeteorShower::radiantTexture = StelApp::getInstance().getTextureManager().createTexture(":/MeteorShowers/radiant.png");
 
 		// key bindings and other actions
-		addAction("actionShow_MeteorShower", N_("Meteor Shower"), N_("Show meteor showers"), "msVisible", "Ctrl+Alt+M");
-		addAction("actionShow_MeteorShower_ConfigDialog", N_("Meteor Shower"), N_("Meteor Shower configuration window"), configDialog, "visible");
+		QString msGroup = N_("Meteor Shower");
+		addAction("actionShow_MeteorShower", msGroup, N_("Show meteor showers"), "msVisible", "Ctrl+Alt+M");
+		addAction("actionShow_radiant_Labels", msGroup, N_("Radiant labels"), "labelsVisible", "Shift+M");
+		addAction("actionShow_MeteorShower_ConfigDialog", msGroup, N_("Meteor Shower configuration window"), configDialog, "visible");
 
 		GlowIcon = new QPixmap(":/graphicsGui/glow32x32.png");
 		OnIcon = new QPixmap(":/MeteorShowers/btMS-on.png");
@@ -775,6 +777,7 @@ void MeteorShowers::restoreDefaultConfigIni(void)
 	conf->setValue("colorARG", "0, 255, 240");
 	conf->setValue("colorARR", "255, 240, 0");
 	conf->setValue("colorIR", "255, 255, 255");
+	conf->setValue("show_radiant_labels", true);
 
 	conf->endGroup();
 }
@@ -904,7 +907,7 @@ void MeteorShowers::readSettingsFromConfig(void)
 	color = StelUtils::strToVec3f(conf->value("colorIR", "255, 255, 255").toString());
 	colorIR = QColor(color[0],color[1],color[2]);
 
-	// Get a font for labels
+	MeteorShower::showLabels = conf->value("show_radiant_labels", true).toBool();
 	labelFont.setPixelSize(conf->value("font_size", 13).toInt());
 
 	conf->endGroup();
@@ -928,7 +931,7 @@ void MeteorShowers::saveSettingsToConfig(void)
 	colorIR.getRgb(&r,&g,&b);
 	conf->setValue("colorIR", QString("%1, %2, %3").arg(r).arg(g).arg(b));
 
-	// Get a font for labels
+	conf->setValue("show_radiant_labels", MeteorShower::showLabels);
 	conf->setValue("font_size", labelFont.pixelSize());
 
 	conf->endGroup();
@@ -1032,6 +1035,17 @@ void MeteorShowers::messageTimeout(void)
 	{
 		GETSTELMODULE(LabelMgr)->deleteLabel(i);
 	}
+}
+
+bool MeteorShowers::getFlagLabels()
+{
+	return MeteorShower::showLabels;
+}
+
+void MeteorShowers::setFlagLabels(bool b)
+{
+	if (MeteorShower::showLabels != b)
+		MeteorShower::showLabels = b;
 }
 
 void MeteorShowers::setLabelFontSize(int size)
