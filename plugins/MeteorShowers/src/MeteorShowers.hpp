@@ -204,7 +204,30 @@ public:
 		return labelFont.pixelSize();
 	}
 
+	//! Get status of labels
+	//! @return false: hidden
 	bool getFlagLabels();
+
+	//! Get status of active radiant based on generic data
+	//! @return false: hidden
+	bool getFlagARG()
+	{
+		return flagShowARG;
+	}
+
+	//! Get status of active radiant based on real data
+	//! @return false: hidden
+	bool getFlagARR()
+	{
+		return flagShowARR;
+	}
+
+	//! Get inactive radiant status
+	//! @return false: hidden
+	bool getFlagIR()
+	{
+		return flagShowIR;
+	}
 
 signals:
 	//! @param state the new update state.
@@ -240,7 +263,29 @@ public slots:
 	void setLabelFontSize(int size);
 
 	//! Set whether text labels should be displayed next to radiant.
+	//! @param false: hidden
 	void setFlagLabels(bool b);
+
+	//! Enable/disable marker of active radiant based on generic data.
+	//! @param false: hidden
+	void setFlagARG(bool b)
+	{
+		flagShowARG = b;
+	}
+
+	//! Enable/disable marker of active radiant based on real data.
+	//! @param false: hidden
+	void setFlagARR(bool b)
+	{
+		flagShowARR = b;
+	}
+
+	//! Enable/disable inactive radiant marker.
+	//! @param false: hidden
+	void setFlagIR(bool b)
+	{
+		flagShowIR = b;
+	}
 
 private:
 	// Upgrade config.ini: rename old key settings to new
@@ -338,6 +383,9 @@ private:
 	int ZHR;
 	const static double zhrToWsr = 1.6667f/3600.f;  // factor to convert from zhr to whole earth per second rate
 	bool flagShow;
+	bool flagShowARG;  //! Show marker of active radiant based on generic data
+	bool flagShowARR;  //! Show marker of active radiant based on generic data
+	bool flagShowIR;   //! Show marker of inactive radiant
 
 	typedef struct
 	{
