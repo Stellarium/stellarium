@@ -16,7 +16,6 @@ SET(MeteorShowers_SRCS
     MeteorStream.cpp
     gui/MeteorShowerDialog.hpp
     gui/MeteorShowerDialog.cpp
-    translations.h
 )
 
 SET(MeteorShowersDialog_UIS
