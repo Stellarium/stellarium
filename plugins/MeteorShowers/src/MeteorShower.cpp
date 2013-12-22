@@ -381,8 +381,6 @@ void MeteorShower::update(double deltaTime)
 
 void MeteorShower::draw(StelPainter& painter)
 {
-	updateCurrentData(getSkyQDateTime());
-
 	StelUtils::spheToRect(radiantAlpha, radiantDelta, XYZ);
 	painter.getProjector()->project(XYZ, XY);
 
