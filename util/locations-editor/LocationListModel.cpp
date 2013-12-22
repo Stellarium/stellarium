@@ -581,7 +581,8 @@ bool LocationListModel::setData(const QModelIndex& index,
 			
 		case 3:
 		{
-			QChar role = value.toChar(); // TODO: Validate
+			// TODO: Validate type
+			QChar role = value.toString().at(0);
 			loc->role = (role != '\0') ? role : QChar('N');// TODO: Decide default role character
 		}
 			break;
