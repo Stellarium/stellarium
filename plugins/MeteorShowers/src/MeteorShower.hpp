@@ -76,6 +76,7 @@ public:
 	}
 	QString getDesignation(void) const;
 	void update(double deltaTime);
+	static float showLabels;
 
 private:
 	Vec3d XYZ;                      // Cartesian equatorial position

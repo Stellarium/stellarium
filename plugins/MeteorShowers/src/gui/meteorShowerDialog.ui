@@ -603,9 +603,15 @@
         </widget>
        </item>
        <item>
-        <widget class="QGroupBox" name="labelSizeGroup">
+        <widget class="QGroupBox" name="labelsGroup">
          <property name="title">
           <string>Label</string>
+         </property>
+         <property name="flat">
+          <bool>true</bool>
+         </property>
+         <property name="checkable">
+          <bool>true</bool>
          </property>
          <layout class="QGridLayout" name="gridLayout_5">
           <item row="0" column="0">
