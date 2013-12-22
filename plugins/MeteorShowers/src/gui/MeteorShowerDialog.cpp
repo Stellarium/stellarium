@@ -104,6 +104,8 @@ void MeteorShowerDialog::createDialogContent()
 	connect(ui->changeColorARR, SIGNAL(clicked()), this, SLOT(setColorARR()));
 	connect(ui->changeColorIR, SIGNAL(clicked()), this, SLOT(setColorIR()));
 
+	connect(ui->fontSizeSpinBox, SIGNAL(valueChanged(int)), GETSTELMODULE(MeteorShowers), SLOT(setLabelFontSize(int)));
+
 	// About tab
 	setAboutHtml();
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
@@ -214,6 +216,7 @@ void MeteorShowerDialog::restoreDefaults(void)
 void MeteorShowerDialog::updateGuiFromSettings(void)
 {
 	ui->internetUpdatesCheckbox->setChecked(GETSTELMODULE(MeteorShowers)->getUpdatesEnabled());
+	ui->fontSizeSpinBox->setValue(GETSTELMODULE(MeteorShowers)->getLabelFontSize());
 	refreshUpdateValues();
 	refreshColorMarkers();
 }
