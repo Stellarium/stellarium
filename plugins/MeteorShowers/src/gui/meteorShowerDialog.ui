@@ -333,25 +333,6 @@
           <string>Active Radiant - Real Data</string>
          </property>
          <layout class="QGridLayout" name="gridLayout_2">
-          <item row="0" column="0">
-           <widget class="QWidget" name="textureAR" native="true">
-            <property name="minimumSize">
-             <size>
-              <width>64</width>
-              <height>64</height>
-             </size>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>64</width>
-              <height>64</height>
-             </size>
-            </property>
-            <property name="styleSheet">
-             <string notr="true">background-image: url(:/MeteorShowers/radiant.png);</string>
-            </property>
-           </widget>
-          </item>
           <item row="0" column="1">
            <widget class="QFrame" name="frame">
             <property name="frameShape">
@@ -368,36 +349,26 @@
               <number>9</number>
              </property>
              <item>
-              <widget class="QCheckBox" name="checkBox">
+              <widget class="QCheckBox" name="showARR">
                <property name="text">
                 <string>Show all markers of active radiant based on real data.</string>
                </property>
               </widget>
              </item>
              <item>
-              <widget class="QPushButton" name="pushButton">
+              <widget class="QPushButton" name="changeColorARR">
                <property name="text">
                 <string>Change Color</string>
                </property>
               </widget>
              </item>
             </layout>
-            <zorder>textureAR</zorder>
-            <zorder>pushButton</zorder>
-            <zorder>checkBox</zorder>
+            <zorder>changeColorARR</zorder>
+            <zorder>showARR</zorder>
            </widget>
           </item>
-         </layout>
-        </widget>
-       </item>
-       <item>
-        <widget class="QGroupBox" name="activeGenericData">
-         <property name="title">
-          <string>Active Radiant - Generic Data</string>
-         </property>
-         <layout class="QGridLayout" name="gridLayout_3">
           <item row="0" column="0">
-           <widget class="QWidget" name="textureAG" native="true">
+           <widget class="QFrame" name="frame_6">
             <property name="minimumSize">
              <size>
               <width>64</width>
@@ -410,9 +381,99 @@
               <height>64</height>
              </size>
             </property>
-            <property name="styleSheet">
-             <string notr="true">background-image: url(:/MeteorShowers/radiant.png);</string>
+            <property name="frameShape">
+             <enum>QFrame::StyledPanel</enum>
             </property>
+            <property name="frameShadow">
+             <enum>QFrame::Raised</enum>
+            </property>
+            <widget class="QLabel" name="textureARR">
+             <property name="geometry">
+              <rect>
+               <x>0</x>
+               <y>0</y>
+               <width>64</width>
+               <height>64</height>
+              </rect>
+             </property>
+             <property name="minimumSize">
+              <size>
+               <width>64</width>
+               <height>64</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>64</width>
+               <height>64</height>
+              </size>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">background-image: url(:/MeteorShowers/radiantSetting.png);</string>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+            </widget>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="activeGenericData">
+         <property name="title">
+          <string>Active Radiant - Generic Data</string>
+         </property>
+         <layout class="QGridLayout" name="gridLayout_3">
+          <item row="0" column="0">
+           <widget class="QFrame" name="frame_4">
+            <property name="minimumSize">
+             <size>
+              <width>64</width>
+              <height>64</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>64</width>
+              <height>64</height>
+             </size>
+            </property>
+            <property name="frameShape">
+             <enum>QFrame::StyledPanel</enum>
+            </property>
+            <property name="frameShadow">
+             <enum>QFrame::Raised</enum>
+            </property>
+            <widget class="QLabel" name="textureARG">
+             <property name="geometry">
+              <rect>
+               <x>0</x>
+               <y>0</y>
+               <width>64</width>
+               <height>64</height>
+              </rect>
+             </property>
+             <property name="minimumSize">
+              <size>
+               <width>64</width>
+               <height>64</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>64</width>
+               <height>64</height>
+              </size>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">background-image: url(:/MeteorShowers/radiantSetting.png);</string>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+            </widget>
            </widget>
           </item>
           <item row="0" column="1">
@@ -431,14 +492,14 @@
               <number>9</number>
              </property>
              <item>
-              <widget class="QCheckBox" name="checkBox_2">
+              <widget class="QCheckBox" name="showARG">
                <property name="text">
                 <string>Show all markers of active radiant based on generic data.</string>
                </property>
               </widget>
              </item>
              <item>
-              <widget class="QPushButton" name="pushButton_2">
+              <widget class="QPushButton" name="changeColorARG">
                <property name="text">
                 <string>Change Color</string>
                </property>
@@ -472,14 +533,14 @@
               <number>9</number>
              </property>
              <item>
-              <widget class="QCheckBox" name="checkBox_3">
+              <widget class="QCheckBox" name="showIR">
                <property name="text">
                 <string>Show all markers of inactive radiant.</string>
                </property>
               </widget>
              </item>
              <item>
-              <widget class="QPushButton" name="pushButton_3">
+              <widget class="QPushButton" name="changeColorIR">
                <property name="text">
                 <string>Change Color</string>
                </property>
@@ -489,7 +550,7 @@
            </widget>
           </item>
           <item row="0" column="0">
-           <widget class="QWidget" name="textureI" native="true">
+           <widget class="QFrame" name="frame_5">
             <property name="minimumSize">
              <size>
               <width>64</width>
@@ -502,9 +563,42 @@
               <height>64</height>
              </size>
             </property>
-            <property name="styleSheet">
-             <string notr="true">background-image: url(:/MeteorShowers/radiant.png);</string>
+            <property name="frameShape">
+             <enum>QFrame::StyledPanel</enum>
             </property>
+            <property name="frameShadow">
+             <enum>QFrame::Raised</enum>
+            </property>
+            <widget class="QLabel" name="textureIR">
+             <property name="geometry">
+              <rect>
+               <x>0</x>
+               <y>0</y>
+               <width>64</width>
+               <height>64</height>
+              </rect>
+             </property>
+             <property name="minimumSize">
+              <size>
+               <width>64</width>
+               <height>64</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>64</width>
+               <height>64</height>
+              </size>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">background-image: url(:/MeteorShowers/radiantSetting.png);</string>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+            </widget>
+            <zorder>frame_3</zorder>
+            <zorder>textureIR</zorder>
            </widget>
           </item>
          </layout>
