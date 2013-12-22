@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>530</width>
-    <height>502</height>
+    <height>503</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -597,9 +597,26 @@
               <string/>
              </property>
             </widget>
-            <zorder>frame_3</zorder>
-            <zorder>textureIR</zorder>
            </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="labelSizeGroup">
+         <property name="title">
+          <string>Label</string>
+         </property>
+         <layout class="QGridLayout" name="gridLayout_5">
+          <item row="0" column="0">
+           <widget class="QLabel" name="label">
+            <property name="text">
+             <string>Label font size (pixels):</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QSpinBox" name="fontSizeSpinBox"/>
           </item>
          </layout>
         </widget>
