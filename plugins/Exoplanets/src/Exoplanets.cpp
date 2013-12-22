@@ -731,6 +731,8 @@ void Exoplanets::updateDownloadComplete(QNetworkReply* reply)
 		StelApp::getInstance().removeProgressBar(progressBar);
 		progressBar = NULL;
 	}
+
+	readJsonFile();
 }
 
 void Exoplanets::displayMessage(const QString& message, const QString hexColor)

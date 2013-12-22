@@ -155,7 +155,7 @@ void TestConversions::testRadToDMS()
 		if (deg>=0)
 			angle1 = sec+min*60+deg*3600;
 		else
-			angle1 = -1*(sec+min*60+std::abs(deg)*3600);
+			angle1 = -1*(sec+min*60+std::abs((double)deg)*3600);
 		StelUtils::radToDms(rad, sign, dego, mino, seco);
 		angle2 = seco+mino*60+dego*3600;
 		if (!sign)
