@@ -67,6 +67,30 @@ QString Location::extendId()
 	return generateId();
 }
 
+bool Location::setPopulation(const float& newPopulation)
+{
+	if (newPopulation < 0.0)
+		return false;
+
+	population = newPopulation;
+	// This has some interesting effects with rounding...
+	populationString.setNum(population, 'f', 3);
+	// qDebug() << population << populationString;
+	return true;
+}
+
+bool Location::setPopulation(const QString& string)
+{
+	bool ok = false;
+	float newPopulation = string.toFloat(&ok);
+	if (!ok)
+		return false;
+
+	population = newPopulation;
+	populationString = string;
+	return true;
+}
+
 
 // Write the location as a tab-separated string.
 // Reuses code from the same function in StelLocation with some changes.
@@ -80,7 +104,7 @@ QString Location::toLine() const
 	        .arg(region)
 	        .arg(country)
 	        .arg(role)
-	        .arg(population)
+	        .arg(populationString)
 	        .arg(latitudeStr)
 	        .arg(longitudeStr)
 	        .arg(altitude)
@@ -108,7 +132,7 @@ Location* Location::fromLine(const QString& line)
 	loc->role    = splitline.at(3).at(0);
 	if (loc->role == '\0')
 		loc->role = 'X';
-	loc->population = splitline.at(4);
+	loc->setPopulation(splitline.at(4));
 	
 	const QString& latStr = splitline.at(5);
 	loc->latitude = latitudeFromString(latStr);
@@ -163,7 +187,7 @@ void Location::toBinary(QDataStream& out)
 	    << region
 	    << countryName
 	    << role
-	    << ((int) (population.toFloat()*1000))
+		<< ((int) (population * 1000))
 	    << latitude
 	    << longitude
 	    << altitude
@@ -253,7 +277,7 @@ QDataStream& operator<<(QDataStream& out, const Location& loc)
 	    << loc.timeZone
 	    << loc.bortleScaleIndex
 	    << loc.role
-	    << loc.population
+		<< loc.populationString
 	    << loc.landscapeKey
 	    << loc.stelId
 	    << loc.hasDuplicate
@@ -277,7 +301,7 @@ QDataStream& operator>>(QDataStream& in, Location& loc)
 	   >> loc.timeZone
 	   >> loc.bortleScaleIndex
 	   >> loc.role
-	   >> loc.population
+	   >> loc.populationString //TODO: Handle separate float/string values?
 	   >> loc.landscapeKey
 	   >> loc.stelId
 	   >> loc.hasDuplicate

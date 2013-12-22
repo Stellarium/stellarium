@@ -589,10 +589,11 @@ bool LocationListModel::setData(const QModelIndex& index,
 			
 		case 4:
 		{
-			int population = value.toInt();
-			if (population < 0)
+			// TODO: Save the user-entered string or rely on conversion?
+			float population = value.toFloat();
+			// qDebug() << "setData:" << population;
+			if(!loc->setPopulation(population))
 				return false;
-			loc->population = population;
 		}
 			break;
 		

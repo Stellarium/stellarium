@@ -90,7 +90,14 @@ public:
 	//! [IGNORED] Population in thousands of inhabitants.
 	//! Note that StelLocation uses an int with the exact
 	//! population (this * 1000).
-	QString population;
+	//! When modifying, use setPopulation() to keep population and
+	//! populationString in sync.
+	float population;
+	//! Population string, to prevent all the populations being overwritten
+	//! every time the location list is saved due to float representation.
+	//! When modifying, use setPopulation() to keep population and
+	//! populationString in sync.
+	QString populationString;
 	//! [IGNORED] A hint for associating a landscape to the location.
 	QString landscapeKey;
 	//! @}
@@ -113,6 +120,11 @@ public:
 	//! Format: "name (region), countryName".
 	//! Calls generateId() to re-set #stelName.
 	QString extendId();
+
+	//! Set the population numbers in both ::population and populationString.
+	bool setPopulation(const float& newPopulation);
+	//! Set the population numbers in both ::population and populationString.
+	bool setPopulation(const QString& string);
 	
 	//! Output the location as a tab-delimited string.
 	//! @author Fabien Chereau
