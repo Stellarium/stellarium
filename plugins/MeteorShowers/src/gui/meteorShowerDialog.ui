@@ -350,6 +350,9 @@
              </property>
              <item>
               <widget class="QCheckBox" name="showARR">
+               <property name="toolTip">
+                <string>It doesn't affect the drawing of the meteor showers.</string>
+               </property>
                <property name="text">
                 <string>Show all markers of active radiant based on real data.</string>
                </property>
@@ -493,6 +496,9 @@
              </property>
              <item>
               <widget class="QCheckBox" name="showARG">
+               <property name="toolTip">
+                <string>It doesn't affect the drawing of the meteor showers.</string>
+               </property>
                <property name="text">
                 <string>Show all markers of active radiant based on generic data.</string>
                </property>
@@ -534,6 +540,9 @@
              </property>
              <item>
               <widget class="QCheckBox" name="showIR">
+               <property name="toolTip">
+                <string>It doesn't affect the drawing of the meteor showers.</string>
+               </property>
                <property name="text">
                 <string>Show all markers of inactive radiant.</string>
                </property>
