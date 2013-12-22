@@ -324,7 +324,7 @@ void ViewDialog::setBortleScaleToolTip(int Bindex)
 
 	QString tooltip = QString("%1 (%2 %3)")
 			.arg(list.at(i).toLocal8Bit().constData())
-			.arg("The naked-eye limiting magnitude is")
+			.arg(q_("The naked-eye limiting magnitude is"))
 			.arg(nelm.at(i).toLocal8Bit().constData());
 
 	ui->lightPollutionSpinBox->setToolTip(tooltip);
