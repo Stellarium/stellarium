@@ -274,6 +274,12 @@ private:
 	//! Set items for list of struct from data map
 	void setShowersMap(const QVariantMap& map);
 
+	//! A fake method for strings marked for translation.
+	//! Use it instead of translations.h for N_() strings, except perhaps for
+	//! keyboard action descriptions. (It's better for them to be in a single
+	//! place.)
+	static void translations();
+
 	//! Font used for displaying our text
 	QFont font;
 

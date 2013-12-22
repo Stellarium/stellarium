@@ -570,10 +570,9 @@ StelObjectP MeteorShowers::searchByName(const QString& englishName) const
 	if(!flagShowMS)
 		return NULL;
 
-	QString objw = englishName.toUpper();
 	foreach(const MeteorShowerP& ms, mShowers)
 	{
-		if(ms->getEnglishName().toUpper() == englishName)
+		if(ms->getEnglishName().toUpper() == englishName.toUpper())
 			return qSharedPointerCast<StelObject>(ms);
 	}
 
@@ -587,7 +586,7 @@ StelObjectP MeteorShowers::searchByNameI18n(const QString& nameI18n) const
 
 	foreach(const MeteorShowerP& ms, mShowers)
 	{
-		if(ms->getNameI18n().toUpper() == nameI18n)
+		if(ms->getNameI18n().toUpper() == nameI18n.toUpper())
 			return qSharedPointerCast<StelObject>(ms);
 	}
 
@@ -603,18 +602,33 @@ QStringList MeteorShowers::listMatchingObjectsI18n(const QString& objPrefix, int
 	if(maxNbItem==0)
 		return result;
 
-	QString objw = objPrefix.toUpper();
+	QString sn;
+	bool find;
 
 	foreach(const MeteorShowerP& ms, mShowers)
 	{
-		if(ms->getNameI18n().toUpper().left(objw.length()) == objw)
+		sn = ms->getNameI18n();
+		find = false;
+		if (useStartOfWords)
 		{
-			result << ms->getNameI18n().toUpper();
+			if (sn.toUpper().left(objPrefix.length()) == objPrefix.toUpper())
+				find = true;
 		}
+		else
+		{
+			if (sn.contains(objPrefix, Qt::CaseInsensitive))
+				find = true;
+		}
+		if (find)
+			result << sn;
+
+
 	}
 
 	result.sort();
-	if(result.size()>maxNbItem) result.erase(result.begin()+maxNbItem, result.end());
+
+	if(result.size()>maxNbItem)
+		result.erase(result.begin()+maxNbItem, result.end());
 
 	return result;
 }
@@ -1012,4 +1026,105 @@ void MeteorShowers::messageTimeout(void)
 	{
 		GETSTELMODULE(LabelMgr)->deleteLabel(i);
 	}
+}
+
+void MeteorShowers::translations()
+{
+#if 0
+	// Meteor showers
+	// TRANSLATORS: Name of meteor shower
+	N_("Quadrantids");
+	// TRANSLATORS: Name of meteor shower
+	N_("Lyrids");
+	// TRANSLATORS: Name of meteor shower
+	N_("α-Centaurids");
+	// TRANSLATORS: Name of meteor shower
+	N_("γ-Normids");
+	// TRANSLATORS: Name of meteor shower
+	N_("η-Aquariids");
+	// TRANSLATORS: Name of meteor shower
+	N_("June Bootids");
+	// TRANSLATORS: Name of meteor shower
+	N_("Piscis Austrinids");
+	// TRANSLATORS: Name of meteor shower
+	N_("Southern δ-Aquariids");
+	// TRANSLATORS: Name of meteor shower
+	N_("α-Capricornids");
+	// TRANSLATORS: Name of meteor shower
+	N_("α-Aurigids");
+	// TRANSLATORS: Name of meteor shower
+	N_("September ε-Perseids");
+	// TRANSLATORS: Name of meteor shower
+	N_("Draconids");
+	// TRANSLATORS: Name of meteor shower
+	N_("Leonids");
+	// TRANSLATORS: Name of meteor shower
+	N_("Phoenicids");
+	// TRANSLATORS: Name of meteor shower
+	N_("Puppid-Velids");
+	// TRANSLATORS: Name of meteor shower
+	N_("Ursids");
+	// TRANSLATORS: Name of meteor shower
+	N_("Perseids");
+	// TRANSLATORS: Name of meteor shower
+	N_("δ-Leonids");
+	// TRANSLATORS: Name of meteor shower
+	N_("π-Puppids");
+	// TRANSLATORS: Name of meteor shower
+	N_("June Lyrids");
+	// TRANSLATORS: Name of meteor shower
+	N_("κ-Cygnids");
+	// TRANSLATORS: Name of meteor shower
+	N_("ε-Lyrids");
+	// TRANSLATORS: Name of meteor shower
+	N_("δ-Aurigids");
+	// TRANSLATORS: Name of meteor shower
+	N_("ε-Geminids");
+	// TRANSLATORS: Name of meteor shower
+	N_("Southern Taurids");
+	// TRANSLATORS: Name of meteor shower
+	N_("Northern Taurids");
+	// TRANSLATORS: Name of meteor shower
+	N_("Monocerotids");
+	// TRANSLATORS: Name of meteor shower
+	N_("σ-Hydrids");
+	// TRANSLATORS: Name of meteor shower
+	N_("Geminids");
+	// TRANSLATORS: Name of meteor shower
+	N_("Leonis Minorids");
+	// TRANSLATORS: Name of meteor shower
+	N_("December Leonis Minorids");
+	// TRANSLATORS: Name of meteor shower
+	N_("Comae Berenicids");
+	// TRANSLATORS: Name of meteor shower
+	N_("Orionids");
+
+	// List of parent objects for meteor showers
+	// TRANSLATORS: Name of parent object for meteor shower
+	N_("Asteroid 2003 EH1");
+	// TRANSLATORS: Name of parent object for meteor shower
+	N_("Comet 1P/Halley");
+	// TRANSLATORS: Name of parent object for meteor shower
+	N_("Comet 7P/Pons-Winnecke");
+	// TRANSLATORS: Name of parent object for meteor shower
+	N_("Comet 55P/Tempel-Tuttle");
+	// TRANSLATORS: Name of parent object for meteor shower
+	N_("Comet 96P/Machholz");
+	// TRANSLATORS: Name of parent object for meteor shower
+	N_("Comet 109P/Swift-Tuttle");
+	// TRANSLATORS: Name of parent object for meteor shower
+	N_("Comet Thatcher (1861 I)");
+	// TRANSLATORS: Name of parent object for meteor shower
+	N_("Asteroid (4450) Pan");
+	// TRANSLATORS: Name of parent object for meteor shower
+	N_("Comet 26P/Grigg-Skjellerup");
+	// TRANSLATORS: Name of parent object for meteor shower
+	N_("Comet 21P/Giacobini-Zinner");
+
+	/* For copy/paste:
+	// TRANSLATORS: Name of meteor shower
+	N_("");
+	*/
+
+#endif
 }
