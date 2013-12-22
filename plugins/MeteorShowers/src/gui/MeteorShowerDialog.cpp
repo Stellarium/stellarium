@@ -71,7 +71,7 @@ void MeteorShowerDialog::createDialogContent()
 {
 	ui->setupUi(dialog);
 	ui->tabs->setCurrentIndex(0);
-	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(languageChanged()));
+	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
 
 	// Settings tab / updates group
 	ui->displayModeCheckBox->setChecked(GETSTELMODULE(MeteorShowers)->getFlagShowMS());
