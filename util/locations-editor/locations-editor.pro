@@ -11,7 +11,7 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = locations-editor
 TEMPLATE = app
 
-win32:{
+win32 {
 	INCLUDEPATH += ../../src/core/external/kfilter/ \
 	               ../../src/core/external/
 	LIBS += libiconv libintl libz libwsock32
@@ -28,7 +28,7 @@ SOURCES += main.cpp\
     ../../src/core/external/kfilter/kfilterbase.cpp \
     ../../src/core/external/kfilter/karchive.cpp
 
-win32:{
+win32 {
 SOURCES += ../../src/core/external/kdewin32/bind/inet_ntop.c \
  ../../src/core/external/kdewin32/bind/inet_pton.c \
  ../../src/core/external/kdewin32/dirent.c \
@@ -63,7 +63,7 @@ HEADERS  += LocationListEditor.hpp \
     ../../src/core/external/kfilter/kfilterbase.h \
     ../../src/core/external/kfilter/karchive.h
 
-win32:{
+win32 {
 HEADERS += ../../src/core/external/kdewin32/basetyps.h \
 		../../src/core/external/kdewin32/byteswap.h \
 		../../src/core/external/kdewin32/comcat.h \
@@ -114,6 +114,10 @@ HEADERS += ../../src/core/external/kdewin32/basetyps.h \
 		../../src/core/external/kdewin32/sys/unistd.h \
 		../../src/core/external/kdewin32/sys/utsname.h \
 		../../src/core/external/kdewin32/sys/wait.h \
+}
+
+linux {
+LIBS += -lz
 }
 
 FORMS    += LocationListEditor.ui
