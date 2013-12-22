@@ -35,6 +35,7 @@
 #include <QVariantMap>
 
 StelTextureSP MeteorShower::radiantTexture;
+float MeteorShower::showLabels = true;
 
 MeteorShower::MeteorShower(const QVariantMap& map)
 	: initialized(false)
@@ -408,9 +409,12 @@ void MeteorShower::draw(StelPainter& painter)
 	MeteorShower::radiantTexture->bind();
 	painter.drawSprite2dMode(XY[0], XY[1], 10);
 
-	float size = getAngularSize(NULL)*M_PI/180.*painter.getProjector()->getPixelPerRadAtCenter();
-	float shift = 8.f + size/1.8f;
-	painter.setColor(color[0], color[1], color[2], 1.0f);
-	painter.drawText(XY[0]+shift, XY[1]+shift, getNameI18n(), 0, 0, 0, false);
+	if (MeteorShower::showLabels)
+	{
+		float size = getAngularSize(NULL)*M_PI/180.*painter.getProjector()->getPixelPerRadAtCenter();
+		float shift = 8.f + size/1.8f;
+		painter.setColor(color[0], color[1], color[2], 1.0f);
+		painter.drawText(XY[0]+shift, XY[1]+shift, getNameI18n(), 0, 0, 0, false);
+	}
 	painter.setColor(1,1,1,0);
 }

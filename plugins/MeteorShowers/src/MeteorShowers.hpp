@@ -49,6 +49,7 @@ class MeteorShowers : public StelObjectModule
 {
 	Q_OBJECT
 	Q_PROPERTY(bool msVisible READ getFlagShowMS WRITE setFlagShowMS)
+	Q_PROPERTY(bool labelsVisible READ getFlagLabels WRITE setFlagLabels)
 public:
 	//! @enum UpdateState
 	//! Used for keeping track of the download/update status
@@ -203,6 +204,8 @@ public:
 		return labelFont.pixelSize();
 	}
 
+	bool getFlagLabels();
+
 signals:
 	//! @param state the new update state.
 	void updateStateChanged(MeteorShowers::UpdateState state);
@@ -235,6 +238,9 @@ public slots:
 	//! set the label font size.
 	//! @param size the pixel size of the font
 	void setLabelFontSize(int size);
+
+	//! Set whether text labels should be displayed next to radiant.
+	void setFlagLabels(bool b);
 
 private:
 	// Upgrade config.ini: rename old key settings to new
