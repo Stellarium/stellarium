@@ -52,6 +52,7 @@
 #include <QSettings>
 #include <QTimer>
 #include <QDialog>
+#include <QStringList>
 
 ViewDialog::ViewDialog(QObject* parent) : StelDialog(parent)
 {
@@ -218,9 +219,13 @@ void ViewDialog::createDialogContent()
 	ui->landscapeBrightnessCheckBox->setChecked(lmgr->getFlagLandscapeSetsMinimalBrightness());
 	connect(ui->landscapeBrightnessCheckBox, SIGNAL(toggled(bool)), lmgr, SLOT(setFlagLandscapeSetsMinimalBrightness(bool)));
 
-	ui->lightPollutionSpinBox->setValue(StelApp::getInstance().getCore()->getSkyDrawer()->getBortleScaleIndex());
+	int bIdx = StelApp::getInstance().getCore()->getSkyDrawer()->getBortleScaleIndex();
+	ui->lightPollutionSpinBox->setValue(bIdx);
+	setBortleScaleToolTip(bIdx);
 	connect(ui->lightPollutionSpinBox, SIGNAL(valueChanged(int)), lmgr, SLOT(setAtmosphereBortleLightPollution(int)));
 	connect(ui->lightPollutionSpinBox, SIGNAL(valueChanged(int)), StelApp::getInstance().getCore()->getSkyDrawer(), SLOT(setBortleScaleIndex(int)));
+	connect(ui->lightPollutionSpinBox, SIGNAL(valueChanged(int)), this, SLOT(setBortleScaleToolTip(int)));
+
 
 	ui->autoChangeLandscapesCheckBox->setChecked(lmgr->getFlagLandscapeAutoSelection());
 	connect(ui->autoChangeLandscapesCheckBox, SIGNAL(toggled(bool)), lmgr, SLOT(setFlagLandscapeAutoSelection(bool)));
@@ -282,6 +287,47 @@ void ViewDialog::createDialogContent()
 	QTimer* refreshTimer = new QTimer(this);
 	connect(refreshTimer, SIGNAL(timeout()), this, SLOT(updateFromProgram()));
 	refreshTimer->start(200);
+}
+
+void ViewDialog::setBortleScaleToolTip(int Bindex)
+{
+	int i = Bindex-1;
+	QStringList list, nelm;
+	//TRANSLATORS: Short description for Class 1 of the Bortle scale
+	list.append(q_("Excellent dark-sky site"));
+	//TRANSLATORS: Short description for Class 2 of the Bortle scale
+	list.append(q_("Typical truly dark site"));
+	//TRANSLATORS: Short description for Class 3 of the Bortle scale
+	list.append(q_("Rural sky"));
+	//TRANSLATORS: Short description for Class 4 of the Bortle scale
+	list.append(q_("Rural/suburban transition"));
+	//TRANSLATORS: Short description for Class 5 of the Bortle scale
+	list.append(q_("Suburban sky"));
+	//TRANSLATORS: Short description for Class 6 of the Bortle scale
+	list.append(q_("Bright suburban sky"));
+	//TRANSLATORS: Short description for Class 7 of the Bortle scale
+	list.append(q_("Suburban/urban transition"));
+	//TRANSLATORS: Short description for Class 8 of the Bortle scale
+	list.append(q_("City sky"));
+	//TRANSLATORS: Short description for Class 9 of the Bortle scale
+	list.append(q_("Inner-city sky"));
+
+	nelm.append("7.6–8.0");
+	nelm.append("7.1–7.5");
+	nelm.append("6.6–7.0");
+	nelm.append("6.1–6.5");
+	nelm.append("5.6–6.0");
+	nelm.append("5.1-5.5");
+	nelm.append("4.6–5.0");
+	nelm.append("4.1–4.5");
+	nelm.append("4.0");
+
+	QString tooltip = QString("%1 (%2 %3)")
+			.arg(list.at(i).toLocal8Bit().constData())
+			.arg("The naked-eye limiting magnitude is")
+			.arg(nelm.at(i).toLocal8Bit().constData());
+
+	ui->lightPollutionSpinBox->setToolTip(tooltip);
 }
 
 void ViewDialog::populateLists()
