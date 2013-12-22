@@ -167,7 +167,7 @@ void Satellites::init()
 	// If the json file does not already exist, create it from the resource in the QT resource
 	if(QFileInfo(catalogPath).exists())
 	{
-		if (readCatalogVersion() != SATELLITES_PLUGIN_VERSION)
+		if (!checkJsonFileFormat() || readCatalogVersion() != SATELLITES_PLUGIN_VERSION)
 		{
 			displayMessage(q_("The old satellites.json file is no longer compatible - using default file"), "#bb0000");
 			restoreDefaultCatalog();
@@ -513,6 +513,7 @@ void Satellites::restoreDefaultSettings()
 	conf->setValue("orbit_line_segments", 90);
 	conf->setValue("orbit_fade_segments", 5);
 	conf->setValue("orbit_segment_duration", 20);
+	conf->setValue("realistic_mode_enabled", false);
 	
 	conf->endGroup(); // saveTleSources() opens it for itself
 	
@@ -647,6 +648,9 @@ void Satellites::loadSettings()
 	Satellite::orbitLineFadeSegments = conf->value("orbit_fade_segments", 5).toInt();
 	Satellite::orbitLineSegmentDuration = conf->value("orbit_segment_duration", 20).toInt();
 
+	// realistic mode
+	setFlagRelisticMode(conf->value("realistic_mode_enabled", false).toBool());
+
 	conf->endGroup();
 }
 
@@ -671,6 +675,9 @@ void Satellites::saveSettings()
 	conf->setValue("orbit_line_segments", Satellite::orbitLineSegments);
 	conf->setValue("orbit_fade_segments", Satellite::orbitLineFadeSegments);
 	conf->setValue("orbit_segment_duration", Satellite::orbitLineSegmentDuration);
+
+	// realistic mode
+	conf->setValue("realistic_mode_enabled", getFlagRealisticMode());
 
 	conf->endGroup();
 	
@@ -1067,6 +1074,20 @@ void Satellites::enableAutoRemove(bool enabled)
 	if (autoRemoveEnabled != enabled)
 	{
 		autoRemoveEnabled = enabled;
+		emit settingsChanged();
+	}
+}
+
+bool Satellites::getFlagRealisticMode()
+{
+	return Satellite::realisticModeFlag;
+}
+
+void Satellites::setFlagRelisticMode(bool b)
+{
+	if (Satellite::realisticModeFlag != b)
+	{
+		Satellite::realisticModeFlag = b;
 		emit settingsChanged();
 	}
 }
@@ -1599,6 +1620,32 @@ void Satellites::drawPointer(StelCore* core, StelPainter& painter)
 		painter.drawSprite2dMode(screenpos[0]+size/2, screenpos[1]+size/2, 20, -90);
 		painter.drawSprite2dMode(screenpos[0]+size/2, screenpos[1]-size/2, 20, -180);
 	}
+}
+
+bool Satellites::checkJsonFileFormat()
+{
+	QFile jsonFile(catalogPath);
+	if (!jsonFile.open(QIODevice::ReadOnly))
+	{
+		qWarning() << "Satellites::checkJsonFileFormat(): cannot open " << QDir::toNativeSeparators(catalogPath);
+		return false;
+	}
+
+	QVariantMap map;
+	try
+	{
+		map = StelJsonParser::parse(&jsonFile).toMap();
+		jsonFile.close();
+	}
+	catch (std::runtime_error& e)
+	{
+		qDebug() << "Satellites::checkJsonFileFormat(): file format is wrong!";
+		qDebug() << "Satellites::checkJsonFileFormat() error:" << e.what();
+		return false;
+	}
+
+	return true;
+
 }
 
 void Satellites::translations()

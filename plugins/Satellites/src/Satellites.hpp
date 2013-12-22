@@ -137,6 +137,9 @@ class Satellites : public StelObjectModule, protected QOpenGLFunctions_1_2
 	           READ isAutoRemoveEnabled
 	           WRITE enableAutoRemove
 	           NOTIFY settingsChanged)
+	Q_PROPERTY(bool realisticMode
+		   READ getFlagRealisticMode
+		   WRITE setFlagRelisticMode)
 	
 public:
 	//! @enum UpdateState
@@ -344,10 +347,11 @@ public:
 	//! @return the pixel size of the font
 	int getLabelFontSize() {return labelFont.pixelSize();}
 	bool getFlagLabels();
+	bool getFlagRealisticMode();
 	//! Get the current status of the orbit line rendering flag.
 	bool getOrbitLinesFlag();
 	bool isAutoAddEnabled() const { return autoAddEnabled; }
-	bool isAutoRemoveEnabled() const { return autoRemoveEnabled; }
+	bool isAutoRemoveEnabled() const { return autoRemoveEnabled; }	
 
 signals:
 	//! Emitted when some of the plugin settings have been changed.
@@ -392,6 +396,9 @@ public slots:
 	//! Emits settingsChanged() if the value changes.
 	//! @todo Decide how to sync with "actionShow_Satellite_Labels".
 	void setFlagLabels(bool b);
+
+	//! Emits settingsChanged() if the value changes.
+	void setFlagRelisticMode(bool b);
 	
 	//! set the label font size.
 	//! @param size the pixel size of the font
@@ -478,6 +485,10 @@ private:
 	
 	//! Sets lastUpdate to the current date/time and saves it to the settings.
 	void markLastUpdate();
+
+	//! Check format of the catalog of satellites
+	//! @return valid boolean, e.g. "true"
+	bool checkJsonFileFormat();
 	
 	//! A fake method for strings marked for translation.
 	//! Use it instead of translations.h for N_() strings, except perhaps for
