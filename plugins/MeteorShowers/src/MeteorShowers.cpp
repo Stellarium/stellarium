@@ -359,7 +359,23 @@ void MeteorShowers::drawStream(StelCore* core, StelPainter& painter)
 	{
 		foreach(const activeData &a, activeInfo)
 		{
-			(void)a;
+			// Checks if the meteor stream can be showed
+			bool flag=true;
+			switch(a.status)
+			{
+			case 1:
+				flag = flagShowStreamARR;
+				break;
+			case 2:
+				flag = flagShowStreamARG;
+				break;
+			default:
+				flag = false;
+			}
+
+			if(!flag)
+				continue; //next
+
 			// step through and draw all active meteors
 			for(std::vector<MeteorStream*>::iterator iter = active[index].begin(); iter != active[index].end(); ++iter)
 			{
@@ -457,6 +473,7 @@ void MeteorShowers::updateActiveInfo(StelCore* core)
 					newData.start = ms->start;
 					newData.finish = ms->finish;
 					newData.peak = ms->peak;
+					newData.status = ms->isActive;
 					activeInfo.append(newData);
 				}
 				else //just overwrites
@@ -466,6 +483,7 @@ void MeteorShowers::updateActiveInfo(StelCore* core)
 					activeInfo[index].start = ms->start;
 					activeInfo[index].finish = ms->finish;
 					activeInfo[index].peak = ms->peak;
+					activeInfo[index].status = ms->isActive;
 				}
 			}
 		}
@@ -789,13 +807,20 @@ void MeteorShowers::restoreDefaultConfigIni(void)
 	conf->setValue("url", "http://stellarium.org/json/showers.json");
 	conf->setValue("update_frequency_hours", 100);
 	conf->setValue("flag_show_ms_button", true);
+
 	conf->setValue("colorARG", "0, 255, 240");
 	conf->setValue("colorARR", "255, 240, 0");
 	conf->setValue("colorIR", "255, 255, 255");
-	conf->setValue("show_radiant_labels", true);
+
+	conf->setValue("show_activeRadiantRealData_stream", true);
+	conf->setValue("show_activeRadiantGenericData_stream", true);
+	conf->setValue("show_inactiveRadiant_stream", false);
+
 	conf->setValue("show_activeRadiantRealData_marker", true);
 	conf->setValue("show_activeRadiantGenericData_marker", true);
 	conf->setValue("show_inactiveRadiant_marker", false);
+
+	conf->setValue("show_radiant_labels", true);
 
 	conf->endGroup();
 }
@@ -925,6 +950,9 @@ void MeteorShowers::readSettingsFromConfig(void)
 	color = StelUtils::strToVec3f(conf->value("colorIR", "255, 255, 255").toString());
 	colorIR = QColor(color[0],color[1],color[2]);
 
+	flagShowStreamARG = conf->value("show_activeRadiantGenericData_stream", true).toBool();
+	flagShowStreamARR = conf->value("show_activeRadiantRealData_stream", true).toBool();
+
 	flagShowARG = conf->value("show_activeRadiantGenericData_marker", true).toBool();
 	flagShowARR = conf->value("show_activeRadiantRealData_marker", true).toBool();
 	flagShowIR = conf->value("show_inactiveRadiant_marker", false).toBool();
@@ -952,6 +980,9 @@ void MeteorShowers::saveSettingsToConfig(void)
 	conf->setValue("colorARR", QString("%1, %2, %3").arg(r).arg(g).arg(b));
 	colorIR.getRgb(&r,&g,&b);
 	conf->setValue("colorIR", QString("%1, %2, %3").arg(r).arg(g).arg(b));
+
+	conf->setValue("show_activeRadiantGenericData_stream", flagShowStreamARG);
+	conf->setValue("show_activeRadiantRealData_stream", flagShowStreamARR);
 
 	conf->setValue("show_activeRadiantGenericData_marker", flagShowARG);
 	conf->setValue("show_activeRadiantRealData_marker", flagShowARR);
