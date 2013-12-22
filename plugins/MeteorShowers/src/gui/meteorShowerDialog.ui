@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>530</width>
-    <height>503</height>
+    <height>480</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -333,6 +333,12 @@
           <string>Active Radiant - Real Data</string>
          </property>
          <layout class="QGridLayout" name="gridLayout_2">
+          <property name="topMargin">
+           <number>4</number>
+          </property>
+          <property name="bottomMargin">
+           <number>4</number>
+          </property>
           <item row="0" column="1">
            <widget class="QFrame" name="frame">
             <property name="frameShape">
@@ -348,6 +354,19 @@
              <property name="spacing">
               <number>9</number>
              </property>
+             <property name="topMargin">
+              <number>0</number>
+             </property>
+             <property name="bottomMargin">
+              <number>0</number>
+             </property>
+             <item>
+              <widget class="QCheckBox" name="showStreamARR">
+               <property name="text">
+                <string>Displays the meteor stream.</string>
+               </property>
+              </widget>
+             </item>
              <item>
               <widget class="QCheckBox" name="showARR">
                <property name="toolTip">
@@ -368,6 +387,7 @@
             </layout>
             <zorder>changeColorARR</zorder>
             <zorder>showARR</zorder>
+            <zorder>showStreamARR</zorder>
            </widget>
           </item>
           <item row="0" column="0">
@@ -429,6 +449,12 @@
           <string>Active Radiant - Generic Data</string>
          </property>
          <layout class="QGridLayout" name="gridLayout_3">
+          <property name="topMargin">
+           <number>4</number>
+          </property>
+          <property name="bottomMargin">
+           <number>4</number>
+          </property>
           <item row="0" column="0">
            <widget class="QFrame" name="frame_4">
             <property name="minimumSize">
@@ -494,6 +520,19 @@
              <property name="spacing">
               <number>9</number>
              </property>
+             <property name="topMargin">
+              <number>0</number>
+             </property>
+             <property name="bottomMargin">
+              <number>0</number>
+             </property>
+             <item>
+              <widget class="QCheckBox" name="showStreamARG">
+               <property name="text">
+                <string>Displays the meteor stream.</string>
+               </property>
+              </widget>
+             </item>
              <item>
               <widget class="QCheckBox" name="showARG">
                <property name="toolTip">
@@ -523,6 +562,12 @@
           <string>Inactive Radiant</string>
          </property>
          <layout class="QGridLayout" name="gridLayout_4">
+          <property name="topMargin">
+           <number>4</number>
+          </property>
+          <property name="bottomMargin">
+           <number>4</number>
+          </property>
           <item row="0" column="1">
            <widget class="QFrame" name="frame_3">
             <property name="frameShape">
@@ -537,6 +582,12 @@
             <layout class="QVBoxLayout" name="verticalLayout_7">
              <property name="spacing">
               <number>9</number>
+             </property>
+             <property name="topMargin">
+              <number>0</number>
+             </property>
+             <property name="bottomMargin">
+              <number>0</number>
              </property>
              <item>
               <widget class="QCheckBox" name="showIR">
@@ -623,6 +674,12 @@
           <bool>true</bool>
          </property>
          <layout class="QGridLayout" name="gridLayout_5">
+          <property name="topMargin">
+           <number>4</number>
+          </property>
+          <property name="bottomMargin">
+           <number>4</number>
+          </property>
           <item row="0" column="0">
            <widget class="QLabel" name="label">
             <property name="text">
