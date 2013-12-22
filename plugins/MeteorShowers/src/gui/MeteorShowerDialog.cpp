@@ -104,6 +104,9 @@ void MeteorShowerDialog::createDialogContent()
 	connect(ui->changeColorARR, SIGNAL(clicked()), this, SLOT(setColorARR()));
 	connect(ui->changeColorIR, SIGNAL(clicked()), this, SLOT(setColorIR()));
 
+	connect(ui->showStreamARG, SIGNAL(clicked(bool)), GETSTELMODULE(MeteorShowers), SLOT(setFlagShowStreamARG(bool)));
+	connect(ui->showStreamARR, SIGNAL(clicked(bool)), GETSTELMODULE(MeteorShowers), SLOT(setFlagShowStreamARR(bool)));
+
 	connect(ui->showARG, SIGNAL(clicked(bool)), GETSTELMODULE(MeteorShowers), SLOT(setFlagARG(bool)));
 	connect(ui->showARR, SIGNAL(clicked(bool)), GETSTELMODULE(MeteorShowers), SLOT(setFlagARR(bool)));
 	connect(ui->showIR, SIGNAL(clicked(bool)), GETSTELMODULE(MeteorShowers), SLOT(setFlagIR(bool)));
@@ -221,11 +224,17 @@ void MeteorShowerDialog::restoreDefaults(void)
 void MeteorShowerDialog::updateGuiFromSettings(void)
 {
 	ui->internetUpdatesCheckbox->setChecked(GETSTELMODULE(MeteorShowers)->getUpdatesEnabled());
+
+	ui->showStreamARG->setChecked(GETSTELMODULE(MeteorShowers)->getFlagShowStreamARG());
+	ui->showStreamARR->setChecked(GETSTELMODULE(MeteorShowers)->getFlagShowStreamARR());
+
 	ui->showARG->setChecked(GETSTELMODULE(MeteorShowers)->getFlagARG());
 	ui->showARR->setChecked(GETSTELMODULE(MeteorShowers)->getFlagARR());
 	ui->showIR->setChecked(GETSTELMODULE(MeteorShowers)->getFlagIR());
+
 	ui->labelsGroup->setChecked(GETSTELMODULE(MeteorShowers)->getFlagLabels());
 	ui->fontSizeSpinBox->setValue(GETSTELMODULE(MeteorShowers)->getLabelFontSize());
+
 	refreshUpdateValues();
 	refreshColorMarkers();
 }

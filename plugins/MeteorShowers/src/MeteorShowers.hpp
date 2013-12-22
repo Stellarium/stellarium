@@ -229,6 +229,20 @@ public:
 		return flagShowIR;
 	}
 
+	//! Get the meteor stream status of active radiant based on generic data.
+	//! @return false: hidden
+	bool getFlagShowStreamARG()
+	{
+		return flagShowStreamARG;
+	}
+
+	//! Get the meteor stream status of active radiant based on real data.
+	//! @return false: hidden
+	bool getFlagShowStreamARR()
+	{
+		return flagShowStreamARR;
+	}
+
 signals:
 	//! @param state the new update state.
 	void updateStateChanged(MeteorShowers::UpdateState state);
@@ -285,6 +299,20 @@ public slots:
 	void setFlagIR(bool b)
 	{
 		flagShowIR = b;
+	}
+
+	//! Enable/disable meteor stream of active radiant based on generic data.
+	//! @param false: hidden
+	void setFlagShowStreamARG(bool b)
+	{
+		flagShowStreamARG = b;
+	}
+
+	//! Enable/disable meteor stream of active radiant based on real data.
+	//! @param false: hidden
+	void setFlagShowStreamARR(bool b)
+	{
+		flagShowStreamARR = b;
 	}
 
 private:
@@ -387,17 +415,21 @@ private:
 	bool flagShowARR;  //! Show marker of active radiant based on generic data
 	bool flagShowIR;   //! Show marker of inactive radiant
 
+	bool flagShowStreamARG;  //! Show meteor stream of active radiant based on generic data
+	bool flagShowStreamARR;  //! Show meteor stream of active radiant based on generic data
+
 	typedef struct
 	{
-		QString showerID;		    //! The ID of the meteor shower
-		QDateTime start;			    //! First day for activity
-		QDateTime finish;			    //! Latest day for activity
-		QDateTime peak;			    //! Day with maximum for activity
-		int zhr;		    	    //! ZHR of shower
-		QString variable;           //! value of variable for ZHR
-		int speed;                  //! Speed of meteors
-		double radiantAlpha;        //! R.A. for radiant of meteor shower
-		double radiantDelta;        //! Dec. for radiant of meteor shower
+		QString showerID;	//! The ID of the meteor shower
+		QDateTime start;	//! First day for activity
+		QDateTime finish;	//! Latest day for activity
+		QDateTime peak;		//! Day with maximum for activity
+		int status;		//! 0:inactive 1:activeRealData 2:activeGenericData
+		int zhr;		//! ZHR of shower
+		QString variable;	//! value of variable for ZHR
+		int speed;		//! Speed of meteors
+		double radiantAlpha;    //! R.A. for radiant of meteor shower
+		double radiantDelta;    //! Dec. for radiant of meteor shower
 	} activeData;
 
 	QList<activeData> activeInfo;	//! List of active meteors
