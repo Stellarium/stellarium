@@ -55,6 +55,7 @@ private slots:
 	void updateZhrDescription(int zhr);
 	void planetsLabelsValueChanged(int);
 	void nebulasLabelsValueChanged(int);
+	void setBortleScaleToolTip(int Bindex);
 	void starsLabelsValueChanged(int);
 	void setCurrentLandscapeAsDefault(void);
 	void setCurrentCultureAsDefault(void);
