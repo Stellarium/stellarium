@@ -280,32 +280,6 @@ void MeteorShowers::draw(StelCore* core)
 	drawStream(core, painter);
 }
 
-void MeteorShowers::drawStream(StelCore* core, StelPainter& painter)
-{
-	LandscapeMgr* landmgr = (LandscapeMgr*)StelApp::getInstance().getModuleMgr().getModule("LandscapeMgr");
-	if(landmgr->getFlagAtmosphere() && landmgr->getLuminance()>5)
-		return;
-
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	glEnable(GL_BLEND);
-	painter.enableTexture2d(false);
-
-	int index = 0;
-	if(active.size() > 0)
-	{
-		foreach(const activeData &a, activeInfo)
-		{
-			(void)a;
-			// step through and draw all active meteors
-			for(std::vector<MeteorStream*>::iterator iter = active[index].begin(); iter != active[index].end(); ++iter)
-			{
-				(*iter)->draw(core, painter);
-			}
-			index++;
-		}
-	}
-}
-
 void MeteorShowers::drawMarker(StelCore* core, StelPainter& painter)
 {
 	painter.setFont(labelFont);
@@ -316,7 +290,22 @@ void MeteorShowers::drawMarker(StelCore* core, StelPainter& painter)
 
 	foreach(const MeteorShowerP& ms, mShowers)
 	{
-		if(ms && ms->initialized)
+		bool flag=true;
+		switch(ms->getStatus())
+		{
+		case 1:
+			flag = flagShowARR;
+			break;
+		case 2:
+			flag = flagShowARG;
+			break;
+		default:
+			flag = flagShowIR;
+		}
+
+		ms->updateCurrentData(skyDate);
+
+		if(ms && ms->initialized && flag)
 			ms->draw(painter);
 	}
 	glDisable(GL_TEXTURE_2D);
@@ -352,6 +341,32 @@ void MeteorShowers::drawPointer(StelCore* core, StelPainter& painter)
 		painter.drawSprite2dMode(screenpos[0]+size/2, screenpos[1]+size/2, 10.f, -90);
 		painter.drawSprite2dMode(screenpos[0]+size/2, screenpos[1]-size/2, 10.f, -180);
 		painter.setColor(1,1,1,0);
+	}
+}
+
+void MeteorShowers::drawStream(StelCore* core, StelPainter& painter)
+{
+	LandscapeMgr* landmgr = (LandscapeMgr*)StelApp::getInstance().getModuleMgr().getModule("LandscapeMgr");
+	if(landmgr->getFlagAtmosphere() && landmgr->getLuminance()>5)
+		return;
+
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	glEnable(GL_BLEND);
+	painter.enableTexture2d(false);
+
+	int index = 0;
+	if(active.size() > 0)
+	{
+		foreach(const activeData &a, activeInfo)
+		{
+			(void)a;
+			// step through and draw all active meteors
+			for(std::vector<MeteorStream*>::iterator iter = active[index].begin(); iter != active[index].end(); ++iter)
+			{
+				(*iter)->draw(core, painter);
+			}
+			index++;
+		}
 	}
 }
 
@@ -778,6 +793,9 @@ void MeteorShowers::restoreDefaultConfigIni(void)
 	conf->setValue("colorARR", "255, 240, 0");
 	conf->setValue("colorIR", "255, 255, 255");
 	conf->setValue("show_radiant_labels", true);
+	conf->setValue("show_activeRadiantRealData_marker", true);
+	conf->setValue("show_activeRadiantGenericData_marker", true);
+	conf->setValue("show_inactiveRadiant_marker", false);
 
 	conf->endGroup();
 }
@@ -907,6 +925,10 @@ void MeteorShowers::readSettingsFromConfig(void)
 	color = StelUtils::strToVec3f(conf->value("colorIR", "255, 255, 255").toString());
 	colorIR = QColor(color[0],color[1],color[2]);
 
+	flagShowARG = conf->value("show_activeRadiantGenericData_marker", true).toBool();
+	flagShowARR = conf->value("show_activeRadiantRealData_marker", true).toBool();
+	flagShowIR = conf->value("show_inactiveRadiant_marker", false).toBool();
+
 	MeteorShower::showLabels = conf->value("show_radiant_labels", true).toBool();
 	labelFont.setPixelSize(conf->value("font_size", 13).toInt());
 
@@ -930,6 +952,10 @@ void MeteorShowers::saveSettingsToConfig(void)
 	conf->setValue("colorARR", QString("%1, %2, %3").arg(r).arg(g).arg(b));
 	colorIR.getRgb(&r,&g,&b);
 	conf->setValue("colorIR", QString("%1, %2, %3").arg(r).arg(g).arg(b));
+
+	conf->setValue("show_activeRadiantGenericData_marker", flagShowARG);
+	conf->setValue("show_activeRadiantRealData_marker", flagShowARR);
+	conf->setValue("show_inactiveRadiant_marker", flagShowIR);
 
 	conf->setValue("show_radiant_labels", MeteorShower::showLabels);
 	conf->setValue("font_size", labelFont.pixelSize());
