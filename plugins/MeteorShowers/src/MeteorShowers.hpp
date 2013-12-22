@@ -196,6 +196,13 @@ public:
 		colorIR = color;
 	}
 
+	//! get the label font size.
+	//! @return the pixel size of the font
+	int getLabelFontSize()
+	{
+		return labelFont.pixelSize();
+	}
+
 signals:
 	//! @param state the new update state.
 	void updateStateChanged(MeteorShowers::UpdateState state);
@@ -224,6 +231,10 @@ public slots:
 	{
 		return flagShowMSButton;
 	}
+
+	//! set the label font size.
+	//! @param size the pixel size of the font
+	void setLabelFontSize(int size);
 
 private:
 	// Upgrade config.ini: rename old key settings to new
@@ -281,7 +292,7 @@ private:
 	static void translations();
 
 	//! Font used for displaying our text
-	QFont font;
+	QFont labelFont;
 
 	QString showersJsonPath;
 

@@ -96,7 +96,7 @@ MeteorShowers::MeteorShowers()
 	setObjectName("MeteorShowers");
 	configDialog = new MeteorShowerDialog();
 	conf = StelApp::getInstance().getSettings();
-	font.setPixelSize(conf->value("gui/base_font_size", 13).toInt());
+	labelFont.setPixelSize(conf->value("gui/base_font_size", 13).toInt());
 }
 
 /*
@@ -306,7 +306,7 @@ void MeteorShowers::drawStream(StelCore* core, StelPainter& painter)
 
 void MeteorShowers::drawMarker(StelCore* core, StelPainter& painter)
 {
-	painter.setFont(font);
+	painter.setFont(labelFont);
 
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glEnable(GL_BLEND);
@@ -904,6 +904,9 @@ void MeteorShowers::readSettingsFromConfig(void)
 	color = StelUtils::strToVec3f(conf->value("colorIR", "255, 255, 255").toString());
 	colorIR = QColor(color[0],color[1],color[2]);
 
+	// Get a font for labels
+	labelFont.setPixelSize(conf->value("font_size", 13).toInt());
+
 	conf->endGroup();
 }
 
@@ -924,6 +927,9 @@ void MeteorShowers::saveSettingsToConfig(void)
 	conf->setValue("colorARR", QString("%1, %2, %3").arg(r).arg(g).arg(b));
 	colorIR.getRgb(&r,&g,&b);
 	conf->setValue("colorIR", QString("%1, %2, %3").arg(r).arg(g).arg(b));
+
+	// Get a font for labels
+	conf->setValue("font_size", labelFont.pixelSize());
 
 	conf->endGroup();
 }
@@ -1026,6 +1032,12 @@ void MeteorShowers::messageTimeout(void)
 	{
 		GETSTELMODULE(LabelMgr)->deleteLabel(i);
 	}
+}
+
+void MeteorShowers::setLabelFontSize(int size)
+{
+	if (labelFont.pixelSize() != size)
+		labelFont.setPixelSize(size);
 }
 
 void MeteorShowers::translations()
