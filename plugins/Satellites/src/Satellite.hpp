@@ -226,10 +226,11 @@ private:
 	static int   orbitLineFadeSegments;
 	static int   orbitLineSegmentDuration; //measured in seconds
 	static bool  orbitLinesFlag;
+	static bool  realisticModeFlag;
 	//! Mask controlling which info display flags should be honored.
 	static StelObject::InfoStringGroupFlags flagsMask;
 
-	void draw(const StelCore* core, StelPainter& painter, float maxMagHints);
+	void draw(StelCore *core, StelPainter& painter, float maxMagHints);
 
 	//Satellite Orbit Position calculation
 	gSatWrapper *pSatWrapper;
