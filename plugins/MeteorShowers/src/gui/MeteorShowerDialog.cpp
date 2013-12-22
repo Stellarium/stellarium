@@ -19,11 +19,13 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 */
 
-#include <QDebug>
-#include <QTimer>
+#include <QColorDialog>
 #include <QDateTime>
-#include <QUrl>
+#include <QDebug>
 #include <QFileDialog>
+#include <QGraphicsColorizeEffect>
+#include <QTimer>
+#include <QUrl>
 
 #include "StelApp.hpp"
 #include "ui_meteorShowerDialog.h"
@@ -96,6 +98,11 @@ void MeteorShowerDialog::createDialogContent()
 	connect(ui->restoreDefaultsButton, SIGNAL(clicked()), this, SLOT(restoreDefaults()));
 	connect(ui->saveSettingsButton, SIGNAL(clicked()), this, SLOT(saveSettings()));
 
+	// Markers tab
+	connect(ui->changeColorIR, SIGNAL(clicked()), this, SLOT(setColorIR()));
+	connect(ui->changeColorARG, SIGNAL(clicked()), this, SLOT(setColorARG()));
+	connect(ui->changeColorARR, SIGNAL(clicked()), this, SLOT(setColorARR()));
+
 	// About tab
 	setAboutHtml();
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
@@ -103,7 +110,6 @@ void MeteorShowerDialog::createDialogContent()
 	ui->aboutTextBrowser->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
 
 	updateGuiFromSettings();
-
 }
 
 void MeteorShowerDialog::setAboutHtml(void)
@@ -221,4 +227,28 @@ void MeteorShowerDialog::updateJSON(void)
 	{
 		GETSTELMODULE(MeteorShowers)->updateJSON();
 	}
+}
+
+void MeteorShowerDialog::setColorARG()
+{
+	QColor color = QColorDialog::getColor();
+	QGraphicsColorizeEffect *e = new QGraphicsColorizeEffect(ui->textureARG);
+	e->setColor(color);
+	ui->textureARG->setGraphicsEffect(e);
+}
+
+void MeteorShowerDialog::setColorARR()
+{
+	QColor color = QColorDialog::getColor();
+	QGraphicsColorizeEffect *e = new QGraphicsColorizeEffect(ui->textureARR);
+	e->setColor(color);
+	ui->textureARR->setGraphicsEffect(e);
+}
+
+void MeteorShowerDialog::setColorIR()
+{
+	QColor color = QColorDialog::getColor();
+	QGraphicsColorizeEffect *e = new QGraphicsColorizeEffect(ui->textureIR);
+	e->setColor(color);
+	ui->textureIR->setGraphicsEffect(e);
 }
