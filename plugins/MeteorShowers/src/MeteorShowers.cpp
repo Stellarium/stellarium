@@ -40,21 +40,22 @@
 #include "MeteorStream.hpp"
 #include "StelProgressController.hpp"
 
+#include <QAction>
+#include <QColor>
+#include <QDebug>
+#include <QDir>
+#include <QFile>
+#include <QFileInfo>
+#include <QKeyEvent>
+#include <QList>
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
-#include <QKeyEvent>
-#include <QAction>
 #include <QProgressBar>
-#include <QDebug>
-#include <QFileInfo>
-#include <QFile>
-#include <QTimer>
-#include <QVariantMap>
-#include <QVariant>
-#include <QList>
 #include <QSharedPointer>
 #include <QStringList>
-#include <QDir>
+#include <QTimer>
+#include <QVariant>
+#include <QVariantMap>
 
 #define CATALOG_FORMAT_VERSION 1 /* Version of format of catalog */
 
@@ -757,6 +758,10 @@ void MeteorShowers::restoreDefaultConfigIni(void)
 	conf->setValue("url", "http://stellarium.org/json/showers.json");
 	conf->setValue("update_frequency_hours", 100);
 	conf->setValue("flag_show_ms_button", true);
+	conf->setValue("colorARG", "0, 255, 240");
+	conf->setValue("colorARR", "255, 240, 0");
+	conf->setValue("colorIR", "255, 255, 255");
+
 	conf->endGroup();
 }
 
@@ -877,6 +882,14 @@ void MeteorShowers::readSettingsFromConfig(void)
 	enableAtStartup = conf->value("enable_at_startup", false).toBool();
 	flagShowMSButton = conf->value("flag_show_ms_button", true).toBool();
 
+	Vec3f color;
+	color = StelUtils::strToVec3f(conf->value("colorARG", "0, 255, 240").toString());
+	colorARG = QColor(color[0],color[1],color[2]);
+	color = StelUtils::strToVec3f(conf->value("colorARR", "255, 240, 0").toString());
+	colorARR = QColor(color[0],color[1],color[2]);
+	color = StelUtils::strToVec3f(conf->value("colorIR", "255, 255, 255").toString());
+	colorIR = QColor(color[0],color[1],color[2]);
+
 	conf->endGroup();
 }
 
@@ -889,6 +902,14 @@ void MeteorShowers::saveSettingsToConfig(void)
 	conf->setValue("updates_enabled", updatesEnabled);
 	conf->setValue("enable_at_startup", enableAtStartup);
 	conf->setValue("flag_show_ms_button", flagShowMSButton);
+
+	int r,g,b;
+	colorARG.getRgb(&r,&g,&b);
+	conf->setValue("colorARG", QString("%1, %2, %3").arg(r).arg(g).arg(b));
+	colorARR.getRgb(&r,&g,&b);
+	conf->setValue("colorARR", QString("%1, %2, %3").arg(r).arg(g).arg(b));
+	colorIR.getRgb(&r,&g,&b);
+	conf->setValue("colorIR", QString("%1, %2, %3").arg(r).arg(g).arg(b));
 
 	conf->endGroup();
 }

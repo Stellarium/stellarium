@@ -99,9 +99,10 @@ void MeteorShowerDialog::createDialogContent()
 	connect(ui->saveSettingsButton, SIGNAL(clicked()), this, SLOT(saveSettings()));
 
 	// Markers tab
-	connect(ui->changeColorIR, SIGNAL(clicked()), this, SLOT(setColorIR()));
+	refreshColorMarkers();
 	connect(ui->changeColorARG, SIGNAL(clicked()), this, SLOT(setColorARG()));
 	connect(ui->changeColorARR, SIGNAL(clicked()), this, SLOT(setColorARR()));
+	connect(ui->changeColorIR, SIGNAL(clicked()), this, SLOT(setColorIR()));
 
 	// About tab
 	setAboutHtml();
@@ -214,6 +215,7 @@ void MeteorShowerDialog::updateGuiFromSettings(void)
 {
 	ui->internetUpdatesCheckbox->setChecked(GETSTELMODULE(MeteorShowers)->getUpdatesEnabled());
 	refreshUpdateValues();
+	refreshColorMarkers();
 }
 
 void MeteorShowerDialog::saveSettings(void)
@@ -229,26 +231,37 @@ void MeteorShowerDialog::updateJSON(void)
 	}
 }
 
+void MeteorShowerDialog::refreshColorMarkers(void)
+{
+	setTextureColor(ui->textureARG, GETSTELMODULE(MeteorShowers)->getColorARG());
+	setTextureColor(ui->textureARR, GETSTELMODULE(MeteorShowers)->getColorARR());
+	setTextureColor(ui->textureIR, GETSTELMODULE(MeteorShowers)->getColorIR());
+}
+
+void MeteorShowerDialog::setTextureColor(QLabel *texture, QColor color)
+{
+	QGraphicsColorizeEffect *e = new QGraphicsColorizeEffect(texture);
+	e->setColor(color);
+	texture->setGraphicsEffect(e);
+}
+
 void MeteorShowerDialog::setColorARG()
 {
 	QColor color = QColorDialog::getColor();
-	QGraphicsColorizeEffect *e = new QGraphicsColorizeEffect(ui->textureARG);
-	e->setColor(color);
-	ui->textureARG->setGraphicsEffect(e);
+	setTextureColor(ui->textureARG, color);
+	GETSTELMODULE(MeteorShowers)->setColorARG(color);
 }
 
 void MeteorShowerDialog::setColorARR()
 {
 	QColor color = QColorDialog::getColor();
-	QGraphicsColorizeEffect *e = new QGraphicsColorizeEffect(ui->textureARR);
-	e->setColor(color);
-	ui->textureARR->setGraphicsEffect(e);
+	setTextureColor(ui->textureARR, color);
+	GETSTELMODULE(MeteorShowers)->setColorARR(color);
 }
 
 void MeteorShowerDialog::setColorIR()
 {
 	QColor color = QColorDialog::getColor();
-	QGraphicsColorizeEffect *e = new QGraphicsColorizeEffect(ui->textureIR);
-	e->setColor(color);
-	ui->textureIR->setGraphicsEffect(e);
+	setTextureColor(ui->textureIR, color);
+	GETSTELMODULE(MeteorShowers)->setColorIR(color);
 }

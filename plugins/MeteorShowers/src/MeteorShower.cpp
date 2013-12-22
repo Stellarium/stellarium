@@ -18,22 +18,21 @@
  */
 
 #include "MeteorShower.hpp"
-#include "Meteor.hpp"
-#include "StelObject.hpp"
-#include "StelPainter.hpp"
+#include "MeteorShowers.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
+#include "StelModuleMgr.hpp"
+#include "StelObject.hpp"
+#include "StelPainter.hpp"
 #include "StelTexture.hpp"
 #include "StelUtils.hpp"
-#include "StelModuleMgr.hpp"
 
-#include <QTextStream>
 #include <QDebug>
-#include <QVariant>
-#include <QOpenGLFunctions>
-#include <QVariantMap>
-#include <QVariant>
 #include <QList>
+#include <QOpenGLFunctions>
+#include <QTextStream>
+#include <QVariant>
+#include <QVariantMap>
 
 StelTextureSP MeteorShower::radiantTexture;
 
@@ -390,19 +389,21 @@ void MeteorShower::draw(StelPainter& painter)
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE);
 
+	qreal r, g, b;
 	float alpha = 0.85f + ((double) rand() / (RAND_MAX))/10;
-
 	switch(isActive)
 	{
 	case 1: //Active, real data
-		painter.setColor(1.0f, 0.94f, 0.0f, alpha);
+		GETSTELMODULE(MeteorShowers)->getColorARR().getRgbF(&r,&g,&b);
 		break;
 	case 2: //Active, generic data
-		painter.setColor(0.0f, 1.0f, 0.94f, alpha);
+		GETSTELMODULE(MeteorShowers)->getColorARG().getRgbF(&r,&g,&b);
 		break;
 	default: //Inactive
-		painter.setColor(1.0f, 1.0f, 1.0f, alpha);
+		GETSTELMODULE(MeteorShowers)->getColorIR().getRgbF(&r,&g,&b);
 	}
+
+	painter.setColor(r, g, b, alpha);
 
 	MeteorShower::radiantTexture->bind();
 	painter.drawSprite2dMode(XY[0], XY[1], 10);

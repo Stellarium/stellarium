@@ -20,17 +20,18 @@
 #ifndef METEORSHOWERS_HPP_
 #define METEORSHOWERS_HPP_
 
-#include "StelModule.hpp"
-#include "StelObjectModule.hpp"
-#include "StelFader.hpp"
-#include "StelTextureTypes.hpp"
 #include "MeteorShower.hpp"
 #include "MeteorStream.hpp"
+#include "StelFader.hpp"
+#include "StelModule.hpp"
+#include "StelObjectModule.hpp"
+#include "StelTextureTypes.hpp"
 
+#include <QColor>
 #include <QDateTime>
+#include <QFont>
 #include <QSharedPointer>
 #include <QVariantMap>
-#include <QFont>
 
 class QNetworkAccessManager;
 class QNetworkReply;
@@ -165,6 +166,36 @@ public:
 		return updateState;
 	}
 
+	//! Get current color of active radiant based  in generic data
+	QColor getColorARG()
+	{
+		return colorARG;
+	}
+	void setColorARG(QColor color)
+	{
+		colorARG = color;
+	}
+
+	//! Get current color of active radiant based  in real data
+	QColor getColorARR()
+	{
+		return colorARR;
+	}
+	void setColorARR(QColor color)
+	{
+		colorARR = color;
+	}
+
+	//! Get current inactive radiant color
+	QColor getColorIR()
+	{
+		return colorIR;
+	}
+	void setColorIR(QColor color)
+	{
+		colorIR = color;
+	}
+
 signals:
 	//! @param state the new update state.
 	void updateStateChanged(MeteorShowers::UpdateState state);
@@ -259,6 +290,9 @@ private:
 	QPixmap* OffIcon;
 	QPixmap* GlowIcon;
 	StelButton* toolbarButton;
+	QColor colorARR;			//color of active radiant based on real data
+	QColor colorARG;			//color of active radiant based on generic data
+	QColor colorIR;			//color of inactive radiant
 
 	// variables and functions for the updater
 	UpdateState updateState;
