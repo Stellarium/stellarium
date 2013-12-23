@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-20 22:08+0700\n"
+"POT-Creation-Date: 2013-12-23 01:35+0700\n"
 "PO-Revision-Date: 2013-08-12 03:14+0000\n"
 "Last-Translator: Tanmoy Saha <Unknown>\n"
 "Language-Team: Tanmoy Saha\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-12-21 05:16+0000\n"
+"X-Launchpad-Export-Date: 2013-12-23 05:17+0000\n"
 "X-Generator: Launchpad (build 16872)\n"
 "Language: bn\n"
 
@@ -1157,7 +1157,7 @@ msgstr "দিগংশ / উন্নতি-এর প্রারম্ভি�
 msgid "Authors"
 msgstr "লেখকবৃন্দ"
 
-#: src/gui/ConfigurationDialog.cpp:701 src/gui/ViewDialog.cpp:365
+#: src/gui/ConfigurationDialog.cpp:701 src/gui/ViewDialog.cpp:411
 msgid "Contact"
 msgstr "যোগাযোগ"
 
@@ -1516,31 +1516,80 @@ msgstr "Space"
 msgid "%1m"
 msgstr "%1m"
 
-#: src/gui/ViewDialog.cpp:413
+#. TRANSLATORS: Short description for Class 1 of the Bortle scale
+#: src/gui/ViewDialog.cpp:297
+msgid "Excellent dark-sky site"
+msgstr ""
+
+#. TRANSLATORS: Short description for Class 2 of the Bortle scale
+#: src/gui/ViewDialog.cpp:299
+msgid "Typical truly dark site"
+msgstr ""
+
+#. TRANSLATORS: Short description for Class 3 of the Bortle scale
+#: src/gui/ViewDialog.cpp:301
+msgid "Rural sky"
+msgstr ""
+
+#. TRANSLATORS: Short description for Class 4 of the Bortle scale
+#: src/gui/ViewDialog.cpp:303
+msgid "Rural/suburban transition"
+msgstr ""
+
+#. TRANSLATORS: Short description for Class 5 of the Bortle scale
+#: src/gui/ViewDialog.cpp:305
+msgid "Suburban sky"
+msgstr ""
+
+#. TRANSLATORS: Short description for Class 6 of the Bortle scale
+#: src/gui/ViewDialog.cpp:307
+msgid "Bright suburban sky"
+msgstr ""
+
+#. TRANSLATORS: Short description for Class 7 of the Bortle scale
+#: src/gui/ViewDialog.cpp:309
+msgid "Suburban/urban transition"
+msgstr ""
+
+#. TRANSLATORS: Short description for Class 8 of the Bortle scale
+#: src/gui/ViewDialog.cpp:311
+msgid "City sky"
+msgstr ""
+
+#. TRANSLATORS: Short description for Class 9 of the Bortle scale
+#: src/gui/ViewDialog.cpp:313
+msgid "Inner-city sky"
+msgstr ""
+
+#: src/gui/ViewDialog.cpp:327
+msgid "The naked-eye limiting magnitude is"
+msgstr ""
+
+#: src/gui/ViewDialog.cpp:459
 msgid "No description"
 msgstr "কোন বর্ণনা নেই"
 
-#: src/gui/ViewDialog.cpp:523
+#: src/gui/ViewDialog.cpp:569
 msgid "No shooting stars"
 msgstr "কোন উল্কা দেখা যাবে না"
 
-#: src/gui/ViewDialog.cpp:526
+#: src/gui/ViewDialog.cpp:572
 msgid "Normal rate"
 msgstr "স্বাভাবিক হার"
 
-#: src/gui/ViewDialog.cpp:529
+#: src/gui/ViewDialog.cpp:575
 msgid "Standard Perseids rate"
 msgstr "প্রমাণ হার"
 
-#: src/gui/ViewDialog.cpp:532
+#: src/gui/ViewDialog.cpp:578
 msgid "Meteor storm rate"
 msgstr "উল্কা ঝড়ের হার"
 
-#: src/gui/ViewDialog.cpp:535
+#: src/gui/ViewDialog.cpp:581
 msgid "Exceptional Leonid rate"
 msgstr "সিংহরাশি থেকে বর্ষিত উল্কাবৃষ্টির  ব্যতিক্রমী হার"
 
-#: src/gui/ViewDialog.cpp:538
+#: src/gui/ViewDialog.cpp:584
 msgid "Highest rate ever (1966 Leonids)"
 msgstr "সর্বকালের সর্বোচ্চ হার (১৯৬৬ সিংহরাশি থেকে)"
 
@@ -5174,62 +5223,62 @@ msgstr ""
 "সূচনা ফাইল ব্যবহার করুন"
 
 #. TRANSLATORS: Satellite group: Bright/naked-eye-visible satellites
-#: plugins/Satellites/src/Satellites.cpp:1630
+#: plugins/Satellites/src/Satellites.cpp:1656
 msgid "visual"
 msgstr "দৃষি্টগোচর"
 
 #. TRANSLATORS: Satellite group: Scientific satellites
-#: plugins/Satellites/src/Satellites.cpp:1632
+#: plugins/Satellites/src/Satellites.cpp:1658
 msgid "scientific"
 msgstr "বিজ্ঞানসংক্রান্ত"
 
 #. TRANSLATORS: Satellite group: Communication satellites
-#: plugins/Satellites/src/Satellites.cpp:1634
+#: plugins/Satellites/src/Satellites.cpp:1660
 msgid "communications"
 msgstr "যোগাযোগসংক্রান্ত"
 
 #. TRANSLATORS: Satellite group: Navigation satellites
-#: plugins/Satellites/src/Satellites.cpp:1636
+#: plugins/Satellites/src/Satellites.cpp:1662
 msgid "navigation"
 msgstr "মার্গদর্শী"
 
 #. TRANSLATORS: Satellite group: Amateur radio (ham) satellites
-#: plugins/Satellites/src/Satellites.cpp:1638
+#: plugins/Satellites/src/Satellites.cpp:1664
 msgid "amateur"
 msgstr "রেডিও"
 
 #. TRANSLATORS: Satellite group: Weather (meteorological) satellites
-#: plugins/Satellites/src/Satellites.cpp:1640
+#: plugins/Satellites/src/Satellites.cpp:1666
 msgid "weather"
 msgstr "আবহাওয়া"
 
 #. TRANSLATORS: Satellite group: Satellites in geostationary orbit
-#: plugins/Satellites/src/Satellites.cpp:1642
+#: plugins/Satellites/src/Satellites.cpp:1668
 msgid "geostationary"
 msgstr "ভুসমলয়"
 
 #. TRANSLATORS: Satellite group: Satellites that are no longer functioning
-#: plugins/Satellites/src/Satellites.cpp:1644
+#: plugins/Satellites/src/Satellites.cpp:1670
 msgid "non-operational"
 msgstr "অকেজো"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GPS constellation (the Global Positioning System)
-#: plugins/Satellites/src/Satellites.cpp:1646
+#: plugins/Satellites/src/Satellites.cpp:1672
 msgid "gps"
 msgstr "জিপিএস"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Iridium constellation (Iridium is a proper name)
-#: plugins/Satellites/src/Satellites.cpp:1648
+#: plugins/Satellites/src/Satellites.cpp:1674
 msgid "iridium"
 msgstr "ইরিডিয়াম"
 
 #. TRANSLATORS: Satellite description. "Hubble" is a person's name.
-#: plugins/Satellites/src/Satellites.cpp:1659
+#: plugins/Satellites/src/Satellites.cpp:1685
 msgid "The Hubble Space Telescope"
 msgstr "হাবল স্পেস টেলিস্কোপ"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:1661
+#: plugins/Satellites/src/Satellites.cpp:1687
 msgid "The International Space Station"
 msgstr "আন্তর্জাতিক মহাকাশ কেন্দ্র"
 
