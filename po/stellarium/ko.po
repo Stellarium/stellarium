@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-20 22:08+0700\n"
+"POT-Creation-Date: 2013-12-23 01:35+0700\n"
 "PO-Revision-Date: 2013-11-05 08:29+0000\n"
 "Last-Translator: LEE E. S. <Unknown>\n"
 "Language-Team: Korean <ko@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-12-21 05:21+0000\n"
+"X-Launchpad-Export-Date: 2013-12-23 05:22+0000\n"
 "X-Generator: Launchpad (build 16872)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:106 src/core/modules/StarMgr.cpp:336
@@ -1101,7 +1101,7 @@ msgstr "시작시 시야 방향 방위/고도: %1/%2"
 msgid "Authors"
 msgstr "저작자"
 
-#: src/gui/ConfigurationDialog.cpp:701 src/gui/ViewDialog.cpp:365
+#: src/gui/ConfigurationDialog.cpp:701 src/gui/ViewDialog.cpp:411
 msgid "Contact"
 msgstr "연락처"
 
@@ -1458,31 +1458,80 @@ msgstr "스페이스"
 msgid "%1m"
 msgstr "%1m"
 
-#: src/gui/ViewDialog.cpp:413
+#. TRANSLATORS: Short description for Class 1 of the Bortle scale
+#: src/gui/ViewDialog.cpp:297
+msgid "Excellent dark-sky site"
+msgstr ""
+
+#. TRANSLATORS: Short description for Class 2 of the Bortle scale
+#: src/gui/ViewDialog.cpp:299
+msgid "Typical truly dark site"
+msgstr ""
+
+#. TRANSLATORS: Short description for Class 3 of the Bortle scale
+#: src/gui/ViewDialog.cpp:301
+msgid "Rural sky"
+msgstr ""
+
+#. TRANSLATORS: Short description for Class 4 of the Bortle scale
+#: src/gui/ViewDialog.cpp:303
+msgid "Rural/suburban transition"
+msgstr ""
+
+#. TRANSLATORS: Short description for Class 5 of the Bortle scale
+#: src/gui/ViewDialog.cpp:305
+msgid "Suburban sky"
+msgstr ""
+
+#. TRANSLATORS: Short description for Class 6 of the Bortle scale
+#: src/gui/ViewDialog.cpp:307
+msgid "Bright suburban sky"
+msgstr ""
+
+#. TRANSLATORS: Short description for Class 7 of the Bortle scale
+#: src/gui/ViewDialog.cpp:309
+msgid "Suburban/urban transition"
+msgstr ""
+
+#. TRANSLATORS: Short description for Class 8 of the Bortle scale
+#: src/gui/ViewDialog.cpp:311
+msgid "City sky"
+msgstr ""
+
+#. TRANSLATORS: Short description for Class 9 of the Bortle scale
+#: src/gui/ViewDialog.cpp:313
+msgid "Inner-city sky"
+msgstr ""
+
+#: src/gui/ViewDialog.cpp:327
+msgid "The naked-eye limiting magnitude is"
+msgstr ""
+
+#: src/gui/ViewDialog.cpp:459
 msgid "No description"
 msgstr "설명 없음"
 
-#: src/gui/ViewDialog.cpp:523
+#: src/gui/ViewDialog.cpp:569
 msgid "No shooting stars"
 msgstr "유성 없음"
 
-#: src/gui/ViewDialog.cpp:526
+#: src/gui/ViewDialog.cpp:572
 msgid "Normal rate"
 msgstr "정상 속도"
 
-#: src/gui/ViewDialog.cpp:529
+#: src/gui/ViewDialog.cpp:575
 msgid "Standard Perseids rate"
 msgstr "표준 페르세우스 유성우 빈도수"
 
-#: src/gui/ViewDialog.cpp:532
+#: src/gui/ViewDialog.cpp:578
 msgid "Meteor storm rate"
 msgstr "유성폭풍 비율"
 
-#: src/gui/ViewDialog.cpp:535
+#: src/gui/ViewDialog.cpp:581
 msgid "Exceptional Leonid rate"
 msgstr "예외적인 사자자리 유성우 빈도수"
 
-#: src/gui/ViewDialog.cpp:538
+#: src/gui/ViewDialog.cpp:584
 msgid "Highest rate ever (1966 Leonids)"
 msgstr "사상 최고 빈도수 (1996년 사자자리 유성우)"
 
@@ -5057,62 +5106,62 @@ msgid ""
 msgstr "The old satellites.json 파일은 더이상 호환이 되지 않습니다 - 기본 파일을 사용하여"
 
 #. TRANSLATORS: Satellite group: Bright/naked-eye-visible satellites
-#: plugins/Satellites/src/Satellites.cpp:1630
+#: plugins/Satellites/src/Satellites.cpp:1656
 msgid "visual"
 msgstr "보이는"
 
 #. TRANSLATORS: Satellite group: Scientific satellites
-#: plugins/Satellites/src/Satellites.cpp:1632
+#: plugins/Satellites/src/Satellites.cpp:1658
 msgid "scientific"
 msgstr "과학"
 
 #. TRANSLATORS: Satellite group: Communication satellites
-#: plugins/Satellites/src/Satellites.cpp:1634
+#: plugins/Satellites/src/Satellites.cpp:1660
 msgid "communications"
 msgstr "통신"
 
 #. TRANSLATORS: Satellite group: Navigation satellites
-#: plugins/Satellites/src/Satellites.cpp:1636
+#: plugins/Satellites/src/Satellites.cpp:1662
 msgid "navigation"
 msgstr "해양"
 
 #. TRANSLATORS: Satellite group: Amateur radio (ham) satellites
-#: plugins/Satellites/src/Satellites.cpp:1638
+#: plugins/Satellites/src/Satellites.cpp:1664
 msgid "amateur"
 msgstr "아마츄어"
 
 #. TRANSLATORS: Satellite group: Weather (meteorological) satellites
-#: plugins/Satellites/src/Satellites.cpp:1640
+#: plugins/Satellites/src/Satellites.cpp:1666
 msgid "weather"
 msgstr "기상"
 
 #. TRANSLATORS: Satellite group: Satellites in geostationary orbit
-#: plugins/Satellites/src/Satellites.cpp:1642
+#: plugins/Satellites/src/Satellites.cpp:1668
 msgid "geostationary"
 msgstr "정지"
 
 #. TRANSLATORS: Satellite group: Satellites that are no longer functioning
-#: plugins/Satellites/src/Satellites.cpp:1644
+#: plugins/Satellites/src/Satellites.cpp:1670
 msgid "non-operational"
 msgstr "비작동"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GPS constellation (the Global Positioning System)
-#: plugins/Satellites/src/Satellites.cpp:1646
+#: plugins/Satellites/src/Satellites.cpp:1672
 msgid "gps"
 msgstr "GPS"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Iridium constellation (Iridium is a proper name)
-#: plugins/Satellites/src/Satellites.cpp:1648
+#: plugins/Satellites/src/Satellites.cpp:1674
 msgid "iridium"
 msgstr "이리듐"
 
 #. TRANSLATORS: Satellite description. "Hubble" is a person's name.
-#: plugins/Satellites/src/Satellites.cpp:1659
+#: plugins/Satellites/src/Satellites.cpp:1685
 msgid "The Hubble Space Telescope"
 msgstr "허블우주망원경"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:1661
+#: plugins/Satellites/src/Satellites.cpp:1687
 msgid "The International Space Station"
 msgstr "국제우주정거장"
 
