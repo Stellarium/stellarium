@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-23 01:35+0700\n"
+"POT-Creation-Date: 2013-12-24 21:46+0700\n"
 "PO-Revision-Date: 2013-12-23 11:51+0000\n"
 "Last-Translator: Tuomas Teipainen <tmsteipainen1@gmail.com>\n"
 "Language-Team: Finnish <fi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-12-24 05:21+0000\n"
+"X-Launchpad-Export-Date: 2013-12-25 05:21+0000\n"
 "X-Generator: Launchpad (build 16877)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:106 src/core/modules/StarMgr.cpp:336
@@ -1371,7 +1371,59 @@ msgstr "Islam, Sadiq & Qureshi (2008, 2013)"
 msgid "Custom equation of %1T"
 msgstr "Käyttäjän määrittelemä %1T"
 
-#: src/gui/HelpDialog.cpp:161
+#: src/gui/HelpDialog.cpp:119
+msgid "Stellarium Help"
+msgstr "Stellariumin avustus"
+
+#: src/gui/HelpDialog.cpp:124 src/gui/HelpDialog.cpp:129
+msgid "Keys"
+msgstr "Näppäimet"
+
+#: src/gui/HelpDialog.cpp:126 src/gui/HelpDialog.cpp:198
+msgid "Further Reading"
+msgstr "Lisälukemista"
+
+#: src/gui/HelpDialog.cpp:133
+msgid "Pan view around the sky"
+msgstr "Pyöritä näkymää taivaan ympäri"
+
+#: src/gui/HelpDialog.cpp:134
+msgid "Arrow keys & left mouse drag"
+msgstr "Nuolinäppäimet & veto hiiren vasemmalla näppäimellä"
+
+#: src/gui/HelpDialog.cpp:136
+msgid "Zoom in/out"
+msgstr "Suurenna/loitonna"
+
+#: src/gui/HelpDialog.cpp:138
+msgid "Page Up/Down"
+msgstr "Sivu ylös/alas"
+
+#: src/gui/HelpDialog.cpp:140
+msgid "CTRL + Up/Down"
+msgstr "CTRL + Ylös/alas"
+
+#: src/gui/HelpDialog.cpp:143
+msgid "Select object"
+msgstr "Valitse kohde"
+
+#: src/gui/HelpDialog.cpp:144
+msgid "Left click"
+msgstr "Napsauta vasemmalla"
+
+#: src/gui/HelpDialog.cpp:152
+msgid "Clear selection"
+msgstr "Poista valinta"
+
+#: src/gui/HelpDialog.cpp:153
+msgid "Right click"
+msgstr "Napsauta oikealla"
+
+#: src/gui/HelpDialog.cpp:155
+msgid "CTRL + Left click"
+msgstr "CTRL + napsauta vasemmalla"
+
+#: src/gui/HelpDialog.cpp:160
 #, qt-format
 msgid ""
 "Below are listed only the actions with assigned keys. Further actions may be "
@@ -1380,44 +1432,94 @@ msgstr ""
 "Alla on lueteltu vain näppäinkomennoin määritellyt toiminnot. Lisää "
 "toimintoja voi olla saatavilla \"%1\"-näppäimellä."
 
-#: src/gui/HelpDialog.cpp:263
+#: src/gui/HelpDialog.cpp:199
+msgid ""
+"The following links are external web links, and will launch your web "
+"browser:\n"
+msgstr ""
+"Seuraavat linkit ovat verkkolinkkejä ja käynnistävät WWW-selaimesi:\n"
+
+#: src/gui/HelpDialog.cpp:200
+msgid "The Stellarium User Guide"
+msgstr "Stellarium-käyttöopas"
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:204
+msgid "{Frequently Asked Questions} about Stellarium.  Answers too."
+msgstr "{Usein kysyttyjä kysymyksiä} Stellariumista. Ja vastauksia."
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:209
+msgid ""
+"{The Stellarium Wiki} - General information.  You can also find user-"
+"contributed landscapes and scripts here."
+msgstr ""
+"{Stellarium-wiki} - yleistä tietoa. Löydät täältä myös käyttäjien tekemiä "
+"maisemia ja komentosarjoja."
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:214
+msgid ""
+"{Support ticket system} - if you need help using Stellarium, post a support "
+"request here and we'll try to help."
+msgstr ""
+"{Tukipyyntöjärjestelmä} - jos tarvitset Stellariumin käyttöapua, lähetä "
+"tukipyyntösi tänne, niin yritämme auttaa."
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:219
+msgid ""
+"{Bug reporting and feature request system} - if something doesn't work "
+"properly or is missing and is not listed in the tracker, you can open bug "
+"reports here."
+msgstr ""
+"{Järjestelmä virheiden raportointiin ja ominaisuuksien tilaamiseen} - jos "
+"jokin ei toimi tai jotain puuttuu, eikä ole listattuna seurantaan, voit "
+"avata virheraportin täällä."
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:224
+msgid "{Forums} - discuss Stellarium with other users."
+msgstr "{Foorumit} - keskustele muiden Stellariumin käyttäjien kanssa."
+
+#: src/gui/HelpDialog.cpp:262
 msgid "Developers"
 msgstr "Kehittäjät"
 
-#: src/gui/HelpDialog.cpp:264
+#: src/gui/HelpDialog.cpp:263
 #, qt-format
 msgid "Project coordinator & lead developer: %1"
 msgstr "Projektikoordinaattori ja johtava kehittäjä: %1"
 
-#: src/gui/HelpDialog.cpp:265
+#: src/gui/HelpDialog.cpp:264
 #, qt-format
 msgid "Doc author/developer: %1"
 msgstr "Dokumentoija/kehittäjä:%1"
 
-#: src/gui/HelpDialog.cpp:266 src/gui/HelpDialog.cpp:267
-#: src/gui/HelpDialog.cpp:268 src/gui/HelpDialog.cpp:269
-#: src/gui/HelpDialog.cpp:270 src/gui/HelpDialog.cpp:277
-#: src/gui/HelpDialog.cpp:278 src/gui/HelpDialog.cpp:279
-#: src/gui/HelpDialog.cpp:280
+#: src/gui/HelpDialog.cpp:265 src/gui/HelpDialog.cpp:266
+#: src/gui/HelpDialog.cpp:267 src/gui/HelpDialog.cpp:268
+#: src/gui/HelpDialog.cpp:269 src/gui/HelpDialog.cpp:276
+#: src/gui/HelpDialog.cpp:277 src/gui/HelpDialog.cpp:278
+#: src/gui/HelpDialog.cpp:279
 #, qt-format
 msgid "Developer: %1"
 msgstr "Kehittäjä: %1"
 
-#: src/gui/HelpDialog.cpp:271
+#: src/gui/HelpDialog.cpp:270
 #, qt-format
 msgid "Continuous Integration: %1"
 msgstr "Jatkuva integraatio: %1"
 
-#: src/gui/HelpDialog.cpp:272 src/gui/HelpDialog.cpp:273
+#: src/gui/HelpDialog.cpp:271 src/gui/HelpDialog.cpp:272
 #, qt-format
 msgid "Tester: %1"
 msgstr "Testaaja: %1"
 
-#: src/gui/HelpDialog.cpp:274
+#: src/gui/HelpDialog.cpp:273
 msgid "Past Developers"
 msgstr "Aiemmat kehittäjät"
 
-#: src/gui/HelpDialog.cpp:275
+#: src/gui/HelpDialog.cpp:274
 msgid ""
 "Several people have made significant contributions, but are no longer "
 "active. Their work has made a big difference to the project:"
@@ -1425,12 +1527,12 @@ msgstr ""
 "Monet henkilöt ovat antaneet merkittävän panoksen, mutteivat ole enää "
 "aktiivisia. Heidän työnsä on ollut projektille todella tärkeää:"
 
-#: src/gui/HelpDialog.cpp:276
+#: src/gui/HelpDialog.cpp:275
 #, qt-format
 msgid "Graphic/other designer: %1"
 msgstr "Graafinen/muu suunnittelija: %1"
 
-#: src/gui/HelpDialog.cpp:281 src/gui/HelpDialog.cpp:282
+#: src/gui/HelpDialog.cpp:280 src/gui/HelpDialog.cpp:281
 #, qt-format
 msgid "OSX Developer: %1"
 msgstr "OSX-kehittäjä: %1"
@@ -8506,42 +8608,6 @@ msgstr "Auringon korkeus hämärän päättyessä: 0 astetta"
 #~ msgid "Correct for light travel time: "
 #~ msgstr "Korjaa valon matka-aika: "
 
-#~ msgid "Arrow keys & left mouse drag"
-#~ msgstr "Nuolinäppäimet & veto hiiren vasemmalla näppäimellä"
-
-#~ msgid "Page Up/Down"
-#~ msgstr "Sivu ylös/alas"
-
-#~ msgid "CTRL + Up/Down"
-#~ msgstr "CTRL + Ylös/alas"
-
-#~ msgid "Left click"
-#~ msgstr "Napsauta vasemmalla"
-
-#~ msgid "Right click"
-#~ msgstr "Napsauta oikealla"
-
-#~ msgid "Select object"
-#~ msgstr "Valitse kohde"
-
-#~ msgid "Clear selection"
-#~ msgstr "Poista valinta"
-
-#~ msgid "Stellarium Help"
-#~ msgstr "Stellariumin avustus"
-
-#~ msgid "Keys"
-#~ msgstr "Näppäimet"
-
-#~ msgid "Further Reading"
-#~ msgstr "Lisälukemista"
-
-#~ msgid "{Frequently Asked Questions} about Stellarium.  Answers too."
-#~ msgstr "{Usein kysyttyjä kysymyksiä} Stellariumista. Ja vastauksia."
-
-#~ msgid "{Forums} - discuss Stellarium with other users."
-#~ msgstr "{Foorumit} - keskustele muiden Stellariumin käyttäjien kanssa."
-
 #~ msgid "Nebulas"
 #~ msgstr "Tähtisumut"
 
@@ -8566,18 +8632,6 @@ msgstr "Auringon korkeus hämärän päättyessä: 0 astetta"
 #~ msgid "Art brightness: "
 #~ msgstr "Kuvien voimakkuus: "
 
-#~ msgid "CTRL + Left click"
-#~ msgstr "CTRL + napsauta vasemmalla"
-
-#~ msgid "Pan view around the sky"
-#~ msgstr "Pyöritä näkymää taivaan ympäri"
-
-#~ msgid "Zoom in/out"
-#~ msgstr "Suurenna/loitonna"
-
-#~ msgid "The Stellarium User Guide"
-#~ msgstr "Stellarium-käyttöopas"
-
 #~ msgid "Nebulas background images"
 #~ msgstr "Tähtisumujen taustakuvat"
 
@@ -8599,26 +8653,6 @@ msgstr "Auringon korkeus hämärän päättyessä: 0 astetta"
 #~ msgid "Other"
 #~ msgstr "Muut"
 
-#~ msgid ""
-#~ "The following links are external web links, and will launch your web "
-#~ "browser:\n"
-#~ msgstr ""
-#~ "Seuraavat linkit ovat verkkolinkkejä ja käynnistävät WWW-selaimesi:\n"
-
-#~ msgid ""
-#~ "{The Stellarium Wiki} - General information.  You can also find user-"
-#~ "contributed landscapes and scripts here."
-#~ msgstr ""
-#~ "{Stellarium-wiki} - yleistä tietoa. Löydät täältä myös käyttäjien tekemiä "
-#~ "maisemia ja komentosarjoja."
-
-#~ msgid ""
-#~ "{Support ticket system} - if you need help using Stellarium, post a support "
-#~ "request here and we'll try to help."
-#~ msgstr ""
-#~ "{Tukipyyntöjärjestelmä} - jos tarvitset Stellariumin käyttöapua, lähetä "
-#~ "tukipyyntösi tänne, niin yritämme auttaa."
-
 #~ msgid "Hourly zenith rate:"
 #~ msgstr "Aktiivisuus tunnissa zeniitissä:"
 
@@ -8639,15 +8673,6 @@ msgstr "Auringon korkeus hämärän päättyessä: 0 astetta"
 
 #~ msgid "Finished downloading all star catalogs!"
 #~ msgstr "Kaikkien tähtiluetteloiden lataus valmis!"
-
-#~ msgid ""
-#~ "{Bug reporting and feature request system} - if something doesn't work "
-#~ "properly or is missing and is not listed in the tracker, you can open bug "
-#~ "reports here."
-#~ msgstr ""
-#~ "{Järjestelmä virheiden raportointiin ja ominaisuuksien tilaamiseen} - jos "
-#~ "jokin ei toimi tai jotain puuttuu, eikä ole listattuna seurantaan, voit "
-#~ "avata virheraportin täällä."
 
 #~ msgid "Scripts "
 #~ msgstr "Komentosarjat "

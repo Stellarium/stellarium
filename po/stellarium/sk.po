@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-23 01:35+0700\n"
+"POT-Creation-Date: 2013-12-24 21:46+0700\n"
 "PO-Revision-Date: 2013-12-23 22:08+0000\n"
 "Last-Translator: Miroslav Remák <Unknown>\n"
 "Language-Team: Slovak <sk@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-12-24 05:22+0000\n"
+"X-Launchpad-Export-Date: 2013-12-25 05:28+0000\n"
 "X-Generator: Launchpad (build 16877)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:106 src/core/modules/StarMgr.cpp:336
@@ -1367,7 +1367,59 @@ msgstr "Islam, Sadiq a Qureshi (2008, 2013)"
 msgid "Custom equation of %1T"
 msgstr "Užívateľská rovnica %1T"
 
-#: src/gui/HelpDialog.cpp:161
+#: src/gui/HelpDialog.cpp:119
+msgid "Stellarium Help"
+msgstr "Pomocník pre Stellarium"
+
+#: src/gui/HelpDialog.cpp:124 src/gui/HelpDialog.cpp:129
+msgid "Keys"
+msgstr "Klávesy"
+
+#: src/gui/HelpDialog.cpp:126 src/gui/HelpDialog.cpp:198
+msgid "Further Reading"
+msgstr "Súvisiace články"
+
+#: src/gui/HelpDialog.cpp:133
+msgid "Pan view around the sky"
+msgstr "Pohyb zorného poľa po oblohe"
+
+#: src/gui/HelpDialog.cpp:134
+msgid "Arrow keys & left mouse drag"
+msgstr "Šípky a ťahanie ľavým tlačidlom myši"
+
+#: src/gui/HelpDialog.cpp:136
+msgid "Zoom in/out"
+msgstr "Zväčšiť/Zmenšiť"
+
+#: src/gui/HelpDialog.cpp:138
+msgid "Page Up/Down"
+msgstr "Page Up/Down"
+
+#: src/gui/HelpDialog.cpp:140
+msgid "CTRL + Up/Down"
+msgstr "CTRL + Hore/Dolu"
+
+#: src/gui/HelpDialog.cpp:143
+msgid "Select object"
+msgstr "Vybrať objekt"
+
+#: src/gui/HelpDialog.cpp:144
+msgid "Left click"
+msgstr "Ľavé tlačidlo myši"
+
+#: src/gui/HelpDialog.cpp:152
+msgid "Clear selection"
+msgstr "Zrušiť výber"
+
+#: src/gui/HelpDialog.cpp:153
+msgid "Right click"
+msgstr "Pravé tlačidlo myši"
+
+#: src/gui/HelpDialog.cpp:155
+msgid "CTRL + Left click"
+msgstr "CTRL + ľavé tlačidlo myši"
+
+#: src/gui/HelpDialog.cpp:160
 #, qt-format
 msgid ""
 "Below are listed only the actions with assigned keys. Further actions may be "
@@ -1376,44 +1428,95 @@ msgstr ""
 "Nižšie sú uvedené len akcie, ktoré majú priradené klávesy. Ďalšie akcie "
 "sprístupníte stlačením tlačidla \"%1\"."
 
-#: src/gui/HelpDialog.cpp:263
+#: src/gui/HelpDialog.cpp:199
+msgid ""
+"The following links are external web links, and will launch your web "
+"browser:\n"
+msgstr ""
+"Nasledujúce odkazy vedú na externé stránky na internete a spustia Váš "
+"prehliadač.\n"
+
+#: src/gui/HelpDialog.cpp:200
+msgid "The Stellarium User Guide"
+msgstr "Užívateľská príručka Stellarium"
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:204
+msgid "{Frequently Asked Questions} about Stellarium.  Answers too."
+msgstr "{Často kladené otázky } o Stellariu vrátane odpovedí."
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:209
+msgid ""
+"{The Stellarium Wiki} - General information.  You can also find user-"
+"contributed landscapes and scripts here."
+msgstr ""
+"{The Stellarium Wiki} - všeobecné informácie. Nájdete tu aj terény a skripty "
+"od ostatných používateľov."
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:214
+msgid ""
+"{Support ticket system} - if you need help using Stellarium, post a support "
+"request here and we'll try to help."
+msgstr ""
+"{Žiadosť o pomoc} - ak potrebujete pomôcť so Stellariom, napíšte žiadosť o "
+"pomoc a my urobíme, čo bude v našich silách."
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:219
+msgid ""
+"{Bug reporting and feature request system} - if something doesn't work "
+"properly or is missing and is not listed in the tracker, you can open bug "
+"reports here."
+msgstr ""
+"{Oznamovanie chýb a systém požiadavok na nové funkcie} - ak niečo nefunguje "
+"správne, alebo niečo chýba, a nie je to v zozname sledovača, tu o tom môžete "
+"podať správu."
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:224
+msgid "{Forums} - discuss Stellarium with other users."
+msgstr "{Fóra} - diskusie s ostatnými používateľmi Stellaria."
+
+#: src/gui/HelpDialog.cpp:262
 msgid "Developers"
 msgstr "Vývojári"
 
-#: src/gui/HelpDialog.cpp:264
+#: src/gui/HelpDialog.cpp:263
 #, qt-format
 msgid "Project coordinator & lead developer: %1"
 msgstr "Koordinátor projektu a vedúci vývojár: %1"
 
-#: src/gui/HelpDialog.cpp:265
+#: src/gui/HelpDialog.cpp:264
 #, qt-format
 msgid "Doc author/developer: %1"
 msgstr "Tvorba dokumentácie: %1"
 
-#: src/gui/HelpDialog.cpp:266 src/gui/HelpDialog.cpp:267
-#: src/gui/HelpDialog.cpp:268 src/gui/HelpDialog.cpp:269
-#: src/gui/HelpDialog.cpp:270 src/gui/HelpDialog.cpp:277
-#: src/gui/HelpDialog.cpp:278 src/gui/HelpDialog.cpp:279
-#: src/gui/HelpDialog.cpp:280
+#: src/gui/HelpDialog.cpp:265 src/gui/HelpDialog.cpp:266
+#: src/gui/HelpDialog.cpp:267 src/gui/HelpDialog.cpp:268
+#: src/gui/HelpDialog.cpp:269 src/gui/HelpDialog.cpp:276
+#: src/gui/HelpDialog.cpp:277 src/gui/HelpDialog.cpp:278
+#: src/gui/HelpDialog.cpp:279
 #, qt-format
 msgid "Developer: %1"
 msgstr "Vývojár: %1"
 
-#: src/gui/HelpDialog.cpp:271
+#: src/gui/HelpDialog.cpp:270
 #, qt-format
 msgid "Continuous Integration: %1"
 msgstr "Spojité integrovanie: %1"
 
-#: src/gui/HelpDialog.cpp:272 src/gui/HelpDialog.cpp:273
+#: src/gui/HelpDialog.cpp:271 src/gui/HelpDialog.cpp:272
 #, qt-format
 msgid "Tester: %1"
 msgstr "Tester: %1"
 
-#: src/gui/HelpDialog.cpp:274
+#: src/gui/HelpDialog.cpp:273
 msgid "Past Developers"
 msgstr "Predchádzajúci vývojári"
 
-#: src/gui/HelpDialog.cpp:275
+#: src/gui/HelpDialog.cpp:274
 msgid ""
 "Several people have made significant contributions, but are no longer "
 "active. Their work has made a big difference to the project:"
@@ -1421,12 +1524,12 @@ msgstr ""
 "Mnoho ľudí k vývoju významne prispelo, ale už nie sú aktívni. Ich prínos "
 "výrazne pomohol projektu:"
 
-#: src/gui/HelpDialog.cpp:276
+#: src/gui/HelpDialog.cpp:275
 #, qt-format
 msgid "Graphic/other designer: %1"
 msgstr "Grafický a iný dizajn: %1"
 
-#: src/gui/HelpDialog.cpp:281 src/gui/HelpDialog.cpp:282
+#: src/gui/HelpDialog.cpp:280 src/gui/HelpDialog.cpp:281
 #, qt-format
 msgid "OSX Developer: %1"
 msgstr "Vývoj pre OSX: %1"
@@ -8447,45 +8550,8 @@ msgstr "Výška slnka pri úsvite: 0 stupňov."
 #~ msgid "Correct for light travel time: "
 #~ msgstr "Oprava na rýchlosť svetla: "
 
-#~ msgid "Keys"
-#~ msgstr "Klávesy"
-
-#~ msgid "Right click"
-#~ msgstr "Pravé tlačidlo myši"
-
-#~ msgid "Left click"
-#~ msgstr "Ľavé tlačidlo myši"
-
-#~ msgid "Select object"
-#~ msgstr "Vybrať objekt"
-
 #~ msgid "10000"
 #~ msgstr "10000"
-
-#~ msgid "Zoom in/out"
-#~ msgstr "Zväčšiť/Zmenšiť"
-
-#~ msgid "Clear selection"
-#~ msgstr "Zrušiť výber"
-
-#~ msgid "CTRL + Left click"
-#~ msgstr "CTRL + ľavé tlačidlo myši"
-
-#~ msgid "Page Up/Down"
-#~ msgstr "Page Up/Down"
-
-#~ msgid "Arrow keys & left mouse drag"
-#~ msgstr "Šípky a ťahanie ľavým tlačidlom myši"
-
-#~ msgid "The Stellarium User Guide"
-#~ msgstr "Užívateľská príručka Stellarium"
-
-#~ msgid ""
-#~ "The following links are external web links, and will launch your web "
-#~ "browser:\n"
-#~ msgstr ""
-#~ "Nasledujúce odkazy vedú na externé stránky na internete a spustia Váš "
-#~ "prehliadač.\n"
 
 #~ msgid ":"
 #~ msgstr ":"
@@ -8522,9 +8588,6 @@ msgstr "Výška slnka pri úsvite: 0 stupňov."
 
 #~ msgid "Other"
 #~ msgstr "Ostatné"
-
-#~ msgid "Pan view around the sky"
-#~ msgstr "Pohyb zorného poľa po oblohe"
 
 #~ msgid "Startup FOV: XX"
 #~ msgstr "Šírka zorného poľa pri spustení: XX"
@@ -8648,9 +8711,6 @@ msgstr "Výška slnka pri úsvite: 0 stupňov."
 #~ msgid "(geometric)"
 #~ msgstr "(geometricky)"
 
-#~ msgid "Stellarium Help"
-#~ msgstr "Pomocník pre Stellarium"
-
 #~ msgid "Update TLE lists from Internet sources"
 #~ msgstr "Aktualizácia zoznamov TLE z internetových zdrojov"
 
@@ -8756,40 +8816,8 @@ msgstr "Výška slnka pri úsvite: 0 stupňov."
 #~ msgid "Magnitude: <b>%1</b> (B-V: <b>%2</b>)"
 #~ msgstr "Magnitúda: <b>%1</b> (B-V: <b>%2</b>)"
 
-#~ msgid "CTRL + Up/Down"
-#~ msgstr "CTRL + Hore/Dolu"
-
 #~ msgid "When a Script is Running"
 #~ msgstr "Keď je spustený skript"
-
-#~ msgid "Further Reading"
-#~ msgstr "Súvisiace články"
-
-#~ msgid ""
-#~ "{Support ticket system} - if you need help using Stellarium, post a support "
-#~ "request here and we'll try to help."
-#~ msgstr ""
-#~ "{Žiadosť o pomoc} - ak potrebujete pomôcť so Stellariom, napíšte žiadosť o "
-#~ "pomoc a my urobíme, čo bude v našich silách."
-
-#~ msgid ""
-#~ "{The Stellarium Wiki} - General information.  You can also find user-"
-#~ "contributed landscapes and scripts here."
-#~ msgstr ""
-#~ "{The Stellarium Wiki} - všeobecné informácie. Nájdete tu aj terény a skripty "
-#~ "od ostatných používateľov."
-
-#~ msgid "{Frequently Asked Questions} about Stellarium.  Answers too."
-#~ msgstr "{Často kladené otázky } o Stellariu vrátane odpovedí."
-
-#~ msgid ""
-#~ "{Bug reporting and feature request system} - if something doesn't work "
-#~ "properly or is missing and is not listed in the tracker, you can open bug "
-#~ "reports here."
-#~ msgstr ""
-#~ "{Oznamovanie chýb a systém požiadavok na nové funkcie} - ak niečo nefunguje "
-#~ "správne, alebo niečo chýba, a nie je to v zozname sledovača, tu o tom môžete "
-#~ "podať správu."
 
 #~ msgid "Crosshairs"
 #~ msgstr "Nitkový kríž"
@@ -8905,6 +8933,3 @@ msgstr "Výška slnka pri úsvite: 0 stupňov."
 #~ msgstr ""
 #~ "Modul zobrazuje niektoré historické supernovy jasnejšie ako 10. vizuálna "
 #~ "magnitúda: "
-
-#~ msgid "{Forums} - discuss Stellarium with other users."
-#~ msgstr "{Fóra} - diskusie s ostatnými používateľmi Stellaria."
