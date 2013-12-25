@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-23 01:35+0700\n"
+"POT-Creation-Date: 2013-12-24 21:46+0700\n"
 "PO-Revision-Date: 2012-10-28 17:30+0000\n"
 "Last-Translator: Batarale <batarale@gmail.com>\n"
 "Language-Team: Serbian <sr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-12-23 05:24+0000\n"
-"X-Generator: Launchpad (build 16872)\n"
+"X-Launchpad-Export-Date: 2013-12-25 05:27+0000\n"
+"X-Generator: Launchpad (build 16877)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:106 src/core/modules/StarMgr.cpp:336
 #: src/core/modules/GridLinesMgr.cpp:679 src/core/modules/LandscapeMgr.cpp:335
@@ -1285,51 +1285,154 @@ msgstr ""
 msgid "Custom equation of %1T"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:161
+#: src/gui/HelpDialog.cpp:119
+msgid "Stellarium Help"
+msgstr "Стеларијумова Помоћ"
+
+#: src/gui/HelpDialog.cpp:124 src/gui/HelpDialog.cpp:129
+msgid "Keys"
+msgstr "Tasteri"
+
+#: src/gui/HelpDialog.cpp:126 src/gui/HelpDialog.cpp:198
+msgid "Further Reading"
+msgstr "За даље читање"
+
+#: src/gui/HelpDialog.cpp:133
+msgid "Pan view around the sky"
+msgstr "Померање погледа по небу"
+
+#: src/gui/HelpDialog.cpp:134
+msgid "Arrow keys & left mouse drag"
+msgstr "Тастери са стрелицама и превлачење левим кликом миша"
+
+#: src/gui/HelpDialog.cpp:136
+msgid "Zoom in/out"
+msgstr "Увеличање/умањење"
+
+#: src/gui/HelpDialog.cpp:138
+msgid "Page Up/Down"
+msgstr "Страна Горе/Доле"
+
+#: src/gui/HelpDialog.cpp:140
+msgid "CTRL + Up/Down"
+msgstr "Контролни тастер (CTRL) + Горе/Доле"
+
+#: src/gui/HelpDialog.cpp:143
+msgid "Select object"
+msgstr "Изаберите објекат"
+
+#: src/gui/HelpDialog.cpp:144
+msgid "Left click"
+msgstr "Леви клик"
+
+#: src/gui/HelpDialog.cpp:152
+msgid "Clear selection"
+msgstr "Поништите избор"
+
+#: src/gui/HelpDialog.cpp:153
+msgid "Right click"
+msgstr "Десни клик"
+
+#: src/gui/HelpDialog.cpp:155
+msgid "CTRL + Left click"
+msgstr "Контролни тастер (CTRL) + Леви клик на мишу"
+
+#: src/gui/HelpDialog.cpp:160
 #, qt-format
 msgid ""
 "Below are listed only the actions with assigned keys. Further actions may be "
 "available via the \"%1\" button."
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:263
+#: src/gui/HelpDialog.cpp:199
+msgid ""
+"The following links are external web links, and will launch your web "
+"browser:\n"
+msgstr ""
+"Следеће везе воде ка спољашњим интернет страницама, и покренуће Ваш интернет "
+"претраживач:\n"
+
+#: src/gui/HelpDialog.cpp:200
+msgid "The Stellarium User Guide"
+msgstr "Стеларијумов Водич за кориснике"
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:204
+msgid "{Frequently Asked Questions} about Stellarium.  Answers too."
+msgstr "{Често Постављана Питања} о Стеларијуму. Одговори такође."
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:209
+msgid ""
+"{The Stellarium Wiki} - General information.  You can also find user-"
+"contributed landscapes and scripts here."
+msgstr ""
+"{Стеларијумов \"Вики\"} - Опште информације. Такође, овде можете пронаћи "
+"пејзаже и скрипте дониране од стране корисника."
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:214
+msgid ""
+"{Support ticket system} - if you need help using Stellarium, post a support "
+"request here and we'll try to help."
+msgstr ""
+"{Систем подршке} - ако требате помоћ при коришћењу Стеларијума, пошаљите "
+"захтев за подршку и покушаћемо да Вам помогнемо."
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:219
+msgid ""
+"{Bug reporting and feature request system} - if something doesn't work "
+"properly or is missing and is not listed in the tracker, you can open bug "
+"reports here."
+msgstr ""
+"{Систем пријављивања грешака и захтева за побољшања} - ако нешто не ради "
+"како треба или недостаје, а није већ наведено или тражено, можете отворити "
+"нови извештај о грешци."
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:224
+msgid "{Forums} - discuss Stellarium with other users."
+msgstr "{Форуми} - расправљајте о Стеларијуму са другим корисницима."
+
+#: src/gui/HelpDialog.cpp:262
 msgid "Developers"
 msgstr "Програмери"
 
-#: src/gui/HelpDialog.cpp:264
+#: src/gui/HelpDialog.cpp:263
 #, qt-format
 msgid "Project coordinator & lead developer: %1"
 msgstr "Координатор пројекта и главни програмер: %1"
 
-#: src/gui/HelpDialog.cpp:265
+#: src/gui/HelpDialog.cpp:264
 #, qt-format
 msgid "Doc author/developer: %1"
 msgstr "Аутор/програмер документа: %1"
 
-#: src/gui/HelpDialog.cpp:266 src/gui/HelpDialog.cpp:267
-#: src/gui/HelpDialog.cpp:268 src/gui/HelpDialog.cpp:269
-#: src/gui/HelpDialog.cpp:270 src/gui/HelpDialog.cpp:277
-#: src/gui/HelpDialog.cpp:278 src/gui/HelpDialog.cpp:279
-#: src/gui/HelpDialog.cpp:280
+#: src/gui/HelpDialog.cpp:265 src/gui/HelpDialog.cpp:266
+#: src/gui/HelpDialog.cpp:267 src/gui/HelpDialog.cpp:268
+#: src/gui/HelpDialog.cpp:269 src/gui/HelpDialog.cpp:276
+#: src/gui/HelpDialog.cpp:277 src/gui/HelpDialog.cpp:278
+#: src/gui/HelpDialog.cpp:279
 #, qt-format
 msgid "Developer: %1"
 msgstr "Програмер: %1"
 
-#: src/gui/HelpDialog.cpp:271
+#: src/gui/HelpDialog.cpp:270
 #, qt-format
 msgid "Continuous Integration: %1"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:272 src/gui/HelpDialog.cpp:273
+#: src/gui/HelpDialog.cpp:271 src/gui/HelpDialog.cpp:272
 #, qt-format
 msgid "Tester: %1"
 msgstr "Испитивач: %1"
 
-#: src/gui/HelpDialog.cpp:274
+#: src/gui/HelpDialog.cpp:273
 msgid "Past Developers"
 msgstr "Последњи програмери"
 
-#: src/gui/HelpDialog.cpp:275
+#: src/gui/HelpDialog.cpp:274
 msgid ""
 "Several people have made significant contributions, but are no longer "
 "active. Their work has made a big difference to the project:"
@@ -1337,12 +1440,12 @@ msgstr ""
 "Више људи су направили значајан допринос, али  више нису активни. Њихов рад "
 "је направио велики допринос пројекту :"
 
-#: src/gui/HelpDialog.cpp:276
+#: src/gui/HelpDialog.cpp:275
 #, qt-format
 msgid "Graphic/other designer: %1"
 msgstr "Графички дизајнер/остало: %1"
 
-#: src/gui/HelpDialog.cpp:281 src/gui/HelpDialog.cpp:282
+#: src/gui/HelpDialog.cpp:280 src/gui/HelpDialog.cpp:281
 #, qt-format
 msgid "OSX Developer: %1"
 msgstr "OSX програмер: %1"
@@ -8092,20 +8195,11 @@ msgstr ""
 #~ msgid "Light Pollution Luminance: "
 #~ msgstr "Осветљеност светлосног загађења: "
 
-#~ msgid "Right click"
-#~ msgstr "Десни клик"
-
-#~ msgid "Left click"
-#~ msgstr "Леви клик"
-
 #~ msgid "Nebulas"
 #~ msgstr "Маглине"
 
 #~ msgid "Light pollution: "
 #~ msgstr "Светлосно загађење: "
-
-#~ msgid "Keys"
-#~ msgstr "Tasteri"
 
 #~ msgid "10000"
 #~ msgstr "10000"
@@ -8118,9 +8212,6 @@ msgstr ""
 
 #~ msgid "Arrow down to load list."
 #~ msgstr "Стрелица надоле да се учита листа."
-
-#~ msgid "{Frequently Asked Questions} about Stellarium.  Answers too."
-#~ msgstr "{Често Постављана Питања} о Стеларијуму. Одговори такође."
 
 #~ msgid "General "
 #~ msgstr "Опште "
@@ -8272,71 +8363,8 @@ msgstr ""
 #~ msgid "Finished downloading all star catalogs!"
 #~ msgstr "Завршено преузимање свих каталога звезда!"
 
-#~ msgid "CTRL + Left click"
-#~ msgstr "Контролни тастер (CTRL) + Леви клик на мишу"
-
-#~ msgid "CTRL + Up/Down"
-#~ msgstr "Контролни тастер (CTRL) + Горе/Доле"
-
-#~ msgid "Page Up/Down"
-#~ msgstr "Страна Горе/Доле"
-
-#~ msgid "Arrow keys & left mouse drag"
-#~ msgstr "Тастери са стрелицама и превлачење левим кликом миша"
-
 #~ msgid "When a Script is Running"
 #~ msgstr "Кад је скрипта покренута"
-
-#~ msgid "Zoom in/out"
-#~ msgstr "Увеличање/умањење"
-
-#~ msgid "Select object"
-#~ msgstr "Изаберите објекат"
-
-#~ msgid "Clear selection"
-#~ msgstr "Поништите избор"
-
-#~ msgid "Stellarium Help"
-#~ msgstr "Стеларијумова Помоћ"
-
-#~ msgid "Further Reading"
-#~ msgstr "За даље читање"
-
-#~ msgid "The Stellarium User Guide"
-#~ msgstr "Стеларијумов Водич за кориснике"
-
-#~ msgid "{Forums} - discuss Stellarium with other users."
-#~ msgstr "{Форуми} - расправљајте о Стеларијуму са другим корисницима."
-
-#~ msgid ""
-#~ "The following links are external web links, and will launch your web "
-#~ "browser:\n"
-#~ msgstr ""
-#~ "Следеће везе воде ка спољашњим интернет страницама, и покренуће Ваш интернет "
-#~ "претраживач:\n"
-
-#~ msgid ""
-#~ "{The Stellarium Wiki} - General information.  You can also find user-"
-#~ "contributed landscapes and scripts here."
-#~ msgstr ""
-#~ "{Стеларијумов \"Вики\"} - Опште информације. Такође, овде можете пронаћи "
-#~ "пејзаже и скрипте дониране од стране корисника."
-
-#~ msgid ""
-#~ "{Bug reporting and feature request system} - if something doesn't work "
-#~ "properly or is missing and is not listed in the tracker, you can open bug "
-#~ "reports here."
-#~ msgstr ""
-#~ "{Систем пријављивања грешака и захтева за побољшања} - ако нешто не ради "
-#~ "како треба или недостаје, а није већ наведено или тражено, можете отворити "
-#~ "нови извештај о грешци."
-
-#~ msgid ""
-#~ "{Support ticket system} - if you need help using Stellarium, post a support "
-#~ "request here and we'll try to help."
-#~ msgstr ""
-#~ "{Систем подршке} - ако требате помоћ при коришћењу Стеларијума, пошаљите "
-#~ "захтев за подршку и покушаћемо да Вам помогнемо."
 
 #~ msgid "Nebulas background images"
 #~ msgstr "Позадинске слике маглина"
@@ -8415,9 +8443,6 @@ msgstr ""
 
 #~ msgid "Plugin Key Bindings"
 #~ msgstr "Тастери за прикључке"
-
-#~ msgid "Pan view around the sky"
-#~ msgstr "Померање погледа по небу"
 
 #~ msgid "Hydra"
 #~ msgstr "Хидра"

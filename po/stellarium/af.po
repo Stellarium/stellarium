@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-23 01:35+0700\n"
+"POT-Creation-Date: 2013-12-24 21:46+0700\n"
 "PO-Revision-Date: 2013-01-07 10:27+0000\n"
 "Last-Translator: Alexander Wolf <Unknown>\n"
 "Language-Team: Afrikaans <af@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-12-23 05:15+0000\n"
-"X-Generator: Launchpad (build 16872)\n"
+"X-Launchpad-Export-Date: 2013-12-25 05:17+0000\n"
+"X-Generator: Launchpad (build 16877)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:106 src/core/modules/StarMgr.cpp:336
 #: src/core/modules/GridLinesMgr.cpp:679 src/core/modules/LandscapeMgr.cpp:335
@@ -1285,51 +1285,154 @@ msgstr ""
 msgid "Custom equation of %1T"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:161
+#: src/gui/HelpDialog.cpp:119
+msgid "Stellarium Help"
+msgstr "Stellarium Hulp"
+
+#: src/gui/HelpDialog.cpp:124 src/gui/HelpDialog.cpp:129
+msgid "Keys"
+msgstr "Sleutels"
+
+#: src/gui/HelpDialog.cpp:126 src/gui/HelpDialog.cpp:198
+msgid "Further Reading"
+msgstr "Verdere leesstof"
+
+#: src/gui/HelpDialog.cpp:133
+msgid "Pan view around the sky"
+msgstr "Draai oogpunt rond in die lug"
+
+#: src/gui/HelpDialog.cpp:134
+msgid "Arrow keys & left mouse drag"
+msgstr "Pylsleutels & linksmuis sleep"
+
+#: src/gui/HelpDialog.cpp:136
+msgid "Zoom in/out"
+msgstr "Zoem in/uit"
+
+#: src/gui/HelpDialog.cpp:138
+msgid "Page Up/Down"
+msgstr "Bladsy Op/Af"
+
+#: src/gui/HelpDialog.cpp:140
+msgid "CTRL + Up/Down"
+msgstr "CTRL + Op/Af"
+
+#: src/gui/HelpDialog.cpp:143
+msgid "Select object"
+msgstr "Kies voorwerp"
+
+#: src/gui/HelpDialog.cpp:144
+msgid "Left click"
+msgstr "Links kliek"
+
+#: src/gui/HelpDialog.cpp:152
+msgid "Clear selection"
+msgstr "Vee keuse"
+
+#: src/gui/HelpDialog.cpp:153
+msgid "Right click"
+msgstr "Regs kliek"
+
+#: src/gui/HelpDialog.cpp:155
+msgid "CTRL + Left click"
+msgstr "CTRL + Links kliek"
+
+#: src/gui/HelpDialog.cpp:160
 #, qt-format
 msgid ""
 "Below are listed only the actions with assigned keys. Further actions may be "
 "available via the \"%1\" button."
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:263
+#: src/gui/HelpDialog.cpp:199
+msgid ""
+"The following links are external web links, and will launch your web "
+"browser:\n"
+msgstr ""
+"Die volgende skakels is eksterne webskakels, en sal in jou webblaaier "
+"oopmaak:\n"
+
+#: src/gui/HelpDialog.cpp:200
+msgid "The Stellarium User Guide"
+msgstr "The Stellarium Verbruikers Gids"
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:204
+msgid "{Frequently Asked Questions} about Stellarium.  Answers too."
+msgstr "{Mees Gevraagde Vrae} oor Stellarium. Antwoorde ook."
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:209
+msgid ""
+"{The Stellarium Wiki} - General information.  You can also find user-"
+"contributed landscapes and scripts here."
+msgstr ""
+"{Die Stellarium Wiki} - Algemene inligting. Jy kan ook landskappe deur "
+"gebruikers en skripte hier kry."
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:214
+msgid ""
+"{Support ticket system} - if you need help using Stellarium, post a support "
+"request here and we'll try to help."
+msgstr ""
+"{Navrae} - benodig jy hulp met die gebruik van Stellarium, stuur navrae hier "
+"aan ons en ons sal probeer om jou te help."
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:219
+msgid ""
+"{Bug reporting and feature request system} - if something doesn't work "
+"properly or is missing and is not listed in the tracker, you can open bug "
+"reports here."
+msgstr ""
+"{Bug reporting and feature request system} - indien iets nie korrek werk nie "
+"of weg is en nie in die spoorder gelys is nie, kan 'n foutverslag hier "
+"gedoen word."
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:224
+msgid "{Forums} - discuss Stellarium with other users."
+msgstr "{Forums} - bespreek Stellarium met ander verbruikers"
+
+#: src/gui/HelpDialog.cpp:262
 msgid "Developers"
 msgstr "Ontwikkelaars"
 
-#: src/gui/HelpDialog.cpp:264
+#: src/gui/HelpDialog.cpp:263
 #, qt-format
 msgid "Project coordinator & lead developer: %1"
 msgstr "Projek koördineerder & leier ontwikkelaar: %1"
 
-#: src/gui/HelpDialog.cpp:265
+#: src/gui/HelpDialog.cpp:264
 #, qt-format
 msgid "Doc author/developer: %1"
 msgstr "Dok auteur/ontwikkelaar: %1"
 
-#: src/gui/HelpDialog.cpp:266 src/gui/HelpDialog.cpp:267
-#: src/gui/HelpDialog.cpp:268 src/gui/HelpDialog.cpp:269
-#: src/gui/HelpDialog.cpp:270 src/gui/HelpDialog.cpp:277
-#: src/gui/HelpDialog.cpp:278 src/gui/HelpDialog.cpp:279
-#: src/gui/HelpDialog.cpp:280
+#: src/gui/HelpDialog.cpp:265 src/gui/HelpDialog.cpp:266
+#: src/gui/HelpDialog.cpp:267 src/gui/HelpDialog.cpp:268
+#: src/gui/HelpDialog.cpp:269 src/gui/HelpDialog.cpp:276
+#: src/gui/HelpDialog.cpp:277 src/gui/HelpDialog.cpp:278
+#: src/gui/HelpDialog.cpp:279
 #, qt-format
 msgid "Developer: %1"
 msgstr "Ontwikkelaar: %1"
 
-#: src/gui/HelpDialog.cpp:271
+#: src/gui/HelpDialog.cpp:270
 #, qt-format
 msgid "Continuous Integration: %1"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:272 src/gui/HelpDialog.cpp:273
+#: src/gui/HelpDialog.cpp:271 src/gui/HelpDialog.cpp:272
 #, qt-format
 msgid "Tester: %1"
 msgstr "Toetser: %1"
 
-#: src/gui/HelpDialog.cpp:274
+#: src/gui/HelpDialog.cpp:273
 msgid "Past Developers"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:275
+#: src/gui/HelpDialog.cpp:274
 msgid ""
 "Several people have made significant contributions, but are no longer "
 "active. Their work has made a big difference to the project:"
@@ -1337,12 +1440,12 @@ msgstr ""
 "Verskeie persone het betekenisvolle bydraes gemaak, maar is nie meer aktief "
 "nie. Hulle werk het 'n groot verskil aan die projek gemaak."
 
-#: src/gui/HelpDialog.cpp:276
+#: src/gui/HelpDialog.cpp:275
 #, qt-format
 msgid "Graphic/other designer: %1"
 msgstr "Grafiese/ander ontwerper: %1"
 
-#: src/gui/HelpDialog.cpp:281 src/gui/HelpDialog.cpp:282
+#: src/gui/HelpDialog.cpp:280 src/gui/HelpDialog.cpp:281
 #, qt-format
 msgid "OSX Developer: %1"
 msgstr "OSX Ontwikkelaar: %1"
@@ -8184,18 +8287,6 @@ msgstr ""
 #~ msgid "Star Value Multiplier: "
 #~ msgstr "Sterwaarde versterker "
 
-#~ msgid "Page Up/Down"
-#~ msgstr "Bladsy Op/Af"
-
-#~ msgid "Arrow keys & left mouse drag"
-#~ msgstr "Pylsleutels & linksmuis sleep"
-
-#~ msgid "The Stellarium User Guide"
-#~ msgstr "The Stellarium Verbruikers Gids"
-
-#~ msgid "{Forums} - discuss Stellarium with other users."
-#~ msgstr "{Forums} - bespreek Stellarium met ander verbruikers"
-
 #~ msgid "10"
 #~ msgstr "10"
 
@@ -8212,29 +8303,11 @@ msgstr ""
 #~ msgid "Distance: %1AU"
 #~ msgstr "Afstand: %1AU"
 
-#~ msgid "CTRL + Up/Down"
-#~ msgstr "CTRL + Op/Af"
-
-#~ msgid "Stellarium Help"
-#~ msgstr "Stellarium Hulp"
-
-#~ msgid "{Frequently Asked Questions} about Stellarium.  Answers too."
-#~ msgstr "{Mees Gevraagde Vrae} oor Stellarium. Antwoorde ook."
-
-#~ msgid "Zoom in/out"
-#~ msgstr "Zoem in/uit"
-
 #~ msgid ":"
 #~ msgstr ":"
 
 #~ msgid "/"
 #~ msgstr "/"
-
-#~ msgid "Right click"
-#~ msgstr "Regs kliek"
-
-#~ msgid "CTRL + Left click"
-#~ msgstr "CTRL + Links kliek"
 
 #~ msgid "Light Pollution Luminance: "
 #~ msgstr "Lig besoedeling beligting: "
@@ -8244,39 +8317,6 @@ msgstr ""
 
 #~ msgid "Correct for light travel time: "
 #~ msgstr "Korrigeer vir reistyd van lig: "
-
-#~ msgid "Left click"
-#~ msgstr "Links kliek"
-
-#~ msgid "Keys"
-#~ msgstr "Sleutels"
-
-#~ msgid "Further Reading"
-#~ msgstr "Verdere leesstof"
-
-#~ msgid "Select object"
-#~ msgstr "Kies voorwerp"
-
-#~ msgid ""
-#~ "{The Stellarium Wiki} - General information.  You can also find user-"
-#~ "contributed landscapes and scripts here."
-#~ msgstr ""
-#~ "{Die Stellarium Wiki} - Algemene inligting. Jy kan ook landskappe deur "
-#~ "gebruikers en skripte hier kry."
-
-#~ msgid ""
-#~ "{Support ticket system} - if you need help using Stellarium, post a support "
-#~ "request here and we'll try to help."
-#~ msgstr ""
-#~ "{Navrae} - benodig jy hulp met die gebruik van Stellarium, stuur navrae hier "
-#~ "aan ons en ons sal probeer om jou te help."
-
-#~ msgid ""
-#~ "The following links are external web links, and will launch your web "
-#~ "browser:\n"
-#~ msgstr ""
-#~ "Die volgende skakels is eksterne webskakels, en sal in jou webblaaier "
-#~ "oopmaak:\n"
 
 #~ msgid "Nebulas background images"
 #~ msgstr "Agtergrondbeelde vir nebula"
@@ -8309,17 +8349,11 @@ msgstr ""
 #~ msgid "Magnitude: <b>%1</b> (B-V: %2)"
 #~ msgstr "Grootte: <b>%1</b> (B-V: %2)"
 
-#~ msgid "Pan view around the sky"
-#~ msgstr "Draai oogpunt rond in die lug"
-
 #~ msgid "Planets labels"
 #~ msgstr "Planeetname"
 
 #~ msgid "Art brightness: "
 #~ msgstr "Kunshelderheid: "
-
-#~ msgid "Clear selection"
-#~ msgstr "Vee keuse"
 
 #~ msgid "Hourly zenith rate:"
 #~ msgstr "Uurlikse zenith tempo:"
@@ -8338,15 +8372,6 @@ msgstr ""
 
 #~ msgid "Finished downloading all star catalogs!"
 #~ msgstr "Alle ster katalogusse klaar afgelaai!"
-
-#~ msgid ""
-#~ "{Bug reporting and feature request system} - if something doesn't work "
-#~ "properly or is missing and is not listed in the tracker, you can open bug "
-#~ "reports here."
-#~ msgstr ""
-#~ "{Bug reporting and feature request system} - indien iets nie korrek werk nie "
-#~ "of weg is en nie in die spoorder gelys is nie, kan 'n foutverslag hier "
-#~ "gedoen word."
 
 #~ msgid "Plugin Key Bindings"
 #~ msgstr "Invoegsel sleutelbinding"

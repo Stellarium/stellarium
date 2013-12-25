@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-23 01:35+0700\n"
+"POT-Creation-Date: 2013-12-24 21:46+0700\n"
 "PO-Revision-Date: 2013-11-05 08:29+0000\n"
 "Last-Translator: LEE E. S. <Unknown>\n"
 "Language-Team: Korean <ko@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-12-23 05:22+0000\n"
-"X-Generator: Launchpad (build 16872)\n"
+"X-Launchpad-Export-Date: 2013-12-25 05:24+0000\n"
+"X-Generator: Launchpad (build 16877)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:106 src/core/modules/StarMgr.cpp:336
 #: src/core/modules/GridLinesMgr.cpp:679 src/core/modules/LandscapeMgr.cpp:335
@@ -1308,63 +1308,161 @@ msgstr "Islam, Sadiq & Qureshi (2008, 2013)"
 msgid "Custom equation of %1T"
 msgstr "%1T의 사용자 정의 방정식"
 
-#: src/gui/HelpDialog.cpp:161
+#: src/gui/HelpDialog.cpp:119
+msgid "Stellarium Help"
+msgstr "스텔라리움 도움말"
+
+#: src/gui/HelpDialog.cpp:124 src/gui/HelpDialog.cpp:129
+msgid "Keys"
+msgstr "키"
+
+#: src/gui/HelpDialog.cpp:126 src/gui/HelpDialog.cpp:198
+msgid "Further Reading"
+msgstr "더 읽어 보기"
+
+#: src/gui/HelpDialog.cpp:133
+msgid "Pan view around the sky"
+msgstr "회전하며 하늘 보기"
+
+#: src/gui/HelpDialog.cpp:134
+msgid "Arrow keys & left mouse drag"
+msgstr "방향키 & 마우스 왼쪽 드래그"
+
+#: src/gui/HelpDialog.cpp:136
+msgid "Zoom in/out"
+msgstr "확대/축소"
+
+#: src/gui/HelpDialog.cpp:138
+msgid "Page Up/Down"
+msgstr "Page Up/Down"
+
+#: src/gui/HelpDialog.cpp:140
+msgid "CTRL + Up/Down"
+msgstr "CTRL + 위/아래"
+
+#: src/gui/HelpDialog.cpp:143
+msgid "Select object"
+msgstr "천체 찾기"
+
+#: src/gui/HelpDialog.cpp:144
+msgid "Left click"
+msgstr "마우스 왼쪽 클릭"
+
+#: src/gui/HelpDialog.cpp:152
+msgid "Clear selection"
+msgstr "선택 해제"
+
+#: src/gui/HelpDialog.cpp:153
+msgid "Right click"
+msgstr "마우스 오른쪽 클릭"
+
+#: src/gui/HelpDialog.cpp:155
+msgid "CTRL + Left click"
+msgstr "CTRL + 마우스 왼쪽 클릭"
+
+#: src/gui/HelpDialog.cpp:160
 #, qt-format
 msgid ""
 "Below are listed only the actions with assigned keys. Further actions may be "
 "available via the \"%1\" button."
 msgstr "아래는 키가 지정된 동작만 표시됩니다. 더 많은 동작은 \"%1\" 버튼을 눌러 사용할 수 있습니다."
 
-#: src/gui/HelpDialog.cpp:263
+#: src/gui/HelpDialog.cpp:199
+msgid ""
+"The following links are external web links, and will launch your web "
+"browser:\n"
+msgstr "다음의 링크는 외부 웹 링크이며, 당신의 웹 브라우저를 실행할 것입니다:\n"
+
+#: src/gui/HelpDialog.cpp:200
+msgid "The Stellarium User Guide"
+msgstr "스텔라리움 사용자 안내서"
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:204
+msgid "{Frequently Asked Questions} about Stellarium.  Answers too."
+msgstr "{Frequently Asked Questions} 스텔라리움에 관련된 질문과 답변이 있습니다."
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:209
+msgid ""
+"{The Stellarium Wiki} - General information.  You can also find user-"
+"contributed landscapes and scripts here."
+msgstr ""
+"{The Stellarium Wiki} - 전반적인 정보가 있습니다. 여기서 사용자가 기고한 풍경과 스크립트도 찾아볼 수 있습니다."
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:214
+msgid ""
+"{Support ticket system} - if you need help using Stellarium, post a support "
+"request here and we'll try to help."
+msgstr ""
+"{Support ticket system} - 만약 스텔라리움을 사용하면서 도움이 필요할 때, 여기에 지원 요청을 하시면 도와드리겠습니다."
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:219
+msgid ""
+"{Bug reporting and feature request system} - if something doesn't work "
+"properly or is missing and is not listed in the tracker, you can open bug "
+"reports here."
+msgstr ""
+"{버그 제보, 기능 요청 시스템} - 만약 무언가가 제대로 작동하지 않고 그것이 트래커에 기재되지 않았다면, 여기서 버그 제보를 할 수 "
+"있습니다."
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:224
+msgid "{Forums} - discuss Stellarium with other users."
+msgstr "{Forums} - 다른 사용자와 스텔라리움에 대해 이야기하세요."
+
+#: src/gui/HelpDialog.cpp:262
 msgid "Developers"
 msgstr "만든 사람들"
 
-#: src/gui/HelpDialog.cpp:264
+#: src/gui/HelpDialog.cpp:263
 #, qt-format
 msgid "Project coordinator & lead developer: %1"
 msgstr "프로젝트 책임자 & 핵심 개발자: %1"
 
-#: src/gui/HelpDialog.cpp:265
+#: src/gui/HelpDialog.cpp:264
 #, qt-format
 msgid "Doc author/developer: %1"
 msgstr "문서 저자/개발자: %1"
 
-#: src/gui/HelpDialog.cpp:266 src/gui/HelpDialog.cpp:267
-#: src/gui/HelpDialog.cpp:268 src/gui/HelpDialog.cpp:269
-#: src/gui/HelpDialog.cpp:270 src/gui/HelpDialog.cpp:277
-#: src/gui/HelpDialog.cpp:278 src/gui/HelpDialog.cpp:279
-#: src/gui/HelpDialog.cpp:280
+#: src/gui/HelpDialog.cpp:265 src/gui/HelpDialog.cpp:266
+#: src/gui/HelpDialog.cpp:267 src/gui/HelpDialog.cpp:268
+#: src/gui/HelpDialog.cpp:269 src/gui/HelpDialog.cpp:276
+#: src/gui/HelpDialog.cpp:277 src/gui/HelpDialog.cpp:278
+#: src/gui/HelpDialog.cpp:279
 #, qt-format
 msgid "Developer: %1"
 msgstr "개발자: %1"
 
-#: src/gui/HelpDialog.cpp:271
+#: src/gui/HelpDialog.cpp:270
 #, qt-format
 msgid "Continuous Integration: %1"
 msgstr "연속적인 통합: %1"
 
-#: src/gui/HelpDialog.cpp:272 src/gui/HelpDialog.cpp:273
+#: src/gui/HelpDialog.cpp:271 src/gui/HelpDialog.cpp:272
 #, qt-format
 msgid "Tester: %1"
 msgstr "테스터: %1"
 
-#: src/gui/HelpDialog.cpp:274
+#: src/gui/HelpDialog.cpp:273
 msgid "Past Developers"
 msgstr "과거 개발자들"
 
-#: src/gui/HelpDialog.cpp:275
+#: src/gui/HelpDialog.cpp:274
 msgid ""
 "Several people have made significant contributions, but are no longer "
 "active. Their work has made a big difference to the project:"
 msgstr ""
 "여러 사람들이 상당한 기여를 했지만, 더 이상 활성화되어 있지 않습니다. 그들의 작업은 프로젝트에 큰 차이를 만들었습니다 :"
 
-#: src/gui/HelpDialog.cpp:276
+#: src/gui/HelpDialog.cpp:275
 #, qt-format
 msgid "Graphic/other designer: %1"
 msgstr "그래픽/기타 디자이너: %1"
 
-#: src/gui/HelpDialog.cpp:281 src/gui/HelpDialog.cpp:282
+#: src/gui/HelpDialog.cpp:280 src/gui/HelpDialog.cpp:281
 #, qt-format
 msgid "OSX Developer: %1"
 msgstr "OSX 개발자: %1"
@@ -8176,9 +8274,6 @@ msgstr "박명에서 태양고도: 0도."
 #~ msgid "Nebulas"
 #~ msgstr "성운"
 
-#~ msgid "Select object"
-#~ msgstr "천체 찾기"
-
 #, qt-format
 #~ msgid "Magnitude: <b>%1</b> (B-V: %2)"
 #~ msgstr "등급: <b>%1</b>(B-V: %2)"
@@ -8190,18 +8285,6 @@ msgstr "박명에서 태양고도: 0도."
 #~ msgid "Correct for light travel time: "
 #~ msgstr "빛의 여행 시간에 맞게 고치세요: "
 
-#~ msgid "Arrow keys & left mouse drag"
-#~ msgstr "방향키 & 마우스 왼쪽 드래그"
-
-#~ msgid "Further Reading"
-#~ msgstr "더 읽어 보기"
-
-#~ msgid "Clear selection"
-#~ msgstr "선택 해제"
-
-#~ msgid "Stellarium Help"
-#~ msgstr "스텔라리움 도움말"
-
 #~ msgid "10"
 #~ msgstr "10"
 
@@ -8210,9 +8293,6 @@ msgstr "박명에서 태양고도: 0도."
 
 #~ msgid "144000"
 #~ msgstr "144000"
-
-#~ msgid "Keys"
-#~ msgstr "키"
 
 #~ msgid "Limiting Magnitude: "
 #~ msgstr "한계등급 "
@@ -8226,9 +8306,6 @@ msgstr "박명에서 태양고도: 0도."
 #~ msgid "0"
 #~ msgstr "0"
 
-#~ msgid "{Forums} - discuss Stellarium with other users."
-#~ msgstr "{Forums} - 다른 사용자와 스텔라리움에 대해 이야기하세요."
-
 #~ msgid "Other"
 #~ msgstr "기타"
 
@@ -8241,40 +8318,11 @@ msgstr "박명에서 태양고도: 0도."
 #~ msgid "/"
 #~ msgstr "/"
 
-#~ msgid "The Stellarium User Guide"
-#~ msgstr "스텔라리움 사용자 안내서"
-
 #~ msgid "Light pollution: "
 #~ msgstr "광공해: "
 
-#~ msgid "{Frequently Asked Questions} about Stellarium.  Answers too."
-#~ msgstr "{Frequently Asked Questions} 스텔라리움에 관련된 질문과 답변이 있습니다."
-
 #~ msgid "Art brightness: "
 #~ msgstr "그림 밝기: "
-
-#~ msgid "Right click"
-#~ msgstr "마우스 오른쪽 클릭"
-
-#~ msgid "CTRL + Left click"
-#~ msgstr "CTRL + 마우스 왼쪽 클릭"
-
-#~ msgid "Left click"
-#~ msgstr "마우스 왼쪽 클릭"
-
-#~ msgid "CTRL + Up/Down"
-#~ msgstr "CTRL + 위/아래"
-
-#~ msgid "Page Up/Down"
-#~ msgstr "Page Up/Down"
-
-#~ msgid "Zoom in/out"
-#~ msgstr "확대/축소"
-
-#~ msgid ""
-#~ "The following links are external web links, and will launch your web "
-#~ "browser:\n"
-#~ msgstr "다음의 링크는 외부 웹 링크이며, 당신의 웹 브라우저를 실행할 것입니다:\n"
 
 #~ msgid "Startup FOV: XX"
 #~ msgstr "시작시 화각: XX"
@@ -8282,29 +8330,14 @@ msgstr "박명에서 태양고도: 0도."
 #~ msgid "Startup direction of view: xxxx"
 #~ msgstr "시작시 시야 방향: xxxx"
 
-#~ msgid "Pan view around the sky"
-#~ msgstr "회전하며 하늘 보기"
-
 #~ msgid "Nebulas background images"
 #~ msgstr "성운 배경 그림"
-
-#~ msgid ""
-#~ "{Support ticket system} - if you need help using Stellarium, post a support "
-#~ "request here and we'll try to help."
-#~ msgstr ""
-#~ "{Support ticket system} - 만약 스텔라리움을 사용하면서 도움이 필요할 때, 여기에 지원 요청을 하시면 도와드리겠습니다."
 
 #~ msgid "Get catalog x of y"
 #~ msgstr "y 의 x 목록 가져오기"
 
 #~ msgid "xxx"
 #~ msgstr "xxx"
-
-#~ msgid ""
-#~ "{The Stellarium Wiki} - General information.  You can also find user-"
-#~ "contributed landscapes and scripts here."
-#~ msgstr ""
-#~ "{The Stellarium Wiki} - 전반적인 정보가 있습니다. 여기서 사용자가 기고한 풍경과 스크립트도 찾아볼 수 있습니다."
 
 #~ msgid "Hourly zenith rate:"
 #~ msgstr "시간당 유성 개수:"
@@ -8317,14 +8350,6 @@ msgstr "박명에서 태양고도: 0도."
 
 #~ msgid "Finished downloading all star catalogs!"
 #~ msgstr "모든 별 목록의 다운로드가 끝났습니다!"
-
-#~ msgid ""
-#~ "{Bug reporting and feature request system} - if something doesn't work "
-#~ "properly or is missing and is not listed in the tracker, you can open bug "
-#~ "reports here."
-#~ msgstr ""
-#~ "{버그 제보, 기능 요청 시스템} - 만약 무언가가 제대로 작동하지 않고 그것이 트래커에 기재되지 않았다면, 여기서 버그 제보를 할 수 "
-#~ "있습니다."
 
 #~ msgid "Latitude: "
 #~ msgstr "위도: "
