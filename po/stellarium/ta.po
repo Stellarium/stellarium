@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2013-12-23 01:35+0700\n"
+"POT-Creation-Date: 2013-12-24 21:46+0700\n"
 "PO-Revision-Date: 2012-10-13 16:08+0000\n"
 "Last-Translator: முரளி <Unknown>\n"
 "Language-Team: Tamil <ta@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-12-23 05:26+0000\n"
-"X-Generator: Launchpad (build 16872)\n"
+"X-Launchpad-Export-Date: 2013-12-25 05:29+0000\n"
+"X-Generator: Launchpad (build 16877)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:106 src/core/modules/StarMgr.cpp:336
 #: src/core/modules/GridLinesMgr.cpp:679 src/core/modules/LandscapeMgr.cpp:335
@@ -1269,51 +1269,147 @@ msgstr ""
 msgid "Custom equation of %1T"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:161
+#: src/gui/HelpDialog.cpp:119
+msgid "Stellarium Help"
+msgstr "ஸ்டெல்லறியும் உதவி"
+
+#: src/gui/HelpDialog.cpp:124 src/gui/HelpDialog.cpp:129
+msgid "Keys"
+msgstr "விசைகள்"
+
+#: src/gui/HelpDialog.cpp:126 src/gui/HelpDialog.cpp:198
+msgid "Further Reading"
+msgstr "மேலும் படிக்க"
+
+#: src/gui/HelpDialog.cpp:133
+msgid "Pan view around the sky"
+msgstr ""
+
+#: src/gui/HelpDialog.cpp:134
+msgid "Arrow keys & left mouse drag"
+msgstr "திசை சாவிகள் மற்றும் இடது சுட்டெலி இழுப்பு"
+
+#: src/gui/HelpDialog.cpp:136
+msgid "Zoom in/out"
+msgstr "உரு அளவு பெரிதாக்கு/சிறிதாக்கு"
+
+#: src/gui/HelpDialog.cpp:138
+msgid "Page Up/Down"
+msgstr "பக்கம் மேல்/கீழ்"
+
+#: src/gui/HelpDialog.cpp:140
+msgid "CTRL + Up/Down"
+msgstr "கண்ட்ரோல் + மேல்/கீழ்"
+
+#: src/gui/HelpDialog.cpp:143
+msgid "Select object"
+msgstr "பொருளை தேர்வு செய்"
+
+#: src/gui/HelpDialog.cpp:144
+msgid "Left click"
+msgstr "இடச்சொடுகு"
+
+#: src/gui/HelpDialog.cpp:152
+msgid "Clear selection"
+msgstr "தேர்வை நீக்கு"
+
+#: src/gui/HelpDialog.cpp:153
+msgid "Right click"
+msgstr "வலச்சொடுக்கு"
+
+#: src/gui/HelpDialog.cpp:155
+msgid "CTRL + Left click"
+msgstr "கண்ட்ரோல் + இடச்சொடுகு"
+
+#: src/gui/HelpDialog.cpp:160
 #, qt-format
 msgid ""
 "Below are listed only the actions with assigned keys. Further actions may be "
 "available via the \"%1\" button."
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:263
+#: src/gui/HelpDialog.cpp:199
+msgid ""
+"The following links are external web links, and will launch your web "
+"browser:\n"
+msgstr ""
+"பின்வரும் இணைப்புகள் எல்லாம் வெளிப்புற வலை இணைப்புகள், கூடவே அவைகள் வலை "
+"உலாவி மூலம் திறக்கப்படும்\n"
+
+#: src/gui/HelpDialog.cpp:200
+msgid "The Stellarium User Guide"
+msgstr "ஸ்டெல்லறியும் பயனர் வழிகாட்டி"
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:204
+msgid "{Frequently Asked Questions} about Stellarium.  Answers too."
+msgstr "{Frequently Asked Questions} ஸ்டெல்லரியாதை பற்றி. பதிலும் கூட."
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:209
+msgid ""
+"{The Stellarium Wiki} - General information.  You can also find user-"
+"contributed landscapes and scripts here."
+msgstr ""
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:214
+msgid ""
+"{Support ticket system} - if you need help using Stellarium, post a support "
+"request here and we'll try to help."
+msgstr ""
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:219
+msgid ""
+"{Bug reporting and feature request system} - if something doesn't work "
+"properly or is missing and is not listed in the tracker, you can open bug "
+"reports here."
+msgstr ""
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:224
+msgid "{Forums} - discuss Stellarium with other users."
+msgstr "{Forums}- மற்ற ஸ்டெல்லறியும் பயனருடன் கலந்துரையாடுங்கள்."
+
+#: src/gui/HelpDialog.cpp:262
 msgid "Developers"
 msgstr "உருவாக்குபவர்கள்"
 
-#: src/gui/HelpDialog.cpp:264
+#: src/gui/HelpDialog.cpp:263
 #, qt-format
 msgid "Project coordinator & lead developer: %1"
 msgstr "செயற்திட்ட ஒருங்கிணைப்பாளர் & உருவாக்குநர்: %1"
 
-#: src/gui/HelpDialog.cpp:265
+#: src/gui/HelpDialog.cpp:264
 #, qt-format
 msgid "Doc author/developer: %1"
 msgstr "ஆவண படைப்பன்/உருவாக்குநர்: %1"
 
-#: src/gui/HelpDialog.cpp:266 src/gui/HelpDialog.cpp:267
-#: src/gui/HelpDialog.cpp:268 src/gui/HelpDialog.cpp:269
-#: src/gui/HelpDialog.cpp:270 src/gui/HelpDialog.cpp:277
-#: src/gui/HelpDialog.cpp:278 src/gui/HelpDialog.cpp:279
-#: src/gui/HelpDialog.cpp:280
+#: src/gui/HelpDialog.cpp:265 src/gui/HelpDialog.cpp:266
+#: src/gui/HelpDialog.cpp:267 src/gui/HelpDialog.cpp:268
+#: src/gui/HelpDialog.cpp:269 src/gui/HelpDialog.cpp:276
+#: src/gui/HelpDialog.cpp:277 src/gui/HelpDialog.cpp:278
+#: src/gui/HelpDialog.cpp:279
 #, qt-format
 msgid "Developer: %1"
 msgstr "உருவாக்குநர்: %1"
 
-#: src/gui/HelpDialog.cpp:271
+#: src/gui/HelpDialog.cpp:270
 #, qt-format
 msgid "Continuous Integration: %1"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:272 src/gui/HelpDialog.cpp:273
+#: src/gui/HelpDialog.cpp:271 src/gui/HelpDialog.cpp:272
 #, qt-format
 msgid "Tester: %1"
 msgstr "சோதிப்பான்: %1"
 
-#: src/gui/HelpDialog.cpp:274
+#: src/gui/HelpDialog.cpp:273
 msgid "Past Developers"
 msgstr "கடந்த உருவாக்குநர்கள்"
 
-#: src/gui/HelpDialog.cpp:275
+#: src/gui/HelpDialog.cpp:274
 msgid ""
 "Several people have made significant contributions, but are no longer "
 "active. Their work has made a big difference to the project:"
@@ -1321,12 +1417,12 @@ msgstr ""
 "பலர் குறிப்பிடத்தக்க பங்காற்றியுள்ளனர். ஆனால் செயல்பாட்டில் இல்லை. அவர்களின் "
 "பங்களிப்புகள் இத்திட்டப்பணியில் பெரும் மாற்றங்களை செய்துள்ளன:"
 
-#: src/gui/HelpDialog.cpp:276
+#: src/gui/HelpDialog.cpp:275
 #, qt-format
 msgid "Graphic/other designer: %1"
 msgstr "வரைகலை/மற்ற கலைஞர்:%1"
 
-#: src/gui/HelpDialog.cpp:281 src/gui/HelpDialog.cpp:282
+#: src/gui/HelpDialog.cpp:280 src/gui/HelpDialog.cpp:281
 #, qt-format
 msgid "OSX Developer: %1"
 msgstr "ஒ ச க்ஸ்(OSX) உருவாக்குநர்: %1"
@@ -7939,55 +8035,6 @@ msgstr ""
 #~ msgid "Finished downloading all star catalogs!"
 #~ msgstr "அனைத்து நட்சத்திர பட்டியல்கள் பதிவிறக்கம் செய்யப்பட்டுவிட்டது"
 
-#~ msgid "Right click"
-#~ msgstr "வலச்சொடுக்கு"
-
-#~ msgid "Left click"
-#~ msgstr "இடச்சொடுகு"
-
-#~ msgid "Arrow keys & left mouse drag"
-#~ msgstr "திசை சாவிகள் மற்றும் இடது சுட்டெலி இழுப்பு"
-
-#~ msgid "Further Reading"
-#~ msgstr "மேலும் படிக்க"
-
-#~ msgid "Select object"
-#~ msgstr "பொருளை தேர்வு செய்"
-
-#~ msgid "Clear selection"
-#~ msgstr "தேர்வை நீக்கு"
-
-#~ msgid "Stellarium Help"
-#~ msgstr "ஸ்டெல்லறியும் உதவி"
-
-#~ msgid ""
-#~ "The following links are external web links, and will launch your web "
-#~ "browser:\n"
-#~ msgstr ""
-#~ "பின்வரும் இணைப்புகள் எல்லாம் வெளிப்புற வலை இணைப்புகள், கூடவே அவைகள் வலை "
-#~ "உலாவி மூலம் திறக்கப்படும்\n"
-
-#~ msgid "Keys"
-#~ msgstr "விசைகள்"
-
-#~ msgid "The Stellarium User Guide"
-#~ msgstr "ஸ்டெல்லறியும் பயனர் வழிகாட்டி"
-
-#~ msgid "Zoom in/out"
-#~ msgstr "உரு அளவு பெரிதாக்கு/சிறிதாக்கு"
-
-#~ msgid "CTRL + Left click"
-#~ msgstr "கண்ட்ரோல் + இடச்சொடுகு"
-
-#~ msgid "CTRL + Up/Down"
-#~ msgstr "கண்ட்ரோல் + மேல்/கீழ்"
-
-#~ msgid "Page Up/Down"
-#~ msgstr "பக்கம் மேல்/கீழ்"
-
-#~ msgid "{Frequently Asked Questions} about Stellarium.  Answers too."
-#~ msgstr "{Frequently Asked Questions} ஸ்டெல்லரியாதை பற்றி. பதிலும் கூட."
-
 #~ msgid "General "
 #~ msgstr "பொதுவானவை "
 
@@ -8081,9 +8128,6 @@ msgstr ""
 #, no-c-format, qt-format
 #~ msgid "Distance: %1AU"
 #~ msgstr "தொலைவு: %1AU (வானியல் அலகு)"
-
-#~ msgid "{Forums} - discuss Stellarium with other users."
-#~ msgstr "{Forums}- மற்ற ஸ்டெல்லறியும் பயனருடன் கலந்துரையாடுங்கள்."
 
 #~ msgid "Nebulas"
 #~ msgstr "நெபுளாக்கள்"

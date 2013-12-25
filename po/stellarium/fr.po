@@ -17,15 +17,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-23 01:35+0700\n"
+"POT-Creation-Date: 2013-12-24 21:46+0700\n"
 "PO-Revision-Date: 2013-12-20 17:15+0000\n"
 "Last-Translator: Nicolas Martignoni <Unknown>\n"
 "Language-Team: <fr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-12-23 05:19+0000\n"
-"X-Generator: Launchpad (build 16872)\n"
+"X-Launchpad-Export-Date: 2013-12-25 05:21+0000\n"
+"X-Generator: Launchpad (build 16877)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:106 src/core/modules/StarMgr.cpp:336
 #: src/core/modules/GridLinesMgr.cpp:679 src/core/modules/LandscapeMgr.cpp:335
@@ -1392,7 +1392,59 @@ msgstr "Islam, Sadiq & Qureshi (2008, 2013)"
 msgid "Custom equation of %1T"
 msgstr "Équation personnalisée de %1T"
 
-#: src/gui/HelpDialog.cpp:161
+#: src/gui/HelpDialog.cpp:119
+msgid "Stellarium Help"
+msgstr "Aide de Stellarium"
+
+#: src/gui/HelpDialog.cpp:124 src/gui/HelpDialog.cpp:129
+msgid "Keys"
+msgstr "Touches"
+
+#: src/gui/HelpDialog.cpp:126 src/gui/HelpDialog.cpp:198
+msgid "Further Reading"
+msgstr "Plus d'info"
+
+#: src/gui/HelpDialog.cpp:133
+msgid "Pan view around the sky"
+msgstr "Vue panoramique du ciel"
+
+#: src/gui/HelpDialog.cpp:134
+msgid "Arrow keys & left mouse drag"
+msgstr "Touches de direction & glissé du bouton gauche"
+
+#: src/gui/HelpDialog.cpp:136
+msgid "Zoom in/out"
+msgstr "Zoom +/-"
+
+#: src/gui/HelpDialog.cpp:138
+msgid "Page Up/Down"
+msgstr "Page Haut/Bas"
+
+#: src/gui/HelpDialog.cpp:140
+msgid "CTRL + Up/Down"
+msgstr "CTRL + Haut/Bas"
+
+#: src/gui/HelpDialog.cpp:143
+msgid "Select object"
+msgstr "Sélectionner un objet"
+
+#: src/gui/HelpDialog.cpp:144
+msgid "Left click"
+msgstr "Clic gauche"
+
+#: src/gui/HelpDialog.cpp:152
+msgid "Clear selection"
+msgstr "Effacer la sélection"
+
+#: src/gui/HelpDialog.cpp:153
+msgid "Right click"
+msgstr "Clic droit"
+
+#: src/gui/HelpDialog.cpp:155
+msgid "CTRL + Left click"
+msgstr "CTRL + Clic gauche"
+
+#: src/gui/HelpDialog.cpp:160
 #, qt-format
 msgid ""
 "Below are listed only the actions with assigned keys. Further actions may be "
@@ -1402,44 +1454,96 @@ msgstr ""
 "indiquées ci-dessous. Pour afficher d'autres commandes, cliquer sur le "
 "bouton « %1 »."
 
-#: src/gui/HelpDialog.cpp:263
+#: src/gui/HelpDialog.cpp:199
+msgid ""
+"The following links are external web links, and will launch your web "
+"browser:\n"
+msgstr ""
+"Les liens suivants sont des liens internet externes et vont démarrer votre "
+"navigateur :\n"
+
+#: src/gui/HelpDialog.cpp:200
+msgid "The Stellarium User Guide"
+msgstr "Le guide de l'utilisateur de Stellarium"
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:204
+msgid "{Frequently Asked Questions} about Stellarium.  Answers too."
+msgstr "{Foire Aux Questions} sur Stellarium. Réponses aussi."
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:209
+msgid ""
+"{The Stellarium Wiki} - General information.  You can also find user-"
+"contributed landscapes and scripts here."
+msgstr ""
+"{Le wiki de Stellarium} – Information générale. Vous pouvez aussi trouver "
+"ici les paysages et scripts fournis par les utilisateurs."
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:214
+msgid ""
+"{Support ticket system} - if you need help using Stellarium, post a support "
+"request here and we'll try to help."
+msgstr ""
+"{Système de tickets de support} – Si vous avez besoin d'aide pour "
+"l'utilisation de Stellarium, postez une requête ici et nous essaierons de "
+"vous aider."
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:219
+msgid ""
+"{Bug reporting and feature request system} - if something doesn't work "
+"properly or is missing and is not listed in the tracker, you can open bug "
+"reports here."
+msgstr ""
+"{Rapport de bug et demande de fonctionnalités} – Si quelque chose ne "
+"fonctionne pas bien ou manque et n'est pas suivi, vous pouvez ouvrir un "
+"rapport de bug ici."
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:224
+msgid "{Forums} - discuss Stellarium with other users."
+msgstr "{Forums} – Discutez de Stellarium avec d'autres utilisateurs."
+
+#: src/gui/HelpDialog.cpp:262
 msgid "Developers"
 msgstr "Développeurs"
 
-#: src/gui/HelpDialog.cpp:264
+#: src/gui/HelpDialog.cpp:263
 #, qt-format
 msgid "Project coordinator & lead developer: %1"
 msgstr "Coordinateur du projet & développeur principal : %1"
 
-#: src/gui/HelpDialog.cpp:265
+#: src/gui/HelpDialog.cpp:264
 #, qt-format
 msgid "Doc author/developer: %1"
 msgstr "Document d'auteur/développeur : %1"
 
-#: src/gui/HelpDialog.cpp:266 src/gui/HelpDialog.cpp:267
-#: src/gui/HelpDialog.cpp:268 src/gui/HelpDialog.cpp:269
-#: src/gui/HelpDialog.cpp:270 src/gui/HelpDialog.cpp:277
-#: src/gui/HelpDialog.cpp:278 src/gui/HelpDialog.cpp:279
-#: src/gui/HelpDialog.cpp:280
+#: src/gui/HelpDialog.cpp:265 src/gui/HelpDialog.cpp:266
+#: src/gui/HelpDialog.cpp:267 src/gui/HelpDialog.cpp:268
+#: src/gui/HelpDialog.cpp:269 src/gui/HelpDialog.cpp:276
+#: src/gui/HelpDialog.cpp:277 src/gui/HelpDialog.cpp:278
+#: src/gui/HelpDialog.cpp:279
 #, qt-format
 msgid "Developer: %1"
 msgstr "Développeur : %1"
 
-#: src/gui/HelpDialog.cpp:271
+#: src/gui/HelpDialog.cpp:270
 #, qt-format
 msgid "Continuous Integration: %1"
 msgstr "Intégration continue : %1"
 
-#: src/gui/HelpDialog.cpp:272 src/gui/HelpDialog.cpp:273
+#: src/gui/HelpDialog.cpp:271 src/gui/HelpDialog.cpp:272
 #, qt-format
 msgid "Tester: %1"
 msgstr "Testeur : %1"
 
-#: src/gui/HelpDialog.cpp:274
+#: src/gui/HelpDialog.cpp:273
 msgid "Past Developers"
 msgstr "Anciens développeurs"
 
-#: src/gui/HelpDialog.cpp:275
+#: src/gui/HelpDialog.cpp:274
 msgid ""
 "Several people have made significant contributions, but are no longer "
 "active. Their work has made a big difference to the project:"
@@ -1447,12 +1551,12 @@ msgstr ""
 "Plusieurs personnes ont apporté des contributions importantes, mais ne sont "
 "plus actifs. Leur travail a fait une grande différence pour le projet :"
 
-#: src/gui/HelpDialog.cpp:276
+#: src/gui/HelpDialog.cpp:275
 #, qt-format
 msgid "Graphic/other designer: %1"
 msgstr "Designer graphique/autres : %1"
 
-#: src/gui/HelpDialog.cpp:281 src/gui/HelpDialog.cpp:282
+#: src/gui/HelpDialog.cpp:280 src/gui/HelpDialog.cpp:281
 #, qt-format
 msgid "OSX Developer: %1"
 msgstr "Développeur OS X : %1"
@@ -8495,44 +8599,11 @@ msgstr "Hauteur du Soleil au crépuscule : 0 deg."
 #~ msgid "Object Sizing Rule: "
 #~ msgstr "Taille des objets : "
 
-#~ msgid "CTRL + Left click"
-#~ msgstr "CTRL + Clic gauche"
-
-#~ msgid "CTRL + Up/Down"
-#~ msgstr "CTRL + Haut/Bas"
-
-#~ msgid "Page Up/Down"
-#~ msgstr "Page Haut/Bas"
-
-#~ msgid "Arrow keys & left mouse drag"
-#~ msgstr "Touches de direction & glissé du bouton gauche"
-
-#~ msgid "Further Reading"
-#~ msgstr "Plus d'info"
-
-#~ msgid "Stellarium Help"
-#~ msgstr "Aide de Stellarium"
-
-#~ msgid "{Frequently Asked Questions} about Stellarium.  Answers too."
-#~ msgstr "{Foire Aux Questions} sur Stellarium. Réponses aussi."
-
 #~ msgid "10"
 #~ msgstr "10"
 
 #~ msgid "80"
 #~ msgstr "80"
-
-#~ msgid "Select object"
-#~ msgstr "Sélectionner un objet"
-
-#~ msgid "Right click"
-#~ msgstr "Clic droit"
-
-#~ msgid "Left click"
-#~ msgstr "Clic gauche"
-
-#~ msgid "Keys"
-#~ msgstr "Touches"
 
 #~ msgid "Nebulas"
 #~ msgstr "Nébuleuses"
@@ -8549,12 +8620,6 @@ msgstr "Hauteur du Soleil au crépuscule : 0 deg."
 #~ msgid "Limiting Magnitude: "
 #~ msgstr "Limiter la magnitude: "
 
-#~ msgid "Pan view around the sky"
-#~ msgstr "Vue panoramique du ciel"
-
-#~ msgid "Clear selection"
-#~ msgstr "Effacer la sélection"
-
 #~ msgid "0"
 #~ msgstr "0"
 
@@ -8566,12 +8631,6 @@ msgstr "Hauteur du Soleil au crépuscule : 0 deg."
 
 #~ msgid ":"
 #~ msgstr ":"
-
-#~ msgid "Zoom in/out"
-#~ msgstr "Zoom +/-"
-
-#~ msgid "The Stellarium User Guide"
-#~ msgstr "Le guide de l'utilisateur de Stellarium"
 
 #~ msgid "Other"
 #~ msgstr "Divers"
@@ -8975,40 +9034,6 @@ msgstr "Hauteur du Soleil au crépuscule : 0 deg."
 #, qt-format
 #~ msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>. B-V: <b>%3</b>)"
 #~ msgstr "Magnitude : <b>%1</b> (extinction à  : <b>%2</b> ; B-V : <b>%3</b>)"
-
-#~ msgid ""
-#~ "{The Stellarium Wiki} - General information.  You can also find user-"
-#~ "contributed landscapes and scripts here."
-#~ msgstr ""
-#~ "{Le wiki de Stellarium} – Information générale. Vous pouvez aussi trouver "
-#~ "ici les paysages et scripts fournis par les utilisateurs."
-
-#~ msgid ""
-#~ "{Support ticket system} - if you need help using Stellarium, post a support "
-#~ "request here and we'll try to help."
-#~ msgstr ""
-#~ "{Système de tickets de support} – Si vous avez besoin d'aide pour "
-#~ "l'utilisation de Stellarium, postez une requête ici et nous essaierons de "
-#~ "vous aider."
-
-#~ msgid "{Forums} - discuss Stellarium with other users."
-#~ msgstr "{Forums} – Discutez de Stellarium avec d'autres utilisateurs."
-
-#~ msgid ""
-#~ "The following links are external web links, and will launch your web "
-#~ "browser:\n"
-#~ msgstr ""
-#~ "Les liens suivants sont des liens internet externes et vont démarrer votre "
-#~ "navigateur :\n"
-
-#~ msgid ""
-#~ "{Bug reporting and feature request system} - if something doesn't work "
-#~ "properly or is missing and is not listed in the tracker, you can open bug "
-#~ "reports here."
-#~ msgstr ""
-#~ "{Rapport de bug et demande de fonctionnalités} – Si quelque chose ne "
-#~ "fonctionne pas bien ou manque et n'est pas suivi, vous pouvez ouvrir un "
-#~ "rapport de bug ici."
 
 #~ msgid "Hourly zenith rate:"
 #~ msgstr "Fréquence horaire au zénith :"

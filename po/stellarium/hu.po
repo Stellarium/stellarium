@@ -8,15 +8,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Stellarium 0.10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-23 01:35+0700\n"
+"POT-Creation-Date: 2013-12-24 21:46+0700\n"
 "PO-Revision-Date: 2013-12-20 20:56+0000\n"
 "Last-Translator: misibacsi <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-12-23 05:20+0000\n"
-"X-Generator: Launchpad (build 16872)\n"
+"X-Launchpad-Export-Date: 2013-12-25 05:23+0000\n"
+"X-Generator: Launchpad (build 16877)\n"
 "X-Poedit-Language: Hungarian\n"
 
 #: src/core/modules/ConstellationMgr.cpp:106 src/core/modules/StarMgr.cpp:336
@@ -1363,7 +1363,59 @@ msgstr "Islam, Sadiq & Qureshi (2008, 2013)"
 msgid "Custom equation of %1T"
 msgstr "%1T egyéni kiszámítása"
 
-#: src/gui/HelpDialog.cpp:161
+#: src/gui/HelpDialog.cpp:119
+msgid "Stellarium Help"
+msgstr "A Stellarium súgója"
+
+#: src/gui/HelpDialog.cpp:124 src/gui/HelpDialog.cpp:129
+msgid "Keys"
+msgstr "Billentyűk"
+
+#: src/gui/HelpDialog.cpp:126 src/gui/HelpDialog.cpp:198
+msgid "Further Reading"
+msgstr "További olvasmányok"
+
+#: src/gui/HelpDialog.cpp:133
+msgid "Pan view around the sky"
+msgstr "Körbenézés az égen"
+
+#: src/gui/HelpDialog.cpp:134
+msgid "Arrow keys & left mouse drag"
+msgstr "Nyílbillentyűk és bal egérgombbal húzás"
+
+#: src/gui/HelpDialog.cpp:136
+msgid "Zoom in/out"
+msgstr "Nagyítás/kicsinyítés"
+
+#: src/gui/HelpDialog.cpp:138
+msgid "Page Up/Down"
+msgstr "Page Up, Page Down"
+
+#: src/gui/HelpDialog.cpp:140
+msgid "CTRL + Up/Down"
+msgstr "CTRL + fel/le"
+
+#: src/gui/HelpDialog.cpp:143
+msgid "Select object"
+msgstr "Égitest kijelölése"
+
+#: src/gui/HelpDialog.cpp:144
+msgid "Left click"
+msgstr "Bal kattintás"
+
+#: src/gui/HelpDialog.cpp:152
+msgid "Clear selection"
+msgstr "Kijelölés törlése"
+
+#: src/gui/HelpDialog.cpp:153
+msgid "Right click"
+msgstr "Jobb kattintás"
+
+#: src/gui/HelpDialog.cpp:155
+msgid "CTRL + Left click"
+msgstr "CTRL + bal kattintás"
+
+#: src/gui/HelpDialog.cpp:160
 #, qt-format
 msgid ""
 "Below are listed only the actions with assigned keys. Further actions may be "
@@ -1372,56 +1424,105 @@ msgstr ""
 "Alább a gombokhoz rendelt műveletek láthatók. További műveletek a  \"%1\"  "
 "gombbal érhetők el."
 
-#: src/gui/HelpDialog.cpp:263
+#: src/gui/HelpDialog.cpp:199
+msgid ""
+"The following links are external web links, and will launch your web "
+"browser:\n"
+msgstr "Az alábbi külső hivatkozások webböngészőben fognak megnyílni:\n"
+
+#: src/gui/HelpDialog.cpp:200
+msgid "The Stellarium User Guide"
+msgstr "Stellarium felhasználói kézikönyv"
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:204
+msgid "{Frequently Asked Questions} about Stellarium.  Answers too."
+msgstr "{Gyakori kérdések} a Stellariumról. Válaszokkal."
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:209
+msgid ""
+"{The Stellarium Wiki} - General information.  You can also find user-"
+"contributed landscapes and scripts here."
+msgstr ""
+"{A Stellarium wikije} – általános információk. Itt találhatók a felhasználók "
+"által készített tájképek és parancsfájlok is."
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:214
+msgid ""
+"{Support ticket system} - if you need help using Stellarium, post a support "
+"request here and we'll try to help."
+msgstr ""
+"{Segítségkérés} – ha segítségre van szükséged a Stellarium használatához, "
+"akkor itt tedd fel a kérdésedet, mi pedig megpróbálunk segíteni."
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:219
+msgid ""
+"{Bug reporting and feature request system} - if something doesn't work "
+"properly or is missing and is not listed in the tracker, you can open bug "
+"reports here."
+msgstr ""
+"{Hibajelentés és részletezés rendszerének kérése} - ha valami nem működik "
+"megfelelően, vagy hiányosság lép fel, és nincs a nyomkövető listáján, itt "
+"megnyithatja a hibajelentéseket."
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:224
+msgid "{Forums} - discuss Stellarium with other users."
+msgstr "{Fórumok} – társalogj a Stellariumról a többi felhasználóval."
+
+#: src/gui/HelpDialog.cpp:262
 msgid "Developers"
 msgstr "Fejlesztők"
 
-#: src/gui/HelpDialog.cpp:264
+#: src/gui/HelpDialog.cpp:263
 #, qt-format
 msgid "Project coordinator & lead developer: %1"
 msgstr "%1 (koordinátor és vezető fejlesztő)"
 
-#: src/gui/HelpDialog.cpp:265
+#: src/gui/HelpDialog.cpp:264
 #, qt-format
 msgid "Doc author/developer: %1"
 msgstr "Dokumentáció és fejlesztés: %1"
 
-#: src/gui/HelpDialog.cpp:266 src/gui/HelpDialog.cpp:267
-#: src/gui/HelpDialog.cpp:268 src/gui/HelpDialog.cpp:269
-#: src/gui/HelpDialog.cpp:270 src/gui/HelpDialog.cpp:277
-#: src/gui/HelpDialog.cpp:278 src/gui/HelpDialog.cpp:279
-#: src/gui/HelpDialog.cpp:280
+#: src/gui/HelpDialog.cpp:265 src/gui/HelpDialog.cpp:266
+#: src/gui/HelpDialog.cpp:267 src/gui/HelpDialog.cpp:268
+#: src/gui/HelpDialog.cpp:269 src/gui/HelpDialog.cpp:276
+#: src/gui/HelpDialog.cpp:277 src/gui/HelpDialog.cpp:278
+#: src/gui/HelpDialog.cpp:279
 #, qt-format
 msgid "Developer: %1"
 msgstr "Fejlesztő: %1"
 
-#: src/gui/HelpDialog.cpp:271
+#: src/gui/HelpDialog.cpp:270
 #, qt-format
 msgid "Continuous Integration: %1"
 msgstr "Folyamatos integrálás: %1"
 
-#: src/gui/HelpDialog.cpp:272 src/gui/HelpDialog.cpp:273
+#: src/gui/HelpDialog.cpp:271 src/gui/HelpDialog.cpp:272
 #, qt-format
 msgid "Tester: %1"
 msgstr "Tesztelő: %1"
 
-#: src/gui/HelpDialog.cpp:274
+#: src/gui/HelpDialog.cpp:273
 msgid "Past Developers"
 msgstr "Korábbi fejlesztők"
 
-#: src/gui/HelpDialog.cpp:275
+#: src/gui/HelpDialog.cpp:274
 msgid ""
 "Several people have made significant contributions, but are no longer "
 "active. Their work has made a big difference to the project:"
 msgstr ""
 "Sokan jelentősen hozzájárultak munkájukkal a projekthez, de már nem aktívak:"
 
-#: src/gui/HelpDialog.cpp:276
+#: src/gui/HelpDialog.cpp:275
 #, qt-format
 msgid "Graphic/other designer: %1"
 msgstr "Grafika és egyéb design: %1"
 
-#: src/gui/HelpDialog.cpp:281 src/gui/HelpDialog.cpp:282
+#: src/gui/HelpDialog.cpp:280 src/gui/HelpDialog.cpp:281
 #, qt-format
 msgid "OSX Developer: %1"
 msgstr "OSX-es fejlesztő: %1"
@@ -8436,67 +8537,6 @@ msgstr "A Nap magassága szürkületkor nulla fok."
 #~ msgid "Correct for light travel time: "
 #~ msgstr "Fénysebesség figyelembevétele: "
 
-#~ msgid "Arrow keys & left mouse drag"
-#~ msgstr "Nyílbillentyűk és bal egérgombbal húzás"
-
-#~ msgid "Page Up/Down"
-#~ msgstr "Page Up, Page Down"
-
-#~ msgid "CTRL + Up/Down"
-#~ msgstr "CTRL + fel/le"
-
-#~ msgid "Left click"
-#~ msgstr "Bal kattintás"
-
-#~ msgid "Right click"
-#~ msgstr "Jobb kattintás"
-
-#~ msgid "CTRL + Left click"
-#~ msgstr "CTRL + bal kattintás"
-
-#~ msgid "Pan view around the sky"
-#~ msgstr "Körbenézés az égen"
-
-#~ msgid "Zoom in/out"
-#~ msgstr "Nagyítás/kicsinyítés"
-
-#~ msgid "Select object"
-#~ msgstr "Égitest kijelölése"
-
-#~ msgid "Clear selection"
-#~ msgstr "Kijelölés törlése"
-
-#~ msgid "Stellarium Help"
-#~ msgstr "A Stellarium súgója"
-
-#~ msgid "Keys"
-#~ msgstr "Billentyűk"
-
-#~ msgid "Further Reading"
-#~ msgstr "További olvasmányok"
-
-#~ msgid ""
-#~ "The following links are external web links, and will launch your web "
-#~ "browser:\n"
-#~ msgstr "Az alábbi külső hivatkozások webböngészőben fognak megnyílni:\n"
-
-#~ msgid "{Frequently Asked Questions} about Stellarium.  Answers too."
-#~ msgstr "{Gyakori kérdések} a Stellariumról. Válaszokkal."
-
-#~ msgid ""
-#~ "{The Stellarium Wiki} - General information.  You can also find user-"
-#~ "contributed landscapes and scripts here."
-#~ msgstr ""
-#~ "{A Stellarium wikije} – általános információk. Itt találhatók a felhasználók "
-#~ "által készített tájképek és parancsfájlok is."
-
-#~ msgid ""
-#~ "{Support ticket system} - if you need help using Stellarium, post a support "
-#~ "request here and we'll try to help."
-#~ msgstr ""
-#~ "{Segítségkérés} – ha segítségre van szükséged a Stellarium használatához, "
-#~ "akkor itt tedd fel a kérdésedet, mi pedig megpróbálunk segíteni."
-
 #~ msgid "Form"
 #~ msgstr "Űrlap"
 
@@ -8521,9 +8561,6 @@ msgstr "A Nap magassága szürkületkor nulla fok."
 #~ msgid "Mouse cursor timeout (seconds):"
 #~ msgstr "Egérmutató elrejtési ideje (másodperc):"
 
-#~ msgid "{Forums} - discuss Stellarium with other users."
-#~ msgstr "{Fórumok} – társalogj a Stellariumról a többi felhasználóval."
-
 #~ msgid "0"
 #~ msgstr "0"
 
@@ -8538,9 +8575,6 @@ msgstr "A Nap magassága szürkületkor nulla fok."
 
 #~ msgid "/"
 #~ msgstr "-"
-
-#~ msgid "The Stellarium User Guide"
-#~ msgstr "Stellarium felhasználói kézikönyv"
 
 #~ msgid "Light pollution: "
 #~ msgstr "Fényszennyezés: "
@@ -8568,15 +8602,6 @@ msgstr "A Nap magassága szürkületkor nulla fok."
 
 #~ msgid "Finished downloading all star catalogs!"
 #~ msgstr "Az összes csillagkatalógus letöltve !"
-
-#~ msgid ""
-#~ "{Bug reporting and feature request system} - if something doesn't work "
-#~ "properly or is missing and is not listed in the tracker, you can open bug "
-#~ "reports here."
-#~ msgstr ""
-#~ "{Hibajelentés és részletezés rendszerének kérése} - ha valami nem működik "
-#~ "megfelelően, vagy hiányosság lép fel, és nincs a nyomkövető listáján, itt "
-#~ "megnyithatja a hibajelentéseket."
 
 # XXX [mayday]: Úgy mint "Day keys: Calendar". Jobbe lenne a "Calendar Day"...
 #~ msgid "Calendar"

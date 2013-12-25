@@ -9,14 +9,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium-uk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-23 01:35+0700\n"
+"POT-Creation-Date: 2013-12-24 21:46+0700\n"
 "PO-Revision-Date: 2013-12-23 05:09+0000\n"
 "Last-Translator: Yuri Chornoivan <yurchor@gmail.com>\n"
 "Language-Team: Ukrainian <translation@linux.org.ua>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-12-24 05:22+0000\n"
+"X-Launchpad-Export-Date: 2013-12-25 05:30+0000\n"
 "X-Generator: Launchpad (build 16877)\n"
 "X-Poedit-Country: UKRAINE\n"
 "Language: uk\n"
@@ -1395,7 +1395,59 @@ msgstr "Islam, Sadiq та Qureshi (2008, 2013)"
 msgid "Custom equation of %1T"
 msgstr "Нетипове рівняння для %1T"
 
-#: src/gui/HelpDialog.cpp:161
+#: src/gui/HelpDialog.cpp:119
+msgid "Stellarium Help"
+msgstr "Довідка зі Stellarium"
+
+#: src/gui/HelpDialog.cpp:124 src/gui/HelpDialog.cpp:129
+msgid "Keys"
+msgstr "Клавіші"
+
+#: src/gui/HelpDialog.cpp:126 src/gui/HelpDialog.cpp:198
+msgid "Further Reading"
+msgstr "Подальше читання"
+
+#: src/gui/HelpDialog.cpp:133
+msgid "Pan view around the sky"
+msgstr "Загальний вигляд неба"
+
+#: src/gui/HelpDialog.cpp:134
+msgid "Arrow keys & left mouse drag"
+msgstr "Клавіші-стрілки і перетягування лівою кнопкою миші"
+
+#: src/gui/HelpDialog.cpp:136
+msgid "Zoom in/out"
+msgstr "Збільшити/Зменшити"
+
+#: src/gui/HelpDialog.cpp:138
+msgid "Page Up/Down"
+msgstr "Page Up/Down"
+
+#: src/gui/HelpDialog.cpp:140
+msgid "CTRL + Up/Down"
+msgstr "CTRL + Вверх/Вниз"
+
+#: src/gui/HelpDialog.cpp:143
+msgid "Select object"
+msgstr "Позначити об’єкт"
+
+#: src/gui/HelpDialog.cpp:144
+msgid "Left click"
+msgstr "клацнути лівою кнопкою мишки"
+
+#: src/gui/HelpDialog.cpp:152
+msgid "Clear selection"
+msgstr "Зняти позначення"
+
+#: src/gui/HelpDialog.cpp:153
+msgid "Right click"
+msgstr "клацнути правою кнопкою мишки"
+
+#: src/gui/HelpDialog.cpp:155
+msgid "CTRL + Left click"
+msgstr "CTRL + клацання лівою кнопкою мишки"
+
+#: src/gui/HelpDialog.cpp:160
 #, qt-format
 msgid ""
 "Below are listed only the actions with assigned keys. Further actions may be "
@@ -1405,44 +1457,95 @@ msgstr ""
 "скорочення. Список інших дій можна отримати у відповідь на натискання кнопки "
 "«%1»."
 
-#: src/gui/HelpDialog.cpp:263
+#: src/gui/HelpDialog.cpp:199
+msgid ""
+"The following links are external web links, and will launch your web "
+"browser:\n"
+msgstr ""
+"Наступні посилання є зовнішніми посиланнями. Буде запущено програму для "
+"перегляду інтернету:\n"
+
+#: src/gui/HelpDialog.cpp:200
+msgid "The Stellarium User Guide"
+msgstr "Інструкція користувача Stellarium"
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:204
+msgid "{Frequently Asked Questions} about Stellarium.  Answers too."
+msgstr "{Frequently Asked Questions} щодо Stellarium. З відповідями."
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:209
+msgid ""
+"{The Stellarium Wiki} - General information.  You can also find user-"
+"contributed landscapes and scripts here."
+msgstr ""
+"{The Stellarium Wiki} — Загальна інформація. Ви можете знайти тут ландшафти "
+"та скрипти, створені користувачами."
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:214
+msgid ""
+"{Support ticket system} - if you need help using Stellarium, post a support "
+"request here and we'll try to help."
+msgstr ""
+"{Support ticket system} — якщо у Вас є питання щодо Stellarium, розмістіть "
+"тут запит щодо підтримки, і ми спробуємо допомогти."
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:219
+msgid ""
+"{Bug reporting and feature request system} - if something doesn't work "
+"properly or is missing and is not listed in the tracker, you can open bug "
+"reports here."
+msgstr ""
+"{Bug reporting and feature request system} - якщо у списку вад та побажань "
+"чогось немає або щось працює неналежним чином, ви можете створити власне "
+"повідомлення про ваду або побажання щодо покращення."
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:224
+msgid "{Forums} - discuss Stellarium with other users."
+msgstr "{Forums} — обговоріть Stellarium з іншими користувачами."
+
+#: src/gui/HelpDialog.cpp:262
 msgid "Developers"
 msgstr "Розробники"
 
-#: src/gui/HelpDialog.cpp:264
+#: src/gui/HelpDialog.cpp:263
 #, qt-format
 msgid "Project coordinator & lead developer: %1"
 msgstr "Координатор проекту і основний розробник: %1"
 
-#: src/gui/HelpDialog.cpp:265
+#: src/gui/HelpDialog.cpp:264
 #, qt-format
 msgid "Doc author/developer: %1"
 msgstr "Автор документації/розробник: %1"
 
-#: src/gui/HelpDialog.cpp:266 src/gui/HelpDialog.cpp:267
-#: src/gui/HelpDialog.cpp:268 src/gui/HelpDialog.cpp:269
-#: src/gui/HelpDialog.cpp:270 src/gui/HelpDialog.cpp:277
-#: src/gui/HelpDialog.cpp:278 src/gui/HelpDialog.cpp:279
-#: src/gui/HelpDialog.cpp:280
+#: src/gui/HelpDialog.cpp:265 src/gui/HelpDialog.cpp:266
+#: src/gui/HelpDialog.cpp:267 src/gui/HelpDialog.cpp:268
+#: src/gui/HelpDialog.cpp:269 src/gui/HelpDialog.cpp:276
+#: src/gui/HelpDialog.cpp:277 src/gui/HelpDialog.cpp:278
+#: src/gui/HelpDialog.cpp:279
 #, qt-format
 msgid "Developer: %1"
 msgstr "Розробник: %1"
 
-#: src/gui/HelpDialog.cpp:271
+#: src/gui/HelpDialog.cpp:270
 #, qt-format
 msgid "Continuous Integration: %1"
 msgstr "Неперервна інтеграція: %1"
 
-#: src/gui/HelpDialog.cpp:272 src/gui/HelpDialog.cpp:273
+#: src/gui/HelpDialog.cpp:271 src/gui/HelpDialog.cpp:272
 #, qt-format
 msgid "Tester: %1"
 msgstr "Перевірено: %1"
 
-#: src/gui/HelpDialog.cpp:274
+#: src/gui/HelpDialog.cpp:273
 msgid "Past Developers"
 msgstr "Колишні розробники"
 
-#: src/gui/HelpDialog.cpp:275
+#: src/gui/HelpDialog.cpp:274
 msgid ""
 "Several people have made significant contributions, but are no longer "
 "active. Their work has made a big difference to the project:"
@@ -1450,12 +1553,12 @@ msgstr ""
 "Дехто зробив значний внесок, але тепер не бере участі у розробці програми. "
 "Внесок цих людей значно вплинув на поточний стан проекту."
 
-#: src/gui/HelpDialog.cpp:276
+#: src/gui/HelpDialog.cpp:275
 #, qt-format
 msgid "Graphic/other designer: %1"
 msgstr "Створення графіки/інших елементів: %1"
 
-#: src/gui/HelpDialog.cpp:281 src/gui/HelpDialog.cpp:282
+#: src/gui/HelpDialog.cpp:280 src/gui/HelpDialog.cpp:281
 #, qt-format
 msgid "OSX Developer: %1"
 msgstr "Розробник під OSX: %1"
@@ -8529,27 +8632,6 @@ msgstr "Висота сонця у сутінках: 0°"
 #~ msgid "Magnitude Scaling Multiplier: "
 #~ msgstr "Множник масштабування величин: "
 
-#~ msgid "Right click"
-#~ msgstr "клацнути правою кнопкою мишки"
-
-#~ msgid "Left click"
-#~ msgstr "клацнути лівою кнопкою мишки"
-
-#~ msgid "CTRL + Up/Down"
-#~ msgstr "CTRL + Вверх/Вниз"
-
-#~ msgid "Arrow keys & left mouse drag"
-#~ msgstr "Клавіші-стрілки і перетягування лівою кнопкою миші"
-
-#~ msgid "Keys"
-#~ msgstr "Клавіші"
-
-#~ msgid "Further Reading"
-#~ msgstr "Подальше читання"
-
-#~ msgid "Pan view around the sky"
-#~ msgstr "Загальний вигляд неба"
-
 #~ msgid "Nebulas"
 #~ msgstr "Туманності"
 
@@ -8602,38 +8684,6 @@ msgstr "Висота сонця у сутінках: 0°"
 #~ msgid "Correct for light travel time: "
 #~ msgstr "Корекція на час поширення світла: "
 
-#~ msgid "Page Up/Down"
-#~ msgstr "Page Up/Down"
-
-#~ msgid "Zoom in/out"
-#~ msgstr "Збільшити/Зменшити"
-
-#~ msgid "Stellarium Help"
-#~ msgstr "Довідка зі Stellarium"
-
-#~ msgid "The Stellarium User Guide"
-#~ msgstr "Інструкція користувача Stellarium"
-
-#~ msgid "{Frequently Asked Questions} about Stellarium.  Answers too."
-#~ msgstr "{Frequently Asked Questions} щодо Stellarium. З відповідями."
-
-#~ msgid ""
-#~ "{The Stellarium Wiki} - General information.  You can also find user-"
-#~ "contributed landscapes and scripts here."
-#~ msgstr ""
-#~ "{The Stellarium Wiki} — Загальна інформація. Ви можете знайти тут ландшафти "
-#~ "та скрипти, створені користувачами."
-
-#~ msgid ""
-#~ "{Support ticket system} - if you need help using Stellarium, post a support "
-#~ "request here and we'll try to help."
-#~ msgstr ""
-#~ "{Support ticket system} — якщо у Вас є питання щодо Stellarium, розмістіть "
-#~ "тут запит щодо підтримки, і ми спробуємо допомогти."
-
-#~ msgid "{Forums} - discuss Stellarium with other users."
-#~ msgstr "{Forums} — обговоріть Stellarium з іншими користувачами."
-
 #~ msgid "Nebulas background images"
 #~ msgstr "Зображення туманностей"
 
@@ -8664,15 +8714,6 @@ msgstr "Висота сонця у сутінках: 0°"
 #~ msgid "Finished downloading all star catalogs!"
 #~ msgstr "Звантаження всіх зоряних каталогів завершено!"
 
-#~ msgid ""
-#~ "{Bug reporting and feature request system} - if something doesn't work "
-#~ "properly or is missing and is not listed in the tracker, you can open bug "
-#~ "reports here."
-#~ msgstr ""
-#~ "{Bug reporting and feature request system} - якщо у списку вад та побажань "
-#~ "чогось немає або щось працює неналежним чином, ви можете створити власне "
-#~ "повідомлення про ваду або побажання щодо покращення."
-
 #~ msgid "Actual Time"
 #~ msgstr "Поточний час"
 
@@ -8700,22 +8741,6 @@ msgstr "Висота сонця у сутінках: 0°"
 #, no-c-format, qt-format
 #~ msgid "Distance: %1AU"
 #~ msgstr "Відстань: %1 а.о."
-
-#~ msgid "CTRL + Left click"
-#~ msgstr "CTRL + клацання лівою кнопкою мишки"
-
-#~ msgid "Select object"
-#~ msgstr "Позначити об’єкт"
-
-#~ msgid "Clear selection"
-#~ msgstr "Зняти позначення"
-
-#~ msgid ""
-#~ "The following links are external web links, and will launch your web "
-#~ "browser:\n"
-#~ msgstr ""
-#~ "Наступні посилання є зовнішніми посиланнями. Буде запущено програму для "
-#~ "перегляду інтернету:\n"
 
 #~ msgid "Set Location "
 #~ msgstr "Встановити розташування "
