@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-23 01:35+0700\n"
+"POT-Creation-Date: 2013-12-24 21:46+0700\n"
 "PO-Revision-Date: 2013-08-01 11:57+0000\n"
 "Last-Translator: aydın <bestworst@msn.com>\n"
 "Language-Team: <tr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-12-23 05:26+0000\n"
-"X-Generator: Launchpad (build 16872)\n"
+"X-Launchpad-Export-Date: 2013-12-25 05:29+0000\n"
+"X-Generator: Launchpad (build 16877)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:106 src/core/modules/StarMgr.cpp:336
 #: src/core/modules/GridLinesMgr.cpp:679 src/core/modules/LandscapeMgr.cpp:335
@@ -1283,51 +1283,155 @@ msgstr ""
 msgid "Custom equation of %1T"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:161
+#: src/gui/HelpDialog.cpp:119
+msgid "Stellarium Help"
+msgstr "Stellarium Yardımı"
+
+#: src/gui/HelpDialog.cpp:124 src/gui/HelpDialog.cpp:129
+msgid "Keys"
+msgstr "Tuşlar"
+
+#: src/gui/HelpDialog.cpp:126 src/gui/HelpDialog.cpp:198
+msgid "Further Reading"
+msgstr "Daha fazla bilgi için..."
+
+#: src/gui/HelpDialog.cpp:133
+msgid "Pan view around the sky"
+msgstr "Gökyüzünün geniş görüntüsü"
+
+#: src/gui/HelpDialog.cpp:134
+msgid "Arrow keys & left mouse drag"
+msgstr "Ok tuşları ve sol fare sürükleme"
+
+#: src/gui/HelpDialog.cpp:136
+msgid "Zoom in/out"
+msgstr "Yaklaş/Uzaklaş"
+
+#: src/gui/HelpDialog.cpp:138
+msgid "Page Up/Down"
+msgstr "Sayfa Yukarı/Aşağı"
+
+#: src/gui/HelpDialog.cpp:140
+msgid "CTRL + Up/Down"
+msgstr "CTRL + Yukarı/Aşağı"
+
+#: src/gui/HelpDialog.cpp:143
+msgid "Select object"
+msgstr "Cisim seçin"
+
+#: src/gui/HelpDialog.cpp:144
+msgid "Left click"
+msgstr "Sol tıklama"
+
+#: src/gui/HelpDialog.cpp:152
+msgid "Clear selection"
+msgstr "Seçimi temizle"
+
+#: src/gui/HelpDialog.cpp:153
+msgid "Right click"
+msgstr "Sağ tıklama"
+
+#: src/gui/HelpDialog.cpp:155
+msgid "CTRL + Left click"
+msgstr "CTRL + Sol tıklama"
+
+#: src/gui/HelpDialog.cpp:160
 #, qt-format
 msgid ""
 "Below are listed only the actions with assigned keys. Further actions may be "
 "available via the \"%1\" button."
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:263
+#: src/gui/HelpDialog.cpp:199
+msgid ""
+"The following links are external web links, and will launch your web "
+"browser:\n"
+msgstr ""
+"Belirtilen linkler dış kaynaklı ağ bağlantılarıdır ve ağ tarayıcınızı "
+"başlatacaktır:\n"
+
+#: src/gui/HelpDialog.cpp:200
+msgid "The Stellarium User Guide"
+msgstr "Stellarium Kullanım Kılavuzu"
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:204
+msgid "{Frequently Asked Questions} about Stellarium.  Answers too."
+msgstr "{Sık Sorulan Sorular} Stellarium hakkında. Cevaplar dahil..."
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:209
+msgid ""
+"{The Stellarium Wiki} - General information.  You can also find user-"
+"contributed landscapes and scripts here."
+msgstr ""
+"{Stellarium Viki} - Genel bilgiler. Kullanıcı tanımlı alan haritaları ve "
+"komut dosyalarını buradan da görebilirsiniz."
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:214
+msgid ""
+"{Support ticket system} - if you need help using Stellarium, post a support "
+"request here and we'll try to help."
+msgstr ""
+"{Bilet sistemi desteği} - Eger Stellarium kullanımı ile ilgili yardıma "
+"ihtiyacınız varsa, destek için buraya yazınız ve size yardım etmeye "
+"çalışalım."
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:219
+msgid ""
+"{Bug reporting and feature request system} - if something doesn't work "
+"properly or is missing and is not listed in the tracker, you can open bug "
+"reports here."
+msgstr ""
+"{Hata raporlama ve özellik talep sistemi} -Herhangi bir şey düzgün "
+"çalışmazsa ya da eksikse ve daha önce listelenmemişse, buradan bir hata "
+"raporu oluşturabilirsiniz."
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:224
+msgid "{Forums} - discuss Stellarium with other users."
+msgstr "{Forumlar}- Diğer kullanıcılarla Stellarium'u tartışın."
+
+#: src/gui/HelpDialog.cpp:262
 msgid "Developers"
 msgstr "Geliştiriciler"
 
-#: src/gui/HelpDialog.cpp:264
+#: src/gui/HelpDialog.cpp:263
 #, qt-format
 msgid "Project coordinator & lead developer: %1"
 msgstr "Proje eşgüdüm sorumlusu ve baş geliştirici: %1"
 
-#: src/gui/HelpDialog.cpp:265
+#: src/gui/HelpDialog.cpp:264
 #, qt-format
 msgid "Doc author/developer: %1"
 msgstr "Dosya yazici/gelistirici: %1"
 
-#: src/gui/HelpDialog.cpp:266 src/gui/HelpDialog.cpp:267
-#: src/gui/HelpDialog.cpp:268 src/gui/HelpDialog.cpp:269
-#: src/gui/HelpDialog.cpp:270 src/gui/HelpDialog.cpp:277
-#: src/gui/HelpDialog.cpp:278 src/gui/HelpDialog.cpp:279
-#: src/gui/HelpDialog.cpp:280
+#: src/gui/HelpDialog.cpp:265 src/gui/HelpDialog.cpp:266
+#: src/gui/HelpDialog.cpp:267 src/gui/HelpDialog.cpp:268
+#: src/gui/HelpDialog.cpp:269 src/gui/HelpDialog.cpp:276
+#: src/gui/HelpDialog.cpp:277 src/gui/HelpDialog.cpp:278
+#: src/gui/HelpDialog.cpp:279
 #, qt-format
 msgid "Developer: %1"
 msgstr "Geliştirici:%1"
 
-#: src/gui/HelpDialog.cpp:271
+#: src/gui/HelpDialog.cpp:270
 #, qt-format
 msgid "Continuous Integration: %1"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:272 src/gui/HelpDialog.cpp:273
+#: src/gui/HelpDialog.cpp:271 src/gui/HelpDialog.cpp:272
 #, qt-format
 msgid "Tester: %1"
 msgstr "Tecrübe: %1"
 
-#: src/gui/HelpDialog.cpp:274
+#: src/gui/HelpDialog.cpp:273
 msgid "Past Developers"
 msgstr "Önceki Geliştiriciler"
 
-#: src/gui/HelpDialog.cpp:275
+#: src/gui/HelpDialog.cpp:274
 msgid ""
 "Several people have made significant contributions, but are no longer "
 "active. Their work has made a big difference to the project:"
@@ -1335,12 +1439,12 @@ msgstr ""
 "Birkaç kişi önemli katkılarda bulunmuştu fakat artık aktif değiller.Onların "
 "emekleri bu projede önemli değişiklikler sağladı."
 
-#: src/gui/HelpDialog.cpp:276
+#: src/gui/HelpDialog.cpp:275
 #, qt-format
 msgid "Graphic/other designer: %1"
 msgstr "Grafik/ diger tasarimci: %1"
 
-#: src/gui/HelpDialog.cpp:281 src/gui/HelpDialog.cpp:282
+#: src/gui/HelpDialog.cpp:280 src/gui/HelpDialog.cpp:281
 #, qt-format
 msgid "OSX Developer: %1"
 msgstr "OSX gelistirici: %1"
@@ -8140,12 +8244,6 @@ msgstr ""
 #~ msgid "USB Script: "
 #~ msgstr "USB Betiği: "
 
-#~ msgid "Zoom in/out"
-#~ msgstr "Yaklaş/Uzaklaş"
-
-#~ msgid "Clear selection"
-#~ msgstr "Seçimi temizle"
-
 #~ msgid "Form"
 #~ msgstr "Biçim"
 
@@ -8169,9 +8267,6 @@ msgstr ""
 
 #~ msgid "144000"
 #~ msgstr "144000"
-
-#~ msgid "Keys"
-#~ msgstr "Tuşlar"
 
 #~ msgid ":"
 #~ msgstr ":"
@@ -8202,57 +8297,6 @@ msgstr ""
 
 #~ msgid "Correct for light travel time: "
 #~ msgstr "Işık seyahat süresi için düzeltiniz. "
-
-#~ msgid "CTRL + Left click"
-#~ msgstr "CTRL + Sol tıklama"
-
-#~ msgid "Left click"
-#~ msgstr "Sol tıklama"
-
-#~ msgid "CTRL + Up/Down"
-#~ msgstr "CTRL + Yukarı/Aşağı"
-
-#~ msgid "Page Up/Down"
-#~ msgstr "Sayfa Yukarı/Aşağı"
-
-#~ msgid "Arrow keys & left mouse drag"
-#~ msgstr "Ok tuşları ve sol fare sürükleme"
-
-#~ msgid "Further Reading"
-#~ msgstr "Daha fazla bilgi için..."
-
-#~ msgid "Stellarium Help"
-#~ msgstr "Stellarium Yardımı"
-
-#~ msgid "Pan view around the sky"
-#~ msgstr "Gökyüzünün geniş görüntüsü"
-
-#~ msgid "The Stellarium User Guide"
-#~ msgstr "Stellarium Kullanım Kılavuzu"
-
-#~ msgid ""
-#~ "The following links are external web links, and will launch your web "
-#~ "browser:\n"
-#~ msgstr ""
-#~ "Belirtilen linkler dış kaynaklı ağ bağlantılarıdır ve ağ tarayıcınızı "
-#~ "başlatacaktır:\n"
-
-#~ msgid ""
-#~ "{Support ticket system} - if you need help using Stellarium, post a support "
-#~ "request here and we'll try to help."
-#~ msgstr ""
-#~ "{Bilet sistemi desteği} - Eger Stellarium kullanımı ile ilgili yardıma "
-#~ "ihtiyacınız varsa, destek için buraya yazınız ve size yardım etmeye "
-#~ "çalışalım."
-
-#~ msgid "{Forums} - discuss Stellarium with other users."
-#~ msgstr "{Forumlar}- Diğer kullanıcılarla Stellarium'u tartışın."
-
-#~ msgid "{Frequently Asked Questions} about Stellarium.  Answers too."
-#~ msgstr "{Sık Sorulan Sorular} Stellarium hakkında. Cevaplar dahil..."
-
-#~ msgid "Right click"
-#~ msgstr "Sağ tıklama"
 
 #~ msgid "Planets labels"
 #~ msgstr "Gezegen etiketleri"
@@ -8285,27 +8329,11 @@ msgstr ""
 #~ msgid "Meridian Line"
 #~ msgstr "Meridyen Çizgisi"
 
-#~ msgid ""
-#~ "{Bug reporting and feature request system} - if something doesn't work "
-#~ "properly or is missing and is not listed in the tracker, you can open bug "
-#~ "reports here."
-#~ msgstr ""
-#~ "{Hata raporlama ve özellik talep sistemi} -Herhangi bir şey düzgün "
-#~ "çalışmazsa ya da eksikse ve daha önce listelenmemişse, buradan bir hata "
-#~ "raporu oluşturabilirsiniz."
-
 #~ msgid "Equatorial Grid"
 #~ msgstr "Ekvatoral Izgara"
 
 #~ msgid "Azimuthal Grid"
 #~ msgstr "Azimutal Izgara"
-
-#~ msgid ""
-#~ "{The Stellarium Wiki} - General information.  You can also find user-"
-#~ "contributed landscapes and scripts here."
-#~ msgstr ""
-#~ "{Stellarium Viki} - Genel bilgiler. Kullanıcı tanımlı alan haritaları ve "
-#~ "komut dosyalarını buradan da görebilirsiniz."
 
 #~ msgid "Landscape: "
 #~ msgstr "Alan Haritası: "
@@ -8331,9 +8359,6 @@ msgstr ""
 
 #~ msgid "(geometric)"
 #~ msgstr "(geometrik)"
-
-#~ msgid "Select object"
-#~ msgstr "Cisim seçin"
 
 #, qt-format
 #~ msgid "Updated %1/%2 satellite(s); %3 missing"

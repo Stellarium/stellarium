@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-23 01:35+0700\n"
+"POT-Creation-Date: 2013-12-24 21:46+0700\n"
 "PO-Revision-Date: 2013-09-08 11:13+0000\n"
 "Last-Translator: Ardian Wardhana <Unknown>\n"
 "Language-Team: Indonesian <id@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-12-23 05:21+0000\n"
-"X-Generator: Launchpad (build 16872)\n"
+"X-Launchpad-Export-Date: 2013-12-25 05:24+0000\n"
+"X-Generator: Launchpad (build 16877)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:106 src/core/modules/StarMgr.cpp:336
 #: src/core/modules/GridLinesMgr.cpp:679 src/core/modules/LandscapeMgr.cpp:335
@@ -1305,51 +1305,156 @@ msgstr "Islam, Sadiq & Qureshi (2008, 2013)"
 msgid "Custom equation of %1T"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:161
+#: src/gui/HelpDialog.cpp:119
+msgid "Stellarium Help"
+msgstr "Bantuan Stellarium"
+
+#: src/gui/HelpDialog.cpp:124 src/gui/HelpDialog.cpp:129
+msgid "Keys"
+msgstr "Tombol"
+
+#: src/gui/HelpDialog.cpp:126 src/gui/HelpDialog.cpp:198
+msgid "Further Reading"
+msgstr "Bacaan Lanjut"
+
+#: src/gui/HelpDialog.cpp:133
+msgid "Pan view around the sky"
+msgstr "Menggeser pandangan sekitar langit"
+
+#: src/gui/HelpDialog.cpp:134
+msgid "Arrow keys & left mouse drag"
+msgstr "Tombol anak panah dan seret tetikus kiri"
+
+#: src/gui/HelpDialog.cpp:136
+msgid "Zoom in/out"
+msgstr "Perbesar/perkecil"
+
+#: src/gui/HelpDialog.cpp:138
+msgid "Page Up/Down"
+msgstr "Page Up/Down"
+
+#: src/gui/HelpDialog.cpp:140
+msgid "CTRL + Up/Down"
+msgstr "Ctrl + Atas/Bawah"
+
+#: src/gui/HelpDialog.cpp:143
+msgid "Select object"
+msgstr "Memilih objek"
+
+#: src/gui/HelpDialog.cpp:144
+msgid "Left click"
+msgstr "Klik kiri"
+
+#: src/gui/HelpDialog.cpp:152
+msgid "Clear selection"
+msgstr "Bersihkan pilihan"
+
+#: src/gui/HelpDialog.cpp:153
+msgid "Right click"
+msgstr "Klik kanan"
+
+#: src/gui/HelpDialog.cpp:155
+msgid "CTRL + Left click"
+msgstr "Ctrl + Klik kiri"
+
+#: src/gui/HelpDialog.cpp:160
 #, qt-format
 msgid ""
 "Below are listed only the actions with assigned keys. Further actions may be "
 "available via the \"%1\" button."
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:263
+#: src/gui/HelpDialog.cpp:199
+msgid ""
+"The following links are external web links, and will launch your web "
+"browser:\n"
+msgstr ""
+"Tautan berikut adalah tautan web eksternal, dan akan menjalankan web browser "
+"anda:\n"
+
+#: src/gui/HelpDialog.cpp:200
+msgid "The Stellarium User Guide"
+msgstr "Panduan Pengguna Stellarium"
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:204
+msgid "{Frequently Asked Questions} about Stellarium.  Answers too."
+msgstr ""
+"{Pertanyaan yang sering ditanyakan} tentang Stellarium. Beserta jawabannya."
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:209
+msgid ""
+"{The Stellarium Wiki} - General information.  You can also find user-"
+"contributed landscapes and scripts here."
+msgstr ""
+"{Wiki Stellarium} - Informasi umum. Anda juga dapat menemukan lanskap dan "
+"skrip kontribusi dari pengguna di sini."
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:214
+msgid ""
+"{Support ticket system} - if you need help using Stellarium, post a support "
+"request here and we'll try to help."
+msgstr ""
+"{Sistem pemberian bantuan} - jika anda memerlukan bantuan dalam menggunakan "
+"Stellarium, kirimkan permintaan bantuan anda di sini dan kami akan mencoba "
+"untuk membantu."
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:219
+msgid ""
+"{Bug reporting and feature request system} - if something doesn't work "
+"properly or is missing and is not listed in the tracker, you can open bug "
+"reports here."
+msgstr ""
+"{Sistem pelaporan bug dan permintaan fitur} - jika sesuatu tidak bekerja "
+"dengan semestinya atau hilang dan tidak terdaftar pada pelacak, anda dapat "
+"membuat laporan bug di sini."
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:224
+msgid "{Forums} - discuss Stellarium with other users."
+msgstr "{Forum} - diskusikan Stellarium bersama pengguna lainnya."
+
+#: src/gui/HelpDialog.cpp:262
 msgid "Developers"
 msgstr "Pengembang"
 
-#: src/gui/HelpDialog.cpp:264
+#: src/gui/HelpDialog.cpp:263
 #, qt-format
 msgid "Project coordinator & lead developer: %1"
 msgstr "Koordinator proyek dan pengembang utama: %1"
 
-#: src/gui/HelpDialog.cpp:265
+#: src/gui/HelpDialog.cpp:264
 #, qt-format
 msgid "Doc author/developer: %1"
 msgstr "Penulis/pengembang dokumentasi: %1"
 
-#: src/gui/HelpDialog.cpp:266 src/gui/HelpDialog.cpp:267
-#: src/gui/HelpDialog.cpp:268 src/gui/HelpDialog.cpp:269
-#: src/gui/HelpDialog.cpp:270 src/gui/HelpDialog.cpp:277
-#: src/gui/HelpDialog.cpp:278 src/gui/HelpDialog.cpp:279
-#: src/gui/HelpDialog.cpp:280
+#: src/gui/HelpDialog.cpp:265 src/gui/HelpDialog.cpp:266
+#: src/gui/HelpDialog.cpp:267 src/gui/HelpDialog.cpp:268
+#: src/gui/HelpDialog.cpp:269 src/gui/HelpDialog.cpp:276
+#: src/gui/HelpDialog.cpp:277 src/gui/HelpDialog.cpp:278
+#: src/gui/HelpDialog.cpp:279
 #, qt-format
 msgid "Developer: %1"
 msgstr "Pengembang: %1"
 
-#: src/gui/HelpDialog.cpp:271
+#: src/gui/HelpDialog.cpp:270
 #, qt-format
 msgid "Continuous Integration: %1"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:272 src/gui/HelpDialog.cpp:273
+#: src/gui/HelpDialog.cpp:271 src/gui/HelpDialog.cpp:272
 #, qt-format
 msgid "Tester: %1"
 msgstr "Penguji: %1"
 
-#: src/gui/HelpDialog.cpp:274
+#: src/gui/HelpDialog.cpp:273
 msgid "Past Developers"
 msgstr "Pengembanh terdahulu"
 
-#: src/gui/HelpDialog.cpp:275
+#: src/gui/HelpDialog.cpp:274
 msgid ""
 "Several people have made significant contributions, but are no longer "
 "active. Their work has made a big difference to the project:"
@@ -1357,12 +1462,12 @@ msgstr ""
 "Beberapa orang telah membuat kontribusi yang signifikan, namun sekarang "
 "tidak lagi aktif. Karya mereka telah membuat perbedaan besar untuk proyek:"
 
-#: src/gui/HelpDialog.cpp:276
+#: src/gui/HelpDialog.cpp:275
 #, qt-format
 msgid "Graphic/other designer: %1"
 msgstr "Desainer grafis/lainnya: %1"
 
-#: src/gui/HelpDialog.cpp:281 src/gui/HelpDialog.cpp:282
+#: src/gui/HelpDialog.cpp:280 src/gui/HelpDialog.cpp:281
 #, qt-format
 msgid "OSX Developer: %1"
 msgstr "Pengembang OSX: %1"
@@ -8069,9 +8174,6 @@ msgstr ""
 #~ msgid "Magnitude Scaling Multiplier: "
 #~ msgstr "Pengali Skala Magnitudo: "
 
-#~ msgid "Stellarium Help"
-#~ msgstr "Bantuan Stellarium"
-
 #~ msgid "0"
 #~ msgstr "0"
 
@@ -8090,9 +8192,6 @@ msgstr ""
 #~ msgid "Show: "
 #~ msgstr "Tampilkan: "
 
-#~ msgid "Keys"
-#~ msgstr "Tombol"
-
 #~ msgid "Get catalog x of y"
 #~ msgstr "Ambil katalog x dari y"
 
@@ -8104,12 +8203,6 @@ msgstr ""
 
 #~ msgid "10000"
 #~ msgstr "10000"
-
-#~ msgid "The Stellarium User Guide"
-#~ msgstr "Panduan Pengguna Stellarium"
-
-#~ msgid "{Forums} - discuss Stellarium with other users."
-#~ msgstr "{Forum} - diskusikan Stellarium bersama pengguna lainnya."
 
 #~ msgid "Nebulas background images"
 #~ msgstr "Citra latar belakang nebula"
@@ -8209,63 +8302,8 @@ msgstr ""
 #~ msgid "Finished downloading all star catalogs!"
 #~ msgstr "Telah selesai mengunduh semua katalog bintang!"
 
-#~ msgid "Arrow keys & left mouse drag"
-#~ msgstr "Tombol anak panah dan seret tetikus kiri"
-
-#~ msgid "Page Up/Down"
-#~ msgstr "Page Up/Down"
-
-#~ msgid "Left click"
-#~ msgstr "Klik kiri"
-
-#~ msgid "Right click"
-#~ msgstr "Klik kanan"
-
-#~ msgid "Pan view around the sky"
-#~ msgstr "Menggeser pandangan sekitar langit"
-
-#~ msgid "Zoom in/out"
-#~ msgstr "Perbesar/perkecil"
-
-#~ msgid "Select object"
-#~ msgstr "Memilih objek"
-
-#~ msgid "Clear selection"
-#~ msgstr "Bersihkan pilihan"
-
 #~ msgid "When a Script is Running"
 #~ msgstr "Saat Skrip Berjalan"
-
-#~ msgid "Further Reading"
-#~ msgstr "Bacaan Lanjut"
-
-#~ msgid ""
-#~ "The following links are external web links, and will launch your web "
-#~ "browser:\n"
-#~ msgstr ""
-#~ "Tautan berikut adalah tautan web eksternal, dan akan menjalankan web browser "
-#~ "anda:\n"
-
-#~ msgid "{Frequently Asked Questions} about Stellarium.  Answers too."
-#~ msgstr ""
-#~ "{Pertanyaan yang sering ditanyakan} tentang Stellarium. Beserta jawabannya."
-
-#~ msgid ""
-#~ "{Support ticket system} - if you need help using Stellarium, post a support "
-#~ "request here and we'll try to help."
-#~ msgstr ""
-#~ "{Sistem pemberian bantuan} - jika anda memerlukan bantuan dalam menggunakan "
-#~ "Stellarium, kirimkan permintaan bantuan anda di sini dan kami akan mencoba "
-#~ "untuk membantu."
-
-#~ msgid ""
-#~ "{Bug reporting and feature request system} - if something doesn't work "
-#~ "properly or is missing and is not listed in the tracker, you can open bug "
-#~ "reports here."
-#~ msgstr ""
-#~ "{Sistem pelaporan bug dan permintaan fitur} - jika sesuatu tidak bekerja "
-#~ "dengan semestinya atau hilang dan tidak terdaftar pada pelacak, anda dapat "
-#~ "membuat laporan bug di sini."
 
 #~ msgid "Nebulas"
 #~ msgstr "Nebula"
@@ -8302,19 +8340,6 @@ msgstr ""
 
 #~ msgid "Manual zoom: "
 #~ msgstr "Zum manual: "
-
-#~ msgid "CTRL + Up/Down"
-#~ msgstr "Ctrl + Atas/Bawah"
-
-#~ msgid "CTRL + Left click"
-#~ msgstr "Ctrl + Klik kiri"
-
-#~ msgid ""
-#~ "{The Stellarium Wiki} - General information.  You can also find user-"
-#~ "contributed landscapes and scripts here."
-#~ msgstr ""
-#~ "{Wiki Stellarium} - Informasi umum. Anda juga dapat menemukan lanskap dan "
-#~ "skrip kontribusi dari pengguna di sini."
 
 #~ msgid "Hourly zenith rate:"
 #~ msgstr "Laju zenit per jam:"

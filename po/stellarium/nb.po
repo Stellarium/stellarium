@@ -8,15 +8,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nb\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-23 01:35+0700\n"
+"POT-Creation-Date: 2013-12-24 21:46+0700\n"
 "PO-Revision-Date: 2013-12-11 14:29+0000\n"
 "Last-Translator: FreewareTips <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-12-23 05:23+0000\n"
-"X-Generator: Launchpad (build 16872)\n"
+"X-Launchpad-Export-Date: 2013-12-25 05:26+0000\n"
+"X-Generator: Launchpad (build 16877)\n"
 "X-Poedit-Country: NORWAY\n"
 "X-Poedit-Language: Norwegian\n"
 
@@ -1296,7 +1296,59 @@ msgstr ""
 msgid "Custom equation of %1T"
 msgstr "Egendefinert ligning for %1T"
 
-#: src/gui/HelpDialog.cpp:161
+#: src/gui/HelpDialog.cpp:119
+msgid "Stellarium Help"
+msgstr "Hjelp"
+
+#: src/gui/HelpDialog.cpp:124 src/gui/HelpDialog.cpp:129
+msgid "Keys"
+msgstr "Taster"
+
+#: src/gui/HelpDialog.cpp:126 src/gui/HelpDialog.cpp:198
+msgid "Further Reading"
+msgstr "Les mer"
+
+#: src/gui/HelpDialog.cpp:133
+msgid "Pan view around the sky"
+msgstr "Panoramavisning av himmelen"
+
+#: src/gui/HelpDialog.cpp:134
+msgid "Arrow keys & left mouse drag"
+msgstr "Piltaster & dra med venstre museknapp"
+
+#: src/gui/HelpDialog.cpp:136
+msgid "Zoom in/out"
+msgstr "Zoom inn/ut"
+
+#: src/gui/HelpDialog.cpp:138
+msgid "Page Up/Down"
+msgstr "Page Up/Down"
+
+#: src/gui/HelpDialog.cpp:140
+msgid "CTRL + Up/Down"
+msgstr "Ctrl + Pil opp/Pil ned"
+
+#: src/gui/HelpDialog.cpp:143
+msgid "Select object"
+msgstr "Velg objekt"
+
+#: src/gui/HelpDialog.cpp:144
+msgid "Left click"
+msgstr "Venstreklikk"
+
+#: src/gui/HelpDialog.cpp:152
+msgid "Clear selection"
+msgstr "Opphev valg"
+
+#: src/gui/HelpDialog.cpp:153
+msgid "Right click"
+msgstr "Høyreklikk"
+
+#: src/gui/HelpDialog.cpp:155
+msgid "CTRL + Left click"
+msgstr "Ctrl + venstreklikk"
+
+#: src/gui/HelpDialog.cpp:160
 #, qt-format
 msgid ""
 "Below are listed only the actions with assigned keys. Further actions may be "
@@ -1305,44 +1357,93 @@ msgstr ""
 "Under vises bare handlingene med tilordnede tastesnarveier. Flere handlinger "
 "kan være tilgjengelige med \"%1\"-knappen."
 
-#: src/gui/HelpDialog.cpp:263
+#: src/gui/HelpDialog.cpp:199
+msgid ""
+"The following links are external web links, and will launch your web "
+"browser:\n"
+msgstr "De følgende lenkene er eksterne lenker som åpnes i din nettleser:\n"
+
+#: src/gui/HelpDialog.cpp:200
+msgid "The Stellarium User Guide"
+msgstr "Brukerveiledning for Stellarium"
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:204
+msgid "{Frequently Asked Questions} about Stellarium.  Answers too."
+msgstr "{Ofte stilte spørsmål} om Stellarium. Med svar."
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:209
+msgid ""
+"{The Stellarium Wiki} - General information.  You can also find user-"
+"contributed landscapes and scripts here."
+msgstr ""
+"{Stellarium Wiki} - Generell informasjon.  Her kan du også finne flere "
+"landskap og skript som brukere har bidratt med."
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:214
+msgid ""
+"{Support ticket system} - if you need help using Stellarium, post a support "
+"request here and we'll try to help."
+msgstr ""
+"{Hjelpesystem} - trenger du hjelp med bruken av Stellarium, post en "
+"henvendelse her og vi vil prøve å hjelpe."
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:219
+msgid ""
+"{Bug reporting and feature request system} - if something doesn't work "
+"properly or is missing and is not listed in the tracker, you can open bug "
+"reports here."
+msgstr ""
+"{Feilrapportering og forespørsel om nye funksjoner} - hvis noe ikke virker "
+"ordentlig eller mangler og ikke er oppført i oversikten, kan du lage en "
+"feilrapport her."
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:224
+msgid "{Forums} - discuss Stellarium with other users."
+msgstr "{Forumer} - diskuter Stellarium med andre brukere."
+
+#: src/gui/HelpDialog.cpp:262
 msgid "Developers"
 msgstr "Utviklere"
 
-#: src/gui/HelpDialog.cpp:264
+#: src/gui/HelpDialog.cpp:263
 #, qt-format
 msgid "Project coordinator & lead developer: %1"
 msgstr "Prosjektkoordinator og hovedutvikler: %1"
 
-#: src/gui/HelpDialog.cpp:265
+#: src/gui/HelpDialog.cpp:264
 #, qt-format
 msgid "Doc author/developer: %1"
 msgstr "Forfatter/utvikler av dokumentasjon: %1"
 
-#: src/gui/HelpDialog.cpp:266 src/gui/HelpDialog.cpp:267
-#: src/gui/HelpDialog.cpp:268 src/gui/HelpDialog.cpp:269
-#: src/gui/HelpDialog.cpp:270 src/gui/HelpDialog.cpp:277
-#: src/gui/HelpDialog.cpp:278 src/gui/HelpDialog.cpp:279
-#: src/gui/HelpDialog.cpp:280
+#: src/gui/HelpDialog.cpp:265 src/gui/HelpDialog.cpp:266
+#: src/gui/HelpDialog.cpp:267 src/gui/HelpDialog.cpp:268
+#: src/gui/HelpDialog.cpp:269 src/gui/HelpDialog.cpp:276
+#: src/gui/HelpDialog.cpp:277 src/gui/HelpDialog.cpp:278
+#: src/gui/HelpDialog.cpp:279
 #, qt-format
 msgid "Developer: %1"
 msgstr "Utvikler: %1"
 
-#: src/gui/HelpDialog.cpp:271
+#: src/gui/HelpDialog.cpp:270
 #, qt-format
 msgid "Continuous Integration: %1"
 msgstr "Kontinuerlig integrasjon: %1"
 
-#: src/gui/HelpDialog.cpp:272 src/gui/HelpDialog.cpp:273
+#: src/gui/HelpDialog.cpp:271 src/gui/HelpDialog.cpp:272
 #, qt-format
 msgid "Tester: %1"
 msgstr "Tester: %1"
 
-#: src/gui/HelpDialog.cpp:274
+#: src/gui/HelpDialog.cpp:273
 msgid "Past Developers"
 msgstr "Tidligere utviklere"
 
-#: src/gui/HelpDialog.cpp:275
+#: src/gui/HelpDialog.cpp:274
 msgid ""
 "Several people have made significant contributions, but are no longer "
 "active. Their work has made a big difference to the project:"
@@ -1350,12 +1451,12 @@ msgstr ""
 "Flere personer har bidratt betydelig, men er ikke lenger aktive. Deres "
 "arbeid har hatt stor betydning for prosjektet:"
 
-#: src/gui/HelpDialog.cpp:276
+#: src/gui/HelpDialog.cpp:275
 #, qt-format
 msgid "Graphic/other designer: %1"
 msgstr "Designer for grafikk og annet: %1"
 
-#: src/gui/HelpDialog.cpp:281 src/gui/HelpDialog.cpp:282
+#: src/gui/HelpDialog.cpp:280 src/gui/HelpDialog.cpp:281
 #, qt-format
 msgid "OSX Developer: %1"
 msgstr "OSX-utvikler: %1"
@@ -8331,21 +8432,6 @@ msgstr "Solhøyde ved tussmørke: 0 grd."
 #~ msgid "Preset Time"
 #~ msgstr "Forhåndsinnstilt tid"
 
-#~ msgid "Further Reading"
-#~ msgstr "Les mer"
-
-#~ msgid "Stellarium Help"
-#~ msgstr "Hjelp"
-
-#~ msgid "CTRL + Left click"
-#~ msgstr "Ctrl + venstreklikk"
-
-#~ msgid "CTRL + Up/Down"
-#~ msgstr "Ctrl + Pil opp/Pil ned"
-
-#~ msgid "Page Up/Down"
-#~ msgstr "Page Up/Down"
-
 #~ msgid "80"
 #~ msgstr "80"
 
@@ -8355,38 +8441,15 @@ msgstr "Solhøyde ved tussmørke: 0 grd."
 #~ msgid "144000"
 #~ msgstr "144000"
 
-#~ msgid "Keys"
-#~ msgstr "Taster"
-
-#~ msgid "Right click"
-#~ msgstr "Høyreklikk"
-
-#~ msgid "Left click"
-#~ msgstr "Venstreklikk"
-
 #~ msgid "Nebulas"
 #~ msgstr "Stjernetåker"
 
 #~ msgid "10000"
 #~ msgstr "10000"
 
-#~ msgid ""
-#~ "The following links are external web links, and will launch your web "
-#~ "browser:\n"
-#~ msgstr "De følgende lenkene er eksterne lenker som åpnes i din nettleser:\n"
-
-#~ msgid "Zoom in/out"
-#~ msgstr "Zoom inn/ut"
-
-#~ msgid "Clear selection"
-#~ msgstr "Opphev valg"
-
 #, no-c-format, qt-format
 #~ msgid "Distance: %1AU"
 #~ msgstr "Avstand: %1AE"
-
-#~ msgid "Select object"
-#~ msgstr "Velg objekt"
 
 #~ msgid "Light pollution: "
 #~ msgstr "Lysforurensing: "
@@ -8421,46 +8484,8 @@ msgstr "Solhøyde ved tussmørke: 0 grd."
 #~ msgid "Light Pollution Luminance: "
 #~ msgstr "Styrke på lysforurensing: "
 
-#~ msgid "Arrow keys & left mouse drag"
-#~ msgstr "Piltaster & dra med venstre museknapp"
-
-#~ msgid "Pan view around the sky"
-#~ msgstr "Panoramavisning av himmelen"
-
 #~ msgid "When a Script is Running"
 #~ msgstr "Når et skript kjører"
-
-#~ msgid "The Stellarium User Guide"
-#~ msgstr "Brukerveiledning for Stellarium"
-
-#~ msgid "{Frequently Asked Questions} about Stellarium.  Answers too."
-#~ msgstr "{Ofte stilte spørsmål} om Stellarium. Med svar."
-
-#~ msgid ""
-#~ "{The Stellarium Wiki} - General information.  You can also find user-"
-#~ "contributed landscapes and scripts here."
-#~ msgstr ""
-#~ "{Stellarium Wiki} - Generell informasjon.  Her kan du også finne flere "
-#~ "landskap og skript som brukere har bidratt med."
-
-#~ msgid ""
-#~ "{Support ticket system} - if you need help using Stellarium, post a support "
-#~ "request here and we'll try to help."
-#~ msgstr ""
-#~ "{Hjelpesystem} - trenger du hjelp med bruken av Stellarium, post en "
-#~ "henvendelse her og vi vil prøve å hjelpe."
-
-#~ msgid ""
-#~ "{Bug reporting and feature request system} - if something doesn't work "
-#~ "properly or is missing and is not listed in the tracker, you can open bug "
-#~ "reports here."
-#~ msgstr ""
-#~ "{Feilrapportering og forespørsel om nye funksjoner} - hvis noe ikke virker "
-#~ "ordentlig eller mangler og ikke er oppført i oversikten, kan du lage en "
-#~ "feilrapport her."
-
-#~ msgid "{Forums} - discuss Stellarium with other users."
-#~ msgstr "{Forumer} - diskuter Stellarium med andre brukere."
 
 #~ msgid "Planets labels"
 #~ msgstr "Planetnavn"

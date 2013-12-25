@@ -10,15 +10,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 20130131_stellarium_stellarium-is\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-23 01:35+0700\n"
+"POT-Creation-Date: 2013-12-24 21:46+0700\n"
 "PO-Revision-Date: 2013-05-17 23:23+0000\n"
 "Last-Translator: Sverrir Gudmundsson <Unknown>\n"
 "Language-Team: Icelandic <translation-team-is@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-12-23 05:21+0000\n"
-"X-Generator: Launchpad (build 16872)\n"
+"X-Launchpad-Export-Date: 2013-12-25 05:23+0000\n"
+"X-Generator: Launchpad (build 16877)\n"
 "Language: is\n"
 
 #: src/core/modules/ConstellationMgr.cpp:106 src/core/modules/StarMgr.cpp:336
@@ -1283,7 +1283,59 @@ msgstr ""
 msgid "Custom equation of %1T"
 msgstr "Sérsniðin jafna %1T"
 
-#: src/gui/HelpDialog.cpp:161
+#: src/gui/HelpDialog.cpp:119
+msgid "Stellarium Help"
+msgstr "Stellarium hjálp"
+
+#: src/gui/HelpDialog.cpp:124 src/gui/HelpDialog.cpp:129
+msgid "Keys"
+msgstr "Lyklar"
+
+#: src/gui/HelpDialog.cpp:126 src/gui/HelpDialog.cpp:198
+msgid "Further Reading"
+msgstr "Sjá nánar"
+
+#: src/gui/HelpDialog.cpp:133
+msgid "Pan view around the sky"
+msgstr "Færsla til hliðar á himninum"
+
+#: src/gui/HelpDialog.cpp:134
+msgid "Arrow keys & left mouse drag"
+msgstr "Örvalyklar og færsla músar"
+
+#: src/gui/HelpDialog.cpp:136
+msgid "Zoom in/out"
+msgstr "Aðdráttur/Minnkun"
+
+#: src/gui/HelpDialog.cpp:138
+msgid "Page Up/Down"
+msgstr "Upp/Niður (um síðu)"
+
+#: src/gui/HelpDialog.cpp:140
+msgid "CTRL + Up/Down"
+msgstr "CTRL + Upp/Niður"
+
+#: src/gui/HelpDialog.cpp:143
+msgid "Select object"
+msgstr "Velja fyrirbæri"
+
+#: src/gui/HelpDialog.cpp:144
+msgid "Left click"
+msgstr "Vinstri músarsmellur"
+
+#: src/gui/HelpDialog.cpp:152
+msgid "Clear selection"
+msgstr "Hreinsa val"
+
+#: src/gui/HelpDialog.cpp:153
+msgid "Right click"
+msgstr "Hægri músarsmellur"
+
+#: src/gui/HelpDialog.cpp:155
+msgid "CTRL + Left click"
+msgstr "CTRL + vinstri músarhnappur"
+
+#: src/gui/HelpDialog.cpp:160
 #, qt-format
 msgid ""
 "Below are listed only the actions with assigned keys. Further actions may be "
@@ -1293,44 +1345,93 @@ msgstr ""
 "Fleiri aðgerðir gætu verið tiltækar með því að nota \"%1\" "
 "lyklaborðshnappinn."
 
-#: src/gui/HelpDialog.cpp:263
+#: src/gui/HelpDialog.cpp:199
+msgid ""
+"The following links are external web links, and will launch your web "
+"browser:\n"
+msgstr "Eftirtaldir tenglar vísa á vefslóðir og opnast í vafranum þínum:\n"
+
+#: src/gui/HelpDialog.cpp:200
+msgid "The Stellarium User Guide"
+msgstr "Notendaleiðbeiningar Stellarium"
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:204
+msgid "{Frequently Asked Questions} about Stellarium.  Answers too."
+msgstr "{Algengar spurningar} um Stellarium. Einnig svör."
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:209
+msgid ""
+"{The Stellarium Wiki} - General information.  You can also find user-"
+"contributed landscapes and scripts here."
+msgstr ""
+"{Stellarium Wiki} - Almennar upplýsingar. Hérna gefur þú fundið "
+"landslagsmyndir og skriptur sem notendur Stellarium hafa búið til."
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:214
+msgid ""
+"{Support ticket system} - if you need help using Stellarium, post a support "
+"request here and we'll try to help."
+msgstr ""
+"{Stuðningskerfi} - ef þú þarft aðstoð í tengslum við Stellarium, sendu inn "
+"beiðni um stuðning hérna og við munum reyna að aðstoða þig."
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:219
+msgid ""
+"{Bug reporting and feature request system} - if something doesn't work "
+"properly or is missing and is not listed in the tracker, you can open bug "
+"reports here."
+msgstr ""
+"{Kerfi fyrir villuskýrslur og óskir um eiginleika} - ef eitthvað virkar ekki "
+"sem skyldi eða vantar og er ekki á listanum (tracker), þá geturðu sett inn "
+"skilaboð hér."
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:224
+msgid "{Forums} - discuss Stellarium with other users."
+msgstr "{Spjallsvæði} - hægt að ræða við aðra notendur Stellarium."
+
+#: src/gui/HelpDialog.cpp:262
 msgid "Developers"
 msgstr "Hönnuðir"
 
-#: src/gui/HelpDialog.cpp:264
+#: src/gui/HelpDialog.cpp:263
 #, qt-format
 msgid "Project coordinator & lead developer: %1"
 msgstr "Stjórnandi verkefnisins & aðalhönnuður: %1"
 
-#: src/gui/HelpDialog.cpp:265
+#: src/gui/HelpDialog.cpp:264
 #, qt-format
 msgid "Doc author/developer: %1"
 msgstr "Höfundur skjala: %1"
 
-#: src/gui/HelpDialog.cpp:266 src/gui/HelpDialog.cpp:267
-#: src/gui/HelpDialog.cpp:268 src/gui/HelpDialog.cpp:269
-#: src/gui/HelpDialog.cpp:270 src/gui/HelpDialog.cpp:277
-#: src/gui/HelpDialog.cpp:278 src/gui/HelpDialog.cpp:279
-#: src/gui/HelpDialog.cpp:280
+#: src/gui/HelpDialog.cpp:265 src/gui/HelpDialog.cpp:266
+#: src/gui/HelpDialog.cpp:267 src/gui/HelpDialog.cpp:268
+#: src/gui/HelpDialog.cpp:269 src/gui/HelpDialog.cpp:276
+#: src/gui/HelpDialog.cpp:277 src/gui/HelpDialog.cpp:278
+#: src/gui/HelpDialog.cpp:279
 #, qt-format
 msgid "Developer: %1"
 msgstr "Hönnuður: %1"
 
-#: src/gui/HelpDialog.cpp:271
+#: src/gui/HelpDialog.cpp:270
 #, qt-format
 msgid "Continuous Integration: %1"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:272 src/gui/HelpDialog.cpp:273
+#: src/gui/HelpDialog.cpp:271 src/gui/HelpDialog.cpp:272
 #, qt-format
 msgid "Tester: %1"
 msgstr "Prófandi: %1"
 
-#: src/gui/HelpDialog.cpp:274
+#: src/gui/HelpDialog.cpp:273
 msgid "Past Developers"
 msgstr "Fyrri forritarar"
 
-#: src/gui/HelpDialog.cpp:275
+#: src/gui/HelpDialog.cpp:274
 msgid ""
 "Several people have made significant contributions, but are no longer "
 "active. Their work has made a big difference to the project:"
@@ -1338,12 +1439,12 @@ msgstr ""
 "Ýmsir aðilar hafa komið með mikilvæg framlög til verkefnisins, en eru ekki "
 "virkir lengur. Vinna þeirra hefur skipt sköpum fyrir verkefnið:"
 
-#: src/gui/HelpDialog.cpp:276
+#: src/gui/HelpDialog.cpp:275
 #, qt-format
 msgid "Graphic/other designer: %1"
 msgstr "Grafískur hönnuður: %1"
 
-#: src/gui/HelpDialog.cpp:281 src/gui/HelpDialog.cpp:282
+#: src/gui/HelpDialog.cpp:280 src/gui/HelpDialog.cpp:281
 #, qt-format
 msgid "OSX Developer: %1"
 msgstr "OSX hönnuður: %1"
@@ -8181,21 +8282,6 @@ msgstr ""
 #~ msgid "Magnitude: <b>%1</b> (B-V: %2)"
 #~ msgstr "Birtustig: <b>%1</b> (B-V: %2)"
 
-#~ msgid "Keys"
-#~ msgstr "Lyklar"
-
-#~ msgid "Select object"
-#~ msgstr "Velja fyrirbæri"
-
-#~ msgid "Clear selection"
-#~ msgstr "Hreinsa val"
-
-#~ msgid "Stellarium Help"
-#~ msgstr "Stellarium hjálp"
-
-#~ msgid "{Frequently Asked Questions} about Stellarium.  Answers too."
-#~ msgstr "{Algengar spurningar} um Stellarium. Einnig svör."
-
 #~ msgid "Nebulas"
 #~ msgstr "Geimþokur"
 
@@ -8235,36 +8321,6 @@ msgstr ""
 #~ msgid "Magnitude Scaling Multiplier: "
 #~ msgstr "Margfaldari birtustigs: "
 
-#~ msgid "Zoom in/out"
-#~ msgstr "Aðdráttur/Minnkun"
-
-#~ msgid "CTRL + Left click"
-#~ msgstr "CTRL + vinstri músarhnappur"
-
-#~ msgid "CTRL + Up/Down"
-#~ msgstr "CTRL + Upp/Niður"
-
-#~ msgid "Page Up/Down"
-#~ msgstr "Upp/Niður (um síðu)"
-
-#~ msgid "Further Reading"
-#~ msgstr "Sjá nánar"
-
-#~ msgid ""
-#~ "{Support ticket system} - if you need help using Stellarium, post a support "
-#~ "request here and we'll try to help."
-#~ msgstr ""
-#~ "{Stuðningskerfi} - ef þú þarft aðstoð í tengslum við Stellarium, sendu inn "
-#~ "beiðni um stuðning hérna og við munum reyna að aðstoða þig."
-
-#~ msgid ""
-#~ "The following links are external web links, and will launch your web "
-#~ "browser:\n"
-#~ msgstr "Eftirtaldir tenglar vísa á vefslóðir og opnast í vafranum þínum:\n"
-
-#~ msgid "{Forums} - discuss Stellarium with other users."
-#~ msgstr "{Spjallsvæði} - hægt að ræða við aðra notendur Stellarium."
-
 #~ msgid "Hourly zenith rate:"
 #~ msgstr "Tíðni á klst. í hvirfilpunkti:"
 
@@ -8273,22 +8329,6 @@ msgstr ""
 
 #~ msgid "Correct for light travel time: "
 #~ msgstr "Leiðrétta vegna ferðatíma ljóss: "
-
-#~ msgid ""
-#~ "{The Stellarium Wiki} - General information.  You can also find user-"
-#~ "contributed landscapes and scripts here."
-#~ msgstr ""
-#~ "{Stellarium Wiki} - Almennar upplýsingar. Hérna gefur þú fundið "
-#~ "landslagsmyndir og skriptur sem notendur Stellarium hafa búið til."
-
-#~ msgid "Right click"
-#~ msgstr "Hægri músarsmellur"
-
-#~ msgid "The Stellarium User Guide"
-#~ msgstr "Notendaleiðbeiningar Stellarium"
-
-#~ msgid "Left click"
-#~ msgstr "Vinstri músarsmellur"
 
 #~ msgid "Mouse cursor timeout (seconds):"
 #~ msgstr "Tími uns slökkt er á músarbendli (sek.):"
@@ -8302,26 +8342,11 @@ msgstr ""
 #~ msgid "Nebulas background images"
 #~ msgstr "Bakgrunnsmyndir geimþoka"
 
-#~ msgid "Arrow keys & left mouse drag"
-#~ msgstr "Örvalyklar og færsla músar"
-
-#~ msgid "Pan view around the sky"
-#~ msgstr "Færsla til hliðar á himninum"
-
 #~ msgid "xxx"
 #~ msgstr "xxx"
 
 #~ msgid "Planets labels"
 #~ msgstr "Merkingar á reikistjörnum"
-
-#~ msgid ""
-#~ "{Bug reporting and feature request system} - if something doesn't work "
-#~ "properly or is missing and is not listed in the tracker, you can open bug "
-#~ "reports here."
-#~ msgstr ""
-#~ "{Kerfi fyrir villuskýrslur og óskir um eiginleika} - ef eitthvað virkar ekki "
-#~ "sem skyldi eða vantar og er ekki á listanum (tracker), þá geturðu sett inn "
-#~ "skilaboð hér."
 
 #~ msgid "Time Display Format: "
 #~ msgstr "Tímasnið: "

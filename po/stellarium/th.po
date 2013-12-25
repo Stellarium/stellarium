@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Thai for stellarium 0.8.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-23 01:35+0700\n"
+"POT-Creation-Date: 2013-12-24 21:46+0700\n"
 "PO-Revision-Date: 2013-12-10 09:12+0000\n"
 "Last-Translator: Worachate Boonplod <Unknown>\n"
 "Language-Team: MicKi Alone <Need24Get@msn.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-12-23 05:26+0000\n"
-"X-Generator: Launchpad (build 16872)\n"
+"X-Launchpad-Export-Date: 2013-12-25 05:29+0000\n"
+"X-Generator: Launchpad (build 16877)\n"
 "X-Poedit-Country: THAILAND\n"
 "X-Poedit-Language: Thai\n"
 
@@ -1332,7 +1332,59 @@ msgstr "Islam, Sadiq & Qureshi (2008, 2013)"
 msgid "Custom equation of %1T"
 msgstr "สมการ %1T ที่กำหนดเอง"
 
-#: src/gui/HelpDialog.cpp:161
+#: src/gui/HelpDialog.cpp:119
+msgid "Stellarium Help"
+msgstr "วิธีใช้ Stellarium"
+
+#: src/gui/HelpDialog.cpp:124 src/gui/HelpDialog.cpp:129
+msgid "Keys"
+msgstr "ปุ่ม"
+
+#: src/gui/HelpDialog.cpp:126 src/gui/HelpDialog.cpp:198
+msgid "Further Reading"
+msgstr "ศึกษาเพิ่มเติม"
+
+#: src/gui/HelpDialog.cpp:133
+msgid "Pan view around the sky"
+msgstr "มองกราดไปทั่วท้องฟ้า"
+
+#: src/gui/HelpDialog.cpp:134
+msgid "Arrow keys & left mouse drag"
+msgstr "ปุ่มลูกศรและลากเมาส์ซ้าย"
+
+#: src/gui/HelpDialog.cpp:136
+msgid "Zoom in/out"
+msgstr "ซูมเข้า/ออก"
+
+#: src/gui/HelpDialog.cpp:138
+msgid "Page Up/Down"
+msgstr "Page Up/Down"
+
+#: src/gui/HelpDialog.cpp:140
+msgid "CTRL + Up/Down"
+msgstr "CTRL + Up/Down"
+
+#: src/gui/HelpDialog.cpp:143
+msgid "Select object"
+msgstr "เลือกวัตถุ"
+
+#: src/gui/HelpDialog.cpp:144
+msgid "Left click"
+msgstr "คลิกซ้าย"
+
+#: src/gui/HelpDialog.cpp:152
+msgid "Clear selection"
+msgstr "ล้างการเลือก"
+
+#: src/gui/HelpDialog.cpp:153
+msgid "Right click"
+msgstr "คลิกขวา"
+
+#: src/gui/HelpDialog.cpp:155
+msgid "CTRL + Left click"
+msgstr "CTRL และคลิกซ้าย"
+
+#: src/gui/HelpDialog.cpp:160
 #, qt-format
 msgid ""
 "Below are listed only the actions with assigned keys. Further actions may be "
@@ -1341,44 +1393,94 @@ msgstr ""
 "ด้านล่างแสดงเฉพาะรายการปุ่มลัดที่ได้มีการกำหนดไว้ การกระทำอื่น ๆ "
 "อาจตั้งค่าผ่าน \"%1\""
 
-#: src/gui/HelpDialog.cpp:263
+#: src/gui/HelpDialog.cpp:199
+msgid ""
+"The following links are external web links, and will launch your web "
+"browser:\n"
+msgstr ""
+"การเชื่อมต่อนี้จะเชื่อมต่อเว็บภายนอก และจะเรียกให้เบราว์เซอร์ของท่านทำงาน\n"
+
+#: src/gui/HelpDialog.cpp:200
+msgid "The Stellarium User Guide"
+msgstr "คู่มือผู้ใช้งาน Stellarium"
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:204
+msgid "{Frequently Asked Questions} about Stellarium.  Answers too."
+msgstr "{คำถามที่ถามบ่อย} เกี่ยวกับ Stellarium และคำตอบ"
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:209
+msgid ""
+"{The Stellarium Wiki} - General information.  You can also find user-"
+"contributed landscapes and scripts here."
+msgstr ""
+"{Stellarium วิกิ} - ข้อมูลทั่วไป "
+"คุณสามารถหารายชื่อผู้เข้าร่วมและสคริปต์ได้ที่นี่"
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:214
+msgid ""
+"{Support ticket system} - if you need help using Stellarium, post a support "
+"request here and we'll try to help."
+msgstr ""
+"{ระบบสนับสนุน} - ถ้าคุณต้องการความช่วยเหลือ "
+"สามารถร้องขอความช่วยเหลือได้ที่นี่ แล้วเราจะช่วยคุณ"
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:219
+msgid ""
+"{Bug reporting and feature request system} - if something doesn't work "
+"properly or is missing and is not listed in the tracker, you can open bug "
+"reports here."
+msgstr ""
+"{ระบบการรายงานข้อผิดพลาดและข้อเสนอแนะ} - "
+"หากพบการทำงานผิดปกติซึ่งไม่ได้แสดงไว้ใน tracker "
+"คุณสามารถสร้างรายงานข้อผิดพลาดได้ที่นี่"
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:224
+msgid "{Forums} - discuss Stellarium with other users."
+msgstr "{กระทู้} - ถกปัญหากับผู้ใช้คนอื่น ๆ  เกี่ยวกับ Stellarium"
+
+#: src/gui/HelpDialog.cpp:262
 msgid "Developers"
 msgstr "เหล่านักพัฒนา"
 
-#: src/gui/HelpDialog.cpp:264
+#: src/gui/HelpDialog.cpp:263
 #, qt-format
 msgid "Project coordinator & lead developer: %1"
 msgstr "ผู้ร่วมโครงการและผู้พัฒนาหลัก: %1"
 
-#: src/gui/HelpDialog.cpp:265
+#: src/gui/HelpDialog.cpp:264
 #, qt-format
 msgid "Doc author/developer: %1"
 msgstr "เจ้าของผลงาน/ผู้พัฒนา เอกสาร: %1"
 
-#: src/gui/HelpDialog.cpp:266 src/gui/HelpDialog.cpp:267
-#: src/gui/HelpDialog.cpp:268 src/gui/HelpDialog.cpp:269
-#: src/gui/HelpDialog.cpp:270 src/gui/HelpDialog.cpp:277
-#: src/gui/HelpDialog.cpp:278 src/gui/HelpDialog.cpp:279
-#: src/gui/HelpDialog.cpp:280
+#: src/gui/HelpDialog.cpp:265 src/gui/HelpDialog.cpp:266
+#: src/gui/HelpDialog.cpp:267 src/gui/HelpDialog.cpp:268
+#: src/gui/HelpDialog.cpp:269 src/gui/HelpDialog.cpp:276
+#: src/gui/HelpDialog.cpp:277 src/gui/HelpDialog.cpp:278
+#: src/gui/HelpDialog.cpp:279
 #, qt-format
 msgid "Developer: %1"
 msgstr "นักพัฒนา: %1"
 
-#: src/gui/HelpDialog.cpp:271
+#: src/gui/HelpDialog.cpp:270
 #, qt-format
 msgid "Continuous Integration: %1"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:272 src/gui/HelpDialog.cpp:273
+#: src/gui/HelpDialog.cpp:271 src/gui/HelpDialog.cpp:272
 #, qt-format
 msgid "Tester: %1"
 msgstr "ผู้ทดสอบ: %1"
 
-#: src/gui/HelpDialog.cpp:274
+#: src/gui/HelpDialog.cpp:273
 msgid "Past Developers"
 msgstr "ผู้พัฒนาในอดีต"
 
-#: src/gui/HelpDialog.cpp:275
+#: src/gui/HelpDialog.cpp:274
 msgid ""
 "Several people have made significant contributions, but are no longer "
 "active. Their work has made a big difference to the project:"
@@ -1386,12 +1488,12 @@ msgstr ""
 "หลายคนเคยมีส่วนร่วมในการพัฒนา แต่ปัจจุบันไม่มีความเคลื่อนไหว "
 "ผลงานของพวกเขาเป็นประโยชน์ต่อโครงการ:"
 
-#: src/gui/HelpDialog.cpp:276
+#: src/gui/HelpDialog.cpp:275
 #, qt-format
 msgid "Graphic/other designer: %1"
 msgstr "นักออกแบบกราฟิก/อื่น ๆ: %1"
 
-#: src/gui/HelpDialog.cpp:281 src/gui/HelpDialog.cpp:282
+#: src/gui/HelpDialog.cpp:280 src/gui/HelpDialog.cpp:281
 #, qt-format
 msgid "OSX Developer: %1"
 msgstr "นักพัฒนา OSX: %1"
@@ -8320,35 +8422,8 @@ msgstr "มุมเงยของดวงอาทิตย์ขณะสน
 #~ msgid "Light Pollution Luminance: "
 #~ msgstr "ปริมาณมลภาวะทางแสง: "
 
-#~ msgid "Keys"
-#~ msgstr "ปุ่ม"
-
-#~ msgid "Further Reading"
-#~ msgstr "ศึกษาเพิ่มเติม"
-
-#~ msgid "Clear selection"
-#~ msgstr "ล้างการเลือก"
-
-#~ msgid "Pan view around the sky"
-#~ msgstr "มองกราดไปทั่วท้องฟ้า"
-
-#~ msgid "The Stellarium User Guide"
-#~ msgstr "คู่มือผู้ใช้งาน Stellarium"
-
 #~ msgid "Nebulas"
 #~ msgstr "เนบิวลา"
-
-#~ msgid "Left click"
-#~ msgstr "คลิกซ้าย"
-
-#~ msgid "Zoom in/out"
-#~ msgstr "ซูมเข้า/ออก"
-
-#~ msgid "Right click"
-#~ msgstr "คลิกขวา"
-
-#~ msgid "CTRL + Left click"
-#~ msgstr "CTRL และคลิกซ้าย"
 
 #~ msgid "80"
 #~ msgstr "๘๐"
@@ -8401,43 +8476,8 @@ msgstr "มุมเงยของดวงอาทิตย์ขณะสน
 #~ msgid "Save Current Configuration as Default: "
 #~ msgstr "บันทึกค่าปัจจุบันเป็นค่าเริ่มต้น: "
 
-#~ msgid "Arrow keys & left mouse drag"
-#~ msgstr "ปุ่มลูกศรและลากเมาส์ซ้าย"
-
-#~ msgid "Page Up/Down"
-#~ msgstr "Page Up/Down"
-
-#~ msgid "CTRL + Up/Down"
-#~ msgstr "CTRL + Up/Down"
-
-#~ msgid "Select object"
-#~ msgstr "เลือกวัตถุ"
-
 #~ msgid "When a Script is Running"
 #~ msgstr "เมื่อสคริปต์กำลังทำงาน"
-
-#~ msgid "Stellarium Help"
-#~ msgstr "วิธีใช้ Stellarium"
-
-#~ msgid "{Frequently Asked Questions} about Stellarium.  Answers too."
-#~ msgstr "{คำถามที่ถามบ่อย} เกี่ยวกับ Stellarium และคำตอบ"
-
-#~ msgid ""
-#~ "{The Stellarium Wiki} - General information.  You can also find user-"
-#~ "contributed landscapes and scripts here."
-#~ msgstr ""
-#~ "{Stellarium วิกิ} - ข้อมูลทั่วไป "
-#~ "คุณสามารถหารายชื่อผู้เข้าร่วมและสคริปต์ได้ที่นี่"
-
-#~ msgid ""
-#~ "{Support ticket system} - if you need help using Stellarium, post a support "
-#~ "request here and we'll try to help."
-#~ msgstr ""
-#~ "{ระบบสนับสนุน} - ถ้าคุณต้องการความช่วยเหลือ "
-#~ "สามารถร้องขอความช่วยเหลือได้ที่นี่ แล้วเราจะช่วยคุณ"
-
-#~ msgid "{Forums} - discuss Stellarium with other users."
-#~ msgstr "{กระทู้} - ถกปัญหากับผู้ใช้คนอื่น ๆ  เกี่ยวกับ Stellarium"
 
 #~ msgid "Startup FOV: XX"
 #~ msgstr "พื้นที่การมองเห็นเริ่มต้น: XX"
@@ -8528,15 +8568,6 @@ msgstr "มุมเงยของดวงอาทิตย์ขณะสน
 
 #~ msgid "Hourly zenith rate:"
 #~ msgstr "อัตราสูงสุดที่เหนือศีรษะ:"
-
-#~ msgid ""
-#~ "{Bug reporting and feature request system} - if something doesn't work "
-#~ "properly or is missing and is not listed in the tracker, you can open bug "
-#~ "reports here."
-#~ msgstr ""
-#~ "{ระบบการรายงานข้อผิดพลาดและข้อเสนอแนะ} - "
-#~ "หากพบการทำงานผิดปกติซึ่งไม่ได้แสดงไว้ใน tracker "
-#~ "คุณสามารถสร้างรายงานข้อผิดพลาดได้ที่นี่"
 
 #~ msgid "Plugin Key Bindings"
 #~ msgstr "ปุ่มลัดในโปรแกรมเสริม"
@@ -8807,9 +8838,3 @@ msgstr "มุมเงยของดวงอาทิตย์ขณะสน
 #~ msgid ""
 #~ "Screensaver of various happenings in the Solar System. 171 events in all!"
 #~ msgstr "ภาพพักหน้าจอ แสดง 171 ปรากฏการณ์! ที่เกิดขึ้นในระบบสุริยะ"
-
-#~ msgid ""
-#~ "The following links are external web links, and will launch your web "
-#~ "browser:\n"
-#~ msgstr ""
-#~ "การเชื่อมต่อนี้จะเชื่อมต่อเว็บภายนอก และจะเรียกให้เบราว์เซอร์ของท่านทำงาน\n"
