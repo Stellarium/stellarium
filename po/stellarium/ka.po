@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Stellarium 0.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-23 01:35+0700\n"
+"POT-Creation-Date: 2013-12-24 21:46+0700\n"
 "PO-Revision-Date: 2011-05-09 01:51+0000\n"
 "Last-Translator: George Machitidze <giomac@gmail.com>\n"
 "Language-Team: Georgian <ka@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-12-23 05:19+0000\n"
-"X-Generator: Launchpad (build 16872)\n"
+"X-Launchpad-Export-Date: 2013-12-25 05:22+0000\n"
+"X-Generator: Launchpad (build 16877)\n"
 "X-Poedit-Country: GEORGIA\n"
 "X-Poedit-Language: Georgian\n"
 
@@ -1279,62 +1279,160 @@ msgstr ""
 msgid "Custom equation of %1T"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:161
+#: src/gui/HelpDialog.cpp:119
+msgid "Stellarium Help"
+msgstr "Stellarium-ის დახმარება"
+
+#: src/gui/HelpDialog.cpp:124 src/gui/HelpDialog.cpp:129
+msgid "Keys"
+msgstr "კლავიშები"
+
+#: src/gui/HelpDialog.cpp:126 src/gui/HelpDialog.cpp:198
+msgid "Further Reading"
+msgstr "შემდეგი საკითხავი"
+
+#: src/gui/HelpDialog.cpp:133
+msgid "Pan view around the sky"
+msgstr "ცის სრული მიმოხილვა"
+
+#: src/gui/HelpDialog.cpp:134
+msgid "Arrow keys & left mouse drag"
+msgstr "ისრები და გადათრევა თაგუნას მარცხენა ღილაკით"
+
+#: src/gui/HelpDialog.cpp:136
+msgid "Zoom in/out"
+msgstr "მოახლოვება/დაშორება"
+
+#: src/gui/HelpDialog.cpp:138
+msgid "Page Up/Down"
+msgstr "გვერდი ზემოთ/ქვემოთ"
+
+#: src/gui/HelpDialog.cpp:140
+msgid "CTRL + Up/Down"
+msgstr "CTRL + ზედა/ქვედა ისარი"
+
+#: src/gui/HelpDialog.cpp:143
+msgid "Select object"
+msgstr "ობიექტის მონიშვნა"
+
+#: src/gui/HelpDialog.cpp:144
+msgid "Left click"
+msgstr "მარცხენა დაწკაპვა"
+
+#: src/gui/HelpDialog.cpp:152
+msgid "Clear selection"
+msgstr "მონიშვნის მოხსნა"
+
+#: src/gui/HelpDialog.cpp:153
+msgid "Right click"
+msgstr "მარჯვენა დაწკაპვა"
+
+#: src/gui/HelpDialog.cpp:155
+msgid "CTRL + Left click"
+msgstr "CTRL + მარცხენა დაწკაპვა"
+
+#: src/gui/HelpDialog.cpp:160
 #, qt-format
 msgid ""
 "Below are listed only the actions with assigned keys. Further actions may be "
 "available via the \"%1\" button."
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:263
+#: src/gui/HelpDialog.cpp:199
+msgid ""
+"The following links are external web links, and will launch your web "
+"browser:\n"
+msgstr "შემდეგი ბმები გარე ვებ ბმებია და თქვენს ბრაუზერში გაიხსნება:\n"
+
+#: src/gui/HelpDialog.cpp:200
+msgid "The Stellarium User Guide"
+msgstr "Stellarium-ის მომხმარებლის სახელმძღვანელო"
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:204
+msgid "{Frequently Asked Questions} about Stellarium.  Answers too."
+msgstr "{ფრიად აქტუალური კითხვები} Stellarium-ის შესახებ.  პასუხებიც იქვეა."
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:209
+msgid ""
+"{The Stellarium Wiki} - General information.  You can also find user-"
+"contributed landscapes and scripts here."
+msgstr ""
+"{Stellarium-ის ენციკლოპედია} - ზოგადი ინფორმაცია.  შეგიძლიათ მოიძიოთ "
+"გამოგზავნილი პეიზაჟები და სცენარები."
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:214
+msgid ""
+"{Support ticket system} - if you need help using Stellarium, post a support "
+"request here and we'll try to help."
+msgstr ""
+"{მომსახურების ცენტრი} - თუ დახმარება გესაჭიროებათ, გამოაგზავნეთ მოთხოვნა და "
+"შევეცდებით დაგეხმაროთ."
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:219
+msgid ""
+"{Bug reporting and feature request system} - if something doesn't work "
+"properly or is missing and is not listed in the tracker, you can open bug "
+"reports here."
+msgstr ""
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:224
+msgid "{Forums} - discuss Stellarium with other users."
+msgstr "{ფორუმები} - განიხილეთ Stellarium სხვა მომხმარებლებთან ერთად."
+
+#: src/gui/HelpDialog.cpp:262
 msgid "Developers"
 msgstr "შემმუშავებლები"
 
-#: src/gui/HelpDialog.cpp:264
+#: src/gui/HelpDialog.cpp:263
 #, qt-format
 msgid "Project coordinator & lead developer: %1"
 msgstr "პროექტის კოორდინატორი და წამყვანი პროგრამისტი: %1"
 
-#: src/gui/HelpDialog.cpp:265
+#: src/gui/HelpDialog.cpp:264
 #, qt-format
 msgid "Doc author/developer: %1"
 msgstr "დოკუმენტაციის ავტორი/შემმუშავებელი: %1"
 
-#: src/gui/HelpDialog.cpp:266 src/gui/HelpDialog.cpp:267
-#: src/gui/HelpDialog.cpp:268 src/gui/HelpDialog.cpp:269
-#: src/gui/HelpDialog.cpp:270 src/gui/HelpDialog.cpp:277
-#: src/gui/HelpDialog.cpp:278 src/gui/HelpDialog.cpp:279
-#: src/gui/HelpDialog.cpp:280
+#: src/gui/HelpDialog.cpp:265 src/gui/HelpDialog.cpp:266
+#: src/gui/HelpDialog.cpp:267 src/gui/HelpDialog.cpp:268
+#: src/gui/HelpDialog.cpp:269 src/gui/HelpDialog.cpp:276
+#: src/gui/HelpDialog.cpp:277 src/gui/HelpDialog.cpp:278
+#: src/gui/HelpDialog.cpp:279
 #, qt-format
 msgid "Developer: %1"
 msgstr "პროგრამისტი: %1"
 
-#: src/gui/HelpDialog.cpp:271
+#: src/gui/HelpDialog.cpp:270
 #, qt-format
 msgid "Continuous Integration: %1"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:272 src/gui/HelpDialog.cpp:273
+#: src/gui/HelpDialog.cpp:271 src/gui/HelpDialog.cpp:272
 #, qt-format
 msgid "Tester: %1"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:274
+#: src/gui/HelpDialog.cpp:273
 msgid "Past Developers"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:275
+#: src/gui/HelpDialog.cpp:274
 msgid ""
 "Several people have made significant contributions, but are no longer "
 "active. Their work has made a big difference to the project:"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:276
+#: src/gui/HelpDialog.cpp:275
 #, qt-format
 msgid "Graphic/other designer: %1"
 msgstr "გრაფიკული/სხვა გაფორმება: %1"
 
-#: src/gui/HelpDialog.cpp:281 src/gui/HelpDialog.cpp:282
+#: src/gui/HelpDialog.cpp:280 src/gui/HelpDialog.cpp:281
 #, qt-format
 msgid "OSX Developer: %1"
 msgstr "OSX პროგრამისტი: %1"
@@ -8134,73 +8232,6 @@ msgstr ""
 
 #~ msgid "Set UI Locale: "
 #~ msgstr "UI ლოკალის მითითება "
-
-#~ msgid "Arrow keys & left mouse drag"
-#~ msgstr "ისრები და გადათრევა თაგუნას მარცხენა ღილაკით"
-
-#~ msgid "Page Up/Down"
-#~ msgstr "გვერდი ზემოთ/ქვემოთ"
-
-#~ msgid "CTRL + Up/Down"
-#~ msgstr "CTRL + ზედა/ქვედა ისარი"
-
-#~ msgid "Left click"
-#~ msgstr "მარცხენა დაწკაპვა"
-
-#~ msgid "Right click"
-#~ msgstr "მარჯვენა დაწკაპვა"
-
-#~ msgid "CTRL + Left click"
-#~ msgstr "CTRL + მარცხენა დაწკაპვა"
-
-#~ msgid "Pan view around the sky"
-#~ msgstr "ცის სრული მიმოხილვა"
-
-#~ msgid "Zoom in/out"
-#~ msgstr "მოახლოვება/დაშორება"
-
-#~ msgid "Select object"
-#~ msgstr "ობიექტის მონიშვნა"
-
-#~ msgid "Clear selection"
-#~ msgstr "მონიშვნის მოხსნა"
-
-#~ msgid "Stellarium Help"
-#~ msgstr "Stellarium-ის დახმარება"
-
-#~ msgid "Keys"
-#~ msgstr "კლავიშები"
-
-#~ msgid "Further Reading"
-#~ msgstr "შემდეგი საკითხავი"
-
-#~ msgid ""
-#~ "The following links are external web links, and will launch your web "
-#~ "browser:\n"
-#~ msgstr "შემდეგი ბმები გარე ვებ ბმებია და თქვენს ბრაუზერში გაიხსნება:\n"
-
-#~ msgid "The Stellarium User Guide"
-#~ msgstr "Stellarium-ის მომხმარებლის სახელმძღვანელო"
-
-#~ msgid "{Frequently Asked Questions} about Stellarium.  Answers too."
-#~ msgstr "{ფრიად აქტუალური კითხვები} Stellarium-ის შესახებ.  პასუხებიც იქვეა."
-
-#~ msgid ""
-#~ "{The Stellarium Wiki} - General information.  You can also find user-"
-#~ "contributed landscapes and scripts here."
-#~ msgstr ""
-#~ "{Stellarium-ის ენციკლოპედია} - ზოგადი ინფორმაცია.  შეგიძლიათ მოიძიოთ "
-#~ "გამოგზავნილი პეიზაჟები და სცენარები."
-
-#~ msgid ""
-#~ "{Support ticket system} - if you need help using Stellarium, post a support "
-#~ "request here and we'll try to help."
-#~ msgstr ""
-#~ "{მომსახურების ცენტრი} - თუ დახმარება გესაჭიროებათ, გამოაგზავნეთ მოთხოვნა და "
-#~ "შევეცდებით დაგეხმაროთ."
-
-#~ msgid "{Forums} - discuss Stellarium with other users."
-#~ msgstr "{ფორუმები} - განიხილეთ Stellarium სხვა მომხმარებლებთან ერთად."
 
 #~ msgid "Nebulas"
 #~ msgstr "ნისლეულები"

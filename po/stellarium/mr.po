@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2013-12-23 01:35+0700\n"
+"POT-Creation-Date: 2013-12-24 21:46+0700\n"
 "PO-Revision-Date: 2013-10-11 04:04+0000\n"
 "Last-Translator: nyogi <nyogi2004@gmail.com>\n"
 "Language-Team: Marathi <mr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-12-23 05:23+0000\n"
-"X-Generator: Launchpad (build 16872)\n"
+"X-Launchpad-Export-Date: 2013-12-25 05:25+0000\n"
+"X-Generator: Launchpad (build 16877)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:106 src/core/modules/StarMgr.cpp:336
 #: src/core/modules/GridLinesMgr.cpp:679 src/core/modules/LandscapeMgr.cpp:335
@@ -1285,7 +1285,59 @@ msgstr ""
 msgid "Custom equation of %1T"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:161
+#: src/gui/HelpDialog.cpp:119
+msgid "Stellarium Help"
+msgstr "स्टेलेरिअम बाबत मदत"
+
+#: src/gui/HelpDialog.cpp:124 src/gui/HelpDialog.cpp:129
+msgid "Keys"
+msgstr "कळ"
+
+#: src/gui/HelpDialog.cpp:126 src/gui/HelpDialog.cpp:198
+msgid "Further Reading"
+msgstr "अधिक वाचनासाठी"
+
+#: src/gui/HelpDialog.cpp:133
+msgid "Pan view around the sky"
+msgstr "आकाशात दृष्य सरकवा"
+
+#: src/gui/HelpDialog.cpp:134
+msgid "Arrow keys & left mouse drag"
+msgstr "अॅरो की आणि माउसचे डावे बटन खेचा"
+
+#: src/gui/HelpDialog.cpp:136
+msgid "Zoom in/out"
+msgstr "निकटन/दुरावलोकन"
+
+#: src/gui/HelpDialog.cpp:138
+msgid "Page Up/Down"
+msgstr "पेज अप / पेज डाउन"
+
+#: src/gui/HelpDialog.cpp:140
+msgid "CTRL + Up/Down"
+msgstr "CTRL + वर/खाली"
+
+#: src/gui/HelpDialog.cpp:143
+msgid "Select object"
+msgstr "आकाशस्थ लक्ष निवडा"
+
+#: src/gui/HelpDialog.cpp:144
+msgid "Left click"
+msgstr "डावी क्लिक"
+
+#: src/gui/HelpDialog.cpp:152
+msgid "Clear selection"
+msgstr "निवड रद्द करा"
+
+#: src/gui/HelpDialog.cpp:153
+msgid "Right click"
+msgstr "उजवी क्लिक"
+
+#: src/gui/HelpDialog.cpp:155
+msgid "CTRL + Left click"
+msgstr "CTRL + डावी क्लिक"
+
+#: src/gui/HelpDialog.cpp:160
 #, qt-format
 msgid ""
 "Below are listed only the actions with assigned keys. Further actions may be "
@@ -1294,44 +1346,95 @@ msgstr ""
 "खालील यादीतील क्रिया संबधित कि ज शी जोडलेल्या आहेत. जादाच्या कृती  \"%1\" "
 "यातून मिळतील."
 
-#: src/gui/HelpDialog.cpp:263
+#: src/gui/HelpDialog.cpp:199
+msgid ""
+"The following links are external web links, and will launch your web "
+"browser:\n"
+msgstr ""
+"पुढे दिलेले दुवे हे बाहेरील महाजालातील दुवे आहेत, आणि ते तुमच्या "
+"महाजालन्याहळक उघडतील :\n"
+
+#: src/gui/HelpDialog.cpp:200
+msgid "The Stellarium User Guide"
+msgstr "स्टेलारीअम वापरण्याचा मार्गदर्शक"
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:204
+msgid "{Frequently Asked Questions} about Stellarium.  Answers too."
+msgstr "{Frequently Asked Questions} स्टेलारीअम बाबत प्रश्न व उत्तरे."
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:209
+msgid ""
+"{The Stellarium Wiki} - General information.  You can also find user-"
+"contributed landscapes and scripts here."
+msgstr ""
+"{The Stellarium Wiki} - सर्वसामान्य माहिती, तुम्हाला या ठिकाणी इतर "
+"वापरकर्त्यांनी तयार केलेले देखावे आणि आज्ञावली मिळू शकतील."
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:214
+msgid ""
+"{Support ticket system} - if you need help using Stellarium, post a support "
+"request here and we'll try to help."
+msgstr ""
+"{Support ticket system} - स्टेलारीअम वापरासंबंधी काही मदत हवी असल्यास  तुमची "
+"विनंती येथे लिहा, आम्ही तुम्हाला मदत करण्याचा प्रयत्न करू."
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:219
+msgid ""
+"{Bug reporting and feature request system} - if something doesn't work "
+"properly or is missing and is not listed in the tracker, you can open bug "
+"reports here."
+msgstr ""
+"{Bug reporting and feature request system} - जर प्रोग्राम योग्य रितीने काम "
+"करीत नसेल किंवा अर्धवट असेल, ट्रॅकर सुचीत अंतर्भूत नसेल तर, तृटीची नोंद येथे "
+"करा"
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:224
+msgid "{Forums} - discuss Stellarium with other users."
+msgstr "{Forums} स्टेलारीअम बाबत इतरांशी चर्चा करा."
+
+#: src/gui/HelpDialog.cpp:262
 msgid "Developers"
 msgstr "विकासक"
 
-#: src/gui/HelpDialog.cpp:264
+#: src/gui/HelpDialog.cpp:263
 #, qt-format
 msgid "Project coordinator & lead developer: %1"
 msgstr "प्रकल्प संयोजक आणि प्रमुख विकासक: %1"
 
-#: src/gui/HelpDialog.cpp:265
+#: src/gui/HelpDialog.cpp:264
 #, qt-format
 msgid "Doc author/developer: %1"
 msgstr "दस्त लेखक / विकासक: %1"
 
-#: src/gui/HelpDialog.cpp:266 src/gui/HelpDialog.cpp:267
-#: src/gui/HelpDialog.cpp:268 src/gui/HelpDialog.cpp:269
-#: src/gui/HelpDialog.cpp:270 src/gui/HelpDialog.cpp:277
-#: src/gui/HelpDialog.cpp:278 src/gui/HelpDialog.cpp:279
-#: src/gui/HelpDialog.cpp:280
+#: src/gui/HelpDialog.cpp:265 src/gui/HelpDialog.cpp:266
+#: src/gui/HelpDialog.cpp:267 src/gui/HelpDialog.cpp:268
+#: src/gui/HelpDialog.cpp:269 src/gui/HelpDialog.cpp:276
+#: src/gui/HelpDialog.cpp:277 src/gui/HelpDialog.cpp:278
+#: src/gui/HelpDialog.cpp:279
 #, qt-format
 msgid "Developer: %1"
 msgstr "विकासक: %1"
 
-#: src/gui/HelpDialog.cpp:271
+#: src/gui/HelpDialog.cpp:270
 #, qt-format
 msgid "Continuous Integration: %1"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:272 src/gui/HelpDialog.cpp:273
+#: src/gui/HelpDialog.cpp:271 src/gui/HelpDialog.cpp:272
 #, qt-format
 msgid "Tester: %1"
 msgstr "टेस्टर: %1"
 
-#: src/gui/HelpDialog.cpp:274
+#: src/gui/HelpDialog.cpp:273
 msgid "Past Developers"
 msgstr "मागिल विकसक"
 
-#: src/gui/HelpDialog.cpp:275
+#: src/gui/HelpDialog.cpp:274
 msgid ""
 "Several people have made significant contributions, but are no longer "
 "active. Their work has made a big difference to the project:"
@@ -1339,12 +1442,12 @@ msgstr ""
 "खुप व्यक्तींचे यात महत्वपुर्ण योगदान आहे, परंतू त्या सध्या सक्रिय नाहित. "
 "त्यांच्या कामामुळे या प्रकल्पात महत्वाचा फरक पडला आहे"
 
-#: src/gui/HelpDialog.cpp:276
+#: src/gui/HelpDialog.cpp:275
 #, qt-format
 msgid "Graphic/other designer: %1"
 msgstr "रेखाचित्र/ इतर रचनाकार: %1"
 
-#: src/gui/HelpDialog.cpp:281 src/gui/HelpDialog.cpp:282
+#: src/gui/HelpDialog.cpp:280 src/gui/HelpDialog.cpp:281
 #, qt-format
 msgid "OSX Developer: %1"
 msgstr "ओ एस् एक्स् विकासक: %1"
@@ -8095,75 +8198,6 @@ msgstr ""
 #~ msgid "Set UI Locale: "
 #~ msgstr "UI Locale निश्चित करा: "
 
-#~ msgid "Arrow keys & left mouse drag"
-#~ msgstr "अॅरो की आणि माउसचे डावे बटन खेचा"
-
-#~ msgid "Page Up/Down"
-#~ msgstr "पेज अप / पेज डाउन"
-
-#~ msgid "CTRL + Up/Down"
-#~ msgstr "CTRL + वर/खाली"
-
-#~ msgid "Left click"
-#~ msgstr "डावी क्लिक"
-
-#~ msgid "Right click"
-#~ msgstr "उजवी क्लिक"
-
-#~ msgid "CTRL + Left click"
-#~ msgstr "CTRL + डावी क्लिक"
-
-#~ msgid "Pan view around the sky"
-#~ msgstr "आकाशात दृष्य सरकवा"
-
-#~ msgid "Zoom in/out"
-#~ msgstr "निकटन/दुरावलोकन"
-
-#~ msgid "Select object"
-#~ msgstr "आकाशस्थ लक्ष निवडा"
-
-#~ msgid "Clear selection"
-#~ msgstr "निवड रद्द करा"
-
-#~ msgid "Stellarium Help"
-#~ msgstr "स्टेलेरिअम बाबत मदत"
-
-#~ msgid "Keys"
-#~ msgstr "कळ"
-
-#~ msgid "Further Reading"
-#~ msgstr "अधिक वाचनासाठी"
-
-#~ msgid ""
-#~ "The following links are external web links, and will launch your web "
-#~ "browser:\n"
-#~ msgstr ""
-#~ "पुढे दिलेले दुवे हे बाहेरील महाजालातील दुवे आहेत, आणि ते तुमच्या "
-#~ "महाजालन्याहळक उघडतील :\n"
-
-#~ msgid "The Stellarium User Guide"
-#~ msgstr "स्टेलारीअम वापरण्याचा मार्गदर्शक"
-
-#~ msgid "{Frequently Asked Questions} about Stellarium.  Answers too."
-#~ msgstr "{Frequently Asked Questions} स्टेलारीअम बाबत प्रश्न व उत्तरे."
-
-#~ msgid ""
-#~ "{The Stellarium Wiki} - General information.  You can also find user-"
-#~ "contributed landscapes and scripts here."
-#~ msgstr ""
-#~ "{The Stellarium Wiki} - सर्वसामान्य माहिती, तुम्हाला या ठिकाणी इतर "
-#~ "वापरकर्त्यांनी तयार केलेले देखावे आणि आज्ञावली मिळू शकतील."
-
-#~ msgid ""
-#~ "{Support ticket system} - if you need help using Stellarium, post a support "
-#~ "request here and we'll try to help."
-#~ msgstr ""
-#~ "{Support ticket system} - स्टेलारीअम वापरासंबंधी काही मदत हवी असल्यास  तुमची "
-#~ "विनंती येथे लिहा, आम्ही तुम्हाला मदत करण्याचा प्रयत्न करू."
-
-#~ msgid "{Forums} - discuss Stellarium with other users."
-#~ msgstr "{Forums} स्टेलारीअम बाबत इतरांशी चर्चा करा."
-
 #~ msgid "Nebulas"
 #~ msgstr "तेजोमेघ"
 
@@ -8297,15 +8331,6 @@ msgstr ""
 
 #~ msgid "When a Script is Running"
 #~ msgstr "जेव्हा आज्ञावली कार्यरत असेल"
-
-#~ msgid ""
-#~ "{Bug reporting and feature request system} - if something doesn't work "
-#~ "properly or is missing and is not listed in the tracker, you can open bug "
-#~ "reports here."
-#~ msgstr ""
-#~ "{Bug reporting and feature request system} - जर प्रोग्राम योग्य रितीने काम "
-#~ "करीत नसेल किंवा अर्धवट असेल, ट्रॅकर सुचीत अंतर्भूत नसेल तर, तृटीची नोंद येथे "
-#~ "करा"
 
 #~ msgid "Solar System Body: "
 #~ msgstr "सूर्यमालेतील वस्तू "

@@ -9,15 +9,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: po_stellarium-et\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-23 01:35+0700\n"
+"POT-Creation-Date: 2013-12-24 21:46+0700\n"
 "PO-Revision-Date: 2012-01-14 15:35+0000\n"
 "Last-Translator: Merike <Unknown>\n"
 "Language-Team: Estonian <kde-i18n-doc@lists.kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-12-23 05:18+0000\n"
-"X-Generator: Launchpad (build 16872)\n"
+"X-Launchpad-Export-Date: 2013-12-25 05:21+0000\n"
+"X-Generator: Launchpad (build 16877)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:106 src/core/modules/StarMgr.cpp:336
 #: src/core/modules/GridLinesMgr.cpp:679 src/core/modules/LandscapeMgr.cpp:335
@@ -1288,62 +1288,164 @@ msgstr ""
 msgid "Custom equation of %1T"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:161
+#: src/gui/HelpDialog.cpp:119
+msgid "Stellarium Help"
+msgstr "Stellariumi abi"
+
+#: src/gui/HelpDialog.cpp:124 src/gui/HelpDialog.cpp:129
+msgid "Keys"
+msgstr "Kiirklahvid"
+
+#: src/gui/HelpDialog.cpp:126 src/gui/HelpDialog.cpp:198
+msgid "Further Reading"
+msgstr "Edasiseks lugemiseks"
+
+#: src/gui/HelpDialog.cpp:133
+msgid "Pan view around the sky"
+msgstr "Vaate nihutamine"
+
+#: src/gui/HelpDialog.cpp:134
+msgid "Arrow keys & left mouse drag"
+msgstr "Nooleklahvid ja hiire vasaku klahviga lohistamine"
+
+#: src/gui/HelpDialog.cpp:136
+msgid "Zoom in/out"
+msgstr "Suurendamine/vähendamine"
+
+#: src/gui/HelpDialog.cpp:138
+msgid "Page Up/Down"
+msgstr "Page Up/Down"
+
+#: src/gui/HelpDialog.cpp:140
+msgid "CTRL + Up/Down"
+msgstr "CTRL + Up/Down"
+
+#: src/gui/HelpDialog.cpp:143
+msgid "Select object"
+msgstr "Taevakeha valik"
+
+#: src/gui/HelpDialog.cpp:144
+msgid "Left click"
+msgstr "Vasakklõps"
+
+#: src/gui/HelpDialog.cpp:152
+msgid "Clear selection"
+msgstr "Valiku eemaldamine"
+
+#: src/gui/HelpDialog.cpp:153
+msgid "Right click"
+msgstr "Paremklõps"
+
+#: src/gui/HelpDialog.cpp:155
+msgid "CTRL + Left click"
+msgstr "CTRL + vasakklõps"
+
+#: src/gui/HelpDialog.cpp:160
 #, qt-format
 msgid ""
 "Below are listed only the actions with assigned keys. Further actions may be "
 "available via the \"%1\" button."
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:263
+#: src/gui/HelpDialog.cpp:199
+msgid ""
+"The following links are external web links, and will launch your web "
+"browser:\n"
+msgstr ""
+"Järgnevad viidad on välised veebiviidad ja avavad sinu veebilehitseja:\n"
+
+#: src/gui/HelpDialog.cpp:200
+msgid "The Stellarium User Guide"
+msgstr "Stellariumi kasutajajuhend"
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:204
+msgid "{Frequently Asked Questions} about Stellarium.  Answers too."
+msgstr "{Korduma kippuvad Stellariumi küsimused}. Ja vastused."
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:209
+msgid ""
+"{The Stellarium Wiki} - General information.  You can also find user-"
+"contributed landscapes and scripts here."
+msgstr ""
+"{Stellariumi Wiki} - üldine teave. Siit leiab ka kasutajate tehtud maastikke "
+"ja skripte."
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:214
+msgid ""
+"{Support ticket system} - if you need help using Stellarium, post a support "
+"request here and we'll try to help."
+msgstr ""
+"{Kasutajatugi} - kui vajad Stellariumi kasutamisel abi, postita siia küsimus "
+"ja me proovime aidata."
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:219
+msgid ""
+"{Bug reporting and feature request system} - if something doesn't work "
+"properly or is missing and is not listed in the tracker, you can open bug "
+"reports here."
+msgstr ""
+"{Vigadest teavitamise ja uute võimaluste küsimise süsteem} - kui miski ei "
+"tööta korralikult või puudub sootuks ja ei ole veel süsteemi kantud, siis "
+"võid selle raporteerida."
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:224
+msgid "{Forums} - discuss Stellarium with other users."
+msgstr "{Foorumid} - aruta Stellariumi teemasid teiste kasutajatega"
+
+#: src/gui/HelpDialog.cpp:262
 msgid "Developers"
 msgstr "Arendajad"
 
-#: src/gui/HelpDialog.cpp:264
+#: src/gui/HelpDialog.cpp:263
 #, qt-format
 msgid "Project coordinator & lead developer: %1"
 msgstr "Projekti koordinaator ja juhtiv arendaja: %1"
 
-#: src/gui/HelpDialog.cpp:265
+#: src/gui/HelpDialog.cpp:264
 #, qt-format
 msgid "Doc author/developer: %1"
 msgstr "Dokumentatsiooni autor/arendaja: %1"
 
-#: src/gui/HelpDialog.cpp:266 src/gui/HelpDialog.cpp:267
-#: src/gui/HelpDialog.cpp:268 src/gui/HelpDialog.cpp:269
-#: src/gui/HelpDialog.cpp:270 src/gui/HelpDialog.cpp:277
-#: src/gui/HelpDialog.cpp:278 src/gui/HelpDialog.cpp:279
-#: src/gui/HelpDialog.cpp:280
+#: src/gui/HelpDialog.cpp:265 src/gui/HelpDialog.cpp:266
+#: src/gui/HelpDialog.cpp:267 src/gui/HelpDialog.cpp:268
+#: src/gui/HelpDialog.cpp:269 src/gui/HelpDialog.cpp:276
+#: src/gui/HelpDialog.cpp:277 src/gui/HelpDialog.cpp:278
+#: src/gui/HelpDialog.cpp:279
 #, qt-format
 msgid "Developer: %1"
 msgstr "Arendaja: %1"
 
-#: src/gui/HelpDialog.cpp:271
+#: src/gui/HelpDialog.cpp:270
 #, qt-format
 msgid "Continuous Integration: %1"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:272 src/gui/HelpDialog.cpp:273
+#: src/gui/HelpDialog.cpp:271 src/gui/HelpDialog.cpp:272
 #, qt-format
 msgid "Tester: %1"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:274
+#: src/gui/HelpDialog.cpp:273
 msgid "Past Developers"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:275
+#: src/gui/HelpDialog.cpp:274
 msgid ""
 "Several people have made significant contributions, but are no longer "
 "active. Their work has made a big difference to the project:"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:276
+#: src/gui/HelpDialog.cpp:275
 #, qt-format
 msgid "Graphic/other designer: %1"
 msgstr "Graafika/muu kujundaja: %1"
 
-#: src/gui/HelpDialog.cpp:281 src/gui/HelpDialog.cpp:282
+#: src/gui/HelpDialog.cpp:280 src/gui/HelpDialog.cpp:281
 #, qt-format
 msgid "OSX Developer: %1"
 msgstr "OSX'i arendaja: %1"
@@ -8098,9 +8200,6 @@ msgstr ""
 #~ msgid "USB Script: "
 #~ msgstr "USB skript: "
 
-#~ msgid "Keys"
-#~ msgstr "Kiirklahvid"
-
 #~ msgid "Nebulas"
 #~ msgstr "Udukogud"
 
@@ -8154,71 +8253,6 @@ msgstr ""
 #~ msgid "Correct for light travel time: "
 #~ msgstr "Paranda valguse levimisaja suhtes: "
 
-#~ msgid "Arrow keys & left mouse drag"
-#~ msgstr "Nooleklahvid ja hiire vasaku klahviga lohistamine"
-
-#~ msgid "Page Up/Down"
-#~ msgstr "Page Up/Down"
-
-#~ msgid "CTRL + Up/Down"
-#~ msgstr "CTRL + Up/Down"
-
-#~ msgid "Left click"
-#~ msgstr "Vasakklõps"
-
-#~ msgid "Right click"
-#~ msgstr "Paremklõps"
-
-#~ msgid "CTRL + Left click"
-#~ msgstr "CTRL + vasakklõps"
-
-#~ msgid "Pan view around the sky"
-#~ msgstr "Vaate nihutamine"
-
-#~ msgid "Zoom in/out"
-#~ msgstr "Suurendamine/vähendamine"
-
-#~ msgid "Select object"
-#~ msgstr "Taevakeha valik"
-
-#~ msgid "Clear selection"
-#~ msgstr "Valiku eemaldamine"
-
-#~ msgid "Stellarium Help"
-#~ msgstr "Stellariumi abi"
-
-#~ msgid "Further Reading"
-#~ msgstr "Edasiseks lugemiseks"
-
-#~ msgid ""
-#~ "The following links are external web links, and will launch your web "
-#~ "browser:\n"
-#~ msgstr ""
-#~ "Järgnevad viidad on välised veebiviidad ja avavad sinu veebilehitseja:\n"
-
-#~ msgid "The Stellarium User Guide"
-#~ msgstr "Stellariumi kasutajajuhend"
-
-#~ msgid "{Frequently Asked Questions} about Stellarium.  Answers too."
-#~ msgstr "{Korduma kippuvad Stellariumi küsimused}. Ja vastused."
-
-#~ msgid ""
-#~ "{The Stellarium Wiki} - General information.  You can also find user-"
-#~ "contributed landscapes and scripts here."
-#~ msgstr ""
-#~ "{Stellariumi Wiki} - üldine teave. Siit leiab ka kasutajate tehtud maastikke "
-#~ "ja skripte."
-
-#~ msgid ""
-#~ "{Support ticket system} - if you need help using Stellarium, post a support "
-#~ "request here and we'll try to help."
-#~ msgstr ""
-#~ "{Kasutajatugi} - kui vajad Stellariumi kasutamisel abi, postita siia küsimus "
-#~ "ja me proovime aidata."
-
-#~ msgid "{Forums} - discuss Stellarium with other users."
-#~ msgstr "{Foorumid} - aruta Stellariumi teemasid teiste kasutajatega"
-
 #~ msgid "Nebulas background images"
 #~ msgstr "Udukogude taustapildid"
 
@@ -8257,15 +8291,6 @@ msgstr ""
 
 #~ msgid "Finished downloading all star catalogs!"
 #~ msgstr "Kõigi tähekataloogide allalaadimine lõpetati!"
-
-#~ msgid ""
-#~ "{Bug reporting and feature request system} - if something doesn't work "
-#~ "properly or is missing and is not listed in the tracker, you can open bug "
-#~ "reports here."
-#~ msgstr ""
-#~ "{Vigadest teavitamise ja uute võimaluste küsimise süsteem} - kui miski ei "
-#~ "tööta korralikult või puudub sootuks ja ei ole veel süsteemi kantud, siis "
-#~ "võid selle raporteerida."
 
 #~ msgid "Set Time Zone: "
 #~ msgstr "Määra ajavöönd: "

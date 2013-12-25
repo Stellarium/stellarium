@@ -10,15 +10,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ca\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-23 01:35+0700\n"
+"POT-Creation-Date: 2013-12-24 21:46+0700\n"
 "PO-Revision-Date: 2013-12-07 20:15+0000\n"
 "Last-Translator: Daniel Alomar i Claramonte <daniel.adastra@gmail.com>\n"
 "Language-Team: Català <ca@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-12-23 05:17+0000\n"
-"X-Generator: Launchpad (build 16872)\n"
+"X-Launchpad-Export-Date: 2013-12-25 05:20+0000\n"
+"X-Generator: Launchpad (build 16877)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:106 src/core/modules/StarMgr.cpp:336
 #: src/core/modules/GridLinesMgr.cpp:679 src/core/modules/LandscapeMgr.cpp:335
@@ -1383,7 +1383,59 @@ msgstr "Islam, Sadiq i Qureshi (2008, 2013)"
 msgid "Custom equation of %1T"
 msgstr "Equació personalitzada per %1T"
 
-#: src/gui/HelpDialog.cpp:161
+#: src/gui/HelpDialog.cpp:119
+msgid "Stellarium Help"
+msgstr "Ajuda de Stellarium"
+
+#: src/gui/HelpDialog.cpp:124 src/gui/HelpDialog.cpp:129
+msgid "Keys"
+msgstr "Tecles"
+
+#: src/gui/HelpDialog.cpp:126 src/gui/HelpDialog.cpp:198
+msgid "Further Reading"
+msgstr "Més lectura"
+
+#: src/gui/HelpDialog.cpp:133
+msgid "Pan view around the sky"
+msgstr "Vista panoràmica al voltant del cel"
+
+#: src/gui/HelpDialog.cpp:134
+msgid "Arrow keys & left mouse drag"
+msgstr "Tecles cursos i arrossegar amb el botó esquerra del ratolí"
+
+#: src/gui/HelpDialog.cpp:136
+msgid "Zoom in/out"
+msgstr "Apropar/Allunyar"
+
+#: src/gui/HelpDialog.cpp:138
+msgid "Page Up/Down"
+msgstr "Pàgina Amunt/Abaix"
+
+#: src/gui/HelpDialog.cpp:140
+msgid "CTRL + Up/Down"
+msgstr "CTRL + Amunt/Avall"
+
+#: src/gui/HelpDialog.cpp:143
+msgid "Select object"
+msgstr "Seleccioneu l'objecte"
+
+#: src/gui/HelpDialog.cpp:144
+msgid "Left click"
+msgstr "Botó esquerra"
+
+#: src/gui/HelpDialog.cpp:152
+msgid "Clear selection"
+msgstr "Neteja la selecció"
+
+#: src/gui/HelpDialog.cpp:153
+msgid "Right click"
+msgstr "Botó dret"
+
+#: src/gui/HelpDialog.cpp:155
+msgid "CTRL + Left click"
+msgstr "CTRL + Clic esquerra"
+
+#: src/gui/HelpDialog.cpp:160
 #, qt-format
 msgid ""
 "Below are listed only the actions with assigned keys. Further actions may be "
@@ -1392,44 +1444,95 @@ msgstr ""
 "A continuació s'enumeren només les accions amb les tecles assignades. Altres "
 "accions poden estar disponibles a través de la  \"%1\"."
 
-#: src/gui/HelpDialog.cpp:263
+#: src/gui/HelpDialog.cpp:199
+msgid ""
+"The following links are external web links, and will launch your web "
+"browser:\n"
+msgstr ""
+"Els enllaços següents son a planes web externes, i arrencaran el seu "
+"navegador:\n"
+
+#: src/gui/HelpDialog.cpp:200
+msgid "The Stellarium User Guide"
+msgstr "Guia d'usuari de Stellarium"
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:204
+msgid "{Frequently Asked Questions} about Stellarium.  Answers too."
+msgstr "{Preguntes Més Freqüents} sobre Stellarium. També respostes."
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:209
+msgid ""
+"{The Stellarium Wiki} - General information.  You can also find user-"
+"contributed landscapes and scripts here."
+msgstr ""
+"{El Wiki de Stellarium} - Informació general.  Aquí també pots trobar "
+"paisatges i scripts fetes per contribucions d'usuaris."
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:214
+msgid ""
+"{Support ticket system} - if you need help using Stellarium, post a support "
+"request here and we'll try to help."
+msgstr ""
+"{Sistema d'ajuda per tiquets} - si necessites ajuda de l'ús de Stellarium, "
+"aquí pots fer una petició i intentarem ajudar-te."
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:219
+msgid ""
+"{Bug reporting and feature request system} - if something doesn't work "
+"properly or is missing and is not listed in the tracker, you can open bug "
+"reports here."
+msgstr ""
+"{Informe d'errades i petició de noves funcionalitats} - Si alguna cosa no "
+"funciona correctament o no hi és i no està a la llista de temes pendents, "
+"pots obrir un informe d'errades aquí."
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:224
+msgid "{Forums} - discuss Stellarium with other users."
+msgstr "{Fòrums} - parla amb altres usuaris de Stellarium."
+
+#: src/gui/HelpDialog.cpp:262
 msgid "Developers"
 msgstr "Desenvolupadors"
 
-#: src/gui/HelpDialog.cpp:264
+#: src/gui/HelpDialog.cpp:263
 #, qt-format
 msgid "Project coordinator & lead developer: %1"
 msgstr "Coordinador del projecte y desenvolupador en cap: %1"
 
-#: src/gui/HelpDialog.cpp:265
+#: src/gui/HelpDialog.cpp:264
 #, qt-format
 msgid "Doc author/developer: %1"
 msgstr "Autor/desenvolupador documentació: %1"
 
-#: src/gui/HelpDialog.cpp:266 src/gui/HelpDialog.cpp:267
-#: src/gui/HelpDialog.cpp:268 src/gui/HelpDialog.cpp:269
-#: src/gui/HelpDialog.cpp:270 src/gui/HelpDialog.cpp:277
-#: src/gui/HelpDialog.cpp:278 src/gui/HelpDialog.cpp:279
-#: src/gui/HelpDialog.cpp:280
+#: src/gui/HelpDialog.cpp:265 src/gui/HelpDialog.cpp:266
+#: src/gui/HelpDialog.cpp:267 src/gui/HelpDialog.cpp:268
+#: src/gui/HelpDialog.cpp:269 src/gui/HelpDialog.cpp:276
+#: src/gui/HelpDialog.cpp:277 src/gui/HelpDialog.cpp:278
+#: src/gui/HelpDialog.cpp:279
 #, qt-format
 msgid "Developer: %1"
 msgstr "Desenvolupador: %1"
 
-#: src/gui/HelpDialog.cpp:271
+#: src/gui/HelpDialog.cpp:270
 #, qt-format
 msgid "Continuous Integration: %1"
 msgstr "Integració contínua: %1"
 
-#: src/gui/HelpDialog.cpp:272 src/gui/HelpDialog.cpp:273
+#: src/gui/HelpDialog.cpp:271 src/gui/HelpDialog.cpp:272
 #, qt-format
 msgid "Tester: %1"
 msgstr "Comprobador: %1"
 
-#: src/gui/HelpDialog.cpp:274
+#: src/gui/HelpDialog.cpp:273
 msgid "Past Developers"
 msgstr "Desenvolupadors anteriors"
 
-#: src/gui/HelpDialog.cpp:275
+#: src/gui/HelpDialog.cpp:274
 msgid ""
 "Several people have made significant contributions, but are no longer "
 "active. Their work has made a big difference to the project:"
@@ -1437,12 +1540,12 @@ msgstr ""
 "Vàries persones han fet aportacions notables, però ja no s'hi dediquen. La "
 "seva feina ha significat molt per al projecte:"
 
-#: src/gui/HelpDialog.cpp:276
+#: src/gui/HelpDialog.cpp:275
 #, qt-format
 msgid "Graphic/other designer: %1"
 msgstr "Dissenyadors gràfics/altres : %1"
 
-#: src/gui/HelpDialog.cpp:281 src/gui/HelpDialog.cpp:282
+#: src/gui/HelpDialog.cpp:280 src/gui/HelpDialog.cpp:281
 #, qt-format
 msgid "OSX Developer: %1"
 msgstr "Desenvolupador OSX: %1"
@@ -8548,54 +8651,6 @@ msgstr "Altitud Solar al crepuscle: 0 deg."
 #~ msgid "Correct for light travel time: "
 #~ msgstr "Correcció per viatge a la velocitat de la llum: "
 
-#~ msgid "Page Up/Down"
-#~ msgstr "Pàgina Amunt/Abaix"
-
-#~ msgid "Arrow keys & left mouse drag"
-#~ msgstr "Tecles cursos i arrossegar amb el botó esquerra del ratolí"
-
-#~ msgid "Further Reading"
-#~ msgstr "Més lectura"
-
-#~ msgid "Clear selection"
-#~ msgstr "Neteja la selecció"
-
-#~ msgid "Stellarium Help"
-#~ msgstr "Ajuda de Stellarium"
-
-#~ msgid "CTRL + Left click"
-#~ msgstr "CTRL + Clic esquerra"
-
-#~ msgid "CTRL + Up/Down"
-#~ msgstr "CTRL + Amunt/Avall"
-
-#~ msgid "Pan view around the sky"
-#~ msgstr "Vista panoràmica al voltant del cel"
-
-#~ msgid ""
-#~ "{Support ticket system} - if you need help using Stellarium, post a support "
-#~ "request here and we'll try to help."
-#~ msgstr ""
-#~ "{Sistema d'ajuda per tiquets} - si necessites ajuda de l'ús de Stellarium, "
-#~ "aquí pots fer una petició i intentarem ajudar-te."
-
-#~ msgid "{Forums} - discuss Stellarium with other users."
-#~ msgstr "{Fòrums} - parla amb altres usuaris de Stellarium."
-
-#~ msgid ""
-#~ "The following links are external web links, and will launch your web "
-#~ "browser:\n"
-#~ msgstr ""
-#~ "Els enllaços següents son a planes web externes, i arrencaran el seu "
-#~ "navegador:\n"
-
-#~ msgid ""
-#~ "{The Stellarium Wiki} - General information.  You can also find user-"
-#~ "contributed landscapes and scripts here."
-#~ msgstr ""
-#~ "{El Wiki de Stellarium} - Informació general.  Aquí també pots trobar "
-#~ "paisatges i scripts fetes per contribucions d'usuaris."
-
 #~ msgid "10"
 #~ msgstr "10"
 
@@ -8608,17 +8663,8 @@ msgstr "Altitud Solar al crepuscle: 0 deg."
 #~ msgid "Art brightness: "
 #~ msgstr "Brillantor Dibuixos: "
 
-#~ msgid "Keys"
-#~ msgstr "Tecles"
-
-#~ msgid "Right click"
-#~ msgstr "Botó dret"
-
 #~ msgid "Limiting Magnitude: "
 #~ msgstr "Limitador de Magnitud: "
-
-#~ msgid "Left click"
-#~ msgstr "Botó esquerra"
 
 #~ msgid "Form"
 #~ msgstr "Format"
@@ -8674,15 +8720,6 @@ msgstr "Altitud Solar al crepuscle: 0 deg."
 #~ msgid "Finished downloading all star catalogs!"
 #~ msgstr "Finalitzada la descàrrega de tots els catàlegs estel·lars!"
 
-#~ msgid ""
-#~ "{Bug reporting and feature request system} - if something doesn't work "
-#~ "properly or is missing and is not listed in the tracker, you can open bug "
-#~ "reports here."
-#~ msgstr ""
-#~ "{Informe d'errades i petició de noves funcionalitats} - Si alguna cosa no "
-#~ "funciona correctament o no hi és i no està a la llista de temes pendents, "
-#~ "pots obrir un informe d'errades aquí."
-
 #~ msgid "Scripts "
 #~ msgstr "Scripts "
 
@@ -8719,20 +8756,8 @@ msgstr "Altitud Solar al crepuscle: 0 deg."
 #~ msgid "Set UI Locale: "
 #~ msgstr "Estableix IU Local: "
 
-#~ msgid "Zoom in/out"
-#~ msgstr "Apropar/Allunyar"
-
 #~ msgid "When a Script is Running"
 #~ msgstr "Quan un script s'està executant"
-
-#~ msgid "Select object"
-#~ msgstr "Seleccioneu l'objecte"
-
-#~ msgid "The Stellarium User Guide"
-#~ msgstr "Guia d'usuari de Stellarium"
-
-#~ msgid "{Frequently Asked Questions} about Stellarium.  Answers too."
-#~ msgstr "{Preguntes Més Freqüents} sobre Stellarium. També respostes."
 
 #~ msgid "Plugin Key Bindings"
 #~ msgstr "Connector d'assignació de tecles"
