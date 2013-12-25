@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2013-12-23 01:35+0700\n"
+"POT-Creation-Date: 2013-12-24 21:46+0700\n"
 "PO-Revision-Date: 2013-11-13 06:22+0000\n"
 "Last-Translator: Jayasimha <Unknown>\n"
 "Language-Team: Kannada <kn@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-12-23 05:21+0000\n"
-"X-Generator: Launchpad (build 16872)\n"
+"X-Launchpad-Export-Date: 2013-12-25 05:24+0000\n"
+"X-Generator: Launchpad (build 16877)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:106 src/core/modules/StarMgr.cpp:336
 #: src/core/modules/GridLinesMgr.cpp:679 src/core/modules/LandscapeMgr.cpp:335
@@ -1254,62 +1254,163 @@ msgstr ""
 msgid "Custom equation of %1T"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:161
+#: src/gui/HelpDialog.cpp:119
+msgid "Stellarium Help"
+msgstr "ಸ್ಟೆಲ್ಲೇರಿಯಮ್ ಸಹಾಯ"
+
+#: src/gui/HelpDialog.cpp:124 src/gui/HelpDialog.cpp:129
+msgid "Keys"
+msgstr "ಕೀಲಿಗಳು"
+
+#: src/gui/HelpDialog.cpp:126 src/gui/HelpDialog.cpp:198
+msgid "Further Reading"
+msgstr "ಹೆಚ್ಚಿನ ವಿಷಯ"
+
+#: src/gui/HelpDialog.cpp:133
+msgid "Pan view around the sky"
+msgstr ""
+
+#: src/gui/HelpDialog.cpp:134
+msgid "Arrow keys & left mouse drag"
+msgstr ""
+
+#: src/gui/HelpDialog.cpp:136
+msgid "Zoom in/out"
+msgstr "ದೊಡ್ಡದಾಗಿಸು/ಚಿಕ್ಕದಾಗಿಸು"
+
+#: src/gui/HelpDialog.cpp:138
+msgid "Page Up/Down"
+msgstr ""
+
+#: src/gui/HelpDialog.cpp:140
+msgid "CTRL + Up/Down"
+msgstr ""
+
+#: src/gui/HelpDialog.cpp:143
+msgid "Select object"
+msgstr "ವಸ್ತುವಿನ ಆಯ್ಕೆ"
+
+#: src/gui/HelpDialog.cpp:144
+msgid "Left click"
+msgstr ""
+
+#: src/gui/HelpDialog.cpp:152
+msgid "Clear selection"
+msgstr "ಆಯ್ಕೆಯನ್ನು ತೆಗೆದು ಹಾಕು"
+
+#: src/gui/HelpDialog.cpp:153
+msgid "Right click"
+msgstr ""
+
+#: src/gui/HelpDialog.cpp:155
+msgid "CTRL + Left click"
+msgstr ""
+
+#: src/gui/HelpDialog.cpp:160
 #, qt-format
 msgid ""
 "Below are listed only the actions with assigned keys. Further actions may be "
 "available via the \"%1\" button."
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:263
+#: src/gui/HelpDialog.cpp:199
+msgid ""
+"The following links are external web links, and will launch your web "
+"browser:\n"
+msgstr ""
+
+#: src/gui/HelpDialog.cpp:200
+msgid "The Stellarium User Guide"
+msgstr "ಸ್ಟೆಲ್ಲೇರಿಯಂ ಬಳಕೆದಾರರ ಕೈಪಿಡಿ"
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:204
+msgid "{Frequently Asked Questions} about Stellarium.  Answers too."
+msgstr "ಸ್ಟೆಲ್ಲೇರಿಯಂ ಬಗೆಗೆ {ಅನೇಕ ಬಾರಿ ಕೇಳಿದ ಪ್ರಶ್ನೆಗಳು}. ಉತ್ತರದ ಜೊತೆಗೆ."
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:209
+msgid ""
+"{The Stellarium Wiki} - General information.  You can also find user-"
+"contributed landscapes and scripts here."
+msgstr ""
+"{ಸ್ಟೆಲ್ಲೇರಿಯಂ ವಿಕಿ} - ಸಾಮಾನ್ಯ ಮಾಹಿತಿ. ಹಾಗೆಯೇ, ಬಳಕೆದಾರರು ನೀಡಿರುವ ಭೂದೃಶ್ಯ "
+"ಮತ್ತು ಸ್ಕ್ರಿಪ್ಟ್ ಗಳನ್ನು ನೀವು ಇಲ್ಲಿಂದ ಪಡೆಯಬಹುದು."
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:214
+msgid ""
+"{Support ticket system} - if you need help using Stellarium, post a support "
+"request here and we'll try to help."
+msgstr ""
+"{ನೆರವಿನ ಚೀಟಿಯ ವ್ಯವಸ್ಥೆ} - ಸ್ಟೆಲ್ಲೇರಿಯಂ ಬಳಸುವಲ್ಲಿ ನಿಮಗೇನಾದರೂ ಸಹಾಯ ಬೇಕಾದಲ್ಲಿ, "
+"ನೆರವು ಕೋರಿಕೆಯ ಚೀಟಿಯನ್ನು ಇಲ್ಲಿ ಬರೆಯಿರಿ. ನಾವು ಸಹಾಯಮಾಡಲು ಪ್ರಯತ್ನಿಸುತ್ತೇವೆ."
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:219
+msgid ""
+"{Bug reporting and feature request system} - if something doesn't work "
+"properly or is missing and is not listed in the tracker, you can open bug "
+"reports here."
+msgstr ""
+"{ತಪ್ಪುಗಳನ್ನು ವರದಿ ಮಾಡುವ ಮತ್ತು ಹೊಸ ಗುಣಲಕ್ಷಣಗಳ ಕೋರಿಕೆಯ ವ್ಯವಸ್ಥೆ} - ಏನಾದರು "
+"ಸರಿಯಾಗಿ ಕೆಲಸ ಮಾಡದಿದ್ದಲ್ಲಿ ಅಥವಾ ಕಾನೆಯಾಗಿದ್ದಲ್ಲಿ ಮತ್ತು ಟ್ರ್ಯಾಕರ್ ಪಟ್ಟಿಯಲ್ಲಿ "
+"ಇಲ್ಲದಿದ್ದಲ್ಲಿ, ನೀವು ಈ ಥಪ್ಪುಗಳನ್ನು ವರಿದಿಮಾದಬಹುದು."
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:224
+msgid "{Forums} - discuss Stellarium with other users."
+msgstr "{ವಿಚಾರ ವೇದಿಕೆ} - ಇತರ ಬಳಕೆದಾರರ ಜೊತೆ ಸ್ಟೆಲ್ಲೇರಿಯಂ ಬಗ್ಗೆ ಚರ್ಚಿಸಿ."
+
+#: src/gui/HelpDialog.cpp:262
 msgid "Developers"
 msgstr "ನಿಮಿ೯ಸಿದವರು"
 
-#: src/gui/HelpDialog.cpp:264
+#: src/gui/HelpDialog.cpp:263
 #, qt-format
 msgid "Project coordinator & lead developer: %1"
 msgstr "ಯೋಜನಾ ಸಂಯೋಜಕ ಮತ್ತು ಮುಖ್ಯ ನಿರ್ಮಾಣಕರ್ತ: %1"
 
-#: src/gui/HelpDialog.cpp:265
+#: src/gui/HelpDialog.cpp:264
 #, qt-format
 msgid "Doc author/developer: %1"
 msgstr "ಬರವಣಿಗೆಗಳ ಲೇಖಕ/ನಿರ್ಮಾಣಕರ್ತ: %1"
 
-#: src/gui/HelpDialog.cpp:266 src/gui/HelpDialog.cpp:267
-#: src/gui/HelpDialog.cpp:268 src/gui/HelpDialog.cpp:269
-#: src/gui/HelpDialog.cpp:270 src/gui/HelpDialog.cpp:277
-#: src/gui/HelpDialog.cpp:278 src/gui/HelpDialog.cpp:279
-#: src/gui/HelpDialog.cpp:280
+#: src/gui/HelpDialog.cpp:265 src/gui/HelpDialog.cpp:266
+#: src/gui/HelpDialog.cpp:267 src/gui/HelpDialog.cpp:268
+#: src/gui/HelpDialog.cpp:269 src/gui/HelpDialog.cpp:276
+#: src/gui/HelpDialog.cpp:277 src/gui/HelpDialog.cpp:278
+#: src/gui/HelpDialog.cpp:279
 #, qt-format
 msgid "Developer: %1"
 msgstr "ನಿರ್ಮಾಣಕರ್ತ: %1"
 
-#: src/gui/HelpDialog.cpp:271
+#: src/gui/HelpDialog.cpp:270
 #, qt-format
 msgid "Continuous Integration: %1"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:272 src/gui/HelpDialog.cpp:273
+#: src/gui/HelpDialog.cpp:271 src/gui/HelpDialog.cpp:272
 #, qt-format
 msgid "Tester: %1"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:274
+#: src/gui/HelpDialog.cpp:273
 msgid "Past Developers"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:275
+#: src/gui/HelpDialog.cpp:274
 msgid ""
 "Several people have made significant contributions, but are no longer "
 "active. Their work has made a big difference to the project:"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:276
+#: src/gui/HelpDialog.cpp:275
 #, qt-format
 msgid "Graphic/other designer: %1"
 msgstr "ವರ್ಣಚಿತ್ರ/ಮತ್ತಿತರ ವಿನ್ಯಾಸಕಾರ: %1"
 
-#: src/gui/HelpDialog.cpp:281 src/gui/HelpDialog.cpp:282
+#: src/gui/HelpDialog.cpp:280 src/gui/HelpDialog.cpp:281
 #, qt-format
 msgid "OSX Developer: %1"
 msgstr "OSX ನಿರ್ಮಾಣಕರ್ತರು: %1"
@@ -7990,24 +8091,6 @@ msgstr ""
 #~ msgid "Set UI Locale: "
 #~ msgstr "ಭಾಷಾ ಆಯ್ಕೆ: "
 
-#~ msgid "Zoom in/out"
-#~ msgstr "ದೊಡ್ಡದಾಗಿಸು/ಚಿಕ್ಕದಾಗಿಸು"
-
-#~ msgid "Select object"
-#~ msgstr "ವಸ್ತುವಿನ ಆಯ್ಕೆ"
-
-#~ msgid "Clear selection"
-#~ msgstr "ಆಯ್ಕೆಯನ್ನು ತೆಗೆದು ಹಾಕು"
-
-#~ msgid "Stellarium Help"
-#~ msgstr "ಸ್ಟೆಲ್ಲೇರಿಯಮ್ ಸಹಾಯ"
-
-#~ msgid "Keys"
-#~ msgstr "ಕೀಲಿಗಳು"
-
-#~ msgid "Further Reading"
-#~ msgstr "ಹೆಚ್ಚಿನ ವಿಷಯ"
-
 #~ msgid "Nebulas"
 #~ msgstr "ನೀಹಾರಿಕೆಗಳು"
 
@@ -8055,38 +8138,6 @@ msgstr ""
 
 #~ msgid "General "
 #~ msgstr "ಸಾಮಾನ್ಯ "
-
-#~ msgid ""
-#~ "{The Stellarium Wiki} - General information.  You can also find user-"
-#~ "contributed landscapes and scripts here."
-#~ msgstr ""
-#~ "{ಸ್ಟೆಲ್ಲೇರಿಯಂ ವಿಕಿ} - ಸಾಮಾನ್ಯ ಮಾಹಿತಿ. ಹಾಗೆಯೇ, ಬಳಕೆದಾರರು ನೀಡಿರುವ ಭೂದೃಶ್ಯ "
-#~ "ಮತ್ತು ಸ್ಕ್ರಿಪ್ಟ್ ಗಳನ್ನು ನೀವು ಇಲ್ಲಿಂದ ಪಡೆಯಬಹುದು."
-
-#~ msgid "The Stellarium User Guide"
-#~ msgstr "ಸ್ಟೆಲ್ಲೇರಿಯಂ ಬಳಕೆದಾರರ ಕೈಪಿಡಿ"
-
-#~ msgid ""
-#~ "{Support ticket system} - if you need help using Stellarium, post a support "
-#~ "request here and we'll try to help."
-#~ msgstr ""
-#~ "{ನೆರವಿನ ಚೀಟಿಯ ವ್ಯವಸ್ಥೆ} - ಸ್ಟೆಲ್ಲೇರಿಯಂ ಬಳಸುವಲ್ಲಿ ನಿಮಗೇನಾದರೂ ಸಹಾಯ ಬೇಕಾದಲ್ಲಿ, "
-#~ "ನೆರವು ಕೋರಿಕೆಯ ಚೀಟಿಯನ್ನು ಇಲ್ಲಿ ಬರೆಯಿರಿ. ನಾವು ಸಹಾಯಮಾಡಲು ಪ್ರಯತ್ನಿಸುತ್ತೇವೆ."
-
-#~ msgid "{Frequently Asked Questions} about Stellarium.  Answers too."
-#~ msgstr "ಸ್ಟೆಲ್ಲೇರಿಯಂ ಬಗೆಗೆ {ಅನೇಕ ಬಾರಿ ಕೇಳಿದ ಪ್ರಶ್ನೆಗಳು}. ಉತ್ತರದ ಜೊತೆಗೆ."
-
-#~ msgid ""
-#~ "{Bug reporting and feature request system} - if something doesn't work "
-#~ "properly or is missing and is not listed in the tracker, you can open bug "
-#~ "reports here."
-#~ msgstr ""
-#~ "{ತಪ್ಪುಗಳನ್ನು ವರದಿ ಮಾಡುವ ಮತ್ತು ಹೊಸ ಗುಣಲಕ್ಷಣಗಳ ಕೋರಿಕೆಯ ವ್ಯವಸ್ಥೆ} - ಏನಾದರು "
-#~ "ಸರಿಯಾಗಿ ಕೆಲಸ ಮಾಡದಿದ್ದಲ್ಲಿ ಅಥವಾ ಕಾನೆಯಾಗಿದ್ದಲ್ಲಿ ಮತ್ತು ಟ್ರ್ಯಾಕರ್ ಪಟ್ಟಿಯಲ್ಲಿ "
-#~ "ಇಲ್ಲದಿದ್ದಲ್ಲಿ, ನೀವು ಈ ಥಪ್ಪುಗಳನ್ನು ವರಿದಿಮಾದಬಹುದು."
-
-#~ msgid "{Forums} - discuss Stellarium with other users."
-#~ msgstr "{ವಿಚಾರ ವೇದಿಕೆ} - ಇತರ ಬಳಕೆದಾರರ ಜೊತೆ ಸ್ಟೆಲ್ಲೇರಿಯಂ ಬಗ್ಗೆ ಚರ್ಚಿಸಿ."
 
 #~ msgid "Planets labels"
 #~ msgstr "ಗ್ರಹಗಳ ಹೆಸರು"

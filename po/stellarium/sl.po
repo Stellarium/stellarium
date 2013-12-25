@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-23 01:35+0700\n"
+"POT-Creation-Date: 2013-12-24 21:46+0700\n"
 "PO-Revision-Date: 2010-11-30 12:06+0000\n"
 "Last-Translator: Alexander Wolf <Unknown>\n"
 "Language-Team: Slovenian <sl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-12-23 05:25+0000\n"
-"X-Generator: Launchpad (build 16872)\n"
+"X-Launchpad-Export-Date: 2013-12-25 05:28+0000\n"
+"X-Generator: Launchpad (build 16877)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:106 src/core/modules/StarMgr.cpp:336
 #: src/core/modules/GridLinesMgr.cpp:679 src/core/modules/LandscapeMgr.cpp:335
@@ -1284,62 +1284,163 @@ msgstr ""
 msgid "Custom equation of %1T"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:161
+#: src/gui/HelpDialog.cpp:119
+msgid "Stellarium Help"
+msgstr "Pomoč"
+
+#: src/gui/HelpDialog.cpp:124 src/gui/HelpDialog.cpp:129
+msgid "Keys"
+msgstr "Tipke"
+
+#: src/gui/HelpDialog.cpp:126 src/gui/HelpDialog.cpp:198
+msgid "Further Reading"
+msgstr "Nadaljnje branje"
+
+#: src/gui/HelpDialog.cpp:133
+msgid "Pan view around the sky"
+msgstr "Pomikaj pogled po nebu"
+
+#: src/gui/HelpDialog.cpp:134
+msgid "Arrow keys & left mouse drag"
+msgstr "Tipke s puščicami in povlek z levim gumbom miške"
+
+#: src/gui/HelpDialog.cpp:136
+msgid "Zoom in/out"
+msgstr "Spremeni povečavo prikaza"
+
+#: src/gui/HelpDialog.cpp:138
+msgid "Page Up/Down"
+msgstr "Tipki Page Up/Down"
+
+#: src/gui/HelpDialog.cpp:140
+msgid "CTRL + Up/Down"
+msgstr "Tipke CTRL + Up/Down"
+
+#: src/gui/HelpDialog.cpp:143
+msgid "Select object"
+msgstr "Izberi objekt"
+
+#: src/gui/HelpDialog.cpp:144
+msgid "Left click"
+msgstr "Levi klik"
+
+#: src/gui/HelpDialog.cpp:152
+msgid "Clear selection"
+msgstr "Prekliči izbor"
+
+#: src/gui/HelpDialog.cpp:153
+msgid "Right click"
+msgstr "Desni klik"
+
+#: src/gui/HelpDialog.cpp:155
+msgid "CTRL + Left click"
+msgstr "CTRL + levi klik"
+
+#: src/gui/HelpDialog.cpp:160
 #, qt-format
 msgid ""
 "Below are listed only the actions with assigned keys. Further actions may be "
 "available via the \"%1\" button."
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:263
+#: src/gui/HelpDialog.cpp:199
+msgid ""
+"The following links are external web links, and will launch your web "
+"browser:\n"
+msgstr "Naslednje povezave so spletne in bodo zagnale spletni brskalnik:\n"
+
+#: src/gui/HelpDialog.cpp:200
+msgid "The Stellarium User Guide"
+msgstr "Uporabniški priročnik za Stellarium"
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:204
+msgid "{Frequently Asked Questions} about Stellarium.  Answers too."
+msgstr "{Pogosta vprašanja} o programu Stellarium. Odgovori tudi."
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:209
+msgid ""
+"{The Stellarium Wiki} - General information.  You can also find user-"
+"contributed landscapes and scripts here."
+msgstr ""
+"{Wiki za Stellarium} - Splošne informacije. Tu najdeš ozadja in programe, ki "
+"so jih prispevali uporabniki."
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:214
+msgid ""
+"{Support ticket system} - if you need help using Stellarium, post a support "
+"request here and we'll try to help."
+msgstr ""
+"{Sistem za podporo} - če potrebuješ podporo pri uporabi programa Stellarium, "
+"nam pošlji zahtevek za strokovno pomoč in poskušali bomo pomagati."
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:219
+msgid ""
+"{Bug reporting and feature request system} - if something doesn't work "
+"properly or is missing and is not listed in the tracker, you can open bug "
+"reports here."
+msgstr ""
+"{Sistem za prijavo napak in predlogov} - če kaj pogrešate ali ne deluje "
+"pravilno, in tega še ni zabeleženega v tem sistemu, nam to lahko prijavite "
+"tu."
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:224
+msgid "{Forums} - discuss Stellarium with other users."
+msgstr "{Forumi} - razpravljaj o programu Stellarium z ostalimi uporabniki."
+
+#: src/gui/HelpDialog.cpp:262
 msgid "Developers"
 msgstr "Razvijalci"
 
-#: src/gui/HelpDialog.cpp:264
+#: src/gui/HelpDialog.cpp:263
 #, qt-format
 msgid "Project coordinator & lead developer: %1"
 msgstr "Koordinator projekta in glavni razvijalec: %1"
 
-#: src/gui/HelpDialog.cpp:265
+#: src/gui/HelpDialog.cpp:264
 #, qt-format
 msgid "Doc author/developer: %1"
 msgstr "Avtor/razvijalec dokumentacije: %1"
 
-#: src/gui/HelpDialog.cpp:266 src/gui/HelpDialog.cpp:267
-#: src/gui/HelpDialog.cpp:268 src/gui/HelpDialog.cpp:269
-#: src/gui/HelpDialog.cpp:270 src/gui/HelpDialog.cpp:277
-#: src/gui/HelpDialog.cpp:278 src/gui/HelpDialog.cpp:279
-#: src/gui/HelpDialog.cpp:280
+#: src/gui/HelpDialog.cpp:265 src/gui/HelpDialog.cpp:266
+#: src/gui/HelpDialog.cpp:267 src/gui/HelpDialog.cpp:268
+#: src/gui/HelpDialog.cpp:269 src/gui/HelpDialog.cpp:276
+#: src/gui/HelpDialog.cpp:277 src/gui/HelpDialog.cpp:278
+#: src/gui/HelpDialog.cpp:279
 #, qt-format
 msgid "Developer: %1"
 msgstr "Razvijalec: %1"
 
-#: src/gui/HelpDialog.cpp:271
+#: src/gui/HelpDialog.cpp:270
 #, qt-format
 msgid "Continuous Integration: %1"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:272 src/gui/HelpDialog.cpp:273
+#: src/gui/HelpDialog.cpp:271 src/gui/HelpDialog.cpp:272
 #, qt-format
 msgid "Tester: %1"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:274
+#: src/gui/HelpDialog.cpp:273
 msgid "Past Developers"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:275
+#: src/gui/HelpDialog.cpp:274
 msgid ""
 "Several people have made significant contributions, but are no longer "
 "active. Their work has made a big difference to the project:"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:276
+#: src/gui/HelpDialog.cpp:275
 #, qt-format
 msgid "Graphic/other designer: %1"
 msgstr "Načrtovalec za grafiko in ostalo: %1"
 
-#: src/gui/HelpDialog.cpp:281 src/gui/HelpDialog.cpp:282
+#: src/gui/HelpDialog.cpp:280 src/gui/HelpDialog.cpp:281
 #, qt-format
 msgid "OSX Developer: %1"
 msgstr "Razvijalec za Mac OS X: %1"
@@ -7988,12 +8089,6 @@ msgstr ""
 #~ msgid "Update me via Internet: "
 #~ msgstr "Posodobitev prek spleta: "
 
-#~ msgid "Keys"
-#~ msgstr "Tipke"
-
-#~ msgid "Further Reading"
-#~ msgstr "Nadaljnje branje"
-
 #, qt-format
 #~ msgid "Magnitude: <b>%1</b> (B-V: %2)"
 #~ msgstr "Magnituda: <b>%1</b> (B-V: %2)"
@@ -8064,12 +8159,6 @@ msgstr ""
 #~ msgid "Save Current Configuration as Default: "
 #~ msgstr "Prevzemi trenutne nastavitve "
 
-#~ msgid "Clear selection"
-#~ msgstr "Prekliči izbor"
-
-#~ msgid "Stellarium Help"
-#~ msgstr "Pomoč"
-
 #~ msgid "Limiting Magnitude: "
 #~ msgstr "Mejna magnituda: "
 
@@ -8084,9 +8173,6 @@ msgstr ""
 
 #~ msgid "Sidereal"
 #~ msgstr "Zvezdni"
-
-#~ msgid "Select object"
-#~ msgstr "Izberi objekt"
 
 #~ msgid "Object Sizing Rule: "
 #~ msgstr "Pravilo za velikost objekta: "
@@ -8109,15 +8195,6 @@ msgstr ""
 #~ msgid "Maximum Magnitude to Label: "
 #~ msgstr "Mejna magnituda za označevanje: "
 
-#~ msgid "Right click"
-#~ msgstr "Desni klik"
-
-#~ msgid "CTRL + Left click"
-#~ msgstr "CTRL + levi klik"
-
-#~ msgid "Left click"
-#~ msgstr "Levi klik"
-
 #~ msgid "Light Pollution Luminance: "
 #~ msgstr "Stopnja svetlobnega onesnaženja "
 
@@ -8128,22 +8205,11 @@ msgstr ""
 #~ msgid "Distance: %1AU"
 #~ msgstr "Oddaljenost: %1 a.e."
 
-#~ msgid "Zoom in/out"
-#~ msgstr "Spremeni povečavo prikaza"
-
 #~ msgid "Cursor Timeout: "
 #~ msgstr "Potekla je časovna omejitev za kazalček "
 
 #~ msgid "Mouse cursor timeout (seconds):"
 #~ msgstr "Časovna omejitev za kazalček (sekunde):"
-
-#~ msgid "The Stellarium User Guide"
-#~ msgstr "Uporabniški priročnik za Stellarium"
-
-#~ msgid ""
-#~ "The following links are external web links, and will launch your web "
-#~ "browser:\n"
-#~ msgstr "Naslednje povezave so spletne in bodo zagnale spletni brskalnik:\n"
 
 #~ msgid "Art brightness: "
 #~ msgstr "Svetlost risb: "
@@ -8174,9 +8240,6 @@ msgstr ""
 
 #~ msgid "Maximum Nebula Magnitude to Label: "
 #~ msgstr "Mejna magnituda za označevanje meglic: "
-
-#~ msgid "Pan view around the sky"
-#~ msgstr "Pomikaj pogled po nebu"
 
 #~ msgid "Time Display Format: "
 #~ msgstr "Oblika prikaza časa: "
@@ -8235,20 +8298,11 @@ msgstr ""
 #~ msgid "Arrow down to load list."
 #~ msgstr "Za nalaganje seznama pritisni puščico dol"
 
-#~ msgid "Arrow keys & left mouse drag"
-#~ msgstr "Tipke s puščicami in povlek z levim gumbom miške"
-
 #~ msgid "Constellation Art Intensity"
 #~ msgstr "Svetlost risbe ozvezdij"
 
 #~ msgid "Shut Down: "
 #~ msgstr "Zaključi: "
-
-#~ msgid "CTRL + Up/Down"
-#~ msgstr "Tipke CTRL + Up/Down"
-
-#~ msgid "Page Up/Down"
-#~ msgstr "Tipki Page Up/Down"
 
 #~ msgid "Sky Culture: "
 #~ msgstr "Izročila narodov: "
@@ -8274,34 +8328,5 @@ msgstr ""
 #~ msgid "Other"
 #~ msgstr "Ostalo"
 
-#~ msgid ""
-#~ "{The Stellarium Wiki} - General information.  You can also find user-"
-#~ "contributed landscapes and scripts here."
-#~ msgstr ""
-#~ "{Wiki za Stellarium} - Splošne informacije. Tu najdeš ozadja in programe, ki "
-#~ "so jih prispevali uporabniki."
-
-#~ msgid "{Frequently Asked Questions} about Stellarium.  Answers too."
-#~ msgstr "{Pogosta vprašanja} o programu Stellarium. Odgovori tudi."
-
-#~ msgid ""
-#~ "{Support ticket system} - if you need help using Stellarium, post a support "
-#~ "request here and we'll try to help."
-#~ msgstr ""
-#~ "{Sistem za podporo} - če potrebuješ podporo pri uporabi programa Stellarium, "
-#~ "nam pošlji zahtevek za strokovno pomoč in poskušali bomo pomagati."
-
-#~ msgid "{Forums} - discuss Stellarium with other users."
-#~ msgstr "{Forumi} - razpravljaj o programu Stellarium z ostalimi uporabniki."
-
 #~ msgid "Finished downloading all star catalogs!"
 #~ msgstr "Prenos vseh zvezdnih katalogov je končan!"
-
-#~ msgid ""
-#~ "{Bug reporting and feature request system} - if something doesn't work "
-#~ "properly or is missing and is not listed in the tracker, you can open bug "
-#~ "reports here."
-#~ msgstr ""
-#~ "{Sistem za prijavo napak in predlogov} - če kaj pogrešate ali ne deluje "
-#~ "pravilno, in tega še ni zabeleženega v tem sistemu, nam to lahko prijavite "
-#~ "tu."

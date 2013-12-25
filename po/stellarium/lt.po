@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-23 01:35+0700\n"
+"POT-Creation-Date: 2013-12-24 21:46+0700\n"
 "PO-Revision-Date: 2013-08-27 21:37+0000\n"
 "Last-Translator: Ieva <emailas@gmail.com>\n"
 "Language-Team: Lithuanian <lt@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-12-23 05:22+0000\n"
-"X-Generator: Launchpad (build 16872)\n"
+"X-Launchpad-Export-Date: 2013-12-25 05:25+0000\n"
+"X-Generator: Launchpad (build 16877)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:106 src/core/modules/StarMgr.cpp:336
 #: src/core/modules/GridLinesMgr.cpp:679 src/core/modules/LandscapeMgr.cpp:335
@@ -1286,7 +1286,59 @@ msgstr ""
 msgid "Custom equation of %1T"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:161
+#: src/gui/HelpDialog.cpp:119
+msgid "Stellarium Help"
+msgstr "Stellarium žinynas"
+
+#: src/gui/HelpDialog.cpp:124 src/gui/HelpDialog.cpp:129
+msgid "Keys"
+msgstr "Klavišai"
+
+#: src/gui/HelpDialog.cpp:126 src/gui/HelpDialog.cpp:198
+msgid "Further Reading"
+msgstr "Tolesniam skaitymui"
+
+#: src/gui/HelpDialog.cpp:133
+msgid "Pan view around the sky"
+msgstr "Slinkti vaizdą aplink dangų"
+
+#: src/gui/HelpDialog.cpp:134
+msgid "Arrow keys & left mouse drag"
+msgstr "Rodyklių klavišai ir slinkimas kairiu pelės klavišu"
+
+#: src/gui/HelpDialog.cpp:136
+msgid "Zoom in/out"
+msgstr "Keisti mastelį"
+
+#: src/gui/HelpDialog.cpp:138
+msgid "Page Up/Down"
+msgstr "Ankstesnio/tolesnio puslapio klavišas"
+
+#: src/gui/HelpDialog.cpp:140
+msgid "CTRL + Up/Down"
+msgstr "Ctrl + aukštyn/žemyn"
+
+#: src/gui/HelpDialog.cpp:143
+msgid "Select object"
+msgstr "Parinkti objektą"
+
+#: src/gui/HelpDialog.cpp:144
+msgid "Left click"
+msgstr "Spragtelėti kairiu pelės klavišu"
+
+#: src/gui/HelpDialog.cpp:152
+msgid "Clear selection"
+msgstr "Išvalyti parinkimą"
+
+#: src/gui/HelpDialog.cpp:153
+msgid "Right click"
+msgstr "Spragtelėti dešiniu pelės klavišu"
+
+#: src/gui/HelpDialog.cpp:155
+msgid "CTRL + Left click"
+msgstr "Ctrl + kairiojo pelės klavišo spustelėjimas"
+
+#: src/gui/HelpDialog.cpp:160
 #, qt-format
 msgid ""
 "Below are listed only the actions with assigned keys. Further actions may be "
@@ -1295,55 +1347,106 @@ msgstr ""
 "Žemiau išvardinti tik veiksmai su priskirtais sparčiaisiais klavišais. Kiti "
 "veiksmai gali būti pasiekiami klavišu \"%1\"."
 
-#: src/gui/HelpDialog.cpp:263
+#: src/gui/HelpDialog.cpp:199
+msgid ""
+"The following links are external web links, and will launch your web "
+"browser:\n"
+msgstr ""
+"Šios nuorodos veda į interneto svetaines ir bus atidarytos interneto "
+"naršyklėje:\n"
+
+#: src/gui/HelpDialog.cpp:200
+msgid "The Stellarium User Guide"
+msgstr "Stellarium vartotojo žinynas"
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:204
+msgid "{Frequently Asked Questions} about Stellarium.  Answers too."
+msgstr "{Dažniausiai užduodami klausimai} apie Stellarium.  Su atsakymais."
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:209
+msgid ""
+"{The Stellarium Wiki} - General information.  You can also find user-"
+"contributed landscapes and scripts here."
+msgstr ""
+"{The Stellarium Wiki} - Bendra informacija. Čia galite rasti ir vartotojų "
+"sukurtas vietoves bei scenarijus."
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:214
+msgid ""
+"{Support ticket system} - if you need help using Stellarium, post a support "
+"request here and we'll try to help."
+msgstr ""
+"{Support ticket system} - jei Jums reikalinga pagalba naudojantis "
+"Stellarium, parašykite pagalbos prašymą čia ir mes pabandysime padėti."
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:219
+msgid ""
+"{Bug reporting and feature request system} - if something doesn't work "
+"properly or is missing and is not listed in the tracker, you can open bug "
+"reports here."
+msgstr ""
+"{Pranešimų apie klaidas ir naujų funkcijų pageidavimo sistema} - jei kažkas "
+"veikia klaidingai ar kažko trūksta ir tai nepridėta klaidų sąraše, apie tai "
+"galite pranešti čia."
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:224
+msgid "{Forums} - discuss Stellarium with other users."
+msgstr "{Forumai} - aptarkite Stellarium su kitais vartotojais."
+
+#: src/gui/HelpDialog.cpp:262
 msgid "Developers"
 msgstr "Programuotojai"
 
-#: src/gui/HelpDialog.cpp:264
+#: src/gui/HelpDialog.cpp:263
 #, qt-format
 msgid "Project coordinator & lead developer: %1"
 msgstr "Projekto koordinatorius ir pagrindinis programuotojas: %1"
 
-#: src/gui/HelpDialog.cpp:265
+#: src/gui/HelpDialog.cpp:264
 #, qt-format
 msgid "Doc author/developer: %1"
 msgstr "Žinyno autorius/programuotojas: %1"
 
-#: src/gui/HelpDialog.cpp:266 src/gui/HelpDialog.cpp:267
-#: src/gui/HelpDialog.cpp:268 src/gui/HelpDialog.cpp:269
-#: src/gui/HelpDialog.cpp:270 src/gui/HelpDialog.cpp:277
-#: src/gui/HelpDialog.cpp:278 src/gui/HelpDialog.cpp:279
-#: src/gui/HelpDialog.cpp:280
+#: src/gui/HelpDialog.cpp:265 src/gui/HelpDialog.cpp:266
+#: src/gui/HelpDialog.cpp:267 src/gui/HelpDialog.cpp:268
+#: src/gui/HelpDialog.cpp:269 src/gui/HelpDialog.cpp:276
+#: src/gui/HelpDialog.cpp:277 src/gui/HelpDialog.cpp:278
+#: src/gui/HelpDialog.cpp:279
 #, qt-format
 msgid "Developer: %1"
 msgstr "Programuotojas: %1"
 
-#: src/gui/HelpDialog.cpp:271
+#: src/gui/HelpDialog.cpp:270
 #, qt-format
 msgid "Continuous Integration: %1"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:272 src/gui/HelpDialog.cpp:273
+#: src/gui/HelpDialog.cpp:271 src/gui/HelpDialog.cpp:272
 #, qt-format
 msgid "Tester: %1"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:274
+#: src/gui/HelpDialog.cpp:273
 msgid "Past Developers"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:275
+#: src/gui/HelpDialog.cpp:274
 msgid ""
 "Several people have made significant contributions, but are no longer "
 "active. Their work has made a big difference to the project:"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:276
+#: src/gui/HelpDialog.cpp:275
 #, qt-format
 msgid "Graphic/other designer: %1"
 msgstr "Grafikos/kt. dizaineris: %1"
 
-#: src/gui/HelpDialog.cpp:281 src/gui/HelpDialog.cpp:282
+#: src/gui/HelpDialog.cpp:280 src/gui/HelpDialog.cpp:281
 #, qt-format
 msgid "OSX Developer: %1"
 msgstr "OSX programuotojas: %1"
@@ -8179,17 +8282,8 @@ msgstr ""
 #~ msgid "USB Script: "
 #~ msgstr "USB Scenarijus: "
 
-#~ msgid "Keys"
-#~ msgstr "Klavišai"
-
 #~ msgid "Limiting Magnitude: "
 #~ msgstr "Ribojantis ryškis: "
-
-#~ msgid "Right click"
-#~ msgstr "Spragtelėti dešiniu pelės klavišu"
-
-#~ msgid "Left click"
-#~ msgstr "Spragtelėti kairiu pelės klavišu"
 
 #~ msgid "Nebulas"
 #~ msgstr "Ūkai"
@@ -8207,34 +8301,6 @@ msgstr ""
 #, qt-format
 #~ msgid "Magnitude: <b>%1</b> (B-V: %2)"
 #~ msgstr "Ryškis: <b>%1</b> (B-V: %2)"
-
-#~ msgid "Zoom in/out"
-#~ msgstr "Keisti mastelį"
-
-#~ msgid "Select object"
-#~ msgstr "Parinkti objektą"
-
-#~ msgid "Clear selection"
-#~ msgstr "Išvalyti parinkimą"
-
-#~ msgid "Stellarium Help"
-#~ msgstr "Stellarium žinynas"
-
-#~ msgid "Pan view around the sky"
-#~ msgstr "Slinkti vaizdą aplink dangų"
-
-#~ msgid ""
-#~ "The following links are external web links, and will launch your web "
-#~ "browser:\n"
-#~ msgstr ""
-#~ "Šios nuorodos veda į interneto svetaines ir bus atidarytos interneto "
-#~ "naršyklėje:\n"
-
-#~ msgid "{Frequently Asked Questions} about Stellarium.  Answers too."
-#~ msgstr "{Dažniausiai užduodami klausimai} apie Stellarium.  Su atsakymais."
-
-#~ msgid "{Forums} - discuss Stellarium with other users."
-#~ msgstr "{Forumai} - aptarkite Stellarium su kitais vartotojais."
 
 #~ msgid "0"
 #~ msgstr "0"
@@ -8257,29 +8323,6 @@ msgstr ""
 #~ msgid "Correct for light travel time: "
 #~ msgstr "Kelionės šviesos greičiu pataisa: "
 
-#~ msgid ""
-#~ "{The Stellarium Wiki} - General information.  You can also find user-"
-#~ "contributed landscapes and scripts here."
-#~ msgstr ""
-#~ "{The Stellarium Wiki} - Bendra informacija. Čia galite rasti ir vartotojų "
-#~ "sukurtas vietoves bei scenarijus."
-
-#~ msgid "Further Reading"
-#~ msgstr "Tolesniam skaitymui"
-
-#~ msgid ""
-#~ "{Support ticket system} - if you need help using Stellarium, post a support "
-#~ "request here and we'll try to help."
-#~ msgstr ""
-#~ "{Support ticket system} - jei Jums reikalinga pagalba naudojantis "
-#~ "Stellarium, parašykite pagalbos prašymą čia ir mes pabandysime padėti."
-
-#~ msgid "Page Up/Down"
-#~ msgstr "Ankstesnio/tolesnio puslapio klavišas"
-
-#~ msgid "Arrow keys & left mouse drag"
-#~ msgstr "Rodyklių klavišai ir slinkimas kairiu pelės klavišu"
-
 #~ msgid "Mouse cursor timeout (seconds):"
 #~ msgstr "Slėpti pelės žymeklį po (sekundžių):"
 
@@ -8294,9 +8337,6 @@ msgstr ""
 
 #~ msgid "Hourly zenith rate:"
 #~ msgstr "Valandinis zenitinis dažnis:"
-
-#~ msgid "The Stellarium User Guide"
-#~ msgstr "Stellarium vartotojo žinynas"
 
 #~ msgid "Startup FOV: XX"
 #~ msgstr "Pradinis apžvalgos laukas: XX"
@@ -8322,15 +8362,6 @@ msgstr ""
 #~ msgid "Finished downloading all star catalogs!"
 #~ msgstr "Visi žvaigždžių katalogai parsiųsti"
 
-#~ msgid ""
-#~ "{Bug reporting and feature request system} - if something doesn't work "
-#~ "properly or is missing and is not listed in the tracker, you can open bug "
-#~ "reports here."
-#~ msgstr ""
-#~ "{Pranešimų apie klaidas ir naujų funkcijų pageidavimo sistema} - jei kažkas "
-#~ "veikia klaidingai ar kažko trūksta ir tai nepridėta klaidų sąraše, apie tai "
-#~ "galite pranešti čia."
-
 #~ msgid "Magnitude Sizing Multiplier: "
 #~ msgstr "Ryškio dydžio daugiklis: "
 
@@ -8342,12 +8373,6 @@ msgstr ""
 
 #~ msgid "Plugin Key Bindings"
 #~ msgstr "Papildinių klavišų saistymas"
-
-#~ msgid "CTRL + Up/Down"
-#~ msgstr "Ctrl + aukštyn/žemyn"
-
-#~ msgid "CTRL + Left click"
-#~ msgstr "Ctrl + kairiojo pelės klavišo spustelėjimas"
 
 #~ msgid "Longitude/Latitude (J2000)"
 #~ msgstr "Ilguma/Platuma (J2000)"

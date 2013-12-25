@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-23 01:35+0700\n"
+"POT-Creation-Date: 2013-12-24 21:46+0700\n"
 "PO-Revision-Date: 2013-07-22 13:50+0000\n"
 "Last-Translator: Gaman Gabriel <gamangabriel@gmail.com>\n"
 "Language-Team: Romanian <ro@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-12-23 05:24+0000\n"
-"X-Generator: Launchpad (build 16872)\n"
+"X-Launchpad-Export-Date: 2013-12-25 05:27+0000\n"
+"X-Generator: Launchpad (build 16877)\n"
 "100 > 19) || ((n % 100 == 0) && (n != 0))) ? 2: 1))\n"
 
 #: src/core/modules/ConstellationMgr.cpp:106 src/core/modules/StarMgr.cpp:336
@@ -1311,51 +1311,155 @@ msgstr "Islam, Sadiq & Qureshi (2008, 2013)"
 msgid "Custom equation of %1T"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:161
+#: src/gui/HelpDialog.cpp:119
+msgid "Stellarium Help"
+msgstr "Manualul de ajutor Stellarium"
+
+#: src/gui/HelpDialog.cpp:124 src/gui/HelpDialog.cpp:129
+msgid "Keys"
+msgstr "Taste"
+
+#: src/gui/HelpDialog.cpp:126 src/gui/HelpDialog.cpp:198
+msgid "Further Reading"
+msgstr "Lectură aprofundată"
+
+#: src/gui/HelpDialog.cpp:133
+msgid "Pan view around the sky"
+msgstr "Deplasarea zonei vizibile a cerului"
+
+#: src/gui/HelpDialog.cpp:134
+msgid "Arrow keys & left mouse drag"
+msgstr "Taste direcţionale şi tragere cu buton stânga de mouse"
+
+#: src/gui/HelpDialog.cpp:136
+msgid "Zoom in/out"
+msgstr "Mărire/Micșorare"
+
+#: src/gui/HelpDialog.cpp:138
+msgid "Page Up/Down"
+msgstr "Page Up/Down"
+
+#: src/gui/HelpDialog.cpp:140
+msgid "CTRL + Up/Down"
+msgstr "CTRL + Sus/Jos"
+
+#: src/gui/HelpDialog.cpp:143
+msgid "Select object"
+msgstr "Selectați un obiect"
+
+#: src/gui/HelpDialog.cpp:144
+msgid "Left click"
+msgstr "Clic stânga"
+
+#: src/gui/HelpDialog.cpp:152
+msgid "Clear selection"
+msgstr "Anulați selectarea"
+
+#: src/gui/HelpDialog.cpp:153
+msgid "Right click"
+msgstr "Clic dreapta"
+
+#: src/gui/HelpDialog.cpp:155
+msgid "CTRL + Left click"
+msgstr "CTRL + Clic stânga"
+
+#: src/gui/HelpDialog.cpp:160
 #, qt-format
 msgid ""
 "Below are listed only the actions with assigned keys. Further actions may be "
 "available via the \"%1\" button."
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:263
+#: src/gui/HelpDialog.cpp:199
+msgid ""
+"The following links are external web links, and will launch your web "
+"browser:\n"
+msgstr ""
+"Următoarele legături sunt legături web externe și vor porni navigatorul "
+"dumneavoastră web:\n"
+
+#: src/gui/HelpDialog.cpp:200
+msgid "The Stellarium User Guide"
+msgstr "Ghidul utilizatorului pentru Stellarium"
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:204
+msgid "{Frequently Asked Questions} about Stellarium.  Answers too."
+msgstr "{Întrebări frecvente} despre Stellarium.  De asemenea și răspunsuri."
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:209
+msgid ""
+"{The Stellarium Wiki} - General information.  You can also find user-"
+"contributed landscapes and scripts here."
+msgstr ""
+"{Wiki-ul Stellarium} - Informații generale. Aici puteţi găsi peisaje și "
+"scripturi trimise de utilizatori."
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:214
+msgid ""
+"{Support ticket system} - if you need help using Stellarium, post a support "
+"request here and we'll try to help."
+msgstr ""
+"{Sistem de asistență cu tichet} - dacă aveți nevoie de ajutor în utilizarea "
+"Stellarium, solicitați-ne ajutorul și vom încerca să vă ajutăm."
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:219
+msgid ""
+"{Bug reporting and feature request system} - if something doesn't work "
+"properly or is missing and is not listed in the tracker, you can open bug "
+"reports here."
+msgstr ""
+"{Sistemul de raportare a defecțiunilor și solicitare a funcționalităților} - "
+"dacă ceva nu funcționează corect sau ceva lipsește și acest lucru nu este "
+"menționat în sistemul de raportare, puteți deschide aici rapoarte ale "
+"defecțiunilor."
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:224
+msgid "{Forums} - discuss Stellarium with other users."
+msgstr "{Forumuri} - discutați despre Stellarium cu alți utilizatori."
+
+#: src/gui/HelpDialog.cpp:262
 msgid "Developers"
 msgstr "Dezvoltatori"
 
-#: src/gui/HelpDialog.cpp:264
+#: src/gui/HelpDialog.cpp:263
 #, qt-format
 msgid "Project coordinator & lead developer: %1"
 msgstr "Coordonator proiect și dezvoltator principal: %1"
 
-#: src/gui/HelpDialog.cpp:265
+#: src/gui/HelpDialog.cpp:264
 #, qt-format
 msgid "Doc author/developer: %1"
 msgstr "Autor documentație/dezvoltator: %1"
 
-#: src/gui/HelpDialog.cpp:266 src/gui/HelpDialog.cpp:267
-#: src/gui/HelpDialog.cpp:268 src/gui/HelpDialog.cpp:269
-#: src/gui/HelpDialog.cpp:270 src/gui/HelpDialog.cpp:277
-#: src/gui/HelpDialog.cpp:278 src/gui/HelpDialog.cpp:279
-#: src/gui/HelpDialog.cpp:280
+#: src/gui/HelpDialog.cpp:265 src/gui/HelpDialog.cpp:266
+#: src/gui/HelpDialog.cpp:267 src/gui/HelpDialog.cpp:268
+#: src/gui/HelpDialog.cpp:269 src/gui/HelpDialog.cpp:276
+#: src/gui/HelpDialog.cpp:277 src/gui/HelpDialog.cpp:278
+#: src/gui/HelpDialog.cpp:279
 #, qt-format
 msgid "Developer: %1"
 msgstr "Dezvoltator: %1"
 
-#: src/gui/HelpDialog.cpp:271
+#: src/gui/HelpDialog.cpp:270
 #, qt-format
 msgid "Continuous Integration: %1"
 msgstr "Integrare continuă: %1"
 
-#: src/gui/HelpDialog.cpp:272 src/gui/HelpDialog.cpp:273
+#: src/gui/HelpDialog.cpp:271 src/gui/HelpDialog.cpp:272
 #, qt-format
 msgid "Tester: %1"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:274
+#: src/gui/HelpDialog.cpp:273
 msgid "Past Developers"
 msgstr "Dezvoltatori anteriori"
 
-#: src/gui/HelpDialog.cpp:275
+#: src/gui/HelpDialog.cpp:274
 msgid ""
 "Several people have made significant contributions, but are no longer "
 "active. Their work has made a big difference to the project:"
@@ -1363,12 +1467,12 @@ msgstr ""
 "Multe persoane au făcut contribuţii semnificative, dar nu mai sunt activi. "
 "Munca lor a făcut o mare diferenţă la proiect:"
 
-#: src/gui/HelpDialog.cpp:276
+#: src/gui/HelpDialog.cpp:275
 #, qt-format
 msgid "Graphic/other designer: %1"
 msgstr "Designer grafică/Alt designer: %1"
 
-#: src/gui/HelpDialog.cpp:281 src/gui/HelpDialog.cpp:282
+#: src/gui/HelpDialog.cpp:280 src/gui/HelpDialog.cpp:281
 #, qt-format
 msgid "OSX Developer: %1"
 msgstr "Dezvoltator pentru OSX: %1"
@@ -8081,37 +8185,6 @@ msgstr ""
 #~ msgid "Magnitude: <b>%1</b> (B-V: %2)"
 #~ msgstr "Magnitudine: <b>%1</b> (B-V: %2)"
 
-#~ msgid "Page Up/Down"
-#~ msgstr "Page Up/Down"
-
-#~ msgid "Select object"
-#~ msgstr "Selectați un obiect"
-
-#~ msgid "Right click"
-#~ msgstr "Clic dreapta"
-
-#~ msgid "CTRL + Left click"
-#~ msgstr "CTRL + Clic stânga"
-
-#~ msgid "Left click"
-#~ msgstr "Clic stânga"
-
-#~ msgid "Keys"
-#~ msgstr "Taste"
-
-#~ msgid ""
-#~ "The following links are external web links, and will launch your web "
-#~ "browser:\n"
-#~ msgstr ""
-#~ "Următoarele legături sunt legături web externe și vor porni navigatorul "
-#~ "dumneavoastră web:\n"
-
-#~ msgid "{Forums} - discuss Stellarium with other users."
-#~ msgstr "{Forumuri} - discutați despre Stellarium cu alți utilizatori."
-
-#~ msgid "{Frequently Asked Questions} about Stellarium.  Answers too."
-#~ msgstr "{Întrebări frecvente} despre Stellarium.  De asemenea și răspunsuri."
-
 #~ msgid "Other"
 #~ msgstr "Altele"
 
@@ -8151,36 +8224,14 @@ msgstr ""
 #~ msgid "0"
 #~ msgstr "0"
 
-#~ msgid "Further Reading"
-#~ msgstr "Lectură aprofundată"
-
-#~ msgid "Zoom in/out"
-#~ msgstr "Mărire/Micșorare"
-
 #~ msgid "Star Value Multiplier: "
 #~ msgstr "Coeficient de multiplicare al stelei: "
 
 #~ msgid "Light Pollution Luminance: "
 #~ msgstr "Poluarea luminoasă: "
 
-#~ msgid "Arrow keys & left mouse drag"
-#~ msgstr "Taste direcţionale şi tragere cu buton stânga de mouse"
-
-#~ msgid "The Stellarium User Guide"
-#~ msgstr "Ghidul utilizatorului pentru Stellarium"
-
-#~ msgid ""
-#~ "{The Stellarium Wiki} - General information.  You can also find user-"
-#~ "contributed landscapes and scripts here."
-#~ msgstr ""
-#~ "{Wiki-ul Stellarium} - Informații generale. Aici puteţi găsi peisaje și "
-#~ "scripturi trimise de utilizatori."
-
 #~ msgid "Hourly zenith rate:"
 #~ msgstr "Rata orară zenitală:"
-
-#~ msgid "Stellarium Help"
-#~ msgstr "Manualul de ajutor Stellarium"
 
 #~ msgid "xxx"
 #~ msgstr "xxx"
@@ -8300,29 +8351,6 @@ msgstr ""
 #~ msgid "Finished downloading all star catalogs!"
 #~ msgstr "S-a încheiat descărcarea tuturor cataloagelor stelare!"
 
-#~ msgid "Clear selection"
-#~ msgstr "Anulați selectarea"
-
-#~ msgid "Pan view around the sky"
-#~ msgstr "Deplasarea zonei vizibile a cerului"
-
-#~ msgid ""
-#~ "{Support ticket system} - if you need help using Stellarium, post a support "
-#~ "request here and we'll try to help."
-#~ msgstr ""
-#~ "{Sistem de asistență cu tichet} - dacă aveți nevoie de ajutor în utilizarea "
-#~ "Stellarium, solicitați-ne ajutorul și vom încerca să vă ajutăm."
-
-#~ msgid ""
-#~ "{Bug reporting and feature request system} - if something doesn't work "
-#~ "properly or is missing and is not listed in the tracker, you can open bug "
-#~ "reports here."
-#~ msgstr ""
-#~ "{Sistemul de raportare a defecțiunilor și solicitare a funcționalităților} - "
-#~ "dacă ceva nu funcționează corect sau ceva lipsește și acest lucru nu este "
-#~ "menționat în sistemul de raportare, puteți deschide aici rapoarte ale "
-#~ "defecțiunilor."
-
 #~ msgid "Planets labels"
 #~ msgstr "Numele planetelor"
 
@@ -8394,9 +8422,6 @@ msgstr ""
 
 #~ msgid "(geometric)"
 #~ msgstr "(geometric)"
-
-#~ msgid "CTRL + Up/Down"
-#~ msgstr "CTRL + Sus/Jos"
 
 #~ msgid "Show and edit all keyboard shortcuts"
 #~ msgstr "Arată şi editează toate scurtăturile tastaturii"

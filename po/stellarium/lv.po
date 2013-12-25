@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-23 01:35+0700\n"
+"POT-Creation-Date: 2013-12-24 21:46+0700\n"
 "PO-Revision-Date: 2013-09-09 04:15+0000\n"
 "Last-Translator: Kārlis Goba <karlis.goba@gmail.com>\n"
 "Language-Team: Latvian <lv@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-12-23 05:22+0000\n"
-"X-Generator: Launchpad (build 16872)\n"
+"X-Launchpad-Export-Date: 2013-12-25 05:25+0000\n"
+"X-Generator: Launchpad (build 16877)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:106 src/core/modules/StarMgr.cpp:336
 #: src/core/modules/GridLinesMgr.cpp:679 src/core/modules/LandscapeMgr.cpp:335
@@ -1282,62 +1282,156 @@ msgstr ""
 msgid "Custom equation of %1T"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:161
+#: src/gui/HelpDialog.cpp:119
+msgid "Stellarium Help"
+msgstr "Palīdzība par Stellarium"
+
+#: src/gui/HelpDialog.cpp:124 src/gui/HelpDialog.cpp:129
+msgid "Keys"
+msgstr "Taustiņi"
+
+#: src/gui/HelpDialog.cpp:126 src/gui/HelpDialog.cpp:198
+msgid "Further Reading"
+msgstr "Ieteicamā literatūra"
+
+#: src/gui/HelpDialog.cpp:133
+msgid "Pan view around the sky"
+msgstr "Pārvietot skatu pa debesīm"
+
+#: src/gui/HelpDialog.cpp:134
+msgid "Arrow keys & left mouse drag"
+msgstr "Bultiņu taustiņi un vilkšana ar peles kreiso pogu"
+
+#: src/gui/HelpDialog.cpp:136
+msgid "Zoom in/out"
+msgstr "Pietuvināt/attālināt"
+
+#: src/gui/HelpDialog.cpp:138
+msgid "Page Up/Down"
+msgstr "Page Up/Down"
+
+#: src/gui/HelpDialog.cpp:140
+msgid "CTRL + Up/Down"
+msgstr "CTRL + Up/Down"
+
+#: src/gui/HelpDialog.cpp:143
+msgid "Select object"
+msgstr "Iezīmēt objektu"
+
+#: src/gui/HelpDialog.cpp:144
+msgid "Left click"
+msgstr "Kreisais klikšķis"
+
+#: src/gui/HelpDialog.cpp:152
+msgid "Clear selection"
+msgstr "Notīrīt izvēli"
+
+#: src/gui/HelpDialog.cpp:153
+msgid "Right click"
+msgstr "Labais klikšķis"
+
+#: src/gui/HelpDialog.cpp:155
+msgid "CTRL + Left click"
+msgstr "CTRL + kreisais klikšķis"
+
+#: src/gui/HelpDialog.cpp:160
 #, qt-format
 msgid ""
 "Below are listed only the actions with assigned keys. Further actions may be "
 "available via the \"%1\" button."
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:263
+#: src/gui/HelpDialog.cpp:199
+msgid ""
+"The following links are external web links, and will launch your web "
+"browser:\n"
+msgstr ""
+
+#: src/gui/HelpDialog.cpp:200
+msgid "The Stellarium User Guide"
+msgstr "Stellarium lietotāja ceļvedis"
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:204
+msgid "{Frequently Asked Questions} about Stellarium.  Answers too."
+msgstr "{Bieži uzdotie jautājumi} par Stellarium.  Arī atbildes."
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:209
+msgid ""
+"{The Stellarium Wiki} - General information.  You can also find user-"
+"contributed landscapes and scripts here."
+msgstr ""
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:214
+msgid ""
+"{Support ticket system} - if you need help using Stellarium, post a support "
+"request here and we'll try to help."
+msgstr ""
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:219
+msgid ""
+"{Bug reporting and feature request system} - if something doesn't work "
+"properly or is missing and is not listed in the tracker, you can open bug "
+"reports here."
+msgstr ""
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: src/gui/HelpDialog.cpp:224
+msgid "{Forums} - discuss Stellarium with other users."
+msgstr ""
+
+#: src/gui/HelpDialog.cpp:262
 msgid "Developers"
 msgstr "Izstrādātāji"
 
-#: src/gui/HelpDialog.cpp:264
+#: src/gui/HelpDialog.cpp:263
 #, qt-format
 msgid "Project coordinator & lead developer: %1"
 msgstr "Projekta koordinators un galvenais izstrādātājs: %1"
 
-#: src/gui/HelpDialog.cpp:265
+#: src/gui/HelpDialog.cpp:264
 #, qt-format
 msgid "Doc author/developer: %1"
 msgstr "Dokumentācijas autors/izstrādātājs: %1"
 
-#: src/gui/HelpDialog.cpp:266 src/gui/HelpDialog.cpp:267
-#: src/gui/HelpDialog.cpp:268 src/gui/HelpDialog.cpp:269
-#: src/gui/HelpDialog.cpp:270 src/gui/HelpDialog.cpp:277
-#: src/gui/HelpDialog.cpp:278 src/gui/HelpDialog.cpp:279
-#: src/gui/HelpDialog.cpp:280
+#: src/gui/HelpDialog.cpp:265 src/gui/HelpDialog.cpp:266
+#: src/gui/HelpDialog.cpp:267 src/gui/HelpDialog.cpp:268
+#: src/gui/HelpDialog.cpp:269 src/gui/HelpDialog.cpp:276
+#: src/gui/HelpDialog.cpp:277 src/gui/HelpDialog.cpp:278
+#: src/gui/HelpDialog.cpp:279
 #, qt-format
 msgid "Developer: %1"
 msgstr "Izstrādātājs: %1"
 
-#: src/gui/HelpDialog.cpp:271
+#: src/gui/HelpDialog.cpp:270
 #, qt-format
 msgid "Continuous Integration: %1"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:272 src/gui/HelpDialog.cpp:273
+#: src/gui/HelpDialog.cpp:271 src/gui/HelpDialog.cpp:272
 #, qt-format
 msgid "Tester: %1"
 msgstr "Testētājs: %1"
 
-#: src/gui/HelpDialog.cpp:274
+#: src/gui/HelpDialog.cpp:273
 msgid "Past Developers"
 msgstr "Bijušie izstrādātāji"
 
-#: src/gui/HelpDialog.cpp:275
+#: src/gui/HelpDialog.cpp:274
 msgid ""
 "Several people have made significant contributions, but are no longer "
 "active. Their work has made a big difference to the project:"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:276
+#: src/gui/HelpDialog.cpp:275
 #, qt-format
 msgid "Graphic/other designer: %1"
 msgstr "Grafiskais/cits dizaineris: %1"
 
-#: src/gui/HelpDialog.cpp:281 src/gui/HelpDialog.cpp:282
+#: src/gui/HelpDialog.cpp:280 src/gui/HelpDialog.cpp:281
 #, qt-format
 msgid "OSX Developer: %1"
 msgstr "OSX izstrādātājs: %1"
@@ -8182,62 +8276,17 @@ msgstr ""
 #~ msgid "Nebulas"
 #~ msgstr "Miglāji"
 
-#~ msgid "Clear selection"
-#~ msgstr "Notīrīt izvēli"
-
-#~ msgid "Right click"
-#~ msgstr "Labais klikšķis"
-
-#~ msgid "CTRL + Left click"
-#~ msgstr "CTRL + kreisais klikšķis"
-
-#~ msgid "Left click"
-#~ msgstr "Kreisais klikšķis"
-
-#~ msgid "Keys"
-#~ msgstr "Taustiņi"
-
-#~ msgid "Further Reading"
-#~ msgstr "Ieteicamā literatūra"
-
-#~ msgid "Stellarium Help"
-#~ msgstr "Palīdzība par Stellarium"
-
-#~ msgid "The Stellarium User Guide"
-#~ msgstr "Stellarium lietotāja ceļvedis"
-
 #~ msgid "Nebulas background images"
 #~ msgstr "Miglāju fona attēli"
 
-#~ msgid "Zoom in/out"
-#~ msgstr "Pietuvināt/attālināt"
-
-#~ msgid "Select object"
-#~ msgstr "Iezīmēt objektu"
-
 #~ msgid "(geometric)"
 #~ msgstr "(ģeometriskais)"
-
-#~ msgid "Arrow keys & left mouse drag"
-#~ msgstr "Bultiņu taustiņi un vilkšana ar peles kreiso pogu"
-
-#~ msgid "Pan view around the sky"
-#~ msgstr "Pārvietot skatu pa debesīm"
-
-#~ msgid "{Frequently Asked Questions} about Stellarium.  Answers too."
-#~ msgstr "{Bieži uzdotie jautājumi} par Stellarium.  Arī atbildes."
 
 #~ msgid "Hourly zenith rate:"
 #~ msgstr "Zenīta intensitāte stundā"
 
 #~ msgid "When a Script is Running"
 #~ msgstr "Skripta darbības laikā"
-
-#~ msgid "CTRL + Up/Down"
-#~ msgstr "CTRL + Up/Down"
-
-#~ msgid "Page Up/Down"
-#~ msgstr "Page Up/Down"
 
 #~ msgid "F7"
 #~ msgstr "F7"
