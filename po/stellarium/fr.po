@@ -17,14 +17,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-24 21:46+0700\n"
-"PO-Revision-Date: 2013-12-20 17:15+0000\n"
+"POT-Creation-Date: 2013-12-26 00:07+0700\n"
+"PO-Revision-Date: 2013-12-25 18:27+0000\n"
 "Last-Translator: Nicolas Martignoni <Unknown>\n"
 "Language-Team: <fr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-12-25 05:21+0000\n"
+"X-Launchpad-Export-Date: 2013-12-26 05:18+0000\n"
 "X-Generator: Launchpad (build 16877)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:106 src/core/modules/StarMgr.cpp:336
@@ -1167,7 +1167,7 @@ msgstr "Trouvé"
 
 #: src/gui/ConfigurationDialog.cpp:422 src/gui/ConfigurationDialog.cpp:424
 msgid "Select screenshot directory"
-msgstr "Sélectionner le dossier de sauvegarde des captures d'écran"
+msgstr "Sélectionner le dossier d'enregistrement des captures d'écran"
 
 #: src/gui/ConfigurationDialog.cpp:649
 #, qt-format
@@ -1653,51 +1653,51 @@ msgstr "%1 m"
 #. TRANSLATORS: Short description for Class 1 of the Bortle scale
 #: src/gui/ViewDialog.cpp:297
 msgid "Excellent dark-sky site"
-msgstr ""
+msgstr "Excellent ciel noir"
 
 #. TRANSLATORS: Short description for Class 2 of the Bortle scale
 #: src/gui/ViewDialog.cpp:299
 msgid "Typical truly dark site"
-msgstr ""
+msgstr "Ciel noir typique"
 
 #. TRANSLATORS: Short description for Class 3 of the Bortle scale
 #: src/gui/ViewDialog.cpp:301
 msgid "Rural sky"
-msgstr ""
+msgstr "Ciel rural"
 
 #. TRANSLATORS: Short description for Class 4 of the Bortle scale
 #: src/gui/ViewDialog.cpp:303
 msgid "Rural/suburban transition"
-msgstr ""
+msgstr "Transition rural/périurbain"
 
 #. TRANSLATORS: Short description for Class 5 of the Bortle scale
 #: src/gui/ViewDialog.cpp:305
 msgid "Suburban sky"
-msgstr ""
+msgstr "Ciel de banlieue"
 
 #. TRANSLATORS: Short description for Class 6 of the Bortle scale
 #: src/gui/ViewDialog.cpp:307
 msgid "Bright suburban sky"
-msgstr ""
+msgstr "Ciel de banlieue lumineuse"
 
 #. TRANSLATORS: Short description for Class 7 of the Bortle scale
 #: src/gui/ViewDialog.cpp:309
 msgid "Suburban/urban transition"
-msgstr ""
+msgstr "Transition banlieue/ville"
 
 #. TRANSLATORS: Short description for Class 8 of the Bortle scale
 #: src/gui/ViewDialog.cpp:311
 msgid "City sky"
-msgstr ""
+msgstr "Ciel urbain"
 
 #. TRANSLATORS: Short description for Class 9 of the Bortle scale
 #: src/gui/ViewDialog.cpp:313
 msgid "Inner-city sky"
-msgstr ""
+msgstr "Ciel de centre-ville"
 
 #: src/gui/ViewDialog.cpp:327
 msgid "The naked-eye limiting magnitude is"
-msgstr ""
+msgstr "La magnitude limite à l'oeil nu est"
 
 #: src/gui/ViewDialog.cpp:459
 msgid "No description"
@@ -3992,7 +3992,7 @@ msgstr "Pollution lumineuse :"
 
 #: src/ui_viewDialog.h:1235
 msgid "pressure, temperature, extinction coefficient"
-msgstr "pression, température, coefficient d'extinction"
+msgstr "Pression, température, coefficient d'extinction"
 
 #: src/ui_viewDialog.h:1237
 msgid "Refraction/Extinction settings..."
@@ -4172,7 +4172,7 @@ msgstr ""
 #: src/ui_configurationDialog.h:980
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:390
 msgid "Save settings"
-msgstr "Sauvegarder les paramètres"
+msgstr "Enregistrer les paramètres"
 
 #: src/ui_configurationDialog.h:982
 msgid "Restore the default settings that came with Stellarium"
@@ -4189,7 +4189,7 @@ msgid ""
 "next startup."
 msgstr ""
 "Restaurer les valeurs par défaut nécessite le redémarrage de Stellarium. "
-"Sauvegarder les paramètres actuels inclut le champ visuel et l'orientation "
+"Enregistrer les paramètres actuels inclut le champ visuel et l'orientation "
 "actuels pour les utiliser au prochain démarrage."
 
 #: src/ui_configurationDialog.h:987
@@ -4630,11 +4630,11 @@ msgstr "Paramètres de réfraction"
 
 #: src/ui_AtmosphereDialog.h:178
 msgid "Pressure (mbar):"
-msgstr "Pression (mbar):"
+msgstr "Pression (mbar) :"
 
 #: src/ui_AtmosphereDialog.h:179
 msgid "Temperature (C):"
-msgstr "Température (°C):"
+msgstr "Température (°C) :"
 
 #: src/ui_AtmosphereDialog.h:184
 msgid ""
@@ -5297,27 +5297,27 @@ msgstr "Capteurs"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1076
 msgid "Resolution x (pixels):"
-msgstr "Résolution x (pixels):"
+msgstr "Résolution x (pixels) :"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1077
 msgid "Resolution y (pixels):"
-msgstr "Résolution y (pixels):"
+msgstr "Résolution y (pixels) :"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1078
 msgid "Chip width (mm):"
-msgstr "Largeur du capteur (mm) :"
+msgstr "Largeur du capteur (mm) :"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1079
 msgid "Chip height (mm):"
-msgstr "Hauteur du capteur (mm) :"
+msgstr "Hauteur du capteur (mm) :"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1080
 msgid "Pixel width (micron):"
-msgstr "Largeur pixel (micron):"
+msgstr "Largeur pixel (micron) :"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1081
 msgid "Pixel height (micron):"
-msgstr "Hauteur pixel (micron):"
+msgstr "Hauteur pixel (micron) :"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1083
 #: plugins/Oculars/src/ui_ocularDialog.h:1091
@@ -5468,19 +5468,19 @@ msgstr "Magnitude approx. : <b>%1</b>"
 #: plugins/Satellites/src/Satellite.cpp:257
 #, qt-format
 msgid "Range (km): %1"
-msgstr "Distance (km): %1"
+msgstr "Distance (km) : %1"
 
 #. TRANSLATORS: Rate at which the distance changes
 #: plugins/Satellites/src/Satellite.cpp:260
 #, qt-format
 msgid "Range rate (km/s): %1"
-msgstr "Évolution de la distance (km/s): %1"
+msgstr "Évolution de la distance (km/s) : %1"
 
 #. TRANSLATORS: Satellite altitude
 #: plugins/Satellites/src/Satellite.cpp:263
 #, qt-format
 msgid "Altitude (km): %1"
-msgstr "Altitude (km): %1"
+msgstr "Altitude (km) : %1"
 
 #. TRANSLATORS: %1 and %3 are numbers, %2 and %4 - degree signs.
 #: plugins/Satellites/src/Satellite.cpp:266
@@ -5492,13 +5492,13 @@ msgstr "Sous-point (Lat./Long.) : %1%2/%3%4"
 #: plugins/Satellites/src/Satellite.cpp:280
 #, qt-format
 msgid "TEME coordinates (km): %1"
-msgstr "Coordonnées TEME (km): %1"
+msgstr "Coordonnées TEME (km) : %1"
 
 #. TRANSLATORS: TEME is an Earth-centered inertial coordinate system
 #: plugins/Satellites/src/Satellite.cpp:288
 #, qt-format
 msgid "TEME velocity (km/s): %1"
-msgstr "Vitesse TEME (km/s): %1"
+msgstr "Vitesse TEME (km/s) : %1"
 
 #: plugins/Satellites/src/Satellite.cpp:296
 msgid "The satellite and the observer are in sunlight."
@@ -5922,7 +5922,7 @@ msgstr ""
 #: plugins/Satellites/src/ui_satellitesDialog.h:688
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:303
 msgid "Update frequency (hours):"
-msgstr "Fréquence de mise à jour (heures):"
+msgstr "Fréquence de mise à jour (heures) :"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:689
 msgid "Labels"
@@ -5930,7 +5930,7 @@ msgstr "Noms"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:690
 msgid "Label font size (pixels):"
-msgstr "Taille de la police des noms (px):"
+msgstr "Taille de police des noms (px) :"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:691
 msgid "Orbit lines"
@@ -5985,7 +5985,7 @@ msgstr "Restaurer les paramètres par défaut"
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:318
 #: plugins/Observability/src/ui_ObservabilityDialog.h:368
 msgid "Save settings as default"
-msgstr "Sauvegarder ces paramètres comme paramètres par défaut"
+msgstr "Enregistrer ces paramètres comme paramètres par défaut"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:716
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:240
@@ -6303,11 +6303,11 @@ msgstr "Pointer le télescope aux coordonnées"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:290
 msgid "De&clination (J2000):"
-msgstr "Dé&clinaison (J2000) :"
+msgstr "Dé&clinaison (J2000) :"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:291
 msgid "&Right Ascension (J2000):"
-msgstr "&Ascension droite (J2000) :"
+msgstr "&Ascension droite (J2000) :"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:292
 msgid "&Current object"
@@ -6468,7 +6468,7 @@ msgstr "Utiliser les indicateurs de champ de vision"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:510
 msgid "Circle size(s):"
-msgstr "Taille du(des) cercle(s):"
+msgstr "Taille du(des) cercle(s) :"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:512
 msgid "Up to ten decimal values in degrees of arc, separated with commas"
@@ -6680,7 +6680,7 @@ msgstr "Nom du fuseau horaire:"
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:452
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:387
 msgid "Offset from UTC (hours):"
-msgstr "Écart par rapport à UTC (heures) :"
+msgstr "Écart par rapport à UTC (heures) :"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:453
 msgid "Daylight saving time (summer time)"
@@ -6692,7 +6692,7 @@ msgstr "Nom du fuseau horaire de l'heure d'été:"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:455
 msgid "DST offset from UTC (hours):"
-msgstr "Écart de l'heure d'été par rapport à UTC (heures) :"
+msgstr "Écart de l'heure d'été par rapport à UTC (heures) :"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:456
 msgid "Daylight saving time start"
@@ -6943,7 +6943,7 @@ msgstr "Charger la configuration par défaut"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:476
 msgid "Save current configuration"
-msgstr "Sauvegarder la configuration actuelle"
+msgstr "Enregistrer la configuration actuelle"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:479
 msgid "Shut down"
@@ -7331,7 +7331,7 @@ msgstr "Mettre à jour à partir des sources Internet"
 #: plugins/Quasars/src/ui_quasarsDialog.h:263
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:263
 msgid "Update frequency (days):"
-msgstr "Fréquence de mise à jour (jours) :"
+msgstr "Fréquence de mise à jour (jours) :"
 
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:236
 #: plugins/Novae/src/ui_novaeDialog.h:239
