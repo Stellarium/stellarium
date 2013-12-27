@@ -32,7 +32,7 @@
 #include "Planet.hpp"
 
 #include "StelProjector.hpp"
-#include "sideral_time.h"
+#include "sidereal_time.h"
 #include "StelTextureMgr.hpp"
 #include "StelModuleMgr.hpp"
 #include "StarMgr.hpp"
