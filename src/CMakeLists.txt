@@ -156,8 +156,8 @@ SET(stellarium_lib_SRCS
 	core/planetsephems/marssat.h
 	core/planetsephems/pluto.c
 	core/planetsephems/pluto.h
-	core/planetsephems/sideral_time.c
-	core/planetsephems/sideral_time.h
+	core/planetsephems/sidereal_time.c
+	core/planetsephems/sidereal_time.h
 	core/planetsephems/stellplanet.c
 	core/planetsephems/stellplanet.h
 	core/planetsephems/tass17.c

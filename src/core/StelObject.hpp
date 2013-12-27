@@ -106,12 +106,12 @@ public:
 	//! Get observer-centered hour angle + declination (at current equinox)
 	//! It is the geometric position, i.e. without taking refraction effect into account.
 	//! The frame has its Z axis at the planet's current rotation axis
-	Vec3d getSideralPosGeometric(const StelCore* core) const;
+	Vec3d getSiderealPosGeometric(const StelCore* core) const;
 
 	//! Get observer-centered hour angle + declination (at current equinox)
 	//! It is the apparent position, i.e. taking the refraction effect into account.
 	//! The frame has its Z axis at the planet's current rotation axis
-	Vec3d getSideralPosApparent(const StelCore* core) const;
+	Vec3d getSiderealPosApparent(const StelCore* core) const;
 
 	//! Get observer-centered alt/az position
 	//! It is the geometric position, i.e. without taking refraction effect into account.
