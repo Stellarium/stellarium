@@ -23,11 +23,12 @@
 #include "Planet.hpp"
 
 /*! \class Comet
-	\author Bogdan Marinov
+	\author Bogdan Marinov, Georg Zotti (orbit computation enhancements, tails)
 
 	Some of the code in this class is re-used from the parent Planet class.
 	\todo Implement better comet rendering (star-like objects, no physical body).
 	\todo (Long-term) Photo realistic comet rendering, see https://blueprints.launchpad.net/stellarium/+spec/realistic-comet-rendering
+	2013-12: New algorithms for position computation following Paul Heafner: Fundamental Ephemeris Computations (Willmann-Bell 1999).
   */
 class Comet : public Planet
 {
@@ -78,8 +79,11 @@ public:
 	//! set value for semi-major axis in AU
 	void setSemiMajorAxis(double value);
 
-	//! get sidereal period for minor planet
-	double getSiderealPeriod() const;
+	//! get sidereal period for comet, days, or returns 0 if not possible (paraboloid, hyperboloid orbit)
+	virtual double getSiderealPeriod() const;
+
+	//! GZ new: re-implementation of Planet's draw()
+	virtual void draw(StelCore* core, float maxMagLabels, const QFont& planetNameFont);
 
 private:
 	double absoluteMagnitude;
@@ -88,6 +92,15 @@ private:
 
 	bool isCometFragment;
 	bool nameIsProvisionalDesignation;
+
+	//GZ Tail additions
+	StelVertexArray *dustTail;    //!< a thin textured paraboloid that represents the dust tail
+	StelVertexArray *gasTail;     //!< an even thinner textured paraboloid that represents the gas tail
+	StelTextureSP dustTexture;
+	StelTextureSP gasTexture;
+	Mat4d scaleRotDust;           //!< rotation and scale matrix for dust tail
+	Mat4d scaleRotGas;            //!< rotation and scale matrix for gas tail
+	Vec3d eclipticSpeed;          //!< Speed in the solar system. Together with eclipticPos, this is the state vector. Required for rotating the tails.
 };
 
 #endif //_COMET_HPP_

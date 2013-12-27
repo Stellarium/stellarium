@@ -137,7 +137,8 @@ public:
 	virtual void translateName(const StelTranslator &trans);
 
 	// Draw the Planet
-	void draw(StelCore* core, float maxMagLabels, const QFont& planetNameFont);
+	// GZ Made that virtual to allow comets having their own draw().
+	virtual void draw(StelCore* core, float maxMagLabels, const QFont& planetNameFont);
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods specific to Planet
@@ -147,7 +148,8 @@ public:
 	//! Get duration of sidereal day
 	double getSiderealDay(void) const {return re.period;}
 	//! Get duration of sidereal year
-	double getSiderealPeriod(void) const { return re.siderealPeriod; }
+	// GZ: made that virtual for Comets.
+	virtual double getSiderealPeriod(void) const { return re.siderealPeriod; }
 	//! Get duration of mean solar day
 	double getMeanSolarDay(void) const;
 
