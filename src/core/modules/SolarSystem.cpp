@@ -529,11 +529,14 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 					} else {
 						// in case of parent=sun: use Gaussian gravitational constant
 						// for calculating meanMotion:
-						meanMotion = (eccentricity >= 0.9999 && eccentricity <= 1.0)
-									? 0.01720209895 * (1.5/pericenterDistance) * sqrt(0.5/pericenterDistance)
-									: (semi_major_axis > 0.0)
-									? 0.01720209895 / (semi_major_axis*sqrt(semi_major_axis))
-									: 0.01720209895 / (-semi_major_axis*sqrt(-semi_major_axis));
+						//meanMotion = (eccentricity >= 0.9999 && eccentricity <= 1.0)
+						//			? 0.01720209895 * (1.5/pericenterDistance) * sqrt(0.5/pericenterDistance)
+						//			: (semi_major_axis > 0.0)
+						//			? 0.01720209895 / (semi_major_axis*sqrt(semi_major_axis))
+						//			: 0.01720209895 / (-semi_major_axis*sqrt(-semi_major_axis));
+						meanMotion = (eccentricity == 1.0)
+									? 0.01720209895 * (1.5/pericenterDistance) * sqrt(0.5/pericenterDistance)  // GZ: This is Heafner's W / dt
+									: 0.01720209895 / (fabs(semi_major_axis)*sqrt(fabs(semi_major_axis)));
 					}
 				} else {
 					meanMotion = 2.0*M_PI/period;
@@ -575,6 +578,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 							J2000NodeOrigin.normalize();
 							parent_rot_j2000_longitude = atan2(J2000NodeOrigin*OrbitAxis1,J2000NodeOrigin*OrbitAxis0);
 						}
+			qDebug() << "Creating CometOrbit for " << englishName;
 			CometOrbit *orb = new CometOrbit(pericenterDistance,
 							 eccentricity,
 							 inclination,
