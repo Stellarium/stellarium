@@ -223,7 +223,7 @@ void Pulsars::draw(StelCore* core)
 	foreach (const PulsarP& pulsar, psr)
 	{
 		if (pulsar && pulsar->initialized)
-			pulsar->draw(core, painter);
+			pulsar->draw(core, &painter);
 	}
 
 	if (GETSTELMODULE(StelObjectMgr)->getFlagSelectedObjectPointer())
