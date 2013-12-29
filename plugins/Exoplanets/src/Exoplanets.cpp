@@ -227,7 +227,7 @@ void Exoplanets::draw(StelCore* core)
 	foreach (const ExoplanetP& eps, ep)
 	{
 		if (eps && eps->initialized)
-			eps->draw(core, painter);
+			eps->draw(core, &painter);
 	}
 
 	if (GETSTELMODULE(StelObjectMgr)->getFlagSelectedObjectPointer())
