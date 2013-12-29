@@ -421,7 +421,7 @@ void Exoplanet::draw(StelCore* core, StelPainter *painter)
 	StelUtils::spheToRect(RA, DE, XYZ);
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_ONE, GL_ONE);
-	painter.setColor(color[0], color[1], color[2], 1);
+	painter->setColor(color[0], color[1], color[2], 1);
 
 	if (timelineMode)
 	{
