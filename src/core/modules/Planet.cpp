@@ -589,7 +589,6 @@ double Planet::getPhaseAngle(const Vec3d& obsPos) const
 	const Vec3d& planetHelioPos = getHeliocentricEclipticPos();
 	const double planetRq = planetHelioPos.lengthSquared();
 	const double observerPlanetRq = (obsPos - planetHelioPos).lengthSquared();
-	//return std::acos(observerPlanetRq + planetRq - observerRq)/(2.0*sqrt(observerPlanetRq*planetRq));
 	return std::acos((observerPlanetRq + planetRq - observerRq)/(2.0*sqrt(observerPlanetRq*planetRq)));
 }
 
@@ -965,7 +964,7 @@ void Planet::drawSphere(StelPainter* painter, float screenSz)
 			return;
 		}
 	}
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	//glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // GZ deactivated. 2013-12-27. If disabling blend, who cares which one?
 	painter->setColor(1.f, 1.f, 1.f);
 
 	painter->enableTexture2d(true);
