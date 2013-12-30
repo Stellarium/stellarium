@@ -26,8 +26,9 @@
 #include <QDateTime>
 #include <QString>
 
-// astonomical unit (km)
+// astronomical unit (km)
 #define AU 149597870.691
+#define AU_KM (1.0/149597870.691)
 // Parsec (km)
 #define PARSEC 30.857e12
 // speed of light (km/sec)
