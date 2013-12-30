@@ -47,7 +47,7 @@ public:
 	       bool hidden,
 	       const QString &pType);
 
-	~Comet();
+	virtual ~Comet();
 
 	//Inherited from StelObject via Planet
 	//! Get a string with data about the Comet.
@@ -86,6 +86,15 @@ public:
 	virtual void draw(StelCore* core, float maxMagLabels, const QFont& planetNameFont);
 
 private:
+//	float getTailLengthAU() const; //! return estimate for tail length
+//	float getComaDiameterAU() const; //! return estimate for Coma diameter
+	//! @returns estimates for (Coma diameter, gas tail length, dust tail length).
+	//! Using a formula found at http://www.projectpluto.com/update7b.htm#comet_tail_formula
+	//! @param dustFactor estimate of dust tail length in relation to gas tail length. Default: 0.7.
+	Vec3f getComaTailLengthsAU(const float dustFactor=0.7f) const;
+	void drawTail(StelCore* core, StelProjector::ModelViewTranformP transfo, float screenSz, bool gas);
+	void computeParabola(const float radius, const int slices, const int stacks,
+								QVector<double>& vertexArr, QVector<float>& texCoordArr, QVector<unsigned short>& indices);
 	double absoluteMagnitude;
 	double slopeParameter;
 	double semiMajorAxis;
@@ -94,8 +103,16 @@ private:
 	bool nameIsProvisionalDesignation;
 
 	//GZ Tail additions
-	StelVertexArray *dustTail;    //!< a thin textured paraboloid that represents the dust tail
-	StelVertexArray *gasTail;     //!< an even thinner textured paraboloid that represents the gas tail
+//	StelVertexArray *dustTail;    //!< a thin textured paraboloid that represents the dust tail
+//	StelVertexArray *gasTail;     //!< an even thinner textured paraboloid that represents the gas tail
+	QVector<double> dusttailVertexArr; // TBD: Maybe only one array is required, used with different scalings. Let's see.
+	QVector<float> dusttailTexCoordArr;
+	QVector<unsigned short> dusttailIndices;
+	QVector<double> gastailVertexArr;
+	QVector<float> gastailTexCoordArr;
+	QVector<unsigned short> gastailIndices;
+
+
 	StelTextureSP dustTexture;
 	StelTextureSP gasTexture;
 	Mat4d scaleRotDust;           //!< rotation and scale matrix for dust tail
