@@ -21,6 +21,7 @@
 
 #include "StelApp.hpp"
 #include "StelCore.hpp"
+#include "StelPainter.hpp"
 
 #include "StelTexture.hpp"
 #include "StelTextureMgr.hpp"
@@ -74,8 +75,8 @@ Comet::Comet(const QString& englishName,
 	texMap = StelApp::getInstance().getTextureManager().createTextureThread(StelFileMgr::getInstallationDir()+"/textures/"+texMapName, StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT));
 
 	//GZ: tail textures. We use a paraboloid tail body, textured like a fisheye sphere, i.e. center=head. Maybe a texture similar to halo.png is all we need?
-	dustTexture = StelApp::getInstance().getTextureManager().createTextureThread(StelFileMgr::getInstallationDir()+"/textures/cometTail.png", StelTexture::StelTextureParams(true, GL_LINEAR, GL_CLAMP));
-	gasTexture = StelApp::getInstance().getTextureManager().createTextureThread(StelFileMgr::getInstallationDir()+"/textures/cometTail.png", StelTexture::StelTextureParams(true, GL_LINEAR, GL_CLAMP));
+	dustTexture = StelApp::getInstance().getTextureManager().createTextureThread(StelFileMgr::getInstallationDir()+"/textures/cometTail.png", StelTexture::StelTextureParams(true, GL_LINEAR, GL_CLAMP_TO_EDGE));
+	gasTexture = StelApp::getInstance().getTextureManager().createTextureThread(StelFileMgr::getInstallationDir()+"/textures/cometTail.png", StelTexture::StelTextureParams(true, GL_LINEAR, GL_CLAMP_TO_EDGE));
 
 	//Comet specific members
 	absoluteMagnitude = 0;
@@ -87,13 +88,15 @@ Comet::Comet(const QString& englishName,
 
 	flagLabels = true;
 
-	// TODO: create paraboloid vertex arrays: dustTail, gasTail.
+	// TODO: find valid parameters to create paraboloid vertex arrays: dustTail, gasTail.
+	computeParabola(25.f, 16, 16, gastailVertexArr,  gastailTexCoordArr,  gastailIndices);
+	computeParabola(4.f, 16, 12, dusttailVertexArr, dusttailTexCoordArr, dusttailIndices);
 }
 
 Comet::~Comet()
 {
-	if (dustTail) delete dustTail;
-	if (gasTail)  delete gasTail;
+//	if (dustTail) delete dustTail;
+//	if (gasTail)  delete gasTail;
 }
 
 void Comet::setAbsoluteMagnitudeAndSlope(double magnitude, double slope)
@@ -240,6 +243,10 @@ void Comet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFont
 {
 	if (hidden)
 		return;
+	if (getEnglishName() == core->getCurrentLocation().planetName)
+	{ // GZ moved this up. Maybe even don't do that? E.g., draw tail while riding the comet? Decide later.
+		return;
+	}
 
 	Mat4d mat = Mat4d::translation(eclipticPos) * rotLocalToParent;
 	// We can remove that - a Comet has no parent except for the sun...
@@ -253,10 +260,6 @@ void Comet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFont
 	// This removed totally the Planet shaking bug!!!
 	StelProjector::ModelViewTranformP transfo = core->getHeliocentricEclipticModelViewTransform();
 	transfo->combine(mat);
-	if (getEnglishName() == core->getCurrentLocation().planetName)
-	{ // GZ Maybe even don't do that? E.g., draw tail while riding the comet? Decide later.
-		return;
-	}
 
 	// Compute the 2D position and check if in the screen
 	// TODO: consider tails.
@@ -288,8 +291,147 @@ void Comet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFont
 		drawHints(core, planetNameFont);
 
 		draw3dModel(core,transfo,screenSz);
-		//drawGasTail(core,transfo,screenSz);
-		//drawDustTail(core,transfo,screenSz);
 	}
+	// tails should also be drawn if core is off-screen...
+	drawTail(core,transfo,screenSz, true);  // gas tail
+	drawTail(core,transfo,screenSz, false); // dust tail
 	return;
+}
+
+void Comet::drawTail(StelCore* core, StelProjector::ModelViewTranformP transfo, float screenSz, bool gas)
+{
+//	if (screenSz>1.)
+//	{
+		StelProjector::ModelViewTranformP transfo2 = transfo->clone();
+		transfo2->combine(Mat4d::zrotation(M_PI/180*(axisRotation + 90.)));
+		transfo2->combine(Mat4d::scaling(0.001d));
+		StelPainter* sPainter = new StelPainter(core->getProjection(transfo2));
+		sPainter->getLight().disable();
+
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_ONE, GL_ONE);
+		glDisable(GL_CULL_FACE);
+
+		// Code from OldstyleLandscape, drawGround()
+		//transfo->combine(Mat4d::zrotation(groundAngleRotateZ-angleRotateZOffset) * Mat4d::translation(Vec3d(0,0,vshift)));
+
+		// TODO: move "tail" to have nucleus in focus,
+		//sPainter.setProjector(core->getProjection(transfo));
+		//sPainter.setColor(landscapeBrightness, landscapeBrightness, landscapeBrightness, landFader.getInterstate());
+
+		if (gas) {
+			// allow lazy loading
+			//if (!gasTexture->bind()) return;
+			gasTexture->bind();
+			sPainter->setColor(0.f,0.5f,1.f);
+			sPainter->setArrays((Vec3d*)gastailVertexArr.constData(), (Vec2f*)gastailTexCoordArr.constData());
+			//sPainter->drawFromArray(StelPainter::Triangles, gastailVertexArr.size()/3);
+			sPainter->drawFromArray(StelPainter::Triangles, gastailIndices.size(), 0, true, gastailIndices.constData());
+		} else {
+			//if (!dustTexture->bind()) return;
+			dustTexture->bind();
+			sPainter->setColor(1.f,0.8f,0.5f);
+			sPainter->setArrays((Vec3d*)dusttailVertexArr.constData(), (Vec2f*)dusttailTexCoordArr.constData());
+			//sPainter->drawFromArray(StelPainter::Triangles, dusttailVertexArr.size()/3);
+			sPainter->drawFromArray(StelPainter::Triangles, dusttailIndices.size(), 0, true, dusttailIndices.constData());
+		}
+		glDisable(GL_BLEND);
+
+
+
+		if (sPainter)
+			delete sPainter;
+		sPainter=NULL;
+//	}
+}
+
+//// ! Using a formula found at http://www.projectpluto.com/update7b.htm#comet_tail_formula
+//float Comet::getTailLengthAU() const {
+//	float r=getHeliocentricEclipticPos().length();
+//	float mhelio=absoluteMagnitude+slopeParameter*log10(r);
+//	float Lo=pow(((-0.0075f*mhelio - 0.19f)*mhelio + 2.1f) , 10.0);
+//	return Lo*(1.0f-pow(10.0, -4.0f*r))*(1.0f-pow(10.0, -2.0f*r))* AU_KM;
+//}
+//// ! Using a formula found at http://www.projectpluto.com/update7b.htm#comet_tail_formula
+//float Comet::getComaDiameterAU() const {
+//	float r=getHeliocentricEclipticPos().length();
+//	float mhelio=absoluteMagnitude+slopeParameter*log10(r);
+//	float Do=pow(((-0.0033f*mhelio - 0.07f)*mhelio + 3.25f) , 10.0);
+//	return Do*(1.0f-pow(10.0, -2.0f*r))*(1.0f-pow(10.0, -r))* AU_KM;
+//}
+Vec3f Comet::getComaTailLengthsAU(const float dustFactor) const {
+	float r=getHeliocentricEclipticPos().length();
+	float mhelio=absoluteMagnitude+slopeParameter*log10(r);
+	float Do=pow(((-0.0033f*mhelio - 0.07f)*mhelio + 3.25f) , 10.0);
+	float D =Do*(1.0f-pow(10.0, -2.0f*r))*(1.0f-pow(10.0, -r))* AU_KM;
+	float Lo=pow(((-0.0075f*mhelio - 0.19f)*mhelio + 2.1f) , 10.0);
+	float L = Lo*(1.0f-pow(10.0, -4.0f*r))*(1.0f-pow(10.0, -2.0f*r))* AU_KM;
+	return Vec3f(D, L, dustFactor*L);
+}
+//! create parabola shell to represent a tail. Designed for slices=16, stacks=10.
+void Comet::computeParabola(const float radius, const int slices, const int stacks,
+							QVector<double>& vertexArr, QVector<float>& texCoordArr, QVector<unsigned short> &indices) {
+	vertexArr.clear();
+	texCoordArr.clear();
+	indices.clear();
+	int i;
+	// The parabola has triangular faces with vertices on two circles that are rotated against each other. 
+	float xa[2*slices];
+	float ya[2*slices];
+	float x, y, z;
+	
+	// TODO: fill xa, ya with sin/cosines.
+	float da=M_PI/slices; // full circle/2slices
+	for (i=0; i<2*slices; ++i){
+		xa[i]=-sin(i*da);
+		ya[i]=cos(i*da);
+	}
+	
+	// center point, vertex0
+	vertexArr << 0.0f << 0.0f << 0.0f;
+	texCoordArr << 0.5f << 0.5f;	
+	// define the indices lying on circles, starting at 1: odd rings have 1/slices+1/2slices, even-numbered rings straight 1/slices
+	// inner ring#1
+	int ring;
+	for (ring=1; ring<=stacks; ++ring){
+		z=radius*ring/stacks; z*=z;
+		for (i=ring & 1; i<2*slices; i+=2) { // i.e., ring1 has shifted vertices, ring2 has even ones.
+			x=xa[i]*radius*ring/stacks;
+			y=ya[i]*radius*ring/stacks;
+			vertexArr << x << y << z;
+			texCoordArr << 0.5+ x/radius << 0.5+y/radius;
+		}
+	}
+	// now link the faces with indices. That's fun... ;-)
+	for (i=1; i<16; ++i) indices << 0 << i << i+1; // FIX THAT. COUNT TO <16.
+	indices << 0 << 16 << 1; // close inner fan.
+	// The other slices are a repeating pattern of 2 possibilities. Index @ring always is on the inner ring (slices-agon)
+	for (ring=1; ring<stacks; ring+=2) { // odd rings
+		const int first=(ring-1)*slices+1;
+		for (i=0; i<slices-1; ++i){
+			indices << first+i << first+slices+i << first+slices+1+i;
+			indices << first+i << first+slices+1+i << first+1+i;
+		}
+		// closing slice: mesh with other indices...
+		indices << ring*slices << (ring+1)*slices << ring*slices+1;
+		indices << ring*slices << ring*slices+1 << first;
+	}
+
+	for (ring=2; ring<stacks; ring+=2) { // even rings: different sequence.
+		const int first=(ring-1)*slices+1;
+		for (i=0; i<slices-1; ++i){
+			indices << first+i << first+slices+i << first+1+i;
+			indices << first+1+i << first+slices+i << first+slices+1+i;
+		}
+		// closing slice: mesh with other indices...
+		indices << ring*slices << (ring+1)*slices << first;
+		indices << first << (ring+1)*slices << ring*slices+1;
+	}
+//	qDebug() << "Parabola: Vertex index dump\n";
+//	for (int i=0; i<indices.length(); i+=3)
+//		qDebug() << indices[i] << "-" << indices[i+1] << "-" << indices[i+2] << ":"
+//				 << vertexArr[3*indices[i]]   << vertexArr[3*indices[i]+1]   << vertexArr[3*indices[i]+2]   << "/"
+//				 << vertexArr[3*indices[i+1]] << vertexArr[3*indices[i+1]+1] << vertexArr[3*indices[i+1]+2] << "/"
+//				 << vertexArr[3*indices[i+2]] << vertexArr[3*indices[i+2]+1] << vertexArr[3*indices[i+2]+2];
+
 }
