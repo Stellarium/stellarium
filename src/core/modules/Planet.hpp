@@ -99,7 +99,7 @@ public:
 	       bool hasHalo,
 	       const QString &pType);
 
-	~Planet();
+	virtual ~Planet();
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods inherited from StelObject
