@@ -92,7 +92,10 @@ public:
 
     // Compute the orbit for a specified Julian date and return a "stellarium compliant" function
     // GZ: new optional variable: updateSpeedVector, true required for dust tail orientation!
-  void positionAtTimevInVSOP87Coordinates(double JD, double* v, bool updateVelocityVector=false);
+  void positionAtTimevInVSOP87Coordinates(double JD, double* v, bool updateVelocityVector=true);
+  // updating the tails is a bit expensive. try not to overdo it.
+  bool getUpdateTails() const {return updateTails;}
+  void setUpdateTails(const bool update){updateTails=update;}
   Vec3d getVelocity() const {return rdot;} //! return speed value last computed by positionAtTimevInVSOP87Coordinates(JD, v, true)
 private:
   const double q;  //! perihel distance
@@ -104,6 +107,7 @@ private:
   const double n;  //! mean motion (for parabolic orbits: W/dt in Heafner's presentation)
   Vec3d rdot;      //! GZ: velocity vector. Caches velocity from last position computation.
   double rotateToVsop87[9]; //! Rotation matrix
+  bool updateTails; //! flag to signal that tails must be recomputed.
 };
 
 

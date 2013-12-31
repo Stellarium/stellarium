@@ -93,8 +93,18 @@ private:
 	//! @param dustFactor estimate of dust tail length in relation to gas tail length. Default: 0.7.
 	Vec3f getComaTailLengthsAU(const float dustFactor=0.7f) const;
 	void drawTail(StelCore* core, StelProjector::ModelViewTranformP transfo, float screenSz, bool gas);
-	void computeParabola(const float radius, const int slices, const int stacks,
-								QVector<double>& vertexArr, QVector<float>& texCoordArr, QVector<unsigned short>& indices);
+	//! compute tail shape. This is a paraboloid shell with triangular mesh (indexed vertices).
+	//! Try to call not for every frame...
+	//! @param parameter the parameter p of the parabola. z=r²/2p (r²=x²+y²)
+	//! @param lengthfactor The parabola will be lengthened. This shifts the visible focus, so it must be here.
+	//! @param slices segments around the perimeter
+	//! @param stacks cust along the rotational axis
+	//! @param vertexArr vertex array, collects x0, y0, z0, x1, y1, z1, ...
+	//! @param texCoordArr texture coordinates u0, v0, u1, v1, ...
+	//! @param colorArr vertex colors (if not textured) r0, g0, b0, r1, g1, b1, ...
+	//! @param indices into the former arrays (zero-starting), triplets forming triangles: t0,0, t0,1, t0,2, t1,0, t1,1, t1,2, ...
+	void computeParabola(const float parameter, const float topradius, const float zshift, const int slices, const int stacks,
+								QVector<double>& vertexArr, QVector<float>& texCoordArr, QVector<float>& colorArr, QVector<unsigned short>& indices);
 	double absoluteMagnitude;
 	double slopeParameter;
 	double semiMajorAxis;
@@ -107,9 +117,11 @@ private:
 //	StelVertexArray *gasTail;     //!< an even thinner textured paraboloid that represents the gas tail
 	QVector<double> dusttailVertexArr; // TBD: Maybe only one array is required, used with different scalings. Let's see.
 	QVector<float> dusttailTexCoordArr;
+	QVector<float> dusttailColorArr;
 	QVector<unsigned short> dusttailIndices;
 	QVector<double> gastailVertexArr;
 	QVector<float> gastailTexCoordArr;
+	QVector<float> gastailColorArr;
 	QVector<unsigned short> gastailIndices;
 
 

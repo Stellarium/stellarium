@@ -18,6 +18,7 @@
  */
  
 #include "Comet.hpp"
+#include "Orbit.hpp"
 
 #include "StelApp.hpp"
 #include "StelCore.hpp"
@@ -88,9 +89,6 @@ Comet::Comet(const QString& englishName,
 
 	flagLabels = true;
 
-	// TODO: find valid parameters to create paraboloid vertex arrays: dustTail, gasTail.
-	computeParabola(25.f, 16, 16, gastailVertexArr,  gastailTexCoordArr,  gastailIndices);
-	computeParabola(4.f, 16, 12, dusttailVertexArr, dusttailTexCoordArr, dusttailIndices);
 }
 
 Comet::~Comet()
@@ -224,8 +222,8 @@ float Comet::getVMagnitude(const StelCore* core) const
 	//Calculate distances
 	const Vec3d& observerHeliocentricPosition = core->getObserverHeliocentricEclipticPos();
 	const Vec3d& cometHeliocentricPosition = getHeliocentricEclipticPos();
-	const double cometSunDistance = std::sqrt(cometHeliocentricPosition.lengthSquared());
-	const double observerCometDistance = std::sqrt((observerHeliocentricPosition - cometHeliocentricPosition).lengthSquared());
+	const double cometSunDistance = cometHeliocentricPosition.length();
+	const double observerCometDistance = (observerHeliocentricPosition - cometHeliocentricPosition).length();
 
 	//Calculate apparent magnitude
 	//Sources: http://www.clearskyinstitute.com/xephem/help/xephem.html#mozTocId564354
@@ -246,6 +244,26 @@ void Comet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFont
 	if (getEnglishName() == core->getCurrentLocation().planetName)
 	{ // GZ moved this up. Maybe even don't do that? E.g., draw tail while riding the comet? Decide later.
 		return;
+	}
+// NOTE: CometOrbit is in userdataptr!
+
+	CometOrbit* orbit=(CometOrbit*)userDataPtr;
+	Q_ASSERT(orbit);
+	if (orbit->getUpdateTails()  ){
+		// TODO: Compute lengths and orientations from orbit object
+
+		Vec3f tailFactors=getComaTailLengthsAU();
+		qDebug() << "Comet " << englishName << tailFactors[0] << tailFactors[1] << tailFactors[2];
+		//float parameter=eclipticPos.lengthSquared();
+		float gasparameter=tailFactors[0]*tailFactors[0]/(2.0f*tailFactors[1]);
+		float dustparameter=4.0f*tailFactors[0]*tailFactors[0]/(1.5f*tailFactors[1]);
+		// TODO: Influence of H10?
+
+		// TODO: find valid parameters to create paraboloid vertex arrays: dustTail, gasTail.
+		computeParabola(gasparameter, tailFactors[0], -0.5f*gasparameter, 16, 16, gastailVertexArr,  gastailTexCoordArr, gastailColorArr, gastailIndices);
+		computeParabola(dustparameter, 2.0f*tailFactors[0], -0.5f*dustparameter,  16, 16, dusttailVertexArr, dusttailTexCoordArr, dusttailColorArr, dusttailIndices);
+
+		orbit->setUpdateTails(false); // don't update until position has been recalculated elsewhere
 	}
 
 	Mat4d mat = Mat4d::translation(eclipticPos) * rotLocalToParent;
@@ -300,11 +318,20 @@ void Comet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFont
 
 void Comet::drawTail(StelCore* core, StelProjector::ModelViewTranformP transfo, float screenSz, bool gas)
 {
+
+	// TODO: Find rotatin matrix from 0/0/1 to eclipticPosition: crossproduct for axis (normal vector), dotproduct for angle.
+
+	Vec3d eclpos=eclipticPos; eclpos.normalize();
+	Mat4d tailrot=Mat4d::rotation(Vec3d(0.0, 0.0, 1.0)^(eclpos), std::acos(Vec3d(0.0, 0.0, 1.0).dot(eclpos)) );
+
+
 //	if (screenSz>1.)
 //	{
 		StelProjector::ModelViewTranformP transfo2 = transfo->clone();
-		transfo2->combine(Mat4d::zrotation(M_PI/180*(axisRotation + 90.)));
-		transfo2->combine(Mat4d::scaling(0.001d));
+		//transfo2->combine(Mat4d::zrotation(M_PI/180*(axisRotation + 90.)));
+		//transfo2->combine(Mat4d::scaling(Vec3d(1.0, 1.0, 1.0)));
+		transfo2->combine(tailrot);
+		//transfo2->combine(Mat4d::yrotation(M_PI/2)); // From along Z axis towards along X axis
 		StelPainter* sPainter = new StelPainter(core->getProjection(transfo2));
 		sPainter->getLight().disable();
 
@@ -323,14 +350,15 @@ void Comet::drawTail(StelCore* core, StelProjector::ModelViewTranformP transfo, 
 			// allow lazy loading
 			//if (!gasTexture->bind()) return;
 			gasTexture->bind();
-			sPainter->setColor(0.f,0.5f,1.f);
+			sPainter->setColor(0.f,0.5f,0.8f);
 			sPainter->setArrays((Vec3d*)gastailVertexArr.constData(), (Vec2f*)gastailTexCoordArr.constData());
 			//sPainter->drawFromArray(StelPainter::Triangles, gastailVertexArr.size()/3);
 			sPainter->drawFromArray(StelPainter::Triangles, gastailIndices.size(), 0, true, gastailIndices.constData());
+
 		} else {
 			//if (!dustTexture->bind()) return;
 			dustTexture->bind();
-			sPainter->setColor(1.f,0.8f,0.5f);
+			sPainter->setColor(0.7f,0.6f,0.25f);
 			sPainter->setArrays((Vec3d*)dusttailVertexArr.constData(), (Vec2f*)dusttailTexCoordArr.constData());
 			//sPainter->drawFromArray(StelPainter::Triangles, dusttailVertexArr.size()/3);
 			sPainter->drawFromArray(StelPainter::Triangles, dusttailIndices.size(), 0, true, dusttailIndices.constData());
@@ -346,31 +374,23 @@ void Comet::drawTail(StelCore* core, StelProjector::ModelViewTranformP transfo, 
 }
 
 //// ! Using a formula found at http://www.projectpluto.com/update7b.htm#comet_tail_formula
-//float Comet::getTailLengthAU() const {
-//	float r=getHeliocentricEclipticPos().length();
-//	float mhelio=absoluteMagnitude+slopeParameter*log10(r);
-//	float Lo=pow(((-0.0075f*mhelio - 0.19f)*mhelio + 2.1f) , 10.0);
-//	return Lo*(1.0f-pow(10.0, -4.0f*r))*(1.0f-pow(10.0, -2.0f*r))* AU_KM;
-//}
-//// ! Using a formula found at http://www.projectpluto.com/update7b.htm#comet_tail_formula
-//float Comet::getComaDiameterAU() const {
-//	float r=getHeliocentricEclipticPos().length();
-//	float mhelio=absoluteMagnitude+slopeParameter*log10(r);
-//	float Do=pow(((-0.0033f*mhelio - 0.07f)*mhelio + 3.25f) , 10.0);
-//	return Do*(1.0f-pow(10.0, -2.0f*r))*(1.0f-pow(10.0, -r))* AU_KM;
-//}
 Vec3f Comet::getComaTailLengthsAU(const float dustFactor) const {
 	float r=getHeliocentricEclipticPos().length();
 	float mhelio=absoluteMagnitude+slopeParameter*log10(r);
-	float Do=pow(((-0.0033f*mhelio - 0.07f)*mhelio + 3.25f) , 10.0);
-	float D =Do*(1.0f-pow(10.0, -2.0f*r))*(1.0f-pow(10.0, -r))* AU_KM;
-	float Lo=pow(((-0.0075f*mhelio - 0.19f)*mhelio + 2.1f) , 10.0);
-	float L = Lo*(1.0f-pow(10.0, -4.0f*r))*(1.0f-pow(10.0, -2.0f*r))* AU_KM;
+	float Do=pow(10.0f, ((-0.0033f*mhelio - 0.07f)*mhelio + 3.25f));
+	float D =Do*(1.0f-pow(10.0, -2.0f*r))*(1.0f-pow(10.0, -r))* (1000.0f*AU_KM);
+	float Lo=pow(10.0f, ((-0.0075f*mhelio - 0.19f)*mhelio + 2.1f));
+	float L = Lo*(1.0f-pow(10.0, -4.0f*r))*(1.0f-pow(10.0, -2.0f*r))* (1e6*AU_KM);
 	return Vec3f(D, L, dustFactor*L);
 }
-//! create parabola shell to represent a tail. Designed for slices=16, stacks=10.
-void Comet::computeParabola(const float radius, const int slices, const int stacks,
-							QVector<double>& vertexArr, QVector<float>& texCoordArr, QVector<unsigned short> &indices) {
+
+//! create parabola shell to represent a tail. Designed for slices=16, stacks=16.
+// Par equation: z=x²/2p.
+void Comet::computeParabola(const float parameter, const float radius, const float zshift, const int slices, const int stacks,
+							QVector<double>& vertexArr, QVector<float>& texCoordArr, QVector<float> &colorArr, QVector<unsigned short> &indices) {
+	//const float radius=1.0f; // We make a "normalized paraboloid" --> NO WE DONT!
+	//const float zshift=-0.5f*parameter/lengthfactor; // so that local origin is in focus of parabola, i.e. core of comet.
+	const float lengthfactor=1.0f; // TODO REMOVE!
 	vertexArr.clear();
 	texCoordArr.clear();
 	indices.clear();
@@ -380,7 +400,7 @@ void Comet::computeParabola(const float radius, const int slices, const int stac
 	float ya[2*slices];
 	float x, y, z;
 	
-	// TODO: fill xa, ya with sin/cosines.
+	// fill xa, ya with sin/cosines. TBD: make more efficient with index mirroring etc.
 	float da=M_PI/slices; // full circle/2slices
 	for (i=0; i<2*slices; ++i){
 		xa[i]=-sin(i*da);
@@ -388,13 +408,13 @@ void Comet::computeParabola(const float radius, const int slices, const int stac
 	}
 	
 	// center point, vertex0
-	vertexArr << 0.0f << 0.0f << 0.0f;
+	vertexArr << 0.0f << 0.0f << zshift;
 	texCoordArr << 0.5f << 0.5f;	
 	// define the indices lying on circles, starting at 1: odd rings have 1/slices+1/2slices, even-numbered rings straight 1/slices
 	// inner ring#1
 	int ring;
 	for (ring=1; ring<=stacks; ++ring){
-		z=radius*ring/stacks; z*=z;
+		z=ring*radius/stacks; z=z*z/(2*parameter)*lengthfactor + zshift;
 		for (i=ring & 1; i<2*slices; i+=2) { // i.e., ring1 has shifted vertices, ring2 has even ones.
 			x=xa[i]*radius*ring/stacks;
 			y=ya[i]*radius*ring/stacks;
