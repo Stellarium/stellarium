@@ -257,7 +257,10 @@ void CometOrbit::positionAtTimevInVSOP87Coordinates(double JD, double *v, bool u
   //v[0]=p0;
   //v[1]=p1;
   //v[2]=p2;
-  if (updateVelocityVector) rdot.set(s0, s1, s2); // TODO: ROTATE?
+  if (updateVelocityVector) {
+      rdot.set(s0, s1, s2); // TODO: ROTATE?
+      updateTails=true;
+  }
 }
 
 
