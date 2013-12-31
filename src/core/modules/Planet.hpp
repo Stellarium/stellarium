@@ -209,6 +209,7 @@ public:
 	static void setLabelColor(const Vec3f& lc) {labelColor = lc;}
 	static const Vec3f& getLabelColor(void) {return labelColor;}
 
+	// update screen. @param deltaTime: ms (?)
 	void update(int deltaTime);
 
 	void setFlagHints(bool b){hintFader = b;}
@@ -229,7 +230,7 @@ public:
 	Vec3d orbit[ORBIT_SEGMENTS+1];   // store heliocentric coordinates for drawing the orbit
 	Vec3d orbitP[ORBIT_SEGMENTS+1];  // store local coordinate for orbit
 	double lastOrbitJD;
-	double deltaJD;
+	double deltaJD;                  // time difference between positional updates.
 	double deltaOrbitJD;
 	bool orbitCached;                // whether orbit calculations are cached for drawing orbit yet
 	bool closeOrbit;                 // whether to connect the beginning of the orbit line to
@@ -280,7 +281,7 @@ protected:
 	double distance;                 // Temporary variable used to store the distance to a given point
 					 // it is used for sorting while drawing
 	float sphereScale;               // Artificial scaling for better viewing
-	double lastJD;
+	double lastJD;                   // caches JD of last positional computation
 	// The callback for the calculation of the equatorial rect heliocentric position at time JD.
 	posFuncType coordFunc;
 	void* userDataPtr;
