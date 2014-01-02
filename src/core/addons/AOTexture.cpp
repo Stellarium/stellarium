@@ -139,6 +139,7 @@ AddOn::Status AOTexture::installFromImg(QString idInstall, QString downloadedFil
 AddOn::Status AOTexture::uninstallAddOn(const QString& idInstall,
 					const QStringList& selectedFiles) const
 {
+	int installedTextures = 0;
 	int filesRemoved = 0;
 	foreach (QString texture, m_pInstalledTextures->allKeys())
 	{
@@ -147,6 +148,7 @@ AddOn::Status AOTexture::uninstallAddOn(const QString& idInstall,
 			continue;
 		}
 
+		installedTextures++;
 		if (selectedFiles.isEmpty() || selectedFiles.contains(texture))
 		{
 			QFile file(m_sTexturesInstallDir % texture);
@@ -163,7 +165,7 @@ AddOn::Status AOTexture::uninstallAddOn(const QString& idInstall,
 		}
 	}
 
-	if (filesRemoved == selectedFiles.count())
+	if (filesRemoved == installedTextures)
 	{
 		qDebug() << "Add-On Textures : Successfully removed" << idInstall;
 		return AddOn::NotInstalled;
