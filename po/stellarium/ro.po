@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-12-26 00:07+0700\n"
-"PO-Revision-Date: 2013-07-22 13:50+0000\n"
-"Last-Translator: Gaman Gabriel <gamangabriel@gmail.com>\n"
+"PO-Revision-Date: 2014-01-02 00:40+0000\n"
+"Last-Translator: Stoian Andrei-Marian <javaboy.mc@gmail.com>\n"
 "Language-Team: Romanian <ro@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-12-26 05:23+0000\n"
+"X-Launchpad-Export-Date: 2014-01-02 05:10+0000\n"
 "X-Generator: Launchpad (build 16877)\n"
 "100 > 19) || ((n % 100 == 0) && (n != 0))) ? 2: 1))\n"
 
@@ -230,7 +230,7 @@ msgstr "Tip nedocumentat"
 
 #: src/core/modules/NebulaMgr.cpp:123
 msgid "Deep-sky objects"
-msgstr ""
+msgstr "Obiecte extra-solare"
 
 #: src/core/modules/Planet.cpp:142 src/core/modules/MinorPlanet.cpp:233
 #: src/core/modules/MinorPlanet.cpp:237 src/core/modules/Comet.cpp:142
@@ -311,7 +311,7 @@ msgstr "Iluminare: %1%"
 #: src/core/modules/MinorPlanet.cpp:206
 #, qt-format
 msgid "Provisional designation: %1"
-msgstr ""
+msgstr "Denumire provizorie: %1"
 
 #: src/core/modules/SolarSystem.cpp:151
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:302
@@ -525,7 +525,7 @@ msgstr "Adaugă un an sideral"
 
 #: src/core/StelCore.cpp:179
 msgid "Add 1 sidereal century"
-msgstr ""
+msgstr "Adaugă un secol sideral"
 
 #: src/core/StelCore.cpp:180
 msgid "Add 1 synodic month"
@@ -573,7 +573,7 @@ msgstr "Scade un an sideral"
 
 #: src/core/StelCore.cpp:191
 msgid "Subtract 1 sidereal century"
-msgstr ""
+msgstr "Scoate un secol sideral"
 
 #: src/core/StelCore.cpp:192
 msgid "Subtract 1 synodic month"
