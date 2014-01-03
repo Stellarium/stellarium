@@ -1373,7 +1373,9 @@ void Oculars::paintCCDBounds()
 	glDisable(GL_BLEND);
 	glColor3f(0.f,0.f,0.f);
 	glPushMatrix();
-	glTranslated(params.viewportCenter[0], params.viewportCenter[1], 0.0);
+	glTranslated(params.viewportCenter[0] * params.devicePixelsPerPixel,
+					 params.viewportCenter[1] * params.devicePixelsPerPixel,
+					 0.0);
 	glRotated(ccdRotationAngle, 0.0, 0.0, 1.0);
 	GLdouble screenFOV = params.fov;
 
@@ -1391,8 +1393,8 @@ void Oculars::paintCCDBounds()
 			if (params.viewportXywh[2] > params.viewportXywh[3]) {
 				aspectIndex = 3;
 			}
-			float width = params.viewportXywh[aspectIndex] * ccdYRatio;
-			float height = params.viewportXywh[aspectIndex] * ccdXRatio;
+			float width = params.viewportXywh[aspectIndex] * ccdYRatio * params.devicePixelsPerPixel;
+			float height = params.viewportXywh[aspectIndex] * ccdXRatio * params.devicePixelsPerPixel;
 
 			if (width > 0.0 && height > 0.0) {
 				glBegin(GL_LINE_LOOP);
@@ -1421,7 +1423,7 @@ void Oculars::paintCrosshairs()
 	if (useMaxEyepieceAngle && oculars[selectedOcularIndex]->appearentFOV() > 0.0) {
 		length = oculars[selectedOcularIndex]->appearentFOV() * length / maxEyepieceAngle;
 	}
-
+	length *= params.devicePixelsPerPixel;
 	// Draw the lines
 	StelPainter painter(projector);
 	painter.setColor(0.77, 0.14, 0.16, 1);
