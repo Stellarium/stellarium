@@ -92,30 +92,64 @@ StelPluginInfo OcularsStelPluginInterface::getPluginInfo() const
 #endif
 /* ****************************************************************************************************************** */
 Oculars::Oculars():
+	selectedCCDIndex(-1),
+	selectedOcularIndex(-1),
+	selectedTelescopeIndex(-1),
+	selectedLensIndex(-1),
+	flagShowCCD(false),
+	flagShowOculars(false),
+	flagShowCrosshairs(false),
+	flagShowTelrad(false),
+	usageMessageLabelID(-1),
+	flagAzimuthalGrid(false),
+	flagGalacticGrid(false),
+	flagEquatorGrid(false),
+	flagEquatorJ2000Grid(false),
+	flagEquatorLine(false),
+	flagEclipticLine(false),
+	flagEclipticJ2000Grid(false),
+	flagMeridianLine(false),
+	flagHorizonLine(false),
+	flagGalacticPlaneLine(false),
+	flagAdaptation(false),
+	flagLimitStars(false),
+	magLimitStars(0.0),
+	flagLimitDSOs(false),
+	magLimitDSOs(0.0),
+	ccdRotationAngle(0.0),
+	maxEyepieceAngle(0.0),
+	requireSelection(true),
+	flagLimitMagnitude(false),
+	useMaxEyepieceAngle(true),
+	guiPanelEnabled(false),
+	flagDecimalDegrees(false),
+	ccdRotationSignalMapper(0),
+	ccdsSignalMapper(0),
+	ocularsSignalMapper(0),
+	telescopesSignalMapper(0),
+	lenseSignalMapper(0),
 	pxmapGlow(NULL),
 	pxmapOnIcon(NULL),
 	pxmapOffIcon(NULL),
 	toolbarButton(NULL),
+	ready(false),
 	actionShowOcular(0),
 	actionShowCrosshairs(0),
 	actionShowSensor(0),
 	actionShowTelrad(0),
+	actionConfiguration(0),
+	actionMenu(0),
+	actionTelescopeIncrement(0),
+	actionTelescopeDecrement(0),
+	actionOcularIncrement(0),
+	actionOcularDecrement(0),
 	guiPanel(0),
 	actualFOV(0),
 	reticleRotation(0)
 {
 
 	QOpenGLFunctions_1_2::initializeOpenGLFunctions();
-	flagShowCCD = false;
-	flagShowOculars = false;
-	flagShowCrosshairs = false;
-	flagShowTelrad = false;
-	ready = false;
-	requireSelection = true;
-	useMaxEyepieceAngle = true;
-
 	font.setPixelSize(14);
-	maxEyepieceAngle = 0.0;
 
 	ccds = QList<CCD *>();
 	oculars = QList<Ocular *>();
@@ -128,13 +162,6 @@ Oculars::Oculars():
 	telescopesSignalMapper = new QSignalMapper(this);
 	lenseSignalMapper = new QSignalMapper(this);
 	
-	selectedCCDIndex = -1;
-	selectedOcularIndex = -1;
-	selectedTelescopeIndex = -1;
-	selectedLensIndex = -1;
-	
-	usageMessageLabelID = -1;
-
 	setObjectName("Oculars");
 
 #ifdef Q_OS_MAC
@@ -621,7 +648,7 @@ void Oculars::setScaleImageCircle(bool state)
 
 void Oculars::setScreenFOVForCCD()
 {
-	Lens *lens = selectedLensIndex >=0  ? lense[selectedLensIndex] : NULL;
+	Lens * lens = selectedLensIndex >=0  ? lense[selectedLensIndex] : NULL;
 	if (selectedCCDIndex > -1 && selectedTelescopeIndex > -1) {
 		StelCore *core = StelApp::getInstance().getCore();
 		StelMovementMgr *movementManager = core->getMovementMgr();
@@ -1109,10 +1136,11 @@ void Oculars::disableLens()
 void Oculars::rotateCCD(QString amount)
 {
 	ccdRotationAngle += amount.toInt();
-	if (ccdRotationAngle >= 360)
+	if (ccdRotationAngle >= 360) {
 		ccdRotationAngle -= 360;
-	if (ccdRotationAngle <= -360)
+	} else if (ccdRotationAngle <= -360) {
 		ccdRotationAngle += 360;
+	}
 }
 
 void Oculars::selectCCDAtIndex(QString indexString)
@@ -1166,8 +1194,7 @@ void Oculars::selectLensAtIndex(QString indexString)
 void Oculars::toggleCCD(bool show)
 {
 	//If there are no sensors...
-	if (ccds.isEmpty() || telescopes.isEmpty())
-	{
+	if (ccds.isEmpty() || telescopes.isEmpty()) {
 		//TODO: BM: Make this an on-screen message and/or disable the button
 		//if there are no sensors.
 		if (show)
@@ -1176,38 +1203,39 @@ void Oculars::toggleCCD(bool show)
 		flagShowCCD = false;
 		selectedCCDIndex = -1;
 		show = false;
-		if (actionShowSensor->isChecked())
+		if (actionShowSensor->isChecked()) {
 			actionShowSensor->setChecked(false);
+		}
 	}
 
-	if (show)
-	{
+	if (show) {
 		//Mutually exclusive with the ocular mode
 		hideUsageMessageIfDisplayed();
-		if (flagShowOculars)
-		{
-			if (actionShowOcular->isChecked())
+		if (flagShowOculars) {
+			if (actionShowOcular->isChecked()) {
 				actionShowOcular->setChecked(false);
+			}
 		}
 
-		if (flagShowTelrad)
-		{
-			if (actionShowTelrad->isChecked())
+		if (flagShowTelrad) {
+			if (actionShowTelrad->isChecked()) {
 				actionShowTelrad->setChecked(false);
+			}
 		}
 
-		if (selectedTelescopeIndex < 0)
+		if (selectedTelescopeIndex < 0) {
 			selectedTelescopeIndex = 0;
-		if (selectedCCDIndex < 0)
+		}
+		if (selectedCCDIndex < 0) {
 			selectedCCDIndex = 0;
+		}
 		flagShowCCD = true;
 		setScreenFOVForCCD();
 
-		if (guiPanel)
+		if (guiPanel) {
 			guiPanel->showCcdGui();
-	}
-	else
-	{
+		}
+	} else {
 		flagShowCCD = false;
 
 		//Zoom out
@@ -1216,17 +1244,19 @@ void Oculars::toggleCCD(bool show)
 		movementManager->zoomTo(movementManager->getInitFov());
 		movementManager->setFlagTracking(false);
 
-		if (guiPanel)
+		if (guiPanel) {
 			guiPanel->foldGui();
+		}
 	}
 }
 
 void Oculars::toggleCCD()
 {
-	if (flagShowCCD)
+	if (flagShowCCD) {
 		toggleCCD(false);
-	else
+	} else {
 		toggleCCD(true);
+	}
 }
 
 void Oculars::toggleCrosshairs(bool show)
