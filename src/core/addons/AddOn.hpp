@@ -92,7 +92,7 @@ public:
 	QString getLicenseURL() { return m_sLicenseURL; }
 	QString getDownloadFilename() { return m_sDownloadFilename; }
 	QString getDownloadFilepath();
-	quint64 getDownloadSize() { return m_sDownloadSize.toLongLong(); }
+	quint64 getDownloadSize() { return m_sDownloadSize.toLongLong() * 1000; }
 	QString getDownloadURL() { return m_sDownloadURL; }
 	QString getThumbnail() { return m_sThumbnail; }
 	QString getInstallId() { return m_sInstallId; }

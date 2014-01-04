@@ -52,6 +52,8 @@ private:
 	Ui_AddOnWidget* ui;
 	QStringList m_sSelectedFilesToInstall;
 	QStringList m_sSelectedFilesToRemove;
+
+	QString fileSizeToString(float bytes);
 };
 
 #endif // _ADDONWIDGET_HPP

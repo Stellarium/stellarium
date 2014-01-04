@@ -59,7 +59,7 @@ AddOnWidget::AddOnWidget(QWidget* parent, int row, AddOn* addon)
 	ui->txtLicense->setText(addon->getLicenseName() % " <" % addon->getLicenseURL() % ">");
 
 	// Download Size
-	ui->txtSize->setText(QString::number(addon->getDownloadSize()) % " KBytes");
+	ui->txtSize->setText(fileSizeToString(addon->getDownloadSize()));
 
 	// Thumbnail
 	QString thumbnailDir = StelApp::getInstance().getStelAddOnMgr().getThumbnailDir();
@@ -106,6 +106,20 @@ AddOnWidget::~AddOnWidget()
 {
 	delete ui;
 	ui = NULL;
+}
+
+QString AddOnWidget::fileSizeToString(float bytes)
+{
+	QStringList list;
+	list << "KB" << "MB" << "GB" << "TB";
+	QStringListIterator i(list);
+	QString unit("bytes");
+	while(bytes >= 1000.0 && i.hasNext())
+	{
+	    unit = i.next();
+	    bytes /= 1000.0;
+	}
+	return QString::number(bytes,'f',2) % " " % unit;
 }
 
 void AddOnWidget::paintEvent(QPaintEvent*)
