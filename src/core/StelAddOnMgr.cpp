@@ -179,6 +179,10 @@ void StelAddOnMgr::readJsonObject(const QJsonObject& addOns)
 		if (addOn->isValid())
 		{
 			AddOnMap amap;
+			if (m_addons.contains(addOn->getType()))
+			{
+				amap = m_addons.value(addOn->getType());
+			}
 			amap.insert(addOnId, addOn);
 			m_addons.insert(addOn->getType(), amap);
 			m_addonsByMd5.insert(addOn->getChecksum(), addOn);
