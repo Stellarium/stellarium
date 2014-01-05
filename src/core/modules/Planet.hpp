@@ -209,7 +209,7 @@ public:
 	static void setLabelColor(const Vec3f& lc) {labelColor = lc;}
 	static const Vec3f& getLabelColor(void) {return labelColor;}
 
-	// update screen. @param deltaTime: ms (?)
+	// update displayed elements. @param deltaTime: ms (?)
 	void update(int deltaTime);
 
 	void setFlagHints(bool b){hintFader = b;}
@@ -270,9 +270,9 @@ protected:
 					 // centered on the parent Planet
 	Vec3d screenPos;                 // Used to store temporarily the 2D position on screen
 	Vec3d previousScreenPos;         // The position of this planet in the previous frame.
-	Vec3f color;
+	Vec3f color;                     // exclusively used for drawing the planet halo
 
-	float albedo;                    // Planet albedo
+	float albedo;                    // Planet albedo. Used for magnitude computation (but formula dubious!)
 	Mat4d rotLocalToParent;
 	float axisRotation;              // Rotation angle of the Planet on it's axis
 	StelTextureSP texMap;            // Planet map texture
