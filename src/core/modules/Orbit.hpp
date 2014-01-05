@@ -84,6 +84,7 @@ public:
              double ascendingNode,
              double argOfPerhelion,
              double timeAtPerihelion,
+             double orbitGoodDays,
              double meanMotion,              // GZ: for parabolics, this is W/dt in Heafner's lettering
              double parentRotObliquity,           // Comets only have parent==sun, no need for these? Oh yes, VSOP/J2000 eq frames!
              double parentRotAscendingnode,
@@ -96,7 +97,8 @@ public:
   // updating the tails is a bit expensive. try not to overdo it.
   bool getUpdateTails() const {return updateTails;}
   void setUpdateTails(const bool update){updateTails=update;}
-  Vec3d getVelocity() const {return rdot;} //! return speed value last computed by positionAtTimevInVSOP87Coordinates(JD, v, true)
+  Vec3d getVelocity() const {return rdot;} //! return speed value [AU/d] last computed by positionAtTimevInVSOP87Coordinates(JD, v, true)
+  bool objectDateValid(const double JD) const {return (fabs(t0-JD)<orbitGood);}
 private:
   const double q;  //! perihel distance
   const double e;  //! eccentricity
@@ -105,9 +107,10 @@ private:
   const double w;  //! argument of perihel // GZ RENAMED from o
   const double t0; //! time of perihel, JDE
   const double n;  //! mean motion (for parabolic orbits: W/dt in Heafner's presentation)
-  Vec3d rdot;      //! GZ: velocity vector. Caches velocity from last position computation.
+  Vec3d rdot;      //! GZ: velocity vector. Caches velocity from last position computation, [AU/d]
   double rotateToVsop87[9]; //! Rotation matrix
   bool updateTails; //! flag to signal that tails must be recomputed.
+  const double orbitGood; //! orb. elements are only valid for this time [days]. Don't draw the object outside.
 };
 
 

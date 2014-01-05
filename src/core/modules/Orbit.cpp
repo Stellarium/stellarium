@@ -190,13 +190,14 @@ CometOrbit::CometOrbit(double pericenterDistance,
                        double ascendingNode,
                        double argOfPerhelion,
                        double timeAtPerihelion,
+                       double orbitGoodDays,
                        double meanMotion,              // GZ: for parabolics, this is W/dt in Heafner's lettering
                        double parentRotObliquity,      // GZ: I don't see any use for this, should be 0 for comets.
                        double parentRotAscendingnode,  // GZ: I don't see any use for this, should be 0 for comets.
                        double parentRotJ2000Longitude) // GZ: I don't see any use for this, should be 0 for comets.
                       //)
             :q(pericenterDistance),e(eccentricity),i(inclination),
-            Om(ascendingNode),w(argOfPerhelion),t0(timeAtPerihelion),
+            Om(ascendingNode),w(argOfPerhelion),t0(timeAtPerihelion),orbitGood(orbitGoodDays),
             n(meanMotion) {
 //        qDebug() << "CometOrbit::()";
   rdot.set(0.0, 0.0, 0.0);
