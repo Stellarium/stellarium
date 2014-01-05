@@ -278,7 +278,7 @@ double Planet::getParentSatellitesFov(const StelCore* core) const
 	return -1.0;
 }
 
-// Set the orbital elements
+// Set the rotational elements of the planet body.
 void Planet::setRotationElements(float _period, float _offset, double _epoch, float _obliquity, float _ascendingNode, float _precessionRate, double _siderealPeriod )
 {
 	re.period = _period;
@@ -887,7 +887,7 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 		else
 		{
 			sPainter->getLight().disable();
-			sPainter->setColor(1.f,1.f,1.f);
+			sPainter->setColor(albedo,albedo,albedo);
 		}
 
 		if (rings)
@@ -1091,7 +1091,7 @@ void Planet::drawHints(const StelCore* core, const QFont& planetNameFont)
 	sPainter.setColor(labelColor[0], labelColor[1], labelColor[2],labelsFader.getInterstate());
 	sPainter.drawText(screenPos[0],screenPos[1], getSkyLabel(core), 0, tmp, tmp, false);
 
-	// hint disapears smoothly on close view
+	// hint disappears smoothly on close view
 	if (hintFader.getInterstate()<=0)
 		return;
 	tmp -= 10.f;
