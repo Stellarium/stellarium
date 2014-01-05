@@ -359,7 +359,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 	{
 		totalPlanets++;
 		const QString secname = orderedSections.at(i);
-		const QString englishName = pd.value(secname+"/name").toString();
+		const QString englishName = pd.value(secname+"/name").toString().simplified();
 		const QString strParent = pd.value(secname+"/parent").toString();
 		PlanetP parent;
 		if (strParent!="none")
@@ -559,6 +559,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 					time_at_pericenter = epoch - mean_anomaly / meanMotion;
 				}
 			}
+			const double orbitGoodDays=pd.value(secname+"/orbit_good", 1000).toDouble();
 			const double inclination = pd.value(secname+"/orbit_Inclination").toDouble()*(M_PI/180.0);
 			const double arg_of_pericenter = pd.value(secname+"/orbit_ArgOfPericenter").toDouble()*(M_PI/180.0);
 			const double ascending_node = pd.value(secname+"/orbit_AscendingNode").toDouble()*(M_PI/180.0);
@@ -585,6 +586,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 							 ascending_node,
 							 arg_of_pericenter,
 							 time_at_pericenter,
+							 orbitGoodDays,
 							 meanMotion,
 							 parentRotObliquity,
 							 parent_rot_asc_node,
@@ -710,8 +712,8 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 		// Create the Solar System body and add it to the list
 		QString type = pd.value(secname+"/type").toString();		
 		PlanetP p;
-		// New class objects, named "plutoid", has properties similar asteroids and we should calculate their
-		// positions like for asteroids. Plutoids having one exception - Pluto - we should use special
+		// New class objects, named "plutoid", has properties similar to asteroids and we should calculate their
+		// positions like for asteroids. Plutoids have one exception: Pluto - we should use special
 		// function for calculation of orbit of Pluto.
 		if ((type == "asteroid" || type == "plutoid") && !englishName.contains("Pluto"))
 		{
@@ -735,7 +737,6 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 			int minorPlanetNumber = pd.value(secname+"/minor_planet_number", 0).toInt();
 			if (minorPlanetNumber)
 			{
-
 				mp->setMinorPlanetNumber(minorPlanetNumber);
 			}
 
@@ -777,8 +778,12 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 			               userDataPtr,
 			               osculatingFunc,
 			               closeOrbit,
-				       pd.value(secname+"/hidden", 0).toBool(),				       
-				       type));
+						   pd.value(secname+"/hidden", 0).toBool(),
+						   type,
+						   pd.value(secname+"/dust_widthfactor", 1.5f).toFloat(),
+						   pd.value(secname+"/dust_lengthfactor", 0.4f).toFloat(),
+						   pd.value(secname+"/dust_brightnessfactor", 1.5f).toFloat()
+						  ));
 
 			QSharedPointer<Comet> mp =  p.dynamicCast<Comet>();
 
