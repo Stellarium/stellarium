@@ -96,7 +96,9 @@ float StelObject::getVMagnitudeWithExtinction(const StelCore* core) const
 	Vec3d altAzPos = getAltAzPosGeometric(core);
 	altAzPos.normalize();
 	float vMag = getVMagnitude(core);
-	core->getSkyDrawer()->getExtinction().forward(altAzPos, &vMag); 
+	// GZ 2014-01-02: without the test, planets flicker stupidly in fullsky atmosphere-less view.
+	if (core->getSkyDrawer()->getFlagHasAtmosphere())
+		core->getSkyDrawer()->getExtinction().forward(altAzPos, &vMag);
 	return vMag;
 }
 
