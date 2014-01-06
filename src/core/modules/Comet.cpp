@@ -295,12 +295,13 @@ void Comet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFont
 		float gasparameter=tailFactors[0]*tailFactors[0]/(2.0f*tailFactors[1]); // parabola formula: z=r²/2p, so p=r²/2z
 		// The dust tail is thicker and usually shorter. The factors can be configured in the elements.
 		float dustparameter=tailFactors[0]*tailFactors[0]*dustTailWidthFactor*dustTailWidthFactor/(2.0f*dustTailLengthFactor*tailFactors[1]);
-		// TODO: Influence of H10?  --> are included...
 
-		// TODO: find valid parameters to create paraboloid vertex arrays: dustTail, gasTail.
+		// Find valid parameters to create paraboloid vertex arrays: dustTail, gasTail.
 		computeParabola(gasparameter, tailFactors[0], -0.5f*gasparameter, 16, 16, gastailVertexArr,  gastailTexCoordArr, gastailIndices);
+		// This was for a rotated straight parabola:
 		//computeParabola(dustparameter, 2.0f*tailFactors[0], -0.5f*dustparameter,  16, 16, dusttailVertexArr, dusttailTexCoordArr, dusttailIndices);
-		computeParabola(dustparameter, dustTailWidthFactor*tailFactors[0], -0.5f*dustparameter,  16, 16, dusttailVertexArr, gastailTexCoordArr, gastailIndices);
+		// Now we make a skewed parabola. Skew factor 15 (last arg) ad-hoc/empirical. TBD later: Find physically correct solution.
+		computeParabola(dustparameter, dustTailWidthFactor*tailFactors[0], -0.5f*dustparameter,  16, 16, dusttailVertexArr, gastailTexCoordArr, gastailIndices, 25.0f*orbit->getVelocity().length());
 
 		// Note that we use a diameter larger than what the formula returns. A scale factor of 1.2 is ad-hoc/empirical (GZ), but may look better.
 		computeComa(1.0f*tailFactors[0]);
@@ -370,10 +371,12 @@ void Comet::drawTail(StelCore* core, StelProjector::ModelViewTranformP transfo, 
 	if (!gas) {
 		CometOrbit* orbit=(CometOrbit*)userDataPtr;
 		Vec3d velocity=orbit->getVelocity(); // [AU/d]
-		Mat4d dustTailRot=Mat4d::rotation(eclposNrm^(-velocity), 0.15f*std::acos(eclposNrm.dot(-velocity))); // GZ: This scale factor of 0.15 is empirical from photos of Halley and Hale-Bopp.
+		// This was a try to rotate a straight parabola somewhat away from the antisolar direction.
+		//Mat4d dustTailRot=Mat4d::rotation(eclposNrm^(-velocity), 0.15f*std::acos(eclposNrm.dot(-velocity))); // GZ: This scale factor of 0.15 is empirical from photos of Halley and Hale-Bopp.
+		// The curved tail is curved towards positive X. We first rotate around the Z axis into a direction opposite of the motion vector, then again the antisolar rotation applies.
+		Mat4d dustTailRot=Mat4d::zrotation(atan2(velocity[1], velocity[0]) + M_PI);
 		transfo2->combine(dustTailRot);
 	}
-	//transfo2->combine(Mat4d::yrotation(M_PI/2)); // From along Z axis towards along X axis
 	StelPainter* sPainter = new StelPainter(core->getProjection(transfo2));
 	sPainter->getLight().disable();
 	glEnable(GL_BLEND);
@@ -397,6 +400,7 @@ void Comet::drawTail(StelCore* core, StelProjector::ModelViewTranformP transfo, 
 		magFactor*=atmLumFactor*atmLumFactor;
 	}
 	magFactor*=(gas? 0.9 : dustTailBrightnessFactor); // TBD: empirical adjustment for texture brightness.
+	magFactor=qMin(magFactor, 1.05f); // Limit excessively bright display.
 
 	gasTailTexture->bind();
 
@@ -444,19 +448,8 @@ void Comet::drawComa(StelCore* core, StelProjector::ModelViewTranformP transfo)
 	float mag100pct=minSkyMag-6.0f; // should be 5, but let us draw it a bit brighter.
 	float magDrop=getVMagnitudeWithExtinction(core)-mag100pct;
 	float magFactor=std::pow(0.6f , magDrop);
-	//float magFactor=std::pow(0.6f , getVMagnitude(core));
-/*	if (core->getSkyDrawer()->getFlagHasAtmosphere())
-	{
-		// Mix with sky brightness and light pollution: This is very ad-hoc, if someone finds a better solution, please go ahead!
-		// Light pollution:
-		float bortleIndexFactor=0.1f * (11 - core->getSkyDrawer()->getBortleScaleIndex());
-		magFactor*= bortleIndexFactor*bortleIndexFactor; // GZ-Guesstimate for light pollution influence
-		// sky brightness: This is about 10 for twilight where bright comet tails should already be visible. Dark night is close to 0.
-		float avgAtmLum=GETSTELMODULE(LandscapeMgr)->getAtmosphereAverageLuminance();
-		float atmLumFactor=(10.0f-avgAtmLum)/10.0f;  if (atmLumFactor<0.0f) atmLumFactor=0.0f;    //atmLumFactor=std::sqrt(atmLumFactor);
-		magFactor*=atmLumFactor*atmLumFactor;
-	}
-*/
+	magFactor=qMin(magFactor, 2.0f); // Limit excessively bright display.
+
 
 	comaTexture->bind();
 	sPainter->setColor(magFactor,magFactor,0.6f*magFactor);
@@ -489,8 +482,9 @@ void Comet::computeComa(const float diameter)
 //! create parabola shell to represent a tail. Designed for slices=16, stacks=16, but should work with other sizes as well.
 //! (Maybe slices must be an even number.)
 // Parabola equation: z=x²/2p.
+// xOffset for the dust tail, this may introduce a bend. Units are x per sqrt(z).
 void Comet::computeParabola(const float parameter, const float radius, const float zshift, const int slices, const int stacks,
-							QVector<double>& vertexArr, QVector<float>& texCoordArr, QVector<unsigned short> &indices) {
+							QVector<double>& vertexArr, QVector<float>& texCoordArr, QVector<unsigned short> &indices, const float xOffset) {
 	vertexArr.clear();
 	//texCoordArr.clear();
 	//indices.clear();
@@ -517,10 +511,11 @@ void Comet::computeParabola(const float parameter, const float radius, const flo
 	int ring;
 	for (ring=1; ring<=stacks; ++ring){
 		z=ring*radius/stacks; z=z*z/(2*parameter) + zshift;
+		float xShift= xOffset*z*z;
 		for (i=ring & 1; i<2*slices; i+=2) { // i.e., ring1 has shifted vertices, ring2 has even ones.
-			x=xa[i]*radius*ring/stacks;
+			x=xa[i]*radius*ring/stacks ;
 			y=ya[i]*radius*ring/stacks;
-			vertexArr << x << y << z;
+			vertexArr << x+xShift << y << z;
 			if (createTexcoords) texCoordArr << 0.5+ 0.5*x/radius << 0.5+0.5*y/radius;
 		}
 	}
