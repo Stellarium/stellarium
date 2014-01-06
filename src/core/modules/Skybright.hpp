@@ -46,26 +46,26 @@ public:
 	//! @param year the year in YYYY format
 	//! @param month the month: 1=Jan, 12=Dec
 	//! @param moonPhase the moon phase in radian 0=Full Moon, PI/2=First Quadrant/Last Quadran, PI=No Moon
-	void setDate(int year, int month, float moonPhase);
+	void setDate(const int year, const int month, const float moonPhase);
 
 	//! Set the position parameters to use for atmosphere computation
 	//! @param latitude observer latitude in radian
 	//! @param altitude observer altitude in m
 	//! @param temperature temperature in deg. C
 	//! @param relativeHumidity air humidity in %
-	void setLocation(float latitude, float altitude, float temperature=15.f, float relativeHumidity=40.f);
+	void setLocation(const float latitude, const float altitude, const float temperature=15.f, const float relativeHumidity=40.f);
 
 	//! Set the moon and sun zenith angular distance (cosin given) and precompute what can be
 	//! This function has to be called once before any call to getLuminance()
 	//! @param cosDistMoonZenith cos(angular distance between moon and zenith)
 	//! @param cosDistSunZenith cos(angular distance between sun and zenith)
-	void setSunMoon(float cosDistMoonZenith, float cosDistSunZenith);
+	void setSunMoon(const float cosDistMoonZenith, const float cosDistSunZenith);
 
 	//! Compute the luminance at the given position
 	//! @param cosDistMoon cos(angular distance between moon and the position)
 	//! @param cosDistSun cos(angular distance between sun  and the position)
 	//! @param cosDistZenith cos(angular distance between zenith and the position)
-	float getLuminance(float cosDistMoon, float cosDistSun, float cosDistZenith) const;
+	float getLuminance(float cosDistMoon, const float cosDistSun, const float cosDistZenith) const;
 
 private:
 	float airMassMoon;  // Air mass for the Moon
