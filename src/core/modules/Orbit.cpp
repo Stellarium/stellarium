@@ -96,7 +96,7 @@ static void InitPar(const double q, const double n, const double dt, double &rCo
 //    const double W=1.5*M;
     const double W=dt*n;
     const double Y=cbrt(W+sqrt(W*W+1));
-    const double tanNu2=(Y-1.0)/Y;
+    const double tanNu2=Y-1.0/Y; // Heafner (5.5.8) has an error here, writes (Y-1)/Y.
     rCosNu=q*(1.0-tanNu2*tanNu2);
     rSinNu=2.0*q*tanNu2;
 }
