@@ -292,16 +292,17 @@ void Comet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFont
 		// TODO: This part should possibly be moved to another thread to keep draw() free from too much computation.
 
 		Vec2f tailFactors=getComaDiameterAndTailLengthAU();
-		float gasparameter=tailFactors[0]*tailFactors[0]/(2.0f*tailFactors[1]); // parabola formula: z=r²/2p, so p=r²/2z
+		float gasTailEndRadius=qMax(tailFactors[0], 0.025f*tailFactors[1]) ; // This avoids too slim gas tails for bright comets like Hale-Bopp.
+		float gasparameter=gasTailEndRadius*gasTailEndRadius/(2.0f*tailFactors[1]); // parabola formula: z=r²/2p, so p=r²/2z
 		// The dust tail is thicker and usually shorter. The factors can be configured in the elements.
 		float dustparameter=tailFactors[0]*tailFactors[0]*dustTailWidthFactor*dustTailWidthFactor/(2.0f*dustTailLengthFactor*tailFactors[1]);
 
 		// Find valid parameters to create paraboloid vertex arrays: dustTail, gasTail.
-		computeParabola(gasparameter, tailFactors[0], -0.5f*gasparameter, 16, 16, gastailVertexArr,  gastailTexCoordArr, gastailIndices);
+		computeParabola(gasparameter, gasTailEndRadius, -0.5f*gasparameter, 16, 16, gastailVertexArr,  gastailTexCoordArr, gastailIndices);
 		// This was for a rotated straight parabola:
 		//computeParabola(dustparameter, 2.0f*tailFactors[0], -0.5f*dustparameter,  16, 16, dusttailVertexArr, dusttailTexCoordArr, dusttailIndices);
 		// Now we make a skewed parabola. Skew factor 15 (last arg) ad-hoc/empirical. TBD later: Find physically correct solution.
-		computeParabola(dustparameter, dustTailWidthFactor*tailFactors[0], -0.5f*dustparameter,  16, 16, dusttailVertexArr, gastailTexCoordArr, gastailIndices, 25.0f*orbit->getVelocity().length());
+		computeParabola(dustparameter, dustTailWidthFactor*gasTailEndRadius, -0.5f*dustparameter,  16, 16, dusttailVertexArr, gastailTexCoordArr, gastailIndices, 25.0f*orbit->getVelocity().length());
 
 		// Note that we use a diameter larger than what the formula returns. A scale factor of 1.2 is ad-hoc/empirical (GZ), but may look better.
 		computeComa(1.0f*tailFactors[0]);
@@ -376,6 +377,9 @@ void Comet::drawTail(StelCore* core, StelProjector::ModelViewTranformP transfo, 
 		// The curved tail is curved towards positive X. We first rotate around the Z axis into a direction opposite of the motion vector, then again the antisolar rotation applies.
 		Mat4d dustTailRot=Mat4d::zrotation(atan2(velocity[1], velocity[0]) + M_PI);
 		transfo2->combine(dustTailRot);
+		// In addition, we let the dust tail already start with a light tilt.
+		Mat4d dustTailYrot=Mat4d::yrotation(5.0f*velocity.length()); // again, this is pretty ad-hoc, feel free to improve!
+		transfo2->combine(dustTailYrot);
 	}
 	StelPainter* sPainter = new StelPainter(core->getProjection(transfo2));
 	sPainter->getLight().disable();
