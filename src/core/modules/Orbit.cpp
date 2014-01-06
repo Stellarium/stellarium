@@ -197,8 +197,8 @@ CometOrbit::CometOrbit(double pericenterDistance,
                        double parentRotJ2000Longitude) // GZ: I don't see any use for this, should be 0 for comets.
                       //)
             :q(pericenterDistance),e(eccentricity),i(inclination),
-            Om(ascendingNode),w(argOfPerhelion),t0(timeAtPerihelion),orbitGood(orbitGoodDays),
-            n(meanMotion) {
+            Om(ascendingNode),w(argOfPerhelion),t0(timeAtPerihelion),
+            n(meanMotion), orbitGood(orbitGoodDays) {
 //        qDebug() << "CometOrbit::()";
   rdot.set(0.0, 0.0, 0.0);
   const double c_obl = cos(parentRotObliquity);         // 1?
