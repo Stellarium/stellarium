@@ -295,7 +295,7 @@ void Comet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFont
 		float gasTailEndRadius=qMax(tailFactors[0], 0.025f*tailFactors[1]) ; // This avoids too slim gas tails for bright comets like Hale-Bopp.
 		float gasparameter=gasTailEndRadius*gasTailEndRadius/(2.0f*tailFactors[1]); // parabola formula: z=r²/2p, so p=r²/2z
 		// The dust tail is thicker and usually shorter. The factors can be configured in the elements.
-		float dustparameter=tailFactors[0]*tailFactors[0]*dustTailWidthFactor*dustTailWidthFactor/(2.0f*dustTailLengthFactor*tailFactors[1]);
+		float dustparameter=gasTailEndRadius*gasTailEndRadius*dustTailWidthFactor*dustTailWidthFactor/(2.0f*dustTailLengthFactor*tailFactors[1]);
 
 		// Find valid parameters to create paraboloid vertex arrays: dustTail, gasTail.
 		computeParabola(gasparameter, gasTailEndRadius, -0.5f*gasparameter, 16, 16, gastailVertexArr,  gastailTexCoordArr, gastailIndices);
@@ -400,7 +400,7 @@ void Comet::drawTail(StelCore* core, StelProjector::ModelViewTranformP transfo, 
 		magFactor*= bortleIndexFactor*bortleIndexFactor; // GZ-Guesstimate for light pollution influence
 		// sky brightness: This is about 10 for twilight where bright comet tails should already be visible. Dark night is close to 0.
 		float avgAtmLum=GETSTELMODULE(LandscapeMgr)->getAtmosphereAverageLuminance();
-		float atmLumFactor=(10.0f-avgAtmLum)/10.0f;  if (atmLumFactor<0.0f) atmLumFactor=0.0f;    //atmLumFactor=std::sqrt(atmLumFactor);
+		float atmLumFactor=(15.0f-avgAtmLum)/15.0f;  if (atmLumFactor<0.05f) atmLumFactor=0.05f;    //atmLumFactor=std::sqrt(atmLumFactor);
 		magFactor*=atmLumFactor*atmLumFactor;
 	}
 	magFactor*=(gas? 0.9 : dustTailBrightnessFactor); // TBD: empirical adjustment for texture brightness.
@@ -409,13 +409,13 @@ void Comet::drawTail(StelCore* core, StelProjector::ModelViewTranformP transfo, 
 	gasTailTexture->bind();
 
 	if (gas) {
-		//gasTexture->bind();
-		sPainter->setColor(0.15f*magFactor,0.15f*magFactor,0.8f*magFactor);
+		//gasTailTexture->bind();
+		sPainter->setColor(0.15f*magFactor,0.15f*magFactor,0.6f*magFactor);
 		sPainter->setArrays((Vec3d*)gastailVertexArr.constData(), (Vec2f*)gastailTexCoordArr.constData());
 		sPainter->drawFromArray(StelPainter::Triangles, gastailIndices.size(), 0, true, gastailIndices.constData());
 
 	} else {
-		//dustTexture->bind();
+		//dustTailTexture->bind();
 		sPainter->setColor(magFactor, magFactor,0.6f*magFactor);
 		//sPainter->setArrays((Vec3d*)dusttailVertexArr.constData(), (Vec2f*)dusttailTexCoordArr.constData());
 		//sPainter->drawFromArray(StelPainter::Triangles, dusttailIndices.size(), 0, true, dusttailIndices.constData());
