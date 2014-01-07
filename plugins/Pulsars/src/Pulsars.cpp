@@ -605,6 +605,8 @@ void Pulsars::restoreDefaultConfigIni(void)
 	conf->setValue("update_frequency_days", 100);
 	conf->setValue("flag_show_pulsars_button", true);
 	conf->setValue("marker_color", "0.4,0.5,1.0");
+	conf->setValue("glitch_color", "0.2,0.3,1.0");
+	conf->setValue("use_separate_colors", false);
 	conf->endGroup();
 }
 
@@ -617,7 +619,9 @@ void Pulsars::readSettingsFromConfig(void)
 	lastUpdate = QDateTime::fromString(conf->value("last_update", "2012-05-24T12:00:00").toString(), Qt::ISODate);
 	updatesEnabled = conf->value("updates_enabled", true).toBool();
 	setDisplayMode(conf->value("distribution_enabled", false).toBool());
-	setMarkerColor(conf->value("marker_color", "0.4,0.5,1.0").toString());
+	setGlitchFlag(conf->value("use_separate_colors", false).toBool());
+	setMarkerColor(conf->value("marker_color", "0.4,0.5,1.0").toString(), true);
+	setMarkerColor(conf->value("glitch_color", "0.2,0.3,1.0").toString(), false);
 	enableAtStartup = conf->value("enable_at_startup", false).toBool();
 	flagShowPulsarsButton = conf->value("flag_show_pulsars_button", true).toBool();
 
@@ -632,9 +636,11 @@ void Pulsars::saveSettingsToConfig(void)
 	conf->setValue("update_frequency_days", updateFrequencyDays);
 	conf->setValue("updates_enabled", updatesEnabled );
 	conf->setValue("distribution_enabled", getDisplayMode());
+	conf->setValue("use_separate_colors", getGlitchFlag());
 	conf->setValue("enable_at_startup", enableAtStartup);
 	conf->setValue("flag_show_pulsars_button", flagShowPulsarsButton);
-	conf->setValue("marker_color", getMarkerColor());
+	conf->setValue("marker_color", getMarkerColor(true));
+	conf->setValue("glitch_color", getMarkerColor(false));
 
 	conf->endGroup();
 }
@@ -771,13 +777,30 @@ void Pulsars::setDisplayMode(bool b)
 	Pulsar::distributionMode=b;
 }
 
-QString Pulsars::getMarkerColor()
+bool Pulsars::getGlitchFlag()
 {
-	Vec3f c = Pulsar::markerColor;
+	return Pulsar::glitchFlag;
+}
+
+void Pulsars::setGlitchFlag(bool b)
+{
+	Pulsar::glitchFlag=b;
+}
+
+QString Pulsars::getMarkerColor(bool mtype)
+{
+	Vec3f c;
+	if (mtype)
+		c = Pulsar::markerColor;
+	else
+		c = Pulsar::glitchColor;
 	return QString("%1,%2,%3").arg(c[0]).arg(c[1]).arg(c[2]);
 }
 
-void Pulsars::setMarkerColor(QString c)
+void Pulsars::setMarkerColor(QString c, bool mtype)
 {
-	Pulsar::markerColor = StelUtils::strToVec3f(c);
+	if (mtype)
+		Pulsar::markerColor = StelUtils::strToVec3f(c);
+	else
+		Pulsar::glitchColor = StelUtils::strToVec3f(c);
 }
