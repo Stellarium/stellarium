@@ -93,7 +93,9 @@ private:
 	static StelTextureSP hintTexture;
 	static StelTextureSP markerTexture;
 	static bool distributionMode;
+	static bool glitchFlag;
 	static Vec3f markerColor;
+	static Vec3f glitchColor;
 
 	void draw(StelCore* core, StelPainter *painter);
 
@@ -114,6 +116,7 @@ private:
 	float s600;		//! Time averaged flux density at 600MHz in mJy
 	float s1400;		//! Time averaged flux density at 1400MHz in mJy
 	float distance;		//! Distance based on electron density model in kpc
+	int glitch;		//! Number of glitches
 	QString notes;		//! Notes to pulsar (Type of pulsar)
 
 	LinearFader labelsFader;

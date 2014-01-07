@@ -77,6 +77,7 @@ for ($i=0;$i<scalar(@cat)-1;$i++) {
 	$elong = "";
 	$flag = 0;
 	$notes = "";
+	$glitch = 0;
 	for ($j=0;$j<scalar(@lines);$j++) {
 		if ($lines[$j] =~ /^PSRJ(\s+)J([\d]{4})([\+\-]{1})([\d]{2,4})([\w]{0,1})(\s+)/) {
 			$name = $2.$3.$4.$5;
@@ -169,6 +170,11 @@ for ($i=0;$i<scalar(@cat)-1;$i++) {
 		{
 			$notes = $2;
 		}
+
+		if ($lines[$j] =~ /^NGLT(\s+)([\d]+)/)
+		{
+			$glitch = $2;
+		}
 	}
 
 	$out  = "\t\t\"PSR J".$name."\":\n";
@@ -211,6 +217,9 @@ for ($i=0;$i<scalar(@cat)-1;$i++) {
 	}
 	if ($s1400 > 0) {
 		$out .= "\t\t\t\"s1400\": ".$s1400.",\n";
+	}
+	if ($glitch > 0) {
+		$out .= "\t\t\t\"glitch\": ".$glitch.",\n";
 	}
 	if ($notes ne '')
 	{
