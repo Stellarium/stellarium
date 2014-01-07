@@ -56,7 +56,12 @@ AddOnWidget::AddOnWidget(QWidget* parent, int row, AddOn* addon)
 	ui->txtDescription->setText(addon->getDescription());
 
 	// License (name and url)
-	ui->txtLicense->setText(addon->getLicenseName() % " <" % addon->getLicenseURL() % ">");
+	QString licensetxt = addon->getLicenseName();
+	if (!addon->getLicenseURL().isEmpty())
+	{
+		licensetxt += " <" % addon->getLicenseURL() % ">";
+	}
+	ui->txtLicense->setText(licensetxt);
 
 	// Download Size
 	ui->txtSize->setText(fileSizeToString(addon->getDownloadSize()));
