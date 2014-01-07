@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-24 21:46+0700\n"
-"PO-Revision-Date: 2013-07-22 13:50+0000\n"
-"Last-Translator: Gaman Gabriel <gamangabriel@gmail.com>\n"
+"POT-Creation-Date: 2013-12-26 00:07+0700\n"
+"PO-Revision-Date: 2014-01-06 21:39+0000\n"
+"Last-Translator: Stoian Andrei-Marian <javaboy.mc@gmail.com>\n"
 "Language-Team: Romanian <ro@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-12-25 05:27+0000\n"
+"X-Launchpad-Export-Date: 2014-01-07 04:41+0000\n"
 "X-Generator: Launchpad (build 16877)\n"
 "100 > 19) || ((n % 100 == 0) && (n != 0))) ? 2: 1))\n"
 
@@ -230,7 +230,7 @@ msgstr "Tip nedocumentat"
 
 #: src/core/modules/NebulaMgr.cpp:123
 msgid "Deep-sky objects"
-msgstr ""
+msgstr "Obiecte extra-solare"
 
 #: src/core/modules/Planet.cpp:142 src/core/modules/MinorPlanet.cpp:233
 #: src/core/modules/MinorPlanet.cpp:237 src/core/modules/Comet.cpp:142
@@ -259,7 +259,7 @@ msgstr "Distanţă: %1AU (%2 km)"
 #: src/core/modules/Comet.cpp:161
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 Mio km)"
-msgstr ""
+msgstr "Distanța: %1AU (%2 Mil. km.)"
 
 #: src/core/modules/Planet.cpp:186
 #, qt-format
@@ -311,7 +311,7 @@ msgstr "Iluminare: %1%"
 #: src/core/modules/MinorPlanet.cpp:206
 #, qt-format
 msgid "Provisional designation: %1"
-msgstr ""
+msgstr "Denumire provizorie: %1"
 
 #: src/core/modules/SolarSystem.cpp:151
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:302
@@ -338,7 +338,7 @@ msgstr "stea"
 #: plugins/Quasars/src/Quasar.cpp:112
 #, qt-format
 msgid "Color Index (B-V): <b>%1</b>"
-msgstr ""
+msgstr "Indexul culorilor(B-V): <b>%1</b>"
 
 #: src/core/modules/StarWrapper.cpp:144
 msgid "eruptive variable star"
@@ -457,11 +457,11 @@ msgstr "Deplasare și selectare"
 
 #: src/core/StelCore.cpp:162
 msgid "Increase time speed"
-msgstr "Mărește viteza ceasului"
+msgstr "Mărește videza scurgerii timpului"
 
 #: src/core/StelCore.cpp:163
 msgid "Decrease time speed"
-msgstr "Scade viteza ceasului"
+msgstr "Micșorează viteza scurgerii timpului"
 
 #: src/core/StelCore.cpp:164
 msgid "Increase time speed (a little)"
@@ -473,7 +473,7 @@ msgstr "Micșorează viteza scurgerii timpului (puțin)"
 
 #: src/core/StelCore.cpp:166
 msgid "Set normal time rate"
-msgstr "Setează rata ceasului"
+msgstr "Stabilește viteza normală a scurgerii timpului"
 
 #: src/core/StelCore.cpp:167
 msgid "Set time rate to zero"
@@ -525,7 +525,7 @@ msgstr "Adaugă un an sideral"
 
 #: src/core/StelCore.cpp:179
 msgid "Add 1 sidereal century"
-msgstr ""
+msgstr "Adaugă un secol sideral"
 
 #: src/core/StelCore.cpp:180
 msgid "Add 1 synodic month"
@@ -553,7 +553,7 @@ msgstr "Adaugă un an tropical mediu"
 
 #: src/core/StelCore.cpp:186
 msgid "Add 1 mean tropical century"
-msgstr ""
+msgstr "Adaugă o medie a unui secol tropical"
 
 #: src/core/StelCore.cpp:187
 msgid "Subtract 1 sidereal day"
@@ -573,7 +573,7 @@ msgstr "Scade un an sideral"
 
 #: src/core/StelCore.cpp:191
 msgid "Subtract 1 sidereal century"
-msgstr ""
+msgstr "Scoate un secol sideral"
 
 #: src/core/StelCore.cpp:192
 msgid "Subtract 1 synodic month"
@@ -601,7 +601,7 @@ msgstr "Scade un an tropical mediu"
 
 #: src/core/StelCore.cpp:198
 msgid "Subtract 1 mean tropical century"
-msgstr ""
+msgstr "Extrage o medie a unui secol tropical"
 
 #: src/core/StelCore.cpp:200
 msgid "Set home planet to selected planet"
@@ -763,6 +763,9 @@ msgid ""
 "article <em>Long-Term Fluctuations in the Earth's Rotation: 700 BC to AD "
 "1990</em> (%1)."
 msgstr ""
+"Acestă ecuație a fost publicată de catre F. R. Stephenson si de cartre L. V. "
+"Morrison in articolul <em>Fluctuațiile de lungă durata in rotația "
+"Pamăntului: 700 iHr. - 1990 dHr</em>(%1)"
 
 #: src/core/StelCore.cpp:1506
 #, qt-format
@@ -786,6 +789,8 @@ msgid ""
 "The JPL Solar System Dynamics Group of the NASA Jet Propulsion Laboratory "
 "use this formula in their interactive website %1JPL Horizons%2."
 msgstr ""
+"Grupul JPL Solar System Dynamics al NASA Jet Propulsion Laboratory folosește "
+"această formula in websiteul lor interactiv %1JPL Horizons%2"
 
 #: src/core/StelCore.cpp:1515
 #, qt-format
@@ -887,6 +892,7 @@ msgstr "cu valori de zero în afara acestui interval"
 #: src/core/StelCore.cpp:1649
 msgid "with a typical 1-second accuracy and zero values outside this range"
 msgstr ""
+"cu o secundă tipică de acurateţe şi valori de zero în afara acestui interval"
 
 #: src/core/StelCore.cpp:1686
 #, qt-format
@@ -1453,7 +1459,7 @@ msgstr "Integrare continuă: %1"
 #: src/gui/HelpDialog.cpp:271 src/gui/HelpDialog.cpp:272
 #, qt-format
 msgid "Tester: %1"
-msgstr ""
+msgstr "Tester: %1"
 
 #: src/gui/HelpDialog.cpp:273
 msgid "Past Developers"
@@ -1733,7 +1739,7 @@ msgstr "text selectat"
 
 #: src/gui/ScriptConsole.cpp:75
 msgid "clear text"
-msgstr ""
+msgstr "curăţă textul"
 
 #: src/gui/ScriptConsole.cpp:76
 msgid "clear images"
@@ -1745,7 +1751,7 @@ msgstr "natural"
 
 #: src/gui/ScriptConsole.cpp:78
 msgid "starchart"
-msgstr ""
+msgstr "harta stelara"
 
 #: src/gui/SearchDialog.cpp:370
 msgid "Simbad Lookup Error"
@@ -2415,22 +2421,22 @@ msgstr "Analemma"
 #. TRANSLATORS: Name of script
 #: src/translations.h:254
 msgid "Sky Culture Tour"
-msgstr ""
+msgstr "Turul Cultulelor Cerești"
 
 #. TRANSLATORS: Name and description of script
 #: src/translations.h:256
 msgid "Earth Events from Mercury"
-msgstr ""
+msgstr "Evenimente ale Pământului de pe Mercur"
 
 #. TRANSLATORS: Name and description of script
 #: src/translations.h:258
 msgid "Earth Events from Venus"
-msgstr ""
+msgstr "Evenimente ale Pământului de pe Venus"
 
 #. TRANSLATORS: Name and description of script
 #: src/translations.h:260
 msgid "Earth Events from Mars"
-msgstr ""
+msgstr "Evenimente ale Pământului de pe Marte"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:262
@@ -2482,6 +2488,9 @@ msgid ""
 "constellations which lie along the line which the Sun traces across the "
 "celestial sphere over the course of a year."
 msgstr ""
+"Acest script afişează constelaţiile zodiacale. Asta înseamnă constelaţiile "
+"care se află de-a lungul liniei sferei cereşti prin care trece Soarele pe "
+"parcursul unui an."
 
 #: src/translations.h:279
 msgid ""
@@ -5020,7 +5029,7 @@ msgstr ""
 #: plugins/Oculars/src/gui/OcularDialog.cpp:526
 #: plugins/Oculars/src/gui/OcularDialog.cpp:531
 msgid "[no key defined]"
-msgstr ""
+msgstr "[nici o tastă definită]"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:535
 msgid "Switches on/off the ocular overlay."
@@ -8093,7 +8102,7 @@ msgstr ""
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:366
 msgid "Dates of previous and next Full Moon"
-msgstr ""
+msgstr "Datele anterioare şi următoare a Lunii Pline"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:369
 msgid "Font color and size"
