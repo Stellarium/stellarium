@@ -323,7 +323,7 @@ int main(int argc, char **argv)
 	StelMainView mainWin;
 	// some basic diagnostics
 	if (!QGLFormat::hasOpenGL()){
-	  QMessageBox::warning(0, "Stellarium", q_("This system does not support OpenGL."));
+		QMessageBox::warning(0, "Stellarium", q_("This system does not support OpenGL."));
 	}
 
 	qDebug() << "OpenGLVersionFlags: " << QGLFormat::openGLVersionFlags();

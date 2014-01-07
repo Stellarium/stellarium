@@ -77,6 +77,8 @@ void PulsarsDialog::createDialogContent()
 	ui->displayAtStartupCheckBox->setChecked(GETSTELMODULE(Pulsars)->getEnableAtStartup());
 	connect(ui->displayAtStartupCheckBox, SIGNAL(stateChanged(int)), this, SLOT(setDisplayAtStartupEnabled(int)));
 	ui->displayShowPulsarsButton->setChecked(GETSTELMODULE(Pulsars)->getFlagShowPulsarsButton());
+	ui->displaySeparateColorsCheckBox->setChecked(GETSTELMODULE(Pulsars)->getGlitchFlag());
+	connect(ui->displaySeparateColorsCheckBox, SIGNAL(stateChanged(int)), this, SLOT(setSeparateColorsFlag(int)));
 	connect(ui->displayShowPulsarsButton, SIGNAL(stateChanged(int)), this, SLOT(setDisplayShowPulsarsButton(int)));
 	connect(ui->internetUpdatesCheckbox, SIGNAL(stateChanged(int)), this, SLOT(setUpdatesEnabled(int)));
 	connect(ui->updateButton, SIGNAL(clicked()), this, SLOT(updateJSON()));
@@ -209,6 +211,12 @@ void PulsarsDialog::setDisplayShowPulsarsButton(int checkState)
 {
 	bool b = checkState != Qt::Unchecked;
 	GETSTELMODULE(Pulsars)->setFlagShowPulsarsButton(b);
+}
+
+void PulsarsDialog::setSeparateColorsFlag(int checkState)
+{
+	bool b = checkState != Qt::Unchecked;
+	GETSTELMODULE(Pulsars)->setGlitchFlag(b);
 }
 
 void PulsarsDialog::updateStateReceiver(Pulsars::UpdateState state)

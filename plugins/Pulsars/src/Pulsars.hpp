@@ -132,8 +132,11 @@ public:
 	bool getDisplayMode(void);
 	void setDisplayMode(bool b);
 
-	QString getMarkerColor(void);
-	void setMarkerColor(QString c);
+	bool getGlitchFlag(void);
+	void setGlitchFlag(bool b);
+
+	QString getMarkerColor(bool mtype = true);
+	void setMarkerColor(QString c, bool mtype = true);
 
 	void setEnableAtStartup(bool b) { enableAtStartup=b; }
 	bool getEnableAtStartup(void) { return enableAtStartup; }

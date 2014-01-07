@@ -48,6 +48,7 @@ private slots:
 	void setUpdateValues(int days);
 	void setUpdatesEnabled(int checkState);
 	void setDistributionEnabled(int checkState);
+	void setSeparateColorsFlag(int checkState);
 	void setDisplayAtStartupEnabled(int checkState);
 	void setDisplayShowPulsarsButton(int checkState);
 	void updateStateReceiver(Pulsars::UpdateState state);
