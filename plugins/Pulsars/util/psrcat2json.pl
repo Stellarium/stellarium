@@ -52,6 +52,7 @@ open (JSON, ">$JSON");
 print JSON "{\n";
 print JSON "\t\"version\": \"".$FORMAT."\",\n";
 print JSON "\t\"shortName\": \"A catalogue of pulsars, based on ATNF Pulsar Catalogue v. ".$CATVER."\",\n";
+print JSON "\t\"originalCatalogURL\": \"http://www.atnf.csiro.au/research/pulsar/psrcat/\",\n";
 print JSON "\t\"pulsars\":\n";
 print JSON "\t{\n";
 
@@ -91,19 +92,23 @@ for ($i=0;$i<scalar(@cat)-1;$i++) {
 		}
 
 		if ($lines[$j] =~ /^RAJ(\s+)([\d\-\+\:\.]+)/) {
+			$secf = 0;
 			($hour,$min,$sec) = split(":",$2);
 			$min += 0;
+			if ($min!=int($min)) { $secf = $min-int($min); $secf *= 60; $min = int($min); }
 			if ($min<10) { $min = "0".$min; }
-			$sec += 0;
+			$sec += $secf;
 			if ($sec<10) { $sec = "0".$sec; }
 			$outRA = $hour."h".$min."m".$sec."s";
 		}
 
 		if ($lines[$j] =~ /^DECJ(\s+)([\d\-\+\:\.]+)/) {
+			$secf = 0;
 			($deg,$min,$sec) = split(":",$2);
 			$min += 0;
+			if ($min!=int($min)) { $secf = $min-int($min); $secf *= 60; $min = int($min); }
 			if ($min<10) { $min = "0".$min; }
-			$sec += 0;
+			$sec += $secf;
 			if ($sec<10) { $sec = "0".$sec; }
 			$outDE = $deg."d".$min."m".$sec."s";
 		}
