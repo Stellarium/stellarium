@@ -102,7 +102,9 @@ void FOV::update(double)
 bool FOV::configureGui(bool show)
 {
 	if (show)
+	{
 		mainWindow->setVisible(true);
+	}
 
 	return true;
 }
@@ -166,7 +168,9 @@ void FOV::setFOV()
 {
 	// Find out for which FOV is the command
 	if (sender() == NULL)
+	{
 		return;
+	}
 	// XXX: we could use a QSignalMapper instead of this trick.
 	int slotNumber = sender()->objectName().right(1).toInt();
 
