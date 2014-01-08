@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-08 22:13+0700\n"
+"POT-Creation-Date: 2014-01-08 22:29+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -3969,7 +3969,7 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:980
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:390
-#: plugins/FOV/src/ui_fovWindow.h:382
+#: plugins/FOV/src/ui_fovWindow.h:386
 msgid "Save settings"
 msgstr ""
 
@@ -3977,7 +3977,7 @@ msgstr ""
 msgid "Restore the default settings that came with Stellarium"
 msgstr ""
 
-#: src/ui_configurationDialog.h:984 plugins/FOV/src/ui_fovWindow.h:378
+#: src/ui_configurationDialog.h:984 plugins/FOV/src/ui_fovWindow.h:385
 msgid "Restore defaults"
 msgstr ""
 
@@ -5094,7 +5094,7 @@ msgstr ""
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:283
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:322
 #: plugins/Observability/src/ui_ObservabilityDialog.h:378
-#: plugins/FOV/src/ui_fovWindow.h:389
+#: plugins/FOV/src/ui_fovWindow.h:404
 msgctxt "tab in plugin windows"
 msgid "About"
 msgstr ""
@@ -8027,8 +8027,8 @@ msgid "Sun altitude at twilight: 0 deg."
 msgstr ""
 
 #: plugins/FOV/src/FOV.cpp:40 plugins/FOV/src/FOV.cpp:77
-#: plugins/FOV/src/ui_fovWindow.h:372 plugins/FOV/src/ui_fovWindow.h:374
-#: plugins/FOV/src/ui_fovWindow.h:388
+#: plugins/FOV/src/ui_fovWindow.h:382 plugins/FOV/src/ui_fovWindow.h:384
+#: plugins/FOV/src/ui_fovWindow.h:403
 msgid "Field of View"
 msgstr ""
 
@@ -8053,44 +8053,4 @@ msgid ""
 "shortcuts. Some users want stepwise zooming like in <em>{Cartes du Ciel}</"
 "em> planetarium and this plugin give this feature. You can edit values and "
 "use keyboard for quick set FOV. All values in degrees."
-msgstr ""
-
-#: plugins/FOV/src/ui_fovWindow.h:375
-msgid "Ctrl+Alt+5"
-msgstr ""
-
-#: plugins/FOV/src/ui_fovWindow.h:376
-msgid "Ctrl+Alt+0"
-msgstr ""
-
-#: plugins/FOV/src/ui_fovWindow.h:377
-msgid "Ctrl+Alt+8"
-msgstr ""
-
-#: plugins/FOV/src/ui_fovWindow.h:379
-msgid "Ctrl+Alt+3"
-msgstr ""
-
-#: plugins/FOV/src/ui_fovWindow.h:380
-msgid "Ctrl+Alt+6"
-msgstr ""
-
-#: plugins/FOV/src/ui_fovWindow.h:381
-msgid "Ctrl+Alt+2"
-msgstr ""
-
-#: plugins/FOV/src/ui_fovWindow.h:383
-msgid "Ctrl+Alt+4"
-msgstr ""
-
-#: plugins/FOV/src/ui_fovWindow.h:385
-msgid "Ctrl+Alt+1"
-msgstr ""
-
-#: plugins/FOV/src/ui_fovWindow.h:386
-msgid "Ctrl+Alt+7"
-msgstr ""
-
-#: plugins/FOV/src/ui_fovWindow.h:387
-msgid "Ctrl+Alt+9"
 msgstr ""

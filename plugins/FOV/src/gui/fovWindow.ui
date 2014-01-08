@@ -200,21 +200,21 @@
           <item row="5" column="0" alignment="Qt::AlignRight">
            <widget class="QLabel" name="labelFOV5">
             <property name="text">
-             <string>Ctrl+Alt+5</string>
+             <string notr="true">Ctrl+Alt+5</string>
             </property>
            </widget>
           </item>
           <item row="5" column="2" alignment="Qt::AlignRight">
            <widget class="QLabel" name="labelFOV0">
             <property name="text">
-             <string>Ctrl+Alt+0</string>
+             <string notr="true">Ctrl+Alt+0</string>
             </property>
            </widget>
           </item>
           <item row="3" column="2" alignment="Qt::AlignRight">
            <widget class="QLabel" name="labelFOV8">
             <property name="text">
-             <string>Ctrl+Alt+8</string>
+             <string notr="true">Ctrl+Alt+8</string>
             </property>
            </widget>
           </item>
@@ -228,14 +228,14 @@
           <item row="3" column="0" alignment="Qt::AlignRight">
            <widget class="QLabel" name="labelFOV3">
             <property name="text">
-             <string>Ctrl+Alt+3</string>
+             <string notr="true">Ctrl+Alt+3</string>
             </property>
            </widget>
           </item>
           <item row="1" column="2" alignment="Qt::AlignRight">
            <widget class="QLabel" name="labelFOV6">
             <property name="text">
-             <string>Ctrl+Alt+6</string>
+             <string notr="true">Ctrl+Alt+6</string>
             </property>
            </widget>
           </item>
@@ -258,7 +258,7 @@
           <item row="2" column="0" alignment="Qt::AlignRight">
            <widget class="QLabel" name="labelFOV2">
             <property name="text">
-             <string>Ctrl+Alt+2</string>
+             <string notr="true">Ctrl+Alt+2</string>
             </property>
            </widget>
           </item>
@@ -390,7 +390,7 @@
           <item row="4" column="0" alignment="Qt::AlignRight">
            <widget class="QLabel" name="labelFOV4">
             <property name="text">
-             <string>Ctrl+Alt+4</string>
+             <string notr="true">Ctrl+Alt+4</string>
             </property>
            </widget>
           </item>
@@ -447,22 +447,37 @@
           </item>
           <item row="1" column="0" alignment="Qt::AlignRight">
            <widget class="QLabel" name="labelFOV1">
+            <property name="toolTip">
+             <string/>
+            </property>
+            <property name="statusTip">
+             <string/>
+            </property>
+            <property name="whatsThis">
+             <string/>
+            </property>
+            <property name="accessibleName">
+             <string/>
+            </property>
+            <property name="accessibleDescription">
+             <string/>
+            </property>
             <property name="text">
-             <string>Ctrl+Alt+1</string>
+             <string notr="true">Ctrl+Alt+1</string>
             </property>
            </widget>
           </item>
           <item row="2" column="2" alignment="Qt::AlignRight">
            <widget class="QLabel" name="labelFOV7">
             <property name="text">
-             <string>Ctrl+Alt+7</string>
+             <string notr="true">Ctrl+Alt+7</string>
             </property>
            </widget>
           </item>
           <item row="4" column="2" alignment="Qt::AlignRight">
            <widget class="QLabel" name="labelFOV9">
             <property name="text">
-             <string>Ctrl+Alt+9</string>
+             <string notr="true">Ctrl+Alt+9</string>
             </property>
            </widget>
           </item>
