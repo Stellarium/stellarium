@@ -147,6 +147,10 @@ Q_IMPORT_PLUGIN(PulsarsStelPluginInterface)
 Q_IMPORT_PLUGIN(ExoplanetsStelPluginInterface)
 #endif
 
+#ifdef USE_STATIC_PLUGIN_FOV
+Q_IMPORT_PLUGIN(FOVStelPluginInterface)
+#endif
+
 #ifdef USE_STATIC_PLUGIN_OBSERVABILITY
 Q_IMPORT_PLUGIN(ObservabilityStelPluginInterface)
 #endif
