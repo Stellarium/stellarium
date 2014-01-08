@@ -26,6 +26,7 @@
 #include "Pulsars.hpp"
 
 class Ui_pulsarsDialog;
+class Pulsars;
 class QTimer;
 
 class PulsarsDialog : public StelDialog
@@ -59,6 +60,7 @@ private slots:
 
 private:
 	Ui_pulsarsDialog* ui;
+	Pulsars* psr;
 	void setAboutHtml(void);
 	void updateGuiFromSettings(void);
 	QTimer* updateTimer;

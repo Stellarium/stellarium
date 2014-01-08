@@ -506,11 +506,14 @@ QVariantMap Pulsars::loadPSRMap(QString path)
 void Pulsars::setPSRMap(const QVariantMap& map)
 {
 	psr.clear();
+	PsrCount = 0;
 	QVariantMap psrMap = map.value("pulsars").toMap();
 	foreach(QString psrKey, psrMap.keys())
 	{
 		QVariantMap psrData = psrMap.value(psrKey).toMap();
 		psrData["designation"] = psrKey;
+
+		PsrCount++;
 
 		PulsarP pulsar(new Pulsar(psrData));
 		if (pulsar->initialized)

@@ -150,6 +150,9 @@ public:
 	//! Get the current updateState
 	UpdateState getUpdateState(void) {return updateState;}
 
+	//! Get count of quasars from catalog
+	int getCountQuasars(void) {return QsrCount;}
+
 signals:
 	//! @param state the new update state.
 	void updateStateChanged(Quasars::UpdateState state);
@@ -209,6 +212,8 @@ private:
 	void setQSOMap(const QVariantMap& map);
 
 	QString catalogJsonPath;
+
+	int QsrCount;
 
 	StelTextureSP texPointer;
 	QList<QuasarP> QSO;

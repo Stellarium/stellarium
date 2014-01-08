@@ -154,6 +154,9 @@ public:
 	//! Get the current updateState
 	UpdateState getUpdateState(void) {return updateState;}
 
+	//! Get count of pulsars from catalog
+	int getCountPulsars(void) {return PsrCount;}
+
 signals:
 	//! @param state the new update state.
 	void updateStateChanged(Pulsars::UpdateState state);
@@ -217,6 +220,8 @@ private:
 
 	StelTextureSP texPointer;
 	QList<PulsarP> psr;
+
+	int PsrCount;
 
 	// variables and functions for the updater
 	UpdateState updateState;

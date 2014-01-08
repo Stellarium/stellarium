@@ -164,6 +164,9 @@ public:
 	//! Get lower limit of  brightness for displayed supernovae
 	float getLowerLimitBrightness();
 
+	//! Get count of supernovae from catalog
+	int getCountSupernovae(void) {return SNCount;}
+
 signals:
 	//! @param state the new update state.
 	void updateStateChanged(Supernovae::UpdateState state);
@@ -215,6 +218,8 @@ private:
 	void setSNeMap(const QVariantMap& map);
 
 	QString sneJsonPath;
+
+	int SNCount;
 
 	StelTextureSP texPointer;
 	QList<SupernovaP> snstar;

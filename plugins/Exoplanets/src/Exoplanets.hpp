@@ -156,6 +156,12 @@ public:
 	//! Get the current updateState
 	UpdateState getUpdateState(void) {return updateState;}
 
+	//! Get count of planetary systems from catalog
+	int getCountPlanetarySystems(void) {return PSCount;}
+
+	//! Get count of exoplanets from catalog
+	int getCountAllExoplanets(void) {return EPCountAll;}
+
 signals:
 	//! @param state the new update state.
 	void updateStateChanged(Exoplanets::UpdateState state);
@@ -215,6 +221,9 @@ private:
 	void setEPMap(const QVariantMap& map);
 
 	QString jsonCatalogPath;
+
+	int PSCount;
+	int EPCountAll;
 
 	StelTextureSP texPointer;
 	QList<ExoplanetP> ep;
