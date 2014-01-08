@@ -462,6 +462,7 @@ void Supernovae::setSNeMap(const QVariantMap& map)
 {
 	snstar.clear();
 	snlist.clear();
+	SNCount = 0;
 	QVariantMap sneMap = map.value("supernova").toMap();
 	foreach(QString sneKey, sneMap.keys())
 	{
@@ -469,6 +470,7 @@ void Supernovae::setSNeMap(const QVariantMap& map)
 		sneData["designation"] = QString("SN %1").arg(sneKey);
 
 		snlist.insert(sneData.value("designation").toString(), sneData.value("peakJD").toDouble());
+		SNCount++;
 
 		SupernovaP sn(new Supernova(sneData));
 		if (sn->initialized)

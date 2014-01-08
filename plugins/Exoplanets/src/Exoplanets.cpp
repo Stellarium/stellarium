@@ -511,15 +511,22 @@ QVariantMap Exoplanets::loadEPMap(QString path)
 void Exoplanets::setEPMap(const QVariantMap& map)
 {
 	ep.clear();
+	PSCount=0;
+	EPCountAll=0;
 	QVariantMap epsMap = map.value("stars").toMap();
 	foreach(QString epsKey, epsMap.keys())
 	{
 		QVariantMap epsData = epsMap.value(epsKey).toMap();
 		epsData["designation"] = epsKey;
 
+		PSCount++;
+
 		ExoplanetP eps(new Exoplanet(epsData));
 		if (eps->initialized)
+		{
 			ep.append(eps);
+			EPCountAll += eps->getCountExoplanets();
+		}
 
 	}
 }
