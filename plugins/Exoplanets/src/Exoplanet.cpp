@@ -61,12 +61,14 @@ Exoplanet::Exoplanet(const QVariantMap& map)
 	effectiveTemp = map.value("effectiveTemp").toInt();
 	hasHabitableExoplanets = map.value("hasHP", false).toBool();
 
+	EPCount=0;
 	if (map.contains("exoplanets"))
 	{
 		foreach(const QVariant &expl, map.value("exoplanets").toList())
 		{
 			QVariantMap exoplanetMap = expl.toMap();
 			exoplanetData p;
+			EPCount++;
 			if (exoplanetMap.contains("planetName")) p.planetName = exoplanetMap.value("planetName").toString();
 			p.period = exoplanetMap.value("period", -1.f).toFloat();
 			p.mass = exoplanetMap.value("mass", -1.f).toFloat();

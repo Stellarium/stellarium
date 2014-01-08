@@ -157,6 +157,15 @@ public:
 	//! Get the current updateState
 	UpdateState getUpdateState(void) {return updateState;}
 
+	//! Get list of novae
+	QString getNovaeList();
+
+	//! Get lower limit of  brightness for displayed novae
+	float getLowerLimitBrightness();
+
+	//! Get count of novae from catalog
+	int getCountNovae(void) {return NovaCnt;}
+
 signals:
 	//! @param state the new update state.
 	void updateStateChanged(Novae::UpdateState state);
@@ -208,6 +217,8 @@ private:
 	void setNovaeMap(const QVariantMap& map);
 
 	QString novaeJsonPath;
+
+	int NovaCnt;
 
 	StelTextureSP texPointer;
 	QList<NovaP> nova;
