@@ -60,7 +60,6 @@
       "first-stel": "0.9.0",
       "last-stel": "0.14.0",
       "license": "Public Domain",
-      "license-url": "",
       "download-url": "http://porpoisehead.net/mysw/downloads/landscapes-0.9.x/landscape_mars_opportunity_rover.zip",
       "download-filename": "landscape_mars_opportunity_rover.zip",
       "download-size": "2273",
@@ -97,6 +96,29 @@
         }
       ],
       "textures": "milkyway.png"
+    },
+    "20141005001126":
+    {
+      "type": "texture",
+      "install-id": "texture-set1",
+      "title": "Texture Set",
+      "description": "Testing texture set.",
+      "version": "1.0",
+      "first-stel": "0.12.4",
+      "last-stel": "0.14.0",
+      "license": "CC-BY-NC",
+      "license-url": "http://creativecommons.org/licenses/by-nc/2.0/",
+      "download-url": "http://sourceforge.net/projects/cardinot/files/textureset1.zip/download",
+      "download-filename": "textureset1.zip",
+      "download-size": "182",
+      "installed-size": "182",
+      "checksum": "8723a45258142230d2aa492725d15269",
+      "authors": [
+        {
+          "name": "Marcos Cardinot"
+        }
+      ],
+      "textures": "amalthea.png,ariel.png,callisto.png"
     }
   }
 }
