@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Thai for stellarium 0.8.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-26 00:07+0700\n"
+"POT-Creation-Date: 2014-01-07 21:02+0700\n"
 "PO-Revision-Date: 2013-12-10 09:12+0000\n"
 "Last-Translator: Worachate Boonplod <Unknown>\n"
 "Language-Team: MicKi Alone <Need24Get@msn.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-12-26 05:26+0000\n"
+"X-Launchpad-Export-Date: 2014-01-08 04:47+0000\n"
 "X-Generator: Launchpad (build 16877)\n"
 "X-Poedit-Country: THAILAND\n"
 "X-Poedit-Language: Thai\n"
@@ -165,7 +165,7 @@ msgstr "ดาวเคราะห์: "
 #: src/core/modules/StarWrapper.cpp:173
 #: plugins/Satellites/src/Satellite.cpp:242
 #: plugins/Supernovae/src/Supernova.cpp:117 plugins/Quasars/src/Quasar.cpp:91
-#: plugins/Pulsars/src/Pulsar.cpp:130 plugins/Exoplanets/src/Exoplanet.cpp:155
+#: plugins/Pulsars/src/Pulsar.cpp:137 plugins/Exoplanets/src/Exoplanet.cpp:155
 #, qt-format
 msgid "Type: <b>%1</b>"
 msgstr "ชนิด: <b>%1</b>"
@@ -1132,7 +1132,7 @@ msgstr "ติดต่อ"
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:108
 #: plugins/Novae/src/gui/NovaeDialog.cpp:107
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:114
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:114
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:116
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:122
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:99
 msgid "Author"
@@ -4145,7 +4145,7 @@ msgstr "ทั้งหมดที่มี"
 msgid "Display no information"
 msgstr "ไม่แสดงข้อมูล"
 
-#: src/ui_configurationDialog.h:1000 plugins/Oculars/src/Oculars.cpp:1888
+#: src/ui_configurationDialog.h:1000 plugins/Oculars/src/Oculars.cpp:1920
 #: plugins/Observability/src/Observability.cpp:230
 msgid "None"
 msgstr "ไม่มี"
@@ -4679,7 +4679,7 @@ msgstr "แสดงแบริงเข็มทิศตามแนวขอ
 msgid "Compass marks"
 msgstr "ขีดแสดงมุมทิศ"
 
-#: plugins/Oculars/src/Oculars.cpp:80 plugins/Oculars/src/Oculars.cpp:1293
+#: plugins/Oculars/src/Oculars.cpp:80 plugins/Oculars/src/Oculars.cpp:1323
 #: plugins/Oculars/src/ui_ocularDialog.h:1039
 msgid "Oculars"
 msgstr "เลนส์ใกล้ตา"
@@ -4694,205 +4694,205 @@ msgstr ""
 "(จำลองเฉพาะกำลังขยายและขอบเขตภาพ) นอกจากนี้ ยังสามารถแสดงเฟรมเซนเซอร์และวง "
 "Telrad ด้วย"
 
-#: plugins/Oculars/src/Oculars.cpp:806
+#: plugins/Oculars/src/Oculars.cpp:833
 msgid "Please select an object before switching to ocular view."
 msgstr "กรุณาเลือกวัตถุก่อนจะสลับไปที่มุมมองเลนส์ใกล้ตา"
 
-#: plugins/Oculars/src/Oculars.cpp:898
+#: plugins/Oculars/src/Oculars.cpp:925
 msgid "&Previous ocular"
 msgstr "เลนส์ใกล้ตา&ก่อนหน้า"
 
-#: plugins/Oculars/src/Oculars.cpp:899
+#: plugins/Oculars/src/Oculars.cpp:926
 msgid "&Next ocular"
 msgstr "เลนส์ใกล้ตา&ถัดไป"
 
-#: plugins/Oculars/src/Oculars.cpp:900
+#: plugins/Oculars/src/Oculars.cpp:927
 msgid "Select &ocular"
 msgstr "เลือกเ&ลนส์ใกล้ตา"
 
-#: plugins/Oculars/src/Oculars.cpp:947
+#: plugins/Oculars/src/Oculars.cpp:974
 msgid "Toggle &crosshair"
 msgstr "สลับ&สายใยเล็ง"
 
-#: plugins/Oculars/src/Oculars.cpp:955
+#: plugins/Oculars/src/Oculars.cpp:982
 msgid "Configure &Oculars"
 msgstr "&ปรับแต่งเลนส์ใกล้ตา"
 
-#: plugins/Oculars/src/Oculars.cpp:963
+#: plugins/Oculars/src/Oculars.cpp:990
 msgid "Toggle &CCD"
 msgstr "สลับ&ซีซีดี"
 
-#: plugins/Oculars/src/Oculars.cpp:970
+#: plugins/Oculars/src/Oculars.cpp:997
 msgid "Toggle &Telrad"
 msgstr "สลับ &Telrad"
 
-#: plugins/Oculars/src/Oculars.cpp:979
+#: plugins/Oculars/src/Oculars.cpp:1006
 msgid "&Previous CCD"
 msgstr "ซีซีดี&ก่อนหน้า"
 
-#: plugins/Oculars/src/Oculars.cpp:980
+#: plugins/Oculars/src/Oculars.cpp:1007
 msgid "&Next CCD"
 msgstr "ซีซีดี&ถัดไป"
 
-#: plugins/Oculars/src/Oculars.cpp:981
+#: plugins/Oculars/src/Oculars.cpp:1008
 msgid "&Select CCD"
 msgstr "เ&ลือกซีซีดี"
 
-#: plugins/Oculars/src/Oculars.cpp:1003
+#: plugins/Oculars/src/Oculars.cpp:1030
 msgid "&Rotate CCD"
 msgstr "&หมุนซีซีดี"
 
-#: plugins/Oculars/src/Oculars.cpp:1035
+#: plugins/Oculars/src/Oculars.cpp:1062
 msgid "&Reset rotation"
 msgstr "&ยกเลิกการหมุน"
 
-#: plugins/Oculars/src/Oculars.cpp:1276
+#: plugins/Oculars/src/Oculars.cpp:1306
 #: plugins/Oculars/src/ui_ocularDialog.h:1041
 msgid "Ocular view"
 msgstr "มุมมองเลนส์ใกล้ตา"
 
-#: plugins/Oculars/src/Oculars.cpp:1294
+#: plugins/Oculars/src/Oculars.cpp:1324
 msgid "Oculars popup menu"
 msgstr "รายการเลือกแบบผุดขึ้นของเลนส์ใกล้ตา"
 
-#: plugins/Oculars/src/Oculars.cpp:1295
+#: plugins/Oculars/src/Oculars.cpp:1325
 msgid "Show crosshairs"
 msgstr "แสดงสายใยเล็ง"
 
-#: plugins/Oculars/src/Oculars.cpp:1296
+#: plugins/Oculars/src/Oculars.cpp:1326
 msgid "Image sensor frame"
 msgstr "เฟรมเซนเซอร์ภาพ"
 
-#: plugins/Oculars/src/Oculars.cpp:1297
+#: plugins/Oculars/src/Oculars.cpp:1327
 msgid "Telrad sight"
 msgstr "วง Telrad"
 
-#: plugins/Oculars/src/Oculars.cpp:1298
+#: plugins/Oculars/src/Oculars.cpp:1328
 msgid "Oculars plugin configuration"
 msgstr "การตั้งค่าโปรแกรมเสริมเลนส์ใกล้ตา"
 
-#: plugins/Oculars/src/Oculars.cpp:1300
+#: plugins/Oculars/src/Oculars.cpp:1330
 msgid "Select next telescope"
 msgstr "เลือกกล้องโทรทรรศน์ถัดไป"
 
-#: plugins/Oculars/src/Oculars.cpp:1302
+#: plugins/Oculars/src/Oculars.cpp:1332
 msgid "Select previous telescope"
 msgstr "เลือกกล้องโทรทรรศน์ก่อนหน้า"
 
-#: plugins/Oculars/src/Oculars.cpp:1304
+#: plugins/Oculars/src/Oculars.cpp:1334
 msgid "Select next eyepiece"
 msgstr "เลือกเลนส์ใกล้ตาถัดไป"
 
-#: plugins/Oculars/src/Oculars.cpp:1306
+#: plugins/Oculars/src/Oculars.cpp:1336
 msgid "Select previous eyepiece"
 msgstr "เลือกเลนส์ใกล้ตาก่อนหน้า"
 
-#: plugins/Oculars/src/Oculars.cpp:1533
+#: plugins/Oculars/src/Oculars.cpp:1565
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:499
 #, qt-format
 msgid "Ocular #%1"
 msgstr "เลนส์ใกล้ตา #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:1538
+#: plugins/Oculars/src/Oculars.cpp:1570
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:503
 #, qt-format
 msgid "Ocular #%1: %2"
 msgstr "เลนส์ใกล้ตา #%1: %2"
 
 #. TRANSLATORS: FL = Focal length
-#: plugins/Oculars/src/Oculars.cpp:1552
+#: plugins/Oculars/src/Oculars.cpp:1584
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:540
 #, qt-format
 msgid "Ocular FL: %1 mm"
 msgstr "ความยาวโฟกัสของเลนส์ใกล้ตา: %1 มม."
 
 #. TRANSLATORS: aFOV = apparent field of view
-#: plugins/Oculars/src/Oculars.cpp:1559
+#: plugins/Oculars/src/Oculars.cpp:1591
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:550
 #, qt-format
 msgid "Ocular aFOV: %1"
 msgstr "ขอบเขตภาพปรากฏของเลนส์ใกล้ตา: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1571
+#: plugins/Oculars/src/Oculars.cpp:1603
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:580
 #, qt-format
 msgid "Lens #%1"
 msgstr "เลนส์ #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:1575
+#: plugins/Oculars/src/Oculars.cpp:1607
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:584
 #, qt-format
 msgid "Lens #%1: %2"
 msgstr "เลนส์ #%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:1580
+#: plugins/Oculars/src/Oculars.cpp:1612
 msgid "Lens: none"
 msgstr "เลนส์ : ไม่มี"
 
-#: plugins/Oculars/src/Oculars.cpp:1590 plugins/Oculars/src/Oculars.cpp:1647
+#: plugins/Oculars/src/Oculars.cpp:1622 plugins/Oculars/src/Oculars.cpp:1679
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:737
 #, qt-format
 msgid "Telescope #%1"
 msgstr "กล้องโทรทรรศน์ #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:1595 plugins/Oculars/src/Oculars.cpp:1652
+#: plugins/Oculars/src/Oculars.cpp:1627 plugins/Oculars/src/Oculars.cpp:1684
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:741
 #, qt-format
 msgid "Telescope #%1: %2"
 msgstr "กล้องโทรทรรศน์ #%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:1606
+#: plugins/Oculars/src/Oculars.cpp:1638
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:817
 #, qt-format
 msgid "Magnification: %1"
 msgstr "กำลังขยาย: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1614
+#: plugins/Oculars/src/Oculars.cpp:1646
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:826
 #, qt-format
 msgid "FOV: %1"
 msgstr "ขอบเขตภาพ: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1624
+#: plugins/Oculars/src/Oculars.cpp:1656
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:682
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:779
 #, qt-format
 msgid "Dimensions: %1"
 msgstr "ขนาด: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1629
+#: plugins/Oculars/src/Oculars.cpp:1661
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:642
 #, qt-format
 msgid "Sensor #%1"
 msgstr "เซนเซอร์ #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:1633
+#: plugins/Oculars/src/Oculars.cpp:1665
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:646
 #, qt-format
 msgid "Sensor #%1: %2"
 msgstr "เซนเซอร์ #%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:1884
+#: plugins/Oculars/src/Oculars.cpp:1916
 msgid "&Lens"
 msgstr "เ&ลนส์"
 
-#: plugins/Oculars/src/Oculars.cpp:1885
+#: plugins/Oculars/src/Oculars.cpp:1917
 msgid "&Previous lens"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1886
+#: plugins/Oculars/src/Oculars.cpp:1918
 msgid "&Next lens"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1916
+#: plugins/Oculars/src/Oculars.cpp:1948
 msgid "&Telescope"
 msgstr "&กล้องโทรทรรศน์"
 
-#: plugins/Oculars/src/Oculars.cpp:1917
+#: plugins/Oculars/src/Oculars.cpp:1949
 msgid "&Previous telescope"
 msgstr "กล้องโทรทรรศน์&ก่อนหน้า"
 
-#: plugins/Oculars/src/Oculars.cpp:1918
+#: plugins/Oculars/src/Oculars.cpp:1950
 msgid "&Next telescope"
 msgstr "กล้องโทรทรรศน์&ถัดไป"
 
@@ -5012,7 +5012,7 @@ msgstr "โปรแกรมเสริมเลนส์ใกล้ตา"
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:107
 #: plugins/Novae/src/gui/NovaeDialog.cpp:106
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:113
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:113
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:115
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:121
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:98
 msgid "Version"
@@ -5246,7 +5246,7 @@ msgstr "พลิกในแนวตั้ง"
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:241
 #: plugins/Novae/src/ui_novaeDialog.h:244
 #: plugins/Quasars/src/ui_quasarsDialog.h:276
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:276
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:283
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:322
 #: plugins/Observability/src/ui_ObservabilityDialog.h:378
 msgctxt "tab in plugin windows"
@@ -5554,7 +5554,7 @@ msgstr "ดู %1เอกสารนี้%2 สำหรับรายละ
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:125
 #: plugins/Novae/src/gui/NovaeDialog.cpp:119
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:122
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:136
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:138
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:127
 msgid "Links"
 msgstr "ลิงก์"
@@ -5563,7 +5563,7 @@ msgstr "ลิงก์"
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:126
 #: plugins/Novae/src/gui/NovaeDialog.cpp:120
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:123
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:137
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:139
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:128
 #, qt-format
 msgid ""
@@ -5578,7 +5578,7 @@ msgstr ""
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:129
 #: plugins/Novae/src/gui/NovaeDialog.cpp:123
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:126
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:140
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:142
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:131
 #, qt-format
 msgid "If you have a question, you can %1get an answer here%2"
@@ -5589,7 +5589,7 @@ msgstr "หากมีคำถาม คุณสามารถ%1ถามไ
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:131
 #: plugins/Novae/src/gui/NovaeDialog.cpp:125
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:128
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:142
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:144
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:133
 #, qt-format
 msgid "Bug reports can be made %1here%2."
@@ -5600,7 +5600,7 @@ msgstr "รายงานข้อผิดพลาดได้%1ที่น�
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:133
 #: plugins/Novae/src/gui/NovaeDialog.cpp:127
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:130
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:144
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:146
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:135
 msgid ""
 "If you would like to make a feature request, you can create a bug report, "
@@ -5613,7 +5613,7 @@ msgstr ""
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:153
 #: plugins/Novae/src/gui/NovaeDialog.cpp:147
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:150
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:164
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:166
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:203
 msgid "Internet updates disabled"
 msgstr "การปรับปรุงจากอินเทอร์เน็ตถูกปิดการใช้งาน"
@@ -5626,8 +5626,8 @@ msgstr "การปรับปรุงจากอินเทอร์เน
 #: plugins/Novae/src/gui/NovaeDialog.cpp:183
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:152
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:204
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:166
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:218
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:168
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:226
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:205
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:261
 msgid "Updating now..."
@@ -5637,7 +5637,7 @@ msgstr "กำลังปรับปรุง..."
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:157
 #: plugins/Novae/src/gui/NovaeDialog.cpp:151
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:154
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:168
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:170
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:207
 msgid "Next update: < 1 minute"
 msgstr "ปรับปรุงครั้งถัดไป: < 1 นาที"
@@ -5646,7 +5646,7 @@ msgstr "ปรับปรุงครั้งถัดไป: < 1 นาที
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:159
 #: plugins/Novae/src/gui/NovaeDialog.cpp:153
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:156
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:170
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:172
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:209
 #, qt-format
 msgid "Next update: %1 minutes"
@@ -5656,7 +5656,7 @@ msgstr "ปรับปรุงครั้งถัดไป: %1 นาที"
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:161
 #: plugins/Novae/src/gui/NovaeDialog.cpp:155
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:158
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:172
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:174
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:211
 #, qt-format
 msgid "Next update: %1 hours"
@@ -5666,7 +5666,7 @@ msgstr "ปรับปรุงครั้งถัดไป: %1 ชั่ว�
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:192
 #: plugins/Novae/src/gui/NovaeDialog.cpp:186
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:207
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:221
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:229
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:264
 msgid "Update error"
 msgstr "มีข้อผิดพลาดในการปรับปรุงข้อมูล"
@@ -5693,8 +5693,8 @@ msgstr "[แหล่งข้อมูลใหม่]"
 #: plugins/Novae/src/ui_novaeDialog.h:240
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:175
 #: plugins/Quasars/src/ui_quasarsDialog.h:265
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:189
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:265
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:191
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:271
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:250
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:305
 msgid "Update now"
@@ -5704,7 +5704,7 @@ msgstr "ปรับปรุงเดี๋ยวนี้"
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:180
 #: plugins/Novae/src/gui/NovaeDialog.cpp:174
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:177
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:191
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:193
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:252
 msgid "Update from files"
 msgstr "ปรับปรุงจากแฟ้มข้อมูล"
@@ -5785,7 +5785,7 @@ msgstr "ปรับปรุงข้อมูลดาวเทียมจา
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:234
 #: plugins/Novae/src/ui_novaeDialog.h:237
 #: plugins/Quasars/src/ui_quasarsDialog.h:262
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:262
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:268
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:302
 msgid "Last update:"
 msgstr "ปรับปรุงล่าสุด:"
@@ -5854,7 +5854,7 @@ msgstr ""
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:238
 #: plugins/Novae/src/ui_novaeDialog.h:241
 #: plugins/Quasars/src/ui_quasarsDialog.h:273
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:273
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:280
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:317
 #: plugins/Observability/src/ui_ObservabilityDialog.h:367
 msgid "Restore default settings"
@@ -5864,7 +5864,7 @@ msgstr "คืนค่าเริ่มต้นเดิม"
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:239
 #: plugins/Novae/src/ui_novaeDialog.h:242
 #: plugins/Quasars/src/ui_quasarsDialog.h:274
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:274
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:281
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:318
 #: plugins/Observability/src/ui_ObservabilityDialog.h:368
 msgid "Save settings as default"
@@ -5874,7 +5874,7 @@ msgstr "บันทึกการตั้งค่าต่าง ๆ ให�
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:240
 #: plugins/Novae/src/ui_novaeDialog.h:243
 #: plugins/Quasars/src/ui_quasarsDialog.h:275
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:275
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:282
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:319
 #: plugins/Observability/src/ui_ObservabilityDialog.h:377
 msgid "Settings"
@@ -7115,7 +7115,7 @@ msgid "Acknowledgments"
 msgstr "กิตติกรรมประกาศ"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:119
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:125
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:127
 msgid ""
 "We thank the following people for their contribution and valuable comments:"
 msgstr ""
@@ -7130,14 +7130,14 @@ msgid "Institute for Theoretical and Experimental Physics"
 msgstr "Institute for Theoretical and Experimental Physics"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:124
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:130
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:132
 msgid "in Russia"
 msgstr "ในรัสเซีย"
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:135
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:132
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:146
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:148
 #, qt-format
 msgid ""
 "If you want to read full information about this plugin, its history and "
@@ -7149,7 +7149,7 @@ msgstr ""
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:163
 #: plugins/Novae/src/gui/NovaeDialog.cpp:157
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:160
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:174
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:176
 #, qt-format
 msgid "Next update: %1 days"
 msgstr "ปรับปรุงครั้งถัดไป: %1 วัน"
@@ -7169,14 +7169,14 @@ msgstr "การตั้งค่าโปรแกรมเสริมซู
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:232
 #: plugins/Novae/src/ui_novaeDialog.h:235
 #: plugins/Quasars/src/ui_quasarsDialog.h:260
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:260
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:266
 msgid "Update catalog from Internet"
 msgstr "ปรับปรุงแค็ตตาล็อกจากอินเทอร์เน็ต"
 
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:233
 #: plugins/Novae/src/ui_novaeDialog.h:236
 #: plugins/Quasars/src/ui_quasarsDialog.h:261
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:261
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:267
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:301
 msgid "Update from Internet sources"
 msgstr "ปรับปรุงจากแหล่งข้อมูลบนอินเทอร์เน็ต"
@@ -7184,14 +7184,14 @@ msgstr "ปรับปรุงจากแหล่งข้อมูลบน
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:235
 #: plugins/Novae/src/ui_novaeDialog.h:238
 #: plugins/Quasars/src/ui_quasarsDialog.h:263
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:263
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:269
 msgid "Update frequency (days):"
 msgstr "ความถี่ในการปรับปรุง (วัน):"
 
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:236
 #: plugins/Novae/src/ui_novaeDialog.h:239
 #: plugins/Quasars/src/ui_quasarsDialog.h:264
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:264
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:270
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:304
 msgid "[next update info]"
 msgstr "[ข้อมูลการปรับปรุงถัดไป]"
@@ -7208,7 +7208,7 @@ msgstr ""
 msgid "Bright Novae configuration window"
 msgstr ""
 
-#: plugins/Novae/src/Nova.cpp:120
+#: plugins/Novae/src/Nova.cpp:120 plugins/Pulsars/src/Pulsar.cpp:148
 #, qt-format
 msgid "Type: <b>%1</b> (%2)"
 msgstr "ชนิด: <b>%1</b> (%2)"
@@ -7339,7 +7339,7 @@ msgid "Enable display of distribution for quasars"
 msgstr "แสดงการกระจายตัวสำหรับเควซาร์"
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:271
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:271
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:277
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:315
 msgid "Enable display at startup"
 msgstr "เปิดใช้งานเมื่อเริ่มโปรแกรม"
@@ -7354,7 +7354,7 @@ msgid "Pulsars"
 msgstr "พัลซาร์"
 
 #: plugins/Pulsars/src/Pulsars.cpp:74
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:117
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:119
 msgid ""
 "This plugin plots the position of various pulsars, with object information "
 "about each one."
@@ -7368,116 +7368,130 @@ msgstr "แสดงพัลซาร์"
 msgid "Pulsars configuration window"
 msgstr "หน้าต่างการตั้งค่าพัลซาร์"
 
-#: plugins/Pulsars/src/Pulsar.cpp:130
+#: plugins/Pulsars/src/Pulsar.cpp:137
 msgid "pulsar"
 msgstr "พัลซาร์"
 
+#: plugins/Pulsars/src/Pulsar.cpp:142
+msgid "has one registered glitch"
+msgstr ""
+
+#. TRANSLATORS: Full phrase is "Has X registered glitches", where X is number
+#: plugins/Pulsars/src/Pulsar.cpp:146
+#, qt-format
+msgid "has %1 registered glitches"
+msgstr ""
+
+#: plugins/Pulsars/src/Pulsar.cpp:148
+msgid "pulsar with glitches"
+msgstr ""
+
 #. TRANSLATORS: Unit of measure for period - seconds
-#: plugins/Pulsars/src/Pulsar.cpp:141
+#: plugins/Pulsars/src/Pulsar.cpp:160
 #, qt-format
 msgid "Barycentric period: %1 s"
 msgstr "คาบศูนย์ระบบมวล: %1 วินาที"
 
-#: plugins/Pulsars/src/Pulsar.cpp:145
+#: plugins/Pulsars/src/Pulsar.cpp:164
 #, qt-format
 msgid "Time derivative of barycentric period: %1"
 msgstr ""
 
-#: plugins/Pulsars/src/Pulsar.cpp:150
+#: plugins/Pulsars/src/Pulsar.cpp:169
 msgid "Dispersion measure:"
 msgstr ""
 
 #. TRANSLATORS: Unit of measure for distance - centimeters
-#: plugins/Pulsars/src/Pulsar.cpp:153
+#: plugins/Pulsars/src/Pulsar.cpp:172
 msgid "cm"
 msgstr "ซม."
 
 #. TRANSLATORS: Unit of measure for distance - parsecs
-#: plugins/Pulsars/src/Pulsar.cpp:156
+#: plugins/Pulsars/src/Pulsar.cpp:175
 msgid "pc"
 msgstr "พาร์เซก"
 
-#: plugins/Pulsars/src/Pulsar.cpp:162
+#: plugins/Pulsars/src/Pulsar.cpp:181
 #, qt-format
 msgid "Spin down energy loss rate: %1 ergs/s"
 msgstr "อัตราการสูญเสียมวลขณะหมุนช้าลง: %1 เอิร์ก/วินาที"
 
-#: plugins/Pulsars/src/Pulsar.cpp:166
+#: plugins/Pulsars/src/Pulsar.cpp:185
 #, qt-format
 msgid "Binary period of pulsar: %1 days"
 msgstr "คาบของดาวคู่ในพัลซาร์: %1 วัน"
 
-#: plugins/Pulsars/src/Pulsar.cpp:170
+#: plugins/Pulsars/src/Pulsar.cpp:189
 #, qt-format
 msgid "Eccentricity: %1"
 msgstr "ภาวะเยื้องศูนย์กลาง: %1"
 
 #. TRANSLATORS: Unit of measure for annual parallax - milliarcseconds
-#: plugins/Pulsars/src/Pulsar.cpp:175
+#: plugins/Pulsars/src/Pulsar.cpp:194
 #, qt-format
 msgid "Annual parallax: %1 mas"
 msgstr "แพรัลแลกซ์รายปี: %1 มิลลิพิลิปดา"
 
-#: plugins/Pulsars/src/Pulsar.cpp:179
+#: plugins/Pulsars/src/Pulsar.cpp:198
 #, qt-format
 msgid "Distance based on electron density model: %1 kpc (%2 ly)"
 msgstr ""
 "ระยะห่างคำนวณจากแบบจำลองความหนาแน่นอิเล็กตรอน: %1 กิโลพาร์เซก (%2 ปีแสง)"
 
-#: plugins/Pulsars/src/Pulsar.cpp:183
+#: plugins/Pulsars/src/Pulsar.cpp:202
 #, qt-format
 msgid "Profile width at 50% of peak: %1 ms"
 msgstr ""
 
 #. TRANSLATORS: Full phrase is "Time averaged flux density at XXXMHz"
-#: plugins/Pulsars/src/Pulsar.cpp:189 plugins/Pulsars/src/Pulsar.cpp:201
-#: plugins/Pulsars/src/Pulsar.cpp:213
+#: plugins/Pulsars/src/Pulsar.cpp:208 plugins/Pulsars/src/Pulsar.cpp:220
+#: plugins/Pulsars/src/Pulsar.cpp:232
 msgid "Time averaged flux density at"
 msgstr "ความหนาแน่นฟลักซ์เฉลี่ยเวลาที่"
 
 #. TRANSLATORS: Unit of measurement of frequency
-#: plugins/Pulsars/src/Pulsar.cpp:192 plugins/Pulsars/src/Pulsar.cpp:204
-#: plugins/Pulsars/src/Pulsar.cpp:216
+#: plugins/Pulsars/src/Pulsar.cpp:211 plugins/Pulsars/src/Pulsar.cpp:223
+#: plugins/Pulsars/src/Pulsar.cpp:235
 msgid "MHz"
 msgstr "MHz"
 
 #. TRANSLATORS: mJy is milliJansky(10-26W/m2/Hz)
-#: plugins/Pulsars/src/Pulsar.cpp:195 plugins/Pulsars/src/Pulsar.cpp:207
-#: plugins/Pulsars/src/Pulsar.cpp:219
+#: plugins/Pulsars/src/Pulsar.cpp:214 plugins/Pulsars/src/Pulsar.cpp:226
+#: plugins/Pulsars/src/Pulsar.cpp:238
 msgid "mJy"
 msgstr "mJy"
 
-#: plugins/Pulsars/src/Pulsar.cpp:223
+#: plugins/Pulsars/src/Pulsar.cpp:242
 #, qt-format
 msgid "Notes: %1"
 msgstr "หมายเหตุ: %1"
 
-#: plugins/Pulsars/src/Pulsar.cpp:290
+#: plugins/Pulsars/src/Pulsar.cpp:309
 msgid ""
 "anomalous X-ray pulsar or soft gamma-ray repeater with detected pulsations"
 msgstr ""
 
-#: plugins/Pulsars/src/Pulsar.cpp:295
+#: plugins/Pulsars/src/Pulsar.cpp:314
 msgid "has one or more binary companions"
 msgstr "มีดาวที่เป็นคู่จำนวนหนึ่งดวงหรือมากกว่า"
 
-#: plugins/Pulsars/src/Pulsar.cpp:300
+#: plugins/Pulsars/src/Pulsar.cpp:319
 msgid "with pulsed emission from radio to infrared or higher frequencies"
 msgstr "มีการเปล่งเป็นห้วง ๆ จากคลื่นวิทยุถึงอินฟราเรด หรือความถี่ที่สูงกว่า"
 
-#: plugins/Pulsars/src/Pulsar.cpp:305
+#: plugins/Pulsars/src/Pulsar.cpp:324
 msgid "with pulsed emission only at infrared or higher frequencies"
 msgstr "มีการเปล่งเป็นห้วง ๆ เฉพาะในคลื่นอินฟราเรด หรือความถี่ที่สูงกว่า"
 
-#: plugins/Pulsars/src/Pulsar.cpp:310
+#: plugins/Pulsars/src/Pulsar.cpp:329
 msgid "with pulsed emission in the radio band"
 msgstr "มีการเปล่งเป็นห้วง ๆ ในแถบคลื่นวิทยุ"
 
-#: plugins/Pulsars/src/Pulsar.cpp:315
+#: plugins/Pulsars/src/Pulsar.cpp:334
 msgid "with intermittently pulsed radio emission"
 msgstr "มีการเปล่งคลื่นวิทยุเป็นห้วง ๆ อย่างไม่สม่ำเสมอ"
 
-#: plugins/Pulsars/src/Pulsar.cpp:320
+#: plugins/Pulsars/src/Pulsar.cpp:339
 msgid ""
 "isolated neutron star with pulsed thermal X-ray emission but no detectable "
 "radio emission"
@@ -7485,11 +7499,11 @@ msgstr ""
 "ดาวนิวตรอนเดี่ยวที่มีการเปล่งรังสีเอกซ์เชิงความร้อนเป็นห้วง ๆ "
 "แต่ตรวจไม่พบการเปล่งคลื่นวิทยุ"
 
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:112
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:114
 msgid "Pulsars Plug-in"
 msgstr "โปรแกรมเสริมพัลซาร์"
 
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:118
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:120
 #, qt-format
 msgid ""
 "Pulsar data is derived from 'The ATNF Pulsar Catalogue'  (Manchester, R. N., "
@@ -7500,65 +7514,69 @@ msgstr ""
 "B., Teoh, A. & Hobbs, M., Astron. J., 129, 1993-2006 (2005) (%1astro-"
 "ph/0412641%2))"
 
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:122
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:124
 msgid "Note"
 msgstr "หมายเหตุ"
 
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:123
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:125
 msgid "pulsar identifiers have the prefix 'PSR'"
 msgstr "พัลซาร์จะมีชื่อนำหน้าด้วย 'PSR'"
 
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:124
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:126
 msgid "Acknowledgment"
 msgstr "กิตติกรรมประกาศ"
 
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:127
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:129
 msgid "Vladimir Samodourov"
 msgstr "Vladimir Samodourov"
 
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:129
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:131
 msgid "Pushchino Radio Astronomy Observatory"
 msgstr "Pushchino Radio Astronomy Observatory"
 
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:132
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:134
 msgid "Maciej Serylak"
 msgstr "Maciej Serylak"
 
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:134
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:136
 msgid "Nancay Radioastronomical Observatory"
 msgstr "Nancay Radioastronomical Observatory"
 
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:135
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:137
 msgid "in France"
 msgstr "ในฝรั่งเศส"
 
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:228
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:236
 msgid "Pulsars is updated"
 msgstr "พัลซาร์ได้รับการปรับปรุงแล้ว"
 
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:257
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:263
 msgid "Pulsars Configuration"
 msgstr "การตั้งค่าพัลซาร์"
 
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:258
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:264
 msgid "Pulsars Plug-in Configuration"
 msgstr "การตั้งค่าโปรแกรมเสริมพัลซาร์"
 
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:266
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:272
 msgid "Settings for pulsars"
 msgstr "การตั้งค่าสำหรับพัลซาร์"
 
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:268
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:274
 msgid "Plot all pulsars without labels"
 msgstr "แสดงทุกพัลซาร์โดยไม่ต้องแสดงป้ายชื่อ"
 
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:270
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:276
 msgid "Enable display of distribution for pulsars"
 msgstr "แสดงการกระจายตัวสำหรับพัลซาร์"
 
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:272
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:278
 msgid "Show pulsars button on toolbar"
 msgstr "แสดงปุ่มพัลซาร์บนแถบเครื่องมือ"
+
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:279
+msgid "Use separate color for pulsars with glitches"
+msgstr ""
 
 #: plugins/Exoplanets/src/Exoplanets.cpp:73
 #: plugins/Exoplanets/src/Exoplanets.cpp:161
