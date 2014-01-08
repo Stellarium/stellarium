@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-07 21:02+0700\n"
+"POT-Creation-Date: 2014-01-08 22:13+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,7 +20,7 @@ msgstr ""
 #: src/core/modules/ConstellationMgr.cpp:106 src/core/modules/StarMgr.cpp:336
 #: src/core/modules/GridLinesMgr.cpp:679 src/core/modules/LandscapeMgr.cpp:335
 #: src/core/modules/NebulaMgr.cpp:123 src/core/modules/SolarSystem.cpp:150
-#: src/core/StelApp.cpp:436 src/core/StelCore.cpp:160
+#: src/core/StelApp.cpp:440 src/core/StelCore.cpp:160
 #: src/core/StelSkyLayerMgr.cpp:87 src/StelMainView.cpp:300
 msgid "Display Options"
 msgstr ""
@@ -435,7 +435,7 @@ msgstr ""
 msgid "Rising time: %1%"
 msgstr ""
 
-#: src/core/StelApp.cpp:436
+#: src/core/StelApp.cpp:440
 msgid "Night mode"
 msgstr ""
 
@@ -3969,6 +3969,7 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:980
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:390
+#: plugins/FOV/src/ui_fovWindow.h:382
 msgid "Save settings"
 msgstr ""
 
@@ -3976,7 +3977,7 @@ msgstr ""
 msgid "Restore the default settings that came with Stellarium"
 msgstr ""
 
-#: src/ui_configurationDialog.h:984
+#: src/ui_configurationDialog.h:984 plugins/FOV/src/ui_fovWindow.h:378
 msgid "Restore defaults"
 msgstr ""
 
@@ -5093,6 +5094,7 @@ msgstr ""
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:283
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:322
 #: plugins/Observability/src/ui_ObservabilityDialog.h:378
+#: plugins/FOV/src/ui_fovWindow.h:389
 msgctxt "tab in plugin windows"
 msgid "About"
 msgstr ""
@@ -5872,6 +5874,7 @@ msgstr ""
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:239
 #: plugins/TimeZoneConfiguration/src/gui/TimeZoneConfigurationWindow.cpp:105
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:97
+#: plugins/FOV/src/gui/FOVWindow.cpp:80
 #, qt-format
 msgid "Version %1"
 msgstr ""
@@ -8021,4 +8024,73 @@ msgstr ""
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:376
 msgid "Sun altitude at twilight: 0 deg."
+msgstr ""
+
+#: plugins/FOV/src/FOV.cpp:40 plugins/FOV/src/FOV.cpp:77
+#: plugins/FOV/src/ui_fovWindow.h:372 plugins/FOV/src/ui_fovWindow.h:374
+#: plugins/FOV/src/ui_fovWindow.h:388
+msgid "Field of View"
+msgstr ""
+
+#: plugins/FOV/src/FOV.cpp:43
+msgid ""
+"This plugin gives stepwise zooming like in <em>Cartes du Ciel</em> "
+"planetarium via keyboard shortcuts."
+msgstr ""
+
+#: plugins/FOV/src/FOV.cpp:82
+#, qt-format
+msgid "Set FOV in %1%2"
+msgstr ""
+
+#: plugins/FOV/src/gui/FOVWindow.cpp:79
+msgid "Field of View plug-in"
+msgstr ""
+
+#: plugins/FOV/src/gui/FOVWindow.cpp:88
+msgid ""
+"By default Stellarium use smooth zooming via mouse wheel or keyboard "
+"shortcuts. Some users want stepwise zooming like in <em>{Cartes du Ciel}</"
+"em> planetarium and this plugin give this feature. You can edit values and "
+"use keyboard for quick set FOV. All values in degrees."
+msgstr ""
+
+#: plugins/FOV/src/ui_fovWindow.h:375
+msgid "Ctrl+Alt+5"
+msgstr ""
+
+#: plugins/FOV/src/ui_fovWindow.h:376
+msgid "Ctrl+Alt+0"
+msgstr ""
+
+#: plugins/FOV/src/ui_fovWindow.h:377
+msgid "Ctrl+Alt+8"
+msgstr ""
+
+#: plugins/FOV/src/ui_fovWindow.h:379
+msgid "Ctrl+Alt+3"
+msgstr ""
+
+#: plugins/FOV/src/ui_fovWindow.h:380
+msgid "Ctrl+Alt+6"
+msgstr ""
+
+#: plugins/FOV/src/ui_fovWindow.h:381
+msgid "Ctrl+Alt+2"
+msgstr ""
+
+#: plugins/FOV/src/ui_fovWindow.h:383
+msgid "Ctrl+Alt+4"
+msgstr ""
+
+#: plugins/FOV/src/ui_fovWindow.h:385
+msgid "Ctrl+Alt+1"
+msgstr ""
+
+#: plugins/FOV/src/ui_fovWindow.h:386
+msgid "Ctrl+Alt+7"
+msgstr ""
+
+#: plugins/FOV/src/ui_fovWindow.h:387
+msgid "Ctrl+Alt+9"
 msgstr ""
