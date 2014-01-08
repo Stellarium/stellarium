@@ -69,7 +69,7 @@ AddOn::AddOn(const qint64 addOnId, const QVariantMap& map)
 	if (m_eType == Texture)
 	{
 		m_InstalledTextures.clear();
-		m_AllTextures = map.value("textures").toString().split("/").toSet();
+		m_AllTextures = map.value("textures").toString().split(",").toSet();
 		// a texture must have "textures"
 		if (m_AllTextures.isEmpty())
 		{
