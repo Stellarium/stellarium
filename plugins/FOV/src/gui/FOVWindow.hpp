@@ -44,7 +44,8 @@ protected:
 	void createDialogContent();
 
 private:
-	Ui_fovWindowForm * ui;
+	Ui_fovWindowForm* ui;
+	FOV* fov;
 
 	void updateAboutText();
 	void updateInfoText();

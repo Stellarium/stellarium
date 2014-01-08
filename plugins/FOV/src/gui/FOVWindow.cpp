@@ -28,7 +28,7 @@
 
 FOVWindow::FOVWindow()
 {
-	ui = new Ui_fovWindowForm();
+	ui = new Ui_fovWindowForm();	
 }
 
 FOVWindow::~FOVWindow()
@@ -48,6 +48,7 @@ void FOVWindow::retranslate()
 
 void FOVWindow::createDialogContent()
 {
+	fov = GETSTELMODULE(FOV);
 	ui->setupUi(dialog);
 
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
@@ -89,75 +90,75 @@ void FOVWindow::updateInfoText()
 
 void FOVWindow::saveFOVSettings()
 {
-	GETSTELMODULE(FOV)->saveSettingsToConfig();
+	fov->saveSettingsToConfig();
 }
 
 void FOVWindow::resetFOVSettings()
 {
-	GETSTELMODULE(FOV)->restoreDefaults();
+	fov->restoreDefaults();
 	populateFOV();
 }
 
 void FOVWindow::updateFOV0(double value)
 {
-	GETSTELMODULE(FOV)->setQuickFOV(value, 0);
+	fov->setQuickFOV(value, 0);
 }
 
 void FOVWindow::updateFOV1(double value)
 {
-	GETSTELMODULE(FOV)->setQuickFOV(value, 1);
+	fov->setQuickFOV(value, 1);
 }
 
 void FOVWindow::updateFOV2(double value)
 {
-	GETSTELMODULE(FOV)->setQuickFOV(value, 2);
+	fov->setQuickFOV(value, 2);
 }
 
 void FOVWindow::updateFOV3(double value)
 {
-	GETSTELMODULE(FOV)->setQuickFOV(value, 3);
+	fov->setQuickFOV(value, 3);
 }
 
 void FOVWindow::updateFOV4(double value)
 {
-	GETSTELMODULE(FOV)->setQuickFOV(value, 4);
+	fov->setQuickFOV(value, 4);
 }
 
 void FOVWindow::updateFOV5(double value)
 {
-	GETSTELMODULE(FOV)->setQuickFOV(value, 5);
+	fov->setQuickFOV(value, 5);
 }
 
 void FOVWindow::updateFOV6(double value)
 {
-	GETSTELMODULE(FOV)->setQuickFOV(value, 6);
+	fov->setQuickFOV(value, 6);
 }
 
 void FOVWindow::updateFOV7(double value)
 {
-	GETSTELMODULE(FOV)->setQuickFOV(value, 7);
+	fov->setQuickFOV(value, 7);
 }
 
 void FOVWindow::updateFOV8(double value)
 {
-	GETSTELMODULE(FOV)->setQuickFOV(value, 8);
+	fov->setQuickFOV(value, 8);
 }
 
 void FOVWindow::updateFOV9(double value)
 {
-	GETSTELMODULE(FOV)->setQuickFOV(value, 9);
+	fov->setQuickFOV(value, 9);
 }
 
 void FOVWindow::populateFOV()
 {
-	ui->doubleSpinBoxFOV0->setValue(GETSTELMODULE(FOV)->getQuickFOV(0));
-	ui->doubleSpinBoxFOV1->setValue(GETSTELMODULE(FOV)->getQuickFOV(1));
-	ui->doubleSpinBoxFOV2->setValue(GETSTELMODULE(FOV)->getQuickFOV(2));
-	ui->doubleSpinBoxFOV3->setValue(GETSTELMODULE(FOV)->getQuickFOV(3));
-	ui->doubleSpinBoxFOV4->setValue(GETSTELMODULE(FOV)->getQuickFOV(4));
-	ui->doubleSpinBoxFOV5->setValue(GETSTELMODULE(FOV)->getQuickFOV(5));
-	ui->doubleSpinBoxFOV6->setValue(GETSTELMODULE(FOV)->getQuickFOV(6));
-	ui->doubleSpinBoxFOV7->setValue(GETSTELMODULE(FOV)->getQuickFOV(7));
-	ui->doubleSpinBoxFOV8->setValue(GETSTELMODULE(FOV)->getQuickFOV(8));
-	ui->doubleSpinBoxFOV9->setValue(GETSTELMODULE(FOV)->getQuickFOV(9));
+	ui->doubleSpinBoxFOV0->setValue(fov->getQuickFOV(0));
+	ui->doubleSpinBoxFOV1->setValue(fov->getQuickFOV(1));
+	ui->doubleSpinBoxFOV2->setValue(fov->getQuickFOV(2));
+	ui->doubleSpinBoxFOV3->setValue(fov->getQuickFOV(3));
+	ui->doubleSpinBoxFOV4->setValue(fov->getQuickFOV(4));
+	ui->doubleSpinBoxFOV5->setValue(fov->getQuickFOV(5));
+	ui->doubleSpinBoxFOV6->setValue(fov->getQuickFOV(6));
+	ui->doubleSpinBoxFOV7->setValue(fov->getQuickFOV(7));
+	ui->doubleSpinBoxFOV8->setValue(fov->getQuickFOV(8));
+	ui->doubleSpinBoxFOV9->setValue(fov->getQuickFOV(9));
 }
