@@ -40,6 +40,7 @@ public:
 	void selectionChanged(const QItemSelection& selected, const QItemSelection& deselected);
 	void setModel(QAbstractItemModel* model);
 	void setCategory(AddOn::Category category) { m_category = category; }
+	AddOn::Category getCategory() { return m_category; }
 
 	QHash<AddOn*, QStringList> getSelectedAddonsToInstall() { return m_iSelectedAddOnsToInstall; }
 	QHash<AddOn*, QStringList> getSelectedAddonsToRemove() { return m_iSelectedAddOnsToRemove; }
