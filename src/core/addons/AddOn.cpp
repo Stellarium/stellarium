@@ -172,6 +172,8 @@ QString AddOn::getStatusString() {
 			return "Installed";
 		case Installing:
 			return "Installing";
+		case Restart:
+			return "Restart";
 		case Corrupted:
 			return "Corrupted";
 		case InvalidFormat:

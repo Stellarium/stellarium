@@ -63,6 +63,7 @@ public:
 		PartiallyInstalled,
 		FullyInstalled,
 		Installing,
+		Restart,
 		Corrupted,
 		InvalidFormat,
 		UnableToWrite,

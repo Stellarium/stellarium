@@ -367,6 +367,7 @@ AddOn::Status StelAddOnMgr::installFromFile(AddOn* addon, const QStringList sele
 		(addon->getCategory() == AddOn::LANGUAGEPACK || addon->getCategory() == AddOn::TEXTURE))
 	{
 		emit (addOnMgrMsg(RestartRequired));
+		status = AddOn::Restart;
 	}
 
 	addon->setStatus(status);
@@ -395,12 +396,13 @@ void StelAddOnMgr::removeAddOn(AddOn* addon, const QStringList selectedFiles)
 	}
 
 	addon->setStatus(m_pStelAddOns.value(addon->getCategory())->uninstallAddOn(addon->getInstallId(), selectedFiles));
-	emit (dataUpdated(addon));
 
 	if (addon->getCategory() == AddOn::LANGUAGEPACK || addon->getCategory() == AddOn::TEXTURE)
 	{
 		emit (addOnMgrMsg(RestartRequired));
+		addon->setStatus(AddOn::Restart);
 	}
+	emit (dataUpdated(addon));
 }
 
 QString StelAddOnMgr::calculateMd5(QFile& file) const
