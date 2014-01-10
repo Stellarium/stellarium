@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>530</width>
-    <height>480</height>
+    <height>404</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -146,24 +146,20 @@
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_3">
        <item>
-        <widget class="QGroupBox" name="updatesGroup">
+        <widget class="QGroupBox" name="internetUpdates">
          <property name="title">
-          <string>Update catalog from Internet</string>
+          <string>Update data from Internet</string>
          </property>
          <property name="flat">
           <bool>true</bool>
          </property>
          <property name="checkable">
-          <bool>false</bool>
+          <bool>true</bool>
+         </property>
+         <property name="checked">
+          <bool>true</bool>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_12">
-          <item>
-           <widget class="QCheckBox" name="internetUpdatesCheckbox">
-            <property name="text">
-             <string>Update from Internet sources</string>
-            </property>
-           </widget>
-          </item>
           <item>
            <layout class="QGridLayout" name="gridLayout">
             <item row="0" column="0">
@@ -239,35 +235,31 @@
         </widget>
        </item>
        <item>
-        <widget class="QGroupBox" name="displayBox">
+        <widget class="QGroupBox" name="displayMeteorShowerBox">
+         <property name="toolTip">
+          <string/>
+         </property>
          <property name="title">
-          <string>Settings for meteor showers</string>
+          <string>Meteor showers</string>
          </property>
          <property name="flat">
           <bool>true</bool>
          </property>
-         <layout class="QVBoxLayout" name="verticalLayout">
-          <item>
-           <widget class="QCheckBox" name="displayModeCheckBox">
-            <property name="toolTip">
-             <string/>
-            </property>
-            <property name="text">
-             <string>Enable display of radiants of meteor showers</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QCheckBox" name="displayAtStartupCheckBox">
-            <property name="text">
-             <string>Enable display at startup</string>
-            </property>
-           </widget>
-          </item>
-          <item>
+         <property name="checkable">
+          <bool>false</bool>
+         </property>
+         <layout class="QGridLayout" name="gridLayout_8">
+          <item row="1" column="0">
            <widget class="QCheckBox" name="displayShowMeteorShowerButton">
             <property name="text">
              <string>Show meteor showers button on toolbar</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="0">
+           <widget class="QCheckBox" name="displayMeteorShower">
+            <property name="text">
+             <string>Enable display of meteor showers at startup</string>
             </property>
            </widget>
           </item>
@@ -324,348 +316,316 @@
        <bool>true</bool>
       </property>
       <attribute name="title">
-       <string>Radiant</string>
+       <string>Radiants</string>
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_4">
        <item>
-        <widget class="QGroupBox" name="activeRealData">
+        <widget class="QGroupBox" name="groupBox">
          <property name="title">
-          <string>Active Radiant - Real Data</string>
+          <string>Color of radiants markers</string>
          </property>
-         <layout class="QGridLayout" name="gridLayout_2">
+         <layout class="QGridLayout" name="gridLayout_5">
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
           <property name="topMargin">
-           <number>4</number>
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
           </property>
           <property name="bottomMargin">
-           <number>4</number>
+           <number>0</number>
           </property>
-          <item row="0" column="1">
-           <widget class="QFrame" name="frame">
-            <property name="frameShape">
-             <enum>QFrame::NoFrame</enum>
+          <property name="spacing">
+           <number>0</number>
+          </property>
+          <item row="0" column="1" alignment="Qt::AlignHCenter">
+           <widget class="QGroupBox" name="activeGenericData">
+            <property name="minimumSize">
+             <size>
+              <width>86</width>
+              <height>0</height>
+             </size>
             </property>
-            <property name="frameShadow">
-             <enum>QFrame::Raised</enum>
+            <property name="toolTip">
+             <string>Active Radiant - Generic Data</string>
             </property>
-            <property name="lineWidth">
-             <number>0</number>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
             </property>
-            <layout class="QVBoxLayout" name="verticalLayout_5">
-             <property name="spacing">
-              <number>9</number>
+            <layout class="QGridLayout" name="gridLayout_3">
+             <property name="leftMargin">
+              <number>0</number>
              </property>
              <property name="topMargin">
+              <number>0</number>
+             </property>
+             <property name="rightMargin">
               <number>0</number>
              </property>
              <property name="bottomMargin">
               <number>0</number>
              </property>
-             <item>
-              <widget class="QCheckBox" name="showStreamARR">
-               <property name="text">
-                <string>Displays the meteor stream.</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QCheckBox" name="showARR">
-               <property name="toolTip">
-                <string>It doesn't affect the drawing of the meteor showers.</string>
-               </property>
-               <property name="text">
-                <string>Show all markers of active radiant based on real data.</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QPushButton" name="changeColorARR">
-               <property name="text">
-                <string>Change Color</string>
-               </property>
-              </widget>
-             </item>
-            </layout>
-            <zorder>changeColorARR</zorder>
-            <zorder>showARR</zorder>
-            <zorder>showStreamARR</zorder>
-           </widget>
-          </item>
-          <item row="0" column="0">
-           <widget class="QFrame" name="frame_6">
-            <property name="minimumSize">
-             <size>
-              <width>64</width>
-              <height>64</height>
-             </size>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>64</width>
-              <height>64</height>
-             </size>
-            </property>
-            <property name="frameShape">
-             <enum>QFrame::StyledPanel</enum>
-            </property>
-            <property name="frameShadow">
-             <enum>QFrame::Raised</enum>
-            </property>
-            <widget class="QLabel" name="textureARR">
-             <property name="geometry">
-              <rect>
-               <x>0</x>
-               <y>0</y>
-               <width>64</width>
-               <height>64</height>
-              </rect>
-             </property>
-             <property name="minimumSize">
-              <size>
-               <width>64</width>
-               <height>64</height>
-              </size>
-             </property>
-             <property name="maximumSize">
-              <size>
-               <width>64</width>
-               <height>64</height>
-              </size>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">background-image: url(:/MeteorShowers/radiantSetting.png);</string>
-             </property>
-             <property name="text">
-              <string/>
-             </property>
-            </widget>
-           </widget>
-          </item>
-         </layout>
-        </widget>
-       </item>
-       <item>
-        <widget class="QGroupBox" name="activeGenericData">
-         <property name="title">
-          <string>Active Radiant - Generic Data</string>
-         </property>
-         <layout class="QGridLayout" name="gridLayout_3">
-          <property name="topMargin">
-           <number>4</number>
-          </property>
-          <property name="bottomMargin">
-           <number>4</number>
-          </property>
-          <item row="0" column="0">
-           <widget class="QFrame" name="frame_4">
-            <property name="minimumSize">
-             <size>
-              <width>64</width>
-              <height>64</height>
-             </size>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>64</width>
-              <height>64</height>
-             </size>
-            </property>
-            <property name="frameShape">
-             <enum>QFrame::StyledPanel</enum>
-            </property>
-            <property name="frameShadow">
-             <enum>QFrame::Raised</enum>
-            </property>
-            <widget class="QLabel" name="textureARG">
-             <property name="geometry">
-              <rect>
-               <x>0</x>
-               <y>0</y>
-               <width>64</width>
-               <height>64</height>
-              </rect>
-             </property>
-             <property name="minimumSize">
-              <size>
-               <width>64</width>
-               <height>64</height>
-              </size>
-             </property>
-             <property name="maximumSize">
-              <size>
-               <width>64</width>
-               <height>64</height>
-              </size>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">background-image: url(:/MeteorShowers/radiantSetting.png);</string>
-             </property>
-             <property name="text">
-              <string/>
-             </property>
-            </widget>
-           </widget>
-          </item>
-          <item row="0" column="1">
-           <widget class="QFrame" name="frame_2">
-            <property name="frameShape">
-             <enum>QFrame::NoFrame</enum>
-            </property>
-            <property name="frameShadow">
-             <enum>QFrame::Raised</enum>
-            </property>
-            <property name="lineWidth">
-             <number>0</number>
-            </property>
-            <layout class="QVBoxLayout" name="verticalLayout_6">
              <property name="spacing">
-              <number>9</number>
-             </property>
-             <property name="topMargin">
               <number>0</number>
              </property>
-             <property name="bottomMargin">
-              <number>0</number>
-             </property>
-             <item>
-              <widget class="QCheckBox" name="showStreamARG">
-               <property name="text">
-                <string>Displays the meteor stream.</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QCheckBox" name="showARG">
-               <property name="toolTip">
-                <string>It doesn't affect the drawing of the meteor showers.</string>
-               </property>
-               <property name="text">
-                <string>Show all markers of active radiant based on generic data.</string>
-               </property>
-              </widget>
-             </item>
-             <item>
+             <item row="1" column="0">
               <widget class="QPushButton" name="changeColorARG">
-               <property name="text">
+               <property name="toolTip">
                 <string>Change Color</string>
                </property>
+               <property name="text">
+                <string notr="true">...</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="0">
+              <widget class="QFrame" name="frame_4">
+               <property name="minimumSize">
+                <size>
+                 <width>64</width>
+                 <height>64</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>64</width>
+                 <height>64</height>
+                </size>
+               </property>
+               <property name="frameShape">
+                <enum>QFrame::StyledPanel</enum>
+               </property>
+               <property name="frameShadow">
+                <enum>QFrame::Raised</enum>
+               </property>
+               <widget class="QLabel" name="textureARG">
+                <property name="geometry">
+                 <rect>
+                  <x>0</x>
+                  <y>0</y>
+                  <width>64</width>
+                  <height>64</height>
+                 </rect>
+                </property>
+                <property name="minimumSize">
+                 <size>
+                  <width>64</width>
+                  <height>64</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>64</width>
+                  <height>64</height>
+                 </size>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">background-image: url(:/MeteorShowers/radiantSetting.png);</string>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
               </widget>
              </item>
             </layout>
            </widget>
           </item>
-         </layout>
-        </widget>
-       </item>
-       <item>
-        <widget class="QGroupBox" name="inactive">
-         <property name="title">
-          <string>Inactive Radiant</string>
-         </property>
-         <layout class="QGridLayout" name="gridLayout_4">
-          <property name="topMargin">
-           <number>4</number>
-          </property>
-          <property name="bottomMargin">
-           <number>4</number>
-          </property>
-          <item row="0" column="1">
-           <widget class="QFrame" name="frame_3">
-            <property name="frameShape">
-             <enum>QFrame::NoFrame</enum>
+          <item row="0" column="2" alignment="Qt::AlignHCenter">
+           <widget class="QGroupBox" name="inactive">
+            <property name="minimumSize">
+             <size>
+              <width>86</width>
+              <height>0</height>
+             </size>
             </property>
-            <property name="frameShadow">
-             <enum>QFrame::Raised</enum>
+            <property name="toolTip">
+             <string>Inactive Radiant</string>
             </property>
-            <property name="lineWidth">
-             <number>0</number>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
             </property>
-            <layout class="QVBoxLayout" name="verticalLayout_7">
-             <property name="spacing">
-              <number>9</number>
+            <layout class="QGridLayout" name="gridLayout_4">
+             <property name="leftMargin">
+              <number>0</number>
              </property>
              <property name="topMargin">
+              <number>0</number>
+             </property>
+             <property name="rightMargin">
               <number>0</number>
              </property>
              <property name="bottomMargin">
               <number>0</number>
              </property>
-             <item>
-              <widget class="QCheckBox" name="showIR">
+             <property name="spacing">
+              <number>0</number>
+             </property>
+             <item row="1" column="0">
+              <widget class="QPushButton" name="changeColorIR">
                <property name="toolTip">
-                <string>It doesn't affect the drawing of the meteor showers.</string>
+                <string>Change Color</string>
                </property>
                <property name="text">
-                <string>Show all markers of inactive radiant.</string>
+                <string notr="true">...</string>
                </property>
               </widget>
              </item>
-             <item>
-              <widget class="QPushButton" name="changeColorIR">
-               <property name="text">
-                <string>Change Color</string>
+             <item row="0" column="0">
+              <widget class="QFrame" name="frame_5">
+               <property name="minimumSize">
+                <size>
+                 <width>64</width>
+                 <height>64</height>
+                </size>
                </property>
+               <property name="maximumSize">
+                <size>
+                 <width>64</width>
+                 <height>64</height>
+                </size>
+               </property>
+               <property name="frameShape">
+                <enum>QFrame::StyledPanel</enum>
+               </property>
+               <property name="frameShadow">
+                <enum>QFrame::Raised</enum>
+               </property>
+               <widget class="QLabel" name="textureIR">
+                <property name="geometry">
+                 <rect>
+                  <x>0</x>
+                  <y>0</y>
+                  <width>64</width>
+                  <height>64</height>
+                 </rect>
+                </property>
+                <property name="minimumSize">
+                 <size>
+                  <width>64</width>
+                  <height>64</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>64</width>
+                  <height>64</height>
+                 </size>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">background-image: url(:/MeteorShowers/radiantSetting.png);</string>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
               </widget>
              </item>
             </layout>
            </widget>
           </item>
-          <item row="0" column="0">
-           <widget class="QFrame" name="frame_5">
+          <item row="0" column="0" alignment="Qt::AlignHCenter">
+           <widget class="QGroupBox" name="activeRealData">
             <property name="minimumSize">
              <size>
-              <width>64</width>
-              <height>64</height>
+              <width>0</width>
+              <height>121</height>
              </size>
             </property>
-            <property name="maximumSize">
-             <size>
-              <width>64</width>
-              <height>64</height>
-             </size>
+            <property name="toolTip">
+             <string>Active Radiant - Real Data</string>
             </property>
-            <property name="frameShape">
-             <enum>QFrame::StyledPanel</enum>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
             </property>
-            <property name="frameShadow">
-             <enum>QFrame::Raised</enum>
-            </property>
-            <widget class="QLabel" name="textureIR">
-             <property name="geometry">
-              <rect>
-               <x>0</x>
-               <y>0</y>
-               <width>64</width>
-               <height>64</height>
-              </rect>
+            <layout class="QGridLayout" name="gridLayout_2">
+             <property name="leftMargin">
+              <number>0</number>
              </property>
-             <property name="minimumSize">
-              <size>
-               <width>64</width>
-               <height>64</height>
-              </size>
+             <property name="topMargin">
+              <number>0</number>
              </property>
-             <property name="maximumSize">
-              <size>
-               <width>64</width>
-               <height>64</height>
-              </size>
+             <property name="rightMargin">
+              <number>0</number>
              </property>
-             <property name="styleSheet">
-              <string notr="true">background-image: url(:/MeteorShowers/radiantSetting.png);</string>
+             <property name="bottomMargin">
+              <number>0</number>
              </property>
-             <property name="text">
-              <string/>
+             <property name="spacing">
+              <number>0</number>
              </property>
-            </widget>
+             <item row="1" column="0">
+              <widget class="QPushButton" name="changeColorARR">
+               <property name="toolTip">
+                <string>Change Color</string>
+               </property>
+               <property name="text">
+                <string notr="true">...</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="0">
+              <widget class="QFrame" name="frame_6">
+               <property name="minimumSize">
+                <size>
+                 <width>64</width>
+                 <height>64</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>64</width>
+                 <height>64</height>
+                </size>
+               </property>
+               <property name="frameShape">
+                <enum>QFrame::StyledPanel</enum>
+               </property>
+               <property name="frameShadow">
+                <enum>QFrame::Raised</enum>
+               </property>
+               <widget class="QLabel" name="textureARR">
+                <property name="geometry">
+                 <rect>
+                  <x>0</x>
+                  <y>0</y>
+                  <width>64</width>
+                  <height>64</height>
+                 </rect>
+                </property>
+                <property name="minimumSize">
+                 <size>
+                  <width>64</width>
+                  <height>64</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>64</width>
+                  <height>64</height>
+                 </size>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">background-image: url(:/MeteorShowers/radiantSetting.png);</string>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+              </widget>
+             </item>
+            </layout>
            </widget>
           </item>
          </layout>
         </widget>
        </item>
        <item>
-        <widget class="QGroupBox" name="labelsGroup">
+        <widget class="QGroupBox" name="displayRadiant">
          <property name="title">
-          <string>Label</string>
+          <string>Radiants for meteor showers</string>
          </property>
          <property name="flat">
           <bool>true</bool>
@@ -673,22 +633,27 @@
          <property name="checkable">
           <bool>true</bool>
          </property>
-         <layout class="QGridLayout" name="gridLayout_5">
-          <property name="topMargin">
-           <number>4</number>
-          </property>
-          <property name="bottomMargin">
-           <number>4</number>
-          </property>
-          <item row="0" column="0">
-           <widget class="QLabel" name="label">
+         <layout class="QGridLayout" name="gridLayout_9">
+          <item row="1" column="0">
+           <widget class="QCheckBox" name="radiantLabels">
             <property name="text">
-             <string>Label font size (pixels):</string>
+             <string>Show labels of radiants</string>
             </property>
            </widget>
           </item>
-          <item row="0" column="1">
-           <widget class="QSpinBox" name="fontSizeSpinBox"/>
+          <item row="0" column="0">
+           <widget class="QCheckBox" name="activeRadiantsOnly">
+            <property name="text">
+             <string>Show active radiants only</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QSpinBox" name="fontSizeSpinBox">
+            <property name="toolTip">
+             <string>Label font size (pixels)</string>
+            </property>
+           </widget>
           </item>
          </layout>
         </widget>

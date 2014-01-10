@@ -30,6 +30,7 @@
 
 class Ui_meteorShowerDialog;
 class QTimer;
+class MeteorShowers;
 
 class MeteorShowerDialog : public StelDialog
 {
@@ -50,10 +51,7 @@ public slots:
 
 private slots:
 	void setUpdateValues(int hours);
-	void setUpdatesEnabled(int checkState);
-	void setDistributionEnabled(int checkState);
-	void setDisplayAtStartupEnabled(int checkState);
-	void setDisplayShowMeteorShowerButton(int checkState);
+	void setUpdatesEnabled(bool checkState);
 	void updateStateReceiver(MeteorShowers::UpdateState state);
         void updateCompleteReceiver();
 	void restoreDefaults(void);
@@ -65,6 +63,7 @@ private slots:
 
 private:
         Ui_meteorShowerDialog* ui;
+	MeteorShowers* plugin;
 	void setAboutHtml(void);
 	void updateGuiFromSettings(void);
 	QTimer* updateTimer;
