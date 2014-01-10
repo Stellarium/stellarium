@@ -282,6 +282,10 @@ void MeteorShowers::draw(StelCore* core)
 
 void MeteorShowers::drawMarker(StelCore* core, StelPainter& painter)
 {
+	if(!getFlagRadiant())
+		return;
+
+	Q_UNUSED(core);
 	painter.setFont(labelFont);
 
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -291,17 +295,8 @@ void MeteorShowers::drawMarker(StelCore* core, StelPainter& painter)
 	foreach(const MeteorShowerP& ms, mShowers)
 	{
 		bool flag=true;
-		switch(ms->getStatus())
-		{
-		case 1:
-			flag = flagShowARR;
-			break;
-		case 2:
-			flag = flagShowARG;
-			break;
-		default:
-			flag = flagShowIR;
-		}
+		if (ms->getStatus()==0 && getFlagActiveRadiant())
+			flag = false;
 
 		ms->updateCurrentData(skyDate);
 
@@ -359,22 +354,8 @@ void MeteorShowers::drawStream(StelCore* core, StelPainter& painter)
 	{
 		foreach(const activeData &a, activeInfo)
 		{
-			// Checks if the meteor stream can be showed
-			bool flag=true;
-			switch(a.status)
-			{
-			case 1:
-				flag = flagShowStreamARR;
-				break;
-			case 2:
-				flag = flagShowStreamARG;
-				break;
-			default:
-				flag = false;
-			}
-
-			if(!flag)
-				continue; //next
+			//if (a.status>0)
+			//	continue;
 
 			// step through and draw all active meteors
 			for(std::vector<MeteorStream*>::iterator iter = active[index].begin(); iter != active[index].end(); ++iter)
@@ -807,18 +788,12 @@ void MeteorShowers::restoreDefaultConfigIni(void)
 	conf->setValue("url", "http://stellarium.org/json/showers.json");
 	conf->setValue("update_frequency_hours", 100);
 	conf->setValue("flag_show_ms_button", true);
+	conf->setValue("flag_show_radiants", true);
+	conf->setValue("flag_active_radiants", false);
 
 	conf->setValue("colorARG", "0, 255, 240");
 	conf->setValue("colorARR", "255, 240, 0");
 	conf->setValue("colorIR", "255, 255, 255");
-
-	conf->setValue("show_activeRadiantRealData_stream", true);
-	conf->setValue("show_activeRadiantGenericData_stream", true);
-	conf->setValue("show_inactiveRadiant_stream", false);
-
-	conf->setValue("show_activeRadiantRealData_marker", true);
-	conf->setValue("show_activeRadiantGenericData_marker", true);
-	conf->setValue("show_inactiveRadiant_marker", false);
 
 	conf->setValue("show_radiant_labels", true);
 
@@ -941,6 +916,8 @@ void MeteorShowers::readSettingsFromConfig(void)
 	updatesEnabled = conf->value("updates_enabled", true).toBool();
 	enableAtStartup = conf->value("enable_at_startup", false).toBool();
 	flagShowMSButton = conf->value("flag_show_ms_button", true).toBool();
+	flagShowMSRadiant = conf->value("flag_show_radiants", true).toBool();
+	flagShowAR = conf->value("flag_active_radiants", false).toBool();
 
 	Vec3f color;
 	color = StelUtils::strToVec3f(conf->value("colorARG", "0, 255, 240").toString());
@@ -949,13 +926,6 @@ void MeteorShowers::readSettingsFromConfig(void)
 	colorARR = QColor(color[0],color[1],color[2]);
 	color = StelUtils::strToVec3f(conf->value("colorIR", "255, 255, 255").toString());
 	colorIR = QColor(color[0],color[1],color[2]);
-
-	flagShowStreamARG = conf->value("show_activeRadiantGenericData_stream", true).toBool();
-	flagShowStreamARR = conf->value("show_activeRadiantRealData_stream", true).toBool();
-
-	flagShowARG = conf->value("show_activeRadiantGenericData_marker", true).toBool();
-	flagShowARR = conf->value("show_activeRadiantRealData_marker", true).toBool();
-	flagShowIR = conf->value("show_inactiveRadiant_marker", false).toBool();
 
 	MeteorShower::showLabels = conf->value("show_radiant_labels", true).toBool();
 	labelFont.setPixelSize(conf->value("font_size", 13).toInt());
@@ -972,6 +942,8 @@ void MeteorShowers::saveSettingsToConfig(void)
 	conf->setValue("updates_enabled", updatesEnabled);
 	conf->setValue("enable_at_startup", enableAtStartup);
 	conf->setValue("flag_show_ms_button", flagShowMSButton);
+	conf->setValue("flag_show_radiants", flagShowMSRadiant);
+	conf->setValue("flag_active_radiants", flagShowAR);
 
 	int r,g,b;
 	colorARG.getRgb(&r,&g,&b);
@@ -980,13 +952,6 @@ void MeteorShowers::saveSettingsToConfig(void)
 	conf->setValue("colorARR", QString("%1, %2, %3").arg(r).arg(g).arg(b));
 	colorIR.getRgb(&r,&g,&b);
 	conf->setValue("colorIR", QString("%1, %2, %3").arg(r).arg(g).arg(b));
-
-	conf->setValue("show_activeRadiantGenericData_stream", flagShowStreamARG);
-	conf->setValue("show_activeRadiantRealData_stream", flagShowStreamARR);
-
-	conf->setValue("show_activeRadiantGenericData_marker", flagShowARG);
-	conf->setValue("show_activeRadiantRealData_marker", flagShowARR);
-	conf->setValue("show_inactiveRadiant_marker", flagShowIR);
 
 	conf->setValue("show_radiant_labels", MeteorShower::showLabels);
 	conf->setValue("font_size", labelFont.pixelSize());
