@@ -90,11 +90,15 @@ void StelFileMgr::init()
 #ifdef Q_OS_MAC
 		QString relativePath = "/../Resources";
 		if (QCoreApplication::applicationDirPath().contains("src")) {
-			relativePath = "/../../../../..";
+			relativePath = "/../..";
 		}
 		QFileInfo MacOSdir(QCoreApplication::applicationDirPath() + relativePath);
-		
-		QDir ResourcesDir = MacOSdir.dir();
+		// These two lines are used to see if the Qt bug still exists.
+		// The output from C: should simply be the parent of what is show for B:
+		qDebug() << "B: " << MacOSdir.absolutePath();
+		qDebug() << "C: " << MacOSdir.dir().absolutePath();
+
+		QDir ResourcesDir(MacOSdir.absolutePath());
 		if (!QCoreApplication::applicationDirPath().contains("src")) {
 			ResourcesDir.cd(QString("Resources"));
 		}
@@ -106,7 +110,6 @@ void StelFileMgr::init()
 		QFileInfo installLocation(QFile::decodeName(INSTALL_DATADIR));
 		QFileInfo checkFile(QFile::decodeName(INSTALL_DATADIR "/" CHECK_FILE));
 #endif
-	
 		if (checkFile.exists())
 		{
 			installDir = installLocation.filePath();
