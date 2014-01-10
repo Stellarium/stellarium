@@ -139,9 +139,6 @@ public:
 		updatesEnabled=b;
 	}
 
-	bool getEnableAtStartup(void) {return enableAtStartup;}
-	void setEnableAtStartup(bool b)	{enableAtStartup=b;}
-
 	//! get the date and time the TLE elements were updated
 	QDateTime getLastUpdate(void)
 	{
@@ -208,41 +205,6 @@ public:
 	//! @return false: hidden
 	bool getFlagLabels();
 
-	//! Get status of active radiant based on generic data
-	//! @return false: hidden
-	bool getFlagARG()
-	{
-		return flagShowARG;
-	}
-
-	//! Get status of active radiant based on real data
-	//! @return false: hidden
-	bool getFlagARR()
-	{
-		return flagShowARR;
-	}
-
-	//! Get inactive radiant status
-	//! @return false: hidden
-	bool getFlagIR()
-	{
-		return flagShowIR;
-	}
-
-	//! Get the meteor stream status of active radiant based on generic data.
-	//! @return false: hidden
-	bool getFlagShowStreamARG()
-	{
-		return flagShowStreamARG;
-	}
-
-	//! Get the meteor stream status of active radiant based on real data.
-	//! @return false: hidden
-	bool getFlagShowStreamARR()
-	{
-		return flagShowStreamARR;
-	}
-
 signals:
 	//! @param state the new update state.
 	void updateStateChanged(MeteorShowers::UpdateState state);
@@ -267,10 +229,7 @@ public slots:
 
 	//! Define whether the button toggling meteor showers should be visible
 	void setFlagShowMSButton(bool b);
-	bool getFlagShowMSButton(void)
-	{
-		return flagShowMSButton;
-	}
+	bool getFlagShowMSButton(void) { return flagShowMSButton; }
 
 	//! set the label font size.
 	//! @param size the pixel size of the font
@@ -280,40 +239,14 @@ public slots:
 	//! @param false: hidden
 	void setFlagLabels(bool b);
 
-	//! Enable/disable marker of active radiant based on generic data.
-	//! @param false: hidden
-	void setFlagARG(bool b)
-	{
-		flagShowARG = b;
-	}
+	bool getFlagActiveRadiant(void) { return flagShowAR; }
+	void setFlagActiveRadiant(bool b) { flagShowAR=b; }
 
-	//! Enable/disable marker of active radiant based on real data.
-	//! @param false: hidden
-	void setFlagARR(bool b)
-	{
-		flagShowARR = b;
-	}
+	bool getEnableAtStartup(void) {return enableAtStartup;}
+	void setEnableAtStartup(bool b)	{enableAtStartup=b;}
 
-	//! Enable/disable inactive radiant marker.
-	//! @param false: hidden
-	void setFlagIR(bool b)
-	{
-		flagShowIR = b;
-	}
-
-	//! Enable/disable meteor stream of active radiant based on generic data.
-	//! @param false: hidden
-	void setFlagShowStreamARG(bool b)
-	{
-		flagShowStreamARG = b;
-	}
-
-	//! Enable/disable meteor stream of active radiant based on real data.
-	//! @param false: hidden
-	void setFlagShowStreamARR(bool b)
-	{
-		flagShowStreamARR = b;
-	}
+	bool getFlagRadiant(void) { return flagShowMSRadiant; }
+	void setFlagRadiant(bool b) { flagShowMSRadiant=b; }
 
 private:
 	// Upgrade config.ini: rename old key settings to new
@@ -381,7 +314,8 @@ private:
 	// GUI
 	MeteorShowerDialog* configDialog;
 	bool flagShowMS;
-	bool flagShowMSButton;
+	bool flagShowMSButton;	
+	bool flagShowMSRadiant;
 	QPixmap* OnIcon;
 	QPixmap* OffIcon;
 	QPixmap* GlowIcon;
@@ -410,6 +344,9 @@ private:
 	std::vector<std::vector<MeteorStream*> > active;		// Matrix containing all active meteors
 	int ZHR;
 	const static double zhrToWsr = 1.6667f/3600.f;  // factor to convert from zhr to whole earth per second rate
+
+	bool flagShowAR;   //! Show marker of active radiant
+
 	bool flagShow;
 	bool flagShowARG;  //! Show marker of active radiant based on generic data
 	bool flagShowARR;  //! Show marker of active radiant based on generic data

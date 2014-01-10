@@ -72,26 +72,37 @@ void MeteorShowerDialog::createDialogContent()
 	ui->setupUi(dialog);
 	ui->tabs->setCurrentIndex(0);
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
+	plugin = GETSTELMODULE(MeteorShowers);
 
-	// Settings tab / updates group
-	ui->displayModeCheckBox->setChecked(GETSTELMODULE(MeteorShowers)->getFlagShowMS());
-	connect(ui->displayModeCheckBox, SIGNAL(stateChanged(int)), this, SLOT(setDistributionEnabled(int)));
-	ui->displayAtStartupCheckBox->setChecked(GETSTELMODULE(MeteorShowers)->getEnableAtStartup());
-	connect(ui->displayAtStartupCheckBox, SIGNAL(stateChanged(int)), this, SLOT(setDisplayAtStartupEnabled(int)));
-	ui->displayShowMeteorShowerButton->setChecked(GETSTELMODULE(MeteorShowers)->getFlagShowMSButton());
-	connect(ui->displayShowMeteorShowerButton, SIGNAL(stateChanged(int)), this, SLOT(setDisplayShowMeteorShowerButton(int)));
-	connect(ui->internetUpdatesCheckbox, SIGNAL(stateChanged(int)), this, SLOT(setUpdatesEnabled(int)));
+	// Settings tab / updates group	
+	connect(ui->internetUpdates, SIGNAL(clicked(bool)), this, SLOT(setUpdatesEnabled(bool)));
 	connect(ui->updateButton, SIGNAL(clicked()), this, SLOT(updateJSON()));
-	connect(GETSTELMODULE(MeteorShowers), SIGNAL(updateStateChanged(MeteorShowers::UpdateState)), this, SLOT(updateStateReceiver(MeteorShowers::UpdateState)));
-	connect(GETSTELMODULE(MeteorShowers), SIGNAL(jsonUpdateComplete(void)), this, SLOT(updateCompleteReceiver(void)));
+	connect(plugin, SIGNAL(updateStateChanged(MeteorShowers::UpdateState)), this, SLOT(updateStateReceiver(MeteorShowers::UpdateState)));
+	connect(plugin, SIGNAL(jsonUpdateComplete(void)), this, SLOT(updateCompleteReceiver(void)));
 	connect(ui->updateFrequencySpinBox, SIGNAL(valueChanged(int)), this, SLOT(setUpdateValues(int)));
 	refreshUpdateValues(); // fetch values for last updated and so on
-	// if the state didn't change, setUpdatesEnabled will not be called, so we force it
-	setUpdatesEnabled(ui->internetUpdatesCheckbox->checkState());
 
 	updateTimer = new QTimer(this);
 	connect(updateTimer, SIGNAL(timeout()), this, SLOT(refreshUpdateValues()));
 	updateTimer->start(7000);
+
+	// Settings tab / radiant group
+	ui->displayRadiant->setChecked(plugin->getFlagRadiant());
+	connect(ui->displayRadiant, SIGNAL(clicked(bool)), plugin, SLOT(setFlagRadiant(bool)));
+	ui->activeRadiantsOnly->setChecked(plugin->getFlagActiveRadiant());
+	connect(ui->activeRadiantsOnly, SIGNAL(clicked(bool)), plugin, SLOT(setFlagActiveRadiant(bool)));
+	ui->radiantLabels->setChecked(plugin->getFlagLabels());
+	connect(ui->radiantLabels, SIGNAL(clicked(bool)), plugin, SLOT(setFlagLabels(bool)));
+	ui->fontSizeSpinBox->setValue(plugin->getLabelFontSize());
+	connect(ui->fontSizeSpinBox, SIGNAL(valueChanged(int)), plugin, SLOT(setLabelFontSize(int)));
+
+	// Settings tab / meteor showers group
+	ui->displayMeteorShower->setChecked(plugin->getEnableAtStartup());
+	connect(ui->displayMeteorShower, SIGNAL(clicked(bool)), plugin, SLOT(setEnableAtStartup(bool)));
+	ui->displayShowMeteorShowerButton->setChecked(plugin->getFlagShowMSButton());
+	connect(ui->displayShowMeteorShowerButton, SIGNAL(clicked(bool)), plugin, SLOT(setFlagShowMSButton(bool)));
+
+	// /////////////////////////////////////////
 
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 
@@ -103,16 +114,6 @@ void MeteorShowerDialog::createDialogContent()
 	connect(ui->changeColorARG, SIGNAL(clicked()), this, SLOT(setColorARG()));
 	connect(ui->changeColorARR, SIGNAL(clicked()), this, SLOT(setColorARR()));
 	connect(ui->changeColorIR, SIGNAL(clicked()), this, SLOT(setColorIR()));
-
-	connect(ui->showStreamARG, SIGNAL(clicked(bool)), GETSTELMODULE(MeteorShowers), SLOT(setFlagShowStreamARG(bool)));
-	connect(ui->showStreamARR, SIGNAL(clicked(bool)), GETSTELMODULE(MeteorShowers), SLOT(setFlagShowStreamARR(bool)));
-
-	connect(ui->showARG, SIGNAL(clicked(bool)), GETSTELMODULE(MeteorShowers), SLOT(setFlagARG(bool)));
-	connect(ui->showARR, SIGNAL(clicked(bool)), GETSTELMODULE(MeteorShowers), SLOT(setFlagARR(bool)));
-	connect(ui->showIR, SIGNAL(clicked(bool)), GETSTELMODULE(MeteorShowers), SLOT(setFlagIR(bool)));
-
-	connect(ui->labelsGroup, SIGNAL(clicked(bool)), GETSTELMODULE(MeteorShowers), SLOT(setFlagLabels(bool)));
-	connect(ui->fontSizeSpinBox, SIGNAL(valueChanged(int)), GETSTELMODULE(MeteorShowers), SLOT(setLabelFontSize(int)));
 
 	// About tab
 	setAboutHtml();
@@ -138,13 +139,12 @@ void MeteorShowerDialog::setAboutHtml(void)
 
 void MeteorShowerDialog::refreshUpdateValues(void)
 {
-	ui->lastUpdateDateTimeEdit->setDateTime(GETSTELMODULE(MeteorShowers)->getLastUpdate());
-	ui->updateFrequencySpinBox->setValue(GETSTELMODULE(MeteorShowers)->getUpdateFrequencyHours());
-	int secondsToUpdate = GETSTELMODULE(MeteorShowers)->getSecondsToUpdate();
-	ui->internetUpdatesCheckbox->setChecked(GETSTELMODULE(MeteorShowers)->getUpdatesEnabled());
-	if (!GETSTELMODULE(MeteorShowers)->getUpdatesEnabled())
+	ui->lastUpdateDateTimeEdit->setDateTime(plugin->getLastUpdate());
+	ui->updateFrequencySpinBox->setValue(plugin->getUpdateFrequencyHours());
+	int secondsToUpdate = plugin->getSecondsToUpdate();
+	if (!plugin->getUpdatesEnabled())
 		ui->nextUpdateLabel->setText(q_("Internet updates disabled"));
-	else if (GETSTELMODULE(MeteorShowers)->getUpdateState() == MeteorShowers::Updating)
+	else if (plugin->getUpdateState() == MeteorShowers::Updating)
 		ui->nextUpdateLabel->setText(q_("Updating now..."));
 	else if (secondsToUpdate <= 60)
 		ui->nextUpdateLabel->setText(q_("Next update: < 1 minute"));
@@ -156,40 +156,18 @@ void MeteorShowerDialog::refreshUpdateValues(void)
 
 void MeteorShowerDialog::setUpdateValues(int hours)
 {
-	GETSTELMODULE(MeteorShowers)->setUpdateFrequencyHours(hours);
+	plugin->setUpdateFrequencyHours(hours);
 	refreshUpdateValues();
 }
 
-void MeteorShowerDialog::setUpdatesEnabled(int checkState)
+void MeteorShowerDialog::setUpdatesEnabled(bool checkState)
 {
-	bool b = checkState != Qt::Unchecked;
-	GETSTELMODULE(MeteorShowers)->setUpdatesEnabled(b);
-	ui->updateFrequencySpinBox->setEnabled(b);
-	if(b)
-		ui->updateButton->setText(q_("Update now"));
-	else
-		ui->updateButton->setText(q_("Update from files"));
-
+	plugin->setUpdatesEnabled(checkState);
+	ui->updateFrequencySpinBox->setEnabled(checkState);
+	ui->updateButton->setText(q_("Update now"));
 	refreshUpdateValues();
 }
 
-void MeteorShowerDialog::setDistributionEnabled(int checkState)
-{
-	bool b = checkState != Qt::Unchecked;
-	GETSTELMODULE(MeteorShowers)->setFlagShowMS(b);
-}
-
-void MeteorShowerDialog::setDisplayAtStartupEnabled(int checkState)
-{
-	bool b = checkState != Qt::Unchecked;
-	GETSTELMODULE(MeteorShowers)->setEnableAtStartup(b);
-}
-
-void MeteorShowerDialog::setDisplayShowMeteorShowerButton(int checkState)
-{
-	bool b = checkState != Qt::Unchecked;
-	GETSTELMODULE(MeteorShowers)->setFlagShowMSButton(b);
-}
 
 void MeteorShowerDialog::updateStateReceiver(MeteorShowers::UpdateState state)
 {
@@ -216,47 +194,35 @@ void MeteorShowerDialog::updateCompleteReceiver(void)
 void MeteorShowerDialog::restoreDefaults(void)
 {
 	qDebug() << "MeteorShowers::restoreDefaults";
-	GETSTELMODULE(MeteorShowers)->restoreDefaults();
-	GETSTELMODULE(MeteorShowers)->readSettingsFromConfig();
+	plugin->restoreDefaults();
+	plugin->readSettingsFromConfig();
 	updateGuiFromSettings();
 }
 
 void MeteorShowerDialog::updateGuiFromSettings(void)
-{
-	ui->internetUpdatesCheckbox->setChecked(GETSTELMODULE(MeteorShowers)->getUpdatesEnabled());
-
-	ui->showStreamARG->setChecked(GETSTELMODULE(MeteorShowers)->getFlagShowStreamARG());
-	ui->showStreamARR->setChecked(GETSTELMODULE(MeteorShowers)->getFlagShowStreamARR());
-
-	ui->showARG->setChecked(GETSTELMODULE(MeteorShowers)->getFlagARG());
-	ui->showARR->setChecked(GETSTELMODULE(MeteorShowers)->getFlagARR());
-	ui->showIR->setChecked(GETSTELMODULE(MeteorShowers)->getFlagIR());
-
-	ui->labelsGroup->setChecked(GETSTELMODULE(MeteorShowers)->getFlagLabels());
-	ui->fontSizeSpinBox->setValue(GETSTELMODULE(MeteorShowers)->getLabelFontSize());
-
+{	
 	refreshUpdateValues();
 	refreshColorMarkers();
 }
 
 void MeteorShowerDialog::saveSettings(void)
 {
-	GETSTELMODULE(MeteorShowers)->saveSettingsToConfig();
+	plugin->saveSettingsToConfig();
 }
 
 void MeteorShowerDialog::updateJSON(void)
 {
-	if(GETSTELMODULE(MeteorShowers)->getUpdatesEnabled())
+	if(plugin->getUpdatesEnabled())
 	{
-		GETSTELMODULE(MeteorShowers)->updateJSON();
+		plugin->updateJSON();
 	}
 }
 
 void MeteorShowerDialog::refreshColorMarkers(void)
 {
-	setTextureColor(ui->textureARG, GETSTELMODULE(MeteorShowers)->getColorARG());
-	setTextureColor(ui->textureARR, GETSTELMODULE(MeteorShowers)->getColorARR());
-	setTextureColor(ui->textureIR, GETSTELMODULE(MeteorShowers)->getColorIR());
+	setTextureColor(ui->textureARG, plugin->getColorARG());
+	setTextureColor(ui->textureARR, plugin->getColorARR());
+	setTextureColor(ui->textureIR, plugin->getColorIR());
 }
 
 void MeteorShowerDialog::setTextureColor(QLabel *texture, QColor color)
@@ -270,19 +236,19 @@ void MeteorShowerDialog::setColorARG()
 {
 	QColor color = QColorDialog::getColor();
 	setTextureColor(ui->textureARG, color);
-	GETSTELMODULE(MeteorShowers)->setColorARG(color);
+	plugin->setColorARG(color);
 }
 
 void MeteorShowerDialog::setColorARR()
 {
 	QColor color = QColorDialog::getColor();
 	setTextureColor(ui->textureARR, color);
-	GETSTELMODULE(MeteorShowers)->setColorARR(color);
+	plugin->setColorARR(color);
 }
 
 void MeteorShowerDialog::setColorIR()
 {
 	QColor color = QColorDialog::getColor();
 	setTextureColor(ui->textureIR, color);
-	GETSTELMODULE(MeteorShowers)->setColorIR(color);
+	plugin->setColorIR(color);
 }
