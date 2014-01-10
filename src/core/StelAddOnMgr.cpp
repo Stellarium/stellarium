@@ -330,7 +330,7 @@ void StelAddOnMgr::installAddOn(AddOn* addon, const QStringList selectedFiles)
 		// something goes wrong (file not found OR corrupt),
 		// try downloading it...
 		addon->setStatus(AddOn::Installing);
-		emit (dataUpdated(addon->getCategory()));
+		emit (dataUpdated(addon));
 		m_downloadQueue.insert(addon, selectedFiles);
 		downloadNextAddOn();
 	}
@@ -370,7 +370,7 @@ AddOn::Status StelAddOnMgr::installFromFile(AddOn* addon, const QStringList sele
 	}
 
 	addon->setStatus(status);
-	emit (dataUpdated(addon->getCategory()));
+	emit (dataUpdated(addon));
 	return status;
 }
 
@@ -395,7 +395,7 @@ void StelAddOnMgr::removeAddOn(AddOn* addon, const QStringList selectedFiles)
 	}
 
 	addon->setStatus(m_pStelAddOns.value(addon->getCategory())->uninstallAddOn(addon->getInstallId(), selectedFiles));
-	emit (dataUpdated(addon->getCategory()));
+	emit (dataUpdated(addon));
 
 	if (addon->getCategory() == AddOn::LANGUAGEPACK || addon->getCategory() == AddOn::TEXTURE)
 	{
@@ -518,7 +518,7 @@ void StelAddOnMgr::downloadAddOnFinished()
 		qWarning() << "Add-on Mgr: FAILED to download" << m_pAddOnNetworkReply->url()
 			   << " Error:" << m_pAddOnNetworkReply->errorString();
 		m_downloadingAddOn->setStatus(AddOn::DownloadFailed);
-		emit (dataUpdated(m_downloadingAddOn->getCategory()));
+		emit (dataUpdated(m_downloadingAddOn));
 		finishCurrentDownload();
 	}
 

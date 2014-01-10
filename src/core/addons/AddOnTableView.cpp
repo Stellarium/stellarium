@@ -49,8 +49,8 @@ AddOnTableView::AddOnTableView(QWidget* parent)
 	connect(m_pCheckboxGroup, SIGNAL(buttonToggled(int, bool)),
 		this, SLOT(slotRowChecked(int, bool)));
 
-	connect(&StelApp::getInstance().getStelAddOnMgr(), SIGNAL(dataUpdated(AddOn::Category)),
-		this, SLOT(slotDataUpdated(AddOn::Category)));
+	connect(&StelApp::getInstance().getStelAddOnMgr(), SIGNAL(dataUpdated(AddOn*)),
+		this, SLOT(slotDataUpdated(AddOn*)));
 }
 
 AddOnTableView::~AddOnTableView()
@@ -66,8 +66,8 @@ AddOnTableView::~AddOnTableView()
 	m_pCheckboxGroup->deleteLater();
 }
 
-void AddOnTableView::slotDataUpdated(AddOn::Category category) {
-	if (m_category == category)
+void AddOnTableView::slotDataUpdated(AddOn* addon) {
+	if (m_category == addon->getCategory())
 	{
 		QModelIndex top = ((AddOnTableModel*) model())->index(0, 0);
 		QModelIndex bottom = ((AddOnTableModel*) model())->index(model()->rowCount(), model()->columnCount());

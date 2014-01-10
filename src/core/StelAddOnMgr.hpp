@@ -79,7 +79,7 @@ public:
 
 signals:
 	void addOnMgrMsg(StelAddOnMgr::AddOnMgrMsg);
-	void dataUpdated(AddOn::Category category);
+	void dataUpdated(AddOn* addon);
 	void updateTableViews();
 	void skyCulturesChanged();
 

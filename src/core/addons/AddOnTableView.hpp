@@ -50,11 +50,12 @@ signals:
 	// useful to handle the status of the install/remove buttons
 	void selectedAddOns(int toInstall, int toRemove);
 	void rowChecked(int row, bool checked);
+	void dataUpdated();
 
 public slots:
 	void clearSelection();
 	void setAllChecked(bool checked);
-	void slotDataUpdated(AddOn::Category category);
+	void slotDataUpdated(AddOn* addon);
 
 private slots:
 	void scrollValueChanged(int);
