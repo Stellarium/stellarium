@@ -134,30 +134,38 @@ void StelFileMgr::init()
 QString StelFileMgr::findFile(const QString& path, Flags flags)
 {
 	if (path.isEmpty())
+	{
+		qWarning() << "Empty file path";
 		return "";
+	}
+
 	
 	// Qt resource files
 	if (path.startsWith(":/"))
 		return path;
-	
-	const QFileInfo fileInfo(path);
-	
+
 	// explicitly specified relative paths
 	if (path[0] == '.')
 	{
-		if (fileFlagsCheck(fileInfo, flags))
+		if (fileFlagsCheck(path, flags))
 			return path;
-		qWarning() << QString("file does not match flags: %1").arg(path);
-		return "";
+		else
+		{
+			qWarning() << QString("file does not match flags: %1").arg(path);
+			return "";
+		}
 	}
 
 	// explicitly specified absolute paths
-	if (fileInfo.isAbsolute())
+	if (isAbsolute(path))
 	{
-		if (fileFlagsCheck(fileInfo, flags))
+		if (fileFlagsCheck(path, flags))
 			return path;
-		qWarning() << QString("file does not match flags: %1").arg(path);
-		return "";
+		else
+		{
+			qWarning() << QString("file does not match flags: %1").arg(path);
+			return "";
+		}
 	}
 	
 	foreach (const QString& i, fileLocations)
@@ -166,8 +174,9 @@ QString StelFileMgr::findFile(const QString& path, Flags flags)
 		if (fileFlagsCheck(finfo, flags))
 			return i + "/" + path;
 	}
-	
-	qWarning() << QString("file not found: %1").arg(path);
+
+	//FIXME: This line give false positive values for static plugins (trying search dynamic plugin first)
+	//qWarning() << QString("file not found: %1").arg(path);
 	return "";
 }
 
@@ -184,20 +193,19 @@ QStringList StelFileMgr::findFileInAllPaths(const QString &path, const Flags &fl
 		filePaths.append(path);
 		return filePaths;
 	}
-	
-	const QFileInfo fileInfo(path);
+
 	// explicitly specified relative paths
 	if (path[0] == '.')
 	{
-		if (fileFlagsCheck(fileInfo, flags))
+		if (fileFlagsCheck(path, flags))
 			filePaths.append(path);
 		return filePaths;
 	}
 
 	// explicitly specified absolute paths
-	if ( fileInfo.isAbsolute() )
+	if ( isAbsolute(path) )
 	{
-		if (fileFlagsCheck(fileInfo, flags))
+		if (fileFlagsCheck(path, flags))
 			filePaths.append(path);
 		return filePaths;
 	}
