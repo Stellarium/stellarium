@@ -26,18 +26,14 @@
 #include "StelModuleMgr.hpp"
 #include "StelTextureMgr.hpp"
 #include "StelTranslator.hpp"
-#include "NavStars.hpp"
-#include "StelUtils.hpp"
 #include "StelFileMgr.hpp"
 #include "StelObjectMgr.hpp"
 #include "StarMgr.hpp"
+#include "StelUtils.hpp"
+#include "NavStars.hpp"
 
-#include <QDebug>
-#include <QVariantMap>
-#include <QVariant>
 #include <QList>
 #include <QSharedPointer>
-#include <QStringList>
 
 /*
  This method is the one called automatically by the StelModuleMgr just 
