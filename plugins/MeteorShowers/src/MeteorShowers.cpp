@@ -353,9 +353,7 @@ void MeteorShowers::drawStream(StelCore* core, StelPainter& painter)
 	{
 		foreach(const activeData &a, activeInfo)
 		{
-			//if (a.status>0)
-			//	continue;
-
+			Q_UNUSED(a);
 			// step through and draw all active meteors
 			for(std::vector<MeteorStream*>::iterator iter = active[index].begin(); iter != active[index].end(); ++iter)
 			{
