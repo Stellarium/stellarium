@@ -92,30 +92,64 @@ StelPluginInfo OcularsStelPluginInterface::getPluginInfo() const
 #endif
 /* ****************************************************************************************************************** */
 Oculars::Oculars():
+	selectedCCDIndex(-1),
+	selectedOcularIndex(-1),
+	selectedTelescopeIndex(-1),
+	selectedLensIndex(-1),
+	flagShowCCD(false),
+	flagShowOculars(false),
+	flagShowCrosshairs(false),
+	flagShowTelrad(false),
+	usageMessageLabelID(-1),
+	flagAzimuthalGrid(false),
+	flagGalacticGrid(false),
+	flagEquatorGrid(false),
+	flagEquatorJ2000Grid(false),
+	flagEquatorLine(false),
+	flagEclipticLine(false),
+	flagEclipticJ2000Grid(false),
+	flagMeridianLine(false),
+	flagHorizonLine(false),
+	flagGalacticPlaneLine(false),
+	flagAdaptation(false),
+	flagLimitStars(false),
+	magLimitStars(0.0),
+	flagLimitDSOs(false),
+	magLimitDSOs(0.0),
+	ccdRotationAngle(0.0),
+	maxEyepieceAngle(0.0),
+	requireSelection(true),
+	flagLimitMagnitude(false),
+	useMaxEyepieceAngle(true),
+	guiPanelEnabled(false),
+	flagDecimalDegrees(false),
+	ccdRotationSignalMapper(0),
+	ccdsSignalMapper(0),
+	ocularsSignalMapper(0),
+	telescopesSignalMapper(0),
+	lenseSignalMapper(0),
 	pxmapGlow(NULL),
 	pxmapOnIcon(NULL),
 	pxmapOffIcon(NULL),
 	toolbarButton(NULL),
+	ready(false),
 	actionShowOcular(0),
 	actionShowCrosshairs(0),
 	actionShowSensor(0),
 	actionShowTelrad(0),
+	actionConfiguration(0),
+	actionMenu(0),
+	actionTelescopeIncrement(0),
+	actionTelescopeDecrement(0),
+	actionOcularIncrement(0),
+	actionOcularDecrement(0),
 	guiPanel(0),
 	actualFOV(0),
 	reticleRotation(0)
 {
 
 	QOpenGLFunctions_1_2::initializeOpenGLFunctions();
-	flagShowCCD = false;
-	flagShowOculars = false;
-	flagShowCrosshairs = false;
-	flagShowTelrad = false;
-	ready = false;
-	requireSelection = true;
-	useMaxEyepieceAngle = true;
-
 	font.setPixelSize(14);
-	maxEyepieceAngle = 0.0;
 
 	ccds = QList<CCD *>();
 	oculars = QList<Ocular *>();
@@ -128,13 +162,6 @@ Oculars::Oculars():
 	telescopesSignalMapper = new QSignalMapper(this);
 	lenseSignalMapper = new QSignalMapper(this);
 	
-	selectedCCDIndex = -1;
-	selectedOcularIndex = -1;
-	selectedTelescopeIndex = -1;
-	selectedLensIndex = -1;
-	
-	usageMessageLabelID = -1;
-
 	setObjectName("Oculars");
 
 #ifdef Q_OS_MAC
@@ -621,7 +648,7 @@ void Oculars::setScaleImageCircle(bool state)
 
 void Oculars::setScreenFOVForCCD()
 {
-	Lens *lens = selectedLensIndex >=0  ? lense[selectedLensIndex] : NULL;
+	Lens * lens = selectedLensIndex >=0  ? lense[selectedLensIndex] : NULL;
 	if (selectedCCDIndex > -1 && selectedTelescopeIndex > -1) {
 		StelCore *core = StelApp::getInstance().getCore();
 		StelMovementMgr *movementManager = core->getMovementMgr();
@@ -1109,10 +1136,11 @@ void Oculars::disableLens()
 void Oculars::rotateCCD(QString amount)
 {
 	ccdRotationAngle += amount.toInt();
-	if (ccdRotationAngle >= 360)
+	if (ccdRotationAngle >= 360) {
 		ccdRotationAngle -= 360;
-	if (ccdRotationAngle <= -360)
+	} else if (ccdRotationAngle <= -360) {
 		ccdRotationAngle += 360;
+	}
 }
 
 void Oculars::selectCCDAtIndex(QString indexString)
@@ -1166,8 +1194,7 @@ void Oculars::selectLensAtIndex(QString indexString)
 void Oculars::toggleCCD(bool show)
 {
 	//If there are no sensors...
-	if (ccds.isEmpty() || telescopes.isEmpty())
-	{
+	if (ccds.isEmpty() || telescopes.isEmpty()) {
 		//TODO: BM: Make this an on-screen message and/or disable the button
 		//if there are no sensors.
 		if (show)
@@ -1176,38 +1203,39 @@ void Oculars::toggleCCD(bool show)
 		flagShowCCD = false;
 		selectedCCDIndex = -1;
 		show = false;
-		if (actionShowSensor->isChecked())
+		if (actionShowSensor->isChecked()) {
 			actionShowSensor->setChecked(false);
+		}
 	}
 
-	if (show)
-	{
+	if (show) {
 		//Mutually exclusive with the ocular mode
 		hideUsageMessageIfDisplayed();
-		if (flagShowOculars)
-		{
-			if (actionShowOcular->isChecked())
+		if (flagShowOculars) {
+			if (actionShowOcular->isChecked()) {
 				actionShowOcular->setChecked(false);
+			}
 		}
 
-		if (flagShowTelrad)
-		{
-			if (actionShowTelrad->isChecked())
+		if (flagShowTelrad) {
+			if (actionShowTelrad->isChecked()) {
 				actionShowTelrad->setChecked(false);
+			}
 		}
 
-		if (selectedTelescopeIndex < 0)
+		if (selectedTelescopeIndex < 0) {
 			selectedTelescopeIndex = 0;
-		if (selectedCCDIndex < 0)
+		}
+		if (selectedCCDIndex < 0) {
 			selectedCCDIndex = 0;
+		}
 		flagShowCCD = true;
 		setScreenFOVForCCD();
 
-		if (guiPanel)
+		if (guiPanel) {
 			guiPanel->showCcdGui();
-	}
-	else
-	{
+		}
+	} else {
 		flagShowCCD = false;
 
 		//Zoom out
@@ -1216,17 +1244,19 @@ void Oculars::toggleCCD(bool show)
 		movementManager->zoomTo(movementManager->getInitFov());
 		movementManager->setFlagTracking(false);
 
-		if (guiPanel)
+		if (guiPanel) {
 			guiPanel->foldGui();
+		}
 	}
 }
 
 void Oculars::toggleCCD()
 {
-	if (flagShowCCD)
+	if (flagShowCCD) {
 		toggleCCD(false);
-	else
+	} else {
 		toggleCCD(true);
+	}
 }
 
 void Oculars::toggleCrosshairs(bool show)
@@ -1297,13 +1327,13 @@ void Oculars::initializeActivationActions()
 	actionShowTelrad = addAction("actionShow_Telrad", ocularsGroup, N_("Telrad sight"), "toggleTelrad(bool)", "Ctrl+B");
 	actionConfiguration = addAction("actionOpen_Oculars_Configuration", ocularsGroup, N_("Oculars plugin configuration"), ocularDialog, "visible");
 	// Select next telescope via keyboard
-	addAction("actionShow_Telescope_Increment", ocularsGroup, N_("Select next telescope"), "incrementTelescopeIndex()", "Shift+PgUp");
+	addAction("actionShow_Telescope_Increment", ocularsGroup, N_("Select next telescope"), "incrementTelescopeIndex()", "");
 	// Select previous telescope via keyboard
-	addAction("actionShow_Telescope_Decrement", ocularsGroup, N_("Select previous telescope"), "decrementTelescopeIndex()", "Shift+PgDown");
+	addAction("actionShow_Telescope_Decrement", ocularsGroup, N_("Select previous telescope"), "decrementTelescopeIndex()", "");
 	// Select next eyepiece via keyboard
-	addAction("actionShow_Ocular_Increment", ocularsGroup, N_("Select next eyepiece"), "incrementOcularIndex()", "Ctrl+PgUp");
+	addAction("actionShow_Ocular_Increment", ocularsGroup, N_("Select next eyepiece"), "incrementOcularIndex()", "");
 	// Select previous eyepiece via keyboard
-	addAction("actionShow_Ocular_Decrement", ocularsGroup, N_("Select previous eyepiece"), "decrementOcularIndex()", "Ctrl+PgDown");
+	addAction("actionShow_Ocular_Decrement", ocularsGroup, N_("Select previous eyepiece"), "decrementOcularIndex()", "");
 	connect(this, SIGNAL(selectedCCDChanged()), this, SLOT(instrumentChanged()));
 	connect(this, SIGNAL(selectedCCDChanged()), this, SLOT(setScreenFOVForCCD()));
 	connect(this, SIGNAL(selectedOcularChanged()), this, SLOT(instrumentChanged()));
@@ -1343,7 +1373,9 @@ void Oculars::paintCCDBounds()
 	glDisable(GL_BLEND);
 	glColor3f(0.f,0.f,0.f);
 	glPushMatrix();
-	glTranslated(params.viewportCenter[0], params.viewportCenter[1], 0.0);
+	glTranslated(params.viewportCenter[0] * params.devicePixelsPerPixel,
+					 params.viewportCenter[1] * params.devicePixelsPerPixel,
+					 0.0);
 	glRotated(ccdRotationAngle, 0.0, 0.0, 1.0);
 	GLdouble screenFOV = params.fov;
 
@@ -1361,8 +1393,8 @@ void Oculars::paintCCDBounds()
 			if (params.viewportXywh[2] > params.viewportXywh[3]) {
 				aspectIndex = 3;
 			}
-			float width = params.viewportXywh[aspectIndex] * ccdYRatio;
-			float height = params.viewportXywh[aspectIndex] * ccdXRatio;
+			float width = params.viewportXywh[aspectIndex] * ccdYRatio * params.devicePixelsPerPixel;
+			float height = params.viewportXywh[aspectIndex] * ccdXRatio * params.devicePixelsPerPixel;
 
 			if (width > 0.0 && height > 0.0) {
 				glBegin(GL_LINE_LOOP);
@@ -1391,7 +1423,7 @@ void Oculars::paintCrosshairs()
 	if (useMaxEyepieceAngle && oculars[selectedOcularIndex]->appearentFOV() > 0.0) {
 		length = oculars[selectedOcularIndex]->appearentFOV() * length / maxEyepieceAngle;
 	}
-
+	length *= params.devicePixelsPerPixel;
 	// Draw the lines
 	StelPainter painter(projector);
 	painter.setColor(0.77, 0.14, 0.16, 1);
@@ -1842,7 +1874,6 @@ void Oculars::zoomOcular()
 	if (getFlagLimitMagnitude() && !ocular->isBinoculars())
 	{
 		// Simplified calculation of the penetrating power of the telescope
-		// TODO: need improvements?
 		double limitMag = 2.1 + 5*std::log10(telescope->diameter());
 
 		skyManager->setFlagStarMagnitudeLimit(true);
