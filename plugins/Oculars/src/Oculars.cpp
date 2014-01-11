@@ -1874,7 +1874,6 @@ void Oculars::zoomOcular()
 	if (getFlagLimitMagnitude() && !ocular->isBinoculars())
 	{
 		// Simplified calculation of the penetrating power of the telescope
-		// TODO: need improvements?
 		double limitMag = 2.1 + 5*std::log10(telescope->diameter());
 
 		skyManager->setFlagStarMagnitudeLimit(true);
