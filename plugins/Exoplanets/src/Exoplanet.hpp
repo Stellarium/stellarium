@@ -100,6 +100,8 @@ public:
 
 	void update(double deltaTime);
 
+	int getCountExoplanets(void) {return EPCount;}
+
 private:
 	bool initialized;
 
@@ -112,7 +114,9 @@ private:
 	static bool distributionMode;
 	static bool timelineMode;
 
-	void draw(StelCore* core, StelPainter& painter);
+	void draw(StelCore* core, StelPainter *painter);
+
+	int EPCount;
 
 	//! Variables for description of properties of exoplanets
 	QString designation;			//! The designation of the host star

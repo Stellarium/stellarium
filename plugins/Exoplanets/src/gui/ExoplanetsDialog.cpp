@@ -68,24 +68,25 @@ void ExoplanetsDialog::retranslate()
 // Initialize the dialog widgets and connect the signals/slots
 void ExoplanetsDialog::createDialogContent()
 {
+	ep = GETSTELMODULE(Exoplanets);
 	ui->setupUi(dialog);
 	ui->tabs->setCurrentIndex(0);	
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()),
 		this, SLOT(retranslate()));
 
 	// Settings tab / updates group
-	ui->displayAtStartupCheckBox->setChecked(GETSTELMODULE(Exoplanets)->getEnableAtStartup());
+	ui->displayAtStartupCheckBox->setChecked(ep->getEnableAtStartup());
 	connect(ui->displayAtStartupCheckBox, SIGNAL(stateChanged(int)), this, SLOT(setDisplayAtStartupEnabled(int)));
-	ui->displayModeCheckBox->setChecked(GETSTELMODULE(Exoplanets)->getDisplayMode());
+	ui->displayModeCheckBox->setChecked(ep->getDisplayMode());
 	connect(ui->displayModeCheckBox, SIGNAL(stateChanged(int)), this, SLOT(setDistributionEnabled(int)));
-	ui->displayShowExoplanetsButton->setChecked(GETSTELMODULE(Exoplanets)->getFlagShowExoplanetsButton());
+	ui->displayShowExoplanetsButton->setChecked(ep->getFlagShowExoplanetsButton());
 	connect(ui->displayShowExoplanetsButton, SIGNAL(stateChanged(int)), this, SLOT(setDisplayShowExoplanetsButton(int)));
-	ui->timelineModeCheckBox->setChecked(GETSTELMODULE(Exoplanets)->getTimelineMode());
+	ui->timelineModeCheckBox->setChecked(ep->getTimelineMode());
 	connect(ui->timelineModeCheckBox, SIGNAL(stateChanged(int)), this, SLOT(setTimelineEnabled(int)));
 	connect(ui->internetUpdatesCheckbox, SIGNAL(stateChanged(int)), this, SLOT(setUpdatesEnabled(int)));
 	connect(ui->updateButton, SIGNAL(clicked()), this, SLOT(updateJSON()));
-	connect(GETSTELMODULE(Exoplanets), SIGNAL(updateStateChanged(Exoplanets::UpdateState)), this, SLOT(updateStateReceiver(Exoplanets::UpdateState)));
-	connect(GETSTELMODULE(Exoplanets), SIGNAL(jsonUpdateComplete(void)), this, SLOT(updateCompleteReceiver(void)));
+	connect(ep, SIGNAL(updateStateChanged(Exoplanets::UpdateState)), this, SLOT(updateStateReceiver(Exoplanets::UpdateState)));
+	connect(ep, SIGNAL(jsonUpdateComplete(void)), this, SLOT(updateCompleteReceiver(void)));
 	connect(ui->updateFrequencySpinBox, SIGNAL(valueChanged(int)), this, SLOT(setUpdateValues(int)));
 	refreshUpdateValues(); // fetch values for last updated and so on
 	// if the state didn't change, setUpdatesEnabled will not be called, so we force it
@@ -124,6 +125,7 @@ void ExoplanetsDialog::setAboutHtml(void)
 	html += "<p>" + QString(q_("This plugin plots the position of stars with exoplanets. Exoplanets data is derived from \"%1The Extrasolar Planets Encyclopaedia%2\"")).arg("<a href=\"http://exoplanet.eu/\">").arg("</a>") + ". ";
 	html += QString(q_("List of potential habitable exoplanets and data about them were taken from \"%1The Habitable Exoplanets Catalog%3\" by %2Planetary Habitability Laboratory%3.")).arg("<a href=\"http://phl.upr.edu/projects/habitable-exoplanets-catalog\">").arg("<a href=\"http://phl.upr.edu/home\">").arg("</a>") + "</p>";
 
+	html += "<p>" + q_("Current catalog contains info about %1 planetary systems, which altogether have %2 exoplanets.").arg(ep->getCountPlanetarySystems()).arg(ep->getCountAllExoplanets()) + "</p>";
 	html += "<h3>" + q_("Links") + "</h3>";
 	html += "<p>" + QString(q_("Support is provided via the Launchpad website.  Be sure to put \"%1\" in the subject when posting.")).arg("Exoplanets plugin") + "</p>";
 	html += "<p><ul>";
@@ -195,13 +197,13 @@ void ExoplanetsDialog::setWebsitesHtml(void)
 
 void ExoplanetsDialog::refreshUpdateValues(void)
 {
-	ui->lastUpdateDateTimeEdit->setDateTime(GETSTELMODULE(Exoplanets)->getLastUpdate());
-	ui->updateFrequencySpinBox->setValue(GETSTELMODULE(Exoplanets)->getUpdateFrequencyHours());
-	int secondsToUpdate = GETSTELMODULE(Exoplanets)->getSecondsToUpdate();
-	ui->internetUpdatesCheckbox->setChecked(GETSTELMODULE(Exoplanets)->getUpdatesEnabled());
-	if (!GETSTELMODULE(Exoplanets)->getUpdatesEnabled())
+	ui->lastUpdateDateTimeEdit->setDateTime(ep->getLastUpdate());
+	ui->updateFrequencySpinBox->setValue(ep->getUpdateFrequencyHours());
+	int secondsToUpdate = ep->getSecondsToUpdate();
+	ui->internetUpdatesCheckbox->setChecked(ep->getUpdatesEnabled());
+	if (!ep->getUpdatesEnabled())
 		ui->nextUpdateLabel->setText(q_("Internet updates disabled"));
-	else if (GETSTELMODULE(Exoplanets)->getUpdateState() == Exoplanets::Updating)
+	else if (ep->getUpdateState() == Exoplanets::Updating)
 		ui->nextUpdateLabel->setText(q_("Updating now..."));
 	else if (secondsToUpdate <= 60)
 		ui->nextUpdateLabel->setText(q_("Next update: < 1 minute"));
@@ -213,38 +215,38 @@ void ExoplanetsDialog::refreshUpdateValues(void)
 
 void ExoplanetsDialog::setUpdateValues(int hours)
 {
-	GETSTELMODULE(Exoplanets)->setUpdateFrequencyHours(hours);
+	ep->setUpdateFrequencyHours(hours);
 	refreshUpdateValues();
 }
 
 void ExoplanetsDialog::setDistributionEnabled(int checkState)
 {
 	bool b = checkState != Qt::Unchecked;
-	GETSTELMODULE(Exoplanets)->setDisplayMode(b);
+	ep->setDisplayMode(b);
 }
 
 void ExoplanetsDialog::setTimelineEnabled(int checkState)
 {
 	bool b = checkState != Qt::Unchecked;
-	GETSTELMODULE(Exoplanets)->setTimelineMode(b);
+	ep->setTimelineMode(b);
 }
 
 void ExoplanetsDialog::setDisplayAtStartupEnabled(int checkState)
 {
 	bool b = checkState != Qt::Unchecked;
-	GETSTELMODULE(Exoplanets)->setEnableAtStartup(b);
+	ep->setEnableAtStartup(b);
 }
 
 void ExoplanetsDialog::setDisplayShowExoplanetsButton(int checkState)
 {
 	bool b = checkState != Qt::Unchecked;
-	GETSTELMODULE(Exoplanets)->setFlagShowExoplanetsButton(b);
+	ep->setFlagShowExoplanetsButton(b);
 }
 
 void ExoplanetsDialog::setUpdatesEnabled(int checkState)
 {
 	bool b = checkState != Qt::Unchecked;
-	GETSTELMODULE(Exoplanets)->setUpdatesEnabled(b);
+	ep->setUpdatesEnabled(b);
 	ui->updateFrequencySpinBox->setEnabled(b);
 	if(b)
 		ui->updateButton->setText(q_("Update now"));
@@ -271,7 +273,7 @@ void ExoplanetsDialog::updateCompleteReceiver(void)
         ui->nextUpdateLabel->setText(QString(q_("Exoplanets is updated")));
 	// display the status for another full interval before refreshing status
 	updateTimer->start();
-	ui->lastUpdateDateTimeEdit->setDateTime(GETSTELMODULE(Exoplanets)->getLastUpdate());
+	ui->lastUpdateDateTimeEdit->setDateTime(ep->getLastUpdate());
 	QTimer *timer = new QTimer(this);
 	connect(timer, SIGNAL(timeout()), this, SLOT(refreshUpdateValues()));
 }
@@ -279,26 +281,26 @@ void ExoplanetsDialog::updateCompleteReceiver(void)
 void ExoplanetsDialog::restoreDefaults(void)
 {
 	qDebug() << "Exoplanets::restoreDefaults";
-	GETSTELMODULE(Exoplanets)->restoreDefaults();
-	GETSTELMODULE(Exoplanets)->readSettingsFromConfig();
+	ep->restoreDefaults();
+	ep->readSettingsFromConfig();
 	updateGuiFromSettings();
 }
 
 void ExoplanetsDialog::updateGuiFromSettings(void)
 {
-	ui->internetUpdatesCheckbox->setChecked(GETSTELMODULE(Exoplanets)->getUpdatesEnabled());
+	ui->internetUpdatesCheckbox->setChecked(ep->getUpdatesEnabled());
 	refreshUpdateValues();
 }
 
 void ExoplanetsDialog::saveSettings(void)
 {
-	GETSTELMODULE(Exoplanets)->saveSettingsToConfig();
+	ep->saveSettingsToConfig();
 }
 
 void ExoplanetsDialog::updateJSON(void)
 {
-	if(GETSTELMODULE(Exoplanets)->getUpdatesEnabled())
+	if(ep->getUpdatesEnabled())
 	{
-		GETSTELMODULE(Exoplanets)->updateJSON();
+		ep->updateJSON();
 	}
 }

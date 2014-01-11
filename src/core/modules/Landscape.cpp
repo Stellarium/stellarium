@@ -762,7 +762,7 @@ void LandscapeFisheye::draw(StelCore* core)
 		sPainter.sSphereMap(radius,cols,rows,texFov,1);
 	}
 
-	if (mapTexIllum && lightScapeBrightness>0.0f)
+	if (mapTexIllum && lightScapeBrightness>0.0f && core->getSkyDrawer()->getFlagHasAtmosphere())
 	{
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE);
 		sPainter.setColor(lightScapeBrightness, lightScapeBrightness, lightScapeBrightness, landFader.getInterstate());
@@ -911,7 +911,7 @@ void LandscapeSpherical::draw(StelCore* core)
 	}
 
 	// Self-luminous layer (Light pollution etc). This looks striking!
-	if (mapTexIllum && lightScapeBrightness>0.0f)
+	if (mapTexIllum && lightScapeBrightness>0.0f && core->getSkyDrawer()->getFlagHasAtmosphere())
 	{
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE);
 		sPainter.setColor(lightScapeBrightness, lightScapeBrightness, lightScapeBrightness, landFader.getInterstate());

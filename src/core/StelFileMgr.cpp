@@ -90,11 +90,15 @@ void StelFileMgr::init()
 #ifdef Q_OS_MAC
 		QString relativePath = "/../Resources";
 		if (QCoreApplication::applicationDirPath().contains("src")) {
-			relativePath = "/../../../../..";
+			relativePath = "/../..";
 		}
 		QFileInfo MacOSdir(QCoreApplication::applicationDirPath() + relativePath);
-		
-		QDir ResourcesDir = MacOSdir.dir();
+		// These two lines are used to see if the Qt bug still exists.
+		// The output from C: should simply be the parent of what is show for B:
+		qDebug() << "B: " << MacOSdir.absolutePath();
+		qDebug() << "C: " << MacOSdir.dir().absolutePath();
+
+		QDir ResourcesDir(MacOSdir.absolutePath());
 		if (!QCoreApplication::applicationDirPath().contains("src")) {
 			ResourcesDir.cd(QString("Resources"));
 		}
@@ -106,7 +110,6 @@ void StelFileMgr::init()
 		QFileInfo installLocation(QFile::decodeName(INSTALL_DATADIR));
 		QFileInfo checkFile(QFile::decodeName(INSTALL_DATADIR "/" CHECK_FILE));
 #endif
-	
 		if (checkFile.exists())
 		{
 			installDir = installLocation.filePath();
@@ -131,30 +134,38 @@ void StelFileMgr::init()
 QString StelFileMgr::findFile(const QString& path, Flags flags)
 {
 	if (path.isEmpty())
+	{
+		qWarning() << "Empty file path";
 		return "";
+	}
+
 	
 	// Qt resource files
 	if (path.startsWith(":/"))
 		return path;
-	
-	const QFileInfo fileInfo(path);
-	
+
 	// explicitly specified relative paths
 	if (path[0] == '.')
 	{
-		if (fileFlagsCheck(fileInfo, flags))
+		if (fileFlagsCheck(path, flags))
 			return path;
-		qWarning() << QString("file does not match flags: %1").arg(path);
-		return "";
+		else
+		{
+			qWarning() << QString("file does not match flags: %1").arg(path);
+			return "";
+		}
 	}
 
 	// explicitly specified absolute paths
-	if (fileInfo.isAbsolute())
+	if (isAbsolute(path))
 	{
-		if (fileFlagsCheck(fileInfo, flags))
+		if (fileFlagsCheck(path, flags))
 			return path;
-		qWarning() << QString("file does not match flags: %1").arg(path);
-		return "";
+		else
+		{
+			qWarning() << QString("file does not match flags: %1").arg(path);
+			return "";
+		}
 	}
 	
 	foreach (const QString& i, fileLocations)
@@ -163,8 +174,9 @@ QString StelFileMgr::findFile(const QString& path, Flags flags)
 		if (fileFlagsCheck(finfo, flags))
 			return i + "/" + path;
 	}
-	
-	qWarning() << QString("file not found: %1").arg(path);
+
+	//FIXME: This line give false positive values for static plugins (trying search dynamic plugin first)
+	//qWarning() << QString("file not found: %1").arg(path);
 	return "";
 }
 
@@ -181,20 +193,19 @@ QStringList StelFileMgr::findFileInAllPaths(const QString &path, const Flags &fl
 		filePaths.append(path);
 		return filePaths;
 	}
-	
-	const QFileInfo fileInfo(path);
+
 	// explicitly specified relative paths
 	if (path[0] == '.')
 	{
-		if (fileFlagsCheck(fileInfo, flags))
+		if (fileFlagsCheck(path, flags))
 			filePaths.append(path);
 		return filePaths;
 	}
 
 	// explicitly specified absolute paths
-	if ( fileInfo.isAbsolute() )
+	if ( isAbsolute(path) )
 	{
-		if (fileFlagsCheck(fileInfo, flags))
+		if (fileFlagsCheck(path, flags))
 			filePaths.append(path);
 		return filePaths;
 	}
