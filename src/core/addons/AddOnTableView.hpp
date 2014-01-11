@@ -50,7 +50,6 @@ signals:
 	// useful to handle the status of the install/remove buttons
 	void selectedAddOns(int toInstall, int toRemove);
 	void rowChecked(int row, bool checked);
-	void dataUpdated();
 
 public slots:
 	void clearSelection();
