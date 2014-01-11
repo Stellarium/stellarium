@@ -61,14 +61,26 @@ StelPluginInfo NavStarsStelPluginInterface::getPluginInfo() const
  Constructor
 */
 NavStars::NavStars()
-	: flagShowNavStars(false)
-	, OnIcon(NULL)
+	: OnIcon(NULL)
 	, OffIcon(NULL)
 	, GlowIcon(NULL)
 	, toolbarButton(NULL)	
 {
 	setObjectName("NavStars");
 	conf = StelApp::getInstance().getSettings();
+
+	// Set default color
+	navStarColor = Vec3f(0.8, 0.0, 0.0);
+	if (conf->contains("navstars/navstars_color"))
+	{
+		// OK, we have color settings
+		navStarColor = StelUtils::strToVec3f(conf->value("navstars/navstars_color", "0.8,0.0,0.0").toString());
+	}
+	else
+	{
+		// Oops... no value in config, create a default value
+		conf->setValue("navstars/navstars_color", "0.8,0.0,0.0");
+	}
 }
 
 /*
@@ -86,9 +98,7 @@ NavStars::~NavStars()
 
 void NavStars::deinit()
 {
-	markerTexture.clear();
-	// Restore settings for star labels
-	smgr->setFlagLabels(flagStarName);
+	markerTexture.clear();	
 }
 
 /*
@@ -108,8 +118,6 @@ double NavStars::getCallOrder(StelModuleActionName actionName) const
 void NavStars::init()
 {
 	smgr = GETSTELMODULE(StarMgr);
-	// Save settings for star labels
-	flagStarName = smgr->getFlagLabels();
 
 	// List of HIP numbers of navigational stars
 	nstar << 11767 << 677 << 2081 << 3179 << 3419 << 7588 << 9884 << 13847 << 14135 << 15863 << 21421 << 24436 << 24608 << 25336 << 25428 << 26311;
@@ -133,9 +141,10 @@ void NavStars::init()
 		// Create the nav. stars button
 		toolbarButton = new StelButton(NULL, *OnIcon, *OffIcon, *GlowIcon, "actionShow_NavStars");
 	}
-	gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
+	gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");	
 
-	setHintColor();
+	connect(smgr, SIGNAL(starLabelsDisplayedChanged(bool)), this, SLOT(starNamesChanged(bool)));
+	starNamesState=false;
 }
 
 /*
@@ -143,15 +152,7 @@ void NavStars::init()
 */
 void NavStars::draw(StelCore* core)
 {
-	if (!flagShowNavStars)
-	{
-		// Restore settings for star labels
-		smgr->setFlagLabels(flagStarName);
-		return;
-	}
-
-	// Hide labels of all stars
-	smgr->setFlagLabels(false);
+	if (navStarsMarkerFader.getInterstate() <= 0.0) { return; }
 
 	StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
 	StelPainter painter(prj);
@@ -170,7 +171,7 @@ void NavStars::draw(StelCore* core)
 		glEnable(GL_BLEND);
 		painter.enableTexture2d(true);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-		painter.setColor(navStarColor[0], navStarColor[1], navStarColor[2], 1.f);
+		painter.setColor(navStarColor[0], navStarColor[1], navStarColor[2], navStarsMarkerFader.getInterstate());
 		markerTexture->bind();
 		painter.drawSprite2dMode(pos[0], pos[1], 11.f);
 		if (i>0)
@@ -182,18 +183,41 @@ void NavStars::draw(StelCore* core)
 
 }
 
-void NavStars::setHintColor()
+void NavStars::update(double deltaTime)
 {
-	// Set default color
-	navStarColor = Vec3f(0.8, 0.0, 0.0);
-	if (conf->contains("navstars/navstars_color"))
+	navStarsMarkerFader.update((int)(deltaTime*1000));
+}
+
+void NavStars::setNavStarsMarks(bool b)
+{
+	if (b == navStarsMarkerFader)
+		return;
+
+	if (b)
 	{
-		// OK, we have color settings
-		navStarColor = StelUtils::strToVec3f(conf->value("navstars/navstars_color", "0.8,0.0,0.0").toString());
+		// Save the display state of the star labels and hide them.
+		starNamesState = smgr->getFlagLabels();
+		smgr->setFlagLabels(false);
 	}
 	else
 	{
-		// Oops... no value in config, create a default value
-		conf->setValue("navstars/navstars_color", "0.8,0.0,0.0");
+		// Restore the star labels state.
+		smgr->setFlagLabels(starNamesState);
+	}
+
+	navStarsMarkerFader = b;
+	emit navStarsMarksChanged(b);
+}
+
+bool NavStars::getNavStarsMarks() const
+{
+	return navStarsMarkerFader;
+}
+
+void NavStars::starNamesChanged(bool b)
+{
+	if (b && getNavStarsMarks()) {
+		starNamesState=true;
+		setNavStarsMarks(false);
 	}
 }
