@@ -321,23 +321,23 @@ QString MeteorShower::getInfoString(const StelCore* core, const InfoStringGroup&
 		else
 			oss << "<b>" << q_("Generic data for the year %1").arg(skyYear) << "</b> <br />";
 
-		if(start.fromString("MM") == finish.fromString("MM"))
+		if(start.toString("M") == finish.toString("M"))
 		{
 			oss << QString("%1: %2 - %3 %4")
 			       .arg(q_("Active"))
-			       .arg(start.toString("dd"))
-			       .arg(finish.toString("dd"))
+			       .arg(start.toString("d"))
+			       .arg(finish.toString("d"))
 			       .arg(start.toString("MMMM"));
 		}
 		else
 		{
 			oss << QString("%1: %2 - %3")
 			       .arg(q_("Active"))
-			       .arg(start.toString("dd MMMM"))
-			       .arg(finish.toString("dd MMMM"));
+			       .arg(start.toString("d MMMM"))
+			       .arg(finish.toString("d MMMM"));
 		}
 		oss << "<br />";
-		oss << q_("Maximum: %1").arg(peak.toString("dd MMMM"));
+		oss << q_("Maximum: %1").arg(peak.toString("d MMMM"));
 
 		QString slong = QString::number( MeteorShower::getSolarLongitude(peak), 'f', 2 );
 		oss << QString(" (%1 %2&deg;)").arg(q_("Solar longitude is")).arg(slong);
