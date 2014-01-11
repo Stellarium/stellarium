@@ -96,7 +96,6 @@ MeteorShowers::MeteorShowers()
 	setObjectName("MeteorShowers");
 	configDialog = new MeteorShowerDialog();
 	conf = StelApp::getInstance().getSettings();
-	labelFont.setPixelSize(conf->value("gui/base_font_size", 13).toInt());
 }
 
 /*
