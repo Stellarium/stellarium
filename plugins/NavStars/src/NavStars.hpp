@@ -36,8 +36,9 @@ class NavStars : public StelModule
 {
 	Q_OBJECT
 	Q_PROPERTY(bool navStarsVisible
-		   READ getFlagShowNavStars
-		   WRITE setFlagShowNavStars)
+		   READ getNavStarsMarks
+		   WRITE setNavStarsMarks
+		   NOTIFY navStarsMarksChanged)
 public:	
 	NavStars();
 	virtual ~NavStars();
@@ -46,20 +47,23 @@ public:
 	// Methods defined in the StelModule class
 	virtual void init();
 	virtual void deinit();
-	virtual void update(double) {;}
+	virtual void update(double deltaTime);
 	virtual void draw(StelCore* core);
 	virtual double getCallOrder(StelModuleActionName actionName) const;
 
 
 public slots:
 
-	void setFlagShowNavStars(bool b) { flagShowNavStars=b; }
-	bool getFlagShowNavStars(void) { return flagShowNavStars; }
+	void setNavStarsMarks(bool b);
+	bool getNavStarsMarks(void) const;
 
+signals:
+	void navStarsMarksChanged(bool b);
+
+private slots:
+	void starNamesChanged(bool b);
 
 private:
-	void setHintColor(void);
-
 	StarMgr* smgr;
 	QSettings* conf;
 	StelTextureSP markerTexture;
@@ -67,8 +71,8 @@ private:
 	QList<int> nstar;
 
 	Vec3f navStarColor;
-	bool flagShowNavStars;
-	bool flagStarName;
+	LinearFader navStarsMarkerFader;
+	bool starNamesState;
 
 	QPixmap* OnIcon;
 	QPixmap* OffIcon;
