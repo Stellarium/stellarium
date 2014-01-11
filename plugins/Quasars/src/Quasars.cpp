@@ -508,11 +508,14 @@ QVariantMap Quasars::loadQSOMap(QString path)
 void Quasars::setQSOMap(const QVariantMap& map)
 {
 	QSO.clear();
+	QsrCount = 0;
 	QVariantMap qsoMap = map.value("quasars").toMap();
 	foreach(QString qsoKey, qsoMap.keys())
 	{
 		QVariantMap qsoData = qsoMap.value(qsoKey).toMap();
 		qsoData["designation"] = qsoKey;
+
+		QsrCount++;
 
 		QuasarP quasar(new Quasar(qsoData));
 		if (quasar->initialized)
