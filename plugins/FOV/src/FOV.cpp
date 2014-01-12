@@ -41,6 +41,7 @@ StelPluginInfo FOVStelPluginInterface::getPluginInfo() const
 	info.authors = "Alexander Wolf";
 	info.contact = "http://stellarium.org";
 	info.description = N_("This plugin gives stepwise zooming like in <em>Cartes du Ciel</em> planetarium via keyboard shortcuts.");
+	info.version = FOV_VERSION;
 	return info;
 }
 
