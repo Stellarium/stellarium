@@ -123,9 +123,9 @@ void ExoplanetsDialog::setAboutHtml(void)
 	html += "<tr><td><strong>" + q_("Author") + ":</strong></td><td>Alexander Wolf &lt;alex.v.wolf@gmail.com&gt;</td></tr></table>";
 
 	html += "<p>" + QString(q_("This plugin plots the position of stars with exoplanets. Exoplanets data is derived from \"%1The Extrasolar Planets Encyclopaedia%2\"")).arg("<a href=\"http://exoplanet.eu/\">").arg("</a>") + ". ";
-	html += QString(q_("List of potential habitable exoplanets and data about them were taken from \"%1The Habitable Exoplanets Catalog%3\" by %2Planetary Habitability Laboratory%3.")).arg("<a href=\"http://phl.upr.edu/projects/habitable-exoplanets-catalog\">").arg("<a href=\"http://phl.upr.edu/home\">").arg("</a>") + "</p>";
+	html += QString(q_("The list of potential habitable exoplanets and data about them were taken from \"%1The Habitable Exoplanets Catalog%3\" by %2Planetary Habitability Laboratory%3.")).arg("<a href=\"http://phl.upr.edu/projects/habitable-exoplanets-catalog\">").arg("<a href=\"http://phl.upr.edu/home\">").arg("</a>") + "</p>";
 
-	html += "<p>" + q_("Current catalog contains info about %1 planetary systems, which altogether have %2 exoplanets.").arg(ep->getCountPlanetarySystems()).arg(ep->getCountAllExoplanets()) + "</p>";
+	html += "<p>" + q_("The current catalog contains info about %1 planetary systems, which altogether have %2 exoplanets.").arg(ep->getCountPlanetarySystems()).arg(ep->getCountAllExoplanets()) + "</p>";
 	html += "<h3>" + q_("Links") + "</h3>";
 	html += "<p>" + QString(q_("Support is provided via the Launchpad website.  Be sure to put \"%1\" in the subject when posting.")).arg("Exoplanets plugin") + "</p>";
 	html += "<p><ul>";
@@ -136,7 +136,7 @@ void ExoplanetsDialog::setAboutHtml(void)
 	// TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 	html += "<li>" + q_("If you would like to make a feature request, you can create a bug report, and set the severity to \"wishlist\".") + "</li>";
 	// TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
-	html += "<li>" + q_("If you want read full information about plugin, his history and format of catalog you can %1get info here%2.").arg("<a href=\"http://stellarium.org/wiki/index.php/Exoplanets_plugin\">").arg("</a>") + "</li>";
+	html += "<li>" + q_("If you want to read full information about the plugin, its history and format of the catalog you can %1get info here%2.").arg("<a href=\"http://stellarium.org/wiki/index.php/Exoplanets_plugin\">").arg("</a>") + "</li>";
 	html += "</ul></p></body></html>";
 
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
