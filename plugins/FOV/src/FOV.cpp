@@ -80,7 +80,7 @@ void FOV::init()
 	{
 		QString name = QString("actionSetFOV%1").arg(i);
 		QString shortcut = QString("Ctrl+Alt+%1").arg(i);
-		QString text = q_("Set FOV in %1%2").arg(getQuickFOV(i)).arg(QChar(0x00B0));
+		QString text = q_("Set FOV to %1%2").arg(getQuickFOV(i)).arg(QChar(0x00B0));
 		addAction(name, section, text, "setFOV()", shortcut);
 	}
 }

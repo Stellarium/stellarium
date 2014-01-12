@@ -114,7 +114,7 @@ void NovaeDialog::setAboutHtml(void)
 	html += "<p>" + q_("This plugin allows you to see next bright novae: ");
 	html += nova->getNovaeList();
 	html += ". " + q_("This list altogether contains %1 stars.").arg(nova->getCountNovae());
-	html += " " + q_("All those novae are brighter %1 at peak of brightness.").arg(QString::number(nova->getLowerLimitBrightness(), 'f', 2) + "<sup>m</sup>") + "</p>";
+	html += " " + q_("All those novae are brighter than %1 at peak of brightness.").arg(QString::number(nova->getLowerLimitBrightness(), 'f', 2) + "<sup>m</sup>") + "</p>";
 	html += "<h3>" + q_("Light curves") + "</h3>";
 	html += q_("This plugin uses a very simple model for calculation of light curves for novae stars.") + " ";
 	html += q_("This model is based on time for decay by %1 magnitudes from the maximum value, where %1 is 2, 3, 6 and 9.").arg("<em>N</em>") + " ";
