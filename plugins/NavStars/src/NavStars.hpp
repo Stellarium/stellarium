@@ -31,7 +31,20 @@ class QPixmap;
 class StelButton;
 class StelPainter;
 
-//! This is an example of a plug-in which can be dynamically loaded into stellarium
+/*! @mainpage notitle
+@section overview Plugin Overview
+
+The Navigational Stars plugin marks the navigational stars on the sky.
+
+The NavStars class is the main class of the plug-in. It manages a list of
+of navigational stars and manipulate show/hide markers of them. All markers
+is not objects!
+
+*/
+
+//! @class NavStars
+//! Main class of the Navinatinal Stars plugin.
+//! @author Alexander Wolf
 class NavStars : public StelModule
 {
 	Q_OBJECT
@@ -53,14 +66,18 @@ public:
 
 
 public slots:
-
+	//! Set flag of displaying markers of the navigational stars
+	//! Emits navStarsMarksChanged() if the value changes.
 	void setNavStarsMarks(bool b);
+	//! Get flag of displaying markers of the navigational stars
 	bool getNavStarsMarks(void) const;
 
 signals:
+	//! Emitted when display of markers have been changed.
 	void navStarsMarksChanged(bool b);
 
 private slots:
+	//! Called setNavStarsMarks() if the value changes.
 	void starNamesChanged(bool b);
 
 private:
@@ -68,16 +85,21 @@ private:
 	QSettings* conf;
 	StelTextureSP markerTexture;
 
+	//! List of navigational stars.
 	QList<int> nstar;
-
-	Vec3f navStarColor;
+	//! Color of marker for navigational stars.
+	Vec3f navStarColor;	
 	LinearFader navStarsMarkerFader;
+	//! State of displaying stars labels.
 	bool starNamesState;
 
+	//! @name Bottom toolbar button
+	//@{
 	QPixmap* OnIcon;
 	QPixmap* OffIcon;
-	QPixmap* GlowIcon;
+	QPixmap* GlowIcon;	
 	StelButton* toolbarButton;
+	//@}
 };
 
 
