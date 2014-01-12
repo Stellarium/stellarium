@@ -99,7 +99,6 @@ Comet::Comet(const QString& englishName,
 	slopeParameter = -1;//== uninitialized: used in getVMagnitude()
 
 	//TODO: Name processing?
-
 	nameI18 = englishName;
 
 	flagLabels = true;

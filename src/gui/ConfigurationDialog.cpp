@@ -267,7 +267,7 @@ void ConfigurationDialog::createDialogContent()
 	#endif
 
 	// plugins control
-	connect(ui->pluginsListWidget, SIGNAL(currentItemChanged(QListWidgetItem*,QListWidgetItem*)), this, SLOT(pluginsSelectionChanged(QListWidgetItem*,QListWidgetItem*)));
+	connect(ui->pluginsListWidget, SIGNAL(currentItemChanged(QListWidgetItem*, QListWidgetItem*)), this, SLOT(pluginsSelectionChanged(QListWidgetItem*, QListWidgetItem*)));
 	connect(ui->pluginLoadAtStartupCheckBox, SIGNAL(stateChanged(int)), this, SLOT(loadAtStartupChanged(int)));
 	connect(ui->pluginConfigureButton, SIGNAL(clicked()), this, SLOT(pluginConfigureCurrentSelection()));
 	populatePluginsList();
@@ -667,22 +667,35 @@ void ConfigurationDialog::setDefaultViewOptions()
 
 void ConfigurationDialog::populatePluginsList()
 {
-	int prevSel = ui->pluginsListWidget->currentRow();
-	ui->pluginsListWidget->clear();
+	QListWidget *plugins = ui->pluginsListWidget;
+	plugins->blockSignals(true);
+	int currentRow = plugins->currentRow();
+	QString selectedPluginId = "";
+	if (currentRow>0)
+		 selectedPluginId = plugins->currentItem()->data(Qt::UserRole).toString();
+
+	plugins->clear();
+	QString selectedPluginName = "";
 	const QList<StelModuleMgr::PluginDescriptor> pluginsList = StelApp::getInstance().getModuleMgr().getPluginsList();	
 	foreach (const StelModuleMgr::PluginDescriptor& desc, pluginsList)
 	{
 		QString label = q_(desc.info.displayedName);
 		QListWidgetItem* item = new QListWidgetItem(label);
 		item->setData(Qt::UserRole, desc.info.id);
-		ui->pluginsListWidget->addItem(item);		
+		plugins->addItem(item);
+		if (currentRow>0 && item->data(Qt::UserRole).toString()==selectedPluginId)
+			selectedPluginName = label;
 	}
-	ui->pluginsListWidget->sortItems(Qt::AscendingOrder);
+	plugins->sortItems(Qt::AscendingOrder);
+	plugins->blockSignals(false);
 	// If we had a valid previous selection (i.e. not first time we populate), restore it
-	if (prevSel >= 0 && prevSel < ui->pluginsListWidget->count())
-		ui->pluginsListWidget->setCurrentRow(prevSel);
+
+	if (!selectedPluginName.isEmpty())
+		plugins->setCurrentItem(plugins->findItems(selectedPluginName, Qt::MatchExactly).at(0));
 	else
-		ui->pluginsListWidget->setCurrentRow(0);
+		plugins->setCurrentRow(0);
+
+
 }
 
 void ConfigurationDialog::pluginsSelectionChanged(QListWidgetItem* item, QListWidgetItem* previousItem)
