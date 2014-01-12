@@ -34,16 +34,19 @@ class StelPainter;
 /*! @mainpage notitle
 @section overview Plugin Overview
 
-The Navigational Stars plugin marks the navigational stars on the sky.
+The Navigational Stars plugin marks the 58 navigational stars of the
+Nautical Almanach and the 2102-D Rude Star Finder on the sky.
 
-The NavStars class is the main class of the plug-in. It manages a list of
-of navigational stars and manipulate show/hide markers of them. All markers
-is not objects!
+The NavStars class is the main class of the plug-in. It manages the list of
+navigational stars and manipulate show/hide markers of them. All markers
+are not objects!
+
+The plugin is also an example of a custom plugin that just marks existing stars.
 
 */
 
 //! @class NavStars
-//! Main class of the Navinatinal Stars plugin.
+//! Main class of the Navigational Stars plugin.
 //! @author Alexander Wolf
 class NavStars : public StelModule
 {
@@ -68,7 +71,7 @@ public:
 public slots:
 	//! Set flag of displaying markers of the navigational stars
 	//! Emits navStarsMarksChanged() if the value changes.
-	void setNavStarsMarks(bool b);
+	void setNavStarsMarks(const bool b);
 	//! Get flag of displaying markers of the navigational stars
 	bool getNavStarsMarks(void) const;
 
@@ -78,7 +81,7 @@ signals:
 
 private slots:
 	//! Called setNavStarsMarks() if the value changes.
-	void starNamesChanged(bool b);
+	void starNamesChanged(const bool b);
 
 private:
 	StarMgr* smgr;
