@@ -2255,6 +2255,17 @@ Sinop	Mato Grosso	br	N	116.013	11.86417S	55.5025W	378	7	America/Cuiaba
 Cambebba	Ceara	br	N	0	3.62092S	38.82913W	41		America/Fortaleza
 Trindade	Santa Catarina	br	N	15.1	27.58612S	48.52335W	10	5	America/Sao_Paulo
 Freguesia do Ribeirao da Ilha	Santa Catarina	br	N	21	27.71773S	48.56266W	13	5	America/Sao_Paulo
+Altonia	Parana	br	N	20.5	23.873889S	53.901944W	310	5	America/Sao_Paulo
+Corbelia	Parana	br	N	16.3	24.795384S	53.296051W	895	5	America/Sao_Paulo
+Entre Rios do Oeste	Parana	br	N	3.9	24.703889S	54.242222W	230	4	America/Sao_Paulo
+Maripa	Parana	br	N	5.8	24.417778S	53.830000W	402	4	America/Sao_Paulo
+Mercedes	Parana	br	N	4.6	24.453889S	54.161944W	415	4	America/Sao_Paulo
+Nova Santa Rosa	Parana	br	N	7.1	24.465833S	53.952778W	417	5	America/Sao_Paulo
+Pato Bragado	Parana	br	N	4	24.625833S	54.225000W	563	4	America/Sao_Paulo
+Quatro Pontes	Parana	br	N	3.6	24.575000S	53.976944W	427	4	America/Sao_Paulo
+Santa Helena	Parana	br	N	23.4	24.860019S	54.332832W	258	5	America/Sao_Paulo
+Sao Jose das Palmeiras	Parana	br	N	4.1	24.837778S	54.063889W	563	4	America/Sao_Paulo
+Terra Roxa	Parana	br	N	16.3	24.165314S	54.097281W	410	5	America/Sao_Paulo
 Nassau	New Providence	bs	C	227.94	25.05823N	77.34306W	5	7	America/Nassau
 Lucaya	Freeport	bs	N	46.525	26.53333N	78.66667W	7	5	America/Nassau
 Freeport	Freeport	bs	R	26.91	26.53333N	78.7W	6	5	America/Nassau
@@ -5318,6 +5329,8 @@ Ringsted	Zealand	dk	N	20.188	55.4426N	11.79011E	54	5	Europe/Copenhagen
 Randers	Central Jutland	dk	N	55.78	56.46667N	10.05E	25	6	Europe/Copenhagen
 Odense	South Denmark	dk	N	145.931	55.39594N	10.38831E	17	7	Europe/Copenhagen
 Nykobing Falster	Zealand	dk	N	16.807	54.76906N	11.87425E	2	5	Europe/Copenhagen
+Nykobing Sjaelland	Zealand	dk	N	5.096	55.925N	11.666667E	0	4	Europe/Copenhagen
+Nykobing Mors	Nordjylland	dk	R	9.2	56.795278N	8.859167E	0	4	Europe/Copenhagen
 Nyborg	South Denmark	dk	N	15.826	55.31274N	10.78964E	7	5	Europe/Copenhagen
 Naestved	Zealand	dk	N	40.66	55.22992N	11.76092E	16	5	Europe/Copenhagen
 Lillerod	Capital Region	dk	N	15.359	55.87496N	12.34579E	45	5	Europe/Copenhagen
@@ -17051,7 +17064,6 @@ Vyatskiye Polyany	Kirov	ru	N	39.534	56.22602N	51.06557E	74	5	Europe/Volgograd
 Vsevolozhsk	Leningrad	ru	N	48.224	60.01512N	30.67314E	28	5	Europe/Moscow
 Votkinsk	Udmurtiya	ru	N	98.633	57.04865N	53.98717E	85	6	Europe/Samara
 Vostryakovo	Moskovskaya	ru	N	30	55.66667N	37.45E	182	5	Europe/Moscow
-Vostryakovo	Moskovskaya	ru	N	16.509	55.39934N	37.80829E	163	5	Europe/Moscow
 Voskresensk	Moskovskaya	ru	N	77.086	55.31733N	38.65264E	124	6	Europe/Moscow
 Voronezh	Voronezj	ru	R	848.752	51.67204N	39.1843E	156	8	Europe/Moscow
 Altuf'yevskiy	Moscow	ru	N	54	55.88333N	37.58333E	169	6	Europe/Moscow
@@ -23390,6 +23402,8 @@ Bindura	Mashonaland Central	zw	R	37.423	17.30192S	31.33056E	1118	5	Africa/Harare
 Beitbridge	Matabeleland South	zw	N	26.459	22.21667S	30E	461	5	Africa/Harare
 Epworth	Harare	zw	N	123.25	17.89S	31.1475E	1508	7	Africa/Harare
 Chitungwiza	Harare	zw	N	340.36	18.01274S	31.07555E	1435	7	Africa/Harare
+Haifa		il	R	268	32.816667N	34.983333E	0
+Eilat		il	N	50	29.55N	34.95E	0
 University of Tokyo Atacama Observatory	Cerro Chajnantor	cl	O	0	22.986667S	67.742222W	5640
 Atacama Cosmology Telescope	Cerro Toco	cl	O	0	22.958611S	67.787778W	5190
 Llano de Chajnantor Observatory	Llano de Chajnantor	cl	O	0	23.022778S	67.754722W	5104
@@ -23812,8 +23826,8 @@ York University Observatory	Ontario	ca	O	0	43.7739N	79.5073W	196
 Yuba City Astronomical Observatory	California	us	O	0	39.11465N	121.634125W	0
 Yunnan Astronomical Observatory		cn	O	0	25.033333N	102.783333E	2014
 Zimmerwald Observatory		ch	O	0	46.87667N	7.465E	0
-Haifa		il	R	268	32.816667N	34.983333E	0
-Eilat		il	N	50	29.55N	34.95E	0
+Observatory of Ependes	Ependes	ch	O	0	46.76237N	7.13938E	700
+Observatorio Astronomico da Universidade de Coimbra	Centro	pt	O	0	40.1992N	8.44418W	0
 Apollo 11	USA	Mare Tranquillitatis	L	0	0.67N	23.47E	523	0		Moon	moon
 Apollo 12	USA	Oceanus Procellarum	L	0	3.01S	23.42W	0	0		Moon	moon
 Apollo 14	USA	Fra Mauro	L	0	3.65S	17.47W	0	0		Moon	moon
@@ -23844,6 +23858,7 @@ Surveyor 4	USA		A	0	0.43N	1.33W	0	0		Moon	moon
 Surveyor 5	USA	Mare Tranquillitatis	L	0	1.41N	23.18E	430	0		Moon	moon
 Surveyor 6	USA	Sinus Medii	L	0	0.46N	1.37W	0	0		Moon	moon
 Surveyor 7	USA	Tycho (North rim)	L	0	41.01S	11.41W	0	0		Moon	moon
+Yutu	China	Mare Imbrium	L	0	44.12N	19.51W	0	0		Moon	moon
 Lunar 1	USA		I	0	7.00N	161.00E	0	0		Moon	moon
 Lunar 2	USA		I	0	3.00N	119.10E	0	0		Moon	moon
 Lunar 3	USA		I	0	14.32N	92.70W	0	0		Moon	moon
@@ -23867,5 +23882,4 @@ Venera 11	USSR		L	0	14.00S	61.00W	237	0		Venus
 Venera 12	USSR		L	0	7.00S	66.00W	104	0		Venus
 Venera 13	USSR		L	0	7.50S	57.00W	256	0		Venus
 Venera 14	USSR		L	0	13.25S	50.00W	253	0		Venus
-Observatory of Ependes	Ependes	ch	O	0	46.76237N	7.13938E	700
-Observatorio Astronomico da Universidade de Coimbra	Centro	pt	O	0	40.1992N	8.44418W	0
+Huygens	Europe	Xanadu Region	L	0	15S	168E	0	0		Titan

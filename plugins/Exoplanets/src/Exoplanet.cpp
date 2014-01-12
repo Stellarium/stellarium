@@ -407,7 +407,7 @@ void Exoplanet::update(double deltaTime)
 	labelsFader.update((int)(deltaTime*1000));
 }
 
-void Exoplanet::draw(StelCore* core, StelPainter& painter)
+void Exoplanet::draw(StelCore* core, StelPainter *painter)
 {
 	bool visible;
 	StelSkyDrawer* sd = core->getSkyDrawer();
@@ -421,7 +421,7 @@ void Exoplanet::draw(StelCore* core, StelPainter& painter)
 	StelUtils::spheToRect(RA, DE, XYZ);
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_ONE, GL_ONE);
-	painter.setColor(color[0], color[1], color[2], 1);
+	painter->setColor(color[0], color[1], color[2], 1);
 
 	if (timelineMode)
 	{
@@ -432,21 +432,23 @@ void Exoplanet::draw(StelCore* core, StelPainter& painter)
 		visible = true;
 	}
 
-	if(!visible) {return;}
+	Vec3d win;
+	// Check visibility of exoplanet system
+	if(!visible || !(painter->getProjector()->projectCheck(XYZ, win))) {return;}
 
 	float mlimit = sd->getLimitMagnitude();
 
 	if (mag <= mlimit)
 	{		
 		Exoplanet::markerTexture->bind();
-		float size = getAngularSize(NULL)*M_PI/180.*painter.getProjector()->getPixelPerRadAtCenter();
+		float size = getAngularSize(NULL)*M_PI/180.*painter->getProjector()->getPixelPerRadAtCenter();
 		float shift = 5.f + size/1.6f;
 
-		painter.drawSprite2dMode(XYZ, distributionMode ? 4.f : 5.f);
+		painter->drawSprite2dMode(XYZ, distributionMode ? 4.f : 5.f);
 
 		if (labelsFader.getInterstate()<=0.f && !distributionMode && (mag+1.f)<mlimit)
 		{
-			painter.drawText(XYZ, designation, 0, shift, shift, false);
+			painter->drawText(XYZ, designation, 0, shift, shift, false);
 		}
 	}
 }
