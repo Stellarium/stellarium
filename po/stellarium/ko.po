@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-01-09 00:04+0700\n"
-"PO-Revision-Date: 2013-11-05 08:29+0000\n"
-"Last-Translator: LEE E. S. <Unknown>\n"
+"PO-Revision-Date: 2014-01-11 11:44+0000\n"
+"Last-Translator: Jeong, Tae-Min <jtm71@chollian.net>\n"
 "Language-Team: Korean <ko@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-01-09 04:46+0000\n"
-"X-Generator: Launchpad (build 16884)\n"
+"X-Launchpad-Export-Date: 2014-01-12 05:19+0000\n"
+"X-Generator: Launchpad (build 16890)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:106 src/core/modules/StarMgr.cpp:336
 #: src/core/modules/GridLinesMgr.cpp:679 src/core/modules/LandscapeMgr.cpp:335
@@ -258,7 +258,7 @@ msgstr "거리: %1AU (%2 km)"
 #: src/core/modules/Comet.cpp:161
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 Mio km)"
-msgstr ""
+msgstr "거리: %1AU (%2 Mio km)"
 
 #: src/core/modules/Planet.cpp:186
 #, qt-format
@@ -337,7 +337,7 @@ msgstr "항성"
 #: plugins/Quasars/src/Quasar.cpp:112
 #, qt-format
 msgid "Color Index (B-V): <b>%1</b>"
-msgstr ""
+msgstr "색지수 (B-V): <b>%1</b>"
 
 #: src/core/modules/StarWrapper.cpp:144
 msgid "eruptive variable star"
@@ -1569,7 +1569,7 @@ msgstr ""
 #. TRANSLATORS: Short description for Class 3 of the Bortle scale
 #: src/gui/ViewDialog.cpp:301
 msgid "Rural sky"
-msgstr ""
+msgstr "시골 하늘"
 
 #. TRANSLATORS: Short description for Class 4 of the Bortle scale
 #: src/gui/ViewDialog.cpp:303
@@ -1579,12 +1579,12 @@ msgstr ""
 #. TRANSLATORS: Short description for Class 5 of the Bortle scale
 #: src/gui/ViewDialog.cpp:305
 msgid "Suburban sky"
-msgstr ""
+msgstr "교외"
 
 #. TRANSLATORS: Short description for Class 6 of the Bortle scale
 #: src/gui/ViewDialog.cpp:307
 msgid "Bright suburban sky"
-msgstr ""
+msgstr "하늘이 밝은 교외"
 
 #. TRANSLATORS: Short description for Class 7 of the Bortle scale
 #: src/gui/ViewDialog.cpp:309
@@ -1594,16 +1594,16 @@ msgstr ""
 #. TRANSLATORS: Short description for Class 8 of the Bortle scale
 #: src/gui/ViewDialog.cpp:311
 msgid "City sky"
-msgstr ""
+msgstr "도시 하늘"
 
 #. TRANSLATORS: Short description for Class 9 of the Bortle scale
 #: src/gui/ViewDialog.cpp:313
 msgid "Inner-city sky"
-msgstr ""
+msgstr "도심부 하늘"
 
 #: src/gui/ViewDialog.cpp:327
 msgid "The naked-eye limiting magnitude is"
-msgstr ""
+msgstr "육안 한계등급은"
 
 #: src/gui/ViewDialog.cpp:459
 msgid "No description"
