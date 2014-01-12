@@ -360,7 +360,11 @@ IF(WIN32)
     ENDIF()
     GET_FILENAME_COMPONENT(QT5_LIBS ${QtCore_location} PATH)
     SET(ISS_ICU_LIBS "Source: \"${QT5_LIBS}/icu*.dll\"; DestDir: \"{app}\";")
+    # Deploy related stuff
     SET(ISS_WINDOWS_PLUGIN "Source: \"${QT5_LIBS}/../plugins/platforms/qwindows.dll\"; DestDir: \"{app}/platforms/\";")
+    SET(ISS_QML_DIR "Source: \"${QT5_LIBS}/../imports/Qt/labs/shaders/qmldir\"; DestDir: \"{app}/Qt/labs/shaders/\";")
+    SET(ISS_QML_PLUGINS "Source: \"${QT5_LIBS}/../imports/Qt/labs/shaders/plugins.qmltypes\"; DestDir: \"{app}/Qt/labs/shaders/\";")
+    SET(ISS_QML_SHADERS "Source: \"${QT5_LIBS}/../imports/Qt/labs/shaders/qmlshadersplugin.dll\"; DestDir: \"{app}/Qt/labs/shaders/\";")
   
     CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/stellarium.iss.cmake ${CMAKE_SOURCE_DIR}/stellarium.iss @ONLY)
     CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/stellarium-patch.iss.cmake ${CMAKE_SOURCE_DIR}/stellarium-patch.iss @ONLY)
