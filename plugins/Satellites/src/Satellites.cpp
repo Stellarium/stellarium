@@ -67,6 +67,7 @@ StelPluginInfo SatellitesStelPluginInterface::getPluginInfo() const
 	info.authors = "Matthew Gates, Jose Luis Canales, Bogdan Marinov";
 	info.contact = "http://stellarium.org/";
 	info.description = N_("Prediction of artificial satellite positions in Earth orbit based on NORAD TLE data");
+	info.version = SATELLITES_PLUGIN_VERSION;
 	return info;
 }
 

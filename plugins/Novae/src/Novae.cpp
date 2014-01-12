@@ -73,6 +73,7 @@ StelPluginInfo NovaeStelPluginInterface::getPluginInfo() const
 	info.authors = "Alexander Wolf";
 	info.contact = "alex.v.wolf@gmail.com";
 	info.description = N_("A plugin that shows some bright novae in the Milky Way galaxy.");
+	info.version = NOVAE_PLUGIN_VERSION;
 	return info;
 }
 
@@ -477,13 +478,15 @@ void Novae::setNovaeMap(const QVariantMap& map)
 {
 	nova.clear();
 	novalist.clear();
+	NovaCnt=0;
 	QVariantMap novaeMap = map.value("nova").toMap();
 	foreach(QString novaeKey, novaeMap.keys())
 	{
 		QVariantMap novaeData = novaeMap.value(novaeKey).toMap();
 		novaeData["designation"] = QString("%1").arg(novaeKey);
 
-		novalist.insert(novaeData.value("designation").toString(), novaeData.value("peakJD").toDouble());
+		novalist.insert(novaeData.value("name").toString(), novaeData.value("peakJD").toDouble());
+		NovaCnt++;
 
 		NovaP n(new Nova(novaeData));
 		if (n->initialized)
@@ -697,3 +700,39 @@ void Novae::messageTimeout(void)
 	}
 }
 
+QString Novae::getNovaeList()
+{
+	QString smonth[] = {q_("January"), q_("February"), q_("March"), q_("April"), q_("May"), q_("June"), q_("July"), q_("August"), q_("September"), q_("October"), q_("November"), q_("December")};
+	QStringList out;
+	int year, month, day;
+	QList<double> vals = novalist.values();
+	qSort(vals);
+	foreach(double val, vals)
+	{
+		StelUtils::getDateFromJulianDay(val, &year, &month, &day);
+		out << QString("%1 (%2 %3 %4)").arg(novalist.key(val)).arg(day).arg(smonth[month-1]).arg(year);
+	}
+
+	return out.join(", ");
+}
+
+float Novae::getLowerLimitBrightness()
+{
+	float lowerLimit = 10.f;
+	QFile novaeJsonFile(novaeJsonPath);
+	if (!novaeJsonFile.open(QIODevice::ReadOnly))
+	{
+		qWarning() << "Novae::init cannot open " << QDir::toNativeSeparators(novaeJsonPath);
+		return lowerLimit;
+	}
+
+	QVariantMap map;
+	map = StelJsonParser::parse(&novaeJsonFile).toMap();
+	if (map.contains("limit"))
+	{
+		lowerLimit = map.value("limit").toFloat();
+	}
+
+	novaeJsonFile.close();
+	return lowerLimit;
+}

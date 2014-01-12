@@ -267,7 +267,7 @@ void ConfigurationDialog::createDialogContent()
 	#endif
 
 	// plugins control
-	connect(ui->pluginsListWidget, SIGNAL(currentTextChanged(const QString&)), this, SLOT(pluginsSelectionChanged(const QString&)));
+	connect(ui->pluginsListWidget, SIGNAL(currentItemChanged(QListWidgetItem*,QListWidgetItem*)), this, SLOT(pluginsSelectionChanged(QListWidgetItem*,QListWidgetItem*)));
 	connect(ui->pluginLoadAtStartupCheckBox, SIGNAL(stateChanged(int)), this, SLOT(loadAtStartupChanged(int)));
 	connect(ui->pluginConfigureButton, SIGNAL(clicked()), this, SLOT(pluginConfigureCurrentSelection()));
 	populatePluginsList();
@@ -685,12 +685,13 @@ void ConfigurationDialog::populatePluginsList()
 		ui->pluginsListWidget->setCurrentRow(0);
 }
 
-void ConfigurationDialog::pluginsSelectionChanged(const QString& s)
+void ConfigurationDialog::pluginsSelectionChanged(QListWidgetItem* item, QListWidgetItem* previousItem)
 {
+	Q_UNUSED(previousItem);
 	const QList<StelModuleMgr::PluginDescriptor> pluginsList = StelApp::getInstance().getModuleMgr().getPluginsList();
 	foreach (const StelModuleMgr::PluginDescriptor& desc, pluginsList)
 	{
-		if (s==q_(desc.info.displayedName))//TODO: Use ID!
+		if (item->data(Qt::UserRole).toString()==desc.info.id)
 		{
 			QString html = "<html><head></head><body>";
 			html += "<h2>" + q_(desc.info.displayedName) + "</h2>";			
@@ -699,6 +700,8 @@ void ConfigurationDialog::pluginsSelectionChanged(const QString& s)
 			html += "<p>" + q_(d) + "</p>";
 			html += "<p><strong>" + q_("Authors") + "</strong>: " + desc.info.authors;
 			html += "<br /><strong>" + q_("Contact") + "</strong>: " + desc.info.contact;
+			if (!desc.info.version.isEmpty())
+				html += "<br /><strong>" + q_("Version") + "</strong>: " + desc.info.version;
 			html += "</p></body></html>";
 			ui->pluginsInfoBrowser->setHtml(html);
 			ui->pluginLoadAtStartupCheckBox->setChecked(desc.loadAtStartup);

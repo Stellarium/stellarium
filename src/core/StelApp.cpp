@@ -127,6 +127,10 @@ Q_IMPORT_PLUGIN(SolarSystemEditorStelPluginInterface)
 Q_IMPORT_PLUGIN(TimeZoneConfigurationStelPluginInterface)
 #endif
 
+#ifdef USE_STATIC_PLUGIN_NAVSTARS
+Q_IMPORT_PLUGIN(NavStarsStelPluginInterface)
+#endif
+
 #ifdef USE_STATIC_PLUGIN_NOVAE
 Q_IMPORT_PLUGIN(NovaeStelPluginInterface)
 #endif
@@ -145,6 +149,10 @@ Q_IMPORT_PLUGIN(PulsarsStelPluginInterface)
 
 #ifdef USE_STATIC_PLUGIN_EXOPLANETS
 Q_IMPORT_PLUGIN(ExoplanetsStelPluginInterface)
+#endif
+
+#ifdef USE_STATIC_PLUGIN_FOV
+Q_IMPORT_PLUGIN(FOVStelPluginInterface)
 #endif
 
 #ifdef USE_STATIC_PLUGIN_OBSERVABILITY
