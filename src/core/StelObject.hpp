@@ -106,12 +106,12 @@ public:
 	//! Get observer-centered hour angle + declination (at current equinox)
 	//! It is the geometric position, i.e. without taking refraction effect into account.
 	//! The frame has its Z axis at the planet's current rotation axis
-	Vec3d getSideralPosGeometric(const StelCore* core) const;
+	Vec3d getSiderealPosGeometric(const StelCore* core) const;
 
 	//! Get observer-centered hour angle + declination (at current equinox)
 	//! It is the apparent position, i.e. taking the refraction effect into account.
 	//! The frame has its Z axis at the planet's current rotation axis
-	Vec3d getSideralPosApparent(const StelCore* core) const;
+	Vec3d getSiderealPosApparent(const StelCore* core) const;
 
 	//! Get observer-centered alt/az position
 	//! It is the geometric position, i.e. without taking refraction effect into account.
@@ -132,6 +132,7 @@ public:
 	virtual float getVMagnitude(const StelCore* core) const;
 	
 	//! Return object's apparent V magnitude as seen from observer including extinction.
+	//! GZ 2014-01-02: Extinction obviously only if atmosphere=on.
 	float getVMagnitudeWithExtinction(const StelCore* core) const;
 
 	//! Return a priority value which is used to discriminate objects by priority

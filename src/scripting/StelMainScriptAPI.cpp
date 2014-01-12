@@ -658,8 +658,8 @@ double StelMainScriptAPI::jdFromDateString(const QString& dt, const QString& spe
 
 		if (nowRe.capturedTexts().at(8) == "sidereal")
 		{
-			dayLength = core->getLocalSideralDayLength();
-			yearLength = core->getLocalSideralYearLength();
+			dayLength = core->getLocalSiderealDayLength();
+			yearLength = core->getLocalSiderealYearLength();
 			monthLength = 27.321661; // duration of Earth's sidereal month
 		}
 
