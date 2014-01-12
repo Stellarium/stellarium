@@ -23,7 +23,7 @@
 #include <fstream>
 #include <clocale>
 #include <cstdlib>
-#ifdef WIN32
+#ifdef Q_OS_WIN
 #include <winsock2.h>
 #include <windows.h>
 #endif
