@@ -85,7 +85,7 @@ void FOVWindow::updateInfoText()
 {
 	// Regexp to replace {text} with an HTML link.
 	QRegExp a_rx = QRegExp("[{]([^{]*)[}]");
-	ui->labelFOVInfo->setText(q_("By default Stellarium use smooth zooming via mouse wheel or keyboard shortcuts. Some users want stepwise zooming like in <em>{Cartes du Ciel}</em> planetarium and this plugin give this feature. You can edit values and use keyboard for quick set FOV. All values in degrees.").replace(a_rx, "<a href=\"http://www.ap-i.net/skychart/start\">\\1</a>"));
+	ui->labelFOVInfo->setText(q_("By default Stellarium use smooth zooming via mouse wheel or keyboard shortcuts. Some users want stepwise zooming like in <em>{Cartes du Ciel}</em> planetarium, and this plugin provides this feature. You can edit values and use the keyboard for quick set FOV. All values in degrees.").replace(a_rx, "<a href=\"http://www.ap-i.net/skychart/start\">\\1</a>"));
 }
 
 void FOVWindow::saveFOVSettings()

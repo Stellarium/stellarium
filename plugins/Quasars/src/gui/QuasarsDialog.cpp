@@ -116,11 +116,11 @@ void QuasarsDialog::setAboutHtml(void)
 	html += "</table>";
 
 	html += QString("<p>%1 (<a href=\"%2\">%3</a>)</p>")
-			.arg(q_("The Quasars plugin provides visualization of some quasars brighter than 16 visual magnitude. A catalogue of quasars compiled from \"Quasars and Active Galactic Nuclei\" (13th Ed.)"))
+			.arg(q_("The Quasars plugin provides visualization of some quasars brighter than visual magnitude 16. The catalogue of quasars was compiled from \"Quasars and Active Galactic Nuclei\" (13th Ed.)"))
 			.arg("http://adsabs.harvard.edu/abs/2010A%26A...518A..10V")
 			.arg(q_("Veron+ 2010"));
 
-	html += "</ul><p>" + q_("Current catalog contains info about %1 quasars.").arg(qsr->getCountQuasars()) + "</p>";
+	html += "</ul><p>" + q_("The current catalog contains info about %1 quasars.").arg(qsr->getCountQuasars()) + "</p>";
 	html += "<h3>" + q_("Links") + "</h3>";
 	html += "<p>" + QString(q_("Support is provided via the Launchpad website.  Be sure to put \"%1\" in the subject when posting.")).arg("Quasars plugin") + "</p>";
 	html += "<p><ul>";
@@ -131,7 +131,7 @@ void QuasarsDialog::setAboutHtml(void)
 	// TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 	html += "<li>" + q_("If you would like to make a feature request, you can create a bug report, and set the severity to \"wishlist\".") + "</li>";
 	// TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
-	html += "<li>" + q_("If you want to read full information about this plugin, its history and format of catalog, you can %1get info here%2.").arg("<a href=\"http://stellarium.org/wiki/index.php/Quasars_plugin\">").arg("</a>") + "</li>";
+	html += "<li>" + q_("If you want to read full information about this plugin, its history and format of the catalog, you can %1get info here%2.").arg("<a href=\"http://stellarium.org/wiki/index.php/Quasars_plugin\">").arg("</a>") + "</li>";
 	html += "</ul></p></body></html>";
 
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
