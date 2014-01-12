@@ -191,6 +191,7 @@ SET(USE_PLUGIN_COMPASSMARKS 1 CACHE BOOL "Define whether the CompassMarks plugin
 SET(USE_PLUGIN_EXOPLANETS 1 CACHE BOOL "Define whether the Exoplanets plugin should be created.")
 SET(USE_PLUGIN_FOV 1 CACHE BOOL "Define whether the FOV plugin should be created.")
 SET(USE_PLUGIN_LOGBOOK 0 CACHE BOOL "Define whether the LogBook plugin should be created.")
+SET(USE_PLUGIN_NAVSTARS 1 CACHE BOOL "Define whether the NavStars plugin should be created.")
 SET(USE_PLUGIN_NOVAE 1 CACHE BOOL "Define whether the Novae plugin should be created.")
 SET(USE_PLUGIN_OBSERVABILITY 1 CACHE BOOL "Define whether the Observability plugin should be created.")
 SET(USE_PLUGIN_OCULARS 1 CACHE BOOL "Define whether the Oculars plugin should be created.")

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-09 00:04+0700\n"
+"POT-Creation-Date: 2014-01-12 13:34+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,7 +20,7 @@ msgstr ""
 #: src/core/modules/ConstellationMgr.cpp:106 src/core/modules/StarMgr.cpp:336
 #: src/core/modules/GridLinesMgr.cpp:679 src/core/modules/LandscapeMgr.cpp:335
 #: src/core/modules/NebulaMgr.cpp:123 src/core/modules/SolarSystem.cpp:150
-#: src/core/StelApp.cpp:440 src/core/StelCore.cpp:160
+#: src/core/StelApp.cpp:444 src/core/StelCore.cpp:160
 #: src/core/StelSkyLayerMgr.cpp:87 src/StelMainView.cpp:300
 msgid "Display Options"
 msgstr ""
@@ -435,7 +435,7 @@ msgstr ""
 msgid "Rising time: %1%"
 msgstr ""
 
-#: src/core/StelApp.cpp:440
+#: src/core/StelApp.cpp:444
 msgid "Night mode"
 msgstr ""
 
@@ -1058,7 +1058,7 @@ msgstr ""
 msgid "Authors"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:701 src/gui/ViewDialog.cpp:411
+#: src/gui/ConfigurationDialog.cpp:701 src/gui/ViewDialog.cpp:409
 msgid "Contact"
 msgstr ""
 
@@ -1498,79 +1498,79 @@ msgid "%1m"
 msgstr ""
 
 #. TRANSLATORS: Short description for Class 1 of the Bortle scale
-#: src/gui/ViewDialog.cpp:297
+#: src/gui/ViewDialog.cpp:295
 msgid "Excellent dark-sky site"
 msgstr ""
 
 #. TRANSLATORS: Short description for Class 2 of the Bortle scale
-#: src/gui/ViewDialog.cpp:299
+#: src/gui/ViewDialog.cpp:297
 msgid "Typical truly dark site"
 msgstr ""
 
 #. TRANSLATORS: Short description for Class 3 of the Bortle scale
-#: src/gui/ViewDialog.cpp:301
+#: src/gui/ViewDialog.cpp:299
 msgid "Rural sky"
 msgstr ""
 
 #. TRANSLATORS: Short description for Class 4 of the Bortle scale
-#: src/gui/ViewDialog.cpp:303
+#: src/gui/ViewDialog.cpp:301
 msgid "Rural/suburban transition"
 msgstr ""
 
 #. TRANSLATORS: Short description for Class 5 of the Bortle scale
-#: src/gui/ViewDialog.cpp:305
+#: src/gui/ViewDialog.cpp:303
 msgid "Suburban sky"
 msgstr ""
 
 #. TRANSLATORS: Short description for Class 6 of the Bortle scale
-#: src/gui/ViewDialog.cpp:307
+#: src/gui/ViewDialog.cpp:305
 msgid "Bright suburban sky"
 msgstr ""
 
 #. TRANSLATORS: Short description for Class 7 of the Bortle scale
-#: src/gui/ViewDialog.cpp:309
+#: src/gui/ViewDialog.cpp:307
 msgid "Suburban/urban transition"
 msgstr ""
 
 #. TRANSLATORS: Short description for Class 8 of the Bortle scale
-#: src/gui/ViewDialog.cpp:311
+#: src/gui/ViewDialog.cpp:309
 msgid "City sky"
 msgstr ""
 
 #. TRANSLATORS: Short description for Class 9 of the Bortle scale
-#: src/gui/ViewDialog.cpp:313
+#: src/gui/ViewDialog.cpp:311
 msgid "Inner-city sky"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:327
+#: src/gui/ViewDialog.cpp:325
 msgid "The naked-eye limiting magnitude is"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:459
+#: src/gui/ViewDialog.cpp:457
 msgid "No description"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:569
+#: src/gui/ViewDialog.cpp:567
 msgid "No shooting stars"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:572
+#: src/gui/ViewDialog.cpp:570
 msgid "Normal rate"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:575
+#: src/gui/ViewDialog.cpp:573
 msgid "Standard Perseids rate"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:578
+#: src/gui/ViewDialog.cpp:576
 msgid "Meteor storm rate"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:581
+#: src/gui/ViewDialog.cpp:579
 msgid "Exceptional Leonid rate"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:584
+#: src/gui/ViewDialog.cpp:582
 msgid "Highest rate ever (1966 Leonids)"
 msgstr ""
 
@@ -4012,7 +4012,7 @@ msgstr ""
 msgid "Display no information"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1000 plugins/Oculars/src/Oculars.cpp:1920
+#: src/ui_configurationDialog.h:1000 plugins/Oculars/src/Oculars.cpp:1919
 #: plugins/Observability/src/Observability.cpp:230
 msgid "None"
 msgstr ""
@@ -4722,27 +4722,27 @@ msgstr ""
 msgid "Sensor #%1: %2"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1916
+#: plugins/Oculars/src/Oculars.cpp:1915
 msgid "&Lens"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1917
+#: plugins/Oculars/src/Oculars.cpp:1916
 msgid "&Previous lens"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1918
+#: plugins/Oculars/src/Oculars.cpp:1917
 msgid "&Next lens"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1948
+#: plugins/Oculars/src/Oculars.cpp:1947
 msgid "&Telescope"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1949
+#: plugins/Oculars/src/Oculars.cpp:1948
 msgid "&Previous telescope"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1950
+#: plugins/Oculars/src/Oculars.cpp:1949
 msgid "&Next telescope"
 msgstr ""
 
@@ -8085,4 +8085,16 @@ msgid ""
 "shortcuts. Some users want stepwise zooming like in <em>{Cartes du Ciel}</"
 "em> planetarium and this plugin give this feature. You can edit values and "
 "use keyboard for quick set FOV. All values in degrees."
+msgstr ""
+
+#: plugins/NavStars/src/NavStars.cpp:53 plugins/NavStars/src/NavStars.cpp:132
+msgid "Navigational Stars"
+msgstr ""
+
+#: plugins/NavStars/src/NavStars.cpp:56
+msgid "This plugin marks the navigational stars."
+msgstr ""
+
+#: plugins/NavStars/src/NavStars.cpp:132
+msgid "Mark the navigational stars"
 msgstr ""
