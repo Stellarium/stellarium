@@ -72,6 +72,7 @@ StelPluginInfo SupernovaeStelPluginInterface::getPluginInfo() const
 	info.authors = "Alexander Wolf";
 	info.contact = "alex.v.wolf@gmail.com";
 	info.description = N_("This plugin allows you to see some bright historical supernovae.");
+	info.version = SUPERNOVAE_PLUGIN_VERSION;
 	return info;
 }
 

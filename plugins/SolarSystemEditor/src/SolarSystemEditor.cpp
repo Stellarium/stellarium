@@ -58,6 +58,7 @@ StelPluginInfo SolarSystemEditorStelPluginInterface::getPluginInfo() const
 	info.authors = "Bogdan Marinov";
 	info.contact = "http://stellarium.org";
 	info.description = N_("An interface for adding asteroids and comets to Stellarium. It can download object lists from the Minor Planet Center's website and perform searches in its online database. Still a work in progress.");
+	info.version = SOLARSYSTEMEDITOR_VERSION;
 	return info;
 }
 

@@ -81,6 +81,7 @@ StelPluginInfo OcularsStelPluginInterface::getPluginInfo() const
 	info.authors = "Timothy Reaves, Bogdan Marinov";
 	info.contact = "treaves@silverfieldstech.com";
 	info.description = N_("Shows the sky as if looking through a telescope eyepiece. (Only magnification and field of view are simulated.) It can also show a sensor frame and a Telrad sight.");
+	info.version = OCULARS_PLUGIN_VERSION;
 	return info;
 }
 
