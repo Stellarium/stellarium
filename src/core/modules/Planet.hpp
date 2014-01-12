@@ -99,7 +99,7 @@ public:
 	       bool hasHalo,
 	       const QString &pType);
 
-	~Planet();
+	virtual ~Planet();
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods inherited from StelObject
@@ -137,7 +137,8 @@ public:
 	virtual void translateName(const StelTranslator &trans);
 
 	// Draw the Planet
-	void draw(StelCore* core, float maxMagLabels, const QFont& planetNameFont);
+	// GZ Made that virtual to allow comets having their own draw().
+	virtual void draw(StelCore* core, float maxMagLabels, const QFont& planetNameFont);
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods specific to Planet
@@ -147,7 +148,8 @@ public:
 	//! Get duration of sidereal day
 	double getSiderealDay(void) const {return re.period;}
 	//! Get duration of sidereal year
-	double getSiderealPeriod(void) const { return re.siderealPeriod; }
+	// GZ: made that virtual for Comets.
+	virtual double getSiderealPeriod(void) const { return re.siderealPeriod; }
 	//! Get duration of mean solar day
 	double getMeanSolarDay(void) const;
 
@@ -207,6 +209,7 @@ public:
 	static void setLabelColor(const Vec3f& lc) {labelColor = lc;}
 	static const Vec3f& getLabelColor(void) {return labelColor;}
 
+	// update displayed elements. @param deltaTime: ms (?)
 	void update(int deltaTime);
 
 	void setFlagHints(bool b){hintFader = b;}
@@ -227,7 +230,7 @@ public:
 	Vec3d orbit[ORBIT_SEGMENTS+1];   // store heliocentric coordinates for drawing the orbit
 	Vec3d orbitP[ORBIT_SEGMENTS+1];  // store local coordinate for orbit
 	double lastOrbitJD;
-	double deltaJD;
+	double deltaJD;                  // time difference between positional updates.
 	double deltaOrbitJD;
 	bool orbitCached;                // whether orbit calculations are cached for drawing orbit yet
 	bool closeOrbit;                 // whether to connect the beginning of the orbit line to
@@ -267,9 +270,9 @@ protected:
 					 // centered on the parent Planet
 	Vec3d screenPos;                 // Used to store temporarily the 2D position on screen
 	Vec3d previousScreenPos;         // The position of this planet in the previous frame.
-	Vec3f color;
+	Vec3f color;                     // exclusively used for drawing the planet halo
 
-	float albedo;                    // Planet albedo
+	float albedo;                    // Planet albedo. Used for magnitude computation (but formula dubious!)
 	Mat4d rotLocalToParent;
 	float axisRotation;              // Rotation angle of the Planet on it's axis
 	StelTextureSP texMap;            // Planet map texture
@@ -278,7 +281,7 @@ protected:
 	double distance;                 // Temporary variable used to store the distance to a given point
 					 // it is used for sorting while drawing
 	float sphereScale;               // Artificial scaling for better viewing
-	double lastJD;
+	double lastJD;                   // caches JD of last positional computation
 	// The callback for the calculation of the equatorial rect heliocentric position at time JD.
 	posFuncType coordFunc;
 	void* userDataPtr;
