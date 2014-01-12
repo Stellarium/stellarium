@@ -239,7 +239,7 @@ void AddOnTableView::slotRowChecked(int pRow, bool checked)
 			else
 				m_iSelectedAddOnsToRemove.insert(addon, selectedFilesToRemove);
 		}
-		else
+		else if (addon->getStatus() != AddOn::Restart)
 		{
 			m_iSelectedAddOnsToInstall.insert(addon, selectedFilesToInstall);
 		}
@@ -255,7 +255,7 @@ void AddOnTableView::slotRowChecked(int pRow, bool checked)
 			m_iSelectedAddOnsToInstall.remove(addon);
 			m_iSelectedAddOnsToRemove.remove(addon);
 		}
-		else
+		else if (addon->getStatus() != AddOn::Restart)
 		{
 			m_iSelectedAddOnsToInstall.remove(addon);
 		}
