@@ -53,7 +53,7 @@ StelPluginInfo NavStarsStelPluginInterface::getPluginInfo() const
 	info.displayedName = N_("Navigational Stars");
 	info.authors = "Alexander Wolf";
 	info.contact = "http://stellarium.org/";
-	info.description = N_("This plugin marks the navigational stars.");
+	info.description = N_("This plugin marks the 58 navigational stars of the 2102-D Rude Star Finder, also tabulated in the Nautical Almanac.");
 	info.version = NAVSTARS_PLUGIN_VERSION;
 	return info;
 }
@@ -206,7 +206,7 @@ void NavStars::update(double deltaTime)
 }
 
 // Set flag of displaying markers of the navigational stars
-void NavStars::setNavStarsMarks(bool b)
+void NavStars::setNavStarsMarks(const bool b)
 {
 	if (b == navStarsMarkerFader)
 		return;
@@ -233,7 +233,7 @@ bool NavStars::getNavStarsMarks() const
 	return navStarsMarkerFader;
 }
 
-void NavStars::starNamesChanged(bool b)
+void NavStars::starNamesChanged(const bool b)
 {
 	if (b && getNavStarsMarks()) {
 		starNamesState=true;

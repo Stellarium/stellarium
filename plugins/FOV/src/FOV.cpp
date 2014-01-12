@@ -40,7 +40,7 @@ StelPluginInfo FOVStelPluginInterface::getPluginInfo() const
 	info.displayedName = N_("Field of View");
 	info.authors = "Alexander Wolf";
 	info.contact = "http://stellarium.org";
-	info.description = N_("This plugin gives stepwise zooming like in <em>Cartes du Ciel</em> planetarium via keyboard shortcuts.");
+	info.description = N_("This plugin allows stepwise zooming via keyboard shortcuts like in the <em>Cartes du Ciel</em> planetarium program.");
 	info.version = FOV_VERSION;
 	return info;
 }
@@ -67,7 +67,7 @@ void FOV::init()
 
 	if (!conf->childGroups().contains("fov"))
 	{
-		qDebug() << "FOV::init no fov section exists in main config file - creating with defaults";
+		qDebug() << "FOV::init() no fov section exists in main config file - creating with defaults";
 		restoreDefaultConfigIni();
 	}
 
@@ -155,12 +155,12 @@ void FOV::saveSettingsToConfig(void)
 	conf->endGroup();
 }
 
-double FOV::getQuickFOV(int item)
+double FOV::getQuickFOV(const int item) const
 {
 	return FOVitem.at(item);
 }
 
-void FOV::setQuickFOV(double value, int item)
+void FOV::setQuickFOV(const double value, const int item)
 {
 	FOVitem[item] = value;
 }
