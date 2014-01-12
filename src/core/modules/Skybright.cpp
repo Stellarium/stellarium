@@ -39,7 +39,7 @@ Skybright::Skybright() : SN(1.f)
 
 // month : 1=Jan, 12=Dec
 // moonPhase in radian 0=Full Moon, PI/2=First Quadrant/Last Quadran, PI=No Moon
-void Skybright::setDate(int year, int month, float moonPhase)
+void Skybright::setDate(const int year, const int month, const float moonPhase)
 {
 	magMoon = -12.73f + 1.4896903f * std::fabs(moonPhase) + 0.04310727f * std::pow(moonPhase, 4.f);
 
@@ -52,7 +52,7 @@ void Skybright::setDate(int year, int month, float moonPhase)
 }
 
 
-void Skybright::setLocation(float latitude, float altitude, float temperature, float relativeHumidity)
+void Skybright::setLocation(const float latitude, const float altitude, const float temperature, const float relativeHumidity)
 {
 	float sign_latitude = (latitude>=0.f) * 2.f - 1.f;
 
@@ -67,7 +67,7 @@ void Skybright::setLocation(float latitude, float altitude, float temperature, f
 
 // Set the moon and sun zenith angular distance (cosin given)
 // and precompute what can be
-void Skybright::setSunMoon(float cosDistMoonZenith, float cosDistSunZenith)
+void Skybright::setSunMoon(const float cosDistMoonZenith, const float cosDistSunZenith)
 {
 	// Air mass for Moon
 	if (cosDistMoonZenith<0) airMassMoon = 40.f;
@@ -97,9 +97,9 @@ void Skybright::setSunMoon(float cosDistMoonZenith, float cosDistSunZenith)
 // Inputs : cosDistMoon = cos(angular distance between moon and the position)
 //			cosDistSun  = cos(angular distance between sun  and the position)
 //			cosDistZenith = cos(angular distance between zenith and the position)
-float Skybright::getLuminance(float cosDistMoon,
-                               float cosDistSun,
-                               float cosDistZenith) const
+float Skybright::getLuminance( float cosDistMoon,
+                               const float cosDistSun,
+                               const float cosDistZenith) const
 {
 	// Air mass
 	const float bKX = stelpow10f(-0.4f * K * (1.f / (cosDistZenith + 0.025f*StelUtils::fastExp(-11.f*cosDistZenith))));

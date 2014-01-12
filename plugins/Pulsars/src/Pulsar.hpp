@@ -95,7 +95,7 @@ private:
 	static bool distributionMode;
 	static Vec3f markerColor;
 
-	void draw(StelCore* core, StelPainter& painter);
+	void draw(StelCore* core, StelPainter *painter);
 
 	//! Variables for description of properties of pulsars
 	QString designation;	//! The designation of the pulsar (J2000 pulsar name)
