@@ -116,7 +116,7 @@ private slots:
 	void setDefaultViewOptions();
 
 	void populatePluginsList();
-	void pluginsSelectionChanged(const QString&);
+	void pluginsSelectionChanged(QListWidgetItem *item, QListWidgetItem *previousItem);
 	void pluginConfigureCurrentSelection();
 	void loadAtStartupChanged(int);
 

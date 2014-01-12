@@ -54,6 +54,7 @@ StelPluginInfo NavStarsStelPluginInterface::getPluginInfo() const
 	info.authors = "Alexander Wolf";
 	info.contact = "http://stellarium.org/";
 	info.description = N_("This plugin marks the navigational stars.");
+	info.version = NAVSTARS_PLUGIN_VERSION;
 	return info;
 }
 
