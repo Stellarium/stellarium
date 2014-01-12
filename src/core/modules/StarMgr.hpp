@@ -81,11 +81,13 @@ class StarMgr : public StelObjectModule
 {
 	Q_OBJECT
 	Q_PROPERTY(bool flagStarsDisplayed
-			   READ getFlagStars
-			   WRITE setFlagStars)
+		   READ getFlagStars
+		   WRITE setFlagStars
+		   NOTIFY starsDisplayedChanged)
 	Q_PROPERTY(bool flagLabelsDisplayed
-			   READ getFlagLabels
-			   WRITE setFlagLabels)
+		   READ getFlagLabels
+		   WRITE setFlagLabels
+		   NOTIFY starLabelsDisplayedChanged)
 
 public:
 	StarMgr(void);
@@ -251,6 +253,10 @@ private slots:
 	//! Loads common and scientific names of stars for a given sky culture.
 	//! @param skyCultureDir the name of the directory containing the sky culture to use.
 	void updateSkyCulture(const QString& skyCultureDir);
+
+signals:
+	void starLabelsDisplayedChanged(const bool displayed);
+	void starsDisplayedChanged(const bool displayed);
 
 private:
 
