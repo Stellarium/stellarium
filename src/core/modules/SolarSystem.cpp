@@ -122,7 +122,7 @@ void SolarSystem::init()
 
 	setSelected("");	// Fix a bug on macosX! Thanks Fumio!
 	setFlagMoonScale(conf->value("viewing/flag_moon_scaled", conf->value("viewing/flag_init_moon_scaled", "false").toBool()).toBool());  // name change
-	setMoonScale(conf->value("viewing/moon_scale", 5.0).toFloat());
+	setMoonScale(conf->value("viewing/moon_scale", 4.0).toFloat());
 	setFlagPlanets(conf->value("astro/flag_planets").toBool());
 	setFlagHints(conf->value("astro/flag_planets_hints").toBool());
 	setFlagLabels(conf->value("astro/flag_planets_labels", true).toBool());
@@ -1397,7 +1397,7 @@ void SolarSystem::setFlagMoonScale(bool b)
 }
 
 // Set/Get Moon display scaling factor
-void SolarSystem::setMoonScale(float f)
+void SolarSystem::setMoonScale(double f)
 {
 	moonScale = f;
 	if (flagMoonScale)
