@@ -43,7 +43,9 @@ AddOnTableModel::AddOnTableModel(AddOn::Category category, QHash<AddOn::Type, St
 		}
 		case AddOn::LANGUAGEPACK:
 		{
-			m_addons = addons.value(AddOn::Language_Pack);
+			QMap<qint64, AddOn*> stellarium = addons.value(AddOn::Language_Stellarium);
+			QMap<qint64, AddOn*> skyculture = addons.value(AddOn::Language_SkyCulture);
+			m_addons = stellarium.unite(skyculture);
 			m_iColumns << Title << Type << LastUpdate;
 			break;
 		}

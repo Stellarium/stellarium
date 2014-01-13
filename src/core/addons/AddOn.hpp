@@ -35,7 +35,8 @@ public:
 	enum Type
 	{
 		Landscape,
-		Language_Pack,
+		Language_Stellarium,
+		Language_SkyCulture,
 		Plugin_Catalog,
 		Script,
 		Sky_Culture,

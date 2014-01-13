@@ -111,9 +111,13 @@ AddOn::Type AddOn::fromStringToType(QString string)
 	{
 		return Landscape;
 	}
-	else if (string == "language_pack")
+	else if (string == "language_stellarium")
 	{
-		return Language_Pack;
+		return Language_Stellarium;
+	}
+	else if (string == "language_skyculture")
+	{
+		return Language_SkyCulture;
 	}
 	else if (string == "plugin_catalog")
 	{
@@ -146,7 +150,8 @@ AddOn::Category AddOn::getCategoryFromType(Type type)
 	switch (type) {
 		case Landscape:
 			return LANDSCAPE;
-		case Language_Pack:
+		case Language_Stellarium:
+		case Language_SkyCulture:
 			return LANGUAGEPACK;
 		case Plugin_Catalog:
 			return CATALOG;
