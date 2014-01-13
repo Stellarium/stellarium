@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-12 23:27+0700\n"
+"POT-Creation-Date: 2014-01-13 09:39+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -6917,7 +6917,6 @@ msgstr ""
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:137
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:134
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:150
 #, qt-format
 msgid ""
@@ -7012,7 +7011,7 @@ msgstr ""
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:117
 #, qt-format
-msgid "All those novae are brighter %1 at peak of brightness."
+msgid "All those novae are brighter than %1 at peak of brightness."
 msgstr ""
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:119
@@ -7089,9 +7088,9 @@ msgstr ""
 
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:119
 msgid ""
-"The Quasars plugin provides visualization of some quasars brighter than 16 "
-"visual magnitude. A catalogue of quasars compiled from \"Quasars and Active "
-"Galactic Nuclei\" (13th Ed.)"
+"The Quasars plugin provides visualization of some quasars brighter than "
+"visual magnitude 16. The catalogue of quasars was compiled from \"Quasars "
+"and Active Galactic Nuclei\" (13th Ed.)"
 msgstr ""
 
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:121
@@ -7100,7 +7099,15 @@ msgstr ""
 
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:123
 #, qt-format
-msgid "Current catalog contains info about %1 quasars."
+msgid "The current catalog contains info about %1 quasars."
+msgstr ""
+
+#. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:134
+#, qt-format
+msgid ""
+"If you want to read full information about this plugin, its history and "
+"format of the catalog, you can %1get info here%2."
 msgstr ""
 
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:216
@@ -7478,24 +7485,24 @@ msgstr ""
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:126
 #, qt-format
 msgid ""
-"List of potential habitable exoplanets and data about them were taken from "
-"\"%1The Habitable Exoplanets Catalog%3\" by %2Planetary Habitability "
+"The list of potential habitable exoplanets and data about them were taken "
+"from \"%1The Habitable Exoplanets Catalog%3\" by %2Planetary Habitability "
 "Laboratory%3."
 msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:128
 #, qt-format
 msgid ""
-"Current catalog contains info about %1 planetary systems, which altogether "
-"have %2 exoplanets."
+"The current catalog contains info about %1 planetary systems, which "
+"altogether have %2 exoplanets."
 msgstr ""
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:139
 #, qt-format
 msgid ""
-"If you want read full information about plugin, his history and format of "
-"catalog you can %1get info here%2."
+"If you want to read full information about the plugin, its history and "
+"format of the catalog you can %1get info here%2."
 msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:152
@@ -8088,7 +8095,7 @@ msgstr ""
 
 #: plugins/FOV/src/FOV.cpp:83
 #, qt-format
-msgid "Set FOV in %1%2"
+msgid "Set FOV to %1%2"
 msgstr ""
 
 #: plugins/FOV/src/gui/FOVWindow.cpp:79
@@ -8097,10 +8104,11 @@ msgstr ""
 
 #: plugins/FOV/src/gui/FOVWindow.cpp:88
 msgid ""
-"By default Stellarium use smooth zooming via mouse wheel or keyboard "
-"shortcuts. Some users want stepwise zooming like in <em>{Cartes du Ciel}</"
-"em> planetarium and this plugin give this feature. You can edit values and "
-"use keyboard for quick set FOV. All values in degrees."
+"By default Stellarium uses smooth zooming via mouse wheel or keyboard "
+"shortcuts. Some users want stepwise zooming to fixed values for field of "
+"view like in <em>{Cartes du Ciel}</em> planetarium, and this plugin provides "
+"this feature. You can edit values and use the keyboard for quick-setting of "
+"FOV. All values in degrees."
 msgstr ""
 
 #: plugins/NavStars/src/NavStars.cpp:53 plugins/NavStars/src/NavStars.cpp:138
