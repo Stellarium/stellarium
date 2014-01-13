@@ -495,6 +495,7 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	conf->setValue("astro/flag_planets_orbits", ssmgr->getFlagOrbits());
 	conf->setValue("astro/flag_light_travel_time", ssmgr->getFlagLightTravelTime());
 	conf->setValue("viewing/flag_moon_scaled", ssmgr->getFlagMoonScale());
+	conf->setValue("viewing/moon_scale", ssmgr->getMoonScale());
 	conf->setValue("astro/meteor_rate", mmgr->getZHR());
 	conf->setValue("astro/milky_way_intensity", GETSTELMODULE(MilkyWay)->getIntensity());
 

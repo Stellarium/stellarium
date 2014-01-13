@@ -170,6 +170,8 @@ void ViewDialog::createDialogContent()
 
 	ui->planetScaleMoonCheckBox->setChecked(ssmgr->getFlagMoonScale());
 	connect(ui->planetScaleMoonCheckBox, SIGNAL(toggled(bool)), ssmgr, SLOT(setFlagMoonScale(bool)));
+	ui->moonScaleFactor->setValue(ssmgr->getMoonScale());
+	connect(ui->moonScaleFactor, SIGNAL(valueChanged(double)), ssmgr, SLOT(setMoonScale(double)));
 
 	ui->planetOrbitCheckBox->setChecked(ssmgr->getFlagOrbits());
 	connect(ui->planetOrbitCheckBox, SIGNAL(toggled(bool)), ssmgr, SLOT(setFlagOrbits(bool)));
