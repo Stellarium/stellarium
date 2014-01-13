@@ -154,13 +154,12 @@ AddOn::Category AddOn::getCategoryFromType(Type type)
 		case Language_SkyCulture:
 			return LANGUAGEPACK;
 		case Plugin_Catalog:
+		case Star_Catalog:
 			return CATALOG;
 		case Script:
 			return SCRIPT;
 		case Sky_Culture:
 			return STARLORE;
-		case Star_Catalog:
-			return CATALOG;
 		case Texture:
 			return TEXTURE;
 		default:
