@@ -199,7 +199,7 @@ public slots:
 	bool getFlagMoonScale(void) const {return flagMoonScale;}
 
 	//! Set the display scaling factor for Earth's moon.
-	void setMoonScale(float f);
+	void setMoonScale(double f);
 	//! Get the display scaling factor for Earth's oon.
 	float getMoonScale(void) const {return moonScale;}
 
