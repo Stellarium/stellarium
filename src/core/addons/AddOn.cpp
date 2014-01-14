@@ -197,6 +197,29 @@ QString AddOn::getStatusString() {
 	}
 }
 
+QString AddOn::getTypeString() {
+	switch (m_eType) {
+		case Landscape:
+			return "Landscape";
+		case Language_Stellarium:
+			return "Stellarium";
+		case Language_SkyCulture:
+			return "Sky Culture";
+		case Plugin_Catalog:
+			return "Plugin";
+		case Star_Catalog:
+			return "Star";
+		case Script:
+			return "Script";
+		case Sky_Culture:
+			return "Sky Culture";
+		case Texture:
+			return "Texture";
+		default:
+			return "Invalid";
+	}
+}
+
 QString AddOn::getDownloadFilepath()
 {
 	QString categoryDir = StelApp::getInstance().getStelAddOnMgr().getDirectory(m_eCategory);

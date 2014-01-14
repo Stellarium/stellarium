@@ -86,6 +86,7 @@ public:
 	quint64 getAddOnId() { return m_iAddOnId; }
 	QString getTitle() { return m_sTitle; }
 	Type getType() { return m_eType; }
+	QString getTypeString();
 	Category getCategory() { return m_eCategory; }
 	QString getVersion() { return m_sVersion; }
 	QList<Authors> getAuthors() { return m_authors; }
