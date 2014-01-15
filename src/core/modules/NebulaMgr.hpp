@@ -108,6 +108,9 @@ public:
 	virtual QStringList listAllObjects(bool inEnglish) const { Q_UNUSED(inEnglish) return QStringList(); }
 	virtual QString getName() const { return "Nebulae"; }
 
+	//! Compute the maximum magntiude for which hints will be displayed.
+	float computeMaxMagHint(const class StelSkyDrawer* skyDrawer) const;
+	
 	///////////////////////////////////////////////////////////////////////////
 	// Properties setters and getters
 public slots:
@@ -168,6 +171,7 @@ private slots:
 	
 
 private:
+	
 	//! Search for a nebula object by name. e.g. M83, NGC 1123, IC 1234.
 	NebulaP search(const QString& name);
 

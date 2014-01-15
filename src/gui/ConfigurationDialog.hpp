@@ -80,7 +80,8 @@ private slots:
 	//! Called when any of the boxes has been clicked. Sets the
 	//! "selected info" mode to "Custom".
 	void setSelectedInfoFromCheckBoxes();
-	
+
+	void updateCurrentLanguage();
 	void selectLanguage(const QString& languageCode);
 	void setStartupTimeMode();
 	//! Show/bring to foreground the shortcut editor window.
@@ -115,7 +116,7 @@ private slots:
 	void setDefaultViewOptions();
 
 	void populatePluginsList();
-	void pluginsSelectionChanged(const QString&);
+	void pluginsSelectionChanged(QListWidgetItem *item, QListWidgetItem *previousItem);
 	void pluginConfigureCurrentSelection();
 	void loadAtStartupChanged(int);
 

@@ -378,7 +378,8 @@ void StelMovementMgr::handleMouseClicks(QMouseEvent* event)
 					{
 						setFlagTracking(false);
 					}
-					event->accept();
+					//GZ: You must comment out this line for testing Landscape transparency debug prints.
+					//event->accept();
 					return;
 				}
 			}
@@ -849,7 +850,7 @@ void StelMovementMgr::dragView(int x1, int y1, int x2, int y2)
 		v1[2]=0; v1.normalize();
 		v2[2]=0; v2.normalize();
 		double angle = (v2^v1)[2];
-		double deltaDay = angle/(2.*M_PI)*core->getLocalSideralDayLength();
+		double deltaDay = angle/(2.*M_PI)*core->getLocalSiderealDayLength();
 		core->setJDay(core->getJDay()+deltaDay);
 		addTimeDragPoint(x2, y2);
 	}

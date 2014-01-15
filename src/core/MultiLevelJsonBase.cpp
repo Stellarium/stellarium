@@ -36,6 +36,7 @@
 #include <QNetworkRequest>
 #include <QNetworkReply>
 #include <stdexcept>
+#include <stdio.h>
 
 // #include <QNetworkDiskCache>
 
