@@ -53,7 +53,7 @@ AddOn::AddOn(const qint64 addOnId, const QVariantMap& map)
 	m_sInstalledSize = map.value("installed-size").toString();
 	m_sChecksum = map.value("checksum").toString();
 	m_sThumbnail = map.value("thumbnail").toString();
-	m_dateTime = QDateTime::fromString(QString::number(m_iAddOnId), "yyyymmddhhmmss");
+	m_dateTime = QDateTime::fromString(QString::number(m_iAddOnId), "yyyyMMddhhmmss");
 
 	// early returns if the mandatory fields are not present
 	if (m_sInstallId.isEmpty() || m_sTitle.isEmpty()
