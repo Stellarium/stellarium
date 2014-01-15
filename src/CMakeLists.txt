@@ -220,7 +220,9 @@ SET(stellarium_lib_SRCS
 	CLIProcessor.hpp
 	CLIProcessor.cpp
 	translations.h
+	config.h
 )
+
 IF(ENABLE_SCRIPTING)
 	SET(stellarium_lib_SRCS ${stellarium_lib_SRCS}
 		scripting/StelScriptMgr.cpp
@@ -237,81 +239,14 @@ ENDIF()
 
 IF(WIN32)
 	SET(stellarium_lib_SRCS ${stellarium_lib_SRCS}
-		core/external/kdewin32/basetyps.h
-		core/external/kdewin32/byteswap.h
-		core/external/kdewin32/comcat.h
-		core/external/kdewin32/dirent.h
-		core/external/kdewin32/docobj.h
-		core/external/kdewin32/errno.h
-		core/external/kdewin32/fcntl.h
 		core/external/kdewin32/grp.h
-		core/external/kdewin32/ifaddrs.h
-		core/external/kdewin32/langinfo.h
-		core/external/kdewin32/mshtml.h
-		core/external/kdewin32/netdb.h
-		core/external/kdewin32/nl_types.h
-		core/external/kdewin32/oaidl.h
-		core/external/kdewin32/objfwd.h
-		core/external/kdewin32/objidl.h
-		core/external/kdewin32/ocidl.h
-		core/external/kdewin32/olectl.h
-		core/external/kdewin32/oleidl.h
 		core/external/kdewin32/pwd.h
-		core/external/kdewin32/signal.h
-		core/external/kdewin32/stdio.h
-		core/external/kdewin32/stdlib.h
-		core/external/kdewin32/string.h
-		core/external/kdewin32/strings.h
-		core/external/kdewin32/syslog.h
-		core/external/kdewin32/time.h
 		core/external/kdewin32/unistd.h
-		core/external/kdewin32/unknwn.h
-		core/external/kdewin32/wchar.h
-		core/external/kdewin32/arpa/inet.h
-		core/external/kdewin32/asm/byteorder.h
-		core/external/kdewin32/net/if.h
-		core/external/kdewin32/netinet/in.h
-		core/external/kdewin32/netinet/tcp.h
-		core/external/kdewin32/sys/ioctl.h
-		core/external/kdewin32/sys/mman.h
-		core/external/kdewin32/sys/resource.h
-		core/external/kdewin32/sys/select.h
-		core/external/kdewin32/sys/signal.h
-		core/external/kdewin32/sys/socket.h
-		core/external/kdewin32/sys/stat.h
-		core/external/kdewin32/sys/time.h
-		core/external/kdewin32/sys/times.h
-		core/external/kdewin32/sys/types.h
-		core/external/kdewin32/sys/uio.h
-		core/external/kdewin32/sys/un.h
-		core/external/kdewin32/sys/unistd.h
-		core/external/kdewin32/sys/utsname.h
-		core/external/kdewin32/sys/wait.h
-
-		core/external/kdewin32/bind/inet_ntop.c
-		core/external/kdewin32/bind/inet_pton.c
-		core/external/kdewin32/dirent.c
-		core/external/kdewin32/errno.c
-		core/external/kdewin32/fsync.c
-		core/external/kdewin32/getenv.c
 		core/external/kdewin32/grp.c
-		core/external/kdewin32/inet.c
-		core/external/kdewin32/mmap.c
-		core/external/kdewin32/nl_langinfo.c
-		core/external/kdewin32/net.c
 		core/external/kdewin32/pwd.c
-		core/external/kdewin32/realpath.c
-		core/external/kdewin32/resource.c
-		core/external/kdewin32/signal.c
-		core/external/kdewin32/stdlib.c
-		core/external/kdewin32/string.c
-		core/external/kdewin32/strptime.c
-		core/external/kdewin32/syslog.c
-		core/external/kdewin32/time.c
-		core/external/kdewin32/uname.c
 		core/external/kdewin32/unistd.c
 	)
-ENDIF(WIN32)
+ENDIF()
 
 SET(stellarium_exe_SRCS main.cpp)
 
@@ -323,7 +258,7 @@ QT5_ADD_RESOURCES(stellarium_RES_CXX ${stellarium_RES})
 #############################################################################################
 ############################# Standard GUI plugin compilation ###############################
 #############################################################################################
-IF (GUI_MODE STREQUAL "Standard")
+IF(GUI_MODE STREQUAL "Standard")
 	SET(stellarium_gui_SRCS
 		gui/StelGui.hpp
 		gui/StelGui.cpp
@@ -385,8 +320,8 @@ IF (GUI_MODE STREQUAL "Standard")
 			gui/StelScriptSyntaxHighlighter.cpp)
 		SET(stellarium_UIS ${stellarium_UIS}
 			gui/scriptConsole.ui)
-            ENDIF(ENABLE_SCRIPT_CONSOLE)
-        ENDIF(ENABLE_SCRIPTING)
+            ENDIF()
+        ENDIF()
 
 	QT5_WRAP_UI(stellarium_UIS_H ${stellarium_UIS})
 
@@ -401,7 +336,7 @@ IF (GUI_MODE STREQUAL "Standard")
 	TARGET_LINK_LIBRARIES(StelGuiLib ${StelMain} ${extLinkerOption})
 	QT5_USE_MODULES(StelGuiLib Core Gui Widgets Network OpenGL Script Declarative)
 	SET_TARGET_PROPERTIES(StelGuiLib PROPERTIES COMPILE_FLAGS "-DQT_STATICPLUGIN")
-	SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} ${CMAKE_BINARY_DIR}/src/${CMAKE_CFG_INTDIR}/libStelGuiLib.a)
+        SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} StelGuiLib)
 	ADD_DEPENDENCIES(AllStaticPlugins StelGuiLib)
 ENDIF()
 
@@ -415,7 +350,7 @@ IF (GUI_MODE STREQUAL "None")
 	ADD_LIBRARY(StelNoGuiLib STATIC ${stellarium_nogui_SRCS})
 	TARGET_LINK_LIBRARIES(StelNoGuiLib ${extLinkerOption})
 	SET_TARGET_PROPERTIES(StelNoGuiLib PROPERTIES COMPILE_FLAGS "-DQT_STATICPLUGIN")
-	SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} ${CMAKE_BINARY_DIR}/src/libStelNoGuiLib.a)
+        SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} StelNoGuiLib)
 	ADD_DEPENDENCIES(AllStaticPlugins StelNoGuiLib)
 ENDIF()
 
@@ -439,90 +374,19 @@ ENDIF()
 
 ### demo plugins ###
 
-IF (USE_PLUGIN_HELLOSTELMODULE)
-        SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} "${CMAKE_BINARY_DIR}/plugins/HelloStelModule/src/${CMAKE_CFG_INTDIR}/libHelloStelModule.a")
-        ADD_DEFINITIONS(-DUSE_STATIC_PLUGIN_HELLOSTELMODULE)
+FOREACH(NAME ${STELLARIUM_PLUGINS})
+	STRING(TOUPPER ${NAME} NAME_UP)
+	IF(USE_PLUGIN_${NAME_UP})
+		SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} ${NAME}-static)
+		ADD_DEFINITIONS(-DUSE_STATIC_PLUGIN_${NAME_UP})
+	ENDIF()
+ENDFOREACH()
+
+IF(USE_PLUGIN_LOGBOOK)
+	SET(QT_USE_QTSQL TRUE)
 ENDIF()
 
-IF (USE_PLUGIN_SIMPLEDRAWLINE)
-        SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} "${CMAKE_BINARY_DIR}/plugins/SimpleDrawLine/src/${CMAKE_CFG_INTDIR}/libSimpleDrawLine.a")
-        ADD_DEFINITIONS(-DUSE_STATIC_PLUGIN_SIMPLEDRAWLINE)
-ENDIF()
-	
-### work plugins ###
-
-IF (USE_PLUGIN_ANGLEMEASURE)
-        SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} "${CMAKE_BINARY_DIR}/plugins/AngleMeasure/src/${CMAKE_CFG_INTDIR}/libAngleMeasure.a")
-        ADD_DEFINITIONS(-DUSE_STATIC_PLUGIN_ANGLEMEASURE)
-ENDIF()
-
-IF (USE_PLUGIN_COMPASSMARKS)
-        SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} "${CMAKE_BINARY_DIR}/plugins/CompassMarks/src/${CMAKE_CFG_INTDIR}/libCompassMarks.a")
-        ADD_DEFINITIONS(-DUSE_STATIC_PLUGIN_COMPASSMARKS)
-ENDIF()
-
-IF (USE_PLUGIN_EXOPLANETS)
-        SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} "${CMAKE_BINARY_DIR}/plugins/Exoplanets/src/${CMAKE_CFG_INTDIR}/libExoplanets.a")
-        ADD_DEFINITIONS(-DUSE_STATIC_PLUGIN_EXOPLANETS)
-ENDIF()
-
-IF (USE_PLUGIN_FOV)
-        SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} "${CMAKE_BINARY_DIR}/plugins/FOV/src/${CMAKE_CFG_INTDIR}/libFOV.a")
-        ADD_DEFINITIONS(-DUSE_STATIC_PLUGIN_FOV)
-ENDIF()
-
-IF (USE_PLUGIN_LOGBOOK)
-        SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} "${CMAKE_BINARY_DIR}/plugins/LogBook/src/${CMAKE_CFG_INTDIR}/libLogBook.a")
-        ADD_DEFINITIONS(-DUSE_STATIC_PLUGIN_LOGBOOK)
-        SET(QT_USE_QTSQL TRUE)
-ENDIF()
-
-IF (USE_PLUGIN_NAVSTARS)
-        SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} "${CMAKE_BINARY_DIR}/plugins/NavStars/src/${CMAKE_CFG_INTDIR}/libNavStars.a")
-        ADD_DEFINITIONS(-DUSE_STATIC_PLUGIN_NAVSTARS)
-ENDIF()
-
-IF (USE_PLUGIN_NOVAE)
-        SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} "${CMAKE_BINARY_DIR}/plugins/Novae/src/${CMAKE_CFG_INTDIR}/libNovae.a")
-        ADD_DEFINITIONS(-DUSE_STATIC_PLUGIN_NOVAE)
-ENDIF()
-
-IF (USE_PLUGIN_OBSERVABILITY)
-        SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} "${CMAKE_BINARY_DIR}/plugins/Observability/src/${CMAKE_CFG_INTDIR}/libObservability.a")
-        ADD_DEFINITIONS(-DUSE_STATIC_PLUGIN_OBSERVABILITY)
-ENDIF()
-
-IF (USE_PLUGIN_OCULARS)
-        SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} "${CMAKE_BINARY_DIR}/plugins/Oculars/src/${CMAKE_CFG_INTDIR}/libOculars.a")
-        ADD_DEFINITIONS(-DUSE_STATIC_PLUGIN_OCULARS)
-ENDIF()
-
-IF (USE_PLUGIN_PULSARS)
-        SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} "${CMAKE_BINARY_DIR}/plugins/Pulsars/src/${CMAKE_CFG_INTDIR}/libPulsars.a")
-        ADD_DEFINITIONS(-DUSE_STATIC_PLUGIN_PULSARS)
-ENDIF()
-
-IF (USE_PLUGIN_QUASARS)
-        SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} "${CMAKE_BINARY_DIR}/plugins/Quasars/src/${CMAKE_CFG_INTDIR}/libQuasars.a")
-        ADD_DEFINITIONS(-DUSE_STATIC_PLUGIN_QUASARS)
-ENDIF()
-
-IF (USE_PLUGIN_SATELLITES)
-        SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} "${CMAKE_BINARY_DIR}/plugins/Satellites/src/${CMAKE_CFG_INTDIR}/libSatellites.a")
-        ADD_DEFINITIONS(-DUSE_STATIC_PLUGIN_SATELLITES)
-ENDIF()
-
-IF (USE_PLUGIN_SOLARSYSTEMEDITOR)
-        SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} "${CMAKE_BINARY_DIR}/plugins/SolarSystemEditor/src/${CMAKE_CFG_INTDIR}/libSolarSystemEditor.a")
-        ADD_DEFINITIONS(-DUSE_STATIC_PLUGIN_SOLARSYSTEMEDITOR)
-ENDIF()
-
-IF (USE_PLUGIN_SUPERNOVAE)
-        SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} "${CMAKE_BINARY_DIR}/plugins/Supernovae/src/${CMAKE_CFG_INTDIR}/libSupernovae.a")
-        ADD_DEFINITIONS(-DUSE_STATIC_PLUGIN_SUPERNOVAE)
-ENDIF()
-
-IF (USE_PLUGIN_SVMT)
+IF(USE_PLUGIN_SVMT)
         SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} ${CMAKE_BINARY_DIR}/plugins/svmt/src/${CMAKE_CFG_INTDIR}/libSVMT.a)
         IF(APPLE)
                 SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} "-framework QtDeclarative")
@@ -532,35 +396,19 @@ IF (USE_PLUGIN_SVMT)
         ADD_DEFINITIONS(-DUSE_STATIC_PLUGIN_SVMT)
 ENDIF()
 
-IF (USE_PLUGIN_TELESCOPECONTROL)
-        SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} "${CMAKE_BINARY_DIR}/plugins/TelescopeControl/src/${CMAKE_CFG_INTDIR}/libTelescopeControl.a")
-        IF(WIN32)
-                SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} libwsock32.a)
-        ENDIF(WIN32)
-        ADD_DEFINITIONS(-DUSE_STATIC_PLUGIN_TELESCOPECONTROL)
+IF(USE_PLUGIN_TELESCOPECONTROL)
+	IF(WIN32)
+		SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} libwsock32.a)
+	ENDIF()
 ENDIF()
 
-IF (USE_PLUGIN_TEXTUSERINTERFACE)
-        SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} "${CMAKE_BINARY_DIR}/plugins/TextUserInterface/src/${CMAKE_CFG_INTDIR}/libTextUserInterface.a")
-        ADD_DEFINITIONS(-DUSE_STATIC_PLUGIN_TEXTUSERINTERFACE)
-ENDIF()
-
-IF (USE_PLUGIN_TIMEZONECONFIGURATION)
-        SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} "${CMAKE_BINARY_DIR}/plugins/TimeZoneConfiguration/src/${CMAKE_CFG_INTDIR}/libTimeZoneConfiguration.a")
-        ADD_DEFINITIONS(-DUSE_STATIC_PLUGIN_TIMEZONECONFIGURATION)
-ENDIF()
-
-IF (USE_PLUGIN_VIRGO)
-        SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} ${CMAKE_BINARY_DIR}/plugins/VirGO/src/${CMAKE_CFG_INTDIR}/libVirGO.a ${CFITSIO_LIBRARIES})
-        ADD_DEFINITIONS(-DUSE_STATIC_PLUGIN_VIRGO)
-ENDIF()
 
 #############################################################################################
 ################################ Build main program #########################################
 #############################################################################################
 
 SET(extLinkerOption ${OPENGL_LIBRARIES} ${ZLIB_LIBRARIES})
-IF(WIN32)
+IF(WIN32 AND NOT MSVC)
 	SET(extLinkerOption ${extLinkerOption} libwinmm.a -lws2_32)
 ENDIF()
 
@@ -570,8 +418,8 @@ IF(WIN32 AND ENABLE_WINDOWS_EXE_ICON)
                        COMMAND ${RC_COMPILER_PATH} ${CMAKE_SOURCE_DIR}/data/stellarium.rc ${CMAKE_BINARY_DIR}/stellarium-rc.o
                        WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/data)
     SET(stellarium_exe_SRCS ${stellarium_exe_SRCS} ${CMAKE_BINARY_DIR}/stellarium-rc.o)
-  ENDIF(RC_COMPILER_PATH)
-ENDIF(WIN32 AND ENABLE_WINDOWS_EXE_ICON)
+  ENDIF()
+ENDIF()
 
 IF(GENERATE_STELMAINLIB)
  ADD_LIBRARY(stelMain SHARED ${stellarium_lib_SRCS} ${stellarium_RES_CXX})
