@@ -40,7 +40,7 @@ public:
 	QString name;
 	//! English country name or empty string
 	QString country;
-	//! State/region name (usefull if 2 locations of the same country have the same name)
+	//! State/region name (useful if 2 locations of the same country have the same name)
 	QString state;
 	//! English planet name
 	QString planetName;

@@ -17,6 +17,9 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
+#ifndef _STELACTIONMGR_HPP_
+#define _STELACTIONMGR_HPP_
+
 #include <QObject>
 #include <QKeySequence>
 #include <QList>
@@ -131,3 +134,5 @@ private:
 	bool actionsEnabled;
 	QList<int> keySequence;
 };
+
+#endif // _STELACTIONMGR_HPP_

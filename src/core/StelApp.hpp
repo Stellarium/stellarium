@@ -59,7 +59,7 @@ class StelProgressController;
 class StelApp : public QObject
 {
 	Q_OBJECT
-	Q_PROPERTY(bool nightMode READ getVisionModeNight WRITE setVisionModeNight)
+	Q_PROPERTY(bool nightMode READ getVisionModeNight WRITE setVisionModeNight NOTIFY visionNightModeChanged)
 
 public:
 	friend class StelAppGraphicsWidget;
@@ -140,7 +140,7 @@ public:
 	QSettings* getSettings() {return confSettings;}
 
 	//! Return the currently used style
-	QString getCurrentStelStyle() {return flagNightVision ? "night_color" : "color";}
+	QString getCurrentStelStyle() {return "color";}
 
 	//! Update all object according to the deltaTime in seconds.
 	void update(double deltaTime);
@@ -212,6 +212,7 @@ public slots:
 	void reportFileDownloadFinished(QNetworkReply* reply);
 	
 signals:
+	void visionNightModeChanged(bool);
 	void colorSchemeChanged(const QString&);
 	void languageChanged();
 	void skyCultureChanged(const QString&);

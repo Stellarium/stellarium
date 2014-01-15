@@ -11,11 +11,14 @@ src/core/modules/MinorPlanet.cpp
 src/core/modules/Comet.cpp
 src/core/modules/SolarSystem.cpp
 src/core/modules/StarWrapper.cpp
+src/core/StelApp.cpp
 src/core/StelObserver.cpp
 src/core/StelCore.cpp
 src/core/StelProjector.cpp
 src/core/StelProjectorClasses.cpp
 src/core/StelObject.cpp
+src/core/StelSkyLayerMgr.cpp
+src/core/StelMovementMgr.cpp
 src/core/SimbadSearcher.cpp
 src/gui/ConfigurationDialog.cpp
 src/gui/HelpDialog.cpp
@@ -29,6 +32,7 @@ src/gui/SearchDialog.cpp
 src/gui/ShortcutsDialog.cpp
 src/gui/CustomDeltaTEquationDialog.cpp
 src/main.cpp
+src/StelMainView.cpp
 
 # Translations of strings not contained in the source code
 src/translations.h
@@ -103,3 +107,7 @@ plugins/Exoplanets/src/ui_exoplanetsDialog.h
 plugins/Observability/src/Observability.cpp
 plugins/Observability/src/gui/ObservabilityDialog.cpp
 plugins/Observability/src/ui_ObservabilityDialog.h
+plugins/FOV/src/FOV.cpp
+plugins/FOV/src/gui/FOVWindow.cpp
+plugins/FOV/src/ui_fovWindow.h
+plugins/NavStars/src/NavStars.cpp

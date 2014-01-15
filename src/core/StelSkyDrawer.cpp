@@ -83,9 +83,9 @@ StelSkyDrawer::StelSkyDrawer(StelCore* acore) : core(acore)
 
 	bool ok=true;
 
-	setBortleScale(conf->value("stars/init_bortle_scale",2).toInt(&ok));
+	setBortleScaleIndex(conf->value("stars/init_bortle_scale",2).toInt(&ok));
 	if (!ok)
-		setBortleScale(2);
+		setBortleScaleIndex(2);
 
 	setRelativeStarScale(conf->value("stars/relative_scale",1.0).toFloat(&ok));
 	if (!ok)
@@ -182,11 +182,7 @@ void StelSkyDrawer::init()
 	starShaderProgram = new QOpenGLShaderProgram(QOpenGLContext::currentContext());
 	starShaderProgram->addShader(&vshader);
 	starShaderProgram->addShader(&fshader);
-	starShaderProgram->link();
-	if (!starShaderProgram->log().isEmpty()) {
-	  qWarning() << "StelSkyDrawer::init(): Warnings while linking starShaderProgram: " << starShaderProgram->log();
-	}
-
+	StelPainter::linkProg(starShaderProgram, "starShader");
 	starShaderVars.projectionMatrix = starShaderProgram->uniformLocation("projectionMatrix");
 	starShaderVars.texCoord = starShaderProgram->attributeLocation("texCoord");
 	starShaderVars.pos = starShaderProgram->attributeLocation("pos");
@@ -442,21 +438,14 @@ bool StelSkyDrawer::drawPointSource(StelPainter* sPainter, const Vec3f& v, const
 		sPainter->enableTexture2d(true);
 		glBlendFunc(GL_ONE, GL_ONE);
 		glEnable(GL_BLEND);				
-		if (StelApp::getInstance().getVisionModeNight())
-			sPainter->setColor(color[0]*cmag, 0.0, 0.0);
-		else
-			sPainter->setColor(color[0]*cmag, color[1]*cmag, color[2]*cmag);
-
-		sPainter->drawSprite2dMode(win[0], win[1], rmag);
+		sPainter->setColor(color[0]*cmag, color[1]*cmag, color[2]*cmag);
+		sPainter->drawSprite2dModeNoDeviceScale(win[0], win[1], rmag);
 	}
 
 	unsigned char starColor[3] = {0, 0, 0};
 	starColor[0] = (unsigned char)std::min((int)(color[0]*tw*255+0.5f), 255);
-	if (!StelApp::getInstance().getVisionModeNight())
-	{
-		starColor[1] = (unsigned char)std::min((int)(color[1]*tw*255+0.5f), 255);
-		starColor[2] = (unsigned char)std::min((int)(color[2]*tw*255+0.5f), 255);
-	}
+	starColor[1] = (unsigned char)std::min((int)(color[1]*tw*255+0.5f), 255);
+	starColor[2] = (unsigned char)std::min((int)(color[2]*tw*255+0.5f), 255);
 	
 	// Store the drawing instructions in the vertex arrays
 	StarVertex* vx = &(vertexArray[nbPointSources*6]);
@@ -500,12 +489,8 @@ void StelSkyDrawer::postDrawSky3dModel(StelPainter* painter, const Vec3f& v, flo
 			cmag = qMax(0.f, 1.f-(pixRadius*3.f+100-rmag)/100);
 		Vec3f win;
 		painter->getProjector()->project(v, win);
-		Vec3f c = color;
-		if (StelApp::getInstance().getVisionModeNight())
-			c = StelUtils::getNightColor(c);
-
-		painter->setColor(c[0]*cmag, c[1]*cmag, c[2]*cmag);
-		painter->drawSprite2dMode(win[0], win[1], rmag);
+		painter->setColor(color[0]*cmag, color[1]*cmag, color[2]*cmag);
+		painter->drawSprite2dModeNoDeviceScale(win[0], win[1], rmag);
 		noStarHalo = true;
 	}
 
@@ -636,19 +621,19 @@ void StelSkyDrawer::preDraw()
 }
 
 
-// Set the parameters so that the stars disapear at about the limit given by the bortle scale
+// Set the parameters so that the stars disappear at about the limit given by the bortle scale
 // See http://en.wikipedia.org/wiki/Bortle_Dark-Sky_Scale
-void StelSkyDrawer::setBortleScale(int bIndex)
+void StelSkyDrawer::setBortleScaleIndex(int bIndex)
 {
 	// Associate the Bortle index (1 to 9) to inScale value
 	if (bIndex<1)
 	{
-		qWarning() << "WARING: Bortle scale index range is [1;9], given" << bIndex;
+		qWarning() << "WARNING: Bortle scale index range is [1;9], given" << bIndex;
 		bIndex = 1;
 	}
 	if (bIndex>9)
 	{
-		qWarning() << "WARING: Bortle scale index range is [1;9], given" << bIndex;
+		qWarning() << "WARNING: Bortle scale index range is [1;9], given" << bIndex;
 		bIndex = 9;
 	}
 

@@ -156,8 +156,8 @@ SET(stellarium_lib_SRCS
 	core/planetsephems/marssat.h
 	core/planetsephems/pluto.c
 	core/planetsephems/pluto.h
-	core/planetsephems/sideral_time.c
-	core/planetsephems/sideral_time.h
+	core/planetsephems/sidereal_time.c
+	core/planetsephems/sidereal_time.h
 	core/planetsephems/stellplanet.c
 	core/planetsephems/stellplanet.h
 	core/planetsephems/tass17.c
@@ -466,10 +466,20 @@ IF (USE_PLUGIN_EXOPLANETS)
         ADD_DEFINITIONS(-DUSE_STATIC_PLUGIN_EXOPLANETS)
 ENDIF()
 
+IF (USE_PLUGIN_FOV)
+        SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} "${CMAKE_BINARY_DIR}/plugins/FOV/src/${CMAKE_CFG_INTDIR}/libFOV.a")
+        ADD_DEFINITIONS(-DUSE_STATIC_PLUGIN_FOV)
+ENDIF()
+
 IF (USE_PLUGIN_LOGBOOK)
         SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} "${CMAKE_BINARY_DIR}/plugins/LogBook/src/${CMAKE_CFG_INTDIR}/libLogBook.a")
         ADD_DEFINITIONS(-DUSE_STATIC_PLUGIN_LOGBOOK)
         SET(QT_USE_QTSQL TRUE)
+ENDIF()
+
+IF (USE_PLUGIN_NAVSTARS)
+        SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} "${CMAKE_BINARY_DIR}/plugins/NavStars/src/${CMAKE_CFG_INTDIR}/libNavStars.a")
+        ADD_DEFINITIONS(-DUSE_STATIC_PLUGIN_NAVSTARS)
 ENDIF()
 
 IF (USE_PLUGIN_NOVAE)
@@ -713,7 +723,7 @@ ADD_DEPENDENCIES(buildTests testConversions)
 
 
 ADD_CUSTOM_TARGET(tests COMMENT "Run the Stellarium unit tests")
-#ADD_CUSTOM_COMMAND(TARGET tests POST_BUILD COMMAND ./testDates WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/src/)
+ADD_CUSTOM_COMMAND(TARGET tests POST_BUILD COMMAND ./testDates WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/src/)
 ADD_CUSTOM_COMMAND(TARGET tests POST_BUILD COMMAND ./testStelFileMgr WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/src/)
 ADD_CUSTOM_COMMAND(TARGET tests POST_BUILD COMMAND ./testStelSphereGeometry WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/src/)
 #ADD_CUSTOM_COMMAND(TARGET tests POST_BUILD COMMAND ./testStelSphericalIndex WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/src/)

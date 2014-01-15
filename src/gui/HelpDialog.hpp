@@ -32,7 +32,7 @@ class HelpDialog : public StelDialog
 {
 	Q_OBJECT
 public:
-	HelpDialog();
+	HelpDialog(QObject* parent);
 	~HelpDialog();
 
 	//! Notify that the application style changed
@@ -40,7 +40,6 @@ public:
 
 public slots:
 	void retranslate();
-	void updateIconsColor();
 
 protected:
 	//! Initialize the dialog widgets and connect the signals/slots

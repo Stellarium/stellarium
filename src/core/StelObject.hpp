@@ -42,27 +42,26 @@ public:
 	//! Use InfoStringGroup instead.
 	enum InfoStringGroupFlags
 	{
-		Name          = 0x00000001, //!< An object's name
-		CatalogNumber = 0x00000002, //!< Catalog numbers
-		Magnitude     = 0x00000004, //!< Magnitude related data
-		RaDecJ2000    = 0x00000008, //!< The equatorial position (J2000 ref)
-		RaDecOfDate   = 0x00000010, //!< The equatorial position (of date)
-		AltAzi        = 0x00000020, //!< The position (Altitude/Azimuth)
-		Distance      = 0x00000040, //!< Info about an object's distance
-		Size          = 0x00000080, //!< Info about an object's size
-		Extra1        = 0x00000100, //!< Derived class-specific extra fields
-		Extra2        = 0x00000200, //!< Derived class-specific extra fields
-		Extra3        = 0x00000400, //!< Derived class-specific extra fields
-		PlainText     = 0x00000800, //!< Strip HTML tags from output
-		HourAngle     = 0x00001000,  //!< The hour angle + DE (of date)
-		AbsoluteMagnitude = 0x00002000,  //!< The absolute magnitude
-		GalCoordJ2000 = 0x00004000	//!< The galactic position (J2000 ref) GZ: HEY STOP! GalCoords are DEFINED in B1950 coordinates! What we have here is a transformation matrix preconfigured to do precession J2000->B1950 and Equ.B1950->Gal. But "GalCoord for J2000" does not make sense.
+		Name			= 0x00000001, //!< An object's name
+		CatalogNumber		= 0x00000002, //!< Catalog numbers
+		Magnitude		= 0x00000004, //!< Magnitude related data
+		RaDecJ2000		= 0x00000008, //!< The equatorial position (J2000 ref)
+		RaDecOfDate		= 0x00000010, //!< The equatorial position (of date)
+		AltAzi			= 0x00000020, //!< The position (Altitude/Azimuth)
+		Distance		= 0x00000040, //!< Info about an object's distance
+		Size			= 0x00000080, //!< Info about an object's size
+		Extra			= 0x00000100, //!< Derived class-specific extra fields
+		PlainText		= 0x00000200, //!< Strip HTML tags from output
+		HourAngle		= 0x00000400, //!< The hour angle + DE (of date)
+		AbsoluteMagnitude	= 0x00000800, //!< The absolute magnitude
+		GalacticCoord		= 0x00001000, //!< The galactic position
+		Type			= 0x00002000  //!< The type of the object (star, planet, etc.)
 	};
 	typedef QFlags<InfoStringGroupFlags> InfoStringGroup;
 	Q_FLAGS(InfoStringGroup)
 
 	//! A pre-defined set of specifiers for the getInfoString flags argument to getInfoString
-	static const InfoStringGroupFlags AllInfo = (InfoStringGroupFlags)(Name|CatalogNumber|Magnitude|RaDecJ2000|RaDecOfDate|AltAzi|Distance|Size|Extra1|Extra2|Extra3|HourAngle|AbsoluteMagnitude|GalCoordJ2000);
+	static const InfoStringGroupFlags AllInfo = (InfoStringGroupFlags)(Name|CatalogNumber|Magnitude|RaDecJ2000|RaDecOfDate|AltAzi|Distance|Size|Extra|Type|HourAngle|AbsoluteMagnitude|GalacticCoord);
 	//! A pre-defined set of specifiers for the getInfoString flags argument to getInfoString
 	static const InfoStringGroupFlags ShortInfo = (InfoStringGroupFlags)(Name|CatalogNumber|Magnitude|RaDecJ2000);
 
@@ -101,18 +100,18 @@ public:
 	//! At time 2000-01-01 this frame is almost the same as J2000, but ONLY if the observer is on earth
 	Vec3d getEquinoxEquatorialPos(const StelCore* core) const;
 
-	//! Get observer-centered galactic coordinates at equinox J2000
-	Vec3d getJ2000GalacticPos(const StelCore* core) const;
+	//! Get observer-centered galactic coordinates
+	Vec3d getGalacticPos(const StelCore* core) const;
 
 	//! Get observer-centered hour angle + declination (at current equinox)
 	//! It is the geometric position, i.e. without taking refraction effect into account.
 	//! The frame has its Z axis at the planet's current rotation axis
-	Vec3d getSideralPosGeometric(const StelCore* core) const;
+	Vec3d getSiderealPosGeometric(const StelCore* core) const;
 
 	//! Get observer-centered hour angle + declination (at current equinox)
 	//! It is the apparent position, i.e. taking the refraction effect into account.
 	//! The frame has its Z axis at the planet's current rotation axis
-	Vec3d getSideralPosApparent(const StelCore* core) const;
+	Vec3d getSiderealPosApparent(const StelCore* core) const;
 
 	//! Get observer-centered alt/az position
 	//! It is the geometric position, i.e. without taking refraction effect into account.
@@ -133,11 +132,12 @@ public:
 	virtual float getVMagnitude(const StelCore* core) const;
 	
 	//! Return object's apparent V magnitude as seen from observer including extinction.
+	//! GZ 2014-01-02: Extinction obviously only if atmosphere=on.
 	float getVMagnitudeWithExtinction(const StelCore* core) const;
 
 	//! Return a priority value which is used to discriminate objects by priority
 	//! As for magnitudes, the lower is the higher priority
-	virtual float getSelectPriority(const StelCore*) const {return 99;}
+	virtual float getSelectPriority(const StelCore*) const;
 
 	//! Get a color used to display info about the object
 	virtual Vec3f getInfoColor() const {return Vec3f(1,1,1);}
