@@ -1,0 +1,57 @@
+# Horizon description file for Carte du Ciel
+# 
+# File format :
+# Azimuth(integer) Altitude
+#
+# Be sure to begin at the North horizon (azimuth 0)
+# Intermediate missing value are interpolated
+ 
+# horizon de Geneve / Aire
+# le Jura au nord 
+0 2
+5 1
+# le Lac
+20 0.5
+60 0.5
+73 2
+# les Voirons
+78 3.5
+93 3.5
+95 3
+# le Marcelly
+100 3.5
+101 2.5
+104 2.5
+# le Mole
+106 3
+107 2.5
+109 2.5
+# le Saleve
+112 3
+113 2
+115 2
+120 4
+130 4.5
+145 4.5
+149 3.5
+# les Pitons
+150 4
+160 4
+169 3.5
+174 3
+177 2
+# le Mont de Sion
+180 2
+195 2
+208 0.5
+# le Vuache
+211 1.5
+220 1.5
+218 1
+231 1
+# le Jura a l'ouest
+240 3
+249 3
+250 2.5
+275 3
+320 3

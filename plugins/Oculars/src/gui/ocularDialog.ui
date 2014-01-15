@@ -421,6 +421,10 @@
                     <height>24</height>
                    </size>
                   </property>
+                  <property name="icon">
+                   <iconset resource="../../../../data/gui/guiRes.qrc">
+                    <normaloff>:/graphicGui/spinup.png</normaloff>:/graphicGui/spinup.png</iconset>
+                  </property>
                  </widget>
                 </item>
                 <item>
@@ -436,6 +440,10 @@
                     <width>24</width>
                     <height>24</height>
                    </size>
+                  </property>
+                  <property name="icon">
+                   <iconset resource="../../../../data/gui/guiRes.qrc">
+                    <normaloff>:/graphicGui/spindown.png</normaloff>:/graphicGui/spindown.png</iconset>
                   </property>
                  </widget>
                 </item>
@@ -717,6 +725,10 @@
                     <height>24</height>
                    </size>
                   </property>
+                  <property name="icon">
+                   <iconset resource="../../../../data/gui/guiRes.qrc">
+                    <normaloff>:/graphicGui/spinup.png</normaloff>:/graphicGui/spinup.png</iconset>
+                  </property>
                  </widget>
                 </item>
                 <item>
@@ -732,6 +744,10 @@
                     <width>24</width>
                     <height>24</height>
                    </size>
+                  </property>
+                  <property name="icon">
+                   <iconset resource="../../../../data/gui/guiRes.qrc">
+                    <normaloff>:/graphicGui/spindown.png</normaloff>:/graphicGui/spindown.png</iconset>
                   </property>
                  </widget>
                 </item>
@@ -979,6 +995,10 @@
                     <height>24</height>
                    </size>
                   </property>
+                  <property name="icon">
+                   <iconset resource="../../../../data/gui/guiRes.qrc">
+                    <normaloff>:/graphicGui/spinup.png</normaloff>:/graphicGui/spinup.png</iconset>
+                  </property>
                  </widget>
                 </item>
                 <item>
@@ -994,6 +1014,10 @@
                     <width>24</width>
                     <height>24</height>
                    </size>
+                  </property>
+                  <property name="icon">
+                   <iconset resource="../../../../data/gui/guiRes.qrc">
+                    <normaloff>:/graphicGui/spindown.png</normaloff>:/graphicGui/spindown.png</iconset>
                   </property>
                  </widget>
                 </item>
@@ -1346,6 +1370,10 @@
                     <height>24</height>
                    </size>
                   </property>
+                  <property name="icon">
+                   <iconset resource="../../../../data/gui/guiRes.qrc">
+                    <normaloff>:/graphicGui/spinup.png</normaloff>:/graphicGui/spinup.png</iconset>
+                  </property>
                  </widget>
                 </item>
                 <item>
@@ -1361,6 +1389,10 @@
                     <width>24</width>
                     <height>24</height>
                    </size>
+                  </property>
+                  <property name="icon">
+                   <iconset resource="../../../../data/gui/guiRes.qrc">
+                    <normaloff>:/graphicGui/spindown.png</normaloff>:/graphicGui/spindown.png</iconset>
                   </property>
                  </widget>
                 </item>
@@ -1550,6 +1582,8 @@
   <tabstop>telescopeVFlip</tabstop>
   <tabstop>textBrowser</tabstop>
  </tabstops>
- <resources/>
+ <resources>
+  <include location="../../../../data/gui/guiRes.qrc"/>
+ </resources>
  <connections/>
 </ui>

@@ -75,12 +75,6 @@ QVariantMap Supernova::getMap(void)
 	return map;
 }
 
-float Supernova::getSelectPriority(const StelCore* core) const
-{
-	//Same as StarWrapper::getSelectPriority()
-        return getVMagnitude(core);
-}
-
 QString Supernova::getNameI18n(void) const
 {
 	QString name = designation;
@@ -119,7 +113,7 @@ QString Supernova::getInfoString(const StelCore* core, const InfoStringGroup& fl
 		oss << "</h2>";
 	}
 
-	if (flags&Extra1)
+	if (flags&Type)
 		oss << q_("Type: <b>%1</b>").arg(q_("supernova")) << "<br />";
 
 	if (flags&Magnitude && mag <= core->getSkyDrawer()->getLimitMagnitude())
@@ -134,7 +128,7 @@ QString Supernova::getInfoString(const StelCore* core, const InfoStringGroup& fl
 	// Ra/Dec etc.
 	oss << getPositionInfoString(core, flags);
 
-	if (flags&Extra1)
+	if (flags&Extra)
 	{
 		oss << q_("Type of supernova: %1").arg(sntype) << "<br>";
 		oss << q_("Maximum brightness: %1").arg(getMaxBrightnessDate(peakJD)) << "<br>";
@@ -148,7 +142,7 @@ QString Supernova::getInfoString(const StelCore* core, const InfoStringGroup& fl
 
 Vec3f Supernova::getInfoColor(void) const
 {
-	return StelApp::getInstance().getVisionModeNight() ? Vec3f(0.6, 0.0, 0.0) : Vec3f(1.0, 1.0, 1.0);
+	return Vec3f(1.0, 1.0, 1.0);
 }
 
 float Supernova::getVMagnitude(const StelCore* core) const
@@ -225,9 +219,6 @@ void Supernova::draw(StelCore* core, StelPainter& painter)
 	StarMgr* smgr = GETSTELMODULE(StarMgr); // It's need for checking displaying of labels for stars
 
 	Vec3f color = Vec3f(1.f,1.f,1.f);
-	if (StelApp::getInstance().getVisionModeNight())
-		color = StelUtils::getNightColor(color);
-
 	RCMag rcMag;
 	float size, shift;
 	double mag;

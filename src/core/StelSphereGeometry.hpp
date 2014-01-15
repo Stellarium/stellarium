@@ -30,6 +30,8 @@
 #include "OctahedronPolygon.hpp"
 #include "StelVertexArray.hpp"
 
+#include <stdio.h>
+
 class SphericalRegion;
 class SphericalPolygon;
 class SphericalConvexPolygon;
@@ -280,7 +282,7 @@ public:
 	//! @param ar cosinus of the aperture.
 	SphericalCap(const Vec3d& an, double ar) : n(an), d(ar) {//n.normalize();
 															 Q_ASSERT(d==0 || std::fabs(n.lengthSquared()-1.)<0.0000001);}
-	// TODO:FIXME! GZ reports 2013-03-02: apparently the Q_ASSERT is here because n should be normalized at this point, but
+	// FIXME: GZ reports 2013-03-02: apparently the Q_ASSERT is here because n should be normalized at this point, but
 	// for efficiency n.normalize() should not be called at this point.
 	// However, when zooming in a bit in Hammer-Aitoff and Mercator projections, this Assertion fires.
 	// Atmosphere must be active
@@ -493,8 +495,8 @@ public:
 	static const SphericalRegionP staticInstance;
 };
 
-//! @class AllSkySphericalRegion
-//! Special SphericalRegion for the whole sphere.
+//! @class EmptySphericalRegion
+//! Special SphericalRegion for --- UMM, WHAT EXACTLY?
 class EmptySphericalRegion : public SphericalRegion
 {
 public:
@@ -536,8 +538,8 @@ public:
 };
 
 
-//! @class SphericalPolygonBase
-//! Abstract class defining default implementations for some spherical geometry methods.
+//! @class SphericalPolygon
+//! Class defining default implementations for some spherical geometry methods.
 //! All methods are reentrant.
 class SphericalPolygon : public SphericalRegion
 {
@@ -732,8 +734,8 @@ protected:
 };
 
 
-//! @class SphericalConvexPolygonSet
-//! A special case of SphericalPolygon for which the polygon is composed of disjoint convex polygons.
+// ! @class SphericalConvexPolygonSet
+// ! A special case of SphericalPolygon for which the polygon is composed of disjoint convex polygons.
 //class SphericalConvexPolygonSet : public SphericalRegion
 //{
 //public:

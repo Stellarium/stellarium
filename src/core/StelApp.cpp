@@ -22,7 +22,6 @@
 #include "StelCore.hpp"
 #include "StelUtils.hpp"
 #include "StelTextureMgr.hpp"
-#include "StelLoadingBar.hpp"
 #include "StelObjectMgr.hpp"
 #include "ConstellationMgr.hpp"
 #include "NebulaMgr.hpp"
@@ -128,6 +127,10 @@ Q_IMPORT_PLUGIN(SolarSystemEditorStelPluginInterface)
 Q_IMPORT_PLUGIN(TimeZoneConfigurationStelPluginInterface)
 #endif
 
+#ifdef USE_STATIC_PLUGIN_NAVSTARS
+Q_IMPORT_PLUGIN(NavStarsStelPluginInterface)
+#endif
+
 #ifdef USE_STATIC_PLUGIN_NOVAE
 Q_IMPORT_PLUGIN(NovaeStelPluginInterface)
 #endif
@@ -146,6 +149,10 @@ Q_IMPORT_PLUGIN(PulsarsStelPluginInterface)
 
 #ifdef USE_STATIC_PLUGIN_EXOPLANETS
 Q_IMPORT_PLUGIN(ExoplanetsStelPluginInterface)
+#endif
+
+#ifdef USE_STATIC_PLUGIN_FOV
+Q_IMPORT_PLUGIN(FOVStelPluginInterface)
 #endif
 
 #ifdef USE_STATIC_PLUGIN_OBSERVABILITY
@@ -423,9 +430,8 @@ void StelApp::init(QSettings* conf)
 	initScriptMgr(conf);
 
 	// Initialisation of the color scheme
-	bool tmp = confSettings->value("viewing/flag_night").toBool();
-	flagNightVision=!tmp;  // fool caching
-	setVisionModeNight(tmp);
+	emit colorSchemeChanged("color");
+	setVisionModeNight(confSettings->value("viewing/flag_night").toBool());
 
 	// Initialisation of the render of solar shadows
 	//setRenderSolarShadows(confSettings->value("viewing/flag_render_solar_shadows", true).toBool());
@@ -435,7 +441,7 @@ void StelApp::init(QSettings* conf)
 	updateI18n();
 
 	// Init actions.
-	actionMgr->addAction("actionShow_Night_Mode", "Display Options", "Night mode", this, "nightMode");
+	actionMgr->addAction("actionShow_Night_Mode", N_("Display Options"), N_("Night mode"), this, "nightMode");
 
 	initialized = true;
 }
@@ -663,7 +669,7 @@ void StelApp::setVisionModeNight(bool b)
 	if (flagNightVision!=b)
 	{
 		flagNightVision=b;
-		emit(colorSchemeChanged(b ? "night_color" : "color"));
+		emit(visionNightModeChanged(b));
 	}
 }
 

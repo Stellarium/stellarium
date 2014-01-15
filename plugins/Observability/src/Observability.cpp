@@ -66,6 +66,7 @@ StelPluginInfo ObservabilityStelPluginInterface::getPluginInfo() const
 	info.authors = "Ivan Marti-Vidal (Onsala Space Observatory)"; // non-translatable field
 	info.contact = "i.martividal@gmail.com";
         info.description = N_("Reports an analysis of source observability (rise, set, and transit times), as well as the epochs of year when the source is best observed. It assumes that a source is observable if it is above the horizon during a fraction of the night. The plugin also gives the day for largest separation from the Sun and the days of Acronychal and Cosmical rise/set.<br><br> An explanation of the quantities shown by this script is given in the 'About' tab of the configuration window");
+	info.version = OBSERVABILITY_PLUGIN_VERSION;
         return info;
 }
 
@@ -259,8 +260,8 @@ void Observability::init()
 		OnIcon = new QPixmap(":/observability/bt_observab_on.png");
 		OffIcon = new QPixmap(":/observability/bt_observab_off.png");
 
-		addAction("actionShow_Observability", "Observability", N_("Observability"), "enabled");
-		addAction("actionShow_Observability_ConfigDialog", "Observability", N_("Observability configuration window"), configDialog, "visible");
+		addAction("actionShow_Observability", N_("Observability"), N_("Observability"), "enabled");
+		addAction("actionShow_Observability_ConfigDialog", N_("Observability"), N_("Observability configuration window"), configDialog, "visible");
 		toolbarButton = new StelButton(NULL, *OnIcon, *OffIcon, *GlowIcon, "actionShow_Observability");
 		gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
 	}

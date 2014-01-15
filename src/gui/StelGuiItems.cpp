@@ -72,18 +72,10 @@ void StelButton::initCtor(const QPixmap& apixOn,
 	Q_ASSERT(!pixOn.isNull());
 	Q_ASSERT(!pixOff.isNull());
 
-	redMode = StelApp::getInstance().getVisionModeNight();
-	pixOnRed = StelButton::makeRed(pixOn);
-	pixOffRed = StelButton::makeRed(pixOff);
 	if (isTristate_)
 	{
 		Q_ASSERT(!pixNoChange.isNull());
-		pixNoChangeRed = StelButton::makeRed(pixNoChange);
 	}
-	if (!pixHover.isNull())
-		pixHoverRed = StelButton::makeRed(pixHover);
-	if (!pixBackground.isNull())
-		pixBackgroundRed = StelButton::makeRed(pixBackground);
 
 	setShapeMode(QGraphicsPixmapItem::BoundingRectShape);
 	setAcceptHoverEvents(true);
@@ -197,15 +189,15 @@ void StelButton::updateIcon()
 	QPainter painter(&pix);
 	painter.setOpacity(opacity);
 	if (!pixBackground.isNull() && noBckground==false)
-		painter.drawPixmap(0, 0, redMode ? pixBackgroundRed : pixBackground);
+		painter.drawPixmap(0, 0, pixBackground);
 	painter.drawPixmap(0, 0,
-		(isTristate_ && checked == ButtonStateNoChange) ? (redMode ? pixNoChangeRed : pixNoChange) :
-		(checked == ButtonStateOn) ? (redMode ? pixOnRed : pixOn) :
-		/* (checked == ButtonStateOff) ? */ (redMode ? pixOffRed : pixOff));
+		(isTristate_ && checked == ButtonStateNoChange) ? (pixNoChange) :
+		(checked == ButtonStateOn) ? (pixOn) :
+		/* (checked == ButtonStateOff) ? */ (pixOff));
 	if (hoverOpacity > 0)
 	{
 		painter.setOpacity(hoverOpacity * opacity);
-		painter.drawPixmap(0, 0, redMode ? pixHoverRed : pixHover);
+		painter.drawPixmap(0, 0, pixHover);
 	}
 	setPixmap(pix);
 }
@@ -225,27 +217,8 @@ void StelButton::setChecked(int b)
 void StelButton::setBackgroundPixmap(const QPixmap &newBackground)
 {
 	pixBackground = newBackground;
-	pixBackgroundRed = makeRed(newBackground);
 	updateIcon();
 }
-
-QPixmap StelButton::makeRed(const QPixmap& p)
-{
-	QImage im = p.toImage().convertToFormat(QImage::Format_ARGB32);
-	Q_ASSERT(im.format()==QImage::Format_ARGB32);
-	QRgb* bits = (QRgb*)im.bits();
-	const QRgb* stop = bits+im.width()*im.height();
-	do
-	{
-		Vec3f col = StelUtils::getNightColor(Vec3f(qRed(*bits)/256.0, qGreen(*bits)/256.0, qBlue(*bits)/256.0));
-		*bits = qRgba((int)(256*col[0]), (int)(256*col[1]), (int)(256*col[2]), qAlpha(*bits));
-		++bits;
-	}
-	while (bits!=stop);
-
-	return QPixmap::fromImage(im);
-}
-
 
 LeftStelBar::LeftStelBar(QGraphicsItem* parent) : QGraphicsItem(parent)
 {
@@ -330,18 +303,6 @@ void LeftStelBar::buttonHoverChanged(bool b)
 void LeftStelBar::setColor(const QColor& c)
 {
 	helpLabel->setBrush(c);
-}
-
-// Activate red mode for the buttons, i.e. will reduce the non red color component of the icon
-void LeftStelBar::setRedMode(bool b)
-{
-	foreach (QGraphicsItem *child, QGraphicsItem::childItems())
-	{
-		StelButton* bt = qgraphicsitem_cast<StelButton*>(child);
-		if (bt==0)
-			continue;
-		bt->setRedMode(b);
-	}
 }
 
 BottomStelBar::BottomStelBar(QGraphicsItem* parent,
@@ -715,18 +676,6 @@ void BottomStelBar::setColor(const QColor& c)
 	fov->setBrush(c);
 	fps->setBrush(c);
 	helpLabel->setBrush(c);
-}
-
-// Activate red mode for the buttons, i.e. will reduce the non red color component of the icon
-void BottomStelBar::setRedMode(bool b)
-{
-	foreach (QGraphicsItem *child, QGraphicsItem::childItems())
-	{
-		StelButton* bt = qgraphicsitem_cast<StelButton*>(child);
-		if (bt==0)
-			continue;
-		bt->setRedMode(b);
-	}
 }
 
 // Update the help label when a button is hovered

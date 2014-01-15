@@ -128,6 +128,10 @@ void SatellitesDialog::createDialogContent()
 	connect(ui->saveSettingsButton, SIGNAL(clicked()),
 	        this, SLOT(saveSettings()));
 
+	// Settings tab / realistic mode group
+	connect(ui->realisticGroup, SIGNAL(clicked(bool)),
+		plugin, SLOT(setFlagRelisticMode(bool)));
+
 	// Settings tab / orbit lines group
 	connect(ui->orbitLinesGroup, SIGNAL(clicked(bool)),
 	        plugin, SLOT(setOrbitLinesFlag(bool)));
@@ -611,6 +615,8 @@ void SatellitesDialog::updateSettingsPage()
 	ui->orbitSegmentsSpin->setValue(Satellite::orbitLineSegments);
 	ui->orbitFadeSpin->setValue(Satellite::orbitLineFadeSegments);
 	ui->orbitDurationSpin->setValue(Satellite::orbitLineSegmentDuration);
+
+	ui->realisticGroup->setChecked(plugin->getFlagRealisticMode());
 }
 
 void SatellitesDialog::populateFilterMenu()

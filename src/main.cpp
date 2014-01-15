@@ -43,10 +43,13 @@
 #include <QGLFormat>
 #include <QGuiApplication>
 #include <QSettings>
+#include <QSplashScreen>
 #include <QString>
 #include <QStringList>
 #include <QTextStream>
 #include <QTranslator>
+
+#include <clocale>
 
 #ifdef Q_OS_WIN
 	#include <windows.h>
@@ -147,6 +150,10 @@ int main(int argc, char **argv)
 	QGuiApplication::setDesktopSettingsAware(false);
 	QGuiApplication app(argc, argv);
 #endif
+	QPixmap pixmap(":/splash.png");
+	QSplashScreen splash(pixmap);
+	splash.show();
+	app.processEvents();
 
 	// QApplication sets current locale, but
 	// we need scanf()/printf() and friends to always work in the C locale,
@@ -316,11 +323,16 @@ int main(int argc, char **argv)
 	StelMainView mainWin;
 	// some basic diagnostics
 	if (!QGLFormat::hasOpenGL()){
-	  QMessageBox::warning(0, "Stellarium", q_("This system does not support OpenGL."));
+		QMessageBox::warning(0, "Stellarium", q_("This system does not support OpenGL."));
 	}
 
 	qDebug() << "OpenGLVersionFlags: " << QGLFormat::openGLVersionFlags();
+	// http://qt-project.org/forums/viewthread/35584: clarify: Why is the string empty? (at least Win7/64 NVidia)
+	//QString versionString(QLatin1String(reinterpret_cast<const char *>(glGetString(GL_VERSION))));
+	QString versionString((char *)glGetString(GL_VERSION));
+	qDebug() << "Driver version string: " << versionString;
 	mainWin.init(confSettings);
+	splash.finish(&mainWin);
 	app.exec();
 	mainWin.deinit();
 

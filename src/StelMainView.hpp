@@ -36,6 +36,7 @@ class QMoveEvent;
 //! It is the class creating the singleton GL Widget, the main StelApp instance as well as the main GUI.
 class StelMainView : public QDeclarativeView
 {
+	friend class StelGuiItem;
 	Q_OBJECT
 	Q_PROPERTY(bool fullScreen READ isFullScreen WRITE setFullScreen)
 
@@ -58,6 +59,9 @@ public:
 	void deinitGL();
 	//! Return focus to the sky item.  To be used when we close a dialog.
 	void focusSky();
+	//! Return the parent gui widget, this should be used as parent to all
+	//! the StelDialog instances.
+	QGraphicsWidget* getGuiWidget() const {return guiWidget;}
 public slots:
 
 	//!	Set whether fullscreen is activated or not
@@ -136,6 +140,10 @@ private:
 
 	//! The StelMainView singleton
 	static StelMainView* singleton;
+
+	//! This is created by the StelGuiItem, but need to be publicly
+	//! accessible so that StelDialog instances can reparent to it.
+	QGraphicsWidget *guiWidget;
 
 	//! The openGL window
 	StelQGLWidget* glWidget;

@@ -120,7 +120,7 @@ void NebulaMgr::init()
 	connect(app, SIGNAL(colorSchemeChanged(const QString&)), this, SLOT(setStelStyle(const QString&)));
 	GETSTELMODULE(StelObjectMgr)->registerStelObjectMgr(this);
 
-	addAction("actionShow_Nebulas", "Display Options", N_("Deep-sky objects"), "flagHintDisplayed", "D", "N");
+	addAction("actionShow_Nebulas", N_("Display Options"), N_("Deep-sky objects"), "flagHintDisplayed", "D", "N");
 }
 
 struct DrawNebulaFuncObject
@@ -152,6 +152,11 @@ struct DrawNebulaFuncObject
 	bool checkMaxMagHints;
 };
 
+float NebulaMgr::computeMaxMagHint(const StelSkyDrawer* skyDrawer) const
+{
+	return skyDrawer->getLimitMagnitude()*1.2f-2.f+(hintsAmount *1.2f)-2.f;
+}
+
 // Draw all the Nebulae
 void NebulaMgr::draw(StelCore* core)
 {
@@ -171,7 +176,7 @@ void NebulaMgr::draw(StelCore* core)
 	const SphericalRegionP& p = prj->getViewportConvexPolygon(margin, margin);
 
 	// Print all the nebulae of all the selected zones
-	float maxMagHints  = skyDrawer->getLimitMagnitude()*1.2f-2.f+(hintsAmount *1.2f)-2.f;
+	float maxMagHints  = computeMaxMagHint(skyDrawer);
 	float maxMagLabels = skyDrawer->getLimitMagnitude()     -2.f+(labelsAmount*1.2f)-2.f;
 	sPainter.setFont(nebulaFont);
 	DrawNebulaFuncObject func(maxMagHints, maxMagLabels, &sPainter, core, hintsFader.getInterstate()>0.0001);
@@ -192,11 +197,8 @@ void NebulaMgr::drawPointer(const StelCore* core, StelPainter& sPainter)
 		Vec3d pos=obj->getJ2000EquatorialPos(core);
 
 		// Compute 2D pos and return if outside screen
-		if (!prj->projectInPlace(pos)) return;		
-		if (StelApp::getInstance().getVisionModeNight())
-			sPainter.setColor(0.8f,0.0f,0.0f);
-		else
-			sPainter.setColor(0.4f,0.5f,0.8f);
+		if (!prj->projectInPlace(pos)) return;
+		sPainter.setColor(0.4f,0.5f,0.8f);
 
 		texPointer->bind();
 

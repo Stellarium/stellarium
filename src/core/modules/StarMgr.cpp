@@ -59,6 +59,7 @@
 #ifndef Q_OS_WIN
 #include <unistd.h>
 #else
+#include <winsock2.h>
 #include "kdewin32/unistd.h"
 #endif
 
@@ -68,7 +69,7 @@ static QStringList component_array;
 // This number must be incremented each time the content or file format of the stars catalogs change
 // It can also be incremented when the defaultStarsConfig.json file change.
 // It should always matchs the version field of the defaultStarsConfig.json file
-static const int StarCatalogFormatVersion = 4;
+static const int StarCatalogFormatVersion = 5;
 
 // Initialise statics
 bool StarMgr::flagSciNames = true;
@@ -332,8 +333,9 @@ void StarMgr::init()
 	connect(app, SIGNAL(skyCultureChanged(const QString&)), this, SLOT(updateSkyCulture(const QString&)));
 	connect(app, SIGNAL(colorSchemeChanged(const QString&)), this, SLOT(setStelStyle(const QString&)));
 
-	addAction("actionShow_Stars", "Display Options", N_("Stars"), "flagStarsDisplayed", "S");
-	addAction("actionShow_Stars_Labels", "Display Options", N_("Stars labels"), "flagLabelsDisplayed", "Alt+S");
+	QString displayGroup = N_("Display Options");
+	addAction("actionShow_Stars", displayGroup, N_("Stars"), "flagStarsDisplayed", "S");
+	addAction("actionShow_Stars_Labels", displayGroup, N_("Stars labels"), "flagLabelsDisplayed", "Alt+S");
 }
 
 
@@ -351,9 +353,6 @@ void StarMgr::drawPointer(StelPainter& sPainter, const StelCore* core)
 			return;
 
 		Vec3f c(obj->getInfoColor());
-		if (StelApp::getInstance().getVisionModeNight())
-			c = StelUtils::getNightColor(c);
-
 		sPainter.setColor(c[0], c[1], c[2]);
 		texPointer->bind();
 		sPainter.enableTexture2d(true);

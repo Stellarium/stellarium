@@ -9,7 +9,7 @@ SET(AngleMeasure_SRCS
 SET(AngleMeasure_RES ../AngleMeasure.qrc)
 QT5_ADD_RESOURCES(AngleMeasure_RES_CXX ${AngleMeasure_RES})
 
-SET(extLinkerOption ${FreeType2_LIBRARIES} ${JPEG_LIBRARIES} ${PNG_LIBRARIES} ${OPENGL_LIBRARIES})
+SET(extLinkerOption ${JPEG_LIBRARIES} ${PNG_LIBRARIES} ${OPENGL_LIBRARIES})
 
 ADD_LIBRARY(AngleMeasure-static STATIC ${AngleMeasure_SRCS} ${AngleMeasure_RES_CXX})
 QT5_USE_MODULES(AngleMeasure-static Core Network Widgets)
