@@ -533,8 +533,8 @@ void TextUserInterface::draw(StelCore* core)
 		StelProjector::StelProjectorParams projParams = core->getCurrentStelProjectorParams();
 		xVc = projParams.viewportCenter[0];
 		yVc = projParams.viewportCenter[1];
-		fovOffsetX = projParams.viewportFovDiameter*std::sin(20)/2;
-		fovOffsetY = projParams.viewportFovDiameter*std::cos(20)/2;
+		fovOffsetX = projParams.viewportFovDiameter*std::sin(20.f)/2;
+		fovOffsetY = projParams.viewportFovDiameter*std::cos(20.f)/2;
 	}
 	else 
 	{
