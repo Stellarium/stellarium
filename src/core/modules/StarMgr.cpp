@@ -59,6 +59,7 @@
 #ifndef Q_OS_WIN
 #include <unistd.h>
 #else
+#include <winsock2.h>
 #include "kdewin32/unistd.h"
 #endif
 
@@ -68,7 +69,7 @@ static QStringList component_array;
 // This number must be incremented each time the content or file format of the stars catalogs change
 // It can also be incremented when the defaultStarsConfig.json file change.
 // It should always matchs the version field of the defaultStarsConfig.json file
-static const int StarCatalogFormatVersion = 4;
+static const int StarCatalogFormatVersion = 5;
 
 // Initialise statics
 bool StarMgr::flagSciNames = true;

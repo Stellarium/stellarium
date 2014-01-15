@@ -74,6 +74,7 @@ StelPluginInfo ExoplanetsStelPluginInterface::getPluginInfo() const
 	info.authors = "Alexander Wolf";
 	info.contact = "alex.v.wolf@gmail.com";
 	info.description = N_("This plugin plots the position of stars with exoplanets. Exoplanets data is derived from the 'Extrasolar Planets Encyclopaedia' at exoplanet.eu");
+	info.version = EXOPLANETS_PLUGIN_VERSION;
 	return info;
 }
 
@@ -227,7 +228,7 @@ void Exoplanets::draw(StelCore* core)
 	foreach (const ExoplanetP& eps, ep)
 	{
 		if (eps && eps->initialized)
-			eps->draw(core, painter);
+			eps->draw(core, &painter);
 	}
 
 	if (GETSTELMODULE(StelObjectMgr)->getFlagSelectedObjectPointer())
@@ -511,15 +512,22 @@ QVariantMap Exoplanets::loadEPMap(QString path)
 void Exoplanets::setEPMap(const QVariantMap& map)
 {
 	ep.clear();
+	PSCount=0;
+	EPCountAll=0;
 	QVariantMap epsMap = map.value("stars").toMap();
 	foreach(QString epsKey, epsMap.keys())
 	{
 		QVariantMap epsData = epsMap.value(epsKey).toMap();
 		epsData["designation"] = epsKey;
 
+		PSCount++;
+
 		ExoplanetP eps(new Exoplanet(epsData));
 		if (eps->initialized)
+		{
 			ep.append(eps);
+			EPCountAll += eps->getCountExoplanets();
+		}
 
 	}
 }
@@ -610,6 +618,8 @@ void Exoplanets::restoreDefaultConfigIni(void)
 	conf->setValue("url", "http://stellarium.org/json/exoplanets.json");
 	conf->setValue("update_frequency_hours", 72);
 	conf->setValue("flag_show_exoplanets_button", true);
+	conf->setValue("habitable_exoplanet_marker_color", "1.0,0.5,0.0");
+	conf->setValue("exoplanet_marker_color", "0.4,0.9,0.5");
 	conf->endGroup();
 }
 
@@ -621,10 +631,12 @@ void Exoplanets::readSettingsFromConfig(void)
 	updateFrequencyHours = conf->value("update_frequency_hours", 72).toInt();
 	lastUpdate = QDateTime::fromString(conf->value("last_update", "2012-05-24T12:00:00").toString(), Qt::ISODate);
 	updatesEnabled = conf->value("updates_enabled", true).toBool();
-	distributionEnabled = conf->value("distribution_enabled", false).toBool();
-	timelineEnabled = conf->value("timeline_enabled", false).toBool();	
+	setDisplayMode(conf->value("distribution_enabled", false).toBool());
+	setTimelineMode(conf->value("timeline_enabled", false).toBool());
 	enableAtStartup = conf->value("enable_at_startup", false).toBool();
 	flagShowExoplanetsButton = conf->value("flag_show_exoplanets_button", true).toBool();
+	setMarkerColor(conf->value("exoplanet_marker_color", "0.4,0.9,0.5").toString(), false);
+	setMarkerColor(conf->value("habitable_exoplanet_marker_color", "1.0,0.5,0.0").toString(), true);
 
 	conf->endGroup();
 }
@@ -636,10 +648,12 @@ void Exoplanets::saveSettingsToConfig(void)
 	conf->setValue("url", updateUrl);
 	conf->setValue("update_frequency_hours", updateFrequencyHours);
 	conf->setValue("updates_enabled", updatesEnabled );
-	conf->setValue("distribution_enabled", distributionEnabled);
-	conf->setValue("timeline_enabled", timelineEnabled);
+	conf->setValue("distribution_enabled", getDisplayMode());
+	conf->setValue("timeline_enabled", getTimelineMode());
 	conf->setValue("enable_at_startup", enableAtStartup);
 	conf->setValue("flag_show_exoplanets_button", flagShowExoplanetsButton);
+	conf->setValue("habitable_exoplanet_marker_color", getMarkerColor(true));
+	conf->setValue("exoplanet_marker_color", getMarkerColor(false));
 
 	conf->endGroup();
 }
@@ -725,6 +739,8 @@ void Exoplanets::updateDownloadComplete(QNetworkReply* reply)
 		StelApp::getInstance().removeProgressBar(progressBar);
 		progressBar = NULL;
 	}
+
+	readJsonFile();
 }
 
 void Exoplanets::displayMessage(const QString& message, const QString hexColor)
@@ -767,4 +783,43 @@ void Exoplanets::setFlagShowExoplanetsButton(bool b)
 		gui->getButtonBar()->hideButton("actionShow_Exoplanets");
 	}
 	flagShowExoplanetsButton = b;
+}
+
+bool Exoplanets::getDisplayMode()
+{
+	return Exoplanet::distributionMode;
+}
+
+void Exoplanets::setDisplayMode(bool b)
+{
+	Exoplanet::distributionMode=b;
+}
+
+bool Exoplanets::getTimelineMode()
+{
+	return Exoplanet::timelineMode;
+}
+
+void Exoplanets::setTimelineMode(bool b)
+{
+	Exoplanet::timelineMode=b;
+}
+
+QString Exoplanets::getMarkerColor(bool habitable)
+{
+	Vec3f c;
+	if (habitable)
+		c = Exoplanet::habitableExoplanetMarkerColor;
+	else
+		c = Exoplanet::exoplanetMarkerColor;
+	return QString("%1,%2,%3").arg(c[0]).arg(c[1]).arg(c[2]);
+}
+
+void Exoplanets::setMarkerColor(QString c, bool h)
+{
+	Vec3f nc = StelUtils::strToVec3f(c);
+	if (h)
+		Exoplanet::habitableExoplanetMarkerColor = nc;
+	else
+		Exoplanet::exoplanetMarkerColor = nc;
 }

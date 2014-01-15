@@ -35,7 +35,7 @@ $PSRCAT	= "./psrcat.db";
 $JSON	= "./pulsars.json";
 
 $FORMAT = 2;
-$CATVER = 1.47;
+$CATVER = 1.48;
 
 open (PSRCAT, "<$PSRCAT");
 @catalog = <PSRCAT>;
@@ -52,6 +52,7 @@ open (JSON, ">$JSON");
 print JSON "{\n";
 print JSON "\t\"version\": \"".$FORMAT."\",\n";
 print JSON "\t\"shortName\": \"A catalogue of pulsars, based on ATNF Pulsar Catalogue v. ".$CATVER."\",\n";
+print JSON "\t\"originalCatalogURL\": \"http://www.atnf.csiro.au/research/pulsar/psrcat/\",\n";
 print JSON "\t\"pulsars\":\n";
 print JSON "\t{\n";
 
@@ -76,6 +77,7 @@ for ($i=0;$i<scalar(@cat)-1;$i++) {
 	$elong = "";
 	$flag = 0;
 	$notes = "";
+	$glitch = 0;
 	for ($j=0;$j<scalar(@lines);$j++) {
 		if ($lines[$j] =~ /^PSRJ(\s+)J([\d]{4})([\+\-]{1})([\d]{2,4})([\w]{0,1})(\s+)/) {
 			$name = $2.$3.$4.$5;
@@ -91,19 +93,23 @@ for ($i=0;$i<scalar(@cat)-1;$i++) {
 		}
 
 		if ($lines[$j] =~ /^RAJ(\s+)([\d\-\+\:\.]+)/) {
+			$secf = 0;
 			($hour,$min,$sec) = split(":",$2);
 			$min += 0;
+			if ($min!=int($min)) { $secf = $min-int($min); $secf *= 60; $min = int($min); }
 			if ($min<10) { $min = "0".$min; }
-			$sec += 0;
+			$sec += $secf;
 			if ($sec<10) { $sec = "0".$sec; }
 			$outRA = $hour."h".$min."m".$sec."s";
 		}
 
 		if ($lines[$j] =~ /^DECJ(\s+)([\d\-\+\:\.]+)/) {
+			$secf = 0;
 			($deg,$min,$sec) = split(":",$2);
 			$min += 0;
+			if ($min!=int($min)) { $secf = $min-int($min); $secf *= 60; $min = int($min); }
 			if ($min<10) { $min = "0".$min; }
-			$sec += 0;
+			$sec += $secf;
 			if ($sec<10) { $sec = "0".$sec; }
 			$outDE = $deg."d".$min."m".$sec."s";
 		}
@@ -164,6 +170,11 @@ for ($i=0;$i<scalar(@cat)-1;$i++) {
 		{
 			$notes = $2;
 		}
+
+		if ($lines[$j] =~ /^NGLT(\s+)([\d]+)/)
+		{
+			$glitch = $2;
+		}
 	}
 
 	$out  = "\t\t\"PSR J".$name."\":\n";
@@ -206,6 +217,9 @@ for ($i=0;$i<scalar(@cat)-1;$i++) {
 	}
 	if ($s1400 > 0) {
 		$out .= "\t\t\t\"s1400\": ".$s1400.",\n";
+	}
+	if ($glitch > 0) {
+		$out .= "\t\t\t\"glitch\": ".$glitch.",\n";
 	}
 	if ($notes ne '')
 	{

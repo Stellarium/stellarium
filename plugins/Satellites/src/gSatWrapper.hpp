@@ -62,6 +62,11 @@ public:
 	//! @return Vec3d with TEME position. Units measured in Km.
 	Vec3d getTEMEPos();
 
+	// Operation getSunECIPos
+	//! @brief Get Sun positions in ECI system.
+	//! @return Vec3d with ECI position.
+	Vec3d getSunECIPos();
+
 	// Operation getTEMEVel
 	//! @brief This operation isolate gSatTEME getVel operation.
 	//! @return Vec3d with TEME speed. Units measured in Km/s.
@@ -109,6 +114,8 @@ public:
         //!   Fundamentals of Astrodynamis and Applications (Third Edition) pg 898
         //!   David A. Vallado
         int getVisibilityPredict();
+
+	double getPhaseAngle();
 
 
 private:

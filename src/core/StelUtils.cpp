@@ -453,8 +453,6 @@ QDateTime jdToQDateTime(const double& jd)
 
 void getDateFromJulianDay(const double jd, int *yy, int *mm, int *dd)
 {
-	//WARNING: Algorithm below give wrong data for dates before 1582 year (before Gregorian calendar) with Qt5 --AW
-
 	/*
 	 * This algorithm is taken from
 	 * "Numerical Recipes in c, 2nd Ed." (1992), pp. 14-15
@@ -513,7 +511,7 @@ void getDateFromJulianDay(const double jd, int *yy, int *mm, int *dd)
 	if (julian < 0)
 	{
 		*yy -= 100 * (1 - julian / 36525);
-	}	
+	}
 }
 
 void getTimeFromJulianDay(const double julianDay, int *hour, int *minute, int *second)
@@ -739,7 +737,8 @@ bool getJDFromDate(double* newjd, const int y, const int m, const int d, const i
 	double deltaTime = (h / 24.0) + (min / (24.0*60.0)) + (s / (24.0 * 60.0 * 60.0)) - 0.5;
 	QDate test((y <= 0 ? y-1 : y), m, d);
 	// if QDate will oblige, do so.
-	if ( test.isValid() )
+	// added hook for Julian calendar, because he has been removed from Qt5 --AW
+	if ( test.isValid() && y>1582)
 	{
 		double qdjd = (double)test.toJulianDay();
 		qdjd += deltaTime;

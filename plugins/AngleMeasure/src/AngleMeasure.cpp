@@ -57,6 +57,7 @@ StelPluginInfo AngleMeasureStelPluginInterface::getPluginInfo() const
 	info.authors = "Matthew Gates";
 	info.contact = "http://porpoisehead.net/";
 	info.description = N_("Provides an angle measurement tool");
+	info.version = ANGLEMEASURE_VERSION;
 	return info;
 }
 
