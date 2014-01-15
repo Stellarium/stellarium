@@ -67,14 +67,7 @@ Atmosphere::Atmosphere(void) :viewport(0,0,0,0), posGrid(NULL), posGridBuffer(QO
 	atmoShaderProgram = new QOpenGLShaderProgram();
 	atmoShaderProgram->addShader(&vShader);
 	atmoShaderProgram->addShader(&fShader);
-	if (!atmoShaderProgram->link())
-	{
-		qFatal("Error while linking atmosphere shader program: %s", atmoShaderProgram->log().toLatin1().constData());
-	}
-	if (!atmoShaderProgram->log().isEmpty())
-	{
-		qWarning() << "Warnings while linking atmosphere shader: " << atmoShaderProgram->log();
-	}
+	StelPainter::linkProg(atmoShaderProgram, "atmosphere");
 
 	atmoShaderProgram->bind();
 	shaderAttribLocations.alphaWaOverAlphaDa = atmoShaderProgram->uniformLocation("alphaWaOverAlphaDa");
@@ -369,4 +362,12 @@ void Atmosphere::draw(StelCore* core)
 	atmoShaderProgram->disableAttributeArray(shaderAttribLocations.skyVertex);
 	atmoShaderProgram->disableAttributeArray(shaderAttribLocations.skyColor);
 	atmoShaderProgram->release();
+	// GZ: debug output
+	//const StelProjectorP prj = core->getProjection(StelCore::FrameEquinoxEqu);
+	//StelPainter painter(prj);
+	//painter.setFont(font);
+	//sPainter.setColor(0.7, 0.7, 0.7);
+	//sPainter.drawText(83, 120, QString("Atmosphere::getAverageLuminance(): %1" ).arg(getAverageLuminance()));
+	//qDebug() << atmosphere->getAverageLuminance();
+
 }

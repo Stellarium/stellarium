@@ -71,6 +71,7 @@ public:
 	{
 		return "Exoplanet";
 	}
+
 	virtual float getSelectPriority(const StelCore* core) const;
 
 	//! Get an HTML string to describe the object
@@ -84,6 +85,7 @@ public:
 	}
 	//! Get the visual magnitude
 	virtual float getVMagnitude(const StelCore* core) const;
+	virtual float getVMagnitudeWithExtinction(const StelCore *core) const;
 	//! Get the angular size of pulsar
 	virtual double getAngularSize(const StelCore* core) const;
 	//! Get the localized name of pulsar
@@ -98,6 +100,8 @@ public:
 
 	void update(double deltaTime);
 
+	int getCountExoplanets(void) {return EPCount;}
+
 private:
 	bool initialized;
 
@@ -105,8 +109,14 @@ private:
 
 	static StelTextureSP hintTexture;
 	static StelTextureSP markerTexture;
+	static Vec3f habitableExoplanetMarkerColor;
+	static Vec3f exoplanetMarkerColor;
+	static bool distributionMode;
+	static bool timelineMode;
 
-	void draw(StelCore* core, StelPainter& painter);
+	void draw(StelCore* core, StelPainter *painter);
+
+	int EPCount;
 
 	//! Variables for description of properties of exoplanets
 	QString designation;			//! The designation of the host star

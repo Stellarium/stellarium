@@ -27,6 +27,7 @@
 
 class Ui_quasarsDialog;
 class QTimer;
+class Quasars;
 
 class QuasarsDialog : public StelDialog
 {
@@ -58,6 +59,7 @@ private slots:
 
 private:
 	Ui_quasarsDialog* ui;
+	Quasars* qsr;
 	void setAboutHtml(void);
 	void updateGuiFromSettings(void);
 	QTimer* updateTimer;

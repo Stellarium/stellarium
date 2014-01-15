@@ -156,8 +156,8 @@ SET(stellarium_lib_SRCS
 	core/planetsephems/marssat.h
 	core/planetsephems/pluto.c
 	core/planetsephems/pluto.h
-	core/planetsephems/sideral_time.c
-	core/planetsephems/sideral_time.h
+	core/planetsephems/sidereal_time.c
+	core/planetsephems/sidereal_time.h
 	core/planetsephems/stellplanet.c
 	core/planetsephems/stellplanet.h
 	core/planetsephems/tass17.c
@@ -571,7 +571,7 @@ ADD_DEPENDENCIES(buildTests testConversions)
 
 
 ADD_CUSTOM_TARGET(tests COMMENT "Run the Stellarium unit tests")
-#ADD_CUSTOM_COMMAND(TARGET tests POST_BUILD COMMAND ./testDates WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/src/)
+ADD_CUSTOM_COMMAND(TARGET tests POST_BUILD COMMAND ./testDates WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/src/)
 ADD_CUSTOM_COMMAND(TARGET tests POST_BUILD COMMAND ./testStelFileMgr WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/src/)
 ADD_CUSTOM_COMMAND(TARGET tests POST_BUILD COMMAND ./testStelSphereGeometry WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/src/)
 #ADD_CUSTOM_COMMAND(TARGET tests POST_BUILD COMMAND ./testStelSphericalIndex WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/src/)

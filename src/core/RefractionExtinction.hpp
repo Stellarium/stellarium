@@ -168,8 +168,8 @@ private:
 	//! Update precomputed variables.
 	void updatePrecomputed();
 
-	void innerRefractionForward(Vec3f& altAzPos) const;
-	void innerRefractionBackward(Vec3f& altAzPos) const;
+	void innerRefractionForward(Vec3d& altAzPos) const;
+	void innerRefractionBackward(Vec3d& altAzPos) const;
 	
 	//! These 3 Atmosphere parameters can be controlled by GUI.
 	//! Pressure[mbar] (1013)
