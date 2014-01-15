@@ -102,11 +102,12 @@ void StelMovementMgr::init()
 		}
 	}
 
+	QString movementGroup = N_("Movement and Selection");
 	addAction("actionSwitch_Equatorial_Mount", N_("Miscellaneous"), N_("Switch between equatorial and azimuthal mount"), "equatorialMount", "Ctrl+M");
-	addAction("actionGoto_Selected_Object", N_("Movement and Selection"), N_("Center on selected object"), "setFlagTracking()", "Space");
-	addAction("actionZoom_In_Auto", N_("Movement and Selection"), N_("Zoom in on selected object"), "autoZoomIn()", "/");
-	addAction("actionZoom_Out_Auto", N_("Movement and Selection"), N_("Zoom out"), "autoZoomOut()", "\\");
-	addAction("actionSet_Tracking", N_("Movement and Selection"), N_("Track object"), "tracking", "T");
+	addAction("actionGoto_Selected_Object", movementGroup, N_("Center on selected object"), "setFlagTracking()", "Space");
+	addAction("actionZoom_In_Auto", movementGroup, N_("Zoom in on selected object"), "autoZoomIn()", "/");
+	addAction("actionZoom_Out_Auto", movementGroup, N_("Zoom out"), "autoZoomOut()", "\\");
+	addAction("actionSet_Tracking", movementGroup, N_("Track object"), "tracking", "T");
 }
 
 void StelMovementMgr::setMountMode(MountMode m)
@@ -377,7 +378,8 @@ void StelMovementMgr::handleMouseClicks(QMouseEvent* event)
 					{
 						setFlagTracking(false);
 					}
-					event->accept();
+					//GZ: You must comment out this line for testing Landscape transparency debug prints.
+					//event->accept();
 					return;
 				}
 			}
@@ -848,7 +850,7 @@ void StelMovementMgr::dragView(int x1, int y1, int x2, int y2)
 		v1[2]=0; v1.normalize();
 		v2[2]=0; v2.normalize();
 		double angle = (v2^v1)[2];
-		double deltaDay = angle/(2.*M_PI)*core->getLocalSideralDayLength();
+		double deltaDay = angle/(2.*M_PI)*core->getLocalSiderealDayLength();
 		core->setJDay(core->getJDay()+deltaDay);
 		addTimeDragPoint(x2, y2);
 	}

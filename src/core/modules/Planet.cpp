@@ -32,7 +32,7 @@
 #include "Planet.hpp"
 
 #include "StelProjector.hpp"
-#include "sideral_time.h"
+#include "sidereal_time.h"
 #include "StelTextureMgr.hpp"
 #include "StelModuleMgr.hpp"
 #include "StarMgr.hpp"
@@ -58,11 +58,16 @@ Planet::Planet(const QString& englishName,
 	       bool acloseOrbit,
 	       bool hidden,
 	       bool hasAtmosphere,
+	       bool hasHalo,
 	       const QString& pType)
 	: englishName(englishName),
 	  flagLighting(flagLighting),
-	  radius(radius), oneMinusOblateness(1.0-oblateness),
-	  color(color), albedo(albedo), axisRotation(0.), rings(NULL),
+	  radius(radius),
+	  oneMinusOblateness(1.0-oblateness),
+	  color(color),
+	  albedo(albedo),
+	  axisRotation(0.),
+	  rings(NULL),
 	  sphereScale(1.f),
 	  lastJD(J2000),
 	  coordFunc(coordFunc),
@@ -71,6 +76,7 @@ Planet::Planet(const QString& englishName,
 	  parent(NULL),
 	  hidden(hidden),
 	  atmosphere(hasAtmosphere),
+	  halo(hasHalo),
 	  pType(pType)
 {
 	texMapName = atexMapName;
@@ -118,7 +124,7 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 		oss << "</h2>";
 	}
 
-	if (flags&Extra1)
+	if (flags&Type)
 	{
 		if (pType.length()>0)
 			oss << q_("Type: <b>%1</b>").arg(q_(pType)) << "<br />";
@@ -137,7 +143,7 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 
 	oss << getPositionInfoString(core, flags);
 
-	if ((flags&Extra1) && (core->getCurrentLocation().planetName=="Earth"))
+	if ((flags&Extra) && (core->getCurrentLocation().planetName=="Earth"))
 	{
 		//static SolarSystem *ssystem=GETSTELMODULE(SolarSystem);
 		//double ecl= -(ssystem->getEarth()->getRotObliquity()); // BUG DETECTED! Earth's obliquity is apparently reported constant.
@@ -153,18 +159,20 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 	if (flags&Distance)
 	{
 		double distanceAu = getJ2000EquatorialPos(core).length();
+		double distanceKm = AU * distanceAu;
 		if (distanceAu < 0.1)
 		{
-			double distanceKm = AU * distanceAu;
 			// xgettext:no-c-format
 			oss << QString(q_("Distance: %1AU (%2 km)"))
-			       .arg(distanceAu, 0, 'f', 8)
-			       .arg(distanceKm, 0, 'f', 0);
+				   .arg(distanceAu, 0, 'f', 6)
+				   .arg(distanceKm, 0, 'f', 3);
 		}
 		else
 		{
 			// xgettext:no-c-format
-			oss << q_("Distance: %1AU").arg(distanceAu, 0, 'f', 8);
+			oss << QString(q_("Distance: %1AU (%2 Mio km)"))
+				   .arg(distanceAu, 0, 'f', 3)
+				   .arg(distanceKm / 1.0e6, 0, 'f', 3);
 		}
 		oss << "<br>";
 	}
@@ -188,24 +196,26 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 
 	double siderealPeriod = getSiderealPeriod();
 	double siderealDay = getSiderealDay();
-	if ((flags&Extra1) && (siderealPeriod>0))
+	if (flags&Extra)
 	{
-		// TRANSLATORS: Sidereal (orbital) period for solar system bodies in days and in Julian years (symbol: a)
-		oss << q_("Sidereal period: %1 days (%2 a)").arg(QString::number(siderealPeriod, 'f', 2)).arg(QString::number(siderealPeriod/365.25, 'f', 3)) << "<br>";
-		if (std::abs(siderealDay)>0)
-		{			
-			oss << q_("Sidereal day: %1").arg(StelUtils::hoursToHmsStr(std::abs(siderealDay*24))) << "<br>";			
-			oss << q_("Mean solar day: %1").arg(StelUtils::hoursToHmsStr(std::abs(getMeanSolarDay()*24))) << "<br>";
+		if (siderealPeriod>0)
+		{
+			// TRANSLATORS: Sidereal (orbital) period for solar system bodies in days and in Julian years (symbol: a)
+			oss << q_("Sidereal period: %1 days (%2 a)").arg(QString::number(siderealPeriod, 'f', 2)).arg(QString::number(siderealPeriod/365.25, 'f', 3)) << "<br>";
+			if (std::abs(siderealDay)>0)
+			{
+				oss << q_("Sidereal day: %1").arg(StelUtils::hoursToHmsStr(std::abs(siderealDay*24))) << "<br>";
+				oss << q_("Mean solar day: %1").arg(StelUtils::hoursToHmsStr(std::abs(getMeanSolarDay()*24))) << "<br>";
+			}
 		}
-	}
-
-	if ((flags&Extra2) && (englishName.compare("Sun")!=0))
-	{
-		const Vec3d& observerHelioPos = core->getObserverHeliocentricEclipticPos();		
-		oss << QString(q_("Phase Angle: %1")).arg(StelUtils::radToDmsStr(getPhaseAngle(observerHelioPos))) << "<br>";
-		oss << QString(q_("Elongation: %1")).arg(StelUtils::radToDmsStr(getElongation(observerHelioPos))) << "<br>";
-		oss << QString(q_("Phase: %1")).arg(getPhase(observerHelioPos), 0, 'f', 2) << "<br>";
-		oss << QString(q_("Illuminated: %1%")).arg(getPhase(observerHelioPos) * 100, 0, 'f', 1) << "<br>";
+		if (englishName.compare("Sun")!=0)
+		{
+			const Vec3d& observerHelioPos = core->getObserverHeliocentricEclipticPos();
+			oss << QString(q_("Phase Angle: %1")).arg(StelUtils::radToDmsStr(getPhaseAngle(observerHelioPos))) << "<br>";
+			oss << QString(q_("Elongation: %1")).arg(StelUtils::radToDmsStr(getElongation(observerHelioPos))) << "<br>";
+			oss << QString(q_("Phase: %1")).arg(getPhase(observerHelioPos), 0, 'f', 2) << "<br>";
+			oss << QString(q_("Illuminated: %1%")).arg(getPhase(observerHelioPos) * 100, 0, 'f', 1) << "<br>";
+		}
 	}
 
 	postProcessInfoString(str, flags);
@@ -233,20 +243,17 @@ float Planet::getSelectPriority(const StelCore* core) const
 	if( ((SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("SolarSystem"))->getFlagHints() )
 	{
 	// easy to select, especially pluto
-		return getVMagnitude(core)-15.f;
+		return getVMagnitudeWithExtinction(core)-15.f;
 	}
 	else
 	{
-		return getVMagnitude(core) - 8.f;
+		return getVMagnitudeWithExtinction(core) - 8.f;
 	}
 }
 
 Vec3f Planet::getInfoColor(void) const
 {
-	Vec3f col = ((SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("SolarSystem"))->getLabelsColor();
-	if (StelApp::getInstance().getVisionModeNight())
-		col = StelUtils::getNightColor(col);
-	return col;
+	return ((SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("SolarSystem"))->getLabelsColor();
 }
 
 
@@ -271,7 +278,7 @@ double Planet::getParentSatellitesFov(const StelCore* core) const
 	return -1.0;
 }
 
-// Set the orbital elements
+// Set the rotational elements of the planet body.
 void Planet::setRotationElements(float _period, float _offset, double _epoch, float _obliquity, float _ascendingNode, float _precessionRate, double _siderealPeriod )
 {
 	re.period = _period;
@@ -477,13 +484,13 @@ double Planet::getSiderealTime(double jd) const
 	double wholeRotations = floor(rotations);
 	double remainder = rotations - wholeRotations;
 
-	if (englishName=="Jupiter")
-	{
-		// use semi-empirical coefficient for GRS drift
-		// TODO: need improved
-		return remainder * 360. + re.offset - 0.2483 * std::abs(StelApp::getInstance().getCore()->getJDay() - 2456172);
-	}
-	else
+// TODO: This block need rewrite
+//	if (englishName=="Jupiter")
+//	{
+//		// use semi-empirical coefficient for GRS drift
+//		return remainder * 360. + re.offset - 0.2483 * std::abs(StelApp::getInstance().getCore()->getJDay() - 2456172);
+//	}
+//	else
 		return remainder * 360. + re.offset;
 }
 
@@ -581,7 +588,6 @@ double Planet::getPhaseAngle(const Vec3d& obsPos) const
 	const Vec3d& planetHelioPos = getHeliocentricEclipticPos();
 	const double planetRq = planetHelioPos.lengthSquared();
 	const double observerPlanetRq = (obsPos - planetHelioPos).lengthSquared();
-	//return std::acos(observerPlanetRq + planetRq - observerRq)/(2.0*sqrt(observerPlanetRq*planetRq));
 	return std::acos((observerPlanetRq + planetRq - observerRq)/(2.0*sqrt(observerPlanetRq*planetRq)));
 }
 
@@ -871,16 +877,8 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 			static Vec4f diffuse = Vec4f(2.f,2.f,2.f,1.f);
 			static Vec4f zero = Vec4f(0.f,0.f,0.f,0.f);
 			static Vec4f ambient = Vec4f(0.02f,0.02f,0.02f,0.02f);
-			if (StelApp::getInstance().getVisionModeNight())
-			{
-				diffuse[1] = 0.; diffuse[2] = 0.;
-				ambient[1] = 0.; ambient[2] = 0.;
-			}
-			else
-			{
-				diffuse[1] = 2.; diffuse[2] = 2.;
-				ambient[1] = 0.02; ambient[2] = 0.02;
-			}
+			diffuse[1] = 2.; diffuse[2] = 2.;
+			ambient[1] = 0.02; ambient[2] = 0.02;
 			sPainter->getLight().setAmbient(ambient);
 			sPainter->getLight().setDiffuse(diffuse);
 			sPainter->getLight().setSpecular(zero);
@@ -888,7 +886,7 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 		else
 		{
 			sPainter->getLight().disable();
-			sPainter->setColor(1.f,1.f,1.f);
+			sPainter->setColor(albedo,albedo,albedo);
 		}
 
 		if (rings)
@@ -941,15 +939,17 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 		sPainter=NULL;
 	}
 
-	// Draw the halo
+	// Draw the halo if it enabled in the ssystem.ini file (+ special case for backward compatible for the Sun)
+	if (hasHalo() || getEnglishName().contains("Sun"))
+	{
+		// Prepare openGL lighting parameters according to luminance
+		float surfArcMin2 = getSpheroidAngularSize(core)*60;
+		surfArcMin2 = surfArcMin2*surfArcMin2*M_PI; // the total illuminated area in arcmin^2
 
-	// Prepare openGL lighting parameters according to luminance
-	float surfArcMin2 = getSpheroidAngularSize(core)*60;
-	surfArcMin2 = surfArcMin2*surfArcMin2*M_PI; // the total illuminated area in arcmin^2
-
-	StelPainter sPainter(core->getProjection(StelCore::FrameJ2000));
-	Vec3d tmp = getJ2000EquatorialPos(core);
-	core->getSkyDrawer()->postDrawSky3dModel(&sPainter, Vec3f(tmp[0], tmp[1], tmp[2]), surfArcMin2, getVMagnitudeWithExtinction(core), color);
+		StelPainter sPainter(core->getProjection(StelCore::FrameJ2000));
+		Vec3d tmp = getJ2000EquatorialPos(core);
+		core->getSkyDrawer()->postDrawSky3dModel(&sPainter, Vec3f(tmp[0], tmp[1], tmp[2]), surfArcMin2, getVMagnitudeWithExtinction(core), color);
+	}
 }
 
 
@@ -963,11 +963,8 @@ void Planet::drawSphere(StelPainter* painter, float screenSz)
 			return;
 		}
 	}
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	if (StelApp::getInstance().getVisionModeNight())
-		painter->setColor(1.f, 0.f, 0.f);
-	else
-		painter->setColor(1.f, 1.f, 1.f);
+	//glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // GZ deactivated. 2013-12-27. If disabling blend, who cares which one?
+	painter->setColor(1.f, 1.f, 1.f);
 
 	painter->enableTexture2d(true);
 	glDisable(GL_BLEND);
@@ -1093,7 +1090,7 @@ void Planet::drawHints(const StelCore* core, const QFont& planetNameFont)
 	sPainter.setColor(labelColor[0], labelColor[1], labelColor[2],labelsFader.getInterstate());
 	sPainter.drawText(screenPos[0],screenPos[1], getSkyLabel(core), 0, tmp, tmp, false);
 
-	// hint disapears smoothly on close view
+	// hint disappears smoothly on close view
 	if (hintFader.getInterstate()<=0)
 		return;
 	tmp -= 10.f;
@@ -1129,11 +1126,7 @@ void Ring::draw(StelPainter* sPainter,StelProjector::ModelViewTranformP transfo,
 
 	// Normal transparency mode
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	if (StelApp::getInstance().getVisionModeNight())
-		sPainter->setColor(1.f, 0.f, 0.f);
-	else
-		sPainter->setColor(1.f, 1.f, 1.f);
-
+	sPainter->setColor(1.f, 1.f, 1.f);
 	sPainter->enableTexture2d(true);
 	glEnable(GL_CULL_FACE);
 	glEnable(GL_BLEND);

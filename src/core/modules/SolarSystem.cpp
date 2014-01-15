@@ -58,7 +58,11 @@
 #include <QDebug>
 #include <QDir>
 
-SolarSystem::SolarSystem() : moonScale(1.),	flagOrbits(false), flagLightTravelTime(false), allTrails(NULL)
+SolarSystem::SolarSystem()
+	: moonScale(1.),
+	  flagOrbits(false),
+	  flagLightTravelTime(false),
+	  allTrails(NULL)
 {
 	planetNameFont.setPixelSize(StelApp::getInstance().getSettings()->value("gui/base_font_size", 13).toInt());
 	setObjectName("SolarSystem");
@@ -118,13 +122,14 @@ void SolarSystem::init()
 
 	setSelected("");	// Fix a bug on macosX! Thanks Fumio!
 	setFlagMoonScale(conf->value("viewing/flag_moon_scaled", conf->value("viewing/flag_init_moon_scaled", "false").toBool()).toBool());  // name change
-	setMoonScale(conf->value("viewing/moon_scale", 5.0).toFloat());
+	setMoonScale(conf->value("viewing/moon_scale", 4.0).toFloat());
 	setFlagPlanets(conf->value("astro/flag_planets").toBool());
 	setFlagHints(conf->value("astro/flag_planets_hints").toBool());
 	setFlagLabels(conf->value("astro/flag_planets_labels", true).toBool());
 	setLabelsAmount(conf->value("astro/labels_amount", 3.).toFloat());
 	setFlagOrbits(conf->value("astro/flag_planets_orbits").toBool());
 	setFlagLightTravelTime(conf->value("astro/flag_light_travel_time", false).toBool());
+	setFlagMarkers(conf->value("astro/flag_planets_markers", true).toBool());
 
 	recreateTrails();
 
@@ -142,9 +147,10 @@ void SolarSystem::init()
 	connect(app, SIGNAL(languageChanged()), this, SLOT(updateI18n()));
 	connect(app, SIGNAL(colorSchemeChanged(const QString&)), this, SLOT(setStelStyle(const QString&)));
 
-	addAction("actionShow_Planets_Labels", "Display Options", N_("Planet labels"), "labelsDisplayed", "P");
-	addAction("actionShow_Planets_Orbits", "Display Options", N_("Planet orbits"), "orbitsDisplayed", "O");
-	addAction("actionShow_Planets_Trails", "Display Options", N_("Planet trails"), "trailsDisplayed", "Shift+T");
+	QString displayGroup = N_("Display Options");
+	addAction("actionShow_Planets_Labels", displayGroup, N_("Planet labels"), "labelsDisplayed", "P");
+	addAction("actionShow_Planets_Orbits", displayGroup, N_("Planet orbits"), "orbitsDisplayed", "O");
+	addAction("actionShow_Planets_Trails", displayGroup, N_("Planet trails"), "trailsDisplayed", "Shift+T");
 }
 
 void SolarSystem::recreateTrails()
@@ -176,13 +182,13 @@ void SolarSystem::drawPointer(const StelCore* core)
 
 
 		StelPainter sPainter(prj);
-		if (StelApp::getInstance().getVisionModeNight())
-			sPainter.setColor(1.0f,0.0f,0.0f);
-		else
-			sPainter.setColor(1.0f,0.3f,0.3f);
+		Vec3f color = getPointersColor();
+		sPainter.setColor(color[0],color[1],color[2]);
 
 		float size = obj->getAngularSize(core)*M_PI/180.*prj->getPixelPerRadAtCenter()*2.;
-		size+=40.f + 10.f*std::sin(2.f * StelApp::getInstance().getTotalRunTime());
+		
+		const float scale = prj->getDevicePixelsPerPixel()*StelApp::getInstance().getGlobalScalingRatio();
+		size+= scale * (45.f + 10.f*std::sin(2.f * StelApp::getInstance().getTotalRunTime()));
 
 		texPointer->bind();
 
@@ -353,7 +359,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 	{
 		totalPlanets++;
 		const QString secname = orderedSections.at(i);
-		const QString englishName = pd.value(secname+"/name").toString();
+		const QString englishName = pd.value(secname+"/name").toString().simplified();
 		const QString strParent = pd.value(secname+"/parent").toString();
 		PlanetP parent;
 		if (strParent!="none")
@@ -523,11 +529,14 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 					} else {
 						// in case of parent=sun: use Gaussian gravitational constant
 						// for calculating meanMotion:
+						//meanMotion = (eccentricity >= 0.9999 && eccentricity <= 1.0)
+						//			? 0.01720209895 * (1.5/pericenterDistance) * sqrt(0.5/pericenterDistance)
+						//			: (semi_major_axis > 0.0)
+						//			? 0.01720209895 / (semi_major_axis*sqrt(semi_major_axis))
+						//			: 0.01720209895 / (-semi_major_axis*sqrt(-semi_major_axis));
 						meanMotion = (eccentricity == 1.0)
-									? 0.01720209895 * (1.5/pericenterDistance) * sqrt(0.5/pericenterDistance)
-									: (semi_major_axis > 0.0)
-									? 0.01720209895 / (semi_major_axis*sqrt(semi_major_axis))
-									: 0.01720209895 / (-semi_major_axis*sqrt(-semi_major_axis));
+									? 0.01720209895 * (1.5/pericenterDistance) * sqrt(0.5/pericenterDistance)  // GZ: This is Heafner's W / dt
+									: 0.01720209895 / (fabs(semi_major_axis)*sqrt(fabs(semi_major_axis)));
 					}
 				} else {
 					meanMotion = 2.0*M_PI/period;
@@ -550,6 +559,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 					time_at_pericenter = epoch - mean_anomaly / meanMotion;
 				}
 			}
+			const double orbitGoodDays=pd.value(secname+"/orbit_good", 1000).toDouble();
 			const double inclination = pd.value(secname+"/orbit_Inclination").toDouble()*(M_PI/180.0);
 			const double arg_of_pericenter = pd.value(secname+"/orbit_ArgOfPericenter").toDouble()*(M_PI/180.0);
 			const double ascending_node = pd.value(secname+"/orbit_AscendingNode").toDouble()*(M_PI/180.0);
@@ -569,12 +579,14 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 							J2000NodeOrigin.normalize();
 							parent_rot_j2000_longitude = atan2(J2000NodeOrigin*OrbitAxis1,J2000NodeOrigin*OrbitAxis0);
 						}
+			qDebug() << "Creating CometOrbit for" << englishName;
 			CometOrbit *orb = new CometOrbit(pericenterDistance,
 							 eccentricity,
 							 inclination,
 							 ascending_node,
 							 arg_of_pericenter,
 							 time_at_pericenter,
+							 orbitGoodDays,
 							 meanMotion,
 							 parentRotObliquity,
 							 parent_rot_asc_node,
@@ -698,10 +710,10 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 		}
 
 		// Create the Solar System body and add it to the list
-		QString type = pd.value(secname+"/type").toString();
+		QString type = pd.value(secname+"/type").toString();		
 		PlanetP p;
-		// New class objects, named "plutoid", has properties similar asteroids and we should calculate their
-		// positions like for asteroids. Plutoids having one exception - Pluto - we should use special
+		// New class objects, named "plutoid", has properties similar to asteroids and we should calculate their
+		// positions like for asteroids. Plutoids have one exception: Pluto - we should use special
 		// function for calculation of orbit of Pluto.
 		if ((type == "asteroid" || type == "plutoid") && !englishName.contains("Pluto"))
 		{
@@ -716,7 +728,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 						    userDataPtr,
 						    osculatingFunc,
 						    closeOrbit,
-						    pd.value(secname+"/hidden", 0).toBool(),
+						    pd.value(secname+"/hidden", 0).toBool(),						    
 						    type));
 
 			QSharedPointer<MinorPlanet> mp =  p.dynamicCast<MinorPlanet>();
@@ -725,7 +737,6 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 			int minorPlanetNumber = pd.value(secname+"/minor_planet_number", 0).toInt();
 			if (minorPlanetNumber)
 			{
-
 				mp->setMinorPlanetNumber(minorPlanetNumber);
 			}
 
@@ -767,8 +778,12 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 			               userDataPtr,
 			               osculatingFunc,
 			               closeOrbit,
-				       pd.value(secname+"/hidden", 0).toBool(),
-				       type));
+						   pd.value(secname+"/hidden", 0).toBool(),
+						   type,
+						   pd.value(secname+"/dust_widthfactor", 1.5f).toFloat(),
+						   pd.value(secname+"/dust_lengthfactor", 0.4f).toFloat(),
+						   pd.value(secname+"/dust_brightnessfactor", 1.5f).toFloat()
+						  ));
 
 			QSharedPointer<Comet> mp =  p.dynamicCast<Comet>();
 
@@ -805,6 +820,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 					       closeOrbit,
 					       pd.value(secname+"/hidden", 0).toBool(),
 					       pd.value(secname+"/atmosphere", false).toBool(),
+					       pd.value(secname+"/halo", 0).toBool(),
 					       type));
 		}
 
@@ -969,7 +985,7 @@ void SolarSystem::draw(StelCore* core)
 		p->draw(core, maxMagLabel, planetNameFont);
 	}
 
-	if (GETSTELMODULE(StelObjectMgr)->getFlagSelectedObjectPointer())
+	if (GETSTELMODULE(StelObjectMgr)->getFlagSelectedObjectPointer() && getFlagMarkers())
 		drawPointer(core);
 }
 
@@ -981,6 +997,7 @@ void SolarSystem::setStelStyle(const QString& section)
 	setLabelsColor(StelUtils::strToVec3f(conf->value(section+"/planet_names_color", defaultColor).toString()));
 	setOrbitsColor(StelUtils::strToVec3f(conf->value(section+"/planet_orbits_color", defaultColor).toString()));
 	setTrailsColor(StelUtils::strToVec3f(conf->value(section+"/object_trails_color", defaultColor).toString()));
+	setPointersColor(StelUtils::strToVec3f(conf->value(section+"/planet_pointers_color", "1.0,0.3,0.3").toString()));
 
 	// Recreate the trails to apply new colors
 	recreateTrails();
@@ -1380,7 +1397,7 @@ void SolarSystem::setFlagMoonScale(bool b)
 }
 
 // Set/Get Moon display scaling factor
-void SolarSystem::setMoonScale(float f)
+void SolarSystem::setMoonScale(double f)
 {
 	moonScale = f;
 	if (flagMoonScale)

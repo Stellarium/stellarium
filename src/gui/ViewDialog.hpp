@@ -33,14 +33,13 @@ class ViewDialog : public StelDialog
 {
 Q_OBJECT
 public:
-	ViewDialog();
+	ViewDialog(QObject* parent);
 	virtual ~ViewDialog();
 	//! Notify that the application style changed
 	void styleChanged();
 
 public slots:
 	void retranslate();
-	void updateIconsColor();
 
 protected:
 	Ui_viewDialogForm* ui;
@@ -56,6 +55,7 @@ private slots:
 	void updateZhrDescription(int zhr);
 	void planetsLabelsValueChanged(int);
 	void nebulasLabelsValueChanged(int);
+	void setBortleScaleToolTip(int Bindex);
 	void starsLabelsValueChanged(int);
 	void setCurrentLandscapeAsDefault(void);
 	void setCurrentCultureAsDefault(void);

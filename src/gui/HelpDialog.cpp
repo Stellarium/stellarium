@@ -45,7 +45,7 @@
 #include "StelStyle.hpp"
 #include "StelActionMgr.hpp"
 
-HelpDialog::HelpDialog()
+HelpDialog::HelpDialog(QObject* parent) : StelDialog(parent)
 {
 	ui = new Ui_helpDialogForm;
 }
@@ -73,32 +73,11 @@ void HelpDialog::styleChanged()
 	}
 }
 
-void HelpDialog::updateIconsColor()
-{
-	QPixmap pixmap(50, 50);
-	QStringList icons;
-	icons << "help" << "info" << "logs";
-	bool redIcon = false;
-	if (StelApp::getInstance().getVisionModeNight())
-		redIcon = true;
-
-	foreach(const QString &iconName, icons)
-	{
-		pixmap.load(":/graphicGui/tabicon-" + iconName +".png");
-		if (redIcon)
-			pixmap = StelButton::makeRed(pixmap);
-
-		ui->stackListWidget->item(icons.indexOf(iconName))->setIcon(QIcon(pixmap));
-	}
-}
-
 void HelpDialog::createDialogContent()
 {
 	ui->setupUi(dialog);
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
-	connect(&StelApp::getInstance(), SIGNAL(colorSchemeChanged(QString)), this, SLOT(updateIconsColor()));
 	ui->stackedWidget->setCurrentIndex(0);
-	updateIconsColor();
 	ui->stackListWidget->setCurrentRow(0);
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 
@@ -136,34 +115,33 @@ void HelpDialog::refreshLog()
 
 QString HelpDialog::getHelpText(void)
 {
-	#define E(x) q_(x).toHtmlEscaped()
 	QString htmlText = "<html><head><title>";
-	htmlText += E("Stellarium Help");
+	htmlText += q_("Stellarium Help").toHtmlEscaped();
 	htmlText += "</title></head><body>\n";
 	
 	// WARNING! Section titles are re-used below!
 	htmlText += "<p align=\"center\"><a href=\"#keys\">" +
-	            E("Keys") +
+		    q_("Keys").toHtmlEscaped() +
 	            "</a> &bull; <a href=\"#links\">" +
-	            E("Further Reading") +
+		    q_("Further Reading").toHtmlEscaped() +
 	            "</a></p>\n";
 	
-	htmlText += "<h2 id='keys'>" + E("Keys") + "</h2>\n";
+	htmlText += "<h2 id='keys'>" + q_("Keys").toHtmlEscaped() + "</h2>\n";
 	htmlText += "<table cellpadding=\"10%\">\n";
 	// Describe keys for those keys which do not have actions.
 	// navigate
-	htmlText += "<tr><td>" + E("Pan view around the sky") + "</td>";
-	htmlText += "<td><b>" + E("Arrow keys & left mouse drag") + "</b></td></tr>\n";
+	htmlText += "<tr><td>" + q_("Pan view around the sky").toHtmlEscaped() + "</td>";
+	htmlText += "<td><b>" + q_("Arrow keys & left mouse drag").toHtmlEscaped() + "</b></td></tr>\n";
 	// zoom in/out
-	htmlText += "<tr><td rowspan='2'>" + E("Zoom in/out") +
+	htmlText += "<tr><td rowspan='2'>" + q_("Zoom in/out").toHtmlEscaped() +
 	            "</td>";
-	htmlText += "<td><b>" + E("Page Up/Down") +
+	htmlText += "<td><b>" + q_("Page Up/Down").toHtmlEscaped() +
 	            "</b></td></tr>\n";
-	htmlText += "<tr><td><b>" + E("CTRL + Up/Down") +
+	htmlText += "<tr><td><b>" + q_("CTRL + Up/Down").toHtmlEscaped() +
 	            "</b></td></tr>\n";
 	// select object
-	htmlText += "<tr><td>" + E("Select object") + "</td>";
-	htmlText += "<td><b>" + E("Left click") + "</b></td></tr>\n";
+	htmlText += "<tr><td>" + q_("Select object").toHtmlEscaped() + "</td>";
+	htmlText += "<td><b>" + q_("Left click").toHtmlEscaped() + "</b></td></tr>\n";
 	// clear selection
 	htmlText += "<tr>";
 #ifdef Q_OS_MAC
@@ -171,10 +149,10 @@ QString HelpDialog::getHelpText(void)
 #else
 	htmlText += "<td>";
 #endif
-	htmlText += E("Clear selection") + "</td>";
-	htmlText += "<td><b>" + E("Right click") + "</b></td></tr>\n";
+	htmlText += q_("Clear selection").toHtmlEscaped() + "</td>";
+	htmlText += "<td><b>" + q_("Right click").toHtmlEscaped() + "</b></td></tr>\n";
 #ifdef Q_OS_MAC
-	htmlText += "<tr><td><b>" + E("CTRL + Left click") + "</b></td></tr>\n";
+	htmlText += "<tr><td><b>" + q_("CTRL + Left click").toHtmlEscaped() + "</b></td></tr>\n";
 	//htmlText += "<td>" + E("Clear selection") + "</td>";
 #endif
 	
@@ -198,7 +176,7 @@ QString HelpDialog::getHelpText(void)
 			descriptions.append(KeyDescription(text, key));
 		}
 		qSort(descriptions);
-		htmlText += "<tr></tr><tr><td><b><u>" + E(group) +
+		htmlText += "<tr></tr><tr><td><b><u>" + q_(group) +
 		            ":</u></b></td></tr>\n";
 		foreach (const KeyDescription& desc, descriptions)
 		{
@@ -217,33 +195,33 @@ QString HelpDialog::getHelpText(void)
 	QRegExp a_rx = QRegExp("[{]([^{]*)[}]");
 
 	// WARNING! Section titles are re-used above!
-	htmlText += "<h2 id=\"links\">" + E("Further Reading") + "</h2>\n";
-	htmlText += E("The following links are external web links, and will launch your web browser:\n");
-	htmlText += "<p><a href=\"http://stellarium.org/wiki/index.php/Category:User%27s_Guide\">" + E("The Stellarium User Guide") + "</a>";
+	htmlText += "<h2 id=\"links\">" + q_("Further Reading").toHtmlEscaped() + "</h2>\n";
+	htmlText += q_("The following links are external web links, and will launch your web browser:\n").toHtmlEscaped();
+	htmlText += "<p><a href=\"http://stellarium.org/wiki/index.php/Category:User%27s_Guide\">" + q_("The Stellarium User Guide").toHtmlEscaped() + "</a>";
 
 	htmlText += "<p>";
 	// TRANSLATORS: The text between braces is the text of an HTML link.
-	htmlText += E("{Frequently Asked Questions} about Stellarium.  Answers too.").replace(a_rx, "<a href=\"http://www.stellarium.org/wiki/index.php/FAQ\">\\1</a>");
+	htmlText += q_("{Frequently Asked Questions} about Stellarium.  Answers too.").toHtmlEscaped().replace(a_rx, "<a href=\"http://www.stellarium.org/wiki/index.php/FAQ\">\\1</a>");
 	htmlText += "</p>\n";
 
 	htmlText += "<p>";
 	// TRANSLATORS: The text between braces is the text of an HTML link.
-	htmlText += E("{The Stellarium Wiki} - General information.  You can also find user-contributed landscapes and scripts here.").replace(a_rx, "<a href=\"http://stellarium.org/wiki/\">\\1</a>");
+	htmlText += q_("{The Stellarium Wiki} - General information.  You can also find user-contributed landscapes and scripts here.").toHtmlEscaped().replace(a_rx, "<a href=\"http://stellarium.org/wiki/\">\\1</a>");
 	htmlText += "</p>\n";
 
 	htmlText += "<p>";
 	// TRANSLATORS: The text between braces is the text of an HTML link.
-	htmlText += E("{Support ticket system} - if you need help using Stellarium, post a support request here and we'll try to help.").replace(a_rx, "<a href=\"http://answers.launchpad.net/stellarium/+addquestion\">\\1</a>");
+	htmlText += q_("{Support ticket system} - if you need help using Stellarium, post a support request here and we'll try to help.").toHtmlEscaped().replace(a_rx, "<a href=\"http://answers.launchpad.net/stellarium/+addquestion\">\\1</a>");
 	htmlText += "</p>\n";
 
 	htmlText += "<p>";
 	// TRANSLATORS: The text between braces is the text of an HTML link.
-	htmlText += E("{Bug reporting and feature request system} - if something doesn't work properly or is missing and is not listed in the tracker, you can open bug reports here.").replace(a_rx, "<a href=\"http://bugs.launchpad.net/stellarium/\">\\1</a>");
+	htmlText += q_("{Bug reporting and feature request system} - if something doesn't work properly or is missing and is not listed in the tracker, you can open bug reports here.").toHtmlEscaped().replace(a_rx, "<a href=\"http://bugs.launchpad.net/stellarium/\">\\1</a>");
 	htmlText += "</p>\n";
 
 	htmlText += "<p>";
 	// TRANSLATORS: The text between braces is the text of an HTML link.
-	htmlText += E("{Forums} - discuss Stellarium with other users.").replace(a_rx, "<a href=\"http://sourceforge.net/forum/forum.php?forum_id=278769\">\\1</a>");
+	htmlText += q_("{Forums} - discuss Stellarium with other users.").toHtmlEscaped().replace(a_rx, "<a href=\"http://sourceforge.net/forum/forum.php?forum_id=278769\">\\1</a>");
 	htmlText += "</p>\n";
 
 	htmlText += "</body></html>\n";

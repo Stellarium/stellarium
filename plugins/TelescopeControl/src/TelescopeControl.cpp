@@ -79,6 +79,7 @@ StelPluginInfo TelescopeControlStelPluginInterface::getPluginInfo() const
 	info.authors = "Bogdan Marinov, Johannes Gajdosik";
 	info.contact = "http://stellarium.org";
 	info.description = N_("This plug-in allows Stellarium to send \"slew\" commands to a telescope on a computerized mount (a \"GoTo telescope\").");
+	info.version = TELESCOPE_CONTROL_VERSION;
 	return info;
 }
 
@@ -163,7 +164,7 @@ void TelescopeControl::init()
 			name = moveToCenterActionId.arg(i);
 			shortcut = QString("Alt+%1").arg(i);
 			text = q_("Move telescope #%1 to the point currently in the center of the screen").arg(i);
-			addAction(name, "Telescope Control", text, "slewTelescopeToViewDirection()", shortcut);
+			addAction(name, N_("Telescope Control"), text, "slewTelescopeToViewDirection()", shortcut);
 		}
 		connect(&StelApp::getInstance(), SIGNAL(languageChanged()),
 		        this, SLOT(translateActionDescriptions()));

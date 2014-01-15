@@ -415,7 +415,7 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 
 	//Night mode
 	connect(&stelApp, SIGNAL(colorSchemeChanged(const QString&)),
-	        this, SLOT(setColorScheme(const QString&)));
+		this, SLOT(setColorScheme(const QString&)));
 	setColorScheme(stelApp.getCurrentStelStyle());
 }
 
@@ -1033,36 +1033,12 @@ void OcularsGuiPanel::setControlsFont(const QFont& font)
 	fieldLensMultipler->setFont(font);
 }
 
-void OcularsGuiPanel::setButtonsNightMode(bool nightMode)
-{
-	//Reused from SkyGui, with modifications
-	foreach (QGraphicsItem *child, QGraphicsItem::childItems())
-	{
-		foreach (QGraphicsItem *grandchild, child->childItems())
-		{
-			StelButton* button = qgraphicsitem_cast<StelButton*>(grandchild);
-			if (button)
-				button->setRedMode(nightMode);
-		}
-	}
-}
-
 void OcularsGuiPanel::setColorScheme(const QString &schemeName)
 {
-	if (schemeName == "night_color")
-	{
-		borderPath->setPen(QColor::fromRgbF(0.7,0.2,0.2,0.5));
-		borderPath->setBrush(QColor::fromRgbF(0.23, 0.13, 0.03, 0.2));
-		setControlsColor(QColor::fromRgbF(0.9, 0.33, 0.33, 0.9));
-		setButtonsNightMode(true);
-	}
-	else
-	{
-		borderPath->setPen(QColor::fromRgbF(0.7,0.7,0.7,0.5));
-		borderPath->setBrush(QColor::fromRgbF(0.15, 0.16, 0.19, 0.2));
-		setControlsColor(QColor::fromRgbF(0.9, 0.91, 0.95, 0.9));
-		setButtonsNightMode(false);
-	}
+	Q_UNUSED(schemeName);
+	borderPath->setPen(QColor::fromRgbF(0.7,0.7,0.7,0.5));
+	borderPath->setBrush(QColor::fromRgbF(0.15, 0.16, 0.19, 0.2));
+	setControlsColor(QColor::fromRgbF(0.9, 0.91, 0.95, 0.9));
 }
 
 QPixmap OcularsGuiPanel::createPixmapFromText(const QString& text,

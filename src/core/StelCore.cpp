@@ -158,6 +158,8 @@ void StelCore::init()
 
 	// Register all the core actions.
 	QString timeGroup = N_("Date and Time");
+	QString movementGroup = N_("Movement and Selection");
+	QString displayGroup = N_("Display Options");
 	StelActionMgr* actionsMgr = StelApp::getInstance().getStelActionManager();
 	actionsMgr->addAction("actionIncrease_Time_Speed", timeGroup, N_("Increase time speed"), this, "increaseTimeSpeed()", "L");
 	actionsMgr->addAction("actionDecrease_Time_Speed", timeGroup, N_("Decrease time speed"), this, "decreaseTimeSpeed()", "J");
@@ -197,10 +199,10 @@ void StelCore::init()
 	actionsMgr->addAction("actionSubtract_Tropical_Year", timeGroup, N_("Subtract 1 mean tropical year"), this, "subtractTropicalYear()");
 	actionsMgr->addAction("actionSubtract_Tropical_Century", timeGroup, N_("Subtract 1 mean tropical century"), this, "subtractTropicalCentury()");
 
-	actionsMgr->addAction("actionSet_Home_Planet_To_Selected", N_("Movement and Selection"), N_("Set home planet to selected planet"), this, "moveObserverToSelected()", "Ctrl+G");
-	actionsMgr->addAction("actionGo_Home_Global", N_("Movement and Selection"), N_("Go to home"), this, "returnToHome()", "Ctrl+H");
-	actionsMgr->addAction("actionHorizontal_Flip", N_("Display Options"), N_("Flip scene horizontally"), this, "flipHorz", "Ctrl+Shift+H", "", true);
-	actionsMgr->addAction("actionVertical_Flip", N_("Display Options"), N_("Flip scene vertically"), this, "flipVert", "Ctrl+Shift+V", "", true);
+	actionsMgr->addAction("actionSet_Home_Planet_To_Selected", movementGroup, N_("Set home planet to selected planet"), this, "moveObserverToSelected()", "Ctrl+G");
+	actionsMgr->addAction("actionGo_Home_Global", movementGroup, N_("Go to home"), this, "returnToHome()", "Ctrl+H");
+	actionsMgr->addAction("actionHorizontal_Flip", displayGroup, N_("Flip scene horizontally"), this, "flipHorz", "Ctrl+Shift+H", "", true);
+	actionsMgr->addAction("actionVertical_Flip", displayGroup, N_("Flip scene vertically"), this, "flipVert", "Ctrl+Shift+V", "", true);
 	
 }
 
@@ -1132,19 +1134,19 @@ void StelCore::addSiderealDays(double d)
 }
 
 // Get the sidereal time shifted by the observer longitude
-double StelCore::getLocalSideralTime() const
+double StelCore::getLocalSiderealTime() const
 {
 	return (position->getHomePlanet()->getSiderealTime(JDay)+position->getCurrentLocation().longitude)*M_PI/180.;
 }
 
 //! Get the duration of a sidereal day for the current observer in day.
-double StelCore::getLocalSideralDayLength() const
+double StelCore::getLocalSiderealDayLength() const
 {
 	return position->getHomePlanet()->getSiderealDay();
 }
 
 //! Get the duration of a sidereal year for the current observer in days.
-double StelCore::getLocalSideralYearLength() const
+double StelCore::getLocalSiderealYearLength() const
 {
 	return position->getHomePlanet()->getSiderealPeriod();
 }

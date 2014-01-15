@@ -159,6 +159,11 @@ public slots:
 	//! Get the current value of the flag which determines if planet orbits are drawn or hidden.
 	bool getFlagOrbits() const {return flagOrbits;}
 
+	//! Set flag which determines if planet markers are drawn or hidden.
+	void setFlagMarkers(bool b) { flagMarker=b; }
+	//! Get the current value of the flag which determines if planet markers are drawn or hidden.
+	bool getFlagMarkers() const {return flagMarker;}
+
 	//! Set flag which determines if the light travel time calculation is used or not.
 	void setFlagLightTravelTime(bool b);
 	//! Get the current value of the flag which determines if light travel time
@@ -183,13 +188,18 @@ public slots:
 	//! Get the current color used to draw planet trails lines.
 	Vec3f getTrailsColor() const {return trailColor;}
 
+	//! Set the color used to draw planet pointers.
+	void setPointersColor(const Vec3f& c) {pointerColor=c;}
+	//! Get the current color used to draw planet pointers.
+	Vec3f getPointersColor() const {return pointerColor;}
+
 	//! Set flag which determines if Earth's moon is scaled or not.
 	void setFlagMoonScale(bool b);
 	//! Get the current value of the flag which determines if Earth's moon is scaled or not.
 	bool getFlagMoonScale(void) const {return flagMoonScale;}
 
 	//! Set the display scaling factor for Earth's moon.
-	void setMoonScale(float f);
+	void setMoonScale(double f);
 	//! Get the display scaling factor for Earth's oon.
 	float getMoonScale(void) const {return moonScale;}
 
@@ -341,10 +351,12 @@ private:
 	StelTextureSP texPointer;
 
 	bool flagShow;
+	bool flagMarker;
 
 	class TrailGroup* allTrails;
 	LinearFader trailFader;
 	Vec3f trailColor;
+	Vec3f pointerColor;
 
 	//////////////////////////////////////////////////////////////////////////////////
 	// DEPRECATED

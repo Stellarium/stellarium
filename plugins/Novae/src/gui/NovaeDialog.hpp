@@ -27,6 +27,7 @@
 
 class Ui_novaeDialog;
 class QTimer;
+class Novae;
 
 class NovaeDialog : public StelDialog
 {
@@ -55,6 +56,7 @@ private slots:
 
 private:
 	Ui_novaeDialog* ui;
+	Novae* nova;
 	void setAboutHtml(void);
 	void updateGuiFromSettings(void);
 	QTimer* updateTimer;

@@ -25,6 +25,7 @@
 #include "StelCore.hpp"
 
 #include <stdexcept>
+#include <stdio.h>
 #include <QDebug>
 
 void StelSkyPolygon::initCtor()

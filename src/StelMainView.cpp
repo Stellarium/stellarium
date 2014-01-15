@@ -46,6 +46,9 @@
 #include <QTimer>
 #include <QWidget>
 #include <QWindow>
+#include <QDeclarativeContext>
+
+#include <clocale>
 
 // Initialize static variables
 StelMainView* StelMainView::singleton = NULL;
@@ -112,7 +115,6 @@ void StelSkyItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *optio
 	StelApp::getInstance().draw();
 
 	painter->endNativePainting();
-	// update();
 }
 
 void StelSkyItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
@@ -178,6 +180,7 @@ StelGuiItem::StelGuiItem(QDeclarativeItem* parent) : QDeclarativeItem(parent)
 	connect(this, &StelGuiItem::widthChanged, this, &StelGuiItem::onSizeChanged);
 	connect(this, &StelGuiItem::heightChanged, this, &StelGuiItem::onSizeChanged);
 	widget = new QGraphicsWidget(this);
+	StelMainView::getInstance().guiWidget = widget;
 	StelApp::getInstance().getGui()->init(widget);
 }
 
@@ -202,10 +205,13 @@ public:
 protected:
 	virtual void initializeGL()
 	{
+		qDebug() << "It appears this is never called?";
+		Q_ASSERT(0);
 		qDebug() << "OpenGL supported version: " << QString((char*)glGetString(GL_VERSION));
 
 		QGLWidget::initializeGL();
 
+		qDebug() << "Current Context: " << this->format();
 		if (!format().stencil())
 			qWarning("Could not get stencil buffer; results will be suboptimal");
 		if (!format().depth())
@@ -290,8 +296,8 @@ void StelMainView::init(QSettings* conf)
 	stelApp->setGui(gui);
 	stelApp->init(conf);
 	StelActionMgr *actionMgr = stelApp->getStelActionManager();
-	actionMgr->addAction("actionSave_Screenshot_Global", "Miscellaneous", N_("Save screenshot"), this, "saveScreenShot()", "Ctrl+S");
-	actionMgr->addAction("actionSet_Full_Screen_Global", "Display Options", N_("Full-screen mode"), this, "fullScreen", "F11");
+	actionMgr->addAction("actionSave_Screenshot_Global", N_("Miscellaneous"), N_("Save screenshot"), this, "saveScreenShot()", "Ctrl+S");
+	actionMgr->addAction("actionSet_Full_Screen_Global", N_("Display Options"), N_("Full-screen mode"), this, "fullScreen", "F11");
 	
 
 	StelPainter::initGLShaders();
@@ -300,17 +306,18 @@ void StelMainView::init(QSettings* conf)
 	setResizeMode(QDeclarativeView::SizeRootObjectToView);
 	qmlRegisterType<StelSkyItem>("Stellarium", 1, 0, "StelSky");
 	qmlRegisterType<StelGuiItem>("Stellarium", 1, 0, "StelGui");
-	setSource(QUrl("qrc:/qml/qml/main.qml"));
+	rootContext()->setContextProperty("stelApp", stelApp);
+	setSource(QUrl("qrc:/qml/main.qml"));
 	
 	QScreen* screen = glWidget->windowHandle()->screen();
 	int width = conf->value("video/screen_w", screen->size().width()).toInt();
 	int height = conf->value("video/screen_h", screen->size().height()).toInt();
+
+	// Without this, the screen is not shown on a Mac + we should use resize() for correct work of fullscreen/windowed mode switch. --AW WTF???
+	resize(width, height);
+
 	if (conf->value("video/fullscreen", true).toBool())
 	{
-#ifdef Q_OS_MAC
-		// Without this, the screen is not shown on a Mac.
-		resize(width, height);
-#endif
 		setFullScreen(true);
 	}
 	else
@@ -319,7 +326,6 @@ void StelMainView::init(QSettings* conf)
 		int x = conf->value("video/screen_x", 0).toInt();
 		int y = conf->value("video/screen_y", 0).toInt();
 		move(x, y);
-		resize(width, height);
 	}
 	show();
 
@@ -515,4 +521,3 @@ void StelMainView::doScreenshot(void)
 		qWarning() << "WARNING failed to write screenshot to: " << QDir::toNativeSeparators(shotPath.filePath());
 	}
 }
-
