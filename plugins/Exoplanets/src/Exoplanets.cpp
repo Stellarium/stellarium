@@ -485,6 +485,7 @@ bool Exoplanets::backupJsonFile(bool deleteOriginal)
 void Exoplanets::readJsonFile(void)
 {
 	setEPMap(loadEPMap());
+	emit(updateStateChanged(updateState));
 }
 
 /*
