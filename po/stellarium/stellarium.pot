@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-16 19:13+0700\n"
+"POT-Creation-Date: 2014-01-16 20:55+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -4000,7 +4000,7 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:980
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:390
-#: plugins/FOV/src/ui_fovWindow.h:386
+#: plugins/FOV/src/ui_fovWindow.h:387
 msgid "Save settings"
 msgstr ""
 
@@ -4008,7 +4008,7 @@ msgstr ""
 msgid "Restore the default settings that came with Stellarium"
 msgstr ""
 
-#: src/ui_configurationDialog.h:984 plugins/FOV/src/ui_fovWindow.h:385
+#: src/ui_configurationDialog.h:984 plugins/FOV/src/ui_fovWindow.h:386
 msgid "Restore defaults"
 msgstr ""
 
@@ -5114,7 +5114,7 @@ msgstr ""
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:283
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:322
 #: plugins/Observability/src/ui_ObservabilityDialog.h:378
-#: plugins/FOV/src/ui_fovWindow.h:404
+#: plugins/FOV/src/ui_fovWindow.h:405
 msgctxt "tab in plugin windows"
 msgid "About"
 msgstr ""
@@ -5894,7 +5894,7 @@ msgstr ""
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:239
 #: plugins/TimeZoneConfiguration/src/gui/TimeZoneConfigurationWindow.cpp:105
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:97
-#: plugins/FOV/src/gui/FOVWindow.cpp:80
+#: plugins/FOV/src/gui/FOVWindow.cpp:78
 #, qt-format
 msgid "Version %1"
 msgstr ""
@@ -8086,8 +8086,8 @@ msgid "Sun altitude at twilight: 0 deg."
 msgstr ""
 
 #: plugins/FOV/src/FOV.cpp:40 plugins/FOV/src/FOV.cpp:78
-#: plugins/FOV/src/ui_fovWindow.h:382 plugins/FOV/src/ui_fovWindow.h:384
-#: plugins/FOV/src/ui_fovWindow.h:403
+#: plugins/FOV/src/ui_fovWindow.h:383 plugins/FOV/src/ui_fovWindow.h:385
+#: plugins/FOV/src/ui_fovWindow.h:404
 msgid "Field of View"
 msgstr ""
 
@@ -8102,17 +8102,17 @@ msgstr ""
 msgid "Set FOV to %1%2"
 msgstr ""
 
-#: plugins/FOV/src/gui/FOVWindow.cpp:79
+#: plugins/FOV/src/gui/FOVWindow.cpp:77
 msgid "Field of View plug-in"
 msgstr ""
 
-#: plugins/FOV/src/gui/FOVWindow.cpp:88
+#: plugins/FOV/src/ui_fovWindow.h:403
 msgid ""
 "By default Stellarium uses smooth zooming via mouse wheel or keyboard "
 "shortcuts. Some users want stepwise zooming to fixed values for field of "
-"view like in <em>{Cartes du Ciel}</em> planetarium, and this plugin provides "
-"this feature. You can edit values and use the keyboard for quick-setting of "
-"FOV. All values in degrees."
+"view like in Cartes du Ciel planetarium, and this plugin provides this "
+"feature. You can edit values and use the keyboard for quick-setting of FOV. "
+"All values in degrees."
 msgstr ""
 
 #: plugins/NavStars/src/NavStars.cpp:53 plugins/NavStars/src/NavStars.cpp:138

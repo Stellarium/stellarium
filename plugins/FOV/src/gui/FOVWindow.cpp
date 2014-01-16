@@ -42,7 +42,6 @@ void FOVWindow::retranslate()
 	{
 		ui->retranslateUi(dialog);
 		updateAboutText();
-		updateInfoText();
 	}
 }
 
@@ -70,8 +69,7 @@ void FOVWindow::createDialogContent()
 	connect(ui->pushButtonSave, SIGNAL(clicked()), this, SLOT(saveFOVSettings()));
 	connect(ui->pushButtonReset, SIGNAL(clicked()), this, SLOT(resetFOVSettings()));
 
-	updateAboutText();
-	updateInfoText();
+	updateAboutText();	
 }
 
 void FOVWindow::updateAboutText()
@@ -79,13 +77,6 @@ void FOVWindow::updateAboutText()
 	ui->labelTitle->setText(q_("Field of View plug-in"));
 	QString version = QString(q_("Version %1")).arg(FOV_VERSION);
 	ui->labelVersion->setText(version);
-}
-
-void FOVWindow::updateInfoText()
-{
-	// Regexp to replace {text} with an HTML link. GZ 2014-01-11: does not work! TODO: Make it work!
-	QRegExp a_rx = QRegExp("[{]([^{]*)[}]");
-	ui->labelFOVInfo->setText(q_("By default Stellarium uses smooth zooming via mouse wheel or keyboard shortcuts. Some users want stepwise zooming to fixed values for field of view like in <em>{Cartes du Ciel}</em> planetarium, and this plugin provides this feature. You can edit values and use the keyboard for quick-setting of FOV. All values in degrees.").replace(a_rx, "<a href=\"http://www.ap-i.net/skychart/start\">\\1</a>"));
 }
 
 void FOVWindow::saveFOVSettings()

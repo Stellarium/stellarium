@@ -442,7 +442,7 @@
           <item row="0" column="0" colspan="4">
            <widget class="QLabel" name="labelFOVInfo">
             <property name="text">
-             <string/>
+             <string>By default Stellarium uses smooth zooming via mouse wheel or keyboard shortcuts. Some users want stepwise zooming to fixed values for field of view like in Cartes du Ciel planetarium, and this plugin provides this feature. You can edit values and use the keyboard for quick-setting of FOV. All values in degrees.</string>
             </property>
             <property name="textFormat">
              <enum>Qt::RichText</enum>
