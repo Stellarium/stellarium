@@ -163,6 +163,28 @@
           "name": "Marcos Cardinot"
         }
       ]
+    },
+    "20141005001129":
+    {
+      "type": "script",
+      "install-id": "solar_type_stars",
+      "title": "Solar Type Stars",
+      "description": "This script is meant for a tour the 27 stars that are of the solar spectral type G2V greater than magnitude Vmag=6.5. The program was generated using data from Hipparcos Catalog. All G2V stars brighter than Vmag = 6.5 HIP=Hipparos Identifier. HIP 71683 Alpha Centauri A is the only star with known extrasolar planet in this list. CSPAR-The University of Alabama in Huntsville.",
+      "version": "1.0",
+      "first-stel": "0.10.0",
+      "last-stel": "0.14.0",
+      "license": "Public Domain",
+      "download-url": "http://www.stellarium.org/files/scripts/solar_type_stars.ssc",
+      "download-filename": "solar_type_stars.ssc",
+      "download-size": "8",
+      "installed-size": "8",
+      "checksum": "0b66a9a2742d8c9d45703cb19f190b69",
+      "thumbnail": "http://www.stellarium.org/wikiimg/scripts/sts.jpg",
+      "authors": [
+        {
+          "name": "Allen Gary"
+        }
+      ]
     }
   }
 }
