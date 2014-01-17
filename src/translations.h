@@ -535,5 +535,24 @@ class Translations
 		N_("South Africa");
 		N_("Zambia");
 		N_("Zimbabwe");
+
+		// =====================================================================
+		// List of GUI elements (Qt's dialogs)
+		N_("Undo");
+		N_("Redo");
+		N_("Cut");
+		N_("Copy");
+		N_("Paste");
+		N_("Delete");
+		N_("Select All");
+		N_("Look in:");
+		N_("Directory:");
+		N_("Folder");
+		N_("Choose");
+		N_("Cancel");
+		N_("Files of type");
+		N_("Date Modified");
+		N_("Directories");
+		N_("Computer");
 	}
 };
