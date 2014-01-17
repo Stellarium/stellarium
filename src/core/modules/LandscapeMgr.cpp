@@ -252,7 +252,7 @@ void LandscapeMgr::update(double deltaTime)
 	// GZ: 2013-09-25 Take light pollution into account!
 	StelSkyDrawer* drawer=StelApp::getInstance().getCore()->getSkyDrawer();
 	float pollutionAddonBrightness=(drawer->getBortleScaleIndex()-1.0f)*0.025f; // 0..8, so we assume empirical linear brightening 0..0.02
-	float lunarAddonBrightness;
+	float lunarAddonBrightness=0.f;
 	if (moonPos[2] > -0.1/1.5)
 		lunarAddonBrightness = qMax(0.2/-12.*ssystem->getMoon()->getVMagnitudeWithExtinction(core),0.)*moonPos[2];
 
@@ -650,6 +650,12 @@ float LandscapeMgr::getLuminance() const
 {
 	return atmosphere->getRealDisplayIntensityFactor();
 }
+
+float LandscapeMgr::getAtmosphereAverageLuminance() const
+{
+	return atmosphere->getAverageLuminance();
+}
+
 
 Landscape* LandscapeMgr::createFromFile(const QString& landscapeFile, const QString& landscapeId)
 {

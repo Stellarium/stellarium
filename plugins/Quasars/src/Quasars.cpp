@@ -72,6 +72,7 @@ StelPluginInfo QuasarsStelPluginInterface::getPluginInfo() const
 	info.authors = "Alexander Wolf";
 	info.contact = "alex.v.wolf@gmail.com";
 	info.description = N_("A plugin that shows some quasars brighter than 16 visual magnitude. A catalogue of quasars compiled from 'Quasars and Active Galactic Nuclei' (13th Ed.) (Veron+ 2010) =2010A&A...518A..10V");
+	info.version = QUASARS_PLUGIN_VERSION;
 	return info;
 }
 
@@ -508,11 +509,14 @@ QVariantMap Quasars::loadQSOMap(QString path)
 void Quasars::setQSOMap(const QVariantMap& map)
 {
 	QSO.clear();
+	QsrCount = 0;
 	QVariantMap qsoMap = map.value("quasars").toMap();
 	foreach(QString qsoKey, qsoMap.keys())
 	{
 		QVariantMap qsoData = qsoMap.value(qsoKey).toMap();
 		qsoData["designation"] = qsoKey;
+
+		QsrCount++;
 
 		QuasarP quasar(new Quasar(qsoData));
 		if (quasar->initialized)

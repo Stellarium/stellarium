@@ -37,21 +37,21 @@ Vec3d StelObject::getEquinoxEquatorialPos(const StelCore* core) const
 }
 
 // Get observer local sidereal coordinate
-Vec3d StelObject::getSideralPosGeometric(const StelCore* core) const
+Vec3d StelObject::getSiderealPosGeometric(const StelCore* core) const
 {
 	// Hour Angle corrected to Delta-T value
 	double dt = (core->getDeltaT(core->getJDay())/240.)*M_PI/180.;
-	return Mat4d::zrotation(-core->getLocalSideralTime()+dt)* getEquinoxEquatorialPos(core);
+	return Mat4d::zrotation(-core->getLocalSiderealTime()+dt)* getEquinoxEquatorialPos(core);
 }
 
 // Get observer local sidereal coordinates, deflected by refraction
-Vec3d StelObject::getSideralPosApparent(const StelCore* core) const
+Vec3d StelObject::getSiderealPosApparent(const StelCore* core) const
 {
 	Vec3d v=getAltAzPosApparent(core);
 	v = core->altAzToEquinoxEqu(v, StelCore::RefractionOff);
 	// Hour Angle corrected to Delta-T value
 	double dt = (core->getDeltaT(core->getJDay())/240.)*M_PI/180.;
-	return Mat4d::zrotation(-core->getLocalSideralTime()+dt)*v;
+	return Mat4d::zrotation(-core->getLocalSiderealTime()+dt)*v;
 }
 
 Vec3d StelObject::getAltAzPosGeometric(const StelCore* core) const
@@ -96,7 +96,9 @@ float StelObject::getVMagnitudeWithExtinction(const StelCore* core) const
 	Vec3d altAzPos = getAltAzPosGeometric(core);
 	altAzPos.normalize();
 	float vMag = getVMagnitude(core);
-	core->getSkyDrawer()->getExtinction().forward(altAzPos, &vMag); 
+	// GZ 2014-01-02: without the test, planets flicker stupidly in fullsky atmosphere-less view.
+	if (core->getSkyDrawer()->getFlagHasAtmosphere())
+		core->getSkyDrawer()->getExtinction().forward(altAzPos, &vMag);
 	return vMag;
 }
 
@@ -129,11 +131,11 @@ QString StelObject::getPositionInfoString(const StelCore *core, const InfoString
 	if (flags&HourAngle)
 	{
 		double dec_sidereal, ra_sidereal;
-		StelUtils::rectToSphe(&ra_sidereal,&dec_sidereal,getSideralPosGeometric(core));
+		StelUtils::rectToSphe(&ra_sidereal,&dec_sidereal,getSiderealPosGeometric(core));
 		ra_sidereal = 2.*M_PI-ra_sidereal;
 		if (withAtmosphere)
 		{
-		    StelUtils::rectToSphe(&ra_sidereal,&dec_sidereal,getSideralPosApparent(core));
+		    StelUtils::rectToSphe(&ra_sidereal,&dec_sidereal,getSiderealPosApparent(core));
 		    ra_sidereal = 2.*M_PI-ra_sidereal;
 		    res += q_("Hour angle/DE: %1/%2").arg(StelUtils::radToHmsStr(ra_sidereal), StelUtils::radToDmsStr(dec_sidereal)) + " " + q_("(apparent)") + "<br>";
 		}

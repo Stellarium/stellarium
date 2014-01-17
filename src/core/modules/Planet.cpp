@@ -32,7 +32,7 @@
 #include "Planet.hpp"
 
 #include "StelProjector.hpp"
-#include "sideral_time.h"
+#include "sidereal_time.h"
 #include "StelTextureMgr.hpp"
 #include "StelModuleMgr.hpp"
 #include "StarMgr.hpp"
@@ -278,7 +278,7 @@ double Planet::getParentSatellitesFov(const StelCore* core) const
 	return -1.0;
 }
 
-// Set the orbital elements
+// Set the rotational elements of the planet body.
 void Planet::setRotationElements(float _period, float _offset, double _epoch, float _obliquity, float _ascendingNode, float _precessionRate, double _siderealPeriod )
 {
 	re.period = _period;
@@ -488,7 +488,6 @@ double Planet::getSiderealTime(double jd) const
 //	if (englishName=="Jupiter")
 //	{
 //		// use semi-empirical coefficient for GRS drift
-//		// TODO: need improved
 //		return remainder * 360. + re.offset - 0.2483 * std::abs(StelApp::getInstance().getCore()->getJDay() - 2456172);
 //	}
 //	else
@@ -589,7 +588,6 @@ double Planet::getPhaseAngle(const Vec3d& obsPos) const
 	const Vec3d& planetHelioPos = getHeliocentricEclipticPos();
 	const double planetRq = planetHelioPos.lengthSquared();
 	const double observerPlanetRq = (obsPos - planetHelioPos).lengthSquared();
-	//return std::acos(observerPlanetRq + planetRq - observerRq)/(2.0*sqrt(observerPlanetRq*planetRq));
 	return std::acos((observerPlanetRq + planetRq - observerRq)/(2.0*sqrt(observerPlanetRq*planetRq)));
 }
 
@@ -888,7 +886,7 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 		else
 		{
 			sPainter->getLight().disable();
-			sPainter->setColor(1.f,1.f,1.f);
+			sPainter->setColor(albedo,albedo,albedo);
 		}
 
 		if (rings)
@@ -965,7 +963,7 @@ void Planet::drawSphere(StelPainter* painter, float screenSz)
 			return;
 		}
 	}
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	//glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // GZ deactivated. 2013-12-27. If disabling blend, who cares which one?
 	painter->setColor(1.f, 1.f, 1.f);
 
 	painter->enableTexture2d(true);
@@ -1092,7 +1090,7 @@ void Planet::drawHints(const StelCore* core, const QFont& planetNameFont)
 	sPainter.setColor(labelColor[0], labelColor[1], labelColor[2],labelsFader.getInterstate());
 	sPainter.drawText(screenPos[0],screenPos[1], getSkyLabel(core), 0, tmp, tmp, false);
 
-	// hint disapears smoothly on close view
+	// hint disappears smoothly on close view
 	if (hintFader.getInterstate()<=0)
 		return;
 	tmp -= 10.f;

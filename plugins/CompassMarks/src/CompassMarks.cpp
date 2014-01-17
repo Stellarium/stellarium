@@ -56,6 +56,7 @@ StelPluginInfo CompassMarksStelPluginInterface::getPluginInfo() const
 	info.authors = "Matthew Gates";
 	info.contact = "http://porpoisehead.net/";
 	info.description = N_("Displays compass bearing marks along the horizon");
+	info.version = COMPASSMARKS_VERSION;
 	return info;
 }
 

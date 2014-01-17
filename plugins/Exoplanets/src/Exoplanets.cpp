@@ -74,6 +74,7 @@ StelPluginInfo ExoplanetsStelPluginInterface::getPluginInfo() const
 	info.authors = "Alexander Wolf";
 	info.contact = "alex.v.wolf@gmail.com";
 	info.description = N_("This plugin plots the position of stars with exoplanets. Exoplanets data is derived from the 'Extrasolar Planets Encyclopaedia' at exoplanet.eu");
+	info.version = EXOPLANETS_PLUGIN_VERSION;
 	return info;
 }
 
@@ -227,7 +228,7 @@ void Exoplanets::draw(StelCore* core)
 	foreach (const ExoplanetP& eps, ep)
 	{
 		if (eps && eps->initialized)
-			eps->draw(core, painter);
+			eps->draw(core, &painter);
 	}
 
 	if (GETSTELMODULE(StelObjectMgr)->getFlagSelectedObjectPointer())
@@ -484,6 +485,7 @@ bool Exoplanets::backupJsonFile(bool deleteOriginal)
 void Exoplanets::readJsonFile(void)
 {
 	setEPMap(loadEPMap());
+	emit(updateStateChanged(updateState));
 }
 
 /*
@@ -511,15 +513,22 @@ QVariantMap Exoplanets::loadEPMap(QString path)
 void Exoplanets::setEPMap(const QVariantMap& map)
 {
 	ep.clear();
+	PSCount=0;
+	EPCountAll=0;
 	QVariantMap epsMap = map.value("stars").toMap();
 	foreach(QString epsKey, epsMap.keys())
 	{
 		QVariantMap epsData = epsMap.value(epsKey).toMap();
 		epsData["designation"] = epsKey;
 
+		PSCount++;
+
 		ExoplanetP eps(new Exoplanet(epsData));
 		if (eps->initialized)
+		{
 			ep.append(eps);
+			EPCountAll += eps->getCountExoplanets();
+		}
 
 	}
 }

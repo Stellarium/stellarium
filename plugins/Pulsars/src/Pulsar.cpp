@@ -27,6 +27,7 @@
 #include "StelTranslator.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelSkyDrawer.hpp"
+#include "StelProjector.hpp"
 
 #include <QTextStream>
 #include <QDebug>
@@ -40,7 +41,9 @@
 StelTextureSP Pulsar::markerTexture;
 
 bool Pulsar::distributionMode = false;
+bool Pulsar::glitchFlag = false;
 Vec3f Pulsar::markerColor = Vec3f(0.4f,0.5f,1.0f);
+Vec3f Pulsar::glitchColor = Vec3f(0.2f,0.3f,1.0f);
 
 Pulsar::Pulsar(const QVariantMap& map)
 		: initialized(false)
@@ -65,6 +68,7 @@ Pulsar::Pulsar(const QVariantMap& map)
 	s600 = map.value("s600").toFloat();
 	s1400 = map.value("s1400").toFloat();
 	distance = map.value("distance").toFloat();
+	glitch = map.value("glitch").toInt();
 	notes = map.value("notes").toString();
 
 	// If barycentric period not set then calculate it
@@ -105,6 +109,7 @@ QVariantMap Pulsar::getMap(void)
 	map["s600"] = s600;
 	map["s1400"] = s1400;
 	map["distance"] = distance;
+	map["glitch"] = glitch;
 	map["notes"] = notes;
 
 	return map;
@@ -127,7 +132,21 @@ QString Pulsar::getInfoString(const StelCore* core, const InfoStringGroup& flags
 
 	if (flags&Type)
 	{
-		oss << q_("Type: <b>%1</b>").arg(q_("pulsar")) << "<br />";
+
+		if (glitch==0)
+			oss << q_("Type: <b>%1</b>").arg(q_("pulsar")) << "<br />";
+		else
+		{
+			QString sglitch;
+			if (glitch==1)
+				sglitch = q_("has one registered glitch");
+			else
+			{
+				// TRANSLATORS: Full phrase is "Has X registered glitches", where X is number
+				sglitch = q_("has %1 registered glitches").arg(glitch);
+			}
+			oss << q_("Type: <b>%1</b> (%2)").arg(q_("pulsar with glitches")).arg(sglitch) << "<br />";
+		}
 	}
 
 	// Ra/Dec etc.
@@ -217,7 +236,7 @@ QString Pulsar::getInfoString(const StelCore* core, const InfoStringGroup& flags
 			       .arg(QString::number(s1400, 'f', 2))
 			       // TRANSLATORS: mJy is milliJansky(10-26W/m2/Hz)
 			       .arg(q_("mJy")) << "<br>";
-		}
+		}		
 		if (notes.length()>0)
 		{
 			oss << "<br>" << q_("Notes: %1").arg(getPulsarTypeInfoString(notes)) << "<br>";
@@ -333,29 +352,36 @@ void Pulsar::update(double deltaTime)
 	labelsFader.update((int)(deltaTime*1000));
 }
 
-void Pulsar::draw(StelCore* core, StelPainter& painter)
+void Pulsar::draw(StelCore* core, StelPainter *painter)
 {
-	StelSkyDrawer* sd = core->getSkyDrawer();	
-
+	StelSkyDrawer* sd = core->getSkyDrawer();
 	double mag = getVMagnitudeWithExtinction(core);
+	StelUtils::spheToRect(RA, DE, XYZ);
 
-	StelUtils::spheToRect(RA, DE, XYZ);			
+	Vec3d win;
+	// Check visibility of pulsar
+	if (!(painter->getProjector()->projectCheck(XYZ, win)))
+		return;
+
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_ONE, GL_ONE);
-	painter.setColor(markerColor[0], markerColor[1], markerColor[2], 1);
+	if (glitch>0 && glitchFlag)
+		painter->setColor(glitchColor[0], glitchColor[1], glitchColor[2], 1);
+	else
+		painter->setColor(markerColor[0], markerColor[1], markerColor[2], 1);
 	float mlimit = sd->getLimitMagnitude();
 
 	if (mag <= mlimit)
 	{		
 		Pulsar::markerTexture->bind();
-		float size = getAngularSize(NULL)*M_PI/180.*painter.getProjector()->getPixelPerRadAtCenter();
+		float size = getAngularSize(NULL)*M_PI/180.*painter->getProjector()->getPixelPerRadAtCenter();
 		float shift = 5.f + size/1.6f;		
 
-		painter.drawSprite2dMode(XYZ, distributionMode ? 4.f : 5.f);
+		painter->drawSprite2dMode(XYZ, distributionMode ? 4.f : 5.f);
 
 		if (labelsFader.getInterstate()<=0.f && !distributionMode && (mag+2.f)<mlimit)
 		{
-			painter.drawText(XYZ, designation, 0, shift, shift, false);
+			painter->drawText(XYZ, designation, 0, shift, shift, false);
 		}
 	}
 }

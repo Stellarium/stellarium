@@ -216,9 +216,8 @@ void StelMainScriptAPI::setObserverLocation(double longitude, double latitude, d
 void StelMainScriptAPI::setObserverLocation(const QString id, float duration)
 {
 	StelCore* core = StelApp::getInstance().getCore();
-	bool ok;
-	StelLocation loc = StelApp::getInstance().getLocationMgr().locationForSmallString(id, &ok);
-	if (!ok)
+	StelLocation loc = StelApp::getInstance().getLocationMgr().locationForString(id);
+	if (!loc.isValid())
 		return;	// location find failed
 	core->moveObserverTo(loc, duration);
 }
@@ -658,8 +657,8 @@ double StelMainScriptAPI::jdFromDateString(const QString& dt, const QString& spe
 
 		if (nowRe.capturedTexts().at(8) == "sidereal")
 		{
-			dayLength = core->getLocalSideralDayLength();
-			yearLength = core->getLocalSideralYearLength();
+			dayLength = core->getLocalSiderealDayLength();
+			yearLength = core->getLocalSiderealYearLength();
 			monthLength = 27.321661; // duration of Earth's sidereal month
 		}
 
@@ -732,7 +731,7 @@ QVariantMap StelMainScriptAPI::getObjectInfo(const QString& name)
 
 	
 	Vec3d pos;
-	double ra, dec, alt, azi, glong, glat;
+	double ra, dec, alt, az, glong, glat;
 	StelCore* core = StelApp::getInstance().getCore();
 
 	// ra/dec
@@ -749,21 +748,29 @@ QVariantMap StelMainScriptAPI::getObjectInfo(const QString& name)
 
 	// apparent altitude/azimuth
 	pos = obj->getAltAzPosApparent(core);
-	StelUtils::rectToSphe(&azi, &alt, pos);
+	StelUtils::rectToSphe(&az, &alt, pos);
+	az = 3.*M_PI - az;  // N is zero, E is 90 degrees
+	if (az > M_PI*2)
+		az -= M_PI*2;
+
 	map.insert("altitude", alt*180./M_PI);
-	map.insert("azimuth", azi*180./M_PI);
+	map.insert("azimuth", az*180./M_PI);
 
 	// geometric altitude/azimuth
 	pos = obj->getAltAzPosGeometric(core);
-	StelUtils::rectToSphe(&azi, &alt, pos);
+	StelUtils::rectToSphe(&az, &alt, pos);
+	az = 3.*M_PI - az;  // N is zero, E is 90 degrees
+	if (az > M_PI*2)
+		az -= M_PI*2;
+
 	map.insert("altitude-geometric", alt*180./M_PI);
-	map.insert("azimuth-geometric", azi*180./M_PI);
+	map.insert("azimuth-geometric", az*180./M_PI);
 
 	// galactic long/lat
 	pos = obj->getGalacticPos(core);
 	StelUtils::rectToSphe(&glong, &glat, pos);
-	map.insert("glong", alt*180./M_PI);
-	map.insert("glat", azi*180./M_PI);
+	map.insert("glong", glong*180./M_PI);
+	map.insert("glat", glat*180./M_PI);
 
 	// magnitude
 	map.insert("vmag", obj->getVMagnitude(core));
@@ -804,7 +811,7 @@ QVariantMap StelMainScriptAPI::getSelectedObjectInfo()
 
 	// OK, object found. Let's go.
 	Vec3d pos;
-	double ra, dec, alt, azi, glong, glat;
+	double ra, dec, alt, az, glong, glat;
 	StelCore* core = StelApp::getInstance().getCore();
 
 	// ra/dec
@@ -821,21 +828,29 @@ QVariantMap StelMainScriptAPI::getSelectedObjectInfo()
 
 	// apparent altitude/azimuth
 	pos = obj->getAltAzPosApparent(core);
-	StelUtils::rectToSphe(&azi, &alt, pos);
+	StelUtils::rectToSphe(&az, &alt, pos);
+	az = 3.*M_PI - az;  // N is zero, E is 90 degrees
+	if (az > M_PI*2)
+		az -= M_PI*2;
+
 	map.insert("altitude", alt*180./M_PI);
-	map.insert("azimuth", azi*180./M_PI);
+	map.insert("azimuth", az*180./M_PI);
 
 	// geometric altitude/azimuth
 	pos = obj->getAltAzPosGeometric(core);
-	StelUtils::rectToSphe(&azi, &alt, pos);
+	StelUtils::rectToSphe(&az, &alt, pos);
+	az = 3.*M_PI - az;  // N is zero, E is 90 degrees
+	if (az > M_PI*2)
+		az -= M_PI*2;
+
 	map.insert("altitude-geometric", alt*180./M_PI);
-	map.insert("azimuth-geometric", azi*180./M_PI);
+	map.insert("azimuth-geometric", az*180./M_PI);
 
 	// galactic long/lat
 	pos = obj->getGalacticPos(core);
 	StelUtils::rectToSphe(&glong, &glat, pos);
-	map.insert("glong", alt*180./M_PI);
-	map.insert("glat", azi*180./M_PI);
+	map.insert("glong", glong*180./M_PI);
+	map.insert("glat", glat*180./M_PI);
 
 	// magnitude
 	map.insert("vmag", obj->getVMagnitude(core));
