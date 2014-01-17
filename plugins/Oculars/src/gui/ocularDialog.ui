@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>680</width>
+    <width>660</width>
     <height>416</height>
    </rect>
   </property>
@@ -158,7 +158,7 @@
          </font>
         </property>
         <property name="currentIndex">
-         <number>4</number>
+         <number>2</number>
         </property>
         <property name="usesScrollButtons">
          <bool>false</bool>
@@ -601,13 +601,13 @@
                 <item row="1" column="1">
                  <widget class="QDoubleSpinBox" name="ocularAFov">
                   <property name="decimals">
-                   <number>3</number>
+                   <number>1</number>
                   </property>
                   <property name="maximum">
                    <double>120.000000000000000</double>
                   </property>
                   <property name="singleStep">
-                   <double>0.001000000000000</double>
+                   <double>0.100000000000000</double>
                   </property>
                  </widget>
                 </item>
@@ -621,16 +621,16 @@
                 <item row="2" column="1">
                  <widget class="QDoubleSpinBox" name="ocularFL">
                   <property name="decimals">
-                   <number>3</number>
+                   <number>1</number>
                   </property>
                   <property name="minimum">
                    <double>1.000000000000000</double>
                   </property>
                   <property name="maximum">
-                   <double>100.000000000000000</double>
+                   <double>60.000000000000000</double>
                   </property>
                   <property name="singleStep">
-                   <double>0.001000000000000</double>
+                   <double>0.100000000000000</double>
                   </property>
                  </widget>
                 </item>
@@ -644,16 +644,16 @@
                 <item row="3" column="1">
                  <widget class="QDoubleSpinBox" name="ocularFieldStop">
                   <property name="decimals">
-                   <number>3</number>
+                   <number>1</number>
                   </property>
                   <property name="minimum">
                    <double>1.000000000000000</double>
                   </property>
                   <property name="maximum">
-                   <double>100.000000000000000</double>
+                   <double>60.000000000000000</double>
                   </property>
                   <property name="singleStep">
-                   <double>0.001000000000000</double>
+                   <double>0.100000000000000</double>
                   </property>
                  </widget>
                 </item>
@@ -905,13 +905,13 @@
                 <item row="1" column="1">
                  <widget class="QDoubleSpinBox" name="lensMultipler">
                   <property name="decimals">
-                   <number>3</number>
+                   <number>2</number>
                   </property>
                   <property name="maximum">
                    <double>25.000000000000000</double>
                   </property>
                   <property name="singleStep">
-                   <double>0.001000000000000</double>
+                   <double>0.010000000000000</double>
                   </property>
                  </widget>
                 </item>
@@ -1201,8 +1201,11 @@
                 </item>
                 <item row="1" column="1">
                  <widget class="QSpinBox" name="ccdResX">
+                  <property name="minimum">
+                   <number>1</number>
+                  </property>
                   <property name="maximum">
-                   <number>10000000</number>
+                   <number>9999</number>
                   </property>
                  </widget>
                 </item>
@@ -1215,8 +1218,11 @@
                 </item>
                 <item row="2" column="1">
                  <widget class="QSpinBox" name="ccdResY">
+                  <property name="minimum">
+                   <number>1</number>
+                  </property>
                   <property name="maximum">
-                   <number>10000000</number>
+                   <number>9999</number>
                   </property>
                  </widget>
                 </item>
@@ -1232,8 +1238,11 @@
                   <property name="decimals">
                    <number>1</number>
                   </property>
+                  <property name="minimum">
+                   <double>0.100000000000000</double>
+                  </property>
                   <property name="maximum">
-                   <double>10000000.000000000000000</double>
+                   <double>9999.000000000000000</double>
                   </property>
                   <property name="singleStep">
                    <double>0.100000000000000</double>
@@ -1252,8 +1261,11 @@
                   <property name="decimals">
                    <number>1</number>
                   </property>
+                  <property name="minimum">
+                   <double>0.100000000000000</double>
+                  </property>
                   <property name="maximum">
-                   <double>10000000.000000000000000</double>
+                   <double>9999.000000000000000</double>
                   </property>
                   <property name="singleStep">
                    <double>0.100000000000000</double>
@@ -1272,8 +1284,11 @@
                   <property name="decimals">
                    <number>1</number>
                   </property>
+                  <property name="minimum">
+                   <double>0.100000000000000</double>
+                  </property>
                   <property name="maximum">
-                   <double>10000000.000000000000000</double>
+                   <double>99.000000000000000</double>
                   </property>
                   <property name="singleStep">
                    <double>0.100000000000000</double>
@@ -1292,8 +1307,11 @@
                   <property name="decimals">
                    <number>1</number>
                   </property>
+                  <property name="minimum">
+                   <double>0.100000000000000</double>
+                  </property>
                   <property name="maximum">
-                   <double>10000000.000000000000000</double>
+                   <double>99.000000000000000</double>
                   </property>
                   <property name="singleStep">
                    <double>0.100000000000000</double>
@@ -1528,8 +1546,11 @@
                   <property name="decimals">
                    <number>1</number>
                   </property>
+                  <property name="minimum">
+                   <double>1.000000000000000</double>
+                  </property>
                   <property name="maximum">
-                   <double>10000.000000000000000</double>
+                   <double>99999.000000000000000</double>
                   </property>
                   <property name="singleStep">
                    <double>0.100000000000000</double>
@@ -1548,8 +1569,11 @@
                   <property name="decimals">
                    <number>1</number>
                   </property>
+                  <property name="minimum">
+                   <double>1.000000000000000</double>
+                  </property>
                   <property name="maximum">
-                   <double>1000.000000000000000</double>
+                   <double>9999.000000000000000</double>
                   </property>
                   <property name="singleStep">
                    <double>0.100000000000000</double>
