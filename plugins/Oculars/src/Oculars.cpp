@@ -1030,35 +1030,25 @@ void Oculars::displayPopupMenu()
 			
 			submenu = new QMenu(q_("&Rotate CCD"), popup);
 			QAction* rotateAction = NULL;
-			rotateAction = submenu->addAction(QString("&1: -90") + QChar(0x00B0),
-																				ccdRotationSignalMapper, SLOT(map()));
+			rotateAction = submenu->addAction(QString("&1: -90") + QChar(0x00B0), ccdRotationSignalMapper, SLOT(map()));
 			ccdRotationSignalMapper->setMapping(rotateAction, QString("-90"));
-			rotateAction = submenu->addAction(QString("&2: -45") + QChar(0x00B0),
-																				ccdRotationSignalMapper, SLOT(map()));
+			rotateAction = submenu->addAction(QString("&2: -45") + QChar(0x00B0), ccdRotationSignalMapper, SLOT(map()));
 			ccdRotationSignalMapper->setMapping(rotateAction, QString("-45"));
-			rotateAction = submenu->addAction(QString("&3: -15") + QChar(0x00B0),
-																				ccdRotationSignalMapper, SLOT(map()));
+			rotateAction = submenu->addAction(QString("&3: -15") + QChar(0x00B0), ccdRotationSignalMapper, SLOT(map()));
 			ccdRotationSignalMapper->setMapping(rotateAction, QString("-15"));
-			rotateAction = submenu->addAction(QString("&4: -5") + QChar(0x00B0),
-																				ccdRotationSignalMapper, SLOT(map()));
+			rotateAction = submenu->addAction(QString("&4: -5") + QChar(0x00B0), ccdRotationSignalMapper, SLOT(map()));
 			ccdRotationSignalMapper->setMapping(rotateAction, QString("-5"));
-			rotateAction = submenu->addAction(QString("&5: -1") + QChar(0x00B0),
-																				ccdRotationSignalMapper, SLOT(map()));
+			rotateAction = submenu->addAction(QString("&5: -1") + QChar(0x00B0), ccdRotationSignalMapper, SLOT(map()));
 			ccdRotationSignalMapper->setMapping(rotateAction, QString("-1"));
-			rotateAction = submenu->addAction(QString("&6: +1") + QChar(0x00B0),
-																				ccdRotationSignalMapper, SLOT(map()));
+			rotateAction = submenu->addAction(QString("&6: +1") + QChar(0x00B0), ccdRotationSignalMapper, SLOT(map()));
 			ccdRotationSignalMapper->setMapping(rotateAction, QString("1"));
-			rotateAction = submenu->addAction(QString("&7: +5") + QChar(0x00B0),
-																				ccdRotationSignalMapper, SLOT(map()));
+			rotateAction = submenu->addAction(QString("&7: +5") + QChar(0x00B0), ccdRotationSignalMapper, SLOT(map()));
 			ccdRotationSignalMapper->setMapping(rotateAction, QString("5"));
-			rotateAction = submenu->addAction(QString("&8: +15") + QChar(0x00B0),
-																				ccdRotationSignalMapper, SLOT(map()));
+			rotateAction = submenu->addAction(QString("&8: +15") + QChar(0x00B0), ccdRotationSignalMapper, SLOT(map()));
 			ccdRotationSignalMapper->setMapping(rotateAction, QString("15"));
-			rotateAction = submenu->addAction(QString("&9: +45") + QChar(0x00B0),
-																				ccdRotationSignalMapper, SLOT(map()));
+			rotateAction = submenu->addAction(QString("&9: +45") + QChar(0x00B0), ccdRotationSignalMapper, SLOT(map()));
 			ccdRotationSignalMapper->setMapping(rotateAction, QString("45"));
-			rotateAction = submenu->addAction(QString("&0: +90") + QChar(0x00B0),
-																				ccdRotationSignalMapper, SLOT(map()));
+			rotateAction = submenu->addAction(QString("&0: +90") + QChar(0x00B0), ccdRotationSignalMapper, SLOT(map()));
 			ccdRotationSignalMapper->setMapping(rotateAction, QString("90"));
 			rotateAction = submenu->addAction(q_("&Reset rotation"), this, SLOT(ccdRotationReset()));
 			popup->addMenu(submenu);
