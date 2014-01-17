@@ -185,6 +185,75 @@
           "name": "Allen Gary"
         }
       ]
+    },
+    "20141005001130":
+    {
+      "type": "plugin_catalog",
+      "install-id": "modules/MeteorShowers/showers",
+      "title": "Meteor Showers",
+      "description": "Meteor showers catalog.",
+      "version": "1.0",
+      "first-stel": "0.13.0",
+      "last-stel": "0.14.0",
+      "license": "GPL",
+      "download-url": "http://stellarium.org/json/showers.json",
+      "download-filename": "showers.json",
+      "download-size": "29",
+      "installed-size": "29",
+      "checksum": "1541be46b1b2c6d732ef1307187e6d5f",
+      "authors": [
+        {
+          "name": "Marcos Cardinot"
+        }
+      ]
+    },
+    "20141005001131":
+    {
+      "type": "star_catalog",
+      "install-id": "stars/default/stars_4_1v0_1",
+      "title": "Stars 4",
+      "description": "Extra star catalog 4.",
+      "version": "7.0",
+      "first-stel": "0.13.0",
+      "last-stel": "0.14.0",
+      "license": "GPL",
+      "download-url": "http://downloads.sourceforge.net/project/stellarium/Extra-data-files/stars4/stars_4_1v0_1.cat",
+      "download-filename": "stars_4_1v0_1.cat",
+      "download-size": "17000",
+      "installed-size": "17000",
+      "checksum": "7a3b8b3471a755661b6d3686eb4c7cc2",
+      "authors": [
+        {
+          "name": "Stellarium Team",
+          "url": "http://stellarium.org"
+        }
+      ],
+      "count": 1.7,
+      "magRange": [10.5, 12]
+    },
+    "20141005001132":
+    {
+      "type": "star_catalog",
+      "install-id": "stars/default/stars_5_2v0_1",
+      "title": "Stars 5",
+      "description": "Extra star catalog 5.",
+      "version": "7.0",
+      "first-stel": "0.13.0",
+      "last-stel": "0.14.0",
+      "license": "GPL",
+      "download-url": "http://downloads.sourceforge.net/project/stellarium/Extra-data-files/stars5/stars_5_2v0_1.cat",
+      "download-filename": "stars_5_2v0_1.cat",
+      "download-size": "41000",
+      "installed-size": "41000",
+      "checksum": "50e798428d9402766805da5cf0e8e819",
+      "authors": [
+        {
+          "name": "Stellarium Team",
+          "url": "http://stellarium.org"
+        }
+      ],
+      "count": 7.1,
+      "magRange": [12, 13.5]
     }
   }
 }
