@@ -111,7 +111,7 @@ void NovaeDialog::setAboutHtml(void)
 	html += "<p>" + q_("A plugin that shows some bright novae in the Milky Way galaxy.");
 	html += " " + q_("You can find novae via search tool by entering designation of nova or its common name (e.g. 'Nova Cygni 1975' or 'V1500 Cyg').") + "</p>";
 
-	html += "<p>" + q_("This plugin allows you to see next bright novae: ");
+	html += "<p>" + q_("This plugin allows you to see recent bright novae: ");
 	html += nova->getNovaeList();
 	html += ". " + q_("This list altogether contains %1 stars.").arg(nova->getCountNovae());
 	html += " " + q_("All those novae are brighter than %1 at peak of brightness.").arg(QString::number(nova->getLowerLimitBrightness(), 'f', 2) + "<sup>m</sup>") + "</p>";
