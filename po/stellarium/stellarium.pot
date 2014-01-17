@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-17 11:24+0700\n"
+"POT-Creation-Date: 2014-01-17 20:18+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -3478,6 +3478,75 @@ msgstr ""
 msgid "Zimbabwe"
 msgstr ""
 
+#: src/translations.h:541
+msgid "Undo"
+msgstr ""
+
+#: src/translations.h:542
+msgid "Redo"
+msgstr ""
+
+#: src/translations.h:543
+msgid "Cut"
+msgstr ""
+
+#: src/translations.h:544
+msgid "Copy"
+msgstr ""
+
+#: src/translations.h:545
+msgid "Paste"
+msgstr ""
+
+#: src/translations.h:546 src/ui_locationDialogGui.h:395
+#: plugins/Oculars/src/ui_ocularDialog.h:1058
+#: plugins/Oculars/src/ui_ocularDialog.h:1067
+#: plugins/Oculars/src/ui_ocularDialog.h:1074
+#: plugins/Oculars/src/ui_ocularDialog.h:1085
+msgid "Delete"
+msgstr ""
+
+#: src/translations.h:547
+msgid "Select All"
+msgstr ""
+
+#: src/translations.h:548
+msgid "Look in:"
+msgstr ""
+
+#: src/translations.h:549
+msgid "Directory:"
+msgstr ""
+
+#: src/translations.h:550
+msgid "Folder"
+msgstr ""
+
+#: src/translations.h:551
+msgid "Choose"
+msgstr ""
+
+#: src/translations.h:552 src/ui_configurationDialog.h:1132
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:516
+msgid "Cancel"
+msgstr ""
+
+#: src/translations.h:553
+msgid "Files of type"
+msgstr ""
+
+#: src/translations.h:554
+msgid "Date Modified"
+msgstr ""
+
+#: src/translations.h:555
+msgid "Directories"
+msgstr ""
+
+#: src/translations.h:556
+msgid "Computer"
+msgstr ""
+
 #: src/ui_helpDialogGui.h:277 src/ui_helpDialogGui.h:283
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:417
 msgid "Help"
@@ -3514,13 +3583,6 @@ msgstr ""
 
 #: src/ui_locationDialogGui.h:394
 msgid "Return to default"
-msgstr ""
-
-#: src/ui_locationDialogGui.h:395 plugins/Oculars/src/ui_ocularDialog.h:1058
-#: plugins/Oculars/src/ui_ocularDialog.h:1067
-#: plugins/Oculars/src/ui_ocularDialog.h:1074
-#: plugins/Oculars/src/ui_ocularDialog.h:1085
-msgid "Delete"
 msgstr ""
 
 #: src/ui_locationDialogGui.h:396
@@ -4337,11 +4399,6 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:1130
 msgid "Stop the download. You can always restart it later"
-msgstr ""
-
-#: src/ui_configurationDialog.h:1132
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:516
-msgid "Cancel"
 msgstr ""
 
 #: src/ui_configurationDialog.h:1135
