@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-17 11:24+0700\n"
+"POT-Creation-Date: 2014-01-18 00:40+0700\n"
 "PO-Revision-Date: 2014-01-09 03:55+0000\n"
 "Last-Translator: Miroslav Remák <Unknown>\n"
 "Language-Team: Slovak <sk@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-01-17 05:31+0000\n"
+"X-Launchpad-Export-Date: 2014-01-18 05:31+0000\n"
 "X-Generator: Launchpad (build 16901)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:106 src/core/modules/StarMgr.cpp:336
@@ -1170,7 +1170,7 @@ msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "Smer pohľadu pri spustení (azimut/výška): %1/%2"
 
 #: src/gui/ConfigurationDialog.cpp:715
-#: plugins/Oculars/src/gui/OcularDialog.cpp:498
+#: plugins/Oculars/src/gui/OcularDialog.cpp:479
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:384
 msgid "Authors"
 msgstr "Autori"
@@ -1180,7 +1180,7 @@ msgid "Contact"
 msgstr "Kontakt"
 
 #: src/gui/ConfigurationDialog.cpp:718
-#: plugins/Oculars/src/gui/OcularDialog.cpp:497
+#: plugins/Oculars/src/gui/OcularDialog.cpp:478
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:383
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:108
 #: plugins/Novae/src/gui/NovaeDialog.cpp:107
@@ -3635,6 +3635,83 @@ msgstr "Zambia"
 msgid "Zimbabwe"
 msgstr "Zimbabwe"
 
+#: src/translations.h:541
+msgid "&Undo"
+msgstr ""
+
+#: src/translations.h:542
+msgid "&Redo"
+msgstr ""
+
+#: src/translations.h:543
+msgid "Cu&t"
+msgstr ""
+
+#: src/translations.h:544
+msgid "&Copy"
+msgstr ""
+
+#: src/translations.h:545
+msgid "&Paste"
+msgstr ""
+
+#: src/translations.h:546 src/ui_locationDialogGui.h:395
+#: plugins/Oculars/src/ui_ocularDialog.h:1063
+#: plugins/Oculars/src/ui_ocularDialog.h:1072
+#: plugins/Oculars/src/ui_ocularDialog.h:1079
+#: plugins/Oculars/src/ui_ocularDialog.h:1090
+msgid "Delete"
+msgstr "Vymazať"
+
+#: src/translations.h:547
+msgid "Select All"
+msgstr ""
+
+#: src/translations.h:548
+msgid "Look in:"
+msgstr ""
+
+#: src/translations.h:549
+msgid "Directory:"
+msgstr ""
+
+#: src/translations.h:550
+msgid "Folder"
+msgstr ""
+
+#: src/translations.h:551
+msgid "&Choose"
+msgstr ""
+
+#: src/translations.h:552 src/ui_configurationDialog.h:1132
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:516
+msgid "Cancel"
+msgstr "Zrušiť"
+
+#: src/translations.h:553
+msgid "Files of type:"
+msgstr ""
+
+#: src/translations.h:554
+msgid "Date Modified"
+msgstr ""
+
+#: src/translations.h:555
+msgid "Directories"
+msgstr ""
+
+#: src/translations.h:556
+msgid "Computer"
+msgstr ""
+
+#: src/translations.h:557
+msgid "&Open"
+msgstr ""
+
+#: src/translations.h:558
+msgid "File &name:"
+msgstr ""
+
 #: src/ui_helpDialogGui.h:277 src/ui_helpDialogGui.h:283
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:417
 msgid "Help"
@@ -3672,13 +3749,6 @@ msgstr "Použiť ako predvolené"
 #: src/ui_locationDialogGui.h:394
 msgid "Return to default"
 msgstr "Východzie hodnoty"
-
-#: src/ui_locationDialogGui.h:395 plugins/Oculars/src/ui_ocularDialog.h:1058
-#: plugins/Oculars/src/ui_ocularDialog.h:1067
-#: plugins/Oculars/src/ui_ocularDialog.h:1074
-#: plugins/Oculars/src/ui_ocularDialog.h:1085
-msgid "Delete"
-msgstr "Vymazať"
 
 #: src/ui_locationDialogGui.h:396
 msgid "Add to list"
@@ -4207,7 +4277,7 @@ msgstr "Všetky dostupné"
 msgid "Display no information"
 msgstr "Nezobrazovať informácie"
 
-#: src/ui_configurationDialog.h:1000 plugins/Oculars/src/Oculars.cpp:1920
+#: src/ui_configurationDialog.h:1000 plugins/Oculars/src/Oculars.cpp:1910
 #: plugins/Observability/src/Observability.cpp:231
 msgid "None"
 msgstr "Žiadne"
@@ -4511,11 +4581,6 @@ msgstr "Skúsiť znovu"
 msgid "Stop the download. You can always restart it later"
 msgstr "Zrušiť sťahovanie. Neskôr ho môžete kedykoľvek reštartovať"
 
-#: src/ui_configurationDialog.h:1132
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:516
-msgid "Cancel"
-msgstr "Zrušiť"
-
 #: src/ui_configurationDialog.h:1135
 msgid "Close window when script runs"
 msgstr "Zatvoriť okno keď je skript spustený"
@@ -4743,8 +4808,8 @@ msgstr "Zobrazenie značiek azimutu pozdĺž horizontu"
 msgid "Compass marks"
 msgstr "Značky kompasu"
 
-#: plugins/Oculars/src/Oculars.cpp:80 plugins/Oculars/src/Oculars.cpp:1324
-#: plugins/Oculars/src/ui_ocularDialog.h:1039
+#: plugins/Oculars/src/Oculars.cpp:80 plugins/Oculars/src/Oculars.cpp:1314
+#: plugins/Oculars/src/ui_ocularDialog.h:1044
 msgid "Oculars"
 msgstr "Okuláre"
 
@@ -4806,157 +4871,157 @@ msgstr "&Vybrať CCD"
 msgid "&Rotate CCD"
 msgstr "&Otočiť CCD"
 
-#: plugins/Oculars/src/Oculars.cpp:1063
+#: plugins/Oculars/src/Oculars.cpp:1053
 msgid "&Reset rotation"
 msgstr "&Resetovať otočenie"
 
-#: plugins/Oculars/src/Oculars.cpp:1307
-#: plugins/Oculars/src/ui_ocularDialog.h:1041
+#: plugins/Oculars/src/Oculars.cpp:1297
+#: plugins/Oculars/src/ui_ocularDialog.h:1046
 msgid "Ocular view"
 msgstr "Okulárové zobrazenie"
 
-#: plugins/Oculars/src/Oculars.cpp:1325
+#: plugins/Oculars/src/Oculars.cpp:1315
 msgid "Oculars popup menu"
 msgstr "Ponuka okulárov"
 
-#: plugins/Oculars/src/Oculars.cpp:1326
+#: plugins/Oculars/src/Oculars.cpp:1316
 msgid "Show crosshairs"
 msgstr "Zobraz zameriavací kríž"
 
-#: plugins/Oculars/src/Oculars.cpp:1327
+#: plugins/Oculars/src/Oculars.cpp:1317
 msgid "Image sensor frame"
 msgstr "Rám obrazového snímača"
 
-#: plugins/Oculars/src/Oculars.cpp:1328
+#: plugins/Oculars/src/Oculars.cpp:1318
 msgid "Telrad sight"
 msgstr "Zameriavač Telrad"
 
-#: plugins/Oculars/src/Oculars.cpp:1329
+#: plugins/Oculars/src/Oculars.cpp:1319
 msgid "Oculars plugin configuration"
 msgstr "Nastavenie modulu Okuláre"
 
-#: plugins/Oculars/src/Oculars.cpp:1331
+#: plugins/Oculars/src/Oculars.cpp:1321
 msgid "Select next telescope"
 msgstr "Vybrať ďalší teleskop"
 
-#: plugins/Oculars/src/Oculars.cpp:1333
+#: plugins/Oculars/src/Oculars.cpp:1323
 msgid "Select previous telescope"
 msgstr "Vybrať predchádzajúci teleskop"
 
-#: plugins/Oculars/src/Oculars.cpp:1335
+#: plugins/Oculars/src/Oculars.cpp:1325
 msgid "Select next eyepiece"
 msgstr "Vyber ďalší okulár"
 
-#: plugins/Oculars/src/Oculars.cpp:1337
+#: plugins/Oculars/src/Oculars.cpp:1327
 msgid "Select previous eyepiece"
 msgstr "Vyber predchádzajúci okulár"
 
-#: plugins/Oculars/src/Oculars.cpp:1566
+#: plugins/Oculars/src/Oculars.cpp:1556
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:500
 #, qt-format
 msgid "Ocular #%1"
 msgstr "Okulár #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:1571
+#: plugins/Oculars/src/Oculars.cpp:1561
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:504
 #, qt-format
 msgid "Ocular #%1: %2"
 msgstr "Okulár #%1: %2"
 
 #. TRANSLATORS: FL = Focal length
-#: plugins/Oculars/src/Oculars.cpp:1585
+#: plugins/Oculars/src/Oculars.cpp:1575
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:541
 #, qt-format
 msgid "Ocular FL: %1 mm"
 msgstr "Okulár FL: %1 mm"
 
 #. TRANSLATORS: aFOV = apparent field of view
-#: plugins/Oculars/src/Oculars.cpp:1592
+#: plugins/Oculars/src/Oculars.cpp:1582
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:551
 #, qt-format
 msgid "Ocular aFOV: %1"
 msgstr "Okulár aFOV: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1604
+#: plugins/Oculars/src/Oculars.cpp:1594
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:581
 #, qt-format
 msgid "Lens #%1"
 msgstr "Šošovky #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:1608
+#: plugins/Oculars/src/Oculars.cpp:1598
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:585
 #, qt-format
 msgid "Lens #%1: %2"
 msgstr "Šošovky #%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:1613
+#: plugins/Oculars/src/Oculars.cpp:1603
 msgid "Lens: none"
 msgstr "Šošovky: žiadne"
 
-#: plugins/Oculars/src/Oculars.cpp:1623 plugins/Oculars/src/Oculars.cpp:1680
+#: plugins/Oculars/src/Oculars.cpp:1613 plugins/Oculars/src/Oculars.cpp:1670
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:738
 #, qt-format
 msgid "Telescope #%1"
 msgstr "Teleskop #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:1628 plugins/Oculars/src/Oculars.cpp:1685
+#: plugins/Oculars/src/Oculars.cpp:1618 plugins/Oculars/src/Oculars.cpp:1675
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:742
 #, qt-format
 msgid "Telescope #%1: %2"
 msgstr "Teleskop #%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:1639
+#: plugins/Oculars/src/Oculars.cpp:1629
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:818
 #, qt-format
 msgid "Magnification: %1"
 msgstr "Zväčšenie: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1647
+#: plugins/Oculars/src/Oculars.cpp:1637
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:827
 #, qt-format
 msgid "FOV: %1"
 msgstr "Zorné pole: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1657
+#: plugins/Oculars/src/Oculars.cpp:1647
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:683
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:780
 #, qt-format
 msgid "Dimensions: %1"
 msgstr "Rozmery: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1662
+#: plugins/Oculars/src/Oculars.cpp:1652
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:643
 #, qt-format
 msgid "Sensor #%1"
 msgstr "Senzor #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:1666
+#: plugins/Oculars/src/Oculars.cpp:1656
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:647
 #, qt-format
 msgid "Sensor #%1: %2"
 msgstr "Snímač #%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:1916
+#: plugins/Oculars/src/Oculars.cpp:1906
 msgid "&Lens"
 msgstr "Š&ošovka"
 
-#: plugins/Oculars/src/Oculars.cpp:1917
+#: plugins/Oculars/src/Oculars.cpp:1907
 msgid "&Previous lens"
 msgstr "&Predchádzajúca šošovka"
 
-#: plugins/Oculars/src/Oculars.cpp:1918
+#: plugins/Oculars/src/Oculars.cpp:1908
 msgid "&Next lens"
 msgstr "&Nasledujúca šošovka"
 
-#: plugins/Oculars/src/Oculars.cpp:1948
+#: plugins/Oculars/src/Oculars.cpp:1938
 msgid "&Telescope"
 msgstr "&Teleskop"
 
-#: plugins/Oculars/src/Oculars.cpp:1949
+#: plugins/Oculars/src/Oculars.cpp:1939
 msgid "&Previous telescope"
 msgstr "&Predchádzajúci teleskop"
 
-#: plugins/Oculars/src/Oculars.cpp:1950
+#: plugins/Oculars/src/Oculars.cpp:1940
 msgid "&Next telescope"
 msgstr "&Nasledujúci teleskop"
 
@@ -5070,19 +5135,19 @@ msgid ""
 msgstr ""
 "Aktuálne zorné pole poskytnuté touto kombináciou okulára/šošovky/teleskopu"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:496
+#: plugins/Oculars/src/gui/OcularDialog.cpp:477
 msgid "Oculars Plug-in"
 msgstr "Modul okuláre"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:498
+#: plugins/Oculars/src/gui/OcularDialog.cpp:479
 msgid "Barlow lens feature"
 msgstr "Funkcia Barlowej šošovky"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:502
+#: plugins/Oculars/src/gui/OcularDialog.cpp:483
 msgid "Overview"
 msgstr "Prehľad"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:504
+#: plugins/Oculars/src/gui/OcularDialog.cpp:485
 msgid ""
 "This plugin is intended to simulate what you would see through an eyepiece.  "
 "This configuration dialog can be used to add, modify, or delete eyepieces "
@@ -5094,7 +5159,7 @@ msgstr ""
 "teleskopy, ako aj snímače CCD. Pri prvom spustení aplikácie bude k "
 "dispozícii niekoľko ukážok, ktoré vám pomôžu začať pracovať."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:505
+#: plugins/Oculars/src/gui/OcularDialog.cpp:486
 msgid ""
 "You can choose to scale the image you see on the screen.  This is intended "
 "to show you a better comparison of what one eyepiece/telescope combination "
@@ -5111,7 +5176,7 @@ msgstr ""
 "zväčšenie obrazu zbytočne zaberá veľkú časť obrazovky. Odporúčame preto "
 "zväčšenie nepoužívať, pokiaľ nie je potrebné."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:506
+#: plugins/Oculars/src/gui/OcularDialog.cpp:487
 msgid ""
 "You can toggle a crosshair in the view.  Ideally, I wanted this to be "
 "aligned to North.  I've been unable to do so.  So currently it aligns to the "
@@ -5120,7 +5185,7 @@ msgstr ""
 "Zameriavací kríž môžete prepínať. V ideálnom prípade sa mal kríž orientovať "
 "na sever. Nebolo to možné, preto sa orientuje voči hornej hrane obrazovky."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:507
+#: plugins/Oculars/src/gui/OcularDialog.cpp:488
 #, qt-format
 msgid ""
 "You can toggle a Telrad finder; this can only be done when you have not "
@@ -5133,127 +5198,127 @@ msgstr ""
 "0,5%1, 2,0%1 a 4,0%1, takže ľahšie porovnáte, čo by ste videli voľným okom "
 "cez hľadáčik Telrad (alebo podobný)."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:508
+#: plugins/Oculars/src/gui/OcularDialog.cpp:489
 msgid "If you find any issues, please let me know.  Enjoy!"
 msgstr "Ak nájdete nejaké chyby, prosím dajte mi vedieť."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:511
+#: plugins/Oculars/src/gui/OcularDialog.cpp:492
 msgid "Hot Keys"
 msgstr "Klávesové skratky"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:512
+#: plugins/Oculars/src/gui/OcularDialog.cpp:493
 msgid "The plug-in's key bindings can be edited in the General Tab."
 msgstr "Priradenie kláves v module môžete nastaviť na záložke Hlavné."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:526
-#: plugins/Oculars/src/gui/OcularDialog.cpp:531
+#: plugins/Oculars/src/gui/OcularDialog.cpp:507
+#: plugins/Oculars/src/gui/OcularDialog.cpp:512
 msgid "[no key defined]"
 msgstr "[nenastavená žiadná klávesa]"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:535
+#: plugins/Oculars/src/gui/OcularDialog.cpp:516
 msgid "Switches on/off the ocular overlay."
 msgstr "Zapne/vypne okulárovú vrstvu."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:539
+#: plugins/Oculars/src/gui/OcularDialog.cpp:520
 msgid "Opens the pop-up navigation menu."
 msgstr "Zobrazí vyskakovaciu ponuku navigácie."
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1042
+#: plugins/Oculars/src/ui_ocularDialog.h:1047
 msgid "Enable only if an object is selected"
 msgstr "Povoliť, len ak je vybraný nejaký objekt"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1043
+#: plugins/Oculars/src/ui_ocularDialog.h:1048
 msgid "Scale image circle"
 msgstr "Zmeniť mierku obrazového kruhu"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1045
+#: plugins/Oculars/src/ui_ocularDialog.h:1050
 msgid "Apply limits stellar magnitude for different apertures of telescopes"
 msgstr ""
 "Aplikovať ohraničenie hviezdnej magnitúdy pre rôzne apertúry teleskopov"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1047
+#: plugins/Oculars/src/ui_ocularDialog.h:1052
 msgid "Limit stellar magnitude"
 msgstr "Ohraničiť hviezdnu magnitúdu"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1048
+#: plugins/Oculars/src/ui_ocularDialog.h:1053
 msgid "Key mappings"
 msgstr "Priradenie klávesov"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1049
+#: plugins/Oculars/src/ui_ocularDialog.h:1054
 msgid "Toggle ocular view:"
 msgstr "Prepnúť zobrazenie okulára:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1051
+#: plugins/Oculars/src/ui_ocularDialog.h:1056
 msgid "Open pop-up navigation menu:"
 msgstr "Otvoriť vyskakovacie navigačné menu:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1052
+#: plugins/Oculars/src/ui_ocularDialog.h:1057
 msgid "Interface"
 msgstr "Rozhranie"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1053
+#: plugins/Oculars/src/ui_ocularDialog.h:1058
 msgid "On-screen control panel"
 msgstr "Ovládací panel na obrazovke"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1054
+#: plugins/Oculars/src/ui_ocularDialog.h:1059
 msgid "Use degrees and minutes for FOV of CCD"
 msgstr "Použiť stupne a minúty v nastavení zorného poľa a CCD"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1055
+#: plugins/Oculars/src/ui_ocularDialog.h:1060
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:220
 msgid "General"
 msgstr "Všeobecný"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1056
-#: plugins/Oculars/src/ui_ocularDialog.h:1064
+#: plugins/Oculars/src/ui_ocularDialog.h:1061
+#: plugins/Oculars/src/ui_ocularDialog.h:1069
 msgid "Eyepieces"
 msgstr "Okuláre"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1057
-#: plugins/Oculars/src/ui_ocularDialog.h:1066
-#: plugins/Oculars/src/ui_ocularDialog.h:1073
-#: plugins/Oculars/src/ui_ocularDialog.h:1084
+#: plugins/Oculars/src/ui_ocularDialog.h:1062
+#: plugins/Oculars/src/ui_ocularDialog.h:1071
+#: plugins/Oculars/src/ui_ocularDialog.h:1078
+#: plugins/Oculars/src/ui_ocularDialog.h:1089
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:219
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:402
 msgid "Add"
 msgstr "Pridať"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1059
-#: plugins/Oculars/src/ui_ocularDialog.h:1068
-#: plugins/Oculars/src/ui_ocularDialog.h:1075
-#: plugins/Oculars/src/ui_ocularDialog.h:1086
+#: plugins/Oculars/src/ui_ocularDialog.h:1064
+#: plugins/Oculars/src/ui_ocularDialog.h:1073
+#: plugins/Oculars/src/ui_ocularDialog.h:1080
+#: plugins/Oculars/src/ui_ocularDialog.h:1091
 #: plugins/Satellites/src/ui_satellitesDialog.h:731
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:483
 msgid "Name:"
 msgstr "Názov:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1060
+#: plugins/Oculars/src/ui_ocularDialog.h:1065
 msgid "aFOV:"
 msgstr "zZP:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1061
-#: plugins/Oculars/src/ui_ocularDialog.h:1087
+#: plugins/Oculars/src/ui_ocularDialog.h:1066
+#: plugins/Oculars/src/ui_ocularDialog.h:1092
 msgid "Focal length:"
 msgstr "Hĺbka zaostrenia:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1062
+#: plugins/Oculars/src/ui_ocularDialog.h:1067
 msgid "Field stop:"
 msgstr "Clona:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1063
+#: plugins/Oculars/src/ui_ocularDialog.h:1068
 msgid "Binoculars"
 msgstr "Binokuláre"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1065
-#: plugins/Oculars/src/ui_ocularDialog.h:1071
+#: plugins/Oculars/src/ui_ocularDialog.h:1070
+#: plugins/Oculars/src/ui_ocularDialog.h:1076
 msgid "Lenses"
 msgstr "Šošovky"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1069
+#: plugins/Oculars/src/ui_ocularDialog.h:1074
 msgid "Multiplier:"
 msgstr "Zväčšenie:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1070
+#: plugins/Oculars/src/ui_ocularDialog.h:1075
 msgid ""
 "Values of multiplicity >1 expand the focal length (Barlow lens). Values of "
 "multiplicity <1 reduce the focal length (Shapley lens)."
@@ -5261,55 +5326,55 @@ msgstr ""
 "Hodnoty násobnosti >1 predĺžujú ohniskovú vzdialenosť (Barlowova šošovka). "
 "Hodnoty násobnosti <1 zmenšujú ohniskovú vzdialenosť (Shapleyova šošovka)."
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1072
-#: plugins/Oculars/src/ui_ocularDialog.h:1082
+#: plugins/Oculars/src/ui_ocularDialog.h:1077
+#: plugins/Oculars/src/ui_ocularDialog.h:1087
 msgid "Sensors"
 msgstr "Snímače"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1076
+#: plugins/Oculars/src/ui_ocularDialog.h:1081
 msgid "Resolution x (pixels):"
 msgstr "Rozlíšenie x (v pixeloch):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1077
+#: plugins/Oculars/src/ui_ocularDialog.h:1082
 msgid "Resolution y (pixels):"
 msgstr "Rozlíšenie y (v pixeloch):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1078
+#: plugins/Oculars/src/ui_ocularDialog.h:1083
 msgid "Chip width (mm):"
 msgstr "Šírka čipu (mm):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1079
+#: plugins/Oculars/src/ui_ocularDialog.h:1084
 msgid "Chip height (mm):"
 msgstr "Výška čipu (mm):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1080
+#: plugins/Oculars/src/ui_ocularDialog.h:1085
 msgid "Pixel width (micron):"
 msgstr "Šířka pixelu (mikron)"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1081
+#: plugins/Oculars/src/ui_ocularDialog.h:1086
 msgid "Pixel height (micron):"
 msgstr "Výška pixelu (mikron)"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1083
-#: plugins/Oculars/src/ui_ocularDialog.h:1091
+#: plugins/Oculars/src/ui_ocularDialog.h:1088
+#: plugins/Oculars/src/ui_ocularDialog.h:1096
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:391
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:407
 msgid "Telescopes"
 msgstr "Teleskopy"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1088
+#: plugins/Oculars/src/ui_ocularDialog.h:1093
 msgid "Diameter:"
 msgstr "Priemer:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1089
+#: plugins/Oculars/src/ui_ocularDialog.h:1094
 msgid "Horizontal flip"
 msgstr "Horizontálne preklopenie"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1090
+#: plugins/Oculars/src/ui_ocularDialog.h:1095
 msgid "Vertical flip"
 msgstr "Vertikálne preklopenie"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1092
+#: plugins/Oculars/src/ui_ocularDialog.h:1097
 #: plugins/Satellites/src/ui_satellitesDialog.h:762
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:418
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:405
@@ -9066,6 +9131,3 @@ msgstr ""
 #~ "Modul kvazary poskytuje zobrazenie niektorých kvazarov jasnejších ako 16. "
 #~ "vizuálna magnitúda. Katalóg kvazarov je prevzatý z práce \"Quasars and "
 #~ "Active Galactic Nuclei\" (13th Ed.)"
-
-#~ msgid "This plugin allows you to see next bright novae: "
-#~ msgstr "Tento zásuvný modul vám umožňuje pozorovať ďalšie jasné novy: "
