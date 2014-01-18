@@ -32,7 +32,7 @@ AddOnTableModel::AddOnTableModel(AddOn::Category category, QHash<AddOn::Type, St
 			QMap<qint64, AddOn*> plugin = addons.value(AddOn::Plugin_Catalog);
 			QMap<qint64, AddOn*> star = addons.value(AddOn::Star_Catalog);
 			m_addons = plugin.unite(star);
-			m_iColumns << Title << Type << Version;
+			m_iColumns << Title << Type << LastUpdate;
 			break;
 		}
 		case AddOn::LANDSCAPE:
