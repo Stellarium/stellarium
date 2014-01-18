@@ -579,7 +579,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 							J2000NodeOrigin.normalize();
 							parent_rot_j2000_longitude = atan2(J2000NodeOrigin*OrbitAxis1,J2000NodeOrigin*OrbitAxis0);
 						}
-			qDebug() << "Creating CometOrbit for" << englishName;
+			//qDebug() << "Creating CometOrbit for" << englishName;
 			CometOrbit *orb = new CometOrbit(pericenterDistance,
 							 eccentricity,
 							 inclination,
