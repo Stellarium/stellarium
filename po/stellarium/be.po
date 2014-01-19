@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-01-18 00:40+0700\n"
-"PO-Revision-Date: 2013-12-23 20:17+0000\n"
+"PO-Revision-Date: 2014-01-19 05:17+0000\n"
 "Last-Translator: 375gnu <Unknown>\n"
 "Language-Team: Belarusian <i18n@mova.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-01-18 05:20+0000\n"
+"X-Launchpad-Export-Date: 2014-01-19 05:21+0000\n"
 "X-Generator: Launchpad (build 16901)\n"
 "Language: be\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -317,17 +317,17 @@ msgstr "Часовае абазначэньне: %1"
 #: src/core/modules/Comet.cpp:178
 #, no-c-format, qt-format
 msgid "Distance from Sun: %1AU (%2 km)"
-msgstr ""
+msgstr "Адлегласьць ад Сонца: %1 АА (%2 км)"
 
 #: src/core/modules/Comet.cpp:185
 #, no-c-format, qt-format
 msgid "Distance from Sun: %1AU (%2 Mio km)"
-msgstr ""
+msgstr "Адлегласьць ад Сонца: %1 АА (%2 млн км)"
 
 #: src/core/modules/Comet.cpp:209
 #, no-c-format, qt-format
 msgid "Speed: %1 km/s"
-msgstr ""
+msgstr "Хуткасьць: %1 км/с"
 
 #: src/core/modules/SolarSystem.cpp:151
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:303
@@ -3649,23 +3649,23 @@ msgstr "Зымбабвэ"
 
 #: src/translations.h:541
 msgid "&Undo"
-msgstr ""
+msgstr "&Адрабіць"
 
 #: src/translations.h:542
 msgid "&Redo"
-msgstr ""
+msgstr "&Паўтарыць"
 
 #: src/translations.h:543
 msgid "Cu&t"
-msgstr ""
+msgstr "Вы&разаць"
 
 #: src/translations.h:544
 msgid "&Copy"
-msgstr ""
+msgstr "&Капіяваць"
 
 #: src/translations.h:545
 msgid "&Paste"
-msgstr ""
+msgstr "&Уставіць"
 
 #: src/translations.h:546 src/ui_locationDialogGui.h:395
 #: plugins/Oculars/src/ui_ocularDialog.h:1063
@@ -3677,23 +3677,23 @@ msgstr "Выдаліць"
 
 #: src/translations.h:547
 msgid "Select All"
-msgstr ""
+msgstr "Вылучыць усё"
 
 #: src/translations.h:548
 msgid "Look in:"
-msgstr ""
+msgstr "Глядзець у:"
 
 #: src/translations.h:549
 msgid "Directory:"
-msgstr ""
+msgstr "Каталёґ:"
 
 #: src/translations.h:550
 msgid "Folder"
-msgstr ""
+msgstr "Тэчка"
 
 #: src/translations.h:551
 msgid "&Choose"
-msgstr ""
+msgstr "&Выбраць"
 
 #: src/translations.h:552 src/ui_configurationDialog.h:1132
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:516
@@ -3702,27 +3702,27 @@ msgstr "Скасаваць"
 
 #: src/translations.h:553
 msgid "Files of type:"
-msgstr ""
+msgstr "Файлы тыпу:"
 
 #: src/translations.h:554
 msgid "Date Modified"
-msgstr ""
+msgstr "Дата зьмяненьня:"
 
 #: src/translations.h:555
 msgid "Directories"
-msgstr ""
+msgstr "Каталёґі"
 
 #: src/translations.h:556
 msgid "Computer"
-msgstr ""
+msgstr "Кампутар"
 
 #: src/translations.h:557
 msgid "&Open"
-msgstr ""
+msgstr "&Адкрыць"
 
 #: src/translations.h:558
 msgid "File &name:"
-msgstr ""
+msgstr "&Назва файла:"
 
 #: src/ui_helpDialogGui.h:277 src/ui_helpDialogGui.h:283
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:417
@@ -4050,7 +4050,7 @@ msgstr "Павялічваць Месяц"
 
 #: src/ui_viewDialog.h:1244
 msgid "Scale factor"
-msgstr ""
+msgstr "Множнік маштабу"
 
 #: src/ui_viewDialog.h:1247
 msgid "Automatic change of landscape when planet is changed"
@@ -7268,7 +7268,7 @@ msgstr ""
 #: plugins/Novae/src/gui/NovaeDialog.cpp:116
 #, qt-format
 msgid "This list altogether contains %1 stars."
-msgstr ""
+msgstr "Гэты сьпіс утрымлівае агулам %1 зорак."
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:115
 #, qt-format
@@ -7413,12 +7413,12 @@ msgstr ""
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:114
 msgid "This plugin allows you to see recent bright novae: "
-msgstr ""
+msgstr "Гэты дадатак дазваляе пабачыць нядаўнія яркія новыя: "
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:117
 #, qt-format
 msgid "All those novae are brighter than %1 at peak of brightness."
-msgstr ""
+msgstr "Усе гэтыя новыя ярчэйшыя за %1 на піку яркасьці."
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:119
 msgid ""
@@ -7509,6 +7509,9 @@ msgid ""
 "visual magnitude 16. The catalogue of quasars was compiled from \"Quasars "
 "and Active Galactic Nuclei\" (13th Ed.)"
 msgstr ""
+"Дадатак «Квазары» забясьпечвае адлюстраваньне некаторых квазараў, ярчэйшых "
+"за бачную велічыню 16. Каталёґ квазараў быў сабраны з «Квазары й ядры "
+"актыўных ґаляктык» (13 выданьне)."
 
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:121
 msgid "Veron+ 2010"
@@ -7517,7 +7520,7 @@ msgstr "Veron+ 2010"
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:123
 #, qt-format
 msgid "The current catalog contains info about %1 quasars."
-msgstr ""
+msgstr "Бягучы каталёґ утрымлівае зьвесткі пра %1 квазараў."
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:134
@@ -7526,6 +7529,8 @@ msgid ""
 "If you want to read full information about this plugin, its history and "
 "format of the catalog, you can %1get info here%2."
 msgstr ""
+"Калі жадаеш прачытаць усе зьвесткі пра дадатак, ягоную гісторыю й фармат "
+"каталёґу, то зьвесткі %1можна атрымаць тут%2."
 
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:216
 msgid "Quasars is updated"
@@ -7737,7 +7742,7 @@ msgstr ""
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:124
 #, qt-format
 msgid "Current catalog contains info about %1 pulsars."
-msgstr ""
+msgstr "Бягучы каталёґ утрымлівае зьвесткі пра %1 пульсараў."
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:126
 msgid "Note"
@@ -7924,6 +7929,9 @@ msgid ""
 "from \"%1The Habitable Exoplanets Catalog%3\" by %2Planetary Habitability "
 "Laboratory%3."
 msgstr ""
+"Сьпіс патэнцыйна прыдатных для жыцьця экзаплянэт і зьвесткі пра іх узятыя з "
+"«%1Каталёґу прыдатных для жыцьця экзаплянэт%3», створанага %2Лябараторыяй "
+"вывучэньня прыдатнасьці плянэт для жыцьця%3."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:128
 #, qt-format
@@ -7931,6 +7939,8 @@ msgid ""
 "The current catalog contains info about %1 planetary systems, which "
 "altogether have %2 exoplanets."
 msgstr ""
+"Бягучы каталёґ утрымлівае зьвесткі пра %1 плянэтарных сыстэм, якія агулам "
+"утрымліваюць %2 экзаплянэт.."
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:139
@@ -7939,6 +7949,8 @@ msgid ""
 "If you want to read full information about the plugin, its history and "
 "format of the catalog you can %1get info here%2."
 msgstr ""
+"Калі хочаш прачытаць усе зьвесткі пра дадатак, ягоную гісторыю й фармат "
+"каталёґу, то зьвесткі %1можна атрымаць тут%2."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:152
 msgid "Potential habitable exoplanets"
@@ -8594,13 +8606,15 @@ msgstr "Вышыня Сонца на зьмярканьні: 0°"
 #: plugins/FOV/src/ui_fovWindow.h:383 plugins/FOV/src/ui_fovWindow.h:385
 #: plugins/FOV/src/ui_fovWindow.h:404
 msgid "Field of View"
-msgstr ""
+msgstr "Поле зроку"
 
 #: plugins/FOV/src/FOV.cpp:43
 msgid ""
 "This plugin allows stepwise zooming via keyboard shortcuts like in the "
 "<em>Cartes du Ciel</em> planetarium program."
 msgstr ""
+"Гэты дадатак дазваляе рабіць пакрокавае маштабаваньне з дапамогай скаротаў "
+"клявіятуры як праґрама-плянэтар <em>Cartes du Ciel</em>."
 
 #: plugins/FOV/src/FOV.cpp:83
 #, qt-format
@@ -8609,7 +8623,7 @@ msgstr ""
 
 #: plugins/FOV/src/gui/FOVWindow.cpp:77
 msgid "Field of View plug-in"
-msgstr ""
+msgstr "Дадатак «Поле зроку»"
 
 #: plugins/FOV/src/ui_fovWindow.h:403
 msgid ""
@@ -8619,10 +8633,16 @@ msgid ""
 "feature. You can edit values and use the keyboard for quick-setting of FOV. "
 "All values in degrees."
 msgstr ""
+"Прадвызначана Stellarium мае згладжанае маштабаваньне з дапамогай кола мышы "
+"або скаротаў клявіятуры. Некаторыя карыстальнікі хацелі пакрокавае "
+"маштабаваньне з фіксаванымі значэньнямі поля зроку як у плянэтары «Cartes du "
+"Ciel», і гэты дадатак забясьпечвае гэтую магчымасьць. Можна правіць "
+"значэньні й выкарыстоўваць клявіятуру для хуткавага вызначэньня ПЗ. Усе "
+"значэньні ў ґрадусах."
 
 #: plugins/NavStars/src/NavStars.cpp:53 plugins/NavStars/src/NavStars.cpp:138
 msgid "Navigational Stars"
-msgstr ""
+msgstr "Навіґацыйныя зоркі"
 
 #: plugins/NavStars/src/NavStars.cpp:56
 msgid ""
@@ -8632,7 +8652,7 @@ msgstr ""
 
 #: plugins/NavStars/src/NavStars.cpp:138
 msgid "Mark the navigational stars"
-msgstr ""
+msgstr "Пазначыць навіґацыйныя зоркі"
 
 #~ msgid "Equatorial Grid"
 #~ msgstr "Экватарыяльная сетка"
