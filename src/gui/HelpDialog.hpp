@@ -30,7 +30,6 @@ class Ui_helpDialogForm;
 class QListWidgetItem;
 class QNetworkAccessManager;
 class QNetworkReply;
-class QTimer;
 
 class HelpDialog : public StelDialog
 {
@@ -117,8 +116,7 @@ private:
 	UpdateState updateState;
 	QSettings* conf;
 	QNetworkAccessManager* downloadMgr;
-	QString updateUrl;
-	QDateTime lastUpdate;
+	QString updateUrl;	
 	bool updatesEnabled;
 	QString jsonDataPath;
 	QString currentVersion;
