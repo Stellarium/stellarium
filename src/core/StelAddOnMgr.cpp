@@ -364,7 +364,8 @@ AddOn::Status StelAddOnMgr::installFromFile(AddOn* addon, const QStringList sele
 	}
 
 	if ((status == AddOn::PartiallyInstalled || status == AddOn::FullyInstalled) &&
-		(addon->getCategory() == AddOn::LANGUAGEPACK || addon->getCategory() == AddOn::TEXTURE))
+		(addon->getCategory() == AddOn::CATALOG || addon->getCategory() == AddOn::LANGUAGEPACK
+			|| addon->getCategory() == AddOn::TEXTURE))
 	{
 		emit (addOnMgrMsg(RestartRequired));
 		status = AddOn::Restart;
@@ -397,7 +398,8 @@ void StelAddOnMgr::removeAddOn(AddOn* addon, const QStringList selectedFiles)
 
 	addon->setStatus(m_pStelAddOns.value(addon->getCategory())->uninstallAddOn(addon->getInstallId(), selectedFiles));
 
-	if (addon->getCategory() == AddOn::LANGUAGEPACK || addon->getCategory() == AddOn::TEXTURE)
+	if (addon->getCategory() == AddOn::CATALOG || addon->getCategory() == AddOn::LANGUAGEPACK
+			|| addon->getCategory() == AddOn::TEXTURE)
 	{
 		emit (addOnMgrMsg(RestartRequired));
 		addon->setStatus(AddOn::Restart);
