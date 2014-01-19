@@ -141,7 +141,7 @@ public:
 	void setEnableAtStartup(bool b) { enableAtStartup=b; }
 	bool getEnableAtStartup(void) { return enableAtStartup; }
 
-	//! get the date and time the TLE elements were updated
+	//! get the date and time the pulsars were updated
 	QDateTime getLastUpdate(void) {return lastUpdate;}
 
 	//! get the update frequency in days

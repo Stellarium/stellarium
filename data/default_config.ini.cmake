@@ -1,5 +1,5 @@
 [main]
-version                             = 0.13.0
+version                             = @PACKAGE_VERSION@
 invert_screenshots_colors           = false
 
 [plugins_load_at_startup]
