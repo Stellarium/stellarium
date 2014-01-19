@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-01-18 00:40+0700\n"
-"PO-Revision-Date: 2013-07-13 01:31+0000\n"
+"PO-Revision-Date: 2014-01-18 15:58+0000\n"
 "Last-Translator: Kaori YOKOZAWA <yokozawa@tree.so-net.jp>\n"
 "Language-Team: Japanese <ja@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-01-18 05:26+0000\n"
+"X-Launchpad-Export-Date: 2014-01-19 05:21+0000\n"
 "X-Generator: Launchpad (build 16901)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:106 src/core/modules/StarMgr.cpp:336
@@ -213,7 +213,7 @@ msgstr "惑星状星雲"
 
 #: src/core/modules/Nebula.cpp:357
 msgid "Dark Nebula"
-msgstr ""
+msgstr "暗黒星雲"
 
 #: src/core/modules/Nebula.cpp:360
 msgid "Cluster associated with nebulosity"
@@ -390,12 +390,12 @@ msgstr "種類: <b>%1、%2</b>"
 #: src/core/modules/StarWrapper.cpp:207
 #, qt-format
 msgid "Magnitude range: <b>%1</b>%2<b>%3</b> (Photometric system: %4)"
-msgstr "等級の範囲: <b>%1</b>%2<b>%3</b> (測光システム: %4)"
+msgstr "等級の範囲: <b>%1</b>%2<b>%3</b> (測光系: %4)"
 
 #: src/core/modules/StarWrapper.cpp:209
 #, qt-format
 msgid "Magnitude range: <b>%1</b>%2<b>%3/%4</b> (Photometric system: %5)"
-msgstr ""
+msgstr "等級の範囲: <b>%1</b>%2<b>%3/%4</b> (測光系: %5)"
 
 #: src/core/modules/StarWrapper.cpp:216
 #: plugins/Supernovae/src/Supernova.cpp:136 plugins/Novae/src/Nova.cpp:138
@@ -1746,7 +1746,7 @@ msgstr "アクション"
 
 #: src/gui/ShortcutsDialog.cpp:489 src/ui_shortcutsDialog.h:197
 msgid "Primary shortcut"
-msgstr ""
+msgstr "通常のショートカット"
 
 #: src/gui/ShortcutsDialog.cpp:490 src/ui_shortcutsDialog.h:198
 msgid "Alternative shortcut"
@@ -2057,7 +2057,7 @@ msgstr "太陽系の外から"
 #. TRANSLATORS: TNO/Asteroid (90377) Sedna
 #: src/translations.h:102
 msgid "Sedna"
-msgstr ""
+msgstr "セドナ"
 
 #. TRANSLATORS: TNO/Asteroid (50000) Quaoar
 #: src/translations.h:104
@@ -2909,7 +2909,7 @@ msgstr "香港"
 
 #: src/translations.h:389
 msgid "Heard Island and McDonald Islands"
-msgstr ""
+msgstr "ハード島とマクドナルド諸島"
 
 #: src/translations.h:390
 msgid "Honduras"
@@ -3209,7 +3209,7 @@ msgstr "ペルー"
 
 #: src/translations.h:464
 msgid "French Polynesia"
-msgstr "仏領ポリネシア"
+msgstr "フランス領ポリネシア"
 
 #: src/translations.h:465
 msgid "Papua New Guinea"
@@ -3449,7 +3449,7 @@ msgstr "バチカン市国"
 
 #: src/translations.h:524
 msgid "Saint Vincent and the Grenadines"
-msgstr ""
+msgstr "セントビンセントおよびグレナディーン諸島"
 
 #: src/translations.h:525
 msgid "Venezuela"
@@ -5225,7 +5225,7 @@ msgstr ""
 
 #: plugins/Satellites/src/Satellites.cpp:144
 msgid "Satellite hints"
-msgstr ""
+msgstr "衛星のヒント"
 
 #: plugins/Satellites/src/Satellites.cpp:145
 msgid "Satellite labels"
@@ -5804,7 +5804,7 @@ msgstr ""
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:319
 #: plugins/Observability/src/ui_ObservabilityDialog.h:377
 msgid "Settings"
-msgstr ""
+msgstr "設定"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:718
 msgid "Double-click a satellite to start tracking it."
@@ -5884,7 +5884,7 @@ msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:761
 msgid "Sources"
-msgstr "天体"
+msgstr "配布元"
 
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:211
 msgid "More Satellites"
@@ -6538,15 +6538,15 @@ msgstr ""
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:396
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:400
 msgid "System default"
-msgstr ""
+msgstr "システムのデフォルト"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:397
 msgid "12-hour format"
-msgstr ""
+msgstr "12時間表記"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:398
 msgid "24-hour format"
-msgstr ""
+msgstr "24時間表記"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:399
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:194
@@ -6555,15 +6555,15 @@ msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:401
 msgid "yyyy-mm-dd (ISO 8601)"
-msgstr ""
+msgstr "yyyy-mm-dd (ISO 8601)"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:402
 msgid "dd-mm-yyyy"
-msgstr ""
+msgstr "dd-mm-yyyy"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:403
 msgid "mm-dd-yyyy"
-msgstr ""
+msgstr "mm-dd-yyyy"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:89
 msgid "Text User Interface"
@@ -7172,7 +7172,7 @@ msgstr ""
 
 #: plugins/Quasars/src/Quasar.cpp:91
 msgid "quasar"
-msgstr ""
+msgstr "クエーサー"
 
 #: plugins/Quasars/src/Quasar.cpp:122
 #, qt-format
@@ -7474,7 +7474,7 @@ msgstr ""
 #: plugins/Exoplanets/src/Exoplanets.cpp:162
 #: plugins/Exoplanets/src/Exoplanets.cpp:163
 msgid "Exoplanets"
-msgstr ""
+msgstr "太陽系外惑星"
 
 #: plugins/Exoplanets/src/Exoplanets.cpp:76
 msgid ""
@@ -7515,7 +7515,7 @@ msgstr ""
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:209
 msgid "Exoplanet"
-msgstr ""
+msgstr "太陽系外惑星"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:210
 msgid "Period"
