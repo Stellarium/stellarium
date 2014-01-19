@@ -173,6 +173,7 @@ ADD_PLUGIN(SolarSystemEditor 1)
 ADD_PLUGIN(Supernovae 1)
 ADD_PLUGIN(SVMT 0)
 ADD_PLUGIN(TextUserInterface 1)
+ADD_PLUGIN(TelescopeControl 1)
 ADD_PLUGIN(TimeZoneConfiguration 1)
 ADD_PLUGIN(VirGO 0)
 
@@ -347,6 +348,9 @@ IF(CMAKE_BUILD_TYPE STREQUAL "Release" OR CMAKE_BUILD_TYPE STREQUAL "RelWithDebI
     ADD_DEFINITIONS(-DQT_NO_DEBUG)
     ADD_DEFINITIONS(-DNDEBUG)
 ENDIF()
+
+CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/data/default_config.ini.cmake ${CMAKE_SOURCE_DIR}/data/default_config.ini @ONLY)
+CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/data/updates.json.cmake ${CMAKE_SOURCE_DIR}/data/updates.json @ONLY)
 
 ########### uninstall files ###############
 CONFIGURE_FILE(
