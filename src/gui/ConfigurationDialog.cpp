@@ -403,6 +403,8 @@ void ConfigurationDialog::setSelectedInfoFromCheckBoxes()
 		flags |= StelObject::GalacticCoord;
 	if (ui->checkBoxType->isChecked())
 		flags |= StelObject::Type;
+	if (ui->checkBoxTEclipticCoords->isChecked())
+		flags |= StelObject::TEclipticCoord;
 
 	gui->setInfoTextFilters(flags);
 }
@@ -589,6 +591,8 @@ void ConfigurationDialog::saveCurrentViewOptions()
 			       (bool) (flags & StelObject::Type));
 		conf->setValue("flag_show_galcoord",
 			       (bool) (flags & StelObject::GalacticCoord));
+		conf->setValue("flag_show_eclcoord",
+			       (bool) (flags & StelObject::TEclipticCoord));
 		conf->endGroup();
 	}
 
@@ -1084,6 +1088,7 @@ void ConfigurationDialog::updateSelectedInfoCheckBoxes()
 	ui->checkBoxExtra->setChecked(flags & StelObject::Extra);
 	ui->checkBoxGalacticCoordinates->setChecked(flags & StelObject::GalacticCoord);
 	ui->checkBoxType->setChecked(flags & StelObject::Type);
+	ui->checkBoxTEclipticCoords->setChecked(flags & StelObject::TEclipticCoord);
 }
 
 void ConfigurationDialog::updateTabBarListWidgetWidth()
