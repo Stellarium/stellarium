@@ -168,7 +168,7 @@ QString StelObject::getPositionInfoString(const StelCore *core, const InfoString
 		}
 	}
 
-	if ((flags&TEclipticCoord) && (core->getCurrentLocation().planetName=="Earth"))
+	if ((flags&EclTopocentricCoord) && (core->getCurrentLocation().planetName=="Earth"))
 	{
 		//static SolarSystem *ssystem=GETSTELMODULE(SolarSystem);
 		//double ecl= -(ssystem->getEarth()->getRotObliquity()); // BUG DETECTED! Earth's obliquity is apparently reported constant.

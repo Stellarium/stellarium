@@ -152,7 +152,7 @@ QString Exoplanet::getInfoString(const StelCore* core, const InfoStringGroup& fl
 		oss << "<h2>" << getNameI18n() << "</h2>";
 	}
 	
-	if (flags&Type)
+	if (flags&ObjectType)
 	{
 		oss << q_("Type: <b>%1</b>").arg(q_("planetary system")) << "<br />";
 	}
