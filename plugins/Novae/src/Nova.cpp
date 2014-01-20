@@ -116,7 +116,7 @@ QString Nova::getInfoString(const StelCore* core, const InfoStringGroup& flags) 
 		oss << name;
 	}
 
-	if (flags&Type)
+	if (flags&ObjectType)
 		oss << q_("Type: <b>%1</b> (%2)").arg(q_("nova")).arg(novaType) << "<br />";
 
 	if (flags&Magnitude)

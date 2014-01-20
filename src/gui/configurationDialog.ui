@@ -541,6 +541,9 @@
                <property name="text">
                 <string>Type</string>
                </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedFields</string>
+               </attribute>
               </widget>
              </item>
              <item row="6" column="1">
@@ -566,7 +569,7 @@
                </property>
                <attribute name="buttonGroup">
                 <string notr="true">buttonGroupDisplayedFields</string>
-               </attribute>
+               </attribute>               
               </widget>
              </item>
              <item row="4" column="1">
@@ -600,6 +603,9 @@
                <property name="text">
                 <string>Ecliptic coordinates</string>
                </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedFields</string>
+               </attribute>
               </widget>
              </item>
             </layout>
@@ -1592,6 +1598,9 @@
   <tabstop>checkBoxGalacticCoordinates</tabstop>
   <tabstop>checkBoxRaDecOfDate</tabstop>
   <tabstop>checkBoxSize</tabstop>
+  <tabstop>checkBoxDistance</tabstop>
+  <tabstop>checkBoxType</tabstop>
+  <tabstop>checkBoxTEclipticCoords</tabstop>
   <tabstop>enableKeysNavigationCheckBox</tabstop>
   <tabstop>editShortcutsPushButton</tabstop>
   <tabstop>systemTimeRadio</tabstop>
