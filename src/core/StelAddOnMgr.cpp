@@ -474,7 +474,7 @@ void StelAddOnMgr::downloadNextAddOn()
 
 	m_progressBar = StelApp::getInstance().addProgressBar();
 	m_progressBar->setValue(0);
-	m_progressBar->setRange(0, m_downloadingAddOn->getDownloadSize()*1024);
+	m_progressBar->setRange(0, m_downloadingAddOn->getDownloadSize());
 	m_progressBar->setFormat(QString("%1: %p%").arg(m_downloadingAddOn->getDownloadFilename()));
 }
 
@@ -484,8 +484,8 @@ void StelAddOnMgr::newDownloadedData()
 	Q_ASSERT(m_pAddOnNetworkReply);
 	Q_ASSERT(m_progressBar);
 
-	int size = m_pAddOnNetworkReply->bytesAvailable();
-	m_progressBar->setValue((float)m_progressBar->getValue()+(float)size/1024);
+	float size = m_pAddOnNetworkReply->bytesAvailable();
+	m_progressBar->setValue((float)m_progressBar->getValue()+(float)size);
 	m_currentDownloadFile->write(m_pAddOnNetworkReply->read(size));
 }
 
