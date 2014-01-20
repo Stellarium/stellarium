@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-18 00:40+0700\n"
-"PO-Revision-Date: 2014-01-19 05:17+0000\n"
+"POT-Creation-Date: 2014-01-19 21:18+0700\n"
+"PO-Revision-Date: 2014-01-19 20:28+0000\n"
 "Last-Translator: 375gnu <Unknown>\n"
 "Language-Team: Belarusian <i18n@mova.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-01-19 05:21+0000\n"
+"X-Launchpad-Export-Date: 2014-01-20 05:16+0000\n"
 "X-Generator: Launchpad (build 16901)\n"
 "Language: be\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -1405,59 +1405,80 @@ msgstr "Іслам, Садзік і Курэшы (2008, 2013)"
 msgid "Custom equation of %1T"
 msgstr "Сваё раўнаньне %1T"
 
-#: src/gui/HelpDialog.cpp:119
+#. TRANSLATORS: This message will be displayed for users if Stellarium can't get info about version from stellarium.org
+#: src/gui/HelpDialog.cpp:250
+msgid "Oops... Stellarium can't check latest version."
+msgstr "Вой! Stellarium ня можа спраўдзіць апошняе вэрсіі."
+
+#. TRANSLATORS: This message will be displayed for users if current version of Stellarium is bigger than version from stellarium.org
+#: src/gui/HelpDialog.cpp:272
+msgid "Looks like you are using the development version of Stellarium."
+msgstr "Падобна на тое, што гэта вэрсія, якая знаходзіцца ў распрацоўцы."
+
+#. TRANSLATORS: This message will be displayed for users if current version of Stellarium is smaller than version from stellarium.org
+#: src/gui/HelpDialog.cpp:277
+#, qt-format
+msgid "This version of Stellarium is outdated! Latest version is %1."
+msgstr "Гэтая вэрсія Stellarium састарэла! Апошняя вэрсія — %1."
+
+#. TRANSLATORS: This message will be displayed for users if current version of Stellarium is equals with version from stellarium.org
+#: src/gui/HelpDialog.cpp:283
+msgid "This is latest stable version of Stellarium."
+msgstr "Гэта — апошняя стабільная вэрсія Stellarium."
+
+#: src/gui/HelpDialog.cpp:313
 msgid "Stellarium Help"
 msgstr "Дапамога па Stellarium"
 
-#: src/gui/HelpDialog.cpp:124 src/gui/HelpDialog.cpp:129
+#: src/gui/HelpDialog.cpp:318 src/gui/HelpDialog.cpp:323
 msgid "Keys"
 msgstr "Клявішы"
 
-#: src/gui/HelpDialog.cpp:126 src/gui/HelpDialog.cpp:198
+#: src/gui/HelpDialog.cpp:320 src/gui/HelpDialog.cpp:392
 msgid "Further Reading"
 msgstr "Далей варта чытаць"
 
-#: src/gui/HelpDialog.cpp:133
+#: src/gui/HelpDialog.cpp:327
 msgid "Pan view around the sky"
 msgstr "Перасоўваньне агляду па небе"
 
-#: src/gui/HelpDialog.cpp:134
+#: src/gui/HelpDialog.cpp:328
 msgid "Arrow keys & left mouse drag"
 msgstr "Клявішы-стрэлкі й перацягваньне левай кнопкай мышы"
 
-#: src/gui/HelpDialog.cpp:136
+#: src/gui/HelpDialog.cpp:330
 msgid "Zoom in/out"
 msgstr "Набліжэньне/аддаленьне"
 
-#: src/gui/HelpDialog.cpp:138
+#: src/gui/HelpDialog.cpp:332
 msgid "Page Up/Down"
 msgstr "Page Up/Down"
 
-#: src/gui/HelpDialog.cpp:140
+#: src/gui/HelpDialog.cpp:334
 msgid "CTRL + Up/Down"
 msgstr "CTRL + стрэлкі «уверх»/«уніз»"
 
-#: src/gui/HelpDialog.cpp:143
+#: src/gui/HelpDialog.cpp:337
 msgid "Select object"
 msgstr "Вылучыць аб'ект"
 
-#: src/gui/HelpDialog.cpp:144
+#: src/gui/HelpDialog.cpp:338
 msgid "Left click"
 msgstr "Левы пстрык"
 
-#: src/gui/HelpDialog.cpp:152
+#: src/gui/HelpDialog.cpp:346
 msgid "Clear selection"
 msgstr "Ачысьціць вылучэньне"
 
-#: src/gui/HelpDialog.cpp:153
+#: src/gui/HelpDialog.cpp:347
 msgid "Right click"
 msgstr "Правы пстрык"
 
-#: src/gui/HelpDialog.cpp:155
+#: src/gui/HelpDialog.cpp:349
 msgid "CTRL + Left click"
 msgstr "CTRL + левы пстрык"
 
-#: src/gui/HelpDialog.cpp:160
+#: src/gui/HelpDialog.cpp:354
 #, qt-format
 msgid ""
 "Below are listed only the actions with assigned keys. Further actions may be "
@@ -1466,7 +1487,7 @@ msgstr ""
 "Ніжэй пададзеныя  толькі дзеяньні з прызначанымі клявішамі. Каб пабачыць "
 "болей націсьні «%1»."
 
-#: src/gui/HelpDialog.cpp:199
+#: src/gui/HelpDialog.cpp:393
 msgid ""
 "The following links are external web links, and will launch your web "
 "browser:\n"
@@ -1474,17 +1495,17 @@ msgstr ""
 "Наступныя спасылкі — гэта Сеціўныя спасылкі, для іх будзе выкананы гартач "
 "Сеціва:\n"
 
-#: src/gui/HelpDialog.cpp:200
+#: src/gui/HelpDialog.cpp:394
 msgid "The Stellarium User Guide"
 msgstr "Кіраўніцтва карыстальніка Stellarium"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:204
+#: src/gui/HelpDialog.cpp:398
 msgid "{Frequently Asked Questions} about Stellarium.  Answers too."
 msgstr "{Частыя пытаньні} пра Stellarium.  І адказы таксама."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:209
+#: src/gui/HelpDialog.cpp:403
 msgid ""
 "{The Stellarium Wiki} - General information.  You can also find user-"
 "contributed landscapes and scripts here."
@@ -1493,7 +1514,7 @@ msgstr ""
 "карыстальнікамі краявіды й сцэнары."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:214
+#: src/gui/HelpDialog.cpp:408
 msgid ""
 "{Support ticket system} - if you need help using Stellarium, post a support "
 "request here and we'll try to help."
@@ -1503,7 +1524,7 @@ msgstr ""
 "дапамагчы."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:219
+#: src/gui/HelpDialog.cpp:413
 msgid ""
 "{Bug reporting and feature request system} - if something doesn't work "
 "properly or is missing and is not listed in the tracker, you can open bug "
@@ -1514,48 +1535,48 @@ msgstr ""
 "адкрыць паведамленьне пра хібу."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:224
+#: src/gui/HelpDialog.cpp:418
 msgid "{Forums} - discuss Stellarium with other users."
 msgstr "{Форумы} — абмеркаваньне Stellarium зь іншымі карыстальнікамі."
 
-#: src/gui/HelpDialog.cpp:262
+#: src/gui/HelpDialog.cpp:458
 msgid "Developers"
 msgstr "Распрацоўнікі"
 
-#: src/gui/HelpDialog.cpp:263
+#: src/gui/HelpDialog.cpp:459
 #, qt-format
 msgid "Project coordinator & lead developer: %1"
 msgstr "Каардынатар і галоўны распрацоўнік: %1"
 
-#: src/gui/HelpDialog.cpp:264
+#: src/gui/HelpDialog.cpp:460
 #, qt-format
 msgid "Doc author/developer: %1"
 msgstr "Аўтар дакумэнтацыі/распрацоўнік: %1"
 
-#: src/gui/HelpDialog.cpp:265 src/gui/HelpDialog.cpp:266
-#: src/gui/HelpDialog.cpp:267 src/gui/HelpDialog.cpp:268
-#: src/gui/HelpDialog.cpp:269 src/gui/HelpDialog.cpp:276
-#: src/gui/HelpDialog.cpp:277 src/gui/HelpDialog.cpp:278
-#: src/gui/HelpDialog.cpp:279
+#: src/gui/HelpDialog.cpp:461 src/gui/HelpDialog.cpp:462
+#: src/gui/HelpDialog.cpp:463 src/gui/HelpDialog.cpp:464
+#: src/gui/HelpDialog.cpp:465 src/gui/HelpDialog.cpp:472
+#: src/gui/HelpDialog.cpp:473 src/gui/HelpDialog.cpp:474
+#: src/gui/HelpDialog.cpp:475
 #, qt-format
 msgid "Developer: %1"
 msgstr "Распрацоўнік: %1"
 
-#: src/gui/HelpDialog.cpp:270
+#: src/gui/HelpDialog.cpp:466
 #, qt-format
 msgid "Continuous Integration: %1"
 msgstr "Няспынная інтэґрацыя: %1"
 
-#: src/gui/HelpDialog.cpp:271 src/gui/HelpDialog.cpp:272
+#: src/gui/HelpDialog.cpp:467 src/gui/HelpDialog.cpp:468
 #, qt-format
 msgid "Tester: %1"
 msgstr "Тэставальнік: %1"
 
-#: src/gui/HelpDialog.cpp:273
+#: src/gui/HelpDialog.cpp:469
 msgid "Past Developers"
 msgstr "Ранейшыя распрацоўнікі"
 
-#: src/gui/HelpDialog.cpp:274
+#: src/gui/HelpDialog.cpp:470
 msgid ""
 "Several people have made significant contributions, but are no longer "
 "active. Their work has made a big difference to the project:"
@@ -1563,12 +1584,12 @@ msgstr ""
 "Некалькі чалавек зрабілі значны ўнёсак, але болей яны не актыўныя. Іхняя "
 "праца істотна зьмяніла праект:"
 
-#: src/gui/HelpDialog.cpp:275
+#: src/gui/HelpDialog.cpp:471
 #, qt-format
 msgid "Graphic/other designer: %1"
 msgstr "Дызайнэр ґрафікі й іншага: %1"
 
-#: src/gui/HelpDialog.cpp:280 src/gui/HelpDialog.cpp:281
+#: src/gui/HelpDialog.cpp:476 src/gui/HelpDialog.cpp:477
 #, qt-format
 msgid "OSX Developer: %1"
 msgstr "Распрацоўнік для OSX: %1"
@@ -7594,17 +7615,17 @@ msgstr "пульсар"
 
 #: plugins/Pulsars/src/Pulsar.cpp:142
 msgid "has one registered glitch"
-msgstr ""
+msgstr "ня мае зарэґістраваных збояў"
 
 #. TRANSLATORS: Full phrase is "Has X registered glitches", where X is number
 #: plugins/Pulsars/src/Pulsar.cpp:146
 #, qt-format
 msgid "has %1 registered glitches"
-msgstr ""
+msgstr "мае %1 зарэґістраваных збояў"
 
 #: plugins/Pulsars/src/Pulsar.cpp:148
 msgid "pulsar with glitches"
-msgstr ""
+msgstr "пульсар са збоямі"
 
 #. TRANSLATORS: Unit of measure for period - seconds
 #: plugins/Pulsars/src/Pulsar.cpp:160
@@ -7806,7 +7827,7 @@ msgstr "Паказваць ґузік пульсараў на панэлі пр�
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:279
 msgid "Use separate color for pulsars with glitches"
-msgstr ""
+msgstr "выкарыстоўваць асобны колер для пульсараў са збоямі"
 
 #: plugins/Exoplanets/src/Exoplanets.cpp:73
 #: plugins/Exoplanets/src/Exoplanets.cpp:162
@@ -8619,7 +8640,7 @@ msgstr ""
 #: plugins/FOV/src/FOV.cpp:83
 #, qt-format
 msgid "Set FOV to %1%2"
-msgstr ""
+msgstr "Усталяваць ПЗ у %1%2"
 
 #: plugins/FOV/src/gui/FOVWindow.cpp:77
 msgid "Field of View plug-in"
@@ -8649,6 +8670,8 @@ msgid ""
 "This plugin marks the 58 navigational stars of the 2102-D Rude Star Finder, "
 "also tabulated in the Nautical Almanac."
 msgstr ""
+"Гэты дадатак пазначае 58 навіґацыйных зорак з каталёґу «2102-D Rude Star "
+"Finder», таксама табуляваных у «Марскім альманаху»."
 
 #: plugins/NavStars/src/NavStars.cpp:138
 msgid "Mark the navigational stars"
