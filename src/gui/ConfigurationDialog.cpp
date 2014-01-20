@@ -402,9 +402,9 @@ void ConfigurationDialog::setSelectedInfoFromCheckBoxes()
 	if (ui->checkBoxGalacticCoordinates->isChecked())
 		flags |= StelObject::GalacticCoord;
 	if (ui->checkBoxType->isChecked())
-		flags |= StelObject::Type;
+		flags |= StelObject::ObjectType;
 	if (ui->checkBoxTEclipticCoords->isChecked())
-		flags |= StelObject::TEclipticCoord;
+		flags |= StelObject::EclTopocentricCoord;
 
 	gui->setInfoTextFilters(flags);
 }
@@ -576,7 +576,7 @@ void ConfigurationDialog::saveCurrentViewOptions()
 		conf->setValue("flag_show_radecj2000",
 		               (bool) (flags & StelObject::RaDecJ2000));
 		conf->setValue("flag_show_radecofdate",
-		               (bool) (flags & StelObject::RaDecOfDate));
+			       (bool) (flags & StelObject::RaDecOfDate));
 		conf->setValue("flag_show_hourangle",
 		               (bool) (flags & StelObject::HourAngle));
 		conf->setValue("flag_show_altaz",
@@ -587,12 +587,12 @@ void ConfigurationDialog::saveCurrentViewOptions()
 		               (bool) (flags & StelObject::Size));
 		conf->setValue("flag_show_extra",
 			       (bool) (flags & StelObject::Extra));
-		conf->setValue("flag_show_type",
-			       (bool) (flags & StelObject::Type));
 		conf->setValue("flag_show_galcoord",
 			       (bool) (flags & StelObject::GalacticCoord));
+		conf->setValue("flag_show_type",
+			       (bool) (flags & StelObject::ObjectType));
 		conf->setValue("flag_show_eclcoord",
-			       (bool) (flags & StelObject::TEclipticCoord));
+			       (bool) (flags & StelObject::EclTopocentricCoord));
 		conf->endGroup();
 	}
 
@@ -1087,8 +1087,8 @@ void ConfigurationDialog::updateSelectedInfoCheckBoxes()
 	ui->checkBoxSize->setChecked(flags & StelObject::Size);
 	ui->checkBoxExtra->setChecked(flags & StelObject::Extra);
 	ui->checkBoxGalacticCoordinates->setChecked(flags & StelObject::GalacticCoord);
-	ui->checkBoxType->setChecked(flags & StelObject::Type);
-	ui->checkBoxTEclipticCoords->setChecked(flags & StelObject::TEclipticCoord);
+	ui->checkBoxType->setChecked(flags & StelObject::ObjectType);
+	ui->checkBoxTEclipticCoords->setChecked(flags & StelObject::EclTopocentricCoord);
 }
 
 void ConfigurationDialog::updateTabBarListWidgetWidth()

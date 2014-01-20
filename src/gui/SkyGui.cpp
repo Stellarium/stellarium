@@ -79,11 +79,11 @@ InfoPanel::InfoPanel(QGraphicsItem* parent) : QGraphicsTextItem("", parent)
 		if (conf->value("flag_show_extra", false).toBool())
 			infoTextFilters |= StelObject::Extra;
 		if (conf->value("flag_show_type", false).toBool())
-			infoTextFilters |= StelObject::Type;
+			infoTextFilters |= StelObject::ObjectType;
 		if (conf->value("flag_show_galcoord", false).toBool())
 			infoTextFilters |= StelObject::GalacticCoord;
 		if (conf->value("flag_show_eclcoord", false).toBool())
-			infoTextFilters |= StelObject::TEclipticCoord;
+			infoTextFilters |= StelObject::EclTopocentricCoord;
 		conf->endGroup();
 	}
 	else
