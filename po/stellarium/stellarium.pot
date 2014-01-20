@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-20 19:45+0700\n"
+"POT-Creation-Date: 2014-01-20 20:06+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1000,6 +1000,11 @@ msgid "Az/Alt: %1/%2"
 msgstr ""
 
 #: src/core/StelObject.cpp:180
+#, qt-format
+msgid "Ecliptic Topocentric (of J2000): %1/%2"
+msgstr ""
+
+#: src/core/StelObject.cpp:185
 #, qt-format
 msgid "Ecliptic Topocentric (of date): %1/%2"
 msgstr ""
@@ -4254,11 +4259,12 @@ msgid "Distance"
 msgstr ""
 
 #: src/ui_configurationDialog.h:1047
-msgid "Topocentric ecliptic coordinates, equinox of date (only for Earth)"
+msgid ""
+"Topocentric ecliptic coordinates, equinox of date and J2000 (only for Earth)"
 msgstr ""
 
 #: src/ui_configurationDialog.h:1049
-msgid "Ecliptic coordinates (of date)"
+msgid "Ecliptic coordinates"
 msgstr ""
 
 #: src/ui_configurationDialog.h:1050
