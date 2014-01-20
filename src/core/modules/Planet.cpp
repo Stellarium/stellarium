@@ -147,12 +147,7 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 	{
 		//static SolarSystem *ssystem=GETSTELMODULE(SolarSystem);
 		//double ecl= -(ssystem->getEarth()->getRotObliquity()); // BUG DETECTED! Earth's obliquity is apparently reported constant.
-		double ra_equ, dec_equ, lambda, beta;
 		double ecl= get_mean_ecliptical_obliquity(core->getJDay()) *M_PI/180.0;
-		StelUtils::rectToSphe(&ra_equ,&dec_equ,getEquinoxEquatorialPos(core));
-		StelUtils::ctRadec2Ecl(ra_equ, dec_equ, ecl, &lambda, &beta);
-		if (lambda<0) lambda+=2.0*M_PI;
-		oss << q_("Ecliptic Topocentric (of date): %1/%2").arg(StelUtils::radToDmsStr(lambda, true), StelUtils::radToDmsStr(beta, true)) << "<br>";
 		oss << q_("Obliquity (of date, for Earth): %1").arg(StelUtils::radToDmsStr(ecl, true)) << "<br>";
 	}
 
