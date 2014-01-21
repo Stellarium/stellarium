@@ -163,12 +163,11 @@ def processPlugins():
 	# Always update paths after copying...
 	updateLibraryPath('libqcocoa.dylib', 'plugins/platforms')
 
-def processQmlDirectory(qtQuickDirectoryName):
-	qmlOutputDirectory = os.path.join(installDirectory, 'Resources', 'qml')
-
-	toDir = os.path.join(qmlOutputDirectory, qtQuickDirectoryName)
-	os.makedirs(toDir)
-	fromDir = os.path.join(qmlDirectory, qtQuickDirectoryName)
+def processQmlDirectory(qtImportsDirectoryName):
+	qmlOutputDirectory = os.path.join(installDirectory, 'MacOS/Qt/labs')
+	toDir = os.path.join(qmlOutputDirectory, qtImportsDirectoryName)
+	os.mkdir(toDir)
+	fromDir = os.path.join(qmlDirectory, qtImportsDirectoryName)
 	for plugin in os.listdir(fromDir):
 		# there may be debug versions installed; if so, ignore them
 		if plugin.find('_debug') is -1:
@@ -181,13 +180,16 @@ def processQmlDirectory(qtQuickDirectoryName):
 				copyFrameworkToApp(framework)
 				updateLibraryPath(framework, 'Frameworks')
 			# Update path
-			updateLibraryPath(plugin, 'Resources/qml/' + qtQuickDirectoryName)
+			updateLibraryPath(plugin, 'MacOS/Qt/labs/' + qtImportsDirectoryName)
 
 def processQml():
-	qmlOutputDirectory = os.path.join(installDirectory, 'Resources', 'qml')
+	qmlQtDir = os.path.join(installDirectory, 'MacOS/Qt')
+	os.mkdir(qmlQtDir)
+	
+	qmlOutputDirectory = os.path.join(qmlQtDir, 'labs')
 	os.mkdir(qmlOutputDirectory)
 
-	processQmlDirectory("QtQuick.2")
+	processQmlDirectory("shaders")
 
 def processBin():
 	'''
@@ -203,7 +205,7 @@ def main():
 	'''
 	global installDirectory, sourceDirectory, installDirectory, qtFrameworksDirectory, qtPluginsDirectory, qmlDirectory
 	if len(sys.argv) < 4:
-		print("usage: mac_bundle.py ${CMAKE_INSTALL_PREFIX} ${PROJECT_SOURCE_DIR} ${CMAKE_BUILD_TYPE} ${Qt5Core_INCLUDE_DIRS}")
+		print("usage: mac_app.py ${CMAKE_INSTALL_PREFIX} ${PROJECT_SOURCE_DIR} ${CMAKE_BUILD_TYPE} ${Qt5Core_INCLUDE_DIRS}")
 		print(sys.argv)
 		return
 	installDirectory = sys.argv[1]
@@ -223,7 +225,7 @@ def main():
 	if not os.path.exists(qtPluginsDirectory):
 		print('Could not find plugins directory.')
 		return
-	qmlDirectory = os.path.normpath(qtFrameworksDirectory + '/../qml')
+	qmlDirectory = os.path.normpath(qtFrameworksDirectory + '/../imports/Qt/labs')
 	
 	processBin()
 	processResources()
