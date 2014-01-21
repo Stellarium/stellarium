@@ -102,6 +102,8 @@ StelAddOnMgr::StelAddOnMgr()
 	m_pStelAddOns.insert(AddOn::STARLORE, new AOSkyCulture());
 	m_pStelAddOns.insert(AddOn::TEXTURE, new AOTexture());
 
+	connect(m_pStelAddOns.value(AddOn::SCRIPT), SIGNAL(scriptsChanged()),
+		this, SIGNAL(scriptsChanged()));
 	connect(m_pStelAddOns.value(AddOn::STARLORE), SIGNAL(skyCulturesChanged()),
 		this, SIGNAL(skyCulturesChanged()));
 

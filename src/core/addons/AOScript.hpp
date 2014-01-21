@@ -41,6 +41,9 @@ public:
 	virtual AddOn::Status uninstallAddOn(const QString& idInstall,
 					     const QStringList& selectedFiles) const;
 
+signals:
+	void scriptsChanged() const;
+
 private:
 	const QString m_sScriptInstallDir;
 };

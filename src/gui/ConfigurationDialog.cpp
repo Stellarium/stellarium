@@ -33,6 +33,7 @@
 #include "StelActionMgr.hpp"
 #include "StelProgressController.hpp"
 
+#include "StelAddOnMgr.hpp"
 #include "StelCore.hpp"
 #include "StelMovementMgr.hpp"
 #include "StelModuleMgr.hpp"
@@ -293,6 +294,7 @@ void ConfigurationDialog::createDialogContent()
 	ui->scriptListWidget->setSortingEnabled(true);
 	populateScriptsList();
 	connect(this, SIGNAL(visibleChanged(bool)), this, SLOT(populateScriptsList()));
+	connect(&StelApp::getInstance().getStelAddOnMgr(), SIGNAL(scriptsChanged()), this, SLOT(populateScriptsList()));
 	#endif
 
 	// plugins control

@@ -63,6 +63,7 @@ AddOn::Status AOScript::installFromFile(const QString& idInstall,
 	}
 
 	qDebug() << "Add-On Script: New script installed:" << idInstall;
+	emit (scriptsChanged());
 	return AddOn::FullyInstalled;
 }
 
@@ -92,5 +93,6 @@ AddOn::Status AOScript::uninstallAddOn(const QString& idInstall,
 	}
 
 	qDebug() << "Add-On Scripts : Successfully removed" << idInstall;
+	emit (scriptsChanged());
 	return AddOn::NotInstalled;
 }
