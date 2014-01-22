@@ -248,8 +248,8 @@ for ($i=0;$i<scalar(@cat)-1;$i++) {
 		$RA = $ra / (2.0 * pi); # by dividing by 2PI of radians you obtain number of turns
 		$Dec = $dec / (2.0 * pi); # by dividing by 2PI of radians you obtain number of turns
 		$rahh = $RA * 24.0;
-		$ramm = ($RA * 24.0 - int($rahh)) * 60.0;
-		$rasec = (($RA * 24.0 - int($rahh)) * 60.0 - int($ramm)) * 60.0;
+		$ramm = ($rahh - int($rahh)) * 60.0;
+		$rasec = ($ramm - int($ramm)) * 60.0;
 		$raisec = ($rasec * 10000.0 + 0.5) / 10000;
 		if ($raisec == 60) {
 			$rasec = 0.0;
@@ -264,14 +264,14 @@ for ($i=0;$i<scalar(@cat)-1;$i++) {
 		}
 		$outRA = sprintf("%02dh%02dm%05.3fs",$rahh, $ramm, $rasec);
 		if ($Dec < 0.0) {
-			$trn = $Dec * -1;
+			$sign = -1;
 		} else {
-			$trn = $Dec;
+			$sign = 1;
 		}
 		$dd = $Dec * 360.;
-		$mm = ($trn * 360.0 - int($dd)) * 60.;
-		$sec = (($trn * 360.0 - int($dd)) * 60.0 - int($mm)) * 60.0;
-		$isec = ($sec * 1000.0 + 0.5) / 1000;
+		$mm = ($sign * $dd - int($sign * $dd)) * 60.;
+		$sec = ($sign* $mm - int($sign * $mm)) * 60.0;
+		$isec = ($sign * $sec * 1000.0 + 0.5) / 1000;
 		if ($isec == 60){
 			$sec = 0.;
 			$mm = $mm + 1;
@@ -280,7 +280,7 @@ for ($i=0;$i<scalar(@cat)-1;$i++) {
 				$dd = $dd + 1;
 			}
 		}
-		$outDE = sprintf("%02dd%02dm%05.3fs",$dd,$mm,$sec);
+		$outDE = sprintf("%02dd%02dm%05.3fs",$dd,abs($mm),abs($sec));
 		$out .= "\t\t\t\"RA\": \"".$outRA."\",\n";
 		$out .= "\t\t\t\"DE\": \"".$outDE."\"\n";
 	}
