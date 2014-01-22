@@ -37,7 +37,13 @@ QStringList AOScript::checkInstalledAddOns() const
 	QStringList nameFilters;
 	nameFilters << "*.ssc" << "*.sts";
 	dir.setNameFilters(nameFilters);
-	return dir.entryList();
+	QStringList idInstalls;
+	foreach (QString filename, dir.entryList())
+	{
+		filename.truncate(filename.lastIndexOf('.'));
+		idInstalls.append(filename);
+	}
+	return idInstalls;
 }
 
 AddOn::Status AOScript::installFromFile(const QString& idInstall,
