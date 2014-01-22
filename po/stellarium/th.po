@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: Thai for stellarium 0.8.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-01-20 20:17+0700\n"
-"PO-Revision-Date: 2014-01-21 05:13+0000\n"
+"PO-Revision-Date: 2014-01-21 06:00+0000\n"
 "Last-Translator: Worachate Boonplod <Unknown>\n"
 "Language-Team: MicKi Alone <Need24Get@msn.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-01-21 05:37+0000\n"
+"X-Launchpad-Export-Date: 2014-01-22 05:19+0000\n"
 "X-Generator: Launchpad (build 16901)\n"
 "X-Poedit-Country: THAILAND\n"
 "X-Poedit-Language: Thai\n"
@@ -7768,7 +7768,7 @@ msgstr "หน้าต่างการตั้งค่าดาวเคร
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:157
 msgid "planetary system"
-msgstr ""
+msgstr "ระบบดาวเคราะห์"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:193
 msgid "Metallicity"
@@ -7828,7 +7828,7 @@ msgstr "ระยะห่างเชิงมุม"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:217
 msgid "Discovered year"
-msgstr "ปีที่ค้นพบ"
+msgstr "ค.ศ. ที่ค้นพบ"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:218
 msgid "Habitable class"
@@ -8526,11 +8526,11 @@ msgstr ""
 #: plugins/FOV/src/FOV.cpp:83
 #, qt-format
 msgid "Set FOV to %1%2"
-msgstr ""
+msgstr "ตั้งค่าขอบเขตภาพเป็น %1%2"
 
 #: plugins/FOV/src/gui/FOVWindow.cpp:77
 msgid "Field of View plug-in"
-msgstr ""
+msgstr "โปรแกรมเสริมขอบเขตภาพ"
 
 #: plugins/FOV/src/ui_fovWindow.h:403
 msgid ""
@@ -8543,17 +8543,20 @@ msgstr ""
 
 #: plugins/NavStars/src/NavStars.cpp:53 plugins/NavStars/src/NavStars.cpp:138
 msgid "Navigational Stars"
-msgstr ""
+msgstr "ดาวฤกษ์ช่วยในการเดินหน"
 
 #: plugins/NavStars/src/NavStars.cpp:56
 msgid ""
 "This plugin marks the 58 navigational stars of the 2102-D Rude Star Finder, "
 "also tabulated in the Nautical Almanac."
 msgstr ""
+"โปรแกรมเสริมนี้จะทำเครื่องหมายบ่งชี้ดาวฤกษ์ 58 ดวง ที่ใช้ช่วยในการเดินหน "
+"ตามอุปกรณ์หาดาว 2102-D Rude Star Finder ซึ่งแสดงเป็นตารางใน Nautical Almanac "
+"ด้วย"
 
 #: plugins/NavStars/src/NavStars.cpp:138
 msgid "Mark the navigational stars"
-msgstr ""
+msgstr "ทำเครื่องหมายดาวฤกษ์ช่วยในการเดินหน"
 
 #~ msgid "Ecliptic Line"
 #~ msgstr "เส้นสุริยวิถี"
