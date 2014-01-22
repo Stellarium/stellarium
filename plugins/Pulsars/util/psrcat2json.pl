@@ -269,18 +269,26 @@ for ($i=0;$i<scalar(@cat)-1;$i++) {
 			$sign = 1;
 		}
 		$dd = $Dec * 360.;
-		$mm = ($sign * $dd - int($sign * $dd)) * 60.;
-		$sec = ($sign* $mm - int($sign * $mm)) * 60.0;
-		$isec = ($sign * $sec * 1000.0 + 0.5) / 1000;
+		$mm = abs($dd - int($dd)) * 60.;
+		$sec = ($mm - int($mm)) * 60.0;
+		$isec = ($sec * 1000.0 + 0.5) / 1000;
 		if ($isec == 60){
 			$sec = 0.;
-			$mm = $mm + 1;
+			if ($sign == 1) {
+				$mm = $mm + 1;
+			} else {
+				$mm = $mm - 1;
+			}
 			if ($mm == 60) {
 				$mm = 0;
-				$dd = $dd + 1;
+				if ($sign == 1) {
+					$dd = $dd + 1;
+				} else {
+					$dd = $dd - 1;
+				}
 			}
 		}
-		$outDE = sprintf("%02dd%02dm%05.3fs",$dd,abs($mm),abs($sec));
+		$outDE = sprintf("%02dd%02dm%05.3fs",$dd,$mm,$sec);
 		$out .= "\t\t\t\"RA\": \"".$outRA."\",\n";
 		$out .= "\t\t\t\"DE\": \"".$outDE."\"\n";
 	}
