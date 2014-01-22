@@ -10,16 +10,15 @@ msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-01-20 20:17+0700\n"
-"PO-Revision-Date: 2014-01-21 03:05+0000\n"
+"PO-Revision-Date: 2014-01-21 14:36+0000\n"
 "Last-Translator: José A. Macas Durazo <josedurazo92@gmail.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-01-21 05:36+0000\n"
+"X-Launchpad-Export-Date: 2014-01-22 05:19+0000\n"
 "X-Generator: Launchpad (build 16901)\n"
-"X-Poedit-Country: SPAIN\n"
-"X-Poedit-Language: Spanish\n"
+"Language: es_ES\n"
 
 #: src/core/modules/ConstellationMgr.cpp:106 src/core/modules/StarMgr.cpp:336
 #: src/core/modules/GridLinesMgr.cpp:680 src/core/modules/LandscapeMgr.cpp:342
@@ -668,7 +667,7 @@ msgid ""
 msgstr ""
 "Esta fórmula está basada en un estudio de obersvaciones posteriores a 1650 "
 "del Sol, la Luna y los planetas por Spencer Jones (%1) y usada por Jean "
-"Meeus en su <em>Fórmulas astronómicas para calculadoras</em>. Fue también "
+"Meeus en su <em>Fórmulas Astronómicas para Calculadoras</em>. Fue también "
 "adoptada en el programa de PC SunTracker Pro."
 
 #: src/core/StelCore.cpp:1467
@@ -677,9 +676,9 @@ msgid ""
 "adopted in the <em>Astronomical Ephemeris</em> and in the <em>Canon of Solar "
 "Eclipses</em> by Mucke & Meeus (1983)."
 msgstr ""
-"Esta es una versión levemente modificada de la fórmula IAU (1952), la cual "
-"fue adoptada en la <em>Efemérides Astronómica</em> y en el <em> Canon de los "
-"Eclipses Solares</em> por Mucke & MEeus (1983)."
+"Esta es una versión levemente modificada de la fórmula UAI (1952), la cual "
+"fue adoptada en la <em>Efemérides Astronómicas</em> y en el <em> Canon de "
+"los Eclipses Solares</em> por Mucke & Meeus (1983)."
 
 #: src/core/StelCore.cpp:1471
 msgid ""
@@ -689,7 +688,7 @@ msgid ""
 "(1973)."
 msgstr ""
 "Las tablas de Tuckerman (1962, 1964) muestran la posición del Sol, la Luna y "
-"los planetas en intervalos de 5 y 10 días, desde 601AC hasta 1649DC. La "
+"los planetas en intervalos de 5 y 10 días, desde 601 AEC hasta 1649 EC. La "
 "misma relación fue adoptada implícitamente en las tablas de sizigias de "
 "Goldstine (1973)."
 
@@ -701,8 +700,8 @@ msgid ""
 "observations</em> (%1)."
 msgstr ""
 "Esta ecuación fue publicada por P. M. Muller y F. R. Stephenson en el "
-"artículo <em>Las aceleraciones de la tierra y la luna desde anteriores "
-"observaciones astronómicas</em> (%1)."
+"artículo <em>Las aceleraciones de la Tierra y la luna desde observaciones "
+"astronómicas anteriores</em> (%1)."
 
 #: src/core/StelCore.cpp:1478
 #, qt-format
@@ -723,7 +722,7 @@ msgid ""
 msgstr ""
 "Esta ecuación polinomial de 12vo orden (obsoleta y sustituída por Schmadel & "
 "Zech (1988)) fue publicada por L. D. Schmadel y G. Zech en el artículo "
-"<em>Aproximaciones polinomiales para la corrección delta T E.T-U.T en el "
+"<em>Aproximaciones polinomiales para la corrección delta T T.E.-T.U. en el "
 "período 1800-1975</em> (%1) como adaptación a través de datos publicados por "
 "Brouwer (1952)."
 
@@ -733,9 +732,9 @@ msgid ""
 "Programs and Tables from -4000 to +2800</em> (1986) and in the PC "
 "planetarium program RedShift."
 msgstr ""
-"Este algoritmo fue adoptado en <em>Programas y Tablas planetarias desde -"
-"4000 hasta +2800</em> por P. Bretagnon & L. Simon y en el programa "
-"planetario de PC RedShift."
+"Este algoritmo fue adoptado en los <em>Programas y Tablas planetarias desde -"
+"4000 hasta +2800</em> de P. Bretagnon & L. Simon y en el programa planetario "
+"de PC RedShift."
 
 #: src/core/StelCore.cpp:1487
 #, qt-format
@@ -769,7 +768,7 @@ msgid ""
 "solar eclipse records dating between 2137 BCE and 1715 CE."
 msgstr ""
 "Esta fórmula fue obtenida por K. M. Borkowski (%1) desde un análisis de 31 "
-"registros de eclipses solares que datan entre 2137 a. e. c. y 1715 e. c."
+"registros de eclipses solares que datan entre 2137 AEC y 1715 EC."
 
 #: src/core/StelCore.cpp:1499
 #, qt-format
@@ -780,7 +779,7 @@ msgid ""
 "Morrison (1984)."
 msgstr ""
 "Esta ecuación polinomial de 12vo orden fue publicada por L. D. Schmadel y G. "
-"Zech en el artículo <em>Transformaciones empíricas de TU a TE para el "
+"Zech en el artículo <em>Transformaciones empíricas de T.U. a T.E. para el "
 "Período 1800-1988</em> (%1) como los datos dados por Stephenson y Morrison "
 "(1984)."
 
@@ -848,9 +847,9 @@ msgid ""
 "Personal Computer</em> (2000) provides simple 3rd-order polynomial data fits "
 "for the recent past."
 msgstr ""
-"La cuarta edición de O. Montebruck y T. Pfleger's <em> Astronomía en la "
-"Computadora Personal</em> (2000) provee datos simples de 3er orden "
-"polinomial que encajan para el pasado reciente."
+"La cuarta edición de <em>Astronomía en la Computadora Personal</em> (2000) "
+"por O. Montebruck y T. Pfleger provee datos simples de 3er orden polinomial "
+"que encajan para el pasado reciente."
 
 #: src/core/StelCore.cpp:1523
 msgid ""
@@ -964,7 +963,7 @@ msgstr "con valores cero fuera de este rango"
 #: src/core/StelCore.cpp:1651
 msgid "with a typical 1-second accuracy and zero values outside this range"
 msgstr ""
-"con una presición típica de 1 segundo y valores cero fuera de este rango"
+"con una precisión típica de 1 segundo y valores cero fuera de este rango"
 
 #: src/core/StelCore.cpp:1688
 #, qt-format
@@ -1105,7 +1104,7 @@ msgstr "Latitud/Longitud galáctica: %2/%1"
 #: src/core/StelObject.cpp:141 src/core/StelObject.cpp:145
 #, qt-format
 msgid "Hour angle/DE: %1/%2"
-msgstr "Angulo horario/DE: %1/%2"
+msgstr "Ángulo horario/DE: %1/%2"
 
 #: src/core/StelObject.cpp:141 src/core/StelObject.cpp:163
 msgid "(apparent)"
@@ -1165,7 +1164,7 @@ msgstr "Error al analizar posición"
 
 #: src/core/SimbadSearcher.cpp:131
 msgid "Querying"
-msgstr "Preguntando"
+msgstr "Consultando"
 
 #: src/core/SimbadSearcher.cpp:135
 msgid "Not found"
@@ -1267,7 +1266,7 @@ msgid ""
 "Magnitude range: %3 - %4"
 msgstr ""
 "Tamaño de la descarga: %1MB\n"
-"Conteo de estrellas: %2 millón\n"
+"Conteo de estrellas: %2 millón(es)\n"
 "Rango de magnitud: %3 - %4"
 
 #: src/gui/ConfigurationDialog.cpp:971 src/gui/ConfigurationDialog.cpp:1006
@@ -1507,7 +1506,7 @@ msgstr ""
 
 #: src/gui/HelpDialog.cpp:394
 msgid "The Stellarium User Guide"
-msgstr "Guía del usuario"
+msgstr "Guía de usuario de Stellarium"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: src/gui/HelpDialog.cpp:398
@@ -1591,7 +1590,7 @@ msgid ""
 "active. Their work has made a big difference to the project:"
 msgstr ""
 "Varias personas han hecho contribuciones significativas, pero ya no están "
-"activas. Su trabajo se ha hecho una gran diferencia con el proyecto:"
+"activas. Su trabajo ha hecho una gran diferencia con el proyecto:"
 
 #: src/gui/HelpDialog.cpp:471
 #, qt-format
