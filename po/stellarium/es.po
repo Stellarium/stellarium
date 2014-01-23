@@ -10,13 +10,13 @@ msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-01-20 20:17+0700\n"
-"PO-Revision-Date: 2014-01-21 14:36+0000\n"
+"PO-Revision-Date: 2014-01-22 08:38+0000\n"
 "Last-Translator: José A. Macas Durazo <josedurazo92@gmail.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-01-22 05:19+0000\n"
+"X-Launchpad-Export-Date: 2014-01-23 05:17+0000\n"
 "X-Generator: Launchpad (build 16901)\n"
 "Language: es_ES\n"
 
@@ -1676,11 +1676,11 @@ msgstr "Cambiar la visibilidad de la GUI"
 
 #: src/gui/StelGui.cpp:205
 msgid "Auto hide horizontal button bar"
-msgstr "Ocultación automática de la barra horizontal de botones"
+msgstr "Esconder automáticamente la barrahorizaontal de botones"
 
 #: src/gui/StelGui.cpp:206
 msgid "Auto hide vertical button bar"
-msgstr "Ocultación automática de la barra vertical de botones"
+msgstr "Esconder automáticamente la barra vertical de botones"
 
 #: src/gui/StelGuiItems.cpp:289 src/gui/StelGuiItems.cpp:697
 msgid "Space"
@@ -1766,7 +1766,7 @@ msgstr "Tasa excepcional de las Leónidas"
 
 #: src/gui/ViewDialog.cpp:584
 msgid "Highest rate ever (1966 Leonids)"
-msgstr "Tasa máxima alcanzada (1966 Leónidas)"
+msgstr "Tasa máxima alcanzada (Leónidas 1966)"
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:112
 msgid "Select a ZIP archive that contains a Stellarium landscape"
@@ -1780,7 +1780,7 @@ msgstr "archivos ZIP"
 #: src/gui/AddRemoveLandscapesDialog.cpp:132
 #, qt-format
 msgid "Landscape \"%1\" has been installed successfully."
-msgstr "Paisaje \"%1\" ha sido instalado exitosamente."
+msgstr "El paisaje \"%1\" ha sido instalado exitosamente."
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:133
 #: src/gui/AddRemoveLandscapesDialog.cpp:160
@@ -1806,12 +1806,12 @@ msgstr "¡Error!"
 #: src/gui/AddRemoveLandscapesDialog.cpp:159
 #, qt-format
 msgid "Landscape \"%1\" has been removed successfully."
-msgstr "Paisaje \"%1\" ha sido eliminado exitosamente."
+msgstr "El paisaje \"%1\" ha sido eliminado exitosamente."
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:170
 #: src/gui/AddRemoveLandscapesDialog.cpp:240
 msgid "The selected landscape could not be (completely) removed."
-msgstr "El paisaje elegido podría no ser eliminado (completamente)."
+msgstr "El paisaje seleccionado no puede ser (completamente) eliminado."
 
 #. TRANSLATORS: MiB = mebibytes (IEC 60027-2 standard for 2^20 bytes)
 #: src/gui/AddRemoveLandscapesDialog.cpp:193
@@ -1823,7 +1823,7 @@ msgstr "Tamaño en disco: %1 MiB"
 #: src/gui/AddRemoveLandscapesDialog.cpp:219
 #, qt-format
 msgid "Stellarium cannot open for reading or writing %1"
-msgstr "Stellarium no se puede abrir para leer o escribir %1"
+msgstr "Stellarium no puede abrir para lectura o escritura %1"
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:225
 msgid ""
@@ -1837,7 +1837,7 @@ msgstr ""
 #: src/gui/AddRemoveLandscapesDialog.cpp:232
 #, qt-format
 msgid "A landscape with the same name or identifier (%1) already exists."
-msgstr "Un paisaje con el mismo nombre o identificacion (%1) ya existe."
+msgstr "Un paisaje con el mismo nombre o identificador (%1) ya existe."
 
 #. TRANSLATORS: The parameter is a file/directory path that may be quite long. "It" refers to a landscape that can't be removed.
 #: src/gui/AddRemoveLandscapesDialog.cpp:243
@@ -1883,7 +1883,7 @@ msgstr "Universidad de Strasbourg (Francia)"
 
 #: src/gui/SearchDialog.cpp:547
 msgid "Harvard University (USA)"
-msgstr "Universidad de Harvard (EE. UU.)"
+msgstr "Universidad de Harvard (EUA)"
 
 #: src/gui/ShortcutsDialog.cpp:488
 msgid "Action"
@@ -1925,7 +1925,7 @@ msgstr "Guardar captura de pantalla"
 
 #: src/StelMainView.cpp:300
 msgid "Full-screen mode"
-msgstr "Modo pantalla completa"
+msgstr "Modo de pantalla completa"
 
 #: src/StelMainView.cpp:356
 #, qt-format
@@ -1973,7 +1973,7 @@ msgstr "Ceres"
 
 #: src/translations.h:42
 msgid "Pallas"
-msgstr "Pallas"
+msgstr "Palas"
 
 #: src/translations.h:43
 msgid "Juno"
@@ -1997,7 +1997,7 @@ msgstr "Europa"
 
 #: src/translations.h:48
 msgid "Ganymede"
-msgstr "Ganimedes"
+msgstr "Ganímedes"
 
 #: src/translations.h:49
 msgid "Callisto"
@@ -2017,7 +2017,7 @@ msgstr "Elara"
 
 #: src/translations.h:53
 msgid "Pasiphae"
-msgstr "Pasifae"
+msgstr "Pasífae"
 
 #: src/translations.h:54
 msgid "Sinope"
@@ -2033,7 +2033,7 @@ msgstr "Carmé"
 
 #: src/translations.h:57
 msgid "Ananke"
-msgstr "Ananke"
+msgstr "Ananké"
 
 #: src/translations.h:58
 msgid "Leda"
@@ -2137,7 +2137,7 @@ msgstr "Nix"
 #. TRANSLATORS: Moon of Pluto (III)
 #: src/translations.h:84
 msgid "Hydra (moon)"
-msgstr "Hidra (Luna)"
+msgstr "Hidra (luna)"
 
 #: src/translations.h:85
 msgid "Eris"
@@ -2222,12 +2222,12 @@ msgstr "Haumea"
 #. TRANSLATORS: Asteroid (5) Astraea
 #: src/translations.h:111
 msgid "Astraea"
-msgstr "Asteroide (5) Astrea"
+msgstr "Astrea"
 
 #. TRANSLATORS: Asteroid (6) Hebe
 #: src/translations.h:113
 msgid "Hebe"
-msgstr "Asteroide (6) Hebe"
+msgstr "Hebe"
 
 #. TRANSLATORS: Asteroid (7) Iris
 #: src/translations.h:115
@@ -2242,7 +2242,7 @@ msgstr "Flora"
 #. TRANSLATORS: Asteroid (10) Hygiea
 #: src/translations.h:121
 msgid "Hygiea"
-msgstr "Asteroide (10) Higia"
+msgstr "Higía"
 
 #. TRANSLATORS: Asteroid (41) Daphne
 #: src/translations.h:123
@@ -2252,12 +2252,12 @@ msgstr "Dafne"
 #. TRANSLATORS: Asteroid (1221) Amor
 #: src/translations.h:125
 msgid "Amor"
-msgstr "Asteroide (1221) Amor"
+msgstr "Amor"
 
 #. TRANSLATORS: Asteroid (99942) Apophis
 #: src/translations.h:127
 msgid "Apophis"
-msgstr "Apophis"
+msgstr "Apofis"
 
 #. TRANSLATORS: Asteroid (2060) Chiron
 #: src/translations.h:129
@@ -2287,17 +2287,17 @@ msgstr "Makemake"
 #. TRANSLATORS: Proper name of comet C/1680 V1
 #: src/translations.h:140
 msgid "Great Comet of 1680 (C/1680 V1)"
-msgstr "El Gran Cometa de 1680 (C/1680 V1)"
+msgstr "Gran Cometa de 1680 (C/1680 V1)"
 
 #. TRANSLATORS: Name of supernova SN 1572A and script name
 #: src/translations.h:143
 msgid "Tycho's Supernova"
-msgstr "Tycho's Supernova"
+msgstr "Nova Tycho"
 
 #. TRANSLATORS: Name of supernova SN 1604A
 #: src/translations.h:145
 msgid "Kepler's Supernova"
-msgstr "Kepler's Supernova"
+msgstr "Nova Kepler"
 
 # Norte
 #: src/translations.h:148
@@ -2546,17 +2546,17 @@ msgstr "Paseo de Culturas Estelares"
 #. TRANSLATORS: Name and description of script
 #: src/translations.h:256
 msgid "Earth Events from Mercury"
-msgstr "Eventos planetarios de Mercurio"
+msgstr "Eventos terrestres desde Mercurio"
 
 #. TRANSLATORS: Name and description of script
 #: src/translations.h:258
 msgid "Earth Events from Venus"
-msgstr "Eventos planetarios de Venus"
+msgstr "Eventos terrestres desde Venus"
 
 #. TRANSLATORS: Name and description of script
 #: src/translations.h:260
 msgid "Earth Events from Mars"
-msgstr "Eventos planetarios de Marte"
+msgstr "Eventos terrestres desde Marte"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:262
