@@ -488,9 +488,9 @@ StelProgressController* StelApp::addProgressBar()
 
 void StelApp::removeProgressBar(StelProgressController* p)
 {
-	progressControllers.removeOne(p);
-	delete p;
+	progressControllers.removeOne(p);	
 	emit(progressBarRemoved(p));
+	delete p;
 }
 
 

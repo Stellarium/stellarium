@@ -250,7 +250,7 @@ void HelpDialog::setUpdatesMessage(bool hasUpdates, QString version)
 		updatesMessage = q_("Oops... Stellarium can't check latest version.");
 		return;
 	}
-	int cVMajor, cVMinor, cVPatch, rVMajor, rVMinor, rVPatch;
+	int cVMajor = 0, cVMinor = 0, cVPatch = 0, rVMajor = 0, rVMinor = 0, rVPatch = 0;
 	QRegExp vRx("(\\d+)\\.(\\d+)\\.(\\d+)");
 	if (vRx.exactMatch(currentVersion))
 	{
@@ -266,7 +266,7 @@ void HelpDialog::setUpdatesMessage(bool hasUpdates, QString version)
 	}
 	if (hasUpdates)
 	{
-		if (cVMajor>rVMajor || cVMinor>rVMinor || cVPatch>rVPatch)
+		if ((cVMajor>rVMajor) || (cVMinor>rVMinor) || (cVPatch>rVPatch))
 		{
 			// TRANSLATORS: This message will be displayed for users if current version of Stellarium is bigger than version from stellarium.org
 			updatesMessage = q_("Looks like you are using the development version of Stellarium.");
