@@ -40,7 +40,6 @@
 #include "ZodiacalLight.hpp"
 #include "ConstellationMgr.hpp"
 #include "StelStyle.hpp"
-#include "StelAddOnMgr.hpp"
 #include "StelSkyLayerMgr.hpp"
 #include "StelGuiBase.hpp"
 #include "StelGui.hpp"
@@ -296,7 +295,6 @@ void ViewDialog::createDialogContent()
 	const bool b = StelApp::getInstance().getSkyCultureMgr().getCurrentSkyCultureID()==StelApp::getInstance().getSkyCultureMgr().getDefaultSkyCultureID();
 	ui->useAsDefaultSkyCultureCheckBox->setChecked(b);
 	ui->useAsDefaultSkyCultureCheckBox->setEnabled(!b);
-	connect(&StelApp::getInstance().getStelAddOnMgr(), SIGNAL(skyCulturesChanged()), this, SLOT(populateLists()));
 
 	// Sky layers
 	populateSkyLayersList();
@@ -376,13 +374,11 @@ void ViewDialog::setBortleScaleToolTip(int Bindex)
 void ViewDialog::populateLists()
 {
 	// Fill the culture list widget from the available list
-	StelSkyCultureMgr& skyCultureMgr = StelApp::getInstance().getSkyCultureMgr();
-	skyCultureMgr.updateListOfAvailableSkyCultures();
 	QListWidget* l = ui->culturesListWidget;
 	l->blockSignals(true);
 	l->clear();
-	l->addItems(skyCultureMgr.getSkyCultureListI18());
-	l->setCurrentItem(l->findItems(skyCultureMgr.getCurrentSkyCultureNameI18(), Qt::MatchExactly).at(0));
+	l->addItems(StelApp::getInstance().getSkyCultureMgr().getSkyCultureListI18());
+	l->setCurrentItem(l->findItems(StelApp::getInstance().getSkyCultureMgr().getCurrentSkyCultureNameI18(), Qt::MatchExactly).at(0));
 	l->blockSignals(false);
 	updateSkyCultureText();
 
