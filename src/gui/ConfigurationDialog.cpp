@@ -142,6 +142,9 @@ void ConfigurationDialog::createDialogContent()
 	connect(cb->lineEdit(), SIGNAL(editingFinished()), this, SLOT(updateCurrentLanguage()));
 	connect(cb, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(selectLanguage(const QString&)));
 
+	ui->groupBoxUpdates->setChecked(StelApp::getInstance().getSettings()->value("main/check_updates_enabled", true).toBool());
+	connect(ui->groupBoxUpdates, SIGNAL(toggled(bool)), this, SLOT(setUpdatesFlag(bool)));
+
 	connect(ui->getStarsButton, SIGNAL(clicked()), this, SLOT(downloadStars()));
 	connect(ui->downloadCancelButton, SIGNAL(clicked()), this, SLOT(cancelDownload()));
 	connect(ui->downloadRetryButton, SIGNAL(clicked()), this, SLOT(downloadStars()));
@@ -274,6 +277,11 @@ void ConfigurationDialog::createDialogContent()
 
 	updateConfigLabels();
 	updateTabBarListWidgetWidth();
+}
+
+void ConfigurationDialog::setUpdatesFlag(bool b)
+{
+	StelApp::getInstance().getSettings()->setValue("main/check_updates_enabled", b);
 }
 
 void ConfigurationDialog::updateCurrentLanguage()
