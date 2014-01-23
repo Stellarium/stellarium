@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-01-20 20:17+0700\n"
-"PO-Revision-Date: 2014-01-09 03:55+0000\n"
+"PO-Revision-Date: 2014-01-22 22:53+0000\n"
 "Last-Translator: Miroslav Remák <Unknown>\n"
 "Language-Team: Slovak <sk@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-01-21 05:35+0000\n"
+"X-Launchpad-Export-Date: 2014-01-23 05:16+0000\n"
 "X-Generator: Launchpad (build 16901)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:106 src/core/modules/StarMgr.cpp:336
@@ -310,17 +310,17 @@ msgstr "Predbežné označenie: %1"
 #: src/core/modules/Comet.cpp:178
 #, no-c-format, qt-format
 msgid "Distance from Sun: %1AU (%2 km)"
-msgstr ""
+msgstr "Vzdialenosť od Slnka: %1AU (%2 km)"
 
 #: src/core/modules/Comet.cpp:185
 #, no-c-format, qt-format
 msgid "Distance from Sun: %1AU (%2 Mio km)"
-msgstr ""
+msgstr "Vzdialenosť od Slnka: %1AU (%2 mil. km)"
 
 #: src/core/modules/Comet.cpp:209
 #, no-c-format, qt-format
 msgid "Speed: %1 km/s"
-msgstr ""
+msgstr "Rýchlosť: %1 km/s"
 
 #: src/core/modules/SolarSystem.cpp:151
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:303
@@ -1402,23 +1402,23 @@ msgstr "Užívateľská rovnica %1T"
 #. TRANSLATORS: This message will be displayed for users if Stellarium can't get info about version from stellarium.org
 #: src/gui/HelpDialog.cpp:250
 msgid "Oops... Stellarium can't check latest version."
-msgstr ""
+msgstr "Ale nie... Nebolo možné získať informácie o najnovšej verzii."
 
 #. TRANSLATORS: This message will be displayed for users if current version of Stellarium is bigger than version from stellarium.org
 #: src/gui/HelpDialog.cpp:272
 msgid "Looks like you are using the development version of Stellarium."
-msgstr ""
+msgstr "Zdá sa, že používate vývojovú verziu programu."
 
 #. TRANSLATORS: This message will be displayed for users if current version of Stellarium is smaller than version from stellarium.org
 #: src/gui/HelpDialog.cpp:277
 #, qt-format
 msgid "This version of Stellarium is outdated! Latest version is %1."
-msgstr ""
+msgstr "Táto verzia programu je zastaralá! Najnovšia verzia je %1."
 
 #. TRANSLATORS: This message will be displayed for users if current version of Stellarium is equals with version from stellarium.org
 #: src/gui/HelpDialog.cpp:283
 msgid "This is latest stable version of Stellarium."
-msgstr ""
+msgstr "Toto je najnovšia stabilná verzia programu."
 
 #: src/gui/HelpDialog.cpp:313
 msgid "Stellarium Help"
