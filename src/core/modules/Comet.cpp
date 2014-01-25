@@ -487,7 +487,7 @@ void Comet::computeComa(const float diameter)
 // Parabola equation: z=x²/2p.
 // xOffset for the dust tail, this may introduce a bend. Units are x per sqrt(z).
 void Comet::computeParabola(const float parameter, const float radius, const float zshift, const int slices, const int stacks,
-							QVector<double>& vertexArr, QVector<float>& texCoordArr, QVector<unsigned short> &indices, const float xOffset) {
+			    QVector<double>& vertexArr, QVector<float>& texCoordArr, QVector<unsigned short> &indices, const float xOffset) {
 	vertexArr.clear();
 	//texCoordArr.clear();
 	//indices.clear();
@@ -495,8 +495,15 @@ void Comet::computeParabola(const float parameter, const float radius, const flo
 	bool createTexcoords= texCoordArr.empty();
 	int i;
 	// The parabola has triangular faces with vertices on two circles that are rotated against each other. 
+	#ifdef _MSC_BUILD
+	//FIXME: MSVC2012 compiler doesn't support the non-standard extension for C++
+	//Hint: http://stackoverflow.com/questions/20010716/gnu-compilers-vs-visual-studio-on-arrays-allocated-w-length-constant-w-in-a-sc
+	float xa[32];
+	float ya[32];
+	#else
 	float xa[2*slices];
 	float ya[2*slices];
+	#endif
 	float x, y, z;
 	
 	// fill xa, ya with sin/cosines. TBD: make more efficient with index mirroring etc.
