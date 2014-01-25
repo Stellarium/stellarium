@@ -54,10 +54,10 @@ QT5_USE_MODULES(Satellites-static Core Declarative Network OpenGL)
 # The library target "Satellites-static" has a default OUTPUT_NAME of "Satellites-static", so change it.
 SET_TARGET_PROPERTIES(Satellites-static PROPERTIES OUTPUT_NAME "Satellites")
 TARGET_LINK_LIBRARIES(Satellites-static ${StelMain} ${extLinkerOption})
-IF(UNIX AND NOT WIN32)
-  SET_TARGET_PROPERTIES(Satellites-static PROPERTIES COMPILE_FLAGS "-DQT_STATICPLUGIN -Wno-unused-parameter")
-ELSE()
+IF(MSVC)
   SET_TARGET_PROPERTIES(Satellites-static PROPERTIES COMPILE_FLAGS "-DQT_STATICPLUGIN")
+ELSE()
+  SET_TARGET_PROPERTIES(Satellites-static PROPERTIES COMPILE_FLAGS "-DQT_STATICPLUGIN -Wno-unused-parameter")
 ENDIF()
 ADD_DEPENDENCIES(AllStaticPlugins Satellites-static)
 
