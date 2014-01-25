@@ -114,7 +114,7 @@ private:
 	//! @param indices into the former arrays (zero-starting), triplets forming triangles: t0,0, t0,1, t0,2, t1,0, t1,1, t1,2, ...
 	//! @param xOffset for the dust tail, this may introduce a bend. Units are x per sqrt(z).
 	void computeParabola(const float parameter, const float topradius, const float zshift, const int slices, const int stacks,
-								QVector<double>& vertexArr, QVector<float>& texCoordArr, QVector<unsigned short>& indices, const float xOffset=0.0f);
+			     QVector<double>& vertexArr, QVector<float>& texCoordArr, QVector<unsigned short>& indices, const float xOffset=0.0f);
 
 	double absoluteMagnitude;
 	double slopeParameter;
