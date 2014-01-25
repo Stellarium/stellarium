@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-01-23 19:56+0700\n"
-"PO-Revision-Date: 2013-05-02 19:50+0000\n"
+"PO-Revision-Date: 2014-01-24 20:36+0000\n"
 "Last-Translator: Asier Iturralde Sarasola <Unknown>\n"
 "Language-Team: Basque <eu@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-01-24 05:16+0000\n"
+"X-Launchpad-Export-Date: 2014-01-25 05:16+0000\n"
 "X-Generator: Launchpad (build 16914)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:106 src/core/modules/StarMgr.cpp:337
@@ -229,7 +229,7 @@ msgstr "Dokumentatu gabeko mota"
 
 #: src/core/modules/NebulaMgr.cpp:123
 msgid "Deep-sky objects"
-msgstr ""
+msgstr "Espazio sakoneko objektuak"
 
 #: src/core/modules/Planet.cpp:142 src/core/modules/MinorPlanet.cpp:233
 #: src/core/modules/MinorPlanet.cpp:237 src/core/modules/Comet.cpp:165
@@ -310,7 +310,7 @@ msgstr "Behin-behineko izendapena: %1"
 #: src/core/modules/Comet.cpp:178
 #, no-c-format, qt-format
 msgid "Distance from Sun: %1AU (%2 km)"
-msgstr ""
+msgstr "Distantzia eguzkitik: %1UA (%2 km)"
 
 #: src/core/modules/Comet.cpp:185
 #, no-c-format, qt-format
@@ -320,7 +320,7 @@ msgstr ""
 #: src/core/modules/Comet.cpp:209
 #, no-c-format, qt-format
 msgid "Speed: %1 km/s"
-msgstr ""
+msgstr "Abiadura: %1 km/s"
 
 #: src/core/modules/SolarSystem.cpp:151
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:303
@@ -380,7 +380,7 @@ msgstr "izar bitarra"
 #: src/core/modules/StarWrapper.cpp:168
 #, qt-format
 msgid "Type: <b>%1, %2</b>"
-msgstr ""
+msgstr "Mota: <b>%1, %2</b>"
 
 #: src/core/modules/StarWrapper.cpp:207
 #, qt-format
@@ -423,7 +423,7 @@ msgstr ""
 #: src/core/modules/StarWrapper.cpp:236
 #, qt-format
 msgid "Period: %1 days"
-msgstr ""
+msgstr "Periodoa: %1 days"
 
 #: src/core/modules/StarWrapper.cpp:246
 #, qt-format
@@ -438,7 +438,7 @@ msgstr ""
 #: src/core/modules/StarWrapper.cpp:254
 #, qt-format
 msgid "Duration of eclipse: %1%"
-msgstr ""
+msgstr "Eklipsearen iraupena: %1%"
 
 #: src/core/modules/StarWrapper.cpp:256
 #, qt-format
@@ -1202,7 +1202,7 @@ msgstr "Noren algoritmoa:"
 
 #: src/gui/ConfigurationDialog.cpp:1154
 msgid "Without correction"
-msgstr ""
+msgstr "Zuzenketarik gabe"
 
 #: src/gui/ConfigurationDialog.cpp:1155
 msgid "Schoch (1931)"
@@ -1290,7 +1290,7 @@ msgstr "Montenbruck eta Pfleger (2000)"
 
 #: src/gui/ConfigurationDialog.cpp:1177
 msgid "Reingold & Dershowitz (2002, 2007)"
-msgstr ""
+msgstr "Reingold eta Dershowitz (2002, 2007)"
 
 #: src/gui/ConfigurationDialog.cpp:1178
 msgid "Morrison & Stephenson (2004, 2005)"
@@ -1306,11 +1306,11 @@ msgstr "Reijs (2006)"
 
 #: src/gui/ConfigurationDialog.cpp:1182
 msgid "Banjevic (2006)"
-msgstr ""
+msgstr "Banjevic (2006)"
 
 #: src/gui/ConfigurationDialog.cpp:1183
 msgid "Islam, Sadiq & Qureshi (2008, 2013)"
-msgstr ""
+msgstr "Islam, Sadiq eta Qureshi (2008, 2013)"
 
 #: src/gui/ConfigurationDialog.cpp:1184
 #, qt-format
@@ -1325,18 +1325,18 @@ msgstr ""
 #. TRANSLATORS: This message will be displayed for users if current version of Stellarium is bigger than version from stellarium.org
 #: src/gui/HelpDialog.cpp:272
 msgid "Looks like you are using the development version of Stellarium."
-msgstr ""
+msgstr "Stellariumen garapeneko bertsioa erabiltzen ari zarela dirudi."
 
 #. TRANSLATORS: This message will be displayed for users if current version of Stellarium is smaller than version from stellarium.org
 #: src/gui/HelpDialog.cpp:277
 #, qt-format
 msgid "This version of Stellarium is outdated! Latest version is %1."
-msgstr ""
+msgstr "Stellariumen bertsio hau zaharra da! Azken bertsioa %1 da."
 
 #. TRANSLATORS: This message will be displayed for users if current version of Stellarium is equals with version from stellarium.org
 #: src/gui/HelpDialog.cpp:283
 msgid "This is latest stable version of Stellarium."
-msgstr ""
+msgstr "Stellariumen bertsio egonkorrik berriena da hau."
 
 #: src/gui/HelpDialog.cpp:313
 msgid "Stellarium Help"
@@ -1813,7 +1813,7 @@ msgstr ""
 
 #: src/gui/CustomDeltaTEquationDialog.cpp:137
 msgid "where"
-msgstr ""
+msgstr "non"
 
 #: src/gui/CustomDeltaTEquationDialog.cpp:137
 msgid "year"
@@ -1834,7 +1834,7 @@ msgstr "Pantaila osoko modua"
 #: src/StelMainView.cpp:357
 #, qt-format
 msgid "Stellarium %1"
-msgstr ""
+msgstr "Stellarium %1"
 
 #: src/translations.h:33 plugins/Exoplanets/src/Exoplanet.cpp:197
 #: plugins/Exoplanets/src/Exoplanet.cpp:201
@@ -2151,7 +2151,7 @@ msgstr "Hygiea asteroidea (10)"
 #. TRANSLATORS: Asteroid (41) Daphne
 #: src/translations.h:123
 msgid "Daphne"
-msgstr ""
+msgstr "Daphne"
 
 #. TRANSLATORS: Asteroid (1221) Amor
 #: src/translations.h:125
@@ -2191,7 +2191,7 @@ msgstr "Makemake"
 #. TRANSLATORS: Proper name of comet C/1680 V1
 #: src/translations.h:140
 msgid "Great Comet of 1680 (C/1680 V1)"
-msgstr ""
+msgstr "1680ko kometa handia (C/1680 V1)"
 
 #. TRANSLATORS: Name of supernova SN 1572A and script name
 #: src/translations.h:143
@@ -2242,7 +2242,7 @@ msgstr "ilargia"
 #. TRANSLATORS: Type of object
 #: src/translations.h:166
 msgid "plutoid"
-msgstr ""
+msgstr "plutoidea"
 
 #: src/translations.h:170
 msgid "Arabic"
@@ -2336,12 +2336,12 @@ msgstr "Garching"
 #. TRANSLATORS: Name of landscape
 #: src/translations.h:207
 msgid "Geneva"
-msgstr ""
+msgstr "Geneva"
 
 #. TRANSLATORS: Name of landscape
 #: src/translations.h:209
 msgid "Grossmugl"
-msgstr ""
+msgstr "Grossmugl"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:216
@@ -2446,17 +2446,17 @@ msgstr ""
 #. TRANSLATORS: Name and description of script
 #: src/translations.h:256
 msgid "Earth Events from Mercury"
-msgstr ""
+msgstr "Lurraren gertaerak Merkuriotik"
 
 #. TRANSLATORS: Name and description of script
 #: src/translations.h:258
 msgid "Earth Events from Venus"
-msgstr ""
+msgstr "Lurraren gertaerak Artizarretik"
 
 #. TRANSLATORS: Name and description of script
 #: src/translations.h:260
 msgid "Earth Events from Mars"
-msgstr ""
+msgstr "Lurraren gertaerak Martetik"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:262
@@ -3561,23 +3561,23 @@ msgstr "Zimbabwe"
 
 #: src/translations.h:541
 msgid "&Undo"
-msgstr ""
+msgstr "&Desegin"
 
 #: src/translations.h:542
 msgid "&Redo"
-msgstr ""
+msgstr "&Berregin"
 
 #: src/translations.h:543
 msgid "Cu&t"
-msgstr ""
+msgstr "Moz&tu"
 
 #: src/translations.h:544
 msgid "&Copy"
-msgstr ""
+msgstr "&Kopiatu"
 
 #: src/translations.h:545
 msgid "&Paste"
-msgstr ""
+msgstr "&Itsatsi"
 
 #: src/translations.h:546 src/ui_locationDialogGui.h:395
 #: plugins/Oculars/src/ui_ocularDialog.h:1063
@@ -3589,23 +3589,23 @@ msgstr "Ezabatu"
 
 #: src/translations.h:547
 msgid "Select All"
-msgstr ""
+msgstr "Hautatu denak"
 
 #: src/translations.h:548
 msgid "Look in:"
-msgstr ""
+msgstr "Begiratu hemen:"
 
 #: src/translations.h:549
 msgid "Directory:"
-msgstr ""
+msgstr "Direktorioa:"
 
 #: src/translations.h:550
 msgid "Folder"
-msgstr ""
+msgstr "Karpeta"
 
 #: src/translations.h:551
 msgid "&Choose"
-msgstr ""
+msgstr "&Aukeratu"
 
 #: src/translations.h:552 src/ui_configurationDialog.h:1164
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:516
@@ -3614,27 +3614,27 @@ msgstr "Utzi"
 
 #: src/translations.h:553
 msgid "Files of type:"
-msgstr ""
+msgstr "Mota honetako fitxategiak:"
 
 #: src/translations.h:554
 msgid "Date Modified"
-msgstr ""
+msgstr "Aldatze-data"
 
 #: src/translations.h:555
 msgid "Directories"
-msgstr ""
+msgstr "Direktorioak"
 
 #: src/translations.h:556
 msgid "Computer"
-msgstr ""
+msgstr "Ordenagailua"
 
 #: src/translations.h:557
 msgid "&Open"
-msgstr ""
+msgstr "&Ireki"
 
 #: src/translations.h:558
 msgid "File &name:"
-msgstr ""
+msgstr "&Fitxategi-izena:"
 
 #: src/ui_helpDialogGui.h:277 src/ui_helpDialogGui.h:283
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:417
@@ -3959,7 +3959,7 @@ msgstr "Ilargia eskalan"
 
 #: src/ui_viewDialog.h:1244
 msgid "Scale factor"
-msgstr ""
+msgstr "Eskalatzeko faktorea"
 
 #: src/ui_viewDialog.h:1247
 msgid "Automatic change of landscape when planet is changed"
@@ -4028,7 +4028,7 @@ msgstr ""
 
 #: src/ui_viewDialog.h:1271
 msgid "1000"
-msgstr ""
+msgstr "1000"
 
 #: src/ui_viewDialog.h:1274
 msgid "Limit Magnitudes (for unaided/binocular observers)"
@@ -4155,7 +4155,7 @@ msgstr "Programaren hizkuntza"
 
 #: src/ui_configurationDialog.h:1002
 msgid "Check updates"
-msgstr ""
+msgstr "Egiaztatu eguneraketak"
 
 #: src/ui_configurationDialog.h:1003
 msgid ""
@@ -4295,7 +4295,7 @@ msgstr "Tamaina"
 
 #: src/ui_configurationDialog.h:1056
 msgid "The type of the object (star, planet, etc.)"
-msgstr ""
+msgstr "Objektuaren mota (izarra, planeta...)"
 
 #: src/ui_configurationDialog.h:1058
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:268
@@ -4308,7 +4308,7 @@ msgstr "Mota espektrala, nebulosa mota, eta abar."
 
 #: src/ui_configurationDialog.h:1062
 msgid "Additional information"
-msgstr ""
+msgstr "Informazio gehigarria"
 
 #: src/ui_configurationDialog.h:1064
 msgid "Topocentric equatorial coordinates"
@@ -4370,7 +4370,7 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:1091
 msgid "seconds"
-msgstr ""
+msgstr "segundo"
 
 #: src/ui_configurationDialog.h:1093
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:186
@@ -4387,7 +4387,7 @@ msgstr "Bestelakoa:"
 
 #: src/ui_configurationDialog.h:1099
 msgid "Use current local date and time"
-msgstr ""
+msgstr "Erabili uneko data eta ordu lokalak"
 
 #: src/ui_configurationDialog.h:1101
 msgid "use current"
@@ -4415,11 +4415,11 @@ msgstr "Sistemaren data:"
 
 #: src/ui_configurationDialog.h:1110
 msgid "Time correction"
-msgstr ""
+msgstr "Denboraren zuzenketa"
 
 #: src/ui_configurationDialog.h:1113
 msgid "Edit equation"
-msgstr ""
+msgstr "Editatu ekuazioa"
 
 #: src/ui_configurationDialog.h:1115
 msgid "Planetarium options"
@@ -4856,11 +4856,11 @@ msgstr "Okularrak pluginaren konfigurazioa"
 
 #: plugins/Oculars/src/Oculars.cpp:1321
 msgid "Select next telescope"
-msgstr ""
+msgstr "Hautatu hurrengo teleskopioa"
 
 #: plugins/Oculars/src/Oculars.cpp:1323
 msgid "Select previous telescope"
-msgstr ""
+msgstr "Hautatu aurreko teleskopioa"
 
 #: plugins/Oculars/src/Oculars.cpp:1325
 msgid "Select next eyepiece"
