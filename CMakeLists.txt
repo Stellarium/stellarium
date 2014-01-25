@@ -43,12 +43,9 @@ IF(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
   SET(APPLE 1)
 ENDIF()
 
-IF("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
- MESSAGE(STATUS "Found Clang ${CMAKE_CXX_COMPILER_VERSION}")
-ENDIF()
+MESSAGE(STATUS "[INFO] Compiler is ${CMAKE_CXX_COMPILER_ID} ${CMAKE_CXX_COMPILER_VERSION}")
 
 IF(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_COMPILER_IS_GNUCC)
-  MESSAGE(STATUS "Found GCC ${CMAKE_CXX_COMPILER_VERSION}")
   # The stars structs rely on gnu gcc packing of bit-fields.
   SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -mno-ms-bitfields")
   SET(GCC_VERSION "${CMAKE_CXX_COMPILER_VERSION}")
@@ -57,8 +54,13 @@ ELSE()
 ENDIF()
 
 IF(UNIX AND NOT WIN32)
- SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Wextra -Wno-unused-parameter")
- SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -Wno-unused-parameter -Wno-unused-result")
+  SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Wextra -Wno-unused-parameter")
+  SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -Wno-unused-parameter -Wno-unused-result")
+ELSE()
+  #  additional compiler and linker flags for Windows
+  SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -fexceptions -fident -mthreads")
+  SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wsign-promo -fexceptions -fident -mthreads")
+  SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -Wsign-promo -fexceptions -fident -mthreads -mwindows")
 ENDIF()
 
 IF("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
