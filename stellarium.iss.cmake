@@ -26,15 +26,15 @@ Compression=zip/9
 
 [Files]
 Source: "@CMAKE_INSTALL_PREFIX@\bin\stellarium.exe"; DestDir: "{app}"
-Source: "@CMAKE_INSTALL_PREFIX@\lib\libstelMain.dll"; DestDir: "{app}"
+@STELMAINLIB@
+@REDIST@
 Source: "stellarium.url"; DestDir: "{app}"
 Source: "README"; DestDir: "{app}"; Flags: isreadme; DestName: "README.rtf"
 Source: "INSTALL"; DestDir: "{app}"; DestName: "INSTALL.rtf"
 Source: "COPYING"; DestDir: "{app}"; DestName: "GPL.rtf"
 Source: "AUTHORS"; DestDir: "{app}"; DestName: "AUTHORS.rtf"
 Source: "ChangeLog"; DestDir: "{app}"; DestName: "ChangeLog.rtf"
-Source: "@ZLIB_INCLUDE_DIR@/../bin/zlib1.dll"; DestDir: "{app}";
-@ISS_ARCH_SPECIFIC_MINGW_LIBS@
+@ZLIB@
 Source: "@QtCore_location@"; DestDir: "{app}";
 Source: "@QtGui_location@"; DestDir: "{app}";
 Source: "@QtOpenGL_location@"; DestDir: "{app}";
@@ -74,7 +74,7 @@ Type: files; Name: "{userappdata}\Stellarium\config.ini"; Tasks: removeconfig
 Type: files; Name: "{userappdata}\Stellarium\data\ssystem.ini"; Tasks: removesolar
 Type: filesandordirs; Name: "{userappdata}\Stellarium\modules"; Tasks: removeplugins
 Type: filesandordirs; Name: "{userappdata}\Stellarium\landscapes"; Tasks: removelandscapes
-Type: files; Name: "{userappdata}\Stellarium\data\shortcuts.json"; Tasks: removeshortcuts
+;Type: files; Name: "{userappdata}\Stellarium\data\shortcuts.json"; Tasks: removeshortcuts
 
 [UninstallDelete]
 
