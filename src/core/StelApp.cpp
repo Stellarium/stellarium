@@ -131,6 +131,10 @@ Q_IMPORT_PLUGIN(TimeZoneConfigurationStelPluginInterface)
 Q_IMPORT_PLUGIN(MeteorShowersStelPluginInterface)
 #endif
 
+#ifdef USE_STATIC_PLUGIN_NAVSTARS
+Q_IMPORT_PLUGIN(NavStarsStelPluginInterface)
+#endif
+
 #ifdef USE_STATIC_PLUGIN_NOVAE
 Q_IMPORT_PLUGIN(NovaeStelPluginInterface)
 #endif
@@ -488,9 +492,9 @@ StelProgressController* StelApp::addProgressBar()
 
 void StelApp::removeProgressBar(StelProgressController* p)
 {
-	progressControllers.removeOne(p);
-	delete p;
+	progressControllers.removeOne(p);	
 	emit(progressBarRemoved(p));
+	delete p;
 }
 
 

@@ -166,7 +166,7 @@ private:
 	static Vec3f labelColor;
 	static Vec3f boundaryColor;
 
-	static bool singleSelected;
+	static bool singleSelected;	
 };
 
 #endif // _CONSTELLATION_HPP_

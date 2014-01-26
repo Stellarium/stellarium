@@ -28,6 +28,7 @@
 #include "StelModuleMgr.hpp"
 #include "StelSkyDrawer.hpp"
 #include "StelLocaleMgr.hpp"
+#include "StarMgr.hpp"
 
 #include <QTextStream>
 #include <QDebug>
@@ -152,7 +153,7 @@ QString Exoplanet::getInfoString(const StelCore* core, const InfoStringGroup& fl
 		oss << "<h2>" << getNameI18n() << "</h2>";
 	}
 	
-	if (flags&Type)
+	if (flags&ObjectType)
 	{
 		oss << q_("Type: <b>%1</b>").arg(q_("planetary system")) << "<br />";
 	}
@@ -413,6 +414,7 @@ void Exoplanet::draw(StelCore* core, StelPainter *painter)
 {
 	bool visible;
 	StelSkyDrawer* sd = core->getSkyDrawer();
+	StarMgr* smgr = GETSTELMODULE(StarMgr); // It's need for checking displaying of labels for stars
 
 	Vec3f color = exoplanetMarkerColor;
 	if (hasHabitableExoplanets)
@@ -448,7 +450,7 @@ void Exoplanet::draw(StelCore* core, StelPainter *painter)
 
 		painter->drawSprite2dMode(XYZ, distributionMode ? 4.f : 5.f);
 
-		if (labelsFader.getInterstate()<=0.f && !distributionMode && (mag+1.f)<mlimit)
+		if (labelsFader.getInterstate()<=0.f && !distributionMode && (mag+1.f)<mlimit && smgr->getFlagLabels())
 		{
 			painter->drawText(XYZ, designation, 0, shift, shift, false);
 		}

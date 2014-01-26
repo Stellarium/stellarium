@@ -24,6 +24,7 @@
 #include <QCoreApplication>
 #include <QEventLoop>
 
+class QDeclarativeItem;
 class QGLWidget;
 class QMoveEvent;
 class QResizeEvent;
@@ -37,6 +38,7 @@ class QMoveEvent;
 class StelMainView : public QDeclarativeView
 {
 	friend class StelGuiItem;
+	friend class StelSkyItem;
 	Q_OBJECT
 	Q_PROPERTY(bool fullScreen READ isFullScreen WRITE setFullScreen)
 
@@ -105,9 +107,7 @@ public slots:
 	float getMaxFps() {return maxfps;}
 
 	//! Updates the scene and process all events
-	void updateScene() {
-		scene()->update();
-	}
+	void updateScene();
 
 protected:
 	virtual void mouseMoveEvent(QMouseEvent* event);
@@ -144,6 +144,7 @@ private:
 	//! This is created by the StelGuiItem, but need to be publicly
 	//! accessible so that StelDialog instances can reparent to it.
 	QGraphicsWidget *guiWidget;
+	QDeclarativeItem* skyItem;
 
 	//! The openGL window
 	StelQGLWidget* glWidget;
