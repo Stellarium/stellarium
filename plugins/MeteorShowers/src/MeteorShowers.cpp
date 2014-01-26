@@ -79,6 +79,7 @@ StelPluginInfo MeteorShowersStelPluginInterface::getPluginInfo() const
 	info.authors = "Marcos Cardinot";
 	info.contact = "mcardinot@gmail.com";
 	info.description = N_("This plugin give visualization of the meteor showers, show information about meteor showers and displays marker for radiants in activity range for each meteor showers.");
+	info.version = METEORSHOWERS_PLUGIN_VERSION;
 	return info;
 }
 
@@ -266,7 +267,7 @@ bool MeteorShowers::changedSkyDate(StelCore* core)
 
 void MeteorShowers::draw(StelCore* core)
 {
-	if(!flagShowMS)
+	if(!getFlagShowMS())
 		return;
 
 	StelPainter painter(core->getProjection(StelCore::FrameJ2000));
@@ -468,7 +469,7 @@ void MeteorShowers::updateActiveInfo(StelCore* core)
 
 void MeteorShowers::update(double deltaTime)
 {
-	if(!flagShowMS)
+	if(!getFlagShowMS())
 		return;
 
 	StelCore* core = StelApp::getInstance().getCore();
