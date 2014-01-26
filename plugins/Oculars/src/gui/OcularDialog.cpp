@@ -68,13 +68,6 @@ OcularDialog::OcularDialog(Oculars* pluginPtr, QList<CCD *>* ccds, QList<Ocular 
 			     lensModel,
 			     lensModel->propertyMap());
 
-	validatorPositiveInt = new QIntValidator(0, std::numeric_limits<int>::max(), this);
-	validatorPositiveDouble = new QDoubleValidator(.0, std::numeric_limits<double>::max(), 24, this);
-	validatorOcularAFOV = new QDoubleValidator(1.0, 120.0, 3, this);
-	validatorOcularEFL = new QDoubleValidator(1.0, 60.0, 3, this);
-	validatorTelescopeDiameter = new QDoubleValidator(1.0, 1000.0, 1, this);
-	validatorTelescopeFL = new QDoubleValidator(1.0, 10000.0, 1, this);
-	validatorLensMultipler = new QDoubleValidator(1.0, 6.0, 4, this);
 	QRegExp nameExp("^\\S.*");
 	validatorName = new QRegExpValidator(nameExp, this);
 }
@@ -361,22 +354,10 @@ void OcularDialog::createDialogContent()
 
 	// Validators
 	ui->ccdName->setValidator(validatorName);
-	ui->ccdResX->setValidator(validatorPositiveInt);
-	ui->ccdResY->setValidator(validatorPositiveInt);
-	ui->ccdChipX->setValidator(validatorPositiveDouble);
-	ui->ccdChipY->setValidator(validatorPositiveDouble);
-	ui->ccdPixelX->setValidator(validatorPositiveDouble);
-	ui->ccdPixelY->setValidator(validatorPositiveDouble);
-	ui->ocularAFov->setValidator(validatorOcularAFOV);
-	ui->ocularFL->setValidator(validatorOcularEFL);
-	ui->ocularFieldStop->setValidator(validatorOcularEFL);
-	ui->telescopeFL->setValidator(validatorTelescopeFL);
-	ui->telescopeDiameter->setValidator(validatorTelescopeDiameter);
 	ui->ocularName->setValidator(validatorName);
 	ui->telescopeName->setValidator(validatorName);
 	ui->lensName->setValidator(validatorName);
-	ui->lensMultipler->setValidator(validatorLensMultipler);
-	
+
 	// The key bindings
 	QString bindingString = Oculars::appSettings()->value("bindings/toggle_oculars", "Ctrl+O").toString();
 	ui->togglePluginLineEdit->setText(bindingString);

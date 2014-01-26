@@ -91,6 +91,7 @@ StelSkyItem::StelSkyItem(QDeclarativeItem* parent)
 	connect(this, &StelSkyItem::widthChanged, this, &StelSkyItem::onSizeChanged);
 	connect(this, &StelSkyItem::heightChanged, this, &StelSkyItem::onSizeChanged);
 	previousPaintTime = StelApp::getTotalRunTime();
+	StelMainView::getInstance().skyItem = this;
 	setFocus(true);
 }
 
@@ -365,6 +366,13 @@ void StelMainView::setFullScreen(bool b)
 		showNormal();
 }
 
+void StelMainView::updateScene() {
+	// For some reason the skyItem is not updated when the night mode shader is on.
+	// To fix this we manually do it here.
+	skyItem->update();
+	scene()->update();
+}
+
 void StelMainView::thereWasAnEvent()
 {
 	lastEventTimeSec = StelApp::getTotalRunTime();
@@ -413,7 +421,8 @@ void StelMainView::minFpsChanged()
 	}
 
 	minFpsTimer = new QTimer(this);
-	connect(minFpsTimer, SIGNAL(timeout()), scene(), SLOT(update()));
+	connect(minFpsTimer, SIGNAL(timeout()), this, SLOT(updateScene()));
+
 	minFpsTimer->start((int)(1./getMinFps()*1000.));
 }
 

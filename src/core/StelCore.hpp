@@ -262,13 +262,13 @@ public:
 
 	//! Get the sidereal time shifted by the observer longitude
 	//! @return the local sidereal time in radian
-	double getLocalSideralTime() const;
+	double getLocalSiderealTime() const;
 
 	//! Get the duration of a sidereal day for the current observer in day.
-	double getLocalSideralDayLength() const;
+	double getLocalSiderealDayLength() const;
 
 	//! Get the duration of a sidereal year for the current observer in days.
-	double getLocalSideralYearLength() const;
+	double getLocalSiderealYearLength() const;
 
 	//! Return the startup mode, can be preset|Preset or anything else
 	QString getStartupTimeMode();

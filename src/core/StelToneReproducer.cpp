@@ -17,12 +17,7 @@
  */
 
 #include <cmath>
-#ifndef HAVE_POW10
-# define HAVE_POW10 1
-//# define pow10(x) pow(10,(x))
-# define pow10(x) std::exp((x) * 2.3025850930)
-#endif
-
+#include "config.h"
 #include "StelToneReproducer.hpp"
 
 /*********************************************************************

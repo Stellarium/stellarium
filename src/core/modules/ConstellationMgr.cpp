@@ -154,10 +154,23 @@ void ConstellationMgr::updateSkyCulture(const QString& skyCultureDir)
 	updateI18n();
 
 	// load constellation boundaries
+	// First try load constellation boundaries from sky culture
 	fic = StelFileMgr::findFile("skycultures/" + skyCultureDir + "/constellations_boundaries.dat");
+	bool existBoundaries = false;
 	if (fic.isEmpty())
-		qWarning() << "ERROR loading constellation boundaries file: " << fic;
+	{
+		qWarning() << "ERROR loading constellation boundaries file in sky culture: " << skyCultureDir;
+		// OK, Second try load generic constellation boundaries
+		fic = StelFileMgr::findFile("data/constellations_boundaries.dat");
+		if (fic.isEmpty())
+			qWarning() << "ERROR loading main constellation boundaries file: " << fic;
+		else
+			existBoundaries = true;
+	}
 	else
+		existBoundaries = true;
+
+	if (existBoundaries)
 		loadBoundaries(fic);
 
 	lastLoadedSkyCulture = skyCultureDir;
