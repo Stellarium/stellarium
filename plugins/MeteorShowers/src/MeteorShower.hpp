@@ -90,6 +90,7 @@ private:
 	Vec3d XY;                       // Store temporary 2D position
 
 	static StelTextureSP radiantTexture;
+	static bool radiantMarkerEnabled;
 
 	LinearFader labelsFader;
 
