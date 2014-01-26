@@ -245,8 +245,8 @@ public slots:
 	bool getEnableAtStartup(void) {return enableAtStartup;}
 	void setEnableAtStartup(bool b)	{enableAtStartup=b;}
 
-	bool getFlagRadiant(void) { return flagShowMSRadiant; }
-	void setFlagRadiant(bool b) { flagShowMSRadiant=b; }
+	bool getFlagRadiant(void) const { return MeteorShower::radiantMarkerEnabled; }
+	void setFlagRadiant(bool b) { MeteorShower::radiantMarkerEnabled=b; }
 
 private:
 	// Upgrade config.ini: rename old key settings to new
@@ -315,7 +315,6 @@ private:
 	MeteorShowerDialog* configDialog;
 	bool flagShowMS;
 	bool flagShowMSButton;	
-	bool flagShowMSRadiant;
 	QPixmap* OnIcon;
 	QPixmap* OffIcon;
 	QPixmap* GlowIcon;

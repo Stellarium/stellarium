@@ -78,7 +78,7 @@ StelPluginInfo MeteorShowersStelPluginInterface::getPluginInfo() const
 	info.displayedName = N_("Meteor Showers");
 	info.authors = "Marcos Cardinot";
 	info.contact = "mcardinot@gmail.com";
-	info.description = N_("This plugin show information about meteor showers and displays marker for radiants near maximum activity for each meteor showers.");
+	info.description = N_("This plugin give visualization of the meteor showers, show information about meteor showers and displays marker for radiants in activity range for each meteor showers.");
 	return info;
 }
 
@@ -281,9 +281,6 @@ void MeteorShowers::draw(StelCore* core)
 
 void MeteorShowers::drawMarker(StelCore* core, StelPainter& painter)
 {
-	if(!getFlagRadiant())
-		return;
-
 	Q_UNUSED(core);
 	painter.setFont(labelFont);
 
@@ -554,7 +551,7 @@ QList<StelObjectP> MeteorShowers::searchAround(const Vec3d& av, double limitFov,
 {
 	QList<StelObjectP> result;
 
-	if(!flagShowMS)
+	if(!getFlagRadiant())
 		return result;
 
 	Vec3d v(av);
@@ -580,7 +577,7 @@ QList<StelObjectP> MeteorShowers::searchAround(const Vec3d& av, double limitFov,
 
 StelObjectP MeteorShowers::searchByName(const QString& englishName) const
 {
-	if(!flagShowMS)
+	if(!getFlagRadiant())
 		return NULL;
 
 	foreach(const MeteorShowerP& ms, mShowers)
@@ -594,7 +591,7 @@ StelObjectP MeteorShowers::searchByName(const QString& englishName) const
 
 StelObjectP MeteorShowers::searchByNameI18n(const QString& nameI18n) const
 {
-	if(!flagShowMS)
+	if(!getFlagRadiant())
 		return NULL;
 
 	foreach(const MeteorShowerP& ms, mShowers)
@@ -609,7 +606,7 @@ StelObjectP MeteorShowers::searchByNameI18n(const QString& nameI18n) const
 QStringList MeteorShowers::listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem, bool useStartOfWords) const
 {
 	QStringList result;
-	if(!flagShowMS)
+	if(!getFlagRadiant())
 		return result;
 
 	if(maxNbItem==0)
@@ -649,7 +646,7 @@ QStringList MeteorShowers::listMatchingObjectsI18n(const QString& objPrefix, int
 QStringList MeteorShowers::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords) const
 {
 	QStringList result;
-	if(!flagShowMS)
+	if(!getFlagRadiant())
 		return result;
 
 	if(maxNbItem==0)
@@ -913,7 +910,7 @@ void MeteorShowers::readSettingsFromConfig(void)
 	updatesEnabled = conf->value("updates_enabled", true).toBool();
 	enableAtStartup = conf->value("enable_at_startup", false).toBool();
 	flagShowMSButton = conf->value("flag_show_ms_button", true).toBool();
-	flagShowMSRadiant = conf->value("flag_show_radiants", true).toBool();
+	setFlagRadiant(conf->value("flag_show_radiants", true).toBool());
 	flagShowAR = conf->value("flag_active_radiants", false).toBool();
 
 	Vec3f color;
@@ -939,7 +936,7 @@ void MeteorShowers::saveSettingsToConfig(void)
 	conf->setValue("updates_enabled", updatesEnabled);
 	conf->setValue("enable_at_startup", enableAtStartup);
 	conf->setValue("flag_show_ms_button", flagShowMSButton);
-	conf->setValue("flag_show_radiants", flagShowMSRadiant);
+	conf->setValue("flag_show_radiants", getFlagRadiant());
 	conf->setValue("flag_active_radiants", flagShowAR);
 
 	int r,g,b;
@@ -1040,6 +1037,8 @@ void MeteorShowers::updateDownloadComplete(QNetworkReply* reply)
 		StelApp::getInstance().removeProgressBar(progressBar);
 		progressBar = NULL;
 	}
+
+	readJsonFile();
 }
 
 void MeteorShowers::displayMessage(const QString& message, const QString hexColor)
