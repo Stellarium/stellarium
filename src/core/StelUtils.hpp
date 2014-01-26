@@ -26,8 +26,9 @@
 #include <QDateTime>
 #include <QString>
 
-// astonomical unit (km)
+// astronomical unit (km)
 #define AU 149597870.691
+#define AU_KM (1.0/149597870.691)
 // Parsec (km)
 #define PARSEC 30.857e12
 // speed of light (km/sec)
@@ -41,6 +42,9 @@ namespace StelUtils
 
 	//! Return the version of stellarium, i.e. "0.9.0"
 	QString getApplicationVersion();
+
+	//! Return the name and the version of operating system, i.e. "Mac OS X 10.7"
+	QString getOperatingSystemInfo();
 
 	//! Convert an angle in hms format to radian.
 	//! @param h hour component
@@ -560,6 +564,10 @@ namespace StelUtils
 	//! @return sigma in seconds
 	double getDeltaTStandardError(const double jDay);
 
+    //! Sign function from http://stackoverflow.com/questions/1903954/is-there-a-standard-sign-function-signum-sgn-in-c-c
+    template <typename T> int sign(T val) {
+        return (T(0) < val) - (val < T(0));
+    }
 }
 
 #endif // _STELUTILS_HPP_

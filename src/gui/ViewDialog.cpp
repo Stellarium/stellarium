@@ -170,6 +170,8 @@ void ViewDialog::createDialogContent()
 
 	ui->planetScaleMoonCheckBox->setChecked(ssmgr->getFlagMoonScale());
 	connect(ui->planetScaleMoonCheckBox, SIGNAL(toggled(bool)), ssmgr, SLOT(setFlagMoonScale(bool)));
+	ui->moonScaleFactor->setValue(ssmgr->getMoonScale());
+	connect(ui->moonScaleFactor, SIGNAL(valueChanged(double)), ssmgr, SLOT(setMoonScale(double)));
 
 	ui->planetOrbitCheckBox->setChecked(ssmgr->getFlagOrbits());
 	connect(ui->planetOrbitCheckBox, SIGNAL(toggled(bool)), ssmgr, SLOT(setFlagOrbits(bool)));
@@ -192,9 +194,7 @@ void ViewDialog::createDialogContent()
 
 	// Labels section
 	StarMgr* smgr = GETSTELMODULE(StarMgr);
-	ui->starLabelCheckBox->setChecked(smgr->getFlagLabels());
-	connect(ui->starLabelCheckBox, SIGNAL(toggled(bool)), smgr, SLOT(setFlagLabels(bool)));
-
+	connectCheckBox(ui->starLabelCheckBox, "actionShow_Stars_Labels");
 	connectCheckBox(ui->nebulaLabelCheckBox, "actionShow_Nebulas");
 	connectCheckBox(ui->planetLabelCheckBox, "actionShow_Planets_Labels");
 

@@ -53,8 +53,8 @@ public:
 	//! Save the settings to the main configuration file.
 	void saveSettingsToConfig(void);
 
-	void setQuickFOV(double value, int item);
-	double getQuickFOV(int item);
+	void setQuickFOV(const double value, const int item);
+	double getQuickFOV(const int item) const;
 
 public slots:
 	void setFOV();

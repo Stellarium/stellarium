@@ -237,7 +237,7 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 		oss << catalogNumbers << "<br/><br/>";
 	}
 
-	if (flags & Type)
+	if (flags & ObjectType)
 	{
 		oss << q_("Type: <b>%1</b>").arg(q_("artificial satellite")) << "<br/>";
 	}

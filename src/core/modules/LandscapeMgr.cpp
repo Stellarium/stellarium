@@ -24,6 +24,7 @@
 #include <QSettings>
 #include <QString>
 #include <QDir>
+#include <QDirIterator>
 #include <QFile>
 #include <QTemporaryFile>
 #include <QMouseEvent>
@@ -153,9 +154,15 @@ LandscapeMgr::LandscapeMgr() : atmosphere(NULL), cardinalsPoints(NULL), landscap
 {
 	setObjectName("LandscapeMgr");
 
-	//TODO: Find a way to obtain this list automatically.
 	//Note: The first entry in the list is used as the default 'default landscape' in removeLandscape().
-	packagedLandscapeIDs = (QStringList() << "guereins" << "grossmugl" << "geneva" << "trees" << "moon" << "hurricane" << "ocean" << "garching" << "mars" << "saturn");
+	packagedLandscapeIDs = (QStringList() << "guereins");
+	QDirIterator directories(StelFileMgr::getInstallationDir()+"/landscapes/", QDir::Dirs | QDir::NoSymLinks | QDir::NoDotAndDotDot, QDirIterator::Subdirectories);
+	while(directories.hasNext())
+	{
+		directories.next();
+		packagedLandscapeIDs << directories.fileName();
+	}
+	packagedLandscapeIDs.removeDuplicates();
 }
 
 LandscapeMgr::~LandscapeMgr()
@@ -650,6 +657,12 @@ float LandscapeMgr::getLuminance() const
 {
 	return atmosphere->getRealDisplayIntensityFactor();
 }
+
+float LandscapeMgr::getAtmosphereAverageLuminance() const
+{
+	return atmosphere->getAverageLuminance();
+}
+
 
 Landscape* LandscapeMgr::createFromFile(const QString& landscapeFile, const QString& landscapeId)
 {
