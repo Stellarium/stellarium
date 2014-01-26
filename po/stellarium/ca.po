@@ -11,13 +11,13 @@ msgstr ""
 "Project-Id-Version: ca\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-01-23 19:56+0700\n"
-"PO-Revision-Date: 2014-01-03 19:01+0000\n"
+"PO-Revision-Date: 2014-01-25 23:15+0000\n"
 "Last-Translator: Daniel Alomar i Claramonte <daniel.adastra@gmail.com>\n"
 "Language-Team: Català <ca@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-01-24 05:17+0000\n"
+"X-Launchpad-Export-Date: 2014-01-26 04:36+0000\n"
 "X-Generator: Launchpad (build 16914)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:106 src/core/modules/StarMgr.cpp:337
@@ -313,17 +313,17 @@ msgstr "Nomenament provisional: %1"
 #: src/core/modules/Comet.cpp:178
 #, no-c-format, qt-format
 msgid "Distance from Sun: %1AU (%2 km)"
-msgstr ""
+msgstr "Distància del Sol: %1UA (%2 km)"
 
 #: src/core/modules/Comet.cpp:185
 #, no-c-format, qt-format
 msgid "Distance from Sun: %1AU (%2 Mio km)"
-msgstr ""
+msgstr "Distància del Sol: %1UA (%2 Milions km)"
 
 #: src/core/modules/Comet.cpp:209
 #, no-c-format, qt-format
 msgid "Speed: %1 km/s"
-msgstr ""
+msgstr "Velocitat:%1 km/s"
 
 #: src/core/modules/SolarSystem.cpp:151
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:303
@@ -1120,7 +1120,7 @@ msgstr "Az/Alt: %1/%2"
 #: src/core/StelObject.cpp:180
 #, qt-format
 msgid "Ecliptic Topocentric (of J2000): %1/%2"
-msgstr ""
+msgstr "Eclíptica Topocèntrica (de J2000):%1/%2"
 
 #: src/core/StelObject.cpp:185
 #, qt-format
@@ -1418,23 +1418,24 @@ msgstr "Equació personalitzada per %1T"
 #. TRANSLATORS: This message will be displayed for users if Stellarium can't get info about version from stellarium.org
 #: src/gui/HelpDialog.cpp:250
 msgid "Oops... Stellarium can't check latest version."
-msgstr ""
+msgstr "Oops... Stellarium no pot comprovar l'última versió"
 
 #. TRANSLATORS: This message will be displayed for users if current version of Stellarium is bigger than version from stellarium.org
 #: src/gui/HelpDialog.cpp:272
 msgid "Looks like you are using the development version of Stellarium."
 msgstr ""
+"Sembla que estàs fent servir la versió de desenvolupament de Stellarium"
 
 #. TRANSLATORS: This message will be displayed for users if current version of Stellarium is smaller than version from stellarium.org
 #: src/gui/HelpDialog.cpp:277
 #, qt-format
 msgid "This version of Stellarium is outdated! Latest version is %1."
-msgstr ""
+msgstr "Aquesta versió de Stallarium es obsoleta! L'ultima versió es la %1."
 
 #. TRANSLATORS: This message will be displayed for users if current version of Stellarium is equals with version from stellarium.org
 #: src/gui/HelpDialog.cpp:283
 msgid "This is latest stable version of Stellarium."
-msgstr ""
+msgstr "Aquesta es l'última versió estable de Stellarium."
 
 #: src/gui/HelpDialog.cpp:313
 msgid "Stellarium Help"
@@ -3679,23 +3680,23 @@ msgstr "Zimbabwe"
 
 #: src/translations.h:541
 msgid "&Undo"
-msgstr ""
+msgstr "&Desfés"
 
 #: src/translations.h:542
 msgid "&Redo"
-msgstr ""
+msgstr "&Refés"
 
 #: src/translations.h:543
 msgid "Cu&t"
-msgstr ""
+msgstr "&Tallar"
 
 #: src/translations.h:544
 msgid "&Copy"
-msgstr ""
+msgstr "&Copiar"
 
 #: src/translations.h:545
 msgid "&Paste"
-msgstr ""
+msgstr "&Enganxar"
 
 #: src/translations.h:546 src/ui_locationDialogGui.h:395
 #: plugins/Oculars/src/ui_ocularDialog.h:1063
@@ -3707,23 +3708,23 @@ msgstr "Suprimeix"
 
 #: src/translations.h:547
 msgid "Select All"
-msgstr ""
+msgstr "Selecciona-ho tot"
 
 #: src/translations.h:548
 msgid "Look in:"
-msgstr ""
+msgstr "Cerca a:"
 
 #: src/translations.h:549
 msgid "Directory:"
-msgstr ""
+msgstr "Directori:"
 
 #: src/translations.h:550
 msgid "Folder"
-msgstr ""
+msgstr "Carpeta"
 
 #: src/translations.h:551
 msgid "&Choose"
-msgstr ""
+msgstr "T&ria"
 
 #: src/translations.h:552 src/ui_configurationDialog.h:1164
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:516
@@ -3732,27 +3733,27 @@ msgstr "Cancel·lar"
 
 #: src/translations.h:553
 msgid "Files of type:"
-msgstr ""
+msgstr "Fitxers del tipus:"
 
 #: src/translations.h:554
 msgid "Date Modified"
-msgstr ""
+msgstr "Data de modificació"
 
 #: src/translations.h:555
 msgid "Directories"
-msgstr ""
+msgstr "Directoris"
 
 #: src/translations.h:556
 msgid "Computer"
-msgstr ""
+msgstr "Ordinador"
 
 #: src/translations.h:557
 msgid "&Open"
-msgstr ""
+msgstr "&Obre"
 
 #: src/translations.h:558
 msgid "File &name:"
-msgstr ""
+msgstr "&Nom de fitxer:"
 
 #: src/ui_helpDialogGui.h:277 src/ui_helpDialogGui.h:283
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:417
@@ -4081,7 +4082,7 @@ msgstr "Escala de la Lluna"
 
 #: src/ui_viewDialog.h:1244
 msgid "Scale factor"
-msgstr ""
+msgstr "Factor d'escala"
 
 #: src/ui_viewDialog.h:1247
 msgid "Automatic change of landscape when planet is changed"
@@ -4203,15 +4204,15 @@ msgstr "Esfera celeste"
 
 #: src/ui_viewDialog.h:1292
 msgid "Equatorial grid (on J2000)"
-msgstr ""
+msgstr "Graella equatorial (a J2000)"
 
 #: src/ui_viewDialog.h:1293
 msgid "Equatorial grid (on date)"
-msgstr ""
+msgstr "Graella equatorial (actual)"
 
 #: src/ui_viewDialog.h:1294
 msgid "Ecliptic grid (on J2000)"
-msgstr ""
+msgstr "Graella ecliptica (a J2000)"
 
 #: src/ui_viewDialog.h:1298
 msgid "Show equator line"
@@ -4279,13 +4280,16 @@ msgstr "Idioma del programa"
 
 #: src/ui_configurationDialog.h:1002
 msgid "Check updates"
-msgstr ""
+msgstr "Comprova actualitzacions"
 
 #: src/ui_configurationDialog.h:1003
 msgid ""
 "Enable checking updates of Stellarium via Internet. Info for updates of "
 "stable versions you can look on the tab \"About\" of \"Help\" window."
 msgstr ""
+"Activar comprovació d'actualitzacions de Stellarium via Internet. Pots "
+"trobar informació de les actualitzacions de les versions estables a la "
+"pestanya \"Sobre\" de la finestra \"Ajuda\""
 
 #: src/ui_configurationDialog.h:1004
 msgid "Default options"
@@ -7345,7 +7349,7 @@ msgstr ""
 #: plugins/Novae/src/gui/NovaeDialog.cpp:116
 #, qt-format
 msgid "This list altogether contains %1 stars."
-msgstr ""
+msgstr "Aquesta llista conté en total %1 estrelles."
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:115
 #, qt-format
@@ -7599,7 +7603,7 @@ msgstr "Veron+ 2010"
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:123
 #, qt-format
 msgid "The current catalog contains info about %1 quasars."
-msgstr ""
+msgstr "El catàleg actual conté informació sobre %1 quasars."
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:134
@@ -7608,6 +7612,8 @@ msgid ""
 "If you want to read full information about this plugin, its history and "
 "format of the catalog, you can %1get info here%2."
 msgstr ""
+"Si voleu llegir la informació completa sobre aquest plugin, la seva història "
+"i el format del catàleg, pots aconseguir informació %1 aquí %2."
 
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:216
 msgid "Quasars is updated"
@@ -7671,13 +7677,13 @@ msgstr "púlsar"
 
 #: plugins/Pulsars/src/Pulsar.cpp:142
 msgid "has one registered glitch"
-msgstr ""
+msgstr "té un problema tècnic registrat"
 
 #. TRANSLATORS: Full phrase is "Has X registered glitches", where X is number
 #: plugins/Pulsars/src/Pulsar.cpp:146
 #, qt-format
 msgid "has %1 registered glitches"
-msgstr ""
+msgstr "té %1 problemes tècnics registrats"
 
 #: plugins/Pulsars/src/Pulsar.cpp:148
 msgid "pulsar with glitches"
