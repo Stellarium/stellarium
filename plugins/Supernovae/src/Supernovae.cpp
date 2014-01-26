@@ -687,6 +687,8 @@ void Supernovae::updateDownloadComplete(QNetworkReply* reply)
 		StelApp::getInstance().removeProgressBar(progressBar);
 		progressBar = NULL;
 	}
+
+	readJsonFile();
 }
 
 void Supernovae::displayMessage(const QString& message, const QString hexColor)
