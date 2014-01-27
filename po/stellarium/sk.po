@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-01-23 19:56+0700\n"
-"PO-Revision-Date: 2014-01-22 22:53+0000\n"
+"PO-Revision-Date: 2014-01-26 18:55+0000\n"
 "Last-Translator: Miroslav Remák <Unknown>\n"
 "Language-Team: Slovak <sk@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-01-24 05:25+0000\n"
+"X-Launchpad-Export-Date: 2014-01-27 05:14+0000\n"
 "X-Generator: Launchpad (build 16914)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:106 src/core/modules/StarMgr.cpp:337
@@ -3663,23 +3663,23 @@ msgstr "Zimbabwe"
 
 #: src/translations.h:541
 msgid "&Undo"
-msgstr ""
+msgstr "V&rátiť späť"
 
 #: src/translations.h:542
 msgid "&Redo"
-msgstr ""
+msgstr "&Opakovať vrátené"
 
 #: src/translations.h:543
 msgid "Cu&t"
-msgstr ""
+msgstr "Vys&trihnúť"
 
 #: src/translations.h:544
 msgid "&Copy"
-msgstr ""
+msgstr "&Kopírovať"
 
 #: src/translations.h:545
 msgid "&Paste"
-msgstr ""
+msgstr "V&ložiť"
 
 #: src/translations.h:546 src/ui_locationDialogGui.h:395
 #: plugins/Oculars/src/ui_ocularDialog.h:1063
@@ -3691,23 +3691,23 @@ msgstr "Vymazať"
 
 #: src/translations.h:547
 msgid "Select All"
-msgstr ""
+msgstr "Vybrať všetko"
 
 #: src/translations.h:548
 msgid "Look in:"
-msgstr ""
+msgstr "Hľadať v:"
 
 #: src/translations.h:549
 msgid "Directory:"
-msgstr ""
+msgstr "Priečinok:"
 
 #: src/translations.h:550
 msgid "Folder"
-msgstr ""
+msgstr "Priečinok"
 
 #: src/translations.h:551
 msgid "&Choose"
-msgstr ""
+msgstr "&Zvoliť"
 
 #: src/translations.h:552 src/ui_configurationDialog.h:1164
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:516
@@ -3716,27 +3716,27 @@ msgstr "Zrušiť"
 
 #: src/translations.h:553
 msgid "Files of type:"
-msgstr ""
+msgstr "Súbory typu:"
 
 #: src/translations.h:554
 msgid "Date Modified"
-msgstr ""
+msgstr "Dátum zmeny"
 
 #: src/translations.h:555
 msgid "Directories"
-msgstr ""
+msgstr "Priečinky"
 
 #: src/translations.h:556
 msgid "Computer"
-msgstr ""
+msgstr "Počítač"
 
 #: src/translations.h:557
 msgid "&Open"
-msgstr ""
+msgstr "&Otvoriť"
 
 #: src/translations.h:558
 msgid "File &name:"
-msgstr ""
+msgstr "&Názov súboru:"
 
 #: src/ui_helpDialogGui.h:277 src/ui_helpDialogGui.h:283
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:417
@@ -4265,6 +4265,9 @@ msgid ""
 "Enable checking updates of Stellarium via Internet. Info for updates of "
 "stable versions you can look on the tab \"About\" of \"Help\" window."
 msgstr ""
+"Povoliť kontrolu dostupných aktualizácií programu cez internet. Informácie "
+"ohľadom aktualizácií stabilných verzií nájdete v karte \"O aplikácii\" okna "
+"\"Pomoc\"."
 
 #: src/ui_configurationDialog.h:1004
 msgid "Default options"
@@ -7366,8 +7369,8 @@ msgid ""
 "If you want to read full information about this plugin, its history and "
 "format of catalog, you can %1get info here%2."
 msgstr ""
-"Ak si chcete prečítať plný opis tohto modulu, jeho históriu a formát "
-"katalógu, nájdete ho na %1tejto adrese%2."
+"Ak si chcete prečítať všetky informácie o tomto zásuvnom module, jeho "
+"histórii a formáte katalógu, nájdete ich na %1tejto adrese%2."
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:165
 #: plugins/Novae/src/gui/NovaeDialog.cpp:162
@@ -7454,7 +7457,7 @@ msgstr ""
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:114
 msgid "This plugin allows you to see recent bright novae: "
-msgstr ""
+msgstr "Tento modul vám umožňuje pozorovať súčasné jasné novy: "
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:117
 #, qt-format
@@ -7494,7 +7497,7 @@ msgid ""
 "catalog format, you can %1get info here%2."
 msgstr ""
 "Ak si chcete prečítať všetky informácie o tomto zásuvnom module, jeho "
-"histórii a formáte katalógu, môžete ich %1získať tu%2."
+"histórii a formáte katalógu, nájdete ich na %1tejto adrese%2."
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:198
 msgid "Novae is updated"
@@ -7558,7 +7561,7 @@ msgstr "Veron+ 2010"
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:123
 #, qt-format
 msgid "The current catalog contains info about %1 quasars."
-msgstr ""
+msgstr "Aktuálny katalóg obsahuje údaje o %1 kvazaroch."
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:134
@@ -7567,6 +7570,8 @@ msgid ""
 "If you want to read full information about this plugin, its history and "
 "format of the catalog, you can %1get info here%2."
 msgstr ""
+"Ak si chcete prečítať všetky informácie o tomto zásuvnom module, jeho "
+"histórii a formáte katalógu, nájdete ich na %1tejto adrese%2."
 
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:216
 msgid "Quasars is updated"
@@ -7629,17 +7634,17 @@ msgstr "pulzar"
 
 #: plugins/Pulsars/src/Pulsar.cpp:142
 msgid "has one registered glitch"
-msgstr ""
+msgstr "má jednu zaznamenanú poruchu"
 
 #. TRANSLATORS: Full phrase is "Has X registered glitches", where X is number
 #: plugins/Pulsars/src/Pulsar.cpp:146
 #, qt-format
 msgid "has %1 registered glitches"
-msgstr ""
+msgstr "má %1 zaznamenaných porúch"
 
 #: plugins/Pulsars/src/Pulsar.cpp:148
 msgid "pulsar with glitches"
-msgstr ""
+msgstr "pulzar s poruchami"
 
 #. TRANSLATORS: Unit of measure for period - seconds
 #: plugins/Pulsars/src/Pulsar.cpp:160
@@ -7837,7 +7842,7 @@ msgstr "Zobraz tlačidlo pulzary na lište"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:279
 msgid "Use separate color for pulsars with glitches"
-msgstr ""
+msgstr "Používať osobitnú farbu pre pulzary s poruchami"
 
 #: plugins/Exoplanets/src/Exoplanets.cpp:73
 #: plugins/Exoplanets/src/Exoplanets.cpp:162
@@ -7974,6 +7979,8 @@ msgid ""
 "If you want to read full information about the plugin, its history and "
 "format of the catalog you can %1get info here%2."
 msgstr ""
+"Ak si chcete prečítať všetky informácie o tomto zásuvnom module, jeho "
+"histórii a formáte katalógu, nájdete ich na %1tejto adrese%2."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:152
 msgid "Potential habitable exoplanets"
