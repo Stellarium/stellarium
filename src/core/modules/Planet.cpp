@@ -480,12 +480,12 @@ double Planet::getSiderealTime(double jd) const
 	double remainder = rotations - wholeRotations;
 
 // TODO: This block need rewrite
-//	if (englishName=="Jupiter")
-//	{
-//		// use semi-empirical coefficient for GRS drift
-//		return remainder * 360. + re.offset - 0.2483 * std::abs(StelApp::getInstance().getCore()->getJDay() - 2456172);
-//	}
-//	else
+	if (englishName=="Jupiter")
+	{
+		// use semi-empirical coefficient for GRS drift
+		return remainder * 360. + re.offset - 0.2483 * std::abs(jd - 2456172);
+	}
+	else
 		return remainder * 360. + re.offset;
 }
 
