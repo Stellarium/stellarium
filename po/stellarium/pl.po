@@ -10,13 +10,13 @@ msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-01-23 19:56+0700\n"
-"PO-Revision-Date: 2014-01-13 02:28+0000\n"
+"PO-Revision-Date: 2014-01-28 03:06+0000\n"
 "Last-Translator: pp/bs <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-01-24 05:24+0000\n"
+"X-Launchpad-Export-Date: 2014-01-28 05:27+0000\n"
 "X-Generator: Launchpad (build 16914)\n"
 "X-Poedit-Country: SPAIN\n"
 "X-Poedit-Language: Spanish\n"
@@ -1416,22 +1416,25 @@ msgstr "Własne równanie %1T"
 #: src/gui/HelpDialog.cpp:250
 msgid "Oops... Stellarium can't check latest version."
 msgstr ""
+"Ojej... Stellarium nie może sprawdzić, czy jest dostępna nowsza wersja "
+"programu."
 
 #. TRANSLATORS: This message will be displayed for users if current version of Stellarium is bigger than version from stellarium.org
 #: src/gui/HelpDialog.cpp:272
 msgid "Looks like you are using the development version of Stellarium."
-msgstr ""
+msgstr "Wygląda na to, że używasz wersji rozwojowej programu Stellarium."
 
 #. TRANSLATORS: This message will be displayed for users if current version of Stellarium is smaller than version from stellarium.org
 #: src/gui/HelpDialog.cpp:277
 #, qt-format
 msgid "This version of Stellarium is outdated! Latest version is %1."
 msgstr ""
+"Ta wersja programu Stellarium jest nieaktualna! Najnowsza wersja to %1."
 
 #. TRANSLATORS: This message will be displayed for users if current version of Stellarium is equals with version from stellarium.org
 #: src/gui/HelpDialog.cpp:283
 msgid "This is latest stable version of Stellarium."
-msgstr ""
+msgstr "To jest najnowsza wersja stabilna programu Stellarium."
 
 #: src/gui/HelpDialog.cpp:313
 msgid "Stellarium Help"
@@ -1739,7 +1742,7 @@ msgstr "Niebo w centrum miasta"
 
 #: src/gui/ViewDialog.cpp:327
 msgid "The naked-eye limiting magnitude is"
-msgstr ""
+msgstr "Jasność dla obserwacji gołym okiem ograniczona do"
 
 #: src/gui/ViewDialog.cpp:459
 msgid "No description"
@@ -3683,23 +3686,23 @@ msgstr "Zimbabwe"
 
 #: src/translations.h:541
 msgid "&Undo"
-msgstr ""
+msgstr "&Cofnij"
 
 #: src/translations.h:542
 msgid "&Redo"
-msgstr ""
+msgstr "&Powtórz"
 
 #: src/translations.h:543
 msgid "Cu&t"
-msgstr ""
+msgstr "&Wytnij"
 
 #: src/translations.h:544
 msgid "&Copy"
-msgstr ""
+msgstr "&Kopiuj"
 
 #: src/translations.h:545
 msgid "&Paste"
-msgstr ""
+msgstr "Wkl&ej"
 
 #: src/translations.h:546 src/ui_locationDialogGui.h:395
 #: plugins/Oculars/src/ui_ocularDialog.h:1063
@@ -3711,23 +3714,23 @@ msgstr "Usuń"
 
 #: src/translations.h:547
 msgid "Select All"
-msgstr ""
+msgstr "Zaznacz wszystko"
 
 #: src/translations.h:548
 msgid "Look in:"
-msgstr ""
+msgstr "Pokazuj:"
 
 #: src/translations.h:549
 msgid "Directory:"
-msgstr ""
+msgstr "Katalog:"
 
 #: src/translations.h:550
 msgid "Folder"
-msgstr ""
+msgstr "Folder"
 
 #: src/translations.h:551
 msgid "&Choose"
-msgstr ""
+msgstr "Wy&bierz"
 
 #: src/translations.h:552 src/ui_configurationDialog.h:1164
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:516
@@ -3736,27 +3739,27 @@ msgstr "Anuluj"
 
 #: src/translations.h:553
 msgid "Files of type:"
-msgstr ""
+msgstr "Rodzaj plików:"
 
 #: src/translations.h:554
 msgid "Date Modified"
-msgstr ""
+msgstr "Data modyfikacji"
 
 #: src/translations.h:555
 msgid "Directories"
-msgstr ""
+msgstr "Katalogi"
 
 #: src/translations.h:556
 msgid "Computer"
-msgstr ""
+msgstr "Komputer"
 
 #: src/translations.h:557
 msgid "&Open"
-msgstr ""
+msgstr "&Otwórz"
 
 #: src/translations.h:558
 msgid "File &name:"
-msgstr ""
+msgstr "&Nazwa pliku:"
 
 #: src/ui_helpDialogGui.h:277 src/ui_helpDialogGui.h:283
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:417
@@ -4085,7 +4088,7 @@ msgstr "Skaluj obraz Księżyca"
 
 #: src/ui_viewDialog.h:1244
 msgid "Scale factor"
-msgstr ""
+msgstr "Współczynnik skali"
 
 #: src/ui_viewDialog.h:1247
 msgid "Automatic change of landscape when planet is changed"
@@ -4285,13 +4288,16 @@ msgstr "Język programu"
 
 #: src/ui_configurationDialog.h:1002
 msgid "Check updates"
-msgstr ""
+msgstr "Sprawdź aktualizacje"
 
 #: src/ui_configurationDialog.h:1003
 msgid ""
 "Enable checking updates of Stellarium via Internet. Info for updates of "
 "stable versions you can look on the tab \"About\" of \"Help\" window."
 msgstr ""
+"Włącza sprawdzanie aktualizacji Stellarium przez Internet. Informacje o "
+"aktualizacji wersji stabilnych znajdują się w zakładce \"O programie\" okna "
+"\"Pomoc\"."
 
 #: src/ui_configurationDialog.h:1004
 msgid "Default options"
@@ -5421,7 +5427,7 @@ msgstr "Soczewki"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1074
 msgid "Multiplier:"
-msgstr ""
+msgstr "Zwielokrotnienie:"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1075
 msgid ""
@@ -7365,7 +7371,7 @@ msgstr ""
 #: plugins/Novae/src/gui/NovaeDialog.cpp:116
 #, qt-format
 msgid "This list altogether contains %1 stars."
-msgstr ""
+msgstr "Ta lista zawiera łącznie %1 gwiazd."
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:115
 #, qt-format
@@ -7508,7 +7514,7 @@ msgstr ""
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:114
 msgid "This plugin allows you to see recent bright novae: "
-msgstr ""
+msgstr "Ta wtyczka umożliwia obejrzenie niedawnych jasnych nowych: "
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:117
 #, qt-format
@@ -7545,8 +7551,8 @@ msgid ""
 "If you want to read full information about this plugin, its history and "
 "catalog format, you can %1get info here%2."
 msgstr ""
-"Jeśli chesz przeczytać dokładne informacje o tej wtyczce, jej historii i "
-"formacie katalogu, to %1znajdziesz je tutaj%2."
+"Pełne informacje na temat wtyczki, jej historii i formatu katalogu można "
+"znaleźć %1tutaj%2."
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:198
 msgid "Novae is updated"
@@ -7610,7 +7616,7 @@ msgstr "Veron+ 2010"
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:123
 #, qt-format
 msgid "The current catalog contains info about %1 quasars."
-msgstr ""
+msgstr "Bieżący katalog zawiera informacje o %1 kwazarach."
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:134
@@ -7619,6 +7625,8 @@ msgid ""
 "If you want to read full information about this plugin, its history and "
 "format of the catalog, you can %1get info here%2."
 msgstr ""
+"Pełne informacje na temat wtyczki, jej historii i formatu katalogu można "
+"znaleźć %1tutaj%2."
 
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:216
 msgid "Quasars is updated"
@@ -7828,7 +7836,7 @@ msgstr ""
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:124
 #, qt-format
 msgid "Current catalog contains info about %1 pulsars."
-msgstr ""
+msgstr "Bieżący katalog zawiera informacje o %1 pulsarach."
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:126
 msgid "Note"
@@ -8030,6 +8038,8 @@ msgid ""
 "If you want to read full information about the plugin, its history and "
 "format of the catalog you can %1get info here%2."
 msgstr ""
+"Pełne informacje na temat wtyczki, jej historii i formatu katalogu można "
+"znaleźć %1tutaj%2."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:152
 msgid "Potential habitable exoplanets"
