@@ -43,6 +43,9 @@ Source: "@CMAKE_SOURCE_DIR@\COPYING"; DestDir: "{app}"; Flags: ignoreversion; De
 Source: "@CMAKE_SOURCE_DIR@\ChangeLog"; DestDir: "{app}"; Flags: ignoreversion; DestName: "ChangeLog.txt"
 ; Qt stuff
 Source: "@CMAKE_INSTALL_PREFIX@\qtstuff\*"; DestDir: "{app}\"; Flags: recursesubdirs ignoreversion
+; For Planes plugin
+@ISS_SQLDRIVERS@
+@ISS_LIBMYSQL@
 ; Stellarium's stuff
 Source: "@CMAKE_INSTALL_PREFIX@\share\stellarium\*"; DestDir: "{app}\"; Flags: recursesubdirs ignoreversion
 @ISS_OPENSSL_LIBS@

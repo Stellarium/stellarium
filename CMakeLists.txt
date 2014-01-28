@@ -557,6 +557,7 @@ ELSE()
 ENDIF()
 ADD_PLUGIN(RemoteSync 1)
 ADD_PLUGIN(Satellites 1)
+ADD_PLUGIN(Planes 1)
 ADD_PLUGIN(Scenery3d 1)
 ADD_PLUGIN(SolarSystemEditor 1)
 ADD_PLUGIN(Supernovae 1)
@@ -568,6 +569,10 @@ ADD_PLUGIN(Vts 0)
 
 ########## Static plugins need to define includes and libraries
 ########## for the compilation of Stellarium itself
+
+IF(USE_PLUGIN_PLANES)
+	SET(QT_USE_QTSQL TRUE) # Planes plugin needs SQL module
+ENDIF()
 
 # Custom target used to manage dependencies of stellarium -> Static plugins
 # It is important that static plugins are compiled before stellarium main executable is linked
@@ -634,6 +639,37 @@ IF(WIN32)
      IF(STELLARIUM_BUILD_ARM64 AND ${QT_VERSION} VERSION_LESS "6.5.0")
        MESSAGE(FATAL_ERROR "Qt 6.5.0 or later is required for Windows on ARM builds.")
      ENDIF()
+
+    GET_FILENAME_COMPONENT(QT5_LIBS ${QtCore_location} PATH)
+	IF (USE_PLUGIN_PLANES)
+		SET(ISS_SQLDRIVERS "Source: \"${QT5_LIBS}/../plugins/sqldrivers/*\"; Excludes: \"*d.dll,*psql*\"; DestDir: \"{app}/sqldrivers/\";")
+		SET(ISS_LIBMYSQL "Source: \"libmysql.dll\"; DestDir: \"{app}\";")
+	ELSEIF()
+		SET(ISS_SQLDRIVERS "; Sql drivers not used")
+		SET(ISS_LIBMYSQL "; libmysql.dll unused")
+	ENDIF()
+#    IF(ENABLE_SCRIPTING)
+#        GET_TARGET_PROPERTY(QtScript_location Qt5::Script LOCATION)
+#        SET(ISS_QT_SCRIPT "Source: \"${QtScript_location}\"; DestDir: \"{app}\";")
+#    ELSE()
+#        SET(ISS_QT_SCRIPT "; QtScript don't used")
+#    ENDIF()
+#    IF(ENABLE_SOUND)
+#        GET_TARGET_PROPERTY(QtMultimedia_location Qt5::Multimedia LOCATION)
+#        SET(ISS_QT_MULTIMEDIA "Source: \"${QtMultimedia_location}\"; DestDir: \"{app}\";")
+#    ELSE()
+#        SET(ISS_QT_MULTIMEDIA "; QtMultimedia don't used")
+#    ENDIF()
+#    # TODO: Enable ANGLE support
+#    SET(ISS_ICU_LIBS "Source: \"${QT5_LIBS}/icu*.dll\"; DestDir: \"{app}\";")
+#    # Deploy related stuff
+#    SET(ISS_WINDOWS_PLUGIN "Source: \"${QT5_LIBS}/../plugins/platforms/qwindows.dll\"; DestDir: \"{app}/platforms/\";")
+#    SET(ISS_QML_DIR "Source: \"${QT5_LIBS}/../imports/Qt/labs/shaders/qmldir\"; DestDir: \"{app}/Qt/labs/shaders/\";")
+#    SET(ISS_QML_PLUGINS "Source: \"${QT5_LIBS}/../imports/Qt/labs/shaders/plugins.qmltypes\"; DestDir: \"{app}/Qt/labs/shaders/\";")
+#    SET(ISS_QML_SHADERS "Source: \"${QT5_LIBS}/../imports/Qt/labs/shaders/qmlshadersplugin.dll\"; DestDir: \"{app}/Qt/labs/shaders/\";")
+#  
+#    CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/stellarium.iss.cmake ${CMAKE_SOURCE_DIR}/stellarium.iss @ONLY)
+#    CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/stellarium-patch.iss.cmake ${CMAKE_SOURCE_DIR}/stellarium-patch.iss @ONLY)
 ENDIF()
 
 IF(APPLE)
