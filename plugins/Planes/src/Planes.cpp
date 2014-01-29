@@ -29,7 +29,6 @@
 #include "StelGui.hpp"
 #include "StelGuiItems.hpp"
 #include "Planes.hpp"
-#include "FlightPainter.hpp"
 
 #include <QDebug>
 #include <QMouseEvent>
@@ -43,6 +42,7 @@ StelTextureSP Planes::planeTexture;
 
 Planes::Planes()
 {
+    // Register metatypes so they can be passed on signals/slots across threads
     qRegisterMetaType<DBCredentials>();
     qRegisterMetaType<QList<ADSBFrame> >();
     qRegisterMetaType<QList<FlightID> >();
@@ -74,16 +74,16 @@ void Planes::init()
     //addAction("action_load_planes", planesGroup, N_("Load planes"), "loadFile()");
     addAction("action_show_planes_settings", planesGroup, N_("Show Planes Settings"), settingsDialog, "visible", "Ctrl+P");
 
-    onPix = new QPixmap(":/planes/planes_on.png");
-    offPix = new QPixmap(":/planes/planes_off.png");
-    glowPix = new QPixmap(":/graphicGui/glow32x32.png");
-    onSettingsPix = new QPixmap(":/planes/planes_settings.png");
-    offSettingsPix = new QPixmap(":/planes/planes_settings_off.png");
+    onPix = new QPixmap(QStringLiteral(":/planes/planes_on.png"));
+    offPix = new QPixmap(QStringLiteral(":/planes/planes_off.png"));
+    glowPix = new QPixmap(QStringLiteral(":/graphicGui/glow32x32.png"));
+    onSettingsPix = new QPixmap(QStringLiteral(":/planes/planes_settings.png"));
+    offSettingsPix = new QPixmap(QStringLiteral(":/planes/planes_settings_off.png"));
     enableButton = new StelButton(NULL, *onPix, *offPix, *glowPix, "action_enable_planes");
     settingsButton = new StelButton(NULL, *onSettingsPix, *offSettingsPix, *glowPix, "action_show_planes_settings");
     StelGui *gui = dynamic_cast<StelGui *>(StelApp::getInstance().getGui());
-    gui->getButtonBar()->addButton(enableButton, "065-pluginsGroup");
-    gui->getButtonBar()->addButton(settingsButton, "065-pluginsGroup");
+    gui->getButtonBar()->addButton(enableButton, QStringLiteral("065-pluginsGroup"));
+    gui->getButtonBar()->addButton(settingsButton, QStringLiteral("065-pluginsGroup"));
 
     // Settings
     // Appearance
@@ -122,7 +122,6 @@ void Planes::deinit()
     planeTexture.clear();
     bsDataSource.deinit();
     bsRecordingDataSource.deinit();
-    //FlightPainter::deinitShaders();
 }
 
 void Planes::update(double deltaTime)
@@ -151,7 +150,7 @@ void Planes::draw(StelCore *core)
 double Planes::getCallOrder(StelModule::StelModuleActionName actionName) const
 {
     if (actionName == StelModule::ActionDraw) {
-        return StelApp::getInstance().getModuleMgr().getModule("SolarSystem")->getCallOrder(actionName) + 1.;
+        return StelApp::getInstance().getModuleMgr().getModule(QStringLiteral("SolarSystem"))->getCallOrder(actionName) + 1.;
     }
     return 0;
 }
@@ -185,35 +184,35 @@ bool Planes::configureGui(bool show)
 void Planes::loadSettings()
 {
     QSettings *conf = StelApp::getInstance().getSettings();
-    conf->beginGroup("Planes");
+    conf->beginGroup(QStringLiteral("Planes"));
 
-    bsDataSource.setDatabaseEnabled(conf->value("use_db", false).toBool());
-    bsDataSource.setSocketEnabled(conf->value("use_bs", false).toBool());
+    bsDataSource.setDatabaseEnabled(conf->value(QStringLiteral("use_db"), false).toBool());
+    bsDataSource.setSocketEnabled(conf->value(QStringLiteral("use_bs"), false).toBool());
 
-    dbc.type = conf->value("db_type", "QMYSQL").toString();
-    dbc.host = conf->value("db_host", "").toString();
-    dbc.port = conf->value("db_port", 3306).toInt();
-    dbc.user = conf->value("db_user", "").toString();
-    dbc.pass = conf->value("db_pass", "").toString();
-    dbc.name = conf->value("db_name", "").toString();
+    dbc.type = conf->value(QStringLiteral("db_type"), QStringLiteral("QMYSQL")).toString();
+    dbc.host = conf->value(QStringLiteral("db_host"), QStringLiteral("")).toString();
+    dbc.port = conf->value(QStringLiteral("db_port"), 3306).toInt();
+    dbc.user = conf->value(QStringLiteral("db_user"), QStringLiteral("")).toString();
+    dbc.pass = conf->value(QStringLiteral("db_pass"), QStringLiteral("")).toString();
+    dbc.name = conf->value(QStringLiteral("db_name"), QStringLiteral("")).toString();
 
-    flightMgr.setInterpEnabled(conf->value("use_interp", true).toBool());
-    flightMgr.setLabelsVisible(conf->value("show_labels", true).toBool());
-    flightMgr.setPathDrawMode(static_cast<Flight::PathDrawMode>(conf->value("show_trails", 1).toUInt()));
-    flightMgr.setPathColourMode(static_cast<Flight::PathColour>(conf->value("trail_col", 0).toUInt()));
+    flightMgr.setInterpEnabled(conf->value(QStringLiteral("use_interp"), true).toBool());
+    flightMgr.setLabelsVisible(conf->value(QStringLiteral("show_labels"), true).toBool());
+    flightMgr.setPathDrawMode(static_cast<Flight::PathDrawMode>(conf->value(QStringLiteral("show_trails"), 1).toUInt()));
+    flightMgr.setPathColourMode(static_cast<Flight::PathColour>(conf->value(QStringLiteral("trail_col"), 0).toUInt()));
 
-    Flight::setMaxVertRate(conf->value("max_vert_rate", 50).toDouble());
-    Flight::setMinVertRate(conf->value("min_vert_rate", -50).toDouble());
-    Flight::setMaxHeight(conf->value("max_height", 20000).toDouble());
-    Flight::setMinHeight(conf->value("min_height", 0).toDouble());
-    Flight::setMaxVelocity(conf->value("max_velocity", 500).toDouble());
-    Flight::setMinVelocity(conf->value("min_velocity", 0).toDouble());
+    Flight::setMaxVertRate(conf->value(QStringLiteral("max_vert_rate"), 50).toDouble());
+    Flight::setMinVertRate(conf->value(QStringLiteral("min_vert_rate"), -50).toDouble());
+    Flight::setMaxHeight(conf->value(QStringLiteral("max_height"), 20000).toDouble());
+    Flight::setMinHeight(conf->value(QStringLiteral("min_height"), 0).toDouble());
+    Flight::setMaxVelocity(conf->value(QStringLiteral("max_velocity"), 500).toDouble());
+    Flight::setMinVelocity(conf->value(QStringLiteral("min_velocity"), 0).toDouble());
 
-    bsHost = conf->value("bs_host", "localhost").toString();
-    bsPort = conf->value("bs_port", 30003).toUInt();
-    bsDataSource.setDumpOldFlights(conf->value("bs_use_db", false).toBool());
+    bsHost = conf->value(QStringLiteral("bs_host"), QStringLiteral("localhost")).toString();
+    bsPort = conf->value(QStringLiteral("bs_port"), 30003).toUInt();
+    bsDataSource.setDumpOldFlights(conf->value(QStringLiteral("bs_use_db"), false).toBool());
 
-    connectOnStartup = conf->value("connect_on_startup", false).toBool();
+    connectOnStartup = conf->value(QStringLiteral("connect_on_startup"), false).toBool();
 
     conf->endGroup();
 }
@@ -221,35 +220,35 @@ void Planes::loadSettings()
 void Planes::saveSettings()
 {
     QSettings *conf = StelApp::getInstance().getSettings();
-    conf->beginGroup("Planes");
+    conf->beginGroup(QStringLiteral("Planes"));
 
-    conf->setValue("use_db", bsDataSource.isDatabaseEnabled());
-    conf->setValue("use_bs", bsDataSource.isSocketEnabled());
+    conf->setValue(QStringLiteral("use_db"), bsDataSource.isDatabaseEnabled());
+    conf->setValue(QStringLiteral("use_bs"), bsDataSource.isSocketEnabled());
 
-    conf->setValue("db_type", dbc.type);
-    conf->setValue("db_host", dbc.host);
-    conf->setValue("db_port", dbc.port);
-    conf->setValue("db_user", dbc.user);
-    conf->setValue("db_pass", dbc.pass);
-    conf->setValue("db_name", dbc.name);
+    conf->setValue(QStringLiteral("db_type"), dbc.type);
+    conf->setValue(QStringLiteral("db_host"), dbc.host);
+    conf->setValue(QStringLiteral("db_port"), dbc.port);
+    conf->setValue(QStringLiteral("db_user"), dbc.user);
+    conf->setValue(QStringLiteral("db_pass"), dbc.pass);
+    conf->setValue(QStringLiteral("db_name"), dbc.name);
 
-    conf->setValue("use_interp", flightMgr.isInterpEnabled());
-    conf->setValue("show_labels", flightMgr.isLabelsVisible());
-    conf->setValue("show_trails", static_cast<uint>(flightMgr.getPathDrawMode()));
-    conf->setValue("trail_col", static_cast<uint>(flightMgr.getPathColourMode()));
+    conf->setValue(QStringLiteral("use_interp"), flightMgr.isInterpEnabled());
+    conf->setValue(QStringLiteral("show_labels"), flightMgr.isLabelsVisible());
+    conf->setValue(QStringLiteral("show_trails"), static_cast<uint>(flightMgr.getPathDrawMode()));
+    conf->setValue(QStringLiteral("trail_col"), static_cast<uint>(flightMgr.getPathColourMode()));
 
-    conf->setValue("max_vert_rate", Flight::getMaxVertRate());
-    conf->setValue("min_vert_rate", Flight::getMinVertRate());
-    conf->setValue("max_height", Flight::getMaxHeight());
-    conf->setValue("min_height", Flight::getMinHeight());
-    conf->setValue("max_velocity", Flight::getMaxVelocity());
-    conf->setValue("min_velocity", Flight::getMinVelocity());
+    conf->setValue(QStringLiteral("max_vert_rate"), Flight::getMaxVertRate());
+    conf->setValue(QStringLiteral("min_vert_rate"), Flight::getMinVertRate());
+    conf->setValue(QStringLiteral("max_height"), Flight::getMaxHeight());
+    conf->setValue(QStringLiteral("min_height"), Flight::getMinHeight());
+    conf->setValue(QStringLiteral("max_velocity"), Flight::getMaxVelocity());
+    conf->setValue(QStringLiteral("min_velocity"), Flight::getMinVelocity());
 
-    conf->setValue("bs_host", bsHost);
-    conf->setValue("bs_port", bsPort);
-    conf->setValue("bs_use_db", bsDataSource.isDumpOldFlightsEnabled());
+    conf->setValue(QStringLiteral("bs_host"), bsHost);
+    conf->setValue(QStringLiteral("bs_port"), bsPort);
+    conf->setValue(QStringLiteral("bs_use_db"), bsDataSource.isDumpOldFlightsEnabled());
 
-    conf->setValue("connect_on_startup", connectOnStartup);
+    conf->setValue(QStringLiteral("connect_on_startup"), connectOnStartup);
 
     conf->endGroup();
 }
@@ -292,21 +291,19 @@ void Planes::setConnectOnStartup(bool value)
 
 StelModule *PlanesStelPluginInterface::getStelModule() const
 {
-    qDebug() << "getStelModule() Planes";
     return new Planes();
 }
 
 StelPluginInfo PlanesStelPluginInterface::getPluginInfo() const
 {
-    qDebug() << "getPluginInfo() Planes";
     // Allow to load the resources when used as a static plugin
     Q_INIT_RESOURCE(Planes);
 
     StelPluginInfo info;
-    info.id = "Planes";
+    info.id = QStringLiteral("Planes");
     info.displayedName = N_("Planes");
-    info.authors = "Felix Zeltner";
-    info.contact = "";
-    info.description = N_("Display ADS-B plane tracking data");
+    info.authors = N_("Felix Zeltner");
+    info.contact = QStringLiteral("");
+    info.description = N_("Display flight trajectories from ADS-B tracking data.");
     return info;
 }

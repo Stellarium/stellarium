@@ -25,10 +25,16 @@
 #include <QtCore>
 
 
+//! @class FlightDataSource
+//! Abstract class that is the base class for all
+//! data source implementations
 class FlightDataSource : public QObject
 {
     Q_OBJECT
 public:
+    //! Construct a FlightDataSource object that calls the updateRelevantFlights() function
+    //! every updateInterval seconds.
+    //! @param updateInterval update rate
     FlightDataSource(double updateInterval)
     {
         this->updateInterval = updateInterval;
@@ -62,9 +68,9 @@ public:
     virtual void deinit() = 0;
 
 protected:
-    double updateInterval;
-    double time;
-    double lastUpdate;
+    double updateInterval; //!< update interval
+    double time; //< Time counter for timing update calls
+    double lastUpdate; //!< last time updateRelevantFlights() was called
 };
 
 #endif // FLIGHTDATASOURCE_HPP

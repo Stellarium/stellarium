@@ -25,6 +25,9 @@
 #include "DBCredentials.hpp"
 #include <QtCore>
 
+//! @struct FlightID
+//! Combines mode s address and callsign into key
+//! Can be passed on signal/slot connections
 typedef struct flight_id_s
 {
     QString mode_s;
@@ -37,6 +40,9 @@ Q_DECLARE_METATYPE(QList<ADSBFrame>)
 
 class DatabaseWorker;
 
+//! @class DatabaseDataSource
+//! Unused now, functionality rolled into BSDataSource
+//! @see BSDataSource
 class DatabaseDataSource : public FlightDataSource
 {
     Q_OBJECT

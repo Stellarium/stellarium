@@ -34,8 +34,6 @@ FlightMgr::FlightMgr(QObject *parent) :
     earth = GETSTELMODULE(SolarSystem)->getEarth();
     texPointer = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/pointeur5.png");
     Flight::updateObserverPos(StelApp::getInstance().getCore()->getCurrentLocation());
-    //flights.append(FlightP(new Flight("3C6514")));
-    //parseBaseStationRecording("20131114-114822.bst");
     this->connect(GETSTELMODULE(StelObjectMgr), SIGNAL(selectedObjectChanged(StelModule::StelModuleSelectAction)), SLOT(selectedObjectChanged()));
     dataSource = NULL;
 }
@@ -81,7 +79,7 @@ void FlightMgr::drawPointer(StelCore *core, StelPainter &painter)
 {
     const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
 
-    const QList<StelObjectP> newSelected = GETSTELMODULE(StelObjectMgr)->getSelectedObject("Flight");
+    const QList<StelObjectP> newSelected = GETSTELMODULE(StelObjectMgr)->getSelectedObject(QStringLiteral("Flight"));
     if (!newSelected.empty())
     {
         const StelObjectP obj = newSelected[0];
@@ -92,7 +90,6 @@ void FlightMgr::drawPointer(StelCore *core, StelPainter &painter)
         // Compute 2D pos and return if outside screen
         if (!prj->project(pos, screenpos) || !flight->isVisible())
             return;
-//        glColor3f(0.4f,0.5f,0.8f);
         texPointer->bind();
 
         glEnable(GL_TEXTURE_2D);
@@ -258,7 +255,7 @@ void FlightMgr::selectedObjectChanged()
 {
     qDebug() << "selectedObjectChanged()";
     if (GETSTELMODULE(StelObjectMgr)->getFlagSelectedObjectPointer()) {
-        const QList<StelObjectP> newSelected = GETSTELMODULE(StelObjectMgr)->getSelectedObject("Flight");
+        const QList<StelObjectP> newSelected = GETSTELMODULE(StelObjectMgr)->getSelectedObject(QStringLiteral("Flight"));
         if (!newSelected.empty()) {
             const StelObjectP obj = newSelected[0];
             qDebug() << obj->getType();

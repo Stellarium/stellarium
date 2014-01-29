@@ -35,7 +35,6 @@ Q_DECLARE_METATYPE(DBCredentials)
 //! @class Planes
 //! This class is the entry point for the plugin.
 //! It handles the integration with Stellarium.
-//! @author Felix Zeltner
 class Planes : public StelObjectModule
 {
     Q_OBJECT
@@ -46,7 +45,8 @@ public:
     virtual ~Planes();
 
     ///////////////////////////////////////////////////////////////////////////
-    // Methods defined in the StelModule class
+    //!@{
+    //! Methods defined in the StelModule class
     void init();
     void deinit();
     void update(double deltaTime);
@@ -56,10 +56,12 @@ public:
     void handleMouseClicks(class QMouseEvent* event);
     bool handleMouseMoves(int x, int y, Qt::MouseButtons b);
     bool configureGui(bool show = true);
+    //!@}
 
     ////////////////////////////////////////////////////////////////////////////
-    // Methods defined in StelObjectModule
-    // Forward requests to FlightMgr
+    //!@{
+    //! Methods defined in StelObjectModule
+    //! Forward requests to FlightMgr
     QList<StelObjectP> searchAround(const Vec3d &v, double limitFov, const StelCore *core) const
     {
         return flightMgr.searchAround(v, limitFov , core);
@@ -89,90 +91,133 @@ public:
     {
         return flightMgr.listAllObjects(inEnglish);
     }
+    //!@}
 
+    //! Return the name of this StelObject.
+    //! Name is the class name.
     QString getName() const
     {
-        return "Planes";
+        return QStringLiteral("Planes");
     }
 
-    bool isEnabled() const {return displayFader;}
+    //! Is the plugin enabled?
+    bool isEnabled() const
+    {
+        return displayFader;
+    }
 
+    //! Load settings from the stellarium config file
     void loadSettings();
+
+    //! Save the settings to the stellarium config file
     void saveSettings();
 
+    //! Is the database source enabled?
     bool isUsingDB() const
     {
         return bsDataSource.isDatabaseEnabled();
     }
+
+    //! Is the BaseStation port source enabled?
     bool isUsingBS() const
     {
         return bsDataSource.isSocketEnabled();
     }
+
+    //! Is saving of Flight objects received from the data port enabled?
     bool isDumpingOldFlights() const
     {
         return bsDataSource.isDumpOldFlightsEnabled();
     }
+
+    //! Get the credentials to connect to the database
     DBCredentials getDBCreds() const
     {
         return dbc;
     }
+
+    //! Get the FlightMgr object
     const FlightMgr *getFlightMgr() const
     {
         return &flightMgr;
     }
+
+    //! Get the hostname for the BaseStation data port
     QString getBSHost() const
     {
         return bsHost;
     }
+
+    //! Get the port for the BaseStation data port
     quint16 getBSPort() const
     {
         return bsPort;
     }
+
+    //! Should we autoconnect on startup?
     bool isConnectOnStartupEnabled() const;
 
 public slots:
+    //! Turn this plugin on or off
     void enablePlanes(bool b);
+
+    //! The user changed the observer position in stellarium
     void updateLocation(StelLocation loc)
     {
         Flight::updateObserverPos(loc);
     }
 
+    //! User updated db credentials in the settings
     void setDBCreds(DBCredentials creds);
+
+    //! User wants to open a BaseStation recording file
+    //! @param file the filename and path to the file
     void openBSRecording(QString file);
+
+    //! The user wants to connect to the database and/or the data port
     void connectDBBS();
+
+    //! User changed the data port hostname
     void setBSHost(QString host)
     {
         bsHost = host;
     }
+
+    //! User changed the data port port
     void setBSPort(quint16 port)
     {
         bsPort = port;
     }
+
+    //! User changed connect on startup setting
     void setConnectOnStartup(bool value);
 
 private:
-    static StelTextureSP planeTexture;
-    FlightMgr flightMgr;
-    LinearFader displayFader;
+    static StelTextureSP planeTexture; //!< the texture used for drawing the plane icons
+    FlightMgr flightMgr; //!< The FlightMgr
+    LinearFader displayFader; //!< Fader to fade in and out on enable/disable
 
-    PlanesDialog *settingsDialog;
+    PlanesDialog *settingsDialog; //!< Configuration window
 
-    BSRecordingDataSource bsRecordingDataSource;
-    BSDataSource bsDataSource;
+    BSRecordingDataSource bsRecordingDataSource; //!< data source for loading files
+    BSDataSource bsDataSource; //!< data source for database and data port
 
-    StelButton *settingsButton;
-    StelButton *pathsButton;
-    StelButton *enableButton;
+    StelButton *settingsButton; //!< Button to show settings
+    StelButton *enableButton; //!< Button to enable/disable plugin
+
+    //!@{
+    //! Icons for the buttons
     QPixmap *onPix;
     QPixmap *offPix;
     QPixmap *glowPix;
     QPixmap *onSettingsPix;
     QPixmap *offSettingsPix;
+    //!@}
 
-    DBCredentials dbc;
-    QString bsHost;
-    quint16 bsPort;
-    bool connectOnStartup;
+    DBCredentials dbc; //!< Database credentials
+    QString bsHost; //!< data port hostname
+    quint16 bsPort; //!< data port port
+    bool connectOnStartup; //!< connect on startup setting
 };
 
 
@@ -180,6 +225,7 @@ private:
 #include <QObject>
 #include "StelPluginInterface.hpp"
 
+//! @class PlanesStelPluginInterface
 //! This class is used by Qt to manage a plug-in interface
 class PlanesStelPluginInterface : public QObject, public StelPluginInterface
 {

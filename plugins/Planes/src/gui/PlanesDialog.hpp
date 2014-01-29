@@ -27,6 +27,8 @@ namespace Ui {
 class PlanesDialog;
 }
 
+//! @class PlanesDialog
+//! Provides the user with a GUI to customise the plugin behaviour.
 class PlanesDialog : public StelDialog
 {
     Q_OBJECT
@@ -37,10 +39,16 @@ public:
 
 public slots:
     void retranslate();
+
+    //! Display status string for database
     void setDBStatus(QString status);
+
+    //! Display status string for data port
     void setBSStatus(QString status);
 
 signals:
+    //!@{
+    //! Signals emitted, when settings change or buttons are clicked
     void changePathColourMode(Flight::PathColour mode);
     void changePathDrawModw(Flight::PathDrawMode mode);
     void showLabels(bool enabled);
@@ -57,11 +65,14 @@ signals:
     void connectBS();
     void disconnectBS();
     void connectOnStartup(bool enabled);
+    //!@}
 
 protected:
+    //! Prepare the dialot for first time useage
     void createDialogContent();
 
 private:
+    //! Toggle certain settings that depend on other settings being enabled
     void updateDBFields();
 
     Ui::PlanesDialog *ui;
@@ -69,6 +80,9 @@ private:
     QString cachedBSStatus;
 
 private slots:
+    //!@{
+    //! Slots to connect UI elements to, handle events such as button clicks and
+    //! value changes.
     void solidColClicked()
     {
         emit changePathColourMode(Flight::SolidColour);
@@ -160,6 +174,7 @@ private slots:
     }
     void useBSClicked();
     void connectOnStartupClicked();
+    //!@}
 };
 
 #endif // PLANESDIALOG_HPP

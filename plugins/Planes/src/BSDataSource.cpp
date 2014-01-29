@@ -20,6 +20,7 @@
 #include "StelUtils.hpp"
 #include "StelApp.hpp"
 #include "StelModuleMgr.hpp"
+#include "StelTranslator.hpp"
 #include "Planes.hpp"
 
 const int typePos = 0;
@@ -52,8 +53,8 @@ const int onGroundPos = 21;
 const qint64 MAX_TIME_NO_UPDATE = 1000 * 60 * .5; // .5 min
 const double MAX_JD_DIFF = .5 / (24.0 * 60); // .5 min
 #else
-const qint64 MAX_TIME_NO_UPDATE = 1000 * 60 * 10; // 10 min
-const double MAX_JD_DIFF = 10.0 / (24.0 * 60); // 10 min
+const qint64 MAX_TIME_NO_UPDATE = 1000 * 60 * 10; //!< time after which to assume no more data is gonna arrive on the TCP socket for a flight (10 min)
+const double MAX_JD_DIFF = 10.0 / (24.0 * 60); //!< Remove database flights from memory if they are older than this (10 min)
 #endif
 
 
@@ -151,6 +152,11 @@ void BSDataSource::deinit()
     isSocketConnected = false;
 }
 
+bool BSDataSource::isDatabaseEnabled() const
+{
+    return useDatabase;
+}
+
 void BSDataSource::connectClicked(QString host, quint16 port, DBCredentials creds)
 {
     if (useSocket && !isSocketConnected) {
@@ -216,6 +222,11 @@ void BSDataSource::readData()
     readBuffer = currentReadBuffer.mid(startPos);
 }
 
+void BSDataSource::setDatabaseEnabled(bool enabled)
+{
+    useDatabase = enabled;
+}
+
 void BSDataSource::error()
 {
     qDebug() << socket.errorString();
@@ -225,22 +236,23 @@ void BSDataSource::error()
 void BSDataSource::connected()
 {
     isSocketConnected = true;
-    emit bsStatus("Connected");
+    emit bsStatus(q_("Connected"));
 }
 
 void BSDataSource::disconnected()
 {
     isSocketConnected = false;
-    emit bsStatus("Disconnected");
+    emit bsStatus(q_("Disconnected"));
 }
 
 void BSDataSource::dbConnected(bool connected, QString error)
 {
     isDbConnected = connected;
     if (connected) {
-        emit dbStatus("Connected");
+        emit dbStatus(q_("Connected"));
     } else {
-        emit dbStatus(QString("Connection failed: ") + error);
+        // TRANSLATORS: Connecting to the database failed because: <error>
+        emit dbStatus(QString(q_("Connection failed: ")) + error);
     }
 }
 
@@ -248,9 +260,9 @@ void BSDataSource::dbDisconnected(bool disconnected)
 {
     isDbConnected = !disconnected;
     if (disconnected) {
-        emit dbStatus("Disconnected");
+        emit dbStatus(q_("Disconnected"));
     } else {
-        emit dbStatus("Disconnect failed");
+        emit dbStatus(q_("Disconnect failed"));
     }
 }
 
@@ -291,10 +303,11 @@ void BSDataSource::setFlightList(QList<FlightID> ids)
 void BSDataSource::parseMsg(QByteArray &buf, int start, int end)
 {
     static QList<ADSBFrame> emptyFrameList;
-    static QString n_a = "N/A";
+    // TRANSLATORS: No data available
+    static QString n_a = q_("N/A");
     QList<QByteArray> line = buf.mid(start, end - start).split(',');
     if (line.size() < 2) {
-        if (start != end) { // don't be quite so verbose
+        if (start != end) { // don't be quite so verbose, don't warn on empty lines
             qDebug() << "invalid line start " << start << " end " << end << " " << buf.mid(start, end - start);
         }
         return;
@@ -344,7 +357,7 @@ void BSDataSource::parseMsg(QByteArray &buf, int start, int end)
             QString id = QString::number(hexid.toInt(&ok, 16));
             flights.insert(flightId, FlightP(new Flight(emptyFrameList, id, hexid, callsign, n_a)));
         }
-    } else if (line.at(typePos) == "MSG") {
+    } else if (line.at(typePos) == QStringLiteral("MSG")) {
         // MSG message
 #ifdef BS_PARSE_DEBUG_OUTPUTS
         qDebug() << "MSG msg";
@@ -358,7 +371,7 @@ void BSDataSource::parseMsg(QByteArray &buf, int start, int end)
             // Wait for ID before collecting data
             return;
         }
-        QDateTime t = QDateTime::fromString(QString("%1 %2").arg(QString(line.at(dateMsgGenPos)), QString(line.at(timeMsgGenPos))), "yyyy/MM/dd hh:mm:ss.zzz");
+        QDateTime t = QDateTime::fromString(QString(QStringLiteral("%1 %2")).arg(QString(line.at(dateMsgGenPos)), QString(line.at(timeMsgGenPos))), QStringLiteral("yyyy/MM/dd hh:mm:ss.zzz"));
         t.setTimeSpec(Qt::LocalTime);
         double jdate = StelUtils::qDateTimeToJd(t.toUTC());
         if (msgType == IDMessage) {

@@ -53,25 +53,25 @@ void DatabaseWorker::connectDB(DBCredentials creds)
     dbConnected = db.open();
     emit connected(dbConnected, db.lastError().text());
     qDebug() << "Database connected " << dbConnected << " last error: " << db.lastError();
-    if (creds.type == "QSQLITE") {
+    if (creds.type == QStringLiteral("QSQLITE")) {
         QStringList tables = db.tables();
-        if (!tables.contains("flights") || !tables.contains("adsb")) {
+        if (!tables.contains(QLatin1String("flights")) || !tables.contains(QStringLiteral("adsb"))) {
             qDebug() << "creating tables";
             QSqlQuery qry;
-            qry.prepare("CREATE TABLE IF NOT EXISTS `flights` ("
+            qry.prepare(QStringLiteral("CREATE TABLE IF NOT EXISTS `flights` ("
                         "  `mode_s` int(10) NOT NULL,"
                         "  `callsign` varchar(45) NOT NULL,"
                         "  `mode_s_hex` varchar(45) DEFAULT NULL,"
                         "  `country` varchar(45) DEFAULT NULL,"
                         " CONSTRAINT `pk` PRIMARY KEY (`mode_s`, `callsign`)"
-                        ");");
+                        ");"));
             qry.exec();
             if (qry.lastError().type() != QSqlError::NoError) {
                 qDebug() << qry.lastError().text();
             } else {
                 qDebug() << "success query 1";
             }
-            qry.prepare("CREATE TABLE IF NOT EXISTS `adsb` ("
+            qry.prepare(QStringLiteral("CREATE TABLE IF NOT EXISTS `adsb` ("
                         "  `jdate` double NOT NULL,"
                         "  `flights_mode_s` int(10) NOT NULL,"
                         "  `flights_callsign` varchar(45) NOT NULL,"
@@ -84,7 +84,7 @@ void DatabaseWorker::connectDB(DBCredentials creds)
                         "  `ground_track` double DEFAULT NULL,"
                         "  CONSTRAINT `mode_s` FOREIGN KEY (`flights_mode_s`) REFERENCES `flights` (`mode_s`) ON DELETE NO ACTION ON UPDATE NO ACTION,"
                         "  CONSTRAINT `callsign` FOREIGN KEY (`flights_callsign`) REFERENCES `flights` (`callsign`) ON DELETE NO ACTION ON UPDATE NO ACTION"
-                        ");");
+                        ");"));
             qry.exec();
             if (qry.lastError().type() != QSqlError::NoError) {
                 qDebug() << qry.lastError().text();
@@ -113,13 +113,13 @@ void DatabaseWorker::getFlightList(double jd, double speed)
     // Query here
     QSqlQuery qry;
     QList<FlightID> ids;
-    qry.prepare("SELECT DISTINCT adsb.flights_mode_s, adsb.flights_callsign FROM adsb WHERE adsb.jdate >= :minjdate AND adsb.jdate <= :maxjdate");
+    qry.prepare(QStringLiteral("SELECT DISTINCT adsb.flights_mode_s, adsb.flights_callsign FROM adsb WHERE adsb.jdate >= :minjdate AND adsb.jdate <= :maxjdate"));
     if (speed > 0) {
-        qry.bindValue(":minjdate", jd);
-        qry.bindValue(":maxjdate", jd + 10 * speed);
+        qry.bindValue(QStringLiteral(":minjdate"), jd);
+        qry.bindValue(QStringLiteral(":maxjdate"), jd + 10 * speed);
     } else {
-        qry.bindValue(":maxjdate", jd);
-        qry.bindValue(":minjdate", jd + 10 * speed);
+        qry.bindValue(QStringLiteral(":maxjdate"), jd);
+        qry.bindValue(QStringLiteral(":minjdate"), jd + 10 * speed);
     }
     qry.exec();
     if (qry.lastError().type() != QSqlError::NoError) {
@@ -146,9 +146,9 @@ void DatabaseWorker::getFlight(QString modeS, QString callsign, double startTime
     //qDebug() << "Querying " << modeS << " " << callsign;
     // Query flight
     QSqlQuery qry;
-    qry.prepare("SELECT flights.mode_s_hex, flights.country FROM flights WHERE flights.mode_s = :mode_s AND flights.callsign = :callsign");
-    qry.bindValue(":mode_s", modeS);
-    qry.bindValue(":callsign", callsign);
+    qry.prepare(QStringLiteral("SELECT flights.mode_s_hex, flights.country FROM flights WHERE flights.mode_s = :mode_s AND flights.callsign = :callsign"));
+    qry.bindValue(QStringLiteral(":mode_s"), modeS);
+    qry.bindValue(QStringLiteral(":callsign"), callsign);
     qry.exec();
     if (qry.lastError().type() != QSqlError::NoError) {
         qDebug() << qry.lastError().text();
@@ -161,21 +161,21 @@ void DatabaseWorker::getFlight(QString modeS, QString callsign, double startTime
         country = qry.value(1).toString();
         if (startTime > 0) {
             //						0					1						2						3					4
-            qry.prepare("SELECT adsb.jdate, adsb.on_ground, adsb.altitude_feet, adsb.latitude, adsb.longitude, "
+            qry.prepare(QStringLiteral("SELECT adsb.jdate, adsb.on_ground, adsb.altitude_feet, adsb.latitude, adsb.longitude, "
                         //		5									6								7
                         "adsb.vertical_rate_ft_min, adsb.ground_speed_knots, adsb.ground_track FROM adsb "
                         "WHERE adsb.flights_mode_s = :mode_s AND adsb.flights_callsign = :callsign "
-                        "AND adsb.jdate > :start_time ORDER BY adsb.jdate ASC");
-            qry.bindValue(":start_time", startTime);
+                        "AND adsb.jdate > :start_time ORDER BY adsb.jdate ASC"));
+            qry.bindValue(QStringLiteral(":start_time"), startTime);
         } else {
             //						0					1						2						3					4
-            qry.prepare("SELECT adsb.jdate, adsb.on_ground, adsb.altitude_feet, adsb.latitude, adsb.longitude, "
+            qry.prepare(QStringLiteral("SELECT adsb.jdate, adsb.on_ground, adsb.altitude_feet, adsb.latitude, adsb.longitude, "
                         //		5									6								7
                         "adsb.vertical_rate_ft_min, adsb.ground_speed_knots, adsb.ground_track FROM adsb "
-                        "WHERE adsb.flights_mode_s = :mode_s AND adsb.flights_callsign = :callsign ORDER BY adsb.jdate ASC");
+                        "WHERE adsb.flights_mode_s = :mode_s AND adsb.flights_callsign = :callsign ORDER BY adsb.jdate ASC"));
         }
-        qry.bindValue(":mode_s", modeS);
-        qry.bindValue(":callsign", callsign);
+        qry.bindValue(QStringLiteral(":mode_s"), modeS);
+        qry.bindValue(QStringLiteral(":callsign"), callsign);
         qry.exec();
         if (qry.lastError().type() != QSqlError::NoError) {
             qDebug() << qry.lastError().text();
