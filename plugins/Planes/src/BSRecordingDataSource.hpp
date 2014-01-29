@@ -27,51 +27,51 @@ Q_DECLARE_METATYPE(QList<FlightP>)
 
 class BSParser : public QObject
 {
-    Q_OBJECT
+	Q_OBJECT
 public:
-    BSParser() {}
-    ~BSParser() {}
-    
+	BSParser() {}
+	~BSParser() {}
+
 public slots:
-    void loadFile(QString filename);
-    
+	void loadFile(QString filename);
+
 signals:
-    void done(QList<FlightP> flights);
-    void progressUpdate(qint64 done, qint64 total);
-    
+	void done(QList<FlightP> flights);
+	void progressChanged(qint64 done, qint64 total);
+
 private:
-    QList<FlightP> *results;
+	QList<FlightP> *results;
 };
 
 
 class BSRecordingDataSource : public FlightDataSource
 {
-    Q_OBJECT
+	Q_OBJECT
 public:
-    BSRecordingDataSource();
-    ~BSRecordingDataSource();
+	BSRecordingDataSource();
+	~BSRecordingDataSource();
 
-    QList<FlightP> *getRelevantFlights();
-    void updateRelevantFlights(double jd, double rate);
-    void init();
-    void deinit();
+	QList<FlightP> *getRelevantFlights();
+	void updateRelevantFlights(double jd, double rate);
+	void init();
+	void deinit();
 
-    void loadFile(QString filename);
+	void loadFile(QString filename);
 
 public slots:
-    void workerDone(QList<FlightP> result);
-    void progressUpdate(qint64 done, qint64 total);
+	void processResult(QList<FlightP> result);
+	void setProgress(qint64 done, qint64 total);
 
 signals:
-    void parseFile(QString filename);
+	void parseFileRequested(QString filename);
 
 private:
-    bool workerRunning;
-    QList<FlightP> flights; //<! Holds all flights parsed from the file
-    QList<FlightP> relevantFlights; //<! Holds the relevant flights
-    QThread *workerThread;
-    BSParser *worker;
-    StelProgressController *progressBar;
+	bool workerRunning;
+	QList<FlightP> flights; //<! Holds all flights parsed from the file
+	QList<FlightP> relevantFlights; //<! Holds the relevant flights
+	QThread *workerThread;
+	BSParser *worker;
+	StelProgressController *progressBar;
 };
 
 #endif // BSRECORDINGDATASOURCE_HPP

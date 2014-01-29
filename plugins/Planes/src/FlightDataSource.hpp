@@ -30,47 +30,48 @@
 //! data source implementations
 class FlightDataSource : public QObject
 {
-    Q_OBJECT
+	Q_OBJECT
 public:
-    //! Construct a FlightDataSource object that calls the updateRelevantFlights() function
-    //! every updateInterval seconds.
-    //! @param updateInterval update rate
-    FlightDataSource(double updateInterval)
-    {
-        this->updateInterval = updateInterval;
-        time = 0;
-        lastUpdate = 0;
-    }
+	//! Construct a FlightDataSource object that calls the updateRelevantFlights() function
+	//! every updateInterval seconds.
+	//! @param updateInterval update rate
+	FlightDataSource(double updateInterval)
+	{
+		this->updateInterval = updateInterval;
+		time = 0;
+		lastUpdate = 0;
+	}
 
-    //! Return a list of flights that match the current time
-    //! and should therefor be displayed.
-    virtual QList<FlightP> *getRelevantFlights() = 0;
+	//! Return a list of flights that match the current time
+	//! and should therefor be displayed.
+	virtual QList<FlightP> *getRelevantFlights() = 0;
 
-    //! Load Flight objects relevant for time jd and unload old ones
-    //! @param jd the current time
-    //! @param fwd is the time moving forward or backward
-    virtual void updateRelevantFlights(double jd, double rate) = 0;
+	//! Load Flight objects relevant for time jd and unload old ones
+	//! @param jd the current time
+	//! @param fwd is the time moving forward or backward
+	virtual void updateRelevantFlights(double jd, double rate) = 0;
 
-    //! Called from FlightMgr::update()
-    void update(double deltaTime, double jd, double rate)
-    {
-        time +=  deltaTime;
-        if (time - lastUpdate > updateInterval) {
-            lastUpdate = time;
-            updateRelevantFlights(jd, rate);
-        }
-    }
+	//! Called from FlightMgr::update()
+	void update(double deltaTime, double jd, double rate)
+	{
+		time +=  deltaTime;
+		if (time - lastUpdate > updateInterval)
+		{
+			lastUpdate = time;
+			updateRelevantFlights(jd, rate);
+		}
+	}
 
-    //! Gets called before this data source is being used.
-    virtual void init() = 0;
+	//! Gets called before this data source is being used.
+	virtual void init() = 0;
 
-    //! Gets called when this data source stops being in use.
-    virtual void deinit() = 0;
+	//! Gets called when this data source stops being in use.
+	virtual void deinit() = 0;
 
 protected:
-    double updateInterval; //!< update interval
-    double time; //< Time counter for timing update calls
-    double lastUpdate; //!< last time updateRelevantFlights() was called
+	double updateInterval; //!< update interval
+	double time; //< Time counter for timing update calls
+	double lastUpdate; //!< last time updateRelevantFlights() was called
 };
 
 #endif // FLIGHTDATASOURCE_HPP

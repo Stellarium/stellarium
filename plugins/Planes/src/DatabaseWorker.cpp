@@ -23,194 +23,212 @@
 #include <QSqlError>
 
 DatabaseWorker::DatabaseWorker(QObject *parent) :
-    QObject(parent)
+	QObject(parent)
 {
-    dbConnected = false;
+	dbConnected = false;
 }
 
 void DatabaseWorker::connectDB(DBCredentials creds)
 {
-    qDebug() << "DatabaseWorker::connectDB()";
-    QSqlDatabase oldDb = QSqlDatabase::database();
-    if (oldDb.isValid()) {
-        oldDb.close();
-    }
-    QSqlDatabase db = QSqlDatabase::addDatabase(creds.type);
-    /*
-    if (!db.isValid()) {
-        emit connected(false);
-        qDebug() << creds.type << " is not available or could not be loaded.";
-        qDebug() << db.lastError().text();
-        qDebug() << "Available drivers: " << db.drivers();
-        return;
-    }
-    */
-    db.setHostName(creds.host);
-    db.setPort(creds.port);
-    db.setUserName(creds.user);
-    db.setPassword(creds.pass);
-    db.setDatabaseName(creds.name);
-    dbConnected = db.open();
-    emit connected(dbConnected, db.lastError().text());
-    qDebug() << "Database connected " << dbConnected << " last error: " << db.lastError();
-    if (creds.type == QStringLiteral("QSQLITE")) {
-        QStringList tables = db.tables();
-        if (!tables.contains(QLatin1String("flights")) || !tables.contains(QStringLiteral("adsb"))) {
-            qDebug() << "creating tables";
-            QSqlQuery qry;
-            qry.prepare(QStringLiteral("CREATE TABLE IF NOT EXISTS `flights` ("
-                        "  `mode_s` int(10) NOT NULL,"
-                        "  `callsign` varchar(45) NOT NULL,"
-                        "  `mode_s_hex` varchar(45) DEFAULT NULL,"
-                        "  `country` varchar(45) DEFAULT NULL,"
-                        " CONSTRAINT `pk` PRIMARY KEY (`mode_s`, `callsign`)"
-                        ");"));
-            qry.exec();
-            if (qry.lastError().type() != QSqlError::NoError) {
-                qDebug() << qry.lastError().text();
-            } else {
-                qDebug() << "success query 1";
-            }
-            qry.prepare(QStringLiteral("CREATE TABLE IF NOT EXISTS `adsb` ("
-                        "  `jdate` double NOT NULL,"
-                        "  `flights_mode_s` int(10) NOT NULL,"
-                        "  `flights_callsign` varchar(45) NOT NULL,"
-                        "  `on_ground` tinyint(3) DEFAULT NULL,"
-                        "  `altitude_feet` int(11) DEFAULT NULL,"
-                        "  `latitude` double DEFAULT NULL,"
-                        "  `longitude` double DEFAULT NULL,"
-                        "  `vertical_rate_ft_min` int(11) DEFAULT NULL,"
-                        "  `ground_speed_knots` double DEFAULT NULL,"
-                        "  `ground_track` double DEFAULT NULL,"
-                        "  CONSTRAINT `mode_s` FOREIGN KEY (`flights_mode_s`) REFERENCES `flights` (`mode_s`) ON DELETE NO ACTION ON UPDATE NO ACTION,"
-                        "  CONSTRAINT `callsign` FOREIGN KEY (`flights_callsign`) REFERENCES `flights` (`callsign`) ON DELETE NO ACTION ON UPDATE NO ACTION"
-                        ");"));
-            qry.exec();
-            if (qry.lastError().type() != QSqlError::NoError) {
-                qDebug() << qry.lastError().text();
-            } else {
-                qDebug() << "success query 2";
-            }
-        }
-    }
+	qDebug() << "DatabaseWorker::connectDB()";
+	QSqlDatabase oldDb = QSqlDatabase::database();
+	if (oldDb.isValid())
+	{
+		oldDb.close();
+	}
+	QSqlDatabase db = QSqlDatabase::addDatabase(creds.type);
+	db.setHostName(creds.host);
+	db.setPort(creds.port);
+	db.setUserName(creds.user);
+	db.setPassword(creds.pass);
+	db.setDatabaseName(creds.name);
+	dbConnected = db.open();
+	emit connected(dbConnected, db.lastError().text());
+	qDebug() << "Database connected " << dbConnected << " last error: " << db.lastError();
+	if (creds.type == QStringLiteral("QSQLITE"))
+	{
+		QStringList tables = db.tables();
+		if (!tables.contains(QLatin1String("flights")) || !tables.contains(QStringLiteral("adsb")))
+		{
+			qDebug() << "creating tables";
+			QSqlQuery qry;
+			qry.prepare(QStringLiteral("CREATE TABLE IF NOT EXISTS `flights` ("
+									   "  `mode_s` int(10) NOT NULL,"
+									   "  `callsign` varchar(45) NOT NULL,"
+									   "  `mode_s_hex` varchar(45) DEFAULT NULL,"
+									   "  `country` varchar(45) DEFAULT NULL,"
+									   " CONSTRAINT `pk` PRIMARY KEY (`mode_s`, `callsign`)"
+									   ");"));
+			qry.exec();
+			if (qry.lastError().type() != QSqlError::NoError)
+			{
+				qDebug() << qry.lastError().text();
+			}
+			else
+			{
+				qDebug() << "success query 1";
+			}
+			qry.prepare(QStringLiteral("CREATE TABLE IF NOT EXISTS `adsb` ("
+									   "  `jdate` double NOT NULL,"
+									   "  `flights_mode_s` int(10) NOT NULL,"
+									   "  `flights_callsign` varchar(45) NOT NULL,"
+									   "  `on_ground` tinyint(3) DEFAULT NULL,"
+									   "  `altitude_feet` int(11) DEFAULT NULL,"
+									   "  `latitude` double DEFAULT NULL,"
+									   "  `longitude` double DEFAULT NULL,"
+									   "  `vertical_rate_ft_min` int(11) DEFAULT NULL,"
+									   "  `ground_speed_knots` double DEFAULT NULL,"
+									   "  `ground_track` double DEFAULT NULL,"
+									   "  CONSTRAINT `mode_s` FOREIGN KEY (`flights_mode_s`) REFERENCES `flights` (`mode_s`) ON DELETE NO ACTION ON UPDATE NO ACTION,"
+									   "  CONSTRAINT `callsign` FOREIGN KEY (`flights_callsign`) REFERENCES `flights` (`callsign`) ON DELETE NO ACTION ON UPDATE NO ACTION"
+									   ");"));
+			qry.exec();
+			if (qry.lastError().type() != QSqlError::NoError)
+			{
+				qDebug() << qry.lastError().text();
+			}
+			else
+			{
+				qDebug() << "success query 2";
+			}
+		}
+	}
 }
 
 void DatabaseWorker::disconnectDB()
 {
-    QSqlDatabase db = QSqlDatabase::database();
-    if (db.isValid()) {
-        db.close();
-    }
-    dbConnected = false;
-    emit disconnected(true);
+	QSqlDatabase db = QSqlDatabase::database();
+	if (db.isValid())
+	{
+		db.close();
+	}
+	dbConnected = false;
+	emit disconnected(true);
 }
 
 void DatabaseWorker::getFlightList(double jd, double speed)
 {
-    if (!dbConnected) {
-        return;
-    }
-    // Query here
-    QSqlQuery qry;
-    QList<FlightID> ids;
-    qry.prepare(QStringLiteral("SELECT DISTINCT adsb.flights_mode_s, adsb.flights_callsign FROM adsb WHERE adsb.jdate >= :minjdate AND adsb.jdate <= :maxjdate"));
-    if (speed > 0) {
-        qry.bindValue(QStringLiteral(":minjdate"), jd);
-        qry.bindValue(QStringLiteral(":maxjdate"), jd + 10 * speed);
-    } else {
-        qry.bindValue(QStringLiteral(":maxjdate"), jd);
-        qry.bindValue(QStringLiteral(":minjdate"), jd + 10 * speed);
-    }
-    qry.exec();
-    if (qry.lastError().type() != QSqlError::NoError) {
-        qDebug() << qry.lastError().text();
-    }
-    while (qry.next()) {
-        FlightID f;
-        f.mode_s = qry.value(0).toString();
-        f.callsign = qry.value(1).toString();
-        f.key = f.mode_s + f.callsign;
-        ids.append(f);
-    }
-    if (ids.size() > 0) {
-        emit flightList(ids);
-    }
-    // emit flightlist
+	if (!dbConnected)
+	{
+		return;
+	}
+	// Query here
+	QSqlQuery qry;
+	QList<FlightID> ids;
+	qry.prepare(QStringLiteral("SELECT DISTINCT adsb.flights_mode_s, adsb.flights_callsign FROM adsb WHERE adsb.jdate >= :minjdate AND adsb.jdate <= :maxjdate"));
+	if (speed > 0)
+	{
+		qry.bindValue(QStringLiteral(":minjdate"), jd);
+		qry.bindValue(QStringLiteral(":maxjdate"), jd + 10 * speed);
+	}
+	else
+	{
+		qry.bindValue(QStringLiteral(":maxjdate"), jd);
+		qry.bindValue(QStringLiteral(":minjdate"), jd + 10 * speed);
+	}
+	qry.exec();
+	if (qry.lastError().type() != QSqlError::NoError)
+	{
+		qDebug() << qry.lastError().text();
+	}
+	while (qry.next())
+	{
+		FlightID f;
+		f.mode_s = qry.value(0).toString();
+		f.callsign = qry.value(1).toString();
+		f.key = f.mode_s + f.callsign;
+		ids.append(f);
+	}
+	if (ids.size() > 0)
+	{
+		emit flightListQueried(ids);
+	}
+	// emit flightlist
 }
 
 void DatabaseWorker::getFlight(QString modeS, QString callsign, double startTime)
 {
-    if (!dbConnected) {
-        return;
-    }
-    //qDebug() << "Querying " << modeS << " " << callsign;
-    // Query flight
-    QSqlQuery qry;
-    qry.prepare(QStringLiteral("SELECT flights.mode_s_hex, flights.country FROM flights WHERE flights.mode_s = :mode_s AND flights.callsign = :callsign"));
-    qry.bindValue(QStringLiteral(":mode_s"), modeS);
-    qry.bindValue(QStringLiteral(":callsign"), callsign);
-    qry.exec();
-    if (qry.lastError().type() != QSqlError::NoError) {
-        qDebug() << qry.lastError().text();
-    }
-    if (qry.next()) {
+	if (!dbConnected)
+	{
+		return;
+	}
+	//qDebug() << "Querying " << modeS << " " << callsign;
+	// Query flight
+	QSqlQuery qry;
+	qry.prepare(QStringLiteral("SELECT flights.mode_s_hex, flights.country FROM flights WHERE flights.mode_s = :mode_s AND flights.callsign = :callsign"));
+	qry.bindValue(QStringLiteral(":mode_s"), modeS);
+	qry.bindValue(QStringLiteral(":callsign"), callsign);
+	qry.exec();
+	if (qry.lastError().type() != QSqlError::NoError)
+	{
+		qDebug() << qry.lastError().text();
+	}
+	if (qry.next())
+	{
 		QString country;
 		QString modeSHex;
-        QList<ADSBFrame> data;
-        modeSHex = qry.value(0).toString();
-        country = qry.value(1).toString();
-        if (startTime > 0) {
-            //						0					1						2						3					4
-            qry.prepare(QStringLiteral("SELECT adsb.jdate, adsb.on_ground, adsb.altitude_feet, adsb.latitude, adsb.longitude, "
-                        //		5									6								7
-                        "adsb.vertical_rate_ft_min, adsb.ground_speed_knots, adsb.ground_track FROM adsb "
-                        "WHERE adsb.flights_mode_s = :mode_s AND adsb.flights_callsign = :callsign "
-                        "AND adsb.jdate > :start_time ORDER BY adsb.jdate ASC"));
-            qry.bindValue(QStringLiteral(":start_time"), startTime);
-        } else {
-            //						0					1						2						3					4
-            qry.prepare(QStringLiteral("SELECT adsb.jdate, adsb.on_ground, adsb.altitude_feet, adsb.latitude, adsb.longitude, "
-                        //		5									6								7
-                        "adsb.vertical_rate_ft_min, adsb.ground_speed_knots, adsb.ground_track FROM adsb "
-                        "WHERE adsb.flights_mode_s = :mode_s AND adsb.flights_callsign = :callsign ORDER BY adsb.jdate ASC"));
-        }
-        qry.bindValue(QStringLiteral(":mode_s"), modeS);
-        qry.bindValue(QStringLiteral(":callsign"), callsign);
-        qry.exec();
-        if (qry.lastError().type() != QSqlError::NoError) {
-            qDebug() << qry.lastError().text();
-        }
-        while(qry.next()) {
-            ADSBFrame f;
-            f.time = qry.value(0).toDouble();
-            f.onGround = qry.value(1).toBool();
-            f.altitude_feet = qry.value(2).toDouble();
-            f.latitude = qry.value(3).toDouble();
-            f.longitude = qry.value(4).toDouble();
-            f.vertical_rate_ft_min = qry.value(5).toDouble();
-            f.ground_speed_knots = qry.value(6).toDouble();
-            f.ground_track = qry.value(7).toDouble();
-            ADSBData::postProcessFrame(&f);
-            data.append(f);
-        }
-        // Sometimes we only get the same frame every time due to rounding errors with >
-        if (data.size() > 1) {
-            emit flight(data, modeS, modeSHex, callsign, country);
-        }
-    }
+		QList<ADSBFrame> data;
+		modeSHex = qry.value(0).toString();
+		country = qry.value(1).toString();
+		if (startTime > 0)
+		{
+			//						0					1						2						3					4
+			qry.prepare(QStringLiteral("SELECT adsb.jdate, adsb.on_ground, adsb.altitude_feet, adsb.latitude, adsb.longitude, "
+									   //		5									6								7
+									   "adsb.vertical_rate_ft_min, adsb.ground_speed_knots, adsb.ground_track FROM adsb "
+									   "WHERE adsb.flights_mode_s = :mode_s AND adsb.flights_callsign = :callsign "
+									   "AND adsb.jdate > :start_time ORDER BY adsb.jdate ASC"));
+			qry.bindValue(QStringLiteral(":start_time"), startTime);
+		}
+		else
+		{
+			//						0					1						2						3					4
+			qry.prepare(QStringLiteral("SELECT adsb.jdate, adsb.on_ground, adsb.altitude_feet, adsb.latitude, adsb.longitude, "
+									   //		5									6								7
+									   "adsb.vertical_rate_ft_min, adsb.ground_speed_knots, adsb.ground_track FROM adsb "
+									   "WHERE adsb.flights_mode_s = :mode_s AND adsb.flights_callsign = :callsign ORDER BY adsb.jdate ASC"));
+		}
+		qry.bindValue(QStringLiteral(":mode_s"), modeS);
+		qry.bindValue(QStringLiteral(":callsign"), callsign);
+		qry.exec();
+		if (qry.lastError().type() != QSqlError::NoError)
+		{
+			qDebug() << qry.lastError().text();
+		}
+		while(qry.next())
+		{
+			ADSBFrame f;
+			f.time = qry.value(0).toDouble();
+			f.onGround = qry.value(1).toBool();
+			f.altitude_feet = qry.value(2).toDouble();
+			f.latitude = qry.value(3).toDouble();
+			f.longitude = qry.value(4).toDouble();
+			f.vertical_rate_ft_min = qry.value(5).toDouble();
+			f.ground_speed_knots = qry.value(6).toDouble();
+			f.ground_track = qry.value(7).toDouble();
+			ADSBData::postProcessFrame(&f);
+			data.append(f);
+		}
+		// Sometimes we only get the same frame every time due to rounding errors with >
+		if (data.size() > 1)
+		{
+			emit flightQueried(data, modeS, modeSHex, callsign, country);
+		}
+	}
 }
 
 void DatabaseWorker::dumpFlight(FlightP f)
 {
-   f->writeToDb();
+	f->writeToDb();
 }
 
 void DatabaseWorker::stop()
 {
-    QSqlDatabase db = QSqlDatabase::database();
-    if (db.isValid()) {
-        db.close();
-    }
-    dbConnected = false;
-    emit finished();
+	QSqlDatabase db = QSqlDatabase::database();
+	if (db.isValid())
+	{
+		db.close();
+	}
+	dbConnected = false;
+	emit finished();
 }

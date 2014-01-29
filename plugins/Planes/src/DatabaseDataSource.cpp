@@ -23,9 +23,9 @@
 
 DatabaseDataSource::DatabaseDataSource() : FlightDataSource(10), worker(NULL), workerThread(NULL)
 {
-    lastUpdateJD = 0;
-    lastUpdateRate = 0;
-    initialised = false;
+	lastUpdateJD = 0;
+	lastUpdateRate = 0;
+	initialised = false;
 }
 
 DatabaseDataSource::~DatabaseDataSource()
@@ -35,137 +35,160 @@ DatabaseDataSource::~DatabaseDataSource()
 
 void DatabaseDataSource::updateRelevantFlights(double jd, double rate)
 {
-    lastUpdateJD = jd;
-    lastUpdateRate = rate;
-    emit sigGetFlightList(jd, rate);
+	lastUpdateJD = jd;
+	lastUpdateRate = rate;
+	emit flightListRequested(jd, rate);
 }
 
 void DatabaseDataSource::init()
 {
-    if (initialised) {
-        return;
-    }
-    initialised = true;
-    worker = new DatabaseWorker();
-    workerThread = new QThread();
-    worker->moveToThread(workerThread);
+	if (initialised)
+	{
+		return;
+	}
+	initialised = true;
+	worker = new DatabaseWorker();
+	workerThread = new QThread();
+	worker->moveToThread(workerThread);
 
-    this->connect(worker, SIGNAL(connected(bool)), SLOT(connectResult(bool)));
-    this->connect(worker, SIGNAL(disconnected(bool)), SLOT(disconnectResult(bool)));
-    this->connect(worker, SIGNAL(flight(QList<ADSBFrame>,QString,QString,QString,QString)),
-                  SLOT(addFlight(QList<ADSBFrame>,QString,QString,QString,QString)));
-    this->connect(worker, SIGNAL(flightList(QList<FlightID>)), SLOT(setFlightList(QList<FlightID>)));
+	this->connect(worker, SIGNAL(connected(bool,QString)), SLOT(setConnectResult(bool)));
+	this->connect(worker, SIGNAL(disconnected(bool)), SLOT(setDisconnectResult(bool)));
+	this->connect(worker, SIGNAL(flightQueried(QList<ADSBFrame>,QString,QString,QString,QString)),
+				  SLOT(addFlight(QList<ADSBFrame>,QString,QString,QString,QString)));
+	this->connect(worker, SIGNAL(flightListQueried(QList<FlightID>)), SLOT(setFlightList(QList<FlightID>)));
 
-    worker->connect(this, SIGNAL(stopWorker()), SLOT(stop()));
-    worker->connect(this, SIGNAL(sigConnect(DBCredentials)), SLOT(connectDB(DBCredentials)));
-    worker->connect(this, SIGNAL(sigDisconnect()), SLOT(disconnectDB()));
-    worker->connect(this, SIGNAL(sigGetFlight(QString,QString,double)), SLOT(getFlight(QString,QString, double)));
-    worker->connect(this, SIGNAL(sigGetFlightList(double,double)), SLOT(getFlightList(double, double)));
+	worker->connect(this, SIGNAL(workerStopRequested()), SLOT(stop()));
+	worker->connect(this, SIGNAL(connectRequested(DBCredentials)), SLOT(connectDB(DBCredentials)));
+	worker->connect(this, SIGNAL(disconnectRequested()), SLOT(disconnectDB()));
+	worker->connect(this, SIGNAL(flightRequested(QString,QString,double)), SLOT(getFlight(QString,QString, double)));
+	worker->connect(this, SIGNAL(flightListRequested(double,double)), SLOT(getFlightList(double, double)));
 
-    workerThread->connect(worker, SIGNAL(finished()), SLOT(quit()));
-    workerThread->connect(worker, SIGNAL(finished()), SLOT(deleteLater()));
-    worker->connect(worker, SIGNAL(finished()), SLOT(deleteLater()));
+	workerThread->connect(worker, SIGNAL(finished()), SLOT(quit()));
+	workerThread->connect(worker, SIGNAL(finished()), SLOT(deleteLater()));
+	worker->connect(worker, SIGNAL(finished()), SLOT(deleteLater()));
 
-    workerThread->start();
+	workerThread->start();
 
-    lastUpdateJD = 0;
-    lastUpdateRate = 0;
+	lastUpdateJD = 0;
+	lastUpdateRate = 0;
 }
 
 void DatabaseDataSource::deinit()
 {
-    makeDisconnect();
-    flights.clear();
-    emit stopWorker();
-    initialised = false;
+	disconnectDB();
+	flights.clear();
+	emit workerStopRequested();
+	initialised = false;
 }
 
-void DatabaseDataSource::makeConnection(DBCredentials creds)
+void DatabaseDataSource::connectDB(DBCredentials creds)
 {
-    qDebug() << "DatabaseDataSource::makeConnection()";
-    emit sigConnect(creds);
+	qDebug() << "DatabaseDataSource::makeConnection()";
+	emit connectRequested(creds);
 }
 
-void DatabaseDataSource::makeDisconnect()
+void DatabaseDataSource::disconnectDB()
 {
-    emit sigDisconnect();
+	emit disconnectRequested();
 }
 
 void DatabaseDataSource::addFlight(QList<ADSBFrame> data, QString modeS, QString modeSHex, QString callsign, QString country)
 {
-    qDebug() << "got flight " << modeS << " with " << data.size();
-    if (data.size() == 0) {
-        return;
-    }
-    QString key = modeS + callsign;
-    if (flights.contains(key)) {
-        flights.value(key)->appendData(data);
-    } else {
-        flights.insert(key, FlightP(new Flight(data, modeS, modeSHex, callsign, country)));
-    }
-    // update the relevant flights list
-    updateRelevantFlights();
+	qDebug() << "got flight " << modeS << " with " << data.size();
+	if (data.size() == 0)
+	{
+		return;
+	}
+	QString key = modeS + callsign;
+	if (flights.contains(key))
+	{
+		flights.value(key)->appendData(data);
+	}
+	else
+	{
+		flights.insert(key, FlightP(new Flight(data, modeS, modeSHex, callsign, country)));
+	}
+	// update the relevant flights list
+	updateRelevantFlights();
 }
 
 void DatabaseDataSource::setFlightList(QList<FlightID> ids)
 {
-    QStringList updatedIDs;
-    qDebug() << "Got flight list with " << ids.size() << " entries";
-    foreach (FlightID id, ids) {
-        if (flights.contains(id.key)) {
-            updatedIDs.append(id.key);
-            //qDebug() << "requesting " << id.key << " from date " << flights.value(id.key)->getTimeEnd();
-            emit sigGetFlight(id.mode_s, id.callsign, flights.value(id.key)->getTimeEnd());
-        } else {
-            qDebug() << "requesting new flight " << id.key << " from date " << -1;
-            emit sigGetFlight(id.mode_s, id.callsign, -1);
-        }
-    }
-    // Remove old flights
-    QHash<QString, FlightP>::iterator i = flights.begin();
-    while (i != flights.end()) {
-        bool removed = false;
-        if (!updatedIDs.contains(i.key())) {
-            if (lastUpdateRate > 0) {
-                if (lastUpdateJD - i.value()->getTimeEnd() > 30 * lastUpdateRate) {
-                    i = flights.erase(i);
-                    removed = true;
-                }
-            } else {
-                if (i.value()->getTimeStart() - lastUpdateJD > 30 * fabs(lastUpdateRate)) {
-                    i = flights.erase(i);
-                    removed = true;
-                }
-            }
-        }
-        if (!removed) {
-            ++i;
-        }
-    }
+	QStringList updatedIDs;
+	qDebug() << "Got flight list with " << ids.size() << " entries";
+	foreach (FlightID id, ids)
+	{
+		if (flights.contains(id.key))
+		{
+			updatedIDs.append(id.key);
+			//qDebug() << "requesting " << id.key << " from date " << flights.value(id.key)->getTimeEnd();
+			emit flightRequested(id.mode_s, id.callsign, flights.value(id.key)->getTimeEnd());
+		}
+		else
+		{
+			qDebug() << "requesting new flight " << id.key << " from date " << -1;
+			emit flightRequested(id.mode_s, id.callsign, -1);
+		}
+	}
+	// Remove old flights
+	QHash<QString, FlightP>::iterator i = flights.begin();
+	while (i != flights.end())
+	{
+		bool removed = false;
+		if (!updatedIDs.contains(i.key()))
+		{
+			if (lastUpdateRate > 0)
+			{
+				if (lastUpdateJD - i.value()->getTimeEnd() > 30 * lastUpdateRate)
+				{
+					i = flights.erase(i);
+					removed = true;
+				}
+			}
+			else
+			{
+				if (i.value()->getTimeStart() - lastUpdateJD > 30 * fabs(lastUpdateRate))
+				{
+					i = flights.erase(i);
+					removed = true;
+				}
+			}
+		}
+		if (!removed)
+		{
+			++i;
+		}
+	}
 }
 
 void DatabaseDataSource::updateRelevantFlights()
 {
-   relevantFlights.clear();
-   relevantFlights.append(flights.values());
+	relevantFlights.clear();
+	relevantFlights.append(flights.values());
 }
 
-void DatabaseDataSource::connectResult(bool res)
+void DatabaseDataSource::setConnectResult(bool res)
 {
-   qDebug() << "Connection established " << res;
-   if (res) {
-       emit dbStatus("Connected");
-   } else {
-       emit dbStatus("Connection failed");
-   }
+	qDebug() << "Connection established " << res;
+	if (res)
+	{
+		emit statusChanged("Connected");
+	}
+	else
+	{
+		emit statusChanged("Connection failed");
+	}
 }
 
-void DatabaseDataSource::disconnectResult(bool res)
+void DatabaseDataSource::setDisconnectResult(bool res)
 {
-   qDebug() << "Disconnected " << res;
-   if (res) {
-       emit dbStatus("Disconnected");
-   } else {
-       emit dbStatus("Disconnect failed");
-   }
+	qDebug() << "Disconnected " << res;
+	if (res)
+	{
+		emit statusChanged("Disconnected");
+	}
+	else
+	{
+		emit statusChanged("Disconnect failed");
+	}
 }

@@ -21,13 +21,14 @@
 
 //! @struct DBCredentials
 //! Struct that holds credentials to connect to a database
-typedef struct db_creds_s {
-    QString type; //!< Database driver type
-    QString host; //!< hostname
-    int port; //!< port
-    QString user; //!< username
-    QString pass; //!< password
-    QString name; //!< Database name or filename if the driver is SQLite
+typedef struct db_creds_s
+{
+	QString type; //!< Database driver type
+	QString host; //!< hostname
+	int port; //!< port
+	QString user; //!< username
+	QString pass; //!< password
+	QString name; //!< Database name or filename if the driver is SQLite
 } DBCredentials;
 
 #endif // DBCREDENTIALS_HPP

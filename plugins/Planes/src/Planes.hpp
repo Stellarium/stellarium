@@ -37,187 +37,187 @@ Q_DECLARE_METATYPE(DBCredentials)
 //! It handles the integration with Stellarium.
 class Planes : public StelObjectModule
 {
-    Q_OBJECT
-    Q_PROPERTY(bool enabled READ isEnabled WRITE enablePlanes)
-    friend class FlightMgr;
+	Q_OBJECT
+	Q_PROPERTY(bool enabled READ isEnabled WRITE enablePlanes)
+	friend class FlightMgr;
 public:
-    Planes();
-    virtual ~Planes();
+	Planes();
+	virtual ~Planes();
 
-    ///////////////////////////////////////////////////////////////////////////
-    //!@{
-    //! Methods defined in the StelModule class
-    void init();
-    void deinit();
-    void update(double deltaTime);
-    void draw(StelCore* core);
-    double getCallOrder(StelModuleActionName actionName) const;
-    void handleKeys(class QKeyEvent* event);
-    void handleMouseClicks(class QMouseEvent* event);
-    bool handleMouseMoves(int x, int y, Qt::MouseButtons b);
-    bool configureGui(bool show = true);
-    //!@}
+	///////////////////////////////////////////////////////////////////////////
+	//!@{
+	//! Methods defined in the StelModule class
+	void init();
+	void deinit();
+	void update(double deltaTime);
+	void draw(StelCore* core);
+	double getCallOrder(StelModuleActionName actionName) const;
+	void handleKeys(class QKeyEvent* event);
+	void handleMouseClicks(class QMouseEvent* event);
+	bool handleMouseMoves(int x, int y, Qt::MouseButtons b);
+	bool configureGui(bool show = true);
+	//!@}
 
-    ////////////////////////////////////////////////////////////////////////////
-    //!@{
-    //! Methods defined in StelObjectModule
-    //! Forward requests to FlightMgr
-    QList<StelObjectP> searchAround(const Vec3d &v, double limitFov, const StelCore *core) const
-    {
-        return flightMgr.searchAround(v, limitFov , core);
-    }
+	////////////////////////////////////////////////////////////////////////////
+	//!@{
+	//! Methods defined in StelObjectModule
+	//! Forward requests to FlightMgr
+	QList<StelObjectP> searchAround(const Vec3d &v, double limitFov, const StelCore *core) const
+	{
+		return flightMgr.searchAround(v, limitFov , core);
+	}
 
-    StelObjectP searchByNameI18n(const QString &nameI18n) const
-    {
-        return flightMgr.searchByNameI18n(nameI18n);
-    }
+	StelObjectP searchByNameI18n(const QString &nameI18n) const
+	{
+		return flightMgr.searchByNameI18n(nameI18n);
+	}
 
-    StelObjectP searchByName(const QString &name) const
-    {
-        return flightMgr.searchByName(name);
-    }
+	StelObjectP searchByName(const QString &name) const
+	{
+		return flightMgr.searchByName(name);
+	}
 
-    QStringList listMatchingObjectsI18n(const QString &objPrefix, int maxNbItem, bool useStartOfWords) const
-    {
-        return flightMgr.listMatchingObjectsI18n(objPrefix, maxNbItem, useStartOfWords);
-    }
+	QStringList listMatchingObjectsI18n(const QString &objPrefix, int maxNbItem, bool useStartOfWords) const
+	{
+		return flightMgr.listMatchingObjectsI18n(objPrefix, maxNbItem, useStartOfWords);
+	}
 
-    QStringList listMatchingObjects(const QString &objPrefix, int maxNbItem, bool useStartOfWords) const
-    {
-        return flightMgr.listMatchingObjects(objPrefix, maxNbItem, useStartOfWords);
-    }
+	QStringList listMatchingObjects(const QString &objPrefix, int maxNbItem, bool useStartOfWords) const
+	{
+		return flightMgr.listMatchingObjects(objPrefix, maxNbItem, useStartOfWords);
+	}
 
-    QStringList listAllObjects(bool inEnglish) const
-    {
-        return flightMgr.listAllObjects(inEnglish);
-    }
-    //!@}
+	QStringList listAllObjects(bool inEnglish) const
+	{
+		return flightMgr.listAllObjects(inEnglish);
+	}
+	//!@}
 
-    //! Return the name of this StelObject.
-    //! Name is the class name.
-    QString getName() const
-    {
-        return QStringLiteral("Planes");
-    }
+	//! Return the name of this StelObject.
+	//! Name is the class name.
+	QString getName() const
+	{
+		return QStringLiteral("Planes");
+	}
 
-    //! Is the plugin enabled?
-    bool isEnabled() const
-    {
-        return displayFader;
-    }
+	//! Is the plugin enabled?
+	bool isEnabled() const
+	{
+		return displayFader;
+	}
 
-    //! Load settings from the stellarium config file
-    void loadSettings();
+	//! Load settings from the stellarium config file
+	void loadSettings();
 
-    //! Save the settings to the stellarium config file
-    void saveSettings();
+	//! Save the settings to the stellarium config file
+	void saveSettings();
 
-    //! Is the database source enabled?
-    bool isUsingDB() const
-    {
-        return bsDataSource.isDatabaseEnabled();
-    }
+	//! Is the database source enabled?
+	bool isUsingDB() const
+	{
+		return bsDataSource.isDatabaseEnabled();
+	}
 
-    //! Is the BaseStation port source enabled?
-    bool isUsingBS() const
-    {
-        return bsDataSource.isSocketEnabled();
-    }
+	//! Is the BaseStation port source enabled?
+	bool isUsingBS() const
+	{
+		return bsDataSource.isSocketEnabled();
+	}
 
-    //! Is saving of Flight objects received from the data port enabled?
-    bool isDumpingOldFlights() const
-    {
-        return bsDataSource.isDumpOldFlightsEnabled();
-    }
+	//! Is saving of Flight objects received from the data port enabled?
+	bool isDumpingOldFlights() const
+	{
+		return bsDataSource.isDumpOldFlightsEnabled();
+	}
 
-    //! Get the credentials to connect to the database
-    DBCredentials getDBCreds() const
-    {
-        return dbc;
-    }
+	//! Get the credentials to connect to the database
+	DBCredentials getDBCreds() const
+	{
+		return dbc;
+	}
 
-    //! Get the FlightMgr object
-    const FlightMgr *getFlightMgr() const
-    {
-        return &flightMgr;
-    }
+	//! Get the FlightMgr object
+	const FlightMgr *getFlightMgr() const
+	{
+		return &flightMgr;
+	}
 
-    //! Get the hostname for the BaseStation data port
-    QString getBSHost() const
-    {
-        return bsHost;
-    }
+	//! Get the hostname for the BaseStation data port
+	QString getBSHost() const
+	{
+		return bsHost;
+	}
 
-    //! Get the port for the BaseStation data port
-    quint16 getBSPort() const
-    {
-        return bsPort;
-    }
+	//! Get the port for the BaseStation data port
+	quint16 getBSPort() const
+	{
+		return bsPort;
+	}
 
-    //! Should we autoconnect on startup?
-    bool isConnectOnStartupEnabled() const;
+	//! Should we autoconnect on startup?
+	bool isConnectOnStartupEnabled() const;
 
 public slots:
-    //! Turn this plugin on or off
-    void enablePlanes(bool b);
+	//! Turn this plugin on or off
+	void enablePlanes(bool b);
 
-    //! The user changed the observer position in stellarium
-    void updateLocation(StelLocation loc)
-    {
-        Flight::updateObserverPos(loc);
-    }
+	//! The user changed the observer position in stellarium
+	void updateLocation(StelLocation loc)
+	{
+		Flight::updateObserverPos(loc);
+	}
 
-    //! User updated db credentials in the settings
-    void setDBCreds(DBCredentials creds);
+	//! User updated db credentials in the settings
+	void setDBCreds(DBCredentials creds);
 
-    //! User wants to open a BaseStation recording file
-    //! @param file the filename and path to the file
-    void openBSRecording(QString file);
+	//! User wants to open a BaseStation recording file
+	//! @param file the filename and path to the file
+	void openBSRecording(QString file);
 
-    //! The user wants to connect to the database and/or the data port
-    void connectDBBS();
+	//! The user wants to connect to the database and/or the data port
+	void connectDBBS();
 
-    //! User changed the data port hostname
-    void setBSHost(QString host)
-    {
-        bsHost = host;
-    }
+	//! User changed the data port hostname
+	void setBSHost(QString host)
+	{
+		bsHost = host;
+	}
 
-    //! User changed the data port port
-    void setBSPort(quint16 port)
-    {
-        bsPort = port;
-    }
+	//! User changed the data port port
+	void setBSPort(quint16 port)
+	{
+		bsPort = port;
+	}
 
-    //! User changed connect on startup setting
-    void setConnectOnStartup(bool value);
+	//! User changed connect on startup setting
+	void setConnectOnStartup(bool value);
 
 private:
-    static StelTextureSP planeTexture; //!< the texture used for drawing the plane icons
-    FlightMgr flightMgr; //!< The FlightMgr
-    LinearFader displayFader; //!< Fader to fade in and out on enable/disable
+	static StelTextureSP planeTexture; //!< the texture used for drawing the plane icons
+	FlightMgr flightMgr; //!< The FlightMgr
+	LinearFader displayFader; //!< Fader to fade in and out on enable/disable
 
-    PlanesDialog *settingsDialog; //!< Configuration window
+	PlanesDialog *settingsDialog; //!< Configuration window
 
-    BSRecordingDataSource bsRecordingDataSource; //!< data source for loading files
-    BSDataSource bsDataSource; //!< data source for database and data port
+	BSRecordingDataSource bsRecordingDataSource; //!< data source for loading files
+	BSDataSource bsDataSource; //!< data source for database and data port
 
-    StelButton *settingsButton; //!< Button to show settings
-    StelButton *enableButton; //!< Button to enable/disable plugin
+	StelButton *settingsButton; //!< Button to show settings
+	StelButton *enableButton; //!< Button to enable/disable plugin
 
-    //!@{
-    //! Icons for the buttons
-    QPixmap *onPix;
-    QPixmap *offPix;
-    QPixmap *glowPix;
-    QPixmap *onSettingsPix;
-    QPixmap *offSettingsPix;
-    //!@}
+	//!@{
+	//! Icons for the buttons
+	QPixmap *onPix;
+	QPixmap *offPix;
+	QPixmap *glowPix;
+	QPixmap *onSettingsPix;
+	QPixmap *offSettingsPix;
+	//!@}
 
-    DBCredentials dbc; //!< Database credentials
-    QString bsHost; //!< data port hostname
-    quint16 bsPort; //!< data port port
-    bool connectOnStartup; //!< connect on startup setting
+	DBCredentials dbc; //!< Database credentials
+	QString bsHost; //!< data port hostname
+	quint16 bsPort; //!< data port port
+	bool connectOnStartup; //!< connect on startup setting
 };
 
 
@@ -229,12 +229,12 @@ private:
 //! This class is used by Qt to manage a plug-in interface
 class PlanesStelPluginInterface : public QObject, public StelPluginInterface
 {
-    Q_OBJECT
-    Q_PLUGIN_METADATA(IID "stellarium.StelGuiPluginInterface/1.0")
-    Q_INTERFACES(StelPluginInterface)
+	Q_OBJECT
+	Q_PLUGIN_METADATA(IID "stellarium.StelGuiPluginInterface/1.0")
+	Q_INTERFACES(StelPluginInterface)
 public:
-    virtual StelModule* getStelModule() const;
-    virtual StelPluginInfo getPluginInfo() const;
+	virtual StelModule* getStelModule() const;
+	virtual StelPluginInfo getPluginInfo() const;
 };
 
 #endif /*PLANES_HPP_*/

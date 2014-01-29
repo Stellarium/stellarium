@@ -32,53 +32,53 @@
 //! signals and slots.
 class DatabaseWorker : public QObject
 {
-    Q_OBJECT
+	Q_OBJECT
 public:
-    //! Create a new DatabaseWorker
-    explicit DatabaseWorker(QObject *parent = 0);
+	//! Create a new DatabaseWorker
+	explicit DatabaseWorker(QObject *parent = 0);
 
 signals:
-    //! Returns the result of a getFlightList query
-    void flightList(QList<FlightID> ids);
+	//! Returns the result of a getFlightList query
+	void flightListQueried(QList<FlightID> ids);
 
-    //! Returns the result of a getFlight query
-    void flight(QList<ADSBFrame> data, QString modeS, QString modeSHex, QString callsign, QString country);
+	//! Returns the result of a getFlight query
+	void flightQueried(QList<ADSBFrame> data, QString modeS, QString modeSHex, QString callsign, QString country);
 
-    //! Returns whether the connection was established or not
-    void connected(bool connected, QString error);
+	//! Returns whether the connection was established or not
+	void connected(bool connected, QString error);
 
-    //! Returns whether the connection was disconnected or not
-    void disconnected(bool disconnected);
+	//! Returns whether the connection was disconnected or not
+	void disconnected(bool disconnected);
 
-    //! Emitted, when the worker is shut down
-    void finished();
+	//! Emitted, when the worker is shut down
+	void finished();
 
 public slots:
-    //! Open a connection to the specified database
-    void connectDB(DBCredentials creds);
+	//! Open a connection to the specified database
+	void connectDB(DBCredentials creds);
 
-    //! Disconnect the database
-    void disconnectDB();
+	//! Disconnect the database
+	void disconnectDB();
 
-    //! Get a list of flights that are relevant for the current time and time
-    //! rate
-    //! @param jd the current time
-    //! @param speed the current time rate
-    void getFlightList(double jd, double speed);
+	//! Get a list of flights that are relevant for the current time and time
+	//! rate
+	//! @param jd the current time
+	//! @param speed the current time rate
+	void getFlightList(double jd, double speed);
 
-    //! Query database for flight with id and return values newer than startTime
-    //! @param id the ID (hex address) of the flight
-    //! @param startTime time from which on to query. if < 0, query everything
-    void getFlight(QString modeS, QString callsign, double startTime);
+	//! Query database for flight with id and return values newer than startTime
+	//! @param id the ID (hex address) of the flight
+	//! @param startTime time from which on to query. if < 0, query everything
+	void getFlight(QString modeS, QString callsign, double startTime);
 
-    //! Writes a flight to the db
-    void dumpFlight(FlightP f);
+	//! Writes a flight to the db
+	void dumpFlight(FlightP f);
 
-    //! Shut down this worker
-    void stop();
+	//! Shut down this worker
+	void stop();
 
 private:
-    bool dbConnected;
+	bool dbConnected;
 
 };
 

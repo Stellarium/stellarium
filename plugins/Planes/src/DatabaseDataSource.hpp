@@ -30,9 +30,9 @@
 //! Can be passed on signal/slot connections
 typedef struct flight_id_s
 {
-    QString mode_s;
-    QString callsign;
-    QString key;
+	QString mode_s;
+	QString callsign;
+	QString key;
 } FlightID;
 
 Q_DECLARE_METATYPE(QList<FlightID>)
@@ -45,49 +45,49 @@ class DatabaseWorker;
 //! @see BSDataSource
 class DatabaseDataSource : public FlightDataSource
 {
-    Q_OBJECT
+	Q_OBJECT
 public:
-    DatabaseDataSource();
-    ~DatabaseDataSource();
+	DatabaseDataSource();
+	~DatabaseDataSource();
 
-    QList<FlightP> *getRelevantFlights()
-    {
-        return &relevantFlights;
-    }
+	QList<FlightP> *getRelevantFlights()
+	{
+		return &relevantFlights;
+	}
 
-    void updateRelevantFlights(double jd, double rate);
-    void init();
-    void deinit();
+	void updateRelevantFlights(double jd, double rate);
+	void init();
+	void deinit();
 
 signals:
-    void sigConnect(DBCredentials creds);
-    void sigDisconnect();
-    void sigGetFlightList(double jd, double rate);
-    void sigGetFlight(QString modeS, QString callsign, double startTime);
-    void dbStatus(QString status);
-    void stopWorker();
+	void connectRequested(DBCredentials creds);
+	void disconnectRequested();
+	void flightListRequested(double jd, double rate);
+	void flightRequested(QString modeS, QString callsign, double startTime);
+	void statusChanged(QString status);
+	void workerStopRequested();
 
 public slots:
-    void makeConnection(DBCredentials creds);
-    void makeDisconnect();
-    void addFlight(QList<ADSBFrame> data, QString modeS, QString modeSHex, QString callsign, QString country);
+	void connectDB(DBCredentials creds);
+	void disconnectDB();
+	void addFlight(QList<ADSBFrame> data, QString modeS, QString modeSHex, QString callsign, QString country);
 
-    //! Receive a list of relevant flights from the database worker
-    //! @param ids a list of IDs of the form modeS + callsign
-    void setFlightList(QList<FlightID> ids);
-    void updateRelevantFlights();
-    void connectResult(bool res);
-    void disconnectResult(bool res);
+	//! Receive a list of relevant flights from the database worker
+	//! @param ids a list of IDs of the form modeS + callsign
+	void setFlightList(QList<FlightID> ids);
+	void updateRelevantFlights();
+	void setConnectResult(bool res);
+	void setDisconnectResult(bool res);
 
 private:
-    QHash<QString, FlightP> flights;
-    QList<FlightP> relevantFlights;
-    DatabaseWorker *worker;
-    QThread *workerThread;
-    double lastUpdateJD;
-    double lastUpdateRate;
+	QHash<QString, FlightP> flights;
+	QList<FlightP> relevantFlights;
+	DatabaseWorker *worker;
+	QThread *workerThread;
+	double lastUpdateJD;
+	double lastUpdateRate;
 
-    bool initialised;
+	bool initialised;
 };
 
 #endif // DATABASEDATASOURCE_HPP
