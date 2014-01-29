@@ -20,8 +20,6 @@ SET(Planes_SRCS
   FlightMgr.cpp
   Flight.hpp
   Flight.cpp
-  FlightPainter.hpp
-  FlightPainter.cpp
   Planes.hpp
   Planes.cpp)
 

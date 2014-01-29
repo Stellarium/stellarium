@@ -56,44 +56,49 @@ public:
         AllPaths = 3			//!< Draw paths for all planes, regardless of screen position
     };
 
+    //! Default constructor1
     Flight();
-    Flight(QString filename);
+
+    //! Construct a Flight object by parsing a BaseStation Recording
+    //! @param data the BaseStation Recording data (linewise)
     Flight(QStringList &data);
+
+    //! Construct a Flight object by passing all the data already parsed
     Flight(QList<ADSBFrame> &data, QString &modeS, QString &modeSHex, QString &callsign, QString &country);
     ~Flight();
 
 
+    //! Append a list of ADSBFrames to the underlying ADSBData object
     void appendData(QList<ADSBFrame> &newData);
-    void appendSingle(ADSBFrame &frame);
-    void setInfo(QString &callsign, QString &country)
-    {
-        data->setInfo(callsign, country);
-    }
 
+    //! Append a signle frame to the underlying ADSBData object
+    void appendSingle(ADSBFrame &frame);
+
+    //! Set the callsign and country
+    void setInfo(QString &callsign, QString &country);
+
+    //! Append a surface position message.
+    //! Performs checks if a frame can be built with this data, otherwise waits
+    //! for more data
     void appendSurfacePos(const double &jdate, const double altitude,
                           const double &groundSpeed, const double &track,
-                          const double &lat, const double &lon)
-    {
-        data->appendSurfacePos(jdate, altitude, groundSpeed, track, lat, lon);
-    }
+                          const double &lat, const double &lon);
 
+    //! Append an airborne position message.
+    //! Performs checks if a frame can be built with this data, otherwise waits
+    //! for more data
     void appendAirbornePos(const double &jdate, const double &altitude,
-                           const double &lat, const double &lon, const bool &onGround)
-    {
-        data->appendAirbornePos(jdate, altitude, lat, lon, onGround);
-    }
+                           const double &lat, const double &lon, const bool &onGround);
 
+    //! Append an airborne velocity message.
+    //! Performs checks if a frame can be built with this data, otherwise waits
+    //! for more data
     void appendAirborneVelocity(const double &jdate, const double &groundSpeed,
                                 const double &track,
-                                const double &verticalRate)
-    {
-        data->appendAirborneVelocity(jdate, groundSpeed, track, verticalRate);
-    }
+                                const double &verticalRate);
 
-    QDateTime getLastUpdateTime() const
-    {
-        return data->getLastUpdateTime();
-    }
+    //! Last time a frame has been parsed from messages by ADSBData
+    QDateTime getLastUpdateTime() const;
 
 
     //! Get an HTML string to describe the flight.
@@ -105,60 +110,49 @@ public:
     //! Return the object's type. Type is the classname.
     virtual QString getType() const
     {
-        return "Flight";
+        return QStringLiteral("Flight");
     }
 
     //! Returns the english name of this flight.
     //! This is either the callsign, or if that is empty, the hex ModeS address.
-    virtual QString getEnglishName() const
-    {
-        return data->getCallsign().isEmpty() ? data->getHexAddress() : data->getCallsign();
-    }
+    virtual QString getEnglishName() const;
 
     //! Returns the translated name.
     //! This is the same as the english name, as they are only combinations
     //! of letters and numbers anyways.
-    virtual QString getNameI18n() const
-    {
-        return getEnglishName();
-    }
+    virtual QString getNameI18n() const;
 
     //! Get the callsign of this flight.
-    QString getCallsign() const
-    {
-        return data->getCallsign();
-    }
+    QString getCallsign() const;
 
     //! Get the ModeS address of this flight (in hex).
-    QString getAddress() const
-    {
-        return data->getHexAddress();
-    }
+    QString getAddress() const;
 
-    QString getIntAddress() const
-    {
-        return data->getAddress();
-    }
+    //! Get ModeS address in raw form
+    QString getIntAddress() const;
 
-    QString getCountry() const
-    {
-        return data->getCountry();
-    }
+    //! Get the country
+    QString getCountry() const;
 
+    //! Get the J2000Equatorial Position
     virtual Vec3d getJ2000EquatorialPos(const StelCore *core) const;
 
+    //! Get azimuth / elevation position, depends on observer
     Vec3d getAzAl() const;
 
+    //! Selection priority for Flight objects when user clicks
     virtual float getSelectPriority(const StelCore *core) const
     {
        return -11;
     }
 
+    //! Angular size of Flight objects
     virtual double getAngularSize(const StelCore *core) const
     {
         return .1;
     }
 
+    //! Magnitude of Flight objects
     virtual float getVMagnitude(const StelCore *core) const
     {
         return 100;
@@ -181,15 +175,11 @@ public:
     //! Returns true if jd is in the range of time this flight has data for.
     bool isTimeInRange(double jd) const;
 
-    double getTimeStart() const
-    {
-        return data->getTimeStart();
-    }
+    //! Get time datapoints start at
+    double getTimeStart() const;
 
-    double getTimeEnd() const
-    {
-        return data->getTimeEnd();
-    }
+    //! Get time datapoints end at
+    double getTimeEnd() const;
 
     //! Returns true if the flight is selected
     bool isFlightSelected() const
@@ -197,7 +187,8 @@ public:
         return flightSelected;
     }
 
-    //! Mark this flight as currently selected
+    //! Mark this flight as currently selected.
+    //! Used for path drawing checks.
     void setFlightSelected(bool selected)
     {
         flightSelected = selected;
@@ -251,9 +242,11 @@ public:
         return pathColour;
     }
 
-    static int numVisible;
-    static int numPaths;
+    static int numVisible; //!< Debugging count of planes visible currently
+    static int numPaths; //!< Debugging count of paths drawn currently
 
+    //!@{
+    //! Personalise path colouring
     static double getMaxVertRate();
     static void setMaxVertRate(double value);
 
@@ -271,19 +264,19 @@ public:
 
     static double getMinHeight();
     static void setMinHeight(double value);
+    //!@}
 
+    //! Write this flight to the database.
     void writeToDb() const;
 
-    int size() const
-    {
-        return data->size();
-    }
+    //! Return number of available data points
+    int size() const;
 
 private:
-    static Vec3d observerPos;
-    static double ECEFtoAzAl[3][3];
-    static PathColour pathColour;
-    static QFont labelFont;
+    static Vec3d observerPos; //!< The position of the observer, used to calculate Az/Al pos
+    static double ECEFtoAzAl[3][3]; //!< Matrix to transform from ECEF to Az/Al
+    static PathColour pathColour; //!< Path colouring mode
+    static QFont labelFont; //!< Font for rendering labels
     //!@{
     //! Values for colour coding paths
     static double maxVertRate;
@@ -298,18 +291,21 @@ private:
     static std::vector<float> pathVert;	//!< Buffer holding path points for rendering
     static std::vector<float> pathCol;	//!< Buffer holding path colours for rendering
 
-    ADSBData *data;
-    Vec3d azAlPos;
+    ADSBData *data; //!< Holds the actual ADS-B Data
+    Vec3d azAlPos; //!< Current position in Az/Al frame
 
-    bool flightSelected;
-    ADSBFrame const *currentFrame;
-    Vec3d position;
-    bool inTimeRange;
+    bool flightSelected; //!< Flight currently selected
+    ADSBFrame const *currentFrame; //!< Last frame returned by data
+    Vec3d position; //!< ECEF position of the flight
+    bool inTimeRange; //!< Have data currently
 };
 
+//! @typedef FlightP smartpointer to a Flight object
 typedef QSharedPointer<Flight> FlightP;
+//! @typedef FlightListP smartpointer to a list of Flight objects
 typedef QSharedPointer<QList<FlightP> > FlightListP;
 
+//! Let FlightP be passed via signals and slots
 Q_DECLARE_METATYPE(FlightP)
 
 #endif // FLIGHT_HPP

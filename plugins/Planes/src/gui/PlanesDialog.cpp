@@ -31,8 +31,8 @@
 PlanesDialog::PlanesDialog()
 {
     ui = new Ui::PlanesDialog();
-    cachedDBStatus = "Disconnected";
-    cachedBSStatus = "Disconnected";
+    cachedDBStatus = QStringLiteral("Disconnected");
+    cachedBSStatus = QStringLiteral("Disconnected");
 }
 
 PlanesDialog::~PlanesDialog()
@@ -68,9 +68,9 @@ void PlanesDialog::setBSStatus(QString status)
 void PlanesDialog::createDialogContent()
 {
     ui->setupUi(dialog);
-    ui->dbDriver->addItem("MySQL", "QMYSQL");
-    ui->dbDriver->addItem("ODBC", "QODBC");
-    ui->dbDriver->addItem("SQLite", "QSQLITE");
+    ui->dbDriver->addItem(QStringLiteral("MySQL"), QStringLiteral("QMYSQL"));
+    ui->dbDriver->addItem(QStringLiteral("ODBC"), QStringLiteral("QODBC"));
+    ui->dbDriver->addItem(QStringLiteral("SQLite"), QStringLiteral("QSQLITE"));
     Planes *planes = GETSTELMODULE(Planes);
 
     ui->databaseGroup->setChecked(planes->isUsingDB());
@@ -165,7 +165,7 @@ void PlanesDialog::createDialogContent()
 
 void PlanesDialog::updateDBFields()
 {
-    bool isSqLite = (ui->dbDriver->itemData(ui->dbDriver->currentIndex()).toString() == "QSQLITE");
+    bool isSqLite = (ui->dbDriver->itemData(ui->dbDriver->currentIndex()).toString() == QStringLiteral("QSQLITE"));
     ui->dbHost->setHidden(isSqLite);
     ui->dbHostLabel->setHidden(isSqLite);
     ui->dbPort->setHidden(isSqLite);
@@ -174,12 +174,12 @@ void PlanesDialog::updateDBFields()
     ui->dbUserLabel->setHidden(isSqLite);
     ui->dbPass->setHidden(isSqLite);
     ui->dbPasswordLabel->setHidden(isSqLite);
-    ui->dbNameLabel->setText(isSqLite ? "File" : "Database");
+    ui->dbNameLabel->setText(isSqLite ? QStringLiteral("File") : QStringLiteral("Database"));
 }
 
 void PlanesDialog::fileOpenClicked()
 {
-    QString filePath = QFileDialog::getOpenFileName(&StelMainView::getInstance(), "Open BaseStation Recording", ".", "BaseStation Recordings (*.bst)");
+    QString filePath = QFileDialog::getOpenFileName(&StelMainView::getInstance(), QStringLiteral("Open BaseStation Recording"), QStringLiteral("."), QStringLiteral("BaseStation Recordings (*.bst)"));
     if (!filePath.isNull()) {
         emit fileSelected(filePath);
     }

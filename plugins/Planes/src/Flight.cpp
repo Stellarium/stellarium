@@ -22,7 +22,7 @@
 #include "StelUtils.hpp"
 #include "StelApp.hpp"
 #include "Planes.hpp"
-#include "FlightPainter.hpp"
+#include "StelTranslator.hpp"
 
 #include <QSqlQuery>
 #include <QSqlError>
@@ -59,22 +59,6 @@ Flight::Flight() : position(0, 0, 0)
     flightSelected = false;
 }
 
-Flight::Flight(QString filename) : position(0, 0, 0)
-{
-    QFile file(filename);
-    QStringList adsbData;
-    if (file.open(QIODevice::ReadOnly)) {
-        while (!file.atEnd()) {
-            adsbData.push_back(file.readLine());
-        }
-    }
-    data = new ADSBData(adsbData);
-    currentFrame = NULL;
-    inTimeRange = false;
-    flightSelected = false;
-    file.close();
-}
-
 Flight::Flight(QStringList &data) : position(0, 0, 0)
 {
     this->data = new ADSBData(data);
@@ -98,63 +82,134 @@ Flight::~Flight()
 
 void Flight::appendData(QList<ADSBFrame> &newData)
 {
+    Q_ASSERT(data);
     data->append(newData);
 }
 
 void Flight::appendSingle(ADSBFrame &frame)
 {
-   data->appendFrame(frame);
+    Q_ASSERT(data);
+    data->appendFrame(frame);
+}
+
+void Flight::setInfo(QString &callsign, QString &country)
+{
+    Q_ASSERT(data);
+    data->setInfo(callsign, country);
+}
+
+void Flight::appendSurfacePos(const double &jdate, const double altitude, const double &groundSpeed, const double &track, const double &lat, const double &lon)
+{
+    Q_ASSERT(data);
+    data->appendSurfacePos(jdate, altitude, groundSpeed, track, lat, lon);
+}
+
+void Flight::appendAirbornePos(const double &jdate, const double &altitude, const double &lat, const double &lon, const bool &onGround)
+{
+    Q_ASSERT(data);
+    data->appendAirbornePos(jdate, altitude, lat, lon, onGround);
+}
+
+void Flight::appendAirborneVelocity(const double &jdate, const double &groundSpeed, const double &track, const double &verticalRate)
+{
+    Q_ASSERT(data);
+    data->appendAirborneVelocity(jdate, groundSpeed, track, verticalRate);
+}
+
+QDateTime Flight::getLastUpdateTime() const
+{
+    Q_ASSERT(data);
+    return data->getLastUpdateTime();
 }
 
 QString Flight::getInfoString(const StelCore *core, const StelObject::InfoStringGroup &flags) const
 {
-    if (!data->isInitialised()) {
-        return "";
+    if (!data || !data->isInitialised()) {
+        return QStringLiteral("");
     }
     QString infoStr;
     QTextStream ss(&infoStr);
+    static const QString br = QStringLiteral("<br/>");
     if (flags & Name) {
-        ss << "<h2>" << getEnglishName() << "</h2>";
-        ss << "<br/>";
+        ss << QStringLiteral("<h2>") << getEnglishName() << QStringLiteral("</h2>");
+        ss << br;
     }
 
     if (flags & CatalogNumber) {
         if (!data->getCallsign().isEmpty()) {
-            ss << "Callsign: " << data->getCallsign() << "<br/>";
+            ss << q_("Callsign: ") << data->getCallsign() << br;
         }
-        ss << "Mode S Address (hex): ";
-        ss << data->getHexAddress() << "<br/><br/>";
+        ss << q_("Mode S Address (hex): ");
+        ss << data->getHexAddress() << br << br;
     }
 
-    /*
     if (flags & ObjectType) {
-        ss << "Type: <b>plane</b><br/>";
+        ss << q_("Type: <b>plane</b>") << br;
     }
-    */
     if (flags & Extra) {
-        ss << "Type: <b>plane</b><br/>";
-        ss << "Country: " << data->getCountry() << "<br/>";
+        ss << q_("Country: ") << data->getCountry() << br;
         if (currentFrame) {
-            ss << "On ground: " << (currentFrame->onGround ? "yes" : "no") << "<br/>";
-            ss << "Position: lat " << StelUtils::radToDmsStr(currentFrame->latitude)
-               << ", lon " << StelUtils::radToDmsStr(currentFrame->longitude) << "<br/>";
-            ss << "Altitude: " << currentFrame->altitude << " m (" << currentFrame->altitude_feet << " ft)" << "<br/>";
-            ss << "Distance: " << azAlPos.length() << " m" << "<br/>";
+            // TRANSLATORS: Is the plane on the ground or not
+            ss << q_("On ground: ") << (currentFrame->onGround ? q_("yes") : q_("no")) << br;
+            // TRANSLATORS: Plane latitude position
+            ss << q_("Position: lat ") << StelUtils::radToDmsStr(currentFrame->latitude)
+                  // TRANSLATORS: Plane longitude position
+               << q_(", lon ") << StelUtils::radToDmsStr(currentFrame->longitude) << br;
+            // TRANSLATORS: Height plane is flying at
+            ss << q_("Altitude: ") << currentFrame->altitude << QStringLiteral(" m (") << currentFrame->altitude_feet << QStringLiteral(" ft)") << br;
+            // TRANSLATORS: Distance to observer
+            ss << q_("Distance: ") << azAlPos.length() << QStringLiteral(" m") << br;
             double a;
             double b;
             StelUtils::rectToSphe(&a, &b, azAlPos);
-            ss << "Azimuth / Elevation: " << StelUtils::radToDmsStr(M_PI - a) << " / " << StelUtils::radToDmsStr(b) << "<br/>";
-            ss << "Over ground speed: " << currentFrame->ground_speed << " m/s (" << currentFrame->ground_speed_knots << " knots)" << "<br/>";
-            ss << "Vertical rate: " << currentFrame->vertical_rate << " m/s (" << currentFrame->vertical_rate_ft_min << " ft/min)" << "<br/>";
-            ss << "Ground track: " << currentFrame->ground_track << " deg" << "<br/>";
-            //ss << "visible " << numVisible << " paths " << numPaths;
+            // TRANSLATORS: sight angles to the plane
+            ss << q_("Azimuth / Elevation: ") << StelUtils::radToDmsStr(M_PI - a) << QStringLiteral(" / ") << StelUtils::radToDmsStr(b) << br;
+            ss << q_("Over ground speed: ") << currentFrame->ground_speed << QStringLiteral(" m/s (") << currentFrame->ground_speed_knots << QStringLiteral(" knots)") << br;
+            ss << q_("Vertical rate: ") << currentFrame->vertical_rate << QStringLiteral(" m/s (") << currentFrame->vertical_rate_ft_min << QStringLiteral(" ft/min)") << br;
+            ss << q_("Ground track: ") << currentFrame->ground_track << QStringLiteral(" deg") << br;
         } else {
-            ss << "No data for this time.<br/>";
+            // TRANSLATORS: There is no data for the flight for the current time
+            ss << q_("No data for this time.") << br;
         }
     }
 
     postProcessInfoString(infoStr, flags);
     return infoStr;
+}
+
+QString Flight::getEnglishName() const
+{
+    Q_ASSERT(data);
+    return data->getCallsign().isEmpty() ? data->getHexAddress() : data->getCallsign();
+}
+
+QString Flight::getNameI18n() const
+{
+    return getEnglishName();
+}
+
+QString Flight::getCallsign() const
+{
+    Q_ASSERT(data);
+    return data->getCallsign();
+}
+
+QString Flight::getAddress() const
+{
+    Q_ASSERT(data);
+    return data->getHexAddress();
+}
+
+QString Flight::getIntAddress() const
+{
+    Q_ASSERT(data);
+    return data->getAddress();
+}
+
+QString Flight::getCountry() const
+{
+    Q_ASSERT(data);
+    return data->getCountry();
 }
 
 Vec3d Flight::getJ2000EquatorialPos(const StelCore *core) const
@@ -169,7 +224,20 @@ Vec3d Flight::getAzAl() const
 
 bool Flight::isTimeInRange(double jd) const
 {
+    Q_ASSERT(data);
     return data->timeInRange(jd);
+}
+
+double Flight::getTimeStart() const
+{
+    Q_ASSERT(data);
+    return data->getTimeStart();
+}
+
+double Flight::getTimeEnd() const
+{
+    Q_ASSERT(data);
+    return data->getTimeEnd();
 }
 
 void Flight::update(double currentTime)
@@ -205,12 +273,6 @@ void Flight::draw(StelCore *core, StelPainter &painter, Flight::PathDrawMode pat
         }
         numVisible++;
         painter.drawSprite2dMode(xy[0], xy[1], 11);
-        /*
-        Vec4f col = painter.getColor();
-        painter.setColor(1,0,0,1);
-        painter.drawPoint2d(xy[0], xy[1]);
-        painter.setColor(col[0], col[1], col[2], col[3]);
-        */
         if (drawLabel) {
             painter.drawText(xy[0], xy[1], getEnglishName(), 0, 10, 10, false);
         }
@@ -237,7 +299,6 @@ void Flight::drawPath(StelCore *core, StelPainter &painter)
     }
     //TODO eventually do this all in a shader
     numPaths++;
-    //glDisable(GL_TEXTURE_2D);
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
@@ -245,7 +306,9 @@ void Flight::drawPath(StelCore *core, StelPainter &painter)
     Vec3d onscreen; // projected coords
     painter.enableClientStates(true, false, true);
     QList<ADSBFrame> *pdata = data->getAllData();
-    if (pathVert.size() < pdata->size() * 2) {
+    // Resize buffer if needed
+    Q_ASSERT(pdata->size() >= 0 && pdata->size() <= INT_MAX);
+    if (pathVert.size() < (size_t)pdata->size() * 2) {
         pathVert.resize(pdata->size() * 2);
         pathCol.resize(pdata->size() * 4);
     }
@@ -382,18 +445,18 @@ void Flight::writeToDb() const
     db.transaction();
     QSqlQuery qry;
     //speed up sqlite considerably
-    if (db.driverName() == "QSQLITE") {
-        qry.exec("PRAGMA synchronous=OFF");
-        qry.exec("PRAGMA journal_mode=MEMORY");
-        qry.exec("PRAGMA temp_store=MEMORY");
+    if (db.driverName() == QStringLiteral("QSQLITE")) {
+        qry.exec(QStringLiteral("PRAGMA synchronous=OFF"));
+        qry.exec(QStringLiteral("PRAGMA journal_mode=MEMORY"));
+        qry.exec(QStringLiteral("PRAGMA temp_store=MEMORY"));
     }
-    qry.prepare("INSERT INTO flights (mode_s, callsign, mode_s_hex, country) VALUES (:mode_s, :callsign, :mode_s_hex, :country);");
+    qry.prepare(QStringLiteral("INSERT INTO flights (mode_s, callsign, mode_s_hex, country) VALUES (:mode_s, :callsign, :mode_s_hex, :country);"));
     QString mode_s = data->getAddress();
     QString callsign = data->getCallsign();
-    qry.bindValue(":mode_s", mode_s);
-    qry.bindValue(":callsign", callsign);
-    qry.bindValue(":mode_s_hex", data->getHexAddress());
-    qry.bindValue(":country", data->getCountry());
+    qry.bindValue(QStringLiteral(":mode_s"), mode_s);
+    qry.bindValue(QStringLiteral(":callsign"), callsign);
+    qry.bindValue(QStringLiteral(":mode_s_hex"), data->getHexAddress());
+    qry.bindValue(QStringLiteral(":country"), data->getCountry());
     qry.exec();
     if (qry.lastError().type() != QSqlError::NoError) {
         qDebug() << qry.lastError().text();
@@ -411,20 +474,20 @@ void Flight::writeToDb() const
     QVariantList groundSpeeds;
     QVariantList groundTracks;
 #endif
-    qry.prepare("INSERT INTO adsb (jdate, flights_mode_s, flights_callsign, on_ground, altitude_feet, latitude, longitude, vertical_rate_ft_min, ground_speed_knots, ground_track) "
-                "VALUES (:jdate, :flights_mode_s, :flights_callsign, :on_ground, :altitude_feet, :latitude, :longitude, :vertical_rate_ft_min, :ground_speed_knots, :ground_track)");
+    qry.prepare(QStringLiteral("INSERT INTO adsb (jdate, flights_mode_s, flights_callsign, on_ground, altitude_feet, latitude, longitude, vertical_rate_ft_min, ground_speed_knots, ground_track) "
+                "VALUES (:jdate, :flights_mode_s, :flights_callsign, :on_ground, :altitude_feet, :latitude, :longitude, :vertical_rate_ft_min, :ground_speed_knots, :ground_track)"));
 #ifndef BULKQUERY
     foreach (ADSBFrame f, *data->getAllData()) {
-        qry.bindValue(":jdate", f.time);
-        qry.bindValue(":flights_mode_s", mode_s);
-        qry.bindValue(":flights_callsign", callsign);
-        qry.bindValue(":on_ground", f.onGround);
-        qry.bindValue(":altitude_feet", f.altitude_feet);
-        qry.bindValue(":latitude", f.latitude);
-        qry.bindValue(":longitude", f.longitude);
-        qry.bindValue(":vertical_rate_ft_min", f.vertical_rate_ft_min);
-        qry.bindValue(":ground_speed_knots", f.ground_speed_knots);
-        qry.bindValue(":ground_track", f.ground_track);
+        qry.bindValue(QStringLiteral(":jdate"), f.time);
+        qry.bindValue(QStringLiteral(":flights_mode_s"), mode_s);
+        qry.bindValue(QStringLiteral(":flights_callsign"), callsign);
+        qry.bindValue(QStringLiteral(":on_ground"), f.onGround);
+        qry.bindValue(QStringLiteral(":altitude_feet"), f.altitude_feet);
+        qry.bindValue(QStringLiteral(":latitude"), f.latitude);
+        qry.bindValue(QStringLiteral(":longitude"), f.longitude);
+        qry.bindValue(QStringLiteral(":vertical_rate_ft_min"), f.vertical_rate_ft_min);
+        qry.bindValue(QStringLiteral(":ground_speed_knots"), f.ground_speed_knots);
+        qry.bindValue(QStringLiteral(":ground_track"), f.ground_track);
         qry.exec();
         if (qry.lastError().type() != QSqlError::NoError) {
             qDebug() << qry.lastError().text();
@@ -442,16 +505,16 @@ void Flight::writeToDb() const
         groundSpeeds << f.ground_speed_knots;
         groundTracks << f.ground_track;
     }
-    qry.bindValue(":jdate", jdates);
-    qry.bindValue(":flights_mode_s",mode_ss);
-    qry.bindValue(":flights_callsign", callsigns);
-    qry.bindValue(":on_ground",onGrounds);
-    qry.bindValue(":altitude_feet", altitudes);
-    qry.bindValue(":latitude", latitudes);
-    qry.bindValue(":longitude", longitudes);
-    qry.bindValue(":vertical_rate_ft_min", verticalRates);
-    qry.bindValue(":ground_speed_knots", groundSpeeds);
-    qry.bindValue(":ground_track", groundTracks);
+    qry.bindValue(QStringLiteral(":jdate"), jdates);
+    qry.bindValue(QStringLiteral(":flights_mode_s"),mode_ss);
+    qry.bindValue(QStringLiteral(":flights_callsign"), callsigns);
+    qry.bindValue(QStringLiteral(":on_ground"),onGrounds);
+    qry.bindValue(QStringLiteral(":altitude_feet"), altitudes);
+    qry.bindValue(QStringLiteral(":latitude"), latitudes);
+    qry.bindValue(QStringLiteral(":longitude"), longitudes);
+    qry.bindValue(QStringLiteral(":vertical_rate_ft_min"), verticalRates);
+    qry.bindValue(QStringLiteral(":ground_speed_knots"), groundSpeeds);
+    qry.bindValue(QStringLiteral(":ground_track"), groundTracks);
     qry.exec();
     if (qry.lastError().type() != QSqlError::NoError) {
         qDebug() << qry.lastError().text();
@@ -459,13 +522,19 @@ void Flight::writeToDb() const
 #endif
 #undef BULKQUERY
     db.commit();
-}
+    }
 
-Vec3d Flight::calcECEFPosition(const Vec3d &pos)
-{
-    double r;
-    double c;
-    double sq;
+    int Flight::size() const
+    {
+        Q_ASSERT(data);
+        return data->size();
+    }
+
+    Vec3d Flight::calcECEFPosition(const Vec3d &pos)
+    {
+        double r;
+        double c;
+        double sq;
     double sinlat = sin(pos[0]);
     Vec3d res;
 

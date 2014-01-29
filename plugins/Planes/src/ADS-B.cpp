@@ -21,11 +21,11 @@
 #include "StelUtils.hpp"
 
 
-static const double MAX_TIME_OVER_END = 1000 / (24 * 60 * 60 * 1000); // ms
-static const double FEET_TO_METER = 0.3048;
-static const double KNOTS_TO_MPS = 0.514444444;
-static const double FT_MIN_TO_MPS = 0.00508;
-static const double MAX_TIME_DIFF = 5.0 / (24 * 60 * 60); // 5 sec in jd
+static const double MAX_TIME_OVER_END = 1000 / (24 * 60 * 60 * 1000); //!< Max time to go over end and still returning the end data point (ms)
+static const double FEET_TO_METER = 0.3048; //!< Convert feet to meter
+static const double KNOTS_TO_MPS = 0.514444444; //!< Convert knots to m/s
+static const double FT_MIN_TO_MPS = 0.00508; //!< Convert ft/min to m/s
+static const double MAX_TIME_DIFF = 15.0 / (24 * 60 * 60); //!< Max time to consider msgs as belonging together (15 sec in jd)
 
 bool ADSBData::useInterp = true;
 
@@ -269,7 +269,7 @@ void ADSBData::resetSearchAlgorithm()
 bool ADSBData::parseLine(QString line, ADSBFrame &f, QString &modeS, QString &modeSHex, QString &callsign, QString &country)
 {
     //line.replace("\"", "");
-    QStringList seg = line.split("\",\"");
+    QStringList seg = line.split(QStringLiteral("\",\""));
     if (seg.size() != 17) {
         qDebug() << "Invalid line encountered";
         return false;
@@ -284,10 +284,10 @@ bool ADSBData::parseLine(QString line, ADSBFrame &f, QString &modeS, QString &mo
     }
     // Attempt to find country, even if it's missing in first entry
     country = seg.at(5);
-    QDateTime t = QDateTime::fromString(QString("%1 %2").arg(seg.at(0).right(seg.at(0).size() - 1), seg.at(1)), "yyyy/MM/dd hh:mm:ss.zzz");
+    QDateTime t = QDateTime::fromString(QString(QStringLiteral("%1 %2")).arg(seg.at(0).right(seg.at(0).size() - 1), seg.at(1)), QStringLiteral("yyyy/MM/dd hh:mm:ss.zzz"));
     t.setTimeSpec(Qt::LocalTime);
     f.time = StelUtils::qDateTimeToJd(t.toUTC());
-    f.onGround = (seg.at(6) == "1");
+    f.onGround = (seg.at(6) == QStringLiteral("1"));
     f.altitude_feet = seg.at(7).toDouble();
     f.altitude = f.altitude_feet * FEET_TO_METER;
     f.latitude = seg.at(9).toDouble() * M_PI / 180.0;
@@ -315,7 +315,7 @@ void ADSBData::parseData(QStringList &data)
     //qDebug() << "Begin parsing data";
     if (data.size() >= 1) {
         QString line(data.at(0));
-        QStringList seg = line.replace("\"", "").split(",");
+        QStringList seg = line.replace(QStringLiteral("\""), QStringLiteral("")).split(QStringLiteral(","));
         modeSAddress = seg.at(2);
         modeSAddressHex = seg.at(3);
         callsign = seg.at(4);
@@ -323,8 +323,8 @@ void ADSBData::parseData(QStringList &data)
         initialised = true;
     }
     foreach (QString line, data) {
-        line.replace("\"", "");
-        QStringList seg = line.split(",");
+        line.replace(QStringLiteral("\""), QStringLiteral(""));
+        QStringList seg = line.split(QStringLiteral(","));
         if (seg.size() != 17) {
             qDebug() << "Invalid line encountered";
             continue;
@@ -338,10 +338,10 @@ void ADSBData::parseData(QStringList &data)
             country = seg.at(5);
         }
         ADSBFrame f;
-        QDateTime t = QDateTime::fromString(QString("%1 %2").arg(seg.at(0), seg.at(1)), "yyyy/MM/dd hh:mm:ss.zzz");
+        QDateTime t = QDateTime::fromString(QString(QStringLiteral("%1 %2")).arg(seg.at(0), seg.at(1)), QStringLiteral("yyyy/MM/dd hh:mm:ss.zzz"));
         t.setTimeSpec(Qt::LocalTime);
         f.time = StelUtils::qDateTimeToJd(t.toUTC());
-        f.onGround = (seg.at(6) == "1");
+        f.onGround = (seg.at(6) == QStringLiteral("1"));
         f.altitude_feet = seg.at(7).toDouble();
         f.altitude = f.altitude_feet * FEET_TO_METER;
         f.latitude = seg.at(9).toDouble() * M_PI / 180.0;
@@ -417,6 +417,7 @@ void ADSBData::checkFrame()
         }
     }
     /*
+    // Missing data onGround
     if (surfPosTime > 0) {
         if (fabs(surfPosTimes - airVelTime) < MAX_TIME_DIFF) {
             ADSBFrame f;
