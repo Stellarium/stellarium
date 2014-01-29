@@ -31,150 +31,150 @@ class PlanesDialog;
 //! Provides the user with a GUI to customise the plugin behaviour.
 class PlanesDialog : public StelDialog
 {
-    Q_OBJECT
+	Q_OBJECT
 
 public:
-    explicit PlanesDialog();
-    ~PlanesDialog();
+	explicit PlanesDialog();
+	~PlanesDialog();
 
 public slots:
-    void retranslate();
+	void retranslate();
 
-    //! Display status string for database
-    void setDBStatus(QString status);
+	//! Display status string for database
+	void setDBStatus(QString status);
 
-    //! Display status string for data port
-    void setBSStatus(QString status);
+	//! Display status string for data port
+	void setBSStatus(QString status);
 
 signals:
-    //!@{
-    //! Signals emitted, when settings change or buttons are clicked
-    void changePathColourMode(Flight::PathColour mode);
-    void changePathDrawModw(Flight::PathDrawMode mode);
-    void showLabels(bool enabled);
-    void fileSelected(QString filename);
-    void useInterp(bool interp);
-    void useDB(bool useDB);
-    void useBS(bool useBS);
-    void credentialsChanged(DBCredentials creds);
-    void connectDB();
-    void disconnectDB();
-    void bsHostChanged(QString host);
-    void bsPortChanged(quint16 port);
-    void bsUseDBChanged(bool useDB);
-    void connectBS();
-    void disconnectBS();
-    void connectOnStartup(bool enabled);
-    //!@}
+	//!@{
+	//! Signals emitted, when settings change or buttons are clicked
+	void pathColourModeChanged(Flight::PathColour mode);
+	void pathDrawModeChanged(Flight::PathDrawMode mode);
+	void showLabelsChanged(bool enabled);
+	void fileSelected(QString filename);
+	void useInterpChanged(bool interp);
+	void dbUsedSet(bool dbUsedSet);
+	void bsUsedSet(bool bsUsedSet);
+	void credentialsChanged(DBCredentials creds);
+	void connectDBRequested();
+	void disconnectDBRequested();
+	void bsHostChanged(QString host);
+	void bsPortChanged(quint16 port);
+	void bsUseDBChanged(bool dbUsedSet);
+	void connectBSRequested();
+	void disconnectBSRequested();
+	void connectOnStartupChanged(bool enabled);
+	//!@}
 
 protected:
-    //! Prepare the dialot for first time useage
-    void createDialogContent();
+	//! Prepare the dialot for first time useage
+	void createDialogContent();
 
 private:
-    //! Toggle certain settings that depend on other settings being enabled
-    void updateDBFields();
+	//! Toggle certain settings that depend on other settings being enabled
+	void updateDBFields();
 
-    Ui::PlanesDialog *ui;
-    QString cachedDBStatus;
-    QString cachedBSStatus;
+	Ui::PlanesDialog *ui;
+	QString cachedDBStatus;
+	QString cachedBSStatus;
 
 private slots:
-    //!@{
-    //! Slots to connect UI elements to, handle events such as button clicks and
-    //! value changes.
-    void solidColClicked()
-    {
-        emit changePathColourMode(Flight::SolidColour);
-    }
-    void heightColClicked()
-    {
-        emit changePathColourMode(Flight::EncodeHeight);
-    }
-    void velocityColClicked()
-    {
-        emit changePathColourMode(Flight::EncodeVelocity);
-    }
-    void noPathsClicked()
-    {
-        emit changePathDrawModw(Flight::NoPaths);
-    }
-    void selectedPathClicked()
-    {
-        emit changePathDrawModw(Flight::SelectedOnly);
-    }
-    void inViewPathsClicked()
-    {
-        emit changePathDrawModw(Flight::InViewOnly);
-    }
-    void allPathsClicked()
-    {
-        emit changePathDrawModw(Flight::AllPaths);
-    }
-    void showLabelsClicked(bool enabled)
-    {
-        emit showLabels(enabled);
-    }
-    void useInterpClicked(bool checked)
-    {
-        emit useInterp(checked);
-    }
-    void minHeightChanged(double val) {
-        Flight::setMinHeight(val);
-    }
-    void maxHeightChanged(double val) {
-        Flight::setMaxHeight(val);
-    }
-    void minVelChanged(double val) {
-        Flight::setMinVelocity(val);
-    }
-    void maxVelChanged(double val) {
-        Flight::setMaxVelocity(val);
-    }
-    void minVertRateChanged(double val) {
-        Flight::setMinVertRate(val);
-    }
-    void maxVertRateChanged(double val) {
-        Flight::setMaxVertRate(val);
-    }
+	//!@{
+	//! Slots to connect UI elements to, handle events such as button clicks and
+	//! value changes.
+	void setSolidCol()
+	{
+		emit pathColourModeChanged(Flight::SolidColour);
+	}
+	void setHeightCol()
+	{
+		emit pathColourModeChanged(Flight::EncodeHeight);
+	}
+	void setVelocityCol()
+	{
+		emit pathColourModeChanged(Flight::EncodeVelocity);
+	}
+	void setNoPaths()
+	{
+		emit pathDrawModeChanged(Flight::NoPaths);
+	}
+	void setSelectedPath()
+	{
+		emit pathDrawModeChanged(Flight::SelectedOnly);
+	}
+	void setInviewPaths()
+	{
+		emit pathDrawModeChanged(Flight::InViewOnly);
+	}
+	void setAllPaths()
+	{
+		emit pathDrawModeChanged(Flight::AllPaths);
+	}
+	void setLabels(bool enabled)
+	{
+		emit showLabelsChanged(enabled);
+	}
+	void setInterp(bool checked)
+	{
+		emit useInterpChanged(checked);
+	}
+	void setMinHeight(double val) {
+		Flight::setMinHeight(val);
+	}
+	void setMaxHeight(double val) {
+		Flight::setMaxHeight(val);
+	}
+	void setMinVel(double val) {
+		Flight::setMinVelocity(val);
+	}
+	void setMaxVel(double val) {
+		Flight::setMaxVelocity(val);
+	}
+	void setMinVertRate(double val) {
+		Flight::setMinVertRate(val);
+	}
+	void setMaxVertRate(double val) {
+		Flight::setMaxVertRate(val);
+	}
 
-    void fileOpenClicked();
+	void openFile();
 
-    void connectClicked()
-    {
-        emit connectDB();
-    }
-    void disconnectClicked()
-    {
-        emit disconnectDB();
-    }
+	void connectDB()
+	{
+		emit connectDBRequested();
+	}
+	void disconnectDB()
+	{
+		emit disconnectDBRequested();
+	}
 
-    void useDBClicked();
-    void credsChanged();
+	void setUseDB();
+	void updateCreds();
 
-    void bsHostClicked(const QString &host)
-    {
-        emit bsHostChanged(host);
-    }
-    void bsPortClicked(const QString &port)
-    {
-        emit bsPortChanged(port.toUInt());
-    }
-    void bsUseDBClicked(bool enabled)
-    {
-        emit bsUseDBChanged(enabled);
-    }
-    void bsConnectClicked()
-    {
-        emit connectBS();
-    }
-    void bsDisconnectClicked()
-    {
-        emit disconnectBS();
-    }
-    void useBSClicked();
-    void connectOnStartupClicked();
-    //!@}
+	void setBSHost(const QString &host)
+	{
+		emit bsHostChanged(host);
+	}
+	void setBSPort(const QString &port)
+	{
+		emit bsPortChanged(port.toUInt());
+	}
+	void setBSUseDB(bool enabled)
+	{
+		emit bsUseDBChanged(enabled);
+	}
+	void connectBS()
+	{
+		emit connectBSRequested();
+	}
+	void disconnectBS()
+	{
+		emit disconnectBSRequested();
+	}
+	void setUseBS();
+	void setConnectOnStartup();
+	//!@}
 };
 
 #endif // PLANESDIALOG_HPP

@@ -32,148 +32,148 @@
 //! The captured data can optionally be written to a database.
 class BSDataSource : public FlightDataSource
 {
-    Q_OBJECT
+	Q_OBJECT
 public:
 
-    //! @enum MsgMsgType
-    //! Encodes the types of message a line startin with "MSG" is
-    enum MsgMsgType
-    {
-        NA = 0,
-        IDMessage = 1,
-        SurfacePositionMessage = 2,
-        AirbornePositionMessage = 3,
-        AirborneVelocityMessage = 4,
-        SurveillanceAltMessage = 5,
-        SurveillanceIDMessage = 6,
-        AirToAirMessage = 7,
-        AllCallReply = 8
-    };
+	//! @enum MsgMsgType
+	//! Encodes the types of message a line startin with "MSG" is
+	enum MsgMsgType
+	{
+		NA = 0,
+		IDMessage = 1,
+		SurfacePositionMessage = 2,
+		AirbornePositionMessage = 3,
+		AirborneVelocityMessage = 4,
+		SurveillanceAltMessage = 5,
+		SurveillanceIDMessage = 6,
+		AirToAirMessage = 7,
+		AllCallReply = 8
+	};
 
-    //! Constructor
-    BSDataSource();
+	//! Constructor
+	BSDataSource();
 
-    //! Implemented from FlightDataSource
-    QList<FlightP> *getRelevantFlights();
+	//! Implemented from FlightDataSource
+	QList<FlightP> *getRelevantFlights();
 
-    //! Implemented from FlightDataSource
-    //! Removes old flights.
-    void updateRelevantFlights(double jd, double rate);
+	//! Implemented from FlightDataSource
+	//! Removes old flights.
+	void updateRelevantFlights(double jd, double rate);
 
-    //! Prepare this datasource for use
-    void init();
+	//! Prepare this datasource for use
+	void init();
 
-    //! Cleanup
-    void deinit();
+	//! Cleanup
+	void deinit();
 
-    //! Is a database connection used?
-    bool isDatabaseEnabled() const;
+	//! Is a database connection used?
+	bool isDatabaseEnabled() const;
 
-    //! Is a TCP socket used?
-    bool isSocketEnabled() const;
+	//! Is a TCP socket used?
+	bool isSocketEnabled() const;
 
-    //! Control whether old flights will be saved to the database
-    //! before they are deleted.
-    bool isDumpOldFlightsEnabled() const;
+	//! Control whether old flights will be saved to the database
+	//! before they are deleted.
+	bool isDumpOldFlightsEnabled() const;
 
 public slots:
-    //! Prompted to connect to db and/or socket
-    void connectClicked(QString host, quint16 port, DBCredentials creds);
+	//! Prompted to connect to db and/or socket
+	void connectDBBS(QString host, quint16 port, DBCredentials creds);
 
-    //! Disconnect the socket
-    void disconnectSocket();
+	//! Disconnect the socket
+	void disconnectSocket();
 
-    //! Disconnect the database
-    void disconnectDatabase();
+	//! Disconnect the database
+	void disconnectDatabase();
 
-    //! Read available data from the TCP socket
-    void readData();
+	//! Read available data from the TCP socket
+	void readData();
 
-    //! Turn on usage of database
-    void setDatabaseEnabled(bool enabled);
+	//! Turn on usage of database
+	void setDatabaseEnabled(bool enabled);
 
-    //! Turn on usage of TCP socket
-    void setSocketEnabled(bool value);
+	//! Turn on usage of TCP socket
+	void setSocketEnabled(bool value);
 
-    //! Turn on writing of old flights to database
-    void setDumpOldFlights(bool value);
+	//! Turn on writing of old flights to database
+	void setDumpOldFlights(bool value);
 
 signals:
-    //! Emitted to signal status changes of the socket to the GUI
-    void bsStatus(QString status);
+	//! Emitted to signal status changes of the socket to the GUI
+	void bsStatusChanged(QString status);
 
-    //! Emitted to signal status changes of the database to the GUI
-    void dbStatus(QString status);
+	//! Emitted to signal status changes of the database to the GUI
+	void dbStatusChanged(QString status);
 
-    //! Emitted to request dumping a flight by the DatabaseWorker
-    void dumpFlight(FlightP f);
+	//! Emitted to request dumping a flight by the DatabaseWorker
+	void dumpFlightRequested(FlightP f);
 
-    //! Request connecting to database
-    void connectDB(DBCredentials creds);
+	//! Request connecting to database
+	void connectDBRequested(DBCredentials creds);
 
-    //! Request disconnecting from database
-    void disconnectDB();
+	//! Request disconnecting from database
+	void disconnectDBRequested();
 
-    //! Request querying list of relevant flights by DatabaseWorker
-    void sigGetFlightList(double jd, double rate);
+	//! Request querying list of relevant flights by DatabaseWorker
+	void flightListRequested(double jd, double rate);
 
-    //! Request querying of flight by DatabaseWorker
-    void sigGetFlight(QString modeS, QString callsign, double startTime);
+	//! Request querying of flight by DatabaseWorker
+	void flightRequested(QString modeS, QString callsign, double startTime);
 
-    //! Stop using db, disconnect and exit
-    void stopDB();
+	//! Stop using db, disconnect and exit
+	void dbStopRequested();
 
 private slots:
-    //! Socket error occured
-    void error();
+	//! Socket error occured
+	void handleSocketError();
 
-    //! Socket entered state "connected"
-    void connected();
+	//! Socket entered state "connected"
+	void setSocketConnected();
 
-    //! Socket entered state "disconnected"
-    void disconnected();
+	//! Socket entered state "disconnected"
+	void setSocketDisconnected();
 
-    //! Database connected
-    //! @param connected true if connection was successful
-    //! @param error last error message
-    void dbConnected(bool connected, QString error);
+	//! Database connected
+	//! @param connected true if connection was successful
+	//! @param error last error message
+	void setDBConnected(bool setSocketConnected, QString handleSocketError);
 
-    //! Database disconnected
-    void dbDisconnected(bool disconnected);
+	//! Database disconnected
+	void setDBDisconnected(bool setSocketDisconnected);
 
-    //! Database returned result of sigGetFlight() request
-    void addFlight(QList<ADSBFrame> data, QString modeS, QString modeSHex, QString callsign, QString country);
+	//! Database returned result of sigGetFlight() request
+	void addFlight(QList<ADSBFrame> data, QString modeS, QString modeSHex, QString callsign, QString country);
 
-    //! Receive a list of relevant flights from the database worker
-    //! @param ids a list of IDs of the form modeS + callsign
-    void setFlightList(QList<FlightID> ids);
+	//! Receive a list of relevant flights from the database worker
+	//! @param ids a list of IDs of the form modeS + callsign
+	void setFlightList(QList<FlightID> ids);
 
 
 private:
-    //! Parse a message received on the TCP socket
-    //! @param buf the buffer containing the read data
-    //! @param start start position of the message to parse
-    //! @param end end position of the message to parse
-    void parseMsg(QByteArray &buf, int start, int end);
+	//! Parse a message received on the TCP socket
+	//! @param buf the buffer containing the read data
+	//! @param start start position of the message to parse
+	//! @param end end position of the message to parse
+	void parseMsg(QByteArray &buf, int start, int end);
 
-    QList<FlightP> relevantFlights; //!< List of flights returned to FlightMgr
-    QHash<int, FlightP> flights; //!< Hash of flights used to keep track of data received by socket
-    QHash<QString, FlightP> dbFlights; //!< Hash of flights used to keep track of data received by database
+	QList<FlightP> relevantFlights; //!< List of flights returned to FlightMgr
+	QHash<int, FlightP> flights; //!< Hash of flights used to keep track of data received by socket
+	QHash<QString, FlightP> dbFlights; //!< Hash of flights used to keep track of data received by database
 
-    QTcpSocket socket; //!< TCP socket to receive data from BaseStation on
-    QByteArray readBuffer; //!< Read buffer for the TCP data
+	QTcpSocket socket; //!< TCP socket to receive data from BaseStation on
+	QByteArray readBuffer; //!< Read buffer for the TCP data
 
-    //!@{
-    //! Internal config/state
-    bool useDatabase;
-    bool useSocket;
-    bool dumpOldFlights;
-    bool isDbConnected;
-    bool isSocketConnected;
-    //!@}
+	//!@{
+	//! Internal config/state
+	bool useDatabase;
+	bool useSocket;
+	bool dumpOldFlights;
+	bool isDbConnected;
+	bool isSocketConnected;
+	//!@}
 
-    QThread *dbWorkerThread; //!< DatabaseWorker thread to make database access asynchronous
-    DatabaseWorker *dbWorker; //!< DatabaseWorker
+	QThread *dbWorkerThread; //!< DatabaseWorker thread to make database access asynchronous
+	DatabaseWorker *dbWorker; //!< DatabaseWorker
 };
 
 #endif // BSDATASOURCE_HPP
