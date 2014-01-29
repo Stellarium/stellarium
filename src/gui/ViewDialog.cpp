@@ -79,6 +79,7 @@ void ViewDialog::retranslate()
 		ui->retranslateUi(dialog);
 		updateZhrDescription();
 		populateLists();
+		populateLightPollution();
 
 		//Hack to shrink the tabs to optimal size after language change
 		//by causing the list items to be laid out again.
@@ -235,12 +236,17 @@ void ViewDialog::createDialogContent()
 	connect(ui->landscapePositionCheckBox, SIGNAL(toggled(bool)), lmgr, SLOT(setFlagLandscapeSetsLocation(bool)));
 
 	ui->landscapeBrightnessCheckBox->setChecked(lmgr->getFlagLandscapeUseMinimalBrightness());
-	connect(ui->landscapeBrightnessCheckBox, SIGNAL(toggled(bool)), lmgr, SLOT(setFlagLandscapeUseMinimalBrightness(bool)));
+	connect(ui->landscapeBrightnessCheckBox, SIGNAL(toggled(bool)), this, SLOT(setFlagLandscapeUseMinimalBrightness(bool)));
+	ui->landscapeBrightnessSpinBox->setValue(lmgr->getDefaultMinimalBrightness());
+	connect(ui->landscapeBrightnessSpinBox, SIGNAL(valueChanged(double)), lmgr, SLOT(setDefaultMinimalBrightness(double)));
+	ui->localLandscapeBrightnessCheckBox->setChecked(lmgr->getFlagLandscapeSetsMinimalBrightness());
+	connect(ui->localLandscapeBrightnessCheckBox, SIGNAL(toggled(bool)), lmgr, SLOT(setFlagLandscapeSetsMinimalBrightness(bool)));
+	populateLandscapeMinimalBrightness();
 
 	// Light pollution
 	populateLightPollution();
 	ui->useLocationDataCheckBox->setChecked(lmgr->getFlagUseLightPollutionFromDatabase());
-	connect(ui->useLocationDataCheckBox, SIGNAL(toggled(bool)), lmgr, SLOT(setFlagUseLightPollutionFromDatabase(bool)));	
+	connect(ui->useLocationDataCheckBox, SIGNAL(toggled(bool)), lmgr, SLOT(setFlagUseLightPollutionFromDatabase(bool)));
 	connect(lmgr, SIGNAL(lightPollutionUsageChanged(bool)), this, SLOT(populateLightPollution()));
 	connect(ui->lightPollutionSpinBox, SIGNAL(valueChanged(int)), lmgr, SLOT(setAtmosphereBortleLightPollution(int)));
 	connect(ui->lightPollutionSpinBox, SIGNAL(valueChanged(int)), StelApp::getInstance().getCore()->getSkyDrawer(), SLOT(setBortleScaleIndex(int)));
@@ -249,17 +255,8 @@ void ViewDialog::createDialogContent()
 	ui->autoChangeLandscapesCheckBox->setChecked(lmgr->getFlagLandscapeAutoSelection());
 	connect(ui->autoChangeLandscapesCheckBox, SIGNAL(toggled(bool)), lmgr, SLOT(setFlagLandscapeAutoSelection(bool)));
 	
-	// GZ: changes for refraction
-	//ui->pressureDoubleSpinBox->setValue(StelApp::getInstance().getCore()->getSkyDrawer()->getAtmospherePressure());
-	//connect(ui->pressureDoubleSpinBox, SIGNAL(valueChanged(double)), StelApp::getInstance().getCore()->getSkyDrawer(), SLOT(setAtmospherePressure(double)));
-	//ui->temperatureDoubleSpinBox->setValue(StelApp::getInstance().getCore()->getSkyDrawer()->getAtmosphereTemperature());
-	//connect(ui->temperatureDoubleSpinBox, SIGNAL(valueChanged(double)), StelApp::getInstance().getCore()->getSkyDrawer(), SLOT(setAtmosphereTemperature(double)));
-	//ui->extinctionDoubleSpinBox->setValue(StelApp::getInstance().getCore()->getSkyDrawer()->getExtinctionCoefficient());
-	//connect(ui->extinctionDoubleSpinBox, SIGNAL(valueChanged(double)), StelApp::getInstance().getCore()->getSkyDrawer(), SLOT(setExtinctionCoefficient(double)));
-	//// instead
+	// atmosphere details
 	connect(ui->pushButtonAtmosphereDetails, SIGNAL(clicked()), this, SLOT(showAtmosphereDialog()));
-	// GZ: Done
-
 
 	ui->useAsDefaultLandscapeCheckBox->setChecked(lmgr->getCurrentLandscapeID()==lmgr->getDefaultLandscapeID());
 	ui->useAsDefaultLandscapeCheckBox->setEnabled(lmgr->getCurrentLandscapeID()!=lmgr->getDefaultLandscapeID());
@@ -295,8 +292,12 @@ void ViewDialog::createDialogContent()
 	const bool b = StelApp::getInstance().getSkyCultureMgr().getCurrentSkyCultureID()==StelApp::getInstance().getSkyCultureMgr().getDefaultSkyCultureID();
 	ui->useAsDefaultSkyCultureCheckBox->setChecked(b);
 	ui->useAsDefaultSkyCultureCheckBox->setEnabled(!b);
+	connect(ui->nativeNameCheckBox, SIGNAL(clicked(bool)), ssmgr, SLOT(setFlagNativeNames(bool)));
+	ui->nativeNameCheckBox->setChecked(ssmgr->getFlagNativeNames());
+	// GZ NEW allow to display short names and inhibit translation.
+	connect(ui->skyCultureNamesStyleComboBox, SIGNAL(currentIndexChanged(int)), cmgr, SLOT(setConstellationDisplayStyle(int)));
 
-	// Sky layers
+	// Sky layers. This not yet finished and not visible in releases.
 	populateSkyLayersList();
 	connect(this, SIGNAL(visibleChanged(bool)), this, SLOT(populateSkyLayersList()));
 	connect(ui->skyLayerListWidget, SIGNAL(currentTextChanged(const QString&)), this, SLOT(skyLayersSelectionChanged(const QString&)));
@@ -306,6 +307,27 @@ void ViewDialog::createDialogContent()
 	QTimer* refreshTimer = new QTimer(this);
 	connect(refreshTimer, SIGNAL(timeout()), this, SLOT(updateFromProgram()));
 	refreshTimer->start(200);
+}
+
+void ViewDialog::setFlagLandscapeUseMinimalBrightness(bool b)
+{
+	LandscapeMgr* lmgr = GETSTELMODULE(LandscapeMgr);
+	lmgr->setFlagLandscapeUseMinimalBrightness(b);
+	populateLandscapeMinimalBrightness();
+}
+
+void ViewDialog::populateLandscapeMinimalBrightness()
+{
+	if (ui->landscapeBrightnessCheckBox->isChecked())
+	{
+		ui->localLandscapeBrightnessCheckBox->setEnabled(true);
+		ui->landscapeBrightnessSpinBox->setEnabled(true);
+	}
+	else
+	{
+		ui->localLandscapeBrightnessCheckBox->setEnabled(false);
+		ui->landscapeBrightnessSpinBox->setEnabled(false);
+	}
 }
 
 void ViewDialog::populateLightPollution()
@@ -364,9 +386,9 @@ void ViewDialog::setBortleScaleToolTip(int Bindex)
 	nelm.append("4.0");
 
 	QString tooltip = QString("%1 (%2 %3)")
-			.arg(list.at(i).toLocal8Bit().constData())
+			.arg(list.at(i))
 			.arg(q_("The naked-eye limiting magnitude is"))
-			.arg(nelm.at(i).toLocal8Bit().constData());
+			.arg(nelm.at(i));
 
 	ui->lightPollutionSpinBox->setToolTip(tooltip);
 }
@@ -381,6 +403,23 @@ void ViewDialog::populateLists()
 	l->setCurrentItem(l->findItems(StelApp::getInstance().getSkyCultureMgr().getCurrentSkyCultureNameI18(), Qt::MatchExactly).at(0));
 	l->blockSignals(false);
 	updateSkyCultureText();
+
+	// populate language printing combo. (taken from DeltaT combo)
+	ConstellationMgr* cmgr=GETSTELMODULE(ConstellationMgr);
+	Q_ASSERT(cmgr);
+	Q_ASSERT(ui->skyCultureNamesStyleComboBox);
+	QComboBox* cultureNamesStyleComboBox = ui->skyCultureNamesStyleComboBox;
+	cultureNamesStyleComboBox->blockSignals(true);
+	cultureNamesStyleComboBox->clear();
+	cultureNamesStyleComboBox->addItem(q_("Abbreviated"),  ConstellationMgr::constellationsAbbreviated);
+	cultureNamesStyleComboBox->addItem(q_("Native"),       ConstellationMgr::constellationsNative);  // Please make this always a transcript into European letters!
+	cultureNamesStyleComboBox->addItem(q_("Translated"),   ConstellationMgr::constellationsTranslated);
+	//cultureNamesStyleComboBox->addItem(q_("English"),    ConstellationMgr::constellationsEnglish); // This is not useful.
+	//Restore the selection
+	int index = cultureNamesStyleComboBox->findData(cmgr->getConstellationDisplayStyle(), Qt::UserRole, Qt::MatchCaseSensitive);
+	if (index==-1) index=2; // Default: Translated
+	cultureNamesStyleComboBox->setCurrentIndex(index);
+	cultureNamesStyleComboBox->blockSignals(false);
 
 	const StelCore* core = StelApp::getInstance().getCore();	
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
@@ -470,6 +509,7 @@ void ViewDialog::skyCultureChanged(const QString& cultureName)
 	ui->useAsDefaultSkyCultureCheckBox->setEnabled(!b);
 }
 
+// fill the description text window, not the names in the sky.
 void ViewDialog::updateSkyCultureText()
 {
 	StelApp& app = StelApp::getInstance();

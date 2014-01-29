@@ -142,7 +142,7 @@ QVariantMap MeteorShower::getMap(void)
 
 float MeteorShower::getSelectPriority(const StelCore*) const
 {
-	return -2.0;
+	return -4.0;
 }
 
 QString MeteorShower::getDesignation() const

@@ -80,6 +80,7 @@ public slots:
 	//! @note for fully compatibles behavior of this function with the version 0.11.4
 	//! or earlier, you should call \b core.setDeltaTAlgorithm("WithoutCorrection");
 	//! before running \b core.setDate(); for disabling DeltaT correction.
+	//! @note starting with version 0.13.2 all relative dates are set without DeltaT correction.
 	void setDate(const QString& dt, const QString& spec="utc", const bool& enableDeltaT=true);
 
 	//! get the simulation date and time as a string in ISO format,
@@ -689,7 +690,26 @@ public slots:
 	//! For parameter descriptions see setDate().
 	//! @returns Julian day.
 	double jdFromDateString(const QString& dt, const QString& spec);
-	
+
+	// Methods wait() and waitFor() was added for documentation.
+	// Details: https://bugs.launchpad.net/stellarium/+bug/1402200
+
+	//! Pauses the script for \e t milliseconds
+	//! @param t the number of milliseconds to wait
+	//! @note This method is pure JavaScript implementation.
+	void wait(double t) { Q_UNUSED(t) }
+
+	//! Waits until a specified simulation date/time. This function
+	//! will take into account the rate (and direction) in which simulation
+	//! time is passing. e.g. if a future date is specified and the
+	//! time is moving backwards, the function will return immediately.
+	//! If the time rate is 0, the function will not wait.  This is to
+	//! prevent infinite wait time.
+	//! @param dt the date string to use
+	//! @param spec "local" or "utc"
+	//! @note This method is pure JavaScript implementation.
+	void waitFor(const QString& dt, const QString& spec="utc") { Q_UNUSED(dt); Q_UNUSED(spec) }
+
 signals:
 	void requestLoadSkyImage(const QString& id, const QString& filename,
 							 double c1, double c2,

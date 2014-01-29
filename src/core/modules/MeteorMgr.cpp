@@ -154,7 +154,7 @@ void MeteorMgr::update(double deltaTime)
 
 void MeteorMgr::draw(StelCore* core)
 {
-	if (!flagShow)
+	if (!flagShow || !core->getSkyDrawer()->getFlagHasAtmosphere())
 	{
 		return;
 	}

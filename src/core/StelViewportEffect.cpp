@@ -55,7 +55,9 @@ StelViewportDistorterFisheyeToSphericMirror::StelViewportDistorterFisheyeToSpher
 {
 	QSettings& conf = *StelApp::getInstance().getSettings();
 	StelCore* core = StelApp::getInstance().getCore();
-
+	StelProjector::StelProjectorParams params = core->getCurrentStelProjectorParams();
+	screen_h *= params.devicePixelsPerPixel;
+	screen_w *= params.devicePixelsPerPixel;
 	// initialize viewport parameters and texture size:
 
 	// maximum FOV value of the not yet distorted image
@@ -105,36 +107,37 @@ StelViewportDistorterFisheyeToSphericMirror::StelViewportDistorterFisheyeToSpher
 	newProjectorParams.viewportXywh[0] = (screen_w-newProjectorParams.viewportXywh[2]) >> 1;
 	newProjectorParams.viewportXywh[1] = (screen_h-newProjectorParams.viewportXywh[3]) >> 1;
 
+	newProjectorParams.viewportXywh[2] *= originalProjectorParams.devicePixelsPerPixel;
+	newProjectorParams.viewportXywh[3] *= originalProjectorParams.devicePixelsPerPixel;
 	StelApp::getInstance().getCore()->setCurrentStelProjectorParams(newProjectorParams);
 
 	// init transformation
 	VertexPoint *vertex_point_array = 0;
 	const QString custom_distortion_file = conf.value("spheric_mirror/custom_distortion_file","").toString();
-	if (custom_distortion_file.isEmpty())
-	{
+	if (custom_distortion_file.isEmpty()) {
 		float texture_triangle_base_length = conf.value("spheric_mirror/texture_triangle_base_length",16.f).toFloat();
-		if (texture_triangle_base_length > 256.f)
+		if (texture_triangle_base_length > 256.f) {
 			texture_triangle_base_length = 256.f;
-		else if (texture_triangle_base_length < 2.f)
+		} else if (texture_triangle_base_length < 2.f) {
 			texture_triangle_base_length = 2.f;
-        max_x = (int)StelUtils::trunc(0.5 + screen_w/texture_triangle_base_length);
+		}
+		max_x = (int)StelUtils::trunc(0.5 + screen_w/texture_triangle_base_length);
 		step_x = screen_w / (double)(max_x-0.5);
-        max_y = (int)StelUtils::trunc(screen_h/(texture_triangle_base_length*0.5*sqrt(3.0)));
+		max_y = (int)StelUtils::trunc(screen_h/(texture_triangle_base_length*0.5*sqrt(3.0)));
 		step_y = screen_h/ (double)max_y;
 
 		double gamma = conf.value("spheric_mirror/projector_gamma",0.45).toDouble();
-		if (gamma < 0.0)
+		if (gamma < 0.0) {
 			gamma = 0.0;
+		}
 
 		const float view_scaling_factor = 0.5 * newProjectorParams.viewportFovDiameter / prj->fovToViewScalingFactor(distorter_max_fov*(M_PI/360.0));
 		texture_point_array = new Vec2f[(max_x+1)*(max_y+1)];
 		vertex_point_array = new VertexPoint[(max_x+1)*(max_y+1)];
 		double max_h = 0;
 		SphericMirrorCalculator calc(conf);
-		for (int j=0;j<=max_y;j++)
-		{
-			for (int i=0;i<=max_x;i++)
-			{
+		for (int j=0;j<=max_y;j++) {
+			for (int i=0;i<=max_x;i++) {
 				VertexPoint &vertex_point(vertex_point_array[(j*(max_x+1)+i)]);
 				Vec2f &texture_point(texture_point_array[(j*(max_x+1)+i)]);
 				vertex_point.ver_xy[0] = ((i == 0) ? 0.f : (i == max_x) ? screen_w : (i-0.5f*(j&1))*step_x);
@@ -166,66 +169,21 @@ StelViewportDistorterFisheyeToSphericMirror::StelViewportDistorterFisheyeToSpher
 				if (vertex_point.h > max_h) max_h = vertex_point.h;
 			}
 		}
-		for (int j=0;j<=max_y;j++)
-	
-	// FIXME: Comment out with /**/ after testing. --BM
-	/*qDebug() << "StelViewportDistorterFisheyeToSphericMirror():" 
-	         << "screen_w:" << this->screenWidth
-	         << "screen_h:" << this->screenHeight << endl
-	         << "originalProjectorParams.viewportXywh:" 
-	         << originalProjectorParams.viewportXywh[0] 
-	         << originalProjectorParams.viewportXywh[1] 
-	         << originalProjectorParams.viewportXywh[2] 
-	         << originalProjectorParams.viewportXywh[3] << endl
-	         << "newProjectorParams.viewportXywh:"
-	         << newProjectorParams.viewportXywh[0] 
-	         << newProjectorParams.viewportXywh[1] 
-	         << newProjectorParams.viewportXywh[2]
-	         << newProjectorParams.viewportXywh[3] << endl 
-	         << "originalProjectorParams.fov:"
-	         << originalProjectorParams.fov << endl 
-	         << "newProjectorParams.fov:" << newProjectorParams.fov << endl
-	         << "originalProjectorParams.viewportCenter:"
-	         << originalProjectorParams.viewportCenter[0] 
-	         << originalProjectorParams.viewportCenter[1] << endl
-	         << "newProjectorParams.viewportCenter:" 
-	         << newProjectorParams.viewportCenter[0] 
-	         << newProjectorParams.viewportCenter[1] << endl
-	         << "originalProjectorParams.viewportFovDiameter:" 
-	         << originalProjectorParams.viewportFovDiameter << endl
-	         << "newProjectorParams.viewportFovDiameter:"
-	         << newProjectorParams.viewportFovDiameter << endl
-	         << "originalProjectorParams.zNear,zFar:" 
-	         << originalProjectorParams.zNear 
-	         << originalProjectorParams.zFar << endl
-	         << "newProjectorParams.zNear,zFar:" 
-	         << newProjectorParams.zNear 
-	         << newProjectorParams.zFar << endl
-	         //<< "viewport_texture_offset:" 
-	         //<< viewport_texture_offset[0]
-	         //<< viewport_texture_offset[1] << endl
-	         << "texture_h:" << texture_h << endl
-	         << "max_x:" << maxGridX << endl
-	         << "max_y:" << maxGridY;*/
-		{
-			for (int i=0;i<=max_x;i++)
-			{
+		for (int j=0;j<=max_y;j++) {
+			for (int i=0;i<=max_x;i++) {
 				VertexPoint &vertex_point(vertex_point_array[(j*(max_x+1)+i)]);
 				vertex_point.color[0] = vertex_point.color[1] = vertex_point.color[2] =
 											(vertex_point.h<=0.0) ? 0.0 : exp(gamma*log(vertex_point.h/max_h));
 				vertex_point.color[3] = 1.0f;
 			}
 		}
-	}
-	else
-	{
+	} else {
 		QFile file;
 		QTextStream in;
 		QString fName = StelFileMgr::findFile(custom_distortion_file);
-		if (fName.isEmpty())
+		if (fName.isEmpty()) {
 			qWarning() << "WARNING: could not open custom_distortion_file:" << custom_distortion_file;
-		else
-		{
+		} else {
 			file.setFileName(fName);
 			if(file.open(QIODevice::ReadOnly))
 				in.setDevice(&file);

@@ -129,6 +129,11 @@ void Comet::setAbsoluteMagnitudeAndSlope(const double magnitude, const double sl
 	slopeParameter = slope;
 }
 
+void Comet::translateName(const StelTranslator &translator)
+{
+	nameI18 = translator.qtranslate(englishName);
+}
+
 QString Comet::getInfoString(const StelCore *core, const InfoStringGroup &flags) const
 {
 	//Mostly copied from Planet::getInfoString():
@@ -138,7 +143,7 @@ QString Comet::getInfoString(const StelCore *core, const InfoStringGroup &flags)
 	if (flags&Name)
 	{
 		oss << "<h2>";
-		oss << q_(englishName);  // UI translation can differ from sky translation
+		oss << getNameI18n();  // UI translation can differ from sky translation
 		oss.setRealNumberNotation(QTextStream::FixedNotation);
 		oss.setRealNumberPrecision(1);
 		if (sphereScale != 1.f)
@@ -146,9 +151,15 @@ QString Comet::getInfoString(const StelCore *core, const InfoStringGroup &flags)
 		oss << "</h2>";
 	}
 
-	if (flags&ObjectType)
+	if (flags&ObjectType && getPlanetType()!=isUNDEFINED)
 	{
-		oss << q_("Type: <b>%1</b>").arg(q_(getPlanetTypeString())) << "<br />";
+		QString cometType = qc_("non-periodic", "type of comet");
+		if (semiMajorAxis>0.0)
+		{
+			// Parabolic and hyperbolic comets doesn't have semi-major axis of the orbit. We have comet with elliptic orbit.
+			cometType = qc_("periodic", "type of comet");
+		}
+		oss << q_("Type: <b>%1</b> (%2)").arg(q_(getPlanetTypeString())).arg(cometType) << "<br />";
 	}
 
 	if (flags&Magnitude)
@@ -211,12 +222,22 @@ QString Comet::getInfoString(const StelCore *core, const InfoStringGroup &flags)
 	}
 	if (flags&Extra)
 	{
+		// If semi-major axis not zero then calculate and display orbital period for comet in days
+		double siderealPeriod = getSiderealPeriod();
+		if (siderealPeriod>0)
+		{
+			// TRANSLATORS: Sidereal (orbital) period for comets in Julian years (symbol: a)
+			oss << q_("Sidereal period: %1 a").arg(QString::number(siderealPeriod/365.25, 'f', 3)) << "<br>";
+		}
+
 		// GZ: Add speed. I don't know where else to place that bit of information.
 		// xgettext:no-c-format
 		oss << QString(q_("Speed: %1 km/s"))
 			   .arg(((CometOrbit*)userDataPtr)->getVelocity().length()*AU/86400.0, 0, 'f', 3);
 		oss << "<br>";
+
 	}
+
 
 	if (flags&Size)
 	{
@@ -229,14 +250,6 @@ QString Comet::getInfoString(const StelCore *core, const InfoStringGroup &flags)
 		oss << QString(q_("Gas tail length (estimate): %1 Mio km"))
 			   .arg(tailFactors[1]*AU*1e-6, 0, 'G', 3);
 		oss << "<br>";
-	}
-
-	// If semi-major axis not zero then calculate and display orbital period for comet in days
-	double siderealPeriod = getSiderealPeriod();
-	if ((flags&Extra) && (siderealPeriod>0))
-	{
-		// TRANSLATORS: Sidereal (orbital) period for solar system bodies in days and in Julian years (symbol: a)
-		oss << q_("Sidereal period: %1 days (%2 a)").arg(QString::number(siderealPeriod, 'f', 2)).arg(QString::number(siderealPeriod/365.25, 'f', 3)) << "<br>";
 	}
 
 	postProcessInfoString(str, flags);
@@ -442,13 +455,17 @@ void Comet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFont
 {
 	if (hidden)
 		return;
+
 	if (getEnglishName() == core->getCurrentLocation().planetName)
 	{ // Maybe even don't do that? E.g., draw tail while riding the comet? Decide later.
 		return;
 	}
 
-	// If comet is too faint to be seen, don't bother rendering. (Massive speedup if people have hundreds of comets!)
-	if ((getVMagnitude(core)+2.0f) > core->getSkyDrawer()->getLimitMagnitude())
+	// This test seemed necessary for reasonable fps in case too many comet elements are loaded.
+	// Problematic: Early-out here of course disables the wanted hint circles for dim comets.
+	// The line makes hints for comets 5 magnitudes below sky limiting magnitude visible.
+	// If comet is too faint to be seen, don't bother rendering. (Massive speedup if people have hundreds of comet elements!)
+	if ((getVMagnitude(core)-5.0f) > core->getSkyDrawer()->getLimitMagnitude())
 	{
 		return;
 	}
@@ -491,6 +508,14 @@ void Comet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFont
 
 		draw3dModel(core,transfo,screenSz);
 	}
+
+	// If comet is too faint to be seen, don't bother rendering. (Massive speedup if people have hundreds of comets!)
+	// This test moved here so that hints are still drawn.
+	if ((getVMagnitude(core)-3.0f) > core->getSkyDrawer()->getLimitMagnitude())
+	{
+		return;
+	}
+
 	// but tails should also be drawn if comet core is off-screen...
 	if (tailActive && tailBright)
 	{

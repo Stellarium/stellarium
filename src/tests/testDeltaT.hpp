@@ -30,7 +30,7 @@ class TestDeltaT : public QObject
 Q_OBJECT
 private slots:
 	void initTestCase();
-	void historicalTest();
+	void testDeltaTByEspenakMeeus();
 
 };
 

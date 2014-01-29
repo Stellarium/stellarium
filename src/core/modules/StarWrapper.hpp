@@ -59,7 +59,7 @@ protected:
 	//! <li> PlainText </ul>
 	//! @param core the StelCore object
 	//! @param flags a set of InfoStringGroup items to include in the return value.
-	//! @return a QString containing an HMTL encoded description of the StarWrapperBase.
+	//! @return a QString containing an HTML encoded description of the StarWrapperBase.
 	QString getInfoString(const StelCore *core, const InfoStringGroup& flags) const;
 	virtual float getBV(void) const = 0;
 

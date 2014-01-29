@@ -73,7 +73,8 @@ void SlewDialog::createDialogContent()
 	connect(telescopeManager, SIGNAL(clientConnected(int, QString)), this, SLOT(addTelescope(int, QString)));
 	connect(telescopeManager, SIGNAL(clientDisconnected(int)), this, SLOT(removeTelescope(int)));
         //
-        connect(ui->pushButtonCurrent,SIGNAL(clicked()),this,SLOT(getCurrentObjectInfo()));
+	connect(ui->pushButtonCurrent, SIGNAL(clicked()), this, SLOT(getCurrentObjectInfo()));
+	connect(ui->pushButtonCenter, SIGNAL(clicked()), this, SLOT(getCenterInfo()));
 	//Coordinates are in HMS by default:
 	ui->radioButtonHMS->setChecked(true);
 
@@ -180,14 +181,29 @@ void SlewDialog::slew()
 	telescopeManager->telescopeGoto(slot, targetPosition);
 }
 
-void SlewDialog::getCurrentObjectInfo(){
-    const QList<StelObjectP>& selected = GETSTELMODULE(StelObjectMgr)->getSelectedObject();
-    if (!selected.isEmpty()) {
-        double dec_j2000 = 0;
-        double ra_j2000 = 0;
-        StelUtils::rectToSphe(&ra_j2000,&dec_j2000,selected[0]->getJ2000EquatorialPos(StelApp::getInstance().getCore()));
-        ui->spinBoxRA->setRadians(ra_j2000);
-        ui->spinBoxDec->setRadians(dec_j2000);
-    }
+void SlewDialog::getCurrentObjectInfo()
+{
+	const QList<StelObjectP>& selected = GETSTELMODULE(StelObjectMgr)->getSelectedObject();
+	if (!selected.isEmpty()) {
+		double dec_j2000 = 0;
+		double ra_j2000 = 0;
+		StelUtils::rectToSphe(&ra_j2000,&dec_j2000,selected[0]->getJ2000EquatorialPos(StelApp::getInstance().getCore()));
+		ui->spinBoxRA->setRadians(ra_j2000);
+		ui->spinBoxDec->setRadians(dec_j2000);
+	}
+}
+
+void SlewDialog::getCenterInfo()
+{
+	StelCore *core = StelApp::getInstance().getCore();
+	const StelProjectorP projector = core->getProjection(StelCore::FrameEquinoxEqu);
+	Vec3d centerPosition;
+	Vec2f center = projector->getViewportCenter();
+	projector->unProject(center[0], center[1], centerPosition);
+	double dec_j2000 = 0;
+	double ra_j2000 = 0;
+	StelUtils::rectToSphe(&ra_j2000,&dec_j2000,core->equinoxEquToJ2000(centerPosition));
+	ui->spinBoxRA->setRadians(ra_j2000);
+	ui->spinBoxDec->setRadians(dec_j2000);
 }
 

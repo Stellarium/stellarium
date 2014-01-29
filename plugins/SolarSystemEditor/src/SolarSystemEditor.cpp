@@ -115,6 +115,10 @@ void SolarSystemEditor::init()
 
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(updateI18n()));
 	isInitialized = true;
+
+	// key bindings and other actions
+	addAction("actionShow_MPC_Import", N_("Solar System Editor"), N_("Import orbital elements in MPC format..."), mainWindow, "newImportMPC()", "Ctrl+Alt+S");
+
 }
 
 void SolarSystemEditor::deinit()

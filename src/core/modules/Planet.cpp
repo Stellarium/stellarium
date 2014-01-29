@@ -113,11 +113,14 @@ Planet::Planet(const QString& englishName,
 	normalMap = StelApp::getInstance().getTextureManager().createTextureThread(StelFileMgr::findFile("textures/"+normalMapName), StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT));
 
 	nameI18 = englishName;
+	nativeName = "";
 	if (englishName!="Pluto")
 	{
 		deltaJD = 0.001*StelCore::JD_SECOND;
 	}
 	flagLabels = true;
+	flagNativeName = true;
+	flagTranslatedName = true;
 }
 
 // called in SolarSystem::init() before first planet is created. Loads pTypeMap.
@@ -129,13 +132,17 @@ void Planet::init()
 		qDebug() << "Planet::init(): Non-empty static map. This is a programming error, but we can fix that.";
 		pTypeMap.clear();
 	}
-	pTypeMap.insert(Planet::isStar,     "star");
-	pTypeMap.insert(Planet::isPlanet,   "planet");
-	pTypeMap.insert(Planet::isMoon,     "moon");
-	pTypeMap.insert(Planet::isAsteroid, "asteroid");
-	pTypeMap.insert(Planet::isPlutoid,  "plutoid");
-	pTypeMap.insert(Planet::isComet,    "comet");
-	pTypeMap.insert(Planet::isUNDEFINED,"UNDEFINED"); // something must be broken before we ever see this!
+	pTypeMap.insert(Planet::isStar,		"star");
+	pTypeMap.insert(Planet::isPlanet,	"planet");
+	pTypeMap.insert(Planet::isMoon,		"moon");
+	pTypeMap.insert(Planet::isAsteroid,	"asteroid");
+	pTypeMap.insert(Planet::isPlutino,	"plutino");
+	pTypeMap.insert(Planet::isComet,	"comet");
+	pTypeMap.insert(Planet::isDwarfPlanet,	"dwarf planet");
+	pTypeMap.insert(Planet::isCubewano,	"cubewano");
+	pTypeMap.insert(Planet::isSDO,		"scattered disc object");
+	pTypeMap.insert(Planet::isOCO,		"Oort cloud object");
+	pTypeMap.insert(Planet::isUNDEFINED,	"UNDEFINED"); // something must be broken before we ever see this!
 
 	if (vMagAlgorithmMap.count() > 0)
 	{
@@ -156,7 +163,30 @@ Planet::~Planet()
 
 void Planet::translateName(const StelTranslator& trans)
 {
-	nameI18 = trans.qtranslate(englishName);
+	if (!nativeName.isEmpty() && getFlagNativeName())
+	{
+		if (getFlagTranslatedName())
+			nameI18 = trans.qtranslate(nativeName);
+		else
+			nameI18 = nativeName;
+	}
+	else
+	{
+		if (getFlagTranslatedName())
+			nameI18 = trans.qtranslate(englishName);
+		else
+			nameI18 = englishName;
+	}
+}
+
+QString Planet::getEnglishName() const
+{
+	return englishName;
+}
+
+QString Planet::getNameI18n() const
+{
+	return nameI18;
 }
 
 // Return the information string "ready to print" :)
@@ -167,7 +197,7 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 
 	if (flags&Name)
 	{
-		oss << "<h2>" << q_(englishName);  // UI translation can differ from sky translation
+		oss << "<h2>" << getNameI18n();  // UI translation can differ from sky translation
 		oss.setRealNumberNotation(QTextStream::FixedNotation);
 		oss.setRealNumberPrecision(1);
 		if (sphereScale != 1.f)
@@ -175,7 +205,7 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 		oss << "</h2>";
 	}
 
-	if (flags&ObjectType)
+	if (flags&ObjectType && getPlanetType()!=isUNDEFINED)
 	{
 		oss << q_("Type: <b>%1</b>").arg(q_(getPlanetTypeString())) << "<br />";
 	}
@@ -254,6 +284,10 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 				oss << q_("Sidereal day: %1").arg(StelUtils::hoursToHmsStr(qAbs(siderealDay*24))) << "<br>";
 				oss << q_("Mean solar day: %1").arg(StelUtils::hoursToHmsStr(qAbs(getMeanSolarDay()*24))) << "<br>";
 			}
+			else if (re.period==0.)
+			{
+				oss << q_("The period of rotation is chaotic") << "<br>";
+			}
 		}
 		if (englishName.compare("Sun")!=0)
 		{
@@ -276,7 +310,7 @@ QString Planet::getSkyLabel(const StelCore*) const
 	QString str;
 	QTextStream oss(&str);
 	oss.setRealNumberPrecision(2);
-	oss << nameI18;
+	oss << getNameI18n();
 
 	if (sphereScale != 1.f)
 	{
@@ -373,7 +407,7 @@ bool willCastShadow(const Planet* thisPlanet, const Planet* p)
 	// If the planet p is farther from the sun than this planet, it can't cast shadow on it.
 	if (planetPos.lengthSquared()>thisPos.lengthSquared())
 		return false;
-	
+
 	Vec3d ppVector = planetPos;
 	ppVector.normalize();
 	
@@ -410,6 +444,10 @@ QVector<const Planet*> Planet::getCandidatesForShadow() const
 
 void Planet::computePosition(const double dateJD)
 {
+	// Make sure the parent position is computed for the dateJD, otherwise
+	// getHeliocentricPos() would return incorect values.
+	if (parent)
+		parent->computePositionWithoutOrbits(dateJD);
 
 	if (orbitFader.getInterstate()>0.000001 && deltaOrbitJD > 0 && (fabs(lastOrbitJD-dateJD)>deltaOrbitJD || !orbitCached))
 	{
@@ -427,7 +465,7 @@ void Planet::computePosition(const double dateJD)
 		}
 		double new_date = lastOrbitJD + delta_points*deltaOrbitJD;
 
-		// qDebug( "Updating orbit coordinates for %s (delta %f) (%d points)\n", name.c_str(), deltaOrbitJD, delta_points);
+		// qDebug( "Updating orbit coordinates for %s (delta %f) (%d points)\n", getEnglishName().toUtf8().data(), deltaOrbitJD, delta_points);
 
 		if( delta_points > 0 && delta_points < ORBIT_SEGMENTS && orbitCached)
 		{
@@ -580,7 +618,12 @@ double Planet::getSiderealTime(double jd) const
 	}
 
 	double t = jd - re.epoch;
-	double rotations = t / (double) re.period;
+	// oops... avoid division by zero (typical case for moons with chaotic period of rotation)
+	double rotations = 1.f; // NOTE: Maybe 1e-3 will be better?
+	if (re.period!=0.) // OK, it's not a moon with chaotic period of rotation :)
+	{
+		rotations = t / (double) re.period;
+	}
 	double wholeRotations = floor(rotations);
 	double remainder = rotations - wholeRotations;
 
@@ -755,7 +798,15 @@ float Planet::getVMagnitude(const StelCore* core) const
 			if (d>=radius)
 			{
 				// The satellite is totally inside the inner shadow.
-				shadowFactor = 1e-9;
+				if (englishName=="Moon")
+				{
+					// Fit a more realistic magnitude for the Moon case.
+					// I used some empirical data for fitting. --AW
+					// TODO: This factor should be improved!
+					shadowFactor = 2.718e-5;
+				}
+				else
+					shadowFactor = 1e-9;
 			}
 			else if (d>-radius)
 			{
@@ -932,7 +983,10 @@ void Planet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFon
 	// For a full catalog of NEAs (11000 objects), with this and resetting deltaJD according to distance, rendering time went 4.5fps->12fps.	
 	// TBD: Note that taking away the asteroids at this stage breaks dim-asteroid occultation of stars!
 	//      Maybe make another configurable flag for those interested?
-	if (((getVMagnitude(core)+1.0f) > core->getSkyDrawer()->getLimitMagnitude()) && pType==Planet::isAsteroid)
+	// Problematic: Early-out here of course disables the wanted hint circles for dim asteroids.
+	// The line makes hints for asteroids 5 magnitudes below sky limiting magnitude visible.
+	// If asteroid is too faint to be seen, don't bother rendering. (Massive speedup if people have hundreds of orbital elements!)
+	if (((getVMagnitude(core)-5.0f) > core->getSkyDrawer()->getLimitMagnitude()) && pType==Planet::isAsteroid)
 	{
 		return;
 	}
@@ -1173,7 +1227,7 @@ void Planet::initShader()
 		"    }\n"
 		"\n"
 		"#ifdef IS_MOON\n"
-		"    mediump vec3 normal = texture2D(normalMap, texc).rgb-vec3(0.5, 0.5, 0);\n"
+		"    highp vec3 normal = texture2D(normalMap, texc).rgb-vec3(0.5, 0.5, 0);\n"
 		"    normal = normalize(normalX*normal.x+normalY*normal.y+normalZ*normal.z);\n"
 		"    // normal now contains the real surface normal taking normal map into account\n"
 		"    // Use an Oren-Nayar model for rough surfaces\n"
@@ -1185,14 +1239,14 @@ void Planet::initShader()
 		"    mediump float alpha = max(angleEyeNormal, angleLightNormal);\n"
 		"    mediump float beta = min(angleEyeNormal, angleLightNormal);\n"
 		"    mediump float gamma = dot(eyeDirection - normal * cosAngleEyeNormal, lightDirection - normal * cosAngleLightNormal);\n"
-		"    mediump float roughness = 1.;\n"
+		"    mediump float roughness = 1.0;\n"
 		"    mediump float roughnessSquared = roughness * roughness;\n"
 		"    mediump float A = 1.0 - 0.5 * (roughnessSquared / (roughnessSquared + 0.57));\n"
 		"    mediump float B = 0.45 * (roughnessSquared / (roughnessSquared + 0.09));\n"
 		"    mediump float C = sin(alpha) * tan(beta);\n"
-		"    lum = max(0.0, cosAngleLightNormal) * (A + B * max(0.0, gamma) * C) * 2.;\n"
+		"    lum = max(0.0, cosAngleLightNormal) * (A + B * max(0.0, gamma) * C) * 1.5;\n"
 		"#endif\n"
-		"    mediump vec4 litColor = vec4(lum * final_illumination * diffuseLight + ambientLight, 1.0);\n"
+		"    mediump vec4 litColor = vec4(lum * final_illumination * diffuseLight + ambientLight, 2.0);\n"
 		"#ifdef IS_MOON\n"
 		"    if(final_illumination < 0.99)\n"
 		"    {\n"
@@ -1271,6 +1325,10 @@ void Planet::deinitShader()
 {
 	delete planetShaderProgram;
 	planetShaderProgram = NULL;
+	delete ringPlanetShaderProgram;
+	ringPlanetShaderProgram = NULL;
+	delete moonShaderProgram;
+	moonShaderProgram = NULL;
 }
 
 void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP transfo, float screenSz, bool drawOnlyRing)

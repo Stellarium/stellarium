@@ -166,11 +166,16 @@ void ExoplanetsDialog::setInfoHtml(void)
 {
 	QString html = "<html><head></head><body>";
 	html += "<h2>" + q_("Potential habitable exoplanets") + "</h2>";
-	html += QString("<p>%1</p>").arg(q_("This plugin can display potential habitable exoplanets (orange marker) and some information about those planets - habitable class, mean surface temperature and Earth Similarity Index."));
-	html += QString("<p><b>%1</b> &mdash; %2</p>").arg(q_("Habitable Class")).arg(q_("Classifies habitable planets based on temperature: hypopsychroplanets (O or hP) = very cold (less −50°C); psychroplanets (P) = cold; mesoplanets (M) = medium-temperature (0–50°C); thermoplanets (T) = hot; hyperthermoplanets (E or hT) = very hot (above 100°C). Mesoplanets would be ideal for complex life, whereas class O or E would only support extremophilic life. Non-habitable planets are simply given the class X (or NH)."));
-	html += QString("<p><b>%1</b> &mdash; %2</p>").arg(q_("Mean Surface Temperature")).arg(q_("Temperature in (°C) based on a similar terrestrial atmosphere to planet mass ratio and a greenhouse effect due to 1 percent of CO2 (assuming an albedo of 0.3 in all cases)."));
+	html += QString("<p>%1</p>").arg(q_("This plugin can display potential habitable exoplanets (orange marker) and some information about those planets."));
+	html += QString("<p><b>%1</b> &mdash; %2</p>").arg(q_("Planetary Class")).arg(q_("Planet classification from host star spectral type (F, G, K, M), habitable zone (hot, warm, cold) and size (miniterran, subterran, terran, superterran, jovian, neptunian) (Earth = G-Warm Terran)."));
+	html += QString("<p><b><a href='http://lasp.colorado.edu/~bagenal/3720/CLASS6/6EquilibriumTemp.html'>%1</a></b> &mdash; %2</p>").arg(q_("Equilibrium Temperature")).arg(q_("The planetary equilibrium temperature is a theoretical temperature in (°C) that the planet would be at when considered simply as if it were a black body being heated only by its parent star (assuming a 0.3 bond albedo). As example the planetary equilibrium temperature of Earth is -18.15°C (255 K)."));
 	html += QString("<p><b><a href='http://phl.upr.edu/projects/earth-similarity-index-esi'>%1</a></b> &mdash; %2</p>").arg(q_("Earth Similarity Index (ESI)")).arg(q_("Similarity to Earth on a scale from 0 to 1, with 1 being the most Earth-like. ESI depends on the planet's radius, density, escape velocity, and surface temperature."));
-	html += "</body></html>";
+	html += "<h3>" + q_("Additional info") + "</h3><ul>";
+	html += QString("<li><a href='http://en.wikipedia.org/wiki/Circumstellar_habitable_zone'>%1</a> (en)</li>").arg(q_("Circumstellar habitable zone"));
+	html += QString("<li><a href='http://en.wikipedia.org/wiki/Planetary_equilibrium_temperature'>%1</a> (en)</li>").arg(q_("Planetary equilibrium temperature"));
+	html += QString("<li><a href='http://en.wikipedia.org/wiki/Planetary_habitability'>%1</a> (en)</li>").arg(q_("Planetary habitability"));
+	html += QString("<li><a href='http://en.wikipedia.org/wiki/Earth_Similarity_Index'>%1</a> (en)</li>").arg(q_("Earth Similarity Index"));
+	html += "</ul></body></html>";
 
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 	if(gui!=NULL)

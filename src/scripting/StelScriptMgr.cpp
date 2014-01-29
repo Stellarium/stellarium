@@ -103,15 +103,7 @@ StelScriptMgr::StelScriptMgr(QObject *parent): QObject(parent)
 					"do {curDate = new Date();}"
 					"    while(curDate-date < sleepDurationSec*1000/scriptRateReadOnly);}");
 	engine.evaluate("core['wait'] = mywait__;");
-	
-	//! Waits until a specified simulation date/time.  This function
-	//! will take into account the rate (and direction) in which simulation
-	//! time is passing. e.g. if a future date is specified and the
-	//! time is moving backwards, the function will return immediately.
-	//! If the time rate is 0, the function will not wait.  This is to
-	//! prevent infinite wait time.
-	//! @param dt the date string to use
-	//! @param spec "local" or "utc"
+
 	engine.evaluate("function mywaitFor__(dt, spec) {if (!spec) spec=\"utc\";"
 	"	var JD = core.jdFromDateString(dt, spec);"
 	"	var timeSpeed = core.getTimeRate();"

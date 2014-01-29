@@ -76,6 +76,8 @@ private slots:
 	void setFormatDecimal(bool set);
         //! Sets the input fields to current info
         void getCurrentObjectInfo();
+	//! Sets the input fields to current info
+	void getCenterInfo();
 
 private:
 	TelescopeControl * telescopeManager;

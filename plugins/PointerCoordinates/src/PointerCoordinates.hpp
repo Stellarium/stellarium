@@ -59,6 +59,7 @@ public:
 		RaDec,
 		HourAngle,
 		Ecliptic,
+		EclipticJ2000,
 		AltAzi,
 		Galactic
 	};

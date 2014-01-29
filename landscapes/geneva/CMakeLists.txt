@@ -8,4 +8,4 @@ INSTALL (FILES landscape.ini DESTINATION share/${PACKAGE}/landscapes/geneva )
 INSTALL (DIRECTORY ./ DESTINATION share/${PACKAGE}/landscapes/geneva 
 	FILES_MATCHING PATTERN "*.txt" 
 	PATTERN "description.*.utf8" 
-	PATTERN "CMakeFiles" EXCLUDE )
+	PATTERN "CMake*" EXCLUDE )

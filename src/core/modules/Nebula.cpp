@@ -194,6 +194,12 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints)
 
 	if (lim>maxMagHints)
 		return;
+
+	Vec3d win;
+	// Check visibility of DSO hints
+	if (!(sPainter.getProjector()->projectCheck(XYZ, win)))
+		return;
+
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_ONE, GL_ONE);
 	float lum = 1.f;//qMin(1,4.f/getOnScreenSize(core))*0.8;
@@ -237,6 +243,11 @@ void Nebula::drawLabel(StelPainter& sPainter, float maxMagLabel)
 		lim = 5.f;
 
 	if (lim>maxMagLabel)
+		return;
+
+	Vec3d win;
+	// Check visibility of DSO labels
+	if (!(sPainter.getProjector()->projectCheck(XYZ, win)))
 		return;
 
 	Vec3f col(labelColor[0], labelColor[1], labelColor[2]);

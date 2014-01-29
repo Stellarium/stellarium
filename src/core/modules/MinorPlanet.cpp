@@ -190,7 +190,7 @@ QString MinorPlanet::getInfoString(const StelCore *core, const InfoStringGroup &
 		if (nameIsProvisionalDesignation)
 			oss << provisionalDesignationHtml;
 		else
-			oss << q_(properName);  // UI translation can differ from sky translation
+			oss << getNameI18n();  // UI translation can differ from sky translation
 		oss.setRealNumberNotation(QTextStream::FixedNotation);
 		oss.setRealNumberPrecision(1);
 		if (sphereScale != 1.f)
@@ -203,7 +203,7 @@ QString MinorPlanet::getInfoString(const StelCore *core, const InfoStringGroup &
 		}
 	}
 
-	if (flags&ObjectType)
+	if (flags&ObjectType && getPlanetType()!=isUNDEFINED)
 	{
 		oss << q_("Type: <b>%1</b>").arg(q_(getPlanetTypeString())) << "<br />";
 	}

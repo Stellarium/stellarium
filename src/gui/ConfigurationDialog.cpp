@@ -158,6 +158,16 @@ void ConfigurationDialog::createDialogContent()
 	updateCurrentLanguage();
 	connect(cb->lineEdit(), SIGNAL(editingFinished()), this, SLOT(updateCurrentLanguage()));
 	connect(cb, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(selectLanguage(const QString&)));
+	// Do the same for sky language:
+	cb = ui->skycultureLanguageComboBox;
+	cb->clear();
+	cb->addItems(StelTranslator::globalTranslator->getAvailableLanguagesNamesNative(StelFileMgr::getLocaleDir()));
+	cb->model()->sort(0);
+	updateCurrentSkyLanguage();
+	connect(cb->lineEdit(), SIGNAL(editingFinished()), this, SLOT(updateCurrentSkyLanguage()));
+	connect(cb, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(selectSkyLanguage(const QString&)));
+
+
 
 	ui->groupBoxUpdates->setChecked(StelApp::getInstance().getSettings()->value("main/check_updates_enabled", true).toBool());
 	connect(ui->groupBoxUpdates, SIGNAL(toggled(bool)), this, SLOT(setUpdatesFlag(bool)));
@@ -333,12 +343,40 @@ void ConfigurationDialog::updateCurrentLanguage()
 		cb->setCurrentIndex(lt);
 }
 
+void ConfigurationDialog::updateCurrentSkyLanguage()
+{
+	QComboBox* cb = ui->skycultureLanguageComboBox;
+	QString skyLang = StelApp::getInstance().getLocaleMgr().getSkyLanguage();
+	QString l2 = StelTranslator::iso639_1CodeToNativeName(skyLang);
+
+	if (cb->currentText() == l2)
+		return;
+
+	int lt = cb->findText(l2, Qt::MatchExactly);
+	if (lt == -1 && skyLang.contains('_'))
+	{
+		l2 = skyLang.left(skyLang.indexOf('_'));
+		l2=StelTranslator::iso639_1CodeToNativeName(l2);
+		lt = cb->findText(l2, Qt::MatchExactly);
+	}
+	if (lt!=-1)
+		cb->setCurrentIndex(lt);
+}
+
 void ConfigurationDialog::selectLanguage(const QString& langName)
 {
 	QString code = StelTranslator::nativeNameToIso639_1Code(langName);
 	StelApp::getInstance().getLocaleMgr().setAppLanguage(code);
-	StelApp::getInstance().getLocaleMgr().setSkyLanguage(code);
+//	StelApp::getInstance().getLocaleMgr().setSkyLanguage(code);
 	StelMainView::getInstance().initTitleI18n();
+}
+
+void ConfigurationDialog::selectSkyLanguage(const QString& langName)
+{
+	QString code = StelTranslator::nativeNameToIso639_1Code(langName);
+//	StelApp::getInstance().getLocaleMgr().setAppLanguage(code);
+	StelApp::getInstance().getLocaleMgr().setSkyLanguage(code);
+//	StelMainView::getInstance().initTitleI18n();
 }
 
 void ConfigurationDialog::setStartupTimeMode()
@@ -553,7 +591,9 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	conf->setValue("viewing/flag_landscape_autoselection", lmgr->getFlagLandscapeAutoSelection());
 	conf->setValue("viewing/flag_light_pollution_database", lmgr->getFlagUseLightPollutionFromDatabase());
 	conf->setValue("viewing/flag_atmosphere_auto_enable", lmgr->getFlagAtmosphereAutoEnable());
+	conf->setValue("viewing/flag_planets_native_names", ssmgr->getFlagNativeNames());
 	conf->setValue("viewing/constellation_art_intensity", cmgr->getArtIntensity());
+	conf->setValue("viewing/constellation_name_style", cmgr->getConstellationDisplayStyleString());
 	conf->setValue("viewing/flag_night", StelApp::getInstance().getVisionModeNight());
 	conf->setValue("astro/flag_star_name", smgr->getFlagLabels());
 	conf->setValue("stars/labels_amount", smgr->getLabelsAmount());
@@ -575,6 +615,9 @@ void ConfigurationDialog::saveCurrentViewOptions()
         conf->setValue("landscape/atmospheric_extinction_coefficient", core->getSkyDrawer()->getExtinctionCoefficient());
         conf->setValue("landscape/pressure_mbar", core->getSkyDrawer()->getAtmospherePressure());
         conf->setValue("landscape/temperature_C", core->getSkyDrawer()->getAtmosphereTemperature());
+	conf->setValue("landscape/flag_minimal_brightness", lmgr->getFlagLandscapeUseMinimalBrightness());
+	conf->setValue("landscape/flag_landscape_sets_minimal_brightness", lmgr->getFlagLandscapeSetsMinimalBrightness());
+	conf->setValue("landscape/minimal_brightness", lmgr->getDefaultMinimalBrightness());
 
 	// view dialog / starlore tab
 	StelApp::getInstance().getSkyCultureMgr().setDefaultSkyCultureID(StelApp::getInstance().getSkyCultureMgr().getCurrentSkyCultureID());

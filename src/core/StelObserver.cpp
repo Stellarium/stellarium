@@ -21,6 +21,7 @@
 #include "StelUtils.hpp"
 #include "SolarSystem.hpp"
 #include "Planet.hpp"
+#include "StelLocaleMgr.hpp"
 #include "StelTranslator.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
@@ -281,10 +282,10 @@ void SpaceShipObserver::update(double deltaTime)
 		if (artificialPlanet)
 		{
 			// Update SpaceShip position
-			static_cast<ArtificialPlanet*>(artificialPlanet.data())->computeAverage(timeToGo/(timeToGo + deltaTime));
-			// TRANSLATORS: "Planet name" displayed when "flying" to another planet with Ctrl+G.
-			currentLocation.planetName = N_("SpaceShip");
-			currentLocation.name = q_(moveStartLocation.planetName) + " -> " + q_(moveTargetLocation.planetName);
+			static_cast<ArtificialPlanet*>(artificialPlanet.data())->computeAverage(timeToGo/(timeToGo + deltaTime));			
+			currentLocation.planetName = "SpaceShip";
+			const StelTranslator& trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
+			currentLocation.name = trans.qtranslate(moveStartLocation.planetName) + " -> " + trans.qtranslate(moveTargetLocation.planetName);
 		}
 		else
 		{
@@ -296,7 +297,7 @@ void SpaceShipObserver::update(double deltaTime)
 		const double moveToMult = 1.-(timeToGo/transitSeconds);
 		currentLocation.latitude = moveStartLocation.latitude - moveToMult*(moveStartLocation.latitude-moveTargetLocation.latitude);
 		currentLocation.longitude = moveStartLocation.longitude - moveToMult*(moveStartLocation.longitude-moveTargetLocation.longitude);
-		currentLocation.altitude = int(moveStartLocation.altitude - moveToMult*(moveStartLocation.altitude-moveTargetLocation.altitude));
+		currentLocation.altitude = int(moveStartLocation.altitude - moveToMult*(moveStartLocation.altitude-moveTargetLocation.altitude));		
 	}
 }
 

@@ -231,6 +231,9 @@ public:
 	void setFlagTimeJd(bool b) {flagTimeJd=b;}
 	bool getFlagTimeJd() { return flagTimeJd; }
 
+	void setFlagShowTz(bool b) { flagShowTZ=b; }
+	bool getFlagShowTz() { return flagShowTZ; }
+
 signals:
 	void sizeChanged();
 
@@ -277,6 +280,7 @@ private:
 	bool flagShowFov;
 	bool flagFovDms;
 	bool flagTimeJd;
+	bool flagShowTZ;
 
 	QGraphicsSimpleTextItem* helpLabel;
 };

@@ -363,6 +363,11 @@ void MeteorShowers::drawPointer(StelCore* core, StelPainter& painter)
 
 void MeteorShowers::drawStream(StelCore* core, StelPainter& painter)
 {
+	if (!core->getSkyDrawer()->getFlagHasAtmosphere())
+	{
+		return;
+	}
+
 	LandscapeMgr* landmgr = GETSTELMODULE(LandscapeMgr);
 	if (landmgr->getFlagAtmosphere() && landmgr->getLuminance()>5)
 	{

@@ -218,7 +218,7 @@ private:
 	//! Used to store the screenshot directory
 	static QString screenshotDir;
 
-	//! Used to store the screenshot directory
+	//! Used to store the application data directory
 	static QString installDir;
 	
 #ifdef Q_OS_WIN

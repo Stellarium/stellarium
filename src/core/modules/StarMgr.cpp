@@ -44,6 +44,8 @@
 #include "ZoneArray.hpp"
 #include "StelSkyDrawer.hpp"
 #include "RefractionExtinction.hpp"
+#include "StelModuleMgr.hpp"
+#include "ConstellationMgr.hpp"
 
 #include <QTextStream>
 #include <QFile>
@@ -159,8 +161,13 @@ StarMgr::~StarMgr(void)
 		delete[] hipIndex;
 }
 
+// Allow untranslated name here if set in constellationMgr!
 QString StarMgr::getCommonName(int hip)
 {
+	ConstellationMgr* cmgr=GETSTELMODULE(ConstellationMgr);
+	if (cmgr->getConstellationDisplayStyle() == ConstellationMgr::constellationsNative)
+		return getCommonEnglishName(hip);
+
 	QHash<int,QString>::const_iterator it(commonNamesMapI18n.find(hip));
 	if (it!=commonNamesMapI18n.end())
 		return it.value();
@@ -870,7 +877,7 @@ void StarMgr::draw(StelCore* core)
 }
 
 
-// Return a stl vector containing the stars located
+// Return a QList containing the stars located
 // inside the limFov circle around position v
 QList<StelObjectP > StarMgr::searchAround(const Vec3d& vv, double limFov, const StelCore* core) const
 {

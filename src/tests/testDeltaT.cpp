@@ -24,13 +24,8 @@
 #include <QString>
 #include <QDebug>
 #include <QtGlobal>
-#include <QVector>
-
-#include <cstdlib>
 
 #include "StelUtils.hpp"
-
-#define ERROR_THRESHOLD_PERCENT 5.0
 
 QTEST_MAIN(TestDeltaT)
 
@@ -38,7 +33,7 @@ void TestDeltaT::initTestCase()
 {
 }
 
-void TestDeltaT::historicalTest()
+void TestDeltaT::testDeltaTByEspenakMeeus()
 {
 	// test data from http://eclipse.gsfc.nasa.gov/SEcat5/deltat.html#tab1
 	QVariantList data;
@@ -92,12 +87,13 @@ void TestDeltaT::historicalTest()
 		double acceptableError = data.takeFirst().toDouble();		
 		StelUtils::getJDFromDate(&JD, year, 1, 1, 0, 0, 0);
 		double result = StelUtils::getDeltaTByEspenakMeeus(JD);
-		double actualError = qAbs(expectedResult) - qAbs(result);
+		double actualError = qAbs(qAbs(expectedResult) - qAbs(result));
 		StelUtils::getDateFromJulianDay(JD, &yout, &mout, &dout);
-		QVERIFY2(actualError <= acceptableError, QString("date=%2 year=%3 result=%4 error=%5 acceptable=%6")
+		QVERIFY2(actualError <= acceptableError, QString("date=%2 year=%3 result=%4 expected=%5 error=%6 acceptable=%7")
 							.arg(QString("%1-%2-%3 00:00:00").arg(yout).arg(mout).arg(dout))
 							.arg(year)
 							.arg(result)
+							.arg(expectedResult)
 							.arg(actualError)
 							.arg(acceptableError)
 							.toUtf8());

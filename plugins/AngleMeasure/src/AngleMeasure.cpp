@@ -220,6 +220,13 @@ void AngleMeasure::drawOne(StelCore *core, const StelCore::FrameType frameType, 
 			}
 		}
 
+		glDisable(GL_TEXTURE_2D);
+		// OpenGL ES 2.0 doesn't have GL_LINE_SMOOTH. But it looks much better.
+		#ifdef GL_LINE_SMOOTH
+		if (QOpenGLContext::currentContext()->format().renderableType()==QSurfaceFormat::OpenGL)
+			glEnable(GL_LINE_SMOOTH);
+		#endif
+
 		// main line is a great circle
 		painter.setColor(lineColor[0], lineColor[1], lineColor[2], lineVisible.getInterstate());
 		if (frameType==StelCore::FrameEquinoxEqu)
@@ -237,7 +244,11 @@ void AngleMeasure::drawOne(StelCore *core, const StelCore::FrameType frameType, 
 			// End lines
 			painter.drawGreatCircleArc(perp1StartPointHor, perp1EndPointHor, NULL);
 			painter.drawGreatCircleArc(perp2StartPointHor, perp2EndPointHor, NULL);
-		}		
+		}
+		#ifdef GL_LINE_SMOOTH
+		if (QOpenGLContext::currentContext()->format().renderableType()==QSurfaceFormat::OpenGL)
+			glDisable(GL_LINE_SMOOTH);
+		#endif
 	}
 	if (messageFader.getInterstate() > 0.000001f)
 	{
@@ -316,6 +327,13 @@ void AngleMeasure::handleMouseClicks(class QMouseEvent* event)
 	{
 		const StelProjectorP prj = StelApp::getInstance().getCore()->getProjection(StelCore::FrameEquinoxEqu);
 		prj->unProject(event->x(),event->y(),startPoint);
+		{ // Nick Fedoseev patch: improve click match
+			Vec3d win;
+			prj->project(startPoint,win);
+			float dx = event->x() - win.v[0];
+			float dy = event->y() - win.v[1];
+			prj->unProject(event->x()+dx, event->y()+dy, startPoint);
+		}
 		const StelProjectorP prjHor = StelApp::getInstance().getCore()->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
 		prjHor->unProject(event->x(),event->y(),startPointHor);
 
@@ -346,6 +364,13 @@ void AngleMeasure::handleMouseClicks(class QMouseEvent* event)
 	{
 		const StelProjectorP prj = StelApp::getInstance().getCore()->getProjection(StelCore::FrameEquinoxEqu);
 		prj->unProject(event->x(),event->y(),endPoint);
+		{ // Nick Fedoseev patch: improve click match
+			Vec3d win;
+			prj->project(endPoint,win);
+			float dx = event->x() - win.v[0];
+			float dy = event->y() - win.v[1];
+			prj->unProject(event->x()+dx, event->y()+dy, endPoint);
+		}
 		const StelProjectorP prjHor = StelApp::getInstance().getCore()->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
 		prjHor->unProject(event->x(),event->y(),endPointHor);
 		calculateEnds();
@@ -361,6 +386,13 @@ bool AngleMeasure::handleMouseMoves(int x, int y, Qt::MouseButtons)
 	{
 		const StelProjectorP prj = StelApp::getInstance().getCore()->getProjection(StelCore::FrameEquinoxEqu);
 		prj->unProject(x,y,endPoint);
+		{ // Nick Fedoseev patch: improve click match
+		   Vec3d win;
+		   prj->project(endPoint,win);
+		   float dx = x - win.v[0];
+		   float dy = y - win.v[1];
+		   prj->unProject(x+dx, y+dy, endPoint);
+		}
 		const StelProjectorP prjHor = StelApp::getInstance().getCore()->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
 		prjHor->unProject(x,y,endPointHor);
 		calculateEnds();

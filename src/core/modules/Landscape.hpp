@@ -100,7 +100,7 @@ public:
 	//! Return the associated location (may be empty!)
 	const StelLocation& getLocation() const {return location;}
 	//! Return if the location is valid (a valid location has a valid planetName!)
-	bool hasLocation() const {return (location.planetName.length() > 0);}
+	bool hasLocation() const {return (!(location.planetName.isEmpty()));}
   	//! Return default Bortle index (light pollution value) or -1 (unknown/no change)
 	int getDefaultBortleIndex() const {return defaultBortleIndex;}
 	//! Return default fog setting (0/1) or -1 (no change)

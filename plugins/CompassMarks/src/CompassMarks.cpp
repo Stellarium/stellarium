@@ -132,6 +132,11 @@ void CompassMarks::draw(StelCore* core)
 	glDisable(GL_TEXTURE_2D);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glEnable(GL_BLEND);
+	// OpenGL ES 2.0 doesn't have GL_LINE_SMOOTH. But it looks much better.
+	#ifdef GL_LINE_SMOOTH
+	if (QOpenGLContext::currentContext()->format().renderableType()==QSurfaceFormat::OpenGL)
+		glEnable(GL_LINE_SMOOTH);
+	#endif
 
 	for(int i=0; i<360; i++)
 	{
@@ -162,6 +167,11 @@ void CompassMarks::draw(StelCore* core)
 			//glEnable(GL_TEXTURE_2D);
 		}
 	}
+	// OpenGL ES 2.0 doesn't have GL_LINE_SMOOTH
+	#ifdef GL_LINE_SMOOTH
+	if (QOpenGLContext::currentContext()->format().renderableType()==QSurfaceFormat::OpenGL)
+		glDisable(GL_LINE_SMOOTH);
+	#endif
 	glDisable(GL_BLEND);
 	glEnable(GL_TEXTURE_2D);
 

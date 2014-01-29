@@ -5,11 +5,15 @@ IF(NOT ("${CMAKE_MAJOR_VERSION}.${CMAKE_MINOR_VERSION}" LESS 3.0))
   CMAKE_POLICY(SET CMP0050 OLD)
 ENDIF()
 
+IF(NOT ("${CMAKE_MAJOR_VERSION}.${CMAKE_MINOR_VERSION}.${CMAKE_PATCH_VERSION}" LESS 3.0.2))
+  CMAKE_POLICY(SET CMP0043 OLD)
+ENDIF()
+
 ########### Project name ###########
 PROJECT(Stellarium)
 SET(STELLARIUM_MAJOR "0")
 SET(STELLARIUM_MINOR "13")
-SET(STELLARIUM_PATCH "2")
+SET(STELLARIUM_PATCH "3")
 SET(VERSION "${STELLARIUM_MAJOR}.${STELLARIUM_MINOR}.${STELLARIUM_PATCH}")
 SET(PACKAGE stellarium)
 
@@ -287,19 +291,14 @@ IF(NOT RELEASE_BUILD)
     IF(BZR_REVISION)
         SET(PACKAGE_VERSION "bzr${BZR_REVISION}")
         ADD_DEFINITIONS(-DBZR_REVISION="${BZR_REVISION}")
-    ELSE()
-        FIND_PACKAGE(Subversion)
-        IF(Subversion_FOUND)
-            Subversion_WC_INFO(${PROJECT_SOURCE_DIR} StelSvn)
-            SET(SVN_REVISION ${StelSvn_WC_REVISION})
-            ADD_DEFINITIONS(-DSVN_REVISION="${SVN_REVISION}")
-        ENDIF()
     ENDIF()
 ENDIF()
 
 IF(ENABLE_STRATOSCRIPT_COMPAT)
     ADD_DEFINITIONS(-DENABLE_STRATOSCRIPT_COMPAT)
 ENDIF()
+
+CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/data/stellarium.exe.manifest.cmake ${CMAKE_SOURCE_DIR}/data/stellarium.exe.manifest @ONLY)
 
 ### [Optional] Embed icon in the Windows executable ###
 IF(WIN32)
@@ -382,6 +381,7 @@ IF(WIN32)
     # Deploy related stuff
     SET(ISS_WINDOWS_PLUGIN "Source: \"${QT5_LIBS}/../plugins/platforms/qwindows.dll\"; DestDir: \"{app}/platforms/\";")
     SET(ISS_ICO_PLUGIN "Source: \"${QT5_LIBS}/../plugins/imageformats/qico.dll\"; DestDir: \"{app}/imageformats/\";")
+    SET(ISS_JPEG_PLUGIN "Source: \"${QT5_LIBS}/../plugins/imageformats/qjpeg.dll\"; DestDir: \"{app}/imageformats/\";")
     IF(ENABLE_SOUND)
         SET(ISS_MULTIMEDIA_PLUGINS "Source: \"${QT5_LIBS}/../plugins/mediaservice/dsengine.dll\"; DestDir: \"{app}/mediaservice/\";\nSource: \"${QT5_LIBS}/../plugins/mediaservice/qtmedia_audioengine.dll\"; DestDir: \"{app}/mediaservice/\";\nSource: \"${QT5_LIBS}/../plugins/playlistformats/qtmultimedia_m3u.dll\"; DestDir: \"{app}/playlistformats/\";")
     ELSE()

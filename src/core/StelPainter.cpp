@@ -163,7 +163,7 @@ QFontMetrics StelPainter::getFontMetrics() const
 // Standard methods for drawing primitives
 
 // Fill with black around the circle
-void StelPainter::drawViewportShape(void)
+void StelPainter::drawViewportShape(const GLfloat innerRadius)
 {
 	if (prj->maskType != StelProjector::MaskDisk)
 		return;
@@ -171,7 +171,6 @@ void StelPainter::drawViewportShape(void)
 	glDisable(GL_BLEND);
 	setColor(0.f,0.f,0.f);
 
-	GLfloat innerRadius = 0.5*prj->viewportFovDiameter;
 	GLfloat outerRadius = prj->getViewportWidth()+prj->getViewportHeight();
 	GLint slices = 256;
 	GLfloat sweepAngle = 360.;
@@ -223,6 +222,11 @@ void StelPainter::drawViewportShape(void)
 	}
 	drawFromArray(TriangleStrip, (slices+1)*2, 0, false);
 	enableClientStates(false);
+}
+
+void StelPainter::drawViewportShape(void)
+{
+	this->drawViewportShape(0.5*prj->viewportFovDiameter);
 }
 
 
@@ -646,7 +650,7 @@ void StelPainter::drawSmallCircleArc(const Vec3d& start, const Vec3d& stop, cons
 	tessArc.append(win1);
 
 
-	if (rotCenter.lengthSquared()<0.00000001)
+	if (rotCenter.lengthSquared()<1e-11)
 	{
 		// Great circle
 		// Perform the tesselation of the arc in small segments in a way so that the lines look smooth

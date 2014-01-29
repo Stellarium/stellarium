@@ -87,8 +87,12 @@ public:
 		isPlanet,                 // ssystem.ini: type="planet"
 		isMoon,                   // ssystem.ini: type="moon"
 		isAsteroid,               // ssystem.ini: type="asteroid"
-		isPlutoid,                // ssystem.ini: type="plutoid"
+		isPlutino,                // ssystem.ini: type="plutino"
 		isComet,                  // ssystem.ini: type="comet"
+		isDwarfPlanet,		  // ssystem.ini: type="dwarf planet"
+		isCubewano,		  // ssystem.ini: type="cubewano"
+		isSDO,			  // ssystem.ini: type="sdo"
+		isOCO,			  // ssystem.ini: type="oco"
 		isUNDEFINED               // ssystem.ini: type=<anything else>
 	};
 
@@ -147,8 +151,8 @@ public:
 	virtual Vec3f getInfoColor(void) const;
 	virtual QString getType(void) const {return "Planet";}
 	virtual Vec3d getJ2000EquatorialPos(const StelCore *core) const;
-	virtual QString getEnglishName(void) const {return englishName;}
-	virtual QString getNameI18n(void) const {return nameI18;}
+	virtual QString getEnglishName(void) const;
+	virtual QString getNameI18n(void) const;
 	virtual double getAngularSize(const StelCore* core) const;
 	virtual bool hasAtmosphere(void) {return atmosphere;}
 	virtual bool hasHalo(void) {return halo;}
@@ -178,6 +182,8 @@ public:
 	const QString& getTextMapName() const {return texMapName;}	
 	const QString getPlanetTypeString() const {return pTypeMap.value(pType);}
 	PlanetType getPlanetType() const {return pType;}
+
+	void setNativeName(QString planet) { nativeName = planet; }
 
 	ApparentMagnitudeAlgorithm getApparentMagnitudeAlgorithm() const { return vMagAlgorithm; }
 	const QString getApparentMagnitudeAlgorithmString() const { return vMagAlgorithmMap.value(vMagAlgorithm); }
@@ -247,6 +253,14 @@ public:
 	void setFlagLabels(bool b){flagLabels = b;}
 	bool getFlagLabels(void) const {return flagLabels;}
 
+	bool flagNativeName;
+	void setFlagNativeName(bool b) { flagNativeName = b; }
+	bool getFlagNativeName(void) { return flagNativeName; }
+
+	bool flagTranslatedName;
+	void setFlagTranslatedName(bool b) { flagTranslatedName = b; }
+	bool getFlagTranslatedName(void) { return flagTranslatedName; }
+
 	///////////////////////////////////////////////////////////////////////////
 	// DEPRECATED
 	///// Orbit related code
@@ -292,7 +306,8 @@ protected:
 
 	QString englishName;             // english planet name
 	QString nameI18;                 // International translated name
-	QString texMapName;              // Texture file path	
+	QString nativeName;              // Can be used in a skyculture
+	QString texMapName;              // Texture file path
 	QString normalMapName;              // Texture file path
 	int flagLighting;                // Set whether light computation has to be proceed
 	RotationElements re;             // Rotation param
@@ -333,7 +348,7 @@ protected:
 	ApparentMagnitudeAlgorithm vMagAlgorithm;
 
 	static Vec3f labelColor;
-	static StelTextureSP hintCircleTex;
+	static StelTextureSP hintCircleTex;	
 	static QMap<PlanetType, QString> pTypeMap; // Maps fast type to english name.
 	static QMap<ApparentMagnitudeAlgorithm, QString> vMagAlgorithmMap;
 	
@@ -379,7 +394,6 @@ protected:
 	
 	static void initShader();
 	static void deinitShader();
-
 };
 
 #endif // _PLANET_HPP_

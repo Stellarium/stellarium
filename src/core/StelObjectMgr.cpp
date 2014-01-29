@@ -173,8 +173,16 @@ StelObjectP StelObjectMgr::cleverFind(const StelCore* core, const Vec3d& v) cons
 StelObjectP StelObjectMgr::cleverFind(const StelCore* core, int x, int y) const
 {
 	Vec3d v;
-	if (core->getProjection(StelCore::FrameJ2000)->unProject(x,y,v))
+	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
+	if (prj->unProject(x,y,v))
 	{
+		// Nick Fedoseev patch: improve click match for refracted coordinates
+		Vec3d win;
+		prj->project(v,win);
+		float dx = x - win.v[0];
+		float dy = y - win.v[1];
+		prj->unProject(x+dx, y+dy, v);
+
 		return cleverFind(core, v);
 	}
 	return StelObjectP();
@@ -310,6 +318,7 @@ QStringList StelObjectMgr::listAllModuleObjects(const QString &moduleId, bool in
 		result = module->listAllObjectsByType(objType, inEnglish);
 	else
 		result = module->listAllObjects(inEnglish);
+
 	return result;
 }
 
@@ -326,7 +335,11 @@ QMap<QString, QString> StelObjectMgr::objectModulesMap() const
 			result["SolarSystem:moon"] = "Moons";
 			result["SolarSystem:asteroid"] = "Asteroids";
 			result["SolarSystem:comet"] = "Comets";
-			result["SolarSystem:plutoid"] = "Plutoids";
+			result["SolarSystem:plutino"] = "Plutinos";
+			result["SolarSystem:cubewano"] = "Cubewanos";
+			result["SolarSystem:dwarf planet"] = "Dwarf planets";
+			result["SolarSystem:scattered disc object"] = "Scattered disc objects";
+			result["SolarSystem:Oort cloud object"] = "Oort cloud objects";
 		}
 		// Deep-sky objects by type + couple amateur catalogue
 		if (m->objectName()=="NebulaMgr")

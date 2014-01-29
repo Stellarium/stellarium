@@ -122,16 +122,14 @@ bool DateTimeDialog::valid(int y, int m, int d, int h, int min, int s)
 bool DateTimeDialog::validJd(double jday)
 {
 	pushToWidgets();
-	// local tz -> UTC
-	StelApp::getInstance().getCore()->setJDay(jday-StelApp::getInstance().getLocaleMgr().getGMTShift(jday)/24.+StelApp::getInstance().getCore()->getDeltaT(jday)/86400.);
+	StelApp::getInstance().getCore()->setJDay(jday+StelApp::getInstance().getCore()->getDeltaT(jday)/86400.);
 	return true;
 }
 
 bool DateTimeDialog::validMjd(double mjday)
 {
-	pushToWidgets();
-	// local tz -> UTC
-	StelApp::getInstance().getCore()->setMJDay(mjday-StelApp::getInstance().getLocaleMgr().getGMTShift(mjday)/24.+StelApp::getInstance().getCore()->getDeltaT(mjday)/86400.);
+	pushToWidgets();	
+	StelApp::getInstance().getCore()->setMJDay(mjday+StelApp::getInstance().getCore()->getDeltaT(mjday)/86400.);
 	return true;
 }
 
@@ -149,7 +147,7 @@ void DateTimeDialog::styleChanged()
 
 void DateTimeDialog::close()
 {
-	ui->dateTimeBox->setFocus();
+	ui->dateTimeTab->setFocus();
 	StelDialog::close();
 }
 
@@ -263,11 +261,12 @@ void DateTimeDialog::setDateTime(double newJd)
 		double deltaT = 0.;
 		if (StelApp::getInstance().getCore()->getCurrentLocation().planetName=="Earth")
 			deltaT = StelApp::getInstance().getCore()->getDeltaT(newJd)/86400.;
+		double newJdC = newJd - deltaT;
 		newJd += (StelApp::getInstance().getLocaleMgr().getGMTShift(newJd)/24.0-deltaT); // UTC -> local tz
 		StelUtils::getDateFromJulianDay(newJd, &year, &month, &day);
 		StelUtils::getTimeFromJulianDay(newJd, &hour, &minute, &second);
-		jd = newJd;
-		mjd = newJd-2400000.5;
+		jd = newJdC;
+		mjd = newJdC-2400000.5;
 		pushToWidgets();
 	}
 }

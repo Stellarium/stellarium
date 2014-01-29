@@ -54,12 +54,12 @@ QFrame#TitleBar {
 
 /*********************************************dateTimedialog*********************************************************/
 
-#dateTimeDialogForm #dateTimeBox QFrame {
+#dateTimeDialogForm #dateTimeTabWidget QFrame {
 	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(235, 239, 249), stop: 1 rgb(210, 214, 224));
 	border: none;
 }
 
-#dateTimeDialogForm #dateTimeBox QLabel {
+#dateTimeDialogForm #dateTimeTabWidget QLabel {
 	padding: 0;
 	margin: 0;
 	font-size: 24px;

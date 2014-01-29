@@ -162,7 +162,7 @@ private:
 //! @param[in] bodyType is 1 for Sun, 2 for Moon, 3 for Solar System object.
 	bool calculateSolarSystemEvents(StelCore* core, int bodyType);
 
-//! Finds the heliacal rise/set dates of the year for the currently-selected object.
+//! Finds the acronycal and cosmical rise/set dates of the year for the currently-selected object.
 //! @param[out] acroRise day of year of the Acronycal rise.
 //! @param[out] acroSet day of year of the Acronycal set.
 //! @param[out] cosRise day of year of the Cosmical rise.
@@ -171,6 +171,14 @@ private:
 //! 2 if cosmical dates exist, and 3 if both are found.
 	int calculateAcroCos(int& acroRise, int& acroSet,
 	                     int& cosRise, int& cosSet);
+
+
+//! Finds the Heliacal rise/set dates of the year for the currently-selected object.
+//! @param imethod Determines the algorithm to use (not yet implemented).
+//! @param[out] heliRise day of year of the Heliacal rise.
+//! @param[out] heliSet day of year of the Heliacal set.
+//! @returns 0 if no dates found and 1 otherwise.
+	int calculateHeli(int imethod, int& heliRise, int& heliSet);
 
 
 //! Computes the Sun or Moon coordinates at a given Julian date.
@@ -323,7 +331,7 @@ private:
 	//! Cached copy of the line reporting when the target is observable.
 	QString lineObservableRange;
 	//! Cached copy of the line reporting the acronical/cosmical rise and set.
-	QString lineAcroCos;
+	QString lineAcroCos, lineHeli;
 
 //! Strings to save ephemeris Times:
 	QString RiseTime, SetTime, CulmTime;
@@ -367,6 +375,7 @@ private:
 	//! @{
 	QString msgSetsAt, msgRoseAt, msgSetAt, msgRisesAt, msgCircumpolar, msgNoRise, msgCulminatesAt, msgCulminatedAt, msgH, msgM, msgS;
 	QString msgSrcNotObs, msgNoACRise, msgGreatElong, msgLargSSep, msgNone, msgAcroRise, msgNoAcroRise, msgCosmRise, msgNoCosmRise;
+        QString msgHeliRise, msgHeliSet, msgNoHeliRise;
 	QString msgWholeYear, msgNotObs, msgAboveHoriz, msgToday, msgThisYear, msgPrevFullMoon, msgNextFullMoon;
 	//! @}
 

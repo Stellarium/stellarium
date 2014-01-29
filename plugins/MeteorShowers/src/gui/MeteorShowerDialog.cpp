@@ -116,6 +116,7 @@ void MeteorShowerDialog::createDialogContent()
 	treeWidget = ui->listEvents;
 	initListEvents();
 	connect(treeWidget, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(selectEvent(QModelIndex)));
+	connect(treeWidget, SIGNAL(currentItemChanged(QTreeWidgetItem*,QTreeWidgetItem*)), this, SLOT(repaintTreeWidget()));
 
 	// Settings tab / radiant group
 	ui->displayRadiant->setChecked(plugin->getFlagRadiant());
@@ -155,6 +156,13 @@ void MeteorShowerDialog::createDialogContent()
 	}
 
 	updateGuiFromSettings();
+}
+
+void MeteorShowerDialog::repaintTreeWidget()
+{
+	// Enable force repaint listEvents to avoiding artifacts
+	// Seems bug in Qt5. Details: https://bugs.launchpad.net/stellarium/+bug/1350669
+	treeWidget->repaint();
 }
 
 void MeteorShowerDialog::initListEvents(void)
