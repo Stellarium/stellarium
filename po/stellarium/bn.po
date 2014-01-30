@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-01-23 19:56+0700\n"
-"PO-Revision-Date: 2014-01-19 12:33+0000\n"
+"PO-Revision-Date: 2014-01-29 06:13+0000\n"
 "Last-Translator: Tanmoy Saha <Unknown>\n"
 "Language-Team: stellarium\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-01-24 05:16+0000\n"
-"X-Generator: Launchpad (build 16914)\n"
+"X-Launchpad-Export-Date: 2014-01-30 05:16+0000\n"
+"X-Generator: Launchpad (build 16916)\n"
 "Language: bn\n"
 
 #: src/core/modules/ConstellationMgr.cpp:106 src/core/modules/StarMgr.cpp:337
@@ -311,7 +311,7 @@ msgstr "প্রারম্ভিক অস্থায়ী নাম : %1"
 #: src/core/modules/Comet.cpp:178
 #, no-c-format, qt-format
 msgid "Distance from Sun: %1AU (%2 km)"
-msgstr ""
+msgstr "সূর্য থেকে দূরত্ব : %1 জ্যোতির্বৈজ্ঞানিক একক (%2 কিমি)"
 
 #: src/core/modules/Comet.cpp:185
 #, no-c-format, qt-format
@@ -321,7 +321,7 @@ msgstr "সূর্য থেকে দূরত্ব : %1 জ্যোতি�
 #: src/core/modules/Comet.cpp:209
 #, no-c-format, qt-format
 msgid "Speed: %1 km/s"
-msgstr ""
+msgstr "গতিবেগ : %1 কিমি/সেকেন্ড"
 
 #: src/core/modules/SolarSystem.cpp:151
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:303
@@ -1114,7 +1114,7 @@ msgstr "দিগংশ / উন্নতি : %1/%2"
 #: src/core/StelObject.cpp:180
 #, qt-format
 msgid "Ecliptic Topocentric (of J2000): %1/%2"
-msgstr ""
+msgstr "স্থান কেন্দ্রিক সৌরতলীয় অবস্থান (J2000 অনুযায়ী) : %1/%2"
 
 #: src/core/StelObject.cpp:185
 #, qt-format
@@ -3678,7 +3678,7 @@ msgstr "&পুনরায় করুন"
 
 #: src/translations.h:543
 msgid "Cu&t"
-msgstr ""
+msgstr "&কেটে নিন"
 
 #: src/translations.h:544
 msgid "&Copy"
@@ -3686,7 +3686,7 @@ msgstr "&অনুকরন করুন"
 
 #: src/translations.h:545
 msgid "&Paste"
-msgstr ""
+msgstr "অনুলিপি &জুড়ুন"
 
 #: src/translations.h:546 src/ui_locationDialogGui.h:395
 #: plugins/Oculars/src/ui_ocularDialog.h:1063
@@ -3702,19 +3702,19 @@ msgstr "সব নির্বাচন করুন"
 
 #: src/translations.h:548
 msgid "Look in:"
-msgstr ""
+msgstr "নির্বাচন স্থল :"
 
 #: src/translations.h:549
 msgid "Directory:"
-msgstr ""
+msgstr "ডিরেক্টরি :"
 
 #: src/translations.h:550
 msgid "Folder"
-msgstr ""
+msgstr "ফোল্ডার"
 
 #: src/translations.h:551
 msgid "&Choose"
-msgstr ""
+msgstr "&বেছে নিন"
 
 #: src/translations.h:552 src/ui_configurationDialog.h:1164
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:516
@@ -3723,27 +3723,27 @@ msgstr "বাতিল করুন"
 
 #: src/translations.h:553
 msgid "Files of type:"
-msgstr ""
+msgstr "ধরণ :"
 
 #: src/translations.h:554
 msgid "Date Modified"
-msgstr ""
+msgstr "শেষ সম্পাদনা"
 
 #: src/translations.h:555
 msgid "Directories"
-msgstr ""
+msgstr "ডিরেক্টরি সমূহ"
 
 #: src/translations.h:556
 msgid "Computer"
-msgstr ""
+msgstr "কম্পিউটার"
 
 #: src/translations.h:557
 msgid "&Open"
-msgstr ""
+msgstr "&খুলুন"
 
 #: src/translations.h:558
 msgid "File &name:"
-msgstr ""
+msgstr "নথির &নাম :"
 
 #: src/ui_helpDialogGui.h:277 src/ui_helpDialogGui.h:283
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:417
@@ -4070,7 +4070,7 @@ msgstr "বিবর্ধিত চাঁদ"
 
 #: src/ui_viewDialog.h:1244
 msgid "Scale factor"
-msgstr ""
+msgstr "বিবর্ধন গুণাঙ্ক"
 
 #: src/ui_viewDialog.h:1247
 msgid "Automatic change of landscape when planet is changed"
@@ -4194,15 +4194,15 @@ msgstr "খগোলীয় বিষয়"
 
 #: src/ui_viewDialog.h:1292
 msgid "Equatorial grid (on J2000)"
-msgstr ""
+msgstr "নিরক্ষীয় ছক (J2000 অনুযায়ী)"
 
 #: src/ui_viewDialog.h:1293
 msgid "Equatorial grid (on date)"
-msgstr ""
+msgstr "নিরক্ষীয় ছক (তারিখ অনুযায়ী)"
 
 #: src/ui_viewDialog.h:1294
 msgid "Ecliptic grid (on J2000)"
-msgstr ""
+msgstr "সৌরপথীয় ছক (J2000 অনুযায়ী)"
 
 #: src/ui_viewDialog.h:1298
 msgid "Show equator line"
@@ -4448,10 +4448,12 @@ msgstr "দূরত্ব"
 msgid ""
 "Ecliptic topocentric coordinates, equinox of date and J2000 (only for Earth)"
 msgstr ""
+"স্থান কেন্দ্রিক সৌরতলীয় স্থানাঙ্ক, বর্তমান বিষুব বিন্দু ও J2000 অনুযায়ী "
+"(শুধুমাত্র পৃথিবীর ক্ষেত্রে)"
 
 #: src/ui_configurationDialog.h:1075
 msgid "Ecliptic coordinates"
-msgstr ""
+msgstr "সৌরপথীয় স্থানাঙ্ক"
 
 #: src/ui_configurationDialog.h:1076
 msgid "Control"
@@ -7306,7 +7308,7 @@ msgstr "এই সরঞ্জামটি আমাদের কিছু ব�
 #: plugins/Novae/src/gui/NovaeDialog.cpp:116
 #, qt-format
 msgid "This list altogether contains %1 stars."
-msgstr ""
+msgstr "বর্তমান তালিকাটিতে সর্বোমোট %1 টি নক্ষত্রের তথ্য আছে ।"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:115
 #, qt-format
@@ -7452,11 +7454,12 @@ msgstr ""
 #: plugins/Novae/src/gui/NovaeDialog.cpp:114
 msgid "This plugin allows you to see recent bright novae: "
 msgstr ""
+"এই সরঞ্জামটি সাম্প্রতিক ঘটা নিম্নলিখিত কিছু নক্ষত্র বিস্ফোরণ দেখায় : "
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:117
 #, qt-format
 msgid "All those novae are brighter than %1 at peak of brightness."
-msgstr ""
+msgstr "এগুলি তাদের ঔজ্জ্বল্যতার চূড়ায় %1 এর থেকেও উজ্জ্বল ছিল ।"
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:119
 msgid ""
@@ -7547,6 +7550,9 @@ msgid ""
 "visual magnitude 16. The catalogue of quasars was compiled from \"Quasars "
 "and Active Galactic Nuclei\" (13th Ed.)"
 msgstr ""
+"কোয়াসার সরঞ্জামটি ১৬ ঔজ্জ্বল্যতার থেকে বেশি ঔজ্জ্বল্যতার কিছু কোয়াসারকে "
+"দেখায় । ব্যবহৃত তালিকাটি 'Quasars and Active Galactic Nuclei' (13th Ed.) "
+"থেকে নেওয়া হয়েছে ।"
 
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:121
 msgid "Veron+ 2010"
@@ -7555,7 +7561,7 @@ msgstr "ভেরন+ ২০১০"
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:123
 #, qt-format
 msgid "The current catalog contains info about %1 quasars."
-msgstr ""
+msgstr "বর্তমান তালিকাটিতে %1 টি কোয়াসারের তথ্য দেওয়া আছে ।"
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:134
@@ -7564,6 +7570,8 @@ msgid ""
 "If you want to read full information about this plugin, its history and "
 "format of the catalog, you can %1get info here%2."
 msgstr ""
+"এই সরঞ্জাম, তার ইতিহাস ও এতে ব্যবহৃত তালিকার বিন্যাস সম্বন্ধে বিশদ তথ্য "
+"%1এখানে%2 পাবেন ।"
 
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:216
 msgid "Quasars is updated"
@@ -7769,7 +7777,7 @@ msgstr ""
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:124
 #, qt-format
 msgid "Current catalog contains info about %1 pulsars."
-msgstr ""
+msgstr "বর্তমান তালিকাটিতে %1 টি পালসারের তথ্য দেওয়া আছে ।"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:126
 msgid "Note"
@@ -7955,6 +7963,9 @@ msgid ""
 "from \"%1The Habitable Exoplanets Catalog%3\" by %2Planetary Habitability "
 "Laboratory%3."
 msgstr ""
+"বসবাসযোগ্য বহির গ্রহগুলির তালিকা ও তাদের নানা তথ্য %2Planetary Habitability "
+"Laboratory%3 দ্বারা নির্মিত \\\"%1বসবাসযোগ্য বহির গ্রহগুলির তালিকা%3\\\" "
+"থেকে নেওয়া হয়েছে ।"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:128
 #, qt-format
@@ -7962,6 +7973,7 @@ msgid ""
 "The current catalog contains info about %1 planetary systems, which "
 "altogether have %2 exoplanets."
 msgstr ""
+"বর্তমান তালিকাটিতে %1 টি গ্রহজগতের বা সর্বোমোট %2 টি বহির গ্রহের তথ্য আছে ।"
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:139
@@ -7970,6 +7982,8 @@ msgid ""
 "If you want to read full information about the plugin, its history and "
 "format of the catalog you can %1get info here%2."
 msgstr ""
+"এই সরঞ্জাম, তার ইতিহাস ও এতে ব্যবহৃত তালিকার বিন্যাস সম্বন্ধে বিশদ তথ্য "
+"%1এখানে%2 পাবেন ।"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:152
 msgid "Potential habitable exoplanets"
@@ -8617,7 +8631,7 @@ msgstr "সূর্যের যে অবস্থানে গোধূলি
 #: plugins/FOV/src/ui_fovWindow.h:383 plugins/FOV/src/ui_fovWindow.h:385
 #: plugins/FOV/src/ui_fovWindow.h:404
 msgid "Field of View"
-msgstr ""
+msgstr "দৃষ্টিক্ষেত্র"
 
 #: plugins/FOV/src/FOV.cpp:43
 msgid ""
