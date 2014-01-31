@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-01-23 19:56+0700\n"
-"PO-Revision-Date: 2014-01-26 18:55+0000\n"
-"Last-Translator: Miroslav Remák <Unknown>\n"
+"PO-Revision-Date: 2014-01-30 19:47+0000\n"
+"Last-Translator: Juraj Kubica <Juraj.Kubica@seznam.cz>\n"
 "Language-Team: Slovak <sk@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-01-27 05:14+0000\n"
-"X-Generator: Launchpad (build 16914)\n"
+"X-Launchpad-Export-Date: 2014-01-31 05:19+0000\n"
+"X-Generator: Launchpad (build 16916)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:106 src/core/modules/StarMgr.cpp:337
 #: src/core/modules/GridLinesMgr.cpp:680 src/core/modules/LandscapeMgr.cpp:342
@@ -1104,7 +1104,7 @@ msgstr "Azimut/výška: %1/%2"
 #: src/core/StelObject.cpp:180
 #, qt-format
 msgid "Ecliptic Topocentric (of J2000): %1/%2"
-msgstr ""
+msgstr "Ekliptikálne topocentrické (pre J2000): %1/%2"
 
 #: src/core/StelObject.cpp:185
 #, qt-format
@@ -1694,7 +1694,7 @@ msgstr "Vidiecka obloha"
 #. TRANSLATORS: Short description for Class 4 of the Bortle scale
 #: src/gui/ViewDialog.cpp:303
 msgid "Rural/suburban transition"
-msgstr ""
+msgstr "Prechod vidiecka/predmestská"
 
 #. TRANSLATORS: Short description for Class 5 of the Bortle scale
 #: src/gui/ViewDialog.cpp:305
@@ -1709,7 +1709,7 @@ msgstr "Jasná predmestská obloha"
 #. TRANSLATORS: Short description for Class 7 of the Bortle scale
 #: src/gui/ViewDialog.cpp:309
 msgid "Suburban/urban transition"
-msgstr ""
+msgstr "Prechod predmestská/mestská"
 
 #. TRANSLATORS: Short description for Class 8 of the Bortle scale
 #: src/gui/ViewDialog.cpp:311
@@ -4061,7 +4061,7 @@ msgstr "Zväčšiť Mesiac"
 
 #: src/ui_viewDialog.h:1244
 msgid "Scale factor"
-msgstr ""
+msgstr "Faktor škálovania"
 
 #: src/ui_viewDialog.h:1247
 msgid "Automatic change of landscape when planet is changed"
@@ -4182,15 +4182,15 @@ msgstr "Nebeská klenba"
 
 #: src/ui_viewDialog.h:1292
 msgid "Equatorial grid (on J2000)"
-msgstr ""
+msgstr "Ekvatoriálna sieť (pre J2000)"
 
 #: src/ui_viewDialog.h:1293
 msgid "Equatorial grid (on date)"
-msgstr ""
+msgstr "Ekvatoriálna sieť (pre nastavený dátum)"
 
 #: src/ui_viewDialog.h:1294
 msgid "Ecliptic grid (on J2000)"
-msgstr ""
+msgstr "Ekliptikálna sieť (pre J2000)"
 
 #: src/ui_viewDialog.h:1298
 msgid "Show equator line"
@@ -4258,7 +4258,7 @@ msgstr "Jazyk programu"
 
 #: src/ui_configurationDialog.h:1002
 msgid "Check updates"
-msgstr ""
+msgstr "Skontrolovať aktualizácie"
 
 #: src/ui_configurationDialog.h:1003
 msgid ""
@@ -4439,10 +4439,12 @@ msgstr "Vzdialenosť"
 msgid ""
 "Ecliptic topocentric coordinates, equinox of date and J2000 (only for Earth)"
 msgstr ""
+"Ekliptikálne topocentrické súradnice, ekvinokcium pre nastavený dátum a pre "
+"J2000 (len na Zemi)"
 
 #: src/ui_configurationDialog.h:1075
 msgid "Ecliptic coordinates"
-msgstr ""
+msgstr "Ekliptikálne súradnice"
 
 #: src/ui_configurationDialog.h:1076
 msgid "Control"
@@ -7462,7 +7464,7 @@ msgstr "Tento modul vám umožňuje pozorovať súčasné jasné novy: "
 #: plugins/Novae/src/gui/NovaeDialog.cpp:117
 #, qt-format
 msgid "All those novae are brighter than %1 at peak of brightness."
-msgstr ""
+msgstr "Všetky tieto novy sú jasnejšie než %1 na vrchole jasnosti."
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:119
 msgid ""
@@ -7553,6 +7555,9 @@ msgid ""
 "visual magnitude 16. The catalogue of quasars was compiled from \"Quasars "
 "and Active Galactic Nuclei\" (13th Ed.)"
 msgstr ""
+"Modul Kvazary zobrazuje niektoré kvazary jasnejšie než vizuálna magnitúda "
+"16. Katalóg kvazarov bol zostavený podľa \"Quasars and Active Galactic "
+"Nuclei\" (13. vyd.)"
 
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:121
 msgid "Veron+ 2010"
@@ -7964,6 +7969,9 @@ msgid ""
 "from \"%1The Habitable Exoplanets Catalog%3\" by %2Planetary Habitability "
 "Laboratory%3."
 msgstr ""
+"Zoznam potenciálne obývateľných exoplanét a údaje o nich boli prevzaté z "
+"katalógu \"%1The Habitable Exoplanets Catalog%3\" od %2Planetary "
+"Habitability Laboratory%3."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:128
 #, qt-format
@@ -7971,6 +7979,8 @@ msgid ""
 "The current catalog contains info about %1 planetary systems, which "
 "altogether have %2 exoplanets."
 msgstr ""
+"Aktuálny katalóg obsahuje informácie o %1 planetárnych sústavách, ktoré "
+"spolu majú %2 exoplanét."
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:139
@@ -8638,11 +8648,13 @@ msgid ""
 "This plugin allows stepwise zooming via keyboard shortcuts like in the "
 "<em>Cartes du Ciel</em> planetarium program."
 msgstr ""
+"Tento modul umožňí približovanie po krokoch pomocou klávesových skratiek v "
+"štýle programu <em>Cartes du Ciel</em>."
 
 #: plugins/FOV/src/FOV.cpp:83
 #, qt-format
 msgid "Set FOV to %1%2"
-msgstr ""
+msgstr "Nastav zorné pole na %1%2"
 
 #: plugins/FOV/src/gui/FOVWindow.cpp:77
 msgid "Field of View plug-in"
@@ -8656,20 +8668,27 @@ msgid ""
 "feature. You can edit values and use the keyboard for quick-setting of FOV. "
 "All values in degrees."
 msgstr ""
+"Stellarium štandardne využíva plynulé približovanie kolieskom myši, alebo "
+"klávesami. Niektorí používatelia uprednostňujú zväčšovanie obrazu v pevných "
+"krokoch, podobne ako v programe Cartes du Ciel, čo im poskytuje tento modul. "
+"Môžete nastaviť hodnoty a pomocou kláves rýchlo nastaviť požadované zorné "
+"pole. Všetky hodnoty sa zadávajú v stupňoch."
 
 #: plugins/NavStars/src/NavStars.cpp:53 plugins/NavStars/src/NavStars.cpp:138
 msgid "Navigational Stars"
-msgstr ""
+msgstr "Orientačné hviezdy"
 
 #: plugins/NavStars/src/NavStars.cpp:56
 msgid ""
 "This plugin marks the 58 navigational stars of the 2102-D Rude Star Finder, "
 "also tabulated in the Nautical Almanac."
 msgstr ""
+"Modul zvýrazní 58 navigačných hviezd podľa 2102-D Rude Star Finder, ktoré sa "
+"nachádzajú aj v Námorníckej ročenke."
 
 #: plugins/NavStars/src/NavStars.cpp:138
 msgid "Mark the navigational stars"
-msgstr ""
+msgstr "Vyznačiť navigačné hviezdy"
 
 #~ msgid "Cardinal Points"
 #~ msgstr "Svetové strany"
