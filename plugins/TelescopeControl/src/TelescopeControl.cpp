@@ -79,6 +79,7 @@ StelPluginInfo TelescopeControlStelPluginInterface::getPluginInfo() const
 	info.authors = "Bogdan Marinov, Johannes Gajdosik";
 	info.contact = "http://stellarium.org";
 	info.description = N_("This plug-in allows Stellarium to send \"slew\" commands to a telescope on a computerized mount (a \"GoTo telescope\").");
+	info.version = TELESCOPE_CONTROL_VERSION;
 	return info;
 }
 

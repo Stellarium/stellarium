@@ -17,6 +17,7 @@ from subprocess import PIPE
 
 installDirectory = None
 installDirectory = None
+qmlDirectory = None
 qtFrameworksDirectory = None
 qtPluginsDirectory = None
 sourceDirectory = None
@@ -80,7 +81,7 @@ def updateName(file):
 
 def updateLibraryPath(file, where):
 	'''
-	file is expected to be the path as output from tool
+	file is expected to be the path as output from otool
 	'where' is the path relative to the installDirectory
 	'''
 	base = ''
@@ -122,6 +123,24 @@ def processFrameworks():
 		updateName(framework)
 		updateLibraryPath(framework, 'Frameworks')
 
+def copyPluginDirectory(pluginDirectoryName):
+	'''
+	Utility function to be called by processPlugins().
+	pluginDirectoryName is the name of a plugins subdirectory to copy over.
+	'''
+	pluginsDirectory = os.path.join(installDirectory, 'plugins')
+
+	toDir = os.path.join(pluginsDirectory, pluginDirectoryName)
+	os.mkdir(toDir)
+	fromDir = os.path.join(qtPluginsDirectory, pluginDirectoryName)
+	for plugin in os.listdir(fromDir):
+		# there may be debug versions installed; if so, ignore them
+		if plugin.find('_debug') is -1:
+			shutil.copy(os.path.join(fromDir, plugin), toDir)
+	# Update all paths
+	for plugin in os.listdir(toDir):
+		updateLibraryPath(plugin, 'plugins/' + pluginDirectoryName)
+
 def processPlugins():
 	'''
 	Copies over and process all Qt plugins.
@@ -129,20 +148,13 @@ def processPlugins():
 	#Setup the plugin directory
 	pluginsDirectory = os.path.join(installDirectory, 'plugins')
 	os.mkdir(pluginsDirectory)
+
 	# copy over image plugins
-	for plugin in os.listdir(os.path.join(qtPluginsDirectory, 'imageformats')):
-		# there may be debug versions installed; if so, ignore them
-		if plugin.find('_debug') is -1:
-			shutil.copy(os.path.join(qtPluginsDirectory, 'imageformats', plugin), pluginsDirectory)
-	# copy over icon plugins
-	for plugin in os.listdir(os.path.join(qtPluginsDirectory, 'iconengines')):
-		# there may be debug versions installed; if so, ignore them
-		if plugin.find('_debug') is -1:
-			shutil.copy(os.path.join(qtPluginsDirectory, 'iconengines', plugin), pluginsDirectory)
-	# Update all paths
-	for plugin in os.listdir(pluginsDirectory):
-		updateLibraryPath(plugin, 'plugins')
-	# copy over the Cocoa platform plugin
+	copyPluginDirectory('imageformats')
+	copyPluginDirectory('iconengines')
+	copyPluginDirectory('qmltooling')
+
+	# copy over the Cocoa platform plugin; we do  single one here, as we do not want every platform
 	os.mkdir(os.path.join(pluginsDirectory, 'platforms'))
 	shutil.copy(os.path.join(qtPluginsDirectory, 'platforms', 'libqcocoa.dylib'), os.path.join(pluginsDirectory, 'platforms'))
 	for framework in getListOfLinkedQtFrameworksForFile(os.path.join(pluginsDirectory, 'platforms', 'libqcocoa.dylib')):
@@ -150,6 +162,34 @@ def processPlugins():
 		updateLibraryPath(framework, 'Frameworks')
 	# Always update paths after copying...
 	updateLibraryPath('libqcocoa.dylib', 'plugins/platforms')
+
+def processQmlDirectory(qtImportsDirectoryName):
+	qmlOutputDirectory = os.path.join(installDirectory, 'MacOS/Qt/labs')
+	toDir = os.path.join(qmlOutputDirectory, qtImportsDirectoryName)
+	os.mkdir(toDir)
+	fromDir = os.path.join(qmlDirectory, qtImportsDirectoryName)
+	for plugin in os.listdir(fromDir):
+		# there may be debug versions installed; if so, ignore them
+		if plugin.find('_debug') is -1:
+			shutil.copy(os.path.join(fromDir, plugin), toDir)
+	# Update all paths
+	for plugin in os.listdir(toDir):
+		if plugin[-5:] == 'dylib':
+			# copy required frameworks
+			for framework in getListOfLinkedQtFrameworksForFile(os.path.join(toDir, plugin)):
+				copyFrameworkToApp(framework)
+				updateLibraryPath(framework, 'Frameworks')
+			# Update path
+			updateLibraryPath(plugin, 'MacOS/Qt/labs/' + qtImportsDirectoryName)
+
+def processQml():
+	qmlQtDir = os.path.join(installDirectory, 'MacOS/Qt')
+	os.mkdir(qmlQtDir)
+	
+	qmlOutputDirectory = os.path.join(qmlQtDir, 'labs')
+	os.mkdir(qmlOutputDirectory)
+
+	processQmlDirectory("shaders")
 
 def processBin():
 	'''
@@ -163,9 +203,9 @@ def main():
 	'''
 	main expects three arguments:
 	'''
-	global installDirectory, sourceDirectory, installDirectory, qtFrameworksDirectory, qtPluginsDirectory
+	global installDirectory, sourceDirectory, installDirectory, qtFrameworksDirectory, qtPluginsDirectory, qmlDirectory
 	if len(sys.argv) < 4:
-		print("usage: mac_bundle.py ${CMAKE_INSTALL_PREFIX} ${PROJECT_SOURCE_DIR} ${CMAKE_BUILD_TYPE} ${Qt5Core_INCLUDE_DIRS}")
+		print("usage: mac_app.py ${CMAKE_INSTALL_PREFIX} ${PROJECT_SOURCE_DIR} ${CMAKE_BUILD_TYPE} ${Qt5Core_INCLUDE_DIRS}")
 		print(sys.argv)
 		return
 	installDirectory = sys.argv[1]
@@ -185,11 +225,13 @@ def main():
 	if not os.path.exists(qtPluginsDirectory):
 		print('Could not find plugins directory.')
 		return
-
+	qmlDirectory = os.path.normpath(qtFrameworksDirectory + '/../imports/Qt/labs')
+	
 	processBin()
 	processResources()
 	processFrameworks()
 	processPlugins()
+	processQml()
 	# update application lib's locations; we need to do this here, as the above rely
 	# on the binary with the 'original' paths.
 	updateLibraryPath('stellarium', 'MacOS')

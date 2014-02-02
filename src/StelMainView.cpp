@@ -91,6 +91,7 @@ StelSkyItem::StelSkyItem(QDeclarativeItem* parent)
 	connect(this, &StelSkyItem::widthChanged, this, &StelSkyItem::onSizeChanged);
 	connect(this, &StelSkyItem::heightChanged, this, &StelSkyItem::onSizeChanged);
 	previousPaintTime = StelApp::getTotalRunTime();
+	StelMainView::getInstance().skyItem = this;
 	setFocus(true);
 }
 
@@ -115,7 +116,6 @@ void StelSkyItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *optio
 	StelApp::getInstance().draw();
 
 	painter->endNativePainting();
-	update();
 }
 
 void StelSkyItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
@@ -206,10 +206,13 @@ public:
 protected:
 	virtual void initializeGL()
 	{
+		qDebug() << "It appears this is never called?";
+		Q_ASSERT(0);
 		qDebug() << "OpenGL supported version: " << QString((char*)glGetString(GL_VERSION));
 
 		QGLWidget::initializeGL();
 
+		qDebug() << "Current Context: " << this->format();
 		if (!format().stencil())
 			qWarning("Could not get stencil buffer; results will be suboptimal");
 		if (!format().depth())
@@ -305,17 +308,17 @@ void StelMainView::init(QSettings* conf)
 	qmlRegisterType<StelSkyItem>("Stellarium", 1, 0, "StelSky");
 	qmlRegisterType<StelGuiItem>("Stellarium", 1, 0, "StelGui");
 	rootContext()->setContextProperty("stelApp", stelApp);
-	setSource(QUrl("qrc:/qml/qml/main.qml"));
+	setSource(QUrl("qrc:/qml/main.qml"));
 	
 	QScreen* screen = glWidget->windowHandle()->screen();
 	int width = conf->value("video/screen_w", screen->size().width()).toInt();
 	int height = conf->value("video/screen_h", screen->size().height()).toInt();
+
+	// Without this, the screen is not shown on a Mac + we should use resize() for correct work of fullscreen/windowed mode switch. --AW WTF???
+	resize(width, height);
+
 	if (conf->value("video/fullscreen", true).toBool())
 	{
-#ifdef Q_OS_MAC
-		// Without this, the screen is not shown on a Mac.
-		resize(width, height);
-#endif
 		setFullScreen(true);
 	}
 	else
@@ -324,7 +327,6 @@ void StelMainView::init(QSettings* conf)
 		int x = conf->value("video/screen_x", 0).toInt();
 		int y = conf->value("video/screen_y", 0).toInt();
 		move(x, y);
-		resize(width, height);
 	}
 	show();
 
@@ -362,6 +364,13 @@ void StelMainView::setFullScreen(bool b)
 		showFullScreen();
 	else
 		showNormal();
+}
+
+void StelMainView::updateScene() {
+	// For some reason the skyItem is not updated when the night mode shader is on.
+	// To fix this we manually do it here.
+	skyItem->update();
+	scene()->update();
 }
 
 void StelMainView::thereWasAnEvent()
@@ -412,7 +421,8 @@ void StelMainView::minFpsChanged()
 	}
 
 	minFpsTimer = new QTimer(this);
-	connect(minFpsTimer, SIGNAL(timeout()), scene(), SLOT(update()));
+	connect(minFpsTimer, SIGNAL(timeout()), this, SLOT(updateScene()));
+
 	minFpsTimer->start((int)(1./getMinFps()*1000.));
 }
 

@@ -30,6 +30,14 @@
 #include <QDir>
 #include <QCryptographicHash>
 
+#include <errno.h>
+#ifndef Q_OS_WIN
+#include <unistd.h>
+#else
+#include <winsock2.h>
+#include "kdewin32/unistd.h"
+#endif
+
 #include "StelProjector.hpp"
 #include "StarMgr.hpp"
 #include "StelObject.hpp"
@@ -55,12 +63,6 @@
 #include "StelSkyDrawer.hpp"
 #include "RefractionExtinction.hpp"
 
-#include <errno.h>
-#ifndef Q_OS_WIN
-#include <unistd.h>
-#else
-#include "kdewin32/unistd.h"
-#endif
 
 static QStringList spectral_array;
 static QStringList component_array;
@@ -68,7 +70,7 @@ static QStringList component_array;
 // This number must be incremented each time the content or file format of the stars catalogs change
 // It can also be incremented when the defaultStarsConfig.json file change.
 // It should always matchs the version field of the defaultStarsConfig.json file
-static const int StarCatalogFormatVersion = 4;
+static const int StarCatalogFormatVersion = 5;
 
 // Initialise statics
 bool StarMgr::flagSciNames = true;

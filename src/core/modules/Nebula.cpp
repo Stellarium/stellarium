@@ -98,7 +98,7 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 	if ((flags&Name) || (flags&CatalogNumber))
 		oss << "</h2>";
 
-	if (flags&Extra)
+	if (flags&ObjectType)
 		oss << q_("Type: <b>%1</b>").arg(getTypeString()) << "<br>";
 
 	if (mag < 50 && flags&Magnitude)
@@ -128,16 +128,17 @@ float Nebula::getVMagnitude(const StelCore* core) const
 
 float Nebula::getSelectPriority(const StelCore* core) const
 {
-	if( ((NebulaMgr*)StelApp::getInstance().getModuleMgr().getModule("NebulaMgr"))->getFlagHints() )
-	{
-		// make very easy to select IF LABELED
+	const NebulaMgr* nebMgr = ((NebulaMgr*)StelApp::getInstance().getModuleMgr().getModule("NebulaMgr"));
+	if (!nebMgr->getFlagHints())
+		return StelObject::getSelectPriority(core)-2.f;
+	
+	const float maxMagHint = nebMgr->computeMaxMagHint(core->getSkyDrawer());
+	// make very easy to select if labeled
+	if (std::min(15.f, getVMagnitude(core))<maxMagHint)
 		return -10.f;
-	}
 	else
-	{
-		if (getVMagnitude(core)>20.f) return 20.f;
-		return getVMagnitude(core);
-	}
+		return StelObject::getSelectPriority(core)-2.f;
+
 }
 
 Vec3f Nebula::getInfoColor(void) const

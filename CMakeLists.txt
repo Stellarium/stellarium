@@ -1,19 +1,10 @@
-# Minimal version of cmake for using with Qt5 is 2.8.9
-# Minimal version of cmake for using with Qt5 on Windows is 2.8.11
+
+# Because 2.8.11 is not available yet on ubuntu, but we need it to fix some
+# bugs on windows.
 IF(WIN32)
   CMAKE_MINIMUM_REQUIRED(VERSION 2.8.11)
-ELSE(WIN32)
+ELSE()
   CMAKE_MINIMUM_REQUIRED(VERSION 2.8.10)
-ENDIF(WIN32)
-
-# Avoid repeating the IF statement in the ENDIF and ELSE
-SET(CMAKE_ALLOW_LOOSE_LOOP_CONSTRUCTS true)
-
-IF(COMMAND cmake_policy)
-  CMAKE_POLICY(SET CMP0003 NEW)
-  IF(WIN32)
-    CMAKE_POLICY(SET CMP0020 NEW)
-  ENDIF(WIN32)
 ENDIF()
 
 ########### Project name ###########
@@ -48,66 +39,37 @@ IF(${CMAKE_BUILD_TYPE} MATCHES "Valgrind")
  SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O0 -g")
 ENDIF()
 
-IF(NOT STELLARIUM_SPLASH)
- SET(STELLARIUM_SPLASH Development CACHE STRING "Choose the type of Stellarium's splash image, options are: Release Development ReleaseCandidate." FORCE)
-ENDIF()
-ADD_DEFINITIONS(-DSTELLARIUM_SPLASH="${STELLARIUM_SPLASH}")
-
 IF(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
   SET(APPLE 1)
 ENDIF()
 
-IF("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
- EXEC_PROGRAM(${CMAKE_C_COMPILER} ARGS "-v" OUTPUT_VARIABLE _clang_version_info)
- STRING(REGEX REPLACE "^.*[ ]([0-9]+)\\.[0-9].*$" "\\1" CLANG_MAJOR "${_clang_version_info}")
- STRING(REGEX REPLACE "^.*[ ][0-9]+\\.([0-9]).*$" "\\1" CLANG_MINOR "${_clang_version_info}")
- MESSAGE(STATUS "Found Clang ${CLANG_MAJOR}.${CLANG_MINOR}")
-ELSE()
- # The stars structs rely on gnu gcc packing of bit-fields. Not for clang.
- SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -mno-ms-bitfields")
- SET(CLANG_MAJOR 0)
- SET(CLANG_MINOR 0)
-ENDIF()
-SET(CLANG_VERSION "${CLANG_MAJOR}.${CLANG_MINOR}")
-
 IF(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_COMPILER_IS_GNUCC)
- EXEC_PROGRAM(${CMAKE_C_COMPILER} ARGS "-dumpversion" OUTPUT_VARIABLE _gcc_version_info)
- STRING(REGEX REPLACE "^([0-9]+).*$"                   "\\1" GCC_MAJOR ${_gcc_version_info})
- STRING(REGEX REPLACE "^[0-9]+\\.([0-9]+).*$"          "\\1" GCC_MINOR ${_gcc_version_info})
- STRING(REGEX REPLACE "^[0-9]+\\.[0-9]+\\.([0-9]+).*$" "\\1" GCC_PATCH ${_gcc_version_info})
-
- IF(GCC_PATCH MATCHES "\\.+")
-  SET(GCC_PATCH "")
- ENDIF()
- IF(GCC_MINOR MATCHES "\\.+")
-  SET(GCC_MINOR "")
- ENDIF()
- IF(GCC_MAJOR MATCHES "\\.+")
-  SET(GCC_MAJOR "")
- ENDIF()
- MESSAGE(STATUS "Found GCC ${GCC_MAJOR}.${GCC_MINOR}")
- SET(COMPILER_VERSION gcc${GCC_MAJOR}${GCC_MINOR}${GCC_PATCH})
+  # The stars structs rely on gnu gcc packing of bit-fields.
+  SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -mno-ms-bitfields")
+  SET(GCC_VERSION "${CMAKE_CXX_COMPILER_VERSION}")
 ELSE()
- SET(GCC_MAJOR 0)
- SET(GCC_MINOR 0)
+  SET(GCC_VERSION "0.0")
 ENDIF()
-SET(GCC_VERSION "${GCC_MAJOR}.${GCC_MINOR}")
 
-IF(UNIX AND NOT WIN32)
- SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Wextra -Wno-unused-parameter")       # additional C compile flags
- SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -Wno-unused-parameter")     # additional CPP compile flags
-ELSEIF("${CMAKE_SIZEOF_VOID_P}" EQUAL "4")
- SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -fexceptions -fident -mthreads")
- SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wsign-promo -fexceptions -fident -mthreads")
- SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -Wsign-promo -fexceptions -fident -mthreads -mwindows")  #  --large-address-aware --enable-runtime-pseudo-reloc --verbose
-ELSEIF("${CMAKE_SIZEOF_VOID_P}" EQUAL "8")
- SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -fexceptions -fident -mthreads")
- SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wsign-promo -fexceptions -fident -mthreads")
- SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -Wsign-promo -fexceptions -fident -mthreads -mwindows")  # --enable-runtime-pseudo-reloc --verbose
+IF(WIN32)
+  IF(NOT MSVC)
+    SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -fexceptions -fident -mthreads")
+    SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wsign-promo -fexceptions -fident -mthreads")
+    SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -Wsign-promo -fexceptions -fident -mthreads -mwindows")    
+  ELSE()
+    SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -fexceptions -fident -mthreads -mwindows")
+  ENDIF()
+ELSE()
+  SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Wextra -Wno-unused-parameter")
+  SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -Wno-unused-parameter -Wno-unused-result")
 ENDIF()
 
 IF("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
  SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Woverloaded-virtual -Wno-unused-private-field -Wno-uninitialized -Wno-tautological-constant-out-of-range-compare")
+ # The cosmetic fix for Clang 3.4
+ IF(${CMAKE_CXX_COMPILER_VERSION} VERSION_GREATER 3.3)
+  SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-unused-const-variable")
+ ENDIF()
 ENDIF()
 
 SET(OPTIMIZE_INTEL_ATOM 0 CACHE BOOL "Activate optimizations for atom processor.")
@@ -118,13 +80,13 @@ ENDIF()
 
 # FreeBSD-specific compiler flags
 # resolve bug for FreeBSD/amd64 and NVIDIA proprietary drivers 
-IF (${CMAKE_SYSTEM_NAME} STREQUAL "FreeBSD")
+IF(${CMAKE_SYSTEM_NAME} STREQUAL "FreeBSD")
   # Use -pthread compilation option to properly link to threading library
   SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pthread")
-  IF(${GCC_VERSION} STRGREATER "4.7")
+  IF(${GCC_VERSION} VERSION_GREATER 4.7)
     SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-unused-local-typedefs")
   ENDIF()
-ENDIF (${CMAKE_SYSTEM_NAME} STREQUAL "FreeBSD")
+ENDIF()
 
 # best way to get to APPLE?
 IF(APPLE)
@@ -138,14 +100,21 @@ IF(APPLE)
  SET(CMAKE_OSX_ARCHITECTURES "x86_64")
 ENDIF()
 
+# Needed so that M_PI get defined,
+# and so that windows.h does not redefine min and max.
+ADD_DEFINITIONS(-D_USE_MATH_DEFINES -DNOMINMAX)
+
 ########### Check functions ###########
-INCLUDE(CheckFunctionExists)
 SET(CMAKE_REQUIRED_LIBRARIES "-lm")
-CHECK_FUNCTION_EXISTS(pow10 HAVE_POW10)
-SET(CMAKE_REQUIRED_LIBRARIES)
-IF(HAVE_POW10)
- ADD_DEFINITIONS(-DHAVE_POW10)
-ENDIF()
+INCLUDE(CheckFunctionExists)
+SET(FUNCS pow10 trunc round)
+FOREACH(FUNC ${FUNCS})
+  STRING(TOUPPER ${FUNC} FUNC_UP)
+  CHECK_FUNCTION_EXISTS(${FUNC} HAS_${FUNC_UP})
+  IF(HAS_${FUNC_UP})
+     ADD_DEFINITIONS(-DHAS_${FUNC_UP})
+  ENDIF()
+ENDFOREACH()
 
 ########### Others ###########
 # Activate translation
@@ -178,7 +147,8 @@ SET(GENERATE_PACKAGE_TARGET 1 CACHE BOOL "Set to 1 or true if you want to have m
 
 # On WIN32 we need to split the main binary into a small binary and a dll
 # This is for allowing to link dynamic plug-ins afterward
-IF(WIN32)
+# It does not seem to work with MSVC, so I disable it for the moment.
+IF(WIN32 AND NOT MSVC)
   SET(GENERATE_STELMAINLIB 1)
 ELSE()
   SET(GENERATE_STELMAINLIB 0)
@@ -186,38 +156,46 @@ ENDIF()
 
 ########### Plugin setup #############
 
-#### demo plugins ####
-SET(USE_PLUGIN_HELLOSTELMODULE 0 CACHE BOOL "Define whether the HelloStelModule plugin should be created.")
-SET(USE_PLUGIN_SIMPLEDRAWLINE 0 CACHE BOOL "Define whether the Simple Draw Line plugin should be created.")
+SET(STELLARIUM_PLUGINS) # Global list of all the plugins.
+MACRO(ADD_PLUGIN NAME DEFAULT)
+  STRING(TOUPPER ${NAME} NAME_UP)
+  SET(USE_PLUGIN_${NAME_UP} ${DEFAULT} CACHE BOOL "Define wheter the ${NAME} plugin should be created.")
+  SET(STELLARIUM_PLUGINS ${STELLARIUM_PLUGINS} ${NAME})
+ENDMACRO()
 
+#### demo plugins ####
+ADD_PLUGIN(HelloStelModule 0)
+ADD_PLUGIN(SimpleDrawLine 0)
 #### work plugins ####
-SET(USE_PLUGIN_ANGLEMEASURE 1 CACHE BOOL "Define whether the AngleMeasure plugin should be created.")
-SET(USE_PLUGIN_COMPASSMARKS 1 CACHE BOOL "Define whether the CompassMarks plugin should be created.")
-SET(USE_PLUGIN_EXOPLANETS 1 CACHE BOOL "Define whether the Exoplanets plugin should be created.")
-SET(USE_PLUGIN_LOGBOOK 0 CACHE BOOL "Define whether the LogBook plugin should be created.")
-SET(USE_PLUGIN_NOVAE 1 CACHE BOOL "Define whether the Novae plugin should be created.")
-SET(USE_PLUGIN_OBSERVABILITY 1 CACHE BOOL "Define whether the Observability plugin should be created.")
-SET(USE_PLUGIN_OCULARS 1 CACHE BOOL "Define whether the Oculars plugin should be created.")
-SET(USE_PLUGIN_PULSARS 1 CACHE BOOL "Define whether the Pulsars plugin should be created.")
-SET(USE_PLUGIN_QUASARS 1 CACHE BOOL "Define whether the Quasars plugin should be created.")
-SET(USE_PLUGIN_SATELLITES 1 CACHE BOOL "Define whether the Satellites plugin should be created.")
-SET(USE_PLUGIN_SOLARSYSTEMEDITOR 1 CACHE BOOL "Define whether the Solar System Editor should be built.")
-SET(USE_PLUGIN_SUPERNOVAE 1 CACHE BOOL "Define whether the Historical Supernova plugin should be created.")
-SET(USE_PLUGIN_SVMT 0 CACHE BOOL "Define whether the SVMT plugin should be created.")
-SET(USE_PLUGIN_TELESCOPECONTROL 1 CACHE BOOL "Define whether the TelescopeControl plug-in should be created.")
-SET(USE_PLUGIN_TEXTUSERINTERFACE 1 CACHE BOOL "Define whether the TextUserInterface plugin should be created.")
-SET(USE_PLUGIN_TIMEZONECONFIGURATION 1 CACHE BOOL "Define whether the TimeZoneConfiguration plugin should be created.")
-SET(USE_PLUGIN_VIRGO 0 CACHE BOOL "Define whether the VirGO plugin should be created.")
+ADD_PLUGIN(AngleMeasure 1)
+ADD_PLUGIN(CompassMarks 1)
+ADD_PLUGIN(Exoplanets 1)
+ADD_PLUGIN(FOV 1)
+ADD_PLUGIN(LogBook 0)
+ADD_PLUGIN(NavStars 1)
+ADD_PLUGIN(Novae 1)
+ADD_PLUGIN(Observability 1)
+ADD_PLUGIN(Oculars 1)
+ADD_PLUGIN(Pulsars 1)
+ADD_PLUGIN(Quasars 1)
+ADD_PLUGIN(Satellites 1)
+ADD_PLUGIN(SolarSystemEditor 1)
+ADD_PLUGIN(Supernovae 1)
+ADD_PLUGIN(SVMT 0)
+ADD_PLUGIN(TextUserInterface 1)
+ADD_PLUGIN(TelescopeControl 1)
+ADD_PLUGIN(TimeZoneConfiguration 1)
+ADD_PLUGIN(VirGO 0)
 
 ########## Static plugins need to define includes and libraries
 ########## for the compilation of Stellarium itself
-IF (USE_PLUGIN_SVMT)
+IF(USE_PLUGIN_SVMT)
     SET(QT_USE_QTXML TRUE) # For SVMT we also need QtXml module
     SET(QT_USE_QTDECLARATIVE TRUE) # For SVMT we also need QML module, this line doesn't seem to work right now
     SET(QT_USE_QTWEBKIT TRUE) # For SVMT we also need QML module, this line doesn't seem to work right now
 ENDIF()
 
-IF (USE_PLUGIN_VIRGO)
+IF(USE_PLUGIN_VIRGO)
     ## Library for loading FITS image files
     FIND_PATH(CFITSIO_INCLUDE_DIR fitsio.h
         /usr/include
@@ -232,7 +210,7 @@ IF (USE_PLUGIN_VIRGO)
     SET(QT_USE_QTXML TRUE) # For VirGO we also need QtXml module
 ENDIF()
 
-IF (USE_PLUGIN_LOGBOOK)
+IF(USE_PLUGIN_LOGBOOK)
     SET(QT_USE_QTSQL TRUE) # For LogBook we also need SQL module
 ENDIF()
 
@@ -249,7 +227,6 @@ FIND_PACKAGE(Qt5Network REQUIRED)
 FIND_PACKAGE(Qt5OpenGL REQUIRED)
 FIND_PACKAGE(Qt5Widgets REQUIRED)
 IF(WIN32)
-    # This modules need for Windows (WTF???)
     FIND_PACKAGE(Qt5Sql REQUIRED)
     FIND_PACKAGE(Qt5XmlPatterns REQUIRED)
 ENDIF()
@@ -278,18 +255,18 @@ INCLUDE_DIRECTORIES(${Qt5Test_INCLUDE_DIRS})
 
 ########### Set some global variables ###########
 IF(UNIX AND NOT WIN32)
-IF(APPLE)
-    SET(CMAKE_INSTALL_PREFIX "${PROJECT_BINARY_DIR}/Stellarium.app/Contents")
-ELSE(APPLE)
-    ADD_DEFINITIONS(-DINSTALL_DATADIR="${CMAKE_INSTALL_PREFIX}/share/stellarium")
-    ADD_DEFINITIONS(-DINSTALL_LOCALEDIR="${CMAKE_INSTALL_PREFIX}/share/locale")
-    # Used in generating the documentation (doc/stellarium.pod.cmake):
-    SET(INSTALL_DATADIR "${CMAKE_INSTALL_PREFIX}/share/stellarium")
-ENDIF(APPLE)
-ELSE(UNIX AND NOT WIN32)
+    IF(APPLE)
+        SET(CMAKE_INSTALL_PREFIX "${PROJECT_BINARY_DIR}/Stellarium.app/Contents")
+    ELSE()
+        ADD_DEFINITIONS(-DINSTALL_DATADIR="${CMAKE_INSTALL_PREFIX}/share/stellarium")
+        ADD_DEFINITIONS(-DINSTALL_LOCALEDIR="${CMAKE_INSTALL_PREFIX}/share/locale")
+        # Used in generating the documentation (doc/stellarium.pod.cmake):
+        SET(INSTALL_DATADIR "${CMAKE_INSTALL_PREFIX}/share/stellarium")
+    ENDIF()
+ELSE()
     ADD_DEFINITIONS(-DINSTALL_DATADIR=".")
     ADD_DEFINITIONS(-DINSTALL_LOCALEDIR="./locale")
-ENDIF(UNIX AND NOT WIN32)
+ENDIF()
 
 ########### Get revision number for non-release builds ###########
 IF(NOT RELEASE_BUILD)
@@ -318,11 +295,11 @@ IF(WIN32)
         #The mingGW snapshot distributed with the Qt SDK has it under this name.
         SET(RC_COMPILER_FILENAME "windres.exe")
             FIND_FILE(RC_COMPILER_PATH ${RC_COMPILER_FILENAME})
-        IF (RC_COMPILER_PATH)
+        IF(RC_COMPILER_PATH)
             MESSAGE(STATUS "Found .rc compiler: ${RC_COMPILER_PATH}")
         ENDIF(RC_COMPILER_PATH)
     ENDIF(ENABLE_WINDOWS_EXE_ICON AND NOT RC_COMPILER_PATH)
-ENDIF(WIN32)
+ENDIF()
 
 ### Generate an Inno Setup project file ###
 IF(WIN32)
@@ -331,14 +308,31 @@ IF(WIN32)
     IF("${CMAKE_SIZEOF_VOID_P}" EQUAL "4")
         SET(ISS_ARCHITECTURE_SPECIFIC ";In the 64-bit only version, this line switches the installer to 64-bit mode.")
         SET(ISS_PACKAGE_PLATFORM "win32")
-        SET(ISS_ARCH_SPECIFIC_MINGW_LIBS "Source: \"${MINGW_BIN_DIRECTORY}/libstdc++*.dll\"; DestDir: \"{app}\";\nSource: \"${MINGW_BIN_DIRECTORY}/libgcc_s_dw2-1.dll\"; DestDir: \"{app}\";\nSource: \"${MINGW_BIN_DIRECTORY}/libwinpthread*.dll\"; DestDir: \"{app}\";")
+        IF(MSVC)
+          SET(REDIST "Source: \"${CMAKE_INSTALL_PREFIX}/bin/msvc*.dll\"; DestDir: \"{app}\";")
+        ELSE()
+          SET(REDIST "Source: \"${MINGW_BIN_DIRECTORY}/libstdc++*.dll\"; DestDir: \"{app}\";\nSource: \"${MINGW_BIN_DIRECTORY}/libgcc_s_dw2-1.dll\"; DestDir: \"{app}\";\nSource: \"${MINGW_BIN_DIRECTORY}/libwinpthread*.dll\"; DestDir: \"{app}\";")
+        ENDIF()
     ELSEIF("${CMAKE_SIZEOF_VOID_P}" EQUAL "8")
         SET(ISS_ARCHITECTURE_SPECIFIC ";Make the installer run only on win64:\nArchitecturesAllowed=x64\n;Switch to 64-bit install mode:\nArchitecturesInstallIn64BitMode=x64")
         SET(ISS_PACKAGE_PLATFORM "win64")
-        SET(ISS_ARCH_SPECIFIC_MINGW_LIBS "Source: \"${MINGW_BIN_DIRECTORY}/libstdc++*.dll\"; DestDir: \"{app}\";\nSource: \"${MINGW_BIN_DIRECTORY}/libwinpthread*.dll\"; DestDir: \"{app}\";\nSource: \"${MINGW_BIN_DIRECTORY}/libgcc_s_sjlj*.dll\"; DestDir: \"{app}\";")
+        IF(MSVC)
+          SET(REDIST "Source: \"${CMAKE_INSTALL_PREFIX}/bin/msvc*.dll\"; DestDir: \"{app}\";")
+        ELSE()
+          SET(REDIST "Source: \"${MINGW_BIN_DIRECTORY}/libstdc++*.dll\"; DestDir: \"{app}\";\nSource: \"${MINGW_BIN_DIRECTORY}/libwinpthread*.dll\"; DestDir: \"{app}\";\nSource: \"${MINGW_BIN_DIRECTORY}/libgcc_s_sjlj*.dll\"; DestDir: \"{app}\";")
+        ENDIF()
     ENDIF()
     SET(ISS_AUTOGENERATED_WARNING "Do not edit this file! It has been automatically generated by CMake. Your changes will be lost the next time CMake is run.")
-    # Try to guess the MinGW /bin directory...
+    IF(MSVC)
+        SET(ZLIB "; ZLIB already included...")
+    ELSE()
+        SET(ZLIB "Source: \"${ZLIB_INCLUDE_DIR}/../bin/zlib1.dll\"; DestDir: \"{app}\";")
+    ENDIF()
+    IF(GENERATE_STELMAINLIB)
+        SET(STELMAINLIB "Source: \"${CMAKE_INSTALL_PREFIX}/lib/libstelMain.dll\"; DestDir: \"{app}\";")
+    ELSE()
+        SET(STELMAINLIB "; StelMainLib don't used")
+    ENDIF()
     GET_TARGET_PROPERTY(QtConcurrent_location Qt5::Concurrent LOCATION)
     GET_TARGET_PROPERTY(QtCore_location Qt5::Core LOCATION)
     GET_TARGET_PROPERTY(QtGui_location Qt5::Gui LOCATION)
@@ -361,21 +355,30 @@ IF(WIN32)
     ELSE()
         SET(ISS_QT_MULTIMEDIA "; QtMultimedia don't used")
     ENDIF()
-    GET_FILENAME_COMPONENT(ICU_LIBS ${QtCore_location} PATH)
-    SET(ISS_ICU_LIBS "Source: \"${ICU_LIBS}/icu*.dll\"; DestDir: \"{app}\";")
+    GET_FILENAME_COMPONENT(QT5_LIBS ${QtCore_location} PATH)
+    # TODO: Enable ANGLE support
+    SET(ISS_ICU_LIBS "Source: \"${QT5_LIBS}/icu*.dll\"; DestDir: \"{app}\";")
+    # Deploy related stuff
+    SET(ISS_WINDOWS_PLUGIN "Source: \"${QT5_LIBS}/../plugins/platforms/qwindows.dll\"; DestDir: \"{app}/platforms/\";")
+    SET(ISS_QML_DIR "Source: \"${QT5_LIBS}/../imports/Qt/labs/shaders/qmldir\"; DestDir: \"{app}/Qt/labs/shaders/\";")
+    SET(ISS_QML_PLUGINS "Source: \"${QT5_LIBS}/../imports/Qt/labs/shaders/plugins.qmltypes\"; DestDir: \"{app}/Qt/labs/shaders/\";")
+    SET(ISS_QML_SHADERS "Source: \"${QT5_LIBS}/../imports/Qt/labs/shaders/qmlshadersplugin.dll\"; DestDir: \"{app}/Qt/labs/shaders/\";")
   
     CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/stellarium.iss.cmake ${CMAKE_SOURCE_DIR}/stellarium.iss @ONLY)
     CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/stellarium-patch.iss.cmake ${CMAKE_SOURCE_DIR}/stellarium-patch.iss @ONLY)
-ENDIF(WIN32)
+ENDIF()
 
 IF(APPLE)
     CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/data/Info.plist.cmake ${CMAKE_SOURCE_DIR}/data/Info.plist @ONLY)
-ENDIF(APPLE)
+ENDIF()
 
 IF(CMAKE_BUILD_TYPE STREQUAL "Release" OR CMAKE_BUILD_TYPE STREQUAL "RelWithDebInfo")
     ADD_DEFINITIONS(-DQT_NO_DEBUG)
     ADD_DEFINITIONS(-DNDEBUG)
 ENDIF()
+
+CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/data/default_config.ini.cmake ${CMAKE_SOURCE_DIR}/data/default_config.ini @ONLY)
+CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/data/updates.json.cmake ${CMAKE_SOURCE_DIR}/data/updates.json @ONLY)
 
 ########### uninstall files ###############
 CONFIGURE_FILE(
@@ -434,11 +437,11 @@ CONFIGURE_FILE(${PROJECT_SOURCE_DIR}/Doxyfile.cmake ${CMAKE_CURRENT_BINARY_DIR}/
 ADD_CUSTOM_TARGET(apidoc doxygen ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR} COMMENT "Generate the doxygen documentation into the doc directory.")
 
 ##################### Generate translation copying script ######################
-IF (WIN32)
+IF(WIN32)
  STRING(REPLACE "/" "\\" PROJECT_SOURCE_DIR_WINPATH ${PROJECT_SOURCE_DIR})
  STRING(REPLACE "/" "\\" PROJECT_BINARY_DIR_WINPATH ${PROJECT_BINARY_DIR})
  CONFIGURE_FILE(${PROJECT_SOURCE_DIR}/util/copy-translations.bat.cmake ${PROJECT_SOURCE_DIR}/util/copy-translations.bat @ONLY NEWLINE_STYLE WIN32)
-ENDIF(WIN32)
+ENDIF()
 
 ########### Top level include directories ###########
 # This will be used for all compilations in sub-directories
@@ -456,6 +459,7 @@ INCLUDE_DIRECTORIES(
 	${CMAKE_SOURCE_DIR}/src/scripting
 	${INTL_INCLUDE_DIR}
 	${CMAKE_BINARY_DIR}/src
+	${ZLIB_INCLUDE_DIR}
 )
 
 ########### Subdirectories ###############

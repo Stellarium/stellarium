@@ -134,22 +134,16 @@ void ConfigurationDialog::createDialogContent()
 
 	// Main tab
 	// Fill the language list widget from the available list
-	QString appLang = StelApp::getInstance().getLocaleMgr().getAppLanguage();
 	QComboBox* cb = ui->programLanguageComboBox;
 	cb->clear();
 	cb->addItems(StelTranslator::globalTranslator->getAvailableLanguagesNamesNative(StelFileMgr::getLocaleDir()));
 	cb->model()->sort(0);
-	QString l2 = StelTranslator::iso639_1CodeToNativeName(appLang);
-	int lt = cb->findText(l2, Qt::MatchExactly);
-	if (lt == -1 && appLang.contains('_'))
-	{
-		l2 = appLang.left(appLang.indexOf('_'));
-		l2=StelTranslator::iso639_1CodeToNativeName(l2);
-		lt = cb->findText(l2, Qt::MatchExactly);
-	}
-	if (lt!=-1)
-		cb->setCurrentIndex(lt);
+	updateCurrentLanguage();
+	connect(cb->lineEdit(), SIGNAL(editingFinished()), this, SLOT(updateCurrentLanguage()));
 	connect(cb, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(selectLanguage(const QString&)));
+
+	ui->groupBoxUpdates->setChecked(StelApp::getInstance().getSettings()->value("main/check_updates_enabled", true).toBool());
+	connect(ui->groupBoxUpdates, SIGNAL(toggled(bool)), this, SLOT(setUpdatesFlag(bool)));
 
 	connect(ui->getStarsButton, SIGNAL(clicked()), this, SLOT(downloadStars()));
 	connect(ui->downloadCancelButton, SIGNAL(clicked()), this, SLOT(cancelDownload()));
@@ -276,13 +270,38 @@ void ConfigurationDialog::createDialogContent()
 	#endif
 
 	// plugins control
-	connect(ui->pluginsListWidget, SIGNAL(currentTextChanged(const QString&)), this, SLOT(pluginsSelectionChanged(const QString&)));
+	connect(ui->pluginsListWidget, SIGNAL(currentItemChanged(QListWidgetItem*, QListWidgetItem*)), this, SLOT(pluginsSelectionChanged(QListWidgetItem*, QListWidgetItem*)));
 	connect(ui->pluginLoadAtStartupCheckBox, SIGNAL(stateChanged(int)), this, SLOT(loadAtStartupChanged(int)));
 	connect(ui->pluginConfigureButton, SIGNAL(clicked()), this, SLOT(pluginConfigureCurrentSelection()));
 	populatePluginsList();
 
 	updateConfigLabels();
 	updateTabBarListWidgetWidth();
+}
+
+void ConfigurationDialog::setUpdatesFlag(bool b)
+{
+	StelApp::getInstance().getSettings()->setValue("main/check_updates_enabled", b);
+}
+
+void ConfigurationDialog::updateCurrentLanguage()
+{
+	QComboBox* cb = ui->programLanguageComboBox;
+	QString appLang = StelApp::getInstance().getLocaleMgr().getAppLanguage();
+	QString l2 = StelTranslator::iso639_1CodeToNativeName(appLang);
+
+	if (cb->currentText() == l2)
+		return;
+
+	int lt = cb->findText(l2, Qt::MatchExactly);
+	if (lt == -1 && appLang.contains('_'))
+	{
+		l2 = appLang.left(appLang.indexOf('_'));
+		l2=StelTranslator::iso639_1CodeToNativeName(l2);
+		lt = cb->findText(l2, Qt::MatchExactly);
+	}
+	if (lt!=-1)
+		cb->setCurrentIndex(lt);
 }
 
 void ConfigurationDialog::selectLanguage(const QString& langName)
@@ -390,6 +409,10 @@ void ConfigurationDialog::setSelectedInfoFromCheckBoxes()
 		flags |= StelObject::Extra;
 	if (ui->checkBoxGalacticCoordinates->isChecked())
 		flags |= StelObject::GalacticCoord;
+	if (ui->checkBoxType->isChecked())
+		flags |= StelObject::ObjectType;
+	if (ui->checkBoxTEclipticCoords->isChecked())
+		flags |= StelObject::EclTopocentricCoord;
 
 	gui->setInfoTextFilters(flags);
 }
@@ -482,6 +505,7 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	conf->setValue("astro/flag_planets_orbits", ssmgr->getFlagOrbits());
 	conf->setValue("astro/flag_light_travel_time", ssmgr->getFlagLightTravelTime());
 	conf->setValue("viewing/flag_moon_scaled", ssmgr->getFlagMoonScale());
+	conf->setValue("viewing/moon_scale", ssmgr->getMoonScale());
 	conf->setValue("astro/meteor_rate", mmgr->getZHR());
 	conf->setValue("astro/milky_way_intensity", GETSTELMODULE(MilkyWay)->getIntensity());
 
@@ -518,9 +542,9 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	conf->setValue("landscape/flag_landscape_sets_location", lmgr->getFlagLandscapeSetsLocation());
 	conf->setValue("landscape/flag_landscape", lmgr->getFlagLandscape());
 	conf->setValue("landscape/flag_atmosphere", lmgr->getFlagAtmosphere());
-	conf->setValue("landscape/flag_brightness", lmgr->getFlagLandscapeNightBrightness());
+	conf->setValue("landscape/flag_brightness", lmgr->getFlagLandscapeSetsMinimalBrightness());
 	conf->setValue("landscape/flag_fog", lmgr->getFlagFog());
-	conf->setValue("stars/init_bortle_scale", core->getSkyDrawer()->getBortleScale());
+	conf->setValue("stars/init_bortle_scale", core->getSkyDrawer()->getBortleScaleIndex());
         conf->setValue("landscape/atmospheric_extinction_coefficient", core->getSkyDrawer()->getExtinctionCoefficient());
         conf->setValue("landscape/pressure_mbar", core->getSkyDrawer()->getAtmospherePressure());
         conf->setValue("landscape/temperature_C", core->getSkyDrawer()->getAtmosphereTemperature());
@@ -560,7 +584,7 @@ void ConfigurationDialog::saveCurrentViewOptions()
 		conf->setValue("flag_show_radecj2000",
 		               (bool) (flags & StelObject::RaDecJ2000));
 		conf->setValue("flag_show_radecofdate",
-		               (bool) (flags & StelObject::RaDecOfDate));
+			       (bool) (flags & StelObject::RaDecOfDate));
 		conf->setValue("flag_show_hourangle",
 		               (bool) (flags & StelObject::HourAngle));
 		conf->setValue("flag_show_altaz",
@@ -573,6 +597,10 @@ void ConfigurationDialog::saveCurrentViewOptions()
 			       (bool) (flags & StelObject::Extra));
 		conf->setValue("flag_show_galcoord",
 			       (bool) (flags & StelObject::GalacticCoord));
+		conf->setValue("flag_show_type",
+			       (bool) (flags & StelObject::ObjectType));
+		conf->setValue("flag_show_eclcoord",
+			       (bool) (flags & StelObject::EclTopocentricCoord));
 		conf->endGroup();
 	}
 
@@ -652,30 +680,44 @@ void ConfigurationDialog::setDefaultViewOptions()
 
 void ConfigurationDialog::populatePluginsList()
 {
-	int prevSel = ui->pluginsListWidget->currentRow();
-	ui->pluginsListWidget->clear();
+	QListWidget *plugins = ui->pluginsListWidget;
+	plugins->blockSignals(true);
+	int currentRow = plugins->currentRow();
+	QString selectedPluginId = "";
+	if (currentRow>0)
+		 selectedPluginId = plugins->currentItem()->data(Qt::UserRole).toString();
+
+	plugins->clear();
+	QString selectedPluginName = "";
 	const QList<StelModuleMgr::PluginDescriptor> pluginsList = StelApp::getInstance().getModuleMgr().getPluginsList();	
 	foreach (const StelModuleMgr::PluginDescriptor& desc, pluginsList)
 	{
 		QString label = q_(desc.info.displayedName);
 		QListWidgetItem* item = new QListWidgetItem(label);
 		item->setData(Qt::UserRole, desc.info.id);
-		ui->pluginsListWidget->addItem(item);		
+		plugins->addItem(item);
+		if (currentRow>0 && item->data(Qt::UserRole).toString()==selectedPluginId)
+			selectedPluginName = label;
 	}
-	ui->pluginsListWidget->sortItems(Qt::AscendingOrder);
+	plugins->sortItems(Qt::AscendingOrder);
+	plugins->blockSignals(false);
 	// If we had a valid previous selection (i.e. not first time we populate), restore it
-	if (prevSel >= 0 && prevSel < ui->pluginsListWidget->count())
-		ui->pluginsListWidget->setCurrentRow(prevSel);
+
+	if (!selectedPluginName.isEmpty())
+		plugins->setCurrentItem(plugins->findItems(selectedPluginName, Qt::MatchExactly).at(0));
 	else
-		ui->pluginsListWidget->setCurrentRow(0);
+		plugins->setCurrentRow(0);
+
+
 }
 
-void ConfigurationDialog::pluginsSelectionChanged(const QString& s)
+void ConfigurationDialog::pluginsSelectionChanged(QListWidgetItem* item, QListWidgetItem* previousItem)
 {
+	Q_UNUSED(previousItem);
 	const QList<StelModuleMgr::PluginDescriptor> pluginsList = StelApp::getInstance().getModuleMgr().getPluginsList();
 	foreach (const StelModuleMgr::PluginDescriptor& desc, pluginsList)
 	{
-		if (s==q_(desc.info.displayedName))//TODO: Use ID!
+		if (item->data(Qt::UserRole).toString()==desc.info.id)
 		{
 			QString html = "<html><head></head><body>";
 			html += "<h2>" + q_(desc.info.displayedName) + "</h2>";			
@@ -684,6 +726,8 @@ void ConfigurationDialog::pluginsSelectionChanged(const QString& s)
 			html += "<p>" + q_(d) + "</p>";
 			html += "<p><strong>" + q_("Authors") + "</strong>: " + desc.info.authors;
 			html += "<br /><strong>" + q_("Contact") + "</strong>: " + desc.info.contact;
+			if (!desc.info.version.isEmpty())
+				html += "<br /><strong>" + q_("Version") + "</strong>: " + desc.info.version;
 			html += "</p></body></html>";
 			ui->pluginsInfoBrowser->setHtml(html);
 			ui->pluginLoadAtStartupCheckBox->setChecked(desc.loadAtStartup);
@@ -1051,6 +1095,8 @@ void ConfigurationDialog::updateSelectedInfoCheckBoxes()
 	ui->checkBoxSize->setChecked(flags & StelObject::Size);
 	ui->checkBoxExtra->setChecked(flags & StelObject::Extra);
 	ui->checkBoxGalacticCoordinates->setChecked(flags & StelObject::GalacticCoord);
+	ui->checkBoxType->setChecked(flags & StelObject::ObjectType);
+	ui->checkBoxTEclipticCoords->setChecked(flags & StelObject::EclTopocentricCoord);
 }
 
 void ConfigurationDialog::updateTabBarListWidgetWidth()

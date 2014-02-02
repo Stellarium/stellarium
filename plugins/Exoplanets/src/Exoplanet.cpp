@@ -28,6 +28,7 @@
 #include "StelModuleMgr.hpp"
 #include "StelSkyDrawer.hpp"
 #include "StelLocaleMgr.hpp"
+#include "StarMgr.hpp"
 
 #include <QTextStream>
 #include <QDebug>
@@ -37,6 +38,10 @@
 #include <QList>
 
 StelTextureSP Exoplanet::markerTexture;
+bool Exoplanet::distributionMode = false;
+bool Exoplanet::timelineMode = false;
+Vec3f Exoplanet::exoplanetMarkerColor = Vec3f(0.4f,0.9f,0.5f);
+Vec3f Exoplanet::habitableExoplanetMarkerColor = Vec3f(1.f,0.5f,0.f);
 
 Exoplanet::Exoplanet(const QVariantMap& map)
 		: initialized(false)
@@ -57,12 +62,14 @@ Exoplanet::Exoplanet(const QVariantMap& map)
 	effectiveTemp = map.value("effectiveTemp").toInt();
 	hasHabitableExoplanets = map.value("hasHP", false).toBool();
 
+	EPCount=0;
 	if (map.contains("exoplanets"))
 	{
 		foreach(const QVariant &expl, map.value("exoplanets").toList())
 		{
 			QVariantMap exoplanetMap = expl.toMap();
 			exoplanetData p;
+			EPCount++;
 			if (exoplanetMap.contains("planetName")) p.planetName = exoplanetMap.value("planetName").toString();
 			p.period = exoplanetMap.value("period", -1.f).toFloat();
 			p.mass = exoplanetMap.value("mass", -1.f).toFloat();
@@ -124,16 +131,9 @@ QVariantMap Exoplanet::getMap(void)
 	return map;
 }
 
-float Exoplanet::getSelectPriority(const StelCore* core) const
+float Exoplanet::getSelectPriority(const StelCore *core) const
 {
-	if (getVMagnitude(core)>20.f)
-	{
-		return 20.f;
-	}
-	else
-	{
-		return getVMagnitude(core) - 1.f;
-	}
+	return StelObject::getSelectPriority(core)-2.f;
 }
 
 QString Exoplanet::getNameI18n(void) const
@@ -149,14 +149,18 @@ QString Exoplanet::getInfoString(const StelCore* core, const InfoStringGroup& fl
 	QTextStream oss(&str);
 
 	if (flags&Name)
-	{		
-
+	{
 		oss << "<h2>" << getNameI18n() << "</h2>";
+	}
+	
+	if (flags&ObjectType)
+	{
+		oss << q_("Type: <b>%1</b>").arg(q_("planetary system")) << "<br />";
 	}
 
 	if (flags&Magnitude)
 	{
-		if (Vmag<99 && !GETSTELMODULE(Exoplanets)->getDisplayMode())
+		if (Vmag<99 && !distributionMode)
 		{
 			if (core->getSkyDrawer()->getFlagHasAtmosphere())
 			{
@@ -348,7 +352,7 @@ Vec3f Exoplanet::getInfoColor(void) const
 float Exoplanet::getVMagnitude(const StelCore* core) const
 {
 	Q_UNUSED(core);
-	if (GETSTELMODULE(Exoplanets)->getDisplayMode())
+	if (distributionMode)
 	{
 		return 4.f;
 	}
@@ -363,6 +367,11 @@ float Exoplanet::getVMagnitude(const StelCore* core) const
 			return 6.f;
 		}
 	}
+}
+
+float Exoplanet::getVMagnitudeWithExtinction(const StelCore *core) const
+{
+	return getVMagnitude(core);
 }
 
 double Exoplanet::getAngularSize(const StelCore*) const
@@ -401,24 +410,24 @@ void Exoplanet::update(double deltaTime)
 	labelsFader.update((int)(deltaTime*1000));
 }
 
-void Exoplanet::draw(StelCore* core, StelPainter& painter)
+void Exoplanet::draw(StelCore* core, StelPainter *painter)
 {
 	bool visible;
 	StelSkyDrawer* sd = core->getSkyDrawer();
+	StarMgr* smgr = GETSTELMODULE(StarMgr); // It's need for checking displaying of labels for stars
 
-	//TODO: Store color of markers into config.ini file
-	Vec3f color = Vec3f(0.4f,0.9f,0.5f);
+	Vec3f color = exoplanetMarkerColor;
 	if (hasHabitableExoplanets)
-		color = Vec3f(1.f,0.5f,0.f);
+		color = habitableExoplanetMarkerColor;
 
 	double mag = getVMagnitudeWithExtinction(core);
 
 	StelUtils::spheToRect(RA, DE, XYZ);
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_ONE, GL_ONE);
-	painter.setColor(color[0], color[1], color[2], 1);
+	painter->setColor(color[0], color[1], color[2], 1);
 
-	if (GETSTELMODULE(Exoplanets)->getTimelineMode())
+	if (timelineMode)
 	{
 		visible = isDiscovered(core);
 	}
@@ -427,25 +436,23 @@ void Exoplanet::draw(StelCore* core, StelPainter& painter)
 		visible = true;
 	}
 
-	if(!visible) {return;}
+	Vec3d win;
+	// Check visibility of exoplanet system
+	if(!visible || !(painter->getProjector()->projectCheck(XYZ, win))) {return;}
 
-	if (mag <= sd->getLimitMagnitude())
-	{
+	float mlimit = sd->getLimitMagnitude();
 
+	if (mag <= mlimit)
+	{		
 		Exoplanet::markerTexture->bind();
-		float size = getAngularSize(NULL)*M_PI/180.*painter.getProjector()->getPixelPerRadAtCenter();
+		float size = getAngularSize(NULL)*M_PI/180.*painter->getProjector()->getPixelPerRadAtCenter();
 		float shift = 5.f + size/1.6f;
-		if (labelsFader.getInterstate()<=0.f)
+
+		painter->drawSprite2dMode(XYZ, distributionMode ? 4.f : 5.f);
+
+		if (labelsFader.getInterstate()<=0.f && !distributionMode && (mag+1.f)<mlimit && smgr->getFlagLabels())
 		{
-			if (GETSTELMODULE(Exoplanets)->getDisplayMode())
-			{
-				painter.drawSprite2dMode(XYZ, 4);
-			}
-			else
-			{
-				painter.drawSprite2dMode(XYZ, 5);
-				painter.drawText(XYZ, designation, 0, shift, shift, false);
-			}
+			painter->drawText(XYZ, designation, 0, shift, shift, false);
 		}
 	}
 }

@@ -67,6 +67,7 @@ StelPluginInfo SatellitesStelPluginInterface::getPluginInfo() const
 	info.authors = "Matthew Gates, Jose Luis Canales, Bogdan Marinov";
 	info.contact = "http://stellarium.org/";
 	info.description = N_("Prediction of artificial satellite positions in Earth orbit based on NORAD TLE data");
+	info.version = SATELLITES_PLUGIN_VERSION;
 	return info;
 }
 
@@ -128,7 +129,10 @@ void Satellites::init()
 		// populate settings from main config file.
 		loadSettings();
 
+		// absolute file name for inner catalog of the satellites
 		catalogPath = dataDir.absoluteFilePath("satellites.json");
+		// absolute file name for qs.mag file
+		qsMagFilePath = dataDir.absoluteFilePath("qs.mag");
 
 		// Load and find resources used in the plugin
 		texPointer = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/pointeur5.png");
@@ -164,7 +168,7 @@ void Satellites::init()
 	// If the json file does not already exist, create it from the resource in the QT resource
 	if(QFileInfo(catalogPath).exists())
 	{
-		if (readCatalogVersion() != SATELLITES_PLUGIN_VERSION)
+		if (!checkJsonFileFormat() || readCatalogVersion() != SATELLITES_PLUGIN_VERSION)
 		{
 			displayMessage(q_("The old satellites.json file is no longer compatible - using default file"), "#bb0000");
 			restoreDefaultCatalog();
@@ -174,6 +178,11 @@ void Satellites::init()
 	{
 		qDebug() << "Satellites::init satellites.json does not exist - copying default file to " << QDir::toNativeSeparators(catalogPath);
 		restoreDefaultCatalog();
+	}
+	
+	if(!QFileInfo(qsMagFilePath).exists())
+	{
+		restoreDefaultQSMagFile();
 	}
 
 	qDebug() << "Satellites: loading catalog file:" << QDir::toNativeSeparators(catalogPath);
@@ -480,6 +489,7 @@ void Satellites::restoreDefaults(void)
 {
 	restoreDefaultSettings();
 	restoreDefaultCatalog();
+	restoreDefaultQSMagFile();
 	loadCatalog();
 	loadSettings();
 }
@@ -504,6 +514,7 @@ void Satellites::restoreDefaultSettings()
 	conf->setValue("orbit_line_segments", 90);
 	conf->setValue("orbit_fade_segments", 5);
 	conf->setValue("orbit_segment_duration", 20);
+	conf->setValue("realistic_mode_enabled", false);
 	
 	conf->endGroup(); // saveTleSources() opens it for itself
 	
@@ -546,6 +557,23 @@ void Satellites::restoreDefaultCatalog()
 		StelApp::getInstance().getSettings()->remove("Satellites/last_update");
 		lastUpdate = QDateTime::fromString("2001-05-25T12:00:00", Qt::ISODate);
 
+	}
+}
+
+void Satellites::restoreDefaultQSMagFile()
+{
+	QFile src(":/satellites/qs.mag");
+	if (!src.copy(qsMagFilePath))
+	{
+		qWarning() << "Satellites::restoreDefaultQSMagFile cannot copy qs.mag resource to " + QDir::toNativeSeparators(qsMagFilePath);
+	}
+	else
+	{
+		qDebug() << "Satellites::init copied default qs.mag to " << QDir::toNativeSeparators(qsMagFilePath);
+		// The resource is read only, and the new file inherits this...  make sure the new file
+		// is writable by the Stellarium process so that updates can be done.
+		QFile dest(qsMagFilePath);
+		dest.setPermissions(dest.permissions() | QFile::WriteOwner);
 	}
 }
 
@@ -621,6 +649,9 @@ void Satellites::loadSettings()
 	Satellite::orbitLineFadeSegments = conf->value("orbit_fade_segments", 5).toInt();
 	Satellite::orbitLineSegmentDuration = conf->value("orbit_segment_duration", 20).toInt();
 
+	// realistic mode
+	setFlagRelisticMode(conf->value("realistic_mode_enabled", false).toBool());
+
 	conf->endGroup();
 }
 
@@ -645,6 +676,9 @@ void Satellites::saveSettings()
 	conf->setValue("orbit_line_segments", Satellite::orbitLineSegments);
 	conf->setValue("orbit_fade_segments", Satellite::orbitLineFadeSegments);
 	conf->setValue("orbit_segment_duration", Satellite::orbitLineSegmentDuration);
+
+	// realistic mode
+	conf->setValue("realistic_mode_enabled", getFlagRealisticMode());
 
 	conf->endGroup();
 	
@@ -753,6 +787,9 @@ void Satellites::setDataMap(const QVariantMap& map)
 		if (!satData.contains("orbitColor"))
 			satData["orbitColor"] = satData["hintColor"];
 
+		if (!satData.contains("stdMag") && qsMagList.contains(satId))
+			satData["stdMag"] = qsMagList[satId];
+
 		SatelliteP sat(new Satellite(satId, satData));
 		if (sat->initialized)
 		{
@@ -789,7 +826,10 @@ QVariantMap Satellites::createDataMap(void)
 		if (satMap["hintColor"].toList() == defHintCol)
 			satMap.remove("hintColor");
 
-		sats[sat->id] = satMap;
+		if (satMap["stdMag"].toFloat() == 99.f)
+			satMap.remove("stdMag");
+
+		sats[sat->id] = satMap;		
 	}
 	map["satellites"] = sats;
 	return map;
@@ -896,6 +936,8 @@ bool Satellites::add(const TleData& tleData)
 	//TODO: Decide if newly added satellites are visible by default --BM
 	satProperties.insert("visible", true);
 	satProperties.insert("orbitVisible", false);
+	if (qsMagList.contains(tleData.id))
+		satProperties.insert("stdMag", qsMagList[tleData.id]);
 	
 	SatelliteP sat(new Satellite(tleData.id, satProperties));
 	if (sat->initialized)
@@ -1033,6 +1075,20 @@ void Satellites::enableAutoRemove(bool enabled)
 	if (autoRemoveEnabled != enabled)
 	{
 		autoRemoveEnabled = enabled;
+		emit settingsChanged();
+	}
+}
+
+bool Satellites::getFlagRealisticMode()
+{
+	return Satellite::realisticModeFlag;
+}
+
+void Satellites::setFlagRelisticMode(bool b)
+{
+	if (Satellite::realisticModeFlag != b)
+	{
+		Satellite::realisticModeFlag = b;
 		emit settingsChanged();
 	}
 }
@@ -1220,8 +1276,9 @@ void Satellites::saveDownloadedUpdate(QNetworkReply* reply)
 			delete updateSources[i].file;
 			updateSources[i].file = 0;
 		}
-	}	
-	updateSources.clear();
+	}
+	updateSources.clear();	
+	parseQSMagFile(qsMagFilePath);
 	updateSatellites(newData);
 }
 
@@ -1284,7 +1341,7 @@ void Satellites::updateFromFiles(QStringList paths, bool deleteFiles)
 				tleFile.remove();
 		}
 	}
-
+	parseQSMagFile(qsMagFilePath);
 	updateSatellites(newTleSets);
 }
 
@@ -1344,6 +1401,9 @@ void Satellites::updateSatellites(TleDataHash& newTleSets)
 				sat->lastUpdated = lastUpdate;
 				updatedCount++;
 			}
+			if (qsMagList.contains(id))
+				sat->stdMag = qsMagList[id];
+
 		}
 		else
 		{
@@ -1463,6 +1523,33 @@ void Satellites::parseTleFile(QFile& openFile,
 	}
 }
 
+void Satellites::parseQSMagFile(QString qsMagFile)
+{
+	// Description of file and some additional information you can find here:
+	// 1) http://www.prismnet.com/~mmccants/tles/mccdesc.html
+	// 2) http://www.prismnet.com/~mmccants/tles/intrmagdef.html
+	if (qsMagFile.isEmpty())
+		return;
+
+	QFile qsmFile(qsMagFile);
+	if (!qsmFile.open(QIODevice::ReadOnly))
+	{
+		qWarning() << "Satellites: oops... cannot open " << QDir::toNativeSeparators(qsMagFile);
+		return;
+	}
+
+	qsMagList.clear();
+	while (!qsmFile.atEnd())
+	{
+		QString line = QString(qsmFile.readLine());
+		QString id   = line.mid(0,5).trimmed();
+		QString smag = line.mid(33,4).trimmed();
+		if (!smag.isEmpty())
+			qsMagList.insert(id, smag.toDouble());
+	}
+	qsmFile.close();
+}
+
 void Satellites::update(double deltaTime)
 {
 	if (StelApp::getInstance().getCore()->getCurrentLocation().planetName != earth->getEnglishName() || (!hintFader && hintFader.getInterstate() <= 0.))
@@ -1534,6 +1621,32 @@ void Satellites::drawPointer(StelCore* core, StelPainter& painter)
 		painter.drawSprite2dMode(screenpos[0]+size/2, screenpos[1]+size/2, 20, -90);
 		painter.drawSprite2dMode(screenpos[0]+size/2, screenpos[1]-size/2, 20, -180);
 	}
+}
+
+bool Satellites::checkJsonFileFormat()
+{
+	QFile jsonFile(catalogPath);
+	if (!jsonFile.open(QIODevice::ReadOnly))
+	{
+		qWarning() << "Satellites::checkJsonFileFormat(): cannot open " << QDir::toNativeSeparators(catalogPath);
+		return false;
+	}
+
+	QVariantMap map;
+	try
+	{
+		map = StelJsonParser::parse(&jsonFile).toMap();
+		jsonFile.close();
+	}
+	catch (std::runtime_error& e)
+	{
+		qDebug() << "Satellites::checkJsonFileFormat(): file format is wrong!";
+		qDebug() << "Satellites::checkJsonFileFormat() error:" << e.what();
+		return false;
+	}
+
+	return true;
+
 }
 
 void Satellites::translations()

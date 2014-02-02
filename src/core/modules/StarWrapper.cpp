@@ -45,20 +45,27 @@ QString StarWrapperBase::getInfoString(const StelCore *core, const InfoStringGro
 	QString str;
 	QTextStream oss(&str);
 
-	if (flags&Extra)
+	if (flags&ObjectType)
 	{
 		oss << q_("Type: <b>%1</b>").arg(q_("star")) << "<br />";
 	}
 
 	if (flags&Magnitude)
 	{
-		oss << q_("Magnitude: <b>%1</b> (B-V: %2)").arg(QString::number(getVMagnitude(core), 'f', 2), QString::number(getBV(), 'f', 2)) << "<br>";
 		if (core->getSkyDrawer()->getFlagHasAtmosphere())
-		{
-			oss << q_("Apparent Magnitude: <b>%1</b> (by extinction)").arg(QString::number(getVMagnitudeWithExtinction(core), 'f', 2)) << "<br>";
-		}
-        }
-        oss << getPositionInfoString(core, flags);
+			oss << q_("Magnitude: <b>%1</b> (extincted to: <b>%2</b>)")
+			       .arg(QString::number(getVMagnitude(core), 'f', 2))
+			       .arg(QString::number(getVMagnitudeWithExtinction(core), 'f', 2)) << "<br>";
+		else
+			oss << q_("Magnitude: <b>%1</b>").arg(QString::number(getVMagnitude(core), 'f', 2)) << "<br>";
+	}
+	
+	if (flags&Extra)
+	{
+		oss << q_("Color Index (B-V): <b>%1</b>").arg(QString::number(getBV(), 'f', 2)) << "<br>";
+	}
+	
+	oss << getPositionInfoString(core, flags);
 
 	StelObject::postProcessInfoString(str, flags);
 
@@ -127,7 +134,7 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 	}
 
 	bool ebsFlag = false;
-	if (flags&Extra)
+	if (flags&ObjectType)
 	{
 		QString varstartype = "";
 		QString startype = "";
@@ -170,18 +177,21 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 	if (flags&Magnitude)
 	{
 		if (core->getSkyDrawer()->getFlagHasAtmosphere())
-			oss << q_("Magnitude: <b>%1</b> (extincted to: <b>%2</b>. B-V: <b>%3</b>)").arg(QString::number(getVMagnitude(core), 'f', 2),
-													QString::number(getVMagnitudeWithExtinction(core), 'f', 2),
-													QString::number(s->getBV(), 'f', 2)) << "<br>";
+			oss << q_("Magnitude: <b>%1</b> (extincted to: <b>%2</b>)").arg(QString::number(getVMagnitude(core), 'f', 2))
+				   .arg(QString::number(getVMagnitudeWithExtinction(core), 'f', 2)) << "<br>";
 		else
-			oss << q_("Magnitude: <b>%1</b> (B-V: <b>%2</b>)").arg(QString::number(getVMagnitude(core), 'f', 2),
-									       QString::number(s->getBV(), 'f', 2)) << "<br>";
+			oss << q_("Magnitude: <b>%1</b>").arg(QString::number(getVMagnitude(core), 'f', 2)) << "<br>";
 	}
 
 	if ((flags&AbsoluteMagnitude) && s->plx && !isNan(s->plx) && !isInf(s->plx))
 		oss << q_("Absolute Magnitude: %1").arg(getVMagnitude(core)+5.*(1.+std::log10(0.00001*s->plx)), 0, 'f', 2) << "<br>";
 
-	if (flags&Magnitude)
+	if (flags&Extra)
+	{
+		oss << q_("Color Index (B-V): <b>%1</b>").arg(QString::number(s->getBV(), 'f', 2)) << "<br>";
+	}
+	
+	if (flags&Extra)
 	{
 		if (!varType.isEmpty())
 		{

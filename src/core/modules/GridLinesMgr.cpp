@@ -203,6 +203,7 @@ void viewportEdgeIntersectCallback(const Vec3d& screenPos, const Vec3d& directio
 				}
 				break;
 			}
+			case StelCore::FrameObservercentricEcliptic:
 			case StelCore::FrameGalactic:
 			{
 				double raAngle = M_PI-d->raAngle;
