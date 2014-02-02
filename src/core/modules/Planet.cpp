@@ -869,11 +869,15 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 			sPainter->getLight().setPosition(Vec4f(sunPos[0],sunPos[1],sunPos[2],1.f));
 
 			// Set the light parameters taking sun as the light source
-			static Vec4f diffuse = Vec4f(2.f,2.f,2.f,1.f);
+			static Vec4f diffuse = Vec4f(1.f,1.f,1.f,1.f);
 			static Vec4f zero = Vec4f(0.f,0.f,0.f,0.f);
 			static Vec4f ambient = Vec4f(0.02f,0.02f,0.02f,0.02f);
-			diffuse[1] = 2.; diffuse[2] = 2.;
-			ambient[1] = 0.02; ambient[2] = 0.02;
+			
+			if (this==GETSTELMODULE(SolarSystem)->getMoon().data())
+			{
+				diffuse[1] = 1.5; diffuse[2] = 1.5;
+				ambient[1] = 0.02; ambient[2] = 0.02;
+			}
 			sPainter->getLight().setAmbient(ambient);
 			sPainter->getLight().setDiffuse(diffuse);
 			sPainter->getLight().setSpecular(zero);
