@@ -29,8 +29,9 @@
 #include <QSqlDriver>
 
 
-static const double __f = 3.352779E-3; 		//!< Ellipsoid earth
-static const double R_EARTH = 6378135; 		//!< Radius of the earth in m
+// WGS84
+static const double __f = 1.0 / 298.257223563; 		//!< Ellipsoid earth
+static const double R_EARTH = 6378137; 				//!< Radius of the earth in m
 
 Vec3d Flight::observerPos(R_EARTH,0,0);
 double Flight::ECEFtoAzAl[3][3];
@@ -529,35 +530,35 @@ void Flight::writeToDb() const
 		{
 			qDebug() << qry.lastError().text();
 		}
-	}
 #else
-	jdates << f.time;
-	mode_ss << mode_s;
-	callsigns << callsign;
-	onGrounds << f.onGround;
-	altitudes << f.altitude_feet;
-	latitudes << f.latitude;
-	longitudes << f.longitude;
-	verticalRates << f.vertical_rate_ft_min;
-	groundSpeeds << f.ground_speed_knots;
-	groundTracks << f.ground_track;
-}
-qry.bindValue(QStringLiteral(":jdate"), jdates);
-qry.bindValue(QStringLiteral(":flights_mode_s"),mode_ss);
-qry.bindValue(QStringLiteral(":flights_callsign"), callsigns);
-qry.bindValue(QStringLiteral(":on_ground"),onGrounds);
-qry.bindValue(QStringLiteral(":altitude_feet"), altitudes);
-qry.bindValue(QStringLiteral(":latitude"), latitudes);
-qry.bindValue(QStringLiteral(":longitude"), longitudes);
-qry.bindValue(QStringLiteral(":vertical_rate_ft_min"), verticalRates);
-qry.bindValue(QStringLiteral(":ground_speed_knots"), groundSpeeds);
-qry.bindValue(QStringLiteral(":ground_track"), groundTracks);
-qry.exec();
-if (qry.lastError().type() != QSqlError::NoError) {
-	qDebug() << qry.lastError().text();
-}
+		jdates << f.time;
+		mode_ss << mode_s;
+		callsigns << callsign;
+		onGrounds << f.onGround;
+		altitudes << f.altitude_feet;
+		latitudes << f.latitude;
+		longitudes << f.longitude;
+		verticalRates << f.vertical_rate_ft_min;
+		groundSpeeds << f.ground_speed_knots;
+		groundTracks << f.ground_track;
+	}
+	qry.bindValue(QStringLiteral(":jdate"), jdates);
+	qry.bindValue(QStringLiteral(":flights_mode_s"),mode_ss);
+	qry.bindValue(QStringLiteral(":flights_callsign"), callsigns);
+	qry.bindValue(QStringLiteral(":on_ground"),onGrounds);
+	qry.bindValue(QStringLiteral(":altitude_feet"), altitudes);
+	qry.bindValue(QStringLiteral(":latitude"), latitudes);
+	qry.bindValue(QStringLiteral(":longitude"), longitudes);
+	qry.bindValue(QStringLiteral(":vertical_rate_ft_min"), verticalRates);
+	qry.bindValue(QStringLiteral(":ground_speed_knots"), groundSpeeds);
+	qry.bindValue(QStringLiteral(":ground_track"), groundTracks);
+	qry.exec();
+	if (qry.lastError().type() != QSqlError::NoError)
+	{
+		qDebug() << qry.lastError().text();
 #endif
 #undef BULKQUERY
+	}
 db.commit();
 }
 
@@ -575,7 +576,7 @@ Vec3d Flight::calcECEFPosition(const Vec3d &pos)
 	double sinlat = sin(pos[0]);
 	Vec3d res;
 
-	c = 1 / sqrt(1 + __f * (__f - 2) * (sinlat * sinlat));
+	c = 1.0 / sqrt(1 + __f * (__f - 2) * (sinlat * sinlat));
 	sq = (1 - __f) * (1 - __f) * c;
 	r = (R_EARTH * c + pos[2]) * cos(pos[0]);
 	res[0] = r * cos(pos[1]);
