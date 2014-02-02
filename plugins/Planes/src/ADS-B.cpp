@@ -25,7 +25,7 @@ static const double MAX_TIME_OVER_END = 1000 / (24 * 60 * 60 * 1000); //!< Max t
 static const double FEET_TO_METER = 0.3048; //!< Convert feet to meter
 static const double KNOTS_TO_MPS = 0.514444444; //!< Convert knots to m/s
 static const double FT_MIN_TO_MPS = 0.00508; //!< Convert ft/min to m/s
-static const double MAX_TIME_DIFF = 15.0 / (24 * 60 * 60); //!< Max time to consider msgs as belonging together (15 sec in jd)
+static const double MAX_TIME_DIFF = 30.0 / (24 * 60 * 60); //!< Max time to consider msgs as belonging together (30 sec in jd)
 
 bool ADSBData::useInterp = true;
 
@@ -97,7 +97,7 @@ ADSBData::~ADSBData()
 
 ADSBFrame const *ADSBData::getData(double jd)
 {
-	if (data.size() == 0 || jd < data.first().time || jd > data.last().time)
+	if (data.size() == 0 || jd < data.first().time || jd > (data.last().time + MAX_TIME_OVER_END))
 	{
 		return NULL;
 	}
