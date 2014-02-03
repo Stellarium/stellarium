@@ -872,6 +872,12 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 			static Vec4f diffuse = Vec4f(1.f,1.f,1.f,1.f);
 			static Vec4f zero = Vec4f(0.f,0.f,0.f,0.f);
 			static Vec4f ambient = Vec4f(0.02f,0.02f,0.02f,0.02f);
+
+			if (this==GETSTELMODULE(SolarSystem)->getMoon().data())
+			{
+				// Special case for the Moon (maybe better use 1.5,1.5,1.5,1.0 ?)
+				diffuse = Vec4f(1.6f,1.6f,1.6f,1.f);
+			}
 			
 			sPainter->getLight().setAmbient(ambient);
 			sPainter->getLight().setDiffuse(diffuse);
