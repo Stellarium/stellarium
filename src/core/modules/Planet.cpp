@@ -852,6 +852,7 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 {
 	// This is the main method drawing a planet 3d model
 	// Some work has to be done on this method to make the rendering nicer
+	SolarSystem* ssm = GETSTELMODULE(SolarSystem);
 
 	if (screenSz>1.)
 	{
@@ -873,7 +874,7 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 			static Vec4f zero = Vec4f(0.f,0.f,0.f,0.f);
 			static Vec4f ambient = Vec4f(0.02f,0.02f,0.02f,0.02f);
 
-			if (this==GETSTELMODULE(SolarSystem)->getMoon().data())
+			if (this==ssm->getMoon())
 			{
 				// Special case for the Moon (maybe better use 1.5,1.5,1.5,1.0 ?)
 				diffuse = Vec4f(1.6f,1.6f,1.6f,1.f);
@@ -911,7 +912,6 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 		}
 		else
 		{
-			SolarSystem* ssm = GETSTELMODULE(SolarSystem);
 			if (this==ssm->getMoon() && core->getCurrentLocation().planetName=="Earth" && ssm->nearLunarEclipse())
 			{
 				// Draw earth shadow over moon using stencil buffer if appropriate
