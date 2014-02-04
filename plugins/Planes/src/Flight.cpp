@@ -39,6 +39,7 @@ int Flight::numPaths;
 int Flight::numVisible;
 Flight::PathColour Flight::pathColour = Flight::SolidColour;
 QFont Flight::labelFont;
+Vec3f Flight::infoColour(0, 1, 0);
 
 double Flight::maxVertRate = 50;	//!< Max vertical rate, used for path colouring
 double Flight::minVertRate = -50;	//!< Min vertical rate, used for path colouring
@@ -567,6 +568,16 @@ int Flight::size() const
 	Q_ASSERT(data);
 	return data->size();
 }
+Vec3f Flight::getFlightInfoColour()
+{
+	return infoColour;
+}
+
+void Flight::setFlightInfoColour(const int &r, const int &g, const int &b)
+{
+	infoColour = Vec3f(r / 255.0, g / 255.0, b / 255.0);
+}
+
 
 Vec3d Flight::calcECEFPosition(const Vec3d &pos)
 {

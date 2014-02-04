@@ -162,7 +162,7 @@ public:
 	//! Colour used to colour the info string
 	virtual Vec3f getInfoColor() const
 	{
-		return Vec3f(0, 1, 0);
+		return infoColour;
 	}
 
 	//! Checks if this plane is visible at the current time.
@@ -266,11 +266,18 @@ public:
 	//! Return number of available data points
 	int size() const;
 
+	//! The colour used for drawing info text and icons
+	static Vec3f getFlightInfoColour();
+
+	//! Set the colour used for drawing info text and icons
+	static void setFlightInfoColour(const int &r, const int &g, const int &b);
+
 private:
 	static Vec3d observerPos; //!< The position of the observer, used to calculate Az/Al pos
 	static double ECEFtoAzAl[3][3]; //!< Matrix to transform from ECEF to Az/Al
 	static PathColour pathColour; //!< Path colouring mode
 	static QFont labelFont; //!< Font for rendering labels
+	static Vec3f infoColour;
 	//!@{
 	//! Values for colour coding paths
 	static double maxVertRate;

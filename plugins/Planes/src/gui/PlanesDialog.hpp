@@ -74,6 +74,7 @@ protected:
 private:
 	//! Toggle certain settings that depend on other settings being enabled
 	void updateDBFields();
+	void setColour(const int &r, const int &g, const int &b);
 
 	Ui::PlanesDialog *ui;
 	QString cachedDBStatus;
@@ -174,6 +175,7 @@ private slots:
 	}
 	void setUseBS();
 	void setConnectOnStartup();
+	void setColour();
 	//!@}
 };
 
