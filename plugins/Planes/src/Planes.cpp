@@ -215,6 +215,8 @@ void Planes::loadSettings()
 
 	connectOnStartup = conf->value(QStringLiteral("connect_on_startup"), false).toBool();
 
+	Flight::setFlightInfoColour(StelUtils::strToVec3f(conf->value(QStringLiteral("planes_colour"), QStringLiteral("0.,1.,0.")).toString()));
+
 	conf->endGroup();
 }
 
@@ -250,6 +252,9 @@ void Planes::saveSettings()
 	conf->setValue(QStringLiteral("bs_use_db"), bsDataSource.isDumpOldFlightsEnabled());
 
 	conf->setValue(QStringLiteral("connect_on_startup"), connectOnStartup);
+
+	conf->setValue(QStringLiteral("planes_colour"), QString(QStringLiteral("%1,%2,%3")).arg(Flight::getFlightInfoColour()[0])
+			.arg(Flight::getFlightInfoColour()[1]).arg(Flight::getFlightInfoColour()[2]));
 
 	conf->endGroup();
 }

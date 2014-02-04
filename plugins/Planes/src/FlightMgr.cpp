@@ -53,7 +53,8 @@ void FlightMgr::draw(StelCore *core)
 	}
 	StelProjectorP projection = core->getProjection(StelCore::FrameAltAz);
 	StelPainter painter(projection);
-	painter.setColor(0, 1, 0, displayBrightness);
+	//painter.setColor(0, 1, 0, displayBrightness);
+	painter.setColor(Flight::getFlightInfoColour()[0], Flight::getFlightInfoColour()[1], Flight::getFlightInfoColour()[2], displayBrightness);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glEnable(GL_BLEND);
 	glEnable(GL_TEXTURE_2D);

@@ -72,6 +72,14 @@ void PlanesDialog::setBSStatus(QString status)
 	}
 }
 
+void PlanesDialog::setColour(const int &r, const int &g, const int &b)
+{
+	ui->red->setValue(r);
+	ui->green->setValue(g);
+	ui->blue->setValue(b);
+	ui->col_out->setStyleSheet(QString("background-color: rgb(%1, %2, %3);").arg(r).arg(g).arg(b));
+}
+
 void PlanesDialog::createDialogContent()
 {
 	ui->setupUi(dialog);
@@ -128,6 +136,9 @@ void PlanesDialog::createDialogContent()
 	ui->bsStatus->setText(cachedBSStatus);
 	ui->dbStatus->setText(cachedDBStatus);
 
+	Vec3f col = Flight::getFlightInfoColour();
+	setColour((int)(col[0] * 255), (int)(col[1] * 255), (int)(col[2] * 255));
+
 	this->connect(ui->closeStelWindow, SIGNAL(clicked()), SLOT(close()));
 	this->connect(&StelApp::getInstance(), SIGNAL(languageChanged()), SLOT(retranslate()));
 	this->connect(ui->col_solid, SIGNAL(clicked()), SLOT(setSolidCol()));
@@ -170,6 +181,10 @@ void PlanesDialog::createDialogContent()
 	this->connect(ui->bsDisconnectButton, SIGNAL(clicked()), SLOT(disconnectBS()));
 
 	this->connect(ui->connectOnStartup, SIGNAL(clicked()), SLOT(setConnectOnStartup()));
+
+	this->connect(ui->red, SIGNAL(valueChanged(int)), SLOT(setColour()));
+	this->connect(ui->green, SIGNAL(valueChanged(int)), SLOT(setColour()));
+	this->connect(ui->blue, SIGNAL(valueChanged(int)), SLOT(setColour()));
 }
 
 void PlanesDialog::updateDBFields()
@@ -232,4 +247,13 @@ void PlanesDialog::setUseBS()
 void PlanesDialog::setConnectOnStartup()
 {
 	emit connectOnStartupChanged(ui->connectOnStartup->isChecked());
+}
+
+void PlanesDialog::setColour()
+{
+	int r = ui->red->value();
+	int g = ui->green->value();
+	int b = ui->blue->value();
+	ui->col_out->setStyleSheet(QString(QStringLiteral("background-color: rgb(%1, %2, %3);")).arg(r).arg(g).arg(b));
+	Flight::setFlightInfoColour(r, g, b);
 }
