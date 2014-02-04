@@ -578,6 +578,11 @@ void Flight::setFlightInfoColour(const int &r, const int &g, const int &b)
 	infoColour = Vec3f(r / 255.0, g / 255.0, b / 255.0);
 }
 
+void Flight::setFlightInfoColour(const Vec3f &col)
+{
+	infoColour = col;
+}
+
 
 Vec3d Flight::calcECEFPosition(const Vec3d &pos)
 {

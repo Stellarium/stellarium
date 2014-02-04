@@ -271,6 +271,7 @@ public:
 
 	//! Set the colour used for drawing info text and icons
 	static void setFlightInfoColour(const int &r, const int &g, const int &b);
+	static void setFlightInfoColour(const Vec3f &col);
 
 private:
 	static Vec3d observerPos; //!< The position of the observer, used to calculate Az/Al pos
