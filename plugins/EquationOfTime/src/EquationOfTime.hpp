@@ -60,6 +60,7 @@ public:
 	void saveSettingsToConfig(void);
 
 	//! Get solution of equation of time
+	//! Source: J. Meeus "Astronomical Algorithms" (2nd ed., with corrections as of August 10, 2009) p.183-187.
 	//! @param JDay JD
 	//! @return time in minutes
 	double getSolutionEquationOfTime(const double JDay) const;
