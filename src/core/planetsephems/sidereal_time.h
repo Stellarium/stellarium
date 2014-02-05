@@ -32,7 +32,7 @@ double get_mean_sidereal_time (double JD);
 double get_apparent_sidereal_time (double JD);
 /* Calculate mean ecliptical obliquity in degrees. */
 double get_mean_ecliptical_obliquity(double JDE);
-/* Calculate nutatuin in longitude in degrees. */
+/* Calculate nutation in longitude in degrees. */
 double get_nutation_longitude(double JDE);
 
 #ifdef __cplusplus
