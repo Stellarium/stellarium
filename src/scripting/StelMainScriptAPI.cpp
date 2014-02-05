@@ -216,9 +216,8 @@ void StelMainScriptAPI::setObserverLocation(double longitude, double latitude, d
 void StelMainScriptAPI::setObserverLocation(const QString id, float duration)
 {
 	StelCore* core = StelApp::getInstance().getCore();
-	bool ok;
-	StelLocation loc = StelApp::getInstance().getLocationMgr().locationForSmallString(id, &ok);
-	if (!ok)
+	StelLocation loc = StelApp::getInstance().getLocationMgr().locationForString(id);
+	if (!loc.isValid())
 		return;	// location find failed
 	core->moveObserverTo(loc, duration);
 }
@@ -658,8 +657,8 @@ double StelMainScriptAPI::jdFromDateString(const QString& dt, const QString& spe
 
 		if (nowRe.capturedTexts().at(8) == "sidereal")
 		{
-			dayLength = core->getLocalSideralDayLength();
-			yearLength = core->getLocalSideralYearLength();
+			dayLength = core->getLocalSiderealDayLength();
+			yearLength = core->getLocalSiderealYearLength();
 			monthLength = 27.321661; // duration of Earth's sidereal month
 		}
 

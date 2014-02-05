@@ -208,7 +208,7 @@ QString MinorPlanet::getInfoString(const StelCore *core, const InfoStringGroup &
 		}
 	}
 
-	if (flags&Type)
+	if (flags&ObjectType)
 	{
 		if (pType.length()>0)
 			oss << q_("Type: <b>%1</b>").arg(q_(pType)) << "<br />";
@@ -321,6 +321,8 @@ float MinorPlanet::getVMagnitude(const StelCore* core) const
 
 	//Calculate apparent magnitude
 	//TODO: See if you can "collapse" some calculations
+	// -- GZ: NO! This is also in Meeus, Astr.Alg. 1998, p.231 and authoritative by IAU commission 20, New Delhi November 1985.
+	//       (you can collapse and leave away the reducedMagnitude varable, but this is cosmetic)
 	double apparentMagnitude = reducedMagnitude + 5 * std::log10(std::sqrt(planetRq * observerPlanetRq));
 
 	return apparentMagnitude;
