@@ -193,6 +193,8 @@ SET(stellarium_lib_SRCS
 	core/modules/Orbit.hpp
 	core/modules/Planet.cpp
 	core/modules/Planet.hpp
+	core/modules/PlanetShadows.cpp
+	core/modules/PlanetShadows.hpp
 	core/modules/MinorPlanet.cpp
 	core/modules/MinorPlanet.hpp
 	core/modules/Comet.cpp
