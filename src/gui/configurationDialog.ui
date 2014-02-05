@@ -1121,16 +1121,6 @@
                </property>
               </widget>
              </item>
-             <item row="4" column="0">
-              <widget class="QCheckBox" name="renderSolarShadowsCheckbox">
-               <property name="toolTip">
-                <string>Display solar shadows on planets and moons (For that feature needed OpenGL version 2 or higher)</string>
-               </property>
-               <property name="text">
-                <string>Render Solar Shadows</string>
-               </property>
-              </widget>
-             </item>
             </layout>
            </widget>
           </item>
@@ -1653,7 +1643,6 @@
   <tabstop>gravityLabelCheckbox</tabstop>
   <tabstop>selectSingleConstellationButton</tabstop>
   <tabstop>autoZoomResetsDirectionCheckbox</tabstop>
-  <tabstop>renderSolarShadowsCheckbox</tabstop>
   <tabstop>screenshotBrowseButton</tabstop>
   <tabstop>screenshotDirEdit</tabstop>
   <tabstop>invertScreenShotColorsCheckBox</tabstop>

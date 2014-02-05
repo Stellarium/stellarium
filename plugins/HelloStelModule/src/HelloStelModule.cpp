@@ -46,9 +46,6 @@ StelPluginInfo HelloStelModuleStelPluginInterface::getPluginInfo() const
 	return info;
 }
 
-Q_EXPORT_PLUGIN2(HelloStelModule, HelloStelModuleStelPluginInterface)
-
-
 /*************************************************************************
  Constructor
 *************************************************************************/
