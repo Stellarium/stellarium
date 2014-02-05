@@ -185,6 +185,9 @@ public:
 	static void initStatic();
 	static void deinitStatic();
 
+	//! Get whether solar shadows should be rendered.
+	bool getRenderSolarShadows() const;
+
 	//! Add a progression indicator to the GUI (if applicable).
 	//! @return a controller which can be used to indicate the current status.
 	//! The StelApp instance remains the owner of the controller.
@@ -199,6 +202,9 @@ public slots:
 	void setVisionModeNight(bool);
 	//! Get flag for activating night vision mode.
 	bool getVisionModeNight() const {return flagNightVision;}
+
+	//! Set flag for activating solar shadow rendering.
+	void setRenderSolarShadows(bool);
 
 	//! Get the current number of frame per second.
 	//! @return the FPS averaged on the last second
@@ -304,6 +310,9 @@ private:
 
 	//! Define whether we are in night vision mode
 	bool flagNightVision;
+
+	//! Define whether solar shadows should be rendered (using GLSL shaders)
+	bool renderSolarShadows;
 	
 	QSettings* confSettings;
 
