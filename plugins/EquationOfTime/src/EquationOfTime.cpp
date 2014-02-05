@@ -58,7 +58,7 @@ StelPluginInfo EquationOfTimeStelPluginInterface::getPluginInfo() const
 	info.displayedName = N_("Equation of Time");
 	info.authors = "Alexander Wolf";
 	info.contact = "http://stellarium.org";
-	info.description = N_("This plugin show solution for equation of time.");
+	info.description = N_("This plugin shows the solution of the equation of time.");
 	info.version = EQUATIONOFTIME_PLUGIN_VERSION;
 	return info;
 }
