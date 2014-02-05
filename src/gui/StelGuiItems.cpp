@@ -563,10 +563,18 @@ void BottomStelBar::updateText(bool updatePos)
 			datetime->setToolTip("");
 	}
 
-	QString newLocation = flagShowLocation ? q_(core->getCurrentLocation().planetName) +", "
-			+core->getCurrentLocation().name + ", "
-			// xgettext:no-c-format
-			+q_("%1m").arg(core->getCurrentLocation().altitude) : " ";
+	QString newLocation = "";
+	const StelLocation* loc = &core->getCurrentLocation();
+	if (flagShowLocation && !loc->name.isEmpty())
+	{
+		newLocation = q_(loc->planetName) +", "+loc->name + ", "+q_("%1m").arg(loc->altitude);
+	}
+	if (flagShowLocation && loc->name.isEmpty())
+	{
+		newLocation = q_(loc->planetName)+", "
+		        +StelUtils::radToDmsStr(loc->latitude)+", "
+		        +StelUtils::radToDmsStr(loc->longitude);
+	}
 	if (location->text()!=newLocation)
 	{
 		updatePos = true;

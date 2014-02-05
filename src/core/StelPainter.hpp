@@ -371,10 +371,10 @@ private:
 		int vertex;
 	};
 	static BasicShaderVars basicShaderVars;
-	
+
 	static QOpenGLShaderProgram* colorShaderProgram;
 	static BasicShaderVars colorShaderVars;
-	
+
 	static QOpenGLShaderProgram* texturesShaderProgram;
 	struct TexturesShaderVars {
 		int projectionMatrix;

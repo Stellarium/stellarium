@@ -18,6 +18,7 @@
  */
 
 #include "StelLogger.hpp"
+#include "StelUtils.hpp"
 
 #include <QDateTime>
 #include <QProcess>
@@ -38,102 +39,8 @@ void StelLogger::init(const QString& logFilePath)
 
 	// write timestamp
 	writeLog(QString("%1").arg(QDateTime::currentDateTime().toString(Qt::ISODate)));
-
-	// write OS version
-#ifdef Q_OS_WIN
-	switch(QSysInfo::WindowsVersion)
-	{
-		case QSysInfo::WV_95:
-			writeLog("Windows 95");
-			break;
-		case QSysInfo::WV_98:
-			writeLog("Windows 98");
-			break;
-		case QSysInfo::WV_Me:
-			writeLog("Windows Me");
-			break;
-		case QSysInfo::WV_NT:
-			writeLog("Windows NT");
-			break;
-		case QSysInfo::WV_2000:
-			writeLog("Windows 2000");
-			break;
-		case QSysInfo::WV_XP:
-			writeLog("Windows XP");
-			break;
-		case QSysInfo::WV_2003:
-			writeLog("Windows Server 2003");
-			break;
-		case QSysInfo::WV_VISTA:
-			writeLog("Windows Vista");
-			break;
-		case QSysInfo::WV_WINDOWS7:
-			writeLog("Windows 7");
-			break;
-		#ifdef WV_WINDOWS8
-		case QSysInfo::WV_WINDOWS8:
-			writeLog("Windows 8");
-			break;
-		#endif
-		default:
-			writeLog("Unsupported Windows version");
-			break;
-	}
-
-	// somebody writing something useful for Macs would be great here
-#elif defined Q_OS_MAC
-	switch(QSysInfo::MacintoshVersion)
-	{
-		case QSysInfo::MV_10_3:
-			writeLog("Mac OS X 10.3");
-			break;
-		case QSysInfo::MV_10_4:
-			writeLog("Mac OS X 10.4");
-			break;
-		case QSysInfo::MV_10_5:
-			writeLog("Mac OS X 10.5");
-			break;
-		case QSysInfo::MV_10_6:
-			writeLog("Mac OS X 10.6");
-			break;
-		#ifdef MV_10_7
-		case QSysInfo::MV_10_7:
-			writeLog("Mac OS X 10.7");
-			break;
-		#endif
-		#ifdef MV_10_8
-		case QSysInfo::MV_10_8:
-			writeLog("Mac OS X 10.8");
-			break;
-		#endif
-		default:
-			writeLog("Unsupported Mac version");
-			break;
-	}
-
-#elif defined Q_OS_LINUX
-	QFile procVersion("/proc/version");
-	if(!procVersion.open(QIODevice::ReadOnly | QIODevice::Text))
-		writeLog("Unknown Linux version");
-	else
-	{
-		QString version = procVersion.readAll();
-		if(version.right(1) == "\n")
-			version.chop(1);
-		writeLog(version);
-		procVersion.close();
-	}
-#elif defined Q_OS_BSD4
-	// Check FreeBSD, NetBSD, OpenBSD and DragonFly BSD
-	QProcess uname;
-	uname.start("/usr/bin/uname -srm");
-	uname.waitForStarted();
-	uname.waitForFinished();
-	const QString BSDsystem = uname.readAllStandardOutput();
-	writeLog(BSDsystem.trimmed());
-#else
-	writeLog("Unknown operating system");
-#endif
+	// write info about operating system
+	writeLog(StelUtils::getOperatingSystemInfo());
 
 	// write GCC version
 #if defined __GNUC__ && !defined __clang__

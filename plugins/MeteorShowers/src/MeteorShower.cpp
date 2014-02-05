@@ -36,6 +36,7 @@
 
 StelTextureSP MeteorShower::radiantTexture;
 float MeteorShower::showLabels = true;
+bool MeteorShower::radiantMarkerEnabled = true;
 
 MeteorShower::MeteorShower(const QVariantMap& map)
 	: initialized(false)
@@ -112,7 +113,7 @@ QVariantMap MeteorShower::getMap(void)
 
 float MeteorShower::getSelectPriority(const StelCore*) const
 {
-	return 3.0;
+	return -2.0;
 }
 
 QString MeteorShower::getDesignation() const
@@ -287,11 +288,15 @@ QString MeteorShower::getInfoString(const StelCore* core, const InfoStringGroup&
 	QString str;
 	QTextStream oss(&str);
 
+	QString mstdata = q_("generic data");
+	if(isActive == 1)
+		mstdata = q_("real data");
+
 	if(flags&Name)
 		oss << "<h2>" << getNameI18n() << " (" << showerID  <<")</h2>";
 
 	if(flags&Extra)
-		oss << q_("Type: <b>%1</b>").arg(q_("meteor shower")) << "<br />";
+		oss << q_("Type: <b>%1</b> (%2)").arg(q_("meteor shower"), mstdata) << "<br />";
 
 	// Ra/Dec etc.
 	oss << getPositionInfoString(core, flags);
@@ -314,12 +319,6 @@ QString MeteorShower::getInfoString(const StelCore* core, const InfoStringGroup&
 		{
 			oss << q_("Parent body: %1").arg(parentObj) << "<br />";
 		}
-
-		QString skyYear = getSkyQDateTime().toString("yyyy");
-		if(isActive == 1)
-			oss << "<b>" << q_("Real data for the year %1").arg(skyYear) << "</b> <br />";
-		else
-			oss << "<b>" << q_("Generic data for the year %1").arg(skyYear) << "</b> <br />";
 
 		if(start.toString("M") == finish.toString("M"))
 		{
@@ -384,7 +383,7 @@ void MeteorShower::draw(StelPainter& painter)
 	StelUtils::spheToRect(radiantAlpha, radiantDelta, XYZ);
 	painter.getProjector()->project(XYZ, XY);
 
-	Vec3f color = getInfoColor();
+	//Vec3f color = getInfoColor();
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE);
 
@@ -404,15 +403,19 @@ void MeteorShower::draw(StelPainter& painter)
 
 	painter.setColor(r, g, b, alpha);
 
-	MeteorShower::radiantTexture->bind();
-	painter.drawSprite2dMode(XY[0], XY[1], 10);
-
-	if (MeteorShower::showLabels)
+	if (MeteorShower::radiantMarkerEnabled)
 	{
-		float size = getAngularSize(NULL)*M_PI/180.*painter.getProjector()->getPixelPerRadAtCenter();
-		float shift = 8.f + size/1.8f;
-		painter.setColor(color[0], color[1], color[2], 1.0f);
-		painter.drawText(XY[0]+shift, XY[1]+shift, getNameI18n(), 0, 0, 0, false);
+		MeteorShower::radiantTexture->bind();
+		painter.drawSprite2dMode(XY[0], XY[1], 10);
+
+		if (MeteorShower::showLabels)
+		{
+			float size = getAngularSize(NULL)*M_PI/180.*painter.getProjector()->getPixelPerRadAtCenter();
+			float shift = 8.f + size/1.8f;
+			//painter.setColor(color[0], color[1], color[2], 1.0f);
+			painter.drawText(XY[0]+shift, XY[1]+shift, getNameI18n(), 0, 0, 0, false);
+		}
 	}
-	painter.setColor(1,1,1,0);
+
+	//painter.setColor(1,1,1,0);
 }
