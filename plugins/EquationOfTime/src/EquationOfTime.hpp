@@ -59,29 +59,42 @@ public:
 	//! Save the settings to the main configuration file.
 	void saveSettingsToConfig(void);
 
+	//! Get solution of equation of time
+	//! @param JDay JD
+	//! @return time in minutes
 	double getSolutionEquationOfTime(const double JDay) const;
 
+	//! Is plugin enabled?
 	bool isEnabled() const {return flagShowSolutionEquationOfTime;}
 
+	//! Get font size for messages
 	int getFontSize(void) { return fontSize; }
+	//! Get status of usage minutes and seconds for value of equation
 	bool getFlagMsFormat(void) { return flagUseMsFormat; }
+	//! Get status of usage inverted values for equation of time
 	bool getFlagInvertedValue(void) { return flagUseInvertedValue; }
 	bool getFlagEnableAtStartup(void) { return flagEnableAtStartup; }
 	bool getFlagShowEOTButton(void) { return flagShowEOTButton; }
 
 public slots:
+	//! Enable plugin usage
 	void enableEquationOfTime(bool b);
+	//! Enable usage inverted value for equation of time (switch sign of equation)
 	void setFlagInvertedValue(bool b) { flagUseInvertedValue=b; }
+	//! Enable usage minutes and seconds for value
 	void setFlagMsFormat(bool b) { flagUseMsFormat=b; }
+	//! Enable plugin usage at startup
 	void setFlagEnableAtStartup(bool b) { flagEnableAtStartup=b; }
+	//! Set font size for message
 	void setFontSize(int size) { fontSize=size; }
+	//! Display plugin button on toolbar
 	void setFlagShowEOTButton(bool b);
 
 private slots:
 	void updateMessageText();
 
 private:
-	// if existing, delete Satellites section in main config.ini, then create with default values
+	// if existing, delete EquationOfTime section in main config.ini, then create with default values
 	void restoreDefaultConfigIni(void);
 
 	EquationOfTimeWindow* mainWindow;
