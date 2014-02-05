@@ -177,8 +177,8 @@ namespace StelUtils
 	//! Check if a number is a power of 2.
 	bool isPowerOfTwo(const int value);
 
-	//! Return the first power of two bigger than the given value.
-	int getBiggerPowerOfTwo(int value);
+	//! Return the first power of two bigger or equal to the given value.
+	int getBiggerEqualPowerOfTwo(int value);
 
 	//! Return the inverse sinus hyperbolic of z.
 	double asinh(const double z);
@@ -564,10 +564,10 @@ namespace StelUtils
 	//! @return sigma in seconds
 	double getDeltaTStandardError(const double jDay);
 
-    //! Sign function from http://stackoverflow.com/questions/1903954/is-there-a-standard-sign-function-signum-sgn-in-c-c
-    template <typename T> int sign(T val) {
-        return (T(0) < val) - (val < T(0));
-    }
+	//! Sign function from http://stackoverflow.com/questions/1903954/is-there-a-standard-sign-function-signum-sgn-in-c-c
+	template <typename T> int sign(T val) {
+		return (T(0) < val) - (val < T(0));
+	}
 }
 
 #endif // _STELUTILS_HPP_

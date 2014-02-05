@@ -530,11 +530,11 @@ bool isPowerOfTwo(const int value)
 	return (value & -value) == value;
 }
 
-// Return the first power of two bigger than the given value
-int getBiggerPowerOfTwo(int value)
+// Return the first power of two bigger or equal to the given value
+int getBiggerEqualPowerOfTwo(int value)
 {
 	int p=1;
-	while (p<value)
+	while (p<=value)
 		p<<=1;
 	return p;
 }
