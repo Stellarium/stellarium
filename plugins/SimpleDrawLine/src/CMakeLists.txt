@@ -6,11 +6,12 @@ SET(SimpleDrawLine_SRCS
   SimpleDrawLine.hpp
   SimpleDrawLine.cpp)
 
-SET(extLinkerOption ${QT_LIBRARIES} ${JPEG_LIBRARIES} ${PNG_LIBRARIES} ${OPENGL_LIBRARIES} ${ICONV_LIBRARIES} ${INTL_LIBRARIES})
+SET(extLinkerOption ${OPENGL_LIBRARIES})
 
 ############### For building the dynamic library ######################
-IF(BUILD_DYNAMIC_PLUGINS)
+IF(BUILD_DYNAMIC_PLUGIN)
 	ADD_LIBRARY(SimpleDrawLine MODULE ${SimpleDrawLine_SRCS})
+	QT5_USE_MODULES(SimpleDrawLine-static Core OpenGL)
 	IF(APPLE)
 		FIND_LIBRARY(OPENGL_LIBRARY OpenGL)
 		MARK_AS_ADVANCED(OPENGL_LIBRARY)
@@ -26,12 +27,11 @@ IF(BUILD_DYNAMIC_PLUGINS)
 
 	TARGET_LINK_LIBRARIES(SimpleDrawLine ${StelMain} ${extLinkerOption})
 	INSTALL(TARGETS SimpleDrawLine DESTINATION "modules/SimpleDrawLine")
-ENDIF()
-
+ELSE()
 ############### For building the static library ######################
-IF(BUILD_STATIC_PLUGINS)
 	ADD_LIBRARY(SimpleDrawLine-static STATIC ${SimpleDrawLine_SRCS})
 	# The library target "SimpleDrawLine-static" has a default OUTPUT_NAME of "SimpleDrawLine-static", so change it.
+	QT5_USE_MODULES(SimpleDrawLine-static Core OpenGL)
 	SET_TARGET_PROPERTIES(SimpleDrawLine-static PROPERTIES OUTPUT_NAME "SimpleDrawLine")
 	TARGET_LINK_LIBRARIES(SimpleDrawLine-static ${extLinkerOption})
 	SET_TARGET_PROPERTIES(SimpleDrawLine-static PROPERTIES COMPILE_FLAGS "-DQT_STATICPLUGIN")
