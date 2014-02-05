@@ -362,4 +362,12 @@ void Atmosphere::draw(StelCore* core)
 	atmoShaderProgram->disableAttributeArray(shaderAttribLocations.skyVertex);
 	atmoShaderProgram->disableAttributeArray(shaderAttribLocations.skyColor);
 	atmoShaderProgram->release();
+	// GZ: debug output
+	//const StelProjectorP prj = core->getProjection(StelCore::FrameEquinoxEqu);
+	//StelPainter painter(prj);
+	//painter.setFont(font);
+	//sPainter.setColor(0.7, 0.7, 0.7);
+	//sPainter.drawText(83, 120, QString("Atmosphere::getAverageLuminance(): %1" ).arg(getAverageLuminance()));
+	//qDebug() << atmosphere->getAverageLuminance();
+
 }

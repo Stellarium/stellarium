@@ -37,7 +37,9 @@ struct StelPluginInfo
 	//! The contact email or URL.
 	QString	contact;
 	//! The HTML description of the plugin.
-	QString description;
+	QString description;	
+	//! The version of the plugin, e.g. "1.0.0"
+	QString version;
 	//! Logo or preview image to display in the information dialog or an invalid image if not applicable.
 	//! The image size should be x by x pixels.
 	QImage image;

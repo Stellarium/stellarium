@@ -40,7 +40,6 @@
 
 #include "StelObjectType.hpp"
 #include "StelObject.hpp"
-#include "StelProjector.hpp"
 #include "SolarSystem.hpp"
 #include "StelSkyLayerMgr.hpp"
 #include "StelStyle.hpp"

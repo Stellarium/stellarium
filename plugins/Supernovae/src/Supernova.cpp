@@ -100,9 +100,14 @@ QString Supernova::getMaxBrightnessDate(const double JD) const
 
 QString Supernova::getInfoString(const StelCore* core, const InfoStringGroup& flags) const
 {
-	QString str;
+	float maglimit = 21.f;
+	QString str, mag = "--", mage = "--";
 	QTextStream oss(&str);
-	double mag = getVMagnitude(core);
+	if (getVMagnitude(core) <= maglimit)
+	{
+		mag  = QString::number(getVMagnitude(core), 'f', 2);
+		mage = QString::number(getVMagnitudeWithExtinction(core), 'f', 2);
+	}
 
 	if (flags&Name)
 	{
@@ -113,16 +118,15 @@ QString Supernova::getInfoString(const StelCore* core, const InfoStringGroup& fl
 		oss << "</h2>";
 	}
 
-	if (flags&Type)
+	if (flags&ObjectType)
 		oss << q_("Type: <b>%1</b>").arg(q_("supernova")) << "<br />";
 
-	if (flags&Magnitude && mag <= core->getSkyDrawer()->getLimitMagnitude())
+	if (flags&Magnitude)
 	{
-	    if (core->getSkyDrawer()->getFlagHasAtmosphere())
-		oss << q_("Magnitude: <b>%1</b> (extincted to: <b>%2</b>)").arg(QString::number(getVMagnitude(core), 'f', 2),
-									       QString::number(getVMagnitudeWithExtinction(core), 'f', 2)) << "<br>";
+	    if (core->getSkyDrawer()->getFlagHasAtmosphere() && getVMagnitude(core) <= maglimit)
+		oss << q_("Magnitude: <b>%1</b> (extincted to: <b>%2</b>)").arg(mag, mage) << "<br>";
 	    else
-		oss << q_("Magnitude: <b>%1</b>").arg(mag, 0, 'f', 2) << "<br>";
+		oss << q_("Magnitude: <b>%1</b>").arg(mag) << "<br>";
 	}
 
 	// Ra/Dec etc.

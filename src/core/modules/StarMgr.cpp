@@ -30,6 +30,14 @@
 #include <QDir>
 #include <QCryptographicHash>
 
+#include <errno.h>
+#ifndef Q_OS_WIN
+#include <unistd.h>
+#else
+#include <winsock2.h>
+#include "kdewin32/unistd.h"
+#endif
+
 #include "StelProjector.hpp"
 #include "StarMgr.hpp"
 #include "StelObject.hpp"
@@ -55,13 +63,6 @@
 #include "StelSkyDrawer.hpp"
 #include "RefractionExtinction.hpp"
 
-#include <errno.h>
-#ifndef Q_OS_WIN
-#include <unistd.h>
-#else
-#include <winsock2.h>
-#include "kdewin32/unistd.h"
-#endif
 
 static QStringList spectral_array;
 static QStringList component_array;

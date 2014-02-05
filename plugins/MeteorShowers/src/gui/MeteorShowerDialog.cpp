@@ -131,7 +131,8 @@ void MeteorShowerDialog::setAboutHtml(void)
 	html += "<tr width=\"30%\"><td>" + q_("Version:") + "</td><td>" + METEORSHOWERS_PLUGIN_VERSION + "</td></tr>";
 	html += "<tr><td>" + q_("Author:") + "</td><td>Marcos Cardinot &lt;mcardinot@gmail.com&gt;</td></tr></table>";
 
-	html += "<p>" + q_("The Meteor Showers plugin show markers of radiants and information for general meteor showers.") + "</p>";
+	html += "<p>" + q_("The Meteor Showers plugin give visualization of the meteor showers, show information about meteor showers and displays marker for radiants in activity range for each meteor showers.") + "</p>";
+	html += "<p>" + q_("This plugin was created as project of ESA Summer of Code in Space 2013.") + "</p>";
 	html += "</body></html>";
 
 	ui->aboutTextBrowser->setHtml(html);
