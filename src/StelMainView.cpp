@@ -530,3 +530,13 @@ void StelMainView::doScreenshot(void)
 		qWarning() << "WARNING failed to write screenshot to: " << QDir::toNativeSeparators(shotPath.filePath());
 	}
 }
+
+int StelMainView::getSceneWidth()
+{
+	return glWidget->windowHandle()->screen()->size().width();
+}
+
+int StelMainView::getSceneHeight()
+{
+	return glWidget->windowHandle()->screen()->size().height();
+}
