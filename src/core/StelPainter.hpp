@@ -304,6 +304,9 @@ public:
 	//! @return true if the link was successful.
 	static bool linkProg(class QOpenGLShaderProgram* prog, const QString& name);
 
+	//! Sets whether the special planet shader should be used.
+	void usePlanetShader(bool use);
+
 private:
 
 	friend class StelTextureMgr;
@@ -334,6 +337,9 @@ private:
 	//! @return a descriptor of the new array
 	ArrayDesc projectArray(const ArrayDesc& array, int offset, int count, const unsigned short *indices=NULL);
 
+	//! Converts an array from double to float.
+	void convertArrayToFloat(StelPainter::ArrayDesc& array, int offset, int count, const unsigned short *indices=NULL);
+
 	//! Project the passed triangle on the screen ensuring that it will look smooth, even for non linear distortion
 	//! by splitting it into subtriangles. The resulting vertex arrays are appended to the passed out* ones.
 	//! The size of each edge must be < 180 deg.
@@ -360,6 +366,9 @@ private:
 
 	//! The used for text drawing
 	QFont currentFont;
+
+	//! Whether the special planet shader is used.
+	bool planetShader;
 
 	Vec4f currentColor;
 	bool texture2dEnabled;
