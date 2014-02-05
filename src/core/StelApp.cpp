@@ -437,9 +437,6 @@ void StelApp::init(QSettings* conf)
 	emit colorSchemeChanged("color");
 	setVisionModeNight(confSettings->value("viewing/flag_night").toBool());
 
-	// Initialisation of the render of solar shadows
-	//setRenderSolarShadows(confSettings->value("viewing/flag_render_solar_shadows", true).toBool());
-
 	// Proxy Initialisation
 	setupHttpProxy();
 	updateI18n();
