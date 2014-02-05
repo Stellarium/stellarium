@@ -106,16 +106,19 @@ StelTexture::GLData StelTexture::loadFromData(const QByteArray& data)
  Bind the texture so that it can be used for openGL drawing (calls glBindTexture)
  *************************************************************************/
 
-bool StelTexture::bind()
+bool StelTexture::bind(int slot)
 {
 	if (id != 0)
 	{
 		// The texture is already fully loaded, just bind and return true;
-		glActiveTexture(GL_TEXTURE0);
+		glActiveTexture(GL_TEXTURE0 + slot);
 		glBindTexture(GL_TEXTURE_2D, id);
 		return true;
 	}
 	if (errorOccured)
+		return false;
+
+	if (fullPath.isEmpty())
 		return false;
 
 	// If the file is remote, start a network connection.
@@ -144,6 +147,15 @@ bool StelTexture::bind()
 	glLoad(loader->result());
 	delete loader;
 	loader = NULL;
+	return true;
+}
+
+bool StelTexture::loadFromMemory(const char *data, int width, int height, GLint format, GLint type, GLint internalFormat)
+{
+	if (!fullPath.isEmpty())
+		return false;
+
+	loadData(data, width, height, format, type, internalFormat);
 	return true;
 }
 
@@ -251,22 +263,16 @@ QByteArray StelTexture::convertToGLFormat(const QImage& image, GLint *format, GL
 	return ret;
 }
 
-bool StelTexture::glLoad(const GLData& data)
+void StelTexture::loadData(const char *data, int width, int height, GLint format, GLint type, GLint internalFormat)
 {
-	if (data.data.isEmpty())
-	{
-		reportError("Unknown error");
-		return false;
-	}
-	width = data.width;
-	height = data.height;
+	this->width = width;
+	this->height = height;
 	glActiveTexture(GL_TEXTURE0);
 	glGenTextures(1, &id);
 	glBindTexture(GL_TEXTURE_2D, id);
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, loadParams.filtering);
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, loadParams.filtering);
-	glTexImage2D(GL_TEXTURE_2D, 0, data.format, width, height, 0, data.format,
-				 data.type, data.data.constData());
+	glTexImage2D(GL_TEXTURE_2D, 0, internalFormat == 0 ? format : internalFormat, width, height, 0, format, type, data);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, loadParams.wrapMode);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, loadParams.wrapMode);
 	if (loadParams.generateMipmaps)
@@ -274,6 +280,18 @@ bool StelTexture::glLoad(const GLData& data)
 		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_NEAREST);
 		glGenerateMipmap(GL_TEXTURE_2D);
 	}
+}
+
+bool StelTexture::glLoad(const GLData& data)
+{
+	if (data.data.isEmpty())
+	{
+		reportError("Unknown error");
+		return false;
+	}
+
+	loadData(data.data.constData(), data.width, data.height, data.format, data.type);
+
 	// Report success of texture loading
 	emit(loadingProcessFinished(false));
 	return true;
