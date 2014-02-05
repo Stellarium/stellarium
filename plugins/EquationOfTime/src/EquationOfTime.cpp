@@ -260,7 +260,7 @@ void EquationOfTime::setFlagShowEOTButton(bool b)
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 	if (b==true) {
 		if (toolbarButton==NULL) {
-			// Create the pulsars button
+			// Create the button
 			toolbarButton = new StelButton(NULL,
 						       QPixmap(":/EquationOfTime/bt_EquationOfTime_On.png"),
 						       QPixmap(":/EquationOfTime/bt_EquationOfTime_Off.png"),
