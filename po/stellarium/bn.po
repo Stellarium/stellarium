@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-01-23 19:56+0700\n"
-"PO-Revision-Date: 2014-01-31 05:38+0000\n"
+"PO-Revision-Date: 2014-02-05 05:18+0000\n"
 "Last-Translator: Tanmoy Saha <Unknown>\n"
 "Language-Team: stellarium\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-02-01 05:27+0000\n"
+"X-Launchpad-Export-Date: 2014-02-06 05:28+0000\n"
 "X-Generator: Launchpad (build 16916)\n"
 "Language: bn\n"
 
@@ -1412,12 +1412,13 @@ msgstr "%1T নির্ণয়ের পছন্দসই সমীকরন"
 #. TRANSLATORS: This message will be displayed for users if Stellarium can't get info about version from stellarium.org
 #: src/gui/HelpDialog.cpp:250
 msgid "Oops... Stellarium can't check latest version."
-msgstr ""
+msgstr "উপস্... Stellarium তার সর্বাধুনিক সংস্করণ অনুসন্ধান করতে পারে নি ।"
 
 #. TRANSLATORS: This message will be displayed for users if current version of Stellarium is bigger than version from stellarium.org
 #: src/gui/HelpDialog.cpp:272
 msgid "Looks like you are using the development version of Stellarium."
 msgstr ""
+"দেখা যাচ্ছে যে আপনি Stellarium এর একটি উন্নয়নশীল সংস্করণ ব্যবহার করছেন ।"
 
 #. TRANSLATORS: This message will be displayed for users if current version of Stellarium is smaller than version from stellarium.org
 #: src/gui/HelpDialog.cpp:277
@@ -1429,7 +1430,7 @@ msgstr ""
 #. TRANSLATORS: This message will be displayed for users if current version of Stellarium is equals with version from stellarium.org
 #: src/gui/HelpDialog.cpp:283
 msgid "This is latest stable version of Stellarium."
-msgstr ""
+msgstr "এটি Stellarium এর সর্বাধুনিক সুস্থিত সংস্করণ ।"
 
 #: src/gui/HelpDialog.cpp:313
 msgid "Stellarium Help"
@@ -4271,7 +4272,7 @@ msgstr "ভাষা"
 
 #: src/ui_configurationDialog.h:1002
 msgid "Check updates"
-msgstr ""
+msgstr "আধুনিকরণ করুন"
 
 #: src/ui_configurationDialog.h:1003
 msgid ""
@@ -7634,17 +7635,17 @@ msgstr "পালসার"
 
 #: plugins/Pulsars/src/Pulsar.cpp:142
 msgid "has one registered glitch"
-msgstr ""
+msgstr "একটি নথিভুক্ত ত্রুটি যুক্ত"
 
 #. TRANSLATORS: Full phrase is "Has X registered glitches", where X is number
 #: plugins/Pulsars/src/Pulsar.cpp:146
 #, qt-format
 msgid "has %1 registered glitches"
-msgstr ""
+msgstr "%1 টি নথিভুক্ত ত্রুটি যুক্ত"
 
 #: plugins/Pulsars/src/Pulsar.cpp:148
 msgid "pulsar with glitches"
-msgstr ""
+msgstr "ত্রুটিযুক্ত পালসার"
 
 #. TRANSLATORS: Unit of measure for period - seconds
 #: plugins/Pulsars/src/Pulsar.cpp:160
@@ -7842,7 +7843,7 @@ msgstr "পালসার সরঞ্জাম প্রদর্শণ"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:279
 msgid "Use separate color for pulsars with glitches"
-msgstr ""
+msgstr "ত্রুটিযুক্ত পালসার গুলির জন্য আলাদা রঙের ব্যবহার"
 
 #: plugins/Exoplanets/src/Exoplanets.cpp:73
 #: plugins/Exoplanets/src/Exoplanets.cpp:162
@@ -8639,6 +8640,8 @@ msgid ""
 "This plugin allows stepwise zooming via keyboard shortcuts like in the "
 "<em>Cartes du Ciel</em> planetarium program."
 msgstr ""
+"এই সরঞ্জামের সাহায্যে <em>Cartes du Ciel</em> প্রোগ্রামটির মতন কিবোর্ড "
+"ব্যবহার করে ধাপে ধাপে কছে দূরে করা যায় ।"
 
 #: plugins/FOV/src/FOV.cpp:83
 #, qt-format
@@ -8647,7 +8650,7 @@ msgstr ""
 
 #: plugins/FOV/src/gui/FOVWindow.cpp:77
 msgid "Field of View plug-in"
-msgstr ""
+msgstr "দৃষ্টিক্ষেত্র সরঞ্জাম"
 
 #: plugins/FOV/src/ui_fovWindow.h:403
 msgid ""
