@@ -109,9 +109,6 @@ public slots:
 	//! Updates the scene and process all events
 	void updateScene();
 
-	int getSceneWidth();
-	int getSceneHeight();
-
 protected:
 	virtual void mouseMoveEvent(QMouseEvent* event);
 	virtual void mousePressEvent(QMouseEvent* event);
