@@ -29,8 +29,8 @@
 #include "StelObject.hpp"
 #include "StelObjectMgr.hpp"
 #include "StelIniParser.hpp"
-#include "StelMainView.hpp"
 #include "StelUtils.hpp"
+#include "SkyGui.hpp"
 #include "SolarSystem.hpp"
 #include "Planet.hpp"
 #include "EquationOfTime.hpp"
@@ -81,6 +81,7 @@ void EquationOfTime::init()
 {
 	StelApp& app = StelApp::getInstance();
 	conf = app.getSettings();
+	gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 
 	if (!conf->childGroups().contains("EquationOfTime"))
 	{
@@ -139,8 +140,8 @@ void EquationOfTime::draw(StelCore *core)
 
 
 	QFontMetrics fm(font);
-	QSize fs = fm.size(Qt::TextSingleLine, timeText);
-	sPainter.drawText(StelMainView::getInstance().getSceneWidth()/2 - fs.width()/2, StelMainView::getInstance().getSceneHeight() - fs.height()*1.5, timeText);
+	QSize fs = fm.size(Qt::TextSingleLine, timeText);	
+	sPainter.drawText(gui->getSkyGui()->getSkyGuiWidth()/2 - fs.width()/2, gui->getSkyGui()->getSkyGuiHeight() - fs.height()*1.5, timeText);
 	//qDebug() << timeText;
 }
 
@@ -257,7 +258,6 @@ void EquationOfTime::updateMessageText()
 
 void EquationOfTime::setFlagShowEOTButton(bool b)
 {
-	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 	if (b==true) {
 		if (toolbarButton==NULL) {
 			// Create the button
