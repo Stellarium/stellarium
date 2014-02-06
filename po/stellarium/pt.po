@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-01-23 19:56+0700\n"
-"PO-Revision-Date: 2014-01-13 16:18+0000\n"
-"Last-Translator: Alexander Wolf <Unknown>\n"
+"PO-Revision-Date: 2014-02-05 03:07+0000\n"
+"Last-Translator: Tiago S. <Unknown>\n"
 "Language-Team: Portuguese <pt@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-01-24 05:24+0000\n"
-"X-Generator: Launchpad (build 16914)\n"
+"X-Launchpad-Export-Date: 2014-02-06 05:29+0000\n"
+"X-Generator: Launchpad (build 16916)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:106 src/core/modules/StarMgr.cpp:337
 #: src/core/modules/GridLinesMgr.cpp:680 src/core/modules/LandscapeMgr.cpp:342
@@ -1120,7 +1120,7 @@ msgstr "Az/Alt: %1/%2"
 #: src/core/StelObject.cpp:180
 #, qt-format
 msgid "Ecliptic Topocentric (of J2000): %1/%2"
-msgstr ""
+msgstr "Eclíptica topocêntrica (em J2000): %1/%2"
 
 #: src/core/StelObject.cpp:185
 #, qt-format
@@ -1419,22 +1419,26 @@ msgstr "Equação personalizada do %1T"
 #: src/gui/HelpDialog.cpp:250
 msgid "Oops... Stellarium can't check latest version."
 msgstr ""
+"Desculpe mas o Stellarium não consegue verificar quel é a versão mais "
+"recente."
 
 #. TRANSLATORS: This message will be displayed for users if current version of Stellarium is bigger than version from stellarium.org
 #: src/gui/HelpDialog.cpp:272
 msgid "Looks like you are using the development version of Stellarium."
 msgstr ""
+"Parece que está a utilizar a versão de desenvolvimento do Stellarium."
 
 #. TRANSLATORS: This message will be displayed for users if current version of Stellarium is smaller than version from stellarium.org
 #: src/gui/HelpDialog.cpp:277
 #, qt-format
 msgid "This version of Stellarium is outdated! Latest version is %1."
 msgstr ""
+"Esta versão do Stellarium está desatualizada! A última versão é a %1."
 
 #. TRANSLATORS: This message will be displayed for users if current version of Stellarium is equals with version from stellarium.org
 #: src/gui/HelpDialog.cpp:283
 msgid "This is latest stable version of Stellarium."
-msgstr ""
+msgstr "Esta é a versão estável mais recente do Stellarium."
 
 #: src/gui/HelpDialog.cpp:313
 msgid "Stellarium Help"
@@ -3689,23 +3693,23 @@ msgstr "Zimbabwe"
 
 #: src/translations.h:541
 msgid "&Undo"
-msgstr ""
+msgstr "An&ular"
 
 #: src/translations.h:542
 msgid "&Redo"
-msgstr ""
+msgstr "&Repetir"
 
 #: src/translations.h:543
 msgid "Cu&t"
-msgstr ""
+msgstr "Cor&tar"
 
 #: src/translations.h:544
 msgid "&Copy"
-msgstr ""
+msgstr "&Copiar"
 
 #: src/translations.h:545
 msgid "&Paste"
-msgstr ""
+msgstr "C&olar"
 
 #: src/translations.h:546 src/ui_locationDialogGui.h:395
 #: plugins/Oculars/src/ui_ocularDialog.h:1063
@@ -3717,23 +3721,23 @@ msgstr "Apagar"
 
 #: src/translations.h:547
 msgid "Select All"
-msgstr ""
+msgstr "Seleccionar Tudo"
 
 #: src/translations.h:548
 msgid "Look in:"
-msgstr ""
+msgstr "Procurar em:"
 
 #: src/translations.h:549
 msgid "Directory:"
-msgstr ""
+msgstr "Directório:"
 
 #: src/translations.h:550
 msgid "Folder"
-msgstr ""
+msgstr "Diretório"
 
 #: src/translations.h:551
 msgid "&Choose"
-msgstr ""
+msgstr "&Escolher"
 
 #: src/translations.h:552 src/ui_configurationDialog.h:1164
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:516
@@ -3742,27 +3746,27 @@ msgstr "Cancelar"
 
 #: src/translations.h:553
 msgid "Files of type:"
-msgstr ""
+msgstr "Tipo de ficheiros:"
 
 #: src/translations.h:554
 msgid "Date Modified"
-msgstr ""
+msgstr "Data da modificação"
 
 #: src/translations.h:555
 msgid "Directories"
-msgstr ""
+msgstr "Directórios"
 
 #: src/translations.h:556
 msgid "Computer"
-msgstr ""
+msgstr "Computador"
 
 #: src/translations.h:557
 msgid "&Open"
-msgstr ""
+msgstr "Abrir (&O)"
 
 #: src/translations.h:558
 msgid "File &name:"
-msgstr ""
+msgstr "&Nome do ficheiro:"
 
 #: src/ui_helpDialogGui.h:277 src/ui_helpDialogGui.h:283
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:417
@@ -4215,15 +4219,15 @@ msgstr "Esfera Celestial"
 
 #: src/ui_viewDialog.h:1292
 msgid "Equatorial grid (on J2000)"
-msgstr ""
+msgstr "Grade equatorial (em J2000)"
 
 #: src/ui_viewDialog.h:1293
 msgid "Equatorial grid (on date)"
-msgstr ""
+msgstr "Grade equatorial (na data)"
 
 #: src/ui_viewDialog.h:1294
 msgid "Ecliptic grid (on J2000)"
-msgstr ""
+msgstr "Grade eclíptica (em J2000)"
 
 #: src/ui_viewDialog.h:1298
 msgid "Show equator line"
@@ -4291,13 +4295,16 @@ msgstr "Idioma do programa"
 
 #: src/ui_configurationDialog.h:1002
 msgid "Check updates"
-msgstr ""
+msgstr "Procurar actualizações"
 
 #: src/ui_configurationDialog.h:1003
 msgid ""
 "Enable checking updates of Stellarium via Internet. Info for updates of "
 "stable versions you can look on the tab \"About\" of \"Help\" window."
 msgstr ""
+"Activa a verificação de atualizações do Stellarium na Internet. Informações "
+"sobre actualizações de versões estáveis podem ser encontradas na aba “Sobre” "
+"da janela “Ajuda”."
 
 #: src/ui_configurationDialog.h:1004
 msgid "Default options"
@@ -4470,10 +4477,12 @@ msgstr "Distância"
 msgid ""
 "Ecliptic topocentric coordinates, equinox of date and J2000 (only for Earth)"
 msgstr ""
+"Coordenadas eclípticas topocêntricas, equinócio da data e de J200 (apenas "
+"para a Terra)"
 
 #: src/ui_configurationDialog.h:1075
 msgid "Ecliptic coordinates"
-msgstr ""
+msgstr "Coordenadas Eclípticas"
 
 #: src/ui_configurationDialog.h:1076
 msgid "Control"
@@ -7522,12 +7531,13 @@ msgstr ""
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:114
 msgid "This plugin allows you to see recent bright novae: "
-msgstr ""
+msgstr "Este complemento permite ver novas brilhantes recentes: "
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:117
 #, qt-format
 msgid "All those novae are brighter than %1 at peak of brightness."
 msgstr ""
+"Todas estas novas são mais brilhantes do que %1 no pico de luminosidade."
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:119
 msgid ""
@@ -7618,6 +7628,10 @@ msgid ""
 "visual magnitude 16. The catalogue of quasars was compiled from \"Quasars "
 "and Active Galactic Nuclei\" (13th Ed.)"
 msgstr ""
+"<p align=\"justify\">O complemento de quasares permite visualizar alguns "
+"quasares mais brilhantes do que a magnitude visual 16. O catálogo de "
+"quasares foi compilado a partir da obra “Quasars and Active Galactic Nuclei” "
+"(13ª ed.)."
 
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:121
 msgid "Veron+ 2010"
@@ -7626,7 +7640,7 @@ msgstr "Veron+ 2010"
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:123
 #, qt-format
 msgid "The current catalog contains info about %1 quasars."
-msgstr ""
+msgstr "O catálogo actual contém informações sobre %1 quasares."
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:134
@@ -7635,6 +7649,9 @@ msgid ""
 "If you want to read full information about this plugin, its history and "
 "format of the catalog, you can %1get info here%2."
 msgstr ""
+"<p align=\"justify\">Se quiser ler as informações completas sobre este "
+"complemento, sobre a sua história e sobre o formato do catálogo, pode "
+"%1obter informações aqui%2."
 
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:216
 msgid "Quasars is updated"
@@ -8033,6 +8050,9 @@ msgid ""
 "from \"%1The Habitable Exoplanets Catalog%3\" by %2Planetary Habitability "
 "Laboratory%3."
 msgstr ""
+"A lista de exoplanetas potencialmente habitáveis e as informações sobre eles "
+"foram retirados de “%1The Habitable Exoplanets Catalog%3” por %2Planetary "
+"Habitability Laboratory%3."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:128
 #, qt-format
@@ -8040,6 +8060,8 @@ msgid ""
 "The current catalog contains info about %1 planetary systems, which "
 "altogether have %2 exoplanets."
 msgstr ""
+"O catálogo actual contém informações sobre %1 sistemas planetários, que, ao "
+"todo, têm %2 exoplanetas."
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:139
@@ -8048,6 +8070,9 @@ msgid ""
 "If you want to read full information about the plugin, its history and "
 "format of the catalog you can %1get info here%2."
 msgstr ""
+"<p align=\"justify\">Se quiser ler as informações completas sobre este "
+"complemento, sobre a sua história e sobre o formato do catálogo, pode "
+"%1obter informações aqui%2."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:152
 msgid "Potential habitable exoplanets"
@@ -8721,7 +8746,7 @@ msgstr ""
 #: plugins/FOV/src/FOV.cpp:83
 #, qt-format
 msgid "Set FOV to %1%2"
-msgstr ""
+msgstr "Definir o campo de visão para %1%2"
 
 #: plugins/FOV/src/gui/FOVWindow.cpp:77
 msgid "Field of View plug-in"
@@ -8735,6 +8760,12 @@ msgid ""
 "feature. You can edit values and use the keyboard for quick-setting of FOV. "
 "All values in degrees."
 msgstr ""
+"<p align=\"justify\">Por padrão, o Stellarium utiliza ampliação suave por "
+"meio da roda do rato ou de atalhos do teclado. Alguns utilizadores gostariam "
+"de ter ampliação gradual com valores fixos para o campo de visão, como no "
+"planetário Cartes du Ciel, e este complemento oferece esse recurso. Pode "
+"editar valores e usar o teclado para definir rapidamente o campo de visão. "
+"Todos os valores estão em graus."
 
 #: plugins/NavStars/src/NavStars.cpp:53 plugins/NavStars/src/NavStars.cpp:138
 msgid "Navigational Stars"
