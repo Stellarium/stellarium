@@ -100,6 +100,7 @@ private:
 
 	EquationOfTimeWindow* mainWindow;
 	QSettings* conf;
+	StelGui* gui;
 
 	QFont font;
 	bool flagShowSolutionEquationOfTime;
