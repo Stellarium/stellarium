@@ -1,4 +1,3 @@
-
 # Because 2.8.11 is not available yet on ubuntu, but we need it to fix some
 # bugs on windows.
 IF(WIN32)
@@ -230,6 +229,9 @@ IF(WIN32)
     FIND_PACKAGE(Qt5Sql REQUIRED)
     FIND_PACKAGE(Qt5XmlPatterns REQUIRED)
 ENDIF()
+
+GET_TARGET_PROPERTY(QMAKE_LOCATION Qt5::qmake LOCATION)
+MESSAGE(STATUS "Found Qt5: ${QMAKE_LOCATION} (found version \"${Qt5Core_VERSION_STRING}\")")
 
 # Tell CMake to run moc when necessary:
 set(CMAKE_AUTOMOC ON)
