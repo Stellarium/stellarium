@@ -21,17 +21,14 @@
 #include "StelPainter.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
+#include "SkyGui.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelFileMgr.hpp"
 #include "StelGui.hpp"
 #include "StelGuiItems.hpp"
-#include "StelObject.hpp"
 #include "StelObjectMgr.hpp"
-#include "StelIniParser.hpp"
 #include "StelUtils.hpp"
-#include "SkyGui.hpp"
-#include "SolarSystem.hpp"
 #include "Planet.hpp"
 #include "EquationOfTime.hpp"
 #include "EquationOfTimeWindow.hpp"
@@ -79,7 +76,7 @@ EquationOfTime::~EquationOfTime()
 
 void EquationOfTime::init()
 {
-	StelApp& app = StelApp::getInstance();
+	StelApp &app = StelApp::getInstance();
 	conf = app.getSettings();
 	gui = dynamic_cast<StelGui*>(app.getGui());
 
@@ -110,7 +107,7 @@ void EquationOfTime::deinit()
 
 void EquationOfTime::draw(StelCore *core)
 {
-	if (!isEnabled() && core->getCurrentPlanet().data()->getEnglishName()=="Earth")
+	if (!isEnabled())
 		return;
 
 	StelPainter sPainter(core->getProjection2d());
@@ -141,7 +138,9 @@ void EquationOfTime::draw(StelCore *core)
 
 	QFontMetrics fm(font);
 	QSize fs = fm.size(Qt::TextSingleLine, timeText);	
-	sPainter.drawText(gui->getSkyGui()->getSkyGuiWidth()/2 - fs.width()/2, gui->getSkyGui()->getSkyGuiHeight() - fs.height()*1.5, timeText);
+	if (core->getCurrentPlanet().data()->getEnglishName()=="Earth")
+		sPainter.drawText(gui->getSkyGui()->getSkyGuiWidth()/2 - fs.width()/2, gui->getSkyGui()->getSkyGuiHeight() - fs.height()*1.5, timeText);
+
 	//qDebug() << timeText;
 }
 
