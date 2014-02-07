@@ -69,7 +69,7 @@ EquationOfTime::EquationOfTime()
 	  toolbarButton(NULL)
 {
 	setObjectName("EquationOfTime");
-	mainWindow = new EquationOfTimeWindow();	
+	mainWindow = new EquationOfTimeWindow();
 }
 
 EquationOfTime::~EquationOfTime()
@@ -81,18 +81,18 @@ void EquationOfTime::init()
 {
 	StelApp& app = StelApp::getInstance();
 	conf = app.getSettings();
-	gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+	gui = dynamic_cast<StelGui*>(app.getGui());
 
 	if (!conf->childGroups().contains("EquationOfTime"))
 	{
-		qDebug() << "EquationOfTime::init() no fov section exists in main config file - creating with defaults";
+		qDebug() << "EquationOfTime::init() no EquationOfTime section exists in main config file - creating with defaults";
 		restoreDefaultConfigIni();
 	}
 
 	// populate settings from main config file.
 	readSettingsFromConfig();
 
-	addAction("actionShow_EquationOfTime", N_("Equation Of Time"), N_("Show solution for Equation Of Time"), "enabled", "");
+	addAction("actionShow_EquationOfTime", N_("Equation of Time"), N_("Show solution for Equation of Time"), "enabled", "");
 
 	enableEquationOfTime(getFlagEnableAtStartup());
 	setFlagShowEOTButton(flagShowEOTButton);
