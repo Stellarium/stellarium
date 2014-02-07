@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-01-23 19:56+0700\n"
-"PO-Revision-Date: 2013-12-06 17:46+0000\n"
-"Last-Translator: Yao Chengyun <skystaryy@163.com>\n"
+"PO-Revision-Date: 2014-02-06 13:00+0000\n"
+"Last-Translator: 罗佳伟 <luojiaweil@gmail.com>\n"
 "Language-Team: Chinese (Hong Kong) <zh_HK@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-01-24 05:28+0000\n"
-"X-Generator: Launchpad (build 16914)\n"
+"X-Launchpad-Export-Date: 2014-02-07 05:30+0000\n"
+"X-Generator: Launchpad (build 16916)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:106 src/core/modules/StarMgr.cpp:337
 #: src/core/modules/GridLinesMgr.cpp:680 src/core/modules/LandscapeMgr.cpp:342
@@ -253,7 +253,7 @@ msgstr "距离: %1 天文单位(%2 千米)"
 #: src/core/modules/Comet.cpp:202
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 Mio km)"
-msgstr ""
+msgstr "距离: %1AU (%2百万km)"
 
 #: src/core/modules/Planet.cpp:181
 #, qt-format
@@ -310,17 +310,17 @@ msgstr "临时编号: %1"
 #: src/core/modules/Comet.cpp:178
 #, no-c-format, qt-format
 msgid "Distance from Sun: %1AU (%2 km)"
-msgstr ""
+msgstr "距太阳距离: %1AU (%2 km)"
 
 #: src/core/modules/Comet.cpp:185
 #, no-c-format, qt-format
 msgid "Distance from Sun: %1AU (%2 Mio km)"
-msgstr ""
+msgstr "距太阳距离: %1AU (%2百万km)"
 
 #: src/core/modules/Comet.cpp:209
 #, no-c-format, qt-format
 msgid "Speed: %1 km/s"
-msgstr ""
+msgstr "速度: %1 km/s"
 
 #: src/core/modules/SolarSystem.cpp:151
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:303
