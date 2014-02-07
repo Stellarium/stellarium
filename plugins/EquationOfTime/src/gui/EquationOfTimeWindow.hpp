@@ -45,7 +45,7 @@ protected:
 
 private:
 	Ui_equationOfTimeWindowForm* ui;
-	EquationOfTime* equationOfTime;
+	EquationOfTime* eq;
 
 	void updateAboutText();		
 
