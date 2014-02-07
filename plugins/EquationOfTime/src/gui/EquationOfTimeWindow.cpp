@@ -47,26 +47,26 @@ void EquationOfTimeWindow::retranslate()
 
 void EquationOfTimeWindow::createDialogContent()
 {
-	equationOfTime = GETSTELMODULE(EquationOfTime);
+	eq = GETSTELMODULE(EquationOfTime);
 	ui->setupUi(dialog);
 
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 
-	ui->checkBoxEnableAtStartup->setChecked(equationOfTime->getFlagEnableAtStartup());
-	connect(ui->checkBoxEnableAtStartup, SIGNAL(clicked(bool)), equationOfTime, SLOT(setFlagEnableAtStartup(bool)));
+	ui->checkBoxEnableAtStartup->setChecked(eq->getFlagEnableAtStartup());
+	connect(ui->checkBoxEnableAtStartup, SIGNAL(clicked(bool)), eq, SLOT(setFlagEnableAtStartup(bool)));
 
-	ui->checkBoxInvertedValue->setChecked(equationOfTime->getFlagInvertedValue());
-	connect(ui->checkBoxInvertedValue, SIGNAL(clicked(bool)), equationOfTime, SLOT(setFlagInvertedValue(bool)));
+	ui->checkBoxInvertedValue->setChecked(eq->getFlagInvertedValue());
+	connect(ui->checkBoxInvertedValue, SIGNAL(clicked(bool)), eq, SLOT(setFlagInvertedValue(bool)));
 
-	ui->checkBoxMsFormat->setChecked(equationOfTime->getFlagMsFormat());
-	connect(ui->checkBoxMsFormat, SIGNAL(clicked(bool)), equationOfTime, SLOT(setFlagMsFormat(bool)));
+	ui->checkBoxMsFormat->setChecked(eq->getFlagMsFormat());
+	connect(ui->checkBoxMsFormat, SIGNAL(clicked(bool)), eq, SLOT(setFlagMsFormat(bool)));
 
-	ui->spinBoxFontSize->setValue(equationOfTime->getFontSize());
-	connect(ui->spinBoxFontSize, SIGNAL(valueChanged(int)), equationOfTime, SLOT(setFontSize(int)));
+	ui->spinBoxFontSize->setValue(eq->getFontSize());
+	connect(ui->spinBoxFontSize, SIGNAL(valueChanged(int)), eq, SLOT(setFontSize(int)));
 
-	ui->checkBoxShowButton->setChecked(equationOfTime->getFlagShowEOTButton());
-	connect(ui->checkBoxShowButton, SIGNAL(clicked(bool)), equationOfTime, SLOT(setFlagShowEOTButton(bool)));
+	ui->checkBoxShowButton->setChecked(eq->getFlagShowEOTButton());
+	connect(ui->checkBoxShowButton, SIGNAL(clicked(bool)), eq, SLOT(setFlagShowEOTButton(bool)));
 
 	connect(ui->pushButtonSave, SIGNAL(clicked()), this, SLOT(saveEquationOfTimeSettings()));
 	connect(ui->pushButtonReset, SIGNAL(clicked()), this, SLOT(resetEquationOfTimeSettings()));
@@ -83,10 +83,10 @@ void EquationOfTimeWindow::updateAboutText()
 
 void EquationOfTimeWindow::saveEquationOfTimeSettings()
 {
-	equationOfTime->saveSettingsToConfig();
+	eq->saveSettingsToConfig();
 }
 
 void EquationOfTimeWindow::resetEquationOfTimeSettings()
 {
-	equationOfTime->restoreDefaults();
+	eq->restoreDefaults();
 }
