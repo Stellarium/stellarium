@@ -4,7 +4,7 @@ INCLUDE_DIRECTORIES(
   ${CMAKE_BINARY_DIR}/plugins/EquationOfTime/src/gui
   . gui)
 
-LINK_DIRECTORIES(/src)
+LINK_DIRECTORIES(${BUILD_DIR}/src)
 
 SET(EQUATIONOFTIME_SRCS
   EquationOfTime.hpp
