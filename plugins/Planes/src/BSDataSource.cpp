@@ -22,6 +22,7 @@
 #include "StelModuleMgr.hpp"
 #include "StelTranslator.hpp"
 #include "Planes.hpp"
+#include "DatabaseWorker.hpp"
 
 // Locations of fields in string
 const int TYPE_POS = 0;

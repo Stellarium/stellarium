@@ -23,7 +23,6 @@
 #include "FlightMgr.hpp"
 #include "StelGui.hpp"
 #include "BSRecordingDataSource.hpp"
-#include "DatabaseDataSource.hpp"
 #include "BSDataSource.hpp"
 #include "PlanesDialog.hpp"
 #include "DBCredentials.hpp"
