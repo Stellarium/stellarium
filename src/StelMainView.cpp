@@ -292,6 +292,12 @@ void StelMainView::init(QSettings* conf)
 
 	Q_ASSERT(glWidget->isValid());
 	glWidget->makeCurrent();
+
+	// Debug info about supported version of OpenGL and vendor/renderer
+	qDebug() << "OpenGL versions supported:" << getSupportedOpenGLVersion();
+	qDebug() << "Driver version string:" << QString(reinterpret_cast<const char*>(glGetString(GL_VERSION)));
+	qDebug() << "GL vendor is" << QString(reinterpret_cast<const char*>(glGetString(GL_VENDOR)));
+	qDebug() << "GL renderer is" << QString(reinterpret_cast<const char*>(glGetString(GL_RENDERER)));
 	
 	stelApp= new StelApp();
 	stelApp->setGui(gui);
@@ -342,6 +348,55 @@ void StelMainView::init(QSettings* conf)
 
 	QThread::currentThread()->setPriority(QThread::HighestPriority);
 	startMainLoop();
+}
+
+QString StelMainView::getSupportedOpenGLVersion() const
+{
+	int version = QGLFormat::openGLVersionFlags();
+	QStringList ver;
+
+	if (version&QGLFormat::OpenGL_Version_1_1)
+		ver << "1.1";
+	if (version&QGLFormat::OpenGL_Version_1_2)
+		ver << "1.2";
+	if (version&QGLFormat::OpenGL_Version_1_3)
+		ver << "1.3";
+	if (version&QGLFormat::OpenGL_Version_1_4)
+		ver << "1.4";
+	if (version&QGLFormat::OpenGL_Version_1_5)
+		ver << "1.5";
+	if (version&QGLFormat::OpenGL_Version_2_0)
+		ver << "2.0";
+	if (version&QGLFormat::OpenGL_Version_2_1)
+		ver << "2.1";
+	if (version&QGLFormat::OpenGL_Version_3_0)
+		ver << "3.0";
+	if (version&QGLFormat::OpenGL_Version_3_1)
+		ver << "3.1";
+	if (version&QGLFormat::OpenGL_Version_3_2)
+		ver << "3.2";
+	if (version&QGLFormat::OpenGL_Version_3_3)
+		ver << "3.3";
+	if (version&QGLFormat::OpenGL_Version_4_0)
+		ver << "4.0";
+	if (version&QGLFormat::OpenGL_Version_4_1)
+		ver << "4.1";
+	if (version&QGLFormat::OpenGL_Version_4_2)
+		ver << "4.2";
+	if (version&QGLFormat::OpenGL_Version_4_3)
+		ver << "4.3";
+	if (version&QGLFormat::OpenGL_ES_CommonLite_Version_1_0)
+		ver << "1.0 (ES CL)";
+	if (version&QGLFormat::OpenGL_ES_CommonLite_Version_1_1)
+		ver << "1.1 (ES CL)";
+	if (version&QGLFormat::OpenGL_ES_Common_Version_1_0)
+		ver << "1.0 (ES C)";
+	if (version&QGLFormat::OpenGL_ES_Common_Version_1_1)
+		ver << "1.1 (ES C)";
+	if (version&QGLFormat::OpenGL_ES_Version_2_0)
+		ver << "2.0 (ES)";
+
+	return ver.join(", ");
 }
 
 void StelMainView::deinit()
