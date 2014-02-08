@@ -138,6 +138,8 @@ private:
 	//! Start the display loop
 	void startMainLoop();
 
+	QString getSupportedOpenGLVersion() const;
+
 	//! The StelMainView singleton
 	static StelMainView* singleton;
 
