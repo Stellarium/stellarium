@@ -151,6 +151,10 @@ Q_IMPORT_PLUGIN(PulsarsStelPluginInterface)
 Q_IMPORT_PLUGIN(ExoplanetsStelPluginInterface)
 #endif
 
+#ifdef USE_STATIC_PLUGIN_EQUATIONOFTIME
+Q_IMPORT_PLUGIN(EquationOfTimeStelPluginInterface)
+#endif
+
 #ifdef USE_STATIC_PLUGIN_FOV
 Q_IMPORT_PLUGIN(FOVStelPluginInterface)
 #endif
