@@ -234,11 +234,21 @@ void SkyGui::hoverMoveEvent(QGraphicsSceneHoverEvent* event)
 	}
 }
 
+int SkyGui::getSkyGuiWidth() const
+{
+	return geometry().width();
+}
+
+int SkyGui::getSkyGuiHeight() const
+{
+	return geometry().height();
+}
+
 //! Update the position of the button bars in the main window
 void SkyGui::updateBarsPos()
 {
-	const int ww = geometry().width();
-	const int hh = geometry().height();
+	const int ww = getSkyGuiWidth();
+	const int hh = getSkyGuiHeight();
 	bool updatePath = false;
 
 	// Use a position cache to avoid useless redraw triggered by the position set if the bars don't move

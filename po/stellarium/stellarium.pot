@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-02-07 22:46+0700\n"
+"POT-Creation-Date: 2014-02-08 10:13+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,7 +20,7 @@ msgstr ""
 #: src/core/modules/ConstellationMgr.cpp:106 src/core/modules/StarMgr.cpp:337
 #: src/core/modules/GridLinesMgr.cpp:680 src/core/modules/LandscapeMgr.cpp:342
 #: src/core/modules/NebulaMgr.cpp:123 src/core/modules/SolarSystem.cpp:151
-#: src/core/StelApp.cpp:441 src/core/StelCore.cpp:162
+#: src/core/StelApp.cpp:445 src/core/StelCore.cpp:162
 #: src/core/StelSkyLayerMgr.cpp:87 src/StelMainView.cpp:301
 msgid "Display Options"
 msgstr ""
@@ -445,7 +445,7 @@ msgstr ""
 msgid "Rising time: %1%"
 msgstr ""
 
-#: src/core/StelApp.cpp:441
+#: src/core/StelApp.cpp:445
 msgid "Night mode"
 msgstr ""
 
@@ -4123,6 +4123,7 @@ msgstr ""
 #: src/ui_configurationDialog.h:1001
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:390
 #: plugins/FOV/src/ui_fovWindow.h:387
+#: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:254
 msgid "Save settings"
 msgstr ""
 
@@ -4131,6 +4132,7 @@ msgid "Restore the default settings that came with Stellarium"
 msgstr ""
 
 #: src/ui_configurationDialog.h:1005 plugins/FOV/src/ui_fovWindow.h:386
+#: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:251
 msgid "Restore defaults"
 msgstr ""
 
@@ -5231,6 +5233,7 @@ msgstr ""
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:322
 #: plugins/Observability/src/ui_ObservabilityDialog.h:378
 #: plugins/FOV/src/ui_fovWindow.h:405
+#: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:258
 msgctxt "tab in plugin windows"
 msgid "About"
 msgstr ""
@@ -6011,6 +6014,7 @@ msgstr ""
 #: plugins/TimeZoneConfiguration/src/gui/TimeZoneConfigurationWindow.cpp:105
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:97
 #: plugins/FOV/src/gui/FOVWindow.cpp:78
+#: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:80
 #, qt-format
 msgid "Version %1"
 msgstr ""
@@ -7257,6 +7261,7 @@ msgstr ""
 #: plugins/Quasars/src/ui_quasarsDialog.h:271
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:277
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:315
+#: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:249
 msgid "Enable display at startup"
 msgstr ""
 
@@ -8243,4 +8248,66 @@ msgstr ""
 
 #: plugins/NavStars/src/NavStars.cpp:138
 msgid "Mark the navigational stars"
+msgstr ""
+
+#: plugins/EquationOfTime/src/EquationOfTime.cpp:55
+#: plugins/EquationOfTime/src/EquationOfTime.cpp:92
+#: plugins/EquationOfTime/src/EquationOfTime.cpp:251
+#: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:246
+#: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:248
+#: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:257
+msgid "Equation of Time"
+msgstr ""
+
+#: plugins/EquationOfTime/src/EquationOfTime.cpp:58
+msgid "This plugin shows the solution of the equation of time."
+msgstr ""
+
+#: plugins/EquationOfTime/src/EquationOfTime.cpp:92
+msgid "Show solution for Equation of Time"
+msgstr ""
+
+#. TRANSLATORS: minutes.
+#: plugins/EquationOfTime/src/EquationOfTime.cpp:253
+msgctxt "time"
+msgid "m"
+msgstr ""
+
+#. TRANSLATORS: seconds.
+#: plugins/EquationOfTime/src/EquationOfTime.cpp:255
+msgctxt "time"
+msgid "s"
+msgstr ""
+
+#: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:79
+msgid "Equation of Time plug-in"
+msgstr ""
+
+#: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:250
+msgid ""
+"The equation of time describes the discrepancy between two kinds of solar "
+"time. These are apparent solar time, which directly tracks the motion of the "
+"sun, and mean solar time, which tracks a fictitious \"mean\" sun with noons "
+"24 hours apart. There is no universally accepted definition of the sign of "
+"the equation of time. Some publications show it as positive when a sundial "
+"is ahead of a clock; others when the clock is ahead of the sundial. In the "
+"English-speaking world, the former usage is the more common, but is not "
+"always followed. Anyone who makes use of a published table or graph should "
+"first check its sign usage."
+msgstr ""
+
+#: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:252
+msgid "Font size:"
+msgstr ""
+
+#: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:253
+msgid "Show plug-ins button on toolbar"
+msgstr ""
+
+#: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:255
+msgid "Use minutes and seconds"
+msgstr ""
+
+#: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:256
+msgid "Use inverted value for EOT"
 msgstr ""
