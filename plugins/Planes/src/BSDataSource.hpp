@@ -21,9 +21,25 @@
 
 
 #include "FlightDataSource.hpp"
-#include "DatabaseWorker.hpp"
+#include "DBCredentials.hpp"
 
 #include <QtNetwork>
+
+
+//! @struct FlightID
+//! Combines mode s address and callsign into key
+//! Can be passed on signal/slot connections
+typedef struct flight_id_s
+{
+	QString mode_s;
+	QString callsign;
+	QString key;
+} FlightID;
+
+Q_DECLARE_METATYPE(QList<FlightID>)
+Q_DECLARE_METATYPE(QList<ADSBFrame>)
+
+class DatabaseWorker;
 
 
 //! @class BSDataSource

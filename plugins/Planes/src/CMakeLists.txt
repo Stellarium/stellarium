@@ -9,8 +9,6 @@ SET(Planes_SRCS
   BSDataSource.cpp
   BSRecordingDataSource.hpp
   BSRecordingDataSource.cpp
-  DatabaseDataSource.hpp
-  DatabaseDataSource.cpp
   DatabaseWorker.hpp
   DatabaseWorker.cpp
   DBCredentials.hpp

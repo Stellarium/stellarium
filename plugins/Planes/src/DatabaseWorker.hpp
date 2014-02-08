@@ -24,7 +24,7 @@
 #include <QObject>
 #include "ADS-B.hpp"
 #include "DBCredentials.hpp"
-#include "DatabaseDataSource.hpp"
+#include "BSDataSource.hpp"
 
 //! @class DatabaseWorker
 //! This class handles the database communication for the DatabaseDataSource.
