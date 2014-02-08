@@ -71,6 +71,7 @@ BSDataSource::BSDataSource() : FlightDataSource(10)
 	this->connect(&socket, SIGNAL(error(QAbstractSocket::SocketError)), SLOT(handleSocketError()));
 	isSocketConnected = false;
 	isDbConnected = false;
+	connectionAttemptInProgress = false;
 	dbWorker = NULL;
 	dbWorkerThread = NULL;
 }
@@ -181,10 +182,13 @@ void BSDataSource::connectDBBS(QString host, quint16 port, DBCredentials creds)
 	if (useSocket && !isSocketConnected)
 	{
 		qDebug() << "Connecting socket";
+		emit bsStatusChanged("Connecting...");
 		socket.connectToHost(host, port);
 	}
-	if (useDatabase && !isDbConnected)
+	if (useDatabase && !isDbConnected && !connectionAttemptInProgress)
 	{
+		emit dbStatusChanged("Connecting...");
+		connectionAttemptInProgress = true;
 		qDebug() << "Connecting database";
 		dbWorker = new DatabaseWorker();
 		dbWorkerThread = new QThread();
@@ -206,6 +210,7 @@ void BSDataSource::connectDBBS(QString host, quint16 port, DBCredentials creds)
 		dbWorkerThread->connect(dbWorker, SIGNAL(finished()), SLOT(quit()));
 		dbWorkerThread->connect(dbWorker, SIGNAL(finished()), SLOT(deleteLater()));
 		dbWorker->connect(dbWorker, SIGNAL(finished()), SLOT(deleteLater()));
+		this->connect(dbWorkerThread, SIGNAL(destroyed(QObject*)), SLOT(setWorkerStopped()));
 
 		dbWorkerThread->start();
 		emit connectDBRequested(creds);
@@ -274,6 +279,8 @@ void BSDataSource::setDBConnected(bool connected, QString error)
 	isDbConnected = connected;
 	if (connected)
 	{
+		// Allow new connection attempts
+		connectionAttemptInProgress = false;
 		emit dbStatusChanged(q_("Connected"));
 	}
 	else
@@ -338,6 +345,14 @@ void BSDataSource::setFlightList(QList<FlightID> ids)
 			emit flightRequested(id.mode_s, id.callsign, -1);
 		}
 	}
+}
+
+void BSDataSource::setWorkerStopped()
+{
+	// wait for worker to be destroyed until we attempt to connect again
+	// otherwise  bad things happen
+	connectionAttemptInProgress = false;
+	isDbConnected = false;
 }
 
 void BSDataSource::parseMsg(QByteArray &buf, int start, int end)

@@ -45,6 +45,12 @@ void DatabaseWorker::connectDB(DBCredentials creds)
 	dbConnected = db.open();
 	emit connected(dbConnected, db.lastError().text());
 	qDebug() << "Database connected " << dbConnected << " last error: " << db.lastError();
+	if (!dbConnected)
+	{
+		// If the connection doesn't get established, destroy the worker
+		stop();
+		return;
+	}
 	if (creds.type == QStringLiteral("QSQLITE"))
 	{
 		QStringList tables = db.tables();
@@ -228,6 +234,7 @@ void DatabaseWorker::stop()
 	if (db.isValid())
 	{
 		db.close();
+		QSqlDatabase::removeDatabase(db.connectionName());
 	}
 	dbConnected = false;
 	emit finished();
