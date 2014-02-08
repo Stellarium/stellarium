@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-02-08 11:02+0700\n"
+"POT-Creation-Date: 2014-02-08 11:19+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1541,13 +1541,21 @@ msgstr ""
 msgid "Auto hide vertical button bar"
 msgstr ""
 
-#: src/gui/StelGuiItems.cpp:289 src/gui/StelGuiItems.cpp:697
+#: src/gui/StelGuiItems.cpp:289 src/gui/StelGuiItems.cpp:701
 msgid "Space"
 msgstr ""
 
 #: src/gui/StelGuiItems.cpp:570
 #, c-format, qt-format
 msgid "%1m"
+msgstr ""
+
+#: src/gui/StelGuiItems.cpp:608
+msgid "Field of view"
+msgstr ""
+
+#: src/gui/StelGuiItems.cpp:626
+msgid "Frames per second"
 msgstr ""
 
 #. TRANSLATORS: Short description for Class 1 of the Bortle scale
@@ -8251,8 +8259,8 @@ msgid "Mark the navigational stars"
 msgstr ""
 
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:55
-#: plugins/EquationOfTime/src/EquationOfTime.cpp:92
-#: plugins/EquationOfTime/src/EquationOfTime.cpp:251
+#: plugins/EquationOfTime/src/EquationOfTime.cpp:90
+#: plugins/EquationOfTime/src/EquationOfTime.cpp:249
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:246
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:248
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:257
@@ -8263,18 +8271,18 @@ msgstr ""
 msgid "This plugin shows the solution of the equation of time."
 msgstr ""
 
-#: plugins/EquationOfTime/src/EquationOfTime.cpp:92
+#: plugins/EquationOfTime/src/EquationOfTime.cpp:90
 msgid "Show solution for Equation of Time"
 msgstr ""
 
 #. TRANSLATORS: minutes.
-#: plugins/EquationOfTime/src/EquationOfTime.cpp:253
+#: plugins/EquationOfTime/src/EquationOfTime.cpp:251
 msgctxt "time"
 msgid "m"
 msgstr ""
 
 #. TRANSLATORS: seconds.
-#: plugins/EquationOfTime/src/EquationOfTime.cpp:255
+#: plugins/EquationOfTime/src/EquationOfTime.cpp:253
 msgctxt "time"
 msgid "s"
 msgstr ""
