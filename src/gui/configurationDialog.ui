@@ -965,7 +965,14 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QComboBox" name="deltaTAlgorithmComboBox"/>
+                   <widget class="QComboBox" name="deltaTAlgorithmComboBox">
+                    <property name="editable">
+                     <bool>true</bool>
+                    </property>
+                    <property name="insertPolicy">
+                     <enum>QComboBox::NoInsert</enum>
+                    </property>
+                   </widget>
                   </item>
                   <item>
                    <widget class="QPushButton" name="pushButtonCustomDeltaTEquationDialog">
