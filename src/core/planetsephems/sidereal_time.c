@@ -332,18 +332,18 @@ void get_nutation (double JD, struct ln_nutation * nutation)
  * Formula 11.1, 11.4 pg 83 */
 double get_mean_sidereal_time (double JD)
 {
-    double sidereal;
-    double T;
+	double sidereal;
+	double T;
     
-    T = (JD - 2451545.0) / 36525.0;
+	T = (JD - 2451545.0) / 36525.0;
         
-    /* calc mean angle */
-    sidereal = 280.46061837 + (360.98564736629 * (JD - 2451545.0)) + (0.000387933 * T * T) - (T * T * T / 38710000.0);
+	/* calc mean angle */
+	sidereal = 280.46061837 + (360.98564736629 * (JD - 2451545.0)) + (0.000387933 * T * T) - (T * T * T / 38710000.0);
     
-    /* add a convenient multiple of 360 degrees */
-    sidereal = range_degrees (sidereal);
+	/* add a convenient multiple of 360 degrees */
+	sidereal = range_degrees (sidereal);
 
-    return sidereal;
+	return sidereal;
 } 
 
 
@@ -352,27 +352,34 @@ double get_mean_sidereal_time (double JD)
  * Formula 11.1, 11.4 pg 83 */
 double get_apparent_sidereal_time (double JD)
 {
-   double correction, sidereal;
-   struct ln_nutation nutation;  
+	double correction, sidereal;
+	struct ln_nutation nutation;
    
-   /* get the mean sidereal time */
-   sidereal = get_mean_sidereal_time (JD);
+	/* get the mean sidereal time */
+	sidereal = get_mean_sidereal_time (JD);
         
-   /* add corrections for nutation in longitude and for the true obliquity of 
-   the ecliptic */   
-   get_nutation (JD, &nutation); 
+	/* add corrections for nutation in longitude and for the true obliquity of
+	the ecliptic */
+	get_nutation (JD, &nutation);
     
-   /* GZ: This was the only place where this was used. I added the summation here. */
-   correction = (nutation.longitude * cos ((nutation.ecliptic+nutation.obliquity)*M_PI/180.));
+	/* GZ: This was the only place where this was used. I added the summation here. */
+	correction = (nutation.longitude * cos ((nutation.ecliptic+nutation.obliquity)*M_PI/180.));
 
-   sidereal += correction;
+	sidereal += correction;
    
-   return (sidereal);
+	return (sidereal);
 }
 
 double get_mean_ecliptical_obliquity(double JDE)
 {
-  struct ln_nutation nutation;
-  get_nutation(JDE, &nutation);
-  return nutation.ecliptic;
+	struct ln_nutation nutation;
+	get_nutation(JDE, &nutation);
+	return nutation.ecliptic;
+}
+
+double get_nutation_longitude(double JDE)
+{
+	struct ln_nutation nutation;
+	get_nutation(JDE, &nutation);
+	return nutation.longitude;
 }
