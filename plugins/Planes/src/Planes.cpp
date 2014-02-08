@@ -312,5 +312,6 @@ StelPluginInfo PlanesStelPluginInterface::getPluginInfo() const
 	info.authors = N_("Felix Zeltner");
 	info.contact = QStringLiteral("");
 	info.description = N_("Display flight trajectories from ADS-B tracking data.");
+	info.version = PLANES_PLUGIN_VERSION;
 	return info;
 }
