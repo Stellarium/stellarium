@@ -164,6 +164,9 @@ private slots:
 	//! @param ids a list of IDs of the form modeS + callsign
 	void setFlightList(QList<FlightID> ids);
 
+	//! The worker stopped and was destroyed
+	void setWorkerStopped();
+
 
 private:
 	//! Parse a message received on the TCP socket
@@ -186,6 +189,7 @@ private:
 	bool dumpOldFlights;
 	bool isDbConnected;
 	bool isSocketConnected;
+	bool connectionAttemptInProgress;
 	//!@}
 
 	QThread *dbWorkerThread; //!< DatabaseWorker thread to make database access asynchronous

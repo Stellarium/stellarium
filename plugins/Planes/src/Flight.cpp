@@ -155,7 +155,10 @@ QString Flight::getInfoString(const StelCore *core, const StelObject::InfoString
 	}
 	if (flags & Extra)
 	{
-		ss << q_("Country: ") << data->getCountry() << br;
+		if (data->getCountry() != QStringLiteral("N/A"))
+		{
+			ss << q_("Country: ") << data->getCountry() << br;
+		}
 		if (currentFrame)
 		{
 			// TRANSLATORS: Is the plane on the ground or not
