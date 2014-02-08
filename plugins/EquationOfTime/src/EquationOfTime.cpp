@@ -61,9 +61,7 @@ StelPluginInfo EquationOfTimeStelPluginInterface::getPluginInfo() const
 }
 
 EquationOfTime::EquationOfTime()
-	: flagShowSolutionEquationOfTime(false),
-	  flagUseMsFormat(false),
-	  toolbarButton(NULL)
+	: toolbarButton(NULL)
 {
 	setObjectName("EquationOfTime");
 	mainWindow = new EquationOfTimeWindow();
