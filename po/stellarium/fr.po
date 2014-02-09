@@ -18,13 +18,13 @@ msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-02-08 11:19+0700\n"
-"PO-Revision-Date: 2014-02-05 19:38+0000\n"
+"PO-Revision-Date: 2014-02-08 11:22+0000\n"
 "Last-Translator: Nicolas Martignoni <Unknown>\n"
 "Language-Team: <fr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-02-08 05:31+0000\n"
+"X-Launchpad-Export-Date: 2014-02-09 05:55+0000\n"
 "X-Generator: Launchpad (build 16916)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:106 src/core/modules/StarMgr.cpp:337
@@ -1710,11 +1710,11 @@ msgstr "%1 m"
 
 #: src/gui/StelGuiItems.cpp:608
 msgid "Field of view"
-msgstr ""
+msgstr "Champ de vision"
 
 #: src/gui/StelGuiItems.cpp:626
 msgid "Frames per second"
-msgstr ""
+msgstr "Images par seconde"
 
 #. TRANSLATORS: Short description for Class 1 of the Bortle scale
 #: src/gui/ViewDialog.cpp:297
@@ -2416,7 +2416,7 @@ msgstr "Polynésienne"
 
 #: src/translations.h:182
 msgid "Romanian"
-msgstr ""
+msgstr "Roumain"
 
 #: src/translations.h:183
 msgid "Sami"
@@ -8806,31 +8806,31 @@ msgstr "Marquer les étoiles utilisées en navigation"
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:248
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:257
 msgid "Equation of Time"
-msgstr ""
+msgstr "Équation du temps"
 
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:58
 msgid "This plugin shows the solution of the equation of time."
-msgstr ""
+msgstr "Ce plugin affiche l'équation du temps"
 
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:90
 msgid "Show solution for Equation of Time"
-msgstr ""
+msgstr "Affiche l'équation du temps"
 
 #. TRANSLATORS: minutes.
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:251
 msgctxt "time"
 msgid "m"
-msgstr ""
+msgstr "min"
 
 #. TRANSLATORS: seconds.
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:253
 msgctxt "time"
 msgid "s"
-msgstr ""
+msgstr "s"
 
 #: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:79
 msgid "Equation of Time plug-in"
-msgstr ""
+msgstr "Plugin équation du temps"
 
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:250
 msgid ""
@@ -8844,22 +8844,31 @@ msgid ""
 "always followed. Anyone who makes use of a published table or graph should "
 "first check its sign usage."
 msgstr ""
+"L'équation du temps est la différence entre le temps solaire moyen et le "
+"temps solaire vrai. Le temps solaire moyen est basé sur la position du "
+"soleil moyen, objet fictif qui se déplacerait sur l'équateur à une vitesse "
+"constante, de sorte que la durée du jour solaire moyen soit de 24 heures "
+"exactement. Le temps solaire vrai est une mesure du temps basée sur la "
+"position réelle du Soleil. Le signe de l'équation du temps n'est pas "
+"universellement défini . En France, une valeur positive de l'équation du "
+"temps indique habituellement que le soleil vrai est en retard sur le soleil "
+"moyen. Dans d'autres pays, c'est le contraire."
 
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:252
 msgid "Font size:"
-msgstr ""
+msgstr "Taille de police :"
 
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:253
 msgid "Show plug-ins button on toolbar"
-msgstr ""
+msgstr "Afficher le bouton équation du temps dans la barre d'outils"
 
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:255
 msgid "Use minutes and seconds"
-msgstr ""
+msgstr "Indiquer minutes et secondes"
 
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:256
 msgid "Change sign of equation"
-msgstr ""
+msgstr "Changer le signe de l'équation du temps"
 
 #~ msgid "Date & Time"
 #~ msgstr "Date & Heure"
