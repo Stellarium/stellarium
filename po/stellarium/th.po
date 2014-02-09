@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: Thai for stellarium 0.8.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-02-08 11:19+0700\n"
-"PO-Revision-Date: 2014-02-07 08:06+0000\n"
+"PO-Revision-Date: 2014-02-09 04:21+0000\n"
 "Last-Translator: Worachate Boonplod <Unknown>\n"
 "Language-Team: MicKi Alone <Need24Get@msn.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-02-08 05:41+0000\n"
+"X-Launchpad-Export-Date: 2014-02-09 06:10+0000\n"
 "X-Generator: Launchpad (build 16916)\n"
 "X-Poedit-Country: THAILAND\n"
 "X-Poedit-Language: Thai\n"
@@ -80,12 +80,12 @@ msgstr "ระนาบดาราจักร"
 #: src/core/modules/GridLinesMgr.cpp:681
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:326
 msgid "Equatorial grid"
-msgstr "กริดศูนย์สูตร"
+msgstr "กริดพิกัดศูนย์สูตร"
 
 #: src/core/modules/GridLinesMgr.cpp:682 src/ui_viewDialog.h:1295
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:321
 msgid "Azimuthal grid"
-msgstr "เส้นพิกัดภาคทิศ"
+msgstr "กริดพิกัดขอบฟ้า"
 
 #: src/core/modules/GridLinesMgr.cpp:683
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:341
@@ -110,16 +110,16 @@ msgstr "เส้นขอบฟ้า"
 #: src/core/modules/GridLinesMgr.cpp:687
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:331
 msgid "Equatorial J2000 grid"
-msgstr "กริดศูนย์สูตร J2000"
+msgstr "กริดพิกัดศูนย์สูตร J2000"
 
 #: src/core/modules/GridLinesMgr.cpp:688
 msgid "Ecliptic J2000 grid"
-msgstr "กริดสุริยวิถี J2000"
+msgstr "กริดพิกัดสุริยวิถี J2000"
 
 #: src/core/modules/GridLinesMgr.cpp:689 src/ui_viewDialog.h:1296
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:360
 msgid "Galactic grid"
-msgstr "กริดกาแล็กซี"
+msgstr "กริดพิกัดดาราจักร"
 
 #: src/core/modules/GridLinesMgr.cpp:690 src/ui_viewDialog.h:1316
 msgid "Galactic plane"
@@ -1187,12 +1187,12 @@ msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
 msgstr ""
-"เสร็จสิ้นการดาวน์โหลดแค็ตตาล็อกดาวใหม่!\n"
+"เสร็จสิ้นการดาวน์โหลดบัญชีดาวใหม่!\n"
 "เริ่ม Stellarium ใหม่เพื่อแสดง"
 
 #: src/gui/ConfigurationDialog.cpp:917
 msgid "All available star catalogs have been installed."
-msgstr "แค็ตตาล็อกดาวฤกษ์ที่มีอยู่ทั้งหมดได้รับการติดตั้งแล้ว"
+msgstr "บัญชีดาวที่มีอยู่ทั้งหมดได้รับการติดตั้งแล้ว"
 
 #: src/gui/ConfigurationDialog.cpp:922
 #, qt-format
@@ -1642,56 +1642,56 @@ msgstr "%1 ม."
 
 #: src/gui/StelGuiItems.cpp:608
 msgid "Field of view"
-msgstr ""
+msgstr "ขอบเขตภาพ"
 
 #: src/gui/StelGuiItems.cpp:626
 msgid "Frames per second"
-msgstr ""
+msgstr "เฟรมต่อวินาที"
 
 #. TRANSLATORS: Short description for Class 1 of the Bortle scale
 #: src/gui/ViewDialog.cpp:297
 msgid "Excellent dark-sky site"
-msgstr ""
+msgstr "สถานที่ซึ่งท้องฟ้ามืดสนิทอย่างดีเยี่ยม"
 
 #. TRANSLATORS: Short description for Class 2 of the Bortle scale
 #: src/gui/ViewDialog.cpp:299
 msgid "Typical truly dark site"
-msgstr ""
+msgstr "สถานที่ซึ่งท้องฟ้ามืดสนิท"
 
 #. TRANSLATORS: Short description for Class 3 of the Bortle scale
 #: src/gui/ViewDialog.cpp:301
 msgid "Rural sky"
-msgstr ""
+msgstr "ท้องฟ้าแบบชนบท"
 
 #. TRANSLATORS: Short description for Class 4 of the Bortle scale
 #: src/gui/ViewDialog.cpp:303
 msgid "Rural/suburban transition"
-msgstr ""
+msgstr "ท้องฟ้าระหว่างชนบทกับชานเมือง"
 
 #. TRANSLATORS: Short description for Class 5 of the Bortle scale
 #: src/gui/ViewDialog.cpp:305
 msgid "Suburban sky"
-msgstr ""
+msgstr "ท้องฟ้าแถบชานเมือง"
 
 #. TRANSLATORS: Short description for Class 6 of the Bortle scale
 #: src/gui/ViewDialog.cpp:307
 msgid "Bright suburban sky"
-msgstr ""
+msgstr "ท้องฟ้าแถบชานเมืองที่สว่าง"
 
 #. TRANSLATORS: Short description for Class 7 of the Bortle scale
 #: src/gui/ViewDialog.cpp:309
 msgid "Suburban/urban transition"
-msgstr ""
+msgstr "ท้องฟ้าระหว่างชานเมืองกับในเมือง"
 
 #. TRANSLATORS: Short description for Class 8 of the Bortle scale
 #: src/gui/ViewDialog.cpp:311
 msgid "City sky"
-msgstr ""
+msgstr "ท้องฟ้าในเมือง"
 
 #. TRANSLATORS: Short description for Class 9 of the Bortle scale
 #: src/gui/ViewDialog.cpp:313
 msgid "Inner-city sky"
-msgstr ""
+msgstr "ท้องฟ้าในเมืองชั้นใน"
 
 #: src/gui/ViewDialog.cpp:327
 msgid "The naked-eye limiting magnitude is"
@@ -2203,7 +2203,7 @@ msgstr "ไฮเจีย"
 #. TRANSLATORS: Asteroid (41) Daphne
 #: src/translations.h:123
 msgid "Daphne"
-msgstr ""
+msgstr "แดฟนี"
 
 #. TRANSLATORS: Asteroid (1221) Amor
 #: src/translations.h:125
@@ -2346,7 +2346,7 @@ msgstr "โพลีนีเชีย"
 
 #: src/translations.h:182
 msgid "Romanian"
-msgstr ""
+msgstr "โรมาเนีย"
 
 #: src/translations.h:183
 msgid "Sami"
@@ -4042,11 +4042,11 @@ msgstr "ขยายขนาดดวงจันทร์"
 
 #: src/ui_viewDialog.h:1244
 msgid "Scale factor"
-msgstr ""
+msgstr "ตัวประกอบมาตราส่วน"
 
 #: src/ui_viewDialog.h:1247
 msgid "Automatic change of landscape when planet is changed"
-msgstr ""
+msgstr "เปลี่ยนภูมิทัศน์โดยอัตโนมัติเมื่อเปลี่ยนดาวอันเป็นที่ตั้ง"
 
 #: src/ui_viewDialog.h:1249
 msgid "Auto select landscapes"
@@ -4102,7 +4102,7 @@ msgstr "ดาวตก"
 
 #: src/ui_viewDialog.h:1268
 msgid "Hourly zenith rate"
-msgstr "อัตราตกรายชั่วโมงที่จุดเหนือศีรษะ"
+msgstr "อัตราตกรายชั่วโมงเมื่อจุดกระจายอยู่ที่จุดจอมฟ้า (เหนือศีรษะ)"
 
 #: src/ui_viewDialog.h:1270
 msgctxt "Zenithal Hourly Rate"
@@ -4111,7 +4111,7 @@ msgstr "ZHR:"
 
 #: src/ui_viewDialog.h:1271
 msgid "1000"
-msgstr ""
+msgstr "1000"
 
 #: src/ui_viewDialog.h:1274
 msgid "Limit Magnitudes (for unaided/binocular observers)"
@@ -4163,15 +4163,15 @@ msgstr "ทรงกลมท้องฟ้า"
 
 #: src/ui_viewDialog.h:1292
 msgid "Equatorial grid (on J2000)"
-msgstr ""
+msgstr "กริดพิกัดศูนย์สูตร (จุดเริ่มยุค J2000)"
 
 #: src/ui_viewDialog.h:1293
 msgid "Equatorial grid (on date)"
-msgstr ""
+msgstr "กริดพิกัดศูนย์สูตร (ของวัน)"
 
 #: src/ui_viewDialog.h:1294
 msgid "Ecliptic grid (on J2000)"
-msgstr ""
+msgstr "กริดพิกัดสุริยวิถี (จุดเริ่มยุค J2000)"
 
 #: src/ui_viewDialog.h:1298
 msgid "Show equator line"
@@ -4239,13 +4239,16 @@ msgstr "ภาษาของโปรแกรม"
 
 #: src/ui_configurationDialog.h:995
 msgid "Check updates"
-msgstr ""
+msgstr "ตรวจสอบการปรับปรุงข้อมูล"
 
 #: src/ui_configurationDialog.h:996
 msgid ""
 "Enable checking updates of Stellarium via Internet. Info for updates of "
 "stable versions you can look on the tab \"About\" of \"Help\" window."
 msgstr ""
+"ตรวจสอบเพื่อปรับปรุงข้อมูลที่ใช้ใน Stellarium ผ่านอินเทอร์เน็ต "
+"สำหรับข้อมูลการปรับปรุงโปรแกรมรุ่นเสถียร ให้ดูที่แท็บ \"เกี่ยวกับ\" "
+"ในหน้าต่าง \"วิธีใช้\""
 
 #: src/ui_configurationDialog.h:997
 msgid "Default options"
@@ -4349,7 +4352,7 @@ msgstr "ไรต์แอสเซนชัน/เดคลิเนชัน (
 
 #: src/ui_configurationDialog.h:1036
 msgid "Catalog number(s)"
-msgstr "หมายเลขแค็ตตาล็อก"
+msgstr "หมายเลขบัญชี"
 
 #: src/ui_configurationDialog.h:1038
 msgid "Geocentric equatorial coordinates, equinox of J2000.0"
@@ -4420,10 +4423,12 @@ msgstr "ระยะห่าง"
 msgid ""
 "Ecliptic topocentric coordinates, equinox of date and J2000 (only for Earth)"
 msgstr ""
+"พิกัดสุริยวิถีจากผิวโลก สำหรับวิษุวัตของวันและจุดเริ่มยุค J2000 "
+"(สำหรับโลกเท่านั้น)"
 
 #: src/ui_configurationDialog.h:1068
 msgid "Ecliptic coordinates"
-msgstr ""
+msgstr "พิกัดสุริยวิถี"
 
 #: src/ui_configurationDialog.h:1069
 msgid "Control"
@@ -4586,7 +4591,7 @@ msgstr "กลับสี"
 
 #: src/ui_configurationDialog.h:1141
 msgid "Star catalog updates"
-msgstr "ปรับปรุงแค็ตตาล็อกดาว"
+msgstr "ปรับปรุงบัญชีดาว"
 
 #: src/ui_configurationDialog.h:1143
 msgid "Click here to start downloading"
@@ -5245,11 +5250,11 @@ msgstr "วงกลมมาตราส่วนภาพ"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1050
 msgid "Apply limits stellar magnitude for different apertures of telescopes"
-msgstr ""
+msgstr "กำหนดขอบเขตโชติมาตรของดาวสำหรับหน้ากล้องโทรทรรศน์ที่มีขนาดต่างกัน"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1052
 msgid "Limit stellar magnitude"
-msgstr "ขีดจำกัดโชติมาตรของดาว"
+msgstr "ขอบเขตโชติมาตรของดาว"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1053
 msgid "Key mappings"
@@ -5492,7 +5497,7 @@ msgstr "สถานีอวกาศนานาชาติ"
 #: plugins/Satellites/src/Satellite.cpp:229
 #: plugins/Satellites/src/Satellite.cpp:233
 msgid "Catalog #"
-msgstr "หมายเลขในแค็ตตาล็อก"
+msgstr "หมายเลขในบัญชี"
 
 #: plugins/Satellites/src/Satellite.cpp:235
 msgid "International Designator"
@@ -5505,7 +5510,7 @@ msgstr "ดาวเทียม"
 #: plugins/Satellites/src/Satellite.cpp:247
 #, qt-format
 msgid "Approx. magnitude: <b>%1</b>"
-msgstr ""
+msgstr "โชติมาตรโดยประมาณ: <b>%1</b>"
 
 #. TRANSLATORS: Slant range: distance between the satellite and the observer
 #: plugins/Satellites/src/Satellite.cpp:257
@@ -5995,7 +6000,7 @@ msgstr "ความยาวของส่วนที่จางลง:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:713
 msgid "Realistic mode for the artificial satellites"
-msgstr ""
+msgstr "โหมดเหมือนจริงสำหรับดาวเทียม"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:714
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:238
@@ -6045,7 +6050,7 @@ msgstr "บันทึกการเปลี่ยนแปลง"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:732
 msgid "Catalog number:"
-msgstr "หมายเลขในแค็ตตาล็อก:"
+msgstr "หมายเลขในบัญชี:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:734
 msgid "Display the selected satellite(s)"
@@ -7209,7 +7214,7 @@ msgstr "ซูเปอร์โนวาในประวัติศาสต
 
 #: plugins/Supernovae/src/Supernovae.cpp:74
 msgid "This plugin allows you to see some bright historical supernovae."
-msgstr ""
+msgstr "โปรแกรมเสริมนี้แสดงซูเปอร์โนวาที่สว่างในประวัติศาสตร์"
 
 #: plugins/Supernovae/src/Supernovae.cpp:141
 msgid "Historical Supernovae configuration window"
@@ -7235,18 +7240,18 @@ msgstr "โปรแกรมเสริมซูเปอร์โนวาใ
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:112
 msgid "This plugin allows you to see some bright historical supernovae: "
-msgstr ""
+msgstr "โปรแกรมเสริมนี้แสดงซูเปอร์โนวาที่สว่างในประวัติศาสตร์: "
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:114
 #: plugins/Novae/src/gui/NovaeDialog.cpp:116
 #, qt-format
 msgid "This list altogether contains %1 stars."
-msgstr ""
+msgstr "รายการนี้มีดาวทั้งหมด %1 ดวง"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:115
 #, qt-format
 msgid "All those supernovae are brighter %1 at peak of brightness."
-msgstr ""
+msgstr "ซูเปอร์โนวาทั้งหมดนี้สว่างกว่า %1 เมื่อสว่างที่สุด"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:117
 #: plugins/Novae/src/gui/NovaeDialog.cpp:118
@@ -7298,7 +7303,7 @@ msgid ""
 "format of catalog, you can %1get info here%2."
 msgstr ""
 "หากคุณต้องการข้อมูลโดยละเอียดเกี่ยวกับโปรแกรมเสริมนี้ ความเป็นมา "
-"และรูปแบบของแค็ตตาล็อก คุณสามารถอ่านได้%1จากที่นี่%2"
+"และรูปแบบของบัญชี คุณสามารถอ่านได้%1จากที่นี่%2"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:165
 #: plugins/Novae/src/gui/NovaeDialog.cpp:162
@@ -7325,7 +7330,7 @@ msgstr "การตั้งค่าโปรแกรมเสริมซู
 #: plugins/Quasars/src/ui_quasarsDialog.h:260
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:266
 msgid "Update catalog from Internet"
-msgstr "ปรับปรุงแค็ตตาล็อกจากอินเทอร์เน็ต"
+msgstr "ปรับปรุงบัญชีจากอินเทอร์เน็ต"
 
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:233
 #: plugins/Novae/src/ui_novaeDialog.h:236
@@ -7356,11 +7361,11 @@ msgstr "โนวาสว่าง"
 
 #: plugins/Novae/src/Novae.cpp:75 plugins/Novae/src/gui/NovaeDialog.cpp:111
 msgid "A plugin that shows some bright novae in the Milky Way galaxy."
-msgstr ""
+msgstr "โปรแกรมเสริมนี้แสดงโนวาที่สว่างในดาราจักรทางช้างเผือก"
 
 #: plugins/Novae/src/Novae.cpp:136
 msgid "Bright Novae configuration window"
-msgstr ""
+msgstr "หน้าต่างการตั้งค่าโนวาสว่าง"
 
 #: plugins/Novae/src/Nova.cpp:120 plugins/Pulsars/src/Pulsar.cpp:148
 #, qt-format
@@ -7380,21 +7385,24 @@ msgid ""
 "You can find novae via search tool by entering designation of nova or its "
 "common name (e.g. 'Nova Cygni 1975' or 'V1500 Cyg')."
 msgstr ""
+"คุณสามารถหาโนวาด้วยเครื่องมือค้นหา โดยป้อนชื่อทางการหรือชื่อสามัญของโนวา "
+"(เช่น 'Nova Cygni 1975' หรือ 'V1500 Cyg')"
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:114
 msgid "This plugin allows you to see recent bright novae: "
-msgstr ""
+msgstr "โปรแกรมเสริมนี้แสดงโนวาสว่างที่เกิดขึ้นล่าสุด: "
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:117
 #, qt-format
 msgid "All those novae are brighter than %1 at peak of brightness."
-msgstr ""
+msgstr "โนวาทั้งหมดนี้สว่างกว่า %1 เมื่อสว่างที่สุด"
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:119
 msgid ""
 "This plugin uses a very simple model for calculation of light curves for "
 "novae stars."
 msgstr ""
+"โปรแกรมเสริมนี้ใช้แบบจำลองอย่างง่ายที่สุดในการคำนวณกราฟความสว่างของโนวา"
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:120
 #, qt-format
@@ -7402,12 +7410,14 @@ msgid ""
 "This model is based on time for decay by %1 magnitudes from the maximum "
 "value, where %1 is 2, 3, 6 and 9."
 msgstr ""
+"แบบจำลองนี้สร้างขึ้นตามระยะเวลาในการลดความสว่างลง %1 อันดับ จากค่าสูงสุด "
+"เมื่อ %1 มีค่าเท่ากับ 2, 3, 6 และ 9"
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:121
 msgid ""
 "If a nova has no values for decay of magnitude then this plugin will use "
 "generalized values for it."
-msgstr ""
+msgstr "ถ้าข้อมูลโนวาไม่มีค่าการลดความสว่าง โปรแกรมจะใช้ค่าทั่วไป"
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Novae/src/gui/NovaeDialog.cpp:134
@@ -7423,11 +7433,11 @@ msgstr "ข้อมูลโนวาได้รับการปรับป
 
 #: plugins/Novae/src/ui_novaeDialog.h:232
 msgid "Bright Novae Configuration"
-msgstr ""
+msgstr "การตั้งค่าโนวาสว่าง"
 
 #: plugins/Novae/src/ui_novaeDialog.h:233
 msgid "Bright Novae Plug-in Configuration"
-msgstr ""
+msgstr "การตั้งค่าโปรแกรมเสริมโนวาสว่าง"
 
 #: plugins/Quasars/src/Quasars.cpp:71 plugins/Quasars/src/Quasars.cpp:158
 #: plugins/Quasars/src/Quasars.cpp:159
@@ -7478,7 +7488,7 @@ msgstr "Veron+ 2010"
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:123
 #, qt-format
 msgid "The current catalog contains info about %1 quasars."
-msgstr ""
+msgstr "บัญชีปัจจุบันมีข้อมูลพัลซาร์ประมาณ %1 ดวง"
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:134
@@ -7692,7 +7702,7 @@ msgstr ""
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:124
 #, qt-format
 msgid "Current catalog contains info about %1 pulsars."
-msgstr ""
+msgstr "บัญชีปัจจุบันมีข้อมูลพัลซาร์ประมาณ %1 ดวง"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:126
 msgid "Note"
@@ -7762,24 +7772,24 @@ msgstr ""
 #: plugins/Exoplanets/src/Exoplanets.cpp:162
 #: plugins/Exoplanets/src/Exoplanets.cpp:163
 msgid "Exoplanets"
-msgstr "ดาวเคราะห์นอกระบบ"
+msgstr "ดาวเคราะห์ระบบอื่น"
 
 #: plugins/Exoplanets/src/Exoplanets.cpp:76
 msgid ""
 "This plugin plots the position of stars with exoplanets. Exoplanets data is "
 "derived from the 'Extrasolar Planets Encyclopaedia' at exoplanet.eu"
 msgstr ""
-"โปรแกรมเสริมแสดงตำแหน่งดาวฤกษ์ที่มีดาวเคราะห์เป็นบริวาร "
-"ข้อมูลดาวเคราะห์นอกระบบมาจาก 'Extrasolar Planets Encyclopaedia' ที่ "
+"โปรแกรมเสริมแสดงตำแหน่งดาวฤกษ์ที่พบว่ามีดาวเคราะห์เป็นบริวาร "
+"ข้อมูลดาวเคราะห์ระบบอื่นมาจาก 'Extrasolar Planets Encyclopaedia' ที่ "
 "exoplanet.eu"
 
 #: plugins/Exoplanets/src/Exoplanets.cpp:162
 msgid "Show exoplanets"
-msgstr "แสดงดาวเคราะห์นอกระบบ"
+msgstr "แสดงดาวเคราะห์ระบบอื่น"
 
 #: plugins/Exoplanets/src/Exoplanets.cpp:163
 msgid "Exoplanets configuration window"
-msgstr "หน้าต่างการตั้งค่าดาวเคราะห์นอกระบบ"
+msgstr "หน้าต่างการตั้งค่าดาวเคราะห์ระบบอื่น"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:158
 msgid "planetary system"
@@ -7806,7 +7816,7 @@ msgstr "อุณหภูมิยังผล: %1 เคลวิน"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:210
 msgid "Exoplanet"
-msgstr "ดาวเคราะห์นอกระบบ"
+msgstr "ดาวเคราะห์ระบบอื่น"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:211
 msgid "Period"
@@ -7847,12 +7857,12 @@ msgstr "ค.ศ. ที่ค้นพบ"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:219
 msgid "Habitable class"
-msgstr ""
+msgstr "ชั้นการอยู่อาศัยได้"
 
 #. TRANSLATORS: Full phrase is "Mean Surface Temperature"
 #: plugins/Exoplanets/src/Exoplanet.cpp:221
 msgid "Mean surface temp."
-msgstr ""
+msgstr "อุณหภูมิพื้นผิวเฉลี่ย"
 
 #. TRANSLATORS: ESI = Earth Similarity Index
 #: plugins/Exoplanets/src/Exoplanet.cpp:223
@@ -7861,7 +7871,7 @@ msgstr "ESI"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:121
 msgid "Exoplanets Plug-in"
-msgstr "โปรแกรมเสริมดาวเคราะห์นอกระบบ"
+msgstr "โปรแกรมเสริมดาวเคราะห์ระบบอื่น"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:125
 #, qt-format
@@ -7879,6 +7889,9 @@ msgid ""
 "from \"%1The Habitable Exoplanets Catalog%3\" by %2Planetary Habitability "
 "Laboratory%3."
 msgstr ""
+"รายการและข้อมูลดาวเคราะห์ระบบอื่นที่คาดว่าสิ่งมีชีวิตสามารถอาศัยอยู่ได้ "
+"มาจาก \"%1The Habitable Exoplanets Catalog%3\" โดย %2Planetary Habitability "
+"Laboratory%3"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:128
 #, qt-format
@@ -7886,6 +7899,8 @@ msgid ""
 "The current catalog contains info about %1 planetary systems, which "
 "altogether have %2 exoplanets."
 msgstr ""
+"บัญชีปัจจุบันมีข้อมูลเกี่ยวกับระบบดาวเคราะห์ %1 ระบบ "
+"คิดเป็นดาวเคราะห์ระบบอื่นรวมทั้งสิ้น %2 ดวง"
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:139
@@ -7894,10 +7909,12 @@ msgid ""
 "If you want to read full information about the plugin, its history and "
 "format of the catalog you can %1get info here%2."
 msgstr ""
+"ถ้าคุณต้องการอ่านข้อมูลเต็มเกี่ยวกับโปรแกรมเสริม ความเป็นมา "
+"และรูปแบบของบัญชี คุณสามารถ%1อ่านได้จากที่นี่%2"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:152
 msgid "Potential habitable exoplanets"
-msgstr ""
+msgstr "ดาวเคราะห์ระบบอื่นที่คาดว่าสิ่งมีชีวิตสามารถอาศัยอยู่ได้"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:153
 msgid ""
@@ -7905,10 +7922,13 @@ msgid ""
 "some information about those planets - habitable class, mean surface "
 "temperature and Earth Similarity Index."
 msgstr ""
+"โปรแกรมเสริมนี้สามารถแสดงดาวเคราะห์ระบบอื่นที่คาดว่าสิ่งมีชีวิตสามารถอยู่อาศั"
+"ยได้ (สีส้ม) และข้อมูลเกี่ยวกับดาวเคราะห์นั้น ได้แก่ "
+"ชั้นความสามารถในการอยู่อาศัยได้ อุณหภูมิพื้นผิวเฉลี่ย และดัชนีภาวะคล้ายโลก"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:154
 msgid "Habitable Class"
-msgstr ""
+msgstr "ชั้นความสามารถในการอยู่อาศัยได้"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:154
 msgid ""
@@ -7919,10 +7939,19 @@ msgid ""
 "life, whereas class O or E would only support extremophilic life. Non-"
 "habitable planets are simply given the class X (or NH)."
 msgstr ""
+"จำแนกดาวเคราะห์ระบบอื่นที่คาดว่าสิ่งมีชีวิตสามารถอาศัยอยู่ได้โดยดูจากอุณหภูมิ"
+" ดังนี้ hypopsychroplanets (O หรือ hP) = หนาวเย็นมาก (ต่ำกว่า −50°C), "
+"psychroplanets (P) = หนาวเย็น, mesoplanets (M) = อุณหภูมิปานกลาง (0–50°C), "
+"thermoplanets (T) = ร้อน, hyperthermoplanets (E หรือ hT) = ร้อนมาก (สูงเกิน "
+"100°C) ดาวเคราะห์ในกลุ่ม mesoplanet "
+"ถือเป็นภาวะที่เหมาะสำหรับสิ่งมีชีวิตที่ซับซ้อน ดาวเคราะห์ในชั้น O หรือ E "
+"เหมาะกับสิ่งมีชีวิตในภาวะสุดโต่งเท่านั้น "
+"ส่วนดาวเคราะห์ระบบอื่นที่คาดว่าสิ่งมีชีวิตไม่สามารถอาศัยอยู่ได้จัดเป็นชั้น X "
+"(หรือ NH)"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:155
 msgid "Mean Surface Temperature"
-msgstr ""
+msgstr "อุณหภูมิพื้นผิวเฉลี่ย"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:155
 msgid ""
@@ -7930,10 +7959,13 @@ msgid ""
 "ratio and a greenhouse effect due to 1 percent of CO2 (assuming an albedo of "
 "0.3 in all cases)."
 msgstr ""
+"อุณหภูมิ (°C) จากอัตราส่วนบรรยากาศของโลกต่อมวลของดาวเคราะห์ "
+"และกำหนดให้ปรากฏการณ์เรือนกระจกเกิดจากร้อยละ 1 ของคาร์บอนไดออกไซด์ "
+"(ถือว่าอัตราส่วนสะท้อนมีค่าเท่ากับ 0.3 ในทุกกรณี)"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:156
 msgid "Earth Similarity Index (ESI)"
-msgstr ""
+msgstr "ดัชนีภาวะคล้ายโลก (ESI)"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:156
 msgid ""
@@ -7941,14 +7973,16 @@ msgid ""
 "like. ESI depends on the planet's radius, density, escape velocity, and "
 "surface temperature."
 msgstr ""
+"ภาวะคล้ายโลกมีค่าตั้งแต่ 0 ถึง 1 เมื่อ 1 คือคล้ายโลกมากที่สุด ดัชนี ESI "
+"ขึ้นอยู่กับรัศมี ความหนาแน่น ความเร็วหลุดพ้น และอุณหภูมิพื้นผิวของดาวเคราะห์"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:169
 msgid "General professional Web sites relevant to extrasolar planets"
-msgstr ""
+msgstr "เว็บไซต์เกี่ยวกับดาวเคราะห์ระบบอื่น"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:170
 msgid "Exoplanets: an interactive version of XKCD 1071"
-msgstr ""
+msgstr "Exoplanets: an interactive version of XKCD 1071"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:171
 msgid "HEK (The Hunt for Exomoons with Kepler)"
@@ -7956,15 +7990,15 @@ msgstr "HEK (The Hunt for Exomoons with Kepler)"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:172
 msgid "Exoplanets in binaries and multiple systems (Richard Schwarz)"
-msgstr ""
+msgstr "Exoplanets in binaries and multiple systems (Richard Schwarz)"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:173
 msgid "Naming exoplanets (IAU)"
-msgstr ""
+msgstr "Naming exoplanets (IAU)"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:174
 msgid "Some Astronomers and Groups active in extrasolar planets studies"
-msgstr ""
+msgstr "Some Astronomers and Groups active in extrasolar planets studies"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:174
 msgid "update: 16 April 2012"
@@ -7972,15 +8006,15 @@ msgstr "ปรับปรุง: ๑๖ เมษายน พ.ศ. ๒๕๔�
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:175
 msgid "The Exoplanet Data Explorer"
-msgstr ""
+msgstr "The Exoplanet Data Explorer"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:176
 msgid "The Anglo-Australian Planet Search"
-msgstr ""
+msgstr "The Anglo-Australian Planet Search"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:177
 msgid "Geneva Extrasolar Planet Search Programmes"
-msgstr ""
+msgstr "Geneva Extrasolar Planet Search Programmes"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:178
 msgid "OLBIN (Optical Long-Baseline Interferometry News)"
@@ -7988,59 +8022,59 @@ msgstr "OLBIN (Optical Long-Baseline Interferometry News)"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:179
 msgid "NASA's Exoplanet Exploration Program"
-msgstr ""
+msgstr "NASA's Exoplanet Exploration Program"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:180
 msgid "Pulsar planets"
-msgstr ""
+msgstr "Pulsar planets"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:181
 msgid "The NASA Exoplanet Archive"
-msgstr ""
+msgstr "The NASA Exoplanet Archive"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:182
 msgid "IAU Comission 53: Extrasolar Planets"
-msgstr ""
+msgstr "IAU Comission 53: Extrasolar Planets"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:183
 msgid "ExoMol"
-msgstr ""
+msgstr "ExoMol"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:184
 msgid "The Habitable Zone Gallery"
-msgstr ""
+msgstr "The Habitable Zone Gallery"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:185
 msgid "PlanetQuest - The Search for Another Earth"
-msgstr ""
+msgstr "PlanetQuest - The Search for Another Earth"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:186
 msgid "Open Exoplanet Catalogue"
-msgstr ""
+msgstr "Open Exoplanet Catalogue"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:187
 msgid "The Habitable Exoplanets Catalog"
-msgstr ""
+msgstr "The Habitable Exoplanets Catalog"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:273
 msgid "Exoplanets is updated"
-msgstr "ดาวเคราะห์นอกระบบได้รับการปรับปรุงแล้ว"
+msgstr "ดาวเคราะห์ระบบอื่นได้รับการปรับปรุงแล้ว"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:297
 msgid "Exoplanets Configuration"
-msgstr "การปรับแต่งดาวเคราะห์นอกระบบ"
+msgstr "การปรับแต่งดาวเคราะห์ระบบอื่น"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:298
 msgid "Exoplanets Plug-in Configuration"
-msgstr "การตั้งค่าโปรแกรมเสริมดาวเคราะห์นอกระบบ"
+msgstr "การตั้งค่าโปรแกรมเสริมดาวเคราะห์ระบบอื่น"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:300
 msgid "Update exoplanets data from Internet"
-msgstr "ปรับปรุงข้อมูลดาวเคราะห์นอกระบบจากอินเทอร์เน็ต"
+msgstr "ปรับปรุงข้อมูลดาวเคราะห์ระบบอื่นจากอินเทอร์เน็ต"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:306
 msgid "Settings for exoplanets"
-msgstr "การตั้งค่าสำหรับดาวเคราะห์นอกระบบ"
+msgstr "การตั้งค่าสำหรับดาวเคราะห์ระบบอื่น"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:308
 msgid "Plot all systems with exoplanets without labels"
@@ -8048,19 +8082,19 @@ msgstr "แสดงทุกระบบที่มีดาวเคราะ
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:310
 msgid "Enable display of distribution for exoplanets"
-msgstr "แสดงการกระจายตัวสำหรับดาวเคราะห์นอกระบบ"
+msgstr "แสดงการกระจายตัวของดาวเคราะห์ระบบอื่น"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:312
 msgid "Display exoplanets since their discovery"
-msgstr "แสดงดาวเคราะห์นอกระบบโดยเริ่มตั้งแต่มีการค้นพบ"
+msgstr "แสดงดาวเคราะห์ระบบอื่นโดยเริ่มตั้งแต่มีการค้นพบ"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:314
 msgid "Enable timeline discovery of exoplanets"
-msgstr "แสดงเส้นเวลาการค้นพบดาวเคราะห์นอกระบบ"
+msgstr "แสดงเส้นเวลาการค้นพบดาวเคราะห์ระบบอื่น"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:316
 msgid "Show exoplanets button on toolbar"
-msgstr "แสดงปุ่มดาวเคราะห์นอกระบบบนแถบเครื่องมือ"
+msgstr "แสดงปุ่มดาวเคราะห์ระบบอื่นบนแถบเครื่องมือ"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:320
 msgctxt "tab in plugin windows"
@@ -8537,6 +8571,8 @@ msgid ""
 "This plugin allows stepwise zooming via keyboard shortcuts like in the "
 "<em>Cartes du Ciel</em> planetarium program."
 msgstr ""
+"โปรแกรมเสริมนี้ทำให้สามารถซูมเข้า-ออกด้วยแป้นพิมพ์ลัดแบบเดียวกับโปรแกรม "
+"<em>Cartes du Ciel</em>"
 
 #: plugins/FOV/src/FOV.cpp:83
 #, qt-format
@@ -8555,6 +8591,11 @@ msgid ""
 "feature. You can edit values and use the keyboard for quick-setting of FOV. "
 "All values in degrees."
 msgstr ""
+"โดยปริยาย Stellarium ใช้การซูมอย่างช้า ๆ "
+"โดยการกลิ้งล้อของเมาส์หรือแป้นพิมพ์ลัด "
+"ผู้ใช้บางคนต้องการซูมเป็นขั้นโดยการกำหนดขอบเขตภาพไว้ล่างหน้าอย่างในโปรแกรม "
+"Cartes du Ciel โปรแกรมเสริมนี้ช่วยให้ทำเช่นนั้นได้ "
+"คุณสามารถแก้ไขค่าและใช้แป้นพิมพ์เพื่อตั้งค่าขอบเขตภาพ มีหน่วยเป็นองศา"
 
 #: plugins/NavStars/src/NavStars.cpp:53 plugins/NavStars/src/NavStars.cpp:138
 msgid "Navigational Stars"
@@ -8580,31 +8621,31 @@ msgstr "ทำเครื่องหมายดาวฤกษ์ช่วย
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:248
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:257
 msgid "Equation of Time"
-msgstr ""
+msgstr "สมการเวลา"
 
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:58
 msgid "This plugin shows the solution of the equation of time."
-msgstr ""
+msgstr "โปรแกรมนี้ใช้แสดงผลการคำนวณสมการเวลา"
 
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:90
 msgid "Show solution for Equation of Time"
-msgstr ""
+msgstr "แสดงผลการคำนวณสมการเวลา"
 
 #. TRANSLATORS: minutes.
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:251
 msgctxt "time"
 msgid "m"
-msgstr ""
+msgstr "นาที"
 
 #. TRANSLATORS: seconds.
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:253
 msgctxt "time"
 msgid "s"
-msgstr ""
+msgstr "วินาที"
 
 #: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:79
 msgid "Equation of Time plug-in"
-msgstr ""
+msgstr "โปรแกรมเสริมสมการเวลา"
 
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:250
 msgid ""
@@ -8618,22 +8659,32 @@ msgid ""
 "always followed. Anyone who makes use of a published table or graph should "
 "first check its sign usage."
 msgstr ""
+"สมการเวลาแสดงผลต่างระหว่างเวลาสุริยคติ 2 ชนิด ได้แก่ เวลาสุริยคติปรากฏ "
+"และเวลาสุริยคติปานกลาง เวลาสุริยคติปรากฏอ้างอิงจากตำแหน่งจริงของดวงอาทิตย์ "
+"เวลาสุริยคติปานกลางอ้างอิงจากตำแหน่งดวงอาทิตย์ \"เฉลี่ย\" "
+"ซึ่งเป็นสิ่งที่กำหนดให้หนึ่งวันเท่ากับ 24 ชั่วโมง "
+"โดยทั่วไปไม่มีข้อตกลงในการใช้เครื่องหมาย "
+"บางแหล่งกำหนดให้มีค่าเป็นบวกเมื่อนาฬิกาแดดแสดงเวลาเร็วกว่าเวลาปานกลาง "
+"บางแหล่งกำหนดให้มีค่าเป็นบวกเมื่อเวลาปานกลางแสดงเวลาเร็วกว่านาฬิกาแดด "
+"ในประเทศที่พูดภาษาอังกฤษนิยมใช้แบบแรก แต่ก็ไม่เสมอไป "
+"ผู้ใช้สมการเวลาควรตรวจสอบให้แน่ใจว่าตารางหรือกราฟที่พบในหนังสือกำหนดให้ใช้แบบ"
+"ใด"
 
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:252
 msgid "Font size:"
-msgstr ""
+msgstr "ขนาดตัวอักษร:"
 
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:253
 msgid "Show plug-ins button on toolbar"
-msgstr ""
+msgstr "แสดงปุ่มโปรแกรมเสริมบนแถบเครื่องมือ"
 
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:255
 msgid "Use minutes and seconds"
-msgstr ""
+msgstr "ใช้นาทีและวินาที"
 
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:256
 msgid "Change sign of equation"
-msgstr ""
+msgstr "เปลี่ยนเครื่องมือของสมการ"
 
 #~ msgid "Ecliptic Line"
 #~ msgstr "เส้นสุริยวิถี"
