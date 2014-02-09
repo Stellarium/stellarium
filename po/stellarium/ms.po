@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-02-08 11:19+0700\n"
-"PO-Revision-Date: 2014-01-25 04:28+0000\n"
+"PO-Revision-Date: 2014-02-08 17:16+0000\n"
 "Last-Translator: abuyop <Unknown>\n"
 "Language-Team: Malay <ms@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-02-08 05:37+0000\n"
+"X-Launchpad-Export-Date: 2014-02-09 06:02+0000\n"
 "X-Generator: Launchpad (build 16916)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:106 src/core/modules/StarMgr.cpp:337
@@ -1691,11 +1691,11 @@ msgstr "%1m"
 
 #: src/gui/StelGuiItems.cpp:608
 msgid "Field of view"
-msgstr ""
+msgstr "Medan pandangan"
 
 #: src/gui/StelGuiItems.cpp:626
 msgid "Frames per second"
-msgstr ""
+msgstr "Bingkai per saat"
 
 #. TRANSLATORS: Short description for Class 1 of the Bortle scale
 #: src/gui/ViewDialog.cpp:297
@@ -2396,7 +2396,7 @@ msgstr "Polinesia"
 
 #: src/translations.h:182
 msgid "Romanian"
-msgstr ""
+msgstr "Romania"
 
 #: src/translations.h:183
 msgid "Sami"
@@ -8728,31 +8728,31 @@ msgstr "Tanda bintang bernavigasi"
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:248
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:257
 msgid "Equation of Time"
-msgstr ""
+msgstr "Persamaan Masa"
 
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:58
 msgid "This plugin shows the solution of the equation of time."
-msgstr ""
+msgstr "Pemalam ini menunjukkan penyelesaian bagi persamaan masa."
 
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:90
 msgid "Show solution for Equation of Time"
-msgstr ""
+msgstr "Tunjuk penyelesaian bagi Persamaan Masa"
 
 #. TRANSLATORS: minutes.
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:251
 msgctxt "time"
 msgid "m"
-msgstr ""
+msgstr "m"
 
 #. TRANSLATORS: seconds.
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:253
 msgctxt "time"
 msgid "s"
-msgstr ""
+msgstr "s"
 
 #: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:79
 msgid "Equation of Time plug-in"
-msgstr ""
+msgstr "Pemalam Persamaan Masa"
 
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:250
 msgid ""
@@ -8766,22 +8766,32 @@ msgid ""
 "always followed. Anyone who makes use of a published table or graph should "
 "first check its sign usage."
 msgstr ""
+"Persamaan masa menerangkan ketidakserasian diantara dua jenis masa suria. Ia "
+"adalah masa suria ketara, yang mana menjejak pergerakan langsung matahari, "
+"dan masa suria min, yang menjejak matahari \"min\" khayalan dengan tengah "
+"hari 24 jam berasingan.  Oleh itu, tiada takrifan yang diterima secara "
+"universal bagi persamaan masa. Sesetengah penerbitan menunjukkannya adalah "
+"positif bila jam matahari berada dihadapan jam: yang lain adalah bila jam "
+"mendahului jam matahari. Di dalam dunia penggunaan bahasa Inggeris, "
+"penggunaan yang awal adalah lebih umum, tetapi tidak sepenuhnya diikuti. "
+"Sesiapa sahaja yang menggunakan jadual atau graf tersebut seharusnya "
+"memeriksa terlebih dahulu penggunaan tanda tersebut."
 
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:252
 msgid "Font size:"
-msgstr ""
+msgstr "Saiz fon:"
 
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:253
 msgid "Show plug-ins button on toolbar"
-msgstr ""
+msgstr "Tunjuk butang pemalam pada palang alat"
 
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:255
 msgid "Use minutes and seconds"
-msgstr ""
+msgstr "Guna minit dan saat"
 
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:256
 msgid "Change sign of equation"
-msgstr ""
+msgstr "Ubah isyarat persamaan"
 
 #~ msgid "Set Location "
 #~ msgstr "Tentukan Lokasi "
