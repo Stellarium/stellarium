@@ -765,6 +765,7 @@ void StelCore::returnToHome()
 
 	StelMovementMgr* smmgr = getMovementMgr();
 	smmgr->setViewDirectionJ2000(altAzToJ2000(smmgr->getInitViewingDirection(), StelCore::RefractionOff));
+	smmgr->zoomTo(smmgr->getInitFov(), 1.);
 }
 
 void StelCore::setJDay(double JD)
