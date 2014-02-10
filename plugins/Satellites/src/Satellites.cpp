@@ -1652,9 +1652,12 @@ bool Satellites::isValidRangeDates() const
 {
 	bool ok;
 	double tJD = StelApp::getInstance().getCore()->getJDay();
+	double uJD = StelUtils::getJulianDayFromISO8601String(lastUpdate.toString(Qt::ISODate), &ok);
+	if (lastUpdate.isNull()) // No updates yet?
+		uJD = tJD;
 	// do not draw anything before Oct 4, 1957, 19:28:34GMT ;-)
 	// upper limit for drawing is +5 years after latest update of TLE
-	if ((tJD<2436116.3115) || (tJD>StelUtils::getJulianDayFromISO8601String(lastUpdate.toString(Qt::ISODate), &ok)+1825))
+	if ((tJD<2436116.3115) || (tJD>(uJD+1825)))
 		return false;
 	else
 		return true;
