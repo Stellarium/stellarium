@@ -7,20 +7,20 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-23 19:56+0700\n"
+"POT-Creation-Date: 2014-02-08 11:19+0700\n"
 "PO-Revision-Date: 2013-12-06 16:20+0000\n"
 "Last-Translator: Alexander Wolf <Unknown>\n"
 "Language-Team: Arabic <ar@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-01-24 05:15+0000\n"
-"X-Generator: Launchpad (build 16914)\n"
+"X-Launchpad-Export-Date: 2014-02-08 05:27+0000\n"
+"X-Generator: Launchpad (build 16916)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:106 src/core/modules/StarMgr.cpp:337
 #: src/core/modules/GridLinesMgr.cpp:680 src/core/modules/LandscapeMgr.cpp:342
-#: src/core/modules/NebulaMgr.cpp:123 src/core/modules/SolarSystem.cpp:150
-#: src/core/StelApp.cpp:444 src/core/StelCore.cpp:162
+#: src/core/modules/NebulaMgr.cpp:123 src/core/modules/SolarSystem.cpp:151
+#: src/core/StelApp.cpp:445 src/core/StelCore.cpp:162
 #: src/core/StelSkyLayerMgr.cpp:87 src/StelMainView.cpp:301
 msgid "Display Options"
 msgstr "اختيارات العرض"
@@ -157,31 +157,31 @@ msgstr ", %1 متر"
 msgid "Planet: "
 msgstr "كوكب: "
 
-#: src/core/modules/Nebula.cpp:102 src/core/modules/Planet.cpp:130
-#: src/core/modules/MinorPlanet.cpp:214 src/core/modules/Comet.cpp:147
+#: src/core/modules/Nebula.cpp:102 src/core/modules/Planet.cpp:131
+#: src/core/modules/MinorPlanet.cpp:214 src/core/modules/Comet.cpp:151
 #: src/core/modules/StarWrapper.cpp:50 src/core/modules/StarWrapper.cpp:170
 #: src/core/modules/StarWrapper.cpp:173
 #: plugins/Satellites/src/Satellite.cpp:242
-#: plugins/Supernovae/src/Supernova.cpp:117 plugins/Quasars/src/Quasar.cpp:91
-#: plugins/Pulsars/src/Pulsar.cpp:137 plugins/Exoplanets/src/Exoplanet.cpp:157
+#: plugins/Supernovae/src/Supernova.cpp:122 plugins/Quasars/src/Quasar.cpp:91
+#: plugins/Pulsars/src/Pulsar.cpp:137 plugins/Exoplanets/src/Exoplanet.cpp:158
 #, qt-format
 msgid "Type: <b>%1</b>"
 msgstr "‎النوع:‎ <b>%1</b>"
 
-#: src/core/modules/Nebula.cpp:107 src/core/modules/Planet.cpp:136
-#: src/core/modules/MinorPlanet.cpp:220 src/core/modules/Comet.cpp:153
+#: src/core/modules/Nebula.cpp:107 src/core/modules/Planet.cpp:137
+#: src/core/modules/MinorPlanet.cpp:220 src/core/modules/Comet.cpp:157
 #: src/core/modules/StarWrapper.cpp:56 src/core/modules/StarWrapper.cpp:180
-#: plugins/Supernovae/src/Supernova.cpp:122 plugins/Novae/src/Nova.cpp:125
-#: plugins/Quasars/src/Quasar.cpp:97 plugins/Exoplanets/src/Exoplanet.cpp:166
+#: plugins/Supernovae/src/Supernova.cpp:127 plugins/Novae/src/Nova.cpp:125
+#: plugins/Quasars/src/Quasar.cpp:97 plugins/Exoplanets/src/Exoplanet.cpp:167
 #, qt-format
 msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>)"
 msgstr "‎القدر‎: <b>%1</b> (منطفيء إلى : <b>%2</b>)"
 
-#: src/core/modules/Nebula.cpp:110 src/core/modules/Planet.cpp:139
-#: src/core/modules/MinorPlanet.cpp:223 src/core/modules/Comet.cpp:156
+#: src/core/modules/Nebula.cpp:110 src/core/modules/Planet.cpp:140
+#: src/core/modules/MinorPlanet.cpp:223 src/core/modules/Comet.cpp:160
 #: src/core/modules/StarWrapper.cpp:60 src/core/modules/StarWrapper.cpp:183
-#: plugins/Supernovae/src/Supernova.cpp:125 plugins/Novae/src/Nova.cpp:128
-#: plugins/Quasars/src/Quasar.cpp:102 plugins/Exoplanets/src/Exoplanet.cpp:171
+#: plugins/Supernovae/src/Supernova.cpp:129 plugins/Novae/src/Nova.cpp:128
+#: plugins/Quasars/src/Quasar.cpp:102 plugins/Exoplanets/src/Exoplanet.cpp:172
 #, qt-format
 msgid "Magnitude: <b>%1</b>"
 msgstr "‎القدر:‎ <b>%1</b>"
@@ -231,73 +231,73 @@ msgstr "نوع غير موثَق"
 msgid "Deep-sky objects"
 msgstr "أجرام الفضاء السحيق"
 
-#: src/core/modules/Planet.cpp:142 src/core/modules/MinorPlanet.cpp:233
-#: src/core/modules/MinorPlanet.cpp:237 src/core/modules/Comet.cpp:165
+#: src/core/modules/Planet.cpp:143 src/core/modules/MinorPlanet.cpp:233
+#: src/core/modules/MinorPlanet.cpp:237 src/core/modules/Comet.cpp:169
 #: src/core/modules/StarWrapper.cpp:187 plugins/Quasars/src/Quasar.cpp:106
 #, qt-format
 msgid "Absolute Magnitude: %1"
 msgstr "‎القدر المطلق:‎ %1"
 
-#: src/core/modules/Planet.cpp:151
+#: src/core/modules/Planet.cpp:152
 #, qt-format
 msgid "Obliquity (of date, for Earth): %1"
 msgstr "‎زاوية الميل على المدار‎(الحالية للأرض‎): %1"
 
-#: src/core/modules/Planet.cpp:161 src/core/modules/MinorPlanet.cpp:250
-#: src/core/modules/Comet.cpp:195
+#: src/core/modules/Planet.cpp:162 src/core/modules/MinorPlanet.cpp:250
+#: src/core/modules/Comet.cpp:199
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 km)"
 msgstr "‎‎المسافة‎: ‎%1 وحدة فلكية (‎%2 كم‎)"
 
-#: src/core/modules/Planet.cpp:168 src/core/modules/MinorPlanet.cpp:257
-#: src/core/modules/Comet.cpp:202
+#: src/core/modules/Planet.cpp:169 src/core/modules/MinorPlanet.cpp:257
+#: src/core/modules/Comet.cpp:206
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 Mio km)"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:181
+#: src/core/modules/Planet.cpp:182
 #, qt-format
 msgid "Apparent diameter: %1, with rings: %2"
 msgstr "‎القطر الظاهري‎: %1, مع الحلقات‎: %2"
 
-#: src/core/modules/Planet.cpp:187 src/core/modules/MinorPlanet.cpp:265
+#: src/core/modules/Planet.cpp:188 src/core/modules/MinorPlanet.cpp:265
 #, qt-format
 msgid "Apparent diameter: %1"
 msgstr "القطر الظاهري‎: %1"
 
 #. TRANSLATORS: Sidereal (orbital) period for solar system bodies in days and in Julian years (symbol: a)
-#: src/core/modules/Planet.cpp:199 src/core/modules/MinorPlanet.cpp:272
-#: src/core/modules/Comet.cpp:224
+#: src/core/modules/Planet.cpp:200 src/core/modules/MinorPlanet.cpp:272
+#: src/core/modules/Comet.cpp:228
 #, qt-format
 msgid "Sidereal period: %1 days (%2 a)"
 msgstr "‎الدورة النجمية‎: %1‎يوم‎ (%2 a)"
 
-#: src/core/modules/Planet.cpp:202
+#: src/core/modules/Planet.cpp:203
 #, qt-format
 msgid "Sidereal day: %1"
 msgstr "‎اليوم النجمي‎: %1"
 
-#: src/core/modules/Planet.cpp:203
+#: src/core/modules/Planet.cpp:204
 #, qt-format
 msgid "Mean solar day: %1"
 msgstr "‎اليوم الشمسي المتوسط‎: %1"
 
-#: src/core/modules/Planet.cpp:209
+#: src/core/modules/Planet.cpp:210
 #, qt-format
 msgid "Phase Angle: %1"
 msgstr "‎زاوية الطور‎: %1"
 
-#: src/core/modules/Planet.cpp:210
+#: src/core/modules/Planet.cpp:211
 #, qt-format
 msgid "Elongation: %1"
 msgstr "‎الاستطالة‎: %1"
 
-#: src/core/modules/Planet.cpp:211
+#: src/core/modules/Planet.cpp:212
 #, qt-format
 msgid "Phase: %1"
 msgstr "‎الطور‎: %1"
 
-#: src/core/modules/Planet.cpp:212
+#: src/core/modules/Planet.cpp:213
 #, qt-format
 msgid "Illuminated: %1%"
 msgstr "‎الإضاءة‎:%1%"
@@ -307,32 +307,32 @@ msgstr "‎الإضاءة‎:%1%"
 msgid "Provisional designation: %1"
 msgstr "‎التسمية الاصطلاحية المؤقتة: ‎%1"
 
-#: src/core/modules/Comet.cpp:178
+#: src/core/modules/Comet.cpp:182
 #, no-c-format, qt-format
 msgid "Distance from Sun: %1AU (%2 km)"
 msgstr ""
 
-#: src/core/modules/Comet.cpp:185
+#: src/core/modules/Comet.cpp:189
 #, no-c-format, qt-format
 msgid "Distance from Sun: %1AU (%2 Mio km)"
 msgstr ""
 
-#: src/core/modules/Comet.cpp:209
+#: src/core/modules/Comet.cpp:213
 #, no-c-format, qt-format
 msgid "Speed: %1 km/s"
 msgstr ""
 
-#: src/core/modules/SolarSystem.cpp:151
+#: src/core/modules/SolarSystem.cpp:152
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:303
 msgid "Planet labels"
 msgstr "أسماء الكواكب"
 
-#: src/core/modules/SolarSystem.cpp:152
+#: src/core/modules/SolarSystem.cpp:153
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:307
 msgid "Planet orbits"
 msgstr "مدارات الكواكب"
 
-#: src/core/modules/SolarSystem.cpp:153
+#: src/core/modules/SolarSystem.cpp:154
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:311
 msgid "Planet trails"
 msgstr "مسار  الكوكب"
@@ -393,14 +393,14 @@ msgid "Magnitude range: <b>%1</b>%2<b>%3/%4</b> (Photometric system: %5)"
 msgstr "‎نطاق قدر اللمعان:‎ <b>%1</b>%2<b>%3/%4</b> (‎النظام الفوتومتري:‎%5)"
 
 #: src/core/modules/StarWrapper.cpp:216
-#: plugins/Supernovae/src/Supernova.cpp:136 plugins/Novae/src/Nova.cpp:138
-#: plugins/Exoplanets/src/Exoplanet.cpp:186
+#: plugins/Supernovae/src/Supernova.cpp:140 plugins/Novae/src/Nova.cpp:138
+#: plugins/Exoplanets/src/Exoplanet.cpp:187
 #, qt-format
 msgid "Distance: %1 Light Years"
 msgstr "‎المسافة‎: %1 سنة ضوئية"
 
 #: src/core/modules/StarWrapper.cpp:221
-#: plugins/Exoplanets/src/Exoplanet.cpp:181
+#: plugins/Exoplanets/src/Exoplanet.cpp:182
 #, qt-format
 msgid "Spectral Type: %1"
 msgstr "‎النوع الطيفي:‎ %1"
@@ -445,7 +445,7 @@ msgstr "‎مدة الكسوف:‎%1%"
 msgid "Rising time: %1%"
 msgstr "‎وقت الشروق:‎%1%"
 
-#: src/core/StelApp.cpp:444
+#: src/core/StelApp.cpp:445
 msgid "Night mode"
 msgstr "نَسَق الرؤية الليلية"
 
@@ -454,7 +454,7 @@ msgstr "نَسَق الرؤية الليلية"
 msgid "SpaceShip"
 msgstr "السفينة الفضائية"
 
-#: src/core/StelCore.cpp:160 src/gui/StelGui.cpp:176
+#: src/core/StelCore.cpp:160 src/gui/StelGui.cpp:175
 #: src/ui_dateTimeDialogGui.h:297
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:167
 msgid "Date and Time"
@@ -1105,7 +1105,7 @@ msgstr "‎الكسوفي‎(الحالي‎): %1/%2"
 msgid "Deep-sky objects background images"
 msgstr "الصور الخلفية لأجرام الفضاء السحيق"
 
-#: src/core/StelMovementMgr.cpp:106 src/gui/StelGui.cpp:178
+#: src/core/StelMovementMgr.cpp:106 src/gui/StelGui.cpp:177
 #: src/StelMainView.cpp:300
 msgid "Miscellaneous"
 msgstr "منوعات"
@@ -1577,87 +1577,87 @@ msgstr "مصمم الرسومات/أخرى: %1"
 msgid "OSX Developer: %1"
 msgstr "مطور نظام %1 :OSX"
 
-#: src/gui/StelGui.cpp:177
+#: src/gui/StelGui.cpp:176
 msgid "Windows"
 msgstr "النوافذ"
 
-#: src/gui/StelGui.cpp:179
+#: src/gui/StelGui.cpp:178
 msgid "Quit"
 msgstr "خروج"
 
-#: src/gui/StelGui.cpp:180
+#: src/gui/StelGui.cpp:179
 msgid "Speed up the script execution rate"
 msgstr "سرِّع معدل التنفيذ"
 
-#: src/gui/StelGui.cpp:181
+#: src/gui/StelGui.cpp:180
 msgid "Slow down the script execution rate"
 msgstr "بطيء معدل التنفيذ"
 
-#: src/gui/StelGui.cpp:182
+#: src/gui/StelGui.cpp:181
 msgid "Set the normal script execution rate"
 msgstr "اجعل سرعة التنفيذ طبيعية"
 
-#: src/gui/StelGui.cpp:183
+#: src/gui/StelGui.cpp:182
 msgid "Stop script execution"
 msgstr "أوقف تنفيذ السكريبت"
 
-#: src/gui/StelGui.cpp:184
+#: src/gui/StelGui.cpp:183
 msgid "Pause script execution"
 msgstr "جمِّد تنفيذ السكريبت"
 
-#: src/gui/StelGui.cpp:185
+#: src/gui/StelGui.cpp:184
 msgid "Resume script execution"
 msgstr "استأنِف تنفيذ السكريبت"
 
-#: src/gui/StelGui.cpp:188
+#: src/gui/StelGui.cpp:187
 msgid "Script console window"
 msgstr "نافذة شاشة السكريبت"
 
-#: src/gui/StelGui.cpp:191
+#: src/gui/StelGui.cpp:190
 msgid "Help window"
 msgstr "نافذة المساعدة"
 
-#: src/gui/StelGui.cpp:192
+#: src/gui/StelGui.cpp:191
 msgid "Configuration window"
 msgstr "نافذة ضبط الإعدادات"
 
-#: src/gui/StelGui.cpp:193
+#: src/gui/StelGui.cpp:192
 msgid "Search window"
 msgstr "نافذة البحث"
 
-#: src/gui/StelGui.cpp:194
+#: src/gui/StelGui.cpp:193
 msgid "Sky and viewing options window"
 msgstr "نافذة خيارات العرض والسماء"
 
-#: src/gui/StelGui.cpp:195
+#: src/gui/StelGui.cpp:194
 msgid "Date/time window"
 msgstr "نافذة التاريخ/الوقت"
 
-#: src/gui/StelGui.cpp:196
+#: src/gui/StelGui.cpp:195
 msgid "Location window"
 msgstr "نافذة الموقع"
 
-#: src/gui/StelGui.cpp:197
+#: src/gui/StelGui.cpp:196
 msgid "Shortcuts window"
 msgstr "نافذة الاختصارات"
 
-#: src/gui/StelGui.cpp:198
+#: src/gui/StelGui.cpp:197
 msgid "Copy selected object information to clipboard"
 msgstr "انسخ معلومات الجسم المختار إلى الحافظة"
 
-#: src/gui/StelGui.cpp:199
+#: src/gui/StelGui.cpp:198
 msgid "Toggle visibility of GUI"
 msgstr "إظهار وإخفاء شريط الأدوات الرئيس والجانبي"
 
-#: src/gui/StelGui.cpp:205
+#: src/gui/StelGui.cpp:204
 msgid "Auto hide horizontal button bar"
 msgstr "إخفاء تلقائي لشريط الأدوات الأفقي"
 
-#: src/gui/StelGui.cpp:206
+#: src/gui/StelGui.cpp:205
 msgid "Auto hide vertical button bar"
 msgstr "إخفاء تلقائي لشريط الأدوات العمودي"
 
-#: src/gui/StelGuiItems.cpp:289 src/gui/StelGuiItems.cpp:697
+#: src/gui/StelGuiItems.cpp:289 src/gui/StelGuiItems.cpp:701
 msgid "Space"
 msgstr "مفتاح المسافة"
 
@@ -1665,6 +1665,14 @@ msgstr "مفتاح المسافة"
 #, c-format, qt-format
 msgid "%1m"
 msgstr "‏%1 متر"
+
+#: src/gui/StelGuiItems.cpp:608
+msgid "Field of view"
+msgstr ""
+
+#: src/gui/StelGuiItems.cpp:626
+msgid "Frames per second"
+msgstr ""
 
 #. TRANSLATORS: Short description for Class 1 of the Bortle scale
 #: src/gui/ViewDialog.cpp:297
@@ -1908,8 +1916,8 @@ msgstr "نَسَق الشاشة الكاملة"
 msgid "Stellarium %1"
 msgstr "ستيللاريوم %1"
 
-#: src/translations.h:33 plugins/Exoplanets/src/Exoplanet.cpp:197
-#: plugins/Exoplanets/src/Exoplanet.cpp:201
+#: src/translations.h:33 plugins/Exoplanets/src/Exoplanet.cpp:198
+#: plugins/Exoplanets/src/Exoplanet.cpp:202
 msgid "Sun"
 msgstr "الشمس"
 
@@ -1926,12 +1934,12 @@ msgid "Earth"
 msgstr "الأرض"
 
 #. TRANSLATORS: Name of landscape and Earth's satellite
-#: src/translations.h:37 src/translations.h:195
+#: src/translations.h:37 src/translations.h:196
 msgid "Moon"
 msgstr "القمر‎‏"
 
 #. TRANSLATORS: Name of landscape and planet
-#: src/translations.h:38 src/translations.h:203
+#: src/translations.h:38 src/translations.h:204
 msgid "Mars"
 msgstr "المريخ"
 
@@ -2029,7 +2037,7 @@ msgid "Metis"
 msgstr "ميتس"
 
 #. TRANSLATORS: Name of landscape and planet
-#: src/translations.h:62 src/translations.h:205
+#: src/translations.h:62 src/translations.h:206
 msgid "Saturn"
 msgstr "زحل"
 
@@ -2365,215 +2373,219 @@ msgid "Polynesian"
 msgstr "البولونيزي"
 
 #: src/translations.h:182
+msgid "Romanian"
+msgstr ""
+
+#: src/translations.h:183
 msgid "Sami"
 msgstr "السامي"
 
-#: src/translations.h:183
+#: src/translations.h:184
 msgid "Tupi-Guarani"
 msgstr "توبي - جواراني"
 
-#: src/translations.h:184
+#: src/translations.h:185
 msgid "Tongan"
 msgstr "تونغان"
 
-#: src/translations.h:185
+#: src/translations.h:186
 msgid "Western"
 msgstr "الغربي"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:191
+#: src/translations.h:192
 msgid "Guereins"
 msgstr "جيرين"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:193
+#: src/translations.h:194
 msgid "Trees"
 msgstr "أشجار"
 
 #. TRANSLATORS: Landscape name: Hurricane Ridge
-#: src/translations.h:197
+#: src/translations.h:198
 msgid "Hurricane"
 msgstr "مرتفع الإعصار"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:199
+#: src/translations.h:200
 msgid "Ocean"
 msgstr "المحيط"
 
 #. TRANSLATORS: Landscape name: Garching bei Munchen
-#: src/translations.h:201
+#: src/translations.h:202
 msgid "Garching"
 msgstr "جارشينج"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:207
+#: src/translations.h:208
 msgid "Geneva"
 msgstr "جنيف"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:209
+#: src/translations.h:210
 msgid "Grossmugl"
 msgstr "جروسمجل"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:216
+#: src/translations.h:217
 msgid "Landscape Tour"
 msgstr "<P DIR=RTL>جولة في مناظر الرصد"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:218
+#: src/translations.h:219
 msgid "Partial Lunar Eclipse"
 msgstr "<P DIR=RTL>خسوف قمري جزئي"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:220
+#: src/translations.h:221
 msgid "Total Lunar Eclipse"
 msgstr "<P DIR=RTL>خسوف قمري كلّي"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:222
+#: src/translations.h:223
 msgid "Screensaver"
 msgstr "<P DIR=RTL>شاشة توقف"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:224
+#: src/translations.h:225
 msgid "Solar Eclipse 2009"
 msgstr "<P DIR=RTL>كسوف الشمس 2009"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:226
+#: src/translations.h:227
 msgid "Startup Script"
 msgstr "<P DIR=RTL>سكريبت البداية"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:228
+#: src/translations.h:229
 msgid "Zodiac"
 msgstr "<P DIR=RTL>البروج"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:230
+#: src/translations.h:231
 msgid "Mercury Triple Sunrise and Sunset"
 msgstr "<P DIR=RTL>الشروق والغروب الثلاثي للشمس في عطارد"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:232
+#: src/translations.h:233
 msgid "Double eclipse from Deimos in 2017"
 msgstr "<P DIR=RTL>الكسوف المزدوج من ديموس في 2017"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:234
+#: src/translations.h:235
 msgid "Double eclipse from Deimos in 2031"
 msgstr "<P DIR=RTL>الكسوف المزدوج من ديموس في 2031"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:236
+#: src/translations.h:237
 msgid "Eclipse from Olympus Mons Jan 10 2068"
 msgstr "<P DIR=RTL>كسوف من جبل أوليمبوس على المريخ 10 يناير 2068"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:238
+#: src/translations.h:239
 msgid "Occultation of Earth and Jupiter 2048"
 msgstr "<P DIR=RTL>احتجاب الأرض والمشتري عام 2048"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:240
+#: src/translations.h:241
 msgid "3 Transits and 2 Eclipses from Deimos 2027"
 msgstr "3 عبورات وكسوفين من ديموس 2027 م"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:242
+#: src/translations.h:243
 msgid "Solar System Screensaver"
 msgstr "<P DIR=RTL>حافظ شاشة - النظام الشمسي"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:244
+#: src/translations.h:245
 msgid "Constellations Tour"
 msgstr "<P DIR=RTL>رحلة عبر الكوكبات"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:246
+#: src/translations.h:247
 msgid "Sun from different planets"
 msgstr "<P DIR=RTL>الشمس كما تظهر من سطح الكواكب المختلفة"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:248
+#: src/translations.h:249
 msgid "Earth best views from other bodies"
 msgstr "<P DIR=RTL>أفضل المناظر للأرض من الأجرام الأخرى"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:250
+#: src/translations.h:251
 msgid "Transit of Venus"
 msgstr "<P DIR=RTL>عبور الزهرة"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:252
+#: src/translations.h:253
 msgid "Analemma"
 msgstr "<P DIR=RTL>الأناليما"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:254
+#: src/translations.h:255
 msgid "Sky Culture Tour"
 msgstr "جولة في التراثات الفلكية"
 
 #. TRANSLATORS: Name and description of script
-#: src/translations.h:256
+#: src/translations.h:257
 msgid "Earth Events from Mercury"
 msgstr "أحداث كوكب الأرض الفلكية كما تبدو من عطارد"
 
 #. TRANSLATORS: Name and description of script
-#: src/translations.h:258
+#: src/translations.h:259
 msgid "Earth Events from Venus"
 msgstr "أحداث كوكب الأرض الفلكية كما تبدو من الزهرة"
 
 #. TRANSLATORS: Name and description of script
-#: src/translations.h:260
+#: src/translations.h:261
 msgid "Earth Events from Mars"
 msgstr "أحداث كوكب الأرض الفلكية كما تبدو من المريخ"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:262
+#: src/translations.h:263
 msgid "Earth Greatest Elongations and Brilliancies from Mars"
 msgstr "الاستطالة العظمى وسطوع الأرض كما تبدو من المريخ"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:264
+#: src/translations.h:265
 msgid "Earth and Mars Greatest Elongations from Jupiter"
 msgstr "الاستطالة العظمى للأرض والمريخ كما تبدو من المشتري"
 
 #. TRANSLATORS: Description of the landscape tour script.
-#: src/translations.h:270
+#: src/translations.h:271
 msgid "Look around each installed landscape."
 msgstr "<P DIR=RTL>استعرض كل مناظر الرصد المثبتة"
 
 #. TRANSLATORS: Description of the sky culture tour script.
-#: src/translations.h:272
+#: src/translations.h:273
 msgid "Look at each installed sky culture."
 msgstr "استعرض كل تراث فلكي تضمنه البرنامج"
 
-#: src/translations.h:273
+#: src/translations.h:274
 msgid "Script to demonstrate a partial lunar eclipse."
 msgstr "<P DIR=RTL>مثال يعرض خسوف قمري جزئي"
 
-#: src/translations.h:274
+#: src/translations.h:275
 msgid "Script to demonstrate a total lunar eclipse."
 msgstr "<P DIR=RTL>مثال يعرض خسوف قمري كلّي"
 
-#: src/translations.h:275
+#: src/translations.h:276
 msgid "A slow, infinite tour of the sky, looking at random objects."
 msgstr "<P DIR=RTL>جولة لانهائية بطيئة تستعرض أجراماً سماوية عشوائياً"
 
-#: src/translations.h:276
+#: src/translations.h:277
 msgid ""
 "Script to demonstrate a total solar eclipse which has happened in 2009 "
 "(location=Rangpur, Bangladesh)."
 msgstr ""
 "<P DIR=RTL>مثال يستعرض الكسوف الكلّي للشمس عام 2009 في رانغبور بنغلاديش"
 
-#: src/translations.h:277
+#: src/translations.h:278
 msgid "Script which runs automatically at startup"
 msgstr "<P DIR=RTL>سكريبت يُنفّذ تلقائياً عند بدء البرنامج"
 
-#: src/translations.h:278
+#: src/translations.h:279
 msgid ""
 "This script displays the constellations of the Zodiac. That means the "
 "constellations which lie along the line which the Sun traces across the "
@@ -2582,7 +2594,7 @@ msgstr ""
 "<P DIR=RTL>هذا السكريبت يعرض كوكبات البروج. ويعني ذلك الكوكبات التي تقع على "
 "المسار الذي تقطعه الشمس في الكرة السماوية خلال سنة."
 
-#: src/translations.h:279
+#: src/translations.h:280
 msgid ""
 "Due to the quirks in Mercury's orbit and rotation at certain spots the sun "
 "will rise & set 3 different times in one Mercury day."
@@ -2590,7 +2602,7 @@ msgstr ""
 "<P DIR=RTL>بسبب بعض الشذوذات في مدار عطارد ودورانه تشرق الشمس وتغيب في بع "
 "مناطقه 3 مرات مختلفة في اليوم الواحد."
 
-#: src/translations.h:280
+#: src/translations.h:281
 msgid ""
 "Just before Mars eclipses the sun, Phobos pops out from behind and eclipses "
 "it first. Takes place between Scorpio and Sagittarius on April 26, 2017."
@@ -2598,7 +2610,7 @@ msgstr ""
 "<P DIR=RTL>قبل أن يحدث الكسوف بسبب المريخ  بوقت قصير يأتي فوبوس من الخلف "
 "ويتسبب في كسوف أول للشمس. يحدث بين كوكبتي العقرب والقوس في 26 إبريل 2017"
 
-#: src/translations.h:281
+#: src/translations.h:282
 msgid ""
 "Just before Mars eclipses the sun, Phobos pops out from behind and eclipses "
 "it first. Takes place between Taurus and Gemini on July 23, 2031."
@@ -2606,11 +2618,11 @@ msgstr ""
 "<P DIR=RTL>قبل أن يحدث الكسوف بسبب المريخ  بوقت قصير يأتي فوبوس من الخلف "
 "ويتسبب في كسوف أول للشمس. يحدث بين كوكبتي الثور والتوأمين في 23 يوليه 2031"
 
-#: src/translations.h:282
+#: src/translations.h:283
 msgid "Phobos eclipsing the Sun as seen from Olympus Mons on Jan 10, 2068."
 msgstr "قمر فوبوس يكسف الشمس من جبل أولمبس في 10 يناير 2068."
 
-#: src/translations.h:283
+#: src/translations.h:284
 msgid ""
 "Phobos occultations of Earth are common, as are occultations of Jupiter. But "
 "occultations of both on the same day are very rare. Here's one that takes "
@@ -2619,7 +2631,7 @@ msgstr ""
 "حجب فوبوس للأرض أمر شائع وكذلك حجبه للمشتري، ولكن حجب الإثنين في نفس اليوم "
 "أمر نادر. هذا أحد الأحداث في 1-23-2048، بالسرعة الحقيقية."
 
-#: src/translations.h:284
+#: src/translations.h:285
 msgid ""
 "Phobos races ahead of Mars and transits the sun, passes through it and then "
 "retrogrades back towards the sun and just partially transits it again (only "
@@ -2633,36 +2645,36 @@ msgstr ""
 "كليا بينما يعبر فوبوس بالظلام بين المريخ وديموس. عندما يتجلى فوبوس عن المريخ "
 "يكون مكسوفا جزئيا ومعتم بظل المريخ ثم يتعيد ضياءه."
 
-#: src/translations.h:285
+#: src/translations.h:286
 msgid ""
 "Screensaver of various happenings in the Solar System. 187 events in all!"
 msgstr "حافظ للشاشة يعرض 187 حدثاً من الأحداث الفلكية في النظام الشمسي"
 
-#: src/translations.h:286
+#: src/translations.h:287
 msgid "A tour of the western constellations."
 msgstr "جولة في كوكبات التراث الفلكي الغربي"
 
-#: src/translations.h:287
+#: src/translations.h:288
 msgid "Look at the Sun from big planets of Solar System and Pluto."
 msgstr "انظر إلى الشمس من الكواكب الكبرى وبلوتو"
 
-#: src/translations.h:288
+#: src/translations.h:289
 msgid ""
 "Best views of Earth from other Solar System bodies in the 21st Century."
 msgstr ""
 "افضل مناظر الأرض من أجرام النظام الشمسي الأخرى خلال القرن الواحد والعشرين"
 
-#: src/translations.h:289
+#: src/translations.h:290
 msgid "Transit of Venus as seen from Sydney Australia, 6th June 2012."
 msgstr "عبور الزهرة كما شوهد في سيدني استراليا 6 يونيه 2012م."
 
-#: src/translations.h:290
+#: src/translations.h:291
 msgid ""
 "A demonstration of the analemma - the path of the Sun across the sky during "
 "the year."
 msgstr "عرض لظاهرة الاناليما - مسار الشمس السنوي في السماء"
 
-#: src/translations.h:291
+#: src/translations.h:292
 msgid ""
 "Flash of the supernova observed by Tycho Brahe in 1572. The Supernovae "
 "plugin has to be enabled."
@@ -2670,1001 +2682,1001 @@ msgstr ""
 "لمعان المستعر العظيم الذي رصده تايخو براهي في 1572. يجب تفعيل إضافة "
 "المستعرات العظيمة."
 
-#: src/translations.h:292
+#: src/translations.h:293
 msgid "Earth Greatest Elongations and Brilliancies from Mars 2000-3000"
 msgstr ""
 "الاستطالة العظمى وسطوع الأرض كما تبدو من المريخ من سنة 2000 إلى سنة 3000 م"
 
-#: src/translations.h:293
+#: src/translations.h:294
 msgid "Earth Greatest Elongations from Jupiter 2000-3000"
 msgstr ""
 "الاستطالة العظمى للأرض كما تبدو من المشتري من سنة 2000 إلى سنة 3000 م"
 
-#: src/translations.h:297
+#: src/translations.h:298
 msgid "Andorra"
 msgstr "أندورا"
 
-#: src/translations.h:298
+#: src/translations.h:299
 msgid "United Arab Emirates"
 msgstr "الأمارات العربية المتحدة"
 
-#: src/translations.h:299
+#: src/translations.h:300
 msgid "Afghanistan"
 msgstr "أفغانستان"
 
-#: src/translations.h:300
+#: src/translations.h:301
 msgid "Antigua and Barbuda"
 msgstr "[جزر أنتيغوا وباربودا"
 
-#: src/translations.h:301
+#: src/translations.h:302
 msgid "Anguilla"
 msgstr "جزر أنجويللا"
 
-#: src/translations.h:302
+#: src/translations.h:303
 msgid "Albania"
 msgstr "ألبانيا"
 
-#: src/translations.h:303
+#: src/translations.h:304
 msgid "Armenia"
 msgstr "أرمينيا"
 
-#: src/translations.h:304
+#: src/translations.h:305
 msgid "Netherlands Antilles"
 msgstr "جزر الأنتيل الهولندية"
 
-#: src/translations.h:305
+#: src/translations.h:306
 msgid "Angola"
 msgstr "أنجولا"
 
-#: src/translations.h:306
+#: src/translations.h:307
 msgid "Antarctica"
 msgstr "أنتاركتيكا - القارة المتجمدة الجنوبية"
 
-#: src/translations.h:307
+#: src/translations.h:308
 msgid "Argentina"
 msgstr "الأرجنتين"
 
-#: src/translations.h:308
+#: src/translations.h:309
 msgid "American Samoa"
 msgstr "ساموا الأمريكية"
 
-#: src/translations.h:309
+#: src/translations.h:310
 msgid "Austria"
 msgstr "النمسا"
 
-#: src/translations.h:310
+#: src/translations.h:311
 msgid "Australia"
 msgstr "أستراليا"
 
-#: src/translations.h:311
+#: src/translations.h:312
 msgid "Aruba"
 msgstr "أروبا"
 
-#: src/translations.h:312
+#: src/translations.h:313
 msgid "Azerbaijan"
 msgstr "أذربيجان"
 
-#: src/translations.h:313
+#: src/translations.h:314
 msgid "Bosnia and Herzegowina"
 msgstr "البوسنة والهرسك"
 
-#: src/translations.h:314
+#: src/translations.h:315
 msgid "Barbados"
 msgstr "بربادوس"
 
-#: src/translations.h:315
+#: src/translations.h:316
 msgid "Bangladesh"
 msgstr "بنغلادش"
 
-#: src/translations.h:316
+#: src/translations.h:317
 msgid "Belgium"
 msgstr "بلجيكا"
 
-#: src/translations.h:317
+#: src/translations.h:318
 msgid "Burkina Faso"
 msgstr "بوركينا فاسو"
 
-#: src/translations.h:318
+#: src/translations.h:319
 msgid "Bulgaria"
 msgstr "بلغاريا"
 
-#: src/translations.h:319
+#: src/translations.h:320
 msgid "Bahrain"
 msgstr "البحرين"
 
-#: src/translations.h:320
+#: src/translations.h:321
 msgid "Burundi"
 msgstr "بورندي"
 
-#: src/translations.h:321
+#: src/translations.h:322
 msgid "Benin"
 msgstr "بينين"
 
-#: src/translations.h:322
+#: src/translations.h:323
 msgid "Bermuda"
 msgstr "برمودا"
 
-#: src/translations.h:323
+#: src/translations.h:324
 msgid "Brunei Darussalam"
 msgstr "بروناي دار السلام"
 
-#: src/translations.h:324
+#: src/translations.h:325
 msgid "Bolivia"
 msgstr "بوليفيا"
 
-#: src/translations.h:325
+#: src/translations.h:326
 msgid "Brazil"
 msgstr "البرازيل"
 
-#: src/translations.h:326
+#: src/translations.h:327
 msgid "Bahamas"
 msgstr "الباهاما"
 
-#: src/translations.h:327
+#: src/translations.h:328
 msgid "Bhutan"
 msgstr "بهوتان"
 
-#: src/translations.h:328
+#: src/translations.h:329
 msgid "Bouvet Island"
 msgstr "جزيرة بوفيت"
 
-#: src/translations.h:329
+#: src/translations.h:330
 msgid "Botswana"
 msgstr "بوتسوانا"
 
-#: src/translations.h:330
+#: src/translations.h:331
 msgid "Belarus"
 msgstr "بيلاروسيا"
 
-#: src/translations.h:331
+#: src/translations.h:332
 msgid "Belize"
 msgstr "بيليز"
 
-#: src/translations.h:332
+#: src/translations.h:333
 msgid "Canada"
 msgstr "كندا"
 
-#: src/translations.h:333
+#: src/translations.h:334
 msgid "Cocos Islands"
 msgstr "جزيرة كوكوس"
 
-#: src/translations.h:334
+#: src/translations.h:335
 msgid "Democratic Republic of the Congo"
 msgstr "جمهورية الكونغو الديموقراطية"
 
-#: src/translations.h:335
+#: src/translations.h:336
 msgid "Central African Republic"
 msgstr "أفريقيا الوسطى"
 
-#: src/translations.h:336
+#: src/translations.h:337
 msgid "Republic of the Congo"
 msgstr "جمهورية الكونغو"
 
-#: src/translations.h:337
+#: src/translations.h:338
 msgid "Switzerland"
 msgstr "سويسرا"
 
-#: src/translations.h:338
+#: src/translations.h:339
 msgid "Cote d'Ivoire"
 msgstr "ساحل العاج"
 
-#: src/translations.h:339
+#: src/translations.h:340
 msgid "Cook Islands"
 msgstr "جزيرة كوك"
 
-#: src/translations.h:340
+#: src/translations.h:341
 msgid "Chile"
 msgstr "تشيلي"
 
-#: src/translations.h:341
+#: src/translations.h:342
 msgid "Cameroon"
 msgstr "الكاميرون"
 
-#: src/translations.h:342
+#: src/translations.h:343
 msgid "China"
 msgstr "الصين"
 
-#: src/translations.h:343
+#: src/translations.h:344
 msgid "Colombia"
 msgstr "كولومبيا"
 
-#: src/translations.h:344
+#: src/translations.h:345
 msgid "Costa Rica"
 msgstr "كوستاريكا"
 
-#: src/translations.h:345
+#: src/translations.h:346
 msgid "Serbia and Montenegro"
 msgstr "الصرب والجبل الأسود"
 
-#: src/translations.h:346
+#: src/translations.h:347
 msgid "Cuba"
 msgstr "كوبا"
 
-#: src/translations.h:347
+#: src/translations.h:348
 msgid "Cape Verde"
 msgstr "كيب فيردي"
 
-#: src/translations.h:348
+#: src/translations.h:349
 msgid "Christmas Island"
 msgstr "جزيرة الكريسمس"
 
-#: src/translations.h:349
+#: src/translations.h:350
 msgid "Cyprus"
 msgstr "قبرص"
 
-#: src/translations.h:350
+#: src/translations.h:351
 msgid "Czech Republic"
 msgstr "جمهورية التشيك"
 
-#: src/translations.h:351
+#: src/translations.h:352
 msgid "Germany"
 msgstr "ألمانيا"
 
-#: src/translations.h:352
+#: src/translations.h:353
 msgid "Djibouti"
 msgstr "جيبوتي"
 
-#: src/translations.h:353
+#: src/translations.h:354
 msgid "Denmark"
 msgstr "الدانمارك"
 
-#: src/translations.h:354
+#: src/translations.h:355
 msgid "Dominica"
 msgstr "الدومينيك"
 
-#: src/translations.h:355
+#: src/translations.h:356
 msgid "Dominican Republic"
 msgstr "جمهورية الدومينيك"
 
-#: src/translations.h:356
+#: src/translations.h:357
 msgid "Algeria"
 msgstr "الجزائر"
 
-#: src/translations.h:357
+#: src/translations.h:358
 msgid "Ecuador"
 msgstr "الإكوادور"
 
-#: src/translations.h:358
+#: src/translations.h:359
 msgid "Estonia"
 msgstr "إستونيا"
 
-#: src/translations.h:359
+#: src/translations.h:360
 msgid "Egypt"
 msgstr "مصر"
 
-#: src/translations.h:360
+#: src/translations.h:361
 msgid "Western Sahara"
 msgstr "الصحراء الغربية"
 
-#: src/translations.h:361
+#: src/translations.h:362
 msgid "Eritrea"
 msgstr "أرتيريا"
 
-#: src/translations.h:362
+#: src/translations.h:363
 msgid "Spain"
 msgstr "أسبانيا"
 
-#: src/translations.h:363
+#: src/translations.h:364
 msgid "Ethiopia"
 msgstr "أثيوبيا"
 
-#: src/translations.h:364
+#: src/translations.h:365
 msgid "Finland"
 msgstr "فنلندا"
 
-#: src/translations.h:365
+#: src/translations.h:366
 msgid "Fiji"
 msgstr "فيجي"
 
-#: src/translations.h:366
+#: src/translations.h:367
 msgid "Falkland Islands"
 msgstr "جزر الفولكلاند"
 
-#: src/translations.h:367
+#: src/translations.h:368
 msgid "Micronesia"
 msgstr "ميكرونيجا"
 
-#: src/translations.h:368
+#: src/translations.h:369
 msgid "Faroe Islands"
 msgstr "جزر الفارو"
 
-#: src/translations.h:369
+#: src/translations.h:370
 msgid "France"
 msgstr "فرنسا"
 
-#: src/translations.h:370
+#: src/translations.h:371
 msgid "Gabon"
 msgstr "الجابون"
 
-#: src/translations.h:371
+#: src/translations.h:372
 msgid "United Kingdom"
 msgstr "المملكة المتحدة"
 
-#: src/translations.h:372
+#: src/translations.h:373
 msgid "Grenada"
 msgstr "جرانادا"
 
-#: src/translations.h:373
+#: src/translations.h:374
 msgid "Georgia"
 msgstr "جورجيا"
 
-#: src/translations.h:374
+#: src/translations.h:375
 msgid "French Guiana"
 msgstr "غويانا الفرنسية"
 
-#: src/translations.h:375
+#: src/translations.h:376
 msgid "Ghana"
 msgstr "غانا"
 
-#: src/translations.h:376
+#: src/translations.h:377
 msgid "Gibraltar"
 msgstr "جبل طارق"
 
-#: src/translations.h:377
+#: src/translations.h:378
 msgid "Greenland"
 msgstr "جرينلاند"
 
-#: src/translations.h:378
+#: src/translations.h:379
 msgid "Gambia"
 msgstr "جامبيا"
 
-#: src/translations.h:379
+#: src/translations.h:380
 msgid "Guinea"
 msgstr "جويانا"
 
-#: src/translations.h:380
+#: src/translations.h:381
 msgid "Guadeloupe"
 msgstr "الجواديلوب"
 
-#: src/translations.h:381
+#: src/translations.h:382
 msgid "Equatorial Guinea"
 msgstr "جويانا الإستوائية"
 
-#: src/translations.h:382
+#: src/translations.h:383
 msgid "Greece"
 msgstr "اليونان"
 
-#: src/translations.h:383
+#: src/translations.h:384
 msgid "South Georgia and the South Sandwich Islands"
 msgstr "جورجيا الجنوبية وجزر الساندويتش"
 
-#: src/translations.h:384
+#: src/translations.h:385
 msgid "Guatemala"
 msgstr "جواتيمالا"
 
-#: src/translations.h:385
+#: src/translations.h:386
 msgid "Guam"
 msgstr "جوام"
 
-#: src/translations.h:386
+#: src/translations.h:387
 msgid "Guinea-Bissau"
 msgstr "غينيا بيساو"
 
-#: src/translations.h:387
+#: src/translations.h:388
 msgid "Guyana"
 msgstr "جويانا"
 
-#: src/translations.h:388
+#: src/translations.h:389
 msgid "Hong Kong"
 msgstr "هونج كونج"
 
-#: src/translations.h:389
+#: src/translations.h:390
 msgid "Heard Island and McDonald Islands"
 msgstr "جزر هرد ومكدونالد"
 
-#: src/translations.h:390
+#: src/translations.h:391
 msgid "Honduras"
 msgstr "هندوراس"
 
-#: src/translations.h:391
+#: src/translations.h:392
 msgid "Croatia"
 msgstr "كرواتيا"
 
-#: src/translations.h:392
+#: src/translations.h:393
 msgid "Haiti"
 msgstr "هايتي"
 
-#: src/translations.h:393
+#: src/translations.h:394
 msgid "Hungary"
 msgstr "المجر"
 
-#: src/translations.h:394
+#: src/translations.h:395
 msgid "Indonesia"
 msgstr "أندونيسيا"
 
-#: src/translations.h:395
+#: src/translations.h:396
 msgid "Ireland"
 msgstr "إيرلندا"
 
-#: src/translations.h:396
+#: src/translations.h:397
 msgid "Israel"
 msgstr "إسرائيل"
 
-#: src/translations.h:397
+#: src/translations.h:398
 msgid "India"
 msgstr "الهند"
 
-#: src/translations.h:398
+#: src/translations.h:399
 msgid "British Indian Ocean Territory"
 msgstr "مقاطعة المحيط الهندي البريطانية"
 
-#: src/translations.h:399
+#: src/translations.h:400
 msgid "Iraq"
 msgstr "العراق"
 
-#: src/translations.h:400
+#: src/translations.h:401
 msgid "Iran"
 msgstr "إيران"
 
-#: src/translations.h:401
+#: src/translations.h:402
 msgid "Iceland"
 msgstr "ايسلندا"
 
-#: src/translations.h:402
+#: src/translations.h:403
 msgid "Italy"
 msgstr "إيطاليا"
 
-#: src/translations.h:403
+#: src/translations.h:404
 msgid "Jamaica"
 msgstr "جامايكا"
 
-#: src/translations.h:404
+#: src/translations.h:405
 msgid "Jordan"
 msgstr "الأردن"
 
-#: src/translations.h:405
+#: src/translations.h:406
 msgid "Japan"
 msgstr "اليابان"
 
-#: src/translations.h:406
+#: src/translations.h:407
 msgid "Kenya"
 msgstr "كينيا"
 
-#: src/translations.h:407
+#: src/translations.h:408
 msgid "Kyrgyzstan"
 msgstr "قرغيزستان"
 
-#: src/translations.h:408
+#: src/translations.h:409
 msgid "Cambodia"
 msgstr "كمبوديا"
 
-#: src/translations.h:409
+#: src/translations.h:410
 msgid "Kiribati"
 msgstr "كيريباتي"
 
-#: src/translations.h:410
+#: src/translations.h:411
 msgid "Comoros"
 msgstr "القمر"
 
-#: src/translations.h:411
+#: src/translations.h:412
 msgid "Saint Kitts and Nevis"
 msgstr "سانت كتس ونيفس"
 
-#: src/translations.h:412
+#: src/translations.h:413
 msgid "Democratic People's Republic of Korea"
 msgstr "جمهورية كوريا الديموقراطية"
 
-#: src/translations.h:413
+#: src/translations.h:414
 msgid "Republic of Korea"
 msgstr "كوريا"
 
-#: src/translations.h:414
+#: src/translations.h:415
 msgid "Kuwait"
 msgstr "الكويت"
 
-#: src/translations.h:415
+#: src/translations.h:416
 msgid "Cayman Islands"
 msgstr "جزر الكايمان"
 
-#: src/translations.h:416
+#: src/translations.h:417
 msgid "Kazakhstan"
 msgstr "كازاخستان"
 
-#: src/translations.h:417
+#: src/translations.h:418
 msgid "Lao"
 msgstr "لاو"
 
-#: src/translations.h:418
+#: src/translations.h:419
 msgid "Lebanon"
 msgstr "لبنان"
 
-#: src/translations.h:419
+#: src/translations.h:420
 msgid "Saint Lucia"
 msgstr "سانت لوتشيا"
 
-#: src/translations.h:420
+#: src/translations.h:421
 msgid "Liechtenstein"
 msgstr "ليشتنستين"
 
-#: src/translations.h:421
+#: src/translations.h:422
 msgid "Sri Lanka"
 msgstr "سريلانكا"
 
-#: src/translations.h:422
+#: src/translations.h:423
 msgid "Liberia"
 msgstr "ليبريا"
 
-#: src/translations.h:423
+#: src/translations.h:424
 msgid "Lesotho"
 msgstr "ليسوتو"
 
-#: src/translations.h:424
+#: src/translations.h:425
 msgid "Lithuania"
 msgstr "ليتوانيا"
 
-#: src/translations.h:425
+#: src/translations.h:426
 msgid "Luxembourg"
 msgstr "لوكسمبورج"
 
-#: src/translations.h:426
+#: src/translations.h:427
 msgid "Latvia"
 msgstr "لاتفيا"
 
-#: src/translations.h:427
+#: src/translations.h:428
 msgid "Libyan Arab Jamahiriya"
 msgstr "ليبيا"
 
-#: src/translations.h:428
+#: src/translations.h:429
 msgid "Morocco"
 msgstr "المغرب"
 
-#: src/translations.h:429
+#: src/translations.h:430
 msgid "Monaco"
 msgstr "موناكو"
 
-#: src/translations.h:430
+#: src/translations.h:431
 msgid "Moldova"
 msgstr "مولدوفا"
 
-#: src/translations.h:431
+#: src/translations.h:432
 msgid "Madagascar"
 msgstr "مدغشقر"
 
-#: src/translations.h:432
+#: src/translations.h:433
 msgid "Marshall Islands"
 msgstr "جزر المارشال"
 
-#: src/translations.h:433
+#: src/translations.h:434
 msgid "Macedonia"
 msgstr "مقدونيا"
 
-#: src/translations.h:434
+#: src/translations.h:435
 msgid "Mali"
 msgstr "مالي"
 
-#: src/translations.h:435
+#: src/translations.h:436
 msgid "Myanmar"
 msgstr "ميانمار"
 
-#: src/translations.h:436
+#: src/translations.h:437
 msgid "Mongolia"
 msgstr "منغوليا"
 
-#: src/translations.h:437
+#: src/translations.h:438
 msgid "Macau"
 msgstr "ماو"
 
-#: src/translations.h:438
+#: src/translations.h:439
 msgid "Northern Mariana Islands"
 msgstr "جزر ماريانا الشمالية"
 
-#: src/translations.h:439
+#: src/translations.h:440
 msgid "Martinique"
 msgstr "المارتينيك"
 
-#: src/translations.h:440
+#: src/translations.h:441
 msgid "Mauritania"
 msgstr "موريتانيا"
 
-#: src/translations.h:441
+#: src/translations.h:442
 msgid "Montserrat"
 msgstr "مونتيسيرات"
 
-#: src/translations.h:442
+#: src/translations.h:443
 msgid "Malta"
 msgstr "مالطا"
 
-#: src/translations.h:443
+#: src/translations.h:444
 msgid "Mauritius"
 msgstr "موريشيوس"
 
-#: src/translations.h:444
+#: src/translations.h:445
 msgid "Maldives"
 msgstr "المالديف"
 
-#: src/translations.h:445
+#: src/translations.h:446
 msgid "Malawi"
 msgstr "ملاوي"
 
-#: src/translations.h:446
+#: src/translations.h:447
 msgid "Mexico"
 msgstr "المكسيك"
 
-#: src/translations.h:447
+#: src/translations.h:448
 msgid "Malaysia"
 msgstr "ماليزيا"
 
-#: src/translations.h:448
+#: src/translations.h:449
 msgid "Mozambique"
 msgstr "موزمبيق"
 
-#: src/translations.h:449
+#: src/translations.h:450
 msgid "Namibia"
 msgstr "ناميبيا"
 
-#: src/translations.h:450
+#: src/translations.h:451
 msgid "New Caledonia"
 msgstr "نيو كالدونيا"
 
-#: src/translations.h:451
+#: src/translations.h:452
 msgid "Niger"
 msgstr "النيجر"
 
-#: src/translations.h:452
+#: src/translations.h:453
 msgid "Norfolk Island"
 msgstr "جزر النورفولك"
 
-#: src/translations.h:453
+#: src/translations.h:454
 msgid "Nigeria"
 msgstr "نيجيريا"
 
-#: src/translations.h:454
+#: src/translations.h:455
 msgid "Nicaragua"
 msgstr "نيكاراجوا"
 
-#: src/translations.h:455
+#: src/translations.h:456
 msgid "Netherlands"
 msgstr "هولندا"
 
-#: src/translations.h:456
+#: src/translations.h:457
 msgid "Norway"
 msgstr "النرويج"
 
-#: src/translations.h:457
+#: src/translations.h:458
 msgid "Nepal"
 msgstr "نيبال"
 
-#: src/translations.h:458
+#: src/translations.h:459
 msgid "Nauru"
 msgstr "ناورو"
 
-#: src/translations.h:459
+#: src/translations.h:460
 msgid "Niue"
 msgstr "نيو"
 
-#: src/translations.h:460
+#: src/translations.h:461
 msgid "New Zealand"
 msgstr "نيوزيلاندا"
 
-#: src/translations.h:461
+#: src/translations.h:462
 msgid "Oman"
 msgstr "عمان"
 
-#: src/translations.h:462
+#: src/translations.h:463
 msgid "Panama"
 msgstr "بنما"
 
-#: src/translations.h:463
+#: src/translations.h:464
 msgid "Peru"
 msgstr "بيرو"
 
-#: src/translations.h:464
+#: src/translations.h:465
 msgid "French Polynesia"
 msgstr "بولونيزا الفرنسية"
 
-#: src/translations.h:465
+#: src/translations.h:466
 msgid "Papua New Guinea"
 msgstr "بابوا نيو جويانا"
 
-#: src/translations.h:466
+#: src/translations.h:467
 msgid "Philippines"
 msgstr "الفلبين"
 
-#: src/translations.h:467
+#: src/translations.h:468
 msgid "Pakistan"
 msgstr "باكستان"
 
-#: src/translations.h:468
+#: src/translations.h:469
 msgid "Poland"
 msgstr "بولندا"
 
-#: src/translations.h:469
+#: src/translations.h:470
 msgid "Saint Pierre and Miquelon"
 msgstr "سانت بيير وميكويلون"
 
-#: src/translations.h:470
+#: src/translations.h:471
 msgid "Pitcairn"
 msgstr "بيتكايرن"
 
-#: src/translations.h:471
+#: src/translations.h:472
 msgid "Puerto Rico"
 msgstr "بورتو ريكو"
 
-#: src/translations.h:472
+#: src/translations.h:473
 msgid "Palestinian Territories"
 msgstr "فلسطين"
 
-#: src/translations.h:473
+#: src/translations.h:474
 msgid "Portugal"
 msgstr "البرتغال"
 
-#: src/translations.h:474
+#: src/translations.h:475
 msgid "Palau"
 msgstr "بالاو"
 
-#: src/translations.h:475
+#: src/translations.h:476
 msgid "Paraguay"
 msgstr "باراغواي"
 
-#: src/translations.h:476
+#: src/translations.h:477
 msgid "Qatar"
 msgstr "قطر"
 
-#: src/translations.h:477
+#: src/translations.h:478
 msgid "Réunion"
 msgstr "ريونيون"
 
-#: src/translations.h:478
+#: src/translations.h:479
 msgid "Romania"
 msgstr "رومانيا"
 
-#: src/translations.h:479
+#: src/translations.h:480
 msgid "Serbia"
 msgstr "صربيا"
 
-#: src/translations.h:480
+#: src/translations.h:481
 msgid "Russian Federation"
 msgstr "الإتحاد الروسي"
 
-#: src/translations.h:481
+#: src/translations.h:482
 msgid "Rwanda"
 msgstr "رواندا"
 
-#: src/translations.h:482
+#: src/translations.h:483
 msgid "Saudi Arabia"
 msgstr "السعودية"
 
-#: src/translations.h:483
+#: src/translations.h:484
 msgid "Solomon Islands"
 msgstr "جزر سولومن"
 
-#: src/translations.h:484
+#: src/translations.h:485
 msgid "Seychelles"
 msgstr "سيشل"
 
-#: src/translations.h:485
+#: src/translations.h:486
 msgid "Sudan"
 msgstr "السودان"
 
-#: src/translations.h:486
+#: src/translations.h:487
 msgid "Sweden"
 msgstr "السويد"
 
-#: src/translations.h:487
+#: src/translations.h:488
 msgid "Singapore"
 msgstr "سنغافورة"
 
-#: src/translations.h:488
+#: src/translations.h:489
 msgid "Saint Helena"
 msgstr "سانت هيلينا"
 
-#: src/translations.h:489
+#: src/translations.h:490
 msgid "Slovenia"
 msgstr "سلوفينيا"
 
-#: src/translations.h:490
+#: src/translations.h:491
 msgid "Svalbard and Jan Mayen"
 msgstr "سفالبارد وجان مايين"
 
-#: src/translations.h:491
+#: src/translations.h:492
 msgid "Slovakia"
 msgstr "سلوفاكيا"
 
-#: src/translations.h:492
+#: src/translations.h:493
 msgid "Sierra Leone"
 msgstr "سيراليون"
 
-#: src/translations.h:493
+#: src/translations.h:494
 msgid "San Marino"
 msgstr "سان مارينو"
 
-#: src/translations.h:494
+#: src/translations.h:495
 msgid "Senegal"
 msgstr "السنغال"
 
-#: src/translations.h:495
+#: src/translations.h:496
 msgid "Somalia"
 msgstr "الصومال"
 
-#: src/translations.h:496
+#: src/translations.h:497
 msgid "Suriname"
 msgstr "سورينام"
 
-#: src/translations.h:497
+#: src/translations.h:498
 msgid "Sao Tome and Principe"
 msgstr "ساو توم وبرينسيب"
 
-#: src/translations.h:498
+#: src/translations.h:499
 msgid "El Salvador"
 msgstr "السلفادور"
 
-#: src/translations.h:499
+#: src/translations.h:500
 msgid "Syrian Arab Republic"
 msgstr "سوريا"
 
-#: src/translations.h:500
+#: src/translations.h:501
 msgid "Swaziland"
 msgstr "سوازيلاند"
 
-#: src/translations.h:501
+#: src/translations.h:502
 msgid "Turks and Caicos Islands"
 msgstr "الترك وجزر كايكوس"
 
-#: src/translations.h:502
+#: src/translations.h:503
 msgid "Chad"
 msgstr "تشاد"
 
-#: src/translations.h:503
+#: src/translations.h:504
 msgid "French Southern Territories"
 msgstr "المقاطعات الفرنسية الجنوبية"
 
-#: src/translations.h:504
+#: src/translations.h:505
 msgid "Togo"
 msgstr "توجو"
 
-#: src/translations.h:505
+#: src/translations.h:506
 msgid "Thailand"
 msgstr "تايلاند"
 
-#: src/translations.h:506
+#: src/translations.h:507
 msgid "Tajikistan"
 msgstr "طاجيكستان"
 
-#: src/translations.h:507
+#: src/translations.h:508
 msgid "Tokelau"
 msgstr "توكيلاو"
 
-#: src/translations.h:508
+#: src/translations.h:509
 msgid "East Timor"
 msgstr "تيمور الشرقية"
 
-#: src/translations.h:509
+#: src/translations.h:510
 msgid "Turkmenistan"
 msgstr "تركمانستان"
 
-#: src/translations.h:510
+#: src/translations.h:511
 msgid "Tunisia"
 msgstr "تونس"
 
-#: src/translations.h:511
+#: src/translations.h:512
 msgid "Tonga"
 msgstr "تونغا"
 
-#: src/translations.h:512
+#: src/translations.h:513
 msgid "Turkey"
 msgstr "تركيا"
 
-#: src/translations.h:513
+#: src/translations.h:514
 msgid "Trinidad and Tobago"
 msgstr "ترينيداد وتوباجو"
 
-#: src/translations.h:514
+#: src/translations.h:515
 msgid "Tuvalu"
 msgstr "توفالو"
 
-#: src/translations.h:515
+#: src/translations.h:516
 msgid "Taiwan"
 msgstr "تايوان"
 
-#: src/translations.h:516
+#: src/translations.h:517
 msgid "Tanzania"
 msgstr "تنزانيا"
 
-#: src/translations.h:517
+#: src/translations.h:518
 msgid "Ukraine"
 msgstr "أوكرانيا"
 
-#: src/translations.h:518
+#: src/translations.h:519
 msgid "Uganda"
 msgstr "أوغندا"
 
-#: src/translations.h:519
+#: src/translations.h:520
 msgid "United States Minor Outlying Islands"
 msgstr "جزر الولايات المتحدة البعيدة"
 
-#: src/translations.h:520
+#: src/translations.h:521
 msgid "United States"
 msgstr "الولايات المتحدة"
 
-#: src/translations.h:521
+#: src/translations.h:522
 msgid "Uruguay"
 msgstr "الأوروغواي"
 
-#: src/translations.h:522
+#: src/translations.h:523
 msgid "Uzbekistan"
 msgstr "أزبكستان"
 
-#: src/translations.h:523
+#: src/translations.h:524
 msgid "Vatican City State"
 msgstr "الفاتيكان"
 
-#: src/translations.h:524
+#: src/translations.h:525
 msgid "Saint Vincent and the Grenadines"
 msgstr "سانت فنسنت والجرينادين"
 
-#: src/translations.h:525
+#: src/translations.h:526
 msgid "Venezuela"
 msgstr "فنزويلا"
 
-#: src/translations.h:526
+#: src/translations.h:527
 msgid "British Virgin Islands"
 msgstr "جزر فرجن البريطانية"
 
-#: src/translations.h:527
+#: src/translations.h:528
 msgid "United States Virgin Islands"
 msgstr "جزر فرجن - الولايات المتحدة"
 
-#: src/translations.h:528
+#: src/translations.h:529
 msgid "Viet Nam"
 msgstr "فيتنام"
 
-#: src/translations.h:529
+#: src/translations.h:530
 msgid "Vanuatu"
 msgstr "فانواتو"
 
-#: src/translations.h:530
+#: src/translations.h:531
 msgid "Wallis and Futuna"
 msgstr "واليس وفوتونا"
 
-#: src/translations.h:531
+#: src/translations.h:532
 msgid "Samoa"
 msgstr "ساموا"
 
-#: src/translations.h:532
+#: src/translations.h:533
 msgid "Yemen"
 msgstr "اليمن"
 
-#: src/translations.h:533
+#: src/translations.h:534
 msgid "Mayotte"
 msgstr "مايوت"
 
-#: src/translations.h:534
+#: src/translations.h:535
 msgid "Yugoslavia"
 msgstr "يوغوسلافيا"
 
-#: src/translations.h:535
+#: src/translations.h:536
 msgid "South Africa"
 msgstr "جنوب أفريقيا"
 
-#: src/translations.h:536
+#: src/translations.h:537
 msgid "Zambia"
 msgstr "زامبيا"
 
-#: src/translations.h:537
+#: src/translations.h:538
 msgid "Zimbabwe"
 msgstr "زمبابوي"
 
-#: src/translations.h:541
+#: src/translations.h:542
 msgid "&Undo"
 msgstr ""
 
-#: src/translations.h:542
+#: src/translations.h:543
 msgid "&Redo"
 msgstr ""
 
-#: src/translations.h:543
+#: src/translations.h:544
 msgid "Cu&t"
 msgstr ""
 
-#: src/translations.h:544
+#: src/translations.h:545
 msgid "&Copy"
 msgstr ""
 
-#: src/translations.h:545
+#: src/translations.h:546
 msgid "&Paste"
 msgstr ""
 
-#: src/translations.h:546 src/ui_locationDialogGui.h:395
+#: src/translations.h:547 src/ui_locationDialogGui.h:395
 #: plugins/Oculars/src/ui_ocularDialog.h:1063
 #: plugins/Oculars/src/ui_ocularDialog.h:1072
 #: plugins/Oculars/src/ui_ocularDialog.h:1079
@@ -3672,52 +3684,52 @@ msgstr ""
 msgid "Delete"
 msgstr "احذف"
 
-#: src/translations.h:547
+#: src/translations.h:548
 msgid "Select All"
 msgstr ""
 
-#: src/translations.h:548
+#: src/translations.h:549
 msgid "Look in:"
 msgstr ""
 
-#: src/translations.h:549
+#: src/translations.h:550
 msgid "Directory:"
 msgstr ""
 
-#: src/translations.h:550
+#: src/translations.h:551
 msgid "Folder"
 msgstr ""
 
-#: src/translations.h:551
+#: src/translations.h:552
 msgid "&Choose"
 msgstr ""
 
-#: src/translations.h:552 src/ui_configurationDialog.h:1164
+#: src/translations.h:553 src/ui_configurationDialog.h:1153
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:516
 msgid "Cancel"
 msgstr "إلغاء"
 
-#: src/translations.h:553
+#: src/translations.h:554
 msgid "Files of type:"
 msgstr ""
 
-#: src/translations.h:554
+#: src/translations.h:555
 msgid "Date Modified"
 msgstr ""
 
-#: src/translations.h:555
+#: src/translations.h:556
 msgid "Directories"
 msgstr ""
 
-#: src/translations.h:556
+#: src/translations.h:557
 msgid "Computer"
 msgstr ""
 
-#: src/translations.h:557
+#: src/translations.h:558
 msgid "&Open"
 msgstr ""
 
-#: src/translations.h:558
+#: src/translations.h:559
 msgid "File &name:"
 msgstr ""
 
@@ -3734,7 +3746,7 @@ msgstr "عن"
 msgid "Log"
 msgstr "السجلّ"
 
-#: src/ui_helpDialogGui.h:290 src/ui_configurationDialog.h:1085
+#: src/ui_helpDialogGui.h:290 src/ui_configurationDialog.h:1078
 msgid "Edit keyboard shortcuts..."
 msgstr "حرِّر مفاتيح الاختصارات"
 
@@ -3973,7 +3985,7 @@ msgstr "استخدم التكملة التلقائية من بداية الكل�
 
 #: src/ui_searchDialogGui.h:656 src/ui_viewDialog.h:1320
 #: src/ui_viewDialog.h:1326 src/ui_viewDialog.h:1328
-#: src/ui_configurationDialog.h:1165 src/ui_configurationDialog.h:1176
+#: src/ui_configurationDialog.h:1154 src/ui_configurationDialog.h:1165
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:416
 msgid "Options"
 msgstr "الخيارات"
@@ -4232,29 +4244,29 @@ msgstr "اجعل التراث الفلكي الحالي هو الافتراضي"
 msgid "Visible"
 msgstr "مرئي"
 
-#: src/ui_configurationDialog.h:999
+#: src/ui_configurationDialog.h:992
 msgid "Configuration"
 msgstr "الإعدادات"
 
-#: src/ui_configurationDialog.h:1001
+#: src/ui_configurationDialog.h:994
 msgid "Program language"
 msgstr "لغة البرنامج"
 
-#: src/ui_configurationDialog.h:1002
+#: src/ui_configurationDialog.h:995
 msgid "Check updates"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1003
+#: src/ui_configurationDialog.h:996
 msgid ""
 "Enable checking updates of Stellarium via Internet. Info for updates of "
 "stable versions you can look on the tab \"About\" of \"Help\" window."
 msgstr ""
 
-#: src/ui_configurationDialog.h:1004
+#: src/ui_configurationDialog.h:997
 msgid "Default options"
 msgstr "الخيارات الافتراضية"
 
-#: src/ui_configurationDialog.h:1006
+#: src/ui_configurationDialog.h:999
 msgid ""
 "Save the settings you've changed this session to be the same the next time "
 "you start Stellarium"
@@ -4262,21 +4274,23 @@ msgstr ""
 "احفظ الإعدادات التي قمت بتغييرها في هذه الجلسة لاستخدامها عند تشغيل "
 "ستيللاريوم المرة القادمة"
 
-#: src/ui_configurationDialog.h:1008
+#: src/ui_configurationDialog.h:1001
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:390
 #: plugins/FOV/src/ui_fovWindow.h:387
+#: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:254
 msgid "Save settings"
 msgstr "احفظ الإعدادات"
 
-#: src/ui_configurationDialog.h:1010
+#: src/ui_configurationDialog.h:1003
 msgid "Restore the default settings that came with Stellarium"
 msgstr "استرجع الإعدادات الافتراضية الأصلية كما كانت عند تركيب البرنامج"
 
-#: src/ui_configurationDialog.h:1012 plugins/FOV/src/ui_fovWindow.h:386
+#: src/ui_configurationDialog.h:1005 plugins/FOV/src/ui_fovWindow.h:386
+#: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:251
 msgid "Restore defaults"
 msgstr "استرجع الإعدادات الافتراضية كما كانت عند تركيب البرنامج"
 
-#: src/ui_configurationDialog.h:1013
+#: src/ui_configurationDialog.h:1006
 msgid ""
 "Restoring default settings requires a restart of Stellarium. Saving all the "
 "current options includes the current FOV and direction of view for use at "
@@ -4286,230 +4300,230 @@ msgstr ""
 "الحالية سوف يحفظ أيضاً حقل الرؤية الحالي واتجاه الرؤية لاستخدامها في المرة "
 "القادمة.‏"
 
-#: src/ui_configurationDialog.h:1015
+#: src/ui_configurationDialog.h:1008
 msgid "The width of your view when Stellarium starts"
 msgstr "عرض الرؤية عند بدء تشغيل ستيللاريوم"
 
-#: src/ui_configurationDialog.h:1018
+#: src/ui_configurationDialog.h:1011
 msgid "The direction you're looking when Stellarium starts"
 msgstr "اتجاه الرؤية عند التشغيل"
 
-#: src/ui_configurationDialog.h:1020 src/ui_configurationDialog.h:1187
+#: src/ui_configurationDialog.h:1013 src/ui_configurationDialog.h:1176
 msgid "Selected object information"
 msgstr "معلومات الجرم المختار"
 
-#: src/ui_configurationDialog.h:1022
+#: src/ui_configurationDialog.h:1015
 msgid "Display all information available"
 msgstr "أظهر جميع المعلومات المتوفرة"
 
-#: src/ui_configurationDialog.h:1024
+#: src/ui_configurationDialog.h:1017
 msgid "All available"
 msgstr "أظهر جميع المعلومات"
 
-#: src/ui_configurationDialog.h:1026
+#: src/ui_configurationDialog.h:1019
 msgid "Display no information"
 msgstr "لاتظهر أي معلومات"
 
-#: src/ui_configurationDialog.h:1028 plugins/Oculars/src/Oculars.cpp:1910
+#: src/ui_configurationDialog.h:1021 plugins/Oculars/src/Oculars.cpp:1910
 #: plugins/Observability/src/Observability.cpp:231
 msgid "None"
 msgstr "لاتظهر أي معلومات"
 
-#: src/ui_configurationDialog.h:1030
+#: src/ui_configurationDialog.h:1023
 msgid "Display less information"
 msgstr "أظهر معلومات اقل"
 
-#: src/ui_configurationDialog.h:1032
+#: src/ui_configurationDialog.h:1025
 msgid "Short"
 msgstr "أظهر معلومات مختصرة"
 
-#: src/ui_configurationDialog.h:1034
+#: src/ui_configurationDialog.h:1027
 msgid "Display user settings information"
 msgstr "إعرض المعلومات التي اختارها المستخدم"
 
-#: src/ui_configurationDialog.h:1036
+#: src/ui_configurationDialog.h:1029
 msgid "Customized"
 msgstr "معلومات مختارة"
 
-#: src/ui_configurationDialog.h:1037
+#: src/ui_configurationDialog.h:1030
 msgid "Displayed fields"
 msgstr "حقول المعلومات المعروضة"
 
-#: src/ui_configurationDialog.h:1038
+#: src/ui_configurationDialog.h:1031
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:269
 msgid "Name"
 msgstr "الاسم"
 
-#: src/ui_configurationDialog.h:1040
+#: src/ui_configurationDialog.h:1033
 msgid "Geocentric equatorial coordinates, equinox of date"
 msgstr "الإحداثيات الاستوائية المركزية حسب نقطة الاعتدال الحالية"
 
-#: src/ui_configurationDialog.h:1042
+#: src/ui_configurationDialog.h:1035
 msgid "Right ascension/Declination (of date)"
 msgstr "(المطلع المستقيم/الميل (الحالي"
 
-#: src/ui_configurationDialog.h:1043
+#: src/ui_configurationDialog.h:1036
 msgid "Catalog number(s)"
 msgstr "رقم الدليل"
 
-#: src/ui_configurationDialog.h:1045
+#: src/ui_configurationDialog.h:1038
 msgid "Geocentric equatorial coordinates, equinox of J2000.0"
 msgstr "الإحداثيات الاستوائية المركزية حسب نقطة الاعتدال لعام 2000"
 
-#: src/ui_configurationDialog.h:1047
+#: src/ui_configurationDialog.h:1040
 msgid "Right ascension/Declination (J2000)"
 msgstr "(المطلع المستقيم/الميل (عام 2000"
 
-#: src/ui_configurationDialog.h:1048
+#: src/ui_configurationDialog.h:1041
 msgid "Absolute magnitude"
 msgstr "القدر المطلق"
 
-#: src/ui_configurationDialog.h:1049
+#: src/ui_configurationDialog.h:1042
 msgid "Galactic coordinates"
 msgstr "الإحداثيات المجرية"
 
-#: src/ui_configurationDialog.h:1050
+#: src/ui_configurationDialog.h:1043
 msgid "Visual magnitude"
 msgstr "القدر الظاهري"
 
-#: src/ui_configurationDialog.h:1052
+#: src/ui_configurationDialog.h:1045
 msgid "Angular or physical size"
 msgstr "الحجم الطبيعي أو القدر الزاوي"
 
-#: src/ui_configurationDialog.h:1054
+#: src/ui_configurationDialog.h:1047
 msgid "Size"
 msgstr "الحجم"
 
-#: src/ui_configurationDialog.h:1056
+#: src/ui_configurationDialog.h:1049
 msgid "The type of the object (star, planet, etc.)"
 msgstr "نوع الجرم (نجم، كوكب، إلخ...)"
 
-#: src/ui_configurationDialog.h:1058
+#: src/ui_configurationDialog.h:1051
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:268
 msgid "Type"
 msgstr "النوع"
 
-#: src/ui_configurationDialog.h:1060
+#: src/ui_configurationDialog.h:1053
 msgid "Spectral class, nebula type, etc."
 msgstr "الخصائص الطيفية، نوع السديم، إلخ."
 
-#: src/ui_configurationDialog.h:1062
+#: src/ui_configurationDialog.h:1055
 msgid "Additional information"
 msgstr "معلومات إضافية"
 
-#: src/ui_configurationDialog.h:1064
+#: src/ui_configurationDialog.h:1057
 msgid "Topocentric equatorial coordinates"
 msgstr "الإحداثيات الاستوائية السطحية"
 
-#: src/ui_configurationDialog.h:1066
+#: src/ui_configurationDialog.h:1059
 msgid "Hour angle/Declination"
 msgstr "زاوية الساعة/الميل"
 
-#: src/ui_configurationDialog.h:1068
+#: src/ui_configurationDialog.h:1061
 msgid "Horizontal coordinates"
 msgstr "الإحداثيات الأفقية"
 
-#: src/ui_configurationDialog.h:1070
+#: src/ui_configurationDialog.h:1063
 msgid "Altitude/Azimuth"
 msgstr "الارتفاع الزاوي/السمت"
 
-#: src/ui_configurationDialog.h:1071
+#: src/ui_configurationDialog.h:1064
 msgid "Distance"
 msgstr "المسافة"
 
-#: src/ui_configurationDialog.h:1073
+#: src/ui_configurationDialog.h:1066
 msgid ""
 "Ecliptic topocentric coordinates, equinox of date and J2000 (only for Earth)"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1075
+#: src/ui_configurationDialog.h:1068
 msgid "Ecliptic coordinates"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1076
+#: src/ui_configurationDialog.h:1069
 msgid "Control"
 msgstr "التحكم"
 
-#: src/ui_configurationDialog.h:1078
+#: src/ui_configurationDialog.h:1071
 msgid "Allow keyboard to pan and zoom"
 msgstr "اسمح للوحة المفاتيح بالتحكم في تحريك المشهد والتكبير"
 
-#: src/ui_configurationDialog.h:1080
+#: src/ui_configurationDialog.h:1073
 msgid "Enable keyboard navigation"
 msgstr "مكِّن من التنقل بواسطة لوحة المفاتيح"
 
-#: src/ui_configurationDialog.h:1082
+#: src/ui_configurationDialog.h:1075
 msgid "Allow mouse to pan (drag) and zoom (mousewheel)"
 msgstr "مكِّن الفأرة من تحريك المشهد بالسحب ومن التكبير بالعجلة"
 
-#: src/ui_configurationDialog.h:1084
+#: src/ui_configurationDialog.h:1077
 msgid "Enable mouse navigation"
 msgstr "مكِّن من التنقل بالفأرة"
 
-#: src/ui_configurationDialog.h:1087
+#: src/ui_configurationDialog.h:1080
 msgid "Hides the mouse cursor when inactive"
 msgstr "يخفي مؤشر الفأرة في حالة عدم النشاط"
 
-#: src/ui_configurationDialog.h:1089
+#: src/ui_configurationDialog.h:1082
 msgid "Mouse cursor timeout:"
 msgstr "مهلة إخفاء مؤشر الفأرة (بالثواني)‏"
 
-#: src/ui_configurationDialog.h:1091
+#: src/ui_configurationDialog.h:1084
 msgid "seconds"
 msgstr "ثوانٍ"
 
-#: src/ui_configurationDialog.h:1093
+#: src/ui_configurationDialog.h:1086
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:186
 msgid "Startup date and time"
 msgstr "تاريخ ووقت البدء"
 
-#: src/ui_configurationDialog.h:1095
+#: src/ui_configurationDialog.h:1088
 msgid "Use a specific date and time when Stellarium starts up"
 msgstr "استخدم تاريخاً و وقتاً محددين عندما  يبدأ ستيللاريوم"
 
-#: src/ui_configurationDialog.h:1097
+#: src/ui_configurationDialog.h:1090
 msgid "Other:"
 msgstr "أخرى:"
 
-#: src/ui_configurationDialog.h:1099
+#: src/ui_configurationDialog.h:1092
 msgid "Use current local date and time"
 msgstr "استخدم التاريخ والوقت المحليين الحاليين"
 
-#: src/ui_configurationDialog.h:1101
+#: src/ui_configurationDialog.h:1094
 msgid "use current"
 msgstr "إستخدام القيمة الحالية"
 
-#: src/ui_configurationDialog.h:1103
+#: src/ui_configurationDialog.h:1096
 msgid "Starts Stellarium at system clock date and time"
 msgstr "ابدأ البرنامج باستخدام وقت وتاريخ النظام"
 
-#: src/ui_configurationDialog.h:1105
+#: src/ui_configurationDialog.h:1098
 msgid "System date and time"
 msgstr "وقت و تاريخ النظام"
 
-#: src/ui_configurationDialog.h:1107
+#: src/ui_configurationDialog.h:1100
 msgid ""
 "Sets the simulation time to the next instance of this time of day when "
 "Stellarium starts"
 msgstr "يضبط محاكاة الوقت لمثل هذه اللحظة من اليوم عندما يبدأ ستيللاريوم"
 
-#: src/ui_configurationDialog.h:1109
+#: src/ui_configurationDialog.h:1102
 msgid "System date at:"
 msgstr "تاريخ النظام عند:"
 
-#: src/ui_configurationDialog.h:1110
+#: src/ui_configurationDialog.h:1103
 msgid "Time correction"
 msgstr "تصحيح الوقت"
 
-#: src/ui_configurationDialog.h:1113
+#: src/ui_configurationDialog.h:1106
 msgid "Edit equation"
 msgstr "حرِّر المعادلة"
 
-#: src/ui_configurationDialog.h:1115
+#: src/ui_configurationDialog.h:1108
 msgid "Planetarium options"
 msgstr "خيارات عرض القبة السماوية"
 
-#: src/ui_configurationDialog.h:1117
+#: src/ui_configurationDialog.h:1110
 msgid ""
 "Spheric mirror distortion is used when projecting Stellarium onto a spheric "
 "mirror for low-cost planetarium systems."
@@ -4517,51 +4531,51 @@ msgstr ""
 "يستعمل تشوه المرآة الكروية عند عرض ستيللاريوم على مرآة كروية مستخدمة في "
 "أنظمة القبب السماوية المنخفضة التكلفة"
 
-#: src/ui_configurationDialog.h:1119
+#: src/ui_configurationDialog.h:1112
 msgid "Spheric mirror distortion"
 msgstr "تشوه المرآة الكروية"
 
-#: src/ui_configurationDialog.h:1121
+#: src/ui_configurationDialog.h:1114
 msgid "Mask out everything outside a central circle in the main view"
 msgstr "لاتظهر اي شيء خارج دائرة مركزية في المشهد الرئيسي"
 
-#: src/ui_configurationDialog.h:1123
+#: src/ui_configurationDialog.h:1116
 msgid "Disc viewport"
 msgstr "عرض على شكل قرص"
 
-#: src/ui_configurationDialog.h:1125
+#: src/ui_configurationDialog.h:1118
 msgid "Hide other constellations when you click one"
 msgstr "إخفاء المجموعات النجمية الاخرى عند النقر على أحدها"
 
-#: src/ui_configurationDialog.h:1127
+#: src/ui_configurationDialog.h:1120
 msgid "Select single constellation"
 msgstr "اختر مجموعة نجمية واحدة"
 
-#: src/ui_configurationDialog.h:1129
+#: src/ui_configurationDialog.h:1122
 msgid "Align labels with the horizon"
 msgstr "اجعل الأسماء موازية للأفق"
 
-#: src/ui_configurationDialog.h:1131
+#: src/ui_configurationDialog.h:1124
 msgid "Gravity labels"
 msgstr "اجعل الأسماء موازية للأفق الأقرب"
 
-#: src/ui_configurationDialog.h:1133
+#: src/ui_configurationDialog.h:1126
 msgid "Toggle display backgrounds of the nebulae."
 msgstr "إظهار وإخفاء عرض خلفية السديم"
 
-#: src/ui_configurationDialog.h:1135
+#: src/ui_configurationDialog.h:1128
 msgid "Show nebula background button"
 msgstr "أظهر زر خلفية السديم"
 
-#: src/ui_configurationDialog.h:1137
+#: src/ui_configurationDialog.h:1130
 msgid "Toggle vertical and horizontal image flip buttons."
 msgstr "إزرار قلب المشهد عمودياً وأفقياً.‏"
 
-#: src/ui_configurationDialog.h:1139
+#: src/ui_configurationDialog.h:1132
 msgid "Show flip buttons"
 msgstr "أظهر أزرار قلب المشهد في شريط التحكم"
 
-#: src/ui_configurationDialog.h:1141
+#: src/ui_configurationDialog.h:1134
 msgid ""
 "When enabled, the \"auto zoom out\" key will also set the initial viewing "
 "direction"
@@ -4569,99 +4583,88 @@ msgstr ""
 "عندما يكون \" زر التصغير الذاتي\" ممكناً فسوف يضبط الاتجاه الأولي للمشهد "
 "أيضاً"
 
-#: src/ui_configurationDialog.h:1143
+#: src/ui_configurationDialog.h:1136
 msgid "Auto zoom out returns to initial direction of view"
 msgstr "التصغير الذاتي يعود إلى الاتجاه الأولي للمشهد"
 
-#: src/ui_configurationDialog.h:1145
-msgid ""
-"Display solar shadows on planets and moons (For that feature needed OpenGL "
-"version 2 or higher)"
-msgstr ""
-"عرض الظل على الكواكب والأقمار (لهذه الميزة تحتاج  OpenGL version 2 أو أحدث)"
-
-#: src/ui_configurationDialog.h:1147
-msgid "Render Solar Shadows"
-msgstr "ارسم الظل الشمسي"
-
-#: src/ui_configurationDialog.h:1148
+#: src/ui_configurationDialog.h:1137
 msgid "Screenshots"
 msgstr "لقطات الشاشة"
 
-#: src/ui_configurationDialog.h:1149
+#: src/ui_configurationDialog.h:1138
 msgid "Screenshot Directory"
 msgstr "مجلد لقطة الشاشة"
 
-#: src/ui_configurationDialog.h:1151
+#: src/ui_configurationDialog.h:1140
 msgid "Invert colors"
 msgstr "عكس الألوان"
 
-#: src/ui_configurationDialog.h:1152
+#: src/ui_configurationDialog.h:1141
 msgid "Star catalog updates"
 msgstr "تحديثات دليل النجوم"
 
-#: src/ui_configurationDialog.h:1154
+#: src/ui_configurationDialog.h:1143
 msgid "Click here to start downloading"
 msgstr "اضغط هنا لبدء التحميل"
 
-#: src/ui_configurationDialog.h:1156
+#: src/ui_configurationDialog.h:1145
 msgid "Download this file to view even more stars"
 msgstr "حمِّل هذا الملف لإظهار نجوم اكثر ايضاً"
 
-#: src/ui_configurationDialog.h:1158
+#: src/ui_configurationDialog.h:1147
 msgid "Restart the download"
 msgstr "ابدأ التحميل من جديد"
 
-#: src/ui_configurationDialog.h:1160
+#: src/ui_configurationDialog.h:1149
 msgid "Retry"
 msgstr "أعد المحاولة"
 
-#: src/ui_configurationDialog.h:1162
+#: src/ui_configurationDialog.h:1151
 msgid "Stop the download. You can always restart it later"
 msgstr "أوقف التحميل. تستطيع دائماً أن تبدأ مجدداً في وقت لاحق."
 
-#: src/ui_configurationDialog.h:1167
+#: src/ui_configurationDialog.h:1156
 msgid "Close window when script runs"
 msgstr "أغلق النافذة عندما يبدأ السكريبت في العمل"
 
-#: src/ui_configurationDialog.h:1169
+#: src/ui_configurationDialog.h:1158
 msgid "Run the selected script"
 msgstr "شغِّل السكريبت المختار"
 
-#: src/ui_configurationDialog.h:1173
+#: src/ui_configurationDialog.h:1162
 msgid "Stop a running script"
 msgstr "أوقف السكريبت الشغَّال"
 
-#: src/ui_configurationDialog.h:1177
+#: src/ui_configurationDialog.h:1166
 msgid "Load at startup"
 msgstr "حمِّل عند بدء التشغيل"
 
-#: src/ui_configurationDialog.h:1178
+#: src/ui_configurationDialog.h:1167
 msgid "configure"
 msgstr "اضبط الإعدادات"
 
-#: src/ui_configurationDialog.h:1183
+#: src/ui_configurationDialog.h:1172
 msgid "Main"
 msgstr "الرئيسي"
 
-#: src/ui_configurationDialog.h:1185
+#: src/ui_configurationDialog.h:1174
 msgid "Information"
 msgstr "معلومات"
 
-#: src/ui_configurationDialog.h:1190
+#: src/ui_configurationDialog.h:1179
 msgid "Navigation"
 msgstr "التنقل"
 
-#: src/ui_configurationDialog.h:1192
+#: src/ui_configurationDialog.h:1181
 msgid "Tools"
 msgstr "الأدوات"
 
-#: src/ui_configurationDialog.h:1194
+#: src/ui_configurationDialog.h:1183
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:447
 msgid "Scripts"
 msgstr "البرامج النصية‏"
 
-#: src/ui_configurationDialog.h:1196
+#: src/ui_configurationDialog.h:1185
 msgid "Plugins"
 msgstr "الإضافات"
 
@@ -5426,6 +5429,7 @@ msgstr "قلب المشهد رأسياً"
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:322
 #: plugins/Observability/src/ui_ObservabilityDialog.h:378
 #: plugins/FOV/src/ui_fovWindow.h:405
+#: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:258
 msgctxt "tab in plugin windows"
 msgid "About"
 msgstr "عن"
@@ -6252,6 +6256,7 @@ msgstr "وظيفة التحكم بالتلسكوب"
 #: plugins/TimeZoneConfiguration/src/gui/TimeZoneConfigurationWindow.cpp:105
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:97
 #: plugins/FOV/src/gui/FOVWindow.cpp:78
+#: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:80
 #, qt-format
 msgid "Version %1"
 msgstr "الإصدار %1"
@@ -6602,62 +6607,62 @@ msgstr ""
 "الشريط السفلي."
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:242
-#: plugins/Supernovae/src/Supernovae.cpp:708 plugins/Novae/src/Novae.cpp:705
+#: plugins/Supernovae/src/Supernovae.cpp:710 plugins/Novae/src/Novae.cpp:705
 msgid "January"
 msgstr "يناير"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:243
-#: plugins/Supernovae/src/Supernovae.cpp:708 plugins/Novae/src/Novae.cpp:705
+#: plugins/Supernovae/src/Supernovae.cpp:710 plugins/Novae/src/Novae.cpp:705
 msgid "February"
 msgstr "فبراير"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:244
-#: plugins/Supernovae/src/Supernovae.cpp:708 plugins/Novae/src/Novae.cpp:705
+#: plugins/Supernovae/src/Supernovae.cpp:710 plugins/Novae/src/Novae.cpp:705
 msgid "March"
 msgstr "مارس"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:245
-#: plugins/Supernovae/src/Supernovae.cpp:708 plugins/Novae/src/Novae.cpp:705
+#: plugins/Supernovae/src/Supernovae.cpp:710 plugins/Novae/src/Novae.cpp:705
 msgid "April"
 msgstr "إبريل"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:246
-#: plugins/Supernovae/src/Supernovae.cpp:708 plugins/Novae/src/Novae.cpp:705
+#: plugins/Supernovae/src/Supernovae.cpp:710 plugins/Novae/src/Novae.cpp:705
 msgid "May"
 msgstr "مايو"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:247
-#: plugins/Supernovae/src/Supernovae.cpp:708 plugins/Novae/src/Novae.cpp:705
+#: plugins/Supernovae/src/Supernovae.cpp:710 plugins/Novae/src/Novae.cpp:705
 msgid "June"
 msgstr "يونية"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:248
-#: plugins/Supernovae/src/Supernovae.cpp:708 plugins/Novae/src/Novae.cpp:705
+#: plugins/Supernovae/src/Supernovae.cpp:710 plugins/Novae/src/Novae.cpp:705
 msgid "July"
 msgstr "يولية"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:249
-#: plugins/Supernovae/src/Supernovae.cpp:708 plugins/Novae/src/Novae.cpp:705
+#: plugins/Supernovae/src/Supernovae.cpp:710 plugins/Novae/src/Novae.cpp:705
 msgid "August"
 msgstr "أغسطس"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:250
-#: plugins/Supernovae/src/Supernovae.cpp:708 plugins/Novae/src/Novae.cpp:705
+#: plugins/Supernovae/src/Supernovae.cpp:710 plugins/Novae/src/Novae.cpp:705
 msgid "September"
 msgstr "سبتمبر"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:251
-#: plugins/Supernovae/src/Supernovae.cpp:708 plugins/Novae/src/Novae.cpp:705
+#: plugins/Supernovae/src/Supernovae.cpp:710 plugins/Novae/src/Novae.cpp:705
 msgid "October"
 msgstr "أكتوبر"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:252
-#: plugins/Supernovae/src/Supernovae.cpp:708 plugins/Novae/src/Novae.cpp:705
+#: plugins/Supernovae/src/Supernovae.cpp:710 plugins/Novae/src/Novae.cpp:705
 msgid "November"
 msgstr "نوفمبر"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:253
-#: plugins/Supernovae/src/Supernovae.cpp:708 plugins/Novae/src/Novae.cpp:705
+#: plugins/Supernovae/src/Supernovae.cpp:710 plugins/Novae/src/Novae.cpp:705
 msgid "December"
 msgstr "ديسمبر"
 
@@ -7248,16 +7253,16 @@ msgstr ""
 msgid "Historical Supernovae configuration window"
 msgstr "نافذة إعدادات المستعرات الموثقة تاريخياً"
 
-#: plugins/Supernovae/src/Supernova.cpp:117
+#: plugins/Supernovae/src/Supernova.cpp:122
 msgid "supernova"
 msgstr "مستعر عظيم"
 
-#: plugins/Supernovae/src/Supernova.cpp:133
+#: plugins/Supernovae/src/Supernova.cpp:137
 #, qt-format
 msgid "Type of supernova: %1"
 msgstr "نوع المستعر: %1"
 
-#: plugins/Supernovae/src/Supernova.cpp:134 plugins/Novae/src/Nova.cpp:136
+#: plugins/Supernovae/src/Supernova.cpp:138 plugins/Novae/src/Nova.cpp:136
 #, qt-format
 msgid "Maximum brightness: %1"
 msgstr "‎تاريخ اللمعان الأقصى‎: %1"
@@ -7562,6 +7567,7 @@ msgstr "فعِّل عرض توزيع الكوازارات"
 #: plugins/Quasars/src/ui_quasarsDialog.h:271
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:277
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:315
+#: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:249
 msgid "Enable display at startup"
 msgstr "فعِّل العرض وقت بدء البرنامج"
 
@@ -7831,81 +7837,81 @@ msgstr "أظهر الكواكب الخارجية"
 msgid "Exoplanets configuration window"
 msgstr "نافذة إعدادات الكواكب الخارجية"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:157
+#: plugins/Exoplanets/src/Exoplanet.cpp:158
 msgid "planetary system"
 msgstr ""
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:193
+#: plugins/Exoplanets/src/Exoplanet.cpp:194
 msgid "Metallicity"
 msgstr "مقدار المعدنية"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:197
-#: plugins/Exoplanets/src/Exoplanet.cpp:211
+#: plugins/Exoplanets/src/Exoplanet.cpp:198
+#: plugins/Exoplanets/src/Exoplanet.cpp:212
 msgid "Mass"
 msgstr "الكتلة"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:201
-#: plugins/Exoplanets/src/Exoplanet.cpp:212
+#: plugins/Exoplanets/src/Exoplanet.cpp:202
+#: plugins/Exoplanets/src/Exoplanet.cpp:213
 msgid "Radius"
 msgstr "نصف القطر"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:205
+#: plugins/Exoplanets/src/Exoplanet.cpp:206
 #, qt-format
 msgid "Effective temperature: %1 K"
 msgstr "‎الحرارة الفعلية: ‎%1‎ كلفن"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:209
+#: plugins/Exoplanets/src/Exoplanet.cpp:210
 msgid "Exoplanet"
 msgstr "كوكب خارجي"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:210
+#: plugins/Exoplanets/src/Exoplanet.cpp:211
 msgid "Period"
 msgstr "الفترة"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:210
+#: plugins/Exoplanets/src/Exoplanet.cpp:211
 msgid "days"
 msgstr "أيّام"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:211
 #: plugins/Exoplanets/src/Exoplanet.cpp:212
+#: plugins/Exoplanets/src/Exoplanet.cpp:213
 msgid "Jup"
 msgstr "المشتري"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:213
+#: plugins/Exoplanets/src/Exoplanet.cpp:214
 msgid "Semi-Major Axis"
 msgstr "نصف المحور الأكبر"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:213
+#: plugins/Exoplanets/src/Exoplanet.cpp:214
 msgid "AU"
 msgstr "وحدة فلكية"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:214
+#: plugins/Exoplanets/src/Exoplanet.cpp:215
 msgid "Eccentricity"
 msgstr "الشذوذ المداري"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:215
+#: plugins/Exoplanets/src/Exoplanet.cpp:216
 msgid "Inclination"
 msgstr "الميل"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:216
+#: plugins/Exoplanets/src/Exoplanet.cpp:217
 msgid "Angle Distance"
 msgstr "البعد الزاوي"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:217
+#: plugins/Exoplanets/src/Exoplanet.cpp:218
 msgid "Discovered year"
 msgstr "سنة الاكتشاف"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:218
+#: plugins/Exoplanets/src/Exoplanet.cpp:219
 msgid "Habitable class"
 msgstr "الفئة القابلة للسكنى"
 
 #. TRANSLATORS: Full phrase is "Mean Surface Temperature"
-#: plugins/Exoplanets/src/Exoplanet.cpp:220
+#: plugins/Exoplanets/src/Exoplanet.cpp:221
 msgid "Mean surface temp."
 msgstr "متوسط حرارة السطح"
 
 #. TRANSLATORS: ESI = Earth Similarity Index
-#: plugins/Exoplanets/src/Exoplanet.cpp:222
+#: plugins/Exoplanets/src/Exoplanet.cpp:223
 msgid "ESI"
 msgstr "مؤشر المشابهة للأرض"
 
@@ -8640,6 +8646,68 @@ msgstr ""
 msgid "Mark the navigational stars"
 msgstr ""
 
+#: plugins/EquationOfTime/src/EquationOfTime.cpp:55
+#: plugins/EquationOfTime/src/EquationOfTime.cpp:90
+#: plugins/EquationOfTime/src/EquationOfTime.cpp:249
+#: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:246
+#: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:248
+#: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:257
+msgid "Equation of Time"
+msgstr ""
+
+#: plugins/EquationOfTime/src/EquationOfTime.cpp:58
+msgid "This plugin shows the solution of the equation of time."
+msgstr ""
+
+#: plugins/EquationOfTime/src/EquationOfTime.cpp:90
+msgid "Show solution for Equation of Time"
+msgstr ""
+
+#. TRANSLATORS: minutes.
+#: plugins/EquationOfTime/src/EquationOfTime.cpp:251
+msgctxt "time"
+msgid "m"
+msgstr ""
+
+#. TRANSLATORS: seconds.
+#: plugins/EquationOfTime/src/EquationOfTime.cpp:253
+msgctxt "time"
+msgid "s"
+msgstr ""
+
+#: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:79
+msgid "Equation of Time plug-in"
+msgstr ""
+
+#: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:250
+msgid ""
+"The equation of time describes the discrepancy between two kinds of solar "
+"time. These are apparent solar time, which directly tracks the motion of the "
+"sun, and mean solar time, which tracks a fictitious \"mean\" sun with noons "
+"24 hours apart. There is no universally accepted definition of the sign of "
+"the equation of time. Some publications show it as positive when a sundial "
+"is ahead of a clock; others when the clock is ahead of the sundial. In the "
+"English-speaking world, the former usage is the more common, but is not "
+"always followed. Anyone who makes use of a published table or graph should "
+"first check its sign usage."
+msgstr ""
+
+#: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:252
+msgid "Font size:"
+msgstr ""
+
+#: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:253
+msgid "Show plug-ins button on toolbar"
+msgstr ""
+
+#: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:255
+msgid "Use minutes and seconds"
+msgstr ""
+
+#: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:256
+msgid "Change sign of equation"
+msgstr ""
+
 #~ msgid "Equatorial Grid"
 #~ msgstr "الشبكة الاستوائية"
 
@@ -9235,6 +9303,9 @@ msgstr ""
 
 #~ msgid "Galactic coordinates, equinox of J2000.0"
 #~ msgstr "الإحداثيات المجرية بمرجعية عام عام 2000"
+
+#~ msgid "Render Solar Shadows"
+#~ msgstr "ارسم الظل الشمسي"
 
 #, no-c-format, qt-format
 #~ msgid "Distance: %1AU"

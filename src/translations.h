@@ -179,6 +179,7 @@ class Translations
 		N_("Navajo");
 		N_("Norse");
 		N_("Polynesian");
+		N_("Romanian");
 		N_("Sami");
 		N_("Tupi-Guarani");
 		N_("Tongan");
