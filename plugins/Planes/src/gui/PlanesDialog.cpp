@@ -93,6 +93,7 @@ void PlanesDialog::createDialogContent()
 	ui->useBSDB->setChecked(planes->isDumpingOldFlights());
 	ui->useBSDB->setEnabled(planes->isUsingDB() && planes->isUsingBS());
 	ui->connectOnStartup->setChecked(planes->isConnectOnStartupEnabled());
+	ui->reconnectOnConnectionLoss->setChecked(planes->isReconnectOnConnectionLossEnabled());
 
 	DBCredentials c = planes->getDBCreds();
 	for (int i = 0; i < ui->dbDriver->count(); ++i)
@@ -181,6 +182,7 @@ void PlanesDialog::createDialogContent()
 	this->connect(ui->bsDisconnectButton, SIGNAL(clicked()), SLOT(disconnectBS()));
 
 	this->connect(ui->connectOnStartup, SIGNAL(clicked()), SLOT(setConnectOnStartup()));
+	this->connect(ui->reconnectOnConnectionLoss, SIGNAL(clicked(bool)), SLOT(setReconnectOnConnectionLoss(bool)));
 
 	this->connect(ui->red, SIGNAL(valueChanged(int)), SLOT(setColour()));
 	this->connect(ui->green, SIGNAL(valueChanged(int)), SLOT(setColour()));

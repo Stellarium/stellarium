@@ -65,6 +65,7 @@ signals:
 	void connectBSRequested();
 	void disconnectBSRequested();
 	void connectOnStartupChanged(bool enabled);
+	void reconnectOnConnectionLossChanged(bool enabled);
 	//!@}
 
 protected:
@@ -176,6 +177,11 @@ private slots:
 	void setUseBS();
 	void setConnectOnStartup();
 	void setColour();
+	void setReconnectOnConnectionLoss(bool enabled)
+	{
+		emit reconnectOnConnectionLossChanged(enabled);
+	}
+
 	//!@}
 };
 

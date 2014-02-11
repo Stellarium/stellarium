@@ -72,8 +72,18 @@ BSDataSource::BSDataSource() : FlightDataSource(10)
 	isSocketConnected = false;
 	isDbConnected = false;
 	connectionAttemptInProgress = false;
+	reconnectOnConnectionLoss = false;
+	isUserDisconnect = false;
 	dbWorker = NULL;
 	dbWorkerThread = NULL;
+	timer = new QTimer();
+	this->connect(timer, SIGNAL(timeout()), SLOT(reconnect()));
+}
+
+BSDataSource::~BSDataSource()
+{
+	timer->stop();
+	delete timer;
 }
 
 QList<FlightP> *BSDataSource::getRelevantFlights()
@@ -219,6 +229,7 @@ void BSDataSource::connectDBBS(QString host, quint16 port, DBCredentials creds)
 
 void BSDataSource::disconnectSocket()
 {
+	isUserDisconnect = true;
 	socket.disconnectFromHost();
 }
 
@@ -265,13 +276,22 @@ void BSDataSource::handleSocketError()
 void BSDataSource::setSocketConnected()
 {
 	isSocketConnected = true;
+	timer->stop();
 	emit bsStatusChanged(q_("Connected"));
 }
 
 void BSDataSource::setSocketDisconnected()
 {
 	isSocketConnected = false;
-	emit bsStatusChanged(q_("Disconnected"));
+	if(!isUserDisconnect && reconnectOnConnectionLoss)
+	{
+		emit bsStatusChanged(q_("Attempting to reconnect..."));
+		timer->setInterval(60 * 1000);
+		timer->start();
+	} else {
+		emit bsStatusChanged(q_("Disconnected"));
+		isUserDisconnect = false;
+	}
 }
 
 void BSDataSource::setDBConnected(bool connected, QString error)
@@ -353,6 +373,12 @@ void BSDataSource::setWorkerStopped()
 	// otherwise  bad things happen
 	connectionAttemptInProgress = false;
 	isDbConnected = false;
+}
+
+void BSDataSource::reconnect()
+{
+	Planes *planes = GETSTELMODULE(Planes);
+	connectDBBS(planes->getBSHost(), planes->getBSPort(), planes->getDBCreds());
 }
 
 void BSDataSource::parseMsg(QByteArray &buf, int start, int end)
@@ -544,9 +570,19 @@ bool BSDataSource::isDumpOldFlightsEnabled() const
 	return dumpOldFlights;
 }
 
+bool BSDataSource::isReconnectOnConnectionLossEnabled() const
+{
+	return reconnectOnConnectionLoss;
+}
+
 void BSDataSource::setDumpOldFlights(bool value)
 {
 	dumpOldFlights = value;
+}
+
+void BSDataSource::setReconnectOnConnectionLoss(bool enabled)
+{
+	reconnectOnConnectionLoss = enabled;
 }
 
 bool BSDataSource::isSocketEnabled() const
