@@ -155,6 +155,10 @@ Q_IMPORT_PLUGIN(PulsarsStelPluginInterface)
 Q_IMPORT_PLUGIN(ExoplanetsStelPluginInterface)
 #endif
 
+#ifdef USE_STATIC_PLUGIN_EQUATIONOFTIME
+Q_IMPORT_PLUGIN(EquationOfTimeStelPluginInterface)
+#endif
+
 #ifdef USE_STATIC_PLUGIN_FOV
 Q_IMPORT_PLUGIN(FOVStelPluginInterface)
 #endif
@@ -436,9 +440,6 @@ void StelApp::init(QSettings* conf)
 	// Initialisation of the color scheme
 	emit colorSchemeChanged("color");
 	setVisionModeNight(confSettings->value("viewing/flag_night").toBool());
-
-	// Initialisation of the render of solar shadows
-	//setRenderSolarShadows(confSettings->value("viewing/flag_render_solar_shadows", true).toBool());
 
 	// Proxy Initialisation
 	setupHttpProxy();

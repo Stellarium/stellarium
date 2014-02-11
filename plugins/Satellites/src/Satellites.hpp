@@ -125,10 +125,10 @@ class Satellites : public StelObjectModule, protected QOpenGLFunctions_1_2
 	Q_OBJECT
 	Q_PROPERTY(bool hintsVisible
 	           READ getFlagHints
-	           WRITE setFlagHints)
+		   WRITE setFlagHints)
 	Q_PROPERTY(bool labelsVisible
 	           READ getFlagLabels
-	           WRITE setFlagLabels)
+		   WRITE setFlagLabels)
 	Q_PROPERTY(bool autoAddEnabled
 	           READ isAutoAddEnabled
 	           WRITE enableAutoAdd
@@ -469,6 +469,8 @@ private:
 	//! Replace the qs.mag file with the default one.
 	void restoreDefaultQSMagFile();
 
+	//! Checks valid range dates of life of satellites
+	bool isValidRangeDates() const;
 
 	//! Save a structure representing a satellite catalog to a JSON file.
 	//! If no path is specified, catalogPath is used.
