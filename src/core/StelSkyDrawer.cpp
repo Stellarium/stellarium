@@ -337,7 +337,15 @@ bool StelSkyDrawer::computeRCMag(float mag, RCMag* rcMag) const
 		rcMag->luminance = 0.f;
 		return false;
 	}
-
+	
+	if (rcMag->radius>12.)
+		rcMag->radius = 12.;
+	rcMag->luminance = 1.-(12.-rcMag->radius)/12.;
+	rcMag->luminance *= 1.5;
+	if (rcMag->radius>2.5)
+		rcMag->radius = 2.5;
+	
+/*
 	// if size of star is too small (blink) we put its size to 1.2 --> no more blink
 	// And we compensate the difference of brighteness with cmag
 	if (rcMag->radius<1.2f)
@@ -358,7 +366,7 @@ bool StelSkyDrawer::computeRCMag(float mag, RCMag* rcMag) const
 		{
 			rcMag->radius=MAX_LINEAR_RADIUS+std::sqrt(1.f+rcMag->radius-MAX_LINEAR_RADIUS)-1.f;
 		}
-	}
+	}*/
 	return true;
 }
 
