@@ -304,7 +304,7 @@ private:
 
 	//! Define whether we are in night vision mode
 	bool flagNightVision;
-	
+
 	QSettings* confSettings;
 
 	// Define whether the StelApp instance has completed initialization

@@ -1,4 +1,3 @@
-
 # Because 2.8.11 is not available yet on ubuntu, but we need it to fix some
 # bugs on windows.
 IF(WIN32)
@@ -17,6 +16,8 @@ SET(PACKAGE stellarium)
 
 SET(PACKAGE_VERSION "${VERSION}")
 ADD_DEFINITIONS(-DPACKAGE_VERSION="${PACKAGE_VERSION}")
+
+SET(MINIMAL_QT_VERSION "5.1.0")
 
 # Use customized cmake macros
 SET(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
@@ -170,6 +171,7 @@ ADD_PLUGIN(SimpleDrawLine 0)
 ADD_PLUGIN(AngleMeasure 1)
 ADD_PLUGIN(CompassMarks 1)
 ADD_PLUGIN(Exoplanets 1)
+ADD_PLUGIN(EquationOfTime 1)
 ADD_PLUGIN(FOV 1)
 ADD_PLUGIN(LogBook 0)
 ADD_PLUGIN(MeteorShowers 1)
@@ -220,8 +222,14 @@ ENDIF()
 ADD_CUSTOM_TARGET(AllStaticPlugins ALL)
 
 ########### Find packages ###########
-FIND_PACKAGE(Qt5Concurrent REQUIRED)
 FIND_PACKAGE(Qt5Core REQUIRED)
+GET_TARGET_PROPERTY(QMAKE_LOCATION Qt5::qmake LOCATION)
+IF(${Qt5Core_VERSION_STRING} VERSION_LESS MINIMAL_QT_VERSION)
+    MESSAGE(FATAL_ERROR "Found Qt5: ${QMAKE_LOCATION} (found unsuitable version \"${Qt5Core_VERSION_STRING}\", required is \"${MINIMAL_QT_VERSION}\")")
+ELSE()
+    MESSAGE(STATUS "Found Qt5: ${QMAKE_LOCATION} (found suitable version \"${Qt5Core_VERSION_STRING}\", required is \"${MINIMAL_QT_VERSION}\")")
+ENDIF()
+FIND_PACKAGE(Qt5Concurrent REQUIRED)
 FIND_PACKAGE(Qt5Declarative REQUIRED)
 FIND_PACKAGE(Qt5Gui REQUIRED)
 FIND_PACKAGE(Qt5Network REQUIRED)
@@ -231,6 +239,7 @@ IF(WIN32)
     FIND_PACKAGE(Qt5Sql REQUIRED)
     FIND_PACKAGE(Qt5XmlPatterns REQUIRED)
 ENDIF()
+
 
 # Tell CMake to run moc when necessary:
 set(CMAKE_AUTOMOC ON)
