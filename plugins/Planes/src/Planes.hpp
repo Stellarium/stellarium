@@ -156,6 +156,12 @@ public:
 	//! Should we autoconnect on startup?
 	bool isConnectOnStartupEnabled() const;
 
+	//! Should the data port attempt to reconnect on connection loss?
+	bool isReconnectOnConnectionLossEnabled() const
+	{
+		return bsDataSource.isReconnectOnConnectionLossEnabled();
+	}
+
 public slots:
 	//! Turn this plugin on or off
 	void enablePlanes(bool b);

@@ -101,6 +101,7 @@ void Planes::init()
 	connect(settingsDialog, SIGNAL(disconnectDBRequested()), &bsDataSource, SLOT(disconnectDatabase()));
 	connect(settingsDialog, SIGNAL(connectBSRequested()), this, SLOT(connectDBBS()));
 	connect(settingsDialog, SIGNAL(disconnectBSRequested()), &bsDataSource, SLOT(disconnectSocket()));
+	connect(settingsDialog, SIGNAL(reconnectOnConnectionLossChanged(bool)), &bsDataSource, SLOT(setReconnectOnConnectionLoss(bool)));
 	connect(&bsDataSource, SIGNAL(dbStatusChanged(QString)), settingsDialog, SLOT(setDBStatus(QString)));
 	connect(&bsDataSource, SIGNAL(bsStatusChanged(QString)), settingsDialog, SLOT(setBSStatus(QString)));
 
@@ -189,6 +190,7 @@ void Planes::loadSettings()
 
 	bsDataSource.setDatabaseEnabled(conf->value(QStringLiteral("use_db"), false).toBool());
 	bsDataSource.setSocketEnabled(conf->value(QStringLiteral("use_bs"), false).toBool());
+	bsDataSource.setReconnectOnConnectionLoss(conf->value(QStringLiteral("attempt_reconnects"), false).toBool());
 
 	dbc.type = conf->value(QStringLiteral("db_type"), QStringLiteral("QMYSQL")).toString();
 	dbc.host = conf->value(QStringLiteral("db_host"), QStringLiteral("")).toString();
@@ -227,6 +229,7 @@ void Planes::saveSettings()
 
 	conf->setValue(QStringLiteral("use_db"), bsDataSource.isDatabaseEnabled());
 	conf->setValue(QStringLiteral("use_bs"), bsDataSource.isSocketEnabled());
+	conf->setValue(QStringLiteral("attempt_reconnects"), isReconnectOnConnectionLossEnabled());
 
 	conf->setValue(QStringLiteral("db_type"), dbc.type);
 	conf->setValue(QStringLiteral("db_host"), dbc.host);

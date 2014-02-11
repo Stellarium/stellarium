@@ -133,7 +133,7 @@
        <string>Data Source</string>
       </attribute>
       <layout class="QGridLayout" name="gridLayout">
-       <item row="1" column="0" rowspan="3">
+       <item row="2" column="0" rowspan="3">
         <widget class="QGroupBox" name="BSGroup">
          <property name="enabled">
           <bool>true</bool>
@@ -185,21 +185,21 @@
             </property>
            </widget>
           </item>
-          <item row="3" column="1">
+          <item row="4" column="1">
            <widget class="QPushButton" name="bsConnectButton">
             <property name="text">
              <string>Connect</string>
             </property>
            </widget>
           </item>
-          <item row="4" column="1">
+          <item row="5" column="1">
            <widget class="QPushButton" name="bsDisconnectButton">
             <property name="text">
              <string>Disconnect</string>
             </property>
            </widget>
           </item>
-          <item row="5" column="1">
+          <item row="6" column="1">
            <spacer name="verticalSpacer_5">
             <property name="orientation">
              <enum>Qt::Vertical</enum>
@@ -212,21 +212,21 @@
             </property>
            </spacer>
           </item>
-          <item row="6" column="0">
+          <item row="7" column="0">
            <widget class="QLabel" name="label_17">
             <property name="text">
              <string>Status</string>
             </property>
            </widget>
           </item>
-          <item row="6" column="1">
+          <item row="7" column="1">
            <widget class="QLabel" name="bsStatus">
             <property name="text">
              <string>Disconnected</string>
             </property>
            </widget>
           </item>
-          <item row="2" column="1">
+          <item row="3" column="1">
            <widget class="QCheckBox" name="useBSDB">
             <property name="text">
              <string>Write flights to database specified
@@ -237,14 +237,7 @@ to the right</string>
          </layout>
         </widget>
        </item>
-       <item row="4" column="1">
-        <widget class="QPushButton" name="importFileButton">
-         <property name="text">
-          <string>Import BaseStation Recording</string>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="1" rowspan="3">
+       <item row="2" column="1" rowspan="3">
         <widget class="QGroupBox" name="databaseGroup">
          <property name="enabled">
           <bool>true</bool>
@@ -392,10 +385,24 @@ to the right</string>
          </layout>
         </widget>
        </item>
+       <item row="5" column="1">
+        <widget class="QPushButton" name="importFileButton">
+         <property name="text">
+          <string>Import BaseStation Recording</string>
+         </property>
+        </widget>
+       </item>
        <item row="0" column="0" colspan="2">
         <widget class="QCheckBox" name="connectOnStartup">
          <property name="text">
           <string>Connect automatically on starup</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="QCheckBox" name="reconnectOnConnectionLoss">
+         <property name="text">
+          <string>Attempt to reconnect on connection loss</string>
          </property>
         </widget>
        </item>

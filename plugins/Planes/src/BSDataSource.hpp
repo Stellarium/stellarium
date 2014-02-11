@@ -68,6 +68,7 @@ public:
 
 	//! Constructor
 	BSDataSource();
+	virtual ~BSDataSource();
 
 	//! Implemented from FlightDataSource
 	QList<FlightP> *getRelevantFlights();
@@ -92,6 +93,9 @@ public:
 	//! before they are deleted.
 	bool isDumpOldFlightsEnabled() const;
 
+	//! Whether to attempt to reconnect to a lost data port connection
+	bool isReconnectOnConnectionLossEnabled() const;
+
 public slots:
 	//! Prompted to connect to db and/or socket
 	void connectDBBS(QString host, quint16 port, DBCredentials creds);
@@ -113,6 +117,9 @@ public slots:
 
 	//! Turn on writing of old flights to database
 	void setDumpOldFlights(bool value);
+
+	//! Enable reconnection attempts to data port
+	void setReconnectOnConnectionLoss(bool enabled);
 
 signals:
 	//! Emitted to signal status changes of the socket to the GUI
@@ -167,6 +174,8 @@ private slots:
 	//! The worker stopped and was destroyed
 	void setWorkerStopped();
 
+	void reconnect();
+
 
 private:
 	//! Parse a message received on the TCP socket
@@ -190,8 +199,11 @@ private:
 	bool isDbConnected;
 	bool isSocketConnected;
 	bool connectionAttemptInProgress;
+	bool reconnectOnConnectionLoss;
+	bool isUserDisconnect;
 	//!@}
 
+	QTimer *timer; //!< Timer for reconnection attempts;
 	QThread *dbWorkerThread; //!< DatabaseWorker thread to make database access asynchronous
 	DatabaseWorker *dbWorker; //!< DatabaseWorker
 };
