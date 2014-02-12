@@ -63,6 +63,7 @@ Exoplanet::Exoplanet(const QVariantMap& map)
 	hasHabitableExoplanets = map.value("hasHP", false).toBool();
 
 	EPCount=0;
+	PHEPCount=0;
 	if (map.contains("exoplanets"))
 	{
 		foreach(const QVariant &expl, map.value("exoplanets").toList())
@@ -80,6 +81,8 @@ Exoplanet::Exoplanet(const QVariantMap& map)
 			p.angleDistance = exoplanetMap.value("angleDistance", -1.f).toFloat();
 			p.discovered = exoplanetMap.value("discovered", 0).toInt();
 			p.hclass = exoplanetMap.value("hclass", "").toString();
+			if (!p.hclass.isEmpty())
+				PHEPCount++;
 			p.MSTemp = exoplanetMap.value("MSTemp", -1).toInt();
 			p.ESI = exoplanetMap.value("ESI", -1).toInt();
 			exoplanets.append(p);
