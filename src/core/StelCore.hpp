@@ -561,8 +561,8 @@ private:
 	double presetSkyTime;
 	QTime initTodayTime;
 	QString startupTimeMode;
-	double lastTimeChangeTime;         // Time in seconds when the time rate or time last changed
-	double lastTimeChangeJDay;         // JDay when the time rate or time last changed
+	double secondsOfLastJDayUpdate;         // Time in seconds when the time rate or time last changed
+	double JDayOfLastJDayUpdate;         // JDay when the time rate or time last changed
 
 	// Variables for custom equation of Delta-T
 	Vec3f deltaTCustomEquationCoeff;
