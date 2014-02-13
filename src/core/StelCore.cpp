@@ -1231,11 +1231,11 @@ void StelCore::updateTime(double deltaTime)
 	if (getRealTimeSpeed())
 	{
 		// Get rid of the error from the 1 /
-		JDay = lastTimeChangeJDay + (StelApp::getTotalRunTime() - lastTimeChangeTime) / ONE_OVER_JD_SECOND;
+		JDay = JDayOfLastJDayUpdate + (StelApp::getTotalRunTime() - secondsOfLastJDayUpdate) / ONE_OVER_JD_SECOND;
 	}
 	else
 	{
-		JDay = lastTimeChangeJDay + (StelApp::getTotalRunTime() - lastTimeChangeTime) * timeSpeed;
+		JDay = JDayOfLastJDayUpdate + (StelApp::getTotalRunTime() - secondsOfLastJDayUpdate) * timeSpeed;
 	}
 
 	// Fix time limits to -100000 to +100000 to prevent bugs
@@ -1264,8 +1264,8 @@ void StelCore::updateTime(double deltaTime)
 
 void StelCore::resetSync()
 {
-	lastTimeChangeJDay = getJDay();
-	lastTimeChangeTime = StelApp::getTotalRunTime();
+	JDayOfLastJDayUpdate = getJDay();
+	secondsOfLastJDayUpdate = StelApp::getTotalRunTime();
 }
 
 void StelCore::setStartupTimeMode(const QString& s)
