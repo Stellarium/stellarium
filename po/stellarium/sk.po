@@ -7,21 +7,21 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-02-08 11:19+0700\n"
+"POT-Creation-Date: 2014-02-12 19:44+0700\n"
 "PO-Revision-Date: 2014-02-09 17:03+0000\n"
 "Last-Translator: Pavol Gajdoš <Unknown>\n"
 "Language-Team: Slovak <sk@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-02-10 05:26+0000\n"
+"X-Launchpad-Export-Date: 2014-02-13 05:40+0000\n"
 "X-Generator: Launchpad (build 16916)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:106 src/core/modules/StarMgr.cpp:337
 #: src/core/modules/GridLinesMgr.cpp:680 src/core/modules/LandscapeMgr.cpp:342
 #: src/core/modules/NebulaMgr.cpp:123 src/core/modules/SolarSystem.cpp:151
 #: src/core/StelApp.cpp:445 src/core/StelCore.cpp:162
-#: src/core/StelSkyLayerMgr.cpp:87 src/StelMainView.cpp:301
+#: src/core/StelSkyLayerMgr.cpp:87 src/StelMainView.cpp:307
 msgid "Display Options"
 msgstr "Možnosti zobrazenia"
 
@@ -163,7 +163,7 @@ msgstr "Planéta: "
 #: src/core/modules/StarWrapper.cpp:173
 #: plugins/Satellites/src/Satellite.cpp:242
 #: plugins/Supernovae/src/Supernova.cpp:122 plugins/Quasars/src/Quasar.cpp:91
-#: plugins/Pulsars/src/Pulsar.cpp:137 plugins/Exoplanets/src/Exoplanet.cpp:158
+#: plugins/Pulsars/src/Pulsar.cpp:137 plugins/Exoplanets/src/Exoplanet.cpp:161
 #, qt-format
 msgid "Type: <b>%1</b>"
 msgstr "Typ: <b>%1</b>"
@@ -172,7 +172,7 @@ msgstr "Typ: <b>%1</b>"
 #: src/core/modules/MinorPlanet.cpp:220 src/core/modules/Comet.cpp:157
 #: src/core/modules/StarWrapper.cpp:56 src/core/modules/StarWrapper.cpp:180
 #: plugins/Supernovae/src/Supernova.cpp:127 plugins/Novae/src/Nova.cpp:125
-#: plugins/Quasars/src/Quasar.cpp:97 plugins/Exoplanets/src/Exoplanet.cpp:167
+#: plugins/Quasars/src/Quasar.cpp:97 plugins/Exoplanets/src/Exoplanet.cpp:170
 #, qt-format
 msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>)"
 msgstr "Magnitúda: <b>%1</b> (extinkcia <b>%2</b>)"
@@ -181,7 +181,7 @@ msgstr "Magnitúda: <b>%1</b> (extinkcia <b>%2</b>)"
 #: src/core/modules/MinorPlanet.cpp:223 src/core/modules/Comet.cpp:160
 #: src/core/modules/StarWrapper.cpp:60 src/core/modules/StarWrapper.cpp:183
 #: plugins/Supernovae/src/Supernova.cpp:129 plugins/Novae/src/Nova.cpp:128
-#: plugins/Quasars/src/Quasar.cpp:102 plugins/Exoplanets/src/Exoplanet.cpp:172
+#: plugins/Quasars/src/Quasar.cpp:102 plugins/Exoplanets/src/Exoplanet.cpp:175
 #, qt-format
 msgid "Magnitude: <b>%1</b>"
 msgstr "Magnitúda: <b>%1</b>"
@@ -397,13 +397,13 @@ msgstr ""
 
 #: src/core/modules/StarWrapper.cpp:216
 #: plugins/Supernovae/src/Supernova.cpp:140 plugins/Novae/src/Nova.cpp:138
-#: plugins/Exoplanets/src/Exoplanet.cpp:187
+#: plugins/Exoplanets/src/Exoplanet.cpp:190
 #, qt-format
 msgid "Distance: %1 Light Years"
 msgstr "Vzdialenosť: %1 svetelných rokov"
 
 #: src/core/modules/StarWrapper.cpp:221
-#: plugins/Exoplanets/src/Exoplanet.cpp:182
+#: plugins/Exoplanets/src/Exoplanet.cpp:185
 #, qt-format
 msgid "Spectral Type: %1"
 msgstr "Spektrálny typ: %1"
@@ -631,11 +631,11 @@ msgstr "Zrkadliť horizontálne"
 msgid "Flip scene vertically"
 msgstr "Zrkadliť vertikálne"
 
-#: src/core/StelCore.cpp:1454
+#: src/core/StelCore.cpp:1455
 msgid "Correction is disabled. Use only if you know what you are doing!"
 msgstr "Korekcie sú blokované. Používaj len keď vieš, čo robíš!"
 
-#: src/core/StelCore.cpp:1457
+#: src/core/StelCore.cpp:1458
 #, qt-format
 msgid ""
 "This historical formula was obtained by C. Schoch in 1931 and was used by G. "
@@ -646,7 +646,7 @@ msgstr ""
 "Henrikssonom v jeho článku <em>Einsteinova teória relativity potvrdená "
 "pomocou starodávnych slnečných zatmení</em> (%1). Viac informácii %2tu%3."
 
-#: src/core/StelCore.cpp:1460
+#: src/core/StelCore.cpp:1461
 #, qt-format
 msgid ""
 "This empirical equation was published by G. M. Clemence in the article "
@@ -655,7 +655,7 @@ msgstr ""
 "Túto empirickú rovnicu publikoval G. M. Clemence v článku <em>O sústave "
 "astronomických konštánt</em> (%1)."
 
-#: src/core/StelCore.cpp:1463
+#: src/core/StelCore.cpp:1464
 #, qt-format
 msgid ""
 "This formula is based on a study of post-1650 observations of the Sun, the "
@@ -667,7 +667,7 @@ msgstr ""
 "1650 Spencerom Jonesom (%1) a použitý Jeanom Meeusom v jeho <em>Asronomické "
 "vzorce pre kalkulačky</em>. Bol využitý v PC programe SunTracker Pro."
 
-#: src/core/StelCore.cpp:1467
+#: src/core/StelCore.cpp:1468
 msgid ""
 "This is a slightly modified version of the IAU (1952) formula which was "
 "adopted in the <em>Astronomical Ephemeris</em> and in the <em>Canon of Solar "
@@ -677,7 +677,7 @@ msgstr ""
 "<em>Astronomických efemeridoch</em> a v <em>Pravidlo zatmení Slnka</em> "
 "Mucke a Meeus (1983)."
 
-#: src/core/StelCore.cpp:1471
+#: src/core/StelCore.cpp:1472
 msgid ""
 "The tables of Tuckerman (1962, 1964) list the positions of the Sun, the Moon "
 "and the planets at 5- and 10-day intervals from 601 BCE to 1649 CE. The same "
@@ -688,7 +688,7 @@ msgstr ""
 "v 5- a 10-dňových intervaloch od 601 p.n.l. do 1649 n.l.  Rovnaký vzťah bol "
 "implicitne prijatý v Goldstinových tabuľkách (1973)."
 
-#: src/core/StelCore.cpp:1475
+#: src/core/StelCore.cpp:1476
 #, qt-format
 msgid ""
 "This equation was published by P. M. Muller and F. R. Stephenson in the "
@@ -699,7 +699,7 @@ msgstr ""
 "<em>Zrýchľovanie Zeme a Mesiaca od počiatku astronomických pozorovaní</em> "
 "(%1)."
 
-#: src/core/StelCore.cpp:1478
+#: src/core/StelCore.cpp:1479
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson in the article <em>Pre-"
@@ -708,7 +708,7 @@ msgstr ""
 "Túto rovnicu publikoval F. R. Stephenson v článku <em>Astronomické "
 "pozorovania pred vynálezom ďalekohľadu</em> (%1)."
 
-#: src/core/StelCore.cpp:1481
+#: src/core/StelCore.cpp:1482
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation (outdated and superseded by Schmadel & "
@@ -721,7 +721,7 @@ msgstr ""
 "<em>Polynomické aproximácie pre korekciu delta T E.T.-U.T. v období 1800-"
 "1975</em> (%1) ako fitovanie cez dáta Brouwera (1952)."
 
-#: src/core/StelCore.cpp:1484
+#: src/core/StelCore.cpp:1485
 msgid ""
 "This algorithm was adopted in P. Bretagnon & L. Simon's <em>Planetary "
 "Programs and Tables from -4000 to +2800</em> (1986) and in the PC "
@@ -731,7 +731,7 @@ msgstr ""
 "<em>Planetárne programy atabuľky od -4000 do +2800</em> (1986) a z PC "
 "planetária RedShift."
 
-#: src/core/StelCore.cpp:1487
+#: src/core/StelCore.cpp:1488
 #, qt-format
 msgid ""
 "This formula was published by F. R. Stephenson and L. V. Morrison in the "
@@ -741,11 +741,11 @@ msgstr ""
 "Túto rovnicu publikovali F. R. Stephenson a L. V. Morrison v článku "
 "<em>Dlhodobé zmeny rotácie Zeme - 700 pr. n. l. až 1980</em> (%1)."
 
-#: src/core/StelCore.cpp:1490
+#: src/core/StelCore.cpp:1491
 msgid "This algorithm is used in the PC planetarium program Guide 7."
 msgstr "Algoritmus použitý v PC planetáriu Guide 7."
 
-#: src/core/StelCore.cpp:1493
+#: src/core/StelCore.cpp:1494
 msgid ""
 "This algorithm was given by F. Espenak in his <em>Fifty Year Canon of Solar "
 "Eclipses: 1986-2035</em> (1987) and in his <em>Fifty Year Canon of Lunar "
@@ -755,7 +755,7 @@ msgstr ""
 "slnečnýh zatmení: 1986-2035</em> (1987) a v jeho <em>Päťdesiatročnom súhrne "
 "lunárnych zatmení: 1986-2035</em> (1989)."
 
-#: src/core/StelCore.cpp:1496
+#: src/core/StelCore.cpp:1497
 #, qt-format
 msgid ""
 "This formula was obtained by K.M. Borkowski (%1) from an analysis of 31 "
@@ -764,7 +764,7 @@ msgstr ""
 "Tento vzťah bol získaný K.M. Borkowskim (%1) z analýzy 31 solárnych zatmení "
 "medzi 2137 p.n.l. a 1715 n.l."
 
-#: src/core/StelCore.cpp:1499
+#: src/core/StelCore.cpp:1500
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation was published by L. D. Schmadel and G. "
@@ -776,7 +776,7 @@ msgstr ""
 "článku <em>Empirické transformácie z U.T. do E.T. v období 1800-1988</em> "
 "(%1) ako fitovanie hodnôt od Stephensona a Morrisona (1984)."
 
-#: src/core/StelCore.cpp:1502
+#: src/core/StelCore.cpp:1503
 msgid ""
 "This formula was adopted by M. Chapront-Touze & J. Chapront in the shortened "
 "version of the ELP 2000-85 lunar theory in their <em>Lunar Tables and "
@@ -786,7 +786,7 @@ msgstr ""
 "ELP 2000-85 mesačnej teórii v ich <em>Lunárne tabuľky a programy od 4000 "
 "p.n.l. do 8000 n.l.</em> (1991)."
 
-#: src/core/StelCore.cpp:1505
+#: src/core/StelCore.cpp:1506
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson and L. V. Morrison in the "
@@ -796,7 +796,7 @@ msgstr ""
 "Túto rovnicu publikovali F. R. Stephenson a L. V. Morrison v článku "
 "<em>Dlhodobé odchýlky rotácie Zeme: 700 pr. n. l. až 1990</em> (%1)."
 
-#: src/core/StelCore.cpp:1508
+#: src/core/StelCore.cpp:1509
 #, qt-format
 msgid ""
 "F. R. Stephenson published this formula in his book <em>Historical Eclipses "
@@ -805,7 +805,7 @@ msgstr ""
 "F. R. Stephenson publikoval tento vzorec vo svojej knižke <em>Historické "
 "zatmenia a rotácia Zeme</em> (%1)."
 
-#: src/core/StelCore.cpp:1511
+#: src/core/StelCore.cpp:1512
 msgid ""
 "From J. Meeus, <em>Astronomical Algorithms</em> (2nd ed., 1998), and widely "
 "used. Table for 1620..2000, and includes a variant of Chapront, Chapront-"
@@ -815,7 +815,7 @@ msgstr ""
 "používaný. Tabuľka od 1600 do 2000 a zahŕňa variant Chapront, Chapront-Touze "
 "a Francou (1997) pre dátumy mimo 1620 do 2000."
 
-#: src/core/StelCore.cpp:1514
+#: src/core/StelCore.cpp:1515
 #, qt-format
 msgid ""
 "The JPL Solar System Dynamics Group of the NASA Jet Propulsion Laboratory "
@@ -824,7 +824,7 @@ msgstr ""
 "JPL Solar System Dynamics Group NASA Jet Propulsion Laboratory použila tento "
 "vzťah na ich interaktívnej webstránke %1JPL Horizons%2."
 
-#: src/core/StelCore.cpp:1517
+#: src/core/StelCore.cpp:1518
 #, qt-format
 msgid ""
 "This polynome was published by J. Meeus and L. Simons in article "
@@ -833,7 +833,7 @@ msgstr ""
 "Tento polynóm bol publikovaný J. Meeusom a L. Simonsom v článku "
 "<em>Polynomiálne aproximácie pre Delta T, 1620-2000 n.l.</em> (%1)."
 
-#: src/core/StelCore.cpp:1520
+#: src/core/StelCore.cpp:1521
 msgid ""
 "The fourth edition of O. Montenbruck & T. Pfleger's <em>Astronomy on the "
 "Personal Computer</em> (2000) provides simple 3rd-order polynomial data fits "
@@ -843,7 +843,7 @@ msgstr ""
 "počítači</em> (2000) poskytuje jednoduchý kubický polynóm na fitovanie dát z "
 "nedávnej minulosti."
 
-#: src/core/StelCore.cpp:1523
+#: src/core/StelCore.cpp:1524
 msgid ""
 "E. M. Reingold & N. Dershowitz present this polynomial data fit in "
 "<em>Calendrical Calculations</em> (3rd ed. 2007) and in their "
@@ -855,7 +855,7 @@ msgstr ""
 "kalendárnych tabuliek</em> (2002). Je založený na <em>Astronomických "
 "algoritmoch</em> (1991) Jeana Meeusa."
 
-#: src/core/StelCore.cpp:1526
+#: src/core/StelCore.cpp:1527
 #, qt-format
 msgid ""
 "This important solution was published by L. V. Morrison and F. R. Stephenson "
@@ -866,7 +866,7 @@ msgstr ""
 "Stephensonom v článku <em>Historické hodnoty chyby zemských hodín %1T a "
 "výpočet zatmení</em> (%2) s dodatkom v (%3)."
 
-#: src/core/StelCore.cpp:1529
+#: src/core/StelCore.cpp:1530
 #, qt-format
 msgid ""
 "From the Length of Day (LOD; as determined by Stephenson & Morrison (%2)), "
@@ -879,7 +879,7 @@ msgstr ""
 "mocninou. Je zaločení na možnej periodicite opísanej v Stephenson (%2). Viac "
 "informácií %3tu%4."
 
-#: src/core/StelCore.cpp:1532
+#: src/core/StelCore.cpp:1533
 #, qt-format
 msgid ""
 "This solution by F. Espenak and J. Meeus, based on Morrison & Stephenson "
@@ -893,11 +893,11 @@ msgstr ""
 "použité pre %1NASA Eclipse Web Site%2 a v ich <em>Päťtisícročnom pravidle "
 "solárnych zatmení: -1900 do +3000</em>"
 
-#: src/core/StelCore.cpp:1532
+#: src/core/StelCore.cpp:1533
 msgid "Used by default."
 msgstr "Použité v predvolenom nastavení."
 
-#: src/core/StelCore.cpp:1535
+#: src/core/StelCore.cpp:1536
 #, qt-format
 msgid ""
 "This solution by B. Banjevic, based on Stephenson & Morrison (1984), was "
@@ -908,7 +908,7 @@ msgstr ""
 "publikované v článku <em>Ancient eclipses and dating the fall of "
 "Babylon</em> (%1)."
 
-#: src/core/StelCore.cpp:1538
+#: src/core/StelCore.cpp:1539
 #, qt-format
 msgid ""
 "This solution by S. Islam, M. Sadiq and M. S. Qureshi, based on Meeus & "
@@ -920,7 +920,7 @@ msgstr ""
 "Minimization of Polynomial Approximation of DeltaT</em> (%1) a revidované S. "
 "Islamem v roku 2013."
 
-#: src/core/StelCore.cpp:1541
+#: src/core/StelCore.cpp:1542
 #, qt-format
 msgid ""
 "This is a quadratic formula for calculation of %1T with coefficients defined "
@@ -929,15 +929,15 @@ msgstr ""
 "To je kvadratická rovnica pre výpočet %1T s koeficientami definovanými "
 "užívateľom."
 
-#: src/core/StelCore.cpp:1544 src/core/SimbadSearcher.cpp:133
+#: src/core/StelCore.cpp:1545 src/core/SimbadSearcher.cpp:133
 msgid "Error"
 msgstr "Chyba"
 
-#: src/core/StelCore.cpp:1593
+#: src/core/StelCore.cpp:1594
 msgid "with meaningless values outside this range"
 msgstr "s nezmyselnou hodnotou mimo rozsahu"
 
-#: src/core/StelCore.cpp:1619
+#: src/core/StelCore.cpp:1620
 msgid ""
 "with a mean error of less than one second, max. error 1.9s, and meaningless "
 "values outside this range"
@@ -945,21 +945,21 @@ msgstr ""
 "so strednou chybou menšou ako 1 sekunda, max. chyba 1,9 s, a nezmyselná "
 "hodnota mimo rozsahu"
 
-#: src/core/StelCore.cpp:1641 src/core/StelCore.cpp:1646
-#: src/core/StelCore.cpp:1673 src/core/StelCore.cpp:1678
+#: src/core/StelCore.cpp:1642 src/core/StelCore.cpp:1647
+#: src/core/StelCore.cpp:1674 src/core/StelCore.cpp:1679
 msgid "with zero values outside this range"
 msgstr "s nulovou hodnotou mimo rozsahu"
 
-#: src/core/StelCore.cpp:1651
+#: src/core/StelCore.cpp:1652
 msgid "with a typical 1-second accuracy and zero values outside this range"
 msgstr "s typickou presnosťou 1 sekunda a nulová hodnota mimo rozsahu"
 
-#: src/core/StelCore.cpp:1688
+#: src/core/StelCore.cpp:1689
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2, %3."
 msgstr "Prijateľný rozsah použitia: medzi rokmi %1 a %2, %3."
 
-#: src/core/StelCore.cpp:1690
+#: src/core/StelCore.cpp:1691
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2."
 msgstr "Prijateľný rozsah použitia: medzi rokmi %1 a %2."
@@ -1116,7 +1116,7 @@ msgid "Deep-sky objects background images"
 msgstr "Obrázky na pozadí objektov hlbokého vesmíru"
 
 #: src/core/StelMovementMgr.cpp:106 src/gui/StelGui.cpp:177
-#: src/StelMainView.cpp:300
+#: src/StelMainView.cpp:306
 msgid "Miscellaneous"
 msgstr "Rôzne"
 
@@ -1667,20 +1667,20 @@ msgstr "Automaticky skrývať vodorovný panel tlačidiel"
 msgid "Auto hide vertical button bar"
 msgstr "Automaticky skrývať zvislý panel tlačidiel"
 
-#: src/gui/StelGuiItems.cpp:289 src/gui/StelGuiItems.cpp:701
+#: src/gui/StelGuiItems.cpp:290 src/gui/StelGuiItems.cpp:702
 msgid "Space"
 msgstr "Medzerník"
 
-#: src/gui/StelGuiItems.cpp:570
+#: src/gui/StelGuiItems.cpp:571
 #, c-format, qt-format
 msgid "%1m"
 msgstr "%1m"
 
-#: src/gui/StelGuiItems.cpp:608
+#: src/gui/StelGuiItems.cpp:609
 msgid "Field of view"
 msgstr ""
 
-#: src/gui/StelGuiItems.cpp:626
+#: src/gui/StelGuiItems.cpp:627
 msgid "Frames per second"
 msgstr "Počet snímok za sekundu"
 
@@ -1911,21 +1911,21 @@ msgstr "rok"
 msgid "This system does not support OpenGL."
 msgstr "Tento systém nepodporuje OpenGL."
 
-#: src/StelMainView.cpp:300
+#: src/StelMainView.cpp:306
 msgid "Save screenshot"
 msgstr "Uložiť snímku obrazovky"
 
-#: src/StelMainView.cpp:301
+#: src/StelMainView.cpp:307
 msgid "Full-screen mode"
 msgstr "Celoobrazovkový režim"
 
-#: src/StelMainView.cpp:357
+#: src/StelMainView.cpp:412
 #, qt-format
 msgid "Stellarium %1"
 msgstr "Stellarium %1"
 
-#: src/translations.h:33 plugins/Exoplanets/src/Exoplanet.cpp:198
-#: plugins/Exoplanets/src/Exoplanet.cpp:202
+#: src/translations.h:33 plugins/Exoplanets/src/Exoplanet.cpp:201
+#: plugins/Exoplanets/src/Exoplanet.cpp:205
 msgid "Sun"
 msgstr "Slnko"
 
@@ -3693,7 +3693,7 @@ msgstr "&Kopírovať"
 msgid "&Paste"
 msgstr "V&ložiť"
 
-#: src/translations.h:547 src/ui_locationDialogGui.h:395
+#: src/translations.h:547 src/ui_locationDialogGui.h:396
 #: plugins/Oculars/src/ui_ocularDialog.h:1063
 #: plugins/Oculars/src/ui_ocularDialog.h:1072
 #: plugins/Oculars/src/ui_ocularDialog.h:1079
@@ -3721,7 +3721,7 @@ msgstr "Priečinok"
 msgid "&Choose"
 msgstr "&Zvoliť"
 
-#: src/translations.h:553 src/ui_configurationDialog.h:1153
+#: src/translations.h:553 src/ui_configurationDialog.h:1155
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:516
 msgid "Cancel"
 msgstr "Zrušiť"
@@ -3763,7 +3763,7 @@ msgstr "O aplikácii"
 msgid "Log"
 msgstr "Záznam"
 
-#: src/ui_helpDialogGui.h:290 src/ui_configurationDialog.h:1078
+#: src/ui_helpDialogGui.h:290 src/ui_configurationDialog.h:1080
 msgid "Edit keyboard shortcuts..."
 msgstr "Upraviť klávesové skratky..."
 
@@ -3771,70 +3771,70 @@ msgstr "Upraviť klávesové skratky..."
 msgid "Refresh"
 msgstr "Obnoviť"
 
-#: src/ui_locationDialogGui.h:388
+#: src/ui_locationDialogGui.h:389
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:140
 msgid "Location"
 msgstr "Zemepisná poloha"
 
-#: src/ui_locationDialogGui.h:392
+#: src/ui_locationDialogGui.h:393
 msgid "Current location information"
 msgstr "Informácie o súčasnej zemepisnej polohe"
 
-#: src/ui_locationDialogGui.h:393
+#: src/ui_locationDialogGui.h:394
 msgid "Use as default"
 msgstr "Použiť ako predvolené"
 
-#: src/ui_locationDialogGui.h:394
+#: src/ui_locationDialogGui.h:395
 msgid "Return to default"
 msgstr "Východzie hodnoty"
 
-#: src/ui_locationDialogGui.h:396
+#: src/ui_locationDialogGui.h:397
 msgid "Add to list"
 msgstr "Pridať do zoznamu"
 
-#: src/ui_locationDialogGui.h:397
+#: src/ui_locationDialogGui.h:398
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:141
 msgid "Latitude:"
 msgstr "Zemepisná šírka:"
 
-#: src/ui_locationDialogGui.h:399 src/ui_locationDialogGui.h:403
+#: src/ui_locationDialogGui.h:400 src/ui_locationDialogGui.h:404
 msgid ""
 "You can enter values in decimal degrees, or using dms format, for example: "
 "+1d 12m 8s"
 msgstr ""
 "Hodnoty môžete zadať v stupňoch, alebo vo formáte DMS, napríklad: +1d 12m 8s"
 
-#: src/ui_locationDialogGui.h:401
+#: src/ui_locationDialogGui.h:402
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:144
 msgid "Longitude:"
 msgstr "Zemepisná dĺžka:"
 
-#: src/ui_locationDialogGui.h:405
+#: src/ui_locationDialogGui.h:406
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:147
 msgid "Altitude:"
 msgstr "Nadmorská výška:"
 
-#: src/ui_locationDialogGui.h:407
+#: src/ui_locationDialogGui.h:408
 msgid "Enter the altitude in meter"
 msgstr "Zadajte výšku v metroch"
 
-#: src/ui_locationDialogGui.h:409
+#: src/ui_locationDialogGui.h:410
 msgid " m"
 msgstr " m"
 
-#: src/ui_locationDialogGui.h:410
+#: src/ui_locationDialogGui.h:411
 msgid "Name/City:"
 msgstr "Názov miesta:"
 
-#: src/ui_locationDialogGui.h:411
+#: src/ui_locationDialogGui.h:412
 msgid "New Location"
 msgstr "Nové Umiestnenie"
 
-#: src/ui_locationDialogGui.h:412
+#: src/ui_locationDialogGui.h:413
 msgid "Country:"
 msgstr "Štát:"
 
-#: src/ui_locationDialogGui.h:413
+#: src/ui_locationDialogGui.h:414
 msgid "Planet:"
 msgstr "Planéta:"
 
@@ -4001,7 +4001,7 @@ msgstr "Automatické doplňovanie používať len od začiatku slov"
 
 #: src/ui_searchDialogGui.h:656 src/ui_viewDialog.h:1320
 #: src/ui_viewDialog.h:1326 src/ui_viewDialog.h:1328
-#: src/ui_configurationDialog.h:1154 src/ui_configurationDialog.h:1165
+#: src/ui_configurationDialog.h:1156 src/ui_configurationDialog.h:1167
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:416
 msgid "Options"
 msgstr "Možnosti"
@@ -4260,19 +4260,19 @@ msgstr "Použiť túto kultúru ako predvolenú"
 msgid "Visible"
 msgstr "Viditeľný"
 
-#: src/ui_configurationDialog.h:992
+#: src/ui_configurationDialog.h:994
 msgid "Configuration"
 msgstr "Nastavenia"
 
-#: src/ui_configurationDialog.h:994
+#: src/ui_configurationDialog.h:996
 msgid "Program language"
 msgstr "Jazyk programu"
 
-#: src/ui_configurationDialog.h:995
+#: src/ui_configurationDialog.h:997
 msgid "Check updates"
 msgstr "Skontrolovať aktualizácie"
 
-#: src/ui_configurationDialog.h:996
+#: src/ui_configurationDialog.h:998
 msgid ""
 "Enable checking updates of Stellarium via Internet. Info for updates of "
 "stable versions you can look on the tab \"About\" of \"Help\" window."
@@ -4281,11 +4281,11 @@ msgstr ""
 "ohľadom aktualizácií stabilných verzií nájdete v karte \"O aplikácii\" okna "
 "\"Pomoc\"."
 
-#: src/ui_configurationDialog.h:997
+#: src/ui_configurationDialog.h:999
 msgid "Default options"
 msgstr "Predvolené nastavenia"
 
-#: src/ui_configurationDialog.h:999
+#: src/ui_configurationDialog.h:1001
 msgid ""
 "Save the settings you've changed this session to be the same the next time "
 "you start Stellarium"
@@ -4293,23 +4293,23 @@ msgstr ""
 "Uložiť nastavenia, ktoré ste zmenili v tejto relácii tak, aby boli rovnaké "
 "pri ďalšom spustení Stellaria"
 
-#: src/ui_configurationDialog.h:1001
+#: src/ui_configurationDialog.h:1003
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:390
 #: plugins/FOV/src/ui_fovWindow.h:387
-#: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:254
+#: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:276
 msgid "Save settings"
 msgstr "Uložiť nastavenia"
 
-#: src/ui_configurationDialog.h:1003
+#: src/ui_configurationDialog.h:1005
 msgid "Restore the default settings that came with Stellarium"
 msgstr "Obnoviť pôvodné nastavenia Stellaria"
 
-#: src/ui_configurationDialog.h:1005 plugins/FOV/src/ui_fovWindow.h:386
-#: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:251
+#: src/ui_configurationDialog.h:1007 plugins/FOV/src/ui_fovWindow.h:386
+#: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:277
 msgid "Restore defaults"
 msgstr "Obnoviť pôvodné"
 
-#: src/ui_configurationDialog.h:1006
+#: src/ui_configurationDialog.h:1008
 msgid ""
 "Restoring default settings requires a restart of Stellarium. Saving all the "
 "current options includes the current FOV and direction of view for use at "
@@ -4318,210 +4318,210 @@ msgstr ""
 "Na obnovenie predvolených nastavení je potrebné reštartovať Stellarium. Pri "
 "ukladaní nastavení sa uloží aj smer pohľadu a šírka zorného poľa."
 
-#: src/ui_configurationDialog.h:1008
+#: src/ui_configurationDialog.h:1010
 msgid "The width of your view when Stellarium starts"
 msgstr "Šírka vášho pohľadu pri spustení Stellaria"
 
-#: src/ui_configurationDialog.h:1011
+#: src/ui_configurationDialog.h:1013
 msgid "The direction you're looking when Stellarium starts"
 msgstr "Smer, ktorým sa pozeráte pri spustení Stellaria"
 
-#: src/ui_configurationDialog.h:1013 src/ui_configurationDialog.h:1176
+#: src/ui_configurationDialog.h:1015 src/ui_configurationDialog.h:1178
 msgid "Selected object information"
 msgstr "Informácie o vybranom objekte"
 
-#: src/ui_configurationDialog.h:1015
+#: src/ui_configurationDialog.h:1017
 msgid "Display all information available"
 msgstr "Zobraziť všetky dostupné informácie"
 
-#: src/ui_configurationDialog.h:1017
+#: src/ui_configurationDialog.h:1019
 msgid "All available"
 msgstr "Všetky dostupné"
 
-#: src/ui_configurationDialog.h:1019
+#: src/ui_configurationDialog.h:1021
 msgid "Display no information"
 msgstr "Nezobrazovať informácie"
 
-#: src/ui_configurationDialog.h:1021 plugins/Oculars/src/Oculars.cpp:1910
+#: src/ui_configurationDialog.h:1023 plugins/Oculars/src/Oculars.cpp:1910
 #: plugins/Observability/src/Observability.cpp:231
 msgid "None"
 msgstr "Žiadne"
 
-#: src/ui_configurationDialog.h:1023
+#: src/ui_configurationDialog.h:1025
 msgid "Display less information"
 msgstr "Zobraziť menej informácií"
 
-#: src/ui_configurationDialog.h:1025
+#: src/ui_configurationDialog.h:1027
 msgid "Short"
 msgstr "Stručné"
 
-#: src/ui_configurationDialog.h:1027
+#: src/ui_configurationDialog.h:1029
 msgid "Display user settings information"
 msgstr "Zobrazenie informácie o vlastných nastaveniach"
 
-#: src/ui_configurationDialog.h:1029
+#: src/ui_configurationDialog.h:1031
 msgid "Customized"
 msgstr "Prispôsobené"
 
-#: src/ui_configurationDialog.h:1030
+#: src/ui_configurationDialog.h:1032
 msgid "Displayed fields"
 msgstr "Zobrazené polia"
 
-#: src/ui_configurationDialog.h:1031
+#: src/ui_configurationDialog.h:1033
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:269
 msgid "Name"
 msgstr "Názov"
 
-#: src/ui_configurationDialog.h:1033
+#: src/ui_configurationDialog.h:1035
 msgid "Geocentric equatorial coordinates, equinox of date"
 msgstr "Geocentrické ekvatoriálne súradnice, ekvinokcium k dátumu"
 
-#: src/ui_configurationDialog.h:1035
+#: src/ui_configurationDialog.h:1037
 msgid "Right ascension/Declination (of date)"
 msgstr "Rektascenzia/Deklinácia (k dátumu)"
 
-#: src/ui_configurationDialog.h:1036
+#: src/ui_configurationDialog.h:1038
 msgid "Catalog number(s)"
 msgstr "Čísla katalógov"
 
-#: src/ui_configurationDialog.h:1038
+#: src/ui_configurationDialog.h:1040
 msgid "Geocentric equatorial coordinates, equinox of J2000.0"
 msgstr "Geocentrické rovníkové súradnice, ekvinokcium J2000"
 
-#: src/ui_configurationDialog.h:1040
+#: src/ui_configurationDialog.h:1042
 msgid "Right ascension/Declination (J2000)"
 msgstr "Rektascenzia/Deklinácia (J2000)"
 
-#: src/ui_configurationDialog.h:1041
+#: src/ui_configurationDialog.h:1043
 msgid "Absolute magnitude"
 msgstr "Absolútna magnitúda"
 
-#: src/ui_configurationDialog.h:1042
+#: src/ui_configurationDialog.h:1044
 msgid "Galactic coordinates"
 msgstr "Galaktické súradnice"
 
-#: src/ui_configurationDialog.h:1043
+#: src/ui_configurationDialog.h:1045
 msgid "Visual magnitude"
 msgstr "Vizuálna magnitúda"
 
-#: src/ui_configurationDialog.h:1045
+#: src/ui_configurationDialog.h:1047
 msgid "Angular or physical size"
 msgstr "Uhlová alebo fyzická veľkosť"
 
-#: src/ui_configurationDialog.h:1047
+#: src/ui_configurationDialog.h:1049
 msgid "Size"
 msgstr "Veľkosť"
 
-#: src/ui_configurationDialog.h:1049
+#: src/ui_configurationDialog.h:1051
 msgid "The type of the object (star, planet, etc.)"
 msgstr "Typ objektu (hviezda, planéta atď.)"
 
-#: src/ui_configurationDialog.h:1051
+#: src/ui_configurationDialog.h:1053
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:268
 msgid "Type"
 msgstr "Typ"
 
-#: src/ui_configurationDialog.h:1053
+#: src/ui_configurationDialog.h:1055
 msgid "Spectral class, nebula type, etc."
 msgstr "Spektrálna trieda, typ hmloviny, atď."
 
-#: src/ui_configurationDialog.h:1055
+#: src/ui_configurationDialog.h:1057
 msgid "Additional information"
 msgstr "Doplňujúce informácie"
 
-#: src/ui_configurationDialog.h:1057
+#: src/ui_configurationDialog.h:1059
 msgid "Topocentric equatorial coordinates"
 msgstr "Topocentrické rovníkové súradnice"
 
-#: src/ui_configurationDialog.h:1059
+#: src/ui_configurationDialog.h:1061
 msgid "Hour angle/Declination"
 msgstr "Hodinový uhol/Deklinácia"
 
-#: src/ui_configurationDialog.h:1061
+#: src/ui_configurationDialog.h:1063
 msgid "Horizontal coordinates"
 msgstr "Horizontálne súradnice"
 
-#: src/ui_configurationDialog.h:1063
+#: src/ui_configurationDialog.h:1065
 msgid "Altitude/Azimuth"
 msgstr "Výška/Azimut"
 
-#: src/ui_configurationDialog.h:1064
+#: src/ui_configurationDialog.h:1066
 msgid "Distance"
 msgstr "Vzdialenosť"
 
-#: src/ui_configurationDialog.h:1066
+#: src/ui_configurationDialog.h:1068
 msgid ""
 "Ecliptic topocentric coordinates, equinox of date and J2000 (only for Earth)"
 msgstr ""
 "Ekliptikálne topocentrické súradnice, ekvinokcium pre nastavený dátum a pre "
 "J2000 (len na Zemi)"
 
-#: src/ui_configurationDialog.h:1068
+#: src/ui_configurationDialog.h:1070
 msgid "Ecliptic coordinates"
 msgstr "Ekliptikálne súradnice"
 
-#: src/ui_configurationDialog.h:1069
+#: src/ui_configurationDialog.h:1071
 msgid "Control"
 msgstr "Ovládanie"
 
-#: src/ui_configurationDialog.h:1071
+#: src/ui_configurationDialog.h:1073
 msgid "Allow keyboard to pan and zoom"
 msgstr "Povoliť otáčanie a približovanie klávesnicou"
 
-#: src/ui_configurationDialog.h:1073
+#: src/ui_configurationDialog.h:1075
 msgid "Enable keyboard navigation"
 msgstr "Povoliť navigáciu klávesnicou"
 
-#: src/ui_configurationDialog.h:1075
+#: src/ui_configurationDialog.h:1077
 msgid "Allow mouse to pan (drag) and zoom (mousewheel)"
 msgstr "Povoliť otáčanie (ťahanie) a približovanie (kolieskom) myšou"
 
-#: src/ui_configurationDialog.h:1077
+#: src/ui_configurationDialog.h:1079
 msgid "Enable mouse navigation"
 msgstr "Povoliť navigáciu myšou"
 
-#: src/ui_configurationDialog.h:1080
+#: src/ui_configurationDialog.h:1082
 msgid "Hides the mouse cursor when inactive"
 msgstr "Skrýva kurzor myši pri jeho nevyužití"
 
-#: src/ui_configurationDialog.h:1082
+#: src/ui_configurationDialog.h:1084
 msgid "Mouse cursor timeout:"
 msgstr "Časový limit pre kurzor myši:"
 
-#: src/ui_configurationDialog.h:1084
+#: src/ui_configurationDialog.h:1086
 msgid "seconds"
 msgstr "sekundy"
 
-#: src/ui_configurationDialog.h:1086
+#: src/ui_configurationDialog.h:1088
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:186
 msgid "Startup date and time"
 msgstr "Dátum a čas pri spustení"
 
-#: src/ui_configurationDialog.h:1088
+#: src/ui_configurationDialog.h:1090
 msgid "Use a specific date and time when Stellarium starts up"
 msgstr "Použije konkrétny dátum pri spustení Stellarium"
 
-#: src/ui_configurationDialog.h:1090
+#: src/ui_configurationDialog.h:1092
 msgid "Other:"
 msgstr "Iný:"
 
-#: src/ui_configurationDialog.h:1092
+#: src/ui_configurationDialog.h:1094
 msgid "Use current local date and time"
 msgstr "Použiť súčasný miestny čas a dátum"
 
-#: src/ui_configurationDialog.h:1094
+#: src/ui_configurationDialog.h:1096
 msgid "use current"
 msgstr "použiť súčasný"
 
-#: src/ui_configurationDialog.h:1096
+#: src/ui_configurationDialog.h:1098
 msgid "Starts Stellarium at system clock date and time"
 msgstr "Spustí Stellarium s aktuálnym systémovým časom"
 
-#: src/ui_configurationDialog.h:1098
+#: src/ui_configurationDialog.h:1100
 msgid "System date and time"
 msgstr "Systémový čas"
 
-#: src/ui_configurationDialog.h:1100
+#: src/ui_configurationDialog.h:1102
 msgid ""
 "Sets the simulation time to the next instance of this time of day when "
 "Stellarium starts"
@@ -4529,23 +4529,23 @@ msgstr ""
 "Stellarium sa spustí s dátumom a časom najbližšieho nasledujúceho výskytu "
 "tohoto času."
 
-#: src/ui_configurationDialog.h:1102
+#: src/ui_configurationDialog.h:1104
 msgid "System date at:"
 msgstr "Systémový dátum o:"
 
-#: src/ui_configurationDialog.h:1103
+#: src/ui_configurationDialog.h:1105
 msgid "Time correction"
 msgstr "Časová korekcia"
 
-#: src/ui_configurationDialog.h:1106
+#: src/ui_configurationDialog.h:1108
 msgid "Edit equation"
 msgstr "Úprava rovnice"
 
-#: src/ui_configurationDialog.h:1108
+#: src/ui_configurationDialog.h:1110
 msgid "Planetarium options"
 msgstr "Nastavenia pre planetárium"
 
-#: src/ui_configurationDialog.h:1110
+#: src/ui_configurationDialog.h:1112
 msgid ""
 "Spheric mirror distortion is used when projecting Stellarium onto a spheric "
 "mirror for low-cost planetarium systems."
@@ -4553,51 +4553,51 @@ msgstr ""
 "Tento režim sa využíva, keď sa Stellarium premieta prostredníctvom "
 "sférického (guľového) zrkadla v nízkonákladových planetáriách."
 
-#: src/ui_configurationDialog.h:1112
+#: src/ui_configurationDialog.h:1114
 msgid "Spheric mirror distortion"
 msgstr "Skreslenie sférického zrkadla"
 
-#: src/ui_configurationDialog.h:1114
+#: src/ui_configurationDialog.h:1116
 msgid "Mask out everything outside a central circle in the main view"
 msgstr "Schová všetko mimo stredného okrúhleho zorného poľa."
 
-#: src/ui_configurationDialog.h:1116
+#: src/ui_configurationDialog.h:1118
 msgid "Disc viewport"
 msgstr "Kruhové zorné pole"
 
-#: src/ui_configurationDialog.h:1118
+#: src/ui_configurationDialog.h:1120
 msgid "Hide other constellations when you click one"
 msgstr "Skryť ostatné súhvezdia, keď kliknete na jedno z nich"
 
-#: src/ui_configurationDialog.h:1120
+#: src/ui_configurationDialog.h:1122
 msgid "Select single constellation"
 msgstr "Vybrať jediné súhvezdie"
 
-#: src/ui_configurationDialog.h:1122
+#: src/ui_configurationDialog.h:1124
 msgid "Align labels with the horizon"
 msgstr "Zarovná názvy s obzorom"
 
-#: src/ui_configurationDialog.h:1124
+#: src/ui_configurationDialog.h:1126
 msgid "Gravity labels"
 msgstr "Orientovať názvy"
 
-#: src/ui_configurationDialog.h:1126
+#: src/ui_configurationDialog.h:1128
 msgid "Toggle display backgrounds of the nebulae."
 msgstr "Prepnúť zobrazenie pozadí hmlovín."
 
-#: src/ui_configurationDialog.h:1128
+#: src/ui_configurationDialog.h:1130
 msgid "Show nebula background button"
 msgstr "Zobrazit tlačidlo pozadia hmloviny"
 
-#: src/ui_configurationDialog.h:1130
+#: src/ui_configurationDialog.h:1132
 msgid "Toggle vertical and horizontal image flip buttons."
 msgstr "Zobraziť tlačidlá horizontálneho a vertikálneho prevrátenia obrazu"
 
-#: src/ui_configurationDialog.h:1132
+#: src/ui_configurationDialog.h:1134
 msgid "Show flip buttons"
 msgstr "Zobraziť tlačidlá prevrátenia"
 
-#: src/ui_configurationDialog.h:1134
+#: src/ui_configurationDialog.h:1136
 msgid ""
 "When enabled, the \"auto zoom out\" key will also set the initial viewing "
 "direction"
@@ -4605,88 +4605,88 @@ msgstr ""
 "Keď je táto možnosť zapnutá, použitie klávesy na automatické oddialenie "
 "pohľadu zároveň nastaví počiatočný smer pohľadu."
 
-#: src/ui_configurationDialog.h:1136
+#: src/ui_configurationDialog.h:1138
 msgid "Auto zoom out returns to initial direction of view"
 msgstr "Automatické oddialenie nastaví počiatočný smer pohľadu"
 
-#: src/ui_configurationDialog.h:1137
+#: src/ui_configurationDialog.h:1139
 msgid "Screenshots"
 msgstr "Zachytené obrazovky"
 
-#: src/ui_configurationDialog.h:1138
+#: src/ui_configurationDialog.h:1140
 msgid "Screenshot Directory"
 msgstr "Priečinok so snímkami obrazovky"
 
-#: src/ui_configurationDialog.h:1140
+#: src/ui_configurationDialog.h:1142
 msgid "Invert colors"
 msgstr "Invertovať farby"
 
-#: src/ui_configurationDialog.h:1141
+#: src/ui_configurationDialog.h:1143
 msgid "Star catalog updates"
 msgstr "Aktualizácia katalógu hviezd"
 
-#: src/ui_configurationDialog.h:1143
+#: src/ui_configurationDialog.h:1145
 msgid "Click here to start downloading"
 msgstr "Kliknite tu pre štart sťahovania"
 
-#: src/ui_configurationDialog.h:1145
+#: src/ui_configurationDialog.h:1147
 msgid "Download this file to view even more stars"
 msgstr "Stiahnutím tohto súboru uvidíte ešte viac hviezd."
 
-#: src/ui_configurationDialog.h:1147
+#: src/ui_configurationDialog.h:1149
 msgid "Restart the download"
 msgstr "Reštartovať sťahovanie"
 
-#: src/ui_configurationDialog.h:1149
+#: src/ui_configurationDialog.h:1151
 msgid "Retry"
 msgstr "Skúsiť znovu"
 
-#: src/ui_configurationDialog.h:1151
+#: src/ui_configurationDialog.h:1153
 msgid "Stop the download. You can always restart it later"
 msgstr "Zrušiť sťahovanie. Neskôr ho môžete kedykoľvek reštartovať"
 
-#: src/ui_configurationDialog.h:1156
+#: src/ui_configurationDialog.h:1158
 msgid "Close window when script runs"
 msgstr "Zatvoriť okno keď je skript spustený"
 
-#: src/ui_configurationDialog.h:1158
+#: src/ui_configurationDialog.h:1160
 msgid "Run the selected script"
 msgstr "Spustiť vybratý skript"
 
-#: src/ui_configurationDialog.h:1162
+#: src/ui_configurationDialog.h:1164
 msgid "Stop a running script"
 msgstr "Zastaviť spustený skript"
 
-#: src/ui_configurationDialog.h:1166
+#: src/ui_configurationDialog.h:1168
 msgid "Load at startup"
 msgstr "Nahrať pri spustení"
 
-#: src/ui_configurationDialog.h:1167
+#: src/ui_configurationDialog.h:1169
 msgid "configure"
 msgstr "nastaviť"
 
-#: src/ui_configurationDialog.h:1172
+#: src/ui_configurationDialog.h:1174
 msgid "Main"
 msgstr "Hlavné"
 
-#: src/ui_configurationDialog.h:1174
+#: src/ui_configurationDialog.h:1176
 msgid "Information"
 msgstr "Informácie"
 
-#: src/ui_configurationDialog.h:1179
+#: src/ui_configurationDialog.h:1181
 msgid "Navigation"
 msgstr "Navigácia"
 
-#: src/ui_configurationDialog.h:1181
+#: src/ui_configurationDialog.h:1183
 msgid "Tools"
 msgstr "Ostatné"
 
-#: src/ui_configurationDialog.h:1183
+#: src/ui_configurationDialog.h:1185
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:447
 msgid "Scripts"
 msgstr "Skripty"
 
-#: src/ui_configurationDialog.h:1185
+#: src/ui_configurationDialog.h:1187
 msgid "Plugins"
 msgstr "Moduly"
 
@@ -5450,18 +5450,18 @@ msgstr "Vertikálne preklopenie"
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:322
 #: plugins/Observability/src/ui_ObservabilityDialog.h:378
 #: plugins/FOV/src/ui_fovWindow.h:405
-#: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:258
+#: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:279
 msgctxt "tab in plugin windows"
 msgid "About"
 msgstr "O module"
 
-#: plugins/Satellites/src/Satellites.cpp:66
-#: plugins/Satellites/src/Satellites.cpp:143
+#: plugins/Satellites/src/Satellites.cpp:67
+#: plugins/Satellites/src/Satellites.cpp:144
 #: plugins/Satellites/src/ui_satellitesDialog.h:748
 msgid "Satellites"
 msgstr "Satelity"
 
-#: plugins/Satellites/src/Satellites.cpp:69
+#: plugins/Satellites/src/Satellites.cpp:70
 msgid ""
 "Prediction of artificial satellite positions in Earth orbit based on NORAD "
 "TLE data"
@@ -5469,19 +5469,19 @@ msgstr ""
 "Predpoveď polohy umelých satelitov na obežnej dráhe Zeme podľa údajov TLE "
 "veliteľstva NORAD"
 
-#: plugins/Satellites/src/Satellites.cpp:144
+#: plugins/Satellites/src/Satellites.cpp:145
 msgid "Satellite hints"
 msgstr "Stopy satelitov"
 
-#: plugins/Satellites/src/Satellites.cpp:145
+#: plugins/Satellites/src/Satellites.cpp:146
 msgid "Satellite labels"
 msgstr "Popisky satelitov"
 
-#: plugins/Satellites/src/Satellites.cpp:146
+#: plugins/Satellites/src/Satellites.cpp:147
 msgid "Satellites configuration window"
 msgstr "Okno konfigurácie satelitov"
 
-#: plugins/Satellites/src/Satellites.cpp:173
+#: plugins/Satellites/src/Satellites.cpp:174
 msgid ""
 "The old satellites.json file is no longer compatible - using default file"
 msgstr ""
@@ -5489,62 +5489,62 @@ msgstr ""
 "použije sa predvolený súbor"
 
 #. TRANSLATORS: Satellite group: Bright/naked-eye-visible satellites
-#: plugins/Satellites/src/Satellites.cpp:1657
+#: plugins/Satellites/src/Satellites.cpp:1671
 msgid "visual"
 msgstr "Viditeľné"
 
 #. TRANSLATORS: Satellite group: Scientific satellites
-#: plugins/Satellites/src/Satellites.cpp:1659
+#: plugins/Satellites/src/Satellites.cpp:1673
 msgid "scientific"
 msgstr "Vedecké"
 
 #. TRANSLATORS: Satellite group: Communication satellites
-#: plugins/Satellites/src/Satellites.cpp:1661
+#: plugins/Satellites/src/Satellites.cpp:1675
 msgid "communications"
 msgstr "Komunikačné"
 
 #. TRANSLATORS: Satellite group: Navigation satellites
-#: plugins/Satellites/src/Satellites.cpp:1663
+#: plugins/Satellites/src/Satellites.cpp:1677
 msgid "navigation"
 msgstr "Navigačné"
 
 #. TRANSLATORS: Satellite group: Amateur radio (ham) satellites
-#: plugins/Satellites/src/Satellites.cpp:1665
+#: plugins/Satellites/src/Satellites.cpp:1679
 msgid "amateur"
 msgstr "Amatérske"
 
 #. TRANSLATORS: Satellite group: Weather (meteorological) satellites
-#: plugins/Satellites/src/Satellites.cpp:1667
+#: plugins/Satellites/src/Satellites.cpp:1681
 msgid "weather"
 msgstr "Meterologické"
 
 #. TRANSLATORS: Satellite group: Satellites in geostationary orbit
-#: plugins/Satellites/src/Satellites.cpp:1669
+#: plugins/Satellites/src/Satellites.cpp:1683
 msgid "geostationary"
 msgstr "Geostacionárne"
 
 #. TRANSLATORS: Satellite group: Satellites that are no longer functioning
-#: plugins/Satellites/src/Satellites.cpp:1671
+#: plugins/Satellites/src/Satellites.cpp:1685
 msgid "non-operational"
 msgstr "Nefunkčné"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GPS constellation (the Global Positioning System)
-#: plugins/Satellites/src/Satellites.cpp:1673
+#: plugins/Satellites/src/Satellites.cpp:1687
 msgid "gps"
 msgstr "GPS"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Iridium constellation (Iridium is a proper name)
-#: plugins/Satellites/src/Satellites.cpp:1675
+#: plugins/Satellites/src/Satellites.cpp:1689
 msgid "iridium"
 msgstr "Iridium"
 
 #. TRANSLATORS: Satellite description. "Hubble" is a person's name.
-#: plugins/Satellites/src/Satellites.cpp:1686
+#: plugins/Satellites/src/Satellites.cpp:1700
 msgid "The Hubble Space Telescope"
 msgstr "Hubblov vesmírny teleskop"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:1688
+#: plugins/Satellites/src/Satellites.cpp:1702
 msgid "The International Space Station"
 msgstr "Medzinárodná vesmírna stanica"
 
@@ -7609,7 +7609,7 @@ msgstr "Zapnúť zobrazenie distribúcie kvazarov"
 #: plugins/Quasars/src/ui_quasarsDialog.h:271
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:277
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:315
-#: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:249
+#: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:271
 msgid "Enable display at startup"
 msgstr "Povoliť zobrazenie pri štarte"
 
@@ -7876,81 +7876,81 @@ msgstr "Zobraziť exoplanéty"
 msgid "Exoplanets configuration window"
 msgstr "Okno nastavení exoplanét"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:158
+#: plugins/Exoplanets/src/Exoplanet.cpp:161
 msgid "planetary system"
 msgstr "planetárna sústava"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:194
+#: plugins/Exoplanets/src/Exoplanet.cpp:197
 msgid "Metallicity"
 msgstr "Metalicita"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:198
-#: plugins/Exoplanets/src/Exoplanet.cpp:212
+#: plugins/Exoplanets/src/Exoplanet.cpp:201
+#: plugins/Exoplanets/src/Exoplanet.cpp:215
 msgid "Mass"
 msgstr "Hmotnosť"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:202
-#: plugins/Exoplanets/src/Exoplanet.cpp:213
+#: plugins/Exoplanets/src/Exoplanet.cpp:205
+#: plugins/Exoplanets/src/Exoplanet.cpp:216
 msgid "Radius"
 msgstr "Polomer"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:206
+#: plugins/Exoplanets/src/Exoplanet.cpp:209
 #, qt-format
 msgid "Effective temperature: %1 K"
 msgstr "Efektívna teplota: %1 K"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:210
+#: plugins/Exoplanets/src/Exoplanet.cpp:213
 msgid "Exoplanet"
 msgstr "Exoplanéta"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:211
+#: plugins/Exoplanets/src/Exoplanet.cpp:214
 msgid "Period"
 msgstr "Perióda"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:211
+#: plugins/Exoplanets/src/Exoplanet.cpp:214
 msgid "days"
 msgstr "dní"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:212
-#: plugins/Exoplanets/src/Exoplanet.cpp:213
+#: plugins/Exoplanets/src/Exoplanet.cpp:215
+#: plugins/Exoplanets/src/Exoplanet.cpp:216
 msgid "Jup"
 msgstr "Jup"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:214
+#: plugins/Exoplanets/src/Exoplanet.cpp:217
 msgid "Semi-Major Axis"
 msgstr "Hlavná poloos"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:214
+#: plugins/Exoplanets/src/Exoplanet.cpp:217
 msgid "AU"
 msgstr "AU"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:215
+#: plugins/Exoplanets/src/Exoplanet.cpp:218
 msgid "Eccentricity"
 msgstr "Excentricita"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:216
+#: plugins/Exoplanets/src/Exoplanet.cpp:219
 msgid "Inclination"
 msgstr "Sklon"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:217
+#: plugins/Exoplanets/src/Exoplanet.cpp:220
 msgid "Angle Distance"
 msgstr "Uhlová vzdialenosť"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:218
+#: plugins/Exoplanets/src/Exoplanet.cpp:221
 msgid "Discovered year"
 msgstr "Rok objavenia"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:219
+#: plugins/Exoplanets/src/Exoplanet.cpp:222
 msgid "Habitable class"
 msgstr "Trieda obývateľnosti"
 
 #. TRANSLATORS: Full phrase is "Mean Surface Temperature"
-#: plugins/Exoplanets/src/Exoplanet.cpp:221
+#: plugins/Exoplanets/src/Exoplanet.cpp:224
 msgid "Mean surface temp."
 msgstr "Priem. teplota povrchu"
 
 #. TRANSLATORS: ESI = Earth Similarity Index
-#: plugins/Exoplanets/src/Exoplanet.cpp:223
+#: plugins/Exoplanets/src/Exoplanet.cpp:226
 msgid "ESI"
 msgstr "ESI"
 
@@ -7982,10 +7982,9 @@ msgstr ""
 #, qt-format
 msgid ""
 "The current catalog contains info about %1 planetary systems, which "
-"altogether have %2 exoplanets."
+"altogether have %2 exoplanets (including %3 potentially habitable "
+"exoplanets)."
 msgstr ""
-"Aktuálny katalóg obsahuje informácie o %1 planetárnych sústavách, ktoré "
-"spolu majú %2 exoplanét."
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:139
@@ -8698,9 +8697,9 @@ msgstr "Vyznačiť navigačné hviezdy"
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:55
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:90
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:249
-#: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:246
-#: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:248
-#: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:257
+#: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:267
+#: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:269
+#: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:278
 msgid "Equation of Time"
 msgstr "Časová rovnica"
 
@@ -8728,7 +8727,7 @@ msgstr "s"
 msgid "Equation of Time plug-in"
 msgstr ""
 
-#: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:250
+#: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:270
 msgid ""
 "The equation of time describes the discrepancy between two kinds of solar "
 "time. These are apparent solar time, which directly tracks the motion of the "
@@ -8741,21 +8740,21 @@ msgid ""
 "first check its sign usage."
 msgstr ""
 
-#: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:252
-msgid "Font size:"
-msgstr "Veľkosť písma:"
-
-#: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:253
+#: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:272
 msgid "Show plug-ins button on toolbar"
 msgstr ""
 
-#: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:255
+#: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:273
 msgid "Use minutes and seconds"
 msgstr "Použiť minúty a sekundy"
 
-#: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:256
+#: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:274
 msgid "Change sign of equation"
 msgstr ""
+
+#: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:275
+msgid "Font size:"
+msgstr "Veľkosť písma:"
 
 #~ msgid "Cardinal Points"
 #~ msgstr "Svetové strany"
