@@ -144,11 +144,14 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 
 	oss << getPositionInfoString(core, flags);
 
-	if ((flags&Extra) && (core->getCurrentLocation().planetName=="Earth"))
+	if (flags&Extra)
 	{
 		static SolarSystem *ssystem=GETSTELMODULE(SolarSystem);
 		double ecl= ssystem->getEarth()->getRotObliquity(core->getJDay());
-		oss << q_("Obliquity (of date, for Earth): %1").arg(StelUtils::radToDmsStr(ecl, true)) << "<br>";
+		if ((core->getCurrentLocation().planetName=="Earth"))
+			oss << q_("Obliquity (of date, for Earth): %1").arg(StelUtils::radToDmsStr(ecl, true)) << "<br>";
+		if (englishName!="Sun")
+			oss << q_("Obliquity (of date): %1").arg(StelUtils::radToDmsStr(getRotObliquity(core->getJDay()), true)) << "<br>";
 	}
 
 	if (flags&Distance)
