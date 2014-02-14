@@ -513,8 +513,7 @@ QVariantMap Exoplanets::loadEPMap(QString path)
 void Exoplanets::setEPMap(const QVariantMap& map)
 {
 	ep.clear();
-	PSCount=0;
-	EPCountAll=0;
+	PSCount = EPCountAll = EPCountPH = 0;
 	QVariantMap epsMap = map.value("stars").toMap();
 	foreach(QString epsKey, epsMap.keys())
 	{
@@ -528,6 +527,7 @@ void Exoplanets::setEPMap(const QVariantMap& map)
 		{
 			ep.append(eps);
 			EPCountAll += eps->getCountExoplanets();
+			EPCountPH += eps->getCountHabitableExoplanets();
 		}
 
 	}

@@ -19,7 +19,7 @@
 
 
 #include "StelObject.hpp"
-
+#include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelProjector.hpp"
 #include "StelUtils.hpp"
@@ -27,7 +27,8 @@
 #include "StelSkyDrawer.hpp"
 #include "RefractionExtinction.hpp"
 #include "StelLocation.hpp"
-#include "sidereal_time.h"
+#include "SolarSystem.hpp"
+#include "StelModuleMgr.hpp"
 
 #include <QRegExp>
 #include <QDebug>
@@ -170,15 +171,14 @@ QString StelObject::getPositionInfoString(const StelCore *core, const InfoString
 
 	if ((flags&EclTopocentricCoord) && (core->getCurrentLocation().planetName=="Earth"))
 	{
-		//static SolarSystem *ssystem=GETSTELMODULE(SolarSystem);
-		//double ecl= -(ssystem->getEarth()->getRotObliquity()); // BUG DETECTED! Earth's obliquity is apparently reported constant.
-		double ra_equ, dec_equ, lambda, beta;
-		double ecl = get_mean_ecliptical_obliquity(2451545.0) *M_PI/180.0;
+		static SolarSystem *ssystem=GETSTELMODULE(SolarSystem);
+		double ecl= ssystem->getEarth()->getRotObliquity(2451545.0);
+		double ra_equ, dec_equ, lambda, beta;		
 		StelUtils::rectToSphe(&ra_equ,&dec_equ,getEquinoxEquatorialPos(core));
 		StelUtils::ctRadec2Ecl(ra_equ, dec_equ, ecl, &lambda, &beta);
 		if (lambda<0) lambda+=2.0*M_PI;
-		res += q_("Ecliptic Topocentric (of J2000): %1/%2").arg(StelUtils::radToDmsStr(lambda, true), StelUtils::radToDmsStr(beta, true)) + "<br>";
-		ecl = get_mean_ecliptical_obliquity(core->getJDay()) *M_PI/180.0;
+		res += q_("Ecliptic Topocentric (of J2000): %1/%2").arg(StelUtils::radToDmsStr(lambda, true), StelUtils::radToDmsStr(beta, true)) + "<br>";		
+		ecl= ssystem->getEarth()->getRotObliquity(core->getJDay());
 		StelUtils::rectToSphe(&ra_equ,&dec_equ,getEquinoxEquatorialPos(core));
 		StelUtils::ctRadec2Ecl(ra_equ, dec_equ, ecl, &lambda, &beta);
 		if (lambda<0) lambda+=2.0*M_PI;

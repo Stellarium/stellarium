@@ -68,6 +68,7 @@ void StelButton::initCtor(const QPixmap& apixOn,
 	opacity = 1.;
 	hoverOpacity = 0.;
 	action = aaction;
+	checked = false;
 
 	Q_ASSERT(!pixOn.isNull());
 	Q_ASSERT(!pixOff.isNull());

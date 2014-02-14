@@ -454,7 +454,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 
 			// when the parent is the sun use ecliptic rather than sun equator:
 			const double parentRotObliquity = parent->getParent()
-											  ? parent->getRotObliquity()
+											  ? parent->getRotObliquity(2451545.0)
 											  : 0.0;
 			const double parent_rot_asc_node = parent->getParent()
 											  ? parent->getRotAscendingnode()
@@ -564,7 +564,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 			const double inclination = pd.value(secname+"/orbit_Inclination").toDouble()*(M_PI/180.0);
 			const double arg_of_pericenter = pd.value(secname+"/orbit_ArgOfPericenter").toDouble()*(M_PI/180.0);
 			const double ascending_node = pd.value(secname+"/orbit_AscendingNode").toDouble()*(M_PI/180.0);
-			const double parentRotObliquity = parent->getParent() ? parent->getRotObliquity() : 0.0;
+			const double parentRotObliquity = parent->getParent() ? parent->getRotObliquity(2451545.0) : 0.0;
 			const double parent_rot_asc_node = parent->getParent() ? parent->getRotAscendingnode() : 0.0;
 			double parent_rot_j2000_longitude = 0.0;
 						if (parent->getParent()) {
