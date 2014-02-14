@@ -100,7 +100,14 @@ public:
 
 	void update(double deltaTime);
 
-	int getCountExoplanets(void) {return EPCount;}
+	int getCountExoplanets(void) const
+	{
+		return EPCount;
+	}
+	int getCountHabitableExoplanets(void) const
+	{
+		return PHEPCount;
+	}
 
 private:
 	bool initialized;
@@ -117,6 +124,7 @@ private:
 	void draw(StelCore* core, StelPainter *painter);
 
 	int EPCount;
+	int PHEPCount;
 
 	//! Variables for description of properties of exoplanets
 	QString designation;			//! The designation of the host star

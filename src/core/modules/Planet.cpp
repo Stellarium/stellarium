@@ -144,12 +144,14 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 
 	oss << getPositionInfoString(core, flags);
 
-	if ((flags&Extra) && (core->getCurrentLocation().planetName=="Earth"))
+	if (flags&Extra)
 	{
-		//static SolarSystem *ssystem=GETSTELMODULE(SolarSystem);
-		//double ecl= -(ssystem->getEarth()->getRotObliquity()); // BUG DETECTED! Earth's obliquity is apparently reported constant.
-		double ecl= get_mean_ecliptical_obliquity(core->getJDay()) *M_PI/180.0;
-		oss << q_("Obliquity (of date, for Earth): %1").arg(StelUtils::radToDmsStr(ecl, true)) << "<br>";
+		static SolarSystem *ssystem=GETSTELMODULE(SolarSystem);
+		double ecl= ssystem->getEarth()->getRotObliquity(core->getJDay());
+		if (core->getCurrentLocation().planetName=="Earth")
+			oss << q_("Obliquity (of date, for Earth): %1").arg(StelUtils::radToDmsStr(ecl, true)) << "<br>";
+		if (englishName!="Sun")
+			oss << q_("Obliquity (of date): %1").arg(StelUtils::radToDmsStr(getRotObliquity(core->getJDay()), true)) << "<br>";
 	}
 
 	if (flags&Distance)
@@ -302,6 +304,15 @@ void Planet::computePositionWithoutOrbits(const double date)
 		coordFunc(date, eclipticPos, userDataPtr);
 		lastJD = date;
 	}
+}
+
+double Planet::getRotObliquity(double JDay) const
+{
+	// JDay=2451545.0 for J2000.0
+	if (englishName=="Earth")
+		return get_mean_ecliptical_obliquity(JDay) *M_PI/180.0;
+	else
+		return re.obliquity;
 }
 
 void Planet::computePosition(const double date)
