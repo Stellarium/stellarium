@@ -189,7 +189,7 @@ public:
 				 float _obliquity, float _ascendingNode,
 				 float _precessionRate, double _siderealPeriod);
 	double getRotAscendingnode(void) const {return re.ascendingNode;}
-	double getRotObliquity(void) const {return re.obliquity;}
+	double getRotObliquity(double JDay) const;
 
 	//! Get the Planet position in the parent Planet ecliptic coordinate in AU
 	Vec3d getEclipticPos() const;
