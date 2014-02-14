@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-02-12 19:44+0700\n"
+"POT-Creation-Date: 2014-02-13 22:16+0700\n"
 "PO-Revision-Date: 2014-01-18 08:10+0000\n"
 "Last-Translator: Alexander Wolf <Unknown>\n"
 "Language-Team: English (Canada) <en_CA@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-02-13 05:44+0000\n"
+"X-Launchpad-Export-Date: 2014-02-14 05:46+0000\n"
 "X-Generator: Launchpad (build 16916)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:106 src/core/modules/StarMgr.cpp:337
@@ -243,61 +243,66 @@ msgstr "Absolute Magnitude: %1"
 msgid "Obliquity (of date, for Earth): %1"
 msgstr "Obliquity (of date, for Earth): %1"
 
-#: src/core/modules/Planet.cpp:162 src/core/modules/MinorPlanet.cpp:250
+#: src/core/modules/Planet.cpp:154
+#, qt-format
+msgid "Obliquity (of date): %1"
+msgstr "Obliquity (of date): %1"
+
+#: src/core/modules/Planet.cpp:164 src/core/modules/MinorPlanet.cpp:250
 #: src/core/modules/Comet.cpp:199
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 km)"
 msgstr "Distance: %1AU (%2 km)"
 
-#: src/core/modules/Planet.cpp:169 src/core/modules/MinorPlanet.cpp:257
+#: src/core/modules/Planet.cpp:171 src/core/modules/MinorPlanet.cpp:257
 #: src/core/modules/Comet.cpp:206
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 Mio km)"
 msgstr "Distance: %1AU (%2 Mio km)"
 
-#: src/core/modules/Planet.cpp:182
+#: src/core/modules/Planet.cpp:184
 #, qt-format
 msgid "Apparent diameter: %1, with rings: %2"
 msgstr "Apparent diameter: %1, with rings: %2"
 
-#: src/core/modules/Planet.cpp:188 src/core/modules/MinorPlanet.cpp:265
+#: src/core/modules/Planet.cpp:190 src/core/modules/MinorPlanet.cpp:265
 #, qt-format
 msgid "Apparent diameter: %1"
 msgstr "Apparent diameter: %1"
 
 #. TRANSLATORS: Sidereal (orbital) period for solar system bodies in days and in Julian years (symbol: a)
-#: src/core/modules/Planet.cpp:200 src/core/modules/MinorPlanet.cpp:272
+#: src/core/modules/Planet.cpp:202 src/core/modules/MinorPlanet.cpp:272
 #: src/core/modules/Comet.cpp:228
 #, qt-format
 msgid "Sidereal period: %1 days (%2 a)"
 msgstr "Sidereal period: %1 days (%2 a)"
 
-#: src/core/modules/Planet.cpp:203
+#: src/core/modules/Planet.cpp:205
 #, qt-format
 msgid "Sidereal day: %1"
 msgstr "Sidereal day: %1"
 
-#: src/core/modules/Planet.cpp:204
+#: src/core/modules/Planet.cpp:206
 #, qt-format
 msgid "Mean solar day: %1"
 msgstr "Mean solar day: %1"
 
-#: src/core/modules/Planet.cpp:210
+#: src/core/modules/Planet.cpp:212
 #, qt-format
 msgid "Phase Angle: %1"
 msgstr "Phase Angle: %1"
 
-#: src/core/modules/Planet.cpp:211
+#: src/core/modules/Planet.cpp:213
 #, qt-format
 msgid "Elongation: %1"
 msgstr "Elongation: %1"
 
-#: src/core/modules/Planet.cpp:212
+#: src/core/modules/Planet.cpp:214
 #, qt-format
 msgid "Phase: %1"
 msgstr "Phase: %1"
 
-#: src/core/modules/Planet.cpp:213
+#: src/core/modules/Planet.cpp:215
 #, qt-format
 msgid "Illuminated: %1%"
 msgstr "Illuminated: %1%"
@@ -1074,31 +1079,31 @@ msgstr ""
 "Orthographic projection is related to perspective projection, but the point "
 "of perspective is set to an infinite distance."
 
-#: src/core/StelObject.cpp:115
+#: src/core/StelObject.cpp:116
 #, qt-format
 msgid "RA/DE (J2000): %1/%2"
 msgstr "RA/DE (J2000): %1/%2"
 
-#: src/core/StelObject.cpp:122
+#: src/core/StelObject.cpp:123
 #, qt-format
 msgid "RA/DE (of date): %1/%2"
 msgstr "RA/DE (of date): %1/%2"
 
-#: src/core/StelObject.cpp:129
+#: src/core/StelObject.cpp:130
 #, qt-format
 msgid "Galactic longitude/latitude: %1/%2"
 msgstr "Galactic longitude/latitude: %1/%2"
 
-#: src/core/StelObject.cpp:141 src/core/StelObject.cpp:145
+#: src/core/StelObject.cpp:142 src/core/StelObject.cpp:146
 #, qt-format
 msgid "Hour angle/DE: %1/%2"
 msgstr "Hour angle/DE: %1/%2"
 
-#: src/core/StelObject.cpp:141 src/core/StelObject.cpp:163
+#: src/core/StelObject.cpp:142 src/core/StelObject.cpp:164
 msgid "(apparent)"
 msgstr "(apparent)"
 
-#: src/core/StelObject.cpp:163 src/core/StelObject.cpp:167
+#: src/core/StelObject.cpp:164 src/core/StelObject.cpp:168
 #, qt-format
 msgid "Az/Alt: %1/%2"
 msgstr "Az/Alt: %1/%2"
@@ -9025,10 +9030,6 @@ msgstr ""
 #, qt-format
 #~ msgid "Ecliptic Geocentric (of date): %1/%2"
 #~ msgstr "Ecliptic Geocentric (of date): %1/%2"
-
-#, qt-format
-#~ msgid "Obliquity (of date): %1"
-#~ msgstr "Obliquity (of date): %1"
 
 #~ msgid "(geometric)"
 #~ msgstr "(geometric)"
