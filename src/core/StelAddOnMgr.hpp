@@ -133,6 +133,8 @@ private:
 
 	// download thumbnails
 	void downloadNextThumbnail();
+
+	AddOn::Status unzip(AddOn* addon, QStringList selectedFiles);
 };
 
 #endif // _STELADDONMGR_HPP_

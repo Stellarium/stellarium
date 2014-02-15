@@ -567,3 +567,51 @@ void StelAddOnMgr::cancelAllDownloads()
 	m_downloadQueue.clear();
 	emit(updateTableViews());
 }
+
+AddOn::Status StelAddOnMgr::unzip(AddOn* addon, QStringList selectedFiles)
+{
+	QZipReader reader(addon->getDownloadFilepath());
+	if (reader.status() != QZipReader::NoError)
+	{
+		qWarning() << "StelAddOnMgr: Unable to open the ZIP archive:"
+			   << QDir::toNativeSeparators(addon->getDownloadFilepath());
+		return AddOn::UnableToRead;
+	}
+
+	AddOn::Status status = AddOn::FullyInstalled;
+	foreach(QZipReader::FileInfo info, reader.fileInfoList())
+	{
+		if (!info.isFile)
+		{
+			continue;
+		}
+
+		QFileInfo fileInfo(StelFileMgr::getUserDir() % "/" % info.filePath);
+		StelFileMgr::makeSureDirExistsAndIsWritable(fileInfo.absolutePath());
+		QFile file(fileInfo.absoluteFilePath());
+
+		// when selectedFiles is empty, extract all files
+		if (!selectedFiles.isEmpty())
+		{
+			if (!selectedFiles.contains(info.filePath) && !file.exists())
+			{
+				status = AddOn::PartiallyInstalled;
+				continue;
+			}
+		}
+
+		file.remove(); // overwrite
+		QByteArray data = reader.fileData(info.filePath);
+		if (!file.open(QIODevice::WriteOnly))
+		{
+			qWarning() << "StelAddOnMgr: cannot open file"
+				   << QDir::toNativeSeparators(info.filePath);
+			continue;
+		}
+
+		file.write(data);
+		file.close();
+		qDebug() << "StelAddOnMgr: New file installed:" << info.filePath;
+	}
+	return status;
+}
