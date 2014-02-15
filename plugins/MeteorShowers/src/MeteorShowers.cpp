@@ -548,6 +548,29 @@ void MeteorShowers::update(double deltaTime)
 	}
 }
 
+QList<StelObjectP> MeteorShowers::searchEvents(QDate dateFrom, QDate dateTo) const
+{
+	QList<StelObjectP> result;
+	QDate date;
+
+	foreach(const MeteorShowerP& ms, mShowers)
+	{
+		date = dateFrom;
+		while(date.operator <=(dateTo))
+		{
+			ms->updateCurrentData((QDateTime) date);
+			if(ms->isActive)
+			{
+				result.append(qSharedPointerCast<StelObject>(ms));
+				break;
+			}
+			date = date.addDays(1);
+		}
+	}
+
+	return result;
+}
+
 QList<StelObjectP> MeteorShowers::searchAround(const Vec3d& av, double limitFov, const StelCore*) const
 {
 	QList<StelObjectP> result;

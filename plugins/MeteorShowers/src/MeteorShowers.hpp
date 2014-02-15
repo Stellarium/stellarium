@@ -205,6 +205,19 @@ public:
 	//! @return false: hidden
 	bool getFlagLabels();
 
+	//! Get current sky date.
+	//! @return current sky date
+	QDateTime getSkyDate()
+	{
+		return skyDate;
+	}
+
+	//! Find all meteor_shower events in a given date interval
+	//! @param dateFrom
+	//! @param dateTo
+	//! @return meteor_shower list
+	QList<StelObjectP> searchEvents(QDate dateFrom, QDate dateTo) const;
+
 signals:
 	//! @param state the new update state.
 	void updateStateChanged(MeteorShowers::UpdateState state);
