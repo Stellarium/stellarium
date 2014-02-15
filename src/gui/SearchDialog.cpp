@@ -37,6 +37,7 @@
 #include <QSettings>
 #include <QString>
 #include <QStringList>
+#include <QtAlgorithms>
 #include <QTextEdit>
 #include <QLineEdit>
 #include <QComboBox>
@@ -352,6 +353,12 @@ void SearchDialog::onSearchTextChanged(const QString& text)
 		// remove possible duplicates from completion list
 		matches.removeDuplicates();
 
+		matches.sort(Qt::CaseInsensitive);
+		// objects with short names should be searched first
+		// examples: Moon, Hydra (moon); Jupiter, Ghost of Jupiter
+		stringLengthCompare comparator;
+		qSort(matches.begin(), matches.end(), comparator);
+
 		ui->completionLabel->setValues(matches);
 		ui->completionLabel->selectFirst();
 
@@ -359,6 +366,7 @@ void SearchDialog::onSearchTextChanged(const QString& text)
 		ui->pushButtonGotoSearchSkyObject->setEnabled(true);
 	}
 }
+
 
 // Called when the current simbad query status changes
 void SearchDialog::onSimbadStatusChanged()
