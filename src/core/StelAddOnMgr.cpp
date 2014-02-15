@@ -347,6 +347,14 @@ AddOn::Status StelAddOnMgr::installFromFile(AddOn* addon, const QStringList sele
 		return AddOn::NotInstalled;
 	}
 
+	// only accept zip archive
+	if (!addon->getDownloadFilepath().endsWith(".zip"))
+	{
+		qWarning() << "Add-On Mgr: Error" << addon->getAddOnId()
+			   << "The file found is not a .zip archive";
+		return AddOn::InvalidFormat;
+	}
+
 	// checking integrity
 	AddOn::Status status;
 	if (addon->getChecksum() == calculateMd5(file))
