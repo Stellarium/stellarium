@@ -146,6 +146,13 @@ void LocationDialog::updateFromProgram(const StelLocation& currentLocation)
 	{
 		setFieldsFromLocation(currentLocation);
 	}
+
+	LandscapeMgr *lmgr = GETSTELMODULE(LandscapeMgr);
+	if (lmgr->getFlagUseLightPollutionFromDatabase())
+	{
+		lmgr->setAtmosphereBortleLightPollution(currentLocation.bortleScaleIndex);
+		stelCore->getSkyDrawer()->setBortleScaleIndex(currentLocation.bortleScaleIndex);
+	}
 }
 
 void LocationDialog::disconnectEditSignals()
