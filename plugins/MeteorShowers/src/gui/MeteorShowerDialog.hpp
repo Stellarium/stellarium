@@ -60,6 +60,8 @@ private slots:
 	void setColorARR(void); //! Set color of active radiant based on real data.
 	void setColorARG(void); //! Set color of active radiant based on generic data.
 	void setColorIR(void); //! Set color of inactive radiant.
+	void checkDates(void);
+	void searchEvents(void);
 
 private:
         Ui_meteorShowerDialog* ui;
