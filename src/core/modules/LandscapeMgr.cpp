@@ -318,6 +318,7 @@ void LandscapeMgr::init()
 	setFlagAtmosphere(conf->value("landscape/flag_atmosphere", true).toBool());
 	setAtmosphereFadeDuration(conf->value("landscape/atmosphere_fade_duration",0.5).toFloat());
 	setAtmosphereLightPollutionLuminance(conf->value("viewing/light_pollution_luminance",0.0).toFloat());
+	setFlagUseLightPollutionFromDatabase(conf->value("viewing/flag_light_pollution_database", false).toBool());
 	cardinalsPoints = new Cardinals();
 	cardinalsPoints->setFlagShow(conf->value("viewing/flag_cardinal_points",true).toBool());
 	setFlagLandscapeSetsLocation(conf->value("landscape/flag_landscape_sets_location",false).toBool());
@@ -469,6 +470,20 @@ bool LandscapeMgr::getFlagLandscape() const
 bool LandscapeMgr::getIsLandscapeFullyVisible() const
 {
 	return landscape->getIsFullyVisible();
+}
+
+bool LandscapeMgr::getFlagUseLightPollutionFromDatabase() const
+{
+	return flagLightPollutionFromDatabase;
+}
+
+void LandscapeMgr::setFlagUseLightPollutionFromDatabase(const bool usage)
+{
+	if (flagLightPollutionFromDatabase != usage)
+	{
+		flagLightPollutionFromDatabase = usage;
+		emit lightPollutionUsageChanged(usage);
+	}
 }
 
 void LandscapeMgr::setFlagFog(const bool displayed)
@@ -639,6 +654,7 @@ void LandscapeMgr::setAtmosphereBortleLightPollution(const int bIndex)
 {
 	// This is an empirical formula
 	setAtmosphereLightPollutionLuminance(qMax(0.,0.0004*std::pow(bIndex-1, 2.1)));
+	emit lightPollutionChanged();
 }
 
 //! Get the light pollution following the Bortle Scale
