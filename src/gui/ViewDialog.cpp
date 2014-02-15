@@ -102,6 +102,15 @@ void ViewDialog::connectCheckBox(QCheckBox* checkBox, const QString& actionId)
 	connect(checkBox, SIGNAL(toggled(bool)), action, SLOT(setChecked(bool)));
 }
 
+void ViewDialog::connectGroupBox(QGroupBox* groupBox, const QString& actionId)
+{
+	StelAction* action = StelApp::getInstance().getStelActionManager()->findAction(actionId);
+	Q_ASSERT(action);
+	groupBox->setChecked(action->isChecked());
+	connect(action, SIGNAL(toggled(bool)), groupBox, SLOT(setChecked(bool)));
+	connect(groupBox, SIGNAL(toggled(bool)), action, SLOT(setChecked(bool)));
+}
+
 void ViewDialog::createDialogContent()
 {
 	ui->setupUi(dialog);
@@ -211,7 +220,7 @@ void ViewDialog::createDialogContent()
 	LandscapeMgr* lmgr = GETSTELMODULE(LandscapeMgr);
 	connectCheckBox(ui->showGroundCheckBox, "actionShow_Ground");
 	connectCheckBox(ui->showFogCheckBox, "actionShow_Fog");
-	connectCheckBox(ui->showAtmosphereCheckBox, "actionShow_Atmosphere");
+	connectGroupBox(ui->atmosphereGroupBox, "actionShow_Atmosphere");
 
 	ui->landscapePositionCheckBox->setChecked(lmgr->getFlagLandscapeSetsLocation());
 	connect(ui->landscapePositionCheckBox, SIGNAL(toggled(bool)), lmgr, SLOT(setFlagLandscapeSetsLocation(bool)));
@@ -219,13 +228,11 @@ void ViewDialog::createDialogContent()
 	ui->landscapeBrightnessCheckBox->setChecked(lmgr->getFlagLandscapeSetsMinimalBrightness());
 	connect(ui->landscapeBrightnessCheckBox, SIGNAL(toggled(bool)), lmgr, SLOT(setFlagLandscapeSetsMinimalBrightness(bool)));
 
-	int bIdx = StelApp::getInstance().getCore()->getSkyDrawer()->getBortleScaleIndex();
-	ui->lightPollutionSpinBox->setValue(bIdx);
-	setBortleScaleToolTip(bIdx);
-	connect(ui->lightPollutionSpinBox, SIGNAL(valueChanged(int)), lmgr, SLOT(setAtmosphereBortleLightPollution(int)));
-	connect(ui->lightPollutionSpinBox, SIGNAL(valueChanged(int)), StelApp::getInstance().getCore()->getSkyDrawer(), SLOT(setBortleScaleIndex(int)));
-	connect(ui->lightPollutionSpinBox, SIGNAL(valueChanged(int)), this, SLOT(setBortleScaleToolTip(int)));
-
+	// Light pollution
+	populateLightPollution();
+	ui->useLocationDataCheckBox->setChecked(lmgr->getFlagUseLightPollutionFromDatabase());
+	connect(ui->useLocationDataCheckBox, SIGNAL(toggled(bool)), lmgr, SLOT(setFlagUseLightPollutionFromDatabase(bool)));
+	connect(ui->useLocationDataCheckBox, SIGNAL(clicked()), this, SLOT(populateLightPollution()));
 
 	ui->autoChangeLandscapesCheckBox->setChecked(lmgr->getFlagLandscapeAutoSelection());
 	connect(ui->autoChangeLandscapesCheckBox, SIGNAL(toggled(bool)), lmgr, SLOT(setFlagLandscapeAutoSelection(bool)));
@@ -287,6 +294,26 @@ void ViewDialog::createDialogContent()
 	QTimer* refreshTimer = new QTimer(this);
 	connect(refreshTimer, SIGNAL(timeout()), this, SLOT(updateFromProgram()));
 	refreshTimer->start(200);
+}
+
+void ViewDialog::populateLightPollution()
+{
+	StelCore *core = StelApp::getInstance().getCore();
+	LandscapeMgr *lmgr = GETSTELMODULE(LandscapeMgr);
+	int bIdx = core->getSkyDrawer()->getBortleScaleIndex();
+	if (lmgr->getFlagUseLightPollutionFromDatabase())
+	{
+		bIdx = core->getCurrentLocation().bortleScaleIndex;
+		ui->lightPollutionSpinBox->setEnabled(false);
+	}
+	else
+		ui->lightPollutionSpinBox->setEnabled(true);
+
+	ui->lightPollutionSpinBox->setValue(bIdx);
+	setBortleScaleToolTip(bIdx);
+	connect(ui->lightPollutionSpinBox, SIGNAL(valueChanged(int)), lmgr, SLOT(setAtmosphereBortleLightPollution(int)));
+	connect(ui->lightPollutionSpinBox, SIGNAL(valueChanged(int)), core->getSkyDrawer(), SLOT(setBortleScaleIndex(int)));
+	connect(ui->lightPollutionSpinBox, SIGNAL(valueChanged(int)), this, SLOT(setBortleScaleToolTip(int)));
 }
 
 void ViewDialog::setBortleScaleToolTip(int Bindex)
