@@ -586,6 +586,19 @@ AddOn::Status StelAddOnMgr::unzip(AddOn* addon, QStringList selectedFiles)
 			continue;
 		}
 
+		QStringList validDirs;
+		validDirs << "landscapes/" << "modules/" << "scripts/" << "skycultures/"
+			  << "stars/" << "textures/" << "translations/";
+		foreach (QString validDir, validDirs)
+		{
+			if (!info.filePath.contains(validDir))
+			{
+				qWarning() << "StelAddOnMgr: Unable to install! Invalid destination"
+					   << info.filePath;
+				return AddOn::InvalidDestination;
+			}
+		}
+
 		QFileInfo fileInfo(StelFileMgr::getUserDir() % "/" % info.filePath);
 		StelFileMgr::makeSureDirExistsAndIsWritable(fileInfo.absolutePath());
 		QFile file(fileInfo.absoluteFilePath());

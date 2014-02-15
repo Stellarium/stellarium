@@ -67,6 +67,7 @@ public:
 		Restart,
 		Corrupted,
 		InvalidFormat,
+		InvalidDestination,
 		UnableToWrite,
 		UnableToRead,
 		UnableToRemove,
