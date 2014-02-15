@@ -24,13 +24,13 @@
 #include <QDebug>
 #include <QFileDialog>
 #include <QGraphicsColorizeEffect>
+#include <QMessageBox>
 #include <QTimer>
 #include <QUrl>
 
-#include "StelApp.hpp"
-#include "ui_meteorShowerDialog.h"
 #include "MeteorShowerDialog.hpp"
 #include "MeteorShowers.hpp"
+#include "StelApp.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelObjectMgr.hpp"
 #include "StelMovementMgr.hpp"
@@ -39,6 +39,7 @@
 #include "StelMainView.hpp"
 #include "StelFileMgr.hpp"
 #include "StelTranslator.hpp"
+#include "ui_meteorShowerDialog.h"
 
 MeteorShowerDialog::MeteorShowerDialog() : updateTimer(NULL)
 {
@@ -86,6 +87,11 @@ void MeteorShowerDialog::createDialogContent()
 	connect(updateTimer, SIGNAL(timeout()), this, SLOT(refreshUpdateValues()));
 	updateTimer->start(7000);
 
+	// Settings tab / event group
+	ui->dateFrom->setDate(plugin->getSkyDate().date());
+	ui->dateTo->setDate(plugin->getSkyDate().date());
+	connect(ui->searchButton, SIGNAL(clicked()), this, SLOT(checkDates()));
+
 	// Settings tab / radiant group
 	ui->displayRadiant->setChecked(plugin->getFlagRadiant());
 	connect(ui->displayRadiant, SIGNAL(clicked(bool)), plugin, SLOT(setFlagRadiant(bool)));
@@ -122,6 +128,22 @@ void MeteorShowerDialog::createDialogContent()
 	ui->aboutTextBrowser->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
 
 	updateGuiFromSettings();
+}
+
+void MeteorShowerDialog::checkDates(void)
+{
+	if(ui->dateFrom->date().operator >(ui->dateTo->date()))
+		QMessageBox::warning(0, "Stellarium", q_("Start date greater than end date!"));
+	else
+		searchEvents();
+}
+
+void MeteorShowerDialog::searchEvents(void)
+{
+	ui->listEvents->clear();
+	QList<StelObjectP> result = plugin->searchEvents(ui->dateFrom->date(), ui->dateTo->date());
+	foreach(const StelObjectP& r, result)
+		ui->listEvents->addItem(r->getNameI18n());
 }
 
 void MeteorShowerDialog::setAboutHtml(void)
