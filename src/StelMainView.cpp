@@ -309,7 +309,6 @@ void StelMainView::init(QSettings* conf)
 
 	StelPainter::initGLShaders();
 
-	setViewportUpdateMode(QGraphicsView::FullViewportUpdate);
 	setResizeMode(QDeclarativeView::SizeRootObjectToView);
 	qmlRegisterType<StelSkyItem>("Stellarium", 1, 0, "StelSky");
 	qmlRegisterType<StelGuiItem>("Stellarium", 1, 0, "StelGui");
