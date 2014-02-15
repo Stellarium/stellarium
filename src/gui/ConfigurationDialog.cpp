@@ -527,6 +527,7 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	conf->setValue("viewing/flag_constellation_art", cmgr->getFlagArt());
 	conf->setValue("viewing/flag_constellation_isolate_selected", cmgr->getFlagIsolateSelected());
 	conf->setValue("viewing/flag_landscape_autoselection", lmgr->getFlagLandscapeAutoSelection());
+	conf->setValue("viewing/flag_light_pollution_database", lmgr->getFlagUseLightPollutionFromDatabase());
 	conf->setValue("viewing/constellation_art_intensity", cmgr->getArtIntensity());
 	conf->setValue("viewing/flag_night", StelApp::getInstance().getVisionModeNight());
 	conf->setValue("astro/flag_star_name", smgr->getFlagLabels());

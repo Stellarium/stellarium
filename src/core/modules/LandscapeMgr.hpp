@@ -57,6 +57,10 @@ class LandscapeMgr : public StelModule
 			   READ getFlagLandscape
 			   WRITE setFlagLandscape
 			   NOTIFY landscapeDisplayedChanged)
+	Q_PROPERTY(bool databaseUsage
+			READ getFlagUseLightPollutionFromDatabase
+			WRITE setFlagUseLightPollutionFromDatabase
+			NOTIFY lightPollutionUsageChanged)
 
 public:
 	LandscapeMgr();
@@ -186,6 +190,10 @@ public slots:
 	float getDefaultMinimalBrightness() const {return defaultMinimalBrightness;}
 	//! Set the minimal brightness value of the landscape.
 	void setDefaultMinimalBrightness(const float b) {defaultMinimalBrightness=b;}
+	//! Sets the value of the flag usage light pollution (and bortle index) from locations database.
+	void setFlagUseLightPollutionFromDatabase(const bool usage);
+	//! Return the value of flag usage light pollution (and bortle index) from locations database.
+	bool getFlagUseLightPollutionFromDatabase() const;
 
 	//! Get flag for displaying Cardinals Points.
 	bool getFlagCardinalsPoints() const;
@@ -304,11 +312,14 @@ signals:
 	void cardinalsPointsDisplayedChanged(const bool displayed);
 	void fogDisplayedChanged(const bool displayed);
 	void landscapeDisplayedChanged(const bool displayed);
+	void lightPollutionUsageChanged(const bool usage);
 
 	//! Emitted when a landscape has been installed or un-installed.
 	//! For example, it is used to update the list of landscapes in
 	//! the Sky and viewing options window (the ViewDialog class)
 	void landscapesChanged();
+
+	void lightPollutionChanged();
 
 	//! Emitted when installLandscapeFromArchive() can't read from, write to or
 	//! create a file or a directory.
@@ -365,6 +376,8 @@ private:
 	bool flagLandscapeSetsLocation;
 
 	bool flagLandscapeAutoSelection;
+
+	bool flagLightPollutionFromDatabase;
 
 	//! Indicate use of the default minimal brightness value specified in config.ini.
 	bool flagLandscapeUseMinimalBrightness;

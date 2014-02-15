@@ -618,8 +618,17 @@
               <bold>false</bold>
              </font>
             </property>
+            <property name="toolTip">
+             <string>Show atmosphere</string>
+            </property>
             <property name="title">
              <string>Atmosphere</string>
+            </property>
+            <property name="flat">
+             <bool>true</bool>
+            </property>
+            <property name="checkable">
+             <bool>true</bool>
             </property>
             <layout class="QVBoxLayout" name="verticalLayout_3">
              <property name="leftMargin">
@@ -635,9 +644,12 @@
               <number>0</number>
              </property>
              <item>
-              <widget class="QCheckBox" name="showAtmosphereCheckBox">
+              <widget class="QCheckBox" name="useLocationDataCheckBox">
+               <property name="toolTip">
+                <string>Use light pollution data from locations database and ignore settings for light pollution below</string>
+               </property>
                <property name="text">
-                <string>Show atmosphere</string>
+                <string>Light pollution data from locations database</string>
                </property>
               </widget>
              </item>
@@ -2154,7 +2166,7 @@
   <tabstop>planetMarkerCheckBox</tabstop>
   <tabstop>planetOrbitCheckBox</tabstop>
   <tabstop>planetLightSpeedCheckBox</tabstop>
-  <tabstop>showAtmosphereCheckBox</tabstop>
+  <tabstop>useLocationDataCheckBox</tabstop>
   <tabstop>lightPollutionSpinBox</tabstop>
   <tabstop>starLabelCheckBox</tabstop>
   <tabstop>starsLabelsHorizontalSlider</tabstop>
