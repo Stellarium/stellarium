@@ -585,7 +585,7 @@ void SearchDialog::updateListWidget(int index)
 
 void SearchDialog::updateListTab()
 {
-	if (StelApp::getInstance().getLocaleMgr().getAppLanguage() == "en")
+	if (StelApp::getInstance().getLocaleMgr().getAppLanguage().startsWith("en"))
 	{
 		// hide "names in English" checkbox
 		ui->searchInEnglishCheckBox->hide();
