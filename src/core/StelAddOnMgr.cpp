@@ -599,7 +599,7 @@ AddOn::Status StelAddOnMgr::unzip(AddOn* addon, QStringList selectedFiles)
 			  << "stars/" << "textures/" << "translations/";
 		foreach (QString validDir, validDirs)
 		{
-			if (!info.filePath.contains(validDir))
+			if (!info.filePath.startsWith(validDir))
 			{
 				qWarning() << "StelAddOnMgr: Unable to install! Invalid destination"
 					   << info.filePath;
