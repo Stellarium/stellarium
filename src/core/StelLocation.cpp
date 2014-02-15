@@ -21,6 +21,8 @@
 #include "StelUtils.hpp"
 #include <QStringList>
 
+const int StelLocation::DEFAULT_BORTLE_SCALE_INDEX = 2;
+
 // Output the location as a string ready to be stored in the user_location file
 QString StelLocation::serializeToLine() const
 {
@@ -96,10 +98,10 @@ StelLocation StelLocation::createFromLine(const QString& rawline)
 		bool ok;
 		loc.bortleScaleIndex = splitline.at(8).toInt(&ok);
 		if (ok==false)
-			loc.bortleScaleIndex = 2.f;
+			loc.bortleScaleIndex = DEFAULT_BORTLE_SCALE_INDEX;
 	}
 	else
-		loc.bortleScaleIndex = 2.f;
+		loc.bortleScaleIndex = DEFAULT_BORTLE_SCALE_INDEX;
 
 	// Reserve for TimeZone
 	// if (splitline.size()>9) {}

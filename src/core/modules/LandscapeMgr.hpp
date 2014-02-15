@@ -60,7 +60,7 @@ class LandscapeMgr : public StelModule
 	Q_PROPERTY(bool databaseUsage
 			READ getFlagUseLightPollutionFromDatabase
 			WRITE setFlagUseLightPollutionFromDatabase
-			NOTIFY lightPollutionChanged)
+			NOTIFY lightPollutionUsageChanged)
 
 public:
 	LandscapeMgr();
@@ -312,12 +312,14 @@ signals:
 	void cardinalsPointsDisplayedChanged(const bool displayed);
 	void fogDisplayedChanged(const bool displayed);
 	void landscapeDisplayedChanged(const bool displayed);
-	void lightPollutionChanged(const bool usage);
+	void lightPollutionUsageChanged(const bool usage);
 
 	//! Emitted when a landscape has been installed or un-installed.
 	//! For example, it is used to update the list of landscapes in
 	//! the Sky and viewing options window (the ViewDialog class)
 	void landscapesChanged();
+
+	void lightPollutionChanged();
 
 	//! Emitted when installLandscapeFromArchive() can't read from, write to or
 	//! create a file or a directory.
