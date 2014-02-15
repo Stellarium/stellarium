@@ -231,8 +231,13 @@ void ViewDialog::createDialogContent()
 	// Light pollution
 	populateLightPollution();
 	ui->useLocationDataCheckBox->setChecked(lmgr->getFlagUseLightPollutionFromDatabase());
-	connect(ui->useLocationDataCheckBox, SIGNAL(toggled(bool)), lmgr, SLOT(setFlagUseLightPollutionFromDatabase(bool)));
-	connect(ui->useLocationDataCheckBox, SIGNAL(clicked()), this, SLOT(populateLightPollution()));
+	connect(ui->useLocationDataCheckBox, SIGNAL(toggled(bool)), lmgr, SLOT(setFlagUseLightPollutionFromDatabase(bool)));	
+	connect(lmgr, SIGNAL(lightPollutionUsageChanged(bool)), this, SLOT(populateLightPollution()));
+	connect(lmgr, SIGNAL(lightPollutionChanged()), this, SLOT(populateLightPollution()));
+	connect(ui->lightPollutionSpinBox, SIGNAL(valueChanged(int)), lmgr, SLOT(setAtmosphereBortleLightPollution(int)));
+	connect(ui->lightPollutionSpinBox, SIGNAL(valueChanged(int)), StelApp::getInstance().getCore()->getSkyDrawer(), SLOT(setBortleScaleIndex(int)));
+	connect(ui->lightPollutionSpinBox, SIGNAL(valueChanged(int)), this, SLOT(setBortleScaleToolTip(int)));
+
 
 	ui->autoChangeLandscapesCheckBox->setChecked(lmgr->getFlagLandscapeAutoSelection());
 	connect(ui->autoChangeLandscapesCheckBox, SIGNAL(toggled(bool)), lmgr, SLOT(setFlagLandscapeAutoSelection(bool)));
@@ -303,7 +308,12 @@ void ViewDialog::populateLightPollution()
 	int bIdx = core->getSkyDrawer()->getBortleScaleIndex();
 	if (lmgr->getFlagUseLightPollutionFromDatabase())
 	{
-		bIdx = core->getCurrentLocation().bortleScaleIndex;
+		StelLocation loc = core->getCurrentLocation();
+		bIdx = loc.bortleScaleIndex;
+		if (!loc.planetName.contains("Earth")) // location not on Earth...
+			bIdx = 1;
+		if (bIdx<1) // ...or it observatory, or it unknown location
+			bIdx = loc.DEFAULT_BORTLE_SCALE_INDEX;
 		ui->lightPollutionSpinBox->setEnabled(false);
 	}
 	else
@@ -311,9 +321,6 @@ void ViewDialog::populateLightPollution()
 
 	ui->lightPollutionSpinBox->setValue(bIdx);
 	setBortleScaleToolTip(bIdx);
-	connect(ui->lightPollutionSpinBox, SIGNAL(valueChanged(int)), lmgr, SLOT(setAtmosphereBortleLightPollution(int)));
-	connect(ui->lightPollutionSpinBox, SIGNAL(valueChanged(int)), core->getSkyDrawer(), SLOT(setBortleScaleIndex(int)));
-	connect(ui->lightPollutionSpinBox, SIGNAL(valueChanged(int)), this, SLOT(setBortleScaleToolTip(int)));
 }
 
 void ViewDialog::setBortleScaleToolTip(int Bindex)

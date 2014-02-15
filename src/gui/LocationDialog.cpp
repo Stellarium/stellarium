@@ -150,8 +150,13 @@ void LocationDialog::updateFromProgram(const StelLocation& currentLocation)
 	LandscapeMgr *lmgr = GETSTELMODULE(LandscapeMgr);
 	if (lmgr->getFlagUseLightPollutionFromDatabase())
 	{
-		lmgr->setAtmosphereBortleLightPollution(currentLocation.bortleScaleIndex);
-		stelCore->getSkyDrawer()->setBortleScaleIndex(currentLocation.bortleScaleIndex);
+		int bidx = currentLocation.bortleScaleIndex;
+		if (!currentLocation.planetName.contains("Earth")) // location not on Earth...
+			bidx = 1;
+		if (bidx<1) // ...or it observatory, or it unknown location
+			bidx = currentLocation.DEFAULT_BORTLE_SCALE_INDEX;
+		stelCore->getSkyDrawer()->setBortleScaleIndex(bidx);
+		lmgr->setAtmosphereBortleLightPollution(bidx);
 	}
 }
 

@@ -482,7 +482,7 @@ void LandscapeMgr::setFlagUseLightPollutionFromDatabase(const bool usage)
 	if (flagLightPollutionFromDatabase != usage)
 	{
 		flagLightPollutionFromDatabase = usage;
-		emit lightPollutionChanged(usage);
+		emit lightPollutionUsageChanged(usage);
 	}
 }
 
@@ -654,6 +654,7 @@ void LandscapeMgr::setAtmosphereBortleLightPollution(const int bIndex)
 {
 	// This is an empirical formula
 	setAtmosphereLightPollutionLuminance(qMax(0.,0.0004*std::pow(bIndex-1, 2.1)));
+	emit lightPollutionChanged();
 }
 
 //! Get the light pollution following the Bortle Scale

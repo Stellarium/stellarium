@@ -74,6 +74,8 @@ public:
 
 	//! Used privately by the StelLocationMgr
 	bool isUserLocation;
+
+	static const int DEFAULT_BORTLE_SCALE_INDEX;
 };
 
 //! Serialize the passed StelLocation into a binary blob.
