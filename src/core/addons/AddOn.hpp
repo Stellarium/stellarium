@@ -27,7 +27,7 @@ class AddOn : public QObject
 {
 	Q_OBJECT
 public:
-	AddOn(const qint64 addOnId, const QVariantMap &map);
+	AddOn(const QString addOnId, const QVariantMap &map);
 	virtual ~AddOn();
 
 	//! @enum Type
@@ -84,7 +84,7 @@ public:
 
 	bool isValid() { return m_bIsValid; }
 
-	quint64 getAddOnId() { return m_iAddOnId; }
+	QString getAddOnId() { return m_iAddOnId; }
 	QString getTitle() { return m_sTitle; }
 	Type getType() { return m_eType; }
 	QString getTypeString();
@@ -99,9 +99,7 @@ public:
 	float getDownloadSize() { return m_sDownloadSize.toFloat() * 1000; }
 	QString getDownloadURL() { return m_sDownloadURL; }
 	QString getThumbnail() { return m_sThumbnail; }
-	QString getInstallId() { return m_sInstallId; }
 	QString getChecksum() { return m_sChecksum; }
-	QString getDate() { return m_dateTime.toString("dd MMM yyyy - hh:mm:ss"); }
 
 	Status getStatus() { return m_eStatus; }
 	QString getStatusString();
@@ -111,9 +109,8 @@ public:
 	QSet<QString> getInstalledTextures() { return m_InstalledTextures; }
 
 private:
-	qint64 m_iAddOnId;
+	QString m_iAddOnId;
 	Type m_eType;
-	QString m_sInstallId;
 	QString m_sTitle;
 	QString m_sDescription;
 	QString m_sVersion;
@@ -128,7 +125,6 @@ private:
 	QString m_sChecksum;
 	QString m_sThumbnail;
 	QList<Authors> m_authors;
-	QDateTime m_dateTime;
 	QSet<QString> m_AllTextures;
 	QSet<QString> m_InstalledTextures;
 	QHash<QString, int> m_textures; // <texture_name, installed>

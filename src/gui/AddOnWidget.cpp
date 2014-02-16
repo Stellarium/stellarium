@@ -68,7 +68,7 @@ AddOnWidget::AddOnWidget(QWidget* parent, int row, AddOn* addon)
 
 	// Thumbnail
 	QString thumbnailDir = StelApp::getInstance().getStelAddOnMgr().getThumbnailDir();
-	QPixmap thumbnail(thumbnailDir % addon->getInstallId() % ".jpg");
+	QPixmap thumbnail(thumbnailDir % addon->getAddOnId() % ".jpg");
 	if (thumbnail.isNull())
 	{
 		ui->thumbnail->setVisible(false);

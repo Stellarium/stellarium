@@ -24,7 +24,7 @@
 #include "StelAddOnMgr.hpp"
 #include "StelApp.hpp"
 
-AddOn::AddOn(const qint64 addOnId, const QVariantMap& map)
+AddOn::AddOn(const QString addOnId, const QVariantMap& map)
 	: m_iAddOnId(addOnId)
 	, m_eType(INVALID)
 	, m_bIsValid(false)
@@ -39,7 +39,6 @@ AddOn::AddOn(const qint64 addOnId, const QVariantMap& map)
 	}
 
 	m_eCategory = getCategoryFromType(m_eType);
-	m_sInstallId = map.value("install-id").toString();
 	m_sTitle = map.value("title").toString();
 	m_sDescription = map.value("description").toString();
 	m_sVersion = map.value("version").toString();
@@ -53,13 +52,12 @@ AddOn::AddOn(const qint64 addOnId, const QVariantMap& map)
 	m_sInstalledSize = map.value("installed-size").toString();
 	m_sChecksum = map.value("checksum").toString();
 	m_sThumbnail = map.value("thumbnail").toString();
-	m_dateTime = QDateTime::fromString(QString::number(m_iAddOnId), "yyyyMMddhhmmss");
 
 	// early returns if the mandatory fields are not present
-	if (m_sInstallId.isEmpty() || m_sTitle.isEmpty()
+	if (m_sTitle.isEmpty() || m_sChecksum.isEmpty()
 		|| m_sFirstStel.isEmpty() || m_sLastStel.isEmpty()
 		|| m_sDownloadURL.isEmpty() || m_sDownloadFilename.isEmpty()
-		|| m_sDownloadSize.isEmpty() || m_sChecksum.isEmpty())
+		|| m_sDownloadSize.isEmpty())
 	{
 		qWarning() << "Add-On Catalog : Error! Add-on" << m_iAddOnId
 			   << "does not have all the required fields!";

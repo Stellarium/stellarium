@@ -176,9 +176,7 @@ void StelAddOnMgr::readJsonObject(const QJsonObject& addOns)
 	QVariantMap::iterator i;
 	for (i = map.begin(); i != map.end(); ++i)
 	{
-		qint64 addOnId = i.key().toLongLong();
-		QVariantMap attributes = i.value().toMap();
-		AddOn* addOn(new AddOn(addOnId, attributes));
+		AddOn* addOn(new AddOn(i.key(), i.value().toMap()));
 		if (addOn->isValid())
 		{
 			AddOnMap amap;
@@ -186,10 +184,10 @@ void StelAddOnMgr::readJsonObject(const QJsonObject& addOns)
 			{
 				amap = m_addons.value(addOn->getType());
 			}
-			amap.insert(addOnId, addOn);
+			amap.insert(addOn->getAddOnId(), addOn);
 			m_addons.insert(addOn->getType(), amap);
 			m_addonsByMd5.insert(addOn->getChecksum(), addOn);
-			m_addonsByIdInstallId.insert(addOn->getInstallId(), addOn);
+			m_addonsById.insert(addOn->getAddOnId(), addOn);
 		}
 	}
 }
@@ -244,12 +242,12 @@ void StelAddOnMgr::refreshAddOnStatuses()
 		else if (aos.key() == AddOn::TEXTURE)
 		{
 			AddOnMap textures = m_addons.value(AddOn::Texture);
-			QMap<qint64, AddOn*>::iterator i;
+			QMap<QString, AddOn*>::iterator i;
 			for (i = textures.begin(); i != textures.end(); ++i)
 			{
 				foreach (QString t, list) {
 					QStringList tL = t.split("/");
-					if (tL[0] == i.value()->getInstallId())
+					if (tL[0] == i.value()->getAddOnId())
 					{
 						list.removeOne(t);
 						i.value()->setTextureStatus(tL[1], true);
@@ -265,7 +263,7 @@ void StelAddOnMgr::refreshAddOnStatuses()
 		else
 		{
 			foreach (QString a, list) {
-				AddOn* addon = m_addonsByIdInstallId.value(a);
+				AddOn* addon = m_addonsById.value(a);
 				if (addon)
 				{
 					addon->setStatus(AddOn::FullyInstalled);
@@ -277,7 +275,7 @@ void StelAddOnMgr::refreshAddOnStatuses()
 
 void StelAddOnMgr::refreshThumbnailQueue()
 {
-	QHashIterator<QString, AddOn*> aos(m_addonsByIdInstallId);
+	QHashIterator<QString, AddOn*> aos(m_addonsById);
 	while (aos.hasNext())
 	{
 		aos.next();
@@ -362,7 +360,7 @@ AddOn::Status StelAddOnMgr::installFromFile(AddOn* addon, const QStringList sele
 	{
 		// installing files
 		status = m_pStelAddOns.value(addon->getCategory())
-				->installFromFile(addon->getInstallId(),
+				->installFromFile(addon->getAddOnId(),
 						  addon->getDownloadFilepath(),
 						  selectedFiles);
 	}
@@ -407,7 +405,7 @@ void StelAddOnMgr::removeAddOn(AddOn* addon, const QStringList selectedFiles)
 		return;
 	}
 
-	addon->setStatus(m_pStelAddOns.value(addon->getCategory())->uninstallAddOn(addon->getInstallId(), selectedFiles));
+	addon->setStatus(m_pStelAddOns.value(addon->getCategory())->uninstallAddOn(addon->getAddOnId(), selectedFiles));
 
 	if (addon->getCategory() == AddOn::CATALOG || addon->getCategory() == AddOn::LANGUAGEPACK
 			|| addon->getCategory() == AddOn::TEXTURE)

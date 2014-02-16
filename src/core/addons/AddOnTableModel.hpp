@@ -43,12 +43,11 @@ private:
 		Title,
 		Type,
 		Version,
-		LastUpdate,
 		Status,
 		Checkbox
 	};
 
-	QMap<qint64, AddOn*> m_addons;
+	QMap<QString, AddOn*> m_addons;
 	QList<Column> m_iColumns;
 };
 

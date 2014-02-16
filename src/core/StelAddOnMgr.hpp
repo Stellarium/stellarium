@@ -40,7 +40,7 @@ class StelAddOnMgr : public QObject
 {
 	Q_OBJECT
 public:
-	typedef QMap<qint64, AddOn*> AddOnMap;
+	typedef QMap<QString, AddOn*> AddOnMap;
 
 	//! @enum AddOnMgrMsg
 	enum AddOnMgrMsg
@@ -109,7 +109,7 @@ private:
 	QString m_sJsonPath;
 	QHash<AddOn::Type, AddOnMap> m_addons;
 	QHash<QString, AddOn*> m_addonsByMd5;
-	QHash<QString, AddOn*> m_addonsByIdInstallId;
+	QHash<QString, AddOn*> m_addonsById;
 
 	QNetworkReply* m_pThumbnailNetworkReply;
 	QHash<QString, QString> m_thumbnails;

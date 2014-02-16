@@ -29,10 +29,10 @@ AddOnTableModel::AddOnTableModel(AddOn::Category category, QHash<AddOn::Type, St
 	switch (category) {
 		case AddOn::CATALOG:
 		{
-			QMap<qint64, AddOn*> plugin = addons.value(AddOn::Plugin_Catalog);
-			QMap<qint64, AddOn*> star = addons.value(AddOn::Star_Catalog);
+			QMap<QString, AddOn*> plugin = addons.value(AddOn::Plugin_Catalog);
+			QMap<QString, AddOn*> star = addons.value(AddOn::Star_Catalog);
 			m_addons = plugin.unite(star);
-			m_iColumns << Title << Type << LastUpdate;
+			m_iColumns << Title << Type;
 			break;
 		}
 		case AddOn::LANDSCAPE:
@@ -43,10 +43,10 @@ AddOnTableModel::AddOnTableModel(AddOn::Category category, QHash<AddOn::Type, St
 		}
 		case AddOn::LANGUAGEPACK:
 		{
-			QMap<qint64, AddOn*> stellarium = addons.value(AddOn::Language_Stellarium);
-			QMap<qint64, AddOn*> skyculture = addons.value(AddOn::Language_SkyCulture);
+			QMap<QString, AddOn*> stellarium = addons.value(AddOn::Language_Stellarium);
+			QMap<QString, AddOn*> skyculture = addons.value(AddOn::Language_SkyCulture);
 			m_addons = stellarium.unite(skyculture);
-			m_iColumns << Title << Type << LastUpdate;
+			m_iColumns << Title << Type;
 			break;
 		}
 		case AddOn::SCRIPT:
@@ -58,7 +58,7 @@ AddOnTableModel::AddOnTableModel(AddOn::Category category, QHash<AddOn::Type, St
 		case AddOn::STARLORE:
 		{
 			m_addons = addons.value(AddOn::Sky_Culture);
-			m_iColumns << Title << LastUpdate;
+			m_iColumns << Title;
 			break;
 		}
 		case AddOn::TEXTURE:
@@ -115,9 +115,6 @@ QVariant AddOnTableModel::data(const QModelIndex &index, int role) const
 		case Version:
 			value = addon->getVersion();
 			break;
-		case LastUpdate:
-			value = addon->getDate();
-			break;
 		case Status:
 			value = q_(addon->getStatusString());
 			break;
@@ -146,9 +143,6 @@ QVariant AddOnTableModel::headerData(int section, Qt::Orientation orientation, i
 			break;
 		case Version:
 			value = q_("Version");
-			break;
-		case LastUpdate:
-			value = q_("Last Update");
 			break;
 		case Status:
 			value = q_("Status");
