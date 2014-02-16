@@ -29,6 +29,7 @@
 #include "StelIniParser.hpp"
 #include "StelVertexArray.hpp"
 #include "AngleMeasure.hpp"
+#include "AngleMeasureDialog.hpp"
 
 #include <QDebug>
 #include <QTimer>
@@ -62,34 +63,34 @@ StelPluginInfo AngleMeasureStelPluginInterface::getPluginInfo() const
 }
 
 AngleMeasure::AngleMeasure()
-	: flagShowAngleMeasure(false), dragging(false),
-		angleText(""), flagUseDmsFormat(false), toolbarButton(NULL)
+	: flagShowAngleMeasure(false),
+	  dragging(false),
+	  angle(0.),
+	  toolbarButton(NULL)
 {
 	setObjectName("AngleMeasure");
 	font.setPixelSize(16);
+
+	configDialog = new AngleMeasureDialog();
+	conf = StelApp::getInstance().getSettings();
 
 	messageTimer = new QTimer(this);
 	messageTimer->setInterval(7000);
 	messageTimer->setSingleShot(true);
 
 	connect(messageTimer, SIGNAL(timeout()), this, SLOT(clearMessage()));
-
-	QSettings* conf = StelApp::getInstance().getSettings();
-	if (!conf->contains("AngleMeasure/angle_format_dms"))
-	{
-		// Create the "AngleMeasure" section and set default parameters
-		conf->setValue("AngleMeasure/angle_format_dms", false);
-		conf->setValue("AngleMeasure/text_color", "0,0.5,1");
-		conf->setValue("AngleMeasure/line_color", "0,0.5,1");
-	}
-
-	flagUseDmsFormat = conf->value("AngleMeasure/angle_format_dms", false).toBool();
-	textColor = StelUtils::strToVec3f(conf->value("AngleMeasure/text_color", "0,0.5,1").toString());
-	lineColor = StelUtils::strToVec3f(conf->value("AngleMeasure/line_color", "0,0.5,1").toString());
 }
 
 AngleMeasure::~AngleMeasure()
 {
+	delete configDialog;
+}
+
+bool AngleMeasure::configureGui(bool show)
+{
+	if (show)
+		configDialog->setVisible(true);
+	return true;
 }
 
 //! Determine which "layer" the plagin's drawing will happen on.
@@ -104,6 +105,16 @@ double AngleMeasure::getCallOrder(StelModuleActionName actionName) const
 
 void AngleMeasure::init()
 {
+	// If no settings in the main config file, create with defaults
+	if (!conf->childGroups().contains("AngleMeasure"))
+	{
+		qDebug() << "AngleMeasure::init no AngleMeasure section exists in main config file - creating with defaults";
+		restoreDefaultConfigIni();
+	}
+
+	// populate settings from main config file.
+	readSettingsFromConfig();
+
 	qDebug() << "AngleMeasure plugin - press control-A to toggle angle measure mode";
 	startPoint.set(0.,0.,0.);
 	endPoint.set(0.,0.,0.);
@@ -160,10 +171,15 @@ void AngleMeasure::draw(StelCore* core)
 		glEnable(GL_TEXTURE_2D);
 		
 		Vec3d xy;
+		QString displayedText;
 		if (prj->project(perp1EndPoint,xy))
 		{
 			painter.setColor(textColor[0], textColor[1], textColor[2], lineVisible.getInterstate());
-			painter.drawText(xy[0], xy[1], angleText, 0, 15, 15);
+			if (flagShowPA)
+				displayedText = QString("%1 (%2%3)").arg(calculateAngle(), messagePA, calculatePositionAngle(startPoint, endPoint));
+			else
+				displayedText = calculateAngle();
+			painter.drawText(xy[0], xy[1], displayedText, 0, 15, 15);
 		}
 
 		glDisable(GL_TEXTURE_2D);
@@ -191,6 +207,28 @@ void AngleMeasure::draw(StelCore* core)
 		y -= ls;
 		painter.drawText(x, y, messageRightButton);
 	}
+}
+
+QString AngleMeasure::calculatePositionAngle(const Vec3d p1, const Vec3d p2) const
+{
+	double y = cos(p2.latitude())*sin(p2.longitude()-p1.longitude());
+	double x = cos(p1.latitude())*sin(p2.latitude()) - sin(p1.latitude())*cos(p2.latitude())*cos(p2.longitude()-p1.longitude());
+	double r = std::atan(y/x);
+	if (x<0)
+		r += M_PI;
+	if (y<0)
+		r += 2*M_PI;
+	if (r>(2*M_PI))
+		r -= 2*M_PI;
+
+	unsigned int d, m;
+	double s;
+	bool sign;
+	StelUtils::radToDms(r, sign, d, m, s);
+	if (flagUseDmsFormat)
+		return QString("%1d %2m %3s").arg(d).arg(m).arg(s, 0, 'f', 2);
+	else
+		return QString("%1%2 %3' %4\"").arg(d).arg(QChar(0x00B0)).arg(m).arg(s, 0, 'f', 2);
 }
 
 void AngleMeasure::handleKeys(QKeyEvent* event)
@@ -272,14 +310,20 @@ void AngleMeasure::calculateEnds(void)
 	perp2StartPoint.set(endPoint[0]-p[0],endPoint[1]-p[1],endPoint[2]-p[2]);
 	perp2EndPoint.set(endPoint[0]+p[0],endPoint[1]+p[1],endPoint[2]+p[2]);
 
+	angle = startPoint.angle(endPoint);
+}
+
+QString AngleMeasure::calculateAngle() const
+{
 	unsigned int d, m;
 	double s;
 	bool sign;
-	StelUtils::radToDms(startPoint.angle(endPoint), sign, d, m, s);
+
+	StelUtils::radToDms(angle, sign, d, m, s);
 	if (flagUseDmsFormat)
-		angleText = QString("%1d %2m %3s").arg(d).arg(m).arg(s, 0, 'f', 2);
+		return QString("%1d %2m %3s").arg(d).arg(m).arg(s, 0, 'f', 2);
 	else
-		angleText = QString("%1%2 %3' %4\"").arg(d).arg(QChar(0x00B0)).arg(m).arg(s, 0, 'f', 2);
+		return QString("%1%2 %3' %4\"").arg(d).arg(QChar(0x00B0)).arg(m).arg(s, 0, 'f', 2);
 }
 
 void AngleMeasure::enableAngleMeasure(bool b)
@@ -294,6 +338,16 @@ void AngleMeasure::enableAngleMeasure(bool b)
 	}
 }
 
+void AngleMeasure::showPositionAngle(bool b)
+{
+	flagShowPA = b;
+}
+
+void AngleMeasure::useDmsFormat(bool b)
+{
+	flagUseDmsFormat=b;
+}
+
 void AngleMeasure::updateMessageText()
 {
 	// TRANSLATORS: instructions for using the AngleMeasure plugin.
@@ -302,10 +356,56 @@ void AngleMeasure::updateMessageText()
 	messageLeftButton = q_("Drag with the left button to measure, left-click to clear.");
 	// TRANSLATORS: instructions for using the AngleMeasure plugin.
 	messageRightButton = q_("Right-clicking changes the end point only.");
+	// TRANSLATORS: PA is abbreviation for phrase "Position Angle"
+	messagePA = q_("PA=");
 }
 
 void AngleMeasure::clearMessage()
 {
 	//qDebug() << "AngleMeasure::clearMessage";
 	messageFader = false;
+}
+
+void AngleMeasure::restoreDefaults(void)
+{
+	restoreDefaultConfigIni();
+	readSettingsFromConfig();
+}
+
+void AngleMeasure::restoreDefaultConfigIni(void)
+{
+	// Create the "AngleMeasure" section and set default parameters
+	conf->beginGroup("AngleMeasure");
+
+	// delete all existing the "AngleMeasure" settings...
+	conf->remove("");
+
+	conf->setValue("angle_format_dms", false);
+	conf->setValue("show_position_angle", false);
+	conf->setValue("text_color", "0,0.5,1");
+	conf->setValue("line_color", "0,0.5,1");
+
+	conf->endGroup();
+}
+
+void AngleMeasure::readSettingsFromConfig(void)
+{
+	conf->beginGroup("AngleMeasure");
+
+	useDmsFormat(conf->value("angle_format_dms", false).toBool());
+	showPositionAngle(conf->value("show_position_angle", false).toBool());
+	textColor = StelUtils::strToVec3f(conf->value("text_color", "0,0.5,1").toString());
+	lineColor = StelUtils::strToVec3f(conf->value("line_color", "0,0.5,1").toString());
+
+	conf->endGroup();
+}
+
+void AngleMeasure::saveSettingsToConfig(void)
+{
+	conf->beginGroup("AngleMeasure");
+
+	conf->setValue("angle_format_dms", isDmsFormat());
+	conf->setValue("show_position_angle", isPaDisplayed());
+
+	conf->endGroup();
 }
