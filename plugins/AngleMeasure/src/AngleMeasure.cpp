@@ -183,7 +183,8 @@ void AngleMeasure::draw(StelCore* core)
 		}
 
 		glDisable(GL_TEXTURE_2D);
-		glEnable(GL_LINE_SMOOTH);
+		// GL_LINE_SMOOTH is not exists for OpenGL ES 2.0
+		// glEnable(GL_LINE_SMOOTH);
 		glEnable(GL_BLEND);
 		
 		// main line is a great circle		
