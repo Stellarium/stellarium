@@ -115,6 +115,8 @@ public:
 	// Properties setters and getters
 public slots:
 	//! Set the color used to draw the nebula symbols (circles, boxes. etc).
+	//! @param c The color of the nebula symbols
+	//! @example set red color - setCirclesColor(Vec3f(1.0,0.0,0.0));
 	void setCirclesColor(const Vec3f& c);
 	//! Get current value of the nebula circle color.
 	const Vec3f& getCirclesColor(void) const;
@@ -139,6 +141,8 @@ public slots:
 	bool getFlagShow(void) const { return flagShow; }
 
 	//! Set the color used to draw nebula labels.
+	//! @param c The color of the nebula labels
+	//! @example set red color - setLabelsColor(Vec3f(1.0,0.0,0.0));
 	void setLabelsColor(const Vec3f& c);
 	//! Get current value of the nebula label color.
 	const Vec3f& getLabelsColor(void) const;

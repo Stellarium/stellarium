@@ -158,6 +158,8 @@ public slots:
 	double getArtIntensity() const;
 
 	//! Define boundary color
+	//! @param color The color of boundaries
+	//! @example set red color - setBoundariesColor(Vec3f(1.0,0.0,0.0));
 	void setBoundariesColor(const Vec3f& color);
 	//! Get current boundary color
 	Vec3f getBoundariesColor() const;
@@ -173,6 +175,8 @@ public slots:
 	bool getFlagIsolateSelected(void) const;
 
 	//! Define line color
+	//! @param color The color of lines
+	//! @example set red color - setLinesColor(Vec3f(1.0,0.0,0.0));
 	void setLinesColor(const Vec3f& color);
 	//! Get line color
 	Vec3f getLinesColor() const;
@@ -183,6 +187,8 @@ public slots:
 	bool getFlagLines(void) const;
 
 	//! Set label color for names
+	//! @param color The color of labels
+	//! @example set red color - setLabelsColor(Vec3f(1.0,0.0,0.0));
 	void setLabelsColor(const Vec3f& color);
 	//! Get label color for names
 	Vec3f getLabelsColor() const;
