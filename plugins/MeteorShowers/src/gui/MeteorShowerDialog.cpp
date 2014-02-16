@@ -135,8 +135,13 @@ void MeteorShowerDialog::createDialogContent()
 
 void MeteorShowerDialog::checkDates(void)
 {
-	if(ui->dateFrom->date().operator >(ui->dateTo->date()))
+	double jdFrom = StelUtils::qDateTimeToJd((QDateTime) ui->dateFrom->date());
+	double jdTo = StelUtils::qDateTimeToJd((QDateTime) ui->dateTo->date());
+
+	if(jdFrom > jdTo)
 		QMessageBox::warning(0, "Stellarium", q_("Start date greater than end date!"));
+	else if (jdTo-jdFrom > 365)
+		QMessageBox::warning(0, "Stellarium", q_("Time interval must be less than one year!"));
 	else
 		searchEvents();
 }
