@@ -220,8 +220,7 @@ QString AddOn::getTypeString() {
 
 QString AddOn::getDownloadFilepath()
 {
-	QString categoryDir = StelApp::getInstance().getStelAddOnMgr().getDirectory(m_eCategory);
-	return categoryDir % m_sDownloadFilename;
+	return StelApp::getInstance().getStelAddOnMgr().getAddOnDir() % m_sDownloadFilename;
 }
 
 void AddOn::setTextureStatus(QString name, bool installed)

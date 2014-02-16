@@ -51,19 +51,6 @@ StelAddOnMgr::StelAddOnMgr()
 	StelFileMgr::makeSureDirExistsAndIsWritable(m_sAddOnDir);
 	StelFileMgr::makeSureDirExistsAndIsWritable(m_sThumbnailDir);
 
-	// creating sub-dirs
-	m_dirs.insert(AddOn::CATALOG, m_sAddOnDir % "catalog/");
-	m_dirs.insert(AddOn::LANDSCAPE, m_sAddOnDir % "landscape/");
-	m_dirs.insert(AddOn::LANGUAGEPACK, m_sAddOnDir % "language_pack/");
-	m_dirs.insert(AddOn::SCRIPT, m_sAddOnDir % "script/");
-	m_dirs.insert(AddOn::STARLORE, m_sAddOnDir % "sky_culture/");
-	m_dirs.insert(AddOn::TEXTURE, m_sAddOnDir % "texture/");
-	QHashIterator<AddOn::Category, QString> it(m_dirs);
-	while (it.hasNext()) {
-		it.next();
-		StelFileMgr::makeSureDirExistsAndIsWritable(it.value());
-	}
-
 	// Initialize settings in the main config file
 	if (m_pConfig->childGroups().contains("AddOn"))
 	{

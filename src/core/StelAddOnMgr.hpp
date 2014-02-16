@@ -54,8 +54,8 @@ public:
 
 	AddOnMap getAddOnMap(AddOn::Type type) { return m_addons.value(type); }
 	QHash<AddOn::Type, AddOnMap> getAddOnHash() { return m_addons; }
+	QString getAddOnDir() { return m_sAddOnDir; }
 	QString getThumbnailDir() { return m_sThumbnailDir; }
-	QString getDirectory(AddOn::Category c) { return m_dirs.value(c, ""); }
 	void installAddOn(AddOn *addon, const QStringList selectedFiles);
 	AddOn::Status installFromFile(AddOn* addon, const QStringList selectedFiles);
 	void installFromFile(const QString& filePath);
@@ -100,7 +100,6 @@ private:
 	// addon directories
 	const QString m_sAddOnDir;
 	const QString m_sThumbnailDir;
-	QHash<AddOn::Category, QString> m_dirs;
 
 	// sub-classes
 	QHash<AddOn::Category, StelAddOn*> m_pStelAddOns;
