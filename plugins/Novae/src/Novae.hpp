@@ -188,7 +188,7 @@ private:
 	// Font used for displaying our text
 	QFont font;
 
-	// if existing, delete Satellites section in main config.ini, then create with default values
+	// if existing, delete Novae section in main config.ini, then create with default values
 	void restoreDefaultConfigIni(void);
 
 	//! Replace the JSON file with the default from the compiled-in resource
