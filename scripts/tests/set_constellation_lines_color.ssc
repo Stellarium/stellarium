@@ -1,0 +1,31 @@
+//
+// Name: Set Color
+// License: Public Domain
+// Author: Matthew Gates
+// Description: For testing set colors.
+//
+
+// Save color value
+c = ConstellationMgr.getLinesColor();
+// Show constellation lines
+ConstellationMgr.setFlagLines(true);
+core.wait(3);
+// Hide constellation lines
+ConstellationMgr.setFlagLines(false);
+core.wait(1);
+// Set red color for constellation lines
+ConstellationMgr.setLinesColor(Vec3f(1.0,0.0,0.0));
+// Show constellation lines
+ConstellationMgr.setFlagLines(true);
+core.wait(3);
+// Hide constellation lines
+ConstellationMgr.setFlagLines(false);
+core.wait(1);
+// Restore color of constellation lines
+ConstellationMgr.setLinesColor(c);
+// Show constellation lines
+ConstellationMgr.setFlagLines(true);
+core.wait(3);
+// Hide constellation lines
+ConstellationMgr.setFlagLines(false);
+

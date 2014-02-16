@@ -148,6 +148,11 @@ public slots:
 	///////////////////////////////////////////////////////////////////////////
 	// Methods callable from script and GUI
 	//! Set the color used to label bright stars.
+	//! @param c The color of the bright stars labels
+	//! @code
+	//! // example of usage in scripts
+	//! StarMgr.setLabelColor(Vec3f(1.0,0.0,0.0));
+	//! @endcode
 	void setLabelColor(const Vec3f& c) {labelColor = c;}
 	//! Get the current color used to label bright stars.
 	Vec3f getLabelColor(void) const {return labelColor;}
@@ -188,50 +193,75 @@ public:
 
 	//! Get the (translated) common name for a star with a specified
 	//! Hipparcos catalogue number.
+	//! @param hip The Hipparcos number of star
+	//! @return translated common name of star
 	static QString getCommonName(int hip);
 
 	//! Get the (translated) scientific name for a star with a specified
 	//! Hipparcos catalogue number.
+	//! @param hip The Hipparcos number of star
+	//! @return translated scientific name of star
 	static QString getSciName(int hip);
 
 	//! Get the (translated) additional scientific name for a star with a
 	//! specified Hipparcos catalogue number.
+	//! @param hip The Hipparcos number of star
+	//! @return translated additional scientific name of star
 	static QString getSciAdditionalName(int hip);
 
 	//! Get the (translated) scientific name for a variable star with a specified
 	//! Hipparcos catalogue number.
+	//! @param hip The Hipparcos number of star
+	//! @return translated scientific name of variable star
 	static QString getGcvsName(int hip);
 
 	//! Get the type of variability for a variable star with a specified
 	//! Hipparcos catalogue number.
+	//! @param hip The Hipparcos number of star
+	//! @return type of variability
 	static QString getGcvsVariabilityType(int hip);
 
 	//! Get the magnitude at maximum brightness for a variable star with a specified
 	//! Hipparcos catalogue number.
+	//! @param hip The Hipparcos number of star
+	//! @return the magnitude at maximum brightness for a variable star
 	static float getGcvsMaxMagnitude(int hip);
 
 	//! Get the magnitude flag code for a variable star with a specified
 	//! Hipparcos catalogue number.
+	//! @param hip The Hipparcos number of star
+	//! @return the magnitude flag code for a variable star
 	static int getGcvsMagnitudeFlag(int hip);
 
 	//! Get the minimum magnitude or amplitude for a variable star with a specified
 	//! Hipparcos catalogue number.
+	//! @param hip The Hipparcos number of star
+	//! @param firstMinimumFlag
+	//! @return the minimum magnitude or amplitude for a variable star
 	static float getGcvsMinMagnitude(int hip, bool firstMinimumFlag=true);
 
 	//! Get the photometric system for a variable star with a specified
 	//! Hipparcos catalogue number.
+	//! @param hip The Hipparcos number of star
+	//! @return the photometric system for a variable star
 	static QString getGcvsPhotometricSystem(int hip);
 
 	//! Get Epoch for maximum light for a variable star with a specified
 	//! Hipparcos catalogue number.
+	//! @param hip The Hipparcos number of star
+	//! @return Epoch for maximum light for a variable star
 	static double getGcvsEpoch(int hip);
 
 	//! Get the period for a variable star with a specified
 	//! Hipparcos catalogue number.
+	//! @param hip The Hipparcos number of star
+	//! @return the period of variable star
 	static double getGcvsPeriod(int hip);
 
 	//! Get the rising time or duration of eclipse for a variable star with a
 	//! specified Hipparcos catalogue number.
+	//! @param hip The Hipparcos number of star
+	//! @return the rising time or duration of eclipse for variable star
 	static int getGcvsMM(int hip);
 
 	static QString convertToSpectralType(int index);
