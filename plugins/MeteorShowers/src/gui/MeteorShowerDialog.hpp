@@ -73,7 +73,6 @@ private:
 	void updateGuiFromSettings(void);
 	QTimer* updateTimer;
 	void setTextureColor(QLabel* texture, QColor color);
-	QList<MeteorShowerP> searchResult;
 
 	//! Defines the number and the order of the columns in the table that lists active meteor showers
 	//! @enum ModelColumns
@@ -81,6 +80,7 @@ private:
 		ColumnName,		//!< name column
 		ColumnZHR,		//!< zhr column
 		ColumnDataType,		//!< data type column
+		ColumnPeak,		//!< peak date column
 		ColumnCount		//!< total number of columns
 	};
 	QStandardItemModel * listModel;
