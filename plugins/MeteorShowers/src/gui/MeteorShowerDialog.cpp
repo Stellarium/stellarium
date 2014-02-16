@@ -170,6 +170,7 @@ void MeteorShowerDialog::setHeaderNames(void)
 	headerStrings << q_("Name");
 	headerStrings << q_("ZHR");
 	headerStrings << q_("Data Type");
+	headerStrings << q_("Peak");
 	listModel->setHorizontalHeaderLabels(headerStrings);
 }
 
@@ -188,7 +189,7 @@ void MeteorShowerDialog::checkDates(void)
 
 void MeteorShowerDialog::searchEvents(void)
 {
-	searchResult = plugin->searchEvents(ui->dateFrom->date(), ui->dateTo->date());
+	QList<MeteorShowerP> searchResult = plugin->searchEvents(ui->dateFrom->date(), ui->dateTo->date());
 
 	//Fill list of events
 	initListEvents();
@@ -210,13 +211,20 @@ void MeteorShowerDialog::searchEvents(void)
 		tempItem = new QStandardItem(dataType);
 		tempItem->setEditable(false);
 		listModel->setItem(lastRow, ColumnDataType, tempItem);
+		//Peak
+		QString peak = r->getPeak().toString("dd/MMM/yyyy");
+		tempItem = new QStandardItem(peak);
+		tempItem->setEditable(false);
+		listModel->setItem(lastRow, ColumnPeak, tempItem);
 	}
 }
 
 void MeteorShowerDialog::selectEvent(const QModelIndex &modelIndex)
 {
 	StelCore *core = StelApp::getInstance().getCore();
-	core->setJDay(StelUtils::qDateTimeToJd(searchResult.value(modelIndex.row())->getPeak()));
+	QString dateString = listModel->data( listModel->index(modelIndex.row(),ColumnPeak) ).toString();
+	QDateTime qDateTime = QDateTime::fromString(dateString, "dd/MMM/yyyy");
+	core->setJDay(StelUtils::qDateTimeToJd(qDateTime));
 }
 
 void MeteorShowerDialog::setAboutHtml(void)
