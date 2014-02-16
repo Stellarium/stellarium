@@ -29,6 +29,10 @@
 class MilkyWay : public StelModule
 {
 	Q_OBJECT
+	Q_PROPERTY(bool flagMilkyWayDisplayed
+		   READ getFlagShow
+		   WRITE setFlagShow
+		   NOTIFY milkyWayDisplayedChanged)
 
 public:
 	MilkyWay();
@@ -68,6 +72,9 @@ public slots:
 	void setFlagShow(bool b);
 	//! Gets whether the Milky Way is displayed
 	bool getFlagShow(void) const;
+
+signals:
+	void milkyWayDisplayedChanged(const bool displayed);
 	
 private:
 	StelTextureSP tex;

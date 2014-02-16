@@ -34,6 +34,7 @@
 #include "StelCore.hpp"
 #include "StelSkyDrawer.hpp"
 #include "StelPainter.hpp"
+#include "StelTranslator.hpp"
 
 #include <QDebug>
 #include <QSettings>
@@ -75,6 +76,9 @@ void ZodiacalLight::init()
 
 	eclipticalVertices=vertexArray->vertex;
 	// This vector is used to keep original vertices, these will be modified in update().
+
+	QString displayGroup = N_("Display Options");
+	addAction("actionShow_ZodiacalLight", displayGroup, N_("Zodiacal Light"), "flagZodiacalLightDisplayed", "Ctrl+Shift+Z");
 }
 
 

@@ -213,7 +213,6 @@ void StelGui::init(QGraphicsWidget *atopLevelGraphicsWidget)
 	actionsMgr->addAction("actionShow_Shortcuts_Window_Global", windowsGroup, N_("Shortcuts window"), shortcutsDialog, "visible", "F7", "", true);
 	actionsMgr->addAction("actionShow_AddOn_Window_Global", windowsGroup, N_("Add-On Manager"), addonDialog, "visible", "F8", "", true);
 	actionsMgr->addAction("actionSave_Copy_Object_Information_Global", miscGroup, N_("Copy selected object information to clipboard"), this, "copySelectedObjectInfo()", "Ctrl+C", "", true);
-	actionsMgr->addAction("actionToggle_GuiHidden_Global", miscGroup, N_("Toggle visibility of GUI"), this, "visible", "Ctrl+T", "", true);
 
 	QSettings* conf = StelApp::getInstance().getSettings();
 	Q_ASSERT(conf);
@@ -221,6 +220,9 @@ void StelGui::init(QGraphicsWidget *atopLevelGraphicsWidget)
 	setAutoHideVerticalButtonBar(conf->value("gui/auto_hide_vertical_toolbar", true).toBool());
 	actionsMgr->addAction("actionAutoHideHorizontalButtonBar", miscGroup, N_("Auto hide horizontal button bar"), this, "autoHideHorizontalButtonBar");
 	actionsMgr->addAction("actionAutoHideVerticalButtonBar", miscGroup, N_("Auto hide vertical button bar"), this, "autoHideVerticalButtonBar");
+
+	setVisible(conf->value("gui/flag_show_gui", true).toBool());
+	actionsMgr->addAction("actionToggle_GuiHidden_Global", miscGroup, N_("Toggle visibility of GUI"), this, "visible", "Ctrl+T", "", true);
 
 #ifndef DISABLE_SCRIPTING
 	StelScriptMgr* scriptMgr = &StelApp::getInstance().getScriptMgr();
@@ -372,7 +374,6 @@ void StelGui::init(QGraphicsWidget *atopLevelGraphicsWidget)
 	// add the flip buttons if requested in the config
 	setFlagShowFlipButtons(conf->value("gui/flag_show_flip_buttons", false).toBool());
 	setFlagShowNebulaBackgroundButton(conf->value("gui/flag_show_nebulae_background_button", false).toBool());
-
 	setFlagShowDecimalDegrees(conf->value("gui/flag_show_decimal_degrees", false).toBool());
 
 	///////////////////////////////////////////////////////////////////////
@@ -467,7 +468,6 @@ void StelGui::setStelStyle(const QString& section)
 	scriptConsole->styleChanged();
 #endif // ENABLE_SCRIPT_CONSOLE
 }
-
 
 void StelGui::updateI18n()
 {
@@ -636,7 +636,6 @@ void StelGui::setFlagShowFlipButtons(bool b)
 	}
 }
 
-
 // Define whether the button toggling nebulae backround images should be visible
 void StelGui::setFlagShowNebulaBackgroundButton(bool b)
 {
@@ -793,7 +792,6 @@ StelAction* StelGui::getAction(const QString& actionName)
 #pragma mark Process changes from the GridLinesMgr
 #endif
 /* ****************************************************************************************************************** */
-
 
 void StelGui::copySelectedObjectInfo(void)
 {

@@ -31,6 +31,7 @@
 #include "StelCore.hpp"
 #include "StelSkyDrawer.hpp"
 #include "StelPainter.hpp"
+#include "StelTranslator.hpp"
 
 #include <QDebug>
 #include <QSettings>
@@ -67,6 +68,9 @@ void MilkyWay::init()
 	vertexArray = new StelVertexArray(StelPainter::computeSphereNoLight(1.f,1.f,45,15,1, true)); // GZ orig: slices=stacks=20.
 	vertexArray->colors.resize(vertexArray->vertex.length());
 	vertexArray->colors.fill(Vec3f(1.0, 0.3, 0.9));
+
+	QString displayGroup = N_("Display Options");
+	addAction("actionShow_MilkyWay", displayGroup, N_("Milky Way"), "flagMilkyWayDisplayed", "M");
 }
 
 

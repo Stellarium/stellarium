@@ -49,6 +49,10 @@
 class ZodiacalLight : public StelModule
 {
 	Q_OBJECT
+	Q_PROPERTY(bool flagZodiacalLightDisplayed
+		   READ getFlagShow
+		   WRITE setFlagShow
+		   NOTIFY zodiacalLightDisplayedChanged)
 
 public:
 	ZodiacalLight();
@@ -88,6 +92,9 @@ public slots:
 	void setFlagShow(bool b);
 	//! Gets whether the Zodiacal Light is displayed
 	bool getFlagShow(void) const;
+
+signals:
+	void zodiacalLightDisplayedChanged(const bool displayed);
 	
 private:
 	StelTextureSP tex;

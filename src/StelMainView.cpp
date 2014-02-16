@@ -480,12 +480,13 @@ void StelMainView::init(QSettings* conf)
 
 	if (fullscreen)
 	{
+		// The "+1" below is to work around Linux/Gnome problem with mouse focus.
+		move(screenGeom.x()+1, screenGeom.y()+1);
 		// The fullscreen window appears on screen where is the majority of
-		// the normal window. So we first resize (shrink) the normal window
-		// to screen area.
+		// the normal window. Therefore we crop the normal window to the
+		// screen area to ensure that the majority is not on another screen.
+		setGeometry(geometry() & screenGeom);
 		setFullScreen(true);
-		move(screenGeom.x(), screenGeom.y());
-		resize(screenGeom.width(), screenGeom.height());
 	}
 	else
 	{
