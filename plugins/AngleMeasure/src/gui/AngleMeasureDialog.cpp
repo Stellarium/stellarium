@@ -73,7 +73,8 @@ void AngleMeasureDialog::setAboutHtml(void)
 	html += "<tr><td><strong>" + q_("Contributors") + ":</strong></td><td>Bogdan Marinov<br />Alexander Wolf &lt;alex.v.wolf@gmail.com&gt;</td></tr>";
 	html += "</table>";
 
-	html += "<p>" + q_("This is simple plugin which provides an angle measurement and calculation of position angle.") + "</p>";
+	html += "<p>" + q_("The Angle Measure plugin is a small tool which is used to measure the angular distance between two points on the sky (and calculation of position angle between those two points).") + "</p>";
+	html += "<p>" + q_("*goes misty eyed* I recall measuring the size of the Cassini Division when I was a student. It was not the high academic glamor one might expect... It was cloudy... It was rainy... The observatory lab had some old scopes set up at one end, pointing at a <em>photograph</em> of Saturn at the other end of the lab. We measured. We calculated. We wished we were in Hawaii.") + "</p>";
 
 	html += "<h3>" + q_("Links") + "</h3>";
 	html += "<p>" + QString(q_("Support is provided via the Launchpad website.  Be sure to put \"%1\" in the subject when posting.")).arg("Angle Measure plugin") + "</p>";

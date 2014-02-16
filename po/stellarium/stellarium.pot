@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-02-16 19:55+0700\n"
+"POT-Creation-Date: 2014-02-16 20:19+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -4709,11 +4709,21 @@ msgstr ""
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:76
 msgid ""
-"This is simple plugin which provides an angle measurement and calculation of "
-"position angle."
+"The Angle Measure plugin is a small tool which is used to measure the "
+"angular distance between two points on the sky (and calculation of position "
+"angle between those two points)."
 msgstr ""
 
-#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:78
+#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:77
+msgid ""
+"*goes misty eyed* I recall measuring the size of the Cassini Division when I "
+"was a student. It was not the high academic glamor one might expect... It "
+"was cloudy... It was rainy... The observatory lab had some old scopes set up "
+"at one end, pointing at a <em>photograph</em> of Saturn at the other end of "
+"the lab. We measured. We calculated. We wished we were in Hawaii."
+msgstr ""
+
+#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:79
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:420
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:127
 #: plugins/Novae/src/gui/NovaeDialog.cpp:124
@@ -4723,7 +4733,7 @@ msgstr ""
 msgid "Links"
 msgstr ""
 
-#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:79
+#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:80
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:421
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:128
 #: plugins/Novae/src/gui/NovaeDialog.cpp:125
@@ -4737,7 +4747,7 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
-#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:82
+#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:83
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:424
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:131
 #: plugins/Novae/src/gui/NovaeDialog.cpp:128
@@ -4749,7 +4759,7 @@ msgid "If you have a question, you can %1get an answer here%2"
 msgstr ""
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
-#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:84
+#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:85
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:426
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:133
 #: plugins/Novae/src/gui/NovaeDialog.cpp:130
@@ -4761,7 +4771,7 @@ msgid "Bug reports can be made %1here%2."
 msgstr ""
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
-#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:86
+#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:87
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:428
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:135
 #: plugins/Novae/src/gui/NovaeDialog.cpp:132
@@ -4774,7 +4784,7 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
-#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:88
+#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:89
 #, qt-format
 msgid ""
 "If you want to read full information about this plugin and its history, you "
