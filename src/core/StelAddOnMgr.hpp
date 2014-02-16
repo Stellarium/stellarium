@@ -74,8 +74,8 @@ public:
 	int getUpdateFrequencyHour() { return m_iUpdateFrequencyHour; }
 	QString getUrlForUpdates() { return m_sUrlUpdate; }
 	StelAddOn* getStelAddOnInstance(AddOn::Category c) { return m_pStelAddOns.value(c); }
-	QString getJsonPath() { return m_sJsonPath; }
-	void reloadJsonFile();
+	QString getAddonJsonPath() { return m_sAddonJsonPath; }
+	void reloadAddonJsonFile();
 
 signals:
 	void addOnMgrMsg(StelAddOnMgr::AddOnMgrMsg);
@@ -104,8 +104,8 @@ private:
 	// sub-classes
 	QHash<AddOn::Category, StelAddOn*> m_pStelAddOns;
 
-	QString m_sJsonFilename;
-	QString m_sJsonPath;
+	QString m_sAddonJsonFilename;
+	QString m_sAddonJsonPath;
 	QHash<AddOn::Type, AddOnMap> m_addons;
 	QHash<QString, AddOn*> m_addonsByMd5;
 	QHash<QString, AddOn*> m_addonsById;
@@ -123,8 +123,8 @@ private:
 	void refreshAddOnStatuses();
 	void refreshThumbnailQueue();
 
-	void restoreDefaultJsonFile();
-	void readJsonObject(const QJsonObject& addOns);
+	void restoreDefaultAddonJsonFile();
+	void readAddonJsonObject(const QJsonObject& addOns);
 
 	void downloadNextAddOn();
 	void finishCurrentDownload();

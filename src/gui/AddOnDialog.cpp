@@ -211,7 +211,7 @@ void AddOnDialog::downloadFinished()
 	QByteArray result(m_pUpdateCatalogReply->readAll());
 	if (m_pUpdateCatalogReply->error() == QNetworkReply::NoError && !result.isEmpty())
 	{
-		QFile jsonFile(StelApp::getInstance().getStelAddOnMgr().getJsonPath());
+		QFile jsonFile(StelApp::getInstance().getStelAddOnMgr().getAddonJsonPath());
 		if(jsonFile.exists())
 		{
 			jsonFile.remove();
@@ -222,7 +222,7 @@ void AddOnDialog::downloadFinished()
 			jsonFile.write(result);
 			jsonFile.close();
 
-			StelApp::getInstance().getStelAddOnMgr().reloadJsonFile();
+			StelApp::getInstance().getStelAddOnMgr().reloadAddonJsonFile();
 			qint64 currentTime = QDateTime::currentMSecsSinceEpoch() / 1000;
 			StelApp::getInstance().getStelAddOnMgr().setLastUpdate(currentTime);
 			ui->txtLastUpdate->setText(StelApp::getInstance().getStelAddOnMgr().getLastUpdateString());
