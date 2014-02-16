@@ -37,14 +37,15 @@ StelAddOnMgr::StelAddOnMgr()
 	, m_downloadingAddOn(NULL)
 	, m_pAddOnNetworkReply(NULL)
 	, m_currentDownloadFile(NULL)
+	, m_sAddOnDir(StelFileMgr::getUserDir() % "/addon/")
+	, m_sThumbnailDir(m_sAddOnDir % "thumbnail/")
+	, m_sJsonFilename("addons_0.14.0.json")
+	, m_sJsonPath(m_sAddOnDir % m_sJsonFilename)
 	, m_progressBar(NULL)
 	, m_iLastUpdate(1388966410)
 	, m_iUpdateFrequencyDays(7)
 	, m_iUpdateFrequencyHour(12)
-	, m_sUrlUpdate("http://cardinot.sourceforge.net/addons.json")
-	, m_sAddOnDir(StelFileMgr::getUserDir() % "/addon/")
-	, m_sThumbnailDir(m_sAddOnDir % "thumbnail/")
-	, m_sJsonPath(m_sAddOnDir % "addons.json")
+	, m_sUrlUpdate("http://cardinot.sourceforge.net/" % m_sJsonFilename)
 {
 	// creating addon dir
 	StelFileMgr::makeSureDirExistsAndIsWritable(m_sAddOnDir);
@@ -89,8 +90,8 @@ StelAddOnMgr::StelAddOnMgr()
 	// creating Json file
 	if (!QFile(m_sJsonPath).exists())
 	{
-		qDebug() << "Add-On Mgr: addons.json does not exist - copying default file to"
-			 << QDir::toNativeSeparators(m_sJsonPath);
+		qWarning() << "Add-On Mgr: The catalog does not exist - copying default file to "
+			   << QDir::toNativeSeparators(m_sJsonPath);
 		restoreDefaultJsonFile();
 	}
 
@@ -124,7 +125,7 @@ void StelAddOnMgr::reloadJsonFile()
 		if (json["name"].toString() != "Add-Ons Catalog" ||
 			json["format-version"].toInt() != ADDON_MANAGER_CATALOG_VERSION)
 		{
-			qWarning()  << "Add-On Mgr: The current addons.json file is not compatible - using default file";
+			qWarning()  << "Add-On Mgr: The current catalog is not compatible - using default file";
 			restoreDefaultJsonFile();
 		}
 		qDebug() << "Add-On Mgr: loading catalog file:"
@@ -133,7 +134,7 @@ void StelAddOnMgr::reloadJsonFile()
 	}
 	else
 	{
-		qWarning() << "Add-On Mgr: Couldn't open addons.json file!"
+		qWarning() << "Add-On Mgr: Couldn't open the catalog!"
 			   << QDir::toNativeSeparators(m_sJsonPath);
 	}
 
@@ -145,10 +146,10 @@ void StelAddOnMgr::reloadJsonFile()
 
 void StelAddOnMgr::restoreDefaultJsonFile()
 {
-	QFile defaultJson(StelFileMgr::getInstallationDir() % "/data/default_addons.json");
+	QFile defaultJson(StelFileMgr::getInstallationDir() % "/data/default_" % m_sJsonFilename);
 	if (defaultJson.copy(m_sJsonPath))
 	{
-		qDebug() << "Add-On Mgr: default_addons.json was copied to" << m_sJsonPath;
+		qDebug() << "Add-On Mgr: default_" % m_sJsonFilename % " was copied to " % m_sJsonPath;
 		QFile jsonFile(m_sJsonPath);
 		jsonFile.setPermissions(jsonFile.permissions() | QFile::WriteOwner);
 		// cleaning last_update var
@@ -168,7 +169,7 @@ void StelAddOnMgr::readJsonObject(const QJsonObject& addOns)
 	int duplicated = addOns.size() - map.size();
 	if (duplicated)
 	{
-		qWarning() << "Add-On Mgr : Error! The addons.json file has"
+		qWarning() << "Add-On Mgr : Error! The catalog has"
 			   << duplicated << "duplicated keys!";
 	}
 

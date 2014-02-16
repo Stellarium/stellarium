@@ -97,28 +97,29 @@ private:
 	QNetworkReply* m_pAddOnNetworkReply;
 	QFile* m_currentDownloadFile;
 
-	class StelProgressController* m_progressBar;
-	qint64 m_iLastUpdate;
-	int m_iUpdateFrequencyDays;
-	int m_iUpdateFrequencyHour;
-	QString m_sUrlUpdate;
-
-	QNetworkReply* m_pThumbnailNetworkReply;
-	QHash<QString, QString> m_thumbnails;
-	QStringList m_thumbnailQueue;
-
 	// addon directories
 	const QString m_sAddOnDir;
 	const QString m_sThumbnailDir;
 	QHash<AddOn::Category, QString> m_dirs;
 
+	// sub-classes
+	QHash<AddOn::Category, StelAddOn*> m_pStelAddOns;
+
+	QString m_sJsonFilename;
 	QString m_sJsonPath;
 	QHash<AddOn::Type, AddOnMap> m_addons;
 	QHash<QString, AddOn*> m_addonsByMd5;
 	QHash<QString, AddOn*> m_addonsByIdInstallId;
 
-	// sub-classes
-	QHash<AddOn::Category, StelAddOn*> m_pStelAddOns;
+	QNetworkReply* m_pThumbnailNetworkReply;
+	QHash<QString, QString> m_thumbnails;
+	QStringList m_thumbnailQueue;
+
+	class StelProgressController* m_progressBar;
+	qint64 m_iLastUpdate;
+	int m_iUpdateFrequencyDays;
+	int m_iUpdateFrequencyHour;
+	QString m_sUrlUpdate;
 
 	void refreshAddOnStatuses();
 	void refreshThumbnailQueue();
