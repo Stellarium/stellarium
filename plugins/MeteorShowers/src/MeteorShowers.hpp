@@ -216,7 +216,7 @@ public:
 	//! @param dateFrom
 	//! @param dateTo
 	//! @return meteor_shower list
-	QList<StelObjectP> searchEvents(QDate dateFrom, QDate dateTo) const;
+	QList<MeteorShowerP> searchEvents(QDate dateFrom, QDate dateTo) const;
 
 signals:
 	//! @param state the new update state.

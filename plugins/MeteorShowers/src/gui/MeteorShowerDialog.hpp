@@ -62,6 +62,7 @@ private slots:
 	void setColorIR(void); //! Set color of inactive radiant.
 	void checkDates(void);
 	void searchEvents(void);
+	void selectEvent(const QModelIndex &modelIndex);
 
 private:
         Ui_meteorShowerDialog* ui;
@@ -70,6 +71,7 @@ private:
 	void updateGuiFromSettings(void);
 	QTimer* updateTimer;
 	void setTextureColor(QLabel* texture, QColor color);
+	QList<MeteorShowerP> searchResult;
 };
 
 #endif // _METEORSHOWERDIALOG_HPP_

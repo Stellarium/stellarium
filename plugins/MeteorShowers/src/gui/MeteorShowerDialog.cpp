@@ -31,14 +31,16 @@
 #include "MeteorShowerDialog.hpp"
 #include "MeteorShowers.hpp"
 #include "StelApp.hpp"
-#include "StelModuleMgr.hpp"
-#include "StelObjectMgr.hpp"
-#include "StelMovementMgr.hpp"
-#include "StelStyle.hpp"
+#include "StelCore.hpp"
+#include "StelFileMgr.hpp"
 #include "StelGui.hpp"
 #include "StelMainView.hpp"
-#include "StelFileMgr.hpp"
+#include "StelModuleMgr.hpp"
+#include "StelMovementMgr.hpp"
+#include "StelObjectMgr.hpp"
+#include "StelStyle.hpp"
 #include "StelTranslator.hpp"
+#include "StelUtils.hpp"
 #include "ui_meteorShowerDialog.h"
 
 MeteorShowerDialog::MeteorShowerDialog() : updateTimer(NULL)
@@ -91,6 +93,7 @@ void MeteorShowerDialog::createDialogContent()
 	ui->dateFrom->setDate(plugin->getSkyDate().date());
 	ui->dateTo->setDate(plugin->getSkyDate().date());
 	connect(ui->searchButton, SIGNAL(clicked()), this, SLOT(checkDates()));
+	connect(ui->listEvents, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(selectEvent(QModelIndex)));
 
 	// Settings tab / radiant group
 	ui->displayRadiant->setChecked(plugin->getFlagRadiant());
@@ -141,9 +144,15 @@ void MeteorShowerDialog::checkDates(void)
 void MeteorShowerDialog::searchEvents(void)
 {
 	ui->listEvents->clear();
-	QList<StelObjectP> result = plugin->searchEvents(ui->dateFrom->date(), ui->dateTo->date());
-	foreach(const StelObjectP& r, result)
+	searchResult = plugin->searchEvents(ui->dateFrom->date(), ui->dateTo->date());
+	foreach(const MeteorShowerP& r, searchResult)
 		ui->listEvents->addItem(r->getNameI18n());
+}
+
+void MeteorShowerDialog::selectEvent(const QModelIndex &modelIndex)
+{
+	StelCore *core = StelApp::getInstance().getCore();
+	core->setJDay(StelUtils::qDateTimeToJd(searchResult.value(modelIndex.row())->getPeak()));
 }
 
 void MeteorShowerDialog::setAboutHtml(void)
