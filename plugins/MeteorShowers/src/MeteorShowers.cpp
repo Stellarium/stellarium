@@ -548,9 +548,9 @@ void MeteorShowers::update(double deltaTime)
 	}
 }
 
-QList<StelObjectP> MeteorShowers::searchEvents(QDate dateFrom, QDate dateTo) const
+QList<MeteorShowerP> MeteorShowers::searchEvents(QDate dateFrom, QDate dateTo) const
 {
-	QList<StelObjectP> result;
+	QList<MeteorShowerP> result;
 	QDate date;
 
 	foreach(const MeteorShowerP& ms, mShowers)
@@ -561,7 +561,7 @@ QList<StelObjectP> MeteorShowers::searchEvents(QDate dateFrom, QDate dateTo) con
 			ms->updateCurrentData((QDateTime) date);
 			if(ms->isActive)
 			{
-				result.append(qSharedPointerCast<StelObject>(ms));
+				result.append(ms);
 				break;
 			}
 			date = date.addDays(1);

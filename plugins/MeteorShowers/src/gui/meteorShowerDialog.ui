@@ -397,7 +397,11 @@
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_5">
           <item>
-           <widget class="QListWidget" name="listEvents"/>
+           <widget class="QListWidget" name="listEvents">
+            <property name="toolTip">
+             <string>Double click to select peak.</string>
+            </property>
+           </widget>
           </item>
          </layout>
         </widget>
