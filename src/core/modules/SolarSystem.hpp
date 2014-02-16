@@ -175,28 +175,40 @@ public slots:
 
 	//! Set the color used to draw planet labels.
 	//! @param c The color of the planet labels
-	//! @example set red color - setLabelsColor(Vec3f(1.0,0.0,0.0));
+	//! @code
+	//! // example of usage in scripts
+	//! SolarSystem.setLabelsColor(Vec3f(1.0,0.0,0.0));
+	//! @endcode
 	void setLabelsColor(const Vec3f& c);
 	//! Get the current color used to draw planet labels.
 	const Vec3f& getLabelsColor(void) const;
 
 	//! Set the color used to draw planet orbit lines.
 	//! @param c The color of the planet orbit lines
-	//! @example set red color - setOrbitsColor(Vec3f(1.0,0.0,0.0));
+	//! @code
+	//! // example of usage in scripts
+	//! SolarSystem.setOrbitsColor(Vec3f(1.0,0.0,0.0));
+	//! @endcode
 	void setOrbitsColor(const Vec3f& c);
 	//! Get the current color used to draw planet orbit lines.
 	Vec3f getOrbitsColor(void) const;
 
 	//! Set the color used to draw planet trails lines.
 	//! @param c The color of the planet trails lines
-	//! @example set red color - setTrailsColor(Vec3f(1.0,0.0,0.0));
+	//! @code
+	//! // example of usage in scripts
+	//! SolarSystem.setTrailsColor(Vec3f(1.0,0.0,0.0));
+	//! @endcode
 	void setTrailsColor(const Vec3f& c) {trailColor=c;}
 	//! Get the current color used to draw planet trails lines.
 	Vec3f getTrailsColor() const {return trailColor;}
 
 	//! Set the color used to draw planet pointers.
 	//! @param c The color of the planet pointers
-	//! @example set red color - setPointersColor(Vec3f(1.0,0.0,0.0));
+	//! @code
+	//! // example of usage in scripts
+	//! SolarSystem.setPointersColor(Vec3f(1.0,0.0,0.0));
+	//! @endcode
 	void setPointersColor(const Vec3f& c) {pointerColor=c;}
 	//! Get the current color used to draw planet pointers.
 	Vec3f getPointersColor() const {return pointerColor;}

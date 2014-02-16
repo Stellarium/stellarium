@@ -149,7 +149,10 @@ public slots:
 	// Methods callable from script and GUI
 	//! Set the color used to label bright stars.
 	//! @param c The color of the bright stars labels
-	//! @example set red color - setLabelColor(Vec3f(1.0,0.0,0.0));
+	//! @code
+	//! // example of usage in scripts
+	//! StarMgr.setLabelColor(Vec3f(1.0,0.0,0.0));
+	//! @endcode
 	void setLabelColor(const Vec3f& c) {labelColor = c;}
 	//! Get the current color used to label bright stars.
 	Vec3f getLabelColor(void) const {return labelColor;}

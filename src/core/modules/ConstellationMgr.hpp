@@ -159,7 +159,10 @@ public slots:
 
 	//! Define boundary color
 	//! @param color The color of boundaries
-	//! @example set red color - setBoundariesColor(Vec3f(1.0,0.0,0.0));
+	//! @code
+	//! // example of usage in scripts
+	//! ConstellationMgr.setBoundariesColor(Vec3f(1.0,0.0,0.0));
+	//! @endcode
 	void setBoundariesColor(const Vec3f& color);
 	//! Get current boundary color
 	Vec3f getBoundariesColor() const;
@@ -176,7 +179,10 @@ public slots:
 
 	//! Define line color
 	//! @param color The color of lines
-	//! @example set red color - setLinesColor(Vec3f(1.0,0.0,0.0));
+	//! @code
+	//! // example of usage in scripts
+	//! ConstellationMgr.setLinesColor(Vec3f(1.0,0.0,0.0));
+	//! @endcode
 	void setLinesColor(const Vec3f& color);
 	//! Get line color
 	Vec3f getLinesColor() const;
@@ -188,7 +194,10 @@ public slots:
 
 	//! Set label color for names
 	//! @param color The color of labels
-	//! @example set red color - setLabelsColor(Vec3f(1.0,0.0,0.0));
+	//! @code
+	//! // example of usage in scripts
+	//! ConstellationMgr.setLabelsColor(Vec3f(1.0,0.0,0.0));
+	//! @endcode
 	void setLabelsColor(const Vec3f& color);
 	//! Get label color for names
 	Vec3f getLabelsColor() const;
