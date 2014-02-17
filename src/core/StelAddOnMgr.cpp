@@ -41,6 +41,7 @@ StelAddOnMgr::StelAddOnMgr()
 	, m_sThumbnailDir(m_sAddOnDir % "thumbnail/")
 	, m_sAddonJsonFilename("addons_0.14.0.json")
 	, m_sAddonJsonPath(m_sAddOnDir % m_sAddonJsonFilename)
+	, m_sInstalledAddonsJsonPath(m_sAddOnDir % "installed_addons.json")
 	, m_progressBar(NULL)
 	, m_iLastUpdate(1388966410)
 	, m_iUpdateFrequencyDays(7)
@@ -631,8 +632,7 @@ AddOn::Status StelAddOnMgr::unzip(AddOn* addon, QStringList selectedFiles)
 
 void StelAddOnMgr::appendAddonToInstalledJson(AddOn* addon)
 {
-	QString jsonPath = m_sAddOnDir % "installed_addons.json";
-	QFile jsonFile(jsonPath);
+	QFile jsonFile(m_sInstalledAddonsJsonPath);
 	if (jsonFile.open(QIODevice::ReadWrite))
 	{
 		QJsonObject object(QJsonDocument::fromJson(jsonFile.readAll()).object());
@@ -647,6 +647,6 @@ void StelAddOnMgr::appendAddonToInstalledJson(AddOn* addon)
 	else
 	{
 		qWarning() << "Add-On Mgr: Couldn't open the catalog of installed addons!"
-			   << QDir::toNativeSeparators(jsonPath);
+			   << QDir::toNativeSeparators(m_sInstalledAddonsJsonPath);
 	}
 }
