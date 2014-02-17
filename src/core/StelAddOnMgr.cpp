@@ -206,61 +206,29 @@ void StelAddOnMgr::setUpdateFrequencyHour(int hour) {
 
 void StelAddOnMgr::refreshAddOnStatuses()
 {
-	// TODO: check add-ons which are already installed
-	/*
-	QHashIterator<AddOn::Category, StelAddOn*> aos(m_pStelAddOns);
-	while (aos.hasNext())
+	// check add-ons which are already installed (installed_addons.json)
+	QFile jsonFile(m_sInstalledAddonsJsonPath);
+	if (jsonFile.open(QIODevice::ReadOnly))
 	{
-		aos.next();
-		QStringList list = aos.value()->checkInstalledAddOns();
-		if (list.isEmpty())
+		QJsonObject object(QJsonDocument::fromJson(jsonFile.readAll()).object());
+		QVariantMap map = object.toVariantMap();
+		QVariantMap::iterator i;
+		for (i = map.begin(); i != map.end(); ++i)
 		{
-			continue;
-		}
-
-		if (aos.key() == AddOn::CATALOG || aos.key() == AddOn::LANGUAGEPACK)
-		{
-			foreach (QString a, list) {
-				AddOn* addon = m_addonsByMd5.value(a);
-				if (addon)
-				{
-					addon->setStatus(AddOn::FullyInstalled);
-				}
-			}
-		}
-		else if (aos.key() == AddOn::TEXTURE)
-		{
-			AddOnMap textures = m_addons.value(AddOn::Texture);
-			QMap<QString, AddOn*>::iterator i;
-			for (i = textures.begin(); i != textures.end(); ++i)
+			AddOn* addOn = m_addonsById.value(i.key());
+			QVariantMap attributes(i.value().toMap());
+			if (addOn && addOn->getChecksum() == attributes.value("checksum").toString())
 			{
-				foreach (QString t, list) {
-					QStringList tL = t.split("/");
-					if (tL[0] == i.value()->getAddOnId())
-					{
-						list.removeOne(t);
-						i.value()->setTextureStatus(tL[1], true);
-						i.value()->setStatus(AddOn::PartiallyInstalled);
-					}
-				}
-				if (i.value()->getAllTextures().size() == i.value()->getInstalledTextures().size())
-				{
-					i.value()->setStatus(AddOn::FullyInstalled);
-				}
-			}
-		}
-		else
-		{
-			foreach (QString a, list) {
-				AddOn* addon = m_addonsById.value(a);
-				if (addon)
-				{
-					addon->setStatus(AddOn::FullyInstalled);
-				}
+				addOn->setInstalledFiles(attributes.value("installed-files").toStringList());
+				addOn->setStatus((AddOn::Status)attributes.value("status").toInt());
 			}
 		}
 	}
-	*/
+	else
+	{
+		qWarning() << "Add-On Mgr: Couldn't open the catalog of installed addons!"
+			   << QDir::toNativeSeparators(m_sAddonJsonPath);
+	}
 }
 
 void StelAddOnMgr::refreshThumbnailQueue()
