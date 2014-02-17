@@ -179,6 +179,8 @@ QString AddOn::getStatusString() {
 			return "Corrupted";
 		case InvalidFormat:
 			return "Invalid format";
+		case InvalidDestination:
+			return "Invalid destination";
 		case UnableToWrite:
 			return "Unable to write";
 		case UnableToRead:
