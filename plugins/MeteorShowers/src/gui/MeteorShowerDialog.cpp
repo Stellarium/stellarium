@@ -222,9 +222,15 @@ void MeteorShowerDialog::searchEvents(void)
 void MeteorShowerDialog::selectEvent(const QModelIndex &modelIndex)
 {
 	StelCore *core = StelApp::getInstance().getCore();
+
+	//Change date
 	QString dateString = listModel->data( listModel->index(modelIndex.row(),ColumnPeak) ).toString();
 	QDateTime qDateTime = QDateTime::fromString(dateString, "dd/MMM/yyyy");
 	core->setJDay(StelUtils::qDateTimeToJd(qDateTime));
+
+	//Select
+	QString namel18n = listModel->data( listModel->index(modelIndex.row(),ColumnName) ).toString();
+	GETSTELMODULE(StelObjectMgr)->findAndSelectI18n(namel18n);
 }
 
 void MeteorShowerDialog::setAboutHtml(void)
