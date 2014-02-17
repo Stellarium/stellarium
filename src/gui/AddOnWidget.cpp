@@ -96,7 +96,7 @@ AddOnWidget::AddOnWidget(QWidget* parent, int row, AddOn* addon)
 				item->setFlags(item->flags() | Qt::ItemIsUserCheckable);
 				QCheckBox* parentCheckbox = ((AddOnTableView*)parentWidget())->getCheckBox(m_iRow-1);
 				item->setCheckState(parentCheckbox->checkState());
-				if (addon->getInstalledTextures().contains(texture))
+				if (addon->getInstalledFiles().filter(texture).size() > 0)
 				{
 					item->setText(item->text() % " (installed)");
 					item->setTextColor(QColor("green"));

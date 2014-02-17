@@ -205,7 +205,8 @@ void StelAddOnMgr::setUpdateFrequencyHour(int hour) {
 
 void StelAddOnMgr::refreshAddOnStatuses()
 {
-	// check add-ons which are already installed
+	// TODO: check add-ons which are already installed
+	/*
 	QHashIterator<AddOn::Category, StelAddOn*> aos(m_pStelAddOns);
 	while (aos.hasNext())
 	{
@@ -258,6 +259,7 @@ void StelAddOnMgr::refreshAddOnStatuses()
 			}
 		}
 	}
+	*/
 }
 
 void StelAddOnMgr::refreshThumbnailQueue()

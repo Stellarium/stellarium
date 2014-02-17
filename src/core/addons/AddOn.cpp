@@ -66,7 +66,6 @@ AddOn::AddOn(const QString addOnId, const QVariantMap& map)
 
 	if (m_eType == Texture)
 	{
-		m_InstalledTextures.clear();
 		m_AllTextures = map.value("textures").toString().split(",").toSet();
 		// a texture must have "textures"
 		if (m_AllTextures.isEmpty())
@@ -221,18 +220,4 @@ QString AddOn::getTypeString() {
 QString AddOn::getDownloadFilepath()
 {
 	return StelApp::getInstance().getStelAddOnMgr().getAddOnDir() % m_sDownloadFilename;
-}
-
-void AddOn::setTextureStatus(QString name, bool installed)
-{
-	if (!m_AllTextures.contains(name))
-	{
-		return;
-	}
-
-	m_InstalledTextures.remove(name);
-	if (installed)
-	{
-		m_InstalledTextures.insert(name);
-	}
 }
