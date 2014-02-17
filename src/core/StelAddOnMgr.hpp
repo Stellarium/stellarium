@@ -125,7 +125,7 @@ private:
 
 	void restoreDefaultAddonJsonFile();
 	void readAddonJsonObject(const QJsonObject& addOns);
-	void appendAddonToInstalledJson(AddOn* addon, QStringList& installedFiles);
+	void appendAddonToInstalledJson(AddOn* addon);
 
 	void downloadNextAddOn();
 	void finishCurrentDownload();

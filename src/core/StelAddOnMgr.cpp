@@ -572,7 +572,7 @@ AddOn::Status StelAddOnMgr::unzip(AddOn* addon, QStringList selectedFiles)
 		return AddOn::UnableToRead;
 	}
 
-	QStringList installedFiles;
+	QStringList installedFiles = addon->getInstalledFiles();
 	AddOn::Status status = AddOn::FullyInstalled;
 	foreach(QZipReader::FileInfo info, reader.fileInfoList())
 	{
@@ -621,11 +621,13 @@ AddOn::Status StelAddOnMgr::unzip(AddOn* addon, QStringList selectedFiles)
 		installedFiles.append(fileInfo.absoluteFilePath());
 		qDebug() << "StelAddOnMgr: New file installed:" << info.filePath;
 	}
-	appendAddonToInstalledJson(addon, installedFiles);
+	installedFiles.removeDuplicates();
+	addon->setInstalledFiles(installedFiles);
+	appendAddonToInstalledJson(addon);
 	return status;
 }
 
-void StelAddOnMgr::appendAddonToInstalledJson(AddOn* addon, QStringList& installedFiles)
+void StelAddOnMgr::appendAddonToInstalledJson(AddOn* addon)
 {
 	QString jsonPath = m_sAddOnDir % "installed_addons.json";
 	QFile jsonFile(jsonPath);
@@ -634,7 +636,7 @@ void StelAddOnMgr::appendAddonToInstalledJson(AddOn* addon, QStringList& install
 		QJsonObject object(QJsonDocument::fromJson(jsonFile.readAll()).object());
 		QJsonObject attributes;
 		attributes.insert("checksum", addon->getChecksum());
-		attributes.insert("installed-files", QJsonArray::fromStringList(installedFiles));
+		attributes.insert("installed-files", QJsonArray::fromStringList(addon->getInstalledFiles()));
 		object.insert(addon->getAddOnId(), attributes);
 		jsonFile.resize(0);
 		jsonFile.write(QJsonDocument(object).toJson());

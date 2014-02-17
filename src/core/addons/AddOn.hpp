@@ -107,6 +107,8 @@ public:
 	void setTextureStatus(QString name, bool installed);
 	QSet<QString> getAllTextures() { return m_AllTextures; }
 	QSet<QString> getInstalledTextures() { return m_InstalledTextures; }
+	void setInstalledFiles(QStringList installedFiles) { m_InstalledFiles = installedFiles; }
+	QStringList getInstalledFiles() { return m_InstalledFiles; }
 
 private:
 	QString m_iAddOnId;
@@ -127,6 +129,7 @@ private:
 	QList<Authors> m_authors;
 	QSet<QString> m_AllTextures;
 	QSet<QString> m_InstalledTextures;
+	QStringList m_InstalledFiles;
 	QHash<QString, int> m_textures; // <texture_name, installed>
 
 	bool m_bIsValid;
