@@ -637,6 +637,7 @@ void StelAddOnMgr::appendAddonToInstalledJson(AddOn* addon)
 		QJsonObject object(QJsonDocument::fromJson(jsonFile.readAll()).object());
 		QJsonObject attributes;
 		attributes.insert("checksum", addon->getChecksum());
+		attributes.insert("status", addon->getStatus());
 		attributes.insert("installed-files", QJsonArray::fromStringList(addon->getInstalledFiles()));
 		object.insert(addon->getAddOnId(), attributes);
 		jsonFile.resize(0);
