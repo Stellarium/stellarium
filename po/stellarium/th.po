@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Thai for stellarium 0.8.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-02-15 20:28+0700\n"
+"POT-Creation-Date: 2014-02-16 20:19+0700\n"
 "PO-Revision-Date: 2014-02-11 01:29+0000\n"
 "Last-Translator: Worachate Boonplod <Unknown>\n"
 "Language-Team: MicKi Alone <Need24Get@msn.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-02-16 05:49+0000\n"
+"X-Launchpad-Export-Date: 2014-02-17 05:34+0000\n"
 "X-Generator: Launchpad (build 16916)\n"
 "X-Poedit-Country: THAILAND\n"
 "X-Poedit-Language: Thai\n"
@@ -1149,11 +1149,12 @@ msgstr "ทิศทางการเริ่มต้นของการม
 msgid "Authors"
 msgstr "ผู้สร้าง"
 
-#: src/gui/ConfigurationDialog.cpp:729 src/gui/ViewDialog.cpp:438
+#: src/gui/ConfigurationDialog.cpp:729 src/gui/ViewDialog.cpp:445
 msgid "Contact"
 msgstr "ติดต่อ"
 
 #: src/gui/ConfigurationDialog.cpp:731
+#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:71
 #: plugins/Oculars/src/gui/OcularDialog.cpp:478
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:383
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:108
@@ -1166,6 +1167,7 @@ msgid "Version"
 msgstr "รุ่น"
 
 #: src/gui/ConfigurationDialog.cpp:814
+#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:72
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:109
 #: plugins/Novae/src/gui/NovaeDialog.cpp:108
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:115
@@ -1654,79 +1656,79 @@ msgid "Frames per second"
 msgstr "เฟรมต่อวินาที"
 
 #. TRANSLATORS: Short description for Class 1 of the Bortle scale
-#: src/gui/ViewDialog.cpp:324
+#: src/gui/ViewDialog.cpp:331
 msgid "Excellent dark-sky site"
 msgstr "สถานที่ซึ่งท้องฟ้ามืดสนิทอย่างดีเยี่ยม"
 
 #. TRANSLATORS: Short description for Class 2 of the Bortle scale
-#: src/gui/ViewDialog.cpp:326
+#: src/gui/ViewDialog.cpp:333
 msgid "Typical truly dark site"
 msgstr "สถานที่ซึ่งท้องฟ้ามืดสนิท"
 
 #. TRANSLATORS: Short description for Class 3 of the Bortle scale
-#: src/gui/ViewDialog.cpp:328
+#: src/gui/ViewDialog.cpp:335
 msgid "Rural sky"
 msgstr "ท้องฟ้าแบบชนบท"
 
 #. TRANSLATORS: Short description for Class 4 of the Bortle scale
-#: src/gui/ViewDialog.cpp:330
+#: src/gui/ViewDialog.cpp:337
 msgid "Rural/suburban transition"
 msgstr "ท้องฟ้าระหว่างชนบทกับชานเมือง"
 
 #. TRANSLATORS: Short description for Class 5 of the Bortle scale
-#: src/gui/ViewDialog.cpp:332
+#: src/gui/ViewDialog.cpp:339
 msgid "Suburban sky"
 msgstr "ท้องฟ้าแถบชานเมือง"
 
 #. TRANSLATORS: Short description for Class 6 of the Bortle scale
-#: src/gui/ViewDialog.cpp:334
+#: src/gui/ViewDialog.cpp:341
 msgid "Bright suburban sky"
 msgstr "ท้องฟ้าแถบชานเมืองที่สว่าง"
 
 #. TRANSLATORS: Short description for Class 7 of the Bortle scale
-#: src/gui/ViewDialog.cpp:336
+#: src/gui/ViewDialog.cpp:343
 msgid "Suburban/urban transition"
 msgstr "ท้องฟ้าระหว่างชานเมืองกับในเมือง"
 
 #. TRANSLATORS: Short description for Class 8 of the Bortle scale
-#: src/gui/ViewDialog.cpp:338
+#: src/gui/ViewDialog.cpp:345
 msgid "City sky"
 msgstr "ท้องฟ้าในเมือง"
 
 #. TRANSLATORS: Short description for Class 9 of the Bortle scale
-#: src/gui/ViewDialog.cpp:340
+#: src/gui/ViewDialog.cpp:347
 msgid "Inner-city sky"
 msgstr "ท้องฟ้าในเมืองชั้นใน"
 
-#: src/gui/ViewDialog.cpp:354
+#: src/gui/ViewDialog.cpp:361
 msgid "The naked-eye limiting magnitude is"
 msgstr "ขอบเขตโชติมาตรที่เห็นได้ด้วยตาเปล่าคือ"
 
-#: src/gui/ViewDialog.cpp:486
+#: src/gui/ViewDialog.cpp:493
 msgid "No description"
 msgstr "ไม่มีคำบรรยาย"
 
-#: src/gui/ViewDialog.cpp:596
+#: src/gui/ViewDialog.cpp:603
 msgid "No shooting stars"
 msgstr "ไม่มีดาวตก"
 
-#: src/gui/ViewDialog.cpp:599
+#: src/gui/ViewDialog.cpp:606
 msgid "Normal rate"
 msgstr "อัตราปกติ"
 
-#: src/gui/ViewDialog.cpp:602
+#: src/gui/ViewDialog.cpp:609
 msgid "Standard Perseids rate"
 msgstr "อัตราฝนดาวตกเพอร์ซิอัสมาตรฐาน"
 
-#: src/gui/ViewDialog.cpp:605
+#: src/gui/ViewDialog.cpp:612
 msgid "Meteor storm rate"
 msgstr "อัตราเริ่มต้นของพายุฝนดาวตก"
 
-#: src/gui/ViewDialog.cpp:608
+#: src/gui/ViewDialog.cpp:615
 msgid "Exceptional Leonid rate"
 msgstr "อัตราฝนดาวตกสิงโตระดับสูง"
 
-#: src/gui/ViewDialog.cpp:611
+#: src/gui/ViewDialog.cpp:618
 msgid "Highest rate ever (1966 Leonids)"
 msgstr "อัตราตกสูงสุดเท่าที่เคยมีมา (ฝนดาวตกสิงโต ค.ศ. ๑๙๖๖)"
 
@@ -1888,7 +1890,7 @@ msgstr "บันทึกภาพหน้าจอ"
 msgid "Full-screen mode"
 msgstr "โหมดเต็มจอ"
 
-#: src/StelMainView.cpp:412
+#: src/StelMainView.cpp:411
 #, qt-format
 msgid "Stellarium %1"
 msgstr "Stellarium %1"
@@ -4814,33 +4816,203 @@ msgstr "รวมไดเร็กทอรี:"
 msgid "..."
 msgstr "..."
 
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:56
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:120
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:57
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:131
+#: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:189
 msgid "Angle Measure"
 msgstr "วัดมุม"
 
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:59
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:60
 msgid "Provides an angle measurement tool"
 msgstr "แสดงเครื่องมือวัดมุม"
 
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:120
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:131
 msgid "Angle measure"
 msgstr "วัดมุม"
 
 #. TRANSLATORS: instructions for using the AngleMeasure plugin.
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:300
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:354
 msgid "The Angle Measure is enabled:"
 msgstr "เครื่องมือวัดมุมเปิดใช้งาน:"
 
 #. TRANSLATORS: instructions for using the AngleMeasure plugin.
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:302
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:356
 msgid "Drag with the left button to measure, left-click to clear."
 msgstr "วัดมุมโดยกดปุ่มซ้ายของเมาส์แล้วลาก, คลิกซ้ายเพื่อล้างค่า"
 
 #. TRANSLATORS: instructions for using the AngleMeasure plugin.
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:304
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:358
 msgid "Right-clicking changes the end point only."
 msgstr "คลิกขวาเพื่อเปลี่ยนเฉพาะจุดสิ้นสุด"
+
+#. TRANSLATORS: PA is abbreviation for phrase "Position Angle"
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:360
+msgid "PA="
+msgstr ""
+
+#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:70
+msgid "Angle Measure Plug-in"
+msgstr ""
+
+#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:73
+msgid "Contributors"
+msgstr ""
+
+#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:76
+msgid ""
+"The Angle Measure plugin is a small tool which is used to measure the "
+"angular distance between two points on the sky (and calculation of position "
+"angle between those two points)."
+msgstr ""
+
+#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:77
+msgid ""
+"*goes misty eyed* I recall measuring the size of the Cassini Division when I "
+"was a student. It was not the high academic glamor one might expect... It "
+"was cloudy... It was rainy... The observatory lab had some old scopes set up "
+"at one end, pointing at a <em>photograph</em> of Saturn at the other end of "
+"the lab. We measured. We calculated. We wished we were in Hawaii."
+msgstr ""
+
+#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:79
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:420
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:127
+#: plugins/Novae/src/gui/NovaeDialog.cpp:124
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:124
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:140
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:129
+msgid "Links"
+msgstr "ลิงก์"
+
+#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:80
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:421
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:128
+#: plugins/Novae/src/gui/NovaeDialog.cpp:125
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:125
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:141
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:130
+#, qt-format
+msgid ""
+"Support is provided via the Launchpad website.  Be sure to put \"%1\" in the "
+"subject when posting."
+msgstr ""
+"เราให้การสนับสนุนผ่านเว็บไซต์ Launchpad โปรดแน่ใจว่าได้ระบุ \"%1\" "
+"ในหัวเรื่อง เมื่อส่งข้อความ"
+
+#. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
+#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:83
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:424
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:131
+#: plugins/Novae/src/gui/NovaeDialog.cpp:128
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:128
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:144
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:133
+#, qt-format
+msgid "If you have a question, you can %1get an answer here%2"
+msgstr "หากมีคำถาม คุณสามารถ%1ถามได้ที่นี่%2"
+
+#. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
+#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:85
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:426
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:133
+#: plugins/Novae/src/gui/NovaeDialog.cpp:130
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:130
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:146
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:135
+#, qt-format
+msgid "Bug reports can be made %1here%2."
+msgstr "รายงานข้อผิดพลาดได้%1ที่นี่%2"
+
+#. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
+#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:87
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:428
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:135
+#: plugins/Novae/src/gui/NovaeDialog.cpp:132
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:132
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:148
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:137
+msgid ""
+"If you would like to make a feature request, you can create a bug report, "
+"and set the severity to \"wishlist\"."
+msgstr ""
+"หากต้องการให้โปรแกรมมีความสามารถอื่น ๆ เพิ่มเติม "
+"คุณสามารถร้องขอโดยสร้างรายงานข้อผิดพลาด แล้วตั้งค่าเป็น \"wishlist\""
+
+#. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
+#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:89
+#, qt-format
+msgid ""
+"If you want to read full information about this plugin and its history, you "
+"can %1get info here%2."
+msgstr ""
+
+#: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:181
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:263
+msgid "Pulsars Configuration"
+msgstr "การตั้งค่าพัลซาร์"
+
+#: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:182
+msgid "Angle Measure Plug-in Configuration"
+msgstr ""
+
+#: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:184
+#: plugins/Satellites/src/ui_satellitesDialog.h:716
+#: plugins/Supernovae/src/ui_supernovaeDialog.h:240
+#: plugins/Novae/src/ui_novaeDialog.h:243
+#: plugins/Quasars/src/ui_quasarsDialog.h:275
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:282
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:319
+#: plugins/Observability/src/ui_ObservabilityDialog.h:377
+msgid "Settings"
+msgstr "ตั้งค่า"
+
+#: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:185
+msgid "Use dms format for angles"
+msgstr ""
+
+#: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:186
+msgid "Show position angle"
+msgstr ""
+
+#: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:187
+#: plugins/Satellites/src/ui_satellitesDialog.h:714
+#: plugins/Supernovae/src/ui_supernovaeDialog.h:238
+#: plugins/Novae/src/ui_novaeDialog.h:241
+#: plugins/Quasars/src/ui_quasarsDialog.h:273
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:280
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:317
+#: plugins/Observability/src/ui_ObservabilityDialog.h:367
+msgid "Restore default settings"
+msgstr "คืนค่าเริ่มต้นเดิม"
+
+#: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:188
+#: plugins/Satellites/src/ui_satellitesDialog.h:715
+#: plugins/Supernovae/src/ui_supernovaeDialog.h:239
+#: plugins/Novae/src/ui_novaeDialog.h:242
+#: plugins/Quasars/src/ui_quasarsDialog.h:274
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:281
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:318
+#: plugins/Observability/src/ui_ObservabilityDialog.h:368
+msgid "Save settings as default"
+msgstr "บันทึกการตั้งค่าต่าง ๆ ให้เป็นค่าเริ่มต้น"
+
+#: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:190
+#: plugins/Oculars/src/ui_ocularDialog.h:1097
+#: plugins/Satellites/src/ui_satellitesDialog.h:762
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:418
+#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:405
+#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:309
+#: plugins/Supernovae/src/ui_supernovaeDialog.h:241
+#: plugins/Novae/src/ui_novaeDialog.h:244
+#: plugins/Quasars/src/ui_quasarsDialog.h:276
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:283
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:322
+#: plugins/Observability/src/ui_ObservabilityDialog.h:378
+#: plugins/FOV/src/ui_fovWindow.h:405
+#: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:279
+msgctxt "tab in plugin windows"
+msgid "About"
+msgstr "เกี่ยวกับ"
 
 #: plugins/CompassMarks/src/CompassMarks.cpp:55
 #: plugins/CompassMarks/src/CompassMarks.cpp:123
@@ -5403,23 +5575,6 @@ msgstr "พลิกในแนวนอน"
 msgid "Vertical flip"
 msgstr "พลิกในแนวตั้ง"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1097
-#: plugins/Satellites/src/ui_satellitesDialog.h:762
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:418
-#: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:405
-#: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:309
-#: plugins/Supernovae/src/ui_supernovaeDialog.h:241
-#: plugins/Novae/src/ui_novaeDialog.h:244
-#: plugins/Quasars/src/ui_quasarsDialog.h:276
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:283
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:322
-#: plugins/Observability/src/ui_ObservabilityDialog.h:378
-#: plugins/FOV/src/ui_fovWindow.h:405
-#: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:279
-msgctxt "tab in plugin windows"
-msgid "About"
-msgstr "เกี่ยวกับ"
-
 #: plugins/Satellites/src/Satellites.cpp:67
 #: plugins/Satellites/src/Satellites.cpp:144
 #: plugins/Satellites/src/ui_satellitesDialog.h:748
@@ -5717,65 +5872,6 @@ msgstr ""
 msgid "See %1this document%2 for details."
 msgstr "ดู %1เอกสารนี้%2 สำหรับรายละเอียด"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:420
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:127
-#: plugins/Novae/src/gui/NovaeDialog.cpp:124
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:124
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:140
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:129
-msgid "Links"
-msgstr "ลิงก์"
-
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:421
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:128
-#: plugins/Novae/src/gui/NovaeDialog.cpp:125
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:125
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:141
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:130
-#, qt-format
-msgid ""
-"Support is provided via the Launchpad website.  Be sure to put \"%1\" in the "
-"subject when posting."
-msgstr ""
-"เราให้การสนับสนุนผ่านเว็บไซต์ Launchpad โปรดแน่ใจว่าได้ระบุ \"%1\" "
-"ในหัวเรื่อง เมื่อส่งข้อความ"
-
-#. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:424
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:131
-#: plugins/Novae/src/gui/NovaeDialog.cpp:128
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:128
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:144
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:133
-#, qt-format
-msgid "If you have a question, you can %1get an answer here%2"
-msgstr "หากมีคำถาม คุณสามารถ%1ถามได้ที่นี่%2"
-
-#. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:426
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:133
-#: plugins/Novae/src/gui/NovaeDialog.cpp:130
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:130
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:146
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:135
-#, qt-format
-msgid "Bug reports can be made %1here%2."
-msgstr "รายงานข้อผิดพลาดได้%1ที่นี่%2"
-
-#. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:428
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:135
-#: plugins/Novae/src/gui/NovaeDialog.cpp:132
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:132
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:148
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:137
-msgid ""
-"If you would like to make a feature request, you can create a bug report, "
-"and set the severity to \"wishlist\"."
-msgstr ""
-"หากต้องการให้โปรแกรมมีความสามารถอื่น ๆ เพิ่มเติม "
-"คุณสามารถร้องขอโดยสร้างรายงานข้อผิดพลาด แล้วตั้งค่าเป็น \"wishlist\""
-
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:450
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:155
 #: plugins/Novae/src/gui/NovaeDialog.cpp:152
@@ -6016,36 +6112,6 @@ msgstr "ความยาวของส่วนที่จางลง:"
 #: plugins/Satellites/src/ui_satellitesDialog.h:713
 msgid "Realistic mode for the artificial satellites"
 msgstr "โหมดเหมือนจริงสำหรับดาวเทียม"
-
-#: plugins/Satellites/src/ui_satellitesDialog.h:714
-#: plugins/Supernovae/src/ui_supernovaeDialog.h:238
-#: plugins/Novae/src/ui_novaeDialog.h:241
-#: plugins/Quasars/src/ui_quasarsDialog.h:273
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:280
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:317
-#: plugins/Observability/src/ui_ObservabilityDialog.h:367
-msgid "Restore default settings"
-msgstr "คืนค่าเริ่มต้นเดิม"
-
-#: plugins/Satellites/src/ui_satellitesDialog.h:715
-#: plugins/Supernovae/src/ui_supernovaeDialog.h:239
-#: plugins/Novae/src/ui_novaeDialog.h:242
-#: plugins/Quasars/src/ui_quasarsDialog.h:274
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:281
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:318
-#: plugins/Observability/src/ui_ObservabilityDialog.h:368
-msgid "Save settings as default"
-msgstr "บันทึกการตั้งค่าต่าง ๆ ให้เป็นค่าเริ่มต้น"
-
-#: plugins/Satellites/src/ui_satellitesDialog.h:716
-#: plugins/Supernovae/src/ui_supernovaeDialog.h:240
-#: plugins/Novae/src/ui_novaeDialog.h:243
-#: plugins/Quasars/src/ui_quasarsDialog.h:275
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:282
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:319
-#: plugins/Observability/src/ui_ObservabilityDialog.h:377
-msgid "Settings"
-msgstr "ตั้งค่า"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:718
 msgid "Double-click a satellite to start tracking it."
@@ -7754,10 +7820,6 @@ msgstr "ในฝรั่งเศส"
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:238
 msgid "Pulsars is updated"
 msgstr "พัลซาร์ได้รับการปรับปรุงแล้ว"
-
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:263
-msgid "Pulsars Configuration"
-msgstr "การตั้งค่าพัลซาร์"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:264
 msgid "Pulsars Plug-in Configuration"
