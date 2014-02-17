@@ -318,10 +318,7 @@ void StelAddOnMgr::installFromFile(AddOn* addon, const QStringList selectedFiles
 	if (addon->getChecksum() == calculateMd5(file))
 	{
 		// installing files
-		status = m_pStelAddOns.value(addon->getCategory())
-				->installFromFile(addon->getAddOnId(),
-						  addon->getDownloadFilepath(),
-						  selectedFiles);
+		unzip(*addon, selectedFiles);
 	}
 	else
 	{
