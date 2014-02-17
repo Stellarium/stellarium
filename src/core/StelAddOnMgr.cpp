@@ -315,8 +315,8 @@ void StelAddOnMgr::installAddOn(AddOn* addon, const QStringList selectedFiles)
 		return;
 	}
 
-	AddOn::Status s = installFromFile(addon, selectedFiles);
-	if (s == AddOn::NotInstalled || s == AddOn::Corrupted)
+	installFromFile(addon, selectedFiles);
+	if (addon->getStatus() == AddOn::NotInstalled || addon->getStatus() == AddOn::Corrupted)
 	{
 		// something goes wrong (file not found OR corrupt),
 		// try downloading it...
@@ -327,13 +327,14 @@ void StelAddOnMgr::installAddOn(AddOn* addon, const QStringList selectedFiles)
 	}
 }
 
-AddOn::Status StelAddOnMgr::installFromFile(AddOn* addon, const QStringList selectedFiles)
+void StelAddOnMgr::installFromFile(AddOn* addon, const QStringList selectedFiles)
 {
 	QFile file(addon->getDownloadFilepath());
 	// checking if we have this file in the add-on dir (local disk)
 	if (!file.exists())
 	{
-		return AddOn::NotInstalled;
+		addon->setStatus(AddOn::NotInstalled);
+		return;
 	}
 
 	// only accept zip archive
@@ -341,11 +342,11 @@ AddOn::Status StelAddOnMgr::installFromFile(AddOn* addon, const QStringList sele
 	{
 		qWarning() << "Add-On Mgr: Error" << addon->getAddOnId()
 			   << "The file found is not a .zip archive";
-		return AddOn::InvalidFormat;
+		addon->setStatus(AddOn::InvalidFormat);
+		return;
 	}
 
 	// checking integrity
-	AddOn::Status status;
 	if (addon->getChecksum() == calculateMd5(file))
 	{
 		// installing files
@@ -356,23 +357,21 @@ AddOn::Status StelAddOnMgr::installFromFile(AddOn* addon, const QStringList sele
 	}
 	else
 	{
-		status = AddOn::Corrupted;
+		addon->setStatus(AddOn::Corrupted);
 		qWarning() << "Add-On Mgr: Error: File "
 			   << addon->getDownloadFilepath()
 			   << " is corrupt, MD5 mismatch!";
 	}
 
-	if ((status == AddOn::PartiallyInstalled || status == AddOn::FullyInstalled) &&
+	if ((addon->getStatus() == AddOn::PartiallyInstalled || addon->getStatus() == AddOn::FullyInstalled) &&
 		(addon->getCategory() == AddOn::CATALOG || addon->getCategory() == AddOn::LANGUAGEPACK
 			|| addon->getCategory() == AddOn::TEXTURE))
 	{
 		emit (addOnMgrMsg(RestartRequired));
-		status = AddOn::Restart;
+		addon->setStatus(AddOn::Restart);
 	}
 
-	addon->setStatus(status);
 	emit (dataUpdated(addon));
-	return status;
 }
 
 void StelAddOnMgr::installFromFile(const QString& filePath)
@@ -565,18 +564,18 @@ void StelAddOnMgr::cancelAllDownloads()
 	emit(updateTableViews());
 }
 
-AddOn::Status StelAddOnMgr::unzip(AddOn* addon, QStringList selectedFiles)
+void StelAddOnMgr::unzip(AddOn& addon, QStringList selectedFiles)
 {
-	QZipReader reader(addon->getDownloadFilepath());
+	QZipReader reader(addon.getDownloadFilepath());
 	if (reader.status() != QZipReader::NoError)
 	{
 		qWarning() << "StelAddOnMgr: Unable to open the ZIP archive:"
-			   << QDir::toNativeSeparators(addon->getDownloadFilepath());
-		return AddOn::UnableToRead;
+			   << QDir::toNativeSeparators(addon.getDownloadFilepath());
+		addon.setStatus(AddOn::UnableToRead);
 	}
 
-	QStringList installedFiles = addon->getInstalledFiles();
-	AddOn::Status status = AddOn::FullyInstalled;
+	QStringList installedFiles = addon.getInstalledFiles();
+	addon.setStatus(AddOn::FullyInstalled);
 	foreach(QZipReader::FileInfo info, reader.fileInfoList())
 	{
 		if (!info.isFile)
@@ -593,7 +592,8 @@ AddOn::Status StelAddOnMgr::unzip(AddOn* addon, QStringList selectedFiles)
 			{
 				qWarning() << "StelAddOnMgr: Unable to install! Invalid destination"
 					   << info.filePath;
-				return AddOn::InvalidDestination;
+				addon.setStatus(AddOn::InvalidDestination);
+				return;
 			}
 		}
 
@@ -606,7 +606,7 @@ AddOn::Status StelAddOnMgr::unzip(AddOn* addon, QStringList selectedFiles)
 		{
 			if (!selectedFiles.contains(info.filePath) && !file.exists())
 			{
-				status = AddOn::PartiallyInstalled;
+				addon.setStatus(AddOn::PartiallyInstalled);
 				continue;
 			}
 		}
@@ -625,9 +625,8 @@ AddOn::Status StelAddOnMgr::unzip(AddOn* addon, QStringList selectedFiles)
 		qDebug() << "StelAddOnMgr: New file installed:" << info.filePath;
 	}
 	installedFiles.removeDuplicates();
-	addon->setInstalledFiles(installedFiles);
-	appendAddonToInstalledJson(addon);
-	return status;
+	addon.setInstalledFiles(installedFiles);
+	appendAddonToInstalledJson(&addon);
 }
 
 void StelAddOnMgr::appendAddonToInstalledJson(AddOn* addon)

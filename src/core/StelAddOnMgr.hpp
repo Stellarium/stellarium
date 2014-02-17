@@ -57,7 +57,7 @@ public:
 	QString getAddOnDir() { return m_sAddOnDir; }
 	QString getThumbnailDir() { return m_sThumbnailDir; }
 	void installAddOn(AddOn *addon, const QStringList selectedFiles);
-	AddOn::Status installFromFile(AddOn* addon, const QStringList selectedFiles);
+	void installFromFile(AddOn* addon, const QStringList selectedFiles);
 	void installFromFile(const QString& filePath);
 	void removeAddOn(AddOn *addon, const QStringList files);
 	bool isCompatible(QString first, QString last);
@@ -136,7 +136,7 @@ private:
 	// download thumbnails
 	void downloadNextThumbnail();
 
-	AddOn::Status unzip(AddOn* addon, QStringList selectedFiles);
+	void unzip(AddOn& addon, QStringList selectedFiles);
 };
 
 #endif // _STELADDONMGR_HPP_
