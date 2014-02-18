@@ -589,6 +589,7 @@ void StelAddOnMgr::unzip(AddOn& addon, QStringList selectedFiles)
 		{
 			qWarning() << "StelAddOnMgr: cannot open file"
 				   << QDir::toNativeSeparators(info.filePath);
+			addon.setStatus(AddOn::UnableToWrite);
 			continue;
 		}
 		file.write(data);
