@@ -25,12 +25,14 @@
 #include <QColor>
 #include <QLabel>
 #include <QObject>
-#include "StelDialog.hpp"
-#include "MeteorShowers.hpp"
+#include <QStandardItemModel>
 
-class Ui_meteorShowerDialog;
-class QTimer;
+#include "MeteorShowers.hpp"
+#include "StelDialog.hpp"
+
 class MeteorShowers;
+class QTimer;
+class Ui_meteorShowerDialog;
 
 class MeteorShowerDialog : public StelDialog
 {
@@ -71,7 +73,19 @@ private:
 	void updateGuiFromSettings(void);
 	QTimer* updateTimer;
 	void setTextureColor(QLabel* texture, QColor color);
-	QList<MeteorShowerP> searchResult;
+
+	//! Defines the number and the order of the columns in the table that lists active meteor showers
+	//! @enum ModelColumns
+	enum ModelColumns {
+		ColumnName,		//!< name column
+		ColumnZHR,		//!< zhr column
+		ColumnDataType,		//!< data type column
+		ColumnPeak,		//!< peak date column
+		ColumnCount		//!< total number of columns
+	};
+	QStandardItemModel * listModel;
+	void initListEvents(void);
+	void setHeaderNames(void);
 };
 
 #endif // _METEORSHOWERDIALOG_HPP_

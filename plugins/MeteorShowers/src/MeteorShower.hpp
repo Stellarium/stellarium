@@ -92,6 +92,13 @@ public:
 		return peak;
 	}
 
+	//! Get zhr
+	//! @return ZHR
+	int getZHR()
+	{
+		return zhr;
+	}
+
 private:
 	Vec3d XYZ;                      // Cartesian equatorial position
 	Vec3d XY;                       // Store temporary 2D position
