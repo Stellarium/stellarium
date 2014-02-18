@@ -16,9 +16,9 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
-#include <cstdlib>
-#include "StelTextureMgr.hpp"
+
 #include "StelTexture.hpp"
+#include "StelTextureMgr.hpp"
 #include "glues.h"
 #include "StelFileMgr.hpp"
 #include "StelApp.hpp"
@@ -34,6 +34,8 @@
 #include <QtEndian>
 #include <QFuture>
 #include <QtConcurrent>
+
+#include <cstdlib>
 
 StelTexture::StelTexture() : networkReply(NULL), loader(NULL), errorOccured(false), id(0), avgLuminance(-1.f)
 {

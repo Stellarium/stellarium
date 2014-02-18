@@ -20,6 +20,7 @@
 #ifndef _SKYGUI_HPP_
 #define _SKYGUI_HPP_
 
+#include "config.h"
 #include "StelStyle.hpp"
 #include "StelObject.hpp"
 

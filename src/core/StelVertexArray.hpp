@@ -20,9 +20,10 @@
 #ifndef __STELVERTEXARRAY_HPP__
 #define __STELVERTEXARRAY_HPP__
 
+#include "VecMath.hpp"
+
 #include <QVector>
 #include <QDebug>
-#include "VecMath.hpp"
 
 struct StelVertexArray
 {

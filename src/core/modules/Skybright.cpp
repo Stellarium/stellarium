@@ -16,10 +16,10 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#include <cmath>
-#include <QDebug>
 #include "StelUtils.hpp"
 
+#include <cmath>
+#include <QDebug>
 
 #define stelpow10f(x) std::exp((x) * 2.3025850930f)
 

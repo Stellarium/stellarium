@@ -17,6 +17,9 @@
 * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 */
 
+#include "StelTranslator.hpp"
+#include "StelFileMgr.hpp"
+#include "StelUtils.hpp"
 
 #include <cstdio>
 #include <algorithm>
@@ -37,9 +40,6 @@
 #include <QDir>
 #include <QTranslator>
 
-#include "StelUtils.hpp"
-#include "StelTranslator.hpp"
-#include "StelFileMgr.hpp"
 
 // Init static members
 QMap<QString, QString> StelTranslator::iso639codes;

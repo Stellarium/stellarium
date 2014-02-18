@@ -17,9 +17,6 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#include <QDebug>
-#include <QSettings>
-#include <QOpenGLShaderProgram>
 #include "Atmosphere.hpp"
 #include "StelUtils.hpp"
 #include "StelApp.hpp"
@@ -28,6 +25,10 @@
 #include "StelCore.hpp"
 #include "StelPainter.hpp"
 #include "StelFileMgr.hpp"
+
+#include <QDebug>
+#include <QSettings>
+#include <QOpenGLShaderProgram>
 
 inline bool myisnan(double value)
 {
