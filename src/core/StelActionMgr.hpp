@@ -20,6 +20,8 @@
 #ifndef _STELACTIONMGR_HPP_
 #define _STELACTIONMGR_HPP_
 
+#include "config.h"
+
 #include <QObject>
 #include <QKeySequence>
 #include <QList>

@@ -20,14 +20,14 @@
 #ifndef _PLANET_HPP_
 #define _PLANET_HPP_
 
-#include <QString>
-
 #include "StelObject.hpp"
 #include "StelProjector.hpp"
 #include "VecMath.hpp"
 #include "StelFader.hpp"
 #include "StelTextureTypes.hpp"
 #include "StelProjectorType.hpp"
+
+#include <QString>
 
 // The callback type for the external position computation function
 // The last variable is the userData pointer.

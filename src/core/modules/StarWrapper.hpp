@@ -20,13 +20,14 @@
 #ifndef _STARWRAPPER_HPP_
 #define _STARWRAPPER_HPP_
 
-#include <QString>
 #include "StelObject.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StarMgr.hpp"
 #include "Star.hpp"
 #include "StelSkyDrawer.hpp"
+
+#include <QString>
 
 template <class Star> class SpecialZoneArray;
 template <class Star> struct SpecialZoneData;

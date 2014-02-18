@@ -20,17 +20,6 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#include <QDebug>
-#include <QSettings>
-#include <QString>
-#include <QDir>
-#include <QDirIterator>
-#include <QFile>
-#include <QTemporaryFile>
-#include <QMouseEvent>
-
-#include <stdexcept>
-
 #include "StelActionMgr.hpp"
 #include "LandscapeMgr.hpp"
 #include "Landscape.hpp"
@@ -47,6 +36,17 @@
 #include "StelPainter.hpp"
 #include "karchive.h"
 #include "kzip.h"
+
+#include <QDebug>
+#include <QSettings>
+#include <QString>
+#include <QDir>
+#include <QDirIterator>
+#include <QFile>
+#include <QTemporaryFile>
+#include <QMouseEvent>
+
+#include <stdexcept>
 
 // Class which manages the cardinal points displaying
 class Cardinals

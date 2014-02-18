@@ -17,8 +17,6 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#include <cmath> // std::fmod
-
 #ifdef CYGWIN
  #include <malloc.h>
 #endif
@@ -34,6 +32,7 @@
 #include <QRegExp>
 #include <QProcess>
 #include <QSysInfo>
+#include <cmath> // std::fmod
 
 namespace StelUtils
 {

@@ -16,9 +16,9 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#include <cmath>
-#include "config.h"
 #include "StelToneReproducer.hpp"
+
+#include <cmath>
 
 /*********************************************************************
  Constructor: Set some default values to prevent bugs in case of bad use
