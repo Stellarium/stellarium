@@ -20,6 +20,8 @@
 #ifndef _STELTEXTURETYPES_HPP_
 #define _STELTEXTURETYPES_HPP_
 
+#include "config.h"
+
 #include <QSharedPointer>
 
 //! @file StelTextureTypes.hpp

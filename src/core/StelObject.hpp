@@ -20,11 +20,12 @@
 #ifndef _STELOBJECT_HPP_
 #define _STELOBJECT_HPP_
 
-#include <QFlags>
-#include <QString>
 #include "VecMath.hpp"
 #include "StelObjectType.hpp"
 #include "StelRegionObject.hpp"
+
+#include <QFlags>
+#include <QString>
 
 class StelCore;
 

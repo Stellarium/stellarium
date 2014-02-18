@@ -21,14 +21,14 @@
 #ifndef _CONSTELLATIONMGR_HPP_
 #define _CONSTELLATIONMGR_HPP_
 
+#include "StelObjectType.hpp"
+#include "StelObjectModule.hpp"
+#include "StelProjectorType.hpp"
+
 #include <vector>
 #include <QString>
 #include <QStringList>
 #include <QFont>
-
-#include "StelObjectType.hpp"
-#include "StelObjectModule.hpp"
-#include "StelProjectorType.hpp"
 
 class StelToneReproducer;
 class StarMgr;

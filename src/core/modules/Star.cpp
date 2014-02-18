@@ -19,13 +19,12 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#include <QDebug>
-#include <QString>
-
 #include "Star.hpp"
 #include "StarMgr.hpp"
 #include "StelUtils.hpp"
 
+#include <QDebug>
+#include <QString>
 
 QString Star1::getNameI18n(void) const {
   if (hip) {
