@@ -352,14 +352,54 @@ void StelAddOnMgr::installFromFile(const QString& filePath)
 	installFromFile(addon, QStringList());
 }
 
-void StelAddOnMgr::removeAddOn(AddOn* addon, const QStringList selectedFiles)
+void StelAddOnMgr::removeAddOn(AddOn* addon, QStringList selectedFiles)
 {
 	if (!addon || !addon->isValid())
 	{
 		return;
 	}
 
-	addon->setStatus(m_pStelAddOns.value(addon->getCategory())->uninstallAddOn(addon->getAddOnId(), selectedFiles));
+	if (selectedFiles.isEmpty()) // remove all files
+	{
+		selectedFiles = addon->getInstalledFiles();
+	}
+
+	QStringList installedFiles = addon->getInstalledFiles();
+	foreach (QString filePath, selectedFiles) {
+		QFile file(filePath);
+		if (file.remove())
+		{
+			installedFiles.removeOne(filePath);
+			QDir dir(filePath);
+			dir.cdUp();
+			QString dirName = dir.dirName();
+			dir.cdUp();
+			dir.rmdir(dirName); // try to remove dir
+		}
+		else
+		{
+			qWarning() << "Add-On Mgr : Unable to remove"
+				   << QDir::toNativeSeparators(filePath);
+		}
+
+	}
+
+	if (installedFiles.size() == 0)
+	{
+		qDebug() << "Add-On Mgr : Successfully removed" << addon->getAddOnId();
+		addon->setStatus(AddOn::NotInstalled);
+	}
+	else if (addon->getInstalledFiles().size() > installedFiles.size())
+	{
+		qWarning() << "Add-On Mgr : Partially removed" << addon->getAddOnId();
+		addon->setStatus(AddOn::PartiallyInstalled);
+	}
+	else
+	{
+		addon->setStatus(AddOn::UnableToRemove);
+	}
+
+	addon->setInstalledFiles(installedFiles);
 
 	if (addon->getCategory() == AddOn::CATALOG || addon->getCategory() == AddOn::LANGUAGEPACK
 			|| addon->getCategory() == AddOn::TEXTURE)
