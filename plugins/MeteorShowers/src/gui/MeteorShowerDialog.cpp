@@ -109,8 +109,12 @@ void MeteorShowerDialog::createDialogContent()
 	updateTimer->start(7000);
 
 	// Settings tab / event group
-	ui->dateFrom->setDate(plugin->getSkyDate().date());
-	ui->dateTo->setDate(plugin->getSkyDate().date());
+	int year, month, day;
+	// Get current JD and convert it to year, month and day
+	// TODO: Add changes for the range of dates when year in main app will be changed?
+	StelUtils::getDateFromJulianDay(StelApp::getInstance().getCore()->getJDay(), &year, &month, &day);
+	ui->dateFrom->setDate(QDate(year, 1, 1)); // first date in the range - first day of the year
+	ui->dateTo->setDate(QDate(year, 12, 31)); // second date in the range - last day of the year
 	connect(ui->searchButton, SIGNAL(clicked()), this, SLOT(checkDates()));
 
 	initListEvents();
