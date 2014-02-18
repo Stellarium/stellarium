@@ -104,7 +104,7 @@ public:
 	Status getStatus() { return m_eStatus; }
 	QString getStatusString();
 	void setStatus(Status status) { m_eStatus = status; }
-	QSet<QString> getAllTextures() { return m_AllTextures; }
+	QStringList getAllTextures() { return m_AllTextures; }
 	void setInstalledFiles(QStringList installedFiles) { m_InstalledFiles = installedFiles; }
 	QStringList getInstalledFiles() { return m_InstalledFiles; }
 
@@ -125,7 +125,7 @@ private:
 	QString m_sChecksum;
 	QString m_sThumbnail;
 	QList<Authors> m_authors;
-	QSet<QString> m_AllTextures;
+	QStringList m_AllTextures;
 	QStringList m_InstalledFiles;
 
 	bool m_bIsValid;

@@ -66,13 +66,16 @@ AddOn::AddOn(const QString addOnId, const QVariantMap& map)
 
 	if (m_eType == Texture)
 	{
-		m_AllTextures = map.value("textures").toString().split(",").toSet();
+		m_AllTextures = map.value("textures").toString().split(",").toSet().toList();
 		// a texture must have "textures"
 		if (m_AllTextures.isEmpty())
 		{
 			qWarning() << "Add-On Catalog : Error! Texture" << m_iAddOnId
 				   << "does not have the field \"textures\"!";
 			return;
+		}
+		for (int i=0; i < m_AllTextures.size(); i++) {
+			m_AllTextures[i] = StelFileMgr::getUserDir() % "/textures/" % m_AllTextures[i];
 		}
 	}
 
