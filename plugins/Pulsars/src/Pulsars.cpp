@@ -158,7 +158,7 @@ void Pulsars::init()
 		addAction("actionShow_Pulsars", N_("Pulsars"), N_("Show pulsars"), "pulsarsVisible", "Ctrl+Alt+P");
 		addAction("actionShow_Pulsars_ConfigDialog", N_("Pulsars"), N_("Pulsars configuration window"), configDialog, "visible");
 
-		GlowIcon = new QPixmap(":/graphicsGui/glow32x32.png");
+		GlowIcon = new QPixmap(":/graphicGui/glow32x32.png");
 		OnIcon = new QPixmap(":/Pulsars/btPulsars-on.png");
 		OffIcon = new QPixmap(":/Pulsars/btPulsars-off.png");
 
