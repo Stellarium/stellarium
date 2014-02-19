@@ -85,6 +85,7 @@ signals:
 	void skyCulturesChanged();
 
 private slots:
+	void slotDataUpdated(AddOn* addon);
 	void downloadThumbnailFinished();
 	void downloadAddOnFinished();
 	void newDownloadedData();

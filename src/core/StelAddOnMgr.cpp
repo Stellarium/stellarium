@@ -91,10 +91,7 @@ StelAddOnMgr::StelAddOnMgr()
 	m_pStelAddOns.insert(AddOn::STARLORE, new AOSkyCulture());
 	m_pStelAddOns.insert(AddOn::TEXTURE, new AOTexture());
 
-	connect(m_pStelAddOns.value(AddOn::SCRIPT), SIGNAL(scriptsChanged()),
-		this, SIGNAL(scriptsChanged()));
-	connect(m_pStelAddOns.value(AddOn::STARLORE), SIGNAL(skyCulturesChanged()),
-		this, SIGNAL(skyCulturesChanged()));
+	connect(this, SIGNAL(dataUpdated(AddOn*)), this, SLOT(slotDataUpdated(AddOn*)));
 
 	// loading json file
 	reloadAddonJsonFile();
@@ -670,5 +667,18 @@ void StelAddOnMgr::updateInstalledAddonsJson(AddOn* addon)
 	{
 		qWarning() << "Add-On Mgr: Couldn't open the catalog of installed addons!"
 			   << QDir::toNativeSeparators(m_sInstalledAddonsJsonPath);
+	}
+}
+
+void StelAddOnMgr::slotDataUpdated(AddOn* addon)
+{
+	AddOn::Category cat = addon->getCategory();
+	if (cat == AddOn::SCRIPT)
+	{
+		emit (scriptsChanged());
+	}
+	else if (cat == AddOn::STARLORE)
+	{
+		emit (skyCulturesChanged());
 	}
 }
