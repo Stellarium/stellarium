@@ -231,7 +231,11 @@ IF(ENABLE_SOUND)
     INCLUDE_DIRECTORIES(${Qt5Multimedia_INCLUDE_DIRS})
 ENDIF()
 
-FIND_PACKAGE(OpenGL REQUIRED)
+# I add this test because on Windows with angle we should not link
+# with OpenGL.  Maybe there is a better way to do that.
+IF("${Qt5Gui_OPENGL_LIBRARIES}" MATCHES "opengl")
+    FIND_PACKAGE(OpenGL REQUIRED)
+ENDIF()
 FIND_PACKAGE(ZLIB)
 
 FIND_PACKAGE(Qt5Test)
