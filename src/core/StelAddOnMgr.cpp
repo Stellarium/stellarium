@@ -618,7 +618,7 @@ void StelAddOnMgr::unzip(AddOn& addon, QStringList selectedFiles)
 		// when selectedFiles is empty, extract all files
 		if (!selectedFiles.isEmpty())
 		{
-			if (!selectedFiles.contains(fileInfo.fileName()) && !file.exists())
+			if (!selectedFiles.contains(fileInfo.filePath()) && !file.exists())
 			{
 				addon.setStatus(AddOn::PartiallyInstalled);
 				continue;
