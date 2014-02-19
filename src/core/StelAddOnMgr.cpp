@@ -397,9 +397,11 @@ void StelAddOnMgr::removeAddOn(AddOn* addon, QStringList selectedFiles)
 	else
 	{
 		addon->setStatus(AddOn::UnableToRemove);
+		return; // nothing changed
 	}
 
 	addon->setInstalledFiles(installedFiles);
+	updateInstalledAddonsJson(addon);
 
 	if (addon->getCategory() == AddOn::CATALOG || addon->getCategory() == AddOn::LANGUAGEPACK
 			|| addon->getCategory() == AddOn::TEXTURE)
@@ -639,20 +641,27 @@ void StelAddOnMgr::unzip(AddOn& addon, QStringList selectedFiles)
 	}
 	installedFiles.removeDuplicates();
 	addon.setInstalledFiles(installedFiles);
-	appendAddonToInstalledJson(&addon);
+	updateInstalledAddonsJson(&addon);
 }
 
-void StelAddOnMgr::appendAddonToInstalledJson(AddOn* addon)
+void StelAddOnMgr::updateInstalledAddonsJson(AddOn* addon)
 {
 	QFile jsonFile(m_sInstalledAddonsJsonPath);
 	if (jsonFile.open(QIODevice::ReadWrite))
 	{
 		QJsonObject object(QJsonDocument::fromJson(jsonFile.readAll()).object());
-		QJsonObject attributes;
-		attributes.insert("checksum", addon->getChecksum());
-		attributes.insert("status", addon->getStatus());
-		attributes.insert("installed-files", QJsonArray::fromStringList(addon->getInstalledFiles()));
-		object.insert(addon->getAddOnId(), attributes);
+		if (addon->getStatus() == AddOn::NotInstalled)
+		{
+			object.remove(addon->getAddOnId());
+		}
+		else
+		{
+			QJsonObject attributes;
+			attributes.insert("checksum", addon->getChecksum());
+			attributes.insert("status", addon->getStatus());
+			attributes.insert("installed-files", QJsonArray::fromStringList(addon->getInstalledFiles()));
+			object.insert(addon->getAddOnId(), attributes);
+		}
 		jsonFile.resize(0);
 		jsonFile.write(QJsonDocument(object).toJson());
 		jsonFile.close();
