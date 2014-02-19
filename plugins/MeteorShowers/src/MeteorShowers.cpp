@@ -156,7 +156,7 @@ void MeteorShowers::init()
 		addAction("actionShow_radiant_Labels", msGroup, N_("Radiant labels"), "labelsVisible", "Shift+M");
 		addAction("actionShow_MeteorShower_ConfigDialog", msGroup, N_("Meteor Shower configuration window"), configDialog, "visible");
 
-		GlowIcon = new QPixmap(":/graphicsGui/glow32x32.png");
+		GlowIcon = new QPixmap(":/graphicGui/glow32x32.png");
 		OnIcon = new QPixmap(":/MeteorShowers/btMS-on.png");
 		OffIcon = new QPixmap(":/MeteorShowers/btMS-off.png");
 
@@ -242,7 +242,7 @@ void MeteorShowers::setFlagShowMS(bool b)
 void MeteorShowers::setFlagShowMSButton(bool b)
 {
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-	if(b==true)
+	if(b)
 	{
 		if(toolbarButton==NULL)
 		{
