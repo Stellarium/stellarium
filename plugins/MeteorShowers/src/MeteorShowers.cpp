@@ -294,11 +294,11 @@ void MeteorShowers::drawMarker(StelCore* core, StelPainter& painter)
 
 	foreach(const MeteorShowerP& ms, mShowers)
 	{
+		ms->updateCurrentData(skyDate);
+
 		bool flag=true;
 		if (ms->getStatus()==0 && getFlagActiveRadiant())
 			flag = false;
-
-		ms->updateCurrentData(skyDate);
 
 		if(ms && ms->initialized && flag)
 			ms->draw(painter);
