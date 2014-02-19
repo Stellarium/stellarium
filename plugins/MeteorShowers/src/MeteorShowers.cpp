@@ -206,6 +206,9 @@ void MeteorShowers::init()
 	connect(updateTimer, SIGNAL(timeout()), this, SLOT(checkForUpdate()));
 	updateTimer->start();
 
+	// skyDate startup
+	skyDate = StelUtils::jdToQDateTime(StelApp::getInstance().getCore()->getJDay());
+
 	GETSTELMODULE(StelObjectMgr)->registerStelObjectMgr(this);
 }
 
@@ -412,14 +415,8 @@ int MeteorShowers::calculateZHR(int zhr, QString variable, QDateTime start, QDat
 	return (int) ((int) ((gaussian - (int) gaussian) * 10) >= 5 ? gaussian+1 : gaussian);
 }
 
-void MeteorShowers::updateActiveInfo(StelCore* core)
+void MeteorShowers::updateActiveInfo(void)
 {
-	//check if the sky date changed
-	bool changedDate = changedSkyDate(core);
-
-	if(changedDate)
-		activeInfo.clear(); //clear data of all MS active
-
 	foreach(const MeteorShowerP& ms, mShowers)
 	{
 		if(ms && ms->initialized)
@@ -478,7 +475,20 @@ void MeteorShowers::update(double deltaTime)
 	if(timeRate > 0.2)
 		return;
 
-	updateActiveInfo(core);
+	//check if the sky date changed
+	bool changedDate = changedSkyDate(core);
+
+	if(changedDate)
+	{
+		// clear data of all MS active
+		activeInfo.clear();
+
+		// Is GUI visible and the year changed? refresh ranges
+		if(configDialog->visible() && lastSkyDate.toString("yyyy") != skyDate.toString("yyyy"))
+			configDialog->refreshRangeDates();
+	}
+
+	updateActiveInfo();
 
 	deltaTime*=1000;
 
@@ -540,7 +550,7 @@ void MeteorShowers::update(double deltaTime)
 			double prob = ((double)rand())/RAND_MAX;
 			if(ZHR>0 && prob<((double)ZHR*zhrToWsr*deltaTime/1000.0/(double)mpf))
 			{
-				MeteorStream *m = new MeteorStream(StelApp::getInstance().getCore(), a.speed, a.radiantAlpha, a.radiantDelta);
+				MeteorStream *m = new MeteorStream(core, a.speed, a.radiantAlpha, a.radiantDelta);
 				active[index].push_back(m);
 			}
 		}

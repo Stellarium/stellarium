@@ -50,6 +50,7 @@ public slots:
 	void retranslate();
 	void refreshUpdateValues(void);
 	void refreshColorMarkers(void);
+	void refreshRangeDates(void); //! Refresh dates range when year in main app change
 
 private slots:
 	void setUpdateValues(int hours);

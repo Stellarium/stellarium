@@ -280,7 +280,7 @@ private:
 
 	//! Update the list with information about active meteors
 	//! @param core
-	void updateActiveInfo(StelCore *core);
+	void updateActiveInfo(void);
 
 	//! Set up the plugin with default values.
 	void restoreDefaultConfigIni(void);
