@@ -167,7 +167,7 @@ void AngleMeasure::update(double deltaTime)
 	lineVisible.update((int)(deltaTime*1000));
 	static StelCore *core=StelApp::getInstance().getCore();
 
-	withDecimalDegree = dynamic_cast<StelGui*>(StelApp::getInstance().getGui())->getFlagShowDecimalDegrees();
+	withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
 
 	// if altAz endpoint linked to the rotating sky, move respective point(s)
 	if (flagShowHorizontalStartSkylinked)

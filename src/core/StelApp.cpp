@@ -78,16 +78,6 @@
 #include <QCoreApplication>
 #include <QScreen>
 
-Q_IMPORT_PLUGIN(StelStandardGuiPluginInterface)
-
-#ifdef USE_STATIC_PLUGIN_VIRGO
-Q_IMPORT_PLUGIN(VirGOStelPluginInterface)
-#endif
-
-#ifdef USE_STATIC_PLUGIN_SVMT
-Q_IMPORT_PLUGIN(SVMTStelPluginInterface)
-#endif
-
 #ifdef USE_STATIC_PLUGIN_HELLOSTELMODULE
 Q_IMPORT_PLUGIN(HelloStelModuleStelPluginInterface)
 #endif
@@ -222,6 +212,7 @@ StelApp::StelApp(QObject* parent)
 	, baseFontSize(13)
 	, renderBuffer(NULL)
 	, viewportEffect(NULL)
+	, flagShowDecimalDegrees(false)
 {
 	// Stat variables
 	nbDownloadedFiles=0;
@@ -492,6 +483,8 @@ void StelApp::init(QSettings* conf)
 	// Init actions.
 	actionMgr->addAction("actionShow_Night_Mode", N_("Display Options"), N_("Night mode"), this, "nightMode");
 
+	setFlagShowDecimalDegrees(confSettings->value("gui/flag_show_decimal_degrees", false).toBool());
+	
 	initialized = true;
 }
 
@@ -743,6 +736,12 @@ void StelApp::setVisionModeNight(bool b)
 		flagNightVision=b;
 		emit(visionNightModeChanged(b));
 	}
+}
+
+
+void StelApp::setFlagShowDecimalDegrees(bool b)
+{
+	flagShowDecimalDegrees = b;
 }
 
 // Update translations and font for sky everywhere in the program

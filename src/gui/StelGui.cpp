@@ -75,14 +75,6 @@
 #include <QColor>
 #include <QAction>
 
-StelGuiBase* StelStandardGuiPluginInterface::getStelGuiBase() const
-{
-	// Allow to load the resources when used as a static plugin
-	Q_INIT_RESOURCE(guiRes);
-
-	return new StelGui();
-}
-
 StelGui::StelGui()
 	: topLevelGraphicsWidget(NULL)
 	, skyGui(NULL)
@@ -108,7 +100,6 @@ StelGui::StelGui()
 	, flagShowNebulaBackgroundButton(false)
 	, btShowNebulaeBackground(NULL)
 	, initDone(false)
-	, flagShowDecimalDegrees(false)
 {
 	// QPixmapCache::setCacheLimit(30000); ?
 }
@@ -374,7 +365,6 @@ void StelGui::init(QGraphicsWidget *atopLevelGraphicsWidget)
 	// add the flip buttons if requested in the config
 	setFlagShowFlipButtons(conf->value("gui/flag_show_flip_buttons", false).toBool());
 	setFlagShowNebulaBackgroundButton(conf->value("gui/flag_show_nebulae_background_button", false).toBool());
-	setFlagShowDecimalDegrees(conf->value("gui/flag_show_decimal_degrees", false).toBool());
 
 	///////////////////////////////////////////////////////////////////////
 	// Create the main base widget
@@ -399,7 +389,7 @@ void StelGui::init(QGraphicsWidget *atopLevelGraphicsWidget)
 	// And this is for the focus...  apparently the focus indicator is the inverted value for Active/Button.
 	p.setColor(QPalette::Active, QPalette::Button, QColor(255,255,255));
 	QGuiApplication::setPalette(p);
-	
+
 	// FIXME: Workaround for set UI language when app is started --AW
 	updateI18n();
 
@@ -579,27 +569,27 @@ void StelGui::increaseScriptSpeed()
 }
 
 void StelGui::decreaseScriptSpeed()
-{	
+{
 	StelApp::getInstance().getScriptMgr().setScriptRate(StelApp::getInstance().getScriptMgr().getScriptRate()/2);
 }
 
 void StelGui::setRealScriptSpeed()
-{	
+{
 	StelApp::getInstance().getScriptMgr().setScriptRate(1);
 }
 
 void StelGui::stopScript()
-{	
+{
 	StelApp::getInstance().getScriptMgr().stopScript();
 }
 
 void StelGui::pauseScript()
-{	
+{
 	StelApp::getInstance().getScriptMgr().pauseScript();
 }
 
 void StelGui::resumeScript()
-{	
+{
 	StelApp::getInstance().getScriptMgr().resumeScript();
 }
 #endif
@@ -654,7 +644,12 @@ void StelGui::setFlagShowNebulaBackgroundButton(bool b)
 
 void StelGui::setFlagShowDecimalDegrees(bool b)
 {
-	flagShowDecimalDegrees=b;
+	StelApp::getInstance().setFlagShowDecimalDegrees(b);
+	if (searchDialog->visible())
+	{
+		// Update format of input fields if Search Dialog is open
+		searchDialog->populateCoordinateAxis();
+	}
 }
 
 void StelGui::setVisible(bool b)
@@ -733,11 +728,6 @@ bool StelGui::getFlagShowFlipButtons() const
 bool StelGui::getFlagShowNebulaBackgroundButton() const
 {
 	return flagShowNebulaBackgroundButton;
-}
-
-bool StelGui::getFlagShowDecimalDegrees() const
-{
-	return flagShowDecimalDegrees;
 }
 
 bool StelGui::initComplete(void) const

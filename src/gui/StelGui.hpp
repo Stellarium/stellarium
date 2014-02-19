@@ -89,8 +89,6 @@ public:
 	//! Get whether the button toggling nebulae background is visible
 	bool getFlagShowNebulaBackgroundButton() const;
 
-	bool getFlagShowDecimalDegrees() const;
-
 	//! returns true if the gui has completed init process.
 	bool initComplete(void) const;
 
@@ -199,22 +197,11 @@ private:
 
 	bool initDone;
 
-	bool flagShowDecimalDegrees;
-
 	QSizeF savedProgressBarSize;
 
 	// Currently used StelStyle
 	StelStyle currentStelStyle;
 };
 
-//! Allow to load the GUI as a static plugin
-class StelStandardGuiPluginInterface : public QObject, public StelGuiPluginInterface
-{
-	Q_OBJECT
-	Q_PLUGIN_METADATA(IID "stellarium.StelGuiPluginInterface/1.0")
-	Q_INTERFACES(StelGuiPluginInterface)
-public:
-	virtual class StelGuiBase* getStelGuiBase() const;
-};
 
 #endif // _STELGUI_HPP_

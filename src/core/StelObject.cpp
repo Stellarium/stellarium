@@ -28,7 +28,6 @@
 #include "RefractionExtinction.hpp"
 #include "StelLocation.hpp"
 #include "SolarSystem.hpp"
-#include "StelGui.hpp"
 
 #include <QRegExp>
 #include <QDebug>
@@ -109,7 +108,7 @@ float StelObject::getVMagnitudeWithExtinction(const StelCore* core) const
 QString StelObject::getPositionInfoString(const StelCore *core, const InfoStringGroup& flags) const
 {
 	bool withAtmosphere = core->getSkyDrawer()->getFlagHasAtmosphere();
-	bool withDecimalDegree = dynamic_cast<StelGui*>(StelApp::getInstance().getGui())->getFlagShowDecimalDegrees();
+	bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();;
 	double currentEpoch = core->getCurrentEpoch();
 	QString cepoch = qc_("on date", "coordinates for current epoch");
 	if (currentEpoch>0 && currentEpoch<9000.)
