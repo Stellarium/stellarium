@@ -151,8 +151,7 @@ void CompassMarks::draw(StelCore* core)
 	glDisable(GL_TEXTURE_2D);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glEnable(GL_BLEND);
-	// GL_LINE_SMOOTH is not exists for OpenGL ES 2.0
-	// glEnable(GL_LINE_SMOOTH);
+	glEnable(GL_LINE_SMOOTH);
 
 	for(int i=0; i<360; i++)
 	{
@@ -178,8 +177,7 @@ void CompassMarks::draw(StelCore* core)
 		painter.drawGreatCircleArc(pos, Vec3d(pos[0], pos[1], h), NULL);		
 		glEnable(GL_TEXTURE_2D);
 	}
-	// GL_LINE_SMOOTH is not exists for OpenGL ES 2.0
-	// glDisable(GL_LINE_SMOOTH);
+	glDisable(GL_LINE_SMOOTH);
 	glDisable(GL_BLEND);
 	glEnable(GL_TEXTURE_2D);
 
