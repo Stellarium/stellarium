@@ -92,11 +92,12 @@ AddOnWidget::AddOnWidget(QWidget* parent, int row, AddOn* addon)
 		{
 			foreach (QString texture, addon->getAllTextures())
 			{
-				QListWidgetItem* item = new QListWidgetItem(texture, ui->listWidget);
+				QListWidgetItem* item = new QListWidgetItem(QFileInfo(texture).fileName(), ui->listWidget);
+				item->setToolTip(texture);
 				item->setFlags(item->flags() | Qt::ItemIsUserCheckable);
 				QCheckBox* parentCheckbox = ((AddOnTableView*)parentWidget())->getCheckBox(m_iRow-1);
 				item->setCheckState(parentCheckbox->checkState());
-				if (addon->getInstalledFiles().filter(texture).size() > 0)
+				if (addon->getInstalledFiles().contains(texture))
 				{
 					item->setText(item->text() % " (installed)");
 					item->setTextColor(QColor("green"));
@@ -155,30 +156,28 @@ void AddOnWidget::slotItemChanged(QListWidgetItem *item)
 {
 	if (ui->listWidget->count())
 	{
+		QString filePath = item->toolTip();
+
 		if (item->checkState())
 		{
 			if (item->textColor() == QColor("green")) // installed
 			{
-				QString texture = item->text();
-				texture = texture.left(texture.indexOf(" (installed)"));
-				m_sSelectedFilesToRemove.append(texture);
+				m_sSelectedFilesToRemove.append(filePath);
 			}
 			else
 			{
-				m_sSelectedFilesToInstall.append(item->text());
+				m_sSelectedFilesToInstall.append(filePath);
 			}
 		}
 		else
 		{
 			if (item->textColor() == QColor("green")) // installed
 			{
-				QString texture = item->text();
-				texture = texture.left(texture.indexOf(" (installed)"));
-				m_sSelectedFilesToRemove.removeOne(texture);
+				m_sSelectedFilesToRemove.removeOne(filePath);
 			}
 			else
 			{
-				m_sSelectedFilesToInstall.removeOne(item->text());
+				m_sSelectedFilesToInstall.removeOne(filePath);
 			}
 		}
 
