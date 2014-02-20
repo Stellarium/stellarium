@@ -745,6 +745,14 @@ AddOnTableView::item:selected {
 	background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(177, 130, 43), stop: 1 rgb(210, 207, 133));
 }
 
+CheckedHeader::section {
+	background-color: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 rgb(68, 0, 0), stop: 0.5 rgb(56, 0, 0),stop: 0.6 rgb(47, 0, 0), stop:1 rgb(71, 0, 0));
+	color: rgb(178, 0, 0);
+	font-size: 12px;
+	padding-left: 4px;
+	border: 1px solid rgb(76, 0, 0);
+}
+
 QGroupBox#addOnDialogButtons, QGroupBox#addOnDialogCatalog {
 	padding: 0px;
 	padding-top: 0px;
