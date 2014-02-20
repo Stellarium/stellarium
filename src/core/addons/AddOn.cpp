@@ -54,7 +54,6 @@ AddOn::AddOn(const QString addOnId, const QVariantMap& map)
 
 	// early returns if the mandatory fields are not present
 	if (m_sTitle.isEmpty() || m_sChecksum.isEmpty()
-		|| m_sFirstStel.isEmpty() || m_sLastStel.isEmpty()
 		|| m_sDownloadURL.isEmpty() || m_sDownloadFilename.isEmpty()
 		|| m_sDownloadSize.isEmpty())
 	{

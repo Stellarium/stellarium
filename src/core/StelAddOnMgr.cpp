@@ -423,6 +423,10 @@ QString StelAddOnMgr::calculateMd5(QFile& file) const
 
 bool StelAddOnMgr::isCompatible(QString first, QString last)
 {
+	if (first.isEmpty() && last.isEmpty()) {
+		return true;
+	}
+
 	QStringList c = StelUtils::getApplicationVersion().split(".");
 	QStringList f = first.split(".");
 	QStringList l = last.split(".");
