@@ -22,6 +22,7 @@
 
 #include "Dialog.hpp"
 #include "LandscapeMgr.hpp"
+#include "StelAddOnMgr.hpp"
 #include "StelApp.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelLocaleMgr.hpp"
@@ -63,6 +64,7 @@ void AddRemoveLandscapesDialog::createDialogContent()
 	connect(ui->pushButtonMessageOK, SIGNAL(clicked()), this, SLOT(messageAcknowledged()));
 
 	connect(landscapeManager, SIGNAL(landscapesChanged()), this, SLOT(populateLists()));
+	connect(&StelApp::getInstance().getStelAddOnMgr(), SIGNAL(landscapesChanged()), this, SLOT(populateLists()));
 	connect(landscapeManager, SIGNAL(errorUnableToOpen(QString)), this, SLOT(messageUnableToOpen(QString)));
 	connect(landscapeManager, SIGNAL(errorNotArchive()), this, SLOT(messageNotArchive()));
 	connect(landscapeManager, SIGNAL(errorNotUnique(QString)), this, SLOT(messageNotUnique(QString)));

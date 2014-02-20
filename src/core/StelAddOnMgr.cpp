@@ -673,7 +673,11 @@ void StelAddOnMgr::updateInstalledAddonsJson(AddOn* addon)
 void StelAddOnMgr::slotDataUpdated(AddOn* addon)
 {
 	AddOn::Category cat = addon->getCategory();
-	if (cat == AddOn::SCRIPT)
+	if (cat == AddOn::LANDSCAPE)
+	{
+		emit (landscapesChanged());
+	}
+	else if (cat == AddOn::SCRIPT)
 	{
 		emit (scriptsChanged());
 	}

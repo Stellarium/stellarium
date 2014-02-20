@@ -81,6 +81,7 @@ signals:
 	void addOnMgrMsg(StelAddOnMgr::AddOnMgrMsg);
 	void dataUpdated(AddOn* addon);
 	void updateTableViews();
+	void landscapesChanged();
 	void scriptsChanged();
 	void skyCulturesChanged();
 
