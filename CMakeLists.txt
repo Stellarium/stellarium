@@ -338,8 +338,8 @@ IF(WIN32)
         SET(ISS_QT_MULTIMEDIA "; QtMultimedia don't used")
     ENDIF()
     GET_FILENAME_COMPONENT(QT5_LIBS ${QtCore_location} PATH)
-    # TODO: Enable ANGLE support
-    SET(ISS_ICU_LIBS "Source: \"${QT5_LIBS}/icu*.dll\"; DestDir: \"{app}\";")
+    SET(ISS_ANGLE_LIBS "; ANGLE support (libEGL.dll, libGLESv2.dll and d3dcompiler_*.dll)\nSource: \"${QT5_LIBS}/libEGL.dll\"; DestDir: \"{app}\";\nSource: \"${QT5_LIBS}/libGLESv2.dll\"; DestDir: \"{app}\";\nSource: \"${QT5_LIBS}/d3dcompiler_*.dll\"; DestDir: \"{app}\";")
+    SET(ISS_ICU_LIBS "; ICU support\nSource: \"${QT5_LIBS}/icu*.dll\"; DestDir: \"{app}\";")
     # Deploy related stuff
     SET(ISS_WINDOWS_PLUGIN "Source: \"${QT5_LIBS}/../plugins/platforms/qwindows.dll\"; DestDir: \"{app}/platforms/\";")
     SET(ISS_QML_DIR "Source: \"${QT5_LIBS}/../imports/Qt/labs/shaders/qmldir\"; DestDir: \"{app}/Qt/labs/shaders/\";")

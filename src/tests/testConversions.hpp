@@ -20,6 +20,8 @@
 #ifndef _TESTCONVERSIONS_HPP_
 #define _TESTCONVERSIONS_HPP_
 
+#include "config.h"
+
 #include <QObject>
 #include <QTest>
 
