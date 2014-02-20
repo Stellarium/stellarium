@@ -121,7 +121,6 @@ private:
 	QString m_sDownloadURL;
 	QString m_sDownloadFilename;
 	QString m_sDownloadSize;
-	QString m_sInstalledSize;
 	QString m_sChecksum;
 	QString m_sThumbnail;
 	QList<Authors> m_authors;

@@ -49,7 +49,6 @@ AddOn::AddOn(const QString addOnId, const QVariantMap& map)
 	m_sDownloadURL = map.value("download-url").toString();
 	m_sDownloadFilename = map.value("download-filename").toString();
 	m_sDownloadSize = map.value("download-size").toString();
-	m_sInstalledSize = map.value("installed-size").toString();
 	m_sChecksum = map.value("checksum").toString();
 	m_sThumbnail = map.value("thumbnail").toString();
 
