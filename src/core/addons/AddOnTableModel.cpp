@@ -38,7 +38,7 @@ AddOnTableModel::AddOnTableModel(AddOn::Category category, QHash<AddOn::Type, St
 		case AddOn::LANDSCAPE:
 		{
 			m_addons = addons.value(AddOn::Landscape);
-			m_iColumns << Title << Version;
+			m_iColumns << Title;
 			break;
 		}
 		case AddOn::LANGUAGEPACK:
