@@ -20,6 +20,8 @@
 #ifndef _STELSPHEREGEOMETRY_HPP_
 #define _STELSPHEREGEOMETRY_HPP_
 
+#include "config.h"
+
 #include "OctahedronPolygon.hpp"
 #include "StelVertexArray.hpp"
 #include "VecMath.hpp"
