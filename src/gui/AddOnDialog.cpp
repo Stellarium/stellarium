@@ -246,7 +246,7 @@ void AddOnDialog::downloadFinished()
 
 void AddOnDialog::installFromFile()
 {
-	QString filePath = QFileDialog::getOpenFileName(NULL, q_("Select the add-on"), QDir::homePath());
+	QString filePath = QFileDialog::getOpenFileName(NULL, q_("Select Add-On"), QDir::homePath(), "*.zip");
 	if (QFile(filePath).exists())
 	{
 		StelApp::getInstance().getStelAddOnMgr().installFromFile(filePath);
