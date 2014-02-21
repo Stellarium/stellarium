@@ -17,12 +17,14 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
+#include <QStringBuilder>
 #include <QtDebug>
 #include <QVariantMap>
 
 #include "AddOn.hpp"
 #include "StelAddOnMgr.hpp"
 #include "StelApp.hpp"
+#include "StelFileMgr.hpp"
 
 AddOn::AddOn(const QString addOnId, const QVariantMap& map)
 	: m_iAddOnId(addOnId)

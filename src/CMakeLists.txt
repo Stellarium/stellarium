@@ -242,19 +242,6 @@ SET(stellarium_lib_SRCS
 	core/addons/AddOnTableModel.hpp
 	core/addons/AddOnTableView.cpp
 	core/addons/AddOnTableView.hpp
-	core/addons/StelAddOn.hpp
-	core/addons/AOCatalog.cpp
-	core/addons/AOCatalog.hpp
-	core/addons/AOLandscape.cpp
-	core/addons/AOLandscape.hpp
-	core/addons/AOLanguagePack.cpp
-	core/addons/AOLanguagePack.hpp
-	core/addons/AOScript.cpp
-	core/addons/AOScript.hpp
-	core/addons/AOSkyCulture.cpp
-	core/addons/AOSkyCulture.hpp
-	core/addons/AOTexture.cpp
-	core/addons/AOTexture.hpp
 	core/addons/widget/CheckedHeader.cpp
 	core/addons/widget/CheckedHeader.hpp
 

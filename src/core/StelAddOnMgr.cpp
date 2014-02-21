@@ -24,6 +24,7 @@
 #include <QPixmap>
 #include <QSettings>
 #include <QStringBuilder>
+#include <qzipreader.h>
 
 #include "LandscapeMgr.hpp"
 #include "StelApp.hpp"
@@ -82,14 +83,6 @@ StelAddOnMgr::StelAddOnMgr()
 			   << QDir::toNativeSeparators(m_sAddonJsonPath);
 		restoreDefaultAddonJsonFile();
 	}
-
-	// Init sub-classes
-	m_pStelAddOns.insert(AddOn::CATALOG, new AOCatalog());
-	m_pStelAddOns.insert(AddOn::LANDSCAPE, new AOLandscape());
-	m_pStelAddOns.insert(AddOn::LANGUAGEPACK, new AOLanguagePack());
-	m_pStelAddOns.insert(AddOn::SCRIPT, new AOScript());
-	m_pStelAddOns.insert(AddOn::STARLORE, new AOSkyCulture());
-	m_pStelAddOns.insert(AddOn::TEXTURE, new AOTexture());
 
 	connect(this, SIGNAL(dataUpdated(AddOn*)), this, SLOT(slotDataUpdated(AddOn*)));
 

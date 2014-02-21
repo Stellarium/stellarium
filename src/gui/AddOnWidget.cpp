@@ -18,6 +18,7 @@
 */
 
 #include <QCheckBox>
+#include <QFileInfo>
 #include <QPainter>
 #include <QStringBuilder>
 

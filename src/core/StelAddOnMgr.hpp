@@ -24,13 +24,8 @@
 #include <QFile>
 #include <QNetworkReply>
 #include <QObject>
+#include <QSettings>
 
-#include "AOCatalog.hpp"
-#include "AOLandscape.hpp"
-#include "AOLanguagePack.hpp"
-#include "AOScript.hpp"
-#include "AOSkyCulture.hpp"
-#include "AOTexture.hpp"
 #include "addons/AddOn.hpp"
 
 #define ADDON_MANAGER_VERSION "0.0.2"
@@ -73,7 +68,6 @@ public:
 	int getUpdateFrequencyDays() { return m_iUpdateFrequencyDays; }
 	int getUpdateFrequencyHour() { return m_iUpdateFrequencyHour; }
 	QString getUrlForUpdates() { return m_sUrlUpdate; }
-	StelAddOn* getStelAddOnInstance(AddOn::Category c) { return m_pStelAddOns.value(c); }
 	QString getAddonJsonPath() { return m_sAddonJsonPath; }
 	void reloadAddonJsonFile();
 
@@ -102,9 +96,6 @@ private:
 	// addon directories
 	const QString m_sAddOnDir;
 	const QString m_sThumbnailDir;
-
-	// sub-classes
-	QHash<AddOn::Category, StelAddOn*> m_pStelAddOns;
 
 	QString m_sAddonJsonFilename;
 	QString m_sAddonJsonPath;

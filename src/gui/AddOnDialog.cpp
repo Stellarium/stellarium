@@ -27,6 +27,7 @@
 #include "StelApp.hpp"
 #include "StelGui.hpp"
 #include "StelTranslator.hpp"
+#include "StelUtils.hpp"
 #include "ui_addonDialog.h"
 
 AddOnDialog::AddOnDialog(QObject* parent)
