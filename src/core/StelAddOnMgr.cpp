@@ -586,7 +586,7 @@ void StelAddOnMgr::unzip(AddOn& addon, QStringList selectedFiles)
 	addon.setStatus(AddOn::FullyInstalled);
 	foreach(QZipReader::FileInfo info, reader.fileInfoList())
 	{
-		if (!info.isFile)
+		if (!info.isFile || info.filePath.contains("info.json"))
 		{
 			continue;
 		}
