@@ -242,8 +242,6 @@ SET(stellarium_lib_SRCS
 	core/addons/AddOnTableModel.hpp
 	core/addons/AddOnTableView.cpp
 	core/addons/AddOnTableView.hpp
-	core/addons/widget/CheckedHeader.cpp
-	core/addons/widget/CheckedHeader.hpp
 
 	StelMainView.hpp
 	StelMainView.cpp
@@ -334,6 +332,8 @@ IF(GUI_MODE STREQUAL "Standard")
 		gui/CustomDeltaTEquationDialog.cpp
 		gui/StelDialog.hpp
 		gui/StelDialog.cpp
+		gui/AddOnHeader.hpp
+		gui/AddOnHeader.cpp
 		gui/AddOnDialog.hpp
 		gui/AddOnDialog.cpp
 		gui/AddOnSettingsDialog.hpp

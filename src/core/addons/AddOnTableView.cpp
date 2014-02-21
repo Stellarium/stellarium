@@ -28,7 +28,7 @@
 
 AddOnTableView::AddOnTableView(QWidget* parent)
 	: QTableView(parent)
-	, m_pCheckedHeader(NULL)
+	, m_pAddOnHeader(NULL)
 	, m_pCheckboxGroup(new QButtonGroup(this))
 {
 	setAutoFillBackground(true);
@@ -94,12 +94,12 @@ void AddOnTableView::setModel(QAbstractItemModel* model)
 
 	// Add checkbox in the last column (header)
 	int lastColumn = model->columnCount() - 1; // checkbox column
-	m_pCheckedHeader = new CheckedHeader(lastColumn, Qt::Horizontal, this);
-	setHorizontalHeader(m_pCheckedHeader);
+	m_pAddOnHeader = new AddOnHeader(lastColumn, Qt::Horizontal, this);
+	setHorizontalHeader(m_pAddOnHeader);
 	horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 	horizontalHeader()->setSectionResizeMode(lastColumn, QHeaderView::ResizeToContents);
 	horizontalHeader()->setVisible(true);
-	connect(m_pCheckedHeader, SIGNAL(toggled(bool)),
+	connect(m_pAddOnHeader, SIGNAL(toggled(bool)),
 		this, SLOT(setAllChecked(bool)), Qt::UniqueConnection);
 
 	// Insert checkboxes to the checkboxgroup (rows)
@@ -264,7 +264,7 @@ void AddOnTableView::slotRowChecked(int pRow, bool checked)
 	emit (selectedAddOns(m_iSelectedAddOnsToInstall.size(), m_iSelectedAddOnsToRemove.size()));
 
 	// update checkbox header
-	if (m_pCheckedHeader)
+	if (m_pAddOnHeader)
 	{
 		int countChecked = 0;
 		foreach (QAbstractButton* cbox, m_pCheckboxGroup->buttons())
@@ -275,9 +275,9 @@ void AddOnTableView::slotRowChecked(int pRow, bool checked)
 
 		if (countChecked == model->rowCount() / 2) // all rows checked ?
 		{
-			m_pCheckedHeader->setChecked(true);
+			m_pAddOnHeader->setChecked(true);
 		} else if (countChecked == 0){
-			m_pCheckedHeader->setChecked(false);
+			m_pAddOnHeader->setChecked(false);
 		}
 	}
 }

@@ -17,16 +17,16 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#include "CheckedHeader.hpp"
+#include "AddOnHeader.hpp"
 
-CheckedHeader::CheckedHeader(int section, Qt::Orientation orientation, QWidget *parent)
+AddOnHeader::AddOnHeader(int section, Qt::Orientation orientation, QWidget *parent)
 	: QHeaderView(orientation, parent)
 	, m_iSection(section)
 	, m_bChecked(false)
 {
 }
 
-void CheckedHeader::paintSection(QPainter* painter, const QRect& rect, int logicalIndex) const
+void AddOnHeader::paintSection(QPainter* painter, const QRect& rect, int logicalIndex) const
 {
 	painter->save();
 	QHeaderView::paintSection(painter, rect, logicalIndex);
@@ -60,7 +60,7 @@ void CheckedHeader::paintSection(QPainter* painter, const QRect& rect, int logic
 	}
 }
 
-void CheckedHeader::mousePressEvent(QMouseEvent *event)
+void AddOnHeader::mousePressEvent(QMouseEvent *event)
 {
 	if (!isEnabled() || logicalIndexAt(event->pos()) != m_iSection)
 	{
@@ -70,7 +70,7 @@ void CheckedHeader::mousePressEvent(QMouseEvent *event)
 	setChecked(!m_bChecked);
 }
 
-void CheckedHeader::setChecked(bool checked)
+void AddOnHeader::setChecked(bool checked)
 {
 	if (!isEnabled() || checked == m_bChecked)
 	{

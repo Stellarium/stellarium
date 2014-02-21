@@ -17,18 +17,18 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _CHECKEDHEADER_HPP_
-#define _CHECKEDHEADER_HPP_
+#ifndef _ADDONHEADER_HPP_
+#define _ADDONHEADER_HPP_
 
 #include <QHeaderView>
 #include <QPainter>
 #include <QMouseEvent>
 
-class CheckedHeader : public QHeaderView
+class AddOnHeader : public QHeaderView
 {
 	Q_OBJECT
 public:
-	explicit CheckedHeader(int section, Qt::Orientation orientation, QWidget *parent = 0);
+	explicit AddOnHeader(int section, Qt::Orientation orientation, QWidget *parent = 0);
 
 	void setChecked(bool checked);
 
@@ -44,4 +44,4 @@ private:
 	bool m_bChecked;
 };
 
-#endif // _CHECKEDHEADER_HPP_
+#endif // _ADDONHEADER_HPP_
