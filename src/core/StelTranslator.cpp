@@ -89,12 +89,22 @@ void StelTranslator::init(const QString& fileName)
 //! Try to determine system language from system configuration
 void StelTranslator::initSystemLanguage()
 {
-	char* lang = getenv("LANGUAGE");
-	if (lang) systemLangName = lang;
+#ifdef _MSC_BUILD
+    char lang[128];
+    size_t retval;
+    errno_t err=getenv_s(&retval, lang, sizeof(lang), "LANGUAGE");
+#else
+    char* lang = getenv("LANGUAGE");
+#endif
+    if (lang) systemLangName = lang;
 	else
 	{
-		lang = getenv("LANG");
-		if (lang) systemLangName = lang;
+#ifdef _MSC_BUILD
+        err=getenv_s(&retval, lang, sizeof(lang), "LANG");
+#else
+        lang = getenv("LANG");
+#endif
+        if (lang) systemLangName = lang;
 		else
 		{
 #ifdef Q_OS_WIN

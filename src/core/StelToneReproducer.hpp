@@ -109,7 +109,7 @@ public:
 	//! @return the converted world luminance in cd/m^2
 	float reverseAdaptLuminance(float displayLuminance) const
 	{
-		return std::pow((float)(displayLuminance/term2),1.f/alphaWaOverAlphaDa)/(inputScale*M_PI*0.0001f);
+        return (float) std::pow((float)(displayLuminance/term2),1.f/alphaWaOverAlphaDa)/(inputScale*M_PI*0.0001f);
 	}
 	
 	//! Return adapted luminance from world to display with 1 corresponding to full display white
