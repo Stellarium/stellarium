@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-02-16 20:19+0700\n"
+"POT-Creation-Date: 2014-02-23 00:24+0700\n"
 "PO-Revision-Date: 2012-01-26 14:00+0000\n"
 "Last-Translator: Ravi Prakash Arya <vedicscience@hotmail.com>\n"
 "Language-Team: Hindi <hi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-02-17 05:27+0000\n"
-"X-Generator: Launchpad (build 16916)\n"
+"X-Launchpad-Export-Date: 2014-02-23 05:51+0000\n"
+"X-Generator: Launchpad (build 16926)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:106 src/core/modules/StarMgr.cpp:337
 #: src/core/modules/GridLinesMgr.cpp:680 src/core/modules/LandscapeMgr.cpp:343
@@ -3561,7 +3561,7 @@ msgstr ""
 msgid "&Paste"
 msgstr ""
 
-#: src/translations.h:547 src/ui_locationDialogGui.h:396
+#: src/translations.h:547 src/ui_locationDialogGui.h:402
 #: plugins/Oculars/src/ui_ocularDialog.h:1063
 #: plugins/Oculars/src/ui_ocularDialog.h:1072
 #: plugins/Oculars/src/ui_ocularDialog.h:1079
@@ -3644,65 +3644,71 @@ msgstr "ताजा करें"
 msgid "Location"
 msgstr "स्थान"
 
-#: src/ui_locationDialogGui.h:393
+#: src/ui_locationDialogGui.h:393 src/ui_locationDialogGui.h:396
+msgid ""
+"Standard list of locations is contains only English names (without "
+"diacritics!)"
+msgstr ""
+
+#: src/ui_locationDialogGui.h:399
 msgid "Current location information"
 msgstr "वर्तमान स्थान की जानकारी"
 
-#: src/ui_locationDialogGui.h:394
+#: src/ui_locationDialogGui.h:400
 msgid "Use as default"
 msgstr "प्रारंभ से इस्तेमाल करें"
 
-#: src/ui_locationDialogGui.h:395
+#: src/ui_locationDialogGui.h:401
 msgid "Return to default"
 msgstr ""
 
-#: src/ui_locationDialogGui.h:397
+#: src/ui_locationDialogGui.h:403
 msgid "Add to list"
 msgstr "सूचि में जोड़े"
 
-#: src/ui_locationDialogGui.h:398
+#: src/ui_locationDialogGui.h:404
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:141
 msgid "Latitude:"
 msgstr "शर:"
 
-#: src/ui_locationDialogGui.h:400 src/ui_locationDialogGui.h:404
+#: src/ui_locationDialogGui.h:406 src/ui_locationDialogGui.h:410
 msgid ""
 "You can enter values in decimal degrees, or using dms format, for example: "
 "+1d 12m 8s"
 msgstr ""
 "आपने आंकड़े दशमलव डीग्री में दें या दिन मी. से. इस स्वरुप में, उदा: +1d 12m 8s"
 
-#: src/ui_locationDialogGui.h:402
+#: src/ui_locationDialogGui.h:408
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:144
 msgid "Longitude:"
 msgstr "रेखांश:"
 
-#: src/ui_locationDialogGui.h:406
+#: src/ui_locationDialogGui.h:412
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:147
 msgid "Altitude:"
 msgstr "उन्नतांश:"
 
-#: src/ui_locationDialogGui.h:408
+#: src/ui_locationDialogGui.h:414
 msgid "Enter the altitude in meter"
 msgstr "उन्नतांश मीटर में भरें"
 
-#: src/ui_locationDialogGui.h:410
+#: src/ui_locationDialogGui.h:416
 msgid " m"
 msgstr " मी."
 
-#: src/ui_locationDialogGui.h:411
+#: src/ui_locationDialogGui.h:417
 msgid "Name/City:"
 msgstr "नाम/शहर:"
 
-#: src/ui_locationDialogGui.h:412
+#: src/ui_locationDialogGui.h:418
 msgid "New Location"
 msgstr "नया स्थल"
 
-#: src/ui_locationDialogGui.h:413
+#: src/ui_locationDialogGui.h:419
 msgid "Country:"
 msgstr "देश:"
 
-#: src/ui_locationDialogGui.h:414
+#: src/ui_locationDialogGui.h:420
 msgid "Planet:"
 msgstr "ग्रह:"
 

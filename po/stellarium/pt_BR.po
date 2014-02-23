@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-02-16 20:19+0700\n"
-"PO-Revision-Date: 2014-02-16 15:41+0000\n"
+"POT-Creation-Date: 2014-02-23 00:24+0700\n"
+"PO-Revision-Date: 2014-02-22 18:25+0000\n"
 "Last-Translator: Adriano Steffler <Unknown>\n"
 "Language-Team: Portuguese (Brazil) <pt_BR@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-02-17 05:35+0000\n"
-"X-Generator: Launchpad (build 16916)\n"
+"X-Launchpad-Export-Date: 2014-02-23 06:01+0000\n"
+"X-Generator: Launchpad (build 16926)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:106 src/core/modules/StarMgr.cpp:337
 #: src/core/modules/GridLinesMgr.cpp:680 src/core/modules/LandscapeMgr.cpp:343
@@ -3747,7 +3747,7 @@ msgstr "&Copiar"
 msgid "&Paste"
 msgstr "Co&lar"
 
-#: src/translations.h:547 src/ui_locationDialogGui.h:396
+#: src/translations.h:547 src/ui_locationDialogGui.h:402
 #: plugins/Oculars/src/ui_ocularDialog.h:1063
 #: plugins/Oculars/src/ui_ocularDialog.h:1072
 #: plugins/Oculars/src/ui_ocularDialog.h:1079
@@ -3830,28 +3830,35 @@ msgstr "Atualizar"
 msgid "Location"
 msgstr "Localização"
 
-#: src/ui_locationDialogGui.h:393
+#: src/ui_locationDialogGui.h:393 src/ui_locationDialogGui.h:396
+msgid ""
+"Standard list of locations is contains only English names (without "
+"diacritics!)"
+msgstr ""
+"A lista padrão de locais contém apenas nomes em inglês (sem diacríticos!)"
+
+#: src/ui_locationDialogGui.h:399
 msgid "Current location information"
 msgstr "Informações sobre a localização atual"
 
-#: src/ui_locationDialogGui.h:394
+#: src/ui_locationDialogGui.h:400
 msgid "Use as default"
 msgstr "Utilizar como padrão"
 
-#: src/ui_locationDialogGui.h:395
+#: src/ui_locationDialogGui.h:401
 msgid "Return to default"
 msgstr "Retornar para o padrão"
 
-#: src/ui_locationDialogGui.h:397
+#: src/ui_locationDialogGui.h:403
 msgid "Add to list"
 msgstr "Adicionar à lista"
 
-#: src/ui_locationDialogGui.h:398
+#: src/ui_locationDialogGui.h:404
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:141
 msgid "Latitude:"
 msgstr "Latitude:"
 
-#: src/ui_locationDialogGui.h:400 src/ui_locationDialogGui.h:404
+#: src/ui_locationDialogGui.h:406 src/ui_locationDialogGui.h:410
 msgid ""
 "You can enter values in decimal degrees, or using dms format, for example: "
 "+1d 12m 8s"
@@ -3859,37 +3866,37 @@ msgstr ""
 "Você pode inserir valores em graus decimais ou empregar o formato GMS, por "
 "exemplo: +1g 12m 8s"
 
-#: src/ui_locationDialogGui.h:402
+#: src/ui_locationDialogGui.h:408
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:144
 msgid "Longitude:"
 msgstr "Longitude:"
 
-#: src/ui_locationDialogGui.h:406
+#: src/ui_locationDialogGui.h:412
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:147
 msgid "Altitude:"
 msgstr "Altitude:"
 
-#: src/ui_locationDialogGui.h:408
+#: src/ui_locationDialogGui.h:414
 msgid "Enter the altitude in meter"
 msgstr "Insira a altitude em metros"
 
-#: src/ui_locationDialogGui.h:410
+#: src/ui_locationDialogGui.h:416
 msgid " m"
 msgstr " m"
 
-#: src/ui_locationDialogGui.h:411
+#: src/ui_locationDialogGui.h:417
 msgid "Name/City:"
 msgstr "Nome/Cidade:"
 
-#: src/ui_locationDialogGui.h:412
+#: src/ui_locationDialogGui.h:418
 msgid "New Location"
 msgstr "Nova localização"
 
-#: src/ui_locationDialogGui.h:413
+#: src/ui_locationDialogGui.h:419
 msgid "Country:"
 msgstr "País:"
 
-#: src/ui_locationDialogGui.h:414
+#: src/ui_locationDialogGui.h:420
 msgid "Planet:"
 msgstr "Planeta:"
 
@@ -4351,9 +4358,9 @@ msgid ""
 "Enable checking updates of Stellarium via Internet. Info for updates of "
 "stable versions you can look on the tab \"About\" of \"Help\" window."
 msgstr ""
-"Ativa a verificação de atualizações do Stellarium pela Internet. Informações "
-"sobre atualizações de versões estáveis podem ser encontradas na aba “Sobre” "
-"da janela “Ajuda”."
+"<p align=\"justify\">Esta opção ativa a verificação de atualizações do "
+"Stellarium pela Internet. Informações sobre atualizações de versões estáveis "
+"podem ser encontradas na aba “Sobre” da janela “Ajuda”."
 
 #: src/ui_configurationDialog.h:999
 msgid "Default options"
@@ -4434,7 +4441,7 @@ msgstr "Informações sucintas"
 
 #: src/ui_configurationDialog.h:1029
 msgid "Display user settings information"
-msgstr "Exibir informações de configurações do usuário"
+msgstr "Exibe informações de configurações do usuário"
 
 #: src/ui_configurationDialog.h:1031
 msgid "Customized"
