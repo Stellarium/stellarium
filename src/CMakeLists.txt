@@ -335,6 +335,8 @@ IF(GUI_MODE STREQUAL "Standard")
 		gui/AddOnHeader.cpp
 		gui/AddOnDialog.hpp
 		gui/AddOnDialog.cpp
+		gui/AddOnScanner.hpp
+		gui/AddOnScanner.cpp
 		gui/AddOnSettingsDialog.hpp
 		gui/AddOnSettingsDialog.cpp
 		gui/AddOnWidget.cpp
@@ -353,6 +355,7 @@ IF(GUI_MODE STREQUAL "Standard")
 	gui/CustomDeltaTEquationDialog.ui
 	gui/addRemoveLandscapesDialog.ui
 	gui/addonDialog.ui
+	gui/addonScanner.ui
 	gui/addonSettingsDialog.ui
 	gui/addonWidget.ui)
 

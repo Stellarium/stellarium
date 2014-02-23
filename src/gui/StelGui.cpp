@@ -53,6 +53,7 @@
 #endif
 
 #include "AddOnDialog.hpp"
+#include "AddOnScanner.hpp"
 #include "ConfigurationDialog.hpp"
 #include "DateTimeDialog.hpp"
 #include "HelpDialog.hpp"
@@ -84,6 +85,7 @@ StelGui::StelGui()
 	, buttonTimeForward(NULL)
 	, buttonGotoSelectedObject(NULL)
 	, addonDialog(0)
+	, addonScanner(0)
 	, locationDialog(0)
 	, helpDialog(0)
 	, dateTimeDialog(0)
@@ -113,6 +115,11 @@ StelGui::~StelGui()
 	{
 		delete addonDialog;
 		addonDialog = 0;
+	}
+	if (addonScanner)
+	{
+		delete addonScanner;
+		addonScanner = 0;
 	}
 	if (locationDialog)
 	{
@@ -160,6 +167,7 @@ void StelGui::init(QGraphicsWidget *atopLevelGraphicsWidget)
 
 	StelGuiBase::init(atopLevelGraphicsWidget);
 	addonDialog = new AddOnDialog(atopLevelGraphicsWidget);
+	addonScanner = new AddOnScanner(atopLevelGraphicsWidget);
 	skyGui = new SkyGui(atopLevelGraphicsWidget);
 	locationDialog = new LocationDialog(atopLevelGraphicsWidget);
 	helpDialog = new HelpDialog(atopLevelGraphicsWidget);
@@ -396,6 +404,14 @@ void StelGui::init(QGraphicsWidget *atopLevelGraphicsWidget)
 	StelApp *app = &StelApp::getInstance();
 	connect(app, SIGNAL(languageChanged()), this, SLOT(updateI18n()));
 	connect(app, SIGNAL(colorSchemeChanged(const QString&)), this, SLOT(setStelStyle(const QString&)));
+
+	// check if there are addons to be installed
+	QList<AddOn*> addons = app->getStelAddOnMgr().scanFilesInAddOnDir();
+	if (!addons.isEmpty()) // display AddOnScanner dialog
+	{
+		addonScanner->loadAddons(addons);
+	}
+
 	initDone = true;
 }
 

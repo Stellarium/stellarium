@@ -33,6 +33,7 @@ class StelButton;
 class BottomStelBar;
 class InfoPanel;
 class AddOnDialog;
+class AddOnScanner;
 class ConfigurationDialog;
 class DateTimeDialog;
 class HelpDialog;
@@ -177,6 +178,7 @@ private:
 	StelButton* buttonGotoSelectedObject;
 
 	AddOnDialog* addonDialog;
+	AddOnScanner* addonScanner;
 	LocationDialog* locationDialog;
 	HelpDialog* helpDialog;
 	DateTimeDialog* dateTimeDialog;
