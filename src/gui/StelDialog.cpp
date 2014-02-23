@@ -49,18 +49,20 @@ class CustomProxy : public QGraphicsProxyWidget
 
 		virtual bool event(QEvent* event)
 		{
-			switch (event->type())
+			if (StelApp::getInstance().getSettings()->value("gui/flag_use_window_transparency", true).toBool())
 			{
-				case QEvent::WindowDeactivate:
-					if (StelApp::getInstance().getSettings()->value("gui/flag_use_window_transparency", true).toBool())
+				switch (event->type())
+				{
+					case QEvent::WindowDeactivate:
 						widget()->setWindowOpacity(0.4);
-					break;
-				case QEvent::WindowActivate:
-				case QEvent::GrabMouse:
-					widget()->setWindowOpacity(0.9);
-					break;
-				default:
-					break;
+						break;
+					case QEvent::WindowActivate:
+					case QEvent::GrabMouse:
+						widget()->setWindowOpacity(0.9);
+						break;
+					default:
+						break;
+				}
 			}
 			return QGraphicsProxyWidget::event(event);
 		}
