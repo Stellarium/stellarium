@@ -16,6 +16,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
+#include "config.h"
+
 #include "StelUtils.hpp"
 #include "StelProjector.hpp"
 #include "StelPainter.hpp"
@@ -183,7 +185,8 @@ void AngleMeasure::draw(StelCore* core)
 		}
 
 		glDisable(GL_TEXTURE_2D);
-		glEnable(GL_LINE_SMOOTH);
+		// OpenGL ES 2.0 doesn't have GL_LINE_SMOOTH
+		// glEnable(GL_LINE_SMOOTH);
 		glEnable(GL_BLEND);
 		
 		// main line is a great circle		
