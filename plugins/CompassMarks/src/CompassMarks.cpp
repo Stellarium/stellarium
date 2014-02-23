@@ -16,6 +16,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
+#include "config.h"
+
 #include "VecMath.hpp"
 #include "StelProjector.hpp"
 #include "StelPainter.hpp"
@@ -151,7 +153,8 @@ void CompassMarks::draw(StelCore* core)
 	glDisable(GL_TEXTURE_2D);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glEnable(GL_BLEND);
-	glEnable(GL_LINE_SMOOTH);
+	// OpenGL ES 2.0 doesn't have GL_LINE_SMOOTH
+	// glEnable(GL_LINE_SMOOTH);
 
 	for(int i=0; i<360; i++)
 	{
@@ -177,7 +180,8 @@ void CompassMarks::draw(StelCore* core)
 		painter.drawGreatCircleArc(pos, Vec3d(pos[0], pos[1], h), NULL);		
 		glEnable(GL_TEXTURE_2D);
 	}
-	glDisable(GL_LINE_SMOOTH);
+	// OpenGL ES 2.0 doesn't have GL_LINE_SMOOTH
+	// glDisable(GL_LINE_SMOOTH);
 	glDisable(GL_BLEND);
 	glEnable(GL_TEXTURE_2D);
 
