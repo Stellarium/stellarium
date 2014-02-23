@@ -27,6 +27,7 @@
 #include <QDialog>
 #include <QGraphicsProxyWidget>
 #include <QStyleOptionGraphicsItem>
+#include <QSettings>
 
 class CustomProxy : public QGraphicsProxyWidget
 {
@@ -51,7 +52,8 @@ class CustomProxy : public QGraphicsProxyWidget
 			switch (event->type())
 			{
 				case QEvent::WindowDeactivate:
-					widget()->setWindowOpacity(0.4);
+					if (StelApp::getInstance().getSettings()->value("gui/flag_use_window_transparency", true).toBool())
+						widget()->setWindowOpacity(0.4);
 					break;
 				case QEvent::WindowActivate:
 				case QEvent::GrabMouse:
