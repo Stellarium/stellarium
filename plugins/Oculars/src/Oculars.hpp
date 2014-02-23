@@ -121,6 +121,9 @@ public slots:
 	void setFlagLimitMagnitude(const bool b);
 	bool getFlagLimitMagnitude(void) const;
 
+	void setFlagInitFovUsage(const bool b);
+	bool getFlagInitFovUsage(void) const;
+
 signals:
 	void selectedCCDChanged();
 	void selectedOcularChanged();
@@ -267,7 +270,9 @@ private:
 
 	//Reticle
 	StelTextureSP reticleTexture;
-	double actualFOV; //!< Holds the FOV of the ocular/tescope/lens cobination; what the screen is zoomed to.
+	double actualFOV;	//!< Holds the FOV of the ocular/tescope/lens cobination; what the screen is zoomed to.
+	double initialFOV;	//!< Holds the initial FOV
+	bool flagInitFOVUsage;	//!< Flag used to track if we use default initial FOV (value at the startup of planetarium).
 	double reticleRotation;
 };
 
