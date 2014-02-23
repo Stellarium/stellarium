@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-02-16 20:19+0700\n"
+"POT-Creation-Date: 2014-02-23 00:24+0700\n"
 "PO-Revision-Date: 2014-02-18 11:41+0000\n"
 "Last-Translator: abuyop <Unknown>\n"
 "Language-Team: Malay <ms@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-02-19 05:21+0000\n"
-"X-Generator: Launchpad (build 16916)\n"
+"X-Launchpad-Export-Date: 2014-02-23 05:55+0000\n"
+"X-Generator: Launchpad (build 16926)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:106 src/core/modules/StarMgr.cpp:337
 #: src/core/modules/GridLinesMgr.cpp:680 src/core/modules/LandscapeMgr.cpp:343
@@ -3716,7 +3716,7 @@ msgstr "Sa&lin"
 msgid "&Paste"
 msgstr "Tam&pal"
 
-#: src/translations.h:547 src/ui_locationDialogGui.h:396
+#: src/translations.h:547 src/ui_locationDialogGui.h:402
 #: plugins/Oculars/src/ui_ocularDialog.h:1063
 #: plugins/Oculars/src/ui_ocularDialog.h:1072
 #: plugins/Oculars/src/ui_ocularDialog.h:1079
@@ -3799,28 +3799,34 @@ msgstr "Segar Semula"
 msgid "Location"
 msgstr "Lokasi"
 
-#: src/ui_locationDialogGui.h:393
+#: src/ui_locationDialogGui.h:393 src/ui_locationDialogGui.h:396
+msgid ""
+"Standard list of locations is contains only English names (without "
+"diacritics!)"
+msgstr ""
+
+#: src/ui_locationDialogGui.h:399
 msgid "Current location information"
 msgstr "Maklumat lokasi semasa"
 
-#: src/ui_locationDialogGui.h:394
+#: src/ui_locationDialogGui.h:400
 msgid "Use as default"
 msgstr "Guna sebagai lalai"
 
-#: src/ui_locationDialogGui.h:395
+#: src/ui_locationDialogGui.h:401
 msgid "Return to default"
 msgstr "Kembali ke lalai"
 
-#: src/ui_locationDialogGui.h:397
+#: src/ui_locationDialogGui.h:403
 msgid "Add to list"
 msgstr "Tambah dalam senarai"
 
-#: src/ui_locationDialogGui.h:398
+#: src/ui_locationDialogGui.h:404
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:141
 msgid "Latitude:"
 msgstr "Latitud:"
 
-#: src/ui_locationDialogGui.h:400 src/ui_locationDialogGui.h:404
+#: src/ui_locationDialogGui.h:406 src/ui_locationDialogGui.h:410
 msgid ""
 "You can enter values in decimal degrees, or using dms format, for example: "
 "+1d 12m 8s"
@@ -3828,37 +3834,37 @@ msgstr ""
 "Anda boleh masukkan nilai dalam darjah perpuluhan, atau gunakan format, "
 "contoh: +1d 12m 8s"
 
-#: src/ui_locationDialogGui.h:402
+#: src/ui_locationDialogGui.h:408
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:144
 msgid "Longitude:"
 msgstr "Longitud:"
 
-#: src/ui_locationDialogGui.h:406
+#: src/ui_locationDialogGui.h:412
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:147
 msgid "Altitude:"
 msgstr "Altitud:"
 
-#: src/ui_locationDialogGui.h:408
+#: src/ui_locationDialogGui.h:414
 msgid "Enter the altitude in meter"
 msgstr "Masukkan altitud dalam meter"
 
-#: src/ui_locationDialogGui.h:410
+#: src/ui_locationDialogGui.h:416
 msgid " m"
 msgstr " m"
 
-#: src/ui_locationDialogGui.h:411
+#: src/ui_locationDialogGui.h:417
 msgid "Name/City:"
 msgstr "Nama/Bandar:"
 
-#: src/ui_locationDialogGui.h:412
+#: src/ui_locationDialogGui.h:418
 msgid "New Location"
 msgstr "Lokasi Baru"
 
-#: src/ui_locationDialogGui.h:413
+#: src/ui_locationDialogGui.h:419
 msgid "Country:"
 msgstr "Negara:"
 
-#: src/ui_locationDialogGui.h:414
+#: src/ui_locationDialogGui.h:420
 msgid "Planet:"
 msgstr "Planet:"
 
