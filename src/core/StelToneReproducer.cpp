@@ -68,7 +68,7 @@ void StelToneReproducer::setDisplayAdaptationLuminance(float _Lda)
 
 	// Update terms
 	alphaWaOverAlphaDa = alphaWa/alphaDa;
-    term2 = (float) (pow10((betaWa-betaDa)/alphaDa) / (M_PI*0.0001f));
+	term2 = (float) (pow10((betaWa-betaDa)/alphaDa) / (M_PI*0.0001f));
 	lnTerm2 = std::log(term2);
 	term2TimesOneOverMaxdLpOneOverGamma = std::pow(term2*oneOverMaxdL, oneOverGamma);
 }
@@ -87,7 +87,7 @@ void StelToneReproducer::setWorldAdaptationLuminance(float _Lwa)
 
 	// Update terms
 	alphaWaOverAlphaDa = alphaWa/alphaDa;
-    term2 = (float) (pow10((betaWa-betaDa)/alphaDa) / (M_PI*0.0001f));
+	term2 = (float) (pow10((betaWa-betaDa)/alphaDa) / (M_PI*0.0001f));
 	lnTerm2 = std::log(term2);
 	term2TimesOneOverMaxdLpOneOverGamma = std::pow(term2*oneOverMaxdL, oneOverGamma);
 }
@@ -108,8 +108,8 @@ void StelToneReproducer::xyYToRGB(float* color) const
 		// special case for s = 0 (x=0.25, y=0.25)
 		color[2] *= 0.5121445;
 		color[2] = std::pow((float)(color[2]*M_PI*0.0001f), alphaWaOverAlphaDa*oneOverGamma)* term2TimesOneOverMaxdLpOneOverGamma;
-        color[0] = 0.787077f*color[2];
-        color[1] = 0.9898434f*color[2];
+		color[0] = 0.787077f*color[2];
+		color[1] = 0.9898434f*color[2];
 		color[2] *= 1.9256125;
 		return;
 	}
