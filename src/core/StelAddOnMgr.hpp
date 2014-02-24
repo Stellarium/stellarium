@@ -56,7 +56,6 @@ public:
 	void installFromFile(AddOn* addon, const QStringList selectedFiles);
 	void installFromFile(const QString& filePath);
 	void removeAddOn(AddOn *addon, QStringList files);
-	bool isCompatible(QString first, QString last);
 	void setUpdateFrequencyDays(int days);
 	void setUpdateFrequencyHour(int hour);
 	void setLastUpdate(qint64 time);

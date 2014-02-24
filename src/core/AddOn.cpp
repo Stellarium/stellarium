@@ -25,6 +25,7 @@
 #include "StelAddOnMgr.hpp"
 #include "StelApp.hpp"
 #include "StelFileMgr.hpp"
+#include "StelUtils.hpp"
 
 AddOn::AddOn(const QString addOnId, const QVariantMap& map)
 	: m_iAddOnId(addOnId)
@@ -80,7 +81,7 @@ AddOn::AddOn(const QString addOnId, const QVariantMap& map)
 	}
 
 	// checking compatibility
-	if (!StelApp::getInstance().getStelAddOnMgr().isCompatible(m_sFirstStel, m_sLastStel))
+	if (!isCompatible(m_sFirstStel, m_sLastStel))
 	{
 		return;
 	}
@@ -103,6 +104,32 @@ AddOn::AddOn(const QString addOnId, const QVariantMap& map)
 
 AddOn::~AddOn()
 {
+}
+
+bool AddOn::isCompatible(QString first, QString last)
+{
+	if (first.isEmpty() && last.isEmpty()) {
+		return true;
+	}
+
+	QStringList c = StelUtils::getApplicationVersion().split(".");
+	QStringList f = first.split(".");
+	QStringList l = last.split(".");
+
+	if (c.size() < 3 || f.size() < 3 || l.size() < 3) {
+		return false; // invalid version
+	}
+
+	int currentVersion = QString(c.at(0) % "00" % c.at(1) % "0" % c.at(2)).toInt();
+	int firstVersion = QString(f.at(0) % "00" % f.at(1) % "0" % f.at(2)).toInt();
+	int lastVersion = QString(l.at(0) % "00" % l.at(1) % "0" % l.at(2)).toInt();
+
+	if (currentVersion < firstVersion || currentVersion > lastVersion)
+	{
+		return false; // out of bounds
+	}
+
+	return true;
 }
 
 AddOn::Type AddOn::fromStringToType(QString string)

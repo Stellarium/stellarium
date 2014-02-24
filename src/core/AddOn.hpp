@@ -131,6 +131,7 @@ private:
 	Category m_eCategory;
 	Status m_eStatus;
 
+	bool isCompatible(QString first, QString last);
 	Category getCategoryFromType(Type type);
 	Type fromStringToType(QString string);
 };
