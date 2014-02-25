@@ -51,6 +51,7 @@ public:
 	QHash<AddOn::Type, AddOnMap> getAddOnHash() { return m_addons; }
 	QString getAddOnDir() { return m_sAddOnDir; }
 	QString getThumbnailDir() { return m_sThumbnailDir; }
+	AddOn* getAddOnFromZip(QString filePath);
 	QList<AddOn*> scanFilesInAddOnDir();
 	void installAddOn(AddOn *addon, const QStringList selectedFiles);
 	void installFromFile(AddOn* addon, const QStringList selectedFiles);

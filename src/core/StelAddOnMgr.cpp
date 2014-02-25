@@ -402,6 +402,40 @@ void StelAddOnMgr::removeAddOn(AddOn* addon, QStringList selectedFiles)
 	emit (dataUpdated(addon));
 }
 
+AddOn* StelAddOnMgr::getAddOnFromZip(QString filePath)
+{
+	QZipReader reader(filePath);
+	if (reader.status() != QZipReader::NoError)
+	{
+		qWarning() << "StelAddOnMgr: Unable to open the ZIP archive:"
+			   << QDir::toNativeSeparators(filePath);
+		return NULL;
+	}
+
+	foreach(QZipReader::FileInfo info, reader.fileInfoList())
+	{
+		if (!info.isFile || !info.filePath.endsWith("info.json"))
+		{
+			continue;
+		}
+
+		QByteArray data = reader.fileData(info.filePath);
+		if (!data.isEmpty())
+		{
+			QJsonObject json(QJsonDocument::fromJson(data).object());
+			qDebug() << "Add-On Mgr: loading catalog file:"
+				 << QDir::toNativeSeparators(info.filePath);
+
+			QString addonid = json.keys().at(0);
+			QVariantMap attributes = json.value(addonid).toObject().toVariantMap();
+			QFile zipFile(filePath);
+			attributes.insert("checksum", calculateMd5(zipFile));
+			attributes.insert("download-size", zipFile.size()/1024.0);
+			return new AddOn(addonid, attributes);
+		}
+	}
+}
+
 QList<AddOn*> StelAddOnMgr::scanFilesInAddOnDir()
 {
 	// check if there is any zip archives in the ~/.stellarium/addon dir
@@ -411,35 +445,10 @@ QList<AddOn*> StelAddOnMgr::scanFilesInAddOnDir()
 	dir.setNameFilters(QStringList("*.zip"));
 	foreach (QFileInfo fileInfo, dir.entryInfoList())
 	{
-		QZipReader reader(fileInfo.absoluteFilePath());
-		if (reader.status() != QZipReader::NoError)
+		AddOn* addon = getAddOnFromZip(fileInfo.absoluteFilePath());
+		if (addon)	// get all addons, even the imcompatibles
 		{
-			qWarning() << "StelAddOnMgr: Unable to open the ZIP archive:"
-				   << QDir::toNativeSeparators(fileInfo.absoluteFilePath());
-			continue;
-		}
-
-		foreach(QZipReader::FileInfo info, reader.fileInfoList())
-		{
-			if (!info.isFile || !info.filePath.endsWith("info.json"))
-			{
-				continue;
-			}
-
-			QByteArray data = reader.fileData(info.filePath);
-			if (!data.isEmpty())
-			{
-				QJsonObject json(QJsonDocument::fromJson(data).object());
-				qDebug() << "Add-On Mgr: loading catalog file:"
-					 << QDir::toNativeSeparators(info.filePath);
-
-				QString addonid = json.keys().at(0);
-				QVariantMap attributes = json.value(addonid).toObject().toVariantMap();
-				QFile zipFile(fileInfo.absoluteFilePath());
-				attributes.insert("checksum", calculateMd5(zipFile));
-				attributes.insert("download-size", zipFile.size()/1024.0);
-				addons.append(new AddOn(addonid, attributes));
-			}
+			addons.append(addon);
 		}
 	}
 	return addons;
