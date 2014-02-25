@@ -434,6 +434,7 @@ AddOn* StelAddOnMgr::getAddOnFromZip(QString filePath)
 			return new AddOn(addonid, attributes);
 		}
 	}
+	return NULL;
 }
 
 QList<AddOn*> StelAddOnMgr::scanFilesInAddOnDir()
