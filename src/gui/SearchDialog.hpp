@@ -126,6 +126,10 @@ private slots:
 	// retranslate/recreate tab
 	void updateListTab();
 
+	void showContextMenu(const QPoint &pt);
+
+	void pasteAndGo();
+
 private:
 	class SimbadSearcher* simbadSearcher;
 	class SimbadLookupReply* simbadReply;
