@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-02-23 20:52+0700\n"
+"POT-Creation-Date: 2014-02-25 21:11+0700\n"
 "PO-Revision-Date: 2014-02-23 15:40+0000\n"
 "Last-Translator: Alexander Wolf <Unknown>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-02-24 05:37+0000\n"
-"X-Generator: Launchpad (build 16926)\n"
+"X-Launchpad-Export-Date: 2014-02-26 05:50+0000\n"
+"X-Generator: Launchpad (build 16935)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:106 src/core/modules/StarMgr.cpp:337
 #: src/core/modules/GridLinesMgr.cpp:680 src/core/modules/LandscapeMgr.cpp:343
@@ -162,8 +162,8 @@ msgstr "Планета: "
 #: src/core/modules/StarWrapper.cpp:50 src/core/modules/StarWrapper.cpp:170
 #: src/core/modules/StarWrapper.cpp:173
 #: plugins/Satellites/src/Satellite.cpp:242
-#: plugins/Supernovae/src/Supernova.cpp:122 plugins/Quasars/src/Quasar.cpp:91
-#: plugins/Pulsars/src/Pulsar.cpp:137 plugins/Exoplanets/src/Exoplanet.cpp:161
+#: plugins/Supernovae/src/Supernova.cpp:122 plugins/Quasars/src/Quasar.cpp:93
+#: plugins/Pulsars/src/Pulsar.cpp:139 plugins/Exoplanets/src/Exoplanet.cpp:163
 #, qt-format
 msgid "Type: <b>%1</b>"
 msgstr "Тип: <b>%1</b>"
@@ -171,8 +171,8 @@ msgstr "Тип: <b>%1</b>"
 #: src/core/modules/Nebula.cpp:107 src/core/modules/Planet.cpp:137
 #: src/core/modules/MinorPlanet.cpp:220 src/core/modules/Comet.cpp:157
 #: src/core/modules/StarWrapper.cpp:56 src/core/modules/StarWrapper.cpp:180
-#: plugins/Supernovae/src/Supernova.cpp:127 plugins/Novae/src/Nova.cpp:125
-#: plugins/Quasars/src/Quasar.cpp:97 plugins/Exoplanets/src/Exoplanet.cpp:170
+#: plugins/Supernovae/src/Supernova.cpp:127 plugins/Novae/src/Nova.cpp:127
+#: plugins/Quasars/src/Quasar.cpp:99 plugins/Exoplanets/src/Exoplanet.cpp:172
 #, qt-format
 msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>)"
 msgstr "Звёздная величина: <b>%1</b> (ослаблена до <b>%2</b>)"
@@ -180,8 +180,8 @@ msgstr "Звёздная величина: <b>%1</b> (ослаблена до <b
 #: src/core/modules/Nebula.cpp:110 src/core/modules/Planet.cpp:140
 #: src/core/modules/MinorPlanet.cpp:223 src/core/modules/Comet.cpp:160
 #: src/core/modules/StarWrapper.cpp:60 src/core/modules/StarWrapper.cpp:183
-#: plugins/Supernovae/src/Supernova.cpp:129 plugins/Novae/src/Nova.cpp:128
-#: plugins/Quasars/src/Quasar.cpp:102 plugins/Exoplanets/src/Exoplanet.cpp:175
+#: plugins/Supernovae/src/Supernova.cpp:129 plugins/Novae/src/Nova.cpp:130
+#: plugins/Quasars/src/Quasar.cpp:104 plugins/Exoplanets/src/Exoplanet.cpp:177
 #, qt-format
 msgid "Magnitude: <b>%1</b>"
 msgstr "Звёздная величина: <b>%1</b>"
@@ -233,7 +233,7 @@ msgstr "Объекты глубокого космоса"
 
 #: src/core/modules/Planet.cpp:143 src/core/modules/MinorPlanet.cpp:233
 #: src/core/modules/MinorPlanet.cpp:237 src/core/modules/Comet.cpp:169
-#: src/core/modules/StarWrapper.cpp:187 plugins/Quasars/src/Quasar.cpp:106
+#: src/core/modules/StarWrapper.cpp:187 plugins/Quasars/src/Quasar.cpp:108
 #, qt-format
 msgid "Absolute Magnitude: %1"
 msgstr "Абсолютная звёздная величина: %1"
@@ -349,7 +349,7 @@ msgid "star"
 msgstr "звезда"
 
 #: src/core/modules/StarWrapper.cpp:65 src/core/modules/StarWrapper.cpp:191
-#: plugins/Quasars/src/Quasar.cpp:112
+#: plugins/Quasars/src/Quasar.cpp:114
 #, qt-format
 msgid "Color Index (B-V): <b>%1</b>"
 msgstr "Показатель цвета (B-V): <b>%1</b>"
@@ -401,14 +401,14 @@ msgstr ""
 "%5)"
 
 #: src/core/modules/StarWrapper.cpp:216
-#: plugins/Supernovae/src/Supernova.cpp:140 plugins/Novae/src/Nova.cpp:138
-#: plugins/Exoplanets/src/Exoplanet.cpp:190
+#: plugins/Supernovae/src/Supernova.cpp:140 plugins/Novae/src/Nova.cpp:140
+#: plugins/Exoplanets/src/Exoplanet.cpp:192
 #, qt-format
 msgid "Distance: %1 Light Years"
 msgstr "Расстояние: %1 св. лет"
 
 #: src/core/modules/StarWrapper.cpp:221
-#: plugins/Exoplanets/src/Exoplanet.cpp:185
+#: plugins/Exoplanets/src/Exoplanet.cpp:187
 #, qt-format
 msgid "Spectral Type: %1"
 msgstr "Спектральный класс: %1"
@@ -1877,21 +1877,25 @@ msgstr "обычный вид"
 msgid "starchart"
 msgstr "звёздная карта"
 
-#: src/gui/SearchDialog.cpp:378
+#: src/gui/SearchDialog.cpp:380
 msgid "Simbad Lookup Error"
 msgstr "Ошибка поиска SIMBAD"
 
-#: src/gui/SearchDialog.cpp:386
+#: src/gui/SearchDialog.cpp:388
 msgid "Simbad Lookup"
 msgstr "Поиск SIMBAD"
 
-#: src/gui/SearchDialog.cpp:554
+#: src/gui/SearchDialog.cpp:556
 msgid "University of Strasbourg (France)"
 msgstr "Университет Страсбурга (Франция)"
 
-#: src/gui/SearchDialog.cpp:555
+#: src/gui/SearchDialog.cpp:557
 msgid "Harvard University (USA)"
 msgstr "Гарвардский университет (США)"
+
+#: src/gui/SearchDialog.cpp:616
+msgid "Paste && Search"
+msgstr ""
 
 #: src/gui/ShortcutsDialog.cpp:488
 msgid "Action"
@@ -1940,8 +1944,8 @@ msgstr "Полноэкранный режим"
 msgid "Stellarium %1"
 msgstr "Stellarium %1"
 
-#: src/translations.h:33 plugins/Exoplanets/src/Exoplanet.cpp:201
-#: plugins/Exoplanets/src/Exoplanet.cpp:205
+#: src/translations.h:33 plugins/Exoplanets/src/Exoplanet.cpp:203
+#: plugins/Exoplanets/src/Exoplanet.cpp:207
 msgid "Sun"
 msgstr "Солнце"
 
@@ -3863,169 +3867,169 @@ msgstr "Страна:"
 msgid "Planet:"
 msgstr "Планета:"
 
-#: src/ui_searchDialogGui.h:557
+#: src/ui_searchDialogGui.h:559
 msgid "Find Object"
 msgstr "Поиск объекта"
 
-#: src/ui_searchDialogGui.h:558
+#: src/ui_searchDialogGui.h:560
 msgid "Find Object or Position"
 msgstr "Найти объект или местоположение"
 
-#: src/ui_searchDialogGui.h:561 src/ui_searchDialogGui.h:565
+#: src/ui_searchDialogGui.h:563 src/ui_searchDialogGui.h:567
 msgid "Use tab key for select of found items"
 msgstr "Используйте клавишу табуляции для выбора найденных элементов"
 
-#: src/ui_searchDialogGui.h:570
+#: src/ui_searchDialogGui.h:572
 msgid "iota"
 msgstr "йота"
 
-#: src/ui_searchDialogGui.h:573
+#: src/ui_searchDialogGui.h:575
 msgid "alpha"
 msgstr "альфа"
 
-#: src/ui_searchDialogGui.h:576
+#: src/ui_searchDialogGui.h:578
 msgid "beta"
 msgstr "бета"
 
-#: src/ui_searchDialogGui.h:579
+#: src/ui_searchDialogGui.h:581
 msgid "gamma"
 msgstr "гамма"
 
-#: src/ui_searchDialogGui.h:582
+#: src/ui_searchDialogGui.h:584
 msgid "delta"
 msgstr "дельта"
 
-#: src/ui_searchDialogGui.h:585
+#: src/ui_searchDialogGui.h:587
 msgid "epsilon"
 msgstr "эпсилон"
 
-#: src/ui_searchDialogGui.h:588
+#: src/ui_searchDialogGui.h:590
 msgid "zeta"
 msgstr "дзета"
 
-#: src/ui_searchDialogGui.h:591
+#: src/ui_searchDialogGui.h:593
 msgid "eta"
 msgstr "эта"
 
-#: src/ui_searchDialogGui.h:594
+#: src/ui_searchDialogGui.h:596
 msgid "theta"
 msgstr "тэта"
 
-#: src/ui_searchDialogGui.h:597
+#: src/ui_searchDialogGui.h:599
 msgid "kappa"
 msgstr "каппа"
 
-#: src/ui_searchDialogGui.h:600
+#: src/ui_searchDialogGui.h:602
 msgid "lambda"
 msgstr "лямбда"
 
-#: src/ui_searchDialogGui.h:603
+#: src/ui_searchDialogGui.h:605
 msgid "mu"
 msgstr "мю"
 
-#: src/ui_searchDialogGui.h:606
+#: src/ui_searchDialogGui.h:608
 msgid "nu"
 msgstr "ню"
 
-#: src/ui_searchDialogGui.h:609
+#: src/ui_searchDialogGui.h:611
 msgid "xi"
 msgstr "кси"
 
-#: src/ui_searchDialogGui.h:612
+#: src/ui_searchDialogGui.h:614
 msgid "omicron"
 msgstr "омикрон"
 
-#: src/ui_searchDialogGui.h:615
+#: src/ui_searchDialogGui.h:617
 msgid "pi"
 msgstr "пи"
 
-#: src/ui_searchDialogGui.h:618
+#: src/ui_searchDialogGui.h:620
 msgid "rho"
 msgstr "ро"
 
-#: src/ui_searchDialogGui.h:621
+#: src/ui_searchDialogGui.h:623
 msgid "sigma"
 msgstr "сигма"
 
-#: src/ui_searchDialogGui.h:624
+#: src/ui_searchDialogGui.h:626
 msgid "tau"
 msgstr "тау"
 
-#: src/ui_searchDialogGui.h:627
+#: src/ui_searchDialogGui.h:629
 msgid "upsilon"
 msgstr "ипсилон"
 
-#: src/ui_searchDialogGui.h:630
+#: src/ui_searchDialogGui.h:632
 msgid "phi"
 msgstr "фи"
 
-#: src/ui_searchDialogGui.h:633
+#: src/ui_searchDialogGui.h:635
 msgid "chi"
 msgstr "хи"
 
-#: src/ui_searchDialogGui.h:636
+#: src/ui_searchDialogGui.h:638
 msgid "psi"
 msgstr "пси"
 
-#: src/ui_searchDialogGui.h:639
+#: src/ui_searchDialogGui.h:641
 msgid "omega"
 msgstr "омега"
 
-#: src/ui_searchDialogGui.h:641
+#: src/ui_searchDialogGui.h:643
 msgid "Greek letters for Bayer designations"
 msgstr "Греческие буквы для обозначений Байера"
 
-#: src/ui_searchDialogGui.h:642
+#: src/ui_searchDialogGui.h:644
 msgid "Object"
 msgstr "Объект"
 
-#: src/ui_searchDialogGui.h:643
+#: src/ui_searchDialogGui.h:645
 msgid "RA/Dec (J2000):"
 msgstr "Прям. восх./Склон.  (J2000.0)"
 
-#: src/ui_searchDialogGui.h:644
+#: src/ui_searchDialogGui.h:646
 msgid "Position"
 msgstr "Местоположение"
 
-#: src/ui_searchDialogGui.h:646
+#: src/ui_searchDialogGui.h:648
 msgid "Some objects may be found after activation respective plug-ins"
 msgstr ""
 "Некоторые объекты могут быть найдены после активации соответствующих плагинов"
 
-#: src/ui_searchDialogGui.h:648
+#: src/ui_searchDialogGui.h:650
 msgid "names in English"
 msgstr "английские названия"
 
-#: src/ui_searchDialogGui.h:649
+#: src/ui_searchDialogGui.h:651
 msgid "Search in list..."
 msgstr "Поиск по списку..."
 
-#: src/ui_searchDialogGui.h:650
+#: src/ui_searchDialogGui.h:652
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:525
 msgid "Lists"
 msgstr "Списки"
 
-#: src/ui_searchDialogGui.h:651
+#: src/ui_searchDialogGui.h:653
 msgid "On-line astronomical database SIMBAD"
 msgstr "Онлайновая астрономическая база данных SIMBAD"
 
-#: src/ui_searchDialogGui.h:652
+#: src/ui_searchDialogGui.h:654
 msgid "Extend search with SIMBAD"
 msgstr "Расширить поиск с помощью SIMBAD"
 
-#: src/ui_searchDialogGui.h:653
+#: src/ui_searchDialogGui.h:655
 msgid "Server:"
 msgstr "Сервер:"
 
-#: src/ui_searchDialogGui.h:654
+#: src/ui_searchDialogGui.h:656
 msgid "Search options"
 msgstr "Параметры поиска"
 
-#: src/ui_searchDialogGui.h:655
+#: src/ui_searchDialogGui.h:657
 msgid "Use autofill only from the beginning of words"
 msgstr "Использовать автозаполнения только от начала слов"
 
-#: src/ui_searchDialogGui.h:656 src/ui_viewDialog.h:1328
+#: src/ui_searchDialogGui.h:658 src/ui_viewDialog.h:1328
 #: src/ui_viewDialog.h:1334 src/ui_viewDialog.h:1336
 #: src/ui_configurationDialog.h:1156 src/ui_configurationDialog.h:1167
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:416
@@ -4872,38 +4876,38 @@ msgstr "Включая каталог:"
 msgid "..."
 msgstr "..."
 
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:57
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:131
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:59
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:133
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:189
 msgid "Angle Measure"
 msgstr "Угломер"
 
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:60
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:62
 msgid "Provides an angle measurement tool"
 msgstr "Этот плагин позволяет проводить угловые измерения"
 
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:131
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:133
 msgid "Angle measure"
 msgstr "Угломер"
 
 #. TRANSLATORS: instructions for using the AngleMeasure plugin.
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:354
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:357
 msgid "The Angle Measure is enabled:"
 msgstr "Угломер включён:"
 
 #. TRANSLATORS: instructions for using the AngleMeasure plugin.
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:356
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:359
 msgid "Drag with the left button to measure, left-click to clear."
 msgstr ""
 "Перетаскивание с левой кнопкой мыши включает имерение, щелчек - очистку."
 
 #. TRANSLATORS: instructions for using the AngleMeasure plugin.
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:358
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:361
 msgid "Right-clicking changes the end point only."
 msgstr "Щелчек правой кнопкой мыши изменяет конечную точку."
 
 #. TRANSLATORS: PA is abbreviation for phrase "Position Angle"
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:360
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:363
 msgid "PA="
 msgstr "ПУ="
 
@@ -5081,16 +5085,16 @@ msgctxt "tab in plugin windows"
 msgid "About"
 msgstr "О плагине"
 
-#: plugins/CompassMarks/src/CompassMarks.cpp:55
-#: plugins/CompassMarks/src/CompassMarks.cpp:123
+#: plugins/CompassMarks/src/CompassMarks.cpp:57
+#: plugins/CompassMarks/src/CompassMarks.cpp:125
 msgid "Compass Marks"
 msgstr "Компас"
 
-#: plugins/CompassMarks/src/CompassMarks.cpp:58
+#: plugins/CompassMarks/src/CompassMarks.cpp:60
 msgid "Displays compass bearing marks along the horizon"
 msgstr "Этот плагин позволяет показывать румбы компаса у горизонта"
 
-#: plugins/CompassMarks/src/CompassMarks.cpp:123
+#: plugins/CompassMarks/src/CompassMarks.cpp:125
 msgid "Compass marks"
 msgstr "Компас"
 
@@ -6767,62 +6771,62 @@ msgstr ""
 "изменения времени и даты, отображаемых в нижней панели."
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:242
-#: plugins/Supernovae/src/Supernovae.cpp:710 plugins/Novae/src/Novae.cpp:705
+#: plugins/Supernovae/src/Supernovae.cpp:710 plugins/Novae/src/Novae.cpp:707
 msgid "January"
 msgstr "января"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:243
-#: plugins/Supernovae/src/Supernovae.cpp:710 plugins/Novae/src/Novae.cpp:705
+#: plugins/Supernovae/src/Supernovae.cpp:710 plugins/Novae/src/Novae.cpp:707
 msgid "February"
 msgstr "февраля"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:244
-#: plugins/Supernovae/src/Supernovae.cpp:710 plugins/Novae/src/Novae.cpp:705
+#: plugins/Supernovae/src/Supernovae.cpp:710 plugins/Novae/src/Novae.cpp:707
 msgid "March"
 msgstr "марта"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:245
-#: plugins/Supernovae/src/Supernovae.cpp:710 plugins/Novae/src/Novae.cpp:705
+#: plugins/Supernovae/src/Supernovae.cpp:710 plugins/Novae/src/Novae.cpp:707
 msgid "April"
 msgstr "апреля"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:246
-#: plugins/Supernovae/src/Supernovae.cpp:710 plugins/Novae/src/Novae.cpp:705
+#: plugins/Supernovae/src/Supernovae.cpp:710 plugins/Novae/src/Novae.cpp:707
 msgid "May"
 msgstr "мая"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:247
-#: plugins/Supernovae/src/Supernovae.cpp:710 plugins/Novae/src/Novae.cpp:705
+#: plugins/Supernovae/src/Supernovae.cpp:710 plugins/Novae/src/Novae.cpp:707
 msgid "June"
 msgstr "июня"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:248
-#: plugins/Supernovae/src/Supernovae.cpp:710 plugins/Novae/src/Novae.cpp:705
+#: plugins/Supernovae/src/Supernovae.cpp:710 plugins/Novae/src/Novae.cpp:707
 msgid "July"
 msgstr "июля"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:249
-#: plugins/Supernovae/src/Supernovae.cpp:710 plugins/Novae/src/Novae.cpp:705
+#: plugins/Supernovae/src/Supernovae.cpp:710 plugins/Novae/src/Novae.cpp:707
 msgid "August"
 msgstr "августа"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:250
-#: plugins/Supernovae/src/Supernovae.cpp:710 plugins/Novae/src/Novae.cpp:705
+#: plugins/Supernovae/src/Supernovae.cpp:710 plugins/Novae/src/Novae.cpp:707
 msgid "September"
 msgstr "сентября"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:251
-#: plugins/Supernovae/src/Supernovae.cpp:710 plugins/Novae/src/Novae.cpp:705
+#: plugins/Supernovae/src/Supernovae.cpp:710 plugins/Novae/src/Novae.cpp:707
 msgid "October"
 msgstr "октября"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:252
-#: plugins/Supernovae/src/Supernovae.cpp:710 plugins/Novae/src/Novae.cpp:705
+#: plugins/Supernovae/src/Supernovae.cpp:710 plugins/Novae/src/Novae.cpp:707
 msgid "November"
 msgstr "ноября"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:253
-#: plugins/Supernovae/src/Supernovae.cpp:710 plugins/Novae/src/Novae.cpp:705
+#: plugins/Supernovae/src/Supernovae.cpp:710 plugins/Novae/src/Novae.cpp:707
 msgid "December"
 msgstr "декабря"
 
@@ -7430,7 +7434,7 @@ msgstr "сверхновая"
 msgid "Type of supernova: %1"
 msgstr "Тип сверхновой: %1"
 
-#: plugins/Supernovae/src/Supernova.cpp:138 plugins/Novae/src/Nova.cpp:136
+#: plugins/Supernovae/src/Supernova.cpp:138 plugins/Novae/src/Nova.cpp:138
 #, qt-format
 msgid "Maximum brightness: %1"
 msgstr "Максимум яркости: %1"
@@ -7557,25 +7561,25 @@ msgstr "Частота обновлений (в днях):"
 msgid "[next update info]"
 msgstr "[следующее обновление]"
 
-#: plugins/Novae/src/Novae.cpp:72 plugins/Novae/src/Novae.cpp:136
+#: plugins/Novae/src/Novae.cpp:74 plugins/Novae/src/Novae.cpp:138
 msgid "Bright Novae"
 msgstr "Яркие новые"
 
-#: plugins/Novae/src/Novae.cpp:75 plugins/Novae/src/gui/NovaeDialog.cpp:111
+#: plugins/Novae/src/Novae.cpp:77 plugins/Novae/src/gui/NovaeDialog.cpp:111
 msgid "A plugin that shows some bright novae in the Milky Way galaxy."
 msgstr ""
 "Плагин, который показывает несколько ярких новых звезд в Млечном Пути."
 
-#: plugins/Novae/src/Novae.cpp:136
+#: plugins/Novae/src/Novae.cpp:138
 msgid "Bright Novae configuration window"
 msgstr "Окно настройки плагина \"Яркие новые\""
 
-#: plugins/Novae/src/Nova.cpp:120 plugins/Pulsars/src/Pulsar.cpp:148
+#: plugins/Novae/src/Nova.cpp:122 plugins/Pulsars/src/Pulsar.cpp:150
 #, qt-format
 msgid "Type: <b>%1</b> (%2)"
 msgstr "Тип: <b>%1</b> (%2)"
 
-#: plugins/Novae/src/Nova.cpp:120
+#: plugins/Novae/src/Nova.cpp:122
 msgid "nova"
 msgstr "новая"
 
@@ -7648,12 +7652,12 @@ msgstr "Настройка ярких новых"
 msgid "Bright Novae Plug-in Configuration"
 msgstr "Настройка плагина Яркие новые"
 
-#: plugins/Quasars/src/Quasars.cpp:71 plugins/Quasars/src/Quasars.cpp:158
-#: plugins/Quasars/src/Quasars.cpp:159
+#: plugins/Quasars/src/Quasars.cpp:73 plugins/Quasars/src/Quasars.cpp:160
+#: plugins/Quasars/src/Quasars.cpp:161
 msgid "Quasars"
 msgstr "Квазары"
 
-#: plugins/Quasars/src/Quasars.cpp:74
+#: plugins/Quasars/src/Quasars.cpp:76
 msgid ""
 "A plugin that shows some quasars brighter than 16 visual magnitude. A "
 "catalogue of quasars compiled from 'Quasars and Active Galactic Nuclei' "
@@ -7663,19 +7667,19 @@ msgstr ""
 "квазаров составлен из 13-й редакции каталога \"Квазары и активные ядра "
 "галактик'' (Верон и др.; 2010) =2010A&A...518A..10V"
 
-#: plugins/Quasars/src/Quasars.cpp:158
+#: plugins/Quasars/src/Quasars.cpp:160
 msgid "Show quasars"
 msgstr "Показать квазары"
 
-#: plugins/Quasars/src/Quasars.cpp:159
+#: plugins/Quasars/src/Quasars.cpp:161
 msgid "Quasars configuration window"
 msgstr "Окно настройки плагина \"Квазары\""
 
-#: plugins/Quasars/src/Quasar.cpp:91
+#: plugins/Quasars/src/Quasar.cpp:93
 msgid "quasar"
 msgstr "квазар"
 
-#: plugins/Quasars/src/Quasar.cpp:122
+#: plugins/Quasars/src/Quasar.cpp:124
 #, qt-format
 msgid "Z (redshift): %1"
 msgstr "Z (красное смещение): %1"
@@ -7748,12 +7752,12 @@ msgstr "Включить отображение при запуске"
 msgid "Show quasars button on toolbar"
 msgstr "Показать кнопку квазаров на панели инструментов"
 
-#: plugins/Pulsars/src/Pulsars.cpp:71 plugins/Pulsars/src/Pulsars.cpp:158
-#: plugins/Pulsars/src/Pulsars.cpp:159
+#: plugins/Pulsars/src/Pulsars.cpp:73 plugins/Pulsars/src/Pulsars.cpp:160
+#: plugins/Pulsars/src/Pulsars.cpp:161
 msgid "Pulsars"
 msgstr "Пульсары"
 
-#: plugins/Pulsars/src/Pulsars.cpp:74
+#: plugins/Pulsars/src/Pulsars.cpp:76
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:120
 msgid ""
 "This plugin plots the position of various pulsars, with object information "
@@ -7762,143 +7766,143 @@ msgstr ""
 "Этот плагин отмечает на карте местоположение различных пульсаров с "
 "информацией о каждом из них."
 
-#: plugins/Pulsars/src/Pulsars.cpp:158
+#: plugins/Pulsars/src/Pulsars.cpp:160
 msgid "Show pulsars"
 msgstr "Показать пульсары"
 
-#: plugins/Pulsars/src/Pulsars.cpp:159
+#: plugins/Pulsars/src/Pulsars.cpp:161
 msgid "Pulsars configuration window"
 msgstr "Окно настройки плагина \"Пульсары\""
 
-#: plugins/Pulsars/src/Pulsar.cpp:137
+#: plugins/Pulsars/src/Pulsar.cpp:139
 msgid "pulsar"
 msgstr "пульсар"
 
-#: plugins/Pulsars/src/Pulsar.cpp:142
+#: plugins/Pulsars/src/Pulsar.cpp:144
 msgid "has one registered glitch"
 msgstr "имеет один зарегистрированный сбой"
 
 #. TRANSLATORS: Full phrase is "Has X registered glitches", where X is number
-#: plugins/Pulsars/src/Pulsar.cpp:146
+#: plugins/Pulsars/src/Pulsar.cpp:148
 #, qt-format
 msgid "has %1 registered glitches"
 msgstr "имеет %1 зарегистрированных сбоя"
 
-#: plugins/Pulsars/src/Pulsar.cpp:148
+#: plugins/Pulsars/src/Pulsar.cpp:150
 msgid "pulsar with glitches"
 msgstr "пульсар со сбоями"
 
 #. TRANSLATORS: Unit of measure for period - seconds
-#: plugins/Pulsars/src/Pulsar.cpp:160
+#: plugins/Pulsars/src/Pulsar.cpp:162
 #, qt-format
 msgid "Barycentric period: %1 s"
 msgstr "Барицентрический период: %1 с"
 
-#: plugins/Pulsars/src/Pulsar.cpp:164
+#: plugins/Pulsars/src/Pulsar.cpp:166
 #, qt-format
 msgid "Time derivative of barycentric period: %1"
 msgstr "Производная барицентрического периода по времени: %1"
 
-#: plugins/Pulsars/src/Pulsar.cpp:169
+#: plugins/Pulsars/src/Pulsar.cpp:171
 msgid "Dispersion measure:"
 msgstr "Дисперсия измерения:"
 
 #. TRANSLATORS: Unit of measure for distance - centimeters
-#: plugins/Pulsars/src/Pulsar.cpp:172
+#: plugins/Pulsars/src/Pulsar.cpp:174
 msgid "cm"
 msgstr "см"
 
 #. TRANSLATORS: Unit of measure for distance - parsecs
-#: plugins/Pulsars/src/Pulsar.cpp:175
+#: plugins/Pulsars/src/Pulsar.cpp:177
 msgid "pc"
 msgstr "пк"
 
-#: plugins/Pulsars/src/Pulsar.cpp:181
+#: plugins/Pulsars/src/Pulsar.cpp:183
 #, qt-format
 msgid "Spin down energy loss rate: %1 ergs/s"
 msgstr "Скорость потери энергии осевого вращения: %1 эрг/с"
 
-#: plugins/Pulsars/src/Pulsar.cpp:185
+#: plugins/Pulsars/src/Pulsar.cpp:187
 #, qt-format
 msgid "Binary period of pulsar: %1 days"
 msgstr "Сидерический период обращения пульсара: %1 дней"
 
-#: plugins/Pulsars/src/Pulsar.cpp:189
+#: plugins/Pulsars/src/Pulsar.cpp:191
 #, qt-format
 msgid "Eccentricity: %1"
 msgstr "Эксцентриситет: %1"
 
 #. TRANSLATORS: Unit of measure for annual parallax - milliarcseconds
-#: plugins/Pulsars/src/Pulsar.cpp:194
+#: plugins/Pulsars/src/Pulsar.cpp:196
 #, qt-format
 msgid "Annual parallax: %1 mas"
 msgstr "Годичный параллакс: %1 угловых мс"
 
-#: plugins/Pulsars/src/Pulsar.cpp:198
+#: plugins/Pulsars/src/Pulsar.cpp:200
 #, qt-format
 msgid "Distance based on electron density model: %1 kpc (%2 ly)"
 msgstr ""
 "Расстояние на основе электронной модели плотности: %1 кпк (%2 св. лет)"
 
-#: plugins/Pulsars/src/Pulsar.cpp:202
+#: plugins/Pulsars/src/Pulsar.cpp:204
 #, qt-format
 msgid "Profile width at 50% of peak: %1 ms"
 msgstr "Ширина профиля 50% от пика: %1 мс"
 
 #. TRANSLATORS: Full phrase is "Time averaged flux density at XXXMHz"
-#: plugins/Pulsars/src/Pulsar.cpp:208 plugins/Pulsars/src/Pulsar.cpp:220
-#: plugins/Pulsars/src/Pulsar.cpp:232
+#: plugins/Pulsars/src/Pulsar.cpp:210 plugins/Pulsars/src/Pulsar.cpp:222
+#: plugins/Pulsars/src/Pulsar.cpp:234
 msgid "Time averaged flux density at"
 msgstr "Среднее время плотности потока на"
 
 #. TRANSLATORS: Unit of measurement of frequency
-#: plugins/Pulsars/src/Pulsar.cpp:211 plugins/Pulsars/src/Pulsar.cpp:223
-#: plugins/Pulsars/src/Pulsar.cpp:235
+#: plugins/Pulsars/src/Pulsar.cpp:213 plugins/Pulsars/src/Pulsar.cpp:225
+#: plugins/Pulsars/src/Pulsar.cpp:237
 msgid "MHz"
 msgstr "МГц"
 
 #. TRANSLATORS: mJy is milliJansky(10-26W/m2/Hz)
-#: plugins/Pulsars/src/Pulsar.cpp:214 plugins/Pulsars/src/Pulsar.cpp:226
-#: plugins/Pulsars/src/Pulsar.cpp:238
+#: plugins/Pulsars/src/Pulsar.cpp:216 plugins/Pulsars/src/Pulsar.cpp:228
+#: plugins/Pulsars/src/Pulsar.cpp:240
 msgid "mJy"
 msgstr "мЯн"
 
-#: plugins/Pulsars/src/Pulsar.cpp:242
+#: plugins/Pulsars/src/Pulsar.cpp:244
 #, qt-format
 msgid "Notes: %1"
 msgstr "Примечания: %1"
 
-#: plugins/Pulsars/src/Pulsar.cpp:309
+#: plugins/Pulsars/src/Pulsar.cpp:311
 msgid ""
 "anomalous X-ray pulsar or soft gamma-ray repeater with detected pulsations"
 msgstr ""
 "аномальный рентгеновский пульсар или мягкий гамма-репитер с выявленными "
 "пульсациями"
 
-#: plugins/Pulsars/src/Pulsar.cpp:314
+#: plugins/Pulsars/src/Pulsar.cpp:316
 msgid "has one or more binary companions"
 msgstr "двойной или кратный пульсар"
 
-#: plugins/Pulsars/src/Pulsar.cpp:319
+#: plugins/Pulsars/src/Pulsar.cpp:321
 msgid "with pulsed emission from radio to infrared or higher frequencies"
 msgstr ""
 "с импульсами излучения от радио до инфракрасного диапазона или более высоких "
 "частот"
 
-#: plugins/Pulsars/src/Pulsar.cpp:324
+#: plugins/Pulsars/src/Pulsar.cpp:326
 msgid "with pulsed emission only at infrared or higher frequencies"
 msgstr ""
 "с импульсами излучения в инфракрасном диапазоне или более высоких частот"
 
-#: plugins/Pulsars/src/Pulsar.cpp:329
+#: plugins/Pulsars/src/Pulsar.cpp:331
 msgid "with pulsed emission in the radio band"
 msgstr "с импульсами излучения в радиодиапазоне"
 
-#: plugins/Pulsars/src/Pulsar.cpp:334
+#: plugins/Pulsars/src/Pulsar.cpp:336
 msgid "with intermittently pulsed radio emission"
 msgstr "со сбоями в периоде в радиодиапазоне"
 
-#: plugins/Pulsars/src/Pulsar.cpp:339
+#: plugins/Pulsars/src/Pulsar.cpp:341
 msgid ""
 "isolated neutron star with pulsed thermal X-ray emission but no detectable "
 "radio emission"
@@ -7986,13 +7990,13 @@ msgstr "Показать кнопку пульсаров на панели ин�
 msgid "Use separate color for pulsars with glitches"
 msgstr "Использовать отдельный цвет для пульсаров со сбоями"
 
-#: plugins/Exoplanets/src/Exoplanets.cpp:73
-#: plugins/Exoplanets/src/Exoplanets.cpp:162
-#: plugins/Exoplanets/src/Exoplanets.cpp:163
+#: plugins/Exoplanets/src/Exoplanets.cpp:75
+#: plugins/Exoplanets/src/Exoplanets.cpp:164
+#: plugins/Exoplanets/src/Exoplanets.cpp:165
 msgid "Exoplanets"
 msgstr "Экзопланеты"
 
-#: plugins/Exoplanets/src/Exoplanets.cpp:76
+#: plugins/Exoplanets/src/Exoplanets.cpp:78
 msgid ""
 "This plugin plots the position of stars with exoplanets. Exoplanets data is "
 "derived from the 'Extrasolar Planets Encyclopaedia' at exoplanet.eu"
@@ -8001,89 +8005,89 @@ msgstr ""
 "экзопланет основан на данных из \"Энциклопедии внесолнечных планет\" с "
 "exoplanet.eu"
 
-#: plugins/Exoplanets/src/Exoplanets.cpp:162
+#: plugins/Exoplanets/src/Exoplanets.cpp:164
 msgid "Show exoplanets"
 msgstr "Показать экзопланеты"
 
-#: plugins/Exoplanets/src/Exoplanets.cpp:163
+#: plugins/Exoplanets/src/Exoplanets.cpp:165
 msgid "Exoplanets configuration window"
 msgstr "Окно настройки плагина \"Экзопланеты\""
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:161
+#: plugins/Exoplanets/src/Exoplanet.cpp:163
 msgid "planetary system"
 msgstr "планетная система"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:197
+#: plugins/Exoplanets/src/Exoplanet.cpp:199
 msgid "Metallicity"
 msgstr "Металличность"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:201
-#: plugins/Exoplanets/src/Exoplanet.cpp:215
+#: plugins/Exoplanets/src/Exoplanet.cpp:203
+#: plugins/Exoplanets/src/Exoplanet.cpp:217
 msgid "Mass"
 msgstr "Масса"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:205
-#: plugins/Exoplanets/src/Exoplanet.cpp:216
+#: plugins/Exoplanets/src/Exoplanet.cpp:207
+#: plugins/Exoplanets/src/Exoplanet.cpp:218
 msgid "Radius"
 msgstr "Радиус"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:209
+#: plugins/Exoplanets/src/Exoplanet.cpp:211
 #, qt-format
 msgid "Effective temperature: %1 K"
 msgstr "Эффективная температура: %1 K"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:213
+#: plugins/Exoplanets/src/Exoplanet.cpp:215
 msgid "Exoplanet"
 msgstr "Экзопланета"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:214
+#: plugins/Exoplanets/src/Exoplanet.cpp:216
 msgid "Period"
 msgstr "Период"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:214
+#: plugins/Exoplanets/src/Exoplanet.cpp:216
 msgid "days"
 msgstr "дней"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:215
-#: plugins/Exoplanets/src/Exoplanet.cpp:216
+#: plugins/Exoplanets/src/Exoplanet.cpp:217
+#: plugins/Exoplanets/src/Exoplanet.cpp:218
 msgid "Jup"
 msgstr "Юп."
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:217
+#: plugins/Exoplanets/src/Exoplanet.cpp:219
 msgid "Semi-Major Axis"
 msgstr "Большая полуось орбиты"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:217
+#: plugins/Exoplanets/src/Exoplanet.cpp:219
 msgid "AU"
 msgstr "а. е."
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:218
+#: plugins/Exoplanets/src/Exoplanet.cpp:220
 msgid "Eccentricity"
 msgstr "Эксцентриситет"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:219
+#: plugins/Exoplanets/src/Exoplanet.cpp:221
 msgid "Inclination"
 msgstr "Наклон орбиты"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:220
+#: plugins/Exoplanets/src/Exoplanet.cpp:222
 msgid "Angle Distance"
 msgstr "Угловое расстояние"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:221
+#: plugins/Exoplanets/src/Exoplanet.cpp:223
 msgid "Discovered year"
 msgstr "Год открытия"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:222
+#: plugins/Exoplanets/src/Exoplanet.cpp:224
 msgid "Habitable class"
 msgstr "Класс жизнепригодности"
 
 #. TRANSLATORS: Full phrase is "Mean Surface Temperature"
-#: plugins/Exoplanets/src/Exoplanet.cpp:224
+#: plugins/Exoplanets/src/Exoplanet.cpp:226
 msgid "Mean surface temp."
 msgstr "Ср. температура поверхности"
 
 #. TRANSLATORS: ESI = Earth Similarity Index
-#: plugins/Exoplanets/src/Exoplanet.cpp:226
+#: plugins/Exoplanets/src/Exoplanet.cpp:228
 msgid "ESI"
 msgstr "ИПЗ"
 
