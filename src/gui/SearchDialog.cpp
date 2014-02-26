@@ -613,7 +613,7 @@ void SearchDialog::showContextMenu(const QPoint &pt)
 {
 	QMenu *menu = ui->lineEditSearchSkyObject->createStandardContextMenu();
 	menu->addSeparator();
-	menu->addAction(q_("Paste && Search"), this, SLOT(pasteAndGo()));
+	menu->addAction(q_("Paste and Search"), this, SLOT(pasteAndGo()));
 	menu->exec(ui->lineEditSearchSkyObject->mapToGlobal(pt));
 	delete menu;
 }
