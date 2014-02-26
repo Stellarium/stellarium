@@ -266,80 +266,67 @@ void StelAddOnMgr::downloadThumbnailFinished()
 	downloadNextThumbnail();
 }
 
-void StelAddOnMgr::installAddOn(AddOn* addon, const QStringList selectedFiles)
+void StelAddOnMgr::installAddOn(AddOn* addon, const QStringList selectedFiles, bool tryDownload)
 {
-	if (!addon || !addon->isValid() || m_downloadQueue.contains(addon))
+	if (m_downloadQueue.contains(addon))
 	{
 		return;
 	}
-
-	installFromFile(addon, selectedFiles);
-	if (addon->getStatus() == AddOn::NotInstalled || addon->getStatus() == AddOn::Corrupted)
+	else if (!addon || !addon->isValid())
 	{
-		// something goes wrong (file not found OR corrupt),
-		// try downloading it...
-		addon->setStatus(AddOn::Installing);
-		emit (dataUpdated(addon));
-		m_downloadQueue.insert(addon, selectedFiles);
-		downloadNextAddOn();
+		qWarning() << "Add-On Mgr : Unable to install"
+			   << QDir::toNativeSeparators(addon->getDownloadFilepath())
+			   << "AddOn is not compatible!";
+		return;
 	}
-}
 
-void StelAddOnMgr::installFromFile(AddOn* addon, const QStringList selectedFiles)
-{
 	QFile file(addon->getDownloadFilepath());
 	// checking if we have this file in the add-on dir (local disk)
 	if (!file.exists())
 	{
 		addon->setStatus(AddOn::NotInstalled);
-		return;
 	}
-
 	// only accept zip archive
-	if (!addon->getDownloadFilepath().endsWith(".zip"))
+	else if (!addon->getDownloadFilepath().endsWith(".zip"))
 	{
 		qWarning() << "Add-On Mgr: Error" << addon->getAddOnId()
 			   << "The file found is not a .zip archive";
 		addon->setStatus(AddOn::InvalidFormat);
-		return;
 	}
-
 	// checking integrity
-	if (addon->getChecksum() == calculateMd5(file))
-	{
-		// installing files
-		unzip(*addon, selectedFiles);
-	}
-	else
+	else if (addon->getChecksum() != calculateMd5(file))
 	{
 		addon->setStatus(AddOn::Corrupted);
 		qWarning() << "Add-On Mgr: Error: File "
-			   << addon->getDownloadFilepath()
+			   << QDir::toNativeSeparators(addon->getDownloadFilepath())
 			   << " is corrupt, MD5 mismatch!";
 	}
+	// installing files
+	else
+	{
+		addon->setStatus(AddOn::Installing);
+		emit (dataUpdated(addon));
+		unzip(*addon, selectedFiles);
+	}
 
+	// require restart
 	if ((addon->getStatus() == AddOn::PartiallyInstalled || addon->getStatus() == AddOn::FullyInstalled) &&
 		(addon->getCategory() == AddOn::CATALOG || addon->getCategory() == AddOn::LANGUAGEPACK
 			|| addon->getCategory() == AddOn::TEXTURE))
 	{
-		emit (addOnMgrMsg(RestartRequired));
 		addon->setStatus(AddOn::Restart);
+		emit (addOnMgrMsg(RestartRequired));
+	}
+	// something goes wrong (file not found OR corrupt).
+	// if applicable, try downloading it...
+	else if (tryDownload && (addon->getStatus() == AddOn::NotInstalled || addon->getStatus() == AddOn::Corrupted))
+	{
+		addon->setStatus(AddOn::Installing);
+		m_downloadQueue.insert(addon, selectedFiles);
+		downloadNextAddOn();
 	}
 
 	emit (dataUpdated(addon));
-}
-
-void StelAddOnMgr::installFromFile(const QString& filePath)
-{
-	QFile file(filePath);
-	AddOn* addon = m_addonsByMd5.value(calculateMd5(file));
-	if (!addon || !addon->isValid())
-	{
-		qWarning() << "Add-On InstallFromFile : Unable to install"
-			   << filePath << "File is not compatible!";
-		return;
-	}
-	installFromFile(addon, QStringList());
 }
 
 void StelAddOnMgr::removeAddOn(AddOn* addon, QStringList selectedFiles)
@@ -541,7 +528,7 @@ void StelAddOnMgr::downloadAddOnFinished()
 			return;
 		}
 		finishCurrentDownload();
-		installFromFile(m_downloadingAddOn, m_downloadQueue.value(m_downloadingAddOn));
+		installAddOn(m_downloadingAddOn, m_downloadQueue.value(m_downloadingAddOn), false);
 	}
 	else
 	{

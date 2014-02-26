@@ -53,9 +53,7 @@ public:
 	QString getThumbnailDir() { return m_sThumbnailDir; }
 	AddOn* getAddOnFromZip(QString filePath);
 	QList<AddOn*> scanFilesInAddOnDir();
-	void installAddOn(AddOn *addon, const QStringList selectedFiles);
-	void installFromFile(AddOn* addon, const QStringList selectedFiles);
-	void installFromFile(const QString& filePath);
+	void installAddOn(AddOn *addon, const QStringList selectedFiles, bool tryDownload = true);
 	void removeAddOn(AddOn *addon, QStringList files);
 	void setUpdateFrequencyDays(int days);
 	void setUpdateFrequencyHour(int hour);
