@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Thai for stellarium 0.8.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-02-23 20:52+0700\n"
+"POT-Creation-Date: 2014-02-25 21:11+0700\n"
 "PO-Revision-Date: 2014-02-11 01:29+0000\n"
 "Last-Translator: Worachate Boonplod <Unknown>\n"
 "Language-Team: MicKi Alone <Need24Get@msn.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-02-24 05:40+0000\n"
-"X-Generator: Launchpad (build 16926)\n"
+"X-Launchpad-Export-Date: 2014-02-26 05:54+0000\n"
+"X-Generator: Launchpad (build 16935)\n"
 "X-Poedit-Country: THAILAND\n"
 "X-Poedit-Language: Thai\n"
 
@@ -164,8 +164,8 @@ msgstr "ดาวเคราะห์: "
 #: src/core/modules/StarWrapper.cpp:50 src/core/modules/StarWrapper.cpp:170
 #: src/core/modules/StarWrapper.cpp:173
 #: plugins/Satellites/src/Satellite.cpp:242
-#: plugins/Supernovae/src/Supernova.cpp:122 plugins/Quasars/src/Quasar.cpp:91
-#: plugins/Pulsars/src/Pulsar.cpp:137 plugins/Exoplanets/src/Exoplanet.cpp:161
+#: plugins/Supernovae/src/Supernova.cpp:122 plugins/Quasars/src/Quasar.cpp:93
+#: plugins/Pulsars/src/Pulsar.cpp:139 plugins/Exoplanets/src/Exoplanet.cpp:163
 #, qt-format
 msgid "Type: <b>%1</b>"
 msgstr "ชนิด: <b>%1</b>"
@@ -173,8 +173,8 @@ msgstr "ชนิด: <b>%1</b>"
 #: src/core/modules/Nebula.cpp:107 src/core/modules/Planet.cpp:137
 #: src/core/modules/MinorPlanet.cpp:220 src/core/modules/Comet.cpp:157
 #: src/core/modules/StarWrapper.cpp:56 src/core/modules/StarWrapper.cpp:180
-#: plugins/Supernovae/src/Supernova.cpp:127 plugins/Novae/src/Nova.cpp:125
-#: plugins/Quasars/src/Quasar.cpp:97 plugins/Exoplanets/src/Exoplanet.cpp:170
+#: plugins/Supernovae/src/Supernova.cpp:127 plugins/Novae/src/Nova.cpp:127
+#: plugins/Quasars/src/Quasar.cpp:99 plugins/Exoplanets/src/Exoplanet.cpp:172
 #, qt-format
 msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>)"
 msgstr "โชติมาตร: <b>%1</b> (จางลงไปที่: <b>%2</b>)"
@@ -182,8 +182,8 @@ msgstr "โชติมาตร: <b>%1</b> (จางลงไปที่: <b>
 #: src/core/modules/Nebula.cpp:110 src/core/modules/Planet.cpp:140
 #: src/core/modules/MinorPlanet.cpp:223 src/core/modules/Comet.cpp:160
 #: src/core/modules/StarWrapper.cpp:60 src/core/modules/StarWrapper.cpp:183
-#: plugins/Supernovae/src/Supernova.cpp:129 plugins/Novae/src/Nova.cpp:128
-#: plugins/Quasars/src/Quasar.cpp:102 plugins/Exoplanets/src/Exoplanet.cpp:175
+#: plugins/Supernovae/src/Supernova.cpp:129 plugins/Novae/src/Nova.cpp:130
+#: plugins/Quasars/src/Quasar.cpp:104 plugins/Exoplanets/src/Exoplanet.cpp:177
 #, qt-format
 msgid "Magnitude: <b>%1</b>"
 msgstr "โชติมาตร: <b>%1</b>"
@@ -235,7 +235,7 @@ msgstr "วัตถุท้องฟ้าห้วงลึก"
 
 #: src/core/modules/Planet.cpp:143 src/core/modules/MinorPlanet.cpp:233
 #: src/core/modules/MinorPlanet.cpp:237 src/core/modules/Comet.cpp:169
-#: src/core/modules/StarWrapper.cpp:187 plugins/Quasars/src/Quasar.cpp:106
+#: src/core/modules/StarWrapper.cpp:187 plugins/Quasars/src/Quasar.cpp:108
 #, qt-format
 msgid "Absolute Magnitude: %1"
 msgstr "โชติมาตรสัมบูรณ์: %1"
@@ -351,7 +351,7 @@ msgid "star"
 msgstr "ดาวฤกษ์"
 
 #: src/core/modules/StarWrapper.cpp:65 src/core/modules/StarWrapper.cpp:191
-#: plugins/Quasars/src/Quasar.cpp:112
+#: plugins/Quasars/src/Quasar.cpp:114
 #, qt-format
 msgid "Color Index (B-V): <b>%1</b>"
 msgstr "ดัชนีสี (B-V): <b>%1</b>"
@@ -400,14 +400,14 @@ msgid "Magnitude range: <b>%1</b>%2<b>%3/%4</b> (Photometric system: %5)"
 msgstr "พิสัยโชติมาตร: <b>%1</b>%2<b>%3/%4</b> (ระบบการวัดแสง: %5)"
 
 #: src/core/modules/StarWrapper.cpp:216
-#: plugins/Supernovae/src/Supernova.cpp:140 plugins/Novae/src/Nova.cpp:138
-#: plugins/Exoplanets/src/Exoplanet.cpp:190
+#: plugins/Supernovae/src/Supernova.cpp:140 plugins/Novae/src/Nova.cpp:140
+#: plugins/Exoplanets/src/Exoplanet.cpp:192
 #, qt-format
 msgid "Distance: %1 Light Years"
 msgstr "ระยะทาง: %1 ปีแสง"
 
 #: src/core/modules/StarWrapper.cpp:221
-#: plugins/Exoplanets/src/Exoplanet.cpp:185
+#: plugins/Exoplanets/src/Exoplanet.cpp:187
 #, qt-format
 msgid "Spectral Type: %1"
 msgstr "ชนิดสเปกตรัม: %1"
@@ -1832,21 +1832,25 @@ msgstr "ธรรมชาติ"
 msgid "starchart"
 msgstr "แผนที่ดาว"
 
-#: src/gui/SearchDialog.cpp:378
+#: src/gui/SearchDialog.cpp:380
 msgid "Simbad Lookup Error"
 msgstr "เกิดข้อผิดพลาดในการค้นหาบน Simbad"
 
-#: src/gui/SearchDialog.cpp:386
+#: src/gui/SearchDialog.cpp:388
 msgid "Simbad Lookup"
 msgstr "การค้นหาบน Simbad"
 
-#: src/gui/SearchDialog.cpp:554
+#: src/gui/SearchDialog.cpp:556
 msgid "University of Strasbourg (France)"
 msgstr "มหาวิทยาลัยสทราซบูร์ (ฝรั่งเศส)"
 
-#: src/gui/SearchDialog.cpp:555
+#: src/gui/SearchDialog.cpp:557
 msgid "Harvard University (USA)"
 msgstr "มหาวิทยาลัยฮาร์วาร์ด (สหรัฐอเมริกา)"
+
+#: src/gui/SearchDialog.cpp:616
+msgid "Paste && Search"
+msgstr ""
 
 #: src/gui/ShortcutsDialog.cpp:488
 msgid "Action"
@@ -1895,8 +1899,8 @@ msgstr "โหมดเต็มจอ"
 msgid "Stellarium %1"
 msgstr "Stellarium %1"
 
-#: src/translations.h:33 plugins/Exoplanets/src/Exoplanet.cpp:201
-#: plugins/Exoplanets/src/Exoplanet.cpp:205
+#: src/translations.h:33 plugins/Exoplanets/src/Exoplanet.cpp:203
+#: plugins/Exoplanets/src/Exoplanet.cpp:207
 msgid "Sun"
 msgstr "ดวงอาทิตย์"
 
@@ -3820,168 +3824,168 @@ msgstr "ประเทศ:"
 msgid "Planet:"
 msgstr "ดาวเคราะห์:"
 
-#: src/ui_searchDialogGui.h:557
+#: src/ui_searchDialogGui.h:559
 msgid "Find Object"
 msgstr "ค้นหาวัตถุท้องฟ้า"
 
-#: src/ui_searchDialogGui.h:558
+#: src/ui_searchDialogGui.h:560
 msgid "Find Object or Position"
 msgstr "ค้นหาวัตถุหรือตำแหน่ง"
 
-#: src/ui_searchDialogGui.h:561 src/ui_searchDialogGui.h:565
+#: src/ui_searchDialogGui.h:563 src/ui_searchDialogGui.h:567
 msgid "Use tab key for select of found items"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:570
+#: src/ui_searchDialogGui.h:572
 msgid "iota"
 msgstr "ไอโอตา"
 
-#: src/ui_searchDialogGui.h:573
+#: src/ui_searchDialogGui.h:575
 msgid "alpha"
 msgstr "แอลฟา"
 
-#: src/ui_searchDialogGui.h:576
+#: src/ui_searchDialogGui.h:578
 msgid "beta"
 msgstr "บีตา"
 
-#: src/ui_searchDialogGui.h:579
+#: src/ui_searchDialogGui.h:581
 msgid "gamma"
 msgstr "แกมมา"
 
-#: src/ui_searchDialogGui.h:582
+#: src/ui_searchDialogGui.h:584
 msgid "delta"
 msgstr "เดลตา"
 
-#: src/ui_searchDialogGui.h:585
+#: src/ui_searchDialogGui.h:587
 msgid "epsilon"
 msgstr "เอปไซลอน"
 
-#: src/ui_searchDialogGui.h:588
+#: src/ui_searchDialogGui.h:590
 msgid "zeta"
 msgstr "ซีตา"
 
-#: src/ui_searchDialogGui.h:591
+#: src/ui_searchDialogGui.h:593
 msgid "eta"
 msgstr "อีตา"
 
-#: src/ui_searchDialogGui.h:594
+#: src/ui_searchDialogGui.h:596
 msgid "theta"
 msgstr "ทีตา"
 
-#: src/ui_searchDialogGui.h:597
+#: src/ui_searchDialogGui.h:599
 msgid "kappa"
 msgstr "แคปปา"
 
-#: src/ui_searchDialogGui.h:600
+#: src/ui_searchDialogGui.h:602
 msgid "lambda"
 msgstr "แลมบ์ดา"
 
-#: src/ui_searchDialogGui.h:603
+#: src/ui_searchDialogGui.h:605
 msgid "mu"
 msgstr "มิว"
 
-#: src/ui_searchDialogGui.h:606
+#: src/ui_searchDialogGui.h:608
 msgid "nu"
 msgstr "นิว"
 
-#: src/ui_searchDialogGui.h:609
+#: src/ui_searchDialogGui.h:611
 msgid "xi"
 msgstr "ไซ"
 
-#: src/ui_searchDialogGui.h:612
+#: src/ui_searchDialogGui.h:614
 msgid "omicron"
 msgstr "โอไมครอน"
 
-#: src/ui_searchDialogGui.h:615
+#: src/ui_searchDialogGui.h:617
 msgid "pi"
 msgstr "พาย"
 
-#: src/ui_searchDialogGui.h:618
+#: src/ui_searchDialogGui.h:620
 msgid "rho"
 msgstr "โร"
 
-#: src/ui_searchDialogGui.h:621
+#: src/ui_searchDialogGui.h:623
 msgid "sigma"
 msgstr "ซิกมา"
 
-#: src/ui_searchDialogGui.h:624
+#: src/ui_searchDialogGui.h:626
 msgid "tau"
 msgstr "เทา"
 
-#: src/ui_searchDialogGui.h:627
+#: src/ui_searchDialogGui.h:629
 msgid "upsilon"
 msgstr "อิปไซลอน"
 
-#: src/ui_searchDialogGui.h:630
+#: src/ui_searchDialogGui.h:632
 msgid "phi"
 msgstr "ฟาย"
 
-#: src/ui_searchDialogGui.h:633
+#: src/ui_searchDialogGui.h:635
 msgid "chi"
 msgstr "ไค"
 
-#: src/ui_searchDialogGui.h:636
+#: src/ui_searchDialogGui.h:638
 msgid "psi"
 msgstr "ซาย"
 
-#: src/ui_searchDialogGui.h:639
+#: src/ui_searchDialogGui.h:641
 msgid "omega"
 msgstr "โอเมกา"
 
-#: src/ui_searchDialogGui.h:641
+#: src/ui_searchDialogGui.h:643
 msgid "Greek letters for Bayer designations"
 msgstr "อักษรกรีกสำหรับระบบของเบเยอร์"
 
-#: src/ui_searchDialogGui.h:642
+#: src/ui_searchDialogGui.h:644
 msgid "Object"
 msgstr "วัตถุ"
 
-#: src/ui_searchDialogGui.h:643
+#: src/ui_searchDialogGui.h:645
 msgid "RA/Dec (J2000):"
 msgstr "ไรต์แอสเซนชัน/เดคลิเนชัน (J2000):"
 
-#: src/ui_searchDialogGui.h:644
+#: src/ui_searchDialogGui.h:646
 msgid "Position"
 msgstr "ตำแหน่ง"
 
-#: src/ui_searchDialogGui.h:646
+#: src/ui_searchDialogGui.h:648
 msgid "Some objects may be found after activation respective plug-ins"
 msgstr "บางวัตถุจะค้นหาได้เมื่อเปิดใช้งานโปรแกรมเสริมนั้นแล้ว"
 
-#: src/ui_searchDialogGui.h:648
+#: src/ui_searchDialogGui.h:650
 msgid "names in English"
 msgstr "ชื่อในภาษาอังกฤษ"
 
-#: src/ui_searchDialogGui.h:649
+#: src/ui_searchDialogGui.h:651
 msgid "Search in list..."
 msgstr "ค้นหาในรายการ..."
 
-#: src/ui_searchDialogGui.h:650
+#: src/ui_searchDialogGui.h:652
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:525
 msgid "Lists"
 msgstr "รายการ"
 
-#: src/ui_searchDialogGui.h:651
+#: src/ui_searchDialogGui.h:653
 msgid "On-line astronomical database SIMBAD"
 msgstr "ฐานข้อมูลดาราศาสตร์ออนไลน์ SIMBAD"
 
-#: src/ui_searchDialogGui.h:652
+#: src/ui_searchDialogGui.h:654
 msgid "Extend search with SIMBAD"
 msgstr "ครอบคลุมการค้นหาใน SIMBAD"
 
-#: src/ui_searchDialogGui.h:653
+#: src/ui_searchDialogGui.h:655
 msgid "Server:"
 msgstr "เซิร์ฟเวอร์:"
 
-#: src/ui_searchDialogGui.h:654
+#: src/ui_searchDialogGui.h:656
 msgid "Search options"
 msgstr "ตัวเลือกการค้นหา"
 
-#: src/ui_searchDialogGui.h:655
+#: src/ui_searchDialogGui.h:657
 msgid "Use autofill only from the beginning of words"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:656 src/ui_viewDialog.h:1328
+#: src/ui_searchDialogGui.h:658 src/ui_viewDialog.h:1328
 #: src/ui_viewDialog.h:1334 src/ui_viewDialog.h:1336
 #: src/ui_configurationDialog.h:1156 src/ui_configurationDialog.h:1167
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:416
@@ -4822,37 +4826,37 @@ msgstr "รวมไดเร็กทอรี:"
 msgid "..."
 msgstr "..."
 
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:57
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:131
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:59
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:133
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:189
 msgid "Angle Measure"
 msgstr "วัดมุม"
 
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:60
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:62
 msgid "Provides an angle measurement tool"
 msgstr "แสดงเครื่องมือวัดมุม"
 
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:131
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:133
 msgid "Angle measure"
 msgstr "วัดมุม"
 
 #. TRANSLATORS: instructions for using the AngleMeasure plugin.
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:354
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:357
 msgid "The Angle Measure is enabled:"
 msgstr "เครื่องมือวัดมุมเปิดใช้งาน:"
 
 #. TRANSLATORS: instructions for using the AngleMeasure plugin.
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:356
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:359
 msgid "Drag with the left button to measure, left-click to clear."
 msgstr "วัดมุมโดยกดปุ่มซ้ายของเมาส์แล้วลาก, คลิกซ้ายเพื่อล้างค่า"
 
 #. TRANSLATORS: instructions for using the AngleMeasure plugin.
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:358
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:361
 msgid "Right-clicking changes the end point only."
 msgstr "คลิกขวาเพื่อเปลี่ยนเฉพาะจุดสิ้นสุด"
 
 #. TRANSLATORS: PA is abbreviation for phrase "Position Angle"
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:360
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:363
 msgid "PA="
 msgstr ""
 
@@ -5021,16 +5025,16 @@ msgctxt "tab in plugin windows"
 msgid "About"
 msgstr "เกี่ยวกับ"
 
-#: plugins/CompassMarks/src/CompassMarks.cpp:55
-#: plugins/CompassMarks/src/CompassMarks.cpp:123
+#: plugins/CompassMarks/src/CompassMarks.cpp:57
+#: plugins/CompassMarks/src/CompassMarks.cpp:125
 msgid "Compass Marks"
 msgstr "เครื่องหมายแสดงทิศ"
 
-#: plugins/CompassMarks/src/CompassMarks.cpp:58
+#: plugins/CompassMarks/src/CompassMarks.cpp:60
 msgid "Displays compass bearing marks along the horizon"
 msgstr "แสดงแบริงเข็มทิศตามแนวขอบฟ้า"
 
-#: plugins/CompassMarks/src/CompassMarks.cpp:123
+#: plugins/CompassMarks/src/CompassMarks.cpp:125
 msgid "Compass marks"
 msgstr "ขีดแสดงมุมทิศ"
 
@@ -6669,62 +6673,62 @@ msgstr ""
 "สามารถใช้สำหรับตั้งค่าเขตเวลาและเปลี่ยนแปลงรูปแบบวัน-เวลาในแถบด้านล่าง"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:242
-#: plugins/Supernovae/src/Supernovae.cpp:710 plugins/Novae/src/Novae.cpp:705
+#: plugins/Supernovae/src/Supernovae.cpp:710 plugins/Novae/src/Novae.cpp:707
 msgid "January"
 msgstr "มกราคม"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:243
-#: plugins/Supernovae/src/Supernovae.cpp:710 plugins/Novae/src/Novae.cpp:705
+#: plugins/Supernovae/src/Supernovae.cpp:710 plugins/Novae/src/Novae.cpp:707
 msgid "February"
 msgstr "กุมภาพันธ์"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:244
-#: plugins/Supernovae/src/Supernovae.cpp:710 plugins/Novae/src/Novae.cpp:705
+#: plugins/Supernovae/src/Supernovae.cpp:710 plugins/Novae/src/Novae.cpp:707
 msgid "March"
 msgstr "มีนาคม"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:245
-#: plugins/Supernovae/src/Supernovae.cpp:710 plugins/Novae/src/Novae.cpp:705
+#: plugins/Supernovae/src/Supernovae.cpp:710 plugins/Novae/src/Novae.cpp:707
 msgid "April"
 msgstr "เมษายน"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:246
-#: plugins/Supernovae/src/Supernovae.cpp:710 plugins/Novae/src/Novae.cpp:705
+#: plugins/Supernovae/src/Supernovae.cpp:710 plugins/Novae/src/Novae.cpp:707
 msgid "May"
 msgstr "พฤษภาคม"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:247
-#: plugins/Supernovae/src/Supernovae.cpp:710 plugins/Novae/src/Novae.cpp:705
+#: plugins/Supernovae/src/Supernovae.cpp:710 plugins/Novae/src/Novae.cpp:707
 msgid "June"
 msgstr "มิถุนายน"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:248
-#: plugins/Supernovae/src/Supernovae.cpp:710 plugins/Novae/src/Novae.cpp:705
+#: plugins/Supernovae/src/Supernovae.cpp:710 plugins/Novae/src/Novae.cpp:707
 msgid "July"
 msgstr "กรกฎาคม"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:249
-#: plugins/Supernovae/src/Supernovae.cpp:710 plugins/Novae/src/Novae.cpp:705
+#: plugins/Supernovae/src/Supernovae.cpp:710 plugins/Novae/src/Novae.cpp:707
 msgid "August"
 msgstr "สิงหาคม"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:250
-#: plugins/Supernovae/src/Supernovae.cpp:710 plugins/Novae/src/Novae.cpp:705
+#: plugins/Supernovae/src/Supernovae.cpp:710 plugins/Novae/src/Novae.cpp:707
 msgid "September"
 msgstr "กันยายน"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:251
-#: plugins/Supernovae/src/Supernovae.cpp:710 plugins/Novae/src/Novae.cpp:705
+#: plugins/Supernovae/src/Supernovae.cpp:710 plugins/Novae/src/Novae.cpp:707
 msgid "October"
 msgstr "ตุลาคม"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:252
-#: plugins/Supernovae/src/Supernovae.cpp:710 plugins/Novae/src/Novae.cpp:705
+#: plugins/Supernovae/src/Supernovae.cpp:710 plugins/Novae/src/Novae.cpp:707
 msgid "November"
 msgstr "พฤศจิกายน"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:253
-#: plugins/Supernovae/src/Supernovae.cpp:710 plugins/Novae/src/Novae.cpp:705
+#: plugins/Supernovae/src/Supernovae.cpp:710 plugins/Novae/src/Novae.cpp:707
 msgid "December"
 msgstr "ธันวาคม"
 
@@ -7326,7 +7330,7 @@ msgstr "ซูเปอร์โนวา"
 msgid "Type of supernova: %1"
 msgstr "ชนิดของซูเปอร์โนวา: %1"
 
-#: plugins/Supernovae/src/Supernova.cpp:138 plugins/Novae/src/Nova.cpp:136
+#: plugins/Supernovae/src/Supernova.cpp:138 plugins/Novae/src/Nova.cpp:138
 #, qt-format
 msgid "Maximum brightness: %1"
 msgstr "ความสว่างสูงสุด: %1"
@@ -7452,24 +7456,24 @@ msgstr "ความถี่ในการปรับปรุง (วัน)
 msgid "[next update info]"
 msgstr "[ข้อมูลการปรับปรุงถัดไป]"
 
-#: plugins/Novae/src/Novae.cpp:72 plugins/Novae/src/Novae.cpp:136
+#: plugins/Novae/src/Novae.cpp:74 plugins/Novae/src/Novae.cpp:138
 msgid "Bright Novae"
 msgstr "โนวาสว่าง"
 
-#: plugins/Novae/src/Novae.cpp:75 plugins/Novae/src/gui/NovaeDialog.cpp:111
+#: plugins/Novae/src/Novae.cpp:77 plugins/Novae/src/gui/NovaeDialog.cpp:111
 msgid "A plugin that shows some bright novae in the Milky Way galaxy."
 msgstr "โปรแกรมเสริมนี้แสดงโนวาที่สว่างในดาราจักรทางช้างเผือก"
 
-#: plugins/Novae/src/Novae.cpp:136
+#: plugins/Novae/src/Novae.cpp:138
 msgid "Bright Novae configuration window"
 msgstr "หน้าต่างการตั้งค่าโนวาสว่าง"
 
-#: plugins/Novae/src/Nova.cpp:120 plugins/Pulsars/src/Pulsar.cpp:148
+#: plugins/Novae/src/Nova.cpp:122 plugins/Pulsars/src/Pulsar.cpp:150
 #, qt-format
 msgid "Type: <b>%1</b> (%2)"
 msgstr "ชนิด: <b>%1</b> (%2)"
 
-#: plugins/Novae/src/Nova.cpp:120
+#: plugins/Novae/src/Nova.cpp:122
 msgid "nova"
 msgstr "โนวา"
 
@@ -7536,12 +7540,12 @@ msgstr "การตั้งค่าโนวาสว่าง"
 msgid "Bright Novae Plug-in Configuration"
 msgstr "การตั้งค่าโปรแกรมเสริมโนวาสว่าง"
 
-#: plugins/Quasars/src/Quasars.cpp:71 plugins/Quasars/src/Quasars.cpp:158
-#: plugins/Quasars/src/Quasars.cpp:159
+#: plugins/Quasars/src/Quasars.cpp:73 plugins/Quasars/src/Quasars.cpp:160
+#: plugins/Quasars/src/Quasars.cpp:161
 msgid "Quasars"
 msgstr "เควซาร์"
 
-#: plugins/Quasars/src/Quasars.cpp:74
+#: plugins/Quasars/src/Quasars.cpp:76
 msgid ""
 "A plugin that shows some quasars brighter than 16 visual magnitude. A "
 "catalogue of quasars compiled from 'Quasars and Active Galactic Nuclei' "
@@ -7550,19 +7554,19 @@ msgstr ""
 "ส่วนเสริมสำหรับแสดงเควซาร์ที่สว่างกว่าโชติมาตร 16 ซึ่งรวบรวมจาก 'Quasars and "
 "Active Galactic Nuclei' (13th Ed.) (Veron+ 2010) =2010A&A...518A..10V"
 
-#: plugins/Quasars/src/Quasars.cpp:158
+#: plugins/Quasars/src/Quasars.cpp:160
 msgid "Show quasars"
 msgstr "แสดงเควซาร์"
 
-#: plugins/Quasars/src/Quasars.cpp:159
+#: plugins/Quasars/src/Quasars.cpp:161
 msgid "Quasars configuration window"
 msgstr "หน้าต่างการตั้งค่าเควซาร์"
 
-#: plugins/Quasars/src/Quasar.cpp:91
+#: plugins/Quasars/src/Quasar.cpp:93
 msgid "quasar"
 msgstr "เควซาร์"
 
-#: plugins/Quasars/src/Quasar.cpp:122
+#: plugins/Quasars/src/Quasar.cpp:124
 #, qt-format
 msgid "Z (redshift): %1"
 msgstr "Z (การเลื่อนไปทางแดง): %1"
@@ -7630,150 +7634,150 @@ msgstr "เปิดใช้งานเมื่อเริ่มโปรแ
 msgid "Show quasars button on toolbar"
 msgstr "แสดงปุ่มเควซาร์บนแถบเครื่องมือ"
 
-#: plugins/Pulsars/src/Pulsars.cpp:71 plugins/Pulsars/src/Pulsars.cpp:158
-#: plugins/Pulsars/src/Pulsars.cpp:159
+#: plugins/Pulsars/src/Pulsars.cpp:73 plugins/Pulsars/src/Pulsars.cpp:160
+#: plugins/Pulsars/src/Pulsars.cpp:161
 msgid "Pulsars"
 msgstr "พัลซาร์"
 
-#: plugins/Pulsars/src/Pulsars.cpp:74
+#: plugins/Pulsars/src/Pulsars.cpp:76
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:120
 msgid ""
 "This plugin plots the position of various pulsars, with object information "
 "about each one."
 msgstr "โปรแกรมเสริมนี้แสดงตำแหน่งและข้อมูลของพัลซาร์"
 
-#: plugins/Pulsars/src/Pulsars.cpp:158
+#: plugins/Pulsars/src/Pulsars.cpp:160
 msgid "Show pulsars"
 msgstr "แสดงพัลซาร์"
 
-#: plugins/Pulsars/src/Pulsars.cpp:159
+#: plugins/Pulsars/src/Pulsars.cpp:161
 msgid "Pulsars configuration window"
 msgstr "หน้าต่างการตั้งค่าพัลซาร์"
 
-#: plugins/Pulsars/src/Pulsar.cpp:137
+#: plugins/Pulsars/src/Pulsar.cpp:139
 msgid "pulsar"
 msgstr "พัลซาร์"
 
-#: plugins/Pulsars/src/Pulsar.cpp:142
+#: plugins/Pulsars/src/Pulsar.cpp:144
 msgid "has one registered glitch"
 msgstr ""
 
 #. TRANSLATORS: Full phrase is "Has X registered glitches", where X is number
-#: plugins/Pulsars/src/Pulsar.cpp:146
+#: plugins/Pulsars/src/Pulsar.cpp:148
 #, qt-format
 msgid "has %1 registered glitches"
 msgstr ""
 
-#: plugins/Pulsars/src/Pulsar.cpp:148
+#: plugins/Pulsars/src/Pulsar.cpp:150
 msgid "pulsar with glitches"
 msgstr "พัลซาร์ที่มีการสะดุด"
 
 #. TRANSLATORS: Unit of measure for period - seconds
-#: plugins/Pulsars/src/Pulsar.cpp:160
+#: plugins/Pulsars/src/Pulsar.cpp:162
 #, qt-format
 msgid "Barycentric period: %1 s"
 msgstr "คาบศูนย์ระบบมวล: %1 วินาที"
 
-#: plugins/Pulsars/src/Pulsar.cpp:164
+#: plugins/Pulsars/src/Pulsar.cpp:166
 #, qt-format
 msgid "Time derivative of barycentric period: %1"
 msgstr ""
 
-#: plugins/Pulsars/src/Pulsar.cpp:169
+#: plugins/Pulsars/src/Pulsar.cpp:171
 msgid "Dispersion measure:"
 msgstr ""
 
 #. TRANSLATORS: Unit of measure for distance - centimeters
-#: plugins/Pulsars/src/Pulsar.cpp:172
+#: plugins/Pulsars/src/Pulsar.cpp:174
 msgid "cm"
 msgstr "ซม."
 
 #. TRANSLATORS: Unit of measure for distance - parsecs
-#: plugins/Pulsars/src/Pulsar.cpp:175
+#: plugins/Pulsars/src/Pulsar.cpp:177
 msgid "pc"
 msgstr "พาร์เซก"
 
-#: plugins/Pulsars/src/Pulsar.cpp:181
+#: plugins/Pulsars/src/Pulsar.cpp:183
 #, qt-format
 msgid "Spin down energy loss rate: %1 ergs/s"
 msgstr "อัตราการสูญเสียมวลขณะหมุนช้าลง: %1 เอิร์ก/วินาที"
 
-#: plugins/Pulsars/src/Pulsar.cpp:185
+#: plugins/Pulsars/src/Pulsar.cpp:187
 #, qt-format
 msgid "Binary period of pulsar: %1 days"
 msgstr "คาบของดาวคู่ในพัลซาร์: %1 วัน"
 
-#: plugins/Pulsars/src/Pulsar.cpp:189
+#: plugins/Pulsars/src/Pulsar.cpp:191
 #, qt-format
 msgid "Eccentricity: %1"
 msgstr "ภาวะเยื้องศูนย์กลาง: %1"
 
 #. TRANSLATORS: Unit of measure for annual parallax - milliarcseconds
-#: plugins/Pulsars/src/Pulsar.cpp:194
+#: plugins/Pulsars/src/Pulsar.cpp:196
 #, qt-format
 msgid "Annual parallax: %1 mas"
 msgstr "แพรัลแลกซ์รายปี: %1 มิลลิพิลิปดา"
 
-#: plugins/Pulsars/src/Pulsar.cpp:198
+#: plugins/Pulsars/src/Pulsar.cpp:200
 #, qt-format
 msgid "Distance based on electron density model: %1 kpc (%2 ly)"
 msgstr ""
 "ระยะห่างคำนวณจากแบบจำลองความหนาแน่นอิเล็กตรอน: %1 กิโลพาร์เซก (%2 ปีแสง)"
 
-#: plugins/Pulsars/src/Pulsar.cpp:202
+#: plugins/Pulsars/src/Pulsar.cpp:204
 #, qt-format
 msgid "Profile width at 50% of peak: %1 ms"
 msgstr ""
 
 #. TRANSLATORS: Full phrase is "Time averaged flux density at XXXMHz"
-#: plugins/Pulsars/src/Pulsar.cpp:208 plugins/Pulsars/src/Pulsar.cpp:220
-#: plugins/Pulsars/src/Pulsar.cpp:232
+#: plugins/Pulsars/src/Pulsar.cpp:210 plugins/Pulsars/src/Pulsar.cpp:222
+#: plugins/Pulsars/src/Pulsar.cpp:234
 msgid "Time averaged flux density at"
 msgstr "ความหนาแน่นฟลักซ์เฉลี่ยเวลาที่"
 
 #. TRANSLATORS: Unit of measurement of frequency
-#: plugins/Pulsars/src/Pulsar.cpp:211 plugins/Pulsars/src/Pulsar.cpp:223
-#: plugins/Pulsars/src/Pulsar.cpp:235
+#: plugins/Pulsars/src/Pulsar.cpp:213 plugins/Pulsars/src/Pulsar.cpp:225
+#: plugins/Pulsars/src/Pulsar.cpp:237
 msgid "MHz"
 msgstr "MHz"
 
 #. TRANSLATORS: mJy is milliJansky(10-26W/m2/Hz)
-#: plugins/Pulsars/src/Pulsar.cpp:214 plugins/Pulsars/src/Pulsar.cpp:226
-#: plugins/Pulsars/src/Pulsar.cpp:238
+#: plugins/Pulsars/src/Pulsar.cpp:216 plugins/Pulsars/src/Pulsar.cpp:228
+#: plugins/Pulsars/src/Pulsar.cpp:240
 msgid "mJy"
 msgstr "mJy"
 
-#: plugins/Pulsars/src/Pulsar.cpp:242
+#: plugins/Pulsars/src/Pulsar.cpp:244
 #, qt-format
 msgid "Notes: %1"
 msgstr "หมายเหตุ: %1"
 
-#: plugins/Pulsars/src/Pulsar.cpp:309
+#: plugins/Pulsars/src/Pulsar.cpp:311
 msgid ""
 "anomalous X-ray pulsar or soft gamma-ray repeater with detected pulsations"
 msgstr ""
 
-#: plugins/Pulsars/src/Pulsar.cpp:314
+#: plugins/Pulsars/src/Pulsar.cpp:316
 msgid "has one or more binary companions"
 msgstr "มีดาวที่เป็นคู่จำนวนหนึ่งดวงหรือมากกว่า"
 
-#: plugins/Pulsars/src/Pulsar.cpp:319
+#: plugins/Pulsars/src/Pulsar.cpp:321
 msgid "with pulsed emission from radio to infrared or higher frequencies"
 msgstr "มีการเปล่งเป็นห้วง ๆ จากคลื่นวิทยุถึงอินฟราเรด หรือความถี่ที่สูงกว่า"
 
-#: plugins/Pulsars/src/Pulsar.cpp:324
+#: plugins/Pulsars/src/Pulsar.cpp:326
 msgid "with pulsed emission only at infrared or higher frequencies"
 msgstr "มีการเปล่งเป็นห้วง ๆ เฉพาะในคลื่นอินฟราเรด หรือความถี่ที่สูงกว่า"
 
-#: plugins/Pulsars/src/Pulsar.cpp:329
+#: plugins/Pulsars/src/Pulsar.cpp:331
 msgid "with pulsed emission in the radio band"
 msgstr "มีการเปล่งเป็นห้วง ๆ ในแถบคลื่นวิทยุ"
 
-#: plugins/Pulsars/src/Pulsar.cpp:334
+#: plugins/Pulsars/src/Pulsar.cpp:336
 msgid "with intermittently pulsed radio emission"
 msgstr "มีการเปล่งคลื่นวิทยุเป็นห้วง ๆ อย่างไม่สม่ำเสมอ"
 
-#: plugins/Pulsars/src/Pulsar.cpp:339
+#: plugins/Pulsars/src/Pulsar.cpp:341
 msgid ""
 "isolated neutron star with pulsed thermal X-ray emission but no detectable "
 "radio emission"
@@ -7861,13 +7865,13 @@ msgstr "แสดงปุ่มพัลซาร์บนแถบเครื
 msgid "Use separate color for pulsars with glitches"
 msgstr "ใช้สีที่ต่างออกไปสำหรับพัลซาร์ที่มีการสะดุด"
 
-#: plugins/Exoplanets/src/Exoplanets.cpp:73
-#: plugins/Exoplanets/src/Exoplanets.cpp:162
-#: plugins/Exoplanets/src/Exoplanets.cpp:163
+#: plugins/Exoplanets/src/Exoplanets.cpp:75
+#: plugins/Exoplanets/src/Exoplanets.cpp:164
+#: plugins/Exoplanets/src/Exoplanets.cpp:165
 msgid "Exoplanets"
 msgstr "ดาวเคราะห์ระบบอื่น"
 
-#: plugins/Exoplanets/src/Exoplanets.cpp:76
+#: plugins/Exoplanets/src/Exoplanets.cpp:78
 msgid ""
 "This plugin plots the position of stars with exoplanets. Exoplanets data is "
 "derived from the 'Extrasolar Planets Encyclopaedia' at exoplanet.eu"
@@ -7876,89 +7880,89 @@ msgstr ""
 "ข้อมูลดาวเคราะห์ระบบอื่นมาจาก 'Extrasolar Planets Encyclopaedia' ที่ "
 "exoplanet.eu"
 
-#: plugins/Exoplanets/src/Exoplanets.cpp:162
+#: plugins/Exoplanets/src/Exoplanets.cpp:164
 msgid "Show exoplanets"
 msgstr "แสดงดาวเคราะห์ระบบอื่น"
 
-#: plugins/Exoplanets/src/Exoplanets.cpp:163
+#: plugins/Exoplanets/src/Exoplanets.cpp:165
 msgid "Exoplanets configuration window"
 msgstr "หน้าต่างการตั้งค่าดาวเคราะห์ระบบอื่น"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:161
+#: plugins/Exoplanets/src/Exoplanet.cpp:163
 msgid "planetary system"
 msgstr "ระบบดาวเคราะห์"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:197
+#: plugins/Exoplanets/src/Exoplanet.cpp:199
 msgid "Metallicity"
 msgstr "ความเป็นโลหะ"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:201
-#: plugins/Exoplanets/src/Exoplanet.cpp:215
+#: plugins/Exoplanets/src/Exoplanet.cpp:203
+#: plugins/Exoplanets/src/Exoplanet.cpp:217
 msgid "Mass"
 msgstr "มวล"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:205
-#: plugins/Exoplanets/src/Exoplanet.cpp:216
+#: plugins/Exoplanets/src/Exoplanet.cpp:207
+#: plugins/Exoplanets/src/Exoplanet.cpp:218
 msgid "Radius"
 msgstr "รัศมี"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:209
+#: plugins/Exoplanets/src/Exoplanet.cpp:211
 #, qt-format
 msgid "Effective temperature: %1 K"
 msgstr "อุณหภูมิยังผล: %1 เคลวิน"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:213
+#: plugins/Exoplanets/src/Exoplanet.cpp:215
 msgid "Exoplanet"
 msgstr "ดาวเคราะห์ระบบอื่น"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:214
+#: plugins/Exoplanets/src/Exoplanet.cpp:216
 msgid "Period"
 msgstr "คาบ"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:214
+#: plugins/Exoplanets/src/Exoplanet.cpp:216
 msgid "days"
 msgstr "วัน"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:215
-#: plugins/Exoplanets/src/Exoplanet.cpp:216
+#: plugins/Exoplanets/src/Exoplanet.cpp:217
+#: plugins/Exoplanets/src/Exoplanet.cpp:218
 msgid "Jup"
 msgstr "ดาวพฤหัสบดี"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:217
+#: plugins/Exoplanets/src/Exoplanet.cpp:219
 msgid "Semi-Major Axis"
 msgstr "กึ่งแกนเอก"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:217
+#: plugins/Exoplanets/src/Exoplanet.cpp:219
 msgid "AU"
 msgstr "หน่วยดาราศาสตร์"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:218
+#: plugins/Exoplanets/src/Exoplanet.cpp:220
 msgid "Eccentricity"
 msgstr "ความเยื้องศูนย์กลาง"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:219
+#: plugins/Exoplanets/src/Exoplanet.cpp:221
 msgid "Inclination"
 msgstr "มุมเอียง"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:220
+#: plugins/Exoplanets/src/Exoplanet.cpp:222
 msgid "Angle Distance"
 msgstr "ระยะห่างเชิงมุม"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:221
+#: plugins/Exoplanets/src/Exoplanet.cpp:223
 msgid "Discovered year"
 msgstr "ค.ศ. ที่ค้นพบ"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:222
+#: plugins/Exoplanets/src/Exoplanet.cpp:224
 msgid "Habitable class"
 msgstr "ชั้นการอยู่อาศัยได้"
 
 #. TRANSLATORS: Full phrase is "Mean Surface Temperature"
-#: plugins/Exoplanets/src/Exoplanet.cpp:224
+#: plugins/Exoplanets/src/Exoplanet.cpp:226
 msgid "Mean surface temp."
 msgstr "อุณหภูมิพื้นผิวเฉลี่ย"
 
 #. TRANSLATORS: ESI = Earth Similarity Index
-#: plugins/Exoplanets/src/Exoplanet.cpp:226
+#: plugins/Exoplanets/src/Exoplanet.cpp:228
 msgid "ESI"
 msgstr "ESI"
 
