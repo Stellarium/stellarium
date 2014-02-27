@@ -557,5 +557,6 @@ class Translations
 		N_("Computer");
 		N_("&Open");
 		N_("File &name:");
+		N_("Copy &Link Location");
 	}
 };
