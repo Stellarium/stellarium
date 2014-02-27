@@ -20,6 +20,8 @@
 #ifndef _STELMAINGRAPHICSVIEW_HPP_
 #define _STELMAINGRAPHICSVIEW_HPP_
 
+#include "config.h"
+
 #include <QDeclarativeView>
 #include <QCoreApplication>
 #include <QEventLoop>

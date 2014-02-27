@@ -451,6 +451,7 @@ void ConfigurationDialog::selectScreenshotDir(const QString& dir)
 	}
 	catch (std::runtime_error& e)
 	{
+		Q_UNUSED(e);
 		// nop
 		// this will happen when people are only half way through typing dirs
 	}

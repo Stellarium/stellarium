@@ -20,6 +20,8 @@
 #ifndef STELLOGGER_HPP
 #define STELLOGGER_HPP
 
+#include "config.h"
+
 #include <QString>
 #include <QFile>
 
