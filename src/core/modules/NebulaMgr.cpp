@@ -20,15 +20,6 @@
 
 // class used to manage groups of Nebulas
 
-#include <algorithm>
-#include <QDebug>
-#include <QFile>
-#include <QSettings>
-#include <QString>
-#include <QStringList>
-#include <QRegExp>
-#include <QDir>
-
 #include "StelApp.hpp"
 #include "NebulaMgr.hpp"
 #include "Nebula.hpp"
@@ -47,6 +38,15 @@
 #include "StelPainter.hpp"
 #include "RefractionExtinction.hpp"
 #include "StelActionMgr.hpp"
+
+#include <algorithm>
+#include <QDebug>
+#include <QFile>
+#include <QSettings>
+#include <QString>
+#include <QStringList>
+#include <QRegExp>
+#include <QDir>
 
 void NebulaMgr::setLabelsColor(const Vec3f& c) {Nebula::labelColor = c;}
 const Vec3f &NebulaMgr::getLabelsColor(void) const {return Nebula::labelColor;}

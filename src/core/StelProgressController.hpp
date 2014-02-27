@@ -21,6 +21,7 @@
 #define _STELPROGRESSCONTROLLER_HPP_
 
 #include <QString>
+#include <QObject>
 
 //! Maintain the state of a progress bar
 class StelProgressController : public QObject

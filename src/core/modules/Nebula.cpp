@@ -18,10 +18,6 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#include <QTextStream>
-#include <QFile>
-#include <QString>
-
 #include "Nebula.hpp"
 #include "NebulaMgr.hpp"
 #include "StelTexture.hpp"
@@ -32,6 +28,10 @@
 #include "StelModuleMgr.hpp"
 #include "StelCore.hpp"
 #include "StelPainter.hpp"
+
+#include <QTextStream>
+#include <QFile>
+#include <QString>
 
 #include <QDebug>
 #include <QBuffer>

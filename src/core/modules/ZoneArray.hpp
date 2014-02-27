@@ -23,10 +23,6 @@
 #ifndef _ZONEARRAY_HPP_
 #define _ZONEARRAY_HPP_
 
-#include <QString>
-#include <QFile>
-#include <QDebug>
-
 #include "ZoneData.hpp"
 #include "Star.hpp"
 
@@ -35,6 +31,10 @@
 #include "StarMgr.hpp"
 
 #include "StelPainter.hpp"
+
+#include <QString>
+#include <QFile>
+#include <QDebug>
 
 #ifdef __OpenBSD__
 #include <unistd.h>

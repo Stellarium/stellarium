@@ -21,10 +21,11 @@
 #ifndef _NEBULA_HPP_
 #define _NEBULA_HPP_
 
-#include <QString>
 #include "StelObject.hpp"
 #include "StelTranslator.hpp"
 #include "StelTextureTypes.hpp"
+
+#include <QString>
 
 class StelPainter;
 class QDataStream;

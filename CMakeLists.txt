@@ -1,10 +1,5 @@
-# Because 2.8.11 is not available yet on ubuntu, but we need it to fix some
-# bugs on windows.
-IF(WIN32)
-  CMAKE_MINIMUM_REQUIRED(VERSION 2.8.11)
-ELSE()
-  CMAKE_MINIMUM_REQUIRED(VERSION 2.8.10)
-ENDIF()
+
+CMAKE_MINIMUM_REQUIRED(VERSION 2.8.11)
 
 ########### Project name ###########
 PROJECT(Stellarium)
@@ -57,8 +52,11 @@ IF(WIN32)
     SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -fexceptions -fident -mthreads")
     SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wsign-promo -fexceptions -fident -mthreads")
     SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -Wsign-promo -fexceptions -fident -mthreads -mwindows")    
-  ELSE()
-    SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -fexceptions -fident -mthreads -mwindows")
+  # ELSE()
+    # GZ: GCC flags unknown: exception handling should be default in MSVC.
+    # it seems -fident does not exist any longer. -fno-ident is documented in gcc.
+    # -mthreads and -mwindows are MinGW specific.
+    # SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -fexceptions -fident -mthreads -mwindows")
   ENDIF()
 ELSE()
   SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Wextra -Wno-unused-parameter")
@@ -75,8 +73,13 @@ ENDIF()
 
 SET(OPTIMIZE_INTEL_ATOM 0 CACHE BOOL "Activate optimizations for atom processor.")
 IF(OPTIMIZE_INTEL_ATOM)
- SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -mtune=generic -msse -msse2 -msse3 -mfpmath=sse")
- SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -mtune=generic -msse -msse2 -msse3 -mfpmath=sse")
+ IF (MSVC)
+  SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} /arch:SSE2 ")
+  SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /arch:SSE2 ")
+ ELSE()
+  SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -mtune=generic -msse -msse2 -msse3 -mfpmath=sse")
+  SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -mtune=generic -msse -msse2 -msse3 -mfpmath=sse")
+ ENDIF()
 ENDIF()
 
 # FreeBSD-specific compiler flags
@@ -100,22 +103,6 @@ IF(APPLE)
  # We support only 64 bits MacOSX
  SET(CMAKE_OSX_ARCHITECTURES "x86_64")
 ENDIF()
-
-# Needed so that M_PI get defined,
-# and so that windows.h does not redefine min and max.
-ADD_DEFINITIONS(-D_USE_MATH_DEFINES -DNOMINMAX)
-
-########### Check functions ###########
-SET(CMAKE_REQUIRED_LIBRARIES "-lm")
-INCLUDE(CheckFunctionExists)
-SET(FUNCS pow10 trunc round)
-FOREACH(FUNC ${FUNCS})
-  STRING(TOUPPER ${FUNC} FUNC_UP)
-  CHECK_FUNCTION_EXISTS(${FUNC} HAS_${FUNC_UP})
-  IF(HAS_${FUNC_UP})
-     ADD_DEFINITIONS(-DHAS_${FUNC_UP})
-  ENDIF()
-ENDFOREACH()
 
 ########### Others ###########
 # Activate translation
@@ -256,7 +243,11 @@ IF(ENABLE_SOUND)
     INCLUDE_DIRECTORIES(${Qt5Multimedia_INCLUDE_DIRS})
 ENDIF()
 
-FIND_PACKAGE(OpenGL REQUIRED)
+# I add this test because on Windows with angle we should not link
+# with OpenGL.  Maybe there is a better way to do that.
+IF("${Qt5Gui_OPENGL_LIBRARIES}" MATCHES "opengl")
+    FIND_PACKAGE(OpenGL REQUIRED)
+ENDIF()
 FIND_PACKAGE(ZLIB)
 
 FIND_PACKAGE(Qt5Test)
@@ -365,8 +356,8 @@ IF(WIN32)
         SET(ISS_QT_MULTIMEDIA "; QtMultimedia don't used")
     ENDIF()
     GET_FILENAME_COMPONENT(QT5_LIBS ${QtCore_location} PATH)
-    # TODO: Enable ANGLE support
-    SET(ISS_ICU_LIBS "Source: \"${QT5_LIBS}/icu*.dll\"; DestDir: \"{app}\";")
+    SET(ISS_ANGLE_LIBS "; ANGLE support (libEGL.dll, libGLESv2.dll and d3dcompiler_*.dll)\nSource: \"${QT5_LIBS}/libEGL.dll\"; DestDir: \"{app}\";\nSource: \"${QT5_LIBS}/libGLESv2.dll\"; DestDir: \"{app}\";\nSource: \"${QT5_LIBS}/d3dcompiler_*.dll\"; DestDir: \"{app}\";")
+    SET(ISS_ICU_LIBS "; ICU support\nSource: \"${QT5_LIBS}/icu*.dll\"; DestDir: \"{app}\";")
     # Deploy related stuff
     SET(ISS_WINDOWS_PLUGIN "Source: \"${QT5_LIBS}/../plugins/platforms/qwindows.dll\"; DestDir: \"{app}/platforms/\";")
     SET(ISS_QML_DIR "Source: \"${QT5_LIBS}/../imports/Qt/labs/shaders/qmldir\"; DestDir: \"{app}/Qt/labs/shaders/\";")
