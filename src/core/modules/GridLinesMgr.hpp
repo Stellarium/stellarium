@@ -92,6 +92,14 @@ class GridLinesMgr : public StelModule
 			   READ getColorMeridianLine
 			   WRITE setColorMeridianLine
 			   NOTIFY meridianLineColorChanged)
+	Q_PROPERTY(bool longitudeLineDisplayed
+			   READ getFlagLongitudeLine
+			   WRITE setFlagLongitudeLine
+			   NOTIFY longitudeLineDisplayedChanged)
+	Q_PROPERTY(Vec3f longitudeLineColor
+			   READ getColorLongitudeLine
+			   WRITE setColorLongitudeLine
+			   NOTIFY longitudeLineColorChanged)
 	Q_PROPERTY(bool horizonLineDisplayed
 			   READ getFlagHorizonLine
 			   WRITE setFlagHorizonLine
@@ -252,6 +260,20 @@ public slots:
 	//! @endcode
 	void setColorMeridianLine(const Vec3f& newColor);
 
+	//! Setter for displaying opposition/conjunction longitude line.
+	void setFlagLongitudeLine(const bool displayed);
+	//! Accessor for displaying opposition/conjunction longitude line.
+	bool getFlagLongitudeLine(void) const;
+	//! Get the current color of the opposition/conjunction longitude line.
+	Vec3f getColorLongitudeLine(void) const;
+	//! Set the color of the opposition/conjunction longitude line.
+	//! @param newColor The color of opposition/conjunction longitude line
+	//! @code
+	//! // example of usage in scripts
+	//! GridLinesMgr.setColorLongitudeLine(Vec3f(1.0,0.0,0.0));
+	//! @endcode
+	void setColorLongitudeLine(const Vec3f& newColor);
+
 	//! Setter for displaying Horizon Line.
 	void setFlagHorizonLine(const bool displayed);
 	//! Accessor for displaying Horizon Line.
@@ -302,6 +324,8 @@ signals:
 	void eclipticLineColorChanged(const Vec3f & newColor) const;
 	void meridianLineDisplayedChanged(const bool displayed) const;
 	void meridianLineColorChanged(const Vec3f & newColor) const;
+	void longitudeLineDisplayedChanged(const bool displayed) const;
+	void longitudeLineColorChanged(const Vec3f & newColor) const;
 	void horizonLineDisplayedChanged(const bool displayed) const;
 	void horizonLineColorChanged(const Vec3f & newColor) const;
 	void galacticEquatorLineDisplayedChanged(const bool displayed) const;
@@ -317,14 +341,15 @@ private slots:
 	void updateLineLabels();
 
 private:
-	SkyGrid * equGrid;      	// Equatorial grid
-	SkyGrid * equJ2000Grid; 	// Equatorial J2000 grid
-	SkyGrid * galacticGrid; 	// Galactic grid
-	SkyGrid * eclJ2000Grid; 	// Ecliptic J2000 grid
-	SkyGrid * aziGrid;      	// Azimuthal grid
-	SkyLine * equatorLine;  	// Celestial Equator line
-	SkyLine * eclipticLine; 	// Ecliptic line
-	SkyLine * meridianLine; 	// Meridian line
+	SkyGrid * equGrid;		// Equatorial grid
+	SkyGrid * equJ2000Grid;		// Equatorial J2000 grid
+	SkyGrid * galacticGrid;		// Galactic grid
+	SkyGrid * eclJ2000Grid;		// Ecliptic J2000 grid
+	SkyGrid * aziGrid;		// Azimuthal grid
+	SkyLine * equatorLine;		// Celestial Equator line
+	SkyLine * eclipticLine;		// Ecliptic line
+	SkyLine * meridianLine;		// Meridian line
+	SkyLine * longitudeLine; 	// Opposition/conjunction longitude line
 	SkyLine * horizonLine;		// Horizon line
 	SkyLine * galacticEquatorLine;	// line depicting the Galactic equator as defined by the IAU definition of Galactic coordinates (System II, 1958)
 };

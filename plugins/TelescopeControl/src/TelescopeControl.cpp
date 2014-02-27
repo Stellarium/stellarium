@@ -330,7 +330,7 @@ double TelescopeControl::getCallOrder(StelModuleActionName actionName) const
 {
 	//TODO: Remove magic number (call order offset)
 	if (actionName == StelModule::ActionDraw)
-		return StelApp::getInstance().getModuleMgr().getModule("MeteorMgr")->getCallOrder(actionName) + 2.;
+		return StelApp::getInstance().getModuleMgr().getModule("LandscapeMgr")->getCallOrder(actionName) + 2.;
 	return 0.;
 }
 

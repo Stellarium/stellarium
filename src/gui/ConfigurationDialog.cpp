@@ -43,6 +43,7 @@
 #include "StelLocation.hpp"
 #include "LandscapeMgr.hpp"
 #include "StelSkyCultureMgr.hpp"
+#include "StelSkyLayerMgr.hpp"
 #include "SolarSystem.hpp"
 #include "MeteorMgr.hpp"
 #include "ConstellationMgr.hpp"
@@ -569,6 +570,7 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	conf->setValue("viewing/flag_ecliptic_line", glmgr->getFlagEclipticLine());
 	conf->setValue("viewing/flag_ecliptic_J2000_grid", glmgr->getFlagEclipticJ2000Grid());
 	conf->setValue("viewing/flag_meridian_line", glmgr->getFlagMeridianLine());
+	conf->setValue("viewing/flag_longitude_line", glmgr->getFlagLongitudeLine());
 	conf->setValue("viewing/flag_horizon_line", glmgr->getFlagHorizonLine());
 	conf->setValue("viewing/flag_equatorial_J2000_grid", glmgr->getFlagEquatorJ2000Grid());
 	conf->setValue("viewing/flag_galactic_grid", glmgr->getFlagGalacticGrid());
@@ -592,6 +594,7 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	conf->setValue("astro/labels_amount", ssmgr->getLabelsAmount());
 	conf->setValue("astro/nebula_hints_amount", nmgr->getHintsAmount());
 	conf->setValue("astro/flag_nebula_name", nmgr->getFlagHints());
+	conf->setValue("astro/flag_nebula_display_no_texture", !GETSTELMODULE(StelSkyLayerMgr)->getFlagShow());
 	conf->setValue("projection/type", core->getCurrentProjectionTypeKey());
 
 	// view dialog / landscape tab settings
@@ -1250,6 +1253,7 @@ void ConfigurationDialog::populateDeltaTAlgorithmsList()
 	algorithms->addItem(q_("Reijs (2006)"), "Reijs");
 	algorithms->addItem(q_("Banjevic (2006)"), "Banjevic");
 	algorithms->addItem(q_("Islam, Sadiq & Qureshi (2008, 2013)"), "IslamSadiqQureshi");
+	algorithms->addItem(q_("Khalid, Sultana & Zaidi (2014)"), "KhalidSultanaZaidi");
 	algorithms->addItem(q_("Custom equation of %1T").arg(QChar(0x0394)), "Custom");
 
 	//Restore the selection

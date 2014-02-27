@@ -7,47 +7,48 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-02-12 00:14+0600\n"
-"PO-Revision-Date: 2015-02-02 03:51+0000\n"
+"POT-Creation-Date: 2015-02-15 18:53+0600\n"
+"PO-Revision-Date: 2015-02-16 18:20+0000\n"
 "Last-Translator: Adriano Steffler <Unknown>\n"
 "Language-Team: Portuguese (Brazil) <pt_BR@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-02-12 06:13+0000\n"
-"X-Generator: Launchpad (build 17336)\n"
+"X-Launchpad-Export-Date: 2015-02-17 05:55+0000\n"
+"X-Generator: Launchpad (build 17341)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:132 src/core/modules/StarMgr.cpp:353
 #: src/core/modules/GridLinesMgr.cpp:736 src/core/modules/LandscapeMgr.cpp:355
 #: src/core/modules/NebulaMgr.cpp:126 src/core/modules/SolarSystem.cpp:173
+#: src/core/modules/MilkyWay.cpp:72 src/core/modules/ZodiacalLight.cpp:80
 #: src/core/StelApp.cpp:487 src/core/StelCore.cpp:192
-#: src/core/StelSkyLayerMgr.cpp:87 src/StelMainView.cpp:451
+#: src/core/StelSkyLayerMgr.cpp:87 src/StelMainView.cpp:453
 msgid "Display Options"
 msgstr "Opções de exibição"
 
 #: src/core/modules/ConstellationMgr.cpp:133
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:279
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:280
 msgid "Constellation lines"
 msgstr "Linhas das constelações"
 
 #: src/core/modules/ConstellationMgr.cpp:134
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:289
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:290
 msgid "Constellation art"
 msgstr "Imagens das constelações"
 
 #: src/core/modules/ConstellationMgr.cpp:135
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:284
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:285
 msgid "Constellation labels"
 msgstr "Rótulos das constelações"
 
 #: src/core/modules/ConstellationMgr.cpp:136
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:290
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:291
 msgid "Constellation boundaries"
 msgstr "Limites das constelações"
 
 #: src/core/modules/StarMgr.cpp:354 src/ui_viewDialog.h:1232
 #: src/ui_viewDialog.h:1264 src/ui_viewDialog.h:1290
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:245
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:246
 msgid "Stars"
 msgstr "Estrelas"
 
@@ -76,37 +77,37 @@ msgid "Galactic Equator"
 msgstr "Equador galáctico"
 
 #: src/core/modules/GridLinesMgr.cpp:737
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:331
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:332
 msgid "Equatorial grid"
 msgstr "Grade equatorial"
 
 #: src/core/modules/GridLinesMgr.cpp:738 src/ui_viewDialog.h:1305
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:326
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:327
 msgid "Azimuthal grid"
 msgstr "Grade azimutal"
 
 #: src/core/modules/GridLinesMgr.cpp:739
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:346
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:347
 msgid "Ecliptic line"
 msgstr "Linha eclíptica"
 
 #: src/core/modules/GridLinesMgr.cpp:740
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:341
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:342
 msgid "Equator line"
 msgstr "Linha do Equador"
 
 #: src/core/modules/GridLinesMgr.cpp:741
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:321
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:322
 msgid "Meridian line"
 msgstr "Linha meridiana"
 
 #: src/core/modules/GridLinesMgr.cpp:742
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:360
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:361
 msgid "Horizon line"
 msgstr "Linha do horizonte"
 
 #: src/core/modules/GridLinesMgr.cpp:743
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:336
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:337
 msgid "Equatorial J2000 grid"
 msgstr "Grade equatorial J2000"
 
@@ -115,7 +116,7 @@ msgid "Ecliptic J2000 grid"
 msgstr "Grade eclíptica J2000"
 
 #: src/core/modules/GridLinesMgr.cpp:745 src/ui_viewDialog.h:1306
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:365
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:366
 msgid "Galactic grid"
 msgstr "Grade galáctica"
 
@@ -132,7 +133,7 @@ msgid "Fog"
 msgstr "Névoa"
 
 #: src/core/modules/LandscapeMgr.cpp:358 src/ui_viewDialog.h:1327
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:303
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:304
 msgid "Cardinal points"
 msgstr "Pontos cardeais"
 
@@ -144,20 +145,20 @@ msgstr "Superfície"
 msgid "Illumination"
 msgstr "Iluminação"
 
-#: src/core/modules/LandscapeMgr.cpp:601
+#: src/core/modules/LandscapeMgr.cpp:584
 msgid "Author: "
 msgstr "Autor: "
 
-#: src/core/modules/LandscapeMgr.cpp:607
+#: src/core/modules/LandscapeMgr.cpp:590
 msgid "Location: "
 msgstr "Localização: "
 
-#: src/core/modules/LandscapeMgr.cpp:610
+#: src/core/modules/LandscapeMgr.cpp:593
 #, qt-format
 msgid ", %1 m"
 msgstr ", %1 m"
 
-#: src/core/modules/LandscapeMgr.cpp:615
+#: src/core/modules/LandscapeMgr.cpp:598
 msgid "Celestial body:"
 msgstr "Corpo celeste:"
 
@@ -382,17 +383,17 @@ msgid "Planets"
 msgstr "Planetas"
 
 #: src/core/modules/SolarSystem.cpp:175
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:308
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:309
 msgid "Planet labels"
 msgstr "Rótulos dos planetas"
 
 #: src/core/modules/SolarSystem.cpp:176
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:312
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:313
 msgid "Planet orbits"
 msgstr "Órbitas dos planetas"
 
 #: src/core/modules/SolarSystem.cpp:177
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:316
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:317
 msgid "Planet trails"
 msgstr "Rastros dos planetas"
 
@@ -496,13 +497,21 @@ msgstr "Duração do eclipse: %1%"
 msgid "Rising time: %1%"
 msgstr "Tempo de ascensão: %1%"
 
+#: src/core/modules/MilkyWay.cpp:73
+msgid "Milky Way"
+msgstr "Via Láctea"
+
+#: src/core/modules/ZodiacalLight.cpp:81
+msgid "Zodiacal Light"
+msgstr "Luz zodiacal"
+
 #: src/core/StelApp.cpp:487
 msgid "Night mode"
 msgstr "Modo noturno"
 
 #: src/core/StelCore.cpp:190 src/gui/StelGui.cpp:184
 #: src/ui_dateTimeDialogGui.h:376 src/ui_dateTimeDialogGui.h:379
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:172
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:173
 msgid "Date and Time"
 msgstr "Data e hora"
 
@@ -1183,7 +1192,7 @@ msgid "Deep-sky objects background images"
 msgstr "Imagens de fundo dos objetos do céu profundo"
 
 #: src/core/StelMovementMgr.cpp:130 src/gui/StelGui.cpp:186
-#: src/StelMainView.cpp:450
+#: src/StelMainView.cpp:452
 msgid "Miscellaneous"
 msgstr "Miscelânea"
 
@@ -1227,30 +1236,30 @@ msgstr "Não encontrado"
 msgid "Found"
 msgstr "Encontrado"
 
-#: src/gui/ConfigurationDialog.cpp:483
+#: src/gui/ConfigurationDialog.cpp:484
 msgid "Select screenshot directory"
 msgstr "Selecione o diretório em que serão armazenadas as capturas de tela"
 
-#: src/gui/ConfigurationDialog.cpp:720
+#: src/gui/ConfigurationDialog.cpp:725
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr "Campo de visão ao iniciar: %1%2"
 
-#: src/gui/ConfigurationDialog.cpp:728
+#: src/gui/ConfigurationDialog.cpp:733
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "Direção de visualização azimute/altura ao iniciar: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:785
+#: src/gui/ConfigurationDialog.cpp:790
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:404
 msgid "Authors"
 msgstr "Autores"
 
-#: src/gui/ConfigurationDialog.cpp:786 src/gui/ViewDialog.cpp:491
+#: src/gui/ConfigurationDialog.cpp:791 src/gui/ViewDialog.cpp:491
 msgid "Contact"
 msgstr "Contato"
 
-#: src/gui/ConfigurationDialog.cpp:788
+#: src/gui/ConfigurationDialog.cpp:793
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:89
 #: plugins/Oculars/src/gui/OcularDialog.cpp:523
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:403
@@ -1264,7 +1273,7 @@ msgstr "Contato"
 msgid "Version"
 msgstr "Versão"
 
-#: src/gui/ConfigurationDialog.cpp:871
+#: src/gui/ConfigurationDialog.cpp:876
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:90
 #: plugins/Oculars/src/gui/OcularDialog.cpp:524
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:118
@@ -1277,23 +1286,23 @@ msgstr "Versão"
 msgid "Author"
 msgstr "Autor"
 
-#: src/gui/ConfigurationDialog.cpp:875
+#: src/gui/ConfigurationDialog.cpp:880
 msgid "License"
 msgstr "Licença"
 
-#: src/gui/ConfigurationDialog.cpp:879
+#: src/gui/ConfigurationDialog.cpp:884
 msgid "Shortcut"
 msgstr "Atalho"
 
-#: src/gui/ConfigurationDialog.cpp:903
+#: src/gui/ConfigurationDialog.cpp:908
 msgid "Running script: "
 msgstr "Executando apresentação: "
 
-#: src/gui/ConfigurationDialog.cpp:910
+#: src/gui/ConfigurationDialog.cpp:915
 msgid "Running script: [none]"
 msgstr "Executando apresentação: [nenhuma]"
 
-#: src/gui/ConfigurationDialog.cpp:975
+#: src/gui/ConfigurationDialog.cpp:980
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
@@ -1301,16 +1310,16 @@ msgstr ""
 "A obtenção de novos catálogos estelares foi concluída!\n"
 "Reinicie o Stellarium para exibi-los."
 
-#: src/gui/ConfigurationDialog.cpp:979
+#: src/gui/ConfigurationDialog.cpp:984
 msgid "All available star catalogs have been installed."
 msgstr "Todos os catálogos estelares disponíveis foram instalados."
 
-#: src/gui/ConfigurationDialog.cpp:984
+#: src/gui/ConfigurationDialog.cpp:989
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "Obter catálogo %1 de %2"
 
-#: src/gui/ConfigurationDialog.cpp:991
+#: src/gui/ConfigurationDialog.cpp:996
 #, qt-format
 msgid ""
 "Downloading %1...\n"
@@ -1319,7 +1328,7 @@ msgstr ""
 "Baixando %1…\n"
 "(Você pode fechar esta janela.)"
 
-#: src/gui/ConfigurationDialog.cpp:998
+#: src/gui/ConfigurationDialog.cpp:1003
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -1330,7 +1339,7 @@ msgstr ""
 "Contagem de estrelas: %2 milhões\n"
 "Alcance da magnitude: %3 - %4"
 
-#: src/gui/ConfigurationDialog.cpp:1041 src/gui/ConfigurationDialog.cpp:1075
+#: src/gui/ConfigurationDialog.cpp:1046 src/gui/ConfigurationDialog.cpp:1080
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -1339,11 +1348,11 @@ msgstr ""
 "Ocorreu um erro ao baixar %1:\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:1128
+#: src/gui/ConfigurationDialog.cpp:1133
 msgid "Verifying file integrity..."
 msgstr "Verificando a integridade do arquivo…"
 
-#: src/gui/ConfigurationDialog.cpp:1132
+#: src/gui/ConfigurationDialog.cpp:1137
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -1353,123 +1362,123 @@ msgstr ""
 "O arquivo está corrompido."
 
 #. TRANSLATORS: Full phrase is "Algorithm of DeltaT"
-#: src/gui/ConfigurationDialog.cpp:1205
+#: src/gui/ConfigurationDialog.cpp:1210
 msgid "Algorithm of"
 msgstr "Algoritmo do"
 
-#: src/gui/ConfigurationDialog.cpp:1216
+#: src/gui/ConfigurationDialog.cpp:1221
 msgid "Without correction"
 msgstr "Sem correção"
 
-#: src/gui/ConfigurationDialog.cpp:1217
+#: src/gui/ConfigurationDialog.cpp:1222
 msgid "Schoch (1931)"
 msgstr "Schoch (1931)"
 
-#: src/gui/ConfigurationDialog.cpp:1218
+#: src/gui/ConfigurationDialog.cpp:1223
 msgid "Clemence (1948)"
 msgstr "Clemence (1948)"
 
-#: src/gui/ConfigurationDialog.cpp:1219
+#: src/gui/ConfigurationDialog.cpp:1224
 msgid "IAU (1952)"
 msgstr "IAU (1952)"
 
-#: src/gui/ConfigurationDialog.cpp:1220
+#: src/gui/ConfigurationDialog.cpp:1225
 msgid "Astronomical Ephemeris (1960)"
 msgstr "Astronomical Ephemeris (1960)"
 
-#: src/gui/ConfigurationDialog.cpp:1221
+#: src/gui/ConfigurationDialog.cpp:1226
 msgid "Tuckerman (1962, 1964) & Goldstine (1973)"
 msgstr "Tuckerman (1962, 1964) e Goldstine (1973)"
 
-#: src/gui/ConfigurationDialog.cpp:1222
+#: src/gui/ConfigurationDialog.cpp:1227
 msgid "Muller & Stephenson (1975)"
 msgstr "Muller e Stephenson (1975)"
 
-#: src/gui/ConfigurationDialog.cpp:1223
+#: src/gui/ConfigurationDialog.cpp:1228
 msgid "Stephenson (1978)"
 msgstr "Stephenson (1978)"
 
-#: src/gui/ConfigurationDialog.cpp:1224
+#: src/gui/ConfigurationDialog.cpp:1229
 msgid "Schmadel & Zech (1979)"
 msgstr "Schmadel e Zech (1979)"
 
-#: src/gui/ConfigurationDialog.cpp:1225
+#: src/gui/ConfigurationDialog.cpp:1230
 msgid "Morrison & Stephenson (1982)"
 msgstr "Morrison e Stephenson (1982)"
 
-#: src/gui/ConfigurationDialog.cpp:1226
+#: src/gui/ConfigurationDialog.cpp:1231
 msgid "Stephenson & Morrison (1984)"
 msgstr "Stephenson e Morrison (1984)"
 
-#: src/gui/ConfigurationDialog.cpp:1227
+#: src/gui/ConfigurationDialog.cpp:1232
 msgid "Stephenson & Houlden (1986)"
 msgstr "Stephenson e Houlden (1986)"
 
-#: src/gui/ConfigurationDialog.cpp:1228
+#: src/gui/ConfigurationDialog.cpp:1233
 msgid "Espenak (1987, 1989)"
 msgstr "Espenak (1987, 1989)"
 
-#: src/gui/ConfigurationDialog.cpp:1229
+#: src/gui/ConfigurationDialog.cpp:1234
 msgid "Borkowski (1988)"
 msgstr "Borkowski (1988)"
 
-#: src/gui/ConfigurationDialog.cpp:1230
+#: src/gui/ConfigurationDialog.cpp:1235
 msgid "Schmadel & Zech (1988)"
 msgstr "Schmadel e Zech (1988)"
 
-#: src/gui/ConfigurationDialog.cpp:1231
+#: src/gui/ConfigurationDialog.cpp:1236
 msgid "Chapront-Touze & Chapront (1991)"
 msgstr "Chapront-Touze e Chapront (1991)"
 
-#: src/gui/ConfigurationDialog.cpp:1232
+#: src/gui/ConfigurationDialog.cpp:1237
 msgid "Stephenson & Morrison (1995)"
 msgstr "Stephenson e Morrison (1995)"
 
-#: src/gui/ConfigurationDialog.cpp:1233
+#: src/gui/ConfigurationDialog.cpp:1238
 msgid "Stephenson (1997)"
 msgstr "Stephenson (1997)"
 
-#: src/gui/ConfigurationDialog.cpp:1235
+#: src/gui/ConfigurationDialog.cpp:1240
 msgid "Meeus (1998) (with Chapront, Chapront-Touze & Francou (1997))"
 msgstr "Meeus (1998) (com Chapront, Chapront-Touze & Francou (1997))"
 
-#: src/gui/ConfigurationDialog.cpp:1236
+#: src/gui/ConfigurationDialog.cpp:1241
 msgid "JPL Horizons"
 msgstr "JPL Horizons"
 
-#: src/gui/ConfigurationDialog.cpp:1237
+#: src/gui/ConfigurationDialog.cpp:1242
 msgid "Meeus & Simons (2000)"
 msgstr "Meeus e Simons (2000)"
 
-#: src/gui/ConfigurationDialog.cpp:1238
+#: src/gui/ConfigurationDialog.cpp:1243
 msgid "Montenbruck & Pfleger (2000)"
 msgstr "Montenbruck e Pfleger (2000)"
 
-#: src/gui/ConfigurationDialog.cpp:1239
+#: src/gui/ConfigurationDialog.cpp:1244
 msgid "Reingold & Dershowitz (2002, 2007)"
 msgstr "Reingold e Dershowitz (2002, 2007)"
 
-#: src/gui/ConfigurationDialog.cpp:1240
+#: src/gui/ConfigurationDialog.cpp:1245
 msgid "Morrison & Stephenson (2004, 2005)"
 msgstr "Morrison e Stephenson (2004, 2005)"
 
-#: src/gui/ConfigurationDialog.cpp:1242
+#: src/gui/ConfigurationDialog.cpp:1247
 msgid "Espenak & Meeus (2006)"
 msgstr "Espenak e Meeus (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:1243
+#: src/gui/ConfigurationDialog.cpp:1248
 msgid "Reijs (2006)"
 msgstr "Reijs (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:1244
+#: src/gui/ConfigurationDialog.cpp:1249
 msgid "Banjevic (2006)"
 msgstr "Banjevic (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:1245
+#: src/gui/ConfigurationDialog.cpp:1250
 msgid "Islam, Sadiq & Qureshi (2008, 2013)"
 msgstr "Islam, Sadiq e Qureshi (2008, 2013)"
 
-#: src/gui/ConfigurationDialog.cpp:1246
+#: src/gui/ConfigurationDialog.cpp:1251
 #, qt-format
 msgid "Custom equation of %1T"
 msgstr "Equação personalizada do %1T"
@@ -1711,17 +1720,17 @@ msgid "Copy selected object information to clipboard"
 msgstr ""
 "Copia a informação do objeto selecionado para a área de transferência"
 
-#: src/gui/StelGui.cpp:207
-msgid "Toggle visibility of GUI"
-msgstr "Alternar a visibilidade da interface gráfica do usuário"
-
-#: src/gui/StelGui.cpp:213
+#: src/gui/StelGui.cpp:212
 msgid "Auto hide horizontal button bar"
 msgstr "Auto-ocultar a barra de botões horizontal"
 
-#: src/gui/StelGui.cpp:214
+#: src/gui/StelGui.cpp:213
 msgid "Auto hide vertical button bar"
 msgstr "Auto-ocultar a barra de botões vertical"
+
+#: src/gui/StelGui.cpp:216
+msgid "Toggle visibility of GUI"
+msgstr "Alternar a visibilidade da interface gráfica do usuário"
 
 #: src/gui/StelGuiItems.cpp:289 src/gui/StelGuiItems.cpp:743
 msgid "Space"
@@ -2044,7 +2053,7 @@ msgstr "em que"
 msgid "year"
 msgstr "ano"
 
-#: src/StelMainView.cpp:356 src/StelMainView.cpp:371
+#: src/StelMainView.cpp:358 src/StelMainView.cpp:373
 msgid ""
 "No OpenGL 2 found on this system. Please upgrade hardware or use MESA or an "
 "older version."
@@ -2052,19 +2061,19 @@ msgstr ""
 "O OpenGL 2 não foi encontrado nesse sistema. Por favor, atualize a placa de "
 "vídeo ou utilize o MESA ou uma versão mais antiga."
 
-#: src/StelMainView.cpp:385
+#: src/StelMainView.cpp:387
 msgid "Cannot acquire necessary OpenGL resources."
 msgstr "Não é possível obter os recursos OpenGL necessários."
 
-#: src/StelMainView.cpp:450
+#: src/StelMainView.cpp:452
 msgid "Save screenshot"
 msgstr "Salvar captura de tela"
 
-#: src/StelMainView.cpp:451
+#: src/StelMainView.cpp:453
 msgid "Full-screen mode"
 msgstr "Modo de tela cheia"
 
-#: src/StelMainView.cpp:548
+#: src/StelMainView.cpp:564
 msgid ""
 "Insufficient OpenGL version. Please update drivers, graphics hardware, or "
 "use MESA (or ANGLE) version."
@@ -2072,14 +2081,14 @@ msgstr ""
 "A versão do OpenGL é insuficiente. Por favor, atualize draiveres, a placa "
 "gráfica ou use a vesão MESA (ou ANGLE)."
 
-#: src/StelMainView.cpp:551
+#: src/StelMainView.cpp:567
 msgid ""
 "Insufficient OpenGL version. Please update drivers, or graphics hardware."
 msgstr ""
 "A versão do OpenGL é insuficiente. Por favor, atualize os draiveres ou a "
 "placa gráfica."
 
-#: src/StelMainView.cpp:593
+#: src/StelMainView.cpp:609
 msgid ""
 "Your DirectX/OpenGL ES subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
@@ -2090,7 +2099,7 @@ msgstr ""
 "Ignorar e suprimir este aviso no futuro e tentar continuar de qualquer "
 "maneira no modo degradado?"
 
-#: src/StelMainView.cpp:644
+#: src/StelMainView.cpp:660
 msgid ""
 "Your OpenGL/Mesa subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
@@ -2101,7 +2110,7 @@ msgstr ""
 "Ignorar e suprimir este aviso no futuro e tentar continuar de qualquer "
 "maneira no modo degradado?"
 
-#: src/StelMainView.cpp:699
+#: src/StelMainView.cpp:715
 msgid ""
 "Your OpenGL subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
@@ -2112,7 +2121,7 @@ msgstr ""
 "Ignorar e suprimir este aviso no futuro e tentar continuar de qualquer "
 "maneira no modo degradado?"
 
-#: src/StelMainView.cpp:736
+#: src/StelMainView.cpp:752
 msgid ""
 "Your OpenGL ES subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
@@ -2123,7 +2132,7 @@ msgstr ""
 "Ignorar e suprimir este aviso no futuro e tentar continuar de qualquer "
 "maneira no modo degradado?"
 
-#: src/StelMainView.cpp:845
+#: src/StelMainView.cpp:861
 #, qt-format
 msgid "Stellarium %1"
 msgstr "Stellarium %1"
@@ -3838,7 +3847,7 @@ msgid "Refresh"
 msgstr "Atualizar"
 
 #: src/ui_locationDialogGui.h:403
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:145
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:146
 msgid "Location"
 msgstr "Localização"
 
@@ -3862,7 +3871,7 @@ msgid "Current location information"
 msgstr "Informações sobre a localização atual"
 
 #: src/ui_locationDialogGui.h:418
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:146
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:147
 msgid "Latitude:"
 msgstr "Latitude:"
 
@@ -3875,12 +3884,12 @@ msgstr ""
 "exemplo: +1g 12m 8s"
 
 #: src/ui_locationDialogGui.h:422
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:149
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:150
 msgid "Longitude:"
 msgstr "Longitude:"
 
 #: src/ui_locationDialogGui.h:426
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:152
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:153
 msgid "Altitude:"
 msgstr "Altitude:"
 
@@ -4115,12 +4124,12 @@ msgid "Markings"
 msgstr "Marcações"
 
 #: src/ui_viewDialog.h:1226
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:406
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:407
 msgid "Landscape"
 msgstr "Paisagem"
 
 #: src/ui_viewDialog.h:1228
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:228
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:229
 msgid "Starlore"
 msgstr "Cultura estelar"
 
@@ -4195,7 +4204,7 @@ msgstr ""
 "localizações"
 
 #: src/ui_viewDialog.h:1259
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:401
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:402
 msgid "Light pollution:"
 msgstr "Poluição luminosa:"
 
@@ -4208,12 +4217,12 @@ msgid "Refraction/Extinction settings..."
 msgstr "Configurações de refração e extinção…"
 
 #: src/ui_viewDialog.h:1265
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:258
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:259
 msgid "Absolute scale:"
 msgstr "Escala absoluta:"
 
 #: src/ui_viewDialog.h:1266
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:252
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:253
 msgid "Relative scale:"
 msgstr "Escala relativa:"
 
@@ -4226,7 +4235,7 @@ msgid "Zodiacal Light brightness:"
 msgstr "Brilho da luz zodiacal:"
 
 #: src/ui_viewDialog.h:1269
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:264
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:265
 msgid "Twinkle:"
 msgstr "Cintilação:"
 
@@ -4297,7 +4306,7 @@ msgstr "Exibir imagens"
 
 #. TRANSLATORS: Refers to constellation art
 #: src/ui_viewDialog.h:1300
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:296
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:297
 msgid "Art brightness:"
 msgstr "Brilho das imagens:"
 
@@ -4646,7 +4655,7 @@ msgid "seconds"
 msgstr "segundos"
 
 #: src/ui_configurationDialog.h:1111
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:191
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:192
 msgid "Startup date and time"
 msgstr "Data e hora a serem utilizadas ao iniciar"
 
@@ -4854,7 +4863,7 @@ msgid "Tools"
 msgstr "Ferramentas"
 
 #: src/ui_configurationDialog.h:1216
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:452
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:460
 msgid "Scripts"
 msgstr "Apresentações"
 
@@ -5783,7 +5792,7 @@ msgid "Use flip for CCD"
 msgstr "Utilizar inversão do CCD"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1091
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:225
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:226
 msgid "General"
 msgstr "Geral"
 
@@ -7257,7 +7266,7 @@ msgstr ""
 "data são exibidas na barra inferior."
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:395
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:210
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:211
 msgid "Time display format"
 msgstr "Formato de exibição da hora"
 
@@ -7275,7 +7284,7 @@ msgid "24-hour format"
 msgstr "Formato de 24 horas"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:399
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:199
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:200
 msgid "Date display format"
 msgstr "Formato de exibição da data"
 
@@ -7291,11 +7300,11 @@ msgstr "DD-MM-AAAA"
 msgid "mm-dd-yyyy"
 msgstr "MM-DD-AAAA"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:89
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:90
 msgid "Text User Interface"
 msgstr "Interface textual"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:92
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:93
 msgid ""
 "Plugin implementation of 0.9.x series Text User Interface (TUI), used in "
 "planetarium systems"
@@ -7303,144 +7312,148 @@ msgstr ""
 "<p align=\"justify\">Implementação do complemento das séries 0.9.x da "
 "interface textual (TUI), utilizada em sistemas de planetário."
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:160
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:161
 msgid "Solar System body"
 msgstr "Corpo do sistema solar"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:174
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:175
 msgid "Current date/time"
 msgstr "Data e hora atuais"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:179
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:180
 msgid "Set time zone"
 msgstr "Definir o fuso horário"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:180
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:181
 msgid "Day keys"
 msgstr "Chaves de dias"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:181
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:182
 msgid "Startup date/time preset"
 msgstr "Predefinir a data e a hora a serem utilizadas ao iniciar"
 
 #. TRANSLATORS: The current system time is used at startup
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:188
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:189
 msgid "system"
 msgstr "Hora do sistema"
 
 #. TRANSLATORS: A pre-set time is used at startup
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:190
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:191
 msgid "preset"
 msgstr "Hora predefinida"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:198
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:199
 msgid "mmddyyyy"
 msgstr "MMDDAAAA"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:198
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:199
 msgid "ddmmyyyy"
 msgstr "DDMMAAAA"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:198
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:199
 msgid "yyyymmdd"
 msgstr "AAAAMMDD"
 
 #. TRANSLATORS: 12-hour time format
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:207
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:208
 msgid "12h"
 msgstr "12h"
 
 #. TRANSLATORS: 24-hour time format
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:209
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:210
 msgid "24h"
 msgstr "24h"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:234
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:235
 msgid "Language"
 msgstr "Idioma"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:248
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:249
 msgid "Show stars"
 msgstr "Exibir estrelas"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:276
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:277
 msgid "Colors"
 msgstr "Cores"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:352
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:353
 msgid "Nebula names"
 msgstr "Rótulos das nebulosas"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:356
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:357
 msgid "Nebula hints"
 msgstr "Indicações de nebulosas"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:370
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:371
 msgid "Galactic equator line"
 msgstr "Linha do Equador galáctico"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:399
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:400
 msgid "Effects"
 msgstr "Efeitos"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:413
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:414
 msgid "Manual zoom"
 msgstr "Zoom manual"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:418
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:419
 msgid "Magnitude scaling multiplier"
 msgstr "Multiplicador da escala de magnitude"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:420
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:421
 msgid "Milky Way intensity:"
 msgstr "Intensidade da Via Láctea:"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:426
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:427
+msgid "Zodiacal light intensity:"
+msgstr "Intensidade da luz zodiacal:"
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:433
 msgid "Nebula label frequency:"
 msgstr "Frequência dos rótulos das nebulosas:"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:427
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:434
 msgid "Zoom duration:"
 msgstr "Duração do zum:"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:433
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:440
 msgid "Cursor timeout:"
 msgstr "Tempo limite para o cursor ser ocultado:"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:434
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:441
 msgid "Setting landscape sets location"
 msgstr "Ao definir a paisagem é definida a localização"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:455
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:463
 msgid "Run local script"
 msgstr "Executar uma apresentação local"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:461
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:469
 msgid "Stop running script"
 msgstr "Parar de executar uma apresentação"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:464
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:472
 msgid "CD/DVD script"
 msgstr "Apresentação de CD/DVD"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:472
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:476
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:480
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:484
 msgid "Administration"
 msgstr "Administração"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:481
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:489
 msgid "Load default configuration"
 msgstr "Carregar a configuração padrão"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:482
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:490
 msgid "Save current configuration"
 msgstr "Salvar a configuração atual"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:485
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:493
 msgid "Shut down"
 msgstr "Desligar"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:560
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:569
 msgid "[no TUI node]"
 msgstr "[nenhum nodo de interface textual]"
 
