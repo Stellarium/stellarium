@@ -20,8 +20,9 @@
 #ifndef _STELPROJECTIONS_HPP_
 #define _STELPROJECTIONS_HPP_
 
-#include <limits>
 #include "StelProjector.hpp"
+
+#include <limits>
 
 class StelProjectorPerspective : public StelProjector
 {

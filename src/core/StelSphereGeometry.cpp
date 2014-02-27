@@ -17,13 +17,13 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#include <QDebug>
-#include <QBuffer>
-#include <stdexcept>
-
 #include "StelSphereGeometry.hpp"
 #include "StelUtils.hpp"
 #include "StelJsonParser.hpp"
+
+#include <QDebug>
+#include <QBuffer>
+#include <stdexcept>
 
 // Definition of static constants.
 int SphericalRegionP::metaTypeId = SphericalRegionP::initialize();

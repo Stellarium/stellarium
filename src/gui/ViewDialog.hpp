@@ -20,8 +20,9 @@
 #ifndef _VIEWDIALOG_HPP_
 #define _VIEWDIALOG_HPP_
 
-#include <QObject>
 #include "StelDialog.hpp"
+
+#include <QObject>
 
 class Ui_viewDialogForm;
 class QListWidgetItem;
