@@ -48,6 +48,8 @@ class StelCore : public QObject
 	Q_OBJECT
 	Q_ENUMS(ProjectionType)
 	Q_ENUMS(DeltaTAlgorithm)
+	Q_PROPERTY(bool flipHorz READ getFlipHorz WRITE setFlipHorz)
+	Q_PROPERTY(bool flipVert READ getFlipVert WRITE setFlipVert)
 
 public:
 	//! @enum FrameType
@@ -125,7 +127,7 @@ public:
 	virtual ~StelCore();
 
 	//! Init and load all main core components.
-	void init(class StelRenderer* renderer);
+	void init();
 
 	//! Update all the objects with respect to the time.
 	//! @param deltaTime the time increment in sec.
@@ -138,7 +140,7 @@ public:
 	void preDraw();
 
 	//! Update core state after drawing modules.
-	void postDraw(StelRenderer* renderer);
+	void postDraw();
 
 	//! Get a new instance of a simple 2d projection. This projection cannot be used to project or unproject but
 	//! only for 2d painting
@@ -193,6 +195,7 @@ public:
 	Vec3d equinoxEquToAltAz(const Vec3d& v, RefractionMode refMode=RefractionAuto) const;
 	Vec3d altAzToJ2000(const Vec3d& v, RefractionMode refMode=RefractionAuto) const;
 	Vec3d j2000ToAltAz(const Vec3d& v, RefractionMode refMode=RefractionAuto) const;
+	void j2000ToAltAzInPlaceNoRefraction(Vec3f* v) const {v->transfo4d(matJ2000ToAltAz);}
 	Vec3d galacticToJ2000(const Vec3d& v) const;
 	Vec3d equinoxEquToJ2000(const Vec3d& v) const;
 	Vec3d j2000ToEquinoxEqu(const Vec3d& v) const;
@@ -242,6 +245,8 @@ public:
 
 	const QSharedPointer<class Planet> getCurrentPlanet() const;
 
+	SphericalCap getVisibleSkyArea() const;
+	
 	//! Smoothly move the observer to the given location
 	//! @param target the target location
 	//! @param duration direction of view move duration in s
@@ -254,16 +259,17 @@ public:
 	static const double JD_MINUTE;
 	static const double JD_HOUR;
 	static const double JD_DAY;
+	static const double ONE_OVER_JD_SECOND;
 
 	//! Get the sidereal time shifted by the observer longitude
 	//! @return the local sidereal time in radian
-	double getLocalSideralTime() const;
+	double getLocalSiderealTime() const;
 
 	//! Get the duration of a sidereal day for the current observer in day.
-	double getLocalSideralDayLength() const;
+	double getLocalSiderealDayLength() const;
 
 	//! Get the duration of a sidereal year for the current observer in days.
-	double getLocalSideralYearLength() const;
+	double getLocalSiderealYearLength() const;
 
 	//! Return the startup mode, can be preset|Preset or anything else
 	QString getStartupTimeMode();
@@ -489,20 +495,20 @@ public slots:
 
 	//! Set year for custom equation for calculation of Delta-T
 	//! @param y the year, e.g. 1820
-	void setCustomYear(float y) { customYear=y; }
+	void setDeltaTCustomYear(float y) { deltaTCustomYear=y; }
 	//! Set n-dot for custom equation for calculation of Delta-T
 	//! @param y the n-dot value, e.g. -26.0
-	void setCustomNDot(float v) { customNDot=v; }
+	void setDeltaTCustomNDot(float v) { deltaTCustomNDot=v; }
 	//! Set coefficients for custom equation for calculation of Delta-T
 	//! @param y the coefficients, e.g. -20,0,32
-	void setCustomEquationCoefficients(Vec3f c) { customEquationCoeff=c; }
+	void setDeltaTCustomEquationCoefficients(Vec3f c) { deltaTCustomEquationCoeff=c; }
 
 	//! Get year for custom equation for calculation of Delta-T
-	float getCustomYear() const { return customYear; }
+	float getDeltaTCustomYear() const { return deltaTCustomYear; }
 	//! Get n-dot for custom equation for calculation of Delta-T
-	float getCustomNDot() const { return customNDot; }
+	float getDeltaTCustomNDot() const { return deltaTCustomNDot; }
 	//! Get coefficients for custom equation for calculation of Delta-T
-	Vec3f getCustomEquationCoefficients() const { return customEquationCoeff; }
+	Vec3f getDeltaTCustomEquationCoefficients() const { return deltaTCustomEquationCoeff; }
 
 signals:
 	//! This signal is emitted when the observer location has changed.
@@ -529,6 +535,7 @@ private:
 
 	void updateTransformMatrices();
 	void updateTime(double deltaTime);
+	void resetSync();
 
 	// Matrices used for every coordinate transfo
 	Mat4d matHeliocentricEclipticToAltAz;      // Transform from heliocentric ecliptic (Vsop87) to observer-centric altazimuthal coordinate
@@ -554,11 +561,13 @@ private:
 	double presetSkyTime;
 	QTime initTodayTime;
 	QString startupTimeMode;
+	double secondsOfLastJDayUpdate;         // Time in seconds when the time rate or time last changed
+	double JDayOfLastJDayUpdate;         // JDay when the time rate or time last changed
 
 	// Variables for custom equation of Delta-T
-	Vec3f customEquationCoeff;
-	float customNDot;
-	float customYear;
+	Vec3f deltaTCustomEquationCoeff;
+	float deltaTCustomNDot;
+	float deltaTCustomYear;
 
 };
 

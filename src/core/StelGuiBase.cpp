@@ -18,34 +18,16 @@
  */
 
 #include "StelGuiBase.hpp"
-#include "StelAppGraphicsWidget.hpp"
+#include "StelMainView.hpp"
 #include "StelTranslator.hpp"
 #include <QAction>
 
 
-StelGuiBase::StelGuiBase() : stelAppGraphicsWidget(NULL)
+StelGuiBase::StelGuiBase()
 {
 }
 
-void StelGuiBase::init(QGraphicsWidget* atopLevelGraphicsWidget, StelAppGraphicsWidget* astelAppGraphicsWidget)
+void StelGuiBase::init(QGraphicsWidget *atopLevelGraphicsWidget)
 {
 	Q_UNUSED(atopLevelGraphicsWidget);
-	stelAppGraphicsWidget = astelAppGraphicsWidget;
-}
-
-void StelGuiBase::updateI18n()
-{
-	// Translate all action texts
-	foreach (QObject* obj, stelAppGraphicsWidget->children())
-	{
-		QAction* a = qobject_cast<QAction*>(obj);
-		if (a)
-		{
-			const QString& englishText = a->property("englishText").toString();
-			if (!englishText.isEmpty())
-			{
-				a->setText(q_(englishText));
-			}
-		}
-	}
 }

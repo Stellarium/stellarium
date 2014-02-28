@@ -33,7 +33,7 @@
 #include <QDebug>
 #include <QStringList>
 
-StelObjectMgr::StelObjectMgr() : searchRadiusPixel(30.f), distanceWeight(1.f)
+StelObjectMgr::StelObjectMgr() : searchRadiusPixel(25.f), distanceWeight(1.f)
 {
 	setObjectName("StelObjectMgr");
 	objectPointerVisibility = true;
@@ -132,6 +132,16 @@ StelObjectP StelObjectMgr::cleverFind(const StelCore* core, const Vec3d& v) cons
 	foreach (const StelObjectModule* m, objectsModule)
 		candidates += m->searchAround(v, fov_around, core);
 
+	float limitMag = core->getSkyDrawer()->getLimitMagnitude()-2.f;
+	QList<StelObjectP> tmp;
+	foreach (const StelObjectP& obj, candidates)
+	{
+		if (obj->getSelectPriority(core)<=limitMag)
+			tmp.append(obj);
+	}
+	
+	candidates = tmp;
+	
 	// Now select the object minimizing the function y = distance(in pixel) + magnitude
 	Vec3d winpos;
 	prj->project(v, winpos);
@@ -228,7 +238,7 @@ QList<StelObjectP> StelObjectMgr::getSelectedObject(const QString& type)
  Find and return the list of at most maxNbItem objects auto-completing
  passed object I18 name
 *************************************************************************/
-QStringList StelObjectMgr::listMatchingObjectsI18n(const QString& objPrefix, unsigned int maxNbItem) const
+QStringList StelObjectMgr::listMatchingObjectsI18n(const QString& objPrefix, unsigned int maxNbItem, bool useStartOfWords) const
 {
 	QStringList result;
 
@@ -236,7 +246,7 @@ QStringList StelObjectMgr::listMatchingObjectsI18n(const QString& objPrefix, uns
 	foreach (const StelObjectModule* m, objectsModule)
 	{
 		// Get matching object for this module
-		QStringList matchingObj = m->listMatchingObjectsI18n(objPrefix, maxNbItem);
+		QStringList matchingObj = m->listMatchingObjectsI18n(objPrefix, maxNbItem, useStartOfWords);
 		result += matchingObj;
 		maxNbItem-=matchingObj.size();
 	}
@@ -249,7 +259,7 @@ QStringList StelObjectMgr::listMatchingObjectsI18n(const QString& objPrefix, uns
  Find and return the list of at most maxNbItem objects auto-completing
  passed object English name
 *************************************************************************/
-QStringList StelObjectMgr::listMatchingObjects(const QString& objPrefix, unsigned int maxNbItem) const
+QStringList StelObjectMgr::listMatchingObjects(const QString& objPrefix, unsigned int maxNbItem, bool useStartOfWords) const
 {
 	QStringList result;
 
@@ -257,7 +267,7 @@ QStringList StelObjectMgr::listMatchingObjects(const QString& objPrefix, unsigne
 	foreach (const StelObjectModule* m, objectsModule)
 	{
 		// Get matching object for this module
-		QStringList matchingObj = m->listMatchingObjects(objPrefix, maxNbItem);
+		QStringList matchingObj = m->listMatchingObjects(objPrefix, maxNbItem, useStartOfWords);
 		result += matchingObj;
 		maxNbItem-=matchingObj.size();
 	}

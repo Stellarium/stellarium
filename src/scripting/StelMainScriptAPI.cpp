@@ -38,7 +38,7 @@
 #include "StelFileMgr.hpp"
 #include "StelLocation.hpp"
 #include "StelLocationMgr.hpp"
-#include "StelMainGraphicsView.hpp"
+#include "StelMainView.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelMovementMgr.hpp"
 
@@ -52,7 +52,6 @@
 #include "StelGuiBase.hpp"
 #include "MilkyWay.hpp"
 
-#include <QAction>
 #include <QDateTime>
 #include <QDebug>
 #include <QDir>
@@ -95,7 +94,7 @@ StelMainScriptAPI::StelMainScriptAPI(QObject *parent) : QObject(parent)
 	connect(this, SIGNAL(requestSetNightMode(bool)), &StelApp::getInstance(), SLOT(setVisionModeNight(bool)));
 	connect(this, SIGNAL(requestSetProjectionMode(QString)), StelApp::getInstance().getCore(), SLOT(setCurrentProjectionTypeKey(QString)));
 	connect(this, SIGNAL(requestSetSkyCulture(QString)), &StelApp::getInstance().getSkyCultureMgr(), SLOT(setCurrentSkyCultureID(QString)));
-	connect(this, SIGNAL(requestSetDiskViewport(bool)), StelMainGraphicsView::getInstance().getMainScriptAPIProxy(), SLOT(setDiskViewport(bool)));	
+	connect(this, SIGNAL(requestSetDiskViewport(bool)), StelApp::getInstance().getMainScriptAPIProxy(), SLOT(setDiskViewport(bool)));	
 	connect(this, SIGNAL(requestSetHomePosition()), StelApp::getInstance().getCore(), SLOT(returnToHome()));
 }
 
@@ -176,14 +175,14 @@ void StelMainScriptAPI::setDeltaTAlgorithm(QString algorithmName)
 void StelMainScriptAPI::setTimeRate(double ts)
 {
 	// 1 second = .00001157407407407407 JDay
-	StelApp::getInstance().getCore()->setTimeRate(ts * 0.00001157407407407407 * StelMainGraphicsView::getInstance().getScriptMgr().getScriptRate());
+	StelApp::getInstance().getCore()->setTimeRate(ts * 0.00001157407407407407 * StelApp::getInstance().getScriptMgr().getScriptRate());
 }
 
 //! Get time speed in JDay/sec
 //! @return time speed in JDay/sec
 double StelMainScriptAPI::getTimeRate() const
 {
-	return StelApp::getInstance().getCore()->getTimeRate() / (0.00001157407407407407 * StelMainGraphicsView::getInstance().getScriptMgr().getScriptRate());
+	return StelApp::getInstance().getCore()->getTimeRate() / (0.00001157407407407407 * StelApp::getInstance().getScriptMgr().getScriptRate());
 }
 
 bool StelMainScriptAPI::isRealTime()
@@ -217,9 +216,8 @@ void StelMainScriptAPI::setObserverLocation(double longitude, double latitude, d
 void StelMainScriptAPI::setObserverLocation(const QString id, float duration)
 {
 	StelCore* core = StelApp::getInstance().getCore();
-	bool ok;
-	StelLocation loc = StelApp::getInstance().getLocationMgr().locationForSmallString(id, &ok);
-	if (!ok)
+	StelLocation loc = StelApp::getInstance().getLocationMgr().locationForString(id);
+	if (!loc.isValid())
 		return;	// location find failed
 	core->moveObserverTo(loc, duration);
 }
@@ -250,10 +248,10 @@ QVariantMap StelMainScriptAPI::getObserverLocationInfo()
 
 void StelMainScriptAPI::screenshot(const QString& prefix, bool invert, const QString& dir)
 {
-	bool oldInvertSetting = StelMainGraphicsView::getInstance().getFlagInvertScreenShotColors();
-	StelMainGraphicsView::getInstance().setFlagInvertScreenShotColors(invert);
-	StelMainGraphicsView::getInstance().saveScreenShot(prefix, dir);
-	StelMainGraphicsView::getInstance().setFlagInvertScreenShotColors(oldInvertSetting);
+	bool oldInvertSetting = StelMainView::getInstance().getFlagInvertScreenShotColors();
+	StelMainView::getInstance().setFlagInvertScreenShotColors(invert);
+	StelMainView::getInstance().saveScreenShot(prefix, dir);
+	StelMainView::getInstance().setFlagInvertScreenShotColors(oldInvertSetting);
 }
 
 void StelMainScriptAPI::setGuiVisible(bool b)
@@ -263,22 +261,22 @@ void StelMainScriptAPI::setGuiVisible(bool b)
 
 void StelMainScriptAPI::setMinFps(float m)
 {
-	StelMainGraphicsView::getInstance().setMinFps(m);
+	StelMainView::getInstance().setMinFps(m);
 }
 
 float StelMainScriptAPI::getMinFps()
 {
-	return StelMainGraphicsView::getInstance().getMinFps();
+	return StelMainView::getInstance().getMinFps();
 }
 
 void StelMainScriptAPI::setMaxFps(float m)
 {
-	StelMainGraphicsView::getInstance().setMaxFps(m);
+	StelMainView::getInstance().setMaxFps(m);
 }
 
 float StelMainScriptAPI::getMaxFps()
 {
-	return StelMainGraphicsView::getInstance().getMaxFps();
+	return StelMainView::getInstance().getMaxFps();
 }
 
 QString StelMainScriptAPI::getMountMode()
@@ -484,14 +482,10 @@ void StelMainScriptAPI::removeSkyImage(const QString& id)
 
 void StelMainScriptAPI::loadSound(const QString& filename, const QString& id)
 {
-	QString path;
-	try
+	QString path = StelFileMgr::findFile("scripts/" + filename);
+	if (path.isEmpty())
 	{
-		path = StelFileMgr::findFile("scripts/" + filename);
-	}
-	catch(std::runtime_error& e)
-	{
-		qWarning() << "cannot play sound" << QDir::toNativeSeparators(filename) << ":" << e.what();
+		qWarning() << "cannot play sound" << QDir::toNativeSeparators(filename);
 		return;
 	}
 
@@ -520,14 +514,10 @@ void StelMainScriptAPI::dropSound(const QString& id)
 
 void StelMainScriptAPI::loadVideo(const QString& filename, const QString& id, float x, float y, bool show, float alpha)
 {
-	QString path;
-	try
+	QString path = StelFileMgr::findFile("scripts/" + filename);
+	if (path.isEmpty())
 	{
-		path = StelFileMgr::findFile("scripts/" + filename);
-	}
-	catch(std::runtime_error& e)
-	{
-		qWarning() << "cannot play video" << QDir::toNativeSeparators(filename) << ":" << e.what();
+		qWarning() << "cannot play video" << QDir::toNativeSeparators(filename);
 		return;
 	}
 
@@ -581,27 +571,27 @@ void StelMainScriptAPI::showVideo(const QString& id, bool show)
 
 int StelMainScriptAPI::getScreenWidth()
 {
-	return StelMainGraphicsView::getInstance().size().width();
+	return StelMainView::getInstance().size().width();
 }
 
 int StelMainScriptAPI::getScreenHeight()
 {
-	return StelMainGraphicsView::getInstance().size().height();
+	return StelMainView::getInstance().size().height();
 }
 
 double StelMainScriptAPI::getScriptRate()
 {
-        return StelMainGraphicsView::getInstance().getScriptMgr().getScriptRate();
+        return StelApp::getInstance().getScriptMgr().getScriptRate();
 }
 
 void StelMainScriptAPI::setScriptRate(double r)
 {
-        return StelMainGraphicsView::getInstance().getScriptMgr().setScriptRate(r);
+        return StelApp::getInstance().getScriptMgr().setScriptRate(r);
 }
 
 void StelMainScriptAPI::pauseScript()
 {
-	return StelMainGraphicsView::getInstance().getScriptMgr().pauseScript();
+	return StelApp::getInstance().getScriptMgr().pauseScript();
 }
 
 void StelMainScriptAPI::setSelectedObjectInfo(const QString& level)
@@ -629,7 +619,7 @@ void StelMainScriptAPI::quitStellarium()
 void StelMainScriptAPI::debug(const QString& s)
 {
 	qDebug() << "script: " << s;
-	StelMainGraphicsView::getInstance().getScriptMgr().debug(s);
+	StelApp::getInstance().getScriptMgr().debug(s);
 }
 
 double StelMainScriptAPI::jdFromDateString(const QString& dt, const QString& spec)
@@ -657,7 +647,7 @@ double StelMainScriptAPI::jdFromDateString(const QString& dt, const QString& spe
 		double delta;
 		double unit;
 		double dayLength = 1.0;
-		double yearLength = 365.242189; // duration of Earth's mean tropical year
+		double yearLength = 365.242190419; // duration of Earth's mean tropical year
 		double monthLength = 27.321582241; // duration of Earth's mean tropical month
 
 		if (nowRe.capturedTexts().at(1)=="now")
@@ -667,8 +657,8 @@ double StelMainScriptAPI::jdFromDateString(const QString& dt, const QString& spe
 
 		if (nowRe.capturedTexts().at(8) == "sidereal")
 		{
-			dayLength = core->getLocalSideralDayLength();
-			yearLength = core->getLocalSideralYearLength();
+			dayLength = core->getLocalSiderealDayLength();
+			yearLength = core->getLocalSiderealYearLength();
 			monthLength = 27.321661; // duration of Earth's sidereal month
 		}
 
@@ -741,7 +731,7 @@ QVariantMap StelMainScriptAPI::getObjectInfo(const QString& name)
 
 	
 	Vec3d pos;
-	double ra, dec, alt, azi, glong, glat;
+	double ra, dec, alt, az, glong, glat;
 	StelCore* core = StelApp::getInstance().getCore();
 
 	// ra/dec
@@ -758,25 +748,33 @@ QVariantMap StelMainScriptAPI::getObjectInfo(const QString& name)
 
 	// apparent altitude/azimuth
 	pos = obj->getAltAzPosApparent(core);
-	StelUtils::rectToSphe(&azi, &alt, pos);
+	StelUtils::rectToSphe(&az, &alt, pos);
+	az = 3.*M_PI - az;  // N is zero, E is 90 degrees
+	if (az > M_PI*2)
+		az -= M_PI*2;
+
 	map.insert("altitude", alt*180./M_PI);
-	map.insert("azimuth", azi*180./M_PI);
+	map.insert("azimuth", az*180./M_PI);
 
 	// geometric altitude/azimuth
 	pos = obj->getAltAzPosGeometric(core);
-	StelUtils::rectToSphe(&azi, &alt, pos);
-	map.insert("altitude-geometric", alt*180./M_PI);
-	map.insert("azimuth-geometric", azi*180./M_PI);
+	StelUtils::rectToSphe(&az, &alt, pos);
+	az = 3.*M_PI - az;  // N is zero, E is 90 degrees
+	if (az > M_PI*2)
+		az -= M_PI*2;
 
-	// galactic long/lat in J2000
-	pos = obj->getJ2000GalacticPos(core);
+	map.insert("altitude-geometric", alt*180./M_PI);
+	map.insert("azimuth-geometric", az*180./M_PI);
+
+	// galactic long/lat
+	pos = obj->getGalacticPos(core);
 	StelUtils::rectToSphe(&glong, &glat, pos);
-	map.insert("glong", alt*180./M_PI);
-	map.insert("glat", azi*180./M_PI);
+	map.insert("glong", glong*180./M_PI);
+	map.insert("glat", glat*180./M_PI);
 
 	// magnitude
-	map.insert("vmag", obj->getVMagnitude(core, false));
-	map.insert("vmage", obj->getVMagnitude(core, true));
+	map.insert("vmag", obj->getVMagnitude(core));
+	map.insert("vmage", obj->getVMagnitudeWithExtinction(core));
 
 	// angular size
 	map.insert("size", obj->getAngularSize(core));
@@ -813,7 +811,7 @@ QVariantMap StelMainScriptAPI::getSelectedObjectInfo()
 
 	// OK, object found. Let's go.
 	Vec3d pos;
-	double ra, dec, alt, azi, glong, glat;
+	double ra, dec, alt, az, glong, glat;
 	StelCore* core = StelApp::getInstance().getCore();
 
 	// ra/dec
@@ -830,25 +828,33 @@ QVariantMap StelMainScriptAPI::getSelectedObjectInfo()
 
 	// apparent altitude/azimuth
 	pos = obj->getAltAzPosApparent(core);
-	StelUtils::rectToSphe(&azi, &alt, pos);
+	StelUtils::rectToSphe(&az, &alt, pos);
+	az = 3.*M_PI - az;  // N is zero, E is 90 degrees
+	if (az > M_PI*2)
+		az -= M_PI*2;
+
 	map.insert("altitude", alt*180./M_PI);
-	map.insert("azimuth", azi*180./M_PI);
+	map.insert("azimuth", az*180./M_PI);
 
 	// geometric altitude/azimuth
 	pos = obj->getAltAzPosGeometric(core);
-	StelUtils::rectToSphe(&azi, &alt, pos);
-	map.insert("altitude-geometric", alt*180./M_PI);
-	map.insert("azimuth-geometric", azi*180./M_PI);
+	StelUtils::rectToSphe(&az, &alt, pos);
+	az = 3.*M_PI - az;  // N is zero, E is 90 degrees
+	if (az > M_PI*2)
+		az -= M_PI*2;
 
-	// galactic long/lat in J2000
-	pos = obj->getJ2000GalacticPos(core);
+	map.insert("altitude-geometric", alt*180./M_PI);
+	map.insert("azimuth-geometric", az*180./M_PI);
+
+	// galactic long/lat
+	pos = obj->getGalacticPos(core);
 	StelUtils::rectToSphe(&glong, &glat, pos);
-	map.insert("glong", alt*180./M_PI);
-	map.insert("glat", azi*180./M_PI);
+	map.insert("glong", glong*180./M_PI);
+	map.insert("glat", glat*180./M_PI);
 
 	// magnitude
-	map.insert("vmag", obj->getVMagnitude(core, false));
-	map.insert("vmage", obj->getVMagnitude(core, true));
+	map.insert("vmag", obj->getVMagnitude(core));
+	map.insert("vmage", obj->getVMagnitudeWithExtinction(core));
 
 	// angular size
 	map.insert("size", obj->getAngularSize(core));

@@ -20,21 +20,22 @@
 #ifndef _OCULARS_HPP_
 #define _OCULARS_HPP_
 
-#include "VecMath.hpp"
-#include "StelModule.hpp"
-#include "OcularDialog.hpp"
 #include "CCD.hpp"
-#include "Ocular.hpp"
-#include "Telescope.hpp"
 #include "Lens.hpp"
+#include "Ocular.hpp"
+#include "OcularDialog.hpp"
+#include "StelModule.hpp"
+#include "StelTexture.hpp"
+#include "Telescope.hpp"
+#include "VecMath.hpp"
 
 #include <QFont>
+#include <QOpenGLFunctions_1_2>
 #include <QSettings>
 
-#define MIN_OCULARS_INI_VERSION 0.12
+#define MIN_OCULARS_INI_VERSION 2
 
 QT_BEGIN_NAMESPACE
-class QAction;
 class QKeyEvent;
 class QMenu;
 class QMouseEvent;
@@ -44,9 +45,10 @@ class QSignalMapper;
 QT_END_NAMESPACE
 
 class StelButton;
+class StelAction;
 
 //! Main class of the Oculars plug-in.
-class Oculars : public StelModule
+class Oculars : public StelModule, protected QOpenGLFunctions_1_2
 {
 	Q_OBJECT
 	//BM: Temporary, until the GUI is finalized and some other method of getting
@@ -63,7 +65,7 @@ public:
 	virtual void init();
 	virtual void deinit();
 	virtual bool configureGui(bool show=true);
-	virtual void draw(StelCore* core, class StelRenderer* renderer);
+	virtual void draw(StelCore* core);
 	virtual double getCallOrder(StelModuleActionName actionName) const;
 	//! Returns the module-specific style sheet.
 	//! The main StelStyle instance should be passed.
@@ -116,6 +118,12 @@ public slots:
 	void setFlagDecimalDegrees(const bool b);
 	bool getFlagDecimalDegrees(void) const;
 
+	void setFlagLimitMagnitude(const bool b);
+	bool getFlagLimitMagnitude(void) const;
+
+	void setFlagInitFovUsage(const bool b);
+	bool getFlagInitFovUsage(void) const;
+
 signals:
 	void selectedCCDChanged();
 	void selectedOcularChanged();
@@ -127,10 +135,11 @@ private slots:
 	void instrumentChanged();
 	void determineMaxEyepieceAngle();
 	void setRequireSelection(bool state);
-	void setScaleImageCircle(bool state);
+	void setScaleImageCircle(bool state);	
 	void setScreenFOVForCCD();
 	void retranslateGui();
 	void setStelStyle(const QString& style);
+	void updateOcularReticle(void);
 
 private:
 	//! Set up the Qt actions needed to activate the plugin.
@@ -140,18 +149,18 @@ private:
 	bool isBinocularDefined();
 
 	//! Reneders the CCD bounding box on-screen.  A telescope must be selected, or this call does nothing.
-	void paintCCDBounds(class StelRenderer* renderer);
+	void paintCCDBounds();
 	//! Renders crosshairs into the viewport.
-	void paintCrosshairs(class StelRenderer* renderer);
+	void paintCrosshairs();
 	//! Paint the mask into the viewport.
-	void paintOcularMask(class StelRenderer* renderer);
+	void paintOcularMask(const StelCore * core);
 	//! Renders the three Telrad circles, but only if not in ocular mode.
-	void paintTelrad(class StelRenderer* renderer);
+	void paintTelrad();
 
 
 	//! Paints the text about the current object selections to the upper right hand of the screen.
 	//! Should only be called from a 'ready' state; currently from the draw() method.
-	void paintText(const StelCore* core, StelRenderer* renderer);
+	void paintText(const StelCore * core);
 
 	//! This method is called by the zoom() method, when this plugin is toggled off; it resets to the default view.
 	void unzoomOcular();
@@ -194,11 +203,11 @@ private:
 	int selectedTelescopeIndex; //!< index of the current telescope, in the range of -1:telescopes.count(). -1 means none is selected.
 	int selectedLensIndex; //!<  index of the current lens, in the range of -1:lense.count(). -1 means no lens is selected
 
-	QFont font;					//!< The font used for drawing labels.
-	bool flagShowCCD;				//!< flag used to track f we are in CCD mode.
+	QFont font;			//!< The font used for drawing labels.
+	bool flagShowCCD;		//!< flag used to track f we are in CCD mode.
 	bool flagShowOculars;		//!< flag used to track if we are in ocular mode.
 	bool flagShowCrosshairs;	//!< flag used to track in crosshairs should be rendered in the ocular view.
-	bool flagShowTelrad;			//!< If true, display the Telrad overlay.
+	bool flagShowTelrad;		//!< If true, display the Telrad overlay.
 	int usageMessageLabelID;	//!< the id of the label showing the usage message. -1 means it's not displayed.
 
 	bool flagAzimuthalGrid;		//!< Flag to track if AzimuthalGrid was displayed at activation.
@@ -213,49 +222,62 @@ private:
 	bool flagGalacticPlaneLine;	//!< Flag to track if GalacticPlaneLine was displayed at activation.
 	bool flagAdaptation;		//!< Flag to track if adaptationCheckbox was enabled at activation.
 
+	bool flagLimitStars;		//!< Flag to track limit magnitude for stars
+	float magLimitStars;		//!< Value of limited magnitude for stars
+	bool flagLimitDSOs;		//!< Flag to track limit magnitude for DSOs
+	float magLimitDSOs;		//!< Value of limited magnitude for DSOs
+
 	double ccdRotationAngle;	//!< The angle to rotate the CCD bounding box. */
 	double maxEyepieceAngle;	//!< The maximum aFOV of any eyepiece.
 	bool requireSelection;		//!< Read from the ini file, whether an object is required to be selected to zoom in.
+	bool flagLimitMagnitude;	//!< Read from the ini file, whether a magnitude is required to be limited.
 	bool useMaxEyepieceAngle;	//!< Read from the ini file, whether to scale the mask based aFOV.
 	//! Display the GUI control panel
 	bool guiPanelEnabled;
 	bool flagDecimalDegrees;
 
-	QSignalMapper* ccdRotationSignalMapper;  //!< Used to rotate the CCD. */
-	QSignalMapper* ccdsSignalMapper; //!< Used to determine which CCD was selected from the popup navigator. */
-	QSignalMapper* ocularsSignalMapper; //!< Used to determine which ocular was selected from the popup navigator. */
-	QSignalMapper* telescopesSignalMapper; //!< Used to determine which telescope was selected from the popup navigator. */
-	QSignalMapper* lenseSignalMapper; //!< Used to determine which lens was selected from the popup navigator */
+	QSignalMapper * ccdRotationSignalMapper;  //!< Used to rotate the CCD. */
+	QSignalMapper * ccdsSignalMapper; //!< Used to determine which CCD was selected from the popup navigator. */
+	QSignalMapper * ocularsSignalMapper; //!< Used to determine which ocular was selected from the popup navigator. */
+	QSignalMapper * telescopesSignalMapper; //!< Used to determine which telescope was selected from the popup navigator. */
+	QSignalMapper * lenseSignalMapper; //!< Used to determine which lens was selected from the popup navigator */
 
 	// for toolbar button
-	QPixmap* pxmapGlow;
-	QPixmap* pxmapOnIcon;
-	QPixmap* pxmapOffIcon;
-	StelButton* toolbarButton;
+	QPixmap * pxmapGlow;
+	QPixmap * pxmapOnIcon;
+	QPixmap * pxmapOffIcon;
+	StelButton * toolbarButton;
 
 	OcularDialog *ocularDialog;
 	bool ready; //!< A flag that determines that this module is usable.  If false, we won't open.
 
-	QAction* actionShowOcular;
-	QAction* actionShowCrosshairs;
-	QAction* actionShowSensor;
-	QAction* actionShowTelrad;
-	QAction* actionConfiguration;
-	QAction* actionMenu;
-	QAction* actionTelescopeIncrement;
-	QAction* actionTelescopeDecrement;
-	QAction* actionOcularIncrement;
-	QAction* actionOcularDecrement;
+	StelAction * actionShowOcular;
+	StelAction * actionShowCrosshairs;
+	StelAction * actionShowSensor;
+	StelAction * actionShowTelrad;
+	StelAction * actionConfiguration;
+	StelAction * actionMenu;
+	StelAction * actionTelescopeIncrement;
+	StelAction * actionTelescopeDecrement;
+	StelAction * actionOcularIncrement;
+	StelAction * actionOcularDecrement;
 
-	class OcularsGuiPanel* guiPanel;
+	class OcularsGuiPanel * guiPanel;
 
 	//Styles
 	QByteArray normalStyleSheet;
 	QByteArray nightStyleSheet;
+
+	//Reticle
+	StelTextureSP reticleTexture;
+	double actualFOV;	//!< Holds the FOV of the ocular/tescope/lens cobination; what the screen is zoomed to.
+	double initialFOV;	//!< Holds the initial FOV
+	bool flagInitFOVUsage;	//!< Flag used to track if we use default initial FOV (value at the startup of planetarium).
+	double reticleRotation;
 };
 
 
-#include "fixx11h.h"
+
 #include <QObject>
 #include "StelPluginInterface.hpp"
 
@@ -263,6 +285,7 @@ private:
 class OcularsStelPluginInterface : public QObject, public StelPluginInterface
 {
 	Q_OBJECT
+	Q_PLUGIN_METADATA(IID "stellarium.StelGuiPluginInterface/1.0")
 	Q_INTERFACES(StelPluginInterface)
 public:
 	virtual StelModule* getStelModule() const;

@@ -27,10 +27,11 @@
 #include <QDateTime>
 
 #include "StelObject.hpp"
-#include "StelProjectorType.hpp"
-
+#include "StelTextureTypes.hpp"
+#include "StelPainter.hpp"
 #include "StelFader.hpp"
 
+class StelPainter;
 
 //! @class Pulsar
 //! A Pulsar object represents one pulsar on the sky.
@@ -54,6 +55,7 @@ public:
 	{
 		return "Pulsar";
 	}
+
 	virtual float getSelectPriority(const StelCore* core) const;
 
 	//! Get an HTML string to describe the object
@@ -66,7 +68,8 @@ public:
 		return XYZ;
 	}
 	//! Get the visual magnitude of pulsar
-	virtual float getVMagnitude(const StelCore* core, bool withExtinction=false) const;
+	virtual float getVMagnitude(const StelCore* core) const;
+	virtual float getVMagnitudeWithExtinction(const StelCore *core) const;
 	//! Get the angular size of pulsar
 	virtual double getAngularSize(const StelCore* core) const;
 	//! Get the localized name of pulsar
@@ -87,8 +90,14 @@ private:
 
 	Vec3d XYZ;                         // holds J2000 position	
 
-	void draw(StelCore* core, StelRenderer* renderer, StelProjectorP projector,
-	          class StelTextureNew* markerTexture);
+	static StelTextureSP hintTexture;
+	static StelTextureSP markerTexture;
+	static bool distributionMode;
+	static bool glitchFlag;
+	static Vec3f markerColor;
+	static Vec3f glitchColor;
+
+	void draw(StelCore* core, StelPainter *painter);
 
 	//! Variables for description of properties of pulsars
 	QString designation;	//! The designation of the pulsar (J2000 pulsar name)
@@ -107,6 +116,7 @@ private:
 	float s600;		//! Time averaged flux density at 600MHz in mJy
 	float s1400;		//! Time averaged flux density at 1400MHz in mJy
 	float distance;		//! Distance based on electron density model in kpc
+	int glitch;		//! Number of glitches
 	QString notes;		//! Notes to pulsar (Type of pulsar)
 
 	LinearFader labelsFader;

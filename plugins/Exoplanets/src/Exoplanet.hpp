@@ -27,7 +27,8 @@
 #include <QDateTime>
 
 #include "StelObject.hpp"
-#include "StelProjectorType.hpp"
+#include "StelTextureTypes.hpp"
+#include "StelPainter.hpp"
 #include "StelFader.hpp"
 
 typedef struct
@@ -40,9 +41,13 @@ typedef struct
 	float eccentricity;	//! Exoplanet orbit eccentricity
 	float inclination;	//! Exoplanet orbit inclination
 	float angleDistance;	//! Exoplanet angle distance
-	int discovered;		//! Exoplanet discovered year	
+	int discovered;		//! Exoplanet discovered year
+	QString hclass;		//! Exoplanet habitable class
+	int MSTemp;		//! Exoplanet mean surface temperature (Kelvin)
+	int ESI;		//! Exoplanet Earth Similarity Index
 } exoplanetData;
 
+class StelPainter;
 
 //! @class Exoplanet
 //! A exoplanet object represents one pulsar on the sky.
@@ -66,6 +71,7 @@ public:
 	{
 		return "Exoplanet";
 	}
+
 	virtual float getSelectPriority(const StelCore* core) const;
 
 	//! Get an HTML string to describe the object
@@ -78,7 +84,8 @@ public:
 		return XYZ;
 	}
 	//! Get the visual magnitude
-	virtual float getVMagnitude(const StelCore* core, bool withExtinction=false) const;
+	virtual float getVMagnitude(const StelCore* core) const;
+	virtual float getVMagnitudeWithExtinction(const StelCore *core) const;
 	//! Get the angular size of pulsar
 	virtual double getAngularSize(const StelCore* core) const;
 	//! Get the localized name of pulsar
@@ -93,13 +100,31 @@ public:
 
 	void update(double deltaTime);
 
+	int getCountExoplanets(void) const
+	{
+		return EPCount;
+	}
+	int getCountHabitableExoplanets(void) const
+	{
+		return PHEPCount;
+	}
+
 private:
 	bool initialized;
 
 	Vec3d XYZ;                         // holds J2000 position	
 
-	void draw(StelCore* core, class StelRenderer* renderer, StelProjectorP projector, 
-	          class StelTextureNew* markerTexture);
+	static StelTextureSP hintTexture;
+	static StelTextureSP markerTexture;
+	static Vec3f habitableExoplanetMarkerColor;
+	static Vec3f exoplanetMarkerColor;
+	static bool distributionMode;
+	static bool timelineMode;
+
+	void draw(StelCore* core, StelPainter *painter);
+
+	int EPCount;
+	int PHEPCount;
 
 	//! Variables for description of properties of exoplanets
 	QString designation;			//! The designation of the host star
@@ -112,6 +137,7 @@ private:
 	float Vmag;				//! Visual magnitude of star
 	float sradius;				//! Radius of star in Rsun
 	int effectiveTemp;			//! Effective temperature of star in K
+	bool hasHabitableExoplanets;		//! Has potential habitable exoplanets
 	QList<exoplanetData> exoplanets;	//! List of exoplanets
 
 	LinearFader labelsFader;

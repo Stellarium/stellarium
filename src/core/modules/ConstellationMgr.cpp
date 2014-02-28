@@ -18,22 +18,13 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#include <vector>
-#include <QDebug>
-#include <QFile>
-#include <QImageReader>
-#include <QSettings>
-#include <QRegExp>
-#include <QString>
-#include <QStringList>
-#include <QDir>
 
 #include "ConstellationMgr.hpp"
 #include "Constellation.hpp"
 #include "StarMgr.hpp"
 #include "StelUtils.hpp"
 #include "StelApp.hpp"
-#include "renderer/StelRenderer.hpp"
+#include "StelTextureMgr.hpp"
 #include "StelProjector.hpp"
 #include "StelObjectMgr.hpp"
 #include "StelLocaleMgr.hpp"
@@ -41,15 +32,25 @@
 #include "StelModuleMgr.hpp"
 #include "StelFileMgr.hpp"
 #include "StelCore.hpp"
+#include "StelPainter.hpp"
 #include "StelSkyDrawer.hpp"
+
+#include <vector>
+#include <QDebug>
+#include <QFile>
+#include <QSettings>
+#include <QRegExp>
+#include <QString>
+#include <QStringList>
+#include <QDir>
 
 using namespace std;
 
 // constructor which loads all data from appropriate files
 ConstellationMgr::ConstellationMgr(StarMgr *_hip_stars)
 	: hipStarMgr(_hip_stars),
-	  artFadeDuration(2.0f),
-	  artIntensity(0.5f),
+	  artFadeDuration(1.),
+	  artIntensity(0),
 	  artDisplayed(0),
 	  boundariesDisplayed(0),
 	  linesDisplayed(0),
@@ -84,7 +85,7 @@ void ConstellationMgr::init()
 	Q_ASSERT(conf);
 
 	lastLoadedSkyCulture = "dummy";
-	asterFont.setPixelSize(conf->value("viewing/constellation_font_size", 16).toInt());
+	asterFont.setPixelSize(conf->value("viewing/constellation_font_size", 14).toInt());
 	setFlagLines(conf->value("viewing/flag_constellation_drawing").toBool());
 	setFlagLabels(conf->value("viewing/flag_constellation_name").toBool());
 	setFlagBoundaries(conf->value("viewing/flag_constellation_boundaries",false).toBool());
@@ -102,6 +103,12 @@ void ConstellationMgr::init()
 	connect(app, SIGNAL(languageChanged()), this, SLOT(updateI18n()));
 	connect(app, SIGNAL(skyCultureChanged(const QString&)), this, SLOT(updateSkyCulture(const QString&)));
 	connect(app, SIGNAL(colorSchemeChanged(const QString&)), this, SLOT(setStelStyle(const QString&)));
+
+	QString displayGroup = N_("Display Options");
+	addAction("actionShow_Constellation_Lines", displayGroup, N_("Constellation lines"), "linesDisplayed", "C");
+	addAction("actionShow_Constellation_Art", displayGroup, N_("Constellation art"), "artDisplayed", "R");
+	addAction("actionShow_Constellation_Labels", displayGroup, N_("Constellation labels"), "namesDisplayed", "V");
+	addAction("actionShow_Constellation_Boundaries", displayGroup, N_("Constellation boundaries"), "boundariesDisplayed", "B");
 }
 
 /*************************************************************************
@@ -122,45 +129,50 @@ void ConstellationMgr::updateSkyCulture(const QString& skyCultureDir)
 
 	// Find constellation art.  If this doesn't exist, warn, but continue using ""
 	// the loadLinesAndArt function knows how to handle this (just loads lines).
-	QString conArtFile;
-	try
-	{
-		conArtFile = StelFileMgr::findFile("skycultures/"+skyCultureDir+"/constellationsart.fab");
-	}
-	catch (std::runtime_error& e)
+	QString conArtFile = StelFileMgr::findFile("skycultures/"+skyCultureDir+"/constellationsart.fab");
+	if (conArtFile.isEmpty())
 	{
 		qDebug() << "No constellationsart.fab file found for sky culture " << QDir::toNativeSeparators(skyCultureDir);
 	}
 
-	try
-	{
-		// first of all, remove constellations from the list of selected objects in StelObjectMgr, since we are going to delete them
-		deselectConstellations();
+	// first of all, remove constellations from the list of selected objects in StelObjectMgr, since we are going to delete them
+	deselectConstellations();
 
-		loadLinesAndArt(StelFileMgr::findFile("skycultures/"+skyCultureDir+"/constellationship.fab"), conArtFile, skyCultureDir);
+	QString fic = StelFileMgr::findFile("skycultures/"+skyCultureDir+"/constellationship.fab");
+	if (fic.isEmpty())
+		qWarning() << "ERROR loading constellation lines and art from file: " << fic;
+	else
+		loadLinesAndArt(fic, conArtFile, skyCultureDir);
 
-		// load constellation names
-		loadNames(StelFileMgr::findFile("skycultures/" + skyCultureDir + "/constellation_names.eng.fab"));
+	// load constellation names
+	fic = StelFileMgr::findFile("skycultures/" + skyCultureDir + "/constellation_names.eng.fab");
+	if (fic.isEmpty())
+		qWarning() << "ERROR loading constellation names from file: " << fic;
+	else
+		loadNames(fic);
 
-		// Translate constellation names for the new sky culture
-		updateI18n();
-	}
-	catch (std::runtime_error& e)
-	{
-		qWarning() << "ERROR: while loading new constellation data for sky culture "
-			<< QDir::toNativeSeparators(skyCultureDir) << ", reason: " << e.what() << endl;
-	}
+	// Translate constellation names for the new sky culture
+	updateI18n();
 
-	// TODO: do we need to have an else { clearBoundaries(); } ?
 	// load constellation boundaries
-	try
+	// First try load constellation boundaries from sky culture
+	fic = StelFileMgr::findFile("skycultures/" + skyCultureDir + "/constellations_boundaries.dat");
+	bool existBoundaries = false;
+	if (fic.isEmpty())
 	{
-		loadBoundaries(StelFileMgr::findFile("skycultures/" + skyCultureDir + "/constellations_boundaries.dat"));
+		qWarning() << "ERROR loading constellation boundaries file in sky culture: " << skyCultureDir;
+		// OK, Second try load generic constellation boundaries
+		fic = StelFileMgr::findFile("data/constellations_boundaries.dat");
+		if (fic.isEmpty())
+			qWarning() << "ERROR loading main constellation boundaries file: " << fic;
+		else
+			existBoundaries = true;
 	}
-	catch (std::runtime_error& e)
-	{
-		qWarning() << "ERROR loading constellation boundaries file: " << e.what();
-	}
+	else
+		existBoundaries = true;
+
+	if (existBoundaries)
+		loadBoundaries(fic);
 
 	lastLoadedSkyCulture = skyCultureDir;
 }
@@ -423,47 +435,23 @@ void ConstellationMgr::loadLinesAndArt(const QString &fileName, const QString &a
 		if (!cons)
 		{
 			qWarning() << "ERROR in constellation art file at line" << currentLineNumber << "for culture" << cultureName
-			           << "constellation" << shortname << "unknown";
+					   << "constellation" << shortname << "unknown";
 		}
 		else
 		{
-			QString texturePath(texfile);
-			try
+			QString texturePath = StelFileMgr::findFile("skycultures/"+cultureName+"/"+texfile);
+			if (texturePath.isEmpty())
 			{
-				texturePath = StelFileMgr::findFile("skycultures/"+cultureName+"/"+texfile);
-			}
-			catch (std::runtime_error& e)
-			{
-				// if the texture isn't found in the skycultures/[culture] directory,
-				// try the central textures diectory.
-				qWarning() << "WARNING, could not locate texture file " << QDir::toNativeSeparators(texfile)
-					 << " in the skycultures/" << cultureName
-					 << " directory...  looking in general textures/ directory...";
-				try
-				{
-					texturePath = StelFileMgr::findFile(QString("textures/")+texfile);
-				}
-				catch(std::exception& e2)
-				{
-					qWarning() << "ERROR: could not find texture, " << QDir::toNativeSeparators(texfile) << ": " << e2.what();
-				}
+				qWarning() << "ERROR: could not find texture, " << QDir::toNativeSeparators(texfile);
 			}
 
-			cons->artTexturePath = texturePath;
+			cons->artTexture = StelApp::getInstance().getTextureManager().createTextureThread(texturePath);
 
-			// This is one part that is less convenient than before the GL refactor 
-			// (due to the StelRenderer not being globally (StelCore) available.
-			// We need to determine texture size manually here.
-
-			// Try to get the size from the file without loading data
-			QImageReader im(texturePath);
-			if (!im.canRead())
+			int texSizeX = 0, texSizeY = 0;
+			if (cons->artTexture==NULL || !cons->artTexture->getDimensions(texSizeX, texSizeY))
 			{
-				qWarning() << "Texture dimensions not available";
+				qWarning() << "Texture dimension not available";
 			}
-			const QSize size = im.canRead() ? im.size() : QSize(64, 64);
-			const int texSizeX = size.width();
-			const int texSizeY = size.height();
 
 			StelCore* core = StelApp::getInstance().getCore();
 			Vec3d s1 = hipStarMgr->searchHP(hp1)->getJ2000EquatorialPos(core);
@@ -475,23 +463,37 @@ void ConstellationMgr::loadLinesAndArt(const QString &fileName, const QString &a
 			// We need 3 stars and the 4th point is deduced from the other to get an normal base
 			// X = B inv(A)
 			Vec3d s4 = s1 + ((s2 - s1) ^ (s3 - s1));
-			Mat4d B(s1[0], s1[1], s1[2], 1, 
-			        s2[0], s2[1], s2[2], 1,
-			        s3[0], s3[1], s3[2], 1,
-			        s4[0], s4[1], s4[2], 1);
-			Mat4d A(x1, texSizeY - y1, 0.f, 1.f,
-			        x2, texSizeY - y2, 0.f, 1.f, 
-			        x3, texSizeY - y3, 0.f, 1.f, 
-			        x1, texSizeY - y1, texSizeX, 1.f);
+			Mat4d B(s1[0], s1[1], s1[2], 1, s2[0], s2[1], s2[2], 1, s3[0], s3[1], s3[2], 1, s4[0], s4[1], s4[2], 1);
+			Mat4d A(x1, texSizeY - y1, 0.f, 1.f, x2, texSizeY - y2, 0.f, 1.f, x3, texSizeY - y3, 0.f, 1.f, x1, texSizeY - y1, texSizeX, 1.f);
 			Mat4d X = B * A.inverse();
 
-			cons->texCoordTo3D = Mat4f(X[0]  , X[1]  , X[2]  , X[3],
-			                           X[4]  , X[5]  , X[6]  , X[7],
-			                           X[8]  , X[9]  , X[10] , X[11],
-			                           X[12] , X[13] , X[14] , X[15]);
+			// Tesselate on the plan assuming a tangential projection for the image
+			static const int nbPoints=5;
+			QVector<Vec2f> texCoords;
+			texCoords.reserve(nbPoints*nbPoints*6);
+			for (int j=0;j<nbPoints;++j)
+			{
+				for (int i=0;i<nbPoints;++i)
+				{
+					texCoords << Vec2f(((float)i)/nbPoints, ((float)j)/nbPoints);
+					texCoords << Vec2f(((float)i+1.f)/nbPoints, ((float)j)/nbPoints);
+					texCoords << Vec2f(((float)i)/nbPoints, ((float)j+1.f)/nbPoints);
+					texCoords << Vec2f(((float)i+1.f)/nbPoints, ((float)j)/nbPoints);
+					texCoords << Vec2f(((float)i+1.f)/nbPoints, ((float)j+1.f)/nbPoints);
+					texCoords << Vec2f(((float)i)/nbPoints, ((float)j+1.f)/nbPoints);
+				}
+			}
 
+			QVector<Vec3d> contour;
+			contour.reserve(texCoords.size());
+			foreach (const Vec2f& v, texCoords)
+				contour << X * Vec3d(v[0]*texSizeX, v[1]*texSizeY, 0.);
 
-			Vec3d tmp(X * Vec3d(0.5 * texSizeX, 0.5 * texSizeY, 0.));
+			cons->artPolygon.vertex=contour;
+			cons->artPolygon.texCoords=texCoords;
+			cons->artPolygon.primitiveType=StelVertexArray::Triangles;
+
+			Vec3d tmp(X * Vec3d(0.5*texSizeX, 0.5*texSizeY, 0.));
 			tmp.normalize();
 			Vec3d tmp2(X * Vec3d(0., 0., 0.));
 			tmp2.normalize();
@@ -505,65 +507,61 @@ void ConstellationMgr::loadLinesAndArt(const QString &fileName, const QString &a
 	fic.close();
 }
 
-void ConstellationMgr::draw(StelCore* core, class StelRenderer* renderer)
+void ConstellationMgr::draw(StelCore* core)
 {
-	const StelProjectorP projector = core->getProjection(StelCore::FrameJ2000);
-	drawLines(renderer, projector, core);
-	drawNames(renderer, projector, asterFont);
-	drawArt(renderer, projector);
-	drawBoundaries(renderer, projector);
+	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
+	StelPainter sPainter(prj);
+	sPainter.setFont(asterFont);
+	drawLines(sPainter, core);
+	drawNames(sPainter);
+	drawArt(sPainter);
+	drawBoundaries(sPainter);
 }
 
 // Draw constellations art textures
-void ConstellationMgr::drawArt(StelRenderer* renderer, StelProjectorP projector) const
+void ConstellationMgr::drawArt(StelPainter& sPainter) const
 {
-	renderer->setBlendMode(BlendMode_Add);
+	glBlendFunc(GL_ONE, GL_ONE);
+	sPainter.enableTexture2d(true);
+	glEnable(GL_BLEND);
+	glEnable(GL_CULL_FACE);
 
 	vector < Constellation * >::const_iterator iter;
-	SphericalRegionP region = projector->getViewportConvexPolygon();
+	SphericalRegionP region = sPainter.getProjector()->getViewportConvexPolygon();
 	for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
 	{
-		Constellation* cons = *iter;
-
-		if(NULL == cons->artTexture && !cons->artTexturePath.isEmpty())
-		{
-			cons->artTexture = renderer->createTexture(cons->artTexturePath);
-		}
-		if(NULL == cons->artVertices)
-		{
-			// Tesselate on the plane assuming a tangential projection for the image
-			const int resolution = 5;
-			cons->generateArtVertices(renderer, resolution);
-		}
-
-		cons->drawArtOptim(renderer, projector, *region);
+		(*iter)->drawArtOptim(sPainter, *region);
 	}
+
+	glDisable(GL_CULL_FACE);
 }
 
 // Draw constellations lines
-void ConstellationMgr::drawLines(StelRenderer* renderer, StelProjectorP projector, const StelCore* core) const
+void ConstellationMgr::drawLines(StelPainter& sPainter, const StelCore* core) const
 {
-	renderer->setBlendMode(BlendMode_Alpha);
-	const SphericalCap& viewportHalfspace = projector->getBoundingCap();
+	sPainter.enableTexture2d(false);
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	const SphericalCap& viewportHalfspace = sPainter.getProjector()->getBoundingCap();
 	vector < Constellation * >::const_iterator iter;
 	for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
 	{
-		(*iter)->drawOptim(renderer, projector, core, viewportHalfspace);
+		(*iter)->drawOptim(sPainter, core, viewportHalfspace);
 	}
 }
 
 // Draw the names of all the constellations
-void ConstellationMgr::drawNames(StelRenderer* renderer, StelProjectorP projector, QFont& font) const
+void ConstellationMgr::drawNames(StelPainter& sPainter) const
 {
-	renderer->setBlendMode(BlendMode_Alpha);
+	glEnable(GL_BLEND);
+	sPainter.enableTexture2d(true);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	vector < Constellation * >::const_iterator iter;
 	for (iter = asterisms.begin(); iter != asterisms.end(); iter++)
 	{
 		// Check if in the field of view
-		if (projector->projectCheck((*iter)->XYZname, (*iter)->XYname))
-		{
-			(*iter)->drawName(renderer, font);\
-		}
+		if (sPainter.getProjector()->projectCheck((*iter)->XYZname, (*iter)->XYname))
+			(*iter)->drawName(sPainter);
 	}
 }
 
@@ -675,7 +673,7 @@ void ConstellationMgr::loadNames(const QString& namesFile)
 
 void ConstellationMgr::updateI18n()
 {
-	StelTranslator trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
+	const StelTranslator& trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
 	vector < Constellation * >::const_iterator iter;
 	for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
 	{
@@ -1089,14 +1087,14 @@ bool ConstellationMgr::loadBoundaries(const QString& boundaryFile)
 	return true;
 }
 
-void ConstellationMgr::drawBoundaries(StelRenderer* renderer, StelProjectorP projector) const
+void ConstellationMgr::drawBoundaries(StelPainter& sPainter) const
 {
-	renderer->setBlendMode(BlendMode_None);
-
+	sPainter.enableTexture2d(false);
+	glDisable(GL_BLEND);
 	vector < Constellation * >::const_iterator iter;
 	for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
 	{
-		(*iter)->drawBoundaryOptim(renderer, projector);
+		(*iter)->drawBoundaryOptim(sPainter);
 	}
 }
 
@@ -1128,20 +1126,31 @@ StelObjectP ConstellationMgr::searchByName(const QString& name) const
 	return NULL;
 }
 
-QStringList ConstellationMgr::listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem) const
+QStringList ConstellationMgr::listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem, bool useStartOfWords) const
 {
 	QStringList result;
 	if (maxNbItem==0) return result;
 
-	QString objw = objPrefix.toUpper();
-
+	QString cn;
+	bool find;
 	vector < Constellation * >::const_iterator iter;
 	for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
 	{
-		QString constw = (*iter)->getNameI18n().mid(0, objw.size()).toUpper();
-		if (constw==objw)
+		cn = (*iter)->getNameI18n();
+		find = false;
+		if (useStartOfWords)
 		{
-			result << (*iter)->getNameI18n();
+			if (objPrefix.toUpper()==cn.mid(0, objPrefix.size()).toUpper())
+				find = true;
+		}
+		else
+		{
+			if (cn.contains(objPrefix,Qt::CaseInsensitive))
+				find = true;
+		}
+		if (find)
+		{
+			result << cn;
 			if (result.size()==maxNbItem)
 				return result;
 		}
@@ -1149,20 +1158,31 @@ QStringList ConstellationMgr::listMatchingObjectsI18n(const QString& objPrefix, 
 	return result;
 }
 
-QStringList ConstellationMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem) const
+QStringList ConstellationMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords) const
 {
 	QStringList result;
 	if (maxNbItem==0) return result;
 
-	QString objw = objPrefix.toUpper();
-
+	QString cn;
+	bool find;
 	vector < Constellation * >::const_iterator iter;
 	for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
 	{
-		QString constw = (*iter)->getEnglishName().mid(0, objw.size()).toUpper();
-		if (constw==objw)
+		cn = (*iter)->getEnglishName();
+		find = false;
+		if (useStartOfWords)
 		{
-			result << (*iter)->getEnglishName();
+			if (objPrefix.toUpper()==cn.mid(0, objPrefix.size()).toUpper())
+				find = true;
+		}
+		else
+		{
+			if (cn.contains(objPrefix,Qt::CaseInsensitive))
+				find = true;
+		}
+		if (find)
+		{
+			result << cn;
 			if (result.size()==maxNbItem)
 				return result;
 		}

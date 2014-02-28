@@ -23,28 +23,25 @@
 //! @file StelTranslator.hpp
 //! Define some translation macros.
 
+#include "config.h"
+
 #include <QMap>
 #include <QString>
-#include "StelUtils.hpp"
-#include <QDebug>
-
-// These macro are used as global function replacing standard gettext operation
-#include "gettext.h"
 
 //! @def q_(str)
 //! Return the gettext translated english text @a str using the current global translator.
 //! The returned value is a localized QString.
-#define q_(str) StelTranslator::globalTranslator.qtranslate(str)
+#define q_(str) StelTranslator::globalTranslator->qtranslate(str)
 
 //! @def qc_(str, ctxt)
 //! Return the gettext translated english text @a str in context @b ctxt using the current global translator.
 //! The returned value is a localized QString.
-#define qc_(str, ctxt) StelTranslator::globalTranslator.qtranslate(str, ctxt)
+#define qc_(str, ctxt) StelTranslator::globalTranslator->qtranslate(str, ctxt)
 
 //! @def N_(str)
 //! A pseudo function call that serves as a marker for the automated extraction of messages.
 //! A call to N_() doesn't translate.
-#define N_(str) gettext_noop(str)
+#define N_(str) str
 
 //! Class used to translate strings to any language.
 //! Implements a nice interface to gettext which is UTF-8 compliant and is somewhat multiplateform
@@ -62,45 +59,19 @@ public:
 	//! @param adomain The name of the domain to use for translation
 	//! @param amoDirectory The directory where to look for the domain.mo translation files.
 	//! @param alangName The C locale name or language name like "fr" or "fr_FR". If string is "" or "system" it will use the system locale.
-	StelTranslator(const QString& adomain, const QString& amoDirectory, const QString& alangName) :
-			domain(adomain), moDirectory(amoDirectory), langName(alangName)
-	{
-		StelTranslator::lastUsed = NULL;
-	}
+	StelTranslator(const QString& adomain, const QString& alangName);
+	
+	~StelTranslator();
 	
 	//! Translate input message and return it as a QString.
 	//! @param s input string in english.
 	//! @param c disambiguation string (gettext "context" string).
 	//! @return The translated QString
-	QString qtranslate(const QString& s, const QString& c = QString())
-	{
-		if (s.isEmpty()) return QString();
-		reload();
-		if (c.isEmpty())
-		{
-			return QString::fromUtf8(gettext(s.toUtf8().constData()));
-		}
-		else
-		{
-			// Avoid using pgettext() by manually forming
-			// the context/message combined string.
-			QByteArray bytesC = c.toUtf8();
-			QByteArray bytesS = s.toUtf8();
-			QByteArray glue(1, (char)0x4);
-			QByteArray bytes = bytesC + glue + bytesS;
-			QString t = QString::fromUtf8(gettext(bytes.data()));
-			// If no translation is found, return the original
-			// without the context.
-			if (t.toUtf8() == bytes)
-				return s;
-			else
-				return t;
-		}
-	}
+	QString qtranslate(const QString& s, const QString& c = QString()) const;
 	
 	//! Get true translator locale name. Actual locale, never "system".
 	//! @return Locale name e.g "fr_FR"
-	const QString& getTrueLocaleName(void) const
+	const QString& getTrueLocaleName() const
 	{
 		if (langName=="system" || langName=="system_default")
 			return StelTranslator::systemLangName;
@@ -109,7 +80,7 @@ public:
 	}
 
 	//! Used as a global translator by the whole app
-	static StelTranslator globalTranslator;
+	static StelTranslator* globalTranslator;
 
 	//! Get available language name in native language from passed locales directory
 	QStringList getAvailableLanguagesNamesNative(const QString& localeDir="") const;	
@@ -126,27 +97,24 @@ public:
 	static void init(const QString& fileName);
 	
 private:
+	StelTranslator(const StelTranslator& );
+	const StelTranslator& operator=(const StelTranslator&);
+	
 	//! Initialize the languages code list from the passed file
 	//! @param fileName file containing the list of language codes
 	static void initIso639_1LanguageCodes(const QString& fileName);
 	
 	//! Get available language codes from passed locales directory
 	QStringList getAvailableIso639_1Codes(const QString& localeDir="") const;
-	
-	//! Reload the current locale info so that gettext use them
-	void reload();
 
 	//! The domain name
 	QString domain;
 
-	//! The directory where the locale file tree stands
-	QString moDirectory;
-
 	//! The two letter string defining the current language name
 	QString langName;
-
-	//! Keep in memory which one was the last used transator to prevent reloading it at each tranlate() call
-	static StelTranslator* lastUsed;
+	
+	//! QTranslator instance
+	class QTranslator* translator;
 
 	//! Try to determine system language from system configuration
 	static void initSystemLanguage(void);

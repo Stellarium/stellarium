@@ -26,8 +26,10 @@
 #include <QDebug>
 #include <iostream>
 
-#include <QApplication>
+#include <QGuiApplication>
 #include <QDir>
+
+#include <stdio.h>
 
 void CLIProcessor::parseCLIArgsPreConfig(const QStringList& argList)
 {
@@ -51,7 +53,7 @@ void CLIProcessor::parseCLIArgsPreConfig(const QStringList& argList)
 		          << "--help (or -h)          : This cruft.\n"
 		          << "--config-file (or -c)   : Use an alternative name for the config file\n"
 		          << "--user-dir (or -u)      : Use an alternative user data directory\n"
-		          << "--safe-mode (or -s)     : Disable shaders and use older GL renderer\n"
+		          << "--safe-mode (or -s)     : Disable GL shaders and use older GL engine\n"
 		          << "                          Try this is you have graphics problems\n"
 		          << "--full-screen (or -f)   : With argument \"yes\" or \"no\" over-rides\n"
 		          << "                          the full screen setting in the config file\n"
@@ -84,14 +86,10 @@ void CLIProcessor::parseCLIArgsPreConfig(const QStringList& argList)
 		const QSet<QString>& landscapeIds = StelFileMgr::listContents("landscapes", StelFileMgr::Directory);
 		foreach (const QString& i, landscapeIds)
 		{
-			try
-			{
-				// finding the file will throw an exception if it is not found
-				// in that case we won't output the landscape ID as it cannot work
-				StelFileMgr::findFile("landscapes/" + i + "/landscape.ini");
+			// finding the file will throw an exception if it is not found
+			// in that case we won't output the landscape ID as it cannot work
+			if (!StelFileMgr::findFile("landscapes/" + i + "/landscape.ini").isEmpty())
 				std::cout << qPrintable(i) << std::endl;
-			}
-			catch (std::runtime_error& e){}
 		}
 		exit(0);
 	}

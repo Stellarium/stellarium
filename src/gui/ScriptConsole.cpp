@@ -20,7 +20,7 @@
 
 #include "ScriptConsole.hpp"
 #include "ui_scriptConsole.h"
-#include "StelMainGraphicsView.hpp"
+#include "StelMainView.hpp"
 #include "StelScriptMgr.hpp"
 #include "StelFileMgr.hpp"
 #include "StelApp.hpp"
@@ -84,11 +84,11 @@ void ScriptConsole::createDialogContent()
 	connect(ui->clearButton, SIGNAL(clicked()), this, SLOT(clearButtonPressed()));
 	connect(ui->preprocessSSCButton, SIGNAL(clicked()), this, SLOT(preprocessScript()));
 	connect(ui->runButton, SIGNAL(clicked()), this, SLOT(runScript()));
-	connect(ui->stopButton, SIGNAL(clicked()), &StelMainGraphicsView::getInstance().getScriptMgr(), SLOT(stopScript()));
+	connect(ui->stopButton, SIGNAL(clicked()), &StelApp::getInstance().getScriptMgr(), SLOT(stopScript()));
 	connect(ui->includeBrowseButton, SIGNAL(clicked()), this, SLOT(includeBrowse()));
 	connect(ui->quickrunCombo, SIGNAL(currentIndexChanged(int)), this, SLOT(quickRun(int)));
-	connect(&StelMainGraphicsView::getInstance().getScriptMgr(), SIGNAL(scriptStopped()), this, SLOT(scriptEnded()));
-	connect(&StelMainGraphicsView::getInstance().getScriptMgr(), SIGNAL(scriptDebug(const QString&)), this, SLOT(appendLogLine(const QString&)));
+	connect(&StelApp::getInstance().getScriptMgr(), SIGNAL(scriptStopped()), this, SLOT(scriptEnded()));
+	connect(&StelApp::getInstance().getScriptMgr(), SIGNAL(scriptDebug(const QString&)), this, SLOT(appendLogLine(const QString&)));
 #ifndef ENABLE_STRATOSCRIPT_COMPAT
 	ui->preprocessSTSButton->setHidden(true);
 #else
@@ -100,7 +100,7 @@ void ScriptConsole::createDialogContent()
 
 void ScriptConsole::loadScript()
 {
-	QString fileName = QFileDialog::getOpenFileName(&StelMainGraphicsView::getInstance(), 
+	QString fileName = QFileDialog::getOpenFileName(&StelMainView::getInstance(), 
 	                                                tr("Load Script"), 
 	                                                StelFileMgr::getInstallationDir() + "/scripts", 
 	                                                tr("Script Files") + " " + getFileMask());
@@ -116,17 +116,11 @@ void ScriptConsole::loadScript()
 
 void ScriptConsole::saveScript()
 {
-	QString saveDir;
-	try
-	{
-		saveDir = StelFileMgr::findFile("scripts", StelFileMgr::Flags(StelFileMgr::Writable|StelFileMgr::Directory));
-	}
-	catch (std::runtime_error& e)
-	{
+	QString saveDir = StelFileMgr::findFile("scripts", StelFileMgr::Flags(StelFileMgr::Writable|StelFileMgr::Directory));
+	if (saveDir.isEmpty())
 		saveDir = StelFileMgr::getUserDir();
-	}
 
-	QString fileName = QFileDialog::getSaveFileName(&StelMainGraphicsView::getInstance(), 
+	QString fileName = QFileDialog::getSaveFileName(&StelMainView::getInstance(), 
 	                                                tr("Save Script"), 
 	                                                saveDir,
 	                                                tr("Script Files") + " " + getFileMask());
@@ -166,13 +160,13 @@ void ScriptConsole::preprocessScript()
 			if (sender() == ui->preprocessSSCButton)
 			{
 				qDebug() << "Preprocessing with SSC proprocessor";
-				StelMainGraphicsView::getInstance().getScriptMgr().preprocessScript(src, dest, ui->includeEdit->text());
+				StelApp::getInstance().getScriptMgr().preprocessScript(src, dest, ui->includeEdit->text());
 			}
 #ifdef ENABLE_STRATOSCRIPT_COMPAT
 			else if (sender() == ui->preprocessSTSButton)
 			{
 				qDebug() << "Preprocessing with STS proprocessor";
-				StelMainGraphicsView::getInstance().getScriptMgr().preprocessStratoScript(src, dest, ui->includeEdit->text());
+				StelApp::getInstance().getScriptMgr().preprocessStratoScript(src, dest, ui->includeEdit->text());
 			}
 #endif
 			else
@@ -207,7 +201,7 @@ void ScriptConsole::runScript()
 	ui->stopButton->setEnabled(true);
 
 	appendLogLine(QString("Starting script at %1").arg(QDateTime::currentDateTime().toString()));
-	if (!StelMainGraphicsView::getInstance().getScriptMgr().runScript(fileName, ui->includeEdit->text()))
+	if (!StelApp::getInstance().getScriptMgr().runScript(fileName, ui->includeEdit->text()))
 	{
 		QString msg = QString("ERROR - cannot run script from temp file: \"%1\"").arg(fileName);
 		qWarning() << "ScriptConsole::runScript " + msg;
@@ -247,7 +241,7 @@ void ScriptConsole::appendLogLine(const QString& s)
 
 void ScriptConsole::includeBrowse()
 {
-	ui->includeEdit->setText(QFileDialog::getExistingDirectory(&StelMainGraphicsView::getInstance(), 
+	ui->includeEdit->setText(QFileDialog::getExistingDirectory(&StelMainView::getInstance(), 
 	                                                           tr("Select Script Includ Directory"), 
 	                                                           StelFileMgr::getInstallationDir() + "/scripts"));
 }
@@ -289,7 +283,7 @@ void ScriptConsole::quickRun(int idx)
 		out << scriptText;
 		file.close();
 		appendLogLine(QString("Running: %1").arg(scriptText));
-		StelMainGraphicsView::getInstance().getScriptMgr().runScript(fileName);
+		StelApp::getInstance().getScriptMgr().runScript(fileName);
 	}
 	else
 	{

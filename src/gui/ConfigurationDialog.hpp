@@ -21,7 +21,6 @@
 #define _CONFIGURATIONDIALOG_HPP_
 
 #include <QObject>
-#include <QProgressBar>
 #include <QNetworkReply>
 #include <QFile>
 #include "StelDialog.hpp"
@@ -38,14 +37,13 @@ class ConfigurationDialog : public StelDialog
 {
 	Q_OBJECT
 public:
-	ConfigurationDialog(StelGui* agui);
+	ConfigurationDialog(StelGui* agui, QObject* parent);
 	virtual ~ConfigurationDialog();
 	//! Notify that the application style changed
 	void styleChanged();
 
 public slots:
 	void retranslate();
-	void updateIconsColor();
 
 protected:
 	//! Initialize the dialog widgets and connect the signals/slots
@@ -72,7 +70,7 @@ private:
 	bool hasDownloadedStarCatalog;
 	QNetworkReply* starCatalogDownloadReply;
 	QFile* currentDownloadFile;
-	QProgressBar* progressBar;
+	class StelProgressController* progressBar;
 
 private slots:
 	void setNoSelectedInfo();
@@ -82,7 +80,8 @@ private slots:
 	//! Called when any of the boxes has been clicked. Sets the
 	//! "selected info" mode to "Custom".
 	void setSelectedInfoFromCheckBoxes();
-	
+
+	void updateCurrentLanguage();
 	void selectLanguage(const QString& languageCode);
 	void setStartupTimeMode();
 	//! Show/bring to foreground the shortcut editor window.
@@ -117,9 +116,11 @@ private slots:
 	void setDefaultViewOptions();
 
 	void populatePluginsList();
-	void pluginsSelectionChanged(const QString&);
+	void pluginsSelectionChanged(QListWidgetItem *item, QListWidgetItem *previousItem);
 	void pluginConfigureCurrentSelection();
 	void loadAtStartupChanged(int);
+
+	void setUpdatesFlag(bool b);
 
 	void populateDeltaTAlgorithmsList();
 	void setDeltaTAlgorithm(int algorithmID);

@@ -17,7 +17,16 @@
    <property name="spacing">
     <number>0</number>
    </property>
-   <property name="margin">
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
     <number>0</number>
    </property>
    <item>
@@ -191,7 +200,16 @@
       <enum>QFrame::StyledPanel</enum>
      </property>
      <layout class="QGridLayout" name="gridLayout_2">
-      <property name="margin">
+      <property name="leftMargin">
+       <number>0</number>
+      </property>
+      <property name="topMargin">
+       <number>0</number>
+      </property>
+      <property name="rightMargin">
+       <number>0</number>
+      </property>
+      <property name="bottomMargin">
        <number>0</number>
       </property>
       <property name="spacing">
@@ -218,7 +236,16 @@
          <enum>QFrame::Raised</enum>
         </property>
         <layout class="QGridLayout" name="gridLayout_3">
-         <property name="margin">
+         <property name="leftMargin">
+          <number>0</number>
+         </property>
+         <property name="topMargin">
+          <number>0</number>
+         </property>
+         <property name="rightMargin">
+          <number>0</number>
+         </property>
+         <property name="bottomMargin">
           <number>0</number>
          </property>
          <property name="spacing">
@@ -285,13 +312,25 @@
             <property name="spacing">
              <number>0</number>
             </property>
-            <property name="margin">
+            <property name="leftMargin">
+             <number>0</number>
+            </property>
+            <property name="topMargin">
+             <number>0</number>
+            </property>
+            <property name="rightMargin">
+             <number>0</number>
+            </property>
+            <property name="bottomMargin">
              <number>0</number>
             </property>
             <item>
              <widget class="QListView" name="citiesListView">
               <property name="focusPolicy">
                <enum>Qt::NoFocus</enum>
+              </property>
+              <property name="toolTip">
+               <string>Standard list of locations is contains only English names (without diacritics!)</string>
               </property>
               <property name="horizontalScrollBarPolicy">
                <enum>Qt::ScrollBarAlwaysOff</enum>
@@ -308,6 +347,9 @@
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
+              </property>
+              <property name="toolTip">
+               <string>Standard list of locations is contains only English names (without diacritics!)</string>
               </property>
               <property name="text">
                <string/>
@@ -329,7 +371,16 @@
          <string>Current location information</string>
         </property>
         <layout class="QGridLayout" name="gridLayout">
-         <property name="margin">
+         <property name="leftMargin">
+          <number>0</number>
+         </property>
+         <property name="topMargin">
+          <number>0</number>
+         </property>
+         <property name="rightMargin">
+          <number>0</number>
+         </property>
+         <property name="bottomMargin">
           <number>0</number>
          </property>
          <item row="2" column="0" colspan="3">
@@ -347,7 +398,16 @@
             <enum>QFrame::Raised</enum>
            </property>
            <layout class="QHBoxLayout" name="horizontalLayout">
-            <property name="margin">
+            <property name="leftMargin">
+             <number>0</number>
+            </property>
+            <property name="topMargin">
+             <number>0</number>
+            </property>
+            <property name="rightMargin">
+             <number>0</number>
+            </property>
+            <property name="bottomMargin">
              <number>0</number>
             </property>
             <item>
@@ -432,7 +492,16 @@
             <enum>QFrame::Raised</enum>
            </property>
            <layout class="QGridLayout" name="gridLayout_4">
-            <property name="margin">
+            <property name="leftMargin">
+             <number>0</number>
+            </property>
+            <property name="topMargin">
+             <number>0</number>
+            </property>
+            <property name="rightMargin">
+             <number>0</number>
+            </property>
+            <property name="bottomMargin">
              <number>0</number>
             </property>
             <property name="horizontalSpacing">
@@ -537,7 +606,16 @@
             <enum>QFrame::Raised</enum>
            </property>
            <layout class="QGridLayout" name="gridLayout_5">
-            <property name="margin">
+            <property name="leftMargin">
+             <number>0</number>
+            </property>
+            <property name="topMargin">
+             <number>0</number>
+            </property>
+            <property name="rightMargin">
+             <number>0</number>
+            </property>
+            <property name="bottomMargin">
              <number>0</number>
             </property>
             <item row="0" column="0">
@@ -548,7 +626,11 @@
              </widget>
             </item>
             <item row="0" column="1">
-             <widget class="QLineEdit" name="cityNameLineEdit"/>
+             <widget class="QLineEdit" name="cityNameLineEdit">
+              <property name="placeholderText">
+               <string>New Location</string>
+              </property>
+             </widget>
             </item>
             <item row="1" column="0">
              <widget class="QLabel" name="label_4">
@@ -610,7 +692,10 @@
                </size>
               </property>
               <property name="editable">
-               <bool>false</bool>
+               <bool>true</bool>
+              </property>
+              <property name="insertPolicy">
+               <enum>QComboBox::NoInsert</enum>
               </property>
              </widget>
             </item>

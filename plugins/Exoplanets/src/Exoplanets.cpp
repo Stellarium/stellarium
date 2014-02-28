@@ -16,7 +16,10 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
+#include "config.h"
+
 #include "StelProjector.hpp"
+#include "StelPainter.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelGui.hpp"
@@ -24,22 +27,21 @@
 #include "StelLocaleMgr.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelObjectMgr.hpp"
+#include "StelTextureMgr.hpp"
 #include "StelJsonParser.hpp"
 #include "StelFileMgr.hpp"
 #include "StelUtils.hpp"
 #include "StelTranslator.hpp"
-#include "renderer/StelRenderer.hpp"
-#include "renderer/StelTextureNew.hpp"
 #include "LabelMgr.hpp"
 #include "Exoplanets.hpp"
 #include "Exoplanet.hpp"
 #include "ExoplanetsDialog.hpp"
+#include "StelActionMgr.hpp"
+#include "StelProgressController.hpp"
 
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
 #include <QKeyEvent>
-#include <QAction>
-#include <QProgressBar>
 #include <QDebug>
 #include <QFileInfo>
 #include <QFile>
@@ -47,11 +49,11 @@
 #include <QVariantMap>
 #include <QVariant>
 #include <QList>
-#include <QSettings>
 #include <QSharedPointer>
 #include <QStringList>
 #include <QPixmap>
 #include <QDir>
+#include <QSettings>
 
 #define CATALOG_FORMAT_VERSION 1 /* Version of format of catalog */
 
@@ -74,24 +76,15 @@ StelPluginInfo ExoplanetsStelPluginInterface::getPluginInfo() const
 	info.authors = "Alexander Wolf";
 	info.contact = "alex.v.wolf@gmail.com";
 	info.description = N_("This plugin plots the position of stars with exoplanets. Exoplanets data is derived from the 'Extrasolar Planets Encyclopaedia' at exoplanet.eu");
+	info.version = EXOPLANETS_PLUGIN_VERSION;
 	return info;
 }
-
-Q_EXPORT_PLUGIN2(Exoplanets, ExoplanetsStelPluginInterface)
-
 
 /*
  Constructor
 */
 Exoplanets::Exoplanets()
-	: texPointer(NULL)
-	, markerTexture(NULL)
-	, flagShowExoplanets(false)
-	, OnIcon(NULL)
-	, OffIcon(NULL)
-	, GlowIcon(NULL)
-	, toolbarButton(NULL)
-	, progressBar(NULL)
+	: flagShowExoplanets(false), OnIcon(NULL), OffIcon(NULL), GlowIcon(NULL), toolbarButton(NULL), progressBar(NULL)
 {
 	setObjectName("Exoplanets");
 	exoplanetsConfigDialog = new ExoplanetsDialog();
@@ -119,8 +112,8 @@ Exoplanets::~Exoplanets()
 void Exoplanets::deinit()
 {
 	ep.clear();
-	if(NULL != texPointer)    {delete texPointer;}
-	if(NULL != markerTexture) {delete markerTexture;}	
+	Exoplanet::markerTexture.clear();
+	texPointer.clear();
 }
 
 void Exoplanets::update(double) //deltaTime
@@ -161,23 +154,22 @@ void Exoplanets::init()
 		readSettingsFromConfig();
 
 		jsonCatalogPath = StelFileMgr::findFile("modules/Exoplanets", (StelFileMgr::Flags)(StelFileMgr::Directory|StelFileMgr::Writable)) + "/exoplanets.json";
+		if (jsonCatalogPath.isEmpty())
+			return;
+
+		texPointer = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/pointeur2.png");
+		Exoplanet::markerTexture = StelApp::getInstance().getTextureManager().createTexture(":/Exoplanets/exoplanet.png");
 
 		// key bindings and other actions
-		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+		addAction("actionShow_Exoplanets", N_("Exoplanets"), N_("Show exoplanets"), "showExoplanets", "Ctrl+Alt+E");
+		addAction("actionShow_Exoplanets_ConfigDialog", N_("Exoplanets"), N_("Exoplanets configuration window"), exoplanetsConfigDialog, "visible");
 
-		GlowIcon = new QPixmap(":/graphicsGui/glow32x32.png");
+		GlowIcon = new QPixmap(":/graphicGui/glow32x32.png");
 		OnIcon = new QPixmap(":/Exoplanets/btExoplanets-on.png");
 		OffIcon = new QPixmap(":/Exoplanets/btExoplanets-off.png");
 
 		setFlagShowExoplanets(getEnableAtStartup());
 		setFlagShowExoplanetsButton(flagShowExoplanetsButton);
-
-		connect(gui->getGuiAction("actionShow_Exoplanets_ConfigDialog"), SIGNAL(toggled(bool)), exoplanetsConfigDialog, SLOT(setVisible(bool)));
-		connect(exoplanetsConfigDialog, SIGNAL(visibleChanged(bool)), gui->getGuiAction("actionShow_Exoplanets_ConfigDialog"), SLOT(setChecked(bool)));
-		if (flagShowExoplanetsButton)
-		{
-			connect(gui->getGuiAction("actionShow_Exoplanets"), SIGNAL(toggled(bool)), this, SLOT(setFlagShowExoplanets(bool)));
-		}
 	}
 	catch (std::runtime_error &e)
 	{
@@ -195,7 +187,7 @@ void Exoplanets::init()
 	// If the json file does not already exist, create it from the resource in the Qt resource
 	if(QFileInfo(jsonCatalogPath).exists())
 	{
-		if (getJsonFileFormatVersion() < CATALOG_FORMAT_VERSION)
+		if (!checkJsonFileFormat() || getJsonFileFormatVersion()<CATALOG_FORMAT_VERSION)
 		{
 			restoreDefaultJsonFile();
 		}
@@ -226,33 +218,27 @@ void Exoplanets::init()
 /*
  Draw our module. This should print name of first PSR in the main window
 */
-void Exoplanets::draw(StelCore* core, StelRenderer* renderer)
+void Exoplanets::draw(StelCore* core)
 {
 	if (!flagShowExoplanets)
 		return;
 
 	StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
-	renderer->setFont(font);
-
-	if(NULL == texPointer)
-	{
-		Q_ASSERT_X(NULL == markerTexture, Q_FUNC_INFO, "Textures need to be created simultaneously");
-		texPointer    = renderer->createTexture("textures/pointeur2.png");
-		markerTexture = renderer->createTexture(":/Exoplanets/exoplanet.png");
-	}
+	StelPainter painter(prj);
+	painter.setFont(font);
 	
 	foreach (const ExoplanetP& eps, ep)
 	{
 		if (eps && eps->initialized)
-			eps->draw(core, renderer, prj, markerTexture);
+			eps->draw(core, &painter);
 	}
 
 	if (GETSTELMODULE(StelObjectMgr)->getFlagSelectedObjectPointer())
-		drawPointer(core, renderer, prj);
+		drawPointer(core, painter);
 
 }
 
-void Exoplanets::drawPointer(StelCore* core, StelRenderer* renderer, StelProjectorP projector)
+void Exoplanets::drawPointer(StelCore* core, StelPainter& painter)
 {
 	const QList<StelObjectP> newSelected = GETSTELMODULE(StelObjectMgr)->getSelectedObject("Exoplanet");
 	if (!newSelected.empty())
@@ -262,15 +248,16 @@ void Exoplanets::drawPointer(StelCore* core, StelRenderer* renderer, StelProject
 
 		Vec3d screenpos;
 		// Compute 2D pos and return if outside screen
-		if (!projector->project(pos, screenpos))
+		if (!painter.getProjector()->project(pos, screenpos))
 			return;
 
 		const Vec3f& c(obj->getInfoColor());
-		renderer->setGlobalColor(c[0],c[1],c[2]);
+		painter.setColor(c[0],c[1],c[2]);
 		texPointer->bind();
-		renderer->setBlendMode(BlendMode_Alpha);
-		renderer->drawTexturedRect(screenpos[0] - 13.0f, screenpos[1] - 13.0f, 26.0f, 
-		                           26.0f, StelApp::getInstance().getTotalRunTime() * 40.0f);
+		painter.enableTexture2d(true);
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
+		painter.drawSprite2dMode(screenpos[0], screenpos[1], 13.f, StelApp::getInstance().getTotalRunTime()*40.);
 	}
 }
 
@@ -330,52 +317,80 @@ StelObjectP Exoplanets::searchByNameI18n(const QString& nameI18n) const
 	return NULL;
 }
 
-QStringList Exoplanets::listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem) const
+QStringList Exoplanets::listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem, bool useStartOfWords) const
 {
-	QStringList result;
+	QStringList result;	
 	if (!flagShowExoplanets)
 		return result;
 
-	if (maxNbItem==0) return result;
+	if (maxNbItem==0)
+		return result;
 
-	QString objw = objPrefix.toUpper();
-
+	QString epsn;
+	bool find;
 	foreach(const ExoplanetP& eps, ep)
 	{
-		if (eps->getNameI18n().toUpper().left(objw.length()) == objw)
+		epsn = eps->getNameI18n();
+		find = false;
+		if (useStartOfWords)
 		{
-			result << eps->getNameI18n();
+			if (epsn.toUpper().left(objPrefix.length()) == objPrefix.toUpper())
+				find = true;
+		}
+		else
+		{
+			if (epsn.contains(objPrefix, Qt::CaseInsensitive))
+				find = true;
+		}
+		if (find)
+		{
+			result << epsn;
 		}
 	}
 
 	result.sort();
 
-	if (result.size()>maxNbItem) result.erase(result.begin()+maxNbItem, result.end());
+	if (result.size()>maxNbItem)
+		result.erase(result.begin()+maxNbItem, result.end());
 
 	return result;
 }
 
-QStringList Exoplanets::listMatchingObjects(const QString& objPrefix, int maxNbItem) const
+QStringList Exoplanets::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords) const
 {
 	QStringList result;
 	if (!flagShowExoplanets)
 		return result;
 
-	if (maxNbItem==0) return result;
+	if (maxNbItem==0)
+		return result;
 
-	QString objw = objPrefix.toUpper();
-
+	QString epsn;
+	bool find;
 	foreach(const ExoplanetP& eps, ep)
 	{
-		if (eps->getEnglishName().toUpper().left(objw.length()) == objw)
+		epsn = eps->getNameI18n();
+		find = false;
+		if (useStartOfWords)
 		{
-			result << eps->getEnglishName();
+			if (epsn.toUpper().left(objPrefix.length()) == objPrefix.toUpper())
+				find = true;
+		}
+		else
+		{
+			if (epsn.contains(objPrefix, Qt::CaseInsensitive))
+				find = true;
+		}
+		if (find)
+		{
+			result << epsn;
 		}
 	}
 
 	result.sort();
 
-	if (result.size()>maxNbItem) result.erase(result.begin()+maxNbItem, result.end());
+	if (result.size()>maxNbItem)
+		result.erase(result.begin()+maxNbItem, result.end());
 
 	return result;
 }
@@ -472,6 +487,7 @@ bool Exoplanets::backupJsonFile(bool deleteOriginal)
 void Exoplanets::readJsonFile(void)
 {
 	setEPMap(loadEPMap());
+	emit(updateStateChanged(updateState));
 }
 
 /*
@@ -499,15 +515,22 @@ QVariantMap Exoplanets::loadEPMap(QString path)
 void Exoplanets::setEPMap(const QVariantMap& map)
 {
 	ep.clear();
+	PSCount = EPCountAll = EPCountPH = 0;
 	QVariantMap epsMap = map.value("stars").toMap();
 	foreach(QString epsKey, epsMap.keys())
 	{
 		QVariantMap epsData = epsMap.value(epsKey).toMap();
 		epsData["designation"] = epsKey;
 
+		PSCount++;
+
 		ExoplanetP eps(new Exoplanet(epsData));
 		if (eps->initialized)
+		{
 			ep.append(eps);
+			EPCountAll += eps->getCountExoplanets();
+			EPCountPH += eps->getCountHabitableExoplanets();
+		}
 
 	}
 }
@@ -518,20 +541,45 @@ int Exoplanets::getJsonFileFormatVersion(void)
 	QFile jsonEPCatalogFile(jsonCatalogPath);
 	if (!jsonEPCatalogFile.open(QIODevice::ReadOnly))
 	{
-		qWarning() << "Exoplanets::init cannot open " << QDir::toNativeSeparators(jsonCatalogPath);
+		qWarning() << "Exoplanets::getJsonFileFormatVersion() cannot open " << QDir::toNativeSeparators(jsonCatalogPath);
 		return jsonVersion;
 	}
 
 	QVariantMap map;
 	map = StelJsonParser::parse(&jsonEPCatalogFile).toMap();
+	jsonEPCatalogFile.close();
 	if (map.contains("version"))
 	{
 		jsonVersion = map.value("version").toInt();
 	}
 
-	jsonEPCatalogFile.close();
 	qDebug() << "Exoplanets::getJsonFileFormatVersion() version of format from file:" << jsonVersion;
 	return jsonVersion;
+}
+
+bool Exoplanets::checkJsonFileFormat()
+{
+	QFile jsonEPCatalogFile(jsonCatalogPath);
+	if (!jsonEPCatalogFile.open(QIODevice::ReadOnly))
+	{
+		qWarning() << "Exoplanets::checkJsonFileFormat(): cannot open " << QDir::toNativeSeparators(jsonCatalogPath);
+		return false;
+	}
+
+	QVariantMap map;
+	try
+	{
+		map = StelJsonParser::parse(&jsonEPCatalogFile).toMap();
+		jsonEPCatalogFile.close();
+	}
+	catch (std::runtime_error& e)
+	{
+		qDebug() << "Exoplanets::checkJsonFileFormat(): file format is wrong!";
+		qDebug() << "Exoplanets::checkJsonFileFormat() error:" << e.what();
+		return false;
+	}
+
+	return true;
 }
 
 ExoplanetP Exoplanets::getByID(const QString& id)
@@ -547,11 +595,7 @@ ExoplanetP Exoplanets::getByID(const QString& id)
 bool Exoplanets::configureGui(bool show)
 {
 	if (show)
-	{
-		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-		gui->getGuiAction("actionShow_Exoplanets_ConfigDialog")->setChecked(true);
-	}
-
+		exoplanetsConfigDialog->setVisible(true);
 	return true;
 }
 
@@ -577,6 +621,8 @@ void Exoplanets::restoreDefaultConfigIni(void)
 	conf->setValue("url", "http://stellarium.org/json/exoplanets.json");
 	conf->setValue("update_frequency_hours", 72);
 	conf->setValue("flag_show_exoplanets_button", true);
+	conf->setValue("habitable_exoplanet_marker_color", "1.0,0.5,0.0");
+	conf->setValue("exoplanet_marker_color", "0.4,0.9,0.5");
 	conf->endGroup();
 }
 
@@ -588,10 +634,12 @@ void Exoplanets::readSettingsFromConfig(void)
 	updateFrequencyHours = conf->value("update_frequency_hours", 72).toInt();
 	lastUpdate = QDateTime::fromString(conf->value("last_update", "2012-05-24T12:00:00").toString(), Qt::ISODate);
 	updatesEnabled = conf->value("updates_enabled", true).toBool();
-	distributionEnabled = conf->value("distribution_enabled", false).toBool();
-	timelineEnabled = conf->value("timeline_enabled", false).toBool();	
+	setDisplayMode(conf->value("distribution_enabled", false).toBool());
+	setTimelineMode(conf->value("timeline_enabled", false).toBool());
 	enableAtStartup = conf->value("enable_at_startup", false).toBool();
 	flagShowExoplanetsButton = conf->value("flag_show_exoplanets_button", true).toBool();
+	setMarkerColor(conf->value("exoplanet_marker_color", "0.4,0.9,0.5").toString(), false);
+	setMarkerColor(conf->value("habitable_exoplanet_marker_color", "1.0,0.5,0.0").toString(), true);
 
 	conf->endGroup();
 }
@@ -603,10 +651,12 @@ void Exoplanets::saveSettingsToConfig(void)
 	conf->setValue("url", updateUrl);
 	conf->setValue("update_frequency_hours", updateFrequencyHours);
 	conf->setValue("updates_enabled", updatesEnabled );
-	conf->setValue("distribution_enabled", distributionEnabled);
-	conf->setValue("timeline_enabled", timelineEnabled);
+	conf->setValue("distribution_enabled", getDisplayMode());
+	conf->setValue("timeline_enabled", getTimelineMode());
 	conf->setValue("enable_at_startup", enableAtStartup);
 	conf->setValue("flag_show_exoplanets_button", flagShowExoplanetsButton);
+	conf->setValue("habitable_exoplanet_marker_color", getMarkerColor(true));
+	conf->setValue("exoplanet_marker_color", getMarkerColor(false));
 
 	conf->endGroup();
 }
@@ -642,12 +692,11 @@ void Exoplanets::updateJSON(void)
 	emit(updateStateChanged(updateState));
 
 	if (progressBar==NULL)
-		progressBar = StelApp::getInstance().getGui()->addProgressBar();
+		progressBar = StelApp::getInstance().addProgressBar();
 
 	progressBar->setValue(0);
-	progressBar->setMaximum(100);
+	progressBar->setRange(0, 100);
 	progressBar->setFormat("Update exoplanets");
-	progressBar->setVisible(true);
 
 	QNetworkRequest request;
 	request.setUrl(QUrl(updateUrl));
@@ -690,9 +739,11 @@ void Exoplanets::updateDownloadComplete(QNetworkReply* reply)
 	if (progressBar)
 	{
 		progressBar->setValue(100);
-		delete progressBar;
+		StelApp::getInstance().removeProgressBar(progressBar);
 		progressBar = NULL;
 	}
+
+	readJsonFile();
 }
 
 void Exoplanets::displayMessage(const QString& message, const QString hexColor)
@@ -728,12 +779,50 @@ void Exoplanets::setFlagShowExoplanetsButton(bool b)
 	if (b==true) {
 		if (toolbarButton==NULL) {
 			// Create the exoplanets button
-			gui->getGuiAction("actionShow_Exoplanets")->setChecked(flagShowExoplanets);
-			toolbarButton = new StelButton(NULL, *OnIcon, *OffIcon, *GlowIcon, gui->getGuiAction("actionShow_Exoplanets"));
+			toolbarButton = new StelButton(NULL, *OnIcon, *OffIcon, *GlowIcon, "actionShow_Exoplanets");
 		}
 		gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
 	} else {
 		gui->getButtonBar()->hideButton("actionShow_Exoplanets");
 	}
 	flagShowExoplanetsButton = b;
+}
+
+bool Exoplanets::getDisplayMode()
+{
+	return Exoplanet::distributionMode;
+}
+
+void Exoplanets::setDisplayMode(bool b)
+{
+	Exoplanet::distributionMode=b;
+}
+
+bool Exoplanets::getTimelineMode()
+{
+	return Exoplanet::timelineMode;
+}
+
+void Exoplanets::setTimelineMode(bool b)
+{
+	Exoplanet::timelineMode=b;
+}
+
+QString Exoplanets::getMarkerColor(bool habitable)
+{
+	Vec3f c;
+	if (habitable)
+		c = Exoplanet::habitableExoplanetMarkerColor;
+	else
+		c = Exoplanet::exoplanetMarkerColor;
+	return QString("%1,%2,%3").arg(c[0]).arg(c[1]).arg(c[2]);
+}
+
+void Exoplanets::setMarkerColor(QString c, bool h)
+{
+	Vec3f nc = StelUtils::strToVec3f(c);
+	if (h)
+		Exoplanet::habitableExoplanetMarkerColor = nc;
+	else
+		Exoplanet::exoplanetMarkerColor = nc;
 }

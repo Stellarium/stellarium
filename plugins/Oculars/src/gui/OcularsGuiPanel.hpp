@@ -130,8 +130,6 @@ private:
 
 	void setControlsColor(const QColor& color);
 	void setControlsFont(const QFont& font);
-	//! Sets the night mode flag on all StelButton-s.
-	void setButtonsNightMode(bool nightMode);
 
 	static QPixmap createPixmapFromText(const QString& text,
 	                                    int width,

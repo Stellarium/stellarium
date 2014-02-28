@@ -22,6 +22,8 @@
 #include "StelObjectModule.hpp"
 #include "StelObject.hpp"
 #include "StelFader.hpp"
+#include "StelTextureTypes.hpp"
+#include "StelPainter.hpp"
 #include "Exoplanet.hpp"
 #include <QFont>
 #include <QVariantMap>
@@ -31,10 +33,10 @@
 
 class QNetworkAccessManager;
 class QNetworkReply;
-class QProgressBar;
 class QSettings;
 class QTimer;
 class ExoplanetsDialog;
+class StelPainter;
 class QPixmap;
 class StelButton;
 
@@ -44,6 +46,7 @@ typedef QSharedPointer<Exoplanet> ExoplanetP;
 class Exoplanets : public StelObjectModule
 {
 	Q_OBJECT
+	Q_PROPERTY(bool showExoplanets READ getFlagShowExoplanets WRITE setFlagShowExoplanets)
 public:	
 	//! @enum UpdateState
 	//! Used for keeping for track of the download/update status
@@ -63,9 +66,8 @@ public:
 	virtual void init();
 	virtual void deinit();
 	virtual void update(double deltaTime);
-	virtual void draw(StelCore* core, class StelRenderer* renderer);
-	virtual void drawPointer(StelCore* core, class StelRenderer* renderer,
-	                         StelProjectorP projector);
+	virtual void draw(StelCore* core);
+	virtual void drawPointer(StelCore* core, StelPainter& painter);
 	virtual double getCallOrder(StelModuleActionName actionName) const;
 
 	///////////////////////////////////////////////////////////////////////////
@@ -88,14 +90,16 @@ public:
 	//! Find and return the list of at most maxNbItem objects auto-completing the passed object I18n name.
 	//! @param objPrefix the case insensitive first letters of the searched object
 	//! @param maxNbItem the maximum number of returned object names
+	//! @param useStartOfWords the autofill mode for returned objects names
 	//! @return a list of matching object name by order of relevance, or an empty list if nothing match
-	virtual QStringList listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem=5) const;
+	virtual QStringList listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false) const;
 
 	//! Find and return the list of at most maxNbItem objects auto-completing the passed object English name.
 	//! @param objPrefix the case insensitive first letters of the searched object
 	//! @param maxNbItem the maximum number of returned object names
+	//! @param useStartOfWords the autofill mode for returned objects names
 	//! @return a list of matching object name by order of relevance, or an empty list if nothing match
-	virtual QStringList listMatchingObjects(const QString& objPrefix, int maxNbItem=5) const;
+	virtual QStringList listMatchingObjects(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false) const;
 
 	virtual QStringList listAllObjects(bool inEnglish) const;
 
@@ -127,11 +131,14 @@ public:
 	//! @param b if true, updates will be enabled, else they will be disabled
 	void setUpdatesEnabled(bool b) {updatesEnabled=b;}
 
-	bool getDisplayMode(void) {return distributionEnabled;}
-	void setDisplayMode(bool b) {distributionEnabled=b;}
+	bool getDisplayMode(void);
+	void setDisplayMode(bool b);
 
-	bool getTimelineMode(void) {return timelineEnabled;}
-	void setTimelineMode(bool b) {timelineEnabled=b;}
+	bool getTimelineMode(void);
+	void setTimelineMode(bool b);
+
+	QString getMarkerColor(bool habitable);
+	void setMarkerColor(QString c, bool h);
 
 	void setEnableAtStartup(bool b) { enableAtStartup=b; }
 	bool getEnableAtStartup(void) { return enableAtStartup; }
@@ -148,6 +155,24 @@ public:
 
 	//! Get the current updateState
 	UpdateState getUpdateState(void) {return updateState;}
+
+	//! Get count of planetary systems from catalog
+	int getCountPlanetarySystems(void) const
+	{
+		return PSCount;
+	}
+
+	//! Get count of exoplanets from catalog
+	int getCountAllExoplanets(void) const
+	{
+		return EPCountAll;
+	}
+
+	//! Get count of potentially habitable exoplanets from catalog
+	int getCountHabitableExoplanets(void) const
+	{
+		return EPCountPH;
+	}
 
 signals:
 	//! @param state the new update state.
@@ -197,6 +222,10 @@ private:
 	//! @return version string, e.g. "1"
 	int getJsonFileFormatVersion(void);
 
+	//! Check format of the catalog of exoplanets
+	//! @return valid boolean, e.g. "true"
+	bool checkJsonFileFormat(void);
+
 	//! parse JSON file and load exoplanets to map
 	QVariantMap loadEPMap(QString path=QString());
 
@@ -205,8 +234,11 @@ private:
 
 	QString jsonCatalogPath;
 
-	StelTextureNew* texPointer;
-	StelTextureNew* markerTexture;
+	int PSCount;
+	int EPCountAll;
+	int EPCountPH;
+
+	StelTextureSP texPointer;
 	QList<ExoplanetP> ep;
 
 	// variables and functions for the updater
@@ -218,9 +250,7 @@ private:
 	QList<int> messageIDs;
 	bool updatesEnabled;
 	QDateTime lastUpdate;
-	int updateFrequencyHours;
-	bool distributionEnabled;
-	bool timelineEnabled;
+	int updateFrequencyHours;	
 	bool enableAtStartup;
 
 	QSettings* conf;
@@ -233,7 +263,7 @@ private:
 	QPixmap* OffIcon;
 	QPixmap* GlowIcon;
 	StelButton* toolbarButton;
-	QProgressBar* progressBar;
+	class StelProgressController* progressBar;
 
 private slots:
 	//! check to see if an update is required.  This is called periodically by a timer
@@ -245,7 +275,7 @@ private slots:
 };
 
 
-#include "fixx11h.h"
+
 #include <QObject>
 #include "StelPluginInterface.hpp"
 
@@ -253,6 +283,7 @@ private slots:
 class ExoplanetsStelPluginInterface : public QObject, public StelPluginInterface
 {
 	Q_OBJECT
+	Q_PLUGIN_METADATA(IID "stellarium.StelGuiPluginInterface/1.0")
 	Q_INTERFACES(StelPluginInterface)
 public:
 	virtual StelModule* getStelModule() const;

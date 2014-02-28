@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 #ifndef OBSERVABILITY_HPP_
 #define OBSERVABILITY_HPP_
@@ -46,12 +46,13 @@ class ObservabilityDialog;
 class Observability : public StelModule
 {
 	Q_OBJECT
+	Q_PROPERTY(bool enabled READ getEnableObservability WRITE enableObservability)
 public:
 	Observability();
 	virtual ~Observability();
 	virtual void init();
 	virtual void update(double) {;}
-	virtual void draw(StelCore* core, class StelRenderer* renderer);
+	virtual void draw(StelCore* core);
 	virtual double getCallOrder(StelModuleActionName actionName) const;
 
 	//! Implement this to tell the main Stellarium GUI that there is a GUI element to configure this plugin.
@@ -79,7 +80,7 @@ public:
 	//! Get the user-defined altitude of the visual horizon.
 	int getHorizonAltitude();
 
-
+	bool getEnableObservability() const {return flagShowObservability;}
 public slots:
 	//! Restore and reload the default plug-in settings.
 	void resetConfiguration();
@@ -371,13 +372,14 @@ private:
 
 };
 
-#include "fixx11h.h"
+
 #include <QObject>
 #include "StelPluginInterface.hpp"
 
 class ObservabilityStelPluginInterface : public QObject, public StelPluginInterface
 {
        Q_OBJECT
+       Q_PLUGIN_METADATA(IID "stellarium.StelGuiPluginInterface/1.0")
        Q_INTERFACES(StelPluginInterface)
 public:
        virtual StelModule* getStelModule() const;

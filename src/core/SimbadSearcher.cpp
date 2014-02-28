@@ -18,6 +18,7 @@
 
 #include "SimbadSearcher.hpp"
 
+#include "StelUtils.hpp"
 #include "StelTranslator.hpp"
 #include <QNetworkReply>
 #include <QNetworkAccessManager>

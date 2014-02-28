@@ -39,7 +39,7 @@ StelLocationMgr::StelLocationMgr()
 	modelAllLocation->setStringList(locations.keys());
 	
 	// Init to Paris France because it's the center of the world.
-	lastResortLocation = locationForSmallString("Paris, France");
+	lastResortLocation = locationForString("Paris, France");
 }
 
 void StelLocationMgr::generateBinaryLocationFile(const QString& fileName, bool isUserLocation, const QString& binFilePath) const
@@ -56,15 +56,9 @@ void StelLocationMgr::generateBinaryLocationFile(const QString& fileName, bool i
 QMap<QString, StelLocation> StelLocationMgr::loadCitiesBin(const QString& fileName) const
 {
 	QMap<QString, StelLocation> res;
-	QString cityDataPath;
-	try
-	{
-		cityDataPath = StelFileMgr::findFile(fileName);
-	}
-	catch (std::runtime_error& e)
-	{
+	QString cityDataPath = StelFileMgr::findFile(fileName);
+	if (cityDataPath.isEmpty())
 		return res;
-	}
 
 	QFile sourcefile(cityDataPath);
 	if (!sourcefile.open(QIODevice::ReadOnly))
@@ -77,7 +71,8 @@ QMap<QString, StelLocation> StelLocationMgr::loadCitiesBin(const QString& fileNa
 	{
 		QIODevice* d = KFilterDev::device(&sourcefile, "application/x-gzip", false);
 		d->open(QIODevice::ReadOnly);
-		QDataStream in(d);
+		QByteArray arr = d->readAll();
+		QDataStream in(&arr, QIODevice::ReadOnly);
 		in.setVersion(QDataStream::Qt_4_6);
 		in >> res;
 		d->close();
@@ -97,16 +92,12 @@ QMap<QString, StelLocation> StelLocationMgr::loadCities(const QString& fileName,
 {
 	// Load the cities from data file
 	QMap<QString, StelLocation> locations;
-	QString cityDataPath;
-	try
+	QString cityDataPath = StelFileMgr::findFile(fileName);
+	if (cityDataPath.isEmpty())
 	{
-		cityDataPath = StelFileMgr::findFile(fileName);
-	}
-	catch (std::runtime_error& e)
-	{
-		// Note it is quite normal to nor have a user locations file (e.g. first run)
+		// Note it is quite normal not to have a user locations file (e.g. first run)
 		if (!isUserLocation)
-			qWarning() << "WARNING: Failed to locate location data file: " << QDir::toNativeSeparators(fileName) << e.what();
+			qWarning() << "WARNING: Failed to locate location data file: " << QDir::toNativeSeparators(fileName);
 		return locations;
 	}
 
@@ -158,55 +149,57 @@ StelLocationMgr::~StelLocationMgr()
 {
 }
 
-const StelLocation StelLocationMgr::locationForSmallString(const QString& s, bool* ok) const
+static float parseAngle(const QString& s, bool* ok)
 {
-	QMap<QString, StelLocation>::const_iterator iter = locations.find(s);
-	if (iter==locations.end())
+	float ret;
+	// First try normal decimal value.
+	ret = s.toFloat(ok);
+	if (*ok) return ret;
+	// Try GPS coordinate like +121°33'38.28"
+	QRegExp reg("([+-]?[\\d.]+)°(?:([\\d.]+)')?(?:([\\d.]+)\")?");
+	if (reg.exactMatch(s))
 	{
-		if (ok)
-			*ok=false;
-		return lastResortLocation;
+		float deg = reg.capturedTexts()[1].toFloat(ok);
+		if (!*ok) return 0;
+		float min = reg.capturedTexts()[2].isEmpty()? 0 : reg.capturedTexts()[2].toFloat(ok);
+		if (!*ok) return 0;
+		float sec = reg.capturedTexts()[3].isEmpty()? 0 : reg.capturedTexts()[3].toFloat(ok);
+		if (!*ok) return 0;
+		return deg + min / 60 + sec / 3600;
 	}
-	else
-	{
-		if (ok)
-			*ok = true;
-		return locations.value(s);
-	}
+	return 0;
 }
 
-const StelLocation StelLocationMgr::locationForString(const QString& s, bool* ok) const
+const StelLocation StelLocationMgr::locationForString(const QString& s) const
 {
-	bool myOk;
-	StelLocation ret = locationForSmallString(s, &myOk);
-	if (myOk)
+	QMap<QString, StelLocation>::const_iterator iter = locations.find(s);
+	if (iter!=locations.end())
 	{
-		if (ok)
-			*ok=true;
+		return iter.value();
+	}
+	StelLocation ret;
+	// Maybe it is a coordinate set ? (e.g. GPS 25.107363,121.558807 )
+	QRegExp reg("(?:(.+)\\s+)?(.+),(.+)");
+	if (reg.exactMatch(s))
+	{
+		bool ok;
+		// We have a set of coordinates
+		ret.latitude = parseAngle(reg.capturedTexts()[2].trimmed(), &ok);
+		if (!ok) ret.role = '!';
+		ret.longitude = parseAngle(reg.capturedTexts()[3].trimmed(), &ok);
+		if (!ok) ret.role = '!';
+		ret.name = reg.capturedTexts()[1].trimmed();
+		ret.planetName = "Earth";
 		return ret;
 	}
-	// Maybe it is a coordinate set ? (e.g. GPS +41d51'00" -51d00'00" )
-	QRegExp reg("(.*)([\\+\\-](?:\\d+)d(?:\\d+)'(?:\\d+)\") ([\\+\\-](?:\\d+)d(?:\\d+)'(?:\\d+)\")");
-	reg.setMinimal(true);
-	if (!reg.exactMatch(s))
-	{
-		if (ok)
-			*ok=false;
-		return ret;
-	}
-	// We have a set of coordinates
-	ret.name = reg.capturedTexts()[1].trimmed();
-	ret.latitude = StelUtils::dmsStrToRad(reg.capturedTexts()[2]) * 180 / M_PI;
-	ret.longitude = StelUtils::dmsStrToRad(reg.capturedTexts()[3]) * 180 / M_PI;
-	if (ok)
-		*ok=true;
+	ret.role = '!';
 	return ret;
 }
 
 // Get whether a location can be permanently added to the list of user locations
 bool StelLocationMgr::canSaveUserLocation(const StelLocation& loc) const
 {
-	return locations.find(loc.getID())==locations.end();
+	return loc.isValid() && locations.find(loc.getID())==locations.end();
 }
 
 // Add permanently a location to the list of user locations
@@ -222,12 +215,8 @@ bool StelLocationMgr::saveUserLocation(const StelLocation& loc)
 	modelAllLocation->setStringList(locations.keys());
 
 	// Append to the user location file
-	QString cityDataPath;
-	try
-	{
-		cityDataPath = StelFileMgr::findFile("data/user_locations.txt", StelFileMgr::Flags(StelFileMgr::Writable|StelFileMgr::File));
-	}
-	catch (std::runtime_error& e)
+	QString cityDataPath = StelFileMgr::findFile("data/user_locations.txt", StelFileMgr::Flags(StelFileMgr::Writable|StelFileMgr::File));
+	if (cityDataPath.isEmpty())
 	{
 		if (!StelFileMgr::exists(StelFileMgr::getUserDir()+"/data"))
 		{
@@ -283,12 +272,8 @@ bool StelLocationMgr::deleteUserLocation(const QString& id)
 	modelAllLocation->setStringList(locations.keys());
 
 	// Resave the whole remaining user locations file
-	QString cityDataPath;
-	try
-	{
-		cityDataPath = StelFileMgr::findFile("data/user_locations.txt", StelFileMgr::Writable);
-	}
-	catch (std::runtime_error& e)
+	QString cityDataPath = StelFileMgr::findFile("data/user_locations.txt", StelFileMgr::Writable);
+	if (cityDataPath.isEmpty())
 	{
 		if (!StelFileMgr::exists(StelFileMgr::getUserDir()+"/data"))
 		{
