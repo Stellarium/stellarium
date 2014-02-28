@@ -26,52 +26,20 @@ SET(Oculars_SRCS
 )
 
 SET(Oculars_RES ../resources/Oculars.qrc)
-QT4_ADD_RESOURCES(Oculars_RES_CXX ${Oculars_RES})
+QT5_ADD_RESOURCES(Oculars_RES_CXX ${Oculars_RES})
 
 ################# compiles .ui files ############
 SET(Oculars_UIS
   gui/ocularDialog.ui
 )
-QT4_WRAP_UI(Oculars_UIS_H ${Oculars_UIS})
+QT5_WRAP_UI(Oculars_UIS_H ${Oculars_UIS})
 
-INCLUDE(${QT_USE_FILE})
+SET(extLinkerOption ${OPENGL_LIBRARIES})
 
-SET(extLinkerOption ${QT_LIBRARIES} ${OPENGL_LIBRARIES} ${ICONV_LIBRARIES} ${INTL_LIBRARIES})
+ADD_LIBRARY(Oculars-static STATIC ${Oculars_SRCS} ${Oculars_RES_CXX} ${Oculars_UIS_H})
+SET_TARGET_PROPERTIES(Oculars-static PROPERTIES OUTPUT_NAME "Oculars")
+QT5_USE_MODULES(Oculars-static Core Declarative Network OpenGL Svg Widgets)
 
-############### For building the dynamic library ######################
-IF(BUILD_DYNAMIC_PLUGINS)
-	ADD_LIBRARY(Oculars
-		MODULE ${Oculars_SRCS} ${Oculars_RES_CXX} ${Oculars_UIS_H}
-	)
-
-	IF(APPLE)
-		FIND_LIBRARY(OPENGL_LIBRARY OpenGL)
-		MARK_AS_ADVANCED(OPENGL_LIBRARY)
-		SET_TARGET_PROPERTIES(Oculars
-			PROPERTIES LINK_FLAGS "-undefined dynamic_lookup" SUFFIX ".dylib"
-		)
-	ENDIF(APPLE)
-
-	IF(WIN32)
-		SET_TARGET_PROPERTIES(Oculars
-                        PROPERTIES LINK_FLAGS "-Wl,--enable-runtime-pseudo-reloc -Wl,--allow-multiple-definition"
-		)
-		SET(StelMain stelMain)
-	ELSE(WIN32)
-		SET(StelMain)
-	ENDIF(WIN32)
-
-	TARGET_LINK_LIBRARIES(Oculars ${StelMain} ${extLinkerOption})
-	INSTALL(TARGETS Oculars DESTINATION "modules/${PACKAGE}")
-ENDIF()
-
-############### For building the static library ######################
-IF(BUILD_STATIC_PLUGINS)
-	ADD_LIBRARY(Oculars-static
-		STATIC ${Oculars_SRCS} ${Oculars_RES_CXX} ${Oculars_UIS_H}
-	)
-	SET_TARGET_PROPERTIES(Oculars-static PROPERTIES OUTPUT_NAME "Oculars")
-	TARGET_LINK_LIBRARIES(Oculars-static ${StelMain} ${extLinkerOption})
-	SET_TARGET_PROPERTIES(Oculars-static PROPERTIES COMPILE_FLAGS "-DQT_STATICPLUGIN")
-	ADD_DEPENDENCIES(AllStaticPlugins Oculars-static)
-ENDIF()
+TARGET_LINK_LIBRARIES(Oculars-static ${StelMain} ${extLinkerOption})
+SET_TARGET_PROPERTIES(Oculars-static PROPERTIES COMPILE_FLAGS "-DQT_STATICPLUGIN")
+ADD_DEPENDENCIES(AllStaticPlugins Oculars-static)

@@ -1,6 +1,5 @@
 /*
  * Stellarium
- *
  * Copyright (C) 2013 Alexander Wolf
  *
  * This program is free software; you can redistribute it and/or
@@ -22,10 +21,11 @@
 #ifndef _CUSTOMDELTATEQUATIONDIALOG_HPP_
 #define _CUSTOMDELTATEQUATIONDIALOG_HPP_
 
-#include <QObject>
-#include <QSettings>
 #include "StelDialog.hpp"
 #include "StelCore.hpp"
+
+#include <QObject>
+#include <QSettings>
 
 class Ui_CustomDeltaTEquationDialogForm;
 

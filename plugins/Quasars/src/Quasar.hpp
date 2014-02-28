@@ -27,9 +27,11 @@
 #include <QDateTime>
 
 #include "StelObject.hpp"
+#include "StelTextureTypes.hpp"
+#include "StelPainter.hpp"
 #include "StelFader.hpp"
-#include "StelProjectorType.hpp"
 
+class StelPainter;
 
 //! @class Quasar
 //! A Quasar object represents one Quasar on the sky.
@@ -52,7 +54,8 @@ public:
 	{
 		return "Quasar";
 	}
-	virtual float getSelectPriority(const StelCore* core) const;
+
+	virtual float getSelectPriority(const StelCore *core) const;
 
 	//! Get an HTML string to describe the object
 	//! @param core A pointer to the core
@@ -63,7 +66,7 @@ public:
 	{
 		return XYZ;
 	}
-        virtual float getVMagnitude(const StelCore* core, bool withExtinction=false) const;
+        virtual float getVMagnitude(const StelCore* core) const;
 	virtual double getAngularSize(const StelCore* core) const;
 	virtual QString getNameI18n(void) const
 	{
@@ -81,9 +84,12 @@ private:
 
 	Vec3d XYZ;                         // holds J2000 position
 
-	void draw(StelCore* core, class StelRenderer* renderer, StelProjectorP projector, 
-	          class StelTextureNew* markerTexture);
+	static StelTextureSP hintTexture;
+	static StelTextureSP markerTexture;
+	static bool distributionMode;
+	static Vec3f markerColor;
 
+	void draw(StelCore* core, StelPainter& painter);
 	//! Calculate a color of quasar
 	//! @param b_v value of B-V color index
 	unsigned char BvToColorIndex(float b_v);

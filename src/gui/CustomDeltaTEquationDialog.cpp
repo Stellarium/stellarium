@@ -1,4 +1,12 @@
 /*
+ * Stellarium
+ * Copyright (C) 2013 Alexander Wolf
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
@@ -24,9 +32,9 @@ CustomDeltaTEquationDialog::CustomDeltaTEquationDialog()
 	conf = StelApp::getInstance().getSettings();
 	core = StelApp::getInstance().getCore();
 
-	ndot = core->getCustomNDot();
-	year = core->getCustomYear();
-	coeff = core->getCustomEquationCoefficients();
+	ndot = core->getDeltaTCustomNDot();
+	year = core->getDeltaTCustomYear();
+	coeff = core->getDeltaTCustomEquationCoefficients();
 }
 
 CustomDeltaTEquationDialog::~CustomDeltaTEquationDialog()
@@ -89,35 +97,35 @@ void CustomDeltaTEquationDialog::saveSettings(void) const
 void CustomDeltaTEquationDialog::setNDot(const QString& v)
 {
 	ndot = v.toFloat();
-	core->setCustomNDot(ndot);
+	core->setDeltaTCustomNDot(ndot);
 	saveSettings();
 }
 
 void CustomDeltaTEquationDialog::setYear(const QString& v)
 {
 	year = v.toFloat();
-	core->setCustomYear(year);
+	core->setDeltaTCustomYear(year);
 	saveSettings();
 }
 
 void CustomDeltaTEquationDialog::setCoeffA(const QString& v)
 {
 	coeff[0] = v.toFloat();
-	core->setCustomEquationCoefficients(coeff);
+	core->setDeltaTCustomEquationCoefficients(coeff);
 	saveSettings();
 }
 
 void CustomDeltaTEquationDialog::setCoeffB(const QString& v)
 {
 	coeff[1] = v.toFloat();
-	core->setCustomEquationCoefficients(coeff);
+	core->setDeltaTCustomEquationCoefficients(coeff);
 	saveSettings();
 }
 
 void CustomDeltaTEquationDialog::setCoeffC(const QString& v)
 {
 	coeff[2] = v.toFloat();
-	core->setCustomEquationCoefficients(coeff);
+	core->setDeltaTCustomEquationCoefficients(coeff);
 	saveSettings();
 }
 

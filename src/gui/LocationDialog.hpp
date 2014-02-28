@@ -31,7 +31,7 @@ class LocationDialog : public StelDialog
 {
 	Q_OBJECT
 public:
-	LocationDialog();
+	LocationDialog(QObject* parent);
 	virtual ~LocationDialog();
 	//! Notify that the application style changed
 	void styleChanged();
@@ -102,9 +102,7 @@ private slots:
 	void setDefaultLocation();
 	
 private:
-	QString lastPlanet;	
-	bool lastVisionMode;
-	
+	QString lastPlanet;
 	//! Updates the check state and the enabled/disabled status.
 	void updateDefaultLocationControls(bool currentIsDefault);
 };

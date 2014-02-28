@@ -19,14 +19,12 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#include <QDebug>
-#include <QString>
-
 #include "Star.hpp"
 #include "StarMgr.hpp"
 #include "StelUtils.hpp"
 
-namespace BigStarCatalogExtension {
+#include <QDebug>
+#include <QString>
 
 QString Star1::getNameI18n(void) const {
   if (hip) {
@@ -35,7 +33,7 @@ QString Star1::getNameI18n(void) const {
     if (StarMgr::getFlagSciNames()) {
       const QString sciName = StarMgr::getSciName(hip);
       if (!sciName.isEmpty()) return sciName;
-      const QString varSciName = StarMgr::getGCVSName(hip);
+      const QString varSciName = StarMgr::getGcvsName(hip);
       if (!varSciName.isEmpty() && varSciName!=sciName) return varSciName;
       return QString("HIP %1").arg(hip);
     }
@@ -240,7 +238,4 @@ void Star3::print(void) {
            << ", bV: " << bV
            << ", mag: " << mag;
 }
-
-} // namespace BigStarCatalogExtension
-
 

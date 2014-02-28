@@ -20,17 +20,17 @@
 #ifndef _STELAPP_HPP_
 #define _STELAPP_HPP_
 
+#include "config.h"
 #include <QString>
-#include <QVariant>
 #include <QObject>
 
 // Predeclaration of some classes
 class StelCore;
+class StelTextureMgr;
 class StelObjectMgr;
 class StelLocaleMgr;
 class StelModuleMgr;
 class StelSkyCultureMgr;
-class StelShortcutMgr;
 class QSettings;
 class QNetworkAccessManager;
 class QNetworkReply;
@@ -41,6 +41,10 @@ class StelSkyLayerMgr;
 class StelAudioMgr;
 class StelVideoMgr;
 class StelGuiBase;
+class StelMainScriptAPIProxy;
+class StelScriptMgr;
+class StelActionMgr;
+class StelProgressController;
 
 //! @class StelApp
 //! Singleton main Stellarium application class.
@@ -56,9 +60,11 @@ class StelGuiBase;
 class StelApp : public QObject
 {
 	Q_OBJECT
+	Q_PROPERTY(bool nightMode READ getVisionModeNight WRITE setVisionModeNight NOTIFY visionNightModeChanged)
 
 public:
 	friend class StelAppGraphicsWidget;
+	friend class StelSkyItem;
 
 	//! Create and initialize the main Stellarium application.
 	//! @param parent the QObject parent
@@ -70,8 +76,10 @@ public:
 	//! Deinitialize and destroy the main Stellarium application.
 	virtual ~StelApp();
 
-	//! Initialize core and default modules.
-	void init(QSettings* conf, class StelRenderer* renderer);
+	//! Initialize core and all the modules.
+	void init(QSettings* conf);
+	//! Deinitialize core and all the modules.
+	void deinit();
 
 	//! Load and initialize external modules (plugins)
 	void initPlugIns();
@@ -92,6 +100,10 @@ public:
 	//! @return the sky cultures manager
 	StelSkyCultureMgr& getSkyCultureMgr() {return *skyCultureMgr;}
 
+	//! Get the texture manager to use for loading textures.
+	//! @return the texture manager to use for loading textures.
+	StelTextureMgr& getTextureManager() {return *textureMgr;}
+
 	//! Get the Location manager to use for managing stored locations
 	//! @return the Location manager to use for managing stored locations
 	StelLocationMgr& getLocationMgr() {return *planetLocationMgr;}
@@ -105,8 +117,8 @@ public:
 	//! Get the audio manager
 	StelAudioMgr* getStelAudioMgr() {return audioMgr;}
 
-	//! Get the shortcuts manager to use for managing and editing shortcuts
-	StelShortcutMgr* getStelShortcutManager() {return shortcutMgr;}
+	//! Get the actions manager to use for managing and editing actions
+	StelActionMgr* getStelActionManager() {return actionMgr;}
 
 	//! Get the video manager
 	StelVideoMgr* getStelVideoMgr() {return videoMgr;}
@@ -129,38 +141,60 @@ public:
 	QSettings* getSettings() {return confSettings;}
 
 	//! Return the currently used style
-	QString getCurrentStelStyle() {return flagNightVision ? "night_color" : "color";}
+	QString getCurrentStelStyle() {return "color";}
 
 	//! Update all object according to the deltaTime in seconds.
 	void update(double deltaTime);
+
+	//! Draw all registered StelModule in the order defined by the order lists.
+	//! @return the max squared distance in pixels that any object has travelled since the last update.
+	void draw();
 
 	//! Iterate through the drawing sequence.
 	//! This allow us to split the slow drawing operation into small parts,
 	//! we can then decide to pause the painting for this frame and used the cached image instead.
 	//! @return true if we should continue drawing (by calling the method again)
-	bool drawPartial(class StelRenderer* renderer);
+	bool drawPartial();
 
-	//! Call this when the size of the window has changed.
-	void windowHasBeenResized(float x, float y, float w, float h);
+	//! Call this when the size of the GL window has changed.
+	void glWindowHasBeenResized(float x, float y, float w, float h);
 
+	//! Get the ratio between real device pixel and "Device Independent Pixel".
+	//! Usually this value is 1, but for a mac with retina screen this will be value 2.
+	float getDevicePixelsPerPixel() const {return devicePixelsPerPixel;}
+	void setDevicePixelsPerPixel(float dppp);
+	
+	//! Get the scaling ratio to apply on all display elements, like GUI, text etc..
+	//! When this ratio is 1, all pixel sizes used in Stellarium will look OK on a regular
+	//! computer screen with 96 pixel per inch (reference for tuning sizes).
+	float getGlobalScalingRatio() const {return globalScalingRatio;}
+	void setGlobalScalingRatio(float r) {globalScalingRatio=r;}
+	
 	//! Get the GUI instance implementing the abstract GUI interface.
 	StelGuiBase* getGui() const {return stelGui;}
 	//! Tell the StelApp instance which GUI si currently being used.
 	//! The caller is responsible for destroying the GUI.
 	void setGui(StelGuiBase* b) {stelGui=b;}
 
+#ifndef DISABLE_SCRIPTING
+	//! Get the script API proxy (for signal handling)
+	StelMainScriptAPIProxy* getMainScriptAPIProxy() {return scriptAPIProxy;}
+	//! Get the script manager
+	StelScriptMgr& getScriptMgr() {return *scriptMgr;}
+#endif
+
 	static void initStatic();
 	static void deinitStatic();
 
-	//! Get whether solar shadows should be rendered.
-	bool getRenderSolarShadows() const;
-
+	//! Add a progression indicator to the GUI (if applicable).
+	//! @return a controller which can be used to indicate the current status.
+	//! The StelApp instance remains the owner of the controller.
+	StelProgressController* addProgressBar();
+	void removeProgressBar(StelProgressController* p);
+	
 	///////////////////////////////////////////////////////////////////////////
 	// Scriptable methods
 public slots:
-
-	//! Set flag for activating solar shadow rendering.
-	void setRenderSolarShadows(bool);
 
 	//! Set flag for activating night vision mode.
 	void setVisionModeNight(bool);
@@ -177,11 +211,17 @@ public slots:
 	//! Report that a download occured. This is used for statistics purposes.
 	//! Connect this slot to QNetworkAccessManager::finished() slot to obtain statistics at the end of the program.
 	void reportFileDownloadFinished(QNetworkReply* reply);
-
+	
 signals:
+	void visionNightModeChanged(bool);
 	void colorSchemeChanged(const QString&);
 	void languageChanged();
 	void skyCultureChanged(const QString&);
+
+	//! Called just after a progress bar is added.
+	void progressBarAdded(const StelProgressController*);
+	//! Called just before a progress bar is removed.
+	void progressBarRemoved(const StelProgressController*);
 
 private:
 
@@ -193,6 +233,8 @@ private:
 	void handleMove(int x, int y, Qt::MouseButtons b);
 	//! Handle key press and release.
 	void handleKeys(class QKeyEvent* event);
+
+	void initScriptMgr(QSettings* conf);
 
 	// The StelApp singleton
 	static StelApp* singleton;
@@ -209,8 +251,11 @@ private:
 	// Sky cultures manager for the application
 	StelSkyCultureMgr* skyCultureMgr;
 
-	//Shortcuts manager for the application
-	StelShortcutMgr* shortcutMgr;
+	//Actions manager fot the application.  Will replace shortcutMgr.
+	StelActionMgr* actionMgr;
+
+	// Textures manager for the application
+	StelTextureMgr* textureMgr;
 
 	// Manager for all the StelObjects of the program
 	StelObjectMgr* stelObjectMgr;
@@ -232,8 +277,25 @@ private:
 
 	StelSkyLayerMgr* skyImageMgr;
 
-	StelGuiBase* stelGui;
+#ifndef DISABLE_SCRIPTING
+	// The script API proxy object (for bridging threads)
+	StelMainScriptAPIProxy* scriptAPIProxy;
 
+	// The script manager based on Qt script engine
+	StelScriptMgr* scriptMgr;
+#endif
+
+
+
+	StelGuiBase* stelGui;
+	
+	// Store the ratio between real device pixel in "Device Independent Pixel"
+	// Usually this value is 1, but for a mac with retina screen this will be value 2.
+	float devicePixelsPerPixel;
+
+	// The scaling ratio to apply on all display elements, like GUI, text etc..
+	float globalScalingRatio;
+	
 	// Used to collect wheel events
 	QTimer * wheelEventTimer;
 
@@ -244,9 +306,6 @@ private:
 	//! Define whether we are in night vision mode
 	bool flagNightVision;
 
-	//! Define whether solar shadows should be rendered (using GLSL shaders)
-	bool renderSolarShadows;
-
 	QSettings* confSettings;
 
 	// Define whether the StelApp instance has completed initialization
@@ -254,7 +313,7 @@ private:
 
 	static QTime* qtime;
 
-	// Temporary variables used to store the last window resize
+	// Temporary variables used to store the last gl window resize
 	// if the core was not yet initialized
 	int saveProjW;
 	int saveProjH;
@@ -271,6 +330,8 @@ private:
 
 	//! The state of the drawing sequence
 	int drawState;
+	
+	QList<StelProgressController*> progressControllers;
 };
 
 #endif // _STELAPP_HPP_

@@ -21,6 +21,8 @@
 
 #include "StelObjectModule.hpp"
 #include "StelObject.hpp"
+#include "StelTextureTypes.hpp"
+#include "StelPainter.hpp"
 #include "Quasar.hpp"
 #include <QFont>
 #include <QVariantMap>
@@ -28,10 +30,10 @@
 #include <QList>
 #include <QSharedPointer>
 
+class StelPainter;
 
 class QNetworkAccessManager;
 class QNetworkReply;
-class QProgressBar;
 class QSettings;
 class QTimer;
 class QPixmap;
@@ -44,7 +46,8 @@ typedef QSharedPointer<Quasar> QuasarP;
 class Quasars : public StelObjectModule
 {
 	Q_OBJECT
-public:	
+	Q_PROPERTY(bool quasarsVisible READ getFlagShowQuasars WRITE setFlagShowQuasars)
+public:
 	//! @enum UpdateState
 	//! Used for keeping for track of the download/update status
 	enum UpdateState {
@@ -63,8 +66,8 @@ public:
 	virtual void init();
 	virtual void deinit();
 	virtual void update(double) {;}
-	virtual void draw(StelCore* core, class StelRenderer* renderer);
-	virtual void drawPointer(StelCore* core, class StelRenderer* renderer, StelProjectorP projector);
+	virtual void draw(StelCore* core);
+	virtual void drawPointer(StelCore* core, StelPainter& painter);
 	virtual double getCallOrder(StelModuleActionName actionName) const;
 
 	///////////////////////////////////////////////////////////////////////////
@@ -87,14 +90,16 @@ public:
 	//! Find and return the list of at most maxNbItem objects auto-completing the passed object I18n name.
 	//! @param objPrefix the case insensitive first letters of the searched object
 	//! @param maxNbItem the maximum number of returned object names
+	//! @param useStartOfWords the autofill mode for returned objects names
 	//! @return a list of matching object name by order of relevance, or an empty list if nothing match
-	virtual QStringList listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem=5) const;
+	virtual QStringList listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false) const;
 
 	//! Find and return the list of at most maxNbItem objects auto-completing the passed object English name.
 	//! @param objPrefix the case insensitive first letters of the searched object
 	//! @param maxNbItem the maximum number of returned object names
+	//! @param useStartOfWords the autofill mode for returned objects names
 	//! @return a list of matching object name by order of relevance, or an empty list if nothing match
-	virtual QStringList listMatchingObjects(const QString& objPrefix, int maxNbItem=5) const;
+	virtual QStringList listMatchingObjects(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false) const;
 
 	virtual QStringList listAllObjects(bool inEnglish) const;
 	virtual QString getName() const { return "Quasars"; }
@@ -125,8 +130,10 @@ public:
 	//! @param b if true, updates will be enabled, else they will be disabled
 	void setUpdatesEnabled(bool b) {updatesEnabled=b;}
 
-	bool getDisplayMode(void) {return distributionEnabled;}
-	void setDisplayMode(bool b) {distributionEnabled=b;}
+	bool getDisplayMode(void);
+	void setDisplayMode(bool b);
+	QString getMarkerColor(void);
+	void setMarkerColor(QString c);
 	void setEnableAtStartup(bool b) { enableAtStartup=b; }
 	bool getEnableAtStartup(void) { return enableAtStartup; }
 
@@ -142,6 +149,9 @@ public:
 
 	//! Get the current updateState
 	UpdateState getUpdateState(void) {return updateState;}
+
+	//! Get count of quasars from catalog
+	int getCountQuasars(void) {return QsrCount;}
 
 signals:
 	//! @param state the new update state.
@@ -191,6 +201,10 @@ private:
 	//! @return version string, e.g. "1"
 	int getJsonFileFormatVersion(void);
 
+	//! Check format of the catalog of quasars
+	//! @return valid boolean, e.g. "true"
+	bool checkJsonFileFormat(void);
+
 	//! parse JSON file and load quasars to map
 	QVariantMap loadQSOMap(QString path=QString());
 
@@ -199,8 +213,9 @@ private:
 
 	QString catalogJsonPath;
 
-	class StelTextureNew* texPointer;
-	class StelTextureNew* markerTexture;
+	int QsrCount;
+
+	StelTextureSP texPointer;
 	QList<QuasarP> QSO;
 
 	// variables and functions for the updater
@@ -212,8 +227,7 @@ private:
 	QList<int> messageIDs;
 	bool updatesEnabled;
 	QDateTime lastUpdate;
-	int updateFrequencyDays;
-	bool distributionEnabled;
+	int updateFrequencyDays;	
 	bool enableAtStartup;
 
 	QSettings* conf;
@@ -226,7 +240,7 @@ private:
 	QPixmap* OffIcon;
 	QPixmap* GlowIcon;
 	StelButton* toolbarButton;
-	QProgressBar* progressBar;
+	class StelProgressController* progressBar;
 
 private slots:
 	//! check to see if an update is required.  This is called periodically by a timer
@@ -238,7 +252,7 @@ private slots:
 };
 
 
-#include "fixx11h.h"
+
 #include <QObject>
 #include "StelPluginInterface.hpp"
 
@@ -246,6 +260,7 @@ private slots:
 class QuasarsStelPluginInterface : public QObject, public StelPluginInterface
 {
 	Q_OBJECT
+	Q_PLUGIN_METADATA(IID "stellarium.StelGuiPluginInterface/1.0")
 	Q_INTERFACES(StelPluginInterface)
 public:
 	virtual StelModule* getStelModule() const;

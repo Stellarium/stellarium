@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
 #ifndef HELLOSTELMODULE_HPP_
@@ -33,7 +33,7 @@ public:
 	// Methods defined in the StelModule class
 	virtual void init();
 	virtual void update(double) {;}
-	virtual void draw(StelCore* core, class StelRenderer* renderer);
+	virtual void draw(StelCore* core);
 	virtual double getCallOrder(StelModuleActionName actionName) const;
 private:
 	// Font used for displaying our text
@@ -41,7 +41,6 @@ private:
 };
 
 
-#include "fixx11h.h"
 #include <QObject>
 #include "StelPluginInterface.hpp"
 
@@ -49,6 +48,7 @@ private:
 class HelloStelModuleStelPluginInterface : public QObject, public StelPluginInterface
 {
 	Q_OBJECT
+	Q_PLUGIN_METADATA(IID "stellarium.StelGuiPluginInterface/1.0")
 	Q_INTERFACES(StelPluginInterface)
 public:
 	virtual StelModule* getStelModule() const;

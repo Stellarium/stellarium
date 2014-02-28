@@ -1,3 +1,21 @@
+/*
+ * Stellarium
+ * Copyright (C) 2009 Matthew Gates
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
+ */
 
 #include <QString>
 #include <QDateTime>
@@ -6,13 +24,13 @@
 #include <QList>
 #include <QtGlobal>
 #include <QLocale>
-#include <QtDebug>
+#include <QDebug>
 #include "StelUtils.hpp"
 #include "tests/testDates.hpp"
 
 #define IGREG 2299161
 
-QTEST_MAIN(TestDates);
+QTEST_MAIN(TestDates)
 
 void TestDates::dateRoundTrip()
 {
@@ -58,6 +76,7 @@ void TestDates::dateRoundTrip()
 	map[-1930712.0] ="-9999-12-31T12:00:00";
 
 	bool ok;
+	Q_UNUSED(ok);
 	for (QMap<double, QString>::ConstIterator i=map.constBegin();i!=map.constEnd();++i)
 	{
 		QCOMPARE(StelUtils::julianDayToISO8601String(i.key()), i.value());
@@ -343,8 +362,8 @@ void TestDates::testJulianDays()
 {
 	testJulianDaysRange( 400000000,  400001000);
 	testJulianDaysRange( 200000000,  200001000);
-	testJulianDaysRange(   2299200,    2299161);
-	testJulianDaysRange(   2299160,    2299000);
+	testJulianDaysRange(   2299200,    2299161);	
+	testJulianDaysRange(   2299160,    2299000);	
 	testJulianDaysRange(   2211000,    2210000);
 	testJulianDaysRange(   1721789,    1721788);
 	testJulianDaysRange(   1721424,    1721423);
@@ -360,7 +379,7 @@ void TestDates::testJulianDays()
 	testJulianDaysRange(  -2301000,   -2300000);
 	testJulianDaysRange( -99001000,  -99000000);
 	testJulianDaysRange(-200001000, -200000000);
-	testJulianDaysRange(-400001000, -400000000);
+	testJulianDaysRange(-400001000, -400000000);	
 }
 
 #define TJ1 (2450000)

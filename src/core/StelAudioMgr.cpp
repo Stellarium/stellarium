@@ -17,17 +17,21 @@
  */
 
 #include "StelAudioMgr.hpp"
+#include "StelFileMgr.hpp"
 #include <QDebug>
 #include <QDir>
+
+#ifdef ENABLE_SOUND
+
+#include <QMediaPlayer>
 
 StelAudioMgr::StelAudioMgr()
 {
 }
 
-#ifdef HAVE_QT_PHONON
 StelAudioMgr::~StelAudioMgr()
 {
-	foreach(QString id, audioObjects.keys())
+	foreach(const QString& id, audioObjects.keys())
 	{
 		dropSound(id);
 	}
@@ -41,7 +45,15 @@ void StelAudioMgr::loadSound(const QString& filename, const QString& id)
 		dropSound(id);
 	}
 
-	Phonon::MediaObject* sound = Phonon::createPlayer(Phonon::GameCategory, Phonon::MediaSource(filename));
+	QMediaPlayer* sound = new QMediaPlayer();
+	QString path = filename;
+	if (filename.startsWith('.') || filename.startsWith('/'))
+	{
+		path = QFileInfo(filename).absoluteFilePath();
+		sound->setMedia(QMediaContent(QUrl::fromLocalFile(path)));
+	}
+	else
+		sound->setMedia(QMediaContent(filename));
 	audioObjects[id] = sound;
 }
 
@@ -51,7 +63,7 @@ void StelAudioMgr::playSound(const QString& id)
 		if (audioObjects[id]!=NULL)
 		{
 			// if already playing, stop and play from the start
-			if (audioObjects[id]->state() == Phonon::PlayingState)
+			if (audioObjects[id]->state()==QMediaPlayer::PlayingState)
 				audioObjects[id]->stop();
 
 			// otherwise just play it
@@ -85,16 +97,15 @@ void StelAudioMgr::dropSound(const QString& id)
 	}
 }
 
-#else  // HAVE_QT_PHONON
+#else 
 void StelAudioMgr::loadSound(const QString& filename, const QString& id)
 {
 	qWarning() << "This build of Stellarium does not support sound - cannot load audio" << QDir::toNativeSeparators(filename) << id;
 }
+StelAudioMgr::StelAudioMgr() {}
 StelAudioMgr::~StelAudioMgr() {;}
 void StelAudioMgr::playSound(const QString&) {;}
 void StelAudioMgr::pauseSound(const QString&) {;}
 void StelAudioMgr::stopSound(const QString&) {;}
 void StelAudioMgr::dropSound(const QString&) {;}
-#endif // HAVE_QT_PHONON
-
-
+#endif

@@ -26,6 +26,7 @@
 #include "Pulsars.hpp"
 
 class Ui_pulsarsDialog;
+class Pulsars;
 class QTimer;
 
 class PulsarsDialog : public StelDialog
@@ -48,6 +49,7 @@ private slots:
 	void setUpdateValues(int days);
 	void setUpdatesEnabled(int checkState);
 	void setDistributionEnabled(int checkState);
+	void setSeparateColorsFlag(int checkState);
 	void setDisplayAtStartupEnabled(int checkState);
 	void setDisplayShowPulsarsButton(int checkState);
 	void updateStateReceiver(Pulsars::UpdateState state);
@@ -58,6 +60,7 @@ private slots:
 
 private:
 	Ui_pulsarsDialog* ui;
+	Pulsars* psr;
 	void setAboutHtml(void);
 	void updateGuiFromSettings(void);
 	QTimer* updateTimer;

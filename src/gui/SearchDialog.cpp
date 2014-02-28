@@ -37,9 +37,11 @@
 #include <QSettings>
 #include <QString>
 #include <QStringList>
+#include <QtAlgorithms>
 #include <QTextEdit>
 #include <QLineEdit>
 #include <QComboBox>
+#include <QMenu>
 
 #include "SimbadSearcher.hpp"
 
@@ -121,7 +123,7 @@ void CompletionLabel::updateText()
 
 const char* SearchDialog::DEF_SIMBAD_URL = "http://simbad.u-strasbg.fr/";
 
-SearchDialog::SearchDialog() : simbadReply(NULL)
+SearchDialog::SearchDialog(QObject* parent) : StelDialog(parent), simbadReply(NULL)
 {
 	ui = new Ui_searchDialogForm;
 	simbadSearcher = new SimbadSearcher(this);
@@ -162,6 +164,7 @@ SearchDialog::SearchDialog() : simbadReply(NULL)
 	QSettings* conf = StelApp::getInstance().getSettings();
 	Q_ASSERT(conf);
 	useSimbad = conf->value("search/flag_search_online", true).toBool();	
+	useStartOfWords = conf->value("search/flag_start_words", false).toBool();
 	simbadServerUrl = conf->value("search/simbad_server_url", DEF_SIMBAD_URL).toString();
 }
 
@@ -204,6 +207,7 @@ void SearchDialog::createDialogContent()
 	onSearchTextChanged(ui->lineEditSearchSkyObject->text());
 	connect(ui->lineEditSearchSkyObject, SIGNAL(returnPressed()), this, SLOT(gotoObject()));
 	connect(ui->lineEditSearchSkyObject, SIGNAL(selectionChanged()), this, SLOT(setHasSelectedFlag()));
+	connect(ui->lineEditSearchSkyObject, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(showContextMenu(QPoint)));
 
 	ui->lineEditSearchSkyObject->installEventFilter(this);
 	ui->RAAngleSpinBox->setDisplayFormat(AngleSpinBox::HMSLetters);
@@ -251,11 +255,18 @@ void SearchDialog::createDialogContent()
 	ui->serverListComboBox->setCurrentIndex(idx);
 	connect(ui->serverListComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(selectSimbadServer(int)));
 
+	connect(ui->checkBoxUseStartOfWords, SIGNAL(clicked(bool)), this, SLOT(enableStartOfWordsAutofill(bool)));
+	ui->checkBoxUseStartOfWords->setChecked(useStartOfWords);
+
 	// list views initialization
 	connect(ui->objectTypeComboBox, SIGNAL(activated(int)), this, SLOT(updateListWidget(int)));
 	connect(ui->searchInListLineEdit, SIGNAL(textChanged(QString)), this, SLOT(searchListChanged(QString)));
 	connect(ui->searchInEnglishCheckBox, SIGNAL(toggled(bool)), this, SLOT(updateListTab()));
 	updateListTab();
+
+	// Set the focus directly on the line edit
+	if (ui->lineEditSearchSkyObject->isEnabled())
+		ui->lineEditSearchSkyObject->setFocus();
 }
 
 void SearchDialog::setHasSelectedFlag()
@@ -272,13 +283,13 @@ void SearchDialog::enableSimbadSearch(bool enable)
 	conf->setValue("search/flag_search_online", useSimbad);	
 }
 
-void SearchDialog::setVisible(bool v)
+void SearchDialog::enableStartOfWordsAutofill(bool enable)
 {
-	StelDialog::setVisible(v);
+	useStartOfWords = enable;
 
-	// Set the focus directly on the line edit
-	if (ui->lineEditSearchSkyObject->isVisible())
-		ui->lineEditSearchSkyObject->setFocus();
+	QSettings* conf = StelApp::getInstance().getSettings();
+	Q_ASSERT(conf);
+	conf->setValue("search/flag_start_words", useStartOfWords);
 }
 
 void SearchDialog::setSimpleStyle()
@@ -333,16 +344,22 @@ void SearchDialog::onSearchTextChanged(const QString& text)
 		QString greekText = substituteGreek(trimmedText);
 		QStringList matches;
 		if(greekText != trimmedText) {
-			matches = objectMgr->listMatchingObjectsI18n(trimmedText, 3);			
-			matches += objectMgr->listMatchingObjects(trimmedText, 3);
-			matches += objectMgr->listMatchingObjectsI18n(greekText, (8 - matches.size()));
+			matches = objectMgr->listMatchingObjectsI18n(trimmedText, 3, useStartOfWords);
+			matches += objectMgr->listMatchingObjects(trimmedText, 3, useStartOfWords);
+			matches += objectMgr->listMatchingObjectsI18n(greekText, (8 - matches.size()), useStartOfWords);
 		} else {
-			matches = objectMgr->listMatchingObjectsI18n(trimmedText, 5);
-			matches += objectMgr->listMatchingObjects(trimmedText, 5);
+			matches = objectMgr->listMatchingObjectsI18n(trimmedText, 5, useStartOfWords);
+			matches += objectMgr->listMatchingObjects(trimmedText, 5, useStartOfWords);
 		}
 
 		// remove possible duplicates from completion list
 		matches.removeDuplicates();
+
+		matches.sort(Qt::CaseInsensitive);
+		// objects with short names should be searched first
+		// examples: Moon, Hydra (moon); Jupiter, Ghost of Jupiter
+		stringLengthCompare comparator;
+		qSort(matches.begin(), matches.end(), comparator);
 
 		ui->completionLabel->setValues(matches);
 		ui->completionLabel->selectFirst();
@@ -351,6 +368,7 @@ void SearchDialog::onSearchTextChanged(const QString& text)
 		ui->pushButtonGotoSearchSkyObject->setEnabled(true);
 	}
 }
+
 
 // Called when the current simbad query status changes
 void SearchDialog::onSimbadStatusChanged()
@@ -569,7 +587,7 @@ void SearchDialog::updateListWidget(int index)
 
 void SearchDialog::updateListTab()
 {
-	if (StelApp::getInstance().getLocaleMgr().getAppLanguage() == "en")
+	if (StelApp::getInstance().getLocaleMgr().getAppLanguage().startsWith("en"))
 	{
 		// hide "names in English" checkbox
 		ui->searchInEnglishCheckBox->hide();
@@ -589,4 +607,20 @@ void SearchDialog::updateListTab()
 		}
 	}
 	updateListWidget(ui->objectTypeComboBox->currentIndex());
+}
+
+void SearchDialog::showContextMenu(const QPoint &pt)
+{
+	QMenu *menu = ui->lineEditSearchSkyObject->createStandardContextMenu();
+	menu->addSeparator();
+	menu->addAction(q_("Paste and Search"), this, SLOT(pasteAndGo()));
+	menu->exec(ui->lineEditSearchSkyObject->mapToGlobal(pt));
+	delete menu;
+}
+
+void SearchDialog::pasteAndGo()
+{
+	ui->lineEditSearchSkyObject->clear(); // clear current text
+	ui->lineEditSearchSkyObject->paste(); // paste text from clipboard
+	gotoObject(); // go to first finded object
 }

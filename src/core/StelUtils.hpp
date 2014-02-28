@@ -20,15 +20,17 @@
 #ifndef _STELUTILS_HPP_
 #define _STELUTILS_HPP_
 
+#include "config.h"
+
 #include "VecMath.hpp"
 
 #include <QVariantMap>
 #include <QDateTime>
-#include <QSize>
 #include <QString>
 
-// astonomical unit (km)
+// astronomical unit (km)
 #define AU 149597870.691
+#define AU_KM (1.0/149597870.691)
 // Parsec (km)
 #define PARSEC 30.857e12
 // speed of light (km/sec)
@@ -42,6 +44,9 @@ namespace StelUtils
 
 	//! Return the version of stellarium, i.e. "0.9.0"
 	QString getApplicationVersion();
+
+	//! Return the name and the version of operating system, i.e. "Mac OS X 10.7"
+	QString getOperatingSystemInfo();
 
 	//! Convert an angle in hms format to radian.
 	//! @param h hour component
@@ -95,7 +100,7 @@ namespace StelUtils
 	QString radToDmsStr(const double angle, const bool decimal=false, const bool useD=false);
 
 	//! Convert a dms formatted string to an angle in radian
-	//! @param s The input string
+	//! @param dsm The input string
 	double dmsStrToRad(const QString& s);
 
 	//! Obtains a Vec3f from a string.
@@ -174,11 +179,8 @@ namespace StelUtils
 	//! Check if a number is a power of 2.
 	bool isPowerOfTwo(const int value);
 
-	//! Return the first power of two greater or equal to the given value.
-	int smallestPowerOfTwoGreaterOrEqualTo(const int value);
-
-	//! Return the smallest size with power-of two dimensions at least as large as given size.
-	QSize smallestPowerOfTwoSizeGreaterOrEqualTo(const QSize base);
+	//! Return the first power of two bigger or equal to the given value.
+	int getBiggerEqualPowerOfTwo(int value);
 
 	//! Return the inverse sinus hyperbolic of z.
 	double asinh(const double z);
@@ -264,7 +266,7 @@ namespace StelUtils
 	//! The taylor serie is not accurate around x=1 and x=-1
 	inline float fastAcos(const float x)
 	{
-		return M_PI_2 - (x + x*x*x * (1.f/6.f + x*x * (3.f/40.f + 5.f/112.f * x*x)) );
+		return static_cast<float>(M_PI_2) - (x + x*x*x * (1.f/6.f + x*x * (3.f/40.f + 5.f/112.f * x*x)) );
 	}
 
 	//! Compute exp(x) for small exponents x
@@ -563,6 +565,11 @@ namespace StelUtils
 	//! @param jDay the JD
 	//! @return sigma in seconds
 	double getDeltaTStandardError(const double jDay);
+
+	//! Sign function from http://stackoverflow.com/questions/1903954/is-there-a-standard-sign-function-signum-sgn-in-c-c
+	template <typename T> int sign(T val) {
+		return (T(0) < val) - (val < T(0));
+	}
 }
 
 #endif // _STELUTILS_HPP_

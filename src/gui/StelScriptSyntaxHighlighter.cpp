@@ -116,14 +116,14 @@ StelScriptSyntaxHighlighter::StelScriptSyntaxHighlighter(QTextDocument *parent)
 		{
 			if (metaObject->method(i).methodType() == QMetaMethod::Slot && metaObject->method(i).access() == QMetaMethod::Public)
 			{
-				QString fn = metaObject->method(i).signature();
+				QString fn = metaObject->method(i).methodSignature();
 				fn.replace(QRegExp("\\(.*$"), ""); 
 				fn = m->objectName() + "\\." + fn;
 				knownFunctionNames << fn;
 			}
 		}
         }
-	moduleNames << "\\bStelSkyLayerMgr\\b" << "\\bStelSkyDrawer\\b" << "\\bcore\\b";
+	moduleNames << "\\bStelSkyImageMgr\\b" << "\\bStelSkyDrawer\\b" << "\\bcore\\b";
 	foreach(const QString &pattern, moduleNames)
 	{
 		rule.pattern = QRegExp(pattern);

@@ -25,11 +25,11 @@
 #include "StelGui.hpp"
 #include "StelFileMgr.hpp"
 #include "StelModuleMgr.hpp"
-#include "StelMainGraphicsView.hpp"
+#include "StelMainView.hpp"
 #include "StelTranslator.hpp"
+#include "StelActionMgr.hpp"
 
 #include <QAbstractItemModel>
-#include <QAction>
 #include <QDataWidgetMapper>
 #include <QDebug>
 #include <QFrame>
@@ -68,13 +68,6 @@ OcularDialog::OcularDialog(Oculars* pluginPtr, QList<CCD *>* ccds, QList<Ocular 
 			     lensModel,
 			     lensModel->propertyMap());
 
-	validatorPositiveInt = new QIntValidator(0, std::numeric_limits<int>::max(), this);
-	validatorPositiveDouble = new QDoubleValidator(.0, std::numeric_limits<double>::max(), 24, this);
-	validatorOcularAFOV = new QDoubleValidator(1.0, 120.0, 3, this);
-	validatorOcularEFL = new QDoubleValidator(1.0, 60.0, 3, this);
-	validatorTelescopeDiameter = new QDoubleValidator(1.0, 1000.0, 1, this);
-	validatorTelescopeFL = new QDoubleValidator(1.0, 10000.0, 1, this);
-	validatorLensMultipler = new QDoubleValidator(1.0, 6.0, 4, this);
 	QRegExp nameExp("^\\S.*");
 	validatorName = new QRegExpValidator(nameExp, this);
 }
@@ -128,7 +121,7 @@ void OcularDialog::updateStyle()
 void OcularDialog::closeWindow()
 {
 	setVisible(false);
-	StelMainGraphicsView::getInstance().scene()->setActiveWindow(0);
+	StelMainView::getInstance().scene()->setActiveWindow(0);
 }
 
 void OcularDialog::deleteSelectedCCD()
@@ -284,22 +277,20 @@ void OcularDialog::moveDownSelectedLens()
 void OcularDialog::keyBindingTogglePluginChanged(const QString& newString)
 {
 	Oculars::appSettings()->setValue("bindings/toggle_oculars", newString);
-	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-	Q_ASSERT(gui);
-	QAction* action = gui->getGuiAction("actionShow_Ocular");
+	StelActionMgr* actionMgr = StelApp::getInstance().getStelActionManager();
+	StelAction* action = actionMgr->findAction("actionShow_Ocular");
 	if (action != NULL) {
-		action->setShortcut(QKeySequence(newString.trimmed()));
+		action->setShortcut(newString.trimmed());
 	}
 }
 
 void OcularDialog::keyBindingPopupNavigatorConfigChanged(const QString& newString)
 {
 	Oculars::appSettings()->setValue("bindings/popup_navigator", newString);
-	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-	Q_ASSERT(gui);
-	QAction* action = gui->getGuiAction("actionShow_Ocular_Menu");
+	StelActionMgr* actionMgr = StelApp::getInstance().getStelActionManager();
+	StelAction* action = actionMgr->findAction("actionShow_Ocular_Menu");
 	if (action != NULL) {
-		action->setShortcut(QKeySequence(newString.trimmed()));
+		action->setShortcut(newString.trimmed());
 	}
 }
 
@@ -307,9 +298,10 @@ void OcularDialog::requireSelectionStateChanged(int state)
 {
 	bool requireSelection = (state == Qt::Checked);
 	bool requireSelectionToZoom = Oculars::appSettings()->value("require_selection_to_zoom", 1.0).toBool();
-	if (requireSelection != requireSelectionToZoom) {
+	if (requireSelection != requireSelectionToZoom)
+	{
 		Oculars::appSettings()->setValue("require_selection_to_zoom", requireSelection);
-		Oculars::appSettings()->sync();\
+		Oculars::appSettings()->sync();
 		emit(requireSelectionChanged(requireSelection));
 	}
 }
@@ -318,7 +310,8 @@ void OcularDialog::scaleImageCircleStateChanged(int state)
 {
 	bool shouldScale = (state == Qt::Checked);
 	bool useMaxImageCircle = Oculars::appSettings()->value("use_max_exit_circle",01.0).toBool();
-	if (shouldScale != useMaxImageCircle) {
+	if (shouldScale != useMaxImageCircle)
+	{
 		Oculars::appSettings()->setValue("use_max_exit_circle", shouldScale);
 		Oculars::appSettings()->sync();
 		emit(scaleImageCircleChanged(shouldScale));
@@ -345,8 +338,10 @@ void OcularDialog::createDialogContent()
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 	connect(ui->scaleImageCircleCheckBox, SIGNAL(stateChanged(int)), this, SLOT(scaleImageCircleStateChanged(int)));
 	connect(ui->requireSelectionCheckBox, SIGNAL(stateChanged(int)), this, SLOT(requireSelectionStateChanged(int)));
+	connect(ui->limitStellarMagnitudeCheckBox, SIGNAL(clicked(bool)), plugin, SLOT(setFlagLimitMagnitude(bool)));
 	connect(ui->checkBoxControlPanel, SIGNAL(clicked(bool)), plugin, SLOT(enableGuiPanel(bool)));
 	connect(ui->checkBoxDecimalDegrees, SIGNAL(clicked(bool)), plugin, SLOT(setFlagDecimalDegrees(bool)));
+	connect(ui->checkBoxInitialFOV, SIGNAL(clicked(bool)), plugin, SLOT(setFlagInitFovUsage(bool)));
 	
 	// The add & delete buttons
 	connect(ui->addCCD, SIGNAL(clicked()), this, SLOT(insertNewCCD()));
@@ -360,22 +355,10 @@ void OcularDialog::createDialogContent()
 
 	// Validators
 	ui->ccdName->setValidator(validatorName);
-	ui->ccdResX->setValidator(validatorPositiveInt);
-	ui->ccdResY->setValidator(validatorPositiveInt);
-	ui->ccdChipX->setValidator(validatorPositiveDouble);
-	ui->ccdChipY->setValidator(validatorPositiveDouble);
-	ui->ccdPixelX->setValidator(validatorPositiveDouble);
-	ui->ccdPixelY->setValidator(validatorPositiveDouble);
-	ui->ocularAFov->setValidator(validatorOcularAFOV);
-	ui->ocularFL->setValidator(validatorOcularEFL);
-	ui->ocularFieldStop->setValidator(validatorOcularEFL);
-	ui->telescopeFL->setValidator(validatorTelescopeFL);
-	ui->telescopeDiameter->setValidator(validatorTelescopeDiameter);
 	ui->ocularName->setValidator(validatorName);
 	ui->telescopeName->setValidator(validatorName);
 	ui->lensName->setValidator(validatorName);
-	ui->lensMultipler->setValidator(validatorLensMultipler);
-	
+
 	// The key bindings
 	QString bindingString = Oculars::appSettings()->value("bindings/toggle_oculars", "Ctrl+O").toString();
 	ui->togglePluginLineEdit->setText(bindingString);
@@ -465,19 +448,27 @@ void OcularDialog::createDialogContent()
 	ui->telescopeListView->setCurrentIndex(telescopeTableModel->index(0, 1));
 
 	// set the initial state
-	if (Oculars::appSettings()->value("require_selection_to_zoom", 1.0).toBool()) {
+	QSettings *settings = Oculars::appSettings();
+	if (settings->value("require_selection_to_zoom", 1.0).toBool()) {
 		ui->requireSelectionCheckBox->setCheckState(Qt::Checked);
 	}
-	if (Oculars::appSettings()->value("use_max_exit_circle", 0.0).toBool()) {
+	if (settings->value("use_max_exit_circle", 0.0).toBool()) {
 		ui->scaleImageCircleCheckBox->setCheckState(Qt::Checked);
 	}
-	if (Oculars::appSettings()->value("enable_control_panel", false).toBool())
+	if (settings->value("limit_stellar_magnitude", true).toBool()) {
+		ui->limitStellarMagnitudeCheckBox->setCheckState(Qt::Checked);
+	}
+	if (settings->value("enable_control_panel", false).toBool())
 	{
 		ui->checkBoxControlPanel->setChecked(true);
 	}
-	if (Oculars::appSettings()->value("use_decimal_degrees", false).toBool())
+	if (settings->value("use_decimal_degrees", false).toBool())
 	{
 		ui->checkBoxDecimalDegrees->setChecked(true);
+	}
+	if (settings->value("use_initial_fov", false).toBool())
+	{
+		ui->checkBoxInitialFOV->setChecked(true);
 	}
 
 	//Initialize the style
@@ -491,7 +482,8 @@ void OcularDialog::initAboutText()
 
 	html += "<h2>" + q_("Oculars Plug-in") + "</h2><table width=\"90%\">";
 	html += "<tr width=\"30%\"><td><strong>" + q_("Version") + ":</strong></td><td>" + OCULARS_PLUGIN_VERSION + "</td></tr>";
-	html += "<tr><td><strong>" + q_("Authors") + ":</strong></td><td>Timothy Reaves &lt;treaves@silverfieldstech.com&gt;<br />Bogdan Marinov<br />Pawel Stolowski (" + q_("Barlow lens feature") + ")</td></tr>";
+	html += "<tr><td><strong>" + q_("Author") + ":</strong></td><td>Timothy Reaves &lt;treaves@silverfieldstech.com&gt;</td></tr>";
+	html += "<tr><td><strong>" + q_("Contributors") + ":</strong></td><td>Bogdan Marinov<br />Pawel Stolowski (" + q_("Barlow lens feature") + ")<br />Alexander Wolf</td></tr>";
 	html += "</table>";
 
 	//Overview
@@ -509,18 +501,20 @@ void OcularDialog::initAboutText()
 
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 	Q_ASSERT(gui);
-	QAction* actionOcular = gui->getGuiAction("actionShow_Ocular");
+	StelActionMgr* actionMgr = StelApp::getInstance().getStelActionManager();
+	Q_ASSERT(actionMgr);
+	StelAction* actionOcular = actionMgr->findAction("actionShow_Ocular");
 	Q_ASSERT(actionOcular);
-	QAction* actionMenu = gui->getGuiAction("actionShow_Ocular_Menu");
+	StelAction* actionMenu = actionMgr->findAction("actionShow_Ocular_Menu");
 	Q_ASSERT(actionMenu);
-	QKeySequence ocularShortcut = actionOcular->shortcut();
+	QKeySequence ocularShortcut = actionOcular->getShortcut();
 	QString ocularString = ocularShortcut.toString(QKeySequence::NativeText);
-	ocularString = Qt::escape(ocularString);
+	ocularString = ocularString.toHtmlEscaped();
 	if (ocularString.isEmpty())
 		ocularString = q_("[no key defined]");
-	QKeySequence menuShortcut = actionMenu->shortcut();
+	QKeySequence menuShortcut = actionMenu->getShortcut();
 	QString menuString = menuShortcut.toString(QKeySequence::NativeText);
-	menuString = Qt::escape(menuString);
+	menuString = menuString.toHtmlEscaped();
 	if (menuString.isEmpty())
 		menuString = q_("[no key defined]");
 

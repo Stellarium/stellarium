@@ -119,6 +119,8 @@ class Translations
 		N_("Metis");
 		// TRANSLATORS: Asteroid (10) Hygiea
 		N_("Hygiea");
+		// TRANSLATORS: Asteroid (41) Daphne
+		N_("Daphne");
 		// TRANSLATORS: Asteroid (1221) Amor
 		N_("Amor");
 		// TRANSLATORS: Asteroid (99942) Apophis
@@ -133,6 +135,9 @@ class Translations
 		N_("Varuna");
 		// TRANSLATORS: Asteroid (136472) Makemake
 		N_("Makemake");
+		
+		// TRANSLATORS: Proper name of comet C/1680 V1
+		N_("Great Comet of 1680 (C/1680 V1)")
 		
 		// TRANSLATORS: Name of supernova SN 1572A and script name
 		N_("Tycho's Supernova");
@@ -174,6 +179,7 @@ class Translations
 		N_("Navajo");
 		N_("Norse");
 		N_("Polynesian");
+		N_("Romanian");
 		N_("Sami");
 		N_("Tupi-Guarani");
 		N_("Tongan");
@@ -198,6 +204,11 @@ class Translations
 		N_("Mars");
 		// TRANSLATORS: Name of landscape and planet
 		N_("Saturn");
+		// TRANSLATORS: Name of landscape
+		N_("Geneva");
+		// TRANSLATORS: Name of landscape
+		N_("Grossmugl");
+
 
 		
 		// =====================================================================
@@ -272,7 +283,7 @@ class Translations
 		N_("Phobos eclipsing the Sun as seen from Olympus Mons on Jan 10, 2068.");
 		N_("Phobos occultations of Earth are common, as are occultations of Jupiter. But occultations of both on the same day are very rare. Here's one that takes place 1/23/2048. In real speed.");
 		N_("Phobos races ahead of Mars and transits the sun, passes through it and then retrogrades back towards the sun and just partially transits it again (only seen in the southern hemisphere of Deimos), then Mars totally eclipses the sun while Phobos transits in darkness between Mars and Deimos. When Phobos emerges from Mars it is still eclipsed and dimmed in Mars' shadow, only to light up later.");
-		N_("Screensaver of various happenings in the Solar System. 177 events in all!");
+		N_("Screensaver of various happenings in the Solar System. 187 events in all!");
 		N_("A tour of the western constellations.");
 		N_("Look at the Sun from big planets of Solar System and Pluto.");
 		N_("Best views of Earth from other Solar System bodies in the 21st Century.");
@@ -526,170 +537,26 @@ class Translations
 		N_("Zambia");
 		N_("Zimbabwe");
 
-		
 		// =====================================================================
-		// Keyboard action descriptions
-		
-		// TRANSLATORS: Keyboard action group name, also used elsewhere.
-		N_("Date and Time");
-		N_("Add 1 sidereal day");
-		N_("Add 1 sidereal month");
-		N_("Add 1 sidereal week");
-		N_("Add 1 sidereal year");
-		N_("Add 1 sidereal century");
-		N_("Add 1 solar day");
-		N_("Add 1 solar hour");
-		N_("Add 1 solar week");
-		N_("Add 1 synodic month");
-		N_("Add 1 draconic month");
-		N_("Add 1 anomalistic month");
-		N_("Add 1 mean tropical month");
-		N_("Add 1 draconic year");
-		N_("Add 1 mean tropical year");
-		N_("Add 1 mean tropical century");
-		N_("Slow down the script execution rate");
-		N_("Decrease time speed");
-		N_("Decrease time speed (a little)");
-		N_("Speed up the script execution rate");
-		N_("Increase time speed");
-		N_("Increase time speed (a little)");
-		N_("Pause script execution");
-		N_("Resume script execution");
-		N_("Set time to now");
-		N_("Set the normal script execution rate");
-		N_("Set normal time rate");
-		N_("Set time rate to zero");
-		N_("Stop script execution");
-		N_("Subtract 1 sidereal day");
-		N_("Subtract 1 sidereal month");
-		N_("Subtract 1 sidereal week");
-		N_("Subtract 1 sidereal year");
-		N_("Subtract 1 sidereal century");
-		N_("Subtract 1 solar day");
-		N_("Subtract 1 solar hour");
-		N_("Subtract 1 solar week");
-		N_("Subtract 1 synodic month");
-		N_("Subtract 1 draconic month");
-		N_("Subtract 1 anomalistic month");
-		N_("Subtract 1 mean tropical month");
-		N_("Subtract 1 draconic year");
-		N_("Subtract 1 mean tropical year");
-		N_("Subtract 1 mean tropical century");
-		
-		// TRANSLATORS: Keyboard action group name
-		N_("Display Options");
-		N_("Flip scene horizontally");
-		N_("Full-screen mode");
-		N_("Atmosphere");
-		N_("Azimuthal grid");
-		N_("Cardinal points");
-		N_("Constellation art");
-		N_("Constellation boundaries");
-		N_("Constellation labels");
-		N_("Constellation lines");
-		N_("Deep-sky objects background images");
-		N_("Ecliptic J2000 grid");
-		N_("Ecliptic line");
-		N_("Equator line");
-		N_("Equatorial grid");
-		N_("Equatorial J2000 grid");
-		N_("Fog");
-		N_("Galactic grid");
-		N_("Galactic plane");
-		N_("Ground");
-		N_("Horizon line");
-		N_("Meridian line");
-		N_("Deep-sky objects");
-		N_("Night mode");
-		N_("Planet labels");
-		N_("Planet orbits");
-		N_("Planet trails");
-		N_("Stars");
-		N_("Stars labels");
-		N_("Flip scene vertically");
-		
-		// TRANSLATORS: Keyboard action group name
-		N_("Miscellaneous");
-		N_("Auto hide horizontal button bar");
-		N_("Auto hide vertical button bar");
-		N_("Go to home");
-		N_("Quit");
-		N_("Copy selected object information to clipboard");
-		N_("Save screenshot");
-		N_("Switch between equatorial and azimuthal mount");
-		N_("Toggle visibility of GUI");
-		
-		// TRANSLATORS: Keyboard action group name
-		N_("Movement and Selection");
-		N_("Center on selected object");
-		N_("Set home planet to selected planet");
-		N_("Track object");
-		N_("Zoom in on selected object");
-		N_("Zoom out");
-		
-		// Angle Measure Plugin
-		N_("Angle measure");
-		
-		// Compass Marks Plugin
-		N_("Compass marks");
-		
-		// Exoplanets Plugin
-		N_("Show exoplanets");
-		N_("Exoplanets configuration window");
-		
-		// Observability Analysis Plugin
-		N_("Observability");
-		N_("Observability configuration window");
-		
-		// Oculars Plugin
-		N_("Oculars plugin configuration");
-		N_("Ocular view");
-		N_("Show crosshairs");
-		N_("Oculars popup menu");
-		N_("Image sensor frame");
-		N_("Telrad sight");
-		N_("Select next telescope");
-		N_("Select next eyepiece");
-		N_("Select previous telescope");
-		N_("Select previous eyepiece");
-		
-		// Pulsars Plugin
-		N_("Show pulsars");
-		N_("Pulsars configuration window");
-		
-		// Quasars Plugin
-		N_("Show quasars");
-		N_("Quasars configuration window");
-		
-		// Satellites Plugin
-		N_("Satellites configuration window");
-		N_("Satellite hints");
-		N_("Satellite labels");
-		
-		// Historical Supernovae Plugin
-		N_("Historical Supernovae configuration window");
-		
-		// Telescope Control Plugin
-		N_("Move a telescope to a given set of coordinates");
-		
-		// Renderer Statistics Plugin
-		N_("Show renderer statistics");
-		
-		// TRANSLATORS: Keyboard action group name
-		N_("Scripts");
-		N_("Run landscapes script from file");
-		N_("Show and zoom Moon");
-		
-		// TRANSLATORS: Keyboard action group name
-		N_("Windows");
-		N_("Configuration window");
-		N_("Date/time window");
-		N_("Help window");
-		N_("Location window");
-		N_("Script console window");
-		N_("Search window");
-		N_("Shortcuts window");
-		N_("Sky and viewing options window");
-
+		// List of GUI elements (Qt's dialogs)
+		N_("&Undo");
+		N_("&Redo");
+		N_("Cu&t");
+		N_("&Copy");
+		N_("&Paste");
+		N_("Delete");
+		N_("Select All");
+		N_("Look in:");
+		N_("Directory:");
+		N_("Folder");
+		N_("&Choose");
+		N_("Cancel");
+		N_("Files of type:");
+		N_("Date Modified");
+		N_("Directories");
+		N_("Computer");
+		N_("&Open");
+		N_("File &name:");
+		N_("Copy &Link Location");
 	}
 };

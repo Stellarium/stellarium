@@ -21,19 +21,20 @@
 #ifndef _CONSTELLATIONMGR_HPP_
 #define _CONSTELLATIONMGR_HPP_
 
+#include "StelObjectType.hpp"
+#include "StelObjectModule.hpp"
+#include "StelProjectorType.hpp"
+
 #include <vector>
 #include <QString>
 #include <QStringList>
 #include <QFont>
 
-#include "StelObjectType.hpp"
-#include "StelObjectModule.hpp"
-#include "StelProjectorType.hpp"
-
 class StelToneReproducer;
 class StarMgr;
 class Constellation;
 class StelProjector;
+class StelPainter;
 
 //! @class ConstellationMgr
 //! Display and manage the constellations.
@@ -101,7 +102,7 @@ public:
 	virtual void init();
 
 	//! Draw constellation lines, art, names and boundaries.
-	virtual void draw(StelCore* core, class StelRenderer* renderer);
+	virtual void draw(StelCore* core);
 
 	//! Updates time-varying state for each Constellation.
 	virtual void update(double deltaTime);
@@ -126,13 +127,15 @@ public:
 	//! Find and return the list of at most maxNbItem objects auto-completing the passed object I18n name.
 	//! @param objPrefix the case insensitive first letters of the searched object
 	//! @param maxNbItem the maximum number of returned object names
+	//! @param useStartOfWords the autofill mode for returned objects names
 	//! @return a vector of matching object name by order of relevance, or an empty vector if nothing match
-	virtual QStringList listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem=5) const;
+	virtual QStringList listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false) const;
 	//! Find and return the list of at most maxNbItem objects auto-completing the passed object English name.
 	//! @param objPrefix the case insensitive first letters of the searched object
 	//! @param maxNbItem the maximum number of returned object names
+	//! @param useStartOfWords the autofill mode for returned objects names
 	//! @return a vector of matching object name by order of relevance, or an empty vector if nothing match
-	virtual QStringList listMatchingObjects(const QString& objPrefix, int maxNbItem=5) const;
+	virtual QStringList listMatchingObjects(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false) const;
 	virtual QStringList listAllObjects(bool inEnglish) const;
 	virtual QString getName() const { return "Constellations"; }
 
@@ -155,6 +158,11 @@ public slots:
 	double getArtIntensity() const;
 
 	//! Define boundary color
+	//! @param color The color of boundaries
+	//! @code
+	//! // example of usage in scripts
+	//! ConstellationMgr.setBoundariesColor(Vec3f(1.0,0.0,0.0));
+	//! @endcode
 	void setBoundariesColor(const Vec3f& color);
 	//! Get current boundary color
 	Vec3f getBoundariesColor() const;
@@ -170,6 +178,11 @@ public slots:
 	bool getFlagIsolateSelected(void) const;
 
 	//! Define line color
+	//! @param color The color of lines
+	//! @code
+	//! // example of usage in scripts
+	//! ConstellationMgr.setLinesColor(Vec3f(1.0,0.0,0.0));
+	//! @endcode
 	void setLinesColor(const Vec3f& color);
 	//! Get line color
 	Vec3f getLinesColor() const;
@@ -180,6 +193,11 @@ public slots:
 	bool getFlagLines(void) const;
 
 	//! Set label color for names
+	//! @param color The color of labels
+	//! @code
+	//! // example of usage in scripts
+	//! ConstellationMgr.setLabelsColor(Vec3f(1.0,0.0,0.0));
+	//! @endcode
 	void setLabelsColor(const Vec3f& color);
 	//! Get label color for names
 	Vec3f getLabelsColor() const;
@@ -253,23 +271,13 @@ private:
 	//! @param conCatFile the path to the file which contains the constellation boundary data.
 	bool loadBoundaries(const QString& conCatFile);
         //! Draw the constellation lines at the epoch given by the StelCore.
-	void drawLines(class StelRenderer* renderer, StelProjectorP projector, const StelCore* core) const;
+	void drawLines(StelPainter& sPainter, const StelCore* core) const;
 	//! Draw the constellation art.
-	//!
-	//! @param renderer  Renderer to draw with.
-	//! @param projector Projector to project vertices to viewport.
-	void drawArt(class StelRenderer* renderer, StelProjectorP projector) const;
+	void drawArt(StelPainter& sPainter) const;
 	//! Draw the constellation name labels.
-	//! 
-	//! @param renderer  Renderer to draw with.
-	//! @param projector Projector to project vertices to viewport.
-	//! @param font      Font to draw the names with.
-	void drawNames(class StelRenderer* renderer, StelProjectorP projector, QFont& font) const;
+	void drawNames(StelPainter& sPainter) const;
 	//! Draw the constellation boundaries.
-	//! 
-	//! @param renderer  Renderer to draw with.
-	//! @param projector Projector to project vertices to viewport.
-	void drawBoundaries(StelRenderer* renderer, StelProjectorP projector) const;
+	void drawBoundaries(StelPainter& sPainter) const;
 	//! Handle single and multi-constellation selections.
 	void setSelectedConst(Constellation* c);
 	//! Handle unselecting a single constellation.

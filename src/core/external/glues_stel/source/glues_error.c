@@ -37,7 +37,7 @@
 # include <OpenGL/gl.h>
 #elif defined(QT_OPENGL_ES_1) || defined(QT_OPENGL_ES_1_CL)
 # include <GLES/gl.h>
-#elif defined(QT_OPENGL_ES_2) || defined(USE_OPENGL_ES2)
+#elif defined(QT_OPENGL_ES_2)
 # include <GLES2/gl2.h>
 #else
 #ifdef _MSC_BUILD

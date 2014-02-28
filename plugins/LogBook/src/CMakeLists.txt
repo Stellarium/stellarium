@@ -59,7 +59,7 @@ SOURCE_GROUP(Validators FILES REGULAR_EXPRESSION .*Validator*.+pp)
 
 
 SET(LogBook_RES ../resources/LogBook.qrc)
-QT4_ADD_RESOURCES(LogBook_RES_CXX ${LogBook_RES})
+QT5_ADD_RESOURCES(LogBook_RES_CXX ${LogBook_RES})
 
 ################# compiles .ui files ############
 SET(LogBook_UIS
@@ -75,7 +75,7 @@ SET(LogBook_UIS
 	gui/SessionsDialog.ui
 	gui/TargetsDialog.ui
 )
-QT4_WRAP_UI(LogBook_UIS_H ${LogBook_UIS})
+QT5_WRAP_UI(LogBook_UIS_H ${LogBook_UIS})
 
 SET(QT_USE_QTSQL TRUE)
 INCLUDE(${QT_USE_FILE})

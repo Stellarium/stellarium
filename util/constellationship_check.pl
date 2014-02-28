@@ -3,7 +3,6 @@
 # Quick sanity check for constellationship.fab files
 #
 
-
 $c = $F[0];
 $n = $F[1]; 
 @F = @F[2..$#F];

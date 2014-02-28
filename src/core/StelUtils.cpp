@@ -17,8 +17,6 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#include <cmath> // std::fmod
-
 #ifdef CYGWIN
  #include <malloc.h>
 #endif
@@ -32,7 +30,9 @@
 #include <QDebug>
 #include <QLocale>
 #include <QRegExp>
-#include <QtGlobal>
+#include <QProcess>
+#include <QSysInfo>
+#include <cmath> // std::fmod
 
 namespace StelUtils
 {
@@ -52,6 +52,116 @@ QString getApplicationVersion()
 #else
 	return QString(PACKAGE_VERSION);
 #endif
+}
+
+QString getOperatingSystemInfo()
+{
+	QString OS = "Unknown operating system";
+
+	#ifdef Q_OS_WIN
+	switch(QSysInfo::WindowsVersion)
+	{
+		case QSysInfo::WV_95:
+			OS = "Windows 95";
+			break;
+		case QSysInfo::WV_98:
+			OS = "Windows 98";
+			break;
+		case QSysInfo::WV_Me:
+			OS = "Windows Me";
+			break;
+		case QSysInfo::WV_NT:
+			OS = "Windows NT";
+			break;
+		case QSysInfo::WV_2000:
+			OS = "Windows 2000";
+			break;
+		case QSysInfo::WV_XP:
+			OS = "Windows XP";
+			break;
+		case QSysInfo::WV_2003:
+			OS = "Windows Server 2003";
+			break;
+		case QSysInfo::WV_VISTA:
+			OS = "Windows Vista";
+			break;
+		case QSysInfo::WV_WINDOWS7:
+			OS = "Windows 7";
+			break;
+		#ifdef WV_WINDOWS8
+		case QSysInfo::WV_WINDOWS8:
+			OS = "Windows 8";
+			break;
+		#endif
+		#ifdef WV_WINDOWS8_1
+		case QSysInfo::WV_WINDOWS8_1
+			OS = "Windows 8.1";
+			break;
+		#endif
+		default:
+			OS = "Unsupported Windows version";
+			break;
+	}
+
+	// somebody writing something useful for Macs would be great here
+	#elif defined Q_OS_MAC
+	switch(QSysInfo::MacintoshVersion)
+	{
+		case QSysInfo::MV_10_3:
+			OS = "Mac OS X 10.3";
+			break;
+		case QSysInfo::MV_10_4:
+			OS = "Mac OS X 10.4";
+			break;
+		case QSysInfo::MV_10_5:
+			OS = "Mac OS X 10.5";
+			break;
+		case QSysInfo::MV_10_6:
+			OS = "Mac OS X 10.6";
+			break;
+		#ifdef MV_10_7
+		case QSysInfo::MV_10_7:
+			OS = "Mac OS X 10.7";
+			break;
+		#endif
+		#ifdef MV_10_8
+		case QSysInfo::MV_10_8:
+			OS = "Mac OS X 10.8";
+			break;
+		#endif
+		#ifdef MV_10_9
+		case QSysInfo::MV_10_9:
+			OS = "Mac OS X 10.9";
+			break;
+		#endif
+		default:
+			OS = "Unsupported Mac version";
+			break;
+	}
+
+	#elif defined Q_OS_LINUX
+	QFile procVersion("/proc/version");
+	if(!procVersion.open(QIODevice::ReadOnly | QIODevice::Text))
+		OS = "Unknown Linux version";
+	else
+	{
+		QString version = procVersion.readAll();
+		if(version.right(1) == "\n")
+			version.chop(1);
+		OS = version;
+		procVersion.close();
+	}
+	#elif defined Q_OS_BSD4
+	// Check FreeBSD, NetBSD, OpenBSD and DragonFly BSD
+	QProcess uname;
+	uname.start("/usr/bin/uname -srm");
+	uname.waitForStarted();
+	uname.waitForFinished();
+	const QString BSDsystem = uname.readAllStandardOutput();
+	OS = BSDsystem.trimmed();
+	#endif
+
+	return OS;
 }
 
 double hmsToRad(const unsigned int h, const unsigned int m, const double s )
@@ -419,26 +529,13 @@ bool isPowerOfTwo(const int value)
 	return (value & -value) == value;
 }
 
-// Return the first power of two greater or equal to the given value
-int smallestPowerOfTwoGreaterOrEqualTo(const int value)
+// Return the first power of two bigger or equal to the given value
+int getBiggerEqualPowerOfTwo(int value)
 {
-#ifndef NDEBUG
-	const int twoTo30 = 1073741824;
-	Q_ASSERT_X(value <= twoTo30, Q_FUNC_INFO,
-	           "Value too large - smallest greater/equal power-of-2 is out of range");
-#endif
-
-	if(value == 0){return 0;}
-
-	int pot=1;
-	while (pot<value){pot<<=1;}
-	return pot;
-}
-
-QSize smallestPowerOfTwoSizeGreaterOrEqualTo(const QSize base)
-{
-	return QSize(smallestPowerOfTwoGreaterOrEqualTo(base.width()), 
-	             smallestPowerOfTwoGreaterOrEqualTo(base.height()));
+	int p=1;
+	while (p<=value)
+		p<<=1;
+	return p;
 }
 
 // Return the inverse sinus hyperbolic of z
@@ -452,7 +549,7 @@ double asinh(const double z)
 *************************************************************************/
 double qDateTimeToJd(const QDateTime& dateTime)
 {
-	return (double)(dateTime.date().toJulianDay())+(double)1./(24*60*60*1000)*QTime().msecsTo(dateTime.time())-0.5;
+	return (double)(dateTime.date().toJulianDay())+(double)1./(24*60*60*1000)*QTime(0, 0, 0, 0).msecsTo(dateTime.time())-0.5;
 }
 
 QDateTime jdToQDateTime(const double& jd)
@@ -704,7 +801,7 @@ double getJDFromSystem()
 
 double qTimeToJDFraction(const QTime& time)
 {
-	return (double)1./(24*60*60*1000)*QTime().msecsTo(time)-0.5;
+	return (double)1./(24*60*60*1000)*QTime(0, 0, 0, 0).msecsTo(time)-0.5;
 }
 
 QTime jdFractionToQTime(const double jd)
@@ -751,7 +848,8 @@ bool getJDFromDate(double* newjd, const int y, const int m, const int d, const i
 	double deltaTime = (h / 24.0) + (min / (24.0*60.0)) + (s / (24.0 * 60.0 * 60.0)) - 0.5;
 	QDate test((y <= 0 ? y-1 : y), m, d);
 	// if QDate will oblige, do so.
-	if ( test.isValid() )
+	// added hook for Julian calendar, because he has been removed from Qt5 --AW
+	if ( test.isValid() && y>1582)
 	{
 		double qdjd = (double)test.toJulianDay();
 		qdjd += deltaTime;
@@ -1062,48 +1160,14 @@ double calculateSiderealPeriod(const double SemiMajorAxis)
 	return period/86400; // return period in days
 }
 
+
 QString hoursToHmsStr(const double hours)
 {
 	int h = (int)hours;
-	int m = (int)((std::abs(hours)-std::abs(h))*60);
-	float s = (((std::abs(hours)-std::abs(h))*60)-m)*60;
+	int m = (int)((std::abs(hours)-std::abs(double(h)))*60);
+	float s = (((std::abs(hours)-std::abs(double(h)))*60)-m)*60;
 
 	return QString("%1h%2m%3s").arg(h).arg(m).arg(QString::number(s, 'f', 1));
-}
-
-#if defined(Q_OS_MAC) || defined(Q_OS_LINUX) || defined(Q_OS_FREEBSD)
-#include <sys/time.h>
-#else
-#include <time.h>
-#endif
-
-//! Get current time in seconds (relative to some arbitrary beginning in the past)
-//!
-//! Currently we only have a high-precision implementation for Mac, Linux and 
-//! FreeBSD. A Windows implementation would be good as well (clock_t, 
-//! which we use right now, might be faster/slower than wall clock time 
-//! and usually supports milliseconds at best).
-static long double getTime()
-{
-#if defined(Q_OS_MAC) || defined(Q_OS_LINUX) || defined(Q_OS_FREEBSD)
-	struct timeval timeVal;
-	if(gettimeofday(&timeVal, NULL) != 0)
-	{
-		Q_ASSERT_X(false, Q_FUNC_INFO, "Failed to get time");
-	}
-	return static_cast<long double>(timeVal.tv_sec) + 0.000001L * timeVal.tv_usec;
-#else
-	clock_t cpuTime = clock();
-	return static_cast<long double>(cpuTime) / CLOCKS_PER_SEC;
-#endif
-}
-
-//! Time when the program execution started.
-long double startTime = getTime();
-
-long double secondsSinceStart()
-{
-	return getTime() - startTime;
 }
 
 /* /////////////////// DELTA T VARIANTS

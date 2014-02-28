@@ -13,14 +13,15 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
 #ifndef _STELREGIONOBJECT_HPP_
 #define _STELREGIONOBJECT_HPP_
 
-#include <QSharedPointer>
 #include "StelSphereGeometry.hpp"
+
+#include <QSharedPointer>
 
 //! Simple abstract class defining basic methods implemented by all objects that need
 //! to be stored in a StelSphericalIndex.
@@ -31,6 +32,9 @@ class StelRegionObject
 
 		//! Return the spatial region of the object.
 		virtual SphericalRegionP getRegion() const=0;
+	
+		//! Return the spatial region of the object.
+		virtual Vec3d getPointInRegion() const=0;
 };
 
 //! @typedef StelRegionObjectP

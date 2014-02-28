@@ -16,8 +16,11 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
+#include "config.h"
+
 #include "VecMath.hpp"
 #include "StelProjector.hpp"
+#include "StelPainter.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelLocaleMgr.hpp"
@@ -29,10 +32,7 @@
 #include "StelGui.hpp"
 #include "StelGuiItems.hpp"
 #include "StelIniParser.hpp"
-#include "renderer/StelCircleArcRenderer.hpp"
-#include "renderer/StelRenderer.hpp"
 
-#include <QAction>
 #include <QDebug>
 #include <QPixmap>
 #include <QSettings>
@@ -58,11 +58,9 @@ StelPluginInfo CompassMarksStelPluginInterface::getPluginInfo() const
 	info.authors = "Matthew Gates";
 	info.contact = "http://porpoisehead.net/";
 	info.description = N_("Displays compass bearing marks along the horizon");
+	info.version = COMPASSMARKS_VERSION;
 	return info;
 }
-
-Q_EXPORT_PLUGIN2(CompassMarks, CompassMarksStelPluginInterface)
-
 
 CompassMarks::CompassMarks()
 	: markColor(1,1,1), pxmapGlow(NULL), pxmapOnIcon(NULL), pxmapOffIcon(NULL), toolbarButton(NULL)
@@ -124,18 +122,14 @@ void CompassMarks::init()
 		pxmapOnIcon = new QPixmap(":/compassMarks/bt_compass_on.png");
 		pxmapOffIcon = new QPixmap(":/compassMarks/bt_compass_off.png");
 
-		QAction *showCompassAction = gui->getGuiAction("actionShow_Compass_Marks");
-		//showCompassAction->setChecked(markFader);
-		toolbarButton = new StelButton(NULL, *pxmapOnIcon, *pxmapOffIcon, *pxmapGlow, showCompassAction);
+		addAction("actionShow_Compass_Marks", N_("Compass Marks"), N_("Compass marks"), "marksVisible");
+		toolbarButton = new StelButton(NULL, *pxmapOnIcon, *pxmapOffIcon, *pxmapGlow, "actionShow_Compass_Marks");
 		gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
-		connect(showCompassAction, SIGNAL(toggled(bool)), this, SLOT(setCompassMarks(bool)));
-		connect(gui->getGuiAction("actionShow_Cardinal_Points"), SIGNAL(toggled(bool)), this, SLOT(cardinalPointsChanged(bool)));
+		connect(GETSTELMODULE(LandscapeMgr), SIGNAL(cardinalsPointsDisplayedChanged(bool)), this, SLOT(cardinalPointsChanged(bool)));
 		cardinalPointsState = false;
 
 		QSettings* conf = StelApp::getInstance().getSettings();
 		setCompassMarks(conf->value("CompassMarks/enable_at_startup", false).toBool());
-		// GZ: This must go here, else button may show wrong state
-		gui->getGuiAction("actionShow_Compass_Marks")->setChecked(markFader);
 	}
 	catch (std::runtime_error& e)
 	{
@@ -146,22 +140,22 @@ void CompassMarks::init()
 }
 
 //! Draw any parts on the screen which are for our module
-void CompassMarks::draw(StelCore* core, StelRenderer* renderer)
+void CompassMarks::draw(StelCore* core)
 {
 	if (markFader.getInterstate() <= 0.0) { return; }
 
-	Vec3f pos;
-	StelProjectorP prj = core->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff); // Maybe conflict with Scenery3d branch. AW20120214 No. GZ20120826.yy
+	Vec3d pos;
+	StelProjectorP prj = core->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff); // Maybe conflict with Scenery3d branch. AW20120214 No. GZ20120826.
+	StelPainter painter(prj);
+	painter.setFont(font);
 
-	renderer->setFont(font);
-	const Vec3f mColor = StelApp::getInstance().getVisionModeNight() 
-	                   ? StelUtils::getNightColor(markColor) : markColor;
+	painter.setColor(markColor[0], markColor[1], markColor[2], markFader.getInterstate());
+	glDisable(GL_TEXTURE_2D);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	glEnable(GL_BLEND);
+	// OpenGL ES 2.0 doesn't have GL_LINE_SMOOTH
+	// glEnable(GL_LINE_SMOOTH);
 
-	renderer->setGlobalColor(mColor[0], mColor[1], mColor[2], markFader.getInterstate());
-	renderer->setBlendMode(BlendMode_Alpha);
-
-	const QFontMetrics fontMetrics(font);
-	
 	for(int i=0; i<360; i++)
 	{
 		float a = i*M_PI/180;
@@ -172,21 +166,25 @@ void CompassMarks::draw(StelCore* core, StelRenderer* renderer)
 			h = -0.02;  // the size of the mark every 15 degrees
 
 			QString s = QString("%1").arg((i+90)%360);
-			const float shiftx = fontMetrics.width(s) / 2.;
-			const float shifty = fontMetrics.height() / 2.;
-			renderer->drawText(TextParams(pos, prj, s).shift(-shiftx, shifty));
+
+			float shiftx = painter.getFontMetrics().width(s) / 2.;
+			float shifty = painter.getFontMetrics().height() / 2.;
+			painter.drawText(pos, s, 0, -shiftx, shifty);
 		}
 		else if (i % 5 == 0)
 		{
 			h = -0.01;  // the size of the mark every 5 degrees
 		}
 
-		Vec3f win1, win2;
-		if(prj->project(pos, win1) && prj->project(Vec3f(pos[0], pos[1], h), win2))
-		{
-			renderer->drawLine(win1[0], win1[1], win2[0], win2[1]);
-		}
+		glDisable(GL_TEXTURE_2D);
+		painter.drawGreatCircleArc(pos, Vec3d(pos[0], pos[1], h), NULL);		
+		glEnable(GL_TEXTURE_2D);
 	}
+	// OpenGL ES 2.0 doesn't have GL_LINE_SMOOTH
+	// glDisable(GL_LINE_SMOOTH);
+	glDisable(GL_BLEND);
+	glEnable(GL_TEXTURE_2D);
+
 }
 
 void CompassMarks::update(double deltaTime)
@@ -196,34 +194,25 @@ void CompassMarks::update(double deltaTime)
 
 void CompassMarks::setCompassMarks(bool b)
 {
-	markFader = b;
-	if (markFader)
+	if (b == markFader)
+		return;
+	if (b)
 	{
-		// Save the display state of the cardinal points
+		// Save the display state of the cardinal points and hide them.
 		cardinalPointsState = GETSTELMODULE(LandscapeMgr)->getFlagCardinalsPoints();
+		GETSTELMODULE(LandscapeMgr)->setFlagCardinalsPoints(false);
+	} else {
+		// Restore the cardinal points state.
+		GETSTELMODULE(LandscapeMgr)->setFlagCardinalsPoints(cardinalPointsState);
 	}
-	else
-	{
-	}
-
-	if(cardinalPointsState)
-	{
-		// Using QActions instead of directly calling
-		// setFlagCardinalsPoints() in order to sync with the buttons
-		dynamic_cast<StelGui*>(StelApp::getInstance().getGui())->getGuiAction("actionShow_Cardinal_Points")->trigger();
-	}
+	markFader = b;
+	emit compassMarksChanged(b);
 }
 
 void CompassMarks::cardinalPointsChanged(bool b)
 {
-	if(b)
-	{
-		// If the compass marks are displayed when cardinal points
-		// are about to be shown, hide the compass marks
-		if(markFader)
-		{
-			cardinalPointsState = false; // actionShow_Cardinal_Points should not be triggered again
-			dynamic_cast<StelGui*>(StelApp::getInstance().getGui())->getGuiAction("actionShow_Compass_Marks")->trigger();
-		}
+	if (b && getCompassMarks()) {
+		cardinalPointsState = true;
+		setCompassMarks(false);
 	}
 }

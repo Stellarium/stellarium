@@ -29,6 +29,7 @@
 #include <QDateTime>
 #include <QFile>
 #include <QDir>
+#include <QOpenGLFunctions_1_2>
 #include <QUrl>
 #include <QVariantMap>
 
@@ -37,7 +38,6 @@ class Planet;
 class QNetworkAccessManager;
 class QNetworkReply;
 class QPixmap;
-class QProgressBar;
 class QSettings;
 class QTimer;
 
@@ -75,7 +75,6 @@ struct TleSource
 };
 
 typedef QList<TleSource> TleSourceList;
-
 
 /*! @mainpage notitle
 @section overview Plugin Overview
@@ -121,9 +120,15 @@ file.
 //! Main class of the %Satellites plugin.
 //! @author Matthew Gates
 //! @author Bogdan Marinov
-class Satellites : public StelObjectModule
+class Satellites : public StelObjectModule, protected QOpenGLFunctions_1_2
 {
 	Q_OBJECT
+	Q_PROPERTY(bool hintsVisible
+	           READ getFlagHints
+		   WRITE setFlagHints)
+	Q_PROPERTY(bool labelsVisible
+	           READ getFlagLabels
+		   WRITE setFlagLabels)
 	Q_PROPERTY(bool autoAddEnabled
 	           READ isAutoAddEnabled
 	           WRITE enableAutoAdd
@@ -132,6 +137,9 @@ class Satellites : public StelObjectModule
 	           READ isAutoRemoveEnabled
 	           WRITE enableAutoRemove
 	           NOTIFY settingsChanged)
+	Q_PROPERTY(bool realisticMode
+		   READ getFlagRealisticMode
+		   WRITE setFlagRelisticMode)
 	
 public:
 	//! @enum UpdateState
@@ -163,8 +171,8 @@ public:
 	virtual void init();
 	virtual void deinit();
 	virtual void update(double deltaTime);
-	virtual void draw(StelCore* core, class StelRenderer* renderer);
-	virtual void drawPointer(StelCore* core, class StelRenderer* renderer);
+	virtual void draw(StelCore* core);
+	virtual void drawPointer(StelCore* core, StelPainter& painter);
 	virtual double getCallOrder(StelModuleActionName actionName) const;
 
 	///////////////////////////////////////////////////////////////////////////
@@ -194,14 +202,16 @@ public:
 	//! Find and return the list of at most maxNbItem objects auto-completing the passed object I18n name.
 	//! @param objPrefix the case insensitive first letters of the searched object
 	//! @param maxNbItem the maximum number of returned object names
+	//! @param useStartOfWords the autofill mode for returned objects names
 	//! @return a list of matching object name by order of relevance, or an empty list if nothing match
-	virtual QStringList listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem=5) const;
+	virtual QStringList listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false) const;
 
 	//! Find and return the list of at most maxNbItem objects auto-completing the passed object English name.
 	//! @param objPrefix the case insensitive first letters of the searched object
 	//! @param maxNbItem the maximum number of returned object names
+	//! @param useStartOfWords the autofill mode for returned objects names
 	//! @return a list of matching object name by order of relevance, or an empty list if nothing match
-	virtual QStringList listMatchingObjects(const QString& objPrefix, int maxNbItem=5) const;
+	virtual QStringList listMatchingObjects(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false) const;
 
 	virtual QStringList listAllObjects(bool inEnglish) const;
 
@@ -290,11 +300,6 @@ public:
 	//! Saves the current list of update URLs to the configuration file.
 	void saveTleSources(const QStringList& urls);
 	
-	//! Returns the module-specific style sheet.
-	//! The main StelStyle instance should be passed.
-	// TODO: Plugin-specific styles are no longer necessary?
-	const StelStyle getModuleStyleSheet(const StelStyle& style);
-
 	//! Reads update file(s) in celestrak's .txt format, and updates
 	//! the TLE elements for exisiting satellites from them.
 	//! Indirectly emits signals updateStateChanged() and tleUpdateComplete(),
@@ -330,16 +335,23 @@ public:
 	static void parseTleFile(QFile& openFile,
 	                         TleDataHash& tleList,
 	                         bool addFlagValue = false);
+
+	//! Reads qs.mag file and its parsing for getting id and standard magnitude
+	//! for satellites.
+	//! @note We are having permissions for use this file from Mike McCants.
+	//! @param name of file
+	void parseQSMagFile(QString qsMagFile);
 	
 	bool getFlagHints() {return hintFader;}
 	//! get the label font size.
 	//! @return the pixel size of the font
 	int getLabelFontSize() {return labelFont.pixelSize();}
 	bool getFlagLabels();
+	bool getFlagRealisticMode();
 	//! Get the current status of the orbit line rendering flag.
 	bool getOrbitLinesFlag();
 	bool isAutoAddEnabled() const { return autoAddEnabled; }
-	bool isAutoRemoveEnabled() const { return autoRemoveEnabled; }
+	bool isAutoRemoveEnabled() const { return autoRemoveEnabled; }	
 
 signals:
 	//! Emitted when some of the plugin settings have been changed.
@@ -384,6 +396,9 @@ public slots:
 	//! Emits settingsChanged() if the value changes.
 	//! @todo Decide how to sync with "actionShow_Satellite_Labels".
 	void setFlagLabels(bool b);
+
+	//! Emits settingsChanged() if the value changes.
+	void setFlagRelisticMode(bool b);
 	
 	//! set the label font size.
 	//! @param size the pixel size of the font
@@ -427,7 +442,6 @@ public slots:
 	void saveCatalog(QString path=QString());
 
 private slots:
-	void setStelStyle(const QString& section);
 
 private:
 	//! Add to the current collection the satellite described by the data.
@@ -452,6 +466,11 @@ private:
 	//! Read the version number from the "creator" value in the catalog file.
 	//! @return version string, e.g. "0.6.1"
 	const QString readCatalogVersion();
+	//! Replace the qs.mag file with the default one.
+	void restoreDefaultQSMagFile();
+
+	//! Checks valid range dates of life of satellites
+	bool isValidRangeDates() const;
 
 	//! Save a structure representing a satellite catalog to a JSON file.
 	//! If no path is specified, catalogPath is used.
@@ -468,6 +487,10 @@ private:
 	
 	//! Sets lastUpdate to the current date/time and saves it to the settings.
 	void markLastUpdate();
+
+	//! Check format of the catalog of satellites
+	//! @return valid boolean, e.g. "true"
+	bool checkJsonFileFormat();
 	
 	//! A fake method for strings marked for translation.
 	//! Use it instead of translations.h for N_() strings, except perhaps for
@@ -475,6 +498,8 @@ private:
 	//! place.)
 	static void translations();
 
+	//! Path to the qs.mag file.
+	QString qsMagFilePath;
 	//! Path to the satellite catalog file.
 	QString catalogPath;
 	//! Plug-in data directory.
@@ -485,6 +510,8 @@ private:
 	
 	QList<SatelliteP> satellites;
 	SatellitesListModel* satelliteListModel;
+
+	QHash<QString, double> qsMagList;
 	
 	//! Union of the groups used by all loaded satellites - see @ref groups.
 	//! For simplicity, it can only grow until the plug-in is unloaded -
@@ -493,8 +520,7 @@ private:
 	QSet<QString> groups;
 	
 	LinearFader hintFader;
-	class StelTextureNew* hintTexture;
-	class StelTextureNew* texPointer;
+	StelTextureSP texPointer;
 	
 	//! @name Bottom toolbar button
 	//@{
@@ -528,7 +554,7 @@ private:
 	//! As a side effect it prevents problems if the user calls
 	//! setTleSources() while an update is in progress.
 	TleSourceList updateSources;
-	QProgressBar* progressBar;
+	class StelProgressController* progressBar;
 	int numberDownloadsComplete;
 	QTimer* updateTimer;
 	//! Flag enabling automatic Internet updates.
@@ -549,9 +575,7 @@ private:
 	//@}
 
 	// GUI
-	SatellitesDialog* configDialog;
-	QByteArray normalStyleSheet;
-	QByteArray nightStyleSheet;
+	SatellitesDialog* configDialog;	
 
 private slots:
 	//! check to see if an update is required.  This is called periodically by a timer
@@ -572,7 +596,7 @@ private slots:
 };
 
 
-#include "fixx11h.h"
+
 #include <QObject>
 #include "StelPluginInterface.hpp"
 
@@ -580,6 +604,7 @@ private slots:
 class SatellitesStelPluginInterface : public QObject, public StelPluginInterface
 {
 	Q_OBJECT
+	Q_PLUGIN_METADATA(IID "stellarium.StelGuiPluginInterface/1.0")
 	Q_INTERFACES(StelPluginInterface)
 public:
 	virtual StelModule* getStelModule() const;

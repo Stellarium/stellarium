@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
 #include <QSettings>
@@ -21,13 +21,11 @@
 #include <QTimer>
 #include <QString>
 #include <QDebug>
-#include <QAction>
 #include <QKeyEvent>
 #include <QtNetwork>
 #include <QKeyEvent>
 #include <QMouseEvent>
 
-#include "renderer/StelRenderer.hpp"
 #include "StelIniParser.hpp"
 #include "StelProjector.hpp"
 #include "StarMgr.hpp"
@@ -67,10 +65,10 @@ StelPluginInfo ObservabilityStelPluginInterface::getPluginInfo() const
 	info.authors = "Ivan Marti-Vidal (Onsala Space Observatory)"; // non-translatable field
 	info.contact = "i.martividal@gmail.com";
 	info.description = N_("Reports an analysis of source observability (rise, set, and transit times), as well as the epochs of year when the source is best observed. It assumes that a source is observable if it is above the horizon during a fraction of the night. The plugin also gives the day for largest separation from the Sun and the days of Acronychal and Cosmical rise/set.<br><br> An explanation of the quantities shown by this script is given in the 'About' tab of the configuration window");
+	info.version = OBSERVABILITY_PLUGIN_VERSION;
 	return info;
 }
 
-Q_EXPORT_PLUGIN2(Observability, ObservabilityStelPluginInterface)
 
 Observability::Observability()
 	: ObserverLoc(0.),
@@ -172,7 +170,7 @@ void Observability::updateMessageText()
 	msgCulminatesAt	= q_("Culminates at %1 (in %2) at %3 deg.");
 	msgCulminatedAt	= q_("Culminated at %1 (%2 ago) at %3 deg.");
 	msgSrcNotObs	= q_("Source is not observable.");
-	msgNoACRise	= q_("No acronychal or cosmical rise/set.");
+	msgNoACRise	= q_("No acronychal nor cosmical rise/set.");
 	msgGreatElong	= q_("Greatest elongation: %1 (at %2 deg.)");
 	msgLargSSep	= q_("Largest Sun separation: %1 (at %2 deg.)");
 	msgNone		= q_("None");
@@ -210,22 +208,10 @@ void Observability::init()
 		onPixmap = new QPixmap(":/observability/bt_observab_on.png");
 		offPixmap = new QPixmap(":/observability/bt_observab_off.png");
 
-		QAction* actionShow = gui->getGuiAction("actionShow_Observability");
-		Q_ASSERT(actionShow);
-		actionShow->setChecked(flagShowReport);
-		toolbarButton = new StelButton(NULL,
-		                               *onPixmap,
-		                               *offPixmap,
-		                               *glowPixmap,
-		                               actionShow);
+		addAction("actionShow_Observability", N_("Observability"), N_("Observability"), "enabled");
+		addAction("actionShow_Observability_ConfigDialog", N_("Observability"), N_("Observability configuration window"), configDialog, "visible");
+		toolbarButton = new StelButton(NULL, *OnIcon, *OffIcon, *GlowIcon, "actionShow_Observability");
 		gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
-		connect(actionShow, SIGNAL(toggled(bool)), this, SLOT(showReport(bool)));
-		
-		QAction* actionConfig = gui->getGuiAction("actionShow_Observability_ConfigDialog");
-		connect(actionConfig, SIGNAL(toggled(bool)),
-		        configDialog, SLOT(setVisible(bool)));
-		connect(configDialog, SIGNAL(visibleChanged(bool)),
-		        actionConfig, SLOT(setChecked(bool)));
 	}
 	catch (std::exception &e)
 	{
@@ -239,7 +225,7 @@ void Observability::init()
 
 /////////////////////////////////////////////
 // MAIN CODE:
-void Observability::draw(StelCore* core, StelRenderer* renderer)
+void Observability::draw(StelCore* core)
 {
 	if (!flagShowReport)
 		return; // Button is off.
@@ -255,9 +241,10 @@ void Observability::draw(StelCore* core, StelRenderer* renderer)
 		return;
 
 // Set the painter:
-	renderer->setGlobalColor(fontColor[0], fontColor[1], fontColor[2], 1);
+	StelPainter paintresult(core->getProjection2d());
+	paintresult.setColor(fontColor[0],fontColor[1],fontColor[2],1);
 	font.setPixelSize(fontSize);
-	renderer->setFont(font);
+	paintresult.setFont(font);
 
 // Get current date, location, and check if there is something selected.
 	double currlat = (core->getCurrentLocation().latitude)/Rad2Deg;
@@ -325,7 +312,7 @@ void Observability::draw(StelCore* core, StelRenderer* renderer)
 	double RefracAlt = std::asin(TempRefr[2]);
 
 	// If the diference is larger than 1 arcminute...
-	if (std::abs(refractedHorizonAlt-RefracAlt)>2.91e-4)  
+	if (std::abs(refractedHorizonAlt-RefracAlt)>2.91e-4)
 	{
 		//... configuration for refraction changed notably.
 		refractedHorizonAlt = RefracAlt;
@@ -361,7 +348,7 @@ void Observability::draw(StelCore* core, StelRenderer* renderer)
 		selectedObject = StelApp::getInstance().getStelObjectMgr().getSelectedObject()[0]; 
 
 // Don't do anything for satellites:
-		if(selectedObject->getType()== "Satellite")
+		if(selectedObject->getType() == "Satellite")
 			return;
 
 		QString name = selectedObject->getEnglishName();
@@ -375,7 +362,7 @@ void Observability::draw(StelCore* core, StelRenderer* renderer)
 			nextFullMoon = 0.0;
 		};
 
-//Update position==:
+//Update position:
 		EquPos = selectedObject->getEquinoxEquatorialPos(core);
 		EquPos.normalize();
 		LocPos = core->equinoxEquToAltAz(EquPos, StelCore::RefractionOff);
@@ -458,7 +445,7 @@ void Observability::draw(StelCore* core, StelRenderer* renderer)
 	double currH = calculateHourAngle(mylat,alti,selDec);
 	horizH = calculateHourAngle(mylat,refractedHorizonAlt,selDec);
 	QString RS1, RS2, Cul; // strings with Rise/Set/Culmination times
-	double risingTime, settingTime; // Actual Rise/Set times (in GMT).
+	double risingTime = 0, settingTime = 0; // Actual Rise/Set times (in GMT).
 	int d1,m1,s1,d2,m2,s2,dc,mc,sc; // Integers for the time spans in hh:mm:ss.
 	bool solvedMoon = false; // Check if solutions were found for Sun, Moon, or planet.
 	bool transit = false; // Is the source above the horizon? Did it culminate?

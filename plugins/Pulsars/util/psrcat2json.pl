@@ -1,4 +1,30 @@
 #!/usr/bin/perl -w
+
+#
+# Tool for generate catalog of pulsars
+#
+# Copyright (C) 2012 Alexander Wolf
+#
+# Permission is hereby granted, free of charge, to any person obtaining a
+# copy of this software and associated documentation files (the "Software"),
+# to deal in the Software without restriction, including without limitation
+# the rights to use, copy, modify, merge, publish, distribute, sublicense,
+# and/or sell copies of the Software, and to permit persons to whom the
+# Software is furnished to do so, subject to the following conditions:
+# 
+# The above copyright notice and this permission notice shall be included
+# in all copies or substantial portions of the Software.
+# 
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+# 
+
+
 #
 # read psrcat.db from ATNF Pulsar Catalogue and convert to JSON
 # URL: http://www.atnf.csiro.au/research/pulsar/psrcat/download.html
@@ -9,7 +35,7 @@ $PSRCAT	= "./psrcat.db";
 $JSON	= "./pulsars.json";
 
 $FORMAT = 2;
-$CATVER = 1.46;
+$CATVER = 1.48;
 
 open (PSRCAT, "<$PSRCAT");
 @catalog = <PSRCAT>;
@@ -26,6 +52,7 @@ open (JSON, ">$JSON");
 print JSON "{\n";
 print JSON "\t\"version\": \"".$FORMAT."\",\n";
 print JSON "\t\"shortName\": \"A catalogue of pulsars, based on ATNF Pulsar Catalogue v. ".$CATVER."\",\n";
+print JSON "\t\"originalCatalogURL\": \"http://www.atnf.csiro.au/research/pulsar/psrcat/\",\n";
 print JSON "\t\"pulsars\":\n";
 print JSON "\t{\n";
 
@@ -50,6 +77,7 @@ for ($i=0;$i<scalar(@cat)-1;$i++) {
 	$elong = "";
 	$flag = 0;
 	$notes = "";
+	$glitch = 0;
 	for ($j=0;$j<scalar(@lines);$j++) {
 		if ($lines[$j] =~ /^PSRJ(\s+)J([\d]{4})([\+\-]{1})([\d]{2,4})([\w]{0,1})(\s+)/) {
 			$name = $2.$3.$4.$5;
@@ -65,19 +93,23 @@ for ($i=0;$i<scalar(@cat)-1;$i++) {
 		}
 
 		if ($lines[$j] =~ /^RAJ(\s+)([\d\-\+\:\.]+)/) {
+			$secf = 0;
 			($hour,$min,$sec) = split(":",$2);
 			$min += 0;
+			if ($min!=int($min)) { $secf = $min-int($min); $secf *= 60; $min = int($min); }
 			if ($min<10) { $min = "0".$min; }
-			$sec += 0;
+			$sec += $secf;
 			if ($sec<10) { $sec = "0".$sec; }
 			$outRA = $hour."h".$min."m".$sec."s";
 		}
 
 		if ($lines[$j] =~ /^DECJ(\s+)([\d\-\+\:\.]+)/) {
+			$secf = 0;
 			($deg,$min,$sec) = split(":",$2);
 			$min += 0;
+			if ($min!=int($min)) { $secf = $min-int($min); $secf *= 60; $min = int($min); }
 			if ($min<10) { $min = "0".$min; }
-			$sec += 0;
+			$sec += $secf;
 			if ($sec<10) { $sec = "0".$sec; }
 			$outDE = $deg."d".$min."m".$sec."s";
 		}
@@ -138,6 +170,11 @@ for ($i=0;$i<scalar(@cat)-1;$i++) {
 		{
 			$notes = $2;
 		}
+
+		if ($lines[$j] =~ /^NGLT(\s+)([\d]+)/)
+		{
+			$glitch = $2;
+		}
 	}
 
 	$out  = "\t\t\"PSR J".$name."\":\n";
@@ -181,6 +218,9 @@ for ($i=0;$i<scalar(@cat)-1;$i++) {
 	if ($s1400 > 0) {
 		$out .= "\t\t\t\"s1400\": ".$s1400.",\n";
 	}
+	if ($glitch > 0) {
+		$out .= "\t\t\t\"glitch\": ".$glitch.",\n";
+	}
 	if ($notes ne '')
 	{
 		$out .= "\t\t\t\"notes\": \"".$notes."\",\n";
@@ -208,8 +248,8 @@ for ($i=0;$i<scalar(@cat)-1;$i++) {
 		$RA = $ra / (2.0 * pi); # by dividing by 2PI of radians you obtain number of turns
 		$Dec = $dec / (2.0 * pi); # by dividing by 2PI of radians you obtain number of turns
 		$rahh = $RA * 24.0;
-		$ramm = ($RA * 24.0 - int($rahh)) * 60.0;
-		$rasec = (($RA * 24.0 - int($rahh)) * 60.0 - int($ramm)) * 60.0;
+		$ramm = ($rahh - int($rahh)) * 60.0;
+		$rasec = ($ramm - int($ramm)) * 60.0;
 		$raisec = ($rasec * 10000.0 + 0.5) / 10000;
 		if ($raisec == 60) {
 			$rasec = 0.0;
@@ -224,20 +264,28 @@ for ($i=0;$i<scalar(@cat)-1;$i++) {
 		}
 		$outRA = sprintf("%02dh%02dm%05.3fs",$rahh, $ramm, $rasec);
 		if ($Dec < 0.0) {
-			$trn = $Dec * -1;
+			$sign = -1;
 		} else {
-			$trn = $Dec;
+			$sign = 1;
 		}
 		$dd = $Dec * 360.;
-		$mm = ($trn * 360.0 - int($dd)) * 60.;
-		$sec = (($trn * 360.0 - int($dd)) * 60.0 - int($mm)) * 60.0;
+		$mm = abs($dd - int($dd)) * 60.;
+		$sec = ($mm - int($mm)) * 60.0;
 		$isec = ($sec * 1000.0 + 0.5) / 1000;
 		if ($isec == 60){
 			$sec = 0.;
-			$mm = $mm + 1;
+			if ($sign == 1) {
+				$mm = $mm + 1;
+			} else {
+				$mm = $mm - 1;
+			}
 			if ($mm == 60) {
 				$mm = 0;
-				$dd = $dd + 1;
+				if ($sign == 1) {
+					$dd = $dd + 1;
+				} else {
+					$dd = $dd - 1;
+				}
 			}
 		}
 		$outDE = sprintf("%02dd%02dm%05.3fs",$dd,$mm,$sec);

@@ -13,7 +13,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
 #include "LogBook.hpp"
@@ -34,6 +34,7 @@
 #include "StelObjectMgr.hpp"
 #include "StelObjectType.hpp"
 #include "StelProjector.hpp"
+#include "StelPainter.hpp"
 #include "StelStyle.hpp"
 #include "StelTranslator.hpp"
 
@@ -49,6 +50,13 @@
 #include <QSqlRelation>
 #include <QSqlRelationalTableModel>
 #include <QSqlTableModel>
+
+#if defined(__APPLE__) && defined(__MACH__)
+#include <OpenGL/glu.h>	/* Header File For The GLU Library */
+#else
+#include <GL/glu.h>	/* Header File For The GLU Library */
+#endif
+
 
 /* ********************************************************************* */
 #if 0
@@ -111,8 +119,9 @@ bool LogBook::configureGui(bool)
 	return true;
 }
 
-void LogBook::draw(StelCore* core, class StelRenderer* renderer)
+void LogBook::draw(StelCore* core)
 {
+	StelPainter painter(core->getProjection2d());
 }
 
 double LogBook::getCallOrder(StelModuleActionName actionName) const

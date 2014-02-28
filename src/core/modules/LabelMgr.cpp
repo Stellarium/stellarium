@@ -18,7 +18,6 @@
  */
 
 #include "LabelMgr.hpp"
-#include "renderer/StelRenderer.hpp"
 #include "StelObjectMgr.hpp"
 #include "StelApp.hpp"
 #include "StarMgr.hpp"
@@ -32,6 +31,7 @@
 #include "StelObjectType.hpp"
 #include "StelUtils.hpp"
 #include "VecMath.hpp"
+#include "StelPainter.hpp"
 
 #include <vector>
 #include <QString>
@@ -44,11 +44,9 @@ public:
 	StelLabel(const QString& text, const QFont& font, const Vec3f& color);
 	virtual ~StelLabel() {;}
 
-	//! Draw the label on the sky
+	//! draw the label on the sky
 	//! @param core the StelCore object
-	//! @param renderer Renderer used for drawing.
-	//! @param projection Projection to project to screen coordinates.
-	virtual bool draw(StelCore* core, StelRenderer* renderer, StelProjectorP projector) = 0;
+	virtual bool draw(StelCore* core, StelPainter& sPainter) = 0;
 	//! update fade for on/off action
 	virtual void update(double deltaTime);
 	//! Set the duration used for the fade in / fade out of the label.
@@ -100,9 +98,8 @@ public:
 
 	//! Draw the label on the sky
 	//! @param core the StelCore object
-	//! @param renderer Renderer used for drawing.
-	//! @param projection Projection to project to screen coordinates.
-	virtual bool draw(StelCore* core, StelRenderer* renderer, StelProjectorP projector);
+	//! @param sPainter the StelPainter to use for drawing operations
+	virtual bool draw(StelCore* core, StelPainter& sPainter);
 
 	static SkyLabel::Style stringToStyle(const QString& s);
 	
@@ -130,9 +127,8 @@ public:
 
 	//! draw the label on the sky
 	//! @param core the StelCore object
-	//! @param renderer Renderer used for drawing.
-	//! @param projection Projection to project to screen coordinates.
-	virtual bool draw(StelCore* core, StelRenderer* renderer, StelProjectorP projector);
+	//! @param sPainter the StelPainter to use for drawing operations
+	virtual bool draw(StelCore* core, StelPainter& sPainter);
 
 private:
 	int screenX;
@@ -206,17 +202,17 @@ SkyLabel::~SkyLabel()
 {
 }
 
-bool SkyLabel::draw(StelCore* core, StelRenderer* renderer, StelProjectorP projector)
+bool SkyLabel::draw(StelCore* core, StelPainter& sPainter)
 {
 	if(labelFader.getInterstate() <= 0.0)
 		return false;
 
 	Vec3d objectPos = labelObject->getJ2000EquatorialPos(core);
 	Vec3d labelXY;
+	sPainter.getProjector()->project(objectPos,labelXY);
 
-	projector->project(objectPos, labelXY);
-	renderer->setFont(labelFont);
-
+	sPainter.setFont(labelFont);
+			
 	double xOffset(0.);
 	double yOffset(0.);
 	char hJustify = 'c';
@@ -251,39 +247,39 @@ bool SkyLabel::draw(StelCore* core, StelRenderer* renderer, StelProjectorP proje
 	}
 	else
 	{
-		float shift = 4.0f + labelObject->getAngularSize(core) * M_PI / 180.0f *
-		              projector->getPixelPerRadAtCenter() / 1.8f;
+		float shift = 4.f + labelObject->getAngularSize(core)*M_PI/180.*sPainter.getProjector()->getPixelPerRadAtCenter()/1.8f;
 		// use the object size
 		xOffset *= shift;
 		yOffset *= shift;
 	}
 
-	QFontMetrics fontMetrics(labelFont);
-	const float jxOffset = hJustify == 'r' ? fontMetrics.width(labelText) :
-	                       hJustify == 'c' ? fontMetrics.width(labelText) * 0.5 :
-	                                         0.0;
-	const float jyOffset = vJustify == 't' ? fontMetrics.height() :
-	                       vJustify == 'c' ? fontMetrics.height() * 0.5 :
-	                                         0.0;
+	double jxOffset(0.);
+	double jyOffset(0.); 
+	if (hJustify == 'r')
+		jxOffset = sPainter.getFontMetrics().width(labelText);
+	else if (hJustify == 'c')
+		jxOffset = sPainter.getFontMetrics().width(labelText) / 2.;
 
-	renderer->setGlobalColor(labelColor[0], labelColor[1], 
-	                         labelColor[2], labelFader.getInterstate());
-	renderer->drawText(TextParams(labelXY[0] + xOffset - jxOffset, 
-	                              labelXY[1] + yOffset - jyOffset, 
-	                              labelText).useGravity());
+	if (vJustify == 't')
+		jyOffset = sPainter.getFontMetrics().height();
+	else if (vJustify == 'c')
+		jyOffset = sPainter.getFontMetrics().height() / 2.;
+
+	sPainter.setColor(labelColor[0], labelColor[1], labelColor[2], labelFader.getInterstate());
+	sPainter.drawText(labelXY[0]+xOffset-jxOffset, labelXY[1]+yOffset-jyOffset, labelText, 0, 0, 0, false);
 
 	if (labelStyle == SkyLabel::Line)
 	{
-		renderer->setBlendMode(BlendMode_Alpha);
+		sPainter.enableTexture2d(false);
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 		// screen coordinates of object
 		Vec3d objXY;
-		projector->project(objectPos, objXY);
+		sPainter.getProjector()->project(objectPos,objXY);
 
 		double lineEndX = labelXY[0]+xOffset;
 		double lineEndY = labelXY[1]+yOffset;
-
-
 
 		if (vJustify == 'b')
 			lineEndY -= 5;
@@ -295,10 +291,9 @@ bool SkyLabel::draw(StelCore* core, StelRenderer* renderer, StelProjectorP proje
 		else if (hJustify == 'r')
 			lineEndX += 5;
 				
-		renderer->setGlobalColor(labelColor[0], labelColor[1], labelColor[2],
-		                         labelFader.getInterstate());
-
-		renderer->drawLine(lineEndX,lineEndY,objXY[0], objXY[1]);
+		sPainter.setColor(labelColor[0], labelColor[1], labelColor[2], labelFader.getInterstate());
+		
+		sPainter.drawLine2d(lineEndX,lineEndY,objXY[0], objXY[1]);
 	}
 
 	return true;
@@ -320,20 +315,14 @@ ScreenLabel::~ScreenLabel()
 {
 }
 
-bool ScreenLabel::draw(StelCore*, StelRenderer* renderer, StelProjectorP projector)
+bool ScreenLabel::draw(StelCore*, StelPainter& sPainter)
 {
-	Q_UNUSED(projector);
-
 	if (labelFader.getInterstate() <= 0.0)
-	{
 		return false;
-	}
 
-	renderer->setGlobalColor(labelColor[0], labelColor[1],
-	                         labelColor[2], labelFader.getInterstate());
-	renderer->setFont(labelFont);
-	renderer->drawText(TextParams(screenX, screenY, labelText).useGravity());
-
+	sPainter.setColor(labelColor[0], labelColor[1], labelColor[2], labelFader.getInterstate());
+	sPainter.setFont(labelFont);
+	sPainter.drawText(screenX, screenY, labelText, 0, 0, 0, false);
 	return true;
 }
 
@@ -353,15 +342,12 @@ void LabelMgr::init()
 {
 }
 
-void LabelMgr::draw(StelCore* core, StelRenderer* renderer)
+void LabelMgr::draw(StelCore* core)
 {
+	StelPainter sPainter(core->getProjection(StelCore::FrameJ2000));
 	foreach(StelLabel* l, allLabels) 
-	{
-		if (l != NULL)
-		{
-			l->draw(core, renderer, core->getProjection(StelCore::FrameJ2000));
-		}
-	}
+		if (l!=NULL)
+			l->draw(core, sPainter);
 }
 	
 int LabelMgr::labelObject(const QString& text,
