@@ -46,7 +46,7 @@ class ObservabilityDialog;
 class Observability : public StelModule
 {
 	Q_OBJECT
-	Q_PROPERTY(bool enabled READ getEnableObservability WRITE enableObservability)
+	Q_PROPERTY(bool flagShowReport READ isShownReport WRITE showReport)
 public:
 	Observability();
 	virtual ~Observability();
@@ -80,7 +80,7 @@ public:
 	//! Get the user-defined altitude of the visual horizon.
 	int getHorizonAltitude();
 
-	bool getEnableObservability() const {return flagShowObservability;}
+	bool isShownReport() const {return flagShowReport;}
 public slots:
 	//! Restore and reload the default plug-in settings.
 	void resetConfiguration();
