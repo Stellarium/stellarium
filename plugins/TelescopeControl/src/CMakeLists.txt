@@ -50,41 +50,17 @@ SET(TelescopeControl_UIS
   gui/telescopeDialog.ui
   gui/telescopeConfigurationDialog.ui)
 
-QT4_WRAP_UI(TelescopeControl_UIS_H ${TelescopeControl_UIS})
+QT5_WRAP_UI(TelescopeControl_UIS_H ${TelescopeControl_UIS})
 
 # Compile the resource files
 SET(TelescopeControl_RES ../resources/TelescopeControl.qrc)
-QT4_ADD_RESOURCES(TelescopeControl_RES_CXX ${TelescopeControl_RES})
+QT5_ADD_RESOURCES(TelescopeControl_RES_CXX ${TelescopeControl_RES})
 
-SET(extLinkerOption ${QT_LIBRARIES} ${OPENGL_LIBRARIES} ${ICONV_LIBRARIES} ${INTL_LIBRARIES})
+SET(extLinkerOption ${OPENGL_LIBRARIES})
 
-############### For building the dynamic library ######################
-IF(BUILD_DYNAMIC_PLUGINS)
- ADD_LIBRARY(TelescopeControl MODULE ${TelescopeControl_SRCS} ${TelescopeControl_RES_CXX} ${TelescopeControl_UIS_H})
-
- IF(APPLE)
-  FIND_LIBRARY(OPENGL_LIBRARY OpenGL)
-  MARK_AS_ADVANCED(OPENGL_LIBRARY)
-  SET_TARGET_PROPERTIES(TelescopeControl PROPERTIES LINK_FLAGS "-undefined dynamic_lookup" SUFFIX ".dylib")
- ENDIF(APPLE)
-
- IF(WIN32)
-  SET_TARGET_PROPERTIES(TelescopeControl PROPERTIES LINK_FLAGS "-Wl,--enable-runtime-pseudo-reloc -Wl,--allow-multiple-definition" )
-  SET(StelMain stelMain)
- ELSE(WIN32)
-  SET(StelMain )
- ENDIF(WIN32)
-
- TARGET_LINK_LIBRARIES(TelescopeControl ${StelMain} ${extLinkerOption})
-
- INSTALL(TARGETS TelescopeControl DESTINATION "modules/TelescopeControl")
-ENDIF()
-
-############### For building the static library ######################
-IF(BUILD_STATIC_PLUGINS)
- ADD_LIBRARY(TelescopeControl-static STATIC ${TelescopeControl_SRCS} ${TelescopeControl_RES_CXX} ${TelescopeControl_UIS_H})
- SET_TARGET_PROPERTIES(TelescopeControl-static PROPERTIES OUTPUT_NAME "TelescopeControl")
- TARGET_LINK_LIBRARIES(TelescopeControl-static ${extLinkerOption})
- SET_TARGET_PROPERTIES(TelescopeControl-static PROPERTIES COMPILE_FLAGS "-DQT_STATICPLUGIN")
- ADD_DEPENDENCIES(AllStaticPlugins TelescopeControl-static)
-ENDIF()
+ADD_LIBRARY(TelescopeControl-static STATIC ${TelescopeControl_SRCS} ${TelescopeControl_RES_CXX} ${TelescopeControl_UIS_H})
+SET_TARGET_PROPERTIES(TelescopeControl-static PROPERTIES OUTPUT_NAME "TelescopeControl")
+TARGET_LINK_LIBRARIES(TelescopeControl-static ${extLinkerOption})
+QT5_USE_MODULES(TelescopeControl-static Core Network Widgets Declarative OpenGL)
+SET_TARGET_PROPERTIES(TelescopeControl-static PROPERTIES COMPILE_FLAGS "-DQT_STATICPLUGIN")
+ADD_DEPENDENCIES(AllStaticPlugins TelescopeControl-static)

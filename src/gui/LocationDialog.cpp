@@ -41,10 +41,9 @@
 #include <QTimer>
 #include <QStringListModel>
 
-LocationDialog::LocationDialog() : isEditingNew(false)
+LocationDialog::LocationDialog(QObject* parent) : StelDialog(parent), isEditingNew(false)
 {
 	ui = new Ui_locationDialogForm;
-	lastVisionMode = StelApp::getInstance().getVisionModeNight();
 }
 
 LocationDialog::~LocationDialog()
@@ -147,6 +146,18 @@ void LocationDialog::updateFromProgram(const StelLocation& currentLocation)
 	{
 		setFieldsFromLocation(currentLocation);
 	}
+
+	LandscapeMgr *lmgr = GETSTELMODULE(LandscapeMgr);
+	if (lmgr->getFlagUseLightPollutionFromDatabase())
+	{
+		int bidx = currentLocation.bortleScaleIndex;
+		if (!currentLocation.planetName.contains("Earth")) // location not on Earth...
+			bidx = 1;
+		if (bidx<1) // ...or it observatory, or it unknown location
+			bidx = currentLocation.DEFAULT_BORTLE_SCALE_INDEX;
+		stelCore->getSkyDrawer()->setBortleScaleIndex(bidx);
+		lmgr->setAtmosphereBortleLightPollution(bidx);
+	}
 }
 
 void LocationDialog::disconnectEditSignals()
@@ -224,7 +235,7 @@ void LocationDialog::setFieldsFromLocation(const StelLocation& loc)
 void LocationDialog::setMapForLocation(const StelLocation& loc)
 {
 	// Avoids usless processing
-	if (lastPlanet==loc.planetName && lastVisionMode==StelApp::getInstance().getVisionModeNight())
+	if (lastPlanet==loc.planetName)
 		return;
 
 	QPixmap pixmap;
@@ -238,34 +249,20 @@ void LocationDialog::setMapForLocation(const StelLocation& loc)
 	{
 		SolarSystem* ssm = GETSTELMODULE(SolarSystem);
 		PlanetP p = ssm->searchByEnglishName(loc.planetName);
-		QString path;
 		if (p)
 		{
-			try
+			QString path = StelFileMgr::findFile("textures/"+p->getTextMapName());
+			if (path.isEmpty())
 			{
-				path = StelFileMgr::findFile("textures/"+p->getTextMapName());
-			}
-			catch (std::runtime_error& e)
-			{
-				qWarning() << "ERROR - could not find planet map for " << loc.planetName << e.what();
+				qWarning() << "ERROR - could not find planet map for " << loc.planetName;
 				return;
 			}
 			pixmap = QPixmap(path);
 		}
 	}
-
-	if (StelApp::getInstance().getVisionModeNight())
-	{
-		ui->mapLabel->setPixmap(StelButton::makeRed(pixmap));
-	}
-	else
-	{
-		ui->mapLabel->setPixmap(pixmap);
-	}
-
+	ui->mapLabel->setPixmap(pixmap);
 	// For caching
 	lastPlanet = loc.planetName;
-	lastVisionMode = StelApp::getInstance().getVisionModeNight();
 }
 
 void LocationDialog::populatePlanetList()
@@ -346,9 +343,7 @@ void LocationDialog::setPositionFromList(const QModelIndex& index)
 {
 	isEditingNew=false;
 	ui->addLocationToListPushButton->setEnabled(false);
-
-	StelLocation loc = StelApp::getInstance().getLocationMgr().locationForSmallString(index.data().toString());
-
+	StelLocation loc = StelApp::getInstance().getLocationMgr().locationForString(index.data().toString());
 	setFieldsFromLocation(loc);
 	StelApp::getInstance().getCore()->moveObserverTo(loc, 0.);
 	// This calls indirectly updateFromProgram()
@@ -374,12 +369,15 @@ void LocationDialog::moveToAnotherPlanet(const QString&)
 	if (loc.planetName != stelCore->getCurrentLocation().planetName)
 	{
 		setFieldsFromLocation(loc);
-		// If we have a landscape for selected planet then set it, otherwise use default landscape
-		// Details: https://bugs.launchpad.net/stellarium/+bug/1173254
-		if (ls->getAllLandscapeNames().indexOf(loc.planetName)>0)
-			ls->setCurrentLandscapeName(loc.planetName);
-		else
-			ls->setCurrentLandscapeID(ls->getDefaultLandscapeID());
+		if (ls->getFlagLandscapeAutoSelection())
+		{
+			// If we have a landscape for selected planet then set it, otherwise use default landscape
+			// Details: https://bugs.launchpad.net/stellarium/+bug/1173254
+			if (ls->getAllLandscapeNames().indexOf(loc.planetName)>0)
+				ls->setCurrentLandscapeName(loc.planetName);
+			else
+				ls->setCurrentLandscapeID(ls->getDefaultLandscapeID());
+		}
 
 	}
 	// Planet transition time also set to null to prevent uglyness when
@@ -421,7 +419,7 @@ void LocationDialog::reportEdit()
 		}
 		else
 		{
-			ui->cityNameLineEdit->setText(q_("New Location"));
+			ui->cityNameLineEdit->setText("");
 			ui->cityNameLineEdit->selectAll();
 			loc = locationFromFields();
 		}

@@ -13,16 +13,16 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
 #include "StelProjector.hpp"
+#include "StelPainter.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelModuleMgr.hpp"
 #include "HelloStelModule.hpp"
-#include "renderer/StelRenderer.hpp"
 
 #include <QDebug>
 
@@ -45,9 +45,6 @@ StelPluginInfo HelloStelModuleStelPluginInterface::getPluginInfo() const
 	info.description = "An minimal plugin example.";
 	return info;
 }
-
-Q_EXPORT_PLUGIN2(HelloStelModule, HelloStelModuleStelPluginInterface)
-
 
 /*************************************************************************
  Constructor
@@ -87,10 +84,11 @@ void HelloStelModule::init()
 /*************************************************************************
  Draw our module. This should print "Hello world!" in the main window
 *************************************************************************/
-void HelloStelModule::draw(StelCore* core, StelRenderer* renderer)
+void HelloStelModule::draw(StelCore* core)
 {
-	renderer->setColor(1, 1, 1, 1);
-	renderer->setFont(font);
-	renderer->drawText(300, 300, "Hello World!")
+	StelPainter painter(core->getProjection2d());
+	painter.setColor(1,1,1,1);
+	painter.setFont(font);
+	painter.drawText(300, 300, "Hello World!");
 }
 

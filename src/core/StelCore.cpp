@@ -28,15 +28,15 @@
 #include "StelGeodesicGrid.hpp"
 #include "StelMovementMgr.hpp"
 #include "StelModuleMgr.hpp"
+#include "StelPainter.hpp"
 #include "StelLocationMgr.hpp"
 #include "StelObserver.hpp"
 #include "StelObjectMgr.hpp"
 #include "Planet.hpp"
 #include "SolarSystem.hpp"
-#include "renderer/GenericVertexTypes.hpp"
-#include "renderer/StelRenderer.hpp"
 #include "LandscapeMgr.hpp"
 #include "StelTranslator.hpp"
+#include "StelActionMgr.hpp"
 
 #include <QSettings>
 #include <QDebug>
@@ -53,6 +53,7 @@ const double StelCore::JD_SECOND=0.000011574074074074074074;
 const double StelCore::JD_MINUTE=0.00069444444444444444444;
 const double StelCore::JD_HOUR  =0.041666666666666666666;
 const double StelCore::JD_DAY   =1.;
+const double StelCore::ONE_OVER_JD_SECOND = 24 * 60 * 60;
 
 
 StelCore::StelCore() : movementMgr(NULL), geodesicGrid(NULL), currentProjectionType(ProjectionStereographic), position(NULL), timeSpeed(JD_SECOND), JDay(0.)
@@ -77,6 +78,8 @@ StelCore::StelCore() : movementMgr(NULL), geodesicGrid(NULL), currentProjectionT
 	currentProjectorParams.flipVert = conf->value("projection/flip_vert",false).toBool();
 
 	currentProjectorParams.gravityLabels = conf->value("viewing/flag_gravity_labels").toBool();
+	
+	currentProjectorParams.devicePixelsPerPixel = StelApp::getInstance().getDevicePixelsPerPixel();
 }
 
 
@@ -91,16 +94,18 @@ StelCore::~StelCore()
 /*************************************************************************
  Load core data and initialize with default values
 *************************************************************************/
-void StelCore::init(class StelRenderer* renderer)
+void StelCore::init()
 {
 	QSettings* conf = StelApp::getInstance().getSettings();
 
 	defaultLocationID = conf->value("init_location/location","error").toString();
 	bool ok;
-	StelLocation location = StelApp::getInstance().getLocationMgr().locationForString(defaultLocationID, &ok);
-	if (!ok)
+	StelLocationMgr* locationMgr = &StelApp::getInstance().getLocationMgr();
+	StelLocation location = locationMgr->locationForString(defaultLocationID);
+	if (!location.isValid())
 	{
 		qWarning() << "Warning: location" << defaultLocationID << "is unknown.";
+		location = locationMgr->getLastResortLocation();
 	}
 	position = new StelObserver(location);
 
@@ -111,9 +116,9 @@ void StelCore::init(class StelRenderer* renderer)
 
 	// Define variables of custom equation for calculation of Delta T
 	// Default: ndot = -26.0 "/cy/cy; year = 1820; DeltaT = -20 + 32*u^2, where u = (currentYear-1820)/100
-	setCustomYear(conf->value("custom_time_correction/year", 1820.0).toFloat());
-	setCustomNDot(conf->value("custom_time_correction/ndot", -26.0).toFloat());
-	setCustomEquationCoefficients(StelUtils::strToVec3f(conf->value("custom_time_correction/coefficients", "-20,0,32").toString()));
+	setDeltaTCustomYear(conf->value("custom_time_correction/year", 1820.0).toFloat());
+	setDeltaTCustomNDot(conf->value("custom_time_correction/ndot", -26.0).toFloat());
+	setDeltaTCustomEquationCoefficients(StelUtils::strToVec3f(conf->value("custom_time_correction/coefficients", "-20,0,32").toString()));
 
 	// Time stuff
 	setTimeNow();
@@ -146,11 +151,60 @@ void StelCore::init(class StelRenderer* renderer)
 	currentProjectorParams.fov = movementMgr->getInitFov();
 	StelApp::getInstance().getModuleMgr().registerModule(movementMgr);
 
-	skyDrawer = new StelSkyDrawer(this, renderer);
+	skyDrawer = new StelSkyDrawer(this);
 	skyDrawer->init();
 
 	QString tmpstr = conf->value("projection/type", "ProjectionStereographic").toString();
 	setCurrentProjectionTypeKey(tmpstr);
+
+	// Register all the core actions.
+	QString timeGroup = N_("Date and Time");
+	QString movementGroup = N_("Movement and Selection");
+	QString displayGroup = N_("Display Options");
+	StelActionMgr* actionsMgr = StelApp::getInstance().getStelActionManager();
+	actionsMgr->addAction("actionIncrease_Time_Speed", timeGroup, N_("Increase time speed"), this, "increaseTimeSpeed()", "L");
+	actionsMgr->addAction("actionDecrease_Time_Speed", timeGroup, N_("Decrease time speed"), this, "decreaseTimeSpeed()", "J");
+	actionsMgr->addAction("actionIncrease_Time_Speed_Less", timeGroup, N_("Increase time speed (a little)"), this, "increaseTimeSpeedLess()", "Shift+L");
+	actionsMgr->addAction("actionDecrease_Time_Speed_Less", timeGroup, N_("Decrease time speed (a little)"), this, "decreaseTimeSpeedLess()", "Shift+J");
+	actionsMgr->addAction("actionSet_Real_Time_Speed", timeGroup, N_("Set normal time rate"), this, "toggleRealTimeSpeed()", "K");
+	actionsMgr->addAction("actionSet_Time_Rate_Zero", timeGroup, N_("Set time rate to zero"), this, "setZeroTimeSpeed()", "7");
+	actionsMgr->addAction("actionReturn_To_Current_Time", timeGroup, N_("Set time to now"), this, "setTimeNow()", "8");
+	actionsMgr->addAction("actionAdd_Solar_Hour", timeGroup, N_("Add 1 solar hour"), this, "addHour()", "Ctrl+=");
+	actionsMgr->addAction("actionAdd_Solar_Day", timeGroup, N_("Add 1 solar day"), this, "addDay()", "=");
+	actionsMgr->addAction("actionAdd_Solar_Week", timeGroup, N_("Add 1 solar week"), this, "addWeek()", "]");
+	actionsMgr->addAction("actionSubtract_Solar_Hour", timeGroup, N_("Subtract 1 solar hour"), this, "subtractHour()", "Ctrl+-");
+	actionsMgr->addAction("actionSubtract_Solar_Day", timeGroup, N_("Subtract 1 solar day"), this, "subtractDay()", "-");
+	actionsMgr->addAction("actionSubtract_Solar_Week", timeGroup, N_("Subtract 1 solar week"), this, "subtractWeek()", "[");
+	actionsMgr->addAction("actionAdd_Sidereal_Day", timeGroup, N_("Add 1 sidereal day"), this, "addSiderealDay()", "Alt+=");
+	actionsMgr->addAction("actionAdd_Sidereal_Week", timeGroup, N_("Add 1 sidereal week"), this, "addSiderealWeek()", "Alt+]");
+	actionsMgr->addAction("actionAdd_Sidereal_Month", timeGroup, N_("Add 1 sidereal month"), this, "addSiderealMonth()", "Alt+Shift+]");
+	actionsMgr->addAction("actionAdd_Sidereal_Year", timeGroup, N_("Add 1 sidereal year"), this, "addSiderealYear()", "Ctrl+Alt+Shift+]");
+	actionsMgr->addAction("actionAdd_Sidereal_Century", timeGroup, N_("Add 1 sidereal century"), this, "addSiderealCentury()");
+	actionsMgr->addAction("actionAdd_Synodic_Month", timeGroup, N_("Add 1 synodic month"), this, "addSynodicMonth()");
+	actionsMgr->addAction("actionAdd_Draconic_Month", timeGroup, N_("Add 1 draconic month"), this, "addDraconicMonth()");
+	actionsMgr->addAction("actionAdd_Draconic_Year", timeGroup, N_("Add 1 draconic year"), this, "addDraconicYear()");
+	actionsMgr->addAction("actionAdd_Anomalistic_Month", timeGroup, N_("Add 1 anomalistic month"), this, "addAnomalisticMonth()");
+	actionsMgr->addAction("actionAdd_Tropical_Month", timeGroup, N_("Add 1 mean tropical month"), this, "addTropicalMonth()");
+	actionsMgr->addAction("actionAdd_Tropical_Year", timeGroup, N_("Add 1 mean tropical year"), this, "addTropicalYear()");
+	actionsMgr->addAction("actionAdd_Tropical_Century", timeGroup, N_("Add 1 mean tropical century"), this, "addTropicalCentury()");
+	actionsMgr->addAction("actionSubtract_Sidereal_Day", timeGroup, N_("Subtract 1 sidereal day"), this, "subtractSiderealDay()", "Alt+-");
+	actionsMgr->addAction("actionSubtract_Sidereal_Week", timeGroup, N_("Subtract 1 sidereal week"), this, "subtractSiderealWeek()", "Alt+[");
+	actionsMgr->addAction("actionSubtract_Sidereal_Month", timeGroup, N_("Subtract 1 sidereal month"), this, "subtractSiderealMonth()", "Alt+Shift+[");
+	actionsMgr->addAction("actionSubtract_Sidereal_Year", timeGroup, N_("Subtract 1 sidereal year"), this, "subtractSiderealYear()", "Ctrl+Alt+Shift+[");
+	actionsMgr->addAction("actionSubtract_Sidereal_Century", timeGroup, N_("Subtract 1 sidereal century"), this, "subtractSiderealCentury()");
+	actionsMgr->addAction("actionSubtract_Synodic_Month", timeGroup, N_("Subtract 1 synodic month"), this, "subtractSynodicMonth()");
+	actionsMgr->addAction("actionSubtract_Draconic_Month", timeGroup, N_("Subtract 1 draconic month"), this, "subtractDraconicMonth()");
+	actionsMgr->addAction("actionSubtract_Draconic_Year", timeGroup, N_("Subtract 1 draconic year"), this, "subtractDraconicYear()");
+	actionsMgr->addAction("actionSubtract_Anomalistic_Month", timeGroup, N_("Subtract 1 anomalistic month"), this, "subtractAnomalisticMonth()");
+	actionsMgr->addAction("actionSubtract_Tropical_Month", timeGroup, N_("Subtract 1 mean tropical month"), this, "subtractTropicalMonth()");
+	actionsMgr->addAction("actionSubtract_Tropical_Year", timeGroup, N_("Subtract 1 mean tropical year"), this, "subtractTropicalYear()");
+	actionsMgr->addAction("actionSubtract_Tropical_Century", timeGroup, N_("Subtract 1 mean tropical century"), this, "subtractTropicalCentury()");
+
+	actionsMgr->addAction("actionSet_Home_Planet_To_Selected", movementGroup, N_("Set home planet to selected planet"), this, "moveObserverToSelected()", "Ctrl+G");
+	actionsMgr->addAction("actionGo_Home_Global", movementGroup, N_("Go to home"), this, "returnToHome()", "Ctrl+H");
+	actionsMgr->addAction("actionHorizontal_Flip", displayGroup, N_("Flip scene horizontally"), this, "flipHorz", "Ctrl+Shift+H", "", true);
+	actionsMgr->addAction("actionVertical_Flip", displayGroup, N_("Flip scene vertically"), this, "flipVert", "Ctrl+Shift+V", "", true);
+	
 }
 
 
@@ -272,6 +326,19 @@ const StelMovementMgr* StelCore::getMovementMgr() const
 	return movementMgr;
 }
 
+SphericalCap StelCore::getVisibleSkyArea() const
+{
+	const LandscapeMgr* landscapeMgr = GETSTELMODULE(LandscapeMgr);
+	Vec3d up(0, 0, 1);
+	up = altAzToJ2000(up, RefractionOff);
+	
+	if (landscapeMgr->getIsLandscapeFullyVisible())
+	{
+		return SphericalCap(up, -0.035f);
+	}
+	return SphericalCap(up, -1.f);
+}
+
 void StelCore::setClippingPlanes(double znear, double zfar)
 {
 	currentProjectorParams.zNear=znear;currentProjectorParams.zFar=zfar;
@@ -317,72 +384,25 @@ void StelCore::update(double deltaTime)
 *************************************************************************/
 void StelCore::preDraw()
 {
+	// Init openGL viewing with fov, screen size and clip planes
 	currentProjectorParams.zNear = 0.000001;
 	currentProjectorParams.zFar = 50.;
+
 	skyDrawer->preDraw();
+
+	// Clear areas not redrawn by main viewport (i.e. fisheye square viewport)
+	glClearColor(0,0,0,0);
+	glClear(GL_COLOR_BUFFER_BIT);
 }
 
-//! Fill with black around viewport disc shape.
-static void drawViewportShape(StelRenderer* renderer, StelProjectorP projector)
-{
-	if (projector->getMaskType() != StelProjector::MaskDisk)
-	{
-		return;
-	}
-
-	renderer->setBlendMode(BlendMode_None);
-	renderer->setGlobalColor(0.0f, 0.0f, 0.0f);
-
-	const float innerRadius = 0.5 * projector->getViewportFovDiameter();
-	const float outerRadius = projector->getViewportWidth() + projector->getViewportHeight();
-	Q_ASSERT_X(innerRadius >= 0.0f && outerRadius > innerRadius,
-	           Q_FUNC_INFO, "Inner radius must be at least zero and outer radius must be greater");
-
-	const float sweepAngle = 360.0f;
-
-	static const int resolution = 192;
-
-	float sinCache[resolution];
-	float cosCache[resolution];
-
-	const float deltaRadius = outerRadius - innerRadius;
-	const int slices = resolution - 1;
-	// Cache is the vertex locations cache
-	for (int s = 0; s <= slices; s++)
-	{
-		const float angle = (M_PI * sweepAngle) / 180.0f * s / slices;
-		sinCache[s] = std::sin(angle);
-		cosCache[s] = std::cos(angle);
-	}
-	sinCache[slices] = sinCache[0];
-	cosCache[slices] = cosCache[0];
-
-	const float radiusHigh = outerRadius - deltaRadius;
-
-	StelVertexBuffer<VertexP2>* vertices = 
-		renderer->createVertexBuffer<VertexP2>(PrimitiveType_TriangleStrip);
-
-	const Vec2f center = projector->getViewportCenterAbsolute();
-	for (int i = 0; i <= slices; i++)
-	{
-		vertices->addVertex(VertexP2(center[0] + outerRadius * sinCache[i],
-		                             center[1] + outerRadius * cosCache[i]));
-		vertices->addVertex(VertexP2(center[0] + radiusHigh * sinCache[i],
-		                             center[1] + radiusHigh * cosCache[i]));
-	}
-
-	vertices->lock();
-	renderer->setCulledFaces(CullFace_None);
-	renderer->drawVertexBuffer(vertices);
-	delete vertices;
-}
 
 /*************************************************************************
  Update core state after drawing modules
 *************************************************************************/
-void StelCore::postDraw(StelRenderer* renderer)
+void StelCore::postDraw()
 {
-	drawViewportShape(renderer, getProjection(StelCore::FrameJ2000));
+	StelPainter sPainter(getProjection(StelCore::FrameJ2000));
+	sPainter.drawViewportShape();
 }
 
 void StelCore::setCurrentProjectionType(ProjectionType type)
@@ -404,7 +424,7 @@ StelCore::ProjectionType StelCore::getCurrentProjectionType() const
 void StelCore::setCurrentProjectionTypeKey(QString key)
 {
 	const QMetaEnum& en = metaObject()->enumerator(metaObject()->indexOfEnumerator("ProjectionType"));
-	ProjectionType newType = (ProjectionType)en.keyToValue(key.toAscii().data());
+	ProjectionType newType = (ProjectionType)en.keyToValue(key.toLatin1().data());
 	if (newType<0)
 	{
 		qWarning() << "Unknown projection type: " << key << "setting \"ProjectionStereographic\" instead";
@@ -472,7 +492,7 @@ QString StelCore::getDefaultLocationID() const
 QString StelCore::projectionTypeKeyToNameI18n(const QString& key) const
 {
 	const QMetaEnum& en = metaObject()->enumerator(metaObject()->indexOfEnumerator("ProjectionType"));
-	QString s(getProjection(StelProjector::ModelViewTranformP(new StelProjector::Mat4dTransform(Mat4d::identity())), (ProjectionType)en.keyToValue(key.toAscii()))->getNameI18());
+	QString s(getProjection(StelProjector::ModelViewTranformP(new StelProjector::Mat4dTransform(Mat4d::identity())), (ProjectionType)en.keyToValue(key.toLatin1()))->getNameI18());
 	return s;
 }
 
@@ -706,10 +726,12 @@ Vec3d StelCore::getObserverHeliocentricEclipticPos() const
 // Set the location to use by default at startup
 void StelCore::setDefaultLocationID(const QString& id)
 {
-	bool ok = false;
-	StelApp::getInstance().getLocationMgr().locationForSmallString(id, &ok);
-	if (!ok)
+	StelLocation location = StelApp::getInstance().getLocationMgr().locationForString(id);
+	if (!location.isValid())
+	{
+		qWarning() << "Trying to set an invalid location" << id;
 		return;
+	}
 	defaultLocationID = id;
 	QSettings* conf = StelApp::getInstance().getSettings();
 	Q_ASSERT(conf);
@@ -719,9 +741,8 @@ void StelCore::setDefaultLocationID(const QString& id)
 void StelCore::returnToDefaultLocation()
 {
 	StelLocationMgr& locationMgr = StelApp::getInstance().getLocationMgr();
-	bool ok = false;
-	StelLocation loc = locationMgr.locationForString(defaultLocationID, &ok);
-	if (ok)
+	StelLocation loc = locationMgr.locationForString(defaultLocationID);
+	if (loc.isValid())
 		moveObserverTo(loc, 0.);
 }
 
@@ -730,9 +751,8 @@ void StelCore::returnToHome()
 	// Using returnToDefaultLocation() and getCurrentLocation() introduce issue, because for flying
 	// between planets using SpaceShip and second method give does not exist data
 	StelLocationMgr& locationMgr = StelApp::getInstance().getLocationMgr();
-	bool ok = false;
-	StelLocation loc = locationMgr.locationForString(defaultLocationID, &ok);
-	if (ok)
+	StelLocation loc = locationMgr.locationForString(defaultLocationID);
+	if (loc.isValid())
 		moveObserverTo(loc, 0.);
 
 	PlanetP p = GETSTELMODULE(SolarSystem)->searchByEnglishName(loc.planetName);
@@ -746,11 +766,13 @@ void StelCore::returnToHome()
 
 	StelMovementMgr* smmgr = getMovementMgr();
 	smmgr->setViewDirectionJ2000(altAzToJ2000(smmgr->getInitViewingDirection(), StelCore::RefractionOff));
+	smmgr->zoomTo(smmgr->getInitFov(), 1.);
 }
 
 void StelCore::setJDay(double JD)
 {
 	JDay=JD;
+	resetSync();
 }
 
 double StelCore::getJDay() const
@@ -761,6 +783,7 @@ double StelCore::getJDay() const
 void StelCore::setMJDay(double MJD)
 {
 	JDay=MJD+2400000.5;
+	resetSync();
 }
 
 double StelCore::getMJDay() const
@@ -780,7 +803,9 @@ void StelCore::setPresetSkyTime(double d)
 
 void StelCore::setTimeRate(double ts)
 {
-	timeSpeed=ts; emit timeRateChanged(timeSpeed);
+	timeSpeed=ts;
+	resetSync();
+	emit timeRateChanged(timeSpeed);
 }
 
 double StelCore::getTimeRate() const
@@ -999,7 +1024,7 @@ void StelCore::addDraconicYear()
 
 void StelCore::addTropicalYear()
 {
-	addSolarDays(365.2421897);
+	addSolarDays(365.242190419);
 }
 
 void StelCore::addTropicalCentury()
@@ -1089,7 +1114,7 @@ void StelCore::subtractDraconicYear()
 
 void StelCore::subtractTropicalYear()
 {
-	addSolarDays(-365.2421897);
+	addSolarDays(-365.242190419);
 }
 
 void StelCore::subtractTropicalCentury()
@@ -1115,19 +1140,19 @@ void StelCore::addSiderealDays(double d)
 }
 
 // Get the sidereal time shifted by the observer longitude
-double StelCore::getLocalSideralTime() const
+double StelCore::getLocalSiderealTime() const
 {
 	return (position->getHomePlanet()->getSiderealTime(JDay)+position->getCurrentLocation().longitude)*M_PI/180.;
 }
 
 //! Get the duration of a sidereal day for the current observer in day.
-double StelCore::getLocalSideralDayLength() const
+double StelCore::getLocalSiderealDayLength() const
 {
 	return position->getHomePlanet()->getSiderealDay();
 }
 
 //! Get the duration of a sidereal year for the current observer in days.
-double StelCore::getLocalSideralYearLength() const
+double StelCore::getLocalSiderealYearLength() const
 {
 	return position->getHomePlanet()->getSiderealPeriod();
 }
@@ -1203,7 +1228,15 @@ bool StelCore::getRealTimeSpeed() const
 // Increment time
 void StelCore::updateTime(double deltaTime)
 {
-	JDay+=timeSpeed*deltaTime;
+	if (getRealTimeSpeed())
+	{
+		// Get rid of the error from the 1 /
+		JDay = JDayOfLastJDayUpdate + (StelApp::getTotalRunTime() - secondsOfLastJDayUpdate) / ONE_OVER_JD_SECOND;
+	}
+	else
+	{
+		JDay = JDayOfLastJDayUpdate + (StelApp::getTotalRunTime() - secondsOfLastJDayUpdate) * timeSpeed;
+	}
 
 	// Fix time limits to -100000 to +100000 to prevent bugs
 	if (JDay>38245309.499988) JDay = 38245309.499988;
@@ -1227,6 +1260,12 @@ void StelCore::updateTime(double deltaTime)
 	// Position of sun and all the satellites (ie planets)
 	SolarSystem* solsystem = (SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("SolarSystem");
 	solsystem->computePositions(getJDay(), position->getHomePlanet()->getHeliocentricEclipticPos());
+}
+
+void StelCore::resetSync()
+{
+	JDayOfLastJDayUpdate = getJDay();
+	secondsOfLastJDayUpdate = StelApp::getTotalRunTime();
 }
 
 void StelCore::setStartupTimeMode(const QString& s)
@@ -1388,12 +1427,12 @@ double StelCore::getDeltaT(double jDay) const
 		break;
 	case Custom:
 		// User defined coefficients for quadratic equation for DeltaT
-		ndot = getCustomNDot(); // n.dot = custom value "/cy/cy
+		ndot = getDeltaTCustomNDot(); // n.dot = custom value "/cy/cy
 		int year, month, day;
-		Vec3f coeff = getCustomEquationCoefficients();
+		Vec3f coeff = getDeltaTCustomEquationCoefficients();
 		StelUtils::getDateFromJulianDay(jDay, &year, &month, &day);
 		double yeardec=year+((month-1)*30.5+day/31*30.5)/366;
-		double u = (yeardec-getCustomYear())/100;
+		double u = (yeardec-getDeltaTCustomYear())/100;
 		DeltaT = coeff[0] + coeff[1]*u + coeff[2]*std::pow(u,2);
 		break;
 	}
@@ -1408,7 +1447,7 @@ double StelCore::getDeltaT(double jDay) const
 void StelCore::setCurrentDeltaTAlgorithmKey(QString key)
 {
 	const QMetaEnum& en = metaObject()->enumerator(metaObject()->indexOfEnumerator("DeltaTAlgorithm"));
-	DeltaTAlgorithm algo = (DeltaTAlgorithm)en.keyToValue(key.toAscii().data());
+	DeltaTAlgorithm algo = (DeltaTAlgorithm)en.keyToValue(key.toLatin1().data());
 	if (algo<0)
 	{
 		qWarning() << "Unknown DeltaT algorithm: " << key << "setting \"WithoutCorrection\" instead";

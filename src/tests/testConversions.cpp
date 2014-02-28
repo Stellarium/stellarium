@@ -14,7 +14,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
 #include "tests/testConversions.hpp"
@@ -155,7 +155,7 @@ void TestConversions::testRadToDMS()
 		if (deg>=0)
 			angle1 = sec+min*60+deg*3600;
 		else
-			angle1 = -1*(sec+min*60+std::abs(deg)*3600);
+			angle1 = -1*(sec+min*60+std::abs((double)deg)*3600);
 		StelUtils::radToDms(rad, sign, dego, mino, seco);
 		angle2 = seco+mino*60+dego*3600;
 		if (!sign)

@@ -30,6 +30,14 @@
 // pre declaration of the ui class
 class Ui_searchDialogForm;
 
+struct stringLengthCompare
+{
+	bool operator()(const QString &s1, const QString &s2) const
+	{
+		return s1.length() < s2.length();
+	}
+};
+
 //! @class CompletionLabel
 //! Display a list of results matching the search string, and allow to
 //! tab through those selections.
@@ -67,16 +75,14 @@ class SearchDialog : public StelDialog
 	Q_OBJECT
 
 public:
-	SearchDialog();
+	SearchDialog(QObject* parent);
 	virtual ~SearchDialog();
 	//! Notify that the application style changed
 	void styleChanged();
 	bool eventFilter(QObject *object, QEvent *event);
-	
+
 public slots:
 	void retranslate();
-	//! Add auto focus of the edit line
-	void setVisible(bool);
 	//! This style only displays the text search field and the search button
 	void setSimpleStyle();
 
@@ -105,6 +111,9 @@ private slots:
 	//! Whether to use SIMBAD for searches or not.
 	void enableSimbadSearch(bool enable);
 
+	//! Whether to use autofill for start of words or not.
+	void enableStartOfWordsAutofill(bool enable);
+
 	//! Set flagHasSelectedText as true, if search box has selected text
 	void setHasSelectedFlag();
 
@@ -117,6 +126,10 @@ private slots:
 	// retranslate/recreate tab
 	void updateListTab();
 
+	void showContextMenu(const QPoint &pt);
+
+	void pasteAndGo();
+
 private:
 	class SimbadSearcher* simbadSearcher;
 	class SimbadLookupReply* simbadReply;
@@ -128,7 +141,8 @@ private:
 	QHash<QString, QString> greekLetters;
 	//! Used when substituting text with a Greek letter.
 	bool flagHasSelectedText;
-	
+
+	bool useStartOfWords;
 	bool useSimbad;
 	//! URL of the server used for SIMBAD queries. 
 	QString simbadServerUrl;

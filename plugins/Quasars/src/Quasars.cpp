@@ -16,7 +16,10 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
+#include "config.h"
+
 #include "StelProjector.hpp"
+#include "StelPainter.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelGui.hpp"
@@ -24,6 +27,7 @@
 #include "StelLocaleMgr.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelObjectMgr.hpp"
+#include "StelTextureMgr.hpp"
 #include "StelJsonParser.hpp"
 #include "StelFileMgr.hpp"
 #include "StelUtils.hpp"
@@ -31,25 +35,23 @@
 #include "LabelMgr.hpp"
 #include "Quasar.hpp"
 #include "Quasars.hpp"
-#include "renderer/StelRenderer.hpp"
 #include "QuasarsDialog.hpp"
+#include "StelProgressController.hpp"
 
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
 #include <QKeyEvent>
-#include <QAction>
-#include <QProgressBar>
 #include <QDebug>
-#include <QFile>
 #include <QFileInfo>
+#include <QFile>
 #include <QTimer>
+#include <QVariantMap>
+#include <QVariant>
 #include <QList>
-#include <QSettings>
 #include <QSharedPointer>
 #include <QStringList>
-#include <QVariant>
-#include <QVariantMap>
 #include <QDir>
+#include <QSettings>
 
 #define CATALOG_FORMAT_VERSION 1 /* Version of format of catalog */
 
@@ -72,19 +74,15 @@ StelPluginInfo QuasarsStelPluginInterface::getPluginInfo() const
 	info.authors = "Alexander Wolf";
 	info.contact = "alex.v.wolf@gmail.com";
 	info.description = N_("A plugin that shows some quasars brighter than 16 visual magnitude. A catalogue of quasars compiled from 'Quasars and Active Galactic Nuclei' (13th Ed.) (Veron+ 2010) =2010A&A...518A..10V");
+	info.version = QUASARS_PLUGIN_VERSION;
 	return info;
 }
-
-Q_EXPORT_PLUGIN2(Quasars, QuasarsStelPluginInterface)
-
 
 /*
  Constructor
 */
 Quasars::Quasars()
-	: texPointer(NULL)
-	, markerTexture(NULL)
-	, flagShowQuasars(false)
+	: flagShowQuasars(false)
 	, OnIcon(NULL)
 	, OffIcon(NULL)
 	, GlowIcon(NULL)
@@ -114,10 +112,9 @@ Quasars::~Quasars()
 
 void Quasars::deinit()
 {
-	if(NULL != texPointer)    {delete texPointer;}
-	if(NULL != markerTexture) {delete markerTexture;}
-	texPointer = markerTexture = NULL;
 	QSO.clear();
+	Quasar::markerTexture.clear();
+	texPointer.clear();
 }
 
 /*
@@ -153,23 +150,22 @@ void Quasars::init()
 		readSettingsFromConfig();
 
 		catalogJsonPath = StelFileMgr::findFile("modules/Quasars", (StelFileMgr::Flags)(StelFileMgr::Directory|StelFileMgr::Writable)) + "/quasars.json";
+		if (catalogJsonPath.isEmpty())
+			return;
+
+		texPointer = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/pointeur2.png");
+		Quasar::markerTexture = StelApp::getInstance().getTextureManager().createTexture(":/Quasars/quasar.png");
 
 		// key bindings and other actions
-		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+		addAction("actionShow_Quasars", N_("Quasars"), N_("Show quasars"), "quasarsVisible", "Ctrl+Alt+Q");
+		addAction("actionShow_Quasars_ConfigDialog", N_("Quasars"), N_("Quasars configuration window"), configDialog, "visible");
 
-		GlowIcon = new QPixmap(":/graphicsGui/glow32x32.png");
+		GlowIcon = new QPixmap(":/graphicGui/glow32x32.png");
 		OnIcon = new QPixmap(":/Quasars/btQuasars-on.png");
 		OffIcon = new QPixmap(":/Quasars/btQuasars-off.png");
 
 		setFlagShowQuasars(getEnableAtStartup());
 		setFlagShowQuasarsButton(flagShowQuasarsButton);
-
-		connect(gui->getGuiAction("actionShow_Quasars_ConfigDialog"), SIGNAL(toggled(bool)), configDialog, SLOT(setVisible(bool)));
-		connect(configDialog, SIGNAL(visibleChanged(bool)), gui->getGuiAction("actionShow_Quasars_ConfigDialog"), SLOT(setChecked(bool)));
-		if (flagShowQuasarsButton)
-		{
-			connect(gui->getGuiAction("actionShow_Quasars"), SIGNAL(toggled(bool)), this, SLOT(setFlagShowQuasars(bool)));
-		}
 	}
 	catch (std::runtime_error &e)
 	{
@@ -187,7 +183,7 @@ void Quasars::init()
 	// If the json file does not already exist, create it from the resource in the Qt resource
 	if(QFileInfo(catalogJsonPath).exists())
 	{
-		if (getJsonFileFormatVersion() < CATALOG_FORMAT_VERSION)
+		if (!checkJsonFileFormat() || getJsonFileFormatVersion()<CATALOG_FORMAT_VERSION)
 		{
 			restoreDefaultJsonFile();
 		}
@@ -218,58 +214,48 @@ void Quasars::init()
 /*
  Draw our module. This should print name of first QSO in the main window
 */
-void Quasars::draw(StelCore* core, class StelRenderer* renderer)
+void Quasars::draw(StelCore* core)
 {
 	if (!flagShowQuasars)
 		return;
 
 	StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
-	renderer->setFont(font);
-
-	if(NULL == markerTexture)
-	{
-		markerTexture = renderer->createTexture(":/Quasars/quasar.png");
-	}
+	StelPainter painter(prj);
+	painter.setFont(font);
 	
 	foreach (const QuasarP& quasar, QSO)
 	{
 		if (quasar && quasar->initialized)
-		{
-			quasar->draw(core, renderer, prj, markerTexture);
-		}
+			quasar->draw(core, painter);
 	}
 
 	if (GETSTELMODULE(StelObjectMgr)->getFlagSelectedObjectPointer())
-	{
-		drawPointer(core, renderer, prj);
-	}
+		drawPointer(core, painter);
+
 }
 
-void Quasars::drawPointer(StelCore* core, StelRenderer* renderer, StelProjectorP projector)
+void Quasars::drawPointer(StelCore* core, StelPainter& painter)
 {
+	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
+
 	const QList<StelObjectP> newSelected = GETSTELMODULE(StelObjectMgr)->getSelectedObject("Quasar");
 	if (!newSelected.empty())
 	{
 		const StelObjectP obj = newSelected[0];
 		Vec3d pos=obj->getJ2000EquatorialPos(core);
 
-		Vec3d screenPos;
+		Vec3d screenpos;
 		// Compute 2D pos and return if outside screen
-		if (!projector->project(pos, screenPos))
-		{
+		if (!painter.getProjector()->project(pos, screenpos))
 			return;
-		}
-		if(NULL == texPointer)
-		{
-			texPointer = renderer->createTexture("textures/pointeur2.png");
-		}
 
 		const Vec3f& c(obj->getInfoColor());
-		renderer->setGlobalColor(c[0], c[1], c[2]);
+		painter.setColor(c[0],c[1],c[2]);
 		texPointer->bind();
-		renderer->setBlendMode(BlendMode_Alpha);
-		renderer->drawTexturedRect(screenPos[0] - 13.0f, screenPos[1] - 13.0f, 26.0f, 26.0f, 
-		                           StelApp::getInstance().getTotalRunTime() * 40.0f);
+		painter.enableTexture2d(true);
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
+		painter.drawSprite2dMode(screenpos[0], screenpos[1], 13.f, StelApp::getInstance().getTotalRunTime()*40.);
 	}
 }
 
@@ -329,50 +315,78 @@ StelObjectP Quasars::searchByNameI18n(const QString& nameI18n) const
 	return NULL;
 }
 
-QStringList Quasars::listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem) const
+QStringList Quasars::listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem, bool useStartOfWords) const
 {
 	QStringList result;
 	if (!flagShowQuasars)
 		return result;
 
-	if (maxNbItem==0) return result;
+	if (maxNbItem==0)
+		return result;
 
-	QString objw = objPrefix.toUpper();
-
+	QString qson;
+	bool find;
 	foreach(const QuasarP& quasar, QSO)
 	{
-		if (quasar->getNameI18n().toUpper().left(objw.length()) == objw)
+		qson = quasar->getNameI18n();
+		find = false;
+		if (useStartOfWords)
 		{
-				result << quasar->getNameI18n();
+			if (qson.toUpper().left(objPrefix.length()) == objPrefix.toUpper())
+				find = true;
+		}
+		else
+		{
+			if (qson.contains(objPrefix, Qt::CaseInsensitive))
+				find = true;
+		}
+		if (find)
+		{
+			result << qson;
 		}
 	}
 
 	result.sort();
-	if (result.size()>maxNbItem) result.erase(result.begin()+maxNbItem, result.end());
+	if (result.size()>maxNbItem)
+		result.erase(result.begin()+maxNbItem, result.end());
 
 	return result;
 }
 
-QStringList Quasars::listMatchingObjects(const QString& objPrefix, int maxNbItem) const
+QStringList Quasars::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords) const
 {
 	QStringList result;
 	if (!flagShowQuasars)
 		return result;
 
-	if (maxNbItem==0) return result;
+	if (maxNbItem==0)
+		return result;
 
-	QString objw = objPrefix.toUpper();
-
+	QString qson;
+	bool find;
 	foreach(const QuasarP& quasar, QSO)
 	{
-		if (quasar->getEnglishName().toUpper().left(objw.length()) == objw)
+		qson = quasar->getEnglishName();
+		find = false;
+		if (useStartOfWords)
 		{
-				result << quasar->getEnglishName();
+			if (qson.toUpper().left(objPrefix.length()) == objPrefix.toUpper())
+				find = true;
+		}
+		else
+		{
+			if (qson.contains(objPrefix, Qt::CaseInsensitive))
+				find = true;
+		}
+		if (find)
+		{
+			result << qson;
 		}
 	}
 
 	result.sort();
-	if (result.size()>maxNbItem) result.erase(result.begin()+maxNbItem, result.end());
+	if (result.size()>maxNbItem)
+		result.erase(result.begin()+maxNbItem, result.end());
 
 	return result;
 }
@@ -497,11 +511,14 @@ QVariantMap Quasars::loadQSOMap(QString path)
 void Quasars::setQSOMap(const QVariantMap& map)
 {
 	QSO.clear();
+	QsrCount = 0;
 	QVariantMap qsoMap = map.value("quasars").toMap();
 	foreach(QString qsoKey, qsoMap.keys())
 	{
 		QVariantMap qsoData = qsoMap.value(qsoKey).toMap();
 		qsoData["designation"] = qsoKey;
+
+		QsrCount++;
 
 		QuasarP quasar(new Quasar(qsoData));
 		if (quasar->initialized)
@@ -532,6 +549,31 @@ int Quasars::getJsonFileFormatVersion(void)
 	return jsonVersion;
 }
 
+bool Quasars::checkJsonFileFormat()
+{
+	QFile catalogJsonFile(catalogJsonPath);
+	if (!catalogJsonFile.open(QIODevice::ReadOnly))
+	{
+		qWarning() << "Quasars::checkJsonFileFormat(): cannot open " << QDir::toNativeSeparators(catalogJsonPath);
+		return false;
+	}
+
+	QVariantMap map;
+	try
+	{
+		map = StelJsonParser::parse(&catalogJsonFile).toMap();
+		catalogJsonFile.close();
+	}
+	catch (std::runtime_error& e)
+	{
+		qDebug() << "Quasars::checkJsonFileFormat(): file format is wrong!";
+		qDebug() << "Quasars::checkJsonFileFormat() error:" << e.what();
+		return false;
+	}
+
+	return true;
+}
+
 QuasarP Quasars::getByID(const QString& id)
 {
 	foreach(const QuasarP& quasar, QSO)
@@ -545,11 +587,7 @@ QuasarP Quasars::getByID(const QString& id)
 bool Quasars::configureGui(bool show)
 {
 	if (show)
-	{
-		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-		gui->getGuiAction("actionShow_Quasars_ConfigDialog")->setChecked(true);
-	}
-
+		configDialog->setVisible(true);
 	return true;
 }
 
@@ -574,6 +612,7 @@ void Quasars::restoreDefaultConfigIni(void)
 	conf->setValue("url", "http://stellarium.org/json/quasars.json");
 	conf->setValue("update_frequency_days", 100);
 	conf->setValue("flag_show_quasars_button", true);
+	conf->setValue("marker_color", "1.0,0.5,0.4");
 	conf->endGroup();
 }
 
@@ -585,7 +624,8 @@ void Quasars::readSettingsFromConfig(void)
 	updateFrequencyDays = conf->value("update_frequency_days", 100).toInt();
 	lastUpdate = QDateTime::fromString(conf->value("last_update", "2012-05-24T12:00:00").toString(), Qt::ISODate);
 	updatesEnabled = conf->value("updates_enabled", true).toBool();
-	distributionEnabled = conf->value("distribution_enabled", false).toBool();
+	setDisplayMode(conf->value("distribution_enabled", false).toBool());
+	setMarkerColor(conf->value("marker_color", "1.0,0.5,0.4").toString());
 	enableAtStartup = conf->value("enable_at_startup", false).toBool();
 	flagShowQuasarsButton = conf->value("flag_show_quasars_button", true).toBool();
 
@@ -599,9 +639,10 @@ void Quasars::saveSettingsToConfig(void)
 	conf->setValue("url", updateUrl);
 	conf->setValue("update_frequency_days", updateFrequencyDays);
 	conf->setValue("updates_enabled", updatesEnabled );
-	conf->setValue("distribution_enabled", distributionEnabled);
+	conf->setValue("distribution_enabled", getDisplayMode());
 	conf->setValue("enable_at_startup", enableAtStartup);
 	conf->setValue("flag_show_quasars_button", flagShowQuasarsButton);
+	conf->setValue("marker_color", getMarkerColor());
 
 	conf->endGroup();
 }
@@ -637,12 +678,11 @@ void Quasars::updateJSON(void)
 	emit(updateStateChanged(updateState));	
 
 	if (progressBar==NULL)
-		progressBar = StelApp::getInstance().getGui()->addProgressBar();
+		progressBar = StelApp::getInstance().addProgressBar();
 
 	progressBar->setValue(0);
-	progressBar->setMaximum(100);
+	progressBar->setRange(0, 100);
 	progressBar->setFormat("Update quasars");
-	progressBar->setVisible(true);
 
 	QNetworkRequest request;
 	request.setUrl(QUrl(updateUrl));
@@ -664,28 +704,25 @@ void Quasars::updateDownloadComplete(QNetworkReply* reply)
 	else
 	{
 		// download completed successfully.
-		try
+		QString jsonFilePath = StelFileMgr::findFile("modules/Quasars", StelFileMgr::Flags(StelFileMgr::Writable|StelFileMgr::Directory)) + "/quasars.json";
+		if (jsonFilePath.isEmpty())
 		{
-			QString jsonFilePath = StelFileMgr::findFile("modules/Quasars", StelFileMgr::Flags(StelFileMgr::Writable|StelFileMgr::Directory)) + "/quasars.json";
-			QFile jsonFile(jsonFilePath);
-			if (jsonFile.exists())
-				jsonFile.remove();
-
-			jsonFile.open(QIODevice::WriteOnly | QIODevice::Text);
-			jsonFile.write(reply->readAll());
-			jsonFile.close();
+			qWarning() << "Quasars::updateDownloadComplete: cannot write JSON data to file: modules/Quasars/quasars.json";
+			return;
 		}
-		catch (std::runtime_error &e)
-		{
-			qWarning() << "Quasars::updateDownloadComplete: cannot write JSON data to file:" << e.what();
-		}
+		QFile jsonFile(jsonFilePath);
+		if (jsonFile.exists())
+			jsonFile.remove();
 
+		jsonFile.open(QIODevice::WriteOnly | QIODevice::Text);
+		jsonFile.write(reply->readAll());
+		jsonFile.close();
 	}
 
 	if (progressBar)
 	{
 		progressBar->setValue(100);
-		delete progressBar;
+		StelApp::getInstance().removeProgressBar(progressBar);
 		progressBar = NULL;
 	}
 }
@@ -723,12 +760,32 @@ void Quasars::setFlagShowQuasarsButton(bool b)
 	if (b==true) {
 		if (toolbarButton==NULL) {
 			// Create the quasars button
-			gui->getGuiAction("actionShow_Quasars")->setChecked(flagShowQuasars);
-			toolbarButton = new StelButton(NULL, *OnIcon, *OffIcon, *GlowIcon, gui->getGuiAction("actionShow_Quasars"));
+			toolbarButton = new StelButton(NULL, *OnIcon, *OffIcon, *GlowIcon, "actionShow_Quasars");
 		}
 		gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
 	} else {
 		gui->getButtonBar()->hideButton("actionShow_Quasars");
 	}
 	flagShowQuasarsButton = b;
+}
+
+bool Quasars::getDisplayMode()
+{
+	return Quasar::distributionMode;
+}
+
+void Quasars::setDisplayMode(bool b)
+{
+	Quasar::distributionMode=b;
+}
+
+QString Quasars::getMarkerColor()
+{
+	Vec3f c = Quasar::markerColor;
+	return QString("%1,%2,%3").arg(c[0]).arg(c[1]).arg(c[2]);
+}
+
+void Quasars::setMarkerColor(QString c)
+{
+	Quasar::markerColor = StelUtils::strToVec3f(c);
 }

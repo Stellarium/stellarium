@@ -17,6 +17,7 @@
  *   51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.           *
  ***************************************************************************/
 
+#include "config.h"
 #include "AngleSpinBox.hpp"
 #include "StelTranslator.hpp"
 #include <QDebug>

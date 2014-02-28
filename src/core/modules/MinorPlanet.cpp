@@ -23,39 +23,43 @@
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 
+#include "StelTexture.hpp"
+#include "StelTextureMgr.hpp"
 #include "StelTranslator.hpp"
 #include "StelUtils.hpp"
+#include "StelFileMgr.hpp"
 
 #include <QRegExp>
 #include <QDebug>
 
 MinorPlanet::MinorPlanet(const QString& englishName,
-						 int flagLighting,
-						 double radius,
-						 double oblateness,
-						 Vec3f color,
-						 float albedo,
-						 const QString& atexMapName,
-						 posFuncType coordFunc,
-						 void* auserDataPtr,
-						 OsculatingFunctType *osculatingFunc,
-						 bool acloseOrbit,
-						 bool hidden,
-						 const QString& pType)
-						: Planet (englishName,
-								  flagLighting,
-								  radius,
-								  oblateness,
-								  color,
-								  albedo,
-								  atexMapName,
-								  coordFunc,
-								  auserDataPtr,
-								  osculatingFunc,
-								  acloseOrbit,
-								  hidden,
-								  false, //No atmosphere
-								  pType)
+			 int flagLighting,
+			 double radius,
+			 double oblateness,
+			 Vec3f color,
+			 float albedo,
+			 const QString& atexMapName,
+			 posFuncType coordFunc,
+			 void* auserDataPtr,
+			 OsculatingFunctType *osculatingFunc,
+			 bool acloseOrbit,
+			 bool hidden,
+			 const QString &pType)
+	: Planet (englishName,
+		  flagLighting,
+		  radius,
+		  oblateness,
+		  color,
+		  albedo,
+		  atexMapName,
+		  coordFunc,
+		  auserDataPtr,
+		  osculatingFunc,
+		  acloseOrbit,
+		  hidden,
+		  false, //No atmosphere
+		  true,  //Halo
+		  pType)
 {
 	texMapName = atexMapName;
 	lastOrbitJD =0;
@@ -65,6 +69,7 @@ MinorPlanet::MinorPlanet(const QString& englishName,
 
 	eclipticPos=Vec3d(0.,0.,0.);
 	rotLocalToParent = Mat4d::identity();
+	texMap = StelApp::getInstance().getTextureManager().createTextureThread(StelFileMgr::getInstallationDir()+"/textures/"+texMapName, StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT));
 
 	//MinorPlanet specific members
 	minorPlanetNumber = 0;
@@ -203,7 +208,7 @@ QString MinorPlanet::getInfoString(const StelCore *core, const InfoStringGroup &
 		}
 	}
 
-	if (flags&Extra1)
+	if (flags&ObjectType)
 	{
 		if (pType.length()>0)
 			oss << q_("Type: <b>%1</b>").arg(q_(pType)) << "<br />";
@@ -212,10 +217,10 @@ QString MinorPlanet::getInfoString(const StelCore *core, const InfoStringGroup &
 	if (flags&Magnitude)
 	{
 	    if (core->getSkyDrawer()->getFlagHasAtmosphere())
-		oss << q_("Magnitude: <b>%1</b> (extincted to: <b>%2</b>)").arg(QString::number(getVMagnitude(core, false), 'f', 2),
-										QString::number(getVMagnitude(core, true), 'f', 2)) << "<br>";
+		oss << q_("Magnitude: <b>%1</b> (extincted to: <b>%2</b>)").arg(QString::number(getVMagnitude(core), 'f', 2),
+										QString::number(getVMagnitudeWithExtinction(core), 'f', 2)) << "<br>";
 	    else
-		oss << q_("Magnitude: <b>%1</b>").arg(getVMagnitude(core, false), 0, 'f', 2) << "<br>";
+		oss << q_("Magnitude: <b>%1</b>").arg(getVMagnitude(core), 0, 'f', 2) << "<br>";
 
 	}
 
@@ -225,7 +230,7 @@ QString MinorPlanet::getInfoString(const StelCore *core, const InfoStringGroup &
 		//If the H-G system is not used, use the default radius/albedo mechanism
 		if (slopeParameter < 0)
 		{
-			oss << q_("Absolute Magnitude: %1").arg(getVMagnitude(core, false) - 5. * (std::log10(getJ2000EquatorialPos(core).length()*AU/PARSEC)-1.), 0, 'f', 2) << "<br>";
+			oss << q_("Absolute Magnitude: %1").arg(getVMagnitude(core) - 5. * (std::log10(getJ2000EquatorialPos(core).length()*AU/PARSEC)-1.), 0, 'f', 2) << "<br>";
 		}
 		else
 		{
@@ -238,18 +243,20 @@ QString MinorPlanet::getInfoString(const StelCore *core, const InfoStringGroup &
 	if (flags&Distance)
 	{
 		double distanceAu = getJ2000EquatorialPos(core).length();
+		double distanceKm = AU * distanceAu;
 		if (distanceAu < 0.1)
 		{
-			double distanceKm = AU * distanceAu;
 			// xgettext:no-c-format
 			oss << QString(q_("Distance: %1AU (%2 km)"))
-			       .arg(distanceAu, 0, 'f', 8)
-			       .arg(distanceKm, 0, 'f', 0);
+				   .arg(distanceAu, 0, 'f', 6)
+				   .arg(distanceKm, 0, 'f', 3);
 		}
 		else
 		{
 			// xgettext:no-c-format
-			oss << q_("Distance: %1AU").arg(distanceAu, 0, 'f', 8);
+			oss << QString(q_("Distance: %1AU (%2 Mio km)"))
+				   .arg(distanceAu, 0, 'f', 3)
+				   .arg(distanceKm / 1.0e6, 0, 'f', 3);
 		}
 		oss << "<br>";
 	}
@@ -259,7 +266,7 @@ QString MinorPlanet::getInfoString(const StelCore *core, const InfoStringGroup &
 
 	// If semi-major axis not zero then calculate and display orbital period for asteroid in days
 	double siderealPeriod = getSiderealPeriod();
-	if ((flags&Extra1) && (siderealPeriod>0))
+	if ((flags&Extra) && (siderealPeriod>0))
 	{
 		// TRANSLATORS: Sidereal (orbital) period for solar system bodies in days and in Julian years (symbol: a)
 		oss << q_("Sidereal period: %1 days (%2 a)").arg(QString::number(siderealPeriod, 'f', 2)).arg(QString::number(siderealPeriod/365.25, 'f', 3)) << "<br>";
@@ -267,7 +274,7 @@ QString MinorPlanet::getInfoString(const StelCore *core, const InfoStringGroup &
 
 	//This doesn't work, even if setOpenExternalLinks(true) is used in InfoPanel
 	/*
-	if (flags&Extra1)
+	if (flags&Extra)
 		oss << QString("<br><a href=\"http://ssd.jpl.nasa.gov/sbdb.cgi?sstr=%1\">JPL Small-Body Database Browser</a>").arg( (minorPlanetNumber) ? QString::number(minorPlanetNumber) : englishName );
 	*/
 
@@ -287,20 +294,12 @@ double MinorPlanet::getSiderealPeriod() const
 	return period;
 }
 
-float MinorPlanet::getVMagnitude(const StelCore* core, bool withExtinction) const
+float MinorPlanet::getVMagnitude(const StelCore* core) const
 {
-	float extinctionMag=0.0; // track magnitude loss
-	if (withExtinction)
-	{
-	    Vec3d altAz=getAltAzPosApparent(core);
-	    altAz.normalize();
-	    core->getSkyDrawer()->getExtinction().forward(&altAz[2], &extinctionMag);
-	}
-
 	//If the H-G system is not used, use the default radius/albedo mechanism
 	if (slopeParameter < 0)
 	{
-		return Planet::getVMagnitude(core, withExtinction);
+		return Planet::getVMagnitude(core);
 	}
 
 	//Calculate phase angle
@@ -322,12 +321,14 @@ float MinorPlanet::getVMagnitude(const StelCore* core, bool withExtinction) cons
 
 	//Calculate apparent magnitude
 	//TODO: See if you can "collapse" some calculations
+	// -- GZ: NO! This is also in Meeus, Astr.Alg. 1998, p.231 and authoritative by IAU commission 20, New Delhi November 1985.
+	//       (you can collapse and leave away the reducedMagnitude varable, but this is cosmetic)
 	double apparentMagnitude = reducedMagnitude + 5 * std::log10(std::sqrt(planetRq * observerPlanetRq));
 
-	return apparentMagnitude+extinctionMag;
+	return apparentMagnitude;
 }
 
-void MinorPlanet::translateName(StelTranslator &translator)
+void MinorPlanet::translateName(const StelTranslator &translator)
 {
 	nameI18 = translator.qtranslate(properName);
 	if (englishName.endsWith('*'))

@@ -31,6 +31,7 @@ class StelButton;
 class CompassMarks : public StelModule
 {
 	Q_OBJECT
+	Q_PROPERTY(bool marksVisible READ getCompassMarks WRITE setCompassMarks NOTIFY compassMarksChanged)
 public:
 	CompassMarks();
 	virtual ~CompassMarks();
@@ -39,12 +40,14 @@ public:
 	// Methods defined in the StelModule class
 	virtual void init();
 	virtual void update(double deltaTime);
-	virtual void draw(StelCore* core, class StelRenderer* renderer);
+	virtual void draw(StelCore* core);
 	virtual double getCallOrder(StelModuleActionName actionName) const;
 
+	bool getCompassMarks() const {return markFader;}
 public slots:
 	void setCompassMarks(bool b);
-	
+signals:
+	void compassMarksChanged(bool);
 private slots:
 	void cardinalPointsChanged(bool b);
 
@@ -60,7 +63,7 @@ private:
 	bool cardinalPointsState;
 };
 
-#include "fixx11h.h"
+
 #include <QObject>
 #include "StelPluginInterface.hpp"
 
@@ -68,6 +71,7 @@ private:
 class CompassMarksStelPluginInterface : public QObject, public StelPluginInterface
 {
 	Q_OBJECT
+	Q_PLUGIN_METADATA(IID "stellarium.StelGuiPluginInterface/1.0")
 	Q_INTERFACES(StelPluginInterface)
 public:
 	virtual StelModule* getStelModule() const;

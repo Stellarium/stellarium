@@ -19,7 +19,7 @@ Stellarium comes with ABSOLUTELY NO WARRANTY.  See the COPYING file for details.
 1. INTRODUCTION
 --------------------------------------------------------------------------------
 Stellarium is a free GPL software which renders realistic skies in real time
-with openGL. It is available for Linux/Unix, Windows and MacOSX. With
+with OpenGL. It is available for Linux/Unix, Windows and MacOSX. With
 Stellarium, you really see what you can see with your eyes, binoculars or a
 small telescope.
 
@@ -29,10 +29,10 @@ small telescope.
 Please see the INSTALL file.
 
 --------------------------------------------------------------------------------
-3. REQUIREMENT
+3. REQUIREMENTS
 --------------------------------------------------------------------------------
 Windows or linux/POSIX or CYGWIN or MACOSX environment
-A 3d openGL acceleration card and a good CPU.
+A 3d OpenGL 2.1+ acceleration card and a good CPU.
 
 --------------------------------------------------------------------------------
 4. QUICK START
@@ -87,7 +87,7 @@ for more details on the location of the user data directory for your OS.
 
 	Norbert Zacharias from USNO for kindly sending a cut of the NOMAD
 	  catalogue on 4 DVD, answering NOMAD related questions, and finally
-	  copying the entiere NOMAD catalogue onto a disk.
+	  copying the entire NOMAD catalogue onto a disk.
 
 	The Trolltech Qt team for its incredible library.
 
@@ -119,7 +119,7 @@ for more details on the location of the user data directory for your OS.
 7. NOTE
 --------------------------------------------------------------------------------
 	This program is free, but if you have nothing to do with your
-	money, just go there and do something usefull with it :
+	money, just go there and do something useful with it :
 	https://www.greenpeace.com/forms/gpicontr.html
 
 
@@ -153,7 +153,7 @@ for more details on the location of the user data directory for your OS.
 		sources are available on the Sky and Telescope web site.
 		(code "offered as-is and without support.")
 	1.4 The Delta-T calculations
-		For implementation of calculate values of Delta-T we used next sources:
+		For implementation of calculation routines for Delta-T we used the following sources:
 		[1] Delta-T webpage by Rob van Gent: http://www.staff.science.uu.nl/~gent0113/deltat/deltat.htm
 		[2] "Five Millennium Canon of Solar Eclipses", Espenak and Meeus
 		    http://eclipse.gsfc.nasa.gov/SEhelp/deltatpoly2004.html
@@ -206,7 +206,7 @@ for more details on the location of the user data directory for your OS.
 		[21] DeltaT webpage by V. Reijs: http://www.iol.ie/~geniet/eng/DeltaTeval.htm
 
 2. Included source code
-	2.1 Some computation of the sideral time (sideral_time.h/c) and pluto
+	2.1 Some computation of the sideral time (sidereal_time.h/c) and pluto
 		orbit contains code from the libnova library (LGPL) by Liam Girdwood.
 	2.2 The orbit.cpp/h and solve.h files are directly borrowed from
 		Celestia (Chris Laurel). (GPL license)
@@ -319,8 +319,8 @@ for more details on the location of the user data directory for your OS.
 		http://www.johanmeuris.eu/
 		License: released under the Free Art License
 		(http://artlibre.org/licence.php/lalgb.html)
-	     Icon created by Johan Meuris
-	        License: Creative Commons Attribution-ShareAlike 3.0 Unported
+		Icon created by Johan Meuris
+		License: Creative Commons Attribution-ShareAlike 3.0 Unported
 	4.13 The "earth-clouds" texture includes imagery owned by NASA.
 		See NASA's Visible Earth project at http://visibleearth.nasa.gov/
 		License: 1. The imagery is free of licensing fees
@@ -331,8 +331,8 @@ for more details on the location of the user data directory for your OS.
 	4.14 The folder icon derived from the Tango Desktop Project, used under
 		the terms of the Creative Commons Attribution Share-Alike
 		license.
-	4.15 Images of NGC281, NGC5139, NGC6543, NGC6960, NGC7023, NGC7317, NGC7318, 
-		NGC7319, NGC7320, NGC7331, IC4601, IC4592
+	4.15 Images of NGC281, NGC5139, NGC6543, NGC6960, NGC7023, NGC7317, NGC7319, 
+		NGC7320, IC4601, IC4592
 		from Andrey Kuznetsov, Kepler Observatory
 		http://kepler-observatorium.ru
 		License: Creative Commons Attribution 3.0 Unported
@@ -348,7 +348,7 @@ for more details on the location of the user data directory for your OS.
 	4.18 Images of IC1805, IC1848, NGC6888
 		from Steve Tuttle
 		http://www.stuttle1.com/
-	4.19 Images of IC2944, IC4628, M20, M21, M47
+	4.19 Images of IC2944, IC4628, M20, M21, M47, NGC2467
 		from Trevor Gerdes
 		http://sarcasmogerdes.dyndns.org/
 	4.20 Images of IC2118, NGC1532
@@ -360,6 +360,11 @@ for more details on the location of the user data directory for your OS.
 		NGC6744, NGC6752, NGC6822, NGC7293
 		from Philip Montgomery
 		http://www.kenthurst.bigpondhosting.com/
+	4.24 The Vesta map from NASA's Photojournal site:
+		http://photojournal.jpl.nasa.gov/   see license in section 10.3
+	4.25 Images of NGC7318, NGC7331
+		from Peter Vasey, Plover Hill Observatory
+		http://www.madpc.co.uk/~peterv/
 
 --------------------------------------------------------------------------------
 9. LICENSE
