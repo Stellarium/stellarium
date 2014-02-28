@@ -301,6 +301,21 @@ void StelAddOnMgr::installAddOn(AddOn* addon, const QStringList selectedFiles, b
 			   << QDir::toNativeSeparators(addon->getDownloadFilepath())
 			   << " is corrupt, MD5 mismatch!";
 	}
+	// check if this addon is in the catalog
+	else if (!m_addonsByMd5.contains(addon->getChecksum()))
+	{
+		if (m_addonsById.contains(addon->getAddOnId()))
+		{
+			// TODO: asks the user if he wants to overwrite?
+			qWarning() << "AddOn Mgr : An addon ("
+				   << addon->getTypeString()
+				   << ") with the ID"
+				   << addon->getAddOnId()
+				   << "already exists. Aborting installation!";
+			return;
+		}
+		insertAddOnInUserJson(addon);
+	}
 	// installing files
 	else
 	{
@@ -677,6 +692,66 @@ void StelAddOnMgr::updateInstalledAddonsJson(AddOn* addon)
 	else
 	{
 		qWarning() << "Add-On Mgr: Couldn't open the catalog of installed addons!"
+			   << QDir::toNativeSeparators(m_sInstalledAddonsJsonPath);
+	}
+}
+
+void StelAddOnMgr::insertAddOnInUserJson(AddOn *addon)
+{
+	QFile jsonFile(m_sAddOnDir % "user_" % m_sAddonJsonFilename);
+	if (jsonFile.open(QIODevice::ReadWrite))
+	{
+		QJsonObject attributes;
+		attributes.insert("type", addon->getTypeString());
+		attributes.insert("title", addon->getTitle());
+		attributes.insert("description", addon->getDescription());
+		attributes.insert("version", addon->getVersion());
+		attributes.insert("license", addon->getLicenseName());
+		attributes.insert("license-url", addon->getLicenseURL());
+		attributes.insert("download-url", addon->getDownloadURL());
+		attributes.insert("download-filename", addon->getDownloadFilename());
+		attributes.insert("download-size", addon->getDownloadSize());
+		attributes.insert("checksum", addon->getChecksum());
+		attributes.insert("thumbnail", addon->getThumbnail());
+		attributes.insert("textures", addon->getAllTextures().join(","));
+
+		QJsonArray authors;
+		foreach (AddOn::Authors a, addon->getAuthors())
+		{
+			QJsonObject author;
+			author.insert("name", a.name);
+			author.insert("email", a.email);
+			author.insert("url", a.url);
+			authors.append(author);
+		}
+		attributes.insert("authors", authors);
+
+		QJsonObject json(QJsonDocument::fromJson(jsonFile.readAll()).object());
+		json.insert("name", QString("Add-Ons Catalog"));
+		json.insert("format-version", ADDON_MANAGER_CATALOG_VERSION);
+
+		QJsonObject addons = json["add-ons"].toObject();
+		addons.insert(addon->getAddOnId(), attributes);
+		json.insert("add-ons", addons);
+
+		jsonFile.resize(0);
+		jsonFile.write(QJsonDocument(json).toJson());
+		jsonFile.close();
+
+		// update hash
+		AddOnMap amap;
+		if (m_addons.contains(addon->getType()))
+		{
+			amap = m_addons.value(addon->getType());
+		}
+		amap.insert(addon->getAddOnId(), addon);
+		m_addons.insert(addon->getType(), amap);
+		m_addonsByMd5.insert(addon->getChecksum(), addon);
+		m_addonsById.insert(addon->getAddOnId(), addon);
+	}
+	else
+	{
+		qWarning() << "Add-On Mgr: Couldn't open the user catalog of addons!"
 			   << QDir::toNativeSeparators(m_sInstalledAddonsJsonPath);
 	}
 }

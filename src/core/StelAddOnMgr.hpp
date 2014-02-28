@@ -119,6 +119,7 @@ private:
 	void restoreDefaultAddonJsonFile();
 	void readAddonJsonObject(const QJsonObject& addOns);
 	void updateInstalledAddonsJson(AddOn* addon);
+	void insertAddOnInUserJson(AddOn* addon);
 
 	void downloadNextAddOn();
 	void finishCurrentDownload();
