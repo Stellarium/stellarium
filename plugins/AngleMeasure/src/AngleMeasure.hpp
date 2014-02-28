@@ -29,7 +29,8 @@ class QPixmap;
 class StelButton;
 class AngleMeasureDialog;
 
-//! This is an example of a plug-in which can be dynamically loaded into stellarium
+//! Main class of the Angle Measure plug-in.
+//! Provides an on-screen angle measuring tool.
 class AngleMeasure : public StelModule
 {
 	Q_OBJECT
@@ -55,23 +56,31 @@ public:
 	virtual void handleKeys(class QKeyEvent* event);
 	virtual void handleMouseClicks(class QMouseEvent* event);
 	virtual bool handleMouseMoves(int x, int y, Qt::MouseButtons b);
-	//! Implement this to tell the main Stellarium GUI that there is a GUI element to configure this
-	//! plugin.
 	virtual bool configureGui(bool show=true);
 	bool isEnabled() const {return flagShowAngleMeasure;}
 	bool isDmsFormat() const { return flagUseDmsFormat; }
 	bool isPaDisplayed() const { return flagShowPA; }
 
-	//! Set up the plugin with default values.  This means clearing out the AngleMeasure section in the
-	//! main config.ini (if one already exists), and populating it with default values.
-	void restoreDefaults(void);
+	//! Restore the plug-in's settings to the default state.
+	//! Replace the plug-in's settings in Stellarium's configuration file
+	//! with the default values and re-load them.
+	//! Uses internally loadSettings() and saveSettings().
+	void restoreDefaultSettings();
 
-	//! Read (or re-read) settings from the main config file.  This will be called from init and also
-	//! when restoring defaults (i.e. from the configuration dialog / restore defaults button).
-	void readSettingsFromConfig(void);
+	//! Load the plug-in's settings from the configuration file.
+	//! Settings are kept in the "AngleMeasure" section in Stellarium's
+	//! configuration file. If no such section exists, it will load default
+	//! values.
+	//! @see saveSettings(), restoreSettings()
+	void loadSettings();
 
-	//! Save the settings to the main configuration file.
-	void saveSettingsToConfig(void);
+	//! Save the plug-in's settings to the configuration file.
+	//! @warning textColor and lineColor are not saved, probably because
+	//! they can't be changed by the user in-program.
+	//! @todo find a way to save color values without "rounding drift"
+	//! (this is especially important for restoring default color values).
+	//! @see loadSettings(), restoreSettings()
+	void saveSettings();
 
 public slots:
 	void enableAngleMeasure(bool b);
@@ -83,9 +92,6 @@ private slots:
 	void clearMessage();
 
 private:
-	// if existing, delete AngleMeasure section in main config.ini, then create with default values
-	void restoreDefaultConfigIni(void);
-
 	QFont font;
 	bool flagShowAngleMeasure;
 	LinearFader lineVisible;
