@@ -99,10 +99,10 @@ void AngleMeasureDialog::setAboutHtml(void)
 
 void AngleMeasureDialog::saveAngleMeasureSettings()
 {
-	am->saveSettingsToConfig();
+	am->saveSettings();
 }
 
 void AngleMeasureDialog::resetAngleMeasureSettings()
 {
-	am->restoreDefaults();
+	am->restoreDefaultSettings();
 }
