@@ -27,7 +27,9 @@
 class QPixmap;
 class StelButton;
 
-//! This is an example of a plug-in which can be dynamically loaded into stellarium
+//! Main class of the Compass Marks plug-in.
+//! Provides a ring of marks indicating azimuth on the horizon,
+//! like a compass dial.
 class CompassMarks : public StelModule
 {
 	Q_OBJECT

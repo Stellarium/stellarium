@@ -40,8 +40,6 @@
 #include <QtNetwork>
 #include <cmath>
 
-//! This method is the one called automatically by the StelModuleMgr just
-//! after loading the dynamic library
 StelModule* CompassMarksStelPluginInterface::getStelModule() const
 {
 	return new CompassMarks();
@@ -114,7 +112,6 @@ double CompassMarks::getCallOrder(StelModuleActionName actionName) const
 
 void CompassMarks::init()
 {
-	qDebug() << "CompassMarks plugin - press control-C to toggle compass marks";
 	try
 	{
 		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
