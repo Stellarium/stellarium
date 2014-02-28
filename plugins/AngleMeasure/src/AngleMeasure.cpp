@@ -95,7 +95,7 @@ bool AngleMeasure::configureGui(bool show)
 	return true;
 }
 
-//! Determine which "layer" the plagin's drawing will happen on.
+//! Determine which "layer" the plugin's drawing will happen on.
 double AngleMeasure::getCallOrder(StelModuleActionName actionName) const
 {
 	if (actionName==StelModule::ActionDraw)
@@ -110,14 +110,12 @@ void AngleMeasure::init()
 	// If no settings in the main config file, create with defaults
 	if (!conf->childGroups().contains("AngleMeasure"))
 	{
-		qDebug() << "AngleMeasure::init no AngleMeasure section exists in main config file - creating with defaults";
 		restoreDefaultConfigIni();
 	}
 
 	// populate settings from main config file.
 	readSettingsFromConfig();
 
-	qDebug() << "AngleMeasure plugin - press control-A to toggle angle measure mode";
 	startPoint.set(0.,0.,0.);
 	endPoint.set(0.,0.,0.);
 	perp1StartPoint.set(0.,0.,0.);
