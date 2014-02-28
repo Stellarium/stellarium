@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-02-26 20:05+0700\n"
+"POT-Creation-Date: 2014-02-27 23:04+0700\n"
 "PO-Revision-Date: 2014-01-11 11:44+0000\n"
 "Last-Translator: Jeong, Tae-Min <jtm71@chollian.net>\n"
 "Language-Team: Korean <ko@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-02-27 05:34+0000\n"
-"X-Generator: Launchpad (build 16935)\n"
+"X-Launchpad-Export-Date: 2014-02-28 05:33+0000\n"
+"X-Generator: Launchpad (build 16948)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:106 src/core/modules/StarMgr.cpp:337
 #: src/core/modules/GridLinesMgr.cpp:680 src/core/modules/LandscapeMgr.cpp:343
@@ -3670,6 +3670,10 @@ msgstr ""
 msgid "File &name:"
 msgstr ""
 
+#: src/translations.h:560
+msgid "Copy &Link Location"
+msgstr ""
+
 #: src/ui_helpDialogGui.h:277 src/ui_helpDialogGui.h:283
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:417
 msgid "Help"
@@ -3763,168 +3767,168 @@ msgstr "나라:"
 msgid "Planet:"
 msgstr "행성:"
 
-#: src/ui_searchDialogGui.h:559
+#: src/ui_searchDialogGui.h:558
 msgid "Find Object"
 msgstr "천체 찾기"
 
-#: src/ui_searchDialogGui.h:560
+#: src/ui_searchDialogGui.h:559
 msgid "Find Object or Position"
 msgstr "천체 또는 위치 찾기"
 
-#: src/ui_searchDialogGui.h:563 src/ui_searchDialogGui.h:567
+#: src/ui_searchDialogGui.h:562 src/ui_searchDialogGui.h:566
 msgid "Use tab key for select of found items"
 msgstr "발견된 아이템의 선택을 위해 Tab 키를 사용하세요"
 
-#: src/ui_searchDialogGui.h:572
+#: src/ui_searchDialogGui.h:571
 msgid "iota"
 msgstr "이오타(iota)"
 
-#: src/ui_searchDialogGui.h:575
+#: src/ui_searchDialogGui.h:574
 msgid "alpha"
 msgstr "알파"
 
-#: src/ui_searchDialogGui.h:578
+#: src/ui_searchDialogGui.h:577
 msgid "beta"
 msgstr "베타"
 
-#: src/ui_searchDialogGui.h:581
+#: src/ui_searchDialogGui.h:580
 msgid "gamma"
 msgstr "감마"
 
-#: src/ui_searchDialogGui.h:584
+#: src/ui_searchDialogGui.h:583
 msgid "delta"
 msgstr "델타"
 
-#: src/ui_searchDialogGui.h:587
+#: src/ui_searchDialogGui.h:586
 msgid "epsilon"
 msgstr "엡실론"
 
-#: src/ui_searchDialogGui.h:590
+#: src/ui_searchDialogGui.h:589
 msgid "zeta"
 msgstr "제타"
 
-#: src/ui_searchDialogGui.h:593
+#: src/ui_searchDialogGui.h:592
 msgid "eta"
 msgstr "에타"
 
-#: src/ui_searchDialogGui.h:596
+#: src/ui_searchDialogGui.h:595
 msgid "theta"
 msgstr "쎄타"
 
-#: src/ui_searchDialogGui.h:599
+#: src/ui_searchDialogGui.h:598
 msgid "kappa"
 msgstr "카파"
 
-#: src/ui_searchDialogGui.h:602
+#: src/ui_searchDialogGui.h:601
 msgid "lambda"
 msgstr "람다"
 
-#: src/ui_searchDialogGui.h:605
+#: src/ui_searchDialogGui.h:604
 msgid "mu"
 msgstr "뮤"
 
-#: src/ui_searchDialogGui.h:608
+#: src/ui_searchDialogGui.h:607
 msgid "nu"
 msgstr "누"
 
-#: src/ui_searchDialogGui.h:611
+#: src/ui_searchDialogGui.h:610
 msgid "xi"
 msgstr "크사이"
 
-#: src/ui_searchDialogGui.h:614
+#: src/ui_searchDialogGui.h:613
 msgid "omicron"
 msgstr "오미크론"
 
-#: src/ui_searchDialogGui.h:617
+#: src/ui_searchDialogGui.h:616
 msgid "pi"
 msgstr "파이"
 
-#: src/ui_searchDialogGui.h:620
+#: src/ui_searchDialogGui.h:619
 msgid "rho"
 msgstr "로우"
 
-#: src/ui_searchDialogGui.h:623
+#: src/ui_searchDialogGui.h:622
 msgid "sigma"
 msgstr "시그마"
 
-#: src/ui_searchDialogGui.h:626
+#: src/ui_searchDialogGui.h:625
 msgid "tau"
 msgstr "타우"
 
-#: src/ui_searchDialogGui.h:629
+#: src/ui_searchDialogGui.h:628
 msgid "upsilon"
 msgstr "웁시론"
 
-#: src/ui_searchDialogGui.h:632
+#: src/ui_searchDialogGui.h:631
 msgid "phi"
 msgstr "파이"
 
-#: src/ui_searchDialogGui.h:635
+#: src/ui_searchDialogGui.h:634
 msgid "chi"
 msgstr "카이"
 
-#: src/ui_searchDialogGui.h:638
+#: src/ui_searchDialogGui.h:637
 msgid "psi"
 msgstr "프사이"
 
-#: src/ui_searchDialogGui.h:641
+#: src/ui_searchDialogGui.h:640
 msgid "omega"
 msgstr "오메가"
 
-#: src/ui_searchDialogGui.h:643
+#: src/ui_searchDialogGui.h:642
 msgid "Greek letters for Bayer designations"
 msgstr "바이엘 지정을 위한 그리스 문자"
 
-#: src/ui_searchDialogGui.h:644
+#: src/ui_searchDialogGui.h:643
 msgid "Object"
 msgstr "개체"
 
-#: src/ui_searchDialogGui.h:645
+#: src/ui_searchDialogGui.h:644
 msgid "RA/Dec (J2000):"
 msgstr "적경/적위 (J2000):"
 
-#: src/ui_searchDialogGui.h:646
+#: src/ui_searchDialogGui.h:645
 msgid "Position"
 msgstr "위치"
 
-#: src/ui_searchDialogGui.h:648
+#: src/ui_searchDialogGui.h:647
 msgid "Some objects may be found after activation respective plug-ins"
 msgstr "몇몇의 천체는 각각의 플러그-인 활성화 이후에 발견될 수 있음"
 
-#: src/ui_searchDialogGui.h:650
+#: src/ui_searchDialogGui.h:649
 msgid "names in English"
 msgstr "영어 이름"
 
-#: src/ui_searchDialogGui.h:651
+#: src/ui_searchDialogGui.h:650
 msgid "Search in list..."
 msgstr "목록 찾기..."
 
-#: src/ui_searchDialogGui.h:652
+#: src/ui_searchDialogGui.h:651
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:525
 msgid "Lists"
 msgstr "목록"
 
-#: src/ui_searchDialogGui.h:653
+#: src/ui_searchDialogGui.h:652
 msgid "On-line astronomical database SIMBAD"
 msgstr "온라인 천문학 데이터베이스 SIMBAD"
 
-#: src/ui_searchDialogGui.h:654
+#: src/ui_searchDialogGui.h:653
 msgid "Extend search with SIMBAD"
 msgstr "SIMBAD와 함께 확장 검색"
 
-#: src/ui_searchDialogGui.h:655
+#: src/ui_searchDialogGui.h:654
 msgid "Server:"
 msgstr "서버:"
 
-#: src/ui_searchDialogGui.h:656
+#: src/ui_searchDialogGui.h:655
 msgid "Search options"
 msgstr "검색 옵션"
 
-#: src/ui_searchDialogGui.h:657
+#: src/ui_searchDialogGui.h:656
 msgid "Use autofill only from the beginning of words"
 msgstr "단어의 처음부터 자동 완성 사용"
 
-#: src/ui_searchDialogGui.h:658 src/ui_viewDialog.h:1328
+#: src/ui_searchDialogGui.h:657 src/ui_viewDialog.h:1328
 #: src/ui_viewDialog.h:1334 src/ui_viewDialog.h:1336
 #: src/ui_configurationDialog.h:1156 src/ui_configurationDialog.h:1167
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:416
@@ -7953,8 +7957,8 @@ msgid "The NASA Exoplanet Archive"
 msgstr "나사 외계행성 보관소"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:182
-msgid "IAU Comission 53: Extrasolar Planets"
-msgstr "국제천문연맹(IAU) 위원회 53 : 외계태양계 행성들"
+msgid "IAU Commission 53: Extrasolar Planets"
+msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:183
 msgid "ExoMol"
@@ -8852,3 +8856,6 @@ msgstr ""
 
 #~ msgid "Render Solar Shadows"
 #~ msgstr "태양그림자 표현하기"
+
+#~ msgid "IAU Comission 53: Extrasolar Planets"
+#~ msgstr "국제천문연맹(IAU) 위원회 53 : 외계태양계 행성들"
