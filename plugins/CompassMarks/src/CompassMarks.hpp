@@ -46,15 +46,33 @@ public:
 	virtual double getCallOrder(StelModuleActionName actionName) const;
 
 	bool getCompassMarks() const {return markFader;}
+
 public slots:
 	void setCompassMarks(bool b);
+
+	//! Load the plug-in's settings from the configuration file.
+	//! Settings are kept in the "CompassMarks" section in Stellarium's
+	//! configuration file. If no such section exists, it will load default
+	//! values.
+	//! @see saveSettings(), restoreDefaultSettings()
+	void loadConfiguration();
+	//! Save the plug-in's settings to the configuration file.
+	//! @warning markColor is not saved.
+	//! @todo find a way to save color values without "rounding drift"
+	//! (this is especially important for restoring default color values).
+	//! @see loadSettings(), restoreDefaultSettings()
+	void saveConfiguration();
+	void restoreDefaultConfiguration();
+
 signals:
 	void compassMarksChanged(bool);
 private slots:
 	void cardinalPointsChanged(bool b);
 
 private:
-	// Font used for displaying our text
+	//! Whether the marks should be displayed at startup.
+	bool displayedAtStartup;
+	//! Font used for displaying bearing numbers.
 	QFont font;
 	Vec3f markColor;
 	LinearFader markFader;
