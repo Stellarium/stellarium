@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-02-27 23:04+0700\n"
-"PO-Revision-Date: 2012-10-22 02:33+0000\n"
-"Last-Translator: Bryan Nguyen <bryan.nguy@gmail.com>\n"
+"PO-Revision-Date: 2014-03-01 04:40+0000\n"
+"Last-Translator: timdream <timdream@gmail.com>\n"
 "Language-Team: Chinese (Taiwan) <zh_TW@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-02-28 05:42+0000\n"
+"X-Launchpad-Export-Date: 2014-03-01 04:42+0000\n"
 "X-Generator: Launchpad (build 16948)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:106 src/core/modules/StarMgr.cpp:337
@@ -826,6 +826,10 @@ msgid ""
 "Solar Eclipses: -1900 to +3000</em> (2006). This formula is also used in the "
 "solar, lunar and planetary ephemeris program SOLEX."
 msgstr ""
+"此修正由 F. Espenak and J. Meeus提供, 基於 Morrison & Stephenson (2004) "
+"並通過由1600至2000年列表值多項式擬合, 用作%1NASA Eclipse Web Site%2 及他們的 <em>Five Millennium "
+"Canon of Solar Eclipses: -1900 to +3000</em> (2006). 此方程式亦用在太陽, "
+"月球及行星星歷軟件SOLEX"
 
 #: src/core/StelCore.cpp:1552
 msgid "Used by default."
@@ -838,6 +842,8 @@ msgid ""
 "published in article <em>Ancient eclipses and dating the fall of "
 "Babylon</em> (%1)."
 msgstr ""
+"此修正由B. Banjevic提供, 基於Stephenson & Morrison (1984), 並發表在<em>Ancient eclipses "
+"and dating the fall of Babylon</em> (%1)."
 
 #: src/core/StelCore.cpp:1558
 #, qt-format
@@ -846,6 +852,9 @@ msgid ""
 "Simons (2000), was published in article <em>Error Minimization of Polynomial "
 "Approximation of DeltaT</em> (%1) and revisited by Sana Islam in 2013."
 msgstr ""
+"此修正由S. Islam, M. Sadiq 及 M. S. Qureshi提供, 基於Stephenson & Morrison (1984), "
+"並發表在<em>Error Minimization of Polynomial Approximation of DeltaT</em> (%1) "
+"及由 Sana Islam 在2013年審視."
 
 #: src/core/StelCore.cpp:1561
 #, qt-format
@@ -1770,7 +1779,7 @@ msgstr ""
 
 #: src/gui/SearchDialog.cpp:616
 msgid "Paste and Search"
-msgstr ""
+msgstr "貼上並搜尋"
 
 #: src/gui/ShortcutsDialog.cpp:488
 msgid "Action"
@@ -3553,11 +3562,11 @@ msgstr ""
 
 #: src/translations.h:545
 msgid "&Copy"
-msgstr ""
+msgstr "&複製"
 
 #: src/translations.h:546
 msgid "&Paste"
-msgstr ""
+msgstr "&貼上"
 
 #: src/translations.h:547 src/ui_locationDialogGui.h:402
 #: plugins/Oculars/src/ui_ocularDialog.h:1073
@@ -3569,7 +3578,7 @@ msgstr "刪除"
 
 #: src/translations.h:548
 msgid "Select All"
-msgstr ""
+msgstr "全選"
 
 #: src/translations.h:549
 msgid "Look in:"
@@ -3618,7 +3627,7 @@ msgstr ""
 
 #: src/translations.h:560
 msgid "Copy &Link Location"
-msgstr ""
+msgstr "複製連結位置(&L)"
 
 #: src/ui_helpDialogGui.h:277 src/ui_helpDialogGui.h:283
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:417
