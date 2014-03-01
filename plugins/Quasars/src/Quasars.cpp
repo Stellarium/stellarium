@@ -142,7 +142,7 @@ void Quasars::init()
 		// If no settings in the main config file, create with defaults
 		if (!conf->childGroups().contains("Quasars"))
 		{
-			qDebug() << "Quasars::init no Quasars section exists in main config file - creating with defaults";
+			qDebug() << "Quasars: no Quasars section exists in main config file - creating with defaults";
 			restoreDefaultConfigIni();
 		}
 
@@ -169,7 +169,7 @@ void Quasars::init()
 	}
 	catch (std::runtime_error &e)
 	{
-		qWarning() << "Quasars::init error: " << e.what();
+		qWarning() << "Quasars: init error:" << e.what();
 		return;
 	}
 
@@ -190,11 +190,11 @@ void Quasars::init()
 	}
 	else
 	{
-		qDebug() << "Quasars::init quasars.json does not exist - copying default file to " << QDir::toNativeSeparators(catalogJsonPath);
+		qDebug() << "Quasars: quasars.json does not exist - copying default file to" << QDir::toNativeSeparators(catalogJsonPath);
 		restoreDefaultJsonFile();
 	}
 
-	qDebug() << "Quasars::init using file: " << QDir::toNativeSeparators(catalogJsonPath);
+	qDebug() << "Quasars: loading catalog file:" << QDir::toNativeSeparators(catalogJsonPath);
 
 	readJsonFile();
 
@@ -423,11 +423,11 @@ void Quasars::restoreDefaultJsonFile(void)
 	QFile src(":/Quasars/quasars.json");
 	if (!src.copy(catalogJsonPath))
 	{
-		qWarning() << "Quasars::restoreDefaultJsonFile cannot copy json resource to " + QDir::toNativeSeparators(catalogJsonPath);
+		qWarning() << "Quasars: cannot copy json resource to" + QDir::toNativeSeparators(catalogJsonPath);
 	}
 	else
 	{
-		qDebug() << "Quasars::init copied default catalog.json to " << QDir::toNativeSeparators(catalogJsonPath);
+		qDebug() << "Quasars: copied default quasars.json to" << QDir::toNativeSeparators(catalogJsonPath);
 		// The resource is read only, and the new file inherits this...  make sure the new file
 		// is writable by the Stellarium process so that updates can be done.
 		QFile dest(catalogJsonPath);
@@ -443,14 +443,14 @@ void Quasars::restoreDefaultJsonFile(void)
 }
 
 /*
-  Creates a backup of the Quasars.json file called Quasars.json.old
+  Creates a backup of the quasars.json file called quasars.json.old
 */
 bool Quasars::backupJsonFile(bool deleteOriginal)
 {
 	QFile old(catalogJsonPath);
 	if (!old.exists())
 	{
-		qWarning() << "Quasars::backupJsonFile no file to backup";
+		qWarning() << "Quasars: no file to backup";
 		return false;
 	}
 
@@ -464,14 +464,14 @@ bool Quasars::backupJsonFile(bool deleteOriginal)
 		{
 			if (!old.remove())
 			{
-				qWarning() << "Quasars::backupJsonFile WARNING - could not remove old quasars.json file";
+				qWarning() << "Quasars: WARNING - could not remove old quasars.json file";
 				return false;
 			}
 		}
 	}
 	else
 	{
-		qWarning() << "Quasars::backupJsonFile WARNING - failed to copy quasars.json to quasars.json.old";
+		qWarning() << "Quasars: WARNING - failed to copy quasars.json to quasars.json.old";
 		return false;
 	}
 
@@ -497,7 +497,7 @@ QVariantMap Quasars::loadQSOMap(QString path)
 	QVariantMap map;
 	QFile jsonFile(path);
 	if (!jsonFile.open(QIODevice::ReadOnly))
-	    qWarning() << "Quasars::loadQSOMap cannot open " << QDir::toNativeSeparators(path);
+	    qWarning() << "Quasars: cannot open" << QDir::toNativeSeparators(path);
 	else
 	    map = StelJsonParser::parse(jsonFile.readAll()).toMap();
 
@@ -533,7 +533,7 @@ int Quasars::getJsonFileFormatVersion(void)
 	QFile catalogJsonFile(catalogJsonPath);
 	if (!catalogJsonFile.open(QIODevice::ReadOnly))
 	{
-		qWarning() << "Quasars::init cannot open " << QDir::toNativeSeparators(catalogJsonPath);
+		qWarning() << "Quasars: cannot open" << QDir::toNativeSeparators(catalogJsonPath);
 		return jsonVersion;
 	}
 
@@ -545,7 +545,7 @@ int Quasars::getJsonFileFormatVersion(void)
 	}
 
 	catalogJsonFile.close();
-	qDebug() << "Quasars::getJsonFileFormatVersion() version of format from file:" << jsonVersion;
+	qDebug() << "Quasars: version of the format of the catalog:" << jsonVersion;
 	return jsonVersion;
 }
 
@@ -554,7 +554,7 @@ bool Quasars::checkJsonFileFormat()
 	QFile catalogJsonFile(catalogJsonPath);
 	if (!catalogJsonFile.open(QIODevice::ReadOnly))
 	{
-		qWarning() << "Quasars::checkJsonFileFormat(): cannot open " << QDir::toNativeSeparators(catalogJsonPath);
+		qWarning() << "Quasars: cannot open" << QDir::toNativeSeparators(catalogJsonPath);
 		return false;
 	}
 
@@ -566,8 +566,7 @@ bool Quasars::checkJsonFileFormat()
 	}
 	catch (std::runtime_error& e)
 	{
-		qDebug() << "Quasars::checkJsonFileFormat(): file format is wrong!";
-		qDebug() << "Quasars::checkJsonFileFormat() error:" << e.what();
+		qDebug() << "Quasars: file format is wrong! Error:" << e.what();
 		return false;
 	}
 
@@ -699,7 +698,7 @@ void Quasars::updateDownloadComplete(QNetworkReply* reply)
 	// check the download worked, and save the data to file if this is the case.
 	if (reply->error() != QNetworkReply::NoError)
 	{
-		qWarning() << "Quasars::updateDownloadComplete FAILED to download" << reply->url() << " Error: " << reply->errorString();
+		qWarning() << "Quasars: FAILED to download" << reply->url() << " Error: " << reply->errorString();
 	}
 	else
 	{
@@ -707,7 +706,7 @@ void Quasars::updateDownloadComplete(QNetworkReply* reply)
 		QString jsonFilePath = StelFileMgr::findFile("modules/Quasars", StelFileMgr::Flags(StelFileMgr::Writable|StelFileMgr::Directory)) + "/quasars.json";
 		if (jsonFilePath.isEmpty())
 		{
-			qWarning() << "Quasars::updateDownloadComplete: cannot write JSON data to file: modules/Quasars/quasars.json";
+			qWarning() << "Quasars: cannot write JSON data to file:" << QDir::toNativeSeparators(jsonFilePath);
 			return;
 		}
 		QFile jsonFile(jsonFilePath);
