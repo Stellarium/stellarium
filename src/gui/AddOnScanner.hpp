@@ -24,7 +24,7 @@
 #include "StelAddOnMgr.hpp"
 #include "StelDialog.hpp"
 
-class Ui_addonScannerForm;
+class Ui_AddOnScanner;
 
 class AddOnScanner : public StelDialog
 {
@@ -44,7 +44,7 @@ private slots:
 	void slotRemoveIncompatibles();
 
 protected:
-	Ui_addonScannerForm* ui;
+	Ui_AddOnScanner* ui;
         //! Initialize the dialog widgets and connect the signals/slots.
         virtual void createDialogContent();
 

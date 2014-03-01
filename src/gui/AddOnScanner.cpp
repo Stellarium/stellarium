@@ -25,7 +25,7 @@
 AddOnScanner::AddOnScanner(QObject* parent)
 	: StelDialog(parent)
 {
-	ui = new Ui_addonScannerForm;
+	ui = new Ui_AddOnScanner;
 }
 
 AddOnScanner::~AddOnScanner()
