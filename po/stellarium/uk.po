@@ -9,21 +9,21 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium-uk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-02-27 23:04+0700\n"
-"PO-Revision-Date: 2014-02-27 17:09+0000\n"
+"POT-Creation-Date: 2014-03-01 11:46+0200\n"
+"PO-Revision-Date: 2014-03-01 17:13+0000\n"
 "Last-Translator: Yuri Chornoivan <yurchor@gmail.com>\n"
 "Language-Team: Ukrainian <translation@linux.org.ua>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-02-28 05:40+0000\n"
+"X-Launchpad-Export-Date: 2014-03-02 04:58+0000\n"
 "X-Generator: Launchpad (build 16948)\n"
 "X-Poedit-Country: UKRAINE\n"
 "Language: uk\n"
 "X-Poedit-Language: Ukrainian\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
-#: src/core/modules/ConstellationMgr.cpp:106 src/core/modules/StarMgr.cpp:337
+#: src/core/modules/ConstellationMgr.cpp:107 src/core/modules/StarMgr.cpp:338
 #: src/core/modules/GridLinesMgr.cpp:680 src/core/modules/LandscapeMgr.cpp:343
 #: src/core/modules/NebulaMgr.cpp:123 src/core/modules/SolarSystem.cpp:151
 #: src/core/StelApp.cpp:445 src/core/StelCore.cpp:163
@@ -31,33 +31,33 @@ msgstr ""
 msgid "Display Options"
 msgstr "Параметри показу"
 
-#: src/core/modules/ConstellationMgr.cpp:107
+#: src/core/modules/ConstellationMgr.cpp:108
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:274
 msgid "Constellation lines"
 msgstr "Лінії сузір’їв"
 
-#: src/core/modules/ConstellationMgr.cpp:108
+#: src/core/modules/ConstellationMgr.cpp:109
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:284
 msgid "Constellation art"
 msgstr "Зображення сузір’їв"
 
-#: src/core/modules/ConstellationMgr.cpp:109
+#: src/core/modules/ConstellationMgr.cpp:110
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:279
 msgid "Constellation labels"
 msgstr "Мітки сузір’їв"
 
-#: src/core/modules/ConstellationMgr.cpp:110
+#: src/core/modules/ConstellationMgr.cpp:111
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:285
 msgid "Constellation boundaries"
 msgstr "Межі сузір’їв"
 
-#: src/core/modules/StarMgr.cpp:338 src/ui_viewDialog.h:1233
+#: src/core/modules/StarMgr.cpp:339 src/ui_viewDialog.h:1233
 #: src/ui_viewDialog.h:1265 src/ui_viewDialog.h:1288
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:240
 msgid "Stars"
 msgstr "Зірки"
 
-#: src/core/modules/StarMgr.cpp:339
+#: src/core/modules/StarMgr.cpp:340
 msgid "Stars labels"
 msgstr "Мітки зірок"
 
@@ -1197,26 +1197,26 @@ msgstr "Знайдено"
 msgid "Select screenshot directory"
 msgstr "Оберіть каталог для знімків екрана"
 
-#: src/gui/ConfigurationDialog.cpp:663
+#: src/gui/ConfigurationDialog.cpp:664
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr "Початкове поле зору: %1%2"
 
-#: src/gui/ConfigurationDialog.cpp:671
+#: src/gui/ConfigurationDialog.cpp:672
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "Початковий напрямок зору Аз/Висота: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:728
+#: src/gui/ConfigurationDialog.cpp:729
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:384
 msgid "Authors"
 msgstr "Автори"
 
-#: src/gui/ConfigurationDialog.cpp:729 src/gui/ViewDialog.cpp:445
+#: src/gui/ConfigurationDialog.cpp:730 src/gui/ViewDialog.cpp:445
 msgid "Contact"
 msgstr "Контакти"
 
-#: src/gui/ConfigurationDialog.cpp:731
+#: src/gui/ConfigurationDialog.cpp:732
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:71
 #: plugins/Oculars/src/gui/OcularDialog.cpp:484
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:383
@@ -1229,7 +1229,7 @@ msgstr "Контакти"
 msgid "Version"
 msgstr "Версія"
 
-#: src/gui/ConfigurationDialog.cpp:814
+#: src/gui/ConfigurationDialog.cpp:815
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:72
 #: plugins/Oculars/src/gui/OcularDialog.cpp:485
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:109
@@ -1241,19 +1241,19 @@ msgstr "Версія"
 msgid "Author"
 msgstr "Автор"
 
-#: src/gui/ConfigurationDialog.cpp:818
+#: src/gui/ConfigurationDialog.cpp:819
 msgid "License"
 msgstr "Ліцензія"
 
-#: src/gui/ConfigurationDialog.cpp:842
+#: src/gui/ConfigurationDialog.cpp:843
 msgid "Running script: "
 msgstr "Запуск скрипту: "
 
-#: src/gui/ConfigurationDialog.cpp:849
+#: src/gui/ConfigurationDialog.cpp:850
 msgid "Running script: [none]"
 msgstr "Запуск скрипту: [Немає]"
 
-#: src/gui/ConfigurationDialog.cpp:914
+#: src/gui/ConfigurationDialog.cpp:915
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
@@ -1261,16 +1261,16 @@ msgstr ""
 "Завершено завантаження нових каталогів зірок!\n"
 "Перезапустіть Stellarium для їх відображення."
 
-#: src/gui/ConfigurationDialog.cpp:918
+#: src/gui/ConfigurationDialog.cpp:919
 msgid "All available star catalogs have been installed."
 msgstr "Було встановлено всі доступні зоряні каталоги."
 
-#: src/gui/ConfigurationDialog.cpp:923
+#: src/gui/ConfigurationDialog.cpp:924
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "Отримати каталог %1 із %2"
 
-#: src/gui/ConfigurationDialog.cpp:930
+#: src/gui/ConfigurationDialog.cpp:931
 #, qt-format
 msgid ""
 "Downloading %1...\n"
@@ -1279,7 +1279,7 @@ msgstr ""
 "Звантаження %1…\n"
 "(Ви можете закрити це вікно.)"
 
-#: src/gui/ConfigurationDialog.cpp:937
+#: src/gui/ConfigurationDialog.cpp:938
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -1290,7 +1290,7 @@ msgstr ""
 "Кількість зірок: %2 мільйонів\n"
 "Діапазон зоряних величин: %3-%4"
 
-#: src/gui/ConfigurationDialog.cpp:980 src/gui/ConfigurationDialog.cpp:1015
+#: src/gui/ConfigurationDialog.cpp:981 src/gui/ConfigurationDialog.cpp:1016
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -1299,11 +1299,11 @@ msgstr ""
 "Помилка при звантаженні %1:\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:1067
+#: src/gui/ConfigurationDialog.cpp:1068
 msgid "Verifying file integrity..."
 msgstr "Перевірка цілісності файлів…"
 
-#: src/gui/ConfigurationDialog.cpp:1071
+#: src/gui/ConfigurationDialog.cpp:1072
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -1313,202 +1313,202 @@ msgstr ""
 "Файл пошкоджено."
 
 #. TRANSLATORS: Full phrase is "Algorithm of DeltaT"
-#: src/gui/ConfigurationDialog.cpp:1144
+#: src/gui/ConfigurationDialog.cpp:1145
 msgid "Algorithm of"
 msgstr "Алгоритм обчислення"
 
-#: src/gui/ConfigurationDialog.cpp:1155
+#: src/gui/ConfigurationDialog.cpp:1156
 msgid "Without correction"
 msgstr "Без виправлення"
 
-#: src/gui/ConfigurationDialog.cpp:1156
+#: src/gui/ConfigurationDialog.cpp:1157
 msgid "Schoch (1931)"
 msgstr "Schoch (1931)"
 
-#: src/gui/ConfigurationDialog.cpp:1157
+#: src/gui/ConfigurationDialog.cpp:1158
 msgid "Clemence (1948)"
 msgstr "Clemence (1948)"
 
-#: src/gui/ConfigurationDialog.cpp:1158
+#: src/gui/ConfigurationDialog.cpp:1159
 msgid "IAU (1952)"
 msgstr "IAU (1952)"
 
-#: src/gui/ConfigurationDialog.cpp:1159
+#: src/gui/ConfigurationDialog.cpp:1160
 msgid "Astronomical Ephemeris (1960)"
 msgstr "Астрономічні таблиці (1960)"
 
-#: src/gui/ConfigurationDialog.cpp:1160
+#: src/gui/ConfigurationDialog.cpp:1161
 msgid "Tuckerman (1962, 1964) & Goldstine (1973)"
 msgstr "Tuckerman (1962, 1964) і Goldstine (1973)"
 
-#: src/gui/ConfigurationDialog.cpp:1161
+#: src/gui/ConfigurationDialog.cpp:1162
 msgid "Muller & Stephenson (1975)"
 msgstr "Muller і Stephenson (1975)"
 
-#: src/gui/ConfigurationDialog.cpp:1162
+#: src/gui/ConfigurationDialog.cpp:1163
 msgid "Stephenson (1978)"
 msgstr "Stephenson (1978)"
 
-#: src/gui/ConfigurationDialog.cpp:1163
+#: src/gui/ConfigurationDialog.cpp:1164
 msgid "Schmadel & Zech (1979)"
 msgstr "Schmadel і Zech (1979)"
 
-#: src/gui/ConfigurationDialog.cpp:1164
+#: src/gui/ConfigurationDialog.cpp:1165
 msgid "Morrison & Stephenson (1982)"
 msgstr "Morrison і Stephenson (1982)"
 
-#: src/gui/ConfigurationDialog.cpp:1165
+#: src/gui/ConfigurationDialog.cpp:1166
 msgid "Stephenson & Morrison (1984)"
 msgstr "Stephenson і Morrison (1984)"
 
-#: src/gui/ConfigurationDialog.cpp:1166
+#: src/gui/ConfigurationDialog.cpp:1167
 msgid "Stephenson & Houlden (1986)"
 msgstr "Stephenson і Houlden (1986)"
 
-#: src/gui/ConfigurationDialog.cpp:1167
+#: src/gui/ConfigurationDialog.cpp:1168
 msgid "Espenak (1987, 1989)"
 msgstr "Espenak (1987, 1989)"
 
-#: src/gui/ConfigurationDialog.cpp:1168
+#: src/gui/ConfigurationDialog.cpp:1169
 msgid "Borkowski (1988)"
 msgstr "Borkowski (1988)"
 
-#: src/gui/ConfigurationDialog.cpp:1169
+#: src/gui/ConfigurationDialog.cpp:1170
 msgid "Schmadel & Zech (1988)"
 msgstr "Schmadel і Zech (1988)"
 
-#: src/gui/ConfigurationDialog.cpp:1170
+#: src/gui/ConfigurationDialog.cpp:1171
 msgid "Chapront-Touze & Chapront (1991)"
 msgstr "Chapront-Touze і Chapront (1991)"
 
-#: src/gui/ConfigurationDialog.cpp:1171
+#: src/gui/ConfigurationDialog.cpp:1172
 msgid "Stephenson & Morrison (1995)"
 msgstr "Stephenson і Morrison (1995)"
 
-#: src/gui/ConfigurationDialog.cpp:1172
+#: src/gui/ConfigurationDialog.cpp:1173
 msgid "Stephenson (1997)"
 msgstr "Stephenson (1997)"
 
-#: src/gui/ConfigurationDialog.cpp:1174
+#: src/gui/ConfigurationDialog.cpp:1175
 msgid "Meeus (1998) (with Chapront, Chapront-Touze & Francou (1997))"
 msgstr "Meeus (1998) (with Chapront, Chapront-Touze і Francou (1997))"
 
-#: src/gui/ConfigurationDialog.cpp:1175
+#: src/gui/ConfigurationDialog.cpp:1176
 msgid "JPL Horizons"
 msgstr "JPL Horizons"
 
-#: src/gui/ConfigurationDialog.cpp:1176
+#: src/gui/ConfigurationDialog.cpp:1177
 msgid "Meeus & Simons (2000)"
 msgstr "Meeus і Simons (2000)"
 
-#: src/gui/ConfigurationDialog.cpp:1177
+#: src/gui/ConfigurationDialog.cpp:1178
 msgid "Montenbruck & Pfleger (2000)"
 msgstr "Montenbruck і Pfleger (2000)"
 
-#: src/gui/ConfigurationDialog.cpp:1178
+#: src/gui/ConfigurationDialog.cpp:1179
 msgid "Reingold & Dershowitz (2002, 2007)"
 msgstr "Reingold і Dershowitz (2002, 2007)"
 
-#: src/gui/ConfigurationDialog.cpp:1179
+#: src/gui/ConfigurationDialog.cpp:1180
 msgid "Morrison & Stephenson (2004, 2005)"
 msgstr "Morrison і Stephenson (2004, 2005)"
 
-#: src/gui/ConfigurationDialog.cpp:1181
+#: src/gui/ConfigurationDialog.cpp:1182
 msgid "Espenak & Meeus (2006)"
 msgstr "Espenak і Meeus (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:1182
+#: src/gui/ConfigurationDialog.cpp:1183
 msgid "Reijs (2006)"
 msgstr "Reijs (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:1183
+#: src/gui/ConfigurationDialog.cpp:1184
 msgid "Banjevic (2006)"
 msgstr "Баньєвич (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:1184
+#: src/gui/ConfigurationDialog.cpp:1185
 msgid "Islam, Sadiq & Qureshi (2008, 2013)"
 msgstr "Islam, Sadiq та Qureshi (2008, 2013)"
 
-#: src/gui/ConfigurationDialog.cpp:1185
+#: src/gui/ConfigurationDialog.cpp:1186
 #, qt-format
 msgid "Custom equation of %1T"
 msgstr "Нетипове рівняння для %1T"
 
 #. TRANSLATORS: This message will be displayed for users if Stellarium can't get info about version from stellarium.org
-#: src/gui/HelpDialog.cpp:250
+#: src/gui/HelpDialog.cpp:251
 msgid "Oops... Stellarium can't check latest version."
 msgstr ""
 "Оце тобі… Stellarium не вдалося перевірити, чи є ваша версія найсвіжішою."
 
 #. TRANSLATORS: This message will be displayed for users if current version of Stellarium is bigger than version from stellarium.org
-#: src/gui/HelpDialog.cpp:272
+#: src/gui/HelpDialog.cpp:273
 msgid "Looks like you are using the development version of Stellarium."
 msgstr "Здається, ви користуєтеся тестовою версією Stellarium."
 
 #. TRANSLATORS: This message will be displayed for users if current version of Stellarium is smaller than version from stellarium.org
-#: src/gui/HelpDialog.cpp:277
+#: src/gui/HelpDialog.cpp:278
 #, qt-format
 msgid "This version of Stellarium is outdated! Latest version is %1."
 msgstr "Ця версія Stellarium є застарілою! Найсвіжішою версією є %1."
 
 #. TRANSLATORS: This message will be displayed for users if current version of Stellarium is equals with version from stellarium.org
-#: src/gui/HelpDialog.cpp:283
+#: src/gui/HelpDialog.cpp:284
 msgid "This is latest stable version of Stellarium."
 msgstr "Це найсвіжіша стабільна версія Stellarium."
 
-#: src/gui/HelpDialog.cpp:313
+#: src/gui/HelpDialog.cpp:314
 msgid "Stellarium Help"
 msgstr "Довідка зі Stellarium"
 
-#: src/gui/HelpDialog.cpp:318 src/gui/HelpDialog.cpp:323
+#: src/gui/HelpDialog.cpp:319 src/gui/HelpDialog.cpp:324
 msgid "Keys"
 msgstr "Клавіші"
 
-#: src/gui/HelpDialog.cpp:320 src/gui/HelpDialog.cpp:392
+#: src/gui/HelpDialog.cpp:321 src/gui/HelpDialog.cpp:393
 msgid "Further Reading"
 msgstr "Подальше читання"
 
-#: src/gui/HelpDialog.cpp:327
+#: src/gui/HelpDialog.cpp:328
 msgid "Pan view around the sky"
 msgstr "Загальний вигляд неба"
 
-#: src/gui/HelpDialog.cpp:328
+#: src/gui/HelpDialog.cpp:329
 msgid "Arrow keys & left mouse drag"
 msgstr "Клавіші-стрілки і перетягування лівою кнопкою миші"
 
-#: src/gui/HelpDialog.cpp:330
+#: src/gui/HelpDialog.cpp:331
 msgid "Zoom in/out"
 msgstr "Збільшити/Зменшити"
 
-#: src/gui/HelpDialog.cpp:332
+#: src/gui/HelpDialog.cpp:333
 msgid "Page Up/Down"
 msgstr "Page Up/Down"
 
-#: src/gui/HelpDialog.cpp:334
+#: src/gui/HelpDialog.cpp:335
 msgid "CTRL + Up/Down"
 msgstr "CTRL + Вверх/Вниз"
 
-#: src/gui/HelpDialog.cpp:337
+#: src/gui/HelpDialog.cpp:338
 msgid "Select object"
 msgstr "Позначити об’єкт"
 
-#: src/gui/HelpDialog.cpp:338
+#: src/gui/HelpDialog.cpp:339
 msgid "Left click"
 msgstr "клацнути лівою кнопкою мишки"
 
-#: src/gui/HelpDialog.cpp:346
+#: src/gui/HelpDialog.cpp:347
 msgid "Clear selection"
 msgstr "Зняти позначення"
 
-#: src/gui/HelpDialog.cpp:347
+#: src/gui/HelpDialog.cpp:348
 msgid "Right click"
 msgstr "клацнути правою кнопкою мишки"
 
-#: src/gui/HelpDialog.cpp:349
+#: src/gui/HelpDialog.cpp:350
 msgid "CTRL + Left click"
 msgstr "CTRL + клацання лівою кнопкою мишки"
 
-#: src/gui/HelpDialog.cpp:354
+#: src/gui/HelpDialog.cpp:355
 #, qt-format
 msgid ""
 "Below are listed only the actions with assigned keys. Further actions may be "
@@ -1518,7 +1518,7 @@ msgstr ""
 "скорочення. Список інших дій можна отримати у відповідь на натискання кнопки "
 "«%1»."
 
-#: src/gui/HelpDialog.cpp:393
+#: src/gui/HelpDialog.cpp:394
 msgid ""
 "The following links are external web links, and will launch your web "
 "browser:\n"
@@ -1526,17 +1526,17 @@ msgstr ""
 "Наступні посилання є зовнішніми посиланнями. Буде запущено програму для "
 "перегляду інтернету:\n"
 
-#: src/gui/HelpDialog.cpp:394
+#: src/gui/HelpDialog.cpp:395
 msgid "The Stellarium User Guide"
 msgstr "Інструкція користувача Stellarium"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:398
+#: src/gui/HelpDialog.cpp:399
 msgid "{Frequently Asked Questions} about Stellarium.  Answers too."
 msgstr "{Frequently Asked Questions} щодо Stellarium. З відповідями."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:403
+#: src/gui/HelpDialog.cpp:404
 msgid ""
 "{The Stellarium Wiki} - General information.  You can also find user-"
 "contributed landscapes and scripts here."
@@ -1545,7 +1545,7 @@ msgstr ""
 "та скрипти, створені користувачами."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:408
+#: src/gui/HelpDialog.cpp:409
 msgid ""
 "{Support ticket system} - if you need help using Stellarium, post a support "
 "request here and we'll try to help."
@@ -1554,7 +1554,7 @@ msgstr ""
 "тут запит щодо підтримки, і ми спробуємо допомогти."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:413
+#: src/gui/HelpDialog.cpp:414
 msgid ""
 "{Bug reporting and feature request system} - if something doesn't work "
 "properly or is missing and is not listed in the tracker, you can open bug "
@@ -1565,48 +1565,48 @@ msgstr ""
 "повідомлення про ваду або побажання щодо покращення."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:418
+#: src/gui/HelpDialog.cpp:419
 msgid "{Forums} - discuss Stellarium with other users."
 msgstr "{Forums} — обговоріть Stellarium з іншими користувачами."
 
-#: src/gui/HelpDialog.cpp:458
+#: src/gui/HelpDialog.cpp:459
 msgid "Developers"
 msgstr "Розробники"
 
-#: src/gui/HelpDialog.cpp:459
+#: src/gui/HelpDialog.cpp:460
 #, qt-format
 msgid "Project coordinator & lead developer: %1"
 msgstr "Координатор проекту і основний розробник: %1"
 
-#: src/gui/HelpDialog.cpp:460
+#: src/gui/HelpDialog.cpp:461
 #, qt-format
 msgid "Doc author/developer: %1"
 msgstr "Автор документації/розробник: %1"
 
-#: src/gui/HelpDialog.cpp:461 src/gui/HelpDialog.cpp:462
-#: src/gui/HelpDialog.cpp:463 src/gui/HelpDialog.cpp:464
-#: src/gui/HelpDialog.cpp:465 src/gui/HelpDialog.cpp:472
-#: src/gui/HelpDialog.cpp:473 src/gui/HelpDialog.cpp:474
-#: src/gui/HelpDialog.cpp:475
+#: src/gui/HelpDialog.cpp:462 src/gui/HelpDialog.cpp:463
+#: src/gui/HelpDialog.cpp:464 src/gui/HelpDialog.cpp:465
+#: src/gui/HelpDialog.cpp:466 src/gui/HelpDialog.cpp:473
+#: src/gui/HelpDialog.cpp:474 src/gui/HelpDialog.cpp:475
+#: src/gui/HelpDialog.cpp:476
 #, qt-format
 msgid "Developer: %1"
 msgstr "Розробник: %1"
 
-#: src/gui/HelpDialog.cpp:466
+#: src/gui/HelpDialog.cpp:467
 #, qt-format
 msgid "Continuous Integration: %1"
 msgstr "Неперервна інтеграція: %1"
 
-#: src/gui/HelpDialog.cpp:467 src/gui/HelpDialog.cpp:468
+#: src/gui/HelpDialog.cpp:468 src/gui/HelpDialog.cpp:469
 #, qt-format
 msgid "Tester: %1"
 msgstr "Перевірено: %1"
 
-#: src/gui/HelpDialog.cpp:469
+#: src/gui/HelpDialog.cpp:470
 msgid "Past Developers"
 msgstr "Колишні розробники"
 
-#: src/gui/HelpDialog.cpp:470
+#: src/gui/HelpDialog.cpp:471
 msgid ""
 "Several people have made significant contributions, but are no longer "
 "active. Their work has made a big difference to the project:"
@@ -1614,12 +1614,12 @@ msgstr ""
 "Дехто зробив значний внесок, але тепер не бере участі у розробці програми. "
 "Внесок цих людей значно вплинув на поточний стан проекту."
 
-#: src/gui/HelpDialog.cpp:471
+#: src/gui/HelpDialog.cpp:472
 #, qt-format
 msgid "Graphic/other designer: %1"
 msgstr "Створення графіки/інших елементів: %1"
 
-#: src/gui/HelpDialog.cpp:476 src/gui/HelpDialog.cpp:477
+#: src/gui/HelpDialog.cpp:477 src/gui/HelpDialog.cpp:478
 #, qt-format
 msgid "OSX Developer: %1"
 msgstr "Розробник під OSX: %1"
@@ -4905,7 +4905,7 @@ msgid "..."
 msgstr "…"
 
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:59
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:133
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:124
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:189
 msgid "Angle Measure"
 msgstr "Вимірювання кутів"
@@ -4914,29 +4914,29 @@ msgstr "Вимірювання кутів"
 msgid "Provides an angle measurement tool"
 msgstr "Інструмент вимірювання кутів"
 
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:133
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:124
 msgid "Angle measure"
 msgstr "Вимірювання кутів"
 
 #. TRANSLATORS: instructions for using the AngleMeasure plugin.
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:357
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:348
 msgid "The Angle Measure is enabled:"
 msgstr "Вимірювання кутів увімкнено:"
 
 #. TRANSLATORS: instructions for using the AngleMeasure plugin.
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:359
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:350
 msgid "Drag with the left button to measure, left-click to clear."
 msgstr ""
 "Перетягування з натиснутою лівою кнопкою миші вимірює, клацання лівою "
 "кнопкою — скидає."
 
 #. TRANSLATORS: instructions for using the AngleMeasure plugin.
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:361
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:352
 msgid "Right-clicking changes the end point only."
 msgstr "Клацанням правою кнопкою можна змінити лише кінцеву точку."
 
 #. TRANSLATORS: PA is abbreviation for phrase "Position Angle"
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:363
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:354
 msgid "PA="
 msgstr "КР="
 
@@ -5116,16 +5116,16 @@ msgctxt "tab in plugin windows"
 msgid "About"
 msgstr "Про програму"
 
-#: plugins/CompassMarks/src/CompassMarks.cpp:57
-#: plugins/CompassMarks/src/CompassMarks.cpp:125
+#: plugins/CompassMarks/src/CompassMarks.cpp:55
+#: plugins/CompassMarks/src/CompassMarks.cpp:105
 msgid "Compass Marks"
 msgstr "Позначки румбів"
 
-#: plugins/CompassMarks/src/CompassMarks.cpp:60
+#: plugins/CompassMarks/src/CompassMarks.cpp:58
 msgid "Displays compass bearing marks along the horizon"
 msgstr "Показ позначок румбів компаса над горизонтом"
 
-#: plugins/CompassMarks/src/CompassMarks.cpp:125
+#: plugins/CompassMarks/src/CompassMarks.cpp:105
 msgid "Compass marks"
 msgstr "Позначки румбів"
 
@@ -6811,62 +6811,62 @@ msgstr ""
 "і часу на нижній панелі."
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:242
-#: plugins/Supernovae/src/Supernovae.cpp:710 plugins/Novae/src/Novae.cpp:707
+#: plugins/Supernovae/src/Supernovae.cpp:709 plugins/Novae/src/Novae.cpp:706
 msgid "January"
 msgstr "січня"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:243
-#: plugins/Supernovae/src/Supernovae.cpp:710 plugins/Novae/src/Novae.cpp:707
+#: plugins/Supernovae/src/Supernovae.cpp:709 plugins/Novae/src/Novae.cpp:706
 msgid "February"
 msgstr "лютого"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:244
-#: plugins/Supernovae/src/Supernovae.cpp:710 plugins/Novae/src/Novae.cpp:707
+#: plugins/Supernovae/src/Supernovae.cpp:709 plugins/Novae/src/Novae.cpp:706
 msgid "March"
 msgstr "березня"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:245
-#: plugins/Supernovae/src/Supernovae.cpp:710 plugins/Novae/src/Novae.cpp:707
+#: plugins/Supernovae/src/Supernovae.cpp:709 plugins/Novae/src/Novae.cpp:706
 msgid "April"
 msgstr "квітня"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:246
-#: plugins/Supernovae/src/Supernovae.cpp:710 plugins/Novae/src/Novae.cpp:707
+#: plugins/Supernovae/src/Supernovae.cpp:709 plugins/Novae/src/Novae.cpp:706
 msgid "May"
 msgstr "травня"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:247
-#: plugins/Supernovae/src/Supernovae.cpp:710 plugins/Novae/src/Novae.cpp:707
+#: plugins/Supernovae/src/Supernovae.cpp:709 plugins/Novae/src/Novae.cpp:706
 msgid "June"
 msgstr "червня"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:248
-#: plugins/Supernovae/src/Supernovae.cpp:710 plugins/Novae/src/Novae.cpp:707
+#: plugins/Supernovae/src/Supernovae.cpp:709 plugins/Novae/src/Novae.cpp:706
 msgid "July"
 msgstr "липня"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:249
-#: plugins/Supernovae/src/Supernovae.cpp:710 plugins/Novae/src/Novae.cpp:707
+#: plugins/Supernovae/src/Supernovae.cpp:709 plugins/Novae/src/Novae.cpp:706
 msgid "August"
 msgstr "серпня"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:250
-#: plugins/Supernovae/src/Supernovae.cpp:710 plugins/Novae/src/Novae.cpp:707
+#: plugins/Supernovae/src/Supernovae.cpp:709 plugins/Novae/src/Novae.cpp:706
 msgid "September"
 msgstr "вересня"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:251
-#: plugins/Supernovae/src/Supernovae.cpp:710 plugins/Novae/src/Novae.cpp:707
+#: plugins/Supernovae/src/Supernovae.cpp:709 plugins/Novae/src/Novae.cpp:706
 msgid "October"
 msgstr "жовтня"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:252
-#: plugins/Supernovae/src/Supernovae.cpp:710 plugins/Novae/src/Novae.cpp:707
+#: plugins/Supernovae/src/Supernovae.cpp:709 plugins/Novae/src/Novae.cpp:706
 msgid "November"
 msgstr "листопада"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:253
-#: plugins/Supernovae/src/Supernovae.cpp:710 plugins/Novae/src/Novae.cpp:707
+#: plugins/Supernovae/src/Supernovae.cpp:709 plugins/Novae/src/Novae.cpp:706
 msgid "December"
 msgstr "грудня"
 
@@ -8385,27 +8385,27 @@ msgid "Websites"
 msgstr "Сайти"
 
 #: plugins/Observability/src/Observability.cpp:65
-msgid "Observability analysis"
+msgid "Observability Analysis"
 msgstr "Аналіз спостережності"
 
 #: plugins/Observability/src/Observability.cpp:68
 msgid ""
-"Reports an analysis of source observability (rise, set, and transit times), "
-"as well as the epochs of year when the source is best observed. It assumes "
-"that a source is observable if it is above the horizon during a fraction of "
-"the night. The plugin also gives the day for largest separation from the Sun "
-"and the days of Acronychal and Cosmical rise/set.<br><br> An explanation of "
-"the quantities shown by this script is given in the 'About' tab of the "
-"configuration window"
+"Displays an analysis of a selected object's observability (rise, set, and "
+"transit times) for the current date, as well as when it is observable "
+"through the year. An object is assumed to be observable if it is above the "
+"horizon during a fraction of the night. Also included are the dates of the "
+"largest separation from the Sun and acronychal and cosmical rising and "
+"setting. (Explanations are provided in the 'About' tab of the plugin's "
+"configuration window.)"
 msgstr ""
-"Повідомляє аналітичні дані щодо спостережності джерела (схід, захід і "
-"кульмінація), а також епохи (пори) року, коли умови спостереження за "
-"джерелом є найкращими. Припускається, цщо джерело є спостережним, якщо "
-"перебуває над горизонтом частину нічного часу доби. Крім того, додаток "
-"визначає день, коли джерело найбільше відхиляється від Сонця, та дні "
-"акронічного та космічного сходу та заходу.<br><br>Пояснення щодо величин, "
-"які показує скрипт, наведено на вкладці «Про програму» діалогового вікна "
-"налаштувань."
+"Показує дані аналізу щодо спостережності позначеного об’єкта (часів сходу, "
+"заходу та кульмінації) для поточної дати, а також даних щодо можливості "
+"спостереження за цим об’єктом протягом року. Вважається, що об’єкт є "
+"придатним до спостереження, якщо від перебуває над горизонтом протягом "
+"частини нічної пори доби. Крім того, буде показано дані щодо найбільшого "
+"кута відхилення від сонця та дані щодо акронічного та космічного сходу та "
+"заходу. (Пояснення можна знайти на вкладці «Про програму» діалогового вікна "
+"налаштовування додатка.)"
 
 #: plugins/Observability/src/Observability.cpp:209
 msgctxt "short month name"
@@ -9545,11 +9545,32 @@ msgstr "Розмір шрифту:"
 #~ "Спалах наднової, який спостерігав Тіхо Браге у 1572 році. Для демонстрації "
 #~ "слід увімкнути додаток показу наднових."
 
+#~ msgid "Observability analysis"
+#~ msgstr "Аналіз спостережності"
+
 #~ msgid "Sun altitude at twilight"
 #~ msgstr "Висота Сонця у сутінках"
 
 #~ msgid "0 deg."
 #~ msgstr "0°"
+
+#~ msgid ""
+#~ "Reports an analysis of source observability (rise, set, and transit times), "
+#~ "as well as the epochs of year when the source is best observed. It assumes "
+#~ "that a source is observable if it is above the horizon during a fraction of "
+#~ "the night. The plugin also gives the day for largest separation from the Sun "
+#~ "and the days of Acronychal and Cosmical rise/set.<br><br> An explanation of "
+#~ "the quantities shown by this script is given in the 'About' tab of the "
+#~ "configuration window"
+#~ msgstr ""
+#~ "Повідомляє аналітичні дані щодо спостережності джерела (схід, захід і "
+#~ "кульмінація), а також епохи (пори) року, коли умови спостереження за "
+#~ "джерелом є найкращими. Припускається, цщо джерело є спостережним, якщо "
+#~ "перебуває над горизонтом частину нічного часу доби. Крім того, додаток "
+#~ "визначає день, коли джерело найбільше відхиляється від Сонця, та дні "
+#~ "акронічного та космічного сходу та заходу.<br><br>Пояснення щодо величин, "
+#~ "які показує скрипт, наведено на вкладці «Про програму» діалогового вікна "
+#~ "налаштувань."
 
 #~ msgid "Longitude/Latitude (J2000)"
 #~ msgstr "Довгота/Широта (J2000)"
