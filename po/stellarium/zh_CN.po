@@ -7,17 +7,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-02-27 23:04+0700\n"
+"POT-Creation-Date: 2014-03-01 11:46+0200\n"
 "PO-Revision-Date: 2014-02-28 17:14+0000\n"
 "Last-Translator: henrysky <Unknown>\n"
 "Language-Team: Chinese (Hong Kong) <zh_HK@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-03-01 04:43+0000\n"
+"X-Launchpad-Export-Date: 2014-03-02 04:59+0000\n"
 "X-Generator: Launchpad (build 16948)\n"
 
-#: src/core/modules/ConstellationMgr.cpp:106 src/core/modules/StarMgr.cpp:337
+#: src/core/modules/ConstellationMgr.cpp:107 src/core/modules/StarMgr.cpp:338
 #: src/core/modules/GridLinesMgr.cpp:680 src/core/modules/LandscapeMgr.cpp:343
 #: src/core/modules/NebulaMgr.cpp:123 src/core/modules/SolarSystem.cpp:151
 #: src/core/StelApp.cpp:445 src/core/StelCore.cpp:163
@@ -25,33 +25,33 @@ msgstr ""
 msgid "Display Options"
 msgstr "显示选项"
 
-#: src/core/modules/ConstellationMgr.cpp:107
+#: src/core/modules/ConstellationMgr.cpp:108
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:274
 msgid "Constellation lines"
 msgstr "星座连线"
 
-#: src/core/modules/ConstellationMgr.cpp:108
+#: src/core/modules/ConstellationMgr.cpp:109
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:284
 msgid "Constellation art"
 msgstr "星座图绘"
 
-#: src/core/modules/ConstellationMgr.cpp:109
+#: src/core/modules/ConstellationMgr.cpp:110
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:279
 msgid "Constellation labels"
 msgstr "星座标示"
 
-#: src/core/modules/ConstellationMgr.cpp:110
+#: src/core/modules/ConstellationMgr.cpp:111
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:285
 msgid "Constellation boundaries"
 msgstr "星座边界"
 
-#: src/core/modules/StarMgr.cpp:338 src/ui_viewDialog.h:1233
+#: src/core/modules/StarMgr.cpp:339 src/ui_viewDialog.h:1233
 #: src/ui_viewDialog.h:1265 src/ui_viewDialog.h:1288
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:240
 msgid "Stars"
 msgstr "天体"
 
-#: src/core/modules/StarMgr.cpp:339
+#: src/core/modules/StarMgr.cpp:340
 msgid "Stars labels"
 msgstr "恒星标签"
 
@@ -1108,26 +1108,26 @@ msgstr "已找到"
 msgid "Select screenshot directory"
 msgstr "选择储存截图资料夹"
 
-#: src/gui/ConfigurationDialog.cpp:663
+#: src/gui/ConfigurationDialog.cpp:664
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr "启动时的视野大小: %1%2"
 
-#: src/gui/ConfigurationDialog.cpp:671
+#: src/gui/ConfigurationDialog.cpp:672
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "启动时的地平坐标方位角/高度角: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:728
+#: src/gui/ConfigurationDialog.cpp:729
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:384
 msgid "Authors"
 msgstr "作者"
 
-#: src/gui/ConfigurationDialog.cpp:729 src/gui/ViewDialog.cpp:445
+#: src/gui/ConfigurationDialog.cpp:730 src/gui/ViewDialog.cpp:445
 msgid "Contact"
 msgstr "联系信息"
 
-#: src/gui/ConfigurationDialog.cpp:731
+#: src/gui/ConfigurationDialog.cpp:732
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:71
 #: plugins/Oculars/src/gui/OcularDialog.cpp:484
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:383
@@ -1140,7 +1140,7 @@ msgstr "联系信息"
 msgid "Version"
 msgstr "版本"
 
-#: src/gui/ConfigurationDialog.cpp:814
+#: src/gui/ConfigurationDialog.cpp:815
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:72
 #: plugins/Oculars/src/gui/OcularDialog.cpp:485
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:109
@@ -1152,19 +1152,19 @@ msgstr "版本"
 msgid "Author"
 msgstr "作者"
 
-#: src/gui/ConfigurationDialog.cpp:818
+#: src/gui/ConfigurationDialog.cpp:819
 msgid "License"
 msgstr "授权条款"
 
-#: src/gui/ConfigurationDialog.cpp:842
+#: src/gui/ConfigurationDialog.cpp:843
 msgid "Running script: "
 msgstr "执行指令： "
 
-#: src/gui/ConfigurationDialog.cpp:849
+#: src/gui/ConfigurationDialog.cpp:850
 msgid "Running script: [none]"
 msgstr "执行指令：[空白]"
 
-#: src/gui/ConfigurationDialog.cpp:914
+#: src/gui/ConfigurationDialog.cpp:915
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
@@ -1172,16 +1172,16 @@ msgstr ""
 "新的天体目录经已下载完毕！\n"
 "请重新启动 Stellarium 以使用新的目录。"
 
-#: src/gui/ConfigurationDialog.cpp:918
+#: src/gui/ConfigurationDialog.cpp:919
 msgid "All available star catalogs have been installed."
 msgstr "所有可用的星体资料均已安装。"
 
-#: src/gui/ConfigurationDialog.cpp:923
+#: src/gui/ConfigurationDialog.cpp:924
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "在 %2 中取后 %1 目录"
 
-#: src/gui/ConfigurationDialog.cpp:930
+#: src/gui/ConfigurationDialog.cpp:931
 #, qt-format
 msgid ""
 "Downloading %1...\n"
@@ -1190,7 +1190,7 @@ msgstr ""
 "正在下载 %1……\n"
 "（您可以关闭此窗口）"
 
-#: src/gui/ConfigurationDialog.cpp:937
+#: src/gui/ConfigurationDialog.cpp:938
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -1201,7 +1201,7 @@ msgstr ""
 "天体数量: %2 百万\n"
 "星等范围: %3 - %4"
 
-#: src/gui/ConfigurationDialog.cpp:980 src/gui/ConfigurationDialog.cpp:1015
+#: src/gui/ConfigurationDialog.cpp:981 src/gui/ConfigurationDialog.cpp:1016
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -1210,11 +1210,11 @@ msgstr ""
 "在下载 %1 时发生了错误：\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:1067
+#: src/gui/ConfigurationDialog.cpp:1068
 msgid "Verifying file integrity..."
 msgstr "正在校验文件..."
 
-#: src/gui/ConfigurationDialog.cpp:1071
+#: src/gui/ConfigurationDialog.cpp:1072
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -1224,238 +1224,238 @@ msgstr ""
 "文件被损坏。"
 
 #. TRANSLATORS: Full phrase is "Algorithm of DeltaT"
-#: src/gui/ConfigurationDialog.cpp:1144
+#: src/gui/ConfigurationDialog.cpp:1145
 msgid "Algorithm of"
 msgstr "ΔT的算法"
 
-#: src/gui/ConfigurationDialog.cpp:1155
+#: src/gui/ConfigurationDialog.cpp:1156
 msgid "Without correction"
 msgstr "未校正"
 
-#: src/gui/ConfigurationDialog.cpp:1156
+#: src/gui/ConfigurationDialog.cpp:1157
 msgid "Schoch (1931)"
 msgstr "Schoch（1931年）"
 
-#: src/gui/ConfigurationDialog.cpp:1157
+#: src/gui/ConfigurationDialog.cpp:1158
 msgid "Clemence (1948)"
 msgstr "克莱曼斯"
 
-#: src/gui/ConfigurationDialog.cpp:1158
+#: src/gui/ConfigurationDialog.cpp:1159
 msgid "IAU (1952)"
 msgstr "IAU （1952年）"
 
-#: src/gui/ConfigurationDialog.cpp:1159
+#: src/gui/ConfigurationDialog.cpp:1160
 msgid "Astronomical Ephemeris (1960)"
 msgstr "星历表（1960年）"
 
-#: src/gui/ConfigurationDialog.cpp:1160
+#: src/gui/ConfigurationDialog.cpp:1161
 msgid "Tuckerman (1962, 1964) & Goldstine (1973)"
 msgstr "塔克曼（1962, 1964）和哥斯廷（1973）"
 
-#: src/gui/ConfigurationDialog.cpp:1161
+#: src/gui/ConfigurationDialog.cpp:1162
 msgid "Muller & Stephenson (1975)"
 msgstr "穆勒和斯蒂芬森（1975）"
 
-#: src/gui/ConfigurationDialog.cpp:1162
+#: src/gui/ConfigurationDialog.cpp:1163
 msgid "Stephenson (1978)"
 msgstr "斯蒂芬森（1978）"
 
-#: src/gui/ConfigurationDialog.cpp:1163
+#: src/gui/ConfigurationDialog.cpp:1164
 msgid "Schmadel & Zech (1979)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1164
+#: src/gui/ConfigurationDialog.cpp:1165
 msgid "Morrison & Stephenson (1982)"
 msgstr "莫里森和斯蒂芬森（1982）"
 
-#: src/gui/ConfigurationDialog.cpp:1165
+#: src/gui/ConfigurationDialog.cpp:1166
 msgid "Stephenson & Morrison (1984)"
 msgstr "斯蒂芬森和莫里森（1984）"
 
-#: src/gui/ConfigurationDialog.cpp:1166
+#: src/gui/ConfigurationDialog.cpp:1167
 msgid "Stephenson & Houlden (1986)"
 msgstr "斯蒂芬森和胡尔登（1986）"
 
-#: src/gui/ConfigurationDialog.cpp:1167
+#: src/gui/ConfigurationDialog.cpp:1168
 msgid "Espenak (1987, 1989)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1168
+#: src/gui/ConfigurationDialog.cpp:1169
 msgid "Borkowski (1988)"
 msgstr "博尔科夫斯基（1988）"
 
-#: src/gui/ConfigurationDialog.cpp:1169
+#: src/gui/ConfigurationDialog.cpp:1170
 msgid "Schmadel & Zech (1988)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1170
+#: src/gui/ConfigurationDialog.cpp:1171
 msgid "Chapront-Touze & Chapront (1991)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1171
+#: src/gui/ConfigurationDialog.cpp:1172
 msgid "Stephenson & Morrison (1995)"
 msgstr "斯蒂芬森和莫里森（1995）"
 
-#: src/gui/ConfigurationDialog.cpp:1172
+#: src/gui/ConfigurationDialog.cpp:1173
 msgid "Stephenson (1997)"
 msgstr "斯蒂芬森（1997）"
 
-#: src/gui/ConfigurationDialog.cpp:1174
+#: src/gui/ConfigurationDialog.cpp:1175
 msgid "Meeus (1998) (with Chapront, Chapront-Touze & Francou (1997))"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1175
+#: src/gui/ConfigurationDialog.cpp:1176
 msgid "JPL Horizons"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1176
+#: src/gui/ConfigurationDialog.cpp:1177
 msgid "Meeus & Simons (2000)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1177
+#: src/gui/ConfigurationDialog.cpp:1178
 msgid "Montenbruck & Pfleger (2000)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1178
+#: src/gui/ConfigurationDialog.cpp:1179
 msgid "Reingold & Dershowitz (2002, 2007)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1179
+#: src/gui/ConfigurationDialog.cpp:1180
 msgid "Morrison & Stephenson (2004, 2005)"
 msgstr "莫里森和斯蒂芬森（2004, 2005）"
 
-#: src/gui/ConfigurationDialog.cpp:1181
+#: src/gui/ConfigurationDialog.cpp:1182
 msgid "Espenak & Meeus (2006)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1182
+#: src/gui/ConfigurationDialog.cpp:1183
 msgid "Reijs (2006)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1183
+#: src/gui/ConfigurationDialog.cpp:1184
 msgid "Banjevic (2006)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1184
+#: src/gui/ConfigurationDialog.cpp:1185
 msgid "Islam, Sadiq & Qureshi (2008, 2013)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1185
+#: src/gui/ConfigurationDialog.cpp:1186
 #, qt-format
 msgid "Custom equation of %1T"
 msgstr "%1T 的自定义公式"
 
 #. TRANSLATORS: This message will be displayed for users if Stellarium can't get info about version from stellarium.org
-#: src/gui/HelpDialog.cpp:250
+#: src/gui/HelpDialog.cpp:251
 msgid "Oops... Stellarium can't check latest version."
 msgstr ""
 
 #. TRANSLATORS: This message will be displayed for users if current version of Stellarium is bigger than version from stellarium.org
-#: src/gui/HelpDialog.cpp:272
+#: src/gui/HelpDialog.cpp:273
 msgid "Looks like you are using the development version of Stellarium."
 msgstr ""
 
 #. TRANSLATORS: This message will be displayed for users if current version of Stellarium is smaller than version from stellarium.org
-#: src/gui/HelpDialog.cpp:277
+#: src/gui/HelpDialog.cpp:278
 #, qt-format
 msgid "This version of Stellarium is outdated! Latest version is %1."
 msgstr ""
 
 #. TRANSLATORS: This message will be displayed for users if current version of Stellarium is equals with version from stellarium.org
-#: src/gui/HelpDialog.cpp:283
+#: src/gui/HelpDialog.cpp:284
 msgid "This is latest stable version of Stellarium."
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:313
+#: src/gui/HelpDialog.cpp:314
 msgid "Stellarium Help"
 msgstr "Stellarium 帮助"
 
-#: src/gui/HelpDialog.cpp:318 src/gui/HelpDialog.cpp:323
+#: src/gui/HelpDialog.cpp:319 src/gui/HelpDialog.cpp:324
 msgid "Keys"
 msgstr "快捷键"
 
-#: src/gui/HelpDialog.cpp:320 src/gui/HelpDialog.cpp:392
+#: src/gui/HelpDialog.cpp:321 src/gui/HelpDialog.cpp:393
 msgid "Further Reading"
 msgstr "了解更多"
 
-#: src/gui/HelpDialog.cpp:327
+#: src/gui/HelpDialog.cpp:328
 msgid "Pan view around the sky"
 msgstr "移动画面"
 
-#: src/gui/HelpDialog.cpp:328
+#: src/gui/HelpDialog.cpp:329
 msgid "Arrow keys & left mouse drag"
 msgstr "方向键及鼠标左键拖曳"
 
-#: src/gui/HelpDialog.cpp:330
+#: src/gui/HelpDialog.cpp:331
 msgid "Zoom in/out"
 msgstr "放大/缩小"
 
-#: src/gui/HelpDialog.cpp:332
+#: src/gui/HelpDialog.cpp:333
 msgid "Page Up/Down"
 msgstr "上翻页/下翻页键"
 
-#: src/gui/HelpDialog.cpp:334
+#: src/gui/HelpDialog.cpp:335
 msgid "CTRL + Up/Down"
 msgstr "CTRL + Up/Down键"
 
-#: src/gui/HelpDialog.cpp:337
+#: src/gui/HelpDialog.cpp:338
 msgid "Select object"
 msgstr "选取物体"
 
-#: src/gui/HelpDialog.cpp:338
+#: src/gui/HelpDialog.cpp:339
 msgid "Left click"
 msgstr "按鼠标左键"
 
-#: src/gui/HelpDialog.cpp:346
+#: src/gui/HelpDialog.cpp:347
 msgid "Clear selection"
 msgstr "消除选取"
 
-#: src/gui/HelpDialog.cpp:347
+#: src/gui/HelpDialog.cpp:348
 msgid "Right click"
 msgstr "按鼠标右键"
 
-#: src/gui/HelpDialog.cpp:349
+#: src/gui/HelpDialog.cpp:350
 msgid "CTRL + Left click"
 msgstr "CTRL + 鼠标左键"
 
-#: src/gui/HelpDialog.cpp:354
+#: src/gui/HelpDialog.cpp:355
 #, qt-format
 msgid ""
 "Below are listed only the actions with assigned keys. Further actions may be "
 "available via the \"%1\" button."
 msgstr "以下只列出了被指派了快捷键的动作。更多动作可以通过“%1”按钮查看。"
 
-#: src/gui/HelpDialog.cpp:393
+#: src/gui/HelpDialog.cpp:394
 msgid ""
 "The following links are external web links, and will launch your web "
 "browser:\n"
 msgstr "以下为外部网络链接，浏览器将被启动:\n"
 
-#: src/gui/HelpDialog.cpp:394
+#: src/gui/HelpDialog.cpp:395
 msgid "The Stellarium User Guide"
 msgstr "Stellarium用户指南"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:398
+#: src/gui/HelpDialog.cpp:399
 msgid "{Frequently Asked Questions} about Stellarium.  Answers too."
 msgstr "{FAQ} -关于Stellarium 的常见问答"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:403
+#: src/gui/HelpDialog.cpp:404
 msgid ""
 "{The Stellarium Wiki} - General information.  You can also find user-"
 "contributed landscapes and scripts here."
 msgstr "{The Stellarium Wiki} - 常规信息，您也可以在此找到由其他用户制作的地景及脚本。"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:408
+#: src/gui/HelpDialog.cpp:409
 msgid ""
 "{Support ticket system} - if you need help using Stellarium, post a support "
 "request here and we'll try to help."
 msgstr "{技术支持系统} - 若您在使用 Stellarium 时需要帮忙，请至该处提出要求，我们会尽量帮忙。"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:413
+#: src/gui/HelpDialog.cpp:414
 msgid ""
 "{Bug reporting and feature request system} - if something doesn't work "
 "properly or is missing and is not listed in the tracker, you can open bug "
@@ -1463,59 +1463,59 @@ msgid ""
 msgstr "{Bug 报告及功能请求系统} - 如果出现某些功能异常、缺失或不在跟踪列表中，你可以在此处打开 bug 汇报。"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:418
+#: src/gui/HelpDialog.cpp:419
 msgid "{Forums} - discuss Stellarium with other users."
 msgstr "{讨论区} - 在此处和其他爱好者讨论Stellarium。"
 
-#: src/gui/HelpDialog.cpp:458
+#: src/gui/HelpDialog.cpp:459
 msgid "Developers"
 msgstr "开发者"
 
-#: src/gui/HelpDialog.cpp:459
+#: src/gui/HelpDialog.cpp:460
 #, qt-format
 msgid "Project coordinator & lead developer: %1"
 msgstr "计划协调&开发经理: %1"
 
-#: src/gui/HelpDialog.cpp:460
+#: src/gui/HelpDialog.cpp:461
 #, qt-format
 msgid "Doc author/developer: %1"
 msgstr "说明文件撰写: %1"
 
-#: src/gui/HelpDialog.cpp:461 src/gui/HelpDialog.cpp:462
-#: src/gui/HelpDialog.cpp:463 src/gui/HelpDialog.cpp:464
-#: src/gui/HelpDialog.cpp:465 src/gui/HelpDialog.cpp:472
-#: src/gui/HelpDialog.cpp:473 src/gui/HelpDialog.cpp:474
-#: src/gui/HelpDialog.cpp:475
+#: src/gui/HelpDialog.cpp:462 src/gui/HelpDialog.cpp:463
+#: src/gui/HelpDialog.cpp:464 src/gui/HelpDialog.cpp:465
+#: src/gui/HelpDialog.cpp:466 src/gui/HelpDialog.cpp:473
+#: src/gui/HelpDialog.cpp:474 src/gui/HelpDialog.cpp:475
+#: src/gui/HelpDialog.cpp:476
 #, qt-format
 msgid "Developer: %1"
 msgstr "开发者: %1"
 
-#: src/gui/HelpDialog.cpp:466
+#: src/gui/HelpDialog.cpp:467
 #, qt-format
 msgid "Continuous Integration: %1"
 msgstr "连续积分：%1"
 
-#: src/gui/HelpDialog.cpp:467 src/gui/HelpDialog.cpp:468
+#: src/gui/HelpDialog.cpp:468 src/gui/HelpDialog.cpp:469
 #, qt-format
 msgid "Tester: %1"
 msgstr "测试者：%1"
 
-#: src/gui/HelpDialog.cpp:469
+#: src/gui/HelpDialog.cpp:470
 msgid "Past Developers"
 msgstr "以往开发者："
 
-#: src/gui/HelpDialog.cpp:470
+#: src/gui/HelpDialog.cpp:471
 msgid ""
 "Several people have made significant contributions, but are no longer "
 "active. Their work has made a big difference to the project:"
 msgstr "有一些曾经作出杰出贡献的开发者已不再参与开发。他们的工作曾为这一项目带来巨大的进步："
 
-#: src/gui/HelpDialog.cpp:471
+#: src/gui/HelpDialog.cpp:472
 #, qt-format
 msgid "Graphic/other designer: %1"
 msgstr "视觉与其他设计: %1"
 
-#: src/gui/HelpDialog.cpp:476 src/gui/HelpDialog.cpp:477
+#: src/gui/HelpDialog.cpp:477 src/gui/HelpDialog.cpp:478
 #, qt-format
 msgid "OSX Developer: %1"
 msgstr "OSX开发: %1"
@@ -4736,7 +4736,7 @@ msgid "..."
 msgstr "..."
 
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:59
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:133
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:124
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:189
 msgid "Angle Measure"
 msgstr "角度测量"
@@ -4745,27 +4745,27 @@ msgstr "角度测量"
 msgid "Provides an angle measurement tool"
 msgstr "提供一个角度测量工具"
 
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:133
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:124
 msgid "Angle measure"
 msgstr "角度测量"
 
 #. TRANSLATORS: instructions for using the AngleMeasure plugin.
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:357
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:348
 msgid "The Angle Measure is enabled:"
 msgstr "角度测量工具已启用："
 
 #. TRANSLATORS: instructions for using the AngleMeasure plugin.
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:359
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:350
 msgid "Drag with the left button to measure, left-click to clear."
 msgstr "按下鼠标左键并拖动以测量，点击鼠标右键以清除测量。"
 
 #. TRANSLATORS: instructions for using the AngleMeasure plugin.
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:361
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:352
 msgid "Right-clicking changes the end point only."
 msgstr "点击鼠标右键以改变终点。"
 
 #. TRANSLATORS: PA is abbreviation for phrase "Position Angle"
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:363
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:354
 msgid "PA="
 msgstr ""
 
@@ -4930,16 +4930,16 @@ msgctxt "tab in plugin windows"
 msgid "About"
 msgstr "关于"
 
-#: plugins/CompassMarks/src/CompassMarks.cpp:57
-#: plugins/CompassMarks/src/CompassMarks.cpp:125
+#: plugins/CompassMarks/src/CompassMarks.cpp:55
+#: plugins/CompassMarks/src/CompassMarks.cpp:105
 msgid "Compass Marks"
 msgstr "罗盘标记"
 
-#: plugins/CompassMarks/src/CompassMarks.cpp:60
+#: plugins/CompassMarks/src/CompassMarks.cpp:58
 msgid "Displays compass bearing marks along the horizon"
 msgstr "在地平线上显示罗盘上的刻度标记"
 
-#: plugins/CompassMarks/src/CompassMarks.cpp:125
+#: plugins/CompassMarks/src/CompassMarks.cpp:105
 msgid "Compass marks"
 msgstr "罗盘标记"
 
@@ -6533,62 +6533,62 @@ msgid ""
 msgstr "这是一个为一些 Stellarium 配置文件中的杂项设置提供便捷访问的界面。您可以设置时区或是改变屏幕下方显示时间和日期的方式。"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:242
-#: plugins/Supernovae/src/Supernovae.cpp:710 plugins/Novae/src/Novae.cpp:707
+#: plugins/Supernovae/src/Supernovae.cpp:709 plugins/Novae/src/Novae.cpp:706
 msgid "January"
 msgstr "一月"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:243
-#: plugins/Supernovae/src/Supernovae.cpp:710 plugins/Novae/src/Novae.cpp:707
+#: plugins/Supernovae/src/Supernovae.cpp:709 plugins/Novae/src/Novae.cpp:706
 msgid "February"
 msgstr "二月"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:244
-#: plugins/Supernovae/src/Supernovae.cpp:710 plugins/Novae/src/Novae.cpp:707
+#: plugins/Supernovae/src/Supernovae.cpp:709 plugins/Novae/src/Novae.cpp:706
 msgid "March"
 msgstr "三月"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:245
-#: plugins/Supernovae/src/Supernovae.cpp:710 plugins/Novae/src/Novae.cpp:707
+#: plugins/Supernovae/src/Supernovae.cpp:709 plugins/Novae/src/Novae.cpp:706
 msgid "April"
 msgstr "四月"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:246
-#: plugins/Supernovae/src/Supernovae.cpp:710 plugins/Novae/src/Novae.cpp:707
+#: plugins/Supernovae/src/Supernovae.cpp:709 plugins/Novae/src/Novae.cpp:706
 msgid "May"
 msgstr "五月"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:247
-#: plugins/Supernovae/src/Supernovae.cpp:710 plugins/Novae/src/Novae.cpp:707
+#: plugins/Supernovae/src/Supernovae.cpp:709 plugins/Novae/src/Novae.cpp:706
 msgid "June"
 msgstr "六月"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:248
-#: plugins/Supernovae/src/Supernovae.cpp:710 plugins/Novae/src/Novae.cpp:707
+#: plugins/Supernovae/src/Supernovae.cpp:709 plugins/Novae/src/Novae.cpp:706
 msgid "July"
 msgstr "七月"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:249
-#: plugins/Supernovae/src/Supernovae.cpp:710 plugins/Novae/src/Novae.cpp:707
+#: plugins/Supernovae/src/Supernovae.cpp:709 plugins/Novae/src/Novae.cpp:706
 msgid "August"
 msgstr "八月"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:250
-#: plugins/Supernovae/src/Supernovae.cpp:710 plugins/Novae/src/Novae.cpp:707
+#: plugins/Supernovae/src/Supernovae.cpp:709 plugins/Novae/src/Novae.cpp:706
 msgid "September"
 msgstr "九月"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:251
-#: plugins/Supernovae/src/Supernovae.cpp:710 plugins/Novae/src/Novae.cpp:707
+#: plugins/Supernovae/src/Supernovae.cpp:709 plugins/Novae/src/Novae.cpp:706
 msgid "October"
 msgstr "十月"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:252
-#: plugins/Supernovae/src/Supernovae.cpp:710 plugins/Novae/src/Novae.cpp:707
+#: plugins/Supernovae/src/Supernovae.cpp:709 plugins/Novae/src/Novae.cpp:706
 msgid "November"
 msgstr "十一月"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:253
-#: plugins/Supernovae/src/Supernovae.cpp:710 plugins/Novae/src/Novae.cpp:707
+#: plugins/Supernovae/src/Supernovae.cpp:709 plugins/Novae/src/Novae.cpp:706
 msgid "December"
 msgstr "十二月"
 
@@ -8004,21 +8004,19 @@ msgid "Websites"
 msgstr ""
 
 #: plugins/Observability/src/Observability.cpp:65
-msgid "Observability analysis"
-msgstr "观测分析"
+msgid "Observability Analysis"
+msgstr ""
 
 #: plugins/Observability/src/Observability.cpp:68
 msgid ""
-"Reports an analysis of source observability (rise, set, and transit times), "
-"as well as the epochs of year when the source is best observed. It assumes "
-"that a source is observable if it is above the horizon during a fraction of "
-"the night. The plugin also gives the day for largest separation from the Sun "
-"and the days of Acronychal and Cosmical rise/set.<br><br> An explanation of "
-"the quantities shown by this script is given in the 'About' tab of the "
-"configuration window"
+"Displays an analysis of a selected object's observability (rise, set, and "
+"transit times) for the current date, as well as when it is observable "
+"through the year. An object is assumed to be observable if it is above the "
+"horizon during a fraction of the night. Also included are the dates of the "
+"largest separation from the Sun and acronychal and cosmical rising and "
+"setting. (Explanations are provided in the 'About' tab of the plugin's "
+"configuration window.)"
 msgstr ""
-"本插件提供观测条件（升起、落下和中天）的分析，以及目标在一年中的最佳观测时间。插件假定在夜间处于地平线上方的对象为可观测的。同时，插件还提供了目标对太阳的"
-"最大角距离（大距）、日没升/日出落(冲日)和偕日升/偕日落(合日)时间。<br><br>关于插件显示内容的具体说明可以在配置窗口的“关于”中找到。"
 
 #: plugins/Observability/src/Observability.cpp:209
 msgctxt "short month name"
@@ -9007,6 +9005,9 @@ msgstr ""
 #~ msgid "A Quintuple eclipse from Deimos 2027"
 #~ msgstr "2027年从火卫二看到的一次五重食"
 
+#~ msgid "Observability analysis"
+#~ msgstr "观测分析"
+
 #~ msgid "Show and edit all keyboard shortcuts"
 #~ msgstr "显示并编辑所有快捷键"
 
@@ -9086,6 +9087,18 @@ msgstr ""
 
 #~ msgid "Sun altitude at twilight"
 #~ msgstr "曙暮光太阳高度"
+
+#~ msgid ""
+#~ "Reports an analysis of source observability (rise, set, and transit times), "
+#~ "as well as the epochs of year when the source is best observed. It assumes "
+#~ "that a source is observable if it is above the horizon during a fraction of "
+#~ "the night. The plugin also gives the day for largest separation from the Sun "
+#~ "and the days of Acronychal and Cosmical rise/set.<br><br> An explanation of "
+#~ "the quantities shown by this script is given in the 'About' tab of the "
+#~ "configuration window"
+#~ msgstr ""
+#~ "本插件提供观测条件（升起、落下和中天）的分析，以及目标在一年中的最佳观测时间。插件假定在夜间处于地平线上方的对象为可观测的。同时，插件还提供了目标对太阳的"
+#~ "最大角距离（大距）、日没升/日出落(冲日)和偕日升/偕日落(合日)时间。<br><br>关于插件显示内容的具体说明可以在配置窗口的“关于”中找到。"
 
 #~ msgid "Render Solar Shadows"
 #~ msgstr "渲染日光阴影"
