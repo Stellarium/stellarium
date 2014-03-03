@@ -58,7 +58,7 @@ private:
 	static QFile logFile;
 	static QString log;
 	
-	static QString getMsvcVersion(int ver);
+	static QString getMsvcVersionString(int ver);
 };
 
 #endif // STELLOGGER_HPP

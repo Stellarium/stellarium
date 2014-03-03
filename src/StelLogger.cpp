@@ -266,9 +266,9 @@ void StelLogger::writeLog(QString msg)
 	log += msg;
 }
 
-QString StelLogger::getMsvcVersion(int ver)
+QString StelLogger::getMsvcVersionString(int ver)
 {
-	QString version = "";
+	QString version;
 	switch(ver)
 	{
 		case 1310:
@@ -290,7 +290,7 @@ QString StelLogger::getMsvcVersion(int ver)
 			version = "MSVC++ 12.0 (Visual Studio 2013)";
 			break;
 		default:
-			version = "unknown version";
+			version = "unknown MSVC++ version";
 	}
 	return version;
 }
