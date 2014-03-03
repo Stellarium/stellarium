@@ -144,6 +144,9 @@
       </property>
       <item>
        <widget class="QTableWidget" name="tableWidget">
+        <property name="focusPolicy">
+         <enum>Qt::NoFocus</enum>
+        </property>
         <property name="editTriggers">
          <set>QAbstractItemView::NoEditTriggers</set>
         </property>
@@ -153,8 +156,11 @@
         <property name="selectionBehavior">
          <enum>QAbstractItemView::SelectRows</enum>
         </property>
+        <property name="showGrid">
+         <bool>false</bool>
+        </property>
         <property name="gridStyle">
-         <enum>Qt::SolidLine</enum>
+         <enum>Qt::NoPen</enum>
         </property>
         <property name="columnCount">
          <number>3</number>
