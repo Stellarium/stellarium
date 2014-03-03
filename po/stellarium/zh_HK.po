@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-03-01 11:46+0200\n"
-"PO-Revision-Date: 2014-03-01 14:31+0000\n"
+"PO-Revision-Date: 2014-03-02 09:36+0000\n"
 "Last-Translator: henrysky <Unknown>\n"
 "Language-Team: Chinese (Hong Kong) <zh_HK@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-03-02 04:58+0000\n"
+"X-Launchpad-Export-Date: 2014-03-03 05:26+0000\n"
 "X-Generator: Launchpad (build 16948)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:107 src/core/modules/StarMgr.cpp:338
@@ -644,6 +644,9 @@ msgid ""
 "Henriksson in his article <em>Einstein's Theory of Relativity Confirmed by "
 "Ancient Solar Eclipses</em> (%1). See for more info %2here%3."
 msgstr ""
+"這個有歷史意義的公式是由C. Schoch 於1931年得到的, 被G. Henriksson "
+"在他的文章《古代的日食證明了愛因斯坦的相對論》[<em>Einstein's Theory of Relativity Confirmed by "
+"Ancient Solar Eclipses</em>](%1). 要了解更多信息，請點擊%2這裡%3."
 
 #: src/core/StelCore.cpp:1480
 #, qt-format
@@ -651,6 +654,8 @@ msgid ""
 "This empirical equation was published by G. M. Clemence in the article "
 "<em>On the system of astronomical constants</em> (%1)."
 msgstr ""
+"這個經驗公式由GM Clemence 在文章《關於天文常數係統》[<em>On the system of astronomical "
+"constants</em>] (%1)中公佈."
 
 #: src/core/StelCore.cpp:1483
 #, qt-format
@@ -660,6 +665,9 @@ msgid ""
 "<em>Astronomical Formulae for Calculators</em>. It was also adopted in the "
 "PC program SunTracker Pro."
 msgstr ""
+"此公式基於Spencer Jones (%1)對1650年後期太陽、月球以及行星觀測的研究. 並被Jean Meeus "
+"在他的《用於計算器的天文學公式》[<em>Astronomical Formulae for Calculators</em> ] "
+"中使用。計算機程序SunTracker Pro 也使用了這一公式."
 
 #: src/core/StelCore.cpp:1487
 msgid ""
@@ -667,6 +675,9 @@ msgid ""
 "adopted in the <em>Astronomical Ephemeris</em> and in the <em>Canon of Solar "
 "Eclipses</em> by Mucke & Meeus (1983)."
 msgstr ""
+"這是一個由被Mucke 和Meeus 於1983年在《星曆表》[<em>Astronomical "
+"Ephemeris</em>]和《日食的法規》[<em>Canon of Solar Eclipses</em>]中使用的IAU (1952) "
+"公式稍加修改之後的版本."
 
 #: src/core/StelCore.cpp:1491
 msgid ""
@@ -832,9 +843,8 @@ msgid ""
 "solar, lunar and planetary ephemeris program SOLEX."
 msgstr ""
 "此修正由 F. Espenak and J. Meeus提供, 基於 Morrison & Stephenson (2004) "
-"並通過由1600至2000年列表值多項式擬合, 用作%1NASA Eclipse Web Site%2 及他們的 <em>Five Millennium "
-"Canon of Solar Eclipses: -1900 to +3000</em> (2006). 此方程式亦用在太陽, "
-"月球及行星星歷軟件SOLEX"
+"並通過由1600至2000年列表值多項式擬合, 用作%1NASA日月蝕信息網站%2 及他們的 <em>五千年日食寶典: -1900 到 "
+"+3000</em> (2006). 此方程式亦用在太陽, 月球及行星星歷軟件SOLEX"
 
 #: src/core/StelCore.cpp:1552
 msgid "Used by default."
@@ -894,12 +904,12 @@ msgstr "典型1秒準確度和沒有值超出範圍"
 #: src/core/StelCore.cpp:1708
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2, %3."
-msgstr ""
+msgstr "有效使日期用範: 在%1 及 %2, %3之間."
 
 #: src/core/StelCore.cpp:1710
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2."
-msgstr ""
+msgstr "有效使日期用範: 在%1 及 %2之間."
 
 #: src/core/StelProjector.cpp:129
 msgid "Maximum FOV: "
@@ -1314,7 +1324,7 @@ msgstr "Islam, Sadiq & Qureshi (2008, 2013)"
 #: src/gui/ConfigurationDialog.cpp:1186
 #, qt-format
 msgid "Custom equation of %1T"
-msgstr "自定公式 %1T"
+msgstr "自定 %1T公式"
 
 #. TRANSLATORS: This message will be displayed for users if Stellarium can't get info about version from stellarium.org
 #: src/gui/HelpDialog.cpp:251
@@ -2460,12 +2470,12 @@ msgstr "從火星看地球活動"
 #. TRANSLATORS: Name of script
 #: src/translations.h:263
 msgid "Earth Greatest Elongations and Brilliancies from Mars"
-msgstr ""
+msgstr "從火星看地球最大距角的精彩"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:265
 msgid "Earth and Mars Greatest Elongations from Jupiter"
-msgstr ""
+msgstr "從木星看火星及地球最大距角"
 
 #. TRANSLATORS: Description of the landscape tour script.
 #: src/translations.h:271
@@ -2571,7 +2581,7 @@ msgstr "在澳洲悉尼所見的金星凌日, 2012年6月6日"
 msgid ""
 "A demonstration of the analemma - the path of the Sun across the sky during "
 "the year."
-msgstr ""
+msgstr "日行跡演示 - 一年當中每天同一時刻太陽所在位置描出的軌跡."
 
 #: src/translations.h:292
 msgid ""
@@ -2581,11 +2591,11 @@ msgstr ""
 
 #: src/translations.h:293
 msgid "Earth Greatest Elongations and Brilliancies from Mars 2000-3000"
-msgstr ""
+msgstr "從火星2000-3000年看地球最大距角的精彩"
 
 #: src/translations.h:294
 msgid "Earth Greatest Elongations from Jupiter 2000-3000"
-msgstr ""
+msgstr "從木星2000-3000年看地球最大距角"
 
 #: src/translations.h:298
 msgid "Andorra"
@@ -4543,7 +4553,7 @@ msgstr "在啟動時載入"
 
 #: src/ui_configurationDialog.h:1169
 msgid "configure"
-msgstr ""
+msgstr "設定"
 
 #: src/ui_configurationDialog.h:1174
 msgid "Main"
@@ -4833,7 +4843,7 @@ msgstr ""
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:181
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:263
 msgid "Pulsars Configuration"
-msgstr ""
+msgstr "脈衝星插件設定"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:182
 msgid "Angle Measure Plug-in Configuration"
@@ -6300,7 +6310,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:306
 msgid "Configure &telescopes..."
-msgstr ""
+msgstr "設定&望遠鏡"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:470
 msgid "Telescope Configuration"
@@ -6668,7 +6678,7 @@ msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:385
 msgid "Use system settings (default)"
-msgstr ""
+msgstr "使用系統設定 (預設)"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:386
 msgid "Universal Coordinated Time (UTC)"
@@ -6680,7 +6690,7 @@ msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:389
 msgid "User-defined:"
-msgstr ""
+msgstr "用戶定義:"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:391
 msgid "Any changes will take effect the next time Stellarium is started."
@@ -6868,11 +6878,11 @@ msgstr ""
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:476
 msgid "Load default configuration"
-msgstr ""
+msgstr "載入預設設定"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:477
 msgid "Save current configuration"
-msgstr ""
+msgstr "儲存預設設定"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:480
 msgid "Shut down"
@@ -7052,7 +7062,7 @@ msgid ""
 "This plug-in uses a custom Solar System configuration file. If something "
 "goes wrong and Stellarium crashes and/or doesn't start, you can delete "
 "manually that file from:"
-msgstr ""
+msgstr "此插件使用一個自訂太陽系設定檔案, 如果有甚麼問題或Stellarium異常運作, 你可以在這手動刪除檔案:"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:297
 msgid ""
@@ -7071,7 +7081,7 @@ msgstr "複製/替換太陽系檔"
 msgid ""
 "You can create a backup copy of the custom Solar System configuration file "
 "in a convenient location, or replace it with such a copy."
-msgstr ""
+msgstr "你可以在方便位置新增一個自定太陽系設定檔案備份副本, 又或是取代現有的."
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:301
 msgid "Copy the Solar System file..."
@@ -7283,7 +7293,7 @@ msgstr ""
 msgid ""
 "This plugin uses a very simple model for calculation of light curves for "
 "novae stars."
-msgstr ""
+msgstr "此插件使用一個簡單的模型去計算新星的光度變化."
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:120
 #, qt-format
@@ -8062,11 +8072,11 @@ msgstr ""
 
 #: plugins/Observability/src/Observability.cpp:222
 msgid "Circumpolar."
-msgstr ""
+msgstr "極地附近."
 
 #: plugins/Observability/src/Observability.cpp:223
 msgid "No rise."
-msgstr ""
+msgstr "沒有升."
 
 #: plugins/Observability/src/Observability.cpp:224
 #, qt-format
@@ -8088,7 +8098,7 @@ msgstr ""
 
 #: plugins/Observability/src/Observability.cpp:228
 msgid "Greatest elongation: "
-msgstr ""
+msgstr "最大距角: "
 
 #: plugins/Observability/src/Observability.cpp:229
 msgid "Largest Sun separation: "
@@ -8101,19 +8111,19 @@ msgstr ""
 
 #: plugins/Observability/src/Observability.cpp:232
 msgid "Acronychal rise/set"
-msgstr ""
+msgstr "日沒升/落"
 
 #: plugins/Observability/src/Observability.cpp:233
 msgid "No Acronychal rise/set."
-msgstr ""
+msgstr "沒有日沒升/落"
 
 #: plugins/Observability/src/Observability.cpp:234
 msgid "Cosmical rise/set"
-msgstr ""
+msgstr "偕日升/偕日落"
 
 #: plugins/Observability/src/Observability.cpp:235
 msgid "No Cosmical rise/set."
-msgstr ""
+msgstr "沒有偕日升/偕日落落."
 
 #: plugins/Observability/src/Observability.cpp:236
 msgid "Observable during the whole year."
@@ -8174,7 +8184,7 @@ msgstr ""
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:103
 msgid "Explanation of some parameters"
-msgstr ""
+msgstr "一些參數說明"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:104
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:148
@@ -8216,7 +8226,7 @@ msgstr ""
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:109
 msgid "Acronychal/Cosmical rise/set:"
-msgstr ""
+msgstr "日沒/偕日 升/落:"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:109
 msgid ""
@@ -8249,7 +8259,7 @@ msgstr ""
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:111
 msgid "Nights with source above horizon:"
-msgstr ""
+msgstr "天體在地平線上的夜晚:"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:111
 msgid ""
@@ -8279,7 +8289,7 @@ msgstr "滿月:"
 msgid ""
 "When the Moon is selected, the program can compute the exact closest dates "
 "of the Moon's opposition to the Sun."
-msgstr ""
+msgstr "當月亮被選時, Stellarium可以計算出月球背對太陽確切最接近的日期."
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:148
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:152
