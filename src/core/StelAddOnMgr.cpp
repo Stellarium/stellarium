@@ -322,6 +322,8 @@ void StelAddOnMgr::installAddOn(AddOn* addon, const QStringList selectedFiles, b
 		addon->setStatus(AddOn::Installing);
 		emit (dataUpdated(addon));
 		unzip(*addon, selectedFiles);
+		// remove zip archive from ~/.stellarium/addon/
+		QFile(addon.getDownloadFilepath()).remove();
 	}
 
 	// require restart
