@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-03-01 11:46+0200\n"
-"PO-Revision-Date: 2014-02-16 11:44+0000\n"
+"PO-Revision-Date: 2014-03-03 05:08+0000\n"
 "Last-Translator: 375gnu <Unknown>\n"
 "Language-Team: Belarusian <i18n@mova.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-03-02 04:42+0000\n"
+"X-Launchpad-Export-Date: 2014-03-03 05:26+0000\n"
 "X-Generator: Launchpad (build 16948)\n"
 "Language: be\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -1899,7 +1899,7 @@ msgstr "Гарвардзкі ўнівэрсытэт (ЗША)"
 
 #: src/gui/SearchDialog.cpp:616
 msgid "Paste and Search"
-msgstr ""
+msgstr "Уставіць і шукаць"
 
 #: src/gui/ShortcutsDialog.cpp:488
 msgid "Action"
@@ -3775,7 +3775,7 @@ msgstr "&Назва файла:"
 
 #: src/translations.h:560
 msgid "Copy &Link Location"
-msgstr ""
+msgstr "Капіяваць месца &лучыва"
 
 #: src/ui_helpDialogGui.h:277 src/ui_helpDialogGui.h:283
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:417
@@ -3808,6 +3808,8 @@ msgid ""
 "Standard list of locations is contains only English names (without "
 "diacritics!)"
 msgstr ""
+"Стандартны сьпіс мясцовасьцяў утрымлівае толькі анґельскія назвы (без "
+"дыякрытыкі!)"
 
 #: src/ui_locationDialogGui.h:399
 msgid "Current location information"
@@ -4913,16 +4915,16 @@ msgstr "Пстрык правай зьмяняе толькі канцавы п�
 #. TRANSLATORS: PA is abbreviation for phrase "Position Angle"
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:354
 msgid "PA="
-msgstr ""
+msgstr "ПВ="
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:70
 msgid "Angle Measure Plug-in"
-msgstr ""
+msgstr "Дадатак «Мераньне вуглоў»"
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:73
 #: plugins/Oculars/src/gui/OcularDialog.cpp:486
 msgid "Contributors"
-msgstr ""
+msgstr "Укладальнікі"
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:76
 msgid ""
@@ -4930,6 +4932,9 @@ msgid ""
 "angular distance between two points on the sky (and calculation of position "
 "angle between those two points)."
 msgstr ""
+"Дадатак «Мераньне вуглоў» — маленькая прылада, якая выкарыстоўваецца для "
+"мераньня вуглавой адлегласьці між двума пунктамі на небе (і разьліку "
+"пазыцыйнаа вугла між гэтымі двума пунктамі)."
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:77
 msgid ""
@@ -5011,6 +5016,8 @@ msgid ""
 "If you want to read full information about this plugin and its history, you "
 "can %1get info here%2."
 msgstr ""
+"Калі жадаеш прачытаць усе зьвесткі пра гэты дадатак і ягоную гісторыю, то "
+"зьвесткі %1можна атрымаць тут%2."
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:181
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:263
@@ -5019,7 +5026,7 @@ msgstr "Настаўленьні пульсараў"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:182
 msgid "Angle Measure Plug-in Configuration"
-msgstr ""
+msgstr "Настаўленьні дадатку «Мераньне вуглоў»"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:184
 #: plugins/Satellites/src/ui_satellitesDialog.h:716
@@ -5034,11 +5041,11 @@ msgstr "Настройкі"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:185
 msgid "Use dms format for angles"
-msgstr ""
+msgstr "Паказваць вуглы ў фармаце ГМС"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:186
 msgid "Show position angle"
-msgstr ""
+msgstr "Паказваць пазыцыйны вугал"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:187
 #: plugins/Satellites/src/ui_satellitesDialog.h:714
@@ -5553,10 +5560,11 @@ msgstr "Паказваць ПЗ ПЗС у ґрадусах і мінутах"
 msgid ""
 "Mark it if you want value of FOV is same like at the startup of Stellarium."
 msgstr ""
+"Пазнач, калі жадаеш мець значэньне ПЗ як на пачатку працы Stellarium."
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1069
 msgid "Restore FOV to initial values"
-msgstr ""
+msgstr "Вернуць ПЗ да пачатковага значэньня"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1070
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:220
@@ -8245,7 +8253,7 @@ msgstr "Архіў экзаплянэт NASA"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:182
 msgid "IAU Commission 53: Extrasolar Planets"
-msgstr ""
+msgstr "Камісія 53 МАС: пазасонечныя плянэты"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:183
 msgid "ExoMol"
