@@ -531,9 +531,10 @@ void Satellite::draw(StelCore* core, StelPainter& painter, float)
 
 	XYZ = getJ2000EquatorialPos(core);
 	StelSkyDrawer* sd = core->getSkyDrawer();
-	Vec3f drawColor;
-	(visibility==RADAR_NIGHT) ? drawColor = Vec3f(0.2f,0.2f,0.2f) : drawColor = hintColor;
-	glColor4f(drawColor[0],drawColor[1],drawColor[2], Satellite::hintBrightness);
+	Vec3f drawColor(0.2f,0.2f,0.2f);
+	if (visibility != RADAR_NIGHT)
+		drawColor = hintColor;
+	painter.setColor(drawColor[0], drawColor[1], drawColor[2], hintBrightness);
 
 	StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
 
