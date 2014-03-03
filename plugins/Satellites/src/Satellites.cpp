@@ -1335,7 +1335,7 @@ void Satellites::updateFromFiles(QStringList paths, bool deleteFiles)
 		QFile tleFile(tleFilePath);
 		if (tleFile.open(QIODevice::ReadOnly|QIODevice::Text))
 		{
-			parseTleFile(tleFile, newTleSets);
+			parseTleFile(tleFile, newTleSets, autoAddEnabled);
 			tleFile.close();
 
 			if (deleteFiles)
