@@ -18,6 +18,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 */
 
+#include "config.h"
+
 #include <QDebug>
 #include <QTimer>
 #include <QDateTime>
@@ -179,7 +181,7 @@ void ExoplanetsDialog::setWebsitesHtml(void)
 	html += QString("<li><a href='%1'>%2</a></li>").arg("http://exep.jpl.nasa.gov/").arg(q_("NASA's Exoplanet Exploration Program"));
 	html += QString("<li><a href='%1'>%2</a></li>").arg("http://www.astro.psu.edu/users/alex/pulsar_planets.htm").arg(q_("Pulsar planets"));
 	html += QString("<li><a href='%1'>%2</a></li>").arg("http://exoplanetarchive.ipac.caltech.edu/").arg(q_("The NASA Exoplanet Archive"));
-	html += QString("<li><a href='%1'>%2</a></li>").arg("http://www.dtm.ciw.edu/boss/c53index.html").arg(q_("IAU Comission 53: Extrasolar Planets"));
+	html += QString("<li><a href='%1'>%2</a></li>").arg("http://www.dtm.ciw.edu/boss/c53index.html").arg(q_("IAU Commission 53: Extrasolar Planets"));
 	html += QString("<li><a href='%1'>%2</a></li>").arg("http://www.exomol.com/").arg(q_("ExoMol"));
 	html += QString("<li><a href='%1'>%2</a></li>").arg("http://www.hzgallery.org/").arg(q_("The Habitable Zone Gallery"));
 	html += QString("<li><a href='%1'>%2</a></li>").arg("http://planetquest.jpl.nasa.gov/").arg(q_("PlanetQuest - The Search for Another Earth"));

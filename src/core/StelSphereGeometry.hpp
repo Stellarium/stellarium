@@ -20,15 +20,18 @@
 #ifndef _STELSPHEREGEOMETRY_HPP_
 #define _STELSPHEREGEOMETRY_HPP_
 
+#include "config.h"
+
+#include "OctahedronPolygon.hpp"
+#include "StelVertexArray.hpp"
+#include "VecMath.hpp"
+
 #include <QVector>
 #include <QVariant>
 #include <QDebug>
 #include <QSharedPointer>
 #include <QVarLengthArray>
 #include <QDataStream>
-#include "VecMath.hpp"
-#include "OctahedronPolygon.hpp"
-#include "StelVertexArray.hpp"
 
 #include <stdio.h>
 

@@ -20,6 +20,8 @@
 #ifndef _STELOBJECTTYPE_HPP_
 #define _STELOBJECTTYPE_HPP_
 
+#include "config.h"
+
 #include <QSharedPointer>
 
 //! Special version of QSharedPointer which by default doesn't delete the referenced pointer when

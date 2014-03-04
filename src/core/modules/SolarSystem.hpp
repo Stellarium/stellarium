@@ -25,10 +25,11 @@
 #undef sun
 #endif
 
-#include <QFont>
 #include "StelObjectModule.hpp"
 #include "StelTextureTypes.hpp"
 #include "Planet.hpp"
+
+#include <QFont>
 
 class Orbit;
 class StelTranslator;

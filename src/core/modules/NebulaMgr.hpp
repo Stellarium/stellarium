@@ -21,14 +21,15 @@
 #ifndef _NEBULAMGR_HPP_
 #define _NEBULAMGR_HPP_
 
-#include <QString>
-#include <QStringList>
-#include <QFont>
 #include "StelObjectType.hpp"
 #include "StelFader.hpp"
 #include "StelSphericalIndex.hpp"
 #include "StelObjectModule.hpp"
 #include "StelTextureTypes.hpp"
+
+#include <QString>
+#include <QStringList>
+#include <QFont>
 
 class Nebula;
 class StelTranslator;
