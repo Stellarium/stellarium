@@ -227,9 +227,16 @@ void MeteorShowerDialog::selectEvent(const QModelIndex &modelIndex)
 	QDateTime qDateTime = QDateTime::fromString(dateString, "dd/MMM/yyyy");
 	core->setJDay(StelUtils::qDateTimeToJd(qDateTime));
 
-	//Select
+	//Select object
 	QString namel18n = listModel->data( listModel->index(modelIndex.row(),ColumnName) ).toString();
-	GETSTELMODULE(StelObjectMgr)->findAndSelectI18n(namel18n);
+	StelObjectMgr* objectMgr = GETSTELMODULE(StelObjectMgr);
+	if((objectMgr->findAndSelectI18n(namel18n) || objectMgr->findAndSelect(namel18n)) && plugin->getFlagShowMS())
+	{
+		//Move to object
+		StelMovementMgr* mvmgr = GETSTELMODULE(StelMovementMgr);
+		mvmgr->moveToObject(objectMgr->getSelectedObject()[0], mvmgr->getAutoMoveDuration());
+		mvmgr->setFlagTracking(true);
+	}
 }
 
 void MeteorShowerDialog::refreshRangeDates(void)
