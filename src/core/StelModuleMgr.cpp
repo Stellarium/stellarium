@@ -60,9 +60,9 @@ void StelModuleMgr::update()
 void StelModuleMgr::registerModule(StelModule* m, bool fgenerateCallingLists)
 {
 	QString name = m->objectName();
-	if (modules.find(name) != modules.end())
+	if (modules.contains(name))
 	{
-		qWarning() << "Module \"" << name << "\" is already loaded.";
+		qWarning() << "Module" << name << "is already loaded.";
 		return;
 	}
 	modules.insert(name, m);
@@ -80,7 +80,7 @@ void StelModuleMgr::unloadModule(const QString& moduleID, bool alsoDelete)
 	StelModule* m = getModule(moduleID);
 	if (!m)
 	{
-		qWarning() << "Module \"" << moduleID << "\" is not loaded.";
+		qWarning() << "Module" << moduleID << "is not loaded.";
 		return;
 	}
 	modules.remove(moduleID);
@@ -98,14 +98,13 @@ void StelModuleMgr::unloadModule(const QString& moduleID, bool alsoDelete)
 *************************************************************************/
 StelModule* StelModuleMgr::getModule(const QString& moduleID, bool noWarning)
 {
-	QMap<QString, StelModule*>::ConstIterator iter = modules.find(moduleID);
-	if (iter==modules.constEnd())
+	StelModule* module = modules.value(moduleID, NULL);
+	if (module == NULL)
 	{
 		if (noWarning==false)
-			qWarning() << "Warning can't find module called " << moduleID << ".";
-		return NULL;
+			qWarning() << "Unable to find module called" << moduleID;
 	}
-	return iter.value();
+	return module;
 }
 
 
@@ -120,12 +119,12 @@ StelModule* StelModuleMgr::loadPlugin(const QString& moduleID)
 		{
 			Q_ASSERT(desc.pluginInterface);
 			StelModule* sMod = desc.pluginInterface->getStelModule();
-			qDebug() << "Loaded plugin " << moduleID << ".";
+			qDebug() << "Loaded plugin" << moduleID;
 			pluginDescriptorList[moduleID].loaded=true;
 			return sMod;
 		}
 	}
-	qWarning() << "Can't find plugin called " << moduleID;
+	qWarning() << "Unable to find plugin called" << moduleID;
 	return NULL;
 }
 
@@ -149,7 +148,7 @@ void StelModuleMgr::unloadAllPlugins()
 		if (d.loaded==false)
 			continue;
 		unloadModule(d.info.id, true);
-		qDebug() << "Unloaded plugin " << d.info.id << ".";
+		qDebug() << "Unloaded plugin" << d.info.id;
 	
 	}
 	// Call update now to make sure that all references to the now deleted plugins modules
@@ -235,16 +234,16 @@ QList<StelModuleMgr::PluginDescriptor> StelModuleMgr::getPluginsList()
 		QPluginLoader loader(moduleFullPath);
 		if (!loader.load())
 		{
-			qWarning() << "Couldn't load the dynamic library: " << QDir::toNativeSeparators(moduleFullPath) << ": " << loader.errorString();
-			qWarning() << "Plugin " << dir << " will not be loaded.";
+			qWarning() << "Couldn't load the dynamic library:" << QDir::toNativeSeparators(moduleFullPath) << ": " << loader.errorString();
+			qWarning() << "Plugin" << dir << "will not be loaded.";
 			continue;
 		}
 
 		QObject* obj = loader.instance();
 		if (!obj)
 		{
-			qWarning() << "Couldn't open the dynamic library: " << QDir::toNativeSeparators(moduleFullPath) << ": " << loader.errorString();
-			qWarning() << "Plugin " << dir << " will not be open.";
+			qWarning() << "Couldn't open the dynamic library:" << QDir::toNativeSeparators(moduleFullPath) << ": " << loader.errorString();
+			qWarning() << "Plugin" << dir << "will not be open.";
 			continue;
 		}
 
@@ -260,12 +259,16 @@ QList<StelModuleMgr::PluginDescriptor> StelModuleMgr::getPluginsList()
 
 	// Load for each plugin if it should be loaded at startup
 	QSettings* conf = StelApp::getInstance().getSettings();
+	Q_ASSERT(conf);
+	conf->beginGroup("plugins_load_at_startup");
 	for (QMap<QString, StelModuleMgr::PluginDescriptor>::Iterator iter=pluginDescriptorList.begin();iter!=pluginDescriptorList.end();++iter)
 	{
-		if (!conf->contains("plugins_load_at_startup/"+iter.key()))
-			conf->setValue("plugins_load_at_startup/"+iter.key(), iter.value().info.startByDefault);
-		iter->loadAtStartup = conf->value("plugins_load_at_startup/"+iter.key()).toBool();
+		bool startByDefault = iter.value().info.startByDefault;
+		iter->loadAtStartup = conf->value(iter.key(), startByDefault).toBool();
+		// Save the value in case no such key exists
+		conf->setValue(iter.key(), iter->loadAtStartup);
 	}
+	conf->endGroup();
 
 	pluginDescriptorListLoaded = true;
 	return pluginDescriptorList.values();

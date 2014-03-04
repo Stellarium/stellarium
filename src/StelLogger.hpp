@@ -20,6 +20,8 @@
 #ifndef STELLOGGER_HPP
 #define STELLOGGER_HPP
 
+#include "config.h"
+
 #include <QString>
 #include <QFile>
 
@@ -55,6 +57,8 @@ public:
 private:
 	static QFile logFile;
 	static QString log;
+	
+	static QString getMsvcVersionString(int ver);
 };
 
 #endif // STELLOGGER_HPP

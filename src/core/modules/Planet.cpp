@@ -17,12 +17,6 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#include <iomanip>
-#include <QTextStream>
-#include <QString>
-#include <QDebug>
-#include <QVarLengthArray>
-
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelFileMgr.hpp"
@@ -41,6 +35,12 @@
 #include "StelPainter.hpp"
 #include "StelTranslator.hpp"
 #include "StelUtils.hpp"
+
+#include <iomanip>
+#include <QTextStream>
+#include <QString>
+#include <QDebug>
+#include <QVarLengthArray>
 
 Vec3f Planet::labelColor = Vec3f(0.4,0.4,0.8);
 Vec3f Planet::orbitColor = Vec3f(1,0.6,1);
@@ -150,8 +150,8 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 		double ecl= ssystem->getEarth()->getRotObliquity(core->getJDay());
 		if (core->getCurrentLocation().planetName=="Earth")
 			oss << q_("Obliquity (of date, for Earth): %1").arg(StelUtils::radToDmsStr(ecl, true)) << "<br>";
-		if (englishName!="Sun")
-			oss << q_("Obliquity (of date): %1").arg(StelUtils::radToDmsStr(getRotObliquity(core->getJDay()), true)) << "<br>";
+		//if (englishName!="Sun")
+		//	oss << q_("Obliquity (of date): %1").arg(StelUtils::radToDmsStr(getRotObliquity(core->getJDay()), true)) << "<br>";
 	}
 
 	if (flags&Distance)

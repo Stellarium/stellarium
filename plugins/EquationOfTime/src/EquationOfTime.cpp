@@ -80,7 +80,7 @@ void EquationOfTime::init()
 
 	if (!conf->childGroups().contains("EquationOfTime"))
 	{
-		qDebug() << "EquationOfTime::init() no EquationOfTime section exists in main config file - creating with defaults";
+		qDebug() << "EquationOfTime: no EquationOfTime section exists in main config file - creating with defaults";
 		restoreDefaultConfigIni();
 	}
 

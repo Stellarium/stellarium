@@ -20,23 +20,6 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#include <QTextStream>
-#include <QFile>
-#include <QSettings>
-#include <QString>
-#include <QRegExp>
-#include <QDebug>
-#include <QFileInfo>
-#include <QDir>
-#include <QCryptographicHash>
-
-#include <errno.h>
-#ifndef Q_OS_WIN
-#include <unistd.h>
-#else
-#include <winsock2.h>
-#include "kdewin32/unistd.h"
-#endif
 
 #include "StelProjector.hpp"
 #include "StarMgr.hpp"
@@ -63,6 +46,24 @@
 #include "StelSkyDrawer.hpp"
 #include "RefractionExtinction.hpp"
 
+#include <QTextStream>
+#include <QFile>
+#include <QSettings>
+#include <QString>
+#include <QRegExp>
+#include <QDebug>
+#include <QFileInfo>
+#include <QDir>
+#include <QCryptographicHash>
+
+#ifndef Q_OS_WIN
+#include <unistd.h>
+#else
+#include <winsock2.h>
+#include "kdewin32/unistd.h"
+#endif
+
+#include <errno.h>
 
 static QStringList spectral_array;
 static QStringList component_array;

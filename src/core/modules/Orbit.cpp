@@ -13,15 +13,15 @@
 // as published by the Free Software Foundation; either version 2
 // of the License, or (at your option) any later version.
 
+#include "Solve.hpp"
+#include "Orbit.hpp"
+#include "StelUtils.hpp"
+
 #include <functional>
 #include <algorithm>
 #include <cmath>
 #include <cstring>
 #include <QDebug>
-
-#include "Solve.hpp"
-#include "Orbit.hpp"
-#include "StelUtils.hpp"
 
 using namespace std;
 

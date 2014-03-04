@@ -78,7 +78,7 @@ StelPluginInfo OcularsStelPluginInterface::getPluginInfo() const
 	StelPluginInfo info;
 	info.id = "Oculars";
 	info.displayedName = N_("Oculars");
-	info.authors = "Timothy Reaves, Bogdan Marinov";
+	info.authors = "Timothy Reaves";
 	info.contact = "treaves@silverfieldstech.com";
 	info.description = N_("Shows the sky as if looking through a telescope eyepiece. (Only magnification and field of view are simulated.) It can also show a sensor frame and a Telrad sight.");
 	info.version = OCULARS_PLUGIN_VERSION;
@@ -120,7 +120,7 @@ Oculars::Oculars():
 	ccdRotationAngle(0.0),
 	maxEyepieceAngle(0.0),
 	requireSelection(true),
-	flagLimitMagnitude(false),
+	flagLimitMagnitude(false),	
 	useMaxEyepieceAngle(true),
 	guiPanelEnabled(false),
 	flagDecimalDegrees(false),
@@ -146,6 +146,8 @@ Oculars::Oculars():
 	actionOcularDecrement(0),
 	guiPanel(0),
 	actualFOV(0),
+	initialFOV(0),
+	flagInitFOVUsage(false),
 	reticleRotation(0)
 {
 
@@ -573,6 +575,7 @@ void Oculars::init()
 
 		setFlagDecimalDegrees(settings->value("use_decimal_degrees", false).toBool());
 		setFlagLimitMagnitude(settings->value("limit_stellar_magnitude", true).toBool());
+		setFlagInitFovUsage(settings->value("use_initial_fov", false).toBool());
 	} catch (std::runtime_error& e) {
 		qWarning() << "WARNING: unable to locate ocular.ini file or create a default one for Ocular plugin: " << e.what();
 		ready = false;
@@ -1768,7 +1771,10 @@ void Oculars::unzoomOcular()
 	core->setFlipHorz(false);
 	core->setFlipVert(false);
 
-	movementManager->zoomTo(movementManager->getInitFov());
+	if (getFlagInitFovUsage())
+		movementManager->zoomTo(movementManager->getInitFov());
+	else
+		movementManager->zoomTo(initialFOV);
 }
 
 void Oculars::zoom(bool zoomedIn)
@@ -1780,6 +1786,8 @@ void Oculars::zoom(bool zoomedIn)
 
 	if (flagShowOculars)  {
 		if (!zoomedIn)  {
+			StelCore *core = StelApp::getInstance().getCore();
+
 			GridLinesMgr *gridManager = (GridLinesMgr *)StelApp::getInstance().getModuleMgr().getModule("GridLinesMgr");
 			// Current state
 			flagAzimuthalGrid = gridManager->getFlagAzimuthalGrid();
@@ -1793,13 +1801,16 @@ void Oculars::zoom(bool zoomedIn)
 			flagHorizonLine = gridManager->getFlagHorizonLine();
 			flagGalacticPlaneLine = gridManager->getFlagGalacticPlaneLine();
 
-			StelSkyDrawer *skyManager = StelApp::getInstance().getCore()->getSkyDrawer();
+			StelSkyDrawer *skyManager = core->getSkyDrawer();
 			// Current state
 			flagAdaptation = skyManager->getFlagLuminanceAdaptation();
 			flagLimitStars = skyManager->getFlagStarMagnitudeLimit();
 			flagLimitDSOs = skyManager->getFlagNebulaMagnitudeLimit();
 			magLimitStars = skyManager->getCustomStarMagnitudeLimit();
 			magLimitDSOs = skyManager->getCustomNebulaMagnitudeLimit();
+
+			StelMovementMgr *movementManager = core->getMovementMgr();
+			initialFOV = movementManager->getCurrentFov();
 		}
 
 		// set new state
@@ -1984,6 +1995,18 @@ void Oculars::setFlagLimitMagnitude(const bool b)
 bool Oculars::getFlagLimitMagnitude() const
 {
 	return flagLimitMagnitude;
+}
+
+void Oculars::setFlagInitFovUsage(const bool b)
+{
+	flagInitFOVUsage = b;
+	settings->setValue("use_initial_fov", b);
+	settings->sync();
+}
+
+bool Oculars::getFlagInitFovUsage() const
+{
+	return flagInitFOVUsage;
 }
 
 QString Oculars::getDimensionsString(double fovX, double fovY) const

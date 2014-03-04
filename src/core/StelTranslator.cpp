@@ -17,6 +17,9 @@
 * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 */
 
+#include "StelTranslator.hpp"
+#include "StelFileMgr.hpp"
+#include "StelUtils.hpp"
 
 #include <cstdio>
 #include <algorithm>
@@ -37,9 +40,6 @@
 #include <QDir>
 #include <QTranslator>
 
-#include "StelUtils.hpp"
-#include "StelTranslator.hpp"
-#include "StelFileMgr.hpp"
 
 // Init static members
 QMap<QString, QString> StelTranslator::iso639codes;
@@ -89,12 +89,24 @@ void StelTranslator::init(const QString& fileName)
 //! Try to determine system language from system configuration
 void StelTranslator::initSystemLanguage()
 {
+#ifdef _MSC_BUILD
+	char lang[128];
+	size_t retval;
+	errno_t err=getenv_s(&retval, lang, sizeof(lang), "LANGUAGE");
+#else
 	char* lang = getenv("LANGUAGE");
-	if (lang) systemLangName = lang;
+#endif
+	if (lang)
+		systemLangName = lang;
 	else
 	{
+#ifdef _MSC_BUILD
+		err=getenv_s(&retval, lang, sizeof(lang), "LANG");
+#else
 		lang = getenv("LANG");
-		if (lang) systemLangName = lang;
+#endif
+		if (lang)
+			systemLangName = lang;
 		else
 		{
 #ifdef Q_OS_WIN

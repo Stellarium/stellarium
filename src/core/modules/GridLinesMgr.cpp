@@ -17,11 +17,6 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#include <set>
-#include <QSettings>
-#include <QDebug>
-#include <QFontMetrics>
-
 #include "GridLinesMgr.hpp"
 #include "StelApp.hpp"
 #include "StelUtils.hpp"
@@ -34,6 +29,11 @@
 #include "StelCore.hpp"
 #include "StelPainter.hpp"
 #include "StelSkyDrawer.hpp"
+
+#include <set>
+#include <QSettings>
+#include <QDebug>
+#include <QFontMetrics>
 
 //! @class SkyGrid
 //! Class which manages a grid to display in the sky.
