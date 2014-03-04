@@ -138,7 +138,7 @@ void NavStars::init()
 	addAction("actionShow_NavStars", N_("Navigational Stars"), N_("Mark the navigational stars"), "navStarsVisible", "");
 
 	// Icon for toolbar button
-	GlowIcon = new QPixmap(":/graphicsGui/glow32x32.png");
+	GlowIcon = new QPixmap(":/graphicGui/glow32x32.png");
 	OnIcon = new QPixmap(":/NavStars/btNavStars-on.png");
 	OffIcon = new QPixmap(":/NavStars/btNavStars-off.png");
 

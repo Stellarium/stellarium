@@ -103,7 +103,11 @@ void StelLocaleMgr::init()
 	{
 		timeZoneMode = STzSystemDefault;
 		// Set the program global intern timezones variables from the system locale
+		#ifdef _MSC_BUILD
+		_tzset();
+		#else
 		tzset();
+		#endif
 	}
 	else
 	{
@@ -320,9 +324,14 @@ void StelLocaleMgr::setCustomTzName(const QString& tzname)
 	if( customTzName != "")
 	{
 		// set the TZ environement variable and update c locale stuff
+		#ifdef _MSC_BUILD
+		_putenv(_strdup(qPrintable("TZ=" + customTzName)));
+		_tzset();
+		#else
 		putenv(strdup(qPrintable("TZ=" + customTzName)));
 		tzset();
-	}
+		#endif
+    }
 }
 
 float StelLocaleMgr::getGMTShift(double JD) const

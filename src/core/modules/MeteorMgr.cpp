@@ -17,10 +17,6 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#include <functional>
-#include <cstdlib>
-#include <QSettings>
-
 #include "StelProjector.hpp"
 
 #include "MeteorMgr.hpp"
@@ -30,6 +26,10 @@
 #include "LandscapeMgr.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelPainter.hpp"
+
+#include <functional>
+#include <cstdlib>
+#include <QSettings>
 
 MeteorMgr::MeteorMgr(int zhr, int maxv ) : flagShow(true)
 {

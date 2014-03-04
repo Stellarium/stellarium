@@ -20,11 +20,12 @@
 #ifndef _STELOBJECTMGR_HPP_
 #define _STELOBJECTMGR_HPP_
 
-#include <QList>
-#include <QString>
 #include "VecMath.hpp"
 #include "StelModule.hpp"
 #include "StelObject.hpp"
+
+#include <QList>
+#include <QString>
 
 class StelObjectModule;
 class StelCore;

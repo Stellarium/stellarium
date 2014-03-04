@@ -41,6 +41,7 @@
 #include <QTextEdit>
 #include <QLineEdit>
 #include <QComboBox>
+#include <QMenu>
 
 #include "SimbadSearcher.hpp"
 
@@ -206,6 +207,7 @@ void SearchDialog::createDialogContent()
 	onSearchTextChanged(ui->lineEditSearchSkyObject->text());
 	connect(ui->lineEditSearchSkyObject, SIGNAL(returnPressed()), this, SLOT(gotoObject()));
 	connect(ui->lineEditSearchSkyObject, SIGNAL(selectionChanged()), this, SLOT(setHasSelectedFlag()));
+	connect(ui->lineEditSearchSkyObject, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(showContextMenu(QPoint)));
 
 	ui->lineEditSearchSkyObject->installEventFilter(this);
 	ui->RAAngleSpinBox->setDisplayFormat(AngleSpinBox::HMSLetters);
@@ -605,4 +607,20 @@ void SearchDialog::updateListTab()
 		}
 	}
 	updateListWidget(ui->objectTypeComboBox->currentIndex());
+}
+
+void SearchDialog::showContextMenu(const QPoint &pt)
+{
+	QMenu *menu = ui->lineEditSearchSkyObject->createStandardContextMenu();
+	menu->addSeparator();
+	menu->addAction(q_("Paste and Search"), this, SLOT(pasteAndGo()));
+	menu->exec(ui->lineEditSearchSkyObject->mapToGlobal(pt));
+	delete menu;
+}
+
+void SearchDialog::pasteAndGo()
+{
+	ui->lineEditSearchSkyObject->clear(); // clear current text
+	ui->lineEditSearchSkyObject->paste(); // paste text from clipboard
+	gotoObject(); // go to first finded object
 }

@@ -20,6 +20,8 @@
 #ifndef _STELMODULE_HPP_
 #define _STELMODULE_HPP_
 
+#include "config.h"
+
 #include <QString>
 #include <QObject>
 #include <QOpenGLFunctions>

@@ -24,8 +24,6 @@
  #define GL_VERTEX_PROGRAM_POINT_SIZE 0x8642
 #endif
 
-#include <QOpenGLShaderProgram>
-
 #include "StelSkyDrawer.hpp"
 #include "StelProjector.hpp"
 #include "StelFileMgr.hpp"
@@ -38,6 +36,7 @@
 #include "StelMovementMgr.hpp"
 #include "StelPainter.hpp"
 
+#include <QOpenGLShaderProgram>
 #include <QStringList>
 #include <QSettings>
 #include <QDebug>

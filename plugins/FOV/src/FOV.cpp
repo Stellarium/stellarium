@@ -67,7 +67,7 @@ void FOV::init()
 
 	if (!conf->childGroups().contains("fov"))
 	{
-		qDebug() << "FOV::init() no fov section exists in main config file - creating with defaults";
+		qDebug() << "FOV: no fov section exists in main config file - creating with defaults";
 		restoreDefaultConfigIni();
 	}
 

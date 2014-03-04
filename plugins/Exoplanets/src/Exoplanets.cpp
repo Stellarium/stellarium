@@ -16,6 +16,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
+#include "config.h"
+
 #include "StelProjector.hpp"
 #include "StelPainter.hpp"
 #include "StelApp.hpp"
@@ -144,7 +146,7 @@ void Exoplanets::init()
 		// If no settings in the main config file, create with defaults
 		if (!conf->childGroups().contains("Exoplanets"))
 		{
-			qDebug() << "Exoplanets::init no Exoplanets section exists in main config file - creating with defaults";
+			qDebug() << "Exoplanets: no Exoplanets section exists in main config file - creating with defaults";
 			restoreDefaultConfigIni();
 		}
 
@@ -162,7 +164,7 @@ void Exoplanets::init()
 		addAction("actionShow_Exoplanets", N_("Exoplanets"), N_("Show exoplanets"), "showExoplanets", "Ctrl+Alt+E");
 		addAction("actionShow_Exoplanets_ConfigDialog", N_("Exoplanets"), N_("Exoplanets configuration window"), exoplanetsConfigDialog, "visible");
 
-		GlowIcon = new QPixmap(":/graphicsGui/glow32x32.png");
+		GlowIcon = new QPixmap(":/graphicGui/glow32x32.png");
 		OnIcon = new QPixmap(":/Exoplanets/btExoplanets-on.png");
 		OffIcon = new QPixmap(":/Exoplanets/btExoplanets-off.png");
 
@@ -171,7 +173,7 @@ void Exoplanets::init()
 	}
 	catch (std::runtime_error &e)
 	{
-		qWarning() << "Exoplanets::init error: " << e.what();
+		qWarning() << "Exoplanets: init error: " << e.what();
 		return;
 	}
 
@@ -192,11 +194,11 @@ void Exoplanets::init()
 	}
 	else
 	{
-		qDebug() << "Exoplanets::init exoplanets.json does not exist - copying default file to " << QDir::toNativeSeparators(jsonCatalogPath);
+		qDebug() << "Exoplanets: exoplanets.json does not exist - copying default catalog to " << QDir::toNativeSeparators(jsonCatalogPath);
 		restoreDefaultJsonFile();
 	}
 
-	qDebug() << "Exoplanets::init using file: " << QDir::toNativeSeparators(jsonCatalogPath);
+	qDebug() << "Exoplanets: loading catalog file:" << QDir::toNativeSeparators(jsonCatalogPath);
 
 	readJsonFile();
 
@@ -213,9 +215,6 @@ void Exoplanets::init()
 	GETSTELMODULE(StelObjectMgr)->registerStelObjectMgr(this);
 }
 
-/*
- Draw our module. This should print name of first PSR in the main window
-*/
 void Exoplanets::draw(StelCore* core)
 {
 	if (!flagShowExoplanets)
@@ -425,11 +424,11 @@ void Exoplanets::restoreDefaultJsonFile(void)
 	QFile src(":/Exoplanets/exoplanets.json");
 	if (!src.copy(jsonCatalogPath))
 	{
-		qWarning() << "Exoplanets::restoreDefaultJsonFile cannot copy json resource to " + QDir::toNativeSeparators(jsonCatalogPath);
+		qWarning() << "Exoplanets: cannot copy JSON resource to " + QDir::toNativeSeparators(jsonCatalogPath);
 	}
 	else
 	{
-		qDebug() << "Exoplanets::init copied default exoplanets.json to " << QDir::toNativeSeparators(jsonCatalogPath);
+		qDebug() << "Exoplanets: default exoplanets.json to " << QDir::toNativeSeparators(jsonCatalogPath);
 		// The resource is read only, and the new file inherits this...  make sure the new file
 		// is writable by the Stellarium process so that updates can be done.
 		QFile dest(jsonCatalogPath);
@@ -451,7 +450,7 @@ bool Exoplanets::backupJsonFile(bool deleteOriginal)
 	QFile old(jsonCatalogPath);
 	if (!old.exists())
 	{
-		qWarning() << "Exoplanets::backupJsonFile no file to backup";
+		qWarning() << "Exoplanets: no file to backup";
 		return false;
 	}
 
@@ -465,14 +464,14 @@ bool Exoplanets::backupJsonFile(bool deleteOriginal)
 		{
 			if (!old.remove())
 			{
-				qWarning() << "Exoplanets::backupJsonFile WARNING - could not remove old exoplanets.json file";
+				qWarning() << "Exoplanets: WARNING - could not remove old exoplanets.json file";
 				return false;
 			}
 		}
 	}
 	else
 	{
-		qWarning() << "Exoplanets::backupJsonFile WARNING - failed to copy exoplanets.json to exoplanets.json.old";
+		qWarning() << "Exoplanets: WARNING - failed to copy exoplanets.json to exoplanets.json.old";
 		return false;
 	}
 
@@ -499,7 +498,7 @@ QVariantMap Exoplanets::loadEPMap(QString path)
 	QVariantMap map;
 	QFile jsonFile(path);
 	if (!jsonFile.open(QIODevice::ReadOnly))
-	    qWarning() << "Exoplanets::loadEPMap cannot open " << QDir::toNativeSeparators(path);
+	    qWarning() << "Exoplanets: cannot open " << QDir::toNativeSeparators(path);
 	else
 	    map = StelJsonParser::parse(jsonFile.readAll()).toMap();
 
@@ -539,7 +538,7 @@ int Exoplanets::getJsonFileFormatVersion(void)
 	QFile jsonEPCatalogFile(jsonCatalogPath);
 	if (!jsonEPCatalogFile.open(QIODevice::ReadOnly))
 	{
-		qWarning() << "Exoplanets::getJsonFileFormatVersion() cannot open " << QDir::toNativeSeparators(jsonCatalogPath);
+		qWarning() << "Exoplanets: cannot open " << QDir::toNativeSeparators(jsonCatalogPath);
 		return jsonVersion;
 	}
 
@@ -551,7 +550,7 @@ int Exoplanets::getJsonFileFormatVersion(void)
 		jsonVersion = map.value("version").toInt();
 	}
 
-	qDebug() << "Exoplanets::getJsonFileFormatVersion() version of format from file:" << jsonVersion;
+	qDebug() << "Exoplanets: version of the format of the catalog:" << jsonVersion;
 	return jsonVersion;
 }
 
@@ -560,7 +559,7 @@ bool Exoplanets::checkJsonFileFormat()
 	QFile jsonEPCatalogFile(jsonCatalogPath);
 	if (!jsonEPCatalogFile.open(QIODevice::ReadOnly))
 	{
-		qWarning() << "Exoplanets::checkJsonFileFormat(): cannot open " << QDir::toNativeSeparators(jsonCatalogPath);
+		qWarning() << "Exoplanets: cannot open " << QDir::toNativeSeparators(jsonCatalogPath);
 		return false;
 	}
 
@@ -572,8 +571,7 @@ bool Exoplanets::checkJsonFileFormat()
 	}
 	catch (std::runtime_error& e)
 	{
-		qDebug() << "Exoplanets::checkJsonFileFormat(): file format is wrong!";
-		qDebug() << "Exoplanets::checkJsonFileFormat() error:" << e.what();
+		qDebug() << "Exoplanets: file format is wrong! Error:" << e.what();
 		return false;
 	}
 
@@ -711,7 +709,7 @@ void Exoplanets::updateDownloadComplete(QNetworkReply* reply)
 	// check the download worked, and save the data to file if this is the case.
 	if (reply->error() != QNetworkReply::NoError)
 	{
-		qWarning() << "Exoplanets::updateDownloadComplete FAILED to download" << reply->url() << " Error: " << reply->errorString();
+		qWarning() << "Exoplanets: FAILED to download" << reply->url() << " Error: " << reply->errorString();
 	}
 	else
 	{
@@ -729,7 +727,7 @@ void Exoplanets::updateDownloadComplete(QNetworkReply* reply)
 		}
 		catch (std::runtime_error &e)
 		{
-			qWarning() << "Exoplanets::updateDownloadComplete: cannot write JSON data to file:" << e.what();
+			qWarning() << "Exoplanets: cannot write JSON data to file:" << e.what();
 		}
 
 	}
