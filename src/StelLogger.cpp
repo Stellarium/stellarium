@@ -53,7 +53,7 @@ void StelLogger::init(const QString& logFilePath)
 #elif defined __clang__
 	writeLog(QString("Compiled using %1 %2.%3.%4").arg("Clang").arg(__clang_major__).arg(__clang_minor__).arg(__clang_patchlevel__));
 #elif defined _MSC_VER
-	writeLog(QString("Compiled using %1").arg(getMsvcVersion(_MSC_VER)));
+	writeLog(QString("Compiled using %1").arg(getMsvcVersionString(_MSC_VER)));
 #else
 	writeLog("Unknown compiler");
 #endif
