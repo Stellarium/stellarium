@@ -68,7 +68,7 @@ public:
 	int getUpdateFrequencyHour() { return m_iUpdateFrequencyHour; }
 	QString getUrlForUpdates() { return m_sUrlUpdate; }
 	QString getAddonJsonPath() { return m_sAddonJsonPath; }
-	void reloadAddonJsonFile();
+	void reloadCatalogues();
 
 signals:
 	void addOnMgrMsg(StelAddOnMgr::AddOnMgrMsg);
@@ -117,7 +117,7 @@ private:
 	void refreshThumbnailQueue();
 
 	void restoreDefaultAddonJsonFile();
-	void readAddonJsonObject(const QJsonObject& addOns);
+	bool loadAddonJson(QString jsonPath);
 	void updateInstalledAddonsJson(AddOn* addon);
 	void insertAddOnInUserJson(AddOn* addon);
 

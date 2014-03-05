@@ -87,34 +87,21 @@ StelAddOnMgr::StelAddOnMgr()
 	connect(this, SIGNAL(dataUpdated(AddOn*)), this, SLOT(slotDataUpdated(AddOn*)));
 
 	// loading json file
-	reloadAddonJsonFile();
+	reloadCatalogues();
 }
 
 StelAddOnMgr::~StelAddOnMgr()
 {
 }
 
-void StelAddOnMgr::reloadAddonJsonFile()
+void StelAddOnMgr::reloadCatalogues()
 {
-	QFile jsonFile(m_sAddonJsonPath);
-	if (jsonFile.open(QIODevice::ReadOnly))
+	if (!loadAddonJson(m_sAddonJsonPath))
 	{
-		QJsonObject json(QJsonDocument::fromJson(jsonFile.readAll()).object());
-		if (json["name"].toString() != "Add-Ons Catalog" ||
-			json["format-version"].toInt() != ADDON_MANAGER_CATALOG_VERSION)
-		{
-			qWarning()  << "Add-On Mgr: The current catalog is not compatible - using default file";
-			restoreDefaultAddonJsonFile();
-		}
-		qDebug() << "Add-On Mgr: loading catalog file:"
-			 << QDir::toNativeSeparators(m_sAddonJsonPath);
-		readAddonJsonObject(json["add-ons"].toObject());
+		restoreDefaultAddonJsonFile();
 	}
-	else
-	{
-		qWarning() << "Add-On Mgr: Couldn't open the catalog!"
-			   << QDir::toNativeSeparators(m_sAddonJsonPath);
-	}
+
+	loadAddonJson(m_sAddOnDir % "user_" % m_sAddonJsonFilename);
 
 	refreshThumbnailQueue();
 
@@ -122,33 +109,36 @@ void StelAddOnMgr::reloadAddonJsonFile()
 	refreshAddOnStatuses();
 }
 
-void StelAddOnMgr::restoreDefaultAddonJsonFile()
+bool StelAddOnMgr::loadAddonJson(QString jsonPath)
 {
-	QFile defaultJson(StelFileMgr::getInstallationDir() % "/data/default_" % m_sAddonJsonFilename);
-	if (defaultJson.copy(m_sAddonJsonPath))
+	QFile jsonFile(jsonPath);
+	if (!jsonFile.open(QIODevice::ReadOnly))
 	{
-		qDebug() << "Add-On Mgr: default_" % m_sAddonJsonFilename % " was copied to " % m_sAddonJsonPath;
-		QFile jsonFile(m_sAddonJsonPath);
-		jsonFile.setPermissions(jsonFile.permissions() | QFile::WriteOwner);
-		// cleaning last_update var
-		m_pConfig->remove("AddOn/last_update");
-		m_iLastUpdate = 1388966410;
+		qWarning() << "Add-On Mgr: Couldn't open the catalog!"
+			   << QDir::toNativeSeparators(jsonPath);
+		return false;
 	}
-	else
-	{
-		qWarning() << "Add-On Mgr: cannot copy JSON resource to"
-			   << QDir::toNativeSeparators(m_sAddonJsonPath);
-	}
-}
 
-void StelAddOnMgr::readAddonJsonObject(const QJsonObject& addOns)
-{
+	QJsonObject json(QJsonDocument::fromJson(jsonFile.readAll()).object());
+	if (json["name"].toString() != "Add-Ons Catalog" ||
+		json["format-version"].toInt() != ADDON_MANAGER_CATALOG_VERSION)
+	{
+		qWarning()  << "Add-On Mgr: The current catalog is not compatible!";
+		return false;
+	}
+
+	qDebug() << "Add-On Mgr: loading catalog file:"
+		 << QDir::toNativeSeparators(jsonPath);
+
+	QJsonObject addOns = json["add-ons"].toObject();
+
 	QVariantMap map = addOns.toVariantMap();
 	int duplicated = addOns.size() - map.size();
 	if (duplicated)
 	{
 		qWarning() << "Add-On Mgr : Error! The catalog has"
 			   << duplicated << "duplicated keys!";
+		return false;
 	}
 
 	QVariantMap::iterator i;
@@ -167,6 +157,27 @@ void StelAddOnMgr::readAddonJsonObject(const QJsonObject& addOns)
 			m_addonsByMd5.insert(addOn->getChecksum(), addOn);
 			m_addonsById.insert(addOn->getAddOnId(), addOn);
 		}
+	}
+
+	return true;
+}
+
+void StelAddOnMgr::restoreDefaultAddonJsonFile()
+{
+	QFile defaultJson(StelFileMgr::getInstallationDir() % "/data/default_" % m_sAddonJsonFilename);
+	if (defaultJson.copy(m_sAddonJsonPath))
+	{
+		qDebug() << "Add-On Mgr: default_" % m_sAddonJsonFilename % " was copied to " % m_sAddonJsonPath;
+		QFile jsonFile(m_sAddonJsonPath);
+		jsonFile.setPermissions(jsonFile.permissions() | QFile::WriteOwner);
+		// cleaning last_update var
+		m_pConfig->remove("AddOn/last_update");
+		m_iLastUpdate = 1388966410;
+	}
+	else
+	{
+		qWarning() << "Add-On Mgr: cannot copy JSON resource to"
+			   << QDir::toNativeSeparators(m_sAddonJsonPath);
 	}
 }
 

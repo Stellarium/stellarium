@@ -223,7 +223,7 @@ void AddOnDialog::downloadFinished()
 			jsonFile.write(result);
 			jsonFile.close();
 
-			StelApp::getInstance().getStelAddOnMgr().reloadAddonJsonFile();
+			StelApp::getInstance().getStelAddOnMgr().reloadCatalogues();
 			qint64 currentTime = QDateTime::currentMSecsSinceEpoch() / 1000;
 			StelApp::getInstance().getStelAddOnMgr().setLastUpdate(currentTime);
 			ui->txtLastUpdate->setText(StelApp::getInstance().getStelAddOnMgr().getLastUpdateString());
