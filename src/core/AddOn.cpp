@@ -31,6 +31,7 @@ AddOn::AddOn(const QString addOnId, const QVariantMap& map)
 	: m_iAddOnId(addOnId)
 	, m_eType(INVALID)
 	, m_bIsValid(false)
+	, m_bAddedByUser(false)
 	, m_eStatus(NotInstalled)
 {
 	m_eType = fromStringToType(map.value("type").toString());
