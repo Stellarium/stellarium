@@ -130,17 +130,7 @@ bool StelAddOnMgr::loadAddonJson(QString jsonPath)
 	qDebug() << "Add-On Mgr: loading catalog file:"
 		 << QDir::toNativeSeparators(jsonPath);
 
-	QJsonObject addOns = json["add-ons"].toObject();
-
-	QVariantMap map = addOns.toVariantMap();
-	int duplicated = addOns.size() - map.size();
-	if (duplicated)
-	{
-		qWarning() << "Add-On Mgr : Error! The catalog has"
-			   << duplicated << "duplicated keys!";
-		return false;
-	}
-
+	QVariantMap map = json["add-ons"].toObject().toVariantMap();
 	QVariantMap::iterator i;
 	for (i = map.begin(); i != map.end(); ++i)
 	{
