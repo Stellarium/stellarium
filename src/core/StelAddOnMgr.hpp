@@ -113,6 +113,7 @@ private:
 	int m_iUpdateFrequencyHour;
 	QString m_sUrlUpdate;
 
+	void insertInAddOnHashes(AddOn* addon);
 	void refreshAddOnStatuses();
 	void refreshThumbnailQueue();
 

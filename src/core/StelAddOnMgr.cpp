@@ -94,6 +94,22 @@ StelAddOnMgr::~StelAddOnMgr()
 {
 }
 
+void StelAddOnMgr::insertInAddOnHashes(AddOn* addon)
+{
+	if (addon && addon->isValid())
+	{
+		AddOnMap amap;
+		if (m_addons.contains(addon->getType()))
+		{
+			amap = m_addons.value(addon->getType());
+		}
+		amap.insert(addon->getAddOnId(), addon);
+		m_addons.insert(addon->getType(), amap);
+		m_addonsByMd5.insert(addon->getChecksum(), addon);
+		m_addonsById.insert(addon->getAddOnId(), addon);
+	}
+}
+
 void StelAddOnMgr::reloadCatalogues()
 {
 	if (!loadAddonJson(m_sAddonJsonPath))
@@ -134,19 +150,7 @@ bool StelAddOnMgr::loadAddonJson(QString jsonPath)
 	QVariantMap::iterator i;
 	for (i = map.begin(); i != map.end(); ++i)
 	{
-		AddOn* addOn(new AddOn(i.key(), i.value().toMap()));
-		if (addOn->isValid())
-		{
-			AddOnMap amap;
-			if (m_addons.contains(addOn->getType()))
-			{
-				amap = m_addons.value(addOn->getType());
-			}
-			amap.insert(addOn->getAddOnId(), addOn);
-			m_addons.insert(addOn->getType(), amap);
-			m_addonsByMd5.insert(addOn->getChecksum(), addOn);
-			m_addonsById.insert(addOn->getAddOnId(), addOn);
-		}
+		insertInAddOnHashes(new AddOn(i.key(), i.value().toMap()));
 	}
 
 	return true;
@@ -699,7 +703,7 @@ void StelAddOnMgr::updateInstalledAddonsJson(AddOn* addon)
 	}
 }
 
-void StelAddOnMgr::insertAddOnInUserJson(AddOn *addon)
+void StelAddOnMgr::insertAddOnInUserJson(AddOn* addon)
 {
 	QFile jsonFile(m_sAddOnDir % "user_" % m_sAddonJsonFilename);
 	if (jsonFile.open(QIODevice::ReadWrite))
@@ -742,15 +746,7 @@ void StelAddOnMgr::insertAddOnInUserJson(AddOn *addon)
 		jsonFile.close();
 
 		// update hash
-		AddOnMap amap;
-		if (m_addons.contains(addon->getType()))
-		{
-			amap = m_addons.value(addon->getType());
-		}
-		amap.insert(addon->getAddOnId(), addon);
-		m_addons.insert(addon->getType(), amap);
-		m_addonsByMd5.insert(addon->getChecksum(), addon);
-		m_addonsById.insert(addon->getAddOnId(), addon);
+		insertInAddOnHashes(addon);
 	}
 	else
 	{
