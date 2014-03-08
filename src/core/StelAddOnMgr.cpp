@@ -203,28 +203,31 @@ void StelAddOnMgr::setUpdateFrequencyHour(int hour) {
 
 void StelAddOnMgr::refreshAddOnStatuses()
 {
-	// check add-ons which are already installed (installed_addons.json)
 	QFile jsonFile(m_sInstalledAddonsJsonPath);
-	if (jsonFile.open(QIODevice::ReadOnly))
+	if (!jsonFile.exists())
 	{
-		QJsonObject object(QJsonDocument::fromJson(jsonFile.readAll()).object());
-		QVariantMap map = object.toVariantMap();
-		QVariantMap::iterator i;
-		for (i = map.begin(); i != map.end(); ++i)
-		{
-			AddOn* addOn = m_addonsById.value(i.key());
-			QVariantMap attributes(i.value().toMap());
-			if (addOn && addOn->getChecksum() == attributes.value("checksum").toString())
-			{
-				addOn->setInstalledFiles(attributes.value("installed-files").toStringList());
-				addOn->setStatus((AddOn::Status)attributes.value("status").toInt());
-			}
-		}
+		return;
 	}
-	else
+	else if (!jsonFile.open(QIODevice::ReadOnly))
 	{
 		qWarning() << "Add-On Mgr: Couldn't open the catalog of installed addons!"
 			   << QDir::toNativeSeparators(m_sAddonJsonPath);
+		return;
+	}
+
+	// check add-ons which are already installed (installed_addons.json)
+	QJsonObject object(QJsonDocument::fromJson(jsonFile.readAll()).object());
+	QVariantMap map = object.toVariantMap();
+	QVariantMap::iterator i;
+	for (i = map.begin(); i != map.end(); ++i)
+	{
+		AddOn* addOn = m_addonsById.value(i.key());
+		QVariantMap attributes(i.value().toMap());
+		if (addOn && addOn->getChecksum() == attributes.value("checksum").toString())
+		{
+			addOn->setInstalledFiles(attributes.value("installed-files").toStringList());
+			addOn->setStatus((AddOn::Status)attributes.value("status").toInt());
+		}
 	}
 }
 
