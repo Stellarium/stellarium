@@ -98,6 +98,7 @@ private:
 
 	QString m_sAddonJsonFilename;
 	QString m_sAddonJsonPath;
+	QString m_sUserAddonJsonPath;
 	QString m_sInstalledAddonsJsonPath;
 	QHash<AddOn::Type, AddOnMap> m_addons;
 	QHash<QString, AddOn*> m_addonsByMd5;

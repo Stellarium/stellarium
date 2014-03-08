@@ -42,6 +42,7 @@ StelAddOnMgr::StelAddOnMgr()
 	, m_sThumbnailDir(m_sAddOnDir % "thumbnail/")
 	, m_sAddonJsonFilename("addons_0.14.0.json")
 	, m_sAddonJsonPath(m_sAddOnDir % m_sAddonJsonFilename)
+	, m_sUserAddonJsonPath(m_sAddOnDir % "user_" % m_sAddonJsonFilename)
 	, m_sInstalledAddonsJsonPath(m_sAddOnDir % "installed_addons.json")
 	, m_progressBar(NULL)
 	, m_iLastUpdate(1388966410)
@@ -125,7 +126,7 @@ void StelAddOnMgr::reloadCatalogues()
 void StelAddOnMgr::loadAddonJson(bool userCatalog)
 {
 	QString jsonPath = userCatalog
-			? m_sAddOnDir % "user_" % m_sAddonJsonFilename
+			? m_sUserAddonJsonPath
 			: m_sAddonJsonPath;
 
 	QFile jsonFile(jsonPath);
@@ -706,7 +707,7 @@ void StelAddOnMgr::updateInstalledAddonsJson(AddOn* addon)
 
 void StelAddOnMgr::insertAddOnInUserJson(AddOn* addon)
 {
-	QFile jsonFile(m_sAddOnDir % "user_" % m_sAddonJsonFilename);
+	QFile jsonFile(m_sUserAddonJsonPath);
 	if (jsonFile.open(QIODevice::ReadWrite))
 	{
 		QJsonObject attributes;
