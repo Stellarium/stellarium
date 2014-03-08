@@ -108,8 +108,8 @@ public slots:
 	//! Get the current maximum frames per second.
 	float getMaxFps() {return maxfps;}
 
-	//! Updates the scene and process all events
-	void updateScene();
+	void maxFpsSceneUpdate();
+	void minFpsSceneUpdate();
 
 protected:
 	virtual void mouseMoveEvent(QMouseEvent* event);
@@ -139,7 +139,9 @@ private slots:
 private:
 	//! Start the display loop
 	void startMainLoop();
-
+	//! Updates the scene and process all events
+	void updateScene();
+	
 	QString getSupportedOpenGLVersion() const;
 
 	//! The StelMainView singleton
@@ -171,6 +173,7 @@ private:
 	double lastEventTimeSec;
 
 	QTimer* minFpsTimer;
+	bool flagMaxFpsUpdatePending;
 	//! The minimum desired frame rate in frame per second.
 	float minfps;
 	//! The maximum desired frame rate in frame per second.
