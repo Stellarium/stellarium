@@ -77,17 +77,9 @@ StelAddOnMgr::StelAddOnMgr()
 		m_pConfig->endGroup();
 	}
 
-	// creating Json file
-	if (!QFile(m_sAddonJsonPath).exists())
-	{
-		qWarning() << "Add-On Mgr: The catalog does not exist - copying default file to "
-			   << QDir::toNativeSeparators(m_sAddonJsonPath);
-		restoreDefaultAddonJsonFile();
-	}
-
 	connect(this, SIGNAL(dataUpdated(AddOn*)), this, SLOT(slotDataUpdated(AddOn*)));
 
-	// loading json file
+	// loading json files
 	reloadCatalogues();
 }
 
@@ -114,7 +106,11 @@ void StelAddOnMgr::insertInAddOnHashes(AddOn* addon)
 void StelAddOnMgr::reloadCatalogues()
 {
 	// load oficial catalog ~/.stellarium/addon_x.x.x.json
-	loadAddonJson(false);
+	if (!loadAddonJson(false))
+	{
+		restoreDefaultAddonJsonFile();
+		loadAddonJson(false); // load again
+	}
 	// load user catalog ~/.stellarium/user_addon_x.x.x.json
 	loadAddonJson(true);
 	// download thumbnails
@@ -123,19 +119,22 @@ void StelAddOnMgr::reloadCatalogues()
 	refreshAddOnStatuses();
 }
 
-void StelAddOnMgr::loadAddonJson(bool userCatalog)
+bool StelAddOnMgr::loadAddonJson(bool userCatalog)
 {
 	QString jsonPath = userCatalog
 			? m_sUserAddonJsonPath
 			: m_sAddonJsonPath;
 
 	QFile jsonFile(jsonPath);
-	if (!jsonFile.open(QIODevice::ReadOnly))
+	if (!jsonFile.exists())
+	{
+		return false;
+	}
+	else if (!jsonFile.open(QIODevice::ReadOnly))
 	{
 		qWarning() << "Add-On Mgr: Couldn't open the catalog!"
 			   << QDir::toNativeSeparators(jsonPath);
-		restoreDefaultAddonJsonFile();
-		return;
+		return false;
 	}
 
 	QJsonObject json(QJsonDocument::fromJson(jsonFile.readAll()).object());
@@ -143,8 +142,7 @@ void StelAddOnMgr::loadAddonJson(bool userCatalog)
 		json["format-version"].toInt() != ADDON_MANAGER_CATALOG_VERSION)
 	{
 		qWarning()  << "Add-On Mgr: The current catalog is not compatible!";
-		restoreDefaultAddonJsonFile();
-		return;
+		return false;
 	}
 
 	qDebug() << "Add-On Mgr: loading catalog file:"
@@ -156,6 +154,8 @@ void StelAddOnMgr::loadAddonJson(bool userCatalog)
 	{
 		insertInAddOnHashes(new AddOn(i.key(), i.value().toMap()));
 	}
+
+	return true;
 }
 
 void StelAddOnMgr::restoreDefaultAddonJsonFile()

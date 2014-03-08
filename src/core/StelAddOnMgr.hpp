@@ -119,7 +119,7 @@ private:
 	void refreshThumbnailQueue();
 
 	void restoreDefaultAddonJsonFile();
-	void loadAddonJson(bool userCatalog);
+	bool loadAddonJson(bool userCatalog);
 	void updateInstalledAddonsJson(AddOn* addon);
 	void insertAddOnInUserJson(AddOn* addon);
 
