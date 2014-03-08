@@ -118,7 +118,7 @@ private:
 	void refreshThumbnailQueue();
 
 	void restoreDefaultAddonJsonFile();
-	bool loadAddonJson(QString jsonPath);
+	void loadAddonJson(bool userCatalog);
 	void updateInstalledAddonsJson(AddOn* addon);
 	void insertAddOnInUserJson(AddOn* addon);
 

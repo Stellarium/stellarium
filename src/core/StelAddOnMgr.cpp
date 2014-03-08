@@ -112,27 +112,29 @@ void StelAddOnMgr::insertInAddOnHashes(AddOn* addon)
 
 void StelAddOnMgr::reloadCatalogues()
 {
-	if (!loadAddonJson(m_sAddonJsonPath))
-	{
-		restoreDefaultAddonJsonFile();
-	}
-
-	loadAddonJson(m_sAddOnDir % "user_" % m_sAddonJsonFilename);
-
+	// load oficial catalog ~/.stellarium/addon_x.x.x.json
+	loadAddonJson(false);
+	// load user catalog ~/.stellarium/user_addon_x.x.x.json
+	loadAddonJson(true);
+	// download thumbnails
 	refreshThumbnailQueue();
-
 	// refresh add-ons statuses (it checks which are installed or not)
 	refreshAddOnStatuses();
 }
 
-bool StelAddOnMgr::loadAddonJson(QString jsonPath)
+void StelAddOnMgr::loadAddonJson(bool userCatalog)
 {
+	QString jsonPath = userCatalog
+			? m_sAddOnDir % "user_" % m_sAddonJsonFilename
+			: m_sAddonJsonPath;
+
 	QFile jsonFile(jsonPath);
 	if (!jsonFile.open(QIODevice::ReadOnly))
 	{
 		qWarning() << "Add-On Mgr: Couldn't open the catalog!"
 			   << QDir::toNativeSeparators(jsonPath);
-		return false;
+		restoreDefaultAddonJsonFile();
+		return;
 	}
 
 	QJsonObject json(QJsonDocument::fromJson(jsonFile.readAll()).object());
@@ -140,7 +142,8 @@ bool StelAddOnMgr::loadAddonJson(QString jsonPath)
 		json["format-version"].toInt() != ADDON_MANAGER_CATALOG_VERSION)
 	{
 		qWarning()  << "Add-On Mgr: The current catalog is not compatible!";
-		return false;
+		restoreDefaultAddonJsonFile();
+		return;
 	}
 
 	qDebug() << "Add-On Mgr: loading catalog file:"
@@ -152,8 +155,6 @@ bool StelAddOnMgr::loadAddonJson(QString jsonPath)
 	{
 		insertInAddOnHashes(new AddOn(i.key(), i.value().toMap()));
 	}
-
-	return true;
 }
 
 void StelAddOnMgr::restoreDefaultAddonJsonFile()
