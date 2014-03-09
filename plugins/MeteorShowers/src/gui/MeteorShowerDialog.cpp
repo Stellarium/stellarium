@@ -46,7 +46,6 @@
 MeteorShowerDialog::MeteorShowerDialog() : updateTimer(NULL)
 {
     ui = new Ui_meteorShowerDialog;
-    listModel = new QStandardItemModel(0, ColumnCount);
 }
 
 MeteorShowerDialog::~MeteorShowerDialog()
@@ -58,7 +57,6 @@ MeteorShowerDialog::~MeteorShowerDialog()
 		updateTimer = NULL;
 	}
 	delete ui;
-	delete listModel;
 }
 
 void MeteorShowerDialog::retranslate()
@@ -71,19 +69,13 @@ void MeteorShowerDialog::retranslate()
 		setHeaderNames();
 
 		//Retranslate name and datatype strings
-		for (int i = 0; i < listModel->rowCount(); i++)
-		{
+		QTreeWidgetItemIterator it(ui->listEvents);
+		while (*it) {
 			//Name
-			QStandardItem* item = listModel->item(i, ColumnName);
-			QString original = item->data(Qt::UserRole).toString();
-			QModelIndex index = listModel->index(i, ColumnName);
-			listModel->setData(index, q_(original), Qt::DisplayRole);
-
+			(*it)->setText(ColumnName, q_((*it)->text(ColumnName)));
 			//Data type
-			item = listModel->item(i, ColumnDataType);
-			original = item->data(Qt::UserRole).toString();
-			index = listModel->index(i, ColumnDataType);
-			listModel->setData(index, q_(original), Qt::DisplayRole);
+			(*it)->setText(ColumnDataType, q_((*it)->text(ColumnDataType)));
+			++it;
 		}
 	}
 }
@@ -155,10 +147,9 @@ void MeteorShowerDialog::createDialogContent()
 
 void MeteorShowerDialog::initListEvents(void)
 {
-	listModel->clear();
-	listModel->setColumnCount(ColumnCount);
+	ui->listEvents->clear();
+	ui->listEvents->setColumnCount(ColumnCount);
 	setHeaderNames();
-	ui->listEvents->setModel(listModel);
 	ui->listEvents->header()->setSectionsMovable(false);
 	ui->listEvents->header()->setStretchLastSection(true);
 }
@@ -170,7 +161,7 @@ void MeteorShowerDialog::setHeaderNames(void)
 	headerStrings << q_("ZHR");
 	headerStrings << q_("Data Type");
 	headerStrings << q_("Peak");
-	listModel->setHorizontalHeaderLabels(headerStrings);
+	ui->listEvents->setHeaderLabels(headerStrings);
 }
 
 void MeteorShowerDialog::checkDates(void)
@@ -194,27 +185,18 @@ void MeteorShowerDialog::searchEvents(void)
 	initListEvents();
 	foreach(const MeteorShowerP& r, searchResult)
 	{
-		QStandardItem* tempItem = 0;
-		int lastRow = listModel->rowCount();
+		QTreeWidgetItem *treeItem = new QTreeWidgetItem(ui->listEvents);
 		//Name
-		tempItem = new QStandardItem(r->getNameI18n());
-		tempItem->setEditable(false);
-		listModel->setItem(lastRow, ColumnName, tempItem);
+		treeItem->setText(ColumnName, r->getNameI18n());
 		//ZHR
 		QString zhr = r->getZHR()==-1?q_("Variable"):QString::number(r->getZHR());
-		tempItem = new QStandardItem(zhr);
-		tempItem->setEditable(false);
-		listModel->setItem(lastRow, ColumnZHR, tempItem);
+		treeItem->setText(ColumnZHR, zhr);
 		//Data Type
 		QString dataType = r->getStatus()==1?q_("Real"):q_("Generic");
-		tempItem = new QStandardItem(dataType);
-		tempItem->setEditable(false);
-		listModel->setItem(lastRow, ColumnDataType, tempItem);
+		treeItem->setText(ColumnDataType, dataType);
 		//Peak
 		QString peak = r->getPeak().toString("dd/MMM/yyyy");
-		tempItem = new QStandardItem(peak);
-		tempItem->setEditable(false);
-		listModel->setItem(lastRow, ColumnPeak, tempItem);
+		treeItem->setText(ColumnPeak, peak);
 	}
 }
 
@@ -223,12 +205,12 @@ void MeteorShowerDialog::selectEvent(const QModelIndex &modelIndex)
 	StelCore *core = StelApp::getInstance().getCore();
 
 	//Change date
-	QString dateString = listModel->data( listModel->index(modelIndex.row(),ColumnPeak) ).toString();
+	QString dateString = ui->listEvents->currentItem()->text(ColumnPeak);
 	QDateTime qDateTime = QDateTime::fromString(dateString, "dd/MMM/yyyy");
 	core->setJDay(StelUtils::qDateTimeToJd(qDateTime));
 
 	//Select object
-	QString namel18n = listModel->data( listModel->index(modelIndex.row(),ColumnName) ).toString();
+	QString namel18n = ui->listEvents->currentItem()->text(ColumnName);
 	StelObjectMgr* objectMgr = GETSTELMODULE(StelObjectMgr);
 	if((objectMgr->findAndSelectI18n(namel18n) || objectMgr->findAndSelect(namel18n)) && plugin->getFlagShowMS())
 	{

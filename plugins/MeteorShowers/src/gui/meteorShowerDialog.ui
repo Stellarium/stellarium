@@ -776,8 +776,14 @@
           <string>Results</string>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_5">
+          <property name="topMargin">
+           <number>4</number>
+          </property>
+          <property name="bottomMargin">
+           <number>4</number>
+          </property>
           <item>
-           <widget class="QTreeView" name="listEvents">
+           <widget class="QTreeWidget" name="listEvents">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
               <horstretch>0</horstretch>
@@ -805,8 +811,14 @@
             <property name="itemsExpandable">
              <bool>false</bool>
             </property>
+            <property name="sortingEnabled">
+             <bool>false</bool>
+            </property>
             <property name="expandsOnDoubleClick">
              <bool>false</bool>
+            </property>
+            <property name="columnCount">
+             <number>0</number>
             </property>
            </widget>
           </item>
