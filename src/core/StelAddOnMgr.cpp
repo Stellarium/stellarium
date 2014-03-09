@@ -51,7 +51,7 @@ StelAddOnMgr::StelAddOnMgr()
 	, m_sUrlUpdate("http://cardinot.sourceforge.net/" % m_sAddonJsonFilename)
 {
 	// Set user agent as "Stellarium/$version$ ($platform$)"
-	m_sUserAgent = QString("Stellarium/%1 (%2)")
+	m_userAgent = QString("Stellarium/%1 (%2)")
 			.arg(StelUtils::getApplicationVersion())
 			.arg(StelUtils::getOperatingSystemInfo())
 			.toLatin1();
@@ -521,7 +521,7 @@ void StelAddOnMgr::downloadNextAddOn()
 	QNetworkRequest req(m_downloadingAddOn->getDownloadURL());
 	req.setAttribute(QNetworkRequest::CacheSaveControlAttribute, false);
 	req.setAttribute(QNetworkRequest::RedirectionTargetAttribute, false);
-	req.setRawHeader("User-Agent", m_sUserAgent);
+	req.setRawHeader("User-Agent", m_userAgent);
 	m_pAddOnNetworkReply = StelApp::getInstance().getNetworkAccessManager()->get(req);
 	m_pAddOnNetworkReply->setReadBufferSize(1024*1024*2);
 	connect(m_pAddOnNetworkReply, SIGNAL(readyRead()), this, SLOT(newDownloadedData()));

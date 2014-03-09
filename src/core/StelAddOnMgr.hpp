@@ -69,7 +69,7 @@ public:
 	QString getUrlForUpdates() { return m_sUrlUpdate; }
 	QString getAddonJsonPath() { return m_sAddonJsonPath; }
 
-	QByteArray getUserAgent() { return m_sUserAgent; }
+	QByteArray getUserAgent() { return m_userAgent; }
 
 	void reloadCatalogues();
 
@@ -94,7 +94,7 @@ private:
 	QMap<AddOn*, QStringList> m_downloadQueue;
 	QNetworkReply* m_pAddOnNetworkReply;
 	QFile* m_currentDownloadFile;
-	QByteArray m_sUserAgent;
+	QByteArray m_userAgent;
 
 	// addon directories
 	const QString m_sAddOnDir;
