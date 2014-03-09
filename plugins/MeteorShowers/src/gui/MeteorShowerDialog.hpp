@@ -48,9 +48,9 @@ protected:
 
 public slots:
 	void retranslate();
-	void refreshUpdateValues(void);
-	void refreshColorMarkers(void);
-	void refreshRangeDates(void); //! Refresh dates range when year in main app change
+	void refreshUpdateValues(void); //! Refresh details about the last update
+	void refreshColorMarkers(void); //! Refresh the color of all markers
+	void refreshRangeDates(void);   //! Refresh dates range when year in main app change
 
 private slots:
 	void setUpdateValues(int hours);
@@ -60,12 +60,12 @@ private slots:
 	void restoreDefaults(void);
 	void saveSettings(void);
 	void updateJSON(void);
-	void setColorARR(void); //! Set color of active radiant based on real data.
-	void setColorARG(void); //! Set color of active radiant based on generic data.
-	void setColorIR(void); //! Set color of inactive radiant.
-	void checkDates(void);
-	void searchEvents(void);
-	void selectEvent(const QModelIndex &modelIndex);
+	void setColorARR(void);  //! Set color of active radiant based on real data.
+	void setColorARG(void);  //! Set color of active radiant based on generic data.
+	void setColorIR(void);   //! Set color of inactive radiant.
+	void checkDates(void);   //! Checks if the inputed dates are valid for use.
+	void searchEvents(void); //! Search events and fill the list.
+	void selectEvent(const QModelIndex &modelIndex); //! If an event is selected by user, the current date change and the object is selected.
 
 private:
         Ui_meteorShowerDialog* ui;
@@ -84,9 +84,9 @@ private:
 		ColumnPeak,		//! peak date column
 		ColumnCount		//! total number of columns
 	};
-	QTreeWidget* treeWidget; //! list of events
-	void initListEvents(void);
-	void setHeaderNames(void);
+	QTreeWidget* treeWidget;   //! list of events
+	void initListEvents(void); //! Init header and list of events
+	void setHeaderNames(void); //! Update header names
 
 	// Reimplementation of QTreeWidgetItem class to fix the sorting bug
 	class TreeWidgetItem : public QTreeWidgetItem
