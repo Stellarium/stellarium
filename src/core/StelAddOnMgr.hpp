@@ -91,6 +91,7 @@ private:
 	QMap<AddOn*, QStringList> m_downloadQueue;
 	QNetworkReply* m_pAddOnNetworkReply;
 	QFile* m_currentDownloadFile;
+	QString m_sUserAgent;
 
 	// addon directories
 	const QString m_sAddOnDir;
