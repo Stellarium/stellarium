@@ -69,7 +69,7 @@ void MeteorShowerDialog::retranslate()
 		setHeaderNames();
 
 		//Retranslate name and datatype strings
-		QTreeWidgetItemIterator it(ui->listEvents);
+		QTreeWidgetItemIterator it(treeWidget);
 		while (*it) {
 			//Name
 			(*it)->setText(ColumnName, q_((*it)->text(ColumnName)));
@@ -104,8 +104,9 @@ void MeteorShowerDialog::createDialogContent()
 	connect(ui->searchButton, SIGNAL(clicked()), this, SLOT(checkDates()));
 	refreshRangeDates();
 
+	treeWidget = ui->listEvents;
 	initListEvents();
-	connect(ui->listEvents, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(selectEvent(QModelIndex)));
+	connect(treeWidget, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(selectEvent(QModelIndex)));
 
 	// Settings tab / radiant group
 	ui->displayRadiant->setChecked(plugin->getFlagRadiant());
@@ -147,11 +148,11 @@ void MeteorShowerDialog::createDialogContent()
 
 void MeteorShowerDialog::initListEvents(void)
 {
-	ui->listEvents->clear();
-	ui->listEvents->setColumnCount(ColumnCount);
+	treeWidget->clear();
+	treeWidget->setColumnCount(ColumnCount);
 	setHeaderNames();
-	ui->listEvents->header()->setSectionsMovable(false);
-	ui->listEvents->header()->setStretchLastSection(true);
+	treeWidget->header()->setSectionsMovable(false);
+	treeWidget->header()->setStretchLastSection(true);
 }
 
 void MeteorShowerDialog::setHeaderNames(void)
@@ -161,7 +162,7 @@ void MeteorShowerDialog::setHeaderNames(void)
 	headerStrings << q_("ZHR");
 	headerStrings << q_("Data Type");
 	headerStrings << q_("Peak");
-	ui->listEvents->setHeaderLabels(headerStrings);
+	treeWidget->setHeaderLabels(headerStrings);
 }
 
 void MeteorShowerDialog::checkDates(void)
@@ -185,7 +186,7 @@ void MeteorShowerDialog::searchEvents(void)
 	initListEvents();
 	foreach(const MeteorShowerP& r, searchResult)
 	{
-		QTreeWidgetItem *treeItem = new QTreeWidgetItem(ui->listEvents);
+		QTreeWidgetItem *treeItem = new QTreeWidgetItem(treeWidget);
 		//Name
 		treeItem->setText(ColumnName, r->getNameI18n());
 		//ZHR
@@ -205,12 +206,12 @@ void MeteorShowerDialog::selectEvent(const QModelIndex &modelIndex)
 	StelCore *core = StelApp::getInstance().getCore();
 
 	//Change date
-	QString dateString = ui->listEvents->currentItem()->text(ColumnPeak);
+	QString dateString = treeWidget->currentItem()->text(ColumnPeak);
 	QDateTime qDateTime = QDateTime::fromString(dateString, "dd/MMM/yyyy");
 	core->setJDay(StelUtils::qDateTimeToJd(qDateTime));
 
 	//Select object
-	QString namel18n = ui->listEvents->currentItem()->text(ColumnName);
+	QString namel18n = treeWidget->currentItem()->text(ColumnName);
 	StelObjectMgr* objectMgr = GETSTELMODULE(StelObjectMgr);
 	if((objectMgr->findAndSelectI18n(namel18n) || objectMgr->findAndSelect(namel18n)) && plugin->getFlagShowMS())
 	{

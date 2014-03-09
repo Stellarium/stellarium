@@ -812,7 +812,7 @@
              <bool>false</bool>
             </property>
             <property name="sortingEnabled">
-             <bool>false</bool>
+             <bool>true</bool>
             </property>
             <property name="expandsOnDoubleClick">
              <bool>false</bool>
@@ -820,6 +820,9 @@
             <property name="columnCount">
              <number>0</number>
             </property>
+            <attribute name="headerShowSortIndicator" stdset="0">
+             <bool>true</bool>
+            </attribute>
            </widget>
           </item>
          </layout>

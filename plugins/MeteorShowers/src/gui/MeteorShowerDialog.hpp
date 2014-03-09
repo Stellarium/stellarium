@@ -25,6 +25,7 @@
 #include <QColor>
 #include <QLabel>
 #include <QObject>
+#include <QTreeWidget>
 
 #include "MeteorShowers.hpp"
 #include "StelDialog.hpp"
@@ -77,12 +78,13 @@ private:
 	//! Defines the number and the order of the columns in the table that lists active meteor showers
 	//! @enum ModelColumns
 	enum ModelColumns {
-		ColumnName,		//!< name column
-		ColumnZHR,		//!< zhr column
-		ColumnDataType,		//!< data type column
-		ColumnPeak,		//!< peak date column
-		ColumnCount		//!< total number of columns
+		ColumnName,		//! name column
+		ColumnZHR,		//! zhr column
+		ColumnDataType,		//! data type column
+		ColumnPeak,		//! peak date column
+		ColumnCount		//! total number of columns
 	};
+	QTreeWidget* treeWidget; //! list of events
 	void initListEvents(void);
 	void setHeaderNames(void);
 };
