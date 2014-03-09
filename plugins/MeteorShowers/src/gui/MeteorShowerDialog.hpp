@@ -87,6 +87,25 @@ private:
 	QTreeWidget* treeWidget; //! list of events
 	void initListEvents(void);
 	void setHeaderNames(void);
+
+	// Reimplementation of QTreeWidgetItem class to fix the sorting bug
+	class TreeWidgetItem : public QTreeWidgetItem
+	{
+	public:
+		TreeWidgetItem(QTreeWidget* parent):QTreeWidgetItem(parent){}
+
+	private:
+		bool operator<(const QTreeWidgetItem &other)const {
+			int column = treeWidget()->sortColumn();
+
+			if (column == ColumnPeak)
+				return QDateTime::fromString(text(column),"dd/MMM/yyyy").operator <(QDateTime::fromString(other.text(column),"dd/MMM/yyyy"));
+			else if (column == ColumnZHR)
+				return text(column).toInt() < other.text(column).toInt();
+			else //ColumnName or ColumnDataType
+				return text(column).toLower() < other.text(column).toLower();
+		}
+	};
 };
 
 #endif // _METEORSHOWERDIALOG_HPP_
