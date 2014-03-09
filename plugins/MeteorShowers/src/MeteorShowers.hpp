@@ -391,8 +391,6 @@ private slots:
 	//! done.
 	void checkForUpdate(void);
 	void updateDownloadComplete(QNetworkReply* reply);
-
-	//void setStelStyle(const QString& section);
 };
 
 
