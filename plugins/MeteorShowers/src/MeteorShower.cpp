@@ -383,7 +383,6 @@ void MeteorShower::draw(StelPainter& painter)
 	StelUtils::spheToRect(radiantAlpha, radiantDelta, XYZ);
 	painter.getProjector()->project(XYZ, XY);
 
-	//Vec3f color = getInfoColor();
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE);
 
@@ -412,10 +411,7 @@ void MeteorShower::draw(StelPainter& painter)
 		{
 			float size = getAngularSize(NULL)*M_PI/180.*painter.getProjector()->getPixelPerRadAtCenter();
 			float shift = 8.f + size/1.8f;
-			//painter.setColor(color[0], color[1], color[2], 1.0f);
 			painter.drawText(XY[0]+shift, XY[1]+shift, getNameI18n(), 0, 0, 0, false);
 		}
 	}
-
-	//painter.setColor(1,1,1,0);
 }
