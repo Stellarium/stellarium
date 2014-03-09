@@ -25,7 +25,6 @@
 #include <QColor>
 #include <QLabel>
 #include <QObject>
-#include <QStandardItemModel>
 
 #include "MeteorShowers.hpp"
 #include "StelDialog.hpp"
@@ -84,7 +83,6 @@ private:
 		ColumnPeak,		//!< peak date column
 		ColumnCount		//!< total number of columns
 	};
-	QStandardItemModel * listModel;
 	void initListEvents(void);
 	void setHeaderNames(void);
 };
