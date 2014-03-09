@@ -209,23 +209,17 @@ void radToDms(double angle, bool& sign, unsigned int& d, unsigned int& m, double
 	d = (unsigned int)angle;
 	m = (unsigned int)((angle - d)*60);
 	s = (angle-d)*3600-60*m;
-	// workaround for rounding numbers
+	// workaround for rounding numbers	
 	if (s>59.9)
 	{
 		s = 0.;
-		if (sign)
-			m += 1;
-		else
-			m -= 1;
+		m += 1;
 	}
 	if (m==60)
 	{
 		m = 0.;
-		if (sign)
-			d += 1;
-		else
-			d -= 1;
-	}
+		d += 1;
+	}	
 }
 
 /*************************************************************************
