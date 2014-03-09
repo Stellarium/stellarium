@@ -272,6 +272,7 @@ void ConfigurationDialog::createDialogContent()
 	// plugins control
 	connect(ui->pluginsListWidget, SIGNAL(currentItemChanged(QListWidgetItem*, QListWidgetItem*)), this, SLOT(pluginsSelectionChanged(QListWidgetItem*, QListWidgetItem*)));
 	connect(ui->pluginLoadAtStartupCheckBox, SIGNAL(stateChanged(int)), this, SLOT(loadAtStartupChanged(int)));
+	connect(ui->pluginsListWidget, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(pluginConfigureCurrentSelection()));
 	connect(ui->pluginConfigureButton, SIGNAL(clicked()), this, SLOT(pluginConfigureCurrentSelection()));
 	populatePluginsList();
 
@@ -755,7 +756,7 @@ void ConfigurationDialog::pluginConfigureCurrentSelection()
 	{
 		if (id == desc.info.id)
 		{
-			StelModule* pmod = moduleMgr.getModule(desc.info.id);
+			StelModule* pmod = moduleMgr.getModule(desc.info.id, QObject::sender()->objectName()=="pluginsListWidget");
 			if (pmod != NULL)
 			{
 				pmod->configureGui(true);
