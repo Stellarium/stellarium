@@ -68,6 +68,9 @@ public:
 	int getUpdateFrequencyHour() { return m_iUpdateFrequencyHour; }
 	QString getUrlForUpdates() { return m_sUrlUpdate; }
 	QString getAddonJsonPath() { return m_sAddonJsonPath; }
+
+	QByteArray getUserAgent() { return m_sUserAgent; }
+
 	void reloadCatalogues();
 
 signals:
@@ -91,7 +94,7 @@ private:
 	QMap<AddOn*, QStringList> m_downloadQueue;
 	QNetworkReply* m_pAddOnNetworkReply;
 	QFile* m_currentDownloadFile;
-	QString m_sUserAgent;
+	QByteArray m_sUserAgent;
 
 	// addon directories
 	const QString m_sAddOnDir;
