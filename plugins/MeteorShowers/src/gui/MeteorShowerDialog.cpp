@@ -186,7 +186,7 @@ void MeteorShowerDialog::searchEvents(void)
 	initListEvents();
 	foreach(const MeteorShowerP& r, searchResult)
 	{
-		QTreeWidgetItem *treeItem = new QTreeWidgetItem(treeWidget);
+		TreeWidgetItem *treeItem = new TreeWidgetItem(treeWidget);
 		//Name
 		treeItem->setText(ColumnName, r->getNameI18n());
 		//ZHR
