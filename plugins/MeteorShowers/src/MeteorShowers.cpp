@@ -138,7 +138,7 @@ void MeteorShowers::init()
 		// If no settings in the main config file, create with defaults
 		if(!conf->childGroups().contains("MeteorShowers"))
 		{
-			qDebug() << "MeteorShowers::init no MeteorShower section exists in main config file - creating with defaults";
+			qDebug() << "MeteorShowers: no MeteorShower section exists in main config file - creating with defaults";
 			restoreDefaultConfigIni();
 		}
 
@@ -165,7 +165,7 @@ void MeteorShowers::init()
 	}
 	catch(std::runtime_error &e)
 	{
-		qWarning() << "MeteorShowers::init error: " << e.what();
+		qWarning() << "MeteorShowers: init error:" << e.what();
 		return;
 	}
 
@@ -186,12 +186,12 @@ void MeteorShowers::init()
 		}
 		else
 		{
-			qDebug() << "MeteorShowers::init showers.json does not exist - copying default file to " << QDir::toNativeSeparators(showersJsonPath);
+			qDebug() << "MeteorShowers: showers.json does not exist - copying default file to" << QDir::toNativeSeparators(showersJsonPath);
 			restoreDefaultJsonFile();
 		}
 	}
 
-	qDebug() << "MeteorShowers::init using file: " << QDir::toNativeSeparators(showersJsonPath);
+	qDebug() << "MeteorShowers: loading catalog file:" << QDir::toNativeSeparators(showersJsonPath);
 
 	// create meteor Showers according to content os Showers.json file
 	readJsonFile();
@@ -768,7 +768,7 @@ QVariantMap MeteorShowers::loadShowersMap(QString path)
 	QVariantMap map;
 	QFile jsonFile(path);
 	if(!jsonFile.open(QIODevice::ReadOnly))
-		qWarning() << "MeteorShowers::loadShowersMap cannot open " << path;
+		qWarning() << "MeteorShowers: cannot open" << path;
 	else
 		map = StelJsonParser::parse(jsonFile.readAll()).toMap();
 
@@ -836,11 +836,11 @@ void MeteorShowers::restoreDefaultJsonFile(void)
 	QFile src(":/MeteorShowers/showers.json");
 	if(!src.copy(showersJsonPath))
 	{
-		qWarning() << "MeteorShowers::restoreDefaultJsonFile cannot copy json resource to " + showersJsonPath;
+		qWarning() << "MeteorShowers: cannot copy JSON resource to" << showersJsonPath;
 	}
 	else
 	{
-		qDebug() << "MeteorShowers::init copied default showers.json to " << showersJsonPath;
+		qDebug() << "MeteorShowers: copied default showers.json to" << showersJsonPath;
 		// The resource is read only, and the new file inherits this...  make sure the new file
 		// is writable by the Stellarium process so that updates can be done.
 		QFile dest(showersJsonPath);
@@ -859,7 +859,7 @@ bool MeteorShowers::backupJsonFile(bool deleteOriginal)
 	QFile old(showersJsonPath);
 	if(!old.exists())
 	{
-		qWarning() << "MeteorShowers::backupJsonFile no file to backup";
+		qWarning() << "MeteorShowers: no file to backup";
 		return false;
 	}
 
@@ -873,14 +873,14 @@ bool MeteorShowers::backupJsonFile(bool deleteOriginal)
 		{
 			if(!old.remove())
 			{
-				qWarning() << "MeteorShowers::backupJsonFile WARNING - could not remove old showers.json file";
+				qWarning() << "MeteorShowers: WARNING - could not remove old showers.json file";
 				return false;
 			}
 		}
 	}
 	else
 	{
-		qWarning() << "MeteorShowers::backupJsonFile WARNING - failed to copy showers.json to showers.json.old";
+		qWarning() << "MeteorShowers: WARNING - failed to copy showers.json to showers.json.old";
 		return false;
 	}
 
@@ -893,7 +893,7 @@ int MeteorShowers::getJsonFileFormatVersion(void)
 	QFile showersJsonFile(showersJsonPath);
 	if(!showersJsonFile.open(QIODevice::ReadOnly))
 	{
-		qWarning() << "MeteorShowers::init cannot open " << QDir::toNativeSeparators(showersJsonPath);
+		qWarning() << "MeteorShowers: cannot open" << QDir::toNativeSeparators(showersJsonPath);
 		return jsonVersion;
 	}
 
@@ -905,7 +905,7 @@ int MeteorShowers::getJsonFileFormatVersion(void)
 	}
 
 	showersJsonFile.close();
-	qDebug() << "MeteorShowers::getJsonFileFormatVersion() version from file:" << jsonVersion;
+	qDebug() << "MeteorShowers: version of the format of the catalog:" << jsonVersion;
 	return jsonVersion;
 }
 
@@ -914,7 +914,7 @@ bool MeteorShowers::checkJsonFileFormat()
 	QFile showersJsonFile(showersJsonPath);
 	if(!showersJsonFile.open(QIODevice::ReadOnly))
 	{
-		qWarning() << "MeteorShowers::init cannot open " << QDir::toNativeSeparators(showersJsonPath);
+		qWarning() << "MeteorShowers: cannot open" << QDir::toNativeSeparators(showersJsonPath);
 		return false;
 	}
 	
@@ -926,8 +926,7 @@ bool MeteorShowers::checkJsonFileFormat()
 	}
 	catch(std::runtime_error& e)
 	{
-		qDebug() << "MeteorShowers::checkJsonFileFormat(): file format is wrong!";
-		qDebug() << "MeteorShowers::checkJsonFileFormat() error:" << e.what();
+		qDebug() << "MeteorShowers: file format is wrong! Error:" << e.what();
 		return false;
 	}
 	
@@ -1043,7 +1042,7 @@ void MeteorShowers::updateDownloadComplete(QNetworkReply* reply)
 	// check the download worked, and save the data to file if this is the case.
 	if(reply->error() != QNetworkReply::NoError)
 	{
-		qWarning() << "MeteorShowers::updateDownloadComplete FAILED to download" << reply->url() << " Error: " << reply->errorString();
+		qWarning() << "MeteorShowers: FAILED to download" << reply->url() << " Error:" << reply->errorString();
 	}
 	else
 	{
@@ -1051,7 +1050,7 @@ void MeteorShowers::updateDownloadComplete(QNetworkReply* reply)
 		QString jsonFilePath = StelFileMgr::findFile("modules/MeteorShowers", StelFileMgr::Flags(StelFileMgr::Writable|StelFileMgr::Directory)) + "/showers.json";
 		if(jsonFilePath.isEmpty())
 		{
-			qWarning() << "MeteorShowers::updateDownloadComplete: cannot write JSON data to file";
+			qWarning() << "MeteorShowers: cannot write JSON data to file";
 		}
 		else
 		{
@@ -1176,10 +1175,12 @@ void MeteorShowers::translations()
 	N_("Comae Berenicids");
 	// TRANSLATORS: Name of meteor shower
 	N_("Orionids");
+	// TRANSLATORS: Name of meteor shower
+	N_("Andromedids");
 
 	// List of parent objects for meteor showers
 	// TRANSLATORS: Name of parent object for meteor shower
-	N_("Asteroid 2003 EH1");
+	N_("Minor planet 2003 EH1 and Comet C/1490 Y1");
 	// TRANSLATORS: Name of parent object for meteor shower
 	N_("Comet 1P/Halley");
 	// TRANSLATORS: Name of parent object for meteor shower
@@ -1193,11 +1194,27 @@ void MeteorShowers::translations()
 	// TRANSLATORS: Name of parent object for meteor shower
 	N_("Comet Thatcher (1861 I)");
 	// TRANSLATORS: Name of parent object for meteor shower
-	N_("Asteroid (4450) Pan");
+	N_("Minor planet (4450) Pan");
 	// TRANSLATORS: Name of parent object for meteor shower
 	N_("Comet 26P/Grigg-Skjellerup");
 	// TRANSLATORS: Name of parent object for meteor shower
 	N_("Comet 21P/Giacobini-Zinner");
+	// TRANSLATORS: Name of parent object for meteor shower
+	N_("Comet 169P/NEAT");
+	// TRANSLATORS: Name of parent object for meteor shower
+	N_("Comet 289P/Blanpain");
+	// TRANSLATORS: Name of parent object for meteor shower
+	N_("Comet 8P/Tuttle");
+	// TRANSLATORS: Name of parent object for meteor shower
+	N_("Minor planet 2008 ED69");
+	// TRANSLATORS: Name of parent object for meteor shower
+	N_("Comet 2P/Encke");
+	// TRANSLATORS: Name of parent object for meteor shower
+	N_("Comet 3D/Biela");
+	// TRANSLATORS: Name of parent object for meteor shower
+	N_("Minor planet 2004 TG10");
+	// TRANSLATORS: Name of parent object for meteor shower
+	N_("Minor planet (3200) Phaethon");
 
 	/* For copy/paste:
 	// TRANSLATORS: Name of meteor shower
