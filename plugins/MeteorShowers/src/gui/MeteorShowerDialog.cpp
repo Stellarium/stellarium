@@ -246,6 +246,8 @@ void MeteorShowerDialog::setAboutHtml(void)
 	html += "<p>" + q_("Many showers have a radiant point that changes position during the interval when it appears. For example, the radiant point for the Delta Aurigids drifts by more than a degree per night.") + "</p>";
 	html += "<p><b>" + q_("Zenithal Hourly Rate (ZHR)") + "</b>";
 	html += "<br />" + q_("In astronomy, the Zenithal Hourly Rate (ZHR) of a meteor shower is the number of meteors a single observer would see in one hour under a clear, dark sky (limiting apparent magnitude of 6.5) if the radiant of the shower were at the zenith. The rate that can effectively be seen is nearly always lower and decreases the closer the radiant is to the horizon.") + "</p>";
+	html += "<p><b>" + q_("Population index") + "</b>";
+	html += "<br />" + q_("The population index indicates the magnitude distribution of the meteor showers. The values below 2.5 correspond to distributions where bright meteors are more frequent than average, while values above 3.0 mean that the share of faint meteors is larger than usual.") + "</p>";
 	html += "<h3>" + q_("Notes") + "</h3>";
 	html += "<p>" + q_("This plugin was created as project of ESA Summer of Code in Space 2013.") + "</p>";
 	html += "<h3>" + q_("Info") + "</h3>";
