@@ -27,14 +27,6 @@ QT5_WRAP_UI(MeteorShowersDialog_UIS_H ${MeteorShowersDialog_UIS})
 SET(MeteorShowers_RES ../resources/MeteorShower.qrc)
 QT5_ADD_RESOURCES(MeteorShowers_RES_CXX ${MeteorShowers_RES})
 
-SET(MeteorShowers_MOC_HDRS
-    MeteorShower.hpp
-    MeteorShowers.hpp
-    gui/MeteorShowerDialog.hpp
-)
-
-QT5_WRAP_CPP(MeteorShowers_MOC_SRCS ${MeteorShowers_MOC_HDRS})
-
 SET(extLinkerOption ${QT_LIBRARIES} ${JPEG_LIBRARIES} ${PNG_LIBRARIES} ${OPENGL_LIBRARIES} ${ICONV_LIBRARIES} ${INTL_LIBRARIES})
 
 ADD_LIBRARY(MeteorShowers-static STATIC ${MeteorShowers_SRCS} ${MeteorShowers_MOC_SRCS} ${MeteorShowers_RES_CXX} ${MeteorShowersDialog_UIS_H})

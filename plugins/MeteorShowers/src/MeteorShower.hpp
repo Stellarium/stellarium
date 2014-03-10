@@ -18,16 +18,16 @@
  */
 
 #ifndef _METEORSHOWER_HPP_
-#define _METEORSHOWER_HPP_ 1
+#define _METEORSHOWER_HPP_
 
 #include <QDateTime>
 #include <QVariantMap>
 #include <QString>
 
-#include "StelObject.hpp"
-#include "StelTextureTypes.hpp"
-#include "StelPainter.hpp"
 #include "StelFader.hpp"
+#include "StelObject.hpp"
+#include "StelPainter.hpp"
+#include "StelTextureTypes.hpp"
 #include "StelTranslator.hpp"
 
 class StelPainter;
@@ -183,4 +183,4 @@ private:
 	float getSolarLongitude(QDateTime QDT) const;
 };
 
-#endif // _METEORSHOWER_HPP_
+#endif /*_METEORSHOWER_HPP_*/
