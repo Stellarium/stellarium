@@ -202,7 +202,7 @@ void AddOnDialog::updateCatalog()
 
 	QNetworkRequest req;
 	req.setUrl(QUrl(StelApp::getInstance().getStelAddOnMgr().getUrlForUpdates()));
-	req.setRawHeader("User-Agent", StelUtils::getApplicationName().toLatin1());
+	req.setRawHeader("User-Agent", StelApp::getInstance().getStelAddOnMgr().getUserAgent());
 	m_pUpdateCatalogReply = StelApp::getInstance().getNetworkAccessManager()->get(req);
 	connect(m_pUpdateCatalogReply, SIGNAL(finished()), this, SLOT(downloadFinished()));
 }
