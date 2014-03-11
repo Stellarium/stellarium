@@ -450,8 +450,8 @@ void StelMainView::drawBackground(QPainter*, const QRectF&)
 	{
 		double duration = 1./getMaxFps();
 		int dur = (int)(duration*1000);
-		QTimer::singleShot(dur<5 ? 5 : dur, this, SLOT(maxFpsSceneUpdate()));
 		flagMaxFpsUpdatePending = true;
+		QTimer::singleShot(dur<5 ? 5 : dur, this, SLOT(maxFpsSceneUpdate()));
 	}
 
 	// Manage cursor timeout
