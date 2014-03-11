@@ -109,7 +109,8 @@ public slots:
 	float getMaxFps() {return maxfps;}
 
 	void maxFpsSceneUpdate();
-	void minFpsSceneUpdate();
+	//! Updates the scene and process all events
+	void updateScene();
 
 protected:
 	virtual void mouseMoveEvent(QMouseEvent* event);
@@ -139,8 +140,6 @@ private slots:
 private:
 	//! Start the display loop
 	void startMainLoop();
-	//! Updates the scene and process all events
-	void updateScene();
 	
 	QString getSupportedOpenGLVersion() const;
 

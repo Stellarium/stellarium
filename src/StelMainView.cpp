@@ -435,15 +435,8 @@ void StelMainView::thereWasAnEvent()
 
 void StelMainView::maxFpsSceneUpdate()
 {
+	updateScene();
 	flagMaxFpsUpdatePending = false;
-	this->updateScene();
-}
-
-void StelMainView::minFpsSceneUpdate()
-{
-	// Do not update screen if we are at maxFps rate
-	if(!flagMaxFpsUpdatePending)
-		this->updateScene();
 }
 
 void StelMainView::drawBackground(QPainter*, const QRectF&)
@@ -490,7 +483,7 @@ void StelMainView::minFpsChanged()
 	}
 
 	minFpsTimer = new QTimer(this);
-	connect(minFpsTimer, SIGNAL(timeout()), this, SLOT(minFpsSceneUpdate()));
+	connect(minFpsTimer, SIGNAL(timeout()), this, SLOT(updateScene()));
 
 	minFpsTimer->start((int)(1./getMinFps()*1000.));
 }
