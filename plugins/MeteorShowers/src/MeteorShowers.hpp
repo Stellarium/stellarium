@@ -231,7 +231,7 @@ public slots:
 	void updateJSON(void);
 
 	void setFlagShowMS(bool b);
-	bool getFlagShowMS(void)
+	bool getFlagShowMS(void) const
 	{
 		return flagShowMS;
 	}
