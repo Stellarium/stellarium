@@ -361,7 +361,7 @@ private:
 	//MS
 	std::vector<std::vector<MeteorStream*> > active;		// Matrix containing all active meteors
 	int ZHR;
-	const static double zhrToWsr = 1.6667f/3600.f;  // factor to convert from zhr to whole earth per second rate
+	static const double zhrToWsr;  // factor to convert from zhr to whole earth per second rate
 
 	bool flagShow;
 	bool flagShowARG;  //! Show marker of active radiant based on generic data
