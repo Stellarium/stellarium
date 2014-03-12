@@ -571,7 +571,7 @@ QList<MeteorShowerP> MeteorShowers::searchEvents(QDate dateFrom, QDate dateTo) c
 		while(date.operator <=(dateTo))
 		{
 			ms->updateCurrentData((QDateTime) date);
-			if(ms->isActive)
+			if(ms->initialized && ms->active)
 			{
 				result.append(ms);
 				break;
@@ -618,7 +618,7 @@ StelObjectP MeteorShowers::searchByName(const QString& englishName) const
 
 	foreach(const MeteorShowerP& ms, mShowers)
 	{
-		if(ms->initialized && ms->active)
+		if(ms->initialized)
 		{
 			if(ms->getEnglishName().toUpper() == englishName.toUpper())
 				return qSharedPointerCast<StelObject>(ms);
@@ -635,7 +635,7 @@ StelObjectP MeteorShowers::searchByNameI18n(const QString& nameI18n) const
 
 	foreach(const MeteorShowerP& ms, mShowers)
 	{
-		if(ms->initialized && ms->active)
+		if(ms->initialized)
 		{
 			if(ms->getNameI18n().toUpper() == nameI18n.toUpper())
 				return qSharedPointerCast<StelObject>(ms);
