@@ -37,7 +37,7 @@
 StelTextureSP MeteorShower::radiantTexture;
 float MeteorShower::showLabels = true;
 bool MeteorShower::radiantMarkerEnabled = true;
-bool MeteorShower::showInactiveRadiants = false;
+bool MeteorShower::showActiveRadiantsOnly = true;
 
 MeteorShower::MeteorShower(const QVariantMap& map)
 	: initialized(false),
@@ -244,7 +244,7 @@ void MeteorShower::updateCurrentData(QDateTime skyDate)
 	{
 		isActive = 0; // isn't active
 	}
-	active = (isActive>0) || showInactiveRadiants;
+	active = (isActive>0) || !showActiveRadiantsOnly;
 
 	/**************************
 	 *Radiant drift

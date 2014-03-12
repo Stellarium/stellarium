@@ -954,7 +954,7 @@ void MeteorShowers::readSettingsFromConfig(void)
 	enableAtStartup = conf->value("enable_at_startup", false).toBool();
 	flagShowMSButton = conf->value("flag_show_ms_button", true).toBool();
 	setFlagRadiant(conf->value("flag_show_radiants", true).toBool());
-	flagShowAR = conf->value("flag_active_radiants", false).toBool();
+	setFlagActiveRadiant(conf->value("flag_active_radiants", false).toBool());
 
 	Vec3f color;
 	color = StelUtils::strToVec3f(conf->value("colorARG", "0, 255, 240").toString());
@@ -980,7 +980,7 @@ void MeteorShowers::saveSettingsToConfig(void)
 	conf->setValue("enable_at_startup", enableAtStartup);
 	conf->setValue("flag_show_ms_button", flagShowMSButton);
 	conf->setValue("flag_show_radiants", getFlagRadiant());
-	conf->setValue("flag_active_radiants", flagShowAR);
+	conf->setValue("flag_active_radiants", getFlagActiveRadiant());
 
 	int r,g,b;
 	colorARG.getRgb(&r,&g,&b);

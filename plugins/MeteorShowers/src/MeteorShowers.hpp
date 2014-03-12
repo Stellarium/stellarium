@@ -252,11 +252,13 @@ public slots:
 	//! @param false: hidden
 	void setFlagLabels(bool b);
 
-	bool getFlagActiveRadiant(void) { return flagShowAR; }
+	bool getFlagActiveRadiant(void)
+	{
+		return MeteorShower::showActiveRadiantsOnly;
+	}
 	void setFlagActiveRadiant(bool b)
 	{
-		flagShowAR=b;
-		MeteorShower::showInactiveRadiants=!b;
+		MeteorShower::showActiveRadiantsOnly=b;
 	}
 
 	bool getEnableAtStartup(void) {return enableAtStartup;}
@@ -360,8 +362,6 @@ private:
 	std::vector<std::vector<MeteorStream*> > active;		// Matrix containing all active meteors
 	int ZHR;
 	const static double zhrToWsr = 1.6667f/3600.f;  // factor to convert from zhr to whole earth per second rate
-
-	bool flagShowAR;   //! Show marker of active radiant
 
 	bool flagShow;
 	bool flagShowARG;  //! Show marker of active radiant based on generic data

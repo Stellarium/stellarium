@@ -105,7 +105,7 @@ private:
 
 	static StelTextureSP radiantTexture;
 	static bool radiantMarkerEnabled;
-	static bool showInactiveRadiants;
+	static bool showActiveRadiantsOnly;
 
 	LinearFader labelsFader;
 
