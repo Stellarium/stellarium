@@ -105,6 +105,7 @@ private:
 
 	static StelTextureSP radiantTexture;
 	static bool radiantMarkerEnabled;
+	static bool showInactiveRadiants;
 
 	LinearFader labelsFader;
 
@@ -119,7 +120,8 @@ private:
 	} activityData;
 
 	bool initialized;
-	QString showerID;		        //! The ID of the meteor shower
+	bool active;
+	QString showerID;		//! The ID of the meteor shower
 	QString designation;            //! The designation of the meteor shower
 	QList<activityData> activity;	//! List of activity
 	int speed;                      //! Speed of meteors
