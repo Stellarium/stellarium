@@ -595,7 +595,7 @@ QList<StelObjectP> MeteorShowers::searchAround(const Vec3d& av, double limitFov,
 
 	foreach(const MeteorShowerP& ms, mShowers)
 	{
-		if(ms->initialized)
+		if(ms->initialized && ms->isActive>0)
 		{
 			equPos = ms->XYZ;
 			equPos.normalize();
@@ -616,8 +616,11 @@ StelObjectP MeteorShowers::searchByName(const QString& englishName) const
 
 	foreach(const MeteorShowerP& ms, mShowers)
 	{
-		if(ms->getEnglishName().toUpper() == englishName.toUpper())
-			return qSharedPointerCast<StelObject>(ms);
+		if(ms->initialized && ms->isActive>0)
+		{
+			if(ms->getEnglishName().toUpper() == englishName.toUpper())
+				return qSharedPointerCast<StelObject>(ms);
+		}
 	}
 
 	return NULL;
@@ -630,8 +633,11 @@ StelObjectP MeteorShowers::searchByNameI18n(const QString& nameI18n) const
 
 	foreach(const MeteorShowerP& ms, mShowers)
 	{
-		if(ms->getNameI18n().toUpper() == nameI18n.toUpper())
-			return qSharedPointerCast<StelObject>(ms);
+		if(ms->initialized && ms->isActive>0)
+		{
+			if(ms->getNameI18n().toUpper() == nameI18n.toUpper())
+				return qSharedPointerCast<StelObject>(ms);
+		}
 	}
 
 	return NULL;
@@ -651,22 +657,23 @@ QStringList MeteorShowers::listMatchingObjectsI18n(const QString& objPrefix, int
 
 	foreach(const MeteorShowerP& ms, mShowers)
 	{
-		sn = ms->getNameI18n();
-		find = false;
-		if (useStartOfWords)
+		if(ms->initialized && ms->isActive>0)
 		{
-			if (sn.toUpper().left(objPrefix.length()) == objPrefix.toUpper())
-				find = true;
+			sn = ms->getNameI18n();
+			find = false;
+			if (useStartOfWords)
+			{
+				if (sn.toUpper().left(objPrefix.length()) == objPrefix.toUpper())
+					find = true;
+			}
+			else
+			{
+				if (sn.contains(objPrefix, Qt::CaseInsensitive))
+					find = true;
+			}
+			if (find)
+				result << sn;
 		}
-		else
-		{
-			if (sn.contains(objPrefix, Qt::CaseInsensitive))
-				find = true;
-		}
-		if (find)
-			result << sn;
-
-
 	}
 
 	result.sort();
@@ -690,38 +697,41 @@ QStringList MeteorShowers::listMatchingObjects(const QString& objPrefix, int max
 	bool find;
 	foreach(const MeteorShowerP& ms, mShowers)
 	{
-		sn = ms->getEnglishName();
-		find = false;
-		if(useStartOfWords)
+		if(ms->initialized && ms->isActive>0)
 		{
-			if(objPrefix.toUpper()==sn.toUpper().left(objPrefix.length()))
-				find = true;
-		}
-		else
-		{
-			if(sn.contains(objPrefix, Qt::CaseInsensitive))
-				find = true;
-		}
-		if(find)
-		{
-			result << sn;
-		}
+			sn = ms->getEnglishName();
+			find = false;
+			if(useStartOfWords)
+			{
+				if(objPrefix.toUpper()==sn.toUpper().left(objPrefix.length()))
+					find = true;
+			}
+			else
+			{
+				if(sn.contains(objPrefix, Qt::CaseInsensitive))
+					find = true;
+			}
+			if(find)
+			{
+				result << sn;
+			}
 
-		sn = ms->getDesignation();
-		find = false;
-		if(useStartOfWords)
-		{
-			if(objPrefix.toUpper()==sn.toUpper().left(objPrefix.length()))
-				find = true;
-		}
-		else
-		{
-			if(sn.contains(objPrefix, Qt::CaseInsensitive))
-				find = true;
-		}
-		if(find)
-		{
-			result << sn;
+			sn = ms->getDesignation();
+			find = false;
+			if(useStartOfWords)
+			{
+				if(objPrefix.toUpper()==sn.toUpper().left(objPrefix.length()))
+					find = true;
+			}
+			else
+			{
+				if(sn.contains(objPrefix, Qt::CaseInsensitive))
+					find = true;
+			}
+			if(find)
+			{
+				result << sn;
+			}
 		}
 	}
 
