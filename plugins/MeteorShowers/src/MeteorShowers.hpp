@@ -253,7 +253,11 @@ public slots:
 	void setFlagLabels(bool b);
 
 	bool getFlagActiveRadiant(void) { return flagShowAR; }
-	void setFlagActiveRadiant(bool b) { flagShowAR=b; }
+	void setFlagActiveRadiant(bool b)
+	{
+		flagShowAR=b;
+		MeteorShower::showInactiveRadiants=!b;
+	}
 
 	bool getEnableAtStartup(void) {return enableAtStartup;}
 	void setEnableAtStartup(bool b)	{enableAtStartup=b;}

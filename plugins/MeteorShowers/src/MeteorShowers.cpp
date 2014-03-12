@@ -595,7 +595,7 @@ QList<StelObjectP> MeteorShowers::searchAround(const Vec3d& av, double limitFov,
 
 	foreach(const MeteorShowerP& ms, mShowers)
 	{
-		if(ms->initialized && ms->isActive>0)
+		if(ms->initialized && ms->active)
 		{
 			equPos = ms->XYZ;
 			equPos.normalize();
@@ -616,7 +616,7 @@ StelObjectP MeteorShowers::searchByName(const QString& englishName) const
 
 	foreach(const MeteorShowerP& ms, mShowers)
 	{
-		if(ms->initialized && ms->isActive>0)
+		if(ms->initialized && ms->active)
 		{
 			if(ms->getEnglishName().toUpper() == englishName.toUpper())
 				return qSharedPointerCast<StelObject>(ms);
@@ -633,7 +633,7 @@ StelObjectP MeteorShowers::searchByNameI18n(const QString& nameI18n) const
 
 	foreach(const MeteorShowerP& ms, mShowers)
 	{
-		if(ms->initialized && ms->isActive>0)
+		if(ms->initialized && ms->active)
 		{
 			if(ms->getNameI18n().toUpper() == nameI18n.toUpper())
 				return qSharedPointerCast<StelObject>(ms);
@@ -657,7 +657,7 @@ QStringList MeteorShowers::listMatchingObjectsI18n(const QString& objPrefix, int
 
 	foreach(const MeteorShowerP& ms, mShowers)
 	{
-		if(ms->initialized && ms->isActive>0)
+		if(ms->initialized && ms->active)
 		{
 			sn = ms->getNameI18n();
 			find = false;
@@ -697,7 +697,7 @@ QStringList MeteorShowers::listMatchingObjects(const QString& objPrefix, int max
 	bool find;
 	foreach(const MeteorShowerP& ms, mShowers)
 	{
-		if(ms->initialized && ms->isActive>0)
+		if(ms->initialized && ms->active)
 		{
 			sn = ms->getEnglishName();
 			find = false;
