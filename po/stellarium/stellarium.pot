@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-03-12 18:23+0700\n"
+"POT-Creation-Date: 2014-03-12 18:41+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1091,6 +1091,7 @@ msgstr ""
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:118
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:124
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:100
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:236
 msgid "Version"
 msgstr ""
 
@@ -1103,6 +1104,7 @@ msgstr ""
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:119
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:125
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:101
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:237
 msgid "Author"
 msgstr ""
 
@@ -4741,7 +4743,7 @@ msgstr ""
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:126
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:142
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:131
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:259
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:262
 msgid "Links"
 msgstr ""
 
@@ -4752,7 +4754,7 @@ msgstr ""
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:127
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:143
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:132
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:260
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:263
 #, qt-format
 msgid ""
 "Support is provided via the Launchpad website.  Be sure to put \"%1\" in the "
@@ -4767,7 +4769,7 @@ msgstr ""
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:130
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:146
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:135
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:263
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:266
 #, qt-format
 msgid "If you have a question, you can %1get an answer here%2"
 msgstr ""
@@ -4780,7 +4782,7 @@ msgstr ""
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:132
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:148
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:137
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:265
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:268
 #, qt-format
 msgid "Bug reports can be made %1here%2."
 msgstr ""
@@ -4793,7 +4795,7 @@ msgstr ""
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:134
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:150
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:139
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:267
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:270
 msgid ""
 "If you would like to make a feature request, you can create a bug report, "
 "and set the severity to \"wishlist\"."
@@ -5718,7 +5720,7 @@ msgstr ""
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:154
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:170
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:207
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:281
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:284
 msgid "Internet updates disabled"
 msgstr ""
 
@@ -5734,8 +5736,8 @@ msgstr ""
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:230
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:209
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:265
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:283
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:311
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:286
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:314
 msgid "Updating now..."
 msgstr ""
 
@@ -5745,7 +5747,7 @@ msgstr ""
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:158
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:174
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:211
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:285
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:288
 msgid "Next update: < 1 minute"
 msgstr ""
 
@@ -5755,7 +5757,7 @@ msgstr ""
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:160
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:176
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:213
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:287
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:290
 #, qt-format
 msgid "Next update: %1 minutes"
 msgstr ""
@@ -5766,7 +5768,7 @@ msgstr ""
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:162
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:178
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:215
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:289
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:292
 #, qt-format
 msgid "Next update: %1 hours"
 msgstr ""
@@ -5777,7 +5779,7 @@ msgstr ""
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:211
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:233
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:268
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:314
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:317
 msgid "Update error"
 msgstr ""
 
@@ -5807,7 +5809,7 @@ msgstr ""
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:271
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:254
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:305
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:302
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:305
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:519
 msgid "Update now"
 msgstr ""
@@ -7764,7 +7766,7 @@ msgstr ""
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:141
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:269
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:272
 #, qt-format
 msgid ""
 "If you want to read full information about the plugin, its history and "
@@ -8826,33 +8828,25 @@ msgid "Generic"
 msgstr ""
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:235
-msgid "Meteor Showers Plugin"
+msgid "Meteor Showers Plug-in"
 msgstr ""
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:236
-msgid "Version:"
-msgstr ""
-
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:237
-msgid "Author:"
-msgstr ""
-
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:239
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:240
 msgid ""
 "The Meteor Showers plugin give visualization of the meteor showers, show "
 "information about meteor showers and displays marker for radiants in "
 "activity range for each meteor showers."
 msgstr ""
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:240
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:241
 msgid "Terms"
 msgstr ""
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:241
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:242
 msgid "Meteor shower"
 msgstr ""
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:242
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:243
 msgid ""
 "A meteor shower is a celestial event in which a number of meteors are "
 "observed to radiate, or originate, from one point in the night sky. These "
@@ -8864,11 +8858,11 @@ msgid ""
 "1,000 meteors an hour."
 msgstr ""
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:243
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:244
 msgid "Radiant"
 msgstr ""
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:244
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:245
 msgid ""
 "The radiant or apparent radiant of a meteor shower is the point in the sky, "
 "from which (to a planetary observer) meteors appear to originate. The "
@@ -8876,7 +8870,7 @@ msgid ""
 "the constellation of Perseus."
 msgstr ""
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:245
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:246
 msgid ""
 "An observer might see such a meteor anywhere in the sky but the direction of "
 "motion, when traced back, will point to the radiant. A meteor that does not "
@@ -8884,18 +8878,18 @@ msgid ""
 "and is not considered part of that shower."
 msgstr ""
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:246
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:247
 msgid ""
 "Many showers have a radiant point that changes position during the interval "
 "when it appears. For example, the radiant point for the Delta Aurigids "
 "drifts by more than a degree per night."
 msgstr ""
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:247
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:248
 msgid "Zenithal Hourly Rate (ZHR)"
 msgstr ""
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:248
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:249
 msgid ""
 "In astronomy, the Zenithal Hourly Rate (ZHR) of a meteor shower is the "
 "number of meteors a single observer would see in one hour under a clear, "
@@ -8904,11 +8898,11 @@ msgid ""
 "lower and decreases the closer the radiant is to the horizon."
 msgstr ""
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:249
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:250
 msgid "Population index"
 msgstr ""
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:250
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:251
 msgid ""
 "The population index indicates the magnitude distribution of the meteor "
 "showers. The values below 2.5 correspond to distributions where bright "
@@ -8916,33 +8910,35 @@ msgid ""
 "share of faint meteors is larger than usual."
 msgstr ""
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:251
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:252
 msgid "Notes"
 msgstr ""
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:252
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:253
 msgid "This plugin was created as project of ESA Summer of Code in Space 2013."
 msgstr ""
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:253
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:254
 msgid "Info"
 msgstr ""
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:254
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:255
 msgid "Info about meteor showers you can get here:"
 msgstr ""
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:256
+#. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:258
 #, qt-format
 msgid "%1Meteor shower%2 - article in Wikipedia"
 msgstr ""
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:257
+#. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:260
 #, qt-format
 msgid "%1International Meteor Organization%2"
 msgstr ""
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:321
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:324
 msgid "Meteor showers is updated"
 msgstr ""
 
