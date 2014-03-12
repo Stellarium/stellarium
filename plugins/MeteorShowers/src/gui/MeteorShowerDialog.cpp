@@ -203,16 +203,17 @@ void MeteorShowerDialog::searchEvents(void)
 
 void MeteorShowerDialog::selectEvent(const QModelIndex &modelIndex)
 {
+	Q_UNUSED(modelIndex);
 	StelCore *core = StelApp::getInstance().getCore();
 
-	//Change date
+	//Change date	
 	QString dateString = treeWidget->currentItem()->text(ColumnPeak);
 	QDateTime qDateTime = QDateTime::fromString(dateString, "dd/MMM/yyyy");
 	core->setJDay(StelUtils::qDateTimeToJd(qDateTime));
 
 	//Select object
 	QString namel18n = treeWidget->currentItem()->text(ColumnName);
-	StelObjectMgr* objectMgr = GETSTELMODULE(StelObjectMgr);
+	StelObjectMgr* objectMgr = GETSTELMODULE(StelObjectMgr);	
 	if((objectMgr->findAndSelectI18n(namel18n) || objectMgr->findAndSelect(namel18n)) && plugin->getFlagShowMS())
 	{
 		//Move to object
