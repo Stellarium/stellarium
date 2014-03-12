@@ -317,7 +317,7 @@ QString MeteorShower::getInfoString(const StelCore* core, const InfoStringGroup&
 
 		if(!parentObj.isEmpty())
 		{
-			oss << q_("Parent body: %1").arg(parentObj) << "<br />";
+			oss << q_("Parent body: %1").arg(q_(parentObj)) << "<br />";
 		}
 
 		if(start.toString("M") == finish.toString("M"))
@@ -331,7 +331,7 @@ QString MeteorShower::getInfoString(const StelCore* core, const InfoStringGroup&
 		else
 		{
 			oss << QString("%1: %2 - %3")
-			       .arg(q_("Active"))
+			       .arg(q_("Activity"))
 			       .arg(start.toString("d MMMM"))
 			       .arg(finish.toString("d MMMM"));
 		}
