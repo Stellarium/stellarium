@@ -585,7 +585,7 @@ QList<StelObjectP> MeteorShowers::searchAround(const Vec3d& av, double limitFov,
 {
 	QList<StelObjectP> result;
 
-	if(!getFlagRadiant())
+	if(!getFlagShowMS() || !getFlagRadiant())
 		return result;
 
 	Vec3d v(av);
@@ -611,7 +611,7 @@ QList<StelObjectP> MeteorShowers::searchAround(const Vec3d& av, double limitFov,
 
 StelObjectP MeteorShowers::searchByName(const QString& englishName) const
 {
-	if(!getFlagRadiant())
+	if(!getFlagShowMS() || !getFlagRadiant())
 		return NULL;
 
 	foreach(const MeteorShowerP& ms, mShowers)
@@ -628,7 +628,7 @@ StelObjectP MeteorShowers::searchByName(const QString& englishName) const
 
 StelObjectP MeteorShowers::searchByNameI18n(const QString& nameI18n) const
 {
-	if(!getFlagRadiant())
+	if(!getFlagShowMS() || !getFlagRadiant())
 		return NULL;
 
 	foreach(const MeteorShowerP& ms, mShowers)
@@ -646,7 +646,7 @@ StelObjectP MeteorShowers::searchByNameI18n(const QString& nameI18n) const
 QStringList MeteorShowers::listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem, bool useStartOfWords) const
 {
 	QStringList result;
-	if(!getFlagRadiant())
+	if(!getFlagShowMS() || !getFlagRadiant())
 		return result;
 
 	if(maxNbItem==0)
@@ -687,7 +687,7 @@ QStringList MeteorShowers::listMatchingObjectsI18n(const QString& objPrefix, int
 QStringList MeteorShowers::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords) const
 {
 	QStringList result;
-	if(!getFlagRadiant())
+	if(!getFlagShowMS() || !getFlagRadiant())
 		return result;
 
 	if(maxNbItem==0)
