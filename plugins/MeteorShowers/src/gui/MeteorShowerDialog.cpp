@@ -232,9 +232,10 @@ void MeteorShowerDialog::refreshRangeDates(void)
 void MeteorShowerDialog::setAboutHtml(void)
 {
 	QString html = "<html><head></head><body>";
-	html += "<h2>" + q_("Meteor Showers Plugin") + "</h2><table width=\"90%\">";
-	html += "<tr width=\"30%\"><td>" + q_("Version:") + "</td><td>" + METEORSHOWERS_PLUGIN_VERSION + "</td></tr>";
-	html += "<tr><td>" + q_("Author:") + "</td><td>Marcos Cardinot &lt;mcardinot@gmail.com&gt;</td></tr></table>";
+	html += "<h2>" + q_("Meteor Showers Plug-in") + "</h2><table width=\"90%\">";
+	html += "<tr width=\"30%\"><td><strong>" + q_("Version") + ":</strong></td><td>" + METEORSHOWERS_PLUGIN_VERSION + "</td></tr>";
+	html += "<tr><td><strong>" + q_("Author") + ":</strong></td><td>Marcos Cardinot &lt;mcardinot@gmail.com&gt;</td></tr>";
+	html += "</table>";
 
 	html += "<p>" + q_("The Meteor Showers plugin give visualization of the meteor showers, show information about meteor showers and displays marker for radiants in activity range for each meteor showers.") + "</p>";
 	html += "<h3>" + q_("Terms") + "</h3>";
@@ -253,7 +254,9 @@ void MeteorShowerDialog::setAboutHtml(void)
 	html += "<h3>" + q_("Info") + "</h3>";
 	html += "<p>" + q_("Info about meteor showers you can get here:") + "</p>";
 	html += "<ul>";
+	// TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 	html += "<li>" + QString(q_("%1Meteor shower%2 - article in Wikipedia").arg("<a href=\"https://en.wikipedia.org/wiki/Meteor_Showers\">")).arg("</a>") + "</li>";
+	// TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 	html += "<li>" + QString(q_("%1International Meteor Organization%2").arg("<a href=\"http://www.imo.net/\">")).arg("</a>") + "</li>";
 	html += "</ul>";
 	html += "<h3>" + q_("Links") + "</h3>";
