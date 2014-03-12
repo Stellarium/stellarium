@@ -38,7 +38,6 @@ StelTextureSP MeteorShower::radiantTexture;
 float MeteorShower::showLabels = true;
 bool MeteorShower::radiantMarkerEnabled = true;
 bool MeteorShower::showActiveRadiantsOnly = true;
-const double MeteorShowers::zhrToWsr = 1.6667f/3600.f;
 
 MeteorShower::MeteorShower(const QVariantMap& map)
 	: initialized(false),
