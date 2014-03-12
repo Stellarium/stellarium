@@ -59,6 +59,8 @@
 
 #define CATALOG_FORMAT_VERSION 1 /* Version of format of catalog */
 
+const double MeteorShowers::zhrToWsr = 1.6667f/3600.f;
+
 /*
  This method is the one called automatically by the StelModuleMgr just
  after loading the dynamic library
