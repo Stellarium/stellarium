@@ -151,7 +151,7 @@ void MeteorShowers::init()
 		MeteorShower::radiantTexture = StelApp::getInstance().getTextureManager().createTexture(":/MeteorShowers/radiant.png");
 
 		// key bindings and other actions
-		QString msGroup = N_("Meteor Shower");
+		QString msGroup = N_("Meteor Showers");
 		addAction("actionShow_MeteorShower", msGroup, N_("Show meteor showers"), "msVisible", "Ctrl+Alt+M");
 		addAction("actionShow_radiant_Labels", msGroup, N_("Radiant labels"), "labelsVisible", "Shift+M");
 		addAction("actionShow_MeteorShower_ConfigDialog", msGroup, N_("Meteor Shower configuration window"), configDialog, "visible", "Alt+M");
