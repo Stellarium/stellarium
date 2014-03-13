@@ -446,12 +446,25 @@ void StelMainView::drawBackground(QPainter*, const QRectF&)
 	// Determines when the next display will need to be triggered
 	// The current policy is that after an event, the FPS is maximum for 2.5 seconds
 	// after that, it switches back to the default minfps value to save power
-	if (now-lastEventTimeSec<2.5 && !flagMaxFpsUpdatePending)
+	if (now-lastEventTimeSec<2.5)
 	{
-		double duration = 1./getMaxFps();
-		int dur = (int)(duration*1000);
-		flagMaxFpsUpdatePending = true;
-		QTimer::singleShot(dur<5 ? 5 : dur, this, SLOT(maxFpsSceneUpdate()));
+		if (!flagMaxFpsUpdatePending)
+		{
+			double duration = 1./getMaxFps();
+			int dur = (int)(duration*1000);
+
+			if (minFpsTimer!=NULL)
+			{
+				disconnect(minFpsTimer, SIGNAL(timeout()), 0, 0);
+				delete minFpsTimer;
+				minFpsTimer = NULL;
+			}
+			flagMaxFpsUpdatePending = true;
+			QTimer::singleShot(dur<5 ? 5 : dur, this, SLOT(maxFpsSceneUpdate()));
+		}
+	} else if (minFpsTimer == NULL) {
+		// Restart the minfps timer
+		minFpsChanged();
 	}
 
 	// Manage cursor timeout
