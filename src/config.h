@@ -23,10 +23,10 @@
 // This file should be included everywhere.  It contains a few preprocessor
 // macros that make the code more cross platform.
 
-// Needed so that M_PI get defined.
-#define _USE_MATH_DEFINES
-
 #ifdef _MSC_BUILD
+	// Using M_PI and other math macros requires defining _USE_MATH_DEFINES
+	// before the first inclusion of cmath, so it's done in CMakeLists.txt.
+	// This way it doesn't matter where the preprocessor first sees cmath.
 	#include <cmath>
 	// Disable a few msvc specific warnings.
 	#  pragma warning(disable : 4305) // double to float truncation.
