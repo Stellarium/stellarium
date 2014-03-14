@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-03-12 20:32+0700\n"
-"PO-Revision-Date: 2014-02-16 18:35+0000\n"
+"PO-Revision-Date: 2014-03-13 18:05+0000\n"
 "Last-Translator: Tuomas Teipainen <tmsteipainen1@gmail.com>\n"
 "Language-Team: Finnish <fi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-03-13 05:55+0000\n"
+"X-Launchpad-Export-Date: 2014-03-14 05:39+0000\n"
 "X-Generator: Launchpad (build 16963)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:107 src/core/modules/StarMgr.cpp:338
@@ -1888,7 +1888,7 @@ msgstr "Harvardin yliopisto (USA)"
 
 #: src/gui/SearchDialog.cpp:616
 msgid "Paste and Search"
-msgstr ""
+msgstr "Liitä ja hae"
 
 #: src/gui/ShortcutsDialog.cpp:488
 msgid "Action"
@@ -3764,7 +3764,7 @@ msgstr "Tiedosto &nimi:"
 
 #: src/translations.h:560
 msgid "Copy &Link Location"
-msgstr ""
+msgstr "Kopioi &linkin osoite"
 
 #: src/ui_helpDialogGui.h:277 src/ui_helpDialogGui.h:283
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:417
@@ -3797,6 +3797,8 @@ msgid ""
 "Standard list of locations is contains only English names (without "
 "diacritics!)"
 msgstr ""
+"Normaali paikkakunta-luettelo sisältää vain englanninkielisiä nimiä (ilman "
+"tarkkeita!)"
 
 #: src/ui_locationDialogGui.h:399
 msgid "Current location information"
@@ -4917,6 +4919,9 @@ msgid ""
 "angular distance between two points on the sky (and calculation of position "
 "angle between those two points)."
 msgstr ""
+"Kulmanmittauslaajennus on pieni työkalu, jota voi käyttää kulman "
+"mittaamiseen asteina kahden taivaalla olevan pisteen välillä (ja "
+"asentokulman laskemiseen näiden kahden pisteen välillä)."
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:79
 msgid ""
@@ -4926,6 +4931,11 @@ msgid ""
 "at one end, pointing at a <em>photograph</em> of Saturn at the other end of "
 "the lab. We measured. We calculated. We wished we were in Hawaii."
 msgstr ""
+"Muistan kuinka mittasimme Cassinin jakoa opiskelijoina. Se ei ollut "
+"akateemista glamouria jota voisi odottaa... Oli pilvistä... Oli sateista... "
+"Observatorion labrassa oli muutama vanha kaukoputki , osoittamassa "
+"<em>valokuvaan</em> Saturnuksesta labran toisessa päässä. Me mittasimme. Me "
+"laskimme. Ja toivoimme että olisimme olleet Hawaijilla"
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:81
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:420
@@ -5003,6 +5013,8 @@ msgid ""
 "If you want to read full information about this plugin and its history, you "
 "can %1get info here%2."
 msgstr ""
+"Jos haluat lukea enemmän tästä laajennuksesta ja sen historiasta, löydät "
+"tiedot %1täältä%2."
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:181
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:263
@@ -5011,7 +5023,7 @@ msgstr "Pulsarien asetukset"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:182
 msgid "Angle Measure Plug-in Configuration"
-msgstr ""
+msgstr "Kulmanmittaustyökalun asetukset"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:184
 #: plugins/Satellites/src/ui_satellitesDialog.h:716
@@ -5027,11 +5039,11 @@ msgstr "Asetukset"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:185
 msgid "Use dms format for angles"
-msgstr ""
+msgstr "Käytä kulmille dms-formaattia"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:186
 msgid "Show position angle"
-msgstr ""
+msgstr "Näytä asentokulma"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:187
 #: plugins/Satellites/src/ui_satellitesDialog.h:714
@@ -5548,10 +5560,11 @@ msgstr "Käytä asteita ja minuutteja CCD:n näkökentälle"
 msgid ""
 "Mark it if you want value of FOV is same like at the startup of Stellarium."
 msgstr ""
+"Merkkaa, jos haluat että näkökenttä on sama kuin Stellariumin käynnistyessä."
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1069
 msgid "Restore FOV to initial values"
-msgstr ""
+msgstr "Paluta oletusnäkökenttä"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1070
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:220
@@ -8252,7 +8265,7 @@ msgstr "NASA:n eksoplaneetta-arkisto"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:184
 msgid "IAU Commission 53: Extrasolar Planets"
-msgstr ""
+msgstr "IAU:n komissio 53: Ekstrasolaariset planeetat"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:185
 msgid "ExoMol"
@@ -8327,7 +8340,7 @@ msgstr "Verkkosivustot"
 
 #: plugins/Observability/src/Observability.cpp:65
 msgid "Observability Analysis"
-msgstr ""
+msgstr "Havaittavuusanalyysi"
 
 #: plugins/Observability/src/Observability.cpp:68
 msgid ""
@@ -8339,6 +8352,13 @@ msgid ""
 "setting. (Explanations are provided in the 'About' tab of the plugin's "
 "configuration window.)"
 msgstr ""
+"Näyttää analyysin valitun kohteen havaittavuudesta (nousu, lasku ja "
+"ylikulkuajat) nykyiselle ajankohdalle, sekä ajan jolloin se on havaittavissa "
+"vuoden aikana. Kohteen oletetaan olevan havaittavissa, jos se on horisontin "
+"yläpuolella edes pienen hetken yön aikana. Sisällytetynä on myös päivät "
+"jolloin kohde on kaummillaan auringosta, sekä akronikaalinen ja kosminen "
+"nousu ja lasku. (Selitykset näille termeille löytyvät \"Tietoja\"-"
+"välilehdeltä laajennuksen asetusikkunasta."
 
 #: plugins/Observability/src/Observability.cpp:209
 msgctxt "short month name"
@@ -8902,7 +8922,7 @@ msgstr "Fontin koko:"
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:78
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:154
 msgid "Meteor Showers"
-msgstr ""
+msgstr "Meteoriparvet"
 
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:81
 msgid ""
@@ -8910,371 +8930,375 @@ msgid ""
 "meteor showers and displays marker for radiants in activity range for each "
 "meteor showers."
 msgstr ""
+"Tämä laajennus näyttää meteoriparvet, antaa tietoja meteoriparvista ja "
+"osoittaa jokaisen meteoriparven radiantit niiden aktiivisuusaikana."
 
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:155
 msgid "Show meteor showers"
-msgstr ""
+msgstr "Näytä meteoriparvet"
 
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:156
 msgid "Radiant labels"
-msgstr ""
+msgstr "Radianttien merkit"
 
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:157
 msgid "Meteor Shower configuration window"
-msgstr ""
+msgstr "Meteoriparvien asetusikkuna"
 
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:184
 msgid ""
 "The old showers.json file is no longer compatible - using default file"
 msgstr ""
+"Vanha showers.json -tiedosto ei ole enää yhteensopiva - käytetään "
+"oletustiedostoa"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1113
 msgid "Quadrantids"
-msgstr ""
+msgstr "Kvadrantidit"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1115
 msgid "Lyrids"
-msgstr ""
+msgstr "Lyridit"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1117
 msgid "α-Centaurids"
-msgstr ""
+msgstr "α-Centauridit"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1119
 msgid "γ-Normids"
-msgstr ""
+msgstr "γ-Normidit"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1121
 msgid "η-Aquariids"
-msgstr ""
+msgstr "η-Akvaridit"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1123
 msgid "June Bootids"
-msgstr ""
+msgstr "Kesäkuun Bootidit"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1125
 msgid "Piscis Austrinids"
-msgstr ""
+msgstr "Piscis Austrinidit"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1127
 msgid "Southern δ-Aquariids"
-msgstr ""
+msgstr "Eteläiset δ-Akvaridit"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1129
 msgid "α-Capricornids"
-msgstr ""
+msgstr "α-Capricornidit"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1131
 msgid "α-Aurigids"
-msgstr ""
+msgstr "α-Aurigidit"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1133
 msgid "September ε-Perseids"
-msgstr ""
+msgstr "Syyskuun ε-Perseidit"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1135
 msgid "Draconids"
-msgstr ""
+msgstr "Draconidit"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1137
 msgid "Leonids"
-msgstr ""
+msgstr "Leonidit"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1139
 msgid "Phoenicids"
-msgstr ""
+msgstr "Phoenicidit"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1141
 msgid "Puppid-Velids"
-msgstr ""
+msgstr "Puppidi-Velidit"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1143
 msgid "Ursids"
-msgstr ""
+msgstr "Ursidit"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1145
 msgid "Perseids"
-msgstr ""
+msgstr "Perseidit"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1147
 msgid "δ-Leonids"
-msgstr ""
+msgstr "δ-Leonidit"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1149
 msgid "π-Puppids"
-msgstr ""
+msgstr "π-Puppidit"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1151
 msgid "June Lyrids"
-msgstr ""
+msgstr "Kesäkuun Lyridit"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1153
 msgid "κ-Cygnids"
-msgstr ""
+msgstr "κ-Cygnidit"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1155
 msgid "ε-Lyrids"
-msgstr ""
+msgstr "ε-Lyridit"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1157
 msgid "δ-Aurigids"
-msgstr ""
+msgstr "δ-Aurigidit"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1159
 msgid "ε-Geminids"
-msgstr ""
+msgstr "ε-Geminidit"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1161
 msgid "Southern Taurids"
-msgstr ""
+msgstr "Eteläiset Tauridit"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1163
 msgid "Northern Taurids"
-msgstr ""
+msgstr "Pohjoiset Tauridit"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1165
 msgid "Monocerotids"
-msgstr ""
+msgstr "Monocerotidit"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1167
 msgid "σ-Hydrids"
-msgstr ""
+msgstr "σ-Hydridit"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1169
 msgid "Geminids"
-msgstr ""
+msgstr "Geminidit"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1171
 msgid "Leonis Minorids"
-msgstr ""
+msgstr "Leonis Minoridit"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1173
 msgid "December Leonis Minorids"
-msgstr ""
+msgstr "Joulukuun Leonis Minoridit"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1175
 msgid "Comae Berenicids"
-msgstr ""
+msgstr "Coma Berenicidit"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1177
 msgid "Orionids"
-msgstr ""
+msgstr "Orionidit"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1179
 msgid "Andromedids"
-msgstr ""
+msgstr "Andromedidit"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1183
 msgid "Minor planet 2003 EH1 and Comet C/1490 Y1"
-msgstr ""
+msgstr "Pikkuplaneetta 2003 EH1 ja komeetta C/1490 Y1"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1185
 msgid "Comet 1P/Halley"
-msgstr ""
+msgstr "Komeetta 1P/Halley"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1187
 msgid "Comet 7P/Pons-Winnecke"
-msgstr ""
+msgstr "Komeetta 7P/Pons-Winnecke"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1189
 msgid "Comet 55P/Tempel-Tuttle"
-msgstr ""
+msgstr "Komeetta 55P/Tempel-Tuttle"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1191
 msgid "Comet 96P/Machholz"
-msgstr ""
+msgstr "Komeetta 96P/Machholz"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1193
 msgid "Comet 109P/Swift-Tuttle"
-msgstr ""
+msgstr "Komeetta 109P/Swift-Tuttle"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1195
 msgid "Comet Thatcher (1861 I)"
-msgstr ""
+msgstr "Komeetta Thatcher (1861 I)"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1197
 msgid "Minor planet (4450) Pan"
-msgstr ""
+msgstr "Pikkuplaneetta (4450) Pan"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1199
 msgid "Comet 26P/Grigg-Skjellerup"
-msgstr ""
+msgstr "Komeetta 26P/Grigg-Skjellerup"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1201
 msgid "Comet 21P/Giacobini-Zinner"
-msgstr ""
+msgstr "Komeetta 21P/Giacobini-Zinner"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1203
 msgid "Comet 169P/NEAT"
-msgstr ""
+msgstr "Komeetta 169P/NEAT"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1205
 msgid "Comet 289P/Blanpain"
-msgstr ""
+msgstr "Komeetta 289P/Blanpain"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1207
 msgid "Comet 8P/Tuttle"
-msgstr ""
+msgstr "Komeetta 8P/Tuttle"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1209
 msgid "Minor planet 2008 ED69"
-msgstr ""
+msgstr "Pikkuplaneetta 2008 ED69"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1211
 msgid "Comet 2P/Encke"
-msgstr ""
+msgstr "Komeetta 2P/Encke"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1213
 msgid "Comet 3D/Biela"
-msgstr ""
+msgstr "Komeetta 3D/Biela"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1215
 msgid "Minor planet 2004 TG10"
-msgstr ""
+msgstr "Pikkuplaneetta 2004 TG10"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1217
 msgid "Minor planet (3200) Phaethon"
-msgstr ""
+msgstr "Pikkuplaneetta (3200) Phaethon"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:291
 msgid "generic data"
-msgstr ""
+msgstr "geneerinen data"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:293
 msgid "real data"
-msgstr ""
+msgstr "todellinen data"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:299
 msgid "meteor shower"
-msgstr ""
+msgstr "meteoriparvi"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:307
 msgid "Radiant drift (per day)"
-msgstr ""
+msgstr "Radiantin siirtyminen (päivässä)"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:312
 #, qt-format
 msgid "Geocentric meteoric velocity: %1 km/s"
-msgstr ""
+msgstr "Geosentrinen meteoriittien nopeus: %1 km/s"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:315
 #, qt-format
 msgid "The population index: %1"
-msgstr ""
+msgstr "Populaatioindeksi: %1"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:320
 #, qt-format
 msgid "Parent body: %1"
-msgstr ""
+msgstr "Emokappale: %1"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:326
 msgid "Active"
-msgstr ""
+msgstr "Aktiivinen"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:334
 msgid "Activity"
-msgstr ""
+msgstr "Aktiivisuus"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:339
 #, qt-format
 msgid "Maximum: %1"
-msgstr ""
+msgstr "Maksimi: %1"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:342
 msgid "Solar longitude is"
-msgstr ""
+msgstr "Solaarinen pituusaste on"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:351
 msgid "variable"
-msgstr ""
+msgstr "muuttuja"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:162
 msgid "ZHR"
-msgstr ""
+msgstr "ZHR"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:163
 msgid "Data Type"
-msgstr ""
+msgstr "Datatyyppi"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:164
 msgid "Peak"
-msgstr ""
+msgstr "Huippu"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:174
 msgid "Start date greater than end date!"
-msgstr ""
+msgstr "Alkamispäivä suurempi kuin loppumispäivä!"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:176
 msgid "Time interval must be less than one year!"
-msgstr ""
+msgstr "Aikavälin pitää olla vähemmän kuin yksi vuosi!"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:193
 msgid "Variable"
-msgstr ""
+msgstr "Muuttuva"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:196
 msgid "Real"
-msgstr ""
+msgstr "Todellinen"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:196
 msgid "Generic"
-msgstr ""
+msgstr "Geneerinen"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:235
 msgid "Meteor Showers Plug-in"
-msgstr ""
+msgstr "Meteoriparvet-laajennus"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:240
 msgid ""
@@ -9282,14 +9306,16 @@ msgid ""
 "information about meteor showers and displays marker for radiants in "
 "activity range for each meteor showers."
 msgstr ""
+"Meteoriparvet-laajennus näyttää meteoriparvet, antaa tietoja meteoriparvista "
+"ja osoittaa jokaisen meteoriparven radiantit niiden aktiivisuusaikana."
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:241
 msgid "Terms"
-msgstr ""
+msgstr "Ehdot"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:242
 msgid "Meteor shower"
-msgstr ""
+msgstr "Meteorparvi"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:243
 msgid ""
