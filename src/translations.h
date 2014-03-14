@@ -179,6 +179,7 @@ class Translations
 		N_("Navajo");
 		N_("Norse");
 		N_("Polynesian");
+		N_("Romanian");
 		N_("Sami");
 		N_("Tupi-Guarani");
 		N_("Tongan");
@@ -535,5 +536,27 @@ class Translations
 		N_("South Africa");
 		N_("Zambia");
 		N_("Zimbabwe");
+
+		// =====================================================================
+		// List of GUI elements (Qt's dialogs)
+		N_("&Undo");
+		N_("&Redo");
+		N_("Cu&t");
+		N_("&Copy");
+		N_("&Paste");
+		N_("Delete");
+		N_("Select All");
+		N_("Look in:");
+		N_("Directory:");
+		N_("Folder");
+		N_("&Choose");
+		N_("Cancel");
+		N_("Files of type:");
+		N_("Date Modified");
+		N_("Directories");
+		N_("Computer");
+		N_("&Open");
+		N_("File &name:");
+		N_("Copy &Link Location");
 	}
 };

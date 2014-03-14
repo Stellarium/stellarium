@@ -19,12 +19,12 @@
 #ifndef _MULTILEVELJSONBASE_HPP_
 #define _MULTILEVELJSONBASE_HPP_
 
+#include "StelSkyLayer.hpp"
+
 #include <QList>
 #include <QString>
 #include <QVariantMap>
 #include <QNetworkReply>
-
-#include "StelSkyLayer.hpp"
 
 class QIODevice;
 class StelCore;

@@ -20,6 +20,8 @@
 #ifndef _STELUTILS_HPP_
 #define _STELUTILS_HPP_
 
+#include "config.h"
+
 #include "VecMath.hpp"
 
 #include <QVariantMap>
@@ -42,6 +44,9 @@ namespace StelUtils
 
 	//! Return the version of stellarium, i.e. "0.9.0"
 	QString getApplicationVersion();
+
+	//! Return the name and the version of operating system, i.e. "Mac OS X 10.7"
+	QString getOperatingSystemInfo();
 
 	//! Convert an angle in hms format to radian.
 	//! @param h hour component
@@ -174,8 +179,8 @@ namespace StelUtils
 	//! Check if a number is a power of 2.
 	bool isPowerOfTwo(const int value);
 
-	//! Return the first power of two bigger than the given value.
-	int getBiggerPowerOfTwo(int value);
+	//! Return the first power of two bigger or equal to the given value.
+	int getBiggerEqualPowerOfTwo(int value);
 
 	//! Return the inverse sinus hyperbolic of z.
 	double asinh(const double z);
@@ -561,10 +566,10 @@ namespace StelUtils
 	//! @return sigma in seconds
 	double getDeltaTStandardError(const double jDay);
 
-    //! Sign function from http://stackoverflow.com/questions/1903954/is-there-a-standard-sign-function-signum-sgn-in-c-c
-    template <typename T> int sign(T val) {
-        return (T(0) < val) - (val < T(0));
-    }
+	//! Sign function from http://stackoverflow.com/questions/1903954/is-there-a-standard-sign-function-signum-sgn-in-c-c
+	template <typename T> int sign(T val) {
+		return (T(0) < val) - (val < T(0));
+	}
 }
 
 #endif // _STELUTILS_HPP_

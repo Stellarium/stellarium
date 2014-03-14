@@ -20,8 +20,9 @@
 #ifndef _VIEWDIALOG_HPP_
 #define _VIEWDIALOG_HPP_
 
-#include <QObject>
 #include "StelDialog.hpp"
+
+#include <QObject>
 
 class Ui_viewDialogForm;
 class QListWidgetItem;
@@ -66,6 +67,8 @@ private slots:
 	void showAddRemoveLandscapesDialog();
         void showAtmosphereDialog();
 
+	void populateLightPollution();
+
 	void populateSkyLayersList();
 	void skyLayersSelectionChanged(const QString&);
 	void skyLayersEnabledChanged(int);
@@ -74,6 +77,7 @@ private slots:
 private:
 	//! convenience method to link a checkbox to a StelAction.
 	void connectCheckBox(class QCheckBox* checkBox, const QString& actionId);
+	void connectGroupBox(class QGroupBox* groupBox, const QString& actionId);
 	void updateSkyCultureText();
 
 	AddRemoveLandscapesDialog * addRemoveLandscapesDialog;

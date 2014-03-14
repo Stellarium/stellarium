@@ -20,16 +20,6 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#include <QDebug>
-#include <QSettings>
-#include <QString>
-#include <QDir>
-#include <QFile>
-#include <QTemporaryFile>
-#include <QMouseEvent>
-
-#include <stdexcept>
-
 #include "StelActionMgr.hpp"
 #include "LandscapeMgr.hpp"
 #include "Landscape.hpp"
@@ -46,6 +36,17 @@
 #include "StelPainter.hpp"
 #include "karchive.h"
 #include "kzip.h"
+
+#include <QDebug>
+#include <QSettings>
+#include <QString>
+#include <QDir>
+#include <QDirIterator>
+#include <QFile>
+#include <QTemporaryFile>
+#include <QMouseEvent>
+
+#include <stdexcept>
 
 // Class which manages the cardinal points displaying
 class Cardinals
@@ -153,9 +154,15 @@ LandscapeMgr::LandscapeMgr() : atmosphere(NULL), cardinalsPoints(NULL), landscap
 {
 	setObjectName("LandscapeMgr");
 
-	//TODO: Find a way to obtain this list automatically.
 	//Note: The first entry in the list is used as the default 'default landscape' in removeLandscape().
-	packagedLandscapeIDs = (QStringList() << "guereins" << "grossmugl" << "geneva" << "trees" << "moon" << "hurricane" << "ocean" << "garching" << "mars" << "saturn");
+	packagedLandscapeIDs = (QStringList() << "guereins");
+	QDirIterator directories(StelFileMgr::getInstallationDir()+"/landscapes/", QDir::Dirs | QDir::NoSymLinks | QDir::NoDotAndDotDot, QDirIterator::Subdirectories);
+	while(directories.hasNext())
+	{
+		directories.next();
+		packagedLandscapeIDs << directories.fileName();
+	}
+	packagedLandscapeIDs.removeDuplicates();
 }
 
 LandscapeMgr::~LandscapeMgr()
@@ -311,6 +318,7 @@ void LandscapeMgr::init()
 	setFlagAtmosphere(conf->value("landscape/flag_atmosphere", true).toBool());
 	setAtmosphereFadeDuration(conf->value("landscape/atmosphere_fade_duration",0.5).toFloat());
 	setAtmosphereLightPollutionLuminance(conf->value("viewing/light_pollution_luminance",0.0).toFloat());
+	setFlagUseLightPollutionFromDatabase(conf->value("viewing/flag_light_pollution_database", false).toBool());
 	cardinalsPoints = new Cardinals();
 	cardinalsPoints->setFlagShow(conf->value("viewing/flag_cardinal_points",true).toBool());
 	setFlagLandscapeSetsLocation(conf->value("landscape/flag_landscape_sets_location",false).toBool());
@@ -464,6 +472,20 @@ bool LandscapeMgr::getIsLandscapeFullyVisible() const
 	return landscape->getIsFullyVisible();
 }
 
+bool LandscapeMgr::getFlagUseLightPollutionFromDatabase() const
+{
+	return flagLightPollutionFromDatabase;
+}
+
+void LandscapeMgr::setFlagUseLightPollutionFromDatabase(const bool usage)
+{
+	if (flagLightPollutionFromDatabase != usage)
+	{
+		flagLightPollutionFromDatabase = usage;
+		emit lightPollutionUsageChanged(usage);
+	}
+}
+
 void LandscapeMgr::setFlagFog(const bool displayed)
 {
 	if (landscape->getFlagShowFog() != displayed) {
@@ -594,6 +616,8 @@ void LandscapeMgr::setFlagAtmosphere(const bool displayed)
 		atmosphere->setFlagShow(displayed);
 		StelApp::getInstance().getCore()->getSkyDrawer()->setFlagHasAtmosphere(displayed);
 		emit atmosphereDisplayedChanged(displayed);
+		if (StelApp::getInstance().getSettings()->value("landscape/flag_fog", true).toBool())
+			setFlagFog(displayed); // sync of visibility of fog because this is atmospheric phenomena
 	}
 }
 
@@ -632,6 +656,7 @@ void LandscapeMgr::setAtmosphereBortleLightPollution(const int bIndex)
 {
 	// This is an empirical formula
 	setAtmosphereLightPollutionLuminance(qMax(0.,0.0004*std::pow(bIndex-1, 2.1)));
+	emit lightPollutionChanged();
 }
 
 //! Get the light pollution following the Bortle Scale

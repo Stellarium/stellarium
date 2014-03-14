@@ -15,7 +15,7 @@ GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
-Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 */
 
 #ifndef _STELLASTRO_H
@@ -32,6 +32,8 @@ double get_mean_sidereal_time (double JD);
 double get_apparent_sidereal_time (double JD);
 /* Calculate mean ecliptical obliquity in degrees. */
 double get_mean_ecliptical_obliquity(double JDE);
+/* Calculate nutation in longitude in degrees. */
+double get_nutation_longitude(double JDE);
 
 #ifdef __cplusplus
 }

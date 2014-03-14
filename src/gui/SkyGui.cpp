@@ -79,9 +79,11 @@ InfoPanel::InfoPanel(QGraphicsItem* parent) : QGraphicsTextItem("", parent)
 		if (conf->value("flag_show_extra", false).toBool())
 			infoTextFilters |= StelObject::Extra;
 		if (conf->value("flag_show_type", false).toBool())
-			infoTextFilters |= StelObject::Type;
+			infoTextFilters |= StelObject::ObjectType;
 		if (conf->value("flag_show_galcoord", false).toBool())
 			infoTextFilters |= StelObject::GalacticCoord;
+		if (conf->value("flag_show_eclcoord", false).toBool())
+			infoTextFilters |= StelObject::EclTopocentricCoord;
 		conf->endGroup();
 	}
 	else
@@ -232,11 +234,21 @@ void SkyGui::hoverMoveEvent(QGraphicsSceneHoverEvent* event)
 	}
 }
 
+int SkyGui::getSkyGuiWidth() const
+{
+	return geometry().width();
+}
+
+int SkyGui::getSkyGuiHeight() const
+{
+	return geometry().height();
+}
+
 //! Update the position of the button bars in the main window
 void SkyGui::updateBarsPos()
 {
-	const int ww = geometry().width();
-	const int hh = geometry().height();
+	const int ww = getSkyGuiWidth();
+	const int hh = getSkyGuiHeight();
 	bool updatePath = false;
 
 	// Use a position cache to avoid useless redraw triggered by the position set if the bars don't move

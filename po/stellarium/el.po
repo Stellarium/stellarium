@@ -7,21 +7,21 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-13 22:53+0700\n"
+"POT-Creation-Date: 2014-02-27 23:04+0700\n"
 "PO-Revision-Date: 2013-04-14 15:39+0000\n"
 "Last-Translator: Christos Sotiropoulos <csot@otenet.gr>\n"
 "Language-Team: Greek, Modern (1453-) <el@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-01-14 05:36+0000\n"
-"X-Generator: Launchpad (build 16890)\n"
+"X-Launchpad-Export-Date: 2014-02-28 05:30+0000\n"
+"X-Generator: Launchpad (build 16948)\n"
 
-#: src/core/modules/ConstellationMgr.cpp:106 src/core/modules/StarMgr.cpp:336
-#: src/core/modules/GridLinesMgr.cpp:679 src/core/modules/LandscapeMgr.cpp:335
-#: src/core/modules/NebulaMgr.cpp:123 src/core/modules/SolarSystem.cpp:150
-#: src/core/StelApp.cpp:444 src/core/StelCore.cpp:160
-#: src/core/StelSkyLayerMgr.cpp:87 src/StelMainView.cpp:300
+#: src/core/modules/ConstellationMgr.cpp:106 src/core/modules/StarMgr.cpp:337
+#: src/core/modules/GridLinesMgr.cpp:680 src/core/modules/LandscapeMgr.cpp:343
+#: src/core/modules/NebulaMgr.cpp:123 src/core/modules/SolarSystem.cpp:151
+#: src/core/StelApp.cpp:445 src/core/StelCore.cpp:163
+#: src/core/StelSkyLayerMgr.cpp:87 src/StelMainView.cpp:307
 msgid "Display Options"
 msgstr "Επιλογές εμφάνισης"
 
@@ -45,143 +45,143 @@ msgstr "Ετικέτες αστερισμών"
 msgid "Constellation boundaries"
 msgstr "Όρια αστερισμών"
 
-#: src/core/modules/StarMgr.cpp:337 src/ui_viewDialog.h:1231
-#: src/ui_viewDialog.h:1257 src/ui_viewDialog.h:1280
+#: src/core/modules/StarMgr.cpp:338 src/ui_viewDialog.h:1233
+#: src/ui_viewDialog.h:1265 src/ui_viewDialog.h:1288
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:240
 msgid "Stars"
 msgstr "Αστέρες"
 
-#: src/core/modules/StarMgr.cpp:338
+#: src/core/modules/StarMgr.cpp:339
 msgid "Stars labels"
 msgstr "Ετικέτες αστεριών"
 
-#: src/core/modules/GridLinesMgr.cpp:530 src/ui_viewDialog.h:1304
+#: src/core/modules/GridLinesMgr.cpp:531 src/ui_viewDialog.h:1312
 msgid "Meridian"
 msgstr "Μεσημβρινός"
 
-#: src/core/modules/GridLinesMgr.cpp:534 src/ui_viewDialog.h:1312
+#: src/core/modules/GridLinesMgr.cpp:535 src/ui_viewDialog.h:1320
 msgid "Ecliptic"
 msgstr "Εκλειπτική"
 
-#: src/core/modules/GridLinesMgr.cpp:538 src/ui_viewDialog.h:1300
+#: src/core/modules/GridLinesMgr.cpp:539 src/ui_viewDialog.h:1308
 msgid "Equator"
 msgstr "Ισημερινός"
 
-#: src/core/modules/GridLinesMgr.cpp:542 src/ui_viewDialog.h:1308
+#: src/core/modules/GridLinesMgr.cpp:543 src/ui_viewDialog.h:1316
 msgid "Horizon"
 msgstr "Ορίζοντας"
 
-#: src/core/modules/GridLinesMgr.cpp:546
+#: src/core/modules/GridLinesMgr.cpp:547
 msgid "Galactic Plane"
 msgstr "Γαλαξιακό Επίπεδο"
 
-#: src/core/modules/GridLinesMgr.cpp:680 src/ui_viewDialog.h:1293
+#: src/core/modules/GridLinesMgr.cpp:681
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:326
 msgid "Equatorial grid"
 msgstr "Πλέγμα Ισημερινού"
 
-#: src/core/modules/GridLinesMgr.cpp:681 src/ui_viewDialog.h:1295
+#: src/core/modules/GridLinesMgr.cpp:682 src/ui_viewDialog.h:1303
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:321
 msgid "Azimuthal grid"
 msgstr "Αζιμουθιακό πλέγμα"
 
-#: src/core/modules/GridLinesMgr.cpp:682
+#: src/core/modules/GridLinesMgr.cpp:683
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:341
 msgid "Ecliptic line"
 msgstr "Γραμμή Εκλειπτικής"
 
-#: src/core/modules/GridLinesMgr.cpp:683
+#: src/core/modules/GridLinesMgr.cpp:684
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:336
 msgid "Equator line"
 msgstr "Γραμμή Ισημερινού"
 
-#: src/core/modules/GridLinesMgr.cpp:684
+#: src/core/modules/GridLinesMgr.cpp:685
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:316
 msgid "Meridian line"
 msgstr "Γραμμή Μεσημβρινού"
 
-#: src/core/modules/GridLinesMgr.cpp:685
+#: src/core/modules/GridLinesMgr.cpp:686
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:355
 msgid "Horizon line"
 msgstr "Γραμμή Ορίζοντα"
 
-#: src/core/modules/GridLinesMgr.cpp:686 src/ui_viewDialog.h:1292
+#: src/core/modules/GridLinesMgr.cpp:687
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:331
 msgid "Equatorial J2000 grid"
 msgstr "Πλέγμα Ισημερινού J2000"
 
-#: src/core/modules/GridLinesMgr.cpp:687 src/ui_viewDialog.h:1294
+#: src/core/modules/GridLinesMgr.cpp:688
 msgid "Ecliptic J2000 grid"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:688 src/ui_viewDialog.h:1296
+#: src/core/modules/GridLinesMgr.cpp:689 src/ui_viewDialog.h:1304
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:360
 msgid "Galactic grid"
 msgstr "Γαλαξιακό πλέγμα"
 
-#: src/core/modules/GridLinesMgr.cpp:689 src/ui_viewDialog.h:1316
+#: src/core/modules/GridLinesMgr.cpp:690 src/ui_viewDialog.h:1324
 msgid "Galactic plane"
 msgstr "Γαλαξιακό επίπεδο"
 
-#: src/core/modules/LandscapeMgr.cpp:336 src/ui_viewDialog.h:1250
+#: src/core/modules/LandscapeMgr.cpp:344 src/ui_viewDialog.h:1255
 msgid "Atmosphere"
 msgstr "Ατμόσφαιρα"
 
-#: src/core/modules/LandscapeMgr.cpp:337
+#: src/core/modules/LandscapeMgr.cpp:345
 msgid "Fog"
 msgstr "Ομίχλη"
 
-#: src/core/modules/LandscapeMgr.cpp:338 src/ui_viewDialog.h:1317
+#: src/core/modules/LandscapeMgr.cpp:346 src/ui_viewDialog.h:1325
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:298
 msgid "Cardinal points"
 msgstr "Σημεία του Ορίζοντα"
 
-#: src/core/modules/LandscapeMgr.cpp:339
+#: src/core/modules/LandscapeMgr.cpp:347
 msgid "Ground"
 msgstr "Έδαφος"
 
-#: src/core/modules/LandscapeMgr.cpp:542
+#: src/core/modules/LandscapeMgr.cpp:564
 msgid "Author: "
 msgstr "Συγγραφέας: "
 
-#: src/core/modules/LandscapeMgr.cpp:545
+#: src/core/modules/LandscapeMgr.cpp:567
 msgid "Location: "
 msgstr "Τοποθεσία: "
 
-#: src/core/modules/LandscapeMgr.cpp:550
+#: src/core/modules/LandscapeMgr.cpp:572
 #, qt-format
 msgid ", %1 m"
 msgstr ", %1 μ"
 
-#: src/core/modules/LandscapeMgr.cpp:554
+#: src/core/modules/LandscapeMgr.cpp:576
 msgid "Planet: "
 msgstr "Πλανήτης: "
 
-#: src/core/modules/Nebula.cpp:102 src/core/modules/Planet.cpp:130
-#: src/core/modules/MinorPlanet.cpp:214 src/core/modules/Comet.cpp:147
+#: src/core/modules/Nebula.cpp:102 src/core/modules/Planet.cpp:131
+#: src/core/modules/MinorPlanet.cpp:214 src/core/modules/Comet.cpp:151
 #: src/core/modules/StarWrapper.cpp:50 src/core/modules/StarWrapper.cpp:170
 #: src/core/modules/StarWrapper.cpp:173
 #: plugins/Satellites/src/Satellite.cpp:242
-#: plugins/Supernovae/src/Supernova.cpp:117 plugins/Quasars/src/Quasar.cpp:91
-#: plugins/Pulsars/src/Pulsar.cpp:137 plugins/Exoplanets/src/Exoplanet.cpp:157
+#: plugins/Supernovae/src/Supernova.cpp:122 plugins/Quasars/src/Quasar.cpp:93
+#: plugins/Pulsars/src/Pulsar.cpp:139 plugins/Exoplanets/src/Exoplanet.cpp:163
 #, qt-format
 msgid "Type: <b>%1</b>"
 msgstr "Τύπος: <b>%1</b>"
 
-#: src/core/modules/Nebula.cpp:107 src/core/modules/Planet.cpp:136
-#: src/core/modules/MinorPlanet.cpp:220 src/core/modules/Comet.cpp:153
+#: src/core/modules/Nebula.cpp:107 src/core/modules/Planet.cpp:137
+#: src/core/modules/MinorPlanet.cpp:220 src/core/modules/Comet.cpp:157
 #: src/core/modules/StarWrapper.cpp:56 src/core/modules/StarWrapper.cpp:180
-#: plugins/Supernovae/src/Supernova.cpp:122 plugins/Novae/src/Nova.cpp:125
-#: plugins/Quasars/src/Quasar.cpp:97 plugins/Exoplanets/src/Exoplanet.cpp:166
+#: plugins/Supernovae/src/Supernova.cpp:127 plugins/Novae/src/Nova.cpp:127
+#: plugins/Quasars/src/Quasar.cpp:99 plugins/Exoplanets/src/Exoplanet.cpp:172
 #, qt-format
 msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>)"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:110 src/core/modules/Planet.cpp:139
-#: src/core/modules/MinorPlanet.cpp:223 src/core/modules/Comet.cpp:156
+#: src/core/modules/Nebula.cpp:110 src/core/modules/Planet.cpp:140
+#: src/core/modules/MinorPlanet.cpp:223 src/core/modules/Comet.cpp:160
 #: src/core/modules/StarWrapper.cpp:60 src/core/modules/StarWrapper.cpp:183
-#: plugins/Supernovae/src/Supernova.cpp:125 plugins/Novae/src/Nova.cpp:128
-#: plugins/Quasars/src/Quasar.cpp:102 plugins/Exoplanets/src/Exoplanet.cpp:171
+#: plugins/Supernovae/src/Supernova.cpp:129 plugins/Novae/src/Nova.cpp:130
+#: plugins/Quasars/src/Quasar.cpp:104 plugins/Exoplanets/src/Exoplanet.cpp:177
 #, qt-format
 msgid "Magnitude: <b>%1</b>"
 msgstr "Μέγεθος: <b>%1</b>"
@@ -231,78 +231,78 @@ msgstr "Άγνωστος τύπος"
 msgid "Deep-sky objects"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:142 src/core/modules/MinorPlanet.cpp:233
-#: src/core/modules/MinorPlanet.cpp:237 src/core/modules/Comet.cpp:165
-#: src/core/modules/StarWrapper.cpp:187 plugins/Quasars/src/Quasar.cpp:106
+#: src/core/modules/Planet.cpp:143 src/core/modules/MinorPlanet.cpp:233
+#: src/core/modules/MinorPlanet.cpp:237 src/core/modules/Comet.cpp:169
+#: src/core/modules/StarWrapper.cpp:187 plugins/Quasars/src/Quasar.cpp:108
 #, qt-format
 msgid "Absolute Magnitude: %1"
 msgstr "Απόλυτο μέγεθος: %1"
 
-#: src/core/modules/Planet.cpp:155
-#, qt-format
-msgid "Ecliptic Topocentric (of date): %1/%2"
-msgstr ""
-
-#: src/core/modules/Planet.cpp:156
+#: src/core/modules/Planet.cpp:152
 #, qt-format
 msgid "Obliquity (of date, for Earth): %1"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:166 src/core/modules/MinorPlanet.cpp:250
-#: src/core/modules/Comet.cpp:195
+#: src/core/modules/Planet.cpp:154
+#, qt-format
+msgid "Obliquity (of date): %1"
+msgstr "Αξονική κλίση (ημερομηνίας): %1"
+
+#: src/core/modules/Planet.cpp:164 src/core/modules/MinorPlanet.cpp:250
+#: src/core/modules/Comet.cpp:199
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 km)"
 msgstr "Απόσταση: %1AU (%2 km)"
 
-#: src/core/modules/Planet.cpp:173 src/core/modules/MinorPlanet.cpp:257
-#: src/core/modules/Comet.cpp:202
+#: src/core/modules/Planet.cpp:171 src/core/modules/MinorPlanet.cpp:257
+#: src/core/modules/Comet.cpp:206
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 Mio km)"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:186
+#: src/core/modules/Planet.cpp:184
 #, qt-format
 msgid "Apparent diameter: %1, with rings: %2"
 msgstr "Φαινόμενη διάμετρος: : %1, με δακτύλιους: %2"
 
-#: src/core/modules/Planet.cpp:192 src/core/modules/MinorPlanet.cpp:265
+#: src/core/modules/Planet.cpp:190 src/core/modules/MinorPlanet.cpp:265
 #, qt-format
 msgid "Apparent diameter: %1"
 msgstr "Φαινόμενη διάμετρος: %1"
 
 #. TRANSLATORS: Sidereal (orbital) period for solar system bodies in days and in Julian years (symbol: a)
-#: src/core/modules/Planet.cpp:204 src/core/modules/MinorPlanet.cpp:272
-#: src/core/modules/Comet.cpp:224
+#: src/core/modules/Planet.cpp:202 src/core/modules/MinorPlanet.cpp:272
+#: src/core/modules/Comet.cpp:228
 #, qt-format
 msgid "Sidereal period: %1 days (%2 a)"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:207
+#: src/core/modules/Planet.cpp:205
 #, qt-format
 msgid "Sidereal day: %1"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:208
+#: src/core/modules/Planet.cpp:206
 #, qt-format
 msgid "Mean solar day: %1"
 msgstr "Μέση ηλιακή ημέρα: %1"
 
-#: src/core/modules/Planet.cpp:214
+#: src/core/modules/Planet.cpp:212
 #, qt-format
 msgid "Phase Angle: %1"
 msgstr "Γωνία Φάσης: %1"
 
-#: src/core/modules/Planet.cpp:215
+#: src/core/modules/Planet.cpp:213
 #, qt-format
 msgid "Elongation: %1"
 msgstr "Αποχή: %1"
 
-#: src/core/modules/Planet.cpp:216
+#: src/core/modules/Planet.cpp:214
 #, qt-format
 msgid "Phase: %1"
 msgstr "Φάση: %1"
 
-#: src/core/modules/Planet.cpp:217
+#: src/core/modules/Planet.cpp:215
 #, qt-format
 msgid "Illuminated: %1%"
 msgstr ""
@@ -312,32 +312,32 @@ msgstr ""
 msgid "Provisional designation: %1"
 msgstr ""
 
-#: src/core/modules/Comet.cpp:178
+#: src/core/modules/Comet.cpp:182
 #, no-c-format, qt-format
 msgid "Distance from Sun: %1AU (%2 km)"
 msgstr ""
 
-#: src/core/modules/Comet.cpp:185
+#: src/core/modules/Comet.cpp:189
 #, no-c-format, qt-format
 msgid "Distance from Sun: %1AU (%2 Mio km)"
 msgstr ""
 
-#: src/core/modules/Comet.cpp:209
+#: src/core/modules/Comet.cpp:213
 #, no-c-format, qt-format
 msgid "Speed: %1 km/s"
 msgstr ""
 
-#: src/core/modules/SolarSystem.cpp:151
+#: src/core/modules/SolarSystem.cpp:152
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:303
 msgid "Planet labels"
 msgstr "Ετικέτες Πλανητών"
 
-#: src/core/modules/SolarSystem.cpp:152
+#: src/core/modules/SolarSystem.cpp:153
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:307
 msgid "Planet orbits"
 msgstr "Τροχιές πλανητών"
 
-#: src/core/modules/SolarSystem.cpp:153
+#: src/core/modules/SolarSystem.cpp:154
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:311
 msgid "Planet trails"
 msgstr "Τροχιές πλανητών"
@@ -349,7 +349,7 @@ msgid "star"
 msgstr "αστέρας"
 
 #: src/core/modules/StarWrapper.cpp:65 src/core/modules/StarWrapper.cpp:191
-#: plugins/Quasars/src/Quasar.cpp:112
+#: plugins/Quasars/src/Quasar.cpp:114
 #, qt-format
 msgid "Color Index (B-V): <b>%1</b>"
 msgstr ""
@@ -398,14 +398,14 @@ msgid "Magnitude range: <b>%1</b>%2<b>%3/%4</b> (Photometric system: %5)"
 msgstr ""
 
 #: src/core/modules/StarWrapper.cpp:216
-#: plugins/Supernovae/src/Supernova.cpp:136 plugins/Novae/src/Nova.cpp:138
-#: plugins/Exoplanets/src/Exoplanet.cpp:186
+#: plugins/Supernovae/src/Supernova.cpp:140 plugins/Novae/src/Nova.cpp:140
+#: plugins/Exoplanets/src/Exoplanet.cpp:192
 #, qt-format
 msgid "Distance: %1 Light Years"
 msgstr "Απόσταση: %1 Έτη Φωτός"
 
 #: src/core/modules/StarWrapper.cpp:221
-#: plugins/Exoplanets/src/Exoplanet.cpp:181
+#: plugins/Exoplanets/src/Exoplanet.cpp:187
 #, qt-format
 msgid "Spectral Type: %1"
 msgstr "Φασματικός Τύπος: %1"
@@ -450,7 +450,7 @@ msgstr ""
 msgid "Rising time: %1%"
 msgstr ""
 
-#: src/core/StelApp.cpp:444
+#: src/core/StelApp.cpp:445
 msgid "Night mode"
 msgstr "Κατάσταση νύχτας"
 
@@ -459,186 +459,186 @@ msgstr "Κατάσταση νύχτας"
 msgid "SpaceShip"
 msgstr "Διαστημόπλοιο"
 
-#: src/core/StelCore.cpp:158 src/gui/StelGui.cpp:176
+#: src/core/StelCore.cpp:161 src/gui/StelGui.cpp:175
 #: src/ui_dateTimeDialogGui.h:297
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:167
 msgid "Date and Time"
 msgstr "Ημ/νία και ώρα"
 
-#: src/core/StelCore.cpp:159 src/core/StelMovementMgr.cpp:105
+#: src/core/StelCore.cpp:162 src/core/StelMovementMgr.cpp:105
 msgid "Movement and Selection"
 msgstr "Κίνηση και Επιλογή"
 
-#: src/core/StelCore.cpp:162
+#: src/core/StelCore.cpp:165
 msgid "Increase time speed"
 msgstr "Άυξηση Ταχύτητας Χρόνου [L]"
 
-#: src/core/StelCore.cpp:163
+#: src/core/StelCore.cpp:166
 msgid "Decrease time speed"
 msgstr "Μείωση Ταχύτητας Χρόνου [J]"
 
-#: src/core/StelCore.cpp:164
+#: src/core/StelCore.cpp:167
 msgid "Increase time speed (a little)"
 msgstr "Αύξηση ταχύτητας χρόνου (λίγο)"
 
-#: src/core/StelCore.cpp:165
+#: src/core/StelCore.cpp:168
 msgid "Decrease time speed (a little)"
 msgstr "Μείωση ταχύτητας χρόνου (λίγο)"
 
-#: src/core/StelCore.cpp:166
+#: src/core/StelCore.cpp:169
 msgid "Set normal time rate"
 msgstr "Κανονικός ρυθμός χρόνου"
 
-#: src/core/StelCore.cpp:167
+#: src/core/StelCore.cpp:170
 msgid "Set time rate to zero"
 msgstr "Μηδενισμός ρυθμού χρόνου"
 
-#: src/core/StelCore.cpp:168
+#: src/core/StelCore.cpp:171
 msgid "Set time to now"
 msgstr "Τρέχουσα ώρα"
 
-#: src/core/StelCore.cpp:169
+#: src/core/StelCore.cpp:172
 msgid "Add 1 solar hour"
 msgstr "Προσθήκη 1 ηλιακής ώρας"
 
-#: src/core/StelCore.cpp:170
+#: src/core/StelCore.cpp:173
 msgid "Add 1 solar day"
 msgstr "Προσθήκη 1 ηλιακής ημέρας"
 
-#: src/core/StelCore.cpp:171
+#: src/core/StelCore.cpp:174
 msgid "Add 1 solar week"
 msgstr "Προσθήκη 1 ηλιακής εβδομάδας"
 
-#: src/core/StelCore.cpp:172
+#: src/core/StelCore.cpp:175
 msgid "Subtract 1 solar hour"
 msgstr "Αφαίρεση 1 ηλιακής ώρας"
 
-#: src/core/StelCore.cpp:173
+#: src/core/StelCore.cpp:176
 msgid "Subtract 1 solar day"
 msgstr "Αφαίρεση 1 ηλιακής ημέρας"
 
-#: src/core/StelCore.cpp:174
+#: src/core/StelCore.cpp:177
 msgid "Subtract 1 solar week"
 msgstr "Αφαίρεση 1 ηλιακής εβδομάδας"
 
-#: src/core/StelCore.cpp:175
+#: src/core/StelCore.cpp:178
 msgid "Add 1 sidereal day"
 msgstr "Προσθήκη 1 αστρικής ημέρας"
 
-#: src/core/StelCore.cpp:176
+#: src/core/StelCore.cpp:179
 msgid "Add 1 sidereal week"
 msgstr "Προσθήκη 1 αστρικής εβδομάδας"
 
-#: src/core/StelCore.cpp:177
+#: src/core/StelCore.cpp:180
 msgid "Add 1 sidereal month"
 msgstr ""
 
-#: src/core/StelCore.cpp:178
+#: src/core/StelCore.cpp:181
 msgid "Add 1 sidereal year"
 msgstr ""
 
-#: src/core/StelCore.cpp:179
+#: src/core/StelCore.cpp:182
 msgid "Add 1 sidereal century"
 msgstr ""
 
-#: src/core/StelCore.cpp:180
+#: src/core/StelCore.cpp:183
 msgid "Add 1 synodic month"
 msgstr ""
 
-#: src/core/StelCore.cpp:181
+#: src/core/StelCore.cpp:184
 msgid "Add 1 draconic month"
 msgstr ""
 
-#: src/core/StelCore.cpp:182
+#: src/core/StelCore.cpp:185
 msgid "Add 1 draconic year"
 msgstr ""
 
-#: src/core/StelCore.cpp:183
+#: src/core/StelCore.cpp:186
 msgid "Add 1 anomalistic month"
 msgstr ""
 
-#: src/core/StelCore.cpp:184
+#: src/core/StelCore.cpp:187
 msgid "Add 1 mean tropical month"
 msgstr ""
 
-#: src/core/StelCore.cpp:185
+#: src/core/StelCore.cpp:188
 msgid "Add 1 mean tropical year"
 msgstr ""
 
-#: src/core/StelCore.cpp:186
+#: src/core/StelCore.cpp:189
 msgid "Add 1 mean tropical century"
 msgstr ""
 
-#: src/core/StelCore.cpp:187
+#: src/core/StelCore.cpp:190
 msgid "Subtract 1 sidereal day"
 msgstr "Αφαίρεση 1 αστρικής ημέρας"
 
-#: src/core/StelCore.cpp:188
+#: src/core/StelCore.cpp:191
 msgid "Subtract 1 sidereal week"
 msgstr "Αφαίρεση 1 αστρικής εβδομάδας"
 
-#: src/core/StelCore.cpp:189
+#: src/core/StelCore.cpp:192
 msgid "Subtract 1 sidereal month"
 msgstr ""
 
-#: src/core/StelCore.cpp:190
+#: src/core/StelCore.cpp:193
 msgid "Subtract 1 sidereal year"
 msgstr ""
 
-#: src/core/StelCore.cpp:191
+#: src/core/StelCore.cpp:194
 msgid "Subtract 1 sidereal century"
 msgstr ""
 
-#: src/core/StelCore.cpp:192
+#: src/core/StelCore.cpp:195
 msgid "Subtract 1 synodic month"
 msgstr ""
 
-#: src/core/StelCore.cpp:193
+#: src/core/StelCore.cpp:196
 msgid "Subtract 1 draconic month"
 msgstr ""
 
-#: src/core/StelCore.cpp:194
+#: src/core/StelCore.cpp:197
 msgid "Subtract 1 draconic year"
 msgstr ""
 
-#: src/core/StelCore.cpp:195
+#: src/core/StelCore.cpp:198
 msgid "Subtract 1 anomalistic month"
 msgstr ""
 
-#: src/core/StelCore.cpp:196
+#: src/core/StelCore.cpp:199
 msgid "Subtract 1 mean tropical month"
 msgstr ""
 
-#: src/core/StelCore.cpp:197
+#: src/core/StelCore.cpp:200
 msgid "Subtract 1 mean tropical year"
 msgstr ""
 
-#: src/core/StelCore.cpp:198
+#: src/core/StelCore.cpp:201
 msgid "Subtract 1 mean tropical century"
 msgstr ""
 
-#: src/core/StelCore.cpp:200
+#: src/core/StelCore.cpp:203
 msgid "Set home planet to selected planet"
 msgstr "Ορισμός επιλεγμένου πλανήτη ως πλανήτη προέλευσης"
 
-#: src/core/StelCore.cpp:201
+#: src/core/StelCore.cpp:204
 msgid "Go to home"
 msgstr ""
 
-#: src/core/StelCore.cpp:202
+#: src/core/StelCore.cpp:205
 msgid "Flip scene horizontally"
 msgstr "Οριζόντια περιστροφή"
 
-#: src/core/StelCore.cpp:203
+#: src/core/StelCore.cpp:206
 msgid "Flip scene vertically"
 msgstr "Κάθετη περιστροφή"
 
-#: src/core/StelCore.cpp:1452
+#: src/core/StelCore.cpp:1474
 msgid "Correction is disabled. Use only if you know what you are doing!"
 msgstr ""
 "Η διόρθωση έχει απενεργοποιηθεί. Χρησιμοποιείστε μόνο αν γνωρίζετε τι κάνετε!"
 
-#: src/core/StelCore.cpp:1455
+#: src/core/StelCore.cpp:1477
 #, qt-format
 msgid ""
 "This historical formula was obtained by C. Schoch in 1931 and was used by G. "
@@ -650,7 +650,7 @@ msgstr ""
 "Σχετικότητας του Αϊνστάιν Επιβεβαιώθηκε από Αρχαίες Ηλιακές Εκλείψεις</em> "
 "(%1). Για περισσότερες πληροφορίες δείτε %2εδώ%3."
 
-#: src/core/StelCore.cpp:1458
+#: src/core/StelCore.cpp:1480
 #, qt-format
 msgid ""
 "This empirical equation was published by G. M. Clemence in the article "
@@ -659,7 +659,7 @@ msgstr ""
 "Αυτή η εμπειρική εξίσωση δημοσιεύθηκε από τον G. M. Clemence στο άρθρο  "
 "<em>Πάνω στο Σύστημα των Αστρονομικών Συνεχών</em> (%1)."
 
-#: src/core/StelCore.cpp:1461
+#: src/core/StelCore.cpp:1483
 #, qt-format
 msgid ""
 "This formula is based on a study of post-1650 observations of the Sun, the "
@@ -673,14 +673,14 @@ msgstr ""
 "Υιοθετήθηκε επίσης από το πρόγραμμα για ηλεκτρονικούς υπολογιστές SunTracker "
 "Pro."
 
-#: src/core/StelCore.cpp:1465
+#: src/core/StelCore.cpp:1487
 msgid ""
 "This is a slightly modified version of the IAU (1952) formula which was "
 "adopted in the <em>Astronomical Ephemeris</em> and in the <em>Canon of Solar "
 "Eclipses</em> by Mucke & Meeus (1983)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1469
+#: src/core/StelCore.cpp:1491
 msgid ""
 "The tables of Tuckerman (1962, 1964) list the positions of the Sun, the Moon "
 "and the planets at 5- and 10-day intervals from 601 BCE to 1649 CE. The same "
@@ -688,7 +688,7 @@ msgid ""
 "(1973)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1473
+#: src/core/StelCore.cpp:1495
 #, qt-format
 msgid ""
 "This equation was published by P. M. Muller and F. R. Stephenson in the "
@@ -696,14 +696,14 @@ msgid ""
 "observations</em> (%1)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1476
+#: src/core/StelCore.cpp:1498
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson in the article <em>Pre-"
 "Telescopic Astronomical Observations</em> (%1)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1479
+#: src/core/StelCore.cpp:1501
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation (outdated and superseded by Schmadel & "
@@ -712,14 +712,14 @@ msgid ""
 "period 1800-1975</em> (%1) as fit through data published by Brouwer (1952)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1482
+#: src/core/StelCore.cpp:1504
 msgid ""
 "This algorithm was adopted in P. Bretagnon & L. Simon's <em>Planetary "
 "Programs and Tables from -4000 to +2800</em> (1986) and in the PC "
 "planetarium program RedShift."
 msgstr ""
 
-#: src/core/StelCore.cpp:1485
+#: src/core/StelCore.cpp:1507
 #, qt-format
 msgid ""
 "This formula was published by F. R. Stephenson and L. V. Morrison in the "
@@ -727,25 +727,25 @@ msgid ""
 "A.D. 1980</em> (%1)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1488
+#: src/core/StelCore.cpp:1510
 msgid "This algorithm is used in the PC planetarium program Guide 7."
 msgstr ""
 
-#: src/core/StelCore.cpp:1491
+#: src/core/StelCore.cpp:1513
 msgid ""
 "This algorithm was given by F. Espenak in his <em>Fifty Year Canon of Solar "
 "Eclipses: 1986-2035</em> (1987) and in his <em>Fifty Year Canon of Lunar "
 "Eclipses: 1986-2035</em> (1989)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1494
+#: src/core/StelCore.cpp:1516
 #, qt-format
 msgid ""
 "This formula was obtained by K.M. Borkowski (%1) from an analysis of 31 "
 "solar eclipse records dating between 2137 BCE and 1715 CE."
 msgstr ""
 
-#: src/core/StelCore.cpp:1497
+#: src/core/StelCore.cpp:1519
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation was published by L. D. Schmadel and G. "
@@ -754,14 +754,14 @@ msgid ""
 "Morrison (1984)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1500
+#: src/core/StelCore.cpp:1522
 msgid ""
 "This formula was adopted by M. Chapront-Touze & J. Chapront in the shortened "
 "version of the ELP 2000-85 lunar theory in their <em>Lunar Tables and "
 "Programs from 4000 B.C. to A.D. 8000</em> (1991)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1503
+#: src/core/StelCore.cpp:1525
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson and L. V. Morrison in the "
@@ -769,42 +769,42 @@ msgid ""
 "1990</em> (%1)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1506
+#: src/core/StelCore.cpp:1528
 #, qt-format
 msgid ""
 "F. R. Stephenson published this formula in his book <em>Historical Eclipses "
 "and Earth's Rotation</em> (%1)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1509
+#: src/core/StelCore.cpp:1531
 msgid ""
 "From J. Meeus, <em>Astronomical Algorithms</em> (2nd ed., 1998), and widely "
 "used. Table for 1620..2000, and includes a variant of Chapront, Chapront-"
 "Touze & Francou (1997) for dates outside 1620..2000."
 msgstr ""
 
-#: src/core/StelCore.cpp:1512
+#: src/core/StelCore.cpp:1534
 #, qt-format
 msgid ""
 "The JPL Solar System Dynamics Group of the NASA Jet Propulsion Laboratory "
 "use this formula in their interactive website %1JPL Horizons%2."
 msgstr ""
 
-#: src/core/StelCore.cpp:1515
+#: src/core/StelCore.cpp:1537
 #, qt-format
 msgid ""
 "This polynome was published by J. Meeus and L. Simons in article "
 "<em>Polynomial approximations to Delta T, 1620-2000 AD</em> (%1)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1518
+#: src/core/StelCore.cpp:1540
 msgid ""
 "The fourth edition of O. Montenbruck & T. Pfleger's <em>Astronomy on the "
 "Personal Computer</em> (2000) provides simple 3rd-order polynomial data fits "
 "for the recent past."
 msgstr ""
 
-#: src/core/StelCore.cpp:1521
+#: src/core/StelCore.cpp:1543
 msgid ""
 "E. M. Reingold & N. Dershowitz present this polynomial data fit in "
 "<em>Calendrical Calculations</em> (3rd ed. 2007) and in their "
@@ -812,7 +812,7 @@ msgid ""
 "<em>Astronomical Algorithms</em> (1991)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1524
+#: src/core/StelCore.cpp:1546
 #, qt-format
 msgid ""
 "This important solution was published by L. V. Morrison and F. R. Stephenson "
@@ -820,7 +820,7 @@ msgid ""
 "calculation of eclipses</em> (%2) with addendum in (%3)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1527
+#: src/core/StelCore.cpp:1549
 #, qt-format
 msgid ""
 "From the Length of Day (LOD; as determined by Stephenson & Morrison (%2)), "
@@ -829,7 +829,7 @@ msgid ""
 "by Stephenson (%2). See for more info %3here%4."
 msgstr ""
 
-#: src/core/StelCore.cpp:1530
+#: src/core/StelCore.cpp:1552
 #, qt-format
 msgid ""
 "This solution by F. Espenak and J. Meeus, based on Morrison & Stephenson "
@@ -839,11 +839,11 @@ msgid ""
 "solar, lunar and planetary ephemeris program SOLEX."
 msgstr ""
 
-#: src/core/StelCore.cpp:1530
+#: src/core/StelCore.cpp:1552
 msgid "Used by default."
 msgstr ""
 
-#: src/core/StelCore.cpp:1533
+#: src/core/StelCore.cpp:1555
 #, qt-format
 msgid ""
 "This solution by B. Banjevic, based on Stephenson & Morrison (1984), was "
@@ -851,7 +851,7 @@ msgid ""
 "Babylon</em> (%1)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1536
+#: src/core/StelCore.cpp:1558
 #, qt-format
 msgid ""
 "This solution by S. Islam, M. Sadiq and M. S. Qureshi, based on Meeus & "
@@ -859,42 +859,42 @@ msgid ""
 "Approximation of DeltaT</em> (%1) and revisited by Sana Islam in 2013."
 msgstr ""
 
-#: src/core/StelCore.cpp:1539
+#: src/core/StelCore.cpp:1561
 #, qt-format
 msgid ""
 "This is a quadratic formula for calculation of %1T with coefficients defined "
 "by the user."
 msgstr ""
 
-#: src/core/StelCore.cpp:1542 src/core/SimbadSearcher.cpp:133
+#: src/core/StelCore.cpp:1564 src/core/SimbadSearcher.cpp:133
 msgid "Error"
 msgstr "Λάθος"
 
-#: src/core/StelCore.cpp:1591
+#: src/core/StelCore.cpp:1613
 msgid "with meaningless values outside this range"
 msgstr ""
 
-#: src/core/StelCore.cpp:1617
+#: src/core/StelCore.cpp:1639
 msgid ""
 "with a mean error of less than one second, max. error 1.9s, and meaningless "
 "values outside this range"
 msgstr ""
 
-#: src/core/StelCore.cpp:1639 src/core/StelCore.cpp:1644
-#: src/core/StelCore.cpp:1671 src/core/StelCore.cpp:1676
+#: src/core/StelCore.cpp:1661 src/core/StelCore.cpp:1666
+#: src/core/StelCore.cpp:1693 src/core/StelCore.cpp:1698
 msgid "with zero values outside this range"
 msgstr ""
 
-#: src/core/StelCore.cpp:1649
+#: src/core/StelCore.cpp:1671
 msgid "with a typical 1-second accuracy and zero values outside this range"
 msgstr ""
 
-#: src/core/StelCore.cpp:1686
+#: src/core/StelCore.cpp:1708
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2, %3."
 msgstr ""
 
-#: src/core/StelCore.cpp:1688
+#: src/core/StelCore.cpp:1710
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2."
 msgstr ""
@@ -1007,41 +1007,51 @@ msgstr ""
 "Η ορθογραφική προβολή έχει σχέση με την προβολή προοπτικής, αλλά το σημείο "
 "της προοπτικής είναι ρυθμισμένη στο άπειρο"
 
-#: src/core/StelObject.cpp:114
+#: src/core/StelObject.cpp:116
 #, qt-format
 msgid "RA/DE (J2000): %1/%2"
 msgstr "Ορθή Αναφορά/Απόκλιση (J2000): %1/%2"
 
-#: src/core/StelObject.cpp:121
+#: src/core/StelObject.cpp:123
 #, qt-format
 msgid "RA/DE (of date): %1/%2"
 msgstr "Ορθή Αναφορά/Απόκλιση (ημερομηνίας): %1/%2"
 
-#: src/core/StelObject.cpp:128
+#: src/core/StelObject.cpp:130
 #, qt-format
 msgid "Galactic longitude/latitude: %1/%2"
 msgstr ""
 
-#: src/core/StelObject.cpp:140 src/core/StelObject.cpp:144
+#: src/core/StelObject.cpp:142 src/core/StelObject.cpp:146
 #, qt-format
 msgid "Hour angle/DE: %1/%2"
 msgstr "Ωρική γωνία/απόκλιση: %1/%2"
 
-#: src/core/StelObject.cpp:140 src/core/StelObject.cpp:162
+#: src/core/StelObject.cpp:142 src/core/StelObject.cpp:164
 msgid "(apparent)"
 msgstr "(φαινόμενη)"
 
-#: src/core/StelObject.cpp:162 src/core/StelObject.cpp:166
+#: src/core/StelObject.cpp:164 src/core/StelObject.cpp:168
 #, qt-format
 msgid "Az/Alt: %1/%2"
 msgstr "Αζ/Υψ: %1/%2"
+
+#: src/core/StelObject.cpp:180
+#, qt-format
+msgid "Ecliptic Topocentric (of J2000): %1/%2"
+msgstr ""
+
+#: src/core/StelObject.cpp:185
+#, qt-format
+msgid "Ecliptic Topocentric (of date): %1/%2"
+msgstr ""
 
 #: src/core/StelSkyLayerMgr.cpp:87
 msgid "Deep-sky objects background images"
 msgstr ""
 
-#: src/core/StelMovementMgr.cpp:106 src/gui/StelGui.cpp:178
-#: src/StelMainView.cpp:299
+#: src/core/StelMovementMgr.cpp:106 src/gui/StelGui.cpp:177
+#: src/StelMainView.cpp:306
 msgid "Miscellaneous"
 msgstr "Διάφορα"
 
@@ -1085,32 +1095,32 @@ msgstr "Δεν βρέθηκε"
 msgid "Found"
 msgstr "Βρέθηκαν"
 
-#: src/gui/ConfigurationDialog.cpp:422 src/gui/ConfigurationDialog.cpp:424
+#: src/gui/ConfigurationDialog.cpp:432 src/gui/ConfigurationDialog.cpp:434
 msgid "Select screenshot directory"
 msgstr "Επιλέξτε κατάλογο για στιγμιότυπα"
 
-#: src/gui/ConfigurationDialog.cpp:650
+#: src/gui/ConfigurationDialog.cpp:663
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr "Εκκίνηση FOV: %1%2"
 
-#: src/gui/ConfigurationDialog.cpp:658
+#: src/gui/ConfigurationDialog.cpp:671
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "Αρχική κατεύθυνση θέασης Αζ/Υψ: %1%2"
 
-#: src/gui/ConfigurationDialog.cpp:715
-#: plugins/Oculars/src/gui/OcularDialog.cpp:498
+#: src/gui/ConfigurationDialog.cpp:728
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:384
 msgid "Authors"
 msgstr "Δημιουργοί"
 
-#: src/gui/ConfigurationDialog.cpp:716 src/gui/ViewDialog.cpp:411
+#: src/gui/ConfigurationDialog.cpp:729 src/gui/ViewDialog.cpp:445
 msgid "Contact"
 msgstr "Επικοινωνία"
 
-#: src/gui/ConfigurationDialog.cpp:718
-#: plugins/Oculars/src/gui/OcularDialog.cpp:497
+#: src/gui/ConfigurationDialog.cpp:731
+#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:71
+#: plugins/Oculars/src/gui/OcularDialog.cpp:484
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:383
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:108
 #: plugins/Novae/src/gui/NovaeDialog.cpp:107
@@ -1121,7 +1131,9 @@ msgstr "Επικοινωνία"
 msgid "Version"
 msgstr "Έκδοση"
 
-#: src/gui/ConfigurationDialog.cpp:801
+#: src/gui/ConfigurationDialog.cpp:814
+#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:72
+#: plugins/Oculars/src/gui/OcularDialog.cpp:485
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:109
 #: plugins/Novae/src/gui/NovaeDialog.cpp:108
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:115
@@ -1131,19 +1143,19 @@ msgstr "Έκδοση"
 msgid "Author"
 msgstr "Συγγραφέας"
 
-#: src/gui/ConfigurationDialog.cpp:805
+#: src/gui/ConfigurationDialog.cpp:818
 msgid "License"
 msgstr "Άδεια χρήσης"
 
-#: src/gui/ConfigurationDialog.cpp:829
+#: src/gui/ConfigurationDialog.cpp:842
 msgid "Running script: "
 msgstr "Σενάριο υπό εκτέλεση: "
 
-#: src/gui/ConfigurationDialog.cpp:836
+#: src/gui/ConfigurationDialog.cpp:849
 msgid "Running script: [none]"
 msgstr "Σενάριο υπό εκτέλεση: [Κανένα]"
 
-#: src/gui/ConfigurationDialog.cpp:901
+#: src/gui/ConfigurationDialog.cpp:914
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
@@ -1151,23 +1163,23 @@ msgstr ""
 "Ολοκλήρωση λήψης των νέων καταλόγων αστεριών!\n"
 "Επανεκκινήστε το Stellarium για να τα δείτε."
 
-#: src/gui/ConfigurationDialog.cpp:905
+#: src/gui/ConfigurationDialog.cpp:918
 msgid "All available star catalogs have been installed."
 msgstr "Εγκαταστάθηκαν όλοι οι διαθέσιμοι αστρικοί κατάλογοι"
 
-#: src/gui/ConfigurationDialog.cpp:910
+#: src/gui/ConfigurationDialog.cpp:923
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "Λήψη καταλόγου %1 απο %2"
 
-#: src/gui/ConfigurationDialog.cpp:917
+#: src/gui/ConfigurationDialog.cpp:930
 #, qt-format
 msgid ""
 "Downloading %1...\n"
 "(You can close this window.)"
 msgstr "Λήψη %1..."
 
-#: src/gui/ConfigurationDialog.cpp:924
+#: src/gui/ConfigurationDialog.cpp:937
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -1178,7 +1190,7 @@ msgstr ""
 "Αριθμός άστρων: %2 εκατομμύρια\n"
 "Όρια Μεγεθών: %3 - %4"
 
-#: src/gui/ConfigurationDialog.cpp:967 src/gui/ConfigurationDialog.cpp:1002
+#: src/gui/ConfigurationDialog.cpp:980 src/gui/ConfigurationDialog.cpp:1015
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -1187,11 +1199,11 @@ msgstr ""
 "Σφάλμα κατά τη λήψη του %1:\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:1054
+#: src/gui/ConfigurationDialog.cpp:1067
 msgid "Verifying file integrity..."
 msgstr "Έλεγχος ακεραιότητας αρχείων…"
 
-#: src/gui/ConfigurationDialog.cpp:1058
+#: src/gui/ConfigurationDialog.cpp:1071
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -1201,187 +1213,208 @@ msgstr ""
 "Το αρχείο είναι αλλοιωμένο."
 
 #. TRANSLATORS: Full phrase is "Algorithm of DeltaT"
-#: src/gui/ConfigurationDialog.cpp:1130
+#: src/gui/ConfigurationDialog.cpp:1144
 msgid "Algorithm of"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1141
+#: src/gui/ConfigurationDialog.cpp:1155
 msgid "Without correction"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1142
+#: src/gui/ConfigurationDialog.cpp:1156
 msgid "Schoch (1931)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1143
+#: src/gui/ConfigurationDialog.cpp:1157
 msgid "Clemence (1948)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1144
+#: src/gui/ConfigurationDialog.cpp:1158
 msgid "IAU (1952)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1145
+#: src/gui/ConfigurationDialog.cpp:1159
 msgid "Astronomical Ephemeris (1960)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1146
+#: src/gui/ConfigurationDialog.cpp:1160
 msgid "Tuckerman (1962, 1964) & Goldstine (1973)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1147
+#: src/gui/ConfigurationDialog.cpp:1161
 msgid "Muller & Stephenson (1975)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1148
+#: src/gui/ConfigurationDialog.cpp:1162
 msgid "Stephenson (1978)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1149
+#: src/gui/ConfigurationDialog.cpp:1163
 msgid "Schmadel & Zech (1979)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1150
+#: src/gui/ConfigurationDialog.cpp:1164
 msgid "Morrison & Stephenson (1982)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1151
+#: src/gui/ConfigurationDialog.cpp:1165
 msgid "Stephenson & Morrison (1984)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1152
+#: src/gui/ConfigurationDialog.cpp:1166
 msgid "Stephenson & Houlden (1986)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1153
+#: src/gui/ConfigurationDialog.cpp:1167
 msgid "Espenak (1987, 1989)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1154
+#: src/gui/ConfigurationDialog.cpp:1168
 msgid "Borkowski (1988)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1155
+#: src/gui/ConfigurationDialog.cpp:1169
 msgid "Schmadel & Zech (1988)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1156
+#: src/gui/ConfigurationDialog.cpp:1170
 msgid "Chapront-Touze & Chapront (1991)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1157
+#: src/gui/ConfigurationDialog.cpp:1171
 msgid "Stephenson & Morrison (1995)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1158
+#: src/gui/ConfigurationDialog.cpp:1172
 msgid "Stephenson (1997)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1160
+#: src/gui/ConfigurationDialog.cpp:1174
 msgid "Meeus (1998) (with Chapront, Chapront-Touze & Francou (1997))"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1161
+#: src/gui/ConfigurationDialog.cpp:1175
 msgid "JPL Horizons"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1162
+#: src/gui/ConfigurationDialog.cpp:1176
 msgid "Meeus & Simons (2000)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1163
+#: src/gui/ConfigurationDialog.cpp:1177
 msgid "Montenbruck & Pfleger (2000)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1164
+#: src/gui/ConfigurationDialog.cpp:1178
 msgid "Reingold & Dershowitz (2002, 2007)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1165
+#: src/gui/ConfigurationDialog.cpp:1179
 msgid "Morrison & Stephenson (2004, 2005)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1167
+#: src/gui/ConfigurationDialog.cpp:1181
 msgid "Espenak & Meeus (2006)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1168
+#: src/gui/ConfigurationDialog.cpp:1182
 msgid "Reijs (2006)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1169
+#: src/gui/ConfigurationDialog.cpp:1183
 msgid "Banjevic (2006)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1170
+#: src/gui/ConfigurationDialog.cpp:1184
 msgid "Islam, Sadiq & Qureshi (2008, 2013)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1171
+#: src/gui/ConfigurationDialog.cpp:1185
 #, qt-format
 msgid "Custom equation of %1T"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:119
+#. TRANSLATORS: This message will be displayed for users if Stellarium can't get info about version from stellarium.org
+#: src/gui/HelpDialog.cpp:250
+msgid "Oops... Stellarium can't check latest version."
+msgstr ""
+
+#. TRANSLATORS: This message will be displayed for users if current version of Stellarium is bigger than version from stellarium.org
+#: src/gui/HelpDialog.cpp:272
+msgid "Looks like you are using the development version of Stellarium."
+msgstr ""
+
+#. TRANSLATORS: This message will be displayed for users if current version of Stellarium is smaller than version from stellarium.org
+#: src/gui/HelpDialog.cpp:277
+#, qt-format
+msgid "This version of Stellarium is outdated! Latest version is %1."
+msgstr ""
+
+#. TRANSLATORS: This message will be displayed for users if current version of Stellarium is equals with version from stellarium.org
+#: src/gui/HelpDialog.cpp:283
+msgid "This is latest stable version of Stellarium."
+msgstr ""
+
+#: src/gui/HelpDialog.cpp:313
 msgid "Stellarium Help"
 msgstr "Βοήθεια για το Stellarium"
 
-#: src/gui/HelpDialog.cpp:124 src/gui/HelpDialog.cpp:129
+#: src/gui/HelpDialog.cpp:318 src/gui/HelpDialog.cpp:323
 msgid "Keys"
 msgstr "Πλήκτρα"
 
-#: src/gui/HelpDialog.cpp:126 src/gui/HelpDialog.cpp:198
+#: src/gui/HelpDialog.cpp:320 src/gui/HelpDialog.cpp:392
 msgid "Further Reading"
 msgstr "Περισσότερες Πληροφορίες"
 
-#: src/gui/HelpDialog.cpp:133
+#: src/gui/HelpDialog.cpp:327
 msgid "Pan view around the sky"
 msgstr "Πειρστροφή της θέας του ουρανού"
 
-#: src/gui/HelpDialog.cpp:134
+#: src/gui/HelpDialog.cpp:328
 msgid "Arrow keys & left mouse drag"
 msgstr "Βέλη κατεύθυνσης και τράβηγμα με αριστερό κουμπί του ποντικιού"
 
-#: src/gui/HelpDialog.cpp:136
+#: src/gui/HelpDialog.cpp:330
 msgid "Zoom in/out"
 msgstr "Εστιακή μεγέθυνση/σμύκρινση"
 
-#: src/gui/HelpDialog.cpp:138
+#: src/gui/HelpDialog.cpp:332
 msgid "Page Up/Down"
 msgstr "Σελίδα Πάνω/Κάτω"
 
-#: src/gui/HelpDialog.cpp:140
+#: src/gui/HelpDialog.cpp:334
 msgid "CTRL + Up/Down"
 msgstr "CTRL + Πάνω/Κάτω"
 
-#: src/gui/HelpDialog.cpp:143
+#: src/gui/HelpDialog.cpp:337
 msgid "Select object"
 msgstr "Επιλογή αντικειμένου"
 
-#: src/gui/HelpDialog.cpp:144
+#: src/gui/HelpDialog.cpp:338
 msgid "Left click"
 msgstr "Αριστερό κλικ"
 
-#: src/gui/HelpDialog.cpp:152
+#: src/gui/HelpDialog.cpp:346
 msgid "Clear selection"
 msgstr "Καθαρισμός επιλογής"
 
-#: src/gui/HelpDialog.cpp:153
+#: src/gui/HelpDialog.cpp:347
 msgid "Right click"
 msgstr "Δεξί κλικ"
 
-#: src/gui/HelpDialog.cpp:155
+#: src/gui/HelpDialog.cpp:349
 msgid "CTRL + Left click"
 msgstr "CTRL + Αριστερό κλίκ"
 
-#: src/gui/HelpDialog.cpp:160
+#: src/gui/HelpDialog.cpp:354
 #, qt-format
 msgid ""
 "Below are listed only the actions with assigned keys. Further actions may be "
 "available via the \"%1\" button."
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:199
+#: src/gui/HelpDialog.cpp:393
 msgid ""
 "The following links are external web links, and will launch your web "
 "browser:\n"
@@ -1389,17 +1422,17 @@ msgstr ""
 "Η παρακάτω σύνδεσμοι είναι εξωτερική σύνδεση στο διαδίκτυο, και θα ανοίξουν "
 "στον φυλλομετρητή σας:\n"
 
-#: src/gui/HelpDialog.cpp:200
+#: src/gui/HelpDialog.cpp:394
 msgid "The Stellarium User Guide"
 msgstr "Ο οδηγός χρήσης του Stellarium"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:204
+#: src/gui/HelpDialog.cpp:398
 msgid "{Frequently Asked Questions} about Stellarium.  Answers too."
 msgstr "{Πολύ Συχνές Ερωτήσεις} για το Stellarium. Και απαντήσεις."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:209
+#: src/gui/HelpDialog.cpp:403
 msgid ""
 "{The Stellarium Wiki} - General information.  You can also find user-"
 "contributed landscapes and scripts here."
@@ -1408,7 +1441,7 @@ msgstr ""
 "επίσης σενάρια και τοπία που έχουν κατασκευάσει άλλοι χρήστες."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:214
+#: src/gui/HelpDialog.cpp:408
 msgid ""
 "{Support ticket system} - if you need help using Stellarium, post a support "
 "request here and we'll try to help."
@@ -1418,7 +1451,7 @@ msgstr ""
 "βοηθήσουμε."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:219
+#: src/gui/HelpDialog.cpp:413
 msgid ""
 "{Bug reporting and feature request system} - if something doesn't work "
 "properly or is missing and is not listed in the tracker, you can open bug "
@@ -1429,48 +1462,48 @@ msgstr ""
 "μία αναφορά λαθών εδώ"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:224
+#: src/gui/HelpDialog.cpp:418
 msgid "{Forums} - discuss Stellarium with other users."
 msgstr "{Φόρουμς} - συζητήστε για το Stellarium με άλλους χρήστες"
 
-#: src/gui/HelpDialog.cpp:262
+#: src/gui/HelpDialog.cpp:458
 msgid "Developers"
 msgstr "Προγραμματιστές"
 
-#: src/gui/HelpDialog.cpp:263
+#: src/gui/HelpDialog.cpp:459
 #, qt-format
 msgid "Project coordinator & lead developer: %1"
 msgstr "Συντονιστής έργου και υπεύθυνος ανάπτυξης: %1"
 
-#: src/gui/HelpDialog.cpp:264
+#: src/gui/HelpDialog.cpp:460
 #, qt-format
 msgid "Doc author/developer: %1"
 msgstr "Προγραμματιστής/Συγγραφέας Κειμένων: %1"
 
-#: src/gui/HelpDialog.cpp:265 src/gui/HelpDialog.cpp:266
-#: src/gui/HelpDialog.cpp:267 src/gui/HelpDialog.cpp:268
-#: src/gui/HelpDialog.cpp:269 src/gui/HelpDialog.cpp:276
-#: src/gui/HelpDialog.cpp:277 src/gui/HelpDialog.cpp:278
-#: src/gui/HelpDialog.cpp:279
+#: src/gui/HelpDialog.cpp:461 src/gui/HelpDialog.cpp:462
+#: src/gui/HelpDialog.cpp:463 src/gui/HelpDialog.cpp:464
+#: src/gui/HelpDialog.cpp:465 src/gui/HelpDialog.cpp:472
+#: src/gui/HelpDialog.cpp:473 src/gui/HelpDialog.cpp:474
+#: src/gui/HelpDialog.cpp:475
 #, qt-format
 msgid "Developer: %1"
 msgstr "Προγραμματιστής: %1"
 
-#: src/gui/HelpDialog.cpp:270
+#: src/gui/HelpDialog.cpp:466
 #, qt-format
 msgid "Continuous Integration: %1"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:271 src/gui/HelpDialog.cpp:272
+#: src/gui/HelpDialog.cpp:467 src/gui/HelpDialog.cpp:468
 #, qt-format
 msgid "Tester: %1"
 msgstr "Δοκιμαστής: %1"
 
-#: src/gui/HelpDialog.cpp:273
+#: src/gui/HelpDialog.cpp:469
 msgid "Past Developers"
 msgstr "Προηγούμενοι προγραμματιστές"
 
-#: src/gui/HelpDialog.cpp:274
+#: src/gui/HelpDialog.cpp:470
 msgid ""
 "Several people have made significant contributions, but are no longer "
 "active. Their work has made a big difference to the project:"
@@ -1478,185 +1511,189 @@ msgstr ""
 "Πολλά άτομα έχουν συνεισφέρει σημαντικά. αλλά δεν είναι πλέον ενεργά. Η "
 "εργασία τους έκανε τη μεγάλη διαφορά σε αυτό το έργο:"
 
-#: src/gui/HelpDialog.cpp:275
+#: src/gui/HelpDialog.cpp:471
 #, qt-format
 msgid "Graphic/other designer: %1"
 msgstr "Σχεδιαστής γραφικών: %1"
 
-#: src/gui/HelpDialog.cpp:280 src/gui/HelpDialog.cpp:281
+#: src/gui/HelpDialog.cpp:476 src/gui/HelpDialog.cpp:477
 #, qt-format
 msgid "OSX Developer: %1"
 msgstr "Προγραμματιστής OSX: %1"
 
-#: src/gui/StelGui.cpp:177
+#: src/gui/StelGui.cpp:176
 msgid "Windows"
 msgstr "Παράθυρα"
 
-#: src/gui/StelGui.cpp:179
+#: src/gui/StelGui.cpp:178
 msgid "Quit"
 msgstr "Έξοδος"
 
-#: src/gui/StelGui.cpp:180
+#: src/gui/StelGui.cpp:179
 msgid "Speed up the script execution rate"
 msgstr "Επιβράδυνση του ρυθμού εκτέλεσης του σεναρίου"
 
-#: src/gui/StelGui.cpp:181
+#: src/gui/StelGui.cpp:180
 msgid "Slow down the script execution rate"
 msgstr "Επιβράδυνση του ρυθμού εκτέλεσης του σεναρίου"
 
-#: src/gui/StelGui.cpp:182
+#: src/gui/StelGui.cpp:181
 msgid "Set the normal script execution rate"
 msgstr "Κανονικός ρυθμός εκτέλεσης του σεναρίου"
 
-#: src/gui/StelGui.cpp:183
+#: src/gui/StelGui.cpp:182
 msgid "Stop script execution"
 msgstr "Ακύρωση εκτέλεσης σεναρίου"
 
-#: src/gui/StelGui.cpp:184
+#: src/gui/StelGui.cpp:183
 msgid "Pause script execution"
 msgstr "Παύση τρέχοντος σεναρίου"
 
-#: src/gui/StelGui.cpp:185
+#: src/gui/StelGui.cpp:184
 msgid "Resume script execution"
 msgstr "Συνέχιση εκτέλεσης σεναρίου"
 
-#: src/gui/StelGui.cpp:188
+#: src/gui/StelGui.cpp:187
 msgid "Script console window"
 msgstr "Κονσόλα σεναρίου"
 
-#: src/gui/StelGui.cpp:191
+#: src/gui/StelGui.cpp:190
 msgid "Help window"
 msgstr "Παράθυρο βοήθειας"
 
-#: src/gui/StelGui.cpp:192
+#: src/gui/StelGui.cpp:191
 msgid "Configuration window"
 msgstr "Παράθυρο ρυθμίσεων"
 
-#: src/gui/StelGui.cpp:193
+#: src/gui/StelGui.cpp:192
 msgid "Search window"
 msgstr "Παράθυρο αναζήτησης"
 
-#: src/gui/StelGui.cpp:194
+#: src/gui/StelGui.cpp:193
 msgid "Sky and viewing options window"
 msgstr "Παραθυρο επιλογών ουρανού και θέασης"
 
-#: src/gui/StelGui.cpp:195
+#: src/gui/StelGui.cpp:194
 msgid "Date/time window"
 msgstr "Παράθυρο ημέρας/ώρας"
 
-#: src/gui/StelGui.cpp:196
+#: src/gui/StelGui.cpp:195
 msgid "Location window"
 msgstr "Παράθυρο τοποθεσίας"
 
-#: src/gui/StelGui.cpp:197
+#: src/gui/StelGui.cpp:196
 msgid "Shortcuts window"
 msgstr "Παράθυρο συντομεύσεων"
 
-#: src/gui/StelGui.cpp:198
+#: src/gui/StelGui.cpp:197
 msgid "Copy selected object information to clipboard"
 msgstr "Αντιγραφή επιλεγμένων πληροφοριών του αντικειμένου στο πρόχειρο"
 
-#: src/gui/StelGui.cpp:199
+#: src/gui/StelGui.cpp:198
 msgid "Toggle visibility of GUI"
 msgstr "Διακόπτης ορατότητας του GUI"
 
-#: src/gui/StelGui.cpp:205
+#: src/gui/StelGui.cpp:204
 msgid "Auto hide horizontal button bar"
 msgstr "Αυτόματη απόκρυψη της οριζόντιας μπάρας κουμπιών"
 
-#: src/gui/StelGui.cpp:206
+#: src/gui/StelGui.cpp:205
 msgid "Auto hide vertical button bar"
 msgstr "Αυτόματη απόκρυψη της κάθετης μπάρας κουμπιών"
 
-#: src/gui/StelGuiItems.cpp:289 src/gui/StelGuiItems.cpp:689
+#: src/gui/StelGuiItems.cpp:290 src/gui/StelGuiItems.cpp:702
 msgid "Space"
 msgstr "Διάστημα"
 
-#: src/gui/StelGuiItems.cpp:569
-#, no-c-format, qt-format
+#: src/gui/StelGuiItems.cpp:571
+#, c-format, qt-format
 msgid "%1m"
 msgstr "%1μ"
 
+#: src/gui/StelGuiItems.cpp:609
+msgid "Field of view"
+msgstr ""
+
+#: src/gui/StelGuiItems.cpp:627
+msgid "Frames per second"
+msgstr ""
+
 #. TRANSLATORS: Short description for Class 1 of the Bortle scale
-#: src/gui/ViewDialog.cpp:297
+#: src/gui/ViewDialog.cpp:331
 msgid "Excellent dark-sky site"
 msgstr ""
 
 #. TRANSLATORS: Short description for Class 2 of the Bortle scale
-#: src/gui/ViewDialog.cpp:299
+#: src/gui/ViewDialog.cpp:333
 msgid "Typical truly dark site"
 msgstr ""
 
 #. TRANSLATORS: Short description for Class 3 of the Bortle scale
-#: src/gui/ViewDialog.cpp:301
+#: src/gui/ViewDialog.cpp:335
 msgid "Rural sky"
 msgstr ""
 
 #. TRANSLATORS: Short description for Class 4 of the Bortle scale
-#: src/gui/ViewDialog.cpp:303
+#: src/gui/ViewDialog.cpp:337
 msgid "Rural/suburban transition"
 msgstr ""
 
 #. TRANSLATORS: Short description for Class 5 of the Bortle scale
-#: src/gui/ViewDialog.cpp:305
+#: src/gui/ViewDialog.cpp:339
 msgid "Suburban sky"
 msgstr ""
 
 #. TRANSLATORS: Short description for Class 6 of the Bortle scale
-#: src/gui/ViewDialog.cpp:307
+#: src/gui/ViewDialog.cpp:341
 msgid "Bright suburban sky"
 msgstr ""
 
 #. TRANSLATORS: Short description for Class 7 of the Bortle scale
-#: src/gui/ViewDialog.cpp:309
+#: src/gui/ViewDialog.cpp:343
 msgid "Suburban/urban transition"
 msgstr ""
 
 #. TRANSLATORS: Short description for Class 8 of the Bortle scale
-#: src/gui/ViewDialog.cpp:311
+#: src/gui/ViewDialog.cpp:345
 msgid "City sky"
 msgstr ""
 
 #. TRANSLATORS: Short description for Class 9 of the Bortle scale
-#: src/gui/ViewDialog.cpp:313
+#: src/gui/ViewDialog.cpp:347
 msgid "Inner-city sky"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:327
+#: src/gui/ViewDialog.cpp:361
 msgid "The naked-eye limiting magnitude is"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:459
+#: src/gui/ViewDialog.cpp:493
 msgid "No description"
 msgstr "Χωρίς περιγραφή"
 
-#: src/gui/ViewDialog.cpp:569
+#: src/gui/ViewDialog.cpp:603
 msgid "No shooting stars"
 msgstr "Χωρίς πεφταστέρια"
 
-#: src/gui/ViewDialog.cpp:572
+#: src/gui/ViewDialog.cpp:606
 msgid "Normal rate"
 msgstr "Κανονικός ρυθμός"
 
-#: src/gui/ViewDialog.cpp:575
+#: src/gui/ViewDialog.cpp:609
 msgid "Standard Perseids rate"
 msgstr "Κανονικός ρυθμός διαττόντων αστέρων Περσείδων"
 
-#: src/gui/ViewDialog.cpp:578
+#: src/gui/ViewDialog.cpp:612
 msgid "Meteor storm rate"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:581
+#: src/gui/ViewDialog.cpp:615
 msgid "Exceptional Leonid rate"
 msgstr "Ασυνήθης ρυθμός διαττόντων αστέρων Λεοντίδων"
 
-#: src/gui/ViewDialog.cpp:584
+#: src/gui/ViewDialog.cpp:618
 msgid "Highest rate ever (1966 Leonids)"
 msgstr "Υψηλότερος ρυθμός στην ιστορία (1966 Λεοντίδες)"
-
-#: src/gui/LocationDialog.cpp:412
-msgid "New Location"
-msgstr "Νέα τοποθεσία"
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:112
 msgid "Select a ZIP archive that contains a Stellarium landscape"
@@ -1762,21 +1799,25 @@ msgstr "φυσικό"
 msgid "starchart"
 msgstr "χάρτης αστεριών"
 
-#: src/gui/SearchDialog.cpp:370
+#: src/gui/SearchDialog.cpp:380
 msgid "Simbad Lookup Error"
 msgstr ""
 
-#: src/gui/SearchDialog.cpp:378
+#: src/gui/SearchDialog.cpp:388
 msgid "Simbad Lookup"
 msgstr ""
 
-#: src/gui/SearchDialog.cpp:546
+#: src/gui/SearchDialog.cpp:556
 msgid "University of Strasbourg (France)"
 msgstr "Πανεπιστήμιο του Στρασβούργου (Γαλλία)"
 
-#: src/gui/SearchDialog.cpp:547
+#: src/gui/SearchDialog.cpp:557
 msgid "Harvard University (USA)"
 msgstr "Πανεπιστήμιο Harvard (ΗΠΑ)"
+
+#: src/gui/SearchDialog.cpp:616
+msgid "Paste and Search"
+msgstr ""
 
 #: src/gui/ShortcutsDialog.cpp:488
 msgid "Action"
@@ -1812,21 +1853,21 @@ msgstr ""
 msgid "This system does not support OpenGL."
 msgstr "Το σύστημά δεν υποστηρίζει OpenGL"
 
-#: src/StelMainView.cpp:299
+#: src/StelMainView.cpp:306
 msgid "Save screenshot"
 msgstr "Αποθήκευση στιγμιότυπου οθόνης"
 
-#: src/StelMainView.cpp:300
+#: src/StelMainView.cpp:307
 msgid "Full-screen mode"
 msgstr "Κατάσταση πλήρους-οθόνης"
 
-#: src/StelMainView.cpp:356
+#: src/StelMainView.cpp:411
 #, qt-format
 msgid "Stellarium %1"
 msgstr ""
 
-#: src/translations.h:33 plugins/Exoplanets/src/Exoplanet.cpp:197
-#: plugins/Exoplanets/src/Exoplanet.cpp:201
+#: src/translations.h:33 plugins/Exoplanets/src/Exoplanet.cpp:203
+#: plugins/Exoplanets/src/Exoplanet.cpp:207
 msgid "Sun"
 msgstr "Ήλιος"
 
@@ -1843,12 +1884,12 @@ msgid "Earth"
 msgstr "Γη"
 
 #. TRANSLATORS: Name of landscape and Earth's satellite
-#: src/translations.h:37 src/translations.h:195
+#: src/translations.h:37 src/translations.h:196
 msgid "Moon"
 msgstr "Σελήνη"
 
 #. TRANSLATORS: Name of landscape and planet
-#: src/translations.h:38 src/translations.h:203
+#: src/translations.h:38 src/translations.h:204
 msgid "Mars"
 msgstr "Άρης"
 
@@ -1946,7 +1987,7 @@ msgid "Metis"
 msgstr "Μήτις"
 
 #. TRANSLATORS: Name of landscape and planet
-#: src/translations.h:62 src/translations.h:205
+#: src/translations.h:62 src/translations.h:206
 msgid "Saturn"
 msgstr "Κρόνος"
 
@@ -2282,250 +2323,254 @@ msgid "Polynesian"
 msgstr "Πολυνήσιος"
 
 #: src/translations.h:182
+msgid "Romanian"
+msgstr ""
+
+#: src/translations.h:183
 msgid "Sami"
 msgstr "Sami"
 
-#: src/translations.h:183
+#: src/translations.h:184
 msgid "Tupi-Guarani"
 msgstr "Τούπι-Γκουαράνι"
 
-#: src/translations.h:184
+#: src/translations.h:185
 msgid "Tongan"
 msgstr ""
 
-#: src/translations.h:185
+#: src/translations.h:186
 msgid "Western"
 msgstr "Δυτικός"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:191
+#: src/translations.h:192
 msgid "Guereins"
 msgstr "Guereins"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:193
+#: src/translations.h:194
 msgid "Trees"
 msgstr "Δέντρα"
 
 #. TRANSLATORS: Landscape name: Hurricane Ridge
-#: src/translations.h:197
+#: src/translations.h:198
 msgid "Hurricane"
 msgstr "Τυφώνας"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:199
+#: src/translations.h:200
 msgid "Ocean"
 msgstr "Ωκεανός"
 
 #. TRANSLATORS: Landscape name: Garching bei Munchen
-#: src/translations.h:201
+#: src/translations.h:202
 msgid "Garching"
 msgstr "Garching"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:207
+#: src/translations.h:208
 msgid "Geneva"
 msgstr ""
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:209
+#: src/translations.h:210
 msgid "Grossmugl"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:216
+#: src/translations.h:217
 msgid "Landscape Tour"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:218
+#: src/translations.h:219
 msgid "Partial Lunar Eclipse"
 msgstr "Μερική Έκλειψη Σελήνης"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:220
+#: src/translations.h:221
 msgid "Total Lunar Eclipse"
 msgstr "Ολική Έκλειψη Σελήνης"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:222
+#: src/translations.h:223
 msgid "Screensaver"
 msgstr "Προφύλαξη Οθόνης"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:224
+#: src/translations.h:225
 msgid "Solar Eclipse 2009"
 msgstr "Ηλιακή Έκλειψη"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:226
+#: src/translations.h:227
 msgid "Startup Script"
 msgstr "Script Εκκίνησης"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:228
+#: src/translations.h:229
 msgid "Zodiac"
 msgstr "Ζωδιακός"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:230
+#: src/translations.h:231
 msgid "Mercury Triple Sunrise and Sunset"
 msgstr "Τριπλή Ανατολή και Δύση του Ερμή"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:232
+#: src/translations.h:233
 msgid "Double eclipse from Deimos in 2017"
 msgstr "Διπλή έκλειψη από τον Δείμο το 2017"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:234
+#: src/translations.h:235
 msgid "Double eclipse from Deimos in 2031"
 msgstr "Διπλή έκλειψη από τον Δείμο το 2031"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:236
+#: src/translations.h:237
 msgid "Eclipse from Olympus Mons Jan 10 2068"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:238
+#: src/translations.h:239
 msgid "Occultation of Earth and Jupiter 2048"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:240
+#: src/translations.h:241
 msgid "3 Transits and 2 Eclipses from Deimos 2027"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:242
+#: src/translations.h:243
 msgid "Solar System Screensaver"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:244
+#: src/translations.h:245
 msgid "Constellations Tour"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:246
+#: src/translations.h:247
 msgid "Sun from different planets"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:248
+#: src/translations.h:249
 msgid "Earth best views from other bodies"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:250
+#: src/translations.h:251
 msgid "Transit of Venus"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:252
+#: src/translations.h:253
 msgid "Analemma"
 msgstr "Analemma"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:254
+#: src/translations.h:255
 msgid "Sky Culture Tour"
 msgstr ""
 
 #. TRANSLATORS: Name and description of script
-#: src/translations.h:256
+#: src/translations.h:257
 msgid "Earth Events from Mercury"
 msgstr ""
 
 #. TRANSLATORS: Name and description of script
-#: src/translations.h:258
+#: src/translations.h:259
 msgid "Earth Events from Venus"
 msgstr ""
 
 #. TRANSLATORS: Name and description of script
-#: src/translations.h:260
+#: src/translations.h:261
 msgid "Earth Events from Mars"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:262
+#: src/translations.h:263
 msgid "Earth Greatest Elongations and Brilliancies from Mars"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:264
+#: src/translations.h:265
 msgid "Earth and Mars Greatest Elongations from Jupiter"
 msgstr ""
 
 #. TRANSLATORS: Description of the landscape tour script.
-#: src/translations.h:270
+#: src/translations.h:271
 msgid "Look around each installed landscape."
 msgstr "Περιήγηση σε κάθε εγκατεστημένο τοπίο"
 
 #. TRANSLATORS: Description of the sky culture tour script.
-#: src/translations.h:272
+#: src/translations.h:273
 msgid "Look at each installed sky culture."
 msgstr ""
 
-#: src/translations.h:273
+#: src/translations.h:274
 msgid "Script to demonstrate a partial lunar eclipse."
 msgstr "Script για την επίδειξη μερικής έκλειψης σελήνης."
 
-#: src/translations.h:274
+#: src/translations.h:275
 msgid "Script to demonstrate a total lunar eclipse."
 msgstr "Script για την επίδειξη ολικής έκλειψης σελήνης."
 
-#: src/translations.h:275
+#: src/translations.h:276
 msgid "A slow, infinite tour of the sky, looking at random objects."
 msgstr ""
 
-#: src/translations.h:276
+#: src/translations.h:277
 msgid ""
 "Script to demonstrate a total solar eclipse which has happened in 2009 "
 "(location=Rangpur, Bangladesh)."
 msgstr ""
 
-#: src/translations.h:277
+#: src/translations.h:278
 msgid "Script which runs automatically at startup"
 msgstr ""
 
-#: src/translations.h:278
+#: src/translations.h:279
 msgid ""
 "This script displays the constellations of the Zodiac. That means the "
 "constellations which lie along the line which the Sun traces across the "
 "celestial sphere over the course of a year."
 msgstr ""
 
-#: src/translations.h:279
+#: src/translations.h:280
 msgid ""
 "Due to the quirks in Mercury's orbit and rotation at certain spots the sun "
 "will rise & set 3 different times in one Mercury day."
 msgstr ""
 
-#: src/translations.h:280
+#: src/translations.h:281
 msgid ""
 "Just before Mars eclipses the sun, Phobos pops out from behind and eclipses "
 "it first. Takes place between Scorpio and Sagittarius on April 26, 2017."
 msgstr ""
 
-#: src/translations.h:281
+#: src/translations.h:282
 msgid ""
 "Just before Mars eclipses the sun, Phobos pops out from behind and eclipses "
 "it first. Takes place between Taurus and Gemini on July 23, 2031."
 msgstr ""
 
-#: src/translations.h:282
+#: src/translations.h:283
 msgid "Phobos eclipsing the Sun as seen from Olympus Mons on Jan 10, 2068."
 msgstr ""
 
-#: src/translations.h:283
+#: src/translations.h:284
 msgid ""
 "Phobos occultations of Earth are common, as are occultations of Jupiter. But "
 "occultations of both on the same day are very rare. Here's one that takes "
 "place 1/23/2048. In real speed."
 msgstr ""
 
-#: src/translations.h:284
+#: src/translations.h:285
 msgid ""
 "Phobos races ahead of Mars and transits the sun, passes through it and then "
 "retrogrades back towards the sun and just partially transits it again (only "
@@ -2535,1011 +2580,1092 @@ msgid ""
 "light up later."
 msgstr ""
 
-#: src/translations.h:285
+#: src/translations.h:286
 msgid ""
 "Screensaver of various happenings in the Solar System. 187 events in all!"
 msgstr ""
 
-#: src/translations.h:286
+#: src/translations.h:287
 msgid "A tour of the western constellations."
 msgstr ""
 
-#: src/translations.h:287
+#: src/translations.h:288
 msgid "Look at the Sun from big planets of Solar System and Pluto."
 msgstr ""
 
-#: src/translations.h:288
+#: src/translations.h:289
 msgid ""
 "Best views of Earth from other Solar System bodies in the 21st Century."
 msgstr ""
 
-#: src/translations.h:289
+#: src/translations.h:290
 msgid "Transit of Venus as seen from Sydney Australia, 6th June 2012."
 msgstr ""
 
-#: src/translations.h:290
+#: src/translations.h:291
 msgid ""
 "A demonstration of the analemma - the path of the Sun across the sky during "
 "the year."
 msgstr ""
 
-#: src/translations.h:291
+#: src/translations.h:292
 msgid ""
 "Flash of the supernova observed by Tycho Brahe in 1572. The Supernovae "
 "plugin has to be enabled."
 msgstr ""
 
-#: src/translations.h:292
+#: src/translations.h:293
 msgid "Earth Greatest Elongations and Brilliancies from Mars 2000-3000"
 msgstr ""
 
-#: src/translations.h:293
+#: src/translations.h:294
 msgid "Earth Greatest Elongations from Jupiter 2000-3000"
 msgstr ""
 
-#: src/translations.h:297
+#: src/translations.h:298
 msgid "Andorra"
 msgstr "Ανδόρα"
 
-#: src/translations.h:298
+#: src/translations.h:299
 msgid "United Arab Emirates"
 msgstr "Ηνωμένα Αραβικά Εμιράτα"
 
-#: src/translations.h:299
+#: src/translations.h:300
 msgid "Afghanistan"
 msgstr "Αφγανιστάν"
 
-#: src/translations.h:300
+#: src/translations.h:301
 msgid "Antigua and Barbuda"
 msgstr "Αντίγκουα και Μπαρμπούντα"
 
-#: src/translations.h:301
+#: src/translations.h:302
 msgid "Anguilla"
 msgstr "Ανγκουίλα"
 
-#: src/translations.h:302
+#: src/translations.h:303
 msgid "Albania"
 msgstr "Αλβανία"
 
-#: src/translations.h:303
+#: src/translations.h:304
 msgid "Armenia"
 msgstr "Αρμενία"
 
-#: src/translations.h:304
+#: src/translations.h:305
 msgid "Netherlands Antilles"
 msgstr "Ολλανδικές Αντίλλες"
 
-#: src/translations.h:305
+#: src/translations.h:306
 msgid "Angola"
 msgstr "Ανγκόλα"
 
-#: src/translations.h:306
+#: src/translations.h:307
 msgid "Antarctica"
 msgstr "Ανταρκτική"
 
-#: src/translations.h:307
+#: src/translations.h:308
 msgid "Argentina"
 msgstr "Αργεντινή"
 
-#: src/translations.h:308
+#: src/translations.h:309
 msgid "American Samoa"
 msgstr "Αμερικανική Σαμόα"
 
-#: src/translations.h:309
+#: src/translations.h:310
 msgid "Austria"
 msgstr "Αυστρία"
 
-#: src/translations.h:310
+#: src/translations.h:311
 msgid "Australia"
 msgstr "Αυστραλία"
 
-#: src/translations.h:311
+#: src/translations.h:312
 msgid "Aruba"
 msgstr "Αρούμπα"
 
-#: src/translations.h:312
+#: src/translations.h:313
 msgid "Azerbaijan"
 msgstr "Αζερμπαϊτζάν"
 
-#: src/translations.h:313
+#: src/translations.h:314
 msgid "Bosnia and Herzegowina"
 msgstr "Βοσνία-Ερζεγοβίνη"
 
-#: src/translations.h:314
+#: src/translations.h:315
 msgid "Barbados"
 msgstr "Μπαρμπάντος"
 
-#: src/translations.h:315
+#: src/translations.h:316
 msgid "Bangladesh"
 msgstr "Μπανγκλαντές"
 
-#: src/translations.h:316
+#: src/translations.h:317
 msgid "Belgium"
 msgstr "Βέλγιο"
 
-#: src/translations.h:317
+#: src/translations.h:318
 msgid "Burkina Faso"
 msgstr "Μπούρκινα Φάσο"
 
-#: src/translations.h:318
+#: src/translations.h:319
 msgid "Bulgaria"
 msgstr "Βουλγαρία"
 
-#: src/translations.h:319
+#: src/translations.h:320
 msgid "Bahrain"
 msgstr "Μπαχρέιν"
 
-#: src/translations.h:320
+#: src/translations.h:321
 msgid "Burundi"
 msgstr "Μπουρούντι"
 
-#: src/translations.h:321
+#: src/translations.h:322
 msgid "Benin"
 msgstr "Μπενίν"
 
-#: src/translations.h:322
+#: src/translations.h:323
 msgid "Bermuda"
 msgstr "Βερμούδες"
 
-#: src/translations.h:323
+#: src/translations.h:324
 msgid "Brunei Darussalam"
 msgstr "Μπρουνέι Νταρουσαλάμ"
 
-#: src/translations.h:324
+#: src/translations.h:325
 msgid "Bolivia"
 msgstr "Βολιβία"
 
-#: src/translations.h:325
+#: src/translations.h:326
 msgid "Brazil"
 msgstr "Βραζιλία"
 
-#: src/translations.h:326
+#: src/translations.h:327
 msgid "Bahamas"
 msgstr "Μπαχάμες"
 
-#: src/translations.h:327
+#: src/translations.h:328
 msgid "Bhutan"
 msgstr "Μπουτάν"
 
-#: src/translations.h:328
+#: src/translations.h:329
 msgid "Bouvet Island"
 msgstr "Νήσος Μπουβέ"
 
-#: src/translations.h:329
+#: src/translations.h:330
 msgid "Botswana"
 msgstr "Μποτσουάνα"
 
-#: src/translations.h:330
+#: src/translations.h:331
 msgid "Belarus"
 msgstr "Λευκορωσία"
 
-#: src/translations.h:331
+#: src/translations.h:332
 msgid "Belize"
 msgstr "Μπελίζε"
 
-#: src/translations.h:332
+#: src/translations.h:333
 msgid "Canada"
 msgstr "Καναδάς"
 
-#: src/translations.h:333
+#: src/translations.h:334
 msgid "Cocos Islands"
 msgstr "Νήσοι Κόκος"
 
-#: src/translations.h:334
+#: src/translations.h:335
 msgid "Democratic Republic of the Congo"
 msgstr "Δημοκρατία του Κονγκό (Ζαΐρ)"
 
-#: src/translations.h:335
+#: src/translations.h:336
 msgid "Central African Republic"
 msgstr "Κεντροαφρικανική Δημοκρατία"
 
-#: src/translations.h:336
+#: src/translations.h:337
 msgid "Republic of the Congo"
 msgstr "Δημοκρατία του Κογκό"
 
-#: src/translations.h:337
+#: src/translations.h:338
 msgid "Switzerland"
 msgstr "Ελβετία"
 
-#: src/translations.h:338
+#: src/translations.h:339
 msgid "Cote d'Ivoire"
 msgstr "Ακτή Ελεφαντοστού"
 
-#: src/translations.h:339
+#: src/translations.h:340
 msgid "Cook Islands"
 msgstr "Νήσοι Κουκ"
 
-#: src/translations.h:340
+#: src/translations.h:341
 msgid "Chile"
 msgstr "Χιλή"
 
-#: src/translations.h:341
+#: src/translations.h:342
 msgid "Cameroon"
 msgstr "Καμερούν"
 
-#: src/translations.h:342
+#: src/translations.h:343
 msgid "China"
 msgstr "Κίνα"
 
-#: src/translations.h:343
+#: src/translations.h:344
 msgid "Colombia"
 msgstr "Κολομβία"
 
-#: src/translations.h:344
+#: src/translations.h:345
 msgid "Costa Rica"
 msgstr "Κόστα Ρίκα"
 
-#: src/translations.h:345
+#: src/translations.h:346
 msgid "Serbia and Montenegro"
 msgstr "Σερβία και Μαυροβούνιο"
 
-#: src/translations.h:346
+#: src/translations.h:347
 msgid "Cuba"
 msgstr "Κούβα"
 
-#: src/translations.h:347
+#: src/translations.h:348
 msgid "Cape Verde"
 msgstr "Κάπε Βέρντε"
 
-#: src/translations.h:348
+#: src/translations.h:349
 msgid "Christmas Island"
 msgstr "Νήσος Χριστουγέννων"
 
-#: src/translations.h:349
+#: src/translations.h:350
 msgid "Cyprus"
 msgstr "Κύπρος"
 
-#: src/translations.h:350
+#: src/translations.h:351
 msgid "Czech Republic"
 msgstr "Δημοκρατία της Τσεχίας"
 
-#: src/translations.h:351
+#: src/translations.h:352
 msgid "Germany"
 msgstr "Γερμανία"
 
-#: src/translations.h:352
+#: src/translations.h:353
 msgid "Djibouti"
 msgstr "Τζιμπουτί"
 
-#: src/translations.h:353
+#: src/translations.h:354
 msgid "Denmark"
 msgstr "Δανία"
 
-#: src/translations.h:354
+#: src/translations.h:355
 msgid "Dominica"
 msgstr "Ντομίνικα"
 
-#: src/translations.h:355
+#: src/translations.h:356
 msgid "Dominican Republic"
 msgstr "Δομηνικανή Δημοκρατία"
 
-#: src/translations.h:356
+#: src/translations.h:357
 msgid "Algeria"
 msgstr "Αλγερία"
 
-#: src/translations.h:357
+#: src/translations.h:358
 msgid "Ecuador"
 msgstr "Εκουαδόρ"
 
-#: src/translations.h:358
+#: src/translations.h:359
 msgid "Estonia"
 msgstr "Εσθονία"
 
-#: src/translations.h:359
+#: src/translations.h:360
 msgid "Egypt"
 msgstr "Αίγυπτος"
 
-#: src/translations.h:360
+#: src/translations.h:361
 msgid "Western Sahara"
 msgstr "Δυτική Σαχάρα"
 
-#: src/translations.h:361
+#: src/translations.h:362
 msgid "Eritrea"
 msgstr "Ερυθραία"
 
-#: src/translations.h:362
+#: src/translations.h:363
 msgid "Spain"
 msgstr "Ισπανία"
 
-#: src/translations.h:363
+#: src/translations.h:364
 msgid "Ethiopia"
 msgstr "Αιθιοπία"
 
-#: src/translations.h:364
+#: src/translations.h:365
 msgid "Finland"
 msgstr "Φινλανδία"
 
-#: src/translations.h:365
+#: src/translations.h:366
 msgid "Fiji"
 msgstr "Φίτζι"
 
-#: src/translations.h:366
+#: src/translations.h:367
 msgid "Falkland Islands"
 msgstr "Νησιά Φώκλαντ"
 
-#: src/translations.h:367
+#: src/translations.h:368
 msgid "Micronesia"
 msgstr "Μικρονησία"
 
-#: src/translations.h:368
+#: src/translations.h:369
 msgid "Faroe Islands"
 msgstr "Νήσοι Φερόες"
 
-#: src/translations.h:369
+#: src/translations.h:370
 msgid "France"
 msgstr "Γαλλία"
 
-#: src/translations.h:370
+#: src/translations.h:371
 msgid "Gabon"
 msgstr "Γκαμπόν"
 
-#: src/translations.h:371
+#: src/translations.h:372
 msgid "United Kingdom"
 msgstr "Ηνωμένο Βασίλειο"
 
-#: src/translations.h:372
+#: src/translations.h:373
 msgid "Grenada"
 msgstr "Γρανάδα"
 
-#: src/translations.h:373
+#: src/translations.h:374
 msgid "Georgia"
 msgstr "Γεωργία"
 
-#: src/translations.h:374
+#: src/translations.h:375
 msgid "French Guiana"
 msgstr "Γαλλική Γουϊάνα"
 
-#: src/translations.h:375
+#: src/translations.h:376
 msgid "Ghana"
 msgstr "Γκάνα"
 
-#: src/translations.h:376
+#: src/translations.h:377
 msgid "Gibraltar"
 msgstr "Γιβραλτάρ"
 
-#: src/translations.h:377
+#: src/translations.h:378
 msgid "Greenland"
 msgstr "Γροιλανδία"
 
-#: src/translations.h:378
+#: src/translations.h:379
 msgid "Gambia"
 msgstr "Γκάμπια"
 
-#: src/translations.h:379
+#: src/translations.h:380
 msgid "Guinea"
 msgstr "Γουινέα"
 
-#: src/translations.h:380
+#: src/translations.h:381
 msgid "Guadeloupe"
 msgstr "Γουαδελούπη"
 
-#: src/translations.h:381
+#: src/translations.h:382
 msgid "Equatorial Guinea"
 msgstr "Ισημερινή Γουϊνέα"
 
-#: src/translations.h:382
+#: src/translations.h:383
 msgid "Greece"
 msgstr "Ελλάδα"
 
-#: src/translations.h:383
+#: src/translations.h:384
 msgid "South Georgia and the South Sandwich Islands"
 msgstr "Νότια Γεωργία και Νότιοι Νήσοι Σάντουιτς"
 
-#: src/translations.h:384
+#: src/translations.h:385
 msgid "Guatemala"
 msgstr "Γουατεμάλα"
 
-#: src/translations.h:385
+#: src/translations.h:386
 msgid "Guam"
 msgstr "Γκουάμ"
 
-#: src/translations.h:386
+#: src/translations.h:387
 msgid "Guinea-Bissau"
 msgstr "Γουινέα-Μπισάου"
 
-#: src/translations.h:387
+#: src/translations.h:388
 msgid "Guyana"
 msgstr "Γουιάνα"
 
-#: src/translations.h:388
+#: src/translations.h:389
 msgid "Hong Kong"
 msgstr "Χονγκ Κονγκ"
 
-#: src/translations.h:389
+#: src/translations.h:390
 msgid "Heard Island and McDonald Islands"
 msgstr "Νήσος Χερντ και Νήσοι Μακντόναλντ"
 
-#: src/translations.h:390
+#: src/translations.h:391
 msgid "Honduras"
 msgstr "Ονδούρα"
 
-#: src/translations.h:391
+#: src/translations.h:392
 msgid "Croatia"
 msgstr "Κροατία"
 
-#: src/translations.h:392
+#: src/translations.h:393
 msgid "Haiti"
 msgstr "Αϊτή"
 
-#: src/translations.h:393
+#: src/translations.h:394
 msgid "Hungary"
 msgstr "Ουγγαρία"
 
-#: src/translations.h:394
+#: src/translations.h:395
 msgid "Indonesia"
 msgstr "Ινδονησία"
 
-#: src/translations.h:395
+#: src/translations.h:396
 msgid "Ireland"
 msgstr "Ιρλανδία"
 
-#: src/translations.h:396
+#: src/translations.h:397
 msgid "Israel"
 msgstr "Ισραήλ"
 
-#: src/translations.h:397
+#: src/translations.h:398
 msgid "India"
 msgstr "Ινδία"
 
-#: src/translations.h:398
+#: src/translations.h:399
 msgid "British Indian Ocean Territory"
 msgstr "Βρετανικά Εδάφη Ινδικού Ωκεανού"
 
-#: src/translations.h:399
+#: src/translations.h:400
 msgid "Iraq"
 msgstr "Ιράκ"
 
-#: src/translations.h:400
+#: src/translations.h:401
 msgid "Iran"
 msgstr "Ιράν"
 
-#: src/translations.h:401
+#: src/translations.h:402
 msgid "Iceland"
 msgstr "Ισλανδία"
 
-#: src/translations.h:402
+#: src/translations.h:403
 msgid "Italy"
 msgstr "Ιταλία"
 
-#: src/translations.h:403
+#: src/translations.h:404
 msgid "Jamaica"
 msgstr "Τζαμάικα"
 
-#: src/translations.h:404
+#: src/translations.h:405
 msgid "Jordan"
 msgstr "Ιορδανία"
 
-#: src/translations.h:405
+#: src/translations.h:406
 msgid "Japan"
 msgstr "Ιαπωνία"
 
-#: src/translations.h:406
+#: src/translations.h:407
 msgid "Kenya"
 msgstr "Κένυα"
 
-#: src/translations.h:407
+#: src/translations.h:408
 msgid "Kyrgyzstan"
 msgstr "Κιργιζία"
 
-#: src/translations.h:408
+#: src/translations.h:409
 msgid "Cambodia"
 msgstr "Καμπότζη"
 
-#: src/translations.h:409
+#: src/translations.h:410
 msgid "Kiribati"
 msgstr "Κιριμπάτι"
 
-#: src/translations.h:410
+#: src/translations.h:411
 msgid "Comoros"
 msgstr "Κομόρες"
 
-#: src/translations.h:411
+#: src/translations.h:412
 msgid "Saint Kitts and Nevis"
 msgstr "Άγιος Χριστόφορος και Νέβις"
 
-#: src/translations.h:412
+#: src/translations.h:413
 msgid "Democratic People's Republic of Korea"
 msgstr "Λαοκρατική Δημοκρατία της Κορέας"
 
-#: src/translations.h:413
+#: src/translations.h:414
 msgid "Republic of Korea"
 msgstr "Δημοκρατία της Κορέας (Νότια Κορέα)"
 
-#: src/translations.h:414
+#: src/translations.h:415
 msgid "Kuwait"
 msgstr "Κουβέιτ"
 
-#: src/translations.h:415
+#: src/translations.h:416
 msgid "Cayman Islands"
 msgstr "Νήσοι Καϋμάν"
 
-#: src/translations.h:416
+#: src/translations.h:417
 msgid "Kazakhstan"
 msgstr "Καζαχστάν"
 
-#: src/translations.h:417
+#: src/translations.h:418
 msgid "Lao"
 msgstr "Λάος"
 
-#: src/translations.h:418
+#: src/translations.h:419
 msgid "Lebanon"
 msgstr "Λίβανος"
 
-#: src/translations.h:419
+#: src/translations.h:420
 msgid "Saint Lucia"
 msgstr "Αγία Λουκία"
 
-#: src/translations.h:420
+#: src/translations.h:421
 msgid "Liechtenstein"
 msgstr "Λιχτενστάιν"
 
-#: src/translations.h:421
+#: src/translations.h:422
 msgid "Sri Lanka"
 msgstr "Σρι Λάνκα"
 
-#: src/translations.h:422
+#: src/translations.h:423
 msgid "Liberia"
 msgstr "Λιβερία"
 
-#: src/translations.h:423
+#: src/translations.h:424
 msgid "Lesotho"
 msgstr "Λεσότο"
 
-#: src/translations.h:424
+#: src/translations.h:425
 msgid "Lithuania"
 msgstr "Λιθουανία"
 
-#: src/translations.h:425
+#: src/translations.h:426
 msgid "Luxembourg"
 msgstr "Λουξεμβούργο"
 
-#: src/translations.h:426
+#: src/translations.h:427
 msgid "Latvia"
 msgstr "Λετονία"
 
-#: src/translations.h:427
+#: src/translations.h:428
 msgid "Libyan Arab Jamahiriya"
 msgstr "Λυβική Αραβική Τζαμαχιρίγια"
 
-#: src/translations.h:428
+#: src/translations.h:429
 msgid "Morocco"
 msgstr "Μαρόκο"
 
-#: src/translations.h:429
+#: src/translations.h:430
 msgid "Monaco"
 msgstr "Μονακό"
 
-#: src/translations.h:430
+#: src/translations.h:431
 msgid "Moldova"
 msgstr "Μολδαβία"
 
-#: src/translations.h:431
+#: src/translations.h:432
 msgid "Madagascar"
 msgstr "Μαδαγασκάρη"
 
-#: src/translations.h:432
+#: src/translations.h:433
 msgid "Marshall Islands"
 msgstr "Νήσοι Μάρσαλ"
 
-#: src/translations.h:433
+#: src/translations.h:434
 msgid "Macedonia"
 msgstr "FYROM"
 
-#: src/translations.h:434
+#: src/translations.h:435
 msgid "Mali"
 msgstr "Μαλί"
 
-#: src/translations.h:435
+#: src/translations.h:436
 msgid "Myanmar"
 msgstr "Μιανμάρ"
 
-#: src/translations.h:436
+#: src/translations.h:437
 msgid "Mongolia"
 msgstr "Μογγολία"
 
-#: src/translations.h:437
+#: src/translations.h:438
 msgid "Macau"
 msgstr "Μακάο"
 
-#: src/translations.h:438
+#: src/translations.h:439
 msgid "Northern Mariana Islands"
 msgstr "Νήσοι Βόρειες Μαριάνες"
 
-#: src/translations.h:439
+#: src/translations.h:440
 msgid "Martinique"
 msgstr "Μαρτινίκα"
 
-#: src/translations.h:440
+#: src/translations.h:441
 msgid "Mauritania"
 msgstr "Μαυριτανία"
 
-#: src/translations.h:441
+#: src/translations.h:442
 msgid "Montserrat"
 msgstr "Μοντσεράτ"
 
-#: src/translations.h:442
+#: src/translations.h:443
 msgid "Malta"
 msgstr "Μάλτα"
 
-#: src/translations.h:443
+#: src/translations.h:444
 msgid "Mauritius"
 msgstr "Μαυρίτιος"
 
-#: src/translations.h:444
+#: src/translations.h:445
 msgid "Maldives"
 msgstr "Μαλδίβες"
 
-#: src/translations.h:445
+#: src/translations.h:446
 msgid "Malawi"
 msgstr "Μαλάουϊ"
 
-#: src/translations.h:446
+#: src/translations.h:447
 msgid "Mexico"
 msgstr "Μεξικό"
 
-#: src/translations.h:447
+#: src/translations.h:448
 msgid "Malaysia"
 msgstr "Μαλαισία"
 
-#: src/translations.h:448
+#: src/translations.h:449
 msgid "Mozambique"
 msgstr "Μοζαμβίκη"
 
-#: src/translations.h:449
+#: src/translations.h:450
 msgid "Namibia"
 msgstr "Ναμίμπια"
 
-#: src/translations.h:450
+#: src/translations.h:451
 msgid "New Caledonia"
 msgstr "Νέα Καληδονία"
 
-#: src/translations.h:451
+#: src/translations.h:452
 msgid "Niger"
 msgstr "Νίγηρας"
 
-#: src/translations.h:452
+#: src/translations.h:453
 msgid "Norfolk Island"
 msgstr "Νήσος Νόρφολκ"
 
-#: src/translations.h:453
+#: src/translations.h:454
 msgid "Nigeria"
 msgstr "Νιγηρία"
 
-#: src/translations.h:454
+#: src/translations.h:455
 msgid "Nicaragua"
 msgstr "Νικαράγουα"
 
-#: src/translations.h:455
+#: src/translations.h:456
 msgid "Netherlands"
 msgstr "Ολλανδία"
 
-#: src/translations.h:456
+#: src/translations.h:457
 msgid "Norway"
 msgstr "Νορβηγία"
 
-#: src/translations.h:457
+#: src/translations.h:458
 msgid "Nepal"
 msgstr "Νεπάλ"
 
-#: src/translations.h:458
+#: src/translations.h:459
 msgid "Nauru"
 msgstr "Ναούρου"
 
-#: src/translations.h:459
+#: src/translations.h:460
 msgid "Niue"
 msgstr "Νιούε"
 
-#: src/translations.h:460
+#: src/translations.h:461
 msgid "New Zealand"
 msgstr "Νέα Ζηλανδία"
 
-#: src/translations.h:461
+#: src/translations.h:462
 msgid "Oman"
 msgstr "Ομάν"
 
-#: src/translations.h:462
+#: src/translations.h:463
 msgid "Panama"
 msgstr "Παναμάς"
 
-#: src/translations.h:463
+#: src/translations.h:464
 msgid "Peru"
 msgstr "Περού"
 
-#: src/translations.h:464
+#: src/translations.h:465
 msgid "French Polynesia"
 msgstr "Γαλλική Πολυνησία"
 
-#: src/translations.h:465
+#: src/translations.h:466
 msgid "Papua New Guinea"
 msgstr "Παπούα Νέα Γουινέα"
 
-#: src/translations.h:466
+#: src/translations.h:467
 msgid "Philippines"
 msgstr "Φιλιππίνες"
 
-#: src/translations.h:467
+#: src/translations.h:468
 msgid "Pakistan"
 msgstr "Πακιστάν"
 
-#: src/translations.h:468
+#: src/translations.h:469
 msgid "Poland"
 msgstr "Πολωνία"
 
-#: src/translations.h:469
+#: src/translations.h:470
 msgid "Saint Pierre and Miquelon"
 msgstr "Νήσοι Αγίου Πέτρου και Μιχαήλ"
 
-#: src/translations.h:470
+#: src/translations.h:471
 msgid "Pitcairn"
 msgstr "Πίτκερν"
 
-#: src/translations.h:471
+#: src/translations.h:472
 msgid "Puerto Rico"
 msgstr "Πουέρτο Ρίκο"
 
-#: src/translations.h:472
+#: src/translations.h:473
 msgid "Palestinian Territories"
 msgstr "Παλαιστίνη"
 
-#: src/translations.h:473
+#: src/translations.h:474
 msgid "Portugal"
 msgstr "Πορτογαλία"
 
-#: src/translations.h:474
+#: src/translations.h:475
 msgid "Palau"
 msgstr "Παλάου"
 
-#: src/translations.h:475
+#: src/translations.h:476
 msgid "Paraguay"
 msgstr "Παραγουάη"
 
-#: src/translations.h:476
+#: src/translations.h:477
 msgid "Qatar"
 msgstr "Κατάρ"
 
-#: src/translations.h:477
+#: src/translations.h:478
 msgid "Réunion"
 msgstr "Ρεγιουνιόν"
 
-#: src/translations.h:478
+#: src/translations.h:479
 msgid "Romania"
 msgstr "Ρουμανία"
 
-#: src/translations.h:479
+#: src/translations.h:480
 msgid "Serbia"
 msgstr "Σερβία"
 
-#: src/translations.h:480
+#: src/translations.h:481
 msgid "Russian Federation"
 msgstr "Ρωσική Ομοσπονδία"
 
-#: src/translations.h:481
+#: src/translations.h:482
 msgid "Rwanda"
 msgstr "Ρουάντα"
 
-#: src/translations.h:482
+#: src/translations.h:483
 msgid "Saudi Arabia"
 msgstr "Σαουδική Αραβία"
 
-#: src/translations.h:483
+#: src/translations.h:484
 msgid "Solomon Islands"
 msgstr "Νήσοι Σολομώντα"
 
-#: src/translations.h:484
+#: src/translations.h:485
 msgid "Seychelles"
 msgstr "Σεϊχέλες"
 
-#: src/translations.h:485
+#: src/translations.h:486
 msgid "Sudan"
 msgstr "Σουδάν"
 
-#: src/translations.h:486
+#: src/translations.h:487
 msgid "Sweden"
 msgstr "Σουηδία"
 
-#: src/translations.h:487
+#: src/translations.h:488
 msgid "Singapore"
 msgstr "Σιγκαπούρη"
 
-#: src/translations.h:488
+#: src/translations.h:489
 msgid "Saint Helena"
 msgstr "Νήσος Αγίας Ελένης"
 
-#: src/translations.h:489
+#: src/translations.h:490
 msgid "Slovenia"
 msgstr "Σλοβενία"
 
-#: src/translations.h:490
+#: src/translations.h:491
 msgid "Svalbard and Jan Mayen"
 msgstr "Νήσοι Σβάλμπαρντ και Γιαν Μάγιεν"
 
-#: src/translations.h:491
+#: src/translations.h:492
 msgid "Slovakia"
 msgstr "Σλοβακία"
 
-#: src/translations.h:492
+#: src/translations.h:493
 msgid "Sierra Leone"
 msgstr "Σιέρα Λεόνε"
 
-#: src/translations.h:493
+#: src/translations.h:494
 msgid "San Marino"
 msgstr "Άγιος Μαρίνος"
 
-#: src/translations.h:494
+#: src/translations.h:495
 msgid "Senegal"
 msgstr "Σενεγάλη"
 
-#: src/translations.h:495
+#: src/translations.h:496
 msgid "Somalia"
 msgstr "Σομαλία"
 
-#: src/translations.h:496
+#: src/translations.h:497
 msgid "Suriname"
 msgstr "Σουρινάμ"
 
-#: src/translations.h:497
+#: src/translations.h:498
 msgid "Sao Tome and Principe"
 msgstr "Σάο Τομέ και Πρίνσιπε"
 
-#: src/translations.h:498
+#: src/translations.h:499
 msgid "El Salvador"
 msgstr "Ελ Σαλβαδόρ"
 
-#: src/translations.h:499
+#: src/translations.h:500
 msgid "Syrian Arab Republic"
 msgstr "Αραβική Δημοκρατία της Συρίας"
 
-#: src/translations.h:500
+#: src/translations.h:501
 msgid "Swaziland"
 msgstr "Σουαζιλάνδη"
 
-#: src/translations.h:501
+#: src/translations.h:502
 msgid "Turks and Caicos Islands"
 msgstr "Νήσοι Τερκς και Κάικος"
 
-#: src/translations.h:502
+#: src/translations.h:503
 msgid "Chad"
 msgstr "Τσαντ"
 
-#: src/translations.h:503
+#: src/translations.h:504
 msgid "French Southern Territories"
 msgstr "Γαλλικές Νότιες Περιοχές"
 
-#: src/translations.h:504
+#: src/translations.h:505
 msgid "Togo"
 msgstr "Τόνγκο"
 
-#: src/translations.h:505
+#: src/translations.h:506
 msgid "Thailand"
 msgstr "Ταϊλάνδη"
 
-#: src/translations.h:506
+#: src/translations.h:507
 msgid "Tajikistan"
 msgstr "Τατζικιστάν"
 
-#: src/translations.h:507
+#: src/translations.h:508
 msgid "Tokelau"
 msgstr "Τοκελάου"
 
-#: src/translations.h:508
+#: src/translations.h:509
 msgid "East Timor"
 msgstr "Ανατολικό Τιμούρ"
 
-#: src/translations.h:509
+#: src/translations.h:510
 msgid "Turkmenistan"
 msgstr "Τουρκμενιστάν"
 
-#: src/translations.h:510
+#: src/translations.h:511
 msgid "Tunisia"
 msgstr "Τυνησία"
 
-#: src/translations.h:511
+#: src/translations.h:512
 msgid "Tonga"
 msgstr "Τόνγκα"
 
-#: src/translations.h:512
+#: src/translations.h:513
 msgid "Turkey"
 msgstr "Τουρκία"
 
-#: src/translations.h:513
+#: src/translations.h:514
 msgid "Trinidad and Tobago"
 msgstr "Τρινιντάντ και Τομπάγκο"
 
-#: src/translations.h:514
+#: src/translations.h:515
 msgid "Tuvalu"
 msgstr "Τουβαλού"
 
-#: src/translations.h:515
+#: src/translations.h:516
 msgid "Taiwan"
 msgstr "Ταϊβάν"
 
-#: src/translations.h:516
+#: src/translations.h:517
 msgid "Tanzania"
 msgstr "Τανζανία"
 
-#: src/translations.h:517
+#: src/translations.h:518
 msgid "Ukraine"
 msgstr "Ουκρανία"
 
-#: src/translations.h:518
+#: src/translations.h:519
 msgid "Uganda"
 msgstr "Ουγκάντα"
 
-#: src/translations.h:519
+#: src/translations.h:520
 msgid "United States Minor Outlying Islands"
 msgstr "Ελάσσονες Νήσοι ΗΠΑ"
 
-#: src/translations.h:520
+#: src/translations.h:521
 msgid "United States"
 msgstr "Ηνωμένες Πολιτείες της Αμερικής"
 
-#: src/translations.h:521
+#: src/translations.h:522
 msgid "Uruguay"
 msgstr "Ουρουγουάη"
 
-#: src/translations.h:522
+#: src/translations.h:523
 msgid "Uzbekistan"
 msgstr "Ουζμπεκιστάν"
 
-#: src/translations.h:523
+#: src/translations.h:524
 msgid "Vatican City State"
 msgstr "Πόλη του Βατικανού"
 
-#: src/translations.h:524
+#: src/translations.h:525
 msgid "Saint Vincent and the Grenadines"
 msgstr "Άγιος Βικέντιος και Γρεναδίνες"
 
-#: src/translations.h:525
+#: src/translations.h:526
 msgid "Venezuela"
 msgstr "Βενεζουέλα"
 
-#: src/translations.h:526
+#: src/translations.h:527
 msgid "British Virgin Islands"
 msgstr "Βρετανικοί Παρθένοι Νήσοι"
 
-#: src/translations.h:527
+#: src/translations.h:528
 msgid "United States Virgin Islands"
 msgstr "Παρθένοι Νήσοι, Αμερικανικές"
 
-#: src/translations.h:528
+#: src/translations.h:529
 msgid "Viet Nam"
 msgstr "Βιετνάμ"
 
-#: src/translations.h:529
+#: src/translations.h:530
 msgid "Vanuatu"
 msgstr "Βανουάτου"
 
-#: src/translations.h:530
+#: src/translations.h:531
 msgid "Wallis and Futuna"
 msgstr "Βαλίς και Φουτούνα"
 
-#: src/translations.h:531
+#: src/translations.h:532
 msgid "Samoa"
 msgstr "Σαμόα"
 
-#: src/translations.h:532
+#: src/translations.h:533
 msgid "Yemen"
 msgstr "Υεμένη"
 
-#: src/translations.h:533
+#: src/translations.h:534
 msgid "Mayotte"
 msgstr "Μαγιότ"
 
-#: src/translations.h:534
+#: src/translations.h:535
 msgid "Yugoslavia"
 msgstr "Γιουγκοσλαβία"
 
-#: src/translations.h:535
+#: src/translations.h:536
 msgid "South Africa"
 msgstr "Νότια Αφρική"
 
-#: src/translations.h:536
+#: src/translations.h:537
 msgid "Zambia"
 msgstr "Ζάμπια"
 
-#: src/translations.h:537
+#: src/translations.h:538
 msgid "Zimbabwe"
 msgstr "Ζιμπάμπουε"
+
+#: src/translations.h:542
+msgid "&Undo"
+msgstr ""
+
+#: src/translations.h:543
+msgid "&Redo"
+msgstr ""
+
+#: src/translations.h:544
+msgid "Cu&t"
+msgstr ""
+
+#: src/translations.h:545
+msgid "&Copy"
+msgstr ""
+
+#: src/translations.h:546
+msgid "&Paste"
+msgstr ""
+
+#: src/translations.h:547 src/ui_locationDialogGui.h:402
+#: plugins/Oculars/src/ui_ocularDialog.h:1073
+#: plugins/Oculars/src/ui_ocularDialog.h:1082
+#: plugins/Oculars/src/ui_ocularDialog.h:1089
+#: plugins/Oculars/src/ui_ocularDialog.h:1100
+msgid "Delete"
+msgstr "Διαγραφή"
+
+#: src/translations.h:548
+msgid "Select All"
+msgstr ""
+
+#: src/translations.h:549
+msgid "Look in:"
+msgstr ""
+
+#: src/translations.h:550
+msgid "Directory:"
+msgstr ""
+
+#: src/translations.h:551
+msgid "Folder"
+msgstr ""
+
+#: src/translations.h:552
+msgid "&Choose"
+msgstr ""
+
+#: src/translations.h:553 src/ui_configurationDialog.h:1155
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:516
+msgid "Cancel"
+msgstr "Άκυρο"
+
+#: src/translations.h:554
+msgid "Files of type:"
+msgstr ""
+
+#: src/translations.h:555
+msgid "Date Modified"
+msgstr ""
+
+#: src/translations.h:556
+msgid "Directories"
+msgstr ""
+
+#: src/translations.h:557
+msgid "Computer"
+msgstr ""
+
+#: src/translations.h:558
+msgid "&Open"
+msgstr ""
+
+#: src/translations.h:559
+msgid "File &name:"
+msgstr ""
+
+#: src/translations.h:560
+msgid "Copy &Link Location"
+msgstr ""
 
 #: src/ui_helpDialogGui.h:277 src/ui_helpDialogGui.h:283
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:417
@@ -3554,7 +3680,7 @@ msgstr "Περί"
 msgid "Log"
 msgstr "Ημερολόγιο καταγραφής"
 
-#: src/ui_helpDialogGui.h:290 src/ui_configurationDialog.h:1053
+#: src/ui_helpDialogGui.h:290 src/ui_configurationDialog.h:1080
 msgid "Edit keyboard shortcuts..."
 msgstr ""
 
@@ -3562,40 +3688,39 @@ msgstr ""
 msgid "Refresh"
 msgstr "Ανανέωση"
 
-#: src/ui_locationDialogGui.h:388
+#: src/ui_locationDialogGui.h:389
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:140
 msgid "Location"
 msgstr "Τοποθεσία"
 
-#: src/ui_locationDialogGui.h:392
+#: src/ui_locationDialogGui.h:393 src/ui_locationDialogGui.h:396
+msgid ""
+"Standard list of locations is contains only English names (without "
+"diacritics!)"
+msgstr ""
+
+#: src/ui_locationDialogGui.h:399
 msgid "Current location information"
 msgstr "Πληροφορίες τρέχουσας τοποθεσίας"
 
-#: src/ui_locationDialogGui.h:393
+#: src/ui_locationDialogGui.h:400
 msgid "Use as default"
 msgstr "Χρήση ως προεπιλογή"
 
-#: src/ui_locationDialogGui.h:394
+#: src/ui_locationDialogGui.h:401
 msgid "Return to default"
 msgstr ""
 
-#: src/ui_locationDialogGui.h:395 plugins/Oculars/src/ui_ocularDialog.h:1058
-#: plugins/Oculars/src/ui_ocularDialog.h:1067
-#: plugins/Oculars/src/ui_ocularDialog.h:1074
-#: plugins/Oculars/src/ui_ocularDialog.h:1085
-msgid "Delete"
-msgstr "Διαγραφή"
-
-#: src/ui_locationDialogGui.h:396
+#: src/ui_locationDialogGui.h:403
 msgid "Add to list"
 msgstr "Προσθήκη στη λίστα"
 
-#: src/ui_locationDialogGui.h:397
+#: src/ui_locationDialogGui.h:404
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:141
 msgid "Latitude:"
 msgstr "Γεωγραφικό πλάτος:"
 
-#: src/ui_locationDialogGui.h:399 src/ui_locationDialogGui.h:403
+#: src/ui_locationDialogGui.h:406 src/ui_locationDialogGui.h:410
 msgid ""
 "You can enter values in decimal degrees, or using dms format, for example: "
 "+1d 12m 8s"
@@ -3603,458 +3728,494 @@ msgstr ""
 "Οι τιμές μπορεί να είναι σε δεκαδικές μοίρες ή με την μορφή μλδ (μέρα λεπτά "
 "δευτερόλεπτα), για παράδειγμα: +1μ 12λ 8δ"
 
-#: src/ui_locationDialogGui.h:401
+#: src/ui_locationDialogGui.h:408
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:144
 msgid "Longitude:"
 msgstr "Γεωγραφικό μήκος:"
 
-#: src/ui_locationDialogGui.h:405
+#: src/ui_locationDialogGui.h:412
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:147
 msgid "Altitude:"
 msgstr "Ύψος :"
 
-#: src/ui_locationDialogGui.h:407
+#: src/ui_locationDialogGui.h:414
 msgid "Enter the altitude in meter"
 msgstr "Ύψος σε μέτρα"
 
-#: src/ui_locationDialogGui.h:409
+#: src/ui_locationDialogGui.h:416
 msgid " m"
 msgstr " μ"
 
-#: src/ui_locationDialogGui.h:410
+#: src/ui_locationDialogGui.h:417
 msgid "Name/City:"
 msgstr "Όνομα/Πόλη:"
 
-#: src/ui_locationDialogGui.h:411
+#: src/ui_locationDialogGui.h:418
+msgid "New Location"
+msgstr "Νέα τοποθεσία"
+
+#: src/ui_locationDialogGui.h:419
 msgid "Country:"
 msgstr "Χώρα:"
 
-#: src/ui_locationDialogGui.h:412
+#: src/ui_locationDialogGui.h:420
 msgid "Planet:"
 msgstr "Πλανήτης:"
 
-#: src/ui_searchDialogGui.h:557
+#: src/ui_searchDialogGui.h:558
 msgid "Find Object"
 msgstr "Εύρεση αντικειμένου"
 
-#: src/ui_searchDialogGui.h:558
+#: src/ui_searchDialogGui.h:559
 msgid "Find Object or Position"
 msgstr "Εύρεση Αντικειμένου ή Τοποθεσίας"
 
-#: src/ui_searchDialogGui.h:561 src/ui_searchDialogGui.h:565
+#: src/ui_searchDialogGui.h:562 src/ui_searchDialogGui.h:566
 msgid "Use tab key for select of found items"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:570
+#: src/ui_searchDialogGui.h:571
 msgid "iota"
 msgstr "γιώτα"
 
-#: src/ui_searchDialogGui.h:573
+#: src/ui_searchDialogGui.h:574
 msgid "alpha"
 msgstr "άλφα"
 
-#: src/ui_searchDialogGui.h:576
+#: src/ui_searchDialogGui.h:577
 msgid "beta"
 msgstr "βήτα"
 
-#: src/ui_searchDialogGui.h:579
+#: src/ui_searchDialogGui.h:580
 msgid "gamma"
 msgstr "γάμα"
 
-#: src/ui_searchDialogGui.h:582
+#: src/ui_searchDialogGui.h:583
 msgid "delta"
 msgstr "δέλτα"
 
-#: src/ui_searchDialogGui.h:585
+#: src/ui_searchDialogGui.h:586
 msgid "epsilon"
 msgstr "έψιλον"
 
-#: src/ui_searchDialogGui.h:588
+#: src/ui_searchDialogGui.h:589
 msgid "zeta"
 msgstr "ζήτα"
 
-#: src/ui_searchDialogGui.h:591
+#: src/ui_searchDialogGui.h:592
 msgid "eta"
 msgstr "ήτα"
 
-#: src/ui_searchDialogGui.h:594
+#: src/ui_searchDialogGui.h:595
 msgid "theta"
 msgstr "θήτα"
 
-#: src/ui_searchDialogGui.h:597
+#: src/ui_searchDialogGui.h:598
 msgid "kappa"
 msgstr "κάπα"
 
-#: src/ui_searchDialogGui.h:600
+#: src/ui_searchDialogGui.h:601
 msgid "lambda"
 msgstr "λάμδα"
 
-#: src/ui_searchDialogGui.h:603
+#: src/ui_searchDialogGui.h:604
 msgid "mu"
 msgstr "μι"
 
-#: src/ui_searchDialogGui.h:606
+#: src/ui_searchDialogGui.h:607
 msgid "nu"
 msgstr "νι"
 
-#: src/ui_searchDialogGui.h:609
+#: src/ui_searchDialogGui.h:610
 msgid "xi"
 msgstr "ξι"
 
-#: src/ui_searchDialogGui.h:612
+#: src/ui_searchDialogGui.h:613
 msgid "omicron"
 msgstr "όμικρον"
 
-#: src/ui_searchDialogGui.h:615
+#: src/ui_searchDialogGui.h:616
 msgid "pi"
 msgstr "πι"
 
-#: src/ui_searchDialogGui.h:618
+#: src/ui_searchDialogGui.h:619
 msgid "rho"
 msgstr "ρο"
 
-#: src/ui_searchDialogGui.h:621
+#: src/ui_searchDialogGui.h:622
 msgid "sigma"
 msgstr "σίγμα"
 
-#: src/ui_searchDialogGui.h:624
+#: src/ui_searchDialogGui.h:625
 msgid "tau"
 msgstr "ταυ"
 
-#: src/ui_searchDialogGui.h:627
+#: src/ui_searchDialogGui.h:628
 msgid "upsilon"
 msgstr "ύψιλον"
 
-#: src/ui_searchDialogGui.h:630
+#: src/ui_searchDialogGui.h:631
 msgid "phi"
 msgstr "φι"
 
-#: src/ui_searchDialogGui.h:633
+#: src/ui_searchDialogGui.h:634
 msgid "chi"
 msgstr "χι"
 
-#: src/ui_searchDialogGui.h:636
+#: src/ui_searchDialogGui.h:637
 msgid "psi"
 msgstr "ψι"
 
-#: src/ui_searchDialogGui.h:639
+#: src/ui_searchDialogGui.h:640
 msgid "omega"
 msgstr "ωμέγα"
 
-#: src/ui_searchDialogGui.h:641
+#: src/ui_searchDialogGui.h:642
 msgid "Greek letters for Bayer designations"
 msgstr "Ελληνικά γράμματα για την ονοματολογία Bayer"
 
-#: src/ui_searchDialogGui.h:642
+#: src/ui_searchDialogGui.h:643
 msgid "Object"
 msgstr "Αντικείμενο"
 
-#: src/ui_searchDialogGui.h:643
+#: src/ui_searchDialogGui.h:644
 msgid "RA/Dec (J2000):"
 msgstr "RA/Dec (J2000):"
 
-#: src/ui_searchDialogGui.h:644
+#: src/ui_searchDialogGui.h:645
 msgid "Position"
 msgstr "Τοποθεσία"
 
-#: src/ui_searchDialogGui.h:646
+#: src/ui_searchDialogGui.h:647
 msgid "Some objects may be found after activation respective plug-ins"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:648
+#: src/ui_searchDialogGui.h:649
 msgid "names in English"
 msgstr "ονόματα στα Αγγλικά"
 
-#: src/ui_searchDialogGui.h:649
+#: src/ui_searchDialogGui.h:650
 msgid "Search in list..."
 msgstr ""
 
-#: src/ui_searchDialogGui.h:650
+#: src/ui_searchDialogGui.h:651
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:525
 msgid "Lists"
 msgstr "Λίστες"
 
-#: src/ui_searchDialogGui.h:651
+#: src/ui_searchDialogGui.h:652
 msgid "On-line astronomical database SIMBAD"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:652
+#: src/ui_searchDialogGui.h:653
 msgid "Extend search with SIMBAD"
 msgstr "Εκτεταμένη αναζήτηση με SIMBAD"
 
-#: src/ui_searchDialogGui.h:653
+#: src/ui_searchDialogGui.h:654
 msgid "Server:"
 msgstr "Εξυπηρετητής:"
 
-#: src/ui_searchDialogGui.h:654
+#: src/ui_searchDialogGui.h:655
 msgid "Search options"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:655
+#: src/ui_searchDialogGui.h:656
 msgid "Use autofill only from the beginning of words"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:656 src/ui_viewDialog.h:1320
-#: src/ui_viewDialog.h:1326 src/ui_viewDialog.h:1328
-#: src/ui_configurationDialog.h:1133 src/ui_configurationDialog.h:1144
+#: src/ui_searchDialogGui.h:657 src/ui_viewDialog.h:1328
+#: src/ui_viewDialog.h:1334 src/ui_viewDialog.h:1336
+#: src/ui_configurationDialog.h:1156 src/ui_configurationDialog.h:1167
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:416
 msgid "Options"
 msgstr "Επιλογές"
 
-#: src/ui_viewDialog.h:1215
+#: src/ui_viewDialog.h:1217
 msgid "View"
 msgstr "Προβολή"
 
-#: src/ui_viewDialog.h:1221
+#: src/ui_viewDialog.h:1223
 msgid "Sky"
 msgstr "Ουρανός"
 
-#: src/ui_viewDialog.h:1223
+#: src/ui_viewDialog.h:1225
 msgid "Markings"
 msgstr "Διακριτικά"
 
-#: src/ui_viewDialog.h:1225
+#: src/ui_viewDialog.h:1227
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:401
 msgid "Landscape"
 msgstr "Τοπίο"
 
-#: src/ui_viewDialog.h:1227
+#: src/ui_viewDialog.h:1229
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:223
 msgid "Starlore"
 msgstr "Παράδοση του Ουρανού"
 
-#: src/ui_viewDialog.h:1230
+#: src/ui_viewDialog.h:1232
 msgid "Labels and Markers"
 msgstr "Ετικέτες και Διακριτικά"
 
-#: src/ui_viewDialog.h:1232
+#: src/ui_viewDialog.h:1234
 msgid "Planets"
 msgstr "Πλανήτες"
 
-#: src/ui_viewDialog.h:1234
+#: src/ui_viewDialog.h:1236
 msgid ""
 "Labels and markers for deep-sky objects (star clusters, galaxies and nebulas)"
 msgstr ""
 
-#: src/ui_viewDialog.h:1236 src/ui_viewDialog.h:1284
+#: src/ui_viewDialog.h:1238 src/ui_viewDialog.h:1292
 msgctxt "Deep-sky objects"
 msgid "DSOs"
 msgstr ""
 
-#: src/ui_viewDialog.h:1237
+#: src/ui_viewDialog.h:1239
 msgid "Planets and satellites"
 msgstr "Πλανήτες και δορυφόροι"
 
-#: src/ui_viewDialog.h:1238
+#: src/ui_viewDialog.h:1240
 msgid "Show planets"
 msgstr "Εμφάνιση πλανητών"
 
-#: src/ui_viewDialog.h:1239
+#: src/ui_viewDialog.h:1241
 msgid "Show planet markers"
 msgstr "Εμφάνιση διακριτικών πλανητών"
 
-#: src/ui_viewDialog.h:1240
+#: src/ui_viewDialog.h:1242
 msgid "Show planet orbits"
 msgstr "Εμφάνιση πλανητικών τροχιών"
 
-#: src/ui_viewDialog.h:1241
+#: src/ui_viewDialog.h:1243
 msgid "Simulate light speed"
 msgstr "Προσομοίωση ταχύτητας φωτός"
 
-#: src/ui_viewDialog.h:1242
+#: src/ui_viewDialog.h:1244
 msgid "Scale Moon"
 msgstr "Κλιμάκωση Σελήνης"
 
-#: src/ui_viewDialog.h:1244
+#: src/ui_viewDialog.h:1246
 msgid "Scale factor"
 msgstr ""
 
-#: src/ui_viewDialog.h:1247
+#: src/ui_viewDialog.h:1249
 msgid "Automatic change of landscape when planet is changed"
 msgstr ""
 
-#: src/ui_viewDialog.h:1249
+#: src/ui_viewDialog.h:1251
 msgid "Auto select landscapes"
 msgstr ""
 
-#: src/ui_viewDialog.h:1251
+#: src/ui_viewDialog.h:1253
 msgid "Show atmosphere"
 msgstr "Εμφάνιση ατμόσφαιρας"
 
-#: src/ui_viewDialog.h:1252
+#: src/ui_viewDialog.h:1257
+msgid ""
+"Use light pollution data from locations database and ignore settings for "
+"light pollution below"
+msgstr ""
+
+#: src/ui_viewDialog.h:1259
+msgid "Light pollution data from locations database"
+msgstr ""
+
+#: src/ui_viewDialog.h:1260
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:396
 msgid "Light pollution:"
 msgstr "Φωτορύπανση"
 
-#: src/ui_viewDialog.h:1254
+#: src/ui_viewDialog.h:1262
 msgid "pressure, temperature, extinction coefficient"
 msgstr "πίεση, θερμοκρασία, συντελεστής απόσβεσης"
 
-#: src/ui_viewDialog.h:1256
+#: src/ui_viewDialog.h:1264
 msgid "Refraction/Extinction settings..."
 msgstr "Ρυθμίσεις Διάθλασης/Απόσβεσης"
 
-#: src/ui_viewDialog.h:1258
+#: src/ui_viewDialog.h:1266
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:253
 msgid "Absolute scale:"
 msgstr "Απόλυτη κλίμακα:"
 
-#: src/ui_viewDialog.h:1259
+#: src/ui_viewDialog.h:1267
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:247
 msgid "Relative scale:"
 msgstr "Σχετική κλίμακα:"
 
-#: src/ui_viewDialog.h:1260
+#: src/ui_viewDialog.h:1268
 msgid "Milky Way brightness:"
 msgstr ""
 
-#: src/ui_viewDialog.h:1261
+#: src/ui_viewDialog.h:1269
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:259
 msgid "Twinkle:"
 msgstr "Αναλαμπή:"
 
-#: src/ui_viewDialog.h:1263
+#: src/ui_viewDialog.h:1271
 msgid "Dim faint stars when a very bright object is visible"
 msgstr ""
 "Μείωση φωτεινότητας αμυδρών αστέρων όταν ένα φωτεινό αντικείμενο είναι ορατό"
 
-#: src/ui_viewDialog.h:1265
+#: src/ui_viewDialog.h:1273
 msgid "Dynamic eye adaptation"
 msgstr "Δυναμική προσαρμογή ματιού"
 
-#: src/ui_viewDialog.h:1266
+#: src/ui_viewDialog.h:1274
 msgid "Shooting Stars"
 msgstr "Πεφταστέρια"
 
-#: src/ui_viewDialog.h:1268
+#: src/ui_viewDialog.h:1276
 msgid "Hourly zenith rate"
 msgstr ""
 
-#: src/ui_viewDialog.h:1270
+#: src/ui_viewDialog.h:1278
 msgctxt "Zenithal Hourly Rate"
 msgid "ZHR:"
 msgstr ""
 
-#: src/ui_viewDialog.h:1271
+#: src/ui_viewDialog.h:1279
 msgid "1000"
 msgstr ""
 
-#: src/ui_viewDialog.h:1274
+#: src/ui_viewDialog.h:1282
 msgid "Limit Magnitudes (for unaided/binocular observers)"
 msgstr ""
 
-#: src/ui_viewDialog.h:1276
+#: src/ui_viewDialog.h:1284
 msgid "Limit Magnitudes"
 msgstr ""
 
-#: src/ui_viewDialog.h:1278
+#: src/ui_viewDialog.h:1286
 msgid "Limit the magnitude of stars"
 msgstr ""
 
-#: src/ui_viewDialog.h:1282
+#: src/ui_viewDialog.h:1290
 msgid ""
 "Limit the magnitude of deep-sky objects (star clusters, galaxies and nebulas)"
 msgstr ""
 
-#: src/ui_viewDialog.h:1285
+#: src/ui_viewDialog.h:1293
 msgid "Constellations"
 msgstr "Αστερισμοί"
 
-#: src/ui_viewDialog.h:1286
+#: src/ui_viewDialog.h:1294
 msgid "Show lines"
 msgstr "Εμφάνιση γραμμών"
 
-#: src/ui_viewDialog.h:1287
+#: src/ui_viewDialog.h:1295
 msgid "Show labels"
 msgstr "Εμφάνιση ετικετών"
 
-#: src/ui_viewDialog.h:1288
+#: src/ui_viewDialog.h:1296
 msgid "Show boundaries"
 msgstr "Εμφάνιση ορίων"
 
-#: src/ui_viewDialog.h:1289
+#: src/ui_viewDialog.h:1297
 msgid "Show art"
 msgstr "Εμφάνιση καλλιτεχνικής ερμηνείας"
 
 #. TRANSLATORS: Refers to constellation art
-#: src/ui_viewDialog.h:1290
+#: src/ui_viewDialog.h:1298
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:291
 msgid "Art brightness:"
 msgstr ""
 
-#: src/ui_viewDialog.h:1291
+#: src/ui_viewDialog.h:1299
 msgid "Celestial Sphere"
 msgstr "Ουράνια Σφαίρα"
 
-#: src/ui_viewDialog.h:1298
-msgid "Show equator line"
-msgstr "Εμφάνιση γραμμής ισημερινού"
+#: src/ui_viewDialog.h:1300
+msgid "Equatorial grid (on J2000)"
+msgstr ""
+
+#: src/ui_viewDialog.h:1301
+msgid "Equatorial grid (on date)"
+msgstr ""
 
 #: src/ui_viewDialog.h:1302
-msgid "Show meridian line"
+msgid "Ecliptic grid (on J2000)"
 msgstr ""
 
 #: src/ui_viewDialog.h:1306
-msgid "Show horizon line"
-msgstr "Εμφάνιση γραμμής ορίζοντα"
+msgid "Show equator line"
+msgstr "Εμφάνιση γραμμής ισημερινού"
 
 #: src/ui_viewDialog.h:1310
-msgid "Show ecliptic line"
+msgid "Show meridian line"
 msgstr ""
 
 #: src/ui_viewDialog.h:1314
+msgid "Show horizon line"
+msgstr "Εμφάνιση γραμμής ορίζοντα"
+
+#: src/ui_viewDialog.h:1318
+msgid "Show ecliptic line"
+msgstr ""
+
+#: src/ui_viewDialog.h:1322
 msgid "Show Galactic plane line"
 msgstr ""
 
-#: src/ui_viewDialog.h:1318
+#: src/ui_viewDialog.h:1326
 msgid "Projection"
 msgstr "Προβολή :"
 
-#: src/ui_viewDialog.h:1319
+#: src/ui_viewDialog.h:1327
 msgid "Add/remove landscapes..."
 msgstr "Προσθήκη/απομάκρυνση τοπίων..."
 
-#: src/ui_viewDialog.h:1321
+#: src/ui_viewDialog.h:1329
 msgid "Show ground"
 msgstr "Εμφάνιση εδάφους"
 
-#: src/ui_viewDialog.h:1322
+#: src/ui_viewDialog.h:1330
 msgid "Show fog"
 msgstr "Εμφάνιση ομίχλης"
 
-#: src/ui_viewDialog.h:1323
+#: src/ui_viewDialog.h:1331
 msgid "Use associated planet and position"
 msgstr "Χρηση υφιστάμενου πλανήτη και θέσης"
 
-#: src/ui_viewDialog.h:1324
+#: src/ui_viewDialog.h:1332
 msgid "Use this landscape as default"
 msgstr "Χρήση αυτού του τοπίου ως προεπιλογή"
 
-#: src/ui_viewDialog.h:1325
+#: src/ui_viewDialog.h:1333
 msgid "Use brightness settings for landscapes"
 msgstr ""
 
-#: src/ui_viewDialog.h:1327
+#: src/ui_viewDialog.h:1335
 msgid "Use this sky culture as default"
 msgstr "Χρήση αυτού του πολιτισμού του ουρανού ως προεπιλογή"
 
-#: src/ui_viewDialog.h:1329
+#: src/ui_viewDialog.h:1337
 msgid "Visible"
 msgstr "Ορατό"
 
-#: src/ui_configurationDialog.h:973
+#: src/ui_configurationDialog.h:994
 msgid "Configuration"
 msgstr "Ρυθμίσεις"
 
-#: src/ui_configurationDialog.h:975
+#: src/ui_configurationDialog.h:996
 msgid "Program language"
 msgstr "Γλώσσα προγράμματος"
 
-#: src/ui_configurationDialog.h:976
+#: src/ui_configurationDialog.h:997
+msgid "Check updates"
+msgstr ""
+
+#: src/ui_configurationDialog.h:998
+msgid ""
+"Enable checking updates of Stellarium via Internet. Info for updates of "
+"stable versions you can look on the tab \"About\" of \"Help\" window."
+msgstr ""
+
+#: src/ui_configurationDialog.h:999
 msgid "Default options"
 msgstr "Προεπιλεγμένες ρυθμίσεις"
 
-#: src/ui_configurationDialog.h:978
+#: src/ui_configurationDialog.h:1001
 msgid ""
 "Save the settings you've changed this session to be the same the next time "
 "you start Stellarium"
@@ -4062,21 +4223,23 @@ msgstr ""
 "Αποθήκευση των ρυθμίσεων ώστε να είναι ίδια και την επόμενη φορά που θα "
 "ανοίξετε το Stellarium"
 
-#: src/ui_configurationDialog.h:980
+#: src/ui_configurationDialog.h:1003
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:390
-#: plugins/FOV/src/ui_fovWindow.h:386
+#: plugins/FOV/src/ui_fovWindow.h:387
+#: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:276
 msgid "Save settings"
 msgstr "Αποθήκευση ρυθμίσεων"
 
-#: src/ui_configurationDialog.h:982
+#: src/ui_configurationDialog.h:1005
 msgid "Restore the default settings that came with Stellarium"
 msgstr "Επαναφέρετε τις προεπιλεγμένες ρυθμίσεις του Stellarium"
 
-#: src/ui_configurationDialog.h:984 plugins/FOV/src/ui_fovWindow.h:385
+#: src/ui_configurationDialog.h:1007 plugins/FOV/src/ui_fovWindow.h:386
+#: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:277
 msgid "Restore defaults"
 msgstr "Επαναφορά προεπιλογών"
 
-#: src/ui_configurationDialog.h:985
+#: src/ui_configurationDialog.h:1008
 msgid ""
 "Restoring default settings requires a restart of Stellarium. Saving all the "
 "current options includes the current FOV and direction of view for use at "
@@ -4086,199 +4249,208 @@ msgstr ""
 "αποθήκευση των τρέχοντων επιλογών περιλαμβάνει το πιο πρόσφατο οπτικό πεδίο "
 "και κατεύθυνση θέασης για χρήση με την επόμενη εκκίνηση"
 
-#: src/ui_configurationDialog.h:987
+#: src/ui_configurationDialog.h:1010
 msgid "The width of your view when Stellarium starts"
 msgstr "Το πλάτος θέασης όταν ξεκινάει το Stellarium"
 
-#: src/ui_configurationDialog.h:990
+#: src/ui_configurationDialog.h:1013
 msgid "The direction you're looking when Stellarium starts"
 msgstr "Η κατεύθυνση όταν ξεκινάει το Stellarium"
 
-#: src/ui_configurationDialog.h:992 src/ui_configurationDialog.h:1155
+#: src/ui_configurationDialog.h:1015 src/ui_configurationDialog.h:1178
 msgid "Selected object information"
 msgstr "Επιλεγμένες πληροφορίες αντικειμένου"
 
-#: src/ui_configurationDialog.h:994
+#: src/ui_configurationDialog.h:1017
 msgid "Display all information available"
 msgstr "Εμφάνιση όλης της διαθέσιμης πληροφορίας"
 
-#: src/ui_configurationDialog.h:996
+#: src/ui_configurationDialog.h:1019
 msgid "All available"
 msgstr "Όλα τα διαθέσιμα"
 
-#: src/ui_configurationDialog.h:998
+#: src/ui_configurationDialog.h:1021
 msgid "Display no information"
 msgstr "Μη εμφάνιση πληροφοριών"
 
-#: src/ui_configurationDialog.h:1000 plugins/Oculars/src/Oculars.cpp:1920
+#: src/ui_configurationDialog.h:1023 plugins/Oculars/src/Oculars.cpp:1921
 #: plugins/Observability/src/Observability.cpp:231
 msgid "None"
 msgstr "Κανένα"
 
-#: src/ui_configurationDialog.h:1002
+#: src/ui_configurationDialog.h:1025
 msgid "Display less information"
 msgstr "Εμφάνιση λιγότερων πληροφοριών"
 
-#: src/ui_configurationDialog.h:1004
+#: src/ui_configurationDialog.h:1027
 msgid "Short"
 msgstr "Σύντομο"
 
-#: src/ui_configurationDialog.h:1006
+#: src/ui_configurationDialog.h:1029
 msgid "Display user settings information"
 msgstr "Εμφάνιση πληροφοριών ρυθμίσεων χρήστη"
 
-#: src/ui_configurationDialog.h:1008
+#: src/ui_configurationDialog.h:1031
 msgid "Customized"
 msgstr "Παραμετροποιημένο"
 
-#: src/ui_configurationDialog.h:1009
+#: src/ui_configurationDialog.h:1032
 msgid "Displayed fields"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1011
-msgid "Geocentric equatorial coordinates, equinox of date"
-msgstr ""
-
-#: src/ui_configurationDialog.h:1013
-msgid "Right ascension/Declination (of date)"
-msgstr ""
-
-#: src/ui_configurationDialog.h:1014
-msgid "Distance"
-msgstr "Απόσταση"
-
-#: src/ui_configurationDialog.h:1015
-msgid "Catalog number(s)"
-msgstr "Αριθμός(οι) καταλόγου"
-
-#: src/ui_configurationDialog.h:1017
-msgid "Geocentric equatorial coordinates, equinox of J2000.0"
-msgstr ""
-
-#: src/ui_configurationDialog.h:1019
-msgid "Right ascension/Declination (J2000)"
-msgstr ""
-
-#: src/ui_configurationDialog.h:1020
-msgid "Absolute magnitude"
-msgstr "Απόλυτο μέγεθος"
-
-#: src/ui_configurationDialog.h:1021
-msgid "Galactic coordinates"
-msgstr ""
-
-#: src/ui_configurationDialog.h:1023
-msgid "Spectral class, nebula type, etc."
-msgstr ""
-
-#: src/ui_configurationDialog.h:1025
-msgid "Additional information"
-msgstr ""
-
-#: src/ui_configurationDialog.h:1027
-msgid "Topocentric equatorial coordinates"
-msgstr ""
-
-#: src/ui_configurationDialog.h:1029
-msgid "Hour angle/Declination"
-msgstr ""
-
-#: src/ui_configurationDialog.h:1030
+#: src/ui_configurationDialog.h:1033
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:269
 msgid "Name"
 msgstr "Όνομα"
 
-#: src/ui_configurationDialog.h:1031
-msgid "Visual magnitude"
-msgstr "Οπτικό μέγεθος"
-
-#: src/ui_configurationDialog.h:1033
-msgid "Horizontal coordinates"
-msgstr "Οριζόντιες συντεταγμένες"
-
 #: src/ui_configurationDialog.h:1035
-msgid "Altitude/Azimuth"
-msgstr "Υψόμετρο/Αζιμούθιο"
-
-#: src/ui_configurationDialog.h:1037
-msgid "Angular or physical size"
+msgid "Geocentric equatorial coordinates, equinox of date"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1039
-msgid "Size"
-msgstr "Μέγεθος"
+#: src/ui_configurationDialog.h:1037
+msgid "Right ascension/Declination (of date)"
+msgstr ""
 
-#: src/ui_configurationDialog.h:1041
-msgid "The type of the object (star, planet, etc.)"
+#: src/ui_configurationDialog.h:1038
+msgid "Catalog number(s)"
+msgstr "Αριθμός(οι) καταλόγου"
+
+#: src/ui_configurationDialog.h:1040
+msgid "Geocentric equatorial coordinates, equinox of J2000.0"
+msgstr ""
+
+#: src/ui_configurationDialog.h:1042
+msgid "Right ascension/Declination (J2000)"
 msgstr ""
 
 #: src/ui_configurationDialog.h:1043
+msgid "Absolute magnitude"
+msgstr "Απόλυτο μέγεθος"
+
+#: src/ui_configurationDialog.h:1044
+msgid "Galactic coordinates"
+msgstr ""
+
+#: src/ui_configurationDialog.h:1045
+msgid "Visual magnitude"
+msgstr "Οπτικό μέγεθος"
+
+#: src/ui_configurationDialog.h:1047
+msgid "Angular or physical size"
+msgstr ""
+
+#: src/ui_configurationDialog.h:1049
+msgid "Size"
+msgstr "Μέγεθος"
+
+#: src/ui_configurationDialog.h:1051
+msgid "The type of the object (star, planet, etc.)"
+msgstr ""
+
+#: src/ui_configurationDialog.h:1053
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:268
 msgid "Type"
 msgstr "Τύπος"
 
-#: src/ui_configurationDialog.h:1044
-msgid "Control"
-msgstr "Έλεγχος"
-
-#: src/ui_configurationDialog.h:1046
-msgid "Allow keyboard to pan and zoom"
-msgstr "Εστιακή σμίκρυνση/μεγέθυνση και μετακίνηση με το πληκτρολόγιο"
-
-#: src/ui_configurationDialog.h:1048
-msgid "Enable keyboard navigation"
-msgstr "Πλοήγηση με πληκτρολόγιο"
-
-#: src/ui_configurationDialog.h:1050
-msgid "Allow mouse to pan (drag) and zoom (mousewheel)"
-msgstr "Εστιακή σμίκρυνση/μεγέθυνση και μετακίνηση με το ποντίκι"
-
-#: src/ui_configurationDialog.h:1052
-msgid "Enable mouse navigation"
-msgstr "Πλοήγηση με ποντίκι"
-
 #: src/ui_configurationDialog.h:1055
-msgid "Hides the mouse cursor when inactive"
-msgstr "Απόκρυψη δείκτη ποντικιού όταν είναι ανενεργό"
+msgid "Spectral class, nebula type, etc."
+msgstr ""
 
 #: src/ui_configurationDialog.h:1057
-msgid "Mouse cursor timeout:"
+msgid "Additional information"
 msgstr ""
 
 #: src/ui_configurationDialog.h:1059
-msgid "seconds"
+msgid "Topocentric equatorial coordinates"
 msgstr ""
 
 #: src/ui_configurationDialog.h:1061
+msgid "Hour angle/Declination"
+msgstr ""
+
+#: src/ui_configurationDialog.h:1063
+msgid "Horizontal coordinates"
+msgstr "Οριζόντιες συντεταγμένες"
+
+#: src/ui_configurationDialog.h:1065
+msgid "Altitude/Azimuth"
+msgstr "Υψόμετρο/Αζιμούθιο"
+
+#: src/ui_configurationDialog.h:1066
+msgid "Distance"
+msgstr "Απόσταση"
+
+#: src/ui_configurationDialog.h:1068
+msgid ""
+"Ecliptic topocentric coordinates, equinox of date and J2000 (only for Earth)"
+msgstr ""
+
+#: src/ui_configurationDialog.h:1070
+msgid "Ecliptic coordinates"
+msgstr ""
+
+#: src/ui_configurationDialog.h:1071
+msgid "Control"
+msgstr "Έλεγχος"
+
+#: src/ui_configurationDialog.h:1073
+msgid "Allow keyboard to pan and zoom"
+msgstr "Εστιακή σμίκρυνση/μεγέθυνση και μετακίνηση με το πληκτρολόγιο"
+
+#: src/ui_configurationDialog.h:1075
+msgid "Enable keyboard navigation"
+msgstr "Πλοήγηση με πληκτρολόγιο"
+
+#: src/ui_configurationDialog.h:1077
+msgid "Allow mouse to pan (drag) and zoom (mousewheel)"
+msgstr "Εστιακή σμίκρυνση/μεγέθυνση και μετακίνηση με το ποντίκι"
+
+#: src/ui_configurationDialog.h:1079
+msgid "Enable mouse navigation"
+msgstr "Πλοήγηση με ποντίκι"
+
+#: src/ui_configurationDialog.h:1082
+msgid "Hides the mouse cursor when inactive"
+msgstr "Απόκρυψη δείκτη ποντικιού όταν είναι ανενεργό"
+
+#: src/ui_configurationDialog.h:1084
+msgid "Mouse cursor timeout:"
+msgstr ""
+
+#: src/ui_configurationDialog.h:1086
+msgid "seconds"
+msgstr ""
+
+#: src/ui_configurationDialog.h:1088
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:186
 msgid "Startup date and time"
 msgstr "Ημερομηνία και ώρα εκκίνησης"
 
-#: src/ui_configurationDialog.h:1063
+#: src/ui_configurationDialog.h:1090
 msgid "Use a specific date and time when Stellarium starts up"
 msgstr "Χρήση συγκεκριμένης ημερομηνίας και ώρας όταν του Stellarium ξεκινά"
 
-#: src/ui_configurationDialog.h:1065
+#: src/ui_configurationDialog.h:1092
 msgid "Other:"
 msgstr "Άλλο:"
 
-#: src/ui_configurationDialog.h:1067
+#: src/ui_configurationDialog.h:1094
 msgid "Use current local date and time"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1069
+#: src/ui_configurationDialog.h:1096
 msgid "use current"
 msgstr "Τρέχον"
 
-#: src/ui_configurationDialog.h:1071
+#: src/ui_configurationDialog.h:1098
 msgid "Starts Stellarium at system clock date and time"
 msgstr "Εκκίνηση του Stellarium με την ημερομηνία και ώρα του συστήματος"
 
-#: src/ui_configurationDialog.h:1073
+#: src/ui_configurationDialog.h:1100
 msgid "System date and time"
 msgstr "Ημερομηνία και ώρα συστήματος"
 
-#: src/ui_configurationDialog.h:1075
+#: src/ui_configurationDialog.h:1102
 msgid ""
 "Sets the simulation time to the next instance of this time of day when "
 "Stellarium starts"
@@ -4286,23 +4458,23 @@ msgstr ""
 "Ορισμός του χρόνου εξομοίωσης στην επόμενη χρονική περίοδο αυτής της ώρας "
 "της μέρας όταν ξαναξεκινήσει το Stellarium"
 
-#: src/ui_configurationDialog.h:1077
+#: src/ui_configurationDialog.h:1104
 msgid "System date at:"
 msgstr "Ημερομηνία συστήματος:"
 
-#: src/ui_configurationDialog.h:1078
+#: src/ui_configurationDialog.h:1105
 msgid "Time correction"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1081
+#: src/ui_configurationDialog.h:1108
 msgid "Edit equation"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1083
+#: src/ui_configurationDialog.h:1110
 msgid "Planetarium options"
 msgstr "Επιλογές πλανηταρίου"
 
-#: src/ui_configurationDialog.h:1085
+#: src/ui_configurationDialog.h:1112
 msgid ""
 "Spheric mirror distortion is used when projecting Stellarium onto a spheric "
 "mirror for low-cost planetarium systems."
@@ -4310,54 +4482,54 @@ msgstr ""
 "Η παραμόρφωση σφαιρικού καθρέπτη χρησιμοποιείται κατά την προβολή του "
 "Stellarium σε σφαιρικούς καθρέπτες για συστήματα πλανηταρίων χαμηλού κόστους."
 
-#: src/ui_configurationDialog.h:1087
+#: src/ui_configurationDialog.h:1114
 msgid "Spheric mirror distortion"
 msgstr "Παραμόρφωση σφαιρικού καθρέπτη"
 
-#: src/ui_configurationDialog.h:1089
+#: src/ui_configurationDialog.h:1116
 msgid "Mask out everything outside a central circle in the main view"
 msgstr ""
 "Απόκρυψη των πάντων έξω από τον κεντρικό κύκλο του κύριου οπτικού πεδίου"
 
-#: src/ui_configurationDialog.h:1091
+#: src/ui_configurationDialog.h:1118
 msgid "Disc viewport"
 msgstr "Άποψη Δίσκου"
 
-#: src/ui_configurationDialog.h:1093
+#: src/ui_configurationDialog.h:1120
 msgid "Hide other constellations when you click one"
 msgstr "Απόκρυψη υπόλοιπων αστερισμών όταν επιλέγεται ένας"
 
-#: src/ui_configurationDialog.h:1095
+#: src/ui_configurationDialog.h:1122
 msgid "Select single constellation"
 msgstr "Επιλογή ενός αστερισμού"
 
-#: src/ui_configurationDialog.h:1097
+#: src/ui_configurationDialog.h:1124
 msgid "Align labels with the horizon"
 msgstr "Ευθυγράμμιση ετικετών με τον ορίζοντα"
 
-#: src/ui_configurationDialog.h:1099
+#: src/ui_configurationDialog.h:1126
 msgid "Gravity labels"
 msgstr "Ετικέτες \"βαρύτητας\""
 
-#: src/ui_configurationDialog.h:1101
+#: src/ui_configurationDialog.h:1128
 msgid "Toggle display backgrounds of the nebulae."
 msgstr ""
 
-#: src/ui_configurationDialog.h:1103
+#: src/ui_configurationDialog.h:1130
 msgid "Show nebula background button"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1105
+#: src/ui_configurationDialog.h:1132
 msgid "Toggle vertical and horizontal image flip buttons."
 msgstr ""
 "Ενεργοποίηση/Απενεργοποίηση των κουμπιών οριζόντιας και κάθετης αντιστροφής "
 "της εικόνας"
 
-#: src/ui_configurationDialog.h:1107
+#: src/ui_configurationDialog.h:1134
 msgid "Show flip buttons"
 msgstr "Εμφάνιση κουμπιών αντιστροφής"
 
-#: src/ui_configurationDialog.h:1109
+#: src/ui_configurationDialog.h:1136
 msgid ""
 "When enabled, the \"auto zoom out\" key will also set the initial viewing "
 "direction"
@@ -4365,104 +4537,89 @@ msgstr ""
 "Όταν είναι ενεργό, το κουμπί \"εστιακή σμίκρυνση\" επίσης θα ρυθμίζει την "
 "αρχική κατεύθυνση οπτικού πεδίου"
 
-#: src/ui_configurationDialog.h:1111
+#: src/ui_configurationDialog.h:1138
 msgid "Auto zoom out returns to initial direction of view"
 msgstr ""
 "Η αυτόματη εστιακή σμίκρυνση επιστρέφει στην αρχική κατεύθυνση οπτικού πεδίου"
 
-#: src/ui_configurationDialog.h:1113
-msgid ""
-"Display solar shadows on planets and moons (For that feature needed OpenGL "
-"version 2 or higher)"
-msgstr ""
-
-#: src/ui_configurationDialog.h:1115
-msgid "Render Solar Shadows"
-msgstr ""
-
-#: src/ui_configurationDialog.h:1116
+#: src/ui_configurationDialog.h:1139
 msgid "Screenshots"
 msgstr "Στιγμιότυπα"
 
-#: src/ui_configurationDialog.h:1117
+#: src/ui_configurationDialog.h:1140
 msgid "Screenshot Directory"
 msgstr "Κατάλογος φωτογραφιών οθόνης"
 
-#: src/ui_configurationDialog.h:1119
+#: src/ui_configurationDialog.h:1142
 msgid "Invert colors"
 msgstr "Αναστροφή χρωμάτων"
 
-#: src/ui_configurationDialog.h:1120
+#: src/ui_configurationDialog.h:1143
 msgid "Star catalog updates"
 msgstr "Ανανέωση αστρικών καταλόγων"
 
-#: src/ui_configurationDialog.h:1122
+#: src/ui_configurationDialog.h:1145
 msgid "Click here to start downloading"
 msgstr "Έναρξη λήψης"
 
-#: src/ui_configurationDialog.h:1124
+#: src/ui_configurationDialog.h:1147
 msgid "Download this file to view even more stars"
 msgstr "Κατεβάστε αυτό το αρχείο για να δείτε περισσότερα αστέρια"
 
-#: src/ui_configurationDialog.h:1126
+#: src/ui_configurationDialog.h:1149
 msgid "Restart the download"
 msgstr "Επανεκκίνηση λήψης"
 
-#: src/ui_configurationDialog.h:1128
+#: src/ui_configurationDialog.h:1151
 msgid "Retry"
 msgstr "Επανάληψη"
 
-#: src/ui_configurationDialog.h:1130
+#: src/ui_configurationDialog.h:1153
 msgid "Stop the download. You can always restart it later"
 msgstr "Παύση της λήψης. Μπορεί να συνεχιστεί αργότερα"
 
-#: src/ui_configurationDialog.h:1132
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:516
-msgid "Cancel"
-msgstr "Άκυρο"
-
-#: src/ui_configurationDialog.h:1135
+#: src/ui_configurationDialog.h:1158
 msgid "Close window when script runs"
 msgstr "Κλείσιμο παραθύρου κατά την εκτέλεση του σεναρίου"
 
-#: src/ui_configurationDialog.h:1137
+#: src/ui_configurationDialog.h:1160
 msgid "Run the selected script"
 msgstr "Εκτέλεση επιλεγμένου σεναρίου"
 
-#: src/ui_configurationDialog.h:1141
+#: src/ui_configurationDialog.h:1164
 msgid "Stop a running script"
 msgstr "Διακοπή εκτέλεσης σεναρίου"
 
-#: src/ui_configurationDialog.h:1145
+#: src/ui_configurationDialog.h:1168
 msgid "Load at startup"
 msgstr "Φόρτωση κατά την εκκινηση"
 
-#: src/ui_configurationDialog.h:1146
+#: src/ui_configurationDialog.h:1169
 msgid "configure"
 msgstr "ρύθμιση"
 
-#: src/ui_configurationDialog.h:1151
+#: src/ui_configurationDialog.h:1174
 msgid "Main"
 msgstr "Βασικό"
 
-#: src/ui_configurationDialog.h:1153
+#: src/ui_configurationDialog.h:1176
 msgid "Information"
 msgstr "Πληροφορίες"
 
-#: src/ui_configurationDialog.h:1158
+#: src/ui_configurationDialog.h:1181
 msgid "Navigation"
 msgstr "Πλοήγηση"
 
-#: src/ui_configurationDialog.h:1160
+#: src/ui_configurationDialog.h:1183
 msgid "Tools"
 msgstr "Εργαλεία"
 
-#: src/ui_configurationDialog.h:1162
+#: src/ui_configurationDialog.h:1185
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:447
 msgid "Scripts"
 msgstr "Σενάρια"
 
-#: src/ui_configurationDialog.h:1164
+#: src/ui_configurationDialog.h:1187
 msgid "Plugins"
 msgstr "Πρόσθετα"
 
@@ -4606,590 +4763,186 @@ msgstr "Συμπερίληψη καταλόγου:"
 msgid "..."
 msgstr "…"
 
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:56
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:120
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:59
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:133
+#: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:189
 msgid "Angle Measure"
 msgstr "Γωνιακή Μέτρηση"
 
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:59
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:62
 msgid "Provides an angle measurement tool"
 msgstr "Παρέχει ένα εργαλείο γωνιακής μέτρησης"
 
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:120
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:133
 msgid "Angle measure"
 msgstr "Γωνιακή Μέτρηση"
 
 #. TRANSLATORS: instructions for using the AngleMeasure plugin.
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:300
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:357
 msgid "The Angle Measure is enabled:"
 msgstr ""
 
 #. TRANSLATORS: instructions for using the AngleMeasure plugin.
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:302
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:359
 msgid "Drag with the left button to measure, left-click to clear."
 msgstr ""
 "Σύρετε με το αριστερό πλήκτρο για να μετρήσετε, αριστερό κλικ για εκκαθάριση"
 
 #. TRANSLATORS: instructions for using the AngleMeasure plugin.
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:304
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:361
 msgid "Right-clicking changes the end point only."
 msgstr "Με δεξί-κλικ αλλάζει μόνο το τελικό σημείο."
 
-#: plugins/CompassMarks/src/CompassMarks.cpp:55
-#: plugins/CompassMarks/src/CompassMarks.cpp:123
-msgid "Compass Marks"
-msgstr "Σημεία Πυξίδας"
+#. TRANSLATORS: PA is abbreviation for phrase "Position Angle"
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:363
+msgid "PA="
+msgstr ""
 
-#: plugins/CompassMarks/src/CompassMarks.cpp:58
-msgid "Displays compass bearing marks along the horizon"
-msgstr "Δείχνει σημεία της πυξίδας κατά μήκος του ορίζοντα"
+#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:70
+msgid "Angle Measure Plug-in"
+msgstr ""
 
-#: plugins/CompassMarks/src/CompassMarks.cpp:123
-msgid "Compass marks"
-msgstr "Σημεία Πυξίδας"
+#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:73
+#: plugins/Oculars/src/gui/OcularDialog.cpp:486
+msgid "Contributors"
+msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:80 plugins/Oculars/src/Oculars.cpp:1324
-#: plugins/Oculars/src/ui_ocularDialog.h:1039
-msgid "Oculars"
-msgstr "Οπτικά"
-
-#: plugins/Oculars/src/Oculars.cpp:83
+#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:76
 msgid ""
-"Shows the sky as if looking through a telescope eyepiece. (Only "
-"magnification and field of view are simulated.) It can also show a sensor "
-"frame and a Telrad sight."
+"The Angle Measure plugin is a small tool which is used to measure the "
+"angular distance between two points on the sky (and calculation of position "
+"angle between those two points)."
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:834
-msgid "Please select an object before switching to ocular view."
-msgstr ""
-
-#: plugins/Oculars/src/Oculars.cpp:926
-msgid "&Previous ocular"
-msgstr ""
-
-#: plugins/Oculars/src/Oculars.cpp:927
-msgid "&Next ocular"
-msgstr ""
-
-#: plugins/Oculars/src/Oculars.cpp:928
-msgid "Select &ocular"
-msgstr ""
-
-#: plugins/Oculars/src/Oculars.cpp:975
-msgid "Toggle &crosshair"
-msgstr ""
-
-#: plugins/Oculars/src/Oculars.cpp:983
-msgid "Configure &Oculars"
-msgstr ""
-
-#: plugins/Oculars/src/Oculars.cpp:991
-msgid "Toggle &CCD"
-msgstr ""
-
-#: plugins/Oculars/src/Oculars.cpp:998
-msgid "Toggle &Telrad"
-msgstr ""
-
-#: plugins/Oculars/src/Oculars.cpp:1007
-msgid "&Previous CCD"
-msgstr ""
-
-#: plugins/Oculars/src/Oculars.cpp:1008
-msgid "&Next CCD"
-msgstr ""
-
-#: plugins/Oculars/src/Oculars.cpp:1009
-msgid "&Select CCD"
-msgstr ""
-
-#: plugins/Oculars/src/Oculars.cpp:1031
-msgid "&Rotate CCD"
-msgstr ""
-
-#: plugins/Oculars/src/Oculars.cpp:1063
-msgid "&Reset rotation"
-msgstr ""
-
-#: plugins/Oculars/src/Oculars.cpp:1307
-#: plugins/Oculars/src/ui_ocularDialog.h:1041
-msgid "Ocular view"
-msgstr "οπτική εικόνα"
-
-#: plugins/Oculars/src/Oculars.cpp:1325
-msgid "Oculars popup menu"
-msgstr "Οπτικά αναδυόμενα μενού"
-
-#: plugins/Oculars/src/Oculars.cpp:1326
-msgid "Show crosshairs"
-msgstr ""
-
-#: plugins/Oculars/src/Oculars.cpp:1327
-msgid "Image sensor frame"
-msgstr ""
-
-#: plugins/Oculars/src/Oculars.cpp:1328
-msgid "Telrad sight"
-msgstr ""
-
-#: plugins/Oculars/src/Oculars.cpp:1329
-msgid "Oculars plugin configuration"
-msgstr ""
-
-#: plugins/Oculars/src/Oculars.cpp:1331
-msgid "Select next telescope"
-msgstr ""
-
-#: plugins/Oculars/src/Oculars.cpp:1333
-msgid "Select previous telescope"
-msgstr ""
-
-#: plugins/Oculars/src/Oculars.cpp:1335
-msgid "Select next eyepiece"
-msgstr ""
-
-#: plugins/Oculars/src/Oculars.cpp:1337
-msgid "Select previous eyepiece"
-msgstr ""
-
-#: plugins/Oculars/src/Oculars.cpp:1566
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:499
-#, qt-format
-msgid "Ocular #%1"
-msgstr ""
-
-#: plugins/Oculars/src/Oculars.cpp:1571
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:503
-#, qt-format
-msgid "Ocular #%1: %2"
-msgstr ""
-
-#. TRANSLATORS: FL = Focal length
-#: plugins/Oculars/src/Oculars.cpp:1585
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:540
-#, qt-format
-msgid "Ocular FL: %1 mm"
-msgstr ""
-
-#. TRANSLATORS: aFOV = apparent field of view
-#: plugins/Oculars/src/Oculars.cpp:1592
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:550
-#, qt-format
-msgid "Ocular aFOV: %1"
-msgstr ""
-
-#: plugins/Oculars/src/Oculars.cpp:1604
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:580
-#, qt-format
-msgid "Lens #%1"
-msgstr ""
-
-#: plugins/Oculars/src/Oculars.cpp:1608
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:584
-#, qt-format
-msgid "Lens #%1: %2"
-msgstr ""
-
-#: plugins/Oculars/src/Oculars.cpp:1613
-msgid "Lens: none"
-msgstr ""
-
-#: plugins/Oculars/src/Oculars.cpp:1623 plugins/Oculars/src/Oculars.cpp:1680
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:737
-#, qt-format
-msgid "Telescope #%1"
-msgstr "Τηλεσκόπιο #%1"
-
-#: plugins/Oculars/src/Oculars.cpp:1628 plugins/Oculars/src/Oculars.cpp:1685
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:741
-#, qt-format
-msgid "Telescope #%1: %2"
-msgstr "Τηλεσκόπιο #%1: %2"
-
-#: plugins/Oculars/src/Oculars.cpp:1639
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:817
-#, qt-format
-msgid "Magnification: %1"
-msgstr ""
-
-#: plugins/Oculars/src/Oculars.cpp:1647
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:826
-#, qt-format
-msgid "FOV: %1"
-msgstr ""
-
-#: plugins/Oculars/src/Oculars.cpp:1657
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:682
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:779
-#, qt-format
-msgid "Dimensions: %1"
-msgstr "Διαστάσεις: %1"
-
-#: plugins/Oculars/src/Oculars.cpp:1662
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:642
-#, qt-format
-msgid "Sensor #%1"
-msgstr ""
-
-#: plugins/Oculars/src/Oculars.cpp:1666
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:646
-#, qt-format
-msgid "Sensor #%1: %2"
-msgstr ""
-
-#: plugins/Oculars/src/Oculars.cpp:1916
-msgid "&Lens"
-msgstr ""
-
-#: plugins/Oculars/src/Oculars.cpp:1917
-msgid "&Previous lens"
-msgstr ""
-
-#: plugins/Oculars/src/Oculars.cpp:1918
-msgid "&Next lens"
-msgstr ""
-
-#: plugins/Oculars/src/Oculars.cpp:1948
-msgid "&Telescope"
-msgstr "&Τηλεσκόπιο"
-
-#: plugins/Oculars/src/Oculars.cpp:1949
-msgid "&Previous telescope"
-msgstr "&Προηγούμενο Τηλεσκόπιο"
-
-#: plugins/Oculars/src/Oculars.cpp:1950
-msgid "&Next telescope"
-msgstr "&Επόμενο Τηλεσκόπιο"
-
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:185
-msgid "Previous ocular"
-msgstr ""
-
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:191
-msgid "Next ocular"
-msgstr ""
-
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:197
-msgid "Previous lens"
-msgstr ""
-
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:203
-msgid "Next lens"
-msgstr ""
-
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:209
-msgid "Previous CCD frame"
-msgstr ""
-
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:215
-msgid "Next CCD frame"
-msgstr ""
-
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:221
-msgid "Previous telescope"
-msgstr "Προηγούμενο Τηλεσκόπιο"
-
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:227
-msgid "Next telescope"
-msgstr "Επόμενο Τηλεσκόπιο"
-
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:260
-msgid "Rotate the sensor frame 15 degrees counterclockwise"
-msgstr "Περιστρέψτε το πλαίσιο του αισθητήρα αριστερόστροφα 15 μοίρες"
-
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:273
-msgid "Rotate the sensor frame 5 degrees counterclockwise"
-msgstr "Περιστρέψτε το πλαίσιο του αισθητήρα αριστερόστροφα 5 μοίρες"
-
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:286
-msgid "Rotate the sensor frame 1 degree counterclockwise"
-msgstr "Περιστρέψτε το πλαίσιο του αισθητήρα αριστερόστροφα 1 μοίρα"
-
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:299
-msgid "Reset the sensor frame rotation"
-msgstr ""
-
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:312
-msgid "Rotate the sensor frame 1 degree clockwise"
-msgstr "Περιστρέψτε το πλαίσιο του αισθητήρα δεξιόστροφα 1 μοίρα"
-
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:325
-msgid "Rotate the sensor frame 5 degrees clockwise"
-msgstr "Περιστρέψτε το πλαίσιο του αισθητήρα δεξιόστροφα 5 μοίρες"
-
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:338
-msgid "Rotate the sensor frame 15 degrees clockwise"
-msgstr "Περιστρέψτε το πλαίσιο του αισθητήρα δεξιόστροφα 15 μοίρες"
-
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:542
-msgid "Effective focal length of the ocular"
-msgstr ""
-
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:553
-msgid "Apparent field of view of the ocular"
-msgstr ""
-
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:586
-#, qt-format
-msgid "Multiplicity: %1"
-msgstr ""
-
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:591
-msgid "Lens: None"
-msgstr ""
-
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:592
-msgid "Multiplicity: N/A"
-msgstr ""
-
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:596
-msgid "Focal length of eyepiece"
-msgstr ""
-
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:690
-#, qt-format
-msgid "Rotation: %1"
-msgstr "Περιστροφή: %1"
-
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:800
-msgid "Magnification provided by these binoculars"
-msgstr ""
-
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:801
-msgid "Actual field of view provided by these binoculars"
-msgstr ""
-
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:809
-msgid "Magnification provided by this ocular/lens/telescope combination"
-msgstr ""
-
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:810
+#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:77
 msgid ""
-"Actual field of view provided by this ocular/lens/telescope combination"
+"*goes misty eyed* I recall measuring the size of the Cassini Division when I "
+"was a student. It was not the high academic glamor one might expect... It "
+"was cloudy... It was rainy... The observatory lab had some old scopes set up "
+"at one end, pointing at a <em>photograph</em> of Saturn at the other end of "
+"the lab. We measured. We calculated. We wished we were in Hawaii."
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:496
-msgid "Oculars Plug-in"
-msgstr ""
+#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:79
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:420
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:127
+#: plugins/Novae/src/gui/NovaeDialog.cpp:124
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:124
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:140
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:129
+msgid "Links"
+msgstr "Σύνδεσμοι"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:498
-msgid "Barlow lens feature"
-msgstr ""
-
-#: plugins/Oculars/src/gui/OcularDialog.cpp:502
-msgid "Overview"
-msgstr "Επισκόπηση"
-
-#: plugins/Oculars/src/gui/OcularDialog.cpp:504
-msgid ""
-"This plugin is intended to simulate what you would see through an eyepiece.  "
-"This configuration dialog can be used to add, modify, or delete eyepieces "
-"and telescopes, as well as CCD Sensors.  Your first time running the app "
-"will populate some samples to get your started."
-msgstr ""
-
-#: plugins/Oculars/src/gui/OcularDialog.cpp:505
-msgid ""
-"You can choose to scale the image you see on the screen.  This is intended "
-"to show you a better comparison of what one eyepiece/telescope combination "
-"will be like as compared to another.  The same eyepiece in two different "
-"telescopes of differing focal length will produce two different exit "
-"circles, changing the view someone.  The trade-off of this is that, with the "
-"image scaled, a good deal of the screen can be wasted.  Therefore I "
-"recommend that you leave it off, unless you feel you have a need of it."
-msgstr ""
-
-#: plugins/Oculars/src/gui/OcularDialog.cpp:506
-msgid ""
-"You can toggle a crosshair in the view.  Ideally, I wanted this to be "
-"aligned to North.  I've been unable to do so.  So currently it aligns to the "
-"top of the screen."
-msgstr ""
-
-#: plugins/Oculars/src/gui/OcularDialog.cpp:507
+#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:80
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:421
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:128
+#: plugins/Novae/src/gui/NovaeDialog.cpp:125
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:125
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:141
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:130
 #, qt-format
 msgid ""
-"You can toggle a Telrad finder; this can only be done when you have not "
-"turned on the Ocular view.  This feature draws three concentric circles of "
-"0.5%1, 2.0%1, and 4.0%1, helping you see what you would expect to see with "
-"the naked eye through the Telrad (or similar) finder."
+"Support is provided via the Launchpad website.  Be sure to put \"%1\" in the "
+"subject when posting."
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:508
-msgid "If you find any issues, please let me know.  Enjoy!"
+#. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
+#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:83
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:424
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:131
+#: plugins/Novae/src/gui/NovaeDialog.cpp:128
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:128
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:144
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:133
+#, qt-format
+msgid "If you have a question, you can %1get an answer here%2"
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:511
-msgid "Hot Keys"
+#. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
+#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:85
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:426
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:133
+#: plugins/Novae/src/gui/NovaeDialog.cpp:130
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:130
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:146
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:135
+#, qt-format
+msgid "Bug reports can be made %1here%2."
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:512
-msgid "The plug-in's key bindings can be edited in the General Tab."
-msgstr ""
-
-#: plugins/Oculars/src/gui/OcularDialog.cpp:526
-#: plugins/Oculars/src/gui/OcularDialog.cpp:531
-msgid "[no key defined]"
-msgstr ""
-
-#: plugins/Oculars/src/gui/OcularDialog.cpp:535
-msgid "Switches on/off the ocular overlay."
-msgstr ""
-
-#: plugins/Oculars/src/gui/OcularDialog.cpp:539
-msgid "Opens the pop-up navigation menu."
-msgstr ""
-
-#: plugins/Oculars/src/ui_ocularDialog.h:1042
-msgid "Enable only if an object is selected"
-msgstr ""
-
-#: plugins/Oculars/src/ui_ocularDialog.h:1043
-msgid "Scale image circle"
-msgstr ""
-
-#: plugins/Oculars/src/ui_ocularDialog.h:1045
-msgid "Apply limits stellar magnitude for different apertures of telescopes"
-msgstr ""
-
-#: plugins/Oculars/src/ui_ocularDialog.h:1047
-msgid "Limit stellar magnitude"
-msgstr ""
-
-#: plugins/Oculars/src/ui_ocularDialog.h:1048
-msgid "Key mappings"
-msgstr ""
-
-#: plugins/Oculars/src/ui_ocularDialog.h:1049
-msgid "Toggle ocular view:"
-msgstr ""
-
-#: plugins/Oculars/src/ui_ocularDialog.h:1051
-msgid "Open pop-up navigation menu:"
-msgstr ""
-
-#: plugins/Oculars/src/ui_ocularDialog.h:1052
-msgid "Interface"
-msgstr "Διεπαφή"
-
-#: plugins/Oculars/src/ui_ocularDialog.h:1053
-msgid "On-screen control panel"
-msgstr ""
-
-#: plugins/Oculars/src/ui_ocularDialog.h:1054
-msgid "Use degrees and minutes for FOV of CCD"
-msgstr ""
-
-#: plugins/Oculars/src/ui_ocularDialog.h:1055
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:220
-msgid "General"
-msgstr "Γενικός"
-
-#: plugins/Oculars/src/ui_ocularDialog.h:1056
-#: plugins/Oculars/src/ui_ocularDialog.h:1064
-msgid "Eyepieces"
-msgstr ""
-
-#: plugins/Oculars/src/ui_ocularDialog.h:1057
-#: plugins/Oculars/src/ui_ocularDialog.h:1066
-#: plugins/Oculars/src/ui_ocularDialog.h:1073
-#: plugins/Oculars/src/ui_ocularDialog.h:1084
-#: plugins/Satellites/src/ui_satellitesImportDialog.h:219
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:402
-msgid "Add"
-msgstr "Πρόσθεση"
-
-#: plugins/Oculars/src/ui_ocularDialog.h:1059
-#: plugins/Oculars/src/ui_ocularDialog.h:1068
-#: plugins/Oculars/src/ui_ocularDialog.h:1075
-#: plugins/Oculars/src/ui_ocularDialog.h:1086
-#: plugins/Satellites/src/ui_satellitesDialog.h:731
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:483
-msgid "Name:"
-msgstr "Όνομα :"
-
-#: plugins/Oculars/src/ui_ocularDialog.h:1060
-msgid "aFOV:"
-msgstr ""
-
-#: plugins/Oculars/src/ui_ocularDialog.h:1061
-#: plugins/Oculars/src/ui_ocularDialog.h:1087
-msgid "Focal length:"
-msgstr "Εστιακή απόσταση:"
-
-#: plugins/Oculars/src/ui_ocularDialog.h:1062
-msgid "Field stop:"
-msgstr ""
-
-#: plugins/Oculars/src/ui_ocularDialog.h:1063
-msgid "Binoculars"
-msgstr ""
-
-#: plugins/Oculars/src/ui_ocularDialog.h:1065
-#: plugins/Oculars/src/ui_ocularDialog.h:1071
-msgid "Lenses"
-msgstr ""
-
-#: plugins/Oculars/src/ui_ocularDialog.h:1069
-msgid "Multiplier:"
-msgstr ""
-
-#: plugins/Oculars/src/ui_ocularDialog.h:1070
+#. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
+#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:87
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:428
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:135
+#: plugins/Novae/src/gui/NovaeDialog.cpp:132
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:132
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:148
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:137
 msgid ""
-"Values of multiplicity >1 expand the focal length (Barlow lens). Values of "
-"multiplicity <1 reduce the focal length (Shapley lens)."
+"If you would like to make a feature request, you can create a bug report, "
+"and set the severity to \"wishlist\"."
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1072
-#: plugins/Oculars/src/ui_ocularDialog.h:1082
-msgid "Sensors"
-msgstr "Ανιχνευτές"
-
-#: plugins/Oculars/src/ui_ocularDialog.h:1076
-msgid "Resolution x (pixels):"
-msgstr "Οριζόντια Ανάλυση (pixels):"
-
-#: plugins/Oculars/src/ui_ocularDialog.h:1077
-msgid "Resolution y (pixels):"
-msgstr "Κατακόρυφη Ανάλυση (pixels):"
-
-#: plugins/Oculars/src/ui_ocularDialog.h:1078
-msgid "Chip width (mm):"
+#. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
+#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:89
+#, qt-format
+msgid ""
+"If you want to read full information about this plugin and its history, you "
+"can %1get info here%2."
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1079
-msgid "Chip height (mm):"
+#: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:181
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:263
+msgid "Pulsars Configuration"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1080
-msgid "Pixel width (micron):"
+#: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:182
+msgid "Angle Measure Plug-in Configuration"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1081
-msgid "Pixel height (micron):"
+#: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:184
+#: plugins/Satellites/src/ui_satellitesDialog.h:716
+#: plugins/Supernovae/src/ui_supernovaeDialog.h:240
+#: plugins/Novae/src/ui_novaeDialog.h:243
+#: plugins/Quasars/src/ui_quasarsDialog.h:275
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:282
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:319
+#: plugins/Observability/src/ui_ObservabilityDialog.h:377
+msgid "Settings"
+msgstr "Ρυθμίσεις"
+
+#: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:185
+msgid "Use dms format for angles"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1083
-#: plugins/Oculars/src/ui_ocularDialog.h:1091
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:391
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:407
-msgid "Telescopes"
+#: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:186
+msgid "Show position angle"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1088
-msgid "Diameter:"
-msgstr "Διάμετρος:"
-
-#: plugins/Oculars/src/ui_ocularDialog.h:1089
-msgid "Horizontal flip"
+#: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:187
+#: plugins/Satellites/src/ui_satellitesDialog.h:714
+#: plugins/Supernovae/src/ui_supernovaeDialog.h:238
+#: plugins/Novae/src/ui_novaeDialog.h:241
+#: plugins/Quasars/src/ui_quasarsDialog.h:273
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:280
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:317
+#: plugins/Observability/src/ui_ObservabilityDialog.h:367
+msgid "Restore default settings"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1090
-msgid "Vertical flip"
+#: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:188
+#: plugins/Satellites/src/ui_satellitesDialog.h:715
+#: plugins/Supernovae/src/ui_supernovaeDialog.h:239
+#: plugins/Novae/src/ui_novaeDialog.h:242
+#: plugins/Quasars/src/ui_quasarsDialog.h:274
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:281
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:318
+#: plugins/Observability/src/ui_ObservabilityDialog.h:368
+msgid "Save settings as default"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1092
+#: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:190
+#: plugins/Oculars/src/ui_ocularDialog.h:1107
 #: plugins/Satellites/src/ui_satellitesDialog.h:762
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:418
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:405
@@ -5200,18 +4953,582 @@ msgstr ""
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:283
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:322
 #: plugins/Observability/src/ui_ObservabilityDialog.h:378
-#: plugins/FOV/src/ui_fovWindow.h:404
+#: plugins/FOV/src/ui_fovWindow.h:405
+#: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:279
 msgctxt "tab in plugin windows"
 msgid "About"
 msgstr "Περί"
 
-#: plugins/Satellites/src/Satellites.cpp:66
-#: plugins/Satellites/src/Satellites.cpp:143
+#: plugins/CompassMarks/src/CompassMarks.cpp:57
+#: plugins/CompassMarks/src/CompassMarks.cpp:125
+msgid "Compass Marks"
+msgstr "Σημεία Πυξίδας"
+
+#: plugins/CompassMarks/src/CompassMarks.cpp:60
+msgid "Displays compass bearing marks along the horizon"
+msgstr "Δείχνει σημεία της πυξίδας κατά μήκος του ορίζοντα"
+
+#: plugins/CompassMarks/src/CompassMarks.cpp:125
+msgid "Compass marks"
+msgstr "Σημεία Πυξίδας"
+
+#: plugins/Oculars/src/Oculars.cpp:80 plugins/Oculars/src/Oculars.cpp:1317
+#: plugins/Oculars/src/ui_ocularDialog.h:1050
+msgid "Oculars"
+msgstr "Οπτικά"
+
+#: plugins/Oculars/src/Oculars.cpp:83
+msgid ""
+"Shows the sky as if looking through a telescope eyepiece. (Only "
+"magnification and field of view are simulated.) It can also show a sensor "
+"frame and a Telrad sight."
+msgstr ""
+
+#: plugins/Oculars/src/Oculars.cpp:837
+msgid "Please select an object before switching to ocular view."
+msgstr ""
+
+#: plugins/Oculars/src/Oculars.cpp:929
+msgid "&Previous ocular"
+msgstr ""
+
+#: plugins/Oculars/src/Oculars.cpp:930
+msgid "&Next ocular"
+msgstr ""
+
+#: plugins/Oculars/src/Oculars.cpp:931
+msgid "Select &ocular"
+msgstr ""
+
+#: plugins/Oculars/src/Oculars.cpp:978
+msgid "Toggle &crosshair"
+msgstr ""
+
+#: plugins/Oculars/src/Oculars.cpp:986
+msgid "Configure &Oculars"
+msgstr ""
+
+#: plugins/Oculars/src/Oculars.cpp:994
+msgid "Toggle &CCD"
+msgstr ""
+
+#: plugins/Oculars/src/Oculars.cpp:1001
+msgid "Toggle &Telrad"
+msgstr ""
+
+#: plugins/Oculars/src/Oculars.cpp:1010
+msgid "&Previous CCD"
+msgstr ""
+
+#: plugins/Oculars/src/Oculars.cpp:1011
+msgid "&Next CCD"
+msgstr ""
+
+#: plugins/Oculars/src/Oculars.cpp:1012
+msgid "&Select CCD"
+msgstr ""
+
+#: plugins/Oculars/src/Oculars.cpp:1034
+msgid "&Rotate CCD"
+msgstr ""
+
+#: plugins/Oculars/src/Oculars.cpp:1056
+msgid "&Reset rotation"
+msgstr ""
+
+#: plugins/Oculars/src/Oculars.cpp:1300
+#: plugins/Oculars/src/ui_ocularDialog.h:1052
+msgid "Ocular view"
+msgstr "οπτική εικόνα"
+
+#: plugins/Oculars/src/Oculars.cpp:1318
+msgid "Oculars popup menu"
+msgstr "Οπτικά αναδυόμενα μενού"
+
+#: plugins/Oculars/src/Oculars.cpp:1319
+msgid "Show crosshairs"
+msgstr ""
+
+#: plugins/Oculars/src/Oculars.cpp:1320
+msgid "Image sensor frame"
+msgstr ""
+
+#: plugins/Oculars/src/Oculars.cpp:1321
+msgid "Telrad sight"
+msgstr ""
+
+#: plugins/Oculars/src/Oculars.cpp:1322
+msgid "Oculars plugin configuration"
+msgstr ""
+
+#: plugins/Oculars/src/Oculars.cpp:1324
+msgid "Select next telescope"
+msgstr ""
+
+#: plugins/Oculars/src/Oculars.cpp:1326
+msgid "Select previous telescope"
+msgstr ""
+
+#: plugins/Oculars/src/Oculars.cpp:1328
+msgid "Select next eyepiece"
+msgstr ""
+
+#: plugins/Oculars/src/Oculars.cpp:1330
+msgid "Select previous eyepiece"
+msgstr ""
+
+#: plugins/Oculars/src/Oculars.cpp:1559
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:500
+#, qt-format
+msgid "Ocular #%1"
+msgstr ""
+
+#: plugins/Oculars/src/Oculars.cpp:1564
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:504
+#, qt-format
+msgid "Ocular #%1: %2"
+msgstr ""
+
+#. TRANSLATORS: FL = Focal length
+#: plugins/Oculars/src/Oculars.cpp:1578
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:541
+#, qt-format
+msgid "Ocular FL: %1 mm"
+msgstr ""
+
+#. TRANSLATORS: aFOV = apparent field of view
+#: plugins/Oculars/src/Oculars.cpp:1585
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:551
+#, qt-format
+msgid "Ocular aFOV: %1"
+msgstr ""
+
+#: plugins/Oculars/src/Oculars.cpp:1597
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:581
+#, qt-format
+msgid "Lens #%1"
+msgstr ""
+
+#: plugins/Oculars/src/Oculars.cpp:1601
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:585
+#, qt-format
+msgid "Lens #%1: %2"
+msgstr ""
+
+#: plugins/Oculars/src/Oculars.cpp:1606
+msgid "Lens: none"
+msgstr ""
+
+#: plugins/Oculars/src/Oculars.cpp:1616 plugins/Oculars/src/Oculars.cpp:1673
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:738
+#, qt-format
+msgid "Telescope #%1"
+msgstr "Τηλεσκόπιο #%1"
+
+#: plugins/Oculars/src/Oculars.cpp:1621 plugins/Oculars/src/Oculars.cpp:1678
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:742
+#, qt-format
+msgid "Telescope #%1: %2"
+msgstr "Τηλεσκόπιο #%1: %2"
+
+#: plugins/Oculars/src/Oculars.cpp:1632
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:818
+#, qt-format
+msgid "Magnification: %1"
+msgstr ""
+
+#: plugins/Oculars/src/Oculars.cpp:1640
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:827
+#, qt-format
+msgid "FOV: %1"
+msgstr ""
+
+#: plugins/Oculars/src/Oculars.cpp:1650
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:683
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:780
+#, qt-format
+msgid "Dimensions: %1"
+msgstr "Διαστάσεις: %1"
+
+#: plugins/Oculars/src/Oculars.cpp:1655
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:643
+#, qt-format
+msgid "Sensor #%1"
+msgstr ""
+
+#: plugins/Oculars/src/Oculars.cpp:1659
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:647
+#, qt-format
+msgid "Sensor #%1: %2"
+msgstr ""
+
+#: plugins/Oculars/src/Oculars.cpp:1917
+msgid "&Lens"
+msgstr ""
+
+#: plugins/Oculars/src/Oculars.cpp:1918
+msgid "&Previous lens"
+msgstr ""
+
+#: plugins/Oculars/src/Oculars.cpp:1919
+msgid "&Next lens"
+msgstr ""
+
+#: plugins/Oculars/src/Oculars.cpp:1949
+msgid "&Telescope"
+msgstr "&Τηλεσκόπιο"
+
+#: plugins/Oculars/src/Oculars.cpp:1950
+msgid "&Previous telescope"
+msgstr "&Προηγούμενο Τηλεσκόπιο"
+
+#: plugins/Oculars/src/Oculars.cpp:1951
+msgid "&Next telescope"
+msgstr "&Επόμενο Τηλεσκόπιο"
+
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:186
+msgid "Previous ocular"
+msgstr ""
+
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:192
+msgid "Next ocular"
+msgstr ""
+
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:198
+msgid "Previous lens"
+msgstr ""
+
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:204
+msgid "Next lens"
+msgstr ""
+
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:210
+msgid "Previous CCD frame"
+msgstr ""
+
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:216
+msgid "Next CCD frame"
+msgstr ""
+
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:222
+msgid "Previous telescope"
+msgstr "Προηγούμενο Τηλεσκόπιο"
+
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:228
+msgid "Next telescope"
+msgstr "Επόμενο Τηλεσκόπιο"
+
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:261
+msgid "Rotate the sensor frame 15 degrees counterclockwise"
+msgstr "Περιστρέψτε το πλαίσιο του αισθητήρα αριστερόστροφα 15 μοίρες"
+
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:274
+msgid "Rotate the sensor frame 5 degrees counterclockwise"
+msgstr "Περιστρέψτε το πλαίσιο του αισθητήρα αριστερόστροφα 5 μοίρες"
+
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:287
+msgid "Rotate the sensor frame 1 degree counterclockwise"
+msgstr "Περιστρέψτε το πλαίσιο του αισθητήρα αριστερόστροφα 1 μοίρα"
+
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:300
+msgid "Reset the sensor frame rotation"
+msgstr ""
+
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:313
+msgid "Rotate the sensor frame 1 degree clockwise"
+msgstr "Περιστρέψτε το πλαίσιο του αισθητήρα δεξιόστροφα 1 μοίρα"
+
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:326
+msgid "Rotate the sensor frame 5 degrees clockwise"
+msgstr "Περιστρέψτε το πλαίσιο του αισθητήρα δεξιόστροφα 5 μοίρες"
+
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:339
+msgid "Rotate the sensor frame 15 degrees clockwise"
+msgstr "Περιστρέψτε το πλαίσιο του αισθητήρα δεξιόστροφα 15 μοίρες"
+
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:543
+msgid "Effective focal length of the ocular"
+msgstr ""
+
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:554
+msgid "Apparent field of view of the ocular"
+msgstr ""
+
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:587
+#, qt-format
+msgid "Multiplicity: %1"
+msgstr ""
+
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:592
+msgid "Lens: None"
+msgstr ""
+
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:593
+msgid "Multiplicity: N/A"
+msgstr ""
+
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:597
+msgid "Focal length of eyepiece"
+msgstr ""
+
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:691
+#, qt-format
+msgid "Rotation: %1"
+msgstr "Περιστροφή: %1"
+
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:801
+msgid "Magnification provided by these binoculars"
+msgstr ""
+
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:802
+msgid "Actual field of view provided by these binoculars"
+msgstr ""
+
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:810
+msgid "Magnification provided by this ocular/lens/telescope combination"
+msgstr ""
+
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:811
+msgid ""
+"Actual field of view provided by this ocular/lens/telescope combination"
+msgstr ""
+
+#: plugins/Oculars/src/gui/OcularDialog.cpp:483
+msgid "Oculars Plug-in"
+msgstr ""
+
+#: plugins/Oculars/src/gui/OcularDialog.cpp:486
+msgid "Barlow lens feature"
+msgstr ""
+
+#: plugins/Oculars/src/gui/OcularDialog.cpp:490
+msgid "Overview"
+msgstr "Επισκόπηση"
+
+#: plugins/Oculars/src/gui/OcularDialog.cpp:492
+msgid ""
+"This plugin is intended to simulate what you would see through an eyepiece.  "
+"This configuration dialog can be used to add, modify, or delete eyepieces "
+"and telescopes, as well as CCD Sensors.  Your first time running the app "
+"will populate some samples to get your started."
+msgstr ""
+
+#: plugins/Oculars/src/gui/OcularDialog.cpp:493
+msgid ""
+"You can choose to scale the image you see on the screen.  This is intended "
+"to show you a better comparison of what one eyepiece/telescope combination "
+"will be like as compared to another.  The same eyepiece in two different "
+"telescopes of differing focal length will produce two different exit "
+"circles, changing the view someone.  The trade-off of this is that, with the "
+"image scaled, a good deal of the screen can be wasted.  Therefore I "
+"recommend that you leave it off, unless you feel you have a need of it."
+msgstr ""
+
+#: plugins/Oculars/src/gui/OcularDialog.cpp:494
+msgid ""
+"You can toggle a crosshair in the view.  Ideally, I wanted this to be "
+"aligned to North.  I've been unable to do so.  So currently it aligns to the "
+"top of the screen."
+msgstr ""
+
+#: plugins/Oculars/src/gui/OcularDialog.cpp:495
+#, qt-format
+msgid ""
+"You can toggle a Telrad finder; this can only be done when you have not "
+"turned on the Ocular view.  This feature draws three concentric circles of "
+"0.5%1, 2.0%1, and 4.0%1, helping you see what you would expect to see with "
+"the naked eye through the Telrad (or similar) finder."
+msgstr ""
+
+#: plugins/Oculars/src/gui/OcularDialog.cpp:496
+msgid "If you find any issues, please let me know.  Enjoy!"
+msgstr ""
+
+#: plugins/Oculars/src/gui/OcularDialog.cpp:499
+msgid "Hot Keys"
+msgstr ""
+
+#: plugins/Oculars/src/gui/OcularDialog.cpp:500
+msgid "The plug-in's key bindings can be edited in the General Tab."
+msgstr ""
+
+#: plugins/Oculars/src/gui/OcularDialog.cpp:514
+#: plugins/Oculars/src/gui/OcularDialog.cpp:519
+msgid "[no key defined]"
+msgstr ""
+
+#: plugins/Oculars/src/gui/OcularDialog.cpp:523
+msgid "Switches on/off the ocular overlay."
+msgstr ""
+
+#: plugins/Oculars/src/gui/OcularDialog.cpp:527
+msgid "Opens the pop-up navigation menu."
+msgstr ""
+
+#: plugins/Oculars/src/ui_ocularDialog.h:1053
+msgid "Enable only if an object is selected"
+msgstr ""
+
+#: plugins/Oculars/src/ui_ocularDialog.h:1054
+msgid "Scale image circle"
+msgstr ""
+
+#: plugins/Oculars/src/ui_ocularDialog.h:1056
+msgid "Apply limits stellar magnitude for different apertures of telescopes"
+msgstr ""
+
+#: plugins/Oculars/src/ui_ocularDialog.h:1058
+msgid "Limit stellar magnitude"
+msgstr ""
+
+#: plugins/Oculars/src/ui_ocularDialog.h:1059
+msgid "Key mappings"
+msgstr ""
+
+#: plugins/Oculars/src/ui_ocularDialog.h:1060
+msgid "Toggle ocular view:"
+msgstr ""
+
+#: plugins/Oculars/src/ui_ocularDialog.h:1062
+msgid "Open pop-up navigation menu:"
+msgstr ""
+
+#: plugins/Oculars/src/ui_ocularDialog.h:1063
+msgid "Interface"
+msgstr "Διεπαφή"
+
+#: plugins/Oculars/src/ui_ocularDialog.h:1064
+msgid "On-screen control panel"
+msgstr ""
+
+#: plugins/Oculars/src/ui_ocularDialog.h:1065
+msgid "Use degrees and minutes for FOV of CCD"
+msgstr ""
+
+#: plugins/Oculars/src/ui_ocularDialog.h:1067
+msgid ""
+"Mark it if you want value of FOV is same like at the startup of Stellarium."
+msgstr ""
+
+#: plugins/Oculars/src/ui_ocularDialog.h:1069
+msgid "Restore FOV to initial values"
+msgstr ""
+
+#: plugins/Oculars/src/ui_ocularDialog.h:1070
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:220
+msgid "General"
+msgstr "Γενικός"
+
+#: plugins/Oculars/src/ui_ocularDialog.h:1071
+#: plugins/Oculars/src/ui_ocularDialog.h:1079
+msgid "Eyepieces"
+msgstr ""
+
+#: plugins/Oculars/src/ui_ocularDialog.h:1072
+#: plugins/Oculars/src/ui_ocularDialog.h:1081
+#: plugins/Oculars/src/ui_ocularDialog.h:1088
+#: plugins/Oculars/src/ui_ocularDialog.h:1099
+#: plugins/Satellites/src/ui_satellitesImportDialog.h:219
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:402
+msgid "Add"
+msgstr "Πρόσθεση"
+
+#: plugins/Oculars/src/ui_ocularDialog.h:1074
+#: plugins/Oculars/src/ui_ocularDialog.h:1083
+#: plugins/Oculars/src/ui_ocularDialog.h:1090
+#: plugins/Oculars/src/ui_ocularDialog.h:1101
+#: plugins/Satellites/src/ui_satellitesDialog.h:731
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:483
+msgid "Name:"
+msgstr "Όνομα :"
+
+#: plugins/Oculars/src/ui_ocularDialog.h:1075
+msgid "aFOV:"
+msgstr ""
+
+#: plugins/Oculars/src/ui_ocularDialog.h:1076
+#: plugins/Oculars/src/ui_ocularDialog.h:1102
+msgid "Focal length:"
+msgstr "Εστιακή απόσταση:"
+
+#: plugins/Oculars/src/ui_ocularDialog.h:1077
+msgid "Field stop:"
+msgstr ""
+
+#: plugins/Oculars/src/ui_ocularDialog.h:1078
+msgid "Binoculars"
+msgstr ""
+
+#: plugins/Oculars/src/ui_ocularDialog.h:1080
+#: plugins/Oculars/src/ui_ocularDialog.h:1086
+msgid "Lenses"
+msgstr ""
+
+#: plugins/Oculars/src/ui_ocularDialog.h:1084
+msgid "Multiplier:"
+msgstr ""
+
+#: plugins/Oculars/src/ui_ocularDialog.h:1085
+msgid ""
+"Values of multiplicity >1 expand the focal length (Barlow lens). Values of "
+"multiplicity <1 reduce the focal length (Shapley lens)."
+msgstr ""
+
+#: plugins/Oculars/src/ui_ocularDialog.h:1087
+#: plugins/Oculars/src/ui_ocularDialog.h:1097
+msgid "Sensors"
+msgstr "Ανιχνευτές"
+
+#: plugins/Oculars/src/ui_ocularDialog.h:1091
+msgid "Resolution x (pixels):"
+msgstr "Οριζόντια Ανάλυση (pixels):"
+
+#: plugins/Oculars/src/ui_ocularDialog.h:1092
+msgid "Resolution y (pixels):"
+msgstr "Κατακόρυφη Ανάλυση (pixels):"
+
+#: plugins/Oculars/src/ui_ocularDialog.h:1093
+msgid "Chip width (mm):"
+msgstr ""
+
+#: plugins/Oculars/src/ui_ocularDialog.h:1094
+msgid "Chip height (mm):"
+msgstr ""
+
+#: plugins/Oculars/src/ui_ocularDialog.h:1095
+msgid "Pixel width (micron):"
+msgstr ""
+
+#: plugins/Oculars/src/ui_ocularDialog.h:1096
+msgid "Pixel height (micron):"
+msgstr ""
+
+#: plugins/Oculars/src/ui_ocularDialog.h:1098
+#: plugins/Oculars/src/ui_ocularDialog.h:1106
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:391
+#: plugins/TelescopeControl/src/ui_telescopeDialog.h:407
+msgid "Telescopes"
+msgstr ""
+
+#: plugins/Oculars/src/ui_ocularDialog.h:1103
+msgid "Diameter:"
+msgstr "Διάμετρος:"
+
+#: plugins/Oculars/src/ui_ocularDialog.h:1104
+msgid "Horizontal flip"
+msgstr ""
+
+#: plugins/Oculars/src/ui_ocularDialog.h:1105
+msgid "Vertical flip"
+msgstr ""
+
+#: plugins/Satellites/src/Satellites.cpp:67
+#: plugins/Satellites/src/Satellites.cpp:144
 #: plugins/Satellites/src/ui_satellitesDialog.h:748
 msgid "Satellites"
 msgstr "Δορυφόροι"
 
-#: plugins/Satellites/src/Satellites.cpp:69
+#: plugins/Satellites/src/Satellites.cpp:70
 msgid ""
 "Prediction of artificial satellite positions in Earth orbit based on NORAD "
 "TLE data"
@@ -5219,19 +5536,19 @@ msgstr ""
 "Πρόβλεψη θέσης τεχνιτών δορυφόρων σε τροχιά γύρω από την Γη βασισμένο στα "
 "δεδομένα του NORAD TLE"
 
-#: plugins/Satellites/src/Satellites.cpp:144
+#: plugins/Satellites/src/Satellites.cpp:145
 msgid "Satellite hints"
 msgstr "Υποδείξεις δορυφόρων"
 
-#: plugins/Satellites/src/Satellites.cpp:145
+#: plugins/Satellites/src/Satellites.cpp:146
 msgid "Satellite labels"
 msgstr "Ετικέτες δορυφόρων"
 
-#: plugins/Satellites/src/Satellites.cpp:146
+#: plugins/Satellites/src/Satellites.cpp:147
 msgid "Satellites configuration window"
 msgstr "Παράθυρο διαμόρφωσης δορυφόρων"
 
-#: plugins/Satellites/src/Satellites.cpp:173
+#: plugins/Satellites/src/Satellites.cpp:174
 msgid ""
 "The old satellites.json file is no longer compatible - using default file"
 msgstr ""
@@ -5239,62 +5556,62 @@ msgstr ""
 "ορισμού αρχείου"
 
 #. TRANSLATORS: Satellite group: Bright/naked-eye-visible satellites
-#: plugins/Satellites/src/Satellites.cpp:1657
+#: plugins/Satellites/src/Satellites.cpp:1671
 msgid "visual"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Scientific satellites
-#: plugins/Satellites/src/Satellites.cpp:1659
+#: plugins/Satellites/src/Satellites.cpp:1673
 msgid "scientific"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Communication satellites
-#: plugins/Satellites/src/Satellites.cpp:1661
+#: plugins/Satellites/src/Satellites.cpp:1675
 msgid "communications"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Navigation satellites
-#: plugins/Satellites/src/Satellites.cpp:1663
+#: plugins/Satellites/src/Satellites.cpp:1677
 msgid "navigation"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Amateur radio (ham) satellites
-#: plugins/Satellites/src/Satellites.cpp:1665
+#: plugins/Satellites/src/Satellites.cpp:1679
 msgid "amateur"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Weather (meteorological) satellites
-#: plugins/Satellites/src/Satellites.cpp:1667
+#: plugins/Satellites/src/Satellites.cpp:1681
 msgid "weather"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites in geostationary orbit
-#: plugins/Satellites/src/Satellites.cpp:1669
+#: plugins/Satellites/src/Satellites.cpp:1683
 msgid "geostationary"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites that are no longer functioning
-#: plugins/Satellites/src/Satellites.cpp:1671
+#: plugins/Satellites/src/Satellites.cpp:1685
 msgid "non-operational"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GPS constellation (the Global Positioning System)
-#: plugins/Satellites/src/Satellites.cpp:1673
+#: plugins/Satellites/src/Satellites.cpp:1687
 msgid "gps"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Iridium constellation (Iridium is a proper name)
-#: plugins/Satellites/src/Satellites.cpp:1675
+#: plugins/Satellites/src/Satellites.cpp:1689
 msgid "iridium"
 msgstr ""
 
 #. TRANSLATORS: Satellite description. "Hubble" is a person's name.
-#: plugins/Satellites/src/Satellites.cpp:1686
+#: plugins/Satellites/src/Satellites.cpp:1700
 msgid "The Hubble Space Telescope"
 msgstr ""
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:1688
+#: plugins/Satellites/src/Satellites.cpp:1702
 msgid "The International Space Station"
 msgstr ""
 
@@ -5480,61 +5797,6 @@ msgstr ""
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:418
 #, qt-format
 msgid "See %1this document%2 for details."
-msgstr ""
-
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:420
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:127
-#: plugins/Novae/src/gui/NovaeDialog.cpp:124
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:124
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:140
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:129
-msgid "Links"
-msgstr "Σύνδεσμοι"
-
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:421
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:128
-#: plugins/Novae/src/gui/NovaeDialog.cpp:125
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:125
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:141
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:130
-#, qt-format
-msgid ""
-"Support is provided via the Launchpad website.  Be sure to put \"%1\" in the "
-"subject when posting."
-msgstr ""
-
-#. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:424
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:131
-#: plugins/Novae/src/gui/NovaeDialog.cpp:128
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:128
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:144
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:133
-#, qt-format
-msgid "If you have a question, you can %1get an answer here%2"
-msgstr ""
-
-#. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:426
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:133
-#: plugins/Novae/src/gui/NovaeDialog.cpp:130
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:130
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:146
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:135
-#, qt-format
-msgid "Bug reports can be made %1here%2."
-msgstr ""
-
-#. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:428
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:135
-#: plugins/Novae/src/gui/NovaeDialog.cpp:132
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:132
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:148
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:137
-msgid ""
-"If you would like to make a feature request, you can create a bug report, "
-"and set the severity to \"wishlist\"."
 msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:450
@@ -5778,36 +6040,6 @@ msgstr ""
 msgid "Realistic mode for the artificial satellites"
 msgstr ""
 
-#: plugins/Satellites/src/ui_satellitesDialog.h:714
-#: plugins/Supernovae/src/ui_supernovaeDialog.h:238
-#: plugins/Novae/src/ui_novaeDialog.h:241
-#: plugins/Quasars/src/ui_quasarsDialog.h:273
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:280
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:317
-#: plugins/Observability/src/ui_ObservabilityDialog.h:367
-msgid "Restore default settings"
-msgstr ""
-
-#: plugins/Satellites/src/ui_satellitesDialog.h:715
-#: plugins/Supernovae/src/ui_supernovaeDialog.h:239
-#: plugins/Novae/src/ui_novaeDialog.h:242
-#: plugins/Quasars/src/ui_quasarsDialog.h:274
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:281
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:318
-#: plugins/Observability/src/ui_ObservabilityDialog.h:368
-msgid "Save settings as default"
-msgstr ""
-
-#: plugins/Satellites/src/ui_satellitesDialog.h:716
-#: plugins/Supernovae/src/ui_supernovaeDialog.h:240
-#: plugins/Novae/src/ui_novaeDialog.h:243
-#: plugins/Quasars/src/ui_quasarsDialog.h:275
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:282
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:319
-#: plugins/Observability/src/ui_ObservabilityDialog.h:377
-msgid "Settings"
-msgstr "Ρυθμίσεις"
-
 #: plugins/Satellites/src/ui_satellitesDialog.h:718
 msgid "Double-click a satellite to start tracking it."
 msgstr ""
@@ -5992,7 +6224,8 @@ msgstr ""
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:239
 #: plugins/TimeZoneConfiguration/src/gui/TimeZoneConfigurationWindow.cpp:105
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:97
-#: plugins/FOV/src/gui/FOVWindow.cpp:80
+#: plugins/FOV/src/gui/FOVWindow.cpp:78
+#: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:80
 #, qt-format
 msgid "Version %1"
 msgstr "Έκδοση %1"
@@ -6331,62 +6564,62 @@ msgstr ""
 "και αλλάζει τον τρόπο που εμφανίζεται η ώρα και η ημερομηνία στην κάτω μπάρα"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:242
-#: plugins/Supernovae/src/Supernovae.cpp:708 plugins/Novae/src/Novae.cpp:705
+#: plugins/Supernovae/src/Supernovae.cpp:710 plugins/Novae/src/Novae.cpp:707
 msgid "January"
 msgstr "Ιανουάριος"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:243
-#: plugins/Supernovae/src/Supernovae.cpp:708 plugins/Novae/src/Novae.cpp:705
+#: plugins/Supernovae/src/Supernovae.cpp:710 plugins/Novae/src/Novae.cpp:707
 msgid "February"
 msgstr "Φεβρουάριος"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:244
-#: plugins/Supernovae/src/Supernovae.cpp:708 plugins/Novae/src/Novae.cpp:705
+#: plugins/Supernovae/src/Supernovae.cpp:710 plugins/Novae/src/Novae.cpp:707
 msgid "March"
 msgstr "Μάρτιος"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:245
-#: plugins/Supernovae/src/Supernovae.cpp:708 plugins/Novae/src/Novae.cpp:705
+#: plugins/Supernovae/src/Supernovae.cpp:710 plugins/Novae/src/Novae.cpp:707
 msgid "April"
 msgstr "Απρίλιος"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:246
-#: plugins/Supernovae/src/Supernovae.cpp:708 plugins/Novae/src/Novae.cpp:705
+#: plugins/Supernovae/src/Supernovae.cpp:710 plugins/Novae/src/Novae.cpp:707
 msgid "May"
 msgstr "Μάϊος"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:247
-#: plugins/Supernovae/src/Supernovae.cpp:708 plugins/Novae/src/Novae.cpp:705
+#: plugins/Supernovae/src/Supernovae.cpp:710 plugins/Novae/src/Novae.cpp:707
 msgid "June"
 msgstr "Ιούνιος"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:248
-#: plugins/Supernovae/src/Supernovae.cpp:708 plugins/Novae/src/Novae.cpp:705
+#: plugins/Supernovae/src/Supernovae.cpp:710 plugins/Novae/src/Novae.cpp:707
 msgid "July"
 msgstr "Ιούλιος"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:249
-#: plugins/Supernovae/src/Supernovae.cpp:708 plugins/Novae/src/Novae.cpp:705
+#: plugins/Supernovae/src/Supernovae.cpp:710 plugins/Novae/src/Novae.cpp:707
 msgid "August"
 msgstr "Αύγουστος"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:250
-#: plugins/Supernovae/src/Supernovae.cpp:708 plugins/Novae/src/Novae.cpp:705
+#: plugins/Supernovae/src/Supernovae.cpp:710 plugins/Novae/src/Novae.cpp:707
 msgid "September"
 msgstr "Σεπτέμβριος"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:251
-#: plugins/Supernovae/src/Supernovae.cpp:708 plugins/Novae/src/Novae.cpp:705
+#: plugins/Supernovae/src/Supernovae.cpp:710 plugins/Novae/src/Novae.cpp:707
 msgid "October"
 msgstr "Οκτώβριος"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:252
-#: plugins/Supernovae/src/Supernovae.cpp:708 plugins/Novae/src/Novae.cpp:705
+#: plugins/Supernovae/src/Supernovae.cpp:710 plugins/Novae/src/Novae.cpp:707
 msgid "November"
 msgstr "Νοέμβριος"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:253
-#: plugins/Supernovae/src/Supernovae.cpp:708 plugins/Novae/src/Novae.cpp:705
+#: plugins/Supernovae/src/Supernovae.cpp:710 plugins/Novae/src/Novae.cpp:707
 msgid "December"
 msgstr "Δεκέμβριος"
 
@@ -6957,16 +7190,16 @@ msgstr ""
 msgid "Historical Supernovae configuration window"
 msgstr ""
 
-#: plugins/Supernovae/src/Supernova.cpp:117
+#: plugins/Supernovae/src/Supernova.cpp:122
 msgid "supernova"
 msgstr ""
 
-#: plugins/Supernovae/src/Supernova.cpp:133
+#: plugins/Supernovae/src/Supernova.cpp:137
 #, qt-format
 msgid "Type of supernova: %1"
 msgstr ""
 
-#: plugins/Supernovae/src/Supernova.cpp:134 plugins/Novae/src/Nova.cpp:136
+#: plugins/Supernovae/src/Supernova.cpp:138 plugins/Novae/src/Nova.cpp:138
 #, qt-format
 msgid "Maximum brightness: %1"
 msgstr ""
@@ -7086,24 +7319,24 @@ msgstr ""
 msgid "[next update info]"
 msgstr ""
 
-#: plugins/Novae/src/Novae.cpp:72 plugins/Novae/src/Novae.cpp:136
+#: plugins/Novae/src/Novae.cpp:74 plugins/Novae/src/Novae.cpp:138
 msgid "Bright Novae"
 msgstr ""
 
-#: plugins/Novae/src/Novae.cpp:75 plugins/Novae/src/gui/NovaeDialog.cpp:111
+#: plugins/Novae/src/Novae.cpp:77 plugins/Novae/src/gui/NovaeDialog.cpp:111
 msgid "A plugin that shows some bright novae in the Milky Way galaxy."
 msgstr ""
 
-#: plugins/Novae/src/Novae.cpp:136
+#: plugins/Novae/src/Novae.cpp:138
 msgid "Bright Novae configuration window"
 msgstr ""
 
-#: plugins/Novae/src/Nova.cpp:120 plugins/Pulsars/src/Pulsar.cpp:148
+#: plugins/Novae/src/Nova.cpp:122 plugins/Pulsars/src/Pulsar.cpp:150
 #, qt-format
 msgid "Type: <b>%1</b> (%2)"
 msgstr ""
 
-#: plugins/Novae/src/Nova.cpp:120
+#: plugins/Novae/src/Nova.cpp:122
 msgid "nova"
 msgstr ""
 
@@ -7118,7 +7351,7 @@ msgid ""
 msgstr ""
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:114
-msgid "This plugin allows you to see next bright novae: "
+msgid "This plugin allows you to see recent bright novae: "
 msgstr ""
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:117
@@ -7165,31 +7398,31 @@ msgstr ""
 msgid "Bright Novae Plug-in Configuration"
 msgstr ""
 
-#: plugins/Quasars/src/Quasars.cpp:71 plugins/Quasars/src/Quasars.cpp:158
-#: plugins/Quasars/src/Quasars.cpp:159
+#: plugins/Quasars/src/Quasars.cpp:73 plugins/Quasars/src/Quasars.cpp:160
+#: plugins/Quasars/src/Quasars.cpp:161
 msgid "Quasars"
 msgstr ""
 
-#: plugins/Quasars/src/Quasars.cpp:74
+#: plugins/Quasars/src/Quasars.cpp:76
 msgid ""
 "A plugin that shows some quasars brighter than 16 visual magnitude. A "
 "catalogue of quasars compiled from 'Quasars and Active Galactic Nuclei' "
 "(13th Ed.) (Veron+ 2010) =2010A&A...518A..10V"
 msgstr ""
 
-#: plugins/Quasars/src/Quasars.cpp:158
+#: plugins/Quasars/src/Quasars.cpp:160
 msgid "Show quasars"
 msgstr ""
 
-#: plugins/Quasars/src/Quasars.cpp:159
+#: plugins/Quasars/src/Quasars.cpp:161
 msgid "Quasars configuration window"
 msgstr ""
 
-#: plugins/Quasars/src/Quasar.cpp:91
+#: plugins/Quasars/src/Quasar.cpp:93
 msgid "quasar"
 msgstr ""
 
-#: plugins/Quasars/src/Quasar.cpp:122
+#: plugins/Quasars/src/Quasar.cpp:124
 #, qt-format
 msgid "Z (redshift): %1"
 msgstr ""
@@ -7249,6 +7482,7 @@ msgstr ""
 #: plugins/Quasars/src/ui_quasarsDialog.h:271
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:277
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:315
+#: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:271
 msgid "Enable display at startup"
 msgstr ""
 
@@ -7256,149 +7490,149 @@ msgstr ""
 msgid "Show quasars button on toolbar"
 msgstr ""
 
-#: plugins/Pulsars/src/Pulsars.cpp:71 plugins/Pulsars/src/Pulsars.cpp:158
-#: plugins/Pulsars/src/Pulsars.cpp:159
+#: plugins/Pulsars/src/Pulsars.cpp:73 plugins/Pulsars/src/Pulsars.cpp:160
+#: plugins/Pulsars/src/Pulsars.cpp:161
 msgid "Pulsars"
 msgstr ""
 
-#: plugins/Pulsars/src/Pulsars.cpp:74
+#: plugins/Pulsars/src/Pulsars.cpp:76
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:120
 msgid ""
 "This plugin plots the position of various pulsars, with object information "
 "about each one."
 msgstr ""
 
-#: plugins/Pulsars/src/Pulsars.cpp:158
+#: plugins/Pulsars/src/Pulsars.cpp:160
 msgid "Show pulsars"
 msgstr ""
 
-#: plugins/Pulsars/src/Pulsars.cpp:159
+#: plugins/Pulsars/src/Pulsars.cpp:161
 msgid "Pulsars configuration window"
 msgstr "Παράθυρο ρύθμισης πάλσαρ"
 
-#: plugins/Pulsars/src/Pulsar.cpp:137
+#: plugins/Pulsars/src/Pulsar.cpp:139
 msgid "pulsar"
 msgstr ""
 
-#: plugins/Pulsars/src/Pulsar.cpp:142
+#: plugins/Pulsars/src/Pulsar.cpp:144
 msgid "has one registered glitch"
 msgstr ""
 
 #. TRANSLATORS: Full phrase is "Has X registered glitches", where X is number
-#: plugins/Pulsars/src/Pulsar.cpp:146
+#: plugins/Pulsars/src/Pulsar.cpp:148
 #, qt-format
 msgid "has %1 registered glitches"
 msgstr ""
 
-#: plugins/Pulsars/src/Pulsar.cpp:148
+#: plugins/Pulsars/src/Pulsar.cpp:150
 msgid "pulsar with glitches"
 msgstr ""
 
 #. TRANSLATORS: Unit of measure for period - seconds
-#: plugins/Pulsars/src/Pulsar.cpp:160
+#: plugins/Pulsars/src/Pulsar.cpp:162
 #, qt-format
 msgid "Barycentric period: %1 s"
 msgstr ""
 
-#: plugins/Pulsars/src/Pulsar.cpp:164
+#: plugins/Pulsars/src/Pulsar.cpp:166
 #, qt-format
 msgid "Time derivative of barycentric period: %1"
 msgstr ""
 
-#: plugins/Pulsars/src/Pulsar.cpp:169
+#: plugins/Pulsars/src/Pulsar.cpp:171
 msgid "Dispersion measure:"
 msgstr ""
 
 #. TRANSLATORS: Unit of measure for distance - centimeters
-#: plugins/Pulsars/src/Pulsar.cpp:172
+#: plugins/Pulsars/src/Pulsar.cpp:174
 msgid "cm"
 msgstr ""
 
 #. TRANSLATORS: Unit of measure for distance - parsecs
-#: plugins/Pulsars/src/Pulsar.cpp:175
+#: plugins/Pulsars/src/Pulsar.cpp:177
 msgid "pc"
 msgstr ""
 
-#: plugins/Pulsars/src/Pulsar.cpp:181
+#: plugins/Pulsars/src/Pulsar.cpp:183
 #, qt-format
 msgid "Spin down energy loss rate: %1 ergs/s"
 msgstr ""
 
-#: plugins/Pulsars/src/Pulsar.cpp:185
+#: plugins/Pulsars/src/Pulsar.cpp:187
 #, qt-format
 msgid "Binary period of pulsar: %1 days"
 msgstr ""
 
-#: plugins/Pulsars/src/Pulsar.cpp:189
+#: plugins/Pulsars/src/Pulsar.cpp:191
 #, qt-format
 msgid "Eccentricity: %1"
 msgstr ""
 
 #. TRANSLATORS: Unit of measure for annual parallax - milliarcseconds
-#: plugins/Pulsars/src/Pulsar.cpp:194
+#: plugins/Pulsars/src/Pulsar.cpp:196
 #, qt-format
 msgid "Annual parallax: %1 mas"
 msgstr ""
 
-#: plugins/Pulsars/src/Pulsar.cpp:198
+#: plugins/Pulsars/src/Pulsar.cpp:200
 #, qt-format
 msgid "Distance based on electron density model: %1 kpc (%2 ly)"
 msgstr ""
 
-#: plugins/Pulsars/src/Pulsar.cpp:202
+#: plugins/Pulsars/src/Pulsar.cpp:204
 #, qt-format
 msgid "Profile width at 50% of peak: %1 ms"
 msgstr ""
 
 #. TRANSLATORS: Full phrase is "Time averaged flux density at XXXMHz"
-#: plugins/Pulsars/src/Pulsar.cpp:208 plugins/Pulsars/src/Pulsar.cpp:220
-#: plugins/Pulsars/src/Pulsar.cpp:232
+#: plugins/Pulsars/src/Pulsar.cpp:210 plugins/Pulsars/src/Pulsar.cpp:222
+#: plugins/Pulsars/src/Pulsar.cpp:234
 msgid "Time averaged flux density at"
 msgstr ""
 
 #. TRANSLATORS: Unit of measurement of frequency
-#: plugins/Pulsars/src/Pulsar.cpp:211 plugins/Pulsars/src/Pulsar.cpp:223
-#: plugins/Pulsars/src/Pulsar.cpp:235
+#: plugins/Pulsars/src/Pulsar.cpp:213 plugins/Pulsars/src/Pulsar.cpp:225
+#: plugins/Pulsars/src/Pulsar.cpp:237
 msgid "MHz"
 msgstr ""
 
 #. TRANSLATORS: mJy is milliJansky(10-26W/m2/Hz)
-#: plugins/Pulsars/src/Pulsar.cpp:214 plugins/Pulsars/src/Pulsar.cpp:226
-#: plugins/Pulsars/src/Pulsar.cpp:238
+#: plugins/Pulsars/src/Pulsar.cpp:216 plugins/Pulsars/src/Pulsar.cpp:228
+#: plugins/Pulsars/src/Pulsar.cpp:240
 msgid "mJy"
 msgstr ""
 
-#: plugins/Pulsars/src/Pulsar.cpp:242
+#: plugins/Pulsars/src/Pulsar.cpp:244
 #, qt-format
 msgid "Notes: %1"
 msgstr ""
 
-#: plugins/Pulsars/src/Pulsar.cpp:309
+#: plugins/Pulsars/src/Pulsar.cpp:311
 msgid ""
 "anomalous X-ray pulsar or soft gamma-ray repeater with detected pulsations"
 msgstr ""
 
-#: plugins/Pulsars/src/Pulsar.cpp:314
+#: plugins/Pulsars/src/Pulsar.cpp:316
 msgid "has one or more binary companions"
 msgstr ""
 
-#: plugins/Pulsars/src/Pulsar.cpp:319
+#: plugins/Pulsars/src/Pulsar.cpp:321
 msgid "with pulsed emission from radio to infrared or higher frequencies"
 msgstr ""
 
-#: plugins/Pulsars/src/Pulsar.cpp:324
+#: plugins/Pulsars/src/Pulsar.cpp:326
 msgid "with pulsed emission only at infrared or higher frequencies"
 msgstr ""
 
-#: plugins/Pulsars/src/Pulsar.cpp:329
+#: plugins/Pulsars/src/Pulsar.cpp:331
 msgid "with pulsed emission in the radio band"
 msgstr ""
 
-#: plugins/Pulsars/src/Pulsar.cpp:334
+#: plugins/Pulsars/src/Pulsar.cpp:336
 msgid "with intermittently pulsed radio emission"
 msgstr ""
 
-#: plugins/Pulsars/src/Pulsar.cpp:339
+#: plugins/Pulsars/src/Pulsar.cpp:341
 msgid ""
 "isolated neutron star with pulsed thermal X-ray emission but no detectable "
 "radio emission"
@@ -7457,10 +7691,6 @@ msgstr ""
 msgid "Pulsars is updated"
 msgstr ""
 
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:263
-msgid "Pulsars Configuration"
-msgstr ""
-
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:264
 msgid "Pulsars Plug-in Configuration"
 msgstr ""
@@ -7485,101 +7715,101 @@ msgstr ""
 msgid "Use separate color for pulsars with glitches"
 msgstr ""
 
-#: plugins/Exoplanets/src/Exoplanets.cpp:73
-#: plugins/Exoplanets/src/Exoplanets.cpp:162
-#: plugins/Exoplanets/src/Exoplanets.cpp:163
+#: plugins/Exoplanets/src/Exoplanets.cpp:75
+#: plugins/Exoplanets/src/Exoplanets.cpp:164
+#: plugins/Exoplanets/src/Exoplanets.cpp:165
 msgid "Exoplanets"
 msgstr ""
 
-#: plugins/Exoplanets/src/Exoplanets.cpp:76
+#: plugins/Exoplanets/src/Exoplanets.cpp:78
 msgid ""
 "This plugin plots the position of stars with exoplanets. Exoplanets data is "
 "derived from the 'Extrasolar Planets Encyclopaedia' at exoplanet.eu"
 msgstr ""
 
-#: plugins/Exoplanets/src/Exoplanets.cpp:162
+#: plugins/Exoplanets/src/Exoplanets.cpp:164
 msgid "Show exoplanets"
 msgstr "Εμφάνιση εξωπλανητών"
 
-#: plugins/Exoplanets/src/Exoplanets.cpp:163
+#: plugins/Exoplanets/src/Exoplanets.cpp:165
 msgid "Exoplanets configuration window"
 msgstr "Παράθυρο ρύθμισης εξωπλανητών"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:157
+#: plugins/Exoplanets/src/Exoplanet.cpp:163
 msgid "planetary system"
 msgstr ""
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:193
+#: plugins/Exoplanets/src/Exoplanet.cpp:199
 msgid "Metallicity"
 msgstr ""
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:197
-#: plugins/Exoplanets/src/Exoplanet.cpp:211
+#: plugins/Exoplanets/src/Exoplanet.cpp:203
+#: plugins/Exoplanets/src/Exoplanet.cpp:217
 msgid "Mass"
 msgstr ""
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:201
-#: plugins/Exoplanets/src/Exoplanet.cpp:212
+#: plugins/Exoplanets/src/Exoplanet.cpp:207
+#: plugins/Exoplanets/src/Exoplanet.cpp:218
 msgid "Radius"
 msgstr ""
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:205
+#: plugins/Exoplanets/src/Exoplanet.cpp:211
 #, qt-format
 msgid "Effective temperature: %1 K"
 msgstr ""
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:209
+#: plugins/Exoplanets/src/Exoplanet.cpp:215
 msgid "Exoplanet"
 msgstr ""
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:210
+#: plugins/Exoplanets/src/Exoplanet.cpp:216
 msgid "Period"
 msgstr ""
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:210
+#: plugins/Exoplanets/src/Exoplanet.cpp:216
 msgid "days"
 msgstr ""
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:211
-#: plugins/Exoplanets/src/Exoplanet.cpp:212
+#: plugins/Exoplanets/src/Exoplanet.cpp:217
+#: plugins/Exoplanets/src/Exoplanet.cpp:218
 msgid "Jup"
 msgstr ""
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:213
+#: plugins/Exoplanets/src/Exoplanet.cpp:219
 msgid "Semi-Major Axis"
 msgstr ""
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:213
+#: plugins/Exoplanets/src/Exoplanet.cpp:219
 msgid "AU"
 msgstr "AU"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:214
+#: plugins/Exoplanets/src/Exoplanet.cpp:220
 msgid "Eccentricity"
 msgstr ""
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:215
+#: plugins/Exoplanets/src/Exoplanet.cpp:221
 msgid "Inclination"
 msgstr ""
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:216
+#: plugins/Exoplanets/src/Exoplanet.cpp:222
 msgid "Angle Distance"
 msgstr ""
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:217
+#: plugins/Exoplanets/src/Exoplanet.cpp:223
 msgid "Discovered year"
 msgstr ""
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:218
+#: plugins/Exoplanets/src/Exoplanet.cpp:224
 msgid "Habitable class"
 msgstr ""
 
 #. TRANSLATORS: Full phrase is "Mean Surface Temperature"
-#: plugins/Exoplanets/src/Exoplanet.cpp:220
+#: plugins/Exoplanets/src/Exoplanet.cpp:226
 msgid "Mean surface temp."
 msgstr ""
 
 #. TRANSLATORS: ESI = Earth Similarity Index
-#: plugins/Exoplanets/src/Exoplanet.cpp:222
+#: plugins/Exoplanets/src/Exoplanet.cpp:228
 msgid "ESI"
 msgstr ""
 
@@ -7606,7 +7836,8 @@ msgstr ""
 #, qt-format
 msgid ""
 "The current catalog contains info about %1 planetary systems, which "
-"altogether have %2 exoplanets."
+"altogether have %2 exoplanets (including %3 potentially habitable "
+"exoplanets)."
 msgstr ""
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
@@ -7721,7 +7952,7 @@ msgid "The NASA Exoplanet Archive"
 msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:182
-msgid "IAU Comission 53: Extrasolar Planets"
+msgid "IAU Commission 53: Extrasolar Planets"
 msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:183
@@ -8194,8 +8425,8 @@ msgid "Sun altitude at twilight: 0 deg."
 msgstr ""
 
 #: plugins/FOV/src/FOV.cpp:40 plugins/FOV/src/FOV.cpp:78
-#: plugins/FOV/src/ui_fovWindow.h:382 plugins/FOV/src/ui_fovWindow.h:384
-#: plugins/FOV/src/ui_fovWindow.h:403
+#: plugins/FOV/src/ui_fovWindow.h:383 plugins/FOV/src/ui_fovWindow.h:385
+#: plugins/FOV/src/ui_fovWindow.h:404
 msgid "Field of View"
 msgstr ""
 
@@ -8210,17 +8441,17 @@ msgstr ""
 msgid "Set FOV to %1%2"
 msgstr ""
 
-#: plugins/FOV/src/gui/FOVWindow.cpp:79
+#: plugins/FOV/src/gui/FOVWindow.cpp:77
 msgid "Field of View plug-in"
 msgstr ""
 
-#: plugins/FOV/src/gui/FOVWindow.cpp:88
+#: plugins/FOV/src/ui_fovWindow.h:403
 msgid ""
 "By default Stellarium uses smooth zooming via mouse wheel or keyboard "
 "shortcuts. Some users want stepwise zooming to fixed values for field of "
-"view like in <em>{Cartes du Ciel}</em> planetarium, and this plugin provides "
-"this feature. You can edit values and use the keyboard for quick-setting of "
-"FOV. All values in degrees."
+"view like in Cartes du Ciel planetarium, and this plugin provides this "
+"feature. You can edit values and use the keyboard for quick-setting of FOV. "
+"All values in degrees."
 msgstr ""
 
 #: plugins/NavStars/src/NavStars.cpp:53 plugins/NavStars/src/NavStars.cpp:138
@@ -8235,6 +8466,68 @@ msgstr ""
 
 #: plugins/NavStars/src/NavStars.cpp:138
 msgid "Mark the navigational stars"
+msgstr ""
+
+#: plugins/EquationOfTime/src/EquationOfTime.cpp:55
+#: plugins/EquationOfTime/src/EquationOfTime.cpp:90
+#: plugins/EquationOfTime/src/EquationOfTime.cpp:249
+#: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:267
+#: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:269
+#: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:278
+msgid "Equation of Time"
+msgstr ""
+
+#: plugins/EquationOfTime/src/EquationOfTime.cpp:58
+msgid "This plugin shows the solution of the equation of time."
+msgstr ""
+
+#: plugins/EquationOfTime/src/EquationOfTime.cpp:90
+msgid "Show solution for Equation of Time"
+msgstr ""
+
+#. TRANSLATORS: minutes.
+#: plugins/EquationOfTime/src/EquationOfTime.cpp:251
+msgctxt "time"
+msgid "m"
+msgstr ""
+
+#. TRANSLATORS: seconds.
+#: plugins/EquationOfTime/src/EquationOfTime.cpp:253
+msgctxt "time"
+msgid "s"
+msgstr ""
+
+#: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:79
+msgid "Equation of Time plug-in"
+msgstr ""
+
+#: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:270
+msgid ""
+"The equation of time describes the discrepancy between two kinds of solar "
+"time. These are apparent solar time, which directly tracks the motion of the "
+"sun, and mean solar time, which tracks a fictitious \"mean\" sun with noons "
+"24 hours apart. There is no universally accepted definition of the sign of "
+"the equation of time. Some publications show it as positive when a sundial "
+"is ahead of a clock; others when the clock is ahead of the sundial. In the "
+"English-speaking world, the former usage is the more common, but is not "
+"always followed. Anyone who makes use of a published table or graph should "
+"first check its sign usage."
+msgstr ""
+
+#: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:272
+msgid "Show plug-ins button on toolbar"
+msgstr ""
+
+#: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:273
+msgid "Use minutes and seconds"
+msgstr ""
+
+#: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:274
+msgid "Change sign of equation"
+msgstr ""
+
+#: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:275
+msgid "Font size:"
 msgstr ""
 
 #~ msgid "Equatorial Grid"
@@ -8521,10 +8814,6 @@ msgstr ""
 #, qt-format
 #~ msgid "Ecliptic Geocentric (of date): %1/%2"
 #~ msgstr "Γεωκεντρική Εκλειπτική (ημερομηνίας): %1/%2"
-
-#, qt-format
-#~ msgid "Obliquity (of date): %1"
-#~ msgstr "Αξονική κλίση (ημερομηνίας): %1"
 
 #~ msgid "(geometric)"
 #~ msgstr "(γεωμετρική)"

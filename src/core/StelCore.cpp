@@ -53,6 +53,7 @@ const double StelCore::JD_SECOND=0.000011574074074074074074;
 const double StelCore::JD_MINUTE=0.00069444444444444444444;
 const double StelCore::JD_HOUR  =0.041666666666666666666;
 const double StelCore::JD_DAY   =1.;
+const double StelCore::ONE_OVER_JD_SECOND = 24 * 60 * 60;
 
 
 StelCore::StelCore() : movementMgr(NULL), geodesicGrid(NULL), currentProjectionType(ProjectionStereographic), position(NULL), timeSpeed(JD_SECOND), JDay(0.)
@@ -765,11 +766,13 @@ void StelCore::returnToHome()
 
 	StelMovementMgr* smmgr = getMovementMgr();
 	smmgr->setViewDirectionJ2000(altAzToJ2000(smmgr->getInitViewingDirection(), StelCore::RefractionOff));
+	smmgr->zoomTo(smmgr->getInitFov(), 1.);
 }
 
 void StelCore::setJDay(double JD)
 {
 	JDay=JD;
+	resetSync();
 }
 
 double StelCore::getJDay() const
@@ -780,6 +783,7 @@ double StelCore::getJDay() const
 void StelCore::setMJDay(double MJD)
 {
 	JDay=MJD+2400000.5;
+	resetSync();
 }
 
 double StelCore::getMJDay() const
@@ -799,7 +803,9 @@ void StelCore::setPresetSkyTime(double d)
 
 void StelCore::setTimeRate(double ts)
 {
-	timeSpeed=ts; emit timeRateChanged(timeSpeed);
+	timeSpeed=ts;
+	resetSync();
+	emit timeRateChanged(timeSpeed);
 }
 
 double StelCore::getTimeRate() const
@@ -1222,7 +1228,15 @@ bool StelCore::getRealTimeSpeed() const
 // Increment time
 void StelCore::updateTime(double deltaTime)
 {
-	JDay+=timeSpeed*deltaTime;
+	if (getRealTimeSpeed())
+	{
+		// Get rid of the error from the 1 /
+		JDay = JDayOfLastJDayUpdate + (StelApp::getTotalRunTime() - secondsOfLastJDayUpdate) / ONE_OVER_JD_SECOND;
+	}
+	else
+	{
+		JDay = JDayOfLastJDayUpdate + (StelApp::getTotalRunTime() - secondsOfLastJDayUpdate) * timeSpeed;
+	}
 
 	// Fix time limits to -100000 to +100000 to prevent bugs
 	if (JDay>38245309.499988) JDay = 38245309.499988;
@@ -1246,6 +1260,12 @@ void StelCore::updateTime(double deltaTime)
 	// Position of sun and all the satellites (ie planets)
 	SolarSystem* solsystem = (SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("SolarSystem");
 	solsystem->computePositions(getJDay(), position->getHomePlanet()->getHeliocentricEclipticPos());
+}
+
+void StelCore::resetSync()
+{
+	JDayOfLastJDayUpdate = getJDay();
+	secondsOfLastJDayUpdate = StelApp::getTotalRunTime();
 }
 
 void StelCore::setStartupTimeMode(const QString& s)

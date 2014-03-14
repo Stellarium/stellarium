@@ -1,11 +1,5 @@
 
-# Because 2.8.11 is not available yet on ubuntu, but we need it to fix some
-# bugs on windows.
-IF(WIN32)
-  CMAKE_MINIMUM_REQUIRED(VERSION 2.8.11)
-ELSE()
-  CMAKE_MINIMUM_REQUIRED(VERSION 2.8.10)
-ENDIF()
+CMAKE_MINIMUM_REQUIRED(VERSION 2.8.11)
 
 ########### Project name ###########
 PROJECT(Stellarium)
@@ -17,6 +11,8 @@ SET(PACKAGE stellarium)
 
 SET(PACKAGE_VERSION "${VERSION}")
 ADD_DEFINITIONS(-DPACKAGE_VERSION="${PACKAGE_VERSION}")
+
+SET(MINIMAL_QT_VERSION "5.1.0")
 
 # Use customized cmake macros
 SET(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
@@ -43,29 +39,47 @@ IF(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
   SET(APPLE 1)
 ENDIF()
 
-IF("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
- MESSAGE(STATUS "Found Clang ${CMAKE_CXX_COMPILER_VERSION}")
-ENDIF()
-
 IF(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_COMPILER_IS_GNUCC)
-  MESSAGE(STATUS "Found GCC ${CMAKE_CXX_COMPILER_VERSION}")
   # The stars structs rely on gnu gcc packing of bit-fields.
   SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -mno-ms-bitfields")
+  SET(GCC_VERSION "${CMAKE_CXX_COMPILER_VERSION}")
+ELSE()
+  SET(GCC_VERSION "0.0")
 ENDIF()
 
-IF(UNIX AND NOT WIN32)
- SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Wextra -Wno-unused-parameter")
- SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -Wno-unused-parameter")
+IF(WIN32)
+  IF(NOT MSVC)
+    SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -fexceptions -fident -mthreads")
+    SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wsign-promo -fexceptions -fident -mthreads")
+    SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -Wsign-promo -fexceptions -fident -mthreads -mwindows")    
+  # ELSE()
+    # GZ: GCC flags unknown: exception handling should be default in MSVC.
+    # it seems -fident does not exist any longer. -fno-ident is documented in gcc.
+    # -mthreads and -mwindows are MinGW specific.
+    # SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -fexceptions -fident -mthreads -mwindows")
+  ENDIF()
+ELSE()
+  SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Wextra -Wno-unused-parameter")
+  SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -Wno-unused-parameter -Wno-unused-result")
 ENDIF()
 
 IF("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
  SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Woverloaded-virtual -Wno-unused-private-field -Wno-uninitialized -Wno-tautological-constant-out-of-range-compare")
+ # The cosmetic fix for Clang 3.4
+ IF(${CMAKE_CXX_COMPILER_VERSION} VERSION_GREATER 3.3)
+  SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-unused-const-variable")
+ ENDIF()
 ENDIF()
 
 SET(OPTIMIZE_INTEL_ATOM 0 CACHE BOOL "Activate optimizations for atom processor.")
 IF(OPTIMIZE_INTEL_ATOM)
- SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -mtune=generic -msse -msse2 -msse3 -mfpmath=sse")
- SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -mtune=generic -msse -msse2 -msse3 -mfpmath=sse")
+ IF (MSVC)
+  SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} /arch:SSE2 ")
+  SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /arch:SSE2 ")
+ ELSE()
+  SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -mtune=generic -msse -msse2 -msse3 -mfpmath=sse")
+  SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -mtune=generic -msse -msse2 -msse3 -mfpmath=sse")
+ ENDIF()
 ENDIF()
 
 # FreeBSD-specific compiler flags
@@ -73,7 +87,7 @@ ENDIF()
 IF(${CMAKE_SYSTEM_NAME} STREQUAL "FreeBSD")
   # Use -pthread compilation option to properly link to threading library
   SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pthread")
-  IF(CMAKE_CXX_COMPILER_VERSION VERSION_GREATER 4.7)
+  IF(${GCC_VERSION} VERSION_GREATER 4.7)
     SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-unused-local-typedefs")
   ENDIF()
 ENDIF()
@@ -89,22 +103,6 @@ IF(APPLE)
  # We support only 64 bits MacOSX
  SET(CMAKE_OSX_ARCHITECTURES "x86_64")
 ENDIF()
-
-# Needed so that M_PI get defined,
-# and so that windows.h does not redefine min and max.
-ADD_DEFINITIONS(-D_USE_MATH_DEFINES -DNOMINMAX)
-
-########### Check functions ###########
-SET(CMAKE_REQUIRED_LIBRARIES "-lm")
-INCLUDE(CheckFunctionExists)
-SET(FUNCS pow10 trunc round)
-FOREACH(FUNC ${FUNCS})
-  STRING(TOUPPER ${FUNC} FUNC_UP)
-  CHECK_FUNCTION_EXISTS(${FUNC} HAS_${FUNC_UP})
-  IF(HAS_${FUNC_UP})
-     ADD_DEFINITIONS(-DHAS_${FUNC_UP})
-  ENDIF()
-ENDFOREACH()
 
 ########### Others ###########
 # Activate translation
@@ -160,8 +158,10 @@ ADD_PLUGIN(SimpleDrawLine 0)
 ADD_PLUGIN(AngleMeasure 1)
 ADD_PLUGIN(CompassMarks 1)
 ADD_PLUGIN(Exoplanets 1)
+ADD_PLUGIN(EquationOfTime 1)
 ADD_PLUGIN(FOV 1)
 ADD_PLUGIN(LogBook 0)
+ADD_PLUGIN(MeteorShowers 1)
 ADD_PLUGIN(NavStars 1)
 ADD_PLUGIN(Novae 1)
 ADD_PLUGIN(Observability 1)
@@ -173,6 +173,7 @@ ADD_PLUGIN(SolarSystemEditor 1)
 ADD_PLUGIN(Supernovae 1)
 ADD_PLUGIN(SVMT 0)
 ADD_PLUGIN(TextUserInterface 1)
+ADD_PLUGIN(TelescopeControl 1)
 ADD_PLUGIN(TimeZoneConfiguration 1)
 ADD_PLUGIN(VirGO 0)
 
@@ -208,13 +209,24 @@ ENDIF()
 ADD_CUSTOM_TARGET(AllStaticPlugins ALL)
 
 ########### Find packages ###########
-FIND_PACKAGE(Qt5Concurrent REQUIRED)
 FIND_PACKAGE(Qt5Core REQUIRED)
+GET_TARGET_PROPERTY(QMAKE_LOCATION Qt5::qmake LOCATION)
+IF(${Qt5Core_VERSION_STRING} VERSION_LESS MINIMAL_QT_VERSION)
+    MESSAGE(FATAL_ERROR "Found Qt5: ${QMAKE_LOCATION} (found unsuitable version \"${Qt5Core_VERSION_STRING}\", required is \"${MINIMAL_QT_VERSION}\")")
+ELSE()
+    MESSAGE(STATUS "Found Qt5: ${QMAKE_LOCATION} (found suitable version \"${Qt5Core_VERSION_STRING}\", required is \"${MINIMAL_QT_VERSION}\")")
+ENDIF()
+FIND_PACKAGE(Qt5Concurrent REQUIRED)
 FIND_PACKAGE(Qt5Declarative REQUIRED)
 FIND_PACKAGE(Qt5Gui REQUIRED)
 FIND_PACKAGE(Qt5Network REQUIRED)
 FIND_PACKAGE(Qt5OpenGL REQUIRED)
 FIND_PACKAGE(Qt5Widgets REQUIRED)
+IF(WIN32)
+    FIND_PACKAGE(Qt5Sql REQUIRED)
+    FIND_PACKAGE(Qt5XmlPatterns REQUIRED)
+ENDIF()
+
 
 # Tell CMake to run moc when necessary:
 set(CMAKE_AUTOMOC ON)
@@ -232,7 +244,11 @@ IF(ENABLE_SOUND)
     INCLUDE_DIRECTORIES(${Qt5Multimedia_INCLUDE_DIRS})
 ENDIF()
 
-FIND_PACKAGE(OpenGL REQUIRED)
+# I add this test because on Windows with angle we should not link
+# with OpenGL.  Maybe there is a better way to do that.
+IF("${Qt5Gui_OPENGL_LIBRARIES}" MATCHES "opengl")
+    FIND_PACKAGE(OpenGL REQUIRED)
+ENDIF()
 FIND_PACKAGE(ZLIB)
 
 FIND_PACKAGE(Qt5Test)
@@ -293,14 +309,31 @@ IF(WIN32)
     IF("${CMAKE_SIZEOF_VOID_P}" EQUAL "4")
         SET(ISS_ARCHITECTURE_SPECIFIC ";In the 64-bit only version, this line switches the installer to 64-bit mode.")
         SET(ISS_PACKAGE_PLATFORM "win32")
-        SET(ISS_ARCH_SPECIFIC_MINGW_LIBS "Source: \"${MINGW_BIN_DIRECTORY}/libstdc++*.dll\"; DestDir: \"{app}\";\nSource: \"${MINGW_BIN_DIRECTORY}/libgcc_s_dw2-1.dll\"; DestDir: \"{app}\";\nSource: \"${MINGW_BIN_DIRECTORY}/libwinpthread*.dll\"; DestDir: \"{app}\";")
+        IF(MSVC)
+          SET(REDIST "Source: \"${CMAKE_INSTALL_PREFIX}/bin/msvc*.dll\"; DestDir: \"{app}\";")
+        ELSE()
+          SET(REDIST "Source: \"${MINGW_BIN_DIRECTORY}/libstdc++*.dll\"; DestDir: \"{app}\";\nSource: \"${MINGW_BIN_DIRECTORY}/libgcc_s_dw2-1.dll\"; DestDir: \"{app}\";\nSource: \"${MINGW_BIN_DIRECTORY}/libwinpthread*.dll\"; DestDir: \"{app}\";")
+        ENDIF()
     ELSEIF("${CMAKE_SIZEOF_VOID_P}" EQUAL "8")
         SET(ISS_ARCHITECTURE_SPECIFIC ";Make the installer run only on win64:\nArchitecturesAllowed=x64\n;Switch to 64-bit install mode:\nArchitecturesInstallIn64BitMode=x64")
         SET(ISS_PACKAGE_PLATFORM "win64")
-        SET(ISS_ARCH_SPECIFIC_MINGW_LIBS "Source: \"${MINGW_BIN_DIRECTORY}/libstdc++*.dll\"; DestDir: \"{app}\";\nSource: \"${MINGW_BIN_DIRECTORY}/libwinpthread*.dll\"; DestDir: \"{app}\";\nSource: \"${MINGW_BIN_DIRECTORY}/libgcc_s_sjlj*.dll\"; DestDir: \"{app}\";")
+        IF(MSVC)
+          SET(REDIST "Source: \"${CMAKE_INSTALL_PREFIX}/bin/msvc*.dll\"; DestDir: \"{app}\";")
+        ELSE()
+          SET(REDIST "Source: \"${MINGW_BIN_DIRECTORY}/libstdc++*.dll\"; DestDir: \"{app}\";\nSource: \"${MINGW_BIN_DIRECTORY}/libwinpthread*.dll\"; DestDir: \"{app}\";\nSource: \"${MINGW_BIN_DIRECTORY}/libgcc_s_sjlj*.dll\"; DestDir: \"{app}\";")
+        ENDIF()
     ENDIF()
     SET(ISS_AUTOGENERATED_WARNING "Do not edit this file! It has been automatically generated by CMake. Your changes will be lost the next time CMake is run.")
-    # Try to guess the MinGW /bin directory...
+    IF(MSVC)
+        SET(ZLIB "; ZLIB already included...")
+    ELSE()
+        SET(ZLIB "Source: \"${ZLIB_INCLUDE_DIR}/../bin/zlib1.dll\"; DestDir: \"{app}\";")
+    ENDIF()
+    IF(GENERATE_STELMAINLIB)
+        SET(STELMAINLIB "Source: \"${CMAKE_INSTALL_PREFIX}/lib/libstelMain.dll\"; DestDir: \"{app}\";")
+    ELSE()
+        SET(STELMAINLIB "; StelMainLib don't used")
+    ENDIF()
     GET_TARGET_PROPERTY(QtConcurrent_location Qt5::Concurrent LOCATION)
     GET_TARGET_PROPERTY(QtCore_location Qt5::Core LOCATION)
     GET_TARGET_PROPERTY(QtGui_location Qt5::Gui LOCATION)
@@ -324,7 +357,12 @@ IF(WIN32)
         SET(ISS_QT_MULTIMEDIA "; QtMultimedia don't used")
     ENDIF()
     GET_FILENAME_COMPONENT(QT5_LIBS ${QtCore_location} PATH)
-    SET(ISS_ICU_LIBS "Source: \"${QT5_LIBS}/icu*.dll\"; DestDir: \"{app}\";")
+    IF(MSVC)
+        SET(ISS_ANGLE_LIBS "; ANGLE support (libEGL.dll, libGLESv2.dll and d3dcompiler_*.dll)\nSource: \"${QT5_LIBS}/libEGL.dll\"; DestDir: \"{app}\";\nSource: \"${QT5_LIBS}/libGLESv2.dll\"; DestDir: \"{app}\";\nSource: \"${QT5_LIBS}/d3dcompiler_*.dll\"; DestDir: \"{app}\";")
+    ELSE()
+        SET(ISS_ANGLE_LIBS "; ANGLE support doesn't exists for MinGW")
+    ENDIF()
+    SET(ISS_ICU_LIBS "; ICU support\nSource: \"${QT5_LIBS}/icu*.dll\"; DestDir: \"{app}\";")
     # Deploy related stuff
     SET(ISS_WINDOWS_PLUGIN "Source: \"${QT5_LIBS}/../plugins/platforms/qwindows.dll\"; DestDir: \"{app}/platforms/\";")
     SET(ISS_QML_DIR "Source: \"${QT5_LIBS}/../imports/Qt/labs/shaders/qmldir\"; DestDir: \"{app}/Qt/labs/shaders/\";")
@@ -343,6 +381,9 @@ IF(CMAKE_BUILD_TYPE STREQUAL "Release" OR CMAKE_BUILD_TYPE STREQUAL "RelWithDebI
     ADD_DEFINITIONS(-DQT_NO_DEBUG)
     ADD_DEFINITIONS(-DNDEBUG)
 ENDIF()
+
+CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/data/default_config.ini.cmake ${CMAKE_SOURCE_DIR}/data/default_config.ini @ONLY)
+CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/data/updates.json.cmake ${CMAKE_SOURCE_DIR}/data/updates.json @ONLY)
 
 ########### uninstall files ###############
 CONFIGURE_FILE(

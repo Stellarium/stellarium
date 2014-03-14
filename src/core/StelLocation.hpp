@@ -19,6 +19,8 @@
 #ifndef _STELLOCATION_HPP_
 #define _STELLOCATION_HPP_
 
+#include "config.h"
+
 #include <QString>
 
 //! @class StelLocation
@@ -74,6 +76,8 @@ public:
 
 	//! Used privately by the StelLocationMgr
 	bool isUserLocation;
+
+	static const int DEFAULT_BORTLE_SCALE_INDEX;
 };
 
 //! Serialize the passed StelLocation into a binary blob.

@@ -618,8 +618,17 @@
               <bold>false</bold>
              </font>
             </property>
+            <property name="toolTip">
+             <string>Show atmosphere</string>
+            </property>
             <property name="title">
              <string>Atmosphere</string>
+            </property>
+            <property name="flat">
+             <bool>true</bool>
+            </property>
+            <property name="checkable">
+             <bool>true</bool>
             </property>
             <layout class="QVBoxLayout" name="verticalLayout_3">
              <property name="leftMargin">
@@ -635,9 +644,12 @@
               <number>0</number>
              </property>
              <item>
-              <widget class="QCheckBox" name="showAtmosphereCheckBox">
+              <widget class="QCheckBox" name="useLocationDataCheckBox">
+               <property name="toolTip">
+                <string>Use light pollution data from locations database and ignore settings for light pollution below</string>
+               </property>
                <property name="text">
-                <string>Show atmosphere</string>
+                <string>Light pollution data from locations database</string>
                </property>
               </widget>
              </item>
@@ -1520,21 +1532,21 @@
                  <item>
                   <widget class="QCheckBox" name="showEquatorialJ2000GridCheckBox">
                    <property name="text">
-                    <string>Equatorial J2000 grid</string>
+                    <string>Equatorial grid (on J2000)</string>
                    </property>
                   </widget>
                  </item>
                  <item>
                   <widget class="QCheckBox" name="showEquatorialGridCheckBox">
                    <property name="text">
-                    <string>Equatorial grid</string>
+                    <string>Equatorial grid (on date)</string>
                    </property>
                   </widget>
                  </item>
                  <item>
                   <widget class="QCheckBox" name="showEclipticGridJ2000CheckBox">
                    <property name="text">
-                    <string>Ecliptic J2000 grid</string>
+                    <string>Ecliptic grid (on J2000)</string>
                    </property>
                   </widget>
                  </item>
@@ -2154,7 +2166,7 @@
   <tabstop>planetMarkerCheckBox</tabstop>
   <tabstop>planetOrbitCheckBox</tabstop>
   <tabstop>planetLightSpeedCheckBox</tabstop>
-  <tabstop>showAtmosphereCheckBox</tabstop>
+  <tabstop>useLocationDataCheckBox</tabstop>
   <tabstop>lightPollutionSpinBox</tabstop>
   <tabstop>starLabelCheckBox</tabstop>
   <tabstop>starsLabelsHorizontalSlider</tabstop>

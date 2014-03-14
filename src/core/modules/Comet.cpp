@@ -36,6 +36,10 @@
 #include <QRegExp>
 #include <QDebug>
 
+// for compute tail shape
+#define COMET_TAIL_SLICES 16 // segments around the perimeter
+#define COMET_TAIL_STACKS 16 // cuts along the rotational axis
+
 Comet::Comet(const QString& englishName,
 		 int flagLighting,
 		 double radius,
@@ -141,7 +145,7 @@ QString Comet::getInfoString(const StelCore *core, const InfoStringGroup &flags)
 		oss << "</h2>";
 	}
 
-	if (flags&Type)
+	if (flags&ObjectType)
 	{
 		if (pType.length()>0)
 			oss << q_("Type: <b>%1</b>").arg(q_(pType)) << "<br />";
@@ -297,11 +301,11 @@ void Comet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFont
 		float dustparameter=gasTailEndRadius*gasTailEndRadius*dustTailWidthFactor*dustTailWidthFactor/(2.0f*dustTailLengthFactor*tailFactors[1]);
 
 		// Find valid parameters to create paraboloid vertex arrays: dustTail, gasTail.
-		computeParabola(gasparameter, gasTailEndRadius, -0.5f*gasparameter, 16, 16, gastailVertexArr,  gastailTexCoordArr, gastailIndices);
+		computeParabola(gasparameter, gasTailEndRadius, -0.5f*gasparameter, gastailVertexArr,  gastailTexCoordArr, gastailIndices);
 		// This was for a rotated straight parabola:
-		//computeParabola(dustparameter, 2.0f*tailFactors[0], -0.5f*dustparameter,  16, 16, dusttailVertexArr, dusttailTexCoordArr, dusttailIndices);
+		//computeParabola(dustparameter, 2.0f*tailFactors[0], -0.5f*dustparameter, dusttailVertexArr, dusttailTexCoordArr, dusttailIndices);
 		// Now we make a skewed parabola. Skew factor 15 (last arg) ad-hoc/empirical. TBD later: Find physically correct solution.
-		computeParabola(dustparameter, dustTailWidthFactor*gasTailEndRadius, -0.5f*dustparameter,  16, 16, dusttailVertexArr, gastailTexCoordArr, gastailIndices, 25.0f*orbit->getVelocity().length());
+		computeParabola(dustparameter, dustTailWidthFactor*gasTailEndRadius, -0.5f*dustparameter, dusttailVertexArr, gastailTexCoordArr, gastailIndices, 25.0f*orbit->getVelocity().length());
 
 		// Note that we use a diameter larger than what the formula returns. A scale factor of 1.2 is ad-hoc/empirical (GZ), but may look better.
 		computeComa(1.0f*tailFactors[0]);
@@ -486,8 +490,8 @@ void Comet::computeComa(const float diameter)
 //! (Maybe slices must be an even number.)
 // Parabola equation: z=x²/2p.
 // xOffset for the dust tail, this may introduce a bend. Units are x per sqrt(z).
-void Comet::computeParabola(const float parameter, const float radius, const float zshift, const int slices, const int stacks,
-							QVector<double>& vertexArr, QVector<float>& texCoordArr, QVector<unsigned short> &indices, const float xOffset) {
+void Comet::computeParabola(const float parameter, const float radius, const float zshift,
+			    QVector<double>& vertexArr, QVector<float>& texCoordArr, QVector<unsigned short> &indices, const float xOffset) {
 	vertexArr.clear();
 	//texCoordArr.clear();
 	//indices.clear();
@@ -495,13 +499,13 @@ void Comet::computeParabola(const float parameter, const float radius, const flo
 	bool createTexcoords= texCoordArr.empty();
 	int i;
 	// The parabola has triangular faces with vertices on two circles that are rotated against each other. 
-	float xa[2*slices];
-	float ya[2*slices];
+	float xa[2*COMET_TAIL_SLICES];
+	float ya[2*COMET_TAIL_SLICES];
 	float x, y, z;
 	
 	// fill xa, ya with sin/cosines. TBD: make more efficient with index mirroring etc.
-	float da=M_PI/slices; // full circle/2slices
-	for (i=0; i<2*slices; ++i){
+	float da=M_PI/COMET_TAIL_SLICES; // full circle/2slices
+	for (i=0; i<2*COMET_TAIL_SLICES; ++i){
 		xa[i]=-sin(i*da);
 		ya[i]=cos(i*da);
 	}
@@ -512,12 +516,12 @@ void Comet::computeParabola(const float parameter, const float radius, const flo
 	// define the indices lying on circles, starting at 1: odd rings have 1/slices+1/2slices, even-numbered rings straight 1/slices
 	// inner ring#1
 	int ring;
-	for (ring=1; ring<=stacks; ++ring){
-		z=ring*radius/stacks; z=z*z/(2*parameter) + zshift;
+	for (ring=1; ring<=COMET_TAIL_STACKS; ++ring){
+		z=ring*radius/COMET_TAIL_STACKS; z=z*z/(2*parameter) + zshift;
 		float xShift= xOffset*z*z;
-		for (i=ring & 1; i<2*slices; i+=2) { // i.e., ring1 has shifted vertices, ring2 has even ones.
-			x=xa[i]*radius*ring/stacks ;
-			y=ya[i]*radius*ring/stacks;
+		for (i=ring & 1; i<2*COMET_TAIL_SLICES; i+=2) { // i.e., ring1 has shifted vertices, ring2 has even ones.
+			x=xa[i]*radius*ring/COMET_TAIL_STACKS;
+			y=ya[i]*radius*ring/COMET_TAIL_STACKS;
 			vertexArr << x+xShift << y << z;
 			if (createTexcoords) texCoordArr << 0.5+ 0.5*x/radius << 0.5+0.5*y/radius;
 		}
@@ -525,29 +529,29 @@ void Comet::computeParabola(const float parameter, const float radius, const flo
 	// now link the faces with indices. That's fun... ;-)
 	if (createIndices)
 	{
-		for (i=1; i<slices; ++i) indices << 0 << i << i+1;
-		indices << 0 << slices << 1; // close inner fan.
+		for (i=1; i<COMET_TAIL_SLICES; ++i) indices << 0 << i << i+1;
+		indices << 0 << COMET_TAIL_SLICES << 1; // close inner fan.
 		// The other slices are a repeating pattern of 2 possibilities. Index @ring always is on the inner ring (slices-agon)
-		for (ring=1; ring<stacks; ring+=2) { // odd rings
-			const int first=(ring-1)*slices+1;
-			for (i=0; i<slices-1; ++i){
-				indices << first+i << first+slices+i << first+slices+1+i;
-				indices << first+i << first+slices+1+i << first+1+i;
+		for (ring=1; ring<COMET_TAIL_STACKS; ring+=2) { // odd rings
+			const int first=(ring-1)*COMET_TAIL_SLICES+1;
+			for (i=0; i<COMET_TAIL_SLICES-1; ++i){
+				indices << first+i << first+COMET_TAIL_SLICES+i << first+COMET_TAIL_SLICES+1+i;
+				indices << first+i << first+COMET_TAIL_SLICES+1+i << first+1+i;
 			}
 			// closing slice: mesh with other indices...
-			indices << ring*slices << (ring+1)*slices << ring*slices+1;
-			indices << ring*slices << ring*slices+1 << first;
+			indices << ring*COMET_TAIL_SLICES << (ring+1)*COMET_TAIL_SLICES << ring*COMET_TAIL_SLICES+1;
+			indices << ring*COMET_TAIL_SLICES << ring*COMET_TAIL_SLICES+1 << first;
 		}
 
-		for (ring=2; ring<stacks; ring+=2) { // even rings: different sequence.
-			const int first=(ring-1)*slices+1;
-			for (i=0; i<slices-1; ++i){
-				indices << first+i << first+slices+i << first+1+i;
-				indices << first+1+i << first+slices+i << first+slices+1+i;
+		for (ring=2; ring<COMET_TAIL_STACKS; ring+=2) { // even rings: different sequence.
+			const int first=(ring-1)*COMET_TAIL_SLICES+1;
+			for (i=0; i<COMET_TAIL_SLICES-1; ++i){
+				indices << first+i << first+COMET_TAIL_SLICES+i << first+1+i;
+				indices << first+1+i << first+COMET_TAIL_SLICES+i << first+COMET_TAIL_SLICES+1+i;
 			}
 			// closing slice: mesh with other indices...
-			indices << ring*slices << (ring+1)*slices << first;
-			indices << first << (ring+1)*slices << ring*slices+1;
+			indices << ring*COMET_TAIL_SLICES << (ring+1)*COMET_TAIL_SLICES << first;
+			indices << first << (ring+1)*COMET_TAIL_SLICES << ring*COMET_TAIL_SLICES+1;
 		}
 	}
 //	qDebug() << "Parabola: Vertex index dump\n";

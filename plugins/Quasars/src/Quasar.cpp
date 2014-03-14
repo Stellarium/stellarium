@@ -16,6 +16,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
+#include "config.h"
+
 #include "Quasar.hpp"
 #include "Quasars.hpp"
 #include "StelObject.hpp"
@@ -87,7 +89,7 @@ QString Quasar::getInfoString(const StelCore* core, const InfoStringGroup& flags
 	{
 		oss << "<h2>" << designation << "</h2>";
 	}
-	if (flags&Type)
+	if (flags&ObjectType)
 		oss << q_("Type: <b>%1</b>").arg(q_("quasar")) << "<br />";
 
 	if (flags&Magnitude)

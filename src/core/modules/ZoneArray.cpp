@@ -17,6 +17,12 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
+#include "ZoneArray.hpp"
+#include "StelApp.hpp"
+#include "StelFileMgr.hpp"
+#include "StelGeodesicGrid.hpp"
+#include "StelObject.hpp"
+
 #include <QDebug>
 #include <QFile>
 #include <QDir>
@@ -25,11 +31,6 @@
 #include <windows.h>
 #endif
 
-#include "ZoneArray.hpp"
-#include "StelApp.hpp"
-#include "StelFileMgr.hpp"
-#include "StelGeodesicGrid.hpp"
-#include "StelObject.hpp"
 
 static unsigned int stel_bswap_32(unsigned int val) {
   return (((val) & 0xff000000) >> 24) | (((val) & 0x00ff0000) >>  8) |

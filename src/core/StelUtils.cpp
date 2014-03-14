@@ -17,8 +17,6 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#include <cmath> // std::fmod
-
 #ifdef CYGWIN
  #include <malloc.h>
 #endif
@@ -32,6 +30,9 @@
 #include <QDebug>
 #include <QLocale>
 #include <QRegExp>
+#include <QProcess>
+#include <QSysInfo>
+#include <cmath> // std::fmod
 
 namespace StelUtils
 {
@@ -51,6 +52,116 @@ QString getApplicationVersion()
 #else
 	return QString(PACKAGE_VERSION);
 #endif
+}
+
+QString getOperatingSystemInfo()
+{
+	QString OS = "Unknown operating system";
+
+	#ifdef Q_OS_WIN
+	switch(QSysInfo::WindowsVersion)
+	{
+		case QSysInfo::WV_95:
+			OS = "Windows 95";
+			break;
+		case QSysInfo::WV_98:
+			OS = "Windows 98";
+			break;
+		case QSysInfo::WV_Me:
+			OS = "Windows Me";
+			break;
+		case QSysInfo::WV_NT:
+			OS = "Windows NT";
+			break;
+		case QSysInfo::WV_2000:
+			OS = "Windows 2000";
+			break;
+		case QSysInfo::WV_XP:
+			OS = "Windows XP";
+			break;
+		case QSysInfo::WV_2003:
+			OS = "Windows Server 2003";
+			break;
+		case QSysInfo::WV_VISTA:
+			OS = "Windows Vista";
+			break;
+		case QSysInfo::WV_WINDOWS7:
+			OS = "Windows 7";
+			break;
+		#ifdef WV_WINDOWS8
+		case QSysInfo::WV_WINDOWS8:
+			OS = "Windows 8";
+			break;
+		#endif
+		#ifdef WV_WINDOWS8_1
+		case QSysInfo::WV_WINDOWS8_1
+			OS = "Windows 8.1";
+			break;
+		#endif
+		default:
+			OS = "Unsupported Windows version";
+			break;
+	}
+
+	// somebody writing something useful for Macs would be great here
+	#elif defined Q_OS_MAC
+	switch(QSysInfo::MacintoshVersion)
+	{
+		case QSysInfo::MV_10_3:
+			OS = "Mac OS X 10.3";
+			break;
+		case QSysInfo::MV_10_4:
+			OS = "Mac OS X 10.4";
+			break;
+		case QSysInfo::MV_10_5:
+			OS = "Mac OS X 10.5";
+			break;
+		case QSysInfo::MV_10_6:
+			OS = "Mac OS X 10.6";
+			break;
+		#ifdef MV_10_7
+		case QSysInfo::MV_10_7:
+			OS = "Mac OS X 10.7";
+			break;
+		#endif
+		#ifdef MV_10_8
+		case QSysInfo::MV_10_8:
+			OS = "Mac OS X 10.8";
+			break;
+		#endif
+		#ifdef MV_10_9
+		case QSysInfo::MV_10_9:
+			OS = "Mac OS X 10.9";
+			break;
+		#endif
+		default:
+			OS = "Unsupported Mac version";
+			break;
+	}
+
+	#elif defined Q_OS_LINUX
+	QFile procVersion("/proc/version");
+	if(!procVersion.open(QIODevice::ReadOnly | QIODevice::Text))
+		OS = "Unknown Linux version";
+	else
+	{
+		QString version = procVersion.readAll();
+		if(version.right(1) == "\n")
+			version.chop(1);
+		OS = version;
+		procVersion.close();
+	}
+	#elif defined Q_OS_BSD4
+	// Check FreeBSD, NetBSD, OpenBSD and DragonFly BSD
+	QProcess uname;
+	uname.start("/usr/bin/uname -srm");
+	uname.waitForStarted();
+	uname.waitForFinished();
+	const QString BSDsystem = uname.readAllStandardOutput();
+	OS = BSDsystem.trimmed();
+	#endif
+
+	return OS;
 }
 
 double hmsToRad(const unsigned int h, const unsigned int m, const double s )
@@ -98,23 +209,17 @@ void radToDms(double angle, bool& sign, unsigned int& d, unsigned int& m, double
 	d = (unsigned int)angle;
 	m = (unsigned int)((angle - d)*60);
 	s = (angle-d)*3600-60*m;
-	// workaround for rounding numbers
+	// workaround for rounding numbers	
 	if (s>59.9)
 	{
 		s = 0.;
-		if (sign)
-			m += 1;
-		else
-			m -= 1;
+		m += 1;
 	}
 	if (m==60)
 	{
 		m = 0.;
-		if (sign)
-			d += 1;
-		else
-			d -= 1;
-	}
+		d += 1;
+	}	
 }
 
 /*************************************************************************
@@ -418,11 +523,11 @@ bool isPowerOfTwo(const int value)
 	return (value & -value) == value;
 }
 
-// Return the first power of two bigger than the given value
-int getBiggerPowerOfTwo(int value)
+// Return the first power of two bigger or equal to the given value
+int getBiggerEqualPowerOfTwo(int value)
 {
 	int p=1;
-	while (p<value)
+	while (p<=value)
 		p<<=1;
 	return p;
 }

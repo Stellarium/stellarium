@@ -19,10 +19,11 @@
 #ifndef STELSKYLAYER_HPP
 #define STELSKYLAYER_HPP
 
+#include "StelCore.hpp"
+
 #include <QObject>
 #include <QString>
 #include <QSharedPointer>
-#include "StelCore.hpp"
 
 class StelCore;
 class StelPainter;

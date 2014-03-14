@@ -16,6 +16,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
+#include "config.h"
+
 #include "Pulsar.hpp"
 #include "Pulsars.hpp"
 #include "StelObject.hpp"
@@ -130,7 +132,7 @@ QString Pulsar::getInfoString(const StelCore* core, const InfoStringGroup& flags
 		oss << "<h2>" << designation << "</h2>";
 	}
 
-	if (flags&Type)
+	if (flags&ObjectType)
 	{
 
 		if (glitch==0)

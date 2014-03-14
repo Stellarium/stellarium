@@ -182,7 +182,7 @@ int main(int argc, char **argv)
 	// OK we start the full program.
 	// Print the console splash and get on with loading the program
 	QString versionLine = QString("This is %1 - http://www.stellarium.org").arg(StelUtils::getApplicationName());
-	QString copyrightLine = QString("Copyright (C) 2000-2013 Fabien Chereau et al");
+	QString copyrightLine = QString("Copyright (C) 2000-2014 Fabien Chereau et al");
 	int maxLength = qMax(versionLine.size(), copyrightLine.size());
 	qDebug() << qPrintable(QString(" %1").arg(QString().fill('-', maxLength+2)));
 	qDebug() << qPrintable(QString("[ %1 ]").arg(versionLine.leftJustified(maxLength, ' ')));
@@ -326,11 +326,6 @@ int main(int argc, char **argv)
 		QMessageBox::warning(0, "Stellarium", q_("This system does not support OpenGL."));
 	}
 
-	qDebug() << "OpenGLVersionFlags: " << QGLFormat::openGLVersionFlags();
-	// http://qt-project.org/forums/viewthread/35584: clarify: Why is the string empty? (at least Win7/64 NVidia)
-	//QString versionString(QLatin1String(reinterpret_cast<const char *>(glGetString(GL_VERSION))));
-	QString versionString((char *)glGetString(GL_VERSION));
-	qDebug() << "Driver version string: " << versionString;
 	mainWin.init(confSettings);
 	splash.finish(&mainWin);
 	app.exec();

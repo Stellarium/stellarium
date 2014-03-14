@@ -157,10 +157,22 @@ public:
 	UpdateState getUpdateState(void) {return updateState;}
 
 	//! Get count of planetary systems from catalog
-	int getCountPlanetarySystems(void) {return PSCount;}
+	int getCountPlanetarySystems(void) const
+	{
+		return PSCount;
+	}
 
 	//! Get count of exoplanets from catalog
-	int getCountAllExoplanets(void) {return EPCountAll;}
+	int getCountAllExoplanets(void) const
+	{
+		return EPCountAll;
+	}
+
+	//! Get count of potentially habitable exoplanets from catalog
+	int getCountHabitableExoplanets(void) const
+	{
+		return EPCountPH;
+	}
 
 signals:
 	//! @param state the new update state.
@@ -224,6 +236,7 @@ private:
 
 	int PSCount;
 	int EPCountAll;
+	int EPCountPH;
 
 	StelTextureSP texPointer;
 	QList<ExoplanetP> ep;

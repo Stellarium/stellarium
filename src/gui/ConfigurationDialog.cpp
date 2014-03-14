@@ -142,6 +142,9 @@ void ConfigurationDialog::createDialogContent()
 	connect(cb->lineEdit(), SIGNAL(editingFinished()), this, SLOT(updateCurrentLanguage()));
 	connect(cb, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(selectLanguage(const QString&)));
 
+	ui->groupBoxUpdates->setChecked(StelApp::getInstance().getSettings()->value("main/check_updates_enabled", true).toBool());
+	connect(ui->groupBoxUpdates, SIGNAL(toggled(bool)), this, SLOT(setUpdatesFlag(bool)));
+
 	connect(ui->getStarsButton, SIGNAL(clicked()), this, SLOT(downloadStars()));
 	connect(ui->downloadCancelButton, SIGNAL(clicked()), this, SLOT(cancelDownload()));
 	connect(ui->downloadRetryButton, SIGNAL(clicked()), this, SLOT(downloadStars()));
@@ -269,11 +272,17 @@ void ConfigurationDialog::createDialogContent()
 	// plugins control
 	connect(ui->pluginsListWidget, SIGNAL(currentItemChanged(QListWidgetItem*, QListWidgetItem*)), this, SLOT(pluginsSelectionChanged(QListWidgetItem*, QListWidgetItem*)));
 	connect(ui->pluginLoadAtStartupCheckBox, SIGNAL(stateChanged(int)), this, SLOT(loadAtStartupChanged(int)));
+	connect(ui->pluginsListWidget, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(pluginConfigureCurrentSelection()));
 	connect(ui->pluginConfigureButton, SIGNAL(clicked()), this, SLOT(pluginConfigureCurrentSelection()));
 	populatePluginsList();
 
 	updateConfigLabels();
 	updateTabBarListWidgetWidth();
+}
+
+void ConfigurationDialog::setUpdatesFlag(bool b)
+{
+	StelApp::getInstance().getSettings()->setValue("main/check_updates_enabled", b);
 }
 
 void ConfigurationDialog::updateCurrentLanguage()
@@ -402,7 +411,9 @@ void ConfigurationDialog::setSelectedInfoFromCheckBoxes()
 	if (ui->checkBoxGalacticCoordinates->isChecked())
 		flags |= StelObject::GalacticCoord;
 	if (ui->checkBoxType->isChecked())
-		flags |= StelObject::Type;
+		flags |= StelObject::ObjectType;
+	if (ui->checkBoxTEclipticCoords->isChecked())
+		flags |= StelObject::EclTopocentricCoord;
 
 	gui->setInfoTextFilters(flags);
 }
@@ -441,6 +452,7 @@ void ConfigurationDialog::selectScreenshotDir(const QString& dir)
 	}
 	catch (std::runtime_error& e)
 	{
+		Q_UNUSED(e);
 		// nop
 		// this will happen when people are only half way through typing dirs
 	}
@@ -517,6 +529,7 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	conf->setValue("viewing/flag_constellation_art", cmgr->getFlagArt());
 	conf->setValue("viewing/flag_constellation_isolate_selected", cmgr->getFlagIsolateSelected());
 	conf->setValue("viewing/flag_landscape_autoselection", lmgr->getFlagLandscapeAutoSelection());
+	conf->setValue("viewing/flag_light_pollution_database", lmgr->getFlagUseLightPollutionFromDatabase());
 	conf->setValue("viewing/constellation_art_intensity", cmgr->getArtIntensity());
 	conf->setValue("viewing/flag_night", StelApp::getInstance().getVisionModeNight());
 	conf->setValue("astro/flag_star_name", smgr->getFlagLabels());
@@ -574,7 +587,7 @@ void ConfigurationDialog::saveCurrentViewOptions()
 		conf->setValue("flag_show_radecj2000",
 		               (bool) (flags & StelObject::RaDecJ2000));
 		conf->setValue("flag_show_radecofdate",
-		               (bool) (flags & StelObject::RaDecOfDate));
+			       (bool) (flags & StelObject::RaDecOfDate));
 		conf->setValue("flag_show_hourangle",
 		               (bool) (flags & StelObject::HourAngle));
 		conf->setValue("flag_show_altaz",
@@ -585,10 +598,12 @@ void ConfigurationDialog::saveCurrentViewOptions()
 		               (bool) (flags & StelObject::Size));
 		conf->setValue("flag_show_extra",
 			       (bool) (flags & StelObject::Extra));
-		conf->setValue("flag_show_type",
-			       (bool) (flags & StelObject::Type));
 		conf->setValue("flag_show_galcoord",
 			       (bool) (flags & StelObject::GalacticCoord));
+		conf->setValue("flag_show_type",
+			       (bool) (flags & StelObject::ObjectType));
+		conf->setValue("flag_show_eclcoord",
+			       (bool) (flags & StelObject::EclTopocentricCoord));
 		conf->endGroup();
 	}
 
@@ -741,7 +756,7 @@ void ConfigurationDialog::pluginConfigureCurrentSelection()
 	{
 		if (id == desc.info.id)
 		{
-			StelModule* pmod = moduleMgr.getModule(desc.info.id);
+			StelModule* pmod = moduleMgr.getModule(desc.info.id, QObject::sender()->objectName()=="pluginsListWidget");
 			if (pmod != NULL)
 			{
 				pmod->configureGui(true);
@@ -1083,7 +1098,8 @@ void ConfigurationDialog::updateSelectedInfoCheckBoxes()
 	ui->checkBoxSize->setChecked(flags & StelObject::Size);
 	ui->checkBoxExtra->setChecked(flags & StelObject::Extra);
 	ui->checkBoxGalacticCoordinates->setChecked(flags & StelObject::GalacticCoord);
-	ui->checkBoxType->setChecked(flags & StelObject::Type);
+	ui->checkBoxType->setChecked(flags & StelObject::ObjectType);
+	ui->checkBoxTEclipticCoords->setChecked(flags & StelObject::EclTopocentricCoord);
 }
 
 void ConfigurationDialog::updateTabBarListWidgetWidth()

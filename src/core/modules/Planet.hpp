@@ -20,14 +20,14 @@
 #ifndef _PLANET_HPP_
 #define _PLANET_HPP_
 
-#include <QString>
-
 #include "StelObject.hpp"
 #include "StelProjector.hpp"
 #include "VecMath.hpp"
 #include "StelFader.hpp"
 #include "StelTextureTypes.hpp"
 #include "StelProjectorType.hpp"
+
+#include <QString>
 
 // The callback type for the external position computation function
 // The last variable is the userData pointer.
@@ -72,6 +72,9 @@ public:
 	~Ring(void);
 	void draw(StelPainter* painter, StelProjector::ModelViewTranformP transfo, double screenSz);
 	double getSize(void) const {return radiusMax;}
+
+	void setupShadow(bool setup);
+
 private:
 	const double radiusMin;
 	const double radiusMax;
@@ -169,6 +172,9 @@ public:
 	// Compute the transformation matrix from the local Planet coordinate to the parent Planet coordinate
 	void computeTransMatrix(double date);
 
+	// Compute the transformation matrix from model to world coordinates
+	void computeModelMatrix(Mat4d& result) const;
+
 	// Get the phase angle (rad) for an observer at pos obsPos in heliocentric coordinates (in AU)
 	double getPhaseAngle(const Vec3d& obsPos) const;
 	// Get the elongation angle (rad) for an observer at pos obsPos in heliocentric coordinates (in AU)
@@ -183,7 +189,7 @@ public:
 				 float _obliquity, float _ascendingNode,
 				 float _precessionRate, double _siderealPeriod);
 	double getRotAscendingnode(void) const {return re.ascendingNode;}
-	double getRotObliquity(void) const {return re.obliquity;}
+	double getRotObliquity(double JDay) const;
 
 	//! Get the Planet position in the parent Planet ecliptic coordinate in AU
 	Vec3d getEclipticPos() const;

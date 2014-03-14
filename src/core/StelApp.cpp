@@ -127,6 +127,10 @@ Q_IMPORT_PLUGIN(SolarSystemEditorStelPluginInterface)
 Q_IMPORT_PLUGIN(TimeZoneConfigurationStelPluginInterface)
 #endif
 
+#ifdef USE_STATIC_PLUGIN_METEORSHOWERS
+Q_IMPORT_PLUGIN(MeteorShowersStelPluginInterface)
+#endif
+
 #ifdef USE_STATIC_PLUGIN_NAVSTARS
 Q_IMPORT_PLUGIN(NavStarsStelPluginInterface)
 #endif
@@ -149,6 +153,10 @@ Q_IMPORT_PLUGIN(PulsarsStelPluginInterface)
 
 #ifdef USE_STATIC_PLUGIN_EXOPLANETS
 Q_IMPORT_PLUGIN(ExoplanetsStelPluginInterface)
+#endif
+
+#ifdef USE_STATIC_PLUGIN_EQUATIONOFTIME
+Q_IMPORT_PLUGIN(EquationOfTimeStelPluginInterface)
 #endif
 
 #ifdef USE_STATIC_PLUGIN_FOV
@@ -433,9 +441,6 @@ void StelApp::init(QSettings* conf)
 	emit colorSchemeChanged("color");
 	setVisionModeNight(confSettings->value("viewing/flag_night").toBool());
 
-	// Initialisation of the render of solar shadows
-	//setRenderSolarShadows(confSettings->value("viewing/flag_render_solar_shadows", true).toBool());
-
 	// Proxy Initialisation
 	setupHttpProxy();
 	updateI18n();
@@ -488,9 +493,9 @@ StelProgressController* StelApp::addProgressBar()
 
 void StelApp::removeProgressBar(StelProgressController* p)
 {
-	progressControllers.removeOne(p);
-	delete p;
+	progressControllers.removeOne(p);	
 	emit(progressBarRemoved(p));
+	delete p;
 }
 
 

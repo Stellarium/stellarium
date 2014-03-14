@@ -16,6 +16,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
+#include "config.h"
+
 #include "VecMath.hpp"
 #include "StelProjector.hpp"
 #include "StelPainter.hpp"
@@ -38,8 +40,6 @@
 #include <QtNetwork>
 #include <cmath>
 
-//! This method is the one called automatically by the StelModuleMgr just
-//! after loading the dynamic library
 StelModule* CompassMarksStelPluginInterface::getStelModule() const
 {
 	return new CompassMarks();
@@ -64,21 +64,6 @@ CompassMarks::CompassMarks()
 	: markColor(1,1,1), pxmapGlow(NULL), pxmapOnIcon(NULL), pxmapOffIcon(NULL), toolbarButton(NULL)
 {
 	setObjectName("CompassMarks");
-
-	QSettings* conf = StelApp::getInstance().getSettings();
-	// Setup defaults if not present
-	if (!conf->contains("CompassMarks/mark_color"))
-		conf->setValue("CompassMarks/mark_color", "1,0,0");
-
-	if (!conf->contains("CompassMarks/font_size"))
-		conf->setValue("CompassMarks/font_size", 10);
-
-	if (!conf->contains("CompassMarks/enable_at_startup"))
-		conf->setValue("CompassMarks/enable_at_startup", false);
-
-	// Load settings from main config file
-	markColor = StelUtils::strToVec3f(conf->value("CompassMarks/mark_color", "1,0,0").toString());
-	font.setPixelSize(conf->value("CompassMarks/font_size", 10).toInt());
 }
 
 CompassMarks::~CompassMarks()
@@ -89,17 +74,6 @@ CompassMarks::~CompassMarks()
 		delete pxmapOnIcon;
 	if (pxmapOffIcon!=NULL)
 		delete pxmapOffIcon;
-	
-	// TODO (requires work in core API)
-	// 1. Remove button from toolbar
-	// 2. Remove action from GUI
-	// 3. Delete GUI objects.  I'll leave this commented right now because
-	// unloading (when implemented) might cause problems if we do it before we
-	// can do parts 1 and 2.
-	//if (toolbarButton!=NULL)
-	//	delete toolbarButton;
-	// BTW, the above remark is from 2009 --BM
-	// See http://stellarium.svn.sourceforge.net/viewvc/stellarium/trunk/extmodules/CompassMarks/src/CompassMarks.cpp?r1=4333&r2=4332&pathrev=4333
 }
 
 //! Determine which "layer" the plugin's drawing will happen on.
@@ -112,7 +86,15 @@ double CompassMarks::getCallOrder(StelModuleActionName actionName) const
 
 void CompassMarks::init()
 {
-	qDebug() << "CompassMarks plugin - press control-C to toggle compass marks";
+	// Because the plug-in has no configuration GUI, users rely on what's
+	// written in the configuration file to know what can be configured.
+	QSettings* conf = StelApp::getInstance().getSettings();
+	Q_ASSERT(conf);
+	if (!conf->contains("CompassMarks"))
+		restoreDefaultConfiguration();
+
+	loadConfiguration();
+
 	try
 	{
 		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
@@ -126,8 +108,7 @@ void CompassMarks::init()
 		connect(GETSTELMODULE(LandscapeMgr), SIGNAL(cardinalsPointsDisplayedChanged(bool)), this, SLOT(cardinalPointsChanged(bool)));
 		cardinalPointsState = false;
 
-		QSettings* conf = StelApp::getInstance().getSettings();
-		setCompassMarks(conf->value("CompassMarks/enable_at_startup", false).toBool());
+		setCompassMarks(displayedAtStartup);
 	}
 	catch (std::runtime_error& e)
 	{
@@ -151,7 +132,8 @@ void CompassMarks::draw(StelCore* core)
 	glDisable(GL_TEXTURE_2D);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glEnable(GL_BLEND);
-	glEnable(GL_LINE_SMOOTH);
+	// OpenGL ES 2.0 doesn't have GL_LINE_SMOOTH
+	// glEnable(GL_LINE_SMOOTH);
 
 	for(int i=0; i<360; i++)
 	{
@@ -177,7 +159,8 @@ void CompassMarks::draw(StelCore* core)
 		painter.drawGreatCircleArc(pos, Vec3d(pos[0], pos[1], h), NULL);		
 		glEnable(GL_TEXTURE_2D);
 	}
-	glDisable(GL_LINE_SMOOTH);
+	// OpenGL ES 2.0 doesn't have GL_LINE_SMOOTH
+	// glDisable(GL_LINE_SMOOTH);
 	glDisable(GL_BLEND);
 	glEnable(GL_TEXTURE_2D);
 
@@ -203,6 +186,47 @@ void CompassMarks::setCompassMarks(bool b)
 	}
 	markFader = b;
 	emit compassMarksChanged(b);
+}
+
+void CompassMarks::loadConfiguration()
+{
+	QSettings* conf = StelApp::getInstance().getSettings();
+	Q_ASSERT(conf);
+
+	conf->beginGroup("CompassMarks");
+	markColor = StelUtils::strToVec3f(conf->value("mark_color", "1,0,0").toString());
+	font.setPixelSize(conf->value("font_size", 10).toInt());
+	displayedAtStartup = conf->value("enable_at_startup", false).toBool();
+	conf->endGroup();
+}
+
+void CompassMarks::saveConfiguration()
+{
+	QSettings* conf = StelApp::getInstance().getSettings();
+	Q_ASSERT(conf);
+
+	conf->beginGroup("CompassMarks");
+	conf->setValue("font_size", font.pixelSize());
+	conf->setValue("enable_at_startup", displayedAtStartup);
+	// The rest is not saved!
+	conf->endGroup();
+}
+
+void CompassMarks::restoreDefaultConfiguration()
+{
+	QSettings* conf = StelApp::getInstance().getSettings();
+	Q_ASSERT(conf);
+
+	// Remove the whole section from the configuration file
+	conf->remove("CompassMarks");
+	// Load the default values...
+	loadConfiguration();
+	// ... then save them.
+	saveConfiguration();
+	// But this doesn't save the color, so...
+	conf->beginGroup("CompassMarks");
+	conf->setValue("mark_color", "1,0,0");
+	conf->endGroup();
 }
 
 void CompassMarks::cardinalPointsChanged(bool b)

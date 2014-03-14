@@ -21,14 +21,15 @@
 #ifndef _NEBULAMGR_HPP_
 #define _NEBULAMGR_HPP_
 
-#include <QString>
-#include <QStringList>
-#include <QFont>
 #include "StelObjectType.hpp"
 #include "StelFader.hpp"
 #include "StelSphericalIndex.hpp"
 #include "StelObjectModule.hpp"
 #include "StelTextureTypes.hpp"
+
+#include <QString>
+#include <QStringList>
+#include <QFont>
 
 class Nebula;
 class StelTranslator;
@@ -115,6 +116,11 @@ public:
 	// Properties setters and getters
 public slots:
 	//! Set the color used to draw the nebula symbols (circles, boxes. etc).
+	//! @param c The color of the nebula symbols
+	//! @code
+	//! // example of usage in scripts
+	//! NebulaMgr.setCirclesColor(Vec3f(1.0,0.0,0.0));
+	//! @endcode
 	void setCirclesColor(const Vec3f& c);
 	//! Get current value of the nebula circle color.
 	const Vec3f& getCirclesColor(void) const;
@@ -139,6 +145,11 @@ public slots:
 	bool getFlagShow(void) const { return flagShow; }
 
 	//! Set the color used to draw nebula labels.
+	//! @param c The color of the nebula labels
+	//! @code
+	//! // example of usage in scripts
+	//! NebulaMgr.setLabelsColor(Vec3f(1.0,0.0,0.0));
+	//! @endcode
 	void setLabelsColor(const Vec3f& c);
 	//! Get current value of the nebula label color.
 	const Vec3f& getLabelsColor(void) const;

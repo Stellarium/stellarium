@@ -35,6 +35,7 @@
 #include "StelModuleMgr.hpp"
 #include "StelIniParser.hpp"
 #include "Planet.hpp"
+#include "PlanetShadows.hpp"
 #include "MinorPlanet.hpp"
 #include "Comet.hpp"
 
@@ -453,7 +454,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 
 			// when the parent is the sun use ecliptic rather than sun equator:
 			const double parentRotObliquity = parent->getParent()
-											  ? parent->getRotObliquity()
+											  ? parent->getRotObliquity(2451545.0)
 											  : 0.0;
 			const double parent_rot_asc_node = parent->getParent()
 											  ? parent->getRotAscendingnode()
@@ -563,7 +564,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 			const double inclination = pd.value(secname+"/orbit_Inclination").toDouble()*(M_PI/180.0);
 			const double arg_of_pericenter = pd.value(secname+"/orbit_ArgOfPericenter").toDouble()*(M_PI/180.0);
 			const double ascending_node = pd.value(secname+"/orbit_AscendingNode").toDouble()*(M_PI/180.0);
-			const double parentRotObliquity = parent->getParent() ? parent->getRotObliquity() : 0.0;
+			const double parentRotObliquity = parent->getParent() ? parent->getRotObliquity(2451545.0) : 0.0;
 			const double parent_rot_asc_node = parent->getParent() ? parent->getRotAscendingnode() : 0.0;
 			double parent_rot_j2000_longitude = 0.0;
 						if (parent->getParent()) {
@@ -579,7 +580,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 							J2000NodeOrigin.normalize();
 							parent_rot_j2000_longitude = atan2(J2000NodeOrigin*OrbitAxis1,J2000NodeOrigin*OrbitAxis0);
 						}
-			qDebug() << "Creating CometOrbit for" << englishName;
+			//qDebug() << "Creating CometOrbit for" << englishName;
 			CometOrbit *orb = new CometOrbit(pericenterDistance,
 							 eccentricity,
 							 inclination,
@@ -949,6 +950,65 @@ struct biggerDistance : public std::binary_function<PlanetP, PlanetP, bool>
 	}
 };
 
+void SolarSystem::computeShadowInfo()
+{
+	// Acquire shadow informations
+	if(shadowModelMatricesBuffer.size() < shadowPlanetCount)
+	{
+		shadowModelMatricesBuffer.resize(shadowPlanetCount);
+	}
+
+	Mat4d* modelMatrices = shadowModelMatricesBuffer.data();
+	int p = 1;
+	foreach (const PlanetP& planet, systemPlanets)
+	{
+		if(planet->parent != sun || !planet->satellites.isEmpty())
+		{
+			planet->computeModelMatrix(modelMatrices[planet == sun ? 0 : p++]);
+		}
+	}
+
+	const int size = StelUtils::getBiggerEqualPowerOfTwo(shadowPlanetCount);
+
+	if(shadowInfoBuffer.size() < size * size)
+	{
+		shadowInfoBuffer.resize(size * size);
+	}
+
+	// Shadow info texture data
+	Vec4f* data = shadowInfoBuffer.data();
+	memset(data, '\0', size * size * sizeof(Vec4f));
+
+	int y = 1;
+
+	foreach (const PlanetP& target, systemPlanets)
+	{
+		if(target == sun || (target->parent == sun && target->satellites.isEmpty()))
+			continue;
+
+		const Mat4d mTarget = modelMatrices[y].inverse();
+		data[y * size] = Vec4f(mTarget[12], mTarget[13], mTarget[14], sun->getRadius());
+
+		int x = 1;
+
+		foreach (const PlanetP& source, systemPlanets)
+		{
+			if(source == sun || (source->parent == sun && source->satellites.isEmpty()))
+				continue;
+
+			const Mat4d& mSource(modelMatrices[x]);
+			const Vec4d position = mTarget * mSource.getColumn(3);
+
+			data[y * size + x] = Vec4f(position[0], position[1], position[2], source->getRadius());
+			x++;
+		}
+
+		y++;
+	}
+
+	PlanetShadows::getInstance()->setData(reinterpret_cast<char*>(data), size, shadowPlanetCount);
+}
+
 // Draw all the elements of the solar system
 // We are supposed to be in heliocentric coordinate
 void SolarSystem::draw(StelCore* core)
@@ -979,10 +1039,39 @@ void SolarSystem::draw(StelCore* core)
 	float maxMagLabel = (core->getSkyDrawer()->getLimitMagnitude()<5.f ? core->getSkyDrawer()->getLimitMagnitude() :
 			5.f+(core->getSkyDrawer()->getLimitMagnitude()-5.f)*1.2f) +(labelsAmount-3.f)*1.2f;
 
-	// Draw the elements
-	foreach (const PlanetP& p, systemPlanets)
+	PlanetShadows* shadows = PlanetShadows::getInstance();
+
+	if(shadows->isSupported())
 	{
-		p->draw(core, maxMagLabel, planetNameFont);
+		computeShadowInfo();
+
+		// Draw the elements
+		int i = 1;
+		foreach (const PlanetP& p, systemPlanets)
+		{
+			if((p == sun || (p->parent == sun && p->satellites.isEmpty())))
+			{
+				shadows->setCurrent(0);
+			}
+			else
+			{
+				shadows->setCurrent(i);
+				i++;
+			}
+
+			p->draw(core, maxMagLabel, planetNameFont);
+		}
+
+		// deactivate
+		shadows->setCurrent(0);
+	}
+	else
+	{
+		// Draw the elements
+		foreach (const PlanetP& p, systemPlanets)
+		{
+			p->draw(core, maxMagLabel, planetNameFont);
+		}
 	}
 
 	if (GETSTELMODULE(StelObjectMgr)->getFlagSelectedObjectPointer() && getFlagMarkers())

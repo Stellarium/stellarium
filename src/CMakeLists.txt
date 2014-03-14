@@ -193,6 +193,8 @@ SET(stellarium_lib_SRCS
 	core/modules/Orbit.hpp
 	core/modules/Planet.cpp
 	core/modules/Planet.hpp
+	core/modules/PlanetShadows.cpp
+	core/modules/PlanetShadows.hpp
 	core/modules/MinorPlanet.cpp
 	core/modules/MinorPlanet.hpp
 	core/modules/Comet.cpp
@@ -435,6 +437,9 @@ IF(GENERATE_STELMAINLIB)
 ELSE()
  ADD_EXECUTABLE(stellarium ${stellarium_lib_SRCS} ${stellarium_RES_CXX} ${stellarium_exe_SRCS})
  TARGET_LINK_LIBRARIES(stellarium ${extLinkerOption} ${STELLARIUM_STATIC_PLUGINS_LIBRARIES})
+ # This will add the ANGLE lib if the Qt version supports it.
+ TARGET_LINK_LIBRARIES(stellarium ${Qt5Gui_LIBRARIES} ${Qt5Gui_OPENGL_LIBRARIES})
+
  QT5_USE_MODULES(stellarium Core Concurrent Declarative Gui Network OpenGL Script Widgets)
  IF(ENABLE_SOUND)
    QT5_USE_MODULES(stellarium Multimedia)

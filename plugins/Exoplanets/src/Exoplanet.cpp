@@ -16,6 +16,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
+#include "config.h"
+
 #include "Exoplanet.hpp"
 #include "Exoplanets.hpp"
 #include "StelObject.hpp"
@@ -28,6 +30,7 @@
 #include "StelModuleMgr.hpp"
 #include "StelSkyDrawer.hpp"
 #include "StelLocaleMgr.hpp"
+#include "StarMgr.hpp"
 
 #include <QTextStream>
 #include <QDebug>
@@ -62,6 +65,7 @@ Exoplanet::Exoplanet(const QVariantMap& map)
 	hasHabitableExoplanets = map.value("hasHP", false).toBool();
 
 	EPCount=0;
+	PHEPCount=0;
 	if (map.contains("exoplanets"))
 	{
 		foreach(const QVariant &expl, map.value("exoplanets").toList())
@@ -79,6 +83,8 @@ Exoplanet::Exoplanet(const QVariantMap& map)
 			p.angleDistance = exoplanetMap.value("angleDistance", -1.f).toFloat();
 			p.discovered = exoplanetMap.value("discovered", 0).toInt();
 			p.hclass = exoplanetMap.value("hclass", "").toString();
+			if (!p.hclass.isEmpty())
+				PHEPCount++;
 			p.MSTemp = exoplanetMap.value("MSTemp", -1).toInt();
 			p.ESI = exoplanetMap.value("ESI", -1).toInt();
 			exoplanets.append(p);
@@ -152,7 +158,7 @@ QString Exoplanet::getInfoString(const StelCore* core, const InfoStringGroup& fl
 		oss << "<h2>" << getNameI18n() << "</h2>";
 	}
 	
-	if (flags&Type)
+	if (flags&ObjectType)
 	{
 		oss << q_("Type: <b>%1</b>").arg(q_("planetary system")) << "<br />";
 	}
@@ -176,12 +182,12 @@ QString Exoplanet::getInfoString(const StelCore* core, const InfoStringGroup& fl
 	// Ra/Dec etc.
 	oss << getPositionInfoString(core, flags);
 
-	if (flags&Extra)
+	if (flags&Extra && !stype.isEmpty())
 	{
 		oss << q_("Spectral Type: %1").arg(stype) << "<br>";
 	}
 
-	if (flags&Distance)
+	if (flags&Distance && distance>0)
 	{
 		oss << q_("Distance: %1 Light Years").arg(QString::number(distance/0.306601, 'f', 2)) << "<br>";
 	}
@@ -413,6 +419,7 @@ void Exoplanet::draw(StelCore* core, StelPainter *painter)
 {
 	bool visible;
 	StelSkyDrawer* sd = core->getSkyDrawer();
+	StarMgr* smgr = GETSTELMODULE(StarMgr); // It's need for checking displaying of labels for stars
 
 	Vec3f color = exoplanetMarkerColor;
 	if (hasHabitableExoplanets)
@@ -448,7 +455,7 @@ void Exoplanet::draw(StelCore* core, StelPainter *painter)
 
 		painter->drawSprite2dMode(XYZ, distributionMode ? 4.f : 5.f);
 
-		if (labelsFader.getInterstate()<=0.f && !distributionMode && (mag+1.f)<mlimit)
+		if (labelsFader.getInterstate()<=0.f && !distributionMode && (mag+1.f)<mlimit && smgr->getFlagLabels())
 		{
 			painter->drawText(XYZ, designation, 0, shift, shift, false);
 		}

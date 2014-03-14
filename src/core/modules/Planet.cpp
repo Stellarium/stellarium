@@ -17,12 +17,6 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#include <iomanip>
-#include <QTextStream>
-#include <QString>
-#include <QDebug>
-#include <QVarLengthArray>
-
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelFileMgr.hpp"
@@ -30,6 +24,7 @@
 #include "StelSkyDrawer.hpp"
 #include "SolarSystem.hpp"
 #include "Planet.hpp"
+#include "PlanetShadows.hpp"
 
 #include "StelProjector.hpp"
 #include "sidereal_time.h"
@@ -40,6 +35,12 @@
 #include "StelPainter.hpp"
 #include "StelTranslator.hpp"
 #include "StelUtils.hpp"
+
+#include <iomanip>
+#include <QTextStream>
+#include <QString>
+#include <QDebug>
+#include <QVarLengthArray>
 
 Vec3f Planet::labelColor = Vec3f(0.4,0.4,0.8);
 Vec3f Planet::orbitColor = Vec3f(1,0.6,1);
@@ -124,7 +125,7 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 		oss << "</h2>";
 	}
 
-	if (flags&Type)
+	if (flags&ObjectType)
 	{
 		if (pType.length()>0)
 			oss << q_("Type: <b>%1</b>").arg(q_(pType)) << "<br />";
@@ -143,17 +144,14 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 
 	oss << getPositionInfoString(core, flags);
 
-	if ((flags&Extra) && (core->getCurrentLocation().planetName=="Earth"))
+	if (flags&Extra)
 	{
-		//static SolarSystem *ssystem=GETSTELMODULE(SolarSystem);
-		//double ecl= -(ssystem->getEarth()->getRotObliquity()); // BUG DETECTED! Earth's obliquity is apparently reported constant.
-		double ra_equ, dec_equ, lambda, beta;
-		double ecl= get_mean_ecliptical_obliquity(core->getJDay()) *M_PI/180.0;
-		StelUtils::rectToSphe(&ra_equ,&dec_equ,getEquinoxEquatorialPos(core));
-		StelUtils::ctRadec2Ecl(ra_equ, dec_equ, ecl, &lambda, &beta);
-		if (lambda<0) lambda+=2.0*M_PI;
-		oss << q_("Ecliptic Topocentric (of date): %1/%2").arg(StelUtils::radToDmsStr(lambda, true), StelUtils::radToDmsStr(beta, true)) << "<br>";
-		oss << q_("Obliquity (of date, for Earth): %1").arg(StelUtils::radToDmsStr(ecl, true)) << "<br>";
+		static SolarSystem *ssystem=GETSTELMODULE(SolarSystem);
+		double ecl= ssystem->getEarth()->getRotObliquity(core->getJDay());
+		if (core->getCurrentLocation().planetName=="Earth")
+			oss << q_("Obliquity (of date, for Earth): %1").arg(StelUtils::radToDmsStr(ecl, true)) << "<br>";
+		//if (englishName!="Sun")
+		//	oss << q_("Obliquity (of date): %1").arg(StelUtils::radToDmsStr(getRotObliquity(core->getJDay()), true)) << "<br>";
 	}
 
 	if (flags&Distance)
@@ -308,6 +306,15 @@ void Planet::computePositionWithoutOrbits(const double date)
 	}
 }
 
+double Planet::getRotObliquity(double JDay) const
+{
+	// JDay=2451545.0 for J2000.0
+	if (englishName=="Earth")
+		return get_mean_ecliptical_obliquity(JDay) *M_PI/180.0;
+	else
+		return re.obliquity;
+}
+
 void Planet::computePosition(const double date)
 {
 
@@ -448,6 +455,17 @@ void Planet::computeTransMatrix(double jd)
 	}
 }
 
+void Planet::computeModelMatrix(Mat4d &result) const
+{
+	result = Mat4d::translation(eclipticPos) * rotLocalToParent * Mat4d::zrotation(M_PI/180*(axisRotation + 90.));
+	PlanetP p = parent;
+	while (p && p->parent)
+	{
+		result = Mat4d::translation(p->eclipticPos) * result * p->rotLocalToParent;
+		p = p->parent;
+	}
+}
+
 Mat4d Planet::getRotEquatorialToVsop87(void) const
 {
 	Mat4d rval = rotLocalToParent;
@@ -485,12 +503,12 @@ double Planet::getSiderealTime(double jd) const
 	double remainder = rotations - wholeRotations;
 
 // TODO: This block need rewrite
-//	if (englishName=="Jupiter")
-//	{
-//		// use semi-empirical coefficient for GRS drift
-//		return remainder * 360. + re.offset - 0.2483 * std::abs(StelApp::getInstance().getCore()->getJDay() - 2456172);
-//	}
-//	else
+	if (englishName=="Jupiter")
+	{
+		// use semi-empirical coefficient for GRS drift
+		return remainder * 360. + re.offset - 0.2483 * std::abs(jd - 2456172);
+	}
+	else
 		return remainder * 360. + re.offset;
 }
 
@@ -815,7 +833,9 @@ void Planet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFon
 		if (rings)
 		{
 			StelPainter sPainter(core->getProjection(transfo));
+			rings->setupShadow(true);
 			rings->draw(&sPainter,transfo,1000.0);
+			rings->setupShadow(false);
 		}
 		return;
 	}
@@ -857,6 +877,7 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 {
 	// This is the main method drawing a planet 3d model
 	// Some work has to be done on this method to make the rendering nicer
+	SolarSystem* ssm = GETSTELMODULE(SolarSystem);
 
 	if (screenSz>1.)
 	{
@@ -874,11 +895,16 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 			sPainter->getLight().setPosition(Vec4f(sunPos[0],sunPos[1],sunPos[2],1.f));
 
 			// Set the light parameters taking sun as the light source
-			static Vec4f diffuse = Vec4f(2.f,2.f,2.f,1.f);
+			static Vec4f diffuse = Vec4f(1.f,1.f,1.f,1.f);
 			static Vec4f zero = Vec4f(0.f,0.f,0.f,0.f);
 			static Vec4f ambient = Vec4f(0.02f,0.02f,0.02f,0.02f);
-			diffuse[1] = 2.; diffuse[2] = 2.;
-			ambient[1] = 0.02; ambient[2] = 0.02;
+
+			if (this==ssm->getMoon())
+			{
+				// Special case for the Moon (maybe better use 1.5,1.5,1.5,1.0 ?)
+				diffuse = Vec4f(1.6f,1.6f,1.6f,1.f);
+			}
+			
 			sPainter->getLight().setAmbient(ambient);
 			sPainter->getLight().setDiffuse(diffuse);
 			sPainter->getLight().setSpecular(zero);
@@ -891,6 +917,7 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 
 		if (rings)
 		{
+			rings->setupShadow(true);
 			const double dist = getEquinoxEquatorialPos(core).length();
 			double z_near = 0.9*(dist - rings->getSize());
 			double z_far  = 1.1*(dist + rings->getSize());
@@ -908,25 +935,36 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 			sPainter->getLight().enable();
 			glDisable(GL_DEPTH_TEST);
 			core->setClippingPlanes(n,f);  // Restore old clipping planes
+			rings->setupShadow(false);
 		}
 		else
 		{
-			SolarSystem* ssm = GETSTELMODULE(SolarSystem);
 			if (this==ssm->getMoon() && core->getCurrentLocation().planetName=="Earth" && ssm->nearLunarEclipse())
 			{
-				// Draw earth shadow over moon using stencil buffer if appropriate
-				// This effect curently only looks right from earth viewpoint
-				// TODO: moon magnitude label during eclipse isn't accurate...
-				glClearStencil(0x0);
-				glClear(GL_STENCIL_BUFFER_BIT);
-				glStencilFunc(GL_ALWAYS, 0x1, 0x1);
-				glStencilOp(GL_ZERO, GL_REPLACE, GL_REPLACE);
-				glEnable(GL_STENCIL_TEST);
-				drawSphere(sPainter, screenSz);
-				glDisable(GL_STENCIL_TEST);
+				PlanetShadows* shadows = PlanetShadows::getInstance();
 
-				sPainter->getLight().disable();
-				drawEarthShadow(core, sPainter);
+				if(shadows->isActive())
+				{
+					shadows->setMoon(texEarthShadow);
+					drawSphere(sPainter, screenSz);
+					shadows->setMoon(StelTextureSP(NULL));
+				}
+				else
+				{
+					// Draw earth shadow over moon using stencil buffer if appropriate
+					// This effect curently only looks right from earth viewpoint
+					// TODO: moon magnitude label during eclipse isn't accurate...
+					glClearStencil(0x0);
+					glClear(GL_STENCIL_BUFFER_BIT);
+					glStencilFunc(GL_ALWAYS, 0x1, 0x1);
+					glStencilOp(GL_ZERO, GL_REPLACE, GL_REPLACE);
+					glEnable(GL_STENCIL_TEST);
+					drawSphere(sPainter, screenSz);
+					glDisable(GL_STENCIL_TEST);
+
+					sPainter->getLight().disable();
+					drawEarthShadow(core, sPainter);
+				}
 			}
 			else
 			{
@@ -979,7 +1017,19 @@ void Planet::drawSphere(StelPainter* painter, float screenSz)
 	// fits to the observers position. No idea why this is necessary,
 	// perhaps some openGl strangeness, or confusing sin/cos.
 
-	painter->sSphere(radius*sphereScale, oneMinusOblateness, nb_facet, nb_facet);
+	PlanetShadows* shadows = PlanetShadows::getInstance();
+
+	if(shadows->isActive())
+	{
+		PlanetShadows::getInstance()->setupShading(painter, radius * sphereScale, oneMinusOblateness, false);
+
+		painter->usePlanetShader(true);
+		painter->sSphere(radius*sphereScale, oneMinusOblateness, nb_facet, nb_facet);
+		painter->usePlanetShader(false);
+	}
+	else
+		painter->sSphere(radius*sphereScale, oneMinusOblateness, nb_facet, nb_facet);
+
 	glDisable(GL_CULL_FACE);
 }
 
@@ -1139,8 +1189,23 @@ void Ring::draw(StelPainter* sPainter,StelProjector::ModelViewTranformP transfo,
 	const double h = mat.r[ 8]*mat.r[12]
 				   + mat.r[ 9]*mat.r[13]
 				   + mat.r[10]*mat.r[14];
+
 	sPainter->sRing(radiusMin,radiusMax,(h<0.0)?slices:-slices,stacks, 0);
+
 	glDisable(GL_CULL_FACE);
+}
+
+void Ring::setupShadow(bool setup)
+{
+	PlanetShadows* shadows = PlanetShadows::getInstance();
+
+	if(shadows->isActive())
+	{
+		if(setup)
+			shadows->setRings(tex, radiusMin, radiusMax);
+		else
+			shadows->setRings(StelTextureSP(NULL), 0, 0);
+	}
 }
 
 
