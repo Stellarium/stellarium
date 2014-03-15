@@ -471,13 +471,15 @@ void Comet::drawComa(StelCore* core, StelProjector::ModelViewTranformP transfo)
 }
 
 // Formula found at http://www.projectpluto.com/update7b.htm#comet_tail_formula
-Vec2f Comet::getComaDiameterAndTailLengthAU() const {
-	float r=getHeliocentricEclipticPos().length();
-	float mhelio=absoluteMagnitude+slopeParameter*log10(r);
-	float Do=pow(10.0f, ((-0.0033f*mhelio - 0.07f)*mhelio + 3.25f));
-	float D =Do*(1.0f-pow(10.0, -2.0f*r))*(1.0f-pow(10.0, -r))* (1000.0f*AU_KM);
-	float Lo=pow(10.0f, ((-0.0075f*mhelio - 0.19f)*mhelio + 2.1f));
-	float L = Lo*(1.0f-pow(10.0, -4.0f*r))*(1.0f-pow(10.0, -2.0f*r))* (1e6*AU_KM);
+Vec2f Comet::getComaDiameterAndTailLengthAU() const
+{
+	float r = getHeliocentricEclipticPos().length();
+	float mhelio = absoluteMagnitude + slopeParameter * log10(r);
+	float Do = pow(10.0f, ((-0.0033f*mhelio - 0.07f) * mhelio + 3.25f));
+	float common = 1.0f - pow(10.0f, (-2.0f*r));
+	float D = Do * common * (1.0f - pow(10.0f, -r)) * (1000.0f*AU_KM);
+	float Lo = pow(10.0f, ((-0.0075f*mhelio - 0.19f) * mhelio + 2.1f));
+	float L = Lo*(1.0f-pow(10.0f, -4.0f*r)) * common * (1e6*AU_KM);
 	return Vec2f(D, L);
 }
 
