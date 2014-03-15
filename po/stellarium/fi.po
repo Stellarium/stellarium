@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-03-12 20:32+0700\n"
-"PO-Revision-Date: 2014-03-13 18:05+0000\n"
+"PO-Revision-Date: 2014-03-15 02:47+0000\n"
 "Last-Translator: Tuomas Teipainen <tmsteipainen1@gmail.com>\n"
 "Language-Team: Finnish <fi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-03-14 05:39+0000\n"
+"X-Launchpad-Export-Date: 2014-03-15 05:43+0000\n"
 "X-Generator: Launchpad (build 16963)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:107 src/core/modules/StarMgr.cpp:338
@@ -9328,10 +9328,17 @@ msgid ""
 "known as meteor outbursts and meteor storms, which may produce greater than "
 "1,000 meteors an hour."
 msgstr ""
+"Meteoriparvella tarkoitetaan Maan ilmakehään tulevia meteoreja, jotka "
+"tulevat tietystä taivaan suunnasta. Meteoriparvet ovat yleensä törmäyksissä "
+"hajonneiden isompien kappaleiden tai ohi kulkeneen komeetan jäännöksiä. "
+"Suurin osa meteoreista on hiekanjyvää pienempiä, ja ne hajoavat ilmakehään "
+"tullessan eivätkä koskaan pääse maan pinnalle asti. Poikkeuksellisen "
+"voimakkaita meteoriparvia kutsutaan meteorimyrskyiksi, jolloin meteoreja "
+"saattaa näkyä jopa enemmän kuin tuhat kappaletta tunnissa."
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:244
 msgid "Radiant"
-msgstr ""
+msgstr "Radiantti"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:245
 msgid ""
@@ -9340,6 +9347,9 @@ msgid ""
 "Perseids, for example, are meteors which appear to come from a point within "
 "the constellation of Perseus."
 msgstr ""
+"Meteoriparven radiantti tai näennäinen radiantti on se taivaan piste, josta "
+"meteorit näyttävät tulevan. Esimerkiksi Perseidit näyttävät tulevan tietystä "
+"pisteestä Perseuksen tähdistössä."
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:246
 msgid ""
@@ -9348,6 +9358,10 @@ msgid ""
 "point back to the known radiant for a given shower is known as a sporadic "
 "and is not considered part of that shower."
 msgstr ""
+"Havaitsija voi nähdä meteorin missä päin taivasta tahansa, mutta jos "
+"meteorin liikettä seurataan, havaitaan sen osoittavan radianttia kohti. "
+"Meteorit, jotka eivät osoita kohti parven radianttia ovat sporadisia eli "
+"satunnaisia meteoreja, eivätkä ne liity kyseiseen parveen."
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:247
 msgid ""
@@ -9355,10 +9369,12 @@ msgid ""
 "when it appears. For example, the radiant point for the Delta Aurigids "
 "drifts by more than a degree per night."
 msgstr ""
+"Monilla parvilla radiantti siirtyy aktiivisuusjakson aikana. Esimerkiksi "
+"delta-Aurigidien radiantti siirtyy yli asteen verran yhdessä yössä."
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:248
 msgid "Zenithal Hourly Rate (ZHR)"
-msgstr ""
+msgstr "Meteoria tunnissa zeniitissä (ZHR)"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:249
 msgid ""
@@ -9368,10 +9384,16 @@ msgid ""
 "were at the zenith. The rate that can effectively be seen is nearly always "
 "lower and decreases the closer the radiant is to the horizon."
 msgstr ""
+"Meteoriparven ZHR  (Zenithal Hourly Rate, meteoria tunnissa zeniitissä) "
+"määrittää kuinka monta kyseisen parven meteoria yksittäinen havaitsija voisi "
+"teoriassa nähdä kirkkaalla, pimeällä taivaalla (rajamagnitudi 6.5), ja "
+"mikäli parven radiantti olisi zeniitissä. Todellinen lukumäärä on "
+"käytännössä aina pienempi ja pienenee sitä mukaa mitä lähempänä horisonttia "
+"radiantti on."
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:250
 msgid "Population index"
-msgstr ""
+msgstr "Populaatioindeksi"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:251
 msgid ""
@@ -9380,131 +9402,135 @@ msgid ""
 "meteors are more frequent than average, while values above 3.0 mean that the "
 "share of faint meteors is larger than usual."
 msgstr ""
+"Populaatioindeksi kertoo kuinka kirkkaita meteoriparven meteorit ovat. Alle "
+"2.5 arvot tarkoittavat kirkkaiden meteorien olevan keskimääräistä "
+"todennäköisempiä, kun taas yli 3.0 arvot tarkoittavat himmeiden meteorien "
+"keskimääräistä suurempaa määrää."
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:252
 msgid "Notes"
-msgstr ""
+msgstr "Huomautukset"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:253
 msgid ""
 "This plugin was created as project of ESA Summer of Code in Space 2013."
-msgstr ""
+msgstr "Laajennus toteutettiin ESA Summer of Code in Spacen projektina 2013."
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:254
 msgid "Info"
-msgstr ""
+msgstr "Tietoja"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:255
 msgid "Info about meteor showers you can get here:"
-msgstr ""
+msgstr "Tietoja meteoriparvista löydät täältä:"
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:258
 #, qt-format
 msgid "%1Meteor shower%2 - article in Wikipedia"
-msgstr ""
+msgstr "%1Meteoriparvi%2 - artikkeli Wikipediassa"
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:260
 #, qt-format
 msgid "%1International Meteor Organization%2"
-msgstr ""
+msgstr "%1International Meteor Organization%2"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:324
 msgid "Meteor showers is updated"
-msgstr ""
+msgstr "Meteoriparvet on päivitetty"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:512
 msgid "Meteor Showers Configuration"
-msgstr ""
+msgstr "Meteoriparvien asetukset"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:513
 msgid "Meteor Showers Plug-in Configuration"
-msgstr ""
+msgstr "Meteoriparvet-lajennuksen asetukset"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:515
 msgid "Update data from Internet"
-msgstr ""
+msgstr "Päivitä tiedot internetistä"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:523
 msgid "Meteor showers"
-msgstr ""
+msgstr "Meteoriparvet"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:524
 msgid "Show meteor showers button on toolbar"
-msgstr ""
+msgstr "Näytä meteoriparvet-painike työkalupalkissa"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:525
 msgid "Enable display of meteor showers at startup"
-msgstr ""
+msgstr "Näytä meteoriparvet käynnistettäessä"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:529
 msgid "Color of radiants markers"
-msgstr ""
+msgstr "Radianttimerkkien väri"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:531
 msgid "Active Radiant - Generic Data"
-msgstr ""
+msgstr "Aktiivinen radiantti - geneerinen data"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:534
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:541
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:548
 msgid "Change Color"
-msgstr ""
+msgstr "Vaihda väriä"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:538
 msgid "Inactive Radiant"
-msgstr ""
+msgstr "Epäaktiivinen radiantti"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:545
 msgid "Active Radiant - Real Data"
-msgstr ""
+msgstr "Aktiivinen radiantti - todellinen data"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:551
 msgid "Radiants for meteor showers"
-msgstr ""
+msgstr "Meteoriparvien radiantit"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:552
 msgid "Show labels of radiants"
-msgstr ""
+msgstr "Näytä radianttien merkit"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:553
 msgid "Show active radiants only"
-msgstr ""
+msgstr "Näytä vain aktiiviset radiantit"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:555
 msgid "Label font size (pixels)"
-msgstr ""
+msgstr "Nimien fonttikoko (pikseliä)"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:557
 msgid "Radiants"
-msgstr ""
+msgstr "Radiantit"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:558
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:563
 msgid "Search"
-msgstr ""
+msgstr "Etsi"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:559
 msgid "From:"
-msgstr ""
+msgstr "Mistä:"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:560
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:562
 msgid "dd/MMM/yyyy"
-msgstr ""
+msgstr "pp/kkk/vvvv"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:561
 msgid "To:"
-msgstr ""
+msgstr "Mihin:"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:564
 msgid "Results"
-msgstr ""
+msgstr "Tulokset"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:565
 msgid "Search Events"
-msgstr ""
+msgstr "Hakutapahtumat"
 
 #~ msgid "Equatorial Grid"
 #~ msgstr "Ekvatoriaaliasteikko"
