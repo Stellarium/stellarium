@@ -420,6 +420,10 @@ IF(WIN32 AND ENABLE_WINDOWS_EXE_ICON)
                        COMMAND ${RC_COMPILER_PATH} ${CMAKE_SOURCE_DIR}/data/stellarium.rc ${CMAKE_BINARY_DIR}/stellarium-rc.o
                        WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/data)
     SET(stellarium_exe_SRCS ${stellarium_exe_SRCS} ${CMAKE_BINARY_DIR}/stellarium-rc.o)
+  ELSE()
+    IF(MSVC)
+      SET(stellarium_exe_SRCS ${stellarium_exe_SRCS} ${CMAKE_SOURCE_DIR}/data/stellarium.rc)
+    ENDIF()
   ENDIF()
 ENDIF()
 
