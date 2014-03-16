@@ -91,7 +91,7 @@ TelescopeControl::TelescopeControl()
 	, moveToCenterActionId("actionSlew_Telescope_To_Direction_%1")
 {
 	setObjectName("TelescopeControl");
-	QOpenGLFunctions_1_2::initializeOpenGLFunctions();
+	QOpenGLFunctions::initializeOpenGLFunctions();
 
 	connectionTypeNames.insert(ConnectionVirtual, "virtual");
 	connectionTypeNames.insert(ConnectionInternal, "internal");
@@ -270,7 +270,7 @@ void TelescopeControl::draw(StelCore* core)
 				//Telescope circles appear synchronously with markers
 				if (circleFader.getInterstate() >= 0)
 				{
-					glColor4f(circleColor[0], circleColor[1], circleColor[2], circleFader.getInterstate());
+					sPainter.setColor(circleColor[0], circleColor[1], circleColor[2], circleFader.getInterstate());
 					glDisable(GL_TEXTURE_2D);
 					foreach (double circle, telescope->getOculars())
 					{
@@ -280,12 +280,12 @@ void TelescopeControl::draw(StelCore* core)
 				}
 				if (reticleFader.getInterstate() >= 0)
 				{
-					glColor4f(reticleColor[0], reticleColor[1], reticleColor[2], reticleFader.getInterstate());
+					sPainter.setColor(reticleColor[0], reticleColor[1], reticleColor[2], reticleFader.getInterstate());
 					sPainter.drawSprite2dMode(XY[0],XY[1],15.f);
 				}
 				if (labelFader.getInterstate() >= 0)
 				{
-					glColor4f(labelColor[0], labelColor[1], labelColor[2], labelFader.getInterstate());
+					sPainter.setColor(labelColor[0], labelColor[1], labelColor[2], labelFader.getInterstate());
 					//TODO: Different position of the label if circles are shown?
 					//TODO: Remove magic number (text spacing)
 					sPainter.drawText(XY[0], XY[1], telescope->getNameI18n(), 0, 6 + 10, -4, false);
