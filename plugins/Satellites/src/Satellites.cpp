@@ -85,7 +85,7 @@ Satellites::Satellites()
 {
 	setObjectName("Satellites");
 	configDialog = new SatellitesDialog();
-	QOpenGLFunctions_1_2::initializeOpenGLFunctions();
+	QOpenGLFunctions::initializeOpenGLFunctions();
 }
 
 void Satellites::deinit()
@@ -1604,7 +1604,7 @@ void Satellites::drawPointer(StelCore* core, StelPainter& painter)
 		// Compute 2D pos and return if outside screen
 		if (!prj->project(pos, screenpos))
 			return;
-		glColor3f(0.4f,0.5f,0.8f);
+		painter.setColor(0.4f,0.5f,0.8f);
 		texPointer->bind();
 
 		glEnable(GL_TEXTURE_2D);
