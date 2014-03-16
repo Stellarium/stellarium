@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-03-12 20:32+0700\n"
-"PO-Revision-Date: 2014-03-10 05:21+0000\n"
+"PO-Revision-Date: 2014-03-16 04:55+0000\n"
 "Last-Translator: Manuel Rosales Graña <manuel.rosales@mundo-r.com>\n"
 "Language-Team: Galician <gl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-03-13 05:56+0000\n"
+"X-Launchpad-Export-Date: 2014-03-16 05:39+0000\n"
 "X-Generator: Launchpad (build 16963)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:107 src/core/modules/StarMgr.cpp:338
@@ -8961,7 +8961,7 @@ msgstr "Tamaño de letra:"
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:78
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:154
 msgid "Meteor Showers"
-msgstr ""
+msgstr "Choivas de meteoros"
 
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:81
 msgid ""
@@ -8969,371 +8969,376 @@ msgid ""
 "meteor showers and displays marker for radiants in activity range for each "
 "meteor showers."
 msgstr ""
+"Este plugin permite a visualización das choivas de meteoros, mostra "
+"información sobre as mesmas e crea marcadores para radiantes no rango de "
+"actividade para cada unha das choivas de meteoros."
 
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:155
 msgid "Show meteor showers"
-msgstr ""
+msgstr "Mostrar choivas de meteoros"
 
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:156
 msgid "Radiant labels"
-msgstr ""
+msgstr "Etiquetas de radiante"
 
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:157
 msgid "Meteor Shower configuration window"
-msgstr ""
+msgstr "Fiestra de configuración das Choivas de Meteoros"
 
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:184
 msgid ""
 "The old showers.json file is no longer compatible - using default file"
 msgstr ""
+"O antigo arquivo showers.json xa non é compatible - usando arquivo por "
+"defecto."
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1113
 msgid "Quadrantids"
-msgstr ""
+msgstr "Cuadrántidas"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1115
 msgid "Lyrids"
-msgstr ""
+msgstr "Líridas"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1117
 msgid "α-Centaurids"
-msgstr ""
+msgstr "α-Centáuridas"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1119
 msgid "γ-Normids"
-msgstr ""
+msgstr "γ-Normídidas"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1121
 msgid "η-Aquariids"
-msgstr ""
+msgstr "η-Acuáridas"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1123
 msgid "June Bootids"
-msgstr ""
+msgstr "Boóiídeas Xuño"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1125
 msgid "Piscis Austrinids"
-msgstr ""
+msgstr "Piscis Austrínidas"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1127
 msgid "Southern δ-Aquariids"
-msgstr ""
+msgstr "δ-Acuáridas Sur"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1129
 msgid "α-Capricornids"
-msgstr ""
+msgstr "α-Capricórnidas"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1131
 msgid "α-Aurigids"
-msgstr ""
+msgstr "α-Auríguidas"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1133
 msgid "September ε-Perseids"
-msgstr ""
+msgstr "ε-Perseidas Setembro"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1135
 msgid "Draconids"
-msgstr ""
+msgstr "Dracónidas"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1137
 msgid "Leonids"
-msgstr ""
+msgstr "Leónidas"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1139
 msgid "Phoenicids"
-msgstr ""
+msgstr "Phoenicidas"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1141
 msgid "Puppid-Velids"
-msgstr ""
+msgstr "Púppidas-Vélidas"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1143
 msgid "Ursids"
-msgstr ""
+msgstr "Úrsidas"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1145
 msgid "Perseids"
-msgstr ""
+msgstr "Perseidas"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1147
 msgid "δ-Leonids"
-msgstr ""
+msgstr "δ-Leónidas"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1149
 msgid "π-Puppids"
-msgstr ""
+msgstr "π-Púppidas"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1151
 msgid "June Lyrids"
-msgstr ""
+msgstr "Líridas Xuño"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1153
 msgid "κ-Cygnids"
-msgstr ""
+msgstr "κ-Cígnidas"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1155
 msgid "ε-Lyrids"
-msgstr ""
+msgstr "ε-Líridas"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1157
 msgid "δ-Aurigids"
-msgstr ""
+msgstr "δ-Auríguidas"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1159
 msgid "ε-Geminids"
-msgstr ""
+msgstr "ε-Xemínidas"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1161
 msgid "Southern Taurids"
-msgstr ""
+msgstr "Táuridas Sur"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1163
 msgid "Northern Taurids"
-msgstr ""
+msgstr "Táuridas Norte"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1165
 msgid "Monocerotids"
-msgstr ""
+msgstr "Monocerótidas"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1167
 msgid "σ-Hydrids"
-msgstr ""
+msgstr "σ-Hídridas"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1169
 msgid "Geminids"
-msgstr ""
+msgstr "Xemínidas"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1171
 msgid "Leonis Minorids"
-msgstr ""
+msgstr "Leo Minóridas"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1173
 msgid "December Leonis Minorids"
-msgstr ""
+msgstr "Leo Minóridas Decembro"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1175
 msgid "Comae Berenicids"
-msgstr ""
+msgstr "Coma Berenícidas"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1177
 msgid "Orionids"
-msgstr ""
+msgstr "Oriónidas"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1179
 msgid "Andromedids"
-msgstr ""
+msgstr "Andromédidas"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1183
 msgid "Minor planet 2003 EH1 and Comet C/1490 Y1"
-msgstr ""
+msgstr "Planeta menor 2003 EH 1 e Cometa C/1490 Y1"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1185
 msgid "Comet 1P/Halley"
-msgstr ""
+msgstr "Cometa 1P/Halley"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1187
 msgid "Comet 7P/Pons-Winnecke"
-msgstr ""
+msgstr "Cometa 7P/Pons-Winnecke"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1189
 msgid "Comet 55P/Tempel-Tuttle"
-msgstr ""
+msgstr "Cometa 55P/Tempel-Tuttle"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1191
 msgid "Comet 96P/Machholz"
-msgstr ""
+msgstr "Cometa 96P/Machholz"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1193
 msgid "Comet 109P/Swift-Tuttle"
-msgstr ""
+msgstr "Cometa 109P/Swift-Tuttle"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1195
 msgid "Comet Thatcher (1861 I)"
-msgstr ""
+msgstr "Cometa Thatcher (1861 I)"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1197
 msgid "Minor planet (4450) Pan"
-msgstr ""
+msgstr "Planeta menor (4450) Pan"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1199
 msgid "Comet 26P/Grigg-Skjellerup"
-msgstr ""
+msgstr "Cometa 26P/Grigg-Skjellerup"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1201
 msgid "Comet 21P/Giacobini-Zinner"
-msgstr ""
+msgstr "Cometa 21P/Giacobini-Zinner"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1203
 msgid "Comet 169P/NEAT"
-msgstr ""
+msgstr "Cometa 169P/NEAT"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1205
 msgid "Comet 289P/Blanpain"
-msgstr ""
+msgstr "Cometa 289P/Blanpain"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1207
 msgid "Comet 8P/Tuttle"
-msgstr ""
+msgstr "Cometa 8P/Tuttle"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1209
 msgid "Minor planet 2008 ED69"
-msgstr ""
+msgstr "Planeta menor 2008 ED69"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1211
 msgid "Comet 2P/Encke"
-msgstr ""
+msgstr "Cometa 2P/Encke"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1213
 msgid "Comet 3D/Biela"
-msgstr ""
+msgstr "Cometa 3D/Biela"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1215
 msgid "Minor planet 2004 TG10"
-msgstr ""
+msgstr "Planeta menor 2004 TG10"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1217
 msgid "Minor planet (3200) Phaethon"
-msgstr ""
+msgstr "Planeta menor (3200) Phaethon"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:291
 msgid "generic data"
-msgstr ""
+msgstr "datos xenéricos"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:293
 msgid "real data"
-msgstr ""
+msgstr "datos reais"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:299
 msgid "meteor shower"
-msgstr ""
+msgstr "choiva de meteoros"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:307
 msgid "Radiant drift (per day)"
-msgstr ""
+msgstr "Deriva do radiante (por día)"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:312
 #, qt-format
 msgid "Geocentric meteoric velocity: %1 km/s"
-msgstr ""
+msgstr "Velociade meteórica xeocéntrica: %1 km/s"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:315
 #, qt-format
 msgid "The population index: %1"
-msgstr ""
+msgstr "Índice de poboación: %1"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:320
 #, qt-format
 msgid "Parent body: %1"
-msgstr ""
+msgstr "Parent body: %1"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:326
 msgid "Active"
-msgstr ""
+msgstr "Activo"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:334
 msgid "Activity"
-msgstr ""
+msgstr "Actividade"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:339
 #, qt-format
 msgid "Maximum: %1"
-msgstr ""
+msgstr "Máximo: %1"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:342
 msgid "Solar longitude is"
-msgstr ""
+msgstr "A lonxitude solar é"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:351
 msgid "variable"
-msgstr ""
+msgstr "variable"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:162
 msgid "ZHR"
-msgstr ""
+msgstr "ZHR"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:163
 msgid "Data Type"
-msgstr ""
+msgstr "Tipo de datos"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:164
 msgid "Peak"
-msgstr ""
+msgstr "Pico"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:174
 msgid "Start date greater than end date!"
-msgstr ""
+msgstr "A data de comezo é maior cá  data final!"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:176
 msgid "Time interval must be less than one year!"
-msgstr ""
+msgstr "O intervalo de tempo debe ser inferior a un ano!"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:193
 msgid "Variable"
-msgstr ""
+msgstr "Variable"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:196
 msgid "Real"
-msgstr ""
+msgstr "Real"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:196
 msgid "Generic"
-msgstr ""
+msgstr "Xenérico"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:235
 msgid "Meteor Showers Plug-in"
-msgstr ""
+msgstr "Plugin de Chovias de Meteoros"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:240
 msgid ""
@@ -9341,14 +9346,17 @@ msgid ""
 "information about meteor showers and displays marker for radiants in "
 "activity range for each meteor showers."
 msgstr ""
+"O plugin de choiva de meteoros permite ver as choivas de meteoros, amosa "
+"información sobre as mesmas e desprega marcadores para radiantes na franxa "
+"de actividade para cada choiva de meteoros."
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:241
 msgid "Terms"
-msgstr ""
+msgstr "Termos"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:242
 msgid "Meteor shower"
-msgstr ""
+msgstr "Choiva de Meteoros"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:243
 msgid ""
@@ -9361,10 +9369,18 @@ msgid ""
 "known as meteor outbursts and meteor storms, which may produce greater than "
 "1,000 meteors an hour."
 msgstr ""
+"A choiva de meteoros é un evento celestial no que un número de meteoros "
+"irradian, ou orixínanse, a partir dun punto no ceo nocturno. Estes meteoros "
+"son causados ​​por fluxos de detritos cósmicos chamados meteoroides que "
+"entran na atmosfera da Terra a velocidades moi altas en traxectorias "
+"paralelas. A maioría dos meteoros son menores ca un gran de area, polo que "
+"case todos eles se desintegran e nunca alcanzan a superficie da Terra. "
+"Intensas ou inusuais choivas de meteoros son coñecidas como explosións e "
+"tempestades de meteoros, que poden producir máis de 1000 meteoros por hora."
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:244
 msgid "Radiant"
-msgstr ""
+msgstr "Radiante"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:245
 msgid ""
@@ -9373,6 +9389,10 @@ msgid ""
 "Perseids, for example, are meteors which appear to come from a point within "
 "the constellation of Perseus."
 msgstr ""
+"O radiante ou radiante aparente dunha choiva de meteoros é o punto do ceo "
+"dende onde (para un observador planetario) os meteoros parecen orixinarse. "
+"As Perseidas, por exemplo, son meteoros que parecen vir dun punto dentro da "
+"constelación de Perseo."
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:246
 msgid ""
@@ -9381,6 +9401,9 @@ msgid ""
 "point back to the known radiant for a given shower is known as a sporadic "
 "and is not considered part of that shower."
 msgstr ""
+"Un observador pode ver un meteoro en calquera lugar do ceo, pero a dirección "
+"do movemento, cando se traza, apuntará ó radiante. Un meteoro que non apunta "
+"ó seu radiante considérase esporádico e non parte desa choiva de meteoros."
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:247
 msgid ""
@@ -9388,10 +9411,13 @@ msgid ""
 "when it appears. For example, the radiant point for the Delta Aurigids "
 "drifts by more than a degree per night."
 msgstr ""
+"Moitas choivas de meteoros teñen un punto radiante que muda de posición "
+"durante o intervalo en que aparecen. Por exemplo, o punto radiante de Delta "
+"Auríguidas deriva máis de un grao por noite."
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:248
 msgid "Zenithal Hourly Rate (ZHR)"
-msgstr ""
+msgstr "Taxa Horaria Zenital (ZHR)"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:249
 msgid ""
@@ -9401,10 +9427,16 @@ msgid ""
 "were at the zenith. The rate that can effectively be seen is nearly always "
 "lower and decreases the closer the radiant is to the horizon."
 msgstr ""
+"En astronomía, a taxa horaria zenital (ZHR) dunha choiva de meteoros é o "
+"número de meteoros que un único observador vería nunha hora baixo un ceo "
+"claro, escuro (limitando a magnitude aparente de 6,5), se o radiante da "
+"choiva estivese no cénit. A proporción que se pode ver de forma eficaz é "
+"case sempre inferior e diminúe canto máir preto estea o radiante do "
+"horizonte."
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:250
 msgid "Population index"
-msgstr ""
+msgstr "Índice de poboación"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:251
 msgid ""
@@ -9413,131 +9445,137 @@ msgid ""
 "meteors are more frequent than average, while values above 3.0 mean that the "
 "share of faint meteors is larger than usual."
 msgstr ""
+"O índice de poboación indica a distribución da magnitude das choivas de "
+"meteoros. Os valores por debaixo de 2,5 corresponden ás distribucións onde "
+"os meteoros brillantes son máis frecuentes que a media, mentres que valores "
+"por enriba de 3,0 significan que a cota de meteoros débiles é maior do "
+"habitual."
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:252
 msgid "Notes"
-msgstr ""
+msgstr "Anotacións"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:253
 msgid ""
 "This plugin was created as project of ESA Summer of Code in Space 2013."
 msgstr ""
+"Este plugin foi crado como proxecto de ESA Summer of Code in Space 2013."
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:254
 msgid "Info"
-msgstr ""
+msgstr "Información"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:255
 msgid "Info about meteor showers you can get here:"
-msgstr ""
+msgstr "Velaquí información sobre choivas de meteoros."
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:258
 #, qt-format
 msgid "%1Meteor shower%2 - article in Wikipedia"
-msgstr ""
+msgstr "%1Choiva de Meteoros%2 - artigo en Wikipedia"
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:260
 #, qt-format
 msgid "%1International Meteor Organization%2"
-msgstr ""
+msgstr "%1Organización Internacional de Meteoros%2"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:324
 msgid "Meteor showers is updated"
-msgstr ""
+msgstr "As choivas de meteoros están actualizadas"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:512
 msgid "Meteor Showers Configuration"
-msgstr ""
+msgstr "Configuración das Choivas de Meteoros"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:513
 msgid "Meteor Showers Plug-in Configuration"
-msgstr ""
+msgstr "Configuración do plugin de choivas de meteoros"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:515
 msgid "Update data from Internet"
-msgstr ""
+msgstr "Actualiar datos dende Internet"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:523
 msgid "Meteor showers"
-msgstr ""
+msgstr "Choivas de meteoros"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:524
 msgid "Show meteor showers button on toolbar"
-msgstr ""
+msgstr "Amosar na barra o botón de choivas de meteoros"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:525
 msgid "Enable display of meteor showers at startup"
-msgstr ""
+msgstr "Activar pantalla de choiva de meteoros ó inicio"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:529
 msgid "Color of radiants markers"
-msgstr ""
+msgstr "Cor dos marcadores de radiantes"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:531
 msgid "Active Radiant - Generic Data"
-msgstr ""
+msgstr "Radiante activo - Datos xenéricos"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:534
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:541
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:548
 msgid "Change Color"
-msgstr ""
+msgstr "Mudar a cor"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:538
 msgid "Inactive Radiant"
-msgstr ""
+msgstr "Radiante Inactivo"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:545
 msgid "Active Radiant - Real Data"
-msgstr ""
+msgstr "Radiante Activo - Datos reais"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:551
 msgid "Radiants for meteor showers"
-msgstr ""
+msgstr "Radiantes para as choivas de meteoros"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:552
 msgid "Show labels of radiants"
-msgstr ""
+msgstr "Amosar etiquetas de radiantes"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:553
 msgid "Show active radiants only"
-msgstr ""
+msgstr "Amosar só radiantes activos"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:555
 msgid "Label font size (pixels)"
-msgstr ""
+msgstr "Etiqueta de tamaño de letra (en píxeles)"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:557
 msgid "Radiants"
-msgstr ""
+msgstr "Radiantes"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:558
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:563
 msgid "Search"
-msgstr ""
+msgstr "Busca"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:559
 msgid "From:"
-msgstr ""
+msgstr "Dende:"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:560
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:562
 msgid "dd/MMM/yyyy"
-msgstr ""
+msgstr "dd/MMM/yyyy"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:561
 msgid "To:"
-msgstr ""
+msgstr "Ata:"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:564
 msgid "Results"
-msgstr ""
+msgstr "Resultados"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:565
 msgid "Search Events"
-msgstr ""
+msgstr "Buscar Eventos"
 
 #~ msgid "Cardinal Points"
 #~ msgstr "Puntos cardinais"
