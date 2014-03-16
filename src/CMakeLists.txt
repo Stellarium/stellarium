@@ -399,9 +399,10 @@ IF(USE_PLUGIN_SVMT)
 ENDIF()
 
 IF(USE_PLUGIN_TELESCOPECONTROL)
-	IF(WIN32)
-		SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} libwsock32.a)
-	ENDIF()
+# WinSock library
+    IF(WIN32)
+        SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} ws2_32)
+    ENDIF()
 ENDIF()
 
 
@@ -411,6 +412,8 @@ ENDIF()
 
 SET(extLinkerOption ${OPENGL_LIBRARIES} ${ZLIB_LIBRARIES})
 IF(WIN32 AND NOT MSVC)
+# TODO: Test if winsock is still necessary if the Telescope Control plug-in is disabled.
+# Because including it here seems to duplicate STELLARIUM_STATIC_PLUGINS_LIBRARIES
 	SET(extLinkerOption ${extLinkerOption} libwinmm.a -lws2_32)
 ENDIF()
 
