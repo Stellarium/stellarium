@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-03-12 20:32+0700\n"
-"PO-Revision-Date: 2014-03-12 14:06+0000\n"
+"PO-Revision-Date: 2014-03-16 16:50+0000\n"
 "Last-Translator: henrysky <Unknown>\n"
 "Language-Team: Chinese (Hong Kong) <zh_HK@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-03-13 06:12+0000\n"
+"X-Launchpad-Export-Date: 2014-03-17 04:44+0000\n"
 "X-Generator: Launchpad (build 16963)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:107 src/core/modules/StarMgr.cpp:338
@@ -8792,11 +8792,11 @@ msgstr ""
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:291
 msgid "generic data"
-msgstr ""
+msgstr "通用數據"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:293
 msgid "real data"
-msgstr ""
+msgstr "真實數據"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:299
 msgid "meteor shower"
@@ -8804,7 +8804,7 @@ msgstr "流星雨"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:307
 msgid "Radiant drift (per day)"
-msgstr ""
+msgstr "輻射點偏移 (每日)"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:312
 #, qt-format
@@ -8814,45 +8814,45 @@ msgstr "地心流星速度: %1 公里/秒"
 #: plugins/MeteorShowers/src/MeteorShower.cpp:315
 #, qt-format
 msgid "The population index: %1"
-msgstr ""
+msgstr "數量指數: %1"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:320
 #, qt-format
 msgid "Parent body: %1"
-msgstr ""
+msgstr "每體: %1"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:326
 msgid "Active"
-msgstr ""
+msgstr "活躍中"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:334
 msgid "Activity"
-msgstr ""
+msgstr "活動"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:339
 #, qt-format
 msgid "Maximum: %1"
-msgstr ""
+msgstr "最大: %1"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:342
 msgid "Solar longitude is"
-msgstr ""
+msgstr "太陽黃經為"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:351
 msgid "variable"
-msgstr ""
+msgstr "可變的"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:162
 msgid "ZHR"
-msgstr ""
+msgstr "每小時天頂流星數"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:163
 msgid "Data Type"
-msgstr ""
+msgstr "資料類型"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:164
 msgid "Peak"
-msgstr ""
+msgstr "高峰"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:174
 msgid "Start date greater than end date!"
@@ -8864,15 +8864,15 @@ msgstr ""
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:193
 msgid "Variable"
-msgstr ""
+msgstr "不定"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:196
 msgid "Real"
-msgstr ""
+msgstr "真實"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:196
 msgid "Generic"
-msgstr ""
+msgstr "通用"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:235
 msgid "Meteor Showers Plug-in"
@@ -8887,7 +8887,7 @@ msgstr "此插件可以模擬流星雨, 顯示流星雨資料及顯示流星雨�
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:241
 msgid "Terms"
-msgstr ""
+msgstr "條款"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:242
 msgid "Meteor shower"
@@ -8907,7 +8907,7 @@ msgstr ""
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:244
 msgid "Radiant"
-msgstr ""
+msgstr "輻射點"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:245
 msgid ""
@@ -8934,7 +8934,7 @@ msgstr ""
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:248
 msgid "Zenithal Hourly Rate (ZHR)"
-msgstr ""
+msgstr "每小時天頂流星數 (ZHR)"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:249
 msgid ""
@@ -8944,12 +8944,10 @@ msgid ""
 "were at the zenith. The rate that can effectively be seen is nearly always "
 "lower and decreases the closer the radiant is to the horizon."
 msgstr ""
-"在天文學,  流星雨每小時天頂數 (ZHR) 指如果流星發生在天頂, 一個觀測者會在晴天, 無光害天空 (大約用肉眼看到6.5星等) 看到流星的數量. "
-"但實際經常低於理論數值, 及輻射點接近地平時也會低於理論數值."
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:250
 msgid "Population index"
-msgstr ""
+msgstr "數量指數"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:251
 msgid ""
@@ -8957,20 +8955,20 @@ msgid ""
 "showers. The values below 2.5 correspond to distributions where bright "
 "meteors are more frequent than average, while values above 3.0 mean that the "
 "share of faint meteors is larger than usual."
-msgstr "數量指數指流星雨光度分佈. 低於2.5指光亮流星多於平均, 而高於3.0指暗淡流星佔多數."
+msgstr ""
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:252
 msgid "Notes"
-msgstr ""
+msgstr "備註"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:253
 msgid ""
 "This plugin was created as project of ESA Summer of Code in Space 2013."
-msgstr ""
+msgstr "此插件是一個歐洲宇航局(ESA)之太空夏季程式碼大賽中的專案."
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:254
 msgid "Info"
-msgstr ""
+msgstr "相關資訊"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:255
 msgid "Info about meteor showers you can get here:"
@@ -9002,7 +9000,7 @@ msgstr "流星雨插件設定"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:515
 msgid "Update data from Internet"
-msgstr ""
+msgstr "從網上更新資料"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:523
 msgid "Meteor showers"
@@ -9018,25 +9016,25 @@ msgstr "在啟動時開啟流星雨插件"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:529
 msgid "Color of radiants markers"
-msgstr ""
+msgstr "輻射點標示顏色"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:531
 msgid "Active Radiant - Generic Data"
-msgstr ""
+msgstr "活躍輻射點 - 通用數據"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:534
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:541
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:548
 msgid "Change Color"
-msgstr ""
+msgstr "改變顏色"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:538
 msgid "Inactive Radiant"
-msgstr ""
+msgstr "不活躍輻射點"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:545
 msgid "Active Radiant - Real Data"
-msgstr ""
+msgstr "活躍輻射點 - 真實數據"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:551
 msgid "Radiants for meteor showers"
@@ -9044,45 +9042,45 @@ msgstr "流星雨輻射點"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:552
 msgid "Show labels of radiants"
-msgstr ""
+msgstr "顯示流星雨輻射點標示"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:553
 msgid "Show active radiants only"
-msgstr ""
+msgstr "只顯示活躍輻射點"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:555
 msgid "Label font size (pixels)"
-msgstr ""
+msgstr "標示字體大小 (像素)"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:557
 msgid "Radiants"
-msgstr ""
+msgstr "輻射點"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:558
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:563
 msgid "Search"
-msgstr ""
+msgstr "搜尋"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:559
 msgid "From:"
-msgstr ""
+msgstr "從："
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:560
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:562
 msgid "dd/MMM/yyyy"
-msgstr ""
+msgstr "dd/MMM/yyyy"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:561
 msgid "To:"
-msgstr ""
+msgstr "至"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:564
 msgid "Results"
-msgstr ""
+msgstr "結果"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:565
 msgid "Search Events"
-msgstr ""
+msgstr "搜索流星雨"
 
 #~ msgid "Equatorial Grid"
 #~ msgstr "赤道座標系統"
