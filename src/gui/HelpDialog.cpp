@@ -59,7 +59,10 @@ HelpDialog::HelpDialog(QObject* parent) : StelDialog(parent)
 
 	conf = StelApp::getInstance().getSettings();
 	setUpdatesEnabled(conf->value("main/check_updates_enabled", true).toBool()); // Enable check for updates by default
-	updateUrl = QString("http://www.stellarium.org/%1/updates.php").arg(conf->value("localization/app_locale", "en").toString());
+	QString lang = conf->value("localization/app_locale", "en").toString();
+	if (lang=="system" || lang=="C")
+		lang = "en";
+	updateUrl = QString("http://www.stellarium.org/%1/updates.php").arg(lang);
 	currentVersion = StelUtils::getApplicationVersion();
 
 	conf->setValue("main/check_updates_enabled", getUpdatesEnabled());
