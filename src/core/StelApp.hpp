@@ -328,9 +328,6 @@ private:
 	//! Store the summed size of all downloaded files read from the cache in bytes.
 	qint64 totalUsedCacheSize;
 
-	//! The state of the drawing sequence
-	int drawState;
-	
 	QList<StelProgressController*> progressControllers;
 };
 
