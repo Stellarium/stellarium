@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-03-12 20:32+0700\n"
-"PO-Revision-Date: 2014-03-17 16:38+0000\n"
+"PO-Revision-Date: 2014-03-19 08:46+0000\n"
 "Last-Translator: henrysky <Unknown>\n"
 "Language-Team: Chinese (Hong Kong) <zh_HK@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-03-18 05:53+0000\n"
-"X-Generator: Launchpad (build 16963)\n"
+"X-Launchpad-Export-Date: 2014-03-20 05:29+0000\n"
+"X-Generator: Launchpad (build 16967)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:107 src/core/modules/StarMgr.cpp:338
 #: src/core/modules/GridLinesMgr.cpp:680 src/core/modules/LandscapeMgr.cpp:343
@@ -689,13 +689,14 @@ msgid ""
 "article <em>The accelerations of the earth and moon from early astronomical "
 "observations</em> (%1)."
 msgstr ""
+"此方程由P. M. Muller及F. R. Stephenson在<em>從早期天文觀測地球和月球的加速現象</em>中發佈 (%1)."
 
 #: src/core/StelCore.cpp:1498
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson in the article <em>Pre-"
 "Telescopic Astronomical Observations</em> (%1)."
-msgstr ""
+msgstr "此方程由F. R. Stephenson在<em>前期望遠鏡時代天文觀察</em>中發佈 (%1)."
 
 #: src/core/StelCore.cpp:1501
 #, qt-format
@@ -725,6 +726,8 @@ msgid ""
 "article <em>Long-term changes in the rotation of the earth - 700 B.C. to "
 "A.D. 1980</em> (%1)."
 msgstr ""
+"此方程由F. R. Stephenson及L. V. Morrison<em>公元前700年到公元1980 - 地球自轉的長期變化</em>中發佈 "
+"(%1)"
 
 #: src/core/StelCore.cpp:1510
 msgid "This algorithm is used in the PC planetarium program Guide 7."
@@ -2523,13 +2526,13 @@ msgstr "由於水星怪異的軌道和圍著太陽某個點旋轉, 在一個水�
 msgid ""
 "Just before Mars eclipses the sun, Phobos pops out from behind and eclipses "
 "it first. Takes place between Scorpio and Sagittarius on April 26, 2017."
-msgstr ""
+msgstr "就在火星食太陽一刻, 火衛一彈出從後面先食了. 發生天蠍座和射手座之間, 2017年4月26日."
 
 #: src/translations.h:282
 msgid ""
 "Just before Mars eclipses the sun, Phobos pops out from behind and eclipses "
 "it first. Takes place between Taurus and Gemini on July 23, 2031."
-msgstr ""
+msgstr "就在火星食太陽一刻, 火衛一彈出從後面先食了. 發生金牛座和雙子座之間, 2031年7月23日."
 
 #: src/translations.h:283
 msgid "Phobos eclipsing the Sun as seen from Olympus Mons on Jan 10, 2068."
@@ -5234,7 +5237,7 @@ msgstr ""
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:801
 msgid "Magnification provided by these binoculars"
-msgstr ""
+msgstr "這些雙筒望遠鏡的放大倍率"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:802
 msgid "Actual field of view provided by these binoculars"
@@ -5319,11 +5322,11 @@ msgstr ""
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:527
 msgid "Opens the pop-up navigation menu."
-msgstr ""
+msgstr "打開彈出式導航選單."
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1053
 msgid "Enable only if an object is selected"
-msgstr ""
+msgstr "只有天體被選擇了才啟用"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1054
 msgid "Scale image circle"
@@ -5942,13 +5945,13 @@ msgstr "最後更新:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:685
 msgid "On update, add all new satellites from the selected source(s)"
-msgstr ""
+msgstr "在更新時, 新增更新來源中的新衛星"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:687
 msgid ""
 "On update, remove the satellites that are no longer listed in the update "
 "sources"
-msgstr ""
+msgstr "在更新時, 移除本機在更新來源中沒有的衛星"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:688
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:303
