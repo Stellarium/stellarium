@@ -10,14 +10,14 @@ msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-03-12 20:32+0700\n"
-"PO-Revision-Date: 2014-03-13 20:58+0000\n"
+"PO-Revision-Date: 2014-03-20 03:14+0000\n"
 "Last-Translator: José A. Macas Durazo <josedurazo92@gmail.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-03-14 05:40+0000\n"
-"X-Generator: Launchpad (build 16963)\n"
+"X-Launchpad-Export-Date: 2014-03-20 05:28+0000\n"
+"X-Generator: Launchpad (build 16967)\n"
 "Language: es_ES\n"
 
 #: src/core/modules/ConstellationMgr.cpp:107 src/core/modules/StarMgr.cpp:338
@@ -1144,11 +1144,11 @@ msgstr "Centrar sobre el objeto seleccionado"
 
 #: src/core/StelMovementMgr.cpp:108
 msgid "Zoom in on selected object"
-msgstr "Hacer zoom sobre el objeto seleccionado"
+msgstr "Hacer zum sobre el objeto seleccionado"
 
 #: src/core/StelMovementMgr.cpp:109
 msgid "Zoom out"
-msgstr "Alejarse"
+msgstr "Alejar zum"
 
 #: src/core/StelMovementMgr.cpp:110
 msgid "Track object"
@@ -1461,7 +1461,7 @@ msgstr "Flechas de teclado y arrastre de ratón"
 
 #: src/gui/HelpDialog.cpp:331
 msgid "Zoom in/out"
-msgstr "Acercar/alejar zoom"
+msgstr "Acercar/alejar zum"
 
 #: src/gui/HelpDialog.cpp:333
 msgid "Page Up/Down"
@@ -4540,7 +4540,7 @@ msgstr "Activar navegación mediante teclado"
 #: src/ui_configurationDialog.h:1077
 msgid "Allow mouse to pan (drag) and zoom (mousewheel)"
 msgstr ""
-"Permitir desplazamiento (clic y arrastrar) y zoom (rueda de desplazamiento) "
+"Permitir desplazamiento (clic y arrastrar) y zum (rueda de desplazamiento) "
 "con ratón"
 
 #: src/ui_configurationDialog.h:1079
@@ -4669,13 +4669,12 @@ msgid ""
 "When enabled, the \"auto zoom out\" key will also set the initial viewing "
 "direction"
 msgstr ""
-"Una vez activado, la tecla de \"Alejar zoom automáticamente\" también "
-"volverá a la dirección de la vista inicial"
+"Una vez activado, la tecla de \"Alejar zum automáticamente\" también volverá "
+"a la dirección de la vista inicial"
 
 #: src/ui_configurationDialog.h:1138
 msgid "Auto zoom out returns to initial direction of view"
-msgstr ""
-"Alejar zoom automáticamente vuelve a la dirección de la vista inicial"
+msgstr "Alejar zum automáticamente vuelve a la dirección de la vista inicial"
 
 #: src/ui_configurationDialog.h:1139
 msgid "Screenshots"
@@ -4962,6 +4961,12 @@ msgid ""
 "at one end, pointing at a <em>photograph</em> of Saturn at the other end of "
 "the lab. We measured. We calculated. We wished we were in Hawaii."
 msgstr ""
+"*se le nubla la vista* Recuerdo estar midiento el tamaño de la División "
+"Cassini cuando era estudiante. No era el alto glamour academico que se podía "
+"esperar... Estaba nublado...  Estaba lloviendo... El laboratorio del "
+"observatorio tenía unos telescopios antiguos mondados en un extremo, "
+"apuntando a una <em>fotografía</em> de Saturno al otro extremo del "
+"laboratorio. Lo medimos. Lo calculamos. Deseamos estar en Hawai."
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:81
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:420
@@ -5591,6 +5596,8 @@ msgstr "Usar grados y minutos para el CDV del CCD"
 msgid ""
 "Mark it if you want value of FOV is same like at the startup of Stellarium."
 msgstr ""
+"Marcar si quiere que el valor del CDV sea el mismo al de inicio de "
+"Stellarium."
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1069
 msgid "Restore FOV to initial values"
@@ -7177,7 +7184,7 @@ msgstr "Efectos"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:408
 msgid "Manual zoom"
-msgstr "Zoom manual"
+msgstr "Zum manual"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:413
 msgid "Magnitude scaling multiplier"
@@ -7193,7 +7200,7 @@ msgstr "Frecuencia de la etiqueta de nebulosa:"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:422
 msgid "Zoom duration:"
-msgstr "Duración del zoom:"
+msgstr "Duración del zum:"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:428
 msgid "Cursor timeout:"
@@ -8188,6 +8195,9 @@ msgid ""
 "altogether have %2 exoplanets (including %3 potentially habitable "
 "exoplanets)."
 msgstr ""
+"El catálogo actual contiene información acerca de %1 sistemas planetarios, "
+"que en conjunto tienen %2 exoplanetas (incluyendo %3 exoplanetas "
+"potencialmente habitables)."
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:141
@@ -8272,7 +8282,7 @@ msgstr "Exoplanetas: una versión interactiva de XKCD No. 1071"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:173
 msgid "HEK (The Hunt for Exomoons with Kepler)"
-msgstr "HEK ( La cacería de exolunas con Kepler)"
+msgstr "HEK (La Cacería de Exolunas con Kepler)"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:174
 msgid "Exoplanets in binaries and multiple systems (Richard Schwarz)"
@@ -8407,6 +8417,13 @@ msgid ""
 "setting. (Explanations are provided in the 'About' tab of the plugin's "
 "configuration window.)"
 msgstr ""
+"Despliega un análisis de la observabilidad del objeto seleccionado (salida, "
+"ocaso, y tiempos de tránsito) para la fecha actual, así como cuándo es "
+"observable durante el año. Se asume que un objeto es observable si se "
+"encuentra por encima del horizonte durante una fracción de la noche. También "
+"se incluyen las fechas de la mayor separación desde el sol, la salida y "
+"ocaso acrónico y cósmico. (Las explicaciones se proveen en la pestaña "
+"'Acerca de' de la ventana de configuración del complemento.)"
 
 #: plugins/Observability/src/Observability.cpp:209
 msgctxt "short month name"
@@ -8861,7 +8878,7 @@ msgid ""
 "This plugin allows stepwise zooming via keyboard shortcuts like in the "
 "<em>Cartes du Ciel</em> planetarium program."
 msgstr ""
-"Este complemento permite acercamientos a través de atajos de teclado como en "
+"Este complemento permite zum en pasos a través de atajos de teclado como en "
 "el programa planetario <em>Cartes du Ciel</em>."
 
 #: plugins/FOV/src/FOV.cpp:83
@@ -8881,11 +8898,12 @@ msgid ""
 "feature. You can edit values and use the keyboard for quick-setting of FOV. "
 "All values in degrees."
 msgstr ""
-"Por defecto Stellarium utiliza acercamientos suavizados a través de la rueda "
-"del ratón o los atajos de teclado. Algunos usuarios desean acercamientos a "
-"pasos fijos para el campo de visión como es en el planetario Cartes du Ciel, "
-"y este  complemento provee esta característica. Puede editar los valores y "
-"usar el teclado para un establecimiento rápido de CdV."
+"Por defecto Stellarium utiliza zum suavizado a través de la rueda del ratón "
+"o los atajos de teclado. Algunos usuarios desean acercamientos a pasos fijos "
+"para el campo de visión como es en el planetario Cartes du Ciel, y este  "
+"complemento provee esta característica. Puede editar los valores y usar el "
+"teclado para un establecimiento rápido de CDV. Todos los valores son en "
+"grados."
 
 #: plugins/NavStars/src/NavStars.cpp:53 plugins/NavStars/src/NavStars.cpp:138
 msgid "Navigational Stars"
@@ -8948,6 +8966,16 @@ msgid ""
 "always followed. Anyone who makes use of a published table or graph should "
 "first check its sign usage."
 msgstr ""
+"La ecuación del tiempo describe la discrepancia entre dos tipos de tiempo "
+"solar. Estos son tiempos solares aparentes, el cual sigue directamente el "
+"movimiento del sol, y el tiempo solar medio, que sigue un sol \"medio\" "
+"ficticio con mediodías de 24 horas aparte. No hay una definición "
+"universalmente aceptada de el signo de ecuación de tiempo. Algunas "
+"publicaciones lo muestran como positivo cuando el gnomon esta delante del "
+"reloj; otros cuando el reloj esta delante del gnomon. En el mundo de habla "
+"inglesa, el uso del anterior es el más común, pero no siempre se sigue. "
+"Cualquier persona que haga uso de una tabla o gráfico publicado debe "
+"comprobar primero el uso de signos."
 
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:272
 msgid "Show plug-ins button on toolbar"
@@ -9167,97 +9195,97 @@ msgstr "Oriónidas"
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1179
 msgid "Andromedids"
-msgstr ""
+msgstr "Andromédidas"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1183
 msgid "Minor planet 2003 EH1 and Comet C/1490 Y1"
-msgstr ""
+msgstr "Planeta menor 2003 EH1 and Cometa C/1490 Y1"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1185
 msgid "Comet 1P/Halley"
-msgstr ""
+msgstr "Cometa 1P/Halley"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1187
 msgid "Comet 7P/Pons-Winnecke"
-msgstr ""
+msgstr "Cometa 7P/Pons-Winnecke"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1189
 msgid "Comet 55P/Tempel-Tuttle"
-msgstr ""
+msgstr "Cometa 55P/Tempel-Tuttle"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1191
 msgid "Comet 96P/Machholz"
-msgstr ""
+msgstr "Cometa 96P/Machholz"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1193
 msgid "Comet 109P/Swift-Tuttle"
-msgstr ""
+msgstr "Cometa 109P/Swift-Tuttle"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1195
 msgid "Comet Thatcher (1861 I)"
-msgstr ""
+msgstr "Cometa Thatcher (1861 I)"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1197
 msgid "Minor planet (4450) Pan"
-msgstr ""
+msgstr "Planeta menor (4450) Pan"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1199
 msgid "Comet 26P/Grigg-Skjellerup"
-msgstr ""
+msgstr "Cometa 26P/Grigg-Skjellerup"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1201
 msgid "Comet 21P/Giacobini-Zinner"
-msgstr ""
+msgstr "Cometa 21P/Giacobini-Zinner"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1203
 msgid "Comet 169P/NEAT"
-msgstr ""
+msgstr "Cometa 169P/NEAT"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1205
 msgid "Comet 289P/Blanpain"
-msgstr ""
+msgstr "Cometa 289P/Blanpain"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1207
 msgid "Comet 8P/Tuttle"
-msgstr ""
+msgstr "Cometa 8P/Tuttle"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1209
 msgid "Minor planet 2008 ED69"
-msgstr ""
+msgstr "Planeta menor 2008 ED69"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1211
 msgid "Comet 2P/Encke"
-msgstr ""
+msgstr "Cometa 2P/Encke"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1213
 msgid "Comet 3D/Biela"
-msgstr ""
+msgstr "Comet 3D/Biela"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1215
 msgid "Minor planet 2004 TG10"
-msgstr ""
+msgstr "Planeta menor 2004 TG10"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1217
 msgid "Minor planet (3200) Phaethon"
-msgstr ""
+msgstr "Planeta menor (3200) Phaethon"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:291
 msgid "generic data"
@@ -9376,6 +9404,15 @@ msgid ""
 "known as meteor outbursts and meteor storms, which may produce greater than "
 "1,000 meteors an hour."
 msgstr ""
+"Una lluva de meteoros es un evento celeste en el que un número de meteoros "
+"se observan radiar, u originar, desde un punto del cielo nocturno. Estos "
+"meteoros son causados por flujos de desechos cósmicos llamados meteoroides "
+"entrando a la atmósfera de la Tierra a velocidades extremadamente altas en "
+"trayectorias paralelas. La mayoría de los meteoros son más chicos que un "
+"grano de arena, casi todos estos se desintegran y nunca alcanzan la "
+"superficie terrestre. Las lluvias intensas o inusuales son conocidas como "
+"explosion de meteoros y tormenta de meteoros, las cuales pueden producir más "
+"de 1,000 meteoros en una hora."
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:244
 msgid "Radiant"
@@ -9400,6 +9437,10 @@ msgid ""
 "point back to the known radiant for a given shower is known as a sporadic "
 "and is not considered part of that shower."
 msgstr ""
+"Un observador podría ver tal meteoro en cualquier lugar en el cielo pero la "
+"dirección del movimiento, cuando se traza hacia atrás, apunta al radiante. "
+"Un meteoro que no apunta hacia el radiante conocido de una lluvia se le "
+"conoce como esporádico y no se considera parte de esta lluvia."
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:247
 msgid ""
@@ -9407,6 +9448,9 @@ msgid ""
 "when it appears. For example, the radiant point for the Delta Aurigids "
 "drifts by more than a degree per night."
 msgstr ""
+"Algunas lluvias tienen un punto radiante que cambia de posición durante el "
+"intervalo que aparece. Por ejemplo, el punto radiante para las Delta "
+"Aurígidas se desplaza más de un grado por noche."
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:248
 msgid "Zenithal Hourly Rate (ZHR)"
@@ -9437,6 +9481,11 @@ msgid ""
 "meteors are more frequent than average, while values above 3.0 mean that the "
 "share of faint meteors is larger than usual."
 msgstr ""
+"El índice poblacional indica la distribución de magnitud de las lluvias de "
+"meteoros. Los valores debajo de 2.5 corresponden a las distribuciones donde "
+"los meteoros brillantes son más frecuentes del promedio, mientras que los "
+"valores por encima de 3.0 significan que la participación de meteoros tenues "
+"es mayor de lo usual."
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:252
 msgid "Notes"
