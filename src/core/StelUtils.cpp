@@ -107,33 +107,27 @@ QString getOperatingSystemInfo()
 	#elif defined Q_OS_MAC
 	switch(QSysInfo::MacintoshVersion)
 	{
-		case QSysInfo::MV_10_3:
-			OS = "Mac OS X 10.3";
+		case QSysInfo::MV_PANTHER:
+			OS = "Mac OS X 10.3 series";
 			break;
-		case QSysInfo::MV_10_4:
-			OS = "Mac OS X 10.4";
+		case QSysInfo::MV_TIGER:
+			OS = "Mac OS X 10.4 series";
 			break;
-		case QSysInfo::MV_10_5:
-			OS = "Mac OS X 10.5";
+		case QSysInfo::MV_LEOPARD:
+			OS = "Mac OS X 10.5 series";
 			break;
-		case QSysInfo::MV_10_6:
-			OS = "Mac OS X 10.6";
+		case QSysInfo::MV_SNOWLEOPARD:
+			OS = "Mac OS X 10.6 series";
 			break;
-		#ifdef MV_10_7
-		case QSysInfo::MV_10_7:
-			OS = "Mac OS X 10.7";
+		case QSysInfo::MV_LION:
+			OS = "Mac OS X 10.7 series";
 			break;
-		#endif
-		#ifdef MV_10_8
-		case QSysInfo::MV_10_8:
-			OS = "Mac OS X 10.8";
+		case QSysInfo::MV_MOUNTAINLION:
+			OS = "Mac OS X 10.8 series";
 			break;
-		#endif
-		#ifdef MV_10_9
-		case QSysInfo::MV_10_9:
-			OS = "Mac OS X 10.9";
+		case QSysInfo::MV_MAVERICKS:
+			OS = "Mac OS X 10.9 series";
 			break;
-		#endif
 		default:
 			OS = "Unsupported Mac version";
 			break;
