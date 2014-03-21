@@ -148,7 +148,7 @@
       <item row="1" column="0">
        <widget class="QStackedWidget" name="configurationStackedWidget">
         <property name="currentIndex">
-         <number>0</number>
+         <number>3</number>
         </property>
         <widget class="QWidget" name="page">
          <layout class="QVBoxLayout" name="verticalLayout_10">
@@ -1125,6 +1125,16 @@
                </property>
                <property name="text">
                 <string>Auto zoom out returns to initial direction of view</string>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="0">
+              <widget class="QCheckBox" name="autoEnableAtmosphereCheckBox">
+               <property name="toolTip">
+                <string>Auto-enabling of the atmosphere for bodies with atmosphere in location window</string>
+               </property>
+               <property name="text">
+                <string>Auto-enabling for the atmosphere</string>
                </property>
               </widget>
              </item>
