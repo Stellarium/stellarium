@@ -40,119 +40,111 @@ Meteor::Meteor(const StelCore* core, double v)
 {
 	const StelToneReproducer* eye = core->getToneReproducer();
 	
-  //  velocity = 11+(double)rand()/((double)RAND_MAX+1)*v;  // abs range 11-72 km/s
-  velocity=v;
+	velocity = 11+(double)rand()/((double)RAND_MAX+1)*v;  // abs range 11-72 km/s
+	if (velocity>72)
+		velocity = 72;
 
-  maxMag = 1;
+	maxMag = 1;
 
-  // determine meteor model view matrix (want z in dir of travel of earth, z=0 at center of earth)
-  // meteor life is so short, no need to recalculate
-  double equ_rotation; // rotation needed to align with path of earth
-  Vec3d sun_dir = core->heliocentricEclipticToEquinoxEqu( Vec3d(0,0,0) );
+	// enable sporadic meteors (randomized radiant for visible hemisphere)
+	double x_r = (M_PI_2*(double)rand())-M_PI;
+	double y_r = (M_PI_2*(double)rand())-M_PI;
+	double z_r = (M_PI_2*(double)rand())-M_PI;
 
-  Mat4d tmat = Mat4d::xrotation(-23.45f*M_PI/180.f);  // ecliptical tilt
-  sun_dir.transfo4d(tmat);  // convert to ecliptical coordinates
-  sun_dir.normalize();
-  equ_rotation = acos( sun_dir.dot( Vec3d(1,0,0) ) );
-  if( sun_dir[1] < 0 ) equ_rotation = 2*M_PI - equ_rotation;
+	mmat = Mat4d::xrotation(x_r) * Mat4d::zrotation(z_r) * Mat4d::yrotation(y_r);
 
-  equ_rotation -= M_PI_2;
+	// select random trajectory using polar coordinates in XY plane, centered on observer
+	xydistance = (double)rand()/((double)RAND_MAX+1)*(VISIBLE_RADIUS);
+	double angle = (double)rand()/((double)RAND_MAX+1)*2*M_PI;
 
-  mmat = Mat4d::xrotation(23.45f*M_PI/180.f) * Mat4d::zrotation(equ_rotation) * Mat4d::yrotation(M_PI_2);
+	// find observer position in meteor coordinate system
+	obs = core->altAzToEquinoxEqu(Vec3d(0,0,EARTH_RADIUS));
+	obs.transfo4d(mmat.transpose());
 
+	// set meteor start x,y
+	posInternal[0] = posTrain[0] = position[0] = xydistance*cos(angle) +obs[0];
+	posInternal[1] = posTrain[1] = position[1] = xydistance*sin(angle) +obs[1];
 
-  // select random trajectory using polar coordinates in XY plane, centered on observer
-  xydistance = (double)rand()/((double)RAND_MAX+1)*(VISIBLE_RADIUS);
-  double angle = (double)rand()/((double)RAND_MAX+1)*2*M_PI;
+	// determine life of meteor (start and end z value based on atmosphere burn altitudes)
 
-  // find observer position in meteor coordinate system
-  obs = core->altAzToEquinoxEqu(Vec3d(0,0,EARTH_RADIUS));
-  obs.transfo4d(mmat.transpose());
+	// D is distance from center of earth
+	double D = sqrt( position[0]*position[0] + position[1]*position[1] );
 
-  // set meteor start x,y
-  posInternal[0] = posTrain[0] = position[0] = xydistance*cos(angle) +obs[0];
-  posInternal[1] = posTrain[1] = position[1] = xydistance*sin(angle) +obs[1];
+	if( D > EARTH_RADIUS+HIGH_ALTITUDE ) {
+		// won't be visible
+		alive = 0;
+		return;
+	}
 
-  // determine life of meteor (start and end z value based on atmosphere burn altitudes)
+	startH = sqrt( pow(EARTH_RADIUS+HIGH_ALTITUDE,2) - D*D);
 
-  // D is distance from center of earth
-  double D = sqrt( position[0]*position[0] + position[1]*position[1] );
+	// determine end of burn point, and nearest point to observer for distance mag calculation
+	// mag should be max at nearest point still burning
+	if( D > EARTH_RADIUS+LOW_ALTITUDE ) {
+		endH = -startH;  // earth grazing
+		minDist = xydistance;
+	} else {
+		endH = sqrt( pow(EARTH_RADIUS+LOW_ALTITUDE,2) - D*D);
+		minDist = sqrt( xydistance*xydistance + pow( endH - obs[2], 2) );
+	}
 
-  if( D > EARTH_RADIUS+HIGH_ALTITUDE ) {
-    // won't be visible
-    alive = 0;
-    return;
-  }
+	if(minDist > VISIBLE_RADIUS ) {
+		// on average, not visible (although if were zoomed ...)
+		alive = 0;
+		return;
+	}
 
-  startH = sqrt( pow(EARTH_RADIUS+HIGH_ALTITUDE,2) - D*D);
+	/* experiment
+	// limit lifetime to 0.5-3.0 sec
+	double tmp_h = startH - velocity * (0.5 + (double)rand()/((double)RAND_MAX+1) * 2.5);
+	if( tmp_h > endH ) {
+		endH = tmp_h;
+	}
+	*/
 
-  // determine end of burn point, and nearest point to observer for distance mag calculation
-  // mag should be max at nearest point still burning
-  if( D > EARTH_RADIUS+LOW_ALTITUDE ) {
-    endH = -startH;  // earth grazing
-    minDist = xydistance;
-  } else {
-    endH = sqrt( pow(EARTH_RADIUS+LOW_ALTITUDE,2) - D*D);
-    minDist = sqrt( xydistance*xydistance + pow( endH - obs[2], 2) );
-  }
+	posTrain[2] = position[2] = startH;
 
-  if(minDist > VISIBLE_RADIUS ) {
-    // on average, not visible (although if were zoomed ...)
-    alive = 0;
-    return;
-  }
-    
-  /* experiment
-  // limit lifetime to 0.5-3.0 sec
-  double tmp_h = startH - velocity * (0.5 + (double)rand()/((double)RAND_MAX+1) * 2.5);
-  if( tmp_h > endH ) {
-    endH = tmp_h;
-  }
-  */
+	//  qDebug("New meteor: %f %f s:%f e:%f v:%f\n", position[0], position[1], startH, endH, velocity);
 
-  posTrain[2] = position[2] = startH;
+	alive = 1;
+	train=0;
 
-  //  qDebug("New meteor: %f %f s:%f e:%f v:%f\n", position[0], position[1], startH, endH, velocity);
+	// Determine drawing color given magnitude and eye
+	// (won't be visible during daylight)
 
-  alive = 1;
-  train=0;
+	// *** color varies somewhat based on velocity, plus atmosphere reddening
 
-  // Determine drawing color given magnitude and eye 
-  // (won't be visible during daylight)
+	// determine intensity
+	float Mag1 = (double)rand()/((double)RAND_MAX+1)*6.75f - 3;
+	float Mag2 = (double)rand()/((double)RAND_MAX+1)*6.75f - 3;
+	float Mag = (Mag1 + Mag2)/2.0f;
 
-  // *** color varies somewhat based on velocity, plus atmosphere reddening
+	mag = (5. + Mag) / 256.0;
+	if (mag>250) mag = mag - 256;
 
-  // determine intensity
-  float Mag1 = (double)rand()/((double)RAND_MAX+1)*6.75f - 3;
-  float Mag2 = (double)rand()/((double)RAND_MAX+1)*6.75f - 3;
-  float Mag = (Mag1 + Mag2)/2.0f;
+	float term1 = std::exp(-0.92103f*(mag + 12.12331f)) * 108064.73f;
 
-  mag = (5. + Mag) / 256.0;
-  if (mag>250) mag = mag - 256;
+	float cmag=1.f;
+	float rmag;
 
-  float term1 = std::exp(-0.92103f*(mag + 12.12331f)) * 108064.73f;
+	// Compute the equivalent star luminance for a 5 arc min circle and convert it
+	// in function of the eye adaptation
+	rmag = eye->adaptLuminanceScaled(term1);
+	rmag = rmag/powf(core->getMovementMgr()->getCurrentFov(),0.85f)*500.f;
 
-  float cmag=1.f;
-  float rmag;
+	// if size of star is too small (blink) we put its size to 1.2 --> no more blink
+	// And we compensate the difference of brighteness with cmag
+	if (rmag<1.2f) {
+		cmag=rmag*rmag/1.44f;
+	}
 
-  // Compute the equivalent star luminance for a 5 arc min circle and convert it
-  // in function of the eye adaptation
-  rmag = eye->adaptLuminanceScaled(term1);
-  rmag = rmag/powf(core->getMovementMgr()->getCurrentFov(),0.85f)*500.f;
+	mag = cmag;  // assumes white
 
-  // if size of star is too small (blink) we put its size to 1.2 --> no more blink
-  // And we compensate the difference of brighteness with cmag
-  if (rmag<1.2f) {
-    cmag=rmag*rmag/1.44f;
-  }
-
-  mag = cmag;  // assumes white
-
-  // most visible meteors are under about 180km distant
-  // scale max mag down if outside this range 
-  float scale = 1;
-  if(minDist!=0) scale = 180*180/(minDist*minDist);
-  if( scale < 1 ) mag *= scale;
+	// most visible meteors are under about 180km distant
+	// scale max mag down if outside this range
+	float scale = 1;
+	if(minDist!=0) scale = 180*180/(minDist*minDist);
+	if( scale < 1 ) mag *= scale;
 
 }
 
@@ -163,37 +155,37 @@ Meteor::~Meteor()
 // returns true if alive
 bool Meteor::update(double deltaTime)
 {
-  if(!alive) return(0);
+	if(!alive) return(0);
 
-  if( position[2] < endH ) {
-    // burning has stopped so magnitude fades out
-    // assume linear fade out
+	if( position[2] < endH ) {
+		// burning has stopped so magnitude fades out
+		// assume linear fade out
 
-    mag -= maxMag * deltaTime/500.0f;
-    if( mag < 0 ) alive=0;  // no longer visible
+		mag -= maxMag * deltaTime/500.0f;
+		if( mag < 0 ) alive=0;  // no longer visible
 
-  }
+	}
 
-  // *** would need time direction multiplier to allow reverse time replay
-  position[2] = position[2] - velocity*deltaTime/1000.0f;
+	// *** would need time direction multiplier to allow reverse time replay
+	position[2] = position[2] - velocity*deltaTime/1000.0f;
 
-  // train doesn't extend beyond start of burn
-  if( position[2] + velocity*0.5f > startH ) {
-    posTrain[2] = startH ;
-  } else {
-    posTrain[2] -= velocity*deltaTime/1000.0f;
-  }
+	// train doesn't extend beyond start of burn
+	if( position[2] + velocity*0.5f > startH ) {
+		posTrain[2] = startH ;
+	} else {
+		posTrain[2] -= velocity*deltaTime/1000.0f;
+	}
 
-  //qDebug("meteor position: %f delta_t %d\n", position[2], deltaTime);
+	//qDebug("meteor position: %f delta_t %d\n", position[2], deltaTime);
 
-  // determine visual magnitude based on distance to observer
-  double dist = sqrt( xydistance*xydistance + pow( position[2]-obs[2], 2) );
+	// determine visual magnitude based on distance to observer
+	double dist = sqrt( xydistance*xydistance + pow( position[2]-obs[2], 2) );
 
-  if( dist == 0 ) dist = .01;  // just to be cautious (meteor hits observer!)
+	if( dist == 0 ) dist = .01;  // just to be cautious (meteor hits observer!)
 
-  distMultiplier = minDist*minDist / (dist*dist);
+	distMultiplier = minDist*minDist / (dist*dist);
 
-  return(alive);
+	return(alive);
 }
 
 
@@ -264,5 +256,5 @@ void Meteor::draw(const StelCore* core, StelPainter& sPainter)
 
 bool Meteor::isAlive(void)
 {
-  return(alive);
+	return(alive);
 }
