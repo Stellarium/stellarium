@@ -40,10 +40,7 @@ Meteor::Meteor(const StelCore* core, double v)
 {
 	const StelToneReproducer* eye = core->getToneReproducer();
 	
-	velocity = 11+(double)rand()/((double)RAND_MAX+1)*v;  // abs range 11-72 km/s
-	if (velocity>72)
-		velocity = 72;
-
+	velocity = 11+(double)rand()/((double)RAND_MAX+1)*(v-11);  // abs range 11-72 km/s by default (see line 427 in StelApp.cpp)
 	maxMag = 1;
 
 	// enable sporadic meteors (randomized radiant for visible hemisphere)
