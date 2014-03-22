@@ -569,42 +569,47 @@ void ViewDialog::updateZhrDescription()
 	int zhr = ui->zhrSpinBox->value();
 	switch (zhr)
 	{
-		case 0:
-			ui->zhrLabel->setText("<small><i>"+q_("No shooting stars")+"</i></small>");
-			break;
-		case 10:
-			ui->zhrLabel->setText("<small><i>"+q_("Normal rate")+"</i></small>");
-			break;
-		case 25:
-			ui->zhrLabel->setText("<small><i>"+q_("Standard Orionids rate")+"</i></small>");
-			break;
-		case 100:
-			ui->zhrLabel->setText("<small><i>"+q_("Standard Perseids rate")+"</i></small>");
-			break;
-		case 120:
-			ui->zhrLabel->setText("<small><i>"+q_("Standard Geminids rate")+"</i></small>");
-			break;
-		case 200:
-			ui->zhrLabel->setText("<small><i>"+q_("Exceptional Perseid rate")+"</i></small>");
-			break;
-		case 1000:
-			ui->zhrLabel->setText("<small><i>"+q_("Meteor storm rate")+"</i></small>");
-			break;
-		case 6000:
-			ui->zhrLabel->setText("<small><i>"+q_("Exceptional Draconid rate")+"</i></small>");
-			break;
-		case 10000:
-			ui->zhrLabel->setText("<small><i>"+q_("Exceptional Leonid rate")+"</i></small>");
-			break;
-		case 144000:
-			ui->zhrLabel->setText("<small><i>"+q_("Very high rate (1966 Leonids)")+"</i></small>");
-			break;
-		case 240000:
-			ui->zhrLabel->setText("<small><i>"+q_("Highest rate ever (1833 Leonids)")+"</i></small>");
-			break;
-		default:
-			ui->zhrLabel->setText("");
-			break;
+	case 0:
+		ui->zhrLabel->setText("<small><i>"+q_("No shooting stars")+"</i></small>");
+		break;
+	case 5:
+	case 6:
+	case 7:
+	case 8:
+	case 9:
+	case 10:
+		ui->zhrLabel->setText("<small><i>"+q_("Normal rate")+"</i></small>");
+		break;
+	case 25:
+		ui->zhrLabel->setText("<small><i>"+q_("Standard Orionids rate")+"</i></small>");
+		break;
+	case 100:
+		ui->zhrLabel->setText("<small><i>"+q_("Standard Perseids rate")+"</i></small>");
+		break;
+	case 120:
+		ui->zhrLabel->setText("<small><i>"+q_("Standard Geminids rate")+"</i></small>");
+		break;
+	case 200:
+		ui->zhrLabel->setText("<small><i>"+q_("Exceptional Perseid rate")+"</i></small>");
+		break;
+	case 1000:
+		ui->zhrLabel->setText("<small><i>"+q_("Meteor storm rate")+"</i></small>");
+		break;
+	case 6000:
+		ui->zhrLabel->setText("<small><i>"+q_("Exceptional Draconid rate")+"</i></small>");
+		break;
+	case 10000:
+		ui->zhrLabel->setText("<small><i>"+q_("Exceptional Leonid rate")+"</i></small>");
+		break;
+	case 144000:
+		ui->zhrLabel->setText("<small><i>"+q_("Very high rate (1966 Leonids)")+"</i></small>");
+		break;
+	case 240000:
+		ui->zhrLabel->setText("<small><i>"+q_("Highest rate ever (1833 Leonids)")+"</i></small>");
+		break;
+	default:
+		ui->zhrLabel->setText("");
+		break;
 	}
 }
 
