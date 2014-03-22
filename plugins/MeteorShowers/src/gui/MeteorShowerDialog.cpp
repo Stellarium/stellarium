@@ -376,21 +376,30 @@ void MeteorShowerDialog::setTextureColor(QLabel *texture, QColor color)
 
 void MeteorShowerDialog::setColorARG()
 {
-	QColor color = QColorDialog::getColor();
-	setTextureColor(ui->textureARG, color);
-	plugin->setColorARG(color);
+	QColor color = QColorDialog::getColor(plugin->getColorARG());
+	if (color.isValid())
+	{
+		setTextureColor(ui->textureARG, color);
+		plugin->setColorARG(color);
+	}
 }
 
 void MeteorShowerDialog::setColorARR()
 {
-	QColor color = QColorDialog::getColor();
-	setTextureColor(ui->textureARR, color);
-	plugin->setColorARR(color);
+	QColor color = QColorDialog::getColor(plugin->getColorARR());
+	if (color.isValid())
+	{
+		setTextureColor(ui->textureARR, color);
+		plugin->setColorARR(color);
+	}
 }
 
 void MeteorShowerDialog::setColorIR()
 {
-	QColor color = QColorDialog::getColor();
-	setTextureColor(ui->textureIR, color);
-	plugin->setColorIR(color);
+	QColor color = QColorDialog::getColor(plugin->getColorIR());
+	if (color.isValid())
+	{
+		setTextureColor(ui->textureIR, color);
+		plugin->setColorIR(color);
+	}
 }

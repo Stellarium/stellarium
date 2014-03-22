@@ -59,7 +59,10 @@ HelpDialog::HelpDialog(QObject* parent) : StelDialog(parent)
 
 	conf = StelApp::getInstance().getSettings();
 	setUpdatesEnabled(conf->value("main/check_updates_enabled", true).toBool()); // Enable check for updates by default
-	updateUrl = QString("http://www.stellarium.org/%1/updates.php").arg(conf->value("localization/app_locale", "en").toString());
+	QString lang = conf->value("localization/app_locale", "en").toString();
+	if (lang=="system" || lang=="C")
+		lang = "en";
+	updateUrl = QString("http://www.stellarium.org/%1/updates.php").arg(lang);
 	currentVersion = StelUtils::getApplicationVersion();
 
 	conf->setValue("main/check_updates_enabled", getUpdatesEnabled());
@@ -464,6 +467,9 @@ void HelpDialog::updateText(void)
 	newHtml += "<li>" + q_("Developer: %1").arg(QString("Guillaume Ch%1reau").arg(QChar(0x00E9))).toHtmlEscaped() + "</li>";
 	newHtml += "<li>" + q_("Developer: %1").arg(QString("Georg Zotti")).toHtmlEscaped() + "</li>";
 	newHtml += "<li>" + q_("Developer: %1").arg(QString("Alexander Wolf")).toHtmlEscaped() + "</li>";
+	newHtml += "<li>" + q_("Developer: %1").arg(QString("Marcos Cardinot")).toHtmlEscaped() + "</li>";
+	newHtml += "<li>" + q_("Developer: %1").arg(QString("Ferdinand Majerech")).toHtmlEscaped() + "</li>";
+	newHtml += "<li>" + q_("Developer: %1").arg(QString("Jörg Müller")).toHtmlEscaped() + "</li>";
 	newHtml += "<li>" + q_("Continuous Integration: %1").arg(QString("Hans Lambermont")).toHtmlEscaped() + "</li>";
 	newHtml += "<li>" + q_("Tester: %1").arg(QString("Barry Gerdes")).toHtmlEscaped() + "</li>";
 	newHtml += "<li>" + q_("Tester: %1").arg(QString("Khalid AlAjaji")).toHtmlEscaped() + "</li></ul>";

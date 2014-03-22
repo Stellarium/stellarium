@@ -28,7 +28,6 @@
 #include "StelModuleMgr.hpp"
 #include "StelTextureMgr.hpp"
 #include "StelJsonParser.hpp"
-#include "StelIniParser.hpp"
 #include "StelFileMgr.hpp"
 #include "LabelMgr.hpp"
 #include "LandscapeMgr.hpp"
@@ -56,6 +55,7 @@
 #include <QTimer>
 #include <QVariant>
 #include <QVariantMap>
+#include <QSettings>
 
 #define CATALOG_FORMAT_VERSION 1 /* Version of format of catalog */
 
