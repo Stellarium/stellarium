@@ -424,7 +424,7 @@ void StelApp::init(QSettings* conf)
 	getModuleMgr().registerModule(gridLines);
 
 	// Meteors
-	MeteorMgr* meteors = new MeteorMgr(10, 60);
+	MeteorMgr* meteors = new MeteorMgr(10, 72);
 	meteors->init();
 	getModuleMgr().registerModule(meteors);
 
