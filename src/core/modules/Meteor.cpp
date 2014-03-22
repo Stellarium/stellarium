@@ -43,12 +43,10 @@ Meteor::Meteor(const StelCore* core, double v)
 	velocity = 11+(double)rand()/((double)RAND_MAX+1)*(v-11);  // abs range 11-72 km/s by default (see line 427 in StelApp.cpp)
 	maxMag = 1;
 
-	// enable sporadic meteors (randomized radiant for visible hemisphere)
-	double x_r = (M_PI_2*(double)rand())-M_PI;
-	double y_r = (M_PI_2*(double)rand())-M_PI;
-	double z_r = (M_PI_2*(double)rand())-M_PI;
-
-	mmat = Mat4d::xrotation(x_r) * Mat4d::zrotation(z_r) * Mat4d::yrotation(y_r);
+	// view matrix of sporadic meteors model
+	double alpha = (double)rand()/((double)RAND_MAX+1)*2*M_PI;
+	double delta = M_PI_2 - (double)rand()/((double)RAND_MAX+1)*M_PI;
+	mmat = Mat4d::zrotation(alpha) * Mat4d::yrotation(delta);
 
 	// select random trajectory using polar coordinates in XY plane, centered on observer
 	xydistance = (double)rand()/((double)RAND_MAX+1)*(VISIBLE_RADIUS);
