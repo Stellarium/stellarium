@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-03-22 19:29+0700\n"
+"POT-Creation-Date: 2014-03-22 22:34+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -45,8 +45,8 @@ msgstr ""
 msgid "Constellation boundaries"
 msgstr ""
 
-#: src/core/modules/StarMgr.cpp:339 src/ui_viewDialog.h:1233
-#: src/ui_viewDialog.h:1265 src/ui_viewDialog.h:1291
+#: src/core/modules/StarMgr.cpp:339 src/ui_viewDialog.h:1163
+#: src/ui_viewDialog.h:1195 src/ui_viewDialog.h:1220
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:240
 msgid "Stars"
 msgstr ""
@@ -55,19 +55,19 @@ msgstr ""
 msgid "Stars labels"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:531 src/ui_viewDialog.h:1315
+#: src/core/modules/GridLinesMgr.cpp:531 src/ui_viewDialog.h:1244
 msgid "Meridian"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:535 src/ui_viewDialog.h:1323
+#: src/core/modules/GridLinesMgr.cpp:535 src/ui_viewDialog.h:1252
 msgid "Ecliptic"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:539 src/ui_viewDialog.h:1311
+#: src/core/modules/GridLinesMgr.cpp:539 src/ui_viewDialog.h:1240
 msgid "Equator"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:543 src/ui_viewDialog.h:1319
+#: src/core/modules/GridLinesMgr.cpp:543 src/ui_viewDialog.h:1248
 msgid "Horizon"
 msgstr ""
 
@@ -80,7 +80,7 @@ msgstr ""
 msgid "Equatorial grid"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:682 src/ui_viewDialog.h:1306
+#: src/core/modules/GridLinesMgr.cpp:682 src/ui_viewDialog.h:1235
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:321
 msgid "Azimuthal grid"
 msgstr ""
@@ -114,16 +114,16 @@ msgstr ""
 msgid "Ecliptic J2000 grid"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:689 src/ui_viewDialog.h:1307
+#: src/core/modules/GridLinesMgr.cpp:689 src/ui_viewDialog.h:1236
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:360
 msgid "Galactic grid"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:690 src/ui_viewDialog.h:1327
+#: src/core/modules/GridLinesMgr.cpp:690 src/ui_viewDialog.h:1256
 msgid "Galactic plane"
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:345 src/ui_viewDialog.h:1255
+#: src/core/modules/LandscapeMgr.cpp:345 src/ui_viewDialog.h:1185
 msgid "Atmosphere"
 msgstr ""
 
@@ -131,7 +131,7 @@ msgstr ""
 msgid "Fog"
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:347 src/ui_viewDialog.h:1328
+#: src/core/modules/LandscapeMgr.cpp:347 src/ui_viewDialog.h:1257
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:298
 msgid "Cardinal points"
 msgstr ""
@@ -1077,7 +1077,7 @@ msgstr ""
 msgid "Authors"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:736 src/gui/ViewDialog.cpp:445
+#: src/gui/ConfigurationDialog.cpp:736 src/gui/ViewDialog.cpp:441
 msgid "Contact"
 msgstr ""
 
@@ -1564,80 +1564,100 @@ msgid "Frames per second"
 msgstr ""
 
 #. TRANSLATORS: Short description for Class 1 of the Bortle scale
-#: src/gui/ViewDialog.cpp:331
+#: src/gui/ViewDialog.cpp:327
 msgid "Excellent dark-sky site"
 msgstr ""
 
 #. TRANSLATORS: Short description for Class 2 of the Bortle scale
-#: src/gui/ViewDialog.cpp:333
+#: src/gui/ViewDialog.cpp:329
 msgid "Typical truly dark site"
 msgstr ""
 
 #. TRANSLATORS: Short description for Class 3 of the Bortle scale
-#: src/gui/ViewDialog.cpp:335
+#: src/gui/ViewDialog.cpp:331
 msgid "Rural sky"
 msgstr ""
 
 #. TRANSLATORS: Short description for Class 4 of the Bortle scale
-#: src/gui/ViewDialog.cpp:337
+#: src/gui/ViewDialog.cpp:333
 msgid "Rural/suburban transition"
 msgstr ""
 
 #. TRANSLATORS: Short description for Class 5 of the Bortle scale
-#: src/gui/ViewDialog.cpp:339
+#: src/gui/ViewDialog.cpp:335
 msgid "Suburban sky"
 msgstr ""
 
 #. TRANSLATORS: Short description for Class 6 of the Bortle scale
-#: src/gui/ViewDialog.cpp:341
+#: src/gui/ViewDialog.cpp:337
 msgid "Bright suburban sky"
 msgstr ""
 
 #. TRANSLATORS: Short description for Class 7 of the Bortle scale
-#: src/gui/ViewDialog.cpp:343
+#: src/gui/ViewDialog.cpp:339
 msgid "Suburban/urban transition"
 msgstr ""
 
 #. TRANSLATORS: Short description for Class 8 of the Bortle scale
-#: src/gui/ViewDialog.cpp:345
+#: src/gui/ViewDialog.cpp:341
 msgid "City sky"
 msgstr ""
 
 #. TRANSLATORS: Short description for Class 9 of the Bortle scale
-#: src/gui/ViewDialog.cpp:347
+#: src/gui/ViewDialog.cpp:343
 msgid "Inner-city sky"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:361
+#: src/gui/ViewDialog.cpp:357
 msgid "The naked-eye limiting magnitude is"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:493
+#: src/gui/ViewDialog.cpp:489
 msgid "No description"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:603
+#: src/gui/ViewDialog.cpp:573
 msgid "No shooting stars"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:606
+#: src/gui/ViewDialog.cpp:576
 msgid "Normal rate"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:609
+#: src/gui/ViewDialog.cpp:579
+msgid "Standard Orionids rate"
+msgstr ""
+
+#: src/gui/ViewDialog.cpp:582
 msgid "Standard Perseids rate"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:612
+#: src/gui/ViewDialog.cpp:585
+msgid "Standard Geminids rate"
+msgstr ""
+
+#: src/gui/ViewDialog.cpp:588
+msgid "Exceptional Perseid rate"
+msgstr ""
+
+#: src/gui/ViewDialog.cpp:591
 msgid "Meteor storm rate"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:615
+#: src/gui/ViewDialog.cpp:594
+msgid "Exceptional Draconid rate"
+msgstr ""
+
+#: src/gui/ViewDialog.cpp:597
 msgid "Exceptional Leonid rate"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:618
-msgid "Highest rate ever (1966 Leonids)"
+#: src/gui/ViewDialog.cpp:600
+msgid "Very high rate (1966 Leonids)"
+msgstr ""
+
+#: src/gui/ViewDialog.cpp:603
+msgid "Highest rate ever (1833 Leonids)"
 msgstr ""
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:112
@@ -3860,276 +3880,272 @@ msgstr ""
 msgid "Use autofill only from the beginning of words"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:657 src/ui_viewDialog.h:1331
-#: src/ui_viewDialog.h:1337 src/ui_viewDialog.h:1339
+#: src/ui_searchDialogGui.h:657 src/ui_viewDialog.h:1260
+#: src/ui_viewDialog.h:1266 src/ui_viewDialog.h:1268
 #: src/ui_configurationDialog.h:1166 src/ui_configurationDialog.h:1177
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:416
 msgid "Options"
 msgstr ""
 
-#: src/ui_viewDialog.h:1217
+#: src/ui_viewDialog.h:1147
 msgid "View"
 msgstr ""
 
-#: src/ui_viewDialog.h:1223
+#: src/ui_viewDialog.h:1153
 msgid "Sky"
 msgstr ""
 
-#: src/ui_viewDialog.h:1225
+#: src/ui_viewDialog.h:1155
 msgid "Markings"
 msgstr ""
 
-#: src/ui_viewDialog.h:1227
+#: src/ui_viewDialog.h:1157
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:401
 msgid "Landscape"
 msgstr ""
 
-#: src/ui_viewDialog.h:1229
+#: src/ui_viewDialog.h:1159
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:223
 msgid "Starlore"
 msgstr ""
 
-#: src/ui_viewDialog.h:1232
+#: src/ui_viewDialog.h:1162
 msgid "Labels and Markers"
 msgstr ""
 
-#: src/ui_viewDialog.h:1234
+#: src/ui_viewDialog.h:1164
 msgid "Planets"
 msgstr ""
 
-#: src/ui_viewDialog.h:1236
+#: src/ui_viewDialog.h:1166
 msgid ""
 "Labels and markers for deep-sky objects (star clusters, galaxies and nebulas)"
 msgstr ""
 
-#: src/ui_viewDialog.h:1238 src/ui_viewDialog.h:1295
+#: src/ui_viewDialog.h:1168 src/ui_viewDialog.h:1224
 msgctxt "Deep-sky objects"
 msgid "DSOs"
 msgstr ""
 
-#: src/ui_viewDialog.h:1239
+#: src/ui_viewDialog.h:1169
 msgid "Planets and satellites"
 msgstr ""
 
-#: src/ui_viewDialog.h:1240
+#: src/ui_viewDialog.h:1170
 msgid "Show planets"
 msgstr ""
 
-#: src/ui_viewDialog.h:1241
+#: src/ui_viewDialog.h:1171
 msgid "Show planet markers"
 msgstr ""
 
-#: src/ui_viewDialog.h:1242
+#: src/ui_viewDialog.h:1172
 msgid "Show planet orbits"
 msgstr ""
 
-#: src/ui_viewDialog.h:1243
+#: src/ui_viewDialog.h:1173
 msgid "Simulate light speed"
 msgstr ""
 
-#: src/ui_viewDialog.h:1244
+#: src/ui_viewDialog.h:1174
 msgid "Scale Moon"
 msgstr ""
 
-#: src/ui_viewDialog.h:1246
+#: src/ui_viewDialog.h:1176
 msgid "Scale factor"
 msgstr ""
 
-#: src/ui_viewDialog.h:1249
+#: src/ui_viewDialog.h:1179
 msgid "Automatic change of landscape when planet is changed"
 msgstr ""
 
-#: src/ui_viewDialog.h:1251
+#: src/ui_viewDialog.h:1181
 msgid "Auto select landscapes"
 msgstr ""
 
-#: src/ui_viewDialog.h:1253
+#: src/ui_viewDialog.h:1183
 msgid "Show atmosphere"
 msgstr ""
 
-#: src/ui_viewDialog.h:1257
+#: src/ui_viewDialog.h:1187
 msgid ""
 "Use light pollution data from locations database and ignore settings for "
 "light pollution below"
 msgstr ""
 
-#: src/ui_viewDialog.h:1259
+#: src/ui_viewDialog.h:1189
 msgid "Light pollution data from locations database"
 msgstr ""
 
-#: src/ui_viewDialog.h:1260
+#: src/ui_viewDialog.h:1190
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:396
 msgid "Light pollution:"
 msgstr ""
 
-#: src/ui_viewDialog.h:1262
+#: src/ui_viewDialog.h:1192
 msgid "pressure, temperature, extinction coefficient"
 msgstr ""
 
-#: src/ui_viewDialog.h:1264
+#: src/ui_viewDialog.h:1194
 msgid "Refraction/Extinction settings..."
 msgstr ""
 
-#: src/ui_viewDialog.h:1266
+#: src/ui_viewDialog.h:1196
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:253
 msgid "Absolute scale:"
 msgstr ""
 
-#: src/ui_viewDialog.h:1267
+#: src/ui_viewDialog.h:1197
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:247
 msgid "Relative scale:"
 msgstr ""
 
-#: src/ui_viewDialog.h:1268
+#: src/ui_viewDialog.h:1198
 msgid "Milky Way brightness:"
 msgstr ""
 
-#: src/ui_viewDialog.h:1269
+#: src/ui_viewDialog.h:1199
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:259
 msgid "Twinkle:"
 msgstr ""
 
-#: src/ui_viewDialog.h:1271
+#: src/ui_viewDialog.h:1201
 msgid "Dim faint stars when a very bright object is visible"
 msgstr ""
 
-#: src/ui_viewDialog.h:1273
+#: src/ui_viewDialog.h:1203
 msgid "Dynamic eye adaptation"
 msgstr ""
 
-#: src/ui_viewDialog.h:1275
+#: src/ui_viewDialog.h:1205
 msgid "Settings for sporadic meteors"
 msgstr ""
 
-#: src/ui_viewDialog.h:1277
+#: src/ui_viewDialog.h:1207
 msgid "Shooting Stars"
 msgstr ""
 
-#: src/ui_viewDialog.h:1279
+#: src/ui_viewDialog.h:1209
 msgid "Hourly zenith rate"
 msgstr ""
 
-#: src/ui_viewDialog.h:1281
+#: src/ui_viewDialog.h:1211
 msgctxt "Zenithal Hourly Rate"
 msgid "ZHR:"
 msgstr ""
 
-#: src/ui_viewDialog.h:1282
-msgid "1000"
-msgstr ""
-
-#: src/ui_viewDialog.h:1285
+#: src/ui_viewDialog.h:1214
 msgid "Limit Magnitudes (for unaided/binocular observers)"
 msgstr ""
 
-#: src/ui_viewDialog.h:1287
+#: src/ui_viewDialog.h:1216
 msgid "Limit Magnitudes"
 msgstr ""
 
-#: src/ui_viewDialog.h:1289
+#: src/ui_viewDialog.h:1218
 msgid "Limit the magnitude of stars"
 msgstr ""
 
-#: src/ui_viewDialog.h:1293
+#: src/ui_viewDialog.h:1222
 msgid ""
 "Limit the magnitude of deep-sky objects (star clusters, galaxies and nebulas)"
 msgstr ""
 
-#: src/ui_viewDialog.h:1296
+#: src/ui_viewDialog.h:1225
 msgid "Constellations"
 msgstr ""
 
-#: src/ui_viewDialog.h:1297
+#: src/ui_viewDialog.h:1226
 msgid "Show lines"
 msgstr ""
 
-#: src/ui_viewDialog.h:1298
+#: src/ui_viewDialog.h:1227
 msgid "Show labels"
 msgstr ""
 
-#: src/ui_viewDialog.h:1299
+#: src/ui_viewDialog.h:1228
 msgid "Show boundaries"
 msgstr ""
 
-#: src/ui_viewDialog.h:1300
+#: src/ui_viewDialog.h:1229
 msgid "Show art"
 msgstr ""
 
 #. TRANSLATORS: Refers to constellation art
-#: src/ui_viewDialog.h:1301
+#: src/ui_viewDialog.h:1230
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:291
 msgid "Art brightness:"
 msgstr ""
 
-#: src/ui_viewDialog.h:1302
+#: src/ui_viewDialog.h:1231
 msgid "Celestial Sphere"
 msgstr ""
 
-#: src/ui_viewDialog.h:1303
+#: src/ui_viewDialog.h:1232
 msgid "Equatorial grid (on J2000)"
 msgstr ""
 
-#: src/ui_viewDialog.h:1304
+#: src/ui_viewDialog.h:1233
 msgid "Equatorial grid (on date)"
 msgstr ""
 
-#: src/ui_viewDialog.h:1305
+#: src/ui_viewDialog.h:1234
 msgid "Ecliptic grid (on J2000)"
 msgstr ""
 
-#: src/ui_viewDialog.h:1309
+#: src/ui_viewDialog.h:1238
 msgid "Show equator line"
 msgstr ""
 
-#: src/ui_viewDialog.h:1313
+#: src/ui_viewDialog.h:1242
 msgid "Show meridian line"
 msgstr ""
 
-#: src/ui_viewDialog.h:1317
+#: src/ui_viewDialog.h:1246
 msgid "Show horizon line"
 msgstr ""
 
-#: src/ui_viewDialog.h:1321
+#: src/ui_viewDialog.h:1250
 msgid "Show ecliptic line"
 msgstr ""
 
-#: src/ui_viewDialog.h:1325
+#: src/ui_viewDialog.h:1254
 msgid "Show Galactic plane line"
 msgstr ""
 
-#: src/ui_viewDialog.h:1329
+#: src/ui_viewDialog.h:1258
 msgid "Projection"
 msgstr ""
 
-#: src/ui_viewDialog.h:1330
+#: src/ui_viewDialog.h:1259
 msgid "Add/remove landscapes..."
 msgstr ""
 
-#: src/ui_viewDialog.h:1332
+#: src/ui_viewDialog.h:1261
 msgid "Show ground"
 msgstr ""
 
-#: src/ui_viewDialog.h:1333
+#: src/ui_viewDialog.h:1262
 msgid "Show fog"
 msgstr ""
 
-#: src/ui_viewDialog.h:1334
+#: src/ui_viewDialog.h:1263
 msgid "Use associated planet and position"
 msgstr ""
 
-#: src/ui_viewDialog.h:1335
+#: src/ui_viewDialog.h:1264
 msgid "Use this landscape as default"
 msgstr ""
 
-#: src/ui_viewDialog.h:1336
+#: src/ui_viewDialog.h:1265
 msgid "Use brightness settings for landscapes"
 msgstr ""
 
-#: src/ui_viewDialog.h:1338
+#: src/ui_viewDialog.h:1267
 msgid "Use this sky culture as default"
 msgstr ""
 
-#: src/ui_viewDialog.h:1340
+#: src/ui_viewDialog.h:1269
 msgid "Visible"
 msgstr ""
 
