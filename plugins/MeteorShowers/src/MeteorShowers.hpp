@@ -231,10 +231,7 @@ public slots:
 	void updateJSON(void);
 
 	void setFlagShowMS(bool b);
-	bool getFlagShowMS(void) const
-	{
-		return flagShowMS;
-	}
+	bool getFlagShowMS(void) const;
 
 	//! Display a message. This is used for plugin-specific warnings and such
 	void displayMessage(const QString& message, const QString hexColor="#999999");
