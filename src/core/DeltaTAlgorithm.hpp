@@ -31,7 +31,7 @@
 class DeltaTAlgorithm
 {
 public:
-	DeltaTAlgorithm();
+	//DeltaTAlgorithm();
 
 	//! Returns a string uniquely identifying this algorithm.
 	virtual QString getId() const = 0;
@@ -57,17 +57,30 @@ public:
 	//! @param[in] month of the same date
 	//! @param[in] day of the same date
 	//! @param[in,out] string if provided, it's filled with displayable text
-	virtual getDeltaT(double jd,
-	                  const int& year,
-	                  const int& month,
-	                  const int& day,
-	                  QString* string = 0) = 0;
+	virtual double calculateDeltaT(const double& jdUtc,
+	                               const int& year,
+	                               const int& month,
+	                               const int& day,
+	                               QString* string = 0) = 0;
 
-	static QString deltaTSymbol() const;
+	//! DeltaT written with the Greek letter.
+	static QString symbol();
 
 private:
+	//! "Dotted n", the Moon's acceleration in arc-seconds per century-squared.
+	//! Expressed as the time derivative of the mean sidereal angular motion of
+	//! the Moon @b n, written in Newton's notation (equivalent to dn/dt or n').
+	double ndot;
+
 	unsigned int startYear;
 	unsigned int endYear;
+
+	//! Calculates the correction for the secular acceleration of the Moon.
+	virtual double calculateSecularAcceleration(const int& year) const;
+
+	//! Calculates the standard error (sigma).
+	virtual double calculateStandardError(const double& jdUtc,
+	                                      const int& year);
 };
 
 #endif // DELTATALGORITHM_HPP

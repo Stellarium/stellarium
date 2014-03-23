@@ -124,6 +124,11 @@ SET(stellarium_lib_SRCS
 	core/StelActionMgr.hpp
 	core/StelActionMgr.cpp
 	core/StelProgressController.hpp
+	core/DeltaTAlgorithm.hpp
+	core/DeltaTAlgorithm.cpp
+	core/StelDeltaTMgr.cpp
+	core/StelDeltaTMgr.hpp
+	core/StelDeltaTMgr.cpp
 
 	${gl_lib_SRCS}
 

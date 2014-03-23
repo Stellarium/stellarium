@@ -16,37 +16,8 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-#include "DeltaTAlgorithm.hpp"
+#include "StelDeltaTMgr.hpp"
 
-#include "StelLocaleMgr.hpp"
-
-
-QString DeltaTAlgorithm::symbol()
+StelDeltaTMgr::StelDeltaTMgr()
 {
-	//
-}
-
-
-QPair<unsigned int, unsigned int> DeltaTAlgorithm::getRange() const
-{
-	return QPair<unsigned int, unsigned int>(startYear, endYear);
-}
-
-QString DeltaTAlgorithm::getRangeDescription() const
-{
-	// TODO: Copy-edit the description(s).
-	// TRANSLATORS: Range of use of a DeltaT calculation algorithm.
-	return q_("Valid range of usage: between years %1 and %2.")
-	        .arg(startYear)
-	        .arg(endYear);
-}
-
-double DeltaTAlgorithm::calculateSecularAcceleration(const int& year) const
-{
-	//
-}
-
-double DeltaTAlgorithm::calculateStandardError(const double& jdUtc, const int& year)
-{
-	//
 }
