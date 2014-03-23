@@ -38,6 +38,7 @@
 #include "MeteorShowerDialog.hpp"
 #include "MeteorStream.hpp"
 #include "StelProgressController.hpp"
+#include "Planet.hpp"
 
 #include <QAction>
 #include <QColor>
@@ -1115,6 +1116,14 @@ void MeteorShowers::setLabelFontSize(int size)
 {
 	if (labelFont.pixelSize() != size)
 		labelFont.setPixelSize(size);
+}
+
+bool MeteorShowers::getFlagShowMS(void) const
+{
+	if (StelApp::getInstance().getCore()->getCurrentPlanet().data()->getEnglishName()!="Earth")
+		return false;
+	else
+		return flagShowMS;
 }
 
 void MeteorShowers::translations()
