@@ -19,32 +19,43 @@
 #ifndef STELDELTATMGR_HPP
 #define STELDELTATMGR_HPP
 
-#include "DeltaTAlgorithm.hpp"
-
 #include <QMap>
+#include <QStandardItemModel>
 #include <QString>
 
+class DeltaTAlgorithm;
+
 //! Manages a collection of DeltaTArgorithm objects.
-//! Not responsible for DeltaT calculations themselves.
 //! Creating an object of this class initializes a collection of objects
 //! representing all the available algorithms for DeltaT calculation.
-//! For now, mostly a convenience class for getting the appropriate DeltaT
-//! algorith by identifier, later may provide other services.
 class StelDeltaTMgr
 {
 public:
 	StelDeltaTMgr();
 	~StelDeltaTMgr();
 
-	DeltaTAlgorithm* getAlgorithm (const QString& id) const;
+	//DeltaTAlgorithm* getAlgorithm (const QString& id) const;
+	//!
+	void setCurrentAlgorithm(const QString& id);
+	//!
+	QString getCurrentAlgorithmId() const;
+	//!
+	QList<QString> getAvailableAlgorithmIds() const;
+	//! Returns a data model describing the available DeltaT algorithms.
+	//! @todo return object or pointer?
+	QStandardItemModel getAvailableAlgorithmsModel();
 
-	QList<QString> getAlgorithmIds() const;
+
+	//! Calculates DeltaT correction using the currently selected algorithm.
+	double calculateDeltaT(const double& jdUtc, QString* outputString);
 
 private:
 	//! All available algorithms, keys are algorithm IDs.
 	//! Should contain one object per each child class of DeltaTAlgorithm.
 	QMap<QString,DeltaTAlgorithm*> algorithms;
 
+	//! Pointer to the object of the currently used algorithm.
+	DeltaTAlgorithm* currentAlgorithm;
 	//! Pointer to the object of the default algorithm.
 	//! Setting this in the constructor is/should be the way to set the
 	//! default DeltaT algorithm in Stellarium.

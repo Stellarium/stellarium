@@ -17,7 +17,52 @@
  */
 
 #include "StelDeltaTMgr.hpp"
+#include "DeltaTAlgorithm.hpp"
 
-StelDeltaTMgr::StelDeltaTMgr()
+StelDeltaTMgr::StelDeltaTMgr() :
+    currentAlgorithm(0),
+    defaultAlgorithm(0),
+    zeroAlgorithm(0),
+    customAlgorithm(0)
 {
+	// TODO
+}
+
+StelDeltaTMgr::~StelDeltaTMgr()
+{
+	// TODO
+}
+
+void
+StelDeltaTMgr::setCurrentAlgorithm(const QString& id)
+{
+	// TODO
+}
+
+QString
+StelDeltaTMgr::getCurrentAlgorithmId() const
+{
+	return currentAlgorithm->getId();
+}
+
+QList<QString>
+StelDeltaTMgr::getAvailableAlgorithmIds() const
+{
+	return algorithms.keys();
+}
+
+QStandardItemModel
+StelDeltaTMgr::getAvailableAlgorithmsModel()
+{
+	return QStandardItemModel();
+}
+
+double
+StelDeltaTMgr::calculateDeltaT(const double& jdUtc, QString* outputString)
+{
+	int year, month, day;
+	// TODO
+	return currentAlgorithm->calculateDeltaT(jdUtc,
+	                                         year, month, day,
+	                                         outputString);
 }
