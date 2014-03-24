@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-03-22 22:34+0700\n"
-"PO-Revision-Date: 2014-03-22 16:58+0000\n"
+"PO-Revision-Date: 2014-03-23 18:43+0000\n"
 "Last-Translator: henrysky <Unknown>\n"
 "Language-Team: Chinese (Hong Kong) <zh_HK@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-03-23 06:11+0000\n"
+"X-Launchpad-Export-Date: 2014-03-24 05:49+0000\n"
 "X-Generator: Launchpad (build 16967)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:107 src/core/modules/StarMgr.cpp:338
@@ -1152,17 +1152,17 @@ msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
 msgstr ""
-"新的恆星目錄經已下載完畢！\n"
-"請重新啟動 Stellarium 以使用新的目錄。"
+"新的星體資料庫經已下載完畢！\n"
+"請重新啟動 Stellarium 以使用新的星體資料庫。"
 
 #: src/gui/ConfigurationDialog.cpp:925
 msgid "All available star catalogs have been installed."
-msgstr "所有可用目錄均已安裝"
+msgstr "所有可用星體資料庫均已安裝"
 
 #: src/gui/ConfigurationDialog.cpp:930
 #, qt-format
 msgid "Get catalog %1 of %2"
-msgstr "取得星表 %1/%2"
+msgstr "取得星體資料庫 %1/%2"
 
 #: src/gui/ConfigurationDialog.cpp:937
 #, qt-format
@@ -4302,7 +4302,7 @@ msgstr "赤經/赤緯 (現在)"
 
 #: src/ui_configurationDialog.h:1044
 msgid "Catalog number(s)"
-msgstr "目錄號碼"
+msgstr "資料庫號碼"
 
 #: src/ui_configurationDialog.h:1046
 msgid "Geocentric equatorial coordinates, equinox of J2000.0"
@@ -4443,7 +4443,7 @@ msgstr "系統日期及時間"
 msgid ""
 "Sets the simulation time to the next instance of this time of day when "
 "Stellarium starts"
-msgstr "下次啟動 Stellarium 時設定此時間為模擬時間"
+msgstr ""
 
 #: src/ui_configurationDialog.h:1110
 msgid "System date at:"
@@ -4544,7 +4544,7 @@ msgstr "對調顏色"
 
 #: src/ui_configurationDialog.h:1153
 msgid "Star catalog updates"
-msgstr "恆星目錄更新"
+msgstr "星體資料庫更新"
 
 #: src/ui_configurationDialog.h:1155
 msgid "Click here to start downloading"
@@ -7291,7 +7291,7 @@ msgstr "歷代超新星插件設定"
 #: plugins/Quasars/src/ui_quasarsDialog.h:260
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:266
 msgid "Update catalog from Internet"
-msgstr "從網上更新星表"
+msgstr "從網上更新資料庫"
 
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:233
 #: plugins/Novae/src/ui_novaeDialog.h:236
@@ -7445,7 +7445,7 @@ msgstr "Veron+ 2010"
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:125
 #, qt-format
 msgid "The current catalog contains info about %1 quasars."
-msgstr "現在所用之類星體資料約包含 %1 個類星體"
+msgstr "現在所用之類星體資料庫約包含 %1 個類星體"
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:136
@@ -8047,6 +8047,9 @@ msgid ""
 "setting. (Explanations are provided in the 'About' tab of the plugin's "
 "configuration window.)"
 msgstr ""
+"此插件顯示一個天體的基於現時可觀測性的分析 (從地平線升起/落下及凌日時間), 以及天體在全年可觀測的時間. "
+"一個天體可被觀測是基於天體在夜晚某時高於地平線的前提下計算出來. 此插件亦會顯示最大與太陽距離以及日沒升/日沒落/偕日升/偕日落及其他設定. "
+"(名詞解釋在插件設定下 關於 中提供)"
 
 #: plugins/Observability/src/Observability.cpp:209
 msgctxt "short month name"
@@ -8123,48 +8126,48 @@ msgstr "秒"
 #: plugins/Observability/src/Observability.cpp:218
 #, qt-format
 msgid "Sets at %1 (in %2)"
-msgstr ""
+msgstr "於%1從地平線落下 (還有%2)"
 
 #: plugins/Observability/src/Observability.cpp:219
 #, qt-format
 msgid "Rose at %1 (%2 ago)"
-msgstr ""
+msgstr "已於%1從地平線升起 (已過%2)"
 
 #: plugins/Observability/src/Observability.cpp:220
 #, qt-format
 msgid "Set at %1 (%2 ago)"
-msgstr ""
+msgstr "於%1從地平線落下 (已過%2)"
 
 #: plugins/Observability/src/Observability.cpp:221
 #, qt-format
 msgid "Rises at %1 (in %2)"
-msgstr ""
+msgstr "在%1從地平線升起 (還有 %2)"
 
 #: plugins/Observability/src/Observability.cpp:222
 msgid "Circumpolar."
-msgstr "極地附近."
+msgstr "天球極點附近."
 
 #: plugins/Observability/src/Observability.cpp:223
 msgid "No rise."
-msgstr "沒有升."
+msgstr "沒有從地平線升起"
 
 #: plugins/Observability/src/Observability.cpp:224
 #, qt-format
 msgid "Culminates at %1 (in %2) at %3 deg."
-msgstr ""
+msgstr "在%1達到最高 (還有 %2) 於 %3度"
 
 #: plugins/Observability/src/Observability.cpp:225
 #, qt-format
 msgid "Culminated at %1 (%2 ago) at %3 deg."
-msgstr ""
+msgstr "在%1達到最高 (%2之前) 於 %3度"
 
 #: plugins/Observability/src/Observability.cpp:226
 msgid "Source is not observable."
-msgstr "此星體是不可觀測"
+msgstr "此星體是不可能在現時位置而被觀測得到"
 
 #: plugins/Observability/src/Observability.cpp:227
 msgid "No Acronychal nor Cosmical rise/set."
-msgstr ""
+msgstr "沒有日沒升/日沒落/偕日升/偕日落"
 
 #: plugins/Observability/src/Observability.cpp:228
 msgid "Greatest elongation: "
@@ -8177,15 +8180,15 @@ msgstr "與太陽最大距離: "
 #: plugins/Observability/src/Observability.cpp:230
 #, qt-format
 msgid " (at %1 deg.)"
-msgstr ""
+msgstr " (於 %1度.)"
 
 #: plugins/Observability/src/Observability.cpp:232
 msgid "Acronychal rise/set"
-msgstr "日沒升/落"
+msgstr "日沒升/日沒落"
 
 #: plugins/Observability/src/Observability.cpp:233
 msgid "No Acronychal rise/set."
-msgstr "沒有日沒升/落"
+msgstr "沒有日沒升/日沒落"
 
 #: plugins/Observability/src/Observability.cpp:234
 msgid "Cosmical rise/set"
@@ -8251,6 +8254,10 @@ msgid ""
 "taken into account.<br><br> The author thanks Alexander Wolf and Georg Zotti "
 "for their advice.<br><br>Ivan Marti-Vidal (Onsala Space Observatory)"
 msgstr ""
+"此插件顯示一個天體的基於現時可觀測性的分析 (如果沒有選擇天體, 就以螢幕中心點作計算). 此插件顯示可以 從地平線升起/落下及凌日時間 "
+"(最大與太陽距離等等), 天體在夜間高於地平線的日子, 日沒升/日沒落/偕日升/偕日落的日子. "
+"<br>該太陽系天體的星歷表和視差效應被考慮在內<br><br>作者感謝Alexander Wolf 及Georg Zotti "
+"提供協助<br><br>Ivan Marti-Vidal (Onsala太空天文台)"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:105
 msgid "Explanation of some parameters"
@@ -8296,7 +8303,7 @@ msgstr ""
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:111
 msgid "Acronychal/Cosmical rise/set:"
-msgstr "日沒/偕日 升/落:"
+msgstr "日沒升/日沒落 偕日升/偕日落:"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:111
 msgid ""
@@ -8310,6 +8317,9 @@ msgid ""
 "that the source is hardly observable (or not observable at all) in the dates "
 "between Cosmical set and rise."
 msgstr ""
+"天體的日沒升/日沒落是指天體在從地平線升起/落下時太陽也從地平線升起/落下. 這些事件發生的確實日子是基於觀察者的位置. "
+"日沒升/日沒落的日期是當天體的高度達到高點而太陽在地平線下低點 (所以天體可以有良好的條件被觀測). 而另一方面天體偕日升/偕日落發生在天體和太陽, "
+"同時在地平線升起/落下. 因此在偕日升/偕日落之間的日子, 天體幾乎不可能被觀測得到."
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:112
 msgid "Largest Sun separation:"
@@ -8386,7 +8396,7 @@ msgstr "今日星歷表（日出, 日落和凌時間）"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:363
 msgid "Dates of Acronychal and Cosmical rise/set"
-msgstr ""
+msgstr "日沒升/日沒落和偕日升/偕日落 日期:"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:364
 msgid "Date of largest separation to the Sun"
@@ -8394,7 +8404,7 @@ msgstr "與太陽最大分隔日期"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:365
 msgid "Nights with the source above horizon"
-msgstr ""
+msgstr "目標天體高於是地平線的夜晚"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:366
 msgid "Dates of previous and next Full Moon"
