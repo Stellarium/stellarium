@@ -385,10 +385,7 @@ void StelGui::init(QGraphicsWidget *atopLevelGraphicsWidget)
 
 void StelGui::quit()
 {
-#ifndef DISABLE_SCRIPTING
-	StelApp::getInstance().getScriptMgr().stopScript();
-#endif
-	QCoreApplication::exit();
+	StelApp::getInstance().quit();
 }
 
 //! Reload the current Qt Style Sheet (Debug only)
