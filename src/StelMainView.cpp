@@ -340,6 +340,7 @@ void StelMainView::init(QSettings* conf)
 	setCursorTimeout(conf->value("gui/mouse_cursor_timeout", 10.f).toFloat());
 	maxfps = conf->value("video/maximum_fps",10000.f).toFloat();
 	minfps = conf->value("video/minimum_fps",10000.f).toFloat();
+	flagMaxFpsUpdatePending = false;
 
 	// XXX: This should be done in StelApp::init(), unfortunately for the moment we need init the gui before the
 	// plugins, because the gui create the QActions needed by some plugins.
@@ -432,6 +433,12 @@ void StelMainView::thereWasAnEvent()
 	lastEventTimeSec = StelApp::getTotalRunTime();
 }
 
+void StelMainView::maxFpsSceneUpdate()
+{
+	updateScene();
+	flagMaxFpsUpdatePending = false;
+}
+
 void StelMainView::drawBackground(QPainter*, const QRectF&)
 {
 	const double now = StelApp::getTotalRunTime();
@@ -441,9 +448,23 @@ void StelMainView::drawBackground(QPainter*, const QRectF&)
 	// after that, it switches back to the default minfps value to save power
 	if (now-lastEventTimeSec<2.5)
 	{
-		double duration = 1./getMaxFps();
-		int dur = (int)(duration*1000);
-		QTimer::singleShot(dur<5 ? 5 : dur, this, SLOT(updateScene()));
+		if (!flagMaxFpsUpdatePending)
+		{
+			double duration = 1./getMaxFps();
+			int dur = (int)(duration*1000);
+
+			if (minFpsTimer!=NULL)
+			{
+				disconnect(minFpsTimer, SIGNAL(timeout()), 0, 0);
+				delete minFpsTimer;
+				minFpsTimer = NULL;
+			}
+			flagMaxFpsUpdatePending = true;
+			QTimer::singleShot(dur<5 ? 5 : dur, this, SLOT(maxFpsSceneUpdate()));
+		}
+	} else if (minFpsTimer == NULL) {
+		// Restart the minfps timer
+		minFpsChanged();
 	}
 
 	// Manage cursor timeout
