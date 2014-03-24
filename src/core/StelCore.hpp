@@ -33,6 +33,7 @@ class StelSkyDrawer;
 class StelGeodesicGrid;
 class StelMovementMgr;
 class StelObserver;
+class StelDeltaTMgr;
 
 //! @class StelCore
 //! Main class for Stellarium core processing.
@@ -529,6 +530,7 @@ private:
 
 	// The currentrly used time correction (DeltaT)
 	DeltaTAlgorithm currentDeltaTAlgorithm;
+	StelDeltaTMgr* timeCorrection;
 
 	// Parameters to use when creating new instances of StelProjector
 	StelProjector::StelProjectorParams currentProjectorParams;

@@ -37,6 +37,7 @@
 #include "LandscapeMgr.hpp"
 #include "StelTranslator.hpp"
 #include "StelActionMgr.hpp"
+#include "StelDeltaTMgr.hpp"
 
 #include <QSettings>
 #include <QDebug>
@@ -80,6 +81,8 @@ StelCore::StelCore() : movementMgr(NULL), geodesicGrid(NULL), currentProjectionT
 	currentProjectorParams.gravityLabels = conf->value("viewing/flag_gravity_labels").toBool();
 	
 	currentProjectorParams.devicePixelsPerPixel = StelApp::getInstance().getDevicePixelsPerPixel();
+
+	timeCorrection = new StelDeltaTMgr();
 }
 
 
@@ -87,6 +90,7 @@ StelCore::~StelCore()
 {
 	delete toneConverter; toneConverter=NULL;
 	delete geodesicGrid; geodesicGrid=NULL;
+	delete timeCorrection; timeCorrection = NULL;
 	delete skyDrawer; skyDrawer=NULL;
 	delete position; position=NULL;
 }
