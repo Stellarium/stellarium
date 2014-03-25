@@ -49,6 +49,13 @@ public:
 	//! Calculates DeltaT correction using the currently selected algorithm.
 	double calculateDeltaT(const double& jdUtc, QString* outputString);
 
+	//!
+	void setCustomAlgorithmParams(const float& year,
+	                              const float& ndot,
+	                              const float& a,
+	                              const float& b,
+	                              const float& c);
+
 private:
 	//! All available algorithms, keys are algorithm IDs.
 	//! Should contain one object per each child class of DeltaTAlgorithm.
