@@ -67,6 +67,8 @@ public:
 	static QString symbol();
 
 private:
+	QString identifier;
+
 	//! "Dotted n", the Moon's acceleration in arc-seconds per century-squared.
 	//! Expressed as the time derivative of the mean sidereal angular motion of
 	//! the Moon @b n, written in Newton's notation (equivalent to dn/dt or n').
@@ -76,11 +78,69 @@ private:
 	unsigned int endYear;
 
 	//! Calculates the correction for the secular acceleration of the Moon.
-	virtual double calculateSecularAcceleration(const int& year) const;
+	virtual double calculateSecularAcceleration(const int& year,
+	                                            const int& month,
+	                                            const int& day) const;
 
 	//! Calculates the standard error (sigma).
 	virtual double calculateStandardError(const double& jdUtc,
 	                                      const int& year);
+
+	//! Does the actual string formatting in calculateDeltaT().
+	void formatDeltaTString(const double& deltaT,
+	                        const double& jdUtc,
+	                        const int& year,
+	                        QString* string);
+
 };
 
+
+// Derived classes for the various deltaT algorithms.
+// IDs are inherited from the DeltaTAlgorithm enum for backwards compatibility.
+// Each entry should provide:
+// - in the constructor, values for the ID, ndot and start and end years
+// - getName()
+// - getDescription()
+// - (optionally) getRangeDescription()
+// - calculateDeltaT()
+namespace DeltaT
+{
+
+class WithoutCorrection : public DeltaTAlgorithm
+{
+public:
+	WithoutCorrection();
+	QString getName() const;
+	QString getDescription() const;
+	QString getRangeDescription() const;
+	double calculateDeltaT(const double &jdUtc,
+	                       const int &year,
+	                       const int &month,
+	                       const int &day,
+	                       QString *string);
+};
+
+class Custom : public DeltaTAlgorithm
+{
+public:
+	Custom();
+	QString getName() const;
+	QString getDescription() const;
+	double calculateDeltaT(const double &jdUtc,
+	                       const int &year,
+	                       const int &month,
+	                       const int &day,
+	                       QString *string);
+
+	void setParameters(const float& year,
+	                   const float& ndot,
+	                   const float& a,
+	                   const float& b,
+	                   const float& c);
+
+private:
+	float paramYear;
+	float paramA, paramB, paramC;
+};
+}
 #endif // DELTATALGORITHM_HPP
