@@ -17,6 +17,7 @@
  */
 
 #include "StelDeltaTMgr.hpp"
+#include "StelUtils.hpp"
 #include "DeltaTAlgorithm.hpp"
 
 #include <QDebug>
@@ -84,7 +85,7 @@ double
 StelDeltaTMgr::calculateDeltaT(const double& jdUtc, QString* outputString)
 {
 	int year, month, day;
-	// TODO
+	StelUtils::getDateFromJulianDay(jdUtc, &year, &month, &day);
 	return currentAlgorithm->calculateDeltaT(jdUtc,
 	                                         year, month, day,
 	                                         outputString);
