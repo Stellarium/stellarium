@@ -537,6 +537,7 @@ void StelMainView::moveEvent(QMoveEvent * event)
 
 void StelMainView::closeEvent(QCloseEvent* event)
 {
+	Q_UNUSED(event);
 	StelApp::getInstance().quit();
 }
 
