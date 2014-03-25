@@ -90,6 +90,17 @@ StelDeltaTMgr::calculateDeltaT(const double& jdUtc, QString* outputString)
 	                                         outputString);
 }
 
+void StelDeltaTMgr::getCustomAlgorithmParams(float* year,
+                                             float* ndot,
+                                             float* a,
+                                             float* b,
+                                             float* c)
+{
+	Custom* algorithm = dynamic_cast<Custom*> customAlgorithm;
+	if (algorithm)
+		;// TODO
+}
+
 void
 StelDeltaTMgr::setCustomAlgorithmParams(const float& year,
                                         const float& ndot,

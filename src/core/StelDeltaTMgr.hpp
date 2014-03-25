@@ -50,6 +50,12 @@ public:
 	double calculateDeltaT(const double& jdUtc, QString* outputString);
 
 	//!
+	void getCustomAlgorithmParams(float* year,
+	                              float* ndot,
+	                              float* a,
+	                              float* b,
+	                              float* c);
+	//!
 	void setCustomAlgorithmParams(const float& year,
 	                              const float& ndot,
 	                              const float& a,

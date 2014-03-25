@@ -173,6 +173,9 @@ public:
 	//! Get the const instance of movement manager.
 	const StelMovementMgr* getMovementMgr() const;
 
+	//! Get the instance of the time correction manager.
+	StelDeltaTMgr* getTimeCorrectionMgr();
+
 	//! Set the near and far clipping planes.
 	void setClippingPlanes(double znear, double zfar);
 	//! Get the near and far clipping planes.
@@ -494,23 +497,6 @@ public slots:
 	//! the selected object is of the correct type - i.e. a planet.
 	void moveObserverToSelected();
 
-	//! Set year for custom equation for calculation of Delta-T
-	//! @param y the year, e.g. 1820
-	void setDeltaTCustomYear(float y) { deltaTCustomYear=y; }
-	//! Set n-dot for custom equation for calculation of Delta-T
-	//! @param y the n-dot value, e.g. -26.0
-	void setDeltaTCustomNDot(float v) { deltaTCustomNDot=v; }
-	//! Set coefficients for custom equation for calculation of Delta-T
-	//! @param y the coefficients, e.g. -20,0,32
-	void setDeltaTCustomEquationCoefficients(Vec3f c) { deltaTCustomEquationCoeff=c; }
-
-	//! Get year for custom equation for calculation of Delta-T
-	float getDeltaTCustomYear() const { return deltaTCustomYear; }
-	//! Get n-dot for custom equation for calculation of Delta-T
-	float getDeltaTCustomNDot() const { return deltaTCustomNDot; }
-	//! Get coefficients for custom equation for calculation of Delta-T
-	Vec3f getDeltaTCustomEquationCoefficients() const { return deltaTCustomEquationCoeff; }
-
 signals:
 	//! This signal is emitted when the observer location has changed.
 	void locationChanged(StelLocation);
@@ -565,12 +551,6 @@ private:
 	QString startupTimeMode;
 	double secondsOfLastJDayUpdate;         // Time in seconds when the time rate or time last changed
 	double JDayOfLastJDayUpdate;         // JDay when the time rate or time last changed
-
-	// Variables for custom equation of Delta-T
-	Vec3f deltaTCustomEquationCoeff;
-	float deltaTCustomNDot;
-	float deltaTCustomYear;
-
 };
 
 #endif // _STELCORE_HPP_

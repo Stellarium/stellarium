@@ -22,12 +22,13 @@
 #define _CUSTOMDELTATEQUATIONDIALOG_HPP_
 
 #include "StelDialog.hpp"
-#include "StelCore.hpp"
 
 #include <QObject>
 #include <QSettings>
 
 class Ui_CustomDeltaTEquationDialogForm;
+class StelCore;
+class StelDeltaTMgr;
 
 //! @class CustomDeltaTEquationDialog
 class CustomDeltaTEquationDialog : public StelDialog
@@ -48,23 +49,19 @@ protected:
 	Ui_CustomDeltaTEquationDialogForm *ui;
 
 private slots:
-	void saveSettings(void) const;
-
-	void setNDot(const QString& v);
-	void setYear(const QString& v);
-	void setCoeffA(const QString& v);
-	void setCoeffB(const QString& v);
-	void setCoeffC(const QString& v);
+	void saveSettings() const;
+	void setValuesFromFields();
 
 private:
 	QSettings* conf;
 	StelCore* core;
+	StelDeltaTMgr* timeCorrection;
 
 	float year;
 	float ndot;
-	Vec3f coeff;
+	float coeffA, coeffB, coeffC;
 
-	void setDescription(void) const;
+	void setDescription() const;
 
 };
 

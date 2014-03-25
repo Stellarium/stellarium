@@ -114,15 +114,18 @@ void StelCore::init()
 	position = new StelObserver(location);
 
 	// Delta-T stuff
+	// TODO: Move this to DeltaTMgr?
 	// Define default algorithm for time correction (Delta T)
 	QString tmpDT = conf->value("navigation/time_correction_algorithm", "EspenakMeeus").toString();
-	setCurrentDeltaTAlgorithmKey(tmpDT);
-
+	// Set it directly to avoid re-adding deltaT (when caching is implemented)
+	timeCorrection->setCurrentAlgorithm(tmpDT);
 	// Define variables of custom equation for calculation of Delta T
 	// Default: ndot = -26.0 "/cy/cy; year = 1820; DeltaT = -20 + 32*u^2, where u = (currentYear-1820)/100
-	setDeltaTCustomYear(conf->value("custom_time_correction/year", 1820.0).toFloat());
-	setDeltaTCustomNDot(conf->value("custom_time_correction/ndot", -26.0).toFloat());
-	setDeltaTCustomEquationCoefficients(StelUtils::strToVec3f(conf->value("custom_time_correction/coefficients", "-20,0,32").toString()));
+	float year = conf->value("custom_time_correction/year", 1820.0).toFloat();
+	float ndot = conf->value("custom_time_correction/ndot", -26.0).toFloat();
+	Vec3f coef;
+	conf->value("custom_time_correction/coefficients", "-20,0,32").toString() >> coef;
+	timeCorrection->setCustomAlgorithmParams(year, ndot, coef[0], coef[1], coef[2]);
 
 	// Time stuff
 	setTimeNow();
@@ -1431,13 +1434,13 @@ double StelCore::getDeltaT(double jDay) const
 		break;
 	case Custom:
 		// User defined coefficients for quadratic equation for DeltaT
-		ndot = getDeltaTCustomNDot(); // n.dot = custom value "/cy/cy
-		int year, month, day;
-		Vec3f coeff = getDeltaTCustomEquationCoefficients();
-		StelUtils::getDateFromJulianDay(jDay, &year, &month, &day);
-		double yeardec=year+((month-1)*30.5+day/31*30.5)/366;
-		double u = (yeardec-getDeltaTCustomYear())/100;
-		DeltaT = coeff[0] + coeff[1]*u + coeff[2]*std::pow(u,2);
+//		ndot = getDeltaTCustomNDot(); // n.dot = custom value "/cy/cy
+//		int year, month, day;
+//		Vec3f coeff = getDeltaTCustomEquationCoefficients();
+//		StelUtils::getDateFromJulianDay(jDay, &year, &month, &day);
+//		double yeardec=year+((month-1)*30.5+day/31*30.5)/366;
+//		double u = (yeardec-getDeltaTCustomYear())/100;
+//		DeltaT = coeff[0] + coeff[1]*u + coeff[2]*std::pow(u,2);
 		break;
 	}
 
@@ -1447,23 +1450,15 @@ double StelCore::getDeltaT(double jDay) const
 	return DeltaT;
 }
 
-//! Set the current algorithm for time correction to use
 void StelCore::setCurrentDeltaTAlgorithmKey(QString key)
 {
-	const QMetaEnum& en = metaObject()->enumerator(metaObject()->indexOfEnumerator("DeltaTAlgorithm"));
-	DeltaTAlgorithm algo = (DeltaTAlgorithm)en.keyToValue(key.toLatin1().data());
-	if (algo<0)
-	{
-		qWarning() << "Unknown DeltaT algorithm: " << key << "setting \"WithoutCorrection\" instead";
-		algo = WithoutCorrection;
-	}
-	setCurrentDeltaTAlgorithm(algo);
+	timeCorrection->setCurrentAlgorithm(key);
+	// TODO: Update cached JD(TT) value.
 }
 
-//! Get the current algorithm used by the DeltaT
 QString StelCore::getCurrentDeltaTAlgorithmKey(void) const
 {
-	return metaObject()->enumerator(metaObject()->indexOfEnumerator("DeltaTAlgorithm")).key(currentDeltaTAlgorithm);
+	return timeCorrection->getCurrentAlgorithmId();
 }
 
 //! Get description of the current algorithm for time correction

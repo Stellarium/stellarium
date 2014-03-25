@@ -1,6 +1,7 @@
 /*
  * Stellarium
  * Copyright (C) 2013 Alexander Wolf
+ * Copyright (C) 2014 Bogdan Marinov
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,6 +22,8 @@
 
 #include "Dialog.hpp"
 #include "StelApp.hpp"
+#include "StelCore.hpp"
+#include "StelDeltaTMgr.hpp"
 #include "StelTranslator.hpp"
 #include "StelObjectMgr.hpp"
 
@@ -31,10 +34,9 @@ CustomDeltaTEquationDialog::CustomDeltaTEquationDialog()
 	ui = new Ui_CustomDeltaTEquationDialogForm;
 	conf = StelApp::getInstance().getSettings();
 	core = StelApp::getInstance().getCore();
-
-	ndot = core->getDeltaTCustomNDot();
-	year = core->getDeltaTCustomYear();
-	coeff = core->getDeltaTCustomEquationCoefficients();
+	timeCorrection = core->getTimeCorrectionMgr();
+	timeCorrection->getCustomAlgorithmParams(&year, &ndot,
+	                                         &coeffA, &coeffB, &coeffC);
 }
 
 CustomDeltaTEquationDialog::~CustomDeltaTEquationDialog()
@@ -58,11 +60,11 @@ void CustomDeltaTEquationDialog::createDialogContent()
 	ui->setupUi(dialog);
 	setDescription();
 
-	ui->labelNDot->setText(QString("%1:").arg(QChar(0x1E45)));
+	ui->labelNDot->setText(QString("%1:").arg(QChar(0x1E45))); // Dotted n
 
-	ui->lineEditCoefficientA->setText(QString("%1").arg(coeff[0]));
-	ui->lineEditCoefficientB->setText(QString("%1").arg(coeff[1]));
-	ui->lineEditCoefficientC->setText(QString("%1").arg(coeff[2]));
+	ui->lineEditCoefficientA->setText(QString("%1").arg(coeffA));
+	ui->lineEditCoefficientB->setText(QString("%1").arg(coeffB));
+	ui->lineEditCoefficientC->setText(QString("%1").arg(coeffC));
 	ui->lineEditYear->setText(QString("%1").arg(year));
 	ui->lineEditNDot->setText(QString("%1").arg(ndot));
 
@@ -70,12 +72,17 @@ void CustomDeltaTEquationDialog::createDialogContent()
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 
-	connect(ui->lineEditNDot, SIGNAL(textEdited(const QString&)), this, SLOT(setNDot(const QString&)));
-	connect(ui->lineEditYear, SIGNAL(textEdited(const QString&)), this, SLOT(setYear(const QString&)));
-	connect(ui->lineEditCoefficientA, SIGNAL(textEdited(const QString&)), this, SLOT(setCoeffA(const QString&)));
-	connect(ui->lineEditCoefficientB, SIGNAL(textEdited(const QString&)), this, SLOT(setCoeffB(const QString&)));
-	connect(ui->lineEditCoefficientC, SIGNAL(textEdited(const QString&)), this, SLOT(setCoeffC(const QString&)));
-
+	// For now, I'll keep the original behavior: setting/saving. --BM
+	connect(ui->lineEditNDot, SIGNAL(textEdited()),
+	        this, SLOT(setValuesFromFields()));
+	connect(ui->lineEditYear, SIGNAL(textEdited()),
+	        this, SLOT(setValuesFromFields()));
+	connect(ui->lineEditCoefficientA, SIGNAL(textEdited()),
+	        this, SLOT(setValuesFromFields()));
+	connect(ui->lineEditCoefficientB, SIGNAL(textEdited()),
+	        this, SLOT(setValuesFromFields()));
+	connect(ui->lineEditCoefficientC, SIGNAL(textEdited()),
+	        this, SLOT(setValuesFromFields()));
 }
 
 void CustomDeltaTEquationDialog::setVisible(bool v)
@@ -83,54 +90,31 @@ void CustomDeltaTEquationDialog::setVisible(bool v)
 	StelDialog::setVisible(v);
 }
 
-void CustomDeltaTEquationDialog::saveSettings(void) const
+void CustomDeltaTEquationDialog::saveSettings() const
 {
 	conf->beginGroup("custom_time_correction");
 
 	conf->setValue("year", year);
 	conf->setValue("ndot", ndot);
-	conf->setValue("coefficients", QString("%1,%2,%3").arg(coeff[0]).arg(coeff[1]).arg(coeff[2]));
+	conf->setValue("coefficients", QString("%1,%2,%3").arg(coeffA).arg(coeffB).arg(coeffB));
 
 	conf->endGroup();
 }
 
-void CustomDeltaTEquationDialog::setNDot(const QString& v)
+void CustomDeltaTEquationDialog::setValuesFromFields()
 {
-	ndot = v.toFloat();
-	core->setDeltaTCustomNDot(ndot);
-	saveSettings();
-}
-
-void CustomDeltaTEquationDialog::setYear(const QString& v)
-{
-	year = v.toFloat();
-	core->setDeltaTCustomYear(year);
-	saveSettings();
-}
-
-void CustomDeltaTEquationDialog::setCoeffA(const QString& v)
-{
-	coeff[0] = v.toFloat();
-	core->setDeltaTCustomEquationCoefficients(coeff);
-	saveSettings();
-}
-
-void CustomDeltaTEquationDialog::setCoeffB(const QString& v)
-{
-	coeff[1] = v.toFloat();
-	core->setDeltaTCustomEquationCoefficients(coeff);
-	saveSettings();
-}
-
-void CustomDeltaTEquationDialog::setCoeffC(const QString& v)
-{
-	coeff[2] = v.toFloat();
-	core->setDeltaTCustomEquationCoefficients(coeff);
+	ndot = ui->lineEditNDot->text().toFloat();
+	year = ui->lineEditYear->text().toFloat();
+	coeffA = ui->lineEditCoefficientA->text().toFloat();
+	coeffB = ui->lineEditCoefficientB->text().toFloat();
+	coeffC = ui->lineEditCoefficientC->text().toFloat();
+	timeCorrection->setCustomAlgorithmParams(year, ndot, coeffA, coeffB, coeffC);
 	saveSettings();
 }
 
 void CustomDeltaTEquationDialog::setDescription() const
 {
+	// TODO: Fix the translations for symbol use, concatenation, etc.
 	ui->stelWindowTitle->setText(q_("Custom equation for %1T").arg(QChar(0x0394)));
 	ui->labelDescription->setText(q_("A typical equation for calculation of %1T looks like:").arg(QChar(0x0394)));
 	ui->labelEquation->setText(QString("<strong>%1T = a + b%2u + c%3u%4,</strong>").arg(QChar(0x0394)).arg(QChar(0x00B7)).arg(QChar(0x00B7)).arg(QChar(0x00B2)));
