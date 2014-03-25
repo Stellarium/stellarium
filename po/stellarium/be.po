@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-03-22 22:34+0700\n"
-"PO-Revision-Date: 2014-03-03 05:08+0000\n"
+"PO-Revision-Date: 2014-03-24 12:56+0000\n"
 "Last-Translator: 375gnu <Unknown>\n"
 "Language-Team: Belarusian <i18n@mova.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-03-23 05:48+0000\n"
+"X-Launchpad-Export-Date: 2014-03-25 06:04+0000\n"
 "X-Generator: Launchpad (build 16967)\n"
 "Language: be\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -1764,7 +1764,7 @@ msgstr "Нармальная часьціня"
 
 #: src/gui/ViewDialog.cpp:579
 msgid "Standard Orionids rate"
-msgstr ""
+msgstr "Звычайная часьціня Арыянідаў"
 
 #: src/gui/ViewDialog.cpp:582
 msgid "Standard Perseids rate"
@@ -1772,11 +1772,11 @@ msgstr "Звычайная часьціня Пэрсэідаў"
 
 #: src/gui/ViewDialog.cpp:585
 msgid "Standard Geminids rate"
-msgstr ""
+msgstr "Звычайная часьціня Джэмінідаў"
 
 #: src/gui/ViewDialog.cpp:588
 msgid "Exceptional Perseid rate"
-msgstr ""
+msgstr "Выключная часьціня Пэрсэідаў"
 
 #: src/gui/ViewDialog.cpp:591
 msgid "Meteor storm rate"
@@ -1784,7 +1784,7 @@ msgstr "Часьціня мэтэорнага шторму"
 
 #: src/gui/ViewDialog.cpp:594
 msgid "Exceptional Draconid rate"
-msgstr ""
+msgstr "Выключная часьціня Драканідаў"
 
 #: src/gui/ViewDialog.cpp:597
 msgid "Exceptional Leonid rate"
@@ -1792,11 +1792,11 @@ msgstr "Выключная часьціня Леанідаў"
 
 #: src/gui/ViewDialog.cpp:600
 msgid "Very high rate (1966 Leonids)"
-msgstr ""
+msgstr "Вельмі высокая (Леаніды ў 1966)"
 
 #: src/gui/ViewDialog.cpp:603
 msgid "Highest rate ever (1833 Leonids)"
-msgstr ""
+msgstr "Найбольшая калі (Леаніды ў 1833)"
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:112
 msgid "Select a ZIP archive that contains a Stellarium landscape"
@@ -4197,7 +4197,7 @@ msgstr "Дынамічная адаптацыя вока"
 
 #: src/ui_viewDialog.h:1205
 msgid "Settings for sporadic meteors"
-msgstr ""
+msgstr "Настройкі спарадычных мэтэораў"
 
 #: src/ui_viewDialog.h:1207
 msgid "Shooting Stars"
@@ -4205,7 +4205,7 @@ msgstr "Зьнічкі"
 
 #: src/ui_viewDialog.h:1209
 msgid "Hourly zenith rate"
-msgstr "Часьціня зьнічак за гадзіну"
+msgstr "Зэнітныя часьціня за гадзіну"
 
 #: src/ui_viewDialog.h:1211
 msgctxt "Zenithal Hourly Rate"
@@ -4684,11 +4684,11 @@ msgstr "«Аўтааддаленьне» вяртае пачатковы нап�
 #: src/ui_configurationDialog.h:1146
 msgid ""
 "Auto-enabling of the atmosphere for bodies with atmosphere in location window"
-msgstr ""
+msgstr "Аўтазадзейнічаньне атмасфэры ў вакне месцаў для целаў з атмасфэраў"
 
 #: src/ui_configurationDialog.h:1148
 msgid "Auto-enabling for the atmosphere"
-msgstr ""
+msgstr "Аўтазадзейнічаньне атмасфэры"
 
 #: src/ui_configurationDialog.h:1149
 msgid "Screenshots"
@@ -4972,6 +4972,12 @@ msgid ""
 "at one end, pointing at a <em>photograph</em> of Saturn at the other end of "
 "the lab. We measured. We calculated. We wished we were in Hawaii."
 msgstr ""
+"*з затуманеным поглядам* Прыгадваю мераньне памеру дзяленьня Касіні ў "
+"студэнцкія гады. Было не так акадэмічна й ґлямурна, як можна было чакаць… "
+"Было хмарна… Ішоў дождж… У абсэрваторскай лябараторыі было некалькі старых "
+"тэлескопаў, усталяваных на адным канцы й накіраваных на <em>фатаґрафію</em> "
+"Сатурна на іншым канцы лябараторыі. Мы мералі. Мы разьлічвалі. Мы хацелі "
+"быць на Гаваях."
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:81
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:420
@@ -8390,7 +8396,7 @@ msgstr "Пляцоўкі"
 
 #: plugins/Observability/src/Observability.cpp:65
 msgid "Observability Analysis"
-msgstr ""
+msgstr "Аналіз назіральнасьці"
 
 #: plugins/Observability/src/Observability.cpp:68
 msgid ""
@@ -8402,6 +8408,12 @@ msgid ""
 "setting. (Explanations are provided in the 'About' tab of the plugin's "
 "configuration window.)"
 msgstr ""
+"Паказвае аналіз назіральнасьці выбранага аб'екту (час узыходу, захаду й "
+"транзыту) на бягучы дзень, а таксама, калі яго можна назіраць на працягу "
+"году. Аб'ект лічыцца назіральным, калі ён знаходзіцца па-над гарызонтам "
+"нейкую частку ночы. Таксама ўключаныя дата найбольшага аддаленьня ад Сонца й "
+"акранічнага й касьмічнага ўзыходу й захаду. (Тлумачэньні дадзеныя на ўкладцы "
+"«Пра» вакна настаўленьняў дадатку.)"
 
 #: plugins/Observability/src/Observability.cpp:209
 msgctxt "short month name"
@@ -8964,7 +8976,7 @@ msgstr "Кегль:"
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:80
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:156
 msgid "Meteor Showers"
-msgstr ""
+msgstr "Мэтэорныя ліўні"
 
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:83
 msgid ""
@@ -8972,371 +8984,375 @@ msgid ""
 "meteor showers and displays marker for radiants in activity range for each "
 "meteor showers."
 msgstr ""
+"Гэты дадатак дае візуалізацыю мэтэорных ліўняў, адлюстроўвае зьвесткі пра іх "
+"і паказвае пазнакі іхных радыянтаў у межах актыўнасьці для кожнага з "
+"мэтэорных ліўняў."
 
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:157
 msgid "Show meteor showers"
-msgstr ""
+msgstr "Паказваць мэтэорныя ліўні"
 
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:158
 msgid "Radiant labels"
-msgstr ""
+msgstr "Подпісы радыянтаў"
 
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:159
 msgid "Meteor Shower configuration window"
-msgstr ""
+msgstr "Вакно настаўленьняў мэтэорных ліўняў"
 
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:186
 msgid ""
 "The old showers.json file is no longer compatible - using default file"
 msgstr ""
+"Стары файл showers.json болей не падтрымліваецца, выкарыстаны прадвызначаны"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1125
 msgid "Quadrantids"
-msgstr ""
+msgstr "Квадрантыды"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1127
 msgid "Lyrids"
-msgstr ""
+msgstr "Лірыды"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1129
 msgid "α-Centaurids"
-msgstr ""
+msgstr "α-Цэнтаўрыды"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1131
 msgid "γ-Normids"
-msgstr ""
+msgstr "γ-Нарміды"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1133
 msgid "η-Aquariids"
-msgstr ""
+msgstr "η-Акварыды"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1135
 msgid "June Bootids"
-msgstr ""
+msgstr "Чэрвеньскія баатыды"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1137
 msgid "Piscis Austrinids"
-msgstr ""
+msgstr "Пісіс-аўстрыніды"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1139
 msgid "Southern δ-Aquariids"
-msgstr ""
+msgstr "Паўднёвыя δ-Акварыды"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1141
 msgid "α-Capricornids"
-msgstr ""
+msgstr "α-Капрыкарніды"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1143
 msgid "α-Aurigids"
-msgstr ""
+msgstr "α-Аўрыґіды"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1145
 msgid "September ε-Perseids"
-msgstr ""
+msgstr "Верасьнёўскія ε-Пэрсэіды"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1147
 msgid "Draconids"
-msgstr ""
+msgstr "Драканіды"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1149
 msgid "Leonids"
-msgstr ""
+msgstr "Леаніды"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1151
 msgid "Phoenicids"
-msgstr ""
+msgstr "Фэніцыды"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1153
 msgid "Puppid-Velids"
-msgstr ""
+msgstr "Пупід-Вэліды"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1155
 msgid "Ursids"
-msgstr ""
+msgstr "Урсіды"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1157
 msgid "Perseids"
-msgstr ""
+msgstr "Пэрсэіды"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1159
 msgid "δ-Leonids"
-msgstr ""
+msgstr "δ-Леаніды"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1161
 msgid "π-Puppids"
-msgstr ""
+msgstr "π-Пупіды"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1163
 msgid "June Lyrids"
-msgstr ""
+msgstr "Чэрвеньскія лірыды"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1165
 msgid "κ-Cygnids"
-msgstr ""
+msgstr "κ-Цыґніды"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1167
 msgid "ε-Lyrids"
-msgstr ""
+msgstr "ε-Лірыды"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1169
 msgid "δ-Aurigids"
-msgstr ""
+msgstr "δ-Аўрыґіды"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1171
 msgid "ε-Geminids"
-msgstr ""
+msgstr "ε-Ґемэніды"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1173
 msgid "Southern Taurids"
-msgstr ""
+msgstr "Паўднёвыя таўрыды"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1175
 msgid "Northern Taurids"
-msgstr ""
+msgstr "Паўночныя таўрыды"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1177
 msgid "Monocerotids"
-msgstr ""
+msgstr "Монацэратыды"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1179
 msgid "σ-Hydrids"
-msgstr ""
+msgstr "σ-Гідрыды"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1181
 msgid "Geminids"
-msgstr ""
+msgstr "Ґемэніды"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1183
 msgid "Leonis Minorids"
-msgstr ""
+msgstr "Леаніс-мінарыды"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1185
 msgid "December Leonis Minorids"
-msgstr ""
+msgstr "Сьнежаньскія Леаніс-мінарыды"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1187
 msgid "Comae Berenicids"
-msgstr ""
+msgstr "Кома-бэрэніцыды"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1189
 msgid "Orionids"
-msgstr ""
+msgstr "Арыяніды"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1191
 msgid "Andromedids"
-msgstr ""
+msgstr "Андрамэдыды"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1195
 msgid "Minor planet 2003 EH1 and Comet C/1490 Y1"
-msgstr ""
+msgstr "Малая плянэта 2003 EH1 і камэта C/1490 Y1"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1197
 msgid "Comet 1P/Halley"
-msgstr ""
+msgstr "Камэта 1P/Галея"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1199
 msgid "Comet 7P/Pons-Winnecke"
-msgstr ""
+msgstr "Камэта 7P/Понса-Вінэке"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1201
 msgid "Comet 55P/Tempel-Tuttle"
-msgstr ""
+msgstr "Камэта 55P/Тэмпэля-Тутля"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1203
 msgid "Comet 96P/Machholz"
-msgstr ""
+msgstr "Камэта 96P/Махгольца"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1205
 msgid "Comet 109P/Swift-Tuttle"
-msgstr ""
+msgstr "Камэта 109P/Свіфта-Тутля"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1207
 msgid "Comet Thatcher (1861 I)"
-msgstr ""
+msgstr "Камэта Тэтчэра (1861 I)"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1209
 msgid "Minor planet (4450) Pan"
-msgstr ""
+msgstr "Малая плянэта (4450) Пан"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1211
 msgid "Comet 26P/Grigg-Skjellerup"
-msgstr ""
+msgstr "Камэта 26P/Ґрыґа-Ск'елерупа"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1213
 msgid "Comet 21P/Giacobini-Zinner"
-msgstr ""
+msgstr "Камэта 21P/Джакабіні-Цынэра"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1215
 msgid "Comet 169P/NEAT"
-msgstr ""
+msgstr "Камэта 169P/NEAT"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1217
 msgid "Comet 289P/Blanpain"
-msgstr ""
+msgstr "Камэта 289P/Бланпэна"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1219
 msgid "Comet 8P/Tuttle"
-msgstr ""
+msgstr "Камэта 8P/Тутля"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1221
 msgid "Minor planet 2008 ED69"
-msgstr ""
+msgstr "Малая плянэта 2008 ED69"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1223
 msgid "Comet 2P/Encke"
-msgstr ""
+msgstr "Камэта 2P/Энке"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1225
 msgid "Comet 3D/Biela"
-msgstr ""
+msgstr "Камэта 3D/Біелы"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1227
 msgid "Minor planet 2004 TG10"
-msgstr ""
+msgstr "Малая плянэта 2004 TG10"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1229
 msgid "Minor planet (3200) Phaethon"
-msgstr ""
+msgstr "Малая плянэта (3200) Фаэтон"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:294
 msgid "generic data"
-msgstr ""
+msgstr "агульныя даньні"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:296
 msgid "real data"
-msgstr ""
+msgstr "сапраўдныя даньні"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:302
 msgid "meteor shower"
-msgstr ""
+msgstr "мэтэорны лівень"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:310
 msgid "Radiant drift (per day)"
-msgstr ""
+msgstr "Адхіленьне радыянту (на дзень)"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:315
 #, qt-format
 msgid "Geocentric meteoric velocity: %1 km/s"
-msgstr ""
+msgstr "Геацэнтрычная мэтэорная хуткасьць: %1 км/г"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:318
 #, qt-format
 msgid "The population index: %1"
-msgstr ""
+msgstr "Каэфіцыент населенасьці: %1"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:323
 #, qt-format
 msgid "Parent body: %1"
-msgstr ""
+msgstr "Бацькоўскае цела: %1"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:329
 msgid "Active"
-msgstr ""
+msgstr "Актыўныя"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:337
 msgid "Activity"
-msgstr ""
+msgstr "Актыўнасьць"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:342
 #, qt-format
 msgid "Maximum: %1"
-msgstr ""
+msgstr "Максымум: %1"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:345
 msgid "Solar longitude is"
-msgstr ""
+msgstr "Сонечная даўгата —"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:354
 msgid "variable"
-msgstr ""
+msgstr "зьменная"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:162
 msgid "ZHR"
-msgstr ""
+msgstr "ЗЧЗ"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:163
 msgid "Data Type"
-msgstr ""
+msgstr "Тып даньняў"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:164
 msgid "Peak"
-msgstr ""
+msgstr "Пік"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:174
 msgid "Start date greater than end date!"
-msgstr ""
+msgstr "Пачатковая дата пазьнейшая за канчатковую!"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:176
 msgid "Time interval must be less than one year!"
-msgstr ""
+msgstr "Прамежак часу мусіць быць меншы за адзін год!"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:193
 msgid "Variable"
-msgstr ""
+msgstr "Зьменная"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:196
 msgid "Real"
-msgstr ""
+msgstr "Сапраўдныя"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:196
 msgid "Generic"
-msgstr ""
+msgstr "Агульныя"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:239
 msgid "Meteor Showers Plug-in"
-msgstr ""
+msgstr "Дадатак «Мэтэорныя ліўні»"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:244
 msgid ""
@@ -9344,14 +9360,17 @@ msgid ""
 "information about meteor showers and displays marker for radiants in "
 "activity range for each meteor showers."
 msgstr ""
+"Дадатак «Мэтэорныя ліўні» дае візуалізацыю мэтэорных ліўняў, адлюстроўвае "
+"зьвесткі пра мэтэорныя ліўні й паказвае пазнаку для радыянтаў у межах "
+"актынасьці кожнага мэтэорнаг ліўня."
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:245
 msgid "Terms"
-msgstr ""
+msgstr "Тэрміны"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:246
 msgid "Meteor shower"
-msgstr ""
+msgstr "Мэтэорны лівень"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:247
 msgid ""
@@ -9364,10 +9383,18 @@ msgid ""
 "known as meteor outbursts and meteor storms, which may produce greater than "
 "1,000 meteors an hour."
 msgstr ""
+"Мэтэорны лівень — гэта нябесная зьява, калі вялікая колькасьць мэтэораў "
+"зьяўляюцца з аднага пункту на небе. Гэтыя мэтэоры выклікаюцца плынямі "
+"касьмічных абломкаў, што называюцца мэтэорнымі целамі, якія ўваходзяць у "
+"атмасфэру Зямлі на вельмі вялікай хуткасьці паралельнымі траекторыямі. "
+"Бальшыня мэтэораў меншыя за пясчынку, так што амаль усе яны распадаюцца і "
+"ніколі не дасягаюць паверхні Зямлі. Інтэнсіўныя ці незвычайныя   ліўні "
+"вядомыя як мэтэорныя выбухі і мэтэорныя штормы, якія могуць спарадзіць больш "
+"за 1000 мэтэораў за гадзіну."
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:248
 msgid "Radiant"
-msgstr ""
+msgstr "Радыянт"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:249
 msgid ""
@@ -9376,6 +9403,10 @@ msgid ""
 "Perseids, for example, are meteors which appear to come from a point within "
 "the constellation of Perseus."
 msgstr ""
+"Радыянт або бачны радыянт мэтэорнага ліўня — гэта пункт на небе, зь якога "
+"(як бачна назіральніку на плянэце) мэтэор візуальна паходзіць. Пэрсэіды, "
+"напрыклад, — гэта мэтэоры, якія візуальна паходзяць з пункту ўнутры сузор'я "
+"Пэрсэй."
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:250
 msgid ""
@@ -9384,6 +9415,10 @@ msgid ""
 "point back to the known radiant for a given shower is known as a sporadic "
 "and is not considered part of that shower."
 msgstr ""
+"Назіральнік можа назіраць такі лівень дзе-заўгодна на небе, але напрамак "
+"руху, калі прасачыць яго назад, будзе паказваць на радыянт. Мэтэор, які не "
+"паказвае на вядомы радыянт дадзенага ліўня, вядомы як спарадычны, і не "
+"лічыцца часткай гэтага ліўня."
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:251
 msgid ""
@@ -9391,10 +9426,12 @@ msgid ""
 "when it appears. For example, the radiant point for the Delta Aurigids "
 "drifts by more than a degree per night."
 msgstr ""
+"Многія ліўня маюць радыянтны пункт, які зьмяняе сваё становішча. Напрыклад, "
+"радыянтны пункт Дэльта-аўрыґідаў перамяшчаецца за ноч больш як на ґрадус."
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:252
 msgid "Zenithal Hourly Rate (ZHR)"
-msgstr ""
+msgstr "Зэнітныя часьціня за гадзіну (ЗЧЗ)"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:253
 msgid ""
@@ -9404,10 +9441,15 @@ msgid ""
 "were at the zenith. The rate that can effectively be seen is nearly always "
 "lower and decreases the closer the radiant is to the horizon."
 msgstr ""
+"У астраноміі зэнітныя часьціня за гадзіну (ЗЧЗ) мэтэорнага ліўня — гэта "
+"колькасьць мэтэораў, якую адзін назіральнік пабачыць на працягу гадзіны на "
+"чыстым цёмным небе (абмяжоўваецца бачнай велічынёй 6,5), калі радыянт ліўня "
+"знаходзіцца ў зэніце. Часьціня, якую ў сапраўднасьці можна пабачыць, амаль "
+"заўжды меншая, і чым ніжэй радыянт да гарызонту, тым яна меншая."
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:254
 msgid "Population index"
-msgstr ""
+msgstr "Каэфіцыент населенасьці"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:255
 msgid ""
@@ -9416,131 +9458,137 @@ msgid ""
 "meteors are more frequent than average, while values above 3.0 mean that the "
 "share of faint meteors is larger than usual."
 msgstr ""
+"Каэфіцыент населенасьці паказвае разьмеркаваньне мэтэорных ліўняў паводле "
+"велічыні. Значэньні, меншыя за 2,5, адпавядаюць разьмеркаваньням, дзе яркія "
+"мэтэоры трапляюцца часьцей за сярэдні ровень, у той час як значэньні большыя "
+"за 3,0 азначаюць, што колькасьць бляклых большая за звычайную."
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:256
 msgid "Notes"
-msgstr ""
+msgstr "Нататкі"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:257
 msgid ""
 "This plugin was created as project of ESA Summer of Code in Space 2013."
 msgstr ""
+"Гэты дадатак быў створаны як праект ЭКА «Summer of Code in Space» у 2013 "
+"годзе."
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:258
 msgid "Info"
-msgstr ""
+msgstr "Зьвесткі"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:259
 msgid "Info about meteor showers you can get here:"
-msgstr ""
+msgstr "Пра мэтэорныя ліўні можна даведацца тут:"
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:262
 #, qt-format
 msgid "%1Meteor shower%2 - article in Wikipedia"
-msgstr ""
+msgstr "%1Мэтэорны лівень%2 — артыкул у Вікіпэдыі"
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:264
 #, qt-format
 msgid "%1International Meteor Organization%2"
-msgstr ""
+msgstr "%1Міжнародная мэтэорная арґанізацыя%2"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:328
 msgid "Meteor showers is updated"
-msgstr ""
+msgstr "«Мэтэорныя ліўні» абноўленыя"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:512
 msgid "Meteor Showers Configuration"
-msgstr ""
+msgstr "Настаўленьні «Мэтэорных ліўняў»"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:513
 msgid "Meteor Showers Plug-in Configuration"
-msgstr ""
+msgstr "Настаўленьні дадатку «Мэтэорныя ліўні»"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:515
 msgid "Update data from Internet"
-msgstr ""
+msgstr "Абнавіць зьвесткі зь Сеціва"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:523
 msgid "Meteor showers"
-msgstr ""
+msgstr "Мэтэорныя ліўні"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:524
 msgid "Show meteor showers button on toolbar"
-msgstr ""
+msgstr "Паказваць ґузік дадатку на панэлі прылад"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:525
 msgid "Enable display of meteor showers at startup"
-msgstr ""
+msgstr "Паказваць мэтэорныя ліўні на пачатку працы"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:529
 msgid "Color of radiants markers"
-msgstr ""
+msgstr "Пафарбаваць меткак радыянтаў"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:531
 msgid "Active Radiant - Generic Data"
-msgstr ""
+msgstr "Актыўныя радыянты — агульныя даньні"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:534
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:541
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:548
 msgid "Change Color"
-msgstr ""
+msgstr "Зьмяніць колер"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:538
 msgid "Inactive Radiant"
-msgstr ""
+msgstr "Неактыўны радыянт"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:545
 msgid "Active Radiant - Real Data"
-msgstr ""
+msgstr "Актыўныя радыянты — сапраўдныя даньні"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:551
 msgid "Radiants for meteor showers"
-msgstr ""
+msgstr "Радыянты мэтэорных ліўняў"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:552
 msgid "Show labels of radiants"
-msgstr ""
+msgstr "Паказваць подпісы радыянтаў"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:553
 msgid "Show active radiants only"
-msgstr ""
+msgstr "Паказваць толькі актыўныя радыянты"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:555
 msgid "Label font size (pixels)"
-msgstr ""
+msgstr "Кеґль подпісаў (у піксэлях)"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:557
 msgid "Radiants"
-msgstr ""
+msgstr "Радыянты"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:558
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:563
 msgid "Search"
-msgstr ""
+msgstr "Шукаць"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:559
 msgid "From:"
-msgstr ""
+msgstr "Ад:"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:560
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:562
 msgid "dd/MMM/yyyy"
-msgstr ""
+msgstr "дд/мм/гггг"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:561
 msgid "To:"
-msgstr ""
+msgstr "Да:"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:564
 msgid "Results"
-msgstr ""
+msgstr "Вынікі"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:565
 msgid "Search Events"
-msgstr ""
+msgstr "Шукаць падзеі"
 
 #~ msgid "Equatorial Grid"
 #~ msgstr "Экватарыяльная сетка"
