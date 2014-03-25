@@ -280,10 +280,19 @@ public:
 	void setStartupTimeMode(const QString& s);
 
 	//! Get Delta-T estimation for a given date.
-	//! @param jDay the date and time expressed as a julian day
-	//! @return Delta-T in seconds
-	//! @note Thanks to Rob van Gent which create a collection from many formulas for calculation of Delta-T: http://www.staff.science.uu.nl/~gent0113/deltat/deltat.htm
+	//! @param jDay JD(UTC), Julian date for the requested date/time.
+	//! @return Delta-T in seconds.
+	//! @note Thanks to Rob van Gent who has collected many Delta-T calculation
+	//! formulas: http://www.staff.science.uu.nl/~gent0113/deltat/deltat.htm
+	//! @todo Wrapper for calculateDeltaT(), kept for backward compatibility.
 	double getDeltaT(double jDay) const;
+
+	//! Calculates DeltaT estimation and provides it in text form if needed.
+	//! @param[in] jd JD(UTC), Julian date for the requested date/time.
+	//! @param[in,out] string if not a null pointer, text is output there.
+	//! @returns DeltaT value in seconds.
+	//! @todo Explain text output.
+	double calculateDeltaT(const double& jd, QString* string = 0) const;
 
 	//! Get info about valid range for current algorithm for calculation of Delta-T
 	//! @param jDay the JD

@@ -1450,6 +1450,11 @@ double StelCore::getDeltaT(double jDay) const
 	return DeltaT;
 }
 
+double StelCore::calculateDeltaT(const double& jd, QString* string) const
+{
+	timeCorrection->calculateDeltaT(jd, string);
+}
+
 void StelCore::setCurrentDeltaTAlgorithmKey(QString key)
 {
 	timeCorrection->setCurrentAlgorithm(key);
