@@ -25,6 +25,7 @@
 #include "StelGuiItems.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelLocation.hpp"
+#include "StelMainView.hpp"
 #include "StelMovementMgr.hpp"
 #include "StelActionMgr.hpp"
 #include "StelProgressController.hpp"
@@ -298,6 +299,8 @@ void LeftStelBar::buttonHoverChanged(bool b)
 	{
 		helpLabel->setText("");
 	}
+	// Update the screen as soon as possible.
+	StelMainView::getInstance().thereWasAnEvent();
 }
 
 // Set the pen for all the sub elements
@@ -711,6 +714,8 @@ void BottomStelBar::buttonHoverChanged(bool b)
 	{
 		helpLabel->setText("");
 	}
+	// Update the screen as soon as possible.
+	StelMainView::getInstance().thereWasAnEvent();
 }
 
 StelBarsPath::StelBarsPath(QGraphicsItem* parent) : QGraphicsPathItem(parent)
