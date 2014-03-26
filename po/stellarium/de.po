@@ -10,13 +10,13 @@ msgstr ""
 "Project-Id-Version: de\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-03-22 22:34+0700\n"
-"PO-Revision-Date: 2014-03-08 19:45+0000\n"
-"Last-Translator: Denis Graipel <Unknown>\n"
+"PO-Revision-Date: 2014-03-25 19:21+0000\n"
+"Last-Translator: gzotti <Georg.Zotti@univie.ac.at>\n"
 "Language-Team: <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-03-23 05:53+0000\n"
+"X-Launchpad-Export-Date: 2014-03-26 05:54+0000\n"
 "X-Generator: Launchpad (build 16967)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:107 src/core/modules/StarMgr.cpp:338
@@ -1769,7 +1769,7 @@ msgstr "Normale Frequenz"
 
 #: src/gui/ViewDialog.cpp:579
 msgid "Standard Orionids rate"
-msgstr ""
+msgstr "Standardrate für Orioniden"
 
 #: src/gui/ViewDialog.cpp:582
 msgid "Standard Perseids rate"
@@ -1777,11 +1777,11 @@ msgstr "Standard-Perseidenfrequenz"
 
 #: src/gui/ViewDialog.cpp:585
 msgid "Standard Geminids rate"
-msgstr ""
+msgstr "Standardrate für Geminiden"
 
 #: src/gui/ViewDialog.cpp:588
 msgid "Exceptional Perseid rate"
-msgstr ""
+msgstr "Außergewöhnliche Rate für Perseiden"
 
 #: src/gui/ViewDialog.cpp:591
 msgid "Meteor storm rate"
@@ -1789,7 +1789,7 @@ msgstr "Meteorsturmrate"
 
 #: src/gui/ViewDialog.cpp:594
 msgid "Exceptional Draconid rate"
-msgstr ""
+msgstr "Außergewöhnliche Rate für Draconiden"
 
 #: src/gui/ViewDialog.cpp:597
 msgid "Exceptional Leonid rate"
@@ -1797,11 +1797,11 @@ msgstr "Außergewöhnliche Leonidenfrequenz"
 
 #: src/gui/ViewDialog.cpp:600
 msgid "Very high rate (1966 Leonids)"
-msgstr ""
+msgstr "Sehr hohe Rate (Leoniden 1966)"
 
 #: src/gui/ViewDialog.cpp:603
 msgid "Highest rate ever (1833 Leonids)"
-msgstr ""
+msgstr "Höchste jemals beobachtete Rate (Leoniden 1833)"
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:112
 msgid "Select a ZIP archive that contains a Stellarium landscape"
@@ -2434,7 +2434,7 @@ msgstr "Polynesisch"
 
 #: src/translations.h:182
 msgid "Romanian"
-msgstr ""
+msgstr "Rumänisch"
 
 #: src/translations.h:183
 msgid "Sami"
@@ -3811,7 +3811,7 @@ msgstr "Datei&name:"
 
 #: src/translations.h:560
 msgid "Copy &Link Location"
-msgstr ""
+msgstr "&Verknüpfungsadresse kopieren"
 
 #: src/ui_helpDialogGui.h:277 src/ui_helpDialogGui.h:283
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:417
@@ -4165,10 +4165,12 @@ msgid ""
 "Use light pollution data from locations database and ignore settings for "
 "light pollution below"
 msgstr ""
+"Lichtverschmutzungsdaten aus der Ortsdatenbank verwenden und Werte für "
+"Lichtverschmutzung unten ignorieren"
 
 #: src/ui_viewDialog.h:1189
 msgid "Light pollution data from locations database"
-msgstr ""
+msgstr "Lichtverschmutzungsdaten aus Ortsdatenbank"
 
 #: src/ui_viewDialog.h:1190
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:396
@@ -4213,7 +4215,7 @@ msgstr "Dynamische Augenadaption"
 
 #: src/ui_viewDialog.h:1205
 msgid "Settings for sporadic meteors"
-msgstr ""
+msgstr "Einstellungen für sporadische Meteore"
 
 #: src/ui_viewDialog.h:1207
 msgid "Shooting Stars"
@@ -4361,6 +4363,9 @@ msgid ""
 "Enable checking updates of Stellarium via Internet. Info for updates of "
 "stable versions you can look on the tab \"About\" of \"Help\" window."
 msgstr ""
+"Suche nach Updates für Stellarium über das Internet zulassen. Informationen "
+"zu Updates stabiler Versionen gibt es unter dem Menüpunkt \"Über...\" im "
+"Hilfefenster."
 
 #: src/ui_configurationDialog.h:1005
 msgid "Default options"
@@ -4700,10 +4705,12 @@ msgstr ""
 msgid ""
 "Auto-enabling of the atmosphere for bodies with atmosphere in location window"
 msgstr ""
+"Automatische Aktivierung der Atmosphäre bei Auswahl von Standorten auf "
+"Planeten mit Atmosphäre im Ortsfenster"
 
 #: src/ui_configurationDialog.h:1148
 msgid "Auto-enabling for the atmosphere"
-msgstr ""
+msgstr "Auto-Aktivierung der Atmosphäre"
 
 #: src/ui_configurationDialog.h:1149
 msgid "Screenshots"
@@ -4959,11 +4966,11 @@ msgstr "Rechtsklick verschiebt Endpunkt."
 #. TRANSLATORS: PA is abbreviation for phrase "Position Angle"
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:352
 msgid "PA="
-msgstr ""
+msgstr "PW="
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:72
 msgid "Angle Measure Plug-in"
-msgstr ""
+msgstr "Winkelmesser Plugin"
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:75
 #: plugins/Oculars/src/gui/OcularDialog.cpp:486
@@ -4976,6 +4983,9 @@ msgid ""
 "angular distance between two points on the sky (and calculation of position "
 "angle between those two points)."
 msgstr ""
+"Das Winkelmesser-Plugin ist ein kleines Werkzeug zum Messen von "
+"Winkeldistanzen zwischen zwei Punkten am Himmel (mit Positionswinkel "
+"zwischen den Punkten)."
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:79
 msgid ""
@@ -5070,7 +5080,7 @@ msgstr "Pulsare-Konfiguration"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:182
 msgid "Angle Measure Plug-in Configuration"
-msgstr ""
+msgstr "Winkelmesser Plugin-Konfiguration"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:184
 #: plugins/Satellites/src/ui_satellitesDialog.h:716
@@ -5086,11 +5096,11 @@ msgstr "Einstellungen"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:185
 msgid "Use dms format for angles"
-msgstr ""
+msgstr "Grad, Minuten, Sekunden-Format für Winkel"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:186
 msgid "Show position angle"
-msgstr ""
+msgstr "Zeige Positionswinkel"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:187
 #: plugins/Satellites/src/ui_satellitesDialog.h:714
@@ -5608,7 +5618,7 @@ msgstr ""
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1069
 msgid "Restore FOV to initial values"
-msgstr ""
+msgstr "Gesichtsfeld auf Anfangswert setzen"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1070
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:220
@@ -8192,6 +8202,9 @@ msgid ""
 "altogether have %2 exoplanets (including %3 potentially habitable "
 "exoplanets)."
 msgstr ""
+"Der aktuelle Katalog umfaßt Information zu %1 Planetensystemen, die "
+"insgesamt %2 Exoplaneten (darunter %3 potentiell bewohnbare Exoplaneten) "
+"aufweisen"
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:141
@@ -8327,7 +8340,7 @@ msgstr "The NASA Exoplanet Archive"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:184
 msgid "IAU Commission 53: Extrasolar Planets"
-msgstr ""
+msgstr "IAU Commission 53: Extrasolar Planets"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:185
 msgid "ExoMol"
@@ -8908,7 +8921,7 @@ msgstr "Zeige typische Sterne zur Astronavigation."
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:269
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:278
 msgid "Equation of Time"
-msgstr ""
+msgstr "Zeitgleichung"
 
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:58
 msgid "This plugin shows the solution of the equation of time."
