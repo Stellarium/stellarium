@@ -43,7 +43,7 @@ public:
 	QList<QString> getAvailableAlgorithmIds() const;
 	//! Returns a data model describing the available DeltaT algorithms.
 	//! @todo return object or pointer?
-	QStandardItemModel getAvailableAlgorithmsModel();
+	void populateAvailableAlgorithmsModel(QStandardItemModel* model);
 
 
 	//! Calculates DeltaT correction using the currently selected algorithm.

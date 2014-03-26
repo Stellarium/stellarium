@@ -17,6 +17,7 @@
  */
 
 #include "StelDeltaTMgr.hpp"
+#include "StelTranslator.hpp"
 #include "StelUtils.hpp"
 #include "DeltaTAlgorithm.hpp"
 
@@ -58,7 +59,7 @@ StelDeltaTMgr::setCurrentAlgorithm(const QString& id)
 {
 	// TODO: Or should it revert to the default instead?
 	currentAlgorithm = algorithms.value(id, zeroAlgorithm);
-	if (currentAlgorithm->getId != id)
+	if (currentAlgorithm->getId() != id)
 		qWarning() << "WARNING: Unable to find DeltaT algorithm" << id << "; "
 		           << "using" << currentAlgorithm->getId() << "instead.";
 }
@@ -75,10 +76,47 @@ StelDeltaTMgr::getAvailableAlgorithmIds() const
 	return algorithms.keys();
 }
 
-QStandardItemModel
-StelDeltaTMgr::getAvailableAlgorithmsModel()
+void
+StelDeltaTMgr::populateAvailableAlgorithmsModel(QStandardItemModel* model)
 {
-	return QStandardItemModel();
+	Q_ASSERT(model);
+	model->clear();
+
+	QMapIterator<QString,DeltaTAlgorithm*> a(algorithms);
+	while (a.hasNext())
+	{
+		a.next();
+
+		QStandardItem* item = new QStandardItem(a.value()->getName());
+		//QComboBox uses UserRole by default
+		item->setData(a.key(), Qt::UserRole);
+
+		QString description = a.value()->getDescription();
+		QString range = a.value()->getRangeDescription();
+		if (!range.isEmpty())
+		{
+			description.append("<br/>");
+			description.append(range);
+		}
+		if (a.value() == defaultAlgorithm)
+		{
+			description.append("<br/></br/>");
+			description.append("<strong>");
+			// TRANSLATORS: Indicates the default DeltaT algorithm in the GUI.
+			description.append(q_("Used by default."));
+			description.append("</strong>");
+
+			QFont font (model->itemPrototype()->font());
+			font.setBold(true);
+			item->setFont(font);
+		}
+		item->setData(description, Qt::UserRole + 1);
+
+		bool isCustom = (a.value() == customAlgorithm);
+		item->setData(isCustom, Qt::UserRole + 2);
+
+		model->appendRow(item);
+	}
 }
 
 double
@@ -97,9 +135,11 @@ void StelDeltaTMgr::getCustomAlgorithmParams(float* year,
                                              float* b,
                                              float* c)
 {
-	Custom* algorithm = dynamic_cast<Custom*> customAlgorithm;
+	Custom* algorithm = dynamic_cast<Custom*>(customAlgorithm);
 	if (algorithm)
+	{
 		;// TODO
+	}
 }
 
 void
@@ -109,7 +149,7 @@ StelDeltaTMgr::setCustomAlgorithmParams(const float& year,
                                         const float& b,
                                         const float& c)
 {
-	Custom* algorithm = dynamic_cast<Custom*> customAlgorithm;
+	Custom* algorithm = dynamic_cast<Custom*>(customAlgorithm);
 	if (algorithm)
 		algorithm->setParameters(year, ndot, a, b, c);
 }
