@@ -505,7 +505,8 @@ void StelMainView::minFpsChanged()
 
 void StelMainView::mouseMoveEvent(QMouseEvent* event)
 {
-	thereWasAnEvent(); // Refresh screen ASAP
+	if (event->buttons())
+		thereWasAnEvent(); // Refresh screen ASAP
 	QDeclarativeView::mouseMoveEvent(event);
 }
 
