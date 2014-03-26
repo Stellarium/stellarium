@@ -1,6 +1,8 @@
 /*
  * Stellarium
- * Copyright (C) 2014  Bogdan Marinov
+ * Copyright (C) 2014  Bogdan Marinov (this file, partially reusing code by)
+ * Copyright (C) 2013  Alexander Wolf, Allan Johnson, Georg Zotti, Victor Reijs
+ *                     and Volker Hoeren
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,9 +20,10 @@
 
 #include "DeltaTAlgorithm.hpp"
 
-#include "StelLocaleMgr.hpp"
+#include "StelTranslator.hpp"
 
 #include <QString>
+#include <cmath>
 
 QString DeltaTAlgorithm::symbol()
 {
@@ -55,7 +58,7 @@ double DeltaTAlgorithm::calculateSecularAcceleration(const int& year,
 	double t = (decimalYear - 1955.5)/100.0;
 	// n.dot for secular acceleration of the Moon in ELP2000-82B
 	// have value -23.8946 "/cy/cy
-	return -0.91072 * (-23.8946 + std::abs(nd)) * t*t;
+	return -0.91072 * (-23.8946 + std::abs(ndot)) * t*t;
 }
 
 double DeltaTAlgorithm::calculateStandardError(const double& jdUtc,
@@ -84,10 +87,10 @@ void DeltaTAlgorithm::formatDeltaTString(const double& deltaT,
 	if (startYear != endYear)
 	{
 		if (startYear > year || year > endYear)
-			rangeIndicator = "*";
+			rangeIndicator = '*';
 	}
 	else
-		rangeIndicator = "?";
+		rangeIndicator = '?';
 
 	// Put sigma on a separate line?
 	// Display algorithm's ndot?
@@ -98,35 +101,36 @@ void DeltaTAlgorithm::formatDeltaTString(const double& deltaT,
 		// TRANSLATORS: Tooltip with the current value of deltaT and parameters.
 		// %1 is the symbol "deltaT"; 's' means seconds; %3 is *, ? or nothing;
 		// 'cy' means centuries; %4 is 'squared' symbol; %5 is the letter sigma.
-		string = q_("%1 = %2s%3 [n-dot @ -23.8946''/cy%4; %5(%1) = %6s]")
-		         .arg(symbol())
-		         .arg(deltaT, 5, 'f', 2)
-		         .arg(rangeIndicator)
-		         .arg(QChar(0x00B2)) // Squared
-		         .arg(QChar(0x03c3)) // Sigma
-		         .arg(sigma, 3, 'f', 1);
+		*string = q_("%1 = %2s%3 [n-dot @ -23.8946''/cy%4; %5(%1) = %6s]")
+		          .arg(symbol())
+		          .arg(deltaT, 5, 'f', 2)
+		          .arg(rangeIndicator)
+		          .arg(QChar(0x00B2)) // Squared
+		          .arg(QChar(0x03c3)) // Sigma
+		          .arg(sigma, 3, 'f', 1);
 	}
 	else
 	{
 		// TRANSLATORS: Tooltip with the current value of deltaT and parameters.
 		// %1 is the symbol "deltaT"; 's' means seconds; %3 is *, ? or nothing;
 		// 'cy' means centuries; %4 is 'squared' symbol.*/
-		string = q_("%1 = %2s%3 [n-dot @ -23.8946''/cy%4]")
-		         .arg(symbol())
-		         .arg(deltaT, 5, 'f', 2)
-		         .arg(rangeIndicator)
-		         .arg(QChar(0x00B2)); // Squared
+		*string = q_("%1 = %2s%3 [n-dot @ -23.8946''/cy%4]")
+		          .arg(symbol())
+		          .arg(deltaT, 5, 'f', 2)
+		          .arg(rangeIndicator)
+		          .arg(QChar(0x00B2)); // Squared
 	}
 }
 
 
 
-DeltaT::WithoutCorrection::WithoutCorrection() :
-    identifier("WithoutCorrection"),
-    ndot (0.),
-    startYear(0),
-    endYear(0)
-{}
+DeltaT::WithoutCorrection::WithoutCorrection()
+{
+	identifier = "WithoutCorrection";
+	ndot = 0.;
+	startYear = 0;
+	endYear = 0;
+}
 
 QString DeltaT::WithoutCorrection::getName() const
 {
@@ -158,16 +162,17 @@ double DeltaT::WithoutCorrection::calculateDeltaT(const double& jdUtc, const int
 
 
 
-DeltaT::Custom::Custom() :
-    identifier("Custom"),
-    ndot(0.),
-    startYear(0.),
-    endYear(0.),
-    paramYear(0.f),
-    paramA(0.f),
-    paramB(0.f),
-    paramC(0.f)
-{}
+DeltaT::Custom::Custom()
+{
+	identifier = "Custom";
+	ndot = 0.;
+	startYear = 0;
+	endYear = 0;
+	paramYear = 0.f;
+	paramA = 0.f;
+	paramB = 0.f;
+	paramC = 0.f;
+}
 
 QString DeltaT::Custom::getName() const
 {

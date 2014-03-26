@@ -32,9 +32,10 @@ class DeltaTAlgorithm
 {
 public:
 	//DeltaTAlgorithm();
+	virtual ~DeltaTAlgorithm(){}
 
 	//! Returns a string uniquely identifying this algorithm.
-	virtual QString getId() const = 0;
+	virtual QString getId() const;
 	//! Returns a human-readable name, such as "Espenak & Meeus (2006)".
 	virtual QString getName() const = 0;
 	//! Returns a HTML description of the algorithm, suitable for a GUI.
@@ -66,7 +67,7 @@ public:
 	//! DeltaT written with the Greek letter.
 	static QString symbol();
 
-private:
+protected:
 	QString identifier;
 
 	//! "Dotted n", the Moon's acceleration in arc-seconds per century-squared.
@@ -74,8 +75,8 @@ private:
 	//! the Moon @b n, written in Newton's notation (equivalent to dn/dt or n').
 	double ndot;
 
-	unsigned int startYear;
-	unsigned int endYear;
+	int startYear;
+	int endYear;
 
 	//! Calculates the correction for the secular acceleration of the Moon.
 	virtual double calculateSecularAcceleration(const int& year,
