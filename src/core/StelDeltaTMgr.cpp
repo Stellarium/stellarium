@@ -76,10 +76,11 @@ StelDeltaTMgr::getAvailableAlgorithmIds() const
 	return algorithms.keys();
 }
 
-void
-StelDeltaTMgr::populateAvailableAlgorithmsModel(QStandardItemModel* model)
+void StelDeltaTMgr::populateAvailableAlgorithmsModel(QAbstractItemModel* baseModel)
 {
-	Q_ASSERT(model);
+	QStandardItemModel* model = dynamic_cast<QStandardItemModel*>(baseModel);
+	if(model == NULL)
+		return;
 	model->clear();
 
 	QMapIterator<QString,DeltaTAlgorithm*> a(algorithms);
@@ -88,6 +89,7 @@ StelDeltaTMgr::populateAvailableAlgorithmsModel(QStandardItemModel* model)
 		a.next();
 
 		QStandardItem* item = new QStandardItem(a.value()->getName());
+		//item->setFlags(Qt::ItemIsEnabled|Qt::ItemIsSelectable|Qt::ItemNeverHasChildren);
 		//QComboBox uses UserRole by default
 		item->setData(a.key(), Qt::UserRole);
 
@@ -100,15 +102,15 @@ StelDeltaTMgr::populateAvailableAlgorithmsModel(QStandardItemModel* model)
 		}
 		if (a.value() == defaultAlgorithm)
 		{
-			description.append("<br/></br/>");
+			description.append("<br/></br/>\n");
 			description.append("<strong>");
 			// TRANSLATORS: Indicates the default DeltaT algorithm in the GUI.
 			description.append(q_("Used by default."));
 			description.append("</strong>");
 
-			QFont font (model->itemPrototype()->font());
-			font.setBold(true);
-			item->setFont(font);
+//			QFont font = item->font();
+//			font.setBold(true);
+//			item->setFont(font);
 		}
 		item->setData(description, Qt::UserRole + 1);
 

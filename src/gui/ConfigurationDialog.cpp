@@ -34,6 +34,7 @@
 #include "StelProgressController.hpp"
 
 #include "StelCore.hpp"
+#include "StelDeltaTMgr.hpp"
 #include "StelMovementMgr.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelSkyDrawer.hpp"
@@ -209,7 +210,8 @@ void ConfigurationDialog::createDialogContent()
 	if (idx==-1)
 	{
 		// Use Espenak & Meeus (2006) as default
-		idx = ui->deltaTAlgorithmComboBox->findData(QVariant("EspenakMeeus"), Qt::UserRole, Qt::MatchCaseSensitive);
+		//idx = ui->deltaTAlgorithmComboBox->findData(QVariant("EspenakMeeus"), Qt::UserRole, Qt::MatchCaseSensitive);
+		idx = 0; // TODO: Fix this after entering all the algorithms! --BM
 	}
 	ui->deltaTAlgorithmComboBox->setCurrentIndex(idx);
 	connect(ui->deltaTAlgorithmComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(setDeltaTAlgorithm(int)));
@@ -1151,12 +1153,9 @@ void ConfigurationDialog::populateDeltaTAlgorithmsList()
 	ui->deltaTLabel->setText(QString("%1 %2T:").arg(q_("Algorithm of")).arg(QChar(0x0394)));
 
 	QComboBox* algorithms = ui->deltaTAlgorithmComboBox;
-
-	//Save the current selection to be restored later
-	algorithms->blockSignals(true);
-	int index = algorithms->currentIndex();
-	QVariant selectedAlgorithmId = algorithms->itemData(index);
+/*
 	algorithms->clear();
+
 	//For each algorithm, display the localized name and store the key as user
 	//data. Unfortunately, there's no other way to do this than with a cycle.
 	algorithms->addItem(q_("Without correction"), "WithoutCorrection");
@@ -1190,31 +1189,42 @@ void ConfigurationDialog::populateDeltaTAlgorithmsList()
 	algorithms->addItem(q_("Banjevic (2006)"), "Banjevic");
 	algorithms->addItem(q_("Islam, Sadiq & Qureshi (2008, 2013)"), "IslamSadiqQureshi");
 	algorithms->addItem(q_("Custom equation of %1T").arg(QChar(0x0394)), "Custom");
+	*/
 
-	//Restore the selection
-	index = algorithms->findData(selectedAlgorithmId, Qt::UserRole, Qt::MatchCaseSensitive);
-	algorithms->setCurrentIndex(index);
-	//algorithms->model()->sort(0);
-	algorithms->blockSignals(false);
-	setDeltaTAlgorithmDescription();
-}
-
-void ConfigurationDialog::setDeltaTAlgorithm(int algorithmID)
-{
 	StelCore* core = StelApp::getInstance().getCore();
-	QString currentAlgorithm = ui->deltaTAlgorithmComboBox->itemData(algorithmID).toString();
-	core->setCurrentDeltaTAlgorithmKey(currentAlgorithm);
-	setDeltaTAlgorithmDescription();
-	if (currentAlgorithm.contains("Custom"))
-		ui->pushButtonCustomDeltaTEquationDialog->setEnabled(true);
-	else
-		ui->pushButtonCustomDeltaTEquationDialog->setEnabled(false);
+	StelDeltaTMgr* timeCorrectionMgr = core->getTimeCorrectionMgr();
+	timeCorrectionMgr->populateAvailableAlgorithmsModel(algorithms->model());
+	algorithms->setView(new QListView()); // Prevents some unpleasant effects
+	algorithms->view()->setSelectionMode(QAbstractItemView::SingleSelection);
+
+	QString id = timeCorrectionMgr->getCurrentAlgorithmId();
+	int index = algorithms->findData(id);
+	if (index < 0)
+		index = 0;
+	algorithms->blockSignals(true);
+	algorithms->setCurrentIndex(index);
+	displayDeltaTAlgorithmDescription(index);
+	algorithms->blockSignals(false);
 }
 
-void ConfigurationDialog::setDeltaTAlgorithmDescription()
+void ConfigurationDialog::setDeltaTAlgorithm(int index)
+{
+	QComboBox* comboBox = ui->deltaTAlgorithmComboBox;
+	QString id = comboBox->itemData(index).toString();
+
+	StelCore* core = StelApp::getInstance().getCore();
+	core->setCurrentDeltaTAlgorithmKey(id);
+
+	displayDeltaTAlgorithmDescription(index);
+	bool isCustom = comboBox->itemData(index, Qt::UserRole+2).toBool();
+	ui->pushButtonCustomDeltaTEquationDialog->setEnabled(isCustom);
+}
+
+void ConfigurationDialog::displayDeltaTAlgorithmDescription(int index)
 {
 	ui->deltaTAlgorithmDescription->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
-	ui->deltaTAlgorithmDescription->setHtml(StelApp::getInstance().getCore()->getCurrentDeltaTAlgorithmDescription());
+	QString description = ui->deltaTAlgorithmComboBox->itemData(index, Qt::UserRole+1).toString();
+	ui->deltaTAlgorithmDescription->setHtml(description);
 }
 
 void ConfigurationDialog::showCustomDeltaTEquationDialog()

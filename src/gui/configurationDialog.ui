@@ -148,7 +148,7 @@
       <item row="1" column="0">
        <widget class="QStackedWidget" name="configurationStackedWidget">
         <property name="currentIndex">
-         <number>3</number>
+         <number>2</number>
         </property>
         <widget class="QWidget" name="page">
          <layout class="QVBoxLayout" name="verticalLayout_10">
@@ -966,11 +966,11 @@
                   </item>
                   <item>
                    <widget class="QComboBox" name="deltaTAlgorithmComboBox">
-                    <property name="editable">
-                     <bool>true</bool>
-                    </property>
                     <property name="insertPolicy">
                      <enum>QComboBox::NoInsert</enum>
+                    </property>
+                    <property name="sizeAdjustPolicy">
+                     <enum>QComboBox::AdjustToContents</enum>
                     </property>
                    </widget>
                   </item>

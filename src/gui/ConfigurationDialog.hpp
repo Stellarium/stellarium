@@ -123,8 +123,8 @@ private slots:
 	void setUpdatesFlag(bool b);
 
 	void populateDeltaTAlgorithmsList();
-	void setDeltaTAlgorithm(int algorithmID);
-	void setDeltaTAlgorithmDescription();
+	void setDeltaTAlgorithm(int index);
+	void displayDeltaTAlgorithmDescription(int index);
 	void showCustomDeltaTEquationDialog();
 
 	#ifndef DISABLE_SCRIPTING
