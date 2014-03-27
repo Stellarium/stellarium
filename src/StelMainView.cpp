@@ -316,26 +316,24 @@ void StelMainView::init(QSettings* conf)
 	setSource(QUrl("qrc:/qml/main.qml"));
 	
 	QSize size = glWidget->windowHandle()->screen()->size();
+	size = QSize(conf->value("video/screen_w", size.width()).toInt(),
+		     conf->value("video/screen_h", size.height()).toInt());
+
 	bool fullscreen = conf->value("video/fullscreen", true).toBool();
-	if (!fullscreen)
-	{
-		size = QSize(conf->value("video/screen_w", size.width()).toInt(),
-					 conf->value("video/screen_h", size.height()).toInt());
-	}
 
 	// Without this, the screen is not shown on a Mac + we should use resize() for correct work of fullscreen/windowed mode switch. --AW WTF???
 	resize(size);
 
 	if (fullscreen)
 	{
-		showFullScreen();
+		setFullScreen(true);
 	}
 	else
 	{
+		setFullScreen(false);
 		int x = conf->value("video/screen_x", 0).toInt();
 		int y = conf->value("video/screen_y", 0).toInt();
-		move(x, y);
-		showNormal();
+		move(x, y);	
 	}
 
 	flagInvertScreenShotColors = conf->value("main/invert_screenshots_colors", false).toBool();
