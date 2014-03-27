@@ -715,6 +715,12 @@ void StelApp::reportFileDownloadFinished(QNetworkReply* reply)
 	}
 }
 
+void StelApp::quit()
+{
+	emit aboutToQuit();
+	QCoreApplication::exit(0);
+}
+
 void StelApp::setDevicePixelsPerPixel(float dppp)
 {
 	// Check that the device-independent pixel size didn't change
