@@ -123,8 +123,9 @@ void StelCore::init()
 	// Default: ndot = -26.0 "/cy/cy; year = 1820; DeltaT = -20 + 32*u^2, where u = (currentYear-1820)/100
 	float year = conf->value("custom_time_correction/year", 1820.0).toFloat();
 	float ndot = conf->value("custom_time_correction/ndot", -26.0).toFloat();
-	Vec3f coef;
-	conf->value("custom_time_correction/coefficients", "-20,0,32").toString() >> coef;
+	QString coefStr = conf->value("custom_time_correction/coefficients",
+	                              "-20,0,32").toString();
+	Vec3f coef = StelUtils::strToVec3f(coefStr);
 	timeCorrection->setCustomAlgorithmParams(year, ndot, coef[0], coef[1], coef[2]);
 
 	// Time stuff
@@ -331,6 +332,11 @@ StelMovementMgr* StelCore::getMovementMgr()
 const StelMovementMgr* StelCore::getMovementMgr() const
 {
 	return movementMgr;
+}
+
+StelDeltaTMgr* StelCore::getTimeCorrectionMgr()
+{
+	return timeCorrection;
 }
 
 SphericalCap StelCore::getVisibleSkyArea() const
@@ -1452,7 +1458,7 @@ double StelCore::getDeltaT(double jDay) const
 
 double StelCore::calculateDeltaT(const double& jd, QString* string) const
 {
-	timeCorrection->calculateDeltaT(jd, string);
+	return timeCorrection->calculateDeltaT(jd, string);
 }
 
 void StelCore::setCurrentDeltaTAlgorithmKey(QString key)
