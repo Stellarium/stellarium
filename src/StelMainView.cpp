@@ -315,25 +315,28 @@ void StelMainView::init(QSettings* conf)
 	rootContext()->setContextProperty("stelApp", stelApp);
 	setSource(QUrl("qrc:/qml/main.qml"));
 	
-	QScreen* screen = glWidget->windowHandle()->screen();
-	int width = conf->value("video/screen_w", screen->size().width()).toInt();
-	int height = conf->value("video/screen_h", screen->size().height()).toInt();
+	QSize size = glWidget->windowHandle()->screen()->size();
+	bool fullscreen = conf->value("video/fullscreen", true).toBool();
+	if (!fullscreen)
+	{
+		size = QSize(conf->value("video/screen_w", size.width()).toInt(),
+					 conf->value("video/screen_h", size.height()).toInt());
+	}
 
 	// Without this, the screen is not shown on a Mac + we should use resize() for correct work of fullscreen/windowed mode switch. --AW WTF???
-	resize(width, height);
+	resize(size);
 
-	if (conf->value("video/fullscreen", true).toBool())
+	if (fullscreen)
 	{
-		setFullScreen(true);
+		showFullScreen();
 	}
 	else
 	{
-		setFullScreen(false);
 		int x = conf->value("video/screen_x", 0).toInt();
 		int y = conf->value("video/screen_y", 0).toInt();
 		move(x, y);
+		showNormal();
 	}
-	show();
 
 	flagInvertScreenShotColors = conf->value("main/invert_screenshots_colors", false).toBool();
 	setFlagCursorTimeout(conf->value("gui/flag_mouse_cursor_timeout", false).toBool());
