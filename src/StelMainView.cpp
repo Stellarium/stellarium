@@ -535,6 +535,12 @@ void StelMainView::moveEvent(QMoveEvent * event)
 	StelApp::getInstance().setDevicePixelsPerPixel(glWidget->windowHandle()->devicePixelRatio());
 }
 
+void StelMainView::closeEvent(QCloseEvent* event)
+{
+	Q_UNUSED(event);
+	StelApp::getInstance().quit();
+}
+
 void StelMainView::keyPressEvent(QKeyEvent* event)
 {
 	thereWasAnEvent(); // Refresh screen ASAP

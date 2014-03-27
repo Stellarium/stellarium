@@ -211,7 +211,9 @@ public slots:
 	//! Report that a download occured. This is used for statistics purposes.
 	//! Connect this slot to QNetworkAccessManager::finished() slot to obtain statistics at the end of the program.
 	void reportFileDownloadFinished(QNetworkReply* reply);
-	
+
+	//! do some cleanup and call QCoreApplication::exit(0)
+	void quit();
 signals:
 	void visionNightModeChanged(bool);
 	void colorSchemeChanged(const QString&);
@@ -222,6 +224,8 @@ signals:
 	void progressBarAdded(const StelProgressController*);
 	//! Called just before a progress bar is removed.
 	void progressBarRemoved(const StelProgressController*);
+	//! Called just before we exit Qt mainloop.
+	void aboutToQuit();
 
 private:
 
