@@ -217,6 +217,8 @@ public:
 	//! Set whether location info must be displayed in the bottom bar
 	void setFlagShowLocation(bool b) {flagShowLocation=b;}
 
+signals:
+	void sizeChanged();
 
 private slots:
 	//! Update the help label when a button is hovered
