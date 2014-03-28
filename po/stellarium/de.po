@@ -10,13 +10,13 @@ msgstr ""
 "Project-Id-Version: de\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-03-22 22:34+0700\n"
-"PO-Revision-Date: 2014-03-26 23:30+0000\n"
+"PO-Revision-Date: 2014-03-27 19:51+0000\n"
 "Last-Translator: gzotti <Georg.Zotti@univie.ac.at>\n"
 "Language-Team: <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-03-27 05:46+0000\n"
+"X-Launchpad-Export-Date: 2014-03-28 05:24+0000\n"
 "X-Generator: Launchpad (build 16967)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:107 src/core/modules/StarMgr.cpp:338
@@ -5072,6 +5072,8 @@ msgid ""
 "If you want to read full information about this plugin and its history, you "
 "can %1get info here%2."
 msgstr ""
+"Vollständige Information über dieses Plugin und seine Entwicklung gibt es "
+"%1hier%2."
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:181
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:263
@@ -8414,7 +8416,7 @@ msgstr "Webseiten"
 
 #: plugins/Observability/src/Observability.cpp:65
 msgid "Observability Analysis"
-msgstr ""
+msgstr "Beobachtbarkeitsanalyse"
 
 #: plugins/Observability/src/Observability.cpp:68
 msgid ""
@@ -8426,6 +8428,13 @@ msgid ""
 "setting. (Explanations are provided in the 'About' tab of the plugin's "
 "configuration window.)"
 msgstr ""
+"Zeigt Angaben zur Beobachtbarkeit (Auf-, Untergang, Meridiandurchgang) zum "
+"aktuellen Datum und Zeitraum der Beobachtbarkeit für das aktuelle Jahr. Ein "
+"Objekt gilt als beobachtbar, wenn es während eines Teils der Nacht über den "
+"Horizont kommt. Zusätzlich gibt es Daten der größten Elongation "
+"(Winkelabstand) von der Sonne sowie Akronychische und Kosmische Auf- und "
+"Untergänge. (Erklärungen dazu in der Registerkarte 'Über' im Plugin-"
+"Konfigurationsfenster.)"
 
 #: plugins/Observability/src/Observability.cpp:209
 msgctxt "short month name"
@@ -9427,6 +9436,10 @@ msgid ""
 "point back to the known radiant for a given shower is known as a sporadic "
 "and is not considered part of that shower."
 msgstr ""
+"Ein Beobachter kann einen Meteor irgendwo am Himmel sehen, aber die Bewegung "
+"läuft scheinbar stets aus dem Radianten. Ein Meteor, der nicht aus dem "
+"Radianten eines gerade aktiven Schauers zu kommen scheint, wird sporadischer "
+"Meteor genannt und zählt nicht zum jeweiligen Schauer."
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:251
 msgid ""
