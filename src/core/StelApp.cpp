@@ -163,6 +163,10 @@ Q_IMPORT_PLUGIN(EquationOfTimeStelPluginInterface)
 Q_IMPORT_PLUGIN(FOVStelPluginInterface)
 #endif
 
+#ifdef USE_STATIC_PLUGIN_COORDINATES
+Q_IMPORT_PLUGIN(CoordinatesStelPluginInterface)
+#endif
+
 #ifdef USE_STATIC_PLUGIN_OBSERVABILITY
 Q_IMPORT_PLUGIN(ObservabilityStelPluginInterface)
 #endif
