@@ -9,13 +9,13 @@ msgstr ""
 "Project-Id-Version: nb\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-03-22 22:34+0700\n"
-"PO-Revision-Date: 2014-03-17 14:33+0000\n"
+"PO-Revision-Date: 2014-03-23 11:25+0000\n"
 "Last-Translator: FreewareTips <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-03-23 06:01+0000\n"
+"X-Launchpad-Export-Date: 2014-03-24 05:49+0000\n"
 "X-Generator: Launchpad (build 16967)\n"
 "X-Poedit-Country: NORWAY\n"
 "X-Poedit-Language: Norwegian\n"
@@ -1683,7 +1683,7 @@ msgstr "Normal rate"
 
 #: src/gui/ViewDialog.cpp:579
 msgid "Standard Orionids rate"
-msgstr ""
+msgstr "Standard Orioniderate"
 
 #: src/gui/ViewDialog.cpp:582
 msgid "Standard Perseids rate"
@@ -1691,11 +1691,11 @@ msgstr "Standard Perseiderate"
 
 #: src/gui/ViewDialog.cpp:585
 msgid "Standard Geminids rate"
-msgstr ""
+msgstr "Standard Geminiderate"
 
 #: src/gui/ViewDialog.cpp:588
 msgid "Exceptional Perseid rate"
-msgstr ""
+msgstr "Eksepsjonell Perseiderate"
 
 #: src/gui/ViewDialog.cpp:591
 msgid "Meteor storm rate"
@@ -1703,7 +1703,7 @@ msgstr "Meteorstormrate"
 
 #: src/gui/ViewDialog.cpp:594
 msgid "Exceptional Draconid rate"
-msgstr ""
+msgstr "Eksepsjonell Draconiderate"
 
 #: src/gui/ViewDialog.cpp:597
 msgid "Exceptional Leonid rate"
@@ -1711,11 +1711,11 @@ msgstr "Eksepsjonell Leoniderate"
 
 #: src/gui/ViewDialog.cpp:600
 msgid "Very high rate (1966 Leonids)"
-msgstr ""
+msgstr "Veldig høy rate (Leonidene 1966)"
 
 #: src/gui/ViewDialog.cpp:603
 msgid "Highest rate ever (1833 Leonids)"
-msgstr ""
+msgstr "Høyeste rate noensinne (Leonidene 1833)"
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:112
 msgid "Select a ZIP archive that contains a Stellarium landscape"
@@ -4117,7 +4117,7 @@ msgstr "Dynamisk øyetilpasning"
 
 #: src/ui_viewDialog.h:1205
 msgid "Settings for sporadic meteors"
-msgstr ""
+msgstr "Innstillinger for sporadiske meteorer"
 
 #: src/ui_viewDialog.h:1207
 msgid "Shooting Stars"
@@ -4268,6 +4268,8 @@ msgid ""
 "Enable checking updates of Stellarium via Internet. Info for updates of "
 "stable versions you can look on the tab \"About\" of \"Help\" window."
 msgstr ""
+"Aktiver oppdateringssjekk for Stellarium via internett. For informasjon om "
+"oppdateringer av stabile versjoner se i fanen \"Info\" i \"Hjelp\"-vinduet."
 
 #: src/ui_configurationDialog.h:1005
 msgid "Default options"
@@ -4602,11 +4604,11 @@ msgstr "Automatisk utzooming returnerer til opprinnelig visningsretning"
 #: src/ui_configurationDialog.h:1146
 msgid ""
 "Auto-enabling of the atmosphere for bodies with atmosphere in location window"
-msgstr ""
+msgstr "Auto-aktivering av atmosfæren for legemer med atmosfære i stedsvindu"
 
 #: src/ui_configurationDialog.h:1148
 msgid "Auto-enabling for the atmosphere"
-msgstr ""
+msgstr "Auto-aktivering for atmosfæren"
 
 #: src/ui_configurationDialog.h:1149
 msgid "Screenshots"
@@ -8833,6 +8835,9 @@ msgid ""
 "meteor showers and displays marker for radiants in activity range for each "
 "meteor showers."
 msgstr ""
+"Dette programtillegget gir en visualisering av meteorsvermene, viser "
+"informasjon om meteorsvermer og viser markører for radianter i "
+"aktivitetsperioden til hver meteorsverm."
 
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:157
 msgid "Show meteor showers"
@@ -9113,11 +9118,11 @@ msgstr "Småplanet (3200) Phaethon"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:294
 msgid "generic data"
-msgstr ""
+msgstr "Generelle data"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:296
 msgid "real data"
-msgstr ""
+msgstr "Reelle data"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:302
 msgid "meteor shower"
@@ -9125,17 +9130,17 @@ msgstr "Meteorsverm"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:310
 msgid "Radiant drift (per day)"
-msgstr ""
+msgstr "Radiantdrift (pr. dag)"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:315
 #, qt-format
 msgid "Geocentric meteoric velocity: %1 km/s"
-msgstr ""
+msgstr "Geosentrisk meteorhastighet: %1 km/s"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:318
 #, qt-format
 msgid "The population index: %1"
-msgstr ""
+msgstr "Populasjonsindeks: %1"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:323
 #, qt-format
@@ -9189,11 +9194,11 @@ msgstr "Variabel"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:196
 msgid "Real"
-msgstr ""
+msgstr "Reell"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:196
 msgid "Generic"
-msgstr ""
+msgstr "Generell"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:239
 msgid "Meteor Showers Plug-in"
@@ -9205,10 +9210,13 @@ msgid ""
 "information about meteor showers and displays marker for radiants in "
 "activity range for each meteor showers."
 msgstr ""
+"Programtillegget for meteorsvermer gir en visualisering av meteorsvermene, "
+"viser informasjon om meteorsvermer og viser markører for radianter i "
+"aktivitetsperioden til hver meteorsverm."
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:245
 msgid "Terms"
-msgstr ""
+msgstr "Uttrykk"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:246
 msgid "Meteor shower"
@@ -9281,7 +9289,7 @@ msgstr ""
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:254
 msgid "Population index"
-msgstr ""
+msgstr "Populasjonsindeks"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:255
 msgid ""
@@ -9354,7 +9362,7 @@ msgstr "Farge på radiantmarkører"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:531
 msgid "Active Radiant - Generic Data"
-msgstr ""
+msgstr "Aktiv radiant - generelle data"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:534
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:541
@@ -9368,7 +9376,7 @@ msgstr "Inaktiv radiant"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:545
 msgid "Active Radiant - Real Data"
-msgstr ""
+msgstr "Aktiv radiant - reelle data"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:551
 msgid "Radiants for meteor showers"
