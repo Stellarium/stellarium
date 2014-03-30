@@ -16,8 +16,6 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#include "config.h"
-
 #include "StelUtils.hpp"
 #include "StelProjector.hpp"
 #include "StelPainter.hpp"
@@ -95,7 +93,7 @@ bool AngleMeasure::configureGui(bool show)
 	return true;
 }
 
-//! Determine which "layer" the plagin's drawing will happen on.
+//! Determine which "layer" the plugin's drawing will happen on.
 double AngleMeasure::getCallOrder(StelModuleActionName actionName) const
 {
 	if (actionName==StelModule::ActionDraw)
@@ -107,17 +105,8 @@ double AngleMeasure::getCallOrder(StelModuleActionName actionName) const
 
 void AngleMeasure::init()
 {
-	// If no settings in the main config file, create with defaults
-	if (!conf->childGroups().contains("AngleMeasure"))
-	{
-		qDebug() << "AngleMeasure::init no AngleMeasure section exists in main config file - creating with defaults";
-		restoreDefaultConfigIni();
-	}
+	loadSettings();
 
-	// populate settings from main config file.
-	readSettingsFromConfig();
-
-	qDebug() << "AngleMeasure plugin - press control-A to toggle angle measure mode";
 	startPoint.set(0.,0.,0.);
 	endPoint.set(0.,0.,0.);
 	perp1StartPoint.set(0.,0.,0.);
@@ -369,29 +358,23 @@ void AngleMeasure::clearMessage()
 	messageFader = false;
 }
 
-void AngleMeasure::restoreDefaults(void)
+void AngleMeasure::restoreDefaultSettings()
 {
-	restoreDefaultConfigIni();
-	readSettingsFromConfig();
-}
-
-void AngleMeasure::restoreDefaultConfigIni(void)
-{
-	// Create the "AngleMeasure" section and set default parameters
+	Q_ASSERT(conf);
+	// Remove the old values...
+	conf->remove("AngleMeasure");
+	// ...load the default values...
+	loadSettings();
+	// ...and then save them.
+	saveSettings();
+	// But this doesn't save the colors, so:
 	conf->beginGroup("AngleMeasure");
-
-	// delete all existing the "AngleMeasure" settings...
-	conf->remove("");
-
-	conf->setValue("angle_format_dms", false);
-	conf->setValue("show_position_angle", false);
 	conf->setValue("text_color", "0,0.5,1");
 	conf->setValue("line_color", "0,0.5,1");
-
 	conf->endGroup();
 }
 
-void AngleMeasure::readSettingsFromConfig(void)
+void AngleMeasure::loadSettings()
 {
 	conf->beginGroup("AngleMeasure");
 
@@ -403,7 +386,7 @@ void AngleMeasure::readSettingsFromConfig(void)
 	conf->endGroup();
 }
 
-void AngleMeasure::saveSettingsToConfig(void)
+void AngleMeasure::saveSettings()
 {
 	conf->beginGroup("AngleMeasure");
 

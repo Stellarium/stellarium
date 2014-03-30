@@ -376,6 +376,7 @@ void BottomStelBar::addButton(StelButton* button, const QString& groupName, cons
 	updateButtonsGroups();
 
 	connect(button, SIGNAL(hoverChanged(bool)), this, SLOT(buttonHoverChanged(bool)));
+	emit sizeChanged();
 }
 
 StelButton* BottomStelBar::hideButton(const QString& actionName)
@@ -408,6 +409,7 @@ StelButton* BottomStelBar::hideButton(const QString& actionName)
 	bToRemove->setParentItem(NULL);
 	bToRemove->setVisible(false);
 	updateButtonsGroups();
+	emit sizeChanged();
 	return bToRemove;
 }
 

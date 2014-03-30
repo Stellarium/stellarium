@@ -78,6 +78,7 @@ QScriptValue createVec3f(QScriptContext* context, QScriptEngine *engine)
 
 StelScriptMgr::StelScriptMgr(QObject *parent): QObject(parent)
 {
+	connect(&StelApp::getInstance(), SIGNAL(aboutToQuit()), this, SLOT(stopScript()), Qt::DirectConnection);
 	// Scripting images
 	ScreenImageMgr* scriptImages = new ScreenImageMgr();
 	scriptImages->init();
