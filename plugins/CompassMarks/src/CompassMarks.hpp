@@ -70,6 +70,7 @@ private slots:
 	void cardinalPointsChanged(bool b);
 
 private:
+	QSettings* conf;
 	//! Whether the marks should be displayed at startup.
 	bool displayedAtStartup;
 	//! Font used for displaying bearing numbers.
