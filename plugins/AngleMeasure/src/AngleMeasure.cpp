@@ -26,7 +26,6 @@
 #include "StelModuleMgr.hpp"
 #include "StelGui.hpp"
 #include "StelGuiItems.hpp"
-#include "StelIniParser.hpp"
 #include "StelVertexArray.hpp"
 #include "AngleMeasure.hpp"
 #include "AngleMeasureDialog.hpp"

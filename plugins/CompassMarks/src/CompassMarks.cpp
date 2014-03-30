@@ -31,7 +31,6 @@
 #include "CompassMarks.hpp"
 #include "StelGui.hpp"
 #include "StelGuiItems.hpp"
-#include "StelIniParser.hpp"
 
 #include <QDebug>
 #include <QPixmap>
