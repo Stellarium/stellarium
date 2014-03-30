@@ -16,39 +16,41 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#include <QSettings>
-#include <QPixmap>
-#include <QTimer>
-#include <QString>
 #include <QDebug>
 #include <QKeyEvent>
-#include <QtNetwork>
-#include <QKeyEvent>
 #include <QMouseEvent>
+#include <QPixmap>
+#include <QSettings>
+#include <QString>
+#include <QTimer>
 
-#include "StelIniParser.hpp"
-#include "StelProjector.hpp"
-#include "StarMgr.hpp"
-#include "StelObject.hpp"
-#include "StelObserver.hpp"
-#include "StelUtils.hpp"
-#include "StelApp.hpp"
-#include "StelObjectMgr.hpp"
-#include "StelLocaleMgr.hpp"
-#include "StelModuleMgr.hpp"
-#include "StelGui.hpp"
-#include "StelGuiItems.hpp"
-#include "StelMovementMgr.hpp"
-#include "StelFileMgr.hpp"
-#include "StelCore.hpp"
-#include "ZoneArray.hpp"
-#include "StelSkyDrawer.hpp"
+//#include <QtNetwork> // Why do we need a full part of the framwork again?
+
 #include "Observability.hpp"
 #include "ObservabilityDialog.hpp"
 
-#include "SolarSystem.hpp"
 #include "Planet.hpp"
+#include "SolarSystem.hpp"
+#include "StarMgr.hpp"
+#include "StelActionMgr.hpp"
+#include "StelApp.hpp"
+#include "StelCore.hpp"
 #include "StelFader.hpp"
+#include "StelFileMgr.hpp"
+#include "StelGui.hpp"
+#include "StelGuiItems.hpp"
+#include "StelIniParser.hpp"
+#include "StelLocaleMgr.hpp"
+#include "StelModuleMgr.hpp"
+#include "StelMovementMgr.hpp"
+#include "StelObject.hpp"
+#include "StelObjectMgr.hpp"
+#include "StelObserver.hpp"
+#include "StelProjector.hpp"
+#include "StelSkyDrawer.hpp"
+#include "StelUtils.hpp"
+#include "ZoneArray.hpp"
+
 
 StelModule* ObservabilityStelPluginInterface::getStelModule() const
 {
@@ -68,6 +70,7 @@ StelPluginInfo ObservabilityStelPluginInterface::getPluginInfo() const
 	info.version = OBSERVABILITY_PLUGIN_VERSION;
 	return info;
 }
+
 
 
 Observability::Observability()
@@ -201,22 +204,27 @@ void Observability::init()
 {
 	loadConfiguration();
 	
-	try 
-	{
-		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-		glowPixmap = new QPixmap(":/graphicGui/glow32x32.png");
-		onPixmap = new QPixmap(":/observability/bt_observab_on.png");
-		offPixmap = new QPixmap(":/observability/bt_observab_off.png");
+	StelAction* actionShow = addAction("actionShow_Observability",
+	                                   N_("Observability"),
+	                                   N_("Observability"),
+	                                   "flagShowReport");
+	// actionShow->setChecked(flagShowReport); //Unnecessary?
+	addAction("actionShow_Observability_ConfigDialog",
+	          N_("Observability"),
+	          N_("Observability configuration window"),
+	          configDialog, "visible");
 
-		addAction("actionShow_Observability", N_("Observability"), N_("Observability"), "enabled");
-		addAction("actionShow_Observability_ConfigDialog", N_("Observability"), N_("Observability configuration window"), configDialog, "visible");
-		toolbarButton = new StelButton(NULL, *OnIcon, *OffIcon, *GlowIcon, "actionShow_Observability");
-		gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
-	}
-	catch (std::exception &e)
-	{
-		qWarning() << "WARNING: unable create toolbar button for Observability plugin (or load gonfig GUI). " << e.what();
-	};
+	glowPixmap = new QPixmap(":/graphicGui/glow32x32.png");
+	onPixmap = new QPixmap(":/observability/bt_observab_on.png");
+	offPixmap = new QPixmap(":/observability/bt_observab_off.png");
+
+	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+	toolbarButton = new StelButton(NULL,
+	                               *onPixmap,
+	                               *offPixmap,
+	                               *glowPixmap,
+	                               actionShow);
+	gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
 	
 	updateMessageText();
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()),
@@ -241,10 +249,10 @@ void Observability::draw(StelCore* core)
 		return;
 
 // Set the painter:
-	StelPainter paintresult(core->getProjection2d());
-	paintresult.setColor(fontColor[0],fontColor[1],fontColor[2],1);
+	StelPainter painter(core->getProjection2d());
+	painter.setColor(fontColor[0],fontColor[1],fontColor[2],1);
 	font.setPixelSize(fontSize);
-	paintresult.setFont(font);
+	painter.setFont(font);
 
 // Get current date, location, and check if there is something selected.
 	double currlat = (core->getCurrentLocation().latitude)/Rad2Deg;
@@ -787,37 +795,32 @@ void Observability::draw(StelCore* core)
 	if (show_Today) 
 	{
 		//renderer->drawText(TextParams(xLine, yLine,q_("TODAY:")));
-		renderer->drawText(TextParams(xLine, yLine, msgToday));
-		renderer->drawText(TextParams(xLine+fontSize, yLine-lineSpacing, RS2));
-		renderer->drawText(TextParams(xLine+fontSize, yLine-lineSpacing*2, RS1));
-		renderer->drawText(TextParams(xLine+fontSize, yLine-lineSpacing*3, Cul));
+		painter.drawText(xLine, yLine, msgToday);
+		painter.drawText(xLine + fontSize, yLine - lineSpacing, RS2);
+		painter.drawText(xLine + fontSize, yLine - lineSpacing*2, RS1);
+		painter.drawText(xLine + fontSize, yLine - lineSpacing*3, Cul);
 		yLine -= groupSpacing;
-	};
+	}
 	
 	if ((isMoon && show_FullMoon) || (!isSun && !isMoon && show_Year)) 
 	{
-		renderer->drawText(TextParams(xLine, yLine, msgThisYear));
+		painter.drawText(xLine, yLine, msgThisYear);
 		if (show_Best_Night || show_FullMoon)
 		{
 			yLine -= lineSpacing;
-			renderer->drawText(TextParams(xLine+fontSize, yLine,
-			                              lineBestNight));
-		};
-		if (show_Good_Nights) 
+			painter.drawText(xLine + fontSize, yLine, lineBestNight);
+		}
+		if (show_Good_Nights)
 		{
 			yLine -= lineSpacing;
-			renderer->drawText(TextParams(xLine+fontSize, yLine,
-			                              lineObservableRange));
-		};
-		if (show_AcroCos) 
+			painter.drawText(xLine + fontSize, yLine, lineObservableRange);
+		}
+		if (show_AcroCos)
 		{
 			yLine -= lineSpacing;
-			renderer->drawText(TextParams(xLine+fontSize, yLine,
-			                              lineAcroCos));
-		};
-
-	};
-
+			painter.drawText(xLine + fontSize, yLine, lineAcroCos);
+		}
+	}
 }
 
 // END OF MAIN CODE
@@ -1634,11 +1637,7 @@ bool Observability::calculateSolarSystemEvents(StelCore* core, int bodyType)
 bool Observability::configureGui(bool show)
 {
 	if (show)
-	{
-		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-		gui->getGuiAction("actionShow_Observability_ConfigDialog")->setChecked(true);
-	}
-
+		configDialog->setVisible(true);
 	return true;
 }
 
