@@ -104,6 +104,9 @@ double AngleMeasure::getCallOrder(StelModuleActionName actionName) const
 
 void AngleMeasure::init()
 {
+	if (!conf->childGroups().contains("AngleMeasure"))
+		restoreDefaultSettings();
+
 	loadSettings();
 
 	startPoint.set(0.,0.,0.);
