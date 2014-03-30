@@ -327,6 +327,7 @@ void LandscapeMgr::init()
 	setDefaultMinimalBrightness(conf->value("landscape/minimal_brightness", 0.01).toFloat());
 	setFlagLandscapeUseMinimalBrightness(conf->value("landscape/flag_minimal_brightness", false).toBool());
 	setFlagLandscapeSetsMinimalBrightness(conf->value("landscape/flag_landscape_sets_minimal_brightness",false).toBool());
+	setFlagAtmosphereAutoEnable(conf->value("viewing/flag_atmopshere_auto_enable",true).toBool());
 
 	bool ok =true;
 	setAtmosphereBortleLightPollution(conf->value("stars/init_bortle_scale",3).toInt(&ok));
@@ -507,6 +508,16 @@ void LandscapeMgr::setFlagLandscapeAutoSelection(bool enableAutoSelect)
 bool LandscapeMgr::getFlagLandscapeAutoSelection() const
 {
 	return flagLandscapeAutoSelection;
+}
+
+void LandscapeMgr::setFlagAtmosphereAutoEnable(bool b)
+{
+	flagAtmosphereAutoEnabling = b;
+}
+
+bool LandscapeMgr::getFlagAtmosphereAutoEnable() const
+{
+	return flagAtmosphereAutoEnabling;
 }
 
 /*********************************************************************

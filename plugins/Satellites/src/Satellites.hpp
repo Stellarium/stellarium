@@ -120,7 +120,7 @@ file.
 //! Main class of the %Satellites plugin.
 //! @author Matthew Gates
 //! @author Bogdan Marinov
-class Satellites : public StelObjectModule, protected QOpenGLFunctions_1_2
+class Satellites : public StelObjectModule
 {
 	Q_OBJECT
 	Q_PROPERTY(bool hintsVisible

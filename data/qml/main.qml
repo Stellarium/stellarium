@@ -5,20 +5,6 @@ import Stellarium 1.0
 
 Rectangle {
 
-	Item {
-		id: all
-		anchors.fill: parent
-		StelSky {
-			anchors.fill: parent
-		}
-
-		// This will generate a single big QGraphicsWidget, and initialize
-		// Stellarium GUI into it.
-		StelGui {
-			anchors.fill: parent
-		}
-	}
-
 	ShaderEffectItem {
 		 property variant source: ShaderEffectSource { sourceItem: all; hideSource: true }
 		 anchors.fill: all
@@ -37,4 +23,19 @@ Rectangle {
 		 }
 		 "
 	 }
+
+	Item {
+		id: all
+		anchors.fill: parent
+		StelSky {
+			anchors.fill: parent
+		}
+
+		// This will generate a single big QGraphicsWidget, and initialize
+		// Stellarium GUI into it.
+		StelGui {
+			anchors.fill: parent
+		}
+	}
+
 }

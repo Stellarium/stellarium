@@ -252,6 +252,10 @@ void ConfigurationDialog::createDialogContent()
 	ui->invertScreenShotColorsCheckBox->setChecked(StelMainView::getInstance().getFlagInvertScreenShotColors());
 	connect(ui->invertScreenShotColorsCheckBox, SIGNAL(toggled(bool)), &StelMainView::getInstance(), SLOT(setFlagInvertScreenShotColors(bool)));
 
+	LandscapeMgr *lmgr = GETSTELMODULE(LandscapeMgr);
+	ui->autoEnableAtmosphereCheckBox->setChecked(lmgr->getFlagAtmosphereAutoEnable());
+	connect(ui->autoEnableAtmosphereCheckBox, SIGNAL(toggled(bool)), lmgr, SLOT(setFlagAtmosphereAutoEnable(bool)));
+
 	// script tab controls
 	#ifndef DISABLE_SCRIPTING
 	StelScriptMgr& scriptMgr = StelApp::getInstance().getScriptMgr();
@@ -272,6 +276,7 @@ void ConfigurationDialog::createDialogContent()
 	// plugins control
 	connect(ui->pluginsListWidget, SIGNAL(currentItemChanged(QListWidgetItem*, QListWidgetItem*)), this, SLOT(pluginsSelectionChanged(QListWidgetItem*, QListWidgetItem*)));
 	connect(ui->pluginLoadAtStartupCheckBox, SIGNAL(stateChanged(int)), this, SLOT(loadAtStartupChanged(int)));
+	connect(ui->pluginsListWidget, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(pluginConfigureCurrentSelection()));
 	connect(ui->pluginConfigureButton, SIGNAL(clicked()), this, SLOT(pluginConfigureCurrentSelection()));
 	populatePluginsList();
 
@@ -529,6 +534,7 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	conf->setValue("viewing/flag_constellation_isolate_selected", cmgr->getFlagIsolateSelected());
 	conf->setValue("viewing/flag_landscape_autoselection", lmgr->getFlagLandscapeAutoSelection());
 	conf->setValue("viewing/flag_light_pollution_database", lmgr->getFlagUseLightPollutionFromDatabase());
+	conf->setValue("viewing/flag_atmopshere_auto_enable", lmgr->getFlagAtmosphereAutoEnable());
 	conf->setValue("viewing/constellation_art_intensity", cmgr->getArtIntensity());
 	conf->setValue("viewing/flag_night", StelApp::getInstance().getVisionModeNight());
 	conf->setValue("astro/flag_star_name", smgr->getFlagLabels());
@@ -755,7 +761,7 @@ void ConfigurationDialog::pluginConfigureCurrentSelection()
 	{
 		if (id == desc.info.id)
 		{
-			StelModule* pmod = moduleMgr.getModule(desc.info.id);
+			StelModule* pmod = moduleMgr.getModule(desc.info.id, QObject::sender()->objectName()=="pluginsListWidget");
 			if (pmod != NULL)
 			{
 				pmod->configureGui(true);

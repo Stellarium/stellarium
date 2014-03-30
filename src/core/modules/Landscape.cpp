@@ -705,11 +705,11 @@ void LandscapeFisheye::load(const QSettings& landscapeIni, const QString& landsc
 		return;
 	}
 	create(name,
-		   landscapeIni.value("landscape/texturefov", 360).toFloat(),
-		   getTexturePath(landscapeIni.value("landscape/maptex").toString(), landscapeId),
-			getTexturePath(landscapeIni.value("landscape/maptex_fog").toString(), landscapeId),
-			getTexturePath(landscapeIni.value("landscape/maptex_illum").toString(), landscapeId),
-			landscapeIni.value("landscape/angle_rotatez", 0.f).toFloat());
+	       landscapeIni.value("landscape/texturefov", 360).toFloat(),
+	       getTexturePath(landscapeIni.value("landscape/maptex").toString(), landscapeId),
+	       getTexturePath(landscapeIni.value("landscape/maptex_fog").toString(), landscapeId),
+	       getTexturePath(landscapeIni.value("landscape/maptex_illum").toString(), landscapeId),
+	       landscapeIni.value("landscape/angle_rotatez", 0.f).toFloat());
 }
 
 
@@ -756,8 +756,8 @@ void LandscapeFisheye::draw(StelCore* core)
 		//glBlendFunc(GL_ONE, GL_ONE); // GZ: Take blending mode as found in the old_style landscapes...
 		glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_COLOR); // GZ: better?
 		sPainter.setColor(fogFader.getInterstate()*(0.1f+0.1f*landscapeBrightness),
-						  fogFader.getInterstate()*(0.1f+0.1f*landscapeBrightness),
-						  fogFader.getInterstate()*(0.1f+0.1f*landscapeBrightness), fogFader.getInterstate());
+				  fogFader.getInterstate()*(0.1f+0.1f*landscapeBrightness),
+				  fogFader.getInterstate()*(0.1f+0.1f*landscapeBrightness), fogFader.getInterstate());
 		mapTexFog->bind();
 		sPainter.sSphereMap(radius,cols,rows,texFov,1);
 	}
@@ -837,16 +837,16 @@ void LandscapeSpherical::load(const QSettings& landscapeIni, const QString& land
 	}
 
 	create(name,
-		   getTexturePath(landscapeIni.value("landscape/maptex").toString(), landscapeId),
-			getTexturePath(landscapeIni.value("landscape/maptex_fog").toString(), landscapeId),
-			getTexturePath(landscapeIni.value("landscape/maptex_illum").toString(), landscapeId),
-			landscapeIni.value("landscape/angle_rotatez"      ,   0.f).toFloat(),
-			landscapeIni.value("landscape/maptex_top"         ,  90.f).toFloat(),
-			landscapeIni.value("landscape/maptex_bottom"      , -90.f).toFloat(),
-			landscapeIni.value("landscape/maptex_fog_top"     ,  90.f).toFloat(),
-			landscapeIni.value("landscape/maptex_fog_bottom"  , -90.f).toFloat(),
-			landscapeIni.value("landscape/maptex_illum_top"   ,  90.f).toFloat(),
-			landscapeIni.value("landscape/maptex_illum_bottom", -90.f).toFloat());
+	       getTexturePath(landscapeIni.value("landscape/maptex").toString(), landscapeId),
+	       getTexturePath(landscapeIni.value("landscape/maptex_fog").toString(), landscapeId),
+	       getTexturePath(landscapeIni.value("landscape/maptex_illum").toString(), landscapeId),
+	       landscapeIni.value("landscape/angle_rotatez"      ,   0.f).toFloat(),
+	       landscapeIni.value("landscape/maptex_top"         ,  90.f).toFloat(),
+	       landscapeIni.value("landscape/maptex_bottom"      , -90.f).toFloat(),
+	       landscapeIni.value("landscape/maptex_fog_top"     ,  90.f).toFloat(),
+	       landscapeIni.value("landscape/maptex_fog_bottom"  , -90.f).toFloat(),
+	       landscapeIni.value("landscape/maptex_illum_top"   ,  90.f).toFloat(),
+	       landscapeIni.value("landscape/maptex_illum_bottom", -90.f).toFloat());
 }
 
 

@@ -127,6 +127,10 @@ Q_IMPORT_PLUGIN(SolarSystemEditorStelPluginInterface)
 Q_IMPORT_PLUGIN(TimeZoneConfigurationStelPluginInterface)
 #endif
 
+#ifdef USE_STATIC_PLUGIN_METEORSHOWERS
+Q_IMPORT_PLUGIN(MeteorShowersStelPluginInterface)
+#endif
+
 #ifdef USE_STATIC_PLUGIN_NAVSTARS
 Q_IMPORT_PLUGIN(NavStarsStelPluginInterface)
 #endif
@@ -420,7 +424,7 @@ void StelApp::init(QSettings* conf)
 	getModuleMgr().registerModule(gridLines);
 
 	// Meteors
-	MeteorMgr* meteors = new MeteorMgr(10, 60);
+	MeteorMgr* meteors = new MeteorMgr(10, 72);
 	meteors->init();
 	getModuleMgr().registerModule(meteors);
 
@@ -709,6 +713,12 @@ void StelApp::reportFileDownloadFinished(QNetworkReply* reply)
 		++nbDownloadedFiles;
 		totalDownloadedSize+=reply->bytesAvailable();
 	}
+}
+
+void StelApp::quit()
+{
+	emit aboutToQuit();
+	QCoreApplication::exit(0);
 }
 
 void StelApp::setDevicePixelsPerPixel(float dppp)
