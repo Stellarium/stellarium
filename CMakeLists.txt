@@ -160,6 +160,7 @@ ADD_PLUGIN(SimpleDrawLine 0)
 #### work plugins ####
 ADD_PLUGIN(AngleMeasure 1)
 ADD_PLUGIN(CompassMarks 1)
+ADD_PLUGIN(Coordinates 1)
 ADD_PLUGIN(Exoplanets 1)
 ADD_PLUGIN(EquationOfTime 1)
 ADD_PLUGIN(FOV 1)
