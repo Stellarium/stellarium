@@ -18,13 +18,13 @@ msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-03-22 22:34+0700\n"
-"PO-Revision-Date: 2014-03-16 21:22+0000\n"
+"PO-Revision-Date: 2014-03-23 12:16+0000\n"
 "Last-Translator: Nicolas Martignoni <Unknown>\n"
 "Language-Team: <fr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-03-23 05:52+0000\n"
+"X-Launchpad-Export-Date: 2014-03-24 05:48+0000\n"
 "X-Generator: Launchpad (build 16967)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:107 src/core/modules/StarMgr.cpp:338
@@ -1784,7 +1784,7 @@ msgstr "Fréquence normale"
 
 #: src/gui/ViewDialog.cpp:579
 msgid "Standard Orionids rate"
-msgstr ""
+msgstr "Taux standard orionides"
 
 #: src/gui/ViewDialog.cpp:582
 msgid "Standard Perseids rate"
@@ -1792,11 +1792,11 @@ msgstr "Fréquence standard des Perséides"
 
 #: src/gui/ViewDialog.cpp:585
 msgid "Standard Geminids rate"
-msgstr ""
+msgstr "Taux standard géminides"
 
 #: src/gui/ViewDialog.cpp:588
 msgid "Exceptional Perseid rate"
-msgstr ""
+msgstr "Taux exceptionnel perséides"
 
 #: src/gui/ViewDialog.cpp:591
 msgid "Meteor storm rate"
@@ -1804,7 +1804,7 @@ msgstr "Taux de pluie d'étoiles filantes"
 
 #: src/gui/ViewDialog.cpp:594
 msgid "Exceptional Draconid rate"
-msgstr ""
+msgstr "Taux exceptionnel draconides"
 
 #: src/gui/ViewDialog.cpp:597
 msgid "Exceptional Leonid rate"
@@ -1812,11 +1812,11 @@ msgstr "Fréquence exceptionnelle des Léonides"
 
 #: src/gui/ViewDialog.cpp:600
 msgid "Very high rate (1966 Leonids)"
-msgstr ""
+msgstr "Taux très élevé (léonides 1966)"
 
 #: src/gui/ViewDialog.cpp:603
 msgid "Highest rate ever (1833 Leonids)"
-msgstr ""
+msgstr "Taux le plus élevé observé (léonines 1833)"
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:112
 msgid "Select a ZIP archive that contains a Stellarium landscape"
@@ -4226,7 +4226,7 @@ msgstr "Adaptation visuelle dynamique"
 
 #: src/ui_viewDialog.h:1205
 msgid "Settings for sporadic meteors"
-msgstr ""
+msgstr "Réglages météores sporadiques"
 
 #: src/ui_viewDialog.h:1207
 msgid "Shooting Stars"
@@ -4716,10 +4716,12 @@ msgstr "Le zoom arrière automatique renvoie au point de vue initial"
 msgid ""
 "Auto-enabling of the atmosphere for bodies with atmosphere in location window"
 msgstr ""
+"Activation automatique de  l'atmosphère pour la localisation sur les corps "
+"célestes avec atmosphère"
 
 #: src/ui_configurationDialog.h:1148
 msgid "Auto-enabling for the atmosphere"
-msgstr ""
+msgstr "Activation automatique de l'atmosphère"
 
 #: src/ui_configurationDialog.h:1149
 msgid "Screenshots"
