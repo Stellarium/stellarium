@@ -315,14 +315,16 @@ void StelMainView::init(QSettings* conf)
 	rootContext()->setContextProperty("stelApp", stelApp);
 	setSource(QUrl("qrc:/qml/main.qml"));
 	
-	QScreen* screen = glWidget->windowHandle()->screen();
-	int width = conf->value("video/screen_w", screen->size().width()).toInt();
-	int height = conf->value("video/screen_h", screen->size().height()).toInt();
+	QSize size = glWidget->windowHandle()->screen()->size();
+	size = QSize(conf->value("video/screen_w", size.width()).toInt(),
+		     conf->value("video/screen_h", size.height()).toInt());
+
+	bool fullscreen = conf->value("video/fullscreen", true).toBool();
 
 	// Without this, the screen is not shown on a Mac + we should use resize() for correct work of fullscreen/windowed mode switch. --AW WTF???
-	resize(width, height);
+	resize(size);
 
-	if (conf->value("video/fullscreen", true).toBool())
+	if (fullscreen)
 	{
 		setFullScreen(true);
 	}
@@ -331,15 +333,15 @@ void StelMainView::init(QSettings* conf)
 		setFullScreen(false);
 		int x = conf->value("video/screen_x", 0).toInt();
 		int y = conf->value("video/screen_y", 0).toInt();
-		move(x, y);
+		move(x, y);	
 	}
-	show();
 
 	flagInvertScreenShotColors = conf->value("main/invert_screenshots_colors", false).toBool();
 	setFlagCursorTimeout(conf->value("gui/flag_mouse_cursor_timeout", false).toBool());
 	setCursorTimeout(conf->value("gui/mouse_cursor_timeout", 10.f).toFloat());
 	maxfps = conf->value("video/maximum_fps",10000.f).toFloat();
 	minfps = conf->value("video/minimum_fps",10000.f).toFloat();
+	flagMaxFpsUpdatePending = false;
 
 	// XXX: This should be done in StelApp::init(), unfortunately for the moment we need init the gui before the
 	// plugins, because the gui create the QActions needed by some plugins.
@@ -432,6 +434,12 @@ void StelMainView::thereWasAnEvent()
 	lastEventTimeSec = StelApp::getTotalRunTime();
 }
 
+void StelMainView::maxFpsSceneUpdate()
+{
+	updateScene();
+	flagMaxFpsUpdatePending = false;
+}
+
 void StelMainView::drawBackground(QPainter*, const QRectF&)
 {
 	const double now = StelApp::getTotalRunTime();
@@ -441,9 +449,23 @@ void StelMainView::drawBackground(QPainter*, const QRectF&)
 	// after that, it switches back to the default minfps value to save power
 	if (now-lastEventTimeSec<2.5)
 	{
-		double duration = 1./getMaxFps();
-		int dur = (int)(duration*1000);
-		QTimer::singleShot(dur<5 ? 5 : dur, this, SLOT(updateScene()));
+		if (!flagMaxFpsUpdatePending)
+		{
+			double duration = 1./getMaxFps();
+			int dur = (int)(duration*1000);
+
+			if (minFpsTimer!=NULL)
+			{
+				disconnect(minFpsTimer, SIGNAL(timeout()), 0, 0);
+				delete minFpsTimer;
+				minFpsTimer = NULL;
+			}
+			flagMaxFpsUpdatePending = true;
+			QTimer::singleShot(dur<5 ? 5 : dur, this, SLOT(maxFpsSceneUpdate()));
+		}
+	} else if (minFpsTimer == NULL) {
+		// Restart the minfps timer
+		minFpsChanged();
 	}
 
 	// Manage cursor timeout
@@ -512,6 +534,12 @@ void StelMainView::moveEvent(QMoveEvent * event)
 
 	// We use the glWidget instead of the even, as we want the screen that shows most of the widget.
 	StelApp::getInstance().setDevicePixelsPerPixel(glWidget->windowHandle()->devicePixelRatio());
+}
+
+void StelMainView::closeEvent(QCloseEvent* event)
+{
+	Q_UNUSED(event);
+	StelApp::getInstance().quit();
 }
 
 void StelMainView::keyPressEvent(QKeyEvent* event)

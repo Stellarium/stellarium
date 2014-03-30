@@ -67,7 +67,7 @@ typedef QSharedPointer<TelescopeClient> TelescopeClientP;
 //! No esoteric features like motor focus, electric heating and such.
 //! The actual controlling of a telescope is left to the implementation
 //! of the abstract base class TelescopeClient.
-class TelescopeControl : public StelObjectModule, protected QOpenGLFunctions_1_2
+class TelescopeControl : public StelObjectModule
 {
 	Q_OBJECT
 

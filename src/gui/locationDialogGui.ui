@@ -417,6 +417,9 @@
                 <stylestrategy>PreferDefault</stylestrategy>
                </font>
               </property>
+              <property name="focusPolicy">
+               <enum>Qt::NoFocus</enum>
+              </property>
               <property name="text">
                <string>Use as default</string>
               </property>
@@ -424,6 +427,9 @@
             </item>
             <item>
              <widget class="QPushButton" name="pushButtonReturnToDefault">
+              <property name="focusPolicy">
+               <enum>Qt::NoFocus</enum>
+              </property>
               <property name="text">
                <string>Return to default</string>
               </property>
@@ -453,6 +459,9 @@
                 <height>0</height>
                </size>
               </property>
+              <property name="focusPolicy">
+               <enum>Qt::NoFocus</enum>
+              </property>
               <property name="text">
                <string>Delete</string>
               </property>
@@ -468,6 +477,9 @@
                 <width>100</width>
                 <height>0</height>
                </size>
+              </property>
+              <property name="focusPolicy">
+               <enum>Qt::NoFocus</enum>
               </property>
               <property name="text">
                <string>Add to list</string>
@@ -661,6 +673,9 @@
               </property>
               <property name="editable">
                <bool>true</bool>
+              </property>
+              <property name="insertPolicy">
+               <enum>QComboBox::NoInsert</enum>
               </property>
              </widget>
             </item>

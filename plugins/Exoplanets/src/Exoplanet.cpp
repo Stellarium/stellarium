@@ -182,12 +182,12 @@ QString Exoplanet::getInfoString(const StelCore* core, const InfoStringGroup& fl
 	// Ra/Dec etc.
 	oss << getPositionInfoString(core, flags);
 
-	if (flags&Extra)
+	if (flags&Extra && !stype.isEmpty())
 	{
 		oss << q_("Spectral Type: %1").arg(stype) << "<br>";
 	}
 
-	if (flags&Distance)
+	if (flags&Distance && distance>0)
 	{
 		oss << q_("Distance: %1 Light Years").arg(QString::number(distance/0.306601, 'f', 2)) << "<br>";
 	}

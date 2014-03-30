@@ -399,9 +399,10 @@ IF(USE_PLUGIN_SVMT)
 ENDIF()
 
 IF(USE_PLUGIN_TELESCOPECONTROL)
-	IF(WIN32)
-		SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} libwsock32.a)
-	ENDIF()
+# WinSock library
+    IF(WIN32)
+        SET(STELLARIUM_STATIC_PLUGINS_LIBRARIES ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} ws2_32)
+    ENDIF()
 ENDIF()
 
 
@@ -411,6 +412,8 @@ ENDIF()
 
 SET(extLinkerOption ${OPENGL_LIBRARIES} ${ZLIB_LIBRARIES})
 IF(WIN32 AND NOT MSVC)
+# TODO: Test if winsock is still necessary if the Telescope Control plug-in is disabled.
+# Because including it here seems to duplicate STELLARIUM_STATIC_PLUGINS_LIBRARIES
 	SET(extLinkerOption ${extLinkerOption} libwinmm.a -lws2_32)
 ENDIF()
 
@@ -420,6 +423,10 @@ IF(WIN32 AND ENABLE_WINDOWS_EXE_ICON)
                        COMMAND ${RC_COMPILER_PATH} ${CMAKE_SOURCE_DIR}/data/stellarium.rc ${CMAKE_BINARY_DIR}/stellarium-rc.o
                        WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/data)
     SET(stellarium_exe_SRCS ${stellarium_exe_SRCS} ${CMAKE_BINARY_DIR}/stellarium-rc.o)
+  ELSE()
+    IF(MSVC)
+      SET(stellarium_exe_SRCS ${stellarium_exe_SRCS} ${CMAKE_SOURCE_DIR}/data/stellarium.rc)
+    ENDIF()
   ENDIF()
 ENDIF()
 

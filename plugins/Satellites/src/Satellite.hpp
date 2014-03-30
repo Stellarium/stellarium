@@ -86,7 +86,7 @@ Q_DECLARE_METATYPE(SatFlags)
 //! 
 //! Thanks to operator<() overloading, container classes (QList, QMap, etc)
 //! with Satellite or SatelliteP objects can be sorted by satellite name/ID.
-class Satellite : public StelObject, protected QOpenGLFunctions_1_2
+class Satellite : public StelObject, protected QOpenGLFunctions
 {
 	friend class Satellites;
 	friend class SatellitesDialog;

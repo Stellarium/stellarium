@@ -19,6 +19,8 @@
 #ifndef _SUPERNOVA_HPP_
 #define _SUPERNOVA_HPP_ 1
 
+#include "config.h"
+
 #include <QVariant>
 #include <QString>
 #include <QStringList>
