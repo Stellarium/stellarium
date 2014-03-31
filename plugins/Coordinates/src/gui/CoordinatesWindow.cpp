@@ -53,19 +53,23 @@ void CoordinatesWindow::createDialogContent()
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 
-	ui->checkBoxEnableAtStartup->setChecked(coord->getFlagEnableAtStartup());
+	populateValues();
+
 	connect(ui->checkBoxEnableAtStartup, SIGNAL(clicked(bool)), coord, SLOT(setFlagEnableAtStartup(bool)));
-
-	ui->spinBoxFontSize->setValue(coord->getFontSize());
 	connect(ui->spinBoxFontSize, SIGNAL(valueChanged(int)), coord, SLOT(setFontSize(int)));
-
-	ui->checkBoxShowButton->setChecked(coord->getFlagShowCoordinatesButton());
 	connect(ui->checkBoxShowButton, SIGNAL(clicked(bool)), coord, SLOT(setFlagShowCoordinatesButton(bool)));
 
 	connect(ui->pushButtonSave, SIGNAL(clicked()), this, SLOT(saveCoordinatesSettings()));
 	connect(ui->pushButtonReset, SIGNAL(clicked()), this, SLOT(resetCoordinatesSettings()));
 
 	updateAboutText();
+}
+
+void CoordinatesWindow::populateValues()
+{
+	ui->checkBoxEnableAtStartup->setChecked(coord->getFlagEnableAtStartup());
+	ui->spinBoxFontSize->setValue(coord->getFontSize());
+	ui->checkBoxShowButton->setChecked(coord->getFlagShowCoordinatesButton());
 }
 
 void CoordinatesWindow::updateAboutText()
@@ -83,4 +87,5 @@ void CoordinatesWindow::saveCoordinatesSettings()
 void CoordinatesWindow::resetCoordinatesSettings()
 {
 	coord->restoreDefaults();
+	populateValues();
 }
