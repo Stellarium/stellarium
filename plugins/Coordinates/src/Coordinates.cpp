@@ -58,7 +58,8 @@ StelPluginInfo CoordinatesStelPluginInterface::getPluginInfo() const
 }
 
 Coordinates::Coordinates()
-	: toolbarButton(NULL)
+	: flagShowCoordinates(false),
+	  toolbarButton(NULL)
 {
 	setObjectName("Coordinates");
 	mainWindow = new CoordinatesWindow();	
@@ -105,18 +106,24 @@ void Coordinates::draw(StelCore *core)
 	if (!isEnabled())
 		return;
 
-	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
+	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000, StelCore::RefractionAuto);
 	StelPainter sPainter(prj);
 	sPainter.setColor(textColor[0], textColor[1], textColor[2], 1.f);
 	font.setPixelSize(getFontSize());
 	sPainter.setFont(font);
 
-	QPoint p = QCursor::pos();
-	prj->unProject(p.x(), p.y(), coordinatesPoint);
+	QPoint p = QCursor::pos(); // get screen coordinates of mouse cursor
+	Vec3d mousePosition;
+	float wh = prj->getViewportWidth()/2; // get half of width of the screen
+	float hh = prj->getViewportHeight()/2; // get half of height of the screen
+	float mx = p.x()-wh; // point 0 in center of the screen, axis X directed to right
+	float my = p.y()-hh; // point 0 in center of the screen, axis Y directed to bottom
+	// calculate position of mouse cursor via position of center of the screen (and invert axis Y)
+	prj->unProject(prj->getViewportPosX()+wh+mx, prj->getViewportPosY()+hh+1-my, mousePosition);
 
 	double dec_j2000, ra_j2000;
-	StelUtils::rectToSphe(&ra_j2000,&dec_j2000,coordinatesPoint);
-	QString coordsText = QString("%1/%2").arg(StelUtils::radToHmsStr(ra_j2000)).arg(StelUtils::radToDmsStr(dec_j2000));
+	StelUtils::rectToSphe(&ra_j2000,&dec_j2000,mousePosition); // Calculate RA/DE (J2000.0) and show it...
+	QString coordsText = QString("%1/%2").arg(StelUtils::radToHmsStr(ra_j2000, true)).arg(StelUtils::radToDmsStr(dec_j2000, true));
 
 	QFontMetrics fm(font);
 	QSize fs = fm.size(Qt::TextSingleLine, coordsText);
@@ -160,8 +167,8 @@ void Coordinates::restoreDefaultConfigIni(void)
 
 	conf->setValue("enable_at_startup", false);
 	conf->setValue("flag_show_button", true);
-	conf->setValue("text_color", "0,0.5,1");
-	conf->setValue("font_size", 20);
+	conf->setValue("text_color", "1,0.5,0");
+	conf->setValue("font_size", 14);
 
 	conf->endGroup();
 }
@@ -171,8 +178,8 @@ void Coordinates::readSettingsFromConfig(void)
 	conf->beginGroup("coordinates");
 
 	setFlagEnableAtStartup(conf->value("enable_at_startup", false).toBool());
-	textColor = StelUtils::strToVec3f(conf->value("text_color", "0,0.5,1").toString());
-	setFontSize(conf->value("font_size", 20).toInt());
+	textColor = StelUtils::strToVec3f(conf->value("text_color", "1,0.5,0").toString());
+	setFontSize(conf->value("font_size", 14).toInt());
 	flagShowCoordinatesButton = conf->value("flag_show_button", true).toBool();
 
 	conf->endGroup();
@@ -184,7 +191,7 @@ void Coordinates::saveSettingsToConfig(void)
 
 	conf->setValue("enable_at_startup", getFlagEnableAtStartup());
 	conf->setValue("flag_show_button", getFlagShowCoordinatesButton());
-	//conf->setValue("text_color", "0,0.5,1");
+	//conf->setValue("text_color", "1,0.5,0");
 	conf->setValue("font_size", getFontSize());
 
 	conf->endGroup();
