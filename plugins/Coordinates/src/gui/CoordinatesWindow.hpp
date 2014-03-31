@@ -47,7 +47,8 @@ private:
 	Ui_coordinatesWindowForm* ui;
 	Coordinates* coord;
 
-	void updateAboutText();		
+	void updateAboutText();
+	void populateValues();
 
 private slots:
 	void saveCoordinatesSettings();
