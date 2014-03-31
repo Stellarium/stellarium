@@ -84,7 +84,12 @@ StelPluginInfo ExoplanetsStelPluginInterface::getPluginInfo() const
  Constructor
 */
 Exoplanets::Exoplanets()
-	: flagShowExoplanets(false), OnIcon(NULL), OffIcon(NULL), GlowIcon(NULL), toolbarButton(NULL), progressBar(NULL)
+	: flagShowExoplanets(false),
+	  OnIcon(NULL),
+	  OffIcon(NULL),
+	  GlowIcon(NULL),
+	  toolbarButton(NULL),
+	  progressBar(NULL)
 {
 	setObjectName("Exoplanets");
 	exoplanetsConfigDialog = new ExoplanetsDialog();
