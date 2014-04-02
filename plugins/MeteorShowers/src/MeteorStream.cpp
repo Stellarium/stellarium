@@ -200,27 +200,32 @@ void MeteorStream::draw(const StelCore* core, StelPainter& sPainter)
 		// connect this point with last drawn point
 		double tmag = mag*distMultiplier;
 
-		// compute an intermediate point so can curve slightly along projection distortions
-		Vec3d posi = posInternal;
-		posi[2] = position[2] + (posTrain[2] - position[2])/2;
-		posi.transfo4d(viewMatrix);
-		posi = core->j2000ToAltAz(posi);
-		posi[2] -= EARTH_RADIUS;
-		posi/=1216;
+		QVector<Vec4f> colorArray;
+		QVector<Vec3d> vertexArray;
+		// last point - dark
+		colorArray.push_back(Vec4f(0,0,0,0));
+		vertexArray.push_back(epos);
+		// compute intermediate points to curve along projection distortions
+		int segments = 10;
+		for (int i=1; i<segments; i++) {
+			Vec3d posi = posInternal;
+			posi[2] = posTrain[2] + i*(position[2] - posTrain[2])/segments;
+			posi.transfo4d(viewMatrix);
+			posi = core->j2000ToAltAz(posi);
+			posi[2] -= EARTH_RADIUS;
+			posi/=1216;
 
-		// draw dark to light
-		Vec4f colorArray[3];
-		colorArray[0].set(0,0,0,0);
-		colorArray[1].set(1,1,1,tmag*0.5);
-		colorArray[2].set(1,1,1,tmag);
-		Vec3d vertexArray[3];
-		vertexArray[0]=epos;
-		vertexArray[1]=posi;
-		vertexArray[2]=spos;
-		sPainter.setColorPointer(4, GL_FLOAT, colorArray);
-		sPainter.setVertexPointer(3, GL_DOUBLE, vertexArray);
+			colorArray.push_back(Vec4f(1,1,1,i*tmag/segments));
+			vertexArray.push_back(posi);
+		}
+		// first point - light
+		colorArray.push_back(Vec4f(1,1,1,1));
+		vertexArray.push_back(spos);
+
+		sPainter.setColorPointer(4, GL_FLOAT, colorArray.constData());
+		sPainter.setVertexPointer(3, GL_DOUBLE, vertexArray.constData());
 		sPainter.enableClientStates(true, false, true);
-		sPainter.drawFromArray(StelPainter::LineStrip, 3, 0, true);
+		sPainter.drawFromArray(StelPainter::LineStrip, vertexArray.size(), 0, true);
 		sPainter.enableClientStates(false);
 	}
 	else
