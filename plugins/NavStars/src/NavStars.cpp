@@ -64,11 +64,11 @@ NavStars::NavStars() : toolbarButton(NULL)
 	conf = StelApp::getInstance().getSettings();
 
 	// Set default color
-	if (!conf->contains("navstars/navstars_color"))
-		conf->setValue("navstars/navstars_color", "0.8,0.0,0.0");
+	if (!conf->contains("NavigationalStars/marker_color"))
+		conf->setValue("NavigationalStars/marker_color", "0.8,0.0,0.0");
 	
-	QVariant value = conf->value("navstars/navstars_color", "0.8,0.0,0.0");
-	navStarColor = StelUtils::strToVec3f(value.toString());
+	QVariant var = conf->value("NavigationalStars/marker_color", "0.8,0.0,0.0");
+	markerColor = StelUtils::strToVec3f(var.toString());
 }
 
 
@@ -147,7 +147,7 @@ void NavStars::deinit()
 void NavStars::draw(StelCore* core)
 {
 	// Drawing is enabled?
-	if (navStarsMarkerFader.getInterstate() <= 0.0)
+	if (markerFader.getInterstate() <= 0.0)
 	{
 		return;
 	}
@@ -173,7 +173,7 @@ void NavStars::draw(StelCore* core)
 		glEnable(GL_BLEND);
 		painter.enableTexture2d(true);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-		painter.setColor(navStarColor[0], navStarColor[1], navStarColor[2], navStarsMarkerFader.getInterstate());
+		painter.setColor(markerColor[0], markerColor[1], markerColor[2], markerFader.getInterstate());
 		markerTexture->bind();
 		painter.drawSprite2dMode(pos[0], pos[1], 11.f);
 		// Get the localized name of the navigational star and it serial number
@@ -190,13 +190,13 @@ void NavStars::draw(StelCore* core)
 
 void NavStars::update(double deltaTime)
 {
-	navStarsMarkerFader.update((int)(deltaTime*1000));
+	markerFader.update((int)(deltaTime*1000));
 }
 
 
 void NavStars::setNavStarsMarks(const bool b)
 {
-	if (b == navStarsMarkerFader)
+	if (b == markerFader)
 		return;
 
 	if (b)
@@ -211,14 +211,14 @@ void NavStars::setNavStarsMarks(const bool b)
 		smgr->setFlagLabels(starNamesState);
 	}
 
-	navStarsMarkerFader = b;
+	markerFader = b;
 	emit navStarsMarksChanged(b);
 }
 
 
 bool NavStars::getNavStarsMarks() const
 {
-	return navStarsMarkerFader;
+	return markerFader;
 }
 
 
