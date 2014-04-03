@@ -98,15 +98,15 @@ void NavStars::init()
 	// Comment from the Wikipedia (http://en.wikipedia.org/wiki/List_of_selected_stars_for_navigation#cite_note-Polaris-9):
 	// This list uses the assigned numbers from the nautical almanac, which includes only 57 stars. Polaris, which is included in the list given in
 	// The American Practical Navigator, is listed here without a number.
-	nstar << 11767 << 677   << 2081  << 3179  << 3419  << 7588  << 9884;
-	nstar << 13847 << 14135 << 15863 << 21421 << 24436 << 24608 << 25336;
-	nstar << 25428 << 26311 << 27989 << 30438 << 32349 << 33579 << 37279;
-	nstar << 37826 << 41037 << 44816 << 45238 << 46390 << 49669 << 54061;
-	nstar << 57632 << 59803 << 60718 << 61084 << 62956 << 65474 << 67301;
-	nstar << 68702 << 68933 << 69673 << 71683 << 72603 << 72607 << 76267;
-	nstar << 80763 << 82273 << 84012 << 85927 << 86032 << 87833 << 90185;
-	nstar << 91262 << 92855 << 97649 << 100751 << 102098 << 107315 << 109268;
-	nstar << 113368 << 113963;
+	starNumbers << 11767 << 677   << 2081  << 3179  << 3419  << 7588  << 9884;
+	starNumbers << 13847 << 14135 << 15863 << 21421 << 24436 << 24608 << 25336;
+	starNumbers << 25428 << 26311 << 27989 << 30438 << 32349 << 33579 << 37279;
+	starNumbers << 37826 << 41037 << 44816 << 45238 << 46390 << 49669 << 54061;
+	starNumbers << 57632 << 59803 << 60718 << 61084 << 62956 << 65474 << 67301;
+	starNumbers << 68702 << 68933 << 69673 << 71683 << 72603 << 72607 << 76267;
+	starNumbers << 80763 << 82273 << 84012 << 85927 << 86032 << 87833 << 90185;
+	starNumbers << 91262 << 92855 << 97649 << 100751 << 102098 << 107315;
+	starNumbers << 109268 << 113368 << 113963;
 
 	// Marker texture - using the same texture as the planet hints.
 	QString path = StelFileMgr::findFile("textures/planet-indicator.png");
@@ -141,6 +141,7 @@ void NavStars::init()
 void NavStars::deinit()
 {
 	markerTexture.clear();
+	stars.clear();
 }
 
 
@@ -151,23 +152,31 @@ void NavStars::draw(StelCore* core)
 	{
 		return;
 	}
+	
+	if (stars.isEmpty())
+	{
+		StelObjectMgr* omgr = GETSTELMODULE(StelObjectMgr);
+		stars.fill(StelObjectP(), starNumbers.size());
+		for (int i = 0; i < starNumbers.size(); ++i)
+		{
+			QString name = QString("HIP %1").arg(starNumbers.at(i));
+			stars[i] = omgr->searchByName(name);
+		}
+	}
 
-	// Set projection frame...
 	StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
 	StelPainter painter(prj);
-	// ... prepare object manager for search stars via them HIP numbers
-	StelObjectMgr* omgr = GETSTELMODULE(StelObjectMgr);
-
+	
 	Vec3d pos;
-	QString name, num;
+	QString num;
 	// Use all HIP numbers from the list of navigational stars
-	for (int i = 0; i < nstar.size(); ++i)
+	for (int i = 0; i < starNumbers.size(); ++i)
 	{
-		// Search HIP numbers...
-		name = QString("HIP %1").arg(nstar.at(i));
-		StelObjectP obj = omgr->searchByName(name);
+		if (stars[i].isNull())
+			continue;
+		
 		// Get the current position of the navigational star
-		prj->projectCheck(obj->getJ2000EquatorialPos(core), pos);
+		prj->projectCheck(stars[i]->getJ2000EquatorialPos(core), pos);
 
 		// ... and draw marker around star
 		glEnable(GL_BLEND);
@@ -182,7 +191,7 @@ void NavStars::draw(StelCore* core)
 			num.setNum(i);
 		else
 			num = "*";
-		painter.drawText(pos[0], pos[1], QString("%1 (%2)").arg(obj->getNameI18n()).arg(num), 0, 10.f, 10.f, false);
+		painter.drawText(pos[0], pos[1], QString("%1 (%2)").arg(stars[i]->getNameI18n()).arg(num), 0, 10.f, 10.f, false);
 	}
 
 }
