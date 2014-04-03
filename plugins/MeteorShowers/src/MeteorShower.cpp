@@ -74,6 +74,10 @@ MeteorShower::MeteorShower(const QVariantMap& map)
 	}
 
 	updateCurrentData(getSkyQDateTime());
+	// ensures that all objects will be drawn once
+	// that's to avoid crashes by trying select a nonexistent object
+	StelPainter painter(StelApp::getInstance().getCore()->getProjection(StelCore::FrameJ2000));
+	draw(painter);
 
 	initialized = true;
 }
@@ -236,15 +240,15 @@ void MeteorShower::updateCurrentData(QDateTime skyDate)
 	if(skyDate.operator >=(start) && skyDate.operator <=(finish))
 	{
 		if(index)
-			isActive = 1; // real data
+			status = 1; // real data
 		else
-			isActive = 2; // generic data
+			status = 2; // generic data
 	}
 	else
 	{
-		isActive = 0; // isn't active
+		status = 0; // isn't active
 	}
-	active = (isActive>0) || !showActiveRadiantsOnly;
+	active = (status>0) || !showActiveRadiantsOnly;
 
 	/**************************
 	 *Radiant drift
@@ -252,7 +256,7 @@ void MeteorShower::updateCurrentData(QDateTime skyDate)
 	radiantAlpha = rAlphaPeak;
 	radiantDelta = rDeltaPeak;
 
-	if (isActive)
+	if (status>0)
 	{
 		double time = (StelUtils::qDateTimeToJd(skyDate) - StelUtils::qDateTimeToJd(peak))*24;
 		radiantAlpha += (driftAlpha/120)*time;
@@ -292,7 +296,7 @@ QString MeteorShower::getInfoString(const StelCore* core, const InfoStringGroup&
 	QTextStream oss(&str);
 
 	QString mstdata = q_("generic data");
-	if(isActive == 1)
+	if(status == 1)
 		mstdata = q_("real data");
 
 	if(flags&Name)
@@ -381,7 +385,7 @@ void MeteorShower::update(double deltaTime)
 	updateCurrentData(getSkyQDateTime());
 }
 
-void MeteorShower::draw(StelPainter& painter)
+void MeteorShower::draw(StelPainter &painter)
 {
 	StelUtils::spheToRect(radiantAlpha, radiantDelta, XYZ);
 	painter.getProjector()->project(XYZ, XY);
@@ -391,7 +395,7 @@ void MeteorShower::draw(StelPainter& painter)
 
 	qreal r, g, b;
 	float alpha = 0.85f + ((double) rand() / (RAND_MAX))/10;
-	switch(isActive)
+	switch(status)
 	{
 	case 1: //Active, real data
 		GETSTELMODULE(MeteorShowers)->getColorARR().getRgbF(&r,&g,&b);
