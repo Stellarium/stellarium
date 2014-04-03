@@ -82,7 +82,6 @@ MeteorStream::MeteorStream(const StelCore* core, double velocity, double radiant
 
 	//If everything is ok until here,
 	alive = true;  //the meteor is alive
-	train = false; //and initially it is only a point
 
 	// Determine drawing color given magnitude and eye
 	// (won't be visible during daylight)
@@ -176,8 +175,6 @@ void MeteorStream::draw(const StelCore* core, StelPainter& sPainter)
 	if(!alive)
 		return;
 
-	const StelProjectorP proj = sPainter.getProjector();
-
 	Vec3d spos = position;
 	Vec3d epos = posTrain;
 
@@ -195,47 +192,36 @@ void MeteorStream::draw(const StelCore* core, StelPainter& sPainter)
 	spos/=1216;
 	epos/=1216;
 
-	if(train)
-	{
-		// connect this point with last drawn point
-		double tmag = mag*distMultiplier;
+	// connect this point with last drawn point
+	double tmag = mag*distMultiplier;
 
-		QVector<Vec4f> colorArray;
-		QVector<Vec3d> vertexArray;
-		// last point - dark
-		colorArray.push_back(Vec4f(0,0,0,0));
-		vertexArray.push_back(epos);
-		// compute intermediate points to curve along projection distortions
-		int segments = 10;
-		for (int i=1; i<segments; i++) {
-			Vec3d posi = posInternal;
-			posi[2] = posTrain[2] + i*(position[2] - posTrain[2])/segments;
-			posi.transfo4d(viewMatrix);
-			posi = core->j2000ToAltAz(posi);
-			posi[2] -= EARTH_RADIUS;
-			posi/=1216;
+	QVector<Vec4f> colorArray;
+	QVector<Vec3d> vertexArray;
+	// last point - dark
+	colorArray.push_back(Vec4f(0,0,0,0));
+	vertexArray.push_back(epos);
+	// compute intermediate points to curve along projection distortions
+	int segments = 10;
+	for (int i=1; i<segments; i++) {
+		Vec3d posi = posInternal;
+		posi[2] = posTrain[2] + i*(position[2] - posTrain[2])/segments;
+		posi.transfo4d(viewMatrix);
+		posi = core->j2000ToAltAz(posi);
+		posi[2] -= EARTH_RADIUS;
+		posi/=1216;
 
-			colorArray.push_back(Vec4f(1,1,1,i*tmag/segments));
-			vertexArray.push_back(posi);
-		}
-		// first point - light
-		colorArray.push_back(Vec4f(1,1,1,1));
-		vertexArray.push_back(spos);
-
-		sPainter.setColorPointer(4, GL_FLOAT, colorArray.constData());
-		sPainter.setVertexPointer(3, GL_DOUBLE, vertexArray.constData());
-		sPainter.enableClientStates(true, false, true);
-		sPainter.drawFromArray(StelPainter::LineStrip, vertexArray.size(), 0, true);
-		sPainter.enableClientStates(false);
+		colorArray.push_back(Vec4f(1,1,1,i*tmag/segments));
+		vertexArray.push_back(posi);
 	}
-	else
-	{
-		Vec3d start;
-		proj->project(spos, start);
-		sPainter.drawPoint2d(start[0],start[1]);
-	}
+	// first point - light
+	colorArray.push_back(Vec4f(1,1,1,tmag));
+	vertexArray.push_back(spos);
 
-	train = 1;
+	sPainter.setColorPointer(4, GL_FLOAT, colorArray.constData());
+	sPainter.setVertexPointer(3, GL_DOUBLE, vertexArray.constData());
+	sPainter.enableClientStates(true, false, true);
+	sPainter.drawFromArray(StelPainter::LineStrip, vertexArray.size(), 0, true);
+	sPainter.enableClientStates(false);
 }
 
 bool MeteorStream::isAlive(void)

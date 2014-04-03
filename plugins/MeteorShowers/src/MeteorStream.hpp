@@ -58,7 +58,6 @@ public:
 
 private:
 	bool alive;             //! Indicate if the meteor it still visible
-	bool train;             //! Indicate if the point or train is visible
 
 	Mat4d viewMatrix;       //! View Matrix
 	Vec3d obs;              //! Observer position
