@@ -53,7 +53,8 @@ StelPluginInfo NavStarsStelPluginInterface::getPluginInfo() const
 	info.displayedName = N_("Navigational Stars");
 	info.authors = "Alexander Wolf";
 	info.contact = "http://stellarium.org/";
-	info.description = N_("This plugin marks the 58 navigational stars of the 2102-D Rude Star Finder, also tabulated in the Nautical Almanac.");
+	// TRANSLATORS: The emphasis tags mark a book title.
+	info.description = N_("This plugin marks 58 navigational stars - Polaris and the 57 \"selected stars\" that are listed in <em>The Nautical Almanac</em> jointly published by Her Majesty's Nautical Almanac Office and the US Naval Observatory since 1958; consequently, these stars are also used in navigational aids such as the 2102D Star Finder and Identifier.");
 	info.version = NAVSTARS_PLUGIN_VERSION;
 	return info;
 }
