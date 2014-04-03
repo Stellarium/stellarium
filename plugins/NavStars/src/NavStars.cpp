@@ -93,11 +93,11 @@ void NavStars::init()
 	// Get the manager of stars for manipulation of the stars labels
 	smgr = GETSTELMODULE(StarMgr);
 
-	// List of HIP numbers of navigational stars
-	// First star (Polaris) doesn't have number and marked as "*"
-	// Comment from the Wikipedia (http://en.wikipedia.org/wiki/List_of_selected_stars_for_navigation#cite_note-Polaris-9):
-	// This list uses the assigned numbers from the nautical almanac, which includes only 57 stars. Polaris, which is included in the list given in
-	// The American Practical Navigator, is listed here without a number.
+	// List of HIP numbers of the navigational stars: Polaris (index 0) and
+	// the 47 "selected stars" from The Nautical Almanac. Polaris is included
+	// because it was listed with them in the The American Practical Navigator,
+	// or more precisely, because it was included in the list on Wikipedia:
+	// http://en.wikipedia.org/wiki/List_of_selected_stars_for_navigation
 	starNumbers << 11767 << 677   << 2081  << 3179  << 3419  << 7588  << 9884;
 	starNumbers << 13847 << 14135 << 15863 << 21421 << 24436 << 24608 << 25336;
 	starNumbers << 25428 << 26311 << 27989 << 30438 << 32349 << 33579 << 37279;
@@ -168,7 +168,6 @@ void NavStars::draw(StelCore* core)
 	StelPainter painter(prj);
 	
 	Vec3d pos;
-	QString num;
 	// Use all HIP numbers from the list of navigational stars
 	for (int i = 0; i < starNumbers.size(); ++i)
 	{
@@ -182,16 +181,19 @@ void NavStars::draw(StelCore* core)
 		glEnable(GL_BLEND);
 		painter.enableTexture2d(true);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-		painter.setColor(markerColor[0], markerColor[1], markerColor[2], markerFader.getInterstate());
+		painter.setColor(markerColor[0],
+		                 markerColor[1],
+		                 markerColor[2],
+		                 markerFader.getInterstate());
 		markerTexture->bind();
 		painter.drawSprite2dMode(pos[0], pos[1], 11.f);
 		// Get the localized name of the navigational star and it serial number
 		// from the list of the stars, and draw them
-		if (i>0)
-			num.setNum(i);
-		else
-			num = "*";
-		painter.drawText(pos[0], pos[1], QString("%1 (%2)").arg(stars[i]->getNameI18n()).arg(num), 0, 10.f, 10.f, false);
+		QString label = stars[i]->getNameI18n();
+		if (i > 0) // Not Polaris
+			label = QString("%1 (%2)").arg(label).arg(i);
+		
+		painter.drawText(pos[0], pos[1], label, 0, 10.f, 10.f, false);
 	}
 
 }
