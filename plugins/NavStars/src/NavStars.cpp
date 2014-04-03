@@ -168,31 +168,32 @@ void NavStars::draw(StelCore* core)
 	StelPainter painter(prj);
 	
 	Vec3d pos;
-	// Use all HIP numbers from the list of navigational stars
 	for (int i = 0; i < starNumbers.size(); ++i)
 	{
 		if (stars[i].isNull())
 			continue;
 		
-		// Get the current position of the navigational star
+		// Get the current position of the navigational star...
 		prj->projectCheck(stars[i]->getJ2000EquatorialPos(core), pos);
 
-		// ... and draw marker around star
-		glEnable(GL_BLEND);
-		painter.enableTexture2d(true);
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-		painter.setColor(markerColor[0],
-		                 markerColor[1],
-		                 markerColor[2],
-		                 markerFader.getInterstate());
-		markerTexture->bind();
-		painter.drawSprite2dMode(pos[0], pos[1], 11.f);
-		// Get the localized name of the navigational star and it serial number
-		// from the list of the stars, and draw them
+		// ... and draw a marker around it
+		if (!markerTexture.isNull())
+		{
+			glEnable(GL_BLEND);
+			painter.enableTexture2d(true);
+			glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+			painter.setColor(markerColor[0],
+			                 markerColor[1],
+			                 markerColor[2],
+			                 markerFader.getInterstate());
+			markerTexture->bind();
+			painter.drawSprite2dMode(pos[0], pos[1], 11.f);
+		}
+		
+		// Draw the localized name of the star and its ordinal number
 		QString label = stars[i]->getNameI18n();
 		if (i > 0) // Not Polaris
 			label = QString("%1 (%2)").arg(label).arg(i);
-		
 		painter.drawText(pos[0], pos[1], label, 0, 10.f, 10.f, false);
 	}
 
