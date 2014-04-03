@@ -90,9 +90,9 @@ private:
 
 	//! List of navigational stars.
 	QList<int> nstar;
-	//! Color of marker for navigational stars.
-	Vec3f navStarColor;	
-	LinearFader navStarsMarkerFader;
+	//! Color used to paint each star's marker and additional label.
+	Vec3f markerColor;	
+	LinearFader markerFader;
 	//! State of displaying stars labels.
 	bool starNamesState;
 
