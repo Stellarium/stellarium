@@ -20,16 +20,16 @@
 #ifndef _NAVSTARS_HPP_
 #define _NAVSTARS_HPP_
 
-#include "StelObjectModule.hpp"
-#include "StelObject.hpp"
-#include "StelTextureTypes.hpp"
-#include "StelPainter.hpp"
-#include "StarMgr.hpp"
-#include "QSettings"
+#include "StelFader.hpp"
+#include "StelModule.hpp"
+#include "StelObject.hpp" // For StelObjectP
+#include "StelTexture.hpp"
 
-class QPixmap;
+#include <QSettings>
+
 class StelButton;
 class StelPainter;
+class StarMgr;
 
 /*! @mainpage notitle
 @section overview Plugin Overview
@@ -86,13 +86,17 @@ private slots:
 private:
 	StarMgr* smgr;
 	QSettings* conf;
-	StelTextureSP markerTexture;
 
-	//! List of navigational stars.
-	QList<int> nstar;
+	//! List of the navigational stars' HIP numbers.
+	QList<int> starNumbers;
+	//! List of pointers to the objects representing the stars.
+	QVector<StelObjectP> stars;
+	
+	StelTextureSP markerTexture;
 	//! Color used to paint each star's marker and additional label.
 	Vec3f markerColor;	
 	LinearFader markerFader;
+	
 	//! State of displaying stars labels.
 	bool starNamesState;
 
