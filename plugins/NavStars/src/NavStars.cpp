@@ -35,10 +35,7 @@
 #include <QList>
 #include <QSharedPointer>
 
-/*
- This method is the one called automatically by the StelModuleMgr just 
- after loading the dynamic library
-*/
+
 StelModule* NavStarsStelPluginInterface::getStelModule() const
 {
 	return new NavStars();
@@ -59,9 +56,8 @@ StelPluginInfo NavStarsStelPluginInterface::getPluginInfo() const
 	return info;
 }
 
-/*
- Constructor
-*/
+
+
 NavStars::NavStars()
 	: OnIcon(NULL)
 	, OffIcon(NULL)
@@ -85,9 +81,7 @@ NavStars::NavStars()
 	}
 }
 
-/*
- Destructor
-*/
+
 NavStars::~NavStars()
 {
 	if (GlowIcon)
@@ -98,25 +92,17 @@ NavStars::~NavStars()
 		delete OffIcon;
 }
 
-void NavStars::deinit()
-{
-	markerTexture.clear();	
-}
 
-/*
- Reimplementation of the getCallOrder method
-*/
 double NavStars::getCallOrder(StelModuleActionName actionName) const
 {
-	if (actionName==StelModule::ActionDraw)
-		return StelApp::getInstance().getModuleMgr().getModule("ConstellationMgr")->getCallOrder(actionName)+10.;
+	if (actionName == StelModule::ActionDraw)
+		return StelApp::getInstance()
+		        .getModuleMgr()
+		        .getModule("ConstellationMgr")->getCallOrder(actionName)+10.;
 	return 0;
 }
 
 
-/*
- Init our module
-*/
 void NavStars::init()
 {
 	// Get the manager of stars for manipulation of the stars labels
@@ -127,16 +113,25 @@ void NavStars::init()
 	// Comment from the Wikipedia (http://en.wikipedia.org/wiki/List_of_selected_stars_for_navigation#cite_note-Polaris-9):
 	// This list uses the assigned numbers from the nautical almanac, which includes only 57 stars. Polaris, which is included in the list given in
 	// The American Practical Navigator, is listed here without a number.
-	nstar << 11767 << 677 << 2081 << 3179 << 3419 << 7588 << 9884 << 13847 << 14135 << 15863 << 21421 << 24436 << 24608 << 25336 << 25428 << 26311;
-	nstar << 27989 << 30438 << 32349 << 33579 << 37279 << 37826 << 41037 << 44816 << 45238 << 46390 << 49669 << 54061 << 57632 << 59803 << 60718;
-	nstar << 61084 << 62956 << 65474 << 67301 << 68702 << 68933 << 69673 << 71683 << 72603 << 72607 << 76267 << 80763 << 82273 << 84012 << 85927;
-	nstar << 86032 << 87833 << 90185 << 91262 << 92855 << 97649 << 100751 << 102098 << 107315 << 109268 << 113368 << 113963;
+	nstar << 11767 << 677   << 2081  << 3179  << 3419  << 7588  << 9884;
+	nstar << 13847 << 14135 << 15863 << 21421 << 24436 << 24608 << 25336;
+	nstar << 25428 << 26311 << 27989 << 30438 << 32349 << 33579 << 37279;
+	nstar << 37826 << 41037 << 44816 << 45238 << 46390 << 49669 << 54061;
+	nstar << 57632 << 59803 << 60718 << 61084 << 62956 << 65474 << 67301;
+	nstar << 68702 << 68933 << 69673 << 71683 << 72603 << 72607 << 76267;
+	nstar << 80763 << 82273 << 84012 << 85927 << 86032 << 87833 << 90185;
+	nstar << 91262 << 92855 << 97649 << 100751 << 102098 << 107315 << 109268;
+	nstar << 113368 << 113963;
 
-	// texture for marker (same texture used for the planet hints)
-	markerTexture = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/planet-indicator.png");
+	// Marker texture - using the same texture as the planet hints.
+	QString path = StelFileMgr::findFile("textures/planet-indicator.png");
+	markerTexture = StelApp::getInstance().getTextureManager().createTexture(path);
 
 	// key bindings and other actions
-	addAction("actionShow_NavStars", N_("Navigational Stars"), N_("Mark the navigational stars"), "navStarsVisible", "");
+	addAction("actionShow_NavStars",
+	          N_("Navigational Stars"),
+	          N_("Mark the navigational stars"),
+	          "navStarsVisible", "");
 
 	// Icon for toolbar button
 	GlowIcon = new QPixmap(":/graphicGui/glow32x32.png");
@@ -145,20 +140,30 @@ void NavStars::init()
 
 	// Toolbar button
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-	if (toolbarButton==NULL) {
+	if (toolbarButton == NULL)
+	{
 		// Create the nav. stars button
-		toolbarButton = new StelButton(NULL, *OnIcon, *OffIcon, *GlowIcon, "actionShow_NavStars");
+		toolbarButton = new StelButton(NULL,
+		                               *OnIcon,
+		                               *OffIcon,
+		                               *GlowIcon,
+		                               "actionShow_NavStars");
 	}
 	gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");	
 
 	// Sync global settings for stars labels
-	connect(smgr, SIGNAL(starLabelsDisplayedChanged(bool)), this, SLOT(starNamesChanged(bool)));
-	starNamesState=false;
+	connect(smgr, SIGNAL(starLabelsDisplayedChanged(bool)),
+	        this, SLOT(starNamesChanged(bool)));
+	starNamesState = false;
 }
 
-/*
- Draw markers of the navigational stars
-*/
+
+void NavStars::deinit()
+{
+	markerTexture.clear();
+}
+
+
 void NavStars::draw(StelCore* core)
 {
 	// Drawing is enabled?
@@ -191,7 +196,8 @@ void NavStars::draw(StelCore* core)
 		painter.setColor(navStarColor[0], navStarColor[1], navStarColor[2], navStarsMarkerFader.getInterstate());
 		markerTexture->bind();
 		painter.drawSprite2dMode(pos[0], pos[1], 11.f);
-		// Get the localized name of the navigational star and it serial number from the list of the stars, and draw them
+		// Get the localized name of the navigational star and it serial number
+		// from the list of the stars, and draw them
 		if (i>0)
 			num.setNum(i);
 		else
@@ -201,12 +207,13 @@ void NavStars::draw(StelCore* core)
 
 }
 
+
 void NavStars::update(double deltaTime)
 {
 	navStarsMarkerFader.update((int)(deltaTime*1000));
 }
 
-// Set flag of displaying markers of the navigational stars
+
 void NavStars::setNavStarsMarks(const bool b)
 {
 	if (b == navStarsMarkerFader)
@@ -228,15 +235,17 @@ void NavStars::setNavStarsMarks(const bool b)
 	emit navStarsMarksChanged(b);
 }
 
-// Get flag of displaying markers of the navigational stars
+
 bool NavStars::getNavStarsMarks() const
 {
 	return navStarsMarkerFader;
 }
 
+
 void NavStars::starNamesChanged(const bool b)
 {
-	if (b && getNavStarsMarks()) {
+	if (b && getNavStarsMarks())
+	{
 		starNamesState=true;
 		setNavStarsMarks(false);
 	}
