@@ -18,13 +18,13 @@ msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-03-22 22:34+0700\n"
-"PO-Revision-Date: 2014-03-23 12:16+0000\n"
+"PO-Revision-Date: 2014-04-02 17:49+0000\n"
 "Last-Translator: Nicolas Martignoni <Unknown>\n"
 "Language-Team: <fr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-03-24 05:48+0000\n"
+"X-Launchpad-Export-Date: 2014-04-03 05:29+0000\n"
 "X-Generator: Launchpad (build 16967)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:107 src/core/modules/StarMgr.cpp:338
@@ -5093,11 +5093,11 @@ msgstr "Pour plus d'informations sur ce plugin, %1cliquez ici%2."
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:181
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:263
 msgid "Pulsars Configuration"
-msgstr "Configuration des pulsars"
+msgstr "Plugins Pulsars"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:182
 msgid "Angle Measure Plug-in Configuration"
-msgstr "Configuration du plugin Goniomètre"
+msgstr "Plugin Goniomètre"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:184
 #: plugins/Satellites/src/ui_satellitesDialog.h:716
@@ -5265,7 +5265,7 @@ msgstr "Viseur Telrad"
 
 #: plugins/Oculars/src/Oculars.cpp:1322
 msgid "Oculars plugin configuration"
-msgstr "Plugin de configuration des oculaires"
+msgstr "Plugin Oculaires"
 
 #: plugins/Oculars/src/Oculars.cpp:1324
 msgid "Select next telescope"
@@ -5781,7 +5781,7 @@ msgstr "Noms des satellites"
 
 #: plugins/Satellites/src/Satellites.cpp:147
 msgid "Satellites configuration window"
-msgstr "Fenêtre de configuration des satellites"
+msgstr "Configuration des satellites"
 
 #: plugins/Satellites/src/Satellites.cpp:174
 msgid ""
@@ -6240,7 +6240,7 @@ msgstr "Catalogue Numéro: %1"
 #: plugins/Satellites/src/ui_satellitesDialog.h:679
 #: plugins/Satellites/src/ui_satellitesDialog.h:680
 msgid "Satellites Configuration"
-msgstr "Configuration des satellites"
+msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:682
 msgid "Updates"
@@ -6675,7 +6675,7 @@ msgstr "Configuration des &télescopes..."
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:470
 msgid "Telescope Configuration"
-msgstr "Configuration des télescopes"
+msgstr "Plugin Télescope"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:472
 msgid "Telescope controlled by:"
@@ -7650,11 +7650,11 @@ msgstr "Les supernovae historiques sont à jour"
 
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:229
 msgid "Historical Supernovae Configuration"
-msgstr "Configuration des supernovae historiques"
+msgstr ""
 
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:230
 msgid "Historical Supernovae Plug-in Configuration"
-msgstr "Configuration du plugin Supernovae historiques"
+msgstr "Plugin Supernovae historiques"
 
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:232
 #: plugins/Novae/src/ui_novaeDialog.h:235
@@ -7777,7 +7777,7 @@ msgstr "Configuration Novae lumineuses"
 
 #: plugins/Novae/src/ui_novaeDialog.h:233
 msgid "Bright Novae Plug-in Configuration"
-msgstr "Configuration du plugin Novae lumineuses"
+msgstr "Plugin Novae lumineuses"
 
 #: plugins/Quasars/src/Quasars.cpp:73 plugins/Quasars/src/Quasars.cpp:160
 #: plugins/Quasars/src/Quasars.cpp:161
@@ -7800,7 +7800,7 @@ msgstr "Afficher les quasars"
 
 #: plugins/Quasars/src/Quasars.cpp:161
 msgid "Quasars configuration window"
-msgstr "Fenêtre de configuration des quasars"
+msgstr "Plugin Quasars"
 
 #: plugins/Quasars/src/Quasar.cpp:93
 msgid "quasar"
@@ -7854,7 +7854,7 @@ msgstr "Configuration des quasars"
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:258
 msgid "Quasars Plug-in Configuration"
-msgstr "Configuration du plugin des quasars"
+msgstr "Plugin Quasars"
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:266
 msgid "Settings for quasars"
@@ -8096,7 +8096,7 @@ msgstr "Les pulsars sont à jour"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:264
 msgid "Pulsars Plug-in Configuration"
-msgstr "Configuration du plugin des pulsars"
+msgstr "Plugin Pulsars"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:272
 msgid "Settings for pulsars"
@@ -8423,7 +8423,7 @@ msgstr "Configuration des exoplanètes"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:298
 msgid "Exoplanets Plug-in Configuration"
-msgstr "Configuration du plugin des exoplanètes"
+msgstr "Plugin Exoplanètes"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:300
 msgid "Update exoplanets data from Internet"
@@ -8868,7 +8868,7 @@ msgstr "Configuration de l'observabilité"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:359
 msgid "Observability Plug-in Configuration"
-msgstr "Configuration du plugin Observabilité"
+msgstr "Plugin Observabilité"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:361
 msgid "Showing Options"
@@ -9587,11 +9587,11 @@ msgstr "Mise à jour en cours"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:512
 msgid "Meteor Showers Configuration"
-msgstr ""
+msgstr "Pluies de météores"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:513
 msgid "Meteor Showers Plug-in Configuration"
-msgstr "Pluies de météores"
+msgstr "Plugin Pluies de météores"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:515
 msgid "Update data from Internet"
