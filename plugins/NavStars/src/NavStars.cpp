@@ -58,11 +58,7 @@ StelPluginInfo NavStarsStelPluginInterface::getPluginInfo() const
 
 
 
-NavStars::NavStars()
-	: OnIcon(NULL)
-	, OffIcon(NULL)
-	, GlowIcon(NULL)
-	, toolbarButton(NULL)	
+NavStars::NavStars() : toolbarButton(NULL)
 {
 	setObjectName("NavStars");
 	conf = StelApp::getInstance().getSettings();
@@ -84,12 +80,7 @@ NavStars::NavStars()
 
 NavStars::~NavStars()
 {
-	if (GlowIcon)
-		delete GlowIcon;
-	if (OnIcon)
-		delete OnIcon;
-	if (OffIcon)
-		delete OffIcon;
+	//
 }
 
 
@@ -133,20 +124,15 @@ void NavStars::init()
 	          N_("Mark the navigational stars"),
 	          "navStarsVisible", "");
 
-	// Icon for toolbar button
-	GlowIcon = new QPixmap(":/graphicGui/glow32x32.png");
-	OnIcon = new QPixmap(":/NavStars/btNavStars-on.png");
-	OffIcon = new QPixmap(":/NavStars/btNavStars-off.png");
-
 	// Toolbar button
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 	if (toolbarButton == NULL)
 	{
 		// Create the nav. stars button
 		toolbarButton = new StelButton(NULL,
-		                               *OnIcon,
-		                               *OffIcon,
-		                               *GlowIcon,
+		                               QPixmap(":/NavStars/btNavStars-on.png"),
+		                               QPixmap(":/NavStars/btNavStars-off.png"),
+		                               QPixmap(":/graphicGui/glow32x32.png"),
 		                               "actionShow_NavStars");
 	}
 	gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");	

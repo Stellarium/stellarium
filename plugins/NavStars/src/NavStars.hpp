@@ -96,13 +96,8 @@ private:
 	//! State of displaying stars labels.
 	bool starNamesState;
 
-	//! @name Bottom toolbar button
-	//@{
-	QPixmap* OnIcon;
-	QPixmap* OffIcon;
-	QPixmap* GlowIcon;	
+	//! Button for the bottom toolbar.
 	StelButton* toolbarButton;
-	//@}
 };
 
 
