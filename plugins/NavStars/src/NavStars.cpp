@@ -64,17 +64,11 @@ NavStars::NavStars() : toolbarButton(NULL)
 	conf = StelApp::getInstance().getSettings();
 
 	// Set default color
-	navStarColor = Vec3f(0.8, 0.0, 0.0);
-	if (conf->contains("navstars/navstars_color"))
-	{
-		// OK, we have color settings
-		navStarColor = StelUtils::strToVec3f(conf->value("navstars/navstars_color", "0.8,0.0,0.0").toString());
-	}
-	else
-	{
-		// Oops... no value in config, create a default value
+	if (!conf->contains("navstars/navstars_color"))
 		conf->setValue("navstars/navstars_color", "0.8,0.0,0.0");
-	}
+	
+	QVariant value = conf->value("navstars/navstars_color", "0.8,0.0,0.0");
+	navStarColor = StelUtils::strToVec3f(value.toString());
 }
 
 
