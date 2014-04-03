@@ -82,7 +82,7 @@ public:
 	//! @return 0:inactive 1:activeRealData 2:activeGenericData
 	int getStatus()
 	{
-		return isActive;
+		return status;
 	}
 
 	//! Get peak
@@ -141,7 +141,7 @@ private:
 	QDateTime finish;		//! Latest day for activity
 	QDateTime peak;			//! Day with maximum for activity
 
-	int isActive;		        //! Check if the radiant is active for the current sky date
+	int status;		        //! Check if the radiant is active for the current sky date
 					//! 0=inactive; 1=realData 2=genericData
 
 	void draw(StelPainter &painter);
