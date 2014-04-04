@@ -359,10 +359,7 @@ private:
 	Vec3f fontColor;
 	bool flagShowReport;
 	int fontSize;
-	QPixmap* onPixmap;
-	QPixmap* offPixmap;
-	QPixmap* glowPixmap;
-	StelButton* toolbarButton;
+	StelButton* button;
 	//! @}
 
 	//! @name Cached translated GUI strings.

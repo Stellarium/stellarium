@@ -74,12 +74,7 @@ StelPluginInfo ObservabilityStelPluginInterface::getPluginInfo() const
 
 
 Observability::Observability()
-	: ObserverLoc(0.),
-      flagShowReport(false),
-      onPixmap(NULL),
-      offPixmap(NULL),
-      glowPixmap(NULL),
-      toolbarButton(NULL)
+	: ObserverLoc(0.), flagShowReport(false), button(NULL)
 {
 	setObjectName("Observability");
 	configDialog = new ObservabilityDialog();
@@ -132,13 +127,9 @@ Observability::Observability()
 
 Observability::~Observability()
 {
-	if (glowPixmap!=NULL)
-		delete glowPixmap;
-	if (onPixmap!=NULL)
-		delete onPixmap;
-	if (offPixmap!=NULL)
-		delete offPixmap;
-	delete configDialog;
+	// Shouldn't this be in the deinit()? --BM
+	if (configDialog != NULL)
+		delete configDialog;
 }
 
 void Observability::updateMessageText()
@@ -214,17 +205,13 @@ void Observability::init()
 	          N_("Observability configuration window"),
 	          configDialog, "visible");
 
-	glowPixmap = new QPixmap(":/graphicGui/glow32x32.png");
-	onPixmap = new QPixmap(":/observability/bt_observab_on.png");
-	offPixmap = new QPixmap(":/observability/bt_observab_off.png");
-
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-	toolbarButton = new StelButton(NULL,
-	                               *onPixmap,
-	                               *offPixmap,
-	                               *glowPixmap,
-	                               actionShow);
-	gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
+	button = new StelButton(NULL,
+	                        QPixmap(":/observability/bt_observab_on.png"),
+	                        QPixmap(":/observability/bt_observab_off.png"),
+	                        QPixmap(":/graphicGui/glow32x32.png"),
+	                        actionShow);
+	gui->getButtonBar()->addButton(button, "065-pluginsGroup");
 	
 	updateMessageText();
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()),
