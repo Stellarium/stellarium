@@ -1192,8 +1192,7 @@ void Oculars::toggleCCD(bool show)
 		//TODO: BM: Make this an on-screen message and/or disable the button
 		//if there are no sensors.
 		if (show)
-			qWarning() << "Oculars plugin: Unable to display a sensor boundary:"
-								 << "No sensors or telescopes are defined.";
+			qWarning() << "Oculars plugin: Unable to display a sensor boundary: No sensors or telescopes are defined.";
 		flagShowCCD = false;
 		selectedCCDIndex = -1;
 		show = false;
@@ -1360,16 +1359,17 @@ bool Oculars::isBinocularDefined()
 
 void Oculars::paintCCDBounds()
 {
-	StelCore *core = StelApp::getInstance().getCore();
+	StelCore *core = StelApp::getInstance().getCore();	
 	StelProjector::StelProjectorParams params = core->getCurrentStelProjectorParams();
 	Lens *lens = selectedLensIndex >=0  ? lense[selectedLensIndex] : NULL;
 
+	const StelProjectorP projector = core->getProjection(StelCore::FrameEquinoxEqu);
+	StelPainter painter(projector);
+
 	glDisable(GL_BLEND);
-	glColor3f(0.f,0.f,0.f);
+	painter.setColor(0.f, 0.f, 0.f, 1);
 	glPushMatrix();
-	glTranslated(params.viewportCenter[0] * params.devicePixelsPerPixel,
-					 params.viewportCenter[1] * params.devicePixelsPerPixel,
-					 0.0);
+	glTranslated(params.viewportCenter[0] * params.devicePixelsPerPixel, params.viewportCenter[1] * params.devicePixelsPerPixel, 0.0);
 	glRotated(ccdRotationAngle, 0.0, 0.0, 1.0);
 	GLdouble screenFOV = params.fov;
 
@@ -1377,7 +1377,7 @@ void Oculars::paintCCDBounds()
 	if(selectedCCDIndex != -1) {
 		CCD *ccd = ccds[selectedCCDIndex];
 		if (ccd) {
-			glColor4f(0.77f, 0.14f, 0.16f, 0.5f);
+			painter.setColor(0.77f, 0.14f, 0.16f, 0.5f);
 			Telescope *telescope = telescopes[selectedTelescopeIndex];
 			const double ccdXRatio = ccd->getActualFOVx(telescope, lens) / screenFOV;
 			const double ccdYRatio = ccd->getActualFOVy(telescope, lens) / screenFOV;
@@ -1406,8 +1406,8 @@ void Oculars::paintCCDBounds()
 
 void Oculars::paintCrosshairs()
 {
-	const StelProjectorP projector = StelApp::getInstance().getCore()->getProjection(StelCore::FrameEquinoxEqu);
 	StelCore *core = StelApp::getInstance().getCore();
+	const StelProjectorP projector = core->getProjection(StelCore::FrameEquinoxEqu);
 	StelProjector::StelProjectorParams params = core->getCurrentStelProjectorParams();
 	// Center of screen
 	Vec2i centerScreen(projector->getViewportPosX()+projector->getViewportWidth()/2,
@@ -1468,9 +1468,10 @@ void Oculars::paintOcularMask(const StelCore *core)
 	if (!reticleTexture.isNull()){
 		glPushMatrix(); //Save the current matrix.
 
-		painter.setColor(0.77, 0.14, 0.16, 1.0);
-		glEnable(GL_TEXTURE_2D);
 		glEnable(GL_BLEND);
+		painter.enableTexture2d(true);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		painter.setColor(0.77, 0.14, 0.16, 1.0);		
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
 		reticleTexture->bind();
 
@@ -1487,6 +1488,7 @@ void Oculars::paintOcularMask(const StelCore *core)
 		glPopMatrix();
 	}
 
+	// FIXME: Enable usage QML shaders
 	// XXX: for some reason I cannot get to make the glu functions work when
 	// compiling with Qt5!
 	// XXX: GLU can't work with OpenGL ES --AW
