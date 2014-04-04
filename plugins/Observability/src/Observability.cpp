@@ -461,16 +461,16 @@ void Observability::draw(StelCore* core)
 	int ephHour, ephMinute, ephSecond;  // Local time for selected ephemeris
 
 	if (show_Today)
-	{  // We show ephemeris for today (i.e., rise, set, and transit times).
-		
-		bool hasRisen = false;
+	{
+		// Today's ephemeris (rise, set, and transit times)
 		if (!isStar) 
 		{
 			int type = (isSun) ? 1:0;
 			type += (isMoon) ? 2:0;
 			type += (!isSun && !isMoon) ? 3:0;
 			
-			solvedMoon = calculateSolarSystemEvents(core, type);  // False if fails; True otherwise.
+			// Returns false if the calculation fails...
+			solvedMoon = calculateSolarSystemEvents(core, type);
 			currH = std::abs(24.*(MoonCulm-myJD)/TFrac);
 			transit = MoonCulm-myJD<0.0;
 			if (solvedMoon)
@@ -531,7 +531,7 @@ void Observability::draw(StelCore* core)
 				double2hms(toUnsignedRA(currLocalT+TFrac*settingTime+12.),
 				           ephHour, ephMinute, ephSecond);
 				SetTime = QString("%1:%2").arg(ephHour).arg(ephMinute,2,10,QChar('0')); // Local time for set.
-				
+
 				double2hms(toUnsignedRA(currLocalT-TFrac*risingTime+12.),
 				           ephHour, ephMinute, ephSecond); // Local time for rise.
 				RiseTime = QString("%1:%2").arg(ephHour).arg(ephMinute,2,10,QLatin1Char('0'));
@@ -1330,7 +1330,7 @@ bool Observability::calculateSolarSystemEvents(StelCore* core, int bodyType)
 
 		toRADec(Pos2,ra,dec);
 		Vec3d moonAltAz = core->equinoxEquToAltAz(Pos2, StelCore::RefractionOff);
-		bool hasRisen = moonAltAz[2] > refractedHorizonAlt;
+		hasRisen = moonAltAz[2] > refractedHorizonAlt;
 
 // Initial guesses of rise/set/transit times.
 // They are called 'Moon', but are also used for the Sun or planet:
