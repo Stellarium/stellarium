@@ -159,7 +159,7 @@ private:
 //! Solves Moon/Sun/Planet Rise/Set/Transit times for the current Julian day.
 //! This function updates the variables MoonRise, MoonSet, MoonCulm.
 //! Returns success status.
-//! @param bodyType is 1 for Sun, 2 for Moon, 3 for Solar System object.
+//! @param[in] bodyType is 1 for Sun, 2 for Moon, 3 for Solar System object.
 	bool calculateSolarSystemEvents(StelCore* core, int bodyType);
 
 //! Finds the heliacal rise/set dates of the year for the currently-selected object.
@@ -339,6 +339,9 @@ private:
 
 //! Some booleans to check the kind of source selected and the kind of output to produce.
 	bool isStar, isMoon, isSun, isScreen;
+
+	//! This really shouldn't be handled like this...
+	bool hasRisen;
 	bool configChanged;
 	bool souChanged;
 	//! The last object type for which calculateSolarSystemEvents() was called.
