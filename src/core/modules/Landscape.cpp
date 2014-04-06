@@ -160,27 +160,27 @@ void Landscape::createPolygonalHorizon(const QString& lineFileName, const float 
 			case azDeg_altDeg:
 				az=(180.0f - polyAngleRotateZ - list.at(0).toFloat())*M_PI/180.f;
 				alt=list.at(1).toFloat()*M_PI/180.f;
-			break;
+				break;
 			case azDeg_zdDeg:
 				az=(180.0f - polyAngleRotateZ - list.at(0).toFloat())*M_PI/180.f;
 				alt=(90.0f-list.at(1).toFloat())*M_PI/180.f;
-			break;
+				break;
 			case azRad_altRad:
 				az=(M_PI - polyAngleRotateZ*M_PI/180.f - list.at(0).toFloat());
 				alt=list.at(1).toFloat();
-			break;
+				break;
 			case azRad_zdRad:
 				az=(M_PI - polyAngleRotateZ*M_PI/180.f - list.at(0).toFloat());
 				alt=M_PI/2.f-list.at(1).toFloat();
-			break;
+				break;
 			case azGrad_altGrad:
 				az=(200.0f  - list.at(0).toFloat())*M_PI/200.f    - polyAngleRotateZ*M_PI/180.f;
 				alt=list.at(1).toFloat()*M_PI/200.f;
-			break;
+				break;
 			case azGrad_zdGrad:
 				az=(200.0f  - list.at(0).toFloat())*M_PI/200.f    - polyAngleRotateZ*M_PI/180.f;
 				alt=(100.0f-list.at(1).toFloat())*M_PI/200.f;
-			break;
+				break;
 			default: qWarning() << "invalid coordMode while reading horizon line.";
 		}
 
