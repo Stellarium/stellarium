@@ -440,11 +440,11 @@ SsoElements MpcImportWindow::readElementsFromString (QString elements)
 
 	switch (importType)
 	{
-	case MpcComets:
-		return ssoManager->readMpcOneLineCometElements(elements);
-	case MpcMinorPlanets:
-	default:
-		return ssoManager->readMpcOneLineMinorPlanetElements(elements);
+		case MpcComets:
+			return ssoManager->readMpcOneLineCometElements(elements);
+		case MpcMinorPlanets:
+		default:
+			return ssoManager->readMpcOneLineMinorPlanetElements(elements);
 	}
 }
 
@@ -454,11 +454,11 @@ QList<SsoElements> MpcImportWindow::readElementsFromFile(ImportType type, QStrin
 
 	switch (type)
 	{
-	case MpcComets:
-		return ssoManager->readMpcOneLineCometElementsFromFile(filePath);
-	case MpcMinorPlanets:
-	default:
-		return ssoManager->readMpcOneLineMinorPlanetElementsFromFile(filePath);
+		case MpcComets:
+			return ssoManager->readMpcOneLineCometElementsFromFile(filePath);
+		case MpcMinorPlanets:
+		default:
+			return ssoManager->readMpcOneLineMinorPlanetElementsFromFile(filePath);
 	}
 }
 

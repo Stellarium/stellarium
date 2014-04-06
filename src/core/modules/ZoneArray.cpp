@@ -166,70 +166,70 @@ ZoneArray* ZoneArray::create(const QString& catalogFilePath, bool use_mmap)
 
 	switch (type)
 	{
-	case 0:
-		if (major > MAX_MAJOR_FILE_VERSION)
-		{
-			dbStr += "warning - unsupported version ";
-		}
-		else
-		{
-			// When this assertion fails you must redefine Star1
-			// for your compiler.
-			// Because your compiler does not pack the data,
-			// which is crucial for this application.
-			Q_ASSERT(sizeof(Star1) == 28);
-			rval = new HipZoneArray(file, byte_swap, use_mmap, level, mag_min, mag_range, mag_steps);
-			if (rval == 0)
+		case 0:
+			if (major > MAX_MAJOR_FILE_VERSION)
 			{
-				dbStr += "error - no memory ";
+				dbStr += "warning - unsupported version ";
 			}
-		}
-		break;
-	case 1:
-		if (major > MAX_MAJOR_FILE_VERSION)
-		{
-			dbStr += "warning - unsupported version ";
-		}
-		else
-		{
-			// When this assertion fails you must redefine Star2
-			// for your compiler.
-			// Because your compiler does not pack the data,
-			// which is crucial for this application.
+			else
+			{
+				// When this assertion fails you must redefine Star1
+				// for your compiler.
+				// Because your compiler does not pack the data,
+				// which is crucial for this application.
+				Q_ASSERT(sizeof(Star1) == 28);
+				rval = new HipZoneArray(file, byte_swap, use_mmap, level, mag_min, mag_range, mag_steps);
+				if (rval == 0)
+				{
+					dbStr += "error - no memory ";
+				}
+			}
+			break;
+		case 1:
+			if (major > MAX_MAJOR_FILE_VERSION)
+			{
+				dbStr += "warning - unsupported version ";
+			}
+			else
+			{
+				// When this assertion fails you must redefine Star2
+				// for your compiler.
+				// Because your compiler does not pack the data,
+				// which is crucial for this application.
 #ifndef _MSC_BUILD
-			Q_ASSERT(sizeof(Star2) == 10);
+				Q_ASSERT(sizeof(Star2) == 10);
 #endif
-			rval = new SpecialZoneArray<Star2>(file, byte_swap, use_mmap, level, mag_min, mag_range, mag_steps);
-			if (rval == 0)
-			{
-				dbStr += "error - no memory ";
+				rval = new SpecialZoneArray<Star2>(file, byte_swap, use_mmap, level, mag_min, mag_range, mag_steps);
+				if (rval == 0)
+				{
+					dbStr += "error - no memory ";
+				}
 			}
-		}
-		break;
-	case 2:
-		if (major > MAX_MAJOR_FILE_VERSION)
-		{
-			dbStr += "warning - unsupported version ";
-		}
-		else
-		{
-			// When this assertion fails you must redefine Star3
-			// for your compiler.
-			// Because your compiler does not pack the data,
-			// which is crucial for this application.
+			break;
+		case 2:
+			if (major > MAX_MAJOR_FILE_VERSION)
+			{
+				dbStr += "warning - unsupported version ";
+			}
+			else
+			{
+				// When this assertion fails you must redefine Star3
+				// for your compiler.
+				// Because your compiler does not pack the data,
+				// which is crucial for this application.
 #ifndef _MSC_BUILD
-			Q_ASSERT(sizeof(Star3) == 6);
+				Q_ASSERT(sizeof(Star3) == 6);
 #endif
-			rval = new SpecialZoneArray<Star3>(file, byte_swap, use_mmap, level, mag_min, mag_range, mag_steps);
-			if (rval == 0)
-			{
-				dbStr += "error - no memory ";
+				rval = new SpecialZoneArray<Star3>(file, byte_swap, use_mmap, level, mag_min, mag_range, mag_steps);
+				if (rval == 0)
+				{
+					dbStr += "error - no memory ";
+				}
 			}
-		}
-		break;
-	default:
-		dbStr += "error - bad file type ";
-		break;
+			break;
+		default:
+			dbStr += "error - bad file type ";
+			break;
 	}
 	if (rval && rval->isInitialized())
 	{

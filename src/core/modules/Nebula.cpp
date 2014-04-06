@@ -168,7 +168,8 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints)
 	Vec3f col(circleColor[0]*lum*hintsBrightness, circleColor[1]*lum*hintsBrightness, circleColor[2]*lum*hintsBrightness);
 
 	sPainter.setColor(col[0], col[1], col[2], 1);
-	switch (nType) {
+	switch (nType)
+	{
 		case NebGx:
 			Nebula::texGalaxy->bind();
 			break;
