@@ -35,6 +35,8 @@
 #include <QFontMetrics>
 #include <QSettings>
 #include <QPixmap>
+#include <QPair>
+#include <QMetaEnum>
 #include <cmath>
 
 StelModule* PointerCoordinatesStelPluginInterface::getStelModule() const
@@ -120,9 +122,7 @@ void PointerCoordinates::draw(StelCore *core)
 	StelUtils::rectToSphe(&ra_j2000,&dec_j2000,mousePosition); // Calculate RA/DE (J2000.0) and show it...
 	QString coordsText = QString("%1/%2").arg(StelUtils::radToHmsStr(ra_j2000, true)).arg(StelUtils::radToDmsStr(dec_j2000, true));
 
-	QFontMetrics fm(font);
-	QSize fs = fm.size(Qt::TextSingleLine, coordsText);	
-	sPainter.drawText(3*gui->getSkyGui()->getSkyGuiWidth()/4 - fs.width()/2, gui->getSkyGui()->getSkyGuiHeight() - fs.height()*1.5, coordsText);
+	sPainter.drawText(getCoordinatesPlace(coordsText).first, getCoordinatesPlace(coordsText).second, coordsText);
 }
 
 void PointerCoordinates::enableCoordinates(bool b)
@@ -133,7 +133,7 @@ void PointerCoordinates::enableCoordinates(bool b)
 double PointerCoordinates::getCallOrder(StelModuleActionName actionName) const
 {
 	if (actionName==StelModule::ActionDraw)
-		return StelApp::getInstance().getModuleMgr().getModule("ConstellationMgr")->getCallOrder(actionName)+10.;
+		return StelApp::getInstance().getModuleMgr().getModule("LandscapeMgr")->getCallOrder(actionName)+10.;
 	return 0;
 }
 
@@ -169,6 +169,7 @@ void PointerCoordinates::loadConfiguration(void)
 	textColor = StelUtils::strToVec3f(conf->value("text_color", "1,0.5,0").toString());
 	setFontSize(conf->value("font_size", 14).toInt());
 	flagShowCoordinatesButton = conf->value("flag_show_button", true).toBool();
+	setCurrentCoordinatesPlaceKey(conf->value("current_displaying_place", "TopRight").toString());
 
 	conf->endGroup();
 }
@@ -179,6 +180,7 @@ void PointerCoordinates::saveConfiguration(void)
 
 	conf->setValue("enable_at_startup", getFlagEnableAtStartup());
 	conf->setValue("flag_show_button", getFlagShowCoordinatesButton());
+	conf->setValue("current_displaying_place", getCurrentCoordinatesPlaceKey());
 	//conf->setValue("text_color", "1,0.5,0");
 	conf->setValue("font_size", getFontSize());
 
@@ -201,5 +203,48 @@ void PointerCoordinates::setFlagShowCoordinatesButton(bool b)
 		gui->getButtonBar()->hideButton("actionShow_MousePointer_Coordinates");
 	}
 	flagShowCoordinatesButton = b;
+}
+
+// Set the current place of the string with coordinates from its key
+void PointerCoordinates::setCurrentCoordinatesPlaceKey(QString key)
+{
+	const QMetaEnum& en = metaObject()->enumerator(metaObject()->indexOfEnumerator("CoordinatesPlace"));
+	CoordinatesPlace coordPlace = (CoordinatesPlace)en.keyToValue(key.toLatin1().data());
+	if (coordPlace<0)
+	{
+		qWarning() << "Unknown coordinates place: " << key << "setting \"TopRight\" instead";
+		coordPlace = TopRight;
+	}
+	setCurrentCoordinatesPlace(coordPlace);
+}
+
+//Get the current place of the string with coordinates
+QString PointerCoordinates::getCurrentCoordinatesPlaceKey() const
+{
+	return metaObject()->enumerator(metaObject()->indexOfEnumerator("CoordinatesPlace")).key(currentPlace);
+}
+
+QPair<int, int> PointerCoordinates::getCoordinatesPlace(QString text)
+{
+	int x = 0, y = 0;
+	float coeff = 1.5;
+	QFontMetrics fm(font);
+	QSize fs = fm.size(Qt::TextSingleLine, text);
+	switch(getCurrentCoordinatesPlace())
+	{
+		case TopCenter:
+			x = gui->getSkyGui()->getSkyGuiWidth()/2 - fs.width()/2;
+			y = gui->getSkyGui()->getSkyGuiHeight() - fs.height()*coeff;
+			break;
+		case TopRight:
+			x = 3*gui->getSkyGui()->getSkyGuiWidth()/4 - fs.width()/2;
+			y = gui->getSkyGui()->getSkyGuiHeight() - fs.height()*coeff;
+			break;
+		case RightBottomCorner:
+			x = gui->getSkyGui()->getSkyGuiWidth() - fs.width() - 10*coeff;
+			y = fs.height();
+			break;
+	}
+	return qMakePair(x, y);
 }
 

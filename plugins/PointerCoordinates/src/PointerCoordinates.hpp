@@ -25,6 +25,7 @@
 
 #include <QFont>
 #include <QString>
+#include <QPair>
 
 class QPixmap;
 class StelButton;
@@ -33,11 +34,22 @@ class PointerCoordinatesWindow;
 class PointerCoordinates : public StelModule
 {
 	Q_OBJECT
+	Q_ENUMS(CoordinatesPlace)
 	Q_PROPERTY(bool enabled
 		   READ isEnabled
 		   WRITE enableCoordinates)
 
 public:
+	//! @enum CoordinatesPlace
+	//! Available places of string with coordinates
+	enum CoordinatesPlace
+	{
+		TopCenter,		//!< The top center of the screen
+		TopRight,		//!< In center of the top right half of the screen
+		RightBottomCorner	//!< The right bottom corner of the screen
+	};
+
+
 	PointerCoordinates();
 	virtual ~PointerCoordinates();
 
@@ -79,6 +91,8 @@ public:
 		return flagShowCoordinatesButton;
 	}
 
+	QPair<int, int> getCoordinatesPlace(QString text);
+
 public slots:
 	//! Enable plugin usage
 	void enableCoordinates(bool b);
@@ -95,10 +109,28 @@ public slots:
 	//! Display plugin button on toolbar
 	void setFlagShowCoordinatesButton(bool b);
 
+	//! Set the current place of the string with coordinates
+	void setCurrentCoordinatesPlace(CoordinatesPlace place)
+	{
+		currentPlace = place;
+	}
+	//! Get the current place of the string with coordinates
+	CoordinatesPlace getCurrentCoordinatesPlace() const
+	{
+		return currentPlace;
+	}
+	//! Get the current place of the string with coordinates
+	QString getCurrentCoordinatesPlaceKey(void) const;
+	//! Set the current place of the string with coordinates from its key
+	void setCurrentCoordinatesPlaceKey(QString key);
+
 private:
 	PointerCoordinatesWindow* mainWindow;
 	QSettings* conf;
 	StelGui* gui;
+
+	// The current place for string with coordinates
+	CoordinatesPlace currentPlace;
 
 	QFont font;
 	bool flagShowCoordinates;
