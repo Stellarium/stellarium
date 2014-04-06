@@ -42,6 +42,7 @@ void PointerCoordinatesWindow::retranslate()
 	{
 		ui->retranslateUi(dialog);
 		updateAboutText();
+		populateCoordinatesPlacesList();
 	}
 }
 
@@ -58,6 +59,17 @@ void PointerCoordinatesWindow::createDialogContent()
 	connect(ui->checkBoxEnableAtStartup, SIGNAL(clicked(bool)), coord, SLOT(setFlagEnableAtStartup(bool)));
 	connect(ui->spinBoxFontSize, SIGNAL(valueChanged(int)), coord, SLOT(setFontSize(int)));
 	connect(ui->checkBoxShowButton, SIGNAL(clicked(bool)), coord, SLOT(setFlagShowCoordinatesButton(bool)));
+
+	// Place of the string with coordinates
+	populateCoordinatesPlacesList();
+	int idx = ui->placeComboBox->findData(coord->getCurrentCoordinatesPlaceKey(), Qt::UserRole, Qt::MatchCaseSensitive);
+	if (idx==-1)
+	{
+		// Use TopRight as default
+		idx = ui->placeComboBox->findData(QVariant("TopRight"), Qt::UserRole, Qt::MatchCaseSensitive);
+	}
+	ui->placeComboBox->setCurrentIndex(idx);
+	connect(ui->placeComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(setCoordinatesPlace(int)));
 
 	connect(ui->pushButtonSave, SIGNAL(clicked()), this, SLOT(saveCoordinatesSettings()));
 	connect(ui->pushButtonReset, SIGNAL(clicked()), this, SLOT(resetCoordinatesSettings()));
@@ -88,4 +100,33 @@ void PointerCoordinatesWindow::resetCoordinatesSettings()
 {
 	coord->restoreDefaultConfiguration();
 	populateValues();
+}
+
+void PointerCoordinatesWindow::populateCoordinatesPlacesList()
+{
+	Q_ASSERT(ui->placeComboBox);
+
+	QComboBox* places = ui->placeComboBox;
+
+	//Save the current selection to be restored later
+	places->blockSignals(true);
+	int index = places->currentIndex();
+	QVariant selectedPlaceId = places->itemData(index);
+	places->clear();
+	//For each algorithm, display the localized name and store the key as user
+	//data. Unfortunately, there's no other way to do this than with a cycle.
+	places->addItem(q_("The top center of the screen"), "TopCenter");
+	places->addItem(q_("In center of the top right half of the screen"), "TopRight");
+	places->addItem(q_("The right bottom corner of the screen"), "RightBottomCorner");
+
+	//Restore the selection
+	index = places->findData(selectedPlaceId, Qt::UserRole, Qt::MatchCaseSensitive);
+	places->setCurrentIndex(index);
+	places->blockSignals(false);
+}
+
+void PointerCoordinatesWindow::setCoordinatesPlace(int placeID)
+{
+	QString currentPlaceID = ui->placeComboBox->itemData(placeID).toString();
+	coord->setCurrentCoordinatesPlaceKey(currentPlaceID);
 }

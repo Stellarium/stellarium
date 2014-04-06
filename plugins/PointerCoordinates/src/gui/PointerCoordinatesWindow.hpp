@@ -54,6 +54,9 @@ private slots:
 	void saveCoordinatesSettings();
 	void resetCoordinatesSettings();
 
+	void populateCoordinatesPlacesList();
+	void setCoordinatesPlace(int placeID);
+
 
 };
 
