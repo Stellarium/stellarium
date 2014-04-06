@@ -33,7 +33,7 @@ class EquationOfTimeWindow;
 class EquationOfTime : public StelModule
 {
 	Q_OBJECT
-	Q_PROPERTY(bool enabled
+	Q_PROPERTY(bool showEOT
 		   READ isEnabled
 		   WRITE enableEquationOfTime)
 
@@ -66,28 +66,46 @@ public:
 	double getSolutionEquationOfTime(const double JDay) const;
 
 	//! Is plugin enabled?
-	bool isEnabled() const {return flagShowSolutionEquationOfTime;}
+	bool isEnabled() const
+	{
+		return flagShowSolutionEquationOfTime;
+	}
 
 	//! Get font size for messages
-	int getFontSize(void) { return fontSize; }
+	int getFontSize(void)
+	{
+		return fontSize;
+	}
 	//! Get status of usage minutes and seconds for value of equation
-	bool getFlagMsFormat(void) { return flagUseMsFormat; }
+	bool getFlagMsFormat(void) const
+	{
+		return flagUseMsFormat;
+	}
 	//! Get status of usage inverted values for equation of time
-	bool getFlagInvertedValue(void) { return flagUseInvertedValue; }
-	bool getFlagEnableAtStartup(void) { return flagEnableAtStartup; }
-	bool getFlagShowEOTButton(void) { return flagShowEOTButton; }
+	bool getFlagInvertedValue(void) const
+	{
+		return flagUseInvertedValue;
+	}
+	bool getFlagEnableAtStartup(void) const
+	{
+		return flagEnableAtStartup;
+	}
+	bool getFlagShowEOTButton(void) const
+	{
+		return flagShowEOTButton;
+	}
 
 public slots:
 	//! Enable plugin usage
 	void enableEquationOfTime(bool b);
 	//! Enable usage inverted value for equation of time (switch sign of equation)
-	void setFlagInvertedValue(bool b) { flagUseInvertedValue=b; }
+	void setFlagInvertedValue(bool b);
 	//! Enable usage minutes and seconds for value
-	void setFlagMsFormat(bool b) { flagUseMsFormat=b; }
+	void setFlagMsFormat(bool b);
 	//! Enable plugin usage at startup
-	void setFlagEnableAtStartup(bool b) { flagEnableAtStartup=b; }
+	void setFlagEnableAtStartup(bool b);
 	//! Set font size for message
-	void setFontSize(int size) { fontSize=size; }
+	void setFontSize(int size);
 	//! Display plugin button on toolbar
 	void setFlagShowEOTButton(bool b);
 

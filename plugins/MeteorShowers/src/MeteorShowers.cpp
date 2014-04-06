@@ -299,11 +299,7 @@ void MeteorShowers::drawMarker(StelCore* core, StelPainter& painter)
 	{
 		ms->updateCurrentData(skyDate);
 
-		bool flag=true;
-		if (ms->getStatus()==0 && getFlagActiveRadiant())
-			flag = false;
-
-		if(ms && ms->initialized && flag)
+		if(ms && ms->initialized && ms->active)
 			ms->draw(painter);
 	}
 	glDisable(GL_TEXTURE_2D);
@@ -425,7 +421,7 @@ void MeteorShowers::updateActiveInfo(void)
 		if(ms && ms->initialized)
 		{
 			//if the meteor shower is active, get data
-			if(ms->isActive)
+			if(ms->active)
 			{
 				//First, check if there is already data about the constellation in "activeInfo"
 				//The var "index" will be updated to show the correct place do put the new information
@@ -449,7 +445,7 @@ void MeteorShowers::updateActiveInfo(void)
 					newData.start = ms->start;
 					newData.finish = ms->finish;
 					newData.peak = ms->peak;
-					newData.status = ms->isActive;
+					newData.status = ms->status;
 					activeInfo.append(newData);
 				}
 				else //just overwrites
@@ -459,7 +455,7 @@ void MeteorShowers::updateActiveInfo(void)
 					activeInfo[index].start = ms->start;
 					activeInfo[index].finish = ms->finish;
 					activeInfo[index].peak = ms->peak;
-					activeInfo[index].status = ms->isActive;
+					activeInfo[index].status = ms->status;
 				}
 			}
 		}

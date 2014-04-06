@@ -31,7 +31,6 @@
 #include "CompassMarks.hpp"
 #include "StelGui.hpp"
 #include "StelGuiItems.hpp"
-#include "StelIniParser.hpp"
 
 #include <QDebug>
 #include <QPixmap>
@@ -88,9 +87,9 @@ void CompassMarks::init()
 {
 	// Because the plug-in has no configuration GUI, users rely on what's
 	// written in the configuration file to know what can be configured.
-	QSettings* conf = StelApp::getInstance().getSettings();
+	conf = StelApp::getInstance().getSettings();
 	Q_ASSERT(conf);
-	if (!conf->contains("CompassMarks"))
+	if (!conf->childGroups().contains("CompassMarks"))
 		restoreDefaultConfiguration();
 
 	loadConfiguration();
@@ -190,9 +189,7 @@ void CompassMarks::setCompassMarks(bool b)
 
 void CompassMarks::loadConfiguration()
 {
-	QSettings* conf = StelApp::getInstance().getSettings();
 	Q_ASSERT(conf);
-
 	conf->beginGroup("CompassMarks");
 	markColor = StelUtils::strToVec3f(conf->value("mark_color", "1,0,0").toString());
 	font.setPixelSize(conf->value("font_size", 10).toInt());
@@ -202,9 +199,7 @@ void CompassMarks::loadConfiguration()
 
 void CompassMarks::saveConfiguration()
 {
-	QSettings* conf = StelApp::getInstance().getSettings();
 	Q_ASSERT(conf);
-
 	conf->beginGroup("CompassMarks");
 	conf->setValue("font_size", font.pixelSize());
 	conf->setValue("enable_at_startup", displayedAtStartup);
@@ -214,9 +209,7 @@ void CompassMarks::saveConfiguration()
 
 void CompassMarks::restoreDefaultConfiguration()
 {
-	QSettings* conf = StelApp::getInstance().getSettings();
 	Q_ASSERT(conf);
-
 	// Remove the whole section from the configuration file
 	conf->remove("CompassMarks");
 	// Load the default values...
