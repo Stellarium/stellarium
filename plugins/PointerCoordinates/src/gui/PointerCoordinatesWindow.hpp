@@ -1,5 +1,5 @@
 /*
- * Coordinates plug-in for Stellarium
+ * Pointer Coordinates plug-in for Stellarium
  *
  * Copyright (C) 2014 Alexander Wolf
  *
@@ -17,25 +17,25 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef _COORDINATES_WINDOW_HPP_
-#define _COORDINATES_WINDOW_HPP_
+#ifndef _POINTER_COORDINATES_WINDOW_HPP_
+#define _POINTER_COORDINATES_WINDOW_HPP_
 
 #include "StelDialog.hpp"
 
 #include <QString>
 #include <QDoubleSpinBox>
 
-class Ui_coordinatesWindowForm;
-class Coordinates;
+class Ui_pointerCoordinatesWindowForm;
+class PointerCoordinates;
 
-//! Main window of the Coordinates plug-in.
-class CoordinatesWindow : public StelDialog
+//! Main window of the Pointer Coordinates plug-in.
+class PointerCoordinatesWindow : public StelDialog
 {
 	Q_OBJECT
 
 public:
-	CoordinatesWindow();
-	~CoordinatesWindow();
+	PointerCoordinatesWindow();
+	~PointerCoordinatesWindow();
 
 public slots:
 	void retranslate();
@@ -44,8 +44,8 @@ protected:
 	void createDialogContent();
 
 private:
-	Ui_coordinatesWindowForm* ui;
-	Coordinates* coord;
+	Ui_pointerCoordinatesWindowForm* ui;
+	PointerCoordinates* coord;
 
 	void updateAboutText();
 	void populateValues();
@@ -58,4 +58,4 @@ private slots:
 };
 
 
-#endif /* _COORDINATES_WINDOW_HPP_ */
+#endif /* _POINTER_COORDINATES_WINDOW_HPP_ */

@@ -1,5 +1,5 @@
 /*
- * Coordinates plug-in for Stellarium
+ * Pointer Coordinates plug-in for Stellarium
  *
  * Copyright (C) 2014 Alexander Wolf
  *
@@ -29,79 +29,74 @@
 #include "StelGuiItems.hpp"
 #include "StelObjectMgr.hpp"
 #include "StelUtils.hpp"
-#include "Coordinates.hpp"
-#include "CoordinatesWindow.hpp"
+#include "PointerCoordinates.hpp"
+#include "PointerCoordinatesWindow.hpp"
 
 #include <QFontMetrics>
 #include <QSettings>
 #include <QPixmap>
 #include <cmath>
 
-StelModule* CoordinatesStelPluginInterface::getStelModule() const
+StelModule* PointerCoordinatesStelPluginInterface::getStelModule() const
 {
-	return new Coordinates();
+	return new PointerCoordinates();
 }
 
-StelPluginInfo CoordinatesStelPluginInterface::getPluginInfo() const
+StelPluginInfo PointerCoordinatesStelPluginInterface::getPluginInfo() const
 {
 	// Allow to load the resources when used as a static plugin
-	Q_INIT_RESOURCE(Coordinates);
+	Q_INIT_RESOURCE(PointerCoordinates);
 
 	StelPluginInfo info;
-	info.id = "Coordinates";
-	info.displayedName = N_("Coordinates");
+	info.id = "PointerCoordinates";
+	info.displayedName = N_("Pointer Coordinates");
 	info.authors = "Alexander Wolf";
 	info.contact = "http://stellarium.org";
 	info.description = N_("This plugin shows the coordinates of the mouse pointer.");
-	info.version = COORDINATES_PLUGIN_VERSION;
+	info.version = POINTERCOORDINATES_PLUGIN_VERSION;
 	return info;
 }
 
-Coordinates::Coordinates()
+PointerCoordinates::PointerCoordinates()
 	: flagShowCoordinates(false),
 	  toolbarButton(NULL)
 {
-	setObjectName("Coordinates");
-	mainWindow = new CoordinatesWindow();	
+	setObjectName("PointerCoordinates");
+	mainWindow = new PointerCoordinatesWindow();
 }
 
-Coordinates::~Coordinates()
+PointerCoordinates::~PointerCoordinates()
 {
 	delete mainWindow;
 }
 
-void Coordinates::init()
+void PointerCoordinates::init()
 {
 	StelApp &app = StelApp::getInstance();
 	conf = app.getSettings();
 	gui = dynamic_cast<StelGui*>(app.getGui());
 
-	if (!conf->childGroups().contains("coordinates"))
+	if (!conf->childGroups().contains("PointerCoordinates"))
 	{
-		qDebug() << "Coordinates: no coordinates section exists in main config file - creating with defaults";
-		restoreDefaultConfigIni();
+		qDebug() << "PointerCoordinates: no coordinates section exists in main config file - creating with defaults";
+		restoreDefaultConfiguration();
 	}
 
 	// populate settings from main config file.
-	readSettingsFromConfig();
+	loadConfiguration();
 
-	addAction("actionShow_MousePointer_Coordinates", N_("Coordinates"), N_("Show coordinates of the mouse pointer"), "enabled", "");
+	addAction("actionShow_MousePointer_Coordinates", N_("Pointer Coordinates"), N_("Show equatorial coordinates (J2000.0) of the mouse pointer"), "enabled", "");
 
 	enableCoordinates(getFlagEnableAtStartup());
 	setFlagShowCoordinatesButton(flagShowCoordinatesButton);
-
-	// Initialize the message strings and make sure they are translated when
-	// the language changes.
-	updateMessageText();
-	connect(&app, SIGNAL(languageChanged()), this, SLOT(updateMessageText()));
 }
 
-void Coordinates::deinit()
+void PointerCoordinates::deinit()
 {
 	//
 }
 
-void Coordinates::draw(StelCore *core)
+void PointerCoordinates::draw(StelCore *core)
 {
 	if (!isEnabled())
 		return;
@@ -126,23 +121,23 @@ void Coordinates::draw(StelCore *core)
 	QString coordsText = QString("%1/%2").arg(StelUtils::radToHmsStr(ra_j2000, true)).arg(StelUtils::radToDmsStr(dec_j2000, true));
 
 	QFontMetrics fm(font);
-	QSize fs = fm.size(Qt::TextSingleLine, coordsText);
-	sPainter.drawText(gui->getSkyGui()->getSkyGuiWidth()/2 - fs.width()/2, gui->getSkyGui()->getSkyGuiHeight() - fs.height()*1.5, coordsText);
+	QSize fs = fm.size(Qt::TextSingleLine, coordsText);	
+	sPainter.drawText(3*gui->getSkyGui()->getSkyGuiWidth()/4 - fs.width()/2, gui->getSkyGui()->getSkyGuiHeight() - fs.height()*1.5, coordsText);
 }
 
-void Coordinates::enableCoordinates(bool b)
+void PointerCoordinates::enableCoordinates(bool b)
 {
 	flagShowCoordinates = b;
 }
 
-double Coordinates::getCallOrder(StelModuleActionName actionName) const
+double PointerCoordinates::getCallOrder(StelModuleActionName actionName) const
 {
 	if (actionName==StelModule::ActionDraw)
 		return StelApp::getInstance().getModuleMgr().getModule("ConstellationMgr")->getCallOrder(actionName)+10.;
 	return 0;
 }
 
-bool Coordinates::configureGui(bool show)
+bool PointerCoordinates::configureGui(bool show)
 {
 	if (show)
 	{
@@ -152,30 +147,23 @@ bool Coordinates::configureGui(bool show)
 	return true;
 }
 
-void Coordinates::restoreDefaults(void)
+void PointerCoordinates::restoreDefaultConfiguration(void)
 {
-	restoreDefaultConfigIni();
-	readSettingsFromConfig();
-}
-
-void Coordinates::restoreDefaultConfigIni(void)
-{
-	conf->beginGroup("coordinates");
-
-	// delete all existing Coordinates settings...
-	conf->remove("");
-
-	conf->setValue("enable_at_startup", false);
-	conf->setValue("flag_show_button", true);
+	// Remove the whole section from the configuration file
+	conf->remove("PointerCoordinates");
+	// Load the default values...
+	loadConfiguration();
+	// ... then save them.
+	saveConfiguration();
+	// But this doesn't save the color, so...
+	conf->beginGroup("PointerCoordinates");
 	conf->setValue("text_color", "1,0.5,0");
-	conf->setValue("font_size", 14);
-
 	conf->endGroup();
 }
 
-void Coordinates::readSettingsFromConfig(void)
+void PointerCoordinates::loadConfiguration(void)
 {
-	conf->beginGroup("coordinates");
+	conf->beginGroup("PointerCoordinates");
 
 	setFlagEnableAtStartup(conf->value("enable_at_startup", false).toBool());
 	textColor = StelUtils::strToVec3f(conf->value("text_color", "1,0.5,0").toString());
@@ -185,9 +173,9 @@ void Coordinates::readSettingsFromConfig(void)
 	conf->endGroup();
 }
 
-void Coordinates::saveSettingsToConfig(void)
+void PointerCoordinates::saveConfiguration(void)
 {
-	conf->beginGroup("coordinates");
+	conf->beginGroup("PointerCoordinates");
 
 	conf->setValue("enable_at_startup", getFlagEnableAtStartup());
 	conf->setValue("flag_show_button", getFlagShowCoordinatesButton());
@@ -197,19 +185,14 @@ void Coordinates::saveSettingsToConfig(void)
 	conf->endGroup();
 }
 
-void Coordinates::updateMessageText()
-{
-	messageCoordinates = q_("");
-}
-
-void Coordinates::setFlagShowCoordinatesButton(bool b)
+void PointerCoordinates::setFlagShowCoordinatesButton(bool b)
 {
 	if (b==true) {
 		if (toolbarButton==NULL) {
 			// Create the button
 			toolbarButton = new StelButton(NULL,
-						       QPixmap(":/Coordinates/bt_Coordinates_On.png"),
-						       QPixmap(":/Coordinates/bt_Coordinates_Off.png"),
+						       QPixmap(":/PointerCoordinates/bt_PointerCoordinates_On.png"),
+						       QPixmap(":/PointerCoordinates/bt_PointerCoordinates_Off.png"),
 						       QPixmap(":/graphicGui/glow32x32.png"),
 						       "actionShow_MousePointer_Coordinates");
 		}

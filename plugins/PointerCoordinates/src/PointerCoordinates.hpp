@@ -1,5 +1,5 @@
 /*
- * Coordinates plug-in for Stellarium
+ * Pointer Coordinates plug-in for Stellarium
  *
  * Copyright (C) 2014 Alexander Wolf
  *
@@ -17,8 +17,8 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef _COORDINATES_HPP_
-#define _COORDINATES_HPP_
+#ifndef _POINTERCOORDINATES_HPP_
+#define _POINTERCOORDINATES_HPP_
 
 #include "StelGui.hpp"
 #include "StelModule.hpp"
@@ -28,9 +28,9 @@
 
 class QPixmap;
 class StelButton;
-class CoordinatesWindow;
+class PointerCoordinatesWindow;
 
-class Coordinates : public StelModule
+class PointerCoordinates : public StelModule
 {
 	Q_OBJECT
 	Q_PROPERTY(bool enabled
@@ -38,8 +38,8 @@ class Coordinates : public StelModule
 		   WRITE enableCoordinates)
 
 public:
-	Coordinates();
-	virtual ~Coordinates();
+	PointerCoordinates();
+	virtual ~PointerCoordinates();
 
 	virtual void init();
 	virtual void deinit();
@@ -48,16 +48,16 @@ public:
 	virtual double getCallOrder(StelModuleActionName actionName) const;
 	virtual bool configureGui(bool show);
 
-	//! Set up the plugin with default values.  This means clearing out the Pulsars section in the
+	//! Set up the plugin with default values.  This means clearing out the PointerCoordinates section in the
 	//! main config.ini (if one already exists), and populating it with default values.
-	void restoreDefaults(void);
+	void restoreDefaultConfiguration(void);
 
 	//! Read (or re-read) settings from the main config file.  This will be called from init and also
 	//! when restoring defaults (i.e. from the configuration dialog / restore defaults button).
-	void readSettingsFromConfig(void);
+	void loadConfiguration(void);
 
 	//! Save the settings to the main configuration file.
-	void saveSettingsToConfig(void);
+	void saveConfiguration(void);
 
 	//! Is plugin enabled?
 	bool isEnabled() const
@@ -95,14 +95,8 @@ public slots:
 	//! Display plugin button on toolbar
 	void setFlagShowCoordinatesButton(bool b);
 
-private slots:
-	void updateMessageText();
-
 private:
-	// if existing, delete coordinates section in main config.ini, then create with default values
-	void restoreDefaultConfigIni(void);
-
-	CoordinatesWindow* mainWindow;	
+	PointerCoordinatesWindow* mainWindow;
 	QSettings* conf;
 	StelGui* gui;
 
@@ -110,7 +104,6 @@ private:
 	bool flagShowCoordinates;
 	bool flagEnableAtStartup;
 	bool flagShowCoordinatesButton;
-	QString messageCoordinates;
 	Vec3f textColor;
 	Vec3d coordinatesPoint;
 	int fontSize;
@@ -122,7 +115,7 @@ private:
 #include "StelPluginInterface.hpp"
 
 //! This class is used by Qt to manage a plug-in interface
-class CoordinatesStelPluginInterface : public QObject, public StelPluginInterface
+class PointerCoordinatesStelPluginInterface : public QObject, public StelPluginInterface
 {
 	Q_OBJECT
 	Q_PLUGIN_METADATA(IID "stellarium.StelGuiPluginInterface/1.0")
@@ -132,4 +125,4 @@ public:
 	virtual StelPluginInfo getPluginInfo() const;
 };
 
-#endif /* _COORDINATES_HPP_ */
+#endif /* _POINTERCOORDINATES_HPP_ */
