@@ -292,20 +292,20 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 		//TODO: Move to a more prominent place.
 		switch (visibility)
 		{
-		case RADAR_SUN:
-			oss << q_("The satellite and the observer are in sunlight.") << "<br/>";
-			break;
-		case VISIBLE:
-			oss << q_("The satellite is visible.") << "<br/>";
-			break;
-		case RADAR_NIGHT:
-			oss << q_("The satellite is eclipsed.") << "<br/>";
-			break;
-		case NOT_VISIBLE:
-			oss << q_("The satellite is not visible") << "<br/>";
-			break;
-		default:
-			break;
+			case RADAR_SUN:
+				oss << q_("The satellite and the observer are in sunlight.") << "<br/>";
+				break;
+			case VISIBLE:
+				oss << q_("The satellite is visible.") << "<br/>";
+				break;
+			case RADAR_NIGHT:
+				oss << q_("The satellite is eclipsed.") << "<br/>";
+				break;
+			case NOT_VISIBLE:
+				oss << q_("The satellite is not visible") << "<br/>";
+				break;
+			default:
+				break;
 		}
 
 		if (comms.size() > 0)

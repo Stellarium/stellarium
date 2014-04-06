@@ -127,25 +127,25 @@ QString TuiNodeDateTime::getDisplayText()
 	{
 		switch (editingPart)
 		{
-		case 0:
-			formatString = ":  >%1<-%2-%3 %4:%5:%6 UTC"; //Year
-			break;
-		case 1:
-			formatString = ":  %1->%2<-%3 %4:%5:%6 UTC"; //Month
-			break;
-		case 2:
-			formatString = ":  %1-%2->%3< %4:%5:%6 UTC"; //Day
-			break;
-		case 3:
-			formatString = ":  %1-%2-%3 >%4<:%5:%6 UTC"; //Hour
-			break;
-		case 4:
-			formatString = ":  %1-%2-%3 %4:>%5<:%6 UTC"; //Minute
-			break;
-		case 5:
-			formatString = ":  %1-%2-%3 %4:%5:>%6< UTC"; //Second
-		default:
-			break;
+			case 0:
+				formatString = ":  >%1<-%2-%3 %4:%5:%6 UTC"; //Year
+				break;
+			case 1:
+				formatString = ":  %1->%2<-%3 %4:%5:%6 UTC"; //Month
+				break;
+			case 2:
+				formatString = ":  %1-%2->%3< %4:%5:%6 UTC"; //Day
+				break;
+			case 3:
+				formatString = ":  %1-%2-%3 >%4<:%5:%6 UTC"; //Hour
+				break;
+			case 4:
+				formatString = ":  %1-%2-%3 %4:>%5<:%6 UTC"; //Minute
+				break;
+			case 5:
+				formatString = ":  %1-%2-%3 %4:%5:>%6< UTC"; //Second
+			default:
+				break;
 		}
 	}
 	

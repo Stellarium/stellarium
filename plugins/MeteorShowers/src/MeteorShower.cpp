@@ -397,14 +397,14 @@ void MeteorShower::draw(StelPainter &painter)
 	float alpha = 0.85f + ((double) rand() / (RAND_MAX))/10;
 	switch(status)
 	{
-	case 1: //Active, real data
-		GETSTELMODULE(MeteorShowers)->getColorARR().getRgbF(&r,&g,&b);
-		break;
-	case 2: //Active, generic data
-		GETSTELMODULE(MeteorShowers)->getColorARG().getRgbF(&r,&g,&b);
-		break;
-	default: //Inactive
-		GETSTELMODULE(MeteorShowers)->getColorIR().getRgbF(&r,&g,&b);
+		case 1: //Active, real data
+			GETSTELMODULE(MeteorShowers)->getColorARR().getRgbF(&r,&g,&b);
+			break;
+		case 2: //Active, generic data
+			GETSTELMODULE(MeteorShowers)->getColorARG().getRgbF(&r,&g,&b);
+			break;
+		default: //Inactive
+			GETSTELMODULE(MeteorShowers)->getColorIR().getRgbF(&r,&g,&b);
 	}
 
 	painter.setColor(r, g, b, alpha);

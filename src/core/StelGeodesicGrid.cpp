@@ -143,40 +143,32 @@ void StelGeodesicGrid::getTriangleCorners(int lev,int index,
 		lev--;
 		const int i = index>>2;
 		Triangle &t(triangles[lev][i]);
+		Vec3f c0,c1,c2;
 		switch (index&3)
 		{
-		case 0:
-				{
-					Vec3f c0,c1,c2;
-				    getTriangleCorners(lev,i,c0,c1,c2);
-				    h0 = c0;
-				    h1 = t.e2;
-				    h2 = t.e1;
-				}
+			case 0:
+				getTriangleCorners(lev,i,c0,c1,c2);
+				h0 = c0;
+				h1 = t.e2;
+				h2 = t.e1;
 				break;
-		case 1:
-			{
-				Vec3f c0,c1,c2;
+			case 1:
 				getTriangleCorners(lev,i,c0,c1,c2);
 				h0 = t.e2;
 				h1 = c1;
 				h2 = t.e0;
-			}
-			break;
-		case 2:
-			{
-				Vec3f c0,c1,c2;
+				break;
+			case 2:
 				getTriangleCorners(lev,i,c0,c1,c2);
 				h0 = t.e1;
 				h1 = t.e0;
 				h2 = c2;
-			}
-			break;
-		case 3:
-			h0 = t.e0;
-			h1 = t.e1;
-			h2 = t.e2;
-			break;
+				break;
+			case 3:
+				h0 = t.e0;
+				h1 = t.e1;
+				h2 = t.e2;
+				break;
 		}
 	}
 }
@@ -190,22 +182,22 @@ int StelGeodesicGrid::getPartnerTriangle(int lev, int index) const
 	}
 	switch(index&7)
 	{
-	case 2:
-	case 6:
-		return index+1;
-	case 3:
-	case 7:
-		return index-1;
-	case 0:
-		return (lev==1) ? index+5 : (getPartnerTriangle(lev-1, index>>2)<<2)+1;
-	case 1:
-		return (lev==1) ? index+3 : (getPartnerTriangle(lev-1, index>>2)<<2)+0;
-	case 4:
-		return (lev==1) ? index-3 : (getPartnerTriangle(lev-1, index>>2)<<2)+1;
-	case 5:
-		return (lev==1) ? index-5 : (getPartnerTriangle(lev-1, index>>2)<<2)+0;
-	default:
-		Q_ASSERT(0);
+		case 2:
+		case 6:
+			return index+1;
+		case 3:
+		case 7:
+			return index-1;
+		case 0:
+			return (lev==1) ? index+5 : (getPartnerTriangle(lev-1, index>>2)<<2)+1;
+		case 1:
+			return (lev==1) ? index+3 : (getPartnerTriangle(lev-1, index>>2)<<2)+0;
+		case 4:
+			return (lev==1) ? index-3 : (getPartnerTriangle(lev-1, index>>2)<<2)+1;
+		case 5:
+			return (lev==1) ? index-5 : (getPartnerTriangle(lev-1, index>>2)<<2)+0;
+		default:
+			Q_ASSERT(0);
 	}
 	return 0;
 }

@@ -265,14 +265,14 @@ QString StelLocaleMgr::getPrintableTimeLocal(double JD) const
 	switch (timeFormat)
 	{
 		case STimeSystemDefault:
-		return t.toString();
+			return t.toString();
 		case STime24h:
-		return t.toString("hh:mm:ss");
+			return t.toString("hh:mm:ss");
 		case STime12h:
-		return t.toString("hh:mm:ss ap");
+			return t.toString("hh:mm:ss ap");
 		default:
 			qWarning() << "WARNING: unknown date format, fallback to system default";
-		return t.toString(Qt::LocaleDate);
+			return t.toString(Qt::LocaleDate);
 	}
 }
 
