@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Thai for stellarium 0.8.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-04-03 20:35+0300\n"
+"POT-Creation-Date: 2014-04-05 17:03+0700\n"
 "PO-Revision-Date: 2014-02-11 01:29+0000\n"
 "Last-Translator: Worachate Boonplod <Unknown>\n"
 "Language-Team: MicKi Alone <Need24Get@msn.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-04-04 05:03+0000\n"
+"X-Launchpad-Export-Date: 2014-04-06 06:19+0000\n"
 "X-Generator: Launchpad (build 16976)\n"
 "X-Poedit-Country: THAILAND\n"
 "X-Poedit-Language: Thai\n"
@@ -1156,7 +1156,7 @@ msgstr "ติดต่อ"
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:116
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:118
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:124
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:100
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:128
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:244
 msgid "Version"
 msgstr "รุ่น"
@@ -1169,7 +1169,7 @@ msgstr "รุ่น"
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:117
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:119
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:125
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:101
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:129
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:245
 msgid "Author"
 msgstr "ผู้สร้าง"
@@ -4361,8 +4361,8 @@ msgstr "ทั้งหมดที่มี"
 msgid "Display no information"
 msgstr "ไม่แสดงข้อมูล"
 
-#: src/ui_configurationDialog.h:1029 plugins/Oculars/src/Oculars.cpp:1921
-#: plugins/Observability/src/Observability.cpp:231
+#: src/ui_configurationDialog.h:1029 plugins/Oculars/src/Oculars.cpp:1923
+#: plugins/Observability/src/Observability.cpp:170
 msgid "None"
 msgstr "ไม่มี"
 
@@ -5010,7 +5010,7 @@ msgstr ""
 #: plugins/Quasars/src/ui_quasarsDialog.h:275
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:282
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:319
-#: plugins/Observability/src/ui_ObservabilityDialog.h:377
+#: plugins/Observability/src/ui_ObservabilityDialog.h:359
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:528
 msgid "Settings"
 msgstr "ตั้งค่า"
@@ -5030,7 +5030,7 @@ msgstr ""
 #: plugins/Quasars/src/ui_quasarsDialog.h:273
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:280
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:317
-#: plugins/Observability/src/ui_ObservabilityDialog.h:367
+#: plugins/Observability/src/ui_ObservabilityDialog.h:357
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:526
 msgid "Restore default settings"
 msgstr "คืนค่าเริ่มต้นเดิม"
@@ -5042,7 +5042,7 @@ msgstr "คืนค่าเริ่มต้นเดิม"
 #: plugins/Quasars/src/ui_quasarsDialog.h:274
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:281
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:318
-#: plugins/Observability/src/ui_ObservabilityDialog.h:368
+#: plugins/Observability/src/ui_ObservabilityDialog.h:358
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:527
 msgid "Save settings as default"
 msgstr "บันทึกการตั้งค่าต่าง ๆ ให้เป็นค่าเริ่มต้น"
@@ -5058,7 +5058,7 @@ msgstr "บันทึกการตั้งค่าต่าง ๆ ให�
 #: plugins/Quasars/src/ui_quasarsDialog.h:276
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:283
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:322
-#: plugins/Observability/src/ui_ObservabilityDialog.h:378
+#: plugins/Observability/src/ui_ObservabilityDialog.h:360
 #: plugins/FOV/src/ui_fovWindow.h:405
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:279
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:566
@@ -5079,7 +5079,7 @@ msgstr "แสดงแบริงเข็มทิศตามแนวขอ
 msgid "Compass marks"
 msgstr "ขีดแสดงมุมทิศ"
 
-#: plugins/Oculars/src/Oculars.cpp:80 plugins/Oculars/src/Oculars.cpp:1317
+#: plugins/Oculars/src/Oculars.cpp:80 plugins/Oculars/src/Oculars.cpp:1316
 #: plugins/Oculars/src/ui_ocularDialog.h:1050
 msgid "Oculars"
 msgstr "เลนส์ใกล้ตา"
@@ -5146,153 +5146,153 @@ msgstr "&หมุนซีซีดี"
 msgid "&Reset rotation"
 msgstr "&ยกเลิกการหมุน"
 
-#: plugins/Oculars/src/Oculars.cpp:1300
+#: plugins/Oculars/src/Oculars.cpp:1299
 #: plugins/Oculars/src/ui_ocularDialog.h:1052
 msgid "Ocular view"
 msgstr "มุมมองเลนส์ใกล้ตา"
 
-#: plugins/Oculars/src/Oculars.cpp:1318
+#: plugins/Oculars/src/Oculars.cpp:1317
 msgid "Oculars popup menu"
 msgstr "รายการเลือกแบบผุดขึ้นของเลนส์ใกล้ตา"
 
-#: plugins/Oculars/src/Oculars.cpp:1319
+#: plugins/Oculars/src/Oculars.cpp:1318
 msgid "Show crosshairs"
 msgstr "แสดงสายใยเล็ง"
 
-#: plugins/Oculars/src/Oculars.cpp:1320
+#: plugins/Oculars/src/Oculars.cpp:1319
 msgid "Image sensor frame"
 msgstr "เฟรมเซนเซอร์ภาพ"
 
-#: plugins/Oculars/src/Oculars.cpp:1321
+#: plugins/Oculars/src/Oculars.cpp:1320
 msgid "Telrad sight"
 msgstr "วง Telrad"
 
-#: plugins/Oculars/src/Oculars.cpp:1322
+#: plugins/Oculars/src/Oculars.cpp:1321
 msgid "Oculars plugin configuration"
 msgstr "การตั้งค่าโปรแกรมเสริมเลนส์ใกล้ตา"
 
-#: plugins/Oculars/src/Oculars.cpp:1324
+#: plugins/Oculars/src/Oculars.cpp:1323
 msgid "Select next telescope"
 msgstr "เลือกกล้องโทรทรรศน์ถัดไป"
 
-#: plugins/Oculars/src/Oculars.cpp:1326
+#: plugins/Oculars/src/Oculars.cpp:1325
 msgid "Select previous telescope"
 msgstr "เลือกกล้องโทรทรรศน์ก่อนหน้า"
 
-#: plugins/Oculars/src/Oculars.cpp:1328
+#: plugins/Oculars/src/Oculars.cpp:1327
 msgid "Select next eyepiece"
 msgstr "เลือกเลนส์ใกล้ตาถัดไป"
 
-#: plugins/Oculars/src/Oculars.cpp:1330
+#: plugins/Oculars/src/Oculars.cpp:1329
 msgid "Select previous eyepiece"
 msgstr "เลือกเลนส์ใกล้ตาก่อนหน้า"
 
-#: plugins/Oculars/src/Oculars.cpp:1559
+#: plugins/Oculars/src/Oculars.cpp:1561
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:500
 #, qt-format
 msgid "Ocular #%1"
 msgstr "เลนส์ใกล้ตา #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:1564
+#: plugins/Oculars/src/Oculars.cpp:1566
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:504
 #, qt-format
 msgid "Ocular #%1: %2"
 msgstr "เลนส์ใกล้ตา #%1: %2"
 
 #. TRANSLATORS: FL = Focal length
-#: plugins/Oculars/src/Oculars.cpp:1578
+#: plugins/Oculars/src/Oculars.cpp:1580
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:541
 #, qt-format
 msgid "Ocular FL: %1 mm"
 msgstr "ความยาวโฟกัสของเลนส์ใกล้ตา: %1 มม."
 
 #. TRANSLATORS: aFOV = apparent field of view
-#: plugins/Oculars/src/Oculars.cpp:1585
+#: plugins/Oculars/src/Oculars.cpp:1587
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:551
 #, qt-format
 msgid "Ocular aFOV: %1"
 msgstr "ขอบเขตภาพปรากฏของเลนส์ใกล้ตา: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1597
+#: plugins/Oculars/src/Oculars.cpp:1599
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:581
 #, qt-format
 msgid "Lens #%1"
 msgstr "เลนส์ #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:1601
+#: plugins/Oculars/src/Oculars.cpp:1603
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:585
 #, qt-format
 msgid "Lens #%1: %2"
 msgstr "เลนส์ #%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:1606
+#: plugins/Oculars/src/Oculars.cpp:1608
 msgid "Lens: none"
 msgstr "เลนส์ : ไม่มี"
 
-#: plugins/Oculars/src/Oculars.cpp:1616 plugins/Oculars/src/Oculars.cpp:1673
+#: plugins/Oculars/src/Oculars.cpp:1618 plugins/Oculars/src/Oculars.cpp:1675
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:738
 #, qt-format
 msgid "Telescope #%1"
 msgstr "กล้องโทรทรรศน์ #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:1621 plugins/Oculars/src/Oculars.cpp:1678
+#: plugins/Oculars/src/Oculars.cpp:1623 plugins/Oculars/src/Oculars.cpp:1680
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:742
 #, qt-format
 msgid "Telescope #%1: %2"
 msgstr "กล้องโทรทรรศน์ #%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:1632
+#: plugins/Oculars/src/Oculars.cpp:1634
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:818
 #, qt-format
 msgid "Magnification: %1"
 msgstr "กำลังขยาย: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1640
+#: plugins/Oculars/src/Oculars.cpp:1642
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:827
 #, qt-format
 msgid "FOV: %1"
 msgstr "ขอบเขตภาพ: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1650
+#: plugins/Oculars/src/Oculars.cpp:1652
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:683
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:780
 #, qt-format
 msgid "Dimensions: %1"
 msgstr "ขนาด: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1655
+#: plugins/Oculars/src/Oculars.cpp:1657
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:643
 #, qt-format
 msgid "Sensor #%1"
 msgstr "เซนเซอร์ #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:1659
+#: plugins/Oculars/src/Oculars.cpp:1661
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:647
 #, qt-format
 msgid "Sensor #%1: %2"
 msgstr "เซนเซอร์ #%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:1917
+#: plugins/Oculars/src/Oculars.cpp:1919
 msgid "&Lens"
 msgstr "เ&ลนส์"
 
-#: plugins/Oculars/src/Oculars.cpp:1918
+#: plugins/Oculars/src/Oculars.cpp:1920
 msgid "&Previous lens"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1919
+#: plugins/Oculars/src/Oculars.cpp:1921
 msgid "&Next lens"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1949
+#: plugins/Oculars/src/Oculars.cpp:1951
 msgid "&Telescope"
 msgstr "&กล้องโทรทรรศน์"
 
-#: plugins/Oculars/src/Oculars.cpp:1950
+#: plugins/Oculars/src/Oculars.cpp:1952
 msgid "&Previous telescope"
 msgstr "กล้องโทรทรรศน์&ก่อนหน้า"
 
-#: plugins/Oculars/src/Oculars.cpp:1951
+#: plugins/Oculars/src/Oculars.cpp:1953
 msgid "&Next telescope"
 msgstr "กล้องโทรทรรศน์&ถัดไป"
 
@@ -8269,11 +8269,11 @@ msgctxt "tab in plugin windows"
 msgid "Websites"
 msgstr "เว็บไซต์"
 
-#: plugins/Observability/src/Observability.cpp:65
+#: plugins/Observability/src/Observability.cpp:66
 msgid "Observability Analysis"
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:68
+#: plugins/Observability/src/Observability.cpp:69
 msgid ""
 "Displays an analysis of a selected object's observability (rise, set, and "
 "transit times) for the current date, as well as when it is observable "
@@ -8284,199 +8284,204 @@ msgid ""
 "configuration window.)"
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:209
+#: plugins/Observability/src/Observability.cpp:139
 msgctxt "short month name"
 msgid "Jan"
 msgstr "ม.ค."
 
-#: plugins/Observability/src/Observability.cpp:209
+#: plugins/Observability/src/Observability.cpp:140
 msgctxt "short month name"
 msgid "Feb"
 msgstr "ก.พ."
 
-#: plugins/Observability/src/Observability.cpp:209
+#: plugins/Observability/src/Observability.cpp:141
 msgctxt "short month name"
 msgid "Mar"
 msgstr "มี.ค."
 
-#: plugins/Observability/src/Observability.cpp:209
+#: plugins/Observability/src/Observability.cpp:142
 msgctxt "short month name"
 msgid "Apr"
 msgstr "เม.ย."
 
-#: plugins/Observability/src/Observability.cpp:209
+#: plugins/Observability/src/Observability.cpp:143
 msgctxt "short month name"
 msgid "May"
 msgstr "พ.ค."
 
-#: plugins/Observability/src/Observability.cpp:209
+#: plugins/Observability/src/Observability.cpp:144
 msgctxt "short month name"
 msgid "Jun"
 msgstr "มิ.ย."
 
-#: plugins/Observability/src/Observability.cpp:209
+#: plugins/Observability/src/Observability.cpp:145
 msgctxt "short month name"
 msgid "Jul"
 msgstr "ก.ค."
 
-#: plugins/Observability/src/Observability.cpp:209
+#: plugins/Observability/src/Observability.cpp:146
 msgctxt "short month name"
 msgid "Aug"
 msgstr "ส.ค."
 
-#: plugins/Observability/src/Observability.cpp:209
+#: plugins/Observability/src/Observability.cpp:147
 msgctxt "short month name"
 msgid "Sep"
 msgstr "ก.ย."
 
-#: plugins/Observability/src/Observability.cpp:209
+#: plugins/Observability/src/Observability.cpp:148
 msgctxt "short month name"
 msgid "Oct"
 msgstr "ต.ค."
 
-#: plugins/Observability/src/Observability.cpp:209
+#: plugins/Observability/src/Observability.cpp:149
 msgctxt "short month name"
 msgid "Nov"
 msgstr "พ.ย."
 
-#: plugins/Observability/src/Observability.cpp:209
+#: plugins/Observability/src/Observability.cpp:150
 msgctxt "short month name"
 msgid "Dec"
 msgstr "ธ.ค."
 
-#: plugins/Observability/src/Observability.cpp:215
+#. TRANSLATORS: Short for "hours".
+#: plugins/Observability/src/Observability.cpp:153
 msgid "h"
 msgstr "ชั่วโมง"
 
-#: plugins/Observability/src/Observability.cpp:216
+#. TRANSLATORS: Short for "minutes".
+#: plugins/Observability/src/Observability.cpp:155
 msgid "m"
 msgstr "นาที"
 
-#: plugins/Observability/src/Observability.cpp:217
+#. TRANSLATORS: Short for "seconds".
+#: plugins/Observability/src/Observability.cpp:157
 msgid "s"
 msgstr "วินาที"
 
-#: plugins/Observability/src/Observability.cpp:218
+#: plugins/Observability/src/Observability.cpp:158
 #, qt-format
 msgid "Sets at %1 (in %2)"
 msgstr "ตกเวลา %1 (ในอีก %2)"
 
-#: plugins/Observability/src/Observability.cpp:219
+#: plugins/Observability/src/Observability.cpp:159
 #, qt-format
 msgid "Rose at %1 (%2 ago)"
 msgstr "ขึ้นเวลา %1 (%2 ที่แล้ว)"
 
-#: plugins/Observability/src/Observability.cpp:220
+#: plugins/Observability/src/Observability.cpp:160
 #, qt-format
 msgid "Set at %1 (%2 ago)"
 msgstr "ตกเวลา %1 (%2 ที่แล้ว)"
 
-#: plugins/Observability/src/Observability.cpp:221
+#: plugins/Observability/src/Observability.cpp:161
 #, qt-format
 msgid "Rises at %1 (in %2)"
 msgstr "ขึ้นเวลา %1 (ในอีก %2)"
 
-#: plugins/Observability/src/Observability.cpp:222
+#: plugins/Observability/src/Observability.cpp:162
 msgid "Circumpolar."
 msgstr "วนรอบขั้วฟ้า (อยู่บนท้องฟ้าตลอดเวลา)"
 
-#: plugins/Observability/src/Observability.cpp:223
+#: plugins/Observability/src/Observability.cpp:163
 msgid "No rise."
 msgstr "ไม่ขึ้น"
 
-#: plugins/Observability/src/Observability.cpp:224
+#: plugins/Observability/src/Observability.cpp:164
 #, qt-format
 msgid "Culminates at %1 (in %2) at %3 deg."
 msgstr "ขึ้นถึงจุดสูงสุดเวลา %1 (ในอีก %2) ที่มุมเงย %3 องศา"
 
-#: plugins/Observability/src/Observability.cpp:225
+#: plugins/Observability/src/Observability.cpp:165
 #, qt-format
 msgid "Culminated at %1 (%2 ago) at %3 deg."
 msgstr "ขึ้นถึงจุดสูงสุดเวลา %1 (%2 ที่แล้ว) ที่มุมเงย %3 องศา"
 
-#: plugins/Observability/src/Observability.cpp:226
+#: plugins/Observability/src/Observability.cpp:166
 msgid "Source is not observable."
 msgstr "ไม่สามารถสังเกตได้"
 
-#: plugins/Observability/src/Observability.cpp:227
-msgid "No Acronychal nor Cosmical rise/set."
-msgstr "ไม่มีการขึ้น/ตก ที่สัมพันธ์กับดวงอาทิตย์"
+#: plugins/Observability/src/Observability.cpp:167
+msgid "No acronychal nor cosmical rise/set."
+msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:228
-msgid "Greatest elongation: "
-msgstr "ทำมุมห่างจากดวงอาทิตย์ที่สุด: "
-
-#: plugins/Observability/src/Observability.cpp:229
-msgid "Largest Sun separation: "
-msgstr "ทำมุมห่างจากดวงอาทิตย์ที่สุด: "
-
-#: plugins/Observability/src/Observability.cpp:230
+#: plugins/Observability/src/Observability.cpp:168
 #, qt-format
-msgid " (at %1 deg.)"
-msgstr " (ที่ระยะ %1 องศา)"
+msgid "Greatest elongation: %1 (at %2 deg.)"
+msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:232
-msgid "Acronychal rise/set"
-msgstr "ขึ้นขณะดวงอาทิตย์ตก/ตกขณะดวงอาทิตย์ขึ้น"
+#: plugins/Observability/src/Observability.cpp:169
+#, qt-format
+msgid "Largest Sun separation: %1 (at %2 deg.)"
+msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:233
-msgid "No Acronychal rise/set."
-msgstr "ไม่มีการขึ้นขณะดวงอาทิตย์ตก/ตกขณะดวงอาทิตย์ขึ้น"
+#. TRANSLATORS: The space at the end is significant - another sentence may follow.
+#: plugins/Observability/src/Observability.cpp:172
+#, qt-format
+msgid "Acronychal rise/set: %1/%2. "
+msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:234
-msgid "Cosmical rise/set"
-msgstr "ขึ้นขณะดวงอาทิตย์ขึ้น/ตกขณะดวงอาทิตย์ตก"
+#. TRANSLATORS: The space at the end is significant - another sentence may follow.
+#: plugins/Observability/src/Observability.cpp:174
+msgid "No acronychal rise/set. "
+msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:235
-msgid "No Cosmical rise/set."
-msgstr "ไม่มีการขึ้นขณะดวงอาทิตย์ขึ้น/ตกขณะดวงอาทิตย์ตก"
+#: plugins/Observability/src/Observability.cpp:175
+#, qt-format
+msgid "Cosmical rise/set: %1/%2."
+msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:236
+#: plugins/Observability/src/Observability.cpp:176
+msgid "No cosmical rise/set."
+msgstr ""
+
+#: plugins/Observability/src/Observability.cpp:177
 msgid "Observable during the whole year."
 msgstr "สามารถสังเกตได้ตลอดปี"
 
-#: plugins/Observability/src/Observability.cpp:237
+#: plugins/Observability/src/Observability.cpp:178
 msgid "Not observable at dark night."
 msgstr "ไม่สามารถสังเกตได้ขณะท้องฟ้ามืดสนิท"
 
-#: plugins/Observability/src/Observability.cpp:238
-msgid "Nights above horizon: "
-msgstr "คืนที่วัตถุอยู่เหนือขอบฟ้า: "
+#: plugins/Observability/src/Observability.cpp:179
+#, qt-format
+msgid "Nights above horizon: %1"
+msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:239
-#: plugins/Observability/src/Observability.cpp:759
+#: plugins/Observability/src/Observability.cpp:180
 msgid "TODAY:"
 msgstr "วันนี้:"
 
-#: plugins/Observability/src/Observability.cpp:240
-#: plugins/Observability/src/Observability.cpp:768
+#: plugins/Observability/src/Observability.cpp:181
 msgid "THIS YEAR:"
 msgstr "ปีนี้:"
 
-#: plugins/Observability/src/Observability.cpp:241
+#. TRANSLATORS: The space at the end is significant - another sentence may follow.
+#: plugins/Observability/src/Observability.cpp:183
 #, qt-format
 msgid "Previous Full Moon: %1 %2 at %3:%4. "
 msgstr "จันทร์เพ็ญก่อนหน้านี้: %2 %1 เวลา %3:%4 น. "
 
-#: plugins/Observability/src/Observability.cpp:242
+#: plugins/Observability/src/Observability.cpp:184
 #, qt-format
 msgid "Next Full Moon: %1 %2 at %3:%4. "
 msgstr "จันทร์เพ็ญครั้งถัดไป: %2 %1 เวลา %3:%4 น. "
 
-#: plugins/Observability/src/Observability.cpp:263
-#: plugins/Observability/src/Observability.cpp:264
+#: plugins/Observability/src/Observability.cpp:199
+#: plugins/Observability/src/Observability.cpp:200
+#: plugins/Observability/src/Observability.cpp:204
 msgid "Observability"
 msgstr "ความสามารถในการสังเกต"
 
-#: plugins/Observability/src/Observability.cpp:264
+#: plugins/Observability/src/Observability.cpp:205
 msgid "Observability configuration window"
 msgstr "หน้าต่างตั้งค่าความสามารถในการสังเกต"
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:99
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:127
 msgid "Observability Plug-in"
 msgstr "โปรแกรมเสริมความสามารถในการสังเกต"
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:103
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:131
 msgid ""
 "Plugin that analyzes the observability of the selected source (or the screen "
 "center, if no source is selected). The plugin can show rise, transit, and "
@@ -8497,17 +8502,15 @@ msgstr ""
 "ผู้พัฒนาขอขอบคุณ Alexander Wolf และ Georg Zotti สำหรับคำแนะนำ<br><br>Ivan "
 "Marti-Vidal (Onsala Space Observatory)"
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:105
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:133
 msgid "Explanation of some parameters"
 msgstr "คำอธิบายพารามิเตอร์บางตัว"
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:106
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:150
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:227
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:134
 msgid "Sun altitude at twilight:"
 msgstr "มุมเงยของดวงอาทิตย์ขณะเริ่มและสิ้นสุดสนธยา:"
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:106
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:134
 msgid ""
 "Any celestial object will be considered visible when the Sun is below this "
 "altitude. The altitude at astronomical twilight ranges usually between -12 "
@@ -8520,13 +8523,11 @@ msgstr ""
 "ค่านี้จะถูกนำมาใช้เฉพาะการประมาณช่วงเวลาที่สังเกตวัตถุท้องฟ้านั้นได้ "
 "(ดูด้านล่าง)"
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:108
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:154
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:234
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:136
 msgid "Horizon altitude:"
 msgstr "มุมเงยของขอบฟ้า:"
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:108
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:136
 msgid ""
 "Minimum observable altitude (due to mountains, buildings, or just a limited "
 "telescope mount)."
@@ -8534,11 +8535,11 @@ msgstr ""
 "มุมเงยต่ำสุดที่สามารถสังเกตได้ (เนื่องจากมีภูเขา, สิ่งปลูกสร้าง, "
 "หรือขีดจำกัดของฐานยึดกล้องโทรทรรศน์)"
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:110
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:138
 msgid "Today ephemeris:"
 msgstr "อิเฟเมอริสของวันนี้:"
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:110
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:138
 msgid ""
 "Self-explanatory. The program will show the rise, set, and culmination "
 "(transit) times. The exact times for these ephemeris are given in two ways: "
@@ -8548,11 +8549,11 @@ msgstr ""
 "คำอธิบาย - โปรแกรมจะแสดงเวลาขึ้น, ตก, และถึงจุดสูงสุด โดยแสดงเป็น 2 แบบ คือ "
 "ช่วงเวลา (อ้างอิงกับเวลาปัจจุบัน) และเวลานาฬิกา (ตามเวลาท้องถิ่น)"
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:111
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:139
 msgid "Acronychal/Cosmical rise/set:"
 msgstr "การขึ้น/ตก ที่สัมพันธ์กับดวงอาทิตย์"
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:111
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:139
 msgid ""
 "The Acronychal rise (or set) of an object happens when the object rises (or "
 "sets) just when the Sun sets (or rises), respectively. The exact dates of "
@@ -8573,11 +8574,11 @@ msgstr ""
 "ขึ้น (หรือตก) ในเวลาเดียวกัน แสดงว่าเป็นช่วงที่สังเกตได้ยาก "
 "หรือไม่สามารถสังเกตได้"
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:112
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:140
 msgid "Largest Sun separation:"
 msgstr "มุมห่างจากดวงอาทิตย์ที่สุด:"
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:112
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:140
 msgid ""
 "Happens when the angular separation between the Sun and the celestial object "
 "are maximum. In most cases, this is equivalent to say that the Equatorial "
@@ -8596,11 +8597,11 @@ msgstr ""
 "และเป็นพื้นที่ที่มืดที่สุดเท่าที่จะเป็นไปได้ของท้องฟ้าที่เดคลิเนชันนั้น "
 "จึงเป็นคืนที่ดีที่สุดสำหรับการสังเกตวัตถุท้องฟ้าดังกล่าว"
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:113
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:141
 msgid "Nights with source above horizon:"
 msgstr "คืนที่วัตถุอยู่เหนือขอบฟ้า:"
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:113
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:141
 msgid ""
 "The program computes the range of dates when the celestial object is above "
 "the horizon at least during one moment of the night. By 'night', the program "
@@ -8634,11 +8635,11 @@ msgstr ""
 "โปรแกรมเสริมนี้จะใช้สมการในคำนวณหาวันดังกล่าวที่แม่นยำกว่านี้ "
 "(ซึ่งจะไม่ขึ้นกับการกำหนดจุดสนธยาโดยผู้ใช้) ในอนาคต"
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:114
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:142
 msgid "Full Moon:"
 msgstr "จันทร์เพ็ญ:"
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:114
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:142
 msgid ""
 "When the Moon is selected, the program can compute the exact closest dates "
 "of the Moon's opposition to the Sun."
@@ -8646,76 +8647,71 @@ msgstr ""
 "เมื่อคลิกที่ดวงจันทร์ "
 "โปรแกรมจะสามารถคำนวณวันที่ใกล้ที่สุดที่ดวงจันทร์อยู่ตรงข้ามกับดวงอาทิตย์"
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:150
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:154
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:227
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:234
-msgid "deg."
-msgstr "องศา"
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:195
+#, qt-format
+msgid "Sun altitude at twilight: %1 deg."
+msgstr ""
 
-#: plugins/Observability/src/ui_ObservabilityDialog.h:358
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:201
+#, qt-format
+msgid "Horizon altitude: %1 deg."
+msgstr ""
+
+#: plugins/Observability/src/ui_ObservabilityDialog.h:342
 msgid "Observability Configuration"
 msgstr "การตั้งค่าความสามารถในการสังเกต"
 
-#: plugins/Observability/src/ui_ObservabilityDialog.h:359
+#: plugins/Observability/src/ui_ObservabilityDialog.h:343
 msgid "Observability Plug-in Configuration"
 msgstr "การตั้งค่าโปรแกรมเสริมความสามารถในการสังเกต"
 
-#: plugins/Observability/src/ui_ObservabilityDialog.h:361
-msgid "Showing Options"
-msgstr "แสดงตัวเลือก"
-
-#: plugins/Observability/src/ui_ObservabilityDialog.h:362
-msgid "Today's ephemeris (rise, set, and transit times)"
-msgstr "อิเฟเมอริสของวันนี้ (เวลาขึ้น, ตก, และถึงจุดสูงสุด)"
-
-#: plugins/Observability/src/ui_ObservabilityDialog.h:363
-msgid "Dates of Acronychal and Cosmical rise/set"
-msgstr "วันที่เกิดการขึ้น/ตกที่สัมพันธ์กับดวงอาทิตย์"
-
-#: plugins/Observability/src/ui_ObservabilityDialog.h:364
-msgid "Date of largest separation to the Sun"
-msgstr "วันที่ทำมุมห่างจากดวงอาทิตย์ที่สุด"
-
-#: plugins/Observability/src/ui_ObservabilityDialog.h:365
-msgid "Nights with the source above horizon"
-msgstr "คืนที่วัตถุอยู่เหนือขอบฟ้า"
-
-#: plugins/Observability/src/ui_ObservabilityDialog.h:366
-msgid "Dates of previous and next Full Moon"
-msgstr "วันเพ็ญครั้งก่อนหน้าและครั้งถัดไป"
-
-#: plugins/Observability/src/ui_ObservabilityDialog.h:369
+#: plugins/Observability/src/ui_ObservabilityDialog.h:345
 msgid "Font color and size"
 msgstr "สีและขนาดตัวอักษร"
 
-#: plugins/Observability/src/ui_ObservabilityDialog.h:370
+#: plugins/Observability/src/ui_ObservabilityDialog.h:346
 msgid "Red"
 msgstr "แดง"
 
-#: plugins/Observability/src/ui_ObservabilityDialog.h:371
+#: plugins/Observability/src/ui_ObservabilityDialog.h:347
 msgid "Green"
 msgstr "เขียว"
 
-#: plugins/Observability/src/ui_ObservabilityDialog.h:372
+#: plugins/Observability/src/ui_ObservabilityDialog.h:348
 msgid "Blue"
 msgstr "น้ำเงิน"
 
-#: plugins/Observability/src/ui_ObservabilityDialog.h:373
+#: plugins/Observability/src/ui_ObservabilityDialog.h:349
 msgid "Font Size"
 msgstr "ขนาดตัวอักษร"
 
-#: plugins/Observability/src/ui_ObservabilityDialog.h:374
+#: plugins/Observability/src/ui_ObservabilityDialog.h:350
 msgid "Observing conditions"
 msgstr "ปัจจัยแวดล้อมในการสังเกตการณ์"
 
-#: plugins/Observability/src/ui_ObservabilityDialog.h:375
-msgid "Horizon altitude: 0 deg."
-msgstr "มุมเงยของขอบฟ้า: 0 องศา"
+#: plugins/Observability/src/ui_ObservabilityDialog.h:351
+msgid "Showing options"
+msgstr ""
 
-#: plugins/Observability/src/ui_ObservabilityDialog.h:376
-msgid "Sun altitude at twilight: 0 deg."
-msgstr "มุมเงยของดวงอาทิตย์ขณะสนธยา: 0 องศา"
+#: plugins/Observability/src/ui_ObservabilityDialog.h:352
+msgid "Today's ephemeris (rise, set, and transit times)"
+msgstr "อิเฟเมอริสของวันนี้ (เวลาขึ้น, ตก, และถึงจุดสูงสุด)"
+
+#: plugins/Observability/src/ui_ObservabilityDialog.h:353
+msgid "Dates of Acronychal and Cosmical rise/set"
+msgstr "วันที่เกิดการขึ้น/ตกที่สัมพันธ์กับดวงอาทิตย์"
+
+#: plugins/Observability/src/ui_ObservabilityDialog.h:354
+msgid "Date of largest separation to the Sun"
+msgstr "วันที่ทำมุมห่างจากดวงอาทิตย์ที่สุด"
+
+#: plugins/Observability/src/ui_ObservabilityDialog.h:355
+msgid "Nights with the source above horizon"
+msgstr "คืนที่วัตถุอยู่เหนือขอบฟ้า"
+
+#: plugins/Observability/src/ui_ObservabilityDialog.h:356
+msgid "Dates of previous and next Full Moon"
+msgstr "วันเพ็ญครั้งก่อนหน้าและครั้งถัดไป"
 
 #: plugins/FOV/src/FOV.cpp:40 plugins/FOV/src/FOV.cpp:78
 #: plugins/FOV/src/ui_fovWindow.h:383 plugins/FOV/src/ui_fovWindow.h:385
@@ -9899,11 +9895,30 @@ msgstr ""
 #~ "ดาวศุกร์ผ่านหน้าดวงอาทิตย์ 6 มิถุนายน ค.ศ. 2012 เมื่อสังเกตจากซิดนีย์ "
 #~ "ออสเตรเลีย"
 
+#~ msgid "Greatest elongation: "
+#~ msgstr "ทำมุมห่างจากดวงอาทิตย์ที่สุด: "
+
+#~ msgid "Largest Sun separation: "
+#~ msgstr "ทำมุมห่างจากดวงอาทิตย์ที่สุด: "
+
+#, qt-format
+#~ msgid " (at %1 deg.)"
+#~ msgstr " (ที่ระยะ %1 องศา)"
+
+#~ msgid "deg."
+#~ msgstr "องศา"
+
+#~ msgid "Showing Options"
+#~ msgstr "แสดงตัวเลือก"
+
 #~ msgid "Sun altitude at twilight"
 #~ msgstr "มุมเงยของดวงอาทิตย์ขณะเริ่มและสิ้นสุดสนธยา"
 
 #~ msgid "0 deg."
 #~ msgstr "0 องศา"
+
+#~ msgid "Nights above horizon: "
+#~ msgstr "คืนที่วัตถุอยู่เหนือขอบฟ้า: "
 
 #, no-c-format, qt-format
 #~ msgid "Distance: %1AU"
@@ -9911,6 +9926,9 @@ msgstr ""
 
 #~ msgid "Nebulas background images"
 #~ msgstr "ภาพพื้นหลังของเนบิวลา"
+
+#~ msgid "Sun altitude at twilight: 0 deg."
+#~ msgstr "มุมเงยของดวงอาทิตย์ขณะสนธยา: 0 องศา"
 
 #~ msgid "Observability analysis"
 #~ msgstr "วิเคราะห์ความสามารถในการสังเกตได้"
@@ -9977,6 +9995,24 @@ msgstr ""
 #~ "โปรแกรมเสริมนี้ยังแสดงวันที่วัตถุทำมุมห่างจากดวงอาทิตย์ที่สุด "
 #~ "และวันที่วัตถุขึ้น-ตก โดยสัมพันธ์กับดวงอาทิตย์<br><br> "
 #~ "คำอธิบายเกี่ยวกับปริมาณเหล่านี้แสดงในแท็บ 'เกี่ยวกับ' ของหน้าต่างการตั้งค่า"
+
+#~ msgid "No Acronychal nor Cosmical rise/set."
+#~ msgstr "ไม่มีการขึ้น/ตก ที่สัมพันธ์กับดวงอาทิตย์"
+
+#~ msgid "Acronychal rise/set"
+#~ msgstr "ขึ้นขณะดวงอาทิตย์ตก/ตกขณะดวงอาทิตย์ขึ้น"
+
+#~ msgid "No Acronychal rise/set."
+#~ msgstr "ไม่มีการขึ้นขณะดวงอาทิตย์ตก/ตกขณะดวงอาทิตย์ขึ้น"
+
+#~ msgid "Cosmical rise/set"
+#~ msgstr "ขึ้นขณะดวงอาทิตย์ขึ้น/ตกขณะดวงอาทิตย์ตก"
+
+#~ msgid "No Cosmical rise/set."
+#~ msgstr "ไม่มีการขึ้นขณะดวงอาทิตย์ขึ้น/ตกขณะดวงอาทิตย์ตก"
+
+#~ msgid "Horizon altitude: 0 deg."
+#~ msgstr "มุมเงยของขอบฟ้า: 0 องศา"
 
 #~ msgid ""
 #~ "Screensaver of various happenings in the Solar System. 171 events in all!"

@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-04-03 20:35+0300\n"
+"POT-Creation-Date: 2014-04-05 17:03+0700\n"
 "PO-Revision-Date: 2014-03-22 19:15+0000\n"
 "Last-Translator: Tuomas Teipainen <tmsteipainen1@gmail.com>\n"
 "Language-Team: Finnish <fi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-04-04 04:47+0000\n"
+"X-Launchpad-Export-Date: 2014-04-06 06:00+0000\n"
 "X-Generator: Launchpad (build 16976)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:107 src/core/modules/StarMgr.cpp:338
@@ -1196,7 +1196,7 @@ msgstr "Yhteystieto"
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:116
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:118
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:124
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:100
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:128
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:244
 msgid "Version"
 msgstr "Versio"
@@ -1209,7 +1209,7 @@ msgstr "Versio"
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:117
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:119
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:125
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:101
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:129
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:245
 msgid "Author"
 msgstr "Tekijä"
@@ -4400,8 +4400,8 @@ msgstr "Kaikki saatavilla olevat"
 msgid "Display no information"
 msgstr "Älä näytä tietoja"
 
-#: src/ui_configurationDialog.h:1029 plugins/Oculars/src/Oculars.cpp:1921
-#: plugins/Observability/src/Observability.cpp:231
+#: src/ui_configurationDialog.h:1029 plugins/Oculars/src/Oculars.cpp:1923
+#: plugins/Observability/src/Observability.cpp:170
 msgid "None"
 msgstr "Ei tietoja"
 
@@ -5062,7 +5062,7 @@ msgstr "Kulmanmittaustyökalun asetukset"
 #: plugins/Quasars/src/ui_quasarsDialog.h:275
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:282
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:319
-#: plugins/Observability/src/ui_ObservabilityDialog.h:377
+#: plugins/Observability/src/ui_ObservabilityDialog.h:359
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:528
 msgid "Settings"
 msgstr "Asetukset"
@@ -5082,7 +5082,7 @@ msgstr "Näytä asentokulma"
 #: plugins/Quasars/src/ui_quasarsDialog.h:273
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:280
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:317
-#: plugins/Observability/src/ui_ObservabilityDialog.h:367
+#: plugins/Observability/src/ui_ObservabilityDialog.h:357
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:526
 msgid "Restore default settings"
 msgstr "Palauta oletusasetukset"
@@ -5094,7 +5094,7 @@ msgstr "Palauta oletusasetukset"
 #: plugins/Quasars/src/ui_quasarsDialog.h:274
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:281
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:318
-#: plugins/Observability/src/ui_ObservabilityDialog.h:368
+#: plugins/Observability/src/ui_ObservabilityDialog.h:358
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:527
 msgid "Save settings as default"
 msgstr "Tallenna asetukset oletukseksi"
@@ -5110,7 +5110,7 @@ msgstr "Tallenna asetukset oletukseksi"
 #: plugins/Quasars/src/ui_quasarsDialog.h:276
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:283
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:322
-#: plugins/Observability/src/ui_ObservabilityDialog.h:378
+#: plugins/Observability/src/ui_ObservabilityDialog.h:360
 #: plugins/FOV/src/ui_fovWindow.h:405
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:279
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:566
@@ -5131,7 +5131,7 @@ msgstr "Näyttää ilmansuuntien merkinnät horisontin ohessa"
 msgid "Compass marks"
 msgstr "Ilmansuuntien merkit"
 
-#: plugins/Oculars/src/Oculars.cpp:80 plugins/Oculars/src/Oculars.cpp:1317
+#: plugins/Oculars/src/Oculars.cpp:80 plugins/Oculars/src/Oculars.cpp:1316
 #: plugins/Oculars/src/ui_ocularDialog.h:1050
 msgid "Oculars"
 msgstr "Okulaarit"
@@ -5198,153 +5198,153 @@ msgstr "&Kierrä CCD:tä"
 msgid "&Reset rotation"
 msgstr "&Palauta kääntö"
 
-#: plugins/Oculars/src/Oculars.cpp:1300
+#: plugins/Oculars/src/Oculars.cpp:1299
 #: plugins/Oculars/src/ui_ocularDialog.h:1052
 msgid "Ocular view"
 msgstr "Okulaarinäkymä"
 
-#: plugins/Oculars/src/Oculars.cpp:1318
+#: plugins/Oculars/src/Oculars.cpp:1317
 msgid "Oculars popup menu"
 msgstr "Okulaarit-valikko"
 
-#: plugins/Oculars/src/Oculars.cpp:1319
+#: plugins/Oculars/src/Oculars.cpp:1318
 msgid "Show crosshairs"
 msgstr "Näytä ristikko"
 
-#: plugins/Oculars/src/Oculars.cpp:1320
+#: plugins/Oculars/src/Oculars.cpp:1319
 msgid "Image sensor frame"
 msgstr "Kuvailmaisimen kehys"
 
-#: plugins/Oculars/src/Oculars.cpp:1321
+#: plugins/Oculars/src/Oculars.cpp:1320
 msgid "Telrad sight"
 msgstr "Telrad-näkymä"
 
-#: plugins/Oculars/src/Oculars.cpp:1322
+#: plugins/Oculars/src/Oculars.cpp:1321
 msgid "Oculars plugin configuration"
 msgstr "Okulaarit-laajennuksen asetukset"
 
-#: plugins/Oculars/src/Oculars.cpp:1324
+#: plugins/Oculars/src/Oculars.cpp:1323
 msgid "Select next telescope"
 msgstr "Valitse seuraava teleskooppi"
 
-#: plugins/Oculars/src/Oculars.cpp:1326
+#: plugins/Oculars/src/Oculars.cpp:1325
 msgid "Select previous telescope"
 msgstr "Valitse edellinen teleskooppi"
 
-#: plugins/Oculars/src/Oculars.cpp:1328
+#: plugins/Oculars/src/Oculars.cpp:1327
 msgid "Select next eyepiece"
 msgstr "Valitse seuraava okulaari"
 
-#: plugins/Oculars/src/Oculars.cpp:1330
+#: plugins/Oculars/src/Oculars.cpp:1329
 msgid "Select previous eyepiece"
 msgstr "Valitse edellinen okulaari"
 
-#: plugins/Oculars/src/Oculars.cpp:1559
+#: plugins/Oculars/src/Oculars.cpp:1561
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:500
 #, qt-format
 msgid "Ocular #%1"
 msgstr "Okulaari %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1564
+#: plugins/Oculars/src/Oculars.cpp:1566
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:504
 #, qt-format
 msgid "Ocular #%1: %2"
 msgstr "Okulaari %1 : %2"
 
 #. TRANSLATORS: FL = Focal length
-#: plugins/Oculars/src/Oculars.cpp:1578
+#: plugins/Oculars/src/Oculars.cpp:1580
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:541
 #, qt-format
 msgid "Ocular FL: %1 mm"
 msgstr "Okulaarin polttoväli: %1 mm"
 
 #. TRANSLATORS: aFOV = apparent field of view
-#: plugins/Oculars/src/Oculars.cpp:1585
+#: plugins/Oculars/src/Oculars.cpp:1587
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:551
 #, qt-format
 msgid "Ocular aFOV: %1"
 msgstr "Okulaarin näenn. näkökenttä: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1597
+#: plugins/Oculars/src/Oculars.cpp:1599
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:581
 #, qt-format
 msgid "Lens #%1"
 msgstr "Linssi #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:1601
+#: plugins/Oculars/src/Oculars.cpp:1603
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:585
 #, qt-format
 msgid "Lens #%1: %2"
 msgstr "Linssi #%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:1606
+#: plugins/Oculars/src/Oculars.cpp:1608
 msgid "Lens: none"
 msgstr "Linssi: ei"
 
-#: plugins/Oculars/src/Oculars.cpp:1616 plugins/Oculars/src/Oculars.cpp:1673
+#: plugins/Oculars/src/Oculars.cpp:1618 plugins/Oculars/src/Oculars.cpp:1675
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:738
 #, qt-format
 msgid "Telescope #%1"
 msgstr "Kaukoputki %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1621 plugins/Oculars/src/Oculars.cpp:1678
+#: plugins/Oculars/src/Oculars.cpp:1623 plugins/Oculars/src/Oculars.cpp:1680
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:742
 #, qt-format
 msgid "Telescope #%1: %2"
 msgstr "Kaukoputki %1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:1632
+#: plugins/Oculars/src/Oculars.cpp:1634
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:818
 #, qt-format
 msgid "Magnification: %1"
 msgstr "Suurennus: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1640
+#: plugins/Oculars/src/Oculars.cpp:1642
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:827
 #, qt-format
 msgid "FOV: %1"
 msgstr "Näkökenttä: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1650
+#: plugins/Oculars/src/Oculars.cpp:1652
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:683
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:780
 #, qt-format
 msgid "Dimensions: %1"
 msgstr "Mitat: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1655
+#: plugins/Oculars/src/Oculars.cpp:1657
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:643
 #, qt-format
 msgid "Sensor #%1"
 msgstr "Ilmaisin %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1659
+#: plugins/Oculars/src/Oculars.cpp:1661
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:647
 #, qt-format
 msgid "Sensor #%1: %2"
 msgstr "Ilmaisin %1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:1917
+#: plugins/Oculars/src/Oculars.cpp:1919
 msgid "&Lens"
 msgstr "&Linssi"
 
-#: plugins/Oculars/src/Oculars.cpp:1918
+#: plugins/Oculars/src/Oculars.cpp:1920
 msgid "&Previous lens"
 msgstr "%Edellinen linssi"
 
-#: plugins/Oculars/src/Oculars.cpp:1919
+#: plugins/Oculars/src/Oculars.cpp:1921
 msgid "&Next lens"
 msgstr "&Seuraava linssi"
 
-#: plugins/Oculars/src/Oculars.cpp:1949
+#: plugins/Oculars/src/Oculars.cpp:1951
 msgid "&Telescope"
 msgstr "&Kaukoputki"
 
-#: plugins/Oculars/src/Oculars.cpp:1950
+#: plugins/Oculars/src/Oculars.cpp:1952
 msgid "&Previous telescope"
 msgstr "&Edellinen kaukoputki"
 
-#: plugins/Oculars/src/Oculars.cpp:1951
+#: plugins/Oculars/src/Oculars.cpp:1953
 msgid "&Next telescope"
 msgstr "&Seuraava kaukoputki"
 
@@ -8368,11 +8368,11 @@ msgctxt "tab in plugin windows"
 msgid "Websites"
 msgstr "Verkkosivustot"
 
-#: plugins/Observability/src/Observability.cpp:65
+#: plugins/Observability/src/Observability.cpp:66
 msgid "Observability Analysis"
 msgstr "Havaittavuusanalyysi"
 
-#: plugins/Observability/src/Observability.cpp:68
+#: plugins/Observability/src/Observability.cpp:69
 msgid ""
 "Displays an analysis of a selected object's observability (rise, set, and "
 "transit times) for the current date, as well as when it is observable "
@@ -8390,199 +8390,204 @@ msgstr ""
 "nousu ja lasku. (Selitykset näille termeille löytyvät \"Tietoja\"-"
 "välilehdeltä laajennuksen asetusikkunasta."
 
-#: plugins/Observability/src/Observability.cpp:209
+#: plugins/Observability/src/Observability.cpp:139
 msgctxt "short month name"
 msgid "Jan"
 msgstr "Tammi"
 
-#: plugins/Observability/src/Observability.cpp:209
+#: plugins/Observability/src/Observability.cpp:140
 msgctxt "short month name"
 msgid "Feb"
 msgstr "Helmi"
 
-#: plugins/Observability/src/Observability.cpp:209
+#: plugins/Observability/src/Observability.cpp:141
 msgctxt "short month name"
 msgid "Mar"
 msgstr "Maalis"
 
-#: plugins/Observability/src/Observability.cpp:209
+#: plugins/Observability/src/Observability.cpp:142
 msgctxt "short month name"
 msgid "Apr"
 msgstr "Huhti"
 
-#: plugins/Observability/src/Observability.cpp:209
+#: plugins/Observability/src/Observability.cpp:143
 msgctxt "short month name"
 msgid "May"
 msgstr "Touko"
 
-#: plugins/Observability/src/Observability.cpp:209
+#: plugins/Observability/src/Observability.cpp:144
 msgctxt "short month name"
 msgid "Jun"
 msgstr "Kesä"
 
-#: plugins/Observability/src/Observability.cpp:209
+#: plugins/Observability/src/Observability.cpp:145
 msgctxt "short month name"
 msgid "Jul"
 msgstr "Heinä"
 
-#: plugins/Observability/src/Observability.cpp:209
+#: plugins/Observability/src/Observability.cpp:146
 msgctxt "short month name"
 msgid "Aug"
 msgstr "Elo"
 
-#: plugins/Observability/src/Observability.cpp:209
+#: plugins/Observability/src/Observability.cpp:147
 msgctxt "short month name"
 msgid "Sep"
 msgstr "Syys"
 
-#: plugins/Observability/src/Observability.cpp:209
+#: plugins/Observability/src/Observability.cpp:148
 msgctxt "short month name"
 msgid "Oct"
 msgstr "Loka"
 
-#: plugins/Observability/src/Observability.cpp:209
+#: plugins/Observability/src/Observability.cpp:149
 msgctxt "short month name"
 msgid "Nov"
 msgstr "Marras"
 
-#: plugins/Observability/src/Observability.cpp:209
+#: plugins/Observability/src/Observability.cpp:150
 msgctxt "short month name"
 msgid "Dec"
 msgstr "Joulu"
 
-#: plugins/Observability/src/Observability.cpp:215
+#. TRANSLATORS: Short for "hours".
+#: plugins/Observability/src/Observability.cpp:153
 msgid "h"
 msgstr "h"
 
-#: plugins/Observability/src/Observability.cpp:216
+#. TRANSLATORS: Short for "minutes".
+#: plugins/Observability/src/Observability.cpp:155
 msgid "m"
 msgstr "m"
 
-#: plugins/Observability/src/Observability.cpp:217
+#. TRANSLATORS: Short for "seconds".
+#: plugins/Observability/src/Observability.cpp:157
 msgid "s"
 msgstr "s"
 
-#: plugins/Observability/src/Observability.cpp:218
+#: plugins/Observability/src/Observability.cpp:158
 #, qt-format
 msgid "Sets at %1 (in %2)"
 msgstr "Laskee %1 (%2 kuluttua)"
 
-#: plugins/Observability/src/Observability.cpp:219
+#: plugins/Observability/src/Observability.cpp:159
 #, qt-format
 msgid "Rose at %1 (%2 ago)"
 msgstr "Nousi %1 (%2 sitten)"
 
-#: plugins/Observability/src/Observability.cpp:220
+#: plugins/Observability/src/Observability.cpp:160
 #, qt-format
 msgid "Set at %1 (%2 ago)"
 msgstr "Laski %1 (%2 sitten)"
 
-#: plugins/Observability/src/Observability.cpp:221
+#: plugins/Observability/src/Observability.cpp:161
 #, qt-format
 msgid "Rises at %1 (in %2)"
 msgstr "Nousee %1 (%2 kuluttua)"
 
-#: plugins/Observability/src/Observability.cpp:222
+#: plugins/Observability/src/Observability.cpp:162
 msgid "Circumpolar."
 msgstr "Sirkumpolaarinen (näkyy aina)."
 
-#: plugins/Observability/src/Observability.cpp:223
+#: plugins/Observability/src/Observability.cpp:163
 msgid "No rise."
 msgstr "Ei nouse."
 
-#: plugins/Observability/src/Observability.cpp:224
+#: plugins/Observability/src/Observability.cpp:164
 #, qt-format
 msgid "Culminates at %1 (in %2) at %3 deg."
 msgstr "Korkeimmillaan %1 (%2 kuluttua) %3 asteessa."
 
-#: plugins/Observability/src/Observability.cpp:225
+#: plugins/Observability/src/Observability.cpp:165
 #, qt-format
 msgid "Culminated at %1 (%2 ago) at %3 deg."
 msgstr "Korkeimmillaan %1 (%2 sitten) %3 asteessa."
 
-#: plugins/Observability/src/Observability.cpp:226
+#: plugins/Observability/src/Observability.cpp:166
 msgid "Source is not observable."
 msgstr "Kohde ei ole havaittavissa"
 
-#: plugins/Observability/src/Observability.cpp:227
-msgid "No Acronychal nor Cosmical rise/set."
-msgstr "Ei akronikaalista tai kosmista nousua/laskua."
+#: plugins/Observability/src/Observability.cpp:167
+msgid "No acronychal nor cosmical rise/set."
+msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:228
-msgid "Greatest elongation: "
-msgstr "Suurin elongaatio: "
-
-#: plugins/Observability/src/Observability.cpp:229
-msgid "Largest Sun separation: "
-msgstr "Suurin kulmaetäisyys Auringosta: "
-
-#: plugins/Observability/src/Observability.cpp:230
+#: plugins/Observability/src/Observability.cpp:168
 #, qt-format
-msgid " (at %1 deg.)"
-msgstr " (%1 asteessa)"
+msgid "Greatest elongation: %1 (at %2 deg.)"
+msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:232
-msgid "Acronychal rise/set"
-msgstr "Akronikaalinen nousu/lasku"
+#: plugins/Observability/src/Observability.cpp:169
+#, qt-format
+msgid "Largest Sun separation: %1 (at %2 deg.)"
+msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:233
-msgid "No Acronychal rise/set."
-msgstr "Ei akronikaalista nousua/laskua."
+#. TRANSLATORS: The space at the end is significant - another sentence may follow.
+#: plugins/Observability/src/Observability.cpp:172
+#, qt-format
+msgid "Acronychal rise/set: %1/%2. "
+msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:234
-msgid "Cosmical rise/set"
-msgstr "Kosminen nousu/lasku"
+#. TRANSLATORS: The space at the end is significant - another sentence may follow.
+#: plugins/Observability/src/Observability.cpp:174
+msgid "No acronychal rise/set. "
+msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:235
-msgid "No Cosmical rise/set."
-msgstr "Ei kosmista nousua/laskua."
+#: plugins/Observability/src/Observability.cpp:175
+#, qt-format
+msgid "Cosmical rise/set: %1/%2."
+msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:236
+#: plugins/Observability/src/Observability.cpp:176
+msgid "No cosmical rise/set."
+msgstr ""
+
+#: plugins/Observability/src/Observability.cpp:177
 msgid "Observable during the whole year."
 msgstr "Havaittavissa läpi vuoden."
 
-#: plugins/Observability/src/Observability.cpp:237
+#: plugins/Observability/src/Observability.cpp:178
 msgid "Not observable at dark night."
 msgstr "Ei havaittavissa pimeään yöaikaan."
 
-#: plugins/Observability/src/Observability.cpp:238
-msgid "Nights above horizon: "
-msgstr "Yöt horisontin yläpuolella: "
+#: plugins/Observability/src/Observability.cpp:179
+#, qt-format
+msgid "Nights above horizon: %1"
+msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:239
-#: plugins/Observability/src/Observability.cpp:759
+#: plugins/Observability/src/Observability.cpp:180
 msgid "TODAY:"
 msgstr "TÄNÄÄN:"
 
-#: plugins/Observability/src/Observability.cpp:240
-#: plugins/Observability/src/Observability.cpp:768
+#: plugins/Observability/src/Observability.cpp:181
 msgid "THIS YEAR:"
 msgstr "TÄNÄ VUONNA:"
 
-#: plugins/Observability/src/Observability.cpp:241
+#. TRANSLATORS: The space at the end is significant - another sentence may follow.
+#: plugins/Observability/src/Observability.cpp:183
 #, qt-format
 msgid "Previous Full Moon: %1 %2 at %3:%4. "
 msgstr "Edellinen täysikuu: %1 %2 kello %3.%4. "
 
-#: plugins/Observability/src/Observability.cpp:242
+#: plugins/Observability/src/Observability.cpp:184
 #, qt-format
 msgid "Next Full Moon: %1 %2 at %3:%4. "
 msgstr "Seuraava täysikuu: %1 %2 kello %3.%4. "
 
-#: plugins/Observability/src/Observability.cpp:263
-#: plugins/Observability/src/Observability.cpp:264
+#: plugins/Observability/src/Observability.cpp:199
+#: plugins/Observability/src/Observability.cpp:200
+#: plugins/Observability/src/Observability.cpp:204
 msgid "Observability"
 msgstr "Havaittavuus"
 
-#: plugins/Observability/src/Observability.cpp:264
+#: plugins/Observability/src/Observability.cpp:205
 msgid "Observability configuration window"
 msgstr "Havaittavuuden asetusikkuna"
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:99
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:127
 msgid "Observability Plug-in"
 msgstr "Havaittavuus-laajennus"
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:103
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:131
 msgid ""
 "Plugin that analyzes the observability of the selected source (or the screen "
 "center, if no source is selected). The plugin can show rise, transit, and "
@@ -8603,17 +8608,15 @@ msgstr ""
 "kiittää Alexander Wolfia ja Georg Zottia heidän antamistaan "
 "neuvoista.<br><br>Ivan Martin-Vidal (Onsala Space Observatory)"
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:105
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:133
 msgid "Explanation of some parameters"
 msgstr "Joidenkin parametrien selityksiä"
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:106
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:150
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:227
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:134
 msgid "Sun altitude at twilight:"
 msgstr "Auringon korkeus hämärän päättyessä:"
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:106
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:134
 msgid ""
 "Any celestial object will be considered visible when the Sun is below this "
 "altitude. The altitude at astronomical twilight ranges usually between -12 "
@@ -8625,13 +8628,11 @@ msgstr ""
 "välillä. Tätä parametriä käytetään vain arvioitaessa havaittuvuusjaksoa "
 "(katso alla)."
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:108
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:154
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:234
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:136
 msgid "Horizon altitude:"
 msgstr "Horisontin korkeus:"
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:108
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:136
 msgid ""
 "Minimum observable altitude (due to mountains, buildings, or just a limited "
 "telescope mount)."
@@ -8639,11 +8640,11 @@ msgstr ""
 "Pienin havainnointikorkeus (mikäli esimerkiksi vuoret, rakennukset tai "
 "kaukoputken jalusta rajoittavat näkymää)."
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:110
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:138
 msgid "Today ephemeris:"
 msgstr "Efemeridit tänään:"
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:110
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:138
 msgid ""
 "Self-explanatory. The program will show the rise, set, and culmination "
 "(transit) times. The exact times for these ephemeris are given in two ways: "
@@ -8654,11 +8655,11 @@ msgstr ""
 "ajat. Tarkat ajat näille efemerideille on annettu kahdella tavalla: "
 "aikaväleinä (viitaten nykyhetkeen) ja kellonaikoina (paikallista aikaa)."
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:111
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:139
 msgid "Acronychal/Cosmical rise/set:"
 msgstr "Akronikaalinen/kosminen nousu/lasku:"
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:111
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:139
 msgid ""
 "The Acronychal rise (or set) of an object happens when the object rises (or "
 "sets) just when the Sun sets (or rises), respectively. The exact dates of "
@@ -8679,11 +8680,11 @@ msgstr ""
 "laskevat) yhtä aikaa. Luonnollisesti kohde on huonosti (tai ei ole "
 "ollenkaan) havaittavissa kosmisen laskun ja nousun välillä."
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:112
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:140
 msgid "Largest Sun separation:"
 msgstr "Suurin kulmaetäisyys Auringosta:"
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:112
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:140
 msgid ""
 "Happens when the angular separation between the Sun and the celestial object "
 "are maximum. In most cases, this is equivalent to say that the Equatorial "
@@ -8702,11 +8703,11 @@ msgstr ""
 "keskiyöllä ja on taivaan tummimmalla alueella tällä deklinaatiolla. Eli on "
 "siis 'paras' yö tämän nimenomaisen kohteen havaitsemiseen."
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:113
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:141
 msgid "Nights with source above horizon:"
 msgstr "Yöt, jolloin kohde on horisontin yllä:"
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:113
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:141
 msgid ""
 "The program computes the range of dates when the celestial object is above "
 "the horizon at least during one moment of the night. By 'night', the program "
@@ -8743,11 +8744,11 @@ msgstr ""
 "planeetoille (jotka eivät riipu käyttäjän asettamasta hämärän korkeudesta) "
 "toteutetaan tulevaisuudessa tähän laajennukseen."
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:114
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:142
 msgid "Full Moon:"
 msgstr "Täysikuu:"
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:114
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:142
 msgid ""
 "When the Moon is selected, the program can compute the exact closest dates "
 "of the Moon's opposition to the Sun."
@@ -8755,76 +8756,71 @@ msgstr ""
 "Kun Kuu on valittuna, ohjelma voi laskea lähimmät tarkat päivämäärät Kuun "
 "oppositiolle Auringon suhteen."
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:150
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:154
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:227
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:234
-msgid "deg."
-msgstr "astetta"
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:195
+#, qt-format
+msgid "Sun altitude at twilight: %1 deg."
+msgstr ""
 
-#: plugins/Observability/src/ui_ObservabilityDialog.h:358
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:201
+#, qt-format
+msgid "Horizon altitude: %1 deg."
+msgstr ""
+
+#: plugins/Observability/src/ui_ObservabilityDialog.h:342
 msgid "Observability Configuration"
 msgstr "Havaittavuuden asetukset"
 
-#: plugins/Observability/src/ui_ObservabilityDialog.h:359
+#: plugins/Observability/src/ui_ObservabilityDialog.h:343
 msgid "Observability Plug-in Configuration"
 msgstr "Havaittavuus-laajennuksen asetukset"
 
-#: plugins/Observability/src/ui_ObservabilityDialog.h:361
-msgid "Showing Options"
-msgstr "Näyttöasetukset"
-
-#: plugins/Observability/src/ui_ObservabilityDialog.h:362
-msgid "Today's ephemeris (rise, set, and transit times)"
-msgstr "Efemeridit tänään (nousu-, lasku- ja meridiaaninohitusajat)"
-
-#: plugins/Observability/src/ui_ObservabilityDialog.h:363
-msgid "Dates of Acronychal and Cosmical rise/set"
-msgstr "Akronikaalisen ja kosmisen nousun/laskun päivämäärät"
-
-#: plugins/Observability/src/ui_ObservabilityDialog.h:364
-msgid "Date of largest separation to the Sun"
-msgstr "Päiväys, jolloin kulmaetäisyys Aurinkoon on suurin"
-
-#: plugins/Observability/src/ui_ObservabilityDialog.h:365
-msgid "Nights with the source above horizon"
-msgstr "Yöt, jolloin kohde on horisontin yläpuolella"
-
-#: plugins/Observability/src/ui_ObservabilityDialog.h:366
-msgid "Dates of previous and next Full Moon"
-msgstr "Edellisen ja seuraavan täydenkuun päivämäärät"
-
-#: plugins/Observability/src/ui_ObservabilityDialog.h:369
+#: plugins/Observability/src/ui_ObservabilityDialog.h:345
 msgid "Font color and size"
 msgstr "Kirjasimen väri ja koko"
 
-#: plugins/Observability/src/ui_ObservabilityDialog.h:370
+#: plugins/Observability/src/ui_ObservabilityDialog.h:346
 msgid "Red"
 msgstr "Punainen"
 
-#: plugins/Observability/src/ui_ObservabilityDialog.h:371
+#: plugins/Observability/src/ui_ObservabilityDialog.h:347
 msgid "Green"
 msgstr "Vihreä"
 
-#: plugins/Observability/src/ui_ObservabilityDialog.h:372
+#: plugins/Observability/src/ui_ObservabilityDialog.h:348
 msgid "Blue"
 msgstr "Sininen"
 
-#: plugins/Observability/src/ui_ObservabilityDialog.h:373
+#: plugins/Observability/src/ui_ObservabilityDialog.h:349
 msgid "Font Size"
 msgstr "Kirjasinkoko"
 
-#: plugins/Observability/src/ui_ObservabilityDialog.h:374
+#: plugins/Observability/src/ui_ObservabilityDialog.h:350
 msgid "Observing conditions"
 msgstr "Havainto-olosuhteet"
 
-#: plugins/Observability/src/ui_ObservabilityDialog.h:375
-msgid "Horizon altitude: 0 deg."
-msgstr "Horisontin korkeus: 0 astetta"
+#: plugins/Observability/src/ui_ObservabilityDialog.h:351
+msgid "Showing options"
+msgstr ""
 
-#: plugins/Observability/src/ui_ObservabilityDialog.h:376
-msgid "Sun altitude at twilight: 0 deg."
-msgstr "Auringon korkeus hämärän päättyessä: 0 astetta"
+#: plugins/Observability/src/ui_ObservabilityDialog.h:352
+msgid "Today's ephemeris (rise, set, and transit times)"
+msgstr "Efemeridit tänään (nousu-, lasku- ja meridiaaninohitusajat)"
+
+#: plugins/Observability/src/ui_ObservabilityDialog.h:353
+msgid "Dates of Acronychal and Cosmical rise/set"
+msgstr "Akronikaalisen ja kosmisen nousun/laskun päivämäärät"
+
+#: plugins/Observability/src/ui_ObservabilityDialog.h:354
+msgid "Date of largest separation to the Sun"
+msgstr "Päiväys, jolloin kulmaetäisyys Aurinkoon on suurin"
+
+#: plugins/Observability/src/ui_ObservabilityDialog.h:355
+msgid "Nights with the source above horizon"
+msgstr "Yöt, jolloin kohde on horisontin yläpuolella"
+
+#: plugins/Observability/src/ui_ObservabilityDialog.h:356
+msgid "Dates of previous and next Full Moon"
+msgstr "Edellisen ja seuraavan täydenkuun päivämäärät"
 
 #: plugins/FOV/src/FOV.cpp:40 plugins/FOV/src/FOV.cpp:78
 #: plugins/FOV/src/ui_fovWindow.h:383 plugins/FOV/src/ui_fovWindow.h:385
@@ -9927,6 +9923,30 @@ msgstr "Hakutapahtumat"
 #~ msgid "Observability analysis"
 #~ msgstr "Havaittavuusanalyysi"
 
+#~ msgid "Greatest elongation: "
+#~ msgstr "Suurin elongaatio: "
+
+#~ msgid "No Acronychal nor Cosmical rise/set."
+#~ msgstr "Ei akronikaalista tai kosmista nousua/laskua."
+
+#~ msgid "Acronychal rise/set"
+#~ msgstr "Akronikaalinen nousu/lasku"
+
+#~ msgid "Nights above horizon: "
+#~ msgstr "Yöt horisontin yläpuolella: "
+
+#~ msgid "No Acronychal rise/set."
+#~ msgstr "Ei akronikaalista nousua/laskua."
+
+#~ msgid "No Cosmical rise/set."
+#~ msgstr "Ei kosmista nousua/laskua."
+
+#~ msgid "Showing Options"
+#~ msgstr "Näyttöasetukset"
+
+#~ msgid "deg."
+#~ msgstr "astetta"
+
 #~ msgid "0 deg."
 #~ msgstr "0 astetta"
 
@@ -9986,6 +10006,9 @@ msgstr "Hakutapahtumat"
 
 #~ msgid "Edit Alternative Shortcut"
 #~ msgstr "Muokkaa vaihtoehtoista pikanäppäintä"
+
+#~ msgid "Cosmical rise/set"
+#~ msgstr "Kosminen nousu/lasku"
 
 #, qt-format
 #~ msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>. B-V: <b>%3</b>)"
@@ -10053,6 +10076,10 @@ msgstr "Hakutapahtumat"
 #~ "Laajennus näyttää muutamia 10 magnitudia kirkkampia historiallisia "
 #~ "supernovia: "
 
+#, qt-format
+#~ msgid " (at %1 deg.)"
+#~ msgstr " (%1 asteessa)"
+
 #~ msgid ""
 #~ "The Quasars plugin provides visualization of some quasars brighter than 16 "
 #~ "visual magnitude. A catalogue of quasars compiled from \"Quasars and Active "
@@ -10093,8 +10120,17 @@ msgstr "Hakutapahtumat"
 #~ "mainittujen suureiden selitykset löytyvät asetusikkunan 'Tietoja'-"
 #~ "välilehdeltä."
 
+#~ msgid "Largest Sun separation: "
+#~ msgstr "Suurin kulmaetäisyys Auringosta: "
+
 #~ msgid "Sun altitude at twilight"
 #~ msgstr "Auringon korkeus hämärän päättyessä"
+
+#~ msgid "Horizon altitude: 0 deg."
+#~ msgstr "Horisontin korkeus: 0 astetta"
+
+#~ msgid "Sun altitude at twilight: 0 deg."
+#~ msgstr "Auringon korkeus hämärän päättyessä: 0 astetta"
 
 #~ msgid "1000"
 #~ msgstr "1000"
