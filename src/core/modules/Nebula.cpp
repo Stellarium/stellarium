@@ -103,11 +103,20 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 
 	if (mag < 50 && flags&Magnitude)
 	{
-	    if (core->getSkyDrawer()->getFlagHasAtmosphere())
-		oss << q_("Magnitude: <b>%1</b> (extincted to: <b>%2</b>)").arg(QString::number(getVMagnitude(core), 'f', 2),
-										QString::number(getVMagnitudeWithExtinction(core), 'f', 2)) << "<br>";
-	    else
-		oss << q_("Magnitude: <b>%1</b>").arg(getVMagnitude(core), 0, 'f', 2) << "<br>";
+		if (core->getSkyDrawer()->getFlagHasAtmosphere())
+		{
+			oss << q_("Magnitude: <b>%1</b> (extincted to: <b>%2</b>)").arg(QString::number(getVMagnitude(core), 'f', 2),
+											QString::number(getVMagnitudeWithExtinction(core), 'f', 2)) << "<br>";
+			if (getSurfaceBrightness(core)<99 && getSurfaceBrightnessWithExtinction(core)<99)
+				oss << q_("Surface brightness: <b>%1</b> (extincted to: <b>%2</b>)").arg(QString::number(getSurfaceBrightness(core), 'f', 2),
+													 QString::number(getSurfaceBrightnessWithExtinction(core), 'f', 2)) << "<br>";
+		}
+		else
+		{
+			oss << q_("Magnitude: <b>%1</b>").arg(getVMagnitude(core), 0, 'f', 2) << "<br>";
+			if (getSurfaceBrightness(core)<99)
+				oss << q_("Surface brightness: <b>%1</b>").arg(QString::number(getSurfaceBrightness(core), 'f', 2)) << "<br>";
+		}
 	}
 	oss << getPositionInfoString(core, flags);
 
@@ -149,6 +158,22 @@ Vec3f Nebula::getInfoColor(void) const
 double Nebula::getCloseViewFov(const StelCore*) const
 {
 	return angularSize>0 ? angularSize * 4 : 1;
+}
+
+float Nebula::getSurfaceBrightness(const StelCore* core) const
+{
+	if (getVMagnitude(core)<99 && angularSize>0)
+		return getVMagnitude(core) + 2.5*log10(M_PI*pow((angularSize*M_PI/180.)*1800,2));
+	else
+		return 99;
+}
+
+float Nebula::getSurfaceBrightnessWithExtinction(const StelCore* core) const
+{
+	if (getVMagnitudeWithExtinction(core)<99 && angularSize>0)
+		return getVMagnitudeWithExtinction(core) + 2.5*log10(M_PI*pow((angularSize*M_PI/180.)*1800,2));
+	else
+		return 99;
 }
 
 void Nebula::drawHints(StelPainter& sPainter, float maxMagHints)
