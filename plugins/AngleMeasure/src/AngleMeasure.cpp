@@ -26,7 +26,6 @@
 #include "StelModuleMgr.hpp"
 #include "StelGui.hpp"
 #include "StelGuiItems.hpp"
-#include "StelIniParser.hpp"
 #include "StelVertexArray.hpp"
 #include "AngleMeasure.hpp"
 #include "AngleMeasureDialog.hpp"
@@ -105,6 +104,9 @@ double AngleMeasure::getCallOrder(StelModuleActionName actionName) const
 
 void AngleMeasure::init()
 {
+	if (!conf->childGroups().contains("AngleMeasure"))
+		restoreDefaultSettings();
+
 	loadSettings();
 
 	startPoint.set(0.,0.,0.);
@@ -129,8 +131,11 @@ void AngleMeasure::init()
 	// Add a toolbar button
 	try
 	{
-		toolbarButton = new StelButton(NULL, QPixmap(":/angleMeasure/bt_anglemeasure_on.png"), QPixmap(":/angleMeasure/bt_anglemeasure_off.png"),
-																	 QPixmap(":/graphicGui/glow32x32.png"), "actionShow_Angle_Measure");
+		toolbarButton = new StelButton(NULL,
+					       QPixmap(":/angleMeasure/bt_anglemeasure_on.png"),
+					       QPixmap(":/angleMeasure/bt_anglemeasure_off.png"),
+					       QPixmap(":/graphicGui/glow32x32.png"),
+					       "actionShow_Angle_Measure");
 		gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
 	}
 	catch (std::runtime_error& e)

@@ -61,7 +61,8 @@ StelPluginInfo EquationOfTimeStelPluginInterface::getPluginInfo() const
 }
 
 EquationOfTime::EquationOfTime()
-	: toolbarButton(NULL)
+	: flagShowSolutionEquationOfTime(false),
+	  toolbarButton(NULL)
 {
 	setObjectName("EquationOfTime");
 	mainWindow = new EquationOfTimeWindow();
@@ -87,7 +88,7 @@ void EquationOfTime::init()
 	// populate settings from main config file.
 	readSettingsFromConfig();
 
-	addAction("actionShow_EquationOfTime", N_("Equation of Time"), N_("Show solution for Equation of Time"), "enabled", "");
+	addAction("actionShow_EquationOfTime", N_("Equation of Time"), N_("Show solution for Equation of Time"), "showEOT", "Ctrl+Alt+T");
 
 	enableEquationOfTime(getFlagEnableAtStartup());
 	setFlagShowEOTButton(flagShowEOTButton);
@@ -142,15 +143,10 @@ void EquationOfTime::draw(StelCore *core)
 	//qDebug() << timeText;
 }
 
-void EquationOfTime::enableEquationOfTime(bool b)
-{
-	flagShowSolutionEquationOfTime = b;
-}
-
 double EquationOfTime::getCallOrder(StelModuleActionName actionName) const
 {
 	if (actionName==StelModule::ActionDraw)
-		return StelApp::getInstance().getModuleMgr().getModule("ConstellationMgr")->getCallOrder(actionName)+10.;
+		return StelApp::getInstance().getModuleMgr().getModule("LandscapeMgr")->getCallOrder(actionName)+10.;
 	return 0;
 }
 
@@ -275,5 +271,30 @@ void EquationOfTime::setFlagShowEOTButton(bool b)
 		gui->getButtonBar()->hideButton("actionShow_EquationOfTime");
 	}
 	flagShowEOTButton = b;
+}
+
+void EquationOfTime::enableEquationOfTime(bool b)
+{
+	flagShowSolutionEquationOfTime = b;
+}
+
+void EquationOfTime::setFlagInvertedValue(bool b)
+{
+	flagUseInvertedValue=b;
+}
+
+void EquationOfTime::setFlagMsFormat(bool b)
+{
+	flagUseMsFormat=b;
+}
+//! Enable plugin usage at startup
+void EquationOfTime::setFlagEnableAtStartup(bool b)
+{
+	flagEnableAtStartup=b;
+}
+//! Set font size for message
+void EquationOfTime::setFontSize(int size)
+{
+	fontSize=size;
 }
 
