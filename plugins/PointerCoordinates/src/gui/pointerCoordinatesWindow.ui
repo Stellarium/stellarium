@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>coordinatesWindowForm</class>
- <widget class="QWidget" name="coordinatesWindowForm">
+ <class>pointerCoordinatesWindowForm</class>
+ <widget class="QWidget" name="pointerCoordinatesWindowForm">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>486</width>
+    <width>485</width>
     <height>461</height>
    </rect>
   </property>
@@ -87,7 +87,7 @@
       <item>
        <widget class="QLabel" name="stelWindowTitle">
         <property name="text">
-         <string>Coordinates</string>
+         <string>Pointer Coordinates</string>
         </property>
        </widget>
       </item>
@@ -136,7 +136,7 @@
      </property>
      <widget class="QWidget" name="tabCoordinates">
       <attribute name="title">
-       <string>Coordinates</string>
+       <string>Pointer Coordinates</string>
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayoutTimeZone">
        <property name="spacing">
@@ -163,7 +163,7 @@
           </size>
          </property>
          <property name="title">
-          <string>Coordinates</string>
+          <string>Pointer Coordinates</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignCenter</set>
@@ -216,7 +216,7 @@
           <item>
            <widget class="QCheckBox" name="checkBoxEnableAtStartup">
             <property name="text">
-             <string>Enable display at startup</string>
+             <string>Enable displaying coordinates at startup</string>
             </property>
            </widget>
           </item>
@@ -300,7 +300,7 @@
 }</string>
          </property>
          <property name="text">
-          <string notr="true">Equation of Time plug-in</string>
+          <string notr="true">Pointer Coordinates plug-in</string>
          </property>
         </widget>
        </item>

@@ -1,5 +1,5 @@
 /*
- * Coordinates plug-in for Stellarium
+ * Pointer Coordinates plug-in for Stellarium
  *
  * Copyright (C) 2014 Alexander Wolf
  *
@@ -17,26 +17,26 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "Coordinates.hpp"
-#include "CoordinatesWindow.hpp"
-#include "ui_coordinatesWindow.h"
+#include "PointerCoordinates.hpp"
+#include "PointerCoordinatesWindow.hpp"
+#include "ui_pointerCoordinatesWindow.h"
 
 #include "StelApp.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelModule.hpp"
 #include "StelModuleMgr.hpp"
 
-CoordinatesWindow::CoordinatesWindow()
+PointerCoordinatesWindow::PointerCoordinatesWindow()
 {
-	ui = new Ui_coordinatesWindowForm();
+	ui = new Ui_pointerCoordinatesWindowForm();
 }
 
-CoordinatesWindow::~CoordinatesWindow()
+PointerCoordinatesWindow::~PointerCoordinatesWindow()
 {
 	delete ui;
 }
 
-void CoordinatesWindow::retranslate()
+void PointerCoordinatesWindow::retranslate()
 {
 	if (dialog)
 	{
@@ -45,9 +45,9 @@ void CoordinatesWindow::retranslate()
 	}
 }
 
-void CoordinatesWindow::createDialogContent()
+void PointerCoordinatesWindow::createDialogContent()
 {
-	coord = GETSTELMODULE(Coordinates);
+	coord = GETSTELMODULE(PointerCoordinates);
 	ui->setupUi(dialog);
 
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
@@ -65,27 +65,27 @@ void CoordinatesWindow::createDialogContent()
 	updateAboutText();
 }
 
-void CoordinatesWindow::populateValues()
+void PointerCoordinatesWindow::populateValues()
 {
 	ui->checkBoxEnableAtStartup->setChecked(coord->getFlagEnableAtStartup());
 	ui->spinBoxFontSize->setValue(coord->getFontSize());
 	ui->checkBoxShowButton->setChecked(coord->getFlagShowCoordinatesButton());
 }
 
-void CoordinatesWindow::updateAboutText()
+void PointerCoordinatesWindow::updateAboutText()
 {
-	ui->labelTitle->setText(q_("Coordinates plug-in"));
-	QString version = QString(q_("Version %1")).arg(COORDINATES_PLUGIN_VERSION);
+	ui->labelTitle->setText(q_("Pointer Coordinates plug-in"));
+	QString version = QString(q_("Version %1")).arg(POINTERCOORDINATES_PLUGIN_VERSION);
 	ui->labelVersion->setText(version);
 }
 
-void CoordinatesWindow::saveCoordinatesSettings()
+void PointerCoordinatesWindow::saveCoordinatesSettings()
 {
-	coord->saveSettingsToConfig();
+	coord->saveConfiguration();
 }
 
-void CoordinatesWindow::resetCoordinatesSettings()
+void PointerCoordinatesWindow::resetCoordinatesSettings()
 {
-	coord->restoreDefaults();
+	coord->restoreDefaultConfiguration();
 	populateValues();
 }
