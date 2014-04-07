@@ -8,14 +8,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nb\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-04-05 17:03+0700\n"
-"PO-Revision-Date: 2014-03-31 11:25+0000\n"
+"POT-Creation-Date: 2014-04-06 21:33+0700\n"
+"PO-Revision-Date: 2014-04-06 20:35+0000\n"
 "Last-Translator: FreewareTips <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-04-06 06:12+0000\n"
+"X-Launchpad-Export-Date: 2014-04-07 05:54+0000\n"
 "X-Generator: Launchpad (build 16976)\n"
 "X-Poedit-Country: NORWAY\n"
 "X-Poedit-Language: Norwegian\n"
@@ -48,8 +48,8 @@ msgstr "Stjernebildenavn"
 msgid "Constellation boundaries"
 msgstr "Stjernebildegrenser"
 
-#: src/core/modules/StarMgr.cpp:339 src/ui_viewDialog.h:1164
-#: src/ui_viewDialog.h:1196 src/ui_viewDialog.h:1221
+#: src/core/modules/StarMgr.cpp:339 src/ui_viewDialog.h:1154
+#: src/ui_viewDialog.h:1186 src/ui_viewDialog.h:1211
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:240
 msgid "Stars"
 msgstr "Stjerner"
@@ -58,19 +58,19 @@ msgstr "Stjerner"
 msgid "Stars labels"
 msgstr "Stjernepåskrifter"
 
-#: src/core/modules/GridLinesMgr.cpp:531 src/ui_viewDialog.h:1245
+#: src/core/modules/GridLinesMgr.cpp:531 src/ui_viewDialog.h:1235
 msgid "Meridian"
 msgstr "Meridian"
 
-#: src/core/modules/GridLinesMgr.cpp:535 src/ui_viewDialog.h:1253
+#: src/core/modules/GridLinesMgr.cpp:535 src/ui_viewDialog.h:1243
 msgid "Ecliptic"
 msgstr "Ekliptikken"
 
-#: src/core/modules/GridLinesMgr.cpp:539 src/ui_viewDialog.h:1241
+#: src/core/modules/GridLinesMgr.cpp:539 src/ui_viewDialog.h:1231
 msgid "Equator"
 msgstr "Ekvator"
 
-#: src/core/modules/GridLinesMgr.cpp:543 src/ui_viewDialog.h:1249
+#: src/core/modules/GridLinesMgr.cpp:543 src/ui_viewDialog.h:1239
 msgid "Horizon"
 msgstr "Horisont"
 
@@ -83,7 +83,7 @@ msgstr "Galaktisk plan"
 msgid "Equatorial grid"
 msgstr "Ekvatorialt nett"
 
-#: src/core/modules/GridLinesMgr.cpp:682 src/ui_viewDialog.h:1236
+#: src/core/modules/GridLinesMgr.cpp:682 src/ui_viewDialog.h:1226
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:321
 msgid "Azimuthal grid"
 msgstr "Asimutnett"
@@ -117,16 +117,16 @@ msgstr "Ekvatorialt J2000-nett"
 msgid "Ecliptic J2000 grid"
 msgstr "Ekliptisk J2000-nett"
 
-#: src/core/modules/GridLinesMgr.cpp:689 src/ui_viewDialog.h:1237
+#: src/core/modules/GridLinesMgr.cpp:689 src/ui_viewDialog.h:1227
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:360
 msgid "Galactic grid"
 msgstr "Galaktisk nett"
 
-#: src/core/modules/GridLinesMgr.cpp:690 src/ui_viewDialog.h:1257
+#: src/core/modules/GridLinesMgr.cpp:690 src/ui_viewDialog.h:1247
 msgid "Galactic plane"
 msgstr "Galaktisk plan"
 
-#: src/core/modules/LandscapeMgr.cpp:345 src/ui_viewDialog.h:1186
+#: src/core/modules/LandscapeMgr.cpp:345 src/ui_viewDialog.h:1176
 msgid "Atmosphere"
 msgstr "Atmosfære"
 
@@ -134,7 +134,7 @@ msgstr "Atmosfære"
 msgid "Fog"
 msgstr "Dis"
 
-#: src/core/modules/LandscapeMgr.cpp:347 src/ui_viewDialog.h:1258
+#: src/core/modules/LandscapeMgr.cpp:347 src/ui_viewDialog.h:1248
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:298
 msgid "Cardinal points"
 msgstr "Himmelretninger"
@@ -171,7 +171,7 @@ msgstr "Planet: "
 msgid "Type: <b>%1</b>"
 msgstr "Type: <b>%1</b>"
 
-#: src/core/modules/Nebula.cpp:107 src/core/modules/Planet.cpp:137
+#: src/core/modules/Nebula.cpp:108 src/core/modules/Planet.cpp:137
 #: src/core/modules/MinorPlanet.cpp:220 src/core/modules/Comet.cpp:157
 #: src/core/modules/StarWrapper.cpp:56 src/core/modules/StarWrapper.cpp:180
 #: plugins/Supernovae/src/Supernova.cpp:127 plugins/Novae/src/Nova.cpp:127
@@ -180,7 +180,12 @@ msgstr "Type: <b>%1</b>"
 msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>)"
 msgstr "Magnitude: <b>%1</b> (med ekstinksjon: <b>%2</b>)"
 
-#: src/core/modules/Nebula.cpp:110 src/core/modules/Planet.cpp:140
+#: src/core/modules/Nebula.cpp:111
+#, qt-format
+msgid "Surface brightness: <b>%1</b> (extincted to: <b>%2</b>)"
+msgstr "Overflatelysstyrke: <b>%1</b> (med ekstinksjon: <b>%2</b>)"
+
+#: src/core/modules/Nebula.cpp:116 src/core/modules/Planet.cpp:140
 #: src/core/modules/MinorPlanet.cpp:223 src/core/modules/Comet.cpp:160
 #: src/core/modules/StarWrapper.cpp:60 src/core/modules/StarWrapper.cpp:183
 #: plugins/Supernovae/src/Supernova.cpp:129 plugins/Novae/src/Nova.cpp:130
@@ -189,44 +194,49 @@ msgstr "Magnitude: <b>%1</b> (med ekstinksjon: <b>%2</b>)"
 msgid "Magnitude: <b>%1</b>"
 msgstr "Magnitude: <b>%1</b>"
 
-#: src/core/modules/Nebula.cpp:115
+#: src/core/modules/Nebula.cpp:118
+#, qt-format
+msgid "Surface brightness: <b>%1</b>"
+msgstr "Overflatelysstyrke: <b>%1</b>"
+
+#: src/core/modules/Nebula.cpp:124
 #, qt-format
 msgid "Size: %1"
 msgstr "Størrelse: %1"
 
-#: src/core/modules/Nebula.cpp:342
+#: src/core/modules/Nebula.cpp:368
 msgid "Galaxy"
 msgstr "Galakse"
 
-#: src/core/modules/Nebula.cpp:345
+#: src/core/modules/Nebula.cpp:371
 msgid "Open cluster"
 msgstr "Åpen stjernehop"
 
-#: src/core/modules/Nebula.cpp:348
+#: src/core/modules/Nebula.cpp:374
 msgid "Globular cluster"
 msgstr "Kulehop"
 
-#: src/core/modules/Nebula.cpp:351
+#: src/core/modules/Nebula.cpp:377
 msgid "Nebula"
 msgstr "Stjernetåke"
 
-#: src/core/modules/Nebula.cpp:354
+#: src/core/modules/Nebula.cpp:380
 msgid "Planetary nebula"
 msgstr "Planetarisk tåke"
 
-#: src/core/modules/Nebula.cpp:357
+#: src/core/modules/Nebula.cpp:383
 msgid "Dark Nebula"
 msgstr "Mørk tåke"
 
-#: src/core/modules/Nebula.cpp:360
+#: src/core/modules/Nebula.cpp:386
 msgid "Cluster associated with nebulosity"
 msgstr "Stjernehop assosiert med en tåke"
 
-#: src/core/modules/Nebula.cpp:363
+#: src/core/modules/Nebula.cpp:389
 msgid "Unknown"
 msgstr "Ukjent"
 
-#: src/core/modules/Nebula.cpp:366
+#: src/core/modules/Nebula.cpp:392
 msgid "Undocumented type"
 msgstr "Udokumentert type"
 
@@ -631,11 +641,11 @@ msgstr "Speilvend horisontalt"
 msgid "Flip scene vertically"
 msgstr "Speilvend vertikalt"
 
-#: src/core/StelCore.cpp:1474
+#: src/core/StelCore.cpp:1476
 msgid "Correction is disabled. Use only if you know what you are doing!"
 msgstr "Korrigering er deaktivert. Bruk kun hvis du vet hva du gjør!"
 
-#: src/core/StelCore.cpp:1477
+#: src/core/StelCore.cpp:1479
 #, qt-format
 msgid ""
 "This historical formula was obtained by C. Schoch in 1931 and was used by G. "
@@ -643,14 +653,14 @@ msgid ""
 "Ancient Solar Eclipses</em> (%1). See for more info %2here%3."
 msgstr ""
 
-#: src/core/StelCore.cpp:1480
+#: src/core/StelCore.cpp:1482
 #, qt-format
 msgid ""
 "This empirical equation was published by G. M. Clemence in the article "
 "<em>On the system of astronomical constants</em> (%1)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1483
+#: src/core/StelCore.cpp:1485
 #, qt-format
 msgid ""
 "This formula is based on a study of post-1650 observations of the Sun, the "
@@ -659,14 +669,14 @@ msgid ""
 "PC program SunTracker Pro."
 msgstr ""
 
-#: src/core/StelCore.cpp:1487
+#: src/core/StelCore.cpp:1489
 msgid ""
 "This is a slightly modified version of the IAU (1952) formula which was "
 "adopted in the <em>Astronomical Ephemeris</em> and in the <em>Canon of Solar "
 "Eclipses</em> by Mucke & Meeus (1983)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1491
+#: src/core/StelCore.cpp:1493
 msgid ""
 "The tables of Tuckerman (1962, 1964) list the positions of the Sun, the Moon "
 "and the planets at 5- and 10-day intervals from 601 BCE to 1649 CE. The same "
@@ -674,7 +684,7 @@ msgid ""
 "(1973)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1495
+#: src/core/StelCore.cpp:1497
 #, qt-format
 msgid ""
 "This equation was published by P. M. Muller and F. R. Stephenson in the "
@@ -682,14 +692,14 @@ msgid ""
 "observations</em> (%1)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1498
+#: src/core/StelCore.cpp:1500
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson in the article <em>Pre-"
 "Telescopic Astronomical Observations</em> (%1)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1501
+#: src/core/StelCore.cpp:1503
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation (outdated and superseded by Schmadel & "
@@ -698,14 +708,14 @@ msgid ""
 "period 1800-1975</em> (%1) as fit through data published by Brouwer (1952)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1504
+#: src/core/StelCore.cpp:1506
 msgid ""
 "This algorithm was adopted in P. Bretagnon & L. Simon's <em>Planetary "
 "Programs and Tables from -4000 to +2800</em> (1986) and in the PC "
 "planetarium program RedShift."
 msgstr ""
 
-#: src/core/StelCore.cpp:1507
+#: src/core/StelCore.cpp:1509
 #, qt-format
 msgid ""
 "This formula was published by F. R. Stephenson and L. V. Morrison in the "
@@ -713,25 +723,25 @@ msgid ""
 "A.D. 1980</em> (%1)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1510
+#: src/core/StelCore.cpp:1512
 msgid "This algorithm is used in the PC planetarium program Guide 7."
 msgstr ""
 
-#: src/core/StelCore.cpp:1513
+#: src/core/StelCore.cpp:1515
 msgid ""
 "This algorithm was given by F. Espenak in his <em>Fifty Year Canon of Solar "
 "Eclipses: 1986-2035</em> (1987) and in his <em>Fifty Year Canon of Lunar "
 "Eclipses: 1986-2035</em> (1989)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1516
+#: src/core/StelCore.cpp:1518
 #, qt-format
 msgid ""
 "This formula was obtained by K.M. Borkowski (%1) from an analysis of 31 "
 "solar eclipse records dating between 2137 BCE and 1715 CE."
 msgstr ""
 
-#: src/core/StelCore.cpp:1519
+#: src/core/StelCore.cpp:1521
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation was published by L. D. Schmadel and G. "
@@ -740,14 +750,14 @@ msgid ""
 "Morrison (1984)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1522
+#: src/core/StelCore.cpp:1524
 msgid ""
 "This formula was adopted by M. Chapront-Touze & J. Chapront in the shortened "
 "version of the ELP 2000-85 lunar theory in their <em>Lunar Tables and "
 "Programs from 4000 B.C. to A.D. 8000</em> (1991)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1525
+#: src/core/StelCore.cpp:1527
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson and L. V. Morrison in the "
@@ -755,7 +765,7 @@ msgid ""
 "1990</em> (%1)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1528
+#: src/core/StelCore.cpp:1530
 #, qt-format
 msgid ""
 "F. R. Stephenson published this formula in his book <em>Historical Eclipses "
@@ -764,14 +774,14 @@ msgstr ""
 "F. R. Stephenson publiserte denne formelen i hans bok <em>Historical "
 "Eclipses and Earth's Rotation</em> (%1)."
 
-#: src/core/StelCore.cpp:1531
+#: src/core/StelCore.cpp:1533
 msgid ""
 "From J. Meeus, <em>Astronomical Algorithms</em> (2nd ed., 1998), and widely "
 "used. Table for 1620..2000, and includes a variant of Chapront, Chapront-"
 "Touze & Francou (1997) for dates outside 1620..2000."
 msgstr ""
 
-#: src/core/StelCore.cpp:1534
+#: src/core/StelCore.cpp:1536
 #, qt-format
 msgid ""
 "The JPL Solar System Dynamics Group of the NASA Jet Propulsion Laboratory "
@@ -780,21 +790,21 @@ msgstr ""
 "JPL Solar System Dynamics Group ved NASA Jet Propulsion Laboratory bruker "
 "denne formelen i deres interaktive nettside %1JPL Horizons%2."
 
-#: src/core/StelCore.cpp:1537
+#: src/core/StelCore.cpp:1539
 #, qt-format
 msgid ""
 "This polynome was published by J. Meeus and L. Simons in article "
 "<em>Polynomial approximations to Delta T, 1620-2000 AD</em> (%1)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1540
+#: src/core/StelCore.cpp:1542
 msgid ""
 "The fourth edition of O. Montenbruck & T. Pfleger's <em>Astronomy on the "
 "Personal Computer</em> (2000) provides simple 3rd-order polynomial data fits "
 "for the recent past."
 msgstr ""
 
-#: src/core/StelCore.cpp:1543
+#: src/core/StelCore.cpp:1545
 msgid ""
 "E. M. Reingold & N. Dershowitz present this polynomial data fit in "
 "<em>Calendrical Calculations</em> (3rd ed. 2007) and in their "
@@ -802,7 +812,7 @@ msgid ""
 "<em>Astronomical Algorithms</em> (1991)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1546
+#: src/core/StelCore.cpp:1548
 #, qt-format
 msgid ""
 "This important solution was published by L. V. Morrison and F. R. Stephenson "
@@ -810,7 +820,7 @@ msgid ""
 "calculation of eclipses</em> (%2) with addendum in (%3)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1549
+#: src/core/StelCore.cpp:1551
 #, qt-format
 msgid ""
 "From the Length of Day (LOD; as determined by Stephenson & Morrison (%2)), "
@@ -819,7 +829,7 @@ msgid ""
 "by Stephenson (%2). See for more info %3here%4."
 msgstr ""
 
-#: src/core/StelCore.cpp:1552
+#: src/core/StelCore.cpp:1554
 #, qt-format
 msgid ""
 "This solution by F. Espenak and J. Meeus, based on Morrison & Stephenson "
@@ -834,11 +844,11 @@ msgstr ""
 "Solar Eclipses: -1900 to +3000</em> (2006). Denne formelen er også brukt i "
 "sol-, måne- og planet-efemerideprogrammet SOLEX."
 
-#: src/core/StelCore.cpp:1552
+#: src/core/StelCore.cpp:1554
 msgid "Used by default."
 msgstr "Brukes som standard."
 
-#: src/core/StelCore.cpp:1555
+#: src/core/StelCore.cpp:1557
 #, qt-format
 msgid ""
 "This solution by B. Banjevic, based on Stephenson & Morrison (1984), was "
@@ -846,7 +856,7 @@ msgid ""
 "Babylon</em> (%1)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1558
+#: src/core/StelCore.cpp:1560
 #, qt-format
 msgid ""
 "This solution by S. Islam, M. Sadiq and M. S. Qureshi, based on Meeus & "
@@ -854,7 +864,7 @@ msgid ""
 "Approximation of DeltaT</em> (%1) and revisited by Sana Islam in 2013."
 msgstr ""
 
-#: src/core/StelCore.cpp:1561
+#: src/core/StelCore.cpp:1563
 #, qt-format
 msgid ""
 "This is a quadratic formula for calculation of %1T with coefficients defined "
@@ -863,35 +873,35 @@ msgstr ""
 "Dette er en kvadratisk formel for beregning av %1T med koeffisienter "
 "definert av brukeren."
 
-#: src/core/StelCore.cpp:1564 src/core/SimbadSearcher.cpp:133
+#: src/core/StelCore.cpp:1566 src/core/SimbadSearcher.cpp:133
 msgid "Error"
 msgstr "Feil"
 
-#: src/core/StelCore.cpp:1613
+#: src/core/StelCore.cpp:1616
 msgid "with meaningless values outside this range"
 msgstr "med meningsløse verdier utenfor dette området"
 
-#: src/core/StelCore.cpp:1639
+#: src/core/StelCore.cpp:1642
 msgid ""
 "with a mean error of less than one second, max. error 1.9s, and meaningless "
 "values outside this range"
 msgstr ""
 
-#: src/core/StelCore.cpp:1661 src/core/StelCore.cpp:1666
-#: src/core/StelCore.cpp:1693 src/core/StelCore.cpp:1698
+#: src/core/StelCore.cpp:1664 src/core/StelCore.cpp:1669
+#: src/core/StelCore.cpp:1696 src/core/StelCore.cpp:1701
 msgid "with zero values outside this range"
 msgstr ""
 
-#: src/core/StelCore.cpp:1671
+#: src/core/StelCore.cpp:1674
 msgid "with a typical 1-second accuracy and zero values outside this range"
 msgstr ""
 
-#: src/core/StelCore.cpp:1708
+#: src/core/StelCore.cpp:1711
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2, %3."
 msgstr "Gyldig bruksområde: Mellom år %1 og %2, %3."
 
-#: src/core/StelCore.cpp:1710
+#: src/core/StelCore.cpp:1713
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2."
 msgstr "Gyldig bruksområde: Mellom år %1 og %2."
@@ -3715,7 +3725,7 @@ msgstr "&Filnavn:"
 
 #: src/translations.h:560
 msgid "Copy &Link Location"
-msgstr ""
+msgstr "Kopier &lenkeadressen"
 
 #: src/ui_helpDialogGui.h:277 src/ui_helpDialogGui.h:283
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:418
@@ -3748,6 +3758,7 @@ msgid ""
 "Standard list of locations is contains only English names (without "
 "diacritics!)"
 msgstr ""
+"Standard stedsliste inneholder kun engelske navn (uten diakritiske tegn!)"
 
 #: src/ui_locationDialogGui.h:404
 msgid "Current location information"
@@ -3974,96 +3985,96 @@ msgstr "Søkealternativer"
 msgid "Use autofill only from the beginning of words"
 msgstr "Søk bare fra ordenes begynnelse"
 
-#: src/ui_searchDialogGui.h:657 src/ui_viewDialog.h:1261
-#: src/ui_viewDialog.h:1267 src/ui_viewDialog.h:1269
+#: src/ui_searchDialogGui.h:657 src/ui_viewDialog.h:1251
+#: src/ui_viewDialog.h:1257 src/ui_viewDialog.h:1259
 #: src/ui_configurationDialog.h:1166 src/ui_configurationDialog.h:1177
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:417
 msgid "Options"
 msgstr "Alternativer"
 
-#: src/ui_viewDialog.h:1148
+#: src/ui_viewDialog.h:1138
 msgid "View"
 msgstr "Visning"
 
-#: src/ui_viewDialog.h:1154
+#: src/ui_viewDialog.h:1144
 msgid "Sky"
 msgstr "Himmel"
 
-#: src/ui_viewDialog.h:1156
+#: src/ui_viewDialog.h:1146
 msgid "Markings"
 msgstr "Markeringer"
 
-#: src/ui_viewDialog.h:1158
+#: src/ui_viewDialog.h:1148
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:401
 msgid "Landscape"
 msgstr "Landskap"
 
-#: src/ui_viewDialog.h:1160
+#: src/ui_viewDialog.h:1150
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:223
 msgid "Starlore"
 msgstr "Stjernemyter"
 
-#: src/ui_viewDialog.h:1163
+#: src/ui_viewDialog.h:1153
 msgid "Labels and Markers"
 msgstr "Påskrifter og markører"
 
-#: src/ui_viewDialog.h:1165
+#: src/ui_viewDialog.h:1155
 msgid "Planets"
 msgstr "Planeter"
 
-#: src/ui_viewDialog.h:1167
+#: src/ui_viewDialog.h:1157
 msgid ""
 "Labels and markers for deep-sky objects (star clusters, galaxies and nebulas)"
 msgstr ""
 "Påskrifter og markeringer for deep-sky-objekter (stjernehoper, galakser og "
 "stjernetåker)"
 
-#: src/ui_viewDialog.h:1169 src/ui_viewDialog.h:1225
+#: src/ui_viewDialog.h:1159 src/ui_viewDialog.h:1215
 msgctxt "Deep-sky objects"
 msgid "DSOs"
 msgstr "DSO"
 
-#: src/ui_viewDialog.h:1170
+#: src/ui_viewDialog.h:1160
 msgid "Planets and satellites"
 msgstr "Planeter og satellitter"
 
-#: src/ui_viewDialog.h:1171
+#: src/ui_viewDialog.h:1161
 msgid "Show planets"
 msgstr "Vis planeter"
 
-#: src/ui_viewDialog.h:1172
+#: src/ui_viewDialog.h:1162
 msgid "Show planet markers"
 msgstr "Vis planetmarkører"
 
-#: src/ui_viewDialog.h:1173
+#: src/ui_viewDialog.h:1163
 msgid "Show planet orbits"
 msgstr "Vis planetbaner"
 
-#: src/ui_viewDialog.h:1174
+#: src/ui_viewDialog.h:1164
 msgid "Simulate light speed"
 msgstr "Simuler lyshastighet"
 
-#: src/ui_viewDialog.h:1175
+#: src/ui_viewDialog.h:1165
 msgid "Scale Moon"
 msgstr "Forstørr månen"
 
-#: src/ui_viewDialog.h:1177
+#: src/ui_viewDialog.h:1167
 msgid "Scale factor"
 msgstr "Skaleringsfaktor"
 
-#: src/ui_viewDialog.h:1180
+#: src/ui_viewDialog.h:1170
 msgid "Automatic change of landscape when planet is changed"
 msgstr "Automatisk endring av landskap når planet endres"
 
-#: src/ui_viewDialog.h:1182
+#: src/ui_viewDialog.h:1172
 msgid "Auto select landscapes"
 msgstr "Velg automatisk landskaper"
 
-#: src/ui_viewDialog.h:1184
+#: src/ui_viewDialog.h:1174
 msgid "Show atmosphere"
 msgstr "Vis atmosfære"
 
-#: src/ui_viewDialog.h:1188
+#: src/ui_viewDialog.h:1178
 msgid ""
 "Use light pollution data from locations database and ignore settings for "
 "light pollution below"
@@ -4071,183 +4082,183 @@ msgstr ""
 "Bruk lysforurensningsdata fra stedsdatabase og ignorer innstillingene for "
 "lysforurensning nedenfor"
 
-#: src/ui_viewDialog.h:1190
+#: src/ui_viewDialog.h:1180
 msgid "Light pollution data from locations database"
 msgstr "Lysforurensningsdata fra stedsdatabase"
 
-#: src/ui_viewDialog.h:1191
+#: src/ui_viewDialog.h:1181
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:396
 msgid "Light pollution:"
 msgstr "Lysforurensning:"
 
-#: src/ui_viewDialog.h:1193
+#: src/ui_viewDialog.h:1183
 msgid "pressure, temperature, extinction coefficient"
 msgstr "trykk, temperatur, ekstinksjonskoeffisient"
 
-#: src/ui_viewDialog.h:1195
+#: src/ui_viewDialog.h:1185
 msgid "Refraction/Extinction settings..."
 msgstr "Still inn refraksjon/ekstinksjon"
 
-#: src/ui_viewDialog.h:1197
+#: src/ui_viewDialog.h:1187
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:253
 msgid "Absolute scale:"
 msgstr "Absolutt skala:"
 
-#: src/ui_viewDialog.h:1198
+#: src/ui_viewDialog.h:1188
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:247
 msgid "Relative scale:"
 msgstr "Relativ skala:"
 
-#: src/ui_viewDialog.h:1199
+#: src/ui_viewDialog.h:1189
 msgid "Milky Way brightness:"
 msgstr "Lysstyrke på Melkeveien:"
 
-#: src/ui_viewDialog.h:1200
+#: src/ui_viewDialog.h:1190
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:259
 msgid "Twinkle:"
 msgstr "Blinke:"
 
-#: src/ui_viewDialog.h:1202
+#: src/ui_viewDialog.h:1192
 msgid "Dim faint stars when a very bright object is visible"
 msgstr "Demp svake stjerner når et veldig lyst objekt er synlig"
 
-#: src/ui_viewDialog.h:1204
+#: src/ui_viewDialog.h:1194
 msgid "Dynamic eye adaptation"
 msgstr "Dynamisk øyetilpasning"
 
-#: src/ui_viewDialog.h:1206
+#: src/ui_viewDialog.h:1196
 msgid "Settings for sporadic meteors"
 msgstr "Innstillinger for sporadiske meteorer"
 
-#: src/ui_viewDialog.h:1208
+#: src/ui_viewDialog.h:1198
 msgid "Shooting Stars"
 msgstr "Meteorer"
 
-#: src/ui_viewDialog.h:1210
+#: src/ui_viewDialog.h:1200
 msgid "Hourly zenith rate"
 msgstr "Timerate i senit"
 
-#: src/ui_viewDialog.h:1212
+#: src/ui_viewDialog.h:1202
 msgctxt "Zenithal Hourly Rate"
 msgid "ZHR:"
 msgstr "ZHR:"
 
-#: src/ui_viewDialog.h:1215
+#: src/ui_viewDialog.h:1205
 msgid "Limit Magnitudes (for unaided/binocular observers)"
 msgstr ""
 "Høyeste magnitudeverdier (for observatører med kikkert eller uten "
 "hjelpemiddel)"
 
-#: src/ui_viewDialog.h:1217
+#: src/ui_viewDialog.h:1207
 msgid "Limit Magnitudes"
 msgstr "Avgrensingsmagnituder"
 
-#: src/ui_viewDialog.h:1219
+#: src/ui_viewDialog.h:1209
 msgid "Limit the magnitude of stars"
 msgstr "Avgrens magnituden til stjerner"
 
-#: src/ui_viewDialog.h:1223
+#: src/ui_viewDialog.h:1213
 msgid ""
 "Limit the magnitude of deep-sky objects (star clusters, galaxies and nebulas)"
 msgstr ""
 "Avgrens magnituden til deep-sky-objekter (stjernehoper, galakser og "
 "stjernetåker)"
 
-#: src/ui_viewDialog.h:1226
+#: src/ui_viewDialog.h:1216
 msgid "Constellations"
 msgstr "Stjernebilder"
 
-#: src/ui_viewDialog.h:1227
+#: src/ui_viewDialog.h:1217
 msgid "Show lines"
 msgstr "Vis linjer"
 
-#: src/ui_viewDialog.h:1228
+#: src/ui_viewDialog.h:1218
 msgid "Show labels"
 msgstr "Vis navn"
 
-#: src/ui_viewDialog.h:1229
+#: src/ui_viewDialog.h:1219
 msgid "Show boundaries"
 msgstr "Vis grenser"
 
-#: src/ui_viewDialog.h:1230
+#: src/ui_viewDialog.h:1220
 msgid "Show art"
 msgstr "Vis kunst"
 
 #. TRANSLATORS: Refers to constellation art
-#: src/ui_viewDialog.h:1231
+#: src/ui_viewDialog.h:1221
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:291
 msgid "Art brightness:"
 msgstr "Lysstyrke på kunst:"
 
-#: src/ui_viewDialog.h:1232
+#: src/ui_viewDialog.h:1222
 msgid "Celestial Sphere"
 msgstr "Himmelhvelving"
 
-#: src/ui_viewDialog.h:1233
+#: src/ui_viewDialog.h:1223
 msgid "Equatorial grid (on J2000)"
 msgstr "Ekvatorialt nett (J2000)"
 
-#: src/ui_viewDialog.h:1234
+#: src/ui_viewDialog.h:1224
 msgid "Equatorial grid (on date)"
 msgstr "Ekvatorialt nett (d.d.)"
 
-#: src/ui_viewDialog.h:1235
+#: src/ui_viewDialog.h:1225
 msgid "Ecliptic grid (on J2000)"
 msgstr "Ekliptisk nett (J2000)"
 
-#: src/ui_viewDialog.h:1239
+#: src/ui_viewDialog.h:1229
 msgid "Show equator line"
 msgstr "Vis ekvatorlinje"
 
-#: src/ui_viewDialog.h:1243
+#: src/ui_viewDialog.h:1233
 msgid "Show meridian line"
 msgstr "Vis meridianlinje"
 
-#: src/ui_viewDialog.h:1247
+#: src/ui_viewDialog.h:1237
 msgid "Show horizon line"
 msgstr "Vis horisontlinje"
 
-#: src/ui_viewDialog.h:1251
+#: src/ui_viewDialog.h:1241
 msgid "Show ecliptic line"
 msgstr "Vis ekliptikken"
 
-#: src/ui_viewDialog.h:1255
+#: src/ui_viewDialog.h:1245
 msgid "Show Galactic plane line"
 msgstr "Vis linje for det galaktiske plan"
 
-#: src/ui_viewDialog.h:1259
+#: src/ui_viewDialog.h:1249
 msgid "Projection"
 msgstr "Projeksjon"
 
-#: src/ui_viewDialog.h:1260
+#: src/ui_viewDialog.h:1250
 msgid "Add/remove landscapes..."
 msgstr "Legg til/fjern landskaper..."
 
-#: src/ui_viewDialog.h:1262
+#: src/ui_viewDialog.h:1252
 msgid "Show ground"
 msgstr "Vis landskap"
 
-#: src/ui_viewDialog.h:1263
+#: src/ui_viewDialog.h:1253
 msgid "Show fog"
 msgstr "Vis dis"
 
-#: src/ui_viewDialog.h:1264
+#: src/ui_viewDialog.h:1254
 msgid "Use associated planet and position"
 msgstr "Bruk tilhørende planet og posisjon"
 
-#: src/ui_viewDialog.h:1265
+#: src/ui_viewDialog.h:1255
 msgid "Use this landscape as default"
 msgstr "Bruk dette landskapet som standard"
 
-#: src/ui_viewDialog.h:1266
+#: src/ui_viewDialog.h:1256
 msgid "Use brightness settings for landscapes"
 msgstr "Bruk lysstyrkeinnstillinger for landskaper"
 
-#: src/ui_viewDialog.h:1268
+#: src/ui_viewDialog.h:1258
 msgid "Use this sky culture as default"
 msgstr "Bruk denne himmelkulturen som standard"
 
-#: src/ui_viewDialog.h:1270
+#: src/ui_viewDialog.h:1260
 msgid "Visible"
 msgstr "Synlig"
 
@@ -4333,7 +4344,7 @@ msgstr "Alt tilgjengelig"
 msgid "Display no information"
 msgstr "Ikke vis informasjon"
 
-#: src/ui_configurationDialog.h:1029 plugins/Oculars/src/Oculars.cpp:1923
+#: src/ui_configurationDialog.h:1029 plugins/Oculars/src/Oculars.cpp:1933
 #: plugins/Observability/src/Observability.cpp:170
 msgid "None"
 msgstr "Ingen"
@@ -4863,7 +4874,7 @@ msgstr "Høyre-klikk endrer bare endepunktet."
 #. TRANSLATORS: PA is abbreviation for phrase "Position Angle"
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:357
 msgid "PA="
-msgstr ""
+msgstr "PV="
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:72
 msgid "Angle Measure Plug-in"
@@ -4990,11 +5001,11 @@ msgstr "Innstillinger"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:185
 msgid "Use dms format for angles"
-msgstr ""
+msgstr "Bruk formatet grader-minutter-sekunder for vinkler"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:186
 msgid "Show position angle"
-msgstr ""
+msgstr "Vis posisjonsvinkel"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:187
 #: plugins/Satellites/src/ui_satellitesDialog.h:714
@@ -5052,7 +5063,7 @@ msgstr "Viser kompassmarkeringer langs horisonten"
 msgid "Compass marks"
 msgstr "Kompassmarkeringer"
 
-#: plugins/Oculars/src/Oculars.cpp:80 plugins/Oculars/src/Oculars.cpp:1316
+#: plugins/Oculars/src/Oculars.cpp:80 plugins/Oculars/src/Oculars.cpp:1326
 #: plugins/Oculars/src/ui_ocularDialog.h:1050
 msgid "Oculars"
 msgstr "Okularer"
@@ -5066,205 +5077,205 @@ msgstr ""
 "Viser himmelen som gjennom et teleskop-okular. (Bare forstørrelse og "
 "synsfelt er simulert). Det kan også vise en sensorramme og et Telrad-sikte."
 
-#: plugins/Oculars/src/Oculars.cpp:837
+#: plugins/Oculars/src/Oculars.cpp:847
 msgid "Please select an object before switching to ocular view."
 msgstr "Velg et objekt før du skifter til okularvisning."
 
-#: plugins/Oculars/src/Oculars.cpp:929
+#: plugins/Oculars/src/Oculars.cpp:939
 msgid "&Previous ocular"
 msgstr "&Forrige okular"
 
-#: plugins/Oculars/src/Oculars.cpp:930
+#: plugins/Oculars/src/Oculars.cpp:940
 msgid "&Next ocular"
 msgstr "&Neste okular"
 
-#: plugins/Oculars/src/Oculars.cpp:931
+#: plugins/Oculars/src/Oculars.cpp:941
 msgid "Select &ocular"
 msgstr "Velg &okular"
 
-#: plugins/Oculars/src/Oculars.cpp:978
+#: plugins/Oculars/src/Oculars.cpp:988
 msgid "Toggle &crosshair"
 msgstr "Slå på/av &trådkors"
 
-#: plugins/Oculars/src/Oculars.cpp:986
+#: plugins/Oculars/src/Oculars.cpp:996
 msgid "Configure &Oculars"
 msgstr "Still inn &okularer"
 
-#: plugins/Oculars/src/Oculars.cpp:994
+#: plugins/Oculars/src/Oculars.cpp:1004
 msgid "Toggle &CCD"
 msgstr "Slå på/av &CCD"
 
-#: plugins/Oculars/src/Oculars.cpp:1001
+#: plugins/Oculars/src/Oculars.cpp:1011
 msgid "Toggle &Telrad"
 msgstr "Slå på/av &Telrad"
 
-#: plugins/Oculars/src/Oculars.cpp:1010
+#: plugins/Oculars/src/Oculars.cpp:1020
 msgid "&Previous CCD"
 msgstr "&Forrige CCD"
 
-#: plugins/Oculars/src/Oculars.cpp:1011
+#: plugins/Oculars/src/Oculars.cpp:1021
 msgid "&Next CCD"
 msgstr "&Neste CCD"
 
-#: plugins/Oculars/src/Oculars.cpp:1012
+#: plugins/Oculars/src/Oculars.cpp:1022
 msgid "&Select CCD"
 msgstr "&Velg CCD"
 
-#: plugins/Oculars/src/Oculars.cpp:1034
+#: plugins/Oculars/src/Oculars.cpp:1044
 msgid "&Rotate CCD"
 msgstr "&Roter CCD"
 
-#: plugins/Oculars/src/Oculars.cpp:1056
+#: plugins/Oculars/src/Oculars.cpp:1066
 msgid "&Reset rotation"
 msgstr "&Tilbakestill rotasjon"
 
-#: plugins/Oculars/src/Oculars.cpp:1299
+#: plugins/Oculars/src/Oculars.cpp:1309
 #: plugins/Oculars/src/ui_ocularDialog.h:1052
 msgid "Ocular view"
 msgstr "Okularvisning"
 
-#: plugins/Oculars/src/Oculars.cpp:1317
+#: plugins/Oculars/src/Oculars.cpp:1327
 msgid "Oculars popup menu"
 msgstr "Oppsprettsmeny for okularer"
 
-#: plugins/Oculars/src/Oculars.cpp:1318
+#: plugins/Oculars/src/Oculars.cpp:1328
 msgid "Show crosshairs"
 msgstr "Vis trådkors"
 
-#: plugins/Oculars/src/Oculars.cpp:1319
+#: plugins/Oculars/src/Oculars.cpp:1329
 msgid "Image sensor frame"
 msgstr "Bildesensorramme"
 
-#: plugins/Oculars/src/Oculars.cpp:1320
+#: plugins/Oculars/src/Oculars.cpp:1330
 msgid "Telrad sight"
 msgstr "Telrad-sikte"
 
-#: plugins/Oculars/src/Oculars.cpp:1321
+#: plugins/Oculars/src/Oculars.cpp:1331
 msgid "Oculars plugin configuration"
 msgstr "Innstilling av programtillegg for okularer"
 
-#: plugins/Oculars/src/Oculars.cpp:1323
+#: plugins/Oculars/src/Oculars.cpp:1333
 msgid "Select next telescope"
 msgstr "Velg neste teleskop"
 
-#: plugins/Oculars/src/Oculars.cpp:1325
+#: plugins/Oculars/src/Oculars.cpp:1335
 msgid "Select previous telescope"
 msgstr "Velg forrige teleskop"
 
-#: plugins/Oculars/src/Oculars.cpp:1327
+#: plugins/Oculars/src/Oculars.cpp:1337
 msgid "Select next eyepiece"
 msgstr "Velg neste okular"
 
-#: plugins/Oculars/src/Oculars.cpp:1329
+#: plugins/Oculars/src/Oculars.cpp:1339
 msgid "Select previous eyepiece"
 msgstr "Velg forrige okular"
 
-#: plugins/Oculars/src/Oculars.cpp:1561
+#: plugins/Oculars/src/Oculars.cpp:1571
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:500
 #, qt-format
 msgid "Ocular #%1"
 msgstr "Okular #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:1566
+#: plugins/Oculars/src/Oculars.cpp:1576
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:504
 #, qt-format
 msgid "Ocular #%1: %2"
 msgstr "Okular #%1: %2"
 
 #. TRANSLATORS: FL = Focal length
-#: plugins/Oculars/src/Oculars.cpp:1580
+#: plugins/Oculars/src/Oculars.cpp:1590
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:541
 #, qt-format
 msgid "Ocular FL: %1 mm"
 msgstr "Okular - br.vidde: %1 mm"
 
 #. TRANSLATORS: aFOV = apparent field of view
-#: plugins/Oculars/src/Oculars.cpp:1587
+#: plugins/Oculars/src/Oculars.cpp:1597
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:551
 #, qt-format
 msgid "Ocular aFOV: %1"
 msgstr "Okular - tils.lat. synsf.: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1599
+#: plugins/Oculars/src/Oculars.cpp:1609
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:581
 #, qt-format
 msgid "Lens #%1"
 msgstr "Linse #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:1603
+#: plugins/Oculars/src/Oculars.cpp:1613
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:585
 #, qt-format
 msgid "Lens #%1: %2"
 msgstr "Linse #%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:1608
+#: plugins/Oculars/src/Oculars.cpp:1618
 msgid "Lens: none"
 msgstr "Linse: Ingen"
 
-#: plugins/Oculars/src/Oculars.cpp:1618 plugins/Oculars/src/Oculars.cpp:1675
+#: plugins/Oculars/src/Oculars.cpp:1628 plugins/Oculars/src/Oculars.cpp:1685
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:738
 #, qt-format
 msgid "Telescope #%1"
 msgstr "Teleskop #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:1623 plugins/Oculars/src/Oculars.cpp:1680
+#: plugins/Oculars/src/Oculars.cpp:1633 plugins/Oculars/src/Oculars.cpp:1690
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:742
 #, qt-format
 msgid "Telescope #%1: %2"
 msgstr "Teleskop #%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:1634
+#: plugins/Oculars/src/Oculars.cpp:1644
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:818
 #, qt-format
 msgid "Magnification: %1"
 msgstr "Forstørrelse: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1642
+#: plugins/Oculars/src/Oculars.cpp:1652
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:827
 #, qt-format
 msgid "FOV: %1"
 msgstr "Synsfelt: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1652
+#: plugins/Oculars/src/Oculars.cpp:1662
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:683
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:780
 #, qt-format
 msgid "Dimensions: %1"
 msgstr "Dimensjoner: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1657
+#: plugins/Oculars/src/Oculars.cpp:1667
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:643
 #, qt-format
 msgid "Sensor #%1"
 msgstr "Sensor #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:1661
+#: plugins/Oculars/src/Oculars.cpp:1671
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:647
 #, qt-format
 msgid "Sensor #%1: %2"
 msgstr "Sensor #%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:1919
+#: plugins/Oculars/src/Oculars.cpp:1929
 msgid "&Lens"
 msgstr "&Linse"
 
-#: plugins/Oculars/src/Oculars.cpp:1920
+#: plugins/Oculars/src/Oculars.cpp:1930
 msgid "&Previous lens"
 msgstr "&Forrige linse"
 
-#: plugins/Oculars/src/Oculars.cpp:1921
+#: plugins/Oculars/src/Oculars.cpp:1931
 msgid "&Next lens"
 msgstr "&Neste linse"
 
-#: plugins/Oculars/src/Oculars.cpp:1951
+#: plugins/Oculars/src/Oculars.cpp:1961
 msgid "&Telescope"
 msgstr "&Teleskop"
 
-#: plugins/Oculars/src/Oculars.cpp:1952
+#: plugins/Oculars/src/Oculars.cpp:1962
 msgid "&Previous telescope"
 msgstr "&Forrige teleskop"
 
-#: plugins/Oculars/src/Oculars.cpp:1953
+#: plugins/Oculars/src/Oculars.cpp:1963
 msgid "&Next telescope"
 msgstr "&Neste teleskop"
 
@@ -5475,10 +5486,11 @@ msgstr "Skaler bildesirkel"
 #: plugins/Oculars/src/ui_ocularDialog.h:1056
 msgid "Apply limits stellar magnitude for different apertures of telescopes"
 msgstr ""
+"Bruk stellar grensemagnitude for forskjellige blenderåpninger på teleskoper"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1058
 msgid "Limit stellar magnitude"
-msgstr ""
+msgstr "Begrens stellar magnitude"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1059
 msgid "Key mappings"
@@ -5511,7 +5523,7 @@ msgstr ""
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1069
 msgid "Restore FOV to initial values"
-msgstr ""
+msgstr "Gjenopprett synsfelt til opprinnelige verdier"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1070
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:220
@@ -8397,37 +8409,37 @@ msgstr "Objekt er ikke observerbart."
 
 #: plugins/Observability/src/Observability.cpp:167
 msgid "No acronychal nor cosmical rise/set."
-msgstr ""
+msgstr "Ingen akronisk eller kosmisk oppgang/nedgang."
 
 #: plugins/Observability/src/Observability.cpp:168
 #, qt-format
 msgid "Greatest elongation: %1 (at %2 deg.)"
-msgstr ""
+msgstr "Største elongasjon: %1 (ved %2 grd.)"
 
 #: plugins/Observability/src/Observability.cpp:169
 #, qt-format
 msgid "Largest Sun separation: %1 (at %2 deg.)"
-msgstr ""
+msgstr "Største separasjon til solen: %1 (ved %2 grd.)"
 
 #. TRANSLATORS: The space at the end is significant - another sentence may follow.
 #: plugins/Observability/src/Observability.cpp:172
 #, qt-format
 msgid "Acronychal rise/set: %1/%2. "
-msgstr ""
+msgstr "Akronisk oppgang/nedgang: %1/%2. "
 
 #. TRANSLATORS: The space at the end is significant - another sentence may follow.
 #: plugins/Observability/src/Observability.cpp:174
 msgid "No acronychal rise/set. "
-msgstr ""
+msgstr "Ingen akronisk oppgang/nedgang. "
 
 #: plugins/Observability/src/Observability.cpp:175
 #, qt-format
 msgid "Cosmical rise/set: %1/%2."
-msgstr ""
+msgstr "Kosmisk oppgang/nedgang: %1/%2."
 
 #: plugins/Observability/src/Observability.cpp:176
 msgid "No cosmical rise/set."
-msgstr ""
+msgstr "Ingen kosmisk oppgang/nedgang."
 
 #: plugins/Observability/src/Observability.cpp:177
 msgid "Observable during the whole year."
@@ -8440,7 +8452,7 @@ msgstr "Ikke observerbar på mørke natten."
 #: plugins/Observability/src/Observability.cpp:179
 #, qt-format
 msgid "Nights above horizon: %1"
-msgstr ""
+msgstr "Netter over horisonten: %1"
 
 #: plugins/Observability/src/Observability.cpp:180
 msgid "TODAY:"
@@ -8647,12 +8659,12 @@ msgstr ""
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:195
 #, qt-format
 msgid "Sun altitude at twilight: %1 deg."
-msgstr ""
+msgstr "Solhøyde ved tussmørke: %1 grd."
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:201
 #, qt-format
 msgid "Horizon altitude: %1 deg."
-msgstr ""
+msgstr "Horisonthøyde: %1 grd."
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:342
 msgid "Observability Configuration"
@@ -8688,7 +8700,7 @@ msgstr "Observasjonsforhold"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:351
 msgid "Showing options"
-msgstr ""
+msgstr "Visningsalternativer"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:352
 msgid "Today's ephemeris (rise, set, and transit times)"
@@ -8755,6 +8767,11 @@ msgid ""
 "1958; consequently, these stars are also used in navigational aids such as "
 "the 2102D Star Finder and Identifier."
 msgstr ""
+"Dette programtillegget markerer 58 navigasjonsstjerner - Polaris og de 57 "
+"\"utvalgte stjerner\" som er listet i <em>The Nautical Almanac</em> utgitt i "
+"fellesskap av Her Majesty's Nautical Almanac Office og US Naval Observatory "
+"siden 1958; følgelig er disse stjernene også brukt i navigasjonshjelpemidler "
+"som 2102-D Star Finder and Identifier."
 
 #: plugins/NavStars/src/NavStars.cpp:118
 msgid "Mark the navigational stars"
@@ -8771,11 +8788,11 @@ msgstr "Tidsjevning"
 
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:58
 msgid "This plugin shows the solution of the equation of time."
-msgstr ""
+msgstr "Dette programtillegget viser verdien av tidsjevning"
 
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:91
 msgid "Show solution for Equation of Time"
-msgstr ""
+msgstr "Vis verdien av tidsjevning"
 
 #. TRANSLATORS: minutes.
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:253
@@ -8816,7 +8833,7 @@ msgstr "Bruk minutter og sekunder"
 
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:274
 msgid "Change sign of equation"
-msgstr ""
+msgstr "Inverter fortegn"
 
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:275
 msgid "Font size:"
@@ -8853,6 +8870,7 @@ msgstr "Innstillingsvindu for meteorsvermer"
 msgid ""
 "The old showers.json file is no longer compatible - using default file"
 msgstr ""
+"Den gamle showers.json-filen er ikke lenger kompatibel - bruker standardfil"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1130
@@ -9160,7 +9178,7 @@ msgstr "Maksimum: %1"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:349
 msgid "Solar longitude is"
-msgstr ""
+msgstr "Sol-lengdegrad er"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:358
 msgid "variable"
@@ -9180,11 +9198,11 @@ msgstr "Maksimum"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:174
 msgid "Start date greater than end date!"
-msgstr ""
+msgstr "Startdato er etter sluttdatoen!"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:176
 msgid "Time interval must be less than one year!"
-msgstr ""
+msgstr "Tidsintervall må være mindre enn ett år!"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:193
 msgid "Variable"
@@ -9231,6 +9249,14 @@ msgid ""
 "known as meteor outbursts and meteor storms, which may produce greater than "
 "1,000 meteors an hour."
 msgstr ""
+"En meteorsverm er en hendelse på himmelen der en gruppe av meteorer er "
+"observert å utstråle eller stamme fra et punkt på nattehimmelen. Disse "
+"meteorene er forårsaket av strømmer av kosmisk støv kalt meteoroider, som "
+"trenger inn i jordens atmosfære i ekstremt høye hastigheter i parallelle "
+"baner. De fleste meteorene er mindre enn et sandkorn, så nesten alle av dem "
+"går i oppløsning og treffer aldri jordoverflaten. Intense eller uvanlige "
+"meteorsvermer er kjent som meteorutbrudd og meteorstormer, som kan produsere "
+"mer enn 1000 meteorer i timen."
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:252
 msgid "Radiant"
@@ -9266,6 +9292,9 @@ msgid ""
 "when it appears. For example, the radiant point for the Delta Aurigids "
 "drifts by more than a degree per night."
 msgstr ""
+"Mange svermer har et utstrålingspunkt som endrer posisjon i løpet av "
+"aktivitetsperioden. For eksempel, utstrålingspunktet for Delta-Aurigidene "
+"forflytter seg med mer enn en grad pr. natt."
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:256
 msgid "Zenithal Hourly Rate (ZHR)"
@@ -9296,15 +9325,20 @@ msgid ""
 "meteors are more frequent than average, while values above 3.0 mean that the "
 "share of faint meteors is larger than usual."
 msgstr ""
+"Populasjonsindeksen indikerer magnitude-distribusjonen til meteorsvermene. "
+"Ved verdier under 2,5 dominerer lyse meteorer, mens ved verdier over 3,0 "
+"dominerer andelen av svake meteorer."
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:260
 msgid "Notes"
-msgstr ""
+msgstr "Merknader"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:261
 msgid ""
 "This plugin was created as project of ESA Summer of Code in Space 2013."
 msgstr ""
+"Dette programtillegget ble utviklet som et prosjekt ved ESA Summer of Code "
+"in Space 2013."
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:262
 msgid "Info"
@@ -9324,7 +9358,7 @@ msgstr "%1Meteorsverm%2 - artikkel i Wikipedia"
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:268
 #, qt-format
 msgid "%1International Meteor Organization%2"
-msgstr ""
+msgstr "%1International Meteor Organization%2"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:332
 msgid "Meteor showers is updated"
@@ -9408,7 +9442,7 @@ msgstr "Fra:"
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:560
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:562
 msgid "dd/MMM/yyyy"
-msgstr ""
+msgstr "dd/mmm/åååå"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:561
 msgid "To:"
