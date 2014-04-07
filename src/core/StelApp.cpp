@@ -619,8 +619,8 @@ void StelApp::handleWheel(QWheelEvent* event)
 
 	wheelEventTimer->start();
 	QWheelEvent deltaEvent(QPoint(event->pos().x()*devicePixelsPerPixel, event->pos().y()*devicePixelsPerPixel),
-						   QPoint(event->globalPos().x()*devicePixelsPerPixel, event->globalPos().y()*devicePixelsPerPixel),
-						   delta, event->buttons(), event->modifiers(), event->orientation());
+			       QPoint(event->globalPos().x()*devicePixelsPerPixel, event->globalPos().y()*devicePixelsPerPixel),
+			       delta, event->buttons(), event->modifiers(), event->orientation());
 	deltaEvent.setAccepted(false);
 	// Send the event to every StelModule
 	foreach (StelModule* i, moduleMgr->getCallOrders(StelModule::ActionHandleMouseClicks)) {

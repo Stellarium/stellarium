@@ -131,6 +131,7 @@ void StelFileMgr::init()
 		screenshotDir = QStandardPaths::standardLocations(QStandardPaths::PicturesLocation)[0].append(screenshotDirSuffix);
 	else
 		screenshotDir = userDir.append(screenshotDirSuffix);
+
 	makeSureDirExistsAndIsWritable(screenshotDir);
 }
 
