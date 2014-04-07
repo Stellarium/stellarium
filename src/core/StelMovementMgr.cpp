@@ -270,9 +270,16 @@ void StelMovementMgr::handleMouseWheel(QWheelEvent* event)
 {
 	if (flagEnableMouseNavigation==false)
 		return;
+
 	int numDegrees = event->delta() / 8;
 	int numSteps = numDegrees / 15;
+	QPoint numPixels = event->pixelDelta();
+
+	if (!numPixels.isNull())
+		numSteps *= StelApp::getInstance().getDevicePixelsPerPixel();
+
 	zoomTo(getAimFov()-mouseZoomSpeed*numSteps*getAimFov()/60., 0.2);
+
 	event->accept();
 }
 
