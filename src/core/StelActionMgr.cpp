@@ -260,9 +260,9 @@ void StelActionMgr::saveShortcuts()
 		if (	action->keySequence == action->defaultKeySequence &&
 				action->altKeySequence == action->defaultAltKeySequence)
 			continue;
-		QString seq = action->keySequence.toString();
+		QString seq = action->keySequence.toString().replace(" ", "");
 		if (action->altKeySequence != action->defaultAltKeySequence)
-			seq += " " + action->altKeySequence.toString();
+			seq += " " + action->altKeySequence.toString().replace(" ", "");
 		conf->setValue(action->objectName(), seq);
 	}
 	conf->endGroup();
