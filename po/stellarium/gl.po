@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-04-06 21:33+0700\n"
-"PO-Revision-Date: 2014-03-16 04:55+0000\n"
+"PO-Revision-Date: 2014-04-07 18:37+0000\n"
 "Last-Translator: Manuel Rosales Graña <manuel.rosales@mundo-r.com>\n"
 "Language-Team: Galician <gl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-04-07 05:46+0000\n"
+"X-Launchpad-Export-Date: 2014-04-08 06:14+0000\n"
 "X-Generator: Launchpad (build 16976)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:107 src/core/modules/StarMgr.cpp:338
@@ -180,7 +180,7 @@ msgstr "Magnitude: <b>%1</b> (extinguido en: <b>%2</b>)"
 #: src/core/modules/Nebula.cpp:111
 #, qt-format
 msgid "Surface brightness: <b>%1</b> (extincted to: <b>%2</b>)"
-msgstr ""
+msgstr "Brillo da superficie:<b>%1</b> (extinguido: <b>%2</b>)"
 
 #: src/core/modules/Nebula.cpp:116 src/core/modules/Planet.cpp:140
 #: src/core/modules/MinorPlanet.cpp:223 src/core/modules/Comet.cpp:160
@@ -194,7 +194,7 @@ msgstr "Magnitude: <b>%1</b>"
 #: src/core/modules/Nebula.cpp:118
 #, qt-format
 msgid "Surface brightness: <b>%1</b>"
-msgstr ""
+msgstr "Brillo da superficie: <b>%1</b>"
 
 #: src/core/modules/Nebula.cpp:124
 #, qt-format
@@ -1767,7 +1767,7 @@ msgstr "Tipo normal"
 
 #: src/gui/ViewDialog.cpp:584
 msgid "Standard Orionids rate"
-msgstr ""
+msgstr "Taxa estándar das Oriónidas"
 
 #: src/gui/ViewDialog.cpp:587
 msgid "Standard Perseids rate"
@@ -1775,11 +1775,11 @@ msgstr "Ratio de Perseidas estándar"
 
 #: src/gui/ViewDialog.cpp:590
 msgid "Standard Geminids rate"
-msgstr ""
+msgstr "Taxa estándar das Xemínidas"
 
 #: src/gui/ViewDialog.cpp:593
 msgid "Exceptional Perseid rate"
-msgstr ""
+msgstr "Taxa excepcional das Perseidas"
 
 #: src/gui/ViewDialog.cpp:596
 msgid "Meteor storm rate"
@@ -1787,7 +1787,7 @@ msgstr "Ratio de meteoritos"
 
 #: src/gui/ViewDialog.cpp:599
 msgid "Exceptional Draconid rate"
-msgstr ""
+msgstr "Taxa excepcional das Dracónidas"
 
 #: src/gui/ViewDialog.cpp:602
 msgid "Exceptional Leonid rate"
@@ -1795,11 +1795,11 @@ msgstr "Ratio de Leónidas excepcional"
 
 #: src/gui/ViewDialog.cpp:605
 msgid "Very high rate (1966 Leonids)"
-msgstr ""
+msgstr "Taxa moi alta (1966 Leónidas)"
 
 #: src/gui/ViewDialog.cpp:608
 msgid "Highest rate ever (1833 Leonids)"
-msgstr ""
+msgstr "A maior taxa acadada (1833 Leónidas)"
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:112
 msgid "Select a ZIP archive that contains a Stellarium landscape"
@@ -4200,7 +4200,7 @@ msgstr "Adaptación dinámica do ollo"
 
 #: src/ui_viewDialog.h:1196
 msgid "Settings for sporadic meteors"
-msgstr ""
+msgstr "Axustes para meteoros esporádicos"
 
 #: src/ui_viewDialog.h:1198
 msgid "Shooting Stars"
@@ -4685,10 +4685,12 @@ msgstr "O autozoom retorna á dirección inicial de visión."
 msgid ""
 "Auto-enabling of the atmosphere for bodies with atmosphere in location window"
 msgstr ""
+"Habilitación automática da atmosfera para os corpos con atmosfera na fiestra "
+"de localización"
 
 #: src/ui_configurationDialog.h:1148
 msgid "Auto-enabling for the atmosphere"
-msgstr ""
+msgstr "Activación automática da atmosfera"
 
 #: src/ui_configurationDialog.h:1149
 msgid "Screenshots"
@@ -8553,37 +8555,37 @@ msgstr "A fonte non é observable."
 
 #: plugins/Observability/src/Observability.cpp:167
 msgid "No acronychal nor cosmical rise/set."
-msgstr ""
+msgstr "Saída/Posta non acrónica e non cósmica"
 
 #: plugins/Observability/src/Observability.cpp:168
 #, qt-format
 msgid "Greatest elongation: %1 (at %2 deg.)"
-msgstr ""
+msgstr "A maior elongación: %1 (a %2 deg.)"
 
 #: plugins/Observability/src/Observability.cpp:169
 #, qt-format
 msgid "Largest Sun separation: %1 (at %2 deg.)"
-msgstr ""
+msgstr "A maior separación do Sol: %1 (a %2 deg.)"
 
 #. TRANSLATORS: The space at the end is significant - another sentence may follow.
 #: plugins/Observability/src/Observability.cpp:172
 #, qt-format
 msgid "Acronychal rise/set: %1/%2. "
-msgstr ""
+msgstr "Saída/Posta acrónica: %1/%2. "
 
 #. TRANSLATORS: The space at the end is significant - another sentence may follow.
 #: plugins/Observability/src/Observability.cpp:174
 msgid "No acronychal rise/set. "
-msgstr ""
+msgstr "Saída/Posta non acrónica "
 
 #: plugins/Observability/src/Observability.cpp:175
 #, qt-format
 msgid "Cosmical rise/set: %1/%2."
-msgstr ""
+msgstr "Saída/Posta cósmica: %1%2."
 
 #: plugins/Observability/src/Observability.cpp:176
 msgid "No cosmical rise/set."
-msgstr ""
+msgstr "Saída/Posta non cósmica."
 
 #: plugins/Observability/src/Observability.cpp:177
 msgid "Observable during the whole year."
@@ -8596,7 +8598,7 @@ msgstr "Non observable en noites escuras."
 #: plugins/Observability/src/Observability.cpp:179
 #, qt-format
 msgid "Nights above horizon: %1"
-msgstr ""
+msgstr "Noites sobre o horizonte:%1"
 
 #: plugins/Observability/src/Observability.cpp:180
 msgid "TODAY:"
@@ -8807,12 +8809,12 @@ msgstr ""
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:195
 #, qt-format
 msgid "Sun altitude at twilight: %1 deg."
-msgstr ""
+msgstr "Altitude do Sol no solpor: %1 deg."
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:201
 #, qt-format
 msgid "Horizon altitude: %1 deg."
-msgstr ""
+msgstr "Altitude do horizonte: %1 graos."
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:342
 msgid "Observability Configuration"
@@ -8848,7 +8850,7 @@ msgstr "Condicións de observación:"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:351
 msgid "Showing options"
-msgstr ""
+msgstr "Amosando opcións"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:352
 msgid "Today's ephemeris (rise, set, and transit times)"
@@ -8920,6 +8922,12 @@ msgid ""
 "1958; consequently, these stars are also used in navigational aids such as "
 "the 2102D Star Finder and Identifier."
 msgstr ""
+"Este plugin marca 58 estrelas de navegación - Polaris e 57 \"estrelas "
+"seleccionadas\" que están listadas en <em> O Almanaque Náutico </ em> "
+"publicado conxuntamente pola Oficina do Almanaque Náutico da Súa Maxestade e "
+"o Observatorio Naval dos Estados Unidos, dende 1958; en consecuencia, estas "
+"estrelas son tamén utilizadss en axudas á navegación, como o Buscador de "
+"Estrelas 2102D e Identifier."
 
 #: plugins/NavStars/src/NavStars.cpp:118
 msgid "Mark the navigational stars"
