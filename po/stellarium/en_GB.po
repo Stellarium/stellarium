@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-04-06 21:33+0700\n"
-"PO-Revision-Date: 2014-04-04 15:23+0000\n"
+"PO-Revision-Date: 2014-04-07 13:58+0000\n"
 "Last-Translator: Anthony Harrington <untaintableangel@ubuntu.com>\n"
 "Language-Team: English (United Kingdom) <en_GB@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-04-07 06:02+0000\n"
+"X-Launchpad-Export-Date: 2014-04-08 06:16+0000\n"
 "X-Generator: Launchpad (build 16976)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:107 src/core/modules/StarMgr.cpp:338
@@ -194,7 +194,7 @@ msgstr "Magnitude: <b>%1</b>"
 #: src/core/modules/Nebula.cpp:118
 #, qt-format
 msgid "Surface brightness: <b>%1</b>"
-msgstr ""
+msgstr "Surface brightness: <b>%1</b>"
 
 #: src/core/modules/Nebula.cpp:124
 #, qt-format
@@ -8506,12 +8506,12 @@ msgstr "Source is not observable."
 
 #: plugins/Observability/src/Observability.cpp:167
 msgid "No acronychal nor cosmical rise/set."
-msgstr ""
+msgstr "No acronychal nor cosmical rise/set."
 
 #: plugins/Observability/src/Observability.cpp:168
 #, qt-format
 msgid "Greatest elongation: %1 (at %2 deg.)"
-msgstr ""
+msgstr "Greatest elongation: %1 (at %2 deg.)"
 
 #: plugins/Observability/src/Observability.cpp:169
 #, qt-format
@@ -8522,7 +8522,7 @@ msgstr ""
 #: plugins/Observability/src/Observability.cpp:172
 #, qt-format
 msgid "Acronychal rise/set: %1/%2. "
-msgstr ""
+msgstr "Acronychal rise/set: %1/%2. "
 
 #. TRANSLATORS: The space at the end is significant - another sentence may follow.
 #: plugins/Observability/src/Observability.cpp:174
@@ -8549,7 +8549,7 @@ msgstr "Not observable at dark night."
 #: plugins/Observability/src/Observability.cpp:179
 #, qt-format
 msgid "Nights above horizon: %1"
-msgstr ""
+msgstr "Nights above horizon: %1"
 
 #: plugins/Observability/src/Observability.cpp:180
 msgid "TODAY:"
@@ -8757,7 +8757,7 @@ msgstr ""
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:195
 #, qt-format
 msgid "Sun altitude at twilight: %1 deg."
-msgstr ""
+msgstr "Sun altitude at twilight: %1 deg."
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:201
 #, qt-format
