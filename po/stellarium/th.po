@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: Thai for stellarium 0.8.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-04-06 21:33+0700\n"
-"PO-Revision-Date: 2014-02-11 01:29+0000\n"
+"PO-Revision-Date: 2014-04-08 02:02+0000\n"
 "Last-Translator: Worachate Boonplod <Unknown>\n"
 "Language-Team: MicKi Alone <Need24Get@msn.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-04-07 05:59+0000\n"
+"X-Launchpad-Export-Date: 2014-04-08 06:15+0000\n"
 "X-Generator: Launchpad (build 16976)\n"
 "X-Poedit-Country: THAILAND\n"
 "X-Poedit-Language: Thai\n"
@@ -182,7 +182,7 @@ msgstr "โชติมาตร: <b>%1</b> (จางลงไปที่: <b>
 #: src/core/modules/Nebula.cpp:111
 #, qt-format
 msgid "Surface brightness: <b>%1</b> (extincted to: <b>%2</b>)"
-msgstr ""
+msgstr "ความสว่างพื้นผิว: <b>%1</b> (ลดลงไปที่: <b>%2</b>)"
 
 #: src/core/modules/Nebula.cpp:116 src/core/modules/Planet.cpp:140
 #: src/core/modules/MinorPlanet.cpp:223 src/core/modules/Comet.cpp:160
@@ -196,7 +196,7 @@ msgstr "โชติมาตร: <b>%1</b>"
 #: src/core/modules/Nebula.cpp:118
 #, qt-format
 msgid "Surface brightness: <b>%1</b>"
-msgstr ""
+msgstr "ความสว่างพื้นผิว: <b>%1</b>"
 
 #: src/core/modules/Nebula.cpp:124
 #, qt-format
@@ -1878,7 +1878,7 @@ msgstr "มหาวิทยาลัยฮาร์วาร์ด (สหร�
 
 #: src/gui/SearchDialog.cpp:616
 msgid "Paste and Search"
-msgstr ""
+msgstr "วางและค้นหา"
 
 #: src/gui/ShortcutsDialog.cpp:488
 msgid "Action"
@@ -3739,7 +3739,7 @@ msgstr ""
 
 #: src/translations.h:555
 msgid "Date Modified"
-msgstr ""
+msgstr "แก้ไขเมื่อ"
 
 #: src/translations.h:556
 msgid "Directories"
@@ -4110,10 +4110,12 @@ msgid ""
 "Use light pollution data from locations database and ignore settings for "
 "light pollution below"
 msgstr ""
+"ใช้ข้อมูลมลพิษทางแสงจากฐานข้อมูลสถานที่ "
+"และไม่สนใจการตั้งค่ามลพิษทางแสงด้านล่าง"
 
 #: src/ui_viewDialog.h:1180
 msgid "Light pollution data from locations database"
-msgstr ""
+msgstr "ข้อมูลมลพิษทางแสงจากฐานข้อมูลสถานที่"
 
 #: src/ui_viewDialog.h:1181
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:396
@@ -4157,7 +4159,7 @@ msgstr "ปรับดวงตาตามสภาพของท้องฟ
 
 #: src/ui_viewDialog.h:1196
 msgid "Settings for sporadic meteors"
-msgstr ""
+msgstr "การตั้งค่าสำหรับดาวตกทั่วไปที่ไม่ใช่ฝนดาวตก"
 
 #: src/ui_viewDialog.h:1198
 msgid "Shooting Stars"
@@ -4904,7 +4906,7 @@ msgstr ""
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:72
 msgid "Angle Measure Plug-in"
-msgstr ""
+msgstr "โปรแกรมเสริมการวัดมุม"
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:75
 #: plugins/Oculars/src/gui/OcularDialog.cpp:486
@@ -5031,7 +5033,7 @@ msgstr ""
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:186
 msgid "Show position angle"
-msgstr ""
+msgstr "แสดงมุมตำแหน่ง"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:187
 #: plugins/Satellites/src/ui_satellitesDialog.h:714
@@ -9333,103 +9335,103 @@ msgstr ""
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:268
 #, qt-format
 msgid "%1International Meteor Organization%2"
-msgstr ""
+msgstr "%1International Meteor Organization%2"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:332
 msgid "Meteor showers is updated"
-msgstr ""
+msgstr "ฝนดาวตกได้รับการปรับปรุง"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:512
 msgid "Meteor Showers Configuration"
-msgstr ""
+msgstr "การตั้งค่าฝนดาวตก"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:513
 msgid "Meteor Showers Plug-in Configuration"
-msgstr ""
+msgstr "การตั้งค่าโปรแกรมเสริมฝนดาวตก"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:515
 msgid "Update data from Internet"
-msgstr ""
+msgstr "ปรับปรุงข้อมูลจากอินเทอร์เน็ต"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:523
 msgid "Meteor showers"
-msgstr ""
+msgstr "ฝนดาวตก"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:524
 msgid "Show meteor showers button on toolbar"
-msgstr ""
+msgstr "แสดงปุ่มฝนดาวตกบนแถบเครื่องมือ"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:525
 msgid "Enable display of meteor showers at startup"
-msgstr ""
+msgstr "เปิดการใช้งานฝนดาวตกเมื่อเริ่มโปรแกรม"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:529
 msgid "Color of radiants markers"
-msgstr ""
+msgstr "สีของเครื่องหมายแสดงจุดกระจาย"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:531
 msgid "Active Radiant - Generic Data"
-msgstr ""
+msgstr "จุดกระจายของฝนดาวตกที่กำลังเกิดขึ้น - ข้อมูลทั่วไป"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:534
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:541
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:548
 msgid "Change Color"
-msgstr ""
+msgstr "เปลี่ยนสี"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:538
 msgid "Inactive Radiant"
-msgstr ""
+msgstr "จุดกระจายของฝนดาวตกที่ไม่ได้กำลังเกิดขึ้น"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:545
 msgid "Active Radiant - Real Data"
-msgstr ""
+msgstr "จุดกระจายของฝนดาวตกที่กำลังเกิดขึ้น - ข้อมูลจริง"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:551
 msgid "Radiants for meteor showers"
-msgstr ""
+msgstr "จุดกระจายสำหรับฝนดาวตก"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:552
 msgid "Show labels of radiants"
-msgstr ""
+msgstr "แสดงชื่อจุดกระจาย"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:553
 msgid "Show active radiants only"
-msgstr ""
+msgstr "แสดงเฉพาะจุดกระจายของฝนดาวตกที่กำลังเกิดขึ้นเท่านั้น"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:555
 msgid "Label font size (pixels)"
-msgstr ""
+msgstr "ขนาดอักษรของชื่อ (จุดภาพ)"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:557
 msgid "Radiants"
-msgstr ""
+msgstr "จุดกระจายฝนดาวตก"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:558
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:563
 msgid "Search"
-msgstr ""
+msgstr "ค้นหา"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:559
 msgid "From:"
-msgstr ""
+msgstr "จาก:"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:560
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:562
 msgid "dd/MMM/yyyy"
-msgstr ""
+msgstr "dd/MMM/yyyy"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:561
 msgid "To:"
-msgstr ""
+msgstr "ถึง:"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:564
 msgid "Results"
-msgstr ""
+msgstr "ผลลัพธ์"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:565
 msgid "Search Events"
-msgstr ""
+msgstr "ค้นหาเหตุการณ์"
 
 #~ msgid "Ecliptic Line"
 #~ msgstr "เส้นสุริยวิถี"
