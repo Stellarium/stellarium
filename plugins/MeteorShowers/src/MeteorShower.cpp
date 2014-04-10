@@ -240,15 +240,15 @@ void MeteorShower::updateCurrentData(QDateTime skyDate)
 	if(skyDate.operator >=(start) && skyDate.operator <=(finish))
 	{
 		if(index)
-			status = 1; // real data
+			status = ACTIVE_REAL; // real data
 		else
-			status = 2; // generic data
+			status = ACTIVE_GENERIC; // generic data
 	}
 	else
 	{
-		status = 0; // isn't active
+		status = INACTIVE; // isn't active
 	}
-	active = (status>0) || !showActiveRadiantsOnly;
+	active = (status != INACTIVE) || !showActiveRadiantsOnly;
 
 	/**************************
 	 *Radiant drift
@@ -256,7 +256,7 @@ void MeteorShower::updateCurrentData(QDateTime skyDate)
 	radiantAlpha = rAlphaPeak;
 	radiantDelta = rDeltaPeak;
 
-	if (status>0)
+	if (status != INACTIVE)
 	{
 		double time = (StelUtils::qDateTimeToJd(skyDate) - StelUtils::qDateTimeToJd(peak))*24;
 		radiantAlpha += (driftAlpha/120)*time;
@@ -296,7 +296,7 @@ QString MeteorShower::getInfoString(const StelCore* core, const InfoStringGroup&
 	QTextStream oss(&str);
 
 	QString mstdata = q_("generic data");
-	if(status == 1)
+	if(status == ACTIVE_REAL)
 		mstdata = q_("real data");
 
 	if(flags&Name)
@@ -397,10 +397,10 @@ void MeteorShower::draw(StelPainter &painter)
 	float alpha = 0.85f + ((double) rand() / (RAND_MAX))/10;
 	switch(status)
 	{
-		case 1: //Active, real data
+		case ACTIVE_REAL: //Active, real data
 			GETSTELMODULE(MeteorShowers)->getColorARR().getRgbF(&r,&g,&b);
 			break;
-		case 2: //Active, generic data
+		case ACTIVE_GENERIC: //Active, generic data
 			GETSTELMODULE(MeteorShowers)->getColorARG().getRgbF(&r,&g,&b);
 			break;
 		default: //Inactive
