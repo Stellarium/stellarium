@@ -150,7 +150,7 @@ void Cardinals::updateI18n()
 }
 
 
-LandscapeMgr::LandscapeMgr() : atmosphere(NULL), cardinalsPoints(NULL), landscape(NULL), flagLandscapeSetsLocation(false)
+LandscapeMgr::LandscapeMgr() : atmosphere(NULL), cardinalsPoints(NULL), landscape(NULL), flagLandscapeSetsLocation(false), flagLightPollutionFromDatabase(false)
 {
 	setObjectName("LandscapeMgr");
 
