@@ -409,7 +409,8 @@ void MeteorShower::draw(StelPainter &painter)
 
 	painter.setColor(r, g, b, alpha);
 
-	if (MeteorShower::radiantMarkerEnabled)
+	Vec3d win;
+	if (MeteorShower::radiantMarkerEnabled && painter.getProjector()->projectCheck(XYZ, win))
 	{
 		MeteorShower::radiantTexture->bind();
 		painter.drawSprite2dMode(XY[0], XY[1], 10);
