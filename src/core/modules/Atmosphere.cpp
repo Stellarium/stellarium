@@ -169,7 +169,7 @@ void Atmosphere::computeColor(double JD, Vec3d _sunPos, Vec3d moonPos, float moo
 		colorGridBuffer.setUsagePattern(QOpenGLBuffer::DynamicDraw);
 		colorGridBuffer.create();
 		colorGridBuffer.bind();
-		colorGridBuffer.allocate(posGrid, (1+skyResolutionX)*(1+skyResolutionY)*4*4);
+		colorGridBuffer.allocate(colorGrid, (1+skyResolutionX)*(1+skyResolutionY)*4*4);
 		colorGridBuffer.release();
 	}
 
