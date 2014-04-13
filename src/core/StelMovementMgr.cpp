@@ -84,7 +84,7 @@ void StelMovementMgr::init()
 	maxFov = 100.;
 	initFov = conf->value("navigation/init_fov",60.f).toFloat();
 	currentFov = initFov;
-	initConstellationIntensity = conf->value("viewing/constellation_art_intensity", 0.5f).toFloat();
+	setInitConstellationIntensity(conf->value("viewing/constellation_art_intensity", 0.5f).toFloat());
 
 	Vec3f tmp = StelUtils::strToVec3f(conf->value("navigation/init_view_pos").toString());
 	initViewPos.set(tmp[0], tmp[1], tmp[2]);
