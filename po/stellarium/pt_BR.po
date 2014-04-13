@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-04-06 21:33+0700\n"
-"PO-Revision-Date: 2014-04-07 11:00+0000\n"
+"PO-Revision-Date: 2014-04-13 03:42+0000\n"
 "Last-Translator: Adriano Steffler <Unknown>\n"
 "Language-Team: Portuguese (Brazil) <pt_BR@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-04-08 06:15+0000\n"
+"X-Launchpad-Export-Date: 2014-04-13 05:49+0000\n"
 "X-Generator: Launchpad (build 16976)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:107 src/core/modules/StarMgr.cpp:338
@@ -9108,7 +9108,7 @@ msgstr "Tamanho da fonte:"
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:81
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:157
 msgid "Meteor Showers"
-msgstr "Chuva de Meteoros"
+msgstr "Chuva de meteoros"
 
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:84
 msgid ""
@@ -9116,7 +9116,7 @@ msgid ""
 "meteor showers and displays marker for radiants in activity range for each "
 "meteor showers."
 msgstr ""
-"Este complemento possibilita a visualização das chuvas de meteoros, mostra "
+"Este complemento oferece a visualização das chuvas de meteoros, mostra "
 "informações sobre elas e marca os radiantes na faixa de atividade de cada "
 "chuva de meteoros."
 
@@ -9401,11 +9401,11 @@ msgstr "Planeta menor (3200) Phaethon"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:298
 msgid "generic data"
-msgstr "dados genéricos"
+msgstr "informações genéricas"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:300
 msgid "real data"
-msgstr "dados reais"
+msgstr "informações reais"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:306
 msgid "meteor shower"
@@ -9457,7 +9457,7 @@ msgstr "THZ"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:163
 msgid "Data Type"
-msgstr "Tipo de Dados"
+msgstr "Tipo de dados"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:164
 msgid "Peak"
@@ -9465,7 +9465,7 @@ msgstr "Pico"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:174
 msgid "Start date greater than end date!"
-msgstr "A data inicial é maior que a data final!"
+msgstr "A data inicial é maior do que a data final!"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:176
 msgid "Time interval must be less than one year!"
@@ -9485,7 +9485,7 @@ msgstr "Genérico"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:243
 msgid "Meteor Showers Plug-in"
-msgstr "Complemento de Chuva de Meteoros"
+msgstr "Complemento de chuva de meteoros"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:248
 msgid ""
@@ -9519,7 +9519,7 @@ msgstr ""
 "A chuva de meteoros é um evento celeste em que uma série de meteoros são "
 "observados ao se irradiarem ou originarem de um ponto no céu noturno. Esses "
 "meteoros são causados ​​por fluxos de detritos cósmicos, chamados "
-"meteoróides, que entram na atmosfera da Terra a velocidades extremamente "
+"meteoroides, que entram na atmosfera da Terra a velocidades extremamente "
 "altas em trajetórias paralelas. A maioria dos meteoros são menores do que um "
 "grão de areia, por isso, quase todos se desintegram e nunca atingem a "
 "superfície da Terra. Chuvas de meteoros intensas ou incomuns são conhecidas "
@@ -9549,10 +9549,10 @@ msgid ""
 "point back to the known radiant for a given shower is known as a sporadic "
 "and is not considered part of that shower."
 msgstr ""
-"Um observador pode ver tal meteoro em qualquer lugar do céu, mas a direção "
-"do movimento, quando rastreado, apontará para o radiante. Um meteoro que não "
-"aponta de volta para o radiante conhecido de uma determinada chuva é chamado "
-"de meteoro esporádico e não é considerado integrante dessa chuva."
+"Um observador pode ver esse tipo de meteoro em qualquer lugar do céu, mas a "
+"direção do movimento, quando rastreado, apontará para o radiante. Um meteoro "
+"que não aponta de volta para o radiante conhecido de uma determinada chuva é "
+"chamado de meteoro esporádico e não é considerado integrante dessa chuva."
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:255
 msgid ""
@@ -9561,12 +9561,12 @@ msgid ""
 "drifts by more than a degree per night."
 msgstr ""
 "Muitas chuvas possuem um ponto radiante que muda de posição durante o "
-"intervalo em que eles aparecem. Por exemplo, o ponto radiante das Delta-"
+"intervalo em que elas aparecem. Por exemplo, o ponto radiante das Delta-"
 "Aurigídeas desvia em mais de um grau por noite."
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:256
 msgid "Zenithal Hourly Rate (ZHR)"
-msgstr "Taxa Horária Zenital (THZ)"
+msgstr "Taxa horária zenital (THZ)"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:257
 msgid ""
@@ -9576,7 +9576,7 @@ msgid ""
 "were at the zenith. The rate that can effectively be seen is nearly always "
 "lower and decreases the closer the radiant is to the horizon."
 msgstr ""
-"Em astronomia, a Taxa Horária Zenital (THZ) de uma chuva de meteoros "
+"Em astronomia, a taxa horária zenital (THZ) de uma chuva de meteoros "
 "corresponde ao número de meteoros que um único observador veria durante uma "
 "hora sob um céu limpo e escuro (limitando-se à magnitude aparente de 6,5), "
 "se o radiante da chuva estivesse no zênite. A taxa a que efetivamente podem "
@@ -9637,7 +9637,7 @@ msgstr "As chuvas de meteoros estão atualizadas."
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:512
 msgid "Meteor Showers Configuration"
-msgstr "Configuração das Chuvas de Meteoros"
+msgstr "Configuração das chuvas de meteoros"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:513
 msgid "Meteor Showers Plug-in Configuration"
@@ -9649,7 +9649,7 @@ msgstr "Atualizar informações a partir da Internet"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:523
 msgid "Meteor showers"
-msgstr "Chuvas de Meteoros"
+msgstr "Chuvas de meteoros"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:524
 msgid "Show meteor showers button on toolbar"
@@ -9665,7 +9665,7 @@ msgstr "Cor dos marcadores de radiantes"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:531
 msgid "Active Radiant - Generic Data"
-msgstr "Radiantes ativos – Dados genéricos"
+msgstr "Radiantes ativos – Informações genéricas"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:534
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:541
@@ -9675,11 +9675,11 @@ msgstr "Alterar a cor"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:538
 msgid "Inactive Radiant"
-msgstr "Radiante Inativo"
+msgstr "Radiante inativo"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:545
 msgid "Active Radiant - Real Data"
-msgstr "Radiante Ativo – Informações Reais"
+msgstr "Radiante ativo – Informações reais"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:551
 msgid "Radiants for meteor showers"
@@ -9725,7 +9725,7 @@ msgstr "Resultados"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:565
 msgid "Search Events"
-msgstr "Pesquisar Eventos"
+msgstr "Pesquisar eventos"
 
 #~ msgid "Equatorial Grid"
 #~ msgstr "Grade equatorial"
