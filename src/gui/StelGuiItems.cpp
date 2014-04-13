@@ -221,7 +221,9 @@ void StelButton::setBackgroundPixmap(const QPixmap &newBackground)
 	updateIcon();
 }
 
-LeftStelBar::LeftStelBar(QGraphicsItem* parent) : QGraphicsItem(parent)
+LeftStelBar::LeftStelBar(QGraphicsItem* parent)
+	: QGraphicsItem(parent)
+	, hideTimeLine(NULL)
 {
 	// Create the help label
 	helpLabel = new QGraphicsSimpleTextItem("", this);

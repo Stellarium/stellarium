@@ -47,11 +47,13 @@ StelLocaleMgr::StelLocaleMgr() : skyTranslator(NULL), GMTShift(0)
 	}
 
 	QFile file(path);
-	file.open(QIODevice::ReadOnly);
-	QDataStream in(&file);	// read the data serialized from the file
-	in.setVersion(QDataStream::Qt_4_5);
-	in >> countryCodeToStringMap;
-	file.close();
+	if(file.open(QIODevice::ReadOnly))
+	{
+		QDataStream in(&file);	// read the data serialized from the file
+		in.setVersion(QDataStream::Qt_4_5);
+		in >> countryCodeToStringMap;
+		file.close();
+	}
 }
 
 
@@ -67,23 +69,27 @@ void StelLocaleMgr::generateCountryList()
 	// Load ISO 3166-1 two-letter country codes from file (slow)
 	// The format is "[code][tab][country name containing spaces][newline]"
 	QFile textFile("data/iso3166-1-alpha-2.utf8");
-	textFile.open(QFile::ReadOnly | QFile::Text);
-	QTextStream list(&textFile);
-	QString line;
-	while(!(line = list.readLine()).isNull())
+	if(textFile.open(QFile::ReadOnly | QFile::Text))
 	{
-		qDebug() << line.section(QChar('\t'), 0, 0) << ":" << line.section(QChar('\t'), 1, 1);
-		countryCodeToStringMap.insert(line.section(QChar('\t'), 0, 0), line.section(QChar('\t'), 1, 1));
+		QTextStream list(&textFile);
+		QString line;
+		while(!(line = list.readLine()).isNull())
+		{
+			qDebug() << line.section(QChar('\t'), 0, 0) << ":" << line.section(QChar('\t'), 1, 1);
+			countryCodeToStringMap.insert(line.section(QChar('\t'), 0, 0), line.section(QChar('\t'), 1, 1));
+		}
+		textFile.close();
 	}
-	textFile.close();
 
 	// Save to binary file
 	QFile binaryFile("data/countryCodes.dat");
-	binaryFile.open(QIODevice::WriteOnly);
-	QDataStream out(&binaryFile);    // save the data serialized to the file
-	out.setVersion(QDataStream::Qt_4_5);
-	out << countryCodeToStringMap;
-	binaryFile.close();
+	if(binaryFile.open(QIODevice::WriteOnly))
+	{
+		QDataStream out(&binaryFile);    // save the data serialized to the file
+		out.setVersion(QDataStream::Qt_4_5);
+		out << countryCodeToStringMap;
+		binaryFile.close();
+	}
 }
 
 void StelLocaleMgr::init()
