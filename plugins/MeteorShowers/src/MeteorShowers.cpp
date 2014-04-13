@@ -779,9 +779,10 @@ QVariantMap MeteorShowers::loadShowersMap(QString path)
 	if(!jsonFile.open(QIODevice::ReadOnly))
 		qWarning() << "MeteorShowers: cannot open" << path;
 	else
+	{
 		map = StelJsonParser::parse(jsonFile.readAll()).toMap();
-
-	jsonFile.close();
+		jsonFile.close();
+	}
 	return map;
 }
 
@@ -1067,9 +1068,11 @@ void MeteorShowers::updateDownloadComplete(QNetworkReply* reply)
 			if(jsonFile.exists())
 				jsonFile.remove();
 
-			jsonFile.open(QIODevice::WriteOnly | QIODevice::Text);
-			jsonFile.write(reply->readAll());
-			jsonFile.close();
+			if(jsonFile.open(QIODevice::WriteOnly | QIODevice::Text))
+			{
+				jsonFile.write(reply->readAll());
+				jsonFile.close();
+			}
 		}
 	}
 

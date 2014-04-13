@@ -448,11 +448,12 @@ QVariantMap Supernovae::loadSNeMap(QString path)
 	QVariantMap map;
 	QFile jsonFile(path);
 	if (!jsonFile.open(QIODevice::ReadOnly))
-	    qWarning() << "Supernovae: cannot open" << QDir::toNativeSeparators(path);
+		qWarning() << "Supernovae: cannot open" << QDir::toNativeSeparators(path);
 	else
-	    map = StelJsonParser::parse(jsonFile.readAll()).toMap();
-
-	jsonFile.close();
+	{
+		map = StelJsonParser::parse(jsonFile.readAll()).toMap();
+		jsonFile.close();
+	}
 	return map;
 }
 
@@ -675,9 +676,11 @@ void Supernovae::updateDownloadComplete(QNetworkReply* reply)
 		if (jsonFile.exists())
 			jsonFile.remove();
 
-		jsonFile.open(QIODevice::WriteOnly | QIODevice::Text);
-		jsonFile.write(reply->readAll());
-		jsonFile.close();
+		if(jsonFile.open(QIODevice::WriteOnly | QIODevice::Text))
+		{
+			jsonFile.write(reply->readAll());
+			jsonFile.close();
+		}
 	}
 
 	if (progressBar)

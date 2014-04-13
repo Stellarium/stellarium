@@ -754,9 +754,10 @@ QVariantMap Satellites::loadDataMap(QString path)
 	if (!jsonFile.open(QIODevice::ReadOnly))
 		qWarning() << "Satellites::loadTleMap cannot open " << QDir::toNativeSeparators(path);
 	else
+	{
 		map = StelJsonParser::parse(&jsonFile).toMap();
-
-	jsonFile.close();
+		jsonFile.close();
+	}
 	return map;
 }
 

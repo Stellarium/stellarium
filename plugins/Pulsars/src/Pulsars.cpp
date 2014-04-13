@@ -495,11 +495,12 @@ QVariantMap Pulsars::loadPSRMap(QString path)
 	QVariantMap map;
 	QFile jsonFile(path);
 	if (!jsonFile.open(QIODevice::ReadOnly))
-	    qWarning() << "Pulsars: cannot open" << QDir::toNativeSeparators(path);
+		qWarning() << "Pulsars: cannot open" << QDir::toNativeSeparators(path);
 	else
-	    map = StelJsonParser::parse(jsonFile.readAll()).toMap();
-
-	jsonFile.close();
+	{
+		map = StelJsonParser::parse(jsonFile.readAll()).toMap();
+		jsonFile.close();
+	}
 	return map;
 }
 
@@ -717,9 +718,11 @@ void Pulsars::updateDownloadComplete(QNetworkReply* reply)
 		if (jsonFile.exists())
 			jsonFile.remove();
 
-		jsonFile.open(QIODevice::WriteOnly | QIODevice::Text);
-		jsonFile.write(reply->readAll());
-		jsonFile.close();
+		if(jsonFile.open(QIODevice::WriteOnly | QIODevice::Text))
+		{
+			jsonFile.write(reply->readAll());
+			jsonFile.close();
+		}
 	}
 
 	if (progressBar)
