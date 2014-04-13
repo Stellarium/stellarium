@@ -418,12 +418,18 @@ void StelGui::setStelStyle(const QString& section)
 
 		// Load Qt style sheet
 		QFile styleFile(qtStyleFileName);
-		styleFile.open(QIODevice::ReadOnly);
-		currentStelStyle.qtStyleSheet = styleFile.readAll();
+		if(styleFile.open(QIODevice::ReadOnly))
+		{
+			currentStelStyle.qtStyleSheet = styleFile.readAll();
+			styleFile.close();
+		}
 
 		QFile htmlStyleFile(htmlStyleFileName);
-		htmlStyleFile.open(QIODevice::ReadOnly);
-		currentStelStyle.htmlStyleSheet = htmlStyleFile.readAll();
+		if(htmlStyleFile.open(QIODevice::ReadOnly))
+		{
+			currentStelStyle.htmlStyleSheet = htmlStyleFile.readAll();
+			htmlStyleFile.close();
+		}
 	}
 	
 	locationDialog->styleChanged();

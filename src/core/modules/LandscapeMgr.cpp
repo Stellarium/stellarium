@@ -1088,11 +1088,13 @@ QString LandscapeMgr::getDescription() const
 	if (hasFile)
 	{
 		QFile file(descFile);
-		file.open(QIODevice::ReadOnly | QIODevice::Text);
-		QTextStream in(&file);
-		in.setCodec("UTF-8");
-		desc = in.readAll();
-		file.close();
+		if(file.open(QIODevice::ReadOnly | QIODevice::Text))
+		{
+			QTextStream in(&file);
+			in.setCodec("UTF-8");
+			desc = in.readAll();
+			file.close();
+		}
 	}
 	else
 	{

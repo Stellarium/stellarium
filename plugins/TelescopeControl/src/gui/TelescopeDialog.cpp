@@ -238,16 +238,20 @@ void TelescopeDialog::setAboutText()
 	aboutPage += QString("<h2>%1</h2>").arg(q_("Telescope Control plug-in"));
 	aboutPage += "<h3>" + QString(q_("Version %1")).arg(TELESCOPE_CONTROL_VERSION) + "</h3>";
 	QFile aboutFile(":/telescopeControl/about.utf8");
-	aboutFile.open(QFile::ReadOnly | QFile::Text);
-	aboutPage += aboutFile.readAll();
-	aboutFile.close();
+	if(aboutFile.open(QFile::ReadOnly | QFile::Text))
+	{
+		aboutPage += aboutFile.readAll();
+		aboutFile.close();
+	}
 	aboutPage += "</body></html>";
 	
 	QString helpPage = "<html><head></head><body>";
 	QFile helpFile(":/telescopeControl/help.utf8");
-	helpFile.open(QFile::ReadOnly | QFile::Text);
-	helpPage += helpFile.readAll();
-	helpFile.close();
+	if(helpFile.open(QFile::ReadOnly | QFile::Text))
+	{
+		helpPage += helpFile.readAll();
+		helpFile.close();
+	}
 	helpPage += "</body></html>";
 	
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
