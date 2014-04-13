@@ -83,8 +83,15 @@ StelPluginInfo NovaeStelPluginInterface::getPluginInfo() const
  Constructor
 */
 Novae::Novae()
-	: texPointer(NULL)
+	: NovaCnt(0)
+	, texPointer(NULL)
+	, updateState(CompleteNoUpdates)
+	, downloadMgr(NULL)
 	, progressBar(NULL)
+	, updateTimer(NULL)
+	, messageTimer(NULL)
+	, updatesEnabled(false)
+	, updateFrequencyDays(0)
 {
 	setObjectName("Novae");
 	configDialog = new NovaeDialog();
