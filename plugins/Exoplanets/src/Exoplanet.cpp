@@ -47,6 +47,8 @@ Vec3f Exoplanet::habitableExoplanetMarkerColor = Vec3f(1.f,0.5f,0.f);
 
 Exoplanet::Exoplanet(const QVariantMap& map)
 		: initialized(false),
+		  EPCount(0),
+		  PHEPCount(0),
 		  designation(""),
 		  RA(0.),
 		  DE(0.),

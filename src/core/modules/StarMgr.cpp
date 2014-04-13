@@ -480,9 +480,11 @@ void StarMgr::setCheckFlag(const QString& catId, bool b)
 		catalogsDescription[idx-1]=m;
 		starSettings["catalogs"]=catalogsDescription;
 		QFile tmp(starConfigFileFullPath);
-		tmp.open(QIODevice::WriteOnly);
-		StelJsonParser::write(starSettings, &tmp);
-		tmp.close();
+		if(tmp.open(QIODevice::WriteOnly))
+		{
+			StelJsonParser::write(starSettings, &tmp);
+			tmp.close();
+		}
 	}
 }
 

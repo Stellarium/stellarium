@@ -60,9 +60,16 @@ StelPluginInfo CompassMarksStelPluginInterface::getPluginInfo() const
 }
 
 CompassMarks::CompassMarks()
-	: markColor(1,1,1), pxmapGlow(NULL), pxmapOnIcon(NULL), pxmapOffIcon(NULL), toolbarButton(NULL)
+	: displayedAtStartup(false)
+	, markColor(1,1,1)
+	, pxmapGlow(NULL)
+	, pxmapOnIcon(NULL)
+	, pxmapOffIcon(NULL)
+	, toolbarButton(NULL)
+	, cardinalPointsState(false)
 {
 	setObjectName("CompassMarks");
+	conf = StelApp::getInstance().getSettings();
 }
 
 CompassMarks::~CompassMarks()
@@ -87,7 +94,6 @@ void CompassMarks::init()
 {
 	// Because the plug-in has no configuration GUI, users rely on what's
 	// written in the configuration file to know what can be configured.
-	conf = StelApp::getInstance().getSettings();
 	Q_ASSERT(conf);
 	if (!conf->childGroups().contains("CompassMarks"))
 		restoreDefaultConfiguration();
