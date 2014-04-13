@@ -48,15 +48,16 @@ QString StelTranslator::systemLangName;
 // Use system locale language by default
 StelTranslator* StelTranslator::globalTranslator = NULL;
 
-StelTranslator::StelTranslator(const QString& adomain, const QString& alangName) :
-		domain(adomain), langName(alangName)
+StelTranslator::StelTranslator(const QString& adomain, const QString& alangName)
+	: domain(adomain),
+	  langName(alangName)
 {
 	translator = new QTranslator();
 	bool res = translator->load(StelFileMgr::getLocaleDir()+"/"+adomain+"/"+getTrueLocaleName()+".qm");
 	if (!res)
-		qWarning() << "Couldn't load translations for language " << alangName;
+		qWarning() << "Couldn't load translations for language " << getTrueLocaleName();
 	if (translator->isEmpty())
-		qWarning() << "Empty translation file for language " << alangName;
+		qWarning() << "Empty translation file for language " << getTrueLocaleName();
 }
 
 StelTranslator::~StelTranslator()
@@ -126,15 +127,15 @@ void StelTranslator::initSystemLanguage()
 			}
 			else
 			{
-				systemLangName = "C";
+				systemLangName = "en";
 			}
 #else
-			systemLangName = "C";
+			systemLangName = "en";
 #endif
 		}
 	}
 
-	if (systemLangName.isEmpty())
+	if (systemLangName.isEmpty() || systemLangName=="system")
 		systemLangName = "en";
 
 	//change systemLangName to ISO 639 / ISO 3166.
