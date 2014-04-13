@@ -90,52 +90,8 @@ void StelTranslator::init(const QString& fileName)
 //! Try to determine system language from system configuration
 void StelTranslator::initSystemLanguage()
 {
-#ifdef _MSC_BUILD
-	char lang[128];
-	size_t retval;
-	errno_t err=getenv_s(&retval, lang, sizeof(lang), "LANGUAGE");
-#else
-	char* lang = getenv("LANGUAGE");
-#endif
-	if (lang)
-		systemLangName = lang;
-	else
-	{
-#ifdef _MSC_BUILD
-		err=getenv_s(&retval, lang, sizeof(lang), "LANG");
-#else
-		lang = getenv("LANG");
-#endif
-		if (lang)
-			systemLangName = lang;
-		else
-		{
-#ifdef Q_OS_WIN
-			char ulng[3], ctry[3];
-			if (GetLocaleInfoA(LOCALE_USER_DEFAULT, LOCALE_SISO639LANGNAME, ulng, 3))
-			{
-				ulng[2] = '\0';
-				if (GetLocaleInfoA(LOCALE_USER_DEFAULT, LOCALE_SISO3166CTRYNAME, ctry, 3))
-				{
-					ctry[2] = '\0';
-					systemLangName = QString("%1_%2").arg(ulng).arg(ctry);
-				}
-				else
-				{
-					systemLangName = ulng;
-				}
-			}
-			else
-			{
-				systemLangName = "en";
-			}
-#else
-			systemLangName = "en";
-#endif
-		}
-	}
-
-	if (systemLangName.isEmpty() || systemLangName=="system")
+	systemLangName = QLocale::system().name();
+	if (systemLangName.isEmpty())
 		systemLangName = "en";
 
 	//change systemLangName to ISO 639 / ISO 3166.
