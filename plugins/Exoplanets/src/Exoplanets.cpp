@@ -780,14 +780,18 @@ void Exoplanets::upgradeConfigIni(void)
 void Exoplanets::setFlagShowExoplanetsButton(bool b)
 {
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-	if (b==true) {
-		if (toolbarButton==NULL) {
-			// Create the exoplanets button
-			toolbarButton = new StelButton(NULL, *OnIcon, *OffIcon, *GlowIcon, "actionShow_Exoplanets");
+	if (gui!=NULL)
+	{
+		if (b==true)
+		{
+			if (toolbarButton==NULL) {
+				// Create the exoplanets button
+				toolbarButton = new StelButton(NULL, *OnIcon, *OffIcon, *GlowIcon, "actionShow_Exoplanets");
+			}
+			gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
+		} else {
+			gui->getButtonBar()->hideButton("actionShow_Exoplanets");
 		}
-		gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
-	} else {
-		gui->getButtonBar()->hideButton("actionShow_Exoplanets");
 	}
 	flagShowExoplanetsButton = b;
 }

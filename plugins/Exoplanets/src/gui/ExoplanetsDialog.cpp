@@ -42,6 +42,7 @@
 ExoplanetsDialog::ExoplanetsDialog() : updateTimer(NULL)
 {
         ui = new Ui_exoplanetsDialog;
+	ep = GETSTELMODULE(Exoplanets);
 }
 
 ExoplanetsDialog::~ExoplanetsDialog()
@@ -70,7 +71,6 @@ void ExoplanetsDialog::retranslate()
 // Initialize the dialog widgets and connect the signals/slots
 void ExoplanetsDialog::createDialogContent()
 {
-	ep = GETSTELMODULE(Exoplanets);
 	ui->setupUi(dialog);
 	ui->tabs->setCurrentIndex(0);	
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()),

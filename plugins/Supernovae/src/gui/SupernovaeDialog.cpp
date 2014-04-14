@@ -42,6 +42,7 @@
 SupernovaeDialog::SupernovaeDialog() : updateTimer(NULL)
 {
 	ui = new Ui_supernovaeDialog;
+	sn = GETSTELMODULE(Supernovae);
 }
 
 SupernovaeDialog::~SupernovaeDialog()
@@ -68,7 +69,6 @@ void SupernovaeDialog::retranslate()
 // Initialize the dialog widgets and connect the signals/slots
 void SupernovaeDialog::createDialogContent()
 {
-	sn = GETSTELMODULE(Supernovae);
 	ui->setupUi(dialog);
 	ui->tabs->setCurrentIndex(0);	
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()),
