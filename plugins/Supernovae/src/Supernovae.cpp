@@ -80,7 +80,14 @@ StelPluginInfo SupernovaeStelPluginInterface::getPluginInfo() const
  Constructor
 */
 Supernovae::Supernovae()
-	: progressBar(NULL)
+	: SNCount(0)
+	, updateState(CompleteNoUpdates)
+	, downloadMgr(NULL)
+	, progressBar(NULL)
+	, updateTimer(0)
+	, messageTimer(0)
+	, updatesEnabled(false)
+	, updateFrequencyDays(0)
 {
 	setObjectName("Supernovae");
 	configDialog = new SupernovaeDialog();

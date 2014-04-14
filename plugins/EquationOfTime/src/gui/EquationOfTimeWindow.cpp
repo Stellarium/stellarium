@@ -29,6 +29,7 @@
 EquationOfTimeWindow::EquationOfTimeWindow()
 {
 	ui = new Ui_equationOfTimeWindowForm();
+	eq = GETSTELMODULE(EquationOfTime);
 }
 
 EquationOfTimeWindow::~EquationOfTimeWindow()
@@ -47,7 +48,6 @@ void EquationOfTimeWindow::retranslate()
 
 void EquationOfTimeWindow::createDialogContent()
 {
-	eq = GETSTELMODULE(EquationOfTime);
 	ui->setupUi(dialog);
 
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));

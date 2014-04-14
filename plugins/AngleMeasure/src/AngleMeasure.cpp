@@ -62,10 +62,12 @@ StelPluginInfo AngleMeasureStelPluginInterface::getPluginInfo() const
 }
 
 AngleMeasure::AngleMeasure()
-	: flagShowAngleMeasure(false),
-	  dragging(false),
-	  angle(0.),
-	  toolbarButton(NULL)
+	: flagShowAngleMeasure(false)
+	, dragging(false)
+	, angle(0.)
+	, flagUseDmsFormat(false)
+	, flagShowPA(false)
+	, toolbarButton(NULL)
 {
 	setObjectName("AngleMeasure");
 	font.setPixelSize(16);

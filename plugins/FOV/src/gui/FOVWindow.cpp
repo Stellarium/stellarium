@@ -28,7 +28,8 @@
 
 FOVWindow::FOVWindow()
 {
-	ui = new Ui_fovWindowForm();	
+	ui = new Ui_fovWindowForm();
+	fov = GETSTELMODULE(FOV);
 }
 
 FOVWindow::~FOVWindow()
@@ -47,7 +48,6 @@ void FOVWindow::retranslate()
 
 void FOVWindow::createDialogContent()
 {
-	fov = GETSTELMODULE(FOV);
 	ui->setupUi(dialog);
 
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));

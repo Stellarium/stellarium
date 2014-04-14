@@ -41,6 +41,7 @@
 NovaeDialog::NovaeDialog() : updateTimer(NULL)
 {
 	ui = new Ui_novaeDialog;
+	nova = GETSTELMODULE(Novae);
 }
 
 NovaeDialog::~NovaeDialog()
@@ -67,7 +68,6 @@ void NovaeDialog::retranslate()
 // Initialize the dialog widgets and connect the signals/slots
 void NovaeDialog::createDialogContent()
 {
-	nova = GETSTELMODULE(Novae);
 	ui->setupUi(dialog);
 	ui->tabs->setCurrentIndex(0);	
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()),
