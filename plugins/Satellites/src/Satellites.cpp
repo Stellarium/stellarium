@@ -73,15 +73,21 @@ StelPluginInfo SatellitesStelPluginInterface::getPluginInfo() const
 }
 
 Satellites::Satellites()
-	: satelliteListModel(NULL),
-	  pxmapGlow(NULL),
-	  pxmapOnIcon(NULL),
-	  pxmapOffIcon(NULL),
-	  toolbarButton(NULL),
-	  earth(NULL),
-	  defaultHintColor(0.0, 0.4, 0.6),
-	  defaultOrbitColor(0.0, 0.3, 0.6),
-	  progressBar(NULL)
+	: satelliteListModel(NULL)
+	, toolbarButton(NULL)
+	, earth(NULL)
+	, defaultHintColor(0.0, 0.4, 0.6)
+	, defaultOrbitColor(0.0, 0.3, 0.6)
+	, updateState(CompleteNoUpdates)
+	, downloadMgr(NULL)
+	, progressBar(NULL)
+	, numberDownloadsComplete(0)
+	, updateTimer(0)
+	, updatesEnabled(false)
+	, autoAddEnabled(false)
+	, autoRemoveEnabled(false)
+	, updateFrequencyHours(0)
+	, messageTimer(0)
 {
 	setObjectName("Satellites");
 	configDialog = new SatellitesDialog();
@@ -97,13 +103,6 @@ void Satellites::deinit()
 Satellites::~Satellites()
 {
 	delete configDialog;
-	
-	if (pxmapGlow)
-		delete pxmapGlow;
-	if (pxmapOnIcon)
-		delete pxmapOnIcon;
-	if (pxmapOffIcon)
-		delete pxmapOffIcon;
 }
 
 
@@ -147,10 +146,11 @@ void Satellites::init()
 		addAction("actionShow_Satellite_ConfigDialog_Global", satGroup, N_("Satellites configuration window"), configDialog, "visible", "Alt+Z");
 
 		// Gui toolbar button
-		pxmapGlow = new QPixmap(":/graphicGui/glow32x32.png");
-		pxmapOnIcon = new QPixmap(":/satellites/bt_satellites_on.png");
-		pxmapOffIcon = new QPixmap(":/satellites/bt_satellites_off.png");
-		toolbarButton = new StelButton(NULL, *pxmapOnIcon, *pxmapOffIcon, *pxmapGlow, "actionShow_Satellite_Hints");
+		toolbarButton = new StelButton(NULL,
+					       QPixmap(":/satellites/bt_satellites_on.png"),
+					       QPixmap(":/satellites/bt_satellites_off.png"),
+					       QPixmap(":/graphicGui/glow32x32.png"),
+					       "actionShow_Satellite_Hints");
 		gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
 	}
 	catch (std::runtime_error &e)
