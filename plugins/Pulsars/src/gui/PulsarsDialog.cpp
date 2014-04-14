@@ -39,10 +39,11 @@
 #include "StelFileMgr.hpp"
 #include "StelTranslator.hpp"
 
-PulsarsDialog::PulsarsDialog() : updateTimer(NULL)
+PulsarsDialog::PulsarsDialog()
+	: psr(NULL)
+	, updateTimer(NULL)
 {
 	ui = new Ui_pulsarsDialog;
-	psr = GETSTELMODULE(Pulsars);
 }
 
 PulsarsDialog::~PulsarsDialog()
@@ -69,6 +70,7 @@ void PulsarsDialog::retranslate()
 // Initialize the dialog widgets and connect the signals/slots
 void PulsarsDialog::createDialogContent()
 {
+	psr = GETSTELMODULE(Pulsars);
 	ui->setupUi(dialog);
 	ui->tabs->setCurrentIndex(0);	
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()),

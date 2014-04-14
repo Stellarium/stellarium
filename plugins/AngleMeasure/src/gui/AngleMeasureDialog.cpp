@@ -29,9 +29,9 @@
 #include "StelModuleMgr.hpp"
 
 AngleMeasureDialog::AngleMeasureDialog()
+	: am(NULL)
 {
 	ui = new Ui_angleMeasureDialog();
-	am = GETSTELMODULE(AngleMeasure);
 }
 
 AngleMeasureDialog::~AngleMeasureDialog()
@@ -50,6 +50,7 @@ void AngleMeasureDialog::retranslate()
 
 void AngleMeasureDialog::createDialogContent()
 {
+	am = GETSTELMODULE(AngleMeasure);
 	ui->setupUi(dialog);
 
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
