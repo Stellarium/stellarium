@@ -84,12 +84,20 @@ StelPluginInfo ExoplanetsStelPluginInterface::getPluginInfo() const
  Constructor
 */
 Exoplanets::Exoplanets()
-	: flagShowExoplanets(false),
-	  OnIcon(NULL),
-	  OffIcon(NULL),
-	  GlowIcon(NULL),
-	  toolbarButton(NULL),
-	  progressBar(NULL)
+	: PSCount(0)
+	, EPCountAll(0)
+	, EPCountPH(0)
+	, updateState(CompleteNoUpdates)
+	, downloadMgr(NULL)
+	, updateTimer(0)
+	, messageTimer(0)
+	, updatesEnabled(false)
+	, updateFrequencyHours(0)
+	, enableAtStartup(false)
+	, flagShowExoplanets(false)
+	, flagShowExoplanetsButton(false)
+	, toolbarButton(NULL)
+	, progressBar(NULL)
 {
 	setObjectName("Exoplanets");
 	exoplanetsConfigDialog = new ExoplanetsDialog();
@@ -105,13 +113,6 @@ Exoplanets::~Exoplanets()
 	StelApp::getInstance().getStelObjectMgr().unSelect();
 
 	delete exoplanetsConfigDialog;
-
-	if (GlowIcon)
-		delete GlowIcon;
-	if (OnIcon)
-		delete OnIcon;
-	if (OffIcon)
-		delete OffIcon;
 }
 
 void Exoplanets::deinit()
@@ -168,10 +169,6 @@ void Exoplanets::init()
 		// key bindings and other actions
 		addAction("actionShow_Exoplanets", N_("Exoplanets"), N_("Show exoplanets"), "showExoplanets", "Ctrl+Alt+E");
 		addAction("actionShow_Exoplanets_ConfigDialog", N_("Exoplanets"), N_("Exoplanets configuration window"), exoplanetsConfigDialog, "visible");
-
-		GlowIcon = new QPixmap(":/graphicGui/glow32x32.png");
-		OnIcon = new QPixmap(":/Exoplanets/btExoplanets-on.png");
-		OffIcon = new QPixmap(":/Exoplanets/btExoplanets-off.png");
 
 		setFlagShowExoplanets(getEnableAtStartup());
 		setFlagShowExoplanetsButton(flagShowExoplanetsButton);
@@ -786,7 +783,11 @@ void Exoplanets::setFlagShowExoplanetsButton(bool b)
 		{
 			if (toolbarButton==NULL) {
 				// Create the exoplanets button
-				toolbarButton = new StelButton(NULL, *OnIcon, *OffIcon, *GlowIcon, "actionShow_Exoplanets");
+				toolbarButton = new StelButton(NULL,
+							       QPixmap(":/Exoplanets/btExoplanets-on.png"),
+							       QPixmap(":/Exoplanets/btExoplanets-off.png"),
+							       QPixmap(":/graphicGui/glow32x32.png"),
+							       "actionShow_Exoplanets");
 			}
 			gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
 		} else {

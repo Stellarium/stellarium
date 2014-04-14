@@ -53,7 +53,10 @@
 #include "StelActionMgr.hpp"
 #include "StelJsonParser.hpp"
 
-HelpDialog::HelpDialog(QObject* parent) : StelDialog(parent)
+HelpDialog::HelpDialog(QObject* parent)
+	: StelDialog(parent)
+	, updateState(CompleteNoUpdates)
+	, downloadMgr(NULL)
 {
 	ui = new Ui_helpDialogForm;
 
