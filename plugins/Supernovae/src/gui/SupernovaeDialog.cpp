@@ -39,10 +39,11 @@
 #include "StelFileMgr.hpp"
 #include "StelTranslator.hpp"
 
-SupernovaeDialog::SupernovaeDialog() : updateTimer(NULL)
+SupernovaeDialog::SupernovaeDialog()
+	: sn(NULL)
+	, updateTimer(NULL)
 {
 	ui = new Ui_supernovaeDialog;
-	sn = GETSTELMODULE(Supernovae);
 }
 
 SupernovaeDialog::~SupernovaeDialog()
@@ -69,6 +70,7 @@ void SupernovaeDialog::retranslate()
 // Initialize the dialog widgets and connect the signals/slots
 void SupernovaeDialog::createDialogContent()
 {
+	sn = GETSTELMODULE(Supernovae);
 	ui->setupUi(dialog);
 	ui->tabs->setCurrentIndex(0);	
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()),
@@ -95,7 +97,7 @@ void SupernovaeDialog::createDialogContent()
 
 	// About tab
 	setAboutHtml();
-	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());	
 	Q_ASSERT(gui);
 	ui->aboutTextBrowser->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
 

@@ -37,7 +37,6 @@ class QSettings;
 class QTimer;
 class ExoplanetsDialog;
 class StelPainter;
-class QPixmap;
 class StelButton;
 
 typedef QSharedPointer<Exoplanet> ExoplanetP;
@@ -259,9 +258,6 @@ private:
 	ExoplanetsDialog* exoplanetsConfigDialog;
 	bool flagShowExoplanets;
 	bool flagShowExoplanetsButton;
-	QPixmap* OnIcon;
-	QPixmap* OffIcon;
-	QPixmap* GlowIcon;
 	StelButton* toolbarButton;
 	class StelProgressController* progressBar;
 
