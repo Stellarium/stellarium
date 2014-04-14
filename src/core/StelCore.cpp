@@ -56,7 +56,20 @@ const double StelCore::JD_DAY   =1.;
 const double StelCore::ONE_OVER_JD_SECOND = 24 * 60 * 60;
 
 
-StelCore::StelCore() : movementMgr(NULL), geodesicGrid(NULL), currentProjectionType(ProjectionStereographic), position(NULL), timeSpeed(JD_SECOND), JDay(0.)
+StelCore::StelCore()
+	: skyDrawer(NULL)
+	, movementMgr(NULL)
+	, geodesicGrid(NULL)
+	, currentProjectionType(ProjectionStereographic)
+	, currentDeltaTAlgorithm(EspenakMeeus)
+	, position(NULL)
+	, timeSpeed(JD_SECOND)
+	, JDay(0.)
+	, presetSkyTime(0.)
+	, secondsOfLastJDayUpdate(0.)
+	, JDayOfLastJDayUpdate(0.)
+	, deltaTCustomNDot(-26.0)
+	, deltaTCustomYear(1820.0)
 {
 	toneConverter = new StelToneReproducer();
 

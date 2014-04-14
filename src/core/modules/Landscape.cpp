@@ -34,7 +34,21 @@
 #include <QDir>
 #include <QtAlgorithms>
 
-Landscape::Landscape(float _radius) : radius(_radius), landscapeBrightness(1.), /*nightBrightness(0.8), */ angleRotateZOffset(0.), horizonPolygon(NULL)
+Landscape::Landscape(float _radius)
+	: radius(_radius)
+	, minBrightness(-1.)
+	, landscapeBrightness(1.)
+	, lightScapeBrightness(0.)
+	, rows(20)
+	, cols(40)
+	, angleRotateZ(0.)
+	, angleRotateZOffset(0.)
+	, defaultBortleIndex(-1)
+	, defaultFogSetting(-1)
+	, defaultExtinctionCoefficient(-1.)
+	, defaultTemperature(-1000.)
+	, defaultPressure(-2.)
+	, horizonPolygon(NULL)
 {
 	validLandscape = 0;
 }
