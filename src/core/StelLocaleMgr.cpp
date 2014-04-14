@@ -34,7 +34,12 @@
 
 QMap<QString, QString> StelLocaleMgr::countryCodeToStringMap;
 
-StelLocaleMgr::StelLocaleMgr() : skyTranslator(NULL), GMTShift(0)
+StelLocaleMgr::StelLocaleMgr()
+	: skyTranslator(NULL)
+	, timeFormat()
+	, dateFormat()
+	, timeZoneMode()
+	, GMTShift(0)
 {
 	//generateCountryList();
 

@@ -130,7 +130,11 @@ void StarMgr::initTriangle(int lev,int index, const Vec3f &c0, const Vec3f &c1, 
 }
 
 
-StarMgr::StarMgr(void) : hipIndex(new HipIndexStruct[NR_OF_HIP+1])
+StarMgr::StarMgr(void)
+	: flagStarName(false)
+	, labelsAmount(0.)
+	, gravityLabel(false)
+	, hipIndex(new HipIndexStruct[NR_OF_HIP+1])
 {
 	setObjectName("StarMgr");
 	if (hipIndex == 0)
