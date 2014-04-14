@@ -23,6 +23,9 @@
 #include "ui_AtmosphereDialog.h"
 
 AtmosphereDialog::AtmosphereDialog()
+	: refraction(NULL)
+	, extinction(NULL)
+
 {
 	ui = new Ui_AtmosphereDialogForm;
 }

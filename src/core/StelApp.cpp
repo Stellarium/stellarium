@@ -187,14 +187,29 @@ void StelApp::deinitStatic()
  Create and initialize the main Stellarium application.
 *************************************************************************/
 StelApp::StelApp(QObject* parent)
-	: QObject(parent), core(NULL),
+	: QObject(parent)
+	, core(NULL)
+	, planetLocationMgr(NULL)
+	, audioMgr(NULL)
+	, videoMgr(NULL)
+	, skyImageMgr(NULL)
 #ifndef DISABLE_SCRIPTING
-	  scriptAPIProxy(NULL), scriptMgr(NULL),
+	, scriptAPIProxy(NULL)
+	, scriptMgr(NULL)
 #endif
-	  stelGui(NULL), devicePixelsPerPixel(1.f), globalScalingRatio(1.f), fps(0),
-	  frame(0), timefr(0.), timeBase(0.), flagNightVision(false),
-	  confSettings(NULL), initialized(false), saveProjW(-1), saveProjH(-1), drawState(0)
-
+	, stelGui(NULL)
+	, devicePixelsPerPixel(1.f)
+	, globalScalingRatio(1.f)
+	, fps(0)
+	, frame(0)
+	, timefr(0.)
+	, timeBase(0.)
+	, flagNightVision(false)
+	, confSettings(NULL)
+	, initialized(false)
+	, saveProjW(-1)
+	, saveProjH(-1)
+	, drawState(0)
 {
 	// Stat variables
 	nbDownloadedFiles=0;

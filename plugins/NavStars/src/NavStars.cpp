@@ -58,7 +58,9 @@ StelPluginInfo NavStarsStelPluginInterface::getPluginInfo() const
 
 
 
-NavStars::NavStars() : toolbarButton(NULL)
+NavStars::NavStars()
+	: starNamesState(false)
+	, toolbarButton(NULL)
 {
 	setObjectName("NavStars");
 	conf = StelApp::getInstance().getSettings();
@@ -69,6 +71,9 @@ NavStars::NavStars() : toolbarButton(NULL)
 	
 	QVariant var = conf->value("NavigationalStars/marker_color", "0.8,0.0,0.0");
 	markerColor = StelUtils::strToVec3f(var.toString());
+
+	// Get the manager of stars for manipulation of the stars labels
+	smgr = GETSTELMODULE(StarMgr);
 }
 
 
@@ -90,9 +95,6 @@ double NavStars::getCallOrder(StelModuleActionName actionName) const
 
 void NavStars::init()
 {
-	// Get the manager of stars for manipulation of the stars labels
-	smgr = GETSTELMODULE(StarMgr);
-
 	// List of HIP numbers of the navigational stars: Polaris (index 0) and
 	// the 47 "selected stars" from The Nautical Almanac. Polaris is included
 	// because it was listed with them in the The American Practical Navigator,

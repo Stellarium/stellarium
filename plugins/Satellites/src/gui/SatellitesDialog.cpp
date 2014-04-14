@@ -43,11 +43,12 @@
 #include "StelTranslator.hpp"
 #include "StelActionMgr.hpp"
 
-SatellitesDialog::SatellitesDialog() :
-    updateTimer(0),
-    importWindow(0),
-    filterModel(0),
-    checkStateRole(Qt::UserRole)
+SatellitesDialog::SatellitesDialog()
+	: satelliteModified(false)
+	, updateTimer(0)
+	, importWindow(0)
+	, filterModel(0)
+	, checkStateRole(Qt::UserRole)
 {
 	ui = new Ui_satellitesDialog;
 }

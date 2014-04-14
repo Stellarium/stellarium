@@ -82,12 +82,22 @@ StelPluginInfo QuasarsStelPluginInterface::getPluginInfo() const
  Constructor
 */
 Quasars::Quasars()
-	: flagShowQuasars(false)
+	: QsrCount(0)
+	, updateState(CompleteNoUpdates)
+	, downloadMgr(NULL)
+	, updateTimer(0)
+	, messageTimer(0)
+	, updatesEnabled(false)
+	, updateFrequencyDays(0)
+	, enableAtStartup(false)
+	, flagShowQuasars(false)
+	, flagShowQuasarsButton(false)
 	, OnIcon(NULL)
 	, OffIcon(NULL)
 	, GlowIcon(NULL)
 	, toolbarButton(NULL)
 	, progressBar(NULL)
+
 {
 	setObjectName("Quasars");
 	configDialog = new QuasarsDialog();
@@ -759,14 +769,17 @@ void Quasars::upgradeConfigIni(void)
 void Quasars::setFlagShowQuasarsButton(bool b)
 {
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-	if (b==true) {
-		if (toolbarButton==NULL) {
-			// Create the quasars button
-			toolbarButton = new StelButton(NULL, *OnIcon, *OffIcon, *GlowIcon, "actionShow_Quasars");
+	if (gui!=NULL)
+	{
+		if (b==true) {
+			if (toolbarButton==NULL) {
+				// Create the quasars button
+				toolbarButton = new StelButton(NULL, *OnIcon, *OffIcon, *GlowIcon, "actionShow_Quasars");
+			}
+			gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
+		} else {
+			gui->getButtonBar()->hideButton("actionShow_Quasars");
 		}
-		gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
-	} else {
-		gui->getButtonBar()->hideButton("actionShow_Quasars");
 	}
 	flagShowQuasarsButton = b;
 }

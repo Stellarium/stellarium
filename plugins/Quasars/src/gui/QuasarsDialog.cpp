@@ -42,6 +42,7 @@
 QuasarsDialog::QuasarsDialog() : updateTimer(NULL)
 {
 	ui = new Ui_quasarsDialog;
+	qsr = GETSTELMODULE(Quasars);
 }
 
 QuasarsDialog::~QuasarsDialog()
@@ -68,7 +69,6 @@ void QuasarsDialog::retranslate()
 // Initialize the dialog widgets and connect the signals/slots
 void QuasarsDialog::createDialogContent()
 {
-	qsr = GETSTELMODULE(Quasars);
 	ui->setupUi(dialog);
 	ui->tabs->setCurrentIndex(0);	
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()),
