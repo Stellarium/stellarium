@@ -103,17 +103,20 @@ void CompassMarks::init()
 	try
 	{
 		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-		pxmapGlow = new QPixmap(":/graphicGui/glow32x32.png");
-		pxmapOnIcon = new QPixmap(":/compassMarks/bt_compass_on.png");
-		pxmapOffIcon = new QPixmap(":/compassMarks/bt_compass_off.png");
+		if (gui != NULL)
+		{
+			pxmapGlow = new QPixmap(":/graphicGui/glow32x32.png");
+			pxmapOnIcon = new QPixmap(":/compassMarks/bt_compass_on.png");
+			pxmapOffIcon = new QPixmap(":/compassMarks/bt_compass_off.png");
 
-		addAction("actionShow_Compass_Marks", N_("Compass Marks"), N_("Compass marks"), "marksVisible");
-		toolbarButton = new StelButton(NULL, *pxmapOnIcon, *pxmapOffIcon, *pxmapGlow, "actionShow_Compass_Marks");
-		gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
-		connect(GETSTELMODULE(LandscapeMgr), SIGNAL(cardinalsPointsDisplayedChanged(bool)), this, SLOT(cardinalPointsChanged(bool)));
-		cardinalPointsState = false;
+			addAction("actionShow_Compass_Marks", N_("Compass Marks"), N_("Compass marks"), "marksVisible");
+			toolbarButton = new StelButton(NULL, *pxmapOnIcon, *pxmapOffIcon, *pxmapGlow, "actionShow_Compass_Marks");
+			gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
+			connect(GETSTELMODULE(LandscapeMgr), SIGNAL(cardinalsPointsDisplayedChanged(bool)), this, SLOT(cardinalPointsChanged(bool)));
+			cardinalPointsState = false;
 
-		setCompassMarks(displayedAtStartup);
+			setCompassMarks(displayedAtStartup);
+		}
 	}
 	catch (std::runtime_error& e)
 	{
