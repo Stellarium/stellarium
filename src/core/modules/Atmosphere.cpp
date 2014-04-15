@@ -35,9 +35,18 @@ inline bool myisnan(double value)
 	return value != value;
 }
 
-Atmosphere::Atmosphere(void) :viewport(0,0,0,0), posGrid(NULL), posGridBuffer(QOpenGLBuffer::VertexBuffer), 
-	indicesBuffer(QOpenGLBuffer::IndexBuffer), colorGrid(NULL), colorGridBuffer(QOpenGLBuffer::VertexBuffer),
-	averageLuminance(0.f), eclipseFactor(1.f), lightPollutionLuminance(0)
+Atmosphere::Atmosphere(void)
+	: viewport(0,0,0,0)
+	, skyResolutionY(44)
+	, skyResolutionX(44)
+	, posGrid(NULL)
+	, posGridBuffer(QOpenGLBuffer::VertexBuffer)
+	, indicesBuffer(QOpenGLBuffer::IndexBuffer)
+	, colorGrid(NULL)
+	, colorGridBuffer(QOpenGLBuffer::VertexBuffer)
+	, averageLuminance(0.f)
+	, eclipseFactor(1.f)
+	, lightPollutionLuminance(0)
 {
 	setFadeDuration(1.5f);
 
