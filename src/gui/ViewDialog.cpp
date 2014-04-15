@@ -372,8 +372,6 @@ void ViewDialog::populateLists()
 	updateSkyCultureText();
 
 	const StelCore* core = StelApp::getInstance().getCore();	
-	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-	Q_ASSERT(gui);
 
 	// Fill the projection list
 	l = ui->projectionListWidget;
@@ -386,7 +384,9 @@ void ViewDialog::populateLists()
 	}
 	l->setCurrentItem(l->findItems(core->projectionTypeKeyToNameI18n(core->getCurrentProjectionTypeKey()), Qt::MatchExactly).at(0));
 	l->blockSignals(false);
-	ui->projectionTextBrowser->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
+	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+	if(gui!=NULL)
+		ui->projectionTextBrowser->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
 	ui->projectionTextBrowser->setHtml(core->getProjection(StelCore::FrameJ2000)->getHtmlSummary());
 
 	// Fill the landscape list
@@ -481,8 +481,8 @@ void ViewDialog::updateSkyCultureText()
 
 	ui->skyCultureTextBrowser->setSearchPaths(searchPaths);
 	StelGui* gui = dynamic_cast<StelGui*>(app.getGui());
-	Q_ASSERT(gui);
-	ui->skyCultureTextBrowser->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
+	if(gui!=NULL)
+		ui->skyCultureTextBrowser->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
 
 	if (descPath.isEmpty())
 	{
@@ -506,8 +506,8 @@ void ViewDialog::projectionChanged(const QString& projectionNameI18n)
 	StelCore* core = StelApp::getInstance().getCore();
 	core->setCurrentProjectionTypeKey(core->projectionNameI18nToTypeKey(projectionNameI18n));
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-	Q_ASSERT(gui);
-	ui->projectionTextBrowser->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
+	if(gui!=NULL)
+		ui->projectionTextBrowser->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
 	ui->projectionTextBrowser->setHtml(core->getProjection(StelCore::FrameJ2000)->getHtmlSummary());
 }
 
@@ -516,8 +516,8 @@ void ViewDialog::landscapeChanged(QListWidgetItem* item)
 	LandscapeMgr* lmgr = GETSTELMODULE(LandscapeMgr);
 	lmgr->setCurrentLandscapeName(item->data(Qt::UserRole).toString());
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-	Q_ASSERT(gui);
-	ui->landscapeTextBrowser->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
+	if(gui!=NULL)
+		ui->landscapeTextBrowser->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
 	ui->landscapeTextBrowser->setHtml(lmgr->getCurrentLandscapeHtmlDescription());
 	ui->useAsDefaultLandscapeCheckBox->setChecked(lmgr->getDefaultLandscapeID()==lmgr->getCurrentLandscapeID());
 	ui->useAsDefaultLandscapeCheckBox->setEnabled(lmgr->getDefaultLandscapeID()!=lmgr->getCurrentLandscapeID());
