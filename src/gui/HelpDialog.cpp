@@ -438,8 +438,8 @@ void HelpDialog::updateText(void)
 	QString newHtml = getHelpText();
 	ui->helpBrowser->clear();
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-	Q_ASSERT(gui);
-	ui->helpBrowser->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
+	if(gui!=NULL)
+		ui->helpBrowser->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
 	ui->helpBrowser->insertHtml(newHtml);
 	ui->helpBrowser->scrollToAnchor("top");
 

@@ -110,10 +110,12 @@ void ExoplanetsDialog::createDialogContent()
 	setInfoHtml();
 	setWebsitesHtml();
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-	Q_ASSERT(gui);
-	ui->aboutTextBrowser->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
-	ui->infoTextBrowser->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
-	ui->websitesTextBrowser->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
+	if(gui!=NULL)
+	{
+		ui->aboutTextBrowser->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
+		ui->infoTextBrowser->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
+		ui->websitesTextBrowser->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
+	}
 
 	updateGuiFromSettings();
 
@@ -144,9 +146,11 @@ void ExoplanetsDialog::setAboutHtml(void)
 	html += "</ul></p></body></html>";
 
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-	Q_ASSERT(gui);
-	QString htmlStyleSheet(gui->getStelStyle().htmlStyleSheet);
-	ui->aboutTextBrowser->document()->setDefaultStyleSheet(htmlStyleSheet);
+	if(gui!=NULL)
+	{
+		QString htmlStyleSheet(gui->getStelStyle().htmlStyleSheet);
+		ui->aboutTextBrowser->document()->setDefaultStyleSheet(htmlStyleSheet);
+	}
 	ui->aboutTextBrowser->setHtml(html);
 }
 
@@ -161,9 +165,11 @@ void ExoplanetsDialog::setInfoHtml(void)
 	html += "</body></html>";
 
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-	Q_ASSERT(gui);
-	QString htmlStyleSheet(gui->getStelStyle().htmlStyleSheet);
-	ui->infoTextBrowser->document()->setDefaultStyleSheet(htmlStyleSheet);
+	if(gui!=NULL)
+	{
+		QString htmlStyleSheet(gui->getStelStyle().htmlStyleSheet);
+		ui->infoTextBrowser->document()->setDefaultStyleSheet(htmlStyleSheet);
+	}
 	ui->infoTextBrowser->setHtml(html);
 }
 
@@ -192,9 +198,11 @@ void ExoplanetsDialog::setWebsitesHtml(void)
 	html += "</ul></body></html>";
 
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-	Q_ASSERT(gui);
-	QString htmlStyleSheet(gui->getStelStyle().htmlStyleSheet);
-	ui->websitesTextBrowser->document()->setDefaultStyleSheet(htmlStyleSheet);
+	if(gui!=NULL)
+	{
+		QString htmlStyleSheet(gui->getStelStyle().htmlStyleSheet);
+		ui->websitesTextBrowser->document()->setDefaultStyleSheet(htmlStyleSheet);
+	}
 	ui->websitesTextBrowser->setHtml(html);
 }
 
