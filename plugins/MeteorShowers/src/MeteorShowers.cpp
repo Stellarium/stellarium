@@ -1198,6 +1198,8 @@ void MeteorShowers::translations()
 	// TRANSLATORS: Name of meteor shower
 	N_("Monocerotids");
 	// TRANSLATORS: Name of meteor shower
+	N_("α-Monocerotids");
+	// TRANSLATORS: Name of meteor shower
 	N_("σ-Hydrids");
 	// TRANSLATORS: Name of meteor shower
 	N_("Geminids");
