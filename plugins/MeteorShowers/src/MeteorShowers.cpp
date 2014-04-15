@@ -91,11 +91,22 @@ StelPluginInfo MeteorShowersStelPluginInterface::getPluginInfo() const
 */
 MeteorShowers::MeteorShowers()
 	: flagShowMS(false)
+	, flagShowMSButton(true)
 	, OnIcon(NULL)
 	, OffIcon(NULL)
 	, GlowIcon(NULL)
 	, toolbarButton(NULL)
+	, updateState(CompleteNoUpdates)
+	, downloadMgr(NULL)
 	, progressBar(NULL)
+	, updateTimer(0)
+	, messageTimer(0)
+	, updatesEnabled(false)
+	, updateFrequencyHours(0)
+	, enableAtStartup(false)
+	, flagShowARG(true)
+	, flagShowARR(true)
+	, flagShowIR(true)
 {
 	setObjectName("MeteorShowers");
 	configDialog = new MeteorShowerDialog();
@@ -245,20 +256,23 @@ void MeteorShowers::setFlagShowMS(bool b)
 void MeteorShowers::setFlagShowMSButton(bool b)
 {
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-	if(b)
+	if (gui!=NULL)
 	{
-		if(toolbarButton==NULL)
+		if(b)
 		{
-			// Create the MeteorShowers button
-			toolbarButton = new StelButton(NULL, *OnIcon, *OffIcon, *GlowIcon, "actionShow_MeteorShower");
+			if(toolbarButton==NULL)
+			{
+				// Create the MeteorShowers button
+				toolbarButton = new StelButton(NULL, *OnIcon, *OffIcon, *GlowIcon, "actionShow_MeteorShower");
+			}
+			gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
 		}
-		gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
+		else
+		{
+			gui->getButtonBar()->hideButton("actionShow_MeteorShower");
+		}
+		flagShowMSButton = b;
 	}
-	else
-	{
-		gui->getButtonBar()->hideButton("actionShow_MeteorShower");
-	}
-	flagShowMSButton = b;
 }
 
 bool MeteorShowers::changedSkyDate(StelCore* core)
@@ -521,7 +535,7 @@ void MeteorShowers::update(double deltaTime)
 	index = 0;
 	foreach(const activeData &a, activeInfo)
 	{
-		ZHR = calculateZHR(a.zhr, a.variable, a.start, a.finish, a.peak);
+		int ZHR = calculateZHR(a.zhr, a.variable, a.start, a.finish, a.peak);
 
 		// only makes sense given lifetimes of meteors to draw when timeSpeed is realtime
 		// otherwise high overhead of large numbers of meteors

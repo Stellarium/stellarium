@@ -40,8 +40,18 @@ bool MeteorShower::radiantMarkerEnabled = true;
 bool MeteorShower::showActiveRadiantsOnly = true;
 
 MeteorShower::MeteorShower(const QVariantMap& map)
-	: initialized(false),
-	  active(false)
+	: initialized(false)
+	, active(false)
+	, speed(0)
+	, rAlphaPeak(0)
+	, rDeltaPeak(0)
+	, driftAlpha(0)
+	, driftDelta(0)
+	, pidx(0)
+	, radiantAlpha(0)
+	, radiantDelta(0)
+	, zhr(0)
+	, status(0)
 {
 	// return initialized if the mandatory fields are not present
 	if(!map.contains("showerID"))

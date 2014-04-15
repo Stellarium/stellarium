@@ -67,7 +67,6 @@ private:
 
 	double speed;           //! Velocity of meteor in km/s
 	double xydistance;      //! Distance in XY plane (orthogonal to meteor path) from observer to meteor
-	double initDist;        //! Initial distance from observer
 	double minDist;         //! Nearest point to observer along path
 	double distMultiplier;  //! Scale magnitude due to changes in distance
 
@@ -76,8 +75,6 @@ private:
 
 	float mag;              //! Apparent magnitude at head, 0-1
 	float maxMag;           //! 0-1
-	float absMag;           //! Absolute magnitude
-	float visMag;           //! Visual magnitude at observer
 };
 
 #endif // _METEORSTREAM_HPP_
