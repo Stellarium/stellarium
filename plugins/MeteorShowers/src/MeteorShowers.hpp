@@ -357,16 +357,11 @@ private:
 
 	//MS
 	std::vector<std::vector<MeteorStream*> > active;		// Matrix containing all active meteors
-	int ZHR;
 	static const double zhrToWsr;  // factor to convert from zhr to whole earth per second rate
 
-	bool flagShow;
 	bool flagShowARG;  //! Show marker of active radiant based on generic data
 	bool flagShowARR;  //! Show marker of active radiant based on generic data
 	bool flagShowIR;   //! Show marker of inactive radiant
-
-	bool flagShowStreamARG;  //! Show meteor stream of active radiant based on generic data
-	bool flagShowStreamARR;  //! Show meteor stream of active radiant based on generic data
 
 	typedef struct
 	{

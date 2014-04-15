@@ -43,7 +43,10 @@
 #include "StelUtils.hpp"
 #include "ui_meteorShowerDialog.h"
 
-MeteorShowerDialog::MeteorShowerDialog() : updateTimer(NULL)
+MeteorShowerDialog::MeteorShowerDialog()
+	: plugin(NULL)
+	, updateTimer(NULL)
+	, treeWidget(NULL)
 {
     ui = new Ui_meteorShowerDialog;
 }

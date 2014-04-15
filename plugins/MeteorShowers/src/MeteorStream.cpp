@@ -121,6 +121,7 @@ MeteorStream::MeteorStream(const StelCore* core, double velocity, double radiant
 	float scale = 1;
 	if(minDist!=0) scale = 180*180/(minDist*minDist);
 	if(scale < 1) mag *= scale;
+	distMultiplier = 0;
 }
 
 MeteorStream::~MeteorStream()
