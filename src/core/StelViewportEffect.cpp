@@ -51,7 +51,7 @@ StelViewportDistorterFisheyeToSphericMirror::StelViewportDistorterFisheyeToSpher
 	: screen_w(screen_w)
 	, screen_h(screen_h)
 	, originalProjectorParams(StelApp::getInstance().getCore()->getCurrentStelProjectorParams())
-	, texture_wh(0)
+	, texture_wh(1)
 	, texture_point_array(NULL)
 {
 	QSettings& conf = *StelApp::getInstance().getSettings();
