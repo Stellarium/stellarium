@@ -122,16 +122,19 @@ void NavStars::init()
 
 	// Toolbar button
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-	if (toolbarButton == NULL)
+	if (gui!=NULL)
 	{
-		// Create the nav. stars button
-		toolbarButton = new StelButton(NULL,
-		                               QPixmap(":/NavStars/btNavStars-on.png"),
-		                               QPixmap(":/NavStars/btNavStars-off.png"),
-		                               QPixmap(":/graphicGui/glow32x32.png"),
-		                               "actionShow_NavStars");
+		if (toolbarButton == NULL)
+		{
+			// Create the nav. stars button
+			toolbarButton = new StelButton(NULL,
+						       QPixmap(":/NavStars/btNavStars-on.png"),
+						       QPixmap(":/NavStars/btNavStars-off.png"),
+						       QPixmap(":/graphicGui/glow32x32.png"),
+						       "actionShow_NavStars");
+		}
+		gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
 	}
-	gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");	
 
 	// Sync global settings for stars labels
 	connect(smgr, SIGNAL(starLabelsDisplayedChanged(bool)),

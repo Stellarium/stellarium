@@ -82,19 +82,19 @@ StelGuiBase* StelStandardGuiPluginInterface::getStelGuiBase() const
 	return new StelGui();
 }
 
-StelGui::StelGui() :
-	topLevelGraphicsWidget(NULL),
-	locationDialog(0),
-	helpDialog(0),
-	dateTimeDialog(0),
-	searchDialog(0),
-	viewDialog(0),
-	shortcutsDialog(0),
-	configurationDialog(0),
+StelGui::StelGui()
+	: topLevelGraphicsWidget(NULL)
+	, locationDialog(0)
+	, helpDialog(0)
+	, dateTimeDialog(0)
+	, searchDialog(0)
+	, viewDialog(0)
+	, shortcutsDialog(0)
+	, configurationDialog(0)
 #ifdef ENABLE_SCRIPT_CONSOLE
-    scriptConsole(0),
+	, scriptConsole(0)
 #endif
-    initDone(false)
+	, initDone(false)
 {
 	// QPixmapCache::setCacheLimit(30000); ?
 	flipHoriz = NULL;

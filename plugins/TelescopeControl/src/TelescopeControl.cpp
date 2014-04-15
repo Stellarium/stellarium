@@ -145,8 +145,6 @@ void TelescopeControl::init()
 		//Load OpenGL textures
 		reticleTexture = StelApp::getInstance().getTextureManager().createTexture(":/telescopeControl/telescope_reticle.png");
 		selectionTexture = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/pointeur2.png");
-		
-		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 
 		//Create telescope key bindings
 		/* StelAction-s with these key bindings existed in Stellarium prior to
@@ -176,11 +174,16 @@ void TelescopeControl::init()
 		addAction("actionShow_Slew_Window", N_("Telescope Control"), N_("Move a telescope to a given set of coordinates"), slewDialog, "visible", "Ctrl+0");
 
 		//Create toolbar button
-		pixmapHover =	new QPixmap(":/graphicGui/glow32x32.png");
-		pixmapOnIcon =	new QPixmap(":/telescopeControl/button_Slew_Dialog_on.png");
-		pixmapOffIcon =	new QPixmap(":/telescopeControl/button_Slew_Dialog_off.png");
-		toolbarButton =	new StelButton(NULL, *pixmapOnIcon, *pixmapOffIcon, *pixmapHover, "actionShow_Slew_Window");
-		gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
+		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+		if (gui!=NULL)
+		{
+			toolbarButton =	new StelButton(NULL,
+						       QPixmap(":/telescopeControl/button_Slew_Dialog_on.png"),
+						       QPixmap(":/telescopeControl/button_Slew_Dialog_off.png"),
+						       QPixmap(":/graphicGui/glow32x32.png"),
+						       "actionShow_Slew_Window");
+			gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
+		}
 	}
 	catch (std::runtime_error &e)
 	{
