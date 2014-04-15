@@ -138,20 +138,23 @@ void Satellites::init()
 		texPointer = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/pointeur5.png");
 		Satellite::hintTexture = StelApp::getInstance().getTextureManager().createTexture(":/satellites/hint.png");
 
-		// key bindings and other actions
-		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+		// key bindings and other actions		
 		QString satGroup = N_("Satellites");
 		addAction("actionShow_Satellite_Hints", satGroup, N_("Satellite hints"), "hintsVisible", "Ctrl+Z");
 		addAction("actionShow_Satellite_Labels", satGroup, N_("Satellite labels"), "labelsVisible", "Shift+Z");
 		addAction("actionShow_Satellite_ConfigDialog_Global", satGroup, N_("Satellites configuration window"), configDialog, "visible", "Alt+Z");
 
 		// Gui toolbar button
-		toolbarButton = new StelButton(NULL,
-					       QPixmap(":/satellites/bt_satellites_on.png"),
-					       QPixmap(":/satellites/bt_satellites_off.png"),
-					       QPixmap(":/graphicGui/glow32x32.png"),
-					       "actionShow_Satellite_Hints");
-		gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
+		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+		if (gui!=NULL)
+		{
+			toolbarButton = new StelButton(NULL,
+						       QPixmap(":/satellites/bt_satellites_on.png"),
+						       QPixmap(":/satellites/bt_satellites_off.png"),
+						       QPixmap(":/graphicGui/glow32x32.png"),
+						       "actionShow_Satellite_Hints");
+			gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
+		}
 	}
 	catch (std::runtime_error &e)
 	{

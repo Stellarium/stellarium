@@ -251,9 +251,6 @@ private:
 	QFont labelFont;
 	
 	//Toolbar button to toggle the Slew window
-	QPixmap* pixmapHover;
-	QPixmap* pixmapOnIcon;
-	QPixmap* pixmapOffIcon;
 	StelButton* toolbarButton;
 	
 	//! Telescope reticle texture
