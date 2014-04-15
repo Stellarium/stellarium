@@ -113,7 +113,11 @@ const QString InfoPanel::getSelectedText(void)
 	return toPlainText();
 }
 
-SkyGui::SkyGui(QGraphicsItem * parent): QGraphicsWidget(parent), stelGui(NULL)
+SkyGui::SkyGui(QGraphicsItem * parent)
+	: QGraphicsWidget(parent)
+	, btHorizAutoHide(NULL)
+	, btVertAutoHide(NULL)
+	, stelGui(NULL)
 {
 	setObjectName("StelSkyGui");
 

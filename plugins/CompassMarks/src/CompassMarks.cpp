@@ -94,21 +94,22 @@ void CompassMarks::init()
 
 	try
 	{
+		addAction("actionShow_Compass_Marks", N_("Compass Marks"), N_("Compass marks"), "marksVisible");
+
 		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 		if (gui != NULL)
 		{
-			addAction("actionShow_Compass_Marks", N_("Compass Marks"), N_("Compass marks"), "marksVisible");
 			toolbarButton = new StelButton(NULL,
 						       QPixmap(":/compassMarks/bt_compass_on.png"),
 						       QPixmap(":/compassMarks/bt_compass_off.png"),
 						       QPixmap(":/graphicGui/glow32x32.png"),
 						       "actionShow_Compass_Marks");
-			gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
-			connect(GETSTELMODULE(LandscapeMgr), SIGNAL(cardinalsPointsDisplayedChanged(bool)), this, SLOT(cardinalPointsChanged(bool)));
-			cardinalPointsState = false;
-
-			setCompassMarks(displayedAtStartup);
+			gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");			
 		}
+		connect(GETSTELMODULE(LandscapeMgr), SIGNAL(cardinalsPointsDisplayedChanged(bool)), this, SLOT(cardinalPointsChanged(bool)));
+		cardinalPointsState = false;
+
+		setCompassMarks(displayedAtStartup);
 	}
 	catch (std::runtime_error& e)
 	{

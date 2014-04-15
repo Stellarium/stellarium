@@ -47,10 +47,12 @@ struct VertexPoint
 	double h;
 };
 
-StelViewportDistorterFisheyeToSphericMirror::StelViewportDistorterFisheyeToSphericMirror(int screen_w,int screen_h) :
-		screen_w(screen_w), screen_h(screen_h),
-		originalProjectorParams(StelApp::getInstance().getCore()->getCurrentStelProjectorParams()),
-		texture_point_array(NULL)
+StelViewportDistorterFisheyeToSphericMirror::StelViewportDistorterFisheyeToSphericMirror(int screen_w,int screen_h)
+	: screen_w(screen_w)
+	, screen_h(screen_h)
+	, originalProjectorParams(StelApp::getInstance().getCore()->getCurrentStelProjectorParams())
+	, texture_wh(0)
+	, texture_point_array(NULL)
 {
 	QSettings& conf = *StelApp::getInstance().getSettings();
 	StelCore* core = StelApp::getInstance().getCore();

@@ -49,7 +49,7 @@ StelPluginInfo TimeZoneConfigurationStelPluginInterface::getPluginInfo() const
 TimeZoneConfiguration::TimeZoneConfiguration()
 {
 	setObjectName("TimeZoneConfiguration");
-
+	mainWindow = new TimeZoneConfigurationWindow();
 	//
 }
 
@@ -60,7 +60,7 @@ TimeZoneConfiguration::~TimeZoneConfiguration()
 
 void TimeZoneConfiguration::init()
 {
-	mainWindow = new TimeZoneConfigurationWindow();
+	//
 }
 
 void TimeZoneConfiguration::deinit()
