@@ -32,22 +32,43 @@
 #include <QKeyEvent>
 #include <QDebug>
 
-StelMovementMgr::StelMovementMgr(StelCore* acore) : core(acore),
-	flagLockEquPos(false),
-	flagTracking(false),
-	isMouseMovingHoriz(false),
-	isMouseMovingVert(false),
-	flagEnableMouseNavigation(true),
-	keyMoveSpeed(0.00025),
-	flagMoveSlow(false),
-	flagAutoMove(false),
-	deltaFov(0.),
-	deltaAlt(0.),
-	deltaAz(0.),
-	dragTimeMode(false),
-	flagAutoZoom(0),
-	flagAutoZoomOutResetsDirection(0),
-	dragTriggerDistance(4.f)
+StelMovementMgr::StelMovementMgr(StelCore* acore)
+	: currentFov(60.)
+	, initFov(60.)
+	, minFov(0.0001)
+	, maxFov(100.)
+	, initConstellationIntensity(0.45)
+	, core(acore)
+	, objectMgr(NULL)
+	, flagLockEquPos(false)
+	, flagTracking(false)
+	, isMouseMovingHoriz(false)
+	, isMouseMovingVert(false)
+	, flagEnableMoveAtScreenEdge(false)
+	, flagEnableMouseNavigation(true)
+	, mouseZoomSpeed(30)
+	, flagEnableZoomKeys(true)
+	, flagEnableMoveKeys(true)
+	, keyMoveSpeed(0.00025)
+	, keyZoomSpeed(0.00025)
+	, flagMoveSlow(false)
+	, movementsSpeedFactor(1.5)
+	, flagAutoMove(false)
+	, zoomingMode(0)
+	, deltaFov(0.)
+	, deltaAlt(0.)
+	, deltaAz(0.)
+	, flagManualZoom(false)
+	, autoMoveDuration(1.5)
+	, hasDragged(false)
+	, previousX(0)
+	, previousY(0)
+	, beforeTimeDragTimeRate(0.)
+	, dragTimeMode(false)
+	, zoomMove()
+	, flagAutoZoom(0)
+	, flagAutoZoomOutResetsDirection(0)
+	, dragTriggerDistance(4.f)
 {
 	setObjectName("StelMovementMgr");
 	isDragging = false;

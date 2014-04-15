@@ -48,11 +48,13 @@ float Nebula::hintsBrightness = 0;
 Vec3f Nebula::labelColor = Vec3f(0.4,0.3,0.5);
 Vec3f Nebula::circleColor = Vec3f(0.8,0.8,0.1);
 
-Nebula::Nebula() :
-		M_nb(0),
-		NGC_nb(0),
-		IC_nb(0),
-		C_nb(0)
+Nebula::Nebula()
+	: M_nb(0)
+	, NGC_nb(0)
+	, IC_nb(0)
+	, C_nb(0)
+	, mag(99.)
+	, nType()
 {
 	nameI18 = "";
 	angularSize = -1;

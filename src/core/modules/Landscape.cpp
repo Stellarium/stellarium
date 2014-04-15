@@ -223,7 +223,22 @@ const QString Landscape::getTexturePath(const QString& basename, const QString& 
 	return path;
 }
 
-LandscapeOldStyle::LandscapeOldStyle(float _radius) : Landscape(_radius), sideTexs(NULL), sides(NULL), tanMode(false), calibrated(false)
+LandscapeOldStyle::LandscapeOldStyle(float _radius)
+	: Landscape(_radius)
+	, sideTexs(NULL)
+	, nbSideTexs(0)
+	, nbSide(0)
+	, sides(NULL)
+	, nbDecorRepeat(0)
+	, fogAltAngle(0.)
+	, fogAngleShift(0.)
+	, decorAltAngle(0.)
+	, decorAngleShift(0.)
+	, groundAngleShift(0.)
+	, groundAngleRotateZ(0.)
+	, drawGroundFirst(0)
+	, tanMode(false)
+	, calibrated(false)
 {}
 
 LandscapeOldStyle::~LandscapeOldStyle()
@@ -699,7 +714,10 @@ float LandscapePolygonal::getOpacity(Vec3d azalt) const
 // LandscapeFisheye
 //
 
-LandscapeFisheye::LandscapeFisheye(float _radius) : Landscape(_radius)
+LandscapeFisheye::LandscapeFisheye(float _radius)
+	: Landscape(_radius)
+	, mapImage(NULL)
+	, texFov(360.)
 {}
 
 LandscapeFisheye::~LandscapeFisheye()
@@ -824,7 +842,15 @@ float LandscapeFisheye::getOpacity(Vec3d azalt) const
 /////////////////////////////////////////////////////////////////////////////////////////////////
 // spherical panoramas
 
-LandscapeSpherical::LandscapeSpherical(float _radius) : Landscape(_radius)
+LandscapeSpherical::LandscapeSpherical(float _radius)
+	: Landscape(_radius)
+	, mapTexTop(0.)
+	, mapTexBottom(0.)
+	, fogTexTop(0.)
+	, fogTexBottom(0.)
+	, illumTexTop(0.)
+	, illumTexBottom(0.)
+	, mapImage(NULL)
 {}
 
 LandscapeSpherical::~LandscapeSpherical()

@@ -198,7 +198,7 @@ CometOrbit::CometOrbit(double pericenterDistance,
                       //)
             :q(pericenterDistance),e(eccentricity),i(inclination),
             Om(ascendingNode),w(argOfPerhelion),t0(timeAtPerihelion),
-            n(meanMotion), orbitGood(orbitGoodDays) {
+	    n(meanMotion), updateTails(true), orbitGood(orbitGoodDays) {
 //        qDebug() << "CometOrbit::()";
   rdot.set(0.0, 0.0, 0.0);
   const double c_obl = cos(parentRotObliquity);         // 1?

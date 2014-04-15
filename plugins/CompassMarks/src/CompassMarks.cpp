@@ -62,9 +62,6 @@ StelPluginInfo CompassMarksStelPluginInterface::getPluginInfo() const
 CompassMarks::CompassMarks()
 	: displayedAtStartup(false)
 	, markColor(1,1,1)
-	, pxmapGlow(NULL)
-	, pxmapOnIcon(NULL)
-	, pxmapOffIcon(NULL)
 	, toolbarButton(NULL)
 	, cardinalPointsState(false)
 {
@@ -74,12 +71,7 @@ CompassMarks::CompassMarks()
 
 CompassMarks::~CompassMarks()
 {
-	if (pxmapGlow!=NULL)
-		delete pxmapGlow;
-	if (pxmapOnIcon!=NULL)
-		delete pxmapOnIcon;
-	if (pxmapOffIcon!=NULL)
-		delete pxmapOffIcon;
+	//
 }
 
 //! Determine which "layer" the plugin's drawing will happen on.
@@ -105,12 +97,12 @@ void CompassMarks::init()
 		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 		if (gui != NULL)
 		{
-			pxmapGlow = new QPixmap(":/graphicGui/glow32x32.png");
-			pxmapOnIcon = new QPixmap(":/compassMarks/bt_compass_on.png");
-			pxmapOffIcon = new QPixmap(":/compassMarks/bt_compass_off.png");
-
 			addAction("actionShow_Compass_Marks", N_("Compass Marks"), N_("Compass marks"), "marksVisible");
-			toolbarButton = new StelButton(NULL, *pxmapOnIcon, *pxmapOffIcon, *pxmapGlow, "actionShow_Compass_Marks");
+			toolbarButton = new StelButton(NULL,
+						       QPixmap(":/compassMarks/bt_compass_on.png"),
+						       QPixmap(":/compassMarks/bt_compass_off.png"),
+						       QPixmap(":/graphicGui/glow32x32.png"),
+						       "actionShow_Compass_Marks");
 			gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
 			connect(GETSTELMODULE(LandscapeMgr), SIGNAL(cardinalsPointsDisplayedChanged(bool)), this, SLOT(cardinalPointsChanged(bool)));
 			cardinalPointsState = false;

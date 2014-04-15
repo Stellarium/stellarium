@@ -37,6 +37,12 @@ which are generally not at the apex of the Earth's way, such as the Perseids sho
 #include "StelPainter.hpp"
 
 Meteor::Meteor(const StelCore* core, double v)
+	: train(false)
+	, mag(1.)
+	, absMag(1.)
+	, visMag(1.)
+	, initDist(0.)
+	, distMultiplier(0.)
 {
 	const StelToneReproducer* eye = core->getToneReproducer();
 	
