@@ -27,6 +27,11 @@
 #include "StelPainter.hpp"
 
 MeteorStream::MeteorStream(const StelCore* core, double velocity, double radiantAlpha, double radiantDelta)
+	: minDist(0.)
+	, distMultiplier(0.)
+	, startH(0.)
+	, endH(0.)
+	, mag(1.)
 {
 	speed = velocity;
 
