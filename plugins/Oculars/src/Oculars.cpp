@@ -133,6 +133,7 @@ Oculars::Oculars():
 	pxmapOnIcon(NULL),
 	pxmapOffIcon(NULL),
 	toolbarButton(NULL),
+	ocularDialog(NULL),
 	ready(false),
 	actionShowOcular(0),
 	actionShowCrosshairs(0),
