@@ -142,8 +142,14 @@ PlanetShadows::~PlanetShadows()
 	delete shaderProgram;
 }
 
-PlanetShadows::PlanetShadows() :
-	shaderProgram(NULL), current(0)
+PlanetShadows::PlanetShadows()
+	: shaderProgram(NULL)
+	, shaderVars(ShaderVars())
+	, rings_min(0.f)
+	, rings_max(0.f)
+	, current(0)
+	, infoCount(0)
+	, infoSize(0)
 {
 	//std::string extensions = reinterpret_cast<const char*>(glGetString(GL_EXTENSIONS));
 	supported = false; // extensions.find("GL_ARB_texture_float") != std::string::npos;
