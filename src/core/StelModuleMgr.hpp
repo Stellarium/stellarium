@@ -84,7 +84,7 @@ public:
 	//! Contains the information read from the module.ini file
 	struct PluginDescriptor
 	{
-		PluginDescriptor() : loadAtStartup(false), loaded(false) {;}
+		PluginDescriptor() : loadAtStartup(false), loaded(false), pluginInterface(NULL) {;}
 		//! The static info for the plugin.
 		StelPluginInfo info;
 		//! If true, the module is automatically loaded at startup

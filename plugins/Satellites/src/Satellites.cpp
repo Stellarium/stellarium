@@ -1474,6 +1474,7 @@ void Satellites::parseTleFile(QFile& openFile,
 	// Code mostly re-used from updateFromFiles()
 	int lineNumber = 0;
 	TleData lastData;
+	lastData.addThis = addFlagValue;
 	
 	while (!openFile.atEnd())
 	{
