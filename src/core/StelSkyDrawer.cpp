@@ -46,25 +46,25 @@
 #define EYE_RESOLUTION (0.25f)
 #define MAX_LINEAR_RADIUS 8.f
 
-StelSkyDrawer::StelSkyDrawer(StelCore* acore) : core(acore)
+StelSkyDrawer::StelSkyDrawer(StelCore* acore) :
+	core(acore),
+	eye(acore->getToneReproducer()),
+	maxAdaptFov(180.f),
+	minAdaptFov(0.1f),
+	lnfovFactor(0.f),
+	starRelativeScale(1.f),
+	starAbsoluteScaleF(1.f),
+	starLinearScale(19.569f),
+	limitMagnitude(-100.f),
+	limitLuminance(0.f),
+	bortleScaleIndex(3),
+	inScale(1.f),
+	starShaderProgram(NULL),
+	starShaderVars(StarShaderVars()),
+	maxLum(0.f),
+	oldLum(-1.f),
+	big3dModelHaloRadius(150.f)
 {
-	eye = core->getToneReproducer();
-
-	inScale = 1.f;
-	bortleScaleIndex = 3;
-	limitMagnitude = -100.f;
-	limitLuminance = 0;
-	oldLum=-1.f;
-	maxLum = 0.f;
-	setMaxAdaptFov(180.f);
-	setMinAdaptFov(0.1f);
-
-	starAbsoluteScaleF = 1.f;
-	starRelativeScale = 1.f;
-	starLinearScale = 19.569f;
-
-	big3dModelHaloRadius = 150.f;
-
 	QSettings* conf = StelApp::getInstance().getSettings();
 	initColorTableFromConfigFile(conf);
 
