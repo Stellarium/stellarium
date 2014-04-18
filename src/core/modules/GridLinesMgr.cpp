@@ -147,7 +147,10 @@ static double getClosestResolutionHMS(double pixelPerRad)
 
 struct ViewportEdgeIntersectCallbackData
 {
-	ViewportEdgeIntersectCallbackData(StelPainter* p) : sPainter(p) {;}
+	ViewportEdgeIntersectCallbackData(StelPainter* p)
+		: sPainter(p)
+		, raAngle(0.0)
+		, frameType(StelCore::FrameUninitialized) {;}
 	StelPainter* sPainter;
 	Vec4f textColor;
 	QString text;		// Label to display at the intersection of the lines and screen side
