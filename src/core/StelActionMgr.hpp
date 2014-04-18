@@ -34,7 +34,13 @@ public:
 	Q_PROPERTY(bool checked READ isChecked WRITE setChecked NOTIFY toggled)
 
 	//! Don't use this constructor, this is just there to ease the migration from QAction.
-	StelAction(QObject *parent): QObject(parent) {}
+	StelAction(QObject *parent)
+		: QObject(parent)
+		, checkable(false)
+		, checked(false)
+		, global(false)
+		, target(NULL)
+		, property(NULL) {}
 
 	StelAction(const QString& actionId,
 	           const QString& groupId,
