@@ -84,6 +84,12 @@ StelGuiBase* StelStandardGuiPluginInterface::getStelGuiBase() const
 
 StelGui::StelGui()
 	: topLevelGraphicsWidget(NULL)
+	, skyGui(NULL)
+	, buttonTimeRewind(NULL)
+	, buttonTimeRealTimeSpeed(NULL)
+	, buttonTimeCurrent(NULL)
+	, buttonTimeForward(NULL)
+	, buttonGotoSelectedObject(NULL)
 	, locationDialog(0)
 	, helpDialog(0)
 	, dateTimeDialog(0)
@@ -94,19 +100,21 @@ StelGui::StelGui()
 #ifdef ENABLE_SCRIPT_CONSOLE
 	, scriptConsole(0)
 #endif
+	, flagShowFlipButtons(false)
+	, flipVert(NULL)
+	, flipHoriz(NULL)
+	, flagShowNebulaBackgroundButton(false)
+	, btShowNebulaeBackground(NULL)
 	, initDone(false)
 {
 	// QPixmapCache::setCacheLimit(30000); ?
-	flipHoriz = NULL;
-	flipVert = NULL;
-	btShowNebulaeBackground = NULL;
 }
 
 StelGui::~StelGui()
 {
 	delete skyGui;
 	skyGui = NULL;
-	
+
 	if (locationDialog)
 	{
 		delete locationDialog;
