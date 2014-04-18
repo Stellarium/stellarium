@@ -86,7 +86,12 @@ StelPluginInfo TelescopeControlStelPluginInterface::getPluginInfo() const
 ////////////////////////////////////////////////////////////////////////////////
 // Constructor and destructor
 TelescopeControl::TelescopeControl()
-	: actionGroupId("PluginTelescopeControl")
+	: toolbarButton(NULL)
+	, useTelescopeServerLogs(false)
+	, useServerExecutables(false)
+	, telescopeDialog(NULL)
+	, slewDialog(NULL)
+	, actionGroupId("PluginTelescopeControl")
 	, moveToSelectedActionId("actionMove_Telescope_To_Selection_%1")
 	, moveToCenterActionId("actionSlew_Telescope_To_Direction_%1")
 {

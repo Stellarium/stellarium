@@ -49,11 +49,13 @@
 #include <QUrlQuery>
 #include <QDir>
 
-MpcImportWindow::MpcImportWindow() :
-    downloadReply(0),
-    queryReply(0),
-    downloadProgressBar(0),
-    queryProgressBar(0)
+MpcImportWindow::MpcImportWindow()
+	: importType(ImportType())
+	, downloadReply(0)
+	, queryReply(0)
+	, downloadProgressBar(0)
+	, queryProgressBar(0)
+	, countdown(0)
 {
 	ui = new Ui_mpcImportWindow();
 	ssoManager = GETSTELMODULE(SolarSystemEditor);
