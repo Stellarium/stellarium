@@ -103,6 +103,7 @@ private:
 	//! data and information to create the OpenGL texture.
 	struct GLData
 	{
+		GLData() : data(NULL), width(0), height(0), format(0), type(0) {}
 		QByteArray data;
 		int width;
 		int height;
