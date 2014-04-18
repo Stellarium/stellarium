@@ -88,7 +88,13 @@ void StelPainter::usePlanetShader(bool use)
 	planetShader = use;
 }
 
-StelPainter::StelPainter(const StelProjectorP& proj) : prj(proj), planetShader(false)
+StelPainter::StelPainter(const StelProjectorP& proj)
+	: prj(proj),
+	  planetShader(false),
+	  vertexArray(ArrayDesc()),
+	  texCoordArray(ArrayDesc()),
+	  normalArray(ArrayDesc()),
+	  colorArray(ArrayDesc())
 {
 	Q_ASSERT(proj);
 
@@ -662,7 +668,12 @@ struct StringTexture
 	int subTexWidth;
 	int subTexHeight;
 
-	StringTexture() : texture(0) {;}
+	StringTexture()
+		: texture(0),
+		  width(0),
+		  height(0),
+		  subTexWidth(0),
+		  subTexHeight(0) {;}
 	~StringTexture()
 	{
 		if (texture != 0)

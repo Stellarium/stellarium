@@ -276,7 +276,18 @@ public:
 
 protected:
 	//! Private constructor. Only StelCore can create instances of StelProjector.
-	StelProjector(ModelViewTranformP amodelViewTransform) : modelViewTransform(amodelViewTransform) {;}
+	StelProjector(ModelViewTranformP amodelViewTransform)
+		: modelViewTransform(amodelViewTransform),
+		  flipHorz(0.f),
+		  flipVert(0.f),
+		  pixelPerRad(0.f),
+		  maskType(MaskNone),
+		  zNear(0.f),
+		  oneOverZNearMinusZFar(0.f),
+		  viewportFovDiameter(0.f),
+		  gravityLabels(true),
+		  defautAngleForGravityText(0.f),
+		  devicePixelsPerPixel(1.f) {;}
 
 	//! Return whether the projection presents discontinuities. Used for optimization.
 	virtual bool hasDiscontinuity() const =0;

@@ -82,7 +82,7 @@ void StelTexture::reportError(const QString& aerrorMessage)
 
 StelTexture::GLData StelTexture::imageToGLData(const QImage &image)
 {
-	GLData ret;
+	GLData ret = GLData();
 	if (image.isNull())
 		return ret;
 	ret.width = image.width();
