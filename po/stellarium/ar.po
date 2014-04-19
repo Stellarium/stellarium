@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-04-15 16:30+0700\n"
-"PO-Revision-Date: 2014-04-15 17:45+0000\n"
+"PO-Revision-Date: 2014-04-18 20:39+0000\n"
 "Last-Translator: Khalid AlAjaji <Unknown>\n"
 "Language-Team: Arabic <ar@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-04-16 05:54+0000\n"
-"X-Generator: Launchpad (build 16976)\n"
+"X-Launchpad-Export-Date: 2014-04-19 05:22+0000\n"
+"X-Generator: Launchpad (build 16985)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:107 src/core/modules/StarMgr.cpp:346
 #: src/core/modules/GridLinesMgr.cpp:692 src/core/modules/LandscapeMgr.cpp:354
@@ -180,7 +180,7 @@ msgstr "‎القدر‎: <b>%1</b> (منطفيء إلى : <b>%2</b>)"
 #: src/core/modules/Nebula.cpp:111
 #, qt-format
 msgid "Surface brightness: <b>%1</b> (extincted to: <b>%2</b>)"
-msgstr ""
+msgstr "‎قدر سطوع سطح السديم‎: <b>%1</b> (‎ <b>%2</b> :منطفيء إلى)"
 
 #: src/core/modules/Nebula.cpp:116 src/core/modules/Planet.cpp:142
 #: src/core/modules/MinorPlanet.cpp:224 src/core/modules/Comet.cpp:163
@@ -194,7 +194,7 @@ msgstr "‎القدر:‎ <b>%1</b>"
 #: src/core/modules/Nebula.cpp:118
 #, qt-format
 msgid "Surface brightness: <b>%1</b>"
-msgstr ""
+msgstr "‎قدر سطوع سطح السديم‎: <b>%1</b>"
 
 #: src/core/modules/Nebula.cpp:124
 #, qt-format
@@ -263,7 +263,7 @@ msgstr "‎‎المسافة‎: ‎%1 وحدة فلكية (‎%2 كم‎)"
 #: src/core/modules/Comet.cpp:209
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 Mio km)"
-msgstr ""
+msgstr "مليون كم %2) وحدة فلكية %1 :المسافة)"
 
 #: src/core/modules/Planet.cpp:186
 #, qt-format
@@ -320,17 +320,17 @@ msgstr "‎التسمية الاصطلاحية المؤقتة: ‎%1"
 #: src/core/modules/Comet.cpp:185
 #, no-c-format, qt-format
 msgid "Distance from Sun: %1AU (%2 km)"
-msgstr ""
+msgstr "‎المسافة من الشمس‎: %1  وحدة فلكية (‎%2 كم‎)"
 
 #: src/core/modules/Comet.cpp:192
 #, no-c-format, qt-format
 msgid "Distance from Sun: %1AU (%2 Mio km)"
-msgstr ""
+msgstr "‎المسافة من الشمس‎: %1  وحدة فلكية (‎%2 مليون كم‎)"
 
 #: src/core/modules/Comet.cpp:216
 #, no-c-format, qt-format
 msgid "Speed: %1 km/s"
-msgstr ""
+msgstr "‎السرعة‎: %1 كم في الثانية"
 
 #: src/core/modules/SolarSystem.cpp:157
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:303
@@ -357,7 +357,7 @@ msgstr "نجم"
 #: plugins/Quasars/src/Quasar.cpp:121
 #, qt-format
 msgid "Color Index (B-V): <b>%1</b>"
-msgstr ""
+msgstr "‎المؤشر اللوني‎(B-V): <b>%1</b>"
 
 #: src/core/modules/StarWrapper.cpp:144
 msgid "eruptive variable star"
@@ -1104,7 +1104,7 @@ msgstr "‎ارتفاع زاوي / سمتي:‎ %1/%2"
 #: src/core/StelObject.cpp:180
 #, qt-format
 msgid "Ecliptic Topocentric (of J2000): %1/%2"
-msgstr ""
+msgstr "‎الكسوفي السطحي‎(J2000): %1/%2"
 
 #: src/core/StelObject.cpp:185
 #, qt-format
@@ -1418,7 +1418,7 @@ msgstr "ييدو أنك تستخدم نسخة من ستيللاريوم لازا
 #: src/gui/HelpDialog.cpp:286
 #, qt-format
 msgid "This version of Stellarium is outdated! Latest version is %1."
-msgstr ""
+msgstr "هذه النسخة من ستيللاريوم قديمة! أحدث الإصدارات هو %1."
 
 #. TRANSLATORS: This message will be displayed for users if current version of Stellarium is equals with version from stellarium.org
 #: src/gui/HelpDialog.cpp:292
@@ -1688,7 +1688,7 @@ msgstr "حقل الرؤية"
 
 #: src/gui/StelGuiItems.cpp:631
 msgid "Frames per second"
-msgstr ""
+msgstr "إطار في الثانية"
 
 #. TRANSLATORS: Short description for Class 1 of the Bortle scale
 #: src/gui/ViewDialog.cpp:327
@@ -2470,97 +2470,97 @@ msgstr "جروسمجل"
 #. TRANSLATORS: Name of script
 #: src/translations.h:217
 msgid "Landscape Tour"
-msgstr "<P DIR=RTL>جولة في مناظر الرصد"
+msgstr "جولة في مناظر الرصد"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:219
 msgid "Partial Lunar Eclipse"
-msgstr "<P DIR=RTL>خسوف قمري جزئي"
+msgstr "خسوف قمري جزئي"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:221
 msgid "Total Lunar Eclipse"
-msgstr "<P DIR=RTL>خسوف قمري كلّي"
+msgstr "خسوف قمري كلّي"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:223
 msgid "Screensaver"
-msgstr "<P DIR=RTL>شاشة توقف"
+msgstr "شاشة توقف"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:225
 msgid "Solar Eclipse 2009"
-msgstr "<P DIR=RTL>كسوف الشمس 2009"
+msgstr "كسوف الشمس 2009"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:227
 msgid "Startup Script"
-msgstr "<P DIR=RTL>سكريبت البداية"
+msgstr "سكريبت البداية"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:229
 msgid "Zodiac"
-msgstr "<P DIR=RTL>البروج"
+msgstr "البروج"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:231
 msgid "Mercury Triple Sunrise and Sunset"
-msgstr "<P DIR=RTL>الشروق والغروب الثلاثي للشمس في عطارد"
+msgstr "الشروق والغروب الثلاثي للشمس في عطارد"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:233
 msgid "Double eclipse from Deimos in 2017"
-msgstr "<P DIR=RTL>الكسوف المزدوج من ديموس في 2017"
+msgstr "الكسوف المزدوج من ديموس في 2017"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:235
 msgid "Double eclipse from Deimos in 2031"
-msgstr "<P DIR=RTL>الكسوف المزدوج من ديموس في 2031"
+msgstr "الكسوف المزدوج من ديموس في 2031"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:237
 msgid "Eclipse from Olympus Mons Jan 10 2068"
-msgstr "<P DIR=RTL>كسوف من جبل أوليمبوس على المريخ 10 يناير 2068"
+msgstr "كسوف من جبل أوليمبوس على المريخ 10 يناير 2068"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:239
 msgid "Occultation of Earth and Jupiter 2048"
-msgstr "<P DIR=RTL>احتجاب الأرض والمشتري عام 2048"
+msgstr "احتجاب الأرض والمشتري عام 2048"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:241
 msgid "3 Transits and 2 Eclipses from Deimos 2027"
-msgstr "3 عبورات وكسوفين من ديموس 2027 م"
+msgstr "ثلاث عبورات وكسوفين من ديموس 2027 م"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:243
 msgid "Solar System Screensaver"
-msgstr "<P DIR=RTL>حافظ شاشة - النظام الشمسي"
+msgstr "حافظ شاشة - النظام الشمسي"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:245
 msgid "Constellations Tour"
-msgstr "<P DIR=RTL>رحلة عبر الكوكبات"
+msgstr "رحلة عبر الكوكبات"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:247
 msgid "Sun from different planets"
-msgstr "<P DIR=RTL>الشمس كما تظهر من سطح الكواكب المختلفة"
+msgstr "الشمس كما تظهر من سطح الكواكب المختلفة"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:249
 msgid "Earth best views from other bodies"
-msgstr "<P DIR=RTL>أفضل المناظر للأرض من الأجرام الأخرى"
+msgstr "أفضل المناظر للأرض من الأجرام الأخرى"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:251
 msgid "Transit of Venus"
-msgstr "<P DIR=RTL>عبور الزهرة"
+msgstr "عبور الزهرة"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:253
 msgid "Analemma"
-msgstr "<P DIR=RTL>الأناليما"
+msgstr "الأناليما"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:255
@@ -3698,23 +3698,23 @@ msgstr "زمبابوي"
 
 #: src/translations.h:542
 msgid "&Undo"
-msgstr ""
+msgstr "&تراجع"
 
 #: src/translations.h:543
 msgid "&Redo"
-msgstr ""
+msgstr "&إعادة"
 
 #: src/translations.h:544
 msgid "Cu&t"
-msgstr ""
+msgstr "ق&ص"
 
 #: src/translations.h:545
 msgid "&Copy"
-msgstr ""
+msgstr "&نسخ"
 
 #: src/translations.h:546
 msgid "&Paste"
-msgstr ""
+msgstr "&لصق"
 
 #: src/translations.h:547 src/ui_locationDialogGui.h:407
 #: plugins/Oculars/src/ui_ocularDialog.h:1073
@@ -3730,19 +3730,19 @@ msgstr "حدّد الكل"
 
 #: src/translations.h:549
 msgid "Look in:"
-msgstr ""
+msgstr "ابحث في:"
 
 #: src/translations.h:550
 msgid "Directory:"
-msgstr ""
+msgstr "المسار:"
 
 #: src/translations.h:551
 msgid "Folder"
-msgstr ""
+msgstr "المجلد"
 
 #: src/translations.h:552
 msgid "&Choose"
-msgstr ""
+msgstr "&اختر"
 
 #: src/translations.h:553 src/ui_configurationDialog.h:1165
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:516
@@ -3751,31 +3751,31 @@ msgstr "إلغاء"
 
 #: src/translations.h:554
 msgid "Files of type:"
-msgstr ""
+msgstr "الملفات من نزع:"
 
 #: src/translations.h:555
 msgid "Date Modified"
-msgstr ""
+msgstr "تاريخ التعديل"
 
 #: src/translations.h:556
 msgid "Directories"
-msgstr ""
+msgstr "المسارات"
 
 #: src/translations.h:557
 msgid "Computer"
-msgstr ""
+msgstr "الحاسب"
 
 #: src/translations.h:558
 msgid "&Open"
-msgstr ""
+msgstr "&فتح"
 
 #: src/translations.h:559
 msgid "File &name:"
-msgstr ""
+msgstr "&اسم الملف:"
 
 #: src/translations.h:560
 msgid "Copy &Link Location"
-msgstr ""
+msgstr "انسخ موقع &الرابط"
 
 #: src/ui_helpDialogGui.h:277 src/ui_helpDialogGui.h:283
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:418
@@ -3807,7 +3807,7 @@ msgstr "الموقع"
 msgid ""
 "Standard list of locations is contains only English names (without "
 "diacritics!)"
-msgstr ""
+msgstr "قائمة أسماء المواقع والمدن القياسية باللغة الإنجليزية"
 
 #: src/ui_locationDialogGui.h:404
 msgid "Current location information"
@@ -4107,7 +4107,7 @@ msgstr "كبِّر الحجم الظاهري للقمر"
 
 #: src/ui_viewDialog.h:1167
 msgid "Scale factor"
-msgstr ""
+msgstr "عامل المقياس"
 
 #: src/ui_viewDialog.h:1170
 msgid "Automatic change of landscape when planet is changed"
@@ -4126,10 +4126,12 @@ msgid ""
 "Use light pollution data from locations database and ignore settings for "
 "light pollution below"
 msgstr ""
+"استخدم بيانات التلوث الضوئي من قاعدة معلومات المواقع والمدن وتجاهل إعدادات "
+"التلوث الضوئي أدناه"
 
 #: src/ui_viewDialog.h:1180
 msgid "Light pollution data from locations database"
-msgstr ""
+msgstr "استخدم بيانات التلوث الضوئي من قاعدة معلومات المواقع"
 
 #: src/ui_viewDialog.h:1181
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:396
@@ -4173,11 +4175,11 @@ msgstr "تكيف العين الديناميكي"
 
 #: src/ui_viewDialog.h:1196
 msgid "Settings for sporadic meteors"
-msgstr ""
+msgstr "إعدادات لزخات الشهب المتفرقة"
 
 #: src/ui_viewDialog.h:1198
 msgid "Shooting Stars"
-msgstr "وابل الشهب"
+msgstr "زخات الشهب"
 
 #: src/ui_viewDialog.h:1200
 msgid "Hourly zenith rate"
@@ -4238,15 +4240,15 @@ msgstr "الكرة السماوية"
 
 #: src/ui_viewDialog.h:1223
 msgid "Equatorial grid (on J2000)"
-msgstr ""
+msgstr "(j2000) الشبكة الاستوائية"
 
 #: src/ui_viewDialog.h:1224
 msgid "Equatorial grid (on date)"
-msgstr ""
+msgstr "(الشبكة الاستوائية (الحالية"
 
 #: src/ui_viewDialog.h:1225
 msgid "Ecliptic grid (on J2000)"
-msgstr ""
+msgstr "(J2000) الشبكة الكسوفية"
 
 #: src/ui_viewDialog.h:1229
 msgid "Show equator line"
@@ -4314,13 +4316,16 @@ msgstr "لغة البرنامج"
 
 #: src/ui_configurationDialog.h:1003
 msgid "Check updates"
-msgstr ""
+msgstr "تحقق من التحديثات"
 
 #: src/ui_configurationDialog.h:1004
 msgid ""
 "Enable checking updates of Stellarium via Internet. Info for updates of "
 "stable versions you can look on the tab \"About\" of \"Help\" window."
 msgstr ""
+"يمكنك من التحقق من وجود إصدار جديد أو تحديثات عن طريق الإنترنت. تجد معلومات "
+"عن تحديثات الإصدارات المستقرة بالرجوع إلى علامة التبويب \"عن\" في \" نافذة "
+"المساعدة\"."
 
 #: src/ui_configurationDialog.h:1005
 msgid "Default options"
@@ -4496,10 +4501,12 @@ msgstr "المسافة"
 msgid ""
 "Ecliptic topocentric coordinates, equinox of date and J2000 (only for Earth)"
 msgstr ""
+"إحداثيات النظام الكسوفي السطحي حسب الاعتدال الحالي و الاعتدال لعام 2000 - "
+"مستخدم فقط لكوكب الأرض"
 
 #: src/ui_configurationDialog.h:1076
 msgid "Ecliptic coordinates"
-msgstr ""
+msgstr "الإحداثيات الكسوفية"
 
 #: src/ui_configurationDialog.h:1077
 msgid "Control"
@@ -4652,10 +4659,12 @@ msgstr "التصغير الذاتي يعود إلى الاتجاه الأولي 
 msgid ""
 "Auto-enabling of the atmosphere for bodies with atmosphere in location window"
 msgstr ""
+"تفعيل الغلاف الجوي تلقائياً حين اختيار موقع جديد في كوكب له غلاف جوي في "
+"نافذة الموقع"
 
 #: src/ui_configurationDialog.h:1148
 msgid "Auto-enabling for the atmosphere"
-msgstr ""
+msgstr "تفعيل تلقائي للغلاف الجوي"
 
 #: src/ui_configurationDialog.h:1149
 msgid "Screenshots"
@@ -4910,16 +4919,16 @@ msgstr "النقر بالزر الأيمن يغيّر نقطة النهاية ف
 #. TRANSLATORS: PA is abbreviation for phrase "Position Angle"
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:359
 msgid "PA="
-msgstr ""
+msgstr "‎زاوية الاتجاه=‎"
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:73
 msgid "Angle Measure Plug-in"
-msgstr ""
+msgstr "إضافة قياس البعد الزاوي"
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:76
 #: plugins/Oculars/src/gui/OcularDialog.cpp:486
 msgid "Contributors"
-msgstr ""
+msgstr "المساهمون"
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:79
 msgid ""
@@ -4927,6 +4936,8 @@ msgid ""
 "angular distance between two points on the sky (and calculation of position "
 "angle between those two points)."
 msgstr ""
+"<p dir=rtl>إضافة قياس البعد الزاوي أداة صغيرة تستخدم لقياس البعد الزاوي بين "
+"نقطتين في السماء وحساب اتجاه الزاوية بين هاتين النقطتين."
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:80
 msgid ""
@@ -4936,6 +4947,11 @@ msgid ""
 "at one end, pointing at a <em>photograph</em> of Saturn at the other end of "
 "the lab. We measured. We calculated. We wished we were in Hawaii."
 msgstr ""
+"<p dir=rtl>أتذكر حينما كنت طالبا وكان علينا قياس حجم فراغات كاسيني بين حلقات "
+"زحل ولم يكن هذا هو الوضع الأكاديمي المجيد الذي تتوقعه، السماء كانت غائمة "
+"وممطرة ومعمل المرصد لايوجد فيه إلا بعض التلسكوبات القديمة في أحد أطرافه "
+"موجهة إلى صورة لزحل في الطرف الاخر. أخذنا القياسات وعملنا الحسابات وتمنينا "
+"لوكنا في المرصد اكبير في هاواي."
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:82
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:421
@@ -5013,6 +5029,8 @@ msgid ""
 "If you want to read full information about this plugin and its history, you "
 "can %1get info here%2."
 msgstr ""
+"إذا أردت الاطلاع على معلومات كاملة عن هذه الإضافة وتاريخها، تستطيع %1الحصول "
+"على المعلومات هنا%2."
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:181
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:263
@@ -5021,7 +5039,7 @@ msgstr "إعدادات النجوم النابضة"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:182
 msgid "Angle Measure Plug-in Configuration"
-msgstr ""
+msgstr "إعدادات قياس البعد الزاوي"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:184
 #: plugins/Satellites/src/ui_satellitesDialog.h:716
@@ -5037,11 +5055,11 @@ msgstr "الضبط"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:185
 msgid "Use dms format for angles"
-msgstr ""
+msgstr "dms استخدم نسق الدرجات والدقائق والثواني"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:186
 msgid "Show position angle"
-msgstr ""
+msgstr "أظهر اتجاه الزاوية"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:187
 #: plugins/Satellites/src/ui_satellitesDialog.h:714
@@ -5561,10 +5579,12 @@ msgstr "استخدم الدرجات والدقائق لحقل الرؤية ال�
 msgid ""
 "Mark it if you want value of FOV is same like at the startup of Stellarium."
 msgstr ""
+"علِّم عليها إذا كنت تريد قيمة حقل الرؤية مساوية للقيمة التي يبدأ بها برنامج "
+"ستيللاريوم"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1069
 msgid "Restore FOV to initial values"
-msgstr ""
+msgstr "استرجع قيمة حقل الرؤية الأصلية"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1070
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:220
@@ -5763,30 +5783,30 @@ msgstr "أقمار إيريديوم"
 #. TRANSLATORS: Satellite description. "Hubble" is a person's name.
 #: plugins/Satellites/src/Satellites.cpp:1701
 msgid "The Hubble Space Telescope"
-msgstr "تلسكوب هابل"
+msgstr "‎تلسكوب هابل‎"
 
 #. TRANSLATORS: Satellite description.
 #: plugins/Satellites/src/Satellites.cpp:1703
 msgid "The International Space Station"
-msgstr "المحطة الفضائية الدولية"
+msgstr "‎المحطة الفضائية الدولية‎"
 
 #: plugins/Satellites/src/Satellite.cpp:239
 #: plugins/Satellites/src/Satellite.cpp:243
 msgid "Catalog #"
-msgstr "‎رقم الدليل‎"
+msgstr "‎‎رقم الدليل‎‎"
 
 #: plugins/Satellites/src/Satellite.cpp:245
 msgid "International Designator"
-msgstr "‎التصنيف العالمي‎"
+msgstr "‎‎التصنيف العالمي‎‎"
 
 #: plugins/Satellites/src/Satellite.cpp:252
 msgid "artificial satellite"
-msgstr "قمر صناعي"
+msgstr "‎قمر صناعي‎"
 
 #: plugins/Satellites/src/Satellite.cpp:257
 #, qt-format
 msgid "Approx. magnitude: <b>%1</b>"
-msgstr ""
+msgstr "‎قدر السطوع التقريبي‎:<b>%1</b>‎"
 
 #. TRANSLATORS: Slant range: distance between the satellite and the observer
 #: plugins/Satellites/src/Satellite.cpp:267
@@ -6232,7 +6252,7 @@ msgstr "طول نهاية الخط"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:713
 msgid "Realistic mode for the artificial satellites"
-msgstr ""
+msgstr "النسق الواقعي للأقمار الصناعية"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:718
 msgid "Double-click a satellite to start tracking it."
@@ -7457,7 +7477,7 @@ msgstr ""
 #: plugins/Novae/src/gui/NovaeDialog.cpp:120
 #, qt-format
 msgid "This list altogether contains %1 stars."
-msgstr ""
+msgstr "هذه القائمة تحوي %1 نجماً"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:119
 #, qt-format
@@ -7604,12 +7624,12 @@ msgstr ""
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:118
 msgid "This plugin allows you to see recent bright novae: "
-msgstr ""
+msgstr "هذه الإضافة تمكنك من رؤية المستعرات الساطعة في الماضي القريب: "
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:121
 #, qt-format
 msgid "All those novae are brighter than %1 at peak of brightness."
-msgstr ""
+msgstr "سطوع كل هذه المستعرات أكبر من %1 عند قمة سطوعها"
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:123
 msgid ""
@@ -7700,6 +7720,9 @@ msgid ""
 "visual magnitude 16. The catalogue of quasars was compiled from \"Quasars "
 "and Active Galactic Nuclei\" (13th Ed.)"
 msgstr ""
+"<p dir=rtl>مهمة إضافة الكوازارات هي وضع علامات لمواقع الكوازارات التي يفوق "
+"قدر سطوعها القدر 16. دليل الكوازارات تم تجميعه من الطبعة 13 لكتاب Quasars "
+"and Active Galactic Nuclei"
 
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:125
 msgid "Veron+ 2010"
@@ -7708,7 +7731,7 @@ msgstr "Veron+ 2010"
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:127
 #, qt-format
 msgid "The current catalog contains info about %1 quasars."
-msgstr ""
+msgstr "يحوي الدليل الحالي معلومات عن حوالي %1 كوازار."
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:138
@@ -7717,6 +7740,8 @@ msgid ""
 "If you want to read full information about this plugin, its history and "
 "format of the catalog, you can %1get info here%2."
 msgstr ""
+"إذا أردت الاطلاع على معلومات كاملة عن هذه الإضافة وتاريخها، تستطيع %1الحصول "
+"على المعلومات هنا%2."
 
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:220
 msgid "Quasars is updated"
@@ -7781,17 +7806,17 @@ msgstr "نجم نابض"
 
 #: plugins/Pulsars/src/Pulsar.cpp:162
 msgid "has one registered glitch"
-msgstr ""
+msgstr "له تغير مفاجيء واحد مسجل لتردده الدوراني"
 
 #. TRANSLATORS: Full phrase is "Has X registered glitches", where X is number
 #: plugins/Pulsars/src/Pulsar.cpp:166
 #, qt-format
 msgid "has %1 registered glitches"
-msgstr ""
+msgstr "له %1 تغير مفاجيء مسجل لتردده الدوراني"
 
 #: plugins/Pulsars/src/Pulsar.cpp:168
 msgid "pulsar with glitches"
-msgstr ""
+msgstr "النجوم النابضة ذات التغيرات المفاجئة في ترددها الدوراني"
 
 #. TRANSLATORS: Unit of measure for period - seconds
 #: plugins/Pulsars/src/Pulsar.cpp:180
@@ -7920,25 +7945,26 @@ msgid ""
 "Hobbs, G. B., Teoh, A. & Hobbs, M., Astron. J., 129, 1993-2006 (2005) "
 "(%1astro-ph/0412641%2))."
 msgstr ""
-"بيانات النجوم النابضة مستقاة من \"Manchester, R. N., Hobbs, G. B., Teoh, A. "
-"& Hobbs, M., Astron. J., 129, 1993-2006 (2005) (%1astro-ph/0412641%2)\""
+"<p dir=rtl>بيانات النجوم النابضة مستقاة من \"Manchester, R. N., Hobbs, G. "
+"B., Teoh, A. & Hobbs, M., Astron. J., 129, 1993-2006 (2005) (%1astro-"
+"ph/0412641%2)\""
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:128
 #, qt-format
 msgid "Current catalog contains info about %1 pulsars."
-msgstr ""
+msgstr "<p dir=rtl>الدليل الحالي يحوي معلومات عن %1 نجماً نابضاً."
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:130
 msgid "Note"
-msgstr "ملحوظة"
+msgstr "<p dir=rtl>ملحوظة"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:131
 msgid "pulsar identifiers have the prefix 'PSR'"
-msgstr "النجوم النابضة يبدأ اسمها التعريفي بـ \"PSR\""
+msgstr "<p dir=rtl>النجوم النابضة يبدأ اسمها التعريفي بـ \"PSR\""
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:132
 msgid "Acknowledgment"
-msgstr "شكر"
+msgstr "<p dir=rtl>شكر"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:135
 msgid "Vladimir Samodourov"
@@ -7987,6 +8013,7 @@ msgstr "أظهر زر النجوم النابضة على شريط المهام"
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:279
 msgid "Use separate color for pulsars with glitches"
 msgstr ""
+"استخدم لوناً مختلفاً للنجوم النابضة ذات التغير المفاجيء في التردد الدوراني"
 
 #: plugins/Exoplanets/src/Exoplanets.cpp:75
 #: plugins/Exoplanets/src/Exoplanets.cpp:170
@@ -8013,7 +8040,7 @@ msgstr "نافذة إعدادات الكواكب الخارجية"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:176
 msgid "planetary system"
-msgstr ""
+msgstr "نظام كوكبي"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:212
 msgid "Metallicity"
@@ -8077,7 +8104,7 @@ msgstr "سنة الاكتشاف"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:237
 msgid "Habitable class"
-msgstr "الفئة القابلة للسكنى"
+msgstr "<p dir=rtl>الفئة القابلة للحياة"
 
 #. TRANSLATORS: Full phrase is "Mean Surface Temperature"
 #: plugins/Exoplanets/src/Exoplanet.cpp:239
@@ -8087,7 +8114,7 @@ msgstr "متوسط حرارة السطح"
 #. TRANSLATORS: ESI = Earth Similarity Index
 #: plugins/Exoplanets/src/Exoplanet.cpp:241
 msgid "ESI"
-msgstr "مؤشر المشابهة للأرض"
+msgstr "<p dir=rtl>مؤشر المشابهة للأرض"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:125
 msgid "Exoplanets Plug-in"
@@ -8109,6 +8136,9 @@ msgid ""
 "from \"%1The Habitable Exoplanets Catalog%3\" by %2Planetary Habitability "
 "Laboratory%3."
 msgstr ""
+"<p dir=rtl>قائمة الكواكب الخارجية التي يحتمل قابليتها للحياة مستقاة من كتاب "
+"%1The Habitable Exoplanets Catalog%3 by %2Planetary Habitability "
+"Laboratory%3."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:132
 #, qt-format
@@ -8117,6 +8147,8 @@ msgid ""
 "altogether have %2 exoplanets (including %3 potentially habitable "
 "exoplanets)."
 msgstr ""
+"<p dir=rtl>الدليل الحالي يحوي معلومات عن حوالي %1 نظاماً كوكبياً، فيها "
+"مامجموعه %2 كوكباً خارجياً ومن ضمنها حوالي %3 كوكباً يحتمل القابلية للحياة."
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:143
@@ -8126,10 +8158,12 @@ msgid ""
 "If you want to read full information about the plugin, its history and "
 "format of the catalog you can %1get info here%2."
 msgstr ""
+"إذا أردت الاطلاع على معلومات كاملة عن هذه الإضافة وتاريخها،وتنسيق الدليل، "
+"تستطيع %1الحصول على المعلومات هنا%2."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:156
 msgid "Potential habitable exoplanets"
-msgstr "الكواكب الخارجية المحتمل قابليتها للسكنى"
+msgstr "الكواكب الخارجية المحتمل قابليتها للحياة"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:157
 msgid ""
@@ -8137,13 +8171,13 @@ msgid ""
 "some information about those planets - habitable class, mean surface "
 "temperature and Earth Similarity Index."
 msgstr ""
-"هذه افضافة تعرض الكواكب الخارجية التي يمكن أن تكون قابلة للمعيشة (العلامة "
-"البرتقالية) وبعض المعلومات - الفئة القابلة للسكنى، متوسط درجة حرارة السطح "
-"ومؤشر مشابهتها للأرض."
+"<p dir=rtl>هذه الإضافة تعرض الكواكب الخارجية التي يمكن أن تكون قابلة للحياة "
+"(العلامة البرتقالية) وبعض المعلومات - الفئة القابلة للحياة، متوسط درجة حرارة "
+"السطح ومؤشر مشابهتها للأرض."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:158
 msgid "Habitable Class"
-msgstr "الفئة القابلة للسكنى"
+msgstr "<p dir=rtl>الفئة القابلة للحياة"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:158
 msgid ""
@@ -8154,17 +8188,18 @@ msgid ""
 "life, whereas class O or E would only support extremophilic life. Non-"
 "habitable planets are simply given the class X (or NH)."
 msgstr ""
-"تصنف الكواكب القابلة للسكنى بناءاً على الحرارة:  hypopsychroplanets تختصر (O "
-"or hP) = بارد جداً - أقل من -50° درجة مئوية ؛  psychroplanets تختصر (P) = "
-"بارد ؛ mesoplanets  تختصر (M) = متوسط الحرارة 0 - 50° ؛ thermoplanets  تختصر "
-"(T) = حار ؛ hyperthermoplanets  تختصر (E or hT) = حار جداً أكثر من 100° درجة "
-"؛ الكواكب من فئة Mesoplanets المتوسطة الحرارة ستكون نموذجية لحياة معقدة، "
-"بينما الكواكب من فئة البارد جداً والحار جداً ستدعم حياة لكائنات تستطيع "
-"البقاء في الظروف القاسية. الكواكب الغير مؤهلة للسكنى تعطى التصنيف X أو NH."
+"<p dir=rtl>تصنف الكواكب القابلة للحياة بناءاً على الحرارة:  "
+"hypopsychroplanets تختصر (O or hP) = بارد جداً - أقل من -50° درجة مئوية ؛  "
+"psychroplanets تختصر (P) = بارد ؛ mesoplanets  تختصر (M) = متوسط الحرارة 0 - "
+"50° ؛ thermoplanets  تختصر (T) = حار ؛ hyperthermoplanets  تختصر (E or hT) = "
+"حار جداً أكثر من 100° درجة ؛ الكواكب من فئة Mesoplanets المتوسطة الحرارة "
+"ستكون نموذجية لحياة معقدة، بينما الكواكب من فئة البارد جداً والحار جداً "
+"ستدعم حياة لكائنات تستطيع البقاء في الظروف القاسية. الكواكب الغير مؤهلة "
+"للحياة تعطى التصنيف X أو NH."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:159
 msgid "Mean Surface Temperature"
-msgstr "متوسط درجة حرارة السطح"
+msgstr "<p dir=rtl>متوسط درجة حرارة السطح"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:159
 msgid ""
@@ -8178,7 +8213,7 @@ msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:160
 msgid "Earth Similarity Index (ESI)"
-msgstr "(ESI) مؤشر المشابهة للأرض"
+msgstr "<p dir=rtl>(ESI) مؤشر المشابهة للأرض"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:160
 msgid ""
@@ -8186,9 +8221,9 @@ msgid ""
 "like. ESI depends on the planet's radius, density, escape velocity, and "
 "surface temperature."
 msgstr ""
-"مدى الشبه لكوكب الأرض بمقياس من 0 إلى 1، حيث 1 يشير إلى كوكب شديد الشبه "
-"بالأرض. ال ESI (مؤشر المشابهة للأرض) يعتمد على نصف القطر والكثافة وسرعة "
-"الإفلات وحرارة السطح."
+"<p dit=rtl>مدى الشبه لكوكب الأرض بمقياس من 0 إلى 1، حيث 1 يشير إلى كوكب شديد "
+"الشبه بالأرض. ال ESI (مؤشر المشابهة للأرض) يعتمد على نصف القطر والكثافة "
+"وسرعة الإفلات وحرارة السطح."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:173
 msgid "General professional Web sites relevant to extrasolar planets"
@@ -8251,7 +8286,7 @@ msgstr "أرشيف ناسا للكواكب الخارجية"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:186
 msgid "IAU Commission 53: Extrasolar Planets"
-msgstr ""
+msgstr "<p dir=rtl>لجنة إتحاد الفلك الدولي 53: الكواكب خارج النظام الشمسي"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:187
 msgid "ExoMol"
@@ -8327,7 +8362,7 @@ msgstr "مواقع الشبكة العنكبوتية"
 
 #: plugins/Observability/src/Observability.cpp:66
 msgid "Observability Analysis"
-msgstr ""
+msgstr "بيانات الرصد"
 
 #: plugins/Observability/src/Observability.cpp:69
 msgid ""
@@ -8339,6 +8374,13 @@ msgid ""
 "setting. (Explanations are provided in the 'About' tab of the plugin's "
 "configuration window.)"
 msgstr ""
+"<p dir=rtl>يعرض تقريراً عن رصد الجرم المختار، (شروقه وغروبه ووقت عبوره لخط "
+"الزوال) في الوقت الحالي، وأفضل الأوقات لرصده خلال السنة. يفترض التطبيق أن "
+"الجرم يمكن رصده إذا كان فوق الأفق لأي جزء من الليل. يوفر التطبيق أيضاً "
+"معلومات عن الوقت الذي تكون فيه استطالته عن الشمس أكبر ماتكون ويعطي وقت أول "
+"طلوع له فجراًمع طلوع الشمس وغيابه مع غياب الشمس ووقت طلوعه مساءاً وقت غياب "
+"الشمس وغروبه وقت طلوع الشمس. تجد شرحاً للمعلومات التي يظهرها هذا التطبيق تحت "
+"علامة التبويب - عن - في نافذة الإعدادات."
 
 #: plugins/Observability/src/Observability.cpp:139
 msgctxt "short month name"
@@ -8459,37 +8501,37 @@ msgstr "لايمكن رصد هذا الجرم"
 
 #: plugins/Observability/src/Observability.cpp:167
 msgid "No acronychal nor cosmical rise/set."
-msgstr ""
+msgstr "لايوجد طلوع أو غياب مقابل للشمس ولايوجد طلوع أو غياب موافق للشمس"
 
 #: plugins/Observability/src/Observability.cpp:168
 #, qt-format
 msgid "Greatest elongation: %1 (at %2 deg.)"
-msgstr ""
+msgstr "الاستطالة العظمى: %1 (عند زاوية %2)"
 
 #: plugins/Observability/src/Observability.cpp:169
 #, qt-format
 msgid "Largest Sun separation: %1 (at %2 deg.)"
-msgstr ""
+msgstr "البعد الزاوي الأعظم عن الشمس: %1 (عند زاوية %2)"
 
 #. TRANSLATORS: The space at the end is significant - another sentence may follow.
 #: plugins/Observability/src/Observability.cpp:172
 #, qt-format
 msgid "Acronychal rise/set: %1/%2. "
-msgstr ""
+msgstr "الطلوع والغياب المقابل للشمس: %1/%2 "
 
 #. TRANSLATORS: The space at the end is significant - another sentence may follow.
 #: plugins/Observability/src/Observability.cpp:174
 msgid "No acronychal rise/set. "
-msgstr ""
+msgstr "لايوجد طلوع او غياب مقابل للشمس "
 
 #: plugins/Observability/src/Observability.cpp:175
 #, qt-format
 msgid "Cosmical rise/set: %1/%2."
-msgstr ""
+msgstr "الطلوع والغياب الموافق للشمس: %1/%2"
 
 #: plugins/Observability/src/Observability.cpp:176
 msgid "No cosmical rise/set."
-msgstr ""
+msgstr "لايوجد طلوع أو غياب موافق للشمس"
 
 #: plugins/Observability/src/Observability.cpp:177
 msgid "Observable during the whole year."
@@ -8502,7 +8544,7 @@ msgstr "لايمكن رصده في الليالي المظلمة."
 #: plugins/Observability/src/Observability.cpp:179
 #, qt-format
 msgid "Nights above horizon: %1"
-msgstr ""
+msgstr "الليالي التي يكون فيها فوق الأفق: %1"
 
 #: plugins/Observability/src/Observability.cpp:180
 msgid "TODAY:"
@@ -8702,12 +8744,12 @@ msgstr ""
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:195
 #, qt-format
 msgid "Sun altitude at twilight: %1 deg."
-msgstr ""
+msgstr "ارتفاع الشمس عند الشفق: %1 درجة"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:201
 #, qt-format
 msgid "Horizon altitude: %1 deg."
-msgstr ""
+msgstr "ارتفاع الأفق: %1 درجة"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:342
 msgid "Observability Configuration"
@@ -8743,7 +8785,7 @@ msgstr "حالة الرصد"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:351
 msgid "Showing options"
-msgstr ""
+msgstr "خيارات إظهار البيانات"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:352
 msgid "Today's ephemeris (rise, set, and transit times)"
@@ -8769,22 +8811,24 @@ msgstr "أوقات البدر التام السابقة واللاحقة"
 #: plugins/FOV/src/ui_fovWindow.h:383 plugins/FOV/src/ui_fovWindow.h:385
 #: plugins/FOV/src/ui_fovWindow.h:404
 msgid "Field of View"
-msgstr ""
+msgstr "حقل الرؤية"
 
 #: plugins/FOV/src/FOV.cpp:43
 msgid ""
 "This plugin allows stepwise zooming via keyboard shortcuts like in the "
 "<em>Cartes du Ciel</em> planetarium program."
 msgstr ""
+"<p dir=rtl>هذه الإضافة تتيح تخصيص حقل الرؤية باتساع معيّن وذلك باستخدام لوحة "
+"المفاتيح بطريقة مشابهة لبرنامج Cartes du Ciel."
 
 #: plugins/FOV/src/FOV.cpp:83
 #, qt-format
 msgid "Set FOV to %1%2"
-msgstr ""
+msgstr "اضبط حقل الرؤية بقيمة %1%2"
 
 #: plugins/FOV/src/gui/FOVWindow.cpp:78
 msgid "Field of View plug-in"
-msgstr ""
+msgstr "إضافة حقل الرؤية"
 
 #: plugins/FOV/src/ui_fovWindow.h:403
 msgid ""
@@ -8794,10 +8838,15 @@ msgid ""
 "feature. You can edit values and use the keyboard for quick-setting of FOV. "
 "All values in degrees."
 msgstr ""
+"<p dir=rtl>ستيللاريوم يتيح زيادة ونقص حقل الرؤية بطريقة انسيابية عبر عجلة "
+"الفأرة أو لوحة المفاتيح. بعض المستخدمين يحبذون اختيار حقل رؤية معد مسبقاً "
+"بطريقة مشابهة لبرنامج كارت دو سيل، وهذه الإضافة تتيح لهم هذه الميزة. تستطيع "
+"تغيير قيم حقل لرؤية واستخدام لوحة المفاتيح للضبط السريع لحقل الرؤية. كل "
+"القيم بالدرجات."
 
 #: plugins/NavStars/src/NavStars.cpp:50 plugins/NavStars/src/NavStars.cpp:119
 msgid "Navigational Stars"
-msgstr ""
+msgstr "نجوم الملاحة"
 
 #. TRANSLATORS: The emphasis tags mark a book title.
 #: plugins/NavStars/src/NavStars.cpp:54
@@ -8808,10 +8857,15 @@ msgid ""
 "1958; consequently, these stars are also used in navigational aids such as "
 "the 2102D Star Finder and Identifier."
 msgstr ""
+"<p dir=rtl>هذه الإضافة تضع علامات تحدد 58 نجماً يستخدمها البحارة وهي الجدي "
+"بالإضافة إلى 57 نجماً مختاراً كما هو موجود في في القائمة في التقويم البحري "
+"الذي ينشر مشاركة بين مكتب الملكة للتقويم البحري ومرصد البحرية الأمريكية منذ "
+"عام 1958 م؛ ولذلك فإن هذه النجوم تستخدم كأداة مساعدة في الملاحة مثل أداة "
+"البحث عن النجوم والتعرف عليها 2102D Star Finder and Identifier."
 
 #: plugins/NavStars/src/NavStars.cpp:120
 msgid "Mark the navigational stars"
-msgstr ""
+msgstr "حدد نجوم الملاحة"
 
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:55
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:96
@@ -8820,31 +8874,31 @@ msgstr ""
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:269
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:278
 msgid "Equation of Time"
-msgstr ""
+msgstr "معادلة الزمن"
 
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:58
 msgid "This plugin shows the solution of the equation of time."
-msgstr ""
+msgstr "<p dir=rtl>هذه الإضافة تعرض حل معادلة الزمن."
 
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:96
 msgid "Show solution for Equation of Time"
-msgstr ""
+msgstr "أظهر حل معادلة الزمن"
 
 #. TRANSLATORS: minutes.
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:258
 msgctxt "time"
 msgid "m"
-msgstr ""
+msgstr "دقيقة"
 
 #. TRANSLATORS: seconds.
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:260
 msgctxt "time"
 msgid "s"
-msgstr ""
+msgstr "ثانية"
 
 #: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:80
 msgid "Equation of Time plug-in"
-msgstr ""
+msgstr "إضافة معادلة الزمن"
 
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:270
 msgid ""
@@ -8858,27 +8912,35 @@ msgid ""
 "always followed. Anyone who makes use of a published table or graph should "
 "first check its sign usage."
 msgstr ""
+"<p dir=rtl>معادلة الزمن تشرح الاختلاف بين نوعين من التوقيت الشمسي. الأول هو "
+"التوقيت الشمسي الظاهري الذي يتتبع حركة الشمس مباشرة والآخر هو متوسط التوقيت "
+"الشمسي الذي يتتبع شمساً افتراضية بين كل زوال وزوال لها 24 ساعة تماماً. ليس "
+"هناك إجماع على تعريف إشارة معادلة الزمن. بعض النشرات تختار إشارة موجبة عندما "
+"تكون المزولة متقدمة على الساعة، والبعض الآخر يجعل الإشارة موجبة عندما تكون "
+"الساعة متقدمة على المزولة. والاستخدام الأكثر في البلاد الناطقة بالإنجليزية "
+"هو الاختيار الأول، ولكن لايتبع ذلك دائماً. على أي شخص يستخدم جدولا منشوراً "
+"أو رسماً بيانياً أن يتحقق من طريقة استعماله لإشارة معادلة الزمن."
 
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:272
 msgid "Show plug-ins button on toolbar"
-msgstr ""
+msgstr "أظهر زر معادلة الزمن على الشريط السفلي"
 
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:273
 msgid "Use minutes and seconds"
-msgstr ""
+msgstr "استخدم الدرجات والدقائق"
 
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:274
 msgid "Change sign of equation"
-msgstr ""
+msgstr "غيِّر إشارة المعادلة"
 
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:275
 msgid "Font size:"
-msgstr ""
+msgstr "حجم الخط"
 
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:81
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:168
 msgid "Meteor Showers"
-msgstr ""
+msgstr "زخات الشهب"
 
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:84
 msgid ""
@@ -8886,376 +8948,378 @@ msgid ""
 "meteor showers and displays marker for radiants in activity range for each "
 "meteor showers."
 msgstr ""
+"<p dir=rtl>هذه الإضافة تحاكي زخات الشهب، وتعطي معلومات عنها، وتعرض علامة في "
+"مكان نشوء الشهب ضمن بقعة نشاطها؛ وذلك لكل زخة شهب موسمية."
 
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:169
 msgid "Show meteor showers"
-msgstr ""
+msgstr "أظهر زخات الشهب"
 
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:170
 msgid "Radiant labels"
-msgstr ""
+msgstr "أسماء مركز نشوء الشهب"
 
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:171
 msgid "Meteor Shower configuration window"
-msgstr ""
+msgstr "نافذة إعدادات زخات الشهب"
 
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:198
 msgid ""
 "The old showers.json file is no longer compatible - using default file"
-msgstr ""
+msgstr "ملف زخات الشهب القديم لم يعد متوافقاً - سيستخدم الملف الافتراضي"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1147
 msgid "Quadrantids"
-msgstr ""
+msgstr "الرباعيات"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1149
 msgid "Lyrids"
-msgstr ""
+msgstr "القيثاريات"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1151
 msgid "α-Centaurids"
-msgstr ""
+msgstr "ألفا قنطورسيات"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1153
 msgid "γ-Normids"
-msgstr ""
+msgstr "زخة شهب جاما مسطرة النقاش"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1155
 msgid "η-Aquariids"
-msgstr ""
+msgstr "إيتا الدلويات"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1157
 msgid "June Bootids"
-msgstr ""
+msgstr "يونيو العوائيات"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1159
 msgid "Piscis Austrinids"
-msgstr ""
+msgstr "الحوتيات الجنوبية"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1161
 msgid "Southern δ-Aquariids"
-msgstr ""
+msgstr "دلتا الدلويات الجنوبية"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1163
 msgid "α-Capricornids"
-msgstr ""
+msgstr "ألفا الجدييات"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1165
 msgid "α-Aurigids"
-msgstr ""
+msgstr "زخة شهب ألفا ممسك الأعنة"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1167
 msgid "September ε-Perseids"
-msgstr ""
+msgstr "سبتمبر إبسلون البرشاويات"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1169
 msgid "Draconids"
-msgstr ""
+msgstr "التنينيات"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1171
 msgid "Leonids"
-msgstr ""
+msgstr "الأسديات"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1173
 msgid "Phoenicids"
-msgstr ""
+msgstr "العنقائيات"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1175
 msgid "Puppid-Velids"
-msgstr ""
+msgstr "الكوثليات - الشراعيات"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1177
 msgid "Ursids"
-msgstr ""
+msgstr "الدبيات"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1179
 msgid "Perseids"
-msgstr ""
+msgstr "البرشاويات"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1181
 msgid "δ-Leonids"
-msgstr ""
+msgstr "دلتا الأسديات"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1183
 msgid "π-Puppids"
-msgstr ""
+msgstr "باي الكوثليات"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1185
 msgid "June Lyrids"
-msgstr ""
+msgstr "يونيو القيثاريات"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1187
 msgid "κ-Cygnids"
-msgstr ""
+msgstr "كابا الدجاجيات"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1189
 msgid "ε-Lyrids"
-msgstr ""
+msgstr "إبسلون القيثاريات"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1191
 msgid "δ-Aurigids"
-msgstr ""
+msgstr "زخة شهب دلتا ممسك الأعنة"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1193
 msgid "ε-Geminids"
-msgstr ""
+msgstr "إبسلون التوأميات"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1195
 msgid "Southern Taurids"
-msgstr ""
+msgstr "الثوريات الجنوبية"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1197
 msgid "Northern Taurids"
-msgstr ""
+msgstr "الثوريات الشمالية"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1199
 msgid "Monocerotids"
-msgstr ""
+msgstr "زخة شهب وحيد القرن"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1201
 msgid "α-Monocerotids"
-msgstr ""
+msgstr "زخة شهب ألفا وحيد القرن"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1203
 msgid "σ-Hydrids"
-msgstr ""
+msgstr "سيجما الشجاعيات"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1205
 msgid "Geminids"
-msgstr ""
+msgstr "التوأميات"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1207
 msgid "Leonis Minorids"
-msgstr ""
+msgstr "زخة شهب الأسد الأصغر"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1209
 msgid "December Leonis Minorids"
-msgstr ""
+msgstr "زخة شهب ديسمبر الأسد الأصغر"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1211
 msgid "Comae Berenicids"
-msgstr ""
+msgstr "الهلبيات"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1213
 msgid "Orionids"
-msgstr ""
+msgstr "الجباريات"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1215
 msgid "Andromedids"
-msgstr ""
+msgstr "زخة شهب المرأة المسلسلة"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1219
 msgid "Minor planet 2003 EH1 and Comet C/1490 Y1"
-msgstr ""
+msgstr "‎الكوكب الثانوي‎  2003 EH1‎ والمذنب‎ C/1490 Y1"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1221
 msgid "Comet 1P/Halley"
-msgstr ""
+msgstr "‎المذنب‎  1P/Halley"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1223
 msgid "Comet 7P/Pons-Winnecke"
-msgstr ""
+msgstr "‎المذنب‎  7P/Pons-Winnecke"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1225
 msgid "Comet 55P/Tempel-Tuttle"
-msgstr ""
+msgstr "‎المذنب‎  55P/Tempel-Tuttle"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1227
 msgid "Comet 96P/Machholz"
-msgstr ""
+msgstr "‎ مذنب‎ 96P/Machholz"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1229
 msgid "Comet 109P/Swift-Tuttle"
-msgstr ""
+msgstr "‎المذنب‎ 109P/Swift-Tuttle"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1231
 msgid "Comet Thatcher (1861 I)"
-msgstr ""
+msgstr "‎المذنب‎ Thatcher (1861 I)"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1233
 msgid "Minor planet (4450) Pan"
-msgstr ""
+msgstr "‎الكوكب الثانوي‎  (4450) Pan"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1235
 msgid "Comet 26P/Grigg-Skjellerup"
-msgstr ""
+msgstr "‎المذنب‎ 26P/Grigg-Skjellerup"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1237
 msgid "Comet 21P/Giacobini-Zinner"
-msgstr ""
+msgstr "‎المذنب‎ 21P/Giacobini-Zinner"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1239
 msgid "Comet 169P/NEAT"
-msgstr ""
+msgstr "‎المذنب‎ 169P/NEAT"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1241
 msgid "Comet 289P/Blanpain"
-msgstr ""
+msgstr "‎المذنب‎ 289P/Blanpain"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1243
 msgid "Comet 8P/Tuttle"
-msgstr ""
+msgstr "‎المذنب‎ 8P/Tuttle"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1245
 msgid "Minor planet 2008 ED69"
-msgstr ""
+msgstr "‎الكوكب الثانوي‎  2008 ED69"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1247
 msgid "Comet 2P/Encke"
-msgstr ""
+msgstr "‎المذنب‎ 2P/Encke"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1249
 msgid "Comet 3D/Biela"
-msgstr ""
+msgstr "‎المذنب‎ 3D/Biela"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1251
 msgid "Minor planet 2004 TG10"
-msgstr ""
+msgstr "‎الكوكب الثانوي‎  2004 TG10"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1253
 msgid "Minor planet (3200) Phaethon"
-msgstr ""
+msgstr "‎الكوكب الثانوي‎  (3200) Phaethon"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:308
 msgid "generic data"
-msgstr ""
+msgstr "‎بيانات عامة‎"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:310
 msgid "real data"
-msgstr ""
+msgstr "‎بيانات حقيقية‎"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:316
 msgid "meteor shower"
-msgstr ""
+msgstr "‎زخة شهب‎"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:324
 msgid "Radiant drift (per day)"
-msgstr ""
+msgstr "‎تزحزح نقطة المنشأ يومياً‎"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:329
 #, qt-format
 msgid "Geocentric meteoric velocity: %1 km/s"
-msgstr ""
+msgstr "‎سرعة الشهب حسب مركز الأرض‎:%1 كم/الساعة"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:332
 #, qt-format
 msgid "The population index: %1"
-msgstr ""
+msgstr "‎مؤشر كثافة الشهب اللامعة‎: %1"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:337
 #, qt-format
 msgid "Parent body: %1"
-msgstr ""
+msgstr "‎الجرم المسبب‎: %1"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:343
 msgid "Active"
-msgstr ""
+msgstr "‎نشط‎"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:351
 msgid "Activity"
-msgstr ""
+msgstr "‎النشاط‎"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:356
 #, qt-format
 msgid "Maximum: %1"
-msgstr ""
+msgstr "‎الذروة‎: %1‎"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:359
 msgid "Solar longitude is"
-msgstr ""
+msgstr "Solar longitude is"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:368
 msgid "variable"
-msgstr ""
+msgstr "متغير"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:165
 msgid "ZHR"
-msgstr ""
+msgstr "‎المعدل السمتي لكل ساعة‎: %1"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:166
 msgid "Data Type"
-msgstr ""
+msgstr "نوع البيانات"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:167
 msgid "Peak"
-msgstr ""
+msgstr "الذروة"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:177
 msgid "Start date greater than end date!"
-msgstr ""
+msgstr "يوم البداية أكبر من يوم النهاية!"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:179
 msgid "Time interval must be less than one year!"
-msgstr ""
+msgstr "الفترة الزمنية يجب أن تكون أقل من سنة!"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:196
 msgid "Variable"
-msgstr ""
+msgstr "متغيّر"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:199
 msgid "Real"
-msgstr ""
+msgstr "حقيقي"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:199
 msgid "Generic"
-msgstr ""
+msgstr "عام"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:246
 msgid "Meteor Showers Plug-in"
-msgstr ""
+msgstr "إضافة زخات الشهب"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:251
 msgid ""
@@ -9263,14 +9327,16 @@ msgid ""
 "information about meteor showers and displays marker for radiants in "
 "activity range for each meteor showers."
 msgstr ""
+"<p dir=rtl>هذه الإضافة تحاكي زخات الشهب، وتعطي معلومات عنها، وتعرض علامة في "
+"مكان نشوء الشهب ضمن بقعة نشاطها؛ وذلك لكل زخة شهب موسمية."
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:252
 msgid "Terms"
-msgstr ""
+msgstr "<p dir=rtl>المصطلحات"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:253
 msgid "Meteor shower"
-msgstr ""
+msgstr "<p dir=rtl>زخة شهب"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:254
 msgid ""
@@ -9283,10 +9349,16 @@ msgid ""
 "known as meteor outbursts and meteor storms, which may produce greater than "
 "1,000 meteors an hour."
 msgstr ""
+"<p dir=rtl>زخة الشهب هي حدث سماوي تشاهد فيه الشهب وهي تنطلق أو تنشأ من نقطة "
+"في السماء. هذه الشهب سببها مخلفات فضائية تسمّى meteoroids تدخل الغلاف الجوي "
+"للأرض بسرعات عالية جداً في مسارات سقوط متوازية. أكثر الشهب لايتعدى حجمها ذرة "
+"من الرمل ولذلك فإن معظمها ينشطر ويتلاشى قبل أن يصل إلى سطح الأرض. زخات الشهب "
+"الكثيفة أو الغير معتادة تعلرف بأنها فورة شهب أو عاصفة شهب والي ربما يشاهد "
+"فيها أكثر من ألف شهاب في الساعة."
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:255
 msgid "Radiant"
-msgstr ""
+msgstr "<p dir=rtl>نقطة المنشأ"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:256
 msgid ""
@@ -9295,6 +9367,9 @@ msgid ""
 "Perseids, for example, are meteors which appear to come from a point within "
 "the constellation of Perseus."
 msgstr ""
+"<p dir=rtl>نقطة المنشأ أو نقطة المنشأ الظاهرية هي المكان في السماء الذي يظهر "
+"للراصد على سطح الكوكب أن الشهب تنشأ وتنطلق منه. البرشاويات،على سبيل المثال، "
+"هي شهب يظهر أنها تنشأ من نقطة في كوكبة برشاوش."
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:257
 msgid ""
@@ -9303,6 +9378,10 @@ msgid ""
 "point back to the known radiant for a given shower is known as a sporadic "
 "and is not considered part of that shower."
 msgstr ""
+"<p dir=rtl>ربنا رأى الراصد هذه الشهب في أماكن مختلفة من السماء، لكن اتجاه "
+"حركتها إذا تتبعناه إلى منشأه فسوف يشير إلى هذه النقطة. إذ كان مسار الشهاب "
+"لاينشا من هذه النقطة عند نشاط زخة شهب موسمسة معروفة فإنه لاينتمي إلى زخة "
+"الشهب هذه ويعتبر من الشهب المتفرقة."
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:258
 msgid ""
@@ -9310,10 +9389,13 @@ msgid ""
 "when it appears. For example, the radiant point for the Delta Aurigids "
 "drifts by more than a degree per night."
 msgstr ""
+"<p dir=rtl>الكثير من زخات الشهب لها نقطة منشأ تغير موقعها خلال وقت نشاطها "
+"مثلاً، نقطة منشأ زخة الشهب المعروفة بدلتا ممسك الأعنة  Delta Aurigids تنزاح "
+"بمقدار درجة كل ليلة."
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:259
 msgid "Zenithal Hourly Rate (ZHR)"
-msgstr ""
+msgstr "<p dir=rtl>المعدل السمتي في الساعة"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:260
 msgid ""
@@ -9323,10 +9405,14 @@ msgid ""
 "were at the zenith. The rate that can effectively be seen is nearly always "
 "lower and decreases the closer the radiant is to the horizon."
 msgstr ""
+"<p dir=rtl>فلكيا، يعد المعدل السمتي في الساعة لزخة شهب هو عدد الشهب التي "
+"يراها الفرد خلال ساعة في سماء صافية ومظلمة بحيث يكون حد قدر السطوع الذي يراه "
+"يصل إلى 6.5 إذا كانت نقطة منشأ  زخة الشهب في السمت. والمعدل الفعلي في العادة "
+"يكون أقل من ذلك ويتناقص كلما كانت نقطة المنشأ أقرب للأفق."
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:261
 msgid "Population index"
-msgstr ""
+msgstr "<p dir=rtl>مؤشر كثافة الشهب الساطعة"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:262
 msgid ""
@@ -9335,131 +9421,136 @@ msgid ""
 "meteors are more frequent than average, while values above 3.0 mean that the "
 "share of faint meteors is larger than usual."
 msgstr ""
+"<p dir=rtl>يدل مؤشر كثافة الشهب الساطعة على توزيع قدر السطوع في زخة الشهب. "
+"القيم أقل من 2.5 تدل على توزيع يكون فيه تكرار الشهب الساطعة أكثر من المعدل، "
+"بينما القيمة 3 تدل على أن حصة الشهب الخافتة أكثر من العادة."
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:263
 msgid "Notes"
-msgstr ""
+msgstr "<p dir=rtl>ملاحظات"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:264
 msgid ""
 "This plugin was created as project of ESA Summer of Code in Space 2013."
 msgstr ""
+"<p dir=rtl>هذه الإضافة تمت من خلال مشروع مقدم إلى برامج الفضاء لصيف 2013 "
+"الذي ترعاه وكالة الفضاء الأوربية."
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:265
 msgid "Info"
-msgstr ""
+msgstr "<p dir=rtl>معلومات"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:266
 msgid "Info about meteor showers you can get here:"
-msgstr ""
+msgstr "<p dir=rtl>يمكنك الحصول على معلومات عن زخات الشهب هنا:"
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:269
 #, qt-format
 msgid "%1Meteor shower%2 - article in Wikipedia"
-msgstr ""
+msgstr "<p dir=rtl>مقالة في الويكيبيديا - %1زخات الشهب%2"
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:271
 #, qt-format
 msgid "%1International Meteor Organization%2"
-msgstr ""
+msgstr "<p dir=rtl>%1منظمة الشهب العالمية%2"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:335
 msgid "Meteor showers is updated"
-msgstr ""
+msgstr "تم تحديث بيانات زخات الشهب"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:512
 msgid "Meteor Showers Configuration"
-msgstr ""
+msgstr "إعدادات زخات الشهب"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:513
 msgid "Meteor Showers Plug-in Configuration"
-msgstr ""
+msgstr "إعدادات إضافة زخات الشهب"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:515
 msgid "Update data from Internet"
-msgstr ""
+msgstr "حدّث البيانات من الإنترنت"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:523
 msgid "Meteor showers"
-msgstr ""
+msgstr "زخات الشهب"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:524
 msgid "Show meteor showers button on toolbar"
-msgstr ""
+msgstr "أظهر زر زخات الشهب على الشريط السفلي"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:525
 msgid "Enable display of meteor showers at startup"
-msgstr ""
+msgstr "فعّل عرض زخات الشهب حين بدء البرنامج"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:529
 msgid "Color of radiants markers"
-msgstr ""
+msgstr "لون علامات نقاط المنشأ"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:531
 msgid "Active Radiant - Generic Data"
-msgstr ""
+msgstr "نقطة منشأ نشطة - بيانات عامة"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:534
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:541
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:548
 msgid "Change Color"
-msgstr ""
+msgstr "غيّر اللون"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:538
 msgid "Inactive Radiant"
-msgstr ""
+msgstr "نقطة منشأ خاملة"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:545
 msgid "Active Radiant - Real Data"
-msgstr ""
+msgstr "نقطة منشأ - بيانات حقيقية"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:551
 msgid "Radiants for meteor showers"
-msgstr ""
+msgstr "نقاط المنشأ لزخات الشهب"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:552
 msgid "Show labels of radiants"
-msgstr ""
+msgstr "حجم خط أسماء نقاط المنشأ"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:553
 msgid "Show active radiants only"
-msgstr ""
+msgstr "أظهر نقاط المنشأ النشطة حالياً فقط"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:555
 msgid "Label font size (pixels)"
-msgstr ""
+msgstr "حجم خط اسم نقطة المنشأ بالبكسل"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:557
 msgid "Radiants"
-msgstr ""
+msgstr "نقاط المنشأ"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:558
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:563
 msgid "Search"
-msgstr ""
+msgstr "ابحث"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:559
 msgid "From:"
-msgstr ""
+msgstr "من"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:560
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:562
 msgid "dd/MMM/yyyy"
-msgstr ""
+msgstr "ي ي/ش ش ش/س س س س"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:561
 msgid "To:"
-msgstr ""
+msgstr "إلى"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:564
 msgid "Results"
-msgstr ""
+msgstr "النتائج"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:565
 msgid "Search Events"
-msgstr ""
+msgstr "البحث عن مواعيد الزخات"
 
 #~ msgid "Equatorial Grid"
 #~ msgstr "الشبكة الاستوائية"
