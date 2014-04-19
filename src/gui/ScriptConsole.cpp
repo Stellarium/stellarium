@@ -154,25 +154,24 @@ void ScriptConsole::preprocessScript()
 		QTextStream out(&src);
 		out << ui->scriptEdit->toPlainText();
 		srcName = src.fileName();
-		src.close();
-		src.open();
 
-			if (sender() == ui->preprocessSSCButton)
-			{
-				qDebug() << "Preprocessing with SSC proprocessor";
-				StelApp::getInstance().getScriptMgr().preprocessScript(src, dest, ui->includeEdit->text());
-			}
+		if (sender() == ui->preprocessSSCButton)
+		{
+			qDebug() << "Preprocessing with SSC proprocessor";
+			StelApp::getInstance().getScriptMgr().preprocessScript(src, dest, ui->includeEdit->text());
+		}
 #ifdef ENABLE_STRATOSCRIPT_COMPAT
-			else if (sender() == ui->preprocessSTSButton)
-			{
-				qDebug() << "Preprocessing with STS proprocessor";
-				StelApp::getInstance().getScriptMgr().preprocessStratoScript(src, dest, ui->includeEdit->text());
-			}
+		else if (sender() == ui->preprocessSTSButton)
+		{
+			qDebug() << "Preprocessing with STS proprocessor";
+			StelApp::getInstance().getScriptMgr().preprocessStratoScript(src, dest, ui->includeEdit->text());
+		}
 #endif
-			else
-				qWarning() << "WARNING: unknown preprocessor type";
+		else
+			qWarning() << "WARNING: unknown preprocessor type";
 
-			ui->scriptEdit->setPlainText(dest);
+		ui->scriptEdit->setPlainText(dest);
+		src.close();
 	}
 	ui->tabs->setCurrentIndex(0);
 }
