@@ -45,13 +45,19 @@ using namespace TelescopeControlGlobals;
 
 
 TelescopeDialog::TelescopeDialog()
+	: telescopeCount(0)
+	, configuredSlot(0)
+	, configuredTelescopeIsNew(false)
 {
+	telescopeStatus[0] = StatusNA;
+	telescopeType[0] = ConnectionNA;
+
 	ui = new Ui_telescopeDialogForm;
-	
+
 	//TODO: Fix this - it's in the same plugin
 	telescopeManager = GETSTELMODULE(TelescopeControl);
 	telescopeListModel = new QStandardItemModel(0, ColumnCount);
-	
+
 	//TODO: This shouldn't be a hash...
 	statusString[StatusNA] = QString(N_("N/A"));
 	statusString[StatusStarting] = QString(N_("Starting"));
@@ -59,8 +65,6 @@ TelescopeDialog::TelescopeDialog()
 	statusString[StatusConnected] = QString(N_("Connected"));
 	statusString[StatusDisconnected] = QString(N_("Disconnected"));
 	statusString[StatusStopped] = QString(N_("Stopped"));
-	
-	telescopeCount = 0;
 }
 
 TelescopeDialog::~TelescopeDialog()

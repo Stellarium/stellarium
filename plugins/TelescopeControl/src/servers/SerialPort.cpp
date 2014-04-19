@@ -33,7 +33,9 @@ Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 
 using namespace std;
 
-SerialPort::SerialPort(Server &server, const char *serial_device) : Connection(server, INVALID_SOCKET)
+SerialPort::SerialPort(Server &server, const char *serial_device) :
+	Connection(server, INVALID_SOCKET),
+	termios_original(termios())
 {
 #ifdef Q_OS_WIN32
 	handle = CreateFile(serial_device, GENERIC_READ|GENERIC_WRITE, 0, 0, OPEN_EXISTING, 0, 0);
