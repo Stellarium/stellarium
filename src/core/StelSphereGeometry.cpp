@@ -187,8 +187,8 @@ SphericalRegionP SphericalRegion::getIntersection(const SphericalRegion* r) cons
 		default:
 			return getIntersectionDefault(r);
 	}
-	Q_ASSERT(0);
-	return SphericalRegionP();
+	// Q_ASSERT(0);
+	// return SphericalRegionP();
 }
 SphericalRegionP SphericalRegion::getIntersection(const SphericalPolygon& r) const {return getIntersectionDefault(&r);}
 SphericalRegionP SphericalRegion::getIntersection(const SphericalConvexPolygon& r) const {return getIntersectionDefault(&r);}
@@ -216,8 +216,8 @@ SphericalRegionP SphericalRegion::getUnion(const SphericalRegion* r) const
 		default:
 			return getUnionDefault(r);
 	}
-	Q_ASSERT(0);
-	return SphericalRegionP();
+	// Q_ASSERT(0);
+	// return SphericalRegionP();
 }
 SphericalRegionP SphericalRegion::getUnion(const SphericalPolygon& r) const {return getUnionDefault(&r);}
 SphericalRegionP SphericalRegion::getUnion(const SphericalConvexPolygon& r) const {return getUnionDefault(&r);}
@@ -246,8 +246,8 @@ SphericalRegionP SphericalRegion::getSubtraction(const SphericalRegion* r) const
 		default:
 			return getSubtractionDefault(r);
 	}
-	Q_ASSERT(0);
-	return SphericalRegionP();
+	// Q_ASSERT(0);
+	// return SphericalRegionP();
 }
 SphericalRegionP SphericalRegion::getSubtraction(const SphericalPolygon& r) const {return getSubtractionDefault(&r);}
 SphericalRegionP SphericalRegion::getSubtraction(const SphericalConvexPolygon& r) const {return getSubtractionDefault(&r);}
@@ -1373,8 +1373,8 @@ SphericalRegionP SphericalRegionP::loadFromQVariant(const QVariantMap& map)
 		}
 		return SphericalRegionP(new SphericalTexturedPolygon(contours));
 	}
-	Q_ASSERT(0);
-	return SphericalRegionP(new SphericalCap());
+	// Q_ASSERT(0);
+	// return SphericalRegionP(new SphericalCap());
 }
 
 void SphericalRegionP::serializeToJson(const QVariant& jsonObject, QIODevice* output, int indentLevel)
