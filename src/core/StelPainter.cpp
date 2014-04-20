@@ -624,7 +624,7 @@ void StelPainter::drawTextGravity180(float x, float y, const QString& ws, const 
 	float yVc = prj->viewportCenter[1] + yshift;
 
 	QString lang = StelApp::getInstance().getLocaleMgr().getAppLanguage();
-	if (!QString("ar fa ug ur he yi").contains(lang))
+	if (!QString("ar fa ckb ug ur he yi").contains(lang))
 	{
 		for (int i=0; i<ws.length(); ++i)
 		{
