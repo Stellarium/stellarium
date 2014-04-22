@@ -17,26 +17,22 @@
  */
 
 #include <cstdlib>
-#include "MeteorShowers.hpp"
+
 #include "MeteorStream.hpp"
 #include "StelCore.hpp"
-#include "StelUtils.hpp"
-
 #include "StelToneReproducer.hpp"
 #include "StelMovementMgr.hpp"
 #include "StelPainter.hpp"
 
 MeteorStream::MeteorStream(const StelCore* core, double velocity, double radiantAlpha, double radiantDelta)
-	: minDist(0.)
+	: speed(velocity)
+	, minDist(0.)
 	, distMultiplier(0.)
 	, startH(0.)
 	, endH(0.)
-	, mag(1.)
+	, mag(1.f)
+	, maxMag(1.f)
 {
-	speed = velocity;
-
-	maxMag = 1; //start with the maximum mag
-
 	//the meteor starts dead, after we'll calculate the position
 	//if the position is within the bounds, this parameter will be changed to TRUE
 	alive = false;
