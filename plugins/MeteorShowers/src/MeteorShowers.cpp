@@ -435,7 +435,7 @@ void MeteorShowers::updateActiveInfo(void)
 		if(ms && ms->initialized)
 		{
 			//if the meteor shower is active, get data
-			if(ms->active)
+			if(ms->getStatus())
 			{
 				//First, check if there is already data about the constellation in "activeInfo"
 				//The var "index" will be updated to show the correct place do put the new information
@@ -483,17 +483,13 @@ void MeteorShowers::update(double deltaTime)
 		return;
 
 	StelCore* core = StelApp::getInstance().getCore();
-
-	double timeRate = core->getTimeRate();
-	if(timeRate > 0.2)
-		return;
+	QList<activeData> old_activeInfo;
 
 	//check if the sky date changed
-	bool changedDate = changedSkyDate(core);
-
-	if(changedDate)
+	if(changedSkyDate(core))
 	{
 		// clear data of all MS active
+		old_activeInfo = activeInfo;
 		activeInfo.clear();
 
 		// Is GUI visible and the year changed? refresh ranges
@@ -501,30 +497,55 @@ void MeteorShowers::update(double deltaTime)
 			configDialog->refreshRangeDates();
 	}
 
+	// fill `activeInfo` with all current active meteor showers
 	updateActiveInfo();
+	// counting index of `active`
+	int index = 0;
+	// something changed? check if we have some MS to remove from `active`
+	if (!old_activeInfo.isEmpty())
+	{
+		for (int i=0; i<old_activeInfo.size(); i++)
+		{
+			bool found = false;
+			for (int j=0; j<activeInfo.size(); j++)
+			{
+				if (old_activeInfo[i].showerID == activeInfo[j].showerID)
+				{
+					found = true;
+					break;
+				}
+			}
+			if (!found)
+			{
+				active.erase(active.begin().operator +(index));
+				index--;
+			}
+			index++;
+		}
+	}
 
 	deltaTime*=1000;
 
 	std::vector<std::vector<MeteorStream*> >::iterator iterOut;
 	std::vector<MeteorStream*>::iterator iterIn;
-	int index = 0;
-	if(active.size() > 0)
+	index = 0;
+	if (active.size() > 0)
 	{
 		// step through and update all active meteors
-		for(iterOut = active.begin(); iterOut != active.end(); ++iterOut)
+		for (iterOut = active.begin(); iterOut != active.end(); ++iterOut)
 		{
-			for(iterIn = active[index].begin(); iterIn != active[index].end(); ++iterIn)
+			for (iterIn = active[index].begin(); iterIn != active[index].end(); ++iterIn)
 			{
-				if(!(*iterIn)->update(deltaTime))
+				if (!(*iterIn)->update(deltaTime))
 				{
 					delete *iterIn;
-					active[index].erase(iterIn);
+					iterIn = active[index].erase(iterIn);
 					iterIn--;
 				}
 			}
-			if(active[index].empty())
+			if (active[index].empty())
 			{
-				active.erase(iterOut);
+				iterOut = active.erase(iterOut);
 				iterOut--;
 				index--;
 			}
@@ -533,15 +554,9 @@ void MeteorShowers::update(double deltaTime)
 	}
 
 	index = 0;
-	foreach(const activeData &a, activeInfo)
+	foreach (const activeData &a, activeInfo)
 	{
 		int ZHR = calculateZHR(a.zhr, a.variable, a.start, a.finish, a.peak);
-
-		// only makes sense given lifetimes of meteors to draw when timeSpeed is realtime
-		// otherwise high overhead of large numbers of meteors
-		double tspeed = timeRate*86400;  // sky seconds per actual second
-		if(tspeed<=0 || fabs(tspeed)>1.)
-			return; // don't start any more meteors
 
 		// if stellarium has been suspended, don't create huge number of meteors to
 		// make up for lost time!
@@ -554,14 +569,14 @@ void MeteorShowers::update(double deltaTime)
 			mpf = 1;
 
 		std::vector<MeteorStream*> aux;
-		if(active.empty() || active.size() < (unsigned) index+1)
+		if(active.empty() || active.size() < (unsigned) activeInfo.size())
 			active.push_back(aux);
 
-		for(int i=0; i<mpf; ++i)
+		for (int i=0; i<mpf; ++i)
 		{
 			// start new meteor based on ZHR time probability
 			double prob = ((double)rand())/RAND_MAX;
-			if(ZHR>0 && prob<((double)ZHR*zhrToWsr*deltaTime/1000.0/(double)mpf))
+			if (ZHR>0 && prob<((double)ZHR*zhrToWsr*deltaTime/1000.0/(double)mpf))
 			{
 				MeteorStream *m = new MeteorStream(core, a.speed, a.radiantAlpha, a.radiantDelta);
 				active[index].push_back(m);
