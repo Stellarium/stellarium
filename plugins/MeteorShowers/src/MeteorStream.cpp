@@ -31,7 +31,6 @@ MeteorStream::MeteorStream(const StelCore* core, double velocity, double radiant
 	, startH(0.)
 	, endH(0.)
 	, mag(1.f)
-	, maxMag(1.f)
 {
 	//the meteor starts dead, after we'll calculate the position
 	//if the position is within the bounds, this parameter will be changed to TRUE
@@ -139,11 +138,10 @@ bool MeteorStream::update(double deltaTime)
 	{
 		// burning has stopped so magnitude fades out
 		// assume linear fade out
-
+		float maxMag = 1.f;
 		mag -= maxMag * deltaTime/500.0f;
 		if(mag < 0)
 			alive=0;    // no longer visible
-
 	}
 
 	// *** would need time direction multiplier to allow reverse time replay

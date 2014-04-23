@@ -74,7 +74,6 @@ private:
 	double endH;            //! End height
 
 	float mag;              //! Apparent magnitude at head, 0-1
-	float maxMag;           //! 0-1
 };
 
 #endif // _METEORSTREAM_HPP_
