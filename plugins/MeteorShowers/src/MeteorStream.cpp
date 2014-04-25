@@ -109,6 +109,13 @@ MeteorStream::MeteorStream(const StelCore* core,
 	{
 		mag *= scale;
 	}
+
+	// implements the population index
+	float oneMag = -0.2; // negative, working in different scale ( 0 to 1 - where 1 is brighter)
+	if (rand()%100 < 100.f/pidx) // probability
+	{
+		mag += oneMag;  // (m+1)
+	}
 }
 
 MeteorStream::~MeteorStream()
@@ -127,7 +134,7 @@ bool MeteorStream::update(double deltaTime)
 	{
 		// burning has stopped so magnitude fades out
 		// assume linear fade out
-		mag -= deltaTime/500.0f;
+		mag -= deltaTime/1000.0f;
 		if(mag < 0)
 		{
 			alive = false;    // no longer visible
@@ -146,16 +153,6 @@ bool MeteorStream::update(double deltaTime)
 	{
 		posTrain[2] -= speed*deltaTime/1000.0f;
 	}
-
-	// determine visual magnitude based on distance to observer
-	double dist = sqrt(xydistance*xydistance + pow(position[2]-obs[2], 2));
-
-	if (dist == 0)
-	{
-		dist = .01;    // just to be cautious (meteor hits observer!)
-	}
-
-	distMultiplier = minDist*minDist / (dist*dist);
 
 	return alive;
 }
@@ -187,9 +184,6 @@ void MeteorStream::draw(const StelCore* core, StelPainter& sPainter)
 	spos/=1216;
 	epos/=1216;
 
-	// connect this point with last drawn point
-	double tmag = mag*distMultiplier;
-
 	QVector<Vec4f> colorArray;
 	QVector<Vec3d> vertexArray;
 	// last point - dark
@@ -205,11 +199,11 @@ void MeteorStream::draw(const StelCore* core, StelPainter& sPainter)
 		posi[2] -= EARTH_RADIUS;
 		posi/=1216;
 
-		colorArray.push_back(Vec4f(1,1,1,i*tmag/segments));
+		colorArray.push_back(Vec4f(1,1,1,i*mag/segments));
 		vertexArray.push_back(posi);
 	}
 	// first point - light
-	colorArray.push_back(Vec4f(1,1,1,tmag));
+	colorArray.push_back(Vec4f(1,1,1,mag));
 	vertexArray.push_back(spos);
 
 	sPainter.setColorPointer(4, GL_FLOAT, colorArray.constData());
