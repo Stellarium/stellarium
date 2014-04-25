@@ -375,6 +375,7 @@ private:
 		int speed;		//! Speed of meteors
 		double radiantAlpha;    //! R.A. for radiant of meteor shower
 		double radiantDelta;    //! Dec. for radiant of meteor shower
+		float pidx;		//! Population index
 	} activeData;
 
 	QList<activeData> activeInfo;	//! List of active meteors

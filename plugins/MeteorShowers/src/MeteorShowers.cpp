@@ -473,6 +473,7 @@ void MeteorShowers::updateActiveInfo(void)
 					newData.speed = ms->speed;
 					newData.radiantAlpha = ms->radiantAlpha;
 					newData.radiantDelta = ms->radiantDelta;
+					newData.pidx = ms->pidx;
 					newData.zhr = ms->zhr;
 					newData.variable = ms->variable;
 					newData.start = ms->start;
@@ -575,9 +576,13 @@ void MeteorShowers::update(double deltaTime)
 	}
 
 	index = 0;
-	foreach (const activeData &a, activeInfo)
+	foreach (const activeData &current, activeInfo)
 	{
-		int ZHR = calculateZHR(a.zhr, a.variable, a.start, a.finish, a.peak);
+		int ZHR = calculateZHR(current.zhr,
+				       current.variable,
+				       current.start,
+				       current.finish,
+				       current.peak);
 
 		// if stellarium has been suspended, don't create huge number of meteors to
 		// make up for lost time!
@@ -595,7 +600,9 @@ void MeteorShowers::update(double deltaTime)
 
 		std::vector<MeteorStream*> aux;
 		if (active.empty() || active.size() < (unsigned) activeInfo.size())
+		{
 			active.push_back(aux);
+		}
 
 		for (int i=0; i<mpf; ++i)
 		{
@@ -603,7 +610,11 @@ void MeteorShowers::update(double deltaTime)
 			double prob = ((double)rand())/RAND_MAX;
 			if (ZHR>0 && prob<((double)ZHR*zhrToWsr*deltaTime/1000.0/(double)mpf))
 			{
-				MeteorStream *m = new MeteorStream(core, a.speed, a.radiantAlpha, a.radiantDelta);
+				MeteorStream *m = new MeteorStream(core,
+								   current.speed,
+								   current.radiantAlpha,
+								   current.radiantDelta,
+								   current.pidx);
 				active[index].push_back(m);
 			}
 		}
