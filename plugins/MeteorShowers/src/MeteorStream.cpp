@@ -37,8 +37,8 @@ MeteorStream::MeteorStream(const StelCore* core,
 	, endH(0.)
 	, mag(1.f)
 {
-	//the meteor starts dead, after we'll calculate the position
-	//if the position is within the bounds, this parameter will be changed to TRUE
+	// the meteor starts dead, after we'll calculate the position
+	// if the position is within the bounds, this parameter will be changed to TRUE
 	alive = false;
 
 	double high_range = EARTH_RADIUS+HIGH_ALTITUDE;
@@ -85,49 +85,25 @@ MeteorStream::MeteorStream(const StelCore* core,
 		return; //meteor still dead
 	}
 
-	//If everything is ok until here,
+	// If everything is ok until here,
 	alive = true;  //the meteor is alive
 
-	// Determine drawing color given magnitude and eye
-	// (won't be visible during daylight)
-
-	// determine intensity
-	float Mag1 = (double)rand()/((double)RAND_MAX+1)*6.75f - 3;
-	float Mag2 = (double)rand()/((double)RAND_MAX+1)*6.75f - 3;
+	// determine intensity [-3; 4.5]
+	float Mag1 = (double)rand()/((double)RAND_MAX+1)*7.5f - 3;
+	float Mag2 = (double)rand()/((double)RAND_MAX+1)*7.5f - 3;
 	float Mag = (Mag1 + Mag2)/2.0f;
 
-	mag = (5. + Mag) / 256.0;
-	if (mag>250)
-	{
-		mag -= 256;
-	}
-
-	float luminance = std::exp(-0.92103f*(mag + 12.12331f)) * 108064.73f;
-
-	float cmag=1.f;
-	float rmag;
-
-	// Compute the equivalent star luminance for a 5 arc min circle and convert it
-	// in function of the eye adaptation
-	const StelToneReproducer* eye = core->getToneReproducer();
-	rmag = eye->adaptLuminanceScaled(luminance);
-	rmag = rmag/powf(core->getMovementMgr()->getCurrentFov(),0.85f)*500.f;
-
-	// if size of star is too small (blink) we put its size to 1.2 --> no more blink
-	// And we compensate the difference of brighteness with cmag
-	if (rmag<1.2f)
-	{
-		cmag=rmag*rmag/1.44f;
-	}
-
-	mag = cmag;  // assumes white
+	// compute RMag and CMag
+	RCMag rcMag;
+	core->getSkyDrawer()->computeRCMag(Mag, &rcMag);
+	mag = rcMag.luminance;
 
 	// most visible meteors are under about 180km distant
 	// scale max mag down if outside this range
 	float scale = 1;
 	if (minDist!=0)
 	{
-		scale = 180*180/(minDist*minDist);
+		scale = 180*180 / (minDist*minDist);
 	}
 	if (scale < 1)
 	{
