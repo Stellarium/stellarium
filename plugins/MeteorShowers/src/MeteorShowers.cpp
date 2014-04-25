@@ -1302,6 +1302,10 @@ void MeteorShowers::translations()
 	N_("Orionids");
 	// TRANSLATORS: Name of meteor shower
 	N_("Andromedids");
+	// TRANSLATORS: Name of meteor shower
+	N_("September ε–Perseids");
+	// TRANSLATORS: Name of meteor shower
+	N_("η-Lyrids");
 
 	// List of parent objects for meteor showers
 	// TRANSLATORS: Name of parent object for meteor shower
