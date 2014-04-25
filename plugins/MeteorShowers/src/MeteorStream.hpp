@@ -42,7 +42,13 @@ public:
 	//! @param velocity the speed of the meteor in km/s.
 	//! @param rAlpha the radiant alpha in rad
 	//! @param rDelta the radiant delta in rad
-	MeteorStream(const StelCore*, double velocity, double radiantAlpha, double radiantDelta);
+	//! @param pidx population index
+	MeteorStream(const StelCore*,
+		     double velocity,
+		     double radiantAlpha,
+		     double radiantDelta,
+		     float pidx);
+
 	virtual ~MeteorStream();
 
 	//! Updates the position of the meteor, and expires it if necessary.
@@ -62,6 +68,7 @@ private:
 	Vec3d posTrain;         //! End of train
 
 	double speed;           //! Velocity of meteor in km/s
+	float pidx;             //! population index
 	double xydistance;      //! Distance in XY plane (orthogonal to meteor path) from observer to meteor
 	double minDist;         //! Nearest point to observer along path
 	double distMultiplier;  //! Scale magnitude due to changes in distance

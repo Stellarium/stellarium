@@ -24,8 +24,13 @@
 #include "StelMovementMgr.hpp"
 #include "StelPainter.hpp"
 
-MeteorStream::MeteorStream(const StelCore* core, double velocity, double radiantAlpha, double radiantDelta)
+MeteorStream::MeteorStream(const StelCore* core,
+			   double velocity,
+			   double radiantAlpha,
+			   double radiantDelta,
+			   float pidx)
 	: speed(velocity)
+	, pidx(pidx)
 	, minDist(0.)
 	, distMultiplier(0.)
 	, startH(0.)
