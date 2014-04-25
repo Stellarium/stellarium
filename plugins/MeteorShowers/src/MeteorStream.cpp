@@ -57,7 +57,7 @@ MeteorStream::MeteorStream(const StelCore* core, double velocity, double radiant
 	// D is distance from center of earth
 	double D = sqrt(position[0]*position[0] + position[1]*position[1]);
 
-	if(D > high_range)     // won't be visible, meteor still dead
+	if (D > high_range)     // won't be visible, meteor still dead
 	{
 		return;
 	}
@@ -68,13 +68,13 @@ MeteorStream::MeteorStream(const StelCore* core, double velocity, double radiant
 	// mag should be max at nearest point still burning
 	endH = -startH;  // earth grazing
 	minDist = xydistance;
-	if(D <= low_range)
+	if (D <= low_range)
 	{
 		endH = sqrt(low_range*low_range - D*D);
 		minDist = sqrt(xydistance*xydistance + pow(endH - obs[2], 2));
 	}
 
-	if(minDist > VISIBLE_RADIUS)
+	if (minDist > VISIBLE_RADIUS)
 	{
 		// on average, not visible (although if were zoomed ...)
 		return; //meteor still dead
@@ -86,17 +86,18 @@ MeteorStream::MeteorStream(const StelCore* core, double velocity, double radiant
 	// Determine drawing color given magnitude and eye
 	// (won't be visible during daylight)
 
-	// *** color varies somewhat based on speed, plus atmosphere reddening
-
 	// determine intensity
 	float Mag1 = (double)rand()/((double)RAND_MAX+1)*6.75f - 3;
 	float Mag2 = (double)rand()/((double)RAND_MAX+1)*6.75f - 3;
 	float Mag = (Mag1 + Mag2)/2.0f;
 
 	mag = (5. + Mag) / 256.0;
-	if(mag>250) mag = mag - 256;
+	if (mag>250)
+	{
+		mag -= 256;
+	}
 
-	float term1 = std::exp(-0.92103f*(mag + 12.12331f)) * 108064.73f;
+	float luminance = std::exp(-0.92103f*(mag + 12.12331f)) * 108064.73f;
 
 	float cmag=1.f;
 	float rmag;
@@ -104,12 +105,12 @@ MeteorStream::MeteorStream(const StelCore* core, double velocity, double radiant
 	// Compute the equivalent star luminance for a 5 arc min circle and convert it
 	// in function of the eye adaptation
 	const StelToneReproducer* eye = core->getToneReproducer();
-	rmag = eye->adaptLuminanceScaled(term1);
+	rmag = eye->adaptLuminanceScaled(luminance);
 	rmag = rmag/powf(core->getMovementMgr()->getCurrentFov(),0.85f)*500.f;
 
 	// if size of star is too small (blink) we put its size to 1.2 --> no more blink
 	// And we compensate the difference of brighteness with cmag
-	if(rmag<1.2f)
+	if (rmag<1.2f)
 	{
 		cmag=rmag*rmag/1.44f;
 	}
@@ -119,9 +120,14 @@ MeteorStream::MeteorStream(const StelCore* core, double velocity, double radiant
 	// most visible meteors are under about 180km distant
 	// scale max mag down if outside this range
 	float scale = 1;
-	if(minDist!=0) scale = 180*180/(minDist*minDist);
-	if(scale < 1) mag *= scale;
-	distMultiplier = 0;
+	if (minDist!=0)
+	{
+		scale = 180*180/(minDist*minDist);
+	}
+	if (scale < 1)
+	{
+		mag *= scale;
+	}
 }
 
 MeteorStream::~MeteorStream()
@@ -131,24 +137,27 @@ MeteorStream::~MeteorStream()
 // returns true if alive
 bool MeteorStream::update(double deltaTime)
 {
-	if(!alive)
-		return(0);
+	if (!alive)
+	{
+		return false;
+	}
 
-	if(position[2] < endH)
+	if (position[2] < endH)
 	{
 		// burning has stopped so magnitude fades out
 		// assume linear fade out
-		float maxMag = 1.f;
-		mag -= maxMag * deltaTime/500.0f;
+		mag -= deltaTime/500.0f;
 		if(mag < 0)
-			alive=0;    // no longer visible
+		{
+			alive = false;    // no longer visible
+		}
 	}
 
 	// *** would need time direction multiplier to allow reverse time replay
-	position[2] = position[2] - speed*deltaTime/1000.0f;
+	position[2] -= speed*deltaTime/1000.0f;
 
 	// train doesn't extend beyond start of burn
-	if(position[2] + speed*0.5f > startH)
+	if (position[2] + speed*0.5f > startH)
 	{
 		posTrain[2] = startH ;
 	}
@@ -160,11 +169,14 @@ bool MeteorStream::update(double deltaTime)
 	// determine visual magnitude based on distance to observer
 	double dist = sqrt(xydistance*xydistance + pow(position[2]-obs[2], 2));
 
-	if(dist == 0) dist = .01;    // just to be cautious (meteor hits observer!)
+	if (dist == 0)
+	{
+		dist = .01;    // just to be cautious (meteor hits observer!)
+	}
 
 	distMultiplier = minDist*minDist / (dist*dist);
 
-	return(alive);
+	return alive;
 }
 
 
@@ -172,8 +184,10 @@ bool MeteorStream::update(double deltaTime)
 // Assumes that we are in local frame
 void MeteorStream::draw(const StelCore* core, StelPainter& sPainter)
 {
-	if(!alive)
+	if (!alive)
+	{
 		return;
+	}
 
 	Vec3d spos = position;
 	Vec3d epos = posTrain;
@@ -222,9 +236,4 @@ void MeteorStream::draw(const StelCore* core, StelPainter& sPainter)
 	sPainter.enableClientStates(true, false, true);
 	sPainter.drawFromArray(StelPainter::LineStrip, vertexArray.size(), 0, true);
 	sPainter.enableClientStates(false);
-}
-
-bool MeteorStream::isAlive(void)
-{
-	return(alive);
 }

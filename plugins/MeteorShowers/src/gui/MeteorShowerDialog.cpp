@@ -143,8 +143,10 @@ void MeteorShowerDialog::createDialogContent()
 	// About tab
 	setAboutHtml();
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-	if(gui!=NULL)
+	if (gui != NULL)
+	{
 		ui->aboutTextBrowser->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
+	}
 
 	updateGuiFromSettings();
 }
@@ -173,12 +175,18 @@ void MeteorShowerDialog::checkDates(void)
 	double jdFrom = StelUtils::qDateTimeToJd((QDateTime) ui->dateFrom->date());
 	double jdTo = StelUtils::qDateTimeToJd((QDateTime) ui->dateTo->date());
 
-	if(jdFrom > jdTo)
+	if (jdFrom > jdTo)
+	{
 		QMessageBox::warning(0, "Stellarium", q_("Start date greater than end date!"));
+	}
 	else if (jdTo-jdFrom > 365)
+	{
 		QMessageBox::warning(0, "Stellarium", q_("Time interval must be less than one year!"));
+	}
 	else
+	{
 		searchEvents();
+	}
 }
 
 void MeteorShowerDialog::searchEvents(void)
@@ -187,7 +195,7 @@ void MeteorShowerDialog::searchEvents(void)
 
 	//Fill list of events
 	initListEvents();
-	foreach(const MeteorShowerP& r, searchResult)
+	foreach (const MeteorShowerP& r, searchResult)
 	{
 		TreeWidgetItem *treeItem = new TreeWidgetItem(treeWidget);
 		//Name
@@ -248,7 +256,7 @@ void MeteorShowerDialog::setAboutHtml(void)
 	html += "<tr><td><strong>" + q_("Author") + ":</strong></td><td>Marcos Cardinot &lt;mcardinot@gmail.com&gt;</td></tr>";
 	html += "</table>";
 
-	html += "<p>" + q_("The Meteor Showers plugin give visualization of the meteor showers, show information about meteor showers and displays marker for radiants in activity range for each meteor showers.") + "</p>";
+	html += "<p>" + q_("This plugin displays meteor showers and a marker for each active and inactive radiant, showing real information about its activity.") + "</p>";
 	html += "<h3>" + q_("Terms") + "</h3>";
 	html += "<p><b>" + q_("Meteor shower") + "</b>";
 	html += "<br />" + q_("A meteor shower is a celestial event in which a number of meteors are observed to radiate, or originate, from one point in the night sky. These meteors are caused by streams of cosmic debris called meteoroids entering Earth's atmosphere at extremely high speeds on parallel trajectories. Most meteors are smaller than a grain of sand, so almost all of them disintegrate and never hit the Earth's surface. Intense or unusual meteor showers are known as meteor outbursts and meteor storms, which may produce greater than 1,000 meteors an hour.") + "</p>";
@@ -361,7 +369,7 @@ void MeteorShowerDialog::saveSettings(void)
 
 void MeteorShowerDialog::updateJSON(void)
 {
-	if(plugin->getUpdatesEnabled())
+	if (plugin->getUpdatesEnabled())
 	{
 		plugin->updateJSON();
 	}
