@@ -120,6 +120,7 @@ private:
 	static Vec3f exoplanetMarkerColor;
 	static bool distributionMode;
 	static bool timelineMode;
+	static bool habitableMode;
 
 	void draw(StelCore* core, StelPainter *painter);
 

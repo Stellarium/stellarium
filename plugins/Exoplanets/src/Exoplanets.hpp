@@ -136,6 +136,9 @@ public:
 	bool getTimelineMode(void);
 	void setTimelineMode(bool b);
 
+	bool getHabitableMode(void);
+	void setHabitableMode(bool b);
+
 	QString getMarkerColor(bool habitable);
 	void setMarkerColor(QString c, bool h);
 
