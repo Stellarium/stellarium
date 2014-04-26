@@ -118,10 +118,10 @@ public:
 
 	//! Read (or re-read) settings from the main config file.  This will be called from init and also
 	//! when restoring defaults (i.e. from the configuration dialog / restore defaults button).
-	void readSettingsFromConfig(void);
+	void loadConfiguration(void);
 
 	//! Save the settings to the main configuration file.
-	void saveSettingsToConfig(void);
+	void saveConfiguration(void);
 
 	//! get whether or not the plugin will try to update TLE data from the internet
 	//! @return true if updates are set to be done, false otherwise
@@ -204,7 +204,7 @@ private:
 	QFont font;
 
 	// if existing, delete Satellites section in main config.ini, then create with default values
-	void restoreDefaultConfigIni(void);
+	void resetConfiguration(void);
 
 	// Upgrade config.ini: rename old key settings to new
 	void upgradeConfigIni(void);
