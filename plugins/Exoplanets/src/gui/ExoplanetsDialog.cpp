@@ -302,7 +302,7 @@ void ExoplanetsDialog::restoreDefaults(void)
 {
 	qDebug() << "Exoplanets::restoreDefaults";
 	ep->restoreDefaults();
-	ep->readSettingsFromConfig();
+	ep->loadConfiguration();
 	updateGuiFromSettings();
 }
 
@@ -314,7 +314,7 @@ void ExoplanetsDialog::updateGuiFromSettings(void)
 
 void ExoplanetsDialog::saveSettings(void)
 {
-	ep->saveSettingsToConfig();
+	ep->saveConfiguration();
 }
 
 void ExoplanetsDialog::updateJSON(void)
