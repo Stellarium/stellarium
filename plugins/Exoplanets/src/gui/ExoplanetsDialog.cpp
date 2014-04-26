@@ -87,6 +87,8 @@ void ExoplanetsDialog::createDialogContent()
 	connect(ui->displayShowExoplanetsButton, SIGNAL(stateChanged(int)), this, SLOT(setDisplayShowExoplanetsButton(int)));
 	ui->timelineModeCheckBox->setChecked(ep->getTimelineMode());
 	connect(ui->timelineModeCheckBox, SIGNAL(stateChanged(int)), this, SLOT(setTimelineEnabled(int)));
+	ui->habitableModeCheckBox->setChecked(ep->getHabitableMode());
+	connect(ui->habitableModeCheckBox, SIGNAL(stateChanged(int)), this, SLOT(setHabitableEnabled(int)));
 	connect(ui->internetUpdatesCheckbox, SIGNAL(stateChanged(int)), this, SLOT(setUpdatesEnabled(int)));
 	connect(ui->updateButton, SIGNAL(clicked()), this, SLOT(updateJSON()));
 	connect(ep, SIGNAL(updateStateChanged(Exoplanets::UpdateState)), this, SLOT(updateStateReceiver(Exoplanets::UpdateState)));
@@ -241,6 +243,12 @@ void ExoplanetsDialog::setTimelineEnabled(int checkState)
 {
 	bool b = checkState != Qt::Unchecked;
 	ep->setTimelineMode(b);
+}
+
+void ExoplanetsDialog::setHabitableEnabled(int checkState)
+{
+	bool b = checkState != Qt::Unchecked;
+	ep->setHabitableMode(b);
 }
 
 void ExoplanetsDialog::setDisplayAtStartupEnabled(int checkState)

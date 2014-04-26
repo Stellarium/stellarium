@@ -817,6 +817,16 @@ void Exoplanets::setTimelineMode(bool b)
 	Exoplanet::timelineMode=b;
 }
 
+bool Exoplanets::getHabitableMode()
+{
+	return Exoplanet::habitableMode;
+}
+
+void Exoplanets::setHabitableMode(bool b)
+{
+	Exoplanet::habitableMode=b;
+}
+
 QString Exoplanets::getMarkerColor(bool habitable)
 {
 	Vec3f c;
