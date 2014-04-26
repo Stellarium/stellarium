@@ -42,6 +42,7 @@
 StelTextureSP Exoplanet::markerTexture;
 bool Exoplanet::distributionMode = false;
 bool Exoplanet::timelineMode = false;
+bool Exoplanet::habitableMode = false;
 Vec3f Exoplanet::exoplanetMarkerColor = Vec3f(0.4f,0.9f,0.5f);
 Vec3f Exoplanet::habitableExoplanetMarkerColor = Vec3f(1.f,0.5f,0.f);
 
@@ -452,6 +453,12 @@ void Exoplanet::draw(StelCore* core, StelPainter *painter)
 	else
 	{
 		visible = true;
+	}
+
+	if (habitableMode)
+	{
+		if (!hasHabitableExoplanets)
+			return;
 	}
 
 	Vec3d win;
