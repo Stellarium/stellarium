@@ -326,7 +326,11 @@ QString MeteorShower::getInfoString(const StelCore* core, const InfoStringGroup&
 			.arg(StelUtils::radToDmsStr(driftDelta/5));
 		oss << "<br />";
 
-		oss << q_("Geocentric meteoric velocity: %1 km/s").arg(speed) << "<br />";
+		if (speed>0)
+		{
+			oss << q_("Geocentric meteoric velocity: %1 km/s").arg(speed) << "<br />";
+		}
+
 		if(pidx>0)
 		{
 			oss << q_("The population index: %1").arg(pidx) << "<br />";
