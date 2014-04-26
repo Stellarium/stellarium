@@ -153,11 +153,11 @@ void Exoplanets::init()
 		if (!conf->childGroups().contains("Exoplanets"))
 		{
 			qDebug() << "Exoplanets: no Exoplanets section exists in main config file - creating with defaults";
-			restoreDefaultConfigIni();
+			resetConfiguration();
 		}
 
 		// populate settings from main config file.
-		readSettingsFromConfig();
+		loadConfiguration();
 
 		jsonCatalogPath = StelFileMgr::findFile("modules/Exoplanets", (StelFileMgr::Flags)(StelFileMgr::Directory|StelFileMgr::Writable)) + "/exoplanets.json";
 		if (jsonCatalogPath.isEmpty())
@@ -600,32 +600,26 @@ bool Exoplanets::configureGui(bool show)
 
 void Exoplanets::restoreDefaults(void)
 {
-	restoreDefaultConfigIni();
+	resetConfiguration();
 	restoreDefaultJsonFile();
 	readJsonFile();
-	readSettingsFromConfig();
+	loadConfiguration();
 }
 
-void Exoplanets::restoreDefaultConfigIni(void)
+void Exoplanets::resetConfiguration(void)
 {
 	conf->beginGroup("Exoplanets");
 
 	// delete all existing Exoplanets settings...
 	conf->remove("");
-
-	conf->setValue("distribution_enabled", false);
-	conf->setValue("timeline_enabled", false);
-	conf->setValue("enable_at_startup", false);
-	conf->setValue("updates_enabled", true);	
-	conf->setValue("url", "http://stellarium.org/json/exoplanets.json");
-	conf->setValue("update_frequency_hours", 72);
-	conf->setValue("flag_show_exoplanets_button", true);
-	conf->setValue("habitable_exoplanet_marker_color", "1.0,0.5,0.0");
-	conf->setValue("exoplanet_marker_color", "0.4,0.9,0.5");
 	conf->endGroup();
+	// Load the default values...
+	loadConfiguration();
+	// ... then save them.
+	saveConfiguration();
 }
 
-void Exoplanets::readSettingsFromConfig(void)
+void Exoplanets::loadConfiguration(void)
 {
 	conf->beginGroup("Exoplanets");
 
@@ -635,6 +629,7 @@ void Exoplanets::readSettingsFromConfig(void)
 	updatesEnabled = conf->value("updates_enabled", true).toBool();
 	setDisplayMode(conf->value("distribution_enabled", false).toBool());
 	setTimelineMode(conf->value("timeline_enabled", false).toBool());
+	setHabitableMode(conf->value("habitable_enabled", false).toBool());
 	enableAtStartup = conf->value("enable_at_startup", false).toBool();
 	flagShowExoplanetsButton = conf->value("flag_show_exoplanets_button", true).toBool();
 	setMarkerColor(conf->value("exoplanet_marker_color", "0.4,0.9,0.5").toString(), false);
@@ -643,7 +638,7 @@ void Exoplanets::readSettingsFromConfig(void)
 	conf->endGroup();
 }
 
-void Exoplanets::saveSettingsToConfig(void)
+void Exoplanets::saveConfiguration(void)
 {
 	conf->beginGroup("Exoplanets");
 
@@ -652,6 +647,7 @@ void Exoplanets::saveSettingsToConfig(void)
 	conf->setValue("updates_enabled", updatesEnabled );
 	conf->setValue("distribution_enabled", getDisplayMode());
 	conf->setValue("timeline_enabled", getTimelineMode());
+	conf->setValue("habitable_enabled", getHabitableMode());
 	conf->setValue("enable_at_startup", enableAtStartup);
 	conf->setValue("flag_show_exoplanets_button", flagShowExoplanetsButton);
 	conf->setValue("habitable_exoplanet_marker_color", getMarkerColor(true));
