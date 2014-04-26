@@ -955,12 +955,13 @@
 		},
 		"ELY":
 		{
-			"designation": "ε-Lyrids",
+			"designation": "η-Lyrids",
 			"activity":
 			[
 			{
 				"year": "generic",
-				"zhr": 3,
+				"zhr": -1,
+				"variable": "1-4",
 				"start": "03.03",
 				"finish": "03.12",
 				"peak": "03.08"
@@ -1075,6 +1076,7 @@
 			"radiantDelta": "+27",
 			"driftAlpha": "5",
 			"driftDelta": "0",
+			"parentObj": "Comet C/1964 N1 (Ikeya)",
 			"pidx": 3.0
 		},
 		"STA":
@@ -1225,7 +1227,7 @@
 			"radiantDelta": "+22",
 			"driftAlpha": "5",
 			"driftDelta": "1",
-			"parentObj": "Minor planet 2004 TG10",
+			"parentObj": "Comet C/1917 F1 (Mellish)",
 			"pidx": 2.3
 		},
 		"MON":
@@ -1259,6 +1261,7 @@
 			"radiantDelta": "+8",
 			"driftAlpha": "4",
 			"driftDelta": "0",
+			"parentObj": "Minor planet 2004 TG10",
 			"pidx": 3.0
 		},
 		"HYD":
@@ -1521,6 +1524,343 @@
 			"driftAlpha": "0.8",
 			"driftDelta": "1",
 			"pidx": 2.4
+		},
+		"ASC":
+		{
+			"designation": "α-Scorpiids",
+			"activity":
+			[
+			{
+				"year": "generic",
+				"zhr": 5,
+				"start": "04.20",
+				"finish": "05.19",
+				"peak": "04.28"
+			}
+			],
+			"speed": 35,
+			"radiantAlpha": "247",
+			"radiantDelta": "-24",
+			"driftAlpha": "0",
+			"driftDelta": "0"
+		},
+		"TCE":
+		{
+			"designation": "θ-Centaurids",
+			"activity":
+			[
+			{
+				"year": "generic",
+				"zhr": 4,
+				"start": "01.23",
+				"finish": "03.12",
+				"peak": "02.14"
+			}
+			],
+			"speed": 60,
+			"radiantAlpha": "210",
+			"radiantDelta": "-40",
+			"driftAlpha": "0",
+			"driftDelta": "0"
+		},
+		"DCA":
+		{
+			"designation": "δ-Cancrids",
+			"activity":
+			[
+			{
+				"year": "generic",
+				"zhr": 4,
+				"start": "12.14",
+				"finish": "02.14",
+				"peak": "01.17"
+			}
+			],
+			"radiantAlpha": "128",
+			"radiantDelta": "20",
+			"driftAlpha": "1.0",
+			"driftDelta": "-0.2"
+		},
+		"THE":
+		{
+			"designation": "τ-Herculids",
+			"activity":
+			[
+			{
+				"year": "generic",
+				"zhr": -1,
+				"variable": "1-72",
+				"start": "05.19",
+				"finish": "06.19",
+				"peak": "06.09"
+			}
+			],
+			"radiantAlpha": "236",
+			"radiantDelta": "41",
+			"driftAlpha": "0",
+			"driftDelta": "0",
+			"parentObj": "Comet Schwassmann-Wachmann 3"
+		},
+		"RGE":
+		{
+			"designation": "ρ-Geminids",
+			"activity":
+			[
+			{
+				"year": "generic",
+				"zhr": 4,
+				"start": "12.28",
+				"finish": "01.28",
+				"peak": "01.08"
+			}
+			],
+			"radiantAlpha": "108",
+			"radiantDelta": "32",
+			"driftAlpha": "1.1",
+			"driftDelta": "-0.2"
+		},
+		"ECR":
+		{
+			"designation": "η-Craterids",
+			"activity":
+			[
+			{
+				"year": "generic",
+				"zhr": 4,
+				"start": "01.11",
+				"finish": "01.22",
+				"peak": "01.16"
+			}
+			],
+			"radiantAlpha": "176",
+			"radiantDelta": "-17",
+			"driftAlpha": "0",
+			"driftDelta": "0"
+		},
+		"PVI":
+		{
+			"designation": "π-Virginids",
+			"activity":
+			[
+			{
+				"year": "generic",
+				"zhr": -1,
+				"variable": "2-5",
+				"start": "02.13",
+				"finish": "04.08",
+				"peak": "03.03"
+			}
+			],
+			"radiantAlpha": "182",
+			"radiantDelta": "3",
+			"driftAlpha": "0",
+			"driftDelta": "0"
+		},
+		"TVI":
+		{
+			"designation": "θ-Virginids",
+			"activity":
+			[
+			{
+				"year": "generic",
+				"zhr": -1,
+				"variable": "1-3",
+				"start": "03.10",
+				"finish": "04.21",
+				"peak": "03.20"
+			}
+			],
+			"radiantAlpha": "194",
+			"radiantDelta": "-2",
+			"driftAlpha": "0.9",
+			"driftDelta": "-0.31"
+		},
+		"MLI":
+		{
+			"designation": "May Librids",
+			"activity":
+			[
+			{
+				"year": "generic",
+				"zhr": -1,
+				"variable": "2-6",
+				"start": "05.01",
+				"finish": "05.09",
+				"peak": "05.06"
+			}
+			],
+			"radiantAlpha": "233",
+			"radiantDelta": "-18",
+			"driftAlpha": "0",
+			"driftDelta": "0"
+		},
+		"OPH":
+		{
+			"designation": "Ophiuchids",
+			"activity":
+			[
+			{
+				"year": "generic",
+				"zhr": 6,
+				"start": "05.19",
+				"finish": "07.02",
+				"peak": "06.20"
+			}
+			],
+			"radiantAlpha": "263",
+			"radiantDelta": "-20",
+			"driftAlpha": "0",
+			"driftDelta": "0"
+		},
+		"TOP":
+		{
+			"designation": "θ-Ophiuchids",
+			"activity":
+			[
+			{
+				"year": "generic",
+				"zhr": 10,
+				"start": "05.21",
+				"finish": "06.16",
+				"peak": "06.10"
+			}
+			],
+			"radiantAlpha": "265",
+			"radiantDelta": "-28",
+			"driftAlpha": "0",
+			"driftDelta": "0"
+		},
+		"JSC":
+		{
+			"designation": "June Scutids",
+			"activity":
+			[
+			{
+				"year": "generic",
+				"zhr": -1,
+				"variable": "2-4",
+				"start": "06.02",
+				"finish": "07.29",
+				"peak": "06.27"
+			}
+			],
+			"radiantAlpha": "278",
+			"radiantDelta": "-4",
+			"driftAlpha": "0",
+			"driftDelta": "0"
+		},
+		"APA":
+		{
+			"designation": "α-Pisces Australids",
+			"activity":
+			[
+			{
+				"year": "generic",
+				"zhr": -1,
+				"variable": "3-5",
+				"start": "07.16",
+				"finish": "08.13",
+				"peak": "06.30"
+			}
+			],
+			"radiantAlpha": "337",
+			"radiantDelta": "-28",
+			"driftAlpha": "0",
+			"driftDelta": "0"
+		},
+		"NIA":
+		{
+			"designation": "Northern ι-Aquariids",
+			"activity":
+			[
+			{
+				"year": "generic",
+				"zhr": -1,
+				"variable": "5-10",
+				"start": "08.11",
+				"finish": "09.10",
+				"peak": "08.25"
+			}
+			],
+			"radiantAlpha": "350",
+			"radiantDelta": "0",
+			"driftAlpha": "1.03",
+			"driftDelta": "0.13"
+		},
+		"SIA":
+		{
+			"designation": "Southern ι-Aquariids",
+			"activity":
+			[
+			{
+				"year": "generic",
+				"zhr": -1,
+				"variable": "7-8",
+				"start": "07.01",
+				"finish": "09.18",
+				"peak": "08.06"
+			}
+			],
+			"radiantAlpha": "337",
+			"radiantDelta": "12",
+			"driftAlpha": "1.07",
+			"driftDelta": "0.18"
+		},
+		"GAQ":
+		{
+			"designation": "γ-Aquariids",
+			"activity":
+			[
+			{
+				"year": "generic",
+				"zhr": -1,
+				"variable": "1-4",
+				"start": "09.01",
+				"finish": "09.14",
+				"peak": "09.07"
+			}
+			],
+			"radiantAlpha": "333",
+			"radiantDelta": "-5",
+			"driftAlpha": "0",
+			"driftDelta": "0"
+		},
+		"AAR":
+		{
+			"designation": "Autumn Arietids",
+			"activity":
+			[
+			{
+				"year": "generic",
+				"zhr": -1,
+				"variable": "3-5",
+				"start": "09.07",
+				"finish": "10.27",
+				"peak": "10.08"
+			}
+			],
+			"radiantAlpha": "32",
+			"radiantDelta": "8",
+			"driftAlpha": "0.9",
+			"driftDelta": "0.35"
+		},
+		"XOR":
+		{
+			"designation": "χ-Orionids",
+			"activity":
+			[
+			{
+				"year": "generic",
+				"zhr": 3,
+				"start": "12.02",
+				"finish": "12.18",
+				"peak": "12.10"
+			}
+			],
+			"radiantAlpha": "88",
+			"radiantDelta": "20",
+			"driftAlpha": "0",
+			"driftDelta": "0"
 		}
 	}
 }
