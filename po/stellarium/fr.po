@@ -17,14 +17,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-04-26 00:22+0700\n"
-"PO-Revision-Date: 2014-04-15 16:31+0000\n"
+"POT-Creation-Date: 2014-04-26 16:57+0700\n"
+"PO-Revision-Date: 2014-04-26 14:24+0000\n"
 "Last-Translator: Nicolas Martignoni <Unknown>\n"
 "Language-Team: <fr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-04-26 05:33+0000\n"
+"X-Launchpad-Export-Date: 2014-04-27 05:38+0000\n"
 "X-Generator: Launchpad (build 16985)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:107 src/core/modules/StarMgr.cpp:346
@@ -173,7 +173,7 @@ msgstr "Planète : "
 #: src/core/modules/StarWrapper.cpp:173
 #: plugins/Satellites/src/Satellite.cpp:252
 #: plugins/Supernovae/src/Supernova.cpp:130 plugins/Quasars/src/Quasar.cpp:100
-#: plugins/Pulsars/src/Pulsar.cpp:157 plugins/Exoplanets/src/Exoplanet.cpp:176
+#: plugins/Pulsars/src/Pulsar.cpp:157 plugins/Exoplanets/src/Exoplanet.cpp:177
 #, qt-format
 msgid "Type: <b>%1</b>"
 msgstr "Type : <b>%1</b>"
@@ -182,7 +182,7 @@ msgstr "Type : <b>%1</b>"
 #: src/core/modules/MinorPlanet.cpp:221 src/core/modules/Comet.cpp:160
 #: src/core/modules/StarWrapper.cpp:56 src/core/modules/StarWrapper.cpp:180
 #: plugins/Supernovae/src/Supernova.cpp:135 plugins/Novae/src/Nova.cpp:140
-#: plugins/Quasars/src/Quasar.cpp:106 plugins/Exoplanets/src/Exoplanet.cpp:185
+#: plugins/Quasars/src/Quasar.cpp:106 plugins/Exoplanets/src/Exoplanet.cpp:186
 #, qt-format
 msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>)"
 msgstr "Magnitude : <b>%1</b> (extinction à : <b>%2</b>)"
@@ -196,7 +196,7 @@ msgstr "Luminosité de surface : <b>%1</b> (atténuée à : <b>%2</b>)"
 #: src/core/modules/MinorPlanet.cpp:224 src/core/modules/Comet.cpp:163
 #: src/core/modules/StarWrapper.cpp:60 src/core/modules/StarWrapper.cpp:183
 #: plugins/Supernovae/src/Supernova.cpp:137 plugins/Novae/src/Nova.cpp:143
-#: plugins/Quasars/src/Quasar.cpp:111 plugins/Exoplanets/src/Exoplanet.cpp:190
+#: plugins/Quasars/src/Quasar.cpp:111 plugins/Exoplanets/src/Exoplanet.cpp:191
 #, qt-format
 msgid "Magnitude: <b>%1</b>"
 msgstr "Magnitude : <b>%1</b>"
@@ -416,13 +416,13 @@ msgstr ""
 
 #: src/core/modules/StarWrapper.cpp:216
 #: plugins/Supernovae/src/Supernova.cpp:148 plugins/Novae/src/Nova.cpp:153
-#: plugins/Exoplanets/src/Exoplanet.cpp:205
+#: plugins/Exoplanets/src/Exoplanet.cpp:206
 #, qt-format
 msgid "Distance: %1 Light Years"
 msgstr "Distance : %1 années-lumière"
 
 #: src/core/modules/StarWrapper.cpp:221
-#: plugins/Exoplanets/src/Exoplanet.cpp:200
+#: plugins/Exoplanets/src/Exoplanet.cpp:201
 #, qt-format
 msgid "Spectral Type: %1"
 msgstr "Type spectral : %1"
@@ -1226,7 +1226,7 @@ msgstr "Contact"
 #: plugins/Novae/src/gui/NovaeDialog.cpp:111
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:118
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:120
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:128
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:130
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:128
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:255
 msgid "Version"
@@ -1239,7 +1239,7 @@ msgstr "Version"
 #: plugins/Novae/src/gui/NovaeDialog.cpp:112
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:119
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:121
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:129
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:131
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:129
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:256
 msgid "Author"
@@ -1997,8 +1997,8 @@ msgstr "Mode plein écran"
 msgid "Stellarium %1"
 msgstr "Stellarium %1"
 
-#: src/translations.h:33 plugins/Exoplanets/src/Exoplanet.cpp:216
-#: plugins/Exoplanets/src/Exoplanet.cpp:220
+#: src/translations.h:33 plugins/Exoplanets/src/Exoplanet.cpp:217
+#: plugins/Exoplanets/src/Exoplanet.cpp:221
 msgid "Sun"
 msgstr "Soleil"
 
@@ -5029,7 +5029,7 @@ msgstr ""
 #: plugins/Novae/src/gui/NovaeDialog.cpp:128
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:128
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:144
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:135
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:137
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:281
 msgid "Links"
 msgstr "Liens"
@@ -5040,7 +5040,7 @@ msgstr "Liens"
 #: plugins/Novae/src/gui/NovaeDialog.cpp:129
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:129
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:145
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:136
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:138
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:282
 #, qt-format
 msgid ""
@@ -5057,7 +5057,7 @@ msgstr ""
 #: plugins/Novae/src/gui/NovaeDialog.cpp:132
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:132
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:148
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:139
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:141
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:285
 #, qt-format
 msgid "If you have a question, you can %1get an answer here%2"
@@ -5070,7 +5070,7 @@ msgstr "Pour toute question, vous pouvez %1obtenir une réponse ici%2"
 #: plugins/Novae/src/gui/NovaeDialog.cpp:134
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:134
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:150
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:141
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:143
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:287
 #, qt-format
 msgid "Bug reports can be made %1here%2."
@@ -5083,7 +5083,7 @@ msgstr "Les rapports de bogue peuvent être transmis %1ici%2."
 #: plugins/Novae/src/gui/NovaeDialog.cpp:136
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:136
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:152
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:143
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:145
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:289
 msgid ""
 "If you would like to make a feature request, you can create a bug report, "
@@ -5115,7 +5115,7 @@ msgstr "Plugin Goniomètre"
 #: plugins/Novae/src/ui_novaeDialog.h:243
 #: plugins/Quasars/src/ui_quasarsDialog.h:275
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:282
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:319
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:329
 #: plugins/Observability/src/ui_ObservabilityDialog.h:359
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:528
 msgid "Settings"
@@ -5135,7 +5135,7 @@ msgstr "Afficher l'angle de position"
 #: plugins/Novae/src/ui_novaeDialog.h:241
 #: plugins/Quasars/src/ui_quasarsDialog.h:273
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:280
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:317
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:327
 #: plugins/Observability/src/ui_ObservabilityDialog.h:357
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:526
 msgid "Restore default settings"
@@ -5147,7 +5147,7 @@ msgstr "Restaurer les paramètres par défaut"
 #: plugins/Novae/src/ui_novaeDialog.h:242
 #: plugins/Quasars/src/ui_quasarsDialog.h:274
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:281
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:318
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:328
 #: plugins/Observability/src/ui_ObservabilityDialog.h:358
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:527
 msgid "Save settings as default"
@@ -5163,7 +5163,7 @@ msgstr "Enregistrer ces paramètres comme paramètres par défaut"
 #: plugins/Novae/src/ui_novaeDialog.h:244
 #: plugins/Quasars/src/ui_quasarsDialog.h:276
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:283
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:322
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:332
 #: plugins/Observability/src/ui_ObservabilityDialog.h:360
 #: plugins/FOV/src/ui_fovWindow.h:405
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:279
@@ -6081,7 +6081,7 @@ msgstr "Voir %1ce document%2 pour plus d'informations."
 #: plugins/Novae/src/gui/NovaeDialog.cpp:158
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:158
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:174
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:217
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:219
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:303
 msgid "Internet updates disabled"
 msgstr "Mise à jour via Internet désactivée"
@@ -6096,8 +6096,8 @@ msgstr "Mise à jour via Internet désactivée"
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:212
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:176
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:234
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:219
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:275
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:221
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:283
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:305
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:333
 msgid "Updating now..."
@@ -6108,7 +6108,7 @@ msgstr "Mise à jour en cours..."
 #: plugins/Novae/src/gui/NovaeDialog.cpp:162
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:162
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:178
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:221
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:223
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:307
 msgid "Next update: < 1 minute"
 msgstr "Prochaine mise à jour: < 1 minute"
@@ -6118,7 +6118,7 @@ msgstr "Prochaine mise à jour: < 1 minute"
 #: plugins/Novae/src/gui/NovaeDialog.cpp:164
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:164
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:180
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:223
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:225
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:309
 #, qt-format
 msgid "Next update: %1 minutes"
@@ -6129,7 +6129,7 @@ msgstr "Prochaine mise à jour: %1 minutes"
 #: plugins/Novae/src/gui/NovaeDialog.cpp:166
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:166
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:182
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:225
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:227
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:311
 #, qt-format
 msgid "Next update: %1 hours"
@@ -6140,7 +6140,7 @@ msgstr "Prochaine mise à jour: %1 heures"
 #: plugins/Novae/src/gui/NovaeDialog.cpp:197
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:215
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:237
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:278
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:286
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:336
 msgid "Update error"
 msgstr "Erreur lors de la mise à jour"
@@ -6169,8 +6169,8 @@ msgstr "[nouvelle source]"
 #: plugins/Quasars/src/ui_quasarsDialog.h:265
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:199
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:271
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:264
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:305
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:272
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:311
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:324
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:519
 msgid "Update now"
@@ -6181,7 +6181,7 @@ msgstr "Mettre à jour maintenant"
 #: plugins/Novae/src/gui/NovaeDialog.cpp:185
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:185
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:201
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:266
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:274
 msgid "Update from files"
 msgstr "Mettre à jour à partir de fichiers"
 
@@ -6265,7 +6265,7 @@ msgstr "Mettre à jour les données des satellites à partir d'Internet"
 #: plugins/Novae/src/ui_novaeDialog.h:237
 #: plugins/Quasars/src/ui_quasarsDialog.h:262
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:268
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:302
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:308
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:516
 msgid "Last update:"
 msgstr "Dernière mise à jour:"
@@ -6285,7 +6285,7 @@ msgstr ""
 "source(s) sélectionnée(s)"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:688
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:303
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:309
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:517
 msgid "Update frequency (hours):"
 msgstr "Fréquence de mise à jour (heures) :"
@@ -7677,7 +7677,7 @@ msgstr "Mise à jour du catalogue à partir d'internet"
 #: plugins/Novae/src/ui_novaeDialog.h:236
 #: plugins/Quasars/src/ui_quasarsDialog.h:261
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:267
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:301
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:307
 msgid "Update from Internet sources"
 msgstr "Mettre à jour à partir des sources Internet"
 
@@ -7692,7 +7692,7 @@ msgstr "Fréquence de mise à jour (jours) :"
 #: plugins/Novae/src/ui_novaeDialog.h:239
 #: plugins/Quasars/src/ui_quasarsDialog.h:264
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:270
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:304
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:310
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:518
 msgid "[next update info]"
 msgstr "[informations sur la prochaine mise à jour]"
@@ -7880,7 +7880,7 @@ msgstr "Active l'affichage de la distribution pour les quasars"
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:271
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:277
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:315
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:325
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:271
 msgid "Enable display at startup"
 msgstr "Activer l'affichage au démarrage"
@@ -8151,89 +8151,89 @@ msgstr "Afficher les exoplanètes"
 msgid "Exoplanets configuration window"
 msgstr "Fenêtre de configuration des exoplanètes"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:176
+#: plugins/Exoplanets/src/Exoplanet.cpp:177
 msgid "planetary system"
 msgstr "système planétaire"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:212
+#: plugins/Exoplanets/src/Exoplanet.cpp:213
 msgid "Metallicity"
 msgstr "Métallicité"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:216
-#: plugins/Exoplanets/src/Exoplanet.cpp:230
+#: plugins/Exoplanets/src/Exoplanet.cpp:217
+#: plugins/Exoplanets/src/Exoplanet.cpp:231
 msgid "Mass"
 msgstr "Masse"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:220
-#: plugins/Exoplanets/src/Exoplanet.cpp:231
+#: plugins/Exoplanets/src/Exoplanet.cpp:221
+#: plugins/Exoplanets/src/Exoplanet.cpp:232
 msgid "Radius"
 msgstr "Rayon"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:224
+#: plugins/Exoplanets/src/Exoplanet.cpp:225
 #, qt-format
 msgid "Effective temperature: %1 K"
 msgstr "Température effective : %1 K"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:228
+#: plugins/Exoplanets/src/Exoplanet.cpp:229
 msgid "Exoplanet"
 msgstr "Exoplanète"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:229
+#: plugins/Exoplanets/src/Exoplanet.cpp:230
 msgid "Period"
 msgstr "Période"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:229
+#: plugins/Exoplanets/src/Exoplanet.cpp:230
 msgid "days"
 msgstr "jours"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:230
 #: plugins/Exoplanets/src/Exoplanet.cpp:231
+#: plugins/Exoplanets/src/Exoplanet.cpp:232
 msgid "Jup"
 msgstr "Jup"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:232
+#: plugins/Exoplanets/src/Exoplanet.cpp:233
 msgid "Semi-Major Axis"
 msgstr "Demi-grand axe"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:232
+#: plugins/Exoplanets/src/Exoplanet.cpp:233
 msgid "AU"
 msgstr "UA"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:233
+#: plugins/Exoplanets/src/Exoplanet.cpp:234
 msgid "Eccentricity"
 msgstr "Excentricité"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:234
+#: plugins/Exoplanets/src/Exoplanet.cpp:235
 msgid "Inclination"
 msgstr "Inclinaison"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:235
+#: plugins/Exoplanets/src/Exoplanet.cpp:236
 msgid "Angle Distance"
 msgstr "Distance angulaire"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:236
+#: plugins/Exoplanets/src/Exoplanet.cpp:237
 msgid "Discovered year"
 msgstr "Année de découverte"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:237
+#: plugins/Exoplanets/src/Exoplanet.cpp:238
 msgid "Habitable class"
 msgstr "Classe habitable"
 
 #. TRANSLATORS: Full phrase is "Mean Surface Temperature"
-#: plugins/Exoplanets/src/Exoplanet.cpp:239
+#: plugins/Exoplanets/src/Exoplanet.cpp:240
 msgid "Mean surface temp."
 msgstr "Temp. moyenne de surface"
 
 #. TRANSLATORS: ESI = Earth Similarity Index
-#: plugins/Exoplanets/src/Exoplanet.cpp:241
+#: plugins/Exoplanets/src/Exoplanet.cpp:242
 msgid "ESI"
 msgstr "ESI"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:127
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:129
 msgid "Exoplanets Plug-in"
 msgstr "Plugin des exoplanètes"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:131
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:133
 #, qt-format
 msgid ""
 "This plugin plots the position of stars with exoplanets. Exoplanets data is "
@@ -8243,7 +8243,7 @@ msgstr ""
 "données des exoplanètes proviennent de « %1The Extrasolar Planets "
 "Encyclopaedia%2 »."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:132
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:134
 #, qt-format
 msgid ""
 "The list of potential habitable exoplanets and data about them were taken "
@@ -8254,7 +8254,7 @@ msgstr ""
 "relatives sont tirées de « %1The Habitable Exoplanets Catalog%3 », du "
 "%2Planetary Habitability Laboratory%3."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:134
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:136
 #, qt-format
 msgid ""
 "The current catalog contains info about %1 planetary systems, which "
@@ -8266,7 +8266,7 @@ msgstr ""
 "potentiellement habitables)."
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:145
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:147
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:291
 #, qt-format
 msgid ""
@@ -8276,11 +8276,11 @@ msgstr ""
 "Obtenir des %1informations détaillées sur ce plugin%2, son histoire et le "
 "format de son catalogue."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:160
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:162
 msgid "Potential habitable exoplanets"
 msgstr "Exoplanètes potentiellement habitables"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:161
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:163
 msgid ""
 "This plugin can display potential habitable exoplanets (orange marker) and "
 "some information about those planets - habitable class, mean surface "
@@ -8290,11 +8290,11 @@ msgstr ""
 "orange) et des informations sur ces planètes : la classe habitable, la "
 "température moyenne de surface et l'indice de similarité avec la Terre (ESI)."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:162
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:164
 msgid "Habitable Class"
 msgstr "Classe habitable"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:162
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:164
 msgid ""
 "Classifies habitable planets based on temperature: hypopsychroplanets (O or "
 "hP) = very cold (less −50°C); psychroplanets (P) = cold; mesoplanets (M) = "
@@ -8312,11 +8312,11 @@ msgstr ""
 "planètes de classe hP or hT ne pourraient vivre que des extrêmophiles. Les "
 "planètes non-habitables sont simplement classées dans la classe X ou NH."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:163
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:165
 msgid "Mean Surface Temperature"
 msgstr "Température moyenne de surface"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:163
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:165
 msgid ""
 "Temperature in (°C) based on a similar terrestrial atmosphere to planet mass "
 "ratio and a greenhouse effect due to 1 percent of CO2 (assuming an albedo of "
@@ -8326,11 +8326,11 @@ msgstr ""
 "rapport de masse et à un effet de serre causé par une concentration de 1% de "
 "CO2 (et pour un albédo de 0.3 dans tous les cas)."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:164
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:166
 msgid "Earth Similarity Index (ESI)"
 msgstr "Indice de similarité avec la Terre (ESI)"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:164
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:166
 msgid ""
 "Similarity to Earth on a scale from 0 to 1, with 1 being the most Earth-"
 "like. ESI depends on the planet's radius, density, escape velocity, and "
@@ -8341,134 +8341,146 @@ msgstr ""
 "dépend du rayon de la planète, de sa densité, de sa vitesse de libération et "
 "de sa température de surface."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:179
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:181
 msgid "General professional Web sites relevant to extrasolar planets"
 msgstr "Sites web professionnels sur le thème des planètes extrasolaires"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:180
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:182
 msgid "Exoplanets: an interactive version of XKCD 1071"
 msgstr "Exoplanètes : une version interactive de xkcd 1071"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:181
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:183
 msgid "HEK (The Hunt for Exomoons with Kepler)"
 msgstr "HEK (The Hunt for Exomoons with Kepler)"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:182
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:184
 msgid "Exoplanets in binaries and multiple systems (Richard Schwarz)"
 msgstr ""
 "Exoplanètes dans des systèmes binaires et multiples (Richard Schwarz)"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:183
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:185
 msgid "Naming exoplanets (IAU)"
 msgstr "Dénomination des exoplanètes (IAU)"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:184
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:186
 msgid "Some Astronomers and Groups active in extrasolar planets studies"
 msgstr ""
 "Quelques astronomes et groupes actifs dans l'étude des planètes extrasolaires"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:184
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:186
 msgid "update: 16 April 2012"
 msgstr "mise à jour : 16 avril 2012"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:185
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:187
 msgid "The Exoplanet Data Explorer"
 msgstr "L'Explorateur de données des exoplanètes"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:186
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:188
 msgid "The Anglo-Australian Planet Search"
 msgstr "The Anglo-Australian Planet Search"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:187
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:189
 msgid "Geneva Extrasolar Planet Search Programmes"
 msgstr "The Geneva Extrasolar Planet Search Programmes"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:188
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:190
 msgid "OLBIN (Optical Long-Baseline Interferometry News)"
 msgstr "OLBIN (Optical Long-Baseline Interferometry News)"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:189
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:191
 msgid "NASA's Exoplanet Exploration Program"
 msgstr "NASA's Exoplanet Exploration Program"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:190
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:192
 msgid "Pulsar planets"
 msgstr "Planètes de pulsar"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:191
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:193
 msgid "The NASA Exoplanet Archive"
 msgstr "The NASA Exoplanet Archive"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:192
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:194
 msgid "IAU Commission 53: Extrasolar Planets"
 msgstr "Commission 53 de l'UAI : Planètes extrasolaires"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:193
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:195
 msgid "ExoMol"
 msgstr "ExoMol"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:194
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:196
 msgid "The Habitable Zone Gallery"
 msgstr "The Habitable Zone Gallery"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:195
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:197
 msgid "PlanetQuest - The Search for Another Earth"
 msgstr "PlanetQuest - The Search for Another Earth"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:196
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:198
 msgid "Open Exoplanet Catalogue"
 msgstr "Open Exoplanet Catalogue"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:197
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:199
 msgid "The Habitable Exoplanets Catalog"
 msgstr "The Habitable Exoplanets Catalog"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:285
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:293
 msgid "Exoplanets is updated"
 msgstr "Les exoplanètes sont à jour"
 
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:297
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:303
 msgid "Exoplanets Configuration"
 msgstr "Configuration des exoplanètes"
 
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:298
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:304
 msgid "Exoplanets Plug-in Configuration"
 msgstr "Plugin Exoplanètes"
 
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:300
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:306
 msgid "Update exoplanets data from Internet"
 msgstr "Mettre à jour les données des exoplanètes depuis Internet"
 
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:306
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:312
 msgid "Settings for exoplanets"
 msgstr "Réglages pour exoplanètes"
 
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:308
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:314
 msgid "Plot all systems with exoplanets without labels"
 msgstr "Affichage de tous les systèmes avec exoplanètes, sans les noms"
 
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:310
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:316
 msgid "Enable display of distribution for exoplanets"
 msgstr "Afficher la distribution des exoplanètes"
 
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:312
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:318
 msgid "Display exoplanets since their discovery"
 msgstr "Affiche les exoplanètes à partir de leur date de découverte"
 
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:314
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:320
 msgid "Enable timeline discovery of exoplanets"
 msgstr "Afficher les exoplanètes selon leur date de découverte"
 
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:316
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:322
+msgid ""
+"Display of the planetary systems, which contains the potential habitable "
+"exoplanets"
+msgstr ""
+"Affichage des systèmes planétaires qui contiennent des exoplanètes "
+"potentiellement habitables"
+
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:324
+msgid "Enable display of the potential habitable exoplanets only"
+msgstr "N'activer l'affichage que des exoplanètes potentiellement habitables"
+
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:326
 msgid "Show exoplanets button on toolbar"
 msgstr "Afficher le bouton exoplanètes dans la barre d'outils"
 
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:320
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:330
 msgctxt "tab in plugin windows"
 msgid "Info"
 msgstr "Infos"
 
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:321
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:331
 msgctxt "tab in plugin windows"
 msgid "Websites"
 msgstr "Sites web"
@@ -9076,6 +9088,8 @@ msgid ""
 "This plugin displays meteor showers and a marker for each active and "
 "inactive radiant, showing real information about its activity."
 msgstr ""
+"Ce plugin affiche les pluies de météores avec un marqueur pour chaque "
+"radiant actif ou inactif, et donne des informations sur leur activité."
 
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:172
 msgid "Show meteor showers"
@@ -9274,95 +9288,235 @@ msgstr "Andromédides"
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1306
 msgid "η-Lyrids"
-msgstr ""
+msgstr "η-lyrides"
 
-#. TRANSLATORS: Name of parent object for meteor shower
+#. TRANSLATORS: Name of meteor shower
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1308
+msgid "α–Scorpiids"
+msgstr "α–scorpiides"
+
+#. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1310
-msgid "Minor planet 2003 EH1 and Comet C/1490 Y1"
-msgstr "Astéroïde 2003 EH1 et comète C/1490 Y1"
+msgid "Ophiuchids"
+msgstr "Ophiuchides"
+
+#. TRANSLATORS: Name of meteor shower
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1312
+msgid "θ-Ophiuchids"
+msgstr "θ-ophiuchides"
+
+#. TRANSLATORS: Name of meteor shower
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1314
+msgid "κ-Serpentids"
+msgstr "κ-serpentides"
+
+#. TRANSLATORS: Name of meteor shower
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1316
+msgid "θ-Centaurids"
+msgstr "θ-centaurides"
+
+#. TRANSLATORS: Name of meteor shower
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1318
+msgid "ω-Cetids"
+msgstr "ω-cétides"
+
+#. TRANSLATORS: Name of meteor shower
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1320
+msgid "Southern ω-Scorpiids"
+msgstr "ω-scorpiides du Sud"
+
+#. TRANSLATORS: Name of meteor shower
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1322
+msgid "Northern ω-Scorpiids"
+msgstr "ω-scorpiides du Nord"
+
+#. TRANSLATORS: Name of meteor shower
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1324
+msgid "Arietids"
+msgstr "Ariétides"
+
+#. TRANSLATORS: Name of meteor shower
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1326
+msgid "π-Cetids"
+msgstr "π-Cétides"
+
+#. TRANSLATORS: Name of meteor shower
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1328
+msgid "δ-Cancrids"
+msgstr "δ-cancrides"
+
+#. TRANSLATORS: Name of meteor shower
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1330
+msgid "τ-Herculids"
+msgstr "τ-herculides"
+
+#. TRANSLATORS: Name of meteor shower
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1332
+msgid "ρ-Geminids"
+msgstr "ρ-géminides"
+
+#. TRANSLATORS: Name of meteor shower
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1334
+msgid "η-Carinids"
+msgstr "η-carinides"
+
+#. TRANSLATORS: Name of meteor shower
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1336
+msgid "η-Craterids"
+msgstr "η-cratérides"
+
+#. TRANSLATORS: Name of meteor shower
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1338
+msgid "π-Virginids"
+msgstr "π-virginides"
+
+#. TRANSLATORS: Name of meteor shower
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1340
+msgid "θ-Virginids"
+msgstr "θ-virginides"
+
+#. TRANSLATORS: Name of meteor shower
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1342
+msgid "May Librids"
+msgstr "Librides de mai"
+
+#. TRANSLATORS: Name of meteor shower
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1344
+msgid "June Scutids"
+msgstr "Scutides de juin"
+
+#. TRANSLATORS: Name of meteor shower
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1346
+msgid "α-Pisces Australids"
+msgstr "α-pisces australides"
+
+#. TRANSLATORS: Name of meteor shower
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1348
+msgid "Southern ι-Aquariids"
+msgstr "ι-aquariides du Sud"
+
+#. TRANSLATORS: Name of meteor shower
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1350
+msgid "Northern ι-Aquariids"
+msgstr "ι-aquariides du Nord"
+
+#. TRANSLATORS: Name of meteor shower
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1352
+msgid "γ-Aquariids"
+msgstr "γ-aquariides"
+
+#. TRANSLATORS: Name of meteor shower
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1354
+msgid "Autumn Arietids"
+msgstr "Ariétides d'automne"
+
+#. TRANSLATORS: Name of meteor shower
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1356
+msgid "χ-Orionids"
+msgstr "χ-orionides"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1312
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1360
 msgid "Comet 1P/Halley"
 msgstr "Comète 1P/Halley"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1314
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1362
 msgid "Comet 7P/Pons-Winnecke"
 msgstr "Comète 7P/Pons-Winnecke"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1316
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1364
 msgid "Comet 55P/Tempel-Tuttle"
 msgstr "Comète 55P/Tempel-Tuttle"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1318
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1366
 msgid "Comet 96P/Machholz"
 msgstr "Comète 96P/Machholz"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1320
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1368
 msgid "Comet 109P/Swift-Tuttle"
 msgstr "Comète 109P/Swift-Tuttle"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1322
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1370
 msgid "Comet Thatcher (1861 I)"
 msgstr "Comète Thatcher (1861 I)"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1324
-msgid "Minor planet (4450) Pan"
-msgstr "Astéroïde (4450) Pan"
-
-#. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1326
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1372
 msgid "Comet 26P/Grigg-Skjellerup"
 msgstr "Comète 26P/Grigg-Skjellerup"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1328
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1374
 msgid "Comet 21P/Giacobini-Zinner"
 msgstr "Comète 21P/Giacobini-Zinner"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1330
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1376
 msgid "Comet 169P/NEAT"
 msgstr "Comète 169P/NEAT"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1332
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1378
 msgid "Comet 289P/Blanpain"
 msgstr "Comète 289P/Blanpain"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1334
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1380
 msgid "Comet 8P/Tuttle"
 msgstr "Comète 8P/Tuttle"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1336
-msgid "Minor planet 2008 ED69"
-msgstr "Astéroïde 2008 ED69"
-
-#. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1338
-msgid "Comet 2P/Encke"
-msgstr "Comète 2P/Encke"
-
-#. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1340
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1382
 msgid "Comet 3D/Biela"
 msgstr "Comète 3D/Biela"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1342
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1384
+msgid "Comet C/1917 F1 (Mellish)"
+msgstr "Comète C/1917 F1 (Mellish)"
+
+#. TRANSLATORS: Name of parent object for meteor shower
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1386
+msgid "Comet C/1964 N1 (Ikeya)"
+msgstr "Comète C/1964 N1 (Ikeya)"
+
+#. TRANSLATORS: Name of parent object for meteor shower
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1388
+msgid "Comet Schwassmann-Wachmann 3"
+msgstr "Comète Schwassmann-Wachmann 3"
+
+#. TRANSLATORS: Name of parent object for meteor shower
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1390
+msgid "Minor planet 2003 EH1 and Comet C/1490 Y1"
+msgstr "Astéroïde 2003 EH1 et comète C/1490 Y1"
+
+#. TRANSLATORS: Name of parent object for meteor shower
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1392
+msgid "Minor planet (4450) Pan"
+msgstr "Astéroïde (4450) Pan"
+
+#. TRANSLATORS: Name of parent object for meteor shower
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1394
+msgid "Minor planet 2008 ED69"
+msgstr "Astéroïde 2008 ED69"
+
+#. TRANSLATORS: Name of parent object for meteor shower
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1396
+msgid "Comet 2P/Encke"
+msgstr "Comète 2P/Encke"
+
+#. TRANSLATORS: Name of parent object for meteor shower
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1398
 msgid "Minor planet 2004 TG10"
 msgstr "Astéroïde 2004 TG10"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1344
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1400
 msgid "Minor planet (3200) Phaethon"
 msgstr "Astéroïde (3200) Phaethon"
 
@@ -9382,39 +9536,39 @@ msgstr "Pluie de météores"
 msgid "Radiant drift (per day)"
 msgstr "Dérive du radiant (par jour)"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:329
+#: plugins/MeteorShowers/src/MeteorShower.cpp:331
 #, qt-format
 msgid "Geocentric meteoric velocity: %1 km/s"
 msgstr "Vitesse météoritique géocentrique : %1 km/s"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:332
+#: plugins/MeteorShowers/src/MeteorShower.cpp:336
 #, qt-format
 msgid "The population index: %1"
 msgstr "Index de population : %1"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:337
+#: plugins/MeteorShowers/src/MeteorShower.cpp:341
 #, qt-format
 msgid "Parent body: %1"
 msgstr "Corps parent : %1"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:343
+#: plugins/MeteorShowers/src/MeteorShower.cpp:347
 msgid "Active"
 msgstr "Active"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:351
+#: plugins/MeteorShowers/src/MeteorShower.cpp:355
 msgid "Activity"
 msgstr "Activité"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:356
+#: plugins/MeteorShowers/src/MeteorShower.cpp:360
 #, qt-format
 msgid "Maximum: %1"
 msgstr "Maximum : %1"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:359
+#: plugins/MeteorShowers/src/MeteorShower.cpp:363
 msgid "Solar longitude is"
 msgstr "Longitude solaire"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:368
+#: plugins/MeteorShowers/src/MeteorShower.cpp:372
 msgid "variable"
 msgstr "variable"
 
@@ -10409,12 +10563,3 @@ msgstr "Recherche"
 #~ "Ce plugin marque les 58 étoiles du catalogue  2102-D Rude Star Finder, "
 #~ "utilisées pour la navigation astronomique. Ces étoiles figurent également "
 #~ "dans l'almanac nautique."
-
-#~ msgid ""
-#~ "This plugin give visualization of the meteor showers, show information about "
-#~ "meteor showers and displays marker for radiants in activity range for each "
-#~ "meteor showers."
-#~ msgstr ""
-#~ "Ce plugin permet la visualisation des pluies de météores, donne des "
-#~ "informations à leur propos et affiche les marques du radiant de chaque pluie "
-#~ "de météores durant leur période d'activité."

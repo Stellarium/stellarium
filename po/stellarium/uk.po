@@ -9,14 +9,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium-uk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-04-26 00:22+0700\n"
-"PO-Revision-Date: 2014-04-25 17:25+0000\n"
+"POT-Creation-Date: 2014-04-26 16:57+0700\n"
+"PO-Revision-Date: 2014-04-26 18:51+0000\n"
 "Last-Translator: Yuri Chornoivan <yurchor@gmail.com>\n"
 "Language-Team: Ukrainian <translation@linux.org.ua>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-04-26 05:46+0000\n"
+"X-Launchpad-Export-Date: 2014-04-27 05:52+0000\n"
 "X-Generator: Launchpad (build 16985)\n"
 "X-Poedit-Country: UKRAINE\n"
 "Language: uk\n"
@@ -169,7 +169,7 @@ msgstr "Планета: "
 #: src/core/modules/StarWrapper.cpp:173
 #: plugins/Satellites/src/Satellite.cpp:252
 #: plugins/Supernovae/src/Supernova.cpp:130 plugins/Quasars/src/Quasar.cpp:100
-#: plugins/Pulsars/src/Pulsar.cpp:157 plugins/Exoplanets/src/Exoplanet.cpp:176
+#: plugins/Pulsars/src/Pulsar.cpp:157 plugins/Exoplanets/src/Exoplanet.cpp:177
 #, qt-format
 msgid "Type: <b>%1</b>"
 msgstr "Тип: <b>%1</b>"
@@ -178,7 +178,7 @@ msgstr "Тип: <b>%1</b>"
 #: src/core/modules/MinorPlanet.cpp:221 src/core/modules/Comet.cpp:160
 #: src/core/modules/StarWrapper.cpp:56 src/core/modules/StarWrapper.cpp:180
 #: plugins/Supernovae/src/Supernova.cpp:135 plugins/Novae/src/Nova.cpp:140
-#: plugins/Quasars/src/Quasar.cpp:106 plugins/Exoplanets/src/Exoplanet.cpp:185
+#: plugins/Quasars/src/Quasar.cpp:106 plugins/Exoplanets/src/Exoplanet.cpp:186
 #, qt-format
 msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>)"
 msgstr "Величина: <b>%1</b> (зменшилася до <b>%2</b>)"
@@ -192,7 +192,7 @@ msgstr "Яскравість поверхні: <b>%1</b> (притлумлено
 #: src/core/modules/MinorPlanet.cpp:224 src/core/modules/Comet.cpp:163
 #: src/core/modules/StarWrapper.cpp:60 src/core/modules/StarWrapper.cpp:183
 #: plugins/Supernovae/src/Supernova.cpp:137 plugins/Novae/src/Nova.cpp:143
-#: plugins/Quasars/src/Quasar.cpp:111 plugins/Exoplanets/src/Exoplanet.cpp:190
+#: plugins/Quasars/src/Quasar.cpp:111 plugins/Exoplanets/src/Exoplanet.cpp:191
 #, qt-format
 msgid "Magnitude: <b>%1</b>"
 msgstr "Величина: <b>%1</b>"
@@ -411,13 +411,13 @@ msgstr ""
 
 #: src/core/modules/StarWrapper.cpp:216
 #: plugins/Supernovae/src/Supernova.cpp:148 plugins/Novae/src/Nova.cpp:153
-#: plugins/Exoplanets/src/Exoplanet.cpp:205
+#: plugins/Exoplanets/src/Exoplanet.cpp:206
 #, qt-format
 msgid "Distance: %1 Light Years"
 msgstr "Відстань: %1 світлових років"
 
 #: src/core/modules/StarWrapper.cpp:221
-#: plugins/Exoplanets/src/Exoplanet.cpp:200
+#: plugins/Exoplanets/src/Exoplanet.cpp:201
 #, qt-format
 msgid "Spectral Type: %1"
 msgstr "Спектральний тип: %1"
@@ -1229,7 +1229,7 @@ msgstr "Контакти"
 #: plugins/Novae/src/gui/NovaeDialog.cpp:111
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:118
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:120
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:128
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:130
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:128
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:255
 msgid "Version"
@@ -1242,7 +1242,7 @@ msgstr "Версія"
 #: plugins/Novae/src/gui/NovaeDialog.cpp:112
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:119
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:121
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:129
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:131
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:129
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:256
 msgid "Author"
@@ -1993,8 +1993,8 @@ msgstr "Повноекранний режим"
 msgid "Stellarium %1"
 msgstr "Stellarium %1"
 
-#: src/translations.h:33 plugins/Exoplanets/src/Exoplanet.cpp:216
-#: plugins/Exoplanets/src/Exoplanet.cpp:220
+#: src/translations.h:33 plugins/Exoplanets/src/Exoplanet.cpp:217
+#: plugins/Exoplanets/src/Exoplanet.cpp:221
 msgid "Sun"
 msgstr "Сонце"
 
@@ -5018,7 +5018,7 @@ msgstr ""
 #: plugins/Novae/src/gui/NovaeDialog.cpp:128
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:128
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:144
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:135
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:137
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:281
 msgid "Links"
 msgstr "Посилання"
@@ -5029,7 +5029,7 @@ msgstr "Посилання"
 #: plugins/Novae/src/gui/NovaeDialog.cpp:129
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:129
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:145
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:136
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:138
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:282
 #, qt-format
 msgid ""
@@ -5046,7 +5046,7 @@ msgstr ""
 #: plugins/Novae/src/gui/NovaeDialog.cpp:132
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:132
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:148
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:139
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:141
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:285
 #, qt-format
 msgid "If you have a question, you can %1get an answer here%2"
@@ -5059,7 +5059,7 @@ msgstr "Якщо у вас виникло питання, ви можете от
 #: plugins/Novae/src/gui/NovaeDialog.cpp:134
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:134
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:150
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:141
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:143
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:287
 #, qt-format
 msgid "Bug reports can be made %1here%2."
@@ -5072,7 +5072,7 @@ msgstr "Повідомити про помилки можна %1тут%2."
 #: plugins/Novae/src/gui/NovaeDialog.cpp:136
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:136
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:152
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:143
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:145
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:289
 msgid ""
 "If you would like to make a feature request, you can create a bug report, "
@@ -5106,7 +5106,7 @@ msgstr "Налаштування додатка вимірювання куті�
 #: plugins/Novae/src/ui_novaeDialog.h:243
 #: plugins/Quasars/src/ui_quasarsDialog.h:275
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:282
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:319
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:329
 #: plugins/Observability/src/ui_ObservabilityDialog.h:359
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:528
 msgid "Settings"
@@ -5126,7 +5126,7 @@ msgstr "Показувати кут розташування"
 #: plugins/Novae/src/ui_novaeDialog.h:241
 #: plugins/Quasars/src/ui_quasarsDialog.h:273
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:280
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:317
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:327
 #: plugins/Observability/src/ui_ObservabilityDialog.h:357
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:526
 msgid "Restore default settings"
@@ -5138,7 +5138,7 @@ msgstr "Відновити параметри"
 #: plugins/Novae/src/ui_novaeDialog.h:242
 #: plugins/Quasars/src/ui_quasarsDialog.h:274
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:281
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:318
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:328
 #: plugins/Observability/src/ui_ObservabilityDialog.h:358
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:527
 msgid "Save settings as default"
@@ -5154,7 +5154,7 @@ msgstr "Зберегти параметри як типові"
 #: plugins/Novae/src/ui_novaeDialog.h:244
 #: plugins/Quasars/src/ui_quasarsDialog.h:276
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:283
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:322
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:332
 #: plugins/Observability/src/ui_ObservabilityDialog.h:360
 #: plugins/FOV/src/ui_fovWindow.h:405
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:279
@@ -6071,7 +6071,7 @@ msgstr "Докладніше про це можна дізнатися з %1до
 #: plugins/Novae/src/gui/NovaeDialog.cpp:158
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:158
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:174
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:217
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:219
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:303
 msgid "Internet updates disabled"
 msgstr "Оновлення за допомогою інтернету вимкнено"
@@ -6086,8 +6086,8 @@ msgstr "Оновлення за допомогою інтернету вимкн
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:212
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:176
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:234
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:219
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:275
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:221
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:283
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:305
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:333
 msgid "Updating now..."
@@ -6098,7 +6098,7 @@ msgstr "Оновлення…"
 #: plugins/Novae/src/gui/NovaeDialog.cpp:162
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:162
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:178
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:221
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:223
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:307
 msgid "Next update: < 1 minute"
 msgstr "До наступного оновлення менше хвилини"
@@ -6108,7 +6108,7 @@ msgstr "До наступного оновлення менше хвилини"
 #: plugins/Novae/src/gui/NovaeDialog.cpp:164
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:164
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:180
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:223
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:225
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:309
 #, qt-format
 msgid "Next update: %1 minutes"
@@ -6119,7 +6119,7 @@ msgstr "Наступне оновлення за %1 хв."
 #: plugins/Novae/src/gui/NovaeDialog.cpp:166
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:166
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:182
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:225
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:227
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:311
 #, qt-format
 msgid "Next update: %1 hours"
@@ -6130,7 +6130,7 @@ msgstr "Наступне оновлення за %1 год."
 #: plugins/Novae/src/gui/NovaeDialog.cpp:197
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:215
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:237
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:278
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:286
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:336
 msgid "Update error"
 msgstr "Помилка оновлення"
@@ -6159,8 +6159,8 @@ msgstr "[нове джерело]"
 #: plugins/Quasars/src/ui_quasarsDialog.h:265
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:199
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:271
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:264
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:305
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:272
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:311
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:324
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:519
 msgid "Update now"
@@ -6171,7 +6171,7 @@ msgstr "Оновити зараз"
 #: plugins/Novae/src/gui/NovaeDialog.cpp:185
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:185
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:201
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:266
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:274
 msgid "Update from files"
 msgstr "Оновити з файлів"
 
@@ -6254,7 +6254,7 @@ msgstr "Оновити дані щодо супутників з інтерне�
 #: plugins/Novae/src/ui_novaeDialog.h:237
 #: plugins/Quasars/src/ui_quasarsDialog.h:262
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:268
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:302
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:308
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:516
 msgid "Last update:"
 msgstr "Попереднє оновлення:"
@@ -6273,7 +6273,7 @@ msgstr ""
 "джерел оновлення"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:688
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:303
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:309
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:517
 msgid "Update frequency (hours):"
 msgstr "Частота оновлення (у годинах):"
@@ -7657,7 +7657,7 @@ msgstr "Оновити дані за допомогою інтернету"
 #: plugins/Novae/src/ui_novaeDialog.h:236
 #: plugins/Quasars/src/ui_quasarsDialog.h:261
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:267
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:301
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:307
 msgid "Update from Internet sources"
 msgstr "Оновити з джерел у інтернеті"
 
@@ -7672,7 +7672,7 @@ msgstr "Частота оновлення (у днях):"
 #: plugins/Novae/src/ui_novaeDialog.h:239
 #: plugins/Quasars/src/ui_quasarsDialog.h:264
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:270
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:304
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:310
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:518
 msgid "[next update info]"
 msgstr "[дані щодо наступного оновлення]"
@@ -7863,7 +7863,7 @@ msgstr "Увімкнути показ розподілу квазарів"
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:271
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:277
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:315
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:325
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:271
 msgid "Enable display at startup"
 msgstr "Увімкнути показ під час запуску"
@@ -8132,89 +8132,89 @@ msgstr "Показувати екзопланети"
 msgid "Exoplanets configuration window"
 msgstr "Вікно налаштовування показу екзопланет"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:176
+#: plugins/Exoplanets/src/Exoplanet.cpp:177
 msgid "planetary system"
 msgstr "планетна система"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:212
+#: plugins/Exoplanets/src/Exoplanet.cpp:213
 msgid "Metallicity"
 msgstr "Металічність"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:216
-#: plugins/Exoplanets/src/Exoplanet.cpp:230
+#: plugins/Exoplanets/src/Exoplanet.cpp:217
+#: plugins/Exoplanets/src/Exoplanet.cpp:231
 msgid "Mass"
 msgstr "Маса"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:220
-#: plugins/Exoplanets/src/Exoplanet.cpp:231
+#: plugins/Exoplanets/src/Exoplanet.cpp:221
+#: plugins/Exoplanets/src/Exoplanet.cpp:232
 msgid "Radius"
 msgstr "Радіус"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:224
+#: plugins/Exoplanets/src/Exoplanet.cpp:225
 #, qt-format
 msgid "Effective temperature: %1 K"
 msgstr "Ефективна температура: %1 K"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:228
+#: plugins/Exoplanets/src/Exoplanet.cpp:229
 msgid "Exoplanet"
 msgstr "Екзопланета"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:229
+#: plugins/Exoplanets/src/Exoplanet.cpp:230
 msgid "Period"
 msgstr "Період"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:229
+#: plugins/Exoplanets/src/Exoplanet.cpp:230
 msgid "days"
 msgstr "днів"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:230
 #: plugins/Exoplanets/src/Exoplanet.cpp:231
+#: plugins/Exoplanets/src/Exoplanet.cpp:232
 msgid "Jup"
 msgstr "Юп"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:232
+#: plugins/Exoplanets/src/Exoplanet.cpp:233
 msgid "Semi-Major Axis"
 msgstr "Велика піввісь"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:232
+#: plugins/Exoplanets/src/Exoplanet.cpp:233
 msgid "AU"
 msgstr "АО"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:233
+#: plugins/Exoplanets/src/Exoplanet.cpp:234
 msgid "Eccentricity"
 msgstr "Ексцентриситет"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:234
+#: plugins/Exoplanets/src/Exoplanet.cpp:235
 msgid "Inclination"
 msgstr "Нахил орбіти"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:235
+#: plugins/Exoplanets/src/Exoplanet.cpp:236
 msgid "Angle Distance"
 msgstr "Кутова відстань"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:236
+#: plugins/Exoplanets/src/Exoplanet.cpp:237
 msgid "Discovered year"
 msgstr "Рік відкриття"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:237
+#: plugins/Exoplanets/src/Exoplanet.cpp:238
 msgid "Habitable class"
 msgstr "Клас придатних до заселення"
 
 #. TRANSLATORS: Full phrase is "Mean Surface Temperature"
-#: plugins/Exoplanets/src/Exoplanet.cpp:239
+#: plugins/Exoplanets/src/Exoplanet.cpp:240
 msgid "Mean surface temp."
 msgstr "Середня температура на поверхні"
 
 #. TRANSLATORS: ESI = Earth Similarity Index
-#: plugins/Exoplanets/src/Exoplanet.cpp:241
+#: plugins/Exoplanets/src/Exoplanet.cpp:242
 msgid "ESI"
 msgstr "ESI"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:127
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:129
 msgid "Exoplanets Plug-in"
 msgstr "Додаток екзопланет"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:131
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:133
 #, qt-format
 msgid ""
 "This plugin plots the position of stars with exoplanets. Exoplanets data is "
@@ -8224,7 +8224,7 @@ msgstr ""
 "екзопланетами. Дані екзопланет отримано на основі «%1The Extrasolar Planets "
 "Encyclopaedia%2»."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:132
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:134
 #, qt-format
 msgid ""
 "The list of potential habitable exoplanets and data about them were taken "
@@ -8235,7 +8235,7 @@ msgstr ""
 "запозичено з «%1Каталогу придатних до заселення екзопланет%3», створеного "
 "%2Лабораторією дослідження придатних до заселення планет%3."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:134
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:136
 #, qt-format
 msgid ""
 "The current catalog contains info about %1 planetary systems, which "
@@ -8247,7 +8247,7 @@ msgstr ""
 "екзопланет)."
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:145
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:147
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:291
 #, qt-format
 msgid ""
@@ -8257,11 +8257,11 @@ msgstr ""
 "Якщо ви хочете ознайомитися з докладною інформацією щодо цього додатка, його "
 "історії та формату каталогу, ви можете %1відвідати цю сторінку%2."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:160
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:162
 msgid "Potential habitable exoplanets"
 msgstr "Потенційно придатні до заселення екзопланети"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:161
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:163
 msgid ""
 "This plugin can display potential habitable exoplanets (orange marker) and "
 "some information about those planets - habitable class, mean surface "
@@ -8272,11 +8272,11 @@ msgstr ""
 "придатності до заселення, середню температуру на поверхні та індекс "
 "подібності до Землі."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:162
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:164
 msgid "Habitable Class"
 msgstr "Клас придатності до заселення"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:162
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:164
 msgid ""
 "Classifies habitable planets based on temperature: hypopsychroplanets (O or "
 "hP) = very cold (less −50°C); psychroplanets (P) = cold; mesoplanets (M) = "
@@ -8293,11 +8293,11 @@ msgstr ""
 "або E можуть підтримувати життя лише витривалих до екстремальних температур "
 "форм життя. Планети, непридатні до заселення, належать до класу X (або NH)."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:163
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:165
 msgid "Mean Surface Temperature"
 msgstr "Середня температура поверхні"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:163
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:165
 msgid ""
 "Temperature in (°C) based on a similar terrestrial atmosphere to planet mass "
 "ratio and a greenhouse effect due to 1 percent of CO2 (assuming an albedo of "
@@ -8308,11 +8308,11 @@ msgstr ""
 "тепличного ефекту, спричиненого 1 відсотком CO₂ (у всіх випадках "
 "припускається альбедо рівне 0,3)."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:164
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:166
 msgid "Earth Similarity Index (ESI)"
 msgstr "Індекс подібності до Землі (ESI)"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:164
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:166
 msgid ""
 "Similarity to Earth on a scale from 0 to 1, with 1 being the most Earth-"
 "like. ESI depends on the planet's radius, density, escape velocity, and "
@@ -8322,137 +8322,149 @@ msgstr ""
 "Землі. ESI залежить від радіуса планети, її щільності, другої космічної "
 "швидкості та температури на поверхні."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:179
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:181
 msgid "General professional Web sites relevant to extrasolar planets"
 msgstr ""
 "Загальні професійні сайти, тематику яких пов’язано з позасонячними планетами"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:180
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:182
 msgid "Exoplanets: an interactive version of XKCD 1071"
 msgstr "Екзопланети: інтерактивна версія XKCD 1071"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:181
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:183
 msgid "HEK (The Hunt for Exomoons with Kepler)"
 msgstr ""
 "HEK (The Hunt for Exomoons with Kepler або полювання за екзосупутниками з "
 "Кеплером)"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:182
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:184
 msgid "Exoplanets in binaries and multiple systems (Richard Schwarz)"
 msgstr "Екзопланети у подвійних і кратних системах (Richard Schwarz)"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:183
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:185
 msgid "Naming exoplanets (IAU)"
 msgstr "Найменування екзопланет (IAU)"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:184
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:186
 msgid "Some Astronomers and Groups active in extrasolar planets studies"
 msgstr ""
 "Деякі астрономи та групи астрономів, які є активними у вивченні позасонячних "
 "планет"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:184
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:186
 msgid "update: 16 April 2012"
 msgstr "оновлення: 16 квітня 2012 року"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:185
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:187
 msgid "The Exoplanet Data Explorer"
 msgstr "Навігатор даними щодо екзопланет"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:186
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:188
 msgid "The Anglo-Australian Planet Search"
 msgstr "Англо-австралійський пошук планет"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:187
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:189
 msgid "Geneva Extrasolar Planet Search Programmes"
 msgstr "Женевські програми пошуку позасонячних планет"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:188
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:190
 msgid "OLBIN (Optical Long-Baseline Interferometry News)"
 msgstr "OLBIN (Optical Long-Baseline Interferometry News)"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:189
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:191
 msgid "NASA's Exoplanet Exploration Program"
 msgstr "Програма вивчення екзопланет НАСА"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:190
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:192
 msgid "Pulsar planets"
 msgstr "Планети пульсарів"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:191
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:193
 msgid "The NASA Exoplanet Archive"
 msgstr "Архів екзопланет НАСА"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:192
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:194
 msgid "IAU Commission 53: Extrasolar Planets"
 msgstr "Комісія 53 МАС: екзопланети"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:193
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:195
 msgid "ExoMol"
 msgstr "ExoMol"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:194
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:196
 msgid "The Habitable Zone Gallery"
 msgstr "Галерея придатних до поселення зон"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:195
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:197
 msgid "PlanetQuest - The Search for Another Earth"
 msgstr "PlanetQuest — пошук інших Земель"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:196
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:198
 msgid "Open Exoplanet Catalogue"
 msgstr "Відкритий каталог екзопланет"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:197
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:199
 msgid "The Habitable Exoplanets Catalog"
 msgstr "Каталог придатних для життя екзопланет"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:285
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:293
 msgid "Exoplanets is updated"
 msgstr "Дані екзопланет оновлено"
 
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:297
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:303
 msgid "Exoplanets Configuration"
 msgstr "Налаштовування показу екзопланет"
 
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:298
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:304
 msgid "Exoplanets Plug-in Configuration"
 msgstr "Налаштовування додатка екзопланет"
 
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:300
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:306
 msgid "Update exoplanets data from Internet"
 msgstr "Оновити дані щодо екзопланет з інтернету"
 
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:306
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:312
 msgid "Settings for exoplanets"
 msgstr "Параметри показу екзопланет"
 
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:308
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:314
 msgid "Plot all systems with exoplanets without labels"
 msgstr "Показувати всі системи з екзопланетами без міток"
 
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:310
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:316
 msgid "Enable display of distribution for exoplanets"
 msgstr "Увімкнути показ розподілу екзопланет"
 
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:312
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:318
 msgid "Display exoplanets since their discovery"
 msgstr "Показувати екзопланети за часом відкриття"
 
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:314
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:320
 msgid "Enable timeline discovery of exoplanets"
 msgstr "Увімкнути часову шкалу показу екзопланет"
 
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:316
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:322
+msgid ""
+"Display of the planetary systems, which contains the potential habitable "
+"exoplanets"
+msgstr ""
+"Показ планетарних систем, які містять потенційно придатні до заселення "
+"екзопланети"
+
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:324
+msgid "Enable display of the potential habitable exoplanets only"
+msgstr "Увімкнути показ лише потенційно придатних до заселення екзопланет"
+
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:326
 msgid "Show exoplanets button on toolbar"
 msgstr "Показувати кнопку екзопланет на панелі"
 
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:320
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:330
 msgctxt "tab in plugin windows"
 msgid "Info"
 msgstr "Відомості"
 
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:321
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:331
 msgctxt "tab in plugin windows"
 msgid "Websites"
 msgstr "Сайти"
@@ -9261,93 +9273,233 @@ msgstr "Андромедиди"
 msgid "η-Lyrids"
 msgstr "η-ліриди"
 
-#. TRANSLATORS: Name of parent object for meteor shower
+#. TRANSLATORS: Name of meteor shower
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1308
+msgid "α–Scorpiids"
+msgstr "α–скорпіїди"
+
+#. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1310
-msgid "Minor planet 2003 EH1 and Comet C/1490 Y1"
-msgstr "Мала планета 2003 EH1 і комета C/1490 Y1"
+msgid "Ophiuchids"
+msgstr "Офіухіди"
+
+#. TRANSLATORS: Name of meteor shower
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1312
+msgid "θ-Ophiuchids"
+msgstr "θ-офіухіди"
+
+#. TRANSLATORS: Name of meteor shower
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1314
+msgid "κ-Serpentids"
+msgstr "κ-серпентиди"
+
+#. TRANSLATORS: Name of meteor shower
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1316
+msgid "θ-Centaurids"
+msgstr "θ-центравриди"
+
+#. TRANSLATORS: Name of meteor shower
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1318
+msgid "ω-Cetids"
+msgstr "ω-цетиди"
+
+#. TRANSLATORS: Name of meteor shower
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1320
+msgid "Southern ω-Scorpiids"
+msgstr "Південні ω-скорпіїди"
+
+#. TRANSLATORS: Name of meteor shower
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1322
+msgid "Northern ω-Scorpiids"
+msgstr "Північні ω-скорпіїди"
+
+#. TRANSLATORS: Name of meteor shower
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1324
+msgid "Arietids"
+msgstr "Арієтиди"
+
+#. TRANSLATORS: Name of meteor shower
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1326
+msgid "π-Cetids"
+msgstr "π-цетиди"
+
+#. TRANSLATORS: Name of meteor shower
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1328
+msgid "δ-Cancrids"
+msgstr "δ-канкріди"
+
+#. TRANSLATORS: Name of meteor shower
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1330
+msgid "τ-Herculids"
+msgstr "τ-геркуліди"
+
+#. TRANSLATORS: Name of meteor shower
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1332
+msgid "ρ-Geminids"
+msgstr "ρ-гемініди"
+
+#. TRANSLATORS: Name of meteor shower
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1334
+msgid "η-Carinids"
+msgstr "η-карініди"
+
+#. TRANSLATORS: Name of meteor shower
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1336
+msgid "η-Craterids"
+msgstr "η-кратериди"
+
+#. TRANSLATORS: Name of meteor shower
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1338
+msgid "π-Virginids"
+msgstr "π-віргініди"
+
+#. TRANSLATORS: Name of meteor shower
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1340
+msgid "θ-Virginids"
+msgstr "θ-віргініди"
+
+#. TRANSLATORS: Name of meteor shower
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1342
+msgid "May Librids"
+msgstr "Травневі лібриди"
+
+#. TRANSLATORS: Name of meteor shower
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1344
+msgid "June Scutids"
+msgstr "Червневі скутиди"
+
+#. TRANSLATORS: Name of meteor shower
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1346
+msgid "α-Pisces Australids"
+msgstr "α-пісізавстраліди"
+
+#. TRANSLATORS: Name of meteor shower
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1348
+msgid "Southern ι-Aquariids"
+msgstr "Південні ι-аквариди"
+
+#. TRANSLATORS: Name of meteor shower
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1350
+msgid "Northern ι-Aquariids"
+msgstr "Північні ι-аквариди"
+
+#. TRANSLATORS: Name of meteor shower
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1352
+msgid "γ-Aquariids"
+msgstr "γ-аквариди"
+
+#. TRANSLATORS: Name of meteor shower
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1354
+msgid "Autumn Arietids"
+msgstr "Осінні арієтиди"
+
+#. TRANSLATORS: Name of meteor shower
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1356
+msgid "χ-Orionids"
+msgstr "χ-оріоніди"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1312
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1360
 msgid "Comet 1P/Halley"
 msgstr "Комета 1P/Комета Галлея"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1314
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1362
 msgid "Comet 7P/Pons-Winnecke"
 msgstr "Комета 7P/Комета Понса-Віннеке"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1316
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1364
 msgid "Comet 55P/Tempel-Tuttle"
 msgstr "Комета 55P/Комета Темпеля-Таттла"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1318
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1366
 msgid "Comet 96P/Machholz"
 msgstr "Комета 96P/Комета Махгольца"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1320
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1368
 msgid "Comet 109P/Swift-Tuttle"
 msgstr "Комета 109P/Комета Свіфта-Таттла"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1322
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1370
 msgid "Comet Thatcher (1861 I)"
 msgstr "Комета Тетчера (1861 I)"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1324
-msgid "Minor planet (4450) Pan"
-msgstr "Мала планета (4450) Пан"
-
-#. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1326
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1372
 msgid "Comet 26P/Grigg-Skjellerup"
 msgstr "Комета 26P/Комета Ґріґа-Ск’єллерупа"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1328
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1374
 msgid "Comet 21P/Giacobini-Zinner"
 msgstr "Комета 21P/Комета Джакобіні-Ціннера"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1330
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1376
 msgid "Comet 169P/NEAT"
 msgstr "Комета 169P/NEAT"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1332
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1378
 msgid "Comet 289P/Blanpain"
 msgstr "Комета 289P/Комета Бланпейна"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1334
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1380
 msgid "Comet 8P/Tuttle"
 msgstr "Комета 8P/Комета Таттла"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1336
-msgid "Minor planet 2008 ED69"
-msgstr "Мала планета 2008 ED69"
-
-#. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1338
-msgid "Comet 2P/Encke"
-msgstr "Комета 2P/Комета Енке"
-
-#. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1340
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1382
 msgid "Comet 3D/Biela"
 msgstr "Комета 3D/Комета Бієла"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1342
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1384
+msgid "Comet C/1917 F1 (Mellish)"
+msgstr "Комета C/1917 F1 (Мелліша)"
+
+#. TRANSLATORS: Name of parent object for meteor shower
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1386
+msgid "Comet C/1964 N1 (Ikeya)"
+msgstr "Комета C/1964 N1 (Ікея)"
+
+#. TRANSLATORS: Name of parent object for meteor shower
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1388
+msgid "Comet Schwassmann-Wachmann 3"
+msgstr "Комета Швасмана-Вахмана 3"
+
+#. TRANSLATORS: Name of parent object for meteor shower
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1390
+msgid "Minor planet 2003 EH1 and Comet C/1490 Y1"
+msgstr "Мала планета 2003 EH1 і комета C/1490 Y1"
+
+#. TRANSLATORS: Name of parent object for meteor shower
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1392
+msgid "Minor planet (4450) Pan"
+msgstr "Мала планета (4450) Пан"
+
+#. TRANSLATORS: Name of parent object for meteor shower
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1394
+msgid "Minor planet 2008 ED69"
+msgstr "Мала планета 2008 ED69"
+
+#. TRANSLATORS: Name of parent object for meteor shower
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1396
+msgid "Comet 2P/Encke"
+msgstr "Комета 2P/Комета Енке"
+
+#. TRANSLATORS: Name of parent object for meteor shower
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1398
 msgid "Minor planet 2004 TG10"
 msgstr "Мала планета 2004 TG10"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1344
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1400
 msgid "Minor planet (3200) Phaethon"
 msgstr "Мала планета (3200) Фаетон"
 
@@ -9367,39 +9519,39 @@ msgstr "метеорний потік"
 msgid "Radiant drift (per day)"
 msgstr "Дрейф радіанта (на день)"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:329
+#: plugins/MeteorShowers/src/MeteorShower.cpp:331
 #, qt-format
 msgid "Geocentric meteoric velocity: %1 km/s"
 msgstr "Геоцентрична швидкість метеорів: %1 км/с"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:332
+#: plugins/MeteorShowers/src/MeteorShower.cpp:336
 #, qt-format
 msgid "The population index: %1"
 msgstr "Індекс щільності: %1"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:337
+#: plugins/MeteorShowers/src/MeteorShower.cpp:341
 #, qt-format
 msgid "Parent body: %1"
 msgstr "Основне тіло: %1"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:343
+#: plugins/MeteorShowers/src/MeteorShower.cpp:347
 msgid "Active"
 msgstr "Активний"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:351
+#: plugins/MeteorShowers/src/MeteorShower.cpp:355
 msgid "Activity"
 msgstr "Активність"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:356
+#: plugins/MeteorShowers/src/MeteorShower.cpp:360
 #, qt-format
 msgid "Maximum: %1"
 msgstr "Максимум: %1"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:359
+#: plugins/MeteorShowers/src/MeteorShower.cpp:363
 msgid "Solar longitude is"
 msgstr "Сонячна довгота"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:368
+#: plugins/MeteorShowers/src/MeteorShower.cpp:372
 msgid "variable"
 msgstr "змінна"
 
@@ -10385,15 +10537,3 @@ msgstr "Знайти подію"
 #~ "За допомогою цього додатка програма може позначати 58 навігаційних зірок з "
 #~ "каталогу 2102-D Rude Star Finder, таблиці для яких також можна знайти у "
 #~ "a«Календарі мореплавця»."
-
-#~ msgid ""
-#~ "This plugin give visualization of the meteor showers, show information about "
-#~ "meteor showers and displays marker for radiants in activity range for each "
-#~ "meteor showers."
-#~ msgstr ""
-#~ "За допомогою цього додатка можна переглядати метеорні потоки, дані щодо "
-#~ "метеорних потоків та позначки радіантів у активному діапазоні для кожного з "
-#~ "метеоритних потоків."
-
-#~ msgid "September ε–Perseids"
-#~ msgstr "Вересневі ε–персеїди"
