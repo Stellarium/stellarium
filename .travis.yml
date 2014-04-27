@@ -1,0 +1,53 @@
+language: cpp
+
+compiler:
+  - gcc
+
+before_install:
+  - "wget -q http://cardinot.net/files/libarchive-3.1.2.tar.gz"
+  - "tar -xzvf libarchive-3.1.2.tar.gz"
+
+  - "wget -q http://cardinot.net/files/cmake-2.8.11.tar.gz"
+  - "tar -xzvf cmake-2.8.11.tar.gz"
+
+  - "mkdir qt5"
+  - "wget -q -O qt5.zip http://cardinot.net/files/qt510.zip"
+  - "unzip -qq qt5.zip -d qt5"
+
+install:
+  - "cd libarchive-3.1.2"
+  - "./configure --prefix=/usr --disable-static"
+  - "make -j 16"
+  - "sudo make install -j 16"
+  - "cd .."
+
+  - "cd cmake-2.8.11"
+  - "./bootstrap --prefix=/usr --system-libs --mandir=/share/man"
+  - "make -j 16"
+  - "sudo make install -j 16"
+  - "cd .."
+
+before_script:
+  - "export PATH=`pwd`/qt5/bin:$PATH"
+  - "export QT_PLUGIN_PATH=`pwd`/qt5/plugins"
+  - "mkdir build"
+  - "cd build"
+
+script:
+  - "cmake ../."
+  - "make -j 16"
+  - "sudo make install -j 16"
+
+notifications:
+  recipients:
+    - mcardinot@gmail.com
+  email:
+    on_success: change
+    on_failure: always
+  irc:
+    channels:
+      - "irc.freenode.net#stellarium"
+    template:
+      - "Stellarium/trunk #%{build_number} (%{author}): %{message}"
+      - "Change view : %{compare_url}"
+      - "Build details : %{build_url}"
