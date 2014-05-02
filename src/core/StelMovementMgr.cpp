@@ -24,6 +24,7 @@
 #include "StelCore.hpp"
 #include "StelUtils.hpp"
 #include "StelTranslator.hpp"
+#include "ConstellationMgr.hpp"
 
 #include <QString>
 #include <QTextStream>
@@ -31,22 +32,43 @@
 #include <QKeyEvent>
 #include <QDebug>
 
-StelMovementMgr::StelMovementMgr(StelCore* acore) : core(acore),
-	flagLockEquPos(false),
-	flagTracking(false),
-	isMouseMovingHoriz(false),
-	isMouseMovingVert(false),
-	flagEnableMouseNavigation(true),
-	keyMoveSpeed(0.00025),
-	flagMoveSlow(false),
-	flagAutoMove(false),
-	deltaFov(0.),
-	deltaAlt(0.),
-	deltaAz(0.),
-	dragTimeMode(false),
-	flagAutoZoom(0),
-	flagAutoZoomOutResetsDirection(0),
-	dragTriggerDistance(4.f)
+StelMovementMgr::StelMovementMgr(StelCore* acore)
+	: currentFov(60.)
+	, initFov(60.)
+	, minFov(0.0001)
+	, maxFov(100.)
+	, initConstellationIntensity(0.45)
+	, core(acore)
+	, objectMgr(NULL)
+	, flagLockEquPos(false)
+	, flagTracking(false)
+	, isMouseMovingHoriz(false)
+	, isMouseMovingVert(false)
+	, flagEnableMoveAtScreenEdge(false)
+	, flagEnableMouseNavigation(true)
+	, mouseZoomSpeed(30)
+	, flagEnableZoomKeys(true)
+	, flagEnableMoveKeys(true)
+	, keyMoveSpeed(0.00025)
+	, keyZoomSpeed(0.00025)
+	, flagMoveSlow(false)
+	, movementsSpeedFactor(1.5)
+	, flagAutoMove(false)
+	, zoomingMode(0)
+	, deltaFov(0.)
+	, deltaAlt(0.)
+	, deltaAz(0.)
+	, flagManualZoom(false)
+	, autoMoveDuration(1.5)
+	, hasDragged(false)
+	, previousX(0)
+	, previousY(0)
+	, beforeTimeDragTimeRate(0.)
+	, dragTimeMode(false)
+	, zoomMove()
+	, flagAutoZoom(0)
+	, flagAutoZoomOutResetsDirection(0)
+	, dragTriggerDistance(4.f)
 {
 	setObjectName("StelMovementMgr");
 	isDragging = false;
@@ -83,6 +105,7 @@ void StelMovementMgr::init()
 	maxFov = 100.;
 	initFov = conf->value("navigation/init_fov",60.f).toFloat();
 	currentFov = initFov;
+	setInitConstellationIntensity(conf->value("viewing/constellation_art_intensity", 0.5f).toFloat());
 
 	Vec3f tmp = StelUtils::strToVec3f(conf->value("navigation/init_view_pos").toString());
 	initViewPos.set(tmp[0], tmp[1], tmp[2]);
@@ -270,9 +293,16 @@ void StelMovementMgr::handleMouseWheel(QWheelEvent* event)
 {
 	if (flagEnableMouseNavigation==false)
 		return;
+
 	int numDegrees = event->delta() / 8;
 	int numSteps = numDegrees / 15;
+	QPoint numPixels = event->pixelDelta();
+
+	if (!numPixels.isNull())
+		numSteps *= StelApp::getInstance().getDevicePixelsPerPixel();
+
 	zoomTo(getAimFov()-mouseZoomSpeed*numSteps*getAimFov()/60., 0.2);
+
 	event->accept();
 }
 
@@ -916,6 +946,20 @@ void StelMovementMgr::changeFov(double deltaFov)
 	// if we are zooming in or out
 	if (deltaFov)
 		setFov(currentFov + deltaFov);
+}
+
+void StelMovementMgr::changeConstellationArtIntensity()
+{
+	ConstellationMgr *cmgr = GETSTELMODULE(ConstellationMgr);
+	if (cmgr->getFlagArt())
+	{
+		double artInt = getInitConstellationIntensity();
+		// Fade out constellation art when FOV less 2 degrees
+		if (currentFov<=2.)
+			artInt *= currentFov>1.? (currentFov-1.) : 0. ;
+
+		cmgr->setArtIntensity(artInt);
+	}
 }
 
 double StelMovementMgr::getAimFov(void) const

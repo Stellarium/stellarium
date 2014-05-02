@@ -82,31 +82,39 @@ StelGuiBase* StelStandardGuiPluginInterface::getStelGuiBase() const
 	return new StelGui();
 }
 
-StelGui::StelGui() :
-	topLevelGraphicsWidget(NULL),
-	locationDialog(0),
-	helpDialog(0),
-	dateTimeDialog(0),
-	searchDialog(0),
-	viewDialog(0),
-	shortcutsDialog(0),
-	configurationDialog(0),
+StelGui::StelGui()
+	: topLevelGraphicsWidget(NULL)
+	, skyGui(NULL)
+	, buttonTimeRewind(NULL)
+	, buttonTimeRealTimeSpeed(NULL)
+	, buttonTimeCurrent(NULL)
+	, buttonTimeForward(NULL)
+	, buttonGotoSelectedObject(NULL)
+	, locationDialog(0)
+	, helpDialog(0)
+	, dateTimeDialog(0)
+	, searchDialog(0)
+	, viewDialog(0)
+	, shortcutsDialog(0)
+	, configurationDialog(0)
 #ifdef ENABLE_SCRIPT_CONSOLE
-    scriptConsole(0),
+	, scriptConsole(0)
 #endif
-    initDone(false)
+	, flagShowFlipButtons(false)
+	, flipVert(NULL)
+	, flipHoriz(NULL)
+	, flagShowNebulaBackgroundButton(false)
+	, btShowNebulaeBackground(NULL)
+	, initDone(false)
 {
 	// QPixmapCache::setCacheLimit(30000); ?
-	flipHoriz = NULL;
-	flipVert = NULL;
-	btShowNebulaeBackground = NULL;
 }
 
 StelGui::~StelGui()
 {
 	delete skyGui;
 	skyGui = NULL;
-	
+
 	if (locationDialog)
 	{
 		delete locationDialog;
@@ -418,12 +426,18 @@ void StelGui::setStelStyle(const QString& section)
 
 		// Load Qt style sheet
 		QFile styleFile(qtStyleFileName);
-		styleFile.open(QIODevice::ReadOnly);
-		currentStelStyle.qtStyleSheet = styleFile.readAll();
+		if(styleFile.open(QIODevice::ReadOnly))
+		{
+			currentStelStyle.qtStyleSheet = styleFile.readAll();
+			styleFile.close();
+		}
 
 		QFile htmlStyleFile(htmlStyleFileName);
-		htmlStyleFile.open(QIODevice::ReadOnly);
-		currentStelStyle.htmlStyleSheet = htmlStyleFile.readAll();
+		if(htmlStyleFile.open(QIODevice::ReadOnly))
+		{
+			currentStelStyle.htmlStyleSheet = htmlStyleFile.readAll();
+			htmlStyleFile.close();
+		}
 	}
 	
 	locationDialog->styleChanged();

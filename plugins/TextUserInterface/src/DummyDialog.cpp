@@ -67,9 +67,11 @@ class CustomProxy : public QGraphicsProxyWidget
 		}
 };
 
-DummyDialog::DummyDialog(StelModule* eventHandler) : dialog(NULL)
+DummyDialog::DummyDialog(StelModule* eventHandler)
+	: proxy(NULL)
+	, dialog(NULL)
+	, evtHandler(eventHandler)
 {
-	evtHandler = eventHandler;
 }
 
 DummyDialog::~DummyDialog()

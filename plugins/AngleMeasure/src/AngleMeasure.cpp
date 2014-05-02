@@ -62,10 +62,12 @@ StelPluginInfo AngleMeasureStelPluginInterface::getPluginInfo() const
 }
 
 AngleMeasure::AngleMeasure()
-	: flagShowAngleMeasure(false),
-	  dragging(false),
-	  angle(0.),
-	  toolbarButton(NULL)
+	: flagShowAngleMeasure(false)
+	, dragging(false)
+	, angle(0.)
+	, flagUseDmsFormat(false)
+	, flagShowPA(false)
+	, toolbarButton(NULL)
 {
 	setObjectName("AngleMeasure");
 	font.setPixelSize(16);
@@ -118,9 +120,7 @@ void AngleMeasure::init()
 
 	StelApp& app = StelApp::getInstance();
 
-	// Create action for enable/disable & hook up signals
-	StelGui* gui = dynamic_cast<StelGui*>(app.getGui());
-	Q_ASSERT(gui);
+	// Create action for enable/disable & hook up signals	
 	addAction("actionShow_Angle_Measure", N_("Angle Measure"), N_("Angle measure"), "enabled", "Ctrl+A");
 
 	// Initialize the message strings and make sure they are translated when
@@ -131,12 +131,16 @@ void AngleMeasure::init()
 	// Add a toolbar button
 	try
 	{
-		toolbarButton = new StelButton(NULL,
-					       QPixmap(":/angleMeasure/bt_anglemeasure_on.png"),
-					       QPixmap(":/angleMeasure/bt_anglemeasure_off.png"),
-					       QPixmap(":/graphicGui/glow32x32.png"),
-					       "actionShow_Angle_Measure");
-		gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
+		StelGui* gui = dynamic_cast<StelGui*>(app.getGui());
+		if (gui!=NULL)
+		{
+			toolbarButton = new StelButton(NULL,
+						       QPixmap(":/angleMeasure/bt_anglemeasure_on.png"),
+						       QPixmap(":/angleMeasure/bt_anglemeasure_off.png"),
+						       QPixmap(":/graphicGui/glow32x32.png"),
+						       "actionShow_Angle_Measure");
+			gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
+		}
 	}
 	catch (std::runtime_error& e)
 	{

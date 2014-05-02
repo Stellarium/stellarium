@@ -54,7 +54,7 @@ struct TrailPoint
 class RotationElements
 {
 public:
-	RotationElements(void) : period(1.), offset(0.), epoch(J2000), obliquity(0.), ascendingNode(0.), precessionRate(0.) {}
+	RotationElements(void) : period(1.), offset(0.), epoch(J2000), obliquity(0.), ascendingNode(0.), precessionRate(0.), siderealPeriod(0.) {}
 	float period;          // rotation period
 	float offset;          // rotation at epoch
 	double epoch;

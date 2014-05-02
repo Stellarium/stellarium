@@ -159,10 +159,13 @@ qint64 getNow(void)
 	return t - core->getDeltaT(StelUtils::getJDFromSystem())*1000000; // Delta T anti-correction
 }
 
-TelescopeTCP::TelescopeTCP(const QString &name, const QString &params, Equinox eq) :
-		TelescopeClient(name),
-		tcpSocket(new QTcpSocket()),
-		equinox(eq)
+TelescopeTCP::TelescopeTCP(const QString &name, const QString &params, Equinox eq)
+	: TelescopeClient(name)
+	, port(0)
+	, tcpSocket(new QTcpSocket())
+	, end_of_timeout(0)
+	, time_delay(0)
+	, equinox(eq)
 {
 	hangup();
 	

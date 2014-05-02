@@ -133,6 +133,7 @@ Oculars::Oculars():
 	pxmapOnIcon(NULL),
 	pxmapOffIcon(NULL),
 	toolbarButton(NULL),
+	ocularDialog(NULL),
 	ready(false),
 	actionShowOcular(0),
 	actionShowCrosshairs(0),
@@ -385,9 +386,11 @@ void Oculars::handleKeys(QKeyEvent* event)
 	StelCore *core = StelApp::getInstance().getCore();
 	StelMovementMgr *movementManager = core->getMovementMgr();
 	
-	if (event->type() == QEvent::KeyPress) {
+	if (event->type() == QEvent::KeyPress)
+	{
 		// Direction and zoom replacements
-		switch (event->key()) {
+		switch (event->key())
+		{
 			case Qt::Key_Left:
 				movementManager->turnLeft(true);
 				consumeEvent = true;
@@ -397,13 +400,15 @@ void Oculars::handleKeys(QKeyEvent* event)
 				consumeEvent = true;
 				break;
 			case Qt::Key_Up:
-				if (!event->modifiers().testFlag(Qt::ControlModifier)) {
+				if (!event->modifiers().testFlag(Qt::ControlModifier))
+				{
 					movementManager->turnUp(true);
 				}
 				consumeEvent = true;
 				break;
 			case Qt::Key_Down:
-				if (!event->modifiers().testFlag(Qt::ControlModifier)) {
+				if (!event->modifiers().testFlag(Qt::ControlModifier))
+				{
 					movementManager->turnDown(true);
 				}
 				consumeEvent = true;
@@ -422,13 +427,16 @@ void Oculars::handleKeys(QKeyEvent* event)
 				break;
 			case Qt::Key_M:
 				double multiplier = 1.0;
-				if (event->modifiers().testFlag(Qt::ControlModifier)) {
+				if (event->modifiers().testFlag(Qt::ControlModifier))
+				{
 					multiplier = 0.1;
 				}
-				if (event->modifiers().testFlag(Qt::AltModifier)) {
+				if (event->modifiers().testFlag(Qt::AltModifier))
+				{
 					multiplier = 5.0;
 				}
-				if (event->modifiers().testFlag(Qt::ShiftModifier)) {
+				if (event->modifiers().testFlag(Qt::ShiftModifier))
+				{
 					reticleRotation += (1.0 * multiplier);
 				} else {
 					reticleRotation -= (1.0 * multiplier);
@@ -439,7 +447,8 @@ void Oculars::handleKeys(QKeyEvent* event)
 		}
 	} else {
 		// When a deplacement key is released stop mooving
-		switch (event->key()) {
+		switch (event->key())
+		{
 			case Qt::Key_Left:
 				movementManager->turnLeft(false);
 				consumeEvent = true;
@@ -469,12 +478,14 @@ void Oculars::handleKeys(QKeyEvent* event)
 				consumeEvent = true;
 				break;
 		}
-		if (consumeEvent) {
+		if (consumeEvent)
+		{
 			// We don't want to re-center the object; just hold the current position.
 			movementManager->setFlagLockEquPos(true);
 		}
 	}
-	if (consumeEvent) {
+	if (consumeEvent)
+	{
 		event->accept();
 	} else {
 		event->setAccepted(false);

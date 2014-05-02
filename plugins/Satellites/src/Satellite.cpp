@@ -59,9 +59,19 @@ Satellite::Satellite(const QString& identifier, const QVariantMap& map)
       userDefined(false),
       newlyAdded(false),
       orbitValid(false),
-      hintColor(0.0,0.0,0.0),
-      lastUpdated(),      
-      pSatWrapper(NULL)
+      jdLaunchYearJan1(0),
+      stdMag(99.),
+      height(0.),
+      range(0.),
+      rangeRate(0.),
+      hintColor(0.0,0.0,0.0),            
+      lastUpdated(),
+      pSatWrapper(NULL),
+      visibility(0),
+      phaseAngle(0.),
+      lastEpochCompForOrbit(0.),
+      epochTime(0.)
+
 {
 	// return initialized if the mandatory fields are not present
 	if (identifier.isEmpty())
@@ -292,20 +302,20 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 		//TODO: Move to a more prominent place.
 		switch (visibility)
 		{
-		case RADAR_SUN:
-			oss << q_("The satellite and the observer are in sunlight.") << "<br/>";
-			break;
-		case VISIBLE:
-			oss << q_("The satellite is visible.") << "<br/>";
-			break;
-		case RADAR_NIGHT:
-			oss << q_("The satellite is eclipsed.") << "<br/>";
-			break;
-		case NOT_VISIBLE:
-			oss << q_("The satellite is not visible") << "<br/>";
-			break;
-		default:
-			break;
+			case RADAR_SUN:
+				oss << q_("The satellite and the observer are in sunlight.") << "<br/>";
+				break;
+			case VISIBLE:
+				oss << q_("The satellite is visible.") << "<br/>";
+				break;
+			case RADAR_NIGHT:
+				oss << q_("The satellite is eclipsed.") << "<br/>";
+				break;
+			case NOT_VISIBLE:
+				oss << q_("The satellite is not visible") << "<br/>";
+				break;
+			default:
+				break;
 		}
 
 		if (comms.size() > 0)

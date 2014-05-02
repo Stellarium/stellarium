@@ -150,7 +150,17 @@ void Cardinals::updateI18n()
 }
 
 
-LandscapeMgr::LandscapeMgr() : atmosphere(NULL), cardinalsPoints(NULL), landscape(NULL), flagLandscapeSetsLocation(false)
+LandscapeMgr::LandscapeMgr()
+	: atmosphere(NULL)
+	, cardinalsPoints(NULL)
+	, landscape(NULL)
+	, flagLandscapeSetsLocation(false)
+	, flagLandscapeAutoSelection(false)
+	, flagLightPollutionFromDatabase(false)
+	, flagLandscapeUseMinimalBrightness(false)
+	, defaultMinimalBrightness(0.01)
+	, flagLandscapeSetsMinimalBrightness(false)
+	, flagAtmosphereAutoEnabling(false)
 {
 	setObjectName("LandscapeMgr");
 
@@ -1088,11 +1098,13 @@ QString LandscapeMgr::getDescription() const
 	if (hasFile)
 	{
 		QFile file(descFile);
-		file.open(QIODevice::ReadOnly | QIODevice::Text);
-		QTextStream in(&file);
-		in.setCodec("UTF-8");
-		desc = in.readAll();
-		file.close();
+		if(file.open(QIODevice::ReadOnly | QIODevice::Text))
+		{
+			QTextStream in(&file);
+			in.setCodec("UTF-8");
+			desc = in.readAll();
+			file.close();
+		}
 	}
 	else
 	{

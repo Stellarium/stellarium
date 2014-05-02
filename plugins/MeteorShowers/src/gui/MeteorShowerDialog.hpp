@@ -30,9 +30,9 @@
 #include "MeteorShowers.hpp"
 #include "StelDialog.hpp"
 
-class MeteorShowers;
 class QTimer;
 class Ui_meteorShowerDialog;
+class MeteorShowers;
 
 class MeteorShowerDialog : public StelDialog
 {
