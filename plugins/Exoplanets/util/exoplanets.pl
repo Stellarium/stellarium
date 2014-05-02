@@ -35,9 +35,9 @@ use Text::CSV;
 
 $URL	= "http://exoplanet.eu/catalog/csv/";
 $CSV	= "./exoplanets.csv";
-$HCSV	= "./";
 $JSON	= "./exoplanets.json";
 $HCSV	= "./habitable.csv";
+$CNT	= "./count";
 
 $CATALOG_FORMAT_VERSION = 1;
 
@@ -47,7 +47,7 @@ $dbuser	= "exoplanet";
 $dbpass	= "exoplanet";
 
 $UA = LWP::UserAgent->new(keep_alive => 1, timeout => 360);
-$UA->agent("Mozilla/5.0 (Stellarium Exoplanets Catalog Updater 0.5; http://stellarium.org/)");
+$UA->agent("Mozilla/5.0 (Stellarium Exoplanets Catalog Updater 1.1; http://stellarium.org/)");
 $request = HTTP::Request->new('GET', $URL);
 $responce = $UA->request($request);
 
@@ -59,7 +59,7 @@ if ($responce->is_success) {
 	close OUT;
 } else {
 	print "Can't connect to URL: $URL\n";
-	exit;
+#	exit;
 }
 
 $dsn = "DBI:mysql:database=$dbname;host=$dbhost";
@@ -86,16 +86,23 @@ close CSV;
 $dbh = DBI->connect($dsn, $dbuser, $dbpass, {'RaiseError' => 1});
 $sth = $dbh->do(q{SET NAMES utf8});
 $sth = $dbh->do(q{TRUNCATE stars});
+$sth = $dbh->prepare(q{SELECT COUNT(pid) FROM planets});
+$sth->execute();
+@ipcnt = $sth->fetchrow_array();
+$initCnt = @ipcnt[0];
+
 $sth = $dbh->do(q{TRUNCATE planets});
 
 for ($i=1;$i<scalar(@catalog);$i++) {
 	$currdata = $catalog[$i];
+	$currdata =~ s/nan//gi;
 	
-	@cpname = ();
-	(@cpname) = split(",",$currdata);
-	
+	$status  = $csvdata->parse($currdata);
+	@psdata = ();
+	@psdata = $csvdata->fields();
+
 	@cfname = ();
-	@cfname = split(" ",$cpname[0]);
+	@cfname = split(" ",$psdata[0]);
 	
 	if (scalar(@cfname)==4) {
 		$csname = $cfname[0]." ".$cfname[1]." ".$cfname[2];
@@ -108,13 +115,34 @@ for ($i=1;$i<scalar(@catalog);$i++) {
 		$pname = $cfname[1];
 	}
 	
-	$status  = $csvdata->parse($currdata);
-	($aname,$pmass,$pradius,$pperiod,$psemiax,$pecc,$pincl,$angdist,$psl,$discovered,$updated,$pomega,$ptperi,$ptconj,$ptzero_tr,$ptzero_tr_sec,$plambda_angle,$ptzero_vr,$ptemp_calculated,$ptemp_measured,$phot_point_lon,$plog_g,$dtype,$mol,$starname,$sRA,$sDec,$sVmag,$sImag,$sJmag,$sHmag,$sKmag,$sdist,$smetal,$smass,$sradius,$sstype,$sage,$sefftemp) = $csvdata->fields();
+	$pmass		= $psdata[1];	# planet mass
+	$pradius	= $psdata[4];	# planet radius
+	$pperiod	= $psdata[7];	# planet period
+	$paxis		= $psdata[10];	# planet axis
+	$pecc		= $psdata[13];	# planet eccentricity
+	$pincl		= $psdata[21];	# planet inclination
+	$angdist	= $psdata[16];	# planet angular distance
+	$discovered	= $psdata[37];	# planet discovered
+	$starname	= $psdata[47];	# star name
+	$sRA		= $psdata[48];	# star RA
+	$sDec		= $psdata[49];	# star dec
+	$sVmag		= $psdata[50];	# star v magnitude
+	$sdist		= $psdata[55];	# star distance
+	$smetal		= $psdata[56];	# star metallicity
+	$smass		= $psdata[57];	# star mass
+	$sradius	= $psdata[58];	# star radius
+	$sstype		= $psdata[59];	# star spectral type
+	$sefftemp	= $psdata[61];	# star effective temperature
 
-	($hour,$mint,$sect) = split(":",$sRA);
-	($deg,$min,$sec) = split(":",$sDec);
-	# fixed bug in raw data
-	$sec =~ s/-//gi;
+	$part = $sRA/15;
+	$hour = int($part);
+	$mint = int(($part-$hour)*60);
+	$sect = int((($part-$hour)*3600-60*$mint)*10)/10;
+
+	$deg = int($sDec);
+	$min = int(($sDec-$deg)*60);
+	$sec = int((($sDec-$deg)*3600-60*$min)*10)/10;
+	
 	# fixed bug for Kepler-68
 	if ($starname =~ m/kepler-68/gi) {
 		$hour = 19;
@@ -125,11 +153,8 @@ for ($i=1;$i<scalar(@catalog);$i++) {
 		$deg = 29; $min = 36; $sec = 57.9;
 	}
 	
-	$sec =~ s/-//gi;
-	$sect =~ s/-//gi;
-	
-	$outRA = $hour."h".$mint."m".$sect."s";
-	$outDE = $deg."d".$min."m".$sec."s";
+	$outRA = $hour."h".abs($mint)."m".abs($sect)."s";
+	$outDE = $deg."d".abs($min)."m".abs($sec)."s";
 	
 	$sname = $starname;
 
@@ -163,7 +188,7 @@ for ($i=1;$i<scalar(@catalog);$i++) {
 	$sname =~ s/^omega/ω/gi;
 	$sname =~ s/^ome/ω/gi;
 	
-	if (($sRA ne '00:00:00.0') && ($sDec ne '+00:00:00.0') && ($sname ne '')) {
+	if (($sRA != 0.0) && ($sDec != 0.0) && ($sname ne '')) {
 		# check star
 		$sth = $dbh->prepare(q{SELECT sid,sname FROM stars WHERE ra_coord=? AND dec_coord=?});
 		$sth->execute($outRA, $outDE);
@@ -197,8 +222,12 @@ for ($i=1;$i<scalar(@catalog);$i++) {
 		}
 		
 		# insert planet data
-		$sth = $dbh->do(q{INSERT INTO planets (sid,pname,pmass,pradius,pperiod,psemiaxis,pecc,pinc,padistance,discovered,hclass,mstemp,esi) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)}, undef, $starID, $pname, $pmass, $pradius, $pperiod, $psemiax, $pecc, $pincl, $angdist, $discovered, $hclass, $mstemp, $esi);
+		$sth = $dbh->do(q{INSERT INTO planets (sid,pname,pmass,pradius,pperiod,psemiaxis,pecc,pinc,padistance,discovered,hclass,mstemp,esi) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)}, undef, $starID, $pname, $pmass, $pradius, $pperiod, $paxis, $pecc, $pincl, $angdist, $discovered, $hclass, $mstemp, $esi);
 	}
+#	else
+#	{
+#		print $sname.": ".$sRA.":".$sDec." [".$currdata."]\n";
+#	}
 }
 
 open (JSON, ">$JSON");
@@ -342,6 +371,16 @@ while (@stars = $sth->fetchrow_array()) {
 
 }
 
-print JSON "\t}\n}";
-
+print JSON "\t}\n}\n";
 close JSON;
+
+$sth = $dbh->prepare(q{SELECT COUNT(pid) FROM planets});
+$sth->execute();
+@ipcnt = $sth->fetchrow_array();
+$lastCnt = @ipcnt[0];
+open (COUNTD, ">$CNT");
+print COUNTD $lastCnt-$initCnt;
+close COUNTD;
+
+# LOG
+print "Planets in DB (Old/New): ".$initCnt."/".$lastCnt."\n";

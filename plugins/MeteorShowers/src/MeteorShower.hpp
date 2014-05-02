@@ -42,6 +42,12 @@ class MeteorShower : public StelObject
 	friend class MeteorShowers;
 
 public:
+	enum RadiantStatus {
+		INACTIVE,        // inactive radiant.
+		ACTIVE_REAL,     // active radiant - real data.
+		ACTIVE_GENERIC   // active radiant - generic data.
+	};
+
 	//! @param id The official ID designation for a meteor shower, e.g. "LYR"
 	MeteorShower(const QVariantMap& map);
 	~MeteorShower();

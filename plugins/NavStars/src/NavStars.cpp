@@ -58,7 +58,9 @@ StelPluginInfo NavStarsStelPluginInterface::getPluginInfo() const
 
 
 
-NavStars::NavStars() : toolbarButton(NULL)
+NavStars::NavStars()
+	: starNamesState(false)
+	, toolbarButton(NULL)
 {
 	setObjectName("NavStars");
 	conf = StelApp::getInstance().getSettings();
@@ -69,6 +71,9 @@ NavStars::NavStars() : toolbarButton(NULL)
 	
 	QVariant var = conf->value("NavigationalStars/marker_color", "0.8,0.0,0.0");
 	markerColor = StelUtils::strToVec3f(var.toString());
+
+	// Get the manager of stars for manipulation of the stars labels
+	smgr = GETSTELMODULE(StarMgr);
 }
 
 
@@ -90,9 +95,6 @@ double NavStars::getCallOrder(StelModuleActionName actionName) const
 
 void NavStars::init()
 {
-	// Get the manager of stars for manipulation of the stars labels
-	smgr = GETSTELMODULE(StarMgr);
-
 	// List of HIP numbers of the navigational stars: Polaris (index 0) and
 	// the 47 "selected stars" from The Nautical Almanac. Polaris is included
 	// because it was listed with them in the The American Practical Navigator,
@@ -120,16 +122,19 @@ void NavStars::init()
 
 	// Toolbar button
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-	if (toolbarButton == NULL)
+	if (gui!=NULL)
 	{
-		// Create the nav. stars button
-		toolbarButton = new StelButton(NULL,
-		                               QPixmap(":/NavStars/btNavStars-on.png"),
-		                               QPixmap(":/NavStars/btNavStars-off.png"),
-		                               QPixmap(":/graphicGui/glow32x32.png"),
-		                               "actionShow_NavStars");
+		if (toolbarButton == NULL)
+		{
+			// Create the nav. stars button
+			toolbarButton = new StelButton(NULL,
+						       QPixmap(":/NavStars/btNavStars-on.png"),
+						       QPixmap(":/NavStars/btNavStars-off.png"),
+						       QPixmap(":/graphicGui/glow32x32.png"),
+						       "actionShow_NavStars");
+		}
+		gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
 	}
-	gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");	
 
 	// Sync global settings for stars labels
 	connect(smgr, SIGNAL(starLabelsDisplayedChanged(bool)),
@@ -174,27 +179,28 @@ void NavStars::draw(StelCore* core)
 			continue;
 		
 		// Get the current position of the navigational star...
-		prj->projectCheck(stars[i]->getJ2000EquatorialPos(core), pos);
-
-		// ... and draw a marker around it
-		if (!markerTexture.isNull())
+		if (prj->projectCheck(stars[i]->getJ2000EquatorialPos(core), pos))
 		{
-			glEnable(GL_BLEND);
-			painter.enableTexture2d(true);
-			glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-			painter.setColor(markerColor[0],
-			                 markerColor[1],
-			                 markerColor[2],
-			                 markerFader.getInterstate());
-			markerTexture->bind();
-			painter.drawSprite2dMode(pos[0], pos[1], 11.f);
+			// ... and draw a marker around it
+			if (!markerTexture.isNull())
+			{
+				glEnable(GL_BLEND);
+				painter.enableTexture2d(true);
+				glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+				painter.setColor(markerColor[0],
+						markerColor[1],
+						markerColor[2],
+						markerFader.getInterstate());
+				markerTexture->bind();
+				painter.drawSprite2dMode(pos[0], pos[1], 11.f);
+			}
+
+			// Draw the localized name of the star and its ordinal number
+			QString label = stars[i]->getNameI18n();
+			if (i > 0) // Not Polaris
+				label = QString("%1 (%2)").arg(label).arg(i);
+			painter.drawText(pos[0], pos[1], label, 0, 10.f, 10.f, false);
 		}
-		
-		// Draw the localized name of the star and its ordinal number
-		QString label = stars[i]->getNameI18n();
-		if (i > 0) // Not Polaris
-			label = QString("%1 (%2)").arg(label).arg(i);
-		painter.drawText(pos[0], pos[1], label, 0, 10.f, 10.f, false);
 	}
 
 }

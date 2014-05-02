@@ -39,7 +39,9 @@
 #include "StelFileMgr.hpp"
 #include "StelTranslator.hpp"
 
-ExoplanetsDialog::ExoplanetsDialog() : updateTimer(NULL)
+ExoplanetsDialog::ExoplanetsDialog()
+	: ep(NULL)
+	, updateTimer(NULL)
 {
         ui = new Ui_exoplanetsDialog;
 }
@@ -85,6 +87,8 @@ void ExoplanetsDialog::createDialogContent()
 	connect(ui->displayShowExoplanetsButton, SIGNAL(stateChanged(int)), this, SLOT(setDisplayShowExoplanetsButton(int)));
 	ui->timelineModeCheckBox->setChecked(ep->getTimelineMode());
 	connect(ui->timelineModeCheckBox, SIGNAL(stateChanged(int)), this, SLOT(setTimelineEnabled(int)));
+	ui->habitableModeCheckBox->setChecked(ep->getHabitableMode());
+	connect(ui->habitableModeCheckBox, SIGNAL(stateChanged(int)), this, SLOT(setHabitableEnabled(int)));
 	connect(ui->internetUpdatesCheckbox, SIGNAL(stateChanged(int)), this, SLOT(setUpdatesEnabled(int)));
 	connect(ui->updateButton, SIGNAL(clicked()), this, SLOT(updateJSON()));
 	connect(ep, SIGNAL(updateStateChanged(Exoplanets::UpdateState)), this, SLOT(updateStateReceiver(Exoplanets::UpdateState)));
@@ -108,10 +112,12 @@ void ExoplanetsDialog::createDialogContent()
 	setInfoHtml();
 	setWebsitesHtml();
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-	Q_ASSERT(gui);
-	ui->aboutTextBrowser->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
-	ui->infoTextBrowser->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
-	ui->websitesTextBrowser->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
+	if(gui!=NULL)
+	{
+		ui->aboutTextBrowser->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
+		ui->infoTextBrowser->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
+		ui->websitesTextBrowser->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
+	}
 
 	updateGuiFromSettings();
 
@@ -142,9 +148,11 @@ void ExoplanetsDialog::setAboutHtml(void)
 	html += "</ul></p></body></html>";
 
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-	Q_ASSERT(gui);
-	QString htmlStyleSheet(gui->getStelStyle().htmlStyleSheet);
-	ui->aboutTextBrowser->document()->setDefaultStyleSheet(htmlStyleSheet);
+	if(gui!=NULL)
+	{
+		QString htmlStyleSheet(gui->getStelStyle().htmlStyleSheet);
+		ui->aboutTextBrowser->document()->setDefaultStyleSheet(htmlStyleSheet);
+	}
 	ui->aboutTextBrowser->setHtml(html);
 }
 
@@ -159,9 +167,11 @@ void ExoplanetsDialog::setInfoHtml(void)
 	html += "</body></html>";
 
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-	Q_ASSERT(gui);
-	QString htmlStyleSheet(gui->getStelStyle().htmlStyleSheet);
-	ui->infoTextBrowser->document()->setDefaultStyleSheet(htmlStyleSheet);
+	if(gui!=NULL)
+	{
+		QString htmlStyleSheet(gui->getStelStyle().htmlStyleSheet);
+		ui->infoTextBrowser->document()->setDefaultStyleSheet(htmlStyleSheet);
+	}
 	ui->infoTextBrowser->setHtml(html);
 }
 
@@ -190,9 +200,11 @@ void ExoplanetsDialog::setWebsitesHtml(void)
 	html += "</ul></body></html>";
 
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-	Q_ASSERT(gui);
-	QString htmlStyleSheet(gui->getStelStyle().htmlStyleSheet);
-	ui->websitesTextBrowser->document()->setDefaultStyleSheet(htmlStyleSheet);
+	if(gui!=NULL)
+	{
+		QString htmlStyleSheet(gui->getStelStyle().htmlStyleSheet);
+		ui->websitesTextBrowser->document()->setDefaultStyleSheet(htmlStyleSheet);
+	}
 	ui->websitesTextBrowser->setHtml(html);
 }
 
@@ -231,6 +243,12 @@ void ExoplanetsDialog::setTimelineEnabled(int checkState)
 {
 	bool b = checkState != Qt::Unchecked;
 	ep->setTimelineMode(b);
+}
+
+void ExoplanetsDialog::setHabitableEnabled(int checkState)
+{
+	bool b = checkState != Qt::Unchecked;
+	ep->setHabitableMode(b);
 }
 
 void ExoplanetsDialog::setDisplayAtStartupEnabled(int checkState)
@@ -284,7 +302,7 @@ void ExoplanetsDialog::restoreDefaults(void)
 {
 	qDebug() << "Exoplanets::restoreDefaults";
 	ep->restoreDefaults();
-	ep->readSettingsFromConfig();
+	ep->loadConfiguration();
 	updateGuiFromSettings();
 }
 
@@ -296,7 +314,7 @@ void ExoplanetsDialog::updateGuiFromSettings(void)
 
 void ExoplanetsDialog::saveSettings(void)
 {
-	ep->saveSettingsToConfig();
+	ep->saveConfiguration();
 }
 
 void ExoplanetsDialog::updateJSON(void)

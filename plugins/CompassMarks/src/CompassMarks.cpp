@@ -60,19 +60,18 @@ StelPluginInfo CompassMarksStelPluginInterface::getPluginInfo() const
 }
 
 CompassMarks::CompassMarks()
-	: markColor(1,1,1), pxmapGlow(NULL), pxmapOnIcon(NULL), pxmapOffIcon(NULL), toolbarButton(NULL)
+	: displayedAtStartup(false)
+	, markColor(1,1,1)
+	, toolbarButton(NULL)
+	, cardinalPointsState(false)
 {
 	setObjectName("CompassMarks");
+	conf = StelApp::getInstance().getSettings();
 }
 
 CompassMarks::~CompassMarks()
 {
-	if (pxmapGlow!=NULL)
-		delete pxmapGlow;
-	if (pxmapOnIcon!=NULL)
-		delete pxmapOnIcon;
-	if (pxmapOffIcon!=NULL)
-		delete pxmapOffIcon;
+	//
 }
 
 //! Determine which "layer" the plugin's drawing will happen on.
@@ -87,7 +86,6 @@ void CompassMarks::init()
 {
 	// Because the plug-in has no configuration GUI, users rely on what's
 	// written in the configuration file to know what can be configured.
-	conf = StelApp::getInstance().getSettings();
 	Q_ASSERT(conf);
 	if (!conf->childGroups().contains("CompassMarks"))
 		restoreDefaultConfiguration();
@@ -96,14 +94,18 @@ void CompassMarks::init()
 
 	try
 	{
-		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-		pxmapGlow = new QPixmap(":/graphicGui/glow32x32.png");
-		pxmapOnIcon = new QPixmap(":/compassMarks/bt_compass_on.png");
-		pxmapOffIcon = new QPixmap(":/compassMarks/bt_compass_off.png");
-
 		addAction("actionShow_Compass_Marks", N_("Compass Marks"), N_("Compass marks"), "marksVisible");
-		toolbarButton = new StelButton(NULL, *pxmapOnIcon, *pxmapOffIcon, *pxmapGlow, "actionShow_Compass_Marks");
-		gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
+
+		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+		if (gui != NULL)
+		{
+			toolbarButton = new StelButton(NULL,
+						       QPixmap(":/compassMarks/bt_compass_on.png"),
+						       QPixmap(":/compassMarks/bt_compass_off.png"),
+						       QPixmap(":/graphicGui/glow32x32.png"),
+						       "actionShow_Compass_Marks");
+			gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");			
+		}
 		connect(GETSTELMODULE(LandscapeMgr), SIGNAL(cardinalsPointsDisplayedChanged(bool)), this, SLOT(cardinalPointsChanged(bool)));
 		cardinalPointsState = false;
 
@@ -123,7 +125,7 @@ void CompassMarks::draw(StelCore* core)
 	if (markFader.getInterstate() <= 0.0) { return; }
 
 	Vec3d pos;
-	StelProjectorP prj = core->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff); // Maybe conflict with Scenery3d branch. AW20120214 No. GZ20120826.
+	StelProjectorP prj = core->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
 	StelPainter painter(prj);
 	painter.setFont(font);
 

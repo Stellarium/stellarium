@@ -88,7 +88,13 @@ void StelPainter::usePlanetShader(bool use)
 	planetShader = use;
 }
 
-StelPainter::StelPainter(const StelProjectorP& proj) : prj(proj), planetShader(false)
+StelPainter::StelPainter(const StelProjectorP& proj)
+	: prj(proj),
+	  planetShader(false),
+	  vertexArray(ArrayDesc()),
+	  texCoordArray(ArrayDesc()),
+	  normalArray(ArrayDesc()),
+	  colorArray(ArrayDesc())
 {
 	Q_ASSERT(proj);
 
@@ -600,15 +606,17 @@ void StelPainter::sSphereMap(const float radius, const int slices, const int sta
 
 void StelPainter::drawTextGravity180(float x, float y, const QString& ws, const float xshift, const float yshift)
 {
-	float dx, dy, d, theta, psi;
+	float dx, dy, d, theta, theta_o, psi;
 	dx = x - prj->viewportCenter[0];
 	dy = y - prj->viewportCenter[1];
 	d = std::sqrt(dx*dx + dy*dy);
+	float limit = 120.;
 
 	// If the text is too far away to be visible in the screen return
 	if (d>qMax(prj->viewportXywh[3], prj->viewportXywh[2])*2)
 		return;
 	theta = std::atan2(dy - 1, dx);
+	theta_o = M_PI + std::atan2(dx, dy - 1);
 	psi = std::atan2((float)getFontMetrics().width(ws)/ws.length(),d + 1) * 180./M_PI;
 	if (psi>5)
 		psi = 5;
@@ -617,16 +625,30 @@ void StelPainter::drawTextGravity180(float x, float y, const QString& ws, const 
 	float xVc = prj->viewportCenter[0] + xshift;
 	float yVc = prj->viewportCenter[1] + yshift;
 
+	const float cosr = std::cos(-theta_o * M_PI/180.);
+	const float sinr = std::sin(-theta_o * M_PI/180.);
+	float xom = x + xshift*cosr - yshift*sinr;
+	float yom = y + yshift*sinr + yshift*cosr;
+
 	QString lang = StelApp::getInstance().getLocaleMgr().getAppLanguage();
-	if (!QString("ar fa ur he yi").contains(lang))
+	if (!QString("ar fa ckb ug ur he yi").contains(lang))
 	{
 		for (int i=0; i<ws.length(); ++i)
 		{
-			x = d * std::cos(theta) + xVc ;
-			y = d * std::sin(theta) + yVc ; 
-			drawText(x, y, ws[i], 90. + theta*180./M_PI, 0., 0.);
-			// Compute how much the character contributes to the angle
-			theta += psi * M_PI/180. * (1 + ((float)getFontMetrics().width(ws[i]) - cWidth)/ cWidth);
+			if (d<limit)
+			{
+				drawText(xom, yom, ws[i], -theta_o*180./M_PI+psi*i, 0., 0.);
+				xom += cWidth*std::cos(-theta_o+psi*i * M_PI/180.);
+				yom += cWidth*std::sin(-theta_o+psi*i * M_PI/180.);
+			}
+			else
+			{
+				x = d * std::cos(theta) + xVc ;
+				y = d * std::sin(theta) + yVc ;
+				drawText(x, y, ws[i], 90. + theta*180./M_PI, 0., 0.);
+				// Compute how much the character contributes to the angle
+				theta += psi * M_PI/180. * (1 + ((float)getFontMetrics().width(ws[i]) - cWidth)/ cWidth);
+			}
 		}
 	}
 	else
@@ -634,10 +656,19 @@ void StelPainter::drawTextGravity180(float x, float y, const QString& ws, const 
 		int slen = ws.length();
 		for (int i=0;i<slen;i++)
 		{
-			x = d * std::cos (theta) + xVc;
-			y = d * std::sin (theta) + yVc; 
-			drawText(x, y, ws[slen-1-i], 90. + theta*180./M_PI, 0., 0.);
-			theta += psi * M_PI/180. * (1 + ((float)getFontMetrics().width(ws[slen-1-i]) - cWidth)/ cWidth);
+			if (d<limit)
+			{
+				drawText(xom, yom, ws[slen-1-i], -theta_o*180./M_PI+psi*i, 0., 0.);
+				xom += cWidth*std::cos(-theta_o+psi*i * M_PI/180.);
+				yom += cWidth*std::sin(-theta_o+psi*i * M_PI/180.);
+			}
+			else
+			{
+				x = d * std::cos (theta) + xVc;
+				y = d * std::sin (theta) + yVc;
+				drawText(x, y, ws[slen-1-i], 90. + theta*180./M_PI, 0., 0.);
+				theta += psi * M_PI/180. * (1 + ((float)getFontMetrics().width(ws[slen-1-i]) - cWidth)/ cWidth);
+			}
 		}
 	}
 }
@@ -662,7 +693,12 @@ struct StringTexture
 	int subTexWidth;
 	int subTexHeight;
 
-	StringTexture() : texture(0) {;}
+	StringTexture()
+		: texture(0),
+		  width(0),
+		  height(0),
+		  subTexWidth(0),
+		  subTexHeight(0) {;}
 	~StringTexture()
 	{
 		if (texture != 0)

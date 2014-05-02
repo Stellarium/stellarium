@@ -21,17 +21,22 @@
 #include "Lens.hpp"
 
 Ocular::Ocular()
+	: m_binoculars(false),
+	  m_appearentFOV(0.0),
+	  m_effectiveFocalLength(0.0),
+	  m_fieldStop(0.0),
+	  m_reticleFOV(0.0)
 {
 }
 
 Ocular::Ocular(const QObject& other)
+	: m_binoculars(other.property("binoculars").toBool()),
+	  m_appearentFOV(other.property("appearentFOV").toDouble()),
+	  m_effectiveFocalLength(other.property("effectiveFocalLength").toDouble()),
+	  m_fieldStop(other.property("fieldStop").toDouble()),
+	  m_name(other.property("name").toString()),
+	  m_reticleFOV(other.property("reticleFOV").toDouble())
 {
-	this->m_appearentFOV = other.property("appearentFOV").toDouble();
-	this->m_effectiveFocalLength = other.property("effectiveFocalLength").toDouble();
-	this->m_fieldStop = other.property("fieldStop").toDouble();
-	this->m_name = other.property("name").toString();
-	this->m_binoculars = other.property("binoculars").toBool();
-	this->m_reticleFOV = other.property("reticleFOV").toDouble();
 }
 
 Ocular::~Ocular()
