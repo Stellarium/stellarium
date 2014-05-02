@@ -60,11 +60,19 @@ StelPluginInfo PointerCoordinatesStelPluginInterface::getPluginInfo() const
 }
 
 PointerCoordinates::PointerCoordinates()
-	: flagShowCoordinates(false),
-	  toolbarButton(NULL)
+	: flagShowCoordinates(false)
+	, flagEnableAtStartup(false)
+	, flagShowCoordinatesButton(false)
+	, textColor(Vec3f(1,0.5,0))
+	, coordinatesPoint(Vec3d(0,0,0))
+	, fontSize(14)
+	, toolbarButton(NULL)
 {
 	setObjectName("PointerCoordinates");
 	mainWindow = new PointerCoordinatesWindow();
+	StelApp &app = StelApp::getInstance();
+	conf = app.getSettings();
+	gui = dynamic_cast<StelGui*>(app.getGui());
 }
 
 PointerCoordinates::~PointerCoordinates()
@@ -74,10 +82,6 @@ PointerCoordinates::~PointerCoordinates()
 
 void PointerCoordinates::init()
 {
-	StelApp &app = StelApp::getInstance();
-	conf = app.getSettings();
-	gui = dynamic_cast<StelGui*>(app.getGui());
-
 	if (!conf->childGroups().contains("PointerCoordinates"))
 	{
 		qDebug() << "PointerCoordinates: no coordinates section exists in main config file - creating with defaults";
@@ -189,18 +193,21 @@ void PointerCoordinates::saveConfiguration(void)
 
 void PointerCoordinates::setFlagShowCoordinatesButton(bool b)
 {
-	if (b==true) {
-		if (toolbarButton==NULL) {
-			// Create the button
-			toolbarButton = new StelButton(NULL,
-						       QPixmap(":/PointerCoordinates/bt_PointerCoordinates_On.png"),
-						       QPixmap(":/PointerCoordinates/bt_PointerCoordinates_Off.png"),
-						       QPixmap(":/graphicGui/glow32x32.png"),
-						       "actionShow_MousePointer_Coordinates");
+	if (gui!=NULL)
+	{
+		if (b==true) {
+			if (toolbarButton==NULL) {
+				// Create the button
+				toolbarButton = new StelButton(NULL,
+							       QPixmap(":/PointerCoordinates/bt_PointerCoordinates_On.png"),
+							       QPixmap(":/PointerCoordinates/bt_PointerCoordinates_Off.png"),
+							       QPixmap(":/graphicGui/glow32x32.png"),
+							       "actionShow_MousePointer_Coordinates");
+			}
+			gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
+		} else {
+			gui->getButtonBar()->hideButton("actionShow_MousePointer_Coordinates");
 		}
-		gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
-	} else {
-		gui->getButtonBar()->hideButton("actionShow_MousePointer_Coordinates");
 	}
 	flagShowCoordinatesButton = b;
 }
