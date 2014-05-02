@@ -61,11 +61,19 @@ StelPluginInfo EquationOfTimeStelPluginInterface::getPluginInfo() const
 }
 
 EquationOfTime::EquationOfTime()
-	: flagShowSolutionEquationOfTime(false),
-	  toolbarButton(NULL)
+	: flagShowSolutionEquationOfTime(false)
+	, flagUseInvertedValue(false)
+	, flagUseMsFormat(false)
+	, flagEnableAtStartup(false)
+	, flagShowEOTButton(false)
+	, fontSize(20)
+	, toolbarButton(NULL)
 {
 	setObjectName("EquationOfTime");
 	mainWindow = new EquationOfTimeWindow();
+	StelApp &app = StelApp::getInstance();
+	conf = app.getSettings();
+	gui = dynamic_cast<StelGui*>(app.getGui());
 }
 
 EquationOfTime::~EquationOfTime()
@@ -76,9 +84,6 @@ EquationOfTime::~EquationOfTime()
 void EquationOfTime::init()
 {
 	StelApp &app = StelApp::getInstance();
-	conf = app.getSettings();
-	gui = dynamic_cast<StelGui*>(app.getGui());
-
 	if (!conf->childGroups().contains("EquationOfTime"))
 	{
 		qDebug() << "EquationOfTime: no EquationOfTime section exists in main config file - creating with defaults";

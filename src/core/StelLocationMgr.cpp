@@ -46,11 +46,13 @@ void StelLocationMgr::generateBinaryLocationFile(const QString& fileName, bool i
 {
 	const QMap<QString, StelLocation>& cities = loadCities(fileName, isUserLocation);
 	QFile binfile(binFilePath);
-	binfile.open(QIODevice::WriteOnly);
-	QDataStream out(&binfile);
-	out.setVersion(QDataStream::Qt_4_6);
-	out << cities;
-	binfile.close();
+	if(binfile.open(QIODevice::WriteOnly))
+	{
+		QDataStream out(&binfile);
+		out.setVersion(QDataStream::Qt_4_6);
+		out << cities;
+		binfile.close();
+	}
 }
 
 QMap<QString, StelLocation> StelLocationMgr::loadCitiesBin(const QString& fileName) const

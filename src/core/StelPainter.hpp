@@ -325,8 +325,9 @@ private:
 	};
 
 	//! Struct describing one opengl array
-	typedef struct
+	typedef struct ArrayDesc
 	{
+		ArrayDesc() : size(0), type(0), pointer(NULL), enabled(false) {}
 		int size;				// The number of coordinates per vertex.
 		int type;				// The data type of each coordinate (GL_SHORT, GL_INT, GL_FLOAT, or GL_DOUBLE).
 		const void* pointer;	// Pointer to the first coordinate of the first vertex in the array.

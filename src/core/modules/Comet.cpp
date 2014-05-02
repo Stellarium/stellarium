@@ -107,6 +107,9 @@ Comet::Comet(const QString& englishName,
 
 	flagLabels = true;
 
+	semiMajorAxis = 0.;
+	isCometFragment = false;
+	nameIsProvisionalDesignation = false;
 }
 
 Comet::~Comet()

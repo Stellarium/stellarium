@@ -42,7 +42,13 @@ public:
 	//! @param velocity the speed of the meteor in km/s.
 	//! @param rAlpha the radiant alpha in rad
 	//! @param rDelta the radiant delta in rad
-	MeteorStream(const StelCore*, double velocity, double radiantAlpha, double radiantDelta);
+	//! @param pidx population index
+	MeteorStream(const StelCore*,
+		     double velocity,
+		     double radiantAlpha,
+		     double radiantDelta,
+		     float pidx);
+
 	virtual ~MeteorStream();
 
 	//! Updates the position of the meteor, and expires it if necessary.
@@ -51,10 +57,6 @@ public:
 
 	//! Draws the meteor.
 	void draw(const StelCore* core, StelPainter& sPainter);
-
-	//! Determine if a meteor is alive or has burned out.
-	//! @return true if alive, else false.
-	bool isAlive(void);
 
 private:
 	bool alive;             //! Indicate if the meteor it still visible
@@ -66,8 +68,8 @@ private:
 	Vec3d posTrain;         //! End of train
 
 	double speed;           //! Velocity of meteor in km/s
+	float pidx;             //! population index
 	double xydistance;      //! Distance in XY plane (orthogonal to meteor path) from observer to meteor
-	double initDist;        //! Initial distance from observer
 	double minDist;         //! Nearest point to observer along path
 	double distMultiplier;  //! Scale magnitude due to changes in distance
 
@@ -75,9 +77,6 @@ private:
 	double endH;            //! End height
 
 	float mag;              //! Apparent magnitude at head, 0-1
-	float maxMag;           //! 0-1
-	float absMag;           //! Absolute magnitude
-	float visMag;           //! Visual magnitude at observer
 };
 
 #endif // _METEORSTREAM_HPP_

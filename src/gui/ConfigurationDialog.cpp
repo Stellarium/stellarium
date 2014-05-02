@@ -65,7 +65,14 @@
 #include <QComboBox>
 #include <QDir>
 
-ConfigurationDialog::ConfigurationDialog(StelGui* agui, QObject* parent) : StelDialog(parent), starCatalogDownloadReply(NULL), currentDownloadFile(NULL), progressBar(NULL), gui(agui)
+ConfigurationDialog::ConfigurationDialog(StelGui* agui, QObject* parent)
+	: StelDialog(parent)
+	, nextStarCatalogToDownloadIndex(0)
+	, starCatalogsCount(0)
+	, starCatalogDownloadReply(NULL)
+	, currentDownloadFile(NULL)
+	, progressBar(NULL)
+	, gui(agui)
 {
 	ui = new Ui_configurationDialogForm;
 	customDeltaTEquationDialog = NULL;

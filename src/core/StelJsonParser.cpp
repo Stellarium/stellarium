@@ -26,7 +26,10 @@
 class StelJsonParserInstance
 {
 public:
-	StelJsonParserInstance(QIODevice* ain) : input(ain), hasNextChar(false)
+	StelJsonParserInstance(QIODevice* ain)
+		: input(ain)
+		, nextChar()
+		, hasNextChar(false)
 	{
 		cur = buffer;
 		last = cur;

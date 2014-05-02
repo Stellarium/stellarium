@@ -253,9 +253,6 @@ landscape_name                      = guereins
 scripting_allow_write_files         = false
 flag_script_allow_ui                = false
 
-[shortcuts]
-actionScript/constellations_tour.ssc   = Ctrl+U, 1
-
 #[proxy]
 #host_name                           = proxy.org
 #port                                = 8080

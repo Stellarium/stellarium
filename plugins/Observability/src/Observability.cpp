@@ -74,7 +74,37 @@ StelPluginInfo ObservabilityStelPluginInterface::getPluginInfo() const
 
 
 Observability::Observability()
-	: ObserverLoc(0.), flagShowReport(false), button(NULL)
+	: Jan1stJD(0.)
+	, GMTShift(0.)
+	, twilightAltRad(0.)
+	, twilightAltDeg(0.)
+	, horizonAltitude(0.)
+	, horizonAltDeg(0.)
+	, selRA(0.)
+	, selDec(0.)
+	, alti(0.)
+	, horizH(0.)
+	, culmAlt(0.)
+	, MoonRise(0.)
+	, MoonSet(0.)
+	, MoonCulm(0.)	
+	, lastJDMoon(0.)	
+	, ObserverLoc(0.)
+	, myPlanet(NULL)
+	, nDays(0)
+	, dmyFormat(false)
+	, hasRisen(false)
+	, configChanged(false)
+	, souChanged(false)
+	, lastType(0)
+	, show_AcroCos(false)
+	, show_Good_Nights(false)
+	, show_Best_Night(false)
+	, show_Today(false)
+	, show_FullMoon(false)
+	, flagShowReport(false)
+	, fontSize(14)	
+	, button(NULL)	
 {
 	setObjectName("Observability");
 	configDialog = new ObservabilityDialog();
@@ -206,12 +236,15 @@ void Observability::init()
 	          configDialog, "visible");
 
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-	button = new StelButton(NULL,
-	                        QPixmap(":/observability/bt_observab_on.png"),
-	                        QPixmap(":/observability/bt_observab_off.png"),
-	                        QPixmap(":/graphicGui/glow32x32.png"),
-	                        actionShow);
-	gui->getButtonBar()->addButton(button, "065-pluginsGroup");
+	if (gui!=NULL)
+	{
+		button = new StelButton(NULL,
+					QPixmap(":/observability/bt_observab_on.png"),
+					QPixmap(":/observability/bt_observab_off.png"),
+					QPixmap(":/graphicGui/glow32x32.png"),
+					actionShow);
+		gui->getButtonBar()->addButton(button, "065-pluginsGroup");
+	}
 	
 	updateMessageText();
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()),

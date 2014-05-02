@@ -25,8 +25,18 @@
 #include <cmath>
 #include <cstdlib>
 
-Skylight::Skylight() : thetas(0.f), T(0.f)
+Skylight::Skylight() :
+	thetas(0.f),
+	T(0.f),
+	zenithLuminance(0.f),
+	zenithColorX(0.f),
+	zenithColorY(0.f),
+	eyeLumConversion(0.f)
 {
+	AY = BY = CY = DY = EY = 0.f;
+	Ax = Bx = Cx = Dx = Ex = 0.f;
+	Ay = By = Cy = Dy = Ey = 0.f;
+	term_x = term_y = term_Y = 0.f;
 }
 
 Skylight::~Skylight()

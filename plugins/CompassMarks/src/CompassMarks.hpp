@@ -24,7 +24,6 @@
 #include "StelFader.hpp"
 #include <QFont>
 
-class QPixmap;
 class StelButton;
 
 //! Main class of the Compass Marks plug-in.
@@ -77,9 +76,6 @@ private:
 	QFont font;
 	Vec3f markColor;
 	LinearFader markFader;
-	QPixmap* pxmapGlow;
-	QPixmap* pxmapOnIcon;
-	QPixmap* pxmapOffIcon;
 	StelButton* toolbarButton;
 	bool cardinalPointsState;
 };

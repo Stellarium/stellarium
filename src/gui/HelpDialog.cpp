@@ -53,7 +53,10 @@
 #include "StelActionMgr.hpp"
 #include "StelJsonParser.hpp"
 
-HelpDialog::HelpDialog(QObject* parent) : StelDialog(parent)
+HelpDialog::HelpDialog(QObject* parent)
+	: StelDialog(parent)
+	, updateState(CompleteNoUpdates)
+	, downloadMgr(NULL)
 {
 	ui = new Ui_helpDialogForm;
 
@@ -155,9 +158,11 @@ void HelpDialog::updateDownloadComplete(QNetworkReply *reply)
 		if (jsonFile.exists())
 			jsonFile.remove();
 
-		jsonFile.open(QIODevice::WriteOnly | QIODevice::Text);
-		jsonFile.write(reply->readAll());
-		jsonFile.close();
+		if(jsonFile.open(QIODevice::WriteOnly | QIODevice::Text))
+		{
+			jsonFile.write(reply->readAll());
+			jsonFile.close();
+		}
 	}
 }
 

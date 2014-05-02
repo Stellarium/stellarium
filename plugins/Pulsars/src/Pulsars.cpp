@@ -82,7 +82,16 @@ StelPluginInfo PulsarsStelPluginInterface::getPluginInfo() const
  Constructor
 */
 Pulsars::Pulsars()
-	: flagShowPulsars(false)
+	: PsrCount(0)
+	, updateState(CompleteNoUpdates)
+	, downloadMgr(NULL)
+	, updateTimer(0)
+	, messageTimer(0)
+	, updatesEnabled(false)
+	, updateFrequencyDays(0)
+	, enableAtStartup(false)
+	, flagShowPulsars(false)
+	, flagShowPulsarsButton(false)
 	, OnIcon(NULL)
 	, OffIcon(NULL)
 	, GlowIcon(NULL)
@@ -495,11 +504,12 @@ QVariantMap Pulsars::loadPSRMap(QString path)
 	QVariantMap map;
 	QFile jsonFile(path);
 	if (!jsonFile.open(QIODevice::ReadOnly))
-	    qWarning() << "Pulsars: cannot open" << QDir::toNativeSeparators(path);
+		qWarning() << "Pulsars: cannot open" << QDir::toNativeSeparators(path);
 	else
-	    map = StelJsonParser::parse(jsonFile.readAll()).toMap();
-
-	jsonFile.close();
+	{
+		map = StelJsonParser::parse(jsonFile.readAll()).toMap();
+		jsonFile.close();
+	}
 	return map;
 }
 
@@ -717,9 +727,11 @@ void Pulsars::updateDownloadComplete(QNetworkReply* reply)
 		if (jsonFile.exists())
 			jsonFile.remove();
 
-		jsonFile.open(QIODevice::WriteOnly | QIODevice::Text);
-		jsonFile.write(reply->readAll());
-		jsonFile.close();
+		if(jsonFile.open(QIODevice::WriteOnly | QIODevice::Text))
+		{
+			jsonFile.write(reply->readAll());
+			jsonFile.close();
+		}
 	}
 
 	if (progressBar)
@@ -760,14 +772,17 @@ void Pulsars::upgradeConfigIni(void)
 void Pulsars::setFlagShowPulsarsButton(bool b)
 {
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-	if (b==true) {
-		if (toolbarButton==NULL) {
-			// Create the pulsars button
-			toolbarButton = new StelButton(NULL, *OnIcon, *OffIcon, *GlowIcon, "actionShow_Pulsars");
+	if (gui!=NULL)
+	{
+		if (b==true) {
+			if (toolbarButton==NULL) {
+				// Create the pulsars button
+				toolbarButton = new StelButton(NULL, *OnIcon, *OffIcon, *GlowIcon, "actionShow_Pulsars");
+			}
+			gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
+		} else {
+			gui->getButtonBar()->hideButton("actionShow_Pulsars");
 		}
-		gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
-	} else {
-		gui->getButtonBar()->hideButton("actionShow_Pulsars");
 	}
 	flagShowPulsarsButton = b;
 }

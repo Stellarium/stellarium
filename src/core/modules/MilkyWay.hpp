@@ -70,7 +70,6 @@ public slots:
 	bool getFlagShow(void) const;
 	
 private:
-	float radius;
 	StelTextureSP tex;
 	Vec3f color;
 	float intensity;
