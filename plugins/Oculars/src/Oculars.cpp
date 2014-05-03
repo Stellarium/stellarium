@@ -151,8 +151,7 @@ Oculars::Oculars():
 	flagInitFOVUsage(false),
 	reticleRotation(0)
 {
-
-	QOpenGLFunctions_1_2::initializeOpenGLFunctions();
+	QOpenGLFunctions::initializeOpenGLFunctions();
 	font.setPixelSize(14);
 
 	ccds = QList<CCD *>();
@@ -1374,22 +1373,20 @@ void Oculars::paintCCDBounds()
 	StelProjector::StelProjectorParams params = core->getCurrentStelProjectorParams();
 	Lens *lens = selectedLensIndex >=0  ? lense[selectedLensIndex] : NULL;
 
-	const StelProjectorP projector = core->getProjection(StelCore::FrameEquinoxEqu);
-	StelPainter painter(projector);
-
-	glDisable(GL_BLEND);
-	painter.setColor(0.f, 0.f, 0.f, 1);
-	glPushMatrix();
-	glTranslated(params.viewportCenter[0] * params.devicePixelsPerPixel, params.viewportCenter[1] * params.devicePixelsPerPixel, 0.0);
-	glRotated(ccdRotationAngle, 0.0, 0.0, 1.0);
-	GLdouble screenFOV = params.fov;
+	const StelProjectorP projector = core->getProjection(StelCore::FrameEquinoxEqu);	
+	double screenFOV = params.fov;
 
 	// draw sensor rectangle
 	if(selectedCCDIndex != -1) {
 		CCD *ccd = ccds[selectedCCDIndex];
 		if (ccd) {
-			painter.setColor(0.77f, 0.14f, 0.16f, 0.5f);
+			StelPainter painter(projector);
+			painter.setColor(0.77f, 0.14f, 0.16f, 1.0f);
 			Telescope *telescope = telescopes[selectedTelescopeIndex];
+			// flip are needed?
+			core->setFlipHorz(telescope->isHFlipped());
+			core->setFlipVert(telescope->isVFlipped());
+
 			const double ccdXRatio = ccd->getActualFOVx(telescope, lens) / screenFOV;
 			const double ccdYRatio = ccd->getActualFOVy(telescope, lens) / screenFOV;
 			// As the FOV is based on the narrow aspect of the screen, we need to calculate
@@ -1402,17 +1399,28 @@ void Oculars::paintCCDBounds()
 			float height = params.viewportXywh[aspectIndex] * ccdXRatio * params.devicePixelsPerPixel;
 
 			if (width > 0.0 && height > 0.0) {
-				glBegin(GL_LINE_LOOP);
-				glVertex2f(-width / 2.0, height / 2.0);
-				glVertex2f(width / 2.0, height / 2.0);
-				glVertex2f(width / 2.0, -height / 2.0);
-				glVertex2f(-width / 2.0, -height / 2.0);
-				glEnd();
+				QPoint a, b;
+				QTransform transform = QTransform().translate(params.viewportCenter[0], params.viewportCenter[1]).rotate(-ccdRotationAngle);
+				// bottom line
+				a = transform.map(QPoint(-width/2.0, -height/2.0));
+				b = transform.map(QPoint(width/2.0, -height/2.0));
+				painter.drawLine2d(a.x(), a.y(), b.x(), b.y());
+				// top line
+				a = transform.map(QPoint(-width/2.0, height/2.0));
+				b = transform.map(QPoint(width/2.0, height/2.0));
+				painter.drawLine2d(a.x(), a.y(), b.x(), b.y());
+				// left line
+				a = transform.map(QPoint(-width/2.0, -height/2.0));
+				b = transform.map(QPoint(-width/2.0, height/2.0));
+				painter.drawLine2d(a.x(), a.y(), b.x(), b.y());
+				// right line
+				a = transform.map(QPoint(width/2.0, height/2.0));
+				b = transform.map(QPoint(width/2.0, -height/2.0));
+				painter.drawLine2d(a.x(), a.y(), b.x(), b.y());
 			}
 		}
 	}
 
-	glPopMatrix();
 }
 
 void Oculars::paintCrosshairs()
