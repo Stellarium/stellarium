@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-04-26 16:57+0700\n"
-"PO-Revision-Date: 2014-02-28 17:14+0000\n"
-"Last-Translator: henrysky <Unknown>\n"
+"PO-Revision-Date: 2014-05-03 01:41+0000\n"
+"Last-Translator: ShunjinZHENG <zhengshunjin@gmail.com>\n"
 "Language-Team: Chinese (Hong Kong) <zh_HK@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-04-27 05:55+0000\n"
+"X-Launchpad-Export-Date: 2014-05-03 05:28+0000\n"
 "X-Generator: Launchpad (build 16985)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:107 src/core/modules/StarMgr.cpp:346
@@ -194,7 +194,7 @@ msgstr "星等：<b>%1</b>"
 #: src/core/modules/Nebula.cpp:120
 #, qt-format
 msgid "Surface brightness: <b>%1</b>"
-msgstr ""
+msgstr "表面亮度: <b>%1</b>"
 
 #: src/core/modules/Nebula.cpp:126
 #, qt-format
@@ -1355,7 +1355,7 @@ msgstr "%1T 的自定义公式"
 #. TRANSLATORS: This message will be displayed for users if Stellarium can't get info about version from stellarium.org
 #: src/gui/HelpDialog.cpp:259
 msgid "Oops... Stellarium can't check latest version."
-msgstr ""
+msgstr "Stellarium无法获取最新版本信息。"
 
 #. TRANSLATORS: This message will be displayed for users if current version of Stellarium is bigger than version from stellarium.org
 #: src/gui/HelpDialog.cpp:281
@@ -1619,11 +1619,11 @@ msgstr "%1 米"
 
 #: src/gui/StelGuiItems.cpp:613
 msgid "Field of view"
-msgstr ""
+msgstr "视野"
 
 #: src/gui/StelGuiItems.cpp:631
 msgid "Frames per second"
-msgstr ""
+msgstr "帧每秒"
 
 #. TRANSLATORS: Short description for Class 1 of the Bortle scale
 #: src/gui/ViewDialog.cpp:327
@@ -2346,7 +2346,7 @@ msgstr "波利尼西亚"
 
 #: src/translations.h:182
 msgid "Romanian"
-msgstr ""
+msgstr "罗马尼亚语(Romanian)"
 
 #: src/translations.h:183
 msgid "Sami"
@@ -9273,7 +9273,7 @@ msgstr ""
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:541
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:548
 msgid "Change Color"
-msgstr ""
+msgstr "更改颜色"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:538
 msgid "Inactive Radiant"
@@ -9297,7 +9297,7 @@ msgstr ""
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:555
 msgid "Label font size (pixels)"
-msgstr ""
+msgstr "标签字号(像素)"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:557
 msgid "Radiants"
