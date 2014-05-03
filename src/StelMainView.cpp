@@ -312,7 +312,7 @@ void StelMainView::init(QSettings* conf)
 	setResizeMode(QDeclarativeView::SizeRootObjectToView);
 	qmlRegisterType<StelSkyItem>("Stellarium", 1, 0, "StelSky");
 	qmlRegisterType<StelGuiItem>("Stellarium", 1, 0, "StelGui");
-	rootContext()->setContextProperty("stelApp", stelApp);
+	rootContext()->setContextProperty("stelApp", stelApp);	
 	setSource(QUrl("qrc:/qml/main.qml"));
 	
 	QSize size = glWidget->windowHandle()->screen()->size();
