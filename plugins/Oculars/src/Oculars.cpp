@@ -1306,7 +1306,8 @@ void Oculars::initializeActivationActions()
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 	Q_ASSERT(gui);
 
-	actionShowOcular = addAction("actionShow_Ocular", "Oculars", N_("Ocular view"), "enableOcular(bool)", "Ctrl+O");
+	QString ocularsGroup = N_("Oculars");
+	actionShowOcular = addAction("actionShow_Ocular", ocularsGroup, N_("Ocular view"), "enableOcular(bool)", "Ctrl+O");
 	actionShowOcular->setChecked(flagShowOculars);
 	// Make a toolbar button
 	try {
@@ -1317,13 +1318,12 @@ void Oculars::initializeActivationActions()
 					       *pxmapOnIcon,
 					       *pxmapOffIcon,
 					       *pxmapGlow,
-							"actionShow_Ocular");
+					       "actionShow_Ocular");
 		gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
 	} catch (std::runtime_error& e) {
 		qWarning() << "WARNING: unable create toolbar button for Oculars plugin: " << e.what();
 	}
 
-	QString ocularsGroup = N_("Oculars");
 	actionMenu = addAction("actionShow_Ocular_Menu", ocularsGroup, N_("Oculars popup menu"), "displayPopupMenu()", "Alt+O");
 	actionShowCrosshairs = addAction("actionShow_Ocular_Crosshairs", ocularsGroup, N_("Show crosshairs"), "toggleCrosshairs(bool)", "Alt+C");
 	actionShowSensor = addAction("actionShow_Sensor", ocularsGroup, N_("Image sensor frame"), "toggleCCD(bool)");
