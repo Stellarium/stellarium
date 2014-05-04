@@ -1246,6 +1246,8 @@ void Oculars::toggleCCD(bool show)
 		StelMovementMgr *movementManager = core->getMovementMgr();
 		movementManager->zoomTo(movementManager->getInitFov());
 		movementManager->setFlagTracking(false);
+		core->setFlipHorz(false);
+		core->setFlipVert(false);
 
 		if (guiPanel) {
 			guiPanel->foldGui();
