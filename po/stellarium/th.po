@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: Thai for stellarium 0.8.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-04-26 16:57+0700\n"
-"PO-Revision-Date: 2014-04-08 02:02+0000\n"
+"PO-Revision-Date: 2014-04-28 04:58+0000\n"
 "Last-Translator: Worachate Boonplod <Unknown>\n"
 "Language-Team: MicKi Alone <Need24Get@msn.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-04-27 05:52+0000\n"
+"X-Launchpad-Export-Date: 2014-04-29 05:49+0000\n"
 "X-Generator: Launchpad (build 16985)\n"
 "X-Poedit-Country: THAILAND\n"
 "X-Poedit-Language: Thai\n"
@@ -8865,7 +8865,7 @@ msgstr "ขนาดตัวอักษร:"
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:71
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:171
 msgid "Meteor Showers"
-msgstr ""
+msgstr "ฝนดาวตก"
 
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:74
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:259
@@ -8876,15 +8876,15 @@ msgstr ""
 
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:172
 msgid "Show meteor showers"
-msgstr ""
+msgstr "แสดงฝนดาวตก"
 
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:173
 msgid "Radiant labels"
-msgstr ""
+msgstr "ป้ายชื่อของจุดกระจาย"
 
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:174
 msgid "Meteor Shower configuration window"
-msgstr ""
+msgstr "หน้าต่างปรับแต่งฝนดาวตก"
 
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:201
 msgid ""
@@ -8894,17 +8894,17 @@ msgstr ""
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1236
 msgid "Quadrantids"
-msgstr ""
+msgstr "ควอแดรนต์"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1238
 msgid "Lyrids"
-msgstr ""
+msgstr "พิณ"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1240
 msgid "α-Centaurids"
-msgstr ""
+msgstr "α-คนครึ่งม้า"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1242
@@ -9303,24 +9303,24 @@ msgstr ""
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:308
 msgid "generic data"
-msgstr ""
+msgstr "ข้อมูลทั่วไป"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:310
 msgid "real data"
-msgstr ""
+msgstr "ข้อมูลจริง"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:316
 msgid "meteor shower"
-msgstr ""
+msgstr "ฝนดาวตก"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:324
 msgid "Radiant drift (per day)"
-msgstr ""
+msgstr "การเลื่อนของจุดกระจาย (ต่อวัน)"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:331
 #, qt-format
 msgid "Geocentric meteoric velocity: %1 km/s"
-msgstr ""
+msgstr "ความเร็วดาวตกเทียบกับศูนย์กลางโลก: %1 กม./วินาที"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:336
 #, qt-format
@@ -9330,7 +9330,7 @@ msgstr ""
 #: plugins/MeteorShowers/src/MeteorShower.cpp:341
 #, qt-format
 msgid "Parent body: %1"
-msgstr ""
+msgstr "วัตถุต้นกำเนิด: %1"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:347
 msgid "Active"
@@ -9343,15 +9343,15 @@ msgstr ""
 #: plugins/MeteorShowers/src/MeteorShower.cpp:360
 #, qt-format
 msgid "Maximum: %1"
-msgstr ""
+msgstr "มากที่สุด: %1"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:363
 msgid "Solar longitude is"
-msgstr ""
+msgstr "ลองจิจูดฟ้าของดวงอาทิตย์"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:372
 msgid "variable"
-msgstr ""
+msgstr "แปรผันได้"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:167
 msgid "ZHR"
@@ -9359,11 +9359,11 @@ msgstr ""
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:168
 msgid "Data Type"
-msgstr ""
+msgstr "ชนิดข้อมูล"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:169
 msgid "Peak"
-msgstr ""
+msgstr "สูงสุด"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:180
 msgid "Start date greater than end date!"
@@ -9395,7 +9395,7 @@ msgstr ""
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:261
 msgid "Meteor shower"
-msgstr ""
+msgstr "ฝนดาวตก"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:262
 msgid ""
@@ -9472,7 +9472,7 @@ msgstr ""
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:273
 msgid "Info"
-msgstr ""
+msgstr "ข้อมูล"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:274
 msgid "Info about meteor showers you can get here:"
