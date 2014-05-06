@@ -134,7 +134,10 @@ float MeteorShower::getSelectPriority(const StelCore*) const
 
 QString MeteorShower::getDesignation() const
 {
-	return designation;
+	QString d = "";
+	if (showerID.toInt()==0)
+		d = showerID;
+	return d;
 }
 
 QString MeteorShower::getDateFromJSON(QString jsondate) const
@@ -310,7 +313,13 @@ QString MeteorShower::getInfoString(const StelCore* core, const InfoStringGroup&
 		mstdata = q_("real data");
 
 	if(flags&Name)
-		oss << "<h2>" << getNameI18n() << " (" << showerID  <<")</h2>";
+	{
+		oss << "<h2>" << getNameI18n();
+		if (showerID.toInt()==0)
+			oss << " (" << showerID  <<")</h2>";
+		else
+			oss << "</h2>";
+	}
 
 	if(flags&Extra)
 		oss << q_("Type: <b>%1</b> (%2)").arg(q_("meteor shower"), mstdata) << "<br />";
