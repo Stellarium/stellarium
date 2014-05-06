@@ -74,11 +74,11 @@ public:
 	virtual double getAngularSize(const StelCore* core) const;
 	virtual QString getNameI18n(void) const
 	{
-		return q_(designation);
+		return q_(designation.trimmed());
 	}
 	virtual QString getEnglishName(void) const
 	{
-		return designation;
+		return designation.trimmed();
 	}
 	QString getDesignation(void) const;
 	void update(double deltaTime);
