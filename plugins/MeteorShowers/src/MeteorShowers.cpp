@@ -686,7 +686,7 @@ StelObjectP MeteorShowers::searchByName(const QString& englishName) const
 	{
 		if (ms->initialized)
 		{
-			if (ms->getEnglishName().toUpper() == englishName.toUpper())
+			if (ms->getEnglishName().toUpper() == englishName.toUpper() || (ms->getDesignation().toUpper() == englishName.toUpper() && ms->getDesignation().size()>0))
 			{
 				return qSharedPointerCast<StelObject>(ms);
 			}
@@ -1305,7 +1305,7 @@ void MeteorShowers::translations()
 	// TRANSLATORS: Name of meteor shower
 	N_("η-Lyrids");
 	// TRANSLATORS: Name of meteor shower
-	N_("α–Scorpiids");
+	N_("α-Scorpiids");
 	// TRANSLATORS: Name of meteor shower
 	N_("Ophiuchids");
 	// TRANSLATORS: Name of meteor shower
