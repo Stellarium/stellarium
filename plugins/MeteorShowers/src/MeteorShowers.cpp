@@ -686,7 +686,10 @@ StelObjectP MeteorShowers::searchByName(const QString& englishName) const
 	{
 		if (ms->initialized)
 		{
-			if (ms->getEnglishName().toUpper() == englishName.toUpper() || (ms->getDesignation().toUpper() == englishName.toUpper() && ms->getDesignation().size()>0))
+			bool sameEngName = ms->getEnglishName().toUpper() == englishName.toUpper();
+			bool desigIsEngName = ms->getDesignation().toUpper() == englishName.toUpper();
+			bool emptyDesig = ms->getDesignation().isEmpty();
+			if (sameEngName || (desigIsEngName && !emptyDesig))
 			{
 				return qSharedPointerCast<StelObject>(ms);
 			}
