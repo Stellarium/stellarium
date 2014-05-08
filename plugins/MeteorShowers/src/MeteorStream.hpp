@@ -39,12 +39,12 @@ class MeteorStream
 {
 public:
 	//! Create a Meteor object.
-	//! @param velocity the speed of the meteor in km/s.
+	//! @param the speed of the meteor in km/s.
 	//! @param rAlpha the radiant alpha in rad
 	//! @param rDelta the radiant delta in rad
 	//! @param pidx population index
 	MeteorStream(const StelCore*,
-		     double velocity,
+		     double speed,
 		     double radiantAlpha,
 		     double radiantDelta,
 		     float pidx);
@@ -59,24 +59,24 @@ public:
 	void draw(const StelCore* core, StelPainter& sPainter);
 
 private:
-	bool alive;             //! Indicate if the meteor it still visible
+	bool m_alive;             //! Indicate if the meteor it still visible
 
-	Mat4d viewMatrix;       //! View Matrix
-	Vec3d obs;              //! Observer position
-	Vec3d position;         //! Equatorial coordinate position
-	Vec3d posInternal;      //! Middle of train
-	Vec3d posTrain;         //! End of train
+	Mat4d m_viewMatrix;       //! View Matrix
+	Vec3d m_obs;              //! Observer position
+	Vec3d m_position;         //! Equatorial coordinate position
+	Vec3d m_posInternal;      //! Middle of train
+	Vec3d m_posTrain;         //! End of train
 
-	double speed;           //! Velocity of meteor in km/s
-	float pidx;             //! population index
-	double xydistance;      //! Distance in XY plane (orthogonal to meteor path) from observer to meteor
-	double minDist;         //! Nearest point to observer along path
-	double distMultiplier;  //! Scale magnitude due to changes in distance
+	double m_speed;           //! Velocity of meteor in km/s
+	float m_pidx;             //! population index
+	double m_xydistance;      //! Distance in XY plane (orthogonal to meteor path) from observer to meteor
+	double m_minDist;         //! Nearest point to observer along path
+	double m_distMultiplier;  //! Scale magnitude due to changes in distance
 
-	double startH;          //! Start height above center of earth
-	double endH;            //! End height
+	double m_startH;          //! Start height above center of earth
+	double m_endH;            //! End height
 
-	float mag;              //! Apparent magnitude at head, 0-1
+	float m_mag;              //! Apparent magnitude at head, 0-1
 };
 
 #endif // _METEORSTREAM_HPP_
