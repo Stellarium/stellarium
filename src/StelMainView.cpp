@@ -120,6 +120,8 @@ void StelSkyItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *optio
 
 void StelSkyItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
+	//To get back the focus from dialogs
+	this->setFocus(true);
 	QPointF pos = event->scenePos();
 	// XXX: to reintroduce
 	//distortPos(&pos);
