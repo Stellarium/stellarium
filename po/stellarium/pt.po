@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-04-26 16:57+0700\n"
-"PO-Revision-Date: 2014-04-17 17:56+0000\n"
+"POT-Creation-Date: 2014-05-06 19:09+0700\n"
+"PO-Revision-Date: 2014-05-08 20:11+0000\n"
 "Last-Translator: Tiago S. <Unknown>\n"
 "Language-Team: Portuguese <pt@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-04-27 05:48+0000\n"
-"X-Generator: Launchpad (build 16985)\n"
+"X-Launchpad-Export-Date: 2014-05-09 05:39+0000\n"
+"X-Generator: Launchpad (build 16996)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:107 src/core/modules/StarMgr.cpp:346
 #: src/core/modules/GridLinesMgr.cpp:695 src/core/modules/LandscapeMgr.cpp:354
@@ -4444,7 +4444,7 @@ msgstr "Todas as disponíveis"
 msgid "Display no information"
 msgstr "Ocultar informações"
 
-#: src/ui_configurationDialog.h:1029 plugins/Oculars/src/Oculars.cpp:1934
+#: src/ui_configurationDialog.h:1029 plugins/Oculars/src/Oculars.cpp:1944
 #: plugins/Observability/src/Observability.cpp:200
 msgid "None"
 msgstr "Nenhuma"
@@ -5180,7 +5180,7 @@ msgstr "Exibe as marcas do compasso no horizonte"
 msgid "Compass marks"
 msgstr "Marcas de compasso"
 
-#: plugins/Oculars/src/Oculars.cpp:80 plugins/Oculars/src/Oculars.cpp:1327
+#: plugins/Oculars/src/Oculars.cpp:80 plugins/Oculars/src/Oculars.cpp:1311
 #: plugins/Oculars/src/ui_ocularDialog.h:1050
 msgid "Oculars"
 msgstr "Oculares"
@@ -5195,205 +5195,205 @@ msgstr ""
 "telescópio. (Apenas a ampliação e o campo de visão são simulados). Também "
 "pode exibir uma estrutura do sensor e uma mira Telrad."
 
-#: plugins/Oculars/src/Oculars.cpp:848
+#: plugins/Oculars/src/Oculars.cpp:847
 msgid "Please select an object before switching to ocular view."
 msgstr "Seleccione um outro objecto antes de mudar para a visão ocular."
 
-#: plugins/Oculars/src/Oculars.cpp:940
+#: plugins/Oculars/src/Oculars.cpp:939
 msgid "&Previous ocular"
 msgstr "Ocular &anterior"
 
-#: plugins/Oculars/src/Oculars.cpp:941
+#: plugins/Oculars/src/Oculars.cpp:940
 msgid "&Next ocular"
 msgstr "Ocular &seguinte"
 
-#: plugins/Oculars/src/Oculars.cpp:942
+#: plugins/Oculars/src/Oculars.cpp:941
 msgid "Select &ocular"
 msgstr "Seleccionar &ocular"
 
-#: plugins/Oculars/src/Oculars.cpp:989
+#: plugins/Oculars/src/Oculars.cpp:988
 msgid "Toggle &crosshair"
 msgstr "Alternar &retículo"
 
-#: plugins/Oculars/src/Oculars.cpp:997
+#: plugins/Oculars/src/Oculars.cpp:996
 msgid "Configure &Oculars"
 msgstr "Configurar &oculares"
 
-#: plugins/Oculars/src/Oculars.cpp:1005
+#: plugins/Oculars/src/Oculars.cpp:1004
 msgid "Toggle &CCD"
 msgstr "Alternar &CCD"
 
-#: plugins/Oculars/src/Oculars.cpp:1012
+#: plugins/Oculars/src/Oculars.cpp:1011
 msgid "Toggle &Telrad"
 msgstr "Alternar &Telrad"
 
-#: plugins/Oculars/src/Oculars.cpp:1021
+#: plugins/Oculars/src/Oculars.cpp:1020
 msgid "&Previous CCD"
 msgstr "CCD &anterior"
 
-#: plugins/Oculars/src/Oculars.cpp:1022
+#: plugins/Oculars/src/Oculars.cpp:1021
 msgid "&Next CCD"
 msgstr "CCD &seguinte"
 
-#: plugins/Oculars/src/Oculars.cpp:1023
+#: plugins/Oculars/src/Oculars.cpp:1022
 msgid "&Select CCD"
 msgstr "&Seleccionar CCD"
 
-#: plugins/Oculars/src/Oculars.cpp:1045
+#: plugins/Oculars/src/Oculars.cpp:1044
 msgid "&Rotate CCD"
 msgstr "&Girar CCD"
 
-#: plugins/Oculars/src/Oculars.cpp:1067
+#: plugins/Oculars/src/Oculars.cpp:1066
 msgid "&Reset rotation"
 msgstr "&Redefinir rotação"
 
-#: plugins/Oculars/src/Oculars.cpp:1310
+#: plugins/Oculars/src/Oculars.cpp:1312
 #: plugins/Oculars/src/ui_ocularDialog.h:1052
 msgid "Ocular view"
 msgstr "Visualização ocular"
 
-#: plugins/Oculars/src/Oculars.cpp:1328
+#: plugins/Oculars/src/Oculars.cpp:1329
 msgid "Oculars popup menu"
 msgstr "Menu de pop-up das oculares"
 
-#: plugins/Oculars/src/Oculars.cpp:1329
+#: plugins/Oculars/src/Oculars.cpp:1330
 msgid "Show crosshairs"
 msgstr "Exibir retículos"
 
-#: plugins/Oculars/src/Oculars.cpp:1330
+#: plugins/Oculars/src/Oculars.cpp:1331
 msgid "Image sensor frame"
 msgstr "Moldura do sensor de imagem"
 
-#: plugins/Oculars/src/Oculars.cpp:1331
+#: plugins/Oculars/src/Oculars.cpp:1332
 msgid "Telrad sight"
 msgstr "Mira Telrad"
 
-#: plugins/Oculars/src/Oculars.cpp:1332
+#: plugins/Oculars/src/Oculars.cpp:1333
 msgid "Oculars plugin configuration"
 msgstr "Configuração do complemento de oculares"
 
-#: plugins/Oculars/src/Oculars.cpp:1334
+#: plugins/Oculars/src/Oculars.cpp:1335
 msgid "Select next telescope"
 msgstr "Seleccionar o telescópio seguinte"
 
-#: plugins/Oculars/src/Oculars.cpp:1336
+#: plugins/Oculars/src/Oculars.cpp:1337
 msgid "Select previous telescope"
 msgstr "Seleccionar o telescópio anterior"
 
-#: plugins/Oculars/src/Oculars.cpp:1338
+#: plugins/Oculars/src/Oculars.cpp:1339
 msgid "Select next eyepiece"
 msgstr "Seleccionar a ócular seguinte"
 
-#: plugins/Oculars/src/Oculars.cpp:1340
+#: plugins/Oculars/src/Oculars.cpp:1341
 msgid "Select previous eyepiece"
 msgstr "Seleccionar a ócular anterior"
 
-#: plugins/Oculars/src/Oculars.cpp:1572
+#: plugins/Oculars/src/Oculars.cpp:1582
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:500
 #, qt-format
 msgid "Ocular #%1"
 msgstr "Ocular #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:1577
+#: plugins/Oculars/src/Oculars.cpp:1587
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:504
 #, qt-format
 msgid "Ocular #%1: %2"
 msgstr "Ocular #%1: %2"
 
 #. TRANSLATORS: FL = Focal length
-#: plugins/Oculars/src/Oculars.cpp:1591
+#: plugins/Oculars/src/Oculars.cpp:1601
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:541
 #, qt-format
 msgid "Ocular FL: %1 mm"
 msgstr "Distância focal da ocular: %1 mm"
 
 #. TRANSLATORS: aFOV = apparent field of view
-#: plugins/Oculars/src/Oculars.cpp:1598
+#: plugins/Oculars/src/Oculars.cpp:1608
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:551
 #, qt-format
 msgid "Ocular aFOV: %1"
 msgstr "Campo de visão aparente da ocular: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1610
+#: plugins/Oculars/src/Oculars.cpp:1620
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:581
 #, qt-format
 msgid "Lens #%1"
 msgstr "Lente nº%1"
 
-#: plugins/Oculars/src/Oculars.cpp:1614
+#: plugins/Oculars/src/Oculars.cpp:1624
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:585
 #, qt-format
 msgid "Lens #%1: %2"
 msgstr "Lente nº%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:1619
+#: plugins/Oculars/src/Oculars.cpp:1629
 msgid "Lens: none"
 msgstr "Lente: nenhuma"
 
-#: plugins/Oculars/src/Oculars.cpp:1629 plugins/Oculars/src/Oculars.cpp:1686
+#: plugins/Oculars/src/Oculars.cpp:1639 plugins/Oculars/src/Oculars.cpp:1696
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:738
 #, qt-format
 msgid "Telescope #%1"
 msgstr "Telescópio nº %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1634 plugins/Oculars/src/Oculars.cpp:1691
+#: plugins/Oculars/src/Oculars.cpp:1644 plugins/Oculars/src/Oculars.cpp:1701
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:742
 #, qt-format
 msgid "Telescope #%1: %2"
 msgstr "Telescópio nº %1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:1645
+#: plugins/Oculars/src/Oculars.cpp:1655
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:818
 #, qt-format
 msgid "Magnification: %1"
 msgstr "Ampliação: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1653
+#: plugins/Oculars/src/Oculars.cpp:1663
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:827
 #, qt-format
 msgid "FOV: %1"
 msgstr "Campo de visão: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1663
+#: plugins/Oculars/src/Oculars.cpp:1673
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:683
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:780
 #, qt-format
 msgid "Dimensions: %1"
 msgstr "Dimensões: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1668
+#: plugins/Oculars/src/Oculars.cpp:1678
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:643
 #, qt-format
 msgid "Sensor #%1"
 msgstr "Sensor nº %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1672
+#: plugins/Oculars/src/Oculars.cpp:1682
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:647
 #, qt-format
 msgid "Sensor #%1: %2"
 msgstr "Sensor nº %1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:1930
+#: plugins/Oculars/src/Oculars.cpp:1940
 msgid "&Lens"
 msgstr "&Lente"
 
-#: plugins/Oculars/src/Oculars.cpp:1931
+#: plugins/Oculars/src/Oculars.cpp:1941
 msgid "&Previous lens"
 msgstr "&Lente anterior"
 
-#: plugins/Oculars/src/Oculars.cpp:1932
+#: plugins/Oculars/src/Oculars.cpp:1942
 msgid "&Next lens"
 msgstr "&Lente seguinte"
 
-#: plugins/Oculars/src/Oculars.cpp:1962
+#: plugins/Oculars/src/Oculars.cpp:1972
 msgid "&Telescope"
 msgstr "&Telescópio"
 
-#: plugins/Oculars/src/Oculars.cpp:1963
+#: plugins/Oculars/src/Oculars.cpp:1973
 msgid "&Previous telescope"
 msgstr "Telescópio &anterior"
 
-#: plugins/Oculars/src/Oculars.cpp:1964
+#: plugins/Oculars/src/Oculars.cpp:1974
 msgid "&Next telescope"
 msgstr "Telescópio &seguinte"
 
@@ -6886,73 +6886,73 @@ msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:242
 #: plugins/Supernovae/src/Supernovae.cpp:719 plugins/Novae/src/Novae.cpp:716
-#: plugins/MeteorShowers/src/MeteorShower.cpp:171
+#: plugins/MeteorShowers/src/MeteorShower.cpp:174
 msgid "January"
 msgstr "Janeiro"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:243
 #: plugins/Supernovae/src/Supernovae.cpp:719 plugins/Novae/src/Novae.cpp:716
-#: plugins/MeteorShowers/src/MeteorShower.cpp:172
+#: plugins/MeteorShowers/src/MeteorShower.cpp:175
 msgid "February"
 msgstr "Fevereiro"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:244
 #: plugins/Supernovae/src/Supernovae.cpp:719 plugins/Novae/src/Novae.cpp:716
-#: plugins/MeteorShowers/src/MeteorShower.cpp:173
+#: plugins/MeteorShowers/src/MeteorShower.cpp:176
 msgid "March"
 msgstr "Março"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:245
 #: plugins/Supernovae/src/Supernovae.cpp:719 plugins/Novae/src/Novae.cpp:716
-#: plugins/MeteorShowers/src/MeteorShower.cpp:174
+#: plugins/MeteorShowers/src/MeteorShower.cpp:177
 msgid "April"
 msgstr "Abril"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:246
 #: plugins/Supernovae/src/Supernovae.cpp:719 plugins/Novae/src/Novae.cpp:716
-#: plugins/MeteorShowers/src/MeteorShower.cpp:175
+#: plugins/MeteorShowers/src/MeteorShower.cpp:178
 msgid "May"
 msgstr "Maio"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:247
 #: plugins/Supernovae/src/Supernovae.cpp:719 plugins/Novae/src/Novae.cpp:716
-#: plugins/MeteorShowers/src/MeteorShower.cpp:176
+#: plugins/MeteorShowers/src/MeteorShower.cpp:179
 msgid "June"
 msgstr "Junho"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:248
 #: plugins/Supernovae/src/Supernovae.cpp:719 plugins/Novae/src/Novae.cpp:716
-#: plugins/MeteorShowers/src/MeteorShower.cpp:177
+#: plugins/MeteorShowers/src/MeteorShower.cpp:180
 msgid "July"
 msgstr "Julho"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:249
 #: plugins/Supernovae/src/Supernovae.cpp:719 plugins/Novae/src/Novae.cpp:716
-#: plugins/MeteorShowers/src/MeteorShower.cpp:178
+#: plugins/MeteorShowers/src/MeteorShower.cpp:181
 msgid "August"
 msgstr "Agosto"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:250
 #: plugins/Supernovae/src/Supernovae.cpp:719 plugins/Novae/src/Novae.cpp:716
-#: plugins/MeteorShowers/src/MeteorShower.cpp:179
+#: plugins/MeteorShowers/src/MeteorShower.cpp:182
 msgid "September"
 msgstr "Setembro"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:251
 #: plugins/Supernovae/src/Supernovae.cpp:719 plugins/Novae/src/Novae.cpp:716
-#: plugins/MeteorShowers/src/MeteorShower.cpp:180
+#: plugins/MeteorShowers/src/MeteorShower.cpp:183
 msgid "October"
 msgstr "Outubro"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:252
 #: plugins/Supernovae/src/Supernovae.cpp:719 plugins/Novae/src/Novae.cpp:716
-#: plugins/MeteorShowers/src/MeteorShower.cpp:181
+#: plugins/MeteorShowers/src/MeteorShower.cpp:184
 msgid "November"
 msgstr "Novembro"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:253
 #: plugins/Supernovae/src/Supernovae.cpp:719 plugins/Novae/src/Novae.cpp:716
-#: plugins/MeteorShowers/src/MeteorShower.cpp:182
+#: plugins/MeteorShowers/src/MeteorShower.cpp:185
 msgid "December"
 msgstr "Dezembro"
 
@@ -7706,7 +7706,7 @@ msgid "Bright Novae configuration window"
 msgstr "Janela de configuração de Novas Brilhantes"
 
 #: plugins/Novae/src/Nova.cpp:135 plugins/Pulsars/src/Pulsar.cpp:168
-#: plugins/MeteorShowers/src/MeteorShower.cpp:316
+#: plugins/MeteorShowers/src/MeteorShower.cpp:325
 #, qt-format
 msgid "Type: <b>%1</b> (%2)"
 msgstr "Tipo: <b>%1</b> (%2)"
@@ -8457,10 +8457,12 @@ msgid ""
 "Display of the planetary systems, which contains the potential habitable "
 "exoplanets"
 msgstr ""
+"Exibição dos sistemas planetários que contêm exoplanetas potencialmente "
+"habitáveis"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:324
 msgid "Enable display of the potential habitable exoplanets only"
-msgstr ""
+msgstr "Ativar a exibição apenas dos exoplanetas potencialmente habitáveis"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:326
 msgid "Show exoplanets button on toolbar"
@@ -9079,6 +9081,8 @@ msgid ""
 "This plugin displays meteor showers and a marker for each active and "
 "inactive radiant, showing real information about its activity."
 msgstr ""
+"Este complemento exibe chuvas de meteoros e um marcador para cada radiante "
+"ativo e inativo, mostrando informações reais sobre a sua atividade."
 
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:172
 msgid "Show meteor showers"
@@ -9277,132 +9281,132 @@ msgstr "Andromedidas"
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1306
 msgid "η-Lyrids"
-msgstr ""
+msgstr "η-Lirídeas"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1308
-msgid "α–Scorpiids"
-msgstr ""
+msgid "α-Scorpiids"
+msgstr "α-Escorpídeas"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1310
 msgid "Ophiuchids"
-msgstr ""
+msgstr "Ofiucídeas"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1312
 msgid "θ-Ophiuchids"
-msgstr ""
+msgstr "θ-Ofiucídeas"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1314
 msgid "κ-Serpentids"
-msgstr ""
+msgstr "κ-Serpentídeas"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1316
 msgid "θ-Centaurids"
-msgstr ""
+msgstr "θ-Centáuridas"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1318
 msgid "ω-Cetids"
-msgstr ""
+msgstr "ω-Cetídeas"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1320
 msgid "Southern ω-Scorpiids"
-msgstr ""
+msgstr "ω-Escorpídeas do Sul"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1322
 msgid "Northern ω-Scorpiids"
-msgstr ""
+msgstr "ω-Escorpídeas do Norte"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1324
 msgid "Arietids"
-msgstr ""
+msgstr "Arietídeas"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1326
 msgid "π-Cetids"
-msgstr ""
+msgstr "π-Cetídeas"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1328
 msgid "δ-Cancrids"
-msgstr ""
+msgstr "δ-Cancrídeas"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1330
 msgid "τ-Herculids"
-msgstr ""
+msgstr "τ-Herculídeas"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1332
 msgid "ρ-Geminids"
-msgstr ""
+msgstr "ρ-Geminídeas"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1334
 msgid "η-Carinids"
-msgstr ""
+msgstr "η-Carinídeas"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1336
 msgid "η-Craterids"
-msgstr ""
+msgstr "η-Craterídeas"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1338
 msgid "π-Virginids"
-msgstr ""
+msgstr "η-Virginídeas"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1340
 msgid "θ-Virginids"
-msgstr ""
+msgstr "θ-Virginídeas"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1342
 msgid "May Librids"
-msgstr ""
+msgstr "Librídeas de Maio"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1344
 msgid "June Scutids"
-msgstr ""
+msgstr "Escutídeas de Junho"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1346
 msgid "α-Pisces Australids"
-msgstr ""
+msgstr "Alfa-Pisces-Australídeas"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1348
 msgid "Southern ι-Aquariids"
-msgstr ""
+msgstr "ι-Aquarídeas do Sul"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1350
 msgid "Northern ι-Aquariids"
-msgstr ""
+msgstr "ι-Aquarídeas do Norte"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1352
 msgid "γ-Aquariids"
-msgstr ""
+msgstr "γ-Aquarídeas"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1354
 msgid "Autumn Arietids"
-msgstr ""
+msgstr "Arietídeas de Outono"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1356
 msgid "χ-Orionids"
-msgstr ""
+msgstr "χ-Oriônidas"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1360
@@ -9467,17 +9471,17 @@ msgstr "Cometa 3D/Biela"
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1384
 msgid "Comet C/1917 F1 (Mellish)"
-msgstr ""
+msgstr "Cometa C/1917 F1 (Mellish)"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1386
 msgid "Comet C/1964 N1 (Ikeya)"
-msgstr ""
+msgstr "Cometa C/1964 N1 (Ikeya)"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1388
 msgid "Comet Schwassmann-Wachmann 3"
-msgstr ""
+msgstr "Cometa Schwassmann-Wachmann 3"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1390
@@ -9509,55 +9513,55 @@ msgstr "Planeta menor 2004 TG10"
 msgid "Minor planet (3200) Phaethon"
 msgstr "Planeta menor (3200) Phaethon"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:308
+#: plugins/MeteorShowers/src/MeteorShower.cpp:311
 msgid "generic data"
 msgstr "informações genéricas"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:310
+#: plugins/MeteorShowers/src/MeteorShower.cpp:313
 msgid "real data"
 msgstr "informações reais"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:316
+#: plugins/MeteorShowers/src/MeteorShower.cpp:325
 msgid "meteor shower"
 msgstr "chuva de meteoros"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:324
+#: plugins/MeteorShowers/src/MeteorShower.cpp:333
 msgid "Radiant drift (per day)"
 msgstr "Desvio radiante (por dia)"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:331
+#: plugins/MeteorShowers/src/MeteorShower.cpp:340
 #, qt-format
 msgid "Geocentric meteoric velocity: %1 km/s"
 msgstr "Velocidade meteórica geocêntrica: %1 km/s"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:336
+#: plugins/MeteorShowers/src/MeteorShower.cpp:345
 #, qt-format
 msgid "The population index: %1"
 msgstr "O índice de população: %1"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:341
+#: plugins/MeteorShowers/src/MeteorShower.cpp:350
 #, qt-format
 msgid "Parent body: %1"
 msgstr "Corpo pai: %1"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:347
+#: plugins/MeteorShowers/src/MeteorShower.cpp:356
 msgid "Active"
 msgstr "Activar"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:355
+#: plugins/MeteorShowers/src/MeteorShower.cpp:364
 msgid "Activity"
 msgstr "Actividade"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:360
+#: plugins/MeteorShowers/src/MeteorShower.cpp:369
 #, qt-format
 msgid "Maximum: %1"
 msgstr "Máximo: %1"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:363
+#: plugins/MeteorShowers/src/MeteorShower.cpp:372
 msgid "Solar longitude is"
 msgstr "A longitude solar é"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:372
+#: plugins/MeteorShowers/src/MeteorShower.cpp:381
 msgid "variable"
 msgstr "variável"
 
