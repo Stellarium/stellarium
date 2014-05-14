@@ -388,11 +388,6 @@ float Exoplanet::getVMagnitude(const StelCore* core) const
 	}
 }
 
-float Exoplanet::getVMagnitudeWithExtinction(const StelCore *core) const
-{
-	return getVMagnitude(core);
-}
-
 double Exoplanet::getAngularSize(const StelCore*) const
 {
 	return 0.0001;
