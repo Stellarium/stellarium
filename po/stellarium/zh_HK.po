@@ -7,21 +7,21 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-06 19:09+0700\n"
-"PO-Revision-Date: 2014-04-26 15:40+0000\n"
+"POT-Creation-Date: 2014-05-14 23:55+0700\n"
+"PO-Revision-Date: 2014-05-14 16:00+0000\n"
 "Last-Translator: henrysky <Unknown>\n"
 "Language-Team: Chinese (Hong Kong) <zh_HK@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-05-07 06:21+0000\n"
-"X-Generator: Launchpad (build 16996)\n"
+"X-Launchpad-Export-Date: 2014-05-15 05:47+0000\n"
+"X-Generator: Launchpad (build 17007)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:107 src/core/modules/StarMgr.cpp:346
 #: src/core/modules/GridLinesMgr.cpp:695 src/core/modules/LandscapeMgr.cpp:354
 #: src/core/modules/NebulaMgr.cpp:126 src/core/modules/SolarSystem.cpp:156
-#: src/core/StelApp.cpp:464 src/core/StelCore.cpp:176
-#: src/core/StelSkyLayerMgr.cpp:87 src/StelMainView.cpp:307
+#: src/core/StelApp.cpp:468 src/core/StelCore.cpp:176
+#: src/core/StelSkyLayerMgr.cpp:87 src/StelMainView.cpp:309
 msgid "Display Options"
 msgstr "顯示選項"
 
@@ -455,7 +455,7 @@ msgstr "日食持續時間: %1%"
 msgid "Rising time: %1%"
 msgstr "日出時間: %1%"
 
-#: src/core/StelApp.cpp:464
+#: src/core/StelApp.cpp:468
 msgid "Night mode"
 msgstr "夜間模式"
 
@@ -1055,7 +1055,7 @@ msgid "Deep-sky objects background images"
 msgstr "深空天體背景圖片"
 
 #: src/core/StelMovementMgr.cpp:129 src/gui/StelGui.cpp:185
-#: src/StelMainView.cpp:306
+#: src/StelMainView.cpp:308
 msgid "Miscellaneous"
 msgstr "其它"
 
@@ -1863,15 +1863,15 @@ msgstr "年"
 msgid "This system does not support OpenGL."
 msgstr "系統不支援OpenGL"
 
-#: src/StelMainView.cpp:306
+#: src/StelMainView.cpp:308
 msgid "Save screenshot"
 msgstr "儲存畫面快照"
 
-#: src/StelMainView.cpp:307
+#: src/StelMainView.cpp:309
 msgid "Full-screen mode"
 msgstr "全螢幕模式"
 
-#: src/StelMainView.cpp:413
+#: src/StelMainView.cpp:415
 #, qt-format
 msgid "Stellarium %1"
 msgstr "Stellarium %1"
@@ -4232,6 +4232,7 @@ msgstr "儲存你在此期間已改的設定, 並成為下次啟動Stellarium的
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:390
 #: plugins/FOV/src/ui_fovWindow.h:387
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:276
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:288
 msgid "Save settings"
 msgstr "儲存設定"
 
@@ -4241,6 +4242,7 @@ msgstr "恢愎Stellarium的原來設定"
 
 #: src/ui_configurationDialog.h:1013 plugins/FOV/src/ui_fovWindow.h:386
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:277
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:289
 msgid "Restore defaults"
 msgstr "還原預設值"
 
@@ -4958,6 +4960,7 @@ msgstr "儲存預設設定"
 #: plugins/FOV/src/ui_fovWindow.h:405
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:279
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:566
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:291
 msgctxt "tab in plugin windows"
 msgid "About"
 msgstr "關於"
@@ -6229,6 +6232,7 @@ msgstr "望遠鏡控制插件"
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:97
 #: plugins/FOV/src/gui/FOVWindow.cpp:79
 #: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:81
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:90
 #, qt-format
 msgid "Version %1"
 msgstr "版本 %1"
@@ -6567,73 +6571,73 @@ msgstr "一個方便的界面用在一些在Stellarium的配置文件中比較�
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:242
 #: plugins/Supernovae/src/Supernovae.cpp:719 plugins/Novae/src/Novae.cpp:716
-#: plugins/MeteorShowers/src/MeteorShower.cpp:174
+#: plugins/MeteorShowers/src/MeteorShower.cpp:175
 msgid "January"
 msgstr "一月"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:243
 #: plugins/Supernovae/src/Supernovae.cpp:719 plugins/Novae/src/Novae.cpp:716
-#: plugins/MeteorShowers/src/MeteorShower.cpp:175
+#: plugins/MeteorShowers/src/MeteorShower.cpp:176
 msgid "February"
 msgstr "二月"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:244
 #: plugins/Supernovae/src/Supernovae.cpp:719 plugins/Novae/src/Novae.cpp:716
-#: plugins/MeteorShowers/src/MeteorShower.cpp:176
+#: plugins/MeteorShowers/src/MeteorShower.cpp:177
 msgid "March"
 msgstr "三月"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:245
 #: plugins/Supernovae/src/Supernovae.cpp:719 plugins/Novae/src/Novae.cpp:716
-#: plugins/MeteorShowers/src/MeteorShower.cpp:177
+#: plugins/MeteorShowers/src/MeteorShower.cpp:178
 msgid "April"
 msgstr "四月"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:246
 #: plugins/Supernovae/src/Supernovae.cpp:719 plugins/Novae/src/Novae.cpp:716
-#: plugins/MeteorShowers/src/MeteorShower.cpp:178
+#: plugins/MeteorShowers/src/MeteorShower.cpp:179
 msgid "May"
 msgstr "五月"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:247
 #: plugins/Supernovae/src/Supernovae.cpp:719 plugins/Novae/src/Novae.cpp:716
-#: plugins/MeteorShowers/src/MeteorShower.cpp:179
+#: plugins/MeteorShowers/src/MeteorShower.cpp:180
 msgid "June"
 msgstr "六月"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:248
 #: plugins/Supernovae/src/Supernovae.cpp:719 plugins/Novae/src/Novae.cpp:716
-#: plugins/MeteorShowers/src/MeteorShower.cpp:180
+#: plugins/MeteorShowers/src/MeteorShower.cpp:181
 msgid "July"
 msgstr "七月"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:249
 #: plugins/Supernovae/src/Supernovae.cpp:719 plugins/Novae/src/Novae.cpp:716
-#: plugins/MeteorShowers/src/MeteorShower.cpp:181
+#: plugins/MeteorShowers/src/MeteorShower.cpp:182
 msgid "August"
 msgstr "八月"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:250
 #: plugins/Supernovae/src/Supernovae.cpp:719 plugins/Novae/src/Novae.cpp:716
-#: plugins/MeteorShowers/src/MeteorShower.cpp:182
+#: plugins/MeteorShowers/src/MeteorShower.cpp:183
 msgid "September"
 msgstr "九月"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:251
 #: plugins/Supernovae/src/Supernovae.cpp:719 plugins/Novae/src/Novae.cpp:716
-#: plugins/MeteorShowers/src/MeteorShower.cpp:183
+#: plugins/MeteorShowers/src/MeteorShower.cpp:184
 msgid "October"
 msgstr "十月"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:252
 #: plugins/Supernovae/src/Supernovae.cpp:719 plugins/Novae/src/Novae.cpp:716
-#: plugins/MeteorShowers/src/MeteorShower.cpp:184
+#: plugins/MeteorShowers/src/MeteorShower.cpp:185
 msgid "November"
 msgstr "十一月"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:253
 #: plugins/Supernovae/src/Supernovae.cpp:719 plugins/Novae/src/Novae.cpp:716
-#: plugins/MeteorShowers/src/MeteorShower.cpp:185
+#: plugins/MeteorShowers/src/MeteorShower.cpp:186
 msgid "December"
 msgstr "十二月"
 
@@ -7346,7 +7350,7 @@ msgid "Bright Novae configuration window"
 msgstr "光亮新星插件設定視窗"
 
 #: plugins/Novae/src/Nova.cpp:135 plugins/Pulsars/src/Pulsar.cpp:168
-#: plugins/MeteorShowers/src/MeteorShower.cpp:325
+#: plugins/MeteorShowers/src/MeteorShower.cpp:331
 #, qt-format
 msgid "Type: <b>%1</b> (%2)"
 msgstr "類型: <b>%1</b> (%2)"
@@ -8564,6 +8568,7 @@ msgstr ""
 "如果太陽是在天球赤道上以等速運轉, 那麼它會很準確的在每天的12點整中天."
 
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:272
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:282
 msgid "Show plug-ins button on toolbar"
 msgstr "顯示插件按扭"
 
@@ -8576,6 +8581,7 @@ msgid "Change sign of equation"
 msgstr "改變公式正負號"
 
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:275
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:283
 msgid "Font size:"
 msgstr "字型大小:"
 
@@ -8609,464 +8615,464 @@ msgid ""
 msgstr "舊的 shower.json 檔案已不被支援 - 使用預設檔案"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1236
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1239
 msgid "Quadrantids"
 msgstr "象限儀座流星雨"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1238
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1241
 msgid "Lyrids"
 msgstr "天琴座流星雨"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1240
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1243
 msgid "α-Centaurids"
 msgstr "半人馬座α流星雨"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1242
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1245
 msgid "γ-Normids"
 msgstr "矩尺座γ流星雨"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1244
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1247
 msgid "η-Aquariids"
 msgstr "寶瓶座η流星雨"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1246
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1249
 msgid "June Bootids"
 msgstr "6月牧夫座流星雨"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1248
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1251
 msgid "Piscis Austrinids"
 msgstr "南魚座流星雨"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1250
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1253
 msgid "Southern δ-Aquariids"
 msgstr "南寶瓶座δ流星雨"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1252
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1255
 msgid "α-Capricornids"
 msgstr "摩羯座α流星雨"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1254
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1257
 msgid "α-Aurigids"
 msgstr "御夫座α流星"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1256
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1259
 msgid "September ε-Perseids"
 msgstr "9月英仙座ε流星雨"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1258
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1261
 msgid "Draconids"
 msgstr "天龍座流星雨"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1260
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1263
 msgid "Leonids"
 msgstr "獅子座流星雨"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1262
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1265
 msgid "Phoenicids"
 msgstr "鳳凰座流星雨"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1264
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1267
 msgid "Puppid-Velids"
 msgstr "船尾/船帆座流星雨"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1266
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1269
 msgid "Ursids"
 msgstr "小熊座流星雨"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1268
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1271
 msgid "Perseids"
 msgstr "英仙座流星雨"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1270
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1273
 msgid "δ-Leonids"
 msgstr "獅子座δ流星雨"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1272
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1275
 msgid "π-Puppids"
 msgstr "船尾座π流星雨"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1274
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1277
 msgid "June Lyrids"
 msgstr "6月天琴座流星雨"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1276
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1279
 msgid "κ-Cygnids"
 msgstr "天鵝座κ流星雨"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1278
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1281
 msgid "ε-Lyrids"
 msgstr "天琴座ε流星雨"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1280
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1283
 msgid "δ-Aurigids"
 msgstr "御夫座δ流星雨"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1282
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1285
 msgid "ε-Geminids"
 msgstr "雙子座ε流星雨"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1284
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1287
 msgid "Southern Taurids"
 msgstr "金牛座南支流星雨"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1286
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1289
 msgid "Northern Taurids"
 msgstr "金牛座北支流星雨"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1288
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1291
 msgid "Monocerotids"
 msgstr "麒麟座流星雨"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1290
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1293
 msgid "α-Monocerotids"
 msgstr "麒麟座α流星雨"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1292
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1295
 msgid "σ-Hydrids"
 msgstr "長蛇座σ流星雨"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1294
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1297
 msgid "Geminids"
 msgstr "雙子座流星雨"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1296
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1299
 msgid "Leonis Minorids"
 msgstr "小獅座流星雨"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1298
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1301
 msgid "December Leonis Minorids"
 msgstr "12月小獅座流星雨"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1300
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1303
 msgid "Comae Berenicids"
 msgstr "后髮座流星雨"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1302
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1305
 msgid "Orionids"
 msgstr "獵戶座流星雨"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1304
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1307
 msgid "Andromedids"
 msgstr "仙女座流星雨"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1306
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1309
 msgid "η-Lyrids"
 msgstr "天琴座η流星雨"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1308
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1311
 msgid "α-Scorpiids"
 msgstr ""
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1310
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1313
 msgid "Ophiuchids"
 msgstr "蛇夫座流星雨"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1312
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1315
 msgid "θ-Ophiuchids"
 msgstr "蛇夫座θ流星雨"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1314
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1317
 msgid "κ-Serpentids"
 msgstr "巨蛇座κ流星雨"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1316
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1319
 msgid "θ-Centaurids"
 msgstr "半人馬座θ流星雨"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1318
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1321
 msgid "ω-Cetids"
 msgstr "鯨魚座ω流星雨"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1320
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1323
 msgid "Southern ω-Scorpiids"
 msgstr "南天蠍座ω流星雨"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1322
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1325
 msgid "Northern ω-Scorpiids"
 msgstr "北天蠍座ω流星雨"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1324
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1327
 msgid "Arietids"
 msgstr "白羊座流星雨"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1326
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1329
 msgid "π-Cetids"
 msgstr "鯨魚座π流星雨"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1328
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1331
 msgid "δ-Cancrids"
 msgstr "巨蟹座δ流星雨"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1330
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1333
 msgid "τ-Herculids"
 msgstr "武仙座τ流星雨"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1332
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1335
 msgid "ρ-Geminids"
 msgstr "雙子座ρ流星雨"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1334
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1337
 msgid "η-Carinids"
 msgstr "船底座η流星雨"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1336
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1339
 msgid "η-Craterids"
 msgstr "巨爵座η流星雨"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1338
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1341
 msgid "π-Virginids"
 msgstr "室女座π流星雨"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1340
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1343
 msgid "θ-Virginids"
 msgstr "室女座θ流星雨"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1342
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1345
 msgid "May Librids"
 msgstr "5月天秤座流星雨"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1344
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1347
 msgid "June Scutids"
 msgstr "6月天盾座流星雨"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1346
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1349
 msgid "α-Pisces Australids"
 msgstr "南魚座α流星雨"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1348
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1351
 msgid "Southern ι-Aquariids"
 msgstr "南ι-寶瓶座流星雨"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1350
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1353
 msgid "Northern ι-Aquariids"
 msgstr "北ι-寶瓶座流星雨"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1352
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1355
 msgid "γ-Aquariids"
 msgstr "寶瓶座γ流星雨"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1354
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1357
 msgid "Autumn Arietids"
 msgstr "秋季白羊座流星雨"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1356
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1359
 msgid "χ-Orionids"
 msgstr "獵戶座χ流星雨"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1360
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1363
 msgid "Comet 1P/Halley"
 msgstr "1P/哈雷彗星"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1362
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1365
 msgid "Comet 7P/Pons-Winnecke"
 msgstr "7P/龐斯 - 溫內克彗星"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1364
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1367
 msgid "Comet 55P/Tempel-Tuttle"
 msgstr "55P/坦普爾 - 塔特爾彗星"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1366
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1369
 msgid "Comet 96P/Machholz"
 msgstr "96P/麥克霍爾茲彗星"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1368
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1371
 msgid "Comet 109P/Swift-Tuttle"
 msgstr "109P/斯威夫特 - 塔特爾彗星"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1370
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1373
 msgid "Comet Thatcher (1861 I)"
 msgstr "佘契爾彗星 (1861 I)"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1372
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1375
 msgid "Comet 26P/Grigg-Skjellerup"
 msgstr "26P/Grigg-Skjellerup彗星"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1374
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1377
 msgid "Comet 21P/Giacobini-Zinner"
 msgstr "21P/ 賈可比尼 - 秦諾彗星"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1376
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1379
 msgid "Comet 169P/NEAT"
 msgstr "169P/NEAT 彗星"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1378
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1381
 msgid "Comet 289P/Blanpain"
 msgstr "289P/ 寶珀彗星"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1380
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1383
 msgid "Comet 8P/Tuttle"
 msgstr "109P/塔特爾彗星"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1382
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1385
 msgid "Comet 3D/Biela"
 msgstr "3D/比拉彗星"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1384
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1387
 msgid "Comet C/1917 F1 (Mellish)"
 msgstr "彗星C/1917 F1 (Mellish)"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1386
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1389
 msgid "Comet C/1964 N1 (Ikeya)"
 msgstr "彗星C/1964 N1 (池谷)"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1388
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1391
 msgid "Comet Schwassmann-Wachmann 3"
 msgstr "施瓦斯曼-瓦茨曼3號彗星"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1390
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1393
 msgid "Minor planet 2003 EH1 and Comet C/1490 Y1"
 msgstr "小行星2003 EH1和彗星C/1490 Y1"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1392
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1395
 msgid "Minor planet (4450) Pan"
 msgstr "小行星 (4450) Pan"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1394
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1397
 msgid "Minor planet 2008 ED69"
 msgstr "小行星 2008 ED69"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1396
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1399
 msgid "Comet 2P/Encke"
 msgstr "2P/恩克彗星"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1398
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1401
 msgid "Minor planet 2004 TG10"
 msgstr "小行星2004 TG10"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1400
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1403
 msgid "Minor planet (3200) Phaethon"
 msgstr "小行星 (3200) 法厄同"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:311
+#: plugins/MeteorShowers/src/MeteorShower.cpp:312
 msgid "generic data"
 msgstr "通用數據"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:313
+#: plugins/MeteorShowers/src/MeteorShower.cpp:314
 msgid "real data"
 msgstr "真實數據"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:325
+#: plugins/MeteorShowers/src/MeteorShower.cpp:331
 msgid "meteor shower"
 msgstr "流星雨"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:333
+#: plugins/MeteorShowers/src/MeteorShower.cpp:340
 msgid "Radiant drift (per day)"
 msgstr "輻射點偏移 (每日)"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:340
+#: plugins/MeteorShowers/src/MeteorShower.cpp:347
 #, qt-format
 msgid "Geocentric meteoric velocity: %1 km/s"
 msgstr "地心流星速度: %1 公里/秒"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:345
+#: plugins/MeteorShowers/src/MeteorShower.cpp:352
 #, qt-format
 msgid "The population index: %1"
 msgstr "光度比: %1"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:350
+#: plugins/MeteorShowers/src/MeteorShower.cpp:357
 #, qt-format
 msgid "Parent body: %1"
 msgstr "母體: %1"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:356
+#: plugins/MeteorShowers/src/MeteorShower.cpp:363
 msgid "Active"
 msgstr "活躍中"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:364
+#: plugins/MeteorShowers/src/MeteorShower.cpp:371
 msgid "Activity"
 msgstr "活動"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:369
+#: plugins/MeteorShowers/src/MeteorShower.cpp:376
 #, qt-format
 msgid "Maximum: %1"
 msgstr "高峰期: %1"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:372
+#: plugins/MeteorShowers/src/MeteorShower.cpp:379
 msgid "Solar longitude is"
 msgstr "太陽黃經為"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:381
+#: plugins/MeteorShowers/src/MeteorShower.cpp:388
 msgid "variable"
 msgstr "可變的"
 
@@ -9311,6 +9317,54 @@ msgstr "結果"
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:565
 msgid "Search Events"
 msgstr "搜尋流星雨"
+
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:54
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:94
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:277
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:279
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:290
+msgid "Pointer Coordinates"
+msgstr "鼠標座標插件"
+
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:57
+msgid "This plugin shows the coordinates of the mouse pointer."
+msgstr "此插件會顯示鼠標在天空的座標"
+
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:94
+msgid "Show equatorial coordinates (J2000.0) of the mouse pointer"
+msgstr "顯示鼠標的J2000.0赤道坐標"
+
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:89
+msgid "Pointer Coordinates plug-in"
+msgstr "鼠標座標插件"
+
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:118
+msgid "The top center of the screen"
+msgstr "屏幕的頂部中心"
+
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:119
+msgid "In center of the top right half of the screen"
+msgstr "在屏幕的右上方一半的中心"
+
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:120
+msgid "The right bottom corner of the screen"
+msgstr "在屏幕的右下角"
+
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:280
+msgid "Show equatorial coordinates of the mouse cursor for epoch J2000.0"
+msgstr ""
+
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:281
+msgid "Enable displaying coordinates at startup"
+msgstr "在啟動時顯示座標"
+
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:285
+msgid "Place of the string with coordinates of the mouse pointer"
+msgstr "鼠標座標字串位置:"
+
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:287
+msgid "Place of the string:"
+msgstr "字串位置:"
 
 #~ msgid "Equatorial Grid"
 #~ msgstr "赤道座標系統"
