@@ -47,7 +47,7 @@ $dbuser	= "exoplanet";
 $dbpass	= "exoplanet";
 
 $UA = LWP::UserAgent->new(keep_alive => 1, timeout => 360);
-$UA->agent("Mozilla/5.0 (Stellarium Exoplanets Catalog Updater 1.1; http://stellarium.org/)");
+$UA->agent("Mozilla/5.0 (Stellarium Exoplanets Catalog Updater 1.2; http://stellarium.org/)");
 $request = HTTP::Request->new('GET', $URL);
 $responce = $UA->request($request);
 
@@ -123,17 +123,17 @@ for ($i=1;$i<scalar(@catalog);$i++) {
 	$pincl		= $psdata[21];	# planet inclination
 	$angdist	= $psdata[16];	# planet angular distance
 	$discovered	= $psdata[37];	# planet discovered
-	$starname	= $psdata[47];	# star name
-	$sRA		= $psdata[48];	# star RA
-	$sDec		= $psdata[49];	# star dec
-	$sVmag		= $psdata[50];	# star v magnitude
-	$sdist		= $psdata[55];	# star distance
-	$smetal		= $psdata[56];	# star metallicity
-	$smass		= $psdata[57];	# star mass
-	$sradius	= $psdata[58];	# star radius
-	$sstype		= $psdata[59];	# star spectral type
-	$sefftemp	= $psdata[61];	# star effective temperature
-
+	$starname	= $psdata[48];	# star name
+	$sRA		= $psdata[49];	# star RA
+	$sDec		= $psdata[50];	# star dec
+	$sVmag		= $psdata[51];	# star v magnitude
+	$sdist		= $psdata[56];	# star distance
+	$smetal		= $psdata[57];	# star metallicity
+	$smass		= $psdata[58];	# star mass
+	$sradius	= $psdata[59];	# star radius
+	$sstype		= $psdata[60];	# star spectral type
+	$sefftemp	= $psdata[62];	# star effective temperature
+	
 	$part = $sRA/15;
 	$hour = int($part);
 	$mint = int(($part-$hour)*60);
@@ -178,7 +178,7 @@ for ($i=1;$i<scalar(@catalog);$i++) {
 	$sname =~ s/^(omicron|omi)/ο/gi;
 	$sname =~ s/^pi/π/gi;
 	$sname =~ s/^rho/ρ/gi;
-	$sname =~ s/^sigma/σ/gi;
+	$sname =~ s/^(sigma|sig)/σ/gi;
 	$sname =~ s/^tau/τ/gi;
 	$sname =~ s/^upsilon/υ/gi;
 	$sname =~ s/^ups/υ/gi;
