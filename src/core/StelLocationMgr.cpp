@@ -71,6 +71,7 @@ QMap<QString, StelLocation> StelLocationMgr::loadCitiesBin(const QString& fileNa
 
 	if (fileName.endsWith(".gz"))
 	{
+		// FIXME: This code doesn't work with MSVC2012 -- need fix! --AW
 		QIODevice* d = KFilterDev::device(&sourcefile, "application/x-gzip", false);
 		d->open(QIODevice::ReadOnly);
 		QByteArray arr = d->readAll();
