@@ -27,6 +27,7 @@
 #include "StelModuleMgr.hpp"
 
 PointerCoordinatesWindow::PointerCoordinatesWindow()
+	: coord(NULL)
 {
 	ui = new Ui_pointerCoordinatesWindowForm();
 }

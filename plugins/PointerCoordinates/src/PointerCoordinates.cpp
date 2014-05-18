@@ -60,7 +60,8 @@ StelPluginInfo PointerCoordinatesStelPluginInterface::getPluginInfo() const
 }
 
 PointerCoordinates::PointerCoordinates()
-	: flagShowCoordinates(false)
+	: currentPlace(TopRight)
+	, flagShowCoordinates(false)
 	, flagEnableAtStartup(false)
 	, flagShowCoordinatesButton(false)
 	, textColor(Vec3f(1,0.5,0))
