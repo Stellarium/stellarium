@@ -24,7 +24,6 @@
 
 #include <QString>
 #include <QObject>
-#include <QOpenGLFunctions>
 
 // Predeclaration
 class StelCore;
@@ -49,7 +48,7 @@ class QSettings;
 //!	Update sky culture, i.e. load data if necessary and translate them to current sky language if needed.
 //! colorSchemeChanged(const QString&)
 //!	Load the given color style
-class StelModule : public QObject, protected QOpenGLFunctions 
+class StelModule : public QObject
 {
 	Q_OBJECT
 	// Do not add Q_OBJECT here!!

@@ -54,7 +54,6 @@ StelPainter::TexturesColorShaderVars StelPainter::texturesColorShaderVars;
 
 StelPainter::GLState::GLState()
 {
-	initializeOpenGLFunctions();
 	blend = glIsEnabled(GL_BLEND);
 	glGetIntegerv(GL_BLEND_SRC_RGB, &blendSrcRGB);
 	glGetIntegerv(GL_BLEND_DST_RGB, &blendDstRGB);

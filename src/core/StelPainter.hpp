@@ -26,7 +26,6 @@
 #include <QString>
 #include <QVarLengthArray>
 #include <QFontMetrics>
-#include <QOpenGLFunctions>
 
 class QOpenGLShaderProgram;
 
@@ -68,7 +67,7 @@ private:
 //! Because openGL is not thread safe, only one instance of StelPainter can exist at a time, enforcing thread safety.
 //! As a coding rule, no openGL calls should be performed when no instance of StelPainter exist.
 //! Typical usage is to create a local instance of StelPainter where drawing operations are needed.
-class StelPainter: protected QOpenGLFunctions
+class StelPainter
 {
 public:
 	friend class VertexArrayProjector;
@@ -314,7 +313,7 @@ private:
 
 	//! RAII class used to store and restore the opengl state.
 	//! to use it we just need to instanciate it at the beginning of a method that might change the state.
-	class GLState : protected QOpenGLFunctions
+	class GLState
 	{
 	public:
 		GLState();
