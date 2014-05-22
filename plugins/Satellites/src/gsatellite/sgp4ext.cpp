@@ -24,7 +24,6 @@
 *       ----------------------------------------------------------------      */
 
 #include "sgp4ext.h"
-#include "StelUtils.hpp"
 
 
 double  sgn
@@ -255,7 +254,7 @@ void newtonnu
                  if ((ecc > 1.0 ) && (fabs(nu)+0.00001 < M_PI-acos(1.0 /ecc)))
                    {
                      sine= ( sqrt( ecc*ecc-1.0  ) * sin(nu) ) / ( 1.0  + ecc*cos(nu) );
-		     e0  = StelUtils::asinh( sine );
+                     e0  = asinh( sine );
                      m   = ecc*sinh(e0) - e0;
                    }
                 }
