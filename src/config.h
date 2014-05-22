@@ -55,4 +55,7 @@
 	}
 #endif
 
+#define GL_GLEXT_PROTOTYPES
+#include <qopengl.h>
+
 #endif // _CONFIG_H_
