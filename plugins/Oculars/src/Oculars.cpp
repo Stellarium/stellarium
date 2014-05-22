@@ -47,7 +47,6 @@
 #include <QMenu>
 #include <QMouseEvent>
 #include <QtNetwork>
-#include <QOpenGLFunctions>
 #include <QPixmap>
 #include <QSignalMapper>
 
@@ -151,7 +150,6 @@ Oculars::Oculars():
 	flagInitFOVUsage(false),
 	reticleRotation(0)
 {
-	QOpenGLFunctions::initializeOpenGLFunctions();
 	font.setPixelSize(14);
 
 	ccds = QList<CCD *>();
