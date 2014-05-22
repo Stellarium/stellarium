@@ -29,7 +29,6 @@
 #include <QDateTime>
 #include <QFile>
 #include <QDir>
-#include <QOpenGLFunctions_1_2>
 #include <QUrl>
 #include <QVariantMap>
 

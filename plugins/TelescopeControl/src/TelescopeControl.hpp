@@ -41,7 +41,6 @@
 #include <QFont>
 #include <QHash>
 #include <QMap>
-#include <QOpenGLFunctions_1_2>
 #include <QProcess>
 #include <QSettings>
 #include <QString>
