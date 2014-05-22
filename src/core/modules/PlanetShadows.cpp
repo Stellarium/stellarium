@@ -41,6 +41,7 @@ void PlanetShadows::setData(const char *data, int size, int count)
 
 	infoCount = count;
 	infoSize = size;
+	// XXX: this does not work with OpenGL ES2 / ANGLE.
 	texture->loadFromMemory(data, size, size, GL_RGBA, GL_FLOAT, GL_RGBA32F);
 }
 
