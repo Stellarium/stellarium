@@ -1,5 +1,6 @@
 #include "PlanetShadows.hpp"
 
+#include <QOpenGLContext>
 #include <QOpenGLShader>
 #include "StelPainter.hpp"
 #include "StelApp.hpp"
