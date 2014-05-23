@@ -179,8 +179,8 @@ namespace StelUtils
 	//! Check if a number is a power of 2.
 	bool isPowerOfTwo(const int value);
 
-	//! Return the first power of two bigger or equal to the given value.
-	int getBiggerEqualPowerOfTwo(int value);
+	//! Return the first power of two bigger than the given value.
+	int getBiggerPowerOfTwo(int value);
 
 	//! Return the inverse sinus hyperbolic of z.
 	double asinh(const double z);
