@@ -835,9 +835,7 @@ void Planet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFon
 		if (rings)
 		{
 			StelPainter sPainter(core->getProjection(transfo));
-			rings->setupShadow(true);
 			rings->draw(&sPainter,transfo,1000.0);
-			rings->setupShadow(false);
 		}
 		return;
 	}
