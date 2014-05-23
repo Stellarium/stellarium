@@ -151,8 +151,8 @@ PlanetShadows::PlanetShadows()
 	, infoCount(0)
 	, infoSize(0)
 {
-	//std::string extensions = reinterpret_cast<const char*>(glGetString(GL_EXTENSIONS));
-	supported = false; // extensions.find("GL_ARB_texture_float") != std::string::npos;
+	std::string extensions = reinterpret_cast<const char*>(glGetString(GL_EXTENSIONS));
+	supported = extensions.find("GL_ARB_texture_float") != std::string::npos;
 
 	if(supported)
 	{
