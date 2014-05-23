@@ -24,7 +24,6 @@
 #include "StelSkyDrawer.hpp"
 #include "SolarSystem.hpp"
 #include "Planet.hpp"
-#include "PlanetShadows.hpp"
 
 #include "StelProjector.hpp"
 #include "sidereal_time.h"
@@ -454,17 +453,6 @@ void Planet::computeTransMatrix(double jd)
 	if (parent)
 	{
 		rotLocalToParent = Mat4d::zrotation(re.ascendingNode - re.precessionRate*(jd-re.epoch)) * Mat4d::xrotation(re.obliquity);
-	}
-}
-
-void Planet::computeModelMatrix(Mat4d &result) const
-{
-	result = Mat4d::translation(eclipticPos) * rotLocalToParent * Mat4d::zrotation(M_PI/180*(axisRotation + 90.));
-	PlanetP p = parent;
-	while (p && p->parent)
-	{
-		result = Mat4d::translation(p->eclipticPos) * result * p->rotLocalToParent;
-		p = p->parent;
 	}
 }
 
@@ -917,7 +905,6 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 
 		if (rings)
 		{
-			rings->setupShadow(true);
 			const double dist = getEquinoxEquatorialPos(core).length();
 			double z_near = 0.9*(dist - rings->getSize());
 			double z_far  = 1.1*(dist + rings->getSize());
@@ -935,36 +922,24 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 			sPainter->getLight().enable();
 			glDisable(GL_DEPTH_TEST);
 			core->setClippingPlanes(n,f);  // Restore old clipping planes
-			rings->setupShadow(false);
 		}
 		else
 		{
 			if (this==ssm->getMoon() && core->getCurrentLocation().planetName=="Earth" && ssm->nearLunarEclipse())
 			{
-				PlanetShadows* shadows = PlanetShadows::getInstance();
+				// Draw earth shadow over moon using stencil buffer if appropriate
+				// This effect curently only looks right from earth viewpoint
+				// TODO: moon magnitude label during eclipse isn't accurate...
+				glClearStencil(0x0);
+				glClear(GL_STENCIL_BUFFER_BIT);
+				glStencilFunc(GL_ALWAYS, 0x1, 0x1);
+				glStencilOp(GL_ZERO, GL_REPLACE, GL_REPLACE);
+				glEnable(GL_STENCIL_TEST);
+				drawSphere(sPainter, screenSz);
+				glDisable(GL_STENCIL_TEST);
 
-				if(shadows->isActive())
-				{
-					shadows->setMoon(texEarthShadow);
-					drawSphere(sPainter, screenSz);
-					shadows->setMoon(StelTextureSP(NULL));
-				}
-				else
-				{
-					// Draw earth shadow over moon using stencil buffer if appropriate
-					// This effect curently only looks right from earth viewpoint
-					// TODO: moon magnitude label during eclipse isn't accurate...
-					glClearStencil(0x0);
-					glClear(GL_STENCIL_BUFFER_BIT);
-					glStencilFunc(GL_ALWAYS, 0x1, 0x1);
-					glStencilOp(GL_ZERO, GL_REPLACE, GL_REPLACE);
-					glEnable(GL_STENCIL_TEST);
-					drawSphere(sPainter, screenSz);
-					glDisable(GL_STENCIL_TEST);
-
-					sPainter->getLight().disable();
-					drawEarthShadow(core, sPainter);
-				}
+				sPainter->getLight().disable();
+				drawEarthShadow(core, sPainter);
 			}
 			else
 			{
@@ -1017,19 +992,7 @@ void Planet::drawSphere(StelPainter* painter, float screenSz)
 	// fits to the observers position. No idea why this is necessary,
 	// perhaps some openGl strangeness, or confusing sin/cos.
 
-	PlanetShadows* shadows = PlanetShadows::getInstance();
-
-	if(shadows->isActive())
-	{
-		PlanetShadows::getInstance()->setupShading(painter, radius * sphereScale, oneMinusOblateness, false);
-
-		painter->usePlanetShader(true);
-		painter->sSphere(radius*sphereScale, oneMinusOblateness, nb_facet, nb_facet);
-		painter->usePlanetShader(false);
-	}
-	else
-		painter->sSphere(radius*sphereScale, oneMinusOblateness, nb_facet, nb_facet);
-
+	painter->sSphere(radius*sphereScale, oneMinusOblateness, nb_facet, nb_facet);
 	glDisable(GL_CULL_FACE);
 }
 
@@ -1189,23 +1152,8 @@ void Ring::draw(StelPainter* sPainter,StelProjector::ModelViewTranformP transfo,
 	const double h = mat.r[ 8]*mat.r[12]
 				   + mat.r[ 9]*mat.r[13]
 				   + mat.r[10]*mat.r[14];
-
 	sPainter->sRing(radiusMin,radiusMax,(h<0.0)?slices:-slices,stacks, 0);
-
 	glDisable(GL_CULL_FACE);
-}
-
-void Ring::setupShadow(bool setup)
-{
-	PlanetShadows* shadows = PlanetShadows::getInstance();
-
-	if(shadows->isActive())
-	{
-		if(setup)
-			shadows->setRings(tex, radiusMin, radiusMax);
-		else
-			shadows->setRings(StelTextureSP(NULL), 0, 0);
-	}
 }
 
 
