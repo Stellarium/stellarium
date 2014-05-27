@@ -72,9 +72,6 @@ public:
 	~Ring(void);
 	void draw(StelPainter* painter, StelProjector::ModelViewTranformP transfo, double screenSz);
 	double getSize(void) const {return radiusMax;}
-
-	void setupShadow(bool setup);
-
 private:
 	const double radiusMin;
 	const double radiusMax;
@@ -171,9 +168,6 @@ public:
 
 	// Compute the transformation matrix from the local Planet coordinate to the parent Planet coordinate
 	void computeTransMatrix(double date);
-
-	// Compute the transformation matrix from model to world coordinates
-	void computeModelMatrix(Mat4d& result) const;
 
 	// Get the phase angle (rad) for an observer at pos obsPos in heliocentric coordinates (in AU)
 	double getPhaseAngle(const Vec3d& obsPos) const;

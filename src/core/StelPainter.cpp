@@ -24,7 +24,6 @@
 #include "StelProjector.hpp"
 #include "StelProjectorClasses.hpp"
 #include "StelUtils.hpp"
-#include "PlanetShadows.hpp"
 
 #include <QDebug>
 #include <QString>
@@ -82,18 +81,7 @@ bool StelPainter::linkProg(QOpenGLShaderProgram* prog, const QString& name)
 	return ret;
 }
 
-void StelPainter::usePlanetShader(bool use)
-{
-	planetShader = use;
-}
-
-StelPainter::StelPainter(const StelProjectorP& proj)
-	: prj(proj),
-	  planetShader(false),
-	  vertexArray(ArrayDesc()),
-	  texCoordArray(ArrayDesc()),
-	  normalArray(ArrayDesc()),
-	  colorArray(ArrayDesc())
+StelPainter::StelPainter(const StelProjectorP& proj) : prj(proj)
 {
 	Q_ASSERT(proj);
 
@@ -467,8 +455,6 @@ void StelPainter::sRing(const float rMin, const float rMax, int slices, const in
 	static QVector<float> texCoordArr;
 	static QVector<float> colorArr;
 
-	PlanetShadows* shadows = PlanetShadows::getInstance();
-
 	// draw intermediate stacks as quad strips
 	for (float r = rMin; r < rMax; r+=dr)
 	{
@@ -505,17 +491,7 @@ void StelPainter::sRing(const float rMin, const float rMax, int slices, const in
 			setArrays((Vec3d*)vertexArr.constData(), (Vec2f*)texCoordArr.constData(), (Vec3f*)colorArr.constData());
 		else
 			setArrays((Vec3d*)vertexArr.constData(), (Vec2f*)texCoordArr.constData());
-
-		if(shadows->isActive())
-		{
-			PlanetShadows::getInstance()->setupShading(this, 1, 1, true);
-
-			planetShader = true;
-			drawFromArray(TriangleStrip, vertexArr.size()/3);
-			planetShader = false;
-		}
-		else
-			drawFromArray(TriangleStrip, vertexArr.size()/3);
+		drawFromArray(TriangleStrip, vertexArr.size()/3);
 	}
 }
 
@@ -1684,7 +1660,6 @@ void StelPainter::sSphere(const float radius, const float oneMinusOblateness, co
 		setArrays((Vec3d*)vertexArr.constData(), (Vec2f*)texCoordArr.constData(), (Vec3f*)colorArr.constData());
 	else
 		setArrays((Vec3d*)vertexArr.constData(), (Vec2f*)texCoordArr.constData());
-
 	drawFromArray(Triangles, indiceArr.size(), 0, true, indiceArr.constData());
 }
 
@@ -1941,7 +1916,6 @@ void StelPainter::initGLShaders()
 
 void StelPainter::deinitGLShaders()
 {
-	PlanetShadows::cleanup();
 	delete basicShaderProgram;
 	basicShaderProgram = NULL;
 	delete colorShaderProgram;
@@ -1996,19 +1970,7 @@ void StelPainter::drawFromArray(const DrawingMode mode, const int count, const i
 	const Mat4f& m = getProjector()->getProjectionMatrix();
 	const QMatrix4x4 qMat(m[0], m[4], m[8], m[12], m[1], m[5], m[9], m[13], m[2], m[6], m[10], m[14], m[3], m[7], m[11], m[15]);
 
-	if (planetShader)
-	{
-		PlanetShadows* shadows = PlanetShadows::getInstance();
-		pr = shadows->setupGeneralUniforms(qMat);
-		pr->setAttributeArray(shadows->shaderVars.vertex, (const GLfloat*)projectedVertexArray.pointer, projectedVertexArray.size);
-		pr->enableAttributeArray(shadows->shaderVars.vertex);
-		convertArrayToFloat(vertexArray, indices ? 0 : offset, count, indices ? indices + offset : NULL);
-		pr->setAttributeArray(shadows->shaderVars.unprojectedVertex, (const GLfloat*)vertexArray.pointer, vertexArray.size);
-		pr->enableAttributeArray(shadows->shaderVars.unprojectedVertex);
-		pr->setAttributeArray(shadows->shaderVars.texCoord, (const GLfloat*)texCoordArray.pointer, 2);
-		pr->enableAttributeArray(shadows->shaderVars.texCoord);
-	}
-	else if (!texCoordArray.enabled && !colorArray.enabled && !normalArray.enabled)
+	if (!texCoordArray.enabled && !colorArray.enabled && !normalArray.enabled)
 	{
 		pr = basicShaderProgram;
 		pr->bind();
@@ -2065,14 +2027,7 @@ void StelPainter::drawFromArray(const DrawingMode mode, const int count, const i
 	else
 		glDrawArrays(mode, offset, count);
 
-	if (planetShader)
-	{
-		PlanetShadows* shadows = PlanetShadows::getInstance();
-		pr->disableAttributeArray(shadows->shaderVars.vertex);
-		pr->disableAttributeArray(shadows->shaderVars.unprojectedVertex);
-		pr->disableAttributeArray(shadows->shaderVars.texCoord);
-	}
-	else if (pr==texturesColorShaderProgram)
+	if (pr==texturesColorShaderProgram)
 	{
 		pr->disableAttributeArray(texturesColorShaderVars.texCoord);
 		pr->disableAttributeArray(texturesColorShaderVars.vertex);
@@ -2134,35 +2089,6 @@ StelPainter::ArrayDesc StelPainter::projectArray(const StelPainter::ArrayDesc& a
 	ret.pointer = polygonVertexArray.constData();
 	ret.enabled = array.enabled;
 	return ret;
-}
-
-void StelPainter::convertArrayToFloat(StelPainter::ArrayDesc& array, int offset, int count, const unsigned short* indices)
-{
-	Q_ASSERT(array.size == 3);
-	Q_ASSERT(array.type == GL_DOUBLE);
-	Vec3d* in = (Vec3d*)array.pointer;
-	Vec3f* out = (Vec3f*)array.pointer;
-
-	// We have two different cases :
-	// 1) We are not using an indice array.  In that case the size of the array is known
-	// 2) We are using an indice array.  In that case we have to find the max value by iterating through the indices.
-	if (indices)
-	{
-		unsigned short max = 0;
-		for (int i = offset; i < offset + count; ++i)
-		{
-			max = std::max(max, indices[i]);
-		}
-		count = max + 1;
-	}
-
-	in += offset;
-	out += offset;
-
-	for (int i = 0; i < count; ++i, ++out)
-		*out = Vec3f(in[i][0], in[i][1], in[i][2]);
-
-	array.type = GL_FLOAT;
 }
 
 // Light methods

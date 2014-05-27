@@ -63,10 +63,8 @@ public:
 	//! Bind the texture so that it can be used for openGL drawing (calls glBindTexture).
 	//! If the texture is lazyly loaded, this starts the loading and return false immediately.
 	//! @return true if the binding successfully occured, false if the texture is not yet loaded.
-	bool bind(int slot = 0);
-
-	//! Load image data from in memory data.
-	bool loadFromMemory(const char *data, int width, int height, GLint format, GLint type, GLint internalFormat = 0);
+	
+	bool bind();
 
 	//! Return whether the texture can be binded, i.e. it is fully loaded
 	bool canBind() const {return id!=0;}
@@ -123,9 +121,6 @@ private:
 	//! This method should be called if the texture loading failed for any reasons
 	//! @param errorMessage the human friendly error message
 	void reportError(const QString& errorMessage);
-
-	//! Load image data from in memory data.
-	void loadData(const char *data, int width, int height, GLint format, GLint type, GLint internalFormat = 0);
 
 	//! Load the texture already in the RAM to the openGL memory
 	//! This function uses openGL routines and must be called in the main thread
