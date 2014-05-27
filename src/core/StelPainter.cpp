@@ -226,94 +226,7 @@ void StelPainter::drawViewportShape(void)
 	enableClientStates(false);
 }
 
-// Arrays to keep cos/sin of angles and multiples of angles. rho and theta are delta angles, and these arrays
-#define MAX_STACKS 4096
-static float cos_sin_rho[2*(MAX_STACKS+1)];
-#define MAX_SLICES 4096
-static float cos_sin_theta[2*(MAX_SLICES+1)];
 
-//! Compute cosines and sines around a circle which is split in "segments" parts.
-//! Values are stored in the global static array cos_sin_theta.
-//! Used for the sin/cos values along a latitude circle, equator, etc. for a spherical mesh.
-//! @param dTheta a difference angle between the stops. Always use 2*M_PI/segments!
-//! @param segments number of partitions (elsewhere called "slices") for the circle
-static void ComputeCosSinTheta(const float dTheta, const int segments)
-{
-	float *cos_sin = cos_sin_theta;
-	float *cos_sin_rev = cos_sin + 2*(segments+1);
-	const float c = std::cos(dTheta);
-	const float s = std::sin(dTheta);
-	*cos_sin++ = 1.f;
-	*cos_sin++ = 0.f;
-	*--cos_sin_rev = -cos_sin[-1];
-	*--cos_sin_rev =  cos_sin[-2];
-	*cos_sin++ = c;
-	*cos_sin++ = s;
-	*--cos_sin_rev = -cos_sin[-1];
-	*--cos_sin_rev =  cos_sin[-2];
-	while (cos_sin < cos_sin_rev)   // compares array address indices only!
-	{
-		// avoid expensive trig functions by use of the addition theorem.
-		cos_sin[0] = cos_sin[-2]*c - cos_sin[-1]*s;
-		cos_sin[1] = cos_sin[-2]*s + cos_sin[-1]*c;
-		cos_sin += 2;
-		*--cos_sin_rev = -cos_sin[-1];
-		*--cos_sin_rev =  cos_sin[-2];
-	}
-}
-
-//! Compute cosines and sines around a half-circle which is split in "segments" parts.
-//! Values are stored in the global static array cos_sin_rho.
-//! Used for the sin/cos values along a meridian for a spherical mesh.
-//! @param dRho a difference angle between the stops. Always use M_PI/segments!
-//! @param segments number of partitions (elsewhere called "stacks") for the half-circle
-static void ComputeCosSinRho(const float dRho, const int segments)
-{
-	float *cos_sin = cos_sin_rho;
-	float *cos_sin_rev = cos_sin + 2*(segments+1);
-	const float c = std::cos(dRho);
-	const float s = std::sin(dRho);
-	*cos_sin++ = 1.f;
-	*cos_sin++ = 0.f;
-	*--cos_sin_rev =  cos_sin[-1];
-	*--cos_sin_rev = -cos_sin[-2];
-	*cos_sin++ = c;
-	*cos_sin++ = s;
-	*--cos_sin_rev =  cos_sin[-1];
-	*--cos_sin_rev = -cos_sin[-2];
-	while (cos_sin < cos_sin_rev)    // compares array address indices only!
-	{
-		// avoid expensive trig functions by use of the addition theorem.
-		cos_sin[0] = cos_sin[-2]*c - cos_sin[-1]*s;
-		cos_sin[1] = cos_sin[-2]*s + cos_sin[-1]*c;
-		cos_sin += 2;
-		*--cos_sin_rev =  cos_sin[-1];
-		*--cos_sin_rev = -cos_sin[-2];
-		// segments--;                       // GZ: WHAT'S THAT GOOD FOR?
-	}
-}
-
-//! Compute cosines and sines around part of a circle (from top to bottom) which is split in "segments" parts.
-//! Values are stored in the global static array cos_sin_rho.
-//! Used for the sin/cos values along a meridian.
-//! GZ: allow leaving away pole caps. The array now contains values for the region minAngle+segments*phi
-//! @param dRho a difference angle between the stops
-//! @param segments number of segments
-//! @param minAngle start angle inside the half-circle. maxAngle=minAngle+segments*phi
-static void ComputeCosSinRhoZone(const float dRho, const int segments, const float minAngle)
-{
-	float *cos_sin = cos_sin_rho;
-	const float c = cos(dRho);
-	const float s = sin(dRho);
-	*cos_sin++ = cos(minAngle);
-	*cos_sin++ = sin(minAngle);
-	for (int i=0; i<segments; ++i) // we cannot mirror this, it may be unequal.
-	{   // efficient computation, avoid expensive trig functions by use of the addition theorem.
-		cos_sin[0] = cos_sin[-2]*c - cos_sin[-1]*s;
-		cos_sin[1] = cos_sin[-2]*s + cos_sin[-1]*c;
-		cos_sin += 2;
-	}
-}
 
 void StelPainter::computeFanDisk(float radius, int innerFanSlices, int level, QVector<double>& vertexArr, QVector<float>& texCoordArr)
 {
@@ -326,9 +239,8 @@ void StelPainter::computeFanDisk(float radius, int innerFanSlices, int level, QV
 		rad[i] = rad[i+1]*(1.f-M_PI/(innerFanSlices<<(i+1)))*2.f/3.f;
 	}
 	int slices = innerFanSlices<<level;
-	const float dtheta = 2.f * M_PI / slices;
-	Q_ASSERT(slices<=MAX_SLICES);
-	ComputeCosSinTheta(dtheta,slices);
+	
+	float* cos_sin_theta = StelUtils::ComputeCosSinTheta(slices);
 	float* cos_sin_theta_p;
 	int slices_step = 2;
 	float x,y,xa,ya;
@@ -419,83 +331,6 @@ void StelPainter::computeFanDisk(float radius, int innerFanSlices, int level, QV
 
 }
 
-void StelPainter::sRing(const float rMin, const float rMax, int slices, const int stacks, const int orientInside)
-{
-	float x,y;
-	int j;
-
-	static Vec3f lightPos3;
-	static Vec4f ambientLight;
-	static Vec4f diffuseLight;
-	float c;
-	const bool isLightOn = light.isEnabled();
-	if (isLightOn)
-	{
-		lightPos3.set(light.getPosition()[0], light.getPosition()[1], light.getPosition()[2]);
-		Vec3f tmpv(0.f);
-		prj->getModelViewTransform()->forward(tmpv); // -posCenterEye
-		//lightPos3 -= tmpv;
-		//lightPos3 = prj->modelViewMatrixf.transpose().multiplyWithoutTranslation(lightPos3);
-		prj->getModelViewTransform()->getApproximateLinearTransfo().transpose().multiplyWithoutTranslation(Vec3d(lightPos3[0], lightPos3[1], lightPos3[2]));
-		prj->getModelViewTransform()->backward(lightPos3);
-		lightPos3.normalize();
-		ambientLight = light.getAmbient();
-		diffuseLight = light.getDiffuse();
-	}
-
-	const float nsign = orientInside?-1.f:1.f;
-
-	const float dr = (rMax-rMin) / stacks;
-	const float dtheta = 2.f * M_PI / slices;
-	if (slices < 0) slices = -slices;
-	Q_ASSERT(slices<=MAX_SLICES);
-	ComputeCosSinTheta(dtheta,slices);
-	float *cos_sin_theta_p;
-
-	static QVector<double> vertexArr;
-	static QVector<float> texCoordArr;
-	static QVector<float> colorArr;
-
-	// draw intermediate stacks as quad strips
-	for (float r = rMin; r < rMax; r+=dr)
-	{
-		const float tex_r0 = (r-rMin)/(rMax-rMin);
-		const float tex_r1 = (r+dr-rMin)/(rMax-rMin);
-		vertexArr.resize(0);
-		texCoordArr.resize(0);
-		colorArr.resize(0);
-		for (j=0,cos_sin_theta_p=cos_sin_theta; j<=slices; ++j,cos_sin_theta_p+=2)
-		{
-			x = r*cos_sin_theta_p[0];
-			y = r*cos_sin_theta_p[1];
-			if (isLightOn)
-			{
-				c = nsign * (lightPos3[0]*x + lightPos3[1]*y);
-				if (c<0) {c=0;}
-				colorArr << c*diffuseLight[0] + ambientLight[0] << c*diffuseLight[1] + ambientLight[1] << c*diffuseLight[2] + ambientLight[2];
-			}
-			texCoordArr << tex_r0 << 0.5f;
-			vertexArr << x << y << 0.f;
-			x = (r+dr)*cos_sin_theta_p[0];
-			y = (r+dr)*cos_sin_theta_p[1];
-			if (isLightOn)
-			{
-				c = nsign * (lightPos3[0]*x + lightPos3[1]*y);
-				if (c<0) {c=0;}
-				colorArr << c*diffuseLight[0] + ambientLight[0] << c*diffuseLight[1] + ambientLight[1] << c*diffuseLight[2] + ambientLight[2];
-			}
-			texCoordArr << tex_r1 << 0.5f;
-			vertexArr << x << y << 0.f;
-		}
-
-		if (isLightOn)
-			setArrays((Vec3d*)vertexArr.constData(), (Vec2f*)texCoordArr.constData(), (Vec3f*)colorArr.constData());
-		else
-			setArrays((Vec3d*)vertexArr.constData(), (Vec2f*)texCoordArr.constData());
-		drawFromArray(TriangleStrip, vertexArr.size()/3);
-	}
-}
-
 static void sSphereMapTexCoordFast(float rho_div_fov, const float costheta, const float sintheta, QVector<float>& out)
 {
 	if (rho_div_fov>0.5f)
@@ -507,17 +342,13 @@ void StelPainter::sSphereMap(const float radius, const int slices, const int sta
 {
 	float rho,x,y,z;
 	int i, j;
+	const float* cos_sin_rho = StelUtils::ComputeCosSinRho(stacks);
+	const float* cos_sin_rho_p;
+
+	const float* cos_sin_theta = StelUtils::ComputeCosSinTheta(slices);
+	const float* cos_sin_theta_p;
+
 	float drho = M_PI / stacks;
-	Q_ASSERT(stacks<=MAX_STACKS);
-	ComputeCosSinRho(drho,stacks);
-	float* cos_sin_rho_p;
-
-	const float dtheta = 2.f * M_PI / slices;
-	Q_ASSERT(slices<=MAX_SLICES);
-
-	ComputeCosSinTheta(dtheta,slices);
-	float* cos_sin_theta_p;
-
 	drho/=textureFov;
 
 	// texturing: s goes from 0.0/0.25/0.5/0.75/1.0 at +y/+x/-y/-x/+y axis
@@ -1546,28 +1377,6 @@ void StelPainter::drawLine2d(const float x1, const float y1, const float x2, con
 // GZ This used to draw a full sphere. Now it's possible to have a spherical zone only.
 void StelPainter::sSphere(const float radius, const float oneMinusOblateness, const int slices, const int stacks, const int orientInside, const bool flipTexture, const float topAngle, const float bottomAngle)
 {
-	// It is really good for performance to have Vec4f,Vec3f objects
-	// static rather than on the stack. But why?
-	// Is the constructor/destructor so expensive?
-	static Vec3f lightPos3;
-	static Vec4f ambientLight;
-	static Vec4f diffuseLight;
-	float c;
-	const bool isLightOn = light.isEnabled();
-	if (isLightOn)
-	{
-		lightPos3.set(light.getPosition()[0], light.getPosition()[1], light.getPosition()[2]);
-		Vec3f tmpv(0.f);
-		prj->getModelViewTransform()->forward(tmpv); // -posCenterEye
-		//lightPos3 -= tmpv;
-		//lightPos3 = prj->modelViewMatrixf.transpose().multiplyWithoutTranslation(lightPos3);
-		prj->getModelViewTransform()->getApproximateLinearTransfo().transpose().multiplyWithoutTranslation(Vec3d(lightPos3[0], lightPos3[1], lightPos3[2]));
-		prj->getModelViewTransform()->backward(lightPos3);
-		lightPos3.normalize();
-		ambientLight = light.getAmbient();
-		diffuseLight = light.getDiffuse();
-	}
-
 	GLfloat x, y, z;
 	GLfloat s=0.f, t=0.f;
 	GLint i, j;
@@ -1584,20 +1393,19 @@ void StelPainter::sSphere(const float radius, const float oneMinusOblateness, co
 		t=1.f;
 	}
 
+	const float* cos_sin_rho = NULL;
 	Q_ASSERT(topAngle<bottomAngle); // don't forget: These are opening angles counted from top.
-	const float drho = (bottomAngle-topAngle) / stacks; // deltaRho:  originally just 180degrees/stacks, now the range clamped.
-	Q_ASSERT(stacks<=MAX_STACKS);
-	//if ((bottomAngle==M_PI) && (topAngle==0))
 	if ((bottomAngle>3.1415) && (topAngle<0.0001)) // safety margin.
-		ComputeCosSinRho(drho, stacks);
+		cos_sin_rho = StelUtils::ComputeCosSinRho(stacks);
 	else
-		ComputeCosSinRhoZone(drho, stacks, M_PI-bottomAngle);
+	{
+		const float drho = (bottomAngle-topAngle) / stacks; // deltaRho:  originally just 180degrees/stacks, now the range clamped.
+		cos_sin_rho = StelUtils::ComputeCosSinRhoZone(drho, stacks, M_PI-bottomAngle);
+	}
 	// GZ: Allow parameters so that pole regions may remain free.
-	float* cos_sin_rho_p;
+	const float* cos_sin_rho_p;
 
-	const float dtheta = 2.f * M_PI / slices;
-	Q_ASSERT(slices<=MAX_SLICES);
-	ComputeCosSinTheta(dtheta,slices);
+	const float* cos_sin_theta = StelUtils::ComputeCosSinTheta(slices);
 	const float *cos_sin_theta_p;
 
 	// texturing: s goes from 0.0/0.25/0.5/0.75/1.0 at +y/+x/-y/-x/+y axis
@@ -1627,23 +1435,11 @@ void StelPainter::sSphere(const float radius, const float oneMinusOblateness, co
 			y = cos_sin_theta_p[0] * cos_sin_rho_p[1];
 			z = nsign * cos_sin_rho_p[0];
 			texCoordArr << s << t;
-			if (isLightOn)
-			{
-				c = nsign * (lightPos3[0]*x*oneMinusOblateness + lightPos3[1]*y*oneMinusOblateness + lightPos3[2]*z);
-				if (c<0) {c=0;}
-				colorArr << c*diffuseLight[0] + ambientLight[0] << c*diffuseLight[1] + ambientLight[1] << c*diffuseLight[2] + ambientLight[2];
-			}
 			vertexArr << x * radius << y * radius << z * oneMinusOblateness * radius;
 			x = -cos_sin_theta_p[1] * cos_sin_rho_p[3];
 			y = cos_sin_theta_p[0] * cos_sin_rho_p[3];
 			z = nsign * cos_sin_rho_p[2];
 			texCoordArr << s << t - dt;
-			if (isLightOn)
-			{
-				c = nsign * (lightPos3[0]*x*oneMinusOblateness + lightPos3[1]*y*oneMinusOblateness + lightPos3[2]*z);
-				if (c<0) {c=0;}
-				colorArr << c*diffuseLight[0] + ambientLight[0] << c*diffuseLight[1] + ambientLight[1] << c*diffuseLight[2] + ambientLight[2];
-			}
 			vertexArr << x * radius << y * radius << z * oneMinusOblateness * radius;
 			s += ds;
 		}
@@ -1657,10 +1453,7 @@ void StelPainter::sSphere(const float radius, const float oneMinusOblateness, co
 	}
 
 	// Draw the array now
-	if (isLightOn)
-		setArrays((Vec3d*)vertexArr.constData(), (Vec2f*)texCoordArr.constData(), (Vec3f*)colorArr.constData());
-	else
-		setArrays((Vec3d*)vertexArr.constData(), (Vec2f*)texCoordArr.constData());
+	setArrays((Vec3d*)vertexArr.constData(), (Vec2f*)texCoordArr.constData());
 	drawFromArray(Triangles, indiceArr.size(), 0, true, indiceArr.constData());
 }
 
@@ -1682,14 +1475,10 @@ StelVertexArray StelPainter::computeSphereNoLight(const float radius, const floa
 		t=1.f;
 	}
 
-	const float drho = M_PI / stacks;
-	Q_ASSERT(stacks<=MAX_STACKS);
-	ComputeCosSinRho(drho,stacks);
-	float* cos_sin_rho_p;
+	const float* cos_sin_rho = StelUtils::ComputeCosSinRho(stacks);
+	const float* cos_sin_rho_p;
 
-	const float dtheta = 2.f * M_PI / slices;
-	Q_ASSERT(slices<=MAX_SLICES);
-	ComputeCosSinTheta(dtheta,slices);
+	const float* cos_sin_theta = StelUtils::ComputeCosSinTheta(slices);
 	const float *cos_sin_theta_p;
 
 	// texturing: s goes from 0.0/0.25/0.5/0.75/1.0 at +y/+x/-y/-x/+y axis
@@ -1726,8 +1515,6 @@ StelVertexArray StelPainter::computeSphereNoLight(const float radius, const floa
 		t -= dt;
 	}
 	return result;
-	//setArrays((Vec3d*)vertexArr.constData(), (Vec2f*)texCoordArr.constData());
-	//drawFromArray(Triangles, indiceArr.size(), 0, true, indiceArr.constData());
 }
 
 // Reimplementation of gluCylinder : glu is overrided for non standard projection
@@ -2018,7 +1805,6 @@ void StelPainter::drawFromArray(const DrawingMode mode, const int count, const i
 	else
 	{
 		qDebug() << "Unhandled parameters." << texCoordArray.enabled << colorArray.enabled << normalArray.enabled;
-		qDebug() << "Light: " << light.isEnabled();
 		Q_ASSERT(0);
 		return;
 	}
@@ -2092,42 +1878,3 @@ StelPainter::ArrayDesc StelPainter::projectArray(const StelPainter::ArrayDesc& a
 	return ret;
 }
 
-// Light methods
-
-void StelPainterLight::setPosition(const Vec4f& v)
-{
-	position = v;
-}
-
-void StelPainterLight::setDiffuse(const Vec4f& v)
-{
-	diffuse = v;
-}
-
-void StelPainterLight::setSpecular(const Vec4f& v)
-{
-	specular = v;
-}
-
-void StelPainterLight::setAmbient(const Vec4f& v)
-{
-	ambient = v;
-}
-
-void StelPainterLight::setEnable(bool v)
-{
-	if (v)
-		enable();
-	else
-		disable();
-}
-
-void StelPainterLight::enable()
-{
-	enabled = true;
-}
-
-void StelPainterLight::disable()
-{
-	enabled = false;
-}
