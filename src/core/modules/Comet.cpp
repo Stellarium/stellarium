@@ -368,7 +368,6 @@ void Comet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFont
 
 void Comet::drawTail(StelCore* core, StelProjector::ModelViewTranformP transfo, bool gas)
 {
-
 	// Find rotation matrix from 0/0/1 to eclipticPosition: crossproduct for axis (normal vector), dotproduct for angle.
 	Vec3d eclposNrm=eclipticPos; eclposNrm.normalize();
 	Mat4d tailrot=Mat4d::rotation(Vec3d(0.0, 0.0, 1.0)^(eclposNrm), std::acos(Vec3d(0.0, 0.0, 1.0).dot(eclposNrm)) );
@@ -388,7 +387,6 @@ void Comet::drawTail(StelCore* core, StelProjector::ModelViewTranformP transfo, 
 		transfo2->combine(dustTailYrot);
 	}
 	StelPainter* sPainter = new StelPainter(core->getProjection(transfo2));
-	sPainter->getLight().disable();
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_ONE, GL_ONE);
 	glDisable(GL_CULL_FACE);
@@ -439,14 +437,12 @@ void Comet::drawTail(StelCore* core, StelProjector::ModelViewTranformP transfo, 
 
 void Comet::drawComa(StelCore* core, StelProjector::ModelViewTranformP transfo)
 {
-
 	// Find rotation matrix from 0/0/1 to viewdirection! crossproduct for axis (normal vector), dotproduct for angle.
 	Vec3d eclposNrm=eclipticPos - core->getObserverHeliocentricEclipticPos()  ; eclposNrm.normalize();
 	Mat4d comarot=Mat4d::rotation(Vec3d(0.0, 0.0, 1.0)^(eclposNrm), std::acos(Vec3d(0.0, 0.0, 1.0).dot(eclposNrm)) );
 	StelProjector::ModelViewTranformP transfo2 = transfo->clone();
 	transfo2->combine(comarot);
 	StelPainter* sPainter = new StelPainter(core->getProjection(transfo2));
-	sPainter->getLight().disable();
 
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_ONE, GL_ONE);
@@ -459,7 +455,6 @@ void Comet::drawComa(StelCore* core, StelProjector::ModelViewTranformP transfo)
 	float magDrop=getVMagnitudeWithExtinction(core)-mag100pct;
 	float magFactor=std::pow(0.6f , magDrop);
 	magFactor=qMin(magFactor, 2.0f); // Limit excessively bright display.
-
 
 	comaTexture->bind();
 	sPainter->setColor(magFactor,magFactor,0.6f*magFactor);
