@@ -70,7 +70,7 @@ class Ring
 public:
 	Ring(double radiusMin,double radiusMax,const QString &texname);
 	~Ring(void);
-	void draw(StelPainter* painter, StelProjector::ModelViewTranformP transfo, double screenSz);
+	void draw(StelPainter* painter, StelProjector::ModelViewTranformP transfo);
 	double getSize(void) const {return radiusMax;}
 private:
 	const double radiusMin;

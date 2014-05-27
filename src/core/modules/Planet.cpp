@@ -823,7 +823,7 @@ void Planet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFon
 		if (rings)
 		{
 			StelPainter sPainter(core->getProjection(transfo));
-			rings->draw(&sPainter,transfo,1000.0);
+			rings->draw(&sPainter,transfo);
 		}
 		return;
 	}
@@ -861,6 +861,16 @@ void Planet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFon
 	return;
 }
 
+class StelPainterLight
+{
+public:
+	Vec3f position;
+	Vec4f diffuse;
+	Vec4f specular;
+	Vec4f ambient;
+};
+static StelPainterLight light;
+
 void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP transfo, float screenSz)
 {
 	// This is the main method drawing a planet 3d model
@@ -875,36 +885,31 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 
 		if (flagLighting)
 		{
-			sPainter->getLight().enable();
-
 			// Set the main source of light to be the sun
 			Vec3d sunPos(0);
 			core->getHeliocentricEclipticModelViewTransform()->forward(sunPos);
-			sPainter->getLight().setPosition(Vec4f(sunPos[0],sunPos[1],sunPos[2],1.f));
+			light.position=Vec4f(sunPos[0],sunPos[1],sunPos[2],1.f);
 
 			// Set the light parameters taking sun as the light source
-			static Vec4f diffuse = Vec4f(1.f,1.f,1.f,1.f);
-			static Vec4f zero = Vec4f(0.f,0.f,0.f,0.f);
-			static Vec4f ambient = Vec4f(0.02f,0.02f,0.02f,0.02f);
+			light.diffuse = Vec4f(1.f,1.f,1.f,1.f);
+			light.specular = Vec4f(0.f,0.f,0.f,0.f);
+			light.ambient = Vec4f(0.02f,0.02f,0.02f,0.02f);
 
 			if (this==ssm->getMoon())
 			{
 				// Special case for the Moon (maybe better use 1.5,1.5,1.5,1.0 ?)
-				diffuse = Vec4f(1.6f,1.6f,1.6f,1.f);
+				light.diffuse = Vec4f(1.6f,1.6f,1.6f,1.f);
 			}
-			
-			sPainter->getLight().setAmbient(ambient);
-			sPainter->getLight().setDiffuse(diffuse);
-			sPainter->getLight().setSpecular(zero);
 		}
 		else
 		{
-			sPainter->getLight().disable();
 			sPainter->setColor(albedo,albedo,albedo);
 		}
 
 		if (rings)
 		{
+			// The planet has rings, we need to use depth buffer and adjust the clipping planes to avoid 
+			// reaching the maximum resolution of the depth buffer
 			const double dist = getEquinoxEquatorialPos(core).length();
 			double z_near = 0.9*(dist - rings->getSize());
 			double z_far  = 1.1*(dist + rings->getSize());
@@ -917,9 +922,7 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 			glEnable(GL_DEPTH_TEST);
 			drawSphere(sPainter, screenSz);
 			glDepthMask(GL_FALSE);
-			sPainter->getLight().disable();
-			rings->draw(sPainter,transfo,screenSz);
-			sPainter->getLight().enable();
+			rings->draw(sPainter,transfo);
 			glDisable(GL_DEPTH_TEST);
 			core->setClippingPlanes(n,f);  // Restore old clipping planes
 		}
@@ -937,8 +940,6 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 				glEnable(GL_STENCIL_TEST);
 				drawSphere(sPainter, screenSz);
 				glDisable(GL_STENCIL_TEST);
-
-				sPainter->getLight().disable();
 				drawEarthShadow(core, sPainter);
 			}
 			else
@@ -966,6 +967,89 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 }
 
 
+void sSphere(StelPainter* painter, const float radius, const float oneMinusOblateness, const int slices, const int stacks, bool isLightOn)
+{
+	float c;
+	if (isLightOn)
+	{
+		painter->getProjector()->getModelViewTransform()->backward(light.position);
+		light.position.normalize();
+	}
+
+	GLfloat x, y, z;
+	GLfloat s=0.f, t=1.f;
+	GLint i, j;
+
+	const float* cos_sin_rho = StelUtils::ComputeCosSinRho(stacks);
+	const float* cos_sin_theta =  StelUtils::ComputeCosSinTheta(slices);
+	
+	const float* cos_sin_rho_p;
+	const float *cos_sin_theta_p;
+
+	// texturing: s goes from 0.0/0.25/0.5/0.75/1.0 at +y/+x/-y/-x/+y axis
+	// t goes from -1.0/+1.0 at z = -radius/+radius (linear along longitudes)
+	// cannot use triangle fan on texturing (s coord. at top/bottom tip varies)
+	// If the texture is flipped, we iterate the coordinates backward.
+	const GLfloat ds = 1.f / slices;
+	const GLfloat dt = 1.f / stacks; // from inside texture is reversed
+
+	// draw intermediate  as quad strips
+	static QVector<double> vertexArr;
+	static QVector<float> texCoordArr;
+	static QVector<float> colorArr;
+	static QVector<unsigned short> indiceArr;
+
+	texCoordArr.resize(0);
+	vertexArr.resize(0);
+	colorArr.resize(0);
+	indiceArr.resize(0);
+
+	for (i = 0,cos_sin_rho_p = cos_sin_rho; i < stacks; ++i,cos_sin_rho_p+=2)
+	{
+		s = 0.f;
+		for (j = 0,cos_sin_theta_p = cos_sin_theta; j<=slices;++j,cos_sin_theta_p+=2)
+		{
+			x = -cos_sin_theta_p[1] * cos_sin_rho_p[1];
+			y = cos_sin_theta_p[0] * cos_sin_rho_p[1];
+			z = cos_sin_rho_p[0];
+			texCoordArr << s << t;
+			if (isLightOn)
+			{
+				c = light.position[0]*x*oneMinusOblateness + light.position[1]*y*oneMinusOblateness + light.position[2]*z;
+				if (c<0) {c=0;}
+				colorArr << c*light.diffuse[0] + light.ambient[0] << c*light.diffuse[1] + light.ambient[1] << c*light.diffuse[2] + light.ambient[2];
+			}
+			vertexArr << x * radius << y * radius << z * oneMinusOblateness * radius;
+			x = -cos_sin_theta_p[1] * cos_sin_rho_p[3];
+			y = cos_sin_theta_p[0] * cos_sin_rho_p[3];
+			z = cos_sin_rho_p[2];
+			texCoordArr << s << t - dt;
+			if (isLightOn)
+			{
+				c = light.position[0]*x*oneMinusOblateness + light.position[1]*y*oneMinusOblateness + light.position[2]*z;
+				if (c<0) {c=0;}
+				colorArr << c*light.diffuse[0] + light.ambient[0] << c*light.diffuse[1] + light.ambient[1] << c*light.diffuse[2] + light.ambient[2];
+			}
+			vertexArr << x * radius << y * radius << z * oneMinusOblateness * radius;
+			s += ds;
+		}
+		unsigned int offset = i*(slices+1)*2;
+		for (j = 2;j<slices*2+2;j+=2)
+		{
+			indiceArr << offset+j-2 << offset+j-1 << offset+j;
+			indiceArr << offset+j << offset+j-1 << offset+j+1;
+		}
+		t -= dt;
+	}
+
+	// Draw the array now
+	if (isLightOn)
+		painter->setArrays((Vec3d*)vertexArr.constData(), (Vec2f*)texCoordArr.constData(), (Vec3f*)colorArr.constData());
+	else
+		painter->setArrays((Vec3d*)vertexArr.constData(), (Vec2f*)texCoordArr.constData());
+	painter->drawFromArray(StelPainter::Triangles, indiceArr.size(), 0, true, indiceArr.constData());
+}
+
 void Planet::drawSphere(StelPainter* painter, float screenSz)
 {
 	if (texMap)
@@ -976,9 +1060,7 @@ void Planet::drawSphere(StelPainter* painter, float screenSz)
 			return;
 		}
 	}
-	//glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // GZ deactivated. 2013-12-27. If disabling blend, who cares which one?
 	painter->setColor(1.f, 1.f, 1.f);
-
 	painter->enableTexture2d(true);
 	glDisable(GL_BLEND);
 	glEnable(GL_CULL_FACE);
@@ -992,7 +1074,7 @@ void Planet::drawSphere(StelPainter* painter, float screenSz)
 	// fits to the observers position. No idea why this is necessary,
 	// perhaps some openGl strangeness, or confusing sin/cos.
 
-	painter->sSphere(radius*sphereScale, oneMinusOblateness, nb_facet, nb_facet);
+	sSphere(painter, radius*sphereScale, oneMinusOblateness, nb_facet, nb_facet, flagLighting);
 	glDisable(GL_CULL_FACE);
 }
 
@@ -1128,14 +1210,47 @@ Ring::~Ring(void)
 {
 }
 
-void Ring::draw(StelPainter* sPainter,StelProjector::ModelViewTranformP transfo,double screenSz)
+void sRing(StelPainter* sPainter, const float rMin, const float rMax, int slices, const int stacks)
 {
-	screenSz -= 50;
-	screenSz /= 250.0;
-	if (screenSz < 0.0) screenSz = 0.0;
-	else if (screenSz > 1.0) screenSz = 1.0;
-	const int slices = 128+(int)((256-128)*screenSz);
-	const int stacks = 8+(int)((32-8)*screenSz);
+	float x,y;
+	int j;
+
+	const float dr = (rMax-rMin) / stacks;
+	if (slices < 0) slices = -slices;
+	const float* cos_sin_theta = StelUtils::ComputeCosSinTheta(slices);
+	const float *cos_sin_theta_p;
+
+	static QVector<double> vertexArr;
+	static QVector<float> texCoordArr;
+
+	// draw intermediate stacks as quad strips
+	for (float r = rMin; r < rMax; r+=dr)
+	{
+		const float tex_r0 = (r-rMin)/(rMax-rMin);
+		const float tex_r1 = (r+dr-rMin)/(rMax-rMin);
+		vertexArr.resize(0);
+		texCoordArr.resize(0);
+		for (j=0,cos_sin_theta_p=cos_sin_theta; j<=slices; ++j,cos_sin_theta_p+=2)
+		{
+			x = r*cos_sin_theta_p[0];
+			y = r*cos_sin_theta_p[1];
+			texCoordArr << tex_r0 << 0.5f;
+			vertexArr << x << y << 0.f;
+			x = (r+dr)*cos_sin_theta_p[0];
+			y = (r+dr)*cos_sin_theta_p[1];
+			texCoordArr << tex_r1 << 0.5f;
+			vertexArr << x << y << 0.f;
+		}
+
+		sPainter->setArrays((Vec3d*)vertexArr.constData(), (Vec2f*)texCoordArr.constData());
+		sPainter->drawFromArray(StelPainter::TriangleStrip, vertexArr.size()/3);
+	}
+}
+
+void Ring::draw(StelPainter* sPainter,StelProjector::ModelViewTranformP transfo)
+{
+	const int slices = 128;
+	const int stacks = 32;
 
 	// Normal transparency mode
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -1152,7 +1267,7 @@ void Ring::draw(StelPainter* sPainter,StelProjector::ModelViewTranformP transfo,
 	const double h = mat.r[ 8]*mat.r[12]
 				   + mat.r[ 9]*mat.r[13]
 				   + mat.r[10]*mat.r[14];
-	sPainter->sRing(radiusMin,radiusMax,(h<0.0)?slices:-slices,stacks, 0);
+	sRing(sPainter, radiusMin,radiusMax,(h<0.0)?slices:-slices,stacks);
 	glDisable(GL_CULL_FACE);
 }
 
