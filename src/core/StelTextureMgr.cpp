@@ -37,26 +37,17 @@ void StelTextureMgr::init()
 {
 }
 
-StelTextureSP StelTextureMgr::createMemoryTexture(const StelTexture::StelTextureParams &params)
-{
-	StelTextureSP tex = StelTextureSP(new StelTexture());
-
-	tex->loadParams = params;
-
-	return tex;
-}
-
 StelTextureSP StelTextureMgr::createTexture(const QString& afilename, const StelTexture::StelTextureParams& params)
 {
 	if (afilename.isEmpty())
 		return StelTextureSP();
 
-	QImage image(afilename);
-	if (image.isNull())
-		return StelTextureSP();
-
 	StelTextureSP tex = StelTextureSP(new StelTexture());
 	tex->fullPath = afilename;
+
+	QImage image(tex->fullPath);
+	if (image.isNull())
+		return StelTextureSP();
 
 	tex->loadParams = params;
 	if (tex->glLoad(image))
