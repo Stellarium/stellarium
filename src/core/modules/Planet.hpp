@@ -68,13 +68,11 @@ public:
 class Ring
 {
 public:
-	Ring(double radiusMin,double radiusMax,const QString &texname);
-	~Ring(void);
+	Ring(float radiusMin, float radiusMax,const QString &texname);
 	void draw(StelPainter* painter, StelProjector::ModelViewTranformP transfo);
 	double getSize(void) const {return radiusMax;}
-private:
-	const double radiusMin;
-	const double radiusMax;
+	const float radiusMin;
+	const float radiusMax;
 	StelTextureSP tex;
 };
 
@@ -241,6 +239,9 @@ public:
 	static void setOrbitColor(const Vec3f& oc) {orbitColor = oc;}
 	static const Vec3f& getOrbitColor() {return orbitColor;}
 
+	//! Return the list of planets which project some shadow on this planet
+	QList<const Planet*> getCandidatesForShadow() const;
+	
 protected:
 	static StelTextureSP texEarthShadow;     // for lunar eclipses
 
@@ -299,6 +300,36 @@ protected:
 
 	static Vec3f labelColor;
 	static StelTextureSP hintCircleTex;
+	
+	// Shader-related variables
+	struct ShaderVars {
+		int projectionMatrix;
+		int texCoord;
+		int unprojectedVertex;
+		int vertex;
+		int texture;
+
+		int lightPos;
+		int diffuseLight;
+		int ambientLight;
+		int radius;
+		int oneMinusOblateness;
+		int shadowCount;
+		int sunInfo;
+		int thisPlanetRadius;
+		int isRing;
+		int ring;
+		int outerRadius;
+		int innerRadius;
+		int ringS;
+		int isMoon;
+		int earthShadow;
+	};
+	static ShaderVars shaderVars;
+
+	static void initShader();
+	static void deinitShader();
+	static class QOpenGLShaderProgram* shaderProgram;
 };
 
 #endif // _PLANET_HPP_

@@ -69,6 +69,8 @@ public:
 	//! - set display options from application settings
 	virtual void init();
 
+	virtual void deinit();
+	
 	//! Draw SolarSystem objects (planets).
 	//! @param core The StelCore object.
 	//! @return The maximum squared distance in pixels that any SolarSystem object
