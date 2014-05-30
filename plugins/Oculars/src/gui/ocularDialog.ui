@@ -158,7 +158,7 @@
          </font>
         </property>
         <property name="currentIndex">
-         <number>0</number>
+         <number>1</number>
         </property>
         <property name="usesScrollButtons">
          <bool>false</bool>
@@ -657,13 +657,16 @@
                    <number>1</number>
                   </property>
                   <property name="minimum">
-                   <double>1.000000000000000</double>
+                   <double>0.000000000000000</double>
                   </property>
                   <property name="maximum">
                    <double>99.000000000000000</double>
                   </property>
                   <property name="singleStep">
                    <double>0.100000000000000</double>
+                  </property>
+                  <property name="value">
+                   <double>0.000000000000000</double>
                   </property>
                  </widget>
                 </item>
