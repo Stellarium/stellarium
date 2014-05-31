@@ -633,7 +633,7 @@ QList<MeteorShowerP> MeteorShowers::searchEvents(QDate dateFrom, QDate dateTo) c
 		while(date.operator <=(dateTo))
 		{
 			ms->updateCurrentData((QDateTime) date);
-			if (ms->initialized && ms->active)
+			if (ms->initialized && ms->status)
 			{
 				result.append(ms);
 				break;
