@@ -248,6 +248,8 @@ protected:
 	// draw earth shadow on moon for lunar eclipses
 	void drawEarthShadow(StelCore* core, StelPainter* sPainter);
 
+	void computeModelMatrix(Mat4d &result) const;
+	
 	// Return the information string "ready to print" :)
 	QString getSkyLabel(const StelCore* core) const;
 
@@ -315,6 +317,7 @@ protected:
 		int radius;
 		int oneMinusOblateness;
 		int shadowCount;
+		int shadowData;
 		int sunInfo;
 		int thisPlanetRadius;
 		int isRing;

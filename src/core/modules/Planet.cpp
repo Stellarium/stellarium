@@ -1009,6 +1009,7 @@ void Planet::initShader()
 		"varying highp vec3 P;\n"
 		"\n"
 		"uniform int shadowCount;\n"
+		"uniform highp mat4 shadowData;\n"
 		"\n"
 		"uniform bool ring;\n"
 		"uniform highp float outerRadius;\n"
@@ -1061,14 +1062,10 @@ void Planet::initShader()
 		"            }\n"
 		"        }\n"*/
 		"\n"
-		"        /*for(int i = 1; i < shadowCount; i++)\n"
+		"        for (int i = 0; i < shadowCount; ++i)\n"
 		"        {\n"
-		"            if(current == i && !isRing)\n"
-		"                continue;\n"
-		"\n"
-		"            data = texture2D(info, vec2(i, current) / infoSize);\n"
-		"            vec3 C = data.rgb;\n"
-		"            float radius = data.a;\n"
+		"            vec3 C = shadowData[i].xyz;\n"
+		"            float radius = shadowData[i].w;\n"
 		"\n"
 		"            float l = length(C - P3);\n"
 		"            radius = l * tan(asin(radius / l));\n"
@@ -1117,7 +1114,7 @@ void Planet::initShader()
 		"\n"
 		"            if(illumination < final_illumination)\n"
 		"                final_illumination = illumination;\n"
-		"        }*/\n"
+		"        }\n"
 		"    }\n"
 		"\n"
 		"    vec4 litColor = (isRing ? 1.0 : lambert) * final_illumination * diffuseLight + ambientLight;\n"
@@ -1150,6 +1147,7 @@ void Planet::initShader()
 	GL(shaderVars.radius = shaderProgram->uniformLocation("radius"));
 	GL(shaderVars.oneMinusOblateness = shaderProgram->uniformLocation("oneMinusOblateness"));
 	GL(shaderVars.shadowCount = shaderProgram->uniformLocation("shadowCount"));
+	GL(shaderVars.shadowData = shaderProgram->uniformLocation("shadowData"));
 	GL(shaderVars.sunInfo = shaderProgram->uniformLocation("sunInfo"));
 	GL(shaderVars.thisPlanetRadius = shaderProgram->uniformLocation("thisPlanetRadius"));
 	GL(shaderVars.isRing = shaderProgram->uniformLocation("isRing"));
@@ -1321,6 +1319,16 @@ void sSphere(Planet3DModel* model, const float radius, const float oneMinusOblat
 	}
 }
 
+void Planet::computeModelMatrix(Mat4d &result) const
+{
+	result = Mat4d::translation(eclipticPos) * rotLocalToParent * Mat4d::zrotation(M_PI/180*(axisRotation + 90.));
+	PlanetP p = parent;
+	while (p && p->parent)
+	{
+		result = Mat4d::translation(p->eclipticPos) * result * p->rotLocalToParent;
+		p = p->parent;
+	}
+}
 
 void Planet::drawSphere(StelPainter* painter, float screenSz)
 {
@@ -1353,10 +1361,6 @@ void Planet::drawSphere(StelPainter* painter, float screenSz)
 	// Generates the vertice
 	sSphere(&model, radius*sphereScale, oneMinusOblateness, nb_facet, nb_facet);
 	
-	QList<const Planet*> shadowCandidates = getCandidatesForShadow();
-	foreach(const Planet* p, shadowCandidates)
-		qDebug() << getEnglishName() << ": " << p->getEnglishName();
-	
 	if (shaderProgram==NULL)
 		Planet::initShader();
 	Q_ASSERT(shaderProgram!=NULL);
@@ -1365,6 +1369,23 @@ void Planet::drawSphere(StelPainter* painter, float screenSz)
 	const Mat4f& m = painter->getProjector()->getProjectionMatrix();
 	const QMatrix4x4 qMat(m[0], m[4], m[8], m[12], m[1], m[5], m[9], m[13], m[2], m[6], m[10], m[14], m[3], m[7], m[11], m[15]);
 	shaderProgram->setUniformValue(shaderVars.projectionMatrix, qMat);
+	
+	Mat4d modelMatrix;
+	computeModelMatrix(modelMatrix);
+	// TODO explain this
+	const Mat4d mTarget = modelMatrix.inverse();
+	
+	QMatrix4x4 shadowCandidatesData;
+	QList<const Planet*> shadowCandidates = getCandidatesForShadow();
+	for (int i=0;i<shadowCandidates.size();++i)
+	{
+		shadowCandidates.at(i)->computeModelMatrix(modelMatrix);
+		const Vec4d position = mTarget * modelMatrix.getColumn(3);
+		shadowCandidatesData(0, i) = position[0];
+		shadowCandidatesData(1, i) = position[1];
+		shadowCandidatesData(2, i) = position[2];
+		shadowCandidatesData(3, i) = shadowCandidates.at(i)->getRadius();
+	}
 	
 	const StelProjectorP& projector = painter->getProjector();
 	
@@ -1383,15 +1404,8 @@ void Planet::drawSphere(StelPainter* painter, float screenSz)
 	GL(shaderProgram->setUniformValue(shaderVars.oneMinusOblateness, (GLfloat)oneMinusOblateness));
 	GL(shaderProgram->setUniformValue(shaderVars.texture, 0));
 	GL(shaderProgram->setUniformValue(shaderVars.shadowCount, shadowCandidates.size()));
+	GL(shaderProgram->setUniformValue(shaderVars.shadowData, shadowCandidatesData));
 	
-	Mat4d modelMatrice = Mat4d::translation(eclipticPos) * rotLocalToParent * Mat4d::zrotation(M_PI/180*(axisRotation + 90.));
-	PlanetP p = parent;
-	while (p && p->parent)
-	{
-		modelMatrice = Mat4d::translation(p->eclipticPos) * modelMatrice * p->rotLocalToParent;
-		p = p->parent;
-	}
-	const Mat4d& mTarget = modelMatrice.inverse();
 	GL(shaderProgram->setUniformValue(shaderVars.sunInfo, mTarget[12], mTarget[13], mTarget[14], ssm->getSun()->getRadius()));
 
 	GL(shaderProgram->setUniformValue(shaderVars.thisPlanetRadius, (float)getRadius()));
