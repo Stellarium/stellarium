@@ -1042,7 +1042,7 @@ void Planet::initShader()
 			"    RS = L * tan(asin(RS / L));\n"
 			"    float R = atan(RS / L); //RS / L;\n"
 			
-/*		"        if(ring && !isRing)\n"
+		"        if(ring && !isRing)\n"
 		"        {\n"
 		"            vec3 ray = normalize(Lp);\n"
 		"            vec3 normal = normalize(vec3(0.0, 0.0, 1.0));\n"
@@ -1055,12 +1055,11 @@ void Planet::initShader()
 		"                if(ring_radius > innerRadius && ring_radius < outerRadius)\n"
 		"                {\n"
 		"                    ring_radius = (ring_radius - innerRadius) / (outerRadius - innerRadius);\n"
-		"                    data = texture2D(ringS, vec2(ring_radius, 0.5));\n"
-		"\n"
-		"                    final_illumination = 1.0 - data.w;\n"
+		"                    float ringAlpha = texture2D(ringS, vec2(ring_radius, 0.5)).w;\n"
+		"                    final_illumination = 1.0 - ringAlpha;\n"
 		"                }\n"
 		"            }\n"
-		"        }\n"*/
+		"        }\n"
 		"\n"
 		"        for (int i = 0; i < shadowCount; ++i)\n"
 		"        {\n"
@@ -1407,9 +1406,7 @@ void Planet::drawSphere(StelPainter* painter, float screenSz)
 	GL(shaderProgram->setUniformValue(shaderVars.shadowData, shadowCandidatesData));
 	
 	GL(shaderProgram->setUniformValue(shaderVars.sunInfo, mTarget[12], mTarget[13], mTarget[14], ssm->getSun()->getRadius()));
-
 	GL(shaderProgram->setUniformValue(shaderVars.thisPlanetRadius, (float)getRadius()));
-	
 	GL(shaderProgram->setUniformValue(shaderVars.isRing, false));
 
 	if (rings!=NULL)
@@ -1625,7 +1622,6 @@ void Ring::draw(StelPainter* sPainter,StelProjector::ModelViewTranformP transfo)
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	sPainter->setColor(1.f, 1.f, 1.f);
 	sPainter->enableTexture2d(true);
-	glEnable(GL_CULL_FACE);
 	glEnable(GL_BLEND);
 
 	if (tex) tex->bind();
@@ -1637,7 +1633,6 @@ void Ring::draw(StelPainter* sPainter,StelProjector::ModelViewTranformP transfo)
 				   + mat.r[ 9]*mat.r[13]
 				   + mat.r[10]*mat.r[14];
 	sRing(sPainter, radiusMin,radiusMax,(h<0.0)?slices:-slices,stacks);
-	glDisable(GL_CULL_FACE);
 }
 
 
