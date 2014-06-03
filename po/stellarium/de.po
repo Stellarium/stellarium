@@ -10,14 +10,14 @@ msgstr ""
 "Project-Id-Version: de\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-05-14 23:55+0700\n"
-"PO-Revision-Date: 2014-04-29 18:18+0000\n"
+"PO-Revision-Date: 2014-06-02 14:30+0000\n"
 "Last-Translator: gzotti <Georg.Zotti@univie.ac.at>\n"
 "Language-Team: <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-05-15 05:33+0000\n"
-"X-Generator: Launchpad (build 17007)\n"
+"X-Launchpad-Export-Date: 2014-06-03 05:43+0000\n"
+"X-Generator: Launchpad (build 17031)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:107 src/core/modules/StarMgr.cpp:346
 #: src/core/modules/GridLinesMgr.cpp:695 src/core/modules/LandscapeMgr.cpp:354
@@ -8588,37 +8588,37 @@ msgstr "Objekt nicht beobachtbar."
 
 #: plugins/Observability/src/Observability.cpp:197
 msgid "No acronychal nor cosmical rise/set."
-msgstr ""
+msgstr "Keine Akronychischen/Kosmischen Auf- bzw. Untergänge"
 
 #: plugins/Observability/src/Observability.cpp:198
 #, qt-format
 msgid "Greatest elongation: %1 (at %2 deg.)"
-msgstr ""
+msgstr "Größte Elongation: %1 (bei %2°)"
 
 #: plugins/Observability/src/Observability.cpp:199
 #, qt-format
 msgid "Largest Sun separation: %1 (at %2 deg.)"
-msgstr ""
+msgstr "Größter Abstand zur Sonne: %1 (bei %2°)"
 
 #. TRANSLATORS: The space at the end is significant - another sentence may follow.
 #: plugins/Observability/src/Observability.cpp:202
 #, qt-format
 msgid "Acronychal rise/set: %1/%2. "
-msgstr ""
+msgstr "Akronychischer Auf-/Untergang: %1/%2. "
 
 #. TRANSLATORS: The space at the end is significant - another sentence may follow.
 #: plugins/Observability/src/Observability.cpp:204
 msgid "No acronychal rise/set. "
-msgstr ""
+msgstr "Kein Akronychischer Auf-/Untergang. "
 
 #: plugins/Observability/src/Observability.cpp:205
 #, qt-format
 msgid "Cosmical rise/set: %1/%2."
-msgstr ""
+msgstr "Kosmischer Auf-/Untergang: %1/%2."
 
 #: plugins/Observability/src/Observability.cpp:206
 msgid "No cosmical rise/set."
-msgstr ""
+msgstr "Kein Kosmischer Auf-/Untergang."
 
 #: plugins/Observability/src/Observability.cpp:207
 msgid "Observable during the whole year."
@@ -8778,10 +8778,10 @@ msgid ""
 "at that declination. Hence, that is the 'best' night to observe a particular "
 "object."
 msgstr ""
-"Für Sterne und die äußern Planeten ist dies das Datum der Opposition, für "
-"innere Planeten (Merkur, Venus) das Datum der größten Elongation. Im Fall "
-"der Opposition kulminiert das Objekt gegen Mitternacht, das ist somit i.a. "
-"die beste Nacht zur Beobachtung."
+"Für Sterne und die äußeren Planeten ist dies das Datum der Opposition, für "
+"die inneren Planeten (Merkur, Venus) das Datum der größten Elongation. Im "
+"Fall der Opposition kulminiert das Objekt gegen Mitternacht, das ist somit "
+"i.a. die beste Nacht zur Beobachtung."
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:141
 msgid "Nights with source above horizon:"
@@ -8835,12 +8835,12 @@ msgstr ""
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:195
 #, qt-format
 msgid "Sun altitude at twilight: %1 deg."
-msgstr ""
+msgstr "Sonnenhöhe bei Dämmerung: %1°"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:201
 #, qt-format
 msgid "Horizon altitude: %1 deg."
-msgstr ""
+msgstr "Horizonthöhe: %1°"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:342
 msgid "Observability Configuration"
@@ -8876,7 +8876,7 @@ msgstr "Beobachtungsbedingungen"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:351
 msgid "Showing options"
-msgstr ""
+msgstr "Anzuzeigende Daten"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:352
 msgid "Today's ephemeris (rise, set, and transit times)"
@@ -9242,7 +9242,7 @@ msgstr "η-Lyriden"
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1311
 msgid "α-Scorpiids"
-msgstr ""
+msgstr "α-Scorpiiden"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1313
@@ -9427,17 +9427,17 @@ msgstr "Komet 3D/Biela"
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1387
 msgid "Comet C/1917 F1 (Mellish)"
-msgstr ""
+msgstr "Komet C/1917 F1 (Mellish)"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1389
 msgid "Comet C/1964 N1 (Ikeya)"
-msgstr ""
+msgstr "Komet C/1964 N1 (Ikeya)"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1391
 msgid "Comet Schwassmann-Wachmann 3"
-msgstr ""
+msgstr "Komet Schwassmann-Wachmann 3"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1393
@@ -9791,23 +9791,23 @@ msgstr "Suche Ereignisse"
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:279
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:290
 msgid "Pointer Coordinates"
-msgstr ""
+msgstr "Mauszeigerkoordinaten"
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:57
 msgid "This plugin shows the coordinates of the mouse pointer."
-msgstr ""
+msgstr "Dieses Plugin zeigt die Koordinaten des Mauszeigers"
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:94
 msgid "Show equatorial coordinates (J2000.0) of the mouse pointer"
-msgstr ""
+msgstr "Zeige Äquatoriale Koordinaten (J2000.0) des Mauszeigers"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:89
 msgid "Pointer Coordinates plug-in"
-msgstr ""
+msgstr "Mauszeigerkoordinaten-Plugin"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:118
 msgid "The top center of the screen"
-msgstr ""
+msgstr "Obere Mitte des Bildschirms"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:119
 msgid "In center of the top right half of the screen"
@@ -9815,11 +9815,11 @@ msgstr ""
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:120
 msgid "The right bottom corner of the screen"
-msgstr ""
+msgstr "Rechte untere Ecke des Bildschirms"
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:280
 msgid "Show equatorial coordinates of the mouse cursor for epoch J2000.0"
-msgstr ""
+msgstr "Zeige Äquatoriale Koordinaten (J2000.0) des Mauszeigers"
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:281
 msgid "Enable displaying coordinates at startup"
@@ -9827,11 +9827,11 @@ msgstr ""
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:285
 msgid "Place of the string with coordinates of the mouse pointer"
-msgstr ""
+msgstr "Platz für Anzeige der Mauszeigerkoordinaten"
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:287
 msgid "Place of the string:"
-msgstr ""
+msgstr "Platz der Anzeige:"
 
 #~ msgid "Stars "
 #~ msgstr "Sterne "
