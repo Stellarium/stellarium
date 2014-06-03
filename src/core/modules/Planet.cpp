@@ -1024,19 +1024,16 @@ void Planet::initShader()
 		"{\n"
 		"    float final_illumination = 1.0;\n"
 		"\n"
-		"    if((lambert > 0.0) || isRing)\n"
+		"    if(lambert > 0.0 || isRing)\n"
 		"    {\n"
 			"    float RS = sunInfo.w;\n"
 			"    vec3 Lp = sunInfo.xyz;\n"
 			"\n"
 			"    vec3 P3;\n"
-			"\n"
 			"    if(isRing)\n"
 			"        P3 = P;\n"
 			"    else\n"
-			"    {\n"
 			"        P3 = normalize(P) * thisPlanetRadius;\n"
-			"    }\n"
 			"\n"
 			"    float L = length(Lp - P3);\n"
 			"    RS = L * tan(asin(RS / L));\n"
@@ -1486,7 +1483,6 @@ void Planet::drawSphere(StelPainter* painter, float screenSz)
 
 	if (rings)
 	{
-		qDebug() << englishName;
 		// Draw the rings just after the planet
 		
 		glDepthMask(GL_FALSE);
