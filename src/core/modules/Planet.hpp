@@ -69,7 +69,6 @@ class Ring
 {
 public:
 	Ring(float radiusMin, float radiusMax,const QString &texname);
-	void draw(StelPainter* painter, StelProjector::ModelViewTranformP transfo);
 	double getSize(void) const {return radiusMax;}
 	const float radiusMin;
 	const float radiusMax;
@@ -240,7 +239,7 @@ public:
 	static const Vec3f& getOrbitColor() {return orbitColor;}
 
 	//! Return the list of planets which project some shadow on this planet
-	QList<const Planet*> getCandidatesForShadow() const;
+	QVector<const Planet*> getCandidatesForShadow() const;
 	
 protected:
 	static StelTextureSP texEarthShadow;     // for lunar eclipses

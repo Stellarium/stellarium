@@ -388,9 +388,9 @@ bool willCastShadow(const Planet* thisPlanet, const Planet* p)
 	return false;
 }
 
-QList<const Planet*> Planet::getCandidatesForShadow() const
+QVector<const Planet*> Planet::getCandidatesForShadow() const
 {
-	QList<const Planet*> res;
+	QVector<const Planet*> res;
 	const SolarSystem *ssystem=GETSTELMODULE(SolarSystem);
 	const Planet* sun = ssystem->getSun().data();
 	if (this==sun || (parent.data()==sun && satellites.empty()))
@@ -914,7 +914,7 @@ void Planet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFon
 		if (rings)
 		{
 			StelPainter sPainter(core->getProjection(transfo));
-			rings->draw(&sPainter,transfo);
+			//rings->draw(&sPainter);
 		}
 		return;
 	}
@@ -970,7 +970,7 @@ void Planet::initShader()
 		"attribute highp vec3 vertex;\n"
 		"attribute highp vec3 unprojectedVertex;\n"
 		"attribute mediump vec2 texCoord;\n"
-		"uniform mediump mat4 projectionMatrix;\n"
+		"uniform highp mat4 projectionMatrix;\n"
 		"uniform highp vec3 lightPos;\n"
 		"uniform highp float oneMinusOblateness;\n"
 		"uniform highp float radius;\n"
@@ -983,11 +983,11 @@ void Planet::initShader()
 		"    gl_Position = projectionMatrix * vec4(vertex, 1.);\n"
 		"    texc = texCoord;\n"
 		"    // Must be a separate variable due to Intel drivers\n"
-		"    vec3 normal = unprojectedVertex / radius;\n"
-		"    float c = lightPos.x * normal.x * oneMinusOblateness +\n"
-		"              lightPos.y * normal.y * oneMinusOblateness +\n"
-		"              lightPos.z * normal.z / oneMinusOblateness;\n"
-		"    lambert = clamp(c, 0.0, 0.5);\n"
+		"    vec3 normal = normalize(unprojectedVertex);\n"
+		"    float c = lightPos.x * normal.x +\n"
+		"              lightPos.y * normal.y +\n"
+		"              lightPos.z * normal.z;\n"
+		"    lambert = clamp(c, 0.0, 1.0);\n"
 		"\n"
 		"    P = unprojectedVertex;\n"
 		"}\n"
@@ -1120,10 +1120,10 @@ void Planet::initShader()
 		"    if(isMoon && final_illumination < 1.0)\n"
 		"    {\n"
 		"        vec4 shadowColor = texture2D(earthShadow, vec2(final_illumination, 0.5));\n"
-		"        gl_FragColor = mix(texture2D(tex, texc) * litColor, shadowColor, shadowColor.a);\n"
+		"        gl_FragColor = clamp(mix(texture2D(tex, texc) * litColor, shadowColor, shadowColor.a), 0.0, 1.0);\n"
 		"    }\n"
 		"    else\n"
-		"        gl_FragColor = texture2D(tex, texc) * litColor;\n"
+		"        gl_FragColor = clamp(texture2D(tex, texc) * litColor, 0.0, 1.0);\n"
 		"}\n"
 		"\n";
 	fshader.compileSourceCode(fsrc);
@@ -1211,13 +1211,9 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 			double n,f;
 			core->getClippingPlanes(&n,&f); // Save clipping planes
 			core->setClippingPlanes(z_near,z_far);
-			glDepthMask(GL_TRUE);
-			glClear(GL_DEPTH_BUFFER_BIT);
-			glEnable(GL_DEPTH_TEST);
+
 			drawSphere(sPainter, screenSz);
-			glDepthMask(GL_FALSE);
-			rings->draw(sPainter,transfo);
-			glDisable(GL_DEPTH_TEST);
+			
 			core->setClippingPlanes(n,f);  // Restore old clipping planes
 		}
 		else
@@ -1318,6 +1314,50 @@ void sSphere(Planet3DModel* model, const float radius, const float oneMinusOblat
 	}
 }
 
+struct Ring3DModel
+{
+	QVector<float> vertexArr;
+	QVector<float> texCoordArr;
+	QVector<unsigned short> indiceArr;
+};
+
+
+void sRing(Ring3DModel* model, const float rMin, const float rMax, int slices, const int stacks)
+{
+	float x,y;
+	
+	const float dr = (rMax-rMin) / stacks;
+	const float* cos_sin_theta = StelUtils::ComputeCosSinTheta(slices);
+	const float* cos_sin_theta_p;
+
+	model->vertexArr.resize(0);
+	model->texCoordArr.resize(0);
+	model->indiceArr.resize(0);
+
+	float r = rMin;
+	for (int i=0; i<=stacks; ++i)
+	{
+		const float tex_r0 = (r-rMin)/(rMax-rMin);
+		int j;
+		for (j=0,cos_sin_theta_p=cos_sin_theta; j<=slices; ++j,cos_sin_theta_p+=2)
+		{
+			x = r*cos_sin_theta_p[0];
+			y = r*cos_sin_theta_p[1];
+			model->texCoordArr << tex_r0 << 0.5f;
+			model->vertexArr << x << y << 0.f;
+		}
+		r+=dr;
+	}
+	for (int i=0; i<stacks; ++i)
+	{
+		for (int j=0; j<slices; ++j)
+		{
+			model->indiceArr << i*slices+j << (i+1)*slices+j << i*slices+j+1;
+			model->indiceArr << i*slices+j+1 << (i+1)*slices+j << (i+1)*slices+j+1;
+		}
+	}
+}
+
 void Planet::computeModelMatrix(Mat4d &result) const
 {
 	result = Mat4d::translation(eclipticPos) * rotLocalToParent * Mat4d::zrotation(M_PI/180*(axisRotation + 90.));
@@ -1339,7 +1379,6 @@ void Planet::drawSphere(StelPainter* painter, float screenSz)
 			return;
 		}
 	}
-	painter->setColor(1.f, 1.f, 1.f);
 	painter->enableTexture2d(true);
 	glDisable(GL_BLEND);
 	glEnable(GL_CULL_FACE);
@@ -1349,15 +1388,9 @@ void Planet::drawSphere(StelPainter* painter, float screenSz)
 	int nb_facet = (int)(screenSz * 40/50);	// 40 facets for 1024 pixels diameter on screen
 	if (nb_facet<10) nb_facet = 10;
 	if (nb_facet>100) nb_facet = 100;
-	// Rotate and add an extra quarter rotation so that the planet texture map
-	// fits to the observers position. No idea why this is necessary,
-	// perhaps some openGl strangeness, or confusing sin/cos.
 
-	Planet3DModel model;
-	
-	const SolarSystem* ssm = GETSTELMODULE(SolarSystem);
-	
 	// Generates the vertice
+	Planet3DModel model;
 	sSphere(&model, radius*sphereScale, oneMinusOblateness, nb_facet, nb_facet);
 	
 	if (shaderProgram==NULL)
@@ -1375,7 +1408,10 @@ void Planet::drawSphere(StelPainter* painter, float screenSz)
 	const Mat4d mTarget = modelMatrix.inverse();
 	
 	QMatrix4x4 shadowCandidatesData;
-	QList<const Planet*> shadowCandidates = getCandidatesForShadow();
+	QVector<const Planet*> shadowCandidates = getCandidatesForShadow();
+	// Our shader doesn't support more than 4 planets creating shadow
+	if (shadowCandidates.size()>4)
+		shadowCandidates.resize(4);
 	for (int i=0;i<shadowCandidates.size();++i)
 	{
 		shadowCandidates.at(i)->computeModelMatrix(modelMatrix);
@@ -1391,7 +1427,7 @@ void Planet::drawSphere(StelPainter* painter, float screenSz)
 	Vec3f lightPos3;
 	lightPos3.set(light.position[0], light.position[1], light.position[2]);
 	Vec3f tmpv(0.f);
-	projector->getModelViewTransform()->forward(tmpv); // -posCenterEye
+	projector->getModelViewTransform()->forward(tmpv);
 	projector->getModelViewTransform()->getApproximateLinearTransfo().transpose().multiplyWithoutTranslation(Vec3d(lightPos3[0], lightPos3[1], lightPos3[2]));
 	projector->getModelViewTransform()->backward(lightPos3);
 	lightPos3.normalize();
@@ -1405,6 +1441,7 @@ void Planet::drawSphere(StelPainter* painter, float screenSz)
 	GL(shaderProgram->setUniformValue(shaderVars.shadowCount, shadowCandidates.size()));
 	GL(shaderProgram->setUniformValue(shaderVars.shadowData, shadowCandidatesData));
 	
+	const SolarSystem* ssm = GETSTELMODULE(SolarSystem);
 	GL(shaderProgram->setUniformValue(shaderVars.sunInfo, mTarget[12], mTarget[13], mTarget[14], ssm->getSun()->getRadius()));
 	GL(shaderProgram->setUniformValue(shaderVars.thisPlanetRadius, (float)getRadius()));
 	GL(shaderProgram->setUniformValue(shaderVars.isRing, false));
@@ -1429,9 +1466,7 @@ void Planet::drawSphere(StelPainter* painter, float screenSz)
 	QVector<float> projectedVertexArr;
 	projectedVertexArr.resize(model.vertexArr.size());
 	for (int i=0;i<model.vertexArr.size()/3;++i)
-	{
 		painter->getProjector()->project(*((Vec3f*)(model.vertexArr.constData()+i*3)), *((Vec3f*)(projectedVertexArr.data()+i*3)));
-	}
 	
 	GL(shaderProgram->setAttributeArray(shaderVars.vertex, (const GLfloat*)projectedVertexArr.constData(), 3));
 	GL(shaderProgram->enableAttributeArray(shaderVars.vertex));
@@ -1439,9 +1474,57 @@ void Planet::drawSphere(StelPainter* painter, float screenSz)
 	GL(shaderProgram->enableAttributeArray(shaderVars.unprojectedVertex));
 	GL(shaderProgram->setAttributeArray(shaderVars.texCoord, (const GLfloat*)model.texCoordArr.constData(), 2));
 	GL(shaderProgram->enableAttributeArray(shaderVars.texCoord));
-			
+
+	if (rings)
+	{
+		glDepthMask(GL_TRUE);
+		glClear(GL_DEPTH_BUFFER_BIT);
+		glEnable(GL_DEPTH_TEST);
+	}
+	
 	GL(glDrawElements(GL_TRIANGLES, model.indiceArr.size(), GL_UNSIGNED_SHORT, model.indiceArr.constData()));
 
+	if (rings)
+	{
+		// Draw the rings just after the planet
+		
+		glDepthMask(GL_FALSE);
+	
+		// Normal transparency mode
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		glEnable(GL_BLEND);
+	
+		Ring3DModel ringModel;
+		sRing(&ringModel, rings->radiusMin, rings->radiusMax, 128, 32);
+		
+		GL(shaderProgram->setUniformValue(shaderVars.isRing, true));
+		GL(shaderProgram->setUniformValue(shaderVars.texture, 2));
+		
+		computeModelMatrix(modelMatrix);
+		const Vec4d position = mTarget * modelMatrix.getColumn(3);
+		shadowCandidatesData(0, 0) = position[0];
+		shadowCandidatesData(1, 0) = position[1];
+		shadowCandidatesData(2, 0) = position[2];
+		shadowCandidatesData(3, 0) = getRadius();
+		GL(shaderProgram->setUniformValue(shaderVars.shadowCount, 1));
+		GL(shaderProgram->setUniformValue(shaderVars.shadowData, shadowCandidatesData));
+		
+		projectedVertexArr.resize(ringModel.vertexArr.size());
+		for (int i=0;i<ringModel.vertexArr.size()/3;++i)
+			painter->getProjector()->project(*((Vec3f*)(ringModel.vertexArr.constData()+i*3)), *((Vec3f*)(projectedVertexArr.data()+i*3)));
+		
+		GL(shaderProgram->setAttributeArray(shaderVars.vertex, (const GLfloat*)projectedVertexArr.constData(), 3));
+		GL(shaderProgram->enableAttributeArray(shaderVars.vertex));
+		GL(shaderProgram->setAttributeArray(shaderVars.unprojectedVertex, (const GLfloat*)ringModel.vertexArr.constData(), 3));
+		GL(shaderProgram->enableAttributeArray(shaderVars.unprojectedVertex));
+		GL(shaderProgram->setAttributeArray(shaderVars.texCoord, (const GLfloat*)ringModel.texCoordArr.constData(), 2));
+		GL(shaderProgram->enableAttributeArray(shaderVars.texCoord));
+		
+		GL(glDrawElements(GL_TRIANGLES, ringModel.indiceArr.size(), GL_UNSIGNED_SHORT, ringModel.indiceArr.constData()));
+		
+		glDisable(GL_DEPTH_TEST);
+	}
+	
 	GL(shaderProgram->release());
 	
 	glDisable(GL_CULL_FACE);
@@ -1573,77 +1656,6 @@ Ring::Ring(float radiusMin, float radiusMax, const QString &texname)
 	 :radiusMin(radiusMin),radiusMax(radiusMax)
 {
 	tex = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/"+texname);
-}
-
-
-struct Ring3DModel
-{
-	QVector<double> vertexArr;
-	QVector<float> texCoordArr;
-	QVector<unsigned short> indiceArr;
-};
-
-void sRing(Ring3DModel* model, const float rMin, const float rMax, int slices, const int stacks)
-{
-	float x,y;
-	
-	const float dr = (rMax-rMin) / stacks;
-	if (slices < 0) slices = -slices;
-	const float* cos_sin_theta = StelUtils::ComputeCosSinTheta(slices);
-	const float* cos_sin_theta_p;
-
-	model->vertexArr.resize(0);
-	model->texCoordArr.resize(0);
-	model->indiceArr.resize(0);
-
-	// draw intermediate stacks as quad strips
-	float r = rMin;
-	for (int i=0; i<=stacks; ++i)
-	{
-		const float tex_r0 = (r-rMin)/(rMax-rMin);
-		int j;
-		for (j=0,cos_sin_theta_p=cos_sin_theta; j<=slices; ++j,cos_sin_theta_p+=2)
-		{
-			x = r*cos_sin_theta_p[0];
-			y = r*cos_sin_theta_p[1];
-			model->texCoordArr << tex_r0 << 0.5f;
-			model->vertexArr << x << y << 0.f;
-		}
-		r+=dr;
-	}
-	for (int i=0; i<stacks; ++i)
-	{
-		for (int j=0; j<slices; ++j)
-		{
-			model->indiceArr << i*slices+j << (i+1)*slices+j << i*slices+j+1;
-			model->indiceArr << i*slices+j+1 << (i+1)*slices+j << (i+1)*slices+j+1;
-		}
-	}
-}
-
-void Ring::draw(StelPainter* sPainter,StelProjector::ModelViewTranformP transfo)
-{
-	const int slices = 128;
-	const int stacks = 32;
-
-	// Normal transparency mode
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	sPainter->setColor(1.f, 1.f, 1.f);
-	sPainter->enableTexture2d(true);
-	glEnable(GL_BLEND);
-
-	if (tex) tex->bind();
-
-	Mat4d mat = transfo->getApproximateLinearTransfo();
-	  // solve the ring wraparound by culling:
-	  // decide if we are above or below the ring plane
-	const double h = mat.r[ 8]*mat.r[12]
-				   + mat.r[ 9]*mat.r[13]
-				   + mat.r[10]*mat.r[14];
-	Ring3DModel model;
-	sRing(&model, radiusMin,radiusMax,(h<0.0)?slices:-slices,stacks);
-	sPainter->setArrays((Vec3d*)model.vertexArr.constData(), (Vec2f*)model.texCoordArr.constData());
-	sPainter->drawFromArray(StelPainter::Triangles, model.indiceArr.size(), 0, true, model.indiceArr.constData());
 }
 
 
