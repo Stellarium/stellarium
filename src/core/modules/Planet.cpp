@@ -1348,7 +1348,7 @@ void Planet::drawSphere(StelPainter* painter, float screenSz)
 	// Adapt the number of facets according with the size of the sphere for optimization
 	int nb_facet = (int)(screenSz * 40/50);	// 40 facets for 1024 pixels diameter on screen
 	if (nb_facet<10) nb_facet = 10;
-	if (nb_facet>40) nb_facet = 40;
+	if (nb_facet>100) nb_facet = 100;
 	// Rotate and add an extra quarter rotation so that the planet texture map
 	// fits to the observers position. No idea why this is necessary,
 	// perhaps some openGl strangeness, or confusing sin/cos.
@@ -1576,40 +1576,48 @@ Ring::Ring(float radiusMin, float radiusMax, const QString &texname)
 }
 
 
-void sRing(StelPainter* sPainter, const float rMin, const float rMax, int slices, const int stacks)
+struct Ring3DModel
+{
+	QVector<double> vertexArr;
+	QVector<float> texCoordArr;
+	QVector<unsigned short> indiceArr;
+};
+
+void sRing(Ring3DModel* model, const float rMin, const float rMax, int slices, const int stacks)
 {
 	float x,y;
-	int j;
-
+	
 	const float dr = (rMax-rMin) / stacks;
 	if (slices < 0) slices = -slices;
 	const float* cos_sin_theta = StelUtils::ComputeCosSinTheta(slices);
-	const float *cos_sin_theta_p;
+	const float* cos_sin_theta_p;
 
-	static QVector<double> vertexArr;
-	static QVector<float> texCoordArr;
+	model->vertexArr.resize(0);
+	model->texCoordArr.resize(0);
+	model->indiceArr.resize(0);
 
 	// draw intermediate stacks as quad strips
-	for (float r = rMin; r < rMax; r+=dr)
+	float r = rMin;
+	for (int i=0; i<=stacks; ++i)
 	{
 		const float tex_r0 = (r-rMin)/(rMax-rMin);
-		const float tex_r1 = (r+dr-rMin)/(rMax-rMin);
-		vertexArr.resize(0);
-		texCoordArr.resize(0);
+		int j;
 		for (j=0,cos_sin_theta_p=cos_sin_theta; j<=slices; ++j,cos_sin_theta_p+=2)
 		{
 			x = r*cos_sin_theta_p[0];
 			y = r*cos_sin_theta_p[1];
-			texCoordArr << tex_r0 << 0.5f;
-			vertexArr << x << y << 0.f;
-			x = (r+dr)*cos_sin_theta_p[0];
-			y = (r+dr)*cos_sin_theta_p[1];
-			texCoordArr << tex_r1 << 0.5f;
-			vertexArr << x << y << 0.f;
+			model->texCoordArr << tex_r0 << 0.5f;
+			model->vertexArr << x << y << 0.f;
 		}
-
-		sPainter->setArrays((Vec3d*)vertexArr.constData(), (Vec2f*)texCoordArr.constData());
-		sPainter->drawFromArray(StelPainter::TriangleStrip, vertexArr.size()/3);
+		r+=dr;
+	}
+	for (int i=0; i<stacks; ++i)
+	{
+		for (int j=0; j<slices; ++j)
+		{
+			model->indiceArr << i*slices+j << (i+1)*slices+j << i*slices+j+1;
+			model->indiceArr << i*slices+j+1 << (i+1)*slices+j << (i+1)*slices+j+1;
+		}
 	}
 }
 
@@ -1632,7 +1640,10 @@ void Ring::draw(StelPainter* sPainter,StelProjector::ModelViewTranformP transfo)
 	const double h = mat.r[ 8]*mat.r[12]
 				   + mat.r[ 9]*mat.r[13]
 				   + mat.r[10]*mat.r[14];
-	sRing(sPainter, radiusMin,radiusMax,(h<0.0)?slices:-slices,stacks);
+	Ring3DModel model;
+	sRing(&model, radiusMin,radiusMax,(h<0.0)?slices:-slices,stacks);
+	sPainter->setArrays((Vec3d*)model.vertexArr.constData(), (Vec2f*)model.texCoordArr.constData());
+	sPainter->drawFromArray(StelPainter::Triangles, model.indiceArr.size(), 0, true, model.indiceArr.constData());
 }
 
 
