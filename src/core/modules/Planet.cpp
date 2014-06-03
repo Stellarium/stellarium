@@ -913,8 +913,7 @@ void Planet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFon
 		// Draw the rings if we are located on a planet with rings, but not the planet itself.
 		if (rings)
 		{
-			StelPainter sPainter(core->getProjection(transfo));
-			//rings->draw(&sPainter);
+			draw3dModel(core, transfo, 1024, true);
 		}
 		return;
 	}
@@ -956,9 +955,8 @@ class StelPainterLight
 {
 public:
 	Vec3f position;
-	Vec4f diffuse;
-	Vec4f specular;
-	Vec4f ambient;
+	Vec3f diffuse;
+	Vec3f ambient;
 };
 static StelPainterLight light;
 
@@ -972,8 +970,6 @@ void Planet::initShader()
 		"attribute mediump vec2 texCoord;\n"
 		"uniform highp mat4 projectionMatrix;\n"
 		"uniform highp vec3 lightPos;\n"
-		"uniform highp float oneMinusOblateness;\n"
-		"uniform highp float radius;\n"
 		"varying mediump vec2 texc;\n"
 		"varying mediump float lambert;\n"
 		"varying highp vec3 P;\n"
@@ -1001,8 +997,8 @@ void Planet::initShader()
 		"varying mediump vec2 texc;\n"
 		"varying mediump float lambert;\n"
 		"uniform sampler2D tex;\n"
-		"uniform mediump vec4 ambientLight;\n"
-		"uniform mediump vec4 diffuseLight;\n"
+		"uniform mediump vec3 ambientLight;\n"
+		"uniform mediump vec3 diffuseLight;\n"
 		"uniform highp vec4 sunInfo;\n"
 		"uniform highp float thisPlanetRadius;\n"
 		"\n"
@@ -1113,7 +1109,7 @@ void Planet::initShader()
 		"        }\n"
 		"    }\n"
 		"\n"
-		"    vec4 litColor = (isRing ? 1.0 : lambert) * final_illumination * diffuseLight + ambientLight;\n"
+		"    vec4 litColor = vec4((isRing ? 1.0 : lambert) * final_illumination * diffuseLight + ambientLight, 1.0);\n"
 		"    if(isMoon && final_illumination < 1.0)\n"
 		"    {\n"
 		"        vec4 shadowColor = texture2D(earthShadow, vec2(final_illumination, 0.5));\n"
@@ -1140,8 +1136,6 @@ void Planet::initShader()
 	GL(shaderVars.lightPos = shaderProgram->uniformLocation("lightPos"));
 	GL(shaderVars.diffuseLight = shaderProgram->uniformLocation("diffuseLight"));
 	GL(shaderVars.ambientLight = shaderProgram->uniformLocation("ambientLight"));
-	GL(shaderVars.radius = shaderProgram->uniformLocation("radius"));
-	GL(shaderVars.oneMinusOblateness = shaderProgram->uniformLocation("oneMinusOblateness"));
 	GL(shaderVars.shadowCount = shaderProgram->uniformLocation("shadowCount"));
 	GL(shaderVars.shadowData = shaderProgram->uniformLocation("shadowData"));
 	GL(shaderVars.sunInfo = shaderProgram->uniformLocation("sunInfo"));
@@ -1162,7 +1156,7 @@ void Planet::deinitShader()
 	shaderProgram = NULL;
 }
 
-void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP transfo, float screenSz)
+void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP transfo, float screenSz, bool drawOnlyRing)
 {
 	// This is the main method drawing a planet 3d model
 	// Some work has to be done on this method to make the rendering nicer
@@ -1182,9 +1176,8 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 			light.position=Vec4f(sunPos[0],sunPos[1],sunPos[2],1.f);
 
 			// Set the light parameters taking sun as the light source
-			light.diffuse = Vec4f(1.f,1.f,1.f,1.f);
-			light.specular = Vec4f(0.f,0.f,0.f,0.f);
-			light.ambient = Vec4f(0.02f,0.02f,0.02f,0.02f);
+			light.diffuse = Vec4f(1.f,1.f,1.f);
+			light.ambient = Vec4f(0.02f,0.02f,0.02f);
 
 			if (this==ssm->getMoon())
 			{
@@ -1235,8 +1228,7 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 				drawSphere(sPainter, screenSz);
 			}
 		}
-		if (sPainter)
-			delete sPainter;
+		delete sPainter;
 		sPainter=NULL;
 	}
 
@@ -1366,7 +1358,7 @@ void Planet::computeModelMatrix(Mat4d &result) const
 	}
 }
 
-void Planet::drawSphere(StelPainter* painter, float screenSz)
+void Planet::drawSphere(StelPainter* painter, float screenSz, bool drawOnlyRing)
 {
 	if (texMap)
 	{
@@ -1382,7 +1374,7 @@ void Planet::drawSphere(StelPainter* painter, float screenSz)
 
 	// Draw the spheroid itself
 	// Adapt the number of facets according with the size of the sphere for optimization
-	int nb_facet = (int)(screenSz * 40/50);	// 40 facets for 1024 pixels diameter on screen
+	int nb_facet = (int)(screenSz * 40.f/50.f);	// 40 facets for 1024 pixels diameter on screen
 	if (nb_facet<10) nb_facet = 10;
 	if (nb_facet>100) nb_facet = 100;
 
@@ -1430,10 +1422,8 @@ void Planet::drawSphere(StelPainter* painter, float screenSz)
 	lightPos3.normalize();
 	
 	GL(shaderProgram->setUniformValue(shaderVars.lightPos, lightPos3[0], lightPos3[1], lightPos3[2]));
-	GL(shaderProgram->setUniformValue(shaderVars.diffuseLight, light.diffuse[0], light.diffuse[1], light.diffuse[2], light.diffuse[3]));
-	GL(shaderProgram->setUniformValue(shaderVars.ambientLight, light.ambient[0], light.ambient[1], light.ambient[2], light.ambient[3]));
-	GL(shaderProgram->setUniformValue(shaderVars.radius, (GLfloat)radius));
-	GL(shaderProgram->setUniformValue(shaderVars.oneMinusOblateness, (GLfloat)oneMinusOblateness));
+	GL(shaderProgram->setUniformValue(shaderVars.diffuseLight, light.diffuse[0], light.diffuse[1], light.diffuse[2]));
+	GL(shaderProgram->setUniformValue(shaderVars.ambientLight, light.ambient[0], light.ambient[1], light.ambient[2]));
 	GL(shaderProgram->setUniformValue(shaderVars.texture, 0));
 	GL(shaderProgram->setUniformValue(shaderVars.shadowCount, shadowCandidates.size()));
 	GL(shaderProgram->setUniformValue(shaderVars.shadowData, shadowCandidatesData));
@@ -1479,7 +1469,8 @@ void Planet::drawSphere(StelPainter* painter, float screenSz)
 		glEnable(GL_DEPTH_TEST);
 	}
 	
-	GL(glDrawElements(GL_TRIANGLES, model.indiceArr.size(), GL_UNSIGNED_SHORT, model.indiceArr.constData()));
+	if (!drawOnlyRing)
+		GL(glDrawElements(GL_TRIANGLES, model.indiceArr.size(), GL_UNSIGNED_SHORT, model.indiceArr.constData()));
 
 	if (rings)
 	{
