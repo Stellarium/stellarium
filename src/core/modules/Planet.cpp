@@ -1446,10 +1446,10 @@ void Planet::drawSphere(StelPainter* painter, float screenSz)
 	GL(shaderProgram->setUniformValue(shaderVars.thisPlanetRadius, (float)getRadius()));
 	GL(shaderProgram->setUniformValue(shaderVars.isRing, false));
 
+	GL(shaderProgram->setUniformValue(shaderVars.ring, rings!=NULL));
 	if (rings!=NULL)
 	{
 		rings->tex->bind(2);
-		GL(shaderProgram->setUniformValue(shaderVars.ring, rings!=NULL));
 		GL(shaderProgram->setUniformValue(shaderVars.outerRadius, rings->radiusMax));
 		GL(shaderProgram->setUniformValue(shaderVars.innerRadius, rings->radiusMin));
 		GL(shaderProgram->setUniformValue(shaderVars.ringS, rings ? 2 : 0));
@@ -1486,6 +1486,7 @@ void Planet::drawSphere(StelPainter* painter, float screenSz)
 
 	if (rings)
 	{
+		qDebug() << englishName;
 		// Draw the rings just after the planet
 		
 		glDepthMask(GL_FALSE);
@@ -1519,6 +1520,8 @@ void Planet::drawSphere(StelPainter* painter, float screenSz)
 		GL(shaderProgram->enableAttributeArray(shaderVars.unprojectedVertex));
 		GL(shaderProgram->setAttributeArray(shaderVars.texCoord, (const GLfloat*)ringModel.texCoordArr.constData(), 2));
 		GL(shaderProgram->enableAttributeArray(shaderVars.texCoord));
+		
+		glDisable(GL_CULL_FACE);
 		
 		GL(glDrawElements(GL_TRIANGLES, ringModel.indiceArr.size(), GL_UNSIGNED_SHORT, ringModel.indiceArr.constData()));
 		
