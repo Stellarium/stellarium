@@ -962,7 +962,7 @@ static StelPainterLight light;
 
 void Planet::initShader()
 {
-	// Basic texture shader program
+	// Default planet texture shader program
 	QOpenGLShader vshader(QOpenGLShader::Vertex);
 	const char *vsrc =
 		"attribute highp vec3 vertex;\n"
@@ -978,7 +978,6 @@ void Planet::initShader()
 		"{\n"
 		"    gl_Position = projectionMatrix * vec4(vertex, 1.);\n"
 		"    texc = texCoord;\n"
-		"    // Must be a separate variable due to Intel drivers\n"
 		"    vec3 normal = normalize(unprojectedVertex);\n"
 		"    float c = lightPos.x * normal.x +\n"
 		"              lightPos.y * normal.y +\n"
@@ -1167,7 +1166,7 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 		StelProjector::ModelViewTranformP transfo2 = transfo->clone();
 		transfo2->combine(Mat4d::zrotation(M_PI/180*(axisRotation + 90.)));
 		StelPainter* sPainter = new StelPainter(core->getProjection(transfo2));
-
+		
 		if (flagLighting)
 		{
 			// Set the main source of light to be the sun
@@ -1233,7 +1232,7 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 	}
 
 	// Draw the halo if it enabled in the ssystem.ini file (+ special case for backward compatible for the Sun)
-	if (hasHalo() || getEnglishName().contains("Sun"))
+	if (hasHalo() || this==ssm->getSun())
 	{
 		// Prepare openGL lighting parameters according to luminance
 		float surfArcMin2 = getSpheroidAngularSize(core)*60;
@@ -1382,6 +1381,20 @@ void Planet::drawSphere(StelPainter* painter, float screenSz, bool drawOnlyRing)
 	Planet3DModel model;
 	sSphere(&model, radius*sphereScale, oneMinusOblateness, nb_facet, nb_facet);
 	
+	QVector<float> projectedVertexArr;
+	projectedVertexArr.resize(model.vertexArr.size());
+	for (int i=0;i<model.vertexArr.size()/3;++i)
+		painter->getProjector()->project(*((Vec3f*)(model.vertexArr.constData()+i*3)), *((Vec3f*)(projectedVertexArr.data()+i*3)));
+	
+	if (englishName=="Sun")
+	{
+		texMap->bind();
+		painter->setColor(2, 2, 2);
+		painter->setArrays((Vec3f*)projectedVertexArr.constData(), (Vec2f*)model.texCoordArr.constData());
+		painter->drawFromArray(StelPainter::Triangles, model.indiceArr.size(), 0, false, model.indiceArr.constData());
+		return;
+	}
+	
 	if (shaderProgram==NULL)
 		Planet::initShader();
 	Q_ASSERT(shaderProgram!=NULL);
@@ -1449,11 +1462,6 @@ void Planet::drawSphere(StelPainter* painter, float screenSz, bool drawOnlyRing)
 	GL(shaderProgram->setUniformValue(shaderVars.earthShadow, isMoon ? 3: 0));
 
 	GL(texMap->bind(1));
-	
-	QVector<float> projectedVertexArr;
-	projectedVertexArr.resize(model.vertexArr.size());
-	for (int i=0;i<model.vertexArr.size()/3;++i)
-		painter->getProjector()->project(*((Vec3f*)(model.vertexArr.constData()+i*3)), *((Vec3f*)(projectedVertexArr.data()+i*3)));
 	
 	GL(shaderProgram->setAttributeArray(shaderVars.vertex, (const GLfloat*)projectedVertexArr.constData(), 3));
 	GL(shaderProgram->enableAttributeArray(shaderVars.vertex));
