@@ -43,13 +43,6 @@ class StelFont;
 class StelPainter;
 class StelTranslator;
 
-struct TrailPoint
-{
-	Vec3d point;
-	double date;
-};
-
-
 // Class used to store orbital elements
 class RotationElements
 {
@@ -68,13 +61,10 @@ public:
 class Ring
 {
 public:
-	Ring(double radiusMin,double radiusMax,const QString &texname);
-	~Ring(void);
-	void draw(StelPainter* painter, StelProjector::ModelViewTranformP transfo, double screenSz);
+	Ring(float radiusMin, float radiusMax,const QString &texname);
 	double getSize(void) const {return radiusMax;}
-private:
-	const double radiusMin;
-	const double radiusMax;
+	const float radiusMin;
+	const float radiusMax;
 	StelTextureSP tex;
 };
 
@@ -241,20 +231,22 @@ public:
 	static void setOrbitColor(const Vec3f& oc) {orbitColor = oc;}
 	static const Vec3f& getOrbitColor() {return orbitColor;}
 
+	//! Return the list of planets which project some shadow on this planet
+	QVector<const Planet*> getCandidatesForShadow() const;
+	
 protected:
 	static StelTextureSP texEarthShadow;     // for lunar eclipses
 
-	// draw earth shadow on moon for lunar eclipses
-	void drawEarthShadow(StelCore* core, StelPainter* sPainter);
-
+	void computeModelMatrix(Mat4d &result) const;
+	
 	// Return the information string "ready to print" :)
 	QString getSkyLabel(const StelCore* core) const;
 
 	// Draw the 3d model. Call the proper functions if there are rings etc..
-	void draw3dModel(StelCore* core, StelProjector::ModelViewTranformP transfo, float screenSz);
+	void draw3dModel(StelCore* core, StelProjector::ModelViewTranformP transfo, float screenSz, bool drawOnlyRing=false);
 
 	// Draw the 3D sphere
-	void drawSphere(StelPainter* painter, float screenSz);
+	void drawSphere(StelPainter* painter, float screenSz, bool drawOnlyRing=false);
 
 	// Draw the circle and name of the Planet
 	void drawHints(const StelCore* core, const QFont& planetNameFont);
@@ -299,6 +291,34 @@ protected:
 
 	static Vec3f labelColor;
 	static StelTextureSP hintCircleTex;
+	
+	// Shader-related variables
+	struct ShaderVars {
+		int projectionMatrix;
+		int texCoord;
+		int unprojectedVertex;
+		int vertex;
+		int texture;
+
+		int lightPos;
+		int diffuseLight;
+		int ambientLight;
+		int shadowCount;
+		int shadowData;
+		int sunInfo;
+		int isRing;
+		int ring;
+		int outerRadius;
+		int innerRadius;
+		int ringS;
+		int isMoon;
+		int earthShadow;
+	};
+	static ShaderVars shaderVars;
+
+	static void initShader();
+	static void deinitShader();
+	static class QOpenGLShaderProgram* shaderProgram;
 };
 
 #endif // _PLANET_HPP_
