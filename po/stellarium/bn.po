@@ -7,20 +7,20 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-14 23:55+0700\n"
+"POT-Creation-Date: 2014-06-03 23:23+0700\n"
 "PO-Revision-Date: 2014-03-20 04:41+0000\n"
 "Last-Translator: Tanmoy Saha <Unknown>\n"
 "Language-Team: stellarium\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-05-15 05:29+0000\n"
-"X-Generator: Launchpad (build 17007)\n"
+"X-Launchpad-Export-Date: 2014-06-04 05:41+0000\n"
+"X-Generator: Launchpad (build 17031)\n"
 "Language: bn\n"
 
 #: src/core/modules/ConstellationMgr.cpp:107 src/core/modules/StarMgr.cpp:346
 #: src/core/modules/GridLinesMgr.cpp:695 src/core/modules/LandscapeMgr.cpp:354
-#: src/core/modules/NebulaMgr.cpp:126 src/core/modules/SolarSystem.cpp:156
+#: src/core/modules/NebulaMgr.cpp:126 src/core/modules/SolarSystem.cpp:155
 #: src/core/StelApp.cpp:468 src/core/StelCore.cpp:176
 #: src/core/StelSkyLayerMgr.cpp:87 src/StelMainView.cpp:309
 msgid "Display Options"
@@ -158,7 +158,7 @@ msgstr ", %1 মিটার"
 msgid "Planet: "
 msgstr "গ্রহ "
 
-#: src/core/modules/Nebula.cpp:104 src/core/modules/Planet.cpp:133
+#: src/core/modules/Nebula.cpp:104 src/core/modules/Planet.cpp:132
 #: src/core/modules/MinorPlanet.cpp:215 src/core/modules/Comet.cpp:154
 #: src/core/modules/StarWrapper.cpp:50 src/core/modules/StarWrapper.cpp:170
 #: src/core/modules/StarWrapper.cpp:173
@@ -169,7 +169,7 @@ msgstr "গ্রহ "
 msgid "Type: <b>%1</b>"
 msgstr "ধরন : <b>%1</b>"
 
-#: src/core/modules/Nebula.cpp:110 src/core/modules/Planet.cpp:139
+#: src/core/modules/Nebula.cpp:109 src/core/modules/Planet.cpp:138
 #: src/core/modules/MinorPlanet.cpp:221 src/core/modules/Comet.cpp:160
 #: src/core/modules/StarWrapper.cpp:56 src/core/modules/StarWrapper.cpp:180
 #: plugins/Supernovae/src/Supernova.cpp:135 plugins/Novae/src/Nova.cpp:140
@@ -178,12 +178,7 @@ msgstr "ধরন : <b>%1</b>"
 msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>)"
 msgstr "ঔজ্জ্বল্যতা : <b>%1</b> (হ্রাস পেয়ে: <b>%2</b>)"
 
-#: src/core/modules/Nebula.cpp:113
-#, qt-format
-msgid "Surface brightness: <b>%1</b> (extincted to: <b>%2</b>)"
-msgstr ""
-
-#: src/core/modules/Nebula.cpp:118 src/core/modules/Planet.cpp:142
+#: src/core/modules/Nebula.cpp:112 src/core/modules/Planet.cpp:141
 #: src/core/modules/MinorPlanet.cpp:224 src/core/modules/Comet.cpp:163
 #: src/core/modules/StarWrapper.cpp:60 src/core/modules/StarWrapper.cpp:183
 #: plugins/Supernovae/src/Supernova.cpp:137 plugins/Novae/src/Nova.cpp:143
@@ -192,49 +187,54 @@ msgstr ""
 msgid "Magnitude: <b>%1</b>"
 msgstr "ঔজ্জ্বল্য : <b>%1</b>"
 
-#: src/core/modules/Nebula.cpp:120
+#: src/core/modules/Nebula.cpp:119
+#, qt-format
+msgid "Surface brightness: <b>%1</b> (extincted to: <b>%2</b>)"
+msgstr ""
+
+#: src/core/modules/Nebula.cpp:125
 #, qt-format
 msgid "Surface brightness: <b>%1</b>"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:126
+#: src/core/modules/Nebula.cpp:131
 #, qt-format
 msgid "Size: %1"
 msgstr "আকার : %1"
 
-#: src/core/modules/Nebula.cpp:370
+#: src/core/modules/Nebula.cpp:375
 msgid "Galaxy"
 msgstr "ছায়াপথ"
 
-#: src/core/modules/Nebula.cpp:373
+#: src/core/modules/Nebula.cpp:378
 msgid "Open cluster"
 msgstr "মুক্ত তারকা গুচ্ছ"
 
-#: src/core/modules/Nebula.cpp:376
+#: src/core/modules/Nebula.cpp:381
 msgid "Globular cluster"
 msgstr "গোলাকার তারকা গুচ্ছ"
 
-#: src/core/modules/Nebula.cpp:379
+#: src/core/modules/Nebula.cpp:384
 msgid "Nebula"
 msgstr "নীহারিকা"
 
-#: src/core/modules/Nebula.cpp:382
+#: src/core/modules/Nebula.cpp:387
 msgid "Planetary nebula"
 msgstr "গ্রহরূপী নীহারিকা"
 
-#: src/core/modules/Nebula.cpp:385
+#: src/core/modules/Nebula.cpp:390
 msgid "Dark Nebula"
 msgstr "কৃষ্ণবর্ণ নিহারীকা"
 
-#: src/core/modules/Nebula.cpp:388
+#: src/core/modules/Nebula.cpp:393
 msgid "Cluster associated with nebulosity"
 msgstr "নীহারিকা যুক্ত তারকা গুচ্ছ"
 
-#: src/core/modules/Nebula.cpp:391
+#: src/core/modules/Nebula.cpp:396
 msgid "Unknown"
 msgstr "অজানা"
 
-#: src/core/modules/Nebula.cpp:394
+#: src/core/modules/Nebula.cpp:399
 msgid "Undocumented type"
 msgstr "নথিভুক্ত না করা জ্যোতিষ্ক"
 
@@ -242,73 +242,73 @@ msgstr "নথিভুক্ত না করা জ্যোতিষ্ক"
 msgid "Deep-sky objects"
 msgstr "অতিজাগতিক জ্যোতিষ্কসমূহ"
 
-#: src/core/modules/Planet.cpp:145 src/core/modules/MinorPlanet.cpp:234
+#: src/core/modules/Planet.cpp:144 src/core/modules/MinorPlanet.cpp:234
 #: src/core/modules/MinorPlanet.cpp:238 src/core/modules/Comet.cpp:172
 #: src/core/modules/StarWrapper.cpp:187 plugins/Quasars/src/Quasar.cpp:115
 #, qt-format
 msgid "Absolute Magnitude: %1"
 msgstr "পরম ঔজ্জ্বল্য : %1"
 
-#: src/core/modules/Planet.cpp:154
+#: src/core/modules/Planet.cpp:153
 #, qt-format
 msgid "Obliquity (of date, for Earth): %1"
 msgstr "পৃথিবীর অক্ষের তীর্যকতা (তারিখ অনুযায়ী) : %1"
 
-#: src/core/modules/Planet.cpp:166 src/core/modules/MinorPlanet.cpp:251
+#: src/core/modules/Planet.cpp:165 src/core/modules/MinorPlanet.cpp:251
 #: src/core/modules/Comet.cpp:202
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 km)"
 msgstr "দূরত্ব : %1 জ্যোতির্বৈজ্ঞানিক একক (%2 কিমি)"
 
-#: src/core/modules/Planet.cpp:173 src/core/modules/MinorPlanet.cpp:258
+#: src/core/modules/Planet.cpp:172 src/core/modules/MinorPlanet.cpp:258
 #: src/core/modules/Comet.cpp:209
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 Mio km)"
 msgstr "দূরত্ব : %1 জ্যোতির্বৈজ্ঞানিক একক (%2 মিলিয়ন কিমি)"
 
-#: src/core/modules/Planet.cpp:186
+#: src/core/modules/Planet.cpp:185
 #, qt-format
 msgid "Apparent diameter: %1, with rings: %2"
 msgstr "অাপাত ব্যাস : %1, বলয় সহ : %2"
 
-#: src/core/modules/Planet.cpp:192 src/core/modules/MinorPlanet.cpp:266
+#: src/core/modules/Planet.cpp:191 src/core/modules/MinorPlanet.cpp:266
 #, qt-format
 msgid "Apparent diameter: %1"
 msgstr "আপাত ব্যাস : %1"
 
 #. TRANSLATORS: Sidereal (orbital) period for solar system bodies in days and in Julian years (symbol: a)
-#: src/core/modules/Planet.cpp:204 src/core/modules/MinorPlanet.cpp:273
+#: src/core/modules/Planet.cpp:203 src/core/modules/MinorPlanet.cpp:273
 #: src/core/modules/Comet.cpp:231
 #, qt-format
 msgid "Sidereal period: %1 days (%2 a)"
 msgstr "প্রদক্ষিণ কাল : %1 দিন (%2 বছর)"
 
-#: src/core/modules/Planet.cpp:207
+#: src/core/modules/Planet.cpp:206
 #, qt-format
 msgid "Sidereal day: %1"
 msgstr "নক্ষত্র দিবস : %1"
 
-#: src/core/modules/Planet.cpp:208
+#: src/core/modules/Planet.cpp:207
 #, qt-format
 msgid "Mean solar day: %1"
 msgstr "গড় সৌর দিবস : %1"
 
-#: src/core/modules/Planet.cpp:214
+#: src/core/modules/Planet.cpp:213
 #, qt-format
 msgid "Phase Angle: %1"
 msgstr "কৌনিক দশা : %1"
 
-#: src/core/modules/Planet.cpp:215
+#: src/core/modules/Planet.cpp:214
 #, qt-format
 msgid "Elongation: %1"
 msgstr "দ্রাঘন বা সূর্যের সাথে কৌনিক দূরত্ব : %1"
 
-#: src/core/modules/Planet.cpp:216
+#: src/core/modules/Planet.cpp:215
 #, qt-format
 msgid "Phase: %1"
 msgstr "দৃশ্যমান দশা : %1 অংশ"
 
-#: src/core/modules/Planet.cpp:217
+#: src/core/modules/Planet.cpp:216
 #, qt-format
 msgid "Illuminated: %1%"
 msgstr "দৃশ্যমান দীপ্তি : %1%"
@@ -333,17 +333,17 @@ msgstr "সূর্য থেকে দূরত্ব : %1 জ্যোতি�
 msgid "Speed: %1 km/s"
 msgstr "গতিবেগ : %1 কিমি/সেকেন্ড"
 
-#: src/core/modules/SolarSystem.cpp:157
+#: src/core/modules/SolarSystem.cpp:156
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:308
 msgid "Planet labels"
 msgstr "গ্রহের নাম"
 
-#: src/core/modules/SolarSystem.cpp:158
+#: src/core/modules/SolarSystem.cpp:157
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:312
 msgid "Planet orbits"
 msgstr "গ্রহের কক্ষপথ"
 
-#: src/core/modules/SolarSystem.cpp:159
+#: src/core/modules/SolarSystem.cpp:158
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:316
 msgid "Planet trails"
 msgstr "গ্রহের গমনপথ"
@@ -3742,10 +3742,10 @@ msgid "&Paste"
 msgstr "অনুলিপি &জুড়ুন"
 
 #: src/translations.h:547 src/ui_locationDialogGui.h:407
-#: plugins/Oculars/src/ui_ocularDialog.h:1073
-#: plugins/Oculars/src/ui_ocularDialog.h:1082
-#: plugins/Oculars/src/ui_ocularDialog.h:1089
-#: plugins/Oculars/src/ui_ocularDialog.h:1100
+#: plugins/Oculars/src/ui_ocularDialog.h:1074
+#: plugins/Oculars/src/ui_ocularDialog.h:1083
+#: plugins/Oculars/src/ui_ocularDialog.h:1090
+#: plugins/Oculars/src/ui_ocularDialog.h:1101
 msgid "Delete"
 msgstr "মুছে ফেলুন"
 
@@ -3828,7 +3828,12 @@ msgstr "সতেজ করন"
 msgid "Location"
 msgstr "অবস্থান"
 
-#: src/ui_locationDialogGui.h:398 src/ui_locationDialogGui.h:401
+#: src/ui_locationDialogGui.h:398
+msgid ""
+"Standard list of locations contains only English names (without diacritics!)"
+msgstr ""
+
+#: src/ui_locationDialogGui.h:401
 msgid ""
 "Standard list of locations is contains only English names (without "
 "diacritics!)"
@@ -5109,7 +5114,7 @@ msgid "Save settings as default"
 msgstr "শুরুর সময় এই বিন্যাস ব্যবহার করুন"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:190
-#: plugins/Oculars/src/ui_ocularDialog.h:1107
+#: plugins/Oculars/src/ui_ocularDialog.h:1108
 #: plugins/Satellites/src/ui_satellitesDialog.h:762
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:419
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:405
@@ -5142,7 +5147,7 @@ msgid "Compass marks"
 msgstr "দিক নির্দেশ"
 
 #: plugins/Oculars/src/Oculars.cpp:80 plugins/Oculars/src/Oculars.cpp:1311
-#: plugins/Oculars/src/ui_ocularDialog.h:1050
+#: plugins/Oculars/src/ui_ocularDialog.h:1051
 msgid "Oculars"
 msgstr "দূরবীন অনুকরন"
 
@@ -5209,7 +5214,7 @@ msgid "&Reset rotation"
 msgstr "&সোজা করুন"
 
 #: plugins/Oculars/src/Oculars.cpp:1312
-#: plugins/Oculars/src/ui_ocularDialog.h:1052
+#: plugins/Oculars/src/ui_ocularDialog.h:1053
 msgid "Ocular view"
 msgstr "দূরবীন অনুকরন"
 
@@ -5552,112 +5557,112 @@ msgstr "দূরবীন চালু বা বন্ধ"
 msgid "Opens the pop-up navigation menu."
 msgstr "ব্যবহারকালীন বিকল্প প্রদর্শণ"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1053
+#: plugins/Oculars/src/ui_ocularDialog.h:1054
 msgid "Enable only if an object is selected"
 msgstr "শুরুর পূর্বে জ্যোতিষ্কের আবশ্যিক নির্বাচন"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1054
+#: plugins/Oculars/src/ui_ocularDialog.h:1055
 msgid "Scale image circle"
 msgstr "দূরবীনের গঠন অনুযায়ী দৃষ্টিক্ষেত্রের ব্যাসের পরিবর্তন"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1056
+#: plugins/Oculars/src/ui_ocularDialog.h:1057
 msgid "Apply limits stellar magnitude for different apertures of telescopes"
 msgstr ""
 "দূরবীনের অভিলক্ষ্য অনুযায়ী পর্যবেক্ষণযোগ্য সর্বোনিম্ন ঔজ্জ্বল্যতা নির্দিষ্ট "
 "হয়ে যায় ।"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1058
+#: plugins/Oculars/src/ui_ocularDialog.h:1059
 msgid "Limit stellar magnitude"
 msgstr "ঔজ্জ্বল্যের সীমাবদ্ধতা"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1059
+#: plugins/Oculars/src/ui_ocularDialog.h:1060
 msgid "Key mappings"
 msgstr "চটজলদি ব্যবহারের উপায়"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1060
+#: plugins/Oculars/src/ui_ocularDialog.h:1061
 msgid "Toggle ocular view:"
 msgstr "দূরবীন চালু বা বন্ধ :"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1062
+#: plugins/Oculars/src/ui_ocularDialog.h:1063
 msgid "Open pop-up navigation menu:"
 msgstr "ব্যবহারকালীন বিকল্প প্রদর্শণ :"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1063
+#: plugins/Oculars/src/ui_ocularDialog.h:1064
 msgid "Interface"
 msgstr "প্রেক্ষাপট"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1064
+#: plugins/Oculars/src/ui_ocularDialog.h:1065
 msgid "On-screen control panel"
 msgstr "দৃশ্যপটে এটি ব্যবহারের সরঞ্জাম প্রদর্শণ"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1065
+#: plugins/Oculars/src/ui_ocularDialog.h:1066
 msgid "Use degrees and minutes for FOV of CCD"
 msgstr "আলোক সংবেদকের এর দৃষ্টিক্ষেত্র পরিমাপে ডিগ্রি ও মিনিট ব্যবহার"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1067
+#: plugins/Oculars/src/ui_ocularDialog.h:1068
 msgid ""
-"Mark it if you want value of FOV is same like at the startup of Stellarium."
-msgstr ""
-
-#: plugins/Oculars/src/ui_ocularDialog.h:1069
-msgid "Restore FOV to initial values"
+"Mark it if you want the FOV value the same like at the startup of Stellarium."
 msgstr ""
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1070
+msgid "Restore FOV to initial values"
+msgstr ""
+
+#: plugins/Oculars/src/ui_ocularDialog.h:1071
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:225
 msgid "General"
 msgstr "মূল বিভাগ"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1071
-#: plugins/Oculars/src/ui_ocularDialog.h:1079
+#: plugins/Oculars/src/ui_ocularDialog.h:1072
+#: plugins/Oculars/src/ui_ocularDialog.h:1080
 msgid "Eyepieces"
 msgstr "অভিনেত্র"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1072
-#: plugins/Oculars/src/ui_ocularDialog.h:1081
-#: plugins/Oculars/src/ui_ocularDialog.h:1088
-#: plugins/Oculars/src/ui_ocularDialog.h:1099
+#: plugins/Oculars/src/ui_ocularDialog.h:1073
+#: plugins/Oculars/src/ui_ocularDialog.h:1082
+#: plugins/Oculars/src/ui_ocularDialog.h:1089
+#: plugins/Oculars/src/ui_ocularDialog.h:1100
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:219
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:403
 msgid "Add"
 msgstr "যোগ করুন"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1074
-#: plugins/Oculars/src/ui_ocularDialog.h:1083
-#: plugins/Oculars/src/ui_ocularDialog.h:1090
-#: plugins/Oculars/src/ui_ocularDialog.h:1101
+#: plugins/Oculars/src/ui_ocularDialog.h:1075
+#: plugins/Oculars/src/ui_ocularDialog.h:1084
+#: plugins/Oculars/src/ui_ocularDialog.h:1091
+#: plugins/Oculars/src/ui_ocularDialog.h:1102
 #: plugins/Satellites/src/ui_satellitesDialog.h:731
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:483
 msgid "Name:"
 msgstr "নাম :"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1075
+#: plugins/Oculars/src/ui_ocularDialog.h:1076
 msgid "aFOV:"
 msgstr "অাপাত দৃষ্টিক্ষেত্র :"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1076
-#: plugins/Oculars/src/ui_ocularDialog.h:1102
+#: plugins/Oculars/src/ui_ocularDialog.h:1077
+#: plugins/Oculars/src/ui_ocularDialog.h:1103
 msgid "Focal length:"
 msgstr "ফোকাস দূরত্ব :"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1077
+#: plugins/Oculars/src/ui_ocularDialog.h:1078
 msgid "Field stop:"
 msgstr "ক্ষেত্র বন্ধ :"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1078
+#: plugins/Oculars/src/ui_ocularDialog.h:1079
 msgid "Binoculars"
 msgstr "দূরবীনগুলি"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1080
-#: plugins/Oculars/src/ui_ocularDialog.h:1086
+#: plugins/Oculars/src/ui_ocularDialog.h:1081
+#: plugins/Oculars/src/ui_ocularDialog.h:1087
 msgid "Lenses"
 msgstr "বিশেষ লেন্স"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1084
+#: plugins/Oculars/src/ui_ocularDialog.h:1085
 msgid "Multiplier:"
 msgstr "গুণক :"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1085
+#: plugins/Oculars/src/ui_ocularDialog.h:1086
 msgid ""
 "Values of multiplicity >1 expand the focal length (Barlow lens). Values of "
 "multiplicity <1 reduce the focal length (Shapley lens)."
@@ -5665,51 +5670,51 @@ msgstr ""
 "বিবর্ধন >১ হলে (Barlow লেন্স) ফোকাস দূরত্ব বাড়ে এবং বিবর্ধকন <১হলে (Shapley "
 "লেন্স) ফোকাস দূরত্ব কমে ।"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1087
-#: plugins/Oculars/src/ui_ocularDialog.h:1097
+#: plugins/Oculars/src/ui_ocularDialog.h:1088
+#: plugins/Oculars/src/ui_ocularDialog.h:1098
 msgid "Sensors"
 msgstr "আলোক সংবেদক"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1091
+#: plugins/Oculars/src/ui_ocularDialog.h:1092
 msgid "Resolution x (pixels):"
 msgstr "আড়াআড়ি মাপ (পিক্সেল) :"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1092
+#: plugins/Oculars/src/ui_ocularDialog.h:1093
 msgid "Resolution y (pixels):"
 msgstr "লম্বালম্বি মাপ (পিক্সেল) :"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1093
+#: plugins/Oculars/src/ui_ocularDialog.h:1094
 msgid "Chip width (mm):"
 msgstr "সংবেদকের দৈর্ঘ্য (মিলিমিটার):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1094
+#: plugins/Oculars/src/ui_ocularDialog.h:1095
 msgid "Chip height (mm):"
 msgstr "সংবেদকের প্রস্থ (মিলিমিটার):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1095
+#: plugins/Oculars/src/ui_ocularDialog.h:1096
 msgid "Pixel width (micron):"
 msgstr "পিক্সেলের দৈর্ঘ্য (মাইক্রন):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1096
+#: plugins/Oculars/src/ui_ocularDialog.h:1097
 msgid "Pixel height (micron):"
 msgstr "পিক্সেলের প্রস্থ (মাইক্রন):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1098
-#: plugins/Oculars/src/ui_ocularDialog.h:1106
+#: plugins/Oculars/src/ui_ocularDialog.h:1099
+#: plugins/Oculars/src/ui_ocularDialog.h:1107
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:392
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:408
 msgid "Telescopes"
 msgstr "দূরবীন সমূহ"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1103
+#: plugins/Oculars/src/ui_ocularDialog.h:1104
 msgid "Diameter:"
 msgstr "ব্যাস :"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1104
+#: plugins/Oculars/src/ui_ocularDialog.h:1105
 msgid "Horizontal flip"
 msgstr "আড়াআড়ি উল্টানো"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1105
+#: plugins/Oculars/src/ui_ocularDialog.h:1106
 msgid "Vertical flip"
 msgstr "লম্বালম্বি উল্টানো"
 
@@ -6456,7 +6461,7 @@ msgstr "দূরবীন নিয়ন্ত্রণ করার সরঞ্
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:97
 #: plugins/FOV/src/gui/FOVWindow.cpp:79
 #: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:81
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:90
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:91
 #, qt-format
 msgid "Version %1"
 msgstr "সংস্করণ %1"
@@ -8929,7 +8934,6 @@ msgstr ""
 "করার আগে এটিতে ব্যবহৃত চিহ্ন নির্ধারণ পদ্ধতিটি অবশ্যই খেয়াল করতে হবে ।"
 
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:272
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:282
 msgid "Show plug-ins button on toolbar"
 msgstr "সময় সমীকরণ সরঞ্জামটি প্রদর্শণ"
 
@@ -9671,7 +9675,7 @@ msgid "Search Events"
 msgstr ""
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:54
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:94
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:95
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:277
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:279
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:290
@@ -9682,23 +9686,23 @@ msgstr ""
 msgid "This plugin shows the coordinates of the mouse pointer."
 msgstr ""
 
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:94
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:95
 msgid "Show equatorial coordinates (J2000.0) of the mouse pointer"
 msgstr ""
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:89
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:90
 msgid "Pointer Coordinates plug-in"
 msgstr ""
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:118
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:119
 msgid "The top center of the screen"
 msgstr ""
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:119
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:120
 msgid "In center of the top right half of the screen"
 msgstr ""
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:120
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:121
 msgid "The right bottom corner of the screen"
 msgstr ""
 
@@ -9707,7 +9711,11 @@ msgid "Show equatorial coordinates of the mouse cursor for epoch J2000.0"
 msgstr ""
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:281
-msgid "Enable displaying coordinates at startup"
+msgid "Enable display of coordinates at startup"
+msgstr ""
+
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:282
+msgid "Show plug-in button on toolbar"
 msgstr ""
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:285
