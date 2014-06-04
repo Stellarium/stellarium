@@ -306,7 +306,6 @@ protected:
 		int shadowCount;
 		int shadowData;
 		int sunInfo;
-		int thisPlanetRadius;
 		int isRing;
 		int ring;
 		int outerRadius;

@@ -999,7 +999,6 @@ void Planet::initShader()
 		"uniform mediump vec3 ambientLight;\n"
 		"uniform mediump vec3 diffuseLight;\n"
 		"uniform highp vec4 sunInfo;\n"
-		"uniform highp float thisPlanetRadius;\n"
 		"\n"
 		"varying highp vec3 P;\n"
 		"\n"
@@ -1018,32 +1017,20 @@ void Planet::initShader()
 		"void main()\n"
 		"{\n"
 		"    float final_illumination = 1.0;\n"
-		"\n"
 		"    if(lambert > 0.0 || isRing)\n"
 		"    {\n"
-			"    float RS = sunInfo.w;\n"
-			"    vec3 Lp = sunInfo.xyz;\n"
-			"\n"
-			"    vec3 P3;\n"
-			"    if(isRing)\n"
-			"        P3 = P;\n"
-			"    else\n"
-			"        P3 = normalize(P) * thisPlanetRadius;\n"
-			"\n"
-			"    float L = length(Lp - P3);\n"
-			"    RS = L * tan(asin(RS / L));\n"
-			"    float R = atan(RS / L); //RS / L;\n"
-			
+		"        float sunRadius = sunInfo.w;\n"
+		"        vec3 sunPosition = sunInfo.xyz;\n"
+		"        float L = length(sunPosition - P);\n"
+		"        sunRadius = L * tan(asin(sunRadius / L));\n"
+		"        float R = atan(sunRadius / L);\n"
 		"        if(ring && !isRing)\n"
 		"        {\n"
-		"            vec3 ray = normalize(Lp);\n"
-		"            vec3 normal = normalize(vec3(0.0, 0.0, 1.0));\n"
-		"            float u = - dot(P3, normal) / dot(ray, normal);\n"
-		"\n"
+		"            vec3 ray = normalize(sunPosition);\n"
+		"            float u = - P.z / ray.z;\n"
 		"            if(u > 0.0 && u < 1e10)\n"
 		"            {\n"
-		"                float ring_radius = length(P3 + u * ray);\n"
-		"\n"
+		"                float ring_radius = length(P + u * ray);\n"
 		"                if(ring_radius > innerRadius && ring_radius < outerRadius)\n"
 		"                {\n"
 		"                    ring_radius = (ring_radius - innerRadius) / (outerRadius - innerRadius);\n"
@@ -1057,11 +1044,10 @@ void Planet::initShader()
 		"        {\n"
 		"            vec3 C = shadowData[i].xyz;\n"
 		"            float radius = shadowData[i].w;\n"
-		"\n"
-		"            float l = length(C - P3);\n"
+		"            float l = length(C - P);\n"
 		"            radius = l * tan(asin(radius / l));\n"
-		"            float r = atan(radius / l); //radius / l;\n"
-		"            float d = acos(min(1.0, dot(normalize(Lp - P3), normalize(C - P3)))); //length( (Lp - P3) / L - (C - P3) / l );\n"
+		"            float r = atan(radius / l);\n"
+		"            float d = acos(min(1.0, dot(normalize(sunPosition - P), normalize(C - P))));\n"
 		"\n"
 		"            float illumination = 1.0;\n"
 		"\n"
@@ -1097,7 +1083,7 @@ void Planet::initShader()
 		"\n"
 		"                    float AR = R * R * (alpha - 0.5 * sin(2.0 * alpha));\n"
 		"                    float Ar = r * r * (beta - 0.5 * sin(2.0 * beta));\n"
-		"                    float AS = R * R * 2.0 * asin(1.0);\n"
+		"                    float AS = R * R * 2.0 * 1.57079633;\n"
 		"\n"
 		"                    illumination = 1.0 - (AR + Ar) / AS;\n"
 		"                }\n"
@@ -1138,7 +1124,6 @@ void Planet::initShader()
 	GL(shaderVars.shadowCount = shaderProgram->uniformLocation("shadowCount"));
 	GL(shaderVars.shadowData = shaderProgram->uniformLocation("shadowData"));
 	GL(shaderVars.sunInfo = shaderProgram->uniformLocation("sunInfo"));
-	GL(shaderVars.thisPlanetRadius = shaderProgram->uniformLocation("thisPlanetRadius"));
 	GL(shaderVars.isRing = shaderProgram->uniformLocation("isRing"));
 	GL(shaderVars.ring = shaderProgram->uniformLocation("ring"));
 	GL(shaderVars.outerRadius = shaderProgram->uniformLocation("outerRadius"));
@@ -1426,7 +1411,6 @@ void Planet::drawSphere(StelPainter* painter, float screenSz, bool drawOnlyRing)
 	
 	const SolarSystem* ssm = GETSTELMODULE(SolarSystem);
 	GL(shaderProgram->setUniformValue(shaderVars.sunInfo, mTarget[12], mTarget[13], mTarget[14], ssm->getSun()->getRadius()));
-	GL(shaderProgram->setUniformValue(shaderVars.thisPlanetRadius, (float)getRadius()));
 	GL(shaderProgram->setUniformValue(shaderVars.isRing, false));
 
 	GL(shaderProgram->setUniformValue(shaderVars.ring, rings!=NULL));
