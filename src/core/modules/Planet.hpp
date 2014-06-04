@@ -43,13 +43,6 @@ class StelFont;
 class StelPainter;
 class StelTranslator;
 
-struct TrailPoint
-{
-	Vec3d point;
-	double date;
-};
-
-
 // Class used to store orbital elements
 class RotationElements
 {
@@ -243,9 +236,6 @@ public:
 	
 protected:
 	static StelTextureSP texEarthShadow;     // for lunar eclipses
-
-	// draw earth shadow on moon for lunar eclipses
-	void drawEarthShadow(StelCore* core, StelPainter* sPainter);
 
 	void computeModelMatrix(Mat4d &result) const;
 	
