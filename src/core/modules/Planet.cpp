@@ -1202,7 +1202,7 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 			core->getClippingPlanes(&n,&f); // Save clipping planes
 			core->setClippingPlanes(z_near,z_far);
 
-			drawSphere(sPainter, screenSz);
+			drawSphere(sPainter, screenSz, drawOnlyRing);
 			
 			core->setClippingPlanes(n,f);  // Restore old clipping planes
 		}
