@@ -42,49 +42,6 @@
 #include <QVarLengthArray>
 #include <QOpenGLShader>
 
-#ifndef NDEBUG
-static const char* get_gl_error_text(int code) {
-    switch (code) {
-    case GL_INVALID_ENUM:
-        return "GL_INVALID_ENUM";
-    case GL_INVALID_FRAMEBUFFER_OPERATION:
-        return "GL_INVALID_FRAMEBUFFER_OPERATION";
-    case GL_INVALID_VALUE:
-        return "GL_INVALID_VALUE";
-    case GL_INVALID_OPERATION:
-        return "GL_INVALID_OPERATION";
-    case GL_OUT_OF_MEMORY:
-        return "GL_OUT_OF_MEMORY";
-    default:
-        return "undefined error";
-    }
-}
-
-int check_gl_errors(const char *file, int line)
-{
-    int errors = 0;
-    while (true)
-    {
-        GLenum x = glGetError();
-        if (x == GL_NO_ERROR)
-            return errors;
-        printf("%s:%d: OpenGL error: %d (%s)\n",
-            file, line, x, get_gl_error_text(x));
-        errors++;
-    }
-}
-#endif
-
-#ifndef NDEBUG
-#  define GL(line) do {                                 \
-       line;                                            \
-       if (check_gl_errors(__FILE__, __LINE__))         \
-           exit(-1);                                    \
-   } while(0)
-#else
-#  define GL(line) line
-#endif
-
 Vec3f Planet::labelColor = Vec3f(0.4,0.4,0.8);
 Vec3f Planet::orbitColor = Vec3f(1,0.6,1);
 StelTextureSP Planet::hintCircleTex;
