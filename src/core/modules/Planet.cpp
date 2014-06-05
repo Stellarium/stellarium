@@ -46,9 +46,14 @@ Vec3f Planet::labelColor = Vec3f(0.4,0.4,0.8);
 Vec3f Planet::orbitColor = Vec3f(1,0.6,1);
 StelTextureSP Planet::hintCircleTex;
 StelTextureSP Planet::texEarthShadow;
-QOpenGLShaderProgram* Planet::shaderProgram=NULL;
-Planet::ShaderVars Planet::shaderVars;
 
+QOpenGLShaderProgram* Planet::planetShaderProgram=NULL;
+Planet::PlanetShaderVars Planet::planetShaderVars;
+QOpenGLShaderProgram* Planet::ringPlanetShaderProgram=NULL;
+Planet::RingPlanetShaderVars Planet::ringPlanetShaderVars;
+QOpenGLShaderProgram* Planet::moonShaderProgram=NULL;
+Planet::MoonShaderVars Planet::moonShaderVars;
+	
 Planet::Planet(const QString& englishName,
 	       int flagLighting,
 	       double radius,
@@ -917,10 +922,23 @@ public:
 };
 static StelPainterLight light;
 
+void Planet::PlanetShaderVars::initLocations(QOpenGLShaderProgram* p)
+{
+	GL(projectionMatrix = p->uniformLocation("projectionMatrix"));
+	GL(texCoord = p->attributeLocation("texCoord"));
+	GL(unprojectedVertex = p->attributeLocation("unprojectedVertex"));
+	GL(vertex = p->attributeLocation("vertex"));
+	GL(texture = p->uniformLocation("tex"));
+	GL(lightPos = p->uniformLocation("lightPos"));
+	GL(diffuseLight = p->uniformLocation("diffuseLight"));
+	GL(ambientLight = p->uniformLocation("ambientLight"));
+	GL(shadowCount = p->uniformLocation("shadowCount"));
+	GL(shadowData = p->uniformLocation("shadowData"));
+	GL(sunInfo = p->uniformLocation("sunInfo"));
+}
+
 void Planet::initShader()
 {
-	// Default planet texture shader program
-	QOpenGLShader vshader(QOpenGLShader::Vertex);
 	const char *vsrc =
 		"attribute highp vec3 vertex;\n"
 		"attribute highp vec3 unprojectedVertex;\n"
@@ -928,7 +946,7 @@ void Planet::initShader()
 		"uniform highp mat4 projectionMatrix;\n"
 		"uniform highp vec3 lightPos;\n"
 		"varying mediump vec2 texc;\n"
-		"varying mediump float lambert;\n"
+		"varying mediump float lambert_;\n"
 		"varying highp vec3 P;\n"
 		"\n"
 		"void main()\n"
@@ -939,44 +957,48 @@ void Planet::initShader()
 		"    float c = lightPos.x * normal.x +\n"
 		"              lightPos.y * normal.y +\n"
 		"              lightPos.z * normal.z;\n"
-		"    lambert = clamp(c, 0.0, 1.0);\n"
+		"    lambert_ = clamp(c, 0.0, 1.0);\n"
 		"\n"
 		"    P = unprojectedVertex;\n"
 		"}\n"
 		"\n";
-	vshader.compileSourceCode(vsrc);
-	if (!vshader.log().isEmpty()) { qWarning() << "Planet: Warnings while compiling vshader: " << vshader.log(); }
-
-	QOpenGLShader fshader(QOpenGLShader::Fragment);
 	
 	const char *fsrc =
 		"varying mediump vec2 texc;\n"
-		"varying mediump float lambert;\n"
+		"varying mediump float lambert_;\n"
 		"uniform sampler2D tex;\n"
 		"uniform mediump vec3 ambientLight;\n"
 		"uniform mediump vec3 diffuseLight;\n"
 		"uniform highp vec4 sunInfo;\n"
-		"\n"
 		"varying highp vec3 P;\n"
 		"\n"
 		"uniform int shadowCount;\n"
 		"uniform highp mat4 shadowData;\n"
 		"\n"
+		"#ifdef RINGS_SUPPORT\n"
 		"uniform bool ring;\n"
 		"uniform highp float outerRadius;\n"
 		"uniform highp float innerRadius;\n"
 		"uniform sampler2D ringS;\n"
 		"uniform bool isRing;\n"
+		"#endif\n"
 		"\n"
-		"uniform bool isMoon;\n"
+		"#ifdef IS_MOON\n"
 		"uniform sampler2D earthShadow;\n"
+		"#endif\n"
 		"\n"
 		"void main()\n"
 		"{\n"
 		"    float final_illumination = 1.0;\n"
-		"    if(lambert > 0.0 || isRing)\n"
+		"    float lambert = lambert_;\n"
+		"#ifdef RINGS_SUPPORT\n"
+		"    if(isRing)"
+		"        lambert=1.0;\n"
+		"#endif\n"
+		"    if(lambert > 0.0)\n"
 		"    {\n"
 		"        vec3 sunPosition = sunInfo.xyz;\n"
+		"#ifdef RINGS_SUPPORT\n"
 		"        if(ring && !isRing)\n"
 		"        {\n"
 		"            vec3 ray = normalize(sunPosition);\n"
@@ -992,6 +1014,7 @@ void Planet::initShader()
 		"                }\n"
 		"            }\n"
 		"        }\n"
+		"#endif\n"
 		"\n"
 		"        float sunRadius = sunInfo.w;\n"
 		"        float L = length(sunPosition - P);\n"
@@ -1014,10 +1037,11 @@ void Planet::initShader()
 		"            // umbra\n"
 		"            else if(r >= R + d)\n"
 		"            {\n"
-		"                if(isMoon)\n"
+		"#ifdef IS_MOON\n"
 		"                    illumination = d / (r - R) * 0.6;\n"
-		"                else"
+		"#else\n"
 		"                    illumination = 0.0;\n"
+		"#endif\n"
 		"            }\n"
 		"            // penumbra completely inside\n"
 		"            else if(d + r <= R)\n"
@@ -1027,18 +1051,17 @@ void Planet::initShader()
 		"            // penumbra partially inside\n"
 		"            else\n"
 		"            {\n"
-		"                if(isMoon)\n"
-		"                    illumination = ((d - abs(R-r)) / (R + r - abs(R-r))) * 0.4 + 0.6;\n"
-		"                else\n"
-		"                {\n"
-		"                    float x = (R * R + d * d - r * r) / (2.0 * d);\n"
-		"                    float alpha = acos(x / R);\n"
-		"                    float beta = acos((d - x) / r);\n"
-		"                    float AR = R * R * (alpha - 0.5 * sin(2.0 * alpha));\n"
-		"                    float Ar = r * r * (beta - 0.5 * sin(2.0 * beta));\n"
-		"                    float AS = R * R * 2.0 * 1.57079633;\n"
-		"                    illumination = 1.0 - (AR + Ar) / AS;\n"
-		"                }\n"
+		"#ifdef IS_MOON\n"
+		"                illumination = ((d - abs(R-r)) / (R + r - abs(R-r))) * 0.4 + 0.6;\n"
+		"#else\n"
+		"                float x = (R * R + d * d - r * r) / (2.0 * d);\n"
+		"                float alpha = acos(x / R);\n"
+		"                float beta = acos((d - x) / r);\n"
+		"                float AR = R * R * (alpha - 0.5 * sin(2.0 * alpha));\n"
+		"                float Ar = r * r * (beta - 0.5 * sin(2.0 * beta));\n"
+		"                float AS = R * R * 2.0 * 1.57079633;\n"
+		"                illumination = 1.0 - (AR + Ar) / AS;\n"
+		"#endif\n"
 		"            }\n"
 		"\n"
 		"            if(illumination < final_illumination)\n"
@@ -1046,50 +1069,78 @@ void Planet::initShader()
 		"        }\n"
 		"    }\n"
 		"\n"
-		"    vec4 litColor = vec4((isRing ? 1.0 : lambert) * final_illumination * diffuseLight + ambientLight, 1.0);\n"
-		"    if(isMoon && final_illumination < 1.0)\n"
+		"    vec4 litColor = vec4(lambert * final_illumination * diffuseLight + ambientLight, 1.0);\n"
+		"#ifdef IS_MOON\n"
+		"    if(final_illumination < 1.0)\n"
 		"    {\n"
 		"        vec4 shadowColor = texture2D(earthShadow, vec2(final_illumination, 0.5));\n"
 		"        gl_FragColor = mix(texture2D(tex, texc) * litColor, shadowColor, shadowColor.a);\n"
 		"    }\n"
 		"    else\n"
+		"#endif\n"
+		"    {\n"
 		"        gl_FragColor = texture2D(tex, texc) * litColor;\n"
-		"}\n"
-		"\n";
+		"    }\n"
+		"}\n";
+	
+	// Default planet shader program
+	QOpenGLShader vshader(QOpenGLShader::Vertex);
+	vshader.compileSourceCode(vsrc);
+	if (!vshader.log().isEmpty()) { qWarning() << "Planet: Warnings while compiling vshader: " << vshader.log(); }
+	
+	QOpenGLShader fshader(QOpenGLShader::Fragment);
 	fshader.compileSourceCode(fsrc);
 	if (!fshader.log().isEmpty()) { qWarning() << "Planet: Warnings while compiling fshader: " << fshader.log(); }
 
-	shaderProgram = new QOpenGLShaderProgram(QOpenGLContext::currentContext());
-	shaderProgram->addShader(&vshader);
-	shaderProgram->addShader(&fshader);
-	GL(StelPainter::linkProg(shaderProgram, "planetShaderProgram"));
-	GL(shaderProgram->bind());
-	GL(shaderVars.projectionMatrix = shaderProgram->uniformLocation("projectionMatrix"));
-	GL(shaderVars.texCoord = shaderProgram->attributeLocation("texCoord"));
-	GL(shaderVars.unprojectedVertex = shaderProgram->attributeLocation("unprojectedVertex"));
-	GL(shaderVars.vertex = shaderProgram->attributeLocation("vertex"));
-	GL(shaderVars.texture = shaderProgram->uniformLocation("tex"));
-
-	GL(shaderVars.lightPos = shaderProgram->uniformLocation("lightPos"));
-	GL(shaderVars.diffuseLight = shaderProgram->uniformLocation("diffuseLight"));
-	GL(shaderVars.ambientLight = shaderProgram->uniformLocation("ambientLight"));
-	GL(shaderVars.shadowCount = shaderProgram->uniformLocation("shadowCount"));
-	GL(shaderVars.shadowData = shaderProgram->uniformLocation("shadowData"));
-	GL(shaderVars.sunInfo = shaderProgram->uniformLocation("sunInfo"));
-	GL(shaderVars.isRing = shaderProgram->uniformLocation("isRing"));
-	GL(shaderVars.ring = shaderProgram->uniformLocation("ring"));
-	GL(shaderVars.outerRadius = shaderProgram->uniformLocation("outerRadius"));
-	GL(shaderVars.innerRadius = shaderProgram->uniformLocation("innerRadius"));
-	GL(shaderVars.ringS = shaderProgram->uniformLocation("ringS"));
-	GL(shaderVars.isMoon = shaderProgram->uniformLocation("isMoon"));
-	GL(shaderVars.earthShadow = shaderProgram->uniformLocation("earthShadow"));
-	GL(shaderProgram->release());
+	planetShaderProgram = new QOpenGLShaderProgram(QOpenGLContext::currentContext());
+	planetShaderProgram->addShader(&vshader);
+	planetShaderProgram->addShader(&fshader);
+	GL(StelPainter::linkProg(planetShaderProgram, "planetShaderProgram"));
+	GL(planetShaderProgram->bind());
+	planetShaderVars.initLocations(planetShaderProgram);
+	GL(planetShaderProgram->release());
+	
+	// Planet with ring shader program
+	QByteArray arr = "#define RINGS_SUPPORT\n\n";
+	arr+=fsrc;
+	QOpenGLShader ringFragmentShader(QOpenGLShader::Fragment);
+	ringFragmentShader.compileSourceCode(arr.constData());
+	if (!ringFragmentShader.log().isEmpty()) { qWarning() << "Planet: Warnings while compiling ringFragmentShader: " << ringFragmentShader.log(); }
+	
+	ringPlanetShaderProgram = new QOpenGLShaderProgram(QOpenGLContext::currentContext());
+	ringPlanetShaderProgram->addShader(&vshader);
+	ringPlanetShaderProgram->addShader(&ringFragmentShader);
+	GL(StelPainter::linkProg(ringPlanetShaderProgram, "ringPlanetShaderProgram"));
+	GL(ringPlanetShaderProgram->bind());
+	ringPlanetShaderVars.initLocations(ringPlanetShaderProgram);
+	GL(ringPlanetShaderVars.isRing = ringPlanetShaderProgram->uniformLocation("isRing"));
+	GL(ringPlanetShaderVars.ring = ringPlanetShaderProgram->uniformLocation("ring"));
+	GL(ringPlanetShaderVars.outerRadius = ringPlanetShaderProgram->uniformLocation("outerRadius"));
+	GL(ringPlanetShaderVars.innerRadius = ringPlanetShaderProgram->uniformLocation("innerRadius"));
+	GL(ringPlanetShaderVars.ringS = ringPlanetShaderProgram->uniformLocation("ringS"));
+	GL(ringPlanetShaderProgram->release());
+	
+	// Moon shader program
+	arr = "#define IS_MOON\n\n";
+	arr+=fsrc;
+	QOpenGLShader moonFragmentShader(QOpenGLShader::Fragment);
+	moonFragmentShader.compileSourceCode(arr.constData());
+	if (!moonFragmentShader.log().isEmpty()) { qWarning() << "Planet: Warnings while compiling moonFragmentShader: " << moonFragmentShader.log(); }
+	
+	moonShaderProgram = new QOpenGLShaderProgram(QOpenGLContext::currentContext());
+	moonShaderProgram->addShader(&vshader);
+	moonShaderProgram->addShader(&moonFragmentShader);
+	GL(StelPainter::linkProg(moonShaderProgram, "ringPlanetShaderProgram"));
+	GL(moonShaderProgram->bind());
+	moonShaderVars.initLocations(moonShaderProgram);
+	GL(moonShaderVars.earthShadow = moonShaderProgram->uniformLocation("earthShadow"));
+	GL(moonShaderProgram->release());
 }
 
 void Planet::deinitShader()
 {
-	delete shaderProgram;
-	shaderProgram = NULL;
+	delete planetShaderProgram;
+	planetShaderProgram = NULL;
 }
 
 void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP transfo, float screenSz, bool drawOnlyRing)
@@ -1306,7 +1357,9 @@ void Planet::drawSphere(StelPainter* painter, float screenSz, bool drawOnlyRing)
 	for (int i=0;i<model.vertexArr.size()/3;++i)
 		painter->getProjector()->project(*((Vec3f*)(model.vertexArr.constData()+i*3)), *((Vec3f*)(projectedVertexArr.data()+i*3)));
 	
-	if (englishName=="Sun")
+	const SolarSystem* ssm = GETSTELMODULE(SolarSystem);
+		
+	if (this==ssm->getSun())
 	{
 		texMap->bind();
 		painter->setColor(2, 2, 2);
@@ -1315,14 +1368,28 @@ void Planet::drawSphere(StelPainter* painter, float screenSz, bool drawOnlyRing)
 		return;
 	}
 	
-	if (shaderProgram==NULL)
+	if (planetShaderProgram==NULL)
 		Planet::initShader();
-	Q_ASSERT(shaderProgram!=NULL);
-	GL(shaderProgram->bind());
+	Q_ASSERT(planetShaderProgram!=NULL);
+	Q_ASSERT(ringPlanetShaderProgram!=NULL);
+	Q_ASSERT(moonShaderProgram!=NULL);
+	
+	QOpenGLShaderProgram* shader = planetShaderProgram;
+	const PlanetShaderVars* shaderVars = &planetShaderVars;
+	if (rings)
+	{
+		shader = ringPlanetShaderProgram;
+		shaderVars = &ringPlanetShaderVars;
+	}
+	if (this==ssm->getMoon())
+	{
+		shader = moonShaderProgram;
+		shaderVars = &moonShaderVars;
+	}
+	GL(shader->bind());
 	
 	const Mat4f& m = painter->getProjector()->getProjectionMatrix();
 	const QMatrix4x4 qMat(m[0], m[4], m[8], m[12], m[1], m[5], m[9], m[13], m[2], m[6], m[10], m[14], m[3], m[7], m[11], m[15]);
-	shaderProgram->setUniformValue(shaderVars.projectionMatrix, qMat);
 	
 	Mat4d modelMatrix;
 	computeModelMatrix(modelMatrix);
@@ -1354,40 +1421,38 @@ void Planet::drawSphere(StelPainter* painter, float screenSz, bool drawOnlyRing)
 	projector->getModelViewTransform()->backward(lightPos3);
 	lightPos3.normalize();
 	
-	GL(shaderProgram->setUniformValue(shaderVars.lightPos, lightPos3[0], lightPos3[1], lightPos3[2]));
-	GL(shaderProgram->setUniformValue(shaderVars.diffuseLight, light.diffuse[0], light.diffuse[1], light.diffuse[2]));
-	GL(shaderProgram->setUniformValue(shaderVars.ambientLight, light.ambient[0], light.ambient[1], light.ambient[2]));
-	GL(shaderProgram->setUniformValue(shaderVars.texture, 0));
-	GL(shaderProgram->setUniformValue(shaderVars.shadowCount, shadowCandidates.size()));
-	GL(shaderProgram->setUniformValue(shaderVars.shadowData, shadowCandidatesData));
-	
-	const SolarSystem* ssm = GETSTELMODULE(SolarSystem);
-	GL(shaderProgram->setUniformValue(shaderVars.sunInfo, mTarget[12], mTarget[13], mTarget[14], ssm->getSun()->getRadius()));
-	GL(shaderProgram->setUniformValue(shaderVars.isRing, false));
-
-	GL(shaderProgram->setUniformValue(shaderVars.ring, rings!=NULL));
-	if (rings!=NULL)
-	{
-		rings->tex->bind(2);
-		GL(shaderProgram->setUniformValue(shaderVars.outerRadius, rings->radiusMax));
-		GL(shaderProgram->setUniformValue(shaderVars.innerRadius, rings->radiusMin));
-		GL(shaderProgram->setUniformValue(shaderVars.ringS, rings ? 2 : 0));
-	}
-
-	const bool isMoon = (this==ssm->getMoon());
-	if (isMoon)
-		texEarthShadow->bind(3);
-	GL(shaderProgram->setUniformValue(shaderVars.isMoon, isMoon));
-	GL(shaderProgram->setUniformValue(shaderVars.earthShadow, isMoon ? 3: 0));
-
+	GL(shader->setUniformValue(shaderVars->projectionMatrix, qMat));
+	GL(shader->setUniformValue(shaderVars->lightPos, lightPos3[0], lightPos3[1], lightPos3[2]));
+	GL(shader->setUniformValue(shaderVars->diffuseLight, light.diffuse[0], light.diffuse[1], light.diffuse[2]));
+	GL(shader->setUniformValue(shaderVars->ambientLight, light.ambient[0], light.ambient[1], light.ambient[2]));
+	GL(shader->setUniformValue(shaderVars->texture, 0));
+	GL(shader->setUniformValue(shaderVars->shadowCount, shadowCandidates.size()));
+	GL(shader->setUniformValue(shaderVars->shadowData, shadowCandidatesData));
+	GL(shader->setUniformValue(shaderVars->sunInfo, mTarget[12], mTarget[13], mTarget[14], ssm->getSun()->getRadius()));
 	GL(texMap->bind(1));
 	
-	GL(shaderProgram->setAttributeArray(shaderVars.vertex, (const GLfloat*)projectedVertexArr.constData(), 3));
-	GL(shaderProgram->enableAttributeArray(shaderVars.vertex));
-	GL(shaderProgram->setAttributeArray(shaderVars.unprojectedVertex, (const GLfloat*)model.vertexArr.constData(), 3));
-	GL(shaderProgram->enableAttributeArray(shaderVars.unprojectedVertex));
-	GL(shaderProgram->setAttributeArray(shaderVars.texCoord, (const GLfloat*)model.texCoordArr.constData(), 2));
-	GL(shaderProgram->enableAttributeArray(shaderVars.texCoord));
+	if (rings!=NULL)
+	{
+		GL(ringPlanetShaderProgram->setUniformValue(ringPlanetShaderVars.isRing, false));
+		GL(ringPlanetShaderProgram->setUniformValue(ringPlanetShaderVars.ring, true));
+		GL(ringPlanetShaderProgram->setUniformValue(ringPlanetShaderVars.outerRadius, rings->radiusMax));
+		GL(ringPlanetShaderProgram->setUniformValue(ringPlanetShaderVars.innerRadius, rings->radiusMin));
+		GL(ringPlanetShaderProgram->setUniformValue(ringPlanetShaderVars.ringS, 2));
+		rings->tex->bind(2);
+	}
+
+	if (this==ssm->getMoon())
+	{
+		GL(texEarthShadow->bind(3));
+		GL(moonShaderProgram->setUniformValue(moonShaderVars.earthShadow, 3));
+	}
+
+	GL(shader->setAttributeArray(shaderVars->vertex, (const GLfloat*)projectedVertexArr.constData(), 3));
+	GL(shader->enableAttributeArray(shaderVars->vertex));
+	GL(shader->setAttributeArray(shaderVars->unprojectedVertex, (const GLfloat*)model.vertexArr.constData(), 3));
+	GL(shader->enableAttributeArray(shaderVars->unprojectedVertex));
+	GL(shader->setAttributeArray(shaderVars->texCoord, (const GLfloat*)model.texCoordArr.constData(), 2));
+	GL(shader->enableAttributeArray(shaderVars->texCoord));
 
 	if (rings)
 	{
@@ -1402,7 +1467,6 @@ void Planet::drawSphere(StelPainter* painter, float screenSz, bool drawOnlyRing)
 	if (rings)
 	{
 		// Draw the rings just after the planet
-		
 		glDepthMask(GL_FALSE);
 	
 		// Normal transparency mode
@@ -1412,8 +1476,8 @@ void Planet::drawSphere(StelPainter* painter, float screenSz, bool drawOnlyRing)
 		Ring3DModel ringModel;
 		sRing(&ringModel, rings->radiusMin, rings->radiusMax, 128, 32);
 		
-		GL(shaderProgram->setUniformValue(shaderVars.isRing, true));
-		GL(shaderProgram->setUniformValue(shaderVars.texture, 2));
+		GL(ringPlanetShaderProgram->setUniformValue(ringPlanetShaderVars.isRing, true));
+		GL(ringPlanetShaderProgram->setUniformValue(ringPlanetShaderVars.texture, 2));
 		
 		computeModelMatrix(modelMatrix);
 		const Vec4d position = mTarget * modelMatrix.getColumn(3);
@@ -1421,19 +1485,19 @@ void Planet::drawSphere(StelPainter* painter, float screenSz, bool drawOnlyRing)
 		shadowCandidatesData(1, 0) = position[1];
 		shadowCandidatesData(2, 0) = position[2];
 		shadowCandidatesData(3, 0) = getRadius();
-		GL(shaderProgram->setUniformValue(shaderVars.shadowCount, 1));
-		GL(shaderProgram->setUniformValue(shaderVars.shadowData, shadowCandidatesData));
+		GL(ringPlanetShaderProgram->setUniformValue(ringPlanetShaderVars.shadowCount, 1));
+		GL(ringPlanetShaderProgram->setUniformValue(ringPlanetShaderVars.shadowData, shadowCandidatesData));
 		
 		projectedVertexArr.resize(ringModel.vertexArr.size());
 		for (int i=0;i<ringModel.vertexArr.size()/3;++i)
 			painter->getProjector()->project(*((Vec3f*)(ringModel.vertexArr.constData()+i*3)), *((Vec3f*)(projectedVertexArr.data()+i*3)));
 		
-		GL(shaderProgram->setAttributeArray(shaderVars.vertex, (const GLfloat*)projectedVertexArr.constData(), 3));
-		GL(shaderProgram->enableAttributeArray(shaderVars.vertex));
-		GL(shaderProgram->setAttributeArray(shaderVars.unprojectedVertex, (const GLfloat*)ringModel.vertexArr.constData(), 3));
-		GL(shaderProgram->enableAttributeArray(shaderVars.unprojectedVertex));
-		GL(shaderProgram->setAttributeArray(shaderVars.texCoord, (const GLfloat*)ringModel.texCoordArr.constData(), 2));
-		GL(shaderProgram->enableAttributeArray(shaderVars.texCoord));
+		GL(ringPlanetShaderProgram->setAttributeArray(ringPlanetShaderVars.vertex, (const GLfloat*)projectedVertexArr.constData(), 3));
+		GL(ringPlanetShaderProgram->enableAttributeArray(ringPlanetShaderVars.vertex));
+		GL(ringPlanetShaderProgram->setAttributeArray(ringPlanetShaderVars.unprojectedVertex, (const GLfloat*)ringModel.vertexArr.constData(), 3));
+		GL(ringPlanetShaderProgram->enableAttributeArray(ringPlanetShaderVars.unprojectedVertex));
+		GL(ringPlanetShaderProgram->setAttributeArray(ringPlanetShaderVars.texCoord, (const GLfloat*)ringModel.texCoordArr.constData(), 2));
+		GL(ringPlanetShaderProgram->enableAttributeArray(ringPlanetShaderVars.texCoord));
 		
 		glDisable(GL_CULL_FACE);
 		
@@ -1442,7 +1506,7 @@ void Planet::drawSphere(StelPainter* painter, float screenSz, bool drawOnlyRing)
 		glDisable(GL_DEPTH_TEST);
 	}
 	
-	GL(shaderProgram->release());
+	GL(shader->release());
 	
 	glDisable(GL_CULL_FACE);
 }
