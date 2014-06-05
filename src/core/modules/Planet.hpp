@@ -42,6 +42,7 @@ typedef void (OsculatingFunctType)(double jd0,double jd,double xyz[3]);
 class StelFont;
 class StelPainter;
 class StelTranslator;
+class QOpenGLShaderProgram;
 
 // Class used to store orbital elements
 class RotationElements
@@ -293,32 +294,46 @@ protected:
 	static StelTextureSP hintCircleTex;
 	
 	// Shader-related variables
-	struct ShaderVars {
+	struct PlanetShaderVars {
 		int projectionMatrix;
 		int texCoord;
 		int unprojectedVertex;
 		int vertex;
 		int texture;
-
 		int lightPos;
 		int diffuseLight;
 		int ambientLight;
 		int shadowCount;
 		int shadowData;
 		int sunInfo;
+		
+		void initLocations(QOpenGLShaderProgram*);
+	};
+	static PlanetShaderVars planetShaderVars;
+	static QOpenGLShaderProgram* planetShaderProgram;
+
+	// Shader-related variables
+	struct RingPlanetShaderVars : public PlanetShaderVars {
+		// Rings-specific variables
 		int isRing;
 		int ring;
 		int outerRadius;
 		int innerRadius;
 		int ringS;
-		int isMoon;
+	};
+	static RingPlanetShaderVars ringPlanetShaderVars;
+	static QOpenGLShaderProgram* ringPlanetShaderProgram;
+	
+	struct MoonShaderVars : public PlanetShaderVars {
+		// Moon-specific variables
 		int earthShadow;
 	};
-	static ShaderVars shaderVars;
-
+	static MoonShaderVars moonShaderVars;
+	static QOpenGLShaderProgram* moonShaderProgram;
+	
 	static void initShader();
 	static void deinitShader();
-	static class QOpenGLShaderProgram* shaderProgram;
+
 };
 
 #endif // _PLANET_HPP_
