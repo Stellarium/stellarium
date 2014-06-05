@@ -939,6 +939,8 @@ void Planet::PlanetShaderVars::initLocations(QOpenGLShaderProgram* p)
 
 void Planet::initShader()
 {
+	qWarning() << "Intializing planets GL shaders... ";
+	
 	const char *vsrc =
 		"attribute highp vec3 vertex;\n"
 		"attribute highp vec3 unprojectedVertex;\n"
@@ -1028,29 +1030,28 @@ void Planet::initShader()
 		"            float d = acos(min(1.0, dot(normalize(sunPosition - P), normalize(satellitePosition - P))));\n"
 		"\n"
 		"            float illumination = 1.0;\n"
-		"\n"
-		"            // distance too far\n"
 		"            if(d >= R + r)\n"
 		"            {\n"
+		"                // distance too far\n"
 		"                illumination = 1.0;\n"
 		"            }\n"
-		"            // umbra\n"
 		"            else if(r >= R + d)\n"
 		"            {\n"
+		"                // umbra\n"
 		"#ifdef IS_MOON\n"
-		"                    illumination = d / (r - R) * 0.6;\n"
+		"                illumination = d / (r - R) * 0.6;\n"
 		"#else\n"
-		"                    illumination = 0.0;\n"
+		"                illumination = 0.0;\n"
 		"#endif\n"
 		"            }\n"
-		"            // penumbra completely inside\n"
 		"            else if(d + r <= R)\n"
 		"            {\n"
+		"                // penumbra completely inside\n"
 		"                illumination = 1.0 - r * r / (R * R);\n"
 		"            }\n"
-		"            // penumbra partially inside\n"
 		"            else\n"
 		"            {\n"
+		"                // penumbra partially inside\n"
 		"#ifdef IS_MOON\n"
 		"                illumination = ((d - abs(R-r)) / (R + r - abs(R-r))) * 0.4 + 0.6;\n"
 		"#else\n"
@@ -1064,8 +1065,7 @@ void Planet::initShader()
 		"#endif\n"
 		"            }\n"
 		"\n"
-		"            if(illumination < final_illumination)\n"
-		"                final_illumination = illumination;\n"
+		"            final_illumination = min(illumination, final_illumination);\n"
 		"        }\n"
 		"    }\n"
 		"\n"
@@ -1400,7 +1400,10 @@ void Planet::drawSphere(StelPainter* painter, float screenSz, bool drawOnlyRing)
 	QVector<const Planet*> shadowCandidates = getCandidatesForShadow();
 	// Our shader doesn't support more than 4 planets creating shadow
 	if (shadowCandidates.size()>4)
+	{
+		qDebug() << "Too many satellite shadows, some won't be displayed";
 		shadowCandidates.resize(4);
+	}
 	for (int i=0;i<shadowCandidates.size();++i)
 	{
 		shadowCandidates.at(i)->computeModelMatrix(modelMatrix);

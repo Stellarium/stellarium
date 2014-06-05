@@ -1555,7 +1555,7 @@ void StelPainter::enableTexture2d(const bool b)
 
 void StelPainter::initGLShaders()
 {
-	qWarning() << "StelPainter: initGLShaders()... ";
+	qWarning() << "Intializing basic GL shaders... ";
 	// Basic shader: just vertex filled with plain color
 	QOpenGLShader vshader3(QOpenGLShader::Vertex);
 	const char *vsrc3 =
@@ -1696,9 +1696,6 @@ void StelPainter::initGLShaders()
 	texturesColorShaderVars.vertex = texturesColorShaderProgram->attributeLocation("vertex");
 	texturesColorShaderVars.color = texturesColorShaderProgram->attributeLocation("color");
 	texturesColorShaderVars.texture = texturesColorShaderProgram->uniformLocation("tex");
-
-	qWarning() << "StelPainter: initGLShaders()... done";
-
 }
 
 
