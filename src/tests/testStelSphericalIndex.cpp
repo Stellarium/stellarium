@@ -24,6 +24,7 @@
 
 #include "StelSphereGeometry.hpp"
 #include "StelUtils.hpp"
+
 #include "tests/testStelSphericalIndex.hpp"
 
 QTEST_MAIN(TestStelSphericalIndex)
