@@ -466,7 +466,7 @@ INSTALL(TARGETS stellarium DESTINATION bin)
 ################################## Build unit tests #########################################
 #############################################################################################
 
-SET(extLinkerOptionTest ${QT_QTCORE_LIBRARY} ${QT_QTNETWORK_LIBRARY} ${QT_QTTEST_LIBRARY} ${QT_QTGUI_LIBRARY} ${QT_QTOPENGL_LIBRARY} ${ZLIB_LIBRARIES})
+SET(extLinkerOptionTest ${QT_QTCORE_LIBRARY} ${QT_QTNETWORK_LIBRARY} ${QT_QTTEST_LIBRARY} ${QT_QTGUI_LIBRARY} ${QT_QTOPENGL_LIBRARY} ${OPENGL_LIBRARIES} ${ZLIB_LIBRARIES})
 
 # Custom target used to build all tests at once
 ADD_CUSTOM_TARGET(buildTests)
@@ -571,10 +571,10 @@ TARGET_LINK_LIBRARIES(testDeltaT ${extLinkerOptionTest})
 ADD_DEPENDENCIES(buildTests testDeltaT)
 
 SET(tests_testConversions_SRCS
-	core/StelUtils.cpp
-	core/StelUtils.hpp
 	tests/testConversions.hpp
 	tests/testConversions.cpp
+	core/StelUtils.cpp
+	core/StelUtils.hpp
 	${glues_lib_SRCS})
 ADD_EXECUTABLE(testConversions EXCLUDE_FROM_ALL ${tests_testConversions_SRCS})
 QT5_USE_MODULES(testConversions Core Gui Widgets OpenGL Script Declarative Test)
