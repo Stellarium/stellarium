@@ -18,12 +18,14 @@
  */
 
 #include "tests/testConversions.hpp"
-#include "StelUtils.hpp"
+
 #include <QString>
 #include <QDebug>
 #include <QtGlobal>
 #include <QVariantList>
 #include <QMap>
+
+#include "StelUtils.hpp"
 
 #define ERROR_LIMIT 1e-6
 
