@@ -28,6 +28,8 @@
 
 #include <cstdlib>
 
+#include "StelUtils.hpp"
+
 #define ERROR_THRESHOLD_PERCENT 5.0
 
 QTEST_MAIN(TestDeltaT)
