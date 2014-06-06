@@ -300,7 +300,8 @@ protected:
 		int unprojectedVertex;
 		int vertex;
 		int texture;
-		int lightPos;
+		int lightDirection;
+		int eyeDirection;
 		int diffuseLight;
 		int ambientLight;
 		int shadowCount;
