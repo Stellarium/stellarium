@@ -17,6 +17,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
+#include "tests/testDeltaT.hpp"
+
 #include <QDateTime>
 #include <QVariantList>
 #include <QString>
@@ -25,8 +27,6 @@
 #include <QVector>
 
 #include <cstdlib>
-
-#include "tests/testDeltaT.hpp"
 
 #define ERROR_THRESHOLD_PERCENT 5.0
 
