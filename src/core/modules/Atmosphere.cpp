@@ -50,7 +50,6 @@ Atmosphere::Atmosphere(void)
 {
 	setFadeDuration(1.5f);
 
-	qDebug() << "Use vertex shader for atmosphere rendering.";
 	QOpenGLShader vShader(QOpenGLShader::Vertex);
 	if (!vShader.compileSourceFile(":/shaders/xyYToRGB.glsl"))
 	{

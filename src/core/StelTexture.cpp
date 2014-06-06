@@ -107,12 +107,12 @@ StelTexture::GLData StelTexture::loadFromData(const QByteArray& data)
  Bind the texture so that it can be used for openGL drawing (calls glBindTexture)
  *************************************************************************/
 
-bool StelTexture::bind()
+bool StelTexture::bind(int slot)
 {
 	if (id != 0)
 	{
 		// The texture is already fully loaded, just bind and return true;
-		glActiveTexture(GL_TEXTURE0);
+		glActiveTexture(GL_TEXTURE0 + slot);
 		glBindTexture(GL_TEXTURE_2D, id);
 		return true;
 	}
