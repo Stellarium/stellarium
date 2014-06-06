@@ -106,16 +106,21 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 	if (mag < 50 && flags&Magnitude)
 	{
 		if (core->getSkyDrawer()->getFlagHasAtmosphere())
-		{
 			oss << q_("Magnitude: <b>%1</b> (extincted to: <b>%2</b>)").arg(QString::number(getVMagnitude(core), 'f', 2),
 											QString::number(getVMagnitudeWithExtinction(core), 'f', 2)) << "<br>";
+		else
+			oss << q_("Magnitude: <b>%1</b>").arg(getVMagnitude(core), 0, 'f', 2) << "<br>";
+	}
+	if (mag < 50 && flags&Extra)
+	{
+		if (core->getSkyDrawer()->getFlagHasAtmosphere())
+		{
 			if (getSurfaceBrightness(core)<99 && getSurfaceBrightnessWithExtinction(core)<99)
 				oss << q_("Surface brightness: <b>%1</b> (extincted to: <b>%2</b>)").arg(QString::number(getSurfaceBrightness(core), 'f', 2),
 													 QString::number(getSurfaceBrightnessWithExtinction(core), 'f', 2)) << "<br>";
 		}
 		else
 		{
-			oss << q_("Magnitude: <b>%1</b>").arg(getVMagnitude(core), 0, 'f', 2) << "<br>";
 			if (getSurfaceBrightness(core)<99)
 				oss << q_("Surface brightness: <b>%1</b>").arg(QString::number(getSurfaceBrightness(core), 'f', 2)) << "<br>";
 		}

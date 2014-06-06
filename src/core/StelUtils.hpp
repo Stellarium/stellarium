@@ -36,6 +36,16 @@
 // speed of light (km/sec)
 #define SPEED_OF_LIGHT 299792.458
 
+#ifndef NDEBUG
+# define GL(line) do { \
+	line;\
+	if (StelUtils::checkGLErrors(__FILE__, __LINE__))\
+		exit(-1);\
+	} while(0)
+#else
+# define GL(line) line
+#endif
+
 //! @namespace StelUtils contains general purpose utility functions.
 namespace StelUtils
 {
@@ -570,6 +580,29 @@ namespace StelUtils
 	template <typename T> int sign(T val) {
 		return (T(0) < val) - (val < T(0));
 	}
+	
+	//! Compute cosines and sines around a circle which is split in "segments" parts.
+	//! Values are stored in the global static array cos_sin_theta.
+	//! Used for the sin/cos values along a latitude circle, equator, etc. for a spherical mesh.
+	//! @param slices number of partitions (elsewhere called "segments") for the circle
+	float *ComputeCosSinTheta(const int slices);
+	
+	//! Compute cosines and sines around a half-circle which is split in "segments" parts.
+	//! Values are stored in the global static array cos_sin_rho.
+	//! Used for the sin/cos values along a meridian for a spherical mesh.
+	//! @param segments number of partitions (elsewhere called "stacks") for the half-circle
+	float *ComputeCosSinRho(const int segments);
+	
+	//! Compute cosines and sines around part of a circle (from top to bottom) which is split in "segments" parts.
+	//! Values are stored in the global static array cos_sin_rho.
+	//! Used for the sin/cos values along a meridian.
+	//! GZ: allow leaving away pole caps. The array now contains values for the region minAngle+segments*phi
+	//! @param dRho a difference angle between the stops
+	//! @param segments number of segments
+	//! @param minAngle start angle inside the half-circle. maxAngle=minAngle+segments*phi
+	float* ComputeCosSinRhoZone(const float dRho, const int segments, const float minAngle);
+	
+	int checkGLErrors(const char *file, int line);
 }
 
 #endif // _STELUTILS_HPP_
