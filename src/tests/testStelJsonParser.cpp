@@ -23,8 +23,9 @@
 #include <QBuffer>
 #include <stdexcept>
 
-#include "testStelJsonParser.hpp"
 #include "StelJsonParser.hpp"
+
+#include "tests/testStelJsonParser.hpp"
 
 QTEST_MAIN(TestStelJsonParser);
 

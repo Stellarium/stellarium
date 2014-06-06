@@ -23,12 +23,12 @@
 #include <QDir>
 #include <QString>
 #include <QStringList>
-
 #include <QDebug>
 #include <QTest>
 #include <QRegExp>
 
 #include "StelFileMgr.hpp"
+
 #include "tests/testStelFileMgr.hpp"
 
 QTEST_MAIN(TestStelFileMgr)

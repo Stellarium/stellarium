@@ -25,7 +25,9 @@
 #include <QtGlobal>
 #include <QLocale>
 #include <QDebug>
+
 #include "StelUtils.hpp"
+
 #include "tests/testDates.hpp"
 
 #define IGREG 2299161
