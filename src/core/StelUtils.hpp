@@ -27,6 +27,7 @@
 #include <QVariantMap>
 #include <QDateTime>
 #include <QString>
+#include <QOpenGLFunctions>
 
 // astronomical unit (km)
 #define AU 149597870.691
