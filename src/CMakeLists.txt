@@ -475,8 +475,7 @@ SET(tests_testDates_SRCS
 	tests/testDates.hpp
 	tests/testDates.cpp
 	core/StelUtils.hpp
-	core/StelUtils.cpp
-	${glues_lib_SRCS})
+	core/StelUtils.cpp)
 ADD_EXECUTABLE(testDates EXCLUDE_FROM_ALL ${tests_testDates_SRCS})
 QT5_USE_MODULES(testDates Core Gui Widgets OpenGL Script Declarative Test)
 TARGET_LINK_LIBRARIES(testDates ${extLinkerOptionTest})
@@ -565,8 +564,7 @@ SET(tests_testDeltaT_SRCS
 	tests/testDeltaT.hpp
 	tests/testDeltaT.cpp
 	core/StelUtils.hpp
-	core/StelUtils.cpp
-	${glues_lib_SRCS})
+	core/StelUtils.cpp)
 ADD_EXECUTABLE(testDeltaT EXCLUDE_FROM_ALL ${tests_testDeltaT_SRCS})
 QT5_USE_MODULES(testDeltaT Core Gui Widgets OpenGL Script Declarative Test)
 TARGET_LINK_LIBRARIES(testDeltaT ${extLinkerOptionTest})
@@ -576,8 +574,7 @@ SET(tests_testConversions_SRCS
 	tests/testConversions.hpp
 	tests/testConversions.cpp
 	core/StelUtils.hpp
-	core/StelUtils.cpp
-	${glues_lib_SRCS})
+	core/StelUtils.cpp)
 ADD_EXECUTABLE(testConversions EXCLUDE_FROM_ALL ${tests_testConversions_SRCS})
 QT5_USE_MODULES(testConversions Core Gui Widgets OpenGL Script Declarative Test)
 TARGET_LINK_LIBRARIES(testConversions ${extLinkerOptionTest})
