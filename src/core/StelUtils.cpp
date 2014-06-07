@@ -33,7 +33,6 @@
 #include <QProcess>
 #include <QSysInfo>
 #include <cmath> // std::fmod
-#include <QOpenGLFunctions>
 
 namespace StelUtils
 {
