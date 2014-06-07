@@ -9,20 +9,20 @@ msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-14 23:55+0700\n"
-"PO-Revision-Date: 2014-05-15 06:00+0000\n"
+"POT-Creation-Date: 2014-06-03 23:23+0700\n"
+"PO-Revision-Date: 2014-06-03 18:15+0000\n"
 "Last-Translator: José A. Macas Durazo <josedurazo92@gmail.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-05-16 05:29+0000\n"
-"X-Generator: Launchpad (build 17007)\n"
+"X-Launchpad-Export-Date: 2014-06-04 05:56+0000\n"
+"X-Generator: Launchpad (build 17031)\n"
 "Language: es_ES\n"
 
 #: src/core/modules/ConstellationMgr.cpp:107 src/core/modules/StarMgr.cpp:346
 #: src/core/modules/GridLinesMgr.cpp:695 src/core/modules/LandscapeMgr.cpp:354
-#: src/core/modules/NebulaMgr.cpp:126 src/core/modules/SolarSystem.cpp:156
+#: src/core/modules/NebulaMgr.cpp:126 src/core/modules/SolarSystem.cpp:155
 #: src/core/StelApp.cpp:468 src/core/StelCore.cpp:176
 #: src/core/StelSkyLayerMgr.cpp:87 src/StelMainView.cpp:309
 msgid "Display Options"
@@ -160,7 +160,7 @@ msgstr ", %1 m"
 msgid "Planet: "
 msgstr "Planeta: "
 
-#: src/core/modules/Nebula.cpp:104 src/core/modules/Planet.cpp:133
+#: src/core/modules/Nebula.cpp:104 src/core/modules/Planet.cpp:132
 #: src/core/modules/MinorPlanet.cpp:215 src/core/modules/Comet.cpp:154
 #: src/core/modules/StarWrapper.cpp:50 src/core/modules/StarWrapper.cpp:170
 #: src/core/modules/StarWrapper.cpp:173
@@ -171,7 +171,7 @@ msgstr "Planeta: "
 msgid "Type: <b>%1</b>"
 msgstr "Tipo: <b>%1</b>"
 
-#: src/core/modules/Nebula.cpp:110 src/core/modules/Planet.cpp:139
+#: src/core/modules/Nebula.cpp:109 src/core/modules/Planet.cpp:138
 #: src/core/modules/MinorPlanet.cpp:221 src/core/modules/Comet.cpp:160
 #: src/core/modules/StarWrapper.cpp:56 src/core/modules/StarWrapper.cpp:180
 #: plugins/Supernovae/src/Supernova.cpp:135 plugins/Novae/src/Nova.cpp:140
@@ -180,12 +180,7 @@ msgstr "Tipo: <b>%1</b>"
 msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>)"
 msgstr "Magnitud: <b>%1</b> (extinto a: <b>%2</b>)"
 
-#: src/core/modules/Nebula.cpp:113
-#, qt-format
-msgid "Surface brightness: <b>%1</b> (extincted to: <b>%2</b>)"
-msgstr "Brillo de superficie: <b>%1</b> (extinto a: <b>%2</b>)"
-
-#: src/core/modules/Nebula.cpp:118 src/core/modules/Planet.cpp:142
+#: src/core/modules/Nebula.cpp:112 src/core/modules/Planet.cpp:141
 #: src/core/modules/MinorPlanet.cpp:224 src/core/modules/Comet.cpp:163
 #: src/core/modules/StarWrapper.cpp:60 src/core/modules/StarWrapper.cpp:183
 #: plugins/Supernovae/src/Supernova.cpp:137 plugins/Novae/src/Nova.cpp:143
@@ -194,49 +189,54 @@ msgstr "Brillo de superficie: <b>%1</b> (extinto a: <b>%2</b>)"
 msgid "Magnitude: <b>%1</b>"
 msgstr "Magnitud: <b>%1</b>"
 
-#: src/core/modules/Nebula.cpp:120
+#: src/core/modules/Nebula.cpp:119
+#, qt-format
+msgid "Surface brightness: <b>%1</b> (extincted to: <b>%2</b>)"
+msgstr "Brillo de superficie: <b>%1</b> (extinto a: <b>%2</b>)"
+
+#: src/core/modules/Nebula.cpp:125
 #, qt-format
 msgid "Surface brightness: <b>%1</b>"
 msgstr "Brillo de superficie: <b>%1</b>"
 
-#: src/core/modules/Nebula.cpp:126
+#: src/core/modules/Nebula.cpp:131
 #, qt-format
 msgid "Size: %1"
 msgstr "Tamaño: %1"
 
-#: src/core/modules/Nebula.cpp:370
+#: src/core/modules/Nebula.cpp:375
 msgid "Galaxy"
 msgstr "Galaxia"
 
-#: src/core/modules/Nebula.cpp:373
+#: src/core/modules/Nebula.cpp:378
 msgid "Open cluster"
 msgstr "Cúmulo abierto"
 
-#: src/core/modules/Nebula.cpp:376
+#: src/core/modules/Nebula.cpp:381
 msgid "Globular cluster"
 msgstr "Cúmulo globular"
 
-#: src/core/modules/Nebula.cpp:379
+#: src/core/modules/Nebula.cpp:384
 msgid "Nebula"
 msgstr "Nebulosa"
 
-#: src/core/modules/Nebula.cpp:382
+#: src/core/modules/Nebula.cpp:387
 msgid "Planetary nebula"
 msgstr "Nebulosa planetaria"
 
-#: src/core/modules/Nebula.cpp:385
+#: src/core/modules/Nebula.cpp:390
 msgid "Dark Nebula"
 msgstr "Nebulosa Oscura"
 
-#: src/core/modules/Nebula.cpp:388
+#: src/core/modules/Nebula.cpp:393
 msgid "Cluster associated with nebulosity"
 msgstr "Cúmulo asociado con nebulosidad"
 
-#: src/core/modules/Nebula.cpp:391
+#: src/core/modules/Nebula.cpp:396
 msgid "Unknown"
 msgstr "Desconocido"
 
-#: src/core/modules/Nebula.cpp:394
+#: src/core/modules/Nebula.cpp:399
 msgid "Undocumented type"
 msgstr "Tipo no documentado"
 
@@ -244,73 +244,73 @@ msgstr "Tipo no documentado"
 msgid "Deep-sky objects"
 msgstr "Objetos del Espacio profundo"
 
-#: src/core/modules/Planet.cpp:145 src/core/modules/MinorPlanet.cpp:234
+#: src/core/modules/Planet.cpp:144 src/core/modules/MinorPlanet.cpp:234
 #: src/core/modules/MinorPlanet.cpp:238 src/core/modules/Comet.cpp:172
 #: src/core/modules/StarWrapper.cpp:187 plugins/Quasars/src/Quasar.cpp:115
 #, qt-format
 msgid "Absolute Magnitude: %1"
 msgstr "Magnitud absoluta: %1"
 
-#: src/core/modules/Planet.cpp:154
+#: src/core/modules/Planet.cpp:153
 #, qt-format
 msgid "Obliquity (of date, for Earth): %1"
 msgstr "Oblicuidad (de fecha, para Tierra): %1"
 
-#: src/core/modules/Planet.cpp:166 src/core/modules/MinorPlanet.cpp:251
+#: src/core/modules/Planet.cpp:165 src/core/modules/MinorPlanet.cpp:251
 #: src/core/modules/Comet.cpp:202
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 km)"
 msgstr "Distancia: %1ua (%2 km)"
 
-#: src/core/modules/Planet.cpp:173 src/core/modules/MinorPlanet.cpp:258
+#: src/core/modules/Planet.cpp:172 src/core/modules/MinorPlanet.cpp:258
 #: src/core/modules/Comet.cpp:209
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 Mio km)"
 msgstr "Distancia: %1 UA (%2 Mio km)"
 
-#: src/core/modules/Planet.cpp:186
+#: src/core/modules/Planet.cpp:185
 #, qt-format
 msgid "Apparent diameter: %1, with rings: %2"
 msgstr "Diámetro aparente: %1, con anillos; %2"
 
-#: src/core/modules/Planet.cpp:192 src/core/modules/MinorPlanet.cpp:266
+#: src/core/modules/Planet.cpp:191 src/core/modules/MinorPlanet.cpp:266
 #, qt-format
 msgid "Apparent diameter: %1"
 msgstr "Diámetro aparente: %1"
 
 #. TRANSLATORS: Sidereal (orbital) period for solar system bodies in days and in Julian years (symbol: a)
-#: src/core/modules/Planet.cpp:204 src/core/modules/MinorPlanet.cpp:273
+#: src/core/modules/Planet.cpp:203 src/core/modules/MinorPlanet.cpp:273
 #: src/core/modules/Comet.cpp:231
 #, qt-format
 msgid "Sidereal period: %1 days (%2 a)"
 msgstr "Periodo sideral: %1 días (%2 a)"
 
-#: src/core/modules/Planet.cpp:207
+#: src/core/modules/Planet.cpp:206
 #, qt-format
 msgid "Sidereal day: %1"
 msgstr "Día sidéreo: %1"
 
-#: src/core/modules/Planet.cpp:208
+#: src/core/modules/Planet.cpp:207
 #, qt-format
 msgid "Mean solar day: %1"
 msgstr "Día solar medio: %1"
 
-#: src/core/modules/Planet.cpp:214
+#: src/core/modules/Planet.cpp:213
 #, qt-format
 msgid "Phase Angle: %1"
 msgstr "Ángulo de Fase: %1"
 
-#: src/core/modules/Planet.cpp:215
+#: src/core/modules/Planet.cpp:214
 #, qt-format
 msgid "Elongation: %1"
 msgstr "Elongación: %1"
 
-#: src/core/modules/Planet.cpp:216
+#: src/core/modules/Planet.cpp:215
 #, qt-format
 msgid "Phase: %1"
 msgstr "Fase: %1"
 
-#: src/core/modules/Planet.cpp:217
+#: src/core/modules/Planet.cpp:216
 #, qt-format
 msgid "Illuminated: %1%"
 msgstr "Iluminado: %1%"
@@ -335,17 +335,17 @@ msgstr "Distancia desde el sol: %1UA (%2 Mio km)"
 msgid "Speed: %1 km/s"
 msgstr "Velocidad: %1 km/s"
 
-#: src/core/modules/SolarSystem.cpp:157
+#: src/core/modules/SolarSystem.cpp:156
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:308
 msgid "Planet labels"
 msgstr "Etiqueta de planetas"
 
-#: src/core/modules/SolarSystem.cpp:158
+#: src/core/modules/SolarSystem.cpp:157
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:312
 msgid "Planet orbits"
 msgstr "Órbitas planetarias"
 
-#: src/core/modules/SolarSystem.cpp:159
+#: src/core/modules/SolarSystem.cpp:158
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:316
 msgid "Planet trails"
 msgstr "Rutas de planetas"
@@ -3758,10 +3758,10 @@ msgid "&Paste"
 msgstr "&Pegar"
 
 #: src/translations.h:547 src/ui_locationDialogGui.h:407
-#: plugins/Oculars/src/ui_ocularDialog.h:1073
-#: plugins/Oculars/src/ui_ocularDialog.h:1082
-#: plugins/Oculars/src/ui_ocularDialog.h:1089
-#: plugins/Oculars/src/ui_ocularDialog.h:1100
+#: plugins/Oculars/src/ui_ocularDialog.h:1074
+#: plugins/Oculars/src/ui_ocularDialog.h:1083
+#: plugins/Oculars/src/ui_ocularDialog.h:1090
+#: plugins/Oculars/src/ui_ocularDialog.h:1101
 msgid "Delete"
 msgstr "Eliminar"
 
@@ -3844,7 +3844,14 @@ msgstr "Actualizar"
 msgid "Location"
 msgstr "Ubicación"
 
-#: src/ui_locationDialogGui.h:398 src/ui_locationDialogGui.h:401
+#: src/ui_locationDialogGui.h:398
+msgid ""
+"Standard list of locations contains only English names (without diacritics!)"
+msgstr ""
+"La lista estándar de ubicaciones sólo contiene nombres en inglés (¡sin "
+"diacríticos!)"
+
+#: src/ui_locationDialogGui.h:401
 msgid ""
 "Standard list of locations is contains only English names (without "
 "diacritics!)"
@@ -5143,7 +5150,7 @@ msgid "Save settings as default"
 msgstr "Guardar configuración como por defecto"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:190
-#: plugins/Oculars/src/ui_ocularDialog.h:1107
+#: plugins/Oculars/src/ui_ocularDialog.h:1108
 #: plugins/Satellites/src/ui_satellitesDialog.h:762
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:419
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:405
@@ -5176,7 +5183,7 @@ msgid "Compass marks"
 msgstr "Marcas de brújula"
 
 #: plugins/Oculars/src/Oculars.cpp:80 plugins/Oculars/src/Oculars.cpp:1311
-#: plugins/Oculars/src/ui_ocularDialog.h:1050
+#: plugins/Oculars/src/ui_ocularDialog.h:1051
 msgid "Oculars"
 msgstr "Oculares"
 
@@ -5244,7 +5251,7 @@ msgid "&Reset rotation"
 msgstr "&Reestablecer rotación"
 
 #: plugins/Oculars/src/Oculars.cpp:1312
-#: plugins/Oculars/src/ui_ocularDialog.h:1052
+#: plugins/Oculars/src/ui_ocularDialog.h:1053
 msgid "Ocular view"
 msgstr "Oculares"
 
@@ -5594,113 +5601,112 @@ msgstr "Activa / desactiva la superposición de oculares."
 msgid "Opens the pop-up navigation menu."
 msgstr "Abre la ventana del menú de navegación."
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1053
+#: plugins/Oculars/src/ui_ocularDialog.h:1054
 msgid "Enable only if an object is selected"
 msgstr "Permitir sólo si un objeto es seleccionado"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1054
+#: plugins/Oculars/src/ui_ocularDialog.h:1055
 msgid "Scale image circle"
 msgstr "Escalar el círculo de imagen"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1056
+#: plugins/Oculars/src/ui_ocularDialog.h:1057
 msgid "Apply limits stellar magnitude for different apertures of telescopes"
 msgstr ""
 "Aplicar límites de magnitud estelar para diferentes aperturas de telescopios"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1058
+#: plugins/Oculars/src/ui_ocularDialog.h:1059
 msgid "Limit stellar magnitude"
 msgstr "Limitar magnitud estelar"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1059
+#: plugins/Oculars/src/ui_ocularDialog.h:1060
 msgid "Key mappings"
 msgstr "Atajos de teclado"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1060
+#: plugins/Oculars/src/ui_ocularDialog.h:1061
 msgid "Toggle ocular view:"
 msgstr "Activar la vista ocular:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1062
+#: plugins/Oculars/src/ui_ocularDialog.h:1063
 msgid "Open pop-up navigation menu:"
 msgstr "Abrir el menú emergente de navegación:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1063
+#: plugins/Oculars/src/ui_ocularDialog.h:1064
 msgid "Interface"
 msgstr "Interfaz"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1064
+#: plugins/Oculars/src/ui_ocularDialog.h:1065
 msgid "On-screen control panel"
 msgstr "Panel de control en pantalla"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1065
+#: plugins/Oculars/src/ui_ocularDialog.h:1066
 msgid "Use degrees and minutes for FOV of CCD"
 msgstr "Usar grados y minutos para el CDV del CCD"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1067
+#: plugins/Oculars/src/ui_ocularDialog.h:1068
 msgid ""
-"Mark it if you want value of FOV is same like at the startup of Stellarium."
+"Mark it if you want the FOV value the same like at the startup of Stellarium."
 msgstr ""
-"Marcar si quiere que el valor del CDV sea el mismo al de inicio de "
-"Stellarium."
+"Márquelo si quiere que el valor del CDV sea el mismo al iniciar Stellarium."
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1069
+#: plugins/Oculars/src/ui_ocularDialog.h:1070
 msgid "Restore FOV to initial values"
 msgstr "Restaurar CDV a los valores iniciales"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1070
+#: plugins/Oculars/src/ui_ocularDialog.h:1071
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:225
 msgid "General"
 msgstr "General"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1071
-#: plugins/Oculars/src/ui_ocularDialog.h:1079
+#: plugins/Oculars/src/ui_ocularDialog.h:1072
+#: plugins/Oculars/src/ui_ocularDialog.h:1080
 msgid "Eyepieces"
 msgstr "Oculares"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1072
-#: plugins/Oculars/src/ui_ocularDialog.h:1081
-#: plugins/Oculars/src/ui_ocularDialog.h:1088
-#: plugins/Oculars/src/ui_ocularDialog.h:1099
+#: plugins/Oculars/src/ui_ocularDialog.h:1073
+#: plugins/Oculars/src/ui_ocularDialog.h:1082
+#: plugins/Oculars/src/ui_ocularDialog.h:1089
+#: plugins/Oculars/src/ui_ocularDialog.h:1100
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:219
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:403
 msgid "Add"
 msgstr "Añadir"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1074
-#: plugins/Oculars/src/ui_ocularDialog.h:1083
-#: plugins/Oculars/src/ui_ocularDialog.h:1090
-#: plugins/Oculars/src/ui_ocularDialog.h:1101
+#: plugins/Oculars/src/ui_ocularDialog.h:1075
+#: plugins/Oculars/src/ui_ocularDialog.h:1084
+#: plugins/Oculars/src/ui_ocularDialog.h:1091
+#: plugins/Oculars/src/ui_ocularDialog.h:1102
 #: plugins/Satellites/src/ui_satellitesDialog.h:731
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:483
 msgid "Name:"
 msgstr "Nombre:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1075
+#: plugins/Oculars/src/ui_ocularDialog.h:1076
 msgid "aFOV:"
 msgstr "CDVa:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1076
-#: plugins/Oculars/src/ui_ocularDialog.h:1102
+#: plugins/Oculars/src/ui_ocularDialog.h:1077
+#: plugins/Oculars/src/ui_ocularDialog.h:1103
 msgid "Focal length:"
 msgstr "Longitud focal:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1077
+#: plugins/Oculars/src/ui_ocularDialog.h:1078
 msgid "Field stop:"
 msgstr "Número f:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1078
+#: plugins/Oculars/src/ui_ocularDialog.h:1079
 msgid "Binoculars"
 msgstr "Binoculares"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1080
-#: plugins/Oculars/src/ui_ocularDialog.h:1086
+#: plugins/Oculars/src/ui_ocularDialog.h:1081
+#: plugins/Oculars/src/ui_ocularDialog.h:1087
 msgid "Lenses"
 msgstr "Lentes"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1084
+#: plugins/Oculars/src/ui_ocularDialog.h:1085
 msgid "Multiplier:"
 msgstr "Multiplicador:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1085
+#: plugins/Oculars/src/ui_ocularDialog.h:1086
 msgid ""
 "Values of multiplicity >1 expand the focal length (Barlow lens). Values of "
 "multiplicity <1 reduce the focal length (Shapley lens)."
@@ -5708,51 +5714,51 @@ msgstr ""
 "Valores de multiplicidad >1 expanden la longitud focal (lente Balow). "
 "Valores de multiplicidad <1 reducen la longitud focal (lente Shapley)."
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1087
-#: plugins/Oculars/src/ui_ocularDialog.h:1097
+#: plugins/Oculars/src/ui_ocularDialog.h:1088
+#: plugins/Oculars/src/ui_ocularDialog.h:1098
 msgid "Sensors"
 msgstr "Sensores"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1091
+#: plugins/Oculars/src/ui_ocularDialog.h:1092
 msgid "Resolution x (pixels):"
 msgstr "Resolución x (pixeles):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1092
+#: plugins/Oculars/src/ui_ocularDialog.h:1093
 msgid "Resolution y (pixels):"
 msgstr "Resolución y (pixeles):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1093
+#: plugins/Oculars/src/ui_ocularDialog.h:1094
 msgid "Chip width (mm):"
 msgstr "Ancho del chip (mm):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1094
+#: plugins/Oculars/src/ui_ocularDialog.h:1095
 msgid "Chip height (mm):"
 msgstr "Alto del chip (mm):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1095
+#: plugins/Oculars/src/ui_ocularDialog.h:1096
 msgid "Pixel width (micron):"
 msgstr "Ancho del pixel (micrones):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1096
+#: plugins/Oculars/src/ui_ocularDialog.h:1097
 msgid "Pixel height (micron):"
 msgstr "Alto del pixel (micrones):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1098
-#: plugins/Oculars/src/ui_ocularDialog.h:1106
+#: plugins/Oculars/src/ui_ocularDialog.h:1099
+#: plugins/Oculars/src/ui_ocularDialog.h:1107
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:392
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:408
 msgid "Telescopes"
 msgstr "Telescopios"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1103
+#: plugins/Oculars/src/ui_ocularDialog.h:1104
 msgid "Diameter:"
 msgstr "Diámetro:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1104
+#: plugins/Oculars/src/ui_ocularDialog.h:1105
 msgid "Horizontal flip"
 msgstr "Voltear horizontalmente"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1105
+#: plugins/Oculars/src/ui_ocularDialog.h:1106
 msgid "Vertical flip"
 msgstr "Voltear verticalmente"
 
@@ -6509,7 +6515,7 @@ msgstr "Complemento controlador de telescopio"
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:97
 #: plugins/FOV/src/gui/FOVWindow.cpp:79
 #: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:81
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:90
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:91
 #, qt-format
 msgid "Version %1"
 msgstr "Versión %1"
@@ -9041,7 +9047,6 @@ msgstr ""
 "comprobar primero el uso de signos."
 
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:272
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:282
 msgid "Show plug-ins button on toolbar"
 msgstr "Mostrar botones de complementos en la barra de herramentas"
 
@@ -9820,7 +9825,7 @@ msgid "Search Events"
 msgstr "Buscar eventos"
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:54
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:94
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:95
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:277
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:279
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:290
@@ -9831,23 +9836,23 @@ msgstr "Coordenadas del Puntero"
 msgid "This plugin shows the coordinates of the mouse pointer."
 msgstr "Este complemento muestra las coordenadas del puntero del ratón."
 
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:94
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:95
 msgid "Show equatorial coordinates (J2000.0) of the mouse pointer"
 msgstr "Mostrar coordenadas ecuatoriales (J2000.0) del puntero del ratón."
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:89
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:90
 msgid "Pointer Coordinates plug-in"
 msgstr "Complemento de Coordenadas del Puntero"
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:118
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:119
 msgid "The top center of the screen"
 msgstr "Al centro superior de la pantalla"
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:119
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:120
 msgid "In center of the top right half of the screen"
 msgstr "En el centro de la mitad superior derecha de la pantalla"
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:120
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:121
 msgid "The right bottom corner of the screen"
 msgstr "La esquina inferior derecha de la pantalla"
 
@@ -9857,8 +9862,12 @@ msgstr ""
 "Mostrar coordenadas ecuatoriales para el cursor del ratón para época J2000.0"
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:281
-msgid "Enable displaying coordinates at startup"
-msgstr "Habilitar la muestra de las coordenadas al inicio"
+msgid "Enable display of coordinates at startup"
+msgstr "Habilitar la muestra de coordenadas al inicio"
+
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:282
+msgid "Show plug-in button on toolbar"
+msgstr "Mostrar botón del complemento en la barra de herramientas"
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:285
 msgid "Place of the string with coordinates of the mouse pointer"
@@ -10590,3 +10599,12 @@ msgstr "Lugar de la cadena:"
 
 #~ msgid "Highest rate ever (1966 Leonids)"
 #~ msgstr "Tasa máxima alcanzada (Leónidas 1966)"
+
+#~ msgid ""
+#~ "Mark it if you want value of FOV is same like at the startup of Stellarium."
+#~ msgstr ""
+#~ "Marcar si quiere que el valor del CDV sea el mismo al de inicio de "
+#~ "Stellarium."
+
+#~ msgid "Enable displaying coordinates at startup"
+#~ msgstr "Habilitar la muestra de las coordenadas al inicio"

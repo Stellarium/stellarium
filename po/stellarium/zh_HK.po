@@ -7,19 +7,19 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-14 23:55+0700\n"
-"PO-Revision-Date: 2014-05-14 16:00+0000\n"
+"POT-Creation-Date: 2014-06-03 23:23+0700\n"
+"PO-Revision-Date: 2014-05-18 04:50+0000\n"
 "Last-Translator: henrysky <Unknown>\n"
 "Language-Team: Chinese (Hong Kong) <zh_HK@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-05-15 05:47+0000\n"
-"X-Generator: Launchpad (build 17007)\n"
+"X-Launchpad-Export-Date: 2014-06-04 06:00+0000\n"
+"X-Generator: Launchpad (build 17031)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:107 src/core/modules/StarMgr.cpp:346
 #: src/core/modules/GridLinesMgr.cpp:695 src/core/modules/LandscapeMgr.cpp:354
-#: src/core/modules/NebulaMgr.cpp:126 src/core/modules/SolarSystem.cpp:156
+#: src/core/modules/NebulaMgr.cpp:126 src/core/modules/SolarSystem.cpp:155
 #: src/core/StelApp.cpp:468 src/core/StelCore.cpp:176
 #: src/core/StelSkyLayerMgr.cpp:87 src/StelMainView.cpp:309
 msgid "Display Options"
@@ -157,7 +157,7 @@ msgstr ", %1 公尺"
 msgid "Planet: "
 msgstr "行星: "
 
-#: src/core/modules/Nebula.cpp:104 src/core/modules/Planet.cpp:133
+#: src/core/modules/Nebula.cpp:104 src/core/modules/Planet.cpp:132
 #: src/core/modules/MinorPlanet.cpp:215 src/core/modules/Comet.cpp:154
 #: src/core/modules/StarWrapper.cpp:50 src/core/modules/StarWrapper.cpp:170
 #: src/core/modules/StarWrapper.cpp:173
@@ -168,7 +168,7 @@ msgstr "行星: "
 msgid "Type: <b>%1</b>"
 msgstr "種類:<b>%1</b>"
 
-#: src/core/modules/Nebula.cpp:110 src/core/modules/Planet.cpp:139
+#: src/core/modules/Nebula.cpp:109 src/core/modules/Planet.cpp:138
 #: src/core/modules/MinorPlanet.cpp:221 src/core/modules/Comet.cpp:160
 #: src/core/modules/StarWrapper.cpp:56 src/core/modules/StarWrapper.cpp:180
 #: plugins/Supernovae/src/Supernova.cpp:135 plugins/Novae/src/Nova.cpp:140
@@ -177,12 +177,7 @@ msgstr "種類:<b>%1</b>"
 msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>)"
 msgstr "星等: <b>%1</b> (消光至: <b>%2</b>)"
 
-#: src/core/modules/Nebula.cpp:113
-#, qt-format
-msgid "Surface brightness: <b>%1</b> (extincted to: <b>%2</b>)"
-msgstr "星雲表面光度: <b>%1</b> (消光至: <b>%2</b>)"
-
-#: src/core/modules/Nebula.cpp:118 src/core/modules/Planet.cpp:142
+#: src/core/modules/Nebula.cpp:112 src/core/modules/Planet.cpp:141
 #: src/core/modules/MinorPlanet.cpp:224 src/core/modules/Comet.cpp:163
 #: src/core/modules/StarWrapper.cpp:60 src/core/modules/StarWrapper.cpp:183
 #: plugins/Supernovae/src/Supernova.cpp:137 plugins/Novae/src/Nova.cpp:143
@@ -191,49 +186,54 @@ msgstr "星雲表面光度: <b>%1</b> (消光至: <b>%2</b>)"
 msgid "Magnitude: <b>%1</b>"
 msgstr "星等: <b>%1</b>"
 
-#: src/core/modules/Nebula.cpp:120
+#: src/core/modules/Nebula.cpp:119
+#, qt-format
+msgid "Surface brightness: <b>%1</b> (extincted to: <b>%2</b>)"
+msgstr "星雲表面光度: <b>%1</b> (消光至: <b>%2</b>)"
+
+#: src/core/modules/Nebula.cpp:125
 #, qt-format
 msgid "Surface brightness: <b>%1</b>"
 msgstr "星雲表面光度: <b>%1</b>"
 
-#: src/core/modules/Nebula.cpp:126
+#: src/core/modules/Nebula.cpp:131
 #, qt-format
 msgid "Size: %1"
 msgstr "大小: %1"
 
-#: src/core/modules/Nebula.cpp:370
+#: src/core/modules/Nebula.cpp:375
 msgid "Galaxy"
 msgstr "星系"
 
-#: src/core/modules/Nebula.cpp:373
+#: src/core/modules/Nebula.cpp:378
 msgid "Open cluster"
 msgstr "疏散星團"
 
-#: src/core/modules/Nebula.cpp:376
+#: src/core/modules/Nebula.cpp:381
 msgid "Globular cluster"
 msgstr "球狀星團"
 
-#: src/core/modules/Nebula.cpp:379
+#: src/core/modules/Nebula.cpp:384
 msgid "Nebula"
 msgstr "星雲"
 
-#: src/core/modules/Nebula.cpp:382
+#: src/core/modules/Nebula.cpp:387
 msgid "Planetary nebula"
 msgstr "行星狀星雲"
 
-#: src/core/modules/Nebula.cpp:385
+#: src/core/modules/Nebula.cpp:390
 msgid "Dark Nebula"
 msgstr "暗星雲"
 
-#: src/core/modules/Nebula.cpp:388
+#: src/core/modules/Nebula.cpp:393
 msgid "Cluster associated with nebulosity"
 msgstr "瀰漫星雲"
 
-#: src/core/modules/Nebula.cpp:391
+#: src/core/modules/Nebula.cpp:396
 msgid "Unknown"
 msgstr "不詳"
 
-#: src/core/modules/Nebula.cpp:394
+#: src/core/modules/Nebula.cpp:399
 msgid "Undocumented type"
 msgstr "未收錄類型"
 
@@ -241,73 +241,73 @@ msgstr "未收錄類型"
 msgid "Deep-sky objects"
 msgstr "深空天體"
 
-#: src/core/modules/Planet.cpp:145 src/core/modules/MinorPlanet.cpp:234
+#: src/core/modules/Planet.cpp:144 src/core/modules/MinorPlanet.cpp:234
 #: src/core/modules/MinorPlanet.cpp:238 src/core/modules/Comet.cpp:172
 #: src/core/modules/StarWrapper.cpp:187 plugins/Quasars/src/Quasar.cpp:115
 #, qt-format
 msgid "Absolute Magnitude: %1"
 msgstr "絕對星等: %1"
 
-#: src/core/modules/Planet.cpp:154
+#: src/core/modules/Planet.cpp:153
 #, qt-format
 msgid "Obliquity (of date, for Earth): %1"
 msgstr "黃赤交角 (現時, 以地球來說): %1"
 
-#: src/core/modules/Planet.cpp:166 src/core/modules/MinorPlanet.cpp:251
+#: src/core/modules/Planet.cpp:165 src/core/modules/MinorPlanet.cpp:251
 #: src/core/modules/Comet.cpp:202
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 km)"
 msgstr "距離: %1地日距離 (%2 公里)"
 
-#: src/core/modules/Planet.cpp:173 src/core/modules/MinorPlanet.cpp:258
+#: src/core/modules/Planet.cpp:172 src/core/modules/MinorPlanet.cpp:258
 #: src/core/modules/Comet.cpp:209
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 Mio km)"
 msgstr "距離: %1AU (%2 Mio 公里)"
 
-#: src/core/modules/Planet.cpp:186
+#: src/core/modules/Planet.cpp:185
 #, qt-format
 msgid "Apparent diameter: %1, with rings: %2"
 msgstr "視直徑: %1, 包括光環: %2"
 
-#: src/core/modules/Planet.cpp:192 src/core/modules/MinorPlanet.cpp:266
+#: src/core/modules/Planet.cpp:191 src/core/modules/MinorPlanet.cpp:266
 #, qt-format
 msgid "Apparent diameter: %1"
 msgstr "視直徑: %1"
 
 #. TRANSLATORS: Sidereal (orbital) period for solar system bodies in days and in Julian years (symbol: a)
-#: src/core/modules/Planet.cpp:204 src/core/modules/MinorPlanet.cpp:273
+#: src/core/modules/Planet.cpp:203 src/core/modules/MinorPlanet.cpp:273
 #: src/core/modules/Comet.cpp:231
 #, qt-format
 msgid "Sidereal period: %1 days (%2 a)"
 msgstr "恆星週期: %1日 (%2 a)"
 
-#: src/core/modules/Planet.cpp:207
+#: src/core/modules/Planet.cpp:206
 #, qt-format
 msgid "Sidereal day: %1"
 msgstr "恆星日: %1"
 
-#: src/core/modules/Planet.cpp:208
+#: src/core/modules/Planet.cpp:207
 #, qt-format
 msgid "Mean solar day: %1"
 msgstr "平均太陽日: %1"
 
-#: src/core/modules/Planet.cpp:214
+#: src/core/modules/Planet.cpp:213
 #, qt-format
 msgid "Phase Angle: %1"
 msgstr "相角: %1"
 
-#: src/core/modules/Planet.cpp:215
+#: src/core/modules/Planet.cpp:214
 #, qt-format
 msgid "Elongation: %1"
 msgstr "距角: %1"
 
-#: src/core/modules/Planet.cpp:216
+#: src/core/modules/Planet.cpp:215
 #, qt-format
 msgid "Phase: %1"
 msgstr "相: %1"
 
-#: src/core/modules/Planet.cpp:217
+#: src/core/modules/Planet.cpp:216
 #, qt-format
 msgid "Illuminated: %1%"
 msgstr "被照亮: %1%"
@@ -332,17 +332,17 @@ msgstr "與太陽距離: %1AU (%2 Mio 公里)"
 msgid "Speed: %1 km/s"
 msgstr "速度: %1 km/s"
 
-#: src/core/modules/SolarSystem.cpp:157
+#: src/core/modules/SolarSystem.cpp:156
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:308
 msgid "Planet labels"
 msgstr "行星標籤"
 
-#: src/core/modules/SolarSystem.cpp:158
+#: src/core/modules/SolarSystem.cpp:157
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:312
 msgid "Planet orbits"
 msgstr "行星軌道"
 
-#: src/core/modules/SolarSystem.cpp:159
+#: src/core/modules/SolarSystem.cpp:158
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:316
 msgid "Planet trails"
 msgstr "行星路徑"
@@ -3617,10 +3617,10 @@ msgid "&Paste"
 msgstr "&貼上"
 
 #: src/translations.h:547 src/ui_locationDialogGui.h:407
-#: plugins/Oculars/src/ui_ocularDialog.h:1073
-#: plugins/Oculars/src/ui_ocularDialog.h:1082
-#: plugins/Oculars/src/ui_ocularDialog.h:1089
-#: plugins/Oculars/src/ui_ocularDialog.h:1100
+#: plugins/Oculars/src/ui_ocularDialog.h:1074
+#: plugins/Oculars/src/ui_ocularDialog.h:1083
+#: plugins/Oculars/src/ui_ocularDialog.h:1090
+#: plugins/Oculars/src/ui_ocularDialog.h:1101
 msgid "Delete"
 msgstr "删除"
 
@@ -3703,7 +3703,12 @@ msgstr "重新整理"
 msgid "Location"
 msgstr "所在位置"
 
-#: src/ui_locationDialogGui.h:398 src/ui_locationDialogGui.h:401
+#: src/ui_locationDialogGui.h:398
+msgid ""
+"Standard list of locations contains only English names (without diacritics!)"
+msgstr ""
+
+#: src/ui_locationDialogGui.h:401
 msgid ""
 "Standard list of locations is contains only English names (without "
 "diacritics!)"
@@ -4946,7 +4951,7 @@ msgid "Save settings as default"
 msgstr "儲存預設設定"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:190
-#: plugins/Oculars/src/ui_ocularDialog.h:1107
+#: plugins/Oculars/src/ui_ocularDialog.h:1108
 #: plugins/Satellites/src/ui_satellitesDialog.h:762
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:419
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:405
@@ -4979,7 +4984,7 @@ msgid "Compass marks"
 msgstr "指南針"
 
 #: plugins/Oculars/src/Oculars.cpp:80 plugins/Oculars/src/Oculars.cpp:1311
-#: plugins/Oculars/src/ui_ocularDialog.h:1050
+#: plugins/Oculars/src/ui_ocularDialog.h:1051
 msgid "Oculars"
 msgstr "觀測模擬插件"
 
@@ -5043,7 +5048,7 @@ msgid "&Reset rotation"
 msgstr "&重設轉換"
 
 #: plugins/Oculars/src/Oculars.cpp:1312
-#: plugins/Oculars/src/ui_ocularDialog.h:1052
+#: plugins/Oculars/src/ui_ocularDialog.h:1053
 msgid "Ocular view"
 msgstr "觀測模擬插件顯示"
 
@@ -5372,160 +5377,160 @@ msgstr ""
 msgid "Opens the pop-up navigation menu."
 msgstr "打開彈出式導航選單."
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1053
+#: plugins/Oculars/src/ui_ocularDialog.h:1054
 msgid "Enable only if an object is selected"
 msgstr "只有天體被選擇了才啟用"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1054
+#: plugins/Oculars/src/ui_ocularDialog.h:1055
 msgid "Scale image circle"
 msgstr "影像比例圈框"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1056
+#: plugins/Oculars/src/ui_ocularDialog.h:1057
 msgid "Apply limits stellar magnitude for different apertures of telescopes"
 msgstr "為不同口徑望遠鏡設極限星等"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1058
+#: plugins/Oculars/src/ui_ocularDialog.h:1059
 msgid "Limit stellar magnitude"
 msgstr "限制星等"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1059
+#: plugins/Oculars/src/ui_ocularDialog.h:1060
 msgid "Key mappings"
 msgstr "對應按鍵"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1060
+#: plugins/Oculars/src/ui_ocularDialog.h:1061
 msgid "Toggle ocular view:"
 msgstr "切換目鏡模擬:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1062
+#: plugins/Oculars/src/ui_ocularDialog.h:1063
 msgid "Open pop-up navigation menu:"
 msgstr "開啟彈出選單"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1063
+#: plugins/Oculars/src/ui_ocularDialog.h:1064
 msgid "Interface"
 msgstr "界面"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1064
+#: plugins/Oculars/src/ui_ocularDialog.h:1065
 msgid "On-screen control panel"
 msgstr "螢幕控制面板"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1065
+#: plugins/Oculars/src/ui_ocularDialog.h:1066
 msgid "Use degrees and minutes for FOV of CCD"
 msgstr "使用角度及分去表示CCD視埸"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1067
+#: plugins/Oculars/src/ui_ocularDialog.h:1068
 msgid ""
-"Mark it if you want value of FOV is same like at the startup of Stellarium."
+"Mark it if you want the FOV value the same like at the startup of Stellarium."
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1069
+#: plugins/Oculars/src/ui_ocularDialog.h:1070
 msgid "Restore FOV to initial values"
 msgstr "回復預設視野大小"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1070
+#: plugins/Oculars/src/ui_ocularDialog.h:1071
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:225
 msgid "General"
 msgstr "一般設定"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1071
-#: plugins/Oculars/src/ui_ocularDialog.h:1079
+#: plugins/Oculars/src/ui_ocularDialog.h:1072
+#: plugins/Oculars/src/ui_ocularDialog.h:1080
 msgid "Eyepieces"
 msgstr "目鏡"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1072
-#: plugins/Oculars/src/ui_ocularDialog.h:1081
-#: plugins/Oculars/src/ui_ocularDialog.h:1088
-#: plugins/Oculars/src/ui_ocularDialog.h:1099
+#: plugins/Oculars/src/ui_ocularDialog.h:1073
+#: plugins/Oculars/src/ui_ocularDialog.h:1082
+#: plugins/Oculars/src/ui_ocularDialog.h:1089
+#: plugins/Oculars/src/ui_ocularDialog.h:1100
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:219
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:403
 msgid "Add"
 msgstr "新增"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1074
-#: plugins/Oculars/src/ui_ocularDialog.h:1083
-#: plugins/Oculars/src/ui_ocularDialog.h:1090
-#: plugins/Oculars/src/ui_ocularDialog.h:1101
+#: plugins/Oculars/src/ui_ocularDialog.h:1075
+#: plugins/Oculars/src/ui_ocularDialog.h:1084
+#: plugins/Oculars/src/ui_ocularDialog.h:1091
+#: plugins/Oculars/src/ui_ocularDialog.h:1102
 #: plugins/Satellites/src/ui_satellitesDialog.h:731
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:483
 msgid "Name:"
 msgstr "名稱:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1075
+#: plugins/Oculars/src/ui_ocularDialog.h:1076
 msgid "aFOV:"
 msgstr "視場:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1076
-#: plugins/Oculars/src/ui_ocularDialog.h:1102
+#: plugins/Oculars/src/ui_ocularDialog.h:1077
+#: plugins/Oculars/src/ui_ocularDialog.h:1103
 msgid "Focal length:"
 msgstr "焦距："
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1077
+#: plugins/Oculars/src/ui_ocularDialog.h:1078
 msgid "Field stop:"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1078
+#: plugins/Oculars/src/ui_ocularDialog.h:1079
 msgid "Binoculars"
 msgstr "雙筒望遠鏡"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1080
-#: plugins/Oculars/src/ui_ocularDialog.h:1086
+#: plugins/Oculars/src/ui_ocularDialog.h:1081
+#: plugins/Oculars/src/ui_ocularDialog.h:1087
 msgid "Lenses"
 msgstr "鏡片組"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1084
+#: plugins/Oculars/src/ui_ocularDialog.h:1085
 msgid "Multiplier:"
 msgstr "倍數:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1085
+#: plugins/Oculars/src/ui_ocularDialog.h:1086
 msgid ""
 "Values of multiplicity >1 expand the focal length (Barlow lens). Values of "
 "multiplicity <1 reduce the focal length (Shapley lens)."
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1087
-#: plugins/Oculars/src/ui_ocularDialog.h:1097
+#: plugins/Oculars/src/ui_ocularDialog.h:1088
+#: plugins/Oculars/src/ui_ocularDialog.h:1098
 msgid "Sensors"
 msgstr "感光元件"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1091
+#: plugins/Oculars/src/ui_ocularDialog.h:1092
 msgid "Resolution x (pixels):"
 msgstr "解像度x (像素):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1092
+#: plugins/Oculars/src/ui_ocularDialog.h:1093
 msgid "Resolution y (pixels):"
 msgstr "解像度y (像素):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1093
+#: plugins/Oculars/src/ui_ocularDialog.h:1094
 msgid "Chip width (mm):"
 msgstr "芯片寬度 (微米):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1094
+#: plugins/Oculars/src/ui_ocularDialog.h:1095
 msgid "Chip height (mm):"
 msgstr "芯片高度 (微米):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1095
+#: plugins/Oculars/src/ui_ocularDialog.h:1096
 msgid "Pixel width (micron):"
 msgstr "像素寬度 (微米):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1096
+#: plugins/Oculars/src/ui_ocularDialog.h:1097
 msgid "Pixel height (micron):"
 msgstr "像素高度 (微米):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1098
-#: plugins/Oculars/src/ui_ocularDialog.h:1106
+#: plugins/Oculars/src/ui_ocularDialog.h:1099
+#: plugins/Oculars/src/ui_ocularDialog.h:1107
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:392
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:408
 msgid "Telescopes"
 msgstr "望遠鏡"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1103
+#: plugins/Oculars/src/ui_ocularDialog.h:1104
 msgid "Diameter:"
 msgstr "直徑:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1104
+#: plugins/Oculars/src/ui_ocularDialog.h:1105
 msgid "Horizontal flip"
 msgstr "水平倒轉"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1105
+#: plugins/Oculars/src/ui_ocularDialog.h:1106
 msgid "Vertical flip"
 msgstr "垂直倒轉"
 
@@ -6232,7 +6237,7 @@ msgstr "望遠鏡控制插件"
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:97
 #: plugins/FOV/src/gui/FOVWindow.cpp:79
 #: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:81
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:90
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:91
 #, qt-format
 msgid "Version %1"
 msgstr "版本 %1"
@@ -8568,7 +8573,6 @@ msgstr ""
 "如果太陽是在天球赤道上以等速運轉, 那麼它會很準確的在每天的12點整中天."
 
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:272
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:282
 msgid "Show plug-ins button on toolbar"
 msgstr "顯示插件按扭"
 
@@ -9319,7 +9323,7 @@ msgid "Search Events"
 msgstr "搜尋流星雨"
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:54
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:94
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:95
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:277
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:279
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:290
@@ -9330,33 +9334,37 @@ msgstr "鼠標座標插件"
 msgid "This plugin shows the coordinates of the mouse pointer."
 msgstr "此插件會顯示鼠標在天空的座標"
 
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:94
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:95
 msgid "Show equatorial coordinates (J2000.0) of the mouse pointer"
 msgstr "顯示鼠標的J2000.0赤道坐標"
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:89
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:90
 msgid "Pointer Coordinates plug-in"
 msgstr "鼠標座標插件"
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:118
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:119
 msgid "The top center of the screen"
 msgstr "屏幕的頂部中心"
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:119
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:120
 msgid "In center of the top right half of the screen"
 msgstr "在屏幕的右上方一半的中心"
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:120
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:121
 msgid "The right bottom corner of the screen"
 msgstr "在屏幕的右下角"
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:280
 msgid "Show equatorial coordinates of the mouse cursor for epoch J2000.0"
-msgstr ""
+msgstr "顯示鼠標的J2000.0赤道坐標"
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:281
-msgid "Enable displaying coordinates at startup"
-msgstr "在啟動時顯示座標"
+msgid "Enable display of coordinates at startup"
+msgstr ""
+
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:282
+msgid "Show plug-in button on toolbar"
+msgstr ""
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:285
 msgid "Place of the string with coordinates of the mouse pointer"
@@ -9716,3 +9724,6 @@ msgstr "字串位置:"
 
 #~ msgid "Acronychal rise/set"
 #~ msgstr "日沒升/日沒落"
+
+#~ msgid "Enable displaying coordinates at startup"
+#~ msgstr "在啟動時顯示座標"
