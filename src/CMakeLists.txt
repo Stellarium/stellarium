@@ -472,9 +472,10 @@ SET(extLinkerOptionTest ${QT_QTCORE_LIBRARY} ${QT_QTNETWORK_LIBRARY} ${QT_QTTEST
 ADD_CUSTOM_TARGET(buildTests)
 
 SET(tests_testDates_SRCS
-	core/StelUtils.cpp
-	core/StelUtils.hpp
+	tests/testDates.hpp
 	tests/testDates.cpp
+	core/StelUtils.hpp
+	core/StelUtils.cpp
 	${glues_lib_SRCS})
 ADD_EXECUTABLE(testDates EXCLUDE_FROM_ALL ${tests_testDates_SRCS})
 QT5_USE_MODULES(testDates Core Gui Widgets OpenGL Script Declarative Test)
@@ -482,9 +483,10 @@ TARGET_LINK_LIBRARIES(testDates ${extLinkerOptionTest})
 ADD_DEPENDENCIES(buildTests testDates)
 
 SET(tests_testStelFileMgr_SRCS
-	core/StelFileMgr.cpp
+	tests/testStelFileMgr.hpp
+	tests/testStelFileMgr.cpp
 	core/StelFileMgr.hpp
-	tests/testStelFileMgr.cpp)
+	core/StelFileMgr.cpp)
 ADD_EXECUTABLE(testStelFileMgr EXCLUDE_FROM_ALL ${tests_testStelFileMgr_SRCS})
 QT5_USE_MODULES(testStelFileMgr Core Gui Widgets OpenGL Script Declarative Test)
 TARGET_LINK_LIBRARIES(testStelFileMgr ${extLinkerOptionTest})
@@ -501,14 +503,14 @@ SET(tests_testStelSphereGeometry_SRCS
 	core/OctahedronPolygon.cpp
 	core/StelJsonParser.hpp
 	core/StelJsonParser.cpp
-	core/StelUtils.cpp
 	core/StelUtils.hpp
-	core/StelProjector.cpp
+	core/StelUtils.cpp
 	core/StelProjector.hpp
-	core/StelFileMgr.cpp
+	core/StelProjector.cpp
 	core/StelFileMgr.hpp
-	core/StelTranslator.cpp
+	core/StelFileMgr.cpp
 	core/StelTranslator.hpp
+	core/StelTranslator.cpp
 	${glues_lib_SRCS})
 ADD_EXECUTABLE(testStelSphereGeometry EXCLUDE_FROM_ALL ${tests_testStelSphereGeometry_SRCS})
 QT5_USE_MODULES(testStelSphereGeometry Core Gui OpenGL Test)
@@ -562,8 +564,8 @@ ADD_DEPENDENCIES(buildTests testStelVertexArray)
 SET(tests_testDeltaT_SRCS
 	tests/testDeltaT.hpp
 	tests/testDeltaT.cpp
-	core/StelUtils.cpp
 	core/StelUtils.hpp
+	core/StelUtils.cpp
 	${glues_lib_SRCS})
 ADD_EXECUTABLE(testDeltaT EXCLUDE_FROM_ALL ${tests_testDeltaT_SRCS})
 QT5_USE_MODULES(testDeltaT Core Gui Widgets OpenGL Script Declarative Test)
@@ -573,8 +575,8 @@ ADD_DEPENDENCIES(buildTests testDeltaT)
 SET(tests_testConversions_SRCS
 	tests/testConversions.hpp
 	tests/testConversions.cpp
-	core/StelUtils.cpp
 	core/StelUtils.hpp
+	core/StelUtils.cpp
 	${glues_lib_SRCS})
 ADD_EXECUTABLE(testConversions EXCLUDE_FROM_ALL ${tests_testConversions_SRCS})
 QT5_USE_MODULES(testConversions Core Gui Widgets OpenGL Script Declarative Test)
