@@ -318,6 +318,16 @@ void StelMovementMgr::addTimeDragPoint(int x, int y)
 		timeDragHistory.removeFirst();
 }
 
+bool StelMovementMgr::handlePinch(qreal scale, bool started)
+{
+	static double previousFov = 0;
+	if (started)
+		previousFov = getAimFov();
+	if (scale>0)
+		zoomTo(previousFov/scale, 0);
+	return true;
+}
+
 void StelMovementMgr::handleMouseClicks(QMouseEvent* event)
 {
 	switch (event->button())
