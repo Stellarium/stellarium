@@ -686,6 +686,16 @@ void StelApp::handleKeys(QKeyEvent* event)
 	}
 }
 
+// Handle pinch on multi touch devices
+void StelApp::handlePinch(qreal scale, bool started)
+{
+	// Send the event to every StelModule
+	foreach (StelModule* i, moduleMgr->getCallOrders(StelModule::ActionHandleMouseMoves))
+	{
+		if (i->handlePinch(scale, started))
+			return;
+	}
+}
 
 //! Set flag for activating night vision mode
 void StelApp::setVisionModeNight(bool b)
