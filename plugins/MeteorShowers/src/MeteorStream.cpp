@@ -63,8 +63,8 @@ MeteorStream::MeteorStream(const StelCore* core,
 	double angle = (double)rand() / ((double)RAND_MAX+1)*2*M_PI;
 
 	// set meteor start x,y
-	m_position[0] = m_posInternal[0] = m_posTrain[0] = m_xydistance*cos(angle) + m_obs[0];
-	m_position[1] = m_posInternal[1] = m_posTrain[1] = m_xydistance*sin(angle) + m_obs[1];
+	m_position[0] = m_posTrain[0] = m_xydistance*cos(angle) + m_obs[0];
+	m_position[1] = m_posTrain[1] = m_xydistance*sin(angle) + m_obs[1];
 
 	// D is distance from center of earth
 	double D = sqrt(m_position[0]*m_position[0] + m_position[1]*m_position[1]);
@@ -202,7 +202,7 @@ void MeteorStream::draw(const StelCore* core, StelPainter& sPainter)
 	// compute intermediate points to curve along projection distortions
 	int segments = 10;
 	for (int i=1; i<segments; i++) {
-		Vec3d posi = m_posInternal;
+		Vec3d posi = m_posTrain;
 		posi[2] = m_posTrain[2] + i*(m_position[2] - m_posTrain[2])/segments;
 		posi.transfo4d(m_viewMatrix);
 		posi = core->j2000ToAltAz(posi);
