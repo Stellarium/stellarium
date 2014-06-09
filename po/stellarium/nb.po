@@ -9,13 +9,13 @@ msgstr ""
 "Project-Id-Version: nb\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-06-03 23:23+0700\n"
-"PO-Revision-Date: 2014-06-05 11:34+0000\n"
+"PO-Revision-Date: 2014-06-08 14:05+0000\n"
 "Last-Translator: FreewareTips <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-06-06 05:33+0000\n"
+"X-Launchpad-Export-Date: 2014-06-09 05:32+0000\n"
 "X-Generator: Launchpad (build 17031)\n"
 "X-Poedit-Country: NORWAY\n"
 "X-Poedit-Language: Norwegian\n"
@@ -1349,23 +1349,23 @@ msgstr "Egendefinert ligning for %1T"
 #. TRANSLATORS: This message will be displayed for users if Stellarium can't get info about version from stellarium.org
 #: src/gui/HelpDialog.cpp:259
 msgid "Oops... Stellarium can't check latest version."
-msgstr ""
+msgstr "Ops! Stellarium kan ikke sjekke om det er en ny versjon."
 
 #. TRANSLATORS: This message will be displayed for users if current version of Stellarium is bigger than version from stellarium.org
 #: src/gui/HelpDialog.cpp:281
 msgid "Looks like you are using the development version of Stellarium."
-msgstr ""
+msgstr "Ser ut som du bruker utviklingsversjonen av Stellarium."
 
 #. TRANSLATORS: This message will be displayed for users if current version of Stellarium is smaller than version from stellarium.org
 #: src/gui/HelpDialog.cpp:286
 #, qt-format
 msgid "This version of Stellarium is outdated! Latest version is %1."
-msgstr ""
+msgstr "Denne versjonen av Stellarium er utdatert! Nyeste versjon er %1."
 
 #. TRANSLATORS: This message will be displayed for users if current version of Stellarium is equals with version from stellarium.org
 #: src/gui/HelpDialog.cpp:292
 msgid "This is latest stable version of Stellarium."
-msgstr ""
+msgstr "Dette er nyeste stabile versjon av Stellarium."
 
 #: src/gui/HelpDialog.cpp:322
 msgid "Stellarium Help"
@@ -3757,7 +3757,8 @@ msgstr "Sted"
 msgid ""
 "Standard list of locations contains only English names (without diacritics!)"
 msgstr ""
-"Standard stedsliste inneholder kun engelske navn (uten diakritiske tegn!)"
+"Standardliste for steder inneholder kun engelske navn (uten diakritiske "
+"tegn!)"
 
 #: src/ui_locationDialogGui.h:401
 msgid ""
@@ -5534,6 +5535,8 @@ msgstr "Bruk grader og minutter for CCD-synsfelt"
 msgid ""
 "Mark it if you want the FOV value the same like at the startup of Stellarium."
 msgstr ""
+"Merk av hvis du vil at synsfeltverdien skal være den samme som ved oppstart "
+"av Stellarium."
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1070
 msgid "Restore FOV to initial values"
@@ -9607,7 +9610,7 @@ msgstr "Fra:"
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:560
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:562
 msgid "dd/MMM/yyyy"
-msgstr "dd/mmm/åååå"
+msgstr "dd/MMM/yyyy"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:561
 msgid "To:"
@@ -9643,15 +9646,15 @@ msgstr "Programtillegg for pekerkoordinater"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:119
 msgid "The top center of the screen"
-msgstr ""
+msgstr "Øverst på midten av skjermen"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:120
 msgid "In center of the top right half of the screen"
-msgstr ""
+msgstr "Øverst og midt på høyre halvdel av skjermen"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:121
 msgid "The right bottom corner of the screen"
-msgstr ""
+msgstr "Nedre høyre hjørne av skjermen"
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:280
 msgid "Show equatorial coordinates of the mouse cursor for epoch J2000.0"
@@ -9667,11 +9670,11 @@ msgstr "Vis knapp for programtillegg på verktøylinje"
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:285
 msgid "Place of the string with coordinates of the mouse pointer"
-msgstr ""
+msgstr "Plass for visning av musepekerkoordinater"
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:287
 msgid "Place of the string:"
-msgstr ""
+msgstr "Plass for visning:"
 
 #~ msgid "Equator Line"
 #~ msgstr "Ekvatorlinje"
