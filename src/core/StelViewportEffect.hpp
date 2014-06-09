@@ -22,13 +22,12 @@
 
 #include "VecMath.hpp"
 #include "StelProjector.hpp"
-#include <QOpenGLFunctions>
 
 class QOpenGLFramebufferObject;
 
 //! @class StelViewportEffect
 //! Allow to apply visual effects on the whole Stellarium viewport.
-class StelViewportEffect: protected QOpenGLFunctions
+class StelViewportEffect
 {
 public:
 	StelViewportEffect() {;}
