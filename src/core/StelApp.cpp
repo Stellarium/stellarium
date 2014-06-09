@@ -213,7 +213,6 @@ StelApp::StelApp(QObject* parent)
 	, initialized(false)
 	, saveProjW(-1)
 	, saveProjH(-1)
-	, drawState(0)
 {
 	// Stat variables
 	nbDownloadedFiles=0;
@@ -546,38 +545,19 @@ void StelApp::update(double deltaTime)
 	stelObjectMgr->update(deltaTime);
 }
 
-//! Iterate through the drawing sequence.
-bool StelApp::drawPartial()
-{
-	if (drawState == 0)
-	{
-		if (!initialized)
-			return false;
-		core->preDraw();
-		drawState = 1;
-		return true;
-	}
-
-	const QList<StelModule*> modules = moduleMgr->getCallOrders(StelModule::ActionDraw);
-	int index = drawState - 1;
-	if (index < modules.size())
-	{
-		if (modules[index]->drawPartial(core))
-			return true;
-		drawState++;
-		return true;
-	}
-	core->postDraw();
-	drawState = 0;
-	return false;
-}
-
 //! Main drawing function called at each frame
 void StelApp::draw()
 {
-	Q_ASSERT(drawState == 0);
-	while (drawPartial()) {}
-	Q_ASSERT(drawState == 0);
+	if (!initialized)
+		return;
+	core->preDraw();
+
+	const QList<StelModule*> modules = moduleMgr->getCallOrders(StelModule::ActionDraw);
+	foreach(StelModule* module, modules)
+	{
+		module->draw(core);
+	}
+	core->postDraw();
 }
 
 /*************************************************************************
