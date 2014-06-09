@@ -167,6 +167,18 @@ bool MeteorStream::update(double deltaTime)
 	return m_alive;
 }
 
+void MeteorStream::insertVertex(const StelCore* core, QVector<Vec3d> &vertexArray, Vec3d vertex) {
+	// convert to equ
+	vertex.transfo4d(m_viewMatrix);
+	// convert to local and correct for earth radius
+	//[since equ and local coordinates in stellarium use same 0 point!]
+	vertex = core->j2000ToAltAz(vertex);
+	vertex[2] -= EARTH_RADIUS;
+	// 1216 is to scale down under 1 for desktop version
+	vertex/=1216;
+
+	vertexArray.push_back(vertex);
+}
 
 // returns true if visible
 // Assumes that we are in local frame
@@ -177,44 +189,25 @@ void MeteorStream::draw(const StelCore* core, StelPainter& sPainter)
 		return;
 	}
 
-	Vec3d spos = m_position;
-	Vec3d epos = m_posTrain;
-
-	// convert to equ
-	spos.transfo4d(m_viewMatrix);
-	epos.transfo4d(m_viewMatrix);
-
-	// convert to local and correct for earth radius
-	//[since equ and local coordinates in stellarium use same 0 point!]
-	spos = core->j2000ToAltAz(spos);
-	epos = core->j2000ToAltAz(epos);
-	spos[2] -= EARTH_RADIUS;
-	epos[2] -= EARTH_RADIUS;
-	// 1216 is to scale down under 1 for desktop version
-	spos/=1216;
-	epos/=1216;
-
 	QVector<Vec4f> colorArray;
 	QVector<Vec3d> vertexArray;
+
 	// last point - dark
+	insertVertex(core, vertexArray, m_posTrain);
 	colorArray.push_back(Vec4f(0,0,0,0));
-	vertexArray.push_back(epos);
+
 	// compute intermediate points to curve along projection distortions
 	int segments = 10;
 	for (int i=1; i<segments; i++) {
 		Vec3d posi = m_posTrain;
 		posi[2] = m_posTrain[2] + i*(m_position[2] - m_posTrain[2])/segments;
-		posi.transfo4d(m_viewMatrix);
-		posi = core->j2000ToAltAz(posi);
-		posi[2] -= EARTH_RADIUS;
-		posi/=1216;
-
+		insertVertex(core, vertexArray, posi);
 		colorArray.push_back(Vec4f(1,1,1,i*m_mag/segments));
-		vertexArray.push_back(posi);
 	}
+
 	// first point - light
+	insertVertex(core, vertexArray, m_position);
 	colorArray.push_back(Vec4f(1,1,1,m_mag));
-	vertexArray.push_back(spos);
 
 	sPainter.setColorPointer(4, GL_FLOAT, colorArray.constData());
 	sPainter.setVertexPointer(3, GL_DOUBLE, vertexArray.constData());
