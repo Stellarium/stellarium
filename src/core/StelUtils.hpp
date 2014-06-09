@@ -27,6 +27,7 @@
 #include <QVariantMap>
 #include <QDateTime>
 #include <QString>
+#include <QOpenGLFunctions>
 
 // astronomical unit (km)
 #define AU 149597870.691
@@ -602,6 +603,7 @@ namespace StelUtils
 	//! @param minAngle start angle inside the half-circle. maxAngle=minAngle+segments*phi
 	float* ComputeCosSinRhoZone(const float dRho, const int segments, const float minAngle);
 	
+	const char* getGLErrorText(int code);
 	int checkGLErrors(const char *file, int line);
 }
 

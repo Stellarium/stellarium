@@ -67,6 +67,8 @@ public:
 	virtual void handleMouseWheel(class QWheelEvent* event);
 	//! Handle mouse click events.
 	virtual void handleMouseClicks(class QMouseEvent* event);
+	//! Handle pinch gesture.
+	virtual bool handlePinch(qreal scale, bool started);
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods specific to StelMovementMgr

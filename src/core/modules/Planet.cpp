@@ -930,7 +930,8 @@ void Planet::PlanetShaderVars::initLocations(QOpenGLShaderProgram* p)
 	GL(unprojectedVertex = p->attributeLocation("unprojectedVertex"));
 	GL(vertex = p->attributeLocation("vertex"));
 	GL(texture = p->uniformLocation("tex"));
-	GL(lightPos = p->uniformLocation("lightPos"));
+	GL(lightDirection = p->uniformLocation("lightDirection"));
+	GL(eyeDirection = p->uniformLocation("eyeDirection"));
 	GL(diffuseLight = p->uniformLocation("diffuseLight"));
 	GL(ambientLight = p->uniformLocation("ambientLight"));
 	GL(shadowCount = p->uniformLocation("shadowCount"));
@@ -947,9 +948,10 @@ void Planet::initShader()
 		"attribute highp vec3 unprojectedVertex;\n"
 		"attribute mediump vec2 texCoord;\n"
 		"uniform highp mat4 projectionMatrix;\n"
-		"uniform highp vec3 lightPos;\n"
+		"uniform highp vec3 lightDirection;\n"
+		"uniform highp vec3 eyeDirection;\n"
 		"varying mediump vec2 texc;\n"
-		"varying mediump float lambert_;\n"
+		"varying mediump float lum_;\n"
 		"varying highp vec3 P;\n"
 		"\n"
 		"void main()\n"
@@ -957,10 +959,28 @@ void Planet::initShader()
 		"    gl_Position = projectionMatrix * vec4(vertex, 1.);\n"
 		"    texc = texCoord;\n"
 		"    vec3 normal = normalize(unprojectedVertex);\n"
-		"    float c = lightPos.x * normal.x +\n"
-		"              lightPos.y * normal.y +\n"
-		"              lightPos.z * normal.z;\n"
-		"    lambert_ = clamp(c, 0.0, 1.0);\n"
+		"#ifdef IS_MOON\n"
+		"    // Use an Oren-Nayar model for rough surfaces\n"
+		"    // Ref: http://content.gpwiki.org/index.php/D3DBook:(Lighting)_Oren-Nayar\n"
+		"    float cosAngleLightNormal = dot(normal, lightDirection);\n"
+		"    float cosAngleEyeNormal = dot(normal, eyeDirection);\n"
+		"    float angleLightNormal = acos(cosAngleLightNormal);\n"
+		"    float angleEyeNormal = acos(cosAngleEyeNormal);\n"
+		"    float alpha = max(angleEyeNormal, angleLightNormal);\n"
+		"    float beta = min(angleEyeNormal, angleLightNormal);\n"
+		"    float gamma = dot(eyeDirection - normal * cosAngleEyeNormal, lightDirection - normal * cosAngleLightNormal);\n"
+		"    float roughness = 1.0;\n"
+		"    float roughnessSquared = roughness * roughness;\n"
+		"    float A = 1.0 - 0.5 * (roughnessSquared / (roughnessSquared + 0.57));\n"
+		"    float B = 0.45 * (roughnessSquared / (roughnessSquared + 0.09));\n"
+		"    float C = sin(alpha) * tan(beta);\n"
+		"    lum_ = max(0.0, cosAngleLightNormal) * (A + B * max(0.0, gamma) * C);\n"
+		"#else\n"
+		"    float c = lightDirection.x * normal.x +\n"
+		"              lightDirection.y * normal.y +\n"
+		"              lightDirection.z * normal.z;\n"
+		"    lum_ = clamp(c, 0.0, 1.0);\n"
+		"#endif\n"
 		"\n"
 		"    P = unprojectedVertex;\n"
 		"}\n"
@@ -968,7 +988,7 @@ void Planet::initShader()
 	
 	const char *fsrc =
 		"varying mediump vec2 texc;\n"
-		"varying mediump float lambert_;\n"
+		"varying mediump float lum_;\n"
 		"uniform sampler2D tex;\n"
 		"uniform mediump vec3 ambientLight;\n"
 		"uniform mediump vec3 diffuseLight;\n"
@@ -993,12 +1013,12 @@ void Planet::initShader()
 		"void main()\n"
 		"{\n"
 		"    float final_illumination = 1.0;\n"
-		"    float lambert = lambert_;\n"
+		"    float lum = lum_;\n"
 		"#ifdef RINGS_SUPPORT\n"
 		"    if(isRing)"
-		"        lambert=1.0;\n"
+		"        lum=1.0;\n"
 		"#endif\n"
-		"    if(lambert > 0.0)\n"
+		"    if(lum > 0.0)\n"
 		"    {\n"
 		"        vec3 sunPosition = sunInfo.xyz;\n"
 		"#ifdef RINGS_SUPPORT\n"
@@ -1070,9 +1090,9 @@ void Planet::initShader()
 		"        }\n"
 		"    }\n"
 		"\n"
-		"    vec4 litColor = vec4(lambert * final_illumination * diffuseLight + ambientLight, 1.0);\n"
+		"    vec4 litColor = vec4(lum * final_illumination * diffuseLight + ambientLight, 1.0);\n"
 		"#ifdef IS_MOON\n"
-		"    if(final_illumination < 1.0)\n"
+		"    if(final_illumination < 0.99)\n"
 		"    {\n"
 		"        vec4 shadowColor = texture2D(earthShadow, vec2(final_illumination, 0.5));\n"
 		"        gl_FragColor = mix(texture2D(tex, texc) * litColor, shadowColor, shadowColor.a);\n"
@@ -1123,13 +1143,19 @@ void Planet::initShader()
 	
 	// Moon shader program
 	arr = "#define IS_MOON\n\n";
+	arr+=vsrc;
+	QOpenGLShader moonVertexShader(QOpenGLShader::Vertex);
+	moonVertexShader.compileSourceCode(arr.constData());
+	if (!moonVertexShader.log().isEmpty()) { qWarning() << "Planet: Warnings while compiling moonVertexShader: " << moonVertexShader.log(); }
+	
+	arr = "#define IS_MOON\n\n";
 	arr+=fsrc;
 	QOpenGLShader moonFragmentShader(QOpenGLShader::Fragment);
 	moonFragmentShader.compileSourceCode(arr.constData());
 	if (!moonFragmentShader.log().isEmpty()) { qWarning() << "Planet: Warnings while compiling moonFragmentShader: " << moonFragmentShader.log(); }
 	
 	moonShaderProgram = new QOpenGLShaderProgram(QOpenGLContext::currentContext());
-	moonShaderProgram->addShader(&vshader);
+	moonShaderProgram->addShader(&moonVertexShader);
 	moonShaderProgram->addShader(&moonFragmentShader);
 	GL(StelPainter::linkProg(moonShaderProgram, "ringPlanetShaderProgram"));
 	GL(moonShaderProgram->bind());
@@ -1417,16 +1443,18 @@ void Planet::drawSphere(StelPainter* painter, float screenSz, bool drawOnlyRing)
 	
 	const StelProjectorP& projector = painter->getProjector();
 	
-	Vec3f lightPos3;
-	lightPos3.set(light.position[0], light.position[1], light.position[2]);
-	Vec3f tmpv(0.f);
-	projector->getModelViewTransform()->forward(tmpv);
-	projector->getModelViewTransform()->getApproximateLinearTransfo().transpose().multiplyWithoutTranslation(Vec3d(lightPos3[0], lightPos3[1], lightPos3[2]));
+	Vec3f lightPos3(light.position[0], light.position[1], light.position[2]);
 	projector->getModelViewTransform()->backward(lightPos3);
 	lightPos3.normalize();
 	
+	Vec3d eyePos = StelApp::getInstance().getCore()->getObserverHeliocentricEclipticPos();
+	StelApp::getInstance().getCore()->getHeliocentricEclipticModelViewTransform()->forward(eyePos);
+	projector->getModelViewTransform()->backward(eyePos);
+	eyePos.normalize();
+	
 	GL(shader->setUniformValue(shaderVars->projectionMatrix, qMat));
-	GL(shader->setUniformValue(shaderVars->lightPos, lightPos3[0], lightPos3[1], lightPos3[2]));
+	GL(shader->setUniformValue(shaderVars->lightDirection, lightPos3[0], lightPos3[1], lightPos3[2]));
+	GL(shader->setUniformValue(shaderVars->eyeDirection, eyePos[0], eyePos[1], eyePos[2]));
 	GL(shader->setUniformValue(shaderVars->diffuseLight, light.diffuse[0], light.diffuse[1], light.diffuse[2]));
 	GL(shader->setUniformValue(shaderVars->ambientLight, light.ambient[0], light.ambient[1], light.ambient[2]));
 	GL(shader->setUniformValue(shaderVars->texture, 0));
@@ -1447,8 +1475,11 @@ void Planet::drawSphere(StelPainter* painter, float screenSz, bool drawOnlyRing)
 
 	if (this==ssm->getMoon())
 	{
-		GL(texEarthShadow->bind(3));
-		GL(moonShaderProgram->setUniformValue(moonShaderVars.earthShadow, 3));
+		if (!shadowCandidates.isEmpty())
+		{
+			GL(texEarthShadow->bind(3));
+			GL(moonShaderProgram->setUniformValue(moonShaderVars.earthShadow, 3));
+		}
 	}
 
 	GL(shader->setAttributeArray(shaderVars->vertex, (const GLfloat*)projectedVertexArr.constData(), 3));
