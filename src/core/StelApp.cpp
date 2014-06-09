@@ -64,6 +64,7 @@
 #include <QNetworkDiskCache>
 #include <QNetworkProxy>
 #include <QNetworkReply>
+#include <QOpenGLContext>
 #include <QString>
 #include <QStringList>
 #include <QSysInfo>

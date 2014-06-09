@@ -29,7 +29,6 @@
 
 #include <QDebug>
 #include <QList>
-#include <QOpenGLFunctions>
 #include <QTextStream>
 #include <QVariant>
 #include <QVariantMap>

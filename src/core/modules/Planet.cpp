@@ -40,6 +40,7 @@
 #include <QString>
 #include <QDebug>
 #include <QVarLengthArray>
+#include <QOpenGLContext>
 #include <QOpenGLShader>
 
 Vec3f Planet::labelColor = Vec3f(0.4,0.4,0.8);

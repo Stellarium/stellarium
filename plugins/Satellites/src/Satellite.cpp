@@ -78,7 +78,6 @@ Satellite::Satellite(const QString& identifier, const QVariantMap& map)
 		return;
 	if (!map.contains("name") || !map.contains("tle1") || !map.contains("tle2"))
 		return;
-	QOpenGLFunctions::initializeOpenGLFunctions();
 
 	font.setPixelSize(16);
 
