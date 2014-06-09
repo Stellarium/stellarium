@@ -17,4 +17,31 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
+#include <QDebug>
+#include <QSqlError>
+#include <QSqlQuery>
+
 #include "StelAddOn.hpp"
+#include "StelFileMgr.hpp"
+
+StelAddOn::StelAddOn()
+	: m_db(QSqlDatabase::addDatabase("QSQLITE"))
+{
+	StelFileMgr::makeSureDirExistsAndIsWritable(StelFileMgr::getUserDir()+"/addon");
+	StelFileMgr::Flags flags = (StelFileMgr::Flags)(StelFileMgr::Directory|StelFileMgr::Writable);
+	QString dbPath = StelFileMgr::findFile("addon/", flags);
+	m_db.setHostName("localhost");
+	m_db.setDatabaseName(dbPath.append("addon.sqlite"));
+	bool ok = m_db.open();
+	qDebug() << "Add-On Database status:" << m_db.databaseName() << "=" << ok;
+	if (m_db.lastError().isValid())
+	{
+	    qDebug() << "Error loading Add-On database:" << m_db.lastError();
+	    exit(-1);
+	}
+
+	if (!createAddonTable())
+	{
+		exit(-1);
+	}
+}

@@ -20,12 +20,15 @@
 #ifndef _STELADDON_HPP_
 #define _STELADDON_HPP_
 
+#include <QSqlDatabase>
+
 class StelAddOn
 {
 public:
+	StelAddOn();
 
 private:
-
+	QSqlDatabase m_db;
 };
 
 #endif // _STELADDON_HPP_

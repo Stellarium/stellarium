@@ -18,6 +18,7 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
+#include "StelAddOn.hpp"
 #include "StelMainView.hpp"
 #include "StelTranslator.hpp"
 #include "StelLogger.hpp"
@@ -294,6 +295,9 @@ int main(int argc, char **argv)
 
 	// Override config file values from CLI.
 	CLIProcessor::parseCLIArgsPostConfig(argList, confSettings);
+
+	// Init Add-On Manager
+	new StelAddOn();
 
 	// Support hi-dpi pixmaps
 	app.setAttribute(Qt::AA_UseHighDpiPixmaps);
