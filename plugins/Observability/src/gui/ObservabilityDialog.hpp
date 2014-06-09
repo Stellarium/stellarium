@@ -27,6 +27,8 @@
 
 class Ui_ObservabilityDialog;
 
+//! Configuration window of the %Observability Analysis plug-in.
+//! @see Observability
 class ObservabilityDialog : public StelDialog
 {
 	Q_OBJECT
@@ -43,28 +45,18 @@ public slots:
 	void retranslate();
 
 private slots:
-	void setTodayFlag(int);
-	void setAcroCosFlag(int);
-	void setOppositionFlag(int);
-	void setGoodDatesFlag(int);
-	void setFullMoonFlag(int);
-//	void setCrescentMoonFlag(int);
-//	void setSuperMoonFlag(int);
-
-	void restoreDefaults(void);
-	void saveSettings(void);
-	void setRed(int);
-	void setGreen(int);
-	void setBlue(int);
-	void setSize(int);
-	void setAltitude(int);
-	void setHorizon(int);
+	//! Read the color values from the sliders and set the font color.
+	void setColor();
+	
+	void updateAltitudeLabel(int altitude);
+	void updateHorizonLabel(int horizon);
+	//! Updates the displayed values of controls from the plug-in.
+	//! Called when the configuration is changed.
+	void updateControls();
 
 private:
-        Ui_ObservabilityDialog* ui;
+	Ui_ObservabilityDialog* ui;
 	void setAboutHtml(void);
-	void updateGuiFromSettings(void);
-
 };
 
 #endif // _OBSERVABILITYDIALOG_HPP_

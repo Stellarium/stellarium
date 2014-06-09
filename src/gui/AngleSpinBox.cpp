@@ -42,19 +42,19 @@ const QString AngleSpinBox::positivePrefix(PrefixType prefix)
 {
 	switch(prefix)
 	{
-	case NormalPlus:
-		return("+");
-		break;
-	case Longitude:
-		return(q_("E "));
-		break;
-	case Latitude:
-		return(q_("N "));
-		break;
-	case Normal:
-	default:
-		return("");
-		break;
+		case NormalPlus:
+			return("+");
+			break;
+		case Longitude:
+			return(q_("E "));
+			break;
+		case Latitude:
+			return(q_("N "));
+			break;
+		case Normal:
+		default:
+			return("");
+			break;
 	}
 }
 
@@ -62,19 +62,19 @@ const QString AngleSpinBox::negativePrefix(PrefixType prefix)
 {
 	switch(prefix)
 	{
-	case NormalPlus:
-		return(QLocale().negativeSign());
-		break;
-	case Longitude:
-		return(q_("W "));
-		break;
-	case Latitude:
-		return(q_("S "));
-		break;
-	case Normal:
-	default:
-		return(QLocale().negativeSign());
-		break;
+		case NormalPlus:
+			return(QLocale().negativeSign());
+			break;
+		case Longitude:
+			return(q_("W "));
+			break;
+		case Latitude:
+			return(q_("S "));
+			break;
+		case Normal:
+		default:
+			return(QLocale().negativeSign());
+			break;
 	}
 }
 

@@ -27,6 +27,7 @@
 #include "StelModuleMgr.hpp"
 
 EquationOfTimeWindow::EquationOfTimeWindow()
+	: eq(NULL)
 {
 	ui = new Ui_equationOfTimeWindowForm();
 }

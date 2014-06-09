@@ -99,7 +99,12 @@ StelPluginInfo TextUserInterfaceStelPluginInterface::getPluginInfo() const
  Constructor
 *************************************************************************/
 TextUserInterface::TextUserInterface()
-	: dummyDialog(this), tuiActive(false), currentNode(NULL)
+	: dummyDialog(this)
+	, tuiActive(false)
+	, tuiDateTime(false)
+	, tuiObjInfo(false)
+	, tuiGravityUi(false)
+	, currentNode(NULL)
 {
 	setObjectName("TextUserInterface");	
 }
@@ -518,12 +523,15 @@ void TextUserInterface::draw(StelCore* core)
 	bool fovMaskDisk = false;
 
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-	if (gui->getVisible())
+	if (gui!=NULL)
 	{
-		QGraphicsItem* bottomBar = dynamic_cast<QGraphicsItem*>(gui->getButtonBar());
-		LeftStelBar* sideBar = gui->getWindowsButtonBar();			
-		x = (sideBar) ? sideBar->boundingRectNoHelpLabel().right() : 50;
-		y = (bottomBar) ? bottomBar->boundingRect().height() : 50;
+		if (gui->getVisible())
+		{
+			QGraphicsItem* bottomBar = dynamic_cast<QGraphicsItem*>(gui->getButtonBar());
+			LeftStelBar* sideBar = gui->getWindowsButtonBar();
+			x = (sideBar) ? sideBar->boundingRectNoHelpLabel().right() : 50;
+			y = (bottomBar) ? bottomBar->boundingRect().height() : 50;
+		}
 	}
 
 	// Alternate x,y for Disk viewport

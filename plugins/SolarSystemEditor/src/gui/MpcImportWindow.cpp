@@ -49,11 +49,13 @@
 #include <QUrlQuery>
 #include <QDir>
 
-MpcImportWindow::MpcImportWindow() :
-    downloadReply(0),
-    queryReply(0),
-    downloadProgressBar(0),
-    queryProgressBar(0)
+MpcImportWindow::MpcImportWindow()
+	: importType(ImportType())
+	, downloadReply(0)
+	, queryReply(0)
+	, downloadProgressBar(0)
+	, queryProgressBar(0)
+	, countdown(0)
 {
 	ui = new Ui_mpcImportWindow();
 	ssoManager = GETSTELMODULE(SolarSystemEditor);
@@ -440,11 +442,11 @@ SsoElements MpcImportWindow::readElementsFromString (QString elements)
 
 	switch (importType)
 	{
-	case MpcComets:
-		return ssoManager->readMpcOneLineCometElements(elements);
-	case MpcMinorPlanets:
-	default:
-		return ssoManager->readMpcOneLineMinorPlanetElements(elements);
+		case MpcComets:
+			return ssoManager->readMpcOneLineCometElements(elements);
+		case MpcMinorPlanets:
+		default:
+			return ssoManager->readMpcOneLineMinorPlanetElements(elements);
 	}
 }
 
@@ -454,11 +456,11 @@ QList<SsoElements> MpcImportWindow::readElementsFromFile(ImportType type, QStrin
 
 	switch (type)
 	{
-	case MpcComets:
-		return ssoManager->readMpcOneLineCometElementsFromFile(filePath);
-	case MpcMinorPlanets:
-	default:
-		return ssoManager->readMpcOneLineMinorPlanetElementsFromFile(filePath);
+		case MpcComets:
+			return ssoManager->readMpcOneLineCometElementsFromFile(filePath);
+		case MpcMinorPlanets:
+		default:
+			return ssoManager->readMpcOneLineMinorPlanetElementsFromFile(filePath);
 	}
 }
 

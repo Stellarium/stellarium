@@ -107,33 +107,27 @@ QString getOperatingSystemInfo()
 	#elif defined Q_OS_MAC
 	switch(QSysInfo::MacintoshVersion)
 	{
-		case QSysInfo::MV_10_3:
-			OS = "Mac OS X 10.3";
+		case QSysInfo::MV_PANTHER:
+			OS = "Mac OS X 10.3 series";
 			break;
-		case QSysInfo::MV_10_4:
-			OS = "Mac OS X 10.4";
+		case QSysInfo::MV_TIGER:
+			OS = "Mac OS X 10.4 series";
 			break;
-		case QSysInfo::MV_10_5:
-			OS = "Mac OS X 10.5";
+		case QSysInfo::MV_LEOPARD:
+			OS = "Mac OS X 10.5 series";
 			break;
-		case QSysInfo::MV_10_6:
-			OS = "Mac OS X 10.6";
+		case QSysInfo::MV_SNOWLEOPARD:
+			OS = "Mac OS X 10.6 series";
 			break;
-		#ifdef MV_10_7
-		case QSysInfo::MV_10_7:
-			OS = "Mac OS X 10.7";
+		case QSysInfo::MV_LION:
+			OS = "Mac OS X 10.7 series";
 			break;
-		#endif
-		#ifdef MV_10_8
-		case QSysInfo::MV_10_8:
-			OS = "Mac OS X 10.8";
+		case QSysInfo::MV_MOUNTAINLION:
+			OS = "Mac OS X 10.8 series";
 			break;
-		#endif
-		#ifdef MV_10_9
-		case QSysInfo::MV_10_9:
-			OS = "Mac OS X 10.9";
+		case QSysInfo::MV_MAVERICKS:
+			OS = "Mac OS X 10.9 series";
 			break;
-		#endif
 		default:
 			OS = "Unsupported Mac version";
 			break;
@@ -523,11 +517,11 @@ bool isPowerOfTwo(const int value)
 	return (value & -value) == value;
 }
 
-// Return the first power of two bigger or equal to the given value
-int getBiggerEqualPowerOfTwo(int value)
+// Return the first power of two bigger than the given value
+int getBiggerPowerOfTwo(int value)
 {
 	int p=1;
-	while (p<=value)
+	while (p<value)
 		p<<=1;
 	return p;
 }
@@ -1784,6 +1778,136 @@ double getDeltaTStandardError(const double jDay)
 		sigma = 0.8 * cDiff1820 * cDiff1820;
 	}
 	return sigma;
+}
+
+
+// Arrays to keep cos/sin of angles and multiples of angles. rho and theta are delta angles, and these arrays
+#define MAX_STACKS 4096
+static float cos_sin_rho[2*(MAX_STACKS+1)];
+#define MAX_SLICES 4096
+static float cos_sin_theta[2*(MAX_SLICES+1)];
+
+//! Compute cosines and sines around a circle which is split in "segments" parts.
+//! Values are stored in the global static array cos_sin_theta.
+//! Used for the sin/cos values along a latitude circle, equator, etc. for a spherical mesh.
+//! @param slices number of partitions (elsewhere called "segments") for the circle
+float* ComputeCosSinTheta(const int slices)
+{
+	Q_ASSERT(slices<=MAX_SLICES);
+	
+	// Difference angle between the stops. Always use 2*M_PI/slices!
+	const float dTheta = 2.f * M_PI / slices;
+	float *cos_sin = cos_sin_theta;
+	float *cos_sin_rev = cos_sin + 2*(slices+1);
+	const float c = std::cos(dTheta);
+	const float s = std::sin(dTheta);
+	*cos_sin++ = 1.f;
+	*cos_sin++ = 0.f;
+	*--cos_sin_rev = -cos_sin[-1];
+	*--cos_sin_rev =  cos_sin[-2];
+	*cos_sin++ = c;
+	*cos_sin++ = s;
+	*--cos_sin_rev = -cos_sin[-1];
+	*--cos_sin_rev =  cos_sin[-2];
+	while (cos_sin < cos_sin_rev)   // compares array address indices only!
+	{
+		// avoid expensive trig functions by use of the addition theorem.
+		cos_sin[0] = cos_sin[-2]*c - cos_sin[-1]*s;
+		cos_sin[1] = cos_sin[-2]*s + cos_sin[-1]*c;
+		cos_sin += 2;
+		*--cos_sin_rev = -cos_sin[-1];
+		*--cos_sin_rev =  cos_sin[-2];
+	}
+	return cos_sin_theta;
+}
+
+//! Compute cosines and sines around a half-circle which is split in "segments" parts.
+//! Values are stored in the global static array cos_sin_rho.
+//! Used for the sin/cos values along a meridian for a spherical mesh.
+//! @param segments number of partitions (elsewhere called "stacks") for the half-circle
+float* ComputeCosSinRho(const int segments)
+{
+	Q_ASSERT(segments<=MAX_STACKS);
+	
+	// Difference angle between the stops. Always use M_PI/segments!
+	const float dRho = M_PI / segments;
+	float *cos_sin = cos_sin_rho;
+	float *cos_sin_rev = cos_sin + 2*(segments+1);
+	const float c = std::cos(dRho);
+	const float s = std::sin(dRho);
+	*cos_sin++ = 1.f;
+	*cos_sin++ = 0.f;
+	*--cos_sin_rev =  cos_sin[-1];
+	*--cos_sin_rev = -cos_sin[-2];
+	*cos_sin++ = c;
+	*cos_sin++ = s;
+	*--cos_sin_rev =  cos_sin[-1];
+	*--cos_sin_rev = -cos_sin[-2];
+	while (cos_sin < cos_sin_rev)    // compares array address indices only!
+	{
+		// avoid expensive trig functions by use of the addition theorem.
+		cos_sin[0] = cos_sin[-2]*c - cos_sin[-1]*s;
+		cos_sin[1] = cos_sin[-2]*s + cos_sin[-1]*c;
+		cos_sin += 2;
+		*--cos_sin_rev =  cos_sin[-1];
+		*--cos_sin_rev = -cos_sin[-2];
+	}
+	
+	return cos_sin_rho;
+}
+
+//! Compute cosines and sines around part of a circle (from top to bottom) which is split in "segments" parts.
+//! Values are stored in the global static array cos_sin_rho.
+//! Used for the sin/cos values along a meridian.
+//! GZ: allow leaving away pole caps. The array now contains values for the region minAngle+segments*phi
+//! @param dRho a difference angle between the stops
+//! @param segments number of segments
+//! @param minAngle start angle inside the half-circle. maxAngle=minAngle+segments*phi
+float *ComputeCosSinRhoZone(const float dRho, const int segments, const float minAngle)
+{
+	float *cos_sin = cos_sin_rho;
+	const float c = cos(dRho);
+	const float s = sin(dRho);
+	*cos_sin++ = cos(minAngle);
+	*cos_sin++ = sin(minAngle);
+	for (int i=0; i<segments; ++i) // we cannot mirror this, it may be unequal.
+	{   // efficient computation, avoid expensive trig functions by use of the addition theorem.
+		cos_sin[0] = cos_sin[-2]*c - cos_sin[-1]*s;
+		cos_sin[1] = cos_sin[-2]*s + cos_sin[-1]*c;
+		cos_sin += 2;
+	}
+	return cos_sin_rho;
+}
+
+const char* getGLErrorText(int code) {
+	switch (code) {
+		case GL_INVALID_ENUM:
+			return "GL_INVALID_ENUM";
+		case GL_INVALID_FRAMEBUFFER_OPERATION:
+			return "GL_INVALID_FRAMEBUFFER_OPERATION";
+		case GL_INVALID_VALUE:
+			return "GL_INVALID_VALUE";
+		case GL_INVALID_OPERATION:
+			return "GL_INVALID_OPERATION";
+		case GL_OUT_OF_MEMORY:
+			return "GL_OUT_OF_MEMORY";
+		default:
+			return "undefined error";
+	}
+}
+
+int checkGLErrors(const char *file, int line)
+{
+	int errors = 0;
+	while (true)
+	{
+		GLenum x = glGetError();
+		if (x == GL_NO_ERROR)
+			return errors;
+		printf("%s:%d: OpenGL error: %d (%s)\n",
+			file, line, x, getGLErrorText(x));
+		errors++;
+	}
 }
 
 } // end of the StelUtils namespace

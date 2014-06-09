@@ -167,14 +167,14 @@ double  angle
           double vec2[3]
         )
    {
-     double small, undefined, magv1, magv2, temp;
-     small     = 0.00000001;
+     double sv, undefined, magv1, magv2, temp;
+     sv     = 0.00000001;
      undefined = 999999.1;
 
      magv1 = mag(vec1);
      magv2 = mag(vec2);
 
-     if (magv1*magv2 > small*small)
+     if (magv1*magv2 > sv*sv)
        {
          temp= dot(vec1,vec2) / (magv1*magv2);
          if (fabs( temp ) > 1.0)
@@ -226,22 +226,22 @@ void newtonnu
        double& e0, double& m
      )
      {
-       double small, sine, cose;
+       double sv, sine, cose;
 
      // ---------------------  implementation   ---------------------
      e0= 999999.9;
      m = 999999.9;
-     small = 0.00000001;
+     sv = 0.00000001;
 
      // --------------------------- circular ------------------------
-     if ( fabs( ecc ) < small  )
+     if ( fabs( ecc ) < sv  )
        {
          m = nu;
          e0= nu;
        }
        else
          // ---------------------- elliptical -----------------------
-         if ( ecc < 1.0-small  )
+	 if ( ecc < 1.0-sv  )
            {
              sine= ( sqrt( 1.0 -ecc*ecc ) * sin(nu) ) / ( 1.0 +ecc*cos(nu) );
              cose= ( ecc + cos(nu) ) / ( 1.0  + ecc*cos(nu) );
@@ -250,7 +250,7 @@ void newtonnu
            }
            else
              // -------------------- hyperbolic  --------------------
-             if ( ecc > 1.0 + small  )
+	     if ( ecc > 1.0 + sv  )
                {
                  if ((ecc > 1.0 ) && (fabs(nu)+0.00001 < M_PI-acos(1.0 /ecc)))
                    {
@@ -341,7 +341,7 @@ void rv2coe
        double& nu, double& m, double& arglat, double& truelon, double& lonper
      )
      {
-       double undefined, small, hbar[3], nbar[3], magr, magv, magn, ebar[3], sme,
+       double undefined, sv, hbar[3], nbar[3], magr, magv, magn, ebar[3], sme,
               rdotv, infinite, temp, c1, hk, twopi, magh, halfpi, e;
 
        int i;
@@ -349,7 +349,7 @@ void rv2coe
 
      twopi  = 2.0 * M_PI;
      halfpi = 0.5 * M_PI;
-     small  = 0.00000001;
+     sv  = 0.00000001;
      undefined = 999999.1;
      infinite  = 999999.9;
 
@@ -360,7 +360,7 @@ void rv2coe
      // ------------------  find h n and e vectors   ----------------
      cross( r,v, hbar );
      magh = mag( hbar );
-     if ( magh > small )
+     if ( magh > sv )
        {
          nbar[0]= -hbar[1];
          nbar[1]=  hbar[0];
@@ -374,7 +374,7 @@ void rv2coe
 
          // ------------  find a e and semi-latus rectum   ----------
          sme= ( magv*magv*0.5  ) - ( mu /magr );
-         if ( fabs( sme ) > small )
+	 if ( fabs( sme ) > sv )
              a= -mu  / (2.0 *sme);
            else
              a= infinite;
@@ -387,10 +387,10 @@ void rv2coe
          // --------  determine type of orbit for later use  --------
          // ------ elliptical, parabolic, hyperbolic inclined -------
          strcpy(typeorbit,"ei");
-         if ( ecc < small )
+	 if ( ecc < sv )
            {
              // ----------------  circular equatorial ---------------
-             if  ((incl<small) | (fabs(incl-M_PI)<small))
+	     if  ((incl<sv) | (fabs(incl-M_PI)<sv))
                  strcpy(typeorbit,"ce");
                else
                  // --------------  circular inclined ---------------
@@ -399,12 +399,12 @@ void rv2coe
            else
            {
              // - elliptical, parabolic, hyperbolic equatorial --
-             if  ((incl<small) | (fabs(incl-M_PI)<small))
+	     if  ((incl<sv) | (fabs(incl-M_PI)<sv))
                  strcpy(typeorbit,"ee");
            }
 
          // ----------  find longitude of ascending node ------------
-         if ( magn > small )
+	 if ( magn > sv )
            {
              temp= nbar[0] / magn;
              if ( fabs(temp) > 1.0  )
@@ -448,7 +448,7 @@ void rv2coe
              arglat= undefined;
 
          // -- find longitude of perigee - elliptical equatorial ----
-         if  (( ecc>small ) && (strcmp(typeorbit,"ee") == 0))
+	 if  (( ecc>sv ) && (strcmp(typeorbit,"ee") == 0))
            {
              temp= ebar[0]/ecc;
              if ( fabs(temp) > 1.0  )
@@ -463,7 +463,7 @@ void rv2coe
              lonper= undefined;
 
          // -------- find true longitude - circular equatorial ------
-         if  (( magr>small ) && ( strcmp(typeorbit,"ce") == 0 ))
+	 if  (( magr>sv ) && ( strcmp(typeorbit,"ce") == 0 ))
            {
              temp= r[0]/magr;
              if ( fabs(temp) > 1.0  )

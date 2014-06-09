@@ -65,7 +65,14 @@
 #include <QComboBox>
 #include <QDir>
 
-ConfigurationDialog::ConfigurationDialog(StelGui* agui, QObject* parent) : StelDialog(parent), starCatalogDownloadReply(NULL), currentDownloadFile(NULL), progressBar(NULL), gui(agui)
+ConfigurationDialog::ConfigurationDialog(StelGui* agui, QObject* parent)
+	: StelDialog(parent)
+	, nextStarCatalogToDownloadIndex(0)
+	, starCatalogsCount(0)
+	, starCatalogDownloadReply(NULL)
+	, currentDownloadFile(NULL)
+	, progressBar(NULL)
+	, gui(agui)
 {
 	ui = new Ui_configurationDialogForm;
 	customDeltaTEquationDialog = NULL;
@@ -252,6 +259,10 @@ void ConfigurationDialog::createDialogContent()
 	ui->invertScreenShotColorsCheckBox->setChecked(StelMainView::getInstance().getFlagInvertScreenShotColors());
 	connect(ui->invertScreenShotColorsCheckBox, SIGNAL(toggled(bool)), &StelMainView::getInstance(), SLOT(setFlagInvertScreenShotColors(bool)));
 
+	LandscapeMgr *lmgr = GETSTELMODULE(LandscapeMgr);
+	ui->autoEnableAtmosphereCheckBox->setChecked(lmgr->getFlagAtmosphereAutoEnable());
+	connect(ui->autoEnableAtmosphereCheckBox, SIGNAL(toggled(bool)), lmgr, SLOT(setFlagAtmosphereAutoEnable(bool)));
+
 	// script tab controls
 	#ifndef DISABLE_SCRIPTING
 	StelScriptMgr& scriptMgr = StelApp::getInstance().getScriptMgr();
@@ -428,12 +439,7 @@ void ConfigurationDialog::cursorTimeOutChanged()
 void ConfigurationDialog::browseForScreenshotDir()
 {
 	QString oldScreenshorDir = StelFileMgr::getScreenshotDir();
-	#ifdef Q_OS_MAC
-		//work-around for Qt bug -  http://bugreports.qt.nokia.com/browse/QTBUG-16722
-		QString newScreenshotDir = QFileDialog::getExistingDirectory(NULL, q_("Select screenshot directory"), oldScreenshorDir, QFileDialog::DontUseNativeDialog);
-	#else
-		QString newScreenshotDir = QFileDialog::getExistingDirectory(NULL, q_("Select screenshot directory"), oldScreenshorDir, QFileDialog::ShowDirsOnly);
-	#endif
+	QString newScreenshotDir = QFileDialog::getExistingDirectory(NULL, q_("Select screenshot directory"), oldScreenshorDir, QFileDialog::ShowDirsOnly);
 
 	if (!newScreenshotDir.isEmpty()) {
 		// remove trailing slash
@@ -530,6 +536,7 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	conf->setValue("viewing/flag_constellation_isolate_selected", cmgr->getFlagIsolateSelected());
 	conf->setValue("viewing/flag_landscape_autoselection", lmgr->getFlagLandscapeAutoSelection());
 	conf->setValue("viewing/flag_light_pollution_database", lmgr->getFlagUseLightPollutionFromDatabase());
+	conf->setValue("viewing/flag_atmopshere_auto_enable", lmgr->getFlagAtmosphereAutoEnable());
 	conf->setValue("viewing/constellation_art_intensity", cmgr->getArtIntensity());
 	conf->setValue("viewing/flag_night", StelApp::getInstance().getVisionModeNight());
 	conf->setValue("astro/flag_star_name", smgr->getFlagLabels());

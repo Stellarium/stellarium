@@ -113,7 +113,11 @@ const QString InfoPanel::getSelectedText(void)
 	return toPlainText();
 }
 
-SkyGui::SkyGui(QGraphicsItem * parent): QGraphicsWidget(parent), stelGui(NULL)
+SkyGui::SkyGui(QGraphicsItem * parent)
+	: QGraphicsWidget(parent)
+	, btHorizAutoHide(NULL)
+	, btVertAutoHide(NULL)
+	, stelGui(NULL)
 {
 	setObjectName("StelSkyGui");
 
@@ -191,6 +195,7 @@ void SkyGui::init(StelGui* astelGui)
 	buttonBarPath->setZValue(-0.1);
 	updateBarsPos();
 	connect(&StelApp::getInstance(), SIGNAL(colorSchemeChanged(const QString&)), this, SLOT(setStelStyle(const QString&)));
+	connect(buttonBar, SIGNAL(sizeChanged()), this, SLOT(updateBarsPos()));
 }
 
 void SkyGui::resizeEvent(QGraphicsSceneResizeEvent* event)

@@ -37,7 +37,6 @@ class StelButton;
 class Planet;
 class QNetworkAccessManager;
 class QNetworkReply;
-class QPixmap;
 class QSettings;
 class QTimer;
 
@@ -524,9 +523,6 @@ private:
 	
 	//! @name Bottom toolbar button
 	//@{
-	QPixmap* pxmapGlow;
-	QPixmap* pxmapOnIcon;
-	QPixmap* pxmapOffIcon;
 	StelButton* toolbarButton;	
 	//@}
 	// FIXME: Possible bug with the Solar System recreated by the SSEditor.

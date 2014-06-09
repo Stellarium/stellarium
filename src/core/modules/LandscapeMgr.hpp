@@ -307,6 +307,11 @@ public slots:
 	//! Set flag for autoselect of landscapes for planets.
 	void setFlagLandscapeAutoSelection(bool enableAutoSelect);
 
+	//! Get flag for auto-enable of atmospheres for planets.
+	bool getFlagAtmosphereAutoEnable() const;
+	//! Set flag for auto-enable atmosphere for planets with atmospheres in location window
+	void setFlagAtmosphereAutoEnable(bool b);
+
 signals:
 	void atmosphereDisplayedChanged(const bool displayed);
 	void cardinalsPointsDisplayedChanged(const bool displayed);
@@ -385,6 +390,8 @@ private:
 	float defaultMinimalBrightness;
 	//! Indicate use of the minimal brightness value specified in the current landscape.ini, if present.
 	bool flagLandscapeSetsMinimalBrightness;
+	//! Indicate auto-enable atmosphere for planets with atmospheres in location window
+	bool flagAtmosphereAutoEnabling;
 
 	// The ID of the currently loaded landscape
 	QString currentLandscapeID;

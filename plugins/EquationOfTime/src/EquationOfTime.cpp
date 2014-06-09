@@ -61,10 +61,19 @@ StelPluginInfo EquationOfTimeStelPluginInterface::getPluginInfo() const
 }
 
 EquationOfTime::EquationOfTime()
-	: toolbarButton(NULL)
+	: flagShowSolutionEquationOfTime(false)
+	, flagUseInvertedValue(false)
+	, flagUseMsFormat(false)
+	, flagEnableAtStartup(false)
+	, flagShowEOTButton(false)
+	, fontSize(20)
+	, toolbarButton(NULL)
 {
 	setObjectName("EquationOfTime");
 	mainWindow = new EquationOfTimeWindow();
+	StelApp &app = StelApp::getInstance();
+	conf = app.getSettings();
+	gui = dynamic_cast<StelGui*>(app.getGui());
 }
 
 EquationOfTime::~EquationOfTime()
@@ -75,9 +84,6 @@ EquationOfTime::~EquationOfTime()
 void EquationOfTime::init()
 {
 	StelApp &app = StelApp::getInstance();
-	conf = app.getSettings();
-	gui = dynamic_cast<StelGui*>(app.getGui());
-
 	if (!conf->childGroups().contains("EquationOfTime"))
 	{
 		qDebug() << "EquationOfTime: no EquationOfTime section exists in main config file - creating with defaults";
@@ -87,7 +93,7 @@ void EquationOfTime::init()
 	// populate settings from main config file.
 	readSettingsFromConfig();
 
-	addAction("actionShow_EquationOfTime", N_("Equation of Time"), N_("Show solution for Equation of Time"), "enabled", "");
+	addAction("actionShow_EquationOfTime", N_("Equation of Time"), N_("Show solution for Equation of Time"), "showEOT", "Ctrl+Alt+T");
 
 	enableEquationOfTime(getFlagEnableAtStartup());
 	setFlagShowEOTButton(flagShowEOTButton);
@@ -142,15 +148,10 @@ void EquationOfTime::draw(StelCore *core)
 	//qDebug() << timeText;
 }
 
-void EquationOfTime::enableEquationOfTime(bool b)
-{
-	flagShowSolutionEquationOfTime = b;
-}
-
 double EquationOfTime::getCallOrder(StelModuleActionName actionName) const
 {
 	if (actionName==StelModule::ActionDraw)
-		return StelApp::getInstance().getModuleMgr().getModule("ConstellationMgr")->getCallOrder(actionName)+10.;
+		return StelApp::getInstance().getModuleMgr().getModule("LandscapeMgr")->getCallOrder(actionName)+10.;
 	return 0;
 }
 
@@ -222,26 +223,32 @@ double EquationOfTime::getSolutionEquationOfTime(const double JDay) const
 	double tau = (JDay - 2451545.0)/365250.0;
 	double sunMeanLongitude = 280.4664567 + tau*(360007.6892779 + tau*(0.03032028 + tau*(1/49931 - tau*(1/15300 - tau/2000000))));
 
-	int count = std::abs(sunMeanLongitude/360.);
-	if (count==0) count = 1;
-
-	if (sunMeanLongitude>360.)
-		sunMeanLongitude -= count*360.;
-
-	if (sunMeanLongitude<0.)
-		sunMeanLongitude += (1+count)*360.;
+	// reduce the angle
+	sunMeanLongitude = std::fmod(sunMeanLongitude, 360.);
+	// force it to be the positive remainder, so that 0 <= angle < 360
+	sunMeanLongitude = std::fmod(sunMeanLongitude + 360., 360.);
 
 	Vec3d pos = GETSTELMODULE(StelObjectMgr)->searchByName("Sun")->getEquinoxEquatorialPos(core);
 	double ra, dec;
 	StelUtils::rectToSphe(&ra, &dec, pos);
-	if (ra < 0.0)
-		ra += 2.0*M_PI;
 
-	double alpha = ra*180./M_PI;
-	if (alpha>360.)
-		alpha -= count*360.;
+	// covert radians to degrees and reduce the angle
+	double alpha = std::fmod(ra*180./M_PI, 360.);
+	// force it to be the positive remainder, so that 0 <= angle < 360
+	alpha = std::fmod(alpha + 360., 360.);
 
-	return 4*(sunMeanLongitude - 0.0057183 - alpha + get_nutation_longitude(JDay)*cos(get_mean_ecliptical_obliquity(JDay)));
+	double equation = 4*(sunMeanLongitude - 0.0057183 - alpha + get_nutation_longitude(JDay)*cos(get_mean_ecliptical_obliquity(JDay)));
+	// The equation of time is always smaller 20 minutes in absolute value
+	if (std::abs(equation)>20)
+	{
+		// If absolute value of the equation of time appears to be too large, add 24 hours (1440 minutes) to or subtract it from our result
+		if (equation>0.)
+			equation -= 1440.;
+		else
+			equation += 1440.;
+	}
+
+	return equation;
 }
 
 void EquationOfTime::updateMessageText()
@@ -269,5 +276,30 @@ void EquationOfTime::setFlagShowEOTButton(bool b)
 		gui->getButtonBar()->hideButton("actionShow_EquationOfTime");
 	}
 	flagShowEOTButton = b;
+}
+
+void EquationOfTime::enableEquationOfTime(bool b)
+{
+	flagShowSolutionEquationOfTime = b;
+}
+
+void EquationOfTime::setFlagInvertedValue(bool b)
+{
+	flagUseInvertedValue=b;
+}
+
+void EquationOfTime::setFlagMsFormat(bool b)
+{
+	flagUseMsFormat=b;
+}
+//! Enable plugin usage at startup
+void EquationOfTime::setFlagEnableAtStartup(bool b)
+{
+	flagEnableAtStartup=b;
+}
+//! Set font size for message
+void EquationOfTime::setFontSize(int size)
+{
+	fontSize=size;
 }
 

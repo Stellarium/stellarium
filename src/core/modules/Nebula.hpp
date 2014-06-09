@@ -70,6 +70,9 @@ public:
 	//! @return the nebula type code.
 	QString getTypeString() const;
 
+	float getSurfaceBrightness(const StelCore* core) const;
+	float getSurfaceBrightnessWithExtinction(const StelCore* core) const;
+
 private:
 	friend struct DrawNebulaFuncObject;
 	
