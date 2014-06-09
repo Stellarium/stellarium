@@ -72,12 +72,6 @@ public:
 	//! @param core the core to use for the drawing
 	virtual void draw(StelCore* core) {Q_UNUSED(core);}
 
-	//! Iterate through the drawing sequence.
-	//! This allow us to split the slow drawing operation into small parts,
-	//! we can then decide to pause the painting for this frame and used the cached image instead.
-	//! @return true if we should continue drawing (by calling the method again)
-	virtual bool drawPartial(StelCore* core);
-
 	//! Update the module with respect to the time.
 	//! @param deltaTime the time increment in second since last call.
 	virtual void update(double deltaTime) = 0;
