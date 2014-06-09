@@ -379,13 +379,6 @@
               <height>150</height>
              </size>
             </property>
-            <property name="font">
-             <font>
-              <pointsize>10</pointsize>
-              <weight>50</weight>
-              <bold>false</bold>
-             </font>
-            </property>
             <property name="title">
              <string>Labels and Markers</string>
             </property>
@@ -500,13 +493,6 @@
           </item>
           <item row="0" column="1">
            <widget class="QGroupBox" name="planetsGroupBox">
-            <property name="font">
-             <font>
-              <pointsize>10</pointsize>
-              <weight>50</weight>
-              <bold>false</bold>
-             </font>
-            </property>
             <property name="title">
              <string>Planets and satellites</string>
             </property>
@@ -611,13 +597,6 @@
           </item>
           <item row="1" column="0">
            <widget class="QGroupBox" name="atmosphereGroupBox">
-            <property name="font">
-             <font>
-              <pointsize>10</pointsize>
-              <weight>50</weight>
-              <bold>false</bold>
-             </font>
-            </property>
             <property name="toolTip">
              <string>Show atmosphere</string>
             </property>
@@ -714,13 +693,6 @@
           </item>
           <item row="0" column="0" alignment="Qt::AlignTop">
            <widget class="QGroupBox" name="starGroupBox">
-            <property name="font">
-             <font>
-              <pointsize>10</pointsize>
-              <weight>50</weight>
-              <bold>false</bold>
-             </font>
-            </property>
             <property name="title">
              <string>Stars</string>
             </property>
@@ -1051,13 +1023,6 @@
               <verstretch>0</verstretch>
              </sizepolicy>
             </property>
-            <property name="font">
-             <font>
-              <pointsize>10</pointsize>
-              <weight>50</weight>
-              <bold>false</bold>
-             </font>
-            </property>
             <property name="toolTip">
              <string>Settings for sporadic meteors</string>
             </property>
@@ -1142,13 +1107,6 @@
               <width>0</width>
               <height>0</height>
              </size>
-            </property>
-            <property name="font">
-             <font>
-              <pointsize>10</pointsize>
-              <weight>50</weight>
-              <bold>false</bold>
-             </font>
             </property>
             <property name="toolTip">
              <string>Limit Magnitudes (for unaided/binocular observers)</string>
@@ -1308,13 +1266,6 @@
           </property>
           <item row="0" column="2">
            <widget class="QGroupBox" name="constellationGroupBox">
-            <property name="font">
-             <font>
-              <pointsize>10</pointsize>
-              <weight>50</weight>
-              <bold>false</bold>
-             </font>
-            </property>
             <property name="title">
              <string>Constellations</string>
             </property>
@@ -1401,13 +1352,6 @@
           </item>
           <item row="0" column="0" colspan="2">
            <widget class="QGroupBox" name="celestialSphereGroupBox">
-            <property name="font">
-             <font>
-              <pointsize>10</pointsize>
-              <weight>50</weight>
-              <bold>false</bold>
-             </font>
-            </property>
             <property name="title">
              <string>Celestial Sphere</string>
             </property>
@@ -1723,13 +1667,6 @@
               <verstretch>0</verstretch>
              </sizepolicy>
             </property>
-            <property name="font">
-             <font>
-              <pointsize>10</pointsize>
-              <weight>50</weight>
-              <bold>false</bold>
-             </font>
-            </property>
             <property name="title">
              <string>Options</string>
             </property>
@@ -1886,13 +1823,6 @@
               <width>0</width>
               <height>0</height>
              </size>
-            </property>
-            <property name="font">
-             <font>
-              <pointsize>10</pointsize>
-              <weight>50</weight>
-              <bold>false</bold>
-             </font>
             </property>
             <property name="title">
              <string>Options</string>

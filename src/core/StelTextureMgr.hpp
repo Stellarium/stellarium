@@ -37,10 +37,6 @@ public:
 	//! Must be called after the creation of the GLContext.
 	void init();
 
-	//! Create a new empty texture
-	//! @param params the texture creation parameters.
-	StelTextureSP createMemoryTexture(const StelTexture::StelTextureParams& params=StelTexture::StelTextureParams());
-
 	//! Load an image from a file and create a new texture from it
 	//! @param filename the texture file name, can be absolute path if starts with '/' otherwise
 	//!    the file will be looked in stellarium standard textures directories.

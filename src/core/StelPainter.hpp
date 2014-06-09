@@ -30,38 +30,6 @@
 
 class QOpenGLShaderProgram;
 
-class StelPainterLight
-{
-public:
-	StelPainterLight(int alight=0) : light(alight), enabled(false) {}
-
-	void setPosition(const Vec4f& v);
-	Vec4f& getPosition() {return position;}
-
-	void setDiffuse(const Vec4f& v);
-	Vec4f& getDiffuse() {return diffuse;}
-
-	void setSpecular(const Vec4f& v);
-	Vec4f& getSpecular() {return specular;}
-
-	void setAmbient(const Vec4f& v);
-	Vec4f& getAmbient() {return ambient;}
-
-	void setEnable(bool v);
-	void enable();
-	void disable();
-	bool isEnabled() const {return enabled;}
-
-private:
-	int light;
-	Vec4f position;
-	Vec4f diffuse;
-	Vec4f specular;
-	Vec4f ambient;
-	bool enabled;
-};
-
-
 //! @class StelPainter
 //! Provides functions for performing openGL drawing operations.
 //! All coordinates are converted using the StelProjector instance passed at construction.
@@ -225,9 +193,6 @@ public:
 	//! @param texCoordArr the vertex array in which the resulting texture coordinates are returned.
 	static void computeFanDisk(float radius, int innerFanSlices, int level, QVector<double>& vertexArr, QVector<float>& texCoordArr);
 
-	//! Draw a ring with a radial texturing.
-	void sRing(const float rMin, const float rMax, int slices, const int stacks, const int orientInside);
-
 	//! Draw a fisheye texture in a sphere.
 	void sSphereMap(const float radius, const int slices, const int stacks, const float textureFov = 2.f*M_PI, const int orientInside = 0);
 
@@ -239,9 +204,6 @@ public:
 
 	//! Get the color currently used for drawing.
 	Vec4f getColor() const;
-
-	//! Get the light
-	StelPainterLight& getLight() {return light;}
 
 	//! Get the font metrics for the current font.
 	QFontMetrics getFontMetrics() const;
@@ -304,9 +266,6 @@ public:
 	//! @return true if the link was successful.
 	static bool linkProg(class QOpenGLShaderProgram* prog, const QString& name);
 
-	//! Sets whether the special planet shader should be used.
-	void usePlanetShader(bool use);
-
 private:
 
 	friend class StelTextureMgr;
@@ -325,8 +284,9 @@ private:
 	};
 
 	//! Struct describing one opengl array
-	typedef struct
+	typedef struct ArrayDesc
 	{
+		ArrayDesc() : size(0), type(0), pointer(NULL), enabled(false) {}
 		int size;				// The number of coordinates per vertex.
 		int type;				// The data type of each coordinate (GL_SHORT, GL_INT, GL_FLOAT, or GL_DOUBLE).
 		const void* pointer;	// Pointer to the first coordinate of the first vertex in the array.
@@ -336,9 +296,6 @@ private:
 	//! Project an array using the current projection.
 	//! @return a descriptor of the new array
 	ArrayDesc projectArray(const ArrayDesc& array, int offset, int count, const unsigned short *indices=NULL);
-
-	//! Converts an array from double to float.
-	void convertArrayToFloat(StelPainter::ArrayDesc& array, int offset, int count, const unsigned short *indices=NULL);
 
 	//! Project the passed triangle on the screen ensuring that it will look smooth, even for non linear distortion
 	//! by splitting it into subtriangles. The resulting vertex arrays are appended to the passed out* ones.
@@ -366,9 +323,6 @@ private:
 
 	//! The used for text drawing
 	QFont currentFont;
-
-	//! Whether the special planet shader is used.
-	bool planetShader;
 
 	Vec4f currentColor;
 	bool texture2dEnabled;
@@ -412,9 +366,6 @@ private:
 	ArrayDesc normalArray;
 	//! The descriptor for the current opengl color array
 	ArrayDesc colorArray;
-
-	//! the single light used by the painter
-	StelPainterLight light;
 };
 
 #endif // _STELPAINTER_HPP_

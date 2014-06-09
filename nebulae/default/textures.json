@@ -14,14 +14,6 @@
 	},
 	{
 		"imageCredits": {"short" : "Grasslands Observatory", "infoUrl": "http://www.grasslands.org/"},
-		"imageUrl" : "m3.png",
-		"worldCoords" : [[[-154.3200, 28.2730], [-154.5695, 28.2570], [-154.5870, 28.4730], [-154.3385, 28.4890]]],
-		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
-		"minResolution" : 0.2194207209,
-		"maxBrightness" : 13.8
-	},
-	{
-		"imageCredits": {"short" : "Grasslands Observatory", "infoUrl": "http://www.grasslands.org/"},
 		"imageUrl" : "m4.png",
 		"worldCoords" : [[[-113.9650, -26.6378], [-114.2085, -26.6454], [-114.2168, -26.4277], [-113.9737, -26.4201]]],
 		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
@@ -526,14 +518,6 @@
 	},
 	{
 		"imageCredits": {"short" : "Grasslands Observatory", "infoUrl": "http://www.grasslands.org/"},
-		"imageUrl" : "m13.png",
-		"worldCoords" : [[[-109.4400, 36.3650], [-109.6925, 36.3500], [-109.7100, 36.5530], [-109.4605, 36.5690]]],
-		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
-		"minResolution" : 0.2096364882,
-		"maxBrightness" : 13.5
-	},
-	{
-		"imageCredits": {"short" : "Grasslands Observatory", "infoUrl": "http://www.grasslands.org/"},
 		"imageUrl" : "m49.png",
 		"worldCoords" : [[[-172.4857, 7.9272], [-172.6310, 7.9279], [-172.6303, 8.0718], [-172.4850, 8.0711]]],
 		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
@@ -595,14 +579,6 @@
 		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
 		"minResolution" : 0.161899429,
 		"maxBrightness" : 13.5
-	},
-	{
-		"imageCredits": {"short" : "Grasslands Observatory", "infoUrl": "http://www.grasslands.org/"},
-		"imageUrl" : "m81.png",
-		"worldCoords" : [[[149.2435, 68.9585], [148.6275, 68.9555], [148.6235, 69.1750], [149.2385, 69.1780]]],
-		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
-		"minResolution" : 0.2431314691,
-		"maxBrightness" : 13.0
 	},
 	{
 		"imageCredits": {"short" : "Grasslands Observatory", "infoUrl": "http://www.grasslands.org/"},
@@ -691,14 +667,6 @@
 		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
 		"minResolution" : 0.1155012336,
 		"maxBrightness" : 13.3
-	},
-	{
-		"imageCredits": {"short" : "Grasslands Observatory", "infoUrl": "http://www.grasslands.org/"},
-		"imageUrl" : "m101.png",
-		"worldCoords" : [[[-149.0100, 54.2420], [-149.3854, 54.2310], [-149.4050, 54.4510], [-149.02420, 54.4607]]],
-		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
-		"minResolution" : 0.1899522032,
-		"maxBrightness" : 14.6
 	},
 	{
 		"imageCredits": {"short" : "Grasslands Observatory", "infoUrl": "http://www.grasslands.org/"},
@@ -1302,12 +1270,44 @@
 		"maxBrightness" : 13.4
 	},
 	{
+		"imagecredits" : {"Short":"Plover Hill Observatory", "infoUrl": "http://www.madpc.co.uk/~peterv/"},
+		"imageUrl" : "m81-vasey.png",
+		"worldCoords" : [[[149.7465, 68.9743], [148.6310, 68.7635],[148.0310, 69.1622], [149.1587, 69.3765]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 0.2169148018,
+		"maxBrightness" : 13.4
+	},
+	{
 		"imageCredits": {"short" : "Plover Hill Observatory", "infoUrl": "http://www.madpc.co.uk/~peterv/"},
 		"imageUrl" : "m82-vasey.png",
 		"worldCoords" : [[[ 149.3695, 69.5180], [ 148.5644, 69.5024], [ 148.5144, 69.7835], [ 149.3291, 69.7995]]],
 		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
 		"minResolution" : 0.1904768338,
 		"maxBrightness" : 12.7
+	},
+	{
+		"imagecredits" : {"Short": "Plover Hill Observatory", "infoUrl": "http://www.madpc.co.uk/~peterv/"},
+		"imageUrl" : "m3-vasey.png",
+		"worldCoords" : [[[205.6745, 28.3162], [205.4833, 28.2643], [205.4240, 28.4330], [205.6160, 28.4850]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 0.2169148018,
+		"maxBrightness" : 13.4
+	},
+	{
+		"imagecredits" : {"Short": "Plover Hill Observatory", "infoUrl": "http://www.madpc.co.uk/~peterv/"},
+		"imageUrl" : "m13-vasey.png",
+		"worldCoords" : [[[250.4777, 36.2838], [250.2018, 36.4167], [250.3668, 36.6388], [250.6433, 36.5055]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 0.2169148018,
+		"maxBrightness" : 13.4
+	},
+	{
+		"imagecredits" : {"Short": "Plover Hill Observatory", "infoUrl": "http://www.madpc.co.uk/~peterv/"},
+		"imageUrl" : "m101-vasey.png",
+		"worldCoords" : [[[211.4445, 54.0215], [210.2719, 54.0221], [210.2635, 54.7104], [211.4548, 54.7102]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 0.2169148018,
+		"maxBrightness" : 13.4
 	},
 	{
 		"imageCredits": {"short" : "Georg Zotti", "infoUrl": "http://www.waa.at/"},

@@ -108,6 +108,12 @@ public:
 	//! @return set the event as accepted if it was intercepted
 	virtual void handleKeys(class QKeyEvent* e) {Q_UNUSED(e);}
 
+	//! Handle pinch gesture events.
+	//! @param scale the value of the pinch gesture.
+	//! @param started define whether the pinch has just started.
+	//! @return true if the event was intercepted.
+	virtual bool handlePinch(qreal scale, bool started) {Q_UNUSED(scale); Q_UNUSED(started); return false;}
+
 	//! Enum used when selecting objects to define whether to add to, replace, or remove from the existing selection list.
 	enum StelModuleSelectAction
 	{

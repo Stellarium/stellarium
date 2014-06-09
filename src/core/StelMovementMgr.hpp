@@ -67,6 +67,8 @@ public:
 	virtual void handleMouseWheel(class QWheelEvent* event);
 	//! Handle mouse click events.
 	virtual void handleMouseClicks(class QMouseEvent* event);
+	//! Handle pinch gesture.
+	virtual bool handlePinch(qreal scale, bool started);
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods specific to StelMovementMgr
@@ -207,6 +209,11 @@ public slots:
 private slots:
 	//! Called when the selected object changes.
 	void selectedObjectChange(StelModule::StelModuleSelectAction action);
+
+	//! Return the initial value of intensity of art of constellations.
+	double getInitConstellationIntensity() const {return initConstellationIntensity;}
+	//! Set the initial value of intensity of art of constellations.
+	void setInitConstellationIntensity(double v) {initConstellationIntensity=v;}
 	
 private:
 	Vec3d j2000ToMountFrame(const Vec3d& v) const;
@@ -216,6 +223,7 @@ private:
 	double initFov;    // The FOV at startup
 	double minFov;     // Minimum FOV in degree
 	double maxFov;     // Maximum FOV in degree
+	double initConstellationIntensity;   // The initial constellation art intensity (level at startup)
 
 	void setFov(double f)
 	{
@@ -224,8 +232,11 @@ private:
 			currentFov = maxFov;
 		if (f<minFov)
 			currentFov = minFov;
+
+		changeConstellationArtIntensity();
 	}
 	void changeFov(double deltaFov);
+	void changeConstellationArtIntensity();
 
 	void updateVisionVector(double deltaTime);
 	void updateAutoZoom(double deltaTime); // Update autoZoom if activated

@@ -65,7 +65,14 @@
 #include <QComboBox>
 #include <QDir>
 
-ConfigurationDialog::ConfigurationDialog(StelGui* agui, QObject* parent) : StelDialog(parent), starCatalogDownloadReply(NULL), currentDownloadFile(NULL), progressBar(NULL), gui(agui)
+ConfigurationDialog::ConfigurationDialog(StelGui* agui, QObject* parent)
+	: StelDialog(parent)
+	, nextStarCatalogToDownloadIndex(0)
+	, starCatalogsCount(0)
+	, starCatalogDownloadReply(NULL)
+	, currentDownloadFile(NULL)
+	, progressBar(NULL)
+	, gui(agui)
 {
 	ui = new Ui_configurationDialogForm;
 	customDeltaTEquationDialog = NULL;
@@ -432,12 +439,7 @@ void ConfigurationDialog::cursorTimeOutChanged()
 void ConfigurationDialog::browseForScreenshotDir()
 {
 	QString oldScreenshorDir = StelFileMgr::getScreenshotDir();
-	#ifdef Q_OS_MAC
-		//work-around for Qt bug -  http://bugreports.qt.nokia.com/browse/QTBUG-16722
-		QString newScreenshotDir = QFileDialog::getExistingDirectory(NULL, q_("Select screenshot directory"), oldScreenshorDir, QFileDialog::DontUseNativeDialog);
-	#else
-		QString newScreenshotDir = QFileDialog::getExistingDirectory(NULL, q_("Select screenshot directory"), oldScreenshorDir, QFileDialog::ShowDirsOnly);
-	#endif
+	QString newScreenshotDir = QFileDialog::getExistingDirectory(NULL, q_("Select screenshot directory"), oldScreenshorDir, QFileDialog::ShowDirsOnly);
 
 	if (!newScreenshotDir.isEmpty()) {
 		// remove trailing slash

@@ -17,50 +17,40 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#include "StelProjector.hpp"
-#include "StelPainter.hpp"
-#include "StelApp.hpp"
-#include "StelCore.hpp"
-#include "StelGui.hpp"
-#include "StelGuiItems.hpp"
-#include "StelLocaleMgr.hpp"
-#include "StelObjectMgr.hpp"
-#include "StelModuleMgr.hpp"
-#include "StelTextureMgr.hpp"
-#include "StelJsonParser.hpp"
-#include "StelFileMgr.hpp"
+#include <QColor>
+#include <QDebug>
+#include <QDir>
+#include <QFileInfo>
+#include <QList>
+#include <QNetworkAccessManager>
+#include <QNetworkReply>
+#include <QTimer>
+#include <QSettings>
+
 #include "LabelMgr.hpp"
 #include "LandscapeMgr.hpp"
-#include "StelTranslator.hpp"
-#include "StelUtils.hpp"
 #include "MeteorShower.hpp"
 #include "MeteorShowers.hpp"
 #include "MeteorShowerDialog.hpp"
 #include "MeteorStream.hpp"
-#include "StelProgressController.hpp"
 #include "Planet.hpp"
-
-#include <QAction>
-#include <QColor>
-#include <QDebug>
-#include <QDir>
-#include <QFile>
-#include <QFileInfo>
-#include <QKeyEvent>
-#include <QList>
-#include <QNetworkAccessManager>
-#include <QNetworkReply>
-#include <QProgressBar>
-#include <QSharedPointer>
-#include <QStringList>
-#include <QTimer>
-#include <QVariant>
-#include <QVariantMap>
-#include <QSettings>
+#include "StelApp.hpp"
+#include "StelCore.hpp"
+#include "StelFileMgr.hpp"
+#include "StelGui.hpp"
+#include "StelGuiItems.hpp"
+#include "StelJsonParser.hpp"
+#include "StelModuleMgr.hpp"
+#include "StelObjectMgr.hpp"
+#include "StelPainter.hpp"
+#include "StelProgressController.hpp"
+#include "StelProjector.hpp"
+#include "StelTextureMgr.hpp"
+#include "StelUtils.hpp"
 
 #define CATALOG_FORMAT_VERSION 1 /* Version of format of catalog */
 
-const double MeteorShowers::zhrToWsr = 1.6667f/3600.f;
+const double MeteorShowers::zhrToWsr = 1.6667f / 3600.f;
 
 /*
  This method is the one called automatically by the StelModuleMgr just
@@ -81,7 +71,9 @@ StelPluginInfo MeteorShowersStelPluginInterface::getPluginInfo() const
 	info.displayedName = N_("Meteor Showers");
 	info.authors = "Marcos Cardinot";
 	info.contact = "mcardinot@gmail.com";
-	info.description = N_("This plugin give visualization of the meteor showers, show information about meteor showers and displays marker for radiants in activity range for each meteor showers.");
+	info.description = N_("This plugin displays meteor showers and a marker"
+			      " for each active and inactive radiant, showing"
+			      " real information about its activity.");
 	info.version = METEORSHOWERS_PLUGIN_VERSION;
 	return info;
 }
@@ -91,11 +83,22 @@ StelPluginInfo MeteorShowersStelPluginInterface::getPluginInfo() const
 */
 MeteorShowers::MeteorShowers()
 	: flagShowMS(false)
+	, flagShowMSButton(true)
 	, OnIcon(NULL)
 	, OffIcon(NULL)
 	, GlowIcon(NULL)
 	, toolbarButton(NULL)
+	, updateState(CompleteNoUpdates)
+	, downloadMgr(NULL)
 	, progressBar(NULL)
+	, updateTimer(0)
+	, messageTimer(0)
+	, updatesEnabled(false)
+	, updateFrequencyHours(0)
+	, enableAtStartup(false)
+	, flagShowARG(true)
+	, flagShowARR(true)
+	, flagShowIR(true)
 {
 	setObjectName("MeteorShowers");
 	configDialog = new MeteorShowerDialog();
@@ -109,12 +112,20 @@ MeteorShowers::~MeteorShowers()
 {
 	delete configDialog;
 
-	if(GlowIcon)
+	if (GlowIcon)
+	{
 		delete GlowIcon;
-	if(OnIcon)
+	}
+
+	if (OnIcon)
+	{
 		delete OnIcon;
-	if(OffIcon)
+	}
+
+	if (OffIcon)
+	{
 		delete OffIcon;
+	}
 
 	active.clear();
 	activeInfo.clear();
@@ -125,8 +136,11 @@ MeteorShowers::~MeteorShowers()
 */
 double MeteorShowers::getCallOrder(StelModuleActionName actionName) const
 {
-	if(actionName == StelModule::ActionDraw)
+	if (actionName == StelModule::ActionDraw)
+	{
 		return StelApp::getInstance().getModuleMgr().getModule("MeteorMgr")->getCallOrder(actionName)+0;
+	}
+
 	return 0;
 }
 
@@ -139,7 +153,7 @@ void MeteorShowers::init()
 		StelFileMgr::makeSureDirExistsAndIsWritable(StelFileMgr::getUserDir()+"/modules/MeteorShowers");
 
 		// If no settings in the main config file, create with defaults
-		if(!conf->childGroups().contains("MeteorShowers"))
+		if (!conf->childGroups().contains("MeteorShowers"))
 		{
 			qDebug() << "MeteorShowers: no MeteorShower section exists in main config file - creating with defaults";
 			restoreDefaultConfigIni();
@@ -180,9 +194,9 @@ void MeteorShowers::init()
 	connect(messageTimer, SIGNAL(timeout()), this, SLOT(messageTimeout()));
 
 	// If the json file does not already exist, create it from the resource in the QT resource
-	if(!QFileInfo(showersJsonPath).exists())
+	if (!QFileInfo(showersJsonPath).exists())
 	{
-		if(!checkJsonFileFormat() || getJsonFileFormatVersion()<CATALOG_FORMAT_VERSION)
+		if (!checkJsonFileFormat() || getJsonFileFormatVersion()<CATALOG_FORMAT_VERSION)
 		{
 			displayMessage(q_("The old showers.json file is no longer compatible - using default file"), "#bb0000");
 			restoreDefaultJsonFile();
@@ -235,8 +249,10 @@ void MeteorShowers::upgradeConfigIni(void)
 
 void MeteorShowers::setFlagShowMS(bool b)
 {
-	if(toolbarButton != NULL)
+	if (toolbarButton != NULL)
+	{
 		toolbarButton->setChecked(b);
+	}
 
 	flagShowMS=b;
 }
@@ -245,42 +261,53 @@ void MeteorShowers::setFlagShowMS(bool b)
 void MeteorShowers::setFlagShowMSButton(bool b)
 {
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-	if(b)
+	if (gui != NULL)
 	{
-		if(toolbarButton==NULL)
+		if (b)
 		{
-			// Create the MeteorShowers button
-			toolbarButton = new StelButton(NULL, *OnIcon, *OffIcon, *GlowIcon, "actionShow_MeteorShower");
+			if (toolbarButton == NULL)
+			{
+				// Create the MeteorShowers button
+				toolbarButton = new StelButton(NULL, *OnIcon, *OffIcon, *GlowIcon, "actionShow_MeteorShower");
+			}
+			gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
 		}
-		gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
+		else
+		{
+			gui->getButtonBar()->hideButton("actionShow_MeteorShower");
+		}
+		flagShowMSButton = b;
 	}
-	else
-	{
-		gui->getButtonBar()->hideButton("actionShow_MeteorShower");
-	}
-	flagShowMSButton = b;
 }
 
 bool MeteorShowers::changedSkyDate(StelCore* core)
 {
 	double JD = core->getJDay();
 	skyDate = StelUtils::jdToQDateTime(JD+StelUtils::getGMTShiftFromQT(JD)/24-core->getDeltaT(JD)/86400);
-	if(skyDate.toString("MM.dd.yyyy") != lastSkyDate.toString("MM.dd.yyyy"))  //if the sky date changed
+	if (skyDate.toString("MM.dd.yyyy") != lastSkyDate.toString("MM.dd.yyyy"))  //if the sky date changed
+	{
 		return true;
+	}
 	else
+	{
 		return false;
+	}
 }
 
 void MeteorShowers::draw(StelCore* core)
 {
-	if(!getFlagShowMS())
+	if (!getFlagShowMS())
+	{
 		return;
+	}
 
 	StelPainter painter(core->getProjection(StelCore::FrameJ2000));
 	drawMarker(core, painter);
 
-	if(GETSTELMODULE(StelObjectMgr)->getFlagSelectedObjectPointer())
+	if (GETSTELMODULE(StelObjectMgr)->getFlagSelectedObjectPointer())
+	{
 		drawPointer(core, painter);
+	}
 
 	painter.setProjector(core->getProjection(StelCore::FrameAltAz));
 	drawStream(core, painter);
@@ -295,16 +322,14 @@ void MeteorShowers::drawMarker(StelCore* core, StelPainter& painter)
 	glEnable(GL_BLEND);
 	glEnable(GL_TEXTURE_2D);
 
-	foreach(const MeteorShowerP& ms, mShowers)
+	foreach (const MeteorShowerP& ms, mShowers)
 	{
 		ms->updateCurrentData(skyDate);
 
-		bool flag=true;
-		if (ms->getStatus()==0 && getFlagActiveRadiant())
-			flag = false;
-
-		if(ms && ms->initialized && flag)
+		if (ms && ms->initialized && ms->active)
+		{
 			ms->draw(painter);
+		}
 	}
 	glDisable(GL_TEXTURE_2D);
 }
@@ -314,15 +339,17 @@ void MeteorShowers::drawPointer(StelCore* core, StelPainter& painter)
 	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
 
 	const QList<StelObjectP> newSelected = GETSTELMODULE(StelObjectMgr)->getSelectedObject("MeteorShower");
-	if(!newSelected.empty())
+	if (!newSelected.empty())
 	{
 		const StelObjectP obj = newSelected[0];
 		Vec3d pos=obj->getJ2000EquatorialPos(core);
 
 		Vec3d screenpos;
 		// Compute 2D pos and return if outside screen
-		if(!painter.getProjector()->project(pos, screenpos))
+		if (!painter.getProjector()->project(pos, screenpos))
+		{
 			return;
+		}
 
 		const Vec3f& c(obj->getInfoColor());
 		painter.setColor(c[0],c[1],c[2]);
@@ -345,21 +372,23 @@ void MeteorShowers::drawPointer(StelCore* core, StelPainter& painter)
 void MeteorShowers::drawStream(StelCore* core, StelPainter& painter)
 {
 	LandscapeMgr* landmgr = (LandscapeMgr*)StelApp::getInstance().getModuleMgr().getModule("LandscapeMgr");
-	if(landmgr->getFlagAtmosphere() && landmgr->getLuminance()>5)
+	if (landmgr->getFlagAtmosphere() && landmgr->getLuminance()>5)
+	{
 		return;
+	}
 
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glEnable(GL_BLEND);
 	painter.enableTexture2d(false);
 
 	int index = 0;
-	if(active.size() > 0)
+	if (active.size() > 0)
 	{
-		foreach(const activeData &a, activeInfo)
+		foreach (const activeData &a, activeInfo)
 		{
 			Q_UNUSED(a);
 			// step through and draw all active meteors
-			for(std::vector<MeteorStream*>::iterator iter = active[index].begin(); iter != active[index].end(); ++iter)
+			for (std::vector<MeteorStream*>::iterator iter = active[index].begin(); iter != active[index].end(); ++iter)
 			{
 				(*iter)->draw(core, painter);
 			}
@@ -376,7 +405,7 @@ int MeteorShowers::calculateZHR(int zhr, QString variable, QDateTime start, QDat
 	int highZHR;
 	int lowZHR;
 	//bool multPeak = false; //multiple peaks
-	if(zhr != -1)  //isn't variable
+	if (zhr != -1)  //isn't variable
 	{
 		highZHR = zhr;
 		lowZHR = 0;
@@ -385,7 +414,7 @@ int MeteorShowers::calculateZHR(int zhr, QString variable, QDateTime start, QDat
 	{
 		QStringList varZHR = variable.split("-");
 		lowZHR = varZHR.at(0).toInt();
-		if(varZHR.at(1).contains("*"))
+		if (varZHR.at(1).contains("*"))
 		{
 			//multPeak = true;
 			highZHR = varZHR[1].replace("*", "").toInt();
@@ -420,36 +449,37 @@ int MeteorShowers::calculateZHR(int zhr, QString variable, QDateTime start, QDat
 
 void MeteorShowers::updateActiveInfo(void)
 {
-	foreach(const MeteorShowerP& ms, mShowers)
+	foreach (const MeteorShowerP& ms, mShowers)
 	{
-		if(ms && ms->initialized)
+		if (ms && ms->initialized)
 		{
 			//if the meteor shower is active, get data
-			if(ms->isActive)
+			if (ms->getStatus())
 			{
 				//First, check if there is already data about the constellation in "activeInfo"
 				//The var "index" will be updated to show the correct place do put the new information
 				int index = 0;
 				foreach(const activeData &a, activeInfo)
 				{
-					if(a.showerID == ms->showerID)  //exists
+					if (a.showerID == ms->showerID)  //exists
 						break;
 					index++;
 				}
 
-				if(activeInfo.size() < index + 1) //new?, put in the end
+				if (activeInfo.size() < index + 1) //new?, put in the end
 				{
 					activeData newData;
 					newData.showerID = ms->showerID;
 					newData.speed = ms->speed;
 					newData.radiantAlpha = ms->radiantAlpha;
 					newData.radiantDelta = ms->radiantDelta;
+					newData.pidx = ms->pidx;
 					newData.zhr = ms->zhr;
 					newData.variable = ms->variable;
 					newData.start = ms->start;
 					newData.finish = ms->finish;
 					newData.peak = ms->peak;
-					newData.status = ms->isActive;
+					newData.status = ms->status;
 					activeInfo.append(newData);
 				}
 				else //just overwrites
@@ -459,7 +489,7 @@ void MeteorShowers::updateActiveInfo(void)
 					activeInfo[index].start = ms->start;
 					activeInfo[index].finish = ms->finish;
 					activeInfo[index].peak = ms->peak;
-					activeInfo[index].status = ms->isActive;
+					activeInfo[index].status = ms->status;
 				}
 			}
 		}
@@ -469,52 +499,75 @@ void MeteorShowers::updateActiveInfo(void)
 
 void MeteorShowers::update(double deltaTime)
 {
-	if(!getFlagShowMS())
+	if (!getFlagShowMS())
+	{
 		return;
+	}
 
 	StelCore* core = StelApp::getInstance().getCore();
-
-	double timeRate = core->getTimeRate();
-	if(timeRate > 0.2)
-		return;
+	QList<activeData> old_activeInfo;
 
 	//check if the sky date changed
-	bool changedDate = changedSkyDate(core);
-
-	if(changedDate)
+	if (changedSkyDate(core))
 	{
 		// clear data of all MS active
+		old_activeInfo = activeInfo;
 		activeInfo.clear();
 
 		// Is GUI visible and the year changed? refresh ranges
-		if(configDialog->visible() && lastSkyDate.toString("yyyy") != skyDate.toString("yyyy"))
+		if (configDialog->visible() && lastSkyDate.toString("yyyy") != skyDate.toString("yyyy"))
 			configDialog->refreshRangeDates();
 	}
 
+	// fill `activeInfo` with all current active meteor showers
 	updateActiveInfo();
+	// counting index of `active`
+	int index = 0;
+	// something changed? check if we have some MS to remove from `active`
+	if (!old_activeInfo.isEmpty())
+	{
+		for (int i=0; i<old_activeInfo.size(); i++)
+		{
+			bool found = false;
+			for (int j=0; j<activeInfo.size(); j++)
+			{
+				if (old_activeInfo[i].showerID == activeInfo[j].showerID)
+				{
+					found = true;
+					break;
+				}
+			}
+			if (!found)
+			{
+				active.erase(active.begin().operator +(index));
+				index--;
+			}
+			index++;
+		}
+	}
 
 	deltaTime*=1000;
 
 	std::vector<std::vector<MeteorStream*> >::iterator iterOut;
 	std::vector<MeteorStream*>::iterator iterIn;
-	int index = 0;
-	if(active.size() > 0)
+	index = 0;
+	if (active.size() > 0)
 	{
 		// step through and update all active meteors
-		for(iterOut = active.begin(); iterOut != active.end(); ++iterOut)
+		for (iterOut = active.begin(); iterOut != active.end(); ++iterOut)
 		{
-			for(iterIn = active[index].begin(); iterIn != active[index].end(); ++iterIn)
+			for (iterIn = active[index].begin(); iterIn != active[index].end(); ++iterIn)
 			{
-				if(!(*iterIn)->update(deltaTime))
+				if (!(*iterIn)->update(deltaTime))
 				{
 					delete *iterIn;
-					active[index].erase(iterIn);
+					iterIn = active[index].erase(iterIn);
 					iterIn--;
 				}
 			}
-			if(active[index].empty())
+			if (active[index].empty())
 			{
-				active.erase(iterOut);
+				iterOut = active.erase(iterOut);
 				iterOut--;
 				index--;
 			}
@@ -523,37 +576,45 @@ void MeteorShowers::update(double deltaTime)
 	}
 
 	index = 0;
-	foreach(const activeData &a, activeInfo)
+	foreach (const activeData &current, activeInfo)
 	{
-		ZHR = calculateZHR(a.zhr, a.variable, a.start, a.finish, a.peak);
-
-		// only makes sense given lifetimes of meteors to draw when timeSpeed is realtime
-		// otherwise high overhead of large numbers of meteors
-		double tspeed = timeRate*86400;  // sky seconds per actual second
-		if(tspeed<=0 || fabs(tspeed)>1.)
-			return; // don't start any more meteors
+		int ZHR = calculateZHR(current.zhr,
+				       current.variable,
+				       current.start,
+				       current.finish,
+				       current.peak);
 
 		// if stellarium has been suspended, don't create huge number of meteors to
 		// make up for lost time!
-		if(deltaTime > 500)
+		if (deltaTime > 500)
+		{
 			deltaTime = 500;
+		}
 
 		// determine average meteors per frame needing to be created
 		int mpf = (int)((double)ZHR*zhrToWsr*deltaTime/1000.0 + 0.5);
-		if(mpf<1)
+		if (mpf<1)
+		{
 			mpf = 1;
+		}
 
 		std::vector<MeteorStream*> aux;
-		if(active.empty() || active.size() < (unsigned) index+1)
+		if (active.empty() || active.size() < (unsigned) activeInfo.size())
+		{
 			active.push_back(aux);
+		}
 
-		for(int i=0; i<mpf; ++i)
+		for (int i=0; i<mpf; ++i)
 		{
 			// start new meteor based on ZHR time probability
 			double prob = ((double)rand())/RAND_MAX;
-			if(ZHR>0 && prob<((double)ZHR*zhrToWsr*deltaTime/1000.0/(double)mpf))
+			if (ZHR>0 && prob<((double)ZHR*zhrToWsr*deltaTime/1000.0/(double)mpf))
 			{
-				MeteorStream *m = new MeteorStream(core, a.speed, a.radiantAlpha, a.radiantDelta);
+				MeteorStream *m = new MeteorStream(core,
+								   current.speed,
+								   current.radiantAlpha,
+								   current.radiantDelta,
+								   current.pidx);
 				active[index].push_back(m);
 			}
 		}
@@ -572,7 +633,7 @@ QList<MeteorShowerP> MeteorShowers::searchEvents(QDate dateFrom, QDate dateTo) c
 		while(date.operator <=(dateTo))
 		{
 			ms->updateCurrentData((QDateTime) date);
-			if(ms->initialized && ms->active)
+			if (ms->initialized && ms->status)
 			{
 				result.append(ms);
 				break;
@@ -588,8 +649,10 @@ QList<StelObjectP> MeteorShowers::searchAround(const Vec3d& av, double limitFov,
 {
 	QList<StelObjectP> result;
 
-	if(!getFlagShowMS() || !getFlagRadiant())
+	if (!getFlagShowMS() || !getFlagRadiant())
+	{
 		return result;
+	}
 
 	Vec3d v(av);
 	v.normalize();
@@ -598,11 +661,11 @@ QList<StelObjectP> MeteorShowers::searchAround(const Vec3d& av, double limitFov,
 
 	foreach(const MeteorShowerP& ms, mShowers)
 	{
-		if(ms->initialized && ms->active)
+		if (ms->initialized && ms->active)
 		{
 			equPos = ms->XYZ;
 			equPos.normalize();
-			if(equPos[0]*v[0] + equPos[1]*v[1] + equPos[2]*v[2]>=cosLimFov)
+			if (equPos[0]*v[0] + equPos[1]*v[1] + equPos[2]*v[2]>=cosLimFov)
 			{
 				result.append(qSharedPointerCast<StelObject>(ms));
 			}
@@ -614,15 +677,22 @@ QList<StelObjectP> MeteorShowers::searchAround(const Vec3d& av, double limitFov,
 
 StelObjectP MeteorShowers::searchByName(const QString& englishName) const
 {
-	if(!getFlagShowMS() || !getFlagRadiant())
+	if (!getFlagShowMS() || !getFlagRadiant())
+	{
 		return NULL;
+	}
 
 	foreach(const MeteorShowerP& ms, mShowers)
 	{
-		if(ms->initialized)
+		if (ms->initialized)
 		{
-			if(ms->getEnglishName().toUpper() == englishName.toUpper())
+			bool sameEngName = ms->getEnglishName().toUpper() == englishName.toUpper();
+			bool desigIsEngName = ms->getDesignation().toUpper() == englishName.toUpper();
+			bool emptyDesig = ms->getDesignation().isEmpty();
+			if (sameEngName || (desigIsEngName && !emptyDesig))
+			{
 				return qSharedPointerCast<StelObject>(ms);
+			}
 		}
 	}
 
@@ -631,15 +701,19 @@ StelObjectP MeteorShowers::searchByName(const QString& englishName) const
 
 StelObjectP MeteorShowers::searchByNameI18n(const QString& nameI18n) const
 {
-	if(!getFlagShowMS() || !getFlagRadiant())
+	if (!getFlagShowMS() || !getFlagRadiant())
+	{
 		return NULL;
+	}
 
 	foreach(const MeteorShowerP& ms, mShowers)
 	{
-		if(ms->initialized)
+		if (ms->initialized)
 		{
-			if(ms->getNameI18n().toUpper() == nameI18n.toUpper())
+			if (ms->getNameI18n().toUpper() == nameI18n.toUpper())
+			{
 				return qSharedPointerCast<StelObject>(ms);
+			}
 		}
 	}
 
@@ -649,18 +723,22 @@ StelObjectP MeteorShowers::searchByNameI18n(const QString& nameI18n) const
 QStringList MeteorShowers::listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem, bool useStartOfWords) const
 {
 	QStringList result;
-	if(!getFlagShowMS() || !getFlagRadiant())
+	if (!getFlagShowMS() || !getFlagRadiant())
+	{
 		return result;
+	}
 
-	if(maxNbItem==0)
+	if (maxNbItem==0)
+	{
 		return result;
+	}
 
 	QString sn;
 	bool find;
 
 	foreach(const MeteorShowerP& ms, mShowers)
 	{
-		if(ms->initialized && ms->active)
+		if (ms->initialized && ms->active)
 		{
 			sn = ms->getNameI18n();
 			find = false;
@@ -681,8 +759,10 @@ QStringList MeteorShowers::listMatchingObjectsI18n(const QString& objPrefix, int
 
 	result.sort();
 
-	if(result.size()>maxNbItem)
+	if (result.size()>maxNbItem)
+	{
 		result.erase(result.begin()+maxNbItem, result.end());
+	}
 
 	return result;
 }
@@ -690,48 +770,52 @@ QStringList MeteorShowers::listMatchingObjectsI18n(const QString& objPrefix, int
 QStringList MeteorShowers::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords) const
 {
 	QStringList result;
-	if(!getFlagShowMS() || !getFlagRadiant())
+	if (!getFlagShowMS() || !getFlagRadiant())
+	{
 		return result;
+	}
 
-	if(maxNbItem==0)
+	if (maxNbItem==0)
+	{
 		return result;
+	}
 
 	QString sn;
 	bool find;
 	foreach(const MeteorShowerP& ms, mShowers)
 	{
-		if(ms->initialized && ms->active)
+		if (ms->initialized && ms->active)
 		{
 			sn = ms->getEnglishName();
 			find = false;
-			if(useStartOfWords)
+			if (useStartOfWords)
 			{
-				if(objPrefix.toUpper()==sn.toUpper().left(objPrefix.length()))
+				if (objPrefix.toUpper()==sn.toUpper().left(objPrefix.length()))
 					find = true;
 			}
 			else
 			{
-				if(sn.contains(objPrefix, Qt::CaseInsensitive))
+				if (sn.contains(objPrefix, Qt::CaseInsensitive))
 					find = true;
 			}
-			if(find)
+			if (find)
 			{
 				result << sn;
 			}
 
 			sn = ms->getDesignation();
 			find = false;
-			if(useStartOfWords)
+			if (useStartOfWords)
 			{
-				if(objPrefix.toUpper()==sn.toUpper().left(objPrefix.length()))
+				if (objPrefix.toUpper()==sn.toUpper().left(objPrefix.length()))
 					find = true;
 			}
 			else
 			{
-				if(sn.contains(objPrefix, Qt::CaseInsensitive))
+				if (sn.contains(objPrefix, Qt::CaseInsensitive))
 					find = true;
 			}
-			if(find)
+			if (find)
 			{
 				result << sn;
 			}
@@ -739,7 +823,7 @@ QStringList MeteorShowers::listMatchingObjects(const QString& objPrefix, int max
 	}
 
 	result.sort();
-	if(result.size()>maxNbItem)
+	if (result.size()>maxNbItem)
 		result.erase(result.begin()+maxNbItem, result.end());
 
 	return result;
@@ -748,7 +832,7 @@ QStringList MeteorShowers::listMatchingObjects(const QString& objPrefix, int max
 QStringList MeteorShowers::listAllObjects(bool inEnglish) const
 {
 	QStringList result;
-	if(inEnglish)
+	if (inEnglish)
 	{
 		foreach(const MeteorShowerP& ms, mShowers)
 		{
@@ -767,25 +851,32 @@ QStringList MeteorShowers::listAllObjects(bool inEnglish) const
 
 bool MeteorShowers::configureGui(bool show)
 {
-	if(show)
+	if (show)
+	{
 		configDialog->setVisible(true);
+	}
 
 	return true;
 }
 
 QVariantMap MeteorShowers::loadShowersMap(QString path)
 {
-	if(path.isEmpty())
+	if (path.isEmpty())
+	{
 		path = showersJsonPath;
+	}
 
 	QVariantMap map;
 	QFile jsonFile(path);
-	if(!jsonFile.open(QIODevice::ReadOnly))
+	if (!jsonFile.open(QIODevice::ReadOnly))
+	{
 		qWarning() << "MeteorShowers: cannot open" << path;
+	}
 	else
+	{
 		map = StelJsonParser::parse(jsonFile.readAll()).toMap();
-
-	jsonFile.close();
+		jsonFile.close();
+	}
 	return map;
 }
 
@@ -804,8 +895,10 @@ void MeteorShowers::setShowersMap(const QVariantMap& map)
 		msData["showerID"] = msKey;
 
 		MeteorShowerP ms(new MeteorShower(msData));
-		if(ms->initialized)
+		if (ms->initialized)
+		{
 			mShowers.append(ms);
+		}
 	}
 }
 
@@ -843,11 +936,13 @@ void MeteorShowers::restoreDefaultConfigIni(void)
 
 void MeteorShowers::restoreDefaultJsonFile(void)
 {
-	if(QFileInfo(showersJsonPath).exists())
+	if (QFileInfo(showersJsonPath).exists())
+	{
 		backupJsonFile(true);
+	}
 
 	QFile src(":/MeteorShowers/showers.json");
-	if(!src.copy(showersJsonPath))
+	if (!src.copy(showersJsonPath))
 	{
 		qWarning() << "MeteorShowers: cannot copy JSON resource to" << showersJsonPath;
 	}
@@ -870,21 +965,23 @@ void MeteorShowers::restoreDefaultJsonFile(void)
 bool MeteorShowers::backupJsonFile(bool deleteOriginal)
 {
 	QFile old(showersJsonPath);
-	if(!old.exists())
+	if (!old.exists())
 	{
 		qWarning() << "MeteorShowers: no file to backup";
 		return false;
 	}
 
 	QString backupPath = showersJsonPath + ".old";
-	if(QFileInfo(backupPath).exists())
-		QFile(backupPath).remove();
-
-	if(old.copy(backupPath))
+	if (QFileInfo(backupPath).exists())
 	{
-		if(deleteOriginal)
+		QFile(backupPath).remove();
+	}
+
+	if (old.copy(backupPath))
+	{
+		if (deleteOriginal)
 		{
-			if(!old.remove())
+			if (!old.remove())
 			{
 				qWarning() << "MeteorShowers: WARNING - could not remove old showers.json file";
 				return false;
@@ -904,7 +1001,7 @@ int MeteorShowers::getJsonFileFormatVersion(void)
 {
 	int jsonVersion = -1;
 	QFile showersJsonFile(showersJsonPath);
-	if(!showersJsonFile.open(QIODevice::ReadOnly))
+	if (!showersJsonFile.open(QIODevice::ReadOnly))
 	{
 		qWarning() << "MeteorShowers: cannot open" << QDir::toNativeSeparators(showersJsonPath);
 		return jsonVersion;
@@ -912,7 +1009,7 @@ int MeteorShowers::getJsonFileFormatVersion(void)
 
 	QVariantMap map;
 	map = StelJsonParser::parse(&showersJsonFile).toMap();
-	if(map.contains("version"))
+	if (map.contains("version"))
 	{
 		jsonVersion = map.value("version").toInt();
 	}
@@ -925,7 +1022,7 @@ int MeteorShowers::getJsonFileFormatVersion(void)
 bool MeteorShowers::checkJsonFileFormat()
 {
 	QFile showersJsonFile(showersJsonPath);
-	if(!showersJsonFile.open(QIODevice::ReadOnly))
+	if (!showersJsonFile.open(QIODevice::ReadOnly))
 	{
 		qWarning() << "MeteorShowers: cannot open" << QDir::toNativeSeparators(showersJsonPath);
 		return false;
@@ -1007,13 +1104,15 @@ int MeteorShowers::getSecondsToUpdate(void)
 
 void MeteorShowers::checkForUpdate(void)
 {
-	if(updatesEnabled && lastUpdate.addSecs(updateFrequencyHours * 3600) <= QDateTime::currentDateTime())
+	if (updatesEnabled && lastUpdate.addSecs(updateFrequencyHours * 3600) <= QDateTime::currentDateTime())
+	{
 		updateJSON();
+	}
 }
 
 void MeteorShowers::updateJSON(void)
 {
-	if(updateState==MeteorShowers::Updating)
+	if (updateState == MeteorShowers::Updating)
 	{
 		qWarning() << "MeteorShowers: already updating...  will not start again current update is complete.";
 		return;
@@ -1033,8 +1132,10 @@ void MeteorShowers::updateJSON(void)
 	emit(updateStateChanged(updateState));
 	updateFile.clear();
 
-	if(progressBar==NULL)
+	if (progressBar == NULL)
+	{
 		progressBar = StelApp::getInstance().addProgressBar();
+	}
 
 	progressBar->setValue(0);
 	progressBar->setRange(0, 100);
@@ -1053,7 +1154,7 @@ void MeteorShowers::updateJSON(void)
 void MeteorShowers::updateDownloadComplete(QNetworkReply* reply)
 {
 	// check the download worked, and save the data to file if this is the case.
-	if(reply->error() != QNetworkReply::NoError)
+	if (reply->error() != QNetworkReply::NoError)
 	{
 		qWarning() << "MeteorShowers: FAILED to download" << reply->url() << " Error:" << reply->errorString();
 	}
@@ -1061,23 +1162,27 @@ void MeteorShowers::updateDownloadComplete(QNetworkReply* reply)
 	{
 		// download completed successfully.
 		QString jsonFilePath = StelFileMgr::findFile("modules/MeteorShowers", StelFileMgr::Flags(StelFileMgr::Writable|StelFileMgr::Directory)) + "/showers.json";
-		if(jsonFilePath.isEmpty())
+		if (jsonFilePath.isEmpty())
 		{
 			qWarning() << "MeteorShowers: cannot write JSON data to file";
 		}
 		else
 		{
 			QFile jsonFile(jsonFilePath);
-			if(jsonFile.exists())
+			if (jsonFile.exists())
+			{
 				jsonFile.remove();
+			}
 
-			jsonFile.open(QIODevice::WriteOnly | QIODevice::Text);
-			jsonFile.write(reply->readAll());
-			jsonFile.close();
+			if (jsonFile.open(QIODevice::WriteOnly | QIODevice::Text))
+			{
+				jsonFile.write(reply->readAll());
+				jsonFile.close();
+			}
 		}
 	}
 
-	if(progressBar)
+	if (progressBar)
 	{
 		progressBar->setValue(100);
 		StelApp::getInstance().removeProgressBar(progressBar);
@@ -1185,6 +1290,8 @@ void MeteorShowers::translations()
 	// TRANSLATORS: Name of meteor shower
 	N_("Monocerotids");
 	// TRANSLATORS: Name of meteor shower
+	N_("α-Monocerotids");
+	// TRANSLATORS: Name of meteor shower
 	N_("σ-Hydrids");
 	// TRANSLATORS: Name of meteor shower
 	N_("Geminids");
@@ -1198,10 +1305,60 @@ void MeteorShowers::translations()
 	N_("Orionids");
 	// TRANSLATORS: Name of meteor shower
 	N_("Andromedids");
+	// TRANSLATORS: Name of meteor shower
+	N_("η-Lyrids");
+	// TRANSLATORS: Name of meteor shower
+	N_("α-Scorpiids");
+	// TRANSLATORS: Name of meteor shower
+	N_("Ophiuchids");
+	// TRANSLATORS: Name of meteor shower
+	N_("θ-Ophiuchids");
+	// TRANSLATORS: Name of meteor shower
+	N_("κ-Serpentids");
+	// TRANSLATORS: Name of meteor shower
+	N_("θ-Centaurids");
+	// TRANSLATORS: Name of meteor shower
+	N_("ω-Cetids");
+	// TRANSLATORS: Name of meteor shower
+	N_("Southern ω-Scorpiids");
+	// TRANSLATORS: Name of meteor shower
+	N_("Northern ω-Scorpiids");
+	// TRANSLATORS: Name of meteor shower
+	N_("Arietids");
+	// TRANSLATORS: Name of meteor shower
+	N_("π-Cetids");
+	// TRANSLATORS: Name of meteor shower
+	N_("δ-Cancrids");
+	// TRANSLATORS: Name of meteor shower
+	N_("τ-Herculids");
+	// TRANSLATORS: Name of meteor shower
+	N_("ρ-Geminids");
+	// TRANSLATORS: Name of meteor shower
+	N_("η-Carinids");
+	// TRANSLATORS: Name of meteor shower
+	N_("η-Craterids");
+	// TRANSLATORS: Name of meteor shower
+	N_("π-Virginids");
+	// TRANSLATORS: Name of meteor shower
+	N_("θ-Virginids");
+	// TRANSLATORS: Name of meteor shower
+	N_("May Librids");
+	// TRANSLATORS: Name of meteor shower
+	N_("June Scutids");
+	// TRANSLATORS: Name of meteor shower
+	N_("α-Pisces Australids");
+	// TRANSLATORS: Name of meteor shower
+	N_("Southern ι-Aquariids");
+	// TRANSLATORS: Name of meteor shower
+	N_("Northern ι-Aquariids");
+	// TRANSLATORS: Name of meteor shower
+	N_("γ-Aquariids");
+	// TRANSLATORS: Name of meteor shower
+	N_("Autumn Arietids");
+	// TRANSLATORS: Name of meteor shower
+	N_("χ-Orionids");
 
 	// List of parent objects for meteor showers
-	// TRANSLATORS: Name of parent object for meteor shower
-	N_("Minor planet 2003 EH1 and Comet C/1490 Y1");
 	// TRANSLATORS: Name of parent object for meteor shower
 	N_("Comet 1P/Halley");
 	// TRANSLATORS: Name of parent object for meteor shower
@@ -1215,8 +1372,6 @@ void MeteorShowers::translations()
 	// TRANSLATORS: Name of parent object for meteor shower
 	N_("Comet Thatcher (1861 I)");
 	// TRANSLATORS: Name of parent object for meteor shower
-	N_("Minor planet (4450) Pan");
-	// TRANSLATORS: Name of parent object for meteor shower
 	N_("Comet 26P/Grigg-Skjellerup");
 	// TRANSLATORS: Name of parent object for meteor shower
 	N_("Comet 21P/Giacobini-Zinner");
@@ -1227,11 +1382,21 @@ void MeteorShowers::translations()
 	// TRANSLATORS: Name of parent object for meteor shower
 	N_("Comet 8P/Tuttle");
 	// TRANSLATORS: Name of parent object for meteor shower
+	N_("Comet 3D/Biela");
+	// TRANSLATORS: Name of parent object for meteor shower
+	N_("Comet C/1917 F1 (Mellish)");
+	// TRANSLATORS: Name of parent object for meteor shower
+	N_("Comet C/1964 N1 (Ikeya)");
+	// TRANSLATORS: Name of parent object for meteor shower
+	N_("Comet Schwassmann-Wachmann 3");
+	// TRANSLATORS: Name of parent object for meteor shower
+	N_("Minor planet 2003 EH1 and Comet C/1490 Y1");
+	// TRANSLATORS: Name of parent object for meteor shower
+	N_("Minor planet (4450) Pan");
+	// TRANSLATORS: Name of parent object for meteor shower
 	N_("Minor planet 2008 ED69");
 	// TRANSLATORS: Name of parent object for meteor shower
 	N_("Comet 2P/Encke");
-	// TRANSLATORS: Name of parent object for meteor shower
-	N_("Comet 3D/Biela");
 	// TRANSLATORS: Name of parent object for meteor shower
 	N_("Minor planet 2004 TG10");
 	// TRANSLATORS: Name of parent object for meteor shower

@@ -35,7 +35,10 @@
 #include <QSettings>
 
 // Class which manages the displaying of the Milky Way
-MilkyWay::MilkyWay() : color(1.f, 1.f, 1.f)
+MilkyWay::MilkyWay()
+	: color(1.f, 1.f, 1.f)
+	, intensity(1.)
+	, vertexArray()
 {
 	setObjectName("MilkyWay");
 	fader = new LinearFader();

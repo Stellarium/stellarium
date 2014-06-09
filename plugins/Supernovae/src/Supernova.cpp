@@ -37,7 +37,15 @@
 #include <QList>
 
 Supernova::Supernova(const QVariantMap& map)
-		: initialized(false)
+		: initialized(false),
+		  designation(""),
+		  sntype(""),
+		  maxMagnitude(21.),
+		  peakJD(0.),
+		  snra(0.),
+		  snde(0.),
+		  note(""),
+		  distance(0.)
 {
 	// return initialized if the mandatory fields are not present
 	if (!map.contains("designation"))

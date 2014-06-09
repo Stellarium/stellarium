@@ -29,6 +29,7 @@
 #include "StelCore.hpp"
 #include "StelPainter.hpp"
 #include "StelSkyDrawer.hpp"
+#include "StelMovementMgr.hpp"
 
 #include <set>
 #include <QSettings>
@@ -146,7 +147,10 @@ static double getClosestResolutionHMS(double pixelPerRad)
 
 struct ViewportEdgeIntersectCallbackData
 {
-	ViewportEdgeIntersectCallbackData(StelPainter* p) : sPainter(p) {;}
+	ViewportEdgeIntersectCallbackData(StelPainter* p)
+		: sPainter(p)
+		, raAngle(0.0)
+		, frameType(StelCore::FrameUninitialized) {;}
 	StelPainter* sPainter;
 	Vec4f textColor;
 	QString text;		// Label to display at the intersection of the lines and screen side
@@ -168,7 +172,8 @@ void viewportEdgeIntersectCallback(const Vec3d& screenPos, const Vec3d& directio
 	{
 		// We are in the case of meridians, we need to determine which of the 2 labels (3h or 15h to use)
 		Vec3d tmpV;
-		d->sPainter->getProjector()->unProject(screenPos, tmpV);
+		d->sPainter->getProjector()->unProject(screenPos, tmpV);		
+		double cFOV = StelApp::getInstance().getCore()->getMovementMgr()->getCurrentFov();
 		double lon, lat;
 		StelUtils::rectToSphe(&lon, &lat, tmpV);
 		switch (d->frameType)
@@ -176,29 +181,34 @@ void viewportEdgeIntersectCallback(const Vec3d& screenPos, const Vec3d& directio
 			case StelCore::FrameAltAz:
 			{
 				double raAngle = M_PI-d->raAngle;
-				lon = M_PI-lon;
-				if (raAngle<0)
-					raAngle=+2.*M_PI;
-				if (lon<0)
-					lon=+2.*M_PI;
-
-				if (std::fabs(2.*M_PI-lon)<0.01)
-				{
-					// We are at meridian 0
-					lon = 0.;
-				}
-				if (std::fabs(lon-raAngle) < 0.01)
+				if (cFOV<50.)
 					text = StelUtils::radToDmsStrAdapt(raAngle);
 				else
 				{
-					const double delta = raAngle<M_PI ? M_PI : -M_PI;
-					if (raAngle==2*M_PI && delta==-M_PI)
+					lon = M_PI-lon;
+					if (raAngle<0)
+						raAngle=+2.*M_PI;
+					if (lon<0)
+						lon=+2.*M_PI;
+
+					if (std::fabs(2.*M_PI-lon)<0.01)
 					{
-						text = StelUtils::radToDmsStrAdapt(0);
+						// We are at meridian 0
+						lon = 0.;
 					}
+					if (std::fabs(lon-raAngle) < 0.01)
+						text = StelUtils::radToDmsStrAdapt(raAngle);
 					else
 					{
-						text = StelUtils::radToDmsStrAdapt(raAngle+delta);
+						const double delta = raAngle<M_PI ? M_PI : -M_PI;
+						if (raAngle==2*M_PI && delta==-M_PI)
+						{
+							text = StelUtils::radToDmsStrAdapt(0);
+						}
+						else
+						{
+							text = StelUtils::radToDmsStrAdapt(raAngle+delta);
+						}
 					}
 				}
 				break;
@@ -229,17 +239,22 @@ void viewportEdgeIntersectCallback(const Vec3d& screenPos, const Vec3d& directio
 			}
 			default:
 			{
-				if (std::fabs(2.*M_PI-lon)<0.01)
-				{
-					// We are at meridian 0
-					lon = 0.;
-				}
-				if (std::fabs(lon-d->raAngle) < 0.01)
+				if (cFOV<50.)
 					text = StelUtils::radToHmsStrAdapt(d->raAngle);
 				else
 				{
-					const double delta = d->raAngle<M_PI ? M_PI : -M_PI;
-					text = StelUtils::radToHmsStrAdapt(d->raAngle+delta);
+					if (std::fabs(2.*M_PI-lon)<0.01)
+					{
+						// We are at meridian 0
+						lon = 0.;
+					}
+					if (std::fabs(lon-d->raAngle) < 0.01)
+						text = StelUtils::radToHmsStrAdapt(d->raAngle);
+					else
+					{
+						const double delta = d->raAngle<M_PI ? M_PI : -M_PI;
+						text = StelUtils::radToHmsStrAdapt(d->raAngle+delta);
+					}
 				}
 			}
 		}

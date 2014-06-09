@@ -17,14 +17,16 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
+#include "tests/testStelJsonParser.hpp"
+
 #include <QObject>
 #include <QDebug>
 #include <QTest>
 #include <QBuffer>
 #include <stdexcept>
 
-#include "testStelJsonParser.hpp"
 #include "StelJsonParser.hpp"
+
 
 QTEST_MAIN(TestStelJsonParser);
 
