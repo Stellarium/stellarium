@@ -24,7 +24,6 @@
 #include "StelFader.hpp"
 #include <QFont>
 
-class QPixmap;
 class StelButton;
 
 //! Main class of the Compass Marks plug-in.
@@ -70,15 +69,13 @@ private slots:
 	void cardinalPointsChanged(bool b);
 
 private:
+	QSettings* conf;
 	//! Whether the marks should be displayed at startup.
 	bool displayedAtStartup;
 	//! Font used for displaying bearing numbers.
 	QFont font;
 	Vec3f markColor;
 	LinearFader markFader;
-	QPixmap* pxmapGlow;
-	QPixmap* pxmapOnIcon;
-	QPixmap* pxmapOffIcon;
 	StelButton* toolbarButton;
 	bool cardinalPointsState;
 };

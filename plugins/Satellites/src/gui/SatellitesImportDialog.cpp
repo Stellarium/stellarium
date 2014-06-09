@@ -36,9 +36,12 @@
 #include <QTemporaryFile>
 #include <QDir>
 
-SatellitesImportDialog::SatellitesImportDialog() :
-    downloadMgr(0),
-    progressBar(0)
+SatellitesImportDialog::SatellitesImportDialog()
+	: isGettingData(false)
+	, numberDownloadsComplete(0)
+	, downloadMgr(0)
+	, progressBar(0)
+	, filterProxyModel(NULL)
 {
 	ui = new Ui_satellitesImportDialog;
 	newSatellitesModel = new QStandardItemModel(this);

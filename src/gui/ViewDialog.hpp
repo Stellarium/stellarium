@@ -51,9 +51,9 @@ private slots:
 	void skyCultureChanged(const QString& cultureName);
 	void projectionChanged(const QString& projectionName);
 	void landscapeChanged(QListWidgetItem* item);
-	void setZhrFromControls();
+	void setZhrFromControls(int zhr);
+	void updateZhrDescription();
 	void updateZhrControls(int zhr);
-	void updateZhrDescription(int zhr);
 	void planetsLabelsValueChanged(int);
 	void nebulasLabelsValueChanged(int);
 	void setBortleScaleToolTip(int Bindex);

@@ -218,14 +218,15 @@ void LocationDialog::setFieldsFromLocation(const StelLocation& loc)
 
 	ui->deleteLocationFromListPushButton->setEnabled(StelApp::getInstance().getLocationMgr().canDeleteUserLocation(loc.getID()));
 
-	QSettings* conf = StelApp::getInstance().getSettings();
-	bool atmosphere = conf->value("landscape/flag_atmosphere", true).toBool();
-	bool fog = conf->value("landscape/flag_fog", true).toBool();
 	SolarSystem* ssm = GETSTELMODULE(SolarSystem);
 	PlanetP p = ssm->searchByEnglishName(loc.planetName);
 	LandscapeMgr* ls = GETSTELMODULE(LandscapeMgr);
-	ls->setFlagAtmosphere(p->hasAtmosphere() & atmosphere);
-	ls->setFlagFog(p->hasAtmosphere() & fog);
+	if (ls->getFlagAtmosphereAutoEnable())
+	{
+		QSettings* conf = StelApp::getInstance().getSettings();
+		ls->setFlagAtmosphere(p->hasAtmosphere() & conf->value("landscape/flag_atmosphere", true).toBool());
+		ls->setFlagFog(p->hasAtmosphere() & conf->value("landscape/flag_fog", true).toBool());
+	}
 
 	// Reactivate edit signals
 	connectEditSignals();

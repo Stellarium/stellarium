@@ -43,7 +43,14 @@ bool Quasar::distributionMode = false;
 Vec3f Quasar::markerColor = Vec3f(1.0f,0.5f,0.4f);
 
 Quasar::Quasar(const QVariantMap& map)
-		: initialized(false)
+		: initialized(false),
+		  designation(""),
+		  VMagnitude(21.),
+		  AMagnitude(21.),
+		  bV(0.),
+		  qRA(0.),
+		  qDE(0.),
+		  redshift(0.)
 {
 	// return initialized if the mandatory fields are not present
 	if (!map.contains("designation"))
