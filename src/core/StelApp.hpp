@@ -237,6 +237,8 @@ private:
 	void handleMove(int x, int y, Qt::MouseButtons b);
 	//! Handle key press and release.
 	void handleKeys(class QKeyEvent* event);
+	//! Handle pinch on multi touch devices.
+	void handlePinch(qreal scale, bool started);
 
 	void initScriptMgr(QSettings* conf);
 
