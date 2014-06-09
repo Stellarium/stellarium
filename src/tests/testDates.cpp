@@ -17,6 +17,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
+#include "tests/testDates.hpp"
+
 #include <QString>
 #include <QDateTime>
 #include <QDate>
@@ -25,8 +27,8 @@
 #include <QtGlobal>
 #include <QLocale>
 #include <QDebug>
+
 #include "StelUtils.hpp"
-#include "tests/testDates.hpp"
 
 #define IGREG 2299161
 

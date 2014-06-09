@@ -83,8 +83,15 @@ StelPluginInfo NovaeStelPluginInterface::getPluginInfo() const
  Constructor
 */
 Novae::Novae()
-	: texPointer(NULL)
+	: NovaCnt(0)
+	, texPointer(NULL)
+	, updateState(CompleteNoUpdates)
+	, downloadMgr(NULL)
 	, progressBar(NULL)
+	, updateTimer(NULL)
+	, messageTimer(NULL)
+	, updatesEnabled(false)
+	, updateFrequencyDays(0)
 {
 	setObjectName("Novae");
 	configDialog = new NovaeDialog();
@@ -465,11 +472,12 @@ QVariantMap Novae::loadNovaeMap(QString path)
 	QVariantMap map;
 	QFile jsonFile(path);
 	if (!jsonFile.open(QIODevice::ReadOnly))
-	    qWarning() << "Novae: cannot open" << QDir::toNativeSeparators(path);
+		qWarning() << "Novae: cannot open" << QDir::toNativeSeparators(path);
 	else
-	    map = StelJsonParser::parse(jsonFile.readAll()).toMap();
-
-	jsonFile.close();
+	{
+		map = StelJsonParser::parse(jsonFile.readAll()).toMap();
+		jsonFile.close();
+	}
 	return map;
 }
 
@@ -673,9 +681,11 @@ void Novae::updateDownloadComplete(QNetworkReply* reply)
 			if (jsonFile.exists())
 				jsonFile.remove();
 
-			jsonFile.open(QIODevice::WriteOnly | QIODevice::Text);
-			jsonFile.write(reply->readAll());
-			jsonFile.close();
+			if(jsonFile.open(QIODevice::WriteOnly | QIODevice::Text))
+			{
+				jsonFile.write(reply->readAll());
+				jsonFile.close();
+			}
 		}
 	}
 

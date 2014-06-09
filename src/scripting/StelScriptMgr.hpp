@@ -98,6 +98,14 @@ public slots:
 	//! Empty string will be returned.
 	const QString getDescription(const QString& s);
 
+	//! Gets the default shortcut of the script.
+	//! @param s the file name of the script whose name is to be returned.
+	//! @return text following a comment with Shortcut: at the start.
+	//! If no such comment is found, QString("") is returned.
+	//! If the file is not found or cannot be opened for some reason, an
+	//! Empty string will be returned.
+	const QString getShortcut(const QString& s);
+
 	//! Run the prprocessed script
 	//! @param preprocessedScript the string containing the preprocessed script.
 	//! @return false if the given script could not be run, true otherwise

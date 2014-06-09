@@ -48,15 +48,16 @@ QString StelTranslator::systemLangName;
 // Use system locale language by default
 StelTranslator* StelTranslator::globalTranslator = NULL;
 
-StelTranslator::StelTranslator(const QString& adomain, const QString& alangName) :
-		domain(adomain), langName(alangName)
+StelTranslator::StelTranslator(const QString& adomain, const QString& alangName)
+	: domain(adomain),
+	  langName(alangName)
 {
 	translator = new QTranslator();
 	bool res = translator->load(StelFileMgr::getLocaleDir()+"/"+adomain+"/"+getTrueLocaleName()+".qm");
 	if (!res)
-		qWarning() << "Couldn't load translations for language " << alangName;
+		qWarning() << "Couldn't load translations for language " << getTrueLocaleName();
 	if (translator->isEmpty())
-		qWarning() << "Empty translation file for language " << alangName;
+		qWarning() << "Empty translation file for language " << getTrueLocaleName();
 }
 
 StelTranslator::~StelTranslator()
@@ -89,51 +90,7 @@ void StelTranslator::init(const QString& fileName)
 //! Try to determine system language from system configuration
 void StelTranslator::initSystemLanguage()
 {
-#ifdef _MSC_BUILD
-	char lang[128];
-	size_t retval;
-	errno_t err=getenv_s(&retval, lang, sizeof(lang), "LANGUAGE");
-#else
-	char* lang = getenv("LANGUAGE");
-#endif
-	if (lang)
-		systemLangName = lang;
-	else
-	{
-#ifdef _MSC_BUILD
-		err=getenv_s(&retval, lang, sizeof(lang), "LANG");
-#else
-		lang = getenv("LANG");
-#endif
-		if (lang)
-			systemLangName = lang;
-		else
-		{
-#ifdef Q_OS_WIN
-			char ulng[3], ctry[3];
-			if (GetLocaleInfoA(LOCALE_USER_DEFAULT, LOCALE_SISO639LANGNAME, ulng, 3))
-			{
-				ulng[2] = '\0';
-				if (GetLocaleInfoA(LOCALE_USER_DEFAULT, LOCALE_SISO3166CTRYNAME, ctry, 3))
-				{
-					ctry[2] = '\0';
-					systemLangName = QString("%1_%2").arg(ulng).arg(ctry);
-				}
-				else
-				{
-					systemLangName = ulng;
-				}
-			}
-			else
-			{
-				systemLangName = "C";
-			}
-#else
-			systemLangName = "C";
-#endif
-		}
-	}
-
+	systemLangName = QLocale::system().name();
 	if (systemLangName.isEmpty())
 		systemLangName = "en";
 
