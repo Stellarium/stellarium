@@ -24,7 +24,6 @@
 
 #include <QObject>
 #include <QImage>
-#include <QOpenGLFunctions>
 
 class QFile;
 class StelTextureMgr;
@@ -38,7 +37,7 @@ template <class T> class QFuture;
 //! @class StelTexture
 //! Base texture class. For creating an instance, use StelTextureMgr::createTexture() and StelTextureMgr::createTextureThread()
 //! @sa StelTextureSP
-class StelTexture: public QObject, protected QOpenGLFunctions
+class StelTexture: public QObject
 {
 	Q_OBJECT
 

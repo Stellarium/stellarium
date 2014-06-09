@@ -36,6 +36,7 @@
 #include "StelMovementMgr.hpp"
 #include "StelPainter.hpp"
 
+#include <QOpenGLContext>
 #include <QOpenGLShaderProgram>
 #include <QStringList>
 #include <QSettings>
