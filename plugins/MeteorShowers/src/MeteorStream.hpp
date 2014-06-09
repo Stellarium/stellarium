@@ -64,7 +64,6 @@ private:
 	Mat4d m_viewMatrix;       //! View Matrix
 	Vec3d m_obs;              //! Observer position
 	Vec3d m_position;         //! Equatorial coordinate position
-	Vec3d m_posInternal;      //! Middle of train
 	Vec3d m_posTrain;         //! End of train
 
 	double m_speed;           //! Velocity of meteor in km/s
