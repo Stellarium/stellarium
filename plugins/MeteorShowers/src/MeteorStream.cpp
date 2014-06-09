@@ -189,29 +189,116 @@ void MeteorStream::draw(const StelCore* core, StelPainter& sPainter)
 		return;
 	}
 
-	QVector<Vec4f> colorArray;
-	QVector<Vec3d> vertexArray;
+	double maxThickness = 0.085;
+	double thickness;
+	double maxFOV = core->getMovementMgr()->getMaxFov();
+	double FOV = core->getMovementMgr()->getCurrentFov();
 
-	// last point - dark
-	insertVertex(core, vertexArray, m_posTrain);
-	colorArray.push_back(Vec4f(0,0,0,0));
-
-	// compute intermediate points to curve along projection distortions
-	int segments = 10;
-	for (int i=1; i<segments; i++) {
-		Vec3d posi = m_posTrain;
-		posi[2] = m_posTrain[2] + i*(m_position[2] - m_posTrain[2])/segments;
-		insertVertex(core, vertexArray, posi);
-		colorArray.push_back(Vec4f(1,1,1,i*m_mag/segments));
+	if (FOV > 1.0) {
+		thickness = (maxFOV - FOV) * maxThickness / maxFOV;
+	} else {
+		thickness = FOV * maxThickness;
 	}
 
-	// first point - light
-	insertVertex(core, vertexArray, m_position);
+	QVector<Vec4f> colorArray;
+	QVector<Vec3d> vertexArrayLine;
+	// triangular prism
+	QVector<Vec3d> vertexArrayL;
+	QVector<Vec3d> vertexArrayR;
+	QVector<Vec3d> vertexArrayTop;
+
+	// last segment - dark
+	insertVertex(core, vertexArrayL, m_posTrain);
+	insertVertex(core, vertexArrayR, m_posTrain);
+	insertVertex(core, vertexArrayLine, m_posTrain);
+	colorArray.push_back(Vec4f(0,0,0,0));
+
+	Vec3d posTrainL = m_posTrain;
+	posTrainL[1] -= thickness;
+	insertVertex(core, vertexArrayL, posTrainL);
+	Vec3d posTrainR = m_posTrain;
+	posTrainR[0] -= thickness;
+	insertVertex(core, vertexArrayR, posTrainR);
+
+	insertVertex(core, vertexArrayTop, posTrainL);
+	insertVertex(core, vertexArrayTop, posTrainR);
+	colorArray.push_back(Vec4f(0,0,0,0));
+
+	// compute intermediate segmanents to curve along projection distortions
+	int segments = 10;
+	for (int i=1; i<segments; i++) {
+		double mag = i*m_mag/segments;
+		double height = m_posTrain[2] + i*(m_position[2] - m_posTrain[2])/segments;
+		Vec3d posi;
+
+		posi = m_posTrain;
+		posi[2] = height;
+		insertVertex(core, vertexArrayL, posi);
+		insertVertex(core, vertexArrayR, posi);
+		insertVertex(core, vertexArrayLine, posi);
+		colorArray.push_back(Vec4f(1,1,1,mag));
+
+		posi = posTrainL;
+		posi[2] = height;
+		insertVertex(core, vertexArrayL, posi);
+		insertVertex(core, vertexArrayTop, posi);
+
+		posi = posTrainR;
+		posi[2] = height;
+		insertVertex(core, vertexArrayR, posi);
+		insertVertex(core, vertexArrayTop, posi);
+
+		colorArray.push_back(Vec4f(1,1,1,mag));
+	}
+
+	// first segment - light
+	insertVertex(core, vertexArrayL, m_position);
+	insertVertex(core, vertexArrayR, m_position);
+	insertVertex(core, vertexArrayLine, m_position);
+	colorArray.push_back(Vec4f(1,1,1,m_mag));
+
+	Vec3d positionL = m_position;
+	positionL[1] -= thickness;
+	insertVertex(core, vertexArrayL, positionL);
+
+	Vec3d positionR = m_position;
+	positionR[0] -= thickness;
+	insertVertex(core, vertexArrayR, positionR);
+
+	insertVertex(core, vertexArrayTop, positionL);
+	insertVertex(core, vertexArrayTop, positionR);
+	colorArray.push_back(Vec4f(1,1,1,m_mag));
+
+	// drawing segments
+	sPainter.enableClientStates(true, false, true);
+	sPainter.setColorPointer(4, GL_FLOAT, colorArray.constData());
+
+	if (thickness) {
+		sPainter.setVertexPointer(3, GL_DOUBLE, vertexArrayL.constData());
+		sPainter.drawFromArray(StelPainter::TriangleStrip, vertexArrayL.size(), 0, true);
+
+		sPainter.setVertexPointer(3, GL_DOUBLE, vertexArrayR.constData());
+		sPainter.drawFromArray(StelPainter::TriangleStrip, vertexArrayR.size(), 0, true);
+
+		sPainter.setVertexPointer(3, GL_DOUBLE, vertexArrayTop.constData());
+		sPainter.drawFromArray(StelPainter::TriangleStrip, vertexArrayTop.size(), 0, true);
+	}
+	sPainter.setVertexPointer(3, GL_DOUBLE, vertexArrayLine.constData());
+	sPainter.drawFromArray(StelPainter::LineStrip, vertexArrayLine.size(), 0, true);
+
+	// face
+	QVector<Vec3d> vertexArrayFront;
+	colorArray.clear();
+	insertVertex(core, vertexArrayFront, positionL);
+	colorArray.push_back(Vec4f(1,1,1,m_mag));
+	insertVertex(core, vertexArrayFront, positionR);
+	colorArray.push_back(Vec4f(1,1,1,m_mag));
+	insertVertex(core, vertexArrayFront, m_position);
 	colorArray.push_back(Vec4f(1,1,1,m_mag));
 
 	sPainter.setColorPointer(4, GL_FLOAT, colorArray.constData());
-	sPainter.setVertexPointer(3, GL_DOUBLE, vertexArray.constData());
-	sPainter.enableClientStates(true, false, true);
-	sPainter.drawFromArray(StelPainter::LineStrip, vertexArray.size(), 0, true);
+	sPainter.setVertexPointer(3, GL_DOUBLE, vertexArrayFront.constData());
+	sPainter.drawFromArray(StelPainter::TriangleStrip, vertexArrayFront.size(), 0, true);
+
 	sPainter.enableClientStates(false);
 }
