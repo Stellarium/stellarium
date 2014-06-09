@@ -150,12 +150,6 @@ public:
 	//! @return the max squared distance in pixels that any object has travelled since the last update.
 	void draw();
 
-	//! Iterate through the drawing sequence.
-	//! This allow us to split the slow drawing operation into small parts,
-	//! we can then decide to pause the painting for this frame and used the cached image instead.
-	//! @return true if we should continue drawing (by calling the method again)
-	bool drawPartial();
-
 	//! Call this when the size of the GL window has changed.
 	void glWindowHasBeenResized(float x, float y, float w, float h);
 
