@@ -59,6 +59,8 @@ public:
 	void draw(const StelCore* core, StelPainter& sPainter);
 
 private:
+	void insertVertex(const StelCore* core, QVector<Vec3d> &vertexArray, Vec3d vertex);
+
 	bool m_alive;             //! Indicate if the meteor it still visible
 
 	Mat4d m_viewMatrix;       //! View Matrix
