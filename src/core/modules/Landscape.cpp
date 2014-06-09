@@ -34,7 +34,21 @@
 #include <QDir>
 #include <QtAlgorithms>
 
-Landscape::Landscape(float _radius) : radius(_radius), landscapeBrightness(1.), /*nightBrightness(0.8), */ angleRotateZOffset(0.), horizonPolygon(NULL)
+Landscape::Landscape(float _radius)
+	: radius(_radius)
+	, minBrightness(-1.)
+	, landscapeBrightness(1.)
+	, lightScapeBrightness(0.)
+	, rows(20)
+	, cols(40)
+	, angleRotateZ(0.)
+	, angleRotateZOffset(0.)
+	, defaultBortleIndex(-1)
+	, defaultFogSetting(-1)
+	, defaultExtinctionCoefficient(-1.)
+	, defaultTemperature(-1000.)
+	, defaultPressure(-2.)
+	, horizonPolygon(NULL)
 {
 	validLandscape = 0;
 }
@@ -160,27 +174,27 @@ void Landscape::createPolygonalHorizon(const QString& lineFileName, const float 
 			case azDeg_altDeg:
 				az=(180.0f - polyAngleRotateZ - list.at(0).toFloat())*M_PI/180.f;
 				alt=list.at(1).toFloat()*M_PI/180.f;
-			break;
+				break;
 			case azDeg_zdDeg:
 				az=(180.0f - polyAngleRotateZ - list.at(0).toFloat())*M_PI/180.f;
 				alt=(90.0f-list.at(1).toFloat())*M_PI/180.f;
-			break;
+				break;
 			case azRad_altRad:
 				az=(M_PI - polyAngleRotateZ*M_PI/180.f - list.at(0).toFloat());
 				alt=list.at(1).toFloat();
-			break;
+				break;
 			case azRad_zdRad:
 				az=(M_PI - polyAngleRotateZ*M_PI/180.f - list.at(0).toFloat());
 				alt=M_PI/2.f-list.at(1).toFloat();
-			break;
+				break;
 			case azGrad_altGrad:
 				az=(200.0f  - list.at(0).toFloat())*M_PI/200.f    - polyAngleRotateZ*M_PI/180.f;
 				alt=list.at(1).toFloat()*M_PI/200.f;
-			break;
+				break;
 			case azGrad_zdGrad:
 				az=(200.0f  - list.at(0).toFloat())*M_PI/200.f    - polyAngleRotateZ*M_PI/180.f;
 				alt=(100.0f-list.at(1).toFloat())*M_PI/200.f;
-			break;
+				break;
 			default: qWarning() << "invalid coordMode while reading horizon line.";
 		}
 
@@ -209,7 +223,22 @@ const QString Landscape::getTexturePath(const QString& basename, const QString& 
 	return path;
 }
 
-LandscapeOldStyle::LandscapeOldStyle(float _radius) : Landscape(_radius), sideTexs(NULL), sides(NULL), tanMode(false), calibrated(false)
+LandscapeOldStyle::LandscapeOldStyle(float _radius)
+	: Landscape(_radius)
+	, sideTexs(NULL)
+	, nbSideTexs(0)
+	, nbSide(0)
+	, sides(NULL)
+	, nbDecorRepeat(0)
+	, fogAltAngle(0.)
+	, fogAngleShift(0.)
+	, decorAltAngle(0.)
+	, decorAngleShift(0.)
+	, groundAngleShift(0.)
+	, groundAngleRotateZ(0.)
+	, drawGroundFirst(0)
+	, tanMode(false)
+	, calibrated(false)
 {}
 
 LandscapeOldStyle::~LandscapeOldStyle()
@@ -685,7 +714,10 @@ float LandscapePolygonal::getOpacity(Vec3d azalt) const
 // LandscapeFisheye
 //
 
-LandscapeFisheye::LandscapeFisheye(float _radius) : Landscape(_radius)
+LandscapeFisheye::LandscapeFisheye(float _radius)
+	: Landscape(_radius)
+	, mapImage(NULL)
+	, texFov(360.)
 {}
 
 LandscapeFisheye::~LandscapeFisheye()
@@ -705,11 +737,11 @@ void LandscapeFisheye::load(const QSettings& landscapeIni, const QString& landsc
 		return;
 	}
 	create(name,
-		   landscapeIni.value("landscape/texturefov", 360).toFloat(),
-		   getTexturePath(landscapeIni.value("landscape/maptex").toString(), landscapeId),
-			getTexturePath(landscapeIni.value("landscape/maptex_fog").toString(), landscapeId),
-			getTexturePath(landscapeIni.value("landscape/maptex_illum").toString(), landscapeId),
-			landscapeIni.value("landscape/angle_rotatez", 0.f).toFloat());
+	       landscapeIni.value("landscape/texturefov", 360).toFloat(),
+	       getTexturePath(landscapeIni.value("landscape/maptex").toString(), landscapeId),
+	       getTexturePath(landscapeIni.value("landscape/maptex_fog").toString(), landscapeId),
+	       getTexturePath(landscapeIni.value("landscape/maptex_illum").toString(), landscapeId),
+	       landscapeIni.value("landscape/angle_rotatez", 0.f).toFloat());
 }
 
 
@@ -756,8 +788,8 @@ void LandscapeFisheye::draw(StelCore* core)
 		//glBlendFunc(GL_ONE, GL_ONE); // GZ: Take blending mode as found in the old_style landscapes...
 		glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_COLOR); // GZ: better?
 		sPainter.setColor(fogFader.getInterstate()*(0.1f+0.1f*landscapeBrightness),
-						  fogFader.getInterstate()*(0.1f+0.1f*landscapeBrightness),
-						  fogFader.getInterstate()*(0.1f+0.1f*landscapeBrightness), fogFader.getInterstate());
+				  fogFader.getInterstate()*(0.1f+0.1f*landscapeBrightness),
+				  fogFader.getInterstate()*(0.1f+0.1f*landscapeBrightness), fogFader.getInterstate());
 		mapTexFog->bind();
 		sPainter.sSphereMap(radius,cols,rows,texFov,1);
 	}
@@ -810,7 +842,15 @@ float LandscapeFisheye::getOpacity(Vec3d azalt) const
 /////////////////////////////////////////////////////////////////////////////////////////////////
 // spherical panoramas
 
-LandscapeSpherical::LandscapeSpherical(float _radius) : Landscape(_radius)
+LandscapeSpherical::LandscapeSpherical(float _radius)
+	: Landscape(_radius)
+	, mapTexTop(0.)
+	, mapTexBottom(0.)
+	, fogTexTop(0.)
+	, fogTexBottom(0.)
+	, illumTexTop(0.)
+	, illumTexBottom(0.)
+	, mapImage(NULL)
 {}
 
 LandscapeSpherical::~LandscapeSpherical()
@@ -837,16 +877,16 @@ void LandscapeSpherical::load(const QSettings& landscapeIni, const QString& land
 	}
 
 	create(name,
-		   getTexturePath(landscapeIni.value("landscape/maptex").toString(), landscapeId),
-			getTexturePath(landscapeIni.value("landscape/maptex_fog").toString(), landscapeId),
-			getTexturePath(landscapeIni.value("landscape/maptex_illum").toString(), landscapeId),
-			landscapeIni.value("landscape/angle_rotatez"      ,   0.f).toFloat(),
-			landscapeIni.value("landscape/maptex_top"         ,  90.f).toFloat(),
-			landscapeIni.value("landscape/maptex_bottom"      , -90.f).toFloat(),
-			landscapeIni.value("landscape/maptex_fog_top"     ,  90.f).toFloat(),
-			landscapeIni.value("landscape/maptex_fog_bottom"  , -90.f).toFloat(),
-			landscapeIni.value("landscape/maptex_illum_top"   ,  90.f).toFloat(),
-			landscapeIni.value("landscape/maptex_illum_bottom", -90.f).toFloat());
+	       getTexturePath(landscapeIni.value("landscape/maptex").toString(), landscapeId),
+	       getTexturePath(landscapeIni.value("landscape/maptex_fog").toString(), landscapeId),
+	       getTexturePath(landscapeIni.value("landscape/maptex_illum").toString(), landscapeId),
+	       landscapeIni.value("landscape/angle_rotatez"      ,   0.f).toFloat(),
+	       landscapeIni.value("landscape/maptex_top"         ,  90.f).toFloat(),
+	       landscapeIni.value("landscape/maptex_bottom"      , -90.f).toFloat(),
+	       landscapeIni.value("landscape/maptex_fog_top"     ,  90.f).toFloat(),
+	       landscapeIni.value("landscape/maptex_fog_bottom"  , -90.f).toFloat(),
+	       landscapeIni.value("landscape/maptex_illum_top"   ,  90.f).toFloat(),
+	       landscapeIni.value("landscape/maptex_illum_bottom", -90.f).toFloat());
 }
 
 

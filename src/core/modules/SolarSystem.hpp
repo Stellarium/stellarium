@@ -69,6 +69,8 @@ public:
 	//! - set display options from application settings
 	virtual void init();
 
+	virtual void deinit();
+	
 	//! Draw SolarSystem objects (planets).
 	//! @param core The StelCore object.
 	//! @return The maximum squared distance in pixels that any SolarSystem object
@@ -335,15 +337,6 @@ private:
 
 	void recreateTrails();
 
-	//! Calculates the shadow information for the shadow planet shader.
-	void computeShadowInfo();
-
-	//! Used by computeShadowInfo to generate shadow info texture before uploading it.
-	QVector<Vec4f> shadowInfoBuffer;
-
-	//! Used by computeShadowInfo to store computed planet model matrices used to generate the
-	//! shadow info texture.
-	QVector<Mat4d> shadowModelMatricesBuffer;
 
 	//! Used to count how many planets actually need shadow information
 	int shadowPlanetCount;

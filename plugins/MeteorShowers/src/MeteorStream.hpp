@@ -39,10 +39,16 @@ class MeteorStream
 {
 public:
 	//! Create a Meteor object.
-	//! @param velocity the speed of the meteor in km/s.
+	//! @param the speed of the meteor in km/s.
 	//! @param rAlpha the radiant alpha in rad
 	//! @param rDelta the radiant delta in rad
-	MeteorStream(const StelCore*, double velocity, double radiantAlpha, double radiantDelta);
+	//! @param pidx population index
+	MeteorStream(const StelCore*,
+		     double speed,
+		     double radiantAlpha,
+		     double radiantDelta,
+		     float pidx);
+
 	virtual ~MeteorStream();
 
 	//! Updates the position of the meteor, and expires it if necessary.
@@ -52,33 +58,25 @@ public:
 	//! Draws the meteor.
 	void draw(const StelCore* core, StelPainter& sPainter);
 
-	//! Determine if a meteor is alive or has burned out.
-	//! @return true if alive, else false.
-	bool isAlive(void);
-
 private:
-	bool alive;             //! Indicate if the meteor it still visible
-	bool train;             //! Indicate if the point or train is visible
+	bool m_alive;             //! Indicate if the meteor it still visible
 
-	Mat4d viewMatrix;       //! View Matrix
-	Vec3d obs;              //! Observer position
-	Vec3d position;         //! Equatorial coordinate position
-	Vec3d posInternal;      //! Middle of train
-	Vec3d posTrain;         //! End of train
+	Mat4d m_viewMatrix;       //! View Matrix
+	Vec3d m_obs;              //! Observer position
+	Vec3d m_position;         //! Equatorial coordinate position
+	Vec3d m_posInternal;      //! Middle of train
+	Vec3d m_posTrain;         //! End of train
 
-	double speed;           //! Velocity of meteor in km/s
-	double xydistance;      //! Distance in XY plane (orthogonal to meteor path) from observer to meteor
-	double initDist;        //! Initial distance from observer
-	double minDist;         //! Nearest point to observer along path
-	double distMultiplier;  //! Scale magnitude due to changes in distance
+	double m_speed;           //! Velocity of meteor in km/s
+	float m_pidx;             //! population index
+	double m_xydistance;      //! Distance in XY plane (orthogonal to meteor path) from observer to meteor
+	double m_minDist;         //! Nearest point to observer along path
+	double m_distMultiplier;  //! Scale magnitude due to changes in distance
 
-	double startH;          //! Start height above center of earth
-	double endH;            //! End height
+	double m_startH;          //! Start height above center of earth
+	double m_endH;            //! End height
 
-	float mag;              //! Apparent magnitude at head, 0-1
-	float maxMag;           //! 0-1
-	float absMag;           //! Absolute magnitude
-	float visMag;           //! Visual magnitude at observer
+	float m_mag;              //! Apparent magnitude at head, 0-1
 };
 
 #endif // _METEORSTREAM_HPP_

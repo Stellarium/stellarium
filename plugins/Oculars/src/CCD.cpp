@@ -28,18 +28,24 @@
 #define RADIAN_TO_DEGREES 57.2957795131
 
 CCD::CCD()
+	: m_resolutionX(0)
+	, m_resolutionY(0)
+	, m_chipWidth(0.)
+	, m_chipHeight(0.)
+	, m_pixelWidth(0.)
+	, m_pixelHeight(0.)
 {
 }
 
 CCD::CCD(const QObject& other)
+	: m_name(other.property("name").toString())
+	, m_resolutionX(other.property("resolutionX").toInt())
+	, m_resolutionY(other.property("resolutionY").toInt())
+	, m_chipWidth(other.property("chipWidth").toFloat())
+	, m_chipHeight(other.property("chipHeight").toFloat())
+	, m_pixelWidth(other.property("pixelWidth").toFloat())
+	, m_pixelHeight(other.property("pixelHeight").toFloat())
 {
-	this->m_name = other.property("name").toString();
-	this->m_chipHeight = other.property("chipHeight").toFloat();
-	this->m_chipWidth = other.property("chipWidth").toFloat();
-	this->m_pixelHeight = other.property("pixelHeight").toFloat();
-	this->m_pixelWidth = other.property("pixelWidth").toFloat();
-	this->m_resolutionX = other.property("resolutionX").toInt();
-	this->m_resolutionY = other.property("resolutionY").toInt();
 }
 
 CCD::~CCD()

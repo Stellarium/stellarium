@@ -221,7 +221,9 @@ void StelButton::setBackgroundPixmap(const QPixmap &newBackground)
 	updateIcon();
 }
 
-LeftStelBar::LeftStelBar(QGraphicsItem* parent) : QGraphicsItem(parent)
+LeftStelBar::LeftStelBar(QGraphicsItem* parent)
+	: QGraphicsItem(parent)
+	, hideTimeLine(NULL)
 {
 	// Create the help label
 	helpLabel = new QGraphicsSimpleTextItem("", this);
@@ -376,6 +378,7 @@ void BottomStelBar::addButton(StelButton* button, const QString& groupName, cons
 	updateButtonsGroups();
 
 	connect(button, SIGNAL(hoverChanged(bool)), this, SLOT(buttonHoverChanged(bool)));
+	emit sizeChanged();
 }
 
 StelButton* BottomStelBar::hideButton(const QString& actionName)
@@ -408,6 +411,7 @@ StelButton* BottomStelBar::hideButton(const QString& actionName)
 	bToRemove->setParentItem(NULL);
 	bToRemove->setVisible(false);
 	updateButtonsGroups();
+	emit sizeChanged();
 	return bToRemove;
 }
 

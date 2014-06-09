@@ -18,6 +18,7 @@
  */
 
 #include "tests/testDeltaT.hpp"
+
 #include <QDateTime>
 #include <QVariantList>
 #include <QString>
@@ -26,6 +27,8 @@
 #include <QVector>
 
 #include <cstdlib>
+
+#include "StelUtils.hpp"
 
 #define ERROR_THRESHOLD_PERCENT 5.0
 

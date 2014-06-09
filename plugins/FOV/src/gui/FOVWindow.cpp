@@ -27,8 +27,9 @@
 #include "StelModuleMgr.hpp"
 
 FOVWindow::FOVWindow()
+	: fov(NULL)
 {
-	ui = new Ui_fovWindowForm();	
+	ui = new Ui_fovWindowForm();
 }
 
 FOVWindow::~FOVWindow()
