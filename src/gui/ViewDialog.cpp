@@ -491,8 +491,12 @@ void ViewDialog::updateSkyCultureText()
 	else
 	{
 		QFile f(descPath);
-		f.open(QIODevice::ReadOnly);
-		QString htmlFile = QString::fromUtf8(f.readAll());
+		QString htmlFile;
+		if(f.open(QIODevice::ReadOnly))
+		{
+			htmlFile = QString::fromUtf8(f.readAll());
+			f.close();
+		}
 		ui->skyCultureTextBrowser->setHtml(htmlFile);
 	}
 }

@@ -42,6 +42,12 @@ class MeteorShower : public StelObject
 	friend class MeteorShowers;
 
 public:
+	enum RadiantStatus {
+		INACTIVE,        // inactive radiant.
+		ACTIVE_REAL,     // active radiant - real data.
+		ACTIVE_GENERIC   // active radiant - generic data.
+	};
+
 	//! @param id The official ID designation for a meteor shower, e.g. "LYR"
 	MeteorShower(const QVariantMap& map);
 	~MeteorShower();
@@ -68,11 +74,11 @@ public:
 	virtual double getAngularSize(const StelCore* core) const;
 	virtual QString getNameI18n(void) const
 	{
-		return q_(designation);
+		return q_(designation.trimmed());
 	}
 	virtual QString getEnglishName(void) const
 	{
-		return designation;
+		return designation.trimmed();
 	}
 	QString getDesignation(void) const;
 	void update(double deltaTime);
@@ -82,7 +88,7 @@ public:
 	//! @return 0:inactive 1:activeRealData 2:activeGenericData
 	int getStatus()
 	{
-		return isActive;
+		return status;
 	}
 
 	//! Get peak
@@ -141,7 +147,7 @@ private:
 	QDateTime finish;		//! Latest day for activity
 	QDateTime peak;			//! Day with maximum for activity
 
-	int isActive;		        //! Check if the radiant is active for the current sky date
+	int status;		        //! Check if the radiant is active for the current sky date
 					//! 0=inactive; 1=realData 2=genericData
 
 	void draw(StelPainter &painter);

@@ -38,8 +38,16 @@
 #include <QStandardItemModel>
 #include <limits>
 
-OcularDialog::OcularDialog(Oculars* pluginPtr, QList<CCD *>* ccds, QList<Ocular *>* oculars, QList<Telescope *>* telescopes, QList<Lens *> *lense) :
-	plugin(pluginPtr)
+OcularDialog::OcularDialog(Oculars* pluginPtr,
+			   QList<CCD *>* ccds,
+			   QList<Ocular *>* oculars,
+			   QList<Telescope *>* telescopes,
+			   QList<Lens *> *lense)
+	: plugin(pluginPtr)
+	, ccdMapper(NULL)
+	, ocularMapper(NULL)
+	, telescopeMapper(NULL)
+	, lensMapper(NULL)
 {
 	ui = new Ui_ocularDialogForm;
 	this->ccds = ccds;

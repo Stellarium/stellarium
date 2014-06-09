@@ -31,7 +31,6 @@
 #include "CompassMarks.hpp"
 #include "StelGui.hpp"
 #include "StelGuiItems.hpp"
-#include "StelIniParser.hpp"
 
 #include <QDebug>
 #include <QPixmap>
@@ -61,19 +60,18 @@ StelPluginInfo CompassMarksStelPluginInterface::getPluginInfo() const
 }
 
 CompassMarks::CompassMarks()
-	: markColor(1,1,1), pxmapGlow(NULL), pxmapOnIcon(NULL), pxmapOffIcon(NULL), toolbarButton(NULL)
+	: displayedAtStartup(false)
+	, markColor(1,1,1)
+	, toolbarButton(NULL)
+	, cardinalPointsState(false)
 {
 	setObjectName("CompassMarks");
+	conf = StelApp::getInstance().getSettings();
 }
 
 CompassMarks::~CompassMarks()
 {
-	if (pxmapGlow!=NULL)
-		delete pxmapGlow;
-	if (pxmapOnIcon!=NULL)
-		delete pxmapOnIcon;
-	if (pxmapOffIcon!=NULL)
-		delete pxmapOffIcon;
+	//
 }
 
 //! Determine which "layer" the plugin's drawing will happen on.
@@ -88,23 +86,26 @@ void CompassMarks::init()
 {
 	// Because the plug-in has no configuration GUI, users rely on what's
 	// written in the configuration file to know what can be configured.
-	QSettings* conf = StelApp::getInstance().getSettings();
 	Q_ASSERT(conf);
-	if (!conf->contains("CompassMarks"))
+	if (!conf->childGroups().contains("CompassMarks"))
 		restoreDefaultConfiguration();
 
 	loadConfiguration();
 
 	try
 	{
-		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-		pxmapGlow = new QPixmap(":/graphicGui/glow32x32.png");
-		pxmapOnIcon = new QPixmap(":/compassMarks/bt_compass_on.png");
-		pxmapOffIcon = new QPixmap(":/compassMarks/bt_compass_off.png");
-
 		addAction("actionShow_Compass_Marks", N_("Compass Marks"), N_("Compass marks"), "marksVisible");
-		toolbarButton = new StelButton(NULL, *pxmapOnIcon, *pxmapOffIcon, *pxmapGlow, "actionShow_Compass_Marks");
-		gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
+
+		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+		if (gui != NULL)
+		{
+			toolbarButton = new StelButton(NULL,
+						       QPixmap(":/compassMarks/bt_compass_on.png"),
+						       QPixmap(":/compassMarks/bt_compass_off.png"),
+						       QPixmap(":/graphicGui/glow32x32.png"),
+						       "actionShow_Compass_Marks");
+			gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");			
+		}
 		connect(GETSTELMODULE(LandscapeMgr), SIGNAL(cardinalsPointsDisplayedChanged(bool)), this, SLOT(cardinalPointsChanged(bool)));
 		cardinalPointsState = false;
 
@@ -124,7 +125,7 @@ void CompassMarks::draw(StelCore* core)
 	if (markFader.getInterstate() <= 0.0) { return; }
 
 	Vec3d pos;
-	StelProjectorP prj = core->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff); // Maybe conflict with Scenery3d branch. AW20120214 No. GZ20120826.
+	StelProjectorP prj = core->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
 	StelPainter painter(prj);
 	painter.setFont(font);
 
@@ -190,9 +191,7 @@ void CompassMarks::setCompassMarks(bool b)
 
 void CompassMarks::loadConfiguration()
 {
-	QSettings* conf = StelApp::getInstance().getSettings();
 	Q_ASSERT(conf);
-
 	conf->beginGroup("CompassMarks");
 	markColor = StelUtils::strToVec3f(conf->value("mark_color", "1,0,0").toString());
 	font.setPixelSize(conf->value("font_size", 10).toInt());
@@ -202,9 +201,7 @@ void CompassMarks::loadConfiguration()
 
 void CompassMarks::saveConfiguration()
 {
-	QSettings* conf = StelApp::getInstance().getSettings();
 	Q_ASSERT(conf);
-
 	conf->beginGroup("CompassMarks");
 	conf->setValue("font_size", font.pixelSize());
 	conf->setValue("enable_at_startup", displayedAtStartup);
@@ -214,9 +211,7 @@ void CompassMarks::saveConfiguration()
 
 void CompassMarks::restoreDefaultConfiguration()
 {
-	QSettings* conf = StelApp::getInstance().getSettings();
 	Q_ASSERT(conf);
-
 	// Remove the whole section from the configuration file
 	conf->remove("CompassMarks");
 	// Load the default values...

@@ -17,13 +17,16 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
+#include "config.h"
 #include "tests/testConversions.hpp"
-#include "StelUtils.hpp"
+
 #include <QString>
 #include <QDebug>
 #include <QtGlobal>
 #include <QVariantList>
 #include <QMap>
+
+#include "StelUtils.hpp"
 
 #define ERROR_LIMIT 1e-6
 

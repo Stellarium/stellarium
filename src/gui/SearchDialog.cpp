@@ -582,7 +582,7 @@ void SearchDialog::updateListWidget(int index)
 	bool englishNames = ui->searchInEnglishCheckBox->isChecked();
 	ui->objectsListWidget->addItems(objectMgr->listAllModuleObjects(moduleId, englishNames));
 	ui->objectsListWidget->sortItems(Qt::AscendingOrder);
-	connect(ui->objectsListWidget, SIGNAL(itemActivated(QListWidgetItem*)), this, SLOT(gotoObject(QListWidgetItem*)));
+	connect(ui->objectsListWidget, SIGNAL(itemClicked(QListWidgetItem*)), this, SLOT(gotoObject(QListWidgetItem*)));
 }
 
 void SearchDialog::updateListTab()

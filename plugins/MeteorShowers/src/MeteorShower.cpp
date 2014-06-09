@@ -40,8 +40,18 @@ bool MeteorShower::radiantMarkerEnabled = true;
 bool MeteorShower::showActiveRadiantsOnly = true;
 
 MeteorShower::MeteorShower(const QVariantMap& map)
-	: initialized(false),
-	  active(false)
+	: initialized(false)
+	, active(false)
+	, speed(0)
+	, rAlphaPeak(0)
+	, rDeltaPeak(0)
+	, driftAlpha(0)
+	, driftDelta(0)
+	, pidx(0)
+	, radiantAlpha(0)
+	, radiantDelta(0)
+	, zhr(0)
+	, status(0)
 {
 	// return initialized if the mandatory fields are not present
 	if(!map.contains("showerID"))
@@ -74,6 +84,10 @@ MeteorShower::MeteorShower(const QVariantMap& map)
 	}
 
 	updateCurrentData(getSkyQDateTime());
+	// ensures that all objects will be drawn once
+	// that's to avoid crashes by trying select a nonexistent object
+	StelPainter painter(StelApp::getInstance().getCore()->getProjection(StelCore::FrameJ2000));
+	draw(painter);
 
 	initialized = true;
 }
@@ -120,7 +134,11 @@ float MeteorShower::getSelectPriority(const StelCore*) const
 
 QString MeteorShower::getDesignation() const
 {
-	return designation;
+	if (showerID.toInt()) // if showerID is a number
+	{
+		return "";
+	}
+	return showerID;
 }
 
 QString MeteorShower::getDateFromJSON(QString jsondate) const
@@ -236,15 +254,15 @@ void MeteorShower::updateCurrentData(QDateTime skyDate)
 	if(skyDate.operator >=(start) && skyDate.operator <=(finish))
 	{
 		if(index)
-			isActive = 1; // real data
+			status = ACTIVE_REAL; // real data
 		else
-			isActive = 2; // generic data
+			status = ACTIVE_GENERIC; // generic data
 	}
 	else
 	{
-		isActive = 0; // isn't active
+		status = INACTIVE; // isn't active
 	}
-	active = (isActive>0) || !showActiveRadiantsOnly;
+	active = (status != INACTIVE) || !showActiveRadiantsOnly;
 
 	/**************************
 	 *Radiant drift
@@ -252,7 +270,7 @@ void MeteorShower::updateCurrentData(QDateTime skyDate)
 	radiantAlpha = rAlphaPeak;
 	radiantDelta = rDeltaPeak;
 
-	if (isActive)
+	if (status != INACTIVE)
 	{
 		double time = (StelUtils::qDateTimeToJd(skyDate) - StelUtils::qDateTimeToJd(peak))*24;
 		radiantAlpha += (driftAlpha/120)*time;
@@ -292,14 +310,26 @@ QString MeteorShower::getInfoString(const StelCore* core, const InfoStringGroup&
 	QTextStream oss(&str);
 
 	QString mstdata = q_("generic data");
-	if(isActive == 1)
+	if(status == ACTIVE_REAL)
 		mstdata = q_("real data");
 
 	if(flags&Name)
-		oss << "<h2>" << getNameI18n() << " (" << showerID  <<")</h2>";
+	{
+		oss << "<h2>" << getNameI18n();
+		if (!showerID.toInt())
+		{
+			oss << " (" << showerID  <<")</h2>";
+		}
+		else
+		{
+			oss << "</h2>";
+		}
+	}
 
 	if(flags&Extra)
+	{
 		oss << q_("Type: <b>%1</b> (%2)").arg(q_("meteor shower"), mstdata) << "<br />";
+	}
 
 	// Ra/Dec etc.
 	oss << getPositionInfoString(core, flags);
@@ -312,7 +342,11 @@ QString MeteorShower::getInfoString(const StelCore* core, const InfoStringGroup&
 			.arg(StelUtils::radToDmsStr(driftDelta/5));
 		oss << "<br />";
 
-		oss << q_("Geocentric meteoric velocity: %1 km/s").arg(speed) << "<br />";
+		if (speed>0)
+		{
+			oss << q_("Geocentric meteoric velocity: %1 km/s").arg(speed) << "<br />";
+		}
+
 		if(pidx>0)
 		{
 			oss << q_("The population index: %1").arg(pidx) << "<br />";
@@ -381,7 +415,7 @@ void MeteorShower::update(double deltaTime)
 	updateCurrentData(getSkyQDateTime());
 }
 
-void MeteorShower::draw(StelPainter& painter)
+void MeteorShower::draw(StelPainter &painter)
 {
 	StelUtils::spheToRect(radiantAlpha, radiantDelta, XYZ);
 	painter.getProjector()->project(XYZ, XY);
@@ -391,21 +425,22 @@ void MeteorShower::draw(StelPainter& painter)
 
 	qreal r, g, b;
 	float alpha = 0.85f + ((double) rand() / (RAND_MAX))/10;
-	switch(isActive)
+	switch(status)
 	{
-	case 1: //Active, real data
-		GETSTELMODULE(MeteorShowers)->getColorARR().getRgbF(&r,&g,&b);
-		break;
-	case 2: //Active, generic data
-		GETSTELMODULE(MeteorShowers)->getColorARG().getRgbF(&r,&g,&b);
-		break;
-	default: //Inactive
-		GETSTELMODULE(MeteorShowers)->getColorIR().getRgbF(&r,&g,&b);
+		case ACTIVE_REAL: //Active, real data
+			GETSTELMODULE(MeteorShowers)->getColorARR().getRgbF(&r,&g,&b);
+			break;
+		case ACTIVE_GENERIC: //Active, generic data
+			GETSTELMODULE(MeteorShowers)->getColorARG().getRgbF(&r,&g,&b);
+			break;
+		default: //Inactive
+			GETSTELMODULE(MeteorShowers)->getColorIR().getRgbF(&r,&g,&b);
 	}
 
 	painter.setColor(r, g, b, alpha);
 
-	if (MeteorShower::radiantMarkerEnabled)
+	Vec3d win;
+	if (MeteorShower::radiantMarkerEnabled && painter.getProjector()->projectCheck(XYZ, win))
 	{
 		MeteorShower::radiantTexture->bind();
 		painter.drawSprite2dMode(XY[0], XY[1], 10);

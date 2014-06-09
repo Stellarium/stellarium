@@ -25,8 +25,6 @@
 #include <QVector>
 #include <QString>
 
-#include "StelUtils.hpp"
-
 class TestDeltaT : public QObject
 {
 Q_OBJECT

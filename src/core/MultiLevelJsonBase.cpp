@@ -135,21 +135,23 @@ void MultiLevelJsonBase::initFromUrl(const QString& url)
 		QFileInfo finf(fileName);
 		baseUrl = finf.absolutePath()+'/';
 		QFile f(fileName);
-		f.open(QIODevice::ReadOnly);
-		const bool compressed = fileName.endsWith(".qZ");
-		const bool gzCompressed = fileName.endsWith(".gz");
-		try
+		if(f.open(QIODevice::ReadOnly))
 		{
-			loadFromQVariantMap(loadFromJSON(f, compressed, gzCompressed));
-		}
-		catch (std::runtime_error e)
-		{
-			qWarning() << "WARNING : Can't parse JSON description: " << QDir::toNativeSeparators(fileName) << ": " << e.what();
-			errorOccured = true;
+			const bool compressed = fileName.endsWith(".qZ");
+			const bool gzCompressed = fileName.endsWith(".gz");
+			try
+			{
+				loadFromQVariantMap(loadFromJSON(f, compressed, gzCompressed));
+			}
+			catch (std::runtime_error e)
+			{
+				qWarning() << "WARNING : Can't parse JSON description: " << QDir::toNativeSeparators(fileName) << ": " << e.what();
+				errorOccured = true;
+				f.close();
+				return;
+			}
 			f.close();
-			return;
 		}
-		f.close();
 	}
 	else
 	{

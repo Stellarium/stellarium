@@ -35,7 +35,6 @@
 #include "StelModuleMgr.hpp"
 #include "StelIniParser.hpp"
 #include "Planet.hpp"
-#include "PlanetShadows.hpp"
 #include "MinorPlanet.hpp"
 #include "Comet.hpp"
 
@@ -60,10 +59,15 @@
 #include <QDir>
 
 SolarSystem::SolarSystem()
-	: moonScale(1.),
-	  flagOrbits(false),
-	  flagLightTravelTime(false),
-	  allTrails(NULL)
+	: shadowPlanetCount(0)
+	, flagMoonScale(false)
+	, moonScale(1.)
+	, labelsAmount(false)
+	, flagOrbits(false)
+	, flagLightTravelTime(false)
+	, flagShow(false)
+	, flagMarker(false)
+	, allTrails(NULL)
 {
 	planetNameFont.setPixelSize(StelApp::getInstance().getSettings()->value("gui/base_font_size", 13).toInt());
 	setObjectName("SolarSystem");
@@ -143,7 +147,7 @@ void SolarSystem::init()
 
 	texPointer = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/pointeur4.png");
 	Planet::hintCircleTex = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/planet-indicator.png");
-
+	
 	StelApp *app = &StelApp::getInstance();
 	connect(app, SIGNAL(languageChanged()), this, SLOT(updateI18n()));
 	connect(app, SIGNAL(colorSchemeChanged(const QString&)), this, SLOT(setStelStyle(const QString&)));
@@ -152,6 +156,11 @@ void SolarSystem::init()
 	addAction("actionShow_Planets_Labels", displayGroup, N_("Planet labels"), "labelsDisplayed", "P");
 	addAction("actionShow_Planets_Orbits", displayGroup, N_("Planet orbits"), "orbitsDisplayed", "O");
 	addAction("actionShow_Planets_Trails", displayGroup, N_("Planet trails"), "trailsDisplayed", "Shift+T");
+}
+
+void SolarSystem::deinit()
+{
+	Planet::deinitShader();
 }
 
 void SolarSystem::recreateTrails()
@@ -950,65 +959,6 @@ struct biggerDistance : public std::binary_function<PlanetP, PlanetP, bool>
 	}
 };
 
-void SolarSystem::computeShadowInfo()
-{
-	// Acquire shadow informations
-	if(shadowModelMatricesBuffer.size() < shadowPlanetCount)
-	{
-		shadowModelMatricesBuffer.resize(shadowPlanetCount);
-	}
-
-	Mat4d* modelMatrices = shadowModelMatricesBuffer.data();
-	int p = 1;
-	foreach (const PlanetP& planet, systemPlanets)
-	{
-		if(planet->parent != sun || !planet->satellites.isEmpty())
-		{
-			planet->computeModelMatrix(modelMatrices[planet == sun ? 0 : p++]);
-		}
-	}
-
-	const int size = StelUtils::getBiggerEqualPowerOfTwo(shadowPlanetCount);
-
-	if(shadowInfoBuffer.size() < size * size)
-	{
-		shadowInfoBuffer.resize(size * size);
-	}
-
-	// Shadow info texture data
-	Vec4f* data = shadowInfoBuffer.data();
-	memset(data, '\0', size * size * sizeof(Vec4f));
-
-	int y = 1;
-
-	foreach (const PlanetP& target, systemPlanets)
-	{
-		if(target == sun || (target->parent == sun && target->satellites.isEmpty()))
-			continue;
-
-		const Mat4d mTarget = modelMatrices[y].inverse();
-		data[y * size] = Vec4f(mTarget[12], mTarget[13], mTarget[14], sun->getRadius());
-
-		int x = 1;
-
-		foreach (const PlanetP& source, systemPlanets)
-		{
-			if(source == sun || (source->parent == sun && source->satellites.isEmpty()))
-				continue;
-
-			const Mat4d& mSource(modelMatrices[x]);
-			const Vec4d position = mTarget * mSource.getColumn(3);
-
-			data[y * size + x] = Vec4f(position[0], position[1], position[2], source->getRadius());
-			x++;
-		}
-
-		y++;
-	}
-
-	PlanetShadows::getInstance()->setData(reinterpret_cast<char*>(data), size, shadowPlanetCount);
-}
-
 // Draw all the elements of the solar system
 // We are supposed to be in heliocentric coordinate
 void SolarSystem::draw(StelCore* core)
@@ -1039,39 +989,10 @@ void SolarSystem::draw(StelCore* core)
 	float maxMagLabel = (core->getSkyDrawer()->getLimitMagnitude()<5.f ? core->getSkyDrawer()->getLimitMagnitude() :
 			5.f+(core->getSkyDrawer()->getLimitMagnitude()-5.f)*1.2f) +(labelsAmount-3.f)*1.2f;
 
-	PlanetShadows* shadows = PlanetShadows::getInstance();
-
-	if(shadows->isSupported())
+	// Draw the elements
+	foreach (const PlanetP& p, systemPlanets)
 	{
-		computeShadowInfo();
-
-		// Draw the elements
-		int i = 1;
-		foreach (const PlanetP& p, systemPlanets)
-		{
-			if((p == sun || (p->parent == sun && p->satellites.isEmpty())))
-			{
-				shadows->setCurrent(0);
-			}
-			else
-			{
-				shadows->setCurrent(i);
-				i++;
-			}
-
-			p->draw(core, maxMagLabel, planetNameFont);
-		}
-
-		// deactivate
-		shadows->setCurrent(0);
-	}
-	else
-	{
-		// Draw the elements
-		foreach (const PlanetP& p, systemPlanets)
-		{
-			p->draw(core, maxMagLabel, planetNameFont);
-		}
+		p->draw(core, maxMagLabel, planetNameFont);
 	}
 
 	if (GETSTELMODULE(StelObjectMgr)->getFlagSelectedObjectPointer() && getFlagMarkers())

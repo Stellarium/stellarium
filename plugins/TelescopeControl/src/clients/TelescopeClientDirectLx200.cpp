@@ -34,9 +34,16 @@
 #include <QRegExp>
 #include <QStringList>
 
-TelescopeClientDirectLx200::TelescopeClientDirectLx200 (const QString &name, const QString &parameters, Equinox eq) :
-		TelescopeClient(name),
-		equinox(eq)
+TelescopeClientDirectLx200::TelescopeClientDirectLx200 (const QString &name, const QString &parameters, Equinox eq)
+	: TelescopeClient(name)
+	, time_delay(0)
+	, equinox(eq)
+	, lx200(NULL)
+	, long_format_used(false)
+	, answers_received(false)
+	, last_ra(0)
+	, queue_get_position(true)
+	, next_pos_time(0)
 {
 	interpolatedPosition.reset();
 	

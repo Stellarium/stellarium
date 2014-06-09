@@ -120,6 +120,8 @@ void StelSkyItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *optio
 
 void StelSkyItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
+	//To get back the focus from dialogs
+	this->setFocus(true);
 	QPointF pos = event->scenePos();
 	// XXX: to reintroduce
 	//distortPos(&pos);
@@ -312,17 +314,19 @@ void StelMainView::init(QSettings* conf)
 	setResizeMode(QDeclarativeView::SizeRootObjectToView);
 	qmlRegisterType<StelSkyItem>("Stellarium", 1, 0, "StelSky");
 	qmlRegisterType<StelGuiItem>("Stellarium", 1, 0, "StelGui");
-	rootContext()->setContextProperty("stelApp", stelApp);
+	rootContext()->setContextProperty("stelApp", stelApp);	
 	setSource(QUrl("qrc:/qml/main.qml"));
 	
-	QScreen* screen = glWidget->windowHandle()->screen();
-	int width = conf->value("video/screen_w", screen->size().width()).toInt();
-	int height = conf->value("video/screen_h", screen->size().height()).toInt();
+	QSize size = glWidget->windowHandle()->screen()->size();
+	size = QSize(conf->value("video/screen_w", size.width()).toInt(),
+		     conf->value("video/screen_h", size.height()).toInt());
+
+	bool fullscreen = conf->value("video/fullscreen", true).toBool();
 
 	// Without this, the screen is not shown on a Mac + we should use resize() for correct work of fullscreen/windowed mode switch. --AW WTF???
-	resize(width, height);
+	resize(size);
 
-	if (conf->value("video/fullscreen", true).toBool())
+	if (fullscreen)
 	{
 		setFullScreen(true);
 	}
@@ -331,9 +335,8 @@ void StelMainView::init(QSettings* conf)
 		setFullScreen(false);
 		int x = conf->value("video/screen_x", 0).toInt();
 		int y = conf->value("video/screen_y", 0).toInt();
-		move(x, y);
+		move(x, y);	
 	}
-	show();
 
 	flagInvertScreenShotColors = conf->value("main/invert_screenshots_colors", false).toBool();
 	setFlagCursorTimeout(conf->value("gui/flag_mouse_cursor_timeout", false).toBool());
@@ -534,6 +537,12 @@ void StelMainView::moveEvent(QMoveEvent * event)
 
 	// We use the glWidget instead of the even, as we want the screen that shows most of the widget.
 	StelApp::getInstance().setDevicePixelsPerPixel(glWidget->windowHandle()->devicePixelRatio());
+}
+
+void StelMainView::closeEvent(QCloseEvent* event)
+{
+	Q_UNUSED(event);
+	StelApp::getInstance().quit();
 }
 
 void StelMainView::keyPressEvent(QKeyEvent* event)

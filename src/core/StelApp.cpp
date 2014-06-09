@@ -163,6 +163,10 @@ Q_IMPORT_PLUGIN(EquationOfTimeStelPluginInterface)
 Q_IMPORT_PLUGIN(FOVStelPluginInterface)
 #endif
 
+#ifdef USE_STATIC_PLUGIN_POINTERCOORDINATES
+Q_IMPORT_PLUGIN(PointerCoordinatesStelPluginInterface)
+#endif
+
 #ifdef USE_STATIC_PLUGIN_OBSERVABILITY
 Q_IMPORT_PLUGIN(ObservabilityStelPluginInterface)
 #endif
@@ -187,14 +191,29 @@ void StelApp::deinitStatic()
  Create and initialize the main Stellarium application.
 *************************************************************************/
 StelApp::StelApp(QObject* parent)
-	: QObject(parent), core(NULL),
+	: QObject(parent)
+	, core(NULL)
+	, planetLocationMgr(NULL)
+	, audioMgr(NULL)
+	, videoMgr(NULL)
+	, skyImageMgr(NULL)
 #ifndef DISABLE_SCRIPTING
-	  scriptAPIProxy(NULL), scriptMgr(NULL),
+	, scriptAPIProxy(NULL)
+	, scriptMgr(NULL)
 #endif
-	  stelGui(NULL), devicePixelsPerPixel(1.f), globalScalingRatio(1.f), fps(0),
-	  frame(0), timefr(0.), timeBase(0.), flagNightVision(false),
-	  confSettings(NULL), initialized(false), saveProjW(-1), saveProjH(-1), drawState(0)
-
+	, stelGui(NULL)
+	, devicePixelsPerPixel(1.f)
+	, globalScalingRatio(1.f)
+	, fps(0)
+	, frame(0)
+	, timefr(0.)
+	, timeBase(0.)
+	, flagNightVision(false)
+	, confSettings(NULL)
+	, initialized(false)
+	, saveProjW(-1)
+	, saveProjH(-1)
+	, drawState(0)
 {
 	// Stat variables
 	nbDownloadedFiles=0;
@@ -619,8 +638,8 @@ void StelApp::handleWheel(QWheelEvent* event)
 
 	wheelEventTimer->start();
 	QWheelEvent deltaEvent(QPoint(event->pos().x()*devicePixelsPerPixel, event->pos().y()*devicePixelsPerPixel),
-						   QPoint(event->globalPos().x()*devicePixelsPerPixel, event->globalPos().y()*devicePixelsPerPixel),
-						   delta, event->buttons(), event->modifiers(), event->orientation());
+			       QPoint(event->globalPos().x()*devicePixelsPerPixel, event->globalPos().y()*devicePixelsPerPixel),
+			       delta, event->buttons(), event->modifiers(), event->orientation());
 	deltaEvent.setAccepted(false);
 	// Send the event to every StelModule
 	foreach (StelModule* i, moduleMgr->getCallOrders(StelModule::ActionHandleMouseClicks)) {
@@ -667,6 +686,16 @@ void StelApp::handleKeys(QKeyEvent* event)
 	}
 }
 
+// Handle pinch on multi touch devices
+void StelApp::handlePinch(qreal scale, bool started)
+{
+	// Send the event to every StelModule
+	foreach (StelModule* i, moduleMgr->getCallOrders(StelModule::ActionHandleMouseMoves))
+	{
+		if (i->handlePinch(scale, started))
+			return;
+	}
+}
 
 //! Set flag for activating night vision mode
 void StelApp::setVisionModeNight(bool b)
@@ -713,6 +742,12 @@ void StelApp::reportFileDownloadFinished(QNetworkReply* reply)
 		++nbDownloadedFiles;
 		totalDownloadedSize+=reply->bytesAvailable();
 	}
+}
+
+void StelApp::quit()
+{
+	emit aboutToQuit();
+	QCoreApplication::exit(0);
 }
 
 void StelApp::setDevicePixelsPerPixel(float dppp)
