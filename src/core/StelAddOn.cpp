@@ -27,7 +27,10 @@
 StelAddOn::StelAddOn()
 	: m_db(QSqlDatabase::addDatabase("QSQLITE"))
 {
+	// creating addon dir
 	StelFileMgr::makeSureDirExistsAndIsWritable(StelFileMgr::getUserDir()+"/addon");
+
+	// Init database
 	StelFileMgr::Flags flags = (StelFileMgr::Flags)(StelFileMgr::Directory|StelFileMgr::Writable);
 	QString dbPath = StelFileMgr::findFile("addon/", flags);
 	m_db.setHostName("localhost");
@@ -40,6 +43,7 @@ StelAddOn::StelAddOn()
 	    exit(-1);
 	}
 
+	// creating tables
 	if (!createAddonTable())
 	{
 		exit(-1);
