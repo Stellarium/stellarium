@@ -61,9 +61,12 @@ bool StelAddOn::createAddonTable()
 			"description TEXT, "
 			"version TEXT, "
 			"compatibility TEXT, "
-			"license INTEGER, "
 			"directory TEXT, "
-			"download INTEGER)"
+			"author INTEGER, "
+			"license INTEGER, "
+			"url TEXT, "
+			"download_size TEXT, "
+			"checksum TEXT)"
 	);
 	if (!query.exec())
 	{
