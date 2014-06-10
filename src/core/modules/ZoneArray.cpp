@@ -22,6 +22,7 @@
 #include "StelFileMgr.hpp"
 #include "StelGeodesicGrid.hpp"
 #include "StelObject.hpp"
+#include "StelPainter.hpp"
 
 #include <QDebug>
 #include <QFile>
