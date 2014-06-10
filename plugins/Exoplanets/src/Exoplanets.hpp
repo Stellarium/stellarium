@@ -23,7 +23,6 @@
 #include "StelObject.hpp"
 #include "StelFader.hpp"
 #include "StelTextureTypes.hpp"
-#include "StelPainter.hpp"
 #include "Exoplanet.hpp"
 #include <QFont>
 #include <QVariantMap>

@@ -19,6 +19,8 @@
 
 #ifndef _STELPAINTER_HPP_
 #define _STELPAINTER_HPP_
+
+#include "StelOpenGL.hpp"
 #include "VecMath.hpp"
 #include "StelSphereGeometry.hpp"
 #include "StelProjectorType.hpp"
