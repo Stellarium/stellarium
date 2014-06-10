@@ -31,8 +31,6 @@
 #include "StelObject.hpp"
 #include "StelTextureTypes.hpp"
 #include "StelSphereGeometry.hpp"
-
-#include "StelPainter.hpp"
 #include "gSatWrapper.hpp"
 
 

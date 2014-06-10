@@ -21,6 +21,7 @@
 #define _STELTEXTURE_HPP_
 
 #include "StelTextureTypes.hpp"
+#include "StelOpenGL.hpp"
 
 #include <QObject>
 #include <QImage>
