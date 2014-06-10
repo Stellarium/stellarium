@@ -29,6 +29,8 @@ public:
 
 private:
 	QSqlDatabase m_db;
+
+	bool createAddonTable();
 };
 
 #endif // _STELADDON_HPP_

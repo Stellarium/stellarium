@@ -45,3 +45,26 @@ StelAddOn::StelAddOn()
 		exit(-1);
 	}
 }
+
+bool StelAddOn::createAddonTable()
+{
+	QSqlQuery query(m_db);
+	query.prepare(
+		"CREATE TABLE IF NOT EXISTS addon ("
+			"id INTEGER primary key AUTOINCREMENT, "
+			"category INTEGER, "
+			"title TEXT, "
+			"description TEXT, "
+			"version TEXT, "
+			"compatibility TEXT, "
+			"license INTEGER, "
+			"directory TEXT, "
+			"download INTEGER)"
+	);
+	if (!query.exec())
+	{
+	  qDebug() << "Add-On Manager : unable to create table addon." << m_db.lastError();
+	  return false;
+	}
+	return true;
+}
