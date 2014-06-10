@@ -44,7 +44,7 @@ StelAddOn::StelAddOn()
 	}
 
 	// creating tables
-	if (!createAddonTable())
+	if (!createAddonTable() || !createCategoryTable())
 	{
 		exit(-1);
 	}
@@ -70,7 +70,23 @@ bool StelAddOn::createAddonTable()
 	);
 	if (!query.exec())
 	{
-	  qDebug() << "Add-On Manager : unable to create table addon." << m_db.lastError();
+	  qDebug() << "Add-On Manager : unable to create the addon table." << m_db.lastError();
+	  return false;
+	}
+	return true;
+}
+
+bool StelAddOn::createCategoryTable()
+{
+	QSqlQuery query(m_db);
+	query.prepare(
+		"CREATE TABLE IF NOT EXISTS category ("
+			"id INTEGER primary key AUTOINCREMENT, "
+			"name TEXT)"
+	);
+	if (!query.exec())
+	{
+	  qDebug() << "Add-On Manager : unable to create the category table." << m_db.lastError();
 	  return false;
 	}
 	return true;
