@@ -23,6 +23,9 @@
 #include "StelToneReproducer.hpp"
 #include "StelMovementMgr.hpp"
 #include "StelPainter.hpp"
+#include "StelTexture.hpp"
+
+StelTextureSP MeteorStream::bolideTexture;
 
 MeteorStream::MeteorStream(const StelCore* core,
 			   double speed,
@@ -193,17 +196,13 @@ void MeteorStream::draw(const StelCore* core, StelPainter& sPainter)
 		return;
 	}
 
-	double maxThickness = 0.085;
-	double thickness;
 	double maxFOV = core->getMovementMgr()->getMaxFov();
 	double FOV = core->getMovementMgr()->getCurrentFov();
+	double thickness = log(FOV)/(1.2*maxFOV - FOV) + 0.01;
+	double bolideSize = thickness*3;
 
-	if (FOV > 1.0) {
-		thickness = (maxFOV - FOV) * maxThickness / maxFOV;
-	} else {
-		thickness = FOV * maxThickness;
-	}
-
+	// train
+	//
 	QVector<Vec4f> colorArrayLine;
 	QVector<Vec3d> vertexArrayLine;
 	// triangular prism
@@ -213,15 +212,19 @@ void MeteorStream::draw(const StelCore* core, StelPainter& sPainter)
 	QVector<Vec3d> vertexArrayTop;
 
 	// last segment - dark
-	insertVertex(core, vertexArrayL, m_posTrain);
-	insertVertex(core, vertexArrayR, m_posTrain);
 	insertVertex(core, vertexArrayLine, m_posTrain);
+	Vec3d posTrainB = m_posTrain;
+	posTrainB[0] += thickness*0.7;
+	posTrainB[1] += thickness*0.7;
 
 	Vec3d posTrainL = m_posTrain;
 	posTrainL[1] -= thickness;
+	insertVertex(core, vertexArrayL, posTrainB);
 	insertVertex(core, vertexArrayL, posTrainL);
+
 	Vec3d posTrainR = m_posTrain;
 	posTrainR[0] -= thickness;
+	insertVertex(core, vertexArrayR, posTrainB);
 	insertVertex(core, vertexArrayR, posTrainR);
 
 	insertVertex(core, vertexArrayTop, posTrainL);
@@ -233,10 +236,10 @@ void MeteorStream::draw(const StelCore* core, StelPainter& sPainter)
 	colorArrayLine.push_back(lastColor);
 
 	// compute intermediate segments
-	for (int i=1; i<m_segments; i++) {
+	for (int i=1; i<=m_segments; i++) {
 		double mag = m_mag * i/(3*m_segments);
 		if (i > m_firstBrightSegment) {
-			mag *= 3;
+			mag *= 12/5;
 		}
 
 		double height = m_posTrain[2] + i*(m_position[2] - m_posTrain[2])/m_segments;
@@ -244,9 +247,12 @@ void MeteorStream::draw(const StelCore* core, StelPainter& sPainter)
 
 		posi = m_posTrain;
 		posi[2] = height;
+		insertVertex(core, vertexArrayLine, posi);
+
+		posi = posTrainB;
+		posi[2] = height;
 		insertVertex(core, vertexArrayL, posi);
 		insertVertex(core, vertexArrayR, posi);
-		insertVertex(core, vertexArrayLine, posi);
 
 		posi = posTrainL;
 		posi[2] = height;
@@ -264,28 +270,9 @@ void MeteorStream::draw(const StelCore* core, StelPainter& sPainter)
 		colorArrayLine.push_back(internalColor);
 	}
 
-	// first segment - light
-	insertVertex(core, vertexArrayL, m_position);
-	insertVertex(core, vertexArrayR, m_position);
-	insertVertex(core, vertexArrayLine, m_position);
-
-	Vec3d positionL = m_position;
-	positionL[1] -= thickness;
-	insertVertex(core, vertexArrayL, positionL);
-
-	Vec3d positionR = m_position;
-	positionR[0] -= thickness;
-	insertVertex(core, vertexArrayR, positionR);
-
-	insertVertex(core, vertexArrayTop, positionL);
-	insertVertex(core, vertexArrayTop, positionR);
-
-	Vec4f initialColor = Vec4f(1,1,1,m_mag);
-	colorArray.push_back(initialColor);
-	colorArray.push_back(initialColor);
-	colorArrayLine.push_back(initialColor);
-
 	// drawing all segments
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	sPainter.enableClientStates(true, false, true);
 	sPainter.setColorPointer(4, GL_FLOAT, colorArray.constData());
 	if (thickness) {
@@ -302,19 +289,43 @@ void MeteorStream::draw(const StelCore* core, StelPainter& sPainter)
 	sPainter.setVertexPointer(3, GL_DOUBLE, vertexArrayLine.constData());
 	sPainter.drawFromArray(StelPainter::LineStrip, vertexArrayLine.size(), 0, true);
 
-	// face
-	QVector<Vec3d> vertexArrayFront;
-	QVector<Vec4f> colorArrayFront;
-	insertVertex(core, vertexArrayFront, positionL);
-	insertVertex(core, vertexArrayFront, positionR);
-	insertVertex(core, vertexArrayFront, m_position);
-	colorArrayFront.push_back(initialColor);
-	colorArrayFront.push_back(initialColor);
-	colorArrayFront.push_back(initialColor);
+	// bolide
+	//
+	QVector<Vec3d> vertexArrayBolide;
+	QVector<Vec4f> colorArrayBolide;
+	Vec4f bolideColor = Vec4f(1,1,1,m_mag);
 
-	sPainter.setColorPointer(4, GL_FLOAT, colorArrayFront.constData());
-	sPainter.setVertexPointer(3, GL_DOUBLE, vertexArrayFront.constData());
-	sPainter.drawFromArray(StelPainter::TriangleStrip, vertexArrayFront.size(), 0, true);
+	Vec3d topLeft = m_position;
+	topLeft[1] -= bolideSize;
+	insertVertex(core, vertexArrayBolide, topLeft);
+	colorArrayBolide.push_back(bolideColor);
 
+	Vec3d topRight = m_position;
+	topRight[0] -= bolideSize;
+	insertVertex(core, vertexArrayBolide, topRight);
+	colorArrayBolide.push_back(bolideColor);
+
+	Vec3d bottomRight = m_position;
+	bottomRight[1] += bolideSize;
+	insertVertex(core, vertexArrayBolide, bottomRight);
+	colorArrayBolide.push_back(bolideColor);
+
+	Vec3d bottomLeft = m_position;
+	bottomLeft[0] += bolideSize;
+	insertVertex(core, vertexArrayBolide, bottomLeft);
+	colorArrayBolide.push_back(bolideColor);
+
+	glBlendFunc(GL_ONE, GL_ONE);
+
+	sPainter.enableClientStates(true, true, true);
+	MeteorStream::bolideTexture->bind();
+
+	static const float texCoordData[] = {1.,0., 0.,0., 0.,1., 1.,1.};
+	sPainter.setTexCoordPointer(2, GL_FLOAT, texCoordData);
+	sPainter.setColorPointer(4, GL_FLOAT, colorArrayBolide.constData());
+	sPainter.setVertexPointer(3, GL_DOUBLE, vertexArrayBolide.constData());
+	sPainter.drawFromArray(StelPainter::TriangleFan, vertexArrayBolide.size(), 0, true);
+
+	glDisable(GL_BLEND);
 	sPainter.enableClientStates(false);
 }

@@ -166,6 +166,7 @@ void MeteorShowers::init()
 
 		texPointer = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/pointeur5.png");
 		MeteorShower::radiantTexture = StelApp::getInstance().getTextureManager().createTexture(":/MeteorShowers/radiant.png");
+		MeteorStream::bolideTexture = StelApp::getInstance().getTextureManager().createTextureThread(StelFileMgr::getInstallationDir()+"/textures/cometTail.png", StelTexture::StelTextureParams(true, GL_LINEAR, GL_CLAMP_TO_EDGE));
 
 		// key bindings and other actions
 		QString msGroup = N_("Meteor Showers");
@@ -376,10 +377,6 @@ void MeteorShowers::drawStream(StelCore* core, StelPainter& painter)
 	{
 		return;
 	}
-
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	glEnable(GL_BLEND);
-	painter.enableTexture2d(false);
 
 	int index = 0;
 	if (active.size() > 0)
