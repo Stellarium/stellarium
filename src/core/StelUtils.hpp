@@ -27,7 +27,6 @@
 #include <QVariantMap>
 #include <QDateTime>
 #include <QString>
-#include <QOpenGLFunctions>
 
 // astronomical unit (km)
 #define AU 149597870.691
@@ -36,16 +35,6 @@
 #define PARSEC 30.857e12
 // speed of light (km/sec)
 #define SPEED_OF_LIGHT 299792.458
-
-#ifndef NDEBUG
-# define GL(line) do { \
-	line;\
-	if (StelUtils::checkGLErrors(__FILE__, __LINE__))\
-		exit(-1);\
-	} while(0)
-#else
-# define GL(line) line
-#endif
 
 //! @namespace StelUtils contains general purpose utility functions.
 namespace StelUtils
@@ -602,9 +591,6 @@ namespace StelUtils
 	//! @param segments number of segments
 	//! @param minAngle start angle inside the half-circle. maxAngle=minAngle+segments*phi
 	float* ComputeCosSinRhoZone(const float dRho, const int segments, const float minAngle);
-	
-	const char* getGLErrorText(int code);
-	int checkGLErrors(const char *file, int line);
 }
 
 #endif // _STELUTILS_HPP_

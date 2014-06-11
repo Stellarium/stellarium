@@ -79,6 +79,8 @@ SET(stellarium_lib_SRCS
 	core/StelObjectModule.cpp
 	core/StelObjectModule.hpp
 	core/StelObjectType.hpp
+	core/StelOpenGL.cpp
+	core/StelOpenGL.hpp
 	core/StelPluginInterface.hpp
 	core/StelSkyCultureMgr.cpp
 	core/StelSkyCultureMgr.hpp
@@ -467,12 +469,6 @@ INSTALL(TARGETS stellarium DESTINATION bin)
 #############################################################################################
 
 SET(extLinkerOptionTest ${QT_QTCORE_LIBRARY} ${QT_QTNETWORK_LIBRARY} ${QT_QTTEST_LIBRARY} ${QT_QTGUI_LIBRARY} ${QT_QTOPENGL_LIBRARY} ${OPENGL_LIBRARIES} ${ZLIB_LIBRARIES})
-# Needed fix (AW)
-IF(APPLE)
-	SET(extLinkerOptionTest ${extLinkerOptionTest} "-framework OpenGL")
-ELSE()
-	SET(extLinkerOptionTest ${extLinkerOptionTest}  -lGL)
-ENDIF()
 
 # Custom target used to build all tests at once
 ADD_CUSTOM_TARGET(buildTests)
@@ -483,7 +479,7 @@ SET(tests_testDates_SRCS
 	core/StelUtils.hpp
 	core/StelUtils.cpp)
 ADD_EXECUTABLE(testDates EXCLUDE_FROM_ALL ${tests_testDates_SRCS})
-QT5_USE_MODULES(testDates Core Gui Widgets OpenGL Script Declarative Test)
+QT5_USE_MODULES(testDates Core Gui Widgets Script Declarative Test)
 TARGET_LINK_LIBRARIES(testDates ${extLinkerOptionTest})
 ADD_DEPENDENCIES(buildTests testDates)
 
@@ -493,7 +489,7 @@ SET(tests_testStelFileMgr_SRCS
 	core/StelFileMgr.hpp
 	core/StelFileMgr.cpp)
 ADD_EXECUTABLE(testStelFileMgr EXCLUDE_FROM_ALL ${tests_testStelFileMgr_SRCS})
-QT5_USE_MODULES(testStelFileMgr Core Gui Widgets OpenGL Script Declarative Test)
+QT5_USE_MODULES(testStelFileMgr Core Gui Widgets Script Declarative Test)
 TARGET_LINK_LIBRARIES(testStelFileMgr ${extLinkerOptionTest})
 ADD_DEPENDENCIES(buildTests testStelFileMgr)
 
@@ -553,7 +549,7 @@ SET(tests_testStelJsonParser_SRCS
 	core/StelJsonParser.hpp
 	core/StelJsonParser.cpp)
 ADD_EXECUTABLE(testStelJsonParser EXCLUDE_FROM_ALL ${tests_testStelJsonParser_SRCS})
-QT5_USE_MODULES(testStelJsonParser Core Gui Widgets OpenGL Script Declarative Test)
+QT5_USE_MODULES(testStelJsonParser Core Gui Widgets Script Declarative Test)
 TARGET_LINK_LIBRARIES(testStelJsonParser ${extLinkerOptionTest})
 ADD_DEPENDENCIES(buildTests testStelJsonParser)
 
@@ -572,7 +568,7 @@ SET(tests_testDeltaT_SRCS
 	core/StelUtils.hpp
 	core/StelUtils.cpp)
 ADD_EXECUTABLE(testDeltaT EXCLUDE_FROM_ALL ${tests_testDeltaT_SRCS})
-QT5_USE_MODULES(testDeltaT Core Gui Widgets OpenGL Script Declarative Test)
+QT5_USE_MODULES(testDeltaT Core Gui Widgets Script Declarative Test)
 TARGET_LINK_LIBRARIES(testDeltaT ${extLinkerOptionTest})
 ADD_DEPENDENCIES(buildTests testDeltaT)
 
@@ -582,7 +578,7 @@ SET(tests_testConversions_SRCS
 	core/StelUtils.hpp
 	core/StelUtils.cpp)
 ADD_EXECUTABLE(testConversions EXCLUDE_FROM_ALL ${tests_testConversions_SRCS})
-QT5_USE_MODULES(testConversions Core Gui Widgets OpenGL Script Declarative Test)
+QT5_USE_MODULES(testConversions Core Gui Widgets Script Declarative Test)
 TARGET_LINK_LIBRARIES(testConversions ${extLinkerOptionTest})
 ADD_DEPENDENCIES(buildTests testConversions)
 
