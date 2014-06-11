@@ -56,6 +56,7 @@
 	#ifdef _MSC_BUILD
 		#include <MMSystem.h>
 		#pragma comment(lib,"Winmm.lib")
+		#pragma comment(linker, "/SUBSYSTEM:windows /ENTRY:mainCRTStartup") // Hide console
 	#endif
 #endif //Q_OS_WIN
 

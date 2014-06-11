@@ -88,5 +88,12 @@ void    invjday
           int& hr, int& minute, double& sec
         );
 
+#ifdef _MSC_BUILD
+double asinh
+	(
+	  double x
+	);
+#endif
+
 #endif
 
