@@ -44,13 +44,13 @@ StelAddOn::StelAddOn()
 	}
 
 	// creating tables
-	if (!createAddonTable() || !createCategoryTable())
+	if (!createTableAddon() || !createTableCategory() || !createTableLicense())
 	{
 		exit(-1);
 	}
 }
 
-bool StelAddOn::createAddonTable()
+bool StelAddOn::createTableAddon()
 {
 	QSqlQuery query(m_db);
 	query.prepare(
@@ -76,7 +76,7 @@ bool StelAddOn::createAddonTable()
 	return true;
 }
 
-bool StelAddOn::createCategoryTable()
+bool StelAddOn::createTableCategory()
 {
 	QSqlQuery query(m_db);
 	query.prepare(
@@ -87,6 +87,23 @@ bool StelAddOn::createCategoryTable()
 	if (!query.exec())
 	{
 	  qDebug() << "Add-On Manager : unable to create the category table." << m_db.lastError();
+	  return false;
+	}
+	return true;
+}
+
+bool StelAddOn::createTableLicense()
+{
+	QSqlQuery query(m_db);
+	query.prepare(
+		"CREATE TABLE IF NOT EXISTS license ("
+			"id INTEGER primary key AUTOINCREMENT, "
+			"name TEXT, "
+			"url TEXT)"
+	);
+	if (!query.exec())
+	{
+	  qDebug() << "Add-On Manager : unable to create the license table." << m_db.lastError();
 	  return false;
 	}
 	return true;
