@@ -23,4 +23,19 @@
 #define GL_GLEXT_PROTOTYPES
 #include <qopengl.h>
 
+#include <QOpenGLFunctions>
+
+#ifndef NDEBUG
+# define GL(line) do { \
+	line;\
+	if (checkGLErrors(__FILE__, __LINE__))\
+		exit(-1);\
+	} while(0)
+#else
+# define GL(line) line
+#endif
+
+const char* getGLErrorText(int code);
+int checkGLErrors(const char *file, int line);
+
 #endif // _STELOPENGL_HPP_
