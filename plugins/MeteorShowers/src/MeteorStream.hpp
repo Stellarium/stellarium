@@ -19,7 +19,9 @@
 #ifndef _METEORSTREAM_HPP_
 #define _METEORSTREAM_HPP_
 
+#include "StelTextureTypes.hpp"
 #include "VecMath.hpp"
+
 class StelCore;
 class StelPainter;
 
@@ -37,6 +39,8 @@ class StelPainter;
 //! status of a meteor may also be determined using the isAlive member.
 class MeteorStream
 {
+	friend class MeteorShowers;
+
 public:
 	//! Create a Meteor object.
 	//! @param the speed of the meteor in km/s.
@@ -60,6 +64,8 @@ public:
 
 private:
 	void insertVertex(const StelCore* core, QVector<Vec3d> &vertexArray, Vec3d vertex);
+
+	static StelTextureSP bolideTexture;
 
 	bool m_alive;             //! Indicate if the meteor it still visible
 
