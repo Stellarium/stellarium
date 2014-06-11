@@ -112,6 +112,10 @@ public slots:
 	//! Updates the scene and process all events
 	void updateScene();
 
+	//! Notify that an event was handled by the program and therefore the
+	//! FPS should be maximized for a couple of seconds.
+	void thereWasAnEvent();
+
 protected:
 	virtual void mouseMoveEvent(QMouseEvent* event);
 	virtual void mousePressEvent(QMouseEvent* event);
@@ -165,10 +169,6 @@ private:
 	// Number of second before the mouse cursor disappears
 	float cursorTimeout;
 	bool flagCursorTimeout;
-
-	//! Notify that an event was handled by the program and therefore the
-	//! FPS should be maximized for a couple of seconds.
-	void thereWasAnEvent();
 
 	double lastEventTimeSec;
 

@@ -24,7 +24,6 @@
 
 #include <QString>
 #include <QObject>
-#include <QOpenGLFunctions>
 
 // Predeclaration
 class StelCore;
@@ -49,7 +48,7 @@ class QSettings;
 //!	Update sky culture, i.e. load data if necessary and translate them to current sky language if needed.
 //! colorSchemeChanged(const QString&)
 //!	Load the given color style
-class StelModule : public QObject, protected QOpenGLFunctions 
+class StelModule : public QObject
 {
 	Q_OBJECT
 	// Do not add Q_OBJECT here!!
@@ -71,12 +70,6 @@ public:
 	//! Execute all the drawing functions for this module.
 	//! @param core the core to use for the drawing
 	virtual void draw(StelCore* core) {Q_UNUSED(core);}
-
-	//! Iterate through the drawing sequence.
-	//! This allow us to split the slow drawing operation into small parts,
-	//! we can then decide to pause the painting for this frame and used the cached image instead.
-	//! @return true if we should continue drawing (by calling the method again)
-	virtual bool drawPartial(StelCore* core);
 
 	//! Update the module with respect to the time.
 	//! @param deltaTime the time increment in second since last call.

@@ -37,7 +37,6 @@
 #include <QFileInfo>
 #include <QIcon>
 #include <QMoveEvent>
-#include <QOpenGLFunctions>
 #include <QPluginLoader>
 #include <QScreen>
 #include <QSettings>
@@ -54,7 +53,7 @@
 StelMainView* StelMainView::singleton = NULL;
 
 //! Render Stellarium sky. 
-class StelSkyItem : public QDeclarativeItem, protected QOpenGLFunctions
+class StelSkyItem : public QDeclarativeItem
 {
 public:
 	StelSkyItem(QDeclarativeItem* parent = NULL);
@@ -445,11 +444,15 @@ void StelMainView::maxFpsSceneUpdate()
 void StelMainView::drawBackground(QPainter*, const QRectF&)
 {
 	const double now = StelApp::getTotalRunTime();
+	const double JD_SECOND=0.000011574074074074074074;
 
 	// Determines when the next display will need to be triggered
 	// The current policy is that after an event, the FPS is maximum for 2.5 seconds
-	// after that, it switches back to the default minfps value to save power
-	if (now-lastEventTimeSec<2.5)
+	// after that, it switches back to the default minfps value to save power.
+	// The fps is also kept to max if the timerate is higher than normal speed.
+	const float timeRate = StelApp::getInstance().getCore()->getTimeRate();
+	const bool needMaxFps = (now - lastEventTimeSec < 2.5) || fabs(timeRate) > JD_SECOND;
+	if (needMaxFps)
 	{
 		if (!flagMaxFpsUpdatePending)
 		{
@@ -508,7 +511,8 @@ void StelMainView::minFpsChanged()
 
 void StelMainView::mouseMoveEvent(QMouseEvent* event)
 {
-	thereWasAnEvent(); // Refresh screen ASAP
+	if (event->buttons())
+		thereWasAnEvent(); // Refresh screen ASAP
 	QDeclarativeView::mouseMoveEvent(event);
 }
 

@@ -22,7 +22,6 @@
 #include "StelObjectModule.hpp"
 #include "StelObject.hpp"
 #include "StelTextureTypes.hpp"
-#include "StelPainter.hpp"
 #include "Quasar.hpp"
 #include <QFont>
 #include <QVariantMap>
