@@ -168,7 +168,8 @@ bool MeteorStream::update(double deltaTime)
 	}
 	else
 	{
-		m_posTrain[2] -= m_speed*deltaTime/1000.0f;
+		double dt = 820+(double)rand()/((double)RAND_MAX+1)*185; // range 820-1005
+		m_posTrain[2] -= m_speed*deltaTime/dt;
 	}
 
 	return m_alive;
