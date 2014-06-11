@@ -52,6 +52,7 @@
 #include "StelScriptMgr.hpp"
 #endif
 
+#include "AddOnDialog.hpp"
 #include "ConfigurationDialog.hpp"
 #include "DateTimeDialog.hpp"
 #include "HelpDialog.hpp"
@@ -90,6 +91,7 @@ StelGui::StelGui()
 	, buttonTimeCurrent(NULL)
 	, buttonTimeForward(NULL)
 	, buttonGotoSelectedObject(NULL)
+	, addonDialog(0)
 	, locationDialog(0)
 	, helpDialog(0)
 	, dateTimeDialog(0)
@@ -115,6 +117,11 @@ StelGui::~StelGui()
 	delete skyGui;
 	skyGui = NULL;
 
+	if (addonDialog)
+	{
+		delete addonDialog;
+		addonDialog = 0;
+	}
 	if (locationDialog)
 	{
 		delete locationDialog;
@@ -160,6 +167,7 @@ void StelGui::init(QGraphicsWidget *atopLevelGraphicsWidget)
 	qDebug() << "Creating GUI ...";
 
 	StelGuiBase::init(atopLevelGraphicsWidget);
+	addonDialog = new AddOnDialog(atopLevelGraphicsWidget);
 	skyGui = new SkyGui(atopLevelGraphicsWidget);
 	locationDialog = new LocationDialog(atopLevelGraphicsWidget);
 	helpDialog = new HelpDialog(atopLevelGraphicsWidget);
@@ -202,6 +210,7 @@ void StelGui::init(QGraphicsWidget *atopLevelGraphicsWidget)
 	actionsMgr->addAction("actionShow_DateTime_Window_Global", windowsGroup, N_("Date/time window"), dateTimeDialog, "visible", "F5", "", true);
 	actionsMgr->addAction("actionShow_Location_Window_Global", windowsGroup, N_("Location window"), locationDialog, "visible", "F6", "", true);
 	actionsMgr->addAction("actionShow_Shortcuts_Window_Global", windowsGroup, N_("Shortcuts window"), shortcutsDialog, "visible", "F7", "", true);
+	actionsMgr->addAction("actionShow_AddOn_Window_Global", windowsGroup, N_("Add-On Manager"), addonDialog, "visible", "F8", "", true);
 	actionsMgr->addAction("actionSave_Copy_Object_Information_Global", miscGroup, N_("Copy selected object information to clipboard"), this, "copySelectedObjectInfo()", "Ctrl+C", "", true);
 	actionsMgr->addAction("actionToggle_GuiHidden_Global", miscGroup, N_("Toggle visibility of GUI"), this, "visible", "Ctrl+T", "", true);
 
@@ -243,6 +252,11 @@ void StelGui::init(QGraphicsWidget *atopLevelGraphicsWidget)
 	pxmapOn = QPixmap(":/graphicGui/6-on-search.png");
 	pxmapOff = QPixmap(":/graphicGui/6-off-search.png");
 	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow, "actionShow_Search_Window_Global");
+	skyGui->winBar->addButton(b);
+
+	pxmapOn = QPixmap(":/graphicGui/7-on-plugins.png");
+	pxmapOff = QPixmap(":/graphicGui/7-off-plugins.png");
+	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow, "actionShow_AddOn_Window_Global");
 	skyGui->winBar->addButton(b);
 
 	pxmapOn = QPixmap(":/graphicGui/8-on-settings.png");
@@ -439,7 +453,8 @@ void StelGui::setStelStyle(const QString& section)
 			htmlStyleFile.close();
 		}
 	}
-	
+
+	addonDialog->styleChanged();
 	locationDialog->styleChanged();
 	dateTimeDialog->styleChanged();
 	configurationDialog->styleChanged();

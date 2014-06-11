@@ -32,6 +32,7 @@ class QTimeLine;
 class StelButton;
 class BottomStelBar;
 class InfoPanel;
+class AddOnDialog;
 class ConfigurationDialog;
 class DateTimeDialog;
 class HelpDialog;
@@ -173,6 +174,7 @@ private:
 
 	StelButton* buttonGotoSelectedObject;
 
+	AddOnDialog* addonDialog;
 	LocationDialog* locationDialog;
 	HelpDialog* helpDialog;
 	DateTimeDialog* dateTimeDialog;
