@@ -41,7 +41,6 @@ StelTexture::StelTexture() : networkReply(NULL), loader(NULL), errorOccured(fals
 {
 	width = -1;
 	height = -1;
-	initializeOpenGLFunctions();
 }
 
 StelTexture::~StelTexture()

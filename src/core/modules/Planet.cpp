@@ -34,12 +34,14 @@
 #include "StelPainter.hpp"
 #include "StelTranslator.hpp"
 #include "StelUtils.hpp"
+#include "StelOpenGL.hpp"
 
 #include <iomanip>
 #include <QTextStream>
 #include <QString>
 #include <QDebug>
 #include <QVarLengthArray>
+#include <QOpenGLContext>
 #include <QOpenGLShader>
 
 Vec3f Planet::labelColor = Vec3f(0.4,0.4,0.8);
@@ -975,9 +977,7 @@ void Planet::initShader()
 		"    float C = sin(alpha) * tan(beta);\n"
 		"    lum_ = max(0.0, cosAngleLightNormal) * (A + B * max(0.0, gamma) * C);\n"
 		"#else\n"
-		"    float c = lightDirection.x * normal.x +\n"
-		"              lightDirection.y * normal.y +\n"
-		"              lightDirection.z * normal.z;\n"
+		"    float c = dot(lightDirection, normal);\n"
 		"    lum_ = clamp(c, 0.0, 1.0);\n"
 		"#endif\n"
 		"\n"

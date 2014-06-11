@@ -49,6 +49,7 @@
 #include "StelProjector.hpp"
 #include "StelSkyDrawer.hpp"
 #include "StelUtils.hpp"
+#include "StelPainter.hpp"
 #include "ZoneArray.hpp"
 
 
