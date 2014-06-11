@@ -44,7 +44,10 @@ StelAddOn::StelAddOn()
 	}
 
 	// creating tables
-	if (!createTableAddon() || !createTableCategory() || !createTableLicense())
+	if (!createTableAddon() ||
+	    !createTableCategory() ||
+	    !createTableLicense() ||
+	    !createTableAuthor())
 	{
 		exit(-1);
 	}
@@ -104,6 +107,24 @@ bool StelAddOn::createTableLicense()
 	if (!query.exec())
 	{
 	  qDebug() << "Add-On Manager : unable to create the license table." << m_db.lastError();
+	  return false;
+	}
+	return true;
+}
+
+bool StelAddOn::createTableAuthor()
+{
+	QSqlQuery query(m_db);
+	query.prepare(
+		"CREATE TABLE IF NOT EXISTS author ("
+			"id INTEGER primary key AUTOINCREMENT, "
+			"name TEXT, "
+			"email TEXT, "
+			"url TEXT)"
+	);
+	if (!query.exec())
+	{
+	  qDebug() << "Add-On Manager : unable to create the author table." << m_db.lastError();
 	  return false;
 	}
 	return true;

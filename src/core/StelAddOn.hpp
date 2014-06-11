@@ -33,6 +33,7 @@ private:
     bool createTableAddon();
     bool createTableCategory();
     bool createTableLicense();
+    bool createTableAuthor();
 };
 
 #endif // _STELADDON_HPP_
