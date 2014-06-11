@@ -34,6 +34,7 @@
 #include "StelPainter.hpp"
 #include "StelTranslator.hpp"
 #include "StelUtils.hpp"
+#include "StelOpenGL.hpp"
 
 #include <iomanip>
 #include <QTextStream>
