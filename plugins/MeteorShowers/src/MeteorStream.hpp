@@ -66,7 +66,6 @@ public:
 private:
 	void insertVertex(const StelCore* core, QVector<Vec3d> &vertexArray, Vec3d vertex);
 	Vec4f getColor(QString colorName);
-	QList<MeteorShower::colorPair> getDefaultColor();
 
 	static StelTextureSP bolideTexture;
 
