@@ -230,17 +230,6 @@ IF(ENABLE_SCRIPTING)
 	)
 ENDIF()
 
-IF(WIN32)
-	SET(stellarium_lib_SRCS ${stellarium_lib_SRCS}
-		core/external/kdewin32/grp.h
-		core/external/kdewin32/pwd.h
-		core/external/kdewin32/unistd.h
-		core/external/kdewin32/grp.c
-		core/external/kdewin32/pwd.c
-		core/external/kdewin32/unistd.c
-	)
-ENDIF()
-
 SET(stellarium_exe_SRCS main.cpp)
 
 ################# compiles resources files ############
