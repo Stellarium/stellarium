@@ -22,6 +22,7 @@
 
 #include "StelDialog.hpp"
 
+#include <QListWidgetItem>
 #include <QObject>
 
 class Ui_addonDialogForm;
@@ -39,9 +40,22 @@ public slots:
 	void retranslate();
 
 protected:
-    Ui_addonDialogForm* ui;
+	Ui_addonDialogForm* ui;
 	//! Initialize the dialog widgets and connect the signals/slots
 	virtual void createDialogContent();
+
+private slots:
+	void changePage(QListWidgetItem *current, QListWidgetItem *previous);
+
+private:
+	//! Defines the columns that will be displayed in the table view.
+	//! @enum ModelColumns
+	enum ModelColumns {
+		ColumnTitle,
+		ColumnInstalledVersion,
+		ColumnLastVersion,
+		ColumnCount
+	};
 };
 
 #endif // _ADDONDIALOG_HPP_

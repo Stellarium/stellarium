@@ -17,9 +17,13 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 */
 
+#include <QStandardItemModel>
+
 #include "AddOnDialog.hpp"
 #include "ui_addonDialog.h"
 #include "StelApp.hpp"
+#include "StelGui.hpp"
+#include "StelTranslator.hpp"
 
 AddOnDialog::AddOnDialog(QObject* parent) : StelDialog(parent)
 {
@@ -29,6 +33,7 @@ AddOnDialog::AddOnDialog(QObject* parent) : StelDialog(parent)
 AddOnDialog::~AddOnDialog()
 {
 	delete ui;
+	ui = NULL;
 }
 
 void AddOnDialog::retranslate()
@@ -47,6 +52,19 @@ void AddOnDialog::createDialogContent()
 {
     ui->setupUi(dialog);
     connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
-
     connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
+    connect(ui->stackListWidget, SIGNAL(currentItemChanged(QListWidgetItem *, QListWidgetItem *)), this, SLOT(changePage(QListWidgetItem *, QListWidgetItem*)));
+
+    // default tab
+    ui->stackedWidget->setCurrentIndex(0);
+    ui->stackListWidget->setCurrentRow(0);
+}
+
+void AddOnDialog::changePage(QListWidgetItem *current, QListWidgetItem *previous)
+{
+	if (!current)
+	{
+		current = previous;
+	}
+	ui->stackedWidget->setCurrentIndex(ui->stackListWidget->row(current));
 }
