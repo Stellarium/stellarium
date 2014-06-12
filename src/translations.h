@@ -145,7 +145,7 @@ class Translations
 		N_("Icarus");
 		
 		// TRANSLATORS: Proper name of comet C/1680 V1
-		N_("Great Comet of 1680 (C/1680 V1)")
+		N_("Great Comet of 1680 (C/1680 V1)");
 		
 		// TRANSLATORS: Name of supernova SN 1572A and script name
 		N_("Tycho's Supernova");
