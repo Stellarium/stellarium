@@ -233,6 +233,7 @@ void MeteorShowers::init()
 void MeteorShowers::deinit()
 {
 	MeteorShower::radiantTexture.clear();
+	MeteorStream::bolideTexture.clear();
 	texPointer.clear();
 }
 
