@@ -477,6 +477,7 @@ void MeteorShowers::updateActiveInfo(void)
 					newData.finish = ms->finish;
 					newData.peak = ms->peak;
 					newData.status = ms->status;
+					newData.colors = ms->colors;
 					activeInfo.append(newData);
 				}
 				else //just overwrites
@@ -611,7 +612,8 @@ void MeteorShowers::update(double deltaTime)
 								   current.speed,
 								   current.radiantAlpha,
 								   current.radiantDelta,
-								   current.pidx);
+								   current.pidx,
+								   current.colors);
 				active[index].push_back(m);
 			}
 		}

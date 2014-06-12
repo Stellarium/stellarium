@@ -51,7 +51,8 @@ public:
 		     double speed,
 		     double radiantAlpha,
 		     double radiantDelta,
-		     float pidx);
+		     float pidx,
+		     QList<MeteorShower::colorPair> colors);
 
 	virtual ~MeteorStream();
 
@@ -64,6 +65,8 @@ public:
 
 private:
 	void insertVertex(const StelCore* core, QVector<Vec3d> &vertexArray, Vec3d vertex);
+	Vec4f getColor(QString colorName);
+	QList<MeteorShower::colorPair> getDefaultColor();
 
 	static StelTextureSP bolideTexture;
 
@@ -83,6 +86,9 @@ private:
 	double m_startH;                //! Start height above center of earth
 	double m_endH;                  //! End height
 
+	QList<MeteorShower::colorPair> m_colors;
+	QList<Vec4f> m_trainColorArray;
+	QList<Vec4f> m_lineColorArray;
 	float m_mag;                    //! Apparent magnitude at head, 0-1
 	int m_segments;                 //! Number of segments along the train
 	int m_firstBrightSegment;       //! First bright segment of the train
