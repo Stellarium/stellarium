@@ -105,6 +105,9 @@ public:
 		return zhr;
 	}
 
+	//! <colorName, intensity>
+	typedef QPair<QString, int> colorPair;
+
 private:
 	Vec3d XYZ;                      //! Cartesian equatorial position
 	Vec3d XY;                       //! Store temporary 2D position
@@ -137,6 +140,7 @@ private:
 	double driftDelta;		//! Drift of Dec.
 	QString parentObj;		//! Parent object for meteor shower
 	float pidx;			//! The population index
+	QList<colorPair> colors;	//! <colorName, 0-100>
 
 	//current information
 	double radiantAlpha;            //! Current R.A. for radiant of meteor shower
