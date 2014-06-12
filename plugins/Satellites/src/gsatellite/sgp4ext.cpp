@@ -687,6 +687,20 @@ void    invjday
    }  // end invjday
 
 
+#ifdef _MSC_BUILD
+double	asinh
+	(
+	  double x
+	)
+   {
+     double returned;
+     if(x>0)
+	returned = log(x + sqrt(x * x + 1));
+     else
+	returned = -log(-x + sqrt(x * x + 1));
 
+     return(returned);
+   }
+#endif
 
 

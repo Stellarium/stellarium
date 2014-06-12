@@ -53,8 +53,8 @@ void CLIProcessor::parseCLIArgsPreConfig(const QStringList& argList)
 		          << "--help (or -h)          : This cruft.\n"
 		          << "--config-file (or -c)   : Use an alternative name for the config file\n"
 		          << "--user-dir (or -u)      : Use an alternative user data directory\n"
-		          << "--safe-mode (or -s)     : Disable GL shaders and use older GL engine\n"
-		          << "                          Try this is you have graphics problems\n"
+			  //<< "--safe-mode (or -s)     : Disable GL shaders and use older GL engine\n"
+			  //<< "                          Try this is you have graphics problems\n"
 		          << "--full-screen (or -f)   : With argument \"yes\" or \"no\" over-rides\n"
 		          << "                          the full screen setting in the config file\n"
 		          << "--screenshot-dir        : Specify directory to save screenshots\n"
@@ -76,10 +76,12 @@ void CLIProcessor::parseCLIArgsPreConfig(const QStringList& argList)
 		exit(0);
 	}
 
+	/*
 	if (argsGetOption(argList, "-s", "--safe-mode"))
 	{
 		qApp->setProperty("onetime_safe_mode", true);
 	}
+	*/
 
 	if (argsGetOption(argList, "", "--list-landscapes"))
 	{
