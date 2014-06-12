@@ -50,14 +50,39 @@ void AddOnDialog::styleChanged()
 
 void AddOnDialog::createDialogContent()
 {
-    ui->setupUi(dialog);
-    connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
-    connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
-    connect(ui->stackListWidget, SIGNAL(currentItemChanged(QListWidgetItem *, QListWidgetItem *)), this, SLOT(changePage(QListWidgetItem *, QListWidgetItem*)));
+	ui->setupUi(dialog);
+	connect(&StelApp::getInstance(), SIGNAL(languageChanged()),this, SLOT(retranslate()));
+	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
+	connect(ui->stackListWidget, SIGNAL(currentItemChanged(QListWidgetItem *, QListWidgetItem *)),
+		this, SLOT(changePage(QListWidgetItem *, QListWidgetItem*)));
 
-    // default tab
-    ui->stackedWidget->setCurrentIndex(0);
-    ui->stackListWidget->setCurrentRow(0);
+	// default tab
+	ui->stackedWidget->setCurrentIndex(0);
+	ui->stackListWidget->setCurrentRow(0);
+
+	// CATALOGS
+	setUpTableView(ui->catalogsTableView);
+	initModel(ui->catalogsTableView);
+
+	// LANDSCAPES
+	setUpTableView(ui->landscapeTableView);
+	initModel(ui->landscapeTableView);
+
+	// LANGUAGE PACK
+	setUpTableView(ui->languageTableView);
+	initModel(ui->languageTableView);
+
+	// SCRIPTS
+	setUpTableView(ui->scriptsTableView);
+	initModel(ui->scriptsTableView);
+
+	// STARLORE
+	setUpTableView(ui->starloreTbleView);
+	initModel(ui->starloreTbleView);
+
+	// TEXTURES
+	setUpTableView(ui->texturesTableView);
+	initModel(ui->texturesTableView);
 }
 
 void AddOnDialog::changePage(QListWidgetItem *current, QListWidgetItem *previous)
@@ -67,4 +92,18 @@ void AddOnDialog::changePage(QListWidgetItem *current, QListWidgetItem *previous
 		current = previous;
 	}
 	ui->stackedWidget->setCurrentIndex(ui->stackListWidget->row(current));
+}
+
+void AddOnDialog::setUpTableView(QTableView* tableView) {
+	tableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+}
+
+void AddOnDialog::initModel(QTableView* tableView)
+{
+	int rowCount = 0;
+	QStandardItemModel* model = new QStandardItemModel(rowCount, ColumnCount);
+	model->setHeaderData(ColumnTitle, Qt::Horizontal, q_("Title"));
+	model->setHeaderData(ColumnInstalledVersion, Qt::Horizontal, q_("Installed Version"));
+	model->setHeaderData(ColumnLastVersion, Qt::Horizontal, q_("Last Version"));
+	tableView->setModel(model);
 }

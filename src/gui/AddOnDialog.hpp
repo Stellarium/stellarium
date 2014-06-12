@@ -24,6 +24,7 @@
 
 #include <QListWidgetItem>
 #include <QObject>
+#include <QTableView>
 
 class Ui_addonDialogForm;
 
@@ -56,6 +57,9 @@ private:
 		ColumnLastVersion,
 		ColumnCount
 	};
+
+	void initModel(QTableView* tableView);
+	void setUpTableView(QTableView* tableView);
 };
 
 #endif // _ADDONDIALOG_HPP_
