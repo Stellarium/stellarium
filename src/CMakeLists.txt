@@ -129,6 +129,10 @@ SET(stellarium_lib_SRCS
 
 	${gl_lib_SRCS}
 
+	core/external/qtcompress/qzip.cpp
+	core/external/qtcompress/qzipreader.h
+	core/external/qtcompress/qzipwriter.h
+
 	core/external/kfilter/kfilterdev.h
 	core/external/kfilter/kfilterdev.cpp
 	core/external/kfilter/kfilterbase.h
