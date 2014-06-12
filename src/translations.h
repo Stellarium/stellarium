@@ -135,9 +135,17 @@ class Translations
 		N_("Varuna");
 		// TRANSLATORS: Asteroid (136472) Makemake
 		N_("Makemake");
+		// TRANSLATORS: Asteroid (3200) Phaethon
+		N_("Phaethon");
+		// TRANSLATORS: Asteroid (1866) Sisyphus
+		N_("Sisyphus");
+		// TRANSLATORS: Asteroid (1864) Daedalus
+		N_("Daedalus");
+		// TRANSLATORS: Asteroid (1566) Icarus
+		N_("Icarus");
 		
 		// TRANSLATORS: Proper name of comet C/1680 V1
-		N_("Great Comet of 1680 (C/1680 V1)")
+		N_("Great Comet of 1680 (C/1680 V1)");
 		
 		// TRANSLATORS: Name of supernova SN 1572A and script name
 		N_("Tycho's Supernova");

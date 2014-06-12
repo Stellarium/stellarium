@@ -29,9 +29,3 @@ Name=Open in fullscreen
 Name[ru]=Открыть в полноэкранном режиме
 Exec=stellarium -f yes
 OnlyShowIn=Unity;
-
-[Desktop Action Safemode]
-Name=Open in safe mode
-Name[ru]=Открыть в безопасном режиме
-Exec=stellarium --safe-mode
-OnlyShowIn=Unity;

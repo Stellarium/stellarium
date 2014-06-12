@@ -82,7 +82,7 @@ Type: filesandordirs; Name: "{userappdata}\Stellarium\landscapes"; Tasks: remove
 [Icons]
 Name: "{group}\{cm:ProgramOnTheWeb,Stellarium}"; Filename: "{app}\stellarium.url"; IconFilename: "{app}\data\stellarium.ico"
 Name: "{group}\Stellarium"; Filename: "{app}\stellarium.exe"; WorkingDir: "{app}"; IconFilename: "{app}\data\stellarium.ico"
-Name: "{group}\Stellarium {cm:FallbackMode}"; Filename: "{app}\stellarium.exe"; Parameters: "--safe-mode"; WorkingDir: "{app}"; IconFilename: "{app}\data\stellarium.ico"
+;Name: "{group}\Stellarium {cm:FallbackMode}"; Filename: "{app}\stellarium.exe"; Parameters: "--safe-mode"; WorkingDir: "{app}"; IconFilename: "{app}\data\stellarium.ico"
 Name: "{group}\{cm:UninstallProgram,Stellarium}"; Filename: "{uninstallexe}"
 Name: "{group}\config.ini"; Filename: "{userappdata}\Stellarium\config.ini"
 Name: "{group}\{cm:LastRunLog}"; Filename: "{userappdata}\Stellarium\log.txt"
