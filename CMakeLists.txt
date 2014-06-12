@@ -457,6 +457,7 @@ INCLUDE_DIRECTORIES(
 	${CMAKE_SOURCE_DIR}/src/core/planetsephems
 	${CMAKE_SOURCE_DIR}/src/core/external
 	${CMAKE_SOURCE_DIR}/src/core/external/kfilter
+	${CMAKE_SOURCE_DIR}/src/core/external/qtcompress
 	${CMAKE_SOURCE_DIR}/src/core/external/glues_stel/source/
 	${CMAKE_SOURCE_DIR}/src/core/external/glues_stel/source/libtess
 	${CMAKE_SOURCE_DIR}/src/gui
