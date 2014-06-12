@@ -133,19 +133,6 @@ SET(stellarium_lib_SRCS
 	core/external/qtcompress/qzipreader.h
 	core/external/qtcompress/qzipwriter.h
 
-	core/external/kfilter/kfilterdev.h
-	core/external/kfilter/kfilterdev.cpp
-	core/external/kfilter/kfilterbase.h
-	core/external/kfilter/kfilterbase.cpp
-	core/external/kfilter/kgzipfilter.h
-	core/external/kfilter/kgzipfilter.cpp
-	core/external/kfilter/kzip.h
-	core/external/kfilter/kzip.cpp
-	core/external/kfilter/klimitediodevice.h
-	core/external/kfilter/klimitediodevice.cpp
-	core/external/kfilter/karchive.h
-	core/external/kfilter/karchive.cpp
-
 	${glues_lib_SRCS}
 
 	core/planetsephems/calc_interpolated_elements.c
