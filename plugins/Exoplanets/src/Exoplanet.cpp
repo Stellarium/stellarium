@@ -434,9 +434,9 @@ void Exoplanet::draw(StelCore* core, StelPainter *painter)
 	if (hasHabitableExoplanets)
 		color = habitableExoplanetMarkerColor;
 
+	StelUtils::spheToRect(RA, DE, XYZ);
 	double mag = getVMagnitudeWithExtinction(core);
 
-	StelUtils::spheToRect(RA, DE, XYZ);
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_ONE, GL_ONE);
 	painter->setColor(color[0], color[1], color[2], 1);
