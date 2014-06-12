@@ -1533,9 +1533,13 @@ void Planet::drawSphere(StelPainter* painter, float screenSz, bool drawOnlyRing)
 		GL(ringPlanetShaderProgram->setAttributeArray(ringPlanetShaderVars.texCoord, (const GLfloat*)ringModel.texCoordArr.constData(), 2));
 		GL(ringPlanetShaderProgram->enableAttributeArray(ringPlanetShaderVars.texCoord));
 		
-		glDisable(GL_CULL_FACE);
-		
+		if (eyePos[2]<0)
+			glCullFace(GL_FRONT);
+					
 		GL(glDrawElements(GL_TRIANGLES, ringModel.indiceArr.size(), GL_UNSIGNED_SHORT, ringModel.indiceArr.constData()));
+		
+		if (eyePos[2]<0)
+			glCullFace(GL_BACK);
 		
 		glDisable(GL_DEPTH_TEST);
 	}
