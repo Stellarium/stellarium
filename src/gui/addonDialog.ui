@@ -10,6 +10,12 @@
     <height>554</height>
    </rect>
   </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
   <property name="font">
    <font/>
   </property>
@@ -220,6 +226,12 @@
    </item>
    <item>
     <widget class="QFrame" name="addonContent">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
      <property name="frameShape">
       <enum>QFrame::StyledPanel</enum>
      </property>
@@ -363,35 +375,81 @@
         </item>
        </widget>
       </item>
-      <item alignment="Qt::AlignTop">
+      <item>
        <widget class="QStackedWidget" name="stackedWidget">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
         <property name="currentIndex">
-         <number>1</number>
+         <number>5</number>
         </property>
         <widget class="QWidget" name="catalogs">
-         <layout class="QGridLayout" name="gridLayout">
-          <property name="leftMargin">
-           <number>0</number>
-          </property>
-          <property name="topMargin">
-           <number>0</number>
-          </property>
-          <property name="rightMargin">
-           <number>0</number>
-          </property>
-          <property name="bottomMargin">
-           <number>0</number>
-          </property>
-          <property name="spacing">
-           <number>0</number>
-          </property>
+         <layout class="QVBoxLayout" name="verticalLayout">
+          <item>
+           <widget class="QTableView" name="catalogsTableView"/>
+          </item>
          </layout>
         </widget>
-        <widget class="QWidget" name="landscape"/>
-        <widget class="QWidget" name="language"/>
-        <widget class="QWidget" name="scripts"/>
-        <widget class="QWidget" name="starlore"/>
-        <widget class="QWidget" name="textures"/>
+        <widget class="QWidget" name="landscape">
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_2">
+          <item>
+           <widget class="QTableView" name="landscapeTableView">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>455</height>
+             </size>
+            </property>
+            <property name="focusPolicy">
+             <enum>Qt::NoFocus</enum>
+            </property>
+            <property name="lineWidth">
+             <number>0</number>
+            </property>
+            <attribute name="verticalHeaderVisible">
+             <bool>false</bool>
+            </attribute>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="language">
+         <layout class="QVBoxLayout" name="verticalLayout_3">
+          <item>
+           <widget class="QTableView" name="languageTableView"/>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="scripts">
+         <layout class="QVBoxLayout" name="verticalLayout_4">
+          <item>
+           <widget class="QTableView" name="scriptsTableView"/>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="starlore">
+         <layout class="QVBoxLayout" name="verticalLayout_6">
+          <item>
+           <widget class="QTableView" name="starloreTbleView"/>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="textures">
+         <layout class="QVBoxLayout" name="verticalLayout_7">
+          <item>
+           <widget class="QTableView" name="texturesTableView"/>
+          </item>
+         </layout>
+        </widget>
        </widget>
       </item>
      </layout>
