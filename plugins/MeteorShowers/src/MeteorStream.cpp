@@ -139,7 +139,7 @@ MeteorStream::MeteorStream(const StelCore* core,
 
 	// determine the meteor color
 	if (m_colors.isEmpty()) {
-		m_colors = getDefaultColor();
+		m_colors.push_back(MeteorShower::colorPair("white", 100));
 	} else {
 		// handle cases when the total intensity is less than 100
 		int totalIntensity = 0;
@@ -154,7 +154,8 @@ MeteorStream::MeteorStream(const StelCore* core,
 		int increaseWhite = 0;
 		if (totalIntensity > 100) {
 			qDebug() << "MeteorShowers plugin (showers.json): Total intensity must be less than 100";
-			m_colors = getDefaultColor();
+			m_colors.clear();
+			m_colors.push_back(MeteorShower::colorPair("white", 100));
 		} else {
 			increaseWhite = 100 - totalIntensity;
 		}
@@ -227,21 +228,6 @@ Vec4f MeteorStream::getColor(QString colorName) {
 	}
 
 	return Vec4f(R/255.f, G/255.f, B/255.f, 1);
-}
-
-QList<MeteorShower::colorPair> MeteorStream::getDefaultColor() {
-	QList<MeteorShower::colorPair> colors;
-	if ((double)rand()/((double)RAND_MAX+1) > 0.5) {
-		colors.push_back(MeteorShower::colorPair("white", 70));
-		colors.push_back(MeteorShower::colorPair("orangeYellow", 10));
-		colors.push_back(MeteorShower::colorPair("yellow", 10));
-		colors.push_back(MeteorShower::colorPair("blueGreen", 10));
-	} else {
-		colors.push_back(MeteorShower::colorPair("white", 90));
-		colors.push_back(MeteorShower::colorPair("violet", 10));
-	}
-
-	return colors;
 }
 
 // returns true if alive
