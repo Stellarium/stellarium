@@ -30,10 +30,10 @@ public:
 private:
 	QSqlDatabase m_db;
 
-    bool createTableAddon();
-    bool createTableCategory();
-    bool createTableLicense();
-    bool createTableAuthor();
+	bool createTableAddon();
+	bool createTableCategory();
+	bool createTableLicense();
+	bool createTableAuthor();
 };
 
 #endif // _STELADDON_HPP_

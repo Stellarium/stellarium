@@ -26,6 +26,7 @@
 
 // Predeclaration of some classes
 class StelCore;
+class StelAddOn;
 class StelTextureMgr;
 class StelObjectMgr;
 class StelLocaleMgr;
@@ -109,8 +110,12 @@ public:
 	StelLocationMgr& getLocationMgr() {return *planetLocationMgr;}
 
 	//! Get the StelObject manager to use for querying from all stellarium objects.
-	//! @return the StelObject manager to use for querying from all stellarium objects 	.
+	//! @return the StelObject manager to use for querying from all stellarium objects.
 	StelObjectMgr& getStelObjectMgr() {return *stelObjectMgr;}
+
+	//! Get the StelAddOn manager.
+	//! @return the StelAddOn manager.
+	StelAddOn& getStelAddOn() {return *stelAddOn;}
 
 	StelSkyLayerMgr& getSkyImageMgr() {return *skyImageMgr;}
 
@@ -285,7 +290,7 @@ private:
 	StelScriptMgr* scriptMgr;
 #endif
 
-
+	StelAddOn* stelAddOn;
 
 	StelGuiBase* stelGui;
 	

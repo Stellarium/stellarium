@@ -19,6 +19,7 @@
 
 #include "StelApp.hpp"
 
+#include "StelAddOn.hpp"
 #include "StelCore.hpp"
 #include "StelUtils.hpp"
 #include "StelTextureMgr.hpp"
@@ -202,6 +203,7 @@ StelApp::StelApp(QObject* parent)
 	, scriptAPIProxy(NULL)
 	, scriptMgr(NULL)
 #endif
+	, stelAddOn(NULL)
 	, stelGui(NULL)
 	, devicePixelsPerPixel(1.f)
 	, globalScalingRatio(1.f)
@@ -266,6 +268,7 @@ StelApp::~StelApp()
 	delete planetLocationMgr; planetLocationMgr=NULL;
 	delete moduleMgr; moduleMgr=NULL; // Delete the secondary instance
 	delete actionMgr; actionMgr = NULL;
+	delete stelAddOn; stelAddOn = NULL;
 
 	Q_ASSERT(singleton);
 	singleton = NULL;
@@ -451,6 +454,9 @@ void StelApp::init(QSettings* conf)
 	LabelMgr* skyLabels = new LabelMgr();
 	skyLabels->init();
 	getModuleMgr().registerModule(skyLabels);
+
+	// Init Add-On Manager
+	stelAddOn = new StelAddOn();
 
 	skyCultureMgr->init();
 
