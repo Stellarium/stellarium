@@ -22,7 +22,6 @@
 #include "StelFileMgr.hpp"
 #include "StelProjector.hpp"
 #include "StelCore.hpp"
-#include "kfilterdev.h"
 #include "StelUtils.hpp"
 
 #include <QDebug>
@@ -274,11 +273,9 @@ QVariantMap MultiLevelJsonBase::loadFromJSON(QIODevice& input, bool qZcompressed
 	}
 	else if (gzCompressed)
 	{
-		QIODevice* d = KFilterDev::device(&input, "application/x-gzip", false);
-		d->open(QIODevice::ReadOnly);
-		map = parser.parse(d).toMap();
-		d->close();
-		delete d;
+		QByteArray ar = StelUtils::uncompress(input.readAll());
+		input.close();
+		map = parser.parse(ar).toMap();
 	}
 	else
 	{
