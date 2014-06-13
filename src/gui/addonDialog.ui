@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>659</width>
-    <height>554</height>
+    <height>574</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -384,7 +384,7 @@
          </sizepolicy>
         </property>
         <property name="currentIndex">
-         <number>5</number>
+         <number>0</number>
         </property>
         <widget class="QWidget" name="catalogs">
          <layout class="QVBoxLayout" name="verticalLayout">
@@ -415,9 +415,6 @@
             <property name="lineWidth">
              <number>0</number>
             </property>
-            <attribute name="verticalHeaderVisible">
-             <bool>false</bool>
-            </attribute>
            </widget>
           </item>
          </layout>

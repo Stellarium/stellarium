@@ -96,6 +96,10 @@ void AddOnDialog::changePage(QListWidgetItem *current, QListWidgetItem *previous
 
 void AddOnDialog::setUpTableView(QTableView* tableView) {
 	tableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+	tableView->verticalHeader()->setVisible(false);
+	tableView->setAlternatingRowColors(true);
+	tableView->setSelectionBehavior(QAbstractItemView::SelectRows);
+	tableView->setEditTriggers(false);
 }
 
 void AddOnDialog::initModel(QTableView* tableView)
