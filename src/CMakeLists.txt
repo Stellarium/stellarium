@@ -129,10 +129,6 @@ SET(stellarium_lib_SRCS
 
 	${gl_lib_SRCS}
 
-	core/external/qtcompress/qzip.cpp
-	core/external/qtcompress/qzipreader.h
-	core/external/qtcompress/qzipwriter.h
-
 	${glues_lib_SRCS}
 
 	core/planetsephems/calc_interpolated_elements.c
@@ -215,6 +211,15 @@ SET(stellarium_lib_SRCS
 	translations.h
 	config.h
 )
+
+# On windows, QZipReader is already included in the lib
+IF(!WIN32)
+	SET(stellarium_lib_SRCS ${stellarium_lib_SRCS}
+		core/external/qtcompress/qzip.cpp
+		core/external/qtcompress/qzipreader.h
+		core/external/qtcompress/qzipwriter.h
+	)
+ENDIF()
 
 IF(ENABLE_SCRIPTING)
 	SET(stellarium_lib_SRCS ${stellarium_lib_SRCS}
