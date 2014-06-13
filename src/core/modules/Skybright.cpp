@@ -26,10 +26,6 @@
 #include "Skybright.hpp"
 #include "StelUtils.hpp"
 
-#if defined(__NetBSD__) || defined(__SUNOS__)
-#undef FS
-#endif
-
 Skybright::Skybright() : SN(1.f)
 {
 	setDate(2003, 8, 0);
@@ -106,10 +102,10 @@ float Skybright::getLuminance( float cosDistMoon,
 
 	// Daylight brightness
 	const float distSun = StelUtils::fastAcos(cosDistSun);
-	const float FS = 18886.28f / (distSun*distSun + 0.0007f)
+	const float FSv = 18886.28f / (distSun*distSun + 0.0007f)
 	               + stelpow10f(6.15f - (distSun+0.001f)* 1.43239f)
 	               + 229086.77f * ( 1.06f + cosDistSun*cosDistSun );
-	const float b_daylight = 9.289663e-12f * (1.f - bKX) * (FS * C4 + 440000.f * (1.f - C4));
+	const float b_daylight = 9.289663e-12f * (1.f - bKX) * (FSv * C4 + 440000.f * (1.f - C4));
 
 	//Twilight brightness
 	const float b_twilight = stelpow10f(bTwilightTerm + 0.063661977f * StelUtils::fastAcos(cosDistZenith)/(K> 0.05f ? K : 0.05f)) * (1.7453293f / distSun) * (1.f-bKX);
