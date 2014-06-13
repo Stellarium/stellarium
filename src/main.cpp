@@ -48,6 +48,7 @@
 #include <QStringList>
 #include <QTextStream>
 #include <QTranslator>
+#include <QNetworkDiskCache>
 
 #include <clocale>
 
@@ -98,7 +99,6 @@ void copyDefaultConfigFile(const QString& newPath)
 	}
 	QFile::setPermissions(newPath, QFile::permissions(newPath) | QFileDevice::WriteOwner);
 }
-
 
 // Main stellarium procedure
 int main(int argc, char **argv)
@@ -254,6 +254,11 @@ int main(int argc, char **argv)
 				else
 				{
 					qDebug() << "Attempting to use an existing older config file.";
+					confSettings->setValue("main/version", QString(PACKAGE_VERSION)); // Upgrade version of config.ini
+					QNetworkDiskCache* cacheMgr = new QNetworkDiskCache();
+					cacheMgr->setCacheDirectory(StelFileMgr::getCacheDir());
+					cacheMgr->clear(); // Removes all items from the cache.
+					qDebug() << "Clear cache and update config.ini...";
 				}
 			}
 		}
