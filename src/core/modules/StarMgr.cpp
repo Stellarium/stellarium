@@ -56,13 +56,6 @@
 #include <QDir>
 #include <QCryptographicHash>
 
-#ifndef Q_OS_WIN
-#include <unistd.h>
-#else
-#include <winsock2.h>
-#include "kdewin32/unistd.h"
-#endif
-
 #include <errno.h>
 
 static QStringList spectral_array;
