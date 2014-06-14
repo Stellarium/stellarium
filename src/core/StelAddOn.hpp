@@ -31,7 +31,6 @@ private:
 	QSqlDatabase m_db;
 
 	bool createAddonTables();
-	bool createTableCategory();
 	bool createTableLicense();
 	bool createTableAuthor();
 };

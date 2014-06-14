@@ -113,22 +113,6 @@ bool StelAddOn::createAddonTables()
 	return true;
 }
 
-bool StelAddOn::createTableCategory()
-{
-	QSqlQuery query(m_db);
-	query.prepare(
-		"CREATE TABLE IF NOT EXISTS category ("
-			"id INTEGER primary key AUTOINCREMENT, "
-			"name TEXT)"
-	);
-	if (!query.exec())
-	{
-	  qDebug() << "Add-On Manager : unable to create the category table." << m_db.lastError();
-	  return false;
-	}
-	return true;
-}
-
 bool StelAddOn::createTableLicense()
 {
 	QSqlQuery query(m_db);
