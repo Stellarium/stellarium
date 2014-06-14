@@ -158,19 +158,6 @@ SET(stellarium_lib_SRCS
 
 	${gl_lib_SRCS}
 
-	core/external/kfilter/kfilterdev.h
-	core/external/kfilter/kfilterdev.cpp
-	core/external/kfilter/kfilterbase.h
-	core/external/kfilter/kfilterbase.cpp
-	core/external/kfilter/kgzipfilter.h
-	core/external/kfilter/kgzipfilter.cpp
-	core/external/kfilter/kzip.h
-	core/external/kfilter/kzip.cpp
-	core/external/kfilter/klimitediodevice.h
-	core/external/kfilter/klimitediodevice.cpp
-	core/external/kfilter/karchive.h
-	core/external/kfilter/karchive.cpp
-
 	${glues_lib_SRCS}
 
 	core/planetsephems/calc_interpolated_elements.c
@@ -254,6 +241,15 @@ SET(stellarium_lib_SRCS
 	config.h
 )
 
+# On windows, QZipReader is already included in the lib
+IF(!WIN32)
+	SET(stellarium_lib_SRCS ${stellarium_lib_SRCS}
+		core/external/qtcompress/qzip.cpp
+		core/external/qtcompress/qzipreader.h
+		core/external/qtcompress/qzipwriter.h
+	)
+ENDIF()
+
 IF(ENABLE_SCRIPTING)
 	SET(stellarium_lib_SRCS ${stellarium_lib_SRCS}
 		scripting/StelScriptMgr.cpp
@@ -271,12 +267,6 @@ ENDIF()
 IF(WIN32)
 	SET(stellarium_lib_SRCS ${stellarium_lib_SRCS}
 		${zlib_SRCS}
-		core/external/kdewin32/grp.h
-		core/external/kdewin32/pwd.h
-		core/external/kdewin32/unistd.h
-		core/external/kdewin32/grp.c
-		core/external/kdewin32/pwd.c
-		core/external/kdewin32/unistd.c
 	)
 ENDIF()
 
