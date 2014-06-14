@@ -30,7 +30,7 @@ public:
 private:
 	QSqlDatabase m_db;
 
-	bool createTableAddon();
+	bool createAddonTables();
 	bool createTableCategory();
 	bool createTableLicense();
 	bool createTableAuthor();

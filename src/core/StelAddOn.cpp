@@ -44,8 +44,7 @@ StelAddOn::StelAddOn()
 	}
 
 	// creating tables
-	if (!createTableAddon() ||
-	    !createTableCategory() ||
+	if (!createAddonTables() ||
 	    !createTableLicense() ||
 	    !createTableAuthor())
 	{
@@ -53,28 +52,63 @@ StelAddOn::StelAddOn()
 	}
 }
 
-bool StelAddOn::createTableAddon()
+bool StelAddOn::createAddonTables()
 {
-	QSqlQuery query(m_db);
-	query.prepare(
-		"CREATE TABLE IF NOT EXISTS addon ("
+	QStringList addonTables;
+
+	addonTables << "CREATE TABLE IF NOT EXISTS addon ("
 			"id INTEGER primary key AUTOINCREMENT, "
-			"category INTEGER, "
-			"title TEXT, "
+			"title TEXT UNIQUE, "
 			"description TEXT, "
 			"version TEXT, "
 			"compatibility TEXT, "
 			"directory TEXT, "
-			"author INTEGER, "
+			"author1 INTEGER, "
+			"author2 INTEGER, "
 			"license INTEGER, "
 			"url TEXT, "
 			"download_size TEXT, "
-			"checksum TEXT)"
-	);
-	if (!query.exec())
-	{
-	  qDebug() << "Add-On Manager : unable to create the addon table." << m_db.lastError();
-	  return false;
+			"checksum TEXT)";
+
+	addonTables << "CREATE TABLE IF NOT EXISTS plugin ("
+			"id INTEGER primary key AUTOINCREMENT, "
+			"addon INTEGER UNIQUE)";
+
+	addonTables << "CREATE TABLE IF NOT EXISTS star ("
+			"id INTEGER primary key AUTOINCREMENT, "
+			"addon INTEGER UNIQUE, "
+			"count INTEGER, "
+			"mag_range TEXT)";
+
+	addonTables << "CREATE TABLE IF NOT EXISTS landscape ("
+			"id INTEGER primary key AUTOINCREMENT, "
+			"addon INTEGER UNIQUE, "
+			"thumbnail TEXT)";
+
+	addonTables << "CREATE TABLE IF NOT EXISTS language_pack ("
+			"id INTEGER primary key AUTOINCREMENT, "
+			"addon INTEGER UNIQUE)";
+
+	addonTables << "CREATE TABLE IF NOT EXISTS script ("
+			"id INTEGER primary key AUTOINCREMENT, "
+			"addon INTEGER UNIQUE)";
+
+	addonTables << "CREATE TABLE IF NOT EXISTS starlore ("
+			"id INTEGER primary key AUTOINCREMENT, "
+			"addon INTEGER UNIQUE)";
+
+	addonTables << "CREATE TABLE IF NOT EXISTS texture ("
+			"id INTEGER primary key AUTOINCREMENT, "
+			"addon INTEGER UNIQUE)";
+
+	QSqlQuery query(m_db);
+	foreach (QString table, addonTables) {
+		query.prepare(table);
+		if (!query.exec())
+		{
+		  qDebug() << "Add-On Manager : unable to create the addon table." << m_db.lastError();
+		  return false;
+		}
 	}
 	return true;
 }
