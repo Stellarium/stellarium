@@ -24,6 +24,9 @@
 *       ----------------------------------------------------------------      */
 
 #include "sgp4ext.h"
+#ifdef _MSC_BUILD
+#include "StelUtils.hpp"
+#endif
 
 
 double  sgn
@@ -254,7 +257,11 @@ void newtonnu
                  if ((ecc > 1.0 ) && (fabs(nu)+0.00001 < M_PI-acos(1.0 /ecc)))
                    {
                      sine= ( sqrt( ecc*ecc-1.0  ) * sin(nu) ) / ( 1.0  + ecc*cos(nu) );
+#ifdef _MSC_BUILD
+		     e0  = StelUtils::asinh( sine );
+#else
                      e0  = asinh( sine );
+#endif
                      m   = ecc*sinh(e0) - e0;
                    }
                 }
@@ -685,22 +692,3 @@ void    invjday
      days2mdhms(year, days, mon, day, hr, minute, sec);
      sec = sec - 0.00000086400;
    }  // end invjday
-
-
-#ifdef _MSC_BUILD
-double	asinh
-	(
-	  double x
-	)
-   {
-     double returned;
-     if(x>0)
-	returned = log(x + sqrt(x * x + 1));
-     else
-	returned = -log(-x + sqrt(x * x + 1));
-
-     return(returned);
-   }
-#endif
-
-

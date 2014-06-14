@@ -530,7 +530,13 @@ int getBiggerPowerOfTwo(int value)
 // Return the inverse sinus hyperbolic of z
 double asinh(const double z)
 {
-	return std::log(z+std::sqrt(z*z+1));
+	double returned;
+	if(z>0)
+	   returned = std::log(z + std::sqrt(z*z+1));
+	else
+	   returned = -std::log(-z + std::sqrt(z*z+1));
+
+	return returned;
 }
 
 /*************************************************************************
