@@ -1,4 +1,5 @@
 /*
+ * Stellarium: Meteor Showers Plug-in
  * Copyright (C) 2013 Marcos Cardinot
  *
  * This program is free software; you can redistribute it and/or
