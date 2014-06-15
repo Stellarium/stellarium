@@ -449,6 +449,71 @@
         </widget>
        </widget>
       </item>
+      <item>
+       <widget class="QGroupBox" name="groupBox">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="MinimumExpanding" vsizetype="Minimum">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QGroupBox {padding-top: 15px;}</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+        </property>
+        <layout class="QHBoxLayout" name="horizontalLayout_6">
+         <property name="spacing">
+          <number>0</number>
+         </property>
+         <property name="topMargin">
+          <number>0</number>
+         </property>
+         <property name="bottomMargin">
+          <number>0</number>
+         </property>
+         <item>
+          <widget class="QLabel" name="lblLastUpdate">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="text">
+            <string>Last update:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="txtLastUpdate">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="btnUpdate">
+           <property name="text">
+            <string>Update Catalog</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+        <zorder>lblLastUpdate</zorder>
+        <zorder>txtLastUpdate</zorder>
+        <zorder>lblLastUpdate</zorder>
+        <zorder>txtLastUpdate</zorder>
+        <zorder>btnUpdate</zorder>
+       </widget>
+      </item>
      </layout>
     </widget>
    </item>
