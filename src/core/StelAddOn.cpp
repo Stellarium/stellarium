@@ -68,7 +68,7 @@ bool StelAddOn::createAddonTables()
 			"license INTEGER, "
 			"url TEXT, "
 			"download_size TEXT, "
-			"checksum TEXT,
+			"checksum TEXT, "
 			"last_update TEXT)";
 
 	addonTables << "CREATE TABLE IF NOT EXISTS plugin ("
