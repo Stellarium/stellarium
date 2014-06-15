@@ -63,6 +63,7 @@ Planet::Planet(const QString& englishName,
 	       Vec3f color,
 	       float albedo,
 	       const QString& atexMapName,
+	       const QString& anormalMapName,
 	       posFuncType coordFunc,
 	       void* auserDataPtr,
 	       OsculatingFunctType *osculatingFunc,
@@ -91,6 +92,7 @@ Planet::Planet(const QString& englishName,
 	  pType(pType)
 {
 	texMapName = atexMapName;
+	normalMapName = anormalMapName;
 	lastOrbitJD =0;
 	deltaJD = StelCore::JD_SECOND;
 	orbitCached = 0;
@@ -101,6 +103,7 @@ Planet::Planet(const QString& englishName,
 	eclipticPos=Vec3d(0.,0.,0.);
 	rotLocalToParent = Mat4d::identity();
 	texMap = StelApp::getInstance().getTextureManager().createTextureThread(StelFileMgr::getInstallationDir()+"/textures/"+texMapName, StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT));
+	normalMap = StelApp::getInstance().getTextureManager().createTextureThread(StelFileMgr::getInstallationDir()+"/textures/"+normalMapName, StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT));
 
 	nameI18 = englishName;
 	if (englishName!="Pluto")
@@ -952,8 +955,14 @@ void Planet::initShader()
 		"uniform highp vec3 lightDirection;\n"
 		"uniform highp vec3 eyeDirection;\n"
 		"varying mediump vec2 texc;\n"
-		"varying mediump float lum_;\n"
 		"varying highp vec3 P;\n"
+		"#ifdef IS_MOON\n"
+		"    varying highp vec3 normalX;\n"
+		"    varying highp vec3 normalY;\n"
+		"    varying highp vec3 normalZ;\n"
+		"#else\n"
+		"    varying mediump float lum_;\n"
+		"#endif\n"
 		"\n"
 		"void main()\n"
 		"{\n"
@@ -961,21 +970,9 @@ void Planet::initShader()
 		"    texc = texCoord;\n"
 		"    highp vec3 normal = normalize(unprojectedVertex);\n"
 		"#ifdef IS_MOON\n"
-		"    // Use an Oren-Nayar model for rough surfaces\n"
-		"    // Ref: http://content.gpwiki.org/index.php/D3DBook:(Lighting)_Oren-Nayar\n"
-		"    highp float cosAngleLightNormal = dot(normal, lightDirection);\n"
-		"    highp float cosAngleEyeNormal = dot(normal, eyeDirection);\n"
-		"    highp float angleLightNormal = acos(cosAngleLightNormal);\n"
-		"    highp float angleEyeNormal = acos(cosAngleEyeNormal);\n"
-		"    highp float alpha = max(angleEyeNormal, angleLightNormal);\n"
-		"    highp float beta = min(angleEyeNormal, angleLightNormal);\n"
-		"    highp float gamma = dot(eyeDirection - normal * cosAngleEyeNormal, lightDirection - normal * cosAngleLightNormal);\n"
-		"    mediump float roughness = 1.0;\n"
-		"    mediump float roughnessSquared = roughness * roughness;\n"
-		"    mediump float A = 1.0 - 0.5 * (roughnessSquared / (roughnessSquared + 0.57));\n"
-		"    mediump float B = 0.45 * (roughnessSquared / (roughnessSquared + 0.09));\n"
-		"    mediump float C = sin(alpha) * tan(beta);\n"
-		"    lum_ = max(0.0, cosAngleLightNormal) * (A + B * max(0.0, gamma) * C);\n"
+		"    normalX = normalize(cross(vec3(0,0,1), normal));\n"
+		"    normalY = normalize(cross(normal, normalX));\n"
+		"    normalZ = normal;\n"
 		"#else\n"
 		"    mediump float c = dot(lightDirection, normal);\n"
 		"    lum_ = clamp(c, 0.0, 1.0);\n"
@@ -987,7 +984,6 @@ void Planet::initShader()
 	
 	const char *fsrc =
 		"varying mediump vec2 texc;\n"
-		"varying mediump float lum_;\n"
 		"uniform sampler2D tex;\n"
 		"uniform mediump vec3 ambientLight;\n"
 		"uniform mediump vec3 diffuseLight;\n"
@@ -1007,12 +1003,24 @@ void Planet::initShader()
 		"\n"
 		"#ifdef IS_MOON\n"
 		"uniform sampler2D earthShadow;\n"
+		"uniform sampler2D normalMap;\n"
+		"uniform highp vec3 lightDirection;\n"
+		"uniform highp vec3 eyeDirection;\n"
+		"varying highp vec3 normalX;\n"
+		"varying highp vec3 normalY;\n"
+		"varying highp vec3 normalZ;\n"
+		"#else\n"
+		"varying mediump float lum_;\n"
 		"#endif\n"
 		"\n"
 		"void main()\n"
 		"{\n"
 		"    mediump float final_illumination = 1.0;\n"
+		"#ifdef IS_MOON\n"
+		"    mediump float lum = 1.;\n"
+		"#else\n"
 		"    mediump float lum = lum_;\n"
+		"#endif\n"
 		"#ifdef RINGS_SUPPORT\n"
 		"    if(isRing)"
 		"        lum=1.0;\n"
@@ -1089,6 +1097,26 @@ void Planet::initShader()
 		"        }\n"
 		"    }\n"
 		"\n"
+		"#ifdef IS_MOON\n"
+		"    mediump vec3 normal = normalize(texture2D(normalMap, texc).rgb-0.5);\n"
+		"    normal = normalize(normalX*normal.x+normalY*normal.y+normalZ*normal.z);\n"
+		"    // normal now contains the real surface normal taking normal map into account\n"
+		"    // Use an Oren-Nayar model for rough surfaces\n"
+		"    // Ref: http://content.gpwiki.org/index.php/D3DBook:(Lighting)_Oren-Nayar\n"
+		"    highp float cosAngleLightNormal = dot(normal, lightDirection);\n"
+		"    highp float cosAngleEyeNormal = dot(normal, eyeDirection);\n"
+		"    mediump float angleLightNormal = acos(cosAngleLightNormal);\n"
+		"    mediump float angleEyeNormal = acos(cosAngleEyeNormal);\n"
+		"    mediump float alpha = max(angleEyeNormal, angleLightNormal);\n"
+		"    mediump float beta = min(angleEyeNormal, angleLightNormal);\n"
+		"    mediump float gamma = dot(eyeDirection - normal * cosAngleEyeNormal, lightDirection - normal * cosAngleLightNormal);\n"
+		"    mediump float roughness = 1.;\n"
+		"    mediump float roughnessSquared = roughness * roughness;\n"
+		"    mediump float A = 1.0 - 0.5 * (roughnessSquared / (roughnessSquared + 0.57));\n"
+		"    mediump float B = 0.45 * (roughnessSquared / (roughnessSquared + 0.09));\n"
+		"    mediump float C = sin(alpha) * tan(beta);\n"
+		"    lum = max(0.0, cosAngleLightNormal) * (A + B * max(0.0, gamma) * C) * 2.;\n"
+		"#endif\n"
 		"    mediump vec4 litColor = vec4(lum * final_illumination * diffuseLight + ambientLight, 1.0);\n"
 		"#ifdef IS_MOON\n"
 		"    if(final_illumination < 0.99)\n"
@@ -1156,10 +1184,11 @@ void Planet::initShader()
 	moonShaderProgram = new QOpenGLShaderProgram(QOpenGLContext::currentContext());
 	moonShaderProgram->addShader(&moonVertexShader);
 	moonShaderProgram->addShader(&moonFragmentShader);
-	GL(StelPainter::linkProg(moonShaderProgram, "ringPlanetShaderProgram"));
+	GL(StelPainter::linkProg(moonShaderProgram, "moonPlanetShaderProgram"));
 	GL(moonShaderProgram->bind());
 	moonShaderVars.initLocations(moonShaderProgram);
 	GL(moonShaderVars.earthShadow = moonShaderProgram->uniformLocation("earthShadow"));
+	GL(moonShaderVars.normalMap = moonShaderProgram->uniformLocation("normalMap"));
 	GL(moonShaderProgram->release());
 }
 
@@ -1359,7 +1388,7 @@ void Planet::drawSphere(StelPainter* painter, float screenSz, bool drawOnlyRing)
 	if (texMap)
 	{
 		// For lazy loading, return if texture not yet loaded
-		if (!texMap->bind())
+		if (!texMap->bind(0))
 		{
 			return;
 		}
@@ -1474,6 +1503,8 @@ void Planet::drawSphere(StelPainter* painter, float screenSz, bool drawOnlyRing)
 
 	if (this==ssm->getMoon())
 	{
+		GL(normalMap->bind(2));
+		GL(moonShaderProgram->setUniformValue(moonShaderVars.normalMap, 2));
 		if (!shadowCandidates.isEmpty())
 		{
 			GL(texEarthShadow->bind(3));

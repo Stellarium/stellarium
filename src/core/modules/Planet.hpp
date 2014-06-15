@@ -81,6 +81,7 @@ public:
 	       Vec3f color,
 	       float albedo,
 	       const QString& texMapName,
+		   const QString& normalMapName,
 	       posFuncType _coordFunc,
 	       void* userDataPtr,
 	       OsculatingFunctType *osculatingFunc,
@@ -255,6 +256,7 @@ protected:
 	QString englishName;             // english planet name
 	QString nameI18;                 // International translated name
 	QString texMapName;              // Texture file path	
+	QString normalMapName;              // Texture file path
 	int flagLighting;                // Set whether light computation has to be proceed
 	RotationElements re;             // Rotation param
 	double radius;                   // Planet radius in AU
@@ -269,6 +271,7 @@ protected:
 	Mat4d rotLocalToParent;
 	float axisRotation;              // Rotation angle of the Planet on it's axis
 	StelTextureSP texMap;            // Planet map texture
+	StelTextureSP normalMap;         // Planet normal map texture
 
 	Ring* rings;                     // Planet rings
 	double distance;                 // Temporary variable used to store the distance to a given point
@@ -328,6 +331,7 @@ protected:
 	struct MoonShaderVars : public PlanetShaderVars {
 		// Moon-specific variables
 		int earthShadow;
+		int normalMap;
 	};
 	static MoonShaderVars moonShaderVars;
 	static QOpenGLShaderProgram* moonShaderProgram;
