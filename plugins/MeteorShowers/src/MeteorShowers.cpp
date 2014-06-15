@@ -504,6 +504,14 @@ void MeteorShowers::update(double deltaTime)
 		return;
 	}
 
+	deltaTime*=1000;
+	// if stellarium has been suspended, don't create huge number of meteors to
+	// make up for lost time!
+	if (deltaTime > 500)
+	{
+		deltaTime = 500;
+	}
+
 	StelCore* core = StelApp::getInstance().getCore();
 	QList<activeData> old_activeInfo;
 
@@ -546,8 +554,6 @@ void MeteorShowers::update(double deltaTime)
 		}
 	}
 
-	deltaTime*=1000;
-
 	std::vector<std::vector<MeteorStream*> >::iterator iterOut;
 	std::vector<MeteorStream*>::iterator iterIn;
 	index = 0;
@@ -583,13 +589,6 @@ void MeteorShowers::update(double deltaTime)
 				       current.start,
 				       current.finish,
 				       current.peak);
-
-		// if stellarium has been suspended, don't create huge number of meteors to
-		// make up for lost time!
-		if (deltaTime > 500)
-		{
-			deltaTime = 500;
-		}
 
 		// determine average meteors per frame needing to be created
 		int mpf = (int)((double)ZHR*zhrToWsr*deltaTime/1000.0 + 0.5);
