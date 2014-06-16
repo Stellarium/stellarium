@@ -29,6 +29,7 @@ public:
 
 private:
 	QSqlDatabase m_db;
+	QString m_sLastUpdate;
 
 	bool createAddonTables();
 	bool createTableLicense();

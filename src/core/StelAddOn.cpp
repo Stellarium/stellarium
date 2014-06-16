@@ -18,8 +18,10 @@
  */
 
 #include <QDebug>
+#include <QFile>
 #include <QSqlError>
 #include <QSqlQuery>
+#include <QStringBuilder>
 
 #include "StelAddOn.hpp"
 #include "StelFileMgr.hpp"
@@ -28,13 +30,13 @@ StelAddOn::StelAddOn()
 	: m_db(QSqlDatabase::addDatabase("QSQLITE"))
 {
 	// creating addon dir
-	StelFileMgr::makeSureDirExistsAndIsWritable(StelFileMgr::getUserDir()+"/addon");
+	StelFileMgr::makeSureDirExistsAndIsWritable(StelFileMgr::getUserDir() + "/addon");
 
 	// Init database
 	StelFileMgr::Flags flags = (StelFileMgr::Flags)(StelFileMgr::Directory|StelFileMgr::Writable);
-	QString dbPath = StelFileMgr::findFile("addon/", flags);
+	QString path = StelFileMgr::findFile("addon/", flags);
 	m_db.setHostName("localhost");
-	m_db.setDatabaseName(dbPath.append("addon.sqlite"));
+	m_db.setDatabaseName(path % "addon.sqlite");
 	bool ok = m_db.open();
 	qDebug() << "Add-On Database status:" << m_db.databaseName() << "=" << ok;
 	if (m_db.lastError().isValid())
@@ -49,6 +51,20 @@ StelAddOn::StelAddOn()
 	    !createTableAuthor())
 	{
 		exit(-1);
+	}
+
+	// create file to store the last update time
+	QFile file(path  % "/lastdbupdate.txt");
+	if (file.open(QIODevice::WriteOnly | QIODevice::Text))
+	{
+		QTextStream txt(&file);
+		m_sLastUpdate = txt.readLine();
+		if(m_sLastUpdate.isEmpty())
+		{
+			m_sLastUpdate = "0";
+			txt << m_sLastUpdate;
+		}
+		file.close();
 	}
 }
 
