@@ -30,6 +30,7 @@
 
 #include "LabelMgr.hpp"
 #include "LandscapeMgr.hpp"
+#include "MeteorMgr.hpp"
 #include "MeteorShower.hpp"
 #include "MeteorShowers.hpp"
 #include "MeteorShowerDialog.hpp"
@@ -139,7 +140,7 @@ double MeteorShowers::getCallOrder(StelModuleActionName actionName) const
 {
 	if (actionName == StelModule::ActionDraw)
 	{
-		return StelApp::getInstance().getModuleMgr().getModule("MeteorMgr")->getCallOrder(actionName)+0;
+		return GETSTELMODULE(MeteorMgr)->getCallOrder(actionName)+10.;
 	}
 
 	return 0;
@@ -374,7 +375,7 @@ void MeteorShowers::drawPointer(StelCore* core, StelPainter& painter)
 
 void MeteorShowers::drawStream(StelCore* core, StelPainter& painter)
 {
-	LandscapeMgr* landmgr = (LandscapeMgr*)StelApp::getInstance().getModuleMgr().getModule("LandscapeMgr");
+	LandscapeMgr* landmgr = GETSTELMODULE(LandscapeMgr);
 	if (landmgr->getFlagAtmosphere() && landmgr->getLuminance()>5)
 	{
 		return;
@@ -387,7 +388,8 @@ void MeteorShowers::drawStream(StelCore* core, StelPainter& painter)
 		{
 			Q_UNUSED(a);
 			// step through and draw all active meteors
-			for (std::vector<MeteorStream*>::iterator iter = active[index].begin(); iter != active[index].end(); ++iter)
+			std::vector<MeteorStream*>::iterator iter;
+			for (iter = active[index].begin(); iter != active[index].end(); ++iter)
 			{
 				(*iter)->draw(core, painter);
 			}
