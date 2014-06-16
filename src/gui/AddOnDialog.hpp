@@ -20,6 +20,7 @@
 #ifndef _ADDONDIALOG_HPP_
 #define _ADDONDIALOG_HPP_
 
+#include "StelAddOn.hpp"
 #include "StelDialog.hpp"
 
 #include <QListWidgetItem>
@@ -47,6 +48,7 @@ protected:
 
 private slots:
 	void changePage(QListWidgetItem *current, QListWidgetItem *previous);
+	void updateCatalog();
 
 private:
 	//! Defines the columns that will be displayed in the table view.
@@ -57,6 +59,8 @@ private:
 		ColumnLastVersion,
 		ColumnCount
 	};
+
+	StelAddOn m_StelAddOn;
 
 	void initModel(QTableView* tableView);
 	void setUpTableView(QTableView* tableView);

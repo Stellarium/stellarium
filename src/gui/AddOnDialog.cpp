@@ -28,6 +28,7 @@
 AddOnDialog::AddOnDialog(QObject* parent) : StelDialog(parent)
 {
     ui = new Ui_addonDialogForm;
+    m_StelAddOn = StelApp::getInstance().getStelAddOn();
 }
 
 AddOnDialog::~AddOnDialog()
@@ -55,6 +56,7 @@ void AddOnDialog::createDialogContent()
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 	connect(ui->stackListWidget, SIGNAL(currentItemChanged(QListWidgetItem *, QListWidgetItem *)),
 		this, SLOT(changePage(QListWidgetItem *, QListWidgetItem*)));
+	connect(ui->btnUpdate, SIGNAL(clicked()), this, SLOT(updateCatalog()));
 
 	// default tab
 	ui->stackedWidget->setCurrentIndex(0);
@@ -94,7 +96,8 @@ void AddOnDialog::changePage(QListWidgetItem *current, QListWidgetItem *previous
 	ui->stackedWidget->setCurrentIndex(ui->stackListWidget->row(current));
 }
 
-void AddOnDialog::setUpTableView(QTableView* tableView) {
+void AddOnDialog::setUpTableView(QTableView* tableView)
+{
 	tableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 	tableView->verticalHeader()->setVisible(false);
 	tableView->setAlternatingRowColors(true);
@@ -110,4 +113,9 @@ void AddOnDialog::initModel(QTableView* tableView)
 	model->setHeaderData(ColumnInstalledVersion, Qt::Horizontal, q_("Installed Version"));
 	model->setHeaderData(ColumnLastVersion, Qt::Horizontal, q_("Last Version"));
 	tableView->setModel(model);
+}
+
+void AddOnDialog::updateCatalog()
+{
+
 }
