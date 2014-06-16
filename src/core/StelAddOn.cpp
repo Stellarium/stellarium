@@ -55,10 +55,10 @@ StelAddOn::StelAddOn()
 
 	// create file to store the last update time
 	QFile file(m_sAddonPath  % "/lastdbupdate.txt");
-	if (file.open(QIODevice::WriteOnly | QIODevice::Text))
+	if (file.open(QIODevice::ReadWrite | QIODevice::Text))
 	{
 		QTextStream txt(&file);
-		m_sLastUpdate = txt.readLine();
+		m_sLastUpdate = txt.readAll();
 		if(m_sLastUpdate.isEmpty())
 		{
 			m_sLastUpdate = "0";
