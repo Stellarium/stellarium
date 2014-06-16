@@ -27,8 +27,12 @@ class StelAddOn
 public:
 	StelAddOn();
 
+	QString getLastUpdate() { return m_sLastUpdate; }
+	void setLastUpdate(QString time);
+
 private:
 	QSqlDatabase m_db;
+	QString m_sAddonPath;
 	QString m_sLastUpdate;
 
 	bool createAddonTables();

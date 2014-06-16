@@ -34,9 +34,9 @@ StelAddOn::StelAddOn()
 
 	// Init database
 	StelFileMgr::Flags flags = (StelFileMgr::Flags)(StelFileMgr::Directory|StelFileMgr::Writable);
-	QString path = StelFileMgr::findFile("addon/", flags);
+	m_sAddonPath = StelFileMgr::findFile("addon/", flags);
 	m_db.setHostName("localhost");
-	m_db.setDatabaseName(path % "addon.sqlite");
+	m_db.setDatabaseName(m_sAddonPath % "addon.sqlite");
 	bool ok = m_db.open();
 	qDebug() << "Add-On Database status:" << m_db.databaseName() << "=" << ok;
 	if (m_db.lastError().isValid())
@@ -54,7 +54,7 @@ StelAddOn::StelAddOn()
 	}
 
 	// create file to store the last update time
-	QFile file(path  % "/lastdbupdate.txt");
+	QFile file(m_sAddonPath  % "/lastdbupdate.txt");
 	if (file.open(QIODevice::WriteOnly | QIODevice::Text))
 	{
 		QTextStream txt(&file);
@@ -163,4 +163,16 @@ bool StelAddOn::createTableAuthor()
 	  return false;
 	}
 	return true;
+}
+
+void StelAddOn::setLastUpdate(QString time) {
+	m_sLastUpdate = time;
+	// store value it in the txt file
+	QFile file(m_sAddonPath  % "/lastdbupdate.txt");
+	if (file.open(QIODevice::WriteOnly | QIODevice::Text))
+	{
+		QTextStream txt(&file);
+		txt << m_sLastUpdate;
+		file.close();
+	}
 }
