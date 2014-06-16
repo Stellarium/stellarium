@@ -27,7 +27,7 @@ Compression=zip/9
 [Files]
 Source: "@CMAKE_INSTALL_PREFIX@\bin\stellarium.exe"; DestDir: "{app}"
 @STELMAINLIB@
-@REDIST@
+@REDIST_FILES@
 Source: "stellarium.url"; DestDir: "{app}"
 Source: "README"; DestDir: "{app}"; Flags: isreadme; DestName: "README.rtf"
 Source: "INSTALL"; DestDir: "{app}"; DestName: "INSTALL.rtf"
@@ -66,6 +66,7 @@ Name: removelandscapes; Description: "{cm:RemoveUILandscapes}"; GroupDescription
 
 [Run]
 ;An option to start Stellarium after setup has finished
+@REDIST_RUN@
 Filename: "{app}\stellarium.exe"; Description: "{cm:LaunchProgram,Stellarium}"; Flags: postinstall nowait skipifsilent unchecked
 
 [InstallDelete]
