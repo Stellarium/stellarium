@@ -17,39 +17,31 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#include "StelProjector.hpp"
-
+#include "Meteor.hpp"
 #include "MeteorMgr.hpp"
+#include "LandscapeMgr.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
-#include "Meteor.hpp"
-#include "LandscapeMgr.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelPainter.hpp"
+#include "SolarSystem.hpp"
 
-#include <functional>
-#include <cstdlib>
 #include <QSettings>
 
-MeteorMgr::MeteorMgr(int zhr, int maxv ) : flagShow(true)
+const double MeteorMgr::zhrToWsr = 1.6667f / 3600.f;
+
+MeteorMgr::MeteorMgr(int zhr, int maxv )
+	: ZHR(zhr)
+	, maxVelocity(maxv)
+	, flagShow(true)
 {
 	setObjectName("MeteorMgr");
-			
-	ZHR = zhr;
-	maxVelocity = maxv;
-
-	// calculate factor for meteor creation rate per second since visible area ZHR is for
-	// estimated visible radius of 458km
-	// (calculated for average meteor magnitude of +2.5 and limiting magnitude of 5)
-
-	//  zhrToWsr = 1.0f/3600.f;
-	zhrToWsr = 1.6667f/3600.f;
-	// this is a correction factor to adjust for the model as programmed to match observed rates
 }
 
 MeteorMgr::~MeteorMgr()
 {
-	for(std::vector<Meteor*>::iterator iter = active.begin(); iter != active.end(); ++iter)
+	std::vector<Meteor*>::iterator iter;
+	for(iter = active.begin(); iter != active.end(); ++iter)
 	{
 		delete *iter;
 	}
@@ -67,7 +59,9 @@ void MeteorMgr::init()
 double MeteorMgr::getCallOrder(StelModuleActionName actionName) const
 {
 	if (actionName==StelModule::ActionDraw)
-		return StelApp::getInstance().getModuleMgr().getModule("SolarSystem")->getCallOrder(actionName)+10;
+	{
+		return GETSTELMODULE(SolarSystem)->getCallOrder(actionName)+10.;
+	}
 	return 0;
 }
 
@@ -93,19 +87,24 @@ void MeteorMgr::update(double deltaTime)
 	return;
 #endif
 	if (!flagShow)
+	{
 		return;
-	
+	}
+
 	deltaTime*=1000;
-	StelCore* core = StelApp::getInstance().getCore();
+	// if stellarium has been suspended, don't create
+	// huge number of meteors to make up for lost time!
+	if (deltaTime > 500)
+	{
+		deltaTime = 500;
+	}
 
 	// step through and update all active meteors
-	for (std::vector<Meteor*>::iterator iter = active.begin(); iter != active.end(); ++iter)
+	std::vector<Meteor*>::iterator iter;
+	for (iter = active.begin(); iter != active.end(); ++iter)
 	{
 		if (!(*iter)->update(deltaTime))
 		{
-			// remove dead meteor
-			//      qDebug("Meteor \tdied\n");
-
 			delete *iter;
 			active.erase(iter);
 			iter--;  // important!
@@ -114,6 +113,7 @@ void MeteorMgr::update(double deltaTime)
 
 	// only makes sense given lifetimes of meteors to draw when timeSpeed is realtime
 	// otherwise high overhead of large numbers of meteors
+	StelCore* core = StelApp::getInstance().getCore();
 	double tspeed = core->getTimeRate()*86400;  // sky seconds per actual second
 	if (tspeed<=0 || fabs(tspeed)>1.)
 	{
@@ -121,50 +121,43 @@ void MeteorMgr::update(double deltaTime)
 		return;
 	}
 
-	// if stellarium has been suspended, don't create huge number of meteors to
-	// make up for lost time!
-	if (deltaTime > 500)
-	{
-		deltaTime = 500;
-	}
-
 	// determine average meteors per frame needing to be created
 	int mpf = (int)((double)ZHR*zhrToWsr*deltaTime/1000.0 + 0.5);
 	if (mpf<1)
+	{
 		mpf = 1;
+	}
 
-	int mlaunch = 0;
 	for (int i=0; i<mpf; ++i)
 	{
 		// start new meteor based on ZHR time probability
 		double prob = ((double)rand())/RAND_MAX;
-		if (ZHR>0 && prob<((double)ZHR*zhrToWsr*deltaTime/1000.0/(double)mpf) )
+		if (ZHR>0 && prob<((double)ZHR*zhrToWsr*deltaTime/1000.0/(double)mpf))
 		{
-			Meteor *m = new Meteor(StelApp::getInstance().getCore(), maxVelocity);
+			Meteor *m = new Meteor(core, maxVelocity);
 			active.push_back(m);
-			mlaunch++;
 		}
 	}
-	//  qDebug("mpf: %d\tm launched: %d\t(mps: %f)\t%d\n", mpf, mlaunch, ZHR*zhrToWsr, deltaTime);
 }
 
 
 void MeteorMgr::draw(StelCore* core)
 {
 	if (!flagShow)
+	{
 		return;
-	
-	LandscapeMgr* landmgr = (LandscapeMgr*)StelApp::getInstance().getModuleMgr().getModule("LandscapeMgr");
-	if (landmgr->getFlagAtmosphere() && landmgr->getLuminance()>5)
-		return;
+	}
 
-	StelPainter sPainter(core->getProjection(StelCore::FrameAltAz));
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	glEnable(GL_BLEND);
-	sPainter.enableTexture2d(false);
+	LandscapeMgr* landmgr = GETSTELMODULE(LandscapeMgr);
+	if (landmgr->getFlagAtmosphere() && landmgr->getLuminance()>5)
+	{
+		return;
+	}
 
 	// step through and draw all active meteors
-	for (std::vector<Meteor*>::iterator iter = active.begin(); iter != active.end(); ++iter)
+	StelPainter sPainter(core->getProjection(StelCore::FrameAltAz));
+	std::vector<Meteor*>::iterator iter;
+	for (iter = active.begin(); iter != active.end(); ++iter)
 	{
 		(*iter)->draw(core, sPainter);
 	}
