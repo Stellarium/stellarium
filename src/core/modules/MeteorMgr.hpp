@@ -20,7 +20,6 @@
 #ifndef _METEORMGR_HPP_
 #define _METEORMGR_HPP_
 
-#include <vector>
 #include "StelModule.hpp"
 
 class Meteor;
@@ -80,10 +79,10 @@ signals:
 	void zhrChanged(int);
 	
 private:
-	std::vector<Meteor*> active;		// Vector containing all active meteors
+	std::vector<Meteor*> active;	// Vector containing all active meteors
+	static const double zhrToWsr;	// factor to convert from zhr to whole earth per second rate
 	int ZHR;
 	int maxVelocity;
-	double zhrToWsr;  // factor to convert from zhr to whole earth per second rate
 	bool flagShow;
 };
 

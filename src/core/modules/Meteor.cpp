@@ -198,9 +198,9 @@ bool Meteor::update(double deltaTime)
 void Meteor::draw(const StelCore* core, StelPainter& sPainter)
 {
 	if (!alive)
+	{
 		return;
-
-	const StelProjectorP proj = sPainter.getProjector();
+	}
 
 	Vec3d spos = position;
 	Vec3d epos = posTrain;
@@ -242,14 +242,18 @@ void Meteor::draw(const StelCore* core, StelPainter& sPainter)
 		vertexArray[0]=epos;
 		vertexArray[1]=posi;
 		vertexArray[2]=spos;
+
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		sPainter.enableClientStates(true, false, true);
 		sPainter.setColorPointer(4, GL_FLOAT, colorArray);
 		sPainter.setVertexPointer(3, GL_DOUBLE, vertexArray);
-		sPainter.enableClientStates(true, false, true);
 		sPainter.drawFromArray(StelPainter::LineStrip, 3, 0, true);
 		sPainter.enableClientStates(false);
 	}
 	else
 	{
+		const StelProjectorP proj = sPainter.getProjector();
 		Vec3d start;
 		proj->project(spos, start);
 		sPainter.drawPoint2d(start[0],start[1]);
