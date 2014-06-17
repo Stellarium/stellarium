@@ -19,12 +19,14 @@
 
 #include <QDateTime>
 #include <QStandardItemModel>
+#include <QStringBuilder>
 
 #include "AddOnDialog.hpp"
 #include "ui_addonDialog.h"
 #include "StelApp.hpp"
 #include "StelGui.hpp"
 #include "StelTranslator.hpp"
+#include "StelUtils.hpp"
 
 AddOnDialog::AddOnDialog(QObject* parent) : StelDialog(parent)
 {
@@ -121,7 +123,51 @@ void AddOnDialog::initModel(QTableView* tableView)
 
 void AddOnDialog::updateCatalog()
 {
+	ui->btnUpdate->setEnabled(false);
+	ui->txtLastUpdate->setText(q_("Updating catalog..."));
 	qint64 currentTime = QDateTime::currentMSecsSinceEpoch();
-	m_StelAddOn.setLastUpdate(currentTime);
+
+	QNetworkRequest req(QUrl("http://cardinot.sourceforge.net/getUpdates.php?time="
+				 % QString::number(currentTime)));
+	req.setAttribute(QNetworkRequest::CacheSaveControlAttribute, false);
+	req.setAttribute(QNetworkRequest::RedirectionTargetAttribute, false);
+	req.setRawHeader("User-Agent", StelUtils::getApplicationName().toLatin1());
+	m_pUpdateCatalogReply = StelApp::getInstance().getNetworkAccessManager()->get(req);
+	m_pUpdateCatalogReply->setReadBufferSize(1024*1024*2);
+	connect(m_pUpdateCatalogReply, SIGNAL(finished()), this, SLOT(downloadFinished()));
+	connect(m_pUpdateCatalogReply, SIGNAL(error(QNetworkReply::NetworkError)),
+		this, SLOT(downloadError(QNetworkReply::NetworkError)));
+}
+
+void AddOnDialog::downloadError(QNetworkReply::NetworkError)
+{
+	Q_ASSERT(m_pUpdateCatalogReply);
+	qWarning() << "Error updating database catalog!" << m_pUpdateCatalogReply->errorString();
+	ui->btnUpdate->setEnabled(true);
+	ui->txtLastUpdate->setText(q_("Database update failed!"));
+}
+
+void AddOnDialog::downloadFinished()
+{
+	Q_ASSERT(m_pUpdateCatalogReply);
+	if (m_pUpdateCatalogReply->error()!=QNetworkReply::NoError)
+	{
+		m_pUpdateCatalogReply->deleteLater();
+		m_pUpdateCatalogReply = NULL;
+		return;
+	}
+
+	QByteArray data=m_pUpdateCatalogReply->readAll();
+	QString result(data);
+
+	if (!result.isEmpty())
+	{
+		// query
+	}
+
+	QString url = m_pUpdateCatalogReply->url().toString();
+	quint64 time = url.mid(url.lastIndexOf("time=")+5).toLong();
+	ui->btnUpdate->setEnabled(true);
+	m_StelAddOn.setLastUpdate(time);
 	ui->txtLastUpdate->setText(m_StelAddOn.getLatUpdate());
 }

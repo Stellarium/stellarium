@@ -24,6 +24,7 @@
 #include "StelDialog.hpp"
 
 #include <QListWidgetItem>
+#include <QNetworkReply>
 #include <QObject>
 #include <QTableView>
 
@@ -49,6 +50,8 @@ protected:
 private slots:
 	void changePage(QListWidgetItem *current, QListWidgetItem *previous);
 	void updateCatalog();
+	void downloadError(QNetworkReply::NetworkError);
+	void downloadFinished();
 
 private:
 	//! Defines the columns that will be displayed in the table view.
@@ -61,6 +64,7 @@ private:
 	};
 
 	StelAddOn m_StelAddOn;
+	QNetworkReply* m_pUpdateCatalogReply;
 
 	void initModel(QTableView* tableView);
 	void setUpTableView(QTableView* tableView);
