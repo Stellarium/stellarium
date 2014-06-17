@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>659</width>
-    <height>574</height>
+    <height>614</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -384,7 +384,7 @@
          </sizepolicy>
         </property>
         <property name="currentIndex">
-         <number>0</number>
+         <number>4</number>
         </property>
         <widget class="QWidget" name="catalogs">
          <layout class="QVBoxLayout" name="verticalLayout">
@@ -482,7 +482,7 @@
             </sizepolicy>
            </property>
            <property name="text">
-            <string>Last update:</string>
+            <string>Last update: </string>
            </property>
           </widget>
          </item>
@@ -507,11 +507,6 @@
           </widget>
          </item>
         </layout>
-        <zorder>lblLastUpdate</zorder>
-        <zorder>txtLastUpdate</zorder>
-        <zorder>lblLastUpdate</zorder>
-        <zorder>txtLastUpdate</zorder>
-        <zorder>btnUpdate</zorder>
        </widget>
       </item>
      </layout>

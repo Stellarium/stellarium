@@ -54,18 +54,20 @@ StelAddOn::StelAddOn()
 	}
 
 	// create file to store the last update time
+	QString lastUpdate;
 	QFile file(m_sAddonPath  % "/lastdbupdate.txt");
 	if (file.open(QIODevice::ReadWrite | QIODevice::Text))
 	{
 		QTextStream txt(&file);
-		m_sLastUpdate = txt.readAll();
-		if(m_sLastUpdate.isEmpty())
+		lastUpdate = txt.readAll();
+		if(lastUpdate.isEmpty())
 		{
-			m_sLastUpdate = "0";
-			txt << m_sLastUpdate;
+			lastUpdate = "0";
+			txt << lastUpdate;
 		}
 		file.close();
 	}
+	m_iLastUpdate = lastUpdate.toLong();
 }
 
 bool StelAddOn::createAddonTables()
@@ -165,14 +167,14 @@ bool StelAddOn::createTableAuthor()
 	return true;
 }
 
-void StelAddOn::setLastUpdate(QString time) {
-	m_sLastUpdate = time;
+void StelAddOn::setLastUpdate(qint64 time) {
+	m_iLastUpdate = time;
 	// store value it in the txt file
 	QFile file(m_sAddonPath  % "/lastdbupdate.txt");
 	if (file.open(QIODevice::WriteOnly | QIODevice::Text))
 	{
 		QTextStream txt(&file);
-		txt << m_sLastUpdate;
+		txt << QString::number(m_iLastUpdate);
 		file.close();
 	}
 }

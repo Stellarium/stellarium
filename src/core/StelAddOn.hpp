@@ -20,6 +20,7 @@
 #ifndef _STELADDON_HPP_
 #define _STELADDON_HPP_
 
+#include <QDateTime>
 #include <QSqlDatabase>
 
 class StelAddOn
@@ -27,13 +28,21 @@ class StelAddOn
 public:
 	StelAddOn();
 
-	QString getLastUpdate() { return m_sLastUpdate; }
-	void setLastUpdate(QString time);
+	void setLastUpdate(qint64 time);
+	QString getLatUpdate()
+	{
+		return QDateTime::fromMSecsSinceEpoch(m_iLastUpdate)
+				.toString("dd MMM yyyy - hh:mm:ss");
+	}
+	qint64 getLastUpdate()
+	{
+		return m_iLastUpdate;
+	}
 
 private:
 	QSqlDatabase m_db;
 	QString m_sAddonPath;
-	QString m_sLastUpdate;
+	qint64 m_iLastUpdate;
 
 	bool createAddonTables();
 	bool createTableLicense();

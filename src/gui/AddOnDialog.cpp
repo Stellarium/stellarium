@@ -17,6 +17,7 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 */
 
+#include <QDateTime>
 #include <QStandardItemModel>
 
 #include "AddOnDialog.hpp"
@@ -56,6 +57,9 @@ void AddOnDialog::createDialogContent()
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 	connect(ui->stackListWidget, SIGNAL(currentItemChanged(QListWidgetItem *, QListWidgetItem *)),
 		this, SLOT(changePage(QListWidgetItem *, QListWidgetItem*)));
+
+	// catalog updates
+	ui->txtLastUpdate->setText(m_StelAddOn.getLatUpdate());
 	connect(ui->btnUpdate, SIGNAL(clicked()), this, SLOT(updateCatalog()));
 
 	// default tab
@@ -117,5 +121,7 @@ void AddOnDialog::initModel(QTableView* tableView)
 
 void AddOnDialog::updateCatalog()
 {
-
+	qint64 currentTime = QDateTime::currentMSecsSinceEpoch();
+	m_StelAddOn.setLastUpdate(currentTime);
+	ui->txtLastUpdate->setText(m_StelAddOn.getLatUpdate());
 }
