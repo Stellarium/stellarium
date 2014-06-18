@@ -178,3 +178,7 @@ void StelAddOn::setLastUpdate(qint64 time) {
 		file.close();
 	}
 }
+
+void StelAddOn::updateDatabase(QString webresult) {
+	qDebug() << webresult;
+}

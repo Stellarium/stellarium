@@ -28,8 +28,9 @@ class StelAddOn
 public:
 	StelAddOn();
 
+	void updateDatabase(QString webresult);
 	void setLastUpdate(qint64 time);
-	QString getLatUpdate()
+	QString getLastUpdateString()
 	{
 		return QDateTime::fromMSecsSinceEpoch(m_iLastUpdate)
 				.toString("dd MMM yyyy - hh:mm:ss");

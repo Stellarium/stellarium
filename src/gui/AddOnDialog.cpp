@@ -61,7 +61,7 @@ void AddOnDialog::createDialogContent()
 		this, SLOT(changePage(QListWidgetItem *, QListWidgetItem*)));
 
 	// catalog updates
-	ui->txtLastUpdate->setText(m_StelAddOn.getLatUpdate());
+	ui->txtLastUpdate->setText(m_StelAddOn.getLastUpdateString());
 	connect(ui->btnUpdate, SIGNAL(clicked()), this, SLOT(updateCatalog()));
 
 	// default tab
@@ -125,10 +125,9 @@ void AddOnDialog::updateCatalog()
 {
 	ui->btnUpdate->setEnabled(false);
 	ui->txtLastUpdate->setText(q_("Updating catalog..."));
-	qint64 currentTime = QDateTime::currentMSecsSinceEpoch();
 
 	QNetworkRequest req(QUrl("http://cardinot.sourceforge.net/getUpdates.php?time="
-				 % QString::number(currentTime)));
+				 % QString::number(m_StelAddOn.getLastUpdate())));
 	req.setAttribute(QNetworkRequest::CacheSaveControlAttribute, false);
 	req.setAttribute(QNetworkRequest::RedirectionTargetAttribute, false);
 	req.setRawHeader("User-Agent", StelUtils::getApplicationName().toLatin1());
@@ -162,12 +161,11 @@ void AddOnDialog::downloadFinished()
 
 	if (!result.isEmpty())
 	{
-		// query
+		m_StelAddOn.updateDatabase(result);
 	}
 
-	QString url = m_pUpdateCatalogReply->url().toString();
-	quint64 time = url.mid(url.lastIndexOf("time=")+5).toLong();
+	qint64 currentTime = QDateTime::currentMSecsSinceEpoch();
 	ui->btnUpdate->setEnabled(true);
-	m_StelAddOn.setLastUpdate(time);
-	ui->txtLastUpdate->setText(m_StelAddOn.getLatUpdate());
+	m_StelAddOn.setLastUpdate(currentTime);
+	ui->txtLastUpdate->setText(m_StelAddOn.getLastUpdateString());
 }
