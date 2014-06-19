@@ -506,6 +506,13 @@ void MeteorShowers::update(double deltaTime)
 		return;
 	}
 
+	StelCore* core = StelApp::getInstance().getCore();
+
+	double tspeed = core->getTimeRate()*86400;  // sky seconds per actual second
+	if (!tspeed) { // is paused?
+		return; // freeze meteors at the current position
+	}
+
 	deltaTime*=1000;
 	// if stellarium has been suspended, don't create huge number of meteors to
 	// make up for lost time!
@@ -514,7 +521,6 @@ void MeteorShowers::update(double deltaTime)
 		deltaTime = 500;
 	}
 
-	StelCore* core = StelApp::getInstance().getCore();
 	QList<activeData> old_activeInfo;
 
 	//check if the sky date changed
