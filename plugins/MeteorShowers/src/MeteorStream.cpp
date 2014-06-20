@@ -291,7 +291,11 @@ void MeteorStream::draw(const StelCore* core, StelPainter& sPainter)
 
 	double maxFOV = core->getMovementMgr()->getMaxFov();
 	double FOV = core->getMovementMgr()->getCurrentFov();
-	double thickness = log(FOV)/(1.2*maxFOV - FOV) + 0.01;
+	double thickness = 2*log(FOV + 0.25)/(1.2*maxFOV - (FOV + 0.25)) + 0.01;
+	if (FOV <= 0.5)
+	{
+		thickness = 0.013 * FOV; // decreasing faster
+	}
 	double bolideSize = thickness*3;
 
 	// train (triangular prism)
