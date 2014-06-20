@@ -91,6 +91,13 @@ void MeteorMgr::update(double deltaTime)
 		return;
 	}
 
+	StelCore* core = StelApp::getInstance().getCore();
+
+	double tspeed = core->getTimeRate()*86400;  // sky seconds per actual second
+	if (!tspeed) { // is paused?
+		return; // freeze meteors at the current position
+	}
+
 	deltaTime*=1000;
 	// if stellarium has been suspended, don't create
 	// huge number of meteors to make up for lost time!
@@ -113,9 +120,7 @@ void MeteorMgr::update(double deltaTime)
 
 	// only makes sense given lifetimes of meteors to draw when timeSpeed is realtime
 	// otherwise high overhead of large numbers of meteors
-	StelCore* core = StelApp::getInstance().getCore();
-	double tspeed = core->getTimeRate()*86400;  // sky seconds per actual second
-	if (tspeed<=0 || fabs(tspeed)>1.)
+	if (tspeed<0 || fabs(tspeed)>1.)
 	{
 		// don't start any more meteors
 		return;
