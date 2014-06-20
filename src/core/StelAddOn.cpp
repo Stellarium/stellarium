@@ -180,5 +180,15 @@ void StelAddOn::setLastUpdate(qint64 time) {
 }
 
 void StelAddOn::updateDatabase(QString webresult) {
-	qDebug() << webresult;
+	QSqlQuery query(m_db);
+	QStringList queries = webresult.split("<br>");
+	queries.removeFirst();
+	foreach (QString insert, queries) {
+		query.prepare(insert.simplified());
+		if (!query.exec())
+		{
+			qDebug() << "Add-On Manager : unable to update database."
+				 << m_db.lastError();
+		}
+	}
 }
