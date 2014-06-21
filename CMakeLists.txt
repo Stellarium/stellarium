@@ -252,7 +252,6 @@ IF(NOT WIN32)
   FIND_PACKAGE(ZLIB)
 ELSE()
   SET(ZLIB_INCLUDE_DIR ${CMAKE_SOURCE_DIR}/src/core/external/zlib)
-  SET(ZLIB "; zlib already included in source code")
 ENDIF()
 
 FIND_PACKAGE(Qt5Test)
