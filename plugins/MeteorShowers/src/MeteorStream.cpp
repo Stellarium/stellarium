@@ -55,8 +55,8 @@ MeteorStream::MeteorStream(const StelCore* core,
 	// if the position is within the bounds, this parameter will be changed to TRUE
 	m_alive = false;
 
-	double high_range = EARTH_RADIUS+HIGH_ALTITUDE;
-	double low_range = EARTH_RADIUS+LOW_ALTITUDE;
+	double high_range = EARTH_RADIUS + HIGH_ALTITUDE;
+	double low_range = EARTH_RADIUS + LOW_ALTITUDE;
 
 	// view matrix of meteor model
 	m_viewMatrix = Mat4d::zrotation(radiantAlpha) * Mat4d::yrotation(M_PI_2 - radiantDelta);
@@ -85,9 +85,12 @@ MeteorStream::MeteorStream(const StelCore* core,
 
 	// determine end of burn point, and nearest point to observer for distance mag calculation
 	// mag should be max at nearest point still burning
-	m_endH = -m_startH;  // earth grazing
-	m_minDist = m_xydistance;
-	if (D <= low_range)
+	if (D > low_range)
+	{
+		m_endH = -m_startH;  // earth grazing
+		m_minDist = m_xydistance;
+	}
+	else
 	{
 		m_endH = sqrt(low_range*low_range - D*D);
 		m_minDist = sqrt(m_xydistance*m_xydistance + pow(m_endH - m_obs[2], 2));
@@ -115,7 +118,7 @@ MeteorStream::MeteorStream(const StelCore* core,
 	// most visible meteors are under about 180km distant
 	// scale max mag down if outside this range
 	float scale = 1;
-	if (m_minDist!=0)
+	if (m_minDist)
 	{
 		scale = 180*180 / (m_minDist*m_minDist);
 	}
