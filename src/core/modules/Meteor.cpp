@@ -37,119 +37,91 @@ which are generally not at the apex of the Earth's way, such as the Perseids sho
 #include "StelPainter.hpp"
 
 Meteor::Meteor(const StelCore* core, double v)
-	: train(false)
-	, startH(0.)
-	, endH(0.)
-	, mag(1.)
-	, absMag(1.)
-	, visMag(1.)		
-	, initDist(0.)
-	, minDist(0.)
-	, distMultiplier(0.)
+	: m_mag(1.)
+	, m_startH(0.)
+	, m_endH(0.)
+	, m_minDist(0.)
+	, m_distMultiplier(0.)
 {
-	const StelToneReproducer* eye = core->getToneReproducer();
-	
-	velocity = 11+(double)rand()/((double)RAND_MAX+1)*(v-11);  // abs range 11-72 km/s by default (see line 427 in StelApp.cpp)
-	maxMag = 1;
+	m_speed = 11+(double)rand()/((double)RAND_MAX+1)*(v-11);  // abs range 11-72 km/s by default (see line 427 in StelApp.cpp)
+
+	// the meteor starts dead, after we'll calculate the position
+	// if the position is within the bounds, this parameter will be changed to TRUE
+	m_alive = false;
+
+	double high_range = EARTH_RADIUS + HIGH_ALTITUDE;
+	double low_range = EARTH_RADIUS + LOW_ALTITUDE;
 
 	// view matrix of sporadic meteors model
 	double alpha = (double)rand()/((double)RAND_MAX+1)*2*M_PI;
 	double delta = M_PI_2 - (double)rand()/((double)RAND_MAX+1)*M_PI;
-	mmat = Mat4d::zrotation(alpha) * Mat4d::yrotation(delta);
-
-	// select random trajectory using polar coordinates in XY plane, centered on observer
-	xydistance = (double)rand()/((double)RAND_MAX+1)*(VISIBLE_RADIUS);
-	double angle = (double)rand()/((double)RAND_MAX+1)*2*M_PI;
+	m_viewMatrix = Mat4d::zrotation(alpha) * Mat4d::yrotation(delta);
 
 	// find observer position in meteor coordinate system
-	obs = core->altAzToEquinoxEqu(Vec3d(0,0,EARTH_RADIUS));
-	obs.transfo4d(mmat.transpose());
+	m_obs = core->altAzToEquinoxEqu(Vec3d(0,0,EARTH_RADIUS));
+	m_obs.transfo4d(m_viewMatrix.transpose());
+
+	// select random trajectory using polar coordinates in XY plane, centered on observer
+	m_xydistance = (double)rand() / ((double)RAND_MAX+1)*(VISIBLE_RADIUS);
+	double angle = (double)rand() / ((double)RAND_MAX+1)*2*M_PI;
 
 	// set meteor start x,y
-	posInternal[0] = posTrain[0] = position[0] = xydistance*cos(angle) +obs[0];
-	posInternal[1] = posTrain[1] = position[1] = xydistance*sin(angle) +obs[1];
-
-	// determine life of meteor (start and end z value based on atmosphere burn altitudes)
+	m_position[0] = m_posTrain[0] = m_xydistance*cos(angle) + m_obs[0];
+	m_position[1] = m_posTrain[1] = m_xydistance*sin(angle) + m_obs[1];
 
 	// D is distance from center of earth
-	double D = sqrt( position[0]*position[0] + position[1]*position[1] );
+	double D = sqrt(m_position[0]*m_position[0] + m_position[1]*m_position[1]);
 
-	if( D > EARTH_RADIUS+HIGH_ALTITUDE ) {
-		// won't be visible
-		alive = 0;
+	if (D > high_range)     // won't be visible, meteor still dead
+	{
 		return;
 	}
 
-	startH = sqrt( pow(EARTH_RADIUS+HIGH_ALTITUDE,2) - D*D);
+	m_posTrain[2] = m_position[2] = m_startH = sqrt(high_range*high_range - D*D);
 
 	// determine end of burn point, and nearest point to observer for distance mag calculation
 	// mag should be max at nearest point still burning
-	if( D > EARTH_RADIUS+LOW_ALTITUDE ) {
-		endH = -startH;  // earth grazing
-		minDist = xydistance;
-	} else {
-		endH = sqrt( pow(EARTH_RADIUS+LOW_ALTITUDE,2) - D*D);
-		minDist = sqrt( xydistance*xydistance + pow( endH - obs[2], 2) );
+	if (D > low_range)
+	{
+		m_endH = -m_startH;  // earth grazing
+		m_minDist = m_xydistance;
+	}
+	else
+	{
+		m_endH = sqrt(low_range*low_range - D*D);
+		m_minDist = sqrt(m_xydistance*m_xydistance + pow(m_endH - m_obs[2], 2));
 	}
 
-	if(minDist > VISIBLE_RADIUS ) {
+	if (m_minDist > VISIBLE_RADIUS)
+	{
 		// on average, not visible (although if were zoomed ...)
-		alive = 0;
-		return;
+		return; //meteor still dead
 	}
 
-	/* experiment
-	// limit lifetime to 0.5-3.0 sec
-	double tmp_h = startH - velocity * (0.5 + (double)rand()/((double)RAND_MAX+1) * 2.5);
-	if( tmp_h > endH ) {
-		endH = tmp_h;
-	}
-	*/
+	// If everything is ok until here,
+	m_alive = true;  //the meteor is alive
 
-	posTrain[2] = position[2] = startH;
-
-	//  qDebug("New meteor: %f %f s:%f e:%f v:%f\n", position[0], position[1], startH, endH, velocity);
-
-	alive = 1;
-	train=0;
-
-	// Determine drawing color given magnitude and eye
-	// (won't be visible during daylight)
-
-	// *** color varies somewhat based on velocity, plus atmosphere reddening
-
-	// determine intensity
-	float Mag1 = (double)rand()/((double)RAND_MAX+1)*6.75f - 3;
-	float Mag2 = (double)rand()/((double)RAND_MAX+1)*6.75f - 3;
+	// determine intensity [-3; 4.5]
+	float Mag1 = (double)rand()/((double)RAND_MAX+1)*7.5f - 3;
+	float Mag2 = (double)rand()/((double)RAND_MAX+1)*7.5f - 3;
 	float Mag = (Mag1 + Mag2)/2.0f;
 
-	mag = (5. + Mag) / 256.0;
-	if (mag>250) mag = mag - 256;
-
-	float term1 = std::exp(-0.92103f*(mag + 12.12331f)) * 108064.73f;
-
-	float cmag=1.f;
-	float rmag;
-
-	// Compute the equivalent star luminance for a 5 arc min circle and convert it
-	// in function of the eye adaptation
-	rmag = eye->adaptLuminanceScaled(term1);
-	rmag = rmag/powf(core->getMovementMgr()->getCurrentFov(),0.85f)*500.f;
-
-	// if size of star is too small (blink) we put its size to 1.2 --> no more blink
-	// And we compensate the difference of brighteness with cmag
-	if (rmag<1.2f) {
-		cmag=rmag*rmag/1.44f;
-	}
-
-	mag = cmag;  // assumes white
+	// compute RMag and CMag
+	RCMag rcMag;
+	core->getSkyDrawer()->computeRCMag(Mag, &rcMag);
+	m_mag = rcMag.luminance;
 
 	// most visible meteors are under about 180km distant
 	// scale max mag down if outside this range
 	float scale = 1;
-	if(minDist!=0) scale = 180*180/(minDist*minDist);
-	if( scale < 1 ) mag *= scale;
-
+	if (m_minDist)
+	{
+		scale = 180*180 / (m_minDist*m_minDist);
+	}
+	if (scale < 1)
+	{
+		m_mag *= scale;
+	}
 }
 
 Meteor::~Meteor()
@@ -159,110 +131,102 @@ Meteor::~Meteor()
 // returns true if alive
 bool Meteor::update(double deltaTime)
 {
-	if(!alive) return(0);
+	if (!m_alive)
+	{
+		return false;
+	}
 
-	if( position[2] < endH ) {
+	if (m_position[2] < m_endH)
+	{
 		// burning has stopped so magnitude fades out
 		// assume linear fade out
-
-		mag -= maxMag * deltaTime/500.0f;
-		if( mag < 0 ) alive=0;  // no longer visible
-
+		m_mag -= deltaTime/500.0f;
+		if(m_mag < 0)
+		{
+			m_alive = false;    // no longer visible
+		}
 	}
 
 	// *** would need time direction multiplier to allow reverse time replay
-	position[2] = position[2] - velocity*deltaTime/1000.0f;
+	m_position[2] -= m_speed*deltaTime/1000.0f;
 
 	// train doesn't extend beyond start of burn
-	if( position[2] + velocity*0.5f > startH ) {
-		posTrain[2] = startH ;
-	} else {
-		posTrain[2] -= velocity*deltaTime/1000.0f;
+	if (m_position[2] + m_speed*0.5f > m_startH)
+	{
+		m_posTrain[2] = m_startH;
+	}
+	else
+	{
+		m_posTrain[2] -= m_speed*deltaTime/1000.0f;
 	}
 
-	//qDebug("meteor position: %f delta_t %d\n", position[2], deltaTime);
-
 	// determine visual magnitude based on distance to observer
-	double dist = sqrt( xydistance*xydistance + pow( position[2]-obs[2], 2) );
+	double dist = sqrt(m_xydistance*m_xydistance + pow(m_position[2]-m_obs[2], 2));
+	if (dist == 0)
+	{
+		dist = .01;    // just to be cautious (meteor hits observer!)
+	}
+	m_distMultiplier = m_minDist*m_minDist / (dist*dist);
 
-	if( dist == 0 ) dist = .01;  // just to be cautious (meteor hits observer!)
-
-	distMultiplier = minDist*minDist / (dist*dist);
-
-	return(alive);
+	return m_alive;
 }
-
 
 // returns true if visible
 // Assumes that we are in local frame
 void Meteor::draw(const StelCore* core, StelPainter& sPainter)
 {
-	if (!alive)
+	if (!m_alive)
 	{
 		return;
 	}
 
-	Vec3d spos = position;
-	Vec3d epos = posTrain;
+	Vec3d spos = m_position;
+	Vec3d epos = m_posTrain;
 
 	// convert to equ
-	spos.transfo4d(mmat);
-	epos.transfo4d(mmat);
+	spos.transfo4d(m_viewMatrix);
+	epos.transfo4d(m_viewMatrix);
 
 	// convert to local and correct for earth radius [since equ and local coordinates in stellarium use same 0 point!] 
-	spos = core->equinoxEquToAltAz( spos );
-	epos = core->equinoxEquToAltAz( epos );
+	spos = core->equinoxEquToAltAz(spos);
+	epos = core->equinoxEquToAltAz(epos);
 	spos[2] -= EARTH_RADIUS;
 	epos[2] -= EARTH_RADIUS;
 	// 1216 is to scale down under 1 for desktop version
 	spos/=1216;
 	epos/=1216;
 
-	//qDebug("[%f %f %f]\n", position[0], position[1], position[2]);
+	// connect this point with last drawn point
+	double tmag = m_mag*m_distMultiplier;
 
-	if (train)
-	{
-		// connect this point with last drawn point
-		double tmag = mag*distMultiplier;
+	// compute an intermediate point so can curve slightly along projection distortions
+	Vec3d posi = m_posTrain;
+	posi[2] = m_posTrain[2] + (m_position[2] - m_posTrain[2])/2;
+	posi.transfo4d(m_viewMatrix);
+	posi = core->equinoxEquToAltAz(posi);
+	posi[2] -= EARTH_RADIUS;
+	posi/=1216;
 
-		// compute an intermediate point so can curve slightly along projection distortions
-		Vec3d posi = posInternal; 
-		posi[2] = position[2] + (posTrain[2] - position[2])/2;
-		posi.transfo4d(mmat);
-		posi = core->equinoxEquToAltAz( posi );
-		posi[2] -= EARTH_RADIUS;
-		posi/=1216;
+	// draw dark to light
+	Vec4f colorArray[3];
+	colorArray[0].set(0,0,0,0);
+	colorArray[1].set(1,1,1,tmag*0.5);
+	colorArray[2].set(1,1,1,tmag);
+	Vec3d vertexArray[3];
+	vertexArray[0]=epos;
+	vertexArray[1]=posi;
+	vertexArray[2]=spos;
 
-		// draw dark to light
-		Vec4f colorArray[3];
-		colorArray[0].set(0,0,0,0);
-		colorArray[1].set(1,1,1,tmag*0.5);
-		colorArray[2].set(1,1,1,tmag);
-		Vec3d vertexArray[3];
-		vertexArray[0]=epos;
-		vertexArray[1]=posi;
-		vertexArray[2]=spos;
-
-		glEnable(GL_BLEND);
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-		sPainter.enableClientStates(true, false, true);
-		sPainter.setColorPointer(4, GL_FLOAT, colorArray);
-		sPainter.setVertexPointer(3, GL_DOUBLE, vertexArray);
-		sPainter.drawFromArray(StelPainter::LineStrip, 3, 0, true);
-		sPainter.enableClientStates(false);
-	}
-	else
-	{
-		const StelProjectorP proj = sPainter.getProjector();
-		Vec3d start;
-		proj->project(spos, start);
-		sPainter.drawPoint2d(start[0],start[1]);
-	}
-
-	train = 1;
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	sPainter.enableClientStates(true, false, true);
+	sPainter.setColorPointer(4, GL_FLOAT, colorArray);
+	sPainter.setVertexPointer(3, GL_DOUBLE, vertexArray);
+	sPainter.drawFromArray(StelPainter::LineStrip, 3, 0, true);
+	sPainter.enableClientStates(false);
 }
 
 bool Meteor::isAlive(void)
 {
-	return(alive);
+	return m_alive;
 }
