@@ -20,7 +20,9 @@
 #ifndef _METEOR_HPP_
 #define _METEOR_HPP_
 
+#include "MeteorMgr.hpp"
 #include "VecMath.hpp"
+
 class StelCore;
 class StelPainter;
 
@@ -56,6 +58,9 @@ public:
 	bool isAlive(void);
 	
 private:
+	void insertVertex(const StelCore* core, QVector<Vec3d> &vertexArray, Vec3d vertex);
+	Vec4f getColor(QString colorName);
+
 	bool m_alive;       //! Indicate if the meteor it still visible
 
 	Mat4d m_viewMatrix; //! tranformation matrix to align radiant with earth direction of travel
@@ -63,13 +68,19 @@ private:
 	Vec3d m_position;   //! equatorial coordinate position
 	Vec3d m_posTrain;   //! end of train
 
-	double m_speed;          //! Velocity of meteor in km/s
-	double m_xydistance;     //! Distance in XY plane (orthogonal to meteor path) from observer to meteor
-	double m_minDist;        //! Nearest point to observer along path
-	float m_mag;	         //! Apparent magnitude at head, 0-1
-	double m_startH;         //! Start height above center of earth
-	double m_endH;           //! End height
-	double m_distMultiplier; //! Scale magnitude due to changes in distance
+	double m_speed;           //! Velocity of meteor in km/s
+	double m_xydistance;      //! Distance in XY plane (orthogonal to meteor path) from observer to meteor
+	double m_minDist;         //! Nearest point to observer along path
+	double m_startH;          //! Start height above center of earth
+	double m_endH;            //! End height
+	float m_mag;	          //! Apparent magnitude at head, 0-1
+	int m_segments;           //! Number of segments along the train
+	int m_firstBrightSegment; //! First bright segment of the train
+	double m_distMultiplier;  //! Scale magnitude due to changes in distance
+
+	QList<MeteorMgr::colorPair> m_colors;
+	QList<Vec4f> m_trainColorArray;
+	QList<Vec4f> m_lineColorArray;
 };
 
 
