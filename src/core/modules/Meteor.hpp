@@ -41,6 +41,19 @@ class StelPainter;
 class Meteor
 {
 public:
+	struct MeteorModel
+	{
+		Vec3d obs;         //! observer position
+		Vec3d position;    //! equatorial coordinate position
+		Vec3d posTrain;    //! end of train
+		double xydistance; //! Distance in XY plane (orthogonal to meteor path) from observer to meteor
+		double minDist;    //! Nearest point to observer along path
+		double startH;     //! Start height above center of earth
+		double endH;       //! End height
+		float mag;	   //! Apparent magnitude at head, 0-1
+		int firstBrightSegment; //! First bright segment of the train
+	};
+
 	//! Create a Meteor object.
 	//! @param v the velocity of the meteor in km/s.
 	Meteor(const StelCore*, double v);
@@ -56,26 +69,28 @@ public:
 	//! Determine if a meteor is alive or has burned out.
 	//! @return true if alive, else false.
 	bool isAlive(void);
-	
+
+	//! Builds Meteor Model
+	//! @return true if alive, else false.
+	bool initMeteorModel(const StelCore *core, const int segments, const Mat4d viewMatrix, MeteorModel &mm);
+
+	//! Determine color arrays of line and prism used to draw meteor train.
+	void buildColorArrays(const int segments,
+			      const QList<MeteorMgr::colorPair> colors,
+			      QList<Vec4f> &lineColorArray,
+			      QList<Vec4f> &trainColorArray);
+
 private:
 	void insertVertex(const StelCore* core, QVector<Vec3d> &vertexArray, Vec3d vertex);
 	Vec4f getColor(QString colorName);
 
-	bool m_alive;       //! Indicate if the meteor it still visible
+	bool m_alive;        //! Indicate if the meteor it still visible
 
-	Mat4d m_viewMatrix; //! tranformation matrix to align radiant with earth direction of travel
-	Vec3d m_obs;        //! observer position
-	Vec3d m_position;   //! equatorial coordinate position
-	Vec3d m_posTrain;   //! end of train
+	double m_speed;      //! Velocity of meteor in km/s
+	Mat4d m_viewMatrix;  //! tranformation matrix to align radiant with earth direction of travel
+	MeteorModel meteor;  //! Parameters of meteor model
 
-	double m_speed;           //! Velocity of meteor in km/s
-	double m_xydistance;      //! Distance in XY plane (orthogonal to meteor path) from observer to meteor
-	double m_minDist;         //! Nearest point to observer along path
-	double m_startH;          //! Start height above center of earth
-	double m_endH;            //! End height
-	float m_mag;	          //! Apparent magnitude at head, 0-1
-	int m_segments;           //! Number of segments along the train
-	int m_firstBrightSegment; //! First bright segment of the train
+	const int m_segments;     //! Number of segments along the train (useful to curve along projection distortions)
 	double m_distMultiplier;  //! Scale magnitude due to changes in distance
 
 	QList<MeteorMgr::colorPair> m_colors;
