@@ -83,6 +83,7 @@ bool StelAddOn::createAddonTables()
 			"author1 INTEGER, "
 			"author2 INTEGER, "
 			"license INTEGER, "
+			"installed TEXT, "
 			"directory TEXT, "
 			"url TEXT, "
 			"download_size TEXT, "
