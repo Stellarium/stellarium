@@ -37,10 +37,10 @@ which are generally not at the apex of the Earth's way, such as the Perseids sho
 #include "StelPainter.hpp"
 
 Meteor::Meteor(const StelCore* core, double v)
-	: m_mag(1.)
+	: m_minDist(0.)
 	, m_startH(0.)
 	, m_endH(0.)
-	, m_minDist(0.)
+	, m_mag(1.)
 	, m_distMultiplier(0.)
 {
 	m_speed = 11+(double)rand()/((double)RAND_MAX+1)*(v-11);  // abs range 11-72 km/s by default (see line 427 in StelApp.cpp)
@@ -122,10 +122,72 @@ Meteor::Meteor(const StelCore* core, double v)
 	{
 		m_mag *= scale;
 	}
+
+	// determine number of intermediate segments (useful to curve along projection distortions)
+	m_segments = 10;
+	m_firstBrightSegment = (double)rand()/((double)RAND_MAX+1)*m_segments;
+	// determine the meteor color
+	m_colors.push_back(MeteorMgr::colorPair("white", 100));
+
+	// building color arrays (line and prism)
+	int totalOfSegments = 0;
+	int currentSegment = 1+(double)rand()/((double)RAND_MAX+1)*(m_segments-1);
+	for (int colorIndex=0; colorIndex<m_colors.size(); colorIndex++) {
+		MeteorMgr::colorPair currentColor = m_colors[colorIndex];
+
+		// segments which we'll paint with the current color
+		int numOfSegments = m_segments*(currentColor.second / 100.f) + 0.4f; // +0.4 affect approximation
+		if (colorIndex == m_colors.size()-1) {
+			numOfSegments = m_segments - totalOfSegments;
+		}
+
+		totalOfSegments += numOfSegments;
+		for (int i=0; i<numOfSegments; i++) {
+			m_lineColorArray.insert(currentSegment, getColor(currentColor.first));
+			m_trainColorArray.insert(currentSegment, getColor(currentColor.first));
+			if (currentSegment >= m_segments-1) {
+				currentSegment = 0;
+			} else {
+				currentSegment++;
+			}
+			m_trainColorArray.insert(currentSegment, getColor(currentColor.first));
+		}
+	}
 }
 
 Meteor::~Meteor()
 {   
+}
+
+Vec4f Meteor::getColor(QString colorName) {
+	int R, G, B; // 0-255
+	if (colorName == "violet") { // Calcium
+		R = 176;
+		G = 67;
+		B = 172;
+	} else if (colorName == "blueGreen") { // Magnesium
+		R = 0;
+		G = 255;
+		B = 152;
+	} else if (colorName == "yellow") { // Iron
+		R = 255;
+		G = 255;
+		B = 0;
+	} else if (colorName == "orangeYellow") { // Sodium
+		R = 255;
+		G = 160;
+		B = 0;
+	} else if (colorName == "red") { // atmospheric nitrogen and oxygen
+		R = 255;
+		G = 30;
+		B = 0;
+	} else { // white
+		R = 255;
+		G = 255;
+		B = 255;
+	}
+
+	return Vec4f(R/255.f, G/255.f, B/255.f, 1);
 }
 
 // returns true if alive
@@ -171,6 +233,19 @@ bool Meteor::update(double deltaTime)
 	return m_alive;
 }
 
+void Meteor::insertVertex(const StelCore* core, QVector<Vec3d> &vertexArray, Vec3d vertex) {
+	// convert to equ
+	vertex.transfo4d(m_viewMatrix);
+	// convert to local and correct for earth radius
+	//[since equ and local coordinates in stellarium use same 0 point!]
+	vertex = core->j2000ToAltAz(vertex);
+	vertex[2] -= EARTH_RADIUS;
+	// 1216 is to scale down under 1 for desktop version
+	vertex/=1216;
+
+	vertexArray.push_back(vertex);
+}
+
 // returns true if visible
 // Assumes that we are in local frame
 void Meteor::draw(const StelCore* core, StelPainter& sPainter)
@@ -180,49 +255,81 @@ void Meteor::draw(const StelCore* core, StelPainter& sPainter)
 		return;
 	}
 
-	Vec3d spos = m_position;
-	Vec3d epos = m_posTrain;
+	double maxFOV = core->getMovementMgr()->getMaxFov();
+	double FOV = core->getMovementMgr()->getCurrentFov();
+	double thickness = 2*log(FOV + 0.25)/(1.2*maxFOV - (FOV + 0.25)) + 0.01;
+	if (FOV <= 0.5)
+	{
+		thickness = 0.013 * FOV; // decreasing faster
+	}
 
-	// convert to equ
-	spos.transfo4d(m_viewMatrix);
-	epos.transfo4d(m_viewMatrix);
+	// train (triangular prism)
+	//
+	QVector<Vec3d> vertexArrayLine;
+	QVector<Vec3d> vertexArrayL;
+	QVector<Vec3d> vertexArrayR;
+	QVector<Vec3d> vertexArrayTop;
 
-	// convert to local and correct for earth radius [since equ and local coordinates in stellarium use same 0 point!] 
-	spos = core->equinoxEquToAltAz(spos);
-	epos = core->equinoxEquToAltAz(epos);
-	spos[2] -= EARTH_RADIUS;
-	epos[2] -= EARTH_RADIUS;
-	// 1216 is to scale down under 1 for desktop version
-	spos/=1216;
-	epos/=1216;
+	Vec3d posTrainB = m_posTrain;
+	posTrainB[0] += thickness*0.7;
+	posTrainB[1] += thickness*0.7;
+	Vec3d posTrainL = m_posTrain;
+	posTrainL[1] -= thickness;
+	Vec3d posTrainR = m_posTrain;
+	posTrainR[0] -= thickness;
 
-	// connect this point with last drawn point
-	double tmag = m_mag*m_distMultiplier;
+	for (int i=0; i<m_segments; i++) {
+		double mag = m_mag * i/(3* (m_segments-1));
+		if (i > m_firstBrightSegment) {
+			mag *= 12/5;
+		}
 
-	// compute an intermediate point so can curve slightly along projection distortions
-	Vec3d posi = m_posTrain;
-	posi[2] = m_posTrain[2] + (m_position[2] - m_posTrain[2])/2;
-	posi.transfo4d(m_viewMatrix);
-	posi = core->equinoxEquToAltAz(posi);
-	posi[2] -= EARTH_RADIUS;
-	posi/=1216;
+		double height = m_posTrain[2] + i*(m_position[2] - m_posTrain[2])/(m_segments-1);
+		Vec3d posi;
 
-	// draw dark to light
-	Vec4f colorArray[3];
-	colorArray[0].set(0,0,0,0);
-	colorArray[1].set(1,1,1,tmag*0.5);
-	colorArray[2].set(1,1,1,tmag);
-	Vec3d vertexArray[3];
-	vertexArray[0]=epos;
-	vertexArray[1]=posi;
-	vertexArray[2]=spos;
+		posi = m_posTrain;
+		posi[2] = height;
+		insertVertex(core, vertexArrayLine, posi);
+
+		posi = posTrainB;
+		posi[2] = height;
+		insertVertex(core, vertexArrayL, posi);
+		insertVertex(core, vertexArrayR, posi);
+
+		posi = posTrainL;
+		posi[2] = height;
+		insertVertex(core, vertexArrayL, posi);
+		insertVertex(core, vertexArrayTop, posi);
+
+		posi = posTrainR;
+		posi[2] = height;
+		insertVertex(core, vertexArrayR, posi);
+		insertVertex(core, vertexArrayTop, posi);
+
+		m_lineColorArray[i][3] = mag;
+		m_trainColorArray[i*2][3] = mag;
+		m_trainColorArray[i*2+1][3] = mag;
+	}
 
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	sPainter.enableClientStates(true, false, true);
-	sPainter.setColorPointer(4, GL_FLOAT, colorArray);
-	sPainter.setVertexPointer(3, GL_DOUBLE, vertexArray);
-	sPainter.drawFromArray(StelPainter::LineStrip, 3, 0, true);
+	sPainter.setColorPointer(4, GL_FLOAT, m_trainColorArray.toVector().constData());
+	if (thickness) {
+		sPainter.setVertexPointer(3, GL_DOUBLE, vertexArrayL.constData());
+		sPainter.drawFromArray(StelPainter::TriangleStrip, vertexArrayL.size(), 0, true);
+
+		sPainter.setVertexPointer(3, GL_DOUBLE, vertexArrayR.constData());
+		sPainter.drawFromArray(StelPainter::TriangleStrip, vertexArrayR.size(), 0, true);
+
+		sPainter.setVertexPointer(3, GL_DOUBLE, vertexArrayTop.constData());
+		sPainter.drawFromArray(StelPainter::TriangleStrip, vertexArrayTop.size(), 0, true);
+	}
+	sPainter.setColorPointer(4, GL_FLOAT, m_lineColorArray.toVector().constData());
+	sPainter.setVertexPointer(3, GL_DOUBLE, vertexArrayLine.constData());
+	sPainter.drawFromArray(StelPainter::LineStrip, vertexArrayLine.size(), 0, true);
+
+	glDisable(GL_BLEND);
 	sPainter.enableClientStates(false);
 }
 
