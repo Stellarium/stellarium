@@ -125,8 +125,9 @@ bool StelAddOn::createAddonTables()
 		query.prepare(table);
 		if (!query.exec())
 		{
-		  qDebug() << "Add-On Manager : unable to create the addon table." << m_db.lastError();
-		  return false;
+			qDebug() << "Add-On Manager : unable to create the addon table."
+				 << m_db.lastError();
+			return false;
 		}
 	}
 	return true;
@@ -143,8 +144,9 @@ bool StelAddOn::createTableLicense()
 	);
 	if (!query.exec())
 	{
-	  qDebug() << "Add-On Manager : unable to create the license table." << m_db.lastError();
-	  return false;
+		qDebug() << "Add-On Manager : unable to create the license table."
+			 << m_db.lastError();
+		return false;
 	}
 	return true;
 }
@@ -161,8 +163,9 @@ bool StelAddOn::createTableAuthor()
 	);
 	if (!query.exec())
 	{
-	  qDebug() << "Add-On Manager : unable to create the author table." << m_db.lastError();
-	  return false;
+		qDebug() << "Add-On Manager : unable to create the author table."
+			 << m_db.lastError();
+		return false;
 	}
 	return true;
 }
