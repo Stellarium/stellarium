@@ -56,25 +56,20 @@ public:
 	bool isAlive(void);
 	
 private:
-	Mat4d mmat; // tranformation matrix to align radiant with earth direction of travel
-	Vec3d obs;  // observer position in meteor coord. system
-	Vec3d position;  // equatorial coordinate position
-	Vec3d posInternal;  // middle of train
-	Vec3d posTrain;  // end of train
-	bool train;      // point or train visible?
-	double startH;  // start height above center of earth
-	double endH;    // end height
-	double velocity; // km/s
-	bool alive;      // is it still visible?
-	float mag;	   // Apparent magnitude at head, 0-1
-	float maxMag;  // 0-1
-	float absMag;  // absolute magnitude
-	float visMag;  // visual magnitude at observer
-	double xydistance; // distance in XY plane (orthogonal to meteor path) from observer to meteor
-	double initDist;  // initial distance from observer
-	double minDist;  // nearest point to observer along path
-	double distMultiplier;  // scale magnitude due to changes in distance 
-	
+	bool m_alive;       //! Indicate if the meteor it still visible
+
+	Mat4d m_viewMatrix; //! tranformation matrix to align radiant with earth direction of travel
+	Vec3d m_obs;        //! observer position
+	Vec3d m_position;   //! equatorial coordinate position
+	Vec3d m_posTrain;   //! end of train
+
+	double m_speed;          //! Velocity of meteor in km/s
+	double m_xydistance;     //! Distance in XY plane (orthogonal to meteor path) from observer to meteor
+	double m_minDist;        //! Nearest point to observer along path
+	float m_mag;	         //! Apparent magnitude at head, 0-1
+	double m_startH;         //! Start height above center of earth
+	double m_endH;           //! End height
+	double m_distMultiplier; //! Scale magnitude due to changes in distance
 };
 
 
