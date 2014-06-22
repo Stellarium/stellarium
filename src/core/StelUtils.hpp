@@ -100,7 +100,7 @@ namespace StelUtils
 	QString radToDmsStr(const double angle, const bool decimal=false, const bool useD=false);
 
 	//! Convert a dms formatted string to an angle in radian
-	//! @param dsm The input string
+	//! @param s The input string
 	double dmsStrToRad(const QString& s);
 
 	//! Obtains a Vec3f from a string.
