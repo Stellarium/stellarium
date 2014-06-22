@@ -1,0 +1,23 @@
+<?xml version="1.0" ?>
+<component type="desktop">
+    <id>stellarium.desktop</id>
+    <metadata_license>CC0-1.0</metadata_license>
+    <project_license>GPL-2.0+</project_license>
+    <name>Stellarium</name>
+    <summary>Desktop Planetarium</summary>
+    <description>
+	<p>Stellarium is a free open source planetarium for your computer. It shows a realistic sky in 3D, just like what you see with the naked eye, binoculars or a telescope.</p>
+	<p>It is being used in planetarium projectors. Just set your coordinates and go.</p>
+    </description>
+    <url type="homepage">http://www.stellarium.org/</url>
+    <url type="bugtracker">https://bugs.launchpad.net/stellarium</url>
+    <url type="help">http://www.stellarium.org/wiki/index.php/Stellarium_User_Guide</url>
+    <screenshots>
+	<screenshot type="default">
+	    <image>http://www.stellarium.org/img/screenshots/0.10-constellation-art-on.jpg</image>
+	</screenshot>
+    </screenshots>
+    <provides>
+	<binary>stellarium</binary>
+    </provides>
+</component>

@@ -100,7 +100,7 @@ namespace StelUtils
 	QString radToDmsStr(const double angle, const bool decimal=false, const bool useD=false);
 
 	//! Convert a dms formatted string to an angle in radian
-	//! @param dsm The input string
+	//! @param s The input string
 	double dmsStrToRad(const QString& s);
 
 	//! Obtains a Vec3f from a string.
@@ -591,6 +591,9 @@ namespace StelUtils
 	//! @param segments number of segments
 	//! @param minAngle start angle inside the half-circle. maxAngle=minAngle+segments*phi
 	float* ComputeCosSinRhoZone(const float dRho, const int segments, const float minAngle);
+
+	//! Uncompress gzip or zlib compressed data.
+	QByteArray uncompress(const QByteArray& data);
 }
 
 #endif // _STELUTILS_HPP_
