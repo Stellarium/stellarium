@@ -22,6 +22,15 @@
 			"delta": "-19d25m24s",
 			"distance": 16
 		},
+		"393A":
+		{
+			"type": "II",
+			"maxMagnitude": -1,
+			"peakJD": 1864673,
+			"alpha": "17h14m0s",
+			"delta": "-39d48m0s",
+			"distance": 34
+		},
 		"1006A":
 		{
 			"type": "I",
@@ -72,6 +81,7 @@
 		"1680A":
 		{
 			"type": "IIb",
+			"note": "Cassiopeia A",
 			"maxMagnitude": 6,
 			"peakJD": 2334895,
 			"alpha": "23h23m24.00s",
@@ -81,6 +91,7 @@
 		"1885A":
 		{
 			"type": "IPec",
+			"note": "S Andromedae",
 			"maxMagnitude": 5.8,
 			"peakJD": 2409771,
 			"alpha": "00h42m43.00s",
@@ -296,6 +307,14 @@
 			"peakJD": 2456337,
 			"alpha": "14h32m33.88s",
 			"delta": "-44d13m27.8s"
+		},
+		"2014j":
+		{
+			"type": "Ia",
+			"maxMagnitude": 10.6,
+			"peakJD": 2456687.2916667,
+			"alpha": "09h55m42.087s",
+			"delta": "+69d40m26.54s"
 		}
 	}
 }
