@@ -3147,7 +3147,7 @@ void CalcAllTass17Elem(const double t,double elem[TASS17_DIM]) {
   int body;
   double lon[7];
   CalcLon(t,lon);
-  for (body=0;body<7;body++) CalcTass17Elem(t,lon,body,elem+(body*6));
+  for (body=0;body<=7;body++) CalcTass17Elem(t,lon,body,elem+(body*6));
 }
 
 void GetTass17Coor(double jd,int body,double *xyz) {

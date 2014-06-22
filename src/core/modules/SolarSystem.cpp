@@ -824,6 +824,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 					       StelUtils::strToVec3f(pd.value(secname+"/color").toString()),
 					       pd.value(secname+"/albedo").toFloat(),
 					       pd.value(secname+"/tex_map").toString(),
+					       pd.value(secname+"/normals_map").toString(),
 					       posfunc,
 					       userDataPtr,
 					       osculatingFunc,

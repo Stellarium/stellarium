@@ -1485,8 +1485,6 @@ void Oculars::paintOcularMask(const StelCore *core)
 
 	// Paint the reticale, if needed
 	if (!reticleTexture.isNull()){
-		glPushMatrix(); //Save the current matrix.
-
 		glEnable(GL_BLEND);
 		painter.enableTexture2d(true);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -1502,9 +1500,6 @@ void Oculars::paintOcularMask(const StelCore *core)
 										 params.viewportXywh[3] / 2 * params.devicePixelsPerPixel,
 										 inner,
 										 reticleRotation);
-
-		//Reset the current matrix to the one that was saved.
-		glPopMatrix();
 	}
 
 	// FIXME: Enable usage QML shaders

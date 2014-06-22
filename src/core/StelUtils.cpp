@@ -33,6 +33,7 @@
 #include <QProcess>
 #include <QSysInfo>
 #include <cmath> // std::fmod
+#include <zlib.h>
 
 namespace StelUtils
 {
@@ -529,7 +530,13 @@ int getBiggerPowerOfTwo(int value)
 // Return the inverse sinus hyperbolic of z
 double asinh(const double z)
 {
-	return std::log(z+std::sqrt(z*z+1));
+	double returned;
+	if(z>0)
+	   returned = std::log(z + std::sqrt(z*z+1));
+	else
+	   returned = -std::log(-z + std::sqrt(z*z+1));
+
+	return returned;
 }
 
 /*************************************************************************
@@ -1877,6 +1884,44 @@ float *ComputeCosSinRhoZone(const float dRho, const int segments, const float mi
 		cos_sin += 2;
 	}
 	return cos_sin_rho;
+}
+
+//! Uncompress gzip or zlib compressed data.
+QByteArray uncompress(const QByteArray& data)
+{
+	if (data.size() <= 4)
+		return QByteArray();
+	static const int CHUNK = 1024;
+	QByteArray buffer(CHUNK, 0);
+	QByteArray out;
+	z_stream strm;
+	strm.zalloc = Z_NULL;
+	strm.zfree = Z_NULL;
+	strm.opaque = Z_NULL;
+	strm.avail_in = data.size();
+	strm.next_in = (Bytef*)(data.data());
+
+	// 15 + 32 for gzip automatic header detection.
+	int ret = inflateInit2(&strm, 15 +  32);
+	if (ret != Z_OK) return QByteArray();
+
+	do
+	{
+		strm.avail_out = CHUNK;
+		strm.next_out = (Bytef*)(buffer.data());
+		ret = inflate(&strm, Z_NO_FLUSH);
+		Q_ASSERT(ret != Z_STREAM_ERROR);
+		if (ret < 0)
+		{
+			out.clear();
+			break;
+		}
+		out.append(buffer.data(), CHUNK - strm.avail_out);
+	}
+	while (strm.avail_out == 0);
+
+    inflateEnd(&strm);
+	return out;
 }
 
 } // end of the StelUtils namespace

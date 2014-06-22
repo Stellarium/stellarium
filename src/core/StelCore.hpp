@@ -67,6 +67,7 @@ public:
 		FrameGalactic			//! Galactic reference frame centered on observer.
 	};
 
+	//! @enum ProjectionType
 	//! Available projection types. A value of 1000 indicate the default projection
 	enum ProjectionType
 	{
@@ -80,6 +81,7 @@ public:
 		ProjectionOrthographic		//!< Orthographic projection
 	};
 
+	//! @enum RefractionMode
 	//! Available refraction mode.
 	enum RefractionMode
 	{
