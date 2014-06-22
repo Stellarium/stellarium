@@ -65,7 +65,7 @@ Meteor::Meteor(const StelCore* core, double v)
 }
 
 Meteor::~Meteor()
-{   
+{
 }
 
 // returns true if alive
@@ -354,9 +354,4 @@ void Meteor::draw(const StelCore* core, StelPainter& sPainter)
 
 	glDisable(GL_BLEND);
 	sPainter.enableClientStates(false);
-}
-
-bool Meteor::isAlive(void)
-{
-	return m_alive;
 }
