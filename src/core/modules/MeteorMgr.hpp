@@ -58,9 +58,6 @@ public:
 	
 	//! Defines the order in which the various modules are drawn.
 	virtual double getCallOrder(StelModuleActionName actionName) const;
-
-	//! <colorName, intensity>
-	typedef QPair<QString, int> colorPair;
 	
 public slots:
 	///////////////////////////////////////////////////////////////////////////
