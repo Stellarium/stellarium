@@ -65,10 +65,6 @@ public:
 	
 	//! Draws the meteor.
 	void draw(const StelCore* core, StelPainter& sPainter);
-	
-	//! Determine if a meteor is alive or has burned out.
-	//! @return true if alive, else false.
-	bool isAlive(void);
 
 	//! <colorName, intensity>
 	typedef QPair<QString, int> colorPair;
