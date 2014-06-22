@@ -205,6 +205,36 @@ void Meteor::buildColorArrays(const int segments,
 	}
 }
 
+bool Meteor::updateMeteorModel(double deltaTime, double speed, MeteorModel &mm)
+{
+	if (mm.position[2] < mm.endH)
+	{
+		// burning has stopped so magnitude fades out
+		// assume linear fade out
+		mm.mag -= deltaTime/500.0f;
+		if(mm.mag < 0)
+		{
+			return false;    // no longer visible
+		}
+	}
+
+	// *** would need time direction multiplier to allow reverse time replay
+	mm.position[2] -= speed*deltaTime/1000.0f;
+
+	// train doesn't extend beyond start of burn
+	if (mm.position[2] + speed*0.5f > mm.startH)
+	{
+		mm.posTrain[2] = mm.startH;
+	}
+	else
+	{
+		double dt = 820+(double)rand()/((double)RAND_MAX+1)*185; // range 820-1005
+		mm.posTrain[2] -= speed*deltaTime/dt;
+	}
+
+	return true;
+}
+
 // returns true if alive
 bool Meteor::update(double deltaTime)
 {
@@ -213,29 +243,7 @@ bool Meteor::update(double deltaTime)
 		return false;
 	}
 
-	if (meteor.position[2] < meteor.endH)
-	{
-		// burning has stopped so magnitude fades out
-		// assume linear fade out
-		meteor.mag -= deltaTime/500.0f;
-		if(meteor.mag < 0)
-		{
-			m_alive = false;    // no longer visible
-		}
-	}
-
-	// *** would need time direction multiplier to allow reverse time replay
-	meteor.position[2] -= m_speed*deltaTime/1000.0f;
-
-	// train doesn't extend beyond start of burn
-	if (meteor.position[2] + m_speed*0.5f > meteor.startH)
-	{
-		meteor.posTrain[2] = meteor.startH;
-	}
-	else
-	{
-		meteor.posTrain[2] -= m_speed*deltaTime/1000.0f;
-	}
+	m_alive = updateMeteorModel(deltaTime, m_speed, meteor);
 
 	// determine visual magnitude based on distance to observer
 	double dist = sqrt(meteor.xydistance*meteor.xydistance + pow(meteor.position[2]-meteor.obs[2], 2));
