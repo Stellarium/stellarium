@@ -18,7 +18,7 @@
 */
 
 #include <QDateTime>
-#include <QStandardItemModel>
+#include <QSqlQueryModel>
 #include <QStringBuilder>
 
 #include "AddOnDialog.hpp"
@@ -70,27 +70,27 @@ void AddOnDialog::createDialogContent()
 
 	// CATALOGS
 	setUpTableView(ui->catalogsTableView);
-	initModel(ui->catalogsTableView);
+	initModel(ui->catalogsTableView, CATALOG);
 
 	// LANDSCAPES
 	setUpTableView(ui->landscapeTableView);
-	initModel(ui->landscapeTableView);
+	initModel(ui->landscapeTableView, LANDSCAPE);
 
 	// LANGUAGE PACK
 	setUpTableView(ui->languageTableView);
-	initModel(ui->languageTableView);
+	initModel(ui->languageTableView, LANGUAGEPACK);
 
 	// SCRIPTS
 	setUpTableView(ui->scriptsTableView);
-	initModel(ui->scriptsTableView);
+	initModel(ui->scriptsTableView, SCRIPT);
 
 	// STARLORE
 	setUpTableView(ui->starloreTbleView);
-	initModel(ui->starloreTbleView);
+	initModel(ui->starloreTbleView, STARLORE);
 
 	// TEXTURES
 	setUpTableView(ui->texturesTableView);
-	initModel(ui->texturesTableView);
+	initModel(ui->texturesTableView, TEXTURE);
 }
 
 void AddOnDialog::changePage(QListWidgetItem *current, QListWidgetItem *previous)
@@ -111,13 +111,42 @@ void AddOnDialog::setUpTableView(QTableView* tableView)
 	tableView->setEditTriggers(false);
 }
 
-void AddOnDialog::initModel(QTableView* tableView)
+void AddOnDialog::initModel(QTableView* tableView, Category category)
 {
-	int rowCount = 0;
-	QStandardItemModel* model = new QStandardItemModel(rowCount, ColumnCount);
-	model->setHeaderData(ColumnTitle, Qt::Horizontal, q_("Title"));
-	model->setHeaderData(ColumnInstalledVersion, Qt::Horizontal, q_("Installed Version"));
-	model->setHeaderData(ColumnLastVersion, Qt::Horizontal, q_("Last Version"));
+	QSqlQueryModel* model = new QSqlQueryModel;
+	QString table, query;
+	switch (category)
+	{
+		case CATALOG:
+			query = "SELECT title, version, installed "
+				"FROM addon INNER JOIN plugin"
+				" ON addon.id = plugin.addon UNION ";
+			table = "star";
+			break;
+		case LANDSCAPE:
+			table = "landscape";
+			break;
+		case LANGUAGEPACK:
+			table = "language_pack";
+			break;
+		case SCRIPT:
+			table = "script";
+			break;
+		case STARLORE:
+			table = "starlore";
+			break;
+		case TEXTURE:
+			table = "texture";
+			break;
+	}
+
+	query = query % "SELECT title, version, installed "
+		"FROM addon INNER JOIN " % table %
+		" ON addon.id = " % table % ".addon";
+	model->setQuery(query);
+	model->setHeaderData(0, Qt::Horizontal, q_("Title"));
+	model->setHeaderData(1, Qt::Horizontal, q_("Last Version"));
+	model->setHeaderData(2, Qt::Horizontal, q_("Installed Version"));
 	tableView->setModel(model);
 }
 

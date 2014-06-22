@@ -56,17 +56,19 @@ private slots:
 private:
 	//! Defines the columns that will be displayed in the table view.
 	//! @enum ModelColumns
-	enum ModelColumns {
-		ColumnTitle,
-		ColumnInstalledVersion,
-		ColumnLastVersion,
-		ColumnCount
+	enum Category {
+		CATALOG,
+		LANDSCAPE,
+		LANGUAGEPACK,
+		SCRIPT,
+		STARLORE,
+		TEXTURE
 	};
 
 	StelAddOn m_StelAddOn;
 	QNetworkReply* m_pUpdateCatalogReply;
 
-	void initModel(QTableView* tableView);
+	void initModel(QTableView* tableView, Category category);
 	void setUpTableView(QTableView* tableView);
 };
 
