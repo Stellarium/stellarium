@@ -162,7 +162,6 @@ static const int RADIUS = 12; // Good
 double cosLat = cos(lat);     // Bad 
 double cosLat = std::cos(lat); // Good
  @endcode
-</ul>
 
 @section translation_sec Translatable Strings and Console Output
 
