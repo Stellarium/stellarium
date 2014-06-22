@@ -37,8 +37,8 @@ which are generally not at the apex of the Earth's way, such as the Perseids sho
 #include "StelPainter.hpp"
 
 Meteor::Meteor(const StelCore* core, double v)
-	: m_segments(10)
-	, m_distMultiplier(0.)
+	: m_distMultiplier(0.)
+	, m_segments(10)
 {
 	// determine meteor velocity
 	// abs range 11-72 km/s by default (see line 427 in StelApp.cpp)
@@ -57,9 +57,11 @@ Meteor::Meteor(const StelCore* core, double v)
 	}
 
 	// determine the meteor color
-	m_colors.push_back(MeteorMgr::colorPair("white", 100));
+	QList<colorPair> colors;
+	colors.push_back(colorPair("white", 100));
+
 	// building lineColorArray and trainColorArray
-	buildColorArrays(m_segments, m_colors, m_lineColorArray, m_trainColorArray);
+	buildColorArrays(m_segments, colors, m_lineColorArray, m_trainColorArray);
 }
 
 Meteor::~Meteor()
@@ -173,7 +175,7 @@ Vec4f Meteor::getColor(QString colorName) {
 }
 
 void Meteor::buildColorArrays(const int segments,
-			      const QList<MeteorMgr::colorPair> colors,
+			      const QList<colorPair> colors,
 			      QList<Vec4f> &lineColorArray,
 			      QList<Vec4f> &trainColorArray)
 {
@@ -181,7 +183,7 @@ void Meteor::buildColorArrays(const int segments,
 	int totalOfSegments = 0;
 	int currentSegment = 1+(double)rand()/((double)RAND_MAX+1)*(segments-1);
 	for (int colorIndex=0; colorIndex<colors.size(); colorIndex++) {
-		MeteorMgr::colorPair currentColor = colors[colorIndex];
+		colorPair currentColor = colors[colorIndex];
 
 		// segments which we'll paint with the current color
 		int numOfSegments = segments*(currentColor.second / 100.f) + 0.4f; // +0.4 affect approximation

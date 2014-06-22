@@ -20,6 +20,7 @@
 #ifndef _METEORSTREAM_HPP_
 #define _METEORSTREAM_HPP_
 
+#include "Meteor.hpp"
 #include "StelTextureTypes.hpp"
 #include "VecMath.hpp"
 
@@ -72,26 +73,13 @@ private:
 
 	bool m_alive;             //! Indicate if the meteor it still visible
 
-	Mat4d m_viewMatrix;       //! View Matrix
-	Vec3d m_obs;              //! Observer position
-	Vec3d m_position;         //! Equatorial coordinate position
-	Vec3d m_posTrain;         //! End of train
-
 	double m_speed;                 //! Velocity of meteor in km/s
-	float m_pidx;                   //! population index
-	double m_xydistance;            //! Distance in XY plane (orthogonal to meteor path) from observer to meteor
-	double m_minDist;               //! Nearest point to observer along path
-	double m_distMultiplier;        //! Scale magnitude due to changes in distance
+	Mat4d m_viewMatrix;         //! View Matrix
+	Meteor::MeteorModel meteor; //! Parameters of meteor model
 
-	double m_startH;                //! Start height above center of earth
-	double m_endH;                  //! End height
-
-	QList<MeteorShower::colorPair> m_colors;
 	QList<Vec4f> m_trainColorArray;
 	QList<Vec4f> m_lineColorArray;
-	float m_mag;                    //! Apparent magnitude at head, 0-1
 	int m_segments;                 //! Number of segments along the train
-	int m_firstBrightSegment;       //! First bright segment of the train
 };
 
 #endif // _METEORSTREAM_HPP_
