@@ -73,6 +73,10 @@ public:
 	//! <colorName, intensity>
 	typedef QPair<QString, int> colorPair;
 
+	//! Updates parameters of meteor model. (useful to be reused in MeteorShowers plugin)
+	//! @return true of the meteor is still alive, else false.
+	static bool updateMeteorModel(double deltaTime, double speed, MeteorModel &mm);
+
 	//! Builds Meteor Model
 	//! @return true if alive, else false.
 	static bool initMeteorModel(const StelCore *core, const int segments, const Mat4d viewMatrix, MeteorModel &mm);

@@ -112,30 +112,7 @@ bool MeteorStream::update(double deltaTime)
 		return false;
 	}
 
-	if (meteor.position[2] < meteor.endH)
-	{
-		// burning has stopped so magnitude fades out
-		// assume linear fade out
-		meteor.mag -= deltaTime/1000.0f;
-		if(meteor.mag < 0)
-		{
-			m_alive = false;    // no longer visible
-		}
-	}
-
-	// *** would need time direction multiplier to allow reverse time replay
-	meteor.position[2] -= m_speed*deltaTime/1000.0f;
-
-	// train doesn't extend beyond start of burn
-	if (meteor.position[2] + m_speed*0.5f > meteor.startH)
-	{
-		meteor.posTrain[2] = meteor.startH;
-	}
-	else
-	{
-		double dt = 820+(double)rand()/((double)RAND_MAX+1)*185; // range 820-1005
-		meteor.posTrain[2] -= m_speed*deltaTime/dt;
-	}
+	m_alive = Meteor::updateMeteorModel(deltaTime, m_speed, meteor);
 
 	return m_alive;
 }
