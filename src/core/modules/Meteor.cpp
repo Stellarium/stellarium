@@ -22,6 +22,9 @@
 #include "StelCore.hpp"
 #include "StelMovementMgr.hpp"
 #include "StelPainter.hpp"
+#include "StelTexture.hpp"
+
+StelTextureSP Meteor::bolideTexture;
 
 Meteor::Meteor(const StelCore* core, double v)
 	: m_distMultiplier(0.)
@@ -267,6 +270,7 @@ void Meteor::draw(const StelCore* core, StelPainter& sPainter)
 	{
 		thickness = 0.013 * FOV; // decreasing faster
 	}
+	double bolideSize = thickness*3;
 
 	// train (triangular prism)
 	//
@@ -333,6 +337,43 @@ void Meteor::draw(const StelCore* core, StelPainter& sPainter)
 	sPainter.setColorPointer(4, GL_FLOAT, m_lineColorArray.toVector().constData());
 	sPainter.setVertexPointer(3, GL_DOUBLE, vertexArrayLine.constData());
 	sPainter.drawFromArray(StelPainter::LineStrip, vertexArrayLine.size(), 0, true);
+
+	// bolide
+	//
+	QVector<Vec3d> vertexArrayBolide;
+	QVector<Vec4f> colorArrayBolide;
+	Vec4f bolideColor = Vec4f(1,1,1,meteor.mag);
+
+	Vec3d topLeft = meteor.position;
+	topLeft[1] -= bolideSize;
+	insertVertex(core, vertexArrayBolide, topLeft);
+	colorArrayBolide.push_back(bolideColor);
+
+	Vec3d topRight = meteor.position;
+	topRight[0] -= bolideSize;
+	insertVertex(core, vertexArrayBolide, topRight);
+	colorArrayBolide.push_back(bolideColor);
+
+	Vec3d bottomRight = meteor.position;
+	bottomRight[1] += bolideSize;
+	insertVertex(core, vertexArrayBolide, bottomRight);
+	colorArrayBolide.push_back(bolideColor);
+
+	Vec3d bottomLeft = meteor.position;
+	bottomLeft[0] += bolideSize;
+	insertVertex(core, vertexArrayBolide, bottomLeft);
+	colorArrayBolide.push_back(bolideColor);
+
+	glBlendFunc(GL_ONE, GL_ONE);
+
+	sPainter.enableClientStates(true, true, true);
+	Meteor::bolideTexture->bind();
+
+	static const float texCoordData[] = {1.,0., 0.,0., 0.,1., 1.,1.};
+	sPainter.setTexCoordPointer(2, GL_FLOAT, texCoordData);
+	sPainter.setColorPointer(4, GL_FLOAT, colorArrayBolide.constData());
+	sPainter.setVertexPointer(3, GL_DOUBLE, vertexArrayBolide.constData());
+	sPainter.drawFromArray(StelPainter::TriangleFan, vertexArrayBolide.size(), 0, true);
 
 	glDisable(GL_BLEND);
 	sPainter.enableClientStates(false);
