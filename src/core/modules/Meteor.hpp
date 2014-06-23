@@ -71,12 +71,12 @@ public:
 
 	//! Draws the meteor train. (useful to be reused in MeteorShowers plugin)
 	static void drawTrain(const StelCore* core, StelPainter& sPainter, MeteorModel mm,
-			      Mat4d viewMatrix, const int thickness, const int segments,
+			      Mat4d viewMatrix, const double thickness, const int segments,
 			      QList<Vec4f> lineColorArray, QList<Vec4f> trainColorArray);
 
 	//! Draws the meteor bolide. (useful to be reused in MeteorShowers plugin)
 	static void drawBolide(const StelCore *core, StelPainter &sPainter, MeteorModel mm,
-			       Mat4d viewMatrix, const int bolideSize);
+			       Mat4d viewMatrix, const double bolideSize);
 
 	//! Calculates the train thickness and bolide size.
 	static void calculateThickness(const StelCore* core, double &thickness, double &bolideSize);
