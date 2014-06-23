@@ -26,22 +26,13 @@
 class StelCore;
 class StelPainter;
 
-// all in km - altitudes make up meteor range
-#define EARTH_RADIUS 6369.f
-#define VISIBLE_RADIUS 457.8f
-#define HIGH_ALTITUDE 115.f
-#define LOW_ALTITUDE 70.f
-
 //! @class MeteorStream
 //! Models a single meteor.
 //! Control of the meteor rate is performed in the MeteorShowers class.  Once
 //! created, a meteor object only lasts for some amount of time, and then
-//! "dies", after which, the update() member returns false.  The live/dead
-//! status of a meteor may also be determined using the isAlive member.
+//! "dies", after which, the update() member returns false.
 class MeteorStream
 {
-	friend class MeteorShowers;
-
 public:
 	//! Create a Meteor object.
 	//! @param the speed of the meteor in km/s.
@@ -65,9 +56,6 @@ public:
 	void draw(const StelCore* core, StelPainter& sPainter);
 
 private:
-	void insertVertex(const StelCore* core, QVector<Vec3d> &vertexArray, Vec3d vertex);
-	Vec4f getColor(QString colorName);
-
 	bool m_alive;             //! Indicate if the meteor it still visible
 
 	double m_speed;                 //! Velocity of meteor in km/s
