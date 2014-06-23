@@ -75,7 +75,7 @@ bool Meteor::initMeteorModel(const StelCore* core, const int segments, const Mat
 	double low_range = EARTH_RADIUS + LOW_ALTITUDE;
 
 	// find observer position in meteor coordinate system
-	mm.obs = core->altAzToEquinoxEqu(Vec3d(0,0,EARTH_RADIUS));
+	mm.obs = core->altAzToJ2000(Vec3d(0,0,EARTH_RADIUS));
 	mm.obs.transfo4d(viewMatrix.transpose());
 
 	// select random trajectory using polar coordinates in XY plane, centered on observer
@@ -257,15 +257,10 @@ bool Meteor::update(double deltaTime)
 }
 
 void Meteor::insertVertex(const StelCore* core, QVector<Vec3d> &vertexArray, Vec3d vertex) {
-	// convert to equ
 	vertex.transfo4d(m_viewMatrix);
-	// convert to local and correct for earth radius
-	//[since equ and local coordinates in stellarium use same 0 point!]
 	vertex = core->j2000ToAltAz(vertex);
 	vertex[2] -= EARTH_RADIUS;
-	// 1216 is to scale down under 1 for desktop version
-	vertex/=1216;
-
+	vertex/=1216; // 1216 is to scale down under 1 for desktop version
 	vertexArray.push_back(vertex);
 }
 
