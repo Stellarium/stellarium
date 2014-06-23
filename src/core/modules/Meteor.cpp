@@ -314,6 +314,12 @@ void Meteor::drawTrain(const StelCore *core, StelPainter& sPainter, MeteorModel 
 		       Mat4d viewMatrix, const int thickness, const int segments,
 		       QList<Vec4f> lineColorArray, QList<Vec4f> trainColorArray)
 {
+	if (segments != lineColorArray.size() || 2*segments != trainColorArray.size())
+	{
+		qWarning() << "Meteor: color arrays have an inconsistent size!";
+		return;
+	}
+
 	// train (triangular prism)
 	//
 	QVector<Vec3d> vertexArrayLine;
