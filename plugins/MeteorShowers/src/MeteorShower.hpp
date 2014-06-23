@@ -22,16 +22,12 @@
 #define _METEORSHOWER_HPP_
 
 #include <QDateTime>
-#include <QVariantMap>
-#include <QString>
 
 #include "StelFader.hpp"
 #include "StelObject.hpp"
 #include "StelPainter.hpp"
 #include "StelTextureTypes.hpp"
 #include "StelTranslator.hpp"
-
-class StelPainter;
 
 //! @class MeteorShower
 //! A MeteorShower object represents one meteor shower on the sky.

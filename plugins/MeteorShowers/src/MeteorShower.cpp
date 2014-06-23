@@ -23,16 +23,8 @@
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelModuleMgr.hpp"
-#include "StelObject.hpp"
-#include "StelPainter.hpp"
 #include "StelTexture.hpp"
 #include "StelUtils.hpp"
-
-#include <QDebug>
-#include <QList>
-#include <QTextStream>
-#include <QVariant>
-#include <QVariantMap>
 
 StelTextureSP MeteorShower::radiantTexture;
 float MeteorShower::showLabels = true;
