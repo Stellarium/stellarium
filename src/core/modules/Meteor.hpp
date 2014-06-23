@@ -21,6 +21,7 @@
 #ifndef _METEOR_HPP_
 #define _METEOR_HPP_
 
+#include "StelTextureTypes.hpp"
 #include "VecMath.hpp"
 
 #include <QList>
@@ -84,6 +85,8 @@ public:
 				     const QList<colorPair> colors,
 				     QList<Vec4f> &lineColorArray,
 				     QList<Vec4f> &trainColorArray);
+
+	static StelTextureSP bolideTexture;
 
 private:
 	void insertVertex(const StelCore* core, QVector<Vec3d> &vertexArray, Vec3d vertex);

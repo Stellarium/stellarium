@@ -18,14 +18,16 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
+#include "LandscapeMgr.hpp"
 #include "Meteor.hpp"
 #include "MeteorMgr.hpp"
-#include "LandscapeMgr.hpp"
+#include "SolarSystem.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
+#include "StelFileMgr.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelPainter.hpp"
-#include "SolarSystem.hpp"
+#include "StelTextureMgr.hpp"
 
 #include <QSettings>
 
@@ -47,10 +49,13 @@ MeteorMgr::~MeteorMgr()
 		delete *iter;
 	}
 	active.clear();
+	Meteor::bolideTexture.clear();
 }
 
 void MeteorMgr::init()
 {
+	Meteor::bolideTexture = StelApp::getInstance().getTextureManager().createTextureThread(StelFileMgr::getInstallationDir()+"/textures/cometTail.png", StelTexture::StelTextureParams(true, GL_LINEAR, GL_CLAMP_TO_EDGE));
+
 	setZHR(StelApp::getInstance().getSettings()->value("astro/meteor_rate", 10).toInt());
 }
 
