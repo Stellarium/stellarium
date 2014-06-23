@@ -246,12 +246,142 @@ bool Meteor::update(double deltaTime)
 	return m_alive;
 }
 
-void Meteor::insertVertex(const StelCore* core, QVector<Vec3d> &vertexArray, Vec3d vertex) {
-	vertex.transfo4d(m_viewMatrix);
+void Meteor::insertVertex(const StelCore* core, Mat4d viewMatrix, QVector<Vec3d> &vertexArray, Vec3d vertex)
+{
+	vertex.transfo4d(viewMatrix);
 	vertex = core->j2000ToAltAz(vertex);
 	vertex[2] -= EARTH_RADIUS;
 	vertex/=1216; // 1216 is to scale down under 1 for desktop version
 	vertexArray.push_back(vertex);
+}
+
+void Meteor::calculateThickness(const StelCore* core, double &thickness, double &bolideSize)
+{
+	double maxFOV = core->getMovementMgr()->getMaxFov();
+	double FOV = core->getMovementMgr()->getCurrentFov();
+	thickness = 2*log(FOV + 0.25)/(1.2*maxFOV - (FOV + 0.25)) + 0.01;
+	if (FOV <= 0.5)
+	{
+		thickness = 0.013 * FOV; // decreasing faster
+	}
+	bolideSize = thickness*3;
+}
+
+void Meteor::drawBolide(const StelCore* core, StelPainter& sPainter, MeteorModel mm,
+			Mat4d viewMatrix, const int bolideSize)
+{
+	// bolide
+	//
+	QVector<Vec3d> vertexArrayBolide;
+	QVector<Vec4f> colorArrayBolide;
+	Vec4f bolideColor = Vec4f(1,1,1,mm.mag);
+
+	Vec3d topLeft = mm.position;
+	topLeft[1] -= bolideSize;
+	insertVertex(core, viewMatrix, vertexArrayBolide, topLeft);
+	colorArrayBolide.push_back(bolideColor);
+
+	Vec3d topRight = mm.position;
+	topRight[0] -= bolideSize;
+	insertVertex(core, viewMatrix, vertexArrayBolide, topRight);
+	colorArrayBolide.push_back(bolideColor);
+
+	Vec3d bottomRight = mm.position;
+	bottomRight[1] += bolideSize;
+	insertVertex(core, viewMatrix, vertexArrayBolide, bottomRight);
+	colorArrayBolide.push_back(bolideColor);
+
+	Vec3d bottomLeft = mm.position;
+	bottomLeft[0] += bolideSize;
+	insertVertex(core, viewMatrix, vertexArrayBolide, bottomLeft);
+	colorArrayBolide.push_back(bolideColor);
+
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_ONE, GL_ONE);
+	sPainter.enableClientStates(true, true, true);
+	Meteor::bolideTexture->bind();
+	static const float texCoordData[] = {1.,0., 0.,0., 0.,1., 1.,1.};
+	sPainter.setTexCoordPointer(2, GL_FLOAT, texCoordData);
+	sPainter.setColorPointer(4, GL_FLOAT, colorArrayBolide.constData());
+	sPainter.setVertexPointer(3, GL_DOUBLE, vertexArrayBolide.constData());
+	sPainter.drawFromArray(StelPainter::TriangleFan, vertexArrayBolide.size(), 0, true);
+
+	glDisable(GL_BLEND);
+	sPainter.enableClientStates(false);
+}
+
+void Meteor::drawTrain(const StelCore *core, StelPainter& sPainter, MeteorModel mm,
+		       Mat4d viewMatrix, const int thickness, const int segments,
+		       QList<Vec4f> lineColorArray, QList<Vec4f> trainColorArray)
+{
+	// train (triangular prism)
+	//
+	QVector<Vec3d> vertexArrayLine;
+	QVector<Vec3d> vertexArrayL;
+	QVector<Vec3d> vertexArrayR;
+	QVector<Vec3d> vertexArrayTop;
+
+	Vec3d posTrainB = mm.posTrain;
+	posTrainB[0] += thickness*0.7;
+	posTrainB[1] += thickness*0.7;
+	Vec3d posTrainL = mm.posTrain;
+	posTrainL[1] -= thickness;
+	Vec3d posTrainR = mm.posTrain;
+	posTrainR[0] -= thickness;
+
+	for (int i=0; i<segments; i++) {
+		double mag = mm.mag * i/(3* (segments-1));
+		if (i > mm.firstBrightSegment) {
+			mag *= 12/5;
+		}
+
+		double height = mm.posTrain[2] + i*(mm.position[2] - mm.posTrain[2])/(segments-1);
+		Vec3d posi;
+
+		posi = mm.posTrain;
+		posi[2] = height;
+		insertVertex(core, viewMatrix, vertexArrayLine, posi);
+
+		posi = posTrainB;
+		posi[2] = height;
+		insertVertex(core, viewMatrix, vertexArrayL, posi);
+		insertVertex(core, viewMatrix, vertexArrayR, posi);
+
+		posi = posTrainL;
+		posi[2] = height;
+		insertVertex(core, viewMatrix, vertexArrayL, posi);
+		insertVertex(core, viewMatrix, vertexArrayTop, posi);
+
+		posi = posTrainR;
+		posi[2] = height;
+		insertVertex(core, viewMatrix, vertexArrayR, posi);
+		insertVertex(core, viewMatrix, vertexArrayTop, posi);
+
+		lineColorArray[i][3] = mag;
+		trainColorArray[i*2][3] = mag;
+		trainColorArray[i*2+1][3] = mag;
+	}
+
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	sPainter.enableClientStates(true, false, true);
+	sPainter.setColorPointer(4, GL_FLOAT, trainColorArray.toVector().constData());
+	if (thickness) {
+		sPainter.setVertexPointer(3, GL_DOUBLE, vertexArrayL.constData());
+		sPainter.drawFromArray(StelPainter::TriangleStrip, vertexArrayL.size(), 0, true);
+
+		sPainter.setVertexPointer(3, GL_DOUBLE, vertexArrayR.constData());
+		sPainter.drawFromArray(StelPainter::TriangleStrip, vertexArrayR.size(), 0, true);
+
+		sPainter.setVertexPointer(3, GL_DOUBLE, vertexArrayTop.constData());
+		sPainter.drawFromArray(StelPainter::TriangleStrip, vertexArrayTop.size(), 0, true);
+	}
+	sPainter.setColorPointer(4, GL_FLOAT, lineColorArray.toVector().constData());
+	sPainter.setVertexPointer(3, GL_DOUBLE, vertexArrayLine.constData());
+	sPainter.drawFromArray(StelPainter::LineStrip, vertexArrayLine.size(), 0, true);
+
+	glDisable(GL_BLEND);
+	sPainter.enableClientStates(false);
 }
 
 // returns true if visible
@@ -263,118 +393,11 @@ void Meteor::draw(const StelCore* core, StelPainter& sPainter)
 		return;
 	}
 
-	double maxFOV = core->getMovementMgr()->getMaxFov();
-	double FOV = core->getMovementMgr()->getCurrentFov();
-	double thickness = 2*log(FOV + 0.25)/(1.2*maxFOV - (FOV + 0.25)) + 0.01;
-	if (FOV <= 0.5)
-	{
-		thickness = 0.013 * FOV; // decreasing faster
-	}
-	double bolideSize = thickness*3;
+	double thickness, bolideSize;
+	calculateThickness(core, thickness, bolideSize);
 
-	// train (triangular prism)
-	//
-	QVector<Vec3d> vertexArrayLine;
-	QVector<Vec3d> vertexArrayL;
-	QVector<Vec3d> vertexArrayR;
-	QVector<Vec3d> vertexArrayTop;
+	drawTrain(core, sPainter, meteor, m_viewMatrix, thickness,
+		  m_segments, m_lineColorArray, m_trainColorArray);
 
-	Vec3d posTrainB = meteor.posTrain;
-	posTrainB[0] += thickness*0.7;
-	posTrainB[1] += thickness*0.7;
-	Vec3d posTrainL = meteor.posTrain;
-	posTrainL[1] -= thickness;
-	Vec3d posTrainR = meteor.posTrain;
-	posTrainR[0] -= thickness;
-
-	for (int i=0; i<m_segments; i++) {
-		double mag = meteor.mag * i/(3* (m_segments-1));
-		if (i > meteor.firstBrightSegment) {
-			mag *= 12/5;
-		}
-
-		double height = meteor.posTrain[2] + i*(meteor.position[2] - meteor.posTrain[2])/(m_segments-1);
-		Vec3d posi;
-
-		posi = meteor.posTrain;
-		posi[2] = height;
-		insertVertex(core, vertexArrayLine, posi);
-
-		posi = posTrainB;
-		posi[2] = height;
-		insertVertex(core, vertexArrayL, posi);
-		insertVertex(core, vertexArrayR, posi);
-
-		posi = posTrainL;
-		posi[2] = height;
-		insertVertex(core, vertexArrayL, posi);
-		insertVertex(core, vertexArrayTop, posi);
-
-		posi = posTrainR;
-		posi[2] = height;
-		insertVertex(core, vertexArrayR, posi);
-		insertVertex(core, vertexArrayTop, posi);
-
-		m_lineColorArray[i][3] = mag;
-		m_trainColorArray[i*2][3] = mag;
-		m_trainColorArray[i*2+1][3] = mag;
-	}
-
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	sPainter.enableClientStates(true, false, true);
-	sPainter.setColorPointer(4, GL_FLOAT, m_trainColorArray.toVector().constData());
-	if (thickness) {
-		sPainter.setVertexPointer(3, GL_DOUBLE, vertexArrayL.constData());
-		sPainter.drawFromArray(StelPainter::TriangleStrip, vertexArrayL.size(), 0, true);
-
-		sPainter.setVertexPointer(3, GL_DOUBLE, vertexArrayR.constData());
-		sPainter.drawFromArray(StelPainter::TriangleStrip, vertexArrayR.size(), 0, true);
-
-		sPainter.setVertexPointer(3, GL_DOUBLE, vertexArrayTop.constData());
-		sPainter.drawFromArray(StelPainter::TriangleStrip, vertexArrayTop.size(), 0, true);
-	}
-	sPainter.setColorPointer(4, GL_FLOAT, m_lineColorArray.toVector().constData());
-	sPainter.setVertexPointer(3, GL_DOUBLE, vertexArrayLine.constData());
-	sPainter.drawFromArray(StelPainter::LineStrip, vertexArrayLine.size(), 0, true);
-
-	// bolide
-	//
-	QVector<Vec3d> vertexArrayBolide;
-	QVector<Vec4f> colorArrayBolide;
-	Vec4f bolideColor = Vec4f(1,1,1,meteor.mag);
-
-	Vec3d topLeft = meteor.position;
-	topLeft[1] -= bolideSize;
-	insertVertex(core, vertexArrayBolide, topLeft);
-	colorArrayBolide.push_back(bolideColor);
-
-	Vec3d topRight = meteor.position;
-	topRight[0] -= bolideSize;
-	insertVertex(core, vertexArrayBolide, topRight);
-	colorArrayBolide.push_back(bolideColor);
-
-	Vec3d bottomRight = meteor.position;
-	bottomRight[1] += bolideSize;
-	insertVertex(core, vertexArrayBolide, bottomRight);
-	colorArrayBolide.push_back(bolideColor);
-
-	Vec3d bottomLeft = meteor.position;
-	bottomLeft[0] += bolideSize;
-	insertVertex(core, vertexArrayBolide, bottomLeft);
-	colorArrayBolide.push_back(bolideColor);
-
-	glBlendFunc(GL_ONE, GL_ONE);
-
-	sPainter.enableClientStates(true, true, true);
-	Meteor::bolideTexture->bind();
-
-	static const float texCoordData[] = {1.,0., 0.,0., 0.,1., 1.,1.};
-	sPainter.setTexCoordPointer(2, GL_FLOAT, texCoordData);
-	sPainter.setColorPointer(4, GL_FLOAT, colorArrayBolide.constData());
-	sPainter.setVertexPointer(3, GL_DOUBLE, vertexArrayBolide.constData());
-	sPainter.drawFromArray(StelPainter::TriangleFan, vertexArrayBolide.size(), 0, true);
-
-	glDisable(GL_BLEND);
-	sPainter.enableClientStates(false);
+	drawBolide(core, sPainter, meteor, m_viewMatrix, bolideSize);
 }
