@@ -69,6 +69,13 @@ public:
 	//! Draws the meteor.
 	void draw(const StelCore* core, StelPainter& sPainter);
 
+	static void drawTrain(const StelCore* core, StelPainter& sPainter, MeteorModel mm,
+			      Mat4d viewMatrix, const int thickness, const int segments,
+			      QList<Vec4f> lineColorArray, QList<Vec4f> trainColorArray);
+
+	static void drawBolide(const StelCore *core, StelPainter &sPainter, MeteorModel mm,
+			       Mat4d viewMatrix, const int bolideSize);
+
 	//! <colorName, intensity>
 	typedef QPair<QString, int> colorPair;
 
@@ -78,7 +85,8 @@ public:
 
 	//! Builds Meteor Model
 	//! @return true if alive, else false.
-	static bool initMeteorModel(const StelCore *core, const int segments, const Mat4d viewMatrix, MeteorModel &mm);
+	static bool initMeteorModel(const StelCore *core, const int segments,
+				    const Mat4d viewMatrix, MeteorModel &mm);
 
 	//! Determine color arrays of line and prism used to draw meteor train.
 	static void buildColorArrays(const int segments,
@@ -89,8 +97,10 @@ public:
 	static StelTextureSP bolideTexture;
 
 private:
-	void insertVertex(const StelCore* core, QVector<Vec3d> &vertexArray, Vec3d vertex);
+	static void insertVertex(const StelCore* core, Mat4d viewMatrix,
+				 QVector<Vec3d> &vertexArray, Vec3d vertex);
 	static Vec4f getColor(QString colorName);
+	void calculateThickness(const StelCore* core, double &thickness, double &bolideSize);
 
 	bool m_alive;        //! Indicate if the meteor it still visible
 
