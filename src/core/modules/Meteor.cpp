@@ -1,6 +1,7 @@
 /*
  * Stellarium
- * This file Copyright (C) 2004 Robert Spearman
+ * Copyright (C) 2004 Robert Spearman
+ * Copyright (C) 2014 Marcos Cardinot
  * 
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,22 +18,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-// This is an ad hoc meteor model
-// Could use a simple ablation physics model in the future
-
-/*
-NOTE: Here the radiant is always along the ecliptic at the apex of the Earth's way.
-In reality, individual meteor streams have varying velocity vectors and therefore radiants
-which are generally not at the apex of the Earth's way, such as the Perseids shower.
-*/
-
-// Improved realism and efficiency 2004-12
-
-#include <cstdlib>
 #include "Meteor.hpp"
 #include "StelCore.hpp"
-
-#include "StelToneReproducer.hpp"
 #include "StelMovementMgr.hpp"
 #include "StelPainter.hpp"
 

@@ -1,6 +1,7 @@
 /*
  * Stellarium
- * This file Copyright (C) 2004 Robert Spearman
+ * Copyright (C) 2004 Robert Spearman
+ * Copyright (C) 2014 Marcos Cardinot
  * 
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,8 +21,10 @@
 #ifndef _METEOR_HPP_
 #define _METEOR_HPP_
 
-#include "MeteorMgr.hpp"
 #include "VecMath.hpp"
+
+#include <QList>
+#include <QPair>
 
 class StelCore;
 class StelPainter;
@@ -36,8 +39,7 @@ class StelPainter;
 //! Models a single meteor.
 //! Control of the meteor rate is performed in the MeteorMgr class.  Once
 //! created, a meteor object only lasts for some amount of time, and then
-//! "dies", after which, the update() member returns false.  The live/dead
-//! status of a meteor may also be determined using the isAlive member.
+//! "dies", after which, the update() member returns false.
 class Meteor
 {
 public:
