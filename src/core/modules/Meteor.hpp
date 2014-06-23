@@ -69,12 +69,17 @@ public:
 	//! Draws the meteor.
 	void draw(const StelCore* core, StelPainter& sPainter);
 
+	//! Draws the meteor train. (useful to be reused in MeteorShowers plugin)
 	static void drawTrain(const StelCore* core, StelPainter& sPainter, MeteorModel mm,
 			      Mat4d viewMatrix, const int thickness, const int segments,
 			      QList<Vec4f> lineColorArray, QList<Vec4f> trainColorArray);
 
+	//! Draws the meteor bolide. (useful to be reused in MeteorShowers plugin)
 	static void drawBolide(const StelCore *core, StelPainter &sPainter, MeteorModel mm,
 			       Mat4d viewMatrix, const int bolideSize);
+
+	//! Calculates the train thickness and bolide size.
+	static void calculateThickness(const StelCore* core, double &thickness, double &bolideSize);
 
 	//! <colorName, intensity>
 	typedef QPair<QString, int> colorPair;
@@ -100,7 +105,6 @@ private:
 	static void insertVertex(const StelCore* core, Mat4d viewMatrix,
 				 QVector<Vec3d> &vertexArray, Vec3d vertex);
 	static Vec4f getColor(QString colorName);
-	void calculateThickness(const StelCore* core, double &thickness, double &bolideSize);
 
 	bool m_alive;        //! Indicate if the meteor it still visible
 
