@@ -32,7 +32,7 @@ public:
 	void setLastUpdate(qint64 time);
 	QString getLastUpdateString()
 	{
-		return QDateTime::fromMSecsSinceEpoch(m_iLastUpdate)
+		return QDateTime::fromMSecsSinceEpoch(m_iLastUpdate*1000)
 				.toString("dd MMM yyyy - hh:mm:ss");
 	}
 	qint64 getLastUpdate()

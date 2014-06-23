@@ -62,7 +62,7 @@ StelAddOn::StelAddOn()
 		lastUpdate = txt.readAll();
 		if(lastUpdate.isEmpty())
 		{
-			lastUpdate = "0";
+			lastUpdate = "1388966410";
 			txt << lastUpdate;
 		}
 		file.close();

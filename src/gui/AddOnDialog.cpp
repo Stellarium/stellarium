@@ -197,7 +197,7 @@ void AddOnDialog::downloadFinished()
 		m_StelAddOn.updateDatabase(result);
 	}
 
-	qint64 currentTime = QDateTime::currentMSecsSinceEpoch();
+	qint64 currentTime = QDateTime::currentMSecsSinceEpoch()/1000;
 	ui->btnUpdate->setEnabled(true);
 	m_StelAddOn.setLastUpdate(currentTime);
 	ui->txtLastUpdate->setText(m_StelAddOn.getLastUpdateString());
