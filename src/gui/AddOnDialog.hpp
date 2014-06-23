@@ -70,6 +70,7 @@ private:
 
 	void initModel(QTableView* tableView, Category category);
 	void setUpTableView(QTableView* tableView);
+	void populateTables();
 };
 
 #endif // _ADDONDIALOG_HPP_

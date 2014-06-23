@@ -68,29 +68,7 @@ void AddOnDialog::createDialogContent()
 	ui->stackedWidget->setCurrentIndex(0);
 	ui->stackListWidget->setCurrentRow(0);
 
-	// CATALOGS
-	setUpTableView(ui->catalogsTableView);
-	initModel(ui->catalogsTableView, CATALOG);
-
-	// LANDSCAPES
-	setUpTableView(ui->landscapeTableView);
-	initModel(ui->landscapeTableView, LANDSCAPE);
-
-	// LANGUAGE PACK
-	setUpTableView(ui->languageTableView);
-	initModel(ui->languageTableView, LANGUAGEPACK);
-
-	// SCRIPTS
-	setUpTableView(ui->scriptsTableView);
-	initModel(ui->scriptsTableView, SCRIPT);
-
-	// STARLORE
-	setUpTableView(ui->starloreTbleView);
-	initModel(ui->starloreTbleView, STARLORE);
-
-	// TEXTURES
-	setUpTableView(ui->texturesTableView);
-	initModel(ui->texturesTableView, TEXTURE);
+	populateTables();
 }
 
 void AddOnDialog::changePage(QListWidgetItem *current, QListWidgetItem *previous)
@@ -150,6 +128,32 @@ void AddOnDialog::initModel(QTableView* tableView, Category category)
 	tableView->setModel(model);
 }
 
+void AddOnDialog::populateTables() {
+	// CATALOGS
+	setUpTableView(ui->catalogsTableView);
+	initModel(ui->catalogsTableView, CATALOG);
+
+	// LANDSCAPES
+	setUpTableView(ui->landscapeTableView);
+	initModel(ui->landscapeTableView, LANDSCAPE);
+
+	// LANGUAGE PACK
+	setUpTableView(ui->languageTableView);
+	initModel(ui->languageTableView, LANGUAGEPACK);
+
+	// SCRIPTS
+	setUpTableView(ui->scriptsTableView);
+	initModel(ui->scriptsTableView, SCRIPT);
+
+	// STARLORE
+	setUpTableView(ui->starloreTbleView);
+	initModel(ui->starloreTbleView, STARLORE);
+
+	// TEXTURES
+	setUpTableView(ui->texturesTableView);
+	initModel(ui->texturesTableView, TEXTURE);
+}
+
 void AddOnDialog::updateCatalog()
 {
 	ui->btnUpdate->setEnabled(false);
@@ -197,4 +201,5 @@ void AddOnDialog::downloadFinished()
 	ui->btnUpdate->setEnabled(true);
 	m_StelAddOn.setLastUpdate(currentTime);
 	ui->txtLastUpdate->setText(m_StelAddOn.getLastUpdateString());
+	populateTables();
 }
