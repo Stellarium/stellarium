@@ -21,7 +21,6 @@
 #define _METEORSTREAM_HPP_
 
 #include "Meteor.hpp"
-#include "StelTextureTypes.hpp"
 #include "VecMath.hpp"
 
 class StelCore;
@@ -68,8 +67,6 @@ public:
 private:
 	void insertVertex(const StelCore* core, QVector<Vec3d> &vertexArray, Vec3d vertex);
 	Vec4f getColor(QString colorName);
-
-	static StelTextureSP bolideTexture;
 
 	bool m_alive;             //! Indicate if the meteor it still visible
 
