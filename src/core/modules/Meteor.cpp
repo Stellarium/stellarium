@@ -268,7 +268,7 @@ void Meteor::calculateThickness(const StelCore* core, double &thickness, double 
 }
 
 void Meteor::drawBolide(const StelCore* core, StelPainter& sPainter, MeteorModel mm,
-			Mat4d viewMatrix, const int bolideSize)
+			Mat4d viewMatrix, const double bolideSize)
 {
 	// bolide
 	//
@@ -311,7 +311,7 @@ void Meteor::drawBolide(const StelCore* core, StelPainter& sPainter, MeteorModel
 }
 
 void Meteor::drawTrain(const StelCore *core, StelPainter& sPainter, MeteorModel mm,
-		       Mat4d viewMatrix, const int thickness, const int segments,
+		       Mat4d viewMatrix, const double thickness, const int segments,
 		       QList<Vec4f> lineColorArray, QList<Vec4f> trainColorArray)
 {
 	if (segments != lineColorArray.size() || 2*segments != trainColorArray.size())
