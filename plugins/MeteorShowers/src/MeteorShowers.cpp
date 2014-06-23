@@ -18,23 +18,16 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#include <QColor>
-#include <QDebug>
 #include <QDir>
-#include <QFileInfo>
-#include <QList>
-#include <QNetworkAccessManager>
 #include <QNetworkReply>
-#include <QTimer>
 #include <QSettings>
+#include <QTimer>
 
 #include "LabelMgr.hpp"
 #include "LandscapeMgr.hpp"
 #include "MeteorMgr.hpp"
-#include "MeteorShower.hpp"
-#include "MeteorShowers.hpp"
 #include "MeteorShowerDialog.hpp"
-#include "MeteorStream.hpp"
+#include "MeteorShowers.hpp"
 #include "Planet.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
@@ -44,11 +37,8 @@
 #include "StelJsonParser.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelObjectMgr.hpp"
-#include "StelPainter.hpp"
 #include "StelProgressController.hpp"
-#include "StelProjector.hpp"
 #include "StelTextureMgr.hpp"
-#include "StelUtils.hpp"
 
 #define CATALOG_FORMAT_VERSION 1 /* Version of format of catalog */
 

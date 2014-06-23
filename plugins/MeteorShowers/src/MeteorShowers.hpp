@@ -21,27 +21,16 @@
 #ifndef METEORSHOWERS_HPP_
 #define METEORSHOWERS_HPP_
 
+#include <QColor>
+
 #include "MeteorShower.hpp"
 #include "MeteorStream.hpp"
-#include "StelFader.hpp"
-#include "StelModule.hpp"
 #include "StelObjectModule.hpp"
-#include "StelTextureTypes.hpp"
 
-#include <QColor>
-#include <QDateTime>
-#include <QFont>
-#include <QSharedPointer>
-#include <QVariantMap>
-
+class MeteorShowerDialog;
 class QNetworkAccessManager;
 class QNetworkReply;
-class QProgressBar;
-class QSettings;
-class QTimer;
-class MeteorShowerDialog;
 class StelButton;
-class StelPainter;
 
 typedef QSharedPointer<MeteorShower> MeteorShowerP;
 

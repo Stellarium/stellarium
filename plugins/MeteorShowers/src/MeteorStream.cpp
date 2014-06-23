@@ -17,13 +17,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#include <cstdlib>
-
 #include "MeteorShowers.hpp"
 #include "MeteorStream.hpp"
-#include "StelCore.hpp"
-#include "StelMovementMgr.hpp"
-#include "StelPainter.hpp"
 
 MeteorStream::MeteorStream(const StelCore* core,
 			   double speed,
