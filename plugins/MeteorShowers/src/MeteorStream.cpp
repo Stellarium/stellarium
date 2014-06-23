@@ -22,12 +22,8 @@
 #include "MeteorShowers.hpp"
 #include "MeteorStream.hpp"
 #include "StelCore.hpp"
-#include "StelToneReproducer.hpp"
 #include "StelMovementMgr.hpp"
 #include "StelPainter.hpp"
-#include "StelTexture.hpp"
-
-StelTextureSP MeteorStream::bolideTexture;
 
 MeteorStream::MeteorStream(const StelCore* core,
 			   double speed,
