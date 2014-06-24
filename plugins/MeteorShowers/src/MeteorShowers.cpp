@@ -42,7 +42,7 @@
 
 #define CATALOG_FORMAT_VERSION 1 /* Version of format of catalog */
 
-const double MeteorShowers::zhrToWsr = 1.6667f / 3600.f;
+const double MeteorShowers::zhrToWsr = MeteorMgr::zhrToWsr;
 
 /*
  This method is the one called automatically by the StelModuleMgr just

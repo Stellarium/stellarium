@@ -59,6 +59,9 @@ public:
 	
 	//! Defines the order in which the various modules are drawn.
 	virtual double getCallOrder(StelModuleActionName actionName) const;
+
+	//! Factor to convert from zhr to whole earth per second rate
+	static const double zhrToWsr = 1.6667f / 3600.f;
 	
 public slots:
 	///////////////////////////////////////////////////////////////////////////
@@ -81,7 +84,6 @@ signals:
 	
 private:
 	std::vector<Meteor*> active;	// Vector containing all active meteors
-	static const double zhrToWsr;	// factor to convert from zhr to whole earth per second rate
 	int ZHR;
 	int maxVelocity;
 	bool flagShow;
