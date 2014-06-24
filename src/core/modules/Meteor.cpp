@@ -263,6 +263,8 @@ void Meteor::calculateThickness(const StelCore* core, double &thickness, double 
 	if (FOV <= 0.5)
 	{
 		thickness = 0.013 * FOV; // decreasing faster
+	} else if (FOV > 100.0) {
+		thickness = 0; // remove prism
 	}
 	bolideSize = thickness*3;
 }
@@ -270,6 +272,10 @@ void Meteor::calculateThickness(const StelCore* core, double &thickness, double 
 void Meteor::drawBolide(const StelCore* core, StelPainter& sPainter, MeteorModel mm,
 			Mat4d viewMatrix, const double bolideSize)
 {
+	if (!bolideSize) {
+		return;
+	}
+
 	// bolide
 	//
 	QVector<Vec3d> vertexArrayBolide;
@@ -371,8 +377,9 @@ void Meteor::drawTrain(const StelCore *core, StelPainter& sPainter, MeteorModel 
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	sPainter.enableClientStates(true, false, true);
-	sPainter.setColorPointer(4, GL_FLOAT, trainColorArray.toVector().constData());
 	if (thickness) {
+		sPainter.setColorPointer(4, GL_FLOAT, trainColorArray.toVector().constData());
+
 		sPainter.setVertexPointer(3, GL_DOUBLE, vertexArrayL.constData());
 		sPainter.drawFromArray(StelPainter::TriangleStrip, vertexArrayL.size(), 0, true);
 
