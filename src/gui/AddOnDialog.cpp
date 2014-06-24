@@ -17,6 +17,7 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 */
 
+#include <QCheckBox>
 #include <QDateTime>
 #include <QSqlQueryModel>
 #include <QStringBuilder>
@@ -118,14 +119,22 @@ void AddOnDialog::initModel(QTableView* tableView, Category category)
 			break;
 	}
 
-	query = query % "SELECT title, version, installed "
+	query = query % "SELECT title, version, installed, NULL "
 		"FROM addon INNER JOIN " % table %
 		" ON addon.id = " % table % ".addon";
 	model->setQuery(query);
 	model->setHeaderData(0, Qt::Horizontal, q_("Title"));
 	model->setHeaderData(1, Qt::Horizontal, q_("Last Version"));
 	model->setHeaderData(2, Qt::Horizontal, q_("Installed Version"));
+	model->setHeaderData(3, Qt::Horizontal, "");
 	tableView->setModel(model);
+
+	for(int i=0; i<tableView->model()->rowCount(); ++i)
+	{
+		QCheckBox *cbox = new QCheckBox();
+		tableView->setIndexWidget(tableView->model()->index(i, 3), cbox);
+		cbox->setStyleSheet("QCheckBox { padding-left: 8px; }");
+	}
 }
 
 void AddOnDialog::populateTables() {
