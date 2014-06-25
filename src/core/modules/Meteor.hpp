@@ -104,7 +104,7 @@ public:
 private:
 	static void insertVertex(const StelCore* core, Mat4d viewMatrix,
 				 QVector<Vec3d> &vertexArray, Vec3d vertex);
-	static Vec4f getColor(QString colorName);
+	static Vec4f getColorFromName(QString colorName);
 
 	bool m_alive;        //! Indicate if the meteor it still visible
 
