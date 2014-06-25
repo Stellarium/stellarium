@@ -17,7 +17,6 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 */
 
-#include <QCheckBox>
 #include <QDateTime>
 #include <QSqlQueryModel>
 #include <QStringBuilder>
@@ -70,6 +69,7 @@ void AddOnDialog::createDialogContent()
 	ui->stackListWidget->setCurrentRow(0);
 
 	populateTables();
+	connect(ui->btnInstall, SIGNAL(clicked()), this, SLOT(installSelectedRows()));
 }
 
 void AddOnDialog::changePage(QListWidgetItem *current, QListWidgetItem *previous)
@@ -130,11 +130,14 @@ void AddOnDialog::initModel(QTableView* tableView, Category category)
 	model->setHeaderData(3, Qt::Horizontal, "");
 	tableView->setModel(model);
 
+	// insert checkboxes
+	m_checkBoxes.clear();
 	for(int i=0; i<tableView->model()->rowCount(); ++i)
 	{
 		QCheckBox *cbox = new QCheckBox();
 		tableView->setIndexWidget(tableView->model()->index(i, 3), cbox);
 		cbox->setStyleSheet("QCheckBox { padding-left: 8px; }");
+		m_checkBoxes.insert(i, cbox);
 	}
 }
 
@@ -212,4 +215,12 @@ void AddOnDialog::downloadFinished()
 	m_StelAddOn.setLastUpdate(currentTime);
 	ui->txtLastUpdate->setText(m_StelAddOn.getLastUpdateString());
 	populateTables();
+}
+
+void AddOnDialog::installSelectedRows() {
+	// get selected rows
+	for (int i=0;i<m_checkBoxes.count(); ++i)
+	{
+		qDebug() << i << m_checkBoxes.value(i)->checkState();
+	}
 }

@@ -23,6 +23,7 @@
 #include "StelAddOn.hpp"
 #include "StelDialog.hpp"
 
+#include <QCheckBox>
 #include <QListWidgetItem>
 #include <QNetworkReply>
 #include <QObject>
@@ -52,6 +53,7 @@ private slots:
 	void updateCatalog();
 	void downloadError(QNetworkReply::NetworkError);
 	void downloadFinished();
+	void installSelectedRows();
 
 private:
 	//! Defines the columns that will be displayed in the table view.
@@ -67,6 +69,7 @@ private:
 
 	StelAddOn m_StelAddOn;
 	QNetworkReply* m_pUpdateCatalogReply;
+	QHash<int, QCheckBox*> m_checkBoxes;
 
 	void initModel(QTableView* tableView, Category category);
 	void setUpTableView(QTableView* tableView);
