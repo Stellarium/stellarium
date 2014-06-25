@@ -28,6 +28,7 @@
 #include "StelTranslator.hpp"
 #include "StelUtils.hpp"
 #include "StelActionMgr.hpp"
+#include "StelOpenGL.hpp"
 
 #include <QDeclarativeItem>
 #include <QDebug>
