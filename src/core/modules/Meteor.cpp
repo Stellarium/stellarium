@@ -46,12 +46,8 @@ Meteor::Meteor(const StelCore* core, double v)
 		return;
 	}
 
-	// determine the meteor color
-	QList<colorPair> colors;
-	colors.push_back(colorPair("white", 100));
-
 	// building lineColorArray and trainColorArray
-	buildColorArrays(m_segments, colors, m_lineColorArray, m_trainColorArray);
+	buildColorArrays(m_segments, getRandColor(), m_lineColorArray, m_trainColorArray);
 }
 
 Meteor::~Meteor()
@@ -162,6 +158,27 @@ Vec4f Meteor::getColorFromName(QString colorName) {
 	}
 
 	return Vec4f(R/255.f, G/255.f, B/255.f, 1);
+}
+
+QList<Meteor::colorPair> Meteor::getRandColor() {
+	QList<colorPair> colors;
+	double prob = (double)rand()/((double)RAND_MAX+1);
+	if (prob > 0.9) {
+		colors.push_back(Meteor::colorPair("white", 70));
+		colors.push_back(Meteor::colorPair("orangeYellow", 10));
+		colors.push_back(Meteor::colorPair("yellow", 10));
+		colors.push_back(Meteor::colorPair("blueGreen", 10));
+	} else if (prob > 0.85)  {
+		colors.push_back(Meteor::colorPair("white", 80));
+		colors.push_back(Meteor::colorPair("violet", 20));
+	} else if (prob > 0.80)  {
+		colors.push_back(Meteor::colorPair("white", 80));
+		colors.push_back(Meteor::colorPair("orangeYellow", 20));
+	} else {
+		colors.push_back(Meteor::colorPair("white", 100));
+	}
+
+	return colors;
 }
 
 void Meteor::buildColorArrays(const int segments,
