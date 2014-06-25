@@ -84,6 +84,7 @@ void AddOnDialog::changePage(QListWidgetItem *current, QListWidgetItem *previous
 void AddOnDialog::setUpTableView(QTableView* tableView)
 {
 	tableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+	tableView->horizontalHeader()->setSectionResizeMode(3, QHeaderView::ResizeToContents);
 	tableView->verticalHeader()->setVisible(false);
 	tableView->setAlternatingRowColors(true);
 	tableView->setSelectionBehavior(QAbstractItemView::SelectRows);
@@ -139,28 +140,28 @@ void AddOnDialog::initModel(QTableView* tableView, Category category)
 
 void AddOnDialog::populateTables() {
 	// CATALOGS
-	setUpTableView(ui->catalogsTableView);
 	initModel(ui->catalogsTableView, CATALOG);
+	setUpTableView(ui->catalogsTableView);
 
 	// LANDSCAPES
-	setUpTableView(ui->landscapeTableView);
 	initModel(ui->landscapeTableView, LANDSCAPE);
+	setUpTableView(ui->landscapeTableView);
 
 	// LANGUAGE PACK
-	setUpTableView(ui->languageTableView);
 	initModel(ui->languageTableView, LANGUAGEPACK);
+	setUpTableView(ui->languageTableView);
 
 	// SCRIPTS
-	setUpTableView(ui->scriptsTableView);
 	initModel(ui->scriptsTableView, SCRIPT);
+	setUpTableView(ui->scriptsTableView);
 
 	// STARLORE
-	setUpTableView(ui->starloreTbleView);
 	initModel(ui->starloreTbleView, STARLORE);
+	setUpTableView(ui->starloreTbleView);
 
 	// TEXTURES
-	setUpTableView(ui->texturesTableView);
 	initModel(ui->texturesTableView, TEXTURE);
+	setUpTableView(ui->texturesTableView);
 }
 
 void AddOnDialog::updateCatalog()
