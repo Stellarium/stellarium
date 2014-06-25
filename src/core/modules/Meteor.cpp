@@ -133,7 +133,7 @@ bool Meteor::initMeteorModel(const StelCore* core, const int segments, const Mat
 	return true;  //the meteor is alive
 }
 
-Vec4f Meteor::getColor(QString colorName) {
+Vec4f Meteor::getColorFromName(QString colorName) {
 	int R, G, B; // 0-255
 	if (colorName == "violet") { // Calcium
 		R = 176;
@@ -183,14 +183,14 @@ void Meteor::buildColorArrays(const int segments,
 
 		totalOfSegments += numOfSegments;
 		for (int i=0; i<numOfSegments; i++) {
-			lineColorArray.insert(currentSegment, getColor(currentColor.first));
-			trainColorArray.insert(currentSegment, getColor(currentColor.first));
+			lineColorArray.insert(currentSegment, getColorFromName(currentColor.first));
+			trainColorArray.insert(currentSegment, getColorFromName(currentColor.first));
 			if (currentSegment >= segments-1) {
 				currentSegment = 0;
 			} else {
 				currentSegment++;
 			}
-			trainColorArray.insert(currentSegment, getColor(currentColor.first));
+			trainColorArray.insert(currentSegment, getColorFromName(currentColor.first));
 		}
 	}
 }
