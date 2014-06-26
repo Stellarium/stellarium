@@ -83,6 +83,7 @@
 #define glGetShaderInfoLog(...)     GLFUNC_(glGetShaderInfoLog(__VA_ARGS__))
 #define glGetShaderPrecisionFormat(...) GLFUNC_(glGetShaderPrecisionFormat(__VA_ARGS__))
 #define glGetShaderSource(...)      GLFUNC_(glGetShaderSource(__VA_ARGS__))
+#define glGetString(...)            GLFUNC_(glGetString(__VA_ARGS__))
 #define glGetUniformfv(...)         GLFUNC_(glGetUniformfv(__VA_ARGS__))
 #define glGetUniformiv(...)         GLFUNC_(glGetUniformiv(__VA_ARGS__))
 #define glGetUniformLocation(...)   GLFUNC_(glGetUniformLocation(__VA_ARGS__))
