@@ -47,8 +47,10 @@ static inline float IndexToBV(unsigned char bV) {
   return (float)bV*(4.f/127.f)-0.5f;
 }
 
-#if ((defined(__sgi) && defined(_COMPILER_VERSION) && !defined(__GNUC__)) || defined(_MSC_BUILD))
+#if (defined(__sgi) && defined(_COMPILER_VERSION) && !defined(__GNUC__))
 #pragma pack(1)
+#elif defined(_MSC_BUILD)
+#pragma pack(push, 1)
 #endif
 struct Star1 { // 28 byte
 #ifdef _MSC_BUILD
@@ -84,13 +86,17 @@ struct Star1 { // 28 byte
    __attribute__ ((__packed__))
 #endif
 ;
-#if ((defined(__sgi) && defined(_COMPILER_VERSION) && !defined(__GNUC__)) || defined(_MSC_BUILD))
+#if (defined(__sgi) && defined(_COMPILER_VERSION) && !defined(__GNUC__))
 #pragma pack(0)
+#elif defined(_MSC_BUILD)
+#pragma pack(pop)
 #endif
 
 
-#if ((defined(__sgi) && defined(_COMPILER_VERSION) && !defined(__GNUC__)) || defined(_MSC_BUILD))
+#if (defined(__sgi) && defined(_COMPILER_VERSION) && !defined(__GNUC__))
 #pragma pack(1)
+#elif defined(_MSC_BUILD)
+#pragma pack(push, 1)
 #endif
 struct Star2 {  // 10 byte
   int x0:20;
@@ -119,13 +125,17 @@ struct Star2 {  // 10 byte
    __attribute__ ((__packed__))
 #endif
 ;
-#if ((defined(__sgi) && defined(_COMPILER_VERSION) && !defined(__GNUC__)) || defined(_MSC_BUILD))
+#if (defined(__sgi) && defined(_COMPILER_VERSION) && !defined(__GNUC__))
 #pragma pack(0)
+#elif defined(_MSC_BUILD)
+#pragma pack(pop)
 #endif
 
 
-#if ((defined(__sgi) && defined(_COMPILER_VERSION) && !defined(__GNUC__)) || defined(_MSC_BUILD))
+#if (defined(__sgi) && defined(_COMPILER_VERSION) && !defined(__GNUC__))
 #pragma pack(1)
+#elif defined(_MSC_BUILD)
+#pragma pack(push, 1)
 #endif
 struct Star3 {  // 6 byte
   int x0:18;
@@ -152,8 +162,10 @@ struct Star3 {  // 6 byte
    __attribute__ ((__packed__))
 #endif
 ;
-#if ((defined(__sgi) && defined(_COMPILER_VERSION) && !defined(__GNUC__)) || defined(_MSC_BUILD))
+#if (defined(__sgi) && defined(_COMPILER_VERSION) && !defined(__GNUC__))
 #pragma pack(0)
+#elif defined(_MSC_BUILD)
+#pragma pack(pop)
 #endif
 
 #endif // _STAR_HPP_
