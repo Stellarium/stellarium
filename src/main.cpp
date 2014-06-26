@@ -61,7 +61,7 @@
 	#endif
 #endif //Q_OS_WIN
 
-//! @class GettextStelTranslator
+//! @class CustomQTranslator
 //! Provides custom i18n support.
 class CustomQTranslator : public QTranslator
 {
@@ -124,14 +124,6 @@ int main(int argc, char **argv)
 	}
 #endif
 #ifdef Q_OS_MAC
-	// This block does not currently work
-//	 QDir dir(argv[0]);
-//	 dir.cdUp();
-//	 dir.cdUp();
-//	 dir.cd("plugins");
-//	 qDebug() << dir.absolutePath();
-//	 QCoreApplication::setLibraryPaths(QStringList(dir.absolutePath()));
-
 	 char ** newArgv = (char**) malloc((argc + 2) * sizeof(*newArgv));
 	 memmove(newArgv, argv, sizeof(*newArgv) * argc);
 	 char * option = new char[20];
