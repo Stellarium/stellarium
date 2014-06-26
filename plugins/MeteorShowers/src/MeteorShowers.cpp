@@ -580,6 +580,17 @@ void MeteorShowers::update(double deltaTime)
 	index = 0;
 	foreach (const activeData &current, activeInfo)
 	{
+		std::vector<MeteorStream*> aux;
+		if (active.empty() || active.size() < (unsigned) activeInfo.size())
+		{
+			if(tspeed<0 || fabs(tspeed)>1.)
+			{
+				activeInfo.removeAt(index);
+				continue; // don't create new meteors
+			}
+			active.push_back(aux);
+		}
+
 		int ZHR = calculateZHR(current.zhr,
 				       current.variable,
 				       current.start,
@@ -591,12 +602,6 @@ void MeteorShowers::update(double deltaTime)
 		if (mpf<1)
 		{
 			mpf = 1;
-		}
-
-		std::vector<MeteorStream*> aux;
-		if (active.empty() || active.size() < (unsigned) activeInfo.size())
-		{
-			active.push_back(aux);
 		}
 
 		for (int i=0; i<mpf; ++i)
