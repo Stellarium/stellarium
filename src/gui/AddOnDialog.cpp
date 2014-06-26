@@ -251,6 +251,8 @@ void AddOnDialog::downloadFinished()
 }
 
 void AddOnDialog::installSelectedRows() {
+	Q_ASSERT(m_checkBoxes.count() == m_currentTableView->model()->rowCount());
+
 	// get selected rows
 	for (int i=0;i<m_checkBoxes.count(); ++i)
 	{
