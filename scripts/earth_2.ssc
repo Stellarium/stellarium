@@ -1,12 +1,12 @@
 // Author: Qam1
 // Name: Earth Events from Mercury
 // License: Public Domain
-// Version: 5.1-1.1
+// Version: 6.0
 // Description: Earth Events from Mercury
 
-// Made on Stellarium 0.12.1
+// Made on Stellarium 0.12.4
 
-spd = 3; // speed for screen saver mode in seconds
+spd = 4; // speed for screen saver mode in seconds
 long = -73.4
 lat = 30.1
 
@@ -24,6 +24,7 @@ root = Math.pow(100,0.2);
 degstring = "\u00B0";
 
 
+core.setDeltaTAlgorithm("WithoutCorrection");
 
 
 ah = "7777-07-07T07:07:07"; //why o why is this necessary?? 

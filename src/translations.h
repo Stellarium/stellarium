@@ -268,9 +268,9 @@ class Translations
 		// TRANSLATORS: Name and description of script
 		N_("Earth Events from Mars");
 		// TRANSLATORS: Name of script
-		N_("Earth Greatest Elongations and Brilliancies from Mars");
+		N_("Earth and Venus Greatest Elongations and Brilliancies from Mars");
 		// TRANSLATORS: Name of script
-		N_("Earth and Mars Greatest Elongations from Jupiter");
+		N_("Earth and Mars Greatest Elongations and Transits from Callisto");
 		
 		// =====================================================================
 		// Script descriptions
@@ -291,15 +291,15 @@ class Translations
 		N_("Phobos eclipsing the Sun as seen from Olympus Mons on Jan 10, 2068.");
 		N_("Phobos occultations of Earth are common, as are occultations of Jupiter. But occultations of both on the same day are very rare. Here's one that takes place 1/23/2048. In real speed.");
 		N_("Phobos races ahead of Mars and transits the sun, passes through it and then retrogrades back towards the sun and just partially transits it again (only seen in the southern hemisphere of Deimos), then Mars totally eclipses the sun while Phobos transits in darkness between Mars and Deimos. When Phobos emerges from Mars it is still eclipsed and dimmed in Mars' shadow, only to light up later.");
-		N_("Screensaver of various happenings in the Solar System. 187 events in all!");
+		N_("Screensaver of various happenings in the Solar System. 232 events in all!");
 		N_("A tour of the western constellations.");
 		N_("Look at the Sun from big planets of Solar System and Pluto.");
 		N_("Best views of Earth from other Solar System bodies in the 21st Century.");
 		N_("Transit of Venus as seen from Sydney Australia, 6th June 2012.");
 		N_("A demonstration of the analemma - the path of the Sun across the sky during the year.");
 		N_("Flash of the supernova observed by Tycho Brahe in 1572. The Supernovae plugin has to be enabled.");
-		N_("Earth Greatest Elongations and Brilliancies from Mars 2000-3000");
-		N_("Earth Greatest Elongations from Jupiter 2000-3000");
+		N_("Earth and Venus Greatest Elongations and Brilliancies from Mars 2000-3000");
+		N_("Earth Greatest Elongations and Transits from Callisto 2000-3000");
 		
 		// =====================================================================
 		// List of countries
