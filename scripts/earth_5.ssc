@@ -1,10 +1,10 @@
 // Author: Qam1
-// Name: Earth Greatest Elongations and Brilliancies from Mars
+// Name: Earth and Venus Greatest Elongations and Brilliancies from Mars
 // License: Public Domain
-// Version: 5.1
-// Description: Earth Greatest Elongations and Brilliancies from Mars 2000-3000
+// Version: 6.0
+// Description: Earth and Venus Greatest Elongations and Brilliancies from Mars 2000-3000
 
-// Made on Stellarium 0.12.1
+// Made on Stellarium 0.12.4
 
 
 
@@ -29,6 +29,8 @@ root = Math.pow(100,0.2);
 
 degstring = "\u00B0";
 
+core.setDeltaTAlgorithm("WithoutCorrection");
+
 
 cplanet = "Earth";
 lplanet = "Earth";
@@ -45,7 +47,7 @@ ij = new Array(length= 4000);
 
 LabelMgr.deleteAllLabels();
 
-long = -73.4;
+long = -73.6;
 lat = 30.1;
 
 core.setObserverLocation(long, lat, 20, 1, "", "Mars");
