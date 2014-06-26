@@ -57,18 +57,21 @@ void AddOnDialog::createDialogContent()
 	ui->setupUi(dialog);
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()),this, SLOT(retranslate()));
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
-	connect(ui->stackListWidget, SIGNAL(currentItemChanged(QListWidgetItem *, QListWidgetItem *)),
-		this, SLOT(changePage(QListWidgetItem *, QListWidgetItem*)));
+
+	// build and populate all tableviews
+	populateTables();
 
 	// catalog updates
 	ui->txtLastUpdate->setText(m_StelAddOn.getLastUpdateString());
 	connect(ui->btnUpdate, SIGNAL(clicked()), this, SLOT(updateCatalog()));
 
-	// default tab
-	ui->stackedWidget->setCurrentIndex(0);
-	ui->stackListWidget->setCurrentRow(0);
+	// setting up tabs
+	connect(ui->stackListWidget, SIGNAL(currentItemChanged(QListWidgetItem *, QListWidgetItem *)),
+		this, SLOT(changePage(QListWidgetItem *, QListWidgetItem*)));
+	ui->stackedWidget->setCurrentIndex(CATALOG);
+	ui->stackListWidget->setCurrentRow(CATALOG);
+	m_currentTableView = ui->catalogsTableView;
 
-	populateTables();
 	connect(ui->btnInstall, SIGNAL(clicked()), this, SLOT(installSelectedRows()));
 }
 
@@ -79,6 +82,38 @@ void AddOnDialog::changePage(QListWidgetItem *current, QListWidgetItem *previous
 		current = previous;
 	}
 	ui->stackedWidget->setCurrentIndex(ui->stackListWidget->row(current));
+
+	switch (ui->stackedWidget->currentIndex())
+	{
+		case CATALOG:
+			m_currentTableView = ui->catalogsTableView;
+			break;
+		case LANDSCAPE:
+			m_currentTableView = ui->landscapeTableView;
+			break;
+		case LANGUAGEPACK:
+			m_currentTableView = ui->languageTableView;
+			break;
+		case SCRIPT:
+			m_currentTableView = ui->scriptsTableView;
+			break;
+		case STARLORE:
+			m_currentTableView = ui->starloreTbleView;
+			break;
+		case TEXTURE:
+			m_currentTableView = ui->texturesTableView;
+			break;
+	}
+
+	// Insert checkboxes to the current tableview
+	m_checkBoxes.clear();
+	for(int i=0; i<m_currentTableView->model()->rowCount(); ++i)
+	{
+		QCheckBox* cbox = new QCheckBox();
+		m_currentTableView->setIndexWidget(m_currentTableView->model()->index(i, 3), cbox);
+		cbox->setStyleSheet("QCheckBox { padding-left: 8px; }");
+		m_checkBoxes.insert(i, cbox);
+	}
 }
 
 void AddOnDialog::setUpTableView(QTableView* tableView)
@@ -129,19 +164,10 @@ void AddOnDialog::initModel(QTableView* tableView, Category category)
 	model->setHeaderData(2, Qt::Horizontal, q_("Installed Version"));
 	model->setHeaderData(3, Qt::Horizontal, "");
 	tableView->setModel(model);
-
-	// insert checkboxes
-	m_checkBoxes.clear();
-	for(int i=0; i<tableView->model()->rowCount(); ++i)
-	{
-		QCheckBox *cbox = new QCheckBox();
-		tableView->setIndexWidget(tableView->model()->index(i, 3), cbox);
-		cbox->setStyleSheet("QCheckBox { padding-left: 8px; }");
-		m_checkBoxes.insert(i, cbox);
-	}
 }
 
-void AddOnDialog::populateTables() {
+void AddOnDialog::populateTables()
+{
 	// CATALOGS
 	initModel(ui->catalogsTableView, CATALOG);
 	setUpTableView(ui->catalogsTableView);
