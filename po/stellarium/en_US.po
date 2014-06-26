@@ -7,21 +7,21 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-06-17 01:06+0700\n"
+"POT-Creation-Date: 2014-06-26 10:33+0700\n"
 "PO-Revision-Date: 2012-05-08 16:58+0000\n"
 "Last-Translator: Alexander Wolf <Unknown>\n"
 "Language-Team: English (United States) <en_US@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-06-17 06:06+0000\n"
-"X-Generator: Launchpad (build 17045)\n"
+"X-Launchpad-Export-Date: 2014-06-26 05:57+0000\n"
+"X-Generator: Launchpad (build 17065)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:107 src/core/modules/StarMgr.cpp:339
 #: src/core/modules/GridLinesMgr.cpp:695 src/core/modules/LandscapeMgr.cpp:353
 #: src/core/modules/NebulaMgr.cpp:126 src/core/modules/SolarSystem.cpp:155
 #: src/core/StelApp.cpp:468 src/core/StelCore.cpp:176
-#: src/core/StelSkyLayerMgr.cpp:87 src/StelMainView.cpp:308
+#: src/core/StelSkyLayerMgr.cpp:87 src/StelMainView.cpp:309
 msgid "Display Options"
 msgstr ""
 
@@ -1024,7 +1024,7 @@ msgid "Deep-sky objects background images"
 msgstr ""
 
 #: src/core/StelMovementMgr.cpp:129 src/gui/StelGui.cpp:185
-#: src/StelMainView.cpp:307
+#: src/StelMainView.cpp:308
 msgid "Miscellaneous"
 msgstr ""
 
@@ -1823,15 +1823,15 @@ msgstr ""
 msgid "This system does not support OpenGL."
 msgstr ""
 
-#: src/StelMainView.cpp:307
+#: src/StelMainView.cpp:308
 msgid "Save screenshot"
 msgstr ""
 
-#: src/StelMainView.cpp:308
+#: src/StelMainView.cpp:309
 msgid "Full-screen mode"
 msgstr ""
 
-#: src/StelMainView.cpp:414
+#: src/StelMainView.cpp:415
 #, qt-format
 msgid "Stellarium %1"
 msgstr ""
@@ -2474,7 +2474,7 @@ msgstr ""
 
 #. TRANSLATORS: Name and description of script
 #: src/translations.h:267
-msgid "Earth Events from Venus"
+msgid "Earth Events from a floating city on Venus"
 msgstr ""
 
 #. TRANSLATORS: Name and description of script
@@ -2484,12 +2484,12 @@ msgstr ""
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:271
-msgid "Earth Greatest Elongations and Brilliancies from Mars"
+msgid "Earth and Venus Greatest Elongations and Brilliancies from Mars"
 msgstr ""
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:273
-msgid "Earth and Mars Greatest Elongations from Jupiter"
+msgid "Earth and Mars Greatest Elongations and Transits from Callisto"
 msgstr ""
 
 #. TRANSLATORS: Description of the landscape tour script.
@@ -2572,7 +2572,7 @@ msgstr ""
 
 #: src/translations.h:294
 msgid ""
-"Screensaver of various happenings in the Solar System. 187 events in all!"
+"Screensaver of various happenings in the Solar System. 232 events in all!"
 msgstr ""
 
 #: src/translations.h:295
@@ -2605,11 +2605,12 @@ msgid ""
 msgstr ""
 
 #: src/translations.h:301
-msgid "Earth Greatest Elongations and Brilliancies from Mars 2000-3000"
+msgid ""
+"Earth and Venus Greatest Elongations and Brilliancies from Mars 2000-3000"
 msgstr ""
 
 #: src/translations.h:302
-msgid "Earth Greatest Elongations from Jupiter 2000-3000"
+msgid "Earth Greatest Elongations and Transits from Callisto 2000-3000."
 msgstr ""
 
 #: src/translations.h:306

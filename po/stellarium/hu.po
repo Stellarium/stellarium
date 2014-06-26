@@ -8,22 +8,22 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Stellarium 0.10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-06-17 01:06+0700\n"
+"POT-Creation-Date: 2014-06-26 10:33+0700\n"
 "PO-Revision-Date: 2014-02-23 15:45+0000\n"
 "Last-Translator: Alexander Wolf <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-06-17 05:52+0000\n"
-"X-Generator: Launchpad (build 17045)\n"
+"X-Launchpad-Export-Date: 2014-06-26 05:44+0000\n"
+"X-Generator: Launchpad (build 17065)\n"
 "X-Poedit-Language: Hungarian\n"
 
 #: src/core/modules/ConstellationMgr.cpp:107 src/core/modules/StarMgr.cpp:339
 #: src/core/modules/GridLinesMgr.cpp:695 src/core/modules/LandscapeMgr.cpp:353
 #: src/core/modules/NebulaMgr.cpp:126 src/core/modules/SolarSystem.cpp:155
 #: src/core/StelApp.cpp:468 src/core/StelCore.cpp:176
-#: src/core/StelSkyLayerMgr.cpp:87 src/StelMainView.cpp:308
+#: src/core/StelSkyLayerMgr.cpp:87 src/StelMainView.cpp:309
 msgid "Display Options"
 msgstr "Megjelenítés beállításai"
 
@@ -1124,7 +1124,7 @@ msgid "Deep-sky objects background images"
 msgstr "Mélyég objektumok háttérképei"
 
 #: src/core/StelMovementMgr.cpp:129 src/gui/StelGui.cpp:185
-#: src/StelMainView.cpp:307
+#: src/StelMainView.cpp:308
 msgid "Miscellaneous"
 msgstr "Egyebek"
 
@@ -1944,15 +1944,15 @@ msgstr "év"
 msgid "This system does not support OpenGL."
 msgstr "Ez a rendszer nem támogatja az OpenGL-t."
 
-#: src/StelMainView.cpp:307
+#: src/StelMainView.cpp:308
 msgid "Save screenshot"
 msgstr "Képernyő mentése"
 
-#: src/StelMainView.cpp:308
+#: src/StelMainView.cpp:309
 msgid "Full-screen mode"
 msgstr "Teljes képernyős mód"
 
-#: src/StelMainView.cpp:414
+#: src/StelMainView.cpp:415
 #, qt-format
 msgid "Stellarium %1"
 msgstr "Stellarium %1"
@@ -2596,8 +2596,8 @@ msgstr "Földi események a Merkúrról nézve"
 
 #. TRANSLATORS: Name and description of script
 #: src/translations.h:267
-msgid "Earth Events from Venus"
-msgstr "Földi események a Vénuszról nézve"
+msgid "Earth Events from a floating city on Venus"
+msgstr ""
 
 #. TRANSLATORS: Name and description of script
 #: src/translations.h:269
@@ -2606,13 +2606,13 @@ msgstr "Földi események a Marsról nézve"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:271
-msgid "Earth Greatest Elongations and Brilliancies from Mars"
-msgstr "A Föld legnagyobb kitérése és fényessége a Marsról nézve"
+msgid "Earth and Venus Greatest Elongations and Brilliancies from Mars"
+msgstr ""
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:273
-msgid "Earth and Mars Greatest Elongations from Jupiter"
-msgstr "A Föld és a Mars legnagyobb elongációja a Jupitertől"
+msgid "Earth and Mars Greatest Elongations and Transits from Callisto"
+msgstr ""
 
 #. TRANSLATORS: Description of the landscape tour script.
 #: src/translations.h:279
@@ -2712,9 +2712,8 @@ msgstr ""
 
 #: src/translations.h:294
 msgid ""
-"Screensaver of various happenings in the Solar System. 187 events in all!"
+"Screensaver of various happenings in the Solar System. 232 events in all!"
 msgstr ""
-"Képernyőkímélő a Naprendszerben történő eseményekről (összesen 187 esemény)."
 
 #: src/translations.h:295
 msgid "A tour of the western constellations."
@@ -2748,13 +2747,13 @@ msgstr ""
 "\"szupernóva\" bővítményt be kell tölteni hozzá)"
 
 #: src/translations.h:301
-msgid "Earth Greatest Elongations and Brilliancies from Mars 2000-3000"
+msgid ""
+"Earth and Venus Greatest Elongations and Brilliancies from Mars 2000-3000"
 msgstr ""
-"A Föld legnagyobb kitérése és fényessége a Marsról nézve 2000-3000 között"
 
 #: src/translations.h:302
-msgid "Earth Greatest Elongations from Jupiter 2000-3000"
-msgstr "A Föld legnagyobb kitérése a Jupiterről nézve 2000-3000 között"
+msgid "Earth Greatest Elongations and Transits from Callisto 2000-3000."
+msgstr ""
 
 #: src/translations.h:306
 msgid "Andorra"
@@ -10131,8 +10130,29 @@ msgstr ""
 #~ msgid "Sun altitude at twilight"
 #~ msgstr "A Nap magassága szürkületkor"
 
+#~ msgid "Earth Greatest Elongations and Brilliancies from Mars"
+#~ msgstr "A Föld legnagyobb kitérése és fényessége a Marsról nézve"
+
+#~ msgid "Earth Events from Venus"
+#~ msgstr "Földi események a Vénuszról nézve"
+
+#~ msgid "Earth Greatest Elongations from Jupiter 2000-3000"
+#~ msgstr "A Föld legnagyobb kitérése a Jupiterről nézve 2000-3000 között"
+
+#~ msgid "Earth Greatest Elongations and Brilliancies from Mars 2000-3000"
+#~ msgstr ""
+#~ "A Föld legnagyobb kitérése és fényessége a Marsról nézve 2000-3000 között"
+
+#~ msgid "Earth and Mars Greatest Elongations from Jupiter"
+#~ msgstr "A Föld és a Mars legnagyobb elongációja a Jupitertől"
+
 #~ msgid "1000"
 #~ msgstr "1000"
+
+#~ msgid ""
+#~ "Screensaver of various happenings in the Solar System. 187 events in all!"
+#~ msgstr ""
+#~ "Képernyőkímélő a Naprendszerben történő eseményekről (összesen 187 esemény)."
 
 #~ msgid "IAU Comission 53: Extrasolar Planets"
 #~ msgstr "IAU Comission 53: Extrasolar Planets"
