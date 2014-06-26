@@ -264,7 +264,7 @@ class Translations
 		// TRANSLATORS: Name and description of script
 		N_("Earth Events from Mercury");
 		// TRANSLATORS: Name and description of script
-		N_("Earth Events from Venus");
+		N_("Earth Events from a floating city on Venus");
 		// TRANSLATORS: Name and description of script
 		N_("Earth Events from Mars");
 		// TRANSLATORS: Name of script
@@ -299,7 +299,7 @@ class Translations
 		N_("A demonstration of the analemma - the path of the Sun across the sky during the year.");
 		N_("Flash of the supernova observed by Tycho Brahe in 1572. The Supernovae plugin has to be enabled.");
 		N_("Earth and Venus Greatest Elongations and Brilliancies from Mars 2000-3000");
-		N_("Earth Greatest Elongations and Transits from Callisto 2000-3000");
+		N_("Earth Greatest Elongations and Transits from Callisto 2000-3000.");
 		
 		// =====================================================================
 		// List of countries
