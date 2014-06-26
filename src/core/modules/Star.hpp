@@ -49,11 +49,11 @@ static inline float IndexToBV(unsigned char bV) {
 
 #if (defined(__sgi) && defined(_COMPILER_VERSION) && !defined(__GNUC__))
 #pragma pack(1)
-#elif defined(_MSC_BUILD)
+#elif defined(_MSC_VER)
 #pragma pack(push, 1)
 #endif
 struct Star1 { // 28 byte
-#ifdef _MSC_BUILD
+#ifdef _MSC_VER
   unsigned int hip:24;         // 17 bits needed
   unsigned int componentIds:8; //  5 bits needed
 #else
@@ -88,14 +88,14 @@ struct Star1 { // 28 byte
 ;
 #if (defined(__sgi) && defined(_COMPILER_VERSION) && !defined(__GNUC__))
 #pragma pack(0)
-#elif defined(_MSC_BUILD)
+#elif defined(_MSC_VER)
 #pragma pack(pop)
 #endif
 
 
 #if (defined(__sgi) && defined(_COMPILER_VERSION) && !defined(__GNUC__))
 #pragma pack(1)
-#elif defined(_MSC_BUILD)
+#elif defined(_MSC_VER)
 #pragma pack(push, 1)
 #endif
 struct Star2 {  // 10 byte
@@ -127,14 +127,14 @@ struct Star2 {  // 10 byte
 ;
 #if (defined(__sgi) && defined(_COMPILER_VERSION) && !defined(__GNUC__))
 #pragma pack(0)
-#elif defined(_MSC_BUILD)
+#elif defined(_MSC_VER)
 #pragma pack(pop)
 #endif
 
 
 #if (defined(__sgi) && defined(_COMPILER_VERSION) && !defined(__GNUC__))
 #pragma pack(1)
-#elif defined(_MSC_BUILD)
+#elif defined(_MSC_VER)
 #pragma pack(push, 1)
 #endif
 struct Star3 {  // 6 byte
@@ -164,7 +164,7 @@ struct Star3 {  // 6 byte
 ;
 #if (defined(__sgi) && defined(_COMPILER_VERSION) && !defined(__GNUC__))
 #pragma pack(0)
-#elif defined(_MSC_BUILD)
+#elif defined(_MSC_VER)
 #pragma pack(pop)
 #endif
 
