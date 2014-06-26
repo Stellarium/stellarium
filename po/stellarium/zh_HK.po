@@ -7,21 +7,21 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-06-17 01:06+0700\n"
+"POT-Creation-Date: 2014-06-26 10:33+0700\n"
 "PO-Revision-Date: 2014-05-18 04:50+0000\n"
 "Last-Translator: henrysky <Unknown>\n"
 "Language-Team: Chinese (Hong Kong) <zh_HK@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-06-17 06:05+0000\n"
-"X-Generator: Launchpad (build 17045)\n"
+"X-Launchpad-Export-Date: 2014-06-26 05:57+0000\n"
+"X-Generator: Launchpad (build 17065)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:107 src/core/modules/StarMgr.cpp:339
 #: src/core/modules/GridLinesMgr.cpp:695 src/core/modules/LandscapeMgr.cpp:353
 #: src/core/modules/NebulaMgr.cpp:126 src/core/modules/SolarSystem.cpp:155
 #: src/core/StelApp.cpp:468 src/core/StelCore.cpp:176
-#: src/core/StelSkyLayerMgr.cpp:87 src/StelMainView.cpp:308
+#: src/core/StelSkyLayerMgr.cpp:87 src/StelMainView.cpp:309
 msgid "Display Options"
 msgstr "顯示選項"
 
@@ -1055,7 +1055,7 @@ msgid "Deep-sky objects background images"
 msgstr "深空天體背景圖片"
 
 #: src/core/StelMovementMgr.cpp:129 src/gui/StelGui.cpp:185
-#: src/StelMainView.cpp:307
+#: src/StelMainView.cpp:308
 msgid "Miscellaneous"
 msgstr "其它"
 
@@ -1863,15 +1863,15 @@ msgstr "年"
 msgid "This system does not support OpenGL."
 msgstr "系統不支援OpenGL"
 
-#: src/StelMainView.cpp:307
+#: src/StelMainView.cpp:308
 msgid "Save screenshot"
 msgstr "儲存畫面快照"
 
-#: src/StelMainView.cpp:308
+#: src/StelMainView.cpp:309
 msgid "Full-screen mode"
 msgstr "全螢幕模式"
 
-#: src/StelMainView.cpp:414
+#: src/StelMainView.cpp:415
 #, qt-format
 msgid "Stellarium %1"
 msgstr "Stellarium %1"
@@ -2514,8 +2514,8 @@ msgstr "從水星看地球活動"
 
 #. TRANSLATORS: Name and description of script
 #: src/translations.h:267
-msgid "Earth Events from Venus"
-msgstr "從金星看地球活動"
+msgid "Earth Events from a floating city on Venus"
+msgstr ""
 
 #. TRANSLATORS: Name and description of script
 #: src/translations.h:269
@@ -2524,13 +2524,13 @@ msgstr "從火星看地球活動"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:271
-msgid "Earth Greatest Elongations and Brilliancies from Mars"
-msgstr "從火星看地球最大距角的精彩"
+msgid "Earth and Venus Greatest Elongations and Brilliancies from Mars"
+msgstr ""
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:273
-msgid "Earth and Mars Greatest Elongations from Jupiter"
-msgstr "從木星看火星及地球最大距角"
+msgid "Earth and Mars Greatest Elongations and Transits from Callisto"
+msgstr ""
 
 #. TRANSLATORS: Description of the landscape tour script.
 #: src/translations.h:279
@@ -2612,8 +2612,8 @@ msgstr ""
 
 #: src/translations.h:294
 msgid ""
-"Screensaver of various happenings in the Solar System. 187 events in all!"
-msgstr "太陽系各種天文現象 (有187件事件) 的螢幕保護!"
+"Screensaver of various happenings in the Solar System. 232 events in all!"
+msgstr ""
 
 #: src/translations.h:295
 msgid "A tour of the western constellations."
@@ -2645,12 +2645,13 @@ msgid ""
 msgstr ""
 
 #: src/translations.h:301
-msgid "Earth Greatest Elongations and Brilliancies from Mars 2000-3000"
-msgstr "從火星2000-3000年看地球最大距角的精彩"
+msgid ""
+"Earth and Venus Greatest Elongations and Brilliancies from Mars 2000-3000"
+msgstr ""
 
 #: src/translations.h:302
-msgid "Earth Greatest Elongations from Jupiter 2000-3000"
-msgstr "從木星2000-3000年看地球最大距角"
+msgid "Earth Greatest Elongations and Transits from Callisto 2000-3000."
+msgstr ""
 
 #: src/translations.h:306
 msgid "Andorra"
@@ -9711,17 +9712,36 @@ msgstr "字串位置:"
 #~ msgid "Observability analysis"
 #~ msgstr "可觀測性分析插件"
 
+#~ msgid "Earth Events from Venus"
+#~ msgstr "從金星看地球活動"
+
 #~ msgid "1000"
 #~ msgstr "1000"
 
 #~ msgid "Greatest elongation: "
 #~ msgstr "最大距角: "
 
+#~ msgid "Earth and Mars Greatest Elongations from Jupiter"
+#~ msgstr "從木星看火星及地球最大距角"
+
+#~ msgid "Earth Greatest Elongations from Jupiter 2000-3000"
+#~ msgstr "從木星2000-3000年看地球最大距角"
+
+#~ msgid "Earth Greatest Elongations and Brilliancies from Mars"
+#~ msgstr "從火星看地球最大距角的精彩"
+
+#~ msgid "Earth Greatest Elongations and Brilliancies from Mars 2000-3000"
+#~ msgstr "從火星2000-3000年看地球最大距角的精彩"
+
 #~ msgid "Cosmical rise/set"
 #~ msgstr "偕日升/偕日落"
 
 #~ msgid "No Cosmical rise/set."
 #~ msgstr "沒有偕日升/偕日落落."
+
+#~ msgid ""
+#~ "Screensaver of various happenings in the Solar System. 187 events in all!"
+#~ msgstr "太陽系各種天文現象 (有187件事件) 的螢幕保護!"
 
 #~ msgid "Largest Sun separation: "
 #~ msgstr "與太陽最大距離: "
