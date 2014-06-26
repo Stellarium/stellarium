@@ -47,7 +47,7 @@ static inline float IndexToBV(unsigned char bV) {
   return (float)bV*(4.f/127.f)-0.5f;
 }
 
-#if (defined(__sgi) && defined(_COMPILER_VERSION) && !defined(__GNUC__))
+#if ((defined(__sgi) && defined(_COMPILER_VERSION) && !defined(__GNUC__)) || defined(_MSC_BUILD))
 #pragma pack(1)
 #endif
 struct Star1 { // 28 byte
@@ -65,9 +65,9 @@ struct Star1 { // 28 byte
   Uint16 spInt;                // 14 bits needed
   Int32 dx0,dx1,plx;
   enum {MaxPosVal=0x7FFFFFFF};
-  StelObjectP createStelObject(const SpecialZoneArray<Star1> *a,
-					 const SpecialZoneData<Star1> *z) const;
-  void getJ2000Pos(const ZoneData *z,float movementFactor, Vec3f& pos) const {
+  StelObjectP createStelObject(const SpecialZoneArray<Star1> *a, const SpecialZoneData<Star1> *z) const;
+  void getJ2000Pos(const ZoneData *z,float movementFactor, Vec3f& pos) const 
+  {
 	  pos = z->axis0;
 	  pos*=((float)(x0)+movementFactor*dx0);
 	  pos+=((float)(x1)+movementFactor*dx1)*z->axis1;
@@ -84,12 +84,12 @@ struct Star1 { // 28 byte
    __attribute__ ((__packed__))
 #endif
 ;
-#if (defined(__sgi) && defined(_COMPILER_VERSION) && !defined(__GNUC__))
+#if ((defined(__sgi) && defined(_COMPILER_VERSION) && !defined(__GNUC__)) || defined(_MSC_BUILD))
 #pragma pack(0)
 #endif
 
 
-#if (defined(__sgi) && defined(_COMPILER_VERSION) && !defined(__GNUC__))
+#if ((defined(__sgi) && defined(_COMPILER_VERSION) && !defined(__GNUC__)) || defined(_MSC_BUILD))
 #pragma pack(1)
 #endif
 struct Star2 {  // 10 byte
@@ -100,9 +100,9 @@ struct Star2 {  // 10 byte
   unsigned int bV:7;
   unsigned int mag:5;
   enum {MaxPosVal=((1<<19)-1)};
-  StelObjectP createStelObject(const SpecialZoneArray<Star2> *a,
-					 const SpecialZoneData<Star2> *z) const;
-  void getJ2000Pos(const ZoneData *z,float movementFactor, Vec3f& pos) const {
+  StelObjectP createStelObject(const SpecialZoneArray<Star2> *a, const SpecialZoneData<Star2> *z) const;
+  void getJ2000Pos(const ZoneData *z,float movementFactor, Vec3f& pos) const 
+  {
 	  pos = z->axis0;
 	  pos*=((float)(x0)+movementFactor*dx0);
 	  pos+=((float)(x1)+movementFactor*dx1)*z->axis1;
@@ -119,12 +119,12 @@ struct Star2 {  // 10 byte
    __attribute__ ((__packed__))
 #endif
 ;
-#if (defined(__sgi) && defined(_COMPILER_VERSION) && !defined(__GNUC__))
+#if ((defined(__sgi) && defined(_COMPILER_VERSION) && !defined(__GNUC__)) || defined(_MSC_BUILD))
 #pragma pack(0)
 #endif
 
 
-#if (defined(__sgi) && defined(_COMPILER_VERSION) && !defined(__GNUC__))
+#if ((defined(__sgi) && defined(_COMPILER_VERSION) && !defined(__GNUC__)) || defined(_MSC_BUILD))
 #pragma pack(1)
 #endif
 struct Star3 {  // 6 byte
@@ -152,7 +152,7 @@ struct Star3 {  // 6 byte
    __attribute__ ((__packed__))
 #endif
 ;
-#if (defined(__sgi) && defined(_COMPILER_VERSION) && !defined(__GNUC__))
+#if ((defined(__sgi) && defined(_COMPILER_VERSION) && !defined(__GNUC__)) || defined(_MSC_BUILD))
 #pragma pack(0)
 #endif
 
