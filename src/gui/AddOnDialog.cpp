@@ -105,14 +105,21 @@ void AddOnDialog::changePage(QListWidgetItem *current, QListWidgetItem *previous
 			break;
 	}
 
-	// Insert checkboxes to the current tableview
+
+	// Destroys all checkboxes of the previous tableview
+	for(int i=0; i<m_checkBoxes.size(); ++i)
+	{
+	    delete m_checkBoxes.take(i);
+	}
 	m_checkBoxes.clear();
-	for(int i=0; i<m_currentTableView->model()->rowCount(); ++i)
+
+	// Insert checkboxes to the current tableview
+	for(int row=0; row<m_currentTableView->model()->rowCount(); ++row)
 	{
 		QCheckBox* cbox = new QCheckBox();
-		m_currentTableView->setIndexWidget(m_currentTableView->model()->index(i, 3), cbox);
+		m_currentTableView->setIndexWidget(m_currentTableView->model()->index(row, 3), cbox);
 		cbox->setStyleSheet("QCheckBox { padding-left: 8px; }");
-		m_checkBoxes.insert(i, cbox);
+		m_checkBoxes.insert(row, cbox);
 	}
 }
 
