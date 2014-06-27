@@ -117,7 +117,7 @@ void AddOnDialog::changePage(QListWidgetItem *current, QListWidgetItem *previous
 	for(int row=0; row<m_currentTableView->model()->rowCount(); ++row)
 	{
 		QCheckBox* cbox = new QCheckBox();
-		m_currentTableView->setIndexWidget(m_currentTableView->model()->index(row, 4), cbox);
+		m_currentTableView->setIndexWidget(m_currentTableView->model()->index(row, 5), cbox);
 		cbox->setStyleSheet("QCheckBox { padding-left: 8px; }");
 		m_checkBoxes.insert(row, cbox);
 	}
@@ -126,7 +126,7 @@ void AddOnDialog::changePage(QListWidgetItem *current, QListWidgetItem *previous
 void AddOnDialog::setUpTableView(QTableView* tableView)
 {
 	tableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
-	tableView->horizontalHeader()->setSectionResizeMode(4, QHeaderView::ResizeToContents);
+	tableView->horizontalHeader()->setSectionResizeMode(5, QHeaderView::ResizeToContents);
 	tableView->verticalHeader()->setVisible(false);
 	tableView->setAlternatingRowColors(true);
 	tableView->setSelectionBehavior(QAbstractItemView::SelectRows);
@@ -140,7 +140,7 @@ void AddOnDialog::initModel(QTableView* tableView, Category category)
 	switch (category)
 	{
 		case CATALOG:
-			query = "SELECT plugin.id, title, version, installed, NULL "
+			query = "SELECT plugin.id, addon.id, title, version, installed, NULL "
 				"FROM addon INNER JOIN plugin"
 				" ON addon.id = plugin.addon UNION ";
 			table = "star";
@@ -162,17 +162,19 @@ void AddOnDialog::initModel(QTableView* tableView, Category category)
 			break;
 	}
 
-	query = query % "SELECT " % table % ".id, title, version, installed, NULL "
+	query = query % "SELECT " % table % ".id, addon.id, title, version, installed, NULL "
 		"FROM addon INNER JOIN " % table %
 		" ON addon.id = " % table % ".addon";
 	model->setQuery(query);
 	model->setHeaderData(0, Qt::Horizontal, q_("Id"));
-	model->setHeaderData(1, Qt::Horizontal, q_("Title"));
-	model->setHeaderData(2, Qt::Horizontal, q_("Last Version"));
-	model->setHeaderData(3, Qt::Horizontal, q_("Installed Version"));
-	model->setHeaderData(4, Qt::Horizontal, "");
+	model->setHeaderData(1, Qt::Horizontal, q_("AddOnId"));
+	model->setHeaderData(2, Qt::Horizontal, q_("Title"));
+	model->setHeaderData(3, Qt::Horizontal, q_("Last Version"));
+	model->setHeaderData(4, Qt::Horizontal, q_("Installed Version"));
+	model->setHeaderData(5, Qt::Horizontal, "");
 	tableView->setModel(model);
 	tableView->setColumnHidden(0, true); // hide id
+	tableView->setColumnHidden(1, true); // hide addonid
 }
 
 void AddOnDialog::populateTables()
@@ -260,6 +262,7 @@ void AddOnDialog::installSelectedRows() {
 		if (m_checkBoxes.value(i)->checkState())
 		{
 			int id = m_currentTableView->model()->index(i, 0).data().toInt();
+			int addonid = m_currentTableView->model()->index(i, 1).data().toInt();
 			Category category = ui->stackedWidget->currentIndex();
 		}
 	}
