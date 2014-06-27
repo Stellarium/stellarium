@@ -117,7 +117,7 @@ void AddOnDialog::changePage(QListWidgetItem *current, QListWidgetItem *previous
 	for(int row=0; row<m_currentTableView->model()->rowCount(); ++row)
 	{
 		QCheckBox* cbox = new QCheckBox();
-		m_currentTableView->setIndexWidget(m_currentTableView->model()->index(row, 3), cbox);
+		m_currentTableView->setIndexWidget(m_currentTableView->model()->index(row, 4), cbox);
 		cbox->setStyleSheet("QCheckBox { padding-left: 8px; }");
 		m_checkBoxes.insert(row, cbox);
 	}
@@ -126,7 +126,7 @@ void AddOnDialog::changePage(QListWidgetItem *current, QListWidgetItem *previous
 void AddOnDialog::setUpTableView(QTableView* tableView)
 {
 	tableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
-	tableView->horizontalHeader()->setSectionResizeMode(3, QHeaderView::ResizeToContents);
+	tableView->horizontalHeader()->setSectionResizeMode(4, QHeaderView::ResizeToContents);
 	tableView->verticalHeader()->setVisible(false);
 	tableView->setAlternatingRowColors(true);
 	tableView->setSelectionBehavior(QAbstractItemView::SelectRows);
@@ -162,15 +162,17 @@ void AddOnDialog::initModel(QTableView* tableView, Category category)
 			break;
 	}
 
-	query = query % "SELECT title, version, installed, NULL "
+	query = query % "SELECT " % table % ".id, title, version, installed, NULL "
 		"FROM addon INNER JOIN " % table %
 		" ON addon.id = " % table % ".addon";
 	model->setQuery(query);
-	model->setHeaderData(0, Qt::Horizontal, q_("Title"));
-	model->setHeaderData(1, Qt::Horizontal, q_("Last Version"));
-	model->setHeaderData(2, Qt::Horizontal, q_("Installed Version"));
-	model->setHeaderData(3, Qt::Horizontal, "");
+	model->setHeaderData(0, Qt::Horizontal, q_("Id"));
+	model->setHeaderData(1, Qt::Horizontal, q_("Title"));
+	model->setHeaderData(2, Qt::Horizontal, q_("Last Version"));
+	model->setHeaderData(3, Qt::Horizontal, q_("Installed Version"));
+	model->setHeaderData(4, Qt::Horizontal, "");
 	tableView->setModel(model);
+	tableView->setColumnHidden(0, true); // hide id
 }
 
 void AddOnDialog::populateTables()
@@ -253,9 +255,11 @@ void AddOnDialog::downloadFinished()
 void AddOnDialog::installSelectedRows() {
 	Q_ASSERT(m_checkBoxes.count() == m_currentTableView->model()->rowCount());
 
-	// get selected rows
 	for (int i=0;i<m_checkBoxes.count(); ++i)
 	{
-		qDebug() << i << m_checkBoxes.value(i)->checkState();
+		if (m_checkBoxes.value(i)->checkState())
+		{
+			QString title = m_currentTableView->model()->index(i, 0).data().toString();
+		}
 	}
 }

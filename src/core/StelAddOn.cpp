@@ -122,7 +122,8 @@ bool StelAddOn::createAddonTables()
 			"addon INTEGER UNIQUE)";
 
 	QSqlQuery query(m_db);
-	foreach (QString table, addonTables) {
+	foreach (QString table, addonTables)
+	{
 		query.prepare(table);
 		if (!query.exec())
 		{
@@ -183,11 +184,13 @@ void StelAddOn::setLastUpdate(qint64 time) {
 	}
 }
 
-void StelAddOn::updateDatabase(QString webresult) {
+void StelAddOn::updateDatabase(QString webresult)
+{
 	QSqlQuery query(m_db);
 	QStringList queries = webresult.split("<br>");
 	queries.removeFirst();
-	foreach (QString insert, queries) {
+	foreach (QString insert, queries)
+	{
 		query.prepare(insert.simplified());
 		if (!query.exec())
 		{
@@ -196,3 +199,5 @@ void StelAddOn::updateDatabase(QString webresult) {
 		}
 	}
 }
+
+
