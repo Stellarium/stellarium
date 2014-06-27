@@ -140,7 +140,7 @@ void AddOnDialog::initModel(QTableView* tableView, Category category)
 	switch (category)
 	{
 		case CATALOG:
-			query = "SELECT title, version, installed "
+			query = "SELECT plugin.id, title, version, installed, NULL "
 				"FROM addon INNER JOIN plugin"
 				" ON addon.id = plugin.addon UNION ";
 			table = "star";
@@ -259,7 +259,8 @@ void AddOnDialog::installSelectedRows() {
 	{
 		if (m_checkBoxes.value(i)->checkState())
 		{
-			QString title = m_currentTableView->model()->index(i, 0).data().toString();
+			int id = m_currentTableView->model()->index(i, 0).data().toInt();
+			Category category = ui->stackedWidget->currentIndex();
 		}
 	}
 }

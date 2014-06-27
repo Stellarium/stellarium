@@ -40,6 +40,17 @@ public:
 	//! Notify that the application style changed
 	void styleChanged();
 
+	//! All categories sorted according to the tab index.
+	//! @enum Category
+	enum Category {
+		CATALOG,
+		LANDSCAPE,
+		LANGUAGEPACK,
+		SCRIPT,
+		STARLORE,
+		TEXTURE
+	};
+
 public slots:
 	void retranslate();
 
@@ -56,17 +67,6 @@ private slots:
 	void installSelectedRows();
 
 private:
-	//! Defines the columns that will be displayed in the table view.
-	//! @enum ModelColumns
-	enum Category {
-		CATALOG,
-		LANDSCAPE,
-		LANGUAGEPACK,
-		SCRIPT,
-		STARLORE,
-		TEXTURE
-	};
-
 	StelAddOn m_StelAddOn;
 	QNetworkReply* m_pUpdateCatalogReply;
 	QTableView* m_currentTableView;
