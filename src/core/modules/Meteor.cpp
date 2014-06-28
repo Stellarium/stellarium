@@ -26,7 +26,7 @@
 
 StelTextureSP Meteor::bolideTexture;
 
-Meteor::Meteor(const StelCore* core, double v)
+Meteor::Meteor(const StelCore* core, float v)
 	: m_distMultiplier(0.)
 	, m_segments(10)
 {
@@ -35,8 +35,8 @@ Meteor::Meteor(const StelCore* core, double v)
 	m_speed = 11+(double)rand()/((double)RAND_MAX+1)*(v-11);
 
 	// view matrix of sporadic meteors model
-	double alpha = (double)rand()/((double)RAND_MAX+1)*2*M_PI;
-	double delta = M_PI_2 - (double)rand()/((double)RAND_MAX+1)*M_PI;
+	float alpha = (double)rand()/((double)RAND_MAX+1)*2*M_PI;
+	float delta = M_PI_2 - (double)rand()/((double)RAND_MAX+1)*M_PI;
 	m_viewMatrix = Mat4d::zrotation(alpha) * Mat4d::yrotation(delta);
 
 	// building meteor model
@@ -57,8 +57,8 @@ Meteor::~Meteor()
 // returns true if alive
 bool Meteor::initMeteorModel(const StelCore* core, const int segments, const Mat4d viewMatrix, MeteorModel &mm)
 {
-	double high_range = EARTH_RADIUS + HIGH_ALTITUDE;
-	double low_range = EARTH_RADIUS + LOW_ALTITUDE;
+	float high_range = EARTH_RADIUS + HIGH_ALTITUDE;
+	float low_range = EARTH_RADIUS + LOW_ALTITUDE;
 
 	// find observer position in meteor coordinate system
 	mm.obs = core->altAzToJ2000(Vec3d(0,0,EARTH_RADIUS));
@@ -66,14 +66,14 @@ bool Meteor::initMeteorModel(const StelCore* core, const int segments, const Mat
 
 	// select random trajectory using polar coordinates in XY plane, centered on observer
 	mm.xydistance = (double)rand() / ((double)RAND_MAX+1)*(VISIBLE_RADIUS);
-	double angle = (double)rand() / ((double)RAND_MAX+1)*2*M_PI;
+	float angle = (double)rand() / ((double)RAND_MAX+1)*2*M_PI;
 
 	// set meteor start x,y
 	mm.position[0] = mm.posTrain[0] = mm.xydistance*cos(angle) + mm.obs[0];
 	mm.position[1] = mm.posTrain[1] = mm.xydistance*sin(angle) + mm.obs[1];
 
 	// D is distance from center of earth
-	double D = sqrt(mm.position[0]*mm.position[0] + mm.position[1]*mm.position[1]);
+	float D = sqrt(mm.position[0]*mm.position[0] + mm.position[1]*mm.position[1]);
 
 	if (D > high_range)     // won't be visible, meteor still dead
 	{
@@ -162,7 +162,7 @@ Vec4f Meteor::getColorFromName(QString colorName) {
 
 QList<Meteor::colorPair> Meteor::getRandColor() {
 	QList<colorPair> colors;
-	double prob = (double)rand()/((double)RAND_MAX+1);
+	float prob = (double)rand()/((double)RAND_MAX+1);
 	if (prob > 0.9) {
 		colors.push_back(Meteor::colorPair("white", 70));
 		colors.push_back(Meteor::colorPair("orangeYellow", 10));
@@ -226,7 +226,7 @@ bool Meteor::updateMeteorModel(double deltaTime, double speed, MeteorModel &mm)
 	}
 
 	// *** would need time direction multiplier to allow reverse time replay
-	double dt = 820+(double)rand()/((double)RAND_MAX+1)*185; // range 820-1005
+	float dt = 820+(double)rand()/((double)RAND_MAX+1)*185; // range 820-1005
 	mm.position[2] -= speed*deltaTime/dt;
 
 	// train doesn't extend beyond start of burn
@@ -272,10 +272,10 @@ void Meteor::insertVertex(const StelCore* core, Mat4d viewMatrix, QVector<Vec3d>
 	vertexArray.push_back(vertex);
 }
 
-void Meteor::calculateThickness(const StelCore* core, double &thickness, double &bolideSize)
+void Meteor::calculateThickness(const StelCore* core, float &thickness, float &bolideSize)
 {
-	double maxFOV = core->getMovementMgr()->getMaxFov();
-	double FOV = core->getMovementMgr()->getCurrentFov();
+	float maxFOV = core->getMovementMgr()->getMaxFov();
+	float FOV = core->getMovementMgr()->getCurrentFov();
 	thickness = 2*log(FOV + 0.25)/(1.2*maxFOV - (FOV + 0.25)) + 0.01;
 	if (FOV <= 0.5)
 	{
@@ -287,7 +287,7 @@ void Meteor::calculateThickness(const StelCore* core, double &thickness, double 
 }
 
 void Meteor::drawBolide(const StelCore* core, StelPainter& sPainter, MeteorModel mm,
-			Mat4d viewMatrix, const double bolideSize)
+			Mat4d viewMatrix, const float bolideSize)
 {
 	if (!bolideSize) {
 		return;
@@ -359,7 +359,7 @@ void Meteor::drawTrain(const StelCore *core, StelPainter& sPainter, MeteorModel 
 	posTrainR[0] -= thickness;
 
 	for (int i=0; i<segments; i++) {
-		double mag = mm.mag * i/(3* (segments-1));
+		float mag = mm.mag * i/(3* (segments-1));
 		if (i > mm.firstBrightSegment) {
 			mag *= 12/5;
 		}
@@ -423,7 +423,7 @@ void Meteor::draw(const StelCore* core, StelPainter& sPainter)
 		return;
 	}
 
-	double thickness, bolideSize;
+	float thickness, bolideSize;
 	calculateThickness(core, thickness, bolideSize);
 
 	drawTrain(core, sPainter, meteor, m_viewMatrix, thickness,

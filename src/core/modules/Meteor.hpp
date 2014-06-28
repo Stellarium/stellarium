@@ -49,17 +49,17 @@ public:
 		Vec3d obs;         //! observer position
 		Vec3d position;    //! equatorial coordinate position
 		Vec3d posTrain;    //! end of train
-		double xydistance; //! Distance in XY plane (orthogonal to meteor path) from observer to meteor
-		double minDist;    //! Nearest point to observer along path
-		double startH;     //! Start height above center of earth
-		double endH;       //! End height
+		float xydistance; //! Distance in XY plane (orthogonal to meteor path) from observer to meteor
+		float minDist;    //! Nearest point to observer along path
+		float startH;     //! Start height above center of earth
+		float endH;       //! End height
 		float mag;	   //! Apparent magnitude at head, 0-1
 		int firstBrightSegment; //! First bright segment of the train
 	};
 
 	//! Create a Meteor object.
 	//! @param v the velocity of the meteor in km/s.
-	Meteor(const StelCore*, double v);
+	Meteor(const StelCore*, float v);
 	virtual ~Meteor();
 	
 	//! Updates the position of the meteor, and expires it if necessary.
@@ -76,10 +76,10 @@ public:
 
 	//! Draws the meteor bolide. (useful to be reused in MeteorShowers plugin)
 	static void drawBolide(const StelCore *core, StelPainter &sPainter, MeteorModel mm,
-			       Mat4d viewMatrix, const double bolideSize);
+			       Mat4d viewMatrix, const float bolideSize);
 
 	//! Calculates the train thickness and bolide size.
-	static void calculateThickness(const StelCore* core, double &thickness, double &bolideSize);
+	static void calculateThickness(const StelCore* core, float &thickness, float &bolideSize);
 
 	//! <colorName, intensity>
 	typedef QPair<QString, int> colorPair;
@@ -109,7 +109,7 @@ private:
 
 	bool m_alive;        //! Indicate if the meteor it still visible
 
-	double m_speed;      //! Velocity of meteor in km/s
+	float m_speed;      //! Velocity of meteor in km/s
 	Mat4d m_viewMatrix;  //! tranformation matrix to align radiant with earth direction of travel
 	MeteorModel meteor;  //! Parameters of meteor model
 	double m_distMultiplier;  //! Scale magnitude due to changes in distance

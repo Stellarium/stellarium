@@ -21,9 +21,9 @@
 #include "MeteorStream.hpp"
 
 MeteorStream::MeteorStream(const StelCore* core,
-			   double speed,
-			   double radiantAlpha,
-			   double radiantDelta,
+			   int speed,
+			   float radiantAlpha,
+			   float radiantDelta,
 			   float pidx,
 			   QList<MeteorShower::colorPair> colors)
 	: m_speed(speed)
@@ -117,7 +117,7 @@ void MeteorStream::draw(const StelCore* core, StelPainter& sPainter)
 		return;
 	}
 
-	double thickness, bolideSize;
+	float thickness, bolideSize;
 	Meteor::calculateThickness(core, thickness, bolideSize);
 
 	Meteor::drawTrain(core, sPainter, meteor, m_viewMatrix, thickness,
