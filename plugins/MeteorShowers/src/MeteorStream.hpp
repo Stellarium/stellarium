@@ -40,9 +40,9 @@ public:
 	//! @param rDelta the radiant delta in rad
 	//! @param pidx population index
 	MeteorStream(const StelCore*,
-		     double speed,
-		     double radiantAlpha,
-		     double radiantDelta,
+		     int speed,
+		     float radiantAlpha,
+		     float radiantDelta,
 		     float pidx,
 		     QList<MeteorShower::colorPair> colors);
 
@@ -58,7 +58,7 @@ public:
 private:
 	bool m_alive;             //! Indicate if the meteor it still visible
 
-	double m_speed;                 //! Velocity of meteor in km/s
+	float m_speed;              //! Velocity of meteor in km/s
 	Mat4d m_viewMatrix;         //! View Matrix
 	Meteor::MeteorModel meteor; //! Parameters of meteor model
 
