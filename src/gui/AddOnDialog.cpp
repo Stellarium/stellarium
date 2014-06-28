@@ -143,22 +143,22 @@ void AddOnDialog::initModel(QTableView* tableView, Category category)
 			query = "SELECT plugin_catalog.id, addon.id, title, version, installed, NULL "
 				"FROM addon INNER JOIN plugin"
 				" ON addon.id = plugin.addon UNION ";
-			table = "star_catalog";
+			table = TABLE_STAR_CATALOG;
 			break;
 		case LANDSCAPE:
-			table = "landscape";
+			table = TABLE_LANDSCAPE;
 			break;
 		case LANGUAGEPACK:
-			table = "language_pack";
+			table = TABLE_LANGUAGE_PACK;
 			break;
 		case SCRIPT:
-			table = "script";
+			table = TABLE_SCRIPT;
 			break;
 		case STARLORE:
-			table = "starlore";
+			table = TABLE_STARLORE;
 			break;
 		case TEXTURE:
-			table = "texture";
+			table = TABLE_TEXTURE;
 			break;
 	}
 

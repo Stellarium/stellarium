@@ -75,7 +75,7 @@ bool StelAddOn::createAddonTables()
 {
 	QStringList addonTables;
 
-	addonTables << "CREATE TABLE IF NOT EXISTS addon ("
+	addonTables << "CREATE TABLE IF NOT EXISTS " % TABLE_ADDON % " ("
 			"id INTEGER primary key AUTOINCREMENT, "
 			"title TEXT UNIQUE, "
 			"description TEXT, "
@@ -91,34 +91,34 @@ bool StelAddOn::createAddonTables()
 			"checksum TEXT, "
 			"last_update TEXT)";
 
-	addonTables << "CREATE TABLE IF NOT EXISTS plugin_catalog ("
+	addonTables << "CREATE TABLE IF NOT EXISTS " % TABLE_PLUGIN_CATALOG % " ("
 			"id INTEGER primary key AUTOINCREMENT, "
 			"addon INTEGER UNIQUE)";
 
-	addonTables << "CREATE TABLE IF NOT EXISTS star_catalog ("
+	addonTables << "CREATE TABLE IF NOT EXISTS " % TABLE_STAR_CATALOG % " ("
 			"id INTEGER primary key AUTOINCREMENT, "
 			"addon INTEGER UNIQUE, "
 			"count INTEGER, "
 			"mag_range TEXT)";
 
-	addonTables << "CREATE TABLE IF NOT EXISTS landscape ("
+	addonTables << "CREATE TABLE IF NOT EXISTS " % TABLE_LANDSCAPE % " ("
 			"id INTEGER primary key AUTOINCREMENT, "
 			"addon INTEGER UNIQUE, "
 			"thumbnail TEXT)";
 
-	addonTables << "CREATE TABLE IF NOT EXISTS language_pack ("
+	addonTables << "CREATE TABLE IF NOT EXISTS " % TABLE_LANGUAGE_PACK % " ("
 			"id INTEGER primary key AUTOINCREMENT, "
 			"addon INTEGER UNIQUE)";
 
-	addonTables << "CREATE TABLE IF NOT EXISTS script ("
+	addonTables << "CREATE TABLE IF NOT EXISTS " % TABLE_SCRIPT % " ("
 			"id INTEGER primary key AUTOINCREMENT, "
 			"addon INTEGER UNIQUE)";
 
-	addonTables << "CREATE TABLE IF NOT EXISTS starlore ("
+	addonTables << "CREATE TABLE IF NOT EXISTS " % TABLE_STARLORE % " ("
 			"id INTEGER primary key AUTOINCREMENT, "
 			"addon INTEGER UNIQUE)";
 
-	addonTables << "CREATE TABLE IF NOT EXISTS texture ("
+	addonTables << "CREATE TABLE IF NOT EXISTS " % TABLE_TEXTURE % " ("
 			"id INTEGER primary key AUTOINCREMENT, "
 			"addon INTEGER UNIQUE)";
 
@@ -140,7 +140,7 @@ bool StelAddOn::createTableLicense()
 {
 	QSqlQuery query(m_db);
 	query.prepare(
-		"CREATE TABLE IF NOT EXISTS license ("
+		"CREATE TABLE IF NOT EXISTS " % TABLE_LICENSE % " ("
 			"id INTEGER primary key AUTOINCREMENT, "
 			"name TEXT, "
 			"url TEXT)"
@@ -158,7 +158,7 @@ bool StelAddOn::createTableAuthor()
 {
 	QSqlQuery query(m_db);
 	query.prepare(
-		"CREATE TABLE IF NOT EXISTS author ("
+		"CREATE TABLE IF NOT EXISTS " % TABLE_AUTHOR % " ("
 			"id INTEGER primary key AUTOINCREMENT, "
 			"name TEXT, "
 			"email TEXT, "
