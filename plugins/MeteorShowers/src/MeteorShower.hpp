@@ -131,10 +131,10 @@ private:
 	QString designation;            //! The designation of the meteor shower
 	QList<activityData> activity;	//! List of activity
 	int speed;                      //! Speed of meteors
-	double rAlphaPeak;              //! R.A. for radiant of meteor shower on the peak day
-	double rDeltaPeak;              //! Dec. for radiant of meteor shower on the peak day
-	double driftAlpha;		//! Drift of R.A.
-	double driftDelta;		//! Drift of Dec.
+	float rAlphaPeak;               //! R.A. for radiant of meteor shower on the peak day
+	float rDeltaPeak;               //! Dec. for radiant of meteor shower on the peak day
+	float driftAlpha;		//! Drift of R.A.
+	float driftDelta;		//! Drift of Dec.
 	QString parentObj;		//! Parent object for meteor shower
 	float pidx;			//! The population index
 	QList<colorPair> colors;	//! <colorName, 0-100>

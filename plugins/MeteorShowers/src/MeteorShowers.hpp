@@ -363,8 +363,8 @@ private:
 		int zhr;			//! ZHR of shower
 		QString variable;		//! value of variable for ZHR
 		int speed;			//! Speed of meteors
-		double radiantAlpha;		//! R.A. for radiant of meteor shower
-		double radiantDelta;		//! Dec. for radiant of meteor shower
+		float radiantAlpha;		//! R.A. for radiant of meteor shower
+		float radiantDelta;		//! Dec. for radiant of meteor shower
 		float pidx;			//! Population index
 		QList<MeteorShower::colorPair> colors;	//! Population index
 	} activeData;
