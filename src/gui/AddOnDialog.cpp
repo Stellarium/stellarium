@@ -140,10 +140,10 @@ void AddOnDialog::initModel(QTableView* tableView, Category category)
 	switch (category)
 	{
 		case CATALOG:
-			query = "SELECT plugin.id, addon.id, title, version, installed, NULL "
+			query = "SELECT plugin_catalog.id, addon.id, title, version, installed, NULL "
 				"FROM addon INNER JOIN plugin"
 				" ON addon.id = plugin.addon UNION ";
-			table = "star";
+			table = "star_catalog";
 			break;
 		case LANDSCAPE:
 			table = "landscape";
@@ -263,7 +263,7 @@ void AddOnDialog::installSelectedRows() {
 		{
 			int id = m_currentTableView->model()->index(i, 0).data().toInt();
 			int addonid = m_currentTableView->model()->index(i, 1).data().toInt();
-			Category category = ui->stackedWidget->currentIndex();
+			//m_StelAddOn.install(id, addonid, "landscape");
 		}
 	}
 }

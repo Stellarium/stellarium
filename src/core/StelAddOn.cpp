@@ -21,6 +21,7 @@
 #include <QFile>
 #include <QSqlError>
 #include <QSqlQuery>
+#include <QSqlRecord>
 #include <QStringBuilder>
 
 #include "StelAddOn.hpp"
@@ -90,11 +91,11 @@ bool StelAddOn::createAddonTables()
 			"checksum TEXT, "
 			"last_update TEXT)";
 
-	addonTables << "CREATE TABLE IF NOT EXISTS plugin ("
+	addonTables << "CREATE TABLE IF NOT EXISTS plugin_catalog ("
 			"id INTEGER primary key AUTOINCREMENT, "
 			"addon INTEGER UNIQUE)";
 
-	addonTables << "CREATE TABLE IF NOT EXISTS star ("
+	addonTables << "CREATE TABLE IF NOT EXISTS star_catalog ("
 			"id INTEGER primary key AUTOINCREMENT, "
 			"addon INTEGER UNIQUE, "
 			"count INTEGER, "
@@ -199,5 +200,3 @@ void StelAddOn::updateDatabase(QString webresult)
 		}
 	}
 }
-
-
