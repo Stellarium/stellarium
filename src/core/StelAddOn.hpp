@@ -22,12 +22,14 @@
 
 #include <QDateTime>
 #include <QSqlDatabase>
+#include <QUrl>
 
 class StelAddOn
 {
 public:
 	StelAddOn();
 
+	void install(int id, int addonId, QString table);
 	void updateDatabase(QString webresult);
 	void setLastUpdate(qint64 time);
 	QString getLastUpdateString()
@@ -48,6 +50,12 @@ private:
 	bool createAddonTables();
 	bool createTableLicense();
 	bool createTableAuthor();
+
+	struct AddOnInfo {
+	    QUrl url;
+	};
+
+	AddOnInfo getAddOnInfo(int addonId);
 };
 
 #endif // _STELADDON_HPP_

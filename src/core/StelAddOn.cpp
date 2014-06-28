@@ -200,3 +200,49 @@ void StelAddOn::updateDatabase(QString webresult)
 		}
 	}
 }
+
+StelAddOn::AddOnInfo StelAddOn::getAddOnInfo(int addonId)
+{
+	if (addonId < 1) {
+		return AddOnInfo();
+	}
+
+	QSqlQuery query(m_db);
+	query.prepare("SELECT url FROM addon WHERE id=:id");
+	query.bindValue(":id", addonId);
+
+	if (!query.exec()) {
+		qDebug() << "Add-On Manager :" << m_db.lastError();
+		return AddOnInfo();
+	}
+
+	QSqlRecord queryRecord = query.record();
+	const int urlColumn = queryRecord.indexOf("url");
+	if (query.next()) {
+		AddOnInfo addonInfo;
+		addonInfo.url = QUrl(query.value(urlColumn).toString());
+		return addonInfo;
+	}
+
+	return AddOnInfo();
+}
+
+void StelAddOn::install(int id, int addonId, QString table)
+{
+	AddOnInfo addonInfo = getAddOnInfo(addonId);
+
+	// getting filename
+	QStringList splitedURL = addonInfo.url.toString().split("/");
+	QString filename = splitedURL.last();
+	if (filename.isEmpty())
+	{
+		filename = splitedURL.at(splitedURL.length() - 2);
+	}
+
+	// checking if we have this file in add-on path (disk)
+	if (QFile(m_sAddonPath % filename).exists())
+	{
+		//intallFile();
+		return;
+	}
+}
