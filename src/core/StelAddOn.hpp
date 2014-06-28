@@ -27,6 +27,7 @@
 const QString TABLE_AUTHOR = "author";
 const QString TABLE_LICENSE = "license";
 const QString TABLE_ADDON = "addon";
+const QString TABLE_CATALOG = "catalog";
 const QString TABLE_LANDSCAPE = "landscape";
 const QString TABLE_LANGUAGE_PACK = "language_pack";
 const QString TABLE_PLUGIN_CATALOG = "plugin_catalog";

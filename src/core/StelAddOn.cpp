@@ -91,13 +91,18 @@ bool StelAddOn::createAddonTables()
 			"checksum TEXT, "
 			"last_update TEXT)";
 
+	addonTables << "CREATE TABLE IF NOT EXISTS " % TABLE_CATALOG % " ("
+			"id INTEGER primary key AUTOINCREMENT, "
+			"addon INTEGER UNIQUE, "
+			"type TEXT)";
+
 	addonTables << "CREATE TABLE IF NOT EXISTS " % TABLE_PLUGIN_CATALOG % " ("
 			"id INTEGER primary key AUTOINCREMENT, "
-			"addon INTEGER UNIQUE)";
+			"catalog INTEGER UNIQUE)";
 
 	addonTables << "CREATE TABLE IF NOT EXISTS " % TABLE_STAR_CATALOG % " ("
 			"id INTEGER primary key AUTOINCREMENT, "
-			"addon INTEGER UNIQUE, "
+			"catalog INTEGER UNIQUE, "
 			"count INTEGER, "
 			"mag_range TEXT)";
 
