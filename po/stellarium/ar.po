@@ -7,21 +7,21 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-06-17 01:06+0700\n"
-"PO-Revision-Date: 2014-05-09 00:32+0000\n"
+"POT-Creation-Date: 2014-06-26 10:33+0700\n"
+"PO-Revision-Date: 2014-06-29 04:21+0000\n"
 "Last-Translator: Khalid AlAjaji <Unknown>\n"
 "Language-Team: Arabic <ar@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-06-17 05:44+0000\n"
-"X-Generator: Launchpad (build 17045)\n"
+"X-Launchpad-Export-Date: 2014-06-29 05:33+0000\n"
+"X-Generator: Launchpad (build 17077)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:107 src/core/modules/StarMgr.cpp:339
 #: src/core/modules/GridLinesMgr.cpp:695 src/core/modules/LandscapeMgr.cpp:353
 #: src/core/modules/NebulaMgr.cpp:126 src/core/modules/SolarSystem.cpp:155
 #: src/core/StelApp.cpp:468 src/core/StelCore.cpp:176
-#: src/core/StelSkyLayerMgr.cpp:87 src/StelMainView.cpp:308
+#: src/core/StelSkyLayerMgr.cpp:87 src/StelMainView.cpp:309
 msgid "Display Options"
 msgstr "اختيارات العرض"
 
@@ -1116,7 +1116,7 @@ msgid "Deep-sky objects background images"
 msgstr "الصور الخلفية لأجرام الفضاء السحيق"
 
 #: src/core/StelMovementMgr.cpp:129 src/gui/StelGui.cpp:185
-#: src/StelMainView.cpp:307
+#: src/StelMainView.cpp:308
 msgid "Miscellaneous"
 msgstr "منوعات"
 
@@ -1943,15 +1943,15 @@ msgstr "السنة"
 msgid "This system does not support OpenGL."
 msgstr "(OpenGL)هذا النظام لا يدعم مكتبة الرسومات المفتوحة"
 
-#: src/StelMainView.cpp:307
+#: src/StelMainView.cpp:308
 msgid "Save screenshot"
 msgstr "احفظ لقطة الشاشة"
 
-#: src/StelMainView.cpp:308
+#: src/StelMainView.cpp:309
 msgid "Full-screen mode"
 msgstr "نَسَق الشاشة الكاملة"
 
-#: src/StelMainView.cpp:414
+#: src/StelMainView.cpp:415
 #, qt-format
 msgid "Stellarium %1"
 msgstr "ستيللاريوم %1"
@@ -2311,22 +2311,22 @@ msgstr "ميكميك"
 #. TRANSLATORS: Asteroid (3200) Phaethon
 #: src/translations.h:139
 msgid "Phaethon"
-msgstr ""
+msgstr "فيثن"
 
 #. TRANSLATORS: Asteroid (1866) Sisyphus
 #: src/translations.h:141
 msgid "Sisyphus"
-msgstr ""
+msgstr "سيسفس"
 
 #. TRANSLATORS: Asteroid (1864) Daedalus
 #: src/translations.h:143
 msgid "Daedalus"
-msgstr ""
+msgstr "دادلس"
 
 #. TRANSLATORS: Asteroid (1566) Icarus
 #: src/translations.h:145
 msgid "Icarus"
-msgstr ""
+msgstr "إيكارس"
 
 #. TRANSLATORS: Proper name of comet C/1680 V1
 #: src/translations.h:148
@@ -2594,8 +2594,8 @@ msgstr "أحداث كوكب الأرض الفلكية كما تبدو من عط�
 
 #. TRANSLATORS: Name and description of script
 #: src/translations.h:267
-msgid "Earth Events from Venus"
-msgstr "أحداث كوكب الأرض الفلكية كما تبدو من الزهرة"
+msgid "Earth Events from a floating city on Venus"
+msgstr "أحداث الأرض من مدينة عائمة على الزهرة"
 
 #. TRANSLATORS: Name and description of script
 #: src/translations.h:269
@@ -2604,13 +2604,13 @@ msgstr "أحداث كوكب الأرض الفلكية كما تبدو من ال�
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:271
-msgid "Earth Greatest Elongations and Brilliancies from Mars"
-msgstr "الاستطالة العظمى وسطوع الأرض كما تبدو من المريخ"
+msgid "Earth and Venus Greatest Elongations and Brilliancies from Mars"
+msgstr "الاستطالة العظمى والسطوع  للأرض والزهرة من المريخ"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:273
-msgid "Earth and Mars Greatest Elongations from Jupiter"
-msgstr "الاستطالة العظمى للأرض والمريخ كما تبدو من المشتري"
+msgid "Earth and Mars Greatest Elongations and Transits from Callisto"
+msgstr "الاستطالة العظمى والعبور للأرض والمريخ من كاليستو"
 
 #. TRANSLATORS: Description of the landscape tour script.
 #: src/translations.h:279
@@ -2707,8 +2707,8 @@ msgstr ""
 
 #: src/translations.h:294
 msgid ""
-"Screensaver of various happenings in the Solar System. 187 events in all!"
-msgstr "حافظ للشاشة يعرض 187 حدثاً من الأحداث الفلكية في النظام الشمسي"
+"Screensaver of various happenings in the Solar System. 232 events in all!"
+msgstr "حافظ للشاشة يعرض 232 حدثاً في النظام الشمسي"
 
 #: src/translations.h:295
 msgid "A tour of the western constellations."
@@ -2743,14 +2743,15 @@ msgstr ""
 "المستعرات العظيمة."
 
 #: src/translations.h:301
-msgid "Earth Greatest Elongations and Brilliancies from Mars 2000-3000"
+msgid ""
+"Earth and Venus Greatest Elongations and Brilliancies from Mars 2000-3000"
 msgstr ""
-"الاستطالة العظمى وسطوع الأرض كما تبدو من المريخ من سنة 2000 إلى سنة 3000 م"
+"الاستطالة العظمى والسطوع  للأرض والزهرة من المريخ خلال الفترة 2000 م - 3000 م"
 
 #: src/translations.h:302
-msgid "Earth Greatest Elongations from Jupiter 2000-3000"
+msgid "Earth Greatest Elongations and Transits from Callisto 2000-3000."
 msgstr ""
-"الاستطالة العظمى للأرض كما تبدو من المشتري من سنة 2000 إلى سنة 3000 م"
+"الاستطالة العظمى والعبور للأرض من كاليستو خلال الفترة 2000 م - 3000 م"
 
 #: src/translations.h:306
 msgid "Andorra"
@@ -3827,6 +3828,7 @@ msgstr "الموقع"
 msgid ""
 "Standard list of locations contains only English names (without diacritics!)"
 msgstr ""
+"قائمة المواقع المعيارية تحوي فقط الأسماء بالإنجليزية من دون علامات التشكيل"
 
 #: src/ui_locationDialogGui.h:404
 msgid "Current location information"
@@ -5601,6 +5603,8 @@ msgstr "استخدم الدرجات والدقائق لحقل الرؤية ال�
 msgid ""
 "Mark it if you want the FOV value the same like at the startup of Stellarium."
 msgstr ""
+"علّم على هذا الاختيار إذا كنت ترغب أن تكون قيمة حقل الرؤية مماثلة لحقل "
+"الرؤية عند بدء برنامج ستيللاريوم"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1070
 msgid "Restore FOV to initial values"
@@ -9727,51 +9731,51 @@ msgstr "البحث عن مواعيد الزخات"
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:279
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:290
 msgid "Pointer Coordinates"
-msgstr ""
+msgstr "إحداثيات المؤشر"
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:57
 msgid "This plugin shows the coordinates of the mouse pointer."
-msgstr ""
+msgstr "هذه الإضافة تعرض إحداثيات مؤشر الفأرة"
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:95
 msgid "Show equatorial coordinates (J2000.0) of the mouse pointer"
-msgstr ""
+msgstr "عرض الإحداثيات الاستوائية (لحقبة 2000.0 ) لمؤشر الفأرة"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:90
 msgid "Pointer Coordinates plug-in"
-msgstr ""
+msgstr "<P DIR=RTL>إضافة إحداثيات المؤشر"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:119
 msgid "The top center of the screen"
-msgstr ""
+msgstr "وسط أعلى الشاشة"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:120
 msgid "In center of the top right half of the screen"
-msgstr ""
+msgstr "وسط أعلى يمين الشاشة"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:121
 msgid "The right bottom corner of the screen"
-msgstr ""
+msgstr "الركن الأيمن السفلي من الشاشة"
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:280
 msgid "Show equatorial coordinates of the mouse cursor for epoch J2000.0"
-msgstr ""
+msgstr "<P DIR=RTL>يعرض الإحداثيات الاستوائية لمؤشر االفأرة لحقبة J2000.0"
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:281
 msgid "Enable display of coordinates at startup"
-msgstr ""
+msgstr "فعّل عرض الإحداثيات عند فتح البرنامج"
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:282
 msgid "Show plug-in button on toolbar"
-msgstr ""
+msgstr "أظهر زر هذه الإضافة على الشريط السفلي"
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:285
 msgid "Place of the string with coordinates of the mouse pointer"
-msgstr ""
+msgstr "موضع عرض إحداثيات المؤشر"
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:287
 msgid "Place of the string:"
-msgstr ""
+msgstr "موضع عرض الإحداثيات"
 
 #~ msgid "Equatorial Grid"
 #~ msgstr "الشبكة الاستوائية"
@@ -10442,6 +10446,23 @@ msgstr ""
 #~ msgid "Longitude/Latitude (J2000)"
 #~ msgstr "(خط الطول/خط العرض (2000"
 
+#~ msgid "Earth Greatest Elongations from Jupiter 2000-3000"
+#~ msgstr ""
+#~ "الاستطالة العظمى للأرض كما تبدو من المشتري من سنة 2000 إلى سنة 3000 م"
+
+#~ msgid "Earth Greatest Elongations and Brilliancies from Mars 2000-3000"
+#~ msgstr ""
+#~ "الاستطالة العظمى وسطوع الأرض كما تبدو من المريخ من سنة 2000 إلى سنة 3000 م"
+
+#~ msgid "Earth Events from Venus"
+#~ msgstr "أحداث كوكب الأرض الفلكية كما تبدو من الزهرة"
+
+#~ msgid "Earth Greatest Elongations and Brilliancies from Mars"
+#~ msgstr "الاستطالة العظمى وسطوع الأرض كما تبدو من المريخ"
+
+#~ msgid "Earth and Mars Greatest Elongations from Jupiter"
+#~ msgstr "الاستطالة العظمى للأرض والمريخ كما تبدو من المشتري"
+
 #~ msgid "1000"
 #~ msgstr "1000"
 
@@ -10449,3 +10470,7 @@ msgstr ""
 #~ msgstr ""
 #~ "IAU Comission 53: لجنة عمل رقم 53 في الاتحاد العالمي الفلكي المتخصصة "
 #~ "بالكواكب الخارجية"
+
+#~ msgid ""
+#~ "Screensaver of various happenings in the Solar System. 187 events in all!"
+#~ msgstr "حافظ للشاشة يعرض 187 حدثاً من الأحداث الفلكية في النظام الشمسي"
