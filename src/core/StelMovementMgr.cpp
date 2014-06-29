@@ -26,6 +26,7 @@
 #include "StelTranslator.hpp"
 #include "ConstellationMgr.hpp"
 
+#include <cmath>
 #include <QString>
 #include <QTextStream>
 #include <QSettings>
@@ -297,11 +298,11 @@ void StelMovementMgr::handleMouseWheel(QWheelEvent* event)
 	// Manage only vertical wheel event
 	if (event->orientation() != Qt::Vertical)
 		return;
-
-	const double numDegrees = event->delta()/8.;
-	const double numSteps = numDegrees/15.;
-
-	zoomTo(getAimFov()-mouseZoomSpeed*numSteps*getAimFov()/60., 0);
+  
+	const float numSteps = event->delta() / 120.f;
+	const float zoomFactor = std::exp(-mouseZoomSpeed * numSteps / 60.f);
+	const float zoomDuration = 0.2f * qAbs(numSteps);
+	zoomTo(getAimFov() * zoomFactor, zoomDuration);
 
 	event->accept();
 }
