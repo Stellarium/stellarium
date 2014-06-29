@@ -9,15 +9,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium-uk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-06-17 01:06+0700\n"
-"PO-Revision-Date: 2014-06-12 19:18+0000\n"
+"POT-Creation-Date: 2014-06-26 10:33+0700\n"
+"PO-Revision-Date: 2014-06-26 15:19+0000\n"
 "Last-Translator: Yuri Chornoivan <yurchor@gmail.com>\n"
 "Language-Team: Ukrainian <translation@linux.org.ua>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-06-17 06:04+0000\n"
-"X-Generator: Launchpad (build 17045)\n"
+"X-Launchpad-Export-Date: 2014-06-27 06:02+0000\n"
+"X-Generator: Launchpad (build 17077)\n"
 "X-Poedit-Country: UKRAINE\n"
 "Language: uk\n"
 "X-Poedit-Language: Ukrainian\n"
@@ -27,7 +27,7 @@ msgstr ""
 #: src/core/modules/GridLinesMgr.cpp:695 src/core/modules/LandscapeMgr.cpp:353
 #: src/core/modules/NebulaMgr.cpp:126 src/core/modules/SolarSystem.cpp:155
 #: src/core/StelApp.cpp:468 src/core/StelCore.cpp:176
-#: src/core/StelSkyLayerMgr.cpp:87 src/StelMainView.cpp:308
+#: src/core/StelSkyLayerMgr.cpp:87 src/StelMainView.cpp:309
 msgid "Display Options"
 msgstr "Параметри показу"
 
@@ -1154,7 +1154,7 @@ msgid "Deep-sky objects background images"
 msgstr "Зображення тла для далеких об’єктів"
 
 #: src/core/StelMovementMgr.cpp:129 src/gui/StelGui.cpp:185
-#: src/StelMainView.cpp:307
+#: src/StelMainView.cpp:308
 msgid "Miscellaneous"
 msgstr "Інше"
 
@@ -1980,15 +1980,15 @@ msgstr "рік"
 msgid "This system does not support OpenGL."
 msgstr "Система не підтримує OpenGL."
 
-#: src/StelMainView.cpp:307
+#: src/StelMainView.cpp:308
 msgid "Save screenshot"
 msgstr "Зберегти знімок екрана"
 
-#: src/StelMainView.cpp:308
+#: src/StelMainView.cpp:309
 msgid "Full-screen mode"
 msgstr "Повноекранний режим"
 
-#: src/StelMainView.cpp:414
+#: src/StelMainView.cpp:415
 #, qt-format
 msgid "Stellarium %1"
 msgstr "Stellarium %1"
@@ -2631,8 +2631,8 @@ msgstr "Події, пов’язані з Землею, з Меркурія"
 
 #. TRANSLATORS: Name and description of script
 #: src/translations.h:267
-msgid "Earth Events from Venus"
-msgstr "Події, пов’язані з Землею, з Венери"
+msgid "Earth Events from a floating city on Venus"
+msgstr "Події із Землею із літаючого міста на Венері"
 
 #. TRANSLATORS: Name and description of script
 #: src/translations.h:269
@@ -2641,13 +2641,15 @@ msgstr "Події, пов’язані з Землею, з Марса"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:271
-msgid "Earth Greatest Elongations and Brilliancies from Mars"
-msgstr "Періоди найбільшої елонгації та яскравості Землі з Марса"
+msgid "Earth and Venus Greatest Elongations and Brilliancies from Mars"
+msgstr ""
+"Моменти найбільшої елонгації та яскравості для Землі та Венери з Марса"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:273
-msgid "Earth and Mars Greatest Elongations from Jupiter"
-msgstr "Найкращі елонгації Землі і Марса з Юпітера"
+msgid "Earth and Mars Greatest Elongations and Transits from Callisto"
+msgstr ""
+"Моменти найбільшої елонгації та кульмінації Землі та Марса з Каллісто"
 
 #. TRANSLATORS: Description of the landscape tour script.
 #: src/translations.h:279
@@ -2750,10 +2752,10 @@ msgstr ""
 
 #: src/translations.h:294
 msgid ""
-"Screensaver of various happenings in the Solar System. 187 events in all!"
+"Screensaver of various happenings in the Solar System. 232 events in all!"
 msgstr ""
-"Зберігач екрана з різноманітними астрономічними подіями у Сонячній системі. "
-"Передбачено 187 подій!"
+"Зберігач екрана з різноманітними подіями у Сонячній системі. Загалом 232 "
+"події!"
 
 #: src/translations.h:295
 msgid "A tour of the western constellations."
@@ -2790,13 +2792,17 @@ msgstr ""
 "бути увімкнено додаток показу наднових."
 
 #: src/translations.h:301
-msgid "Earth Greatest Elongations and Brilliancies from Mars 2000-3000"
+msgid ""
+"Earth and Venus Greatest Elongations and Brilliancies from Mars 2000-3000"
 msgstr ""
-"Періоди найбільшої елонгації та яскравості Землі з Марса, 2000–3000 роки"
+"Моменти найбільшої елонгації та яскравості для Землі та Венери з Марса за "
+"період з 2000 до 3000 року"
 
 #: src/translations.h:302
-msgid "Earth Greatest Elongations from Jupiter 2000-3000"
-msgstr "Періоди найбільшої елонгації Землі з Юпітера, 2000–3000 роки"
+msgid "Earth Greatest Elongations and Transits from Callisto 2000-3000."
+msgstr ""
+"Моменти найбільшої елонгації та кульмінації Землі та Марса з Каллісто за "
+"період з 2000 до 3000 року"
 
 #: src/translations.h:306
 msgid "Andorra"
@@ -10601,11 +10607,33 @@ msgstr "Розташування рядка:"
 #~ msgid "Horizon altitude: 0 deg."
 #~ msgstr "Висота горизонта: 0°"
 
+#~ msgid "Earth Events from Venus"
+#~ msgstr "Події, пов’язані з Землею, з Венери"
+
+#~ msgid "Earth Greatest Elongations and Brilliancies from Mars 2000-3000"
+#~ msgstr ""
+#~ "Періоди найбільшої елонгації та яскравості Землі з Марса, 2000–3000 роки"
+
+#~ msgid "Earth Greatest Elongations from Jupiter 2000-3000"
+#~ msgstr "Періоди найбільшої елонгації Землі з Юпітера, 2000–3000 роки"
+
+#~ msgid "Earth Greatest Elongations and Brilliancies from Mars"
+#~ msgstr "Періоди найбільшої елонгації та яскравості Землі з Марса"
+
+#~ msgid "Earth and Mars Greatest Elongations from Jupiter"
+#~ msgstr "Найкращі елонгації Землі і Марса з Юпітера"
+
 #~ msgid "1000"
 #~ msgstr "1000"
 
 #~ msgid "IAU Comission 53: Extrasolar Planets"
 #~ msgstr "Комітет 53 МАС: позасонячні планети"
+
+#~ msgid ""
+#~ "Screensaver of various happenings in the Solar System. 187 events in all!"
+#~ msgstr ""
+#~ "Зберігач екрана з різноманітними астрономічними подіями у Сонячній системі. "
+#~ "Передбачено 187 подій!"
 
 #~ msgid ""
 #~ "This plugin marks the 58 navigational stars of the 2102-D Rude Star Finder, "

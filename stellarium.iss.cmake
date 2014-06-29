@@ -34,7 +34,6 @@ Source: "INSTALL"; DestDir: "{app}"; DestName: "INSTALL.rtf"
 Source: "COPYING"; DestDir: "{app}"; DestName: "GPL.rtf"
 Source: "AUTHORS"; DestDir: "{app}"; DestName: "AUTHORS.rtf"
 Source: "ChangeLog"; DestDir: "{app}"; DestName: "ChangeLog.rtf"
-; @ZLIB@
 Source: "@QtCore_location@"; DestDir: "{app}";
 Source: "@QtGui_location@"; DestDir: "{app}";
 Source: "@QtOpenGL_location@"; DestDir: "{app}";
