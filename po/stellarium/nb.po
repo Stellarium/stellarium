@@ -8,15 +8,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nb\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-06-17 01:06+0700\n"
+"POT-Creation-Date: 2014-06-26 10:33+0700\n"
 "PO-Revision-Date: 2014-06-20 17:59+0000\n"
 "Last-Translator: FreewareTips <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-06-21 05:35+0000\n"
-"X-Generator: Launchpad (build 17058)\n"
+"X-Launchpad-Export-Date: 2014-06-27 05:56+0000\n"
+"X-Generator: Launchpad (build 17077)\n"
 "X-Poedit-Country: NORWAY\n"
 "X-Poedit-Language: Norwegian\n"
 
@@ -24,7 +24,7 @@ msgstr ""
 #: src/core/modules/GridLinesMgr.cpp:695 src/core/modules/LandscapeMgr.cpp:353
 #: src/core/modules/NebulaMgr.cpp:126 src/core/modules/SolarSystem.cpp:155
 #: src/core/StelApp.cpp:468 src/core/StelCore.cpp:176
-#: src/core/StelSkyLayerMgr.cpp:87 src/StelMainView.cpp:308
+#: src/core/StelSkyLayerMgr.cpp:87 src/StelMainView.cpp:309
 msgid "Display Options"
 msgstr "Visningsalternativer"
 
@@ -1059,7 +1059,7 @@ msgid "Deep-sky objects background images"
 msgstr "Bakgrunnsbilder for deep-sky-objekter"
 
 #: src/core/StelMovementMgr.cpp:129 src/gui/StelGui.cpp:185
-#: src/StelMainView.cpp:307
+#: src/StelMainView.cpp:308
 msgid "Miscellaneous"
 msgstr "Diverse"
 
@@ -1882,15 +1882,15 @@ msgstr "år"
 msgid "This system does not support OpenGL."
 msgstr "Datamaskinen din støtter ikke OpenGL."
 
-#: src/StelMainView.cpp:307
+#: src/StelMainView.cpp:308
 msgid "Save screenshot"
 msgstr "Lagre skjermbilde"
 
-#: src/StelMainView.cpp:308
+#: src/StelMainView.cpp:309
 msgid "Full-screen mode"
 msgstr "Fullskjermmodus"
 
-#: src/StelMainView.cpp:414
+#: src/StelMainView.cpp:415
 #, qt-format
 msgid "Stellarium %1"
 msgstr "Stellarium %1"
@@ -2537,8 +2537,8 @@ msgstr "Jord-hendelser sett fra Merkur"
 
 #. TRANSLATORS: Name and description of script
 #: src/translations.h:267
-msgid "Earth Events from Venus"
-msgstr "Jord-hendelser sett fra Venus"
+msgid "Earth Events from a floating city on Venus"
+msgstr ""
 
 #. TRANSLATORS: Name and description of script
 #: src/translations.h:269
@@ -2547,13 +2547,13 @@ msgstr "Jord-hendelser sett fra Mars"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:271
-msgid "Earth Greatest Elongations and Brilliancies from Mars"
-msgstr "Jordens største elongasjoner og lysstyrker fra Mars"
+msgid "Earth and Venus Greatest Elongations and Brilliancies from Mars"
+msgstr ""
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:273
-msgid "Earth and Mars Greatest Elongations from Jupiter"
-msgstr "Jordens og Mars største elongasjoner fra Jupiter"
+msgid "Earth and Mars Greatest Elongations and Transits from Callisto"
+msgstr ""
 
 #. TRANSLATORS: Description of the landscape tour script.
 #: src/translations.h:279
@@ -2656,9 +2656,8 @@ msgstr ""
 
 #: src/translations.h:294
 msgid ""
-"Screensaver of various happenings in the Solar System. 187 events in all!"
+"Screensaver of various happenings in the Solar System. 232 events in all!"
 msgstr ""
-"Skjermbeskytter med ulike hendelser i solsystemet. 187 hendelser i alt!"
 
 #: src/translations.h:295
 msgid "A tour of the western constellations."
@@ -2695,12 +2694,13 @@ msgstr ""
 "være aktivert."
 
 #: src/translations.h:301
-msgid "Earth Greatest Elongations and Brilliancies from Mars 2000-3000"
-msgstr "Jordens største elongasjoner og lysstyrker fra Mars 2000-3000"
+msgid ""
+"Earth and Venus Greatest Elongations and Brilliancies from Mars 2000-3000"
+msgstr ""
 
 #: src/translations.h:302
-msgid "Earth Greatest Elongations from Jupiter 2000-3000"
-msgstr "Jordens største elongasjoner fra Jupiter 2000-3000"
+msgid "Earth Greatest Elongations and Transits from Callisto 2000-3000."
+msgstr ""
 
 #: src/translations.h:306
 msgid "Andorra"
@@ -10378,8 +10378,28 @@ msgstr "Plass for visning:"
 #~ msgid "Sun altitude at twilight: 0 deg."
 #~ msgstr "Solhøyde ved tussmørke: 0 grd."
 
+#~ msgid ""
+#~ "Screensaver of various happenings in the Solar System. 187 events in all!"
+#~ msgstr ""
+#~ "Skjermbeskytter med ulike hendelser i solsystemet. 187 hendelser i alt!"
+
+#~ msgid "Earth Events from Venus"
+#~ msgstr "Jord-hendelser sett fra Venus"
+
 #~ msgid "1000"
 #~ msgstr "1000"
+
+#~ msgid "Earth Greatest Elongations and Brilliancies from Mars"
+#~ msgstr "Jordens største elongasjoner og lysstyrker fra Mars"
+
+#~ msgid "Earth and Mars Greatest Elongations from Jupiter"
+#~ msgstr "Jordens og Mars største elongasjoner fra Jupiter"
+
+#~ msgid "Earth Greatest Elongations from Jupiter 2000-3000"
+#~ msgstr "Jordens største elongasjoner fra Jupiter 2000-3000"
+
+#~ msgid "Earth Greatest Elongations and Brilliancies from Mars 2000-3000"
+#~ msgstr "Jordens største elongasjoner og lysstyrker fra Mars 2000-3000"
 
 #~ msgid ""
 #~ "This plugin marks the 58 navigational stars of the 2102-D Rude Star Finder, "
