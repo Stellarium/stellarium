@@ -72,7 +72,7 @@ private:
 	QTableView* m_currentTableView;
 	QHash<int, QCheckBox*> m_checkBoxes;
 
-	void initModel(QTableView* tableView, Category category);
+	void initModel(QTableView* tableView, QString table);
 	void setUpTableView(QTableView* tableView);
 	void populateTables();
 };

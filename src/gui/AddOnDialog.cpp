@@ -114,10 +114,11 @@ void AddOnDialog::changePage(QListWidgetItem *current, QListWidgetItem *previous
 	m_checkBoxes.clear();
 
 	// Insert checkboxes to the current tableview
+	int lastColumn = m_currentTableView->horizontalHeader()->count() - 1;
 	for(int row=0; row<m_currentTableView->model()->rowCount(); ++row)
 	{
 		QCheckBox* cbox = new QCheckBox();
-		m_currentTableView->setIndexWidget(m_currentTableView->model()->index(row, 5), cbox);
+		m_currentTableView->setIndexWidget(m_currentTableView->model()->index(row, lastColumn), cbox);
 		cbox->setStyleSheet("QCheckBox { padding-left: 8px; }");
 		m_checkBoxes.insert(row, cbox);
 	}
@@ -126,52 +127,47 @@ void AddOnDialog::changePage(QListWidgetItem *current, QListWidgetItem *previous
 void AddOnDialog::setUpTableView(QTableView* tableView)
 {
 	tableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
-	tableView->horizontalHeader()->setSectionResizeMode(5, QHeaderView::ResizeToContents);
+	int lastColumn = tableView->horizontalHeader()->count() - 1;
+	tableView->horizontalHeader()->setSectionResizeMode(lastColumn, QHeaderView::ResizeToContents);
 	tableView->verticalHeader()->setVisible(false);
 	tableView->setAlternatingRowColors(true);
 	tableView->setSelectionBehavior(QAbstractItemView::SelectRows);
 	tableView->setEditTriggers(false);
 }
 
-void AddOnDialog::initModel(QTableView* tableView, Category category)
+void AddOnDialog::initModel(QTableView* tableView, QString table)
 {
 	QSqlQueryModel* model = new QSqlQueryModel;
-	QString table, query;
-	switch (category)
+	QString query;
+
+	if (table == TABLE_CATALOG)
 	{
-		case CATALOG:
-			query = "SELECT plugin_catalog.id, addon.id, title, version, installed, NULL "
-				"FROM addon INNER JOIN plugin"
-				" ON addon.id = plugin.addon UNION ";
-			table = TABLE_STAR_CATALOG;
-			break;
-		case LANDSCAPE:
-			table = TABLE_LANDSCAPE;
-			break;
-		case LANGUAGEPACK:
-			table = TABLE_LANGUAGE_PACK;
-			break;
-		case SCRIPT:
-			table = TABLE_SCRIPT;
-			break;
-		case STARLORE:
-			table = TABLE_STARLORE;
-			break;
-		case TEXTURE:
-			table = TABLE_TEXTURE;
-			break;
+		query = "SELECT " % table % ".id, addon.id, title, type, version, installed, NULL "
+			"FROM addon INNER JOIN " % table %
+			" ON addon.id = " % table % ".addon";
+		model->setQuery(query);
+		model->setHeaderData(0, Qt::Horizontal, q_("Id"));
+		model->setHeaderData(1, Qt::Horizontal, q_("AddOnId"));
+		model->setHeaderData(2, Qt::Horizontal, q_("Title"));
+		model->setHeaderData(3, Qt::Horizontal, q_("Type"));
+		model->setHeaderData(4, Qt::Horizontal, q_("Last Version"));
+		model->setHeaderData(5, Qt::Horizontal, q_("Installed Version"));
+		model->setHeaderData(6, Qt::Horizontal, "");
+	}
+	else
+	{
+		query = "SELECT " % table % ".id, addon.id, title, version, installed, NULL "
+			"FROM addon INNER JOIN " % table %
+			" ON addon.id = " % table % ".addon";
+		model->setQuery(query);
+		model->setHeaderData(0, Qt::Horizontal, q_("Id"));
+		model->setHeaderData(1, Qt::Horizontal, q_("AddOnId"));
+		model->setHeaderData(2, Qt::Horizontal, q_("Title"));
+		model->setHeaderData(3, Qt::Horizontal, q_("Last Version"));
+		model->setHeaderData(4, Qt::Horizontal, q_("Installed Version"));
+		model->setHeaderData(5, Qt::Horizontal, "");
 	}
 
-	query = query % "SELECT " % table % ".id, addon.id, title, version, installed, NULL "
-		"FROM addon INNER JOIN " % table %
-		" ON addon.id = " % table % ".addon";
-	model->setQuery(query);
-	model->setHeaderData(0, Qt::Horizontal, q_("Id"));
-	model->setHeaderData(1, Qt::Horizontal, q_("AddOnId"));
-	model->setHeaderData(2, Qt::Horizontal, q_("Title"));
-	model->setHeaderData(3, Qt::Horizontal, q_("Last Version"));
-	model->setHeaderData(4, Qt::Horizontal, q_("Installed Version"));
-	model->setHeaderData(5, Qt::Horizontal, "");
 	tableView->setModel(model);
 	tableView->setColumnHidden(0, true); // hide id
 	tableView->setColumnHidden(1, true); // hide addonid
@@ -180,27 +176,27 @@ void AddOnDialog::initModel(QTableView* tableView, Category category)
 void AddOnDialog::populateTables()
 {
 	// CATALOGS
-	initModel(ui->catalogsTableView, CATALOG);
+	initModel(ui->catalogsTableView, TABLE_CATALOG);
 	setUpTableView(ui->catalogsTableView);
 
 	// LANDSCAPES
-	initModel(ui->landscapeTableView, LANDSCAPE);
+	initModel(ui->landscapeTableView,TABLE_LANDSCAPE);
 	setUpTableView(ui->landscapeTableView);
 
 	// LANGUAGE PACK
-	initModel(ui->languageTableView, LANGUAGEPACK);
+	initModel(ui->languageTableView, TABLE_LANGUAGE_PACK);
 	setUpTableView(ui->languageTableView);
 
 	// SCRIPTS
-	initModel(ui->scriptsTableView, SCRIPT);
+	initModel(ui->scriptsTableView, TABLE_SCRIPT);
 	setUpTableView(ui->scriptsTableView);
 
 	// STARLORE
-	initModel(ui->starloreTbleView, STARLORE);
+	initModel(ui->starloreTbleView, TABLE_STARLORE);
 	setUpTableView(ui->starloreTbleView);
 
 	// TEXTURES
-	initModel(ui->texturesTableView, TEXTURE);
+	initModel(ui->texturesTableView, TABLE_TEXTURE);
 	setUpTableView(ui->texturesTableView);
 }
 
