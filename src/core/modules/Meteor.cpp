@@ -32,7 +32,7 @@ Meteor::Meteor(const StelCore* core, float v)
 {
 	// determine meteor velocity
 	// abs range 11-72 km/s by default (see line 427 in StelApp.cpp)
-	m_speed = 11+(double)rand()/((double)RAND_MAX+1)*(v-11);
+	m_speed = 11+(float)rand()/((float)RAND_MAX+1)*(v-11);
 
 	// view matrix of sporadic meteors model
 	float alpha = (double)rand()/((double)RAND_MAX+1)*2*M_PI;
@@ -263,7 +263,7 @@ bool Meteor::update(double deltaTime)
 	return m_alive;
 }
 
-void Meteor::insertVertex(const StelCore* core, Mat4d viewMatrix, QVector<Vec3d> &vertexArray, Vec3d vertex)
+void Meteor::insertVertex(const StelCore* core, const Mat4d& viewMatrix, QVector<Vec3d> &vertexArray, Vec3d vertex)
 {
 	vertex.transfo4d(viewMatrix);
 	vertex = core->j2000ToAltAz(vertex);
@@ -272,7 +272,7 @@ void Meteor::insertVertex(const StelCore* core, Mat4d viewMatrix, QVector<Vec3d>
 	vertexArray.push_back(vertex);
 }
 
-void Meteor::calculateThickness(const StelCore* core, float &thickness, float &bolideSize)
+void Meteor::calculateThickness(const StelCore* core, float& thickness, float& bolideSize)
 {
 	float maxFOV = core->getMovementMgr()->getMaxFov();
 	float FOV = core->getMovementMgr()->getCurrentFov();
@@ -286,8 +286,8 @@ void Meteor::calculateThickness(const StelCore* core, float &thickness, float &b
 	bolideSize = thickness*3;
 }
 
-void Meteor::drawBolide(const StelCore* core, StelPainter& sPainter, MeteorModel mm,
-			Mat4d viewMatrix, const float bolideSize)
+void Meteor::drawBolide(const StelCore* core, StelPainter& sPainter, const MeteorModel& mm,
+			const Mat4d& viewMatrix, const float bolideSize)
 {
 	if (!bolideSize) {
 		return;
@@ -333,8 +333,8 @@ void Meteor::drawBolide(const StelCore* core, StelPainter& sPainter, MeteorModel
 	sPainter.enableClientStates(false);
 }
 
-void Meteor::drawTrain(const StelCore *core, StelPainter& sPainter, MeteorModel mm,
-		       Mat4d viewMatrix, const double thickness, const int segments,
+void Meteor::drawTrain(const StelCore *core, StelPainter& sPainter, const MeteorModel& mm,
+		       const Mat4d& viewMatrix, const float thickness, const int segments,
 		       QList<Vec4f> lineColorArray, QList<Vec4f> trainColorArray)
 {
 	if (segments != lineColorArray.size() || 2*segments != trainColorArray.size())

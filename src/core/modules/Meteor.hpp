@@ -70,13 +70,13 @@ public:
 	void draw(const StelCore* core, StelPainter& sPainter);
 
 	//! Draws the meteor train. (useful to be reused in MeteorShowers plugin)
-	static void drawTrain(const StelCore* core, StelPainter& sPainter, MeteorModel mm,
-			      Mat4d viewMatrix, const double thickness, const int segments,
+	static void drawTrain(const StelCore* core, StelPainter& sPainter, const MeteorModel& mm,
+			      const Mat4d& viewMatrix, const float thickness, const int segments,
 			      QList<Vec4f> lineColorArray, QList<Vec4f> trainColorArray);
 
 	//! Draws the meteor bolide. (useful to be reused in MeteorShowers plugin)
-	static void drawBolide(const StelCore *core, StelPainter &sPainter, MeteorModel mm,
-			       Mat4d viewMatrix, const float bolideSize);
+	static void drawBolide(const StelCore* core, StelPainter &sPainter, const MeteorModel& mm,
+			       const Mat4d& viewMatrix, const float bolideSize);
 
 	//! Calculates the train thickness and bolide size.
 	static void calculateThickness(const StelCore* core, float &thickness, float &bolideSize);
@@ -102,7 +102,7 @@ public:
 	static StelTextureSP bolideTexture;
 
 private:
-	static void insertVertex(const StelCore* core, Mat4d viewMatrix,
+	static void insertVertex(const StelCore* core, const Mat4d& viewMatrix,
 				 QVector<Vec3d> &vertexArray, Vec3d vertex);
 	static Vec4f getColorFromName(QString colorName);
 	QList<colorPair> getRandColor();
