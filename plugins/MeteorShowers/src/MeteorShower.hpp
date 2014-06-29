@@ -1,4 +1,5 @@
 /*
+ * Stellarium: Meteor Showers Plug-in
  * Copyright (C) 2013 Marcos Cardinot
  * Copyright (C) 2011 Alexander Wolf
  *
@@ -21,16 +22,12 @@
 #define _METEORSHOWER_HPP_
 
 #include <QDateTime>
-#include <QVariantMap>
-#include <QString>
 
 #include "StelFader.hpp"
 #include "StelObject.hpp"
 #include "StelPainter.hpp"
 #include "StelTextureTypes.hpp"
 #include "StelTranslator.hpp"
-
-class StelPainter;
 
 //! @class MeteorShower
 //! A MeteorShower object represents one meteor shower on the sky.
@@ -105,6 +102,9 @@ public:
 		return zhr;
 	}
 
+	//! <colorName, intensity>
+	typedef QPair<QString, int> colorPair;
+
 private:
 	Vec3d XYZ;                      //! Cartesian equatorial position
 	Vec3d XY;                       //! Store temporary 2D position
@@ -131,12 +131,13 @@ private:
 	QString designation;            //! The designation of the meteor shower
 	QList<activityData> activity;	//! List of activity
 	int speed;                      //! Speed of meteors
-	double rAlphaPeak;              //! R.A. for radiant of meteor shower on the peak day
-	double rDeltaPeak;              //! Dec. for radiant of meteor shower on the peak day
-	double driftAlpha;		//! Drift of R.A.
-	double driftDelta;		//! Drift of Dec.
+	float rAlphaPeak;               //! R.A. for radiant of meteor shower on the peak day
+	float rDeltaPeak;               //! Dec. for radiant of meteor shower on the peak day
+	float driftAlpha;		//! Drift of R.A.
+	float driftDelta;		//! Drift of Dec.
 	QString parentObj;		//! Parent object for meteor shower
 	float pidx;			//! The population index
+	QList<colorPair> colors;	//! <colorName, 0-100>
 
 	//current information
 	double radiantAlpha;            //! Current R.A. for radiant of meteor shower
