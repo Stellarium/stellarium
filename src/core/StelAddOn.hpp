@@ -41,7 +41,9 @@ class StelAddOn
 public:
 	StelAddOn();
 
-	void install(int id, int addonId, QString table);
+	bool installLandscape(int id, int addonId);
+	bool installLandscapeFromFile(QString filePath);
+	QString getFilenameFromURL(QUrl url);
 	void updateDatabase(QString webresult);
 	void setLastUpdate(qint64 time);
 	QString getLastUpdateString()

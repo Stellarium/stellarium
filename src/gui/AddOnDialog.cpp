@@ -253,13 +253,39 @@ void AddOnDialog::downloadFinished()
 void AddOnDialog::installSelectedRows() {
 	Q_ASSERT(m_checkBoxes.count() == m_currentTableView->model()->rowCount());
 
+	int currentTab = ui->stackedWidget->currentIndex();
 	for (int i=0;i<m_checkBoxes.count(); ++i)
 	{
-		if (m_checkBoxes.value(i)->checkState())
+		if (!m_checkBoxes.value(i)->checkState())
 		{
-			int id = m_currentTableView->model()->index(i, 0).data().toInt();
-			int addonid = m_currentTableView->model()->index(i, 1).data().toInt();
-			//m_StelAddOn.install(id, addonid, "landscape");
+			continue;
+		}
+
+		int id = m_currentTableView->model()->index(i, 0).data().toInt();
+		int addonId = m_currentTableView->model()->index(i, 1).data().toInt();
+		switch (currentTab)
+		{
+			case CATALOG:
+			{
+				QString type = m_currentTableView->model()->index(i, 3).data().toString();
+				// TODO: install
+				break;
+			}
+			case LANDSCAPE:
+				m_StelAddOn.installLandscape(id, addonId);
+				break;
+			case LANGUAGEPACK:
+				// TODO: install
+				break;
+			case SCRIPT:
+				// TODO: install
+				break;
+			case STARLORE:
+				// TODO: install
+				break;
+			case TEXTURE:
+				// TODO: install
+				break;
 		}
 	}
 }

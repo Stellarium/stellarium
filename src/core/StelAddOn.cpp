@@ -24,8 +24,11 @@
 #include <QSqlRecord>
 #include <QStringBuilder>
 
+#include "LandscapeMgr.hpp"
+#include "StelApp.hpp"
 #include "StelAddOn.hpp"
 #include "StelFileMgr.hpp"
+#include "StelModuleMgr.hpp"
 
 StelAddOn::StelAddOn()
 	: m_db(QSqlDatabase::addDatabase("QSQLITE"))
@@ -232,22 +235,37 @@ StelAddOn::AddOnInfo StelAddOn::getAddOnInfo(int addonId)
 	return AddOnInfo();
 }
 
-void StelAddOn::install(int id, int addonId, QString table)
+QString StelAddOn::getFilenameFromURL(QUrl url)
 {
-	AddOnInfo addonInfo = getAddOnInfo(addonId);
-
-	// getting filename
-	QStringList splitedURL = addonInfo.url.toString().split("/");
+	QStringList splitedURL = url.toString().split("/");
 	QString filename = splitedURL.last();
 	if (filename.isEmpty())
 	{
 		filename = splitedURL.at(splitedURL.length() - 2);
 	}
+	return filename;
+}
 
+bool StelAddOn::installLandscape(int id, int addonId)
+{
+	AddOnInfo addonInfo = getAddOnInfo(addonId);
+	QString filename = getFilenameFromURL(addonInfo.url);
+	QString filePath = m_sAddonPath % "landscape/" % filename;
 	// checking if we have this file in add-on path (disk)
-	if (QFile(m_sAddonPath % filename).exists())
+	if (QFile(filePath).exists())
 	{
-		//intallFile();
-		return;
+		return installLandscapeFromFile(filePath);
 	}
+
+	// TODO: download zip file
+}
+
+bool StelAddOn::installLandscapeFromFile(QString filePath)
+{
+	QString ref = GETSTELMODULE(LandscapeMgr)->installLandscapeFromArchive(filePath);
+	if(!ref.isEmpty())
+	{
+		return false;
+	}
+	return true;
 }
