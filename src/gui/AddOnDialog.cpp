@@ -253,6 +253,8 @@ void AddOnDialog::downloadFinished()
 void AddOnDialog::installSelectedRows() {
 	Q_ASSERT(m_checkBoxes.count() == m_currentTableView->model()->rowCount());
 
+	typedef QPair<QString, bool> Result;
+	QList<Result> resultList; // <title, result>
 	int currentTab = ui->stackedWidget->currentIndex();
 	for (int i=0;i<m_checkBoxes.count(); ++i)
 	{
@@ -263,6 +265,8 @@ void AddOnDialog::installSelectedRows() {
 
 		int id = m_currentTableView->model()->index(i, 0).data().toInt();
 		int addonId = m_currentTableView->model()->index(i, 1).data().toInt();
+		QString addonTitle = m_currentTableView->model()->index(i, 2).data().toString();
+		Result res;
 		switch (currentTab)
 		{
 			case CATALOG:
@@ -272,7 +276,9 @@ void AddOnDialog::installSelectedRows() {
 				break;
 			}
 			case LANDSCAPE:
-				m_StelAddOn.installLandscape(id, addonId);
+				res.first = addonTitle;
+				res.second = m_StelAddOn.installLandscape(id, addonId);
+				resultList.append(res);
 				break;
 			case LANGUAGEPACK:
 				// TODO: install
@@ -287,5 +293,12 @@ void AddOnDialog::installSelectedRows() {
 				// TODO: install
 				break;
 		}
+	}
+
+	// Display results
+	foreach (Result r, resultList) {
+		// TODO: display it in a nice message box.
+		QString installed = r.second ? " installed!" : " not installed!";
+		qDebug() << "Add-on: " % r.first % installed;
 	}
 }
