@@ -105,23 +105,6 @@ void AddOnDialog::changePage(QListWidgetItem *current, QListWidgetItem *previous
 			break;
 	}
 
-
-	// Destroys all checkboxes of the previous tableview
-	for(int i=0; i<m_checkBoxes.size(); ++i)
-	{
-	    delete m_checkBoxes.take(i);
-	}
-	m_checkBoxes.clear();
-
-	// Insert checkboxes to the current tableview
-	int lastColumn = m_currentTableView->horizontalHeader()->count() - 1;
-	for(int row=0; row<m_currentTableView->model()->rowCount(); ++row)
-	{
-		QCheckBox* cbox = new QCheckBox();
-		m_currentTableView->setIndexWidget(m_currentTableView->model()->index(row, lastColumn), cbox);
-		cbox->setStyleSheet("QCheckBox { padding-left: 8px; }");
-		m_checkBoxes.insert(row, cbox);
-	}
 }
 
 void AddOnDialog::setUpTableView(QTableView* tableView)
@@ -173,31 +156,64 @@ void AddOnDialog::initModel(QTableView* tableView, QString table)
 	tableView->setColumnHidden(1, true); // hide addonid
 }
 
+void AddOnDialog::insertCheckBoxes(QTableView* tableview, int tab) {
+	// Insert clean checkboxes to the current tableview
+	QHash<int, QCheckBox*> checkboxes;
+	int lastColumn = tableview->horizontalHeader()->count() - 1;
+	for(int row=0; row<tableview->model()->rowCount(); ++row)
+	{
+		QCheckBox* cbox = new QCheckBox();
+		tableview->setIndexWidget(tableview->model()->index(row, lastColumn), cbox);
+		cbox->setStyleSheet("QCheckBox { padding-left: 8px; }");
+		checkboxes.insert(row, cbox);
+	}
+	m_checkBoxes.insert(tab, checkboxes);
+}
+
 void AddOnDialog::populateTables()
 {
+	// destroying all checkboxes
+	while (!m_checkBoxes.isEmpty())
+	{
+		QHash<int, QCheckBox*> cbs;
+		cbs = m_checkBoxes.takeFirst();
+		int i = 0;
+		while (!cbs.isEmpty())
+		{
+			delete cbs.take(i);
+			i++;
+		}
+	}
+
 	// CATALOGS
 	initModel(ui->catalogsTableView, TABLE_CATALOG);
 	setUpTableView(ui->catalogsTableView);
+	insertCheckBoxes(ui->catalogsTableView, CATALOG);
 
 	// LANDSCAPES
 	initModel(ui->landscapeTableView,TABLE_LANDSCAPE);
 	setUpTableView(ui->landscapeTableView);
+	insertCheckBoxes(ui->landscapeTableView, LANDSCAPE);
 
 	// LANGUAGE PACK
 	initModel(ui->languageTableView, TABLE_LANGUAGE_PACK);
 	setUpTableView(ui->languageTableView);
+	insertCheckBoxes(ui->languageTableView, LANGUAGEPACK);
 
 	// SCRIPTS
 	initModel(ui->scriptsTableView, TABLE_SCRIPT);
 	setUpTableView(ui->scriptsTableView);
+	insertCheckBoxes(ui->scriptsTableView, SCRIPT);
 
 	// STARLORE
 	initModel(ui->starloreTbleView, TABLE_STARLORE);
 	setUpTableView(ui->starloreTbleView);
+	insertCheckBoxes(ui->starloreTbleView, STARLORE);
 
 	// TEXTURES
 	initModel(ui->texturesTableView, TABLE_TEXTURE);
 	setUpTableView(ui->texturesTableView);
+	insertCheckBoxes(ui->texturesTableView, TEXTURE);
 }
 
 void AddOnDialog::updateCatalog()
@@ -251,14 +267,13 @@ void AddOnDialog::downloadFinished()
 }
 
 void AddOnDialog::installSelectedRows() {
-	Q_ASSERT(m_checkBoxes.count() == m_currentTableView->model()->rowCount());
-
 	typedef QPair<QString, bool> Result;
 	QList<Result> resultList; // <title, result>
 	int currentTab = ui->stackedWidget->currentIndex();
-	for (int i=0;i<m_checkBoxes.count(); ++i)
+	Q_ASSERT(m_checkBoxes.at(currentTab).count() == m_currentTableView->model()->rowCount());
+	for (int i=0;i<m_checkBoxes.at(currentTab).count(); ++i)
 	{
-		if (!m_checkBoxes.value(i)->checkState())
+		if (!m_checkBoxes.at(currentTab).value(i)->checkState())
 		{
 			continue;
 		}

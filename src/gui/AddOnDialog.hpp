@@ -70,11 +70,12 @@ private:
 	StelAddOn m_StelAddOn;
 	QNetworkReply* m_pUpdateCatalogReply;
 	QTableView* m_currentTableView;
-	QHash<int, QCheckBox*> m_checkBoxes;
+	QList<QHash<int, QCheckBox*> > m_checkBoxes;
 
 	void initModel(QTableView* tableView, QString table);
 	void setUpTableView(QTableView* tableView);
 	void populateTables();
+	void insertCheckBoxes(QTableView* tableview, int tab);
 };
 
 #endif // _ADDONDIALOG_HPP_
