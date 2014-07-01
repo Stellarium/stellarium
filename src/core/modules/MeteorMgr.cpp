@@ -31,6 +31,9 @@
 
 #include <QSettings>
 
+//! Factor to convert from zhr to whole earth per second rate
+static const double zhrToWsr = 1.6667f / 3600.f;
+
 MeteorMgr::MeteorMgr(int zhr, int maxv )
 	: ZHR(zhr)
 	, maxVelocity(maxv)

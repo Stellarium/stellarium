@@ -22,6 +22,7 @@
 #define _METEORMGR_HPP_
 
 #include "StelModule.hpp"
+#include <vector>
 
 class Meteor;
 
