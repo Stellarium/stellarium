@@ -62,7 +62,7 @@ public:
 	virtual double getCallOrder(StelModuleActionName actionName) const;
 
 	//! Factor to convert from zhr to whole earth per second rate
-	static const double zhrToWsr = 1.6667f / 3600.f;
+	static const double zhrToWsr;
 	
 public slots:
 	///////////////////////////////////////////////////////////////////////////
