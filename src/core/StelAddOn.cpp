@@ -18,6 +18,7 @@
  */
 
 #include <QDebug>
+#include <QDir>
 #include <QFile>
 #include <QSqlError>
 #include <QSqlQuery>
@@ -29,12 +30,28 @@
 #include "StelAddOn.hpp"
 #include "StelFileMgr.hpp"
 #include "StelModuleMgr.hpp"
+#include "StelProgressController.hpp"
 
 StelAddOn::StelAddOn()
 	: m_db(QSqlDatabase::addDatabase("QSQLITE"))
+	, m_progressBar(NULL)
+	, dirAddOn(StelFileMgr::getUserDir() % "/addon")
+	, dirCatalog(dirAddOn % "/catalog/")
+	, dirLandscape(dirAddOn % "/landscape/")
+	, dirLanguagePack(dirAddOn % "/language_pack/")
+	, dirScript(dirAddOn % "/script/")
+	, dirStarlore(dirAddOn % "/language_pack/")
+	, dirTexture(dirAddOn % "/texture/")
 {
 	// creating addon dir
-	StelFileMgr::makeSureDirExistsAndIsWritable(StelFileMgr::getUserDir() + "/addon");
+	StelFileMgr::makeSureDirExistsAndIsWritable(dirAddOn);
+	// creating sub-dirs
+	StelFileMgr::makeSureDirExistsAndIsWritable(dirCatalog);
+	StelFileMgr::makeSureDirExistsAndIsWritable(dirLandscape);
+	StelFileMgr::makeSureDirExistsAndIsWritable(dirLanguagePack);
+	StelFileMgr::makeSureDirExistsAndIsWritable(dirScript);
+	StelFileMgr::makeSureDirExistsAndIsWritable(dirStarlore);
+	StelFileMgr::makeSureDirExistsAndIsWritable(dirTexture);
 
 	// Init database
 	StelFileMgr::Flags flags = (StelFileMgr::Flags)(StelFileMgr::Directory|StelFileMgr::Writable);
@@ -216,7 +233,7 @@ StelAddOn::AddOnInfo StelAddOn::getAddOnInfo(int addonId)
 	}
 
 	QSqlQuery query(m_db);
-	query.prepare("SELECT url FROM addon WHERE id=:id");
+	query.prepare("SELECT download_size, url FROM addon WHERE id=:id");
 	query.bindValue(":id", addonId);
 
 	if (!query.exec()) {
@@ -225,39 +242,110 @@ StelAddOn::AddOnInfo StelAddOn::getAddOnInfo(int addonId)
 	}
 
 	QSqlRecord queryRecord = query.record();
+	const int downloadSizeColumn = queryRecord.indexOf("download_size");
 	const int urlColumn = queryRecord.indexOf("url");
 	if (query.next()) {
 		AddOnInfo addonInfo;
+		// info from db
+		addonInfo.downloadSize = query.value(downloadSizeColumn).toDouble();
 		addonInfo.url = QUrl(query.value(urlColumn).toString());
+		// handling url to get filename
+		QStringList splitedURL = addonInfo.url.toString().split("/");
+		addonInfo.filename = splitedURL.last();
+		if (addonInfo.filename.isEmpty())
+		{
+			addonInfo.filename = splitedURL.at(splitedURL.length() - 2);
+		}
 		return addonInfo;
 	}
 
 	return AddOnInfo();
 }
 
-QString StelAddOn::getFilenameFromURL(QUrl url)
+bool StelAddOn::downloadAddOn(const AddOnInfo addonInfo, const QString target)
 {
-	QStringList splitedURL = url.toString().split("/");
-	QString filename = splitedURL.last();
-	if (filename.isEmpty())
+	Q_ASSERT(m_pDownloadReply==NULL);
+	Q_ASSERT(m_currentDownloadFile==NULL);
+	Q_ASSERT(m_progressBar==NULL);
+
+	m_currentDownloadFile = new QFile(target);
+	if (!m_currentDownloadFile->open(QIODevice::WriteOnly))
 	{
-		filename = splitedURL.at(splitedURL.length() - 2);
+		qWarning() << "Can't open a writable file: " << QDir::toNativeSeparators(target);
+		return false;
 	}
-	return filename;
+
+	QNetworkRequest req(addonInfo.url);
+	req.setAttribute(QNetworkRequest::CacheSaveControlAttribute, false);
+	req.setAttribute(QNetworkRequest::RedirectionTargetAttribute, false);
+	req.setRawHeader("User-Agent", StelUtils::getApplicationName().toLatin1());
+	m_pDownloadReply = StelApp::getInstance().getNetworkAccessManager()->get(req);
+	m_pDownloadReply->setReadBufferSize(1024*1024*2);
+	connect(m_pDownloadReply, SIGNAL(readyRead()), this, SLOT(newDownload()));
+	connect(m_pDownloadReply, SIGNAL(finished()), this, SLOT(downloadFinished()));
+	connect(m_pDownloadReply, SIGNAL(error(QNetworkReply::NetworkError)),
+		this, SLOT(downloadError(QNetworkReply::NetworkError)));
+
+	m_progressBar = StelApp::getInstance().addProgressBar();
+	m_progressBar->setValue(0);
+	m_progressBar->setRange(0, addonInfo.downloadSize*1024);
+	m_progressBar->setFormat(QString("%1: %p%").arg(addonInfo.filename));
+	return true;
+}
+
+void StelAddOn::newDownload()
+{
+	Q_ASSERT(m_currentDownloadFile);
+	Q_ASSERT(m_pDownloadReply);
+	Q_ASSERT(m_progressBar);
+
+	int size = m_pDownloadReply->bytesAvailable();
+	m_progressBar->setValue((float)m_progressBar->getValue()+(float)size/1024);
+	m_currentDownloadFile->write(m_pDownloadReply->read(size));
+}
+
+void StelAddOn::downloadError(QNetworkReply::NetworkError)
+{
+	Q_ASSERT(m_currentDownloadFile);
+	Q_ASSERT(m_pDownloadReply);
+	qWarning() << "Error while downloading " % m_pDownloadReply->url().toString()
+		   << m_pDownloadReply->errorString();
+}
+
+void StelAddOn::downloadFinished()
+{
+	Q_ASSERT(m_currentDownloadFile);
+	Q_ASSERT(m_pDownloadReply);
+	Q_ASSERT(m_progressBar);
+
+	if (m_pDownloadReply->error() != QNetworkReply::NoError)
+	{
+		qWarning() << "Add-on Mgr: FAILED to download" << m_pDownloadReply->url()
+			   << " Error:" << m_pDownloadReply->errorString();
+	}
+
+	m_currentDownloadFile->close();
+	m_currentDownloadFile->deleteLater();
+	m_currentDownloadFile = NULL;
+	m_pDownloadReply->deleteLater();
+	m_pDownloadReply = NULL;
+	StelApp::getInstance().removeProgressBar(m_progressBar);
+	m_progressBar = NULL;
 }
 
 bool StelAddOn::installLandscape(int id, int addonId)
 {
 	AddOnInfo addonInfo = getAddOnInfo(addonId);
-	QString filename = getFilenameFromURL(addonInfo.url);
-	QString filePath = m_sAddonPath % "landscape/" % filename;
+	QString filepath = dirLandscape % addonInfo.filename;
 	// checking if we have this file in add-on path (disk)
-	if (QFile(filePath).exists())
+	if (QFile(filepath).exists())
 	{
-		return installLandscapeFromFile(filePath);
+		return installLandscapeFromFile(filepath);
 	}
 
 	// TODO: download zip file
+	m_downloadingAddonIds.append(addonId);
+	return downloadAddOn(addonInfo, filepath);
 }
 
 bool StelAddOn::installLandscapeFromFile(QString filePath)

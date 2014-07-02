@@ -67,7 +67,6 @@ private:
 		TEXTURE
 	};
 
-	StelAddOn m_StelAddOn;
 	QNetworkReply* m_pUpdateCatalogReply;
 	QTableView* m_currentTableView;
 	QList<QHash<int, QCheckBox*> > m_checkBoxes;

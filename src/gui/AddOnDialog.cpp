@@ -31,7 +31,6 @@
 AddOnDialog::AddOnDialog(QObject* parent) : StelDialog(parent)
 {
     ui = new Ui_addonDialogForm;
-    m_StelAddOn = StelApp::getInstance().getStelAddOn();
 }
 
 AddOnDialog::~AddOnDialog()
@@ -62,7 +61,7 @@ void AddOnDialog::createDialogContent()
 	populateTables();
 
 	// catalog updates
-	ui->txtLastUpdate->setText(m_StelAddOn.getLastUpdateString());
+	ui->txtLastUpdate->setText(StelApp::getInstance().getStelAddOn().getLastUpdateString());
 	connect(ui->btnUpdate, SIGNAL(clicked()), this, SLOT(updateCatalog()));
 
 	// setting up tabs
@@ -222,7 +221,7 @@ void AddOnDialog::updateCatalog()
 	ui->txtLastUpdate->setText(q_("Updating catalog..."));
 
 	QNetworkRequest req(QUrl("http://cardinot.sourceforge.net/getUpdates.php?time="
-				 % QString::number(m_StelAddOn.getLastUpdate())));
+				 % QString::number(StelApp::getInstance().getStelAddOn().getLastUpdate())));
 	req.setAttribute(QNetworkRequest::CacheSaveControlAttribute, false);
 	req.setAttribute(QNetworkRequest::RedirectionTargetAttribute, false);
 	req.setRawHeader("User-Agent", StelUtils::getApplicationName().toLatin1());
@@ -244,25 +243,25 @@ void AddOnDialog::downloadError(QNetworkReply::NetworkError)
 void AddOnDialog::downloadFinished()
 {
 	Q_ASSERT(m_pUpdateCatalogReply);
-	if (m_pUpdateCatalogReply->error()!=QNetworkReply::NoError)
+	if (m_pUpdateCatalogReply->error() != QNetworkReply::NoError)
 	{
 		m_pUpdateCatalogReply->deleteLater();
 		m_pUpdateCatalogReply = NULL;
 		return;
 	}
 
-	QByteArray data=m_pUpdateCatalogReply->readAll();
+	QByteArray data = m_pUpdateCatalogReply->readAll();
 	QString result(data);
 
 	if (!result.isEmpty())
 	{
-		m_StelAddOn.updateDatabase(result);
+		StelApp::getInstance().getStelAddOn().updateDatabase(result);
 	}
 
 	qint64 currentTime = QDateTime::currentMSecsSinceEpoch()/1000;
 	ui->btnUpdate->setEnabled(true);
-	m_StelAddOn.setLastUpdate(currentTime);
-	ui->txtLastUpdate->setText(m_StelAddOn.getLastUpdateString());
+	StelApp::getInstance().getStelAddOn().setLastUpdate(currentTime);
+	ui->txtLastUpdate->setText(StelApp::getInstance().getStelAddOn().getLastUpdateString());
 	populateTables();
 }
 
@@ -292,7 +291,7 @@ void AddOnDialog::installSelectedRows() {
 			}
 			case LANDSCAPE:
 				res.first = addonTitle;
-				res.second = m_StelAddOn.installLandscape(id, addonId);
+				res.second = StelApp::getInstance().getStelAddOn().installLandscape(id, addonId);
 				resultList.append(res);
 				break;
 			case LANGUAGEPACK:
