@@ -140,6 +140,11 @@ int main(int argc, char **argv)
 	QCoreApplication::setApplicationVersion(StelUtils::getApplicationVersion());
 	QCoreApplication::setOrganizationDomain("stellarium.org");
 	QCoreApplication::setOrganizationName("stellarium");
+
+	// LP:1335611: Avoid troubles with search of the paths of the plugins (deployments troubles) --AW
+	#if QT_VERSION==QT_VERSION_CHECK(5, 3, 1)
+	QCoreApplication::addLibraryPath(".");
+	#endif
 	
 	QGuiApplication::setDesktopSettingsAware(false);
 
