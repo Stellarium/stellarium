@@ -36,6 +36,8 @@ StelAddOn::StelAddOn()
 	: m_db(QSqlDatabase::addDatabase("QSQLITE"))
 	, m_progressBar(NULL)
 	, m_bDownloading(false)
+	, m_pDownloadReply(NULL)
+	, m_currentDownloadFile(NULL)
 	, dirAddOn(StelFileMgr::getUserDir() % "/addon")
 	, dirCatalog(dirAddOn % "/catalog/")
 	, dirLandscape(dirAddOn % "/landscape/")
@@ -270,7 +272,7 @@ void StelAddOn::downloadAddOn(const QString filepath, const AddOnInfo addonInfo)
 {
 	Q_ASSERT(m_pDownloadReply==NULL);
 	Q_ASSERT(m_currentDownloadFile==NULL);
-	Q_ASSERT(!m_currentDownloadCategory.isEmpty());
+	Q_ASSERT(m_currentDownloadCategory.isEmpty());
 	Q_ASSERT(m_currentDownloadPath.isEmpty());
 	Q_ASSERT(m_progressBar==NULL);
 
