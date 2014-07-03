@@ -277,7 +277,6 @@ void AddOnDialog::installSelectedRows() {
 			continue;
 		}
 
-		int id = m_currentTableView->model()->index(i, 0).data().toInt();
 		int addonId = m_currentTableView->model()->index(i, 1).data().toInt();
 		QString addonTitle = m_currentTableView->model()->index(i, 2).data().toString();
 		Result res;
@@ -291,7 +290,8 @@ void AddOnDialog::installSelectedRows() {
 			}
 			case LANDSCAPE:
 				res.first = addonTitle;
-				res.second = StelApp::getInstance().getStelAddOn().installLandscape(id, addonId);
+				// TODO: fix download result
+				StelApp::getInstance().getStelAddOn().installAddOn(addonId);
 				resultList.append(res);
 				break;
 			case LANGUAGEPACK:

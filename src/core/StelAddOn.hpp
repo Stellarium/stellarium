@@ -45,8 +45,8 @@ class StelAddOn : public QObject
 public:
 	StelAddOn();
 
-	bool installLandscape(int id, int addonId);
-	bool installLandscapeFromFile(QString filePath);
+	void installAddOn(const int addonId);
+	void installFromFile(QString category, QString filePath);
 	void updateDatabase(QString webresult);
 	void setLastUpdate(qint64 time);
 	QString getLastUpdateString()
@@ -60,18 +60,38 @@ public:
 	}
 
 private slots:
-	void downloadError(QNetworkReply::NetworkError);
 	void downloadFinished();
-	void newDownload();
+	void newDownloadedData();
 
 private:
+	//! @enum InstallState
+	//! Used for keeping track of the download/update status
+	enum InstallState
+	{
+		Installed,
+		Complete,
+		CompleteUpdates,
+		DownloadError,
+		OtherError
+	};
+
+	struct AddOnInfo {
+		QString category;
+		double downloadSize;
+		QString filename;
+		QUrl url;
+	};
+
 	QSqlDatabase m_db;
 	QString m_sAddonPath;
 	qint64 m_iLastUpdate;
 	class StelProgressController* m_progressBar;
-	QList<int> m_downloadingAddonIds;
+	QList<int> m_downloadQueue;
+	bool m_bDownloading;
 	QNetworkReply* m_pDownloadReply;
 	QFile* m_currentDownloadFile;
+	QString m_currentDownloadPath;
+	QString m_currentDownloadCategory;
 
 	bool createAddonTables();
 	bool createTableLicense();
@@ -85,15 +105,9 @@ private:
 	const QString dirStarlore;
 	const QString dirTexture;
 
-	struct AddOnInfo {
-		double downloadSize;
-		QString filename;
-		QUrl url;
-	};
-
 	AddOnInfo getAddOnInfo(int addonId);
 
-	bool downloadAddOn(const AddOnInfo addonInfo, const QString target);
+	void downloadAddOn(const QString filepath, const AddOnInfo addonInfo);
 };
 
 #endif // _STELADDON_HPP_
