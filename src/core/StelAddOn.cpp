@@ -94,6 +94,36 @@ StelAddOn::StelAddOn()
 	m_iLastUpdate = lastUpdate.toLong();
 }
 
+QString StelAddOn::getDirectory(QString category)
+{
+	QString dir;
+	if (category == LANDSCAPE)
+	{
+		dir = dirLandscape;
+	}
+	else if (category == LANGUAGE_PACK)
+	{
+		dir = dirLanguagePack;
+	}
+	else if (category == SCRIPT)
+	{
+		dir = dirScript;
+	}
+	else if (category == STARLORE)
+	{
+		dir = dirStarlore;
+	}
+	else if (category == TEXTURE)
+	{
+		dir = dirTexture;
+	}
+	else if (category == PLUGIN_CATALOG || category == STAR_CATALOG)
+	{
+		dir = dirCatalog;
+	}
+	return dir;
+}
+
 bool StelAddOn::createAddonTables()
 {
 	QStringList addonTables;
@@ -255,20 +285,23 @@ StelAddOn::AddOnInfo StelAddOn::getAddOnInfo(int addonId)
 		addonInfo.category =  query.value(categoryColumn).toString();
 		addonInfo.downloadSize = query.value(downloadSizeColumn).toDouble();
 		addonInfo.url = QUrl(query.value(urlColumn).toString());
-		// handling url to get filename
+		// handling url to get filename and filepath
 		QStringList splitedURL = addonInfo.url.toString().split("/");
 		addonInfo.filename = splitedURL.last();
 		if (addonInfo.filename.isEmpty())
 		{
 			addonInfo.filename = splitedURL.at(splitedURL.length() - 2);
 		}
+		QString dir = getDirectory(addonInfo.category);
+		Q_ASSERT(!dir.isEmpty());
+		addonInfo.filepath = dir % addonInfo.filename;
 		return addonInfo;
 	}
 
 	return AddOnInfo();
 }
 
-void StelAddOn::downloadAddOn(const QString filepath, const AddOnInfo addonInfo)
+void StelAddOn::downloadAddOn(const AddOnInfo addonInfo)
 {
 	Q_ASSERT(m_pDownloadReply==NULL);
 	Q_ASSERT(m_currentDownloadFile==NULL);
@@ -276,12 +309,12 @@ void StelAddOn::downloadAddOn(const QString filepath, const AddOnInfo addonInfo)
 	Q_ASSERT(m_currentDownloadPath.isEmpty());
 	Q_ASSERT(m_progressBar==NULL);
 
-	m_currentDownloadPath = filepath;
-	m_currentDownloadFile = new QFile(filepath);
+	m_currentDownloadPath = addonInfo.filepath;
+	m_currentDownloadFile = new QFile(addonInfo.filepath);
 	if (!m_currentDownloadFile->open(QIODevice::WriteOnly))
 	{
 		qWarning() << "Can't open a writable file: "
-			   << QDir::toNativeSeparators(filepath);
+			   << QDir::toNativeSeparators(addonInfo.filepath);
 		return;
 	}
 
@@ -345,9 +378,7 @@ void StelAddOn::downloadFinished()
 	if (!m_downloadQueue.isEmpty())
 	{
 		// next download
-		AddOnInfo nextAddonInfo = getAddOnInfo(m_downloadQueue.first());
-		downloadAddOn(QString(dirLandscape % nextAddonInfo.filename),
-			      nextAddonInfo);
+		downloadAddOn(getAddOnInfo(m_downloadQueue.first()));
 	}
 }
 
@@ -359,24 +390,23 @@ void StelAddOn::installAddOn(const int addonId)
 	}
 
 	AddOnInfo addonInfo = getAddOnInfo(addonId);
-	QString filepath = dirLandscape % addonInfo.filename;
 	// checking if we have this file in add-on path (disk)
-	if (QFile(filepath).exists())
+	if (QFile(addonInfo.filepath).exists())
 	{
-		return installFromFile(addonInfo.category, filepath);
+		return installFromFile(addonInfo.category, addonInfo.filepath);
 	}
 
 	// download file
 	m_downloadQueue.append(addonId);
 	if (!m_bDownloading)
 	{
-		downloadAddOn(filepath, addonInfo);
+		downloadAddOn(addonInfo);
 	}
 }
 
 void StelAddOn::installFromFile(QString category, QString filePath)
 {
-	if (category == TABLE_LANDSCAPE)
+	if (category == LANDSCAPE)
 	{
 		QString ref = GETSTELMODULE(LandscapeMgr)->installLandscapeFromArchive(filePath);
 		if(!ref.isEmpty())

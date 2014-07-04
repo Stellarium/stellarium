@@ -27,6 +27,7 @@
 #include <QSqlDatabase>
 #include <QUrl>
 
+// database table names
 const QString TABLE_AUTHOR = "author";
 const QString TABLE_LICENSE = "license";
 const QString TABLE_ADDON = "addon";
@@ -38,6 +39,15 @@ const QString TABLE_SCRIPT = "script";
 const QString TABLE_STAR_CATALOG = "star_catalog";
 const QString TABLE_STARLORE = "starlore";
 const QString TABLE_TEXTURE = "texture";
+
+// categories (database column addon.category)
+const QString LANDSCAPE = "landscape";
+const QString LANGUAGE_PACK = "language_pack";
+const QString PLUGIN_CATALOG = "plugin_catalog";
+const QString SCRIPT = "script";
+const QString STAR_CATALOG = "star_catalog";
+const QString STARLORE = "starlore";
+const QString TEXTURE = "texture";
 
 class StelAddOn : public QObject
 {
@@ -79,6 +89,7 @@ private:
 		QString category;
 		double downloadSize;
 		QString filename;
+		QString filepath;
 		QUrl url;
 	};
 
@@ -106,8 +117,9 @@ private:
 	const QString dirTexture;
 
 	AddOnInfo getAddOnInfo(int addonId);
+	QString getDirectory(QString category);
 
-	void downloadAddOn(const QString filepath, const AddOnInfo addonInfo);
+	void downloadAddOn(const AddOnInfo addonInfo);
 };
 
 #endif // _STELADDON_HPP_
