@@ -278,35 +278,11 @@ void AddOnDialog::installSelectedRows() {
 		}
 
 		int addonId = m_currentTableView->model()->index(i, 1).data().toInt();
-		QString addonTitle = m_currentTableView->model()->index(i, 2).data().toString();
+		// TODO: fix download result
 		Result res;
-		switch (currentTab)
-		{
-			case CATALOG:
-			{
-				QString type = m_currentTableView->model()->index(i, 3).data().toString();
-				// TODO: install
-				break;
-			}
-			case LANDSCAPE:
-				res.first = addonTitle;
-				// TODO: fix download result
-				StelApp::getInstance().getStelAddOn().installAddOn(addonId);
-				resultList.append(res);
-				break;
-			case LANGUAGEPACK:
-				// TODO: install
-				break;
-			case SCRIPT:
-				// TODO: install
-				break;
-			case STARLORE:
-				// TODO: install
-				break;
-			case TEXTURE:
-				// TODO: install
-				break;
-		}
+		res.first = m_currentTableView->model()->index(i, 2).data().toString();
+		StelApp::getInstance().getStelAddOn().installAddOn(addonId);
+		resultList.append(res);
 	}
 
 	// Display results
