@@ -258,6 +258,37 @@ void StelAddOn::updateDatabase(QString webresult)
 				 << m_db.lastError();
 		}
 	}
+
+	// check add-ons which are already installed
+	// landscapes
+	QDir landscapeDestination = GETSTELMODULE(LandscapeMgr)->getLandscapeDir();
+	QStringList landscapes = GETSTELMODULE(LandscapeMgr)->getUserLandscapeIDs();
+	foreach (QString landscape, landscapes) {
+		if (landscapeDestination.cd(landscape))
+		{
+			updateInstalledAddon(landscape % ".zip",
+					     "1.0",
+					     landscapeDestination.absolutePath());
+			landscapeDestination.cdUp();
+		}
+	}
+}
+
+void StelAddOn::updateInstalledAddon(QString filename,
+				     QString installedVersion,
+				     QString directory)
+{
+	 QSqlQuery query(m_db);
+	 query.prepare("UPDATE addon "
+		       "SET installed=:installed, directory=:dir "
+		       "WHERE filename=:filename");
+	 query.bindValue(":installed", installedVersion);
+	 query.bindValue(":dir", directory);
+	 query.bindValue(":filename", filename);
+
+	 if (!query.exec()) {
+		qWarning() << "Add-On Manager :" << m_db.lastError();
+	}
 }
 
 StelAddOn::AddOnInfo StelAddOn::getAddOnInfo(int addonId)
@@ -267,11 +298,12 @@ StelAddOn::AddOnInfo StelAddOn::getAddOnInfo(int addonId)
 	}
 
 	QSqlQuery query(m_db);
-	query.prepare("SELECT category, download_size, url FROM addon WHERE id=:id");
+	query.prepare("SELECT category, download_size, url "
+		      "FROM addon WHERE id=:id");
 	query.bindValue(":id", addonId);
 
 	if (!query.exec()) {
-		qDebug() << "Add-On Manager :" << m_db.lastError();
+		qWarning() << "Add-On Manager :" << m_db.lastError();
 		return AddOnInfo();
 	}
 

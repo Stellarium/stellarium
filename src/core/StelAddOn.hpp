@@ -120,6 +120,9 @@ private:
 	QString getDirectory(QString category);
 
 	void downloadAddOn(const AddOnInfo addonInfo);
+	void updateInstalledAddon(QString filename,
+				  QString installedVersion,
+				  QString directory);
 };
 
 #endif // _STELADDON_HPP_
