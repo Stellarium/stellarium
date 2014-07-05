@@ -25,6 +25,7 @@
 #include "StelModule.hpp"
 #include "StelUtils.hpp"
 
+#include <QDir>
 #include <QMap>
 #include <QStringList>
 
@@ -111,6 +112,10 @@ public:
 	//! directory in which the files (textures and so on) for the landscape reside.
 	//! @return A pointer to the newly created landscape object.
 	Landscape* createFromFile(const QString& landscapeFile, const QString& landscapeId);
+
+	//! Get the destination directory of all landscapes.
+	//! @return directory
+	QDir getLandscapeDir();
 
 	// GZ: implement StelModule's method. For test purposes only, we implement a manual transparency sampler.
 	// TODO: comment this away for final builds

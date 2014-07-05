@@ -39,7 +39,6 @@
 #include <QDebug>
 #include <QSettings>
 #include <QString>
-#include <QDir>
 #include <QDirIterator>
 #include <QFile>
 #include <QTemporaryFile>
@@ -773,16 +772,8 @@ QMap<QString,QString> LandscapeMgr::getNameToDirMap() const
 	return result;
 }
 
-QString LandscapeMgr::installLandscapeFromArchive(QString sourceFilePath, const bool display, const bool toMainDirectory)
+QDir LandscapeMgr::getLandscapeDir()
 {
-	Q_UNUSED(toMainDirectory);
-	if (!QFile::exists(sourceFilePath))
-	{
-		qDebug() << "LandscapeMgr: File does not exist:" << QDir::toNativeSeparators(sourceFilePath);
-		emit errorUnableToOpen(sourceFilePath);
-		return QString();
-	}
-
 	QDir parentDestinationDir;
 	parentDestinationDir.setPath(StelFileMgr::getUserDir());
 
@@ -796,7 +787,21 @@ QString LandscapeMgr::installLandscapeFromArchive(QString sourceFilePath, const 
 			return QString();
 		}
 	}
-	QDir destinationDir (parentDestinationDir.absoluteFilePath("landscapes"));
+
+	return QDir(parentDestinationDir.absoluteFilePath("landscapes"));
+}
+
+QString LandscapeMgr::installLandscapeFromArchive(QString sourceFilePath, const bool display, const bool toMainDirectory)
+{
+	Q_UNUSED(toMainDirectory);
+	if (!QFile::exists(sourceFilePath))
+	{
+		qDebug() << "LandscapeMgr: File does not exist:" << QDir::toNativeSeparators(sourceFilePath);
+		emit errorUnableToOpen(sourceFilePath);
+		return QString();
+	}
+
+	QDir destinationDir = getLandscapeDir();
 
 	QZipReader reader(sourceFilePath);
 	if (reader.status() != QZipReader::NoError)
