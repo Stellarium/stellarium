@@ -141,6 +141,7 @@ bool StelAddOn::createAddonTables()
 			"installed TEXT, "
 			"directory TEXT, "
 			"url TEXT, "
+			"filename TEXT, "
 			"download_size TEXT, "
 			"checksum TEXT, "
 			"last_update TEXT)";
