@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-06-26 10:33+0700\n"
-"PO-Revision-Date: 2014-02-26 07:15+0000\n"
-"Last-Translator: Zbyněk Schwarz <Unknown>\n"
+"PO-Revision-Date: 2014-07-05 12:10+0000\n"
+"Last-Translator: PRTgeologist <Unknown>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-06-27 05:45+0000\n"
-"X-Generator: Launchpad (build 17077)\n"
+"X-Launchpad-Export-Date: 2014-07-06 05:36+0000\n"
+"X-Generator: Launchpad (build 17086)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:107 src/core/modules/StarMgr.cpp:339
 #: src/core/modules/GridLinesMgr.cpp:695 src/core/modules/LandscapeMgr.cpp:353
@@ -320,17 +320,17 @@ msgstr "Předběžné označení: %1"
 #: src/core/modules/Comet.cpp:186
 #, no-c-format, qt-format
 msgid "Distance from Sun: %1AU (%2 km)"
-msgstr ""
+msgstr "Vzdálenost od Slunce: %1AU (%2 km)"
 
 #: src/core/modules/Comet.cpp:193
 #, no-c-format, qt-format
 msgid "Distance from Sun: %1AU (%2 Mio km)"
-msgstr ""
+msgstr "Vzdálenost od Slunce: %1AU (%2 mil. km)"
 
 #: src/core/modules/Comet.cpp:217
 #, no-c-format, qt-format
 msgid "Speed: %1 km/s"
-msgstr ""
+msgstr "Rychlost: %1 km/s"
 
 #: src/core/modules/SolarSystem.cpp:156
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:308
@@ -1435,7 +1435,7 @@ msgstr ""
 #. TRANSLATORS: This message will be displayed for users if current version of Stellarium is equals with version from stellarium.org
 #: src/gui/HelpDialog.cpp:292
 msgid "This is latest stable version of Stellarium."
-msgstr ""
+msgstr "Toto je nejnovější a nejstabilnější verze Stellaria."
 
 #: src/gui/HelpDialog.cpp:322
 msgid "Stellarium Help"
@@ -1700,52 +1700,52 @@ msgstr ""
 
 #: src/gui/StelGuiItems.cpp:634
 msgid "Frames per second"
-msgstr ""
+msgstr "Snímky za sekundu"
 
 #. TRANSLATORS: Short description for Class 1 of the Bortle scale
 #: src/gui/ViewDialog.cpp:325
 msgid "Excellent dark-sky site"
-msgstr ""
+msgstr "Výtečné temné nebe"
 
 #. TRANSLATORS: Short description for Class 2 of the Bortle scale
 #: src/gui/ViewDialog.cpp:327
 msgid "Typical truly dark site"
-msgstr ""
+msgstr "Typické temné nebe"
 
 #. TRANSLATORS: Short description for Class 3 of the Bortle scale
 #: src/gui/ViewDialog.cpp:329
 msgid "Rural sky"
-msgstr ""
+msgstr "Nebe na venkově"
 
 #. TRANSLATORS: Short description for Class 4 of the Bortle scale
 #: src/gui/ViewDialog.cpp:331
 msgid "Rural/suburban transition"
-msgstr ""
+msgstr "Nebe na venkově přecházející v nebe příměstské"
 
 #. TRANSLATORS: Short description for Class 5 of the Bortle scale
 #: src/gui/ViewDialog.cpp:333
 msgid "Suburban sky"
-msgstr ""
+msgstr "Příměstské nebe"
 
 #. TRANSLATORS: Short description for Class 6 of the Bortle scale
 #: src/gui/ViewDialog.cpp:335
 msgid "Bright suburban sky"
-msgstr ""
+msgstr "Jasné příměstské nebe"
 
 #. TRANSLATORS: Short description for Class 7 of the Bortle scale
 #: src/gui/ViewDialog.cpp:337
 msgid "Suburban/urban transition"
-msgstr ""
+msgstr "Příměstské nebe přecházející v nebe měst"
 
 #. TRANSLATORS: Short description for Class 8 of the Bortle scale
 #: src/gui/ViewDialog.cpp:339
 msgid "City sky"
-msgstr ""
+msgstr "Městské nebe"
 
 #. TRANSLATORS: Short description for Class 9 of the Bortle scale
 #: src/gui/ViewDialog.cpp:341
 msgid "Inner-city sky"
-msgstr ""
+msgstr "Nebe v centru města"
 
 #: src/gui/ViewDialog.cpp:355
 msgid "The naked-eye limiting magnitude is"
@@ -1963,7 +1963,7 @@ msgstr "Režim celá obrazovka"
 #: src/StelMainView.cpp:415
 #, qt-format
 msgid "Stellarium %1"
-msgstr ""
+msgstr "Stellarium %1"
 
 #: src/translations.h:33 plugins/Exoplanets/src/Exoplanet.cpp:217
 #: plugins/Exoplanets/src/Exoplanet.cpp:221
@@ -2280,7 +2280,7 @@ msgstr "Hygiea"
 #. TRANSLATORS: Asteroid (41) Daphne
 #: src/translations.h:123
 msgid "Daphne"
-msgstr ""
+msgstr "Daphne"
 
 #. TRANSLATORS: Asteroid (1221) Amor
 #: src/translations.h:125
@@ -2320,27 +2320,27 @@ msgstr "Makemake"
 #. TRANSLATORS: Asteroid (3200) Phaethon
 #: src/translations.h:139
 msgid "Phaethon"
-msgstr ""
+msgstr "Phaethon"
 
 #. TRANSLATORS: Asteroid (1866) Sisyphus
 #: src/translations.h:141
 msgid "Sisyphus"
-msgstr ""
+msgstr "Sisyphus"
 
 #. TRANSLATORS: Asteroid (1864) Daedalus
 #: src/translations.h:143
 msgid "Daedalus"
-msgstr ""
+msgstr "Daedalus"
 
 #. TRANSLATORS: Asteroid (1566) Icarus
 #: src/translations.h:145
 msgid "Icarus"
-msgstr ""
+msgstr "Icarus"
 
 #. TRANSLATORS: Proper name of comet C/1680 V1
 #: src/translations.h:148
 msgid "Great Comet of 1680 (C/1680 V1)"
-msgstr ""
+msgstr "Velká kometa roku 1680 (C/ 1680 V1)"
 
 #. TRANSLATORS: Name of supernova SN 1572A and script name
 #: src/translations.h:151
@@ -2443,7 +2443,7 @@ msgstr "Polynéská"
 
 #: src/translations.h:190
 msgid "Romanian"
-msgstr ""
+msgstr "Rumunština"
 
 #: src/translations.h:191
 msgid "Sami"
@@ -2604,7 +2604,7 @@ msgstr "Události Země z Merkuru"
 #. TRANSLATORS: Name and description of script
 #: src/translations.h:267
 msgid "Earth Events from a floating city on Venus"
-msgstr ""
+msgstr "Události na Zemi viděné ze vznášejícího se města na Venuši"
 
 #. TRANSLATORS: Name and description of script
 #: src/translations.h:269
@@ -2722,6 +2722,7 @@ msgstr ""
 msgid ""
 "Screensaver of various happenings in the Solar System. 232 events in all!"
 msgstr ""
+"Spořič obrazovky zobrazující beze všeho 232 událostí ve Sluneční soustavě."
 
 #: src/translations.h:295
 msgid "A tour of the western constellations."
@@ -3731,23 +3732,23 @@ msgstr "Zimbabwe"
 
 #: src/translations.h:550
 msgid "&Undo"
-msgstr ""
+msgstr "&Zpět"
 
 #: src/translations.h:551
 msgid "&Redo"
-msgstr ""
+msgstr "&Znovu"
 
 #: src/translations.h:552
 msgid "Cu&t"
-msgstr ""
+msgstr "Vyjmou&t"
 
 #: src/translations.h:553
 msgid "&Copy"
-msgstr ""
+msgstr "&Kopírovat"
 
 #: src/translations.h:554
 msgid "&Paste"
-msgstr ""
+msgstr "&Vložit"
 
 #: src/translations.h:555 src/ui_locationDialogGui.h:407
 #: plugins/Oculars/src/ui_ocularDialog.h:1074
@@ -3759,11 +3760,11 @@ msgstr "Odstranit"
 
 #: src/translations.h:556
 msgid "Select All"
-msgstr ""
+msgstr "Vybrat vše"
 
 #: src/translations.h:557
 msgid "Look in:"
-msgstr ""
+msgstr "Hledat v:"
 
 #: src/translations.h:558
 msgid "Directory:"
@@ -3784,7 +3785,7 @@ msgstr "Storno"
 
 #: src/translations.h:562
 msgid "Files of type:"
-msgstr ""
+msgstr "Soubory typu:"
 
 #: src/translations.h:563
 msgid "Date Modified"
