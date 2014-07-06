@@ -74,7 +74,9 @@ void AddOnDialog::createDialogContent()
 	ui->stackListWidget->setCurrentRow(CATALOG);
 	m_currentTableView = ui->catalogsTableView;
 
+	// Install and Remove
 	connect(ui->btnInstall, SIGNAL(clicked()), this, SLOT(installSelectedRows()));
+	connect(ui->btnRemove, SIGNAL(clicked()), this, SLOT(removeSelectedRows()));
 }
 
 void AddOnDialog::changePage(QListWidgetItem *current, QListWidgetItem *previous)
@@ -299,4 +301,8 @@ void AddOnDialog::installSelectedRows() {
 		QString installed = r.second ? " installed!" : " not installed!";
 		qDebug() << "Add-on: " % r.first % installed;
 	}
+}
+
+void AddOnDialog::removeSelectedRows() {
+	// TODO
 }

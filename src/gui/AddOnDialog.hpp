@@ -54,6 +54,7 @@ private slots:
 	void downloadError(QNetworkReply::NetworkError);
 	void downloadFinished();
 	void installSelectedRows();
+	void removeSelectedRows();
 	void populateTables();
 
 private:
