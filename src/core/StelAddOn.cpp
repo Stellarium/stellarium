@@ -245,7 +245,7 @@ void StelAddOn::setLastUpdate(qint64 time) {
 	}
 }
 
-void StelAddOn::updateDatabase(QString webresult)
+bool StelAddOn::updateDatabase(QString webresult)
 {
 	QSqlQuery query(m_db);
 	QStringList queries = webresult.split("<br>");
@@ -257,6 +257,7 @@ void StelAddOn::updateDatabase(QString webresult)
 		{
 			qDebug() << "Add-On Manager : unable to update database."
 				 << m_db.lastError();
+			return false;
 		}
 	}
 
@@ -273,6 +274,8 @@ void StelAddOn::updateDatabase(QString webresult)
 			landscapeDestination.cdUp();
 		}
 	}
+
+	return true;
 }
 
 void StelAddOn::updateInstalledAddon(QString filename,

@@ -255,7 +255,12 @@ void AddOnDialog::downloadFinished()
 
 	if (!result.isEmpty())
 	{
-		StelApp::getInstance().getStelAddOn().updateDatabase(result);
+		if(!StelApp::getInstance().getStelAddOn().updateDatabase(result))
+		{
+			ui->btnUpdate->setEnabled(true);
+			ui->txtLastUpdate->setText(q_("Database update failed!"));
+			return;
+		}
 	}
 
 	qint64 currentTime = QDateTime::currentMSecsSinceEpoch()/1000;

@@ -57,7 +57,7 @@ public:
 
 	void installAddOn(const int addonId);
 	void installFromFile(QString category, QString filePath);
-	void updateDatabase(QString webresult);
+	bool updateDatabase(QString webresult);
 	void setLastUpdate(qint64 time);
 	QString getLastUpdateString()
 	{
