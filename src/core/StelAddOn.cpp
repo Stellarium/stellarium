@@ -449,5 +449,12 @@ void StelAddOn::installFromFile(QString category, QString filePath)
 		{
 			qWarning() << "FAILED to install " << filePath;
 		}
+		// update database
+		QDir landscapeDestination = GETSTELMODULE(LandscapeMgr)->getLandscapeDir();
+		if (landscapeDestination.cd(ref))
+		{
+			updateInstalledAddon(ref % ".zip", "1.0",
+					     landscapeDestination.absolutePath());
+		}
 	}
 }
