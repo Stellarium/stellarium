@@ -54,6 +54,7 @@ private slots:
 	void downloadError(QNetworkReply::NetworkError);
 	void downloadFinished();
 	void installSelectedRows();
+	void populateTables();
 
 private:
 	//! All categories sorted according to the tab index.
@@ -73,7 +74,6 @@ private:
 
 	void initModel(QTableView* tableView, QString table);
 	void setUpTableView(QTableView* tableView);
-	void populateTables();
 	void insertCheckBoxes(QTableView* tableview, int tab);
 };
 

@@ -68,6 +68,8 @@ public:
 	{
 		return m_iLastUpdate;
 	}
+signals:
+	void updateTableViews();
 
 private slots:
 	void downloadFinished();

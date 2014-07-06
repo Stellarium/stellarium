@@ -53,6 +53,9 @@ void AddOnDialog::styleChanged()
 
 void AddOnDialog::createDialogContent()
 {
+	connect(&StelApp::getInstance().getStelAddOn(), SIGNAL(updateTableViews()),
+		this, SLOT(populateTables()));
+
 	ui->setupUi(dialog);
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()),this, SLOT(retranslate()));
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
