@@ -124,6 +124,7 @@ private:
 	AddOnInfo getAddOnInfo(int addonId);
 	QString getDirectory(QString category);
 
+	void checkInstalledAddOns();
 	void downloadAddOn(const AddOnInfo addonInfo);
 	void updateInstalledAddon(QString filename,
 				  QString installedVersion,

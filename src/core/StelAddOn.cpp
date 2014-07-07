@@ -91,6 +91,9 @@ StelAddOn::StelAddOn()
 		file.close();
 	}
 	m_iLastUpdate = lastUpdate.toLong();
+
+	// check add-ons which are already installed
+	checkInstalledAddOns();
 }
 
 QString StelAddOn::getDirectory(QString category)
@@ -232,6 +235,23 @@ bool StelAddOn::createTableAuthor()
 	return true;
 }
 
+void StelAddOn::checkInstalledAddOns()
+{
+	// check add-ons which are already installed
+	// LANDSCAPES
+	QDir landscapeDestination = GETSTELMODULE(LandscapeMgr)->getLandscapeDir();
+	QStringList landscapes = GETSTELMODULE(LandscapeMgr)->getUserLandscapeIDs();
+	foreach (QString landscape, landscapes) {
+		if (landscapeDestination.cd(landscape))
+		{
+			updateInstalledAddon(landscape % ".zip",
+					     "1.0",
+					     landscapeDestination.absolutePath());
+			landscapeDestination.cdUp();
+		}
+	}
+}
+
 void StelAddOn::setLastUpdate(qint64 time) {
 	m_iLastUpdate = time;
 	// store value it in the txt file
@@ -261,19 +281,7 @@ bool StelAddOn::updateDatabase(QString webresult)
 	}
 
 	// check add-ons which are already installed
-	// landscapes
-	QDir landscapeDestination = GETSTELMODULE(LandscapeMgr)->getLandscapeDir();
-	QStringList landscapes = GETSTELMODULE(LandscapeMgr)->getUserLandscapeIDs();
-	foreach (QString landscape, landscapes) {
-		if (landscapeDestination.cd(landscape))
-		{
-			updateInstalledAddon(landscape % ".zip",
-					     "1.0",
-					     landscapeDestination.absolutePath());
-			landscapeDestination.cdUp();
-		}
-	}
-
+	checkInstalledAddOns();
 	return true;
 }
 
