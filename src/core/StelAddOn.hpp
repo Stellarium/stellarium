@@ -95,7 +95,7 @@ private:
 		QString filename;
 		QString filepath;
 		QUrl url;
-		QDir directory;
+		QDir installedDir;
 	};
 
 	QSqlDatabase m_db;
