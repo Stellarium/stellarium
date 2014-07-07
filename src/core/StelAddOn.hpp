@@ -21,6 +21,7 @@
 #define _STELADDON_HPP_
 
 #include <QDateTime>
+#include <QDir>
 #include <QFile>
 #include <QNetworkReply>
 #include <QObject>
@@ -57,6 +58,7 @@ public:
 
 	void installAddOn(const int addonId);
 	void installFromFile(QString category, QString filePath);
+	void removeAddOn(const int addonId);
 	bool updateDatabase(QString webresult);
 	void setLastUpdate(qint64 time);
 	QString getLastUpdateString()
@@ -93,6 +95,7 @@ private:
 		QString filename;
 		QString filepath;
 		QUrl url;
+		QDir directory;
 	};
 
 	QSqlDatabase m_db;

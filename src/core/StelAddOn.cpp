@@ -302,7 +302,7 @@ StelAddOn::AddOnInfo StelAddOn::getAddOnInfo(int addonId)
 	}
 
 	QSqlQuery query(m_db);
-	query.prepare("SELECT category, download_size, url "
+	query.prepare("SELECT category, download_size, url, directory "
 		      "FROM addon WHERE id=:id");
 	query.bindValue(":id", addonId);
 
@@ -315,12 +315,14 @@ StelAddOn::AddOnInfo StelAddOn::getAddOnInfo(int addonId)
 	const int categoryColumn = queryRecord.indexOf("category");
 	const int downloadSizeColumn = queryRecord.indexOf("download_size");
 	const int urlColumn = queryRecord.indexOf("url");
+	const int directoryColumn = queryRecord.indexOf("directory");
 	if (query.next()) {
 		AddOnInfo addonInfo;
 		// info from db
 		addonInfo.category =  query.value(categoryColumn).toString();
 		addonInfo.downloadSize = query.value(downloadSizeColumn).toDouble();
 		addonInfo.url = QUrl(query.value(urlColumn).toString());
+		addonInfo.directory = QDir(query.value(directoryColumn).toString());
 		// handling url to get filename and filepath
 		QStringList splitedURL = addonInfo.url.toString().split("/");
 		addonInfo.filename = splitedURL.last();
@@ -457,5 +459,23 @@ void StelAddOn::installFromFile(QString category, QString filePath)
 					     landscapeDestination.absolutePath());
 		}
 		emit (updateTableViews());
+	}
+}
+
+void StelAddOn::removeAddOn(const int addonId)
+{
+	AddOnInfo addonInfo = getAddOnInfo(addonId);
+	if (addonInfo.category == LANDSCAPE)
+	{
+		QString dirName = addonInfo.directory.dirName();
+		if(!GETSTELMODULE(LandscapeMgr)->removeLandscape(dirName))
+		{
+			qWarning() << "FAILED to remove landscape " << dirName;
+		}
+		else
+		{
+			updateInstalledAddon(dirName % ".zip", "", "");
+			emit (updateTableViews());
+		}
 	}
 }

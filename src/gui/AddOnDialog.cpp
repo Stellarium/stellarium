@@ -304,5 +304,16 @@ void AddOnDialog::installSelectedRows() {
 }
 
 void AddOnDialog::removeSelectedRows() {
-	// TODO
+	int currentTab = ui->stackedWidget->currentIndex();
+	Q_ASSERT(m_checkBoxes.at(currentTab).count() == m_currentTableView->model()->rowCount());
+	for (int i=0;i<m_checkBoxes.at(currentTab).count(); ++i)
+	{
+		if (!m_checkBoxes.at(currentTab).value(i)->checkState())
+		{
+			continue;
+		}
+
+		int addonId = m_currentTableView->model()->index(i, 1).data().toInt();
+		StelApp::getInstance().getStelAddOn().removeAddOn(addonId);
+	}
 }
