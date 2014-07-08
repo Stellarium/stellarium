@@ -460,6 +460,10 @@ void StelAddOn::installFromFile(QString category, QString filePath)
 			updateInstalledAddon(ref % ".zip", "1.0",
 					     landscapeDestination.absolutePath());
 		}
+	}
+
+	if (m_downloadQueue.isEmpty())
+	{
 		emit (updateTableViews());
 	}
 }

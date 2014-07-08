@@ -117,7 +117,7 @@ void AddOnDialog::setUpTableView(QTableView* tableView)
 	int lastColumn = tableView->horizontalHeader()->count() - 1;
 	tableView->horizontalHeader()->setSectionResizeMode(lastColumn, QHeaderView::ResizeToContents);
 	tableView->verticalHeader()->setVisible(false);
-	tableView->setAlternatingRowColors(true);
+	tableView->setAlternatingRowColors(false);
 	tableView->setSelectionBehavior(QAbstractItemView::SelectRows);
 	tableView->setEditTriggers(false);
 }
@@ -276,44 +276,49 @@ void AddOnDialog::downloadFinished()
 }
 
 void AddOnDialog::installSelectedRows() {
-	typedef QPair<QString, bool> Result;
-	QList<Result> resultList; // <title, result>
 	int currentTab = ui->stackedWidget->currentIndex();
 	Q_ASSERT(m_checkBoxes.at(currentTab).count() == m_currentTableView->model()->rowCount());
+	QList<int> addonIdList;
 	for (int i=0;i<m_checkBoxes.at(currentTab).count(); ++i)
 	{
 		if (!m_checkBoxes.at(currentTab).value(i)->checkState())
 		{
 			continue;
 		}
-
-		int addonId = m_currentTableView->model()->index(i, 1).data().toInt();
-		// TODO: fix download result
-		Result res;
-		res.first = m_currentTableView->model()->index(i, 2).data().toString();
-		StelApp::getInstance().getStelAddOn().installAddOn(addonId);
-		resultList.append(res);
+		addonIdList.append(m_currentTableView->model()->index(i, 1).data().toInt());
 	}
 
+	foreach (int addonId , addonIdList) {
+		StelApp::getInstance().getStelAddOn().installAddOn(addonId);
+	}
+
+	// TODO: fix download result
+	/*
+	typedef QPair<QString, bool> Result;
+	QList<Result> resultList; // <title, result>
 	// Display results
 	foreach (Result r, resultList) {
 		// TODO: display it in a nice message box.
 		QString installed = r.second ? " installed!" : " not installed!";
 		qDebug() << "Add-on: " % r.first % installed;
 	}
+	*/
 }
 
 void AddOnDialog::removeSelectedRows() {
 	int currentTab = ui->stackedWidget->currentIndex();
 	Q_ASSERT(m_checkBoxes.at(currentTab).count() == m_currentTableView->model()->rowCount());
+	QList<int> addonIdList;
 	for (int i=0;i<m_checkBoxes.at(currentTab).count(); ++i)
 	{
 		if (!m_checkBoxes.at(currentTab).value(i)->checkState())
 		{
 			continue;
 		}
+		addonIdList.append(m_currentTableView->model()->index(i, 1).data().toInt());
+	}
 
-		int addonId = m_currentTableView->model()->index(i, 1).data().toInt();
+	foreach (int addonId , addonIdList) {
 		StelApp::getInstance().getStelAddOn().removeAddOn(addonId);
 	}
 }
