@@ -400,6 +400,31 @@ void StelAddOn::downloadFinished()
 	{
 		qWarning() << "Add-on Mgr: FAILED to download" << m_pDownloadReply->url()
 			   << " Error:" << m_pDownloadReply->errorString();
+		m_currentDownloadFile->close();
+		m_currentDownloadFile->deleteLater();
+		m_currentDownloadFile = NULL;
+		m_pDownloadReply->deleteLater();
+		m_pDownloadReply = NULL;
+		StelApp::getInstance().removeProgressBar(m_progressBar);
+		m_progressBar = NULL;
+		return;
+	}
+
+	Q_ASSERT(m_pDownloadReply->bytesAvailable()==0);
+
+	const QVariant& redirect = m_pDownloadReply->attribute(QNetworkRequest::RedirectionTargetAttribute);
+	if (!redirect.isNull())
+	{
+		// We got a redirection, we need to follow
+		m_pDownloadReply->deleteLater();
+		QNetworkRequest req(redirect.toUrl());
+		req.setAttribute(QNetworkRequest::CacheSaveControlAttribute, false);
+		req.setRawHeader("User-Agent", StelUtils::getApplicationName().toLatin1());
+		m_pDownloadReply = StelApp::getInstance().getNetworkAccessManager()->get(req);
+		m_pDownloadReply->setReadBufferSize(1024*1024*2);
+		connect(m_pDownloadReply, SIGNAL(readyRead()), this, SLOT(newDownloadedData()));
+		connect(m_pDownloadReply, SIGNAL(finished()), this, SLOT(downloadFinished()));
+		return;
 	}
 
 	m_currentDownloadFile->close();
