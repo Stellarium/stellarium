@@ -17,17 +17,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _STELADDON_HPP_
-#define _STELADDON_HPP_
+#include "Landscape.hpp"
 
-#include <QObject>
-
-class StelAddOn : public QObject
+Landscape::Landscape()
 {
-	Q_OBJECT
-public:
-	// check add-ons which are already installed
-	virtual void checkInstalledAddOns() = 0;
-};
-
-#endif // _STELADDON_HPP_
+}

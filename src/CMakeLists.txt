@@ -155,8 +155,8 @@ SET(stellarium_lib_SRCS
 	core/StelActionMgr.hpp
 	core/StelActionMgr.cpp
 	core/StelProgressController.hpp
-	core/StelAddOn.cpp
-	core/StelAddOn.hpp
+	core/StelAddOnMgr.cpp
+	core/StelAddOnMgr.hpp
 
 	${gl_lib_SRCS}
 
@@ -235,6 +235,8 @@ SET(stellarium_lib_SRCS
 	core/modules/ZoneData.hpp
 
 	core/addons/StelAddOn.hpp
+	core/addons/Landscape.cpp
+	core/addons/Landscape.hpp
 
 	StelMainView.hpp
 	StelMainView.cpp
