@@ -233,6 +233,9 @@ SET(stellarium_lib_SRCS
 	core/modules/ZoneArray.cpp
 	core/modules/ZoneArray.hpp
 	core/modules/ZoneData.hpp
+
+	core/addons/StelAddOn.hpp
+
 	StelMainView.hpp
 	StelMainView.cpp
 	StelLogger.hpp
