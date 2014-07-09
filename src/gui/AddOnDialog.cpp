@@ -53,7 +53,7 @@ void AddOnDialog::styleChanged()
 
 void AddOnDialog::createDialogContent()
 {
-	connect(&StelApp::getInstance().getStelAddOn(), SIGNAL(updateTableViews()),
+	connect(&StelApp::getInstance().getStelAddOnMgr(), SIGNAL(updateTableViews()),
 		this, SLOT(populateTables()));
 
 	ui->setupUi(dialog);
@@ -64,7 +64,7 @@ void AddOnDialog::createDialogContent()
 	populateTables();
 
 	// catalog updates
-	ui->txtLastUpdate->setText(StelApp::getInstance().getStelAddOn().getLastUpdateString());
+	ui->txtLastUpdate->setText(StelApp::getInstance().getStelAddOnMgr().getLastUpdateString());
 	connect(ui->btnUpdate, SIGNAL(clicked()), this, SLOT(updateCatalog()));
 
 	// setting up tabs
@@ -226,7 +226,7 @@ void AddOnDialog::updateCatalog()
 	ui->txtLastUpdate->setText(q_("Updating catalog..."));
 
 	QNetworkRequest req(QUrl("http://cardinot.sourceforge.net/getUpdates.php?time="
-				 % QString::number(StelApp::getInstance().getStelAddOn().getLastUpdate())));
+				 % QString::number(StelApp::getInstance().getStelAddOnMgr().getLastUpdate())));
 	req.setAttribute(QNetworkRequest::CacheSaveControlAttribute, false);
 	req.setAttribute(QNetworkRequest::RedirectionTargetAttribute, false);
 	req.setRawHeader("User-Agent", StelUtils::getApplicationName().toLatin1());
@@ -260,7 +260,7 @@ void AddOnDialog::downloadFinished()
 
 	if (!result.isEmpty())
 	{
-		if(!StelApp::getInstance().getStelAddOn().updateDatabase(result))
+		if(!StelApp::getInstance().getStelAddOnMgr().updateDatabase(result))
 		{
 			ui->btnUpdate->setEnabled(true);
 			ui->txtLastUpdate->setText(q_("Database update failed!"));
@@ -270,8 +270,8 @@ void AddOnDialog::downloadFinished()
 
 	qint64 currentTime = QDateTime::currentMSecsSinceEpoch()/1000;
 	ui->btnUpdate->setEnabled(true);
-	StelApp::getInstance().getStelAddOn().setLastUpdate(currentTime);
-	ui->txtLastUpdate->setText(StelApp::getInstance().getStelAddOn().getLastUpdateString());
+	StelApp::getInstance().getStelAddOnMgr().setLastUpdate(currentTime);
+	ui->txtLastUpdate->setText(StelApp::getInstance().getStelAddOnMgr().getLastUpdateString());
 	populateTables();
 }
 
@@ -289,7 +289,7 @@ void AddOnDialog::installSelectedRows() {
 	}
 
 	foreach (int addonId , addonIdList) {
-		StelApp::getInstance().getStelAddOn().installAddOn(addonId);
+		StelApp::getInstance().getStelAddOnMgr().installAddOn(addonId);
 	}
 
 	// TODO: fix download result
@@ -319,6 +319,6 @@ void AddOnDialog::removeSelectedRows() {
 	}
 
 	foreach (int addonId , addonIdList) {
-		StelApp::getInstance().getStelAddOn().removeAddOn(addonId);
+		StelApp::getInstance().getStelAddOnMgr().removeAddOn(addonId);
 	}
 }

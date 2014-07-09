@@ -26,7 +26,7 @@
 
 // Predeclaration of some classes
 class StelCore;
-class StelAddOn;
+class StelAddOnMgr;
 class StelTextureMgr;
 class StelObjectMgr;
 class StelLocaleMgr;
@@ -114,8 +114,8 @@ public:
 	StelObjectMgr& getStelObjectMgr() {return *stelObjectMgr;}
 
 	//! Get the StelAddOn manager.
-	//! @return the StelAddOn manager.
-	StelAddOn& getStelAddOn() {return *stelAddOn;}
+	//! @return the StelAddonMgr.
+	StelAddOnMgr& getStelAddOnMgr() {return *stelAddOnMgr;}
 
 	StelSkyLayerMgr& getSkyImageMgr() {return *skyImageMgr;}
 
@@ -290,7 +290,7 @@ private:
 	StelScriptMgr* scriptMgr;
 #endif
 
-	StelAddOn* stelAddOn;
+	StelAddOnMgr* stelAddOnMgr;
 
 	StelGuiBase* stelGui;
 	

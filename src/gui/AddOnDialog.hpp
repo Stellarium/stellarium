@@ -20,7 +20,7 @@
 #ifndef _ADDONDIALOG_HPP_
 #define _ADDONDIALOG_HPP_
 
-#include "StelAddOn.hpp"
+#include "StelAddOnMgr.hpp"
 #include "StelDialog.hpp"
 
 #include <QCheckBox>
