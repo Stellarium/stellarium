@@ -38,13 +38,13 @@ StelAddOnMgr::StelAddOnMgr()
 	, m_pDownloadReply(NULL)
 	, m_currentDownloadFile(NULL)
 	, m_progressBar(NULL)
-	, dirAddOn(StelFileMgr::getUserDir() % "/addon")
-	, dirCatalog(dirAddOn % "/catalog/")
-	, dirLandscape(dirAddOn % "/landscape/")
-	, dirLanguagePack(dirAddOn % "/language_pack/")
-	, dirScript(dirAddOn % "/script/")
-	, dirStarlore(dirAddOn % "/language_pack/")
-	, dirTexture(dirAddOn % "/texture/")
+	, m_sDirAddOn(StelFileMgr::getUserDir() % "/addon")
+	, m_sDirCatalog(m_sDirAddOn % "/catalog/")
+	, m_sDirLandscape(m_sDirAddOn % "/landscape/")
+	, m_sDirLanguagePack(m_sDirAddOn % "/language_pack/")
+	, m_sDirScript(m_sDirAddOn % "/script/")
+	, m_sDirStarlore(m_sDirAddOn % "/language_pack/")
+	, m_sDirTexture(m_sDirAddOn % "/texture/")
 {
 	// Init database
 	Q_ASSERT(m_pStelAddOnDAO->init());
@@ -84,27 +84,27 @@ QString StelAddOnMgr::getDirectory(QString category)
 	QString dir;
 	if (category == LANDSCAPE)
 	{
-		dir = dirLandscape;
+		dir = m_sDirLandscape;
 	}
 	else if (category == LANGUAGE_PACK)
 	{
-		dir = dirLanguagePack;
+		dir = m_sDirLanguagePack;
 	}
 	else if (category == SCRIPT)
 	{
-		dir = dirScript;
+		dir = m_sDirScript;
 	}
 	else if (category == STARLORE)
 	{
-		dir = dirStarlore;
+		dir = m_sDirStarlore;
 	}
 	else if (category == TEXTURE)
 	{
-		dir = dirTexture;
+		dir = m_sDirTexture;
 	}
 	else if (category == PLUGIN_CATALOG || category == STAR_CATALOG)
 	{
-		dir = dirCatalog;
+		dir = m_sDirCatalog;
 	}
 	return dir;
 }

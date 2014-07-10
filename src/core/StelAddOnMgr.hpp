@@ -101,13 +101,13 @@ private:
 	QString m_sAddonPath;
 	qint64 m_iLastUpdate;
 
-	const QString dirAddOn;
-	const QString dirCatalog;
-	const QString dirLandscape;
-	const QString dirLanguagePack;
-	const QString dirScript;
-	const QString dirStarlore;
-	const QString dirTexture;
+	const QString m_sDirAddOn;
+	const QString m_sDirCatalog;
+	const QString m_sDirLandscape;
+	const QString m_sDirLanguagePack;
+	const QString m_sDirScript;
+	const QString m_sDirStarlore;
+	const QString m_sDirTexture;
 
 	AddOnInfo getAddOnInfo(int addonId);
 	QString getDirectory(QString category);
