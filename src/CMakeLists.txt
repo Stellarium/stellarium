@@ -157,6 +157,8 @@ SET(stellarium_lib_SRCS
 	core/StelProgressController.hpp
 	core/StelAddOnMgr.cpp
 	core/StelAddOnMgr.hpp
+	core/StelAddOnDAO.cpp
+	core/StelAddOnDAO.hpp
 
 	${gl_lib_SRCS}
 
