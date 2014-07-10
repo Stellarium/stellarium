@@ -46,7 +46,6 @@ public:
 
 private:
 	QSqlDatabase m_db;
-	QString m_sAddonPath;
 
 	bool createAddonTables();
 	bool createTableLicense();

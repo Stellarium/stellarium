@@ -46,22 +46,23 @@ StelAddOnMgr::StelAddOnMgr()
 	, m_sDirStarlore(m_sDirAddOn % "/language_pack/")
 	, m_sDirTexture(m_sDirAddOn % "/texture/")
 {
+	// creating addon dir
+	StelFileMgr::makeSureDirExistsAndIsWritable(m_sDirAddOn);
+
 	// Init database
 	Q_ASSERT(m_pStelAddOnDAO->init());
 
-	// creating addon dir
-	StelFileMgr::makeSureDirExistsAndIsWritable(dirAddOn);
 	// creating sub-dirs
-	StelFileMgr::makeSureDirExistsAndIsWritable(dirCatalog);
-	StelFileMgr::makeSureDirExistsAndIsWritable(dirLandscape);
-	StelFileMgr::makeSureDirExistsAndIsWritable(dirLanguagePack);
-	StelFileMgr::makeSureDirExistsAndIsWritable(dirScript);
-	StelFileMgr::makeSureDirExistsAndIsWritable(dirStarlore);
-	StelFileMgr::makeSureDirExistsAndIsWritable(dirTexture);
+	StelFileMgr::makeSureDirExistsAndIsWritable(m_sDirCatalog);
+	StelFileMgr::makeSureDirExistsAndIsWritable(m_sDirLandscape);
+	StelFileMgr::makeSureDirExistsAndIsWritable(m_sDirLanguagePack);
+	StelFileMgr::makeSureDirExistsAndIsWritable(m_sDirScript);
+	StelFileMgr::makeSureDirExistsAndIsWritable(m_sDirStarlore);
+	StelFileMgr::makeSureDirExistsAndIsWritable(m_sDirTexture);
 
 	// create file to store the last update time
 	QString lastUpdate;
-	QFile file(m_sAddonPath  % "/lastdbupdate.txt");
+	QFile file(m_sDirAddOn  % "/lastdbupdate.txt");
 	if (file.open(QIODevice::ReadWrite | QIODevice::Text))
 	{
 		QTextStream txt(&file);
@@ -131,7 +132,7 @@ void StelAddOnMgr::checkInstalledAddOns()
 void StelAddOnMgr::setLastUpdate(qint64 time) {
 	m_iLastUpdate = time;
 	// store value it in the txt file
-	QFile file(m_sAddonPath  % "/lastdbupdate.txt");
+	QFile file(m_sDirAddOn  % "/lastdbupdate.txt");
 	if (file.open(QIODevice::WriteOnly | QIODevice::Text))
 	{
 		QTextStream txt(&file);

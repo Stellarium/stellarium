@@ -98,7 +98,6 @@ private:
 	QString m_currentDownloadCategory;
 
 	class StelProgressController* m_progressBar;
-	QString m_sAddonPath;
 	qint64 m_iLastUpdate;
 
 	const QString m_sDirAddOn;

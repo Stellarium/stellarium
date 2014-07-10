@@ -34,9 +34,9 @@ bool StelAddOnDAO::init()
 {
 	// Init database
 	StelFileMgr::Flags flags = (StelFileMgr::Flags)(StelFileMgr::Directory|StelFileMgr::Writable);
-	m_sAddonPath = StelFileMgr::findFile("addon/", flags);
+	QString addonPath = StelFileMgr::findFile("addon/", flags);
 	m_db.setHostName("localhost");
-	m_db.setDatabaseName(m_sAddonPath % "addon.sqlite");
+	m_db.setDatabaseName(addonPath % "addon.sqlite");
 	bool ok = m_db.open();
 	qDebug() << "Add-On Database status:" << m_db.databaseName() << "=" << ok;
 	if (m_db.lastError().isValid())
