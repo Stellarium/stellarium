@@ -33,10 +33,11 @@
 
 StelAddOnMgr::StelAddOnMgr()
 	: m_db(QSqlDatabase::addDatabase("QSQLITE"))
-	, m_progressBar(NULL)
+	, m_pStelAddOnDAO(new StelAddOnDAO(m_db))
 	, m_bDownloading(false)
 	, m_pDownloadReply(NULL)
 	, m_currentDownloadFile(NULL)
+	, m_progressBar(NULL)
 	, dirAddOn(StelFileMgr::getUserDir() % "/addon")
 	, dirCatalog(dirAddOn % "/catalog/")
 	, dirLandscape(dirAddOn % "/landscape/")
@@ -45,6 +46,9 @@ StelAddOnMgr::StelAddOnMgr()
 	, dirStarlore(dirAddOn % "/language_pack/")
 	, dirTexture(dirAddOn % "/texture/")
 {
+	// Init database
+	Q_ASSERT(m_pStelAddOnDAO->init());
+
 	// creating addon dir
 	StelFileMgr::makeSureDirExistsAndIsWritable(dirAddOn);
 	// creating sub-dirs
@@ -54,27 +58,6 @@ StelAddOnMgr::StelAddOnMgr()
 	StelFileMgr::makeSureDirExistsAndIsWritable(dirScript);
 	StelFileMgr::makeSureDirExistsAndIsWritable(dirStarlore);
 	StelFileMgr::makeSureDirExistsAndIsWritable(dirTexture);
-
-	// Init database
-	StelFileMgr::Flags flags = (StelFileMgr::Flags)(StelFileMgr::Directory|StelFileMgr::Writable);
-	m_sAddonPath = StelFileMgr::findFile("addon/", flags);
-	m_db.setHostName("localhost");
-	m_db.setDatabaseName(m_sAddonPath % "addon.sqlite");
-	bool ok = m_db.open();
-	qDebug() << "Add-On Database status:" << m_db.databaseName() << "=" << ok;
-	if (m_db.lastError().isValid())
-	{
-	    qDebug() << "Error loading Add-On database:" << m_db.lastError();
-	    exit(-1);
-	}
-
-	// creating tables
-	if (!createAddonTables() ||
-	    !createTableLicense() ||
-	    !createTableAuthor())
-	{
-		exit(-1);
-	}
 
 	// create file to store the last update time
 	QString lastUpdate;
@@ -126,114 +109,7 @@ QString StelAddOnMgr::getDirectory(QString category)
 	return dir;
 }
 
-bool StelAddOnMgr::createAddonTables()
-{
-	QStringList addonTables;
 
-	addonTables << "CREATE TABLE IF NOT EXISTS " % TABLE_ADDON % " ("
-			"id INTEGER primary key AUTOINCREMENT, "
-			"category TEXT, "
-			"title TEXT UNIQUE, "
-			"description TEXT, "
-			"version TEXT, "
-			"compatibility TEXT, "
-			"author1 INTEGER, "
-			"author2 INTEGER, "
-			"license INTEGER, "
-			"installed TEXT, "
-			"directory TEXT, "
-			"url TEXT, "
-			"filename TEXT, "
-			"download_size TEXT, "
-			"checksum TEXT, "
-			"last_update TEXT)";
-
-	addonTables << "CREATE TABLE IF NOT EXISTS " % TABLE_CATALOG % " ("
-			"id INTEGER primary key AUTOINCREMENT, "
-			"addon INTEGER UNIQUE, "
-			"type TEXT)";
-
-	addonTables << "CREATE TABLE IF NOT EXISTS " % TABLE_PLUGIN_CATALOG % " ("
-			"id INTEGER primary key AUTOINCREMENT, "
-			"catalog INTEGER UNIQUE)";
-
-	addonTables << "CREATE TABLE IF NOT EXISTS " % TABLE_STAR_CATALOG % " ("
-			"id INTEGER primary key AUTOINCREMENT, "
-			"catalog INTEGER UNIQUE, "
-			"count INTEGER, "
-			"mag_range TEXT)";
-
-	addonTables << "CREATE TABLE IF NOT EXISTS " % TABLE_LANDSCAPE % " ("
-			"id INTEGER primary key AUTOINCREMENT, "
-			"addon INTEGER UNIQUE, "
-			"thumbnail TEXT)";
-
-	addonTables << "CREATE TABLE IF NOT EXISTS " % TABLE_LANGUAGE_PACK % " ("
-			"id INTEGER primary key AUTOINCREMENT, "
-			"addon INTEGER UNIQUE)";
-
-	addonTables << "CREATE TABLE IF NOT EXISTS " % TABLE_SCRIPT % " ("
-			"id INTEGER primary key AUTOINCREMENT, "
-			"addon INTEGER UNIQUE)";
-
-	addonTables << "CREATE TABLE IF NOT EXISTS " % TABLE_STARLORE % " ("
-			"id INTEGER primary key AUTOINCREMENT, "
-			"addon INTEGER UNIQUE)";
-
-	addonTables << "CREATE TABLE IF NOT EXISTS " % TABLE_TEXTURE % " ("
-			"id INTEGER primary key AUTOINCREMENT, "
-			"addon INTEGER UNIQUE)";
-
-	QSqlQuery query(m_db);
-	foreach (QString table, addonTables)
-	{
-		query.prepare(table);
-		if (!query.exec())
-		{
-			qDebug() << "Add-On Manager : unable to create the addon table."
-				 << m_db.lastError();
-			return false;
-		}
-	}
-	return true;
-}
-
-bool StelAddOnMgr::createTableLicense()
-{
-	QSqlQuery query(m_db);
-	query.prepare(
-		"CREATE TABLE IF NOT EXISTS " % TABLE_LICENSE % " ("
-			"id INTEGER primary key AUTOINCREMENT, "
-			"name TEXT, "
-			"url TEXT)"
-	);
-	if (!query.exec())
-	{
-		qDebug() << "Add-On Manager : unable to create the license table."
-			 << m_db.lastError();
-		return false;
-	}
-	return true;
-}
-
-bool StelAddOnMgr::createTableAuthor()
-{
-	QSqlQuery query(m_db);
-	query.prepare(
-		"CREATE TABLE IF NOT EXISTS " % TABLE_AUTHOR % " ("
-			"id INTEGER primary key AUTOINCREMENT, "
-			"name TEXT, "
-			"email TEXT, "
-			"url TEXT)"
-	);
-	if (!query.exec())
-	{
-		qDebug() << "Add-On Manager : unable to create the author table."
-			 << m_db.lastError();
-		return false;
-	}
-	return true;
-}
 
 void StelAddOnMgr::checkInstalledAddOns()
 {

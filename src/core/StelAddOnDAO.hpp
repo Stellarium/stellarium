@@ -20,12 +20,37 @@
 #ifndef _STELADDONDAO_HPP_
 #define _STELADDONDAO_HPP_
 
-#include <QObject>
+#include <QSqlDatabase>
+
+// database table names
+const QString TABLE_AUTHOR = "author";
+const QString TABLE_LICENSE = "license";
+const QString TABLE_ADDON = "addon";
+const QString TABLE_CATALOG = "catalog";
+const QString TABLE_LANDSCAPE = "landscape";
+const QString TABLE_LANGUAGE_PACK = "language_pack";
+const QString TABLE_PLUGIN_CATALOG = "plugin_catalog";
+const QString TABLE_SCRIPT = "script";
+const QString TABLE_STAR_CATALOG = "star_catalog";
+const QString TABLE_STARLORE = "starlore";
+const QString TABLE_TEXTURE = "texture";
 
 class StelAddOnDAO
 {
 public:
-	StelAddOnDAO();
+	StelAddOnDAO(QSqlDatabase database);
+	~StelAddOnDAO();
+
+	// Init database
+	bool init();
+
+private:
+	QSqlDatabase m_db;
+	QString m_sAddonPath;
+
+	bool createAddonTables();
+	bool createTableLicense();
+	bool createTableAuthor();
 };
 
 #endif // _STELADDONDAO_HPP_

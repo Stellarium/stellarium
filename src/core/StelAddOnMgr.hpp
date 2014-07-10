@@ -28,18 +28,7 @@
 #include <QSqlDatabase>
 #include <QUrl>
 
-// database table names
-const QString TABLE_AUTHOR = "author";
-const QString TABLE_LICENSE = "license";
-const QString TABLE_ADDON = "addon";
-const QString TABLE_CATALOG = "catalog";
-const QString TABLE_LANDSCAPE = "landscape";
-const QString TABLE_LANGUAGE_PACK = "language_pack";
-const QString TABLE_PLUGIN_CATALOG = "plugin_catalog";
-const QString TABLE_SCRIPT = "script";
-const QString TABLE_STAR_CATALOG = "star_catalog";
-const QString TABLE_STARLORE = "starlore";
-const QString TABLE_TEXTURE = "texture";
+#include "StelAddOnDAO.hpp"
 
 // categories (database column addon.category)
 const QString LANDSCAPE = "landscape";
@@ -99,19 +88,18 @@ private:
 	};
 
 	QSqlDatabase m_db;
-	QString m_sAddonPath;
-	qint64 m_iLastUpdate;
-	class StelProgressController* m_progressBar;
-	QList<int> m_downloadQueue;
+	StelAddOnDAO* m_pStelAddOnDAO;
+
 	bool m_bDownloading;
+	QList<int> m_downloadQueue;
 	QNetworkReply* m_pDownloadReply;
 	QFile* m_currentDownloadFile;
 	QString m_currentDownloadPath;
 	QString m_currentDownloadCategory;
 
-	bool createAddonTables();
-	bool createTableLicense();
-	bool createTableAuthor();
+	class StelProgressController* m_progressBar;
+	QString m_sAddonPath;
+	qint64 m_iLastUpdate;
 
 	const QString dirAddOn;
 	const QString dirCatalog;
