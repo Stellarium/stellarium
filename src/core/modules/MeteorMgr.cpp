@@ -54,7 +54,7 @@ MeteorMgr::~MeteorMgr()
 
 void MeteorMgr::init()
 {
-	Meteor::bolideTexture = StelApp::getInstance().getTextureManager().createTextureThread(StelFileMgr::getInstallationDir()+"/textures/cometTail.png", StelTexture::StelTextureParams(true, GL_LINEAR, GL_CLAMP_TO_EDGE));
+	Meteor::bolideTexture = StelApp::getInstance().getTextureManager().createTextureThread(StelFileMgr::getInstallationDir()+"/textures/cometComa.png", StelTexture::StelTextureParams(true, GL_LINEAR, GL_CLAMP_TO_EDGE));
 
 	setZHR(StelApp::getInstance().getSettings()->value("astro/meteor_rate", 10).toInt());
 }
