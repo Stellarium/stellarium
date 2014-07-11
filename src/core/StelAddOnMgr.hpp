@@ -21,12 +21,10 @@
 #define _STELADDONMGR_HPP_
 
 #include <QDateTime>
-#include <QDir>
 #include <QFile>
 #include <QNetworkReply>
 #include <QObject>
 #include <QSqlDatabase>
-#include <QUrl>
 
 #include "StelAddOnDAO.hpp"
 
@@ -45,6 +43,7 @@ class StelAddOnMgr : public QObject
 public:
 	StelAddOnMgr();
 
+	QString getDirectory(QString category);
 	void installAddOn(const int addonId);
 	void installFromFile(QString category, QString filePath);
 	void removeAddOn(const int addonId);
@@ -78,15 +77,6 @@ private:
 		OtherError
 	};
 
-	struct AddOnInfo {
-		QString category;
-		double downloadSize;
-		QString filename;
-		QString filepath;
-		QUrl url;
-		QDir installedDir;
-	};
-
 	QSqlDatabase m_db;
 	StelAddOnDAO* m_pStelAddOnDAO;
 
@@ -108,13 +98,7 @@ private:
 	const QString m_sDirStarlore;
 	const QString m_sDirTexture;
 
-	AddOnInfo getAddOnInfo(int addonId);
-	QString getDirectory(QString category);
-
-	void downloadAddOn(const AddOnInfo addonInfo);
-	void updateInstalledAddon(QString filename,
-				  QString installedVersion,
-				  QString directory);
+	void downloadAddOn(const StelAddOnDAO::AddOnInfo addonInfo);
 };
 
 #endif // _STELADDONMGR_HPP_

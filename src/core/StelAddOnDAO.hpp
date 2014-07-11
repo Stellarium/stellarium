@@ -20,7 +20,9 @@
 #ifndef _STELADDONDAO_HPP_
 #define _STELADDONDAO_HPP_
 
+#include <QDir>
 #include <QSqlDatabase>
+#include <QUrl>
 
 // database table names
 const QString TABLE_AUTHOR = "author";
@@ -43,6 +45,21 @@ public:
 
 	// Init database
 	bool init();
+
+	struct AddOnInfo {
+		QString category;
+		double downloadSize;
+		QString filename;
+		QString filepath;
+		QUrl url;
+		QDir installedDir;
+	};
+
+	AddOnInfo getAddOnInfo(int addonId);
+	bool insertOnDatabase(QString insert);
+	void updateInstalledAddon(QString filename,
+				  QString installedVersion,
+				  QString directory);
 
 private:
 	QSqlDatabase m_db;

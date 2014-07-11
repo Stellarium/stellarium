@@ -19,9 +19,6 @@
 
 #include <QDebug>
 #include <QFile>
-#include <QSqlError>
-#include <QSqlQuery>
-#include <QSqlRecord>
 #include <QStringBuilder>
 
 #include "LandscapeMgr.hpp"
@@ -124,16 +121,12 @@ void StelAddOnMgr::setLastUpdate(qint64 time) {
 
 bool StelAddOnMgr::updateDatabase(QString webresult)
 {
-	QSqlQuery query(m_db);
 	QStringList queries = webresult.split("<br>");
 	queries.removeFirst();
 	foreach (QString insert, queries)
 	{
-		query.prepare(insert.simplified());
-		if (!query.exec())
+		if (!m_pStelAddOnDAO->insertOnDatabase(insert))
 		{
-			qDebug() << "Add-On Manager : unable to update database."
-				 << m_db.lastError();
 			return false;
 		}
 	}
@@ -143,63 +136,7 @@ bool StelAddOnMgr::updateDatabase(QString webresult)
 	return true;
 }
 
-void StelAddOnMgr::updateInstalledAddon(QString filename,
-				     QString installedVersion,
-				     QString directory)
-{
-	 QSqlQuery query(m_db);
-	 query.prepare("UPDATE addon "
-		       "SET installed=:installed, directory=:dir "
-		       "WHERE filename=:filename");
-	 query.bindValue(":installed", installedVersion);
-	 query.bindValue(":dir", directory);
-	 query.bindValue(":filename", filename);
-
-	 if (!query.exec()) {
-		qWarning() << "Add-On Manager :" << m_db.lastError();
-	}
-}
-
-StelAddOnMgr::AddOnInfo StelAddOnMgr::getAddOnInfo(int addonId)
-{
-	if (addonId < 1) {
-		return AddOnInfo();
-	}
-
-	QSqlQuery query(m_db);
-	query.prepare("SELECT category, download_size, url, filename, directory "
-		      "FROM addon WHERE id=:id");
-	query.bindValue(":id", addonId);
-
-	if (!query.exec()) {
-		qWarning() << "Add-On Manager :" << m_db.lastError();
-		return AddOnInfo();
-	}
-
-	QSqlRecord queryRecord = query.record();
-	const int categoryColumn = queryRecord.indexOf("category");
-	const int downloadSizeColumn = queryRecord.indexOf("download_size");
-	const int urlColumn = queryRecord.indexOf("url");
-	const int filenameColumn = queryRecord.indexOf("filename");
-	const int directoryColumn = queryRecord.indexOf("directory");
-	if (query.next()) {
-		AddOnInfo addonInfo;
-		// info from db
-		addonInfo.category =  query.value(categoryColumn).toString();
-		addonInfo.downloadSize = query.value(downloadSizeColumn).toDouble();
-		addonInfo.url = QUrl(query.value(urlColumn).toString());
-		addonInfo.filename = query.value(filenameColumn).toString();
-		addonInfo.installedDir = QDir(query.value(directoryColumn).toString());
-		QString categoryDir = getDirectory(addonInfo.category);
-		Q_ASSERT(!categoryDir.isEmpty());
-		addonInfo.filepath = categoryDir % addonInfo.filename;
-		return addonInfo;
-	}
-
-	return AddOnInfo();
-}
-
-void StelAddOnMgr::downloadAddOn(const AddOnInfo addonInfo)
+void StelAddOnMgr::downloadAddOn(const StelAddOnDAO::AddOnInfo addonInfo)
 {
 	Q_ASSERT(m_pDownloadReply==NULL);
 	Q_ASSERT(m_currentDownloadFile==NULL);
@@ -301,7 +238,7 @@ void StelAddOnMgr::downloadFinished()
 	if (!m_downloadQueue.isEmpty())
 	{
 		// next download
-		downloadAddOn(getAddOnInfo(m_downloadQueue.first()));
+		downloadAddOn(m_pStelAddOnDAO->getAddOnInfo(m_downloadQueue.first()));
 	}
 }
 
@@ -312,7 +249,7 @@ void StelAddOnMgr::installAddOn(const int addonId)
 		return;
 	}
 
-	AddOnInfo addonInfo = getAddOnInfo(addonId);
+	StelAddOnDAO::AddOnInfo addonInfo = m_pStelAddOnDAO->getAddOnInfo(addonId);
 	// checking if we have this file in add-on path (disk)
 	if (QFile(addonInfo.filepath).exists())
 	{
@@ -340,7 +277,7 @@ void StelAddOnMgr::installFromFile(QString category, QString filePath)
 		QDir landscapeDestination = GETSTELMODULE(LandscapeMgr)->getLandscapeDir();
 		if (landscapeDestination.cd(ref))
 		{
-			updateInstalledAddon(ref % ".zip", "1.0",
+			m_pStelAddOnDAO->updateInstalledAddon(ref % ".zip", "1.0",
 					     landscapeDestination.absolutePath());
 		}
 	}
@@ -353,7 +290,7 @@ void StelAddOnMgr::installFromFile(QString category, QString filePath)
 
 void StelAddOnMgr::removeAddOn(const int addonId)
 {
-	AddOnInfo addonInfo = getAddOnInfo(addonId);
+	StelAddOnDAO::AddOnInfo addonInfo = m_pStelAddOnDAO->getAddOnInfo(addonId);
 	if (addonInfo.category == LANDSCAPE)
 	{
 		QString dirName = addonInfo.installedDir.dirName();
@@ -363,7 +300,7 @@ void StelAddOnMgr::removeAddOn(const int addonId)
 		}
 		else
 		{
-			updateInstalledAddon(dirName % ".zip", "", "");
+			m_pStelAddOnDAO->updateInstalledAddon(dirName % ".zip", "", "");
 			emit (updateTableViews());
 		}
 	}

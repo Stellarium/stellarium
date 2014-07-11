@@ -25,10 +25,6 @@ Landscape::Landscape(StelAddOnDAO* pStelAddOnDAO)
 {
 }
 
-Landscape::~Landscape()
-{
-}
-
 void Landscape::checkInstalledAddOns()
 {
 	QDir landscapeDestination = GETSTELMODULE(LandscapeMgr)->getLandscapeDir();

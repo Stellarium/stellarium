@@ -20,9 +20,12 @@
 #include <QDebug>
 #include <QSqlError>
 #include <QSqlQuery>
+#include <QSqlRecord>
 #include <QStringBuilder>
 
 #include "StelAddOnDAO.hpp"
+#include "StelAddOnMgr.hpp"
+#include "StelApp.hpp"
 #include "StelFileMgr.hpp"
 
 StelAddOnDAO::StelAddOnDAO(QSqlDatabase database)
@@ -163,4 +166,74 @@ bool StelAddOnDAO::createTableAuthor()
 		return false;
 	}
 	return true;
+}
+
+bool StelAddOnDAO::insertOnDatabase(QString insert)
+{
+	QSqlQuery query(m_db);
+	query.prepare(insert);
+	if (!query.exec())
+	{
+		qDebug() << "Add-On Manager : unable to update database."
+			 << m_db.lastError();
+		return false;
+	}
+
+	return true;
+}
+
+void StelAddOnDAO::updateInstalledAddon(QString filename,
+					QString installedVersion,
+					QString directory)
+{
+	 QSqlQuery query(m_db);
+	 query.prepare("UPDATE addon "
+		       "SET installed=:installed, directory=:dir "
+		       "WHERE filename=:filename");
+	 query.bindValue(":installed", installedVersion);
+	 query.bindValue(":dir", directory);
+	 query.bindValue(":filename", filename);
+
+	 if (!query.exec()) {
+		qWarning() << "Add-On Manager :" << m_db.lastError();
+	}
+}
+
+StelAddOnDAO::AddOnInfo StelAddOnDAO::getAddOnInfo(int addonId)
+{
+	if (addonId < 1) {
+		return AddOnInfo();
+	}
+
+	QSqlQuery query(m_db);
+	query.prepare("SELECT category, download_size, url, filename, directory "
+		      "FROM addon WHERE id=:id");
+	query.bindValue(":id", addonId);
+
+	if (!query.exec()) {
+		qWarning() << "Add-On Manager :" << m_db.lastError();
+		return AddOnInfo();
+	}
+
+	QSqlRecord queryRecord = query.record();
+	const int categoryColumn = queryRecord.indexOf("category");
+	const int downloadSizeColumn = queryRecord.indexOf("download_size");
+	const int urlColumn = queryRecord.indexOf("url");
+	const int filenameColumn = queryRecord.indexOf("filename");
+	const int directoryColumn = queryRecord.indexOf("directory");
+	if (query.next()) {
+		AddOnInfo addonInfo;
+		// info from db
+		addonInfo.category =  query.value(categoryColumn).toString();
+		addonInfo.downloadSize = query.value(downloadSizeColumn).toDouble();
+		addonInfo.url = QUrl(query.value(urlColumn).toString());
+		addonInfo.filename = query.value(filenameColumn).toString();
+		addonInfo.installedDir = QDir(query.value(directoryColumn).toString());
+		QString categoryDir = StelApp::getInstance().getStelAddOnMgr().getDirectory(addonInfo.category);
+		Q_ASSERT(!categoryDir.isEmpty());
+		addonInfo.filepath = categoryDir % addonInfo.filename;
+		return addonInfo;
+	}
+
+	return AddOnInfo();
 }

@@ -21,6 +21,7 @@
 #define _STELADDON_HPP_
 
 #include <QObject>
+#include <QStringBuilder>
 
 #include "StelAddOnDAO.hpp"
 #include "StelApp.hpp"
