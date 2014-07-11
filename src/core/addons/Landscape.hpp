@@ -25,10 +25,14 @@
 class Landscape : public StelAddOn
 {
 public:
-	Landscape();
+	Landscape(StelAddOnDAO* pStelAddOnDAO);
+	virtual ~Landscape();
 
 	// check add-ons which are already installed
 	virtual void checkInstalledAddOns();
+
+private:
+	StelAddOnDAO* m_pStelAddOnDAO;
 };
 
 #endif // _LANDSCAPE_HPP_

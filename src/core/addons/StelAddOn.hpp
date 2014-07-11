@@ -22,6 +22,11 @@
 
 #include <QObject>
 
+#include "StelAddOnDAO.hpp"
+#include "StelApp.hpp"
+#include "StelModuleMgr.hpp"
+
+// pure virtual (abstract) class to provide an interface for addons
 class StelAddOn : public QObject
 {
 	Q_OBJECT

@@ -18,7 +18,26 @@
  */
 
 #include "Landscape.hpp"
+#include "LandscapeMgr.hpp"
 
-Landscape::Landscape()
+Landscape::Landscape(StelAddOnDAO* pStelAddOnDAO)
+	: m_pStelAddOnDAO(pStelAddOnDAO)
 {
+}
+
+Landscape::~Landscape()
+{
+}
+
+void Landscape::checkInstalledAddOns()
+{
+	QDir landscapeDestination = GETSTELMODULE(LandscapeMgr)->getLandscapeDir();
+	QStringList landscapes = GETSTELMODULE(LandscapeMgr)->getUserLandscapeIDs();
+	foreach (QString landscape, landscapes) {
+		if (landscapeDestination.cd(landscape))
+		{
+			m_pStelAddOnDAO->updateInstalledAddon(landscape % ".zip", "1.0", landscapeDestination.absolutePath());
+			landscapeDestination.cdUp();
+		}
+	}
 }

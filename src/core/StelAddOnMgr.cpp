@@ -77,7 +77,7 @@ StelAddOnMgr::StelAddOnMgr()
 	m_iLastUpdate = lastUpdate.toLong();
 
 	// check add-ons which are already installed
-	checkInstalledAddOns();
+	//checkInstalledAddOns();
 }
 
 QString StelAddOnMgr::getDirectory(QString category)
@@ -110,25 +110,6 @@ QString StelAddOnMgr::getDirectory(QString category)
 	return dir;
 }
 
-
-
-void StelAddOnMgr::checkInstalledAddOns()
-{
-	// check add-ons which are already installed
-	// LANDSCAPES
-	QDir landscapeDestination = GETSTELMODULE(LandscapeMgr)->getLandscapeDir();
-	QStringList landscapes = GETSTELMODULE(LandscapeMgr)->getUserLandscapeIDs();
-	foreach (QString landscape, landscapes) {
-		if (landscapeDestination.cd(landscape))
-		{
-			updateInstalledAddon(landscape % ".zip",
-					     "1.0",
-					     landscapeDestination.absolutePath());
-			landscapeDestination.cdUp();
-		}
-	}
-}
-
 void StelAddOnMgr::setLastUpdate(qint64 time) {
 	m_iLastUpdate = time;
 	// store value it in the txt file
@@ -158,7 +139,7 @@ bool StelAddOnMgr::updateDatabase(QString webresult)
 	}
 
 	// check add-ons which are already installed
-	checkInstalledAddOns();
+	// checkInstalledAddOns();
 	return true;
 }
 
