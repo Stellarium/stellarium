@@ -27,6 +27,7 @@
 #include <QSqlDatabase>
 
 #include "AOLandscape.hpp"
+#include "AOTexture.hpp"
 #include "StelAddOnDAO.hpp"
 
 // categories (database column addon.category)
@@ -103,6 +104,7 @@ private:
 
 	// Sub-classes
 	AOLandscape* m_pLandscape;
+	AOTexture* m_pTexture;
 
 	void downloadAddOn(const StelAddOnDAO::AddOnInfo addonInfo);
 };

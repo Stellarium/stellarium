@@ -75,9 +75,11 @@ StelAddOnMgr::StelAddOnMgr()
 
 	// Init sub-classes
 	m_pLandscape = new AOLandscape(m_pStelAddOnDAO);
+	m_pTexture = new AOTexture(m_pStelAddOnDAO);
 
 	// check add-ons which are already installed
 	m_pLandscape->checkInstalledAddOns();
+	m_pTexture->checkInstalledAddOns();
 }
 
 StelAddOnMgr::~StelAddOnMgr()
@@ -274,6 +276,10 @@ void StelAddOnMgr::installFromFile(QString category, QString filePath)
 	{
 		m_pLandscape->installFromFile(filePath);
 	}
+	else if (category == TEXTURE)
+	{
+		m_pTexture->installFromFile(filePath);
+	}
 
 	if (m_downloadQueue.isEmpty())
 	{
@@ -288,6 +294,10 @@ void StelAddOnMgr::removeAddOn(const int addonId)
 	if (addonInfo.category == LANDSCAPE)
 	{
 		removed = m_pLandscape->uninstallAddOn(addonInfo);
+	}
+	else if (addonInfo.category == TEXTURE)
+	{
+		removed = m_pTexture->uninstallAddOn(addonInfo);
 	}
 
 	if (removed)

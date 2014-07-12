@@ -239,6 +239,8 @@ SET(stellarium_lib_SRCS
 	core/addons/StelAddOn.hpp
 	core/addons/AOLandscape.cpp
 	core/addons/AOLandscape.hpp
+	core/addons/AOTexture.cpp
+	core/addons/AOTexture.hpp
 
 	StelMainView.hpp
 	StelMainView.cpp
