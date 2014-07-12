@@ -145,14 +145,17 @@ class Translations
 		N_("Icarus");
 		// TRANSLATORS: Asteroid (1809) Prometheus
 		N_("Prometheus");
+		N_("Prometheus (moon)");
 		// TRANSLATORS: Asteroid (1810) Epimetheus
 		N_("Epimetheus");
+		N_("Epimetheus (moon)");
 		// TRANSLATORS: Asteroid (951) Gaspra
 		N_("Gaspra");
 		// TRANSLATORS: Asteroid (243) Ida
 		N_("Ida");
 		// TRANSLATORS: Asteroid (218) Bianca
 		N_("Bianca");
+		N_("Bianca (moon)");
 		
 		// TRANSLATORS: Proper name of comet C/1680 V1
 		N_("Great Comet of 1680 (C/1680 V1)");
