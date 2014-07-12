@@ -29,8 +29,11 @@ public:
 	AOLandscape(StelAddOnDAO* pStelAddOnDAO);
 	virtual ~AOLandscape();
 
-	// check add-ons which are already installed
-	virtual void checkInstalledAddOns();
+	// check landscapes which are already installed.
+	virtual void checkInstalledAddOns() const;
+
+	// install landscape from a zip file.
+	virtual void installFromFile(const QString& filePath) const;
 
 private:
 	StelAddOnDAO* m_pStelAddOnDAO;

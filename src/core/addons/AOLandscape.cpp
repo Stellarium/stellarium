@@ -29,7 +29,7 @@ AOLandscape::~AOLandscape()
 {
 }
 
-void AOLandscape::checkInstalledAddOns()
+void AOLandscape::checkInstalledAddOns() const
 {
 	QDir landscapeDestination = GETSTELMODULE(LandscapeMgr)->getLandscapeDir();
 	QStringList landscapes = GETSTELMODULE(LandscapeMgr)->getUserLandscapeIDs();
@@ -39,5 +39,21 @@ void AOLandscape::checkInstalledAddOns()
 			m_pStelAddOnDAO->updateInstalledAddon(landscape % ".zip", "1.0", landscapeDestination.absolutePath());
 			landscapeDestination.cdUp();
 		}
+	}
+}
+
+void AOLandscape::installFromFile(const QString& filePath) const
+{
+	QString ref = GETSTELMODULE(LandscapeMgr)->installLandscapeFromArchive(filePath);
+	if(!ref.isEmpty())
+	{
+		qWarning() << "FAILED to install " << filePath;
+	}
+	// update database
+	QDir landscapeDestination = GETSTELMODULE(LandscapeMgr)->getLandscapeDir();
+	if (landscapeDestination.cd(ref))
+	{
+		m_pStelAddOnDAO->updateInstalledAddon(ref % ".zip", "1.0",
+				     landscapeDestination.absolutePath());
 	}
 }

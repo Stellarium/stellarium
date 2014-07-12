@@ -22,6 +22,7 @@
 
 #include <QObject>
 #include <QStringBuilder>
+#include <QtDebug>
 
 #include "StelApp.hpp"
 #include "StelAddOnDAO.hpp"
@@ -33,7 +34,10 @@ class StelAddOn : public QObject
 	Q_OBJECT
 public:
 	// check add-ons which are already installed
-	virtual void checkInstalledAddOns() = 0;
+	virtual void checkInstalledAddOns() const = 0;
+
+	// install add-on from a zip file
+	virtual void installFromFile(const QString& filePath) const = 0;
 };
 
 #endif // _STELADDON_HPP_
