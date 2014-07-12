@@ -73,8 +73,15 @@ StelAddOnMgr::StelAddOnMgr()
 	}
 	m_iLastUpdate = lastUpdate.toLong();
 
+	// Init sub-classes
+	m_pLandscape = new AOLandscape(m_pStelAddOnDAO);
+
 	// check add-ons which are already installed
-	//checkInstalledAddOns();
+	m_pLandscape->checkInstalledAddOns();
+}
+
+StelAddOnMgr::~StelAddOnMgr()
+{
 }
 
 QString StelAddOnMgr::getDirectory(QString category)
@@ -130,9 +137,6 @@ bool StelAddOnMgr::updateDatabase(QString webresult)
 			return false;
 		}
 	}
-
-	// check add-ons which are already installed
-	// checkInstalledAddOns();
 	return true;
 }
 

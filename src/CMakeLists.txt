@@ -237,8 +237,8 @@ SET(stellarium_lib_SRCS
 	core/modules/ZoneData.hpp
 
 	core/addons/StelAddOn.hpp
-	core/addons/Landscape.cpp
-	core/addons/Landscape.hpp
+	core/addons/AOLandscape.cpp
+	core/addons/AOLandscape.hpp
 
 	StelMainView.hpp
 	StelMainView.cpp

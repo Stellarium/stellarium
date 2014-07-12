@@ -23,8 +23,8 @@
 #include <QObject>
 #include <QStringBuilder>
 
-#include "StelAddOnDAO.hpp"
 #include "StelApp.hpp"
+#include "StelAddOnDAO.hpp"
 #include "StelModuleMgr.hpp"
 
 // pure virtual (abstract) class to provide an interface for addons

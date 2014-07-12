@@ -17,23 +17,23 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#include "Landscape.hpp"
-#include "LandscapeMgr.hpp"
+#ifndef _LANDSCAPE_HPP_
+#define _LANDSCAPE_HPP_
 
-Landscape::Landscape(StelAddOnDAO* pStelAddOnDAO)
-	: m_pStelAddOnDAO(pStelAddOnDAO)
-{
-}
+#include "StelAddOn.hpp"
 
-void Landscape::checkInstalledAddOns()
+class AOLandscape : public StelAddOn
 {
-	QDir landscapeDestination = GETSTELMODULE(LandscapeMgr)->getLandscapeDir();
-	QStringList landscapes = GETSTELMODULE(LandscapeMgr)->getUserLandscapeIDs();
-	foreach (QString landscape, landscapes) {
-		if (landscapeDestination.cd(landscape))
-		{
-			m_pStelAddOnDAO->updateInstalledAddon(landscape % ".zip", "1.0", landscapeDestination.absolutePath());
-			landscapeDestination.cdUp();
-		}
-	}
-}
+	Q_OBJECT
+public:
+	AOLandscape(StelAddOnDAO* pStelAddOnDAO);
+	virtual ~AOLandscape();
+
+	// check add-ons which are already installed
+	virtual void checkInstalledAddOns();
+
+private:
+	StelAddOnDAO* m_pStelAddOnDAO;
+};
+
+#endif // _LANDSCAPE_HPP_

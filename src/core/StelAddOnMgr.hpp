@@ -26,6 +26,7 @@
 #include <QObject>
 #include <QSqlDatabase>
 
+#include "AOLandscape.hpp"
 #include "StelAddOnDAO.hpp"
 
 // categories (database column addon.category)
@@ -42,6 +43,7 @@ class StelAddOnMgr : public QObject
 	Q_OBJECT
 public:
 	StelAddOnMgr();
+	virtual ~StelAddOnMgr();
 
 	QString getDirectory(QString category);
 	void installAddOn(const int addonId);
@@ -90,6 +92,7 @@ private:
 	class StelProgressController* m_progressBar;
 	qint64 m_iLastUpdate;
 
+	// addon directories
 	const QString m_sDirAddOn;
 	const QString m_sDirCatalog;
 	const QString m_sDirLandscape;
@@ -97,6 +100,9 @@ private:
 	const QString m_sDirScript;
 	const QString m_sDirStarlore;
 	const QString m_sDirTexture;
+
+	// Sub-classes
+	AOLandscape* m_pLandscape;
 
 	void downloadAddOn(const StelAddOnDAO::AddOnInfo addonInfo);
 };
