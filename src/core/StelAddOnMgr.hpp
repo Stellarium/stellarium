@@ -49,7 +49,7 @@ public:
 	void installAddOn(const int addonId);
 	void installFromFile(QString category, QString filePath);
 	void removeAddOn(const int addonId);
-	bool updateDatabase(QString webresult);
+	bool updateCatalog(QString webresult);
 	void setLastUpdate(qint64 time);
 	QString getLastUpdateString()
 	{

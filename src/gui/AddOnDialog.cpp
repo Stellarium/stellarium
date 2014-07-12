@@ -260,7 +260,7 @@ void AddOnDialog::downloadFinished()
 
 	if (!result.isEmpty())
 	{
-		if(!StelApp::getInstance().getStelAddOnMgr().updateDatabase(result))
+		if(!StelApp::getInstance().getStelAddOnMgr().updateCatalog(result))
 		{
 			ui->btnUpdate->setEnabled(true);
 			ui->txtLastUpdate->setText(q_("Database update failed!"));

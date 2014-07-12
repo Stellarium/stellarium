@@ -126,7 +126,7 @@ void StelAddOnMgr::setLastUpdate(qint64 time) {
 	}
 }
 
-bool StelAddOnMgr::updateDatabase(QString webresult)
+bool StelAddOnMgr::updateCatalog(QString webresult)
 {
 	QStringList queries = webresult.split("<br>");
 	queries.removeFirst();
