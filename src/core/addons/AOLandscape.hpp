@@ -17,8 +17,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _LANDSCAPE_HPP_
-#define _LANDSCAPE_HPP_
+#ifndef _AOLANDSCAPE_HPP_
+#define _AOLANDSCAPE_HPP_
 
 #include "StelAddOn.hpp"
 
@@ -42,4 +42,4 @@ private:
 	StelAddOnDAO* m_pStelAddOnDAO;
 };
 
-#endif // _LANDSCAPE_HPP_
+#endif // _AOLANDSCAPE_HPP_
