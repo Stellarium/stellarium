@@ -45,7 +45,7 @@ void AOLandscape::checkInstalledAddOns() const
 void AOLandscape::installFromFile(const QString& filePath) const
 {
 	QString ref = GETSTELMODULE(LandscapeMgr)->installLandscapeFromArchive(filePath);
-	if(!ref.isEmpty())
+	if(ref.isEmpty())
 	{
 		qWarning() << "FAILED to install " << filePath;
 	}
@@ -56,4 +56,18 @@ void AOLandscape::installFromFile(const QString& filePath) const
 		m_pStelAddOnDAO->updateInstalledAddon(ref % ".zip", "1.0",
 				     landscapeDestination.absolutePath());
 	}
+}
+
+bool AOLandscape::uninstallAddOn(const StelAddOnDAO::AddOnInfo &addonInfo) const
+{
+	QString dirName = addonInfo.installedDir.dirName();
+	if(!GETSTELMODULE(LandscapeMgr)->removeLandscape(dirName))
+	{
+		qWarning() << "FAILED to remove landscape " << dirName;
+		return false;
+	}
+
+	m_pStelAddOnDAO->updateInstalledAddon(dirName % ".zip", "", "");
+
+	return true;
 }

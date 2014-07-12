@@ -283,18 +283,15 @@ void StelAddOnMgr::installFromFile(QString category, QString filePath)
 
 void StelAddOnMgr::removeAddOn(const int addonId)
 {
+	bool removed = false;
 	StelAddOnDAO::AddOnInfo addonInfo = m_pStelAddOnDAO->getAddOnInfo(addonId);
 	if (addonInfo.category == LANDSCAPE)
 	{
-		QString dirName = addonInfo.installedDir.dirName();
-		if(!GETSTELMODULE(LandscapeMgr)->removeLandscape(dirName))
-		{
-			qWarning() << "FAILED to remove landscape " << dirName;
-		}
-		else
-		{
-			m_pStelAddOnDAO->updateInstalledAddon(dirName % ".zip", "", "");
-			emit (updateTableViews());
-		}
+		removed = m_pLandscape->uninstallAddOn(addonInfo);
+	}
+
+	if (removed)
+	{
+		emit (updateTableViews());
 	}
 }

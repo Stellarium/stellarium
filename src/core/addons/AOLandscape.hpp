@@ -35,6 +35,9 @@ public:
 	// install landscape from a zip file.
 	virtual void installFromFile(const QString& filePath) const;
 
+	// uninstall landscape
+	virtual bool uninstallAddOn(const StelAddOnDAO::AddOnInfo& addonInfo) const;
+
 private:
 	StelAddOnDAO* m_pStelAddOnDAO;
 };
