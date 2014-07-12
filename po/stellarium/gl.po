@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-06-26 10:33+0700\n"
-"PO-Revision-Date: 2014-05-18 06:52+0000\n"
+"PO-Revision-Date: 2014-07-09 13:10+0000\n"
 "Last-Translator: Manuel Rosales Graña <manuel.rosales@mundo-r.com>\n"
 "Language-Team: Galician <gl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-06-27 05:49+0000\n"
-"X-Generator: Launchpad (build 17077)\n"
+"X-Launchpad-Export-Date: 2014-07-12 05:49+0000\n"
+"X-Generator: Launchpad (build 17111)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:107 src/core/modules/StarMgr.cpp:339
 #: src/core/modules/GridLinesMgr.cpp:695 src/core/modules/LandscapeMgr.cpp:353
@@ -2324,22 +2324,22 @@ msgstr "Makemake"
 #. TRANSLATORS: Asteroid (3200) Phaethon
 #: src/translations.h:139
 msgid "Phaethon"
-msgstr ""
+msgstr "Faetón"
 
 #. TRANSLATORS: Asteroid (1866) Sisyphus
 #: src/translations.h:141
 msgid "Sisyphus"
-msgstr ""
+msgstr "Sísifo"
 
 #. TRANSLATORS: Asteroid (1864) Daedalus
 #: src/translations.h:143
 msgid "Daedalus"
-msgstr ""
+msgstr "Dédalo"
 
 #. TRANSLATORS: Asteroid (1566) Icarus
 #: src/translations.h:145
 msgid "Icarus"
-msgstr ""
+msgstr "Ícaro"
 
 #. TRANSLATORS: Proper name of comet C/1680 V1
 #: src/translations.h:148
@@ -2608,7 +2608,7 @@ msgstr "Eventos da Terra dende Mercurio"
 #. TRANSLATORS: Name and description of script
 #: src/translations.h:267
 msgid "Earth Events from a floating city on Venus"
-msgstr ""
+msgstr "Eventos da Terra dende unha cidade flotante en Venus"
 
 #. TRANSLATORS: Name and description of script
 #: src/translations.h:269
@@ -2618,12 +2618,12 @@ msgstr "Eventos da Terra dende Marte"
 #. TRANSLATORS: Name of script
 #: src/translations.h:271
 msgid "Earth and Venus Greatest Elongations and Brilliancies from Mars"
-msgstr ""
+msgstr "Maiores Elongacións e Brillo da Terra e Venus dende Marte"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:273
 msgid "Earth and Mars Greatest Elongations and Transits from Callisto"
-msgstr ""
+msgstr "Maiores Elongacións e Tránsitos da Terra e Marte dende Calisto"
 
 #. TRANSLATORS: Description of the landscape tour script.
 #: src/translations.h:279
@@ -2729,6 +2729,8 @@ msgstr ""
 msgid ""
 "Screensaver of various happenings in the Solar System. 232 events in all!"
 msgstr ""
+"Salvapantallas de varios acontecementos no Sistema Solar. 232 eventos en "
+"total!"
 
 #: src/translations.h:295
 msgid "A tour of the western constellations."
@@ -2768,11 +2770,11 @@ msgstr ""
 #: src/translations.h:301
 msgid ""
 "Earth and Venus Greatest Elongations and Brilliancies from Mars 2000-3000"
-msgstr ""
+msgstr "Maiores Elongacións e Brillo da Terra e Venus dende Marte 2000-3000"
 
 #: src/translations.h:302
 msgid "Earth Greatest Elongations and Transits from Callisto 2000-3000."
-msgstr ""
+msgstr "Maiores Elongacións e Tránsito da Terra dende Calisto 2000-3000"
 
 #: src/translations.h:306
 msgid "Andorra"
@@ -3849,6 +3851,8 @@ msgstr "Localización"
 msgid ""
 "Standard list of locations contains only English names (without diacritics!)"
 msgstr ""
+"Listaxe estándar de lugares con nome só en Inglés (sen acentos nin "
+"diacríticos)."
 
 #: src/ui_locationDialogGui.h:404
 msgid "Current location information"
@@ -5626,6 +5630,7 @@ msgstr "Usar graos e minutos para o FOV do CCD"
 msgid ""
 "Mark it if you want the FOV value the same like at the startup of Stellarium."
 msgstr ""
+"Marcar para que o valor FOV sexa o mesmo có do arranque do Stellarium."
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1070
 msgid "Restore FOV to initial values"
@@ -9835,11 +9840,11 @@ msgstr ""
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:281
 msgid "Enable display of coordinates at startup"
-msgstr ""
+msgstr "Activar pantalla de coordenadas no inicio"
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:282
 msgid "Show plug-in button on toolbar"
-msgstr ""
+msgstr "Amosar o botón de plugin na barra de ferramentas"
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:285
 msgid "Place of the string with coordinates of the mouse pointer"
