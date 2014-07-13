@@ -20,15 +20,6 @@
 
 // class used to manage groups of Nebulas
 
-#include <algorithm>
-#include <QDebug>
-#include <QFile>
-#include <QSettings>
-#include <QString>
-#include <QStringList>
-#include <QRegExp>
-#include <QDir>
-
 #include "StelApp.hpp"
 #include "NebulaMgr.hpp"
 #include "Nebula.hpp"
@@ -48,6 +39,15 @@
 #include "RefractionExtinction.hpp"
 #include "StelActionMgr.hpp"
 
+#include <algorithm>
+#include <QDebug>
+#include <QFile>
+#include <QSettings>
+#include <QString>
+#include <QStringList>
+#include <QRegExp>
+#include <QDir>
+
 void NebulaMgr::setLabelsColor(const Vec3f& c) {Nebula::labelColor = c;}
 const Vec3f &NebulaMgr::getLabelsColor(void) const {return Nebula::labelColor;}
 void NebulaMgr::setCirclesColor(const Vec3f& c) {Nebula::circleColor = c;}
@@ -56,7 +56,10 @@ void NebulaMgr::setCircleScale(float scale) {Nebula::circleScale = scale;}
 float NebulaMgr::getCircleScale(void) const {return Nebula::circleScale;}
 
 
-NebulaMgr::NebulaMgr(void) : nebGrid(200)
+NebulaMgr::NebulaMgr(void)
+	: nebGrid(200),
+	  hintsAmount(0),
+	  labelsAmount(0)
 {
 	setObjectName("NebulaMgr");
 }

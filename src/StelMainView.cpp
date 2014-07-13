@@ -28,6 +28,7 @@
 #include "StelTranslator.hpp"
 #include "StelUtils.hpp"
 #include "StelActionMgr.hpp"
+#include "StelOpenGL.hpp"
 
 #include <QDeclarativeItem>
 #include <QDebug>
@@ -37,7 +38,6 @@
 #include <QFileInfo>
 #include <QIcon>
 #include <QMoveEvent>
-#include <QOpenGLFunctions>
 #include <QPluginLoader>
 #include <QScreen>
 #include <QSettings>
@@ -54,7 +54,7 @@
 StelMainView* StelMainView::singleton = NULL;
 
 //! Render Stellarium sky. 
-class StelSkyItem : public QDeclarativeItem, protected QOpenGLFunctions
+class StelSkyItem : public QDeclarativeItem
 {
 public:
 	StelSkyItem(QDeclarativeItem* parent = NULL);
@@ -120,6 +120,8 @@ void StelSkyItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *optio
 
 void StelSkyItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
+	//To get back the focus from dialogs
+	this->setFocus(true);
 	QPointF pos = event->scenePos();
 	// XXX: to reintroduce
 	//distortPos(&pos);
@@ -292,6 +294,12 @@ void StelMainView::init(QSettings* conf)
 
 	Q_ASSERT(glWidget->isValid());
 	glWidget->makeCurrent();
+
+	// Debug info about supported version of OpenGL and vendor/renderer
+	qDebug() << "OpenGL versions supported:" << getSupportedOpenGLVersion();
+	qDebug() << "Driver version string:" << QString(reinterpret_cast<const char*>(glGetString(GL_VERSION)));
+	qDebug() << "GL vendor is" << QString(reinterpret_cast<const char*>(glGetString(GL_VENDOR)));
+	qDebug() << "GL renderer is" << QString(reinterpret_cast<const char*>(glGetString(GL_RENDERER)));
 	
 	stelApp= new StelApp();
 	stelApp->setGui(gui);
@@ -303,21 +311,22 @@ void StelMainView::init(QSettings* conf)
 
 	StelPainter::initGLShaders();
 
-	setViewportUpdateMode(QGraphicsView::FullViewportUpdate);
 	setResizeMode(QDeclarativeView::SizeRootObjectToView);
 	qmlRegisterType<StelSkyItem>("Stellarium", 1, 0, "StelSky");
 	qmlRegisterType<StelGuiItem>("Stellarium", 1, 0, "StelGui");
-	rootContext()->setContextProperty("stelApp", stelApp);
+	rootContext()->setContextProperty("stelApp", stelApp);	
 	setSource(QUrl("qrc:/qml/main.qml"));
 	
-	QScreen* screen = glWidget->windowHandle()->screen();
-	int width = conf->value("video/screen_w", screen->size().width()).toInt();
-	int height = conf->value("video/screen_h", screen->size().height()).toInt();
+	QSize size = glWidget->windowHandle()->screen()->size();
+	size = QSize(conf->value("video/screen_w", size.width()).toInt(),
+		     conf->value("video/screen_h", size.height()).toInt());
+
+	bool fullscreen = conf->value("video/fullscreen", true).toBool();
 
 	// Without this, the screen is not shown on a Mac + we should use resize() for correct work of fullscreen/windowed mode switch. --AW WTF???
-	resize(width, height);
+	resize(size);
 
-	if (conf->value("video/fullscreen", true).toBool())
+	if (fullscreen)
 	{
 		setFullScreen(true);
 	}
@@ -326,15 +335,15 @@ void StelMainView::init(QSettings* conf)
 		setFullScreen(false);
 		int x = conf->value("video/screen_x", 0).toInt();
 		int y = conf->value("video/screen_y", 0).toInt();
-		move(x, y);
+		move(x, y);	
 	}
-	show();
 
 	flagInvertScreenShotColors = conf->value("main/invert_screenshots_colors", false).toBool();
 	setFlagCursorTimeout(conf->value("gui/flag_mouse_cursor_timeout", false).toBool());
 	setCursorTimeout(conf->value("gui/mouse_cursor_timeout", 10.f).toFloat());
 	maxfps = conf->value("video/maximum_fps",10000.f).toFloat();
 	minfps = conf->value("video/minimum_fps",10000.f).toFloat();
+	flagMaxFpsUpdatePending = false;
 
 	// XXX: This should be done in StelApp::init(), unfortunately for the moment we need init the gui before the
 	// plugins, because the gui create the QActions needed by some plugins.
@@ -342,6 +351,55 @@ void StelMainView::init(QSettings* conf)
 
 	QThread::currentThread()->setPriority(QThread::HighestPriority);
 	startMainLoop();
+}
+
+QString StelMainView::getSupportedOpenGLVersion() const
+{
+	int version = QGLFormat::openGLVersionFlags();
+	QStringList ver;
+
+	if (version&QGLFormat::OpenGL_Version_1_1)
+		ver << "1.1";
+	if (version&QGLFormat::OpenGL_Version_1_2)
+		ver << "1.2";
+	if (version&QGLFormat::OpenGL_Version_1_3)
+		ver << "1.3";
+	if (version&QGLFormat::OpenGL_Version_1_4)
+		ver << "1.4";
+	if (version&QGLFormat::OpenGL_Version_1_5)
+		ver << "1.5";
+	if (version&QGLFormat::OpenGL_Version_2_0)
+		ver << "2.0";
+	if (version&QGLFormat::OpenGL_Version_2_1)
+		ver << "2.1";
+	if (version&QGLFormat::OpenGL_Version_3_0)
+		ver << "3.0";
+	if (version&QGLFormat::OpenGL_Version_3_1)
+		ver << "3.1";
+	if (version&QGLFormat::OpenGL_Version_3_2)
+		ver << "3.2";
+	if (version&QGLFormat::OpenGL_Version_3_3)
+		ver << "3.3";
+	if (version&QGLFormat::OpenGL_Version_4_0)
+		ver << "4.0";
+	if (version&QGLFormat::OpenGL_Version_4_1)
+		ver << "4.1";
+	if (version&QGLFormat::OpenGL_Version_4_2)
+		ver << "4.2";
+	if (version&QGLFormat::OpenGL_Version_4_3)
+		ver << "4.3";
+	if (version&QGLFormat::OpenGL_ES_CommonLite_Version_1_0)
+		ver << "1.0 (ES CL)";
+	if (version&QGLFormat::OpenGL_ES_CommonLite_Version_1_1)
+		ver << "1.1 (ES CL)";
+	if (version&QGLFormat::OpenGL_ES_Common_Version_1_0)
+		ver << "1.0 (ES C)";
+	if (version&QGLFormat::OpenGL_ES_Common_Version_1_1)
+		ver << "1.1 (ES C)";
+	if (version&QGLFormat::OpenGL_ES_Version_2_0)
+		ver << "2.0 (ES)";
+
+	return ver.join(", ");
 }
 
 void StelMainView::deinit()
@@ -378,18 +436,42 @@ void StelMainView::thereWasAnEvent()
 	lastEventTimeSec = StelApp::getTotalRunTime();
 }
 
+void StelMainView::maxFpsSceneUpdate()
+{
+	updateScene();
+	flagMaxFpsUpdatePending = false;
+}
+
 void StelMainView::drawBackground(QPainter*, const QRectF&)
 {
 	const double now = StelApp::getTotalRunTime();
+	const double JD_SECOND=0.000011574074074074074074;
 
 	// Determines when the next display will need to be triggered
 	// The current policy is that after an event, the FPS is maximum for 2.5 seconds
-	// after that, it switches back to the default minfps value to save power
-	if (now-lastEventTimeSec<2.5)
+	// after that, it switches back to the default minfps value to save power.
+	// The fps is also kept to max if the timerate is higher than normal speed.
+	const float timeRate = StelApp::getInstance().getCore()->getTimeRate();
+	const bool needMaxFps = (now - lastEventTimeSec < 2.5) || fabs(timeRate) > JD_SECOND;
+	if (needMaxFps)
 	{
-		double duration = 1./getMaxFps();
-		int dur = (int)(duration*1000);
-		QTimer::singleShot(dur<5 ? 5 : dur, this, SLOT(updateScene()));
+		if (!flagMaxFpsUpdatePending)
+		{
+			double duration = 1./getMaxFps();
+			int dur = (int)(duration*1000);
+
+			if (minFpsTimer!=NULL)
+			{
+				disconnect(minFpsTimer, SIGNAL(timeout()), 0, 0);
+				delete minFpsTimer;
+				minFpsTimer = NULL;
+			}
+			flagMaxFpsUpdatePending = true;
+			QTimer::singleShot(dur<5 ? 5 : dur, this, SLOT(maxFpsSceneUpdate()));
+		}
+	} else if (minFpsTimer == NULL) {
+		// Restart the minfps timer
+		minFpsChanged();
 	}
 
 	// Manage cursor timeout
@@ -430,7 +512,8 @@ void StelMainView::minFpsChanged()
 
 void StelMainView::mouseMoveEvent(QMouseEvent* event)
 {
-	thereWasAnEvent(); // Refresh screen ASAP
+	if (event->buttons())
+		thereWasAnEvent(); // Refresh screen ASAP
 	QDeclarativeView::mouseMoveEvent(event);
 }
 
@@ -458,6 +541,12 @@ void StelMainView::moveEvent(QMoveEvent * event)
 
 	// We use the glWidget instead of the even, as we want the screen that shows most of the widget.
 	StelApp::getInstance().setDevicePixelsPerPixel(glWidget->windowHandle()->devicePixelRatio());
+}
+
+void StelMainView::closeEvent(QCloseEvent* event)
+{
+	Q_UNUSED(event);
+	StelApp::getInstance().quit();
 }
 
 void StelMainView::keyPressEvent(QKeyEvent* event)

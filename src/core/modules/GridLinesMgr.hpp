@@ -147,6 +147,11 @@ public slots:
 	//! Get the current color of the Azimuthal Grid.
 	Vec3f getColorAzimuthalGrid(void) const;
 	//! Set the color of the Azimuthal Grid.
+	//! @param newColor The color of azimuthal grid
+	//! @code
+	//! // example of usage in scripts
+	//! GridLinesMgr.setColorAzimuthalGrid(Vec3f(1.0,0.0,0.0));
+	//! @endcode
 	void setColorAzimuthalGrid(const Vec3f& newColor);
 
 	//! Setter for displaying Equatorial Grid.
@@ -156,6 +161,11 @@ public slots:
 	//! Get the current color of the Equatorial Grid.
 	Vec3f getColorEquatorGrid(void) const;
 	//! Set the color of the Equatorial Grid.
+	//! @param newColor The color of equatorial grid
+	//! @code
+	//! // example of usage in scripts
+	//! GridLinesMgr.setColorEquatorGrid(Vec3f(1.0,0.0,0.0));
+	//! @endcode
 	void setColorEquatorGrid(const Vec3f& newColor);
 
 	//! Setter for displaying Equatorial Grid.
@@ -165,6 +175,11 @@ public slots:
 	//! Get the current color of the Equatorial J2000 Grid.
 	Vec3f getColorEquatorJ2000Grid(void) const;
 	//! Set the color of the Equatorial J2000 Grid.
+	//! @param newColor The color of equatorial J2000 grid
+	//! @code
+	//! // example of usage in scripts
+	//! GridLinesMgr.setColorEquatorJ2000Grid(Vec3f(1.0,0.0,0.0));
+	//! @endcode
 	void setColorEquatorJ2000Grid(const Vec3f& newColor);
 
 	//! Setter for displaying Ecliptic Grid.
@@ -174,6 +189,11 @@ public slots:
 	//! Get the current color of the Ecliptic J2000 Grid.
 	Vec3f getColorEclipticJ2000Grid(void) const;
 	//! Set the color of the Ecliptic J2000 Grid.
+	//! @param newColor The color of ecliptic J2000 grid
+	//! @code
+	//! // example of usage in scripts
+	//! GridLinesMgr.setColorEclipticJ2000Grid(Vec3f(1.0,0.0,0.0));
+	//! @endcode
 	void setColorEclipticJ2000Grid(const Vec3f& newColor);
 
 	//! Setter for displaying Galactic Grid.
@@ -183,6 +203,11 @@ public slots:
 	//! Get the current color of the Galactic Grid.
 	Vec3f getColorGalacticGrid(void) const;
 	//! Set the color of the Galactic Grid.
+	//! @param newColor The color of galactic grid
+	//! @code
+	//! // example of usage in scripts
+	//! GridLinesMgr.setColorGalacticGrid(Vec3f(1.0,0.0,0.0));
+	//! @endcode
 	void setColorGalacticGrid(const Vec3f& newColor);
 
 	//! Setter for displaying Equatorial Line.
@@ -191,7 +216,12 @@ public slots:
 	bool getFlagEquatorLine(void) const;
 	//! Get the current color of the Equatorial Line.
 	Vec3f getColorEquatorLine(void) const;
-	//! Set the color of the Meridian Line.
+	//! Set the color of the Equator Line.
+	//! @param newColor The color of equator line
+	//! @code
+	//! // example of usage in scripts
+	//! GridLinesMgr.setColorEquatorLine(Vec3f(1.0,0.0,0.0));
+	//! @endcode
 	void setColorEquatorLine(const Vec3f& newColor);
 
 	//! Setter for displaying Ecliptic Line.
@@ -200,7 +230,12 @@ public slots:
 	bool getFlagEclipticLine(void) const;
 	//! Get the current color of the Ecliptic Line.
 	Vec3f getColorEclipticLine(void) const;
-	//! Set the color of the Meridian Line.
+	//! Set the color of the Ecliptic Line.
+	//! @param newColor The color of ecliptic line
+	//! @code
+	//! // example of usage in scripts
+	//! GridLinesMgr.setColorEclipticLine(Vec3f(1.0,0.0,0.0));
+	//! @endcode
 	void setColorEclipticLine(const Vec3f& newColor);
 
 	//! Setter for displaying Meridian Line.
@@ -210,6 +245,11 @@ public slots:
 	//! Get the current color of the Meridian Line.
 	Vec3f getColorMeridianLine(void) const;
 	//! Set the color of the Meridian Line.
+	//! @param newColor The color of meridian line
+	//! @code
+	//! // example of usage in scripts
+	//! GridLinesMgr.setColorMeridianLine(Vec3f(1.0,0.0,0.0));
+	//! @endcode
 	void setColorMeridianLine(const Vec3f& newColor);
 
 	//! Setter for displaying Horizon Line.
@@ -219,15 +259,25 @@ public slots:
 	//! Get the current color of the Horizon Line.
 	Vec3f getColorHorizonLine(void) const;
 	//! Set the color of the Horizon Line.
+	//! @param newColor The color of horizon line
+	//! @code
+	//! // example of usage in scripts
+	//! GridLinesMgr.setColorHorizonLine(Vec3f(1.0,0.0,0.0));
+	//! @endcode
 	void setColorHorizonLine(const Vec3f& newColor);
 
-	//! Setter for displaying GalacticPlane Line.
+	//! Setter for displaying Galactic Plane Line.
 	void setFlagGalacticPlaneLine(const bool displayed);
-	//! Accessor for displaying GalacticPlane Line.
+	//! Accessor for displaying Galactic Plane Line.
 	bool getFlagGalacticPlaneLine(void) const;
-	//! Get the current color of the GalacticPlane Line.
+	//! Get the current color of the Galactic Plane Line.
 	Vec3f getColorGalacticPlaneLine(void) const;
-	//! Set the color of the GalacticPlane Line.
+	//! Set the color of the Galactic Plane Line.
+	//! @param newColor The color of galactic plane line
+	//! @code
+	//! // example of usage in scripts
+	//! GridLinesMgr.setColorGalacticPlaneLine(Vec3f(1.0,0.0,0.0));
+	//! @endcode
 	void setColorGalacticPlaneLine(const Vec3f& newColor);
 signals:
 	void azimuthalGridDisplayedChanged(const bool) const;

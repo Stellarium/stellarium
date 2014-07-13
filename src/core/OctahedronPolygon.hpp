@@ -20,11 +20,14 @@
 #ifndef _OCTAHEDRON_REGION_HPP_
 #define _OCTAHEDRON_REGION_HPP_
 
+#include "config.h"
+
+#include "StelVertexArray.hpp"
+#include "VecMath.hpp"
+
 #include <QVector>
 #include <QDebug>
 #include <QVarLengthArray>
-#include "VecMath.hpp"
-#include "StelVertexArray.hpp"
 
 //! @struct EdgeVertex
 //! Describe a vertex composing polygon contours, and whether it belong to an edge or not.

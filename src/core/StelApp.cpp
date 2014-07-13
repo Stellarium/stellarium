@@ -64,6 +64,7 @@
 #include <QNetworkDiskCache>
 #include <QNetworkProxy>
 #include <QNetworkReply>
+#include <QOpenGLContext>
 #include <QString>
 #include <QStringList>
 #include <QSysInfo>
@@ -127,6 +128,10 @@ Q_IMPORT_PLUGIN(SolarSystemEditorStelPluginInterface)
 Q_IMPORT_PLUGIN(TimeZoneConfigurationStelPluginInterface)
 #endif
 
+#ifdef USE_STATIC_PLUGIN_METEORSHOWERS
+Q_IMPORT_PLUGIN(MeteorShowersStelPluginInterface)
+#endif
+
 #ifdef USE_STATIC_PLUGIN_NAVSTARS
 Q_IMPORT_PLUGIN(NavStarsStelPluginInterface)
 #endif
@@ -151,8 +156,16 @@ Q_IMPORT_PLUGIN(PulsarsStelPluginInterface)
 Q_IMPORT_PLUGIN(ExoplanetsStelPluginInterface)
 #endif
 
+#ifdef USE_STATIC_PLUGIN_EQUATIONOFTIME
+Q_IMPORT_PLUGIN(EquationOfTimeStelPluginInterface)
+#endif
+
 #ifdef USE_STATIC_PLUGIN_FOV
 Q_IMPORT_PLUGIN(FOVStelPluginInterface)
+#endif
+
+#ifdef USE_STATIC_PLUGIN_POINTERCOORDINATES
+Q_IMPORT_PLUGIN(PointerCoordinatesStelPluginInterface)
 #endif
 
 #ifdef USE_STATIC_PLUGIN_OBSERVABILITY
@@ -179,14 +192,28 @@ void StelApp::deinitStatic()
  Create and initialize the main Stellarium application.
 *************************************************************************/
 StelApp::StelApp(QObject* parent)
-	: QObject(parent), core(NULL),
+	: QObject(parent)
+	, core(NULL)
+	, planetLocationMgr(NULL)
+	, audioMgr(NULL)
+	, videoMgr(NULL)
+	, skyImageMgr(NULL)
 #ifndef DISABLE_SCRIPTING
-	  scriptAPIProxy(NULL), scriptMgr(NULL),
+	, scriptAPIProxy(NULL)
+	, scriptMgr(NULL)
 #endif
-	  stelGui(NULL), devicePixelsPerPixel(1.f), globalScalingRatio(1.f), fps(0),
-	  frame(0), timefr(0.), timeBase(0.), flagNightVision(false),
-	  confSettings(NULL), initialized(false), saveProjW(-1), saveProjH(-1), drawState(0)
-
+	, stelGui(NULL)
+	, devicePixelsPerPixel(1.f)
+	, globalScalingRatio(1.f)
+	, fps(0)
+	, frame(0)
+	, timefr(0.)
+	, timeBase(0.)
+	, flagNightVision(false)
+	, confSettings(NULL)
+	, initialized(false)
+	, saveProjW(-1)
+	, saveProjH(-1)
 {
 	// Stat variables
 	nbDownloadedFiles=0;
@@ -213,6 +240,9 @@ StelApp::StelApp(QObject* parent)
 	wheelEventTimer = new QTimer(this);
 	wheelEventTimer->setInterval(25);
 	wheelEventTimer->setSingleShot(true);
+
+	// Reset delta accumulators
+	wheelEventDelta[0] = wheelEventDelta[1] = 0;
 }
 
 /*************************************************************************
@@ -416,7 +446,7 @@ void StelApp::init(QSettings* conf)
 	getModuleMgr().registerModule(gridLines);
 
 	// Meteors
-	MeteorMgr* meteors = new MeteorMgr(10, 60);
+	MeteorMgr* meteors = new MeteorMgr(10, 72);
 	meteors->init();
 	getModuleMgr().registerModule(meteors);
 
@@ -432,9 +462,6 @@ void StelApp::init(QSettings* conf)
 	// Initialisation of the color scheme
 	emit colorSchemeChanged("color");
 	setVisionModeNight(confSettings->value("viewing/flag_night").toBool());
-
-	// Initialisation of the render of solar shadows
-	//setRenderSolarShadows(confSettings->value("viewing/flag_render_solar_shadows", true).toBool());
 
 	// Proxy Initialisation
 	setupHttpProxy();
@@ -522,38 +549,19 @@ void StelApp::update(double deltaTime)
 	stelObjectMgr->update(deltaTime);
 }
 
-//! Iterate through the drawing sequence.
-bool StelApp::drawPartial()
-{
-	if (drawState == 0)
-	{
-		if (!initialized)
-			return false;
-		core->preDraw();
-		drawState = 1;
-		return true;
-	}
-
-	const QList<StelModule*> modules = moduleMgr->getCallOrders(StelModule::ActionDraw);
-	int index = drawState - 1;
-	if (index < modules.size())
-	{
-		if (modules[index]->drawPartial(core))
-			return true;
-		drawState++;
-		return true;
-	}
-	core->postDraw();
-	drawState = 0;
-	return false;
-}
-
 //! Main drawing function called at each frame
 void StelApp::draw()
 {
-	Q_ASSERT(drawState == 0);
-	while (drawPartial()) {}
-	Q_ASSERT(drawState == 0);
+	if (!initialized)
+		return;
+	core->preDraw();
+
+	const QList<StelModule*> modules = moduleMgr->getCallOrders(StelModule::ActionDraw);
+	foreach(StelModule* module, modules)
+	{
+		module->draw(core);
+	}
+	core->postDraw();
 }
 
 /*************************************************************************
@@ -594,29 +602,28 @@ void StelApp::handleClick(QMouseEvent* inputEvent)
 // This deltaEvent is a work-around for QTBUG-22269
 void StelApp::handleWheel(QWheelEvent* event)
 {
-	// variables used to track the changes
-	static int delta = 0;
-
 	event->setAccepted(false);
-	
-	if (wheelEventTimer->isActive()) {
+
+	const int deltaIndex = event->orientation() == Qt::Horizontal ? 0 : 1;
+	wheelEventDelta[deltaIndex] += event->delta();
+	if (wheelEventTimer->isActive())
+	{
 		// Collect the values. If delta is small enough we wait for more values or the end
 		// of the timer period to process them.
-		delta += event->delta();
-		if (qAbs(delta) < 120)
+		if (qAbs(wheelEventDelta[deltaIndex]) < 120)
 			return;
 	}
 
-	// The first time in, the values will not have been set.
-	if (delta == 0) {
-		delta += event->delta();
-	}
-
 	wheelEventTimer->start();
+
+	// Create a new event with the accumulated delta
 	QWheelEvent deltaEvent(QPoint(event->pos().x()*devicePixelsPerPixel, event->pos().y()*devicePixelsPerPixel),
-						   QPoint(event->globalPos().x()*devicePixelsPerPixel, event->globalPos().y()*devicePixelsPerPixel),
-						   delta, event->buttons(), event->modifiers(), event->orientation());
+	                       QPoint(event->globalPos().x()*devicePixelsPerPixel, event->globalPos().y()*devicePixelsPerPixel),
+	                       wheelEventDelta[deltaIndex], event->buttons(), event->modifiers(), event->orientation());
 	deltaEvent.setAccepted(false);
+	// Reset the collected values
+	wheelEventDelta[deltaIndex] = 0;
+
 	// Send the event to every StelModule
 	foreach (StelModule* i, moduleMgr->getCallOrders(StelModule::ActionHandleMouseClicks)) {
 		i->handleMouseWheel(&deltaEvent);
@@ -625,8 +632,6 @@ void StelApp::handleWheel(QWheelEvent* event)
 			break;
 		}
 	}
-	// Reset the collected values
-	delta = 0;
 }
 
 // Handle mouse move
@@ -662,6 +667,16 @@ void StelApp::handleKeys(QKeyEvent* event)
 	}
 }
 
+// Handle pinch on multi touch devices
+void StelApp::handlePinch(qreal scale, bool started)
+{
+	// Send the event to every StelModule
+	foreach (StelModule* i, moduleMgr->getCallOrders(StelModule::ActionHandleMouseMoves))
+	{
+		if (i->handlePinch(scale, started))
+			return;
+	}
+}
 
 //! Set flag for activating night vision mode
 void StelApp::setVisionModeNight(bool b)
@@ -708,6 +723,12 @@ void StelApp::reportFileDownloadFinished(QNetworkReply* reply)
 		++nbDownloadedFiles;
 		totalDownloadedSize+=reply->bytesAvailable();
 	}
+}
+
+void StelApp::quit()
+{
+	emit aboutToQuit();
+	QCoreApplication::exit(0);
 }
 
 void StelApp::setDevicePixelsPerPixel(float dppp)

@@ -76,7 +76,7 @@ void ViewDialog::retranslate()
 	if (dialog)
 	{
 		ui->retranslateUi(dialog);
-		setZhrFromControls();
+		updateZhrDescription();
 		populateLists();
 
 		//Hack to shrink the tabs to optimal size after language change
@@ -100,6 +100,15 @@ void ViewDialog::connectCheckBox(QCheckBox* checkBox, const QString& actionId)
 	checkBox->setChecked(action->isChecked());
 	connect(action, SIGNAL(toggled(bool)), checkBox, SLOT(setChecked(bool)));
 	connect(checkBox, SIGNAL(toggled(bool)), action, SLOT(setChecked(bool)));
+}
+
+void ViewDialog::connectGroupBox(QGroupBox* groupBox, const QString& actionId)
+{
+	StelAction* action = StelApp::getInstance().getStelActionManager()->findAction(actionId);
+	Q_ASSERT(action);
+	groupBox->setChecked(action->isChecked());
+	connect(action, SIGNAL(toggled(bool)), groupBox, SLOT(setChecked(bool)));
+	connect(groupBox, SIGNAL(toggled(bool)), action, SLOT(setChecked(bool)));
 }
 
 void ViewDialog::createDialogContent()
@@ -182,15 +191,11 @@ void ViewDialog::createDialogContent()
 	// Shooting stars section
 	MeteorMgr* mmgr = GETSTELMODULE(MeteorMgr);
 	Q_ASSERT(mmgr);
-	updateZhrControls(mmgr->getZHR());
-	connect(mmgr, SIGNAL(zhrChanged(int)),
-					this, SLOT(updateZhrControls(int)));
-	connect(ui->zhrNone, SIGNAL(clicked()), this, SLOT(setZhrFromControls()));
-	connect(ui->zhr10, SIGNAL(clicked()), this, SLOT(setZhrFromControls()));
-	connect(ui->zhr80, SIGNAL(clicked()), this, SLOT(setZhrFromControls()));
-	connect(ui->zhr1000, SIGNAL(clicked()), this, SLOT(setZhrFromControls()));
-	connect(ui->zhr10000, SIGNAL(clicked()), this, SLOT(setZhrFromControls()));
-	connect(ui->zhr144000, SIGNAL(clicked()), this, SLOT(setZhrFromControls()));
+
+	ui->zhrSpinBox->setValue(mmgr->getZHR());
+	connect(mmgr, SIGNAL(zhrChanged(int)), this, SLOT(updateZhrControls(int)));
+	connect(ui->zhrSpinBox, SIGNAL(valueChanged(int)), this, SLOT(setZhrFromControls(int)));
+	updateZhrDescription();
 
 	// Labels section
 	StarMgr* smgr = GETSTELMODULE(StarMgr);
@@ -211,7 +216,7 @@ void ViewDialog::createDialogContent()
 	LandscapeMgr* lmgr = GETSTELMODULE(LandscapeMgr);
 	connectCheckBox(ui->showGroundCheckBox, "actionShow_Ground");
 	connectCheckBox(ui->showFogCheckBox, "actionShow_Fog");
-	connectCheckBox(ui->showAtmosphereCheckBox, "actionShow_Atmosphere");
+	connectGroupBox(ui->atmosphereGroupBox, "actionShow_Atmosphere");
 
 	ui->landscapePositionCheckBox->setChecked(lmgr->getFlagLandscapeSetsLocation());
 	connect(ui->landscapePositionCheckBox, SIGNAL(toggled(bool)), lmgr, SLOT(setFlagLandscapeSetsLocation(bool)));
@@ -219,13 +224,14 @@ void ViewDialog::createDialogContent()
 	ui->landscapeBrightnessCheckBox->setChecked(lmgr->getFlagLandscapeSetsMinimalBrightness());
 	connect(ui->landscapeBrightnessCheckBox, SIGNAL(toggled(bool)), lmgr, SLOT(setFlagLandscapeSetsMinimalBrightness(bool)));
 
-	int bIdx = StelApp::getInstance().getCore()->getSkyDrawer()->getBortleScaleIndex();
-	ui->lightPollutionSpinBox->setValue(bIdx);
-	setBortleScaleToolTip(bIdx);
+	// Light pollution
+	populateLightPollution();
+	ui->useLocationDataCheckBox->setChecked(lmgr->getFlagUseLightPollutionFromDatabase());
+	connect(ui->useLocationDataCheckBox, SIGNAL(toggled(bool)), lmgr, SLOT(setFlagUseLightPollutionFromDatabase(bool)));	
+	connect(lmgr, SIGNAL(lightPollutionUsageChanged(bool)), this, SLOT(populateLightPollution()));
 	connect(ui->lightPollutionSpinBox, SIGNAL(valueChanged(int)), lmgr, SLOT(setAtmosphereBortleLightPollution(int)));
 	connect(ui->lightPollutionSpinBox, SIGNAL(valueChanged(int)), StelApp::getInstance().getCore()->getSkyDrawer(), SLOT(setBortleScaleIndex(int)));
 	connect(ui->lightPollutionSpinBox, SIGNAL(valueChanged(int)), this, SLOT(setBortleScaleToolTip(int)));
-
 
 	ui->autoChangeLandscapesCheckBox->setChecked(lmgr->getFlagLandscapeAutoSelection());
 	connect(ui->autoChangeLandscapesCheckBox, SIGNAL(toggled(bool)), lmgr, SLOT(setFlagLandscapeAutoSelection(bool)));
@@ -287,6 +293,28 @@ void ViewDialog::createDialogContent()
 	QTimer* refreshTimer = new QTimer(this);
 	connect(refreshTimer, SIGNAL(timeout()), this, SLOT(updateFromProgram()));
 	refreshTimer->start(200);
+}
+
+void ViewDialog::populateLightPollution()
+{
+	StelCore *core = StelApp::getInstance().getCore();
+	LandscapeMgr *lmgr = GETSTELMODULE(LandscapeMgr);
+	int bIdx = core->getSkyDrawer()->getBortleScaleIndex();
+	if (lmgr->getFlagUseLightPollutionFromDatabase())
+	{
+		StelLocation loc = core->getCurrentLocation();
+		bIdx = loc.bortleScaleIndex;
+		if (!loc.planetName.contains("Earth")) // location not on Earth...
+			bIdx = 1;
+		if (bIdx<1) // ...or it observatory, or it unknown location
+			bIdx = loc.DEFAULT_BORTLE_SCALE_INDEX;
+		ui->lightPollutionSpinBox->setEnabled(false);
+	}
+	else
+		ui->lightPollutionSpinBox->setEnabled(true);
+
+	ui->lightPollutionSpinBox->setValue(bIdx);
+	setBortleScaleToolTip(bIdx);
 }
 
 void ViewDialog::setBortleScaleToolTip(int Bindex)
@@ -461,8 +489,12 @@ void ViewDialog::updateSkyCultureText()
 	else
 	{
 		QFile f(descPath);
-		f.open(QIODevice::ReadOnly);
-		QString htmlFile = QString::fromUtf8(f.readAll());
+		QString htmlFile;
+		if(f.open(QIODevice::ReadOnly))
+		{
+			htmlFile = QString::fromUtf8(f.readAll());
+			f.close();
+		}
 		ui->skyCultureTextBrowser->setHtml(htmlFile);
 	}
 }
@@ -513,78 +545,73 @@ void ViewDialog::showAtmosphereDialog()
 }
 
 
-void ViewDialog::setZhrFromControls()
+void ViewDialog::setZhrFromControls(int zhr)
 {
-	MeteorMgr* mmgr = GETSTELMODULE(MeteorMgr);
-	int zhr=-1;
-	if (ui->zhrNone->isChecked())
+	MeteorMgr* mmgr = GETSTELMODULE(MeteorMgr);	
+	if (zhr==0)
 	{
 		mmgr->setFlagShow(false);
-		zhr = 0;
 	}
 	else
 	{
 		mmgr->setFlagShow(true);
-	}
-	if (ui->zhr10->isChecked())
-		zhr = 10;
-	if (ui->zhr80->isChecked())
-		zhr = 80;
-	if (ui->zhr1000->isChecked())
-		zhr = 1000;
-	if (ui->zhr10000->isChecked())
-		zhr = 10000;
-	if (ui->zhr144000->isChecked())
-		zhr = 144000;
-	if (zhr!=mmgr->getZHR())
-	{
 		mmgr->setZHR(zhr);
 	}
-	
-	updateZhrDescription(zhr);
+	updateZhrDescription();
 }
 
 void ViewDialog::updateZhrControls(int zhr)
 {
-	// As the radio buttons are tied to the clicked() signal,
-	// it won't be triggered by setting the value programmatically.
-	switch(zhr)
-	{
-		case 0: ui->zhrNone->setChecked(true); break;
-		case 80: ui->zhr80->setChecked(true); break;
-		case 1000: ui->zhr1000->setChecked(true); break;
-		case 10000: ui->zhr10000->setChecked(true); break;
-		case 144000: ui->zhr144000->setChecked(true); break;
-		default: ui->zhr10->setChecked(true); break;
-	}
-	
-	updateZhrDescription(zhr);
+	ui->zhrSpinBox->setValue(zhr);
+	updateZhrDescription();
 }
 
-void ViewDialog::updateZhrDescription(int zhr)
+void ViewDialog::updateZhrDescription()
 {
+	int zhr = ui->zhrSpinBox->value();
 	switch (zhr)
 	{
 		case 0:
 			ui->zhrLabel->setText("<small><i>"+q_("No shooting stars")+"</i></small>");
 			break;
+		case 5:
+		case 6:
+		case 7:
+		case 8:
+		case 9:
 		case 10:
 			ui->zhrLabel->setText("<small><i>"+q_("Normal rate")+"</i></small>");
 			break;
-		case 80:
+		case 25:
+			ui->zhrLabel->setText("<small><i>"+q_("Standard Orionids rate")+"</i></small>");
+			break;
+		case 100:
 			ui->zhrLabel->setText("<small><i>"+q_("Standard Perseids rate")+"</i></small>");
+			break;
+		case 120:
+			ui->zhrLabel->setText("<small><i>"+q_("Standard Geminids rate")+"</i></small>");
+			break;
+		case 200:
+			ui->zhrLabel->setText("<small><i>"+q_("Exceptional Perseid rate")+"</i></small>");
 			break;
 		case 1000:
 			ui->zhrLabel->setText("<small><i>"+q_("Meteor storm rate")+"</i></small>");
+			break;
+		case 6000:
+			ui->zhrLabel->setText("<small><i>"+q_("Exceptional Draconid rate")+"</i></small>");
 			break;
 		case 10000:
 			ui->zhrLabel->setText("<small><i>"+q_("Exceptional Leonid rate")+"</i></small>");
 			break;
 		case 144000:
-			ui->zhrLabel->setText("<small><i>"+q_("Highest rate ever (1966 Leonids)")+"</i></small>");
+			ui->zhrLabel->setText("<small><i>"+q_("Very high rate (1966 Leonids)")+"</i></small>");
+			break;
+		case 240000:
+			ui->zhrLabel->setText("<small><i>"+q_("Highest rate ever (1833 Leonids)")+"</i></small>");
 			break;
 		default:
-			ui->zhrLabel->setText(QString("<small><i>")+"Error"+"</i></small>");
+			ui->zhrLabel->setText("");
+			break;
 	}
 }
 

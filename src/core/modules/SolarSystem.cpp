@@ -59,10 +59,15 @@
 #include <QDir>
 
 SolarSystem::SolarSystem()
-	: moonScale(1.),
-	  flagOrbits(false),
-	  flagLightTravelTime(false),
-	  allTrails(NULL)
+	: shadowPlanetCount(0)
+	, flagMoonScale(false)
+	, moonScale(1.)
+	, labelsAmount(false)
+	, flagOrbits(false)
+	, flagLightTravelTime(false)
+	, flagShow(false)
+	, flagMarker(false)
+	, allTrails(NULL)
 {
 	planetNameFont.setPixelSize(StelApp::getInstance().getSettings()->value("gui/base_font_size", 13).toInt());
 	setObjectName("SolarSystem");
@@ -142,7 +147,7 @@ void SolarSystem::init()
 
 	texPointer = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/pointeur4.png");
 	Planet::hintCircleTex = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/planet-indicator.png");
-
+	
 	StelApp *app = &StelApp::getInstance();
 	connect(app, SIGNAL(languageChanged()), this, SLOT(updateI18n()));
 	connect(app, SIGNAL(colorSchemeChanged(const QString&)), this, SLOT(setStelStyle(const QString&)));
@@ -151,6 +156,11 @@ void SolarSystem::init()
 	addAction("actionShow_Planets_Labels", displayGroup, N_("Planet labels"), "labelsDisplayed", "P");
 	addAction("actionShow_Planets_Orbits", displayGroup, N_("Planet orbits"), "orbitsDisplayed", "O");
 	addAction("actionShow_Planets_Trails", displayGroup, N_("Planet trails"), "trailsDisplayed", "Shift+T");
+}
+
+void SolarSystem::deinit()
+{
+	Planet::deinitShader();
 }
 
 void SolarSystem::recreateTrails()
@@ -453,7 +463,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 
 			// when the parent is the sun use ecliptic rather than sun equator:
 			const double parentRotObliquity = parent->getParent()
-											  ? parent->getRotObliquity()
+											  ? parent->getRotObliquity(2451545.0)
 											  : 0.0;
 			const double parent_rot_asc_node = parent->getParent()
 											  ? parent->getRotAscendingnode()
@@ -563,7 +573,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 			const double inclination = pd.value(secname+"/orbit_Inclination").toDouble()*(M_PI/180.0);
 			const double arg_of_pericenter = pd.value(secname+"/orbit_ArgOfPericenter").toDouble()*(M_PI/180.0);
 			const double ascending_node = pd.value(secname+"/orbit_AscendingNode").toDouble()*(M_PI/180.0);
-			const double parentRotObliquity = parent->getParent() ? parent->getRotObliquity() : 0.0;
+			const double parentRotObliquity = parent->getParent() ? parent->getRotObliquity(2451545.0) : 0.0;
 			const double parent_rot_asc_node = parent->getParent() ? parent->getRotAscendingnode() : 0.0;
 			double parent_rot_j2000_longitude = 0.0;
 						if (parent->getParent()) {
@@ -814,6 +824,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 					       StelUtils::strToVec3f(pd.value(secname+"/color").toString()),
 					       pd.value(secname+"/albedo").toFloat(),
 					       pd.value(secname+"/tex_map").toString(),
+					       pd.value(secname+"/normals_map").toString(),
 					       posfunc,
 					       userDataPtr,
 					       osculatingFunc,

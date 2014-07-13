@@ -29,7 +29,6 @@
 #include <QDateTime>
 #include <QFile>
 #include <QDir>
-#include <QOpenGLFunctions_1_2>
 #include <QUrl>
 #include <QVariantMap>
 
@@ -37,7 +36,6 @@ class StelButton;
 class Planet;
 class QNetworkAccessManager;
 class QNetworkReply;
-class QPixmap;
 class QSettings;
 class QTimer;
 
@@ -120,15 +118,15 @@ file.
 //! Main class of the %Satellites plugin.
 //! @author Matthew Gates
 //! @author Bogdan Marinov
-class Satellites : public StelObjectModule, protected QOpenGLFunctions_1_2
+class Satellites : public StelObjectModule
 {
 	Q_OBJECT
 	Q_PROPERTY(bool hintsVisible
 	           READ getFlagHints
-	           WRITE setFlagHints)
+		   WRITE setFlagHints)
 	Q_PROPERTY(bool labelsVisible
 	           READ getFlagLabels
-	           WRITE setFlagLabels)
+		   WRITE setFlagLabels)
 	Q_PROPERTY(bool autoAddEnabled
 	           READ isAutoAddEnabled
 	           WRITE enableAutoAdd
@@ -469,6 +467,8 @@ private:
 	//! Replace the qs.mag file with the default one.
 	void restoreDefaultQSMagFile();
 
+	//! Checks valid range dates of life of satellites
+	bool isValidRangeDates() const;
 
 	//! Save a structure representing a satellite catalog to a JSON file.
 	//! If no path is specified, catalogPath is used.
@@ -522,9 +522,6 @@ private:
 	
 	//! @name Bottom toolbar button
 	//@{
-	QPixmap* pxmapGlow;
-	QPixmap* pxmapOnIcon;
-	QPixmap* pxmapOffIcon;
 	StelButton* toolbarButton;	
 	//@}
 	// FIXME: Possible bug with the Solar System recreated by the SSEditor.

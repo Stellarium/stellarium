@@ -16,6 +16,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
+#include "config.h"
+
 #include "Pulsar.hpp"
 #include "Pulsars.hpp"
 #include "StelObject.hpp"
@@ -46,7 +48,25 @@ Vec3f Pulsar::markerColor = Vec3f(0.4f,0.5f,1.0f);
 Vec3f Pulsar::glitchColor = Vec3f(0.2f,0.3f,1.0f);
 
 Pulsar::Pulsar(const QVariantMap& map)
-		: initialized(false)
+		: initialized(false),
+		  designation(""),
+		  RA(0.),
+		  DE(0.),
+		  parallax(0.),
+		  period(0.),
+		  frequency(0.),
+		  pfrequency(0.),
+		  pderivative(0.),
+		  dmeasure(0.),
+		  bperiod(0.),
+		  eccentricity(0.),
+		  w50(0.),
+		  s400(0.),
+		  s600(0.),
+		  s1400(0.),
+		  distance(0.),
+		  glitch(-1),
+		  notes("")
 {
 	// return initialized if the mandatory fields are not present
 	if (!map.contains("designation"))

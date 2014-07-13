@@ -20,6 +20,7 @@
 #ifndef _STELAPP_HPP_
 #define _STELAPP_HPP_
 
+#include "config.h"
 #include <QString>
 #include <QObject>
 
@@ -149,12 +150,6 @@ public:
 	//! @return the max squared distance in pixels that any object has travelled since the last update.
 	void draw();
 
-	//! Iterate through the drawing sequence.
-	//! This allow us to split the slow drawing operation into small parts,
-	//! we can then decide to pause the painting for this frame and used the cached image instead.
-	//! @return true if we should continue drawing (by calling the method again)
-	bool drawPartial();
-
 	//! Call this when the size of the GL window has changed.
 	void glWindowHasBeenResized(float x, float y, float w, float h);
 
@@ -210,7 +205,9 @@ public slots:
 	//! Report that a download occured. This is used for statistics purposes.
 	//! Connect this slot to QNetworkAccessManager::finished() slot to obtain statistics at the end of the program.
 	void reportFileDownloadFinished(QNetworkReply* reply);
-	
+
+	//! do some cleanup and call QCoreApplication::exit(0)
+	void quit();
 signals:
 	void visionNightModeChanged(bool);
 	void colorSchemeChanged(const QString&);
@@ -221,6 +218,8 @@ signals:
 	void progressBarAdded(const StelProgressController*);
 	//! Called just before a progress bar is removed.
 	void progressBarRemoved(const StelProgressController*);
+	//! Called just before we exit Qt mainloop.
+	void aboutToQuit();
 
 private:
 
@@ -232,6 +231,8 @@ private:
 	void handleMove(int x, int y, Qt::MouseButtons b);
 	//! Handle key press and release.
 	void handleKeys(class QKeyEvent* event);
+	//! Handle pinch on multi touch devices.
+	void handlePinch(qreal scale, bool started);
 
 	void initScriptMgr(QSettings* conf);
 
@@ -298,13 +299,16 @@ private:
 	// Used to collect wheel events
 	QTimer * wheelEventTimer;
 
+	// Accumulated horizontal and vertical wheel event deltas
+	int wheelEventDelta[2];
+
 	float fps;
 	int frame;
 	double timefr, timeBase;		// Used for fps counter
 
 	//! Define whether we are in night vision mode
 	bool flagNightVision;
-	
+
 	QSettings* confSettings;
 
 	// Define whether the StelApp instance has completed initialization
@@ -327,9 +331,6 @@ private:
 	//! Store the summed size of all downloaded files read from the cache in bytes.
 	qint64 totalUsedCacheSize;
 
-	//! The state of the drawing sequence
-	int drawState;
-	
 	QList<StelProgressController*> progressControllers;
 };
 

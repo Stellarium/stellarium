@@ -20,17 +20,6 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#include <QDebug>
-#include <QSettings>
-#include <QString>
-#include <QDir>
-#include <QDirIterator>
-#include <QFile>
-#include <QTemporaryFile>
-#include <QMouseEvent>
-
-#include <stdexcept>
-
 #include "StelActionMgr.hpp"
 #include "LandscapeMgr.hpp"
 #include "Landscape.hpp"
@@ -45,8 +34,18 @@
 #include "StelIniParser.hpp"
 #include "StelSkyDrawer.hpp"
 #include "StelPainter.hpp"
-#include "karchive.h"
-#include "kzip.h"
+#include "qzipreader.h"
+
+#include <QDebug>
+#include <QSettings>
+#include <QString>
+#include <QDir>
+#include <QDirIterator>
+#include <QFile>
+#include <QTemporaryFile>
+#include <QMouseEvent>
+
+#include <stdexcept>
 
 // Class which manages the cardinal points displaying
 class Cardinals
@@ -150,7 +149,17 @@ void Cardinals::updateI18n()
 }
 
 
-LandscapeMgr::LandscapeMgr() : atmosphere(NULL), cardinalsPoints(NULL), landscape(NULL), flagLandscapeSetsLocation(false)
+LandscapeMgr::LandscapeMgr()
+	: atmosphere(NULL)
+	, cardinalsPoints(NULL)
+	, landscape(NULL)
+	, flagLandscapeSetsLocation(false)
+	, flagLandscapeAutoSelection(false)
+	, flagLightPollutionFromDatabase(false)
+	, flagLandscapeUseMinimalBrightness(false)
+	, defaultMinimalBrightness(0.01)
+	, flagLandscapeSetsMinimalBrightness(false)
+	, flagAtmosphereAutoEnabling(false)
 {
 	setObjectName("LandscapeMgr");
 
@@ -318,6 +327,7 @@ void LandscapeMgr::init()
 	setFlagAtmosphere(conf->value("landscape/flag_atmosphere", true).toBool());
 	setAtmosphereFadeDuration(conf->value("landscape/atmosphere_fade_duration",0.5).toFloat());
 	setAtmosphereLightPollutionLuminance(conf->value("viewing/light_pollution_luminance",0.0).toFloat());
+	setFlagUseLightPollutionFromDatabase(conf->value("viewing/flag_light_pollution_database", false).toBool());
 	cardinalsPoints = new Cardinals();
 	cardinalsPoints->setFlagShow(conf->value("viewing/flag_cardinal_points",true).toBool());
 	setFlagLandscapeSetsLocation(conf->value("landscape/flag_landscape_sets_location",false).toBool());
@@ -326,6 +336,7 @@ void LandscapeMgr::init()
 	setDefaultMinimalBrightness(conf->value("landscape/minimal_brightness", 0.01).toFloat());
 	setFlagLandscapeUseMinimalBrightness(conf->value("landscape/flag_minimal_brightness", false).toBool());
 	setFlagLandscapeSetsMinimalBrightness(conf->value("landscape/flag_landscape_sets_minimal_brightness",false).toBool());
+	setFlagAtmosphereAutoEnable(conf->value("viewing/flag_atmopshere_auto_enable",true).toBool());
 
 	bool ok =true;
 	setAtmosphereBortleLightPollution(conf->value("stars/init_bortle_scale",3).toInt(&ok));
@@ -471,6 +482,20 @@ bool LandscapeMgr::getIsLandscapeFullyVisible() const
 	return landscape->getIsFullyVisible();
 }
 
+bool LandscapeMgr::getFlagUseLightPollutionFromDatabase() const
+{
+	return flagLightPollutionFromDatabase;
+}
+
+void LandscapeMgr::setFlagUseLightPollutionFromDatabase(const bool usage)
+{
+	if (flagLightPollutionFromDatabase != usage)
+	{
+		flagLightPollutionFromDatabase = usage;
+		emit lightPollutionUsageChanged(usage);
+	}
+}
+
 void LandscapeMgr::setFlagFog(const bool displayed)
 {
 	if (landscape->getFlagShowFog() != displayed) {
@@ -492,6 +517,16 @@ void LandscapeMgr::setFlagLandscapeAutoSelection(bool enableAutoSelect)
 bool LandscapeMgr::getFlagLandscapeAutoSelection() const
 {
 	return flagLandscapeAutoSelection;
+}
+
+void LandscapeMgr::setFlagAtmosphereAutoEnable(bool b)
+{
+	flagAtmosphereAutoEnabling = b;
+}
+
+bool LandscapeMgr::getFlagAtmosphereAutoEnable() const
+{
+	return flagAtmosphereAutoEnabling;
 }
 
 /*********************************************************************
@@ -601,6 +636,8 @@ void LandscapeMgr::setFlagAtmosphere(const bool displayed)
 		atmosphere->setFlagShow(displayed);
 		StelApp::getInstance().getCore()->getSkyDrawer()->setFlagHasAtmosphere(displayed);
 		emit atmosphereDisplayedChanged(displayed);
+		if (StelApp::getInstance().getSettings()->value("landscape/flag_fog", true).toBool())
+			setFlagFog(displayed); // sync of visibility of fog because this is atmospheric phenomena
 	}
 }
 
@@ -639,6 +676,7 @@ void LandscapeMgr::setAtmosphereBortleLightPollution(const int bIndex)
 {
 	// This is an empirical formula
 	setAtmosphereLightPollutionLuminance(qMax(0.,0.0004*std::pow(bIndex-1, 2.1)));
+	emit lightPollutionChanged();
 }
 
 //! Get the light pollution following the Bortle Scale
@@ -735,7 +773,6 @@ QMap<QString,QString> LandscapeMgr::getNameToDirMap() const
 	return result;
 }
 
-
 QString LandscapeMgr::installLandscapeFromArchive(QString sourceFilePath, const bool display, const bool toMainDirectory)
 {
 	Q_UNUSED(toMainDirectory);
@@ -747,7 +784,6 @@ QString LandscapeMgr::installLandscapeFromArchive(QString sourceFilePath, const 
 	}
 
 	QDir parentDestinationDir;
-	//TODO: Fix the "for all users" option
 	parentDestinationDir.setPath(StelFileMgr::getUserDir());
 
 	if (!parentDestinationDir.exists("landscapes"))
@@ -762,8 +798,8 @@ QString LandscapeMgr::installLandscapeFromArchive(QString sourceFilePath, const 
 	}
 	QDir destinationDir (parentDestinationDir.absoluteFilePath("landscapes"));
 
-	KZip sourceArchive(sourceFilePath);
-	if(!sourceArchive.open(QIODevice::ReadOnly))
+	QZipReader reader(sourceFilePath);
+	if (reader.status() != QZipReader::NoError)
 	{
 		qWarning() << "LandscapeMgr: Unable to open as a ZIP archive:" << QDir::toNativeSeparators(sourceFilePath);
 		emit errorNotArchive();
@@ -771,56 +807,30 @@ QString LandscapeMgr::installLandscapeFromArchive(QString sourceFilePath, const 
 	}
 
 	//Detect top directory
-	const KArchiveDirectory * archiveTopDirectory = NULL;
-	QStringList topLevelContents = sourceArchive.directory()->entries();
-	if(topLevelContents.contains("landscape.ini"))
+	QString topDir, iniPath;
+	QList<QZipReader::FileInfo> infoList = reader.fileInfoList();
+	foreach(QZipReader::FileInfo info, infoList)
 	{
-		//If the landscape archive has no top level directory...
-		//(test case is "tulipfield" from the Stellarium Wiki)
-		archiveTopDirectory = sourceArchive.directory();
-	}
-	else
-	{
-		foreach (QString entryPath, topLevelContents)
+		QFileInfo fileInfo(info.filePath);
+		if (fileInfo.fileName() == "landscape.ini")
 		{
-			if (sourceArchive.directory()->entry(entryPath)->isDirectory())
-			{
-				if((dynamic_cast<const KArchiveDirectory*>(sourceArchive.directory()->entry(entryPath)))->entries().contains("landscape.ini"))
-				{
-					archiveTopDirectory = dynamic_cast<const KArchiveDirectory*>(sourceArchive.directory()->entry(entryPath));
-					break;
-				}
-			}
+			iniPath = info.filePath;
+			topDir = fileInfo.dir().path();
+			break;
 		}
 	}
-	if (archiveTopDirectory == NULL)
+	if (topDir.isEmpty())
 	{
 		qWarning() << "LandscapeMgr: Unable to install landscape. There is no directory that contains a 'landscape.ini' file in the source archive.";
 		emit errorNotArchive();
 		return QString();
 	}
-
-	/*
-	qDebug() << "LandscapeMgr: Contents of the source archive:" << endl
-			 << "- top level direcotory:" << archiveTopDirectory->name() << endl
-			 << "- contents:" << archiveTopDirectory->entries();
-	*/
-
-	//Check if the top directory name is unique
-	//TODO: Prompt rename? Rename silently?
-	/*
-	if (destinationDir.exists(archiveTopDirectory->name()))
-	{
-		qWarning() << "LandscapeMgr: Unable to install landscape. A directory named" << archiveTopDirectory->name() << "already exists in" << destinationDir.absolutePath();
-		return QString();
-	}
-	*/
 	//Determine the landscape's identifier
-	QString landscapeID = archiveTopDirectory->name();
+	QString landscapeID = QFileInfo(topDir).fileName();
 	if (landscapeID.length() < 2)
 	{
-		//If the archive has no top level directory (landscapeID is "/"),
-		//use the first 65 characters of its file name for an identifier
+		// If the archive has no top level directory
+		// use the first 65 characters of its file name for an identifier
 		QFileInfo sourceFileInfo(sourceFilePath);
 		landscapeID = sourceFileInfo.baseName().left(65);
 	}
@@ -837,10 +847,9 @@ QString LandscapeMgr::installLandscapeFromArchive(QString sourceFilePath, const 
 	QTemporaryFile tempLandscapeIni("landscapeXXXXXX.ini");
 	if (tempLandscapeIni.open())
 	{
-		const KZipFileEntry * archLandscapeIni = static_cast<const KZipFileEntry*>(archiveTopDirectory->entry("landscape.ini"));
-		tempLandscapeIni.write(archLandscapeIni->createDevice()->readAll());
+		QByteArray iniData = reader.fileData(iniPath);
+		tempLandscapeIni.write(iniData);
 		tempLandscapeIni.close();
-
 		QSettings confLandscapeIni(tempLandscapeIni.fileName(), StelIniFormat);
 		QString landscapeName = confLandscapeIni.value("landscape/name").toString();
 		if (getAllLandscapeNames().contains(landscapeName))
@@ -852,8 +861,6 @@ QString LandscapeMgr::installLandscapeFromArchive(QString sourceFilePath, const 
 	}
 
 	//Copy the landscape directory to the target
-	//sourceArchive.directory()->copyTo(destinationDir.absolutePath());
-
 	//This case already has been handled - and commented out - above. :)
 	if(destinationDir.exists(landscapeID))
 	{
@@ -866,19 +873,25 @@ QString LandscapeMgr::installLandscapeFromArchive(QString sourceFilePath, const 
 		return QString();
 	}
 	destinationDir.cd(landscapeID);
-	QString destinationDirPath = destinationDir.absolutePath();
-	QStringList landscapeFileEntries = archiveTopDirectory->entries();
-	foreach (const QString entry, landscapeFileEntries)
+	foreach(QZipReader::FileInfo info, infoList)
 	{
-		const KArchiveEntry * archEntry = archiveTopDirectory->entry(entry);
-		if(archEntry->isFile())
+		QFileInfo fileInfo(info.filePath);
+		if (info.isFile && fileInfo.dir().path() == topDir)
 		{
-			static_cast<const KZipFileEntry*>(archEntry)->copyTo(destinationDirPath);
+			QByteArray data = reader.fileData(info.filePath);
+			QFile out(destinationDir.filePath(fileInfo.fileName()));
+			if (out.open(QIODevice::WriteOnly))
+			{
+				out.write(data);
+				out.close();
+			}
+			else
+			{
+				qWarning() << "LandscapeMgr: cannot open " << QDir::toNativeSeparators(fileInfo.absoluteFilePath());
+			}
 		}
 	}
-
-	sourceArchive.close();
-
+	reader.close();
 	//If necessary, make the new landscape the current landscape
 	if (display)
 	{
@@ -1059,11 +1072,13 @@ QString LandscapeMgr::getDescription() const
 	if (hasFile)
 	{
 		QFile file(descFile);
-		file.open(QIODevice::ReadOnly | QIODevice::Text);
-		QTextStream in(&file);
-		in.setCodec("UTF-8");
-		desc = in.readAll();
-		file.close();
+		if(file.open(QIODevice::ReadOnly | QIODevice::Text))
+		{
+			QTextStream in(&file);
+			in.setCodec("UTF-8");
+			desc = in.readAll();
+			file.close();
+		}
 	}
 	else
 	{

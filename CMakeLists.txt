@@ -1,11 +1,5 @@
 
-# Because 2.8.11 is not available yet on ubuntu, but we need it to fix some
-# bugs on windows.
-IF(WIN32)
-  CMAKE_MINIMUM_REQUIRED(VERSION 2.8.11)
-ELSE()
-  CMAKE_MINIMUM_REQUIRED(VERSION 2.8.10)
-ENDIF()
+CMAKE_MINIMUM_REQUIRED(VERSION 2.8.11)
 
 ########### Project name ###########
 PROJECT(Stellarium)
@@ -17,6 +11,8 @@ SET(PACKAGE stellarium)
 
 SET(PACKAGE_VERSION "${VERSION}")
 ADD_DEFINITIONS(-DPACKAGE_VERSION="${PACKAGE_VERSION}")
+
+SET(MINIMAL_QT_VERSION "5.1.0")
 
 # Use customized cmake macros
 SET(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
@@ -57,7 +53,8 @@ IF(WIN32)
     SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wsign-promo -fexceptions -fident -mthreads")
     SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -Wsign-promo -fexceptions -fident -mthreads -mwindows")    
   ELSE()
-    SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -fexceptions -fident -mthreads -mwindows")
+    # Prevent MSVC from complaining about M_PI no matter where <cmath> is included first
+    ADD_DEFINITIONS(-D_USE_MATH_DEFINES)
   ENDIF()
 ELSE()
   SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Wextra -Wno-unused-parameter")
@@ -68,14 +65,19 @@ IF("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
  SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Woverloaded-virtual -Wno-unused-private-field -Wno-uninitialized -Wno-tautological-constant-out-of-range-compare")
  # The cosmetic fix for Clang 3.4
  IF(${CMAKE_CXX_COMPILER_VERSION} VERSION_GREATER 3.3)
-  SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-unused-const-variable")
+  SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-unused-const-variable -Wno-unused-result")
  ENDIF()
 ENDIF()
 
 SET(OPTIMIZE_INTEL_ATOM 0 CACHE BOOL "Activate optimizations for atom processor.")
 IF(OPTIMIZE_INTEL_ATOM)
- SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -mtune=generic -msse -msse2 -msse3 -mfpmath=sse")
- SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -mtune=generic -msse -msse2 -msse3 -mfpmath=sse")
+ IF (MSVC)
+  SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} /arch:SSE2 ")
+  SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /arch:SSE2 ")
+ ELSE()
+  SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -mtune=generic -msse -msse2 -msse3 -mfpmath=sse")
+  SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -mtune=generic -msse -msse2 -msse3 -mfpmath=sse")
+ ENDIF()
 ENDIF()
 
 # FreeBSD-specific compiler flags
@@ -92,29 +94,13 @@ ENDIF()
 IF(APPLE)
  SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-common -Wall -Wextra")
  IF("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
-    SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-unused-private-field -Wno-unknown-warning-option")
+    SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-unused-private-field -Wno-unknown-warning-option -Wno-unused-const-variable -Wno-unused-result")
  ENDIF()
  SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fno-common -Wall -Wextra -Wno-unused-parameter")
 
  # We support only 64 bits MacOSX
  SET(CMAKE_OSX_ARCHITECTURES "x86_64")
 ENDIF()
-
-# Needed so that M_PI get defined,
-# and so that windows.h does not redefine min and max.
-ADD_DEFINITIONS(-D_USE_MATH_DEFINES -DNOMINMAX)
-
-########### Check functions ###########
-SET(CMAKE_REQUIRED_LIBRARIES "-lm")
-INCLUDE(CheckFunctionExists)
-SET(FUNCS pow10 trunc round)
-FOREACH(FUNC ${FUNCS})
-  STRING(TOUPPER ${FUNC} FUNC_UP)
-  CHECK_FUNCTION_EXISTS(${FUNC} HAS_${FUNC_UP})
-  IF(HAS_${FUNC_UP})
-     ADD_DEFINITIONS(-DHAS_${FUNC_UP})
-  ENDIF()
-ENDFOREACH()
 
 ########### Others ###########
 # Activate translation
@@ -170,12 +156,15 @@ ADD_PLUGIN(SimpleDrawLine 0)
 ADD_PLUGIN(AngleMeasure 1)
 ADD_PLUGIN(CompassMarks 1)
 ADD_PLUGIN(Exoplanets 1)
+ADD_PLUGIN(EquationOfTime 1)
 ADD_PLUGIN(FOV 1)
 ADD_PLUGIN(LogBook 0)
+ADD_PLUGIN(MeteorShowers 1)
 ADD_PLUGIN(NavStars 1)
 ADD_PLUGIN(Novae 1)
 ADD_PLUGIN(Observability 1)
 ADD_PLUGIN(Oculars 1)
+ADD_PLUGIN(PointerCoordinates 1)
 ADD_PLUGIN(Pulsars 1)
 ADD_PLUGIN(Quasars 1)
 ADD_PLUGIN(Satellites 1)
@@ -219,8 +208,14 @@ ENDIF()
 ADD_CUSTOM_TARGET(AllStaticPlugins ALL)
 
 ########### Find packages ###########
-FIND_PACKAGE(Qt5Concurrent REQUIRED)
 FIND_PACKAGE(Qt5Core REQUIRED)
+GET_TARGET_PROPERTY(QMAKE_LOCATION Qt5::qmake LOCATION)
+IF(${Qt5Core_VERSION_STRING} VERSION_LESS MINIMAL_QT_VERSION)
+    MESSAGE(FATAL_ERROR "Found Qt5: ${QMAKE_LOCATION} (found unsuitable version \"${Qt5Core_VERSION_STRING}\", required is \"${MINIMAL_QT_VERSION}\")")
+ELSE()
+    MESSAGE(STATUS "Found Qt5: ${QMAKE_LOCATION} (found suitable version \"${Qt5Core_VERSION_STRING}\", required is \"${MINIMAL_QT_VERSION}\")")
+ENDIF()
+FIND_PACKAGE(Qt5Concurrent REQUIRED)
 FIND_PACKAGE(Qt5Declarative REQUIRED)
 FIND_PACKAGE(Qt5Gui REQUIRED)
 FIND_PACKAGE(Qt5Network REQUIRED)
@@ -230,6 +225,7 @@ IF(WIN32)
     FIND_PACKAGE(Qt5Sql REQUIRED)
     FIND_PACKAGE(Qt5XmlPatterns REQUIRED)
 ENDIF()
+
 
 # Tell CMake to run moc when necessary:
 set(CMAKE_AUTOMOC ON)
@@ -244,11 +240,20 @@ ENDIF()
 IF(ENABLE_SOUND)
     ADD_DEFINITIONS(-DENABLE_SOUND)
     FIND_PACKAGE(Qt5Multimedia REQUIRED)
+    FIND_PACKAGE(Qt5MultimediaWidgets REQUIRED)
     INCLUDE_DIRECTORIES(${Qt5Multimedia_INCLUDE_DIRS})
 ENDIF()
 
-FIND_PACKAGE(OpenGL REQUIRED)
-FIND_PACKAGE(ZLIB)
+# I add this test because on Windows with angle we should not link
+# with OpenGL.  Maybe there is a better way to do that.
+IF("${Qt5Gui_OPENGL_LIBRARIES}" MATCHES "opengl")
+    FIND_PACKAGE(OpenGL REQUIRED)
+ENDIF()
+IF(NOT WIN32)
+  FIND_PACKAGE(ZLIB)
+ELSE()
+  SET(ZLIB_INCLUDE_DIR ${CMAKE_SOURCE_DIR}/src/core/external/zlib)
+ENDIF()
 
 FIND_PACKAGE(Qt5Test)
 INCLUDE_DIRECTORIES(${Qt5Test_INCLUDE_DIRS})
@@ -292,9 +297,11 @@ ENDIF()
 IF(WIN32)
     SET(ENABLE_WINDOWS_EXE_ICON 1 CACHE BOOL "Determine if it should try to embed the Stellarium icon in the Windows .exe file")
     IF(ENABLE_WINDOWS_EXE_ICON AND NOT RC_COMPILER_PATH)
-        #The mingGW snapshot distributed with the Qt SDK has it under this name.
-        SET(RC_COMPILER_FILENAME "windres.exe")
+        IF(NOT MSVC)
+            #The mingGW snapshot distributed with the Qt SDK has it under this name.
+            SET(RC_COMPILER_FILENAME "windres.exe")
             FIND_FILE(RC_COMPILER_PATH ${RC_COMPILER_FILENAME})
+        ENDIF()
         IF(RC_COMPILER_PATH)
             MESSAGE(STATUS "Found .rc compiler: ${RC_COMPILER_PATH}")
         ENDIF(RC_COMPILER_PATH)
@@ -309,25 +316,27 @@ IF(WIN32)
         SET(ISS_ARCHITECTURE_SPECIFIC ";In the 64-bit only version, this line switches the installer to 64-bit mode.")
         SET(ISS_PACKAGE_PLATFORM "win32")
         IF(MSVC)
-          SET(REDIST "Source: \"${CMAKE_INSTALL_PREFIX}/bin/msvc*.dll\"; DestDir: \"{app}\";")
+          #SET(REDIST_FILES "Source: \"${CMAKE_INSTALL_PREFIX}/bin/msvc*.dll\"; DestDir: \"{app}\";")
+          SET(REDIST_FILES "Source: \"${CMAKE_SOURCE_DIR}/util/vcredist/vcredist_x86.exe\"; DestDir: \"{tmp}\";")
+          SET(REDIST_RUN "Filename: \"{tmp}/vcredist_x86.exe\"; Parameters: \"/passive /Q:a /c:\"\"msiexec /qb /i vcredist.msi\"\" \"; StatusMsg: \"{cm:RedistRun}\"")
         ELSE()
-          SET(REDIST "Source: \"${MINGW_BIN_DIRECTORY}/libstdc++*.dll\"; DestDir: \"{app}\";\nSource: \"${MINGW_BIN_DIRECTORY}/libgcc_s_dw2-1.dll\"; DestDir: \"{app}\";\nSource: \"${MINGW_BIN_DIRECTORY}/libwinpthread*.dll\"; DestDir: \"{app}\";")
+          SET(REDIST_FILES "Source: \"${MINGW_BIN_DIRECTORY}/libstdc++*.dll\"; DestDir: \"{app}\";\nSource: \"${MINGW_BIN_DIRECTORY}/libgcc_s_dw2-1.dll\"; DestDir: \"{app}\";\nSource: \"${MINGW_BIN_DIRECTORY}/libwinpthread*.dll\"; DestDir: \"{app}\";")
+          SET(REDIST_RUN "; Redistributable package not required for MinGW")
         ENDIF()
     ELSEIF("${CMAKE_SIZEOF_VOID_P}" EQUAL "8")
         SET(ISS_ARCHITECTURE_SPECIFIC ";Make the installer run only on win64:\nArchitecturesAllowed=x64\n;Switch to 64-bit install mode:\nArchitecturesInstallIn64BitMode=x64")
         SET(ISS_PACKAGE_PLATFORM "win64")
         IF(MSVC)
-          SET(REDIST "Source: \"${CMAKE_INSTALL_PREFIX}/bin/msvc*.dll\"; DestDir: \"{app}\";")
+          #SET(REDIST_FILES "Source: \"${CMAKE_INSTALL_PREFIX}/bin/msvc*.dll\"; DestDir: \"{app}\";")
+          SET(REDIST_FILES "Source: \"${CMAKE_SOURCE_DIR}/util/vcredist/vcredist_x64.exe\"; DestDir: \"{tmp}\";")
+          SET(REDIST_RUN "Filename: \"{tmp}/vcredist_x64.exe\"; Parameters: \"/passive /Q:a /c:\"\"msiexec /qb /i vcredist.msi\"\" \"; StatusMsg: \"{cm:RedistRun}\"")
         ELSE()
-          SET(REDIST "Source: \"${MINGW_BIN_DIRECTORY}/libstdc++*.dll\"; DestDir: \"{app}\";\nSource: \"${MINGW_BIN_DIRECTORY}/libwinpthread*.dll\"; DestDir: \"{app}\";\nSource: \"${MINGW_BIN_DIRECTORY}/libgcc_s_sjlj*.dll\"; DestDir: \"{app}\";")
+          SET(REDIST_FILES "Source: \"${MINGW_BIN_DIRECTORY}/libstdc++*.dll\"; DestDir: \"{app}\";\nSource: \"${MINGW_BIN_DIRECTORY}/libwinpthread*.dll\"; DestDir: \"{app}\";\nSource: \"${MINGW_BIN_DIRECTORY}/libgcc_s_sjlj*.dll\"; DestDir: \"{app}\";")
+          SET(REDIST_RUN "; Redistributable package not required for MinGW")
         ENDIF()
     ENDIF()
     SET(ISS_AUTOGENERATED_WARNING "Do not edit this file! It has been automatically generated by CMake. Your changes will be lost the next time CMake is run.")
-    IF(MSVC)
-        SET(ZLIB "; ZLIB already included...")
-    ELSE()
-        SET(ZLIB "Source: \"${ZLIB_INCLUDE_DIR}/../bin/zlib1.dll\"; DestDir: \"{app}\";")
-    ENDIF()
+
     IF(GENERATE_STELMAINLIB)
         SET(STELMAINLIB "Source: \"${CMAKE_INSTALL_PREFIX}/lib/libstelMain.dll\"; DestDir: \"{app}\";")
     ELSE()
@@ -340,8 +349,7 @@ IF(WIN32)
     GET_TARGET_PROPERTY(QtNetwork_location Qt5::Network LOCATION)
     GET_TARGET_PROPERTY(QtWidgets_location Qt5::Widgets LOCATION)
     GET_TARGET_PROPERTY(QtDeclarative_location Qt5::Declarative LOCATION)
-    GET_TARGET_PROPERTY(QtSql_location Qt5::Sql LOCATION)
-    GET_TARGET_PROPERTY(QtSvg_location Qt5::Svg LOCATION)
+    GET_TARGET_PROPERTY(QtSql_location Qt5::Sql LOCATION)    
     GET_TARGET_PROPERTY(QtXmlPatterns_location Qt5::XmlPatterns LOCATION)
     IF(ENABLE_SCRIPTING)
         GET_TARGET_PROPERTY(QtScript_location Qt5::Script LOCATION)
@@ -351,19 +359,29 @@ IF(WIN32)
     ENDIF()
     IF(ENABLE_SOUND)
         GET_TARGET_PROPERTY(QtMultimedia_location Qt5::Multimedia LOCATION)
-        SET(ISS_QT_MULTIMEDIA "Source: \"${QtMultimedia_location}\"; DestDir: \"{app}\";")
+        GET_TARGET_PROPERTY(QtMultimediaWidgets_location Qt5::MultimediaWidgets LOCATION)
+        SET(ISS_QT_MULTIMEDIA "Source: \"${QtMultimedia_location}\"; DestDir: \"{app}\";\nSource: \"${QtMultimediaWidgets_location}\"; DestDir: \"{app}\";")
     ELSE()
         SET(ISS_QT_MULTIMEDIA "; QtMultimedia don't used")
     ENDIF()
     GET_FILENAME_COMPONENT(QT5_LIBS ${QtCore_location} PATH)
-    # TODO: Enable ANGLE support
-    SET(ISS_ICU_LIBS "Source: \"${QT5_LIBS}/icu*.dll\"; DestDir: \"{app}\";")
+    IF(MSVC)
+        SET(ISS_ANGLE_LIBS "; ANGLE support (libEGL.dll, libGLESv2.dll and d3dcompiler_*.dll)\nSource: \"${QT5_LIBS}/libEGL.dll\"; DestDir: \"{app}\";\nSource: \"${QT5_LIBS}/libGLESv2.dll\"; DestDir: \"{app}\";\nSource: \"${QT5_LIBS}/d3dcompiler_*.dll\"; DestDir: \"{app}\";")
+    ELSE()
+        SET(ISS_ANGLE_LIBS "; ANGLE support doesn't exists for MinGW")
+    ENDIF()
+    SET(ISS_ICU_LIBS "; ICU support\nSource: \"${QT5_LIBS}/icu*.dll\"; DestDir: \"{app}\";")
     # Deploy related stuff
     SET(ISS_WINDOWS_PLUGIN "Source: \"${QT5_LIBS}/../plugins/platforms/qwindows.dll\"; DestDir: \"{app}/platforms/\";")
+    IF(ENABLE_SOUND)
+        SET(ISS_MULTIMEDIA_PLUGINS "Source: \"${QT5_LIBS}/../plugins/mediaservice/dsengine.dll\"; DestDir: \"{app}/mediaservice/\";\nSource: \"${QT5_LIBS}/../plugins/mediaservice/qtmedia_audioengine.dll\"; DestDir: \"{app}/mediaservice/\";\nSource: \"${QT5_LIBS}/../plugins/playlistformats/qtmultimedia_m3u.dll\"; DestDir: \"{app}/playlistformats/\";")
+    ELSE()
+        SET(ISS_MULTIMEDIA_PLUGINS "; QtMultimedia don't used")
+    ENDIF()
     SET(ISS_QML_DIR "Source: \"${QT5_LIBS}/../imports/Qt/labs/shaders/qmldir\"; DestDir: \"{app}/Qt/labs/shaders/\";")
     SET(ISS_QML_PLUGINS "Source: \"${QT5_LIBS}/../imports/Qt/labs/shaders/plugins.qmltypes\"; DestDir: \"{app}/Qt/labs/shaders/\";")
     SET(ISS_QML_SHADERS "Source: \"${QT5_LIBS}/../imports/Qt/labs/shaders/qmlshadersplugin.dll\"; DestDir: \"{app}/Qt/labs/shaders/\";")
-  
+
     CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/stellarium.iss.cmake ${CMAKE_SOURCE_DIR}/stellarium.iss @ONLY)
     CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/stellarium-patch.iss.cmake ${CMAKE_SOURCE_DIR}/stellarium-patch.iss @ONLY)
 ENDIF()
@@ -452,7 +470,7 @@ INCLUDE_DIRECTORIES(
 	${CMAKE_SOURCE_DIR}/src/core/modules
 	${CMAKE_SOURCE_DIR}/src/core/planetsephems
 	${CMAKE_SOURCE_DIR}/src/core/external
-	${CMAKE_SOURCE_DIR}/src/core/external/kfilter
+	${CMAKE_SOURCE_DIR}/src/core/external/qtcompress
 	${CMAKE_SOURCE_DIR}/src/core/external/glues_stel/source/
 	${CMAKE_SOURCE_DIR}/src/core/external/glues_stel/source/libtess
 	${CMAKE_SOURCE_DIR}/src/gui

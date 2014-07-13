@@ -13,15 +13,15 @@
 // as published by the Free Software Foundation; either version 2
 // of the License, or (at your option) any later version.
 
+#include "Solve.hpp"
+#include "Orbit.hpp"
+#include "StelUtils.hpp"
+
 #include <functional>
 #include <algorithm>
 #include <cmath>
 #include <cstring>
 #include <QDebug>
-
-#include "Solve.hpp"
-#include "Orbit.hpp"
-#include "StelUtils.hpp"
 
 using namespace std;
 
@@ -198,7 +198,7 @@ CometOrbit::CometOrbit(double pericenterDistance,
                       //)
             :q(pericenterDistance),e(eccentricity),i(inclination),
             Om(ascendingNode),w(argOfPerhelion),t0(timeAtPerihelion),
-            n(meanMotion), orbitGood(orbitGoodDays) {
+	    n(meanMotion), updateTails(true), orbitGood(orbitGoodDays) {
 //        qDebug() << "CometOrbit::()";
   rdot.set(0.0, 0.0, 0.0);
   const double c_obl = cos(parentRotObliquity);         // 1?

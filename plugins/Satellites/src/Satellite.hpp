@@ -23,7 +23,6 @@
 #include <QDateTime>
 #include <QFont>
 #include <QList>
-#include <QOpenGLFunctions_1_2>
 #include <QSharedPointer>
 #include <QString>
 #include <QStringList>
@@ -32,8 +31,6 @@
 #include "StelObject.hpp"
 #include "StelTextureTypes.hpp"
 #include "StelSphereGeometry.hpp"
-
-#include "StelPainter.hpp"
 #include "gSatWrapper.hpp"
 
 
@@ -86,7 +83,7 @@ Q_DECLARE_METATYPE(SatFlags)
 //! 
 //! Thanks to operator<() overloading, container classes (QList, QMap, etc)
 //! with Satellite or SatelliteP objects can be sorted by satellite name/ID.
-class Satellite : public StelObject, protected QOpenGLFunctions_1_2
+class Satellite : public StelObject
 {
 	friend class Satellites;
 	friend class SatellitesDialog;

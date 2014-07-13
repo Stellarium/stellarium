@@ -42,7 +42,7 @@ void StelLogger::init(const QString& logFilePath)
 	// write info about operating system
 	writeLog(StelUtils::getOperatingSystemInfo());
 
-	// write GCC version
+	// write compiler version
 #if defined __GNUC__ && !defined __clang__
 	#ifdef __MINGW32__
 		#define COMPILER "MinGW GCC"
@@ -52,6 +52,8 @@ void StelLogger::init(const QString& logFilePath)
 	writeLog(QString("Compiled using %1 %2.%3.%4").arg(COMPILER).arg(__GNUC__).arg(__GNUC_MINOR__).arg(__GNUC_PATCHLEVEL__));
 #elif defined __clang__
 	writeLog(QString("Compiled using %1 %2.%3.%4").arg("Clang").arg(__clang_major__).arg(__clang_minor__).arg(__clang_patchlevel__));
+#elif defined _MSC_VER
+	writeLog(QString("Compiled using %1").arg(getMsvcVersionString(_MSC_VER)));
 #else
 	writeLog("Unknown compiler");
 #endif
@@ -262,4 +264,33 @@ void StelLogger::writeLog(QString msg)
 	msg += "\n";
 	logFile.write(qPrintable(msg), msg.size());
 	log += msg;
+}
+
+QString StelLogger::getMsvcVersionString(int ver)
+{
+	QString version;
+	switch(ver)
+	{
+		case 1310:
+			version = "MSVC++ 7.1 (Visual Studio 2003)";
+			break;
+		case 1400:
+			version = "MSVC++ 8.0 (Visual Studio 2005)";
+			break;
+		case 1500:
+			version = "MSVC++ 9.0 (Visual Studio 2008)";
+			break;
+		case 1600:
+			version = "MSVC++ 10.0 (Visual Studio 2010)";
+			break;
+		case 1700:
+			version = "MSVC++ 11.0 (Visual Studio 2012)";
+			break;
+		case 1800:
+			version = "MSVC++ 12.0 (Visual Studio 2013)";
+			break;
+		default:
+			version = "unknown MSVC++ version";
+	}
+	return version;
 }

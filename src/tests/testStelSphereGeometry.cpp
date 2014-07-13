@@ -17,17 +17,20 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
+
+#include "config.h"
+#include "tests/testStelSphereGeometry.hpp"
+
 #include <QObject>
 #include <QtDebug>
 #include <QBuffer>
 #include <QTest>
+
 #include <stdexcept>
 
 #include "StelJsonParser.hpp"
 #include "StelSphereGeometry.hpp"
 #include "StelUtils.hpp"
-
-#include "tests/testStelSphereGeometry.hpp"
 
 QTEST_MAIN(TestStelSphericalGeometry)
 

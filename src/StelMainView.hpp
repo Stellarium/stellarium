@@ -20,6 +20,8 @@
 #ifndef _STELMAINGRAPHICSVIEW_HPP_
 #define _STELMAINGRAPHICSVIEW_HPP_
 
+#include "config.h"
+
 #include <QDeclarativeView>
 #include <QCoreApplication>
 #include <QEventLoop>
@@ -106,8 +108,13 @@ public slots:
 	//! Get the current maximum frames per second.
 	float getMaxFps() {return maxfps;}
 
+	void maxFpsSceneUpdate();
 	//! Updates the scene and process all events
 	void updateScene();
+
+	//! Notify that an event was handled by the program and therefore the
+	//! FPS should be maximized for a couple of seconds.
+	void thereWasAnEvent();
 
 protected:
 	virtual void mouseMoveEvent(QMouseEvent* event);
@@ -117,6 +124,7 @@ protected:
 	virtual void keyReleaseEvent(QKeyEvent* event);
 	virtual void wheelEvent(QWheelEvent* wheelEvent);
 	virtual void moveEvent(QMoveEvent* event);
+	virtual void closeEvent(QCloseEvent* event);
 
 	//! Update the mouse pointer state and schedule next redraw.
 	//! This method is called automatically by Qt.
@@ -137,6 +145,8 @@ private slots:
 private:
 	//! Start the display loop
 	void startMainLoop();
+	
+	QString getSupportedOpenGLVersion() const;
 
 	//! The StelMainView singleton
 	static StelMainView* singleton;
@@ -160,13 +170,10 @@ private:
 	float cursorTimeout;
 	bool flagCursorTimeout;
 
-	//! Notify that an event was handled by the program and therefore the
-	//! FPS should be maximized for a couple of seconds.
-	void thereWasAnEvent();
-
 	double lastEventTimeSec;
 
 	QTimer* minFpsTimer;
+	bool flagMaxFpsUpdatePending;
 	//! The minimum desired frame rate in frame per second.
 	float minfps;
 	//! The maximum desired frame rate in frame per second.

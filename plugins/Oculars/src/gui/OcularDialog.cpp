@@ -38,8 +38,16 @@
 #include <QStandardItemModel>
 #include <limits>
 
-OcularDialog::OcularDialog(Oculars* pluginPtr, QList<CCD *>* ccds, QList<Ocular *>* oculars, QList<Telescope *>* telescopes, QList<Lens *> *lense) :
-	plugin(pluginPtr)
+OcularDialog::OcularDialog(Oculars* pluginPtr,
+			   QList<CCD *>* ccds,
+			   QList<Ocular *>* oculars,
+			   QList<Telescope *>* telescopes,
+			   QList<Lens *> *lense)
+	: plugin(pluginPtr)
+	, ccdMapper(NULL)
+	, ocularMapper(NULL)
+	, telescopeMapper(NULL)
+	, lensMapper(NULL)
 {
 	ui = new Ui_ocularDialogForm;
 	this->ccds = ccds;
@@ -341,6 +349,7 @@ void OcularDialog::createDialogContent()
 	connect(ui->limitStellarMagnitudeCheckBox, SIGNAL(clicked(bool)), plugin, SLOT(setFlagLimitMagnitude(bool)));
 	connect(ui->checkBoxControlPanel, SIGNAL(clicked(bool)), plugin, SLOT(enableGuiPanel(bool)));
 	connect(ui->checkBoxDecimalDegrees, SIGNAL(clicked(bool)), plugin, SLOT(setFlagDecimalDegrees(bool)));
+	connect(ui->checkBoxInitialFOV, SIGNAL(clicked(bool)), plugin, SLOT(setFlagInitFovUsage(bool)));
 	
 	// The add & delete buttons
 	connect(ui->addCCD, SIGNAL(clicked()), this, SLOT(insertNewCCD()));
@@ -447,22 +456,27 @@ void OcularDialog::createDialogContent()
 	ui->telescopeListView->setCurrentIndex(telescopeTableModel->index(0, 1));
 
 	// set the initial state
-	if (Oculars::appSettings()->value("require_selection_to_zoom", 1.0).toBool()) {
+	QSettings *settings = Oculars::appSettings();
+	if (settings->value("require_selection_to_zoom", 1.0).toBool()) {
 		ui->requireSelectionCheckBox->setCheckState(Qt::Checked);
 	}
-	if (Oculars::appSettings()->value("use_max_exit_circle", 0.0).toBool()) {
+	if (settings->value("use_max_exit_circle", 0.0).toBool()) {
 		ui->scaleImageCircleCheckBox->setCheckState(Qt::Checked);
 	}
-	if (Oculars::appSettings()->value("limit_stellar_magnitude", true).toBool()) {
+	if (settings->value("limit_stellar_magnitude", true).toBool()) {
 		ui->limitStellarMagnitudeCheckBox->setCheckState(Qt::Checked);
 	}
-	if (Oculars::appSettings()->value("enable_control_panel", false).toBool())
+	if (settings->value("enable_control_panel", false).toBool())
 	{
 		ui->checkBoxControlPanel->setChecked(true);
 	}
-	if (Oculars::appSettings()->value("use_decimal_degrees", false).toBool())
+	if (settings->value("use_decimal_degrees", false).toBool())
 	{
 		ui->checkBoxDecimalDegrees->setChecked(true);
+	}
+	if (settings->value("use_initial_fov", false).toBool())
+	{
+		ui->checkBoxInitialFOV->setChecked(true);
 	}
 
 	//Initialize the style
@@ -476,7 +490,8 @@ void OcularDialog::initAboutText()
 
 	html += "<h2>" + q_("Oculars Plug-in") + "</h2><table width=\"90%\">";
 	html += "<tr width=\"30%\"><td><strong>" + q_("Version") + ":</strong></td><td>" + OCULARS_PLUGIN_VERSION + "</td></tr>";
-	html += "<tr><td><strong>" + q_("Authors") + ":</strong></td><td>Timothy Reaves &lt;treaves@silverfieldstech.com&gt;<br />Bogdan Marinov<br />Pawel Stolowski (" + q_("Barlow lens feature") + ")</td></tr>";
+	html += "<tr><td><strong>" + q_("Author") + ":</strong></td><td>Timothy Reaves &lt;treaves@silverfieldstech.com&gt;</td></tr>";
+	html += "<tr><td><strong>" + q_("Contributors") + ":</strong></td><td>Bogdan Marinov<br />Pawel Stolowski (" + q_("Barlow lens feature") + ")<br />Alexander Wolf</td></tr>";
 	html += "</table>";
 
 	//Overview

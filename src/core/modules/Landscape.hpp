@@ -20,8 +20,6 @@
 #ifndef _LANDSCAPE_HPP_
 #define _LANDSCAPE_HPP_
 
-#include <QMap>
-#include <QImage>
 #include "VecMath.hpp"
 #include "StelToneReproducer.hpp"
 #include "StelProjector.hpp"
@@ -30,6 +28,9 @@
 #include "StelUtils.hpp"
 #include "StelTextureTypes.hpp"
 #include "StelLocation.hpp"
+
+#include <QMap>
+#include <QImage>
 
 class QSettings;
 class StelLocation;

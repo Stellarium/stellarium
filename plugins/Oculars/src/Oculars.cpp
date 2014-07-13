@@ -47,7 +47,6 @@
 #include <QMenu>
 #include <QMouseEvent>
 #include <QtNetwork>
-#include <QOpenGLFunctions>
 #include <QPixmap>
 #include <QSignalMapper>
 
@@ -78,7 +77,7 @@ StelPluginInfo OcularsStelPluginInterface::getPluginInfo() const
 	StelPluginInfo info;
 	info.id = "Oculars";
 	info.displayedName = N_("Oculars");
-	info.authors = "Timothy Reaves, Bogdan Marinov";
+	info.authors = "Timothy Reaves";
 	info.contact = "treaves@silverfieldstech.com";
 	info.description = N_("Shows the sky as if looking through a telescope eyepiece. (Only magnification and field of view are simulated.) It can also show a sensor frame and a Telrad sight.");
 	info.version = OCULARS_PLUGIN_VERSION;
@@ -120,7 +119,7 @@ Oculars::Oculars():
 	ccdRotationAngle(0.0),
 	maxEyepieceAngle(0.0),
 	requireSelection(true),
-	flagLimitMagnitude(false),
+	flagLimitMagnitude(false),	
 	useMaxEyepieceAngle(true),
 	guiPanelEnabled(false),
 	flagDecimalDegrees(false),
@@ -133,6 +132,7 @@ Oculars::Oculars():
 	pxmapOnIcon(NULL),
 	pxmapOffIcon(NULL),
 	toolbarButton(NULL),
+	ocularDialog(NULL),
 	ready(false),
 	actionShowOcular(0),
 	actionShowCrosshairs(0),
@@ -146,10 +146,10 @@ Oculars::Oculars():
 	actionOcularDecrement(0),
 	guiPanel(0),
 	actualFOV(0),
+	initialFOV(0),
+	flagInitFOVUsage(false),
 	reticleRotation(0)
 {
-
-	QOpenGLFunctions_1_2::initializeOpenGLFunctions();
 	font.setPixelSize(14);
 
 	ccds = QList<CCD *>();
@@ -383,9 +383,11 @@ void Oculars::handleKeys(QKeyEvent* event)
 	StelCore *core = StelApp::getInstance().getCore();
 	StelMovementMgr *movementManager = core->getMovementMgr();
 	
-	if (event->type() == QEvent::KeyPress) {
+	if (event->type() == QEvent::KeyPress)
+	{
 		// Direction and zoom replacements
-		switch (event->key()) {
+		switch (event->key())
+		{
 			case Qt::Key_Left:
 				movementManager->turnLeft(true);
 				consumeEvent = true;
@@ -395,13 +397,15 @@ void Oculars::handleKeys(QKeyEvent* event)
 				consumeEvent = true;
 				break;
 			case Qt::Key_Up:
-				if (!event->modifiers().testFlag(Qt::ControlModifier)) {
+				if (!event->modifiers().testFlag(Qt::ControlModifier))
+				{
 					movementManager->turnUp(true);
 				}
 				consumeEvent = true;
 				break;
 			case Qt::Key_Down:
-				if (!event->modifiers().testFlag(Qt::ControlModifier)) {
+				if (!event->modifiers().testFlag(Qt::ControlModifier))
+				{
 					movementManager->turnDown(true);
 				}
 				consumeEvent = true;
@@ -420,13 +424,16 @@ void Oculars::handleKeys(QKeyEvent* event)
 				break;
 			case Qt::Key_M:
 				double multiplier = 1.0;
-				if (event->modifiers().testFlag(Qt::ControlModifier)) {
+				if (event->modifiers().testFlag(Qt::ControlModifier))
+				{
 					multiplier = 0.1;
 				}
-				if (event->modifiers().testFlag(Qt::AltModifier)) {
+				if (event->modifiers().testFlag(Qt::AltModifier))
+				{
 					multiplier = 5.0;
 				}
-				if (event->modifiers().testFlag(Qt::ShiftModifier)) {
+				if (event->modifiers().testFlag(Qt::ShiftModifier))
+				{
 					reticleRotation += (1.0 * multiplier);
 				} else {
 					reticleRotation -= (1.0 * multiplier);
@@ -437,7 +444,8 @@ void Oculars::handleKeys(QKeyEvent* event)
 		}
 	} else {
 		// When a deplacement key is released stop mooving
-		switch (event->key()) {
+		switch (event->key())
+		{
 			case Qt::Key_Left:
 				movementManager->turnLeft(false);
 				consumeEvent = true;
@@ -467,12 +475,14 @@ void Oculars::handleKeys(QKeyEvent* event)
 				consumeEvent = true;
 				break;
 		}
-		if (consumeEvent) {
+		if (consumeEvent)
+		{
 			// We don't want to re-center the object; just hold the current position.
 			movementManager->setFlagLockEquPos(true);
 		}
 	}
-	if (consumeEvent) {
+	if (consumeEvent)
+	{
 		event->accept();
 	} else {
 		event->setAccepted(false);
@@ -573,6 +583,7 @@ void Oculars::init()
 
 		setFlagDecimalDegrees(settings->value("use_decimal_degrees", false).toBool());
 		setFlagLimitMagnitude(settings->value("limit_stellar_magnitude", true).toBool());
+		setFlagInitFovUsage(settings->value("use_initial_fov", false).toBool());
 	} catch (std::runtime_error& e) {
 		qWarning() << "WARNING: unable to locate ocular.ini file or create a default one for Ocular plugin: " << e.what();
 		ready = false;
@@ -1189,8 +1200,7 @@ void Oculars::toggleCCD(bool show)
 		//TODO: BM: Make this an on-screen message and/or disable the button
 		//if there are no sensors.
 		if (show)
-			qWarning() << "Oculars plugin: Unable to display a sensor boundary:"
-								 << "No sensors or telescopes are defined.";
+			qWarning() << "Oculars plugin: Unable to display a sensor boundary: No sensors or telescopes are defined.";
 		flagShowCCD = false;
 		selectedCCDIndex = -1;
 		show = false;
@@ -1234,6 +1244,8 @@ void Oculars::toggleCCD(bool show)
 		StelMovementMgr *movementManager = core->getMovementMgr();
 		movementManager->zoomTo(movementManager->getInitFov());
 		movementManager->setFlagTracking(false);
+		core->setFlipHorz(false);
+		core->setFlipVert(false);
 
 		if (guiPanel) {
 			guiPanel->foldGui();
@@ -1294,7 +1306,8 @@ void Oculars::initializeActivationActions()
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 	Q_ASSERT(gui);
 
-	actionShowOcular = addAction("actionShow_Ocular", "Oculars", N_("Ocular view"), "enableOcular(bool)", "Ctrl+O");
+	QString ocularsGroup = N_("Oculars");
+	actionShowOcular = addAction("actionShow_Ocular", ocularsGroup, N_("Ocular view"), "enableOcular(bool)", "Ctrl+O");
 	actionShowOcular->setChecked(flagShowOculars);
 	// Make a toolbar button
 	try {
@@ -1305,13 +1318,12 @@ void Oculars::initializeActivationActions()
 					       *pxmapOnIcon,
 					       *pxmapOffIcon,
 					       *pxmapGlow,
-							"actionShow_Ocular");
+					       "actionShow_Ocular");
 		gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
 	} catch (std::runtime_error& e) {
 		qWarning() << "WARNING: unable create toolbar button for Oculars plugin: " << e.what();
 	}
 
-	QString ocularsGroup = N_("Oculars");
 	actionMenu = addAction("actionShow_Ocular_Menu", ocularsGroup, N_("Oculars popup menu"), "displayPopupMenu()", "Alt+O");
 	actionShowCrosshairs = addAction("actionShow_Ocular_Crosshairs", ocularsGroup, N_("Show crosshairs"), "toggleCrosshairs(bool)", "Alt+C");
 	actionShowSensor = addAction("actionShow_Sensor", ocularsGroup, N_("Image sensor frame"), "toggleCCD(bool)");
@@ -1357,25 +1369,24 @@ bool Oculars::isBinocularDefined()
 
 void Oculars::paintCCDBounds()
 {
-	StelCore *core = StelApp::getInstance().getCore();
+	StelCore *core = StelApp::getInstance().getCore();	
 	StelProjector::StelProjectorParams params = core->getCurrentStelProjectorParams();
 	Lens *lens = selectedLensIndex >=0  ? lense[selectedLensIndex] : NULL;
 
-	glDisable(GL_BLEND);
-	glColor3f(0.f,0.f,0.f);
-	glPushMatrix();
-	glTranslated(params.viewportCenter[0] * params.devicePixelsPerPixel,
-					 params.viewportCenter[1] * params.devicePixelsPerPixel,
-					 0.0);
-	glRotated(ccdRotationAngle, 0.0, 0.0, 1.0);
-	GLdouble screenFOV = params.fov;
+	const StelProjectorP projector = core->getProjection(StelCore::FrameEquinoxEqu);	
+	double screenFOV = params.fov;
 
 	// draw sensor rectangle
 	if(selectedCCDIndex != -1) {
 		CCD *ccd = ccds[selectedCCDIndex];
 		if (ccd) {
-			glColor4f(0.77f, 0.14f, 0.16f, 0.5f);
+			StelPainter painter(projector);
+			painter.setColor(0.77f, 0.14f, 0.16f, 1.0f);
 			Telescope *telescope = telescopes[selectedTelescopeIndex];
+			// flip are needed?
+			core->setFlipHorz(telescope->isHFlipped());
+			core->setFlipVert(telescope->isVFlipped());
+
 			const double ccdXRatio = ccd->getActualFOVx(telescope, lens) / screenFOV;
 			const double ccdYRatio = ccd->getActualFOVy(telescope, lens) / screenFOV;
 			// As the FOV is based on the narrow aspect of the screen, we need to calculate
@@ -1388,23 +1399,34 @@ void Oculars::paintCCDBounds()
 			float height = params.viewportXywh[aspectIndex] * ccdXRatio * params.devicePixelsPerPixel;
 
 			if (width > 0.0 && height > 0.0) {
-				glBegin(GL_LINE_LOOP);
-				glVertex2f(-width / 2.0, height / 2.0);
-				glVertex2f(width / 2.0, height / 2.0);
-				glVertex2f(width / 2.0, -height / 2.0);
-				glVertex2f(-width / 2.0, -height / 2.0);
-				glEnd();
+				QPoint a, b;
+				QTransform transform = QTransform().translate(params.viewportCenter[0], params.viewportCenter[1]).rotate(-ccdRotationAngle);
+				// bottom line
+				a = transform.map(QPoint(-width/2.0, -height/2.0));
+				b = transform.map(QPoint(width/2.0, -height/2.0));
+				painter.drawLine2d(a.x(), a.y(), b.x(), b.y());
+				// top line
+				a = transform.map(QPoint(-width/2.0, height/2.0));
+				b = transform.map(QPoint(width/2.0, height/2.0));
+				painter.drawLine2d(a.x(), a.y(), b.x(), b.y());
+				// left line
+				a = transform.map(QPoint(-width/2.0, -height/2.0));
+				b = transform.map(QPoint(-width/2.0, height/2.0));
+				painter.drawLine2d(a.x(), a.y(), b.x(), b.y());
+				// right line
+				a = transform.map(QPoint(width/2.0, height/2.0));
+				b = transform.map(QPoint(width/2.0, -height/2.0));
+				painter.drawLine2d(a.x(), a.y(), b.x(), b.y());
 			}
 		}
 	}
 
-	glPopMatrix();
 }
 
 void Oculars::paintCrosshairs()
 {
-	const StelProjectorP projector = StelApp::getInstance().getCore()->getProjection(StelCore::FrameEquinoxEqu);
 	StelCore *core = StelApp::getInstance().getCore();
+	const StelProjectorP projector = core->getProjection(StelCore::FrameEquinoxEqu);
 	StelProjector::StelProjectorParams params = core->getCurrentStelProjectorParams();
 	// Center of screen
 	Vec2i centerScreen(projector->getViewportPosX()+projector->getViewportWidth()/2,
@@ -1463,11 +1485,10 @@ void Oculars::paintOcularMask(const StelCore *core)
 
 	// Paint the reticale, if needed
 	if (!reticleTexture.isNull()){
-		glPushMatrix(); //Save the current matrix.
-
-		painter.setColor(0.77, 0.14, 0.16, 1.0);
-		glEnable(GL_TEXTURE_2D);
 		glEnable(GL_BLEND);
+		painter.enableTexture2d(true);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		painter.setColor(0.77, 0.14, 0.16, 1.0);		
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
 		reticleTexture->bind();
 
@@ -1479,11 +1500,9 @@ void Oculars::paintOcularMask(const StelCore *core)
 										 params.viewportXywh[3] / 2 * params.devicePixelsPerPixel,
 										 inner,
 										 reticleRotation);
-
-		//Reset the current matrix to the one that was saved.
-		glPopMatrix();
 	}
 
+	// FIXME: Enable usage QML shaders
 	// XXX: for some reason I cannot get to make the glu functions work when
 	// compiling with Qt5!
 	// XXX: GLU can't work with OpenGL ES --AW
@@ -1768,7 +1787,10 @@ void Oculars::unzoomOcular()
 	core->setFlipHorz(false);
 	core->setFlipVert(false);
 
-	movementManager->zoomTo(movementManager->getInitFov());
+	if (getFlagInitFovUsage())
+		movementManager->zoomTo(movementManager->getInitFov());
+	else
+		movementManager->zoomTo(initialFOV);
 }
 
 void Oculars::zoom(bool zoomedIn)
@@ -1780,6 +1802,8 @@ void Oculars::zoom(bool zoomedIn)
 
 	if (flagShowOculars)  {
 		if (!zoomedIn)  {
+			StelCore *core = StelApp::getInstance().getCore();
+
 			GridLinesMgr *gridManager = (GridLinesMgr *)StelApp::getInstance().getModuleMgr().getModule("GridLinesMgr");
 			// Current state
 			flagAzimuthalGrid = gridManager->getFlagAzimuthalGrid();
@@ -1793,13 +1817,16 @@ void Oculars::zoom(bool zoomedIn)
 			flagHorizonLine = gridManager->getFlagHorizonLine();
 			flagGalacticPlaneLine = gridManager->getFlagGalacticPlaneLine();
 
-			StelSkyDrawer *skyManager = StelApp::getInstance().getCore()->getSkyDrawer();
+			StelSkyDrawer *skyManager = core->getSkyDrawer();
 			// Current state
 			flagAdaptation = skyManager->getFlagLuminanceAdaptation();
 			flagLimitStars = skyManager->getFlagStarMagnitudeLimit();
 			flagLimitDSOs = skyManager->getFlagNebulaMagnitudeLimit();
 			magLimitStars = skyManager->getCustomStarMagnitudeLimit();
 			magLimitDSOs = skyManager->getCustomNebulaMagnitudeLimit();
+
+			StelMovementMgr *movementManager = core->getMovementMgr();
+			initialFOV = movementManager->getCurrentFov();
 		}
 
 		// set new state
@@ -1984,6 +2011,18 @@ void Oculars::setFlagLimitMagnitude(const bool b)
 bool Oculars::getFlagLimitMagnitude() const
 {
 	return flagLimitMagnitude;
+}
+
+void Oculars::setFlagInitFovUsage(const bool b)
+{
+	flagInitFOVUsage = b;
+	settings->setValue("use_initial_fov", b);
+	settings->sync();
+}
+
+bool Oculars::getFlagInitFovUsage() const
+{
+	return flagInitFOVUsage;
 }
 
 QString Oculars::getDimensionsString(double fovX, double fovY) const

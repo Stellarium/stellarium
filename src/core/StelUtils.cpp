@@ -17,8 +17,6 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#include <cmath> // std::fmod
-
 #ifdef CYGWIN
  #include <malloc.h>
 #endif
@@ -34,6 +32,8 @@
 #include <QRegExp>
 #include <QProcess>
 #include <QSysInfo>
+#include <cmath> // std::fmod
+#include <zlib.h>
 
 namespace StelUtils
 {
@@ -108,31 +108,30 @@ QString getOperatingSystemInfo()
 	#elif defined Q_OS_MAC
 	switch(QSysInfo::MacintoshVersion)
 	{
-		case QSysInfo::MV_10_3:
-			OS = "Mac OS X 10.3";
+		case QSysInfo::MV_PANTHER:
+			OS = "Mac OS X 10.3 series";
 			break;
-		case QSysInfo::MV_10_4:
-			OS = "Mac OS X 10.4";
+		case QSysInfo::MV_TIGER:
+			OS = "Mac OS X 10.4 series";
 			break;
-		case QSysInfo::MV_10_5:
-			OS = "Mac OS X 10.5";
+		case QSysInfo::MV_LEOPARD:
+			OS = "Mac OS X 10.5 series";
 			break;
-		case QSysInfo::MV_10_6:
-			OS = "Mac OS X 10.6";
+		case QSysInfo::MV_SNOWLEOPARD:
+			OS = "Mac OS X 10.6 series";
 			break;
-		#ifdef MV_10_7
-		case QSysInfo::MV_10_7:
-			OS = "Mac OS X 10.7";
+		case QSysInfo::MV_LION:
+			OS = "Mac OS X 10.7 series";
 			break;
-		#endif
-		#ifdef MV_10_8
-		case QSysInfo::MV_10_8:
-			OS = "Mac OS X 10.8";
+		case QSysInfo::MV_MOUNTAINLION:
+			OS = "Mac OS X 10.8 series";
 			break;
-		#endif
-		#ifdef MV_10_9
-		case QSysInfo::MV_10_9:
-			OS = "Mac OS X 10.9";
+		case QSysInfo::MV_MAVERICKS:
+			OS = "Mac OS X 10.9 series";
+			break;
+		#ifdef MV_YOSEMITE
+		case QSysInfo::MV_YOSEMITE
+			OS = "Mac OS X 10.10 series";
 			break;
 		#endif
 		default:
@@ -210,23 +209,17 @@ void radToDms(double angle, bool& sign, unsigned int& d, unsigned int& m, double
 	d = (unsigned int)angle;
 	m = (unsigned int)((angle - d)*60);
 	s = (angle-d)*3600-60*m;
-	// workaround for rounding numbers
+	// workaround for rounding numbers	
 	if (s>59.9)
 	{
 		s = 0.;
-		if (sign)
-			m += 1;
-		else
-			m -= 1;
+		m += 1;
 	}
 	if (m==60)
 	{
 		m = 0.;
-		if (sign)
-			d += 1;
-		else
-			d -= 1;
-	}
+		d += 1;
+	}	
 }
 
 /*************************************************************************
@@ -542,7 +535,13 @@ int getBiggerPowerOfTwo(int value)
 // Return the inverse sinus hyperbolic of z
 double asinh(const double z)
 {
-	return std::log(z+std::sqrt(z*z+1));
+	double returned;
+	if(z>0)
+	   returned = std::log(z + std::sqrt(z*z+1));
+	else
+	   returned = -std::log(-z + std::sqrt(z*z+1));
+
+	return returned;
 }
 
 /*************************************************************************
@@ -1791,6 +1790,143 @@ double getDeltaTStandardError(const double jDay)
 		sigma = 0.8 * cDiff1820 * cDiff1820;
 	}
 	return sigma;
+}
+
+
+// Arrays to keep cos/sin of angles and multiples of angles. rho and theta are delta angles, and these arrays
+#define MAX_STACKS 4096
+static float cos_sin_rho[2*(MAX_STACKS+1)];
+#define MAX_SLICES 4096
+static float cos_sin_theta[2*(MAX_SLICES+1)];
+
+//! Compute cosines and sines around a circle which is split in "segments" parts.
+//! Values are stored in the global static array cos_sin_theta.
+//! Used for the sin/cos values along a latitude circle, equator, etc. for a spherical mesh.
+//! @param slices number of partitions (elsewhere called "segments") for the circle
+float* ComputeCosSinTheta(const int slices)
+{
+	Q_ASSERT(slices<=MAX_SLICES);
+	
+	// Difference angle between the stops. Always use 2*M_PI/slices!
+	const float dTheta = 2.f * M_PI / slices;
+	float *cos_sin = cos_sin_theta;
+	float *cos_sin_rev = cos_sin + 2*(slices+1);
+	const float c = std::cos(dTheta);
+	const float s = std::sin(dTheta);
+	*cos_sin++ = 1.f;
+	*cos_sin++ = 0.f;
+	*--cos_sin_rev = -cos_sin[-1];
+	*--cos_sin_rev =  cos_sin[-2];
+	*cos_sin++ = c;
+	*cos_sin++ = s;
+	*--cos_sin_rev = -cos_sin[-1];
+	*--cos_sin_rev =  cos_sin[-2];
+	while (cos_sin < cos_sin_rev)   // compares array address indices only!
+	{
+		// avoid expensive trig functions by use of the addition theorem.
+		cos_sin[0] = cos_sin[-2]*c - cos_sin[-1]*s;
+		cos_sin[1] = cos_sin[-2]*s + cos_sin[-1]*c;
+		cos_sin += 2;
+		*--cos_sin_rev = -cos_sin[-1];
+		*--cos_sin_rev =  cos_sin[-2];
+	}
+	return cos_sin_theta;
+}
+
+//! Compute cosines and sines around a half-circle which is split in "segments" parts.
+//! Values are stored in the global static array cos_sin_rho.
+//! Used for the sin/cos values along a meridian for a spherical mesh.
+//! @param segments number of partitions (elsewhere called "stacks") for the half-circle
+float* ComputeCosSinRho(const int segments)
+{
+	Q_ASSERT(segments<=MAX_STACKS);
+	
+	// Difference angle between the stops. Always use M_PI/segments!
+	const float dRho = M_PI / segments;
+	float *cos_sin = cos_sin_rho;
+	float *cos_sin_rev = cos_sin + 2*(segments+1);
+	const float c = std::cos(dRho);
+	const float s = std::sin(dRho);
+	*cos_sin++ = 1.f;
+	*cos_sin++ = 0.f;
+	*--cos_sin_rev =  cos_sin[-1];
+	*--cos_sin_rev = -cos_sin[-2];
+	*cos_sin++ = c;
+	*cos_sin++ = s;
+	*--cos_sin_rev =  cos_sin[-1];
+	*--cos_sin_rev = -cos_sin[-2];
+	while (cos_sin < cos_sin_rev)    // compares array address indices only!
+	{
+		// avoid expensive trig functions by use of the addition theorem.
+		cos_sin[0] = cos_sin[-2]*c - cos_sin[-1]*s;
+		cos_sin[1] = cos_sin[-2]*s + cos_sin[-1]*c;
+		cos_sin += 2;
+		*--cos_sin_rev =  cos_sin[-1];
+		*--cos_sin_rev = -cos_sin[-2];
+	}
+	
+	return cos_sin_rho;
+}
+
+//! Compute cosines and sines around part of a circle (from top to bottom) which is split in "segments" parts.
+//! Values are stored in the global static array cos_sin_rho.
+//! Used for the sin/cos values along a meridian.
+//! GZ: allow leaving away pole caps. The array now contains values for the region minAngle+segments*phi
+//! @param dRho a difference angle between the stops
+//! @param segments number of segments
+//! @param minAngle start angle inside the half-circle. maxAngle=minAngle+segments*phi
+float *ComputeCosSinRhoZone(const float dRho, const int segments, const float minAngle)
+{
+	float *cos_sin = cos_sin_rho;
+	const float c = cos(dRho);
+	const float s = sin(dRho);
+	*cos_sin++ = cos(minAngle);
+	*cos_sin++ = sin(minAngle);
+	for (int i=0; i<segments; ++i) // we cannot mirror this, it may be unequal.
+	{   // efficient computation, avoid expensive trig functions by use of the addition theorem.
+		cos_sin[0] = cos_sin[-2]*c - cos_sin[-1]*s;
+		cos_sin[1] = cos_sin[-2]*s + cos_sin[-1]*c;
+		cos_sin += 2;
+	}
+	return cos_sin_rho;
+}
+
+//! Uncompress gzip or zlib compressed data.
+QByteArray uncompress(const QByteArray& data)
+{
+	if (data.size() <= 4)
+		return QByteArray();
+	static const int CHUNK = 1024;
+	QByteArray buffer(CHUNK, 0);
+	QByteArray out;
+	z_stream strm;
+	strm.zalloc = Z_NULL;
+	strm.zfree = Z_NULL;
+	strm.opaque = Z_NULL;
+	strm.avail_in = data.size();
+	strm.next_in = (Bytef*)(data.data());
+
+	// 15 + 32 for gzip automatic header detection.
+	int ret = inflateInit2(&strm, 15 +  32);
+	if (ret != Z_OK) return QByteArray();
+
+	do
+	{
+		strm.avail_out = CHUNK;
+		strm.next_out = (Bytef*)(buffer.data());
+		ret = inflate(&strm, Z_NO_FLUSH);
+		Q_ASSERT(ret != Z_STREAM_ERROR);
+		if (ret < 0)
+		{
+			out.clear();
+			break;
+		}
+		out.append(buffer.data(), CHUNK - strm.avail_out);
+	}
+	while (strm.avail_out == 0);
+
+    inflateEnd(&strm);
+	return out;
 }
 
 } // end of the StelUtils namespace

@@ -23,9 +23,10 @@
 #ifndef _SKYLIGHT_HPP_
 #define _SKYLIGHT_HPP_
 
+#include "StelUtils.hpp"
+
 #include <cmath>
 #include <QDebug>
-#include "StelUtils.hpp"
 
 typedef struct {
 	float zenithAngle;  // zenithAngle : angular distance to the zenith in radian

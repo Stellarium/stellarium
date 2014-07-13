@@ -52,6 +52,7 @@ MinorPlanet::MinorPlanet(const QString& englishName,
 		  color,
 		  albedo,
 		  atexMapName,
+		  "",
 		  coordFunc,
 		  auserDataPtr,
 		  osculatingFunc,
@@ -66,6 +67,7 @@ MinorPlanet::MinorPlanet(const QString& englishName,
 	deltaJD = StelCore::JD_SECOND;
 	orbitCached = 0;
 	closeOrbit = acloseOrbit;
+	semiMajorAxis = 0.;
 
 	eclipticPos=Vec3d(0.,0.,0.);
 	rotLocalToParent = Mat4d::identity();

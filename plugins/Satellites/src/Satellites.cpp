@@ -39,6 +39,7 @@
 #include "LabelMgr.hpp"
 #include "StelTranslator.hpp"
 #include "StelProgressController.hpp"
+#include "StelUtils.hpp"
 
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
@@ -72,19 +73,24 @@ StelPluginInfo SatellitesStelPluginInterface::getPluginInfo() const
 }
 
 Satellites::Satellites()
-	: satelliteListModel(NULL),
-	  pxmapGlow(NULL),
-	  pxmapOnIcon(NULL),
-	  pxmapOffIcon(NULL),
-	  toolbarButton(NULL),
-	  earth(NULL),
-	  defaultHintColor(0.0, 0.4, 0.6),
-	  defaultOrbitColor(0.0, 0.3, 0.6),
-	  progressBar(NULL)
+	: satelliteListModel(NULL)
+	, toolbarButton(NULL)
+	, earth(NULL)
+	, defaultHintColor(0.0, 0.4, 0.6)
+	, defaultOrbitColor(0.0, 0.3, 0.6)
+	, updateState(CompleteNoUpdates)
+	, downloadMgr(NULL)
+	, progressBar(NULL)
+	, numberDownloadsComplete(0)
+	, updateTimer(0)
+	, updatesEnabled(false)
+	, autoAddEnabled(false)
+	, autoRemoveEnabled(false)
+	, updateFrequencyHours(0)
+	, messageTimer(0)
 {
 	setObjectName("Satellites");
 	configDialog = new SatellitesDialog();
-	QOpenGLFunctions_1_2::initializeOpenGLFunctions();
 }
 
 void Satellites::deinit()
@@ -96,13 +102,6 @@ void Satellites::deinit()
 Satellites::~Satellites()
 {
 	delete configDialog;
-	
-	if (pxmapGlow)
-		delete pxmapGlow;
-	if (pxmapOnIcon)
-		delete pxmapOnIcon;
-	if (pxmapOffIcon)
-		delete pxmapOffIcon;
 }
 
 
@@ -138,19 +137,23 @@ void Satellites::init()
 		texPointer = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/pointeur5.png");
 		Satellite::hintTexture = StelApp::getInstance().getTextureManager().createTexture(":/satellites/hint.png");
 
-		// key bindings and other actions
-		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+		// key bindings and other actions		
 		QString satGroup = N_("Satellites");
 		addAction("actionShow_Satellite_Hints", satGroup, N_("Satellite hints"), "hintsVisible", "Ctrl+Z");
 		addAction("actionShow_Satellite_Labels", satGroup, N_("Satellite labels"), "labelsVisible", "Shift+Z");
 		addAction("actionShow_Satellite_ConfigDialog_Global", satGroup, N_("Satellites configuration window"), configDialog, "visible", "Alt+Z");
 
 		// Gui toolbar button
-		pxmapGlow = new QPixmap(":/graphicGui/glow32x32.png");
-		pxmapOnIcon = new QPixmap(":/satellites/bt_satellites_on.png");
-		pxmapOffIcon = new QPixmap(":/satellites/bt_satellites_off.png");
-		toolbarButton = new StelButton(NULL, *pxmapOnIcon, *pxmapOffIcon, *pxmapGlow, "actionShow_Satellite_Hints");
-		gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
+		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+		if (gui!=NULL)
+		{
+			toolbarButton = new StelButton(NULL,
+						       QPixmap(":/satellites/bt_satellites_on.png"),
+						       QPixmap(":/satellites/bt_satellites_off.png"),
+						       QPixmap(":/graphicGui/glow32x32.png"),
+						       "actionShow_Satellite_Hints");
+			gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
+		}
 	}
 	catch (std::runtime_error &e)
 	{
@@ -255,7 +258,7 @@ double Satellites::getCallOrder(StelModuleActionName actionName) const
 QList<StelObjectP> Satellites::searchAround(const Vec3d& av, double limitFov, const StelCore*) const
 {
 	QList<StelObjectP> result;
-	if (!hintFader || StelApp::getInstance().getCore()->getCurrentLocation().planetName != earth->getEnglishName())
+	if (!hintFader || StelApp::getInstance().getCore()->getCurrentLocation().planetName != earth->getEnglishName() || !isValidRangeDates())
 		return result;
 
 	Vec3d v(av);
@@ -280,7 +283,7 @@ QList<StelObjectP> Satellites::searchAround(const Vec3d& av, double limitFov, co
 
 StelObjectP Satellites::searchByNameI18n(const QString& nameI18n) const
 {
-	if (!hintFader || StelApp::getInstance().getCore()->getCurrentLocation().planetName != earth->getEnglishName())
+	if (!hintFader || StelApp::getInstance().getCore()->getCurrentLocation().planetName != earth->getEnglishName() || !isValidRangeDates())
 		return NULL;
 	
 	QString objw = nameI18n.toUpper();
@@ -303,7 +306,7 @@ StelObjectP Satellites::searchByNameI18n(const QString& nameI18n) const
 
 StelObjectP Satellites::searchByName(const QString& englishName) const
 {
-	if (!hintFader || StelApp::getInstance().getCore()->getCurrentLocation().planetName != earth->getEnglishName())
+	if (!hintFader || StelApp::getInstance().getCore()->getCurrentLocation().planetName != earth->getEnglishName() || !isValidRangeDates())
 		return NULL;
 
 	QString objw = englishName.toUpper();
@@ -326,7 +329,7 @@ StelObjectP Satellites::searchByName(const QString& englishName) const
 
 StelObjectP Satellites::searchByNoradNumber(const QString &noradNumber) const
 {
-	if (!hintFader || StelApp::getInstance().getCore()->getCurrentLocation().planetName != earth->getEnglishName())
+	if (!hintFader || StelApp::getInstance().getCore()->getCurrentLocation().planetName != earth->getEnglishName() || !isValidRangeDates())
 		return NULL;
 	
 	// If the search string is a catalog number...
@@ -351,7 +354,7 @@ StelObjectP Satellites::searchByNoradNumber(const QString &noradNumber) const
 QStringList Satellites::listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem, bool useStartOfWords) const
 {
 	QStringList result;
-	if (!hintFader || StelApp::getInstance().getCore()->getCurrentLocation().planetName != earth->getEnglishName())
+	if (!hintFader || StelApp::getInstance().getCore()->getCurrentLocation().planetName != earth->getEnglishName() || !isValidRangeDates())
 		return result;
 	if (maxNbItem==0) return result;
 
@@ -405,7 +408,7 @@ QStringList Satellites::listMatchingObjectsI18n(const QString& objPrefix, int ma
 QStringList Satellites::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords) const
 {
 	QStringList result;
-	if (!hintFader || StelApp::getInstance().getCore()->getCurrentLocation().planetName != earth->getEnglishName())
+	if (!hintFader || StelApp::getInstance().getCore()->getCurrentLocation().planetName != earth->getEnglishName() || !isValidRangeDates())
 		return result;
 	if (maxNbItem==0) return result;
 
@@ -753,9 +756,10 @@ QVariantMap Satellites::loadDataMap(QString path)
 	if (!jsonFile.open(QIODevice::ReadOnly))
 		qWarning() << "Satellites::loadTleMap cannot open " << QDir::toNativeSeparators(path);
 	else
+	{
 		map = StelJsonParser::parse(&jsonFile).toMap();
-
-	jsonFile.close();
+		jsonFile.close();
+	}
 	return map;
 }
 
@@ -1334,7 +1338,7 @@ void Satellites::updateFromFiles(QStringList paths, bool deleteFiles)
 		QFile tleFile(tleFilePath);
 		if (tleFile.open(QIODevice::ReadOnly|QIODevice::Text))
 		{
-			parseTleFile(tleFile, newTleSets);
+			parseTleFile(tleFile, newTleSets, autoAddEnabled);
 			tleFile.close();
 
 			if (deleteFiles)
@@ -1469,6 +1473,7 @@ void Satellites::parseTleFile(QFile& openFile,
 	// Code mostly re-used from updateFromFiles()
 	int lineNumber = 0;
 	TleData lastData;
+	lastData.addThis = addFlagValue;
 	
 	while (!openFile.atEnd())
 	{
@@ -1552,7 +1557,7 @@ void Satellites::parseQSMagFile(QString qsMagFile)
 
 void Satellites::update(double deltaTime)
 {
-	if (StelApp::getInstance().getCore()->getCurrentLocation().planetName != earth->getEnglishName() || (!hintFader && hintFader.getInterstate() <= 0.))
+	if (StelApp::getInstance().getCore()->getCurrentLocation().planetName != earth->getEnglishName() || !isValidRangeDates() || (!hintFader && hintFader.getInterstate() <= 0.))
 		return;
 
 	hintFader.update((int)(deltaTime*1000));
@@ -1566,9 +1571,7 @@ void Satellites::update(double deltaTime)
 
 void Satellites::draw(StelCore* core)
 {
-	if (core->getCurrentLocation().planetName != earth->getEnglishName() ||
-			(core->getJDay()<2436116.3115)                               || // do not draw anything before Oct 4, 1957, 19:28:34GMT ;-)
-			(!hintFader && hintFader.getInterstate() <= 0.))
+	if (core->getCurrentLocation().planetName != earth->getEnglishName() ||	!isValidRangeDates() || (!hintFader && hintFader.getInterstate() <= 0.))
 		return;
 
 	StelProjectorP prj = core->getProjection(StelCore::FrameAltAz);
@@ -1605,7 +1608,7 @@ void Satellites::drawPointer(StelCore* core, StelPainter& painter)
 		// Compute 2D pos and return if outside screen
 		if (!prj->project(pos, screenpos))
 			return;
-		glColor3f(0.4f,0.5f,0.8f);
+		painter.setColor(0.4f,0.5f,0.8f);
 		texPointer->bind();
 
 		glEnable(GL_TEXTURE_2D);
@@ -1647,6 +1650,21 @@ bool Satellites::checkJsonFileFormat()
 
 	return true;
 
+}
+
+bool Satellites::isValidRangeDates() const
+{
+	bool ok;
+	double tJD = StelApp::getInstance().getCore()->getJDay();
+	double uJD = StelUtils::getJulianDayFromISO8601String(lastUpdate.toString(Qt::ISODate), &ok);
+	if (lastUpdate.isNull()) // No updates yet?
+		uJD = tJD;
+	// do not draw anything before Oct 4, 1957, 19:28:34GMT ;-)
+	// upper limit for drawing is +5 years after latest update of TLE
+	if ((tJD<2436116.3115) || (tJD>(uJD+1825)))
+		return false;
+	else
+		return true;
 }
 
 void Satellites::translations()

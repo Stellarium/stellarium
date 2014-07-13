@@ -20,7 +20,6 @@
 #include "StelFileMgr.hpp"
 #include "StelLocationMgr.hpp"
 #include "StelUtils.hpp"
-#include "kfilterdev.h"
 
 #include <QStringListModel>
 #include <QDebug>
@@ -46,11 +45,13 @@ void StelLocationMgr::generateBinaryLocationFile(const QString& fileName, bool i
 {
 	const QMap<QString, StelLocation>& cities = loadCities(fileName, isUserLocation);
 	QFile binfile(binFilePath);
-	binfile.open(QIODevice::WriteOnly);
-	QDataStream out(&binfile);
-	out.setVersion(QDataStream::Qt_4_6);
-	out << cities;
-	binfile.close();
+	if(binfile.open(QIODevice::WriteOnly))
+	{
+		QDataStream out(&binfile);
+		out.setVersion(QDataStream::Qt_4_6);
+		out << cities;
+		binfile.close();
+	}
 }
 
 QMap<QString, StelLocation> StelLocationMgr::loadCitiesBin(const QString& fileName) const
@@ -69,14 +70,10 @@ QMap<QString, StelLocation> StelLocationMgr::loadCitiesBin(const QString& fileNa
 
 	if (fileName.endsWith(".gz"))
 	{
-		QIODevice* d = KFilterDev::device(&sourcefile, "application/x-gzip", false);
-		d->open(QIODevice::ReadOnly);
-		QByteArray arr = d->readAll();
-		QDataStream in(&arr, QIODevice::ReadOnly);
+		// FIXME: This code doesn't work with MSVC2012 -- need fix! --AW
+		QDataStream in(StelUtils::uncompress(sourcefile.readAll()));
 		in.setVersion(QDataStream::Qt_4_6);
 		in >> res;
-		d->close();
-		delete d;
 		return res;
 	}
 	else

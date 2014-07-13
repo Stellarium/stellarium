@@ -18,6 +18,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 */
 
+#include "config.h"
+
 #include <QDebug>
 #include <QTimer>
 #include <QDateTime>
@@ -37,7 +39,9 @@
 #include "StelFileMgr.hpp"
 #include "StelTranslator.hpp"
 
-ExoplanetsDialog::ExoplanetsDialog() : updateTimer(NULL)
+ExoplanetsDialog::ExoplanetsDialog()
+	: ep(NULL)
+	, updateTimer(NULL)
 {
         ui = new Ui_exoplanetsDialog;
 }
@@ -83,6 +87,8 @@ void ExoplanetsDialog::createDialogContent()
 	connect(ui->displayShowExoplanetsButton, SIGNAL(stateChanged(int)), this, SLOT(setDisplayShowExoplanetsButton(int)));
 	ui->timelineModeCheckBox->setChecked(ep->getTimelineMode());
 	connect(ui->timelineModeCheckBox, SIGNAL(stateChanged(int)), this, SLOT(setTimelineEnabled(int)));
+	ui->habitableModeCheckBox->setChecked(ep->getHabitableMode());
+	connect(ui->habitableModeCheckBox, SIGNAL(stateChanged(int)), this, SLOT(setHabitableEnabled(int)));
 	connect(ui->internetUpdatesCheckbox, SIGNAL(stateChanged(int)), this, SLOT(setUpdatesEnabled(int)));
 	connect(ui->updateButton, SIGNAL(clicked()), this, SLOT(updateJSON()));
 	connect(ep, SIGNAL(updateStateChanged(Exoplanets::UpdateState)), this, SLOT(updateStateReceiver(Exoplanets::UpdateState)));
@@ -106,10 +112,12 @@ void ExoplanetsDialog::createDialogContent()
 	setInfoHtml();
 	setWebsitesHtml();
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-	Q_ASSERT(gui);
-	ui->aboutTextBrowser->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
-	ui->infoTextBrowser->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
-	ui->websitesTextBrowser->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
+	if(gui!=NULL)
+	{
+		ui->aboutTextBrowser->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
+		ui->infoTextBrowser->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
+		ui->websitesTextBrowser->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
+	}
 
 	updateGuiFromSettings();
 
@@ -125,7 +133,7 @@ void ExoplanetsDialog::setAboutHtml(void)
 	html += "<p>" + QString(q_("This plugin plots the position of stars with exoplanets. Exoplanets data is derived from \"%1The Extrasolar Planets Encyclopaedia%2\"")).arg("<a href=\"http://exoplanet.eu/\">").arg("</a>") + ". ";
 	html += QString(q_("The list of potential habitable exoplanets and data about them were taken from \"%1The Habitable Exoplanets Catalog%3\" by %2Planetary Habitability Laboratory%3.")).arg("<a href=\"http://phl.upr.edu/projects/habitable-exoplanets-catalog\">").arg("<a href=\"http://phl.upr.edu/home\">").arg("</a>") + "</p>";
 
-	html += "<p>" + q_("The current catalog contains info about %1 planetary systems, which altogether have %2 exoplanets.").arg(ep->getCountPlanetarySystems()).arg(ep->getCountAllExoplanets()) + "</p>";
+	html += "<p>" + q_("The current catalog contains info about %1 planetary systems, which altogether have %2 exoplanets (including %3 potentially habitable exoplanets).").arg(ep->getCountPlanetarySystems()).arg(ep->getCountAllExoplanets()).arg(ep->getCountHabitableExoplanets()) + "</p>";
 	html += "<h3>" + q_("Links") + "</h3>";
 	html += "<p>" + QString(q_("Support is provided via the Launchpad website.  Be sure to put \"%1\" in the subject when posting.")).arg("Exoplanets plugin") + "</p>";
 	html += "<p><ul>";
@@ -140,9 +148,11 @@ void ExoplanetsDialog::setAboutHtml(void)
 	html += "</ul></p></body></html>";
 
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-	Q_ASSERT(gui);
-	QString htmlStyleSheet(gui->getStelStyle().htmlStyleSheet);
-	ui->aboutTextBrowser->document()->setDefaultStyleSheet(htmlStyleSheet);
+	if(gui!=NULL)
+	{
+		QString htmlStyleSheet(gui->getStelStyle().htmlStyleSheet);
+		ui->aboutTextBrowser->document()->setDefaultStyleSheet(htmlStyleSheet);
+	}
 	ui->aboutTextBrowser->setHtml(html);
 }
 
@@ -153,13 +163,15 @@ void ExoplanetsDialog::setInfoHtml(void)
 	html += QString("<p>%1</p>").arg(q_("This plugin can display potential habitable exoplanets (orange marker) and some information about those planets - habitable class, mean surface temperature and Earth Similarity Index."));
 	html += QString("<p><b>%1</b> &mdash; %2</p>").arg(q_("Habitable Class")).arg(q_("Classifies habitable planets based on temperature: hypopsychroplanets (O or hP) = very cold (less −50°C); psychroplanets (P) = cold; mesoplanets (M) = medium-temperature (0–50°C); thermoplanets (T) = hot; hyperthermoplanets (E or hT) = very hot (above 100°C). Mesoplanets would be ideal for complex life, whereas class O or E would only support extremophilic life. Non-habitable planets are simply given the class X (or NH)."));
 	html += QString("<p><b>%1</b> &mdash; %2</p>").arg(q_("Mean Surface Temperature")).arg(q_("Temperature in (°C) based on a similar terrestrial atmosphere to planet mass ratio and a greenhouse effect due to 1 percent of CO2 (assuming an albedo of 0.3 in all cases)."));
-	html += QString("<p><b><a href='http://en.wikipedia.org/wiki/Earth_Similarity_Index'>%1</a></b> &mdash; %2</p>").arg(q_("Earth Similarity Index (ESI)")).arg(q_("Similarity to Earth on a scale from 0 to 1, with 1 being the most Earth-like. ESI depends on the planet's radius, density, escape velocity, and surface temperature."));
+	html += QString("<p><b><a href='http://phl.upr.edu/projects/earth-similarity-index-esi'>%1</a></b> &mdash; %2</p>").arg(q_("Earth Similarity Index (ESI)")).arg(q_("Similarity to Earth on a scale from 0 to 1, with 1 being the most Earth-like. ESI depends on the planet's radius, density, escape velocity, and surface temperature."));
 	html += "</body></html>";
 
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-	Q_ASSERT(gui);
-	QString htmlStyleSheet(gui->getStelStyle().htmlStyleSheet);
-	ui->infoTextBrowser->document()->setDefaultStyleSheet(htmlStyleSheet);
+	if(gui!=NULL)
+	{
+		QString htmlStyleSheet(gui->getStelStyle().htmlStyleSheet);
+		ui->infoTextBrowser->document()->setDefaultStyleSheet(htmlStyleSheet);
+	}
 	ui->infoTextBrowser->setHtml(html);
 }
 
@@ -179,7 +191,7 @@ void ExoplanetsDialog::setWebsitesHtml(void)
 	html += QString("<li><a href='%1'>%2</a></li>").arg("http://exep.jpl.nasa.gov/").arg(q_("NASA's Exoplanet Exploration Program"));
 	html += QString("<li><a href='%1'>%2</a></li>").arg("http://www.astro.psu.edu/users/alex/pulsar_planets.htm").arg(q_("Pulsar planets"));
 	html += QString("<li><a href='%1'>%2</a></li>").arg("http://exoplanetarchive.ipac.caltech.edu/").arg(q_("The NASA Exoplanet Archive"));
-	html += QString("<li><a href='%1'>%2</a></li>").arg("http://www.dtm.ciw.edu/boss/c53index.html").arg(q_("IAU Comission 53: Extrasolar Planets"));
+	html += QString("<li><a href='%1'>%2</a></li>").arg("http://www.dtm.ciw.edu/boss/c53index.html").arg(q_("IAU Commission 53: Extrasolar Planets"));
 	html += QString("<li><a href='%1'>%2</a></li>").arg("http://www.exomol.com/").arg(q_("ExoMol"));
 	html += QString("<li><a href='%1'>%2</a></li>").arg("http://www.hzgallery.org/").arg(q_("The Habitable Zone Gallery"));
 	html += QString("<li><a href='%1'>%2</a></li>").arg("http://planetquest.jpl.nasa.gov/").arg(q_("PlanetQuest - The Search for Another Earth"));
@@ -188,9 +200,11 @@ void ExoplanetsDialog::setWebsitesHtml(void)
 	html += "</ul></body></html>";
 
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-	Q_ASSERT(gui);
-	QString htmlStyleSheet(gui->getStelStyle().htmlStyleSheet);
-	ui->websitesTextBrowser->document()->setDefaultStyleSheet(htmlStyleSheet);
+	if(gui!=NULL)
+	{
+		QString htmlStyleSheet(gui->getStelStyle().htmlStyleSheet);
+		ui->websitesTextBrowser->document()->setDefaultStyleSheet(htmlStyleSheet);
+	}
 	ui->websitesTextBrowser->setHtml(html);
 }
 
@@ -229,6 +243,12 @@ void ExoplanetsDialog::setTimelineEnabled(int checkState)
 {
 	bool b = checkState != Qt::Unchecked;
 	ep->setTimelineMode(b);
+}
+
+void ExoplanetsDialog::setHabitableEnabled(int checkState)
+{
+	bool b = checkState != Qt::Unchecked;
+	ep->setHabitableMode(b);
 }
 
 void ExoplanetsDialog::setDisplayAtStartupEnabled(int checkState)
@@ -282,7 +302,7 @@ void ExoplanetsDialog::restoreDefaults(void)
 {
 	qDebug() << "Exoplanets::restoreDefaults";
 	ep->restoreDefaults();
-	ep->readSettingsFromConfig();
+	ep->loadConfiguration();
 	updateGuiFromSettings();
 }
 
@@ -294,7 +314,7 @@ void ExoplanetsDialog::updateGuiFromSettings(void)
 
 void ExoplanetsDialog::saveSettings(void)
 {
-	ep->saveSettingsToConfig();
+	ep->saveConfiguration();
 }
 
 void ExoplanetsDialog::updateJSON(void)

@@ -17,9 +17,6 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#include <QDebug>
-#include <QSettings>
-#include <QOpenGLShaderProgram>
 #include "Atmosphere.hpp"
 #include "StelUtils.hpp"
 #include "StelApp.hpp"
@@ -29,18 +26,30 @@
 #include "StelPainter.hpp"
 #include "StelFileMgr.hpp"
 
+#include <QDebug>
+#include <QSettings>
+#include <QOpenGLShaderProgram>
+
 inline bool myisnan(double value)
 {
 	return value != value;
 }
 
-Atmosphere::Atmosphere(void) :viewport(0,0,0,0), posGrid(NULL), posGridBuffer(QOpenGLBuffer::VertexBuffer), 
-	indicesBuffer(QOpenGLBuffer::IndexBuffer), colorGrid(NULL), colorGridBuffer(QOpenGLBuffer::VertexBuffer),
-	averageLuminance(0.f), eclipseFactor(1.f), lightPollutionLuminance(0)
+Atmosphere::Atmosphere(void)
+	: viewport(0,0,0,0)
+	, skyResolutionY(44)
+	, skyResolutionX(44)
+	, posGrid(NULL)
+	, posGridBuffer(QOpenGLBuffer::VertexBuffer)
+	, indicesBuffer(QOpenGLBuffer::IndexBuffer)
+	, colorGrid(NULL)
+	, colorGridBuffer(QOpenGLBuffer::VertexBuffer)
+	, averageLuminance(0.f)
+	, eclipseFactor(1.f)
+	, lightPollutionLuminance(0)
 {
 	setFadeDuration(1.5f);
 
-	qDebug() << "Use vertex shader for atmosphere rendering.";
 	QOpenGLShader vShader(QOpenGLShader::Vertex);
 	if (!vShader.compileSourceFile(":/shaders/xyYToRGB.glsl"))
 	{
@@ -168,7 +177,7 @@ void Atmosphere::computeColor(double JD, Vec3d _sunPos, Vec3d moonPos, float moo
 		colorGridBuffer.setUsagePattern(QOpenGLBuffer::DynamicDraw);
 		colorGridBuffer.create();
 		colorGridBuffer.bind();
-		colorGridBuffer.allocate(posGrid, (1+skyResolutionX)*(1+skyResolutionY)*4*4);
+		colorGridBuffer.allocate(colorGrid, (1+skyResolutionX)*(1+skyResolutionY)*4*4);
 		colorGridBuffer.release();
 	}
 

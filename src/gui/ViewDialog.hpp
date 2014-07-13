@@ -20,8 +20,9 @@
 #ifndef _VIEWDIALOG_HPP_
 #define _VIEWDIALOG_HPP_
 
-#include <QObject>
 #include "StelDialog.hpp"
+
+#include <QObject>
 
 class Ui_viewDialogForm;
 class QListWidgetItem;
@@ -50,9 +51,9 @@ private slots:
 	void skyCultureChanged(const QString& cultureName);
 	void projectionChanged(const QString& projectionName);
 	void landscapeChanged(QListWidgetItem* item);
-	void setZhrFromControls();
+	void setZhrFromControls(int zhr);
+	void updateZhrDescription();
 	void updateZhrControls(int zhr);
-	void updateZhrDescription(int zhr);
 	void planetsLabelsValueChanged(int);
 	void nebulasLabelsValueChanged(int);
 	void setBortleScaleToolTip(int Bindex);
@@ -66,6 +67,8 @@ private slots:
 	void showAddRemoveLandscapesDialog();
         void showAtmosphereDialog();
 
+	void populateLightPollution();
+
 	void populateSkyLayersList();
 	void skyLayersSelectionChanged(const QString&);
 	void skyLayersEnabledChanged(int);
@@ -74,6 +77,7 @@ private slots:
 private:
 	//! convenience method to link a checkbox to a StelAction.
 	void connectCheckBox(class QCheckBox* checkBox, const QString& actionId);
+	void connectGroupBox(class QGroupBox* groupBox, const QString& actionId);
 	void updateSkyCultureText();
 
 	AddRemoveLandscapesDialog * addRemoveLandscapesDialog;

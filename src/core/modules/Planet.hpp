@@ -20,14 +20,14 @@
 #ifndef _PLANET_HPP_
 #define _PLANET_HPP_
 
-#include <QString>
-
 #include "StelObject.hpp"
 #include "StelProjector.hpp"
 #include "VecMath.hpp"
 #include "StelFader.hpp"
 #include "StelTextureTypes.hpp"
 #include "StelProjectorType.hpp"
+
+#include <QString>
 
 // The callback type for the external position computation function
 // The last variable is the userData pointer.
@@ -42,19 +42,13 @@ typedef void (OsculatingFunctType)(double jd0,double jd,double xyz[3]);
 class StelFont;
 class StelPainter;
 class StelTranslator;
-
-struct TrailPoint
-{
-	Vec3d point;
-	double date;
-};
-
+class QOpenGLShaderProgram;
 
 // Class used to store orbital elements
 class RotationElements
 {
 public:
-	RotationElements(void) : period(1.), offset(0.), epoch(J2000), obliquity(0.), ascendingNode(0.), precessionRate(0.) {}
+	RotationElements(void) : period(1.), offset(0.), epoch(J2000), obliquity(0.), ascendingNode(0.), precessionRate(0.), siderealPeriod(0.) {}
 	float period;          // rotation period
 	float offset;          // rotation at epoch
 	double epoch;
@@ -68,13 +62,10 @@ public:
 class Ring
 {
 public:
-	Ring(double radiusMin,double radiusMax,const QString &texname);
-	~Ring(void);
-	void draw(StelPainter* painter, StelProjector::ModelViewTranformP transfo, double screenSz);
+	Ring(float radiusMin, float radiusMax,const QString &texname);
 	double getSize(void) const {return radiusMax;}
-private:
-	const double radiusMin;
-	const double radiusMax;
+	const float radiusMin;
+	const float radiusMax;
 	StelTextureSP tex;
 };
 
@@ -90,6 +81,7 @@ public:
 	       Vec3f color,
 	       float albedo,
 	       const QString& texMapName,
+		   const QString& normalMapName,
 	       posFuncType _coordFunc,
 	       void* userDataPtr,
 	       OsculatingFunctType *osculatingFunc,
@@ -183,7 +175,7 @@ public:
 				 float _obliquity, float _ascendingNode,
 				 float _precessionRate, double _siderealPeriod);
 	double getRotAscendingnode(void) const {return re.ascendingNode;}
-	double getRotObliquity(void) const {return re.obliquity;}
+	double getRotObliquity(double JDay) const;
 
 	//! Get the Planet position in the parent Planet ecliptic coordinate in AU
 	Vec3d getEclipticPos() const;
@@ -241,20 +233,22 @@ public:
 	static void setOrbitColor(const Vec3f& oc) {orbitColor = oc;}
 	static const Vec3f& getOrbitColor() {return orbitColor;}
 
+	//! Return the list of planets which project some shadow on this planet
+	QVector<const Planet*> getCandidatesForShadow() const;
+	
 protected:
 	static StelTextureSP texEarthShadow;     // for lunar eclipses
 
-	// draw earth shadow on moon for lunar eclipses
-	void drawEarthShadow(StelCore* core, StelPainter* sPainter);
-
+	void computeModelMatrix(Mat4d &result) const;
+	
 	// Return the information string "ready to print" :)
 	QString getSkyLabel(const StelCore* core) const;
 
 	// Draw the 3d model. Call the proper functions if there are rings etc..
-	void draw3dModel(StelCore* core, StelProjector::ModelViewTranformP transfo, float screenSz);
+	void draw3dModel(StelCore* core, StelProjector::ModelViewTranformP transfo, float screenSz, bool drawOnlyRing=false);
 
 	// Draw the 3D sphere
-	void drawSphere(StelPainter* painter, float screenSz);
+	void drawSphere(StelPainter* painter, float screenSz, bool drawOnlyRing=false);
 
 	// Draw the circle and name of the Planet
 	void drawHints(const StelCore* core, const QFont& planetNameFont);
@@ -262,6 +256,7 @@ protected:
 	QString englishName;             // english planet name
 	QString nameI18;                 // International translated name
 	QString texMapName;              // Texture file path	
+	QString normalMapName;              // Texture file path
 	int flagLighting;                // Set whether light computation has to be proceed
 	RotationElements re;             // Rotation param
 	double radius;                   // Planet radius in AU
@@ -276,6 +271,7 @@ protected:
 	Mat4d rotLocalToParent;
 	float axisRotation;              // Rotation angle of the Planet on it's axis
 	StelTextureSP texMap;            // Planet map texture
+	StelTextureSP normalMap;         // Planet normal map texture
 
 	Ring* rings;                     // Planet rings
 	double distance;                 // Temporary variable used to store the distance to a given point
@@ -299,6 +295,50 @@ protected:
 
 	static Vec3f labelColor;
 	static StelTextureSP hintCircleTex;
+	
+	// Shader-related variables
+	struct PlanetShaderVars {
+		int projectionMatrix;
+		int texCoord;
+		int unprojectedVertex;
+		int vertex;
+		int texture;
+		int lightDirection;
+		int eyeDirection;
+		int diffuseLight;
+		int ambientLight;
+		int shadowCount;
+		int shadowData;
+		int sunInfo;
+		
+		void initLocations(QOpenGLShaderProgram*);
+	};
+	static PlanetShaderVars planetShaderVars;
+	static QOpenGLShaderProgram* planetShaderProgram;
+
+	// Shader-related variables
+	struct RingPlanetShaderVars : public PlanetShaderVars {
+		// Rings-specific variables
+		int isRing;
+		int ring;
+		int outerRadius;
+		int innerRadius;
+		int ringS;
+	};
+	static RingPlanetShaderVars ringPlanetShaderVars;
+	static QOpenGLShaderProgram* ringPlanetShaderProgram;
+	
+	struct MoonShaderVars : public PlanetShaderVars {
+		// Moon-specific variables
+		int earthShadow;
+		int normalMap;
+	};
+	static MoonShaderVars moonShaderVars;
+	static QOpenGLShaderProgram* moonShaderProgram;
+	
+	static void initShader();
+	static void deinitShader();
+
 };
 
 #endif // _PLANET_HPP_

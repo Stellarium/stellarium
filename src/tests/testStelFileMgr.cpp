@@ -17,19 +17,19 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
+#include "tests/testStelFileMgr.hpp"
+
 #include <QObject>
 #include <QFileInfo>
 #include <QFile>
 #include <QDir>
 #include <QString>
 #include <QStringList>
-
 #include <QDebug>
 #include <QTest>
 #include <QRegExp>
 
 #include "StelFileMgr.hpp"
-#include "tests/testStelFileMgr.hpp"
 
 QTEST_MAIN(TestStelFileMgr)
 

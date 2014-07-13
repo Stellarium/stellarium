@@ -49,11 +49,13 @@
 #include <QUrlQuery>
 #include <QDir>
 
-MpcImportWindow::MpcImportWindow() :
-    downloadReply(0),
-    queryReply(0),
-    downloadProgressBar(0),
-    queryProgressBar(0)
+MpcImportWindow::MpcImportWindow()
+	: importType(ImportType())
+	, downloadReply(0)
+	, queryReply(0)
+	, downloadProgressBar(0)
+	, queryProgressBar(0)
+	, countdown(0)
 {
 	ui = new Ui_mpcImportWindow();
 	ssoManager = GETSTELMODULE(SolarSystemEditor);
@@ -440,11 +442,11 @@ SsoElements MpcImportWindow::readElementsFromString (QString elements)
 
 	switch (importType)
 	{
-	case MpcComets:
-		return ssoManager->readMpcOneLineCometElements(elements);
-	case MpcMinorPlanets:
-	default:
-		return ssoManager->readMpcOneLineMinorPlanetElements(elements);
+		case MpcComets:
+			return ssoManager->readMpcOneLineCometElements(elements);
+		case MpcMinorPlanets:
+		default:
+			return ssoManager->readMpcOneLineMinorPlanetElements(elements);
 	}
 }
 
@@ -454,11 +456,11 @@ QList<SsoElements> MpcImportWindow::readElementsFromFile(ImportType type, QStrin
 
 	switch (type)
 	{
-	case MpcComets:
-		return ssoManager->readMpcOneLineCometElementsFromFile(filePath);
-	case MpcMinorPlanets:
-	default:
-		return ssoManager->readMpcOneLineMinorPlanetElementsFromFile(filePath);
+		case MpcComets:
+			return ssoManager->readMpcOneLineCometElementsFromFile(filePath);
+		case MpcMinorPlanets:
+		default:
+			return ssoManager->readMpcOneLineMinorPlanetElementsFromFile(filePath);
 	}
 }
 
@@ -969,6 +971,7 @@ void MpcImportWindow::loadBookmarks()
 	//Initialize with hard-coded values
 	bookmarks[MpcMinorPlanets].insert("MPC's list of bright minor planets at opposition in 2011", "http://www.minorplanetcenter.net/iau/Ephemerides/Bright/2011/Soft00Bright.txt");
 	bookmarks[MpcMinorPlanets].insert("MPC's list of bright minor planets at opposition in 2013", "http://www.minorplanetcenter.net/iau/Ephemerides/Bright/2013/Soft00Bright.txt");
+	bookmarks[MpcMinorPlanets].insert("MPC's list of bright minor planets at opposition in 2014", "http://www.minorplanetcenter.net/iau/Ephemerides/Bright/2014/Soft00Bright.txt");
 	bookmarks[MpcMinorPlanets].insert("MPC's list of observable distant minor planets", "http://www.minorplanetcenter.net/iau/Ephemerides/Distant/Soft00Distant.txt");
 	bookmarks[MpcMinorPlanets].insert("MPCORB: near-Earth asteroids (NEAs)", "http://www.minorplanetcenter.net/iau/MPCORB/NEA.txt");
 	bookmarks[MpcMinorPlanets].insert("MPCORB: potentially hazardous asteroids (PHAs)", "http://www.minorplanetcenter.net/iau/MPCORB/PHA.txt");

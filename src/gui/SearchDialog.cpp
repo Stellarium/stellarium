@@ -37,9 +37,11 @@
 #include <QSettings>
 #include <QString>
 #include <QStringList>
+#include <QtAlgorithms>
 #include <QTextEdit>
 #include <QLineEdit>
 #include <QComboBox>
+#include <QMenu>
 
 #include "SimbadSearcher.hpp"
 
@@ -205,6 +207,7 @@ void SearchDialog::createDialogContent()
 	onSearchTextChanged(ui->lineEditSearchSkyObject->text());
 	connect(ui->lineEditSearchSkyObject, SIGNAL(returnPressed()), this, SLOT(gotoObject()));
 	connect(ui->lineEditSearchSkyObject, SIGNAL(selectionChanged()), this, SLOT(setHasSelectedFlag()));
+	connect(ui->lineEditSearchSkyObject, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(showContextMenu(QPoint)));
 
 	ui->lineEditSearchSkyObject->installEventFilter(this);
 	ui->RAAngleSpinBox->setDisplayFormat(AngleSpinBox::HMSLetters);
@@ -352,6 +355,12 @@ void SearchDialog::onSearchTextChanged(const QString& text)
 		// remove possible duplicates from completion list
 		matches.removeDuplicates();
 
+		matches.sort(Qt::CaseInsensitive);
+		// objects with short names should be searched first
+		// examples: Moon, Hydra (moon); Jupiter, Ghost of Jupiter
+		stringLengthCompare comparator;
+		qSort(matches.begin(), matches.end(), comparator);
+
 		ui->completionLabel->setValues(matches);
 		ui->completionLabel->selectFirst();
 
@@ -359,6 +368,7 @@ void SearchDialog::onSearchTextChanged(const QString& text)
 		ui->pushButtonGotoSearchSkyObject->setEnabled(true);
 	}
 }
+
 
 // Called when the current simbad query status changes
 void SearchDialog::onSimbadStatusChanged()
@@ -572,12 +582,12 @@ void SearchDialog::updateListWidget(int index)
 	bool englishNames = ui->searchInEnglishCheckBox->isChecked();
 	ui->objectsListWidget->addItems(objectMgr->listAllModuleObjects(moduleId, englishNames));
 	ui->objectsListWidget->sortItems(Qt::AscendingOrder);
-	connect(ui->objectsListWidget, SIGNAL(itemActivated(QListWidgetItem*)), this, SLOT(gotoObject(QListWidgetItem*)));
+	connect(ui->objectsListWidget, SIGNAL(itemClicked(QListWidgetItem*)), this, SLOT(gotoObject(QListWidgetItem*)));
 }
 
 void SearchDialog::updateListTab()
 {
-	if (StelApp::getInstance().getLocaleMgr().getAppLanguage() == "en")
+	if (StelApp::getInstance().getLocaleMgr().getAppLanguage().startsWith("en"))
 	{
 		// hide "names in English" checkbox
 		ui->searchInEnglishCheckBox->hide();
@@ -597,4 +607,20 @@ void SearchDialog::updateListTab()
 		}
 	}
 	updateListWidget(ui->objectTypeComboBox->currentIndex());
+}
+
+void SearchDialog::showContextMenu(const QPoint &pt)
+{
+	QMenu *menu = ui->lineEditSearchSkyObject->createStandardContextMenu();
+	menu->addSeparator();
+	menu->addAction(q_("Paste and Search"), this, SLOT(pasteAndGo()));
+	menu->exec(ui->lineEditSearchSkyObject->mapToGlobal(pt));
+	delete menu;
+}
+
+void SearchDialog::pasteAndGo()
+{
+	ui->lineEditSearchSkyObject->clear(); // clear current text
+	ui->lineEditSearchSkyObject->paste(); // paste text from clipboard
+	gotoObject(); // go to first finded object
 }

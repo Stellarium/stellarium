@@ -25,6 +25,7 @@
 #include "StelGuiItems.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelLocation.hpp"
+#include "StelMainView.hpp"
 #include "StelMovementMgr.hpp"
 #include "StelActionMgr.hpp"
 #include "StelProgressController.hpp"
@@ -68,6 +69,7 @@ void StelButton::initCtor(const QPixmap& apixOn,
 	opacity = 1.;
 	hoverOpacity = 0.;
 	action = aaction;
+	checked = false;
 
 	Q_ASSERT(!pixOn.isNull());
 	Q_ASSERT(!pixOff.isNull());
@@ -220,7 +222,9 @@ void StelButton::setBackgroundPixmap(const QPixmap &newBackground)
 	updateIcon();
 }
 
-LeftStelBar::LeftStelBar(QGraphicsItem* parent) : QGraphicsItem(parent)
+LeftStelBar::LeftStelBar(QGraphicsItem* parent)
+	: QGraphicsItem(parent)
+	, hideTimeLine(NULL)
 {
 	// Create the help label
 	helpLabel = new QGraphicsSimpleTextItem("", this);
@@ -297,6 +301,8 @@ void LeftStelBar::buttonHoverChanged(bool b)
 	{
 		helpLabel->setText("");
 	}
+	// Update the screen as soon as possible.
+	StelMainView::getInstance().thereWasAnEvent();
 }
 
 // Set the pen for all the sub elements
@@ -375,6 +381,7 @@ void BottomStelBar::addButton(StelButton* button, const QString& groupName, cons
 	updateButtonsGroups();
 
 	connect(button, SIGNAL(hoverChanged(bool)), this, SLOT(buttonHoverChanged(bool)));
+	emit sizeChanged();
 }
 
 StelButton* BottomStelBar::hideButton(const QString& actionName)
@@ -407,6 +414,7 @@ StelButton* BottomStelBar::hideButton(const QString& actionName)
 	bToRemove->setParentItem(NULL);
 	bToRemove->setVisible(false);
 	updateButtonsGroups();
+	emit sizeChanged();
 	return bToRemove;
 }
 
@@ -605,10 +613,12 @@ void BottomStelBar::updateText(bool updatePos)
 		if (confSettings->value("gui/flag_show_fov", true).toBool())
 		{
 			fov->setText(str);
+			fov->setToolTip(q_("Field of view"));
 		}
 		else
 		{
 			fov->setText("");
+			fov->setToolTip("");
 		}
 	}
 
@@ -621,10 +631,12 @@ void BottomStelBar::updateText(bool updatePos)
 		if (confSettings->value("gui/flag_show_fps", true).toBool())
 		{
 			fps->setText(str);
+			fps->setToolTip(q_("Frames per second"));
 		}
 		else
 		{
 			fps->setText("");
+			fps->setToolTip("");
 		}
 	}
 
@@ -706,6 +718,8 @@ void BottomStelBar::buttonHoverChanged(bool b)
 	{
 		helpLabel->setText("");
 	}
+	// Update the screen as soon as possible.
+	StelMainView::getInstance().thereWasAnEvent();
 }
 
 StelBarsPath::StelBarsPath(QGraphicsItem* parent) : QGraphicsPathItem(parent)

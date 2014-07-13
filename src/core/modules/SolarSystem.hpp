@@ -25,10 +25,11 @@
 #undef sun
 #endif
 
-#include <QFont>
 #include "StelObjectModule.hpp"
 #include "StelTextureTypes.hpp"
 #include "Planet.hpp"
+
+#include <QFont>
 
 class Orbit;
 class StelTranslator;
@@ -68,6 +69,8 @@ public:
 	//! - set display options from application settings
 	virtual void init();
 
+	virtual void deinit();
+	
 	//! Draw SolarSystem objects (planets).
 	//! @param core The StelCore object.
 	//! @return The maximum squared distance in pixels that any SolarSystem object
@@ -174,21 +177,41 @@ public slots:
 	void setFontSize(float newFontSize);
 
 	//! Set the color used to draw planet labels.
+	//! @param c The color of the planet labels
+	//! @code
+	//! // example of usage in scripts
+	//! SolarSystem.setLabelsColor(Vec3f(1.0,0.0,0.0));
+	//! @endcode
 	void setLabelsColor(const Vec3f& c);
 	//! Get the current color used to draw planet labels.
 	const Vec3f& getLabelsColor(void) const;
 
 	//! Set the color used to draw planet orbit lines.
+	//! @param c The color of the planet orbit lines
+	//! @code
+	//! // example of usage in scripts
+	//! SolarSystem.setOrbitsColor(Vec3f(1.0,0.0,0.0));
+	//! @endcode
 	void setOrbitsColor(const Vec3f& c);
 	//! Get the current color used to draw planet orbit lines.
 	Vec3f getOrbitsColor(void) const;
 
 	//! Set the color used to draw planet trails lines.
+	//! @param c The color of the planet trails lines
+	//! @code
+	//! // example of usage in scripts
+	//! SolarSystem.setTrailsColor(Vec3f(1.0,0.0,0.0));
+	//! @endcode
 	void setTrailsColor(const Vec3f& c) {trailColor=c;}
 	//! Get the current color used to draw planet trails lines.
 	Vec3f getTrailsColor() const {return trailColor;}
 
 	//! Set the color used to draw planet pointers.
+	//! @param c The color of the planet pointers
+	//! @code
+	//! // example of usage in scripts
+	//! SolarSystem.setPointersColor(Vec3f(1.0,0.0,0.0));
+	//! @endcode
 	void setPointersColor(const Vec3f& c) {pointerColor=c;}
 	//! Get the current color used to draw planet pointers.
 	Vec3f getPointersColor() const {return pointerColor;}

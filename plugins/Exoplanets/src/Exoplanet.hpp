@@ -28,7 +28,6 @@
 
 #include "StelObject.hpp"
 #include "StelTextureTypes.hpp"
-#include "StelPainter.hpp"
 #include "StelFader.hpp"
 
 typedef struct
@@ -85,7 +84,6 @@ public:
 	}
 	//! Get the visual magnitude
 	virtual float getVMagnitude(const StelCore* core) const;
-	virtual float getVMagnitudeWithExtinction(const StelCore *core) const;
 	//! Get the angular size of pulsar
 	virtual double getAngularSize(const StelCore* core) const;
 	//! Get the localized name of pulsar
@@ -100,7 +98,14 @@ public:
 
 	void update(double deltaTime);
 
-	int getCountExoplanets(void) {return EPCount;}
+	int getCountExoplanets(void) const
+	{
+		return EPCount;
+	}
+	int getCountHabitableExoplanets(void) const
+	{
+		return PHEPCount;
+	}
 
 private:
 	bool initialized;
@@ -113,10 +118,12 @@ private:
 	static Vec3f exoplanetMarkerColor;
 	static bool distributionMode;
 	static bool timelineMode;
+	static bool habitableMode;
 
 	void draw(StelCore* core, StelPainter *painter);
 
 	int EPCount;
+	int PHEPCount;
 
 	//! Variables for description of properties of exoplanets
 	QString designation;			//! The designation of the host star

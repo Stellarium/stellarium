@@ -146,6 +146,18 @@ void LocationDialog::updateFromProgram(const StelLocation& currentLocation)
 	{
 		setFieldsFromLocation(currentLocation);
 	}
+
+	LandscapeMgr *lmgr = GETSTELMODULE(LandscapeMgr);
+	if (lmgr->getFlagUseLightPollutionFromDatabase())
+	{
+		int bidx = currentLocation.bortleScaleIndex;
+		if (!currentLocation.planetName.contains("Earth")) // location not on Earth...
+			bidx = 1;
+		if (bidx<1) // ...or it observatory, or it unknown location
+			bidx = currentLocation.DEFAULT_BORTLE_SCALE_INDEX;
+		stelCore->getSkyDrawer()->setBortleScaleIndex(bidx);
+		lmgr->setAtmosphereBortleLightPollution(bidx);
+	}
 }
 
 void LocationDialog::disconnectEditSignals()
@@ -206,14 +218,15 @@ void LocationDialog::setFieldsFromLocation(const StelLocation& loc)
 
 	ui->deleteLocationFromListPushButton->setEnabled(StelApp::getInstance().getLocationMgr().canDeleteUserLocation(loc.getID()));
 
-	QSettings* conf = StelApp::getInstance().getSettings();
-	bool atmosphere = conf->value("landscape/flag_atmosphere", true).toBool();
-	bool fog = conf->value("landscape/flag_fog", true).toBool();
 	SolarSystem* ssm = GETSTELMODULE(SolarSystem);
 	PlanetP p = ssm->searchByEnglishName(loc.planetName);
 	LandscapeMgr* ls = GETSTELMODULE(LandscapeMgr);
-	ls->setFlagAtmosphere(p->hasAtmosphere() & atmosphere);
-	ls->setFlagFog(p->hasAtmosphere() & fog);
+	if (ls->getFlagAtmosphereAutoEnable())
+	{
+		QSettings* conf = StelApp::getInstance().getSettings();
+		ls->setFlagAtmosphere(p->hasAtmosphere() & conf->value("landscape/flag_atmosphere", true).toBool());
+		ls->setFlagFog(p->hasAtmosphere() & conf->value("landscape/flag_fog", true).toBool());
+	}
 
 	// Reactivate edit signals
 	connectEditSignals();

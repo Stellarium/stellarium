@@ -30,7 +30,6 @@
 #include "VecMath.hpp"
 
 #include <QFont>
-#include <QOpenGLFunctions_1_2>
 #include <QSettings>
 
 #define MIN_OCULARS_INI_VERSION 2
@@ -48,7 +47,7 @@ class StelButton;
 class StelAction;
 
 //! Main class of the Oculars plug-in.
-class Oculars : public StelModule, protected QOpenGLFunctions_1_2
+class Oculars : public StelModule
 {
 	Q_OBJECT
 	//BM: Temporary, until the GUI is finalized and some other method of getting
@@ -120,6 +119,9 @@ public slots:
 
 	void setFlagLimitMagnitude(const bool b);
 	bool getFlagLimitMagnitude(void) const;
+
+	void setFlagInitFovUsage(const bool b);
+	bool getFlagInitFovUsage(void) const;
 
 signals:
 	void selectedCCDChanged();
@@ -267,7 +269,9 @@ private:
 
 	//Reticle
 	StelTextureSP reticleTexture;
-	double actualFOV; //!< Holds the FOV of the ocular/tescope/lens cobination; what the screen is zoomed to.
+	double actualFOV;	//!< Holds the FOV of the ocular/tescope/lens cobination; what the screen is zoomed to.
+	double initialFOV;	//!< Holds the initial FOV
+	bool flagInitFOVUsage;	//!< Flag used to track if we use default initial FOV (value at the startup of planetarium).
 	double reticleRotation;
 };
 

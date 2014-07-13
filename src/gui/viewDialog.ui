@@ -379,13 +379,6 @@
               <height>150</height>
              </size>
             </property>
-            <property name="font">
-             <font>
-              <pointsize>10</pointsize>
-              <weight>50</weight>
-              <bold>false</bold>
-             </font>
-            </property>
             <property name="title">
              <string>Labels and Markers</string>
             </property>
@@ -500,13 +493,6 @@
           </item>
           <item row="0" column="1">
            <widget class="QGroupBox" name="planetsGroupBox">
-            <property name="font">
-             <font>
-              <pointsize>10</pointsize>
-              <weight>50</weight>
-              <bold>false</bold>
-             </font>
-            </property>
             <property name="title">
              <string>Planets and satellites</string>
             </property>
@@ -611,15 +597,17 @@
           </item>
           <item row="1" column="0">
            <widget class="QGroupBox" name="atmosphereGroupBox">
-            <property name="font">
-             <font>
-              <pointsize>10</pointsize>
-              <weight>50</weight>
-              <bold>false</bold>
-             </font>
+            <property name="toolTip">
+             <string>Show atmosphere</string>
             </property>
             <property name="title">
              <string>Atmosphere</string>
+            </property>
+            <property name="flat">
+             <bool>true</bool>
+            </property>
+            <property name="checkable">
+             <bool>true</bool>
             </property>
             <layout class="QVBoxLayout" name="verticalLayout_3">
              <property name="leftMargin">
@@ -635,9 +623,12 @@
               <number>0</number>
              </property>
              <item>
-              <widget class="QCheckBox" name="showAtmosphereCheckBox">
+              <widget class="QCheckBox" name="useLocationDataCheckBox">
+               <property name="toolTip">
+                <string>Use light pollution data from locations database and ignore settings for light pollution below</string>
+               </property>
                <property name="text">
-                <string>Show atmosphere</string>
+                <string>Light pollution data from locations database</string>
                </property>
               </widget>
              </item>
@@ -670,6 +661,9 @@
              </item>
              <item>
               <widget class="QPushButton" name="pushButtonAtmosphereDetails">
+               <property name="focusPolicy">
+                <enum>Qt::NoFocus</enum>
+               </property>
                <property name="toolTip">
                 <string>pressure, temperature, extinction coefficient</string>
                </property>
@@ -699,13 +693,6 @@
           </item>
           <item row="0" column="0" alignment="Qt::AlignTop">
            <widget class="QGroupBox" name="starGroupBox">
-            <property name="font">
-             <font>
-              <pointsize>10</pointsize>
-              <weight>50</weight>
-              <bold>false</bold>
-             </font>
-            </property>
             <property name="title">
              <string>Stars</string>
             </property>
@@ -1036,12 +1023,8 @@
               <verstretch>0</verstretch>
              </sizepolicy>
             </property>
-            <property name="font">
-             <font>
-              <pointsize>10</pointsize>
-              <weight>50</weight>
-              <bold>false</bold>
-             </font>
+            <property name="toolTip">
+             <string>Settings for sporadic meteors</string>
             </property>
             <property name="title">
              <string>Shooting Stars</string>
@@ -1063,154 +1046,50 @@
               <number>0</number>
              </property>
              <item>
-              <widget class="QFrame" name="frame_9">
-               <property name="frameShape">
-                <enum>QFrame::StyledPanel</enum>
+              <layout class="QFormLayout" name="formLayout">
+               <property name="fieldGrowthPolicy">
+                <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
                </property>
-               <layout class="QVBoxLayout" name="verticalLayout_4">
-                <property name="leftMargin">
-                 <number>0</number>
-                </property>
-                <property name="topMargin">
-                 <number>0</number>
-                </property>
-                <property name="rightMargin">
-                 <number>0</number>
-                </property>
-                <property name="bottomMargin">
-                 <number>0</number>
-                </property>
-                <item>
-                 <widget class="QLabel" name="label_14">
-                  <property name="toolTip">
-                   <string>Hourly zenith rate</string>
-                  </property>
-                  <property name="text">
-                   <string comment="Zenithal Hourly Rate">ZHR:</string>
-                  </property>
-                  <property name="textFormat">
-                   <enum>Qt::PlainText</enum>
-                  </property>
-                  <property name="alignment">
-                   <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
-                  </property>
-                 </widget>
-                </item>
-               </layout>
-              </widget>
-             </item>
-             <item>
-              <widget class="QFrame" name="frame_11">
-               <property name="frameShape">
-                <enum>QFrame::StyledPanel</enum>
-               </property>
-               <layout class="QVBoxLayout" name="verticalLayout_9">
-                <property name="leftMargin">
-                 <number>0</number>
-                </property>
-                <property name="topMargin">
-                 <number>0</number>
-                </property>
-                <property name="rightMargin">
-                 <number>0</number>
-                </property>
-                <property name="bottomMargin">
-                 <number>0</number>
-                </property>
-                <item alignment="Qt::AlignTop">
-                 <widget class="QFrame" name="frame_8">
-                  <property name="frameShape">
-                   <enum>QFrame::StyledPanel</enum>
-                  </property>
-                  <layout class="QHBoxLayout" name="horizontalLayout_7">
-                   <property name="leftMargin">
-                    <number>0</number>
-                   </property>
-                   <property name="topMargin">
-                    <number>0</number>
-                   </property>
-                   <property name="rightMargin">
-                    <number>0</number>
-                   </property>
-                   <property name="bottomMargin">
-                    <number>0</number>
-                   </property>
-                   <item>
-                    <widget class="QRadioButton" name="zhrNone">
-                     <property name="text">
-                      <string notr="true">0</string>
-                     </property>
-                    </widget>
-                   </item>
-                   <item>
-                    <widget class="QRadioButton" name="zhr10">
-                     <property name="text">
-                      <string notr="true">10</string>
-                     </property>
-                     <property name="checked">
-                      <bool>true</bool>
-                     </property>
-                    </widget>
-                   </item>
-                   <item>
-                    <widget class="QRadioButton" name="zhr80">
-                     <property name="text">
-                      <string notr="true">80</string>
-                     </property>
-                    </widget>
-                   </item>
-                   <item>
-                    <widget class="QRadioButton" name="zhr1000">
-                     <property name="text">
-                      <string>1000</string>
-                     </property>
-                    </widget>
-                   </item>
-                   <item>
-                    <widget class="QRadioButton" name="zhr10000">
-                     <property name="text">
-                      <string notr="true">10000</string>
-                     </property>
-                    </widget>
-                   </item>
-                   <item>
-                    <widget class="QRadioButton" name="zhr144000">
-                     <property name="text">
-                      <string notr="true">144000</string>
-                     </property>
-                    </widget>
-                   </item>
-                  </layout>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QLabel" name="zhrLabel">
-                  <property name="text">
-                   <string/>
-                  </property>
-                  <property name="textFormat">
-                   <enum>Qt::RichText</enum>
-                  </property>
-                  <property name="scaledContents">
-                   <bool>false</bool>
-                  </property>
-                 </widget>
-                </item>
-               </layout>
-              </widget>
-             </item>
-             <item>
-              <spacer name="horizontalSpacer">
-               <property name="orientation">
-                <enum>Qt::Horizontal</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>40</width>
-                 <height>20</height>
-                </size>
-               </property>
-              </spacer>
+               <item row="1" column="0">
+                <widget class="QLabel" name="label_14">
+                 <property name="toolTip">
+                  <string>Hourly zenith rate</string>
+                 </property>
+                 <property name="text">
+                  <string comment="Zenithal Hourly Rate">ZHR:</string>
+                 </property>
+                 <property name="textFormat">
+                  <enum>Qt::PlainText</enum>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="1">
+                <widget class="QSpinBox" name="zhrSpinBox">
+                 <property name="maximum">
+                  <number>240000</number>
+                 </property>
+                 <property name="value">
+                  <number>10</number>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="1">
+                <widget class="QLabel" name="zhrLabel">
+                 <property name="text">
+                  <string/>
+                 </property>
+                 <property name="textFormat">
+                  <enum>Qt::RichText</enum>
+                 </property>
+                 <property name="scaledContents">
+                  <bool>false</bool>
+                 </property>
+                </widget>
+               </item>
+              </layout>
              </item>
             </layout>
            </widget>
@@ -1228,13 +1107,6 @@
               <width>0</width>
               <height>0</height>
              </size>
-            </property>
-            <property name="font">
-             <font>
-              <pointsize>10</pointsize>
-              <weight>50</weight>
-              <bold>false</bold>
-             </font>
             </property>
             <property name="toolTip">
              <string>Limit Magnitudes (for unaided/binocular observers)</string>
@@ -1394,13 +1266,6 @@
           </property>
           <item row="0" column="2">
            <widget class="QGroupBox" name="constellationGroupBox">
-            <property name="font">
-             <font>
-              <pointsize>10</pointsize>
-              <weight>50</weight>
-              <bold>false</bold>
-             </font>
-            </property>
             <property name="title">
              <string>Constellations</string>
             </property>
@@ -1487,13 +1352,6 @@
           </item>
           <item row="0" column="0" colspan="2">
            <widget class="QGroupBox" name="celestialSphereGroupBox">
-            <property name="font">
-             <font>
-              <pointsize>10</pointsize>
-              <weight>50</weight>
-              <bold>false</bold>
-             </font>
-            </property>
             <property name="title">
              <string>Celestial Sphere</string>
             </property>
@@ -1809,13 +1667,6 @@
               <verstretch>0</verstretch>
              </sizepolicy>
             </property>
-            <property name="font">
-             <font>
-              <pointsize>10</pointsize>
-              <weight>50</weight>
-              <bold>false</bold>
-             </font>
-            </property>
             <property name="title">
              <string>Options</string>
             </property>
@@ -1972,13 +1823,6 @@
               <width>0</width>
               <height>0</height>
              </size>
-            </property>
-            <property name="font">
-             <font>
-              <pointsize>10</pointsize>
-              <weight>50</weight>
-              <bold>false</bold>
-             </font>
             </property>
             <property name="title">
              <string>Options</string>
@@ -2154,7 +1998,7 @@
   <tabstop>planetMarkerCheckBox</tabstop>
   <tabstop>planetOrbitCheckBox</tabstop>
   <tabstop>planetLightSpeedCheckBox</tabstop>
-  <tabstop>showAtmosphereCheckBox</tabstop>
+  <tabstop>useLocationDataCheckBox</tabstop>
   <tabstop>lightPollutionSpinBox</tabstop>
   <tabstop>starLabelCheckBox</tabstop>
   <tabstop>starsLabelsHorizontalSlider</tabstop>
@@ -2162,11 +2006,6 @@
   <tabstop>nebulasLabelsHorizontalSlider</tabstop>
   <tabstop>planetLabelCheckBox</tabstop>
   <tabstop>planetsLabelsHorizontalSlider</tabstop>
-  <tabstop>zhrNone</tabstop>
-  <tabstop>zhr10</tabstop>
-  <tabstop>zhr80</tabstop>
-  <tabstop>zhr10000</tabstop>
-  <tabstop>zhr144000</tabstop>
   <tabstop>showEquatorialJ2000GridCheckBox</tabstop>
   <tabstop>showEquatorialGridCheckBox</tabstop>
   <tabstop>showEclipticGridJ2000CheckBox</tabstop>

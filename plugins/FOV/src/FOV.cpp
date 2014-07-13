@@ -65,9 +65,9 @@ void FOV::init()
 	FOVdefault.clear();
 	FOVdefault << 0.5 << 180.0 << 90.0 << 60.0 << 45.0 << 20.0 << 10.0 << 5.0 << 2.0 << 1.0;
 
-	if (!conf->childGroups().contains("fov"))
+	if (!conf->childGroups().contains("FOV"))
 	{
-		qDebug() << "FOV::init() no fov section exists in main config file - creating with defaults";
+		qDebug() << "FOV: no fov section exists in main config file - creating with defaults";
 		restoreDefaultConfigIni();
 	}
 
@@ -118,7 +118,7 @@ void FOV::restoreDefaults(void)
 
 void FOV::restoreDefaultConfigIni(void)
 {
-	conf->beginGroup("fov");
+	conf->beginGroup("FOV");
 
 	// delete all existing FOV settings...
 	conf->remove("");
@@ -133,7 +133,7 @@ void FOV::restoreDefaultConfigIni(void)
 
 void FOV::readSettingsFromConfig(void)
 {
-	conf->beginGroup("fov");
+	conf->beginGroup("FOV");
 
 	for(int i=0; i<10; i++)
 	{
@@ -145,7 +145,7 @@ void FOV::readSettingsFromConfig(void)
 
 void FOV::saveSettingsToConfig(void)
 {
-	conf->beginGroup("fov");
+	conf->beginGroup("FOV");
 
 	for(int i=0; i<10; i++)
 	{

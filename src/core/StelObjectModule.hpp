@@ -20,12 +20,13 @@
 #ifndef _STELOBJECTMODULE_HPP_
 #define _STELOBJECTMODULE_HPP_
 
-#include <QList>
-#include <QString>
-#include <QStringList>
 #include "StelModule.hpp"
 #include "StelObjectType.hpp"
 #include "VecMath.hpp"
+
+#include <QList>
+#include <QString>
+#include <QStringList>
 
 //! @class StelObjectModule
 //! Specialization of StelModule which manages a collection of StelObject.

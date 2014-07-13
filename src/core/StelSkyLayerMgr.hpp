@@ -19,12 +19,12 @@
 #ifndef _STELSKYLAYERMGR_HPP_
 #define _STELSKYLAYERMGR_HPP_
 
+#include "StelModule.hpp"
+#include "StelSkyLayer.hpp"
+
 #include <QString>
 #include <QStringList>
 #include <QMap>
-
-#include "StelModule.hpp"
-#include "StelSkyLayer.hpp"
 
 class StelCore;
 class StelSkyImageTile;

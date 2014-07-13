@@ -165,14 +165,14 @@ private:
 	QGraphicsWidget* topLevelGraphicsWidget;
 
 	class SkyGui* skyGui;
-	
+
 	StelButton* buttonTimeRewind;
 	StelButton* buttonTimeRealTimeSpeed;
 	StelButton* buttonTimeCurrent;
 	StelButton* buttonTimeForward;
-	
+
 	StelButton* buttonGotoSelectedObject;
-	
+
 	LocationDialog* locationDialog;
 	HelpDialog* helpDialog;
 	DateTimeDialog* dateTimeDialog;
@@ -187,13 +187,12 @@ private:
 	bool flagShowFlipButtons;
 	StelButton* flipVert;
 	StelButton* flipHoriz;
-	
+
 	bool flagShowNebulaBackgroundButton;
 	StelButton* btShowNebulaeBackground;
 
 	bool initDone;
-	bool guiHidden;
-	
+
 	QSizeF savedProgressBarSize;
 
 	// Currently used StelStyle

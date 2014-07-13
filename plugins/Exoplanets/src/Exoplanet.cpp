@@ -16,6 +16,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
+#include "config.h"
+
 #include "Exoplanet.hpp"
 #include "Exoplanets.hpp"
 #include "StelObject.hpp"
@@ -40,11 +42,25 @@
 StelTextureSP Exoplanet::markerTexture;
 bool Exoplanet::distributionMode = false;
 bool Exoplanet::timelineMode = false;
+bool Exoplanet::habitableMode = false;
 Vec3f Exoplanet::exoplanetMarkerColor = Vec3f(0.4f,0.9f,0.5f);
 Vec3f Exoplanet::habitableExoplanetMarkerColor = Vec3f(1.f,0.5f,0.f);
 
 Exoplanet::Exoplanet(const QVariantMap& map)
-		: initialized(false)
+		: initialized(false),
+		  EPCount(0),
+		  PHEPCount(0),
+		  designation(""),
+		  RA(0.),
+		  DE(0.),
+		  distance(0.),
+		  stype(""),
+		  smass(0.),
+		  smetal(0.),
+		  Vmag(99.),
+		  sradius(0.),
+		  effectiveTemp(0),
+		  hasHabitableExoplanets(false)
 {
 	// return initialized if the mandatory fields are not present
 	if (!map.contains("designation"))
@@ -63,6 +79,7 @@ Exoplanet::Exoplanet(const QVariantMap& map)
 	hasHabitableExoplanets = map.value("hasHP", false).toBool();
 
 	EPCount=0;
+	PHEPCount=0;
 	if (map.contains("exoplanets"))
 	{
 		foreach(const QVariant &expl, map.value("exoplanets").toList())
@@ -80,6 +97,8 @@ Exoplanet::Exoplanet(const QVariantMap& map)
 			p.angleDistance = exoplanetMap.value("angleDistance", -1.f).toFloat();
 			p.discovered = exoplanetMap.value("discovered", 0).toInt();
 			p.hclass = exoplanetMap.value("hclass", "").toString();
+			if (!p.hclass.isEmpty())
+				PHEPCount++;
 			p.MSTemp = exoplanetMap.value("MSTemp", -1).toInt();
 			p.ESI = exoplanetMap.value("ESI", -1).toInt();
 			exoplanets.append(p);
@@ -177,12 +196,12 @@ QString Exoplanet::getInfoString(const StelCore* core, const InfoStringGroup& fl
 	// Ra/Dec etc.
 	oss << getPositionInfoString(core, flags);
 
-	if (flags&Extra)
+	if (flags&Extra && !stype.isEmpty())
 	{
 		oss << q_("Spectral Type: %1").arg(stype) << "<br>";
 	}
 
-	if (flags&Distance)
+	if (flags&Distance && distance>0)
 	{
 		oss << q_("Distance: %1 Light Years").arg(QString::number(distance/0.306601, 'f', 2)) << "<br>";
 	}
@@ -369,11 +388,6 @@ float Exoplanet::getVMagnitude(const StelCore* core) const
 	}
 }
 
-float Exoplanet::getVMagnitudeWithExtinction(const StelCore *core) const
-{
-	return getVMagnitude(core);
-}
-
 double Exoplanet::getAngularSize(const StelCore*) const
 {
 	return 0.0001;
@@ -420,9 +434,9 @@ void Exoplanet::draw(StelCore* core, StelPainter *painter)
 	if (hasHabitableExoplanets)
 		color = habitableExoplanetMarkerColor;
 
+	StelUtils::spheToRect(RA, DE, XYZ);
 	double mag = getVMagnitudeWithExtinction(core);
 
-	StelUtils::spheToRect(RA, DE, XYZ);
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_ONE, GL_ONE);
 	painter->setColor(color[0], color[1], color[2], 1);
@@ -434,6 +448,12 @@ void Exoplanet::draw(StelCore* core, StelPainter *painter)
 	else
 	{
 		visible = true;
+	}
+
+	if (habitableMode)
+	{
+		if (!hasHabitableExoplanets)
+			return;
 	}
 
 	Vec3d win;

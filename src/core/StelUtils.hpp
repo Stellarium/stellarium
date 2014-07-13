@@ -20,6 +20,8 @@
 #ifndef _STELUTILS_HPP_
 #define _STELUTILS_HPP_
 
+#include "config.h"
+
 #include "VecMath.hpp"
 
 #include <QVariantMap>
@@ -98,7 +100,7 @@ namespace StelUtils
 	QString radToDmsStr(const double angle, const bool decimal=false, const bool useD=false);
 
 	//! Convert a dms formatted string to an angle in radian
-	//! @param dsm The input string
+	//! @param s The input string
 	double dmsStrToRad(const QString& s);
 
 	//! Obtains a Vec3f from a string.
@@ -568,6 +570,30 @@ namespace StelUtils
 	template <typename T> int sign(T val) {
 		return (T(0) < val) - (val < T(0));
 	}
+	
+	//! Compute cosines and sines around a circle which is split in "segments" parts.
+	//! Values are stored in the global static array cos_sin_theta.
+	//! Used for the sin/cos values along a latitude circle, equator, etc. for a spherical mesh.
+	//! @param slices number of partitions (elsewhere called "segments") for the circle
+	float *ComputeCosSinTheta(const int slices);
+	
+	//! Compute cosines and sines around a half-circle which is split in "segments" parts.
+	//! Values are stored in the global static array cos_sin_rho.
+	//! Used for the sin/cos values along a meridian for a spherical mesh.
+	//! @param segments number of partitions (elsewhere called "stacks") for the half-circle
+	float *ComputeCosSinRho(const int segments);
+	
+	//! Compute cosines and sines around part of a circle (from top to bottom) which is split in "segments" parts.
+	//! Values are stored in the global static array cos_sin_rho.
+	//! Used for the sin/cos values along a meridian.
+	//! GZ: allow leaving away pole caps. The array now contains values for the region minAngle+segments*phi
+	//! @param dRho a difference angle between the stops
+	//! @param segments number of segments
+	//! @param minAngle start angle inside the half-circle. maxAngle=minAngle+segments*phi
+	float* ComputeCosSinRhoZone(const float dRho, const int segments, const float minAngle);
+
+	//! Uncompress gzip or zlib compressed data.
+	QByteArray uncompress(const QByteArray& data);
 }
 
 #endif // _STELUTILS_HPP_

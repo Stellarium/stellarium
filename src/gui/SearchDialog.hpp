@@ -30,6 +30,14 @@
 // pre declaration of the ui class
 class Ui_searchDialogForm;
 
+struct stringLengthCompare
+{
+	bool operator()(const QString &s1, const QString &s2) const
+	{
+		return s1.length() < s2.length();
+	}
+};
+
 //! @class CompletionLabel
 //! Display a list of results matching the search string, and allow to
 //! tab through those selections.
@@ -72,7 +80,7 @@ public:
 	//! Notify that the application style changed
 	void styleChanged();
 	bool eventFilter(QObject *object, QEvent *event);
-	
+
 public slots:
 	void retranslate();
 	//! This style only displays the text search field and the search button
@@ -118,6 +126,10 @@ private slots:
 	// retranslate/recreate tab
 	void updateListTab();
 
+	void showContextMenu(const QPoint &pt);
+
+	void pasteAndGo();
+
 private:
 	class SimbadSearcher* simbadSearcher;
 	class SimbadLookupReply* simbadReply;
@@ -129,7 +141,7 @@ private:
 	QHash<QString, QString> greekLetters;
 	//! Used when substituting text with a Greek letter.
 	bool flagHasSelectedText;
-	
+
 	bool useStartOfWords;
 	bool useSimbad;
 	//! URL of the server used for SIMBAD queries. 

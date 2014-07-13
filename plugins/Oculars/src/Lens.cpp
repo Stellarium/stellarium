@@ -22,13 +22,14 @@
 #include <QSettings>
 
 Lens::Lens()
+	: m_multipler(0.)
 {
 }
 
 Lens::Lens(const QObject& other)
+	: m_name(other.property("name").toString())
+	, m_multipler(other.property("multipler").toDouble())
 {
-    this->m_multipler = other.property("multipler").toDouble();
-    this->m_name = other.property("name").toString();
 }
 
 Lens::~Lens()

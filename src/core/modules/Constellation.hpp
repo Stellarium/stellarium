@@ -21,15 +21,15 @@
 #ifndef _CONSTELLATION_HPP_
 #define _CONSTELLATION_HPP_
 
-#include <vector>
-#include <QString>
-#include <QFont>
-
 #include "StelObject.hpp"
 #include "StelUtils.hpp"
 #include "StelFader.hpp"
 #include "StelTextureTypes.hpp"
 #include "StelSphereGeometry.hpp"
+
+#include <vector>
+#include <QString>
+#include <QFont>
 
 class StarMgr;
 class StelPainter;

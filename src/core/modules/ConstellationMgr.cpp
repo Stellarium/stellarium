@@ -18,14 +18,6 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#include <vector>
-#include <QDebug>
-#include <QFile>
-#include <QSettings>
-#include <QRegExp>
-#include <QString>
-#include <QStringList>
-#include <QDir>
 
 #include "ConstellationMgr.hpp"
 #include "Constellation.hpp"
@@ -42,6 +34,15 @@
 #include "StelCore.hpp"
 #include "StelPainter.hpp"
 #include "StelSkyDrawer.hpp"
+
+#include <vector>
+#include <QDebug>
+#include <QFile>
+#include <QSettings>
+#include <QRegExp>
+#include <QString>
+#include <QStringList>
+#include <QDir>
 
 using namespace std;
 

@@ -20,10 +20,10 @@
 #ifndef _STELSKYDRAWER_HPP_
 #define _STELSKYDRAWER_HPP_
 
+#include "RefractionExtinction.hpp"
 #include "StelTextureTypes.hpp"
 #include "StelProjectorType.hpp"
 #include "VecMath.hpp"
-#include "RefractionExtinction.hpp"
 
 #include <QObject>
 

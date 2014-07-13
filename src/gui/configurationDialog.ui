@@ -148,7 +148,7 @@
       <item row="1" column="0">
        <widget class="QStackedWidget" name="configurationStackedWidget">
         <property name="currentIndex">
-         <number>0</number>
+         <number>3</number>
         </property>
         <widget class="QWidget" name="page">
          <layout class="QVBoxLayout" name="verticalLayout_10">
@@ -965,7 +965,14 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QComboBox" name="deltaTAlgorithmComboBox"/>
+                   <widget class="QComboBox" name="deltaTAlgorithmComboBox">
+                    <property name="editable">
+                     <bool>true</bool>
+                    </property>
+                    <property name="insertPolicy">
+                     <enum>QComboBox::NoInsert</enum>
+                    </property>
+                   </widget>
                   </item>
                   <item>
                    <widget class="QPushButton" name="pushButtonCustomDeltaTEquationDialog">
@@ -1053,11 +1060,17 @@
             <layout class="QGridLayout" name="gridLayoutOptions">
              <item row="0" column="0">
               <widget class="QCheckBox" name="sphericMirrorCheckbox">
+               <property name="enabled">
+                <bool>false</bool>
+               </property>
                <property name="toolTip">
                 <string>Spheric mirror distortion is used when projecting Stellarium onto a spheric mirror for low-cost planetarium systems.</string>
                </property>
                <property name="text">
                 <string>Spheric mirror distortion</string>
+               </property>
+               <property name="checkable">
+                <bool>true</bool>
                </property>
               </widget>
              </item>
@@ -1122,12 +1135,12 @@
               </widget>
              </item>
              <item row="4" column="0">
-              <widget class="QCheckBox" name="renderSolarShadowsCheckbox">
+              <widget class="QCheckBox" name="autoEnableAtmosphereCheckBox">
                <property name="toolTip">
-                <string>Display solar shadows on planets and moons (For that feature needed OpenGL version 2 or higher)</string>
+                <string>Auto-enabling of the atmosphere for bodies with atmosphere in location window</string>
                </property>
                <property name="text">
-                <string>Render Solar Shadows</string>
+                <string>Auto-enabling for the atmosphere</string>
                </property>
               </widget>
              </item>
@@ -1653,7 +1666,6 @@
   <tabstop>gravityLabelCheckbox</tabstop>
   <tabstop>selectSingleConstellationButton</tabstop>
   <tabstop>autoZoomResetsDirectionCheckbox</tabstop>
-  <tabstop>renderSolarShadowsCheckbox</tabstop>
   <tabstop>screenshotBrowseButton</tabstop>
   <tabstop>screenshotDirEdit</tabstop>
   <tabstop>invertScreenShotColorsCheckBox</tabstop>

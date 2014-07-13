@@ -19,6 +19,8 @@
 #ifndef _STELLOCATION_HPP_
 #define _STELLOCATION_HPP_
 
+#include "config.h"
+
 #include <QString>
 
 //! @class StelLocation
@@ -26,7 +28,7 @@
 class StelLocation
 {
 public:
-	StelLocation() : longitude(0.f), latitude(0.f), altitude(0), bortleScaleIndex(2.f), role('X'), isUserLocation(true) {;}
+	StelLocation() : longitude(0.f), latitude(0.f), altitude(0), bortleScaleIndex(2.f), population(0.f), role('X'), isUserLocation(true) {;}
 
 	//! Return a short string which can be used in a list view.
 	QString getID() const;
@@ -74,6 +76,8 @@ public:
 
 	//! Used privately by the StelLocationMgr
 	bool isUserLocation;
+
+	static const int DEFAULT_BORTLE_SCALE_INDEX;
 };
 
 //! Serialize the passed StelLocation into a binary blob.

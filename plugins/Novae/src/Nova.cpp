@@ -16,6 +16,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
+#include "config.h"
+
 #include "Nova.hpp"
 #include "StelObject.hpp"
 #include "StelApp.hpp"
@@ -36,7 +38,20 @@
 #include <QList>
 
 Nova::Nova(const QVariantMap& map)
-		: initialized(false)
+		: initialized(false),
+		  designation(""),
+		  novaName(""),
+		  novaType(""),
+		  maxMagnitude(21.),
+		  minMagnitude(21.),
+		  peakJD(0.),
+		  m2(-1),
+		  m3(-1),
+		  m6(-1),
+		  m9(-1),
+		  RA(0.),
+		  Dec(0.),
+		  distance(0.)
 {
 	// return initialized if the mandatory fields are not present
 	if (!map.contains("designation"))

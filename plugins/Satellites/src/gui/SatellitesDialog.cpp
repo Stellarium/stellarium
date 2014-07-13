@@ -43,11 +43,12 @@
 #include "StelTranslator.hpp"
 #include "StelActionMgr.hpp"
 
-SatellitesDialog::SatellitesDialog() :
-    updateTimer(0),
-    importWindow(0),
-    filterModel(0),
-    checkStateRole(Qt::UserRole)
+SatellitesDialog::SatellitesDialog()
+	: satelliteModified(false)
+	, updateTimer(0)
+	, importWindow(0)
+	, filterModel(0)
+	, checkStateRole(Qt::UserRole)
 {
 	ui = new Ui_satellitesDialog;
 }
@@ -687,14 +688,12 @@ void SatellitesDialog::populateSourcesList()
 }
 
 void SatellitesDialog::addSpecialGroupItem()
-{
-	if (ui->groupsListWidget->count() == 0)
-		return;
-	
+{	
 	// TRANSLATORS: Displayed in the satellite group selection box.
 	QListWidgetItem* item = new QListWidgetItem(q_("New group..."));
 	item->setFlags(Qt::ItemIsEnabled|Qt::ItemIsEditable|Qt::ItemIsSelectable);
-	QFont font = ui->groupsListWidget->item(0)->font();
+	// Assuming this is also the font used for the list items...
+	QFont font = ui->groupsListWidget->font();
 	font.setItalic(true);
 	item->setFont(font);
 	ui->groupsListWidget->insertItem(0, item);

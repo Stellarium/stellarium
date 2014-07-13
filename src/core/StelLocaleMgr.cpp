@@ -34,7 +34,12 @@
 
 QMap<QString, QString> StelLocaleMgr::countryCodeToStringMap;
 
-StelLocaleMgr::StelLocaleMgr() : skyTranslator(NULL), GMTShift(0)
+StelLocaleMgr::StelLocaleMgr()
+	: skyTranslator(NULL)
+	, timeFormat()
+	, dateFormat()
+	, timeZoneMode()
+	, GMTShift(0)
 {
 	//generateCountryList();
 
@@ -47,11 +52,13 @@ StelLocaleMgr::StelLocaleMgr() : skyTranslator(NULL), GMTShift(0)
 	}
 
 	QFile file(path);
-	file.open(QIODevice::ReadOnly);
-	QDataStream in(&file);	// read the data serialized from the file
-	in.setVersion(QDataStream::Qt_4_5);
-	in >> countryCodeToStringMap;
-	file.close();
+	if(file.open(QIODevice::ReadOnly))
+	{
+		QDataStream in(&file);	// read the data serialized from the file
+		in.setVersion(QDataStream::Qt_4_5);
+		in >> countryCodeToStringMap;
+		file.close();
+	}
 }
 
 
@@ -67,23 +74,27 @@ void StelLocaleMgr::generateCountryList()
 	// Load ISO 3166-1 two-letter country codes from file (slow)
 	// The format is "[code][tab][country name containing spaces][newline]"
 	QFile textFile("data/iso3166-1-alpha-2.utf8");
-	textFile.open(QFile::ReadOnly | QFile::Text);
-	QTextStream list(&textFile);
-	QString line;
-	while(!(line = list.readLine()).isNull())
+	if(textFile.open(QFile::ReadOnly | QFile::Text))
 	{
-		qDebug() << line.section(QChar('\t'), 0, 0) << ":" << line.section(QChar('\t'), 1, 1);
-		countryCodeToStringMap.insert(line.section(QChar('\t'), 0, 0), line.section(QChar('\t'), 1, 1));
+		QTextStream list(&textFile);
+		QString line;
+		while(!(line = list.readLine()).isNull())
+		{
+			qDebug() << line.section(QChar('\t'), 0, 0) << ":" << line.section(QChar('\t'), 1, 1);
+			countryCodeToStringMap.insert(line.section(QChar('\t'), 0, 0), line.section(QChar('\t'), 1, 1));
+		}
+		textFile.close();
 	}
-	textFile.close();
 
 	// Save to binary file
 	QFile binaryFile("data/countryCodes.dat");
-	binaryFile.open(QIODevice::WriteOnly);
-	QDataStream out(&binaryFile);    // save the data serialized to the file
-	out.setVersion(QDataStream::Qt_4_5);
-	out << countryCodeToStringMap;
-	binaryFile.close();
+	if(binaryFile.open(QIODevice::WriteOnly))
+	{
+		QDataStream out(&binaryFile);    // save the data serialized to the file
+		out.setVersion(QDataStream::Qt_4_5);
+		out << countryCodeToStringMap;
+		binaryFile.close();
+	}
 }
 
 void StelLocaleMgr::init()
@@ -103,7 +114,11 @@ void StelLocaleMgr::init()
 	{
 		timeZoneMode = STzSystemDefault;
 		// Set the program global intern timezones variables from the system locale
+		#ifdef _MSC_BUILD
+		_tzset();
+		#else
 		tzset();
+		#endif
 	}
 	else
 	{
@@ -261,14 +276,14 @@ QString StelLocaleMgr::getPrintableTimeLocal(double JD) const
 	switch (timeFormat)
 	{
 		case STimeSystemDefault:
-		return t.toString();
+			return t.toString();
 		case STime24h:
-		return t.toString("hh:mm:ss");
+			return t.toString("hh:mm:ss");
 		case STime12h:
-		return t.toString("hh:mm:ss ap");
+			return t.toString("hh:mm:ss ap");
 		default:
 			qWarning() << "WARNING: unknown date format, fallback to system default";
-		return t.toString(Qt::LocaleDate);
+			return t.toString(Qt::LocaleDate);
 	}
 }
 
@@ -320,9 +335,14 @@ void StelLocaleMgr::setCustomTzName(const QString& tzname)
 	if( customTzName != "")
 	{
 		// set the TZ environement variable and update c locale stuff
+		#ifdef _MSC_BUILD
+		_putenv(_strdup(qPrintable("TZ=" + customTzName)));
+		_tzset();
+		#else
 		putenv(strdup(qPrintable("TZ=" + customTzName)));
 		tzset();
-	}
+		#endif
+    }
 }
 
 float StelLocaleMgr::getGMTShift(double JD) const

@@ -17,6 +17,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
+#include "StelUtils.hpp"
+
 #include <cstdlib>
 #include <QCoreApplication>
 #include <QFileInfo>
@@ -24,8 +26,6 @@
 #include <QString>
 #include <QDebug>
 #include <QStandardPaths>
-
-#include "StelUtils.hpp"
 
 #include <stdio.h>
 
@@ -126,8 +126,13 @@ void StelFileMgr::init()
 	// Then add the installation directory to the search path
 	fileLocations.append(installDir);
 
+	QString screenshotDirSuffix = "/Stellarium";
 	if (!QStandardPaths::standardLocations(QStandardPaths::PicturesLocation).isEmpty())
-		screenshotDir = QStandardPaths::standardLocations(QStandardPaths::PicturesLocation)[0];
+		screenshotDir = QStandardPaths::standardLocations(QStandardPaths::PicturesLocation)[0].append(screenshotDirSuffix);
+	else
+		screenshotDir = userDir.append(screenshotDirSuffix);
+
+	makeSureDirExistsAndIsWritable(screenshotDir);
 }
 
 

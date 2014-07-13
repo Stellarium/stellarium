@@ -22,3 +22,4 @@ RemoveShortcutsConfig=Remove shortcut's configuration file
 LastRunLog=Last run log
 ChangeLog=Change log
 FallbackMode=(fallback mode)
+RedistRun=Installing Microsoft's C/C++ runtime...

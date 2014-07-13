@@ -44,35 +44,26 @@
 ScreenImage::ScreenImage(const QString& filename, float x, float y, bool show, float scale, float alpha, float fadeDuration)
 	: tex(NULL), maxAlpha(alpha)
 {
-	try
-	{
-		QString path = StelFileMgr::findFile("scripts/" + filename);
-		QPixmap pm(path);
-		tex = StelMainView::getInstance().scene()->addPixmap(pm.scaled(pm.size()*scale));
-		tex->setPos(x, y);
+	QPixmap pm(filename);
+	tex = StelMainView::getInstance().scene()->addPixmap(pm.scaled(pm.size()*scale));
+	tex->setPos(x, y);
 
-		anim = new QGraphicsItemAnimation();
-		moveTimer = new QTimeLine();
-		moveTimer->setCurveShape(QTimeLine::LinearCurve);
-		anim->setTimeLine(moveTimer);
-		anim->setItem(tex);
+	anim = new QGraphicsItemAnimation();
+	moveTimer = new QTimeLine();
+	moveTimer->setCurveShape(QTimeLine::LinearCurve);
+	anim->setTimeLine(moveTimer);
+	anim->setItem(tex);
 
-		fadeTimer = new QTimeLine();
-		fadeTimer->setCurveShape(QTimeLine::LinearCurve);
-		setFadeDuration(fadeDuration);
-		connect(fadeTimer, SIGNAL(valueChanged(qreal)), this, SLOT(setOpacity(qreal)));
+	fadeTimer = new QTimeLine();
+	fadeTimer->setCurveShape(QTimeLine::LinearCurve);
+	setFadeDuration(fadeDuration);
+	connect(fadeTimer, SIGNAL(valueChanged(qreal)), this, SLOT(setOpacity(qreal)));
 
-
-		// set inital displayed state
-		if (show)
-			tex->setOpacity(maxAlpha);
-		else
-			tex->setOpacity(0.);
-	}
-	catch (std::runtime_error& e)
-	{
-		qWarning() << "Failed to create ScreenImage: " << e.what();
-	}
+	// set inital displayed state
+	if (show)
+		tex->setOpacity(maxAlpha);
+	else
+		tex->setOpacity(0.);
 }
 
 ScreenImage::~ScreenImage()
@@ -210,11 +201,19 @@ void ScreenImageMgr::createScreenImage(const QString& id, const QString& filenam
 	if (allScreenImages.contains(id))
 		deleteImage(id);
 
-	ScreenImage* i = new ScreenImage(filename, x, y, visible, scale, alpha, fadeDuration);
-	if (i==NULL)
-		return;
+	QString path = StelFileMgr::findFile("scripts/" + filename);
+	if (!path.isEmpty())
+	{
+		ScreenImage* i = new ScreenImage(path, x, y, visible, scale, alpha, fadeDuration);
+		if (i==NULL)
+			return;
 
-	allScreenImages[id] = i;
+		allScreenImages[id] = i;
+	}
+	else
+	{
+		qWarning() << "Failed to create ScreenImage: file not exists";
+	}
 }
 
 void ScreenImageMgr::deleteImage(const QString& id)

@@ -23,6 +23,7 @@
 #include "StelApp.hpp"
 #include "StelGui.hpp"
 #include "StelCore.hpp"
+#include "StelMainView.hpp"
 #include <QGraphicsView>
 #include <QDebug>
 #include <QTimeLine>
@@ -113,7 +114,11 @@ const QString InfoPanel::getSelectedText(void)
 	return toPlainText();
 }
 
-SkyGui::SkyGui(QGraphicsItem * parent): QGraphicsWidget(parent), stelGui(NULL)
+SkyGui::SkyGui(QGraphicsItem * parent)
+	: QGraphicsWidget(parent)
+	, btHorizAutoHide(NULL)
+	, btVertAutoHide(NULL)
+	, stelGui(NULL)
 {
 	setObjectName("StelSkyGui");
 
@@ -191,6 +196,7 @@ void SkyGui::init(StelGui* astelGui)
 	buttonBarPath->setZValue(-0.1);
 	updateBarsPos();
 	connect(&StelApp::getInstance(), SIGNAL(colorSchemeChanged(const QString&)), this, SLOT(setStelStyle(const QString&)));
+	connect(buttonBar, SIGNAL(sizeChanged()), this, SLOT(updateBarsPos()));
 }
 
 void SkyGui::resizeEvent(QGraphicsSceneResizeEvent* event)
@@ -234,11 +240,21 @@ void SkyGui::hoverMoveEvent(QGraphicsSceneHoverEvent* event)
 	}
 }
 
+int SkyGui::getSkyGuiWidth() const
+{
+	return geometry().width();
+}
+
+int SkyGui::getSkyGuiHeight() const
+{
+	return geometry().height();
+}
+
 //! Update the position of the button bars in the main window
 void SkyGui::updateBarsPos()
 {
-	const int ww = geometry().width();
-	const int hh = geometry().height();
+	const int ww = getSkyGuiWidth();
+	const int hh = getSkyGuiHeight();
 	bool updatePath = false;
 
 	// Use a position cache to avoid useless redraw triggered by the position set if the bars don't move
@@ -278,6 +294,9 @@ void SkyGui::updateBarsPos()
 	autoHidebts->setPos(0, hh-autoHidebts->childrenBoundingRect().height()+1);
 	double opacity = qMax(animLeftBarTimeLine->currentValue(), animBottomBarTimeLine->currentValue());
 	autoHidebts->setOpacity(opacity < 0.01 ? 0.01 : opacity);	// Work around a qt bug
+
+	// Update the screen as soon as possible.
+	StelMainView::getInstance().thereWasAnEvent();
 }
 
 void SkyGui::setStelStyle(const QString& style)

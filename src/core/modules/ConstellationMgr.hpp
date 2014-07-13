@@ -21,14 +21,14 @@
 #ifndef _CONSTELLATIONMGR_HPP_
 #define _CONSTELLATIONMGR_HPP_
 
+#include "StelObjectType.hpp"
+#include "StelObjectModule.hpp"
+#include "StelProjectorType.hpp"
+
 #include <vector>
 #include <QString>
 #include <QStringList>
 #include <QFont>
-
-#include "StelObjectType.hpp"
-#include "StelObjectModule.hpp"
-#include "StelProjectorType.hpp"
 
 class StelToneReproducer;
 class StarMgr;
@@ -158,6 +158,11 @@ public slots:
 	double getArtIntensity() const;
 
 	//! Define boundary color
+	//! @param color The color of boundaries
+	//! @code
+	//! // example of usage in scripts
+	//! ConstellationMgr.setBoundariesColor(Vec3f(1.0,0.0,0.0));
+	//! @endcode
 	void setBoundariesColor(const Vec3f& color);
 	//! Get current boundary color
 	Vec3f getBoundariesColor() const;
@@ -173,6 +178,11 @@ public slots:
 	bool getFlagIsolateSelected(void) const;
 
 	//! Define line color
+	//! @param color The color of lines
+	//! @code
+	//! // example of usage in scripts
+	//! ConstellationMgr.setLinesColor(Vec3f(1.0,0.0,0.0));
+	//! @endcode
 	void setLinesColor(const Vec3f& color);
 	//! Get line color
 	Vec3f getLinesColor() const;
@@ -183,6 +193,11 @@ public slots:
 	bool getFlagLines(void) const;
 
 	//! Set label color for names
+	//! @param color The color of labels
+	//! @code
+	//! // example of usage in scripts
+	//! ConstellationMgr.setLabelsColor(Vec3f(1.0,0.0,0.0));
+	//! @endcode
 	void setLabelsColor(const Vec3f& color);
 	//! Get label color for names
 	Vec3f getLabelsColor() const;

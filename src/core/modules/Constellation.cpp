@@ -18,12 +18,6 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#include <algorithm>
-#include <QString>
-#include <QTextStream>
-#include <QDebug>
-#include <QFontMetrics>
-
 #include "StelProjector.hpp"
 #include "Constellation.hpp"
 #include "StarMgr.hpp"
@@ -33,12 +27,20 @@
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 
+#include <algorithm>
+#include <QString>
+#include <QTextStream>
+#include <QDebug>
+#include <QFontMetrics>
+
 Vec3f Constellation::lineColor = Vec3f(0.4,0.4,0.8);
 Vec3f Constellation::labelColor = Vec3f(0.4,0.4,0.8);
 Vec3f Constellation::boundaryColor = Vec3f(0.8,0.3,0.3);
 bool Constellation::singleSelected = false;
 
-Constellation::Constellation() : asterism(NULL)
+Constellation::Constellation()
+	: numberOfSegments(0)
+	, asterism(NULL)
 {
 }
 

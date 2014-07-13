@@ -20,23 +20,6 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#include <QTextStream>
-#include <QFile>
-#include <QSettings>
-#include <QString>
-#include <QRegExp>
-#include <QDebug>
-#include <QFileInfo>
-#include <QDir>
-#include <QCryptographicHash>
-
-#include <errno.h>
-#ifndef Q_OS_WIN
-#include <unistd.h>
-#else
-#include <winsock2.h>
-#include "kdewin32/unistd.h"
-#endif
 
 #include "StelProjector.hpp"
 #include "StarMgr.hpp"
@@ -63,6 +46,17 @@
 #include "StelSkyDrawer.hpp"
 #include "RefractionExtinction.hpp"
 
+#include <QTextStream>
+#include <QFile>
+#include <QSettings>
+#include <QString>
+#include <QRegExp>
+#include <QDebug>
+#include <QFileInfo>
+#include <QDir>
+#include <QCryptographicHash>
+
+#include <errno.h>
 
 static QStringList spectral_array;
 static QStringList component_array;
@@ -70,7 +64,7 @@ static QStringList component_array;
 // This number must be incremented each time the content or file format of the stars catalogs change
 // It can also be incremented when the defaultStarsConfig.json file change.
 // It should always matchs the version field of the defaultStarsConfig.json file
-static const int StarCatalogFormatVersion = 5;
+static const int StarCatalogFormatVersion = 6;
 
 // Initialise statics
 bool StarMgr::flagSciNames = true;
@@ -129,7 +123,11 @@ void StarMgr::initTriangle(int lev,int index, const Vec3f &c0, const Vec3f &c1, 
 }
 
 
-StarMgr::StarMgr(void) : hipIndex(new HipIndexStruct[NR_OF_HIP+1])
+StarMgr::StarMgr(void)
+	: flagStarName(false)
+	, labelsAmount(0.)
+	, gravityLabel(false)
+	, hipIndex(new HipIndexStruct[NR_OF_HIP+1])
 {
 	setObjectName("StarMgr");
 	if (hipIndex == 0)
@@ -300,9 +298,11 @@ void StarMgr::init()
 	}
 
 	QFile fic(starConfigFileFullPath);
-	fic.open(QIODevice::ReadOnly);
-	starSettings = StelJsonParser::parse(&fic).toMap();
-	fic.close();
+	if(fic.open(QIODevice::ReadOnly))
+	{
+		starSettings = StelJsonParser::parse(&fic).toMap();
+		fic.close();
+	}
 
 	// Increment the 1 each time any star catalog file change
 	if (starSettings.value("version").toInt()!=StarCatalogFormatVersion)
@@ -311,9 +311,11 @@ void StarMgr::init()
 		fic.remove();
 		copyDefaultConfigFile();
 		QFile fic2(starConfigFileFullPath);
-		fic2.open(QIODevice::ReadOnly);
-		starSettings = StelJsonParser::parse(&fic2).toMap();
-		fic2.close();
+		if(fic2.open(QIODevice::ReadOnly))
+		{
+			starSettings = StelJsonParser::parse(&fic2).toMap();
+			fic2.close();
+		}
 	}
 
 	loadData(starSettings);
@@ -405,38 +407,40 @@ bool StarMgr::checkAndLoadCatalog(const QVariantMap& catDesc)
 		qWarning() << "Found file " << QDir::toNativeSeparators(catalogFilePath) << ", checking md5sum..";
 
 		QFile fic(catalogFilePath);
-		fic.open(QIODevice::ReadOnly | QIODevice::Unbuffered);
-		// Compute the MD5 sum
-		QCryptographicHash md5Hash(QCryptographicHash::Md5);
-		const qint64 cat_sz = fic.size();
-		qint64 maxStarBufMd5 = qMin(cat_sz, 9223372036854775807LL);
-		uchar *cat = maxStarBufMd5 ? fic.map(0, maxStarBufMd5) : NULL;
-		if (!cat)
+		if(fic.open(QIODevice::ReadOnly | QIODevice::Unbuffered))
 		{
-			// The OS was not able to map the file, revert to slower not mmap based method
-			static const qint64 maxStarBufMd5 = 1024*1024*8;
-			char* mmd5buf = (char*)malloc(maxStarBufMd5);
-			while (!fic.atEnd())
+			// Compute the MD5 sum
+			QCryptographicHash md5Hash(QCryptographicHash::Md5);
+			const qint64 cat_sz = fic.size();
+			qint64 maxStarBufMd5 = qMin(cat_sz, 9223372036854775807LL);
+			uchar *cat = maxStarBufMd5 ? fic.map(0, maxStarBufMd5) : NULL;
+			if (!cat)
 			{
-				qint64 sz = fic.read(mmd5buf, maxStarBufMd5);
-				md5Hash.addData(mmd5buf, sz);
+				// The OS was not able to map the file, revert to slower not mmap based method
+				static const qint64 maxStarBufMd5 = 1024*1024*8;
+				char* mmd5buf = (char*)malloc(maxStarBufMd5);
+				while (!fic.atEnd())
+				{
+					qint64 sz = fic.read(mmd5buf, maxStarBufMd5);
+					md5Hash.addData(mmd5buf, sz);
+				}
+				free(mmd5buf);
 			}
-			free(mmd5buf);
+			else
+			{
+				md5Hash.addData((const char*)cat, cat_sz);
+				fic.unmap(cat);
+			}
+			fic.close();
+			if (md5Hash.result().toHex()!=catDesc.value("checksum").toByteArray())
+			{
+				qWarning() << "Error: File " << QDir::toNativeSeparators(catalogFileName) << " is corrupt, MD5 mismatch! Found " << md5Hash.result().toHex() << " expected " << catDesc.value("checksum").toByteArray();
+				fic.remove();
+				return false;
+			}
+			qWarning() << "MD5 sum correct!";
+			setCheckFlag(catDesc.value("id").toString(), true);
 		}
-		else
-		{
-			md5Hash.addData((const char*)cat, cat_sz);
-			fic.unmap(cat);
-		}
-		fic.close();
-		if (md5Hash.result().toHex()!=catDesc.value("checksum").toByteArray())
-		{
-			qWarning() << "Error: File " << QDir::toNativeSeparators(catalogFileName) << " is corrupt, MD5 mismatch! Found " << md5Hash.result().toHex() << " expected " << catDesc.value("checksum").toByteArray();
-			fic.remove();
-			return false;
-		}
-		qWarning() << "MD5 sum correct!";
-		setCheckFlag(catDesc.value("id").toString(), true);
 	}
 
 	ZoneArray* z = ZoneArray::create(catalogFilePath, true);
@@ -473,9 +477,11 @@ void StarMgr::setCheckFlag(const QString& catId, bool b)
 		catalogsDescription[idx-1]=m;
 		starSettings["catalogs"]=catalogsDescription;
 		QFile tmp(starConfigFileFullPath);
-		tmp.open(QIODevice::WriteOnly);
-		StelJsonParser::write(starSettings, &tmp);
-		tmp.close();
+		if(tmp.open(QIODevice::WriteOnly))
+		{
+			StelJsonParser::write(starSettings, &tmp);
+			tmp.close();
+		}
 	}
 }
 

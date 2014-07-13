@@ -18,6 +18,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 */
 
+#include "config.h"
+
 #include <QDebug>
 #include <QFileDialog>
 
@@ -50,6 +52,7 @@ void ObservabilityDialog::retranslate()
 	{
 		ui->retranslateUi(dialog);
 		setAboutHtml();
+		updateControls(); // Also re-translate the dynamic slider labels
 	}
 }
 
@@ -58,36 +61,63 @@ void ObservabilityDialog::createDialogContent()
 {
 	ui->setupUi(dialog);
 	ui->tabs->setCurrentIndex(0);
-	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
+	connect(&StelApp::getInstance(),
+	        SIGNAL(languageChanged()), this, SLOT(retranslate()));
 
+	Observability* plugin = GETSTELMODULE(Observability);
+	
 	// Settings:
-	connect(ui->Today, SIGNAL(stateChanged(int)), this, SLOT(setTodayFlag(int)));
-	connect(ui->AcroCos, SIGNAL(stateChanged(int)), this, SLOT(setAcroCosFlag(int)));
-	connect(ui->Opposition, SIGNAL(stateChanged(int)), this, SLOT(setOppositionFlag(int)));
-	connect(ui->Goods, SIGNAL(stateChanged(int)), this, SLOT(setGoodDatesFlag(int)));
-	connect(ui->FullMoon, SIGNAL(stateChanged(int)), this, SLOT(setFullMoonFlag(int)));
-//	connect(ui->Crescent, SIGNAL(stateChanged(int)), this, SLOT(setCrescentMoonFlag(int)));
-//	connect(ui->SuperMoon, SIGNAL(stateChanged(int)), this, SLOT(setSuperMoonFlag(int)));
+	
+	// clicked() is called only when the user makes an input,
+	// so we avoid an endless loop when setting the value in updateControls().
+	connect(ui->todayCheckBox, SIGNAL(clicked(bool)),
+	        plugin, SLOT(enableTodayField(bool)));
+	connect(ui->acroCosCheckBox, SIGNAL(clicked(bool)),
+	        plugin, SLOT(enableAcroCosField(bool)));
+	connect(ui->oppositionCheckBox, SIGNAL(clicked(bool)),
+	        plugin, SLOT(enableOppositionField(bool)));
+	connect(ui->goodNightsCheckBox, SIGNAL(clicked(bool)),
+	        plugin, SLOT(enableGoodNightsField(bool)));
+	connect(ui->fullMoonCheckBox, SIGNAL(clicked(bool)),
+	        plugin, SLOT(enableFullMoonField(bool)));
 
-	connect(ui->Red, SIGNAL(sliderMoved(int)), this, SLOT(setRed(int)));
-	connect(ui->Green, SIGNAL(sliderMoved(int)), this, SLOT(setGreen(int)));
-	connect(ui->Blue, SIGNAL(sliderMoved(int)), this, SLOT(setBlue(int)));
-	connect(ui->fontSize, SIGNAL(sliderMoved(int)), this, SLOT(setSize(int)));
-	connect(ui->SunAltitude, SIGNAL(sliderMoved(int)), this, SLOT(setAltitude(int)));
-	connect(ui->HorizAltitude, SIGNAL(sliderMoved(int)), this, SLOT(setHorizon(int)));
+	connect(ui->redSlider, SIGNAL(sliderMoved(int)),
+	        this, SLOT(setColor()));
+	connect(ui->greenSlider, SIGNAL(sliderMoved(int)),
+	        this, SLOT(setColor()));
+	connect(ui->blueSlider, SIGNAL(sliderMoved(int)),
+	        this, SLOT(setColor()));
+	
+	// Isn't valueChanged() better? But then we'll have to block
+	// signlas when settting the slider values.
+	connect(ui->fontSize, SIGNAL(sliderMoved(int)),
+	        plugin, SLOT(setFontSize(int)));
+	connect(ui->sunAltitudeSlider, SIGNAL(sliderMoved(int)),
+	        plugin, SLOT(setTwilightAltitude(int)));
+	connect(ui->sunAltitudeSlider, SIGNAL(sliderMoved(int)),
+	        this, SLOT(updateAltitudeLabel(int)));
+	connect(ui->horizonAltitudeSlider, SIGNAL(sliderMoved(int)),
+	        plugin, SLOT(setHorizonAltitude(int)));
+	connect(ui->horizonAltitudeSlider, SIGNAL(sliderMoved(int)),
+	        this, SLOT(updateHorizonLabel(int)));
 
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
-	connect(ui->restoreDefaultsButton, SIGNAL(clicked()), this, SLOT(restoreDefaults()));
-	connect(ui->saveSettingsButton, SIGNAL(clicked()), this, SLOT(saveSettings()));
+	connect(ui->restoreDefaultsButton, SIGNAL(clicked()),
+	        plugin, SLOT(resetConfiguration()));
+	// TODO: The plug-in should emit a signal when settings are changed.
+	// This works, because slots are called in the order they were connected.
+	connect(ui->restoreDefaultsButton, SIGNAL(clicked()),
+	        this, SLOT(updateControls()));
+	connect(ui->saveSettingsButton, SIGNAL(clicked()),
+	        plugin, SLOT(saveConfiguration()));
 
 	// About tab
 	setAboutHtml();
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-	Q_ASSERT(gui);
-	ui->aboutTextBrowser->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
+	if(gui!=NULL)
+		ui->aboutTextBrowser->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
 
-	updateGuiFromSettings();
-
+	updateControls();
 }
 
 void ObservabilityDialog::setAboutHtml(void)
@@ -116,121 +146,59 @@ void ObservabilityDialog::setAboutHtml(void)
 	ui->aboutTextBrowser->setHtml(html);
 }
 
-
-void ObservabilityDialog::restoreDefaults(void)
+void ObservabilityDialog::updateControls()
 {
-	qDebug() << "Observability::restoreDefaults";
-	GETSTELMODULE(Observability)->restoreDefaults();
-	GETSTELMODULE(Observability)->readSettingsFromConfig();
-	updateGuiFromSettings();
-}
-
-void ObservabilityDialog::updateGuiFromSettings(void)
-{
-	ui->Today->setChecked(GETSTELMODULE(Observability)->getShowFlags(1));
-	ui->AcroCos->setChecked(GETSTELMODULE(Observability)->getShowFlags(2));
-	ui->Goods->setChecked(GETSTELMODULE(Observability)->getShowFlags(3));
-	ui->Opposition->setChecked(GETSTELMODULE(Observability)->getShowFlags(4));
-	ui->FullMoon->setChecked(GETSTELMODULE(Observability)->getShowFlags(5));
+	Observability* plugin = GETSTELMODULE(Observability);
+	
+	ui->todayCheckBox->setChecked(plugin->getShowFlags(1));
+	ui->acroCosCheckBox->setChecked(plugin->getShowFlags(2));
+	ui->goodNightsCheckBox->setChecked(plugin->getShowFlags(3));
+	ui->oppositionCheckBox->setChecked(plugin->getShowFlags(4));
+	ui->fullMoonCheckBox->setChecked(plugin->getShowFlags(5));
 //	ui->Crescent->setChecked(GETSTELMODULE(Observability)->getShowFlags(6));
 //	ui->SuperMoon->setChecked(GETSTELMODULE(Observability)->getShowFlags(7));
 
-	Vec3f currFont = GETSTELMODULE(Observability)->getFontColor();
-	int Rv = (int)(100.*currFont[0]);
-	int Gv = (int)(100.*currFont[1]);
-	int Bv = (int)(100.*currFont[2]);
-	ui->Red->setValue(Rv);
-	ui->Green->setValue(Gv);
-	ui->Blue->setValue(Bv);
-	ui->fontSize->setValue(GETSTELMODULE(Observability)->getFontSize());
-	int SAlti = GETSTELMODULE(Observability)->getSunAltitude();
-	ui->SunAltitude->setValue(SAlti);
-	ui->AltiText->setText(QString("%1 -%2 %3").arg(q_("Sun altitude at twilight:")).arg(SAlti).arg(q_("deg.")));
+	Vec3f fontColor = plugin->getFontColor();
+	int red = (int)(100.*fontColor[0]);
+	int green = (int)(100.*fontColor[1]);
+	int blue = (int)(100.*fontColor[2]);
+	ui->redSlider->setValue(red);
+	ui->greenSlider->setValue(green);
+	ui->blueSlider->setValue(blue);
 
-	SAlti = GETSTELMODULE(Observability)->getHorizAltitude();
-	ui->HorizAltitude->setValue(SAlti);
-	ui->HorizText->setText(QString("%1 %2 %3").arg(q_("Horizon altitude:")).arg(SAlti).arg(q_("deg.")));
-
+	ui->fontSize->setValue(plugin->getFontSize());
+	int sunAltitude = plugin->getTwilightAltitude();
+	ui->sunAltitudeSlider->setValue(sunAltitude);
+	updateAltitudeLabel(sunAltitude);
+	int horizonAltitude = plugin->getHorizonAltitude();
+	ui->horizonAltitudeSlider->setValue(horizonAltitude);
+	updateHorizonLabel(horizonAltitude);
 }
 
-void ObservabilityDialog::saveSettings(void)
+void ObservabilityDialog::setColor()
 {
-	GETSTELMODULE(Observability)->saveSettingsToConfig();
+	int red = ui->redSlider->value();
+	int green = ui->greenSlider->value();
+	int blue = ui->blueSlider->value();
+
+	float fRed = (float)(red) / 100.;
+	float fGreen = (float)(green) / 100.;
+	float fBlue = (float)(blue) / 100.;
+	
+	Vec3f color(fRed, fGreen, fBlue);
+	GETSTELMODULE(Observability)->setFontColor(color);
 }
 
-void ObservabilityDialog::setTodayFlag(int checkState)
+void ObservabilityDialog::updateAltitudeLabel(int altitude)
 {
-	bool b = checkState != Qt::Unchecked;
-	GETSTELMODULE(Observability)->setShow(1,b);
+	// This allows translators to use their own conventions for degree signs.
+	ui->sunAltitudeLabel->setText(q_("Sun altitude at twilight: %1 deg.").arg(altitude));
 }
 
-void ObservabilityDialog::setAcroCosFlag(int checkState)
+void ObservabilityDialog::updateHorizonLabel(int horizon)
 {
-	bool b = checkState != Qt::Unchecked;
-	GETSTELMODULE(Observability)->setShow(2,b);
-}
-
-void ObservabilityDialog::setGoodDatesFlag(int checkState)
-{
-	bool b = checkState != Qt::Unchecked;
-	GETSTELMODULE(Observability)->setShow(3,b);
-}
-
-void ObservabilityDialog::setOppositionFlag(int checkState)
-{
-	bool b = checkState != Qt::Unchecked;
-	GETSTELMODULE(Observability)->setShow(4,b);
-}
-
-void ObservabilityDialog::setFullMoonFlag(int checkState)
-{
-	bool b = checkState != Qt::Unchecked;
-	GETSTELMODULE(Observability)->setShow(5,b);
-}
-
-//void ObservabilityDialog::setCrescentMoonFlag(int checkState)
-//{
-//	bool b = checkState != Qt::Unchecked;
-//	GETSTELMODULE(Observability)->setShow(6,b);
-//}
-
-//void ObservabilityDialog::setSuperMoonFlag(int checkState)
-//{
-//	bool b = checkState != Qt::Unchecked;
-//	GETSTELMODULE(Observability)->setShow(7,b);
-//}
-
-void ObservabilityDialog::setRed(int Value)
-{
-	GETSTELMODULE(Observability)->setFontColor(0,Value);
-}
-
-void ObservabilityDialog::setGreen(int Value)
-{
-	GETSTELMODULE(Observability)->setFontColor(1,Value);
-}
-
-void ObservabilityDialog::setBlue(int Value)
-{
-	GETSTELMODULE(Observability)->setFontColor(2,Value);
-}
-
-void ObservabilityDialog::setSize(int Value)
-{
-	GETSTELMODULE(Observability)->setFontSize(Value);
-}
-
-void ObservabilityDialog::setAltitude(int Value)
-{
-	ui->AltiText->setText(QString("%1 -%2 %3").arg(q_("Sun altitude at twilight:")).arg(Value).arg(q_("deg.")));
-	GETSTELMODULE(Observability)->setSunAltitude(Value);
-}
-
-
-void ObservabilityDialog::setHorizon(int Value)
-{
-	ui->HorizText->setText(QString("%1 %2 %3").arg(q_("Horizon altitude:")).arg(Value).arg(q_("deg.")));
-	GETSTELMODULE(Observability)->setHorizAltitude(Value);
+	// This allows translators to use their own conventions for degree signs.
+	ui->horizonAltitudeLabel->setText(q_("Horizon altitude: %1 deg.").arg(horizon));
 }
 
 

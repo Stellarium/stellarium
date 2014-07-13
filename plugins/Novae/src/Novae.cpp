@@ -16,6 +16,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
+#include "config.h"
+
 #include "StelProjector.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
@@ -81,8 +83,15 @@ StelPluginInfo NovaeStelPluginInterface::getPluginInfo() const
  Constructor
 */
 Novae::Novae()
-	: texPointer(NULL)
+	: NovaCnt(0)
+	, texPointer(NULL)
+	, updateState(CompleteNoUpdates)
+	, downloadMgr(NULL)
 	, progressBar(NULL)
+	, updateTimer(NULL)
+	, messageTimer(NULL)
+	, updatesEnabled(false)
+	, updateFrequencyDays(0)
 {
 	setObjectName("Novae");
 	configDialog = new NovaeDialog();
@@ -121,7 +130,7 @@ void Novae::init()
 		// If no settings in the main config file, create with defaults
 		if (!conf->childGroups().contains("Novae"))
 		{
-			qDebug() << "Novae::init no Novae section exists in main config file - creating with defaults";
+			qDebug() << "Novae: no Novae section exists in main config file - creating with defaults";
 			restoreDefaultConfigIni();
 		}
 
@@ -137,7 +146,7 @@ void Novae::init()
 	}
 	catch (std::runtime_error &e)
 	{
-		qWarning() << "Novas::init error: " << e.what();
+		qWarning() << "Novae: init error:" << e.what();
 		return;
 	}
 
@@ -158,11 +167,11 @@ void Novae::init()
 	}
 	else
 	{
-		qDebug() << "Novae::init novae.json does not exist - copying default file to " << QDir::toNativeSeparators(novaeJsonPath);
+		qDebug() << "Novae: novae.json does not exist - copying default file to" << QDir::toNativeSeparators(novaeJsonPath);
 		restoreDefaultJsonFile();
 	}
 
-	qDebug() << "Novae::init using file: " << QDir::toNativeSeparators(novaeJsonPath);
+	qDebug() << "Novae: loading catalog file:" << QDir::toNativeSeparators(novaeJsonPath);
 
 	readJsonFile();
 
@@ -390,11 +399,11 @@ void Novae::restoreDefaultJsonFile(void)
 	QFile src(":/Novae/novae.json");
 	if (!src.copy(novaeJsonPath))
 	{
-		qWarning() << "Novae::restoreDefaultJsonFile cannot copy json resource to " + QDir::toNativeSeparators(novaeJsonPath);
+		qWarning() << "Novae: cannot copy JSOIN resource to" + QDir::toNativeSeparators(novaeJsonPath);
 	}
 	else
 	{
-		qDebug() << "Novae::init copied default novae.json to " << QDir::toNativeSeparators(novaeJsonPath);
+		qDebug() << "Novae: copied default novae.json to" << QDir::toNativeSeparators(novaeJsonPath);
 		// The resource is read only, and the new file inherits this...  make sure the new file
 		// is writable by the Stellarium process so that updates can be done.
 		QFile dest(novaeJsonPath);
@@ -416,7 +425,7 @@ bool Novae::backupJsonFile(bool deleteOriginal)
 	QFile old(novaeJsonPath);
 	if (!old.exists())
 	{
-		qWarning() << "Novae::backupJsonFile no file to backup";
+		qWarning() << "Novae: no file to backup";
 		return false;
 	}
 
@@ -430,14 +439,14 @@ bool Novae::backupJsonFile(bool deleteOriginal)
 		{
 			if (!old.remove())
 			{
-				qWarning() << "Novae::backupJsonFile WARNING - could not remove old novae.json file";
+				qWarning() << "Novae: WARNING - could not remove old novae.json file";
 				return false;
 			}
 		}
 	}
 	else
 	{
-		qWarning() << "Novae::backupJsonFile WARNING - failed to copy novae.json to novae.json.old";
+		qWarning() << "Novae: WARNING - failed to copy novae.json to novae.json.old";
 		return false;
 	}
 
@@ -463,11 +472,12 @@ QVariantMap Novae::loadNovaeMap(QString path)
 	QVariantMap map;
 	QFile jsonFile(path);
 	if (!jsonFile.open(QIODevice::ReadOnly))
-	    qWarning() << "Novae::loadNovaeMap cannot open " << QDir::toNativeSeparators(path);
+		qWarning() << "Novae: cannot open" << QDir::toNativeSeparators(path);
 	else
-	    map = StelJsonParser::parse(jsonFile.readAll()).toMap();
-
-	jsonFile.close();
+	{
+		map = StelJsonParser::parse(jsonFile.readAll()).toMap();
+		jsonFile.close();
+	}
 	return map;
 }
 
@@ -501,7 +511,7 @@ int Novae::getJsonFileVersion(void)
 	QFile novaeJsonFile(novaeJsonPath);
 	if (!novaeJsonFile.open(QIODevice::ReadOnly))
 	{
-		qWarning() << "Novae::init cannot open " << QDir::toNativeSeparators(novaeJsonPath);
+		qWarning() << "Novae: cannot open" << QDir::toNativeSeparators(novaeJsonPath);
 		return jsonVersion;
 	}
 
@@ -513,7 +523,7 @@ int Novae::getJsonFileVersion(void)
 	}
 
 	novaeJsonFile.close();
-	qDebug() << "Novae::getJsonFileVersion() version from file:" << jsonVersion;
+	qDebug() << "Novae: version of the catalog:" << jsonVersion;
 	return jsonVersion;
 }
 
@@ -522,7 +532,7 @@ bool Novae::checkJsonFileFormat()
 	QFile novaeJsonFile(novaeJsonPath);
 	if (!novaeJsonFile.open(QIODevice::ReadOnly))
 	{
-		qWarning() << "Novae::checkJsonFileFormat(): cannot open " << QDir::toNativeSeparators(novaeJsonPath);
+		qWarning() << "Novae: cannot open" << QDir::toNativeSeparators(novaeJsonPath);
 		return false;
 	}
 
@@ -534,8 +544,7 @@ bool Novae::checkJsonFileFormat()
 	}
 	catch (std::runtime_error& e)
 	{
-		qDebug() << "Novae::checkJsonFileFormat(): file format is wrong!";
-		qDebug() << "Novae::checkJsonFileFormat() error:" << e.what();
+		qDebug() << "Novae: file format is wrong! Error:" << e.what();
 		return false;
 	}
 
@@ -656,7 +665,7 @@ void Novae::updateDownloadComplete(QNetworkReply* reply)
 	// check the download worked, and save the data to file if this is the case.
 	if (reply->error() != QNetworkReply::NoError)
 	{
-		qWarning() << "Novae::updateDownloadComplete FAILED to download" << reply->url() << " Error: " << reply->errorString();
+		qWarning() << "Novae: FAILED to download" << reply->url() << " Error: " << reply->errorString();
 	}
 	else
 	{
@@ -664,7 +673,7 @@ void Novae::updateDownloadComplete(QNetworkReply* reply)
 		QString jsonFilePath = StelFileMgr::findFile("modules/Novae", StelFileMgr::Flags(StelFileMgr::Writable|StelFileMgr::Directory)) + "/novae.json";
 		if (jsonFilePath.isEmpty())
 		{
-			qWarning() << "Novae::updateDownloadComplete: cannot write JSON data to file";
+			qWarning() << "Novae: cannot write JSON data to file";
 		}
 		else
 		{
@@ -672,9 +681,11 @@ void Novae::updateDownloadComplete(QNetworkReply* reply)
 			if (jsonFile.exists())
 				jsonFile.remove();
 
-			jsonFile.open(QIODevice::WriteOnly | QIODevice::Text);
-			jsonFile.write(reply->readAll());
-			jsonFile.close();
+			if(jsonFile.open(QIODevice::WriteOnly | QIODevice::Text))
+			{
+				jsonFile.write(reply->readAll());
+				jsonFile.close();
+			}
 		}
 	}
 
@@ -722,7 +733,7 @@ float Novae::getLowerLimitBrightness()
 	QFile novaeJsonFile(novaeJsonPath);
 	if (!novaeJsonFile.open(QIODevice::ReadOnly))
 	{
-		qWarning() << "Novae::init cannot open " << QDir::toNativeSeparators(novaeJsonPath);
+		qWarning() << "Novae: cannot open" << QDir::toNativeSeparators(novaeJsonPath);
 		return lowerLimit;
 	}
 
