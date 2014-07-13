@@ -40,6 +40,7 @@ public:
 
 private:
 	StelAddOnDAO* m_pStelAddOnDAO;
+	const QString m_sTexturesInstallDir;
 };
 
 #endif // _AOTEXTURE_HPP_
