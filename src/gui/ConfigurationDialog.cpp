@@ -824,8 +824,12 @@ void ConfigurationDialog::scriptSelectionChanged(const QString& s)
 	}
 	if (!scriptMgr.getLicense(s).trimmed().isEmpty())
 	{
-		html += "<strong>" + q_("License") + "</strong>: " + scriptMgr.getLicense(s);
+		html += "<strong>" + q_("License") + "</strong>: " + scriptMgr.getLicense(s) + "<br />";
 	}	
+	if (!scriptMgr.getShortcut(s).trimmed().isEmpty())
+	{
+		html += "<strong>" + q_("Shortcut") + "</strong>: " + scriptMgr.getShortcut(s);
+	}
 	html += "</p></body></html>";
 	ui->scriptInfoBrowser->setHtml(html);	
 }
