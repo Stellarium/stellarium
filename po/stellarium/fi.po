@@ -7,20 +7,20 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-06-26 10:33+0700\n"
+"POT-Creation-Date: 2014-07-13 12:27+0700\n"
 "PO-Revision-Date: 2014-06-21 01:34+0000\n"
 "Last-Translator: Tuomas Teipainen <tmsteipainen1@gmail.com>\n"
 "Language-Team: Finnish <fi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-07-12 05:47+0000\n"
+"X-Launchpad-Export-Date: 2014-07-13 05:45+0000\n"
 "X-Generator: Launchpad (build 17111)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:107 src/core/modules/StarMgr.cpp:339
 #: src/core/modules/GridLinesMgr.cpp:695 src/core/modules/LandscapeMgr.cpp:353
 #: src/core/modules/NebulaMgr.cpp:126 src/core/modules/SolarSystem.cpp:155
-#: src/core/StelApp.cpp:468 src/core/StelCore.cpp:176
+#: src/core/StelApp.cpp:471 src/core/StelCore.cpp:176
 #: src/core/StelSkyLayerMgr.cpp:87 src/StelMainView.cpp:309
 msgid "Display Options"
 msgstr "Näyttöasetukset"
@@ -349,7 +349,7 @@ msgstr "Planeettojen radat"
 
 #. TRANSLATORS: Type of object
 #: src/core/modules/StarWrapper.cpp:50 src/core/modules/StarWrapper.cpp:163
-#: src/translations.h:164
+#: src/translations.h:177
 msgid "star"
 msgstr "tähti"
 
@@ -455,7 +455,7 @@ msgstr "Pimennyksen kesto: %1%"
 msgid "Rising time: %1%"
 msgstr "Nousuaika: %1%"
 
-#: src/core/StelApp.cpp:468
+#: src/core/StelApp.cpp:471
 msgid "Night mode"
 msgstr "Yötila"
 
@@ -470,7 +470,7 @@ msgstr "Avaruusalus"
 msgid "Date and Time"
 msgstr "Päivays ja aika"
 
-#: src/core/StelCore.cpp:175 src/core/StelMovementMgr.cpp:128
+#: src/core/StelCore.cpp:175 src/core/StelMovementMgr.cpp:129
 msgid "Movement and Selection"
 msgstr "Liikkuminen ja valinta"
 
@@ -1129,28 +1129,28 @@ msgstr "Ekliptikaalinen toposentrinen (nykyinen) %1/%2"
 msgid "Deep-sky objects background images"
 msgstr "Syvän taivaan kohteiden kuvat"
 
-#: src/core/StelMovementMgr.cpp:129 src/gui/StelGui.cpp:185
+#: src/core/StelMovementMgr.cpp:130 src/gui/StelGui.cpp:185
 #: src/StelMainView.cpp:308
 msgid "Miscellaneous"
 msgstr "Sekalaista"
 
-#: src/core/StelMovementMgr.cpp:129
+#: src/core/StelMovementMgr.cpp:130
 msgid "Switch between equatorial and azimuthal mount"
 msgstr "Vaihda ekvatoriaali- tai atsimutaalijalustan välillä"
 
-#: src/core/StelMovementMgr.cpp:130
+#: src/core/StelMovementMgr.cpp:131
 msgid "Center on selected object"
 msgstr "Keskitä valittuun kohteeseen"
 
-#: src/core/StelMovementMgr.cpp:131
+#: src/core/StelMovementMgr.cpp:132
 msgid "Zoom in on selected object"
 msgstr "Suurenna valittuun kohteeseen"
 
-#: src/core/StelMovementMgr.cpp:132
+#: src/core/StelMovementMgr.cpp:133
 msgid "Zoom out"
 msgstr "Loitonna"
 
-#: src/core/StelMovementMgr.cpp:133
+#: src/core/StelMovementMgr.cpp:134
 msgid "Track object"
 msgstr "Seuraa kohdetta"
 
@@ -1207,7 +1207,7 @@ msgstr "Yhteystieto"
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:120
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:130
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:128
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:255
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:254
 msgid "Version"
 msgstr "Versio"
 
@@ -1220,7 +1220,7 @@ msgstr "Versio"
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:121
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:131
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:129
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:256
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:255
 msgid "Author"
 msgstr "Tekijä"
 
@@ -1951,7 +1951,7 @@ msgstr "jossa"
 msgid "year"
 msgstr "vuosi"
 
-#: src/main.cpp:339
+#: src/main.cpp:336
 msgid "This system does not support OpenGL."
 msgstr "Tämä järjestelmä ei tue OpenGL-ominaisuutta."
 
@@ -1986,12 +1986,12 @@ msgid "Earth"
 msgstr "Maa"
 
 #. TRANSLATORS: Name of landscape and Earth's satellite
-#: src/translations.h:37 src/translations.h:204
+#: src/translations.h:37 src/translations.h:217
 msgid "Moon"
 msgstr "Kuu"
 
 #. TRANSLATORS: Name of landscape and planet
-#: src/translations.h:38 src/translations.h:212
+#: src/translations.h:38 src/translations.h:225
 msgid "Mars"
 msgstr "Mars"
 
@@ -2089,7 +2089,7 @@ msgid "Metis"
 msgstr "Metis"
 
 #. TRANSLATORS: Name of landscape and planet
-#: src/translations.h:62 src/translations.h:214
+#: src/translations.h:62 src/translations.h:227
 msgid "Saturn"
 msgstr "Saturnus"
 
@@ -2340,313 +2340,350 @@ msgstr "Daedalus"
 msgid "Icarus"
 msgstr "Icarus"
 
-#. TRANSLATORS: Proper name of comet C/1680 V1
+#. TRANSLATORS: Asteroid (1809) Prometheus
+#: src/translations.h:147
+msgid "Prometheus"
+msgstr ""
+
 #: src/translations.h:148
+msgid "Prometheus (moon)"
+msgstr ""
+
+#. TRANSLATORS: Asteroid (1810) Epimetheus
+#: src/translations.h:150
+msgid "Epimetheus"
+msgstr ""
+
+#: src/translations.h:151
+msgid "Epimetheus (moon)"
+msgstr ""
+
+#. TRANSLATORS: Asteroid (951) Gaspra
+#: src/translations.h:153
+msgid "Gaspra"
+msgstr ""
+
+#. TRANSLATORS: Asteroid (243) Ida
+#: src/translations.h:155
+msgid "Ida"
+msgstr ""
+
+#. TRANSLATORS: Asteroid (218) Bianca
+#: src/translations.h:157
+msgid "Bianca"
+msgstr ""
+
+#: src/translations.h:158
+msgid "Bianca (moon)"
+msgstr ""
+
+#. TRANSLATORS: Proper name of comet C/1680 V1
+#: src/translations.h:161
 msgid "Great Comet of 1680 (C/1680 V1)"
 msgstr "Vuoden 1680 suuri komeetta (C/1680 V1)"
 
 #. TRANSLATORS: Name of supernova SN 1572A and script name
-#: src/translations.h:151
+#: src/translations.h:164
 msgid "Tycho's Supernova"
 msgstr "Tykon supernova"
 
 #. TRANSLATORS: Name of supernova SN 1604A
-#: src/translations.h:153
+#: src/translations.h:166
 msgid "Kepler's Supernova"
 msgstr "Keplerin supernova"
 
-#: src/translations.h:156
+#: src/translations.h:169
 msgid "N"
 msgstr "P"
 
-#: src/translations.h:157
+#: src/translations.h:170
 msgid "S"
 msgstr "E"
 
-#: src/translations.h:158
+#: src/translations.h:171
 msgid "E"
 msgstr "I"
 
-#: src/translations.h:159
+#: src/translations.h:172
 msgid "W"
 msgstr "L"
 
 #. TRANSLATORS: Type of object
-#: src/translations.h:166
+#: src/translations.h:179
 msgid "planet"
 msgstr "planeetta"
 
 #. TRANSLATORS: Type of object
-#: src/translations.h:168
+#: src/translations.h:181
 msgid "comet"
 msgstr "komeetta"
 
 #. TRANSLATORS: Type of object
-#: src/translations.h:170
+#: src/translations.h:183
 msgid "asteroid"
 msgstr "asteroidi"
 
 #. TRANSLATORS: Type of object
-#: src/translations.h:172
+#: src/translations.h:185
 msgid "moon"
 msgstr "kuu"
 
 #. TRANSLATORS: Type of object
-#: src/translations.h:174
+#: src/translations.h:187
 msgid "plutoid"
 msgstr "plutoidi"
 
-#: src/translations.h:178
+#: src/translations.h:191
 msgid "Arabic"
 msgstr "Arabialainen"
 
-#: src/translations.h:179
+#: src/translations.h:192
 msgid "Aztec"
 msgstr "Asteekkien"
 
-#: src/translations.h:180
+#: src/translations.h:193
 msgid "Chinese"
 msgstr "Kiinalainen"
 
-#: src/translations.h:181
+#: src/translations.h:194
 msgid "Egyptian"
 msgstr "Egyptiläinen"
 
-#: src/translations.h:182
+#: src/translations.h:195
 msgid "Inuit"
 msgstr "Inuiittien"
 
-#: src/translations.h:183
+#: src/translations.h:196
 msgid "Indian Vedic"
 msgstr "Intialais-Vedalainen"
 
-#: src/translations.h:184
+#: src/translations.h:197
 msgid "Korean"
 msgstr "Korealainen"
 
-#: src/translations.h:185
+#: src/translations.h:198
 msgid "Lakota"
 msgstr "Lakotien"
 
-#: src/translations.h:186
+#: src/translations.h:199
 msgid "Maori"
 msgstr "Maorien"
 
-#: src/translations.h:187
+#: src/translations.h:200
 msgid "Navajo"
 msgstr "Navajojen"
 
-#: src/translations.h:188
+#: src/translations.h:201
 msgid "Norse"
 msgstr "Muinaisnorjalainen"
 
-#: src/translations.h:189
+#: src/translations.h:202
 msgid "Polynesian"
 msgstr "Polynesialainen"
 
-#: src/translations.h:190
+#: src/translations.h:203
 msgid "Romanian"
 msgstr "Roomalainen"
 
-#: src/translations.h:191
+#: src/translations.h:204
 msgid "Sami"
 msgstr "Saamelainen"
 
-#: src/translations.h:192
+#: src/translations.h:205
 msgid "Tupi-Guarani"
 msgstr "Tupi-guaranilainen"
 
-#: src/translations.h:193
+#: src/translations.h:206
 msgid "Tongan"
 msgstr "Tongalainen"
 
-#: src/translations.h:194
+#: src/translations.h:207
 msgid "Western"
 msgstr "Länsimainen"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:200
+#: src/translations.h:213
 msgid "Guereins"
 msgstr "Guereins"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:202
+#: src/translations.h:215
 msgid "Trees"
 msgstr "Puut"
 
 #. TRANSLATORS: Landscape name: Hurricane Ridge
-#: src/translations.h:206
+#: src/translations.h:219
 msgid "Hurricane"
 msgstr "Hurricane"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:208
+#: src/translations.h:221
 msgid "Ocean"
 msgstr "Valtameri"
 
 #. TRANSLATORS: Landscape name: Garching bei Munchen
-#: src/translations.h:210
+#: src/translations.h:223
 msgid "Garching"
 msgstr "Garching"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:216
+#: src/translations.h:229
 msgid "Geneva"
 msgstr "Geneve"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:218
+#: src/translations.h:231
 msgid "Grossmugl"
 msgstr "Grossmugl"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:225
+#: src/translations.h:238
 msgid "Landscape Tour"
 msgstr "Maisemamatka"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:227
+#: src/translations.h:240
 msgid "Partial Lunar Eclipse"
 msgstr "Osittainen kuunpimennys"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:229
+#: src/translations.h:242
 msgid "Total Lunar Eclipse"
 msgstr "Täydellinen kuunpimennys"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:231
+#: src/translations.h:244
 msgid "Screensaver"
 msgstr "Näytönsäästäjä"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:233
+#: src/translations.h:246
 msgid "Solar Eclipse 2009"
 msgstr "Auringonpimennys 2009"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:235
+#: src/translations.h:248
 msgid "Startup Script"
 msgstr "Käynnistyskomentojono"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:237
+#: src/translations.h:250
 msgid "Zodiac"
 msgstr "Eläinrata"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:239
+#: src/translations.h:252
 msgid "Mercury Triple Sunrise and Sunset"
 msgstr "Merkurius, kolminkertainen auringonnousu ja -lasku"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:241
+#: src/translations.h:254
 msgid "Double eclipse from Deimos in 2017"
 msgstr "Kaksinkertainen pimennys Deimoksessa 2017"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:243
+#: src/translations.h:256
 msgid "Double eclipse from Deimos in 2031"
 msgstr "Kaksinkertainen pimennys Deimoksessa 2031"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:245
+#: src/translations.h:258
 msgid "Eclipse from Olympus Mons Jan 10 2068"
 msgstr "Pimennys Olympys Monsilta 10. tammikuuta 2068"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:247
+#: src/translations.h:260
 msgid "Occultation of Earth and Jupiter 2048"
 msgstr "Maan ja Jupiterin peittyminen 2048"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:249
+#: src/translations.h:262
 msgid "3 Transits and 2 Eclipses from Deimos 2027"
 msgstr "3 ylikulkua ja 2 pimennystä Deimoksessa 2027"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:251
+#: src/translations.h:264
 msgid "Solar System Screensaver"
 msgstr "Aurinkokuntanäytönsäästäjä"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:253
+#: src/translations.h:266
 msgid "Constellations Tour"
 msgstr "Tähdistömatka"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:255
+#: src/translations.h:268
 msgid "Sun from different planets"
 msgstr "Aurinko eri planeetoilta"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:257
+#: src/translations.h:270
 msgid "Earth best views from other bodies"
 msgstr "Parhaat näkymät Maahan eri taivaankappaleilta"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:259
+#: src/translations.h:272
 msgid "Transit of Venus"
 msgstr "Venuksen ylikulku"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:261
+#: src/translations.h:274
 msgid "Analemma"
 msgstr "Analemma"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:263
+#: src/translations.h:276
 msgid "Sky Culture Tour"
 msgstr "Taivaskulttuurimatka"
 
 #. TRANSLATORS: Name and description of script
-#: src/translations.h:265
+#: src/translations.h:278
 msgid "Earth Events from Mercury"
 msgstr "Maan tapahtumia merkuriuksesta"
 
 #. TRANSLATORS: Name and description of script
-#: src/translations.h:267
+#: src/translations.h:280
 msgid "Earth Events from a floating city on Venus"
 msgstr ""
 
 #. TRANSLATORS: Name and description of script
-#: src/translations.h:269
+#: src/translations.h:282
 msgid "Earth Events from Mars"
 msgstr "Maan tapahtumia marsista"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:271
+#: src/translations.h:284
 msgid "Earth and Venus Greatest Elongations and Brilliancies from Mars"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:273
+#: src/translations.h:286
 msgid "Earth and Mars Greatest Elongations and Transits from Callisto"
 msgstr ""
 
 #. TRANSLATORS: Description of the landscape tour script.
-#: src/translations.h:279
+#: src/translations.h:292
 msgid "Look around each installed landscape."
 msgstr "Katso jokaista asennettua maisemaa"
 
 #. TRANSLATORS: Description of the sky culture tour script.
-#: src/translations.h:281
+#: src/translations.h:294
 msgid "Look at each installed sky culture."
 msgstr "Katsele jokaista asennettua taivaskulttuuria."
 
-#: src/translations.h:282
+#: src/translations.h:295
 msgid "Script to demonstrate a partial lunar eclipse."
 msgstr "Komentojono esittelee osittaisen kuunpimennyksen."
 
-#: src/translations.h:283
+#: src/translations.h:296
 msgid "Script to demonstrate a total lunar eclipse."
 msgstr "Komentojono esittelee täydellisen kuunpimennyksen."
 
-#: src/translations.h:284
+#: src/translations.h:297
 msgid "A slow, infinite tour of the sky, looking at random objects."
 msgstr "Hidas, loppumaton matka taivaalla, katsellaan satunnaisia kohteita."
 
-#: src/translations.h:285
+#: src/translations.h:298
 msgid ""
 "Script to demonstrate a total solar eclipse which has happened in 2009 "
 "(location=Rangpur, Bangladesh)."
@@ -2654,12 +2691,12 @@ msgstr ""
 "Komentojono esittelee täydellisen vuoden 2009 auringonpimennyksen "
 "(paikka=Rangpur, Bangladesh)."
 
-#: src/translations.h:286
+#: src/translations.h:299
 msgid "Script which runs automatically at startup"
 msgstr ""
 "Komentojono joka suoritetaan automaattisesti käynnistyksen yhteydessä."
 
-#: src/translations.h:287
+#: src/translations.h:300
 msgid ""
 "This script displays the constellations of the Zodiac. That means the "
 "constellations which lie along the line which the Sun traces across the "
@@ -2668,7 +2705,7 @@ msgstr ""
 "Komentojono näyttää eläinradan tähdistöt. Eläinrata tarkoittaa tähdistöjä, "
 "joiden poikki Aurinko kulkee taivaanpallolla vuotuisen kiertonsa aikana."
 
-#: src/translations.h:288
+#: src/translations.h:301
 msgid ""
 "Due to the quirks in Mercury's orbit and rotation at certain spots the sun "
 "will rise & set 3 different times in one Mercury day."
@@ -2676,7 +2713,7 @@ msgstr ""
 "Merkuriuksen radan ja pyörimisen erikoisuuksien vuoksi tietyissä kohdissa "
 "Aurinko nousee ja laskee 3 kertaa yhden Merkuriuksen päivän aikana."
 
-#: src/translations.h:289
+#: src/translations.h:302
 msgid ""
 "Just before Mars eclipses the sun, Phobos pops out from behind and eclipses "
 "it first. Takes place between Scorpio and Sagittarius on April 26, 2017."
@@ -2685,7 +2722,7 @@ msgstr ""
 "pimentää Auringon ensin. Pimennys tapahtuu Skorpionin ja Jousimiehen välillä "
 "26. huhtikuuta 2017."
 
-#: src/translations.h:290
+#: src/translations.h:303
 msgid ""
 "Just before Mars eclipses the sun, Phobos pops out from behind and eclipses "
 "it first. Takes place between Taurus and Gemini on July 23, 2031."
@@ -2694,12 +2731,12 @@ msgstr ""
 "pimentää Auringon ensin. Pimennys tapahtuu Härän ja Kaksosten välillä 23. "
 "heinäkuuta 2031."
 
-#: src/translations.h:291
+#: src/translations.h:304
 msgid "Phobos eclipsing the Sun as seen from Olympus Mons on Jan 10, 2068."
 msgstr ""
 "Phobos pimentää Auringon nähtynä Olympus Monsilta 10 tammikuuta 2068."
 
-#: src/translations.h:292
+#: src/translations.h:305
 msgid ""
 "Phobos occultations of Earth are common, as are occultations of Jupiter. But "
 "occultations of both on the same day are very rare. Here's one that takes "
@@ -2709,7 +2746,7 @@ msgstr ""
 "molempien peitot samana päivänä ovat harvinaisia. Tässä yksi, joka tapahtuu "
 "23. 1.2048. Todellisella nopeudella."
 
-#: src/translations.h:293
+#: src/translations.h:306
 msgid ""
 "Phobos races ahead of Mars and transits the sun, passes through it and then "
 "retrogrades back towards the sun and just partially transits it again (only "
@@ -2725,37 +2762,37 @@ msgstr ""
 " Phobos tulee esiin Marsin takaa edelleen pimentyneenä, kunnes se poistuu "
 "Marsin varjosta."
 
-#: src/translations.h:294
+#: src/translations.h:307
 msgid ""
 "Screensaver of various happenings in the Solar System. 232 events in all!"
 msgstr ""
 
-#: src/translations.h:295
-msgid "A tour of the western constellations."
-msgstr "Matka länsimaisiin tähtikuvioihin."
+#: src/translations.h:308
+msgid "A tour of the western constellations. Shortcut: Ctrl+U,1"
+msgstr ""
 
-#: src/translations.h:296
+#: src/translations.h:309
 msgid "Look at the Sun from big planets of Solar System and Pluto."
 msgstr "Katsele Aurinkoa aurinkokunnan suurilta planeetoilta ja Plutosta."
 
-#: src/translations.h:297
+#: src/translations.h:310
 msgid ""
 "Best views of Earth from other Solar System bodies in the 21st Century."
 msgstr ""
 "Parhaat näkymät Maahan aurinkokunnan muilta kappaleilta 2000-luvulla."
 
-#: src/translations.h:298
+#: src/translations.h:311
 msgid "Transit of Venus as seen from Sydney Australia, 6th June 2012."
 msgstr "Venuksen ylikulku nähtynä Sydneystä, Australiasta 6. kesäkuuta 2012."
 
-#: src/translations.h:299
+#: src/translations.h:312
 msgid ""
 "A demonstration of the analemma - the path of the Sun across the sky during "
 "the year."
 msgstr ""
 "Analemman esittely - kuvio, jonka Aurinko piirtää taivaalle vuoden aikana."
 
-#: src/translations.h:300
+#: src/translations.h:313
 msgid ""
 "Flash of the supernova observed by Tycho Brahe in 1572. The Supernovae "
 "plugin has to be enabled."
@@ -2763,1000 +2800,1004 @@ msgstr ""
 "Tyko Brahen vuonna 1572 havaitsema supernovan räjähdys. Supernovat-"
 "laajennuksen on oltava käytössä."
 
-#: src/translations.h:301
+#: src/translations.h:314
 msgid ""
 "Earth and Venus Greatest Elongations and Brilliancies from Mars 2000-3000"
 msgstr ""
 
-#: src/translations.h:302
-msgid "Earth Greatest Elongations and Transits from Callisto 2000-3000."
+#: src/translations.h:315
+msgid ""
+"Earth Greatest Elongations and Transits from Callisto 2000-3000. Why "
+"Callisto? Well of the 4 Galilean Satillites, Callisto is the only one "
+"outside of Jupiter's radiation belt. Therefore, if humans ever colonize "
+"Jupiter's moons, Callisto will be the one."
 msgstr ""
 
-#: src/translations.h:306
+#: src/translations.h:319
 msgid "Andorra"
 msgstr "Andorra"
 
-#: src/translations.h:307
+#: src/translations.h:320
 msgid "United Arab Emirates"
 msgstr "Yhdistyneet arabiemiirikunnat"
 
-#: src/translations.h:308
+#: src/translations.h:321
 msgid "Afghanistan"
 msgstr "Afganistan"
 
-#: src/translations.h:309
+#: src/translations.h:322
 msgid "Antigua and Barbuda"
 msgstr "Antigua ja Barbuda"
 
-#: src/translations.h:310
+#: src/translations.h:323
 msgid "Anguilla"
 msgstr "Anguilla"
 
-#: src/translations.h:311
+#: src/translations.h:324
 msgid "Albania"
 msgstr "Albania"
 
-#: src/translations.h:312
+#: src/translations.h:325
 msgid "Armenia"
 msgstr "Armenia"
 
-#: src/translations.h:313
+#: src/translations.h:326
 msgid "Netherlands Antilles"
 msgstr "Alankomaiden Antillit"
 
-#: src/translations.h:314
+#: src/translations.h:327
 msgid "Angola"
 msgstr "Angola"
 
-#: src/translations.h:315
+#: src/translations.h:328
 msgid "Antarctica"
 msgstr "Etelämanner"
 
-#: src/translations.h:316
+#: src/translations.h:329
 msgid "Argentina"
 msgstr "Argentiina"
 
-#: src/translations.h:317
+#: src/translations.h:330
 msgid "American Samoa"
 msgstr "Amerikan Samoa"
 
-#: src/translations.h:318
+#: src/translations.h:331
 msgid "Austria"
 msgstr "Itävalta"
 
-#: src/translations.h:319
+#: src/translations.h:332
 msgid "Australia"
 msgstr "Australia"
 
-#: src/translations.h:320
+#: src/translations.h:333
 msgid "Aruba"
 msgstr "Aruba"
 
-#: src/translations.h:321
+#: src/translations.h:334
 msgid "Azerbaijan"
 msgstr "Azerbaidžan"
 
-#: src/translations.h:322
+#: src/translations.h:335
 msgid "Bosnia and Herzegowina"
 msgstr "Bosnia ja Herzegovina"
 
-#: src/translations.h:323
+#: src/translations.h:336
 msgid "Barbados"
 msgstr "Barbados"
 
-#: src/translations.h:324
+#: src/translations.h:337
 msgid "Bangladesh"
 msgstr "Bangladesh"
 
-#: src/translations.h:325
+#: src/translations.h:338
 msgid "Belgium"
 msgstr "Belgia"
 
-#: src/translations.h:326
+#: src/translations.h:339
 msgid "Burkina Faso"
 msgstr "Burkina Faso"
 
-#: src/translations.h:327
+#: src/translations.h:340
 msgid "Bulgaria"
 msgstr "Bulgaria"
 
-#: src/translations.h:328
+#: src/translations.h:341
 msgid "Bahrain"
 msgstr "Bahrain"
 
-#: src/translations.h:329
+#: src/translations.h:342
 msgid "Burundi"
 msgstr "Burundi"
 
-#: src/translations.h:330
+#: src/translations.h:343
 msgid "Benin"
 msgstr "Benin"
 
-#: src/translations.h:331
+#: src/translations.h:344
 msgid "Bermuda"
 msgstr "Bermuda"
 
-#: src/translations.h:332
+#: src/translations.h:345
 msgid "Brunei Darussalam"
 msgstr "Brunei"
 
-#: src/translations.h:333
+#: src/translations.h:346
 msgid "Bolivia"
 msgstr "Bolivia"
 
-#: src/translations.h:334
+#: src/translations.h:347
 msgid "Brazil"
 msgstr "Brasilia"
 
-#: src/translations.h:335
+#: src/translations.h:348
 msgid "Bahamas"
 msgstr "Bahama"
 
-#: src/translations.h:336
+#: src/translations.h:349
 msgid "Bhutan"
 msgstr "Bhutan"
 
-#: src/translations.h:337
+#: src/translations.h:350
 msgid "Bouvet Island"
 msgstr "Bouvent'nsaari"
 
-#: src/translations.h:338
+#: src/translations.h:351
 msgid "Botswana"
 msgstr "Botswana"
 
-#: src/translations.h:339
+#: src/translations.h:352
 msgid "Belarus"
 msgstr "Valko-Venäjä"
 
-#: src/translations.h:340
+#: src/translations.h:353
 msgid "Belize"
 msgstr "Belize"
 
-#: src/translations.h:341
+#: src/translations.h:354
 msgid "Canada"
 msgstr "Kanada"
 
-#: src/translations.h:342
+#: src/translations.h:355
 msgid "Cocos Islands"
 msgstr "Kookossaaret"
 
-#: src/translations.h:343
+#: src/translations.h:356
 msgid "Democratic Republic of the Congo"
 msgstr "Kongon demokraattinen tasavalta"
 
-#: src/translations.h:344
+#: src/translations.h:357
 msgid "Central African Republic"
 msgstr "Keski-Afrikan tasavalta"
 
-#: src/translations.h:345
+#: src/translations.h:358
 msgid "Republic of the Congo"
 msgstr "Kongon tasavalta"
 
-#: src/translations.h:346
+#: src/translations.h:359
 msgid "Switzerland"
 msgstr "Sveitsi"
 
-#: src/translations.h:347
+#: src/translations.h:360
 msgid "Cote d'Ivoire"
 msgstr "Norsunluurannikko"
 
-#: src/translations.h:348
+#: src/translations.h:361
 msgid "Cook Islands"
 msgstr "Cookinsaaret"
 
-#: src/translations.h:349
+#: src/translations.h:362
 msgid "Chile"
 msgstr "Chile"
 
-#: src/translations.h:350
+#: src/translations.h:363
 msgid "Cameroon"
 msgstr "Kamerun"
 
-#: src/translations.h:351
+#: src/translations.h:364
 msgid "China"
 msgstr "Kiinan kansantasavalta"
 
-#: src/translations.h:352
+#: src/translations.h:365
 msgid "Colombia"
 msgstr "Kolumbia"
 
-#: src/translations.h:353
+#: src/translations.h:366
 msgid "Costa Rica"
 msgstr "Costa Rica"
 
-#: src/translations.h:354
+#: src/translations.h:367
 msgid "Serbia and Montenegro"
 msgstr "Serbia ja Montenegro"
 
-#: src/translations.h:355
+#: src/translations.h:368
 msgid "Cuba"
 msgstr "Kuuba"
 
-#: src/translations.h:356
+#: src/translations.h:369
 msgid "Cape Verde"
 msgstr "Kap Verde"
 
-#: src/translations.h:357
+#: src/translations.h:370
 msgid "Christmas Island"
 msgstr "Joulusaari"
 
-#: src/translations.h:358
+#: src/translations.h:371
 msgid "Cyprus"
 msgstr "Kypros"
 
-#: src/translations.h:359
+#: src/translations.h:372
 msgid "Czech Republic"
 msgstr "Tšekin tasavalta"
 
-#: src/translations.h:360
+#: src/translations.h:373
 msgid "Germany"
 msgstr "Saksa"
 
-#: src/translations.h:361
+#: src/translations.h:374
 msgid "Djibouti"
 msgstr "Djibouti"
 
-#: src/translations.h:362
+#: src/translations.h:375
 msgid "Denmark"
 msgstr "Tanska"
 
-#: src/translations.h:363
+#: src/translations.h:376
 msgid "Dominica"
 msgstr "Dominica"
 
-#: src/translations.h:364
+#: src/translations.h:377
 msgid "Dominican Republic"
 msgstr "Dominikaaninen tasavalta"
 
-#: src/translations.h:365
+#: src/translations.h:378
 msgid "Algeria"
 msgstr "Algeria"
 
-#: src/translations.h:366
+#: src/translations.h:379
 msgid "Ecuador"
 msgstr "Ecuador"
 
-#: src/translations.h:367
+#: src/translations.h:380
 msgid "Estonia"
 msgstr "Viro"
 
-#: src/translations.h:368
+#: src/translations.h:381
 msgid "Egypt"
 msgstr "Egypti"
 
-#: src/translations.h:369
+#: src/translations.h:382
 msgid "Western Sahara"
 msgstr "Länsi-Sahara"
 
-#: src/translations.h:370
+#: src/translations.h:383
 msgid "Eritrea"
 msgstr "Eritrea"
 
-#: src/translations.h:371
+#: src/translations.h:384
 msgid "Spain"
 msgstr "Espanja"
 
-#: src/translations.h:372
+#: src/translations.h:385
 msgid "Ethiopia"
 msgstr "Etiopia"
 
-#: src/translations.h:373
+#: src/translations.h:386
 msgid "Finland"
 msgstr "Suomi"
 
-#: src/translations.h:374
+#: src/translations.h:387
 msgid "Fiji"
 msgstr "Fidži"
 
-#: src/translations.h:375
+#: src/translations.h:388
 msgid "Falkland Islands"
 msgstr "Falklandsaaret"
 
-#: src/translations.h:376
+#: src/translations.h:389
 msgid "Micronesia"
 msgstr "Mikronesia"
 
-#: src/translations.h:377
+#: src/translations.h:390
 msgid "Faroe Islands"
 msgstr "Färsaaret"
 
-#: src/translations.h:378
+#: src/translations.h:391
 msgid "France"
 msgstr "Ranska"
 
-#: src/translations.h:379
+#: src/translations.h:392
 msgid "Gabon"
 msgstr "Gabon"
 
-#: src/translations.h:380
+#: src/translations.h:393
 msgid "United Kingdom"
 msgstr "Yhdistynyt kuningaskunta"
 
-#: src/translations.h:381
+#: src/translations.h:394
 msgid "Grenada"
 msgstr "Grenada"
 
-#: src/translations.h:382
+#: src/translations.h:395
 msgid "Georgia"
 msgstr "Gruusia"
 
-#: src/translations.h:383
+#: src/translations.h:396
 msgid "French Guiana"
 msgstr "Ranskan Guayana"
 
-#: src/translations.h:384
+#: src/translations.h:397
 msgid "Ghana"
 msgstr "Ghana"
 
-#: src/translations.h:385
+#: src/translations.h:398
 msgid "Gibraltar"
 msgstr "Gibraltar"
 
-#: src/translations.h:386
+#: src/translations.h:399
 msgid "Greenland"
 msgstr "Grönlanti"
 
-#: src/translations.h:387
+#: src/translations.h:400
 msgid "Gambia"
 msgstr "Gambia"
 
-#: src/translations.h:388
+#: src/translations.h:401
 msgid "Guinea"
 msgstr "Guinea"
 
-#: src/translations.h:389
+#: src/translations.h:402
 msgid "Guadeloupe"
 msgstr "Guadeloupe"
 
-#: src/translations.h:390
+#: src/translations.h:403
 msgid "Equatorial Guinea"
 msgstr "Päiväntasaajan Guinea"
 
-#: src/translations.h:391
+#: src/translations.h:404
 msgid "Greece"
 msgstr "Kreikka"
 
-#: src/translations.h:392
+#: src/translations.h:405
 msgid "South Georgia and the South Sandwich Islands"
 msgstr "Etelä-Georgia ja Eteläiset Sandwichsaaret"
 
-#: src/translations.h:393
+#: src/translations.h:406
 msgid "Guatemala"
 msgstr "Guatemala"
 
-#: src/translations.h:394
+#: src/translations.h:407
 msgid "Guam"
 msgstr "Guam"
 
-#: src/translations.h:395
+#: src/translations.h:408
 msgid "Guinea-Bissau"
 msgstr "Guinea-Bissau"
 
-#: src/translations.h:396
+#: src/translations.h:409
 msgid "Guyana"
 msgstr "Guayana"
 
-#: src/translations.h:397
+#: src/translations.h:410
 msgid "Hong Kong"
 msgstr "Hong Kong"
 
-#: src/translations.h:398
+#: src/translations.h:411
 msgid "Heard Island and McDonald Islands"
 msgstr "Heard ja McDonaldinsaaret"
 
-#: src/translations.h:399
+#: src/translations.h:412
 msgid "Honduras"
 msgstr "Honduras"
 
-#: src/translations.h:400
+#: src/translations.h:413
 msgid "Croatia"
 msgstr "Kroatia"
 
-#: src/translations.h:401
+#: src/translations.h:414
 msgid "Haiti"
 msgstr "Haiti"
 
-#: src/translations.h:402
+#: src/translations.h:415
 msgid "Hungary"
 msgstr "Unkari"
 
-#: src/translations.h:403
+#: src/translations.h:416
 msgid "Indonesia"
 msgstr "Indonesia"
 
-#: src/translations.h:404
+#: src/translations.h:417
 msgid "Ireland"
 msgstr "Irlanti"
 
-#: src/translations.h:405
+#: src/translations.h:418
 msgid "Israel"
 msgstr "Israel"
 
-#: src/translations.h:406
+#: src/translations.h:419
 msgid "India"
 msgstr "Intia"
 
-#: src/translations.h:407
+#: src/translations.h:420
 msgid "British Indian Ocean Territory"
 msgstr "Brittiläinen Intian valtameren alue"
 
-#: src/translations.h:408
+#: src/translations.h:421
 msgid "Iraq"
 msgstr "Irak"
 
-#: src/translations.h:409
+#: src/translations.h:422
 msgid "Iran"
 msgstr "Iran"
 
-#: src/translations.h:410
+#: src/translations.h:423
 msgid "Iceland"
 msgstr "Islanti"
 
-#: src/translations.h:411
+#: src/translations.h:424
 msgid "Italy"
 msgstr "Italia"
 
-#: src/translations.h:412
+#: src/translations.h:425
 msgid "Jamaica"
 msgstr "Jamaika"
 
-#: src/translations.h:413
+#: src/translations.h:426
 msgid "Jordan"
 msgstr "Jordania"
 
-#: src/translations.h:414
+#: src/translations.h:427
 msgid "Japan"
 msgstr "Japani"
 
-#: src/translations.h:415
+#: src/translations.h:428
 msgid "Kenya"
 msgstr "Kenia"
 
-#: src/translations.h:416
+#: src/translations.h:429
 msgid "Kyrgyzstan"
 msgstr "Kirgiisia"
 
-#: src/translations.h:417
+#: src/translations.h:430
 msgid "Cambodia"
 msgstr "Kambodža"
 
-#: src/translations.h:418
+#: src/translations.h:431
 msgid "Kiribati"
 msgstr "Kiribati"
 
-#: src/translations.h:419
+#: src/translations.h:432
 msgid "Comoros"
 msgstr "Komorit"
 
-#: src/translations.h:420
+#: src/translations.h:433
 msgid "Saint Kitts and Nevis"
 msgstr "Saint Kitts ja Nevis"
 
-#: src/translations.h:421
+#: src/translations.h:434
 msgid "Democratic People's Republic of Korea"
 msgstr "Korean demokraattinen kansantasavalta"
 
-#: src/translations.h:422
+#: src/translations.h:435
 msgid "Republic of Korea"
 msgstr "Korean tasavalta"
 
-#: src/translations.h:423
+#: src/translations.h:436
 msgid "Kuwait"
 msgstr "Kuwait"
 
-#: src/translations.h:424
+#: src/translations.h:437
 msgid "Cayman Islands"
 msgstr "Caymansaaret"
 
-#: src/translations.h:425
+#: src/translations.h:438
 msgid "Kazakhstan"
 msgstr "Kazahstan"
 
-#: src/translations.h:426
+#: src/translations.h:439
 msgid "Lao"
 msgstr "Laos"
 
-#: src/translations.h:427
+#: src/translations.h:440
 msgid "Lebanon"
 msgstr "Libanon"
 
-#: src/translations.h:428
+#: src/translations.h:441
 msgid "Saint Lucia"
 msgstr "Saint Lucia"
 
-#: src/translations.h:429
+#: src/translations.h:442
 msgid "Liechtenstein"
 msgstr "Liechtenstein"
 
-#: src/translations.h:430
+#: src/translations.h:443
 msgid "Sri Lanka"
 msgstr "Sri Lanka"
 
-#: src/translations.h:431
+#: src/translations.h:444
 msgid "Liberia"
 msgstr "Liberia"
 
-#: src/translations.h:432
+#: src/translations.h:445
 msgid "Lesotho"
 msgstr "Lesotho"
 
-#: src/translations.h:433
+#: src/translations.h:446
 msgid "Lithuania"
 msgstr "Liettua"
 
-#: src/translations.h:434
+#: src/translations.h:447
 msgid "Luxembourg"
 msgstr "Luxemburg"
 
-#: src/translations.h:435
+#: src/translations.h:448
 msgid "Latvia"
 msgstr "Latvia"
 
-#: src/translations.h:436
+#: src/translations.h:449
 msgid "Libyan Arab Jamahiriya"
 msgstr "Libya"
 
-#: src/translations.h:437
+#: src/translations.h:450
 msgid "Morocco"
 msgstr "Marokko"
 
-#: src/translations.h:438
+#: src/translations.h:451
 msgid "Monaco"
 msgstr "Monaco"
 
-#: src/translations.h:439
+#: src/translations.h:452
 msgid "Moldova"
 msgstr "Moldavia"
 
-#: src/translations.h:440
+#: src/translations.h:453
 msgid "Madagascar"
 msgstr "Madagaskar"
 
-#: src/translations.h:441
+#: src/translations.h:454
 msgid "Marshall Islands"
 msgstr "Marshallsaaret"
 
-#: src/translations.h:442
+#: src/translations.h:455
 msgid "Macedonia"
 msgstr "Makedonia"
 
-#: src/translations.h:443
+#: src/translations.h:456
 msgid "Mali"
 msgstr "Mali"
 
-#: src/translations.h:444
+#: src/translations.h:457
 msgid "Myanmar"
 msgstr "Myanmar"
 
-#: src/translations.h:445
+#: src/translations.h:458
 msgid "Mongolia"
 msgstr "Mongolia"
 
-#: src/translations.h:446
+#: src/translations.h:459
 msgid "Macau"
 msgstr "Macao"
 
-#: src/translations.h:447
+#: src/translations.h:460
 msgid "Northern Mariana Islands"
 msgstr "Pohjois-Mariaanit"
 
-#: src/translations.h:448
+#: src/translations.h:461
 msgid "Martinique"
 msgstr "Martinique"
 
-#: src/translations.h:449
+#: src/translations.h:462
 msgid "Mauritania"
 msgstr "Mauritania"
 
-#: src/translations.h:450
+#: src/translations.h:463
 msgid "Montserrat"
 msgstr "Montserrat"
 
-#: src/translations.h:451
+#: src/translations.h:464
 msgid "Malta"
 msgstr "Malta"
 
-#: src/translations.h:452
+#: src/translations.h:465
 msgid "Mauritius"
 msgstr "Mauritius"
 
-#: src/translations.h:453
+#: src/translations.h:466
 msgid "Maldives"
 msgstr "Malediivit"
 
-#: src/translations.h:454
+#: src/translations.h:467
 msgid "Malawi"
 msgstr "Malawi"
 
-#: src/translations.h:455
+#: src/translations.h:468
 msgid "Mexico"
 msgstr "Meksiko"
 
-#: src/translations.h:456
+#: src/translations.h:469
 msgid "Malaysia"
 msgstr "Malesia"
 
-#: src/translations.h:457
+#: src/translations.h:470
 msgid "Mozambique"
 msgstr "Mosambik"
 
-#: src/translations.h:458
+#: src/translations.h:471
 msgid "Namibia"
 msgstr "Namibia"
 
-#: src/translations.h:459
+#: src/translations.h:472
 msgid "New Caledonia"
 msgstr "Uusi-Kaledonia"
 
-#: src/translations.h:460
+#: src/translations.h:473
 msgid "Niger"
 msgstr "Niger"
 
-#: src/translations.h:461
+#: src/translations.h:474
 msgid "Norfolk Island"
 msgstr "Norfolkinsaari"
 
-#: src/translations.h:462
+#: src/translations.h:475
 msgid "Nigeria"
 msgstr "Nigeria"
 
-#: src/translations.h:463
+#: src/translations.h:476
 msgid "Nicaragua"
 msgstr "Nicaragua"
 
-#: src/translations.h:464
+#: src/translations.h:477
 msgid "Netherlands"
 msgstr "Alankomaat"
 
-#: src/translations.h:465
+#: src/translations.h:478
 msgid "Norway"
 msgstr "Norja"
 
-#: src/translations.h:466
+#: src/translations.h:479
 msgid "Nepal"
 msgstr "Nepal"
 
-#: src/translations.h:467
+#: src/translations.h:480
 msgid "Nauru"
 msgstr "Nauru"
 
-#: src/translations.h:468
+#: src/translations.h:481
 msgid "Niue"
 msgstr "Niue"
 
-#: src/translations.h:469
+#: src/translations.h:482
 msgid "New Zealand"
 msgstr "Uusi-Seelanti"
 
-#: src/translations.h:470
+#: src/translations.h:483
 msgid "Oman"
 msgstr "Oman"
 
-#: src/translations.h:471
+#: src/translations.h:484
 msgid "Panama"
 msgstr "Panama"
 
-#: src/translations.h:472
+#: src/translations.h:485
 msgid "Peru"
 msgstr "Peru"
 
-#: src/translations.h:473
+#: src/translations.h:486
 msgid "French Polynesia"
 msgstr "Ranskan Polynesia"
 
-#: src/translations.h:474
+#: src/translations.h:487
 msgid "Papua New Guinea"
 msgstr "Papua-Uusi-Guinea"
 
-#: src/translations.h:475
+#: src/translations.h:488
 msgid "Philippines"
 msgstr "Filippiinit"
 
-#: src/translations.h:476
+#: src/translations.h:489
 msgid "Pakistan"
 msgstr "Pakistan"
 
-#: src/translations.h:477
+#: src/translations.h:490
 msgid "Poland"
 msgstr "Puola"
 
-#: src/translations.h:478
+#: src/translations.h:491
 msgid "Saint Pierre and Miquelon"
 msgstr "Saint-Pierre ja Miquelon"
 
-#: src/translations.h:479
+#: src/translations.h:492
 msgid "Pitcairn"
 msgstr "Pitcairn"
 
-#: src/translations.h:480
+#: src/translations.h:493
 msgid "Puerto Rico"
 msgstr "Puerto Rico"
 
-#: src/translations.h:481
+#: src/translations.h:494
 msgid "Palestinian Territories"
 msgstr "Palestiinan alue"
 
-#: src/translations.h:482
+#: src/translations.h:495
 msgid "Portugal"
 msgstr "Portugali"
 
-#: src/translations.h:483
+#: src/translations.h:496
 msgid "Palau"
 msgstr "Palau"
 
-#: src/translations.h:484
+#: src/translations.h:497
 msgid "Paraguay"
 msgstr "Paraguay"
 
-#: src/translations.h:485
+#: src/translations.h:498
 msgid "Qatar"
 msgstr "Qatar"
 
-#: src/translations.h:486
+#: src/translations.h:499
 msgid "Réunion"
 msgstr "Réunion"
 
-#: src/translations.h:487
+#: src/translations.h:500
 msgid "Romania"
 msgstr "Romania"
 
-#: src/translations.h:488
+#: src/translations.h:501
 msgid "Serbia"
 msgstr "Serbia"
 
-#: src/translations.h:489
+#: src/translations.h:502
 msgid "Russian Federation"
 msgstr "Venäjän federaatio"
 
-#: src/translations.h:490
+#: src/translations.h:503
 msgid "Rwanda"
 msgstr "Ruanda"
 
-#: src/translations.h:491
+#: src/translations.h:504
 msgid "Saudi Arabia"
 msgstr "Saudi-Arabia"
 
-#: src/translations.h:492
+#: src/translations.h:505
 msgid "Solomon Islands"
 msgstr "Salomonsaaret"
 
-#: src/translations.h:493
+#: src/translations.h:506
 msgid "Seychelles"
 msgstr "Seychellit"
 
-#: src/translations.h:494
+#: src/translations.h:507
 msgid "Sudan"
 msgstr "Sudan"
 
-#: src/translations.h:495
+#: src/translations.h:508
 msgid "Sweden"
 msgstr "Ruotsi"
 
-#: src/translations.h:496
+#: src/translations.h:509
 msgid "Singapore"
 msgstr "Singapore"
 
-#: src/translations.h:497
+#: src/translations.h:510
 msgid "Saint Helena"
 msgstr "Saint Helena"
 
-#: src/translations.h:498
+#: src/translations.h:511
 msgid "Slovenia"
 msgstr "Slovenia"
 
-#: src/translations.h:499
+#: src/translations.h:512
 msgid "Svalbard and Jan Mayen"
 msgstr "Huippuvuoret ja Jan Mayen"
 
-#: src/translations.h:500
+#: src/translations.h:513
 msgid "Slovakia"
 msgstr "Slovakia"
 
-#: src/translations.h:501
+#: src/translations.h:514
 msgid "Sierra Leone"
 msgstr "Sierra Leone"
 
-#: src/translations.h:502
+#: src/translations.h:515
 msgid "San Marino"
 msgstr "San Marino"
 
-#: src/translations.h:503
+#: src/translations.h:516
 msgid "Senegal"
 msgstr "Senegal"
 
-#: src/translations.h:504
+#: src/translations.h:517
 msgid "Somalia"
 msgstr "Somalia"
 
-#: src/translations.h:505
+#: src/translations.h:518
 msgid "Suriname"
 msgstr "Suriname"
 
-#: src/translations.h:506
+#: src/translations.h:519
 msgid "Sao Tome and Principe"
 msgstr "Sao Tome ja Principe"
 
-#: src/translations.h:507
+#: src/translations.h:520
 msgid "El Salvador"
 msgstr "El Salvador"
 
-#: src/translations.h:508
+#: src/translations.h:521
 msgid "Syrian Arab Republic"
 msgstr "Syyrian arabitasavalta"
 
-#: src/translations.h:509
+#: src/translations.h:522
 msgid "Swaziland"
 msgstr "Swazimaa"
 
-#: src/translations.h:510
+#: src/translations.h:523
 msgid "Turks and Caicos Islands"
 msgstr "Turks- ja Caicossaaret"
 
-#: src/translations.h:511
+#: src/translations.h:524
 msgid "Chad"
 msgstr "Tšad"
 
-#: src/translations.h:512
+#: src/translations.h:525
 msgid "French Southern Territories"
 msgstr "Ranskan eteläiset ja antarktiset alueet"
 
-#: src/translations.h:513
+#: src/translations.h:526
 msgid "Togo"
 msgstr "Togo"
 
-#: src/translations.h:514
+#: src/translations.h:527
 msgid "Thailand"
 msgstr "Thaimaa"
 
-#: src/translations.h:515
+#: src/translations.h:528
 msgid "Tajikistan"
 msgstr "Tadžikistan"
 
-#: src/translations.h:516
+#: src/translations.h:529
 msgid "Tokelau"
 msgstr "Tokelau"
 
-#: src/translations.h:517
+#: src/translations.h:530
 msgid "East Timor"
 msgstr "Itä-Timor"
 
-#: src/translations.h:518
+#: src/translations.h:531
 msgid "Turkmenistan"
 msgstr "Turkmenistan"
 
-#: src/translations.h:519
+#: src/translations.h:532
 msgid "Tunisia"
 msgstr "Tunisia"
 
-#: src/translations.h:520
+#: src/translations.h:533
 msgid "Tonga"
 msgstr "Toga"
 
-#: src/translations.h:521
+#: src/translations.h:534
 msgid "Turkey"
 msgstr "Turkki"
 
-#: src/translations.h:522
+#: src/translations.h:535
 msgid "Trinidad and Tobago"
 msgstr "Trinidad ja Tobago"
 
-#: src/translations.h:523
+#: src/translations.h:536
 msgid "Tuvalu"
 msgstr "Tuvalu"
 
-#: src/translations.h:524
+#: src/translations.h:537
 msgid "Taiwan"
 msgstr "Kiinan tasavalta (Taiwan)"
 
-#: src/translations.h:525
+#: src/translations.h:538
 msgid "Tanzania"
 msgstr "Tansania"
 
-#: src/translations.h:526
+#: src/translations.h:539
 msgid "Ukraine"
 msgstr "Ukraina"
 
-#: src/translations.h:527
+#: src/translations.h:540
 msgid "Uganda"
 msgstr "Uganda"
 
-#: src/translations.h:528
+#: src/translations.h:541
 msgid "United States Minor Outlying Islands"
 msgstr "Yhdysvaltain pienet erillissaaret"
 
-#: src/translations.h:529
+#: src/translations.h:542
 msgid "United States"
 msgstr "Yhdysvallat"
 
-#: src/translations.h:530
+#: src/translations.h:543
 msgid "Uruguay"
 msgstr "Uruguay"
 
-#: src/translations.h:531
+#: src/translations.h:544
 msgid "Uzbekistan"
 msgstr "Uzbekistan"
 
-#: src/translations.h:532
+#: src/translations.h:545
 msgid "Vatican City State"
 msgstr "Vatikaanivaltio"
 
-#: src/translations.h:533
+#: src/translations.h:546
 msgid "Saint Vincent and the Grenadines"
 msgstr "Saint Vincent ja Grenadiinit"
 
-#: src/translations.h:534
+#: src/translations.h:547
 msgid "Venezuela"
 msgstr "Venezuela"
 
-#: src/translations.h:535
+#: src/translations.h:548
 msgid "British Virgin Islands"
 msgstr "Brittiläiset Neitsytsaaret"
 
-#: src/translations.h:536
+#: src/translations.h:549
 msgid "United States Virgin Islands"
 msgstr "Yhdysvaltain Neitsytsaaret"
 
-#: src/translations.h:537
+#: src/translations.h:550
 msgid "Viet Nam"
 msgstr "Vietnam"
 
-#: src/translations.h:538
+#: src/translations.h:551
 msgid "Vanuatu"
 msgstr "Vanuatu"
 
-#: src/translations.h:539
+#: src/translations.h:552
 msgid "Wallis and Futuna"
 msgstr "Wallis ja Futuna"
 
-#: src/translations.h:540
+#: src/translations.h:553
 msgid "Samoa"
 msgstr "Samoa"
 
-#: src/translations.h:541
+#: src/translations.h:554
 msgid "Yemen"
 msgstr "Jemen"
 
-#: src/translations.h:542
+#: src/translations.h:555
 msgid "Mayotte"
 msgstr "Mayotte"
 
-#: src/translations.h:543
+#: src/translations.h:556
 msgid "Yugoslavia"
 msgstr "Jugoslavia"
 
-#: src/translations.h:544
+#: src/translations.h:557
 msgid "South Africa"
 msgstr "Etelä-Afrikka"
 
-#: src/translations.h:545
+#: src/translations.h:558
 msgid "Zambia"
 msgstr "Sambia"
 
-#: src/translations.h:546
+#: src/translations.h:559
 msgid "Zimbabwe"
 msgstr "Zimbabwe"
 
-#: src/translations.h:550
+#: src/translations.h:563
 msgid "&Undo"
 msgstr "&Kumoa"
 
-#: src/translations.h:551
+#: src/translations.h:564
 msgid "&Redo"
 msgstr "&Tee uudelleen"
 
-#: src/translations.h:552
+#: src/translations.h:565
 msgid "Cu&t"
 msgstr "&Leikkaa"
 
-#: src/translations.h:553
+#: src/translations.h:566
 msgid "&Copy"
 msgstr "&Kopioi"
 
-#: src/translations.h:554
+#: src/translations.h:567
 msgid "&Paste"
 msgstr "&Liitä"
 
-#: src/translations.h:555 src/ui_locationDialogGui.h:407
+#: src/translations.h:568 src/ui_locationDialogGui.h:407
 #: plugins/Oculars/src/ui_ocularDialog.h:1074
 #: plugins/Oculars/src/ui_ocularDialog.h:1083
 #: plugins/Oculars/src/ui_ocularDialog.h:1090
@@ -3764,56 +3805,56 @@ msgstr "&Liitä"
 msgid "Delete"
 msgstr "Poista"
 
-#: src/translations.h:556
+#: src/translations.h:569
 msgid "Select All"
 msgstr "Valitse kaikki"
 
-#: src/translations.h:557
+#: src/translations.h:570
 msgid "Look in:"
 msgstr "Etsi kohteesta:"
 
-#: src/translations.h:558
+#: src/translations.h:571
 msgid "Directory:"
 msgstr "Hakemisto:"
 
-#: src/translations.h:559
+#: src/translations.h:572
 msgid "Folder"
 msgstr "Kansio"
 
-#: src/translations.h:560
+#: src/translations.h:573
 msgid "&Choose"
 msgstr "Valitse"
 
-#: src/translations.h:561 src/ui_configurationDialog.h:1165
+#: src/translations.h:574 src/ui_configurationDialog.h:1167
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:516
 msgid "Cancel"
 msgstr "Peru"
 
-#: src/translations.h:562
+#: src/translations.h:575
 msgid "Files of type:"
 msgstr "Tiedostot tyyppiä:"
 
-#: src/translations.h:563
+#: src/translations.h:576
 msgid "Date Modified"
 msgstr "Muokkauspäivämäärä"
 
-#: src/translations.h:564
+#: src/translations.h:577
 msgid "Directories"
 msgstr "Hakemistot"
 
-#: src/translations.h:565
+#: src/translations.h:578
 msgid "Computer"
 msgstr "Tietokone"
 
-#: src/translations.h:566
+#: src/translations.h:579
 msgid "&Open"
 msgstr "&Avaa"
 
-#: src/translations.h:567
+#: src/translations.h:580
 msgid "File &name:"
 msgstr "Tiedosto &nimi:"
 
-#: src/translations.h:568
+#: src/translations.h:581
 msgid "Copy &Link Location"
 msgstr "Kopioi &linkin osoite"
 
@@ -3830,7 +3871,7 @@ msgstr "Tietoja ohjelmasta"
 msgid "Log"
 msgstr "Loki"
 
-#: src/ui_helpDialogGui.h:290 src/ui_configurationDialog.h:1086
+#: src/ui_helpDialogGui.h:290 src/ui_configurationDialog.h:1088
 msgid "Edit keyboard shortcuts..."
 msgstr "Muokkaa pikanäppäimiä..."
 
@@ -4076,7 +4117,7 @@ msgstr "Käytä automaattista täyttöä sanan alusta"
 
 #: src/ui_searchDialogGui.h:657 src/ui_viewDialog.h:1251
 #: src/ui_viewDialog.h:1257 src/ui_viewDialog.h:1259
-#: src/ui_configurationDialog.h:1166 src/ui_configurationDialog.h:1177
+#: src/ui_configurationDialog.h:1168 src/ui_configurationDialog.h:1179
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:417
 msgid "Options"
 msgstr "Asetukset"
@@ -4346,19 +4387,19 @@ msgstr "Käytä tätä taivaskulttuuria oletuksena"
 msgid "Visible"
 msgstr "Näkyvä"
 
-#: src/ui_configurationDialog.h:1000
+#: src/ui_configurationDialog.h:1002
 msgid "Configuration"
 msgstr "Asetukset"
 
-#: src/ui_configurationDialog.h:1002
+#: src/ui_configurationDialog.h:1004
 msgid "Program language"
 msgstr "Ohjelman kieli"
 
-#: src/ui_configurationDialog.h:1003
+#: src/ui_configurationDialog.h:1005
 msgid "Check updates"
 msgstr "Tarkista päivitykset"
 
-#: src/ui_configurationDialog.h:1004
+#: src/ui_configurationDialog.h:1006
 msgid ""
 "Enable checking updates of Stellarium via Internet. Info for updates of "
 "stable versions you can look on the tab \"About\" of \"Help\" window."
@@ -4367,11 +4408,11 @@ msgstr ""
 "päivityksistä löytyy \"ohjeita\"-ikkunan \"tietoja ohjelmasta\" -"
 "välilehdeltä."
 
-#: src/ui_configurationDialog.h:1005
+#: src/ui_configurationDialog.h:1007
 msgid "Default options"
 msgstr "Oletusasetukset"
 
-#: src/ui_configurationDialog.h:1007
+#: src/ui_configurationDialog.h:1009
 msgid ""
 "Save the settings you've changed this session to be the same the next time "
 "you start Stellarium"
@@ -4379,7 +4420,7 @@ msgstr ""
 "Tallenna tässä istunnossa muuttamasi asetukset, jotta ne olisivat samat "
 "seuraavalla Stellariumin käynnistyskerralla"
 
-#: src/ui_configurationDialog.h:1009
+#: src/ui_configurationDialog.h:1011
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:390
 #: plugins/FOV/src/ui_fovWindow.h:387
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:276
@@ -4387,17 +4428,17 @@ msgstr ""
 msgid "Save settings"
 msgstr "Tallenna asetukset"
 
-#: src/ui_configurationDialog.h:1011
+#: src/ui_configurationDialog.h:1013
 msgid "Restore the default settings that came with Stellarium"
 msgstr "Palauta Stellariumin mukana tulleet oletusasetukset"
 
-#: src/ui_configurationDialog.h:1013 plugins/FOV/src/ui_fovWindow.h:386
+#: src/ui_configurationDialog.h:1015 plugins/FOV/src/ui_fovWindow.h:386
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:277
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:289
 msgid "Restore defaults"
 msgstr "Palauta oletusarvot"
 
-#: src/ui_configurationDialog.h:1014
+#: src/ui_configurationDialog.h:1016
 msgid ""
 "Restoring default settings requires a restart of Stellarium. Saving all the "
 "current options includes the current FOV and direction of view for use at "
@@ -4407,235 +4448,235 @@ msgstr ""
 "Tallennetaan seuraavaa käynnistystä varten kaikki nykyiset asetukset mukaan "
 "lukien nykyinen näkökenttä ja katselusuunta."
 
-#: src/ui_configurationDialog.h:1016
+#: src/ui_configurationDialog.h:1018
 msgid "The width of your view when Stellarium starts"
 msgstr "Näkymän leveys Stellariumin käynnistyessä"
 
-#: src/ui_configurationDialog.h:1019
+#: src/ui_configurationDialog.h:1021
 msgid "The direction you're looking when Stellarium starts"
 msgstr "Katselusuunta Stellariumin käynnistyessä"
 
-#: src/ui_configurationDialog.h:1021 src/ui_configurationDialog.h:1188
+#: src/ui_configurationDialog.h:1023 src/ui_configurationDialog.h:1190
 msgid "Selected object information"
 msgstr "Valitun kohteen tiedot"
 
-#: src/ui_configurationDialog.h:1023
+#: src/ui_configurationDialog.h:1025
 msgid "Display all information available"
 msgstr "Näytä kaikki saatavilla olevat tiedot"
 
-#: src/ui_configurationDialog.h:1025
+#: src/ui_configurationDialog.h:1027
 msgid "All available"
 msgstr "Kaikki saatavilla olevat"
 
-#: src/ui_configurationDialog.h:1027
+#: src/ui_configurationDialog.h:1029
 msgid "Display no information"
 msgstr "Älä näytä tietoja"
 
-#: src/ui_configurationDialog.h:1029 plugins/Oculars/src/Oculars.cpp:1937
+#: src/ui_configurationDialog.h:1031 plugins/Oculars/src/Oculars.cpp:1937
 #: plugins/Observability/src/Observability.cpp:201
 msgid "None"
 msgstr "Ei tietoja"
 
-#: src/ui_configurationDialog.h:1031
+#: src/ui_configurationDialog.h:1033
 msgid "Display less information"
 msgstr "Näytä vähemmän tietoja"
 
-#: src/ui_configurationDialog.h:1033
+#: src/ui_configurationDialog.h:1035
 msgid "Short"
 msgstr "Lyhennetyt"
 
-#: src/ui_configurationDialog.h:1035
+#: src/ui_configurationDialog.h:1037
 msgid "Display user settings information"
 msgstr "Näytä tiedot käyttäjän asetuksista"
 
-#: src/ui_configurationDialog.h:1037
+#: src/ui_configurationDialog.h:1039
 msgid "Customized"
 msgstr "Muokattu"
 
-#: src/ui_configurationDialog.h:1038
+#: src/ui_configurationDialog.h:1040
 msgid "Displayed fields"
 msgstr "Näytettävät näkökentät"
 
-#: src/ui_configurationDialog.h:1039
+#: src/ui_configurationDialog.h:1041
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:277
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:166
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:165
 msgid "Name"
 msgstr "Nimi"
 
-#: src/ui_configurationDialog.h:1041
+#: src/ui_configurationDialog.h:1043
 msgid "Geocentric equatorial coordinates, equinox of date"
 msgstr "Geosentrinen ekvatoriaalinen koordinaatisto, nykyhetken epookki"
 
-#: src/ui_configurationDialog.h:1043
+#: src/ui_configurationDialog.h:1045
 msgid "Right ascension/Declination (of date)"
 msgstr "Rektaskensio/deklinaatio (nykyinen)"
 
-#: src/ui_configurationDialog.h:1044
+#: src/ui_configurationDialog.h:1046
 msgid "Catalog number(s)"
 msgstr "Luettelonumero(t)"
 
-#: src/ui_configurationDialog.h:1046
+#: src/ui_configurationDialog.h:1048
 msgid "Geocentric equatorial coordinates, equinox of J2000.0"
 msgstr "Geosentrinen ekvatoriaalinen koordinaatisto, epookki J2000.0"
 
-#: src/ui_configurationDialog.h:1048
+#: src/ui_configurationDialog.h:1050
 msgid "Right ascension/Declination (J2000)"
 msgstr "Rektaskensio/deklinaatio (J2000)"
 
-#: src/ui_configurationDialog.h:1049
+#: src/ui_configurationDialog.h:1051
 msgid "Absolute magnitude"
 msgstr "Absoluuttinen magnitudi"
 
-#: src/ui_configurationDialog.h:1050
+#: src/ui_configurationDialog.h:1052
 msgid "Galactic coordinates"
 msgstr "Galaktiset koordinaatit"
 
-#: src/ui_configurationDialog.h:1051
+#: src/ui_configurationDialog.h:1053
 msgid "Visual magnitude"
 msgstr "Visuaalinen magnitudi"
 
-#: src/ui_configurationDialog.h:1053
+#: src/ui_configurationDialog.h:1055
 msgid "Angular or physical size"
 msgstr "Kulmaläpimitta tai fysikaalinen koko"
 
-#: src/ui_configurationDialog.h:1055
+#: src/ui_configurationDialog.h:1057
 msgid "Size"
 msgstr "Koko"
 
-#: src/ui_configurationDialog.h:1057
+#: src/ui_configurationDialog.h:1059
 msgid "The type of the object (star, planet, etc.)"
 msgstr "Kohteen tyyppi (tähti, planeetta, ym.)"
 
-#: src/ui_configurationDialog.h:1059
+#: src/ui_configurationDialog.h:1061
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:276
 msgid "Type"
 msgstr "Tyyppi"
 
-#: src/ui_configurationDialog.h:1061
+#: src/ui_configurationDialog.h:1063
 msgid "Spectral class, nebula type, etc."
 msgstr "Spektriluokka, sumutyyppi, jne."
 
-#: src/ui_configurationDialog.h:1063
+#: src/ui_configurationDialog.h:1065
 msgid "Additional information"
 msgstr "Lisätietoja"
 
-#: src/ui_configurationDialog.h:1065
+#: src/ui_configurationDialog.h:1067
 msgid "Topocentric equatorial coordinates"
 msgstr "Toposentrinen ekvatoriaalinen koordinaatisto"
 
-#: src/ui_configurationDialog.h:1067
+#: src/ui_configurationDialog.h:1069
 msgid "Hour angle/Declination"
 msgstr "Tuntikulma/deklinaatio"
 
-#: src/ui_configurationDialog.h:1069
+#: src/ui_configurationDialog.h:1071
 msgid "Horizontal coordinates"
 msgstr "Horisontaaliset koordinaatit"
 
-#: src/ui_configurationDialog.h:1071
+#: src/ui_configurationDialog.h:1073
 msgid "Altitude/Azimuth"
 msgstr "Korkeus/atsimuutti"
 
-#: src/ui_configurationDialog.h:1072
+#: src/ui_configurationDialog.h:1074
 msgid "Distance"
 msgstr "Etäisyys"
 
-#: src/ui_configurationDialog.h:1074
+#: src/ui_configurationDialog.h:1076
 msgid ""
 "Ecliptic topocentric coordinates, equinox of date and J2000 (only for Earth)"
 msgstr ""
 "Ekliptiset toposentriset koordinaatit, päiväntasaus nykyinen ja J2000 (vain "
 "maalle)"
 
-#: src/ui_configurationDialog.h:1076
+#: src/ui_configurationDialog.h:1078
 msgid "Ecliptic coordinates"
 msgstr "Ekliptiset koordinaatit"
 
-#: src/ui_configurationDialog.h:1077
+#: src/ui_configurationDialog.h:1079
 msgid "Control"
 msgstr "Hallinta"
 
-#: src/ui_configurationDialog.h:1079
+#: src/ui_configurationDialog.h:1081
 msgid "Allow keyboard to pan and zoom"
 msgstr "Salli siirtyminen ja suurennus/loitonnus näppäimistöllä"
 
-#: src/ui_configurationDialog.h:1081
+#: src/ui_configurationDialog.h:1083
 msgid "Enable keyboard navigation"
 msgstr "Salli liikkuminen näppäimistöllä"
 
-#: src/ui_configurationDialog.h:1083
+#: src/ui_configurationDialog.h:1085
 msgid "Allow mouse to pan (drag) and zoom (mousewheel)"
 msgstr ""
 "Salli hiirellä liikkuminen (vetämällä) ja suurennus/loitonnus (rullalla)"
 
-#: src/ui_configurationDialog.h:1085
+#: src/ui_configurationDialog.h:1087
 msgid "Enable mouse navigation"
 msgstr "Salli hiirellä liikkuminen"
 
-#: src/ui_configurationDialog.h:1088
+#: src/ui_configurationDialog.h:1090
 msgid "Hides the mouse cursor when inactive"
 msgstr "Piilota hiiren osoitin ei-aktiivisessa tilassa"
 
-#: src/ui_configurationDialog.h:1090
+#: src/ui_configurationDialog.h:1092
 msgid "Mouse cursor timeout:"
 msgstr "Hiiren osoittimen aikakatkaisu:"
 
-#: src/ui_configurationDialog.h:1092
+#: src/ui_configurationDialog.h:1094
 msgid "seconds"
 msgstr "sekuntia"
 
-#: src/ui_configurationDialog.h:1094
+#: src/ui_configurationDialog.h:1096
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:191
 msgid "Startup date and time"
 msgstr "Aloituspäiväys ja -aika"
 
-#: src/ui_configurationDialog.h:1096
+#: src/ui_configurationDialog.h:1098
 msgid "Use a specific date and time when Stellarium starts up"
 msgstr "Käytä tiettyä päiväystä ja aikaa Stellariumin käynnistyessä"
 
-#: src/ui_configurationDialog.h:1098
+#: src/ui_configurationDialog.h:1100
 msgid "Other:"
 msgstr "Muu:"
 
-#: src/ui_configurationDialog.h:1100
+#: src/ui_configurationDialog.h:1102
 msgid "Use current local date and time"
 msgstr "Käytä paikallista päivämäärää ja aikaa"
 
-#: src/ui_configurationDialog.h:1102
+#: src/ui_configurationDialog.h:1104
 msgid "use current"
 msgstr "Käytä nykyistä"
 
-#: src/ui_configurationDialog.h:1104
+#: src/ui_configurationDialog.h:1106
 msgid "Starts Stellarium at system clock date and time"
 msgstr "Käynnistää Stellariumin järjestelmän päiväyksellä ja ajalla"
 
-#: src/ui_configurationDialog.h:1106
+#: src/ui_configurationDialog.h:1108
 msgid "System date and time"
 msgstr "Järjestelmän päiväys ja aika"
 
-#: src/ui_configurationDialog.h:1108
+#: src/ui_configurationDialog.h:1110
 msgid ""
 "Sets the simulation time to the next instance of this time of day when "
 "Stellarium starts"
 msgstr ""
 "Asettaa simulaation ajan Stellariumin käynnistyspäivää seuraavaksi ajaksi"
 
-#: src/ui_configurationDialog.h:1110
+#: src/ui_configurationDialog.h:1112
 msgid "System date at:"
 msgstr "Järjestelmän päiväys:"
 
-#: src/ui_configurationDialog.h:1111
+#: src/ui_configurationDialog.h:1113
 msgid "Time correction"
 msgstr "Ajan korjaus"
 
-#: src/ui_configurationDialog.h:1114
+#: src/ui_configurationDialog.h:1116
 msgid "Edit equation"
 msgstr "Muokkaa yhtälöä"
 
-#: src/ui_configurationDialog.h:1116
+#: src/ui_configurationDialog.h:1118
 msgid "Planetarium options"
 msgstr "Planetaarioasetukset"
 
-#: src/ui_configurationDialog.h:1118
+#: src/ui_configurationDialog.h:1120
 msgid ""
 "Spheric mirror distortion is used when projecting Stellarium onto a spheric "
 "mirror for low-cost planetarium systems."
@@ -4643,51 +4684,51 @@ msgstr ""
 "Pallopeilikorjausta käytetään, kun Stellarium heijastetaan pallopeilille "
 "halvoissa planetaariojärjestelmissä."
 
-#: src/ui_configurationDialog.h:1120
+#: src/ui_configurationDialog.h:1122
 msgid "Spheric mirror distortion"
 msgstr "Pallopeilikorjaus"
 
-#: src/ui_configurationDialog.h:1122
+#: src/ui_configurationDialog.h:1124
 msgid "Mask out everything outside a central circle in the main view"
 msgstr "Peitä päänäkymästä kaikki keskusympyrän ulkopuolinen"
 
-#: src/ui_configurationDialog.h:1124
+#: src/ui_configurationDialog.h:1126
 msgid "Disc viewport"
 msgstr "Putkinäkymä"
 
-#: src/ui_configurationDialog.h:1126
+#: src/ui_configurationDialog.h:1128
 msgid "Hide other constellations when you click one"
 msgstr "Piilota muut tähdistöt napsautettaessa yhtä"
 
-#: src/ui_configurationDialog.h:1128
+#: src/ui_configurationDialog.h:1130
 msgid "Select single constellation"
 msgstr "Valitse yksittäinen tähdistö"
 
-#: src/ui_configurationDialog.h:1130
+#: src/ui_configurationDialog.h:1132
 msgid "Align labels with the horizon"
 msgstr "Suuntaa nimet horisontin mukaan"
 
-#: src/ui_configurationDialog.h:1132
+#: src/ui_configurationDialog.h:1134
 msgid "Gravity labels"
 msgstr "\"Gravitaationimet\""
 
-#: src/ui_configurationDialog.h:1134
+#: src/ui_configurationDialog.h:1136
 msgid "Toggle display backgrounds of the nebulae."
 msgstr "Tähtisumukuvat päälle"
 
-#: src/ui_configurationDialog.h:1136
+#: src/ui_configurationDialog.h:1138
 msgid "Show nebula background button"
 msgstr "Näytä tähtisumukuvat-painike"
 
-#: src/ui_configurationDialog.h:1138
+#: src/ui_configurationDialog.h:1140
 msgid "Toggle vertical and horizontal image flip buttons."
 msgstr "Pysty- ja vaakapeilauksen painikkeet päälle/pois."
 
-#: src/ui_configurationDialog.h:1140
+#: src/ui_configurationDialog.h:1142
 msgid "Show flip buttons"
 msgstr "Näytä peilauspainikkeet"
 
-#: src/ui_configurationDialog.h:1142
+#: src/ui_configurationDialog.h:1144
 msgid ""
 "When enabled, the \"auto zoom out\" key will also set the initial viewing "
 "direction"
@@ -4695,99 +4736,99 @@ msgstr ""
 "Kun käytössä, \"automaattinen loitonnus\"-näppäin asettaa myös "
 "aloituskatselusuunnan"
 
-#: src/ui_configurationDialog.h:1144
+#: src/ui_configurationDialog.h:1146
 msgid "Auto zoom out returns to initial direction of view"
 msgstr "Automaattinen loitonnus palauttaa aloituskatselusuunnan"
 
-#: src/ui_configurationDialog.h:1146
+#: src/ui_configurationDialog.h:1148
 msgid ""
 "Auto-enabling of the atmosphere for bodies with atmosphere in location window"
 msgstr ""
 "Aseta paikkakuntaikkunassa ilmakehä automaattisesti kohteille, joilla on "
 "ilmakehä"
 
-#: src/ui_configurationDialog.h:1148
+#: src/ui_configurationDialog.h:1150
 msgid "Auto-enabling for the atmosphere"
 msgstr "Ilmakehän automaattinen asetus"
 
-#: src/ui_configurationDialog.h:1149
+#: src/ui_configurationDialog.h:1151
 msgid "Screenshots"
 msgstr "Kuvankaappaukset"
 
-#: src/ui_configurationDialog.h:1150
+#: src/ui_configurationDialog.h:1152
 msgid "Screenshot Directory"
 msgstr "Kuvankaappaushakemisto"
 
-#: src/ui_configurationDialog.h:1152
+#: src/ui_configurationDialog.h:1154
 msgid "Invert colors"
 msgstr "Käänteiset värit"
 
-#: src/ui_configurationDialog.h:1153
+#: src/ui_configurationDialog.h:1155
 msgid "Star catalog updates"
 msgstr "Tähtiluetteloiden päivitykset"
 
-#: src/ui_configurationDialog.h:1155
+#: src/ui_configurationDialog.h:1157
 msgid "Click here to start downloading"
 msgstr "Napsauta tästä aloittaaksesi haku"
 
-#: src/ui_configurationDialog.h:1157
+#: src/ui_configurationDialog.h:1159
 msgid "Download this file to view even more stars"
 msgstr "Hae tämä tiedosto näyttääkseni enemmän tähtiä"
 
-#: src/ui_configurationDialog.h:1159
+#: src/ui_configurationDialog.h:1161
 msgid "Restart the download"
 msgstr "Aloita haku uudelleen"
 
-#: src/ui_configurationDialog.h:1161
+#: src/ui_configurationDialog.h:1163
 msgid "Retry"
 msgstr "Yritä uudelleen"
 
-#: src/ui_configurationDialog.h:1163
+#: src/ui_configurationDialog.h:1165
 msgid "Stop the download. You can always restart it later"
 msgstr "Keskeytä haku. Voit aina aloittaa sen myöhemmin uudelleen"
 
-#: src/ui_configurationDialog.h:1168
+#: src/ui_configurationDialog.h:1170
 msgid "Close window when script runs"
 msgstr "Sulje ikkuna komentosarjaa suoritettaessa"
 
-#: src/ui_configurationDialog.h:1170
+#: src/ui_configurationDialog.h:1172
 msgid "Run the selected script"
 msgstr "Suorita valittu komentosarja"
 
-#: src/ui_configurationDialog.h:1174
+#: src/ui_configurationDialog.h:1176
 msgid "Stop a running script"
 msgstr "Pysäytä suoritettava komentosarja"
 
-#: src/ui_configurationDialog.h:1178
+#: src/ui_configurationDialog.h:1180
 msgid "Load at startup"
 msgstr "Lataa käynnistettäessä"
 
-#: src/ui_configurationDialog.h:1179
+#: src/ui_configurationDialog.h:1181
 msgid "configure"
 msgstr "muuta asetuksia"
 
-#: src/ui_configurationDialog.h:1184
+#: src/ui_configurationDialog.h:1186
 msgid "Main"
 msgstr "Pää"
 
-#: src/ui_configurationDialog.h:1186
+#: src/ui_configurationDialog.h:1188
 msgid "Information"
 msgstr "Tiedot"
 
-#: src/ui_configurationDialog.h:1191
+#: src/ui_configurationDialog.h:1193
 msgid "Navigation"
 msgstr "Siirtyminen"
 
-#: src/ui_configurationDialog.h:1193
+#: src/ui_configurationDialog.h:1195
 msgid "Tools"
 msgstr "Työkalut"
 
-#: src/ui_configurationDialog.h:1195
+#: src/ui_configurationDialog.h:1197
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:452
 msgid "Scripts"
 msgstr "Komentosarjat"
 
-#: src/ui_configurationDialog.h:1197
+#: src/ui_configurationDialog.h:1199
 msgid "Plugins"
 msgstr "Laajennukset"
 
@@ -5007,7 +5048,7 @@ msgstr ""
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:128
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:144
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:137
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:281
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:280
 msgid "Links"
 msgstr "Linkit"
 
@@ -5018,7 +5059,7 @@ msgstr "Linkit"
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:129
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:145
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:138
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:282
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:281
 #, qt-format
 msgid ""
 "Support is provided via the Launchpad website.  Be sure to put \"%1\" in the "
@@ -5035,7 +5076,7 @@ msgstr ""
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:132
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:148
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:141
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:285
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:284
 #, qt-format
 msgid "If you have a question, you can %1get an answer here%2"
 msgstr "Jos sinulla on kysyttävää, vastaus %1löytyy täältä%2"
@@ -5048,7 +5089,7 @@ msgstr "Jos sinulla on kysyttävää, vastaus %1löytyy täältä%2"
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:134
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:150
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:143
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:287
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:286
 #, qt-format
 msgid "Bug reports can be made %1here%2."
 msgstr "Virheraportteja voi tehdä %1tänne%2."
@@ -5061,7 +5102,7 @@ msgstr "Virheraportteja voi tehdä %1tänne%2."
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:136
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:152
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:145
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:289
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:288
 msgid ""
 "If you would like to make a feature request, you can create a bug report, "
 "and set the severity to \"wishlist\"."
@@ -6049,7 +6090,7 @@ msgstr "Katso lisätietoja %1tästä dokumentista%2."
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:158
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:174
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:219
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:303
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:302
 msgid "Internet updates disabled"
 msgstr "Internet-päivitykset pois käytöstä."
 
@@ -6065,8 +6106,8 @@ msgstr "Internet-päivitykset pois käytöstä."
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:234
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:221
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:283
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:305
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:333
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:304
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:332
 msgid "Updating now..."
 msgstr "Päivitetään..."
 
@@ -6076,7 +6117,7 @@ msgstr "Päivitetään..."
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:162
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:178
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:223
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:307
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:306
 msgid "Next update: < 1 minute"
 msgstr "Seuraava päivitys: < 1 minuuttia"
 
@@ -6086,7 +6127,7 @@ msgstr "Seuraava päivitys: < 1 minuuttia"
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:164
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:180
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:225
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:309
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:308
 #, qt-format
 msgid "Next update: %1 minutes"
 msgstr "Seuraava päivitys: %1 minuuttia"
@@ -6097,7 +6138,7 @@ msgstr "Seuraava päivitys: %1 minuuttia"
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:166
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:182
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:227
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:311
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:310
 #, qt-format
 msgid "Next update: %1 hours"
 msgstr "Seuraava päivitys: %1 tuntia"
@@ -6108,7 +6149,7 @@ msgstr "Seuraava päivitys: %1 tuntia"
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:215
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:237
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:286
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:336
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:335
 msgid "Update error"
 msgstr "Päivitysvirhe"
 
@@ -6138,7 +6179,7 @@ msgstr "[uusi lähde]"
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:271
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:272
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:311
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:324
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:323
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:519
 msgid "Update now"
 msgstr "Päivitä nyt"
@@ -6838,73 +6879,73 @@ msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:242
 #: plugins/Supernovae/src/Supernovae.cpp:719 plugins/Novae/src/Novae.cpp:716
-#: plugins/MeteorShowers/src/MeteorShower.cpp:174
+#: plugins/MeteorShowers/src/MeteorShower.cpp:188
 msgid "January"
 msgstr "Tammikuu"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:243
 #: plugins/Supernovae/src/Supernovae.cpp:719 plugins/Novae/src/Novae.cpp:716
-#: plugins/MeteorShowers/src/MeteorShower.cpp:175
+#: plugins/MeteorShowers/src/MeteorShower.cpp:189
 msgid "February"
 msgstr "Helmikuu"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:244
 #: plugins/Supernovae/src/Supernovae.cpp:719 plugins/Novae/src/Novae.cpp:716
-#: plugins/MeteorShowers/src/MeteorShower.cpp:176
+#: plugins/MeteorShowers/src/MeteorShower.cpp:190
 msgid "March"
 msgstr "Maaliskuu"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:245
 #: plugins/Supernovae/src/Supernovae.cpp:719 plugins/Novae/src/Novae.cpp:716
-#: plugins/MeteorShowers/src/MeteorShower.cpp:177
+#: plugins/MeteorShowers/src/MeteorShower.cpp:191
 msgid "April"
 msgstr "Huhtikuu"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:246
 #: plugins/Supernovae/src/Supernovae.cpp:719 plugins/Novae/src/Novae.cpp:716
-#: plugins/MeteorShowers/src/MeteorShower.cpp:178
+#: plugins/MeteorShowers/src/MeteorShower.cpp:192
 msgid "May"
 msgstr "Toukokuu"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:247
 #: plugins/Supernovae/src/Supernovae.cpp:719 plugins/Novae/src/Novae.cpp:716
-#: plugins/MeteorShowers/src/MeteorShower.cpp:179
+#: plugins/MeteorShowers/src/MeteorShower.cpp:193
 msgid "June"
 msgstr "Kesäkuu"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:248
 #: plugins/Supernovae/src/Supernovae.cpp:719 plugins/Novae/src/Novae.cpp:716
-#: plugins/MeteorShowers/src/MeteorShower.cpp:180
+#: plugins/MeteorShowers/src/MeteorShower.cpp:194
 msgid "July"
 msgstr "Heinäkuu"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:249
 #: plugins/Supernovae/src/Supernovae.cpp:719 plugins/Novae/src/Novae.cpp:716
-#: plugins/MeteorShowers/src/MeteorShower.cpp:181
+#: plugins/MeteorShowers/src/MeteorShower.cpp:195
 msgid "August"
 msgstr "Elokuu"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:250
 #: plugins/Supernovae/src/Supernovae.cpp:719 plugins/Novae/src/Novae.cpp:716
-#: plugins/MeteorShowers/src/MeteorShower.cpp:182
+#: plugins/MeteorShowers/src/MeteorShower.cpp:196
 msgid "September"
 msgstr "Syyskuu"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:251
 #: plugins/Supernovae/src/Supernovae.cpp:719 plugins/Novae/src/Novae.cpp:716
-#: plugins/MeteorShowers/src/MeteorShower.cpp:183
+#: plugins/MeteorShowers/src/MeteorShower.cpp:197
 msgid "October"
 msgstr "Lokakuu"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:252
 #: plugins/Supernovae/src/Supernovae.cpp:719 plugins/Novae/src/Novae.cpp:716
-#: plugins/MeteorShowers/src/MeteorShower.cpp:184
+#: plugins/MeteorShowers/src/MeteorShower.cpp:198
 msgid "November"
 msgstr "Marraskuu"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:253
 #: plugins/Supernovae/src/Supernovae.cpp:719 plugins/Novae/src/Novae.cpp:716
-#: plugins/MeteorShowers/src/MeteorShower.cpp:185
+#: plugins/MeteorShowers/src/MeteorShower.cpp:199
 msgid "December"
 msgstr "Joulukuu"
 
@@ -7651,7 +7692,7 @@ msgid "Bright Novae configuration window"
 msgstr "Kirkkaiden novien asetusikkuna"
 
 #: plugins/Novae/src/Nova.cpp:135 plugins/Pulsars/src/Pulsar.cpp:168
-#: plugins/MeteorShowers/src/MeteorShower.cpp:330
+#: plugins/MeteorShowers/src/MeteorShower.cpp:344
 #, qt-format
 msgid "Type: <b>%1</b> (%2)"
 msgstr "Tyyppi: <b>%1</b> (%2)"
@@ -8199,7 +8240,7 @@ msgstr ""
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:147
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:291
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:290
 #, qt-format
 msgid ""
 "If you want to read full information about the plugin, its history and "
@@ -8993,31 +9034,31 @@ msgstr "Muuta tasauksen merkkiä"
 msgid "Font size:"
 msgstr "Fontin koko:"
 
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:71
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:171
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:63
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:163
 msgid "Meteor Showers"
 msgstr "Meteoriparvet"
 
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:74
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:259
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:66
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:258
 msgid ""
 "This plugin displays meteor showers and a marker for each active and "
 "inactive radiant, showing real information about its activity."
 msgstr ""
 
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:172
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:164
 msgid "Show meteor showers"
 msgstr "Näytä meteoriparvet"
 
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:173
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:165
 msgid "Radiant labels"
 msgstr "Radianttien merkit"
 
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:174
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:166
 msgid "Meteor Shower configuration window"
 msgstr "Meteoriparvien asetusikkuna"
 
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:201
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:193
 msgid ""
 "The old showers.json file is no longer compatible - using default file"
 msgstr ""
@@ -9025,512 +9066,512 @@ msgstr ""
 "oletustiedostoa"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1239
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1240
 msgid "Quadrantids"
 msgstr "Kvadrantidit"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1241
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1242
 msgid "Lyrids"
 msgstr "Lyridit"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1243
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1244
 msgid "α-Centaurids"
 msgstr "α-Centauridit"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1245
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1246
 msgid "γ-Normids"
 msgstr "γ-Normidit"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1247
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1248
 msgid "η-Aquariids"
 msgstr "η-Akvaridit"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1249
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1250
 msgid "June Bootids"
 msgstr "Kesäkuun Bootidit"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1251
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1252
 msgid "Piscis Austrinids"
 msgstr "Piscis Austrinidit"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1253
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1254
 msgid "Southern δ-Aquariids"
 msgstr "Eteläiset δ-Akvaridit"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1255
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1256
 msgid "α-Capricornids"
 msgstr "α-Capricornidit"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1257
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1258
 msgid "α-Aurigids"
 msgstr "α-Aurigidit"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1259
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1260
 msgid "September ε-Perseids"
 msgstr "Syyskuun ε-Perseidit"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1261
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1262
 msgid "Draconids"
 msgstr "Draconidit"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1263
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1264
 msgid "Leonids"
 msgstr "Leonidit"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1265
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1266
 msgid "Phoenicids"
 msgstr "Phoenicidit"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1267
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1268
 msgid "Puppid-Velids"
 msgstr "Puppidi-Velidit"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1269
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1270
 msgid "Ursids"
 msgstr "Ursidit"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1271
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1272
 msgid "Perseids"
 msgstr "Perseidit"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1273
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1274
 msgid "δ-Leonids"
 msgstr "δ-Leonidit"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1275
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1276
 msgid "π-Puppids"
 msgstr "π-Puppidit"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1277
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1278
 msgid "June Lyrids"
 msgstr "Kesäkuun Lyridit"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1279
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1280
 msgid "κ-Cygnids"
 msgstr "κ-Cygnidit"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1281
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1282
 msgid "ε-Lyrids"
 msgstr "ε-Lyridit"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1283
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1284
 msgid "δ-Aurigids"
 msgstr "δ-Aurigidit"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1285
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1286
 msgid "ε-Geminids"
 msgstr "ε-Geminidit"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1287
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1288
 msgid "Southern Taurids"
 msgstr "Eteläiset Tauridit"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1289
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1290
 msgid "Northern Taurids"
 msgstr "Pohjoiset Tauridit"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1291
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1292
 msgid "Monocerotids"
 msgstr "Monocerotidit"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1293
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1294
 msgid "α-Monocerotids"
 msgstr ""
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1295
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1296
 msgid "σ-Hydrids"
 msgstr "σ-Hydridit"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1297
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1298
 msgid "Geminids"
 msgstr "Geminidit"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1299
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1300
 msgid "Leonis Minorids"
 msgstr "Leonis Minoridit"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1301
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1302
 msgid "December Leonis Minorids"
 msgstr "Joulukuun Leonis Minoridit"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1303
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1304
 msgid "Comae Berenicids"
 msgstr "Coma Berenicidit"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1305
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1306
 msgid "Orionids"
 msgstr "Orionidit"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1307
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1308
 msgid "Andromedids"
 msgstr "Andromedidit"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1309
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1310
 msgid "η-Lyrids"
 msgstr ""
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1311
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1312
 msgid "α-Scorpiids"
 msgstr ""
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1313
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1314
 msgid "Ophiuchids"
 msgstr ""
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1315
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1316
 msgid "θ-Ophiuchids"
 msgstr ""
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1317
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1318
 msgid "κ-Serpentids"
 msgstr ""
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1319
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1320
 msgid "θ-Centaurids"
 msgstr ""
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1321
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1322
 msgid "ω-Cetids"
 msgstr ""
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1323
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1324
 msgid "Southern ω-Scorpiids"
 msgstr ""
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1325
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1326
 msgid "Northern ω-Scorpiids"
 msgstr ""
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1327
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1328
 msgid "Arietids"
 msgstr ""
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1329
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1330
 msgid "π-Cetids"
 msgstr ""
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1331
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1332
 msgid "δ-Cancrids"
 msgstr ""
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1333
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1334
 msgid "τ-Herculids"
 msgstr ""
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1335
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1336
 msgid "ρ-Geminids"
 msgstr ""
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1337
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1338
 msgid "η-Carinids"
 msgstr ""
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1339
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1340
 msgid "η-Craterids"
 msgstr ""
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1341
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1342
 msgid "π-Virginids"
 msgstr ""
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1343
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1344
 msgid "θ-Virginids"
 msgstr ""
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1345
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1346
 msgid "May Librids"
 msgstr ""
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1347
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1348
 msgid "June Scutids"
 msgstr ""
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1349
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1350
 msgid "α-Pisces Australids"
 msgstr ""
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1351
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1352
 msgid "Southern ι-Aquariids"
 msgstr ""
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1353
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1354
 msgid "Northern ι-Aquariids"
 msgstr ""
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1355
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1356
 msgid "γ-Aquariids"
 msgstr ""
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1357
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1358
 msgid "Autumn Arietids"
 msgstr ""
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1359
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1360
 msgid "χ-Orionids"
 msgstr ""
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1363
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1364
 msgid "Comet 1P/Halley"
 msgstr "Komeetta 1P/Halley"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1365
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1366
 msgid "Comet 7P/Pons-Winnecke"
 msgstr "Komeetta 7P/Pons-Winnecke"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1367
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1368
 msgid "Comet 55P/Tempel-Tuttle"
 msgstr "Komeetta 55P/Tempel-Tuttle"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1369
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1370
 msgid "Comet 96P/Machholz"
 msgstr "Komeetta 96P/Machholz"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1371
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1372
 msgid "Comet 109P/Swift-Tuttle"
 msgstr "Komeetta 109P/Swift-Tuttle"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1373
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1374
 msgid "Comet Thatcher (1861 I)"
 msgstr "Komeetta Thatcher (1861 I)"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1375
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1376
 msgid "Comet 26P/Grigg-Skjellerup"
 msgstr "Komeetta 26P/Grigg-Skjellerup"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1377
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1378
 msgid "Comet 21P/Giacobini-Zinner"
 msgstr "Komeetta 21P/Giacobini-Zinner"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1379
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1380
 msgid "Comet 169P/NEAT"
 msgstr "Komeetta 169P/NEAT"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1381
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1382
 msgid "Comet 289P/Blanpain"
 msgstr "Komeetta 289P/Blanpain"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1383
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1384
 msgid "Comet 8P/Tuttle"
 msgstr "Komeetta 8P/Tuttle"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1385
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1386
 msgid "Comet 3D/Biela"
 msgstr "Komeetta 3D/Biela"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1387
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1388
 msgid "Comet C/1917 F1 (Mellish)"
 msgstr ""
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1389
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1390
 msgid "Comet C/1964 N1 (Ikeya)"
 msgstr ""
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1391
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1392
 msgid "Comet Schwassmann-Wachmann 3"
 msgstr ""
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1393
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1394
 msgid "Minor planet 2003 EH1 and Comet C/1490 Y1"
 msgstr "Pikkuplaneetta 2003 EH1 ja komeetta C/1490 Y1"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1395
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1396
 msgid "Minor planet (4450) Pan"
 msgstr "Pikkuplaneetta (4450) Pan"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1397
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1398
 msgid "Minor planet 2008 ED69"
 msgstr "Pikkuplaneetta 2008 ED69"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1399
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1400
 msgid "Comet 2P/Encke"
 msgstr "Komeetta 2P/Encke"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1401
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1402
 msgid "Minor planet 2004 TG10"
 msgstr "Pikkuplaneetta 2004 TG10"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1403
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1404
 msgid "Minor planet (3200) Phaethon"
 msgstr "Pikkuplaneetta (3200) Phaethon"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:311
+#: plugins/MeteorShowers/src/MeteorShower.cpp:325
 msgid "generic data"
 msgstr "geneerinen data"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:313
+#: plugins/MeteorShowers/src/MeteorShower.cpp:327
 msgid "real data"
 msgstr "todellinen data"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:330
+#: plugins/MeteorShowers/src/MeteorShower.cpp:344
 msgid "meteor shower"
 msgstr "meteoriparvi"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:339
+#: plugins/MeteorShowers/src/MeteorShower.cpp:353
 msgid "Radiant drift (per day)"
 msgstr "Radiantin siirtyminen (päivässä)"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:346
+#: plugins/MeteorShowers/src/MeteorShower.cpp:360
 #, qt-format
 msgid "Geocentric meteoric velocity: %1 km/s"
 msgstr "Geosentrinen meteoriittien nopeus: %1 km/s"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:351
+#: plugins/MeteorShowers/src/MeteorShower.cpp:365
 #, qt-format
 msgid "The population index: %1"
 msgstr "Populaatioindeksi: %1"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:356
+#: plugins/MeteorShowers/src/MeteorShower.cpp:370
 #, qt-format
 msgid "Parent body: %1"
 msgstr "Emokappale: %1"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:362
+#: plugins/MeteorShowers/src/MeteorShower.cpp:376
 msgid "Active"
 msgstr "Aktiivinen"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:370
+#: plugins/MeteorShowers/src/MeteorShower.cpp:384
 msgid "Activity"
 msgstr "Aktiivisuus"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:375
+#: plugins/MeteorShowers/src/MeteorShower.cpp:389
 #, qt-format
 msgid "Maximum: %1"
 msgstr "Maksimi: %1"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:378
+#: plugins/MeteorShowers/src/MeteorShower.cpp:392
 msgid "Solar longitude is"
 msgstr "Solaarinen pituusaste on"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:387
+#: plugins/MeteorShowers/src/MeteorShower.cpp:401
 msgid "variable"
 msgstr "muuttuja"
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:167
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:166
 msgid "ZHR"
 msgstr "ZHR"
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:168
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:167
 msgid "Data Type"
 msgstr "Datatyyppi"
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:169
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:168
 msgid "Peak"
 msgstr "Huippu"
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:180
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:179
 msgid "Start date greater than end date!"
 msgstr "Alkamispäivä suurempi kuin loppumispäivä!"
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:184
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:183
 msgid "Time interval must be less than one year!"
 msgstr "Aikavälin pitää olla vähemmän kuin yksi vuosi!"
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:204
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:203
 msgid "Variable"
 msgstr "Muuttuva"
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:207
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:206
 msgid "Real"
 msgstr "Todellinen"
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:207
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:206
 msgid "Generic"
 msgstr "Geneerinen"
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:254
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:253
 msgid "Meteor Showers Plug-in"
 msgstr "Meteoriparvet-laajennus"
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:260
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:259
 msgid "Terms"
 msgstr "Ehdot"
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:261
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:260
 msgid "Meteor shower"
 msgstr "Meteorparvi"
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:262
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:261
 msgid ""
 "A meteor shower is a celestial event in which a number of meteors are "
 "observed to radiate, or originate, from one point in the night sky. These "
@@ -9549,11 +9590,11 @@ msgstr ""
 "voimakkaita meteoriparvia kutsutaan meteorimyrskyiksi, jolloin meteoreja "
 "saattaa näkyä jopa enemmän kuin tuhat kappaletta tunnissa."
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:263
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:262
 msgid "Radiant"
 msgstr "Radiantti"
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:264
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:263
 msgid ""
 "The radiant or apparent radiant of a meteor shower is the point in the sky, "
 "from which (to a planetary observer) meteors appear to originate. The "
@@ -9564,7 +9605,7 @@ msgstr ""
 "meteorit näyttävät tulevan. Esimerkiksi Perseidit näyttävät tulevan tietystä "
 "pisteestä Perseuksen tähdistössä."
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:265
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:264
 msgid ""
 "An observer might see such a meteor anywhere in the sky but the direction of "
 "motion, when traced back, will point to the radiant. A meteor that does not "
@@ -9576,7 +9617,7 @@ msgstr ""
 "Meteorit, jotka eivät osoita kohti parven radianttia ovat sporadisia eli "
 "satunnaisia meteoreja, eivätkä ne liity kyseiseen parveen."
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:266
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:265
 msgid ""
 "Many showers have a radiant point that changes position during the interval "
 "when it appears. For example, the radiant point for the Delta Aurigids "
@@ -9585,11 +9626,11 @@ msgstr ""
 "Monilla parvilla radiantti siirtyy aktiivisuusjakson aikana. Esimerkiksi "
 "delta-Aurigidien radiantti siirtyy yli asteen verran yhdessä yössä."
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:267
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:266
 msgid "Zenithal Hourly Rate (ZHR)"
 msgstr "Meteoria tunnissa zeniitissä (ZHR)"
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:268
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:267
 msgid ""
 "In astronomy, the Zenithal Hourly Rate (ZHR) of a meteor shower is the "
 "number of meteors a single observer would see in one hour under a clear, "
@@ -9604,11 +9645,11 @@ msgstr ""
 "käytännössä aina pienempi ja pienenee sitä mukaa mitä lähempänä horisonttia "
 "radiantti on."
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:269
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:268
 msgid "Population index"
 msgstr "Populaatioindeksi"
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:270
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:269
 msgid ""
 "The population index indicates the magnitude distribution of the meteor "
 "showers. The values below 2.5 correspond to distributions where bright "
@@ -9620,36 +9661,36 @@ msgstr ""
 "todennäköisempiä, kun taas yli 3.0 arvot tarkoittavat himmeiden meteorien "
 "keskimääräistä suurempaa määrää."
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:271
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:270
 msgid "Notes"
 msgstr "Huomautukset"
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:272
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:271
 msgid ""
 "This plugin was created as project of ESA Summer of Code in Space 2013."
 msgstr "Laajennus toteutettiin ESA Summer of Code in Spacen projektina 2013."
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:273
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:272
 msgid "Info"
 msgstr "Tietoja"
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:274
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:273
 msgid "Info about meteor showers you can get here:"
 msgstr "Tietoja meteoriparvista löydät täältä:"
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:277
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:276
 #, qt-format
 msgid "%1Meteor shower%2 - article in Wikipedia"
 msgstr "%1Meteoriparvi%2 - artikkeli Wikipediassa"
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:279
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:278
 #, qt-format
 msgid "%1International Meteor Organization%2"
 msgstr "%1International Meteor Organization%2"
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:343
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:342
 msgid "Meteor showers is updated"
 msgstr "Meteoriparvet on päivitetty"
 
@@ -10143,6 +10184,9 @@ msgstr ""
 #~ msgstr ""
 #~ "Komentosarja esittelee analemman - Auringon vuotuisen liikkeen muodostaman "
 #~ "kuvion taivaalla."
+
+#~ msgid "A tour of the western constellations."
+#~ msgstr "Matka länsimaisiin tähtikuvioihin."
 
 #~ msgid "Render Solar Shadows"
 #~ msgstr "Mallinna kappaleiden luomat varjot"
