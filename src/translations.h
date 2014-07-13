@@ -312,7 +312,7 @@ class Translations
 		N_("A demonstration of the analemma - the path of the Sun across the sky during the year.");
 		N_("Flash of the supernova observed by Tycho Brahe in 1572. The Supernovae plugin has to be enabled.");
 		N_("Earth and Venus Greatest Elongations and Brilliancies from Mars 2000-3000");
-		N_("Earth Greatest Elongations and Transits from Callisto 2000-3000. Why Callisto? Well of the 4 Galilean Satillites, Callisto is the only one outside of Jupiter's radiation belt. Therefore, if humans ever colonize Jupiter's moons, Callisto will be the one.");
+		N_("Earth Greatest Elongations and Transits from Callisto 2000-3000. Why Callisto? Well of the 4 Galilean Moons, Callisto is the only one outside of Jupiter's radiation belt. Therefore, if humans ever colonize Jupiter's moons, Callisto will be the one.");
 		
 		// =====================================================================
 		// List of countries
