@@ -74,14 +74,16 @@ StelAddOnMgr::StelAddOnMgr()
 	m_iLastUpdate = lastUpdate.toLong();
 
 	// Init sub-classes
-	m_pLandscape = new AOLandscape(m_pStelAddOnDAO);
-	m_pScript = new AOScript(m_pStelAddOnDAO);
-	m_pTexture = new AOTexture(m_pStelAddOnDAO);
+	m_pStelAddOns.insert(LANDSCAPE, new AOLandscape(m_pStelAddOnDAO));
+	m_pStelAddOns.insert(SCRIPT, new AOScript(m_pStelAddOnDAO));
+	m_pStelAddOns.insert(TEXTURE, new AOTexture(m_pStelAddOnDAO));
 
 	// check add-ons which are already installed
-	m_pLandscape->checkInstalledAddOns();
-	m_pScript->checkInstalledAddOns();
-	m_pTexture->checkInstalledAddOns();
+	QHashIterator<QString, StelAddOn*> aos(m_pStelAddOns);
+	while (aos.hasNext()) {
+	    aos.next();
+	    aos.value()->checkInstalledAddOns();
+	}
 }
 
 StelAddOnMgr::~StelAddOnMgr()
@@ -274,19 +276,7 @@ void StelAddOnMgr::installAddOn(const int addonId)
 
 void StelAddOnMgr::installFromFile(QString category, QString filePath)
 {
-	if (category == LANDSCAPE)
-	{
-		m_pLandscape->installFromFile(filePath);
-	}
-	else if (category == SCRIPT)
-	{
-		m_pScript->installFromFile(filePath);
-	}
-	else if (category == TEXTURE)
-	{
-		m_pTexture->installFromFile(filePath);
-	}
-
+	m_pStelAddOns.value(category)->installFromFile(filePath);
 	if (m_downloadQueue.isEmpty())
 	{
 		emit (updateTableViews());
@@ -295,18 +285,8 @@ void StelAddOnMgr::installFromFile(QString category, QString filePath)
 
 void StelAddOnMgr::removeAddOn(const int addonId)
 {
-	bool removed = false;
 	StelAddOnDAO::AddOnInfo addonInfo = m_pStelAddOnDAO->getAddOnInfo(addonId);
-	if (addonInfo.category == LANDSCAPE)
-	{
-		removed = m_pLandscape->uninstallAddOn(addonInfo);
-	}
-	else if (addonInfo.category == TEXTURE)
-	{
-		removed = m_pTexture->uninstallAddOn(addonInfo);
-	}
-
-	if (removed)
+	if (m_pStelAddOns.value(addonInfo.category)->uninstallAddOn(addonInfo))
 	{
 		emit (updateTableViews());
 	}

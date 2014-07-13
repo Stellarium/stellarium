@@ -103,10 +103,8 @@ private:
 	const QString m_sDirStarlore;
 	const QString m_sDirTexture;
 
-	// Sub-classes
-	AOLandscape* m_pLandscape;
-	AOScript* m_pScript;
-	AOTexture* m_pTexture;
+	// sub-classes
+	QHash<QString, StelAddOn*> m_pStelAddOns;
 
 	void downloadAddOn(const StelAddOnDAO::AddOnInfo addonInfo);
 };
