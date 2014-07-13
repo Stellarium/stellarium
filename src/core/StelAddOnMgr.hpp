@@ -27,6 +27,7 @@
 #include <QSqlDatabase>
 
 #include "AOLandscape.hpp"
+#include "AOScript.hpp"
 #include "AOTexture.hpp"
 #include "StelAddOnDAO.hpp"
 
@@ -104,6 +105,7 @@ private:
 
 	// Sub-classes
 	AOLandscape* m_pLandscape;
+	AOScript* m_pScript;
 	AOTexture* m_pTexture;
 
 	void downloadAddOn(const StelAddOnDAO::AddOnInfo addonInfo);

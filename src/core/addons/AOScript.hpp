@@ -17,32 +17,30 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _STELADDON_HPP_
-#define _STELADDON_HPP_
+#ifndef _AOSCRIPT_HPP_
+#define _AOSCRIPT_HPP_
 
-#include <QObject>
-#include <QStringBuilder>
-#include <QtDebug>
+#include "StelAddOn.hpp"
 
-#include "StelApp.hpp"
-#include "StelAddOnDAO.hpp"
-#include "StelFileMgr.hpp"
-#include "StelModuleMgr.hpp"
-#include "qzipreader.h"
-
-// pure virtual (abstract) class to provide an interface for addons
-class StelAddOn : public QObject
+class AOScript : public StelAddOn
 {
 	Q_OBJECT
 public:
-	// check add-ons which are already installed
-	virtual void checkInstalledAddOns() const = 0;
+	AOScript(StelAddOnDAO* pStelAddOnDAO);
+	virtual ~AOScript();
 
-	// install add-on from a zip file
-	virtual void installFromFile(const QString& filePath) const = 0;
+	// check scripts which are already installed.
+	virtual void checkInstalledAddOns() const;
 
-	// uninstall add-on
-	virtual bool uninstallAddOn(const StelAddOnDAO::AddOnInfo& addonInfo) const = 0;
+	// install script from a zip file.
+	virtual void installFromFile(const QString& filePath) const;
+
+	// uninstall script
+	virtual bool uninstallAddOn(const StelAddOnDAO::AddOnInfo& addonInfo) const;
+
+private:
+	StelAddOnDAO* m_pStelAddOnDAO;
+	const QString m_sScriptInstallDir;
 };
 
-#endif // _STELADDON_HPP_
+#endif // _AOSCRIPT_HPP_

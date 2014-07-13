@@ -17,36 +17,29 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#include "AOTexture.hpp"
+#include "AOScript.hpp"
 
-AOTexture::AOTexture(StelAddOnDAO* pStelAddOnDAO)
+AOScript::AOScript(StelAddOnDAO* pStelAddOnDAO)
 	: m_pStelAddOnDAO(pStelAddOnDAO)
-	, m_sTexturesInstallDir(StelFileMgr::getInstallationDir() % "/textures/")
+	, m_sScriptInstallDir(StelFileMgr::getUserDir() % "/scripts/")
 {
-	if (!QDir(m_sTexturesInstallDir).exists())
-	{
-		qWarning() << "Add-On Texture: Unable to find the textures directory:"
-			   << QDir::toNativeSeparators(m_sTexturesInstallDir);
-	}
+	StelFileMgr::makeSureDirExistsAndIsWritable(m_sScriptInstallDir);
 }
 
-AOTexture::~AOTexture()
+AOScript::~AOScript()
 {
 }
 
-void AOTexture::checkInstalledAddOns() const
+void AOScript::checkInstalledAddOns() const
 {
-	// TODO: users can change the textures externally,
-	// so probably we'll need to compare md5hashes to be able
-	// to know which are the installed textures
 }
 
-void AOTexture::installFromFile(const QString& filePath) const
+void AOScript::installFromFile(const QString& filePath) const
 {
 	QZipReader reader(filePath);
 	if (reader.status() != QZipReader::NoError)
 	{
-		qWarning() << "Add-On Texture: Unable to open the ZIP archive:"
+		qWarning() << "Add-On Script: Unable to open the ZIP archive:"
 			   << QDir::toNativeSeparators(filePath);
 		return;
 	}
@@ -59,21 +52,8 @@ void AOTexture::installFromFile(const QString& filePath) const
 			continue;
 		}
 
-		QString installedFilePath = m_sTexturesInstallDir % info.filePath;
-		QFile installedFile(installedFilePath);
-		if (!installedFile.exists())
-		{
-			qWarning() << "Add-On Texture: Unable to find the file:"
-				   << QDir::toNativeSeparators(installedFilePath);
-			continue;
-		}
-
-		if (!installedFile.remove())
-		{
-			qWarning() << "Add-On Texture: Unable to overwrite :"
-				   << QDir::toNativeSeparators(installedFilePath);
-			continue;
-		}
+		QString installedFilePath = m_sScriptInstallDir % info.filePath;
+		QFile(installedFilePath).remove();
 
 		QByteArray data = reader.fileData(info.filePath);
 		QFile out(installedFilePath);
@@ -81,12 +61,12 @@ void AOTexture::installFromFile(const QString& filePath) const
 		out.write(data);
 		out.close();
 
-		qWarning() << "Add-On Texture: New texture installed:" << info.filePath;
+		qWarning() << "Add-On Script: New script installed:" << info.filePath;
 	}
 	m_pStelAddOnDAO->updateInstalledAddon(QFileInfo(filePath).fileName(), "1.0", "");
 }
 
-bool AOTexture::uninstallAddOn(const StelAddOnDAO::AddOnInfo &addonInfo) const
+bool AOScript::uninstallAddOn(const StelAddOnDAO::AddOnInfo &addonInfo) const
 {
 	return true;
 }

@@ -75,10 +75,12 @@ StelAddOnMgr::StelAddOnMgr()
 
 	// Init sub-classes
 	m_pLandscape = new AOLandscape(m_pStelAddOnDAO);
+	m_pScript = new AOScript(m_pStelAddOnDAO);
 	m_pTexture = new AOTexture(m_pStelAddOnDAO);
 
 	// check add-ons which are already installed
 	m_pLandscape->checkInstalledAddOns();
+	m_pScript->checkInstalledAddOns();
 	m_pTexture->checkInstalledAddOns();
 }
 
@@ -275,6 +277,10 @@ void StelAddOnMgr::installFromFile(QString category, QString filePath)
 	if (category == LANDSCAPE)
 	{
 		m_pLandscape->installFromFile(filePath);
+	}
+	else if (category == SCRIPT)
+	{
+		m_pScript->installFromFile(filePath);
 	}
 	else if (category == TEXTURE)
 	{
