@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-07-13 12:41+0700\n"
-"PO-Revision-Date: 2013-11-28 03:47+0000\n"
-"Last-Translator: Julius Grantén <jgranten@gmail.com>\n"
+"POT-Creation-Date: 2014-07-13 12:59+0700\n"
+"PO-Revision-Date: 2014-07-13 20:35+0000\n"
+"Last-Translator: Sten Persson <utsuddaren@gmail.com>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-07-13 05:59+0000\n"
+"X-Launchpad-Export-Date: 2014-07-14 06:16+0000\n"
 "X-Generator: Launchpad (build 17111)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:107 src/core/modules/StarMgr.cpp:339
@@ -189,12 +189,12 @@ msgstr "Magnitud: <b>%1</b>"
 #: src/core/modules/Nebula.cpp:119
 #, qt-format
 msgid "Surface brightness: <b>%1</b> (extincted to: <b>%2</b>)"
-msgstr ""
+msgstr "Ytljusstyrka: <b>%1</b> (utdör till: <b>%2</b>)"
 
 #: src/core/modules/Nebula.cpp:125
 #, qt-format
 msgid "Surface brightness: <b>%1</b>"
-msgstr ""
+msgstr "Ytljusstyrka: <b>%1</b>"
 
 #: src/core/modules/Nebula.cpp:131
 #, qt-format
@@ -263,7 +263,7 @@ msgstr "Avstånd: %1AU (%2 km)"
 #: src/core/modules/Comet.cpp:210
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 Mio km)"
-msgstr ""
+msgstr "Avstånd: %1AU (%2 M km)"
 
 #: src/core/modules/Planet.cpp:199
 #, qt-format
@@ -320,17 +320,17 @@ msgstr "Provisorisk beteckning: %1"
 #: src/core/modules/Comet.cpp:186
 #, no-c-format, qt-format
 msgid "Distance from Sun: %1AU (%2 km)"
-msgstr ""
+msgstr "Avstånd från solen: %1AU (%2 km)"
 
 #: src/core/modules/Comet.cpp:193
 #, no-c-format, qt-format
 msgid "Distance from Sun: %1AU (%2 Mio km)"
-msgstr ""
+msgstr "Avstånd från solen: %1AU (%2 M km)"
 
 #: src/core/modules/Comet.cpp:217
 #, no-c-format, qt-format
 msgid "Speed: %1 km/s"
-msgstr ""
+msgstr "Hastighet: %1 km/s"
 
 #: src/core/modules/SolarSystem.cpp:156
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:308
@@ -1233,7 +1233,7 @@ msgstr "Licens"
 
 #: src/gui/ConfigurationDialog.cpp:831
 msgid "Shortcut"
-msgstr ""
+msgstr "Kortkommando"
 
 #: src/gui/ConfigurationDialog.cpp:855
 msgid "Running script: "
@@ -1427,23 +1427,25 @@ msgstr "Anpassad ekvation av %1T"
 #. TRANSLATORS: This message will be displayed for users if Stellarium can't get info about version from stellarium.org
 #: src/gui/HelpDialog.cpp:259
 msgid "Oops... Stellarium can't check latest version."
-msgstr ""
+msgstr "Oops... Stellarium kunde inte se den senaste versionen."
 
 #. TRANSLATORS: This message will be displayed for users if current version of Stellarium is bigger than version from stellarium.org
 #: src/gui/HelpDialog.cpp:281
 msgid "Looks like you are using the development version of Stellarium."
-msgstr ""
+msgstr "Det verkar som att du använder utvecklingsversionen av Stellarium."
 
 #. TRANSLATORS: This message will be displayed for users if current version of Stellarium is smaller than version from stellarium.org
 #: src/gui/HelpDialog.cpp:286
 #, qt-format
 msgid "This version of Stellarium is outdated! Latest version is %1."
 msgstr ""
+"Du använder inte den senaste versionen av Stellarium. Den senaste versionen "
+"är %1."
 
 #. TRANSLATORS: This message will be displayed for users if current version of Stellarium is equals with version from stellarium.org
 #: src/gui/HelpDialog.cpp:292
 msgid "This is latest stable version of Stellarium."
-msgstr ""
+msgstr "Det här är den senaste stabila versionen av Stellarium."
 
 #: src/gui/HelpDialog.cpp:322
 msgid "Stellarium Help"
@@ -1702,60 +1704,60 @@ msgstr "%1m"
 
 #: src/gui/StelGuiItems.cpp:616
 msgid "Field of view"
-msgstr ""
+msgstr "Synfält"
 
 #: src/gui/StelGuiItems.cpp:634
 msgid "Frames per second"
-msgstr ""
+msgstr "Bildrutor per sekund"
 
 #. TRANSLATORS: Short description for Class 1 of the Bortle scale
 #: src/gui/ViewDialog.cpp:325
 msgid "Excellent dark-sky site"
-msgstr ""
+msgstr "Extremt mörk plats"
 
 #. TRANSLATORS: Short description for Class 2 of the Bortle scale
 #: src/gui/ViewDialog.cpp:327
 msgid "Typical truly dark site"
-msgstr ""
+msgstr "Väldigt mörk plats"
 
 #. TRANSLATORS: Short description for Class 3 of the Bortle scale
 #: src/gui/ViewDialog.cpp:329
 msgid "Rural sky"
-msgstr ""
+msgstr "Landsbygd"
 
 #. TRANSLATORS: Short description for Class 4 of the Bortle scale
 #: src/gui/ViewDialog.cpp:331
 msgid "Rural/suburban transition"
-msgstr ""
+msgstr "Landsbygd/förort övergång"
 
 #. TRANSLATORS: Short description for Class 5 of the Bortle scale
 #: src/gui/ViewDialog.cpp:333
 msgid "Suburban sky"
-msgstr ""
+msgstr "Förort"
 
 #. TRANSLATORS: Short description for Class 6 of the Bortle scale
 #: src/gui/ViewDialog.cpp:335
 msgid "Bright suburban sky"
-msgstr ""
+msgstr "Ljus förort"
 
 #. TRANSLATORS: Short description for Class 7 of the Bortle scale
 #: src/gui/ViewDialog.cpp:337
 msgid "Suburban/urban transition"
-msgstr ""
+msgstr "Förort/stadsmiljö övergång"
 
 #. TRANSLATORS: Short description for Class 8 of the Bortle scale
 #: src/gui/ViewDialog.cpp:339
 msgid "City sky"
-msgstr ""
+msgstr "Stadsmiljö"
 
 #. TRANSLATORS: Short description for Class 9 of the Bortle scale
 #: src/gui/ViewDialog.cpp:341
 msgid "Inner-city sky"
-msgstr ""
+msgstr "Innerstad"
 
 #: src/gui/ViewDialog.cpp:355
 msgid "The naked-eye limiting magnitude is"
-msgstr ""
+msgstr "Gränsmagnituden för blotta ögat är"
 
 #: src/gui/ViewDialog.cpp:487
 msgid "No description"
@@ -1924,7 +1926,7 @@ msgstr "Harvard University (USA)"
 
 #: src/gui/SearchDialog.cpp:616
 msgid "Paste and Search"
-msgstr ""
+msgstr "Klistra in och sök"
 
 #: src/gui/ShortcutsDialog.cpp:488
 msgid "Action"
@@ -1971,7 +1973,7 @@ msgstr "Helskärmsläge"
 #: src/StelMainView.cpp:415
 #, qt-format
 msgid "Stellarium %1"
-msgstr ""
+msgstr "Stellarium %1"
 
 #: src/translations.h:33 plugins/Exoplanets/src/Exoplanet.cpp:217
 #: plugins/Exoplanets/src/Exoplanet.cpp:221
@@ -2328,59 +2330,59 @@ msgstr "Makemake"
 #. TRANSLATORS: Asteroid (3200) Phaethon
 #: src/translations.h:139
 msgid "Phaethon"
-msgstr ""
+msgstr "Phaethon"
 
 #. TRANSLATORS: Asteroid (1866) Sisyphus
 #: src/translations.h:141
 msgid "Sisyphus"
-msgstr ""
+msgstr "Sisyphus"
 
 #. TRANSLATORS: Asteroid (1864) Daedalus
 #: src/translations.h:143
 msgid "Daedalus"
-msgstr ""
+msgstr "Daedalus"
 
 #. TRANSLATORS: Asteroid (1566) Icarus
 #: src/translations.h:145
 msgid "Icarus"
-msgstr ""
+msgstr "Icarus"
 
 #. TRANSLATORS: Asteroid (1809) Prometheus
 #: src/translations.h:147
 msgid "Prometheus"
-msgstr ""
+msgstr "Prometheus"
 
 #: src/translations.h:148
 msgid "Prometheus (moon)"
-msgstr ""
+msgstr "Prometheus (måne)"
 
 #. TRANSLATORS: Asteroid (1810) Epimetheus
 #: src/translations.h:150
 msgid "Epimetheus"
-msgstr ""
+msgstr "Epimetheus"
 
 #: src/translations.h:151
 msgid "Epimetheus (moon)"
-msgstr ""
+msgstr "Epimetheus (måne)"
 
 #. TRANSLATORS: Asteroid (951) Gaspra
 #: src/translations.h:153
 msgid "Gaspra"
-msgstr ""
+msgstr "Gaspra"
 
 #. TRANSLATORS: Asteroid (243) Ida
 #: src/translations.h:155
 msgid "Ida"
-msgstr ""
+msgstr "Ida"
 
 #. TRANSLATORS: Asteroid (218) Bianca
 #: src/translations.h:157
 msgid "Bianca"
-msgstr ""
+msgstr "Bianca"
 
 #: src/translations.h:158
 msgid "Bianca (moon)"
-msgstr ""
+msgstr "Bianca (måne)"
 
 #. TRANSLATORS: Proper name of comet C/1680 V1
 #: src/translations.h:161
@@ -2488,7 +2490,7 @@ msgstr "Polynesiska"
 
 #: src/translations.h:203
 msgid "Romanian"
-msgstr ""
+msgstr "Rumänska"
 
 #: src/translations.h:204
 msgid "Sami"
@@ -2534,12 +2536,12 @@ msgstr "Garching"
 #. TRANSLATORS: Name of landscape
 #: src/translations.h:229
 msgid "Geneva"
-msgstr ""
+msgstr "Genève"
 
 #. TRANSLATORS: Name of landscape
 #: src/translations.h:231
 msgid "Grossmugl"
-msgstr ""
+msgstr "Grossmugl"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:238
@@ -2649,7 +2651,7 @@ msgstr "Jord händelser sett från Merkurius"
 #. TRANSLATORS: Name and description of script
 #: src/translations.h:280
 msgid "Earth Events from a floating city on Venus"
-msgstr ""
+msgstr "Jordhändelser från en flytande stad på Venus"
 
 #. TRANSLATORS: Name and description of script
 #: src/translations.h:282
@@ -2769,6 +2771,7 @@ msgstr ""
 msgid ""
 "Screensaver of various happenings in the Solar System. 232 events in all!"
 msgstr ""
+"Skärmsläckare med diverse företeelser i solsystemet. Totalt 232 stycken!"
 
 #: src/translations.h:308
 msgid "A tour of the western constellations."
@@ -2814,9 +2817,9 @@ msgstr ""
 #: src/translations.h:315
 msgid ""
 "Earth Greatest Elongations and Transits from Callisto 2000-3000. Why "
-"Callisto? Well of the 4 Galilean Satillites, Callisto is the only one "
-"outside of Jupiter's radiation belt. Therefore, if humans ever colonize "
-"Jupiter's moons, Callisto will be the one."
+"Callisto? Well of the 4 Galilean Moons, Callisto is the only one outside of "
+"Jupiter's radiation belt. Therefore, if humans ever colonize Jupiter's "
+"moons, Callisto will be the one."
 msgstr ""
 
 #: src/translations.h:319
@@ -3789,19 +3792,19 @@ msgstr ""
 
 #: src/translations.h:564
 msgid "&Redo"
-msgstr ""
+msgstr "&Gör om"
 
 #: src/translations.h:565
 msgid "Cu&t"
-msgstr ""
+msgstr "Klipp u&t"
 
 #: src/translations.h:566
 msgid "&Copy"
-msgstr ""
+msgstr "&Kopiera"
 
 #: src/translations.h:567
 msgid "&Paste"
-msgstr ""
+msgstr "&Klistra in"
 
 #: src/translations.h:568 src/ui_locationDialogGui.h:407
 #: plugins/Oculars/src/ui_ocularDialog.h:1074
@@ -3813,23 +3816,23 @@ msgstr "Ta bort"
 
 #: src/translations.h:569
 msgid "Select All"
-msgstr ""
+msgstr "Markera alla"
 
 #: src/translations.h:570
 msgid "Look in:"
-msgstr ""
+msgstr "Leta i:"
 
 #: src/translations.h:571
 msgid "Directory:"
-msgstr ""
+msgstr "Katalog:"
 
 #: src/translations.h:572
 msgid "Folder"
-msgstr ""
+msgstr "Mapp"
 
 #: src/translations.h:573
 msgid "&Choose"
-msgstr ""
+msgstr "&Välj"
 
 #: src/translations.h:574 src/ui_configurationDialog.h:1167
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:516
@@ -3838,27 +3841,27 @@ msgstr "Avbryt"
 
 #: src/translations.h:575
 msgid "Files of type:"
-msgstr ""
+msgstr "Filer av typen:"
 
 #: src/translations.h:576
 msgid "Date Modified"
-msgstr ""
+msgstr "Ändringsdatum"
 
 #: src/translations.h:577
 msgid "Directories"
-msgstr ""
+msgstr "Kataloger"
 
 #: src/translations.h:578
 msgid "Computer"
-msgstr ""
+msgstr "Dator"
 
 #: src/translations.h:579
 msgid "&Open"
-msgstr ""
+msgstr "&Öppna"
 
 #: src/translations.h:580
 msgid "File &name:"
-msgstr ""
+msgstr "Fil&namn:"
 
 #: src/translations.h:581
 msgid "Copy &Link Location"
@@ -4195,7 +4198,7 @@ msgstr "Ändra skala på månen"
 
 #: src/ui_viewDialog.h:1167
 msgid "Scale factor"
-msgstr ""
+msgstr "Skalfaktor"
 
 #: src/ui_viewDialog.h:1170
 msgid "Automatic change of landscape when planet is changed"
@@ -4214,10 +4217,12 @@ msgid ""
 "Use light pollution data from locations database and ignore settings for "
 "light pollution below"
 msgstr ""
+"Använd ljusföroreningsdata från positioners databas och ignorera "
+"inställningar för ljusföroreningar nedan."
 
 #: src/ui_viewDialog.h:1180
 msgid "Light pollution data from locations database"
-msgstr ""
+msgstr "Ljusföroreningsdata från position-databasen."
 
 #: src/ui_viewDialog.h:1181
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:401
@@ -4402,13 +4407,15 @@ msgstr "Programspråk"
 
 #: src/ui_configurationDialog.h:1005
 msgid "Check updates"
-msgstr ""
+msgstr "Kontrollera efter updateringar"
 
 #: src/ui_configurationDialog.h:1006
 msgid ""
 "Enable checking updates of Stellarium via Internet. Info for updates of "
 "stable versions you can look on the tab \"About\" of \"Help\" window."
 msgstr ""
+"Aktivera sökning efter uppdateringar av Stellarium via internet. Info om "
+"nya, stabila versioner kan du hitta under fliken \"Om\" i \"Hjälp\" fönstret."
 
 #: src/ui_configurationDialog.h:1007
 msgid "Default options"
@@ -4589,7 +4596,7 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:1078
 msgid "Ecliptic coordinates"
-msgstr ""
+msgstr "Ekliptiska koordinater"
 
 #: src/ui_configurationDialog.h:1079
 msgid "Control"
@@ -5012,7 +5019,7 @@ msgstr ""
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:76
 #: plugins/Oculars/src/gui/OcularDialog.cpp:494
 msgid "Contributors"
-msgstr ""
+msgstr "Medarbetare"
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:79
 msgid ""
@@ -5094,6 +5101,8 @@ msgid ""
 "If you would like to make a feature request, you can create a bug report, "
 "and set the severity to \"wishlist\"."
 msgstr ""
+"Om du vill efterfråga en ny funktion kan du skapa en fel-rapport och klicka "
+"i \"önskelista\"."
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:92
@@ -5102,6 +5111,8 @@ msgid ""
 "If you want to read full information about this plugin and its history, you "
 "can %1get info here%2."
 msgstr ""
+"Om du vill läsa all information om det här tillägget och dess historik, kan "
+"du %1hitta information här%2."
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:181
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:263
@@ -5468,7 +5479,7 @@ msgstr ""
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:543
 msgid "Effective focal length of the ocular"
-msgstr ""
+msgstr "Effektiv fokallängd för okularet."
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:554
 msgid "Apparent field of view of the ocular"
@@ -5498,11 +5509,11 @@ msgstr "Rotation: %1"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:801
 msgid "Magnification provided by these binoculars"
-msgstr ""
+msgstr "Förstoring hos denna kikare"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:802
 msgid "Actual field of view provided by these binoculars"
-msgstr ""
+msgstr "Verkligt synfält hos denna kikare"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:810
 msgid "Magnification provided by this ocular/lens/telescope combination"
@@ -5512,11 +5523,11 @@ msgstr ""
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:811
 msgid ""
 "Actual field of view provided by this ocular/lens/telescope combination"
-msgstr ""
+msgstr "Verkligt synfält hos denna okular/lins/teleskop-kombination"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:491
 msgid "Oculars Plug-in"
-msgstr ""
+msgstr "Okular plug-in"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:494
 msgid "Barlow lens feature"
@@ -5533,6 +5544,10 @@ msgid ""
 "and telescopes, as well as CCD Sensors.  Your first time running the app "
 "will populate some samples to get your started."
 msgstr ""
+"Det här tillägget skall simulera vad du ser genom ett okular. Det här "
+"konfigurations-fönstret kan användas till att lägga till, ändra eller ta "
+"bort okular och teleskop såväl som CCD-sensorer. Första gången appen körs "
+"kommer ett antal exempel skapas."
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:501
 msgid ""
@@ -5567,32 +5582,32 @@ msgstr ""
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:507
 msgid "Hot Keys"
-msgstr ""
+msgstr "Snabbtangenter"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:508
 msgid "The plug-in's key bindings can be edited in the General Tab."
-msgstr ""
+msgstr "Insticksprogrammets tangenter kan redigeras under Allmänt-fliken."
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:522
 #: plugins/Oculars/src/gui/OcularDialog.cpp:527
 msgid "[no key defined]"
-msgstr ""
+msgstr "[ingen tangent definierad]"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:531
 msgid "Switches on/off the ocular overlay."
-msgstr ""
+msgstr "Slå på/av okular-visning."
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:535
 msgid "Opens the pop-up navigation menu."
-msgstr ""
+msgstr "Öppnar pop-up meny med inställningar."
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1054
 msgid "Enable only if an object is selected"
-msgstr ""
+msgstr "Aktivera endast om ett objekt är valt"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1055
 msgid "Scale image circle"
-msgstr ""
+msgstr "Anpassa bildens storlek"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1057
 msgid "Apply limits stellar magnitude for different apertures of telescopes"
@@ -5612,7 +5627,7 @@ msgstr "Slå på/av okularvisning:"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1063
 msgid "Open pop-up navigation menu:"
-msgstr ""
+msgstr "Öppna pop-up meny med inställningar:"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1064
 msgid "Interface"
@@ -5683,7 +5698,7 @@ msgstr "Kikare"
 #: plugins/Oculars/src/ui_ocularDialog.h:1081
 #: plugins/Oculars/src/ui_ocularDialog.h:1087
 msgid "Lenses"
-msgstr ""
+msgstr "Linser"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1085
 msgid "Multiplier:"
