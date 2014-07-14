@@ -109,7 +109,7 @@ bool StelAddOnDAO::createAddonTables()
 			"id INTEGER primary key AUTOINCREMENT, "
 			"addon INTEGER UNIQUE)";
 
-	addonTables << "CREATE TABLE IF NOT EXISTS " % TABLE_STARLORE % " ("
+	addonTables << "CREATE TABLE IF NOT EXISTS " % TABLE_SKY_CULTURE % " ("
 			"id INTEGER primary key AUTOINCREMENT, "
 			"addon INTEGER UNIQUE)";
 

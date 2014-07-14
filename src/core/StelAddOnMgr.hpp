@@ -37,8 +37,8 @@ const QString LANDSCAPE = "landscape";
 const QString LANGUAGE_PACK = "language_pack";
 const QString PLUGIN_CATALOG = "plugin_catalog";
 const QString SCRIPT = "script";
+const QString SKY_CULTURE = "sky_culture";
 const QString STAR_CATALOG = "star_catalog";
-const QString SKYCULTURE = "starlore";
 const QString TEXTURE = "texture";
 
 class StelAddOnMgr : public QObject
@@ -101,7 +101,7 @@ private:
 	const QString m_sDirLandscape;
 	const QString m_sDirLanguagePack;
 	const QString m_sDirScript;
-	const QString m_sDirStarlore;
+	const QString m_sDirSkyCulture;
 	const QString m_sDirTexture;
 
 	// sub-classes

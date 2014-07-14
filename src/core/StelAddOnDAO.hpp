@@ -34,7 +34,7 @@ const QString TABLE_LANGUAGE_PACK = "language_pack";
 const QString TABLE_PLUGIN_CATALOG = "plugin_catalog";
 const QString TABLE_SCRIPT = "script";
 const QString TABLE_STAR_CATALOG = "star_catalog";
-const QString TABLE_STARLORE = "starlore";
+const QString TABLE_SKY_CULTURE = "sky_culture";
 const QString TABLE_TEXTURE = "texture";
 
 class StelAddOnDAO

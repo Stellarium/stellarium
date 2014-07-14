@@ -40,7 +40,7 @@ StelAddOnMgr::StelAddOnMgr()
 	, m_sDirLandscape(m_sDirAddOn % "/landscape/")
 	, m_sDirLanguagePack(m_sDirAddOn % "/language_pack/")
 	, m_sDirScript(m_sDirAddOn % "/script/")
-	, m_sDirStarlore(m_sDirAddOn % "/starlore/")
+	, m_sDirSkyCulture(m_sDirAddOn % "/starlore/")
 	, m_sDirTexture(m_sDirAddOn % "/texture/")
 {
 	// creating addon dir
@@ -54,7 +54,7 @@ StelAddOnMgr::StelAddOnMgr()
 	StelFileMgr::makeSureDirExistsAndIsWritable(m_sDirLandscape);
 	StelFileMgr::makeSureDirExistsAndIsWritable(m_sDirLanguagePack);
 	StelFileMgr::makeSureDirExistsAndIsWritable(m_sDirScript);
-	StelFileMgr::makeSureDirExistsAndIsWritable(m_sDirStarlore);
+	StelFileMgr::makeSureDirExistsAndIsWritable(m_sDirSkyCulture);
 	StelFileMgr::makeSureDirExistsAndIsWritable(m_sDirTexture);
 
 	// create file to store the last update time
@@ -76,7 +76,7 @@ StelAddOnMgr::StelAddOnMgr()
 	// Init sub-classes
 	m_pStelAddOns.insert(LANDSCAPE, new AOLandscape(m_pStelAddOnDAO));
 	m_pStelAddOns.insert(SCRIPT, new AOScript(m_pStelAddOnDAO));
-	m_pStelAddOns.insert(SKYCULTURE, new AOSkyCulture(m_pStelAddOnDAO));
+	m_pStelAddOns.insert(SKY_CULTURE, new AOSkyCulture(m_pStelAddOnDAO));
 	m_pStelAddOns.insert(TEXTURE, new AOTexture(m_pStelAddOnDAO));
 
 	// check add-ons which are already installed
@@ -106,9 +106,9 @@ QString StelAddOnMgr::getDirectory(QString category)
 	{
 		dir = m_sDirScript;
 	}
-	else if (category == SKYCULTURE)
+	else if (category == SKY_CULTURE)
 	{
-		dir = m_sDirStarlore;
+		dir = m_sDirSkyCulture;
 	}
 	else if (category == TEXTURE)
 	{

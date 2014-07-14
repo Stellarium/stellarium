@@ -209,8 +209,8 @@ void AddOnDialog::populateTables()
 	setUpTableView(ui->scriptsTableView);
 	insertCheckBoxes(ui->scriptsTableView, SCRIPT);
 
-	// STARLORE
-	initModel(ui->starloreTbleView, TABLE_STARLORE);
+	// STARLORE (SKY CULTURE)
+	initModel(ui->starloreTbleView, TABLE_SKY_CULTURE);
 	setUpTableView(ui->starloreTbleView);
 	insertCheckBoxes(ui->starloreTbleView, STARLORE);
 
