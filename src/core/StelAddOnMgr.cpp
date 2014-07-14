@@ -40,7 +40,7 @@ StelAddOnMgr::StelAddOnMgr()
 	, m_sDirLandscape(m_sDirAddOn % "/landscape/")
 	, m_sDirLanguagePack(m_sDirAddOn % "/language_pack/")
 	, m_sDirScript(m_sDirAddOn % "/script/")
-	, m_sDirStarlore(m_sDirAddOn % "/language_pack/")
+	, m_sDirStarlore(m_sDirAddOn % "/starlore/")
 	, m_sDirTexture(m_sDirAddOn % "/texture/")
 {
 	// creating addon dir
@@ -76,6 +76,7 @@ StelAddOnMgr::StelAddOnMgr()
 	// Init sub-classes
 	m_pStelAddOns.insert(LANDSCAPE, new AOLandscape(m_pStelAddOnDAO));
 	m_pStelAddOns.insert(SCRIPT, new AOScript(m_pStelAddOnDAO));
+	m_pStelAddOns.insert(SKYCULTURE, new AOSkyCulture(m_pStelAddOnDAO));
 	m_pStelAddOns.insert(TEXTURE, new AOTexture(m_pStelAddOnDAO));
 
 	// check add-ons which are already installed
@@ -105,7 +106,7 @@ QString StelAddOnMgr::getDirectory(QString category)
 	{
 		dir = m_sDirScript;
 	}
-	else if (category == STARLORE)
+	else if (category == SKYCULTURE)
 	{
 		dir = m_sDirStarlore;
 	}

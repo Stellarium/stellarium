@@ -28,6 +28,7 @@
 
 #include "AOLandscape.hpp"
 #include "AOScript.hpp"
+#include "AOSkyCulture.hpp"
 #include "AOTexture.hpp"
 #include "StelAddOnDAO.hpp"
 
@@ -37,7 +38,7 @@ const QString LANGUAGE_PACK = "language_pack";
 const QString PLUGIN_CATALOG = "plugin_catalog";
 const QString SCRIPT = "script";
 const QString STAR_CATALOG = "star_catalog";
-const QString STARLORE = "starlore";
+const QString SKYCULTURE = "starlore";
 const QString TEXTURE = "texture";
 
 class StelAddOnMgr : public QObject
