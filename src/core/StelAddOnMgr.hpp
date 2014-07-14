@@ -33,12 +33,11 @@
 #include "StelAddOnDAO.hpp"
 
 // categories (database column addon.category)
+const QString CATALOG = "catalog";
 const QString LANDSCAPE = "landscape";
 const QString LANGUAGE_PACK = "language_pack";
-const QString PLUGIN_CATALOG = "plugin_catalog";
 const QString SCRIPT = "script";
 const QString SKY_CULTURE = "sky_culture";
-const QString STAR_CATALOG = "star_catalog";
 const QString TEXTURE = "texture";
 
 class StelAddOnMgr : public QObject
@@ -97,12 +96,7 @@ private:
 
 	// addon directories
 	const QString m_sDirAddOn;
-	const QString m_sDirCatalog;
-	const QString m_sDirLandscape;
-	const QString m_sDirLanguagePack;
-	const QString m_sDirScript;
-	const QString m_sDirSkyCulture;
-	const QString m_sDirTexture;
+	QHash<QString, QString> m_dirs;
 
 	// sub-classes
 	QHash<QString, StelAddOn*> m_pStelAddOns;

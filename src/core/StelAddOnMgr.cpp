@@ -36,12 +36,6 @@ StelAddOnMgr::StelAddOnMgr()
 	, m_currentDownloadFile(NULL)
 	, m_progressBar(NULL)
 	, m_sDirAddOn(StelFileMgr::getUserDir() % "/addon")
-	, m_sDirCatalog(m_sDirAddOn % "/catalog/")
-	, m_sDirLandscape(m_sDirAddOn % "/landscape/")
-	, m_sDirLanguagePack(m_sDirAddOn % "/language_pack/")
-	, m_sDirScript(m_sDirAddOn % "/script/")
-	, m_sDirSkyCulture(m_sDirAddOn % "/starlore/")
-	, m_sDirTexture(m_sDirAddOn % "/texture/")
 {
 	// creating addon dir
 	StelFileMgr::makeSureDirExistsAndIsWritable(m_sDirAddOn);
@@ -50,12 +44,17 @@ StelAddOnMgr::StelAddOnMgr()
 	Q_ASSERT(m_pStelAddOnDAO->init());
 
 	// creating sub-dirs
-	StelFileMgr::makeSureDirExistsAndIsWritable(m_sDirCatalog);
-	StelFileMgr::makeSureDirExistsAndIsWritable(m_sDirLandscape);
-	StelFileMgr::makeSureDirExistsAndIsWritable(m_sDirLanguagePack);
-	StelFileMgr::makeSureDirExistsAndIsWritable(m_sDirScript);
-	StelFileMgr::makeSureDirExistsAndIsWritable(m_sDirSkyCulture);
-	StelFileMgr::makeSureDirExistsAndIsWritable(m_sDirTexture);
+	m_dirs.insert(CATALOG, m_sDirAddOn % "/" % CATALOG % "/");
+	m_dirs.insert(LANDSCAPE, m_sDirAddOn % "/" % LANDSCAPE % "/");
+	m_dirs.insert(LANGUAGE_PACK, m_sDirAddOn % "/" % LANGUAGE_PACK % "/");
+	m_dirs.insert(SCRIPT, m_sDirAddOn % "/" % SCRIPT % "/");
+	m_dirs.insert(SKY_CULTURE, m_sDirAddOn % "/" % SKY_CULTURE % "/");
+	m_dirs.insert(TEXTURE, m_sDirAddOn % "/" % TEXTURE % "/");
+	QHashIterator<QString, QString> it(m_dirs);
+	while (it.hasNext()) {
+		it.next();
+		StelFileMgr::makeSureDirExistsAndIsWritable(it.value());
+	}
 
 	// create file to store the last update time
 	QString lastUpdate;
@@ -93,32 +92,7 @@ StelAddOnMgr::~StelAddOnMgr()
 
 QString StelAddOnMgr::getDirectory(QString category)
 {
-	QString dir;
-	if (category == LANDSCAPE)
-	{
-		dir = m_sDirLandscape;
-	}
-	else if (category == LANGUAGE_PACK)
-	{
-		dir = m_sDirLanguagePack;
-	}
-	else if (category == SCRIPT)
-	{
-		dir = m_sDirScript;
-	}
-	else if (category == SKY_CULTURE)
-	{
-		dir = m_sDirSkyCulture;
-	}
-	else if (category == TEXTURE)
-	{
-		dir = m_sDirTexture;
-	}
-	else if (category == PLUGIN_CATALOG || category == STAR_CATALOG)
-	{
-		dir = m_sDirCatalog;
-	}
-	return dir;
+	return m_dirs.value(category);
 }
 
 void StelAddOnMgr::setLastUpdate(qint64 time) {
