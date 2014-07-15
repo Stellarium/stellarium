@@ -331,29 +331,49 @@ int main(int argc, char **argv)
 	app.installTranslator(&trans);
 
 	StelMainView mainWin;
+
+	bool appCanRun = true;
 	// some basic diagnostics
 	if (!QGLFormat::hasOpenGL()){
+		qWarning() << "Oops... This system does not support OpenGL.";
 		QMessageBox::warning(0, "Stellarium", q_("This system does not support OpenGL."));
+		appCanRun = false;
 	}
 
-	mainWin.init(confSettings);
-	splash.finish(&mainWin);
-	app.exec();
-	mainWin.deinit();
+	if (!(QGLFormat::openGLVersionFlags() & QGLFormat::OpenGL_Version_2_1)) // Check supported version of OpenGL
+	{
+		// OK, minimal required version of OpenGL is 2.1. If platform does not support this
+		// version then say to user about troubles and quit from application.
+		qWarning() << "Oops... Insufficient OpenGL version. Please update drivers, graphics hardware, or use MESA (or ANGLE) version.";
+		QMessageBox::warning(0, "Stellarium", q_("Insufficient OpenGL version. Please update drivers, graphics hardware, or use MESA (or ANGLE) version."));
+		appCanRun = false;
+	}
 
-	delete confSettings;
-	StelLogger::deinit();
+	if (appCanRun)
+	{
+		mainWin.init(confSettings);
+		splash.finish(&mainWin);
+		app.exec();
+		mainWin.deinit();
 
-#ifdef Q_OS_WIN
-	if(timerGrain)
-		timeEndPeriod(timerGrain);
-#endif //Q_OS_WIN
-#ifdef Q_OS_MAC
-	delete(newArgv);
-	delete(option);
-	delete(value);
-#endif
+		delete confSettings;
+		StelLogger::deinit();
 
-	return 0;
+		#ifdef Q_OS_WIN
+		if(timerGrain)
+			timeEndPeriod(timerGrain);
+		#endif //Q_OS_WIN
+		#ifdef Q_OS_MAC
+		delete(newArgv);
+		delete(option);
+		delete(value);
+		#endif
+
+		return 0;
+	}
+	else
+	{
+		app.quit();
+	}
 }
 
