@@ -47,12 +47,13 @@ public:
 	bool init();
 
 	struct AddOnInfo {
+		QString idInstall;
 		QString category;
-		double downloadSize;
+		QUrl url;
+		float size;
+		bool installed;
 		QString filename;
 		QString filepath;
-		QUrl url;
-		QDir installedDir;
 	};
 
 	AddOnInfo getAddOnInfo(int addonId);
