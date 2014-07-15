@@ -44,26 +44,13 @@ void AOSkyCulture::installFromFile(const QString& filePath) const
 		return;
 	}
 
-	QList<QZipReader::FileInfo> infoList = reader.fileInfoList();
-	foreach(QZipReader::FileInfo info, infoList)
-	{
-		if (!info.isFile)
-		{
-			continue;
-		}
-
-		QString installedFilePath = m_sSkyCultureInstallDir % info.filePath;
-		QFile(installedFilePath).remove();
-
-		QByteArray data = reader.fileData(info.filePath);
-		QFile out(installedFilePath);
-		out.open(QIODevice::WriteOnly);
-		out.write(data);
-		out.close();
-
-		qWarning() << "Add-On SkyCultures: New starlore installed:" << info.filePath;
+	if (reader.extractAll(m_sSkyCultureInstallDir)) {
+		qWarning() << "Add-On SkyCultures: New sky culture installed!";
+		m_pStelAddOnDAO->updateInstalledAddon(QFileInfo(filePath).fileName(), "1.0", "");
+	} else {
+		qWarning() << "Add-On SkyCultures: Unable to install the new sky culture!";
 	}
-	m_pStelAddOnDAO->updateInstalledAddon(QFileInfo(filePath).fileName(), "1.0", "");
+	reader.close();
 }
 
 bool AOSkyCulture::uninstallAddOn(const StelAddOnDAO::AddOnInfo &addonInfo) const
