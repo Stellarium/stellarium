@@ -58,9 +58,9 @@ public:
 
 	AddOnInfo getAddOnInfo(int addonId);
 	bool insertOnDatabase(QString insert);
-	void updateInstalledAddon(QString filename,
-				  QString installedVersion,
-				  QString directory);
+	void markAllAddOnsAsUninstalled();
+	void markAddOnsAsInstalled(QStringList idInstall);
+	void updateAddOnStatus(QString idInstall, int installed);
 
 private:
 	QSqlDatabase m_db;

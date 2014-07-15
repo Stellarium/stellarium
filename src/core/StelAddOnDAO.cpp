@@ -183,17 +183,38 @@ bool StelAddOnDAO::insertOnDatabase(QString insert)
 	return true;
 }
 
-void StelAddOnDAO::updateInstalledAddon(QString filename,
-					QString installedVersion,
-					QString directory)
+void StelAddOnDAO::markAllAddOnsAsUninstalled()
+{
+	QSqlQuery query(m_db);
+	query.prepare("UPDATE addon SET installed=0 ");
+	if (!query.exec()) {
+		qWarning() << "Add-On Manager : Could not mark all add-ons as uninstalled!";
+	}
+}
+
+void StelAddOnDAO::markAddOnsAsInstalled(QStringList idInstall)
+{
+	if (idInstall.isEmpty())
+	{
+		return;
+	}
+
+	QSqlQuery query(m_db);
+	query.prepare(QString("UPDATE addon SET installed=1 "
+			"WHERE id_install IN (%1)").arg(idInstall.join(",")));
+	if (!query.exec()) {
+		qWarning() << "Add-On Manager : Could not mark add-ons as installed!";
+	}
+}
+
+void StelAddOnDAO::updateAddOnStatus(QString idInstall, int installed)
 {
 	 QSqlQuery query(m_db);
 	 query.prepare("UPDATE addon "
-		       "SET installed=:installed, directory=:dir "
-		       "WHERE filename=:filename");
-	 query.bindValue(":installed", installedVersion);
-	 query.bindValue(":dir", directory);
-	 query.bindValue(":filename", filename);
+		       "SET installed=:installed "
+		       "WHERE id_install=:id_install");
+	 query.bindValue(":installed", installed);
+	 query.bindValue(":id_install", idInstall);
 
 	 if (!query.exec()) {
 		qWarning() << "Add-On Manager :" << m_db.lastError();

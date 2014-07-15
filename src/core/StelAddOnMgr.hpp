@@ -49,7 +49,7 @@ public:
 
 	QString getDirectory(QString category);
 	void installAddOn(const int addonId);
-	void installFromFile(QString category, QString filePath);
+	void installFromFile(const StelAddOnDAO::AddOnInfo addonInfo);
 	void removeAddOn(const int addonId);
 	bool updateCatalog(QString webresult);
 	void setLastUpdate(qint64 time);
@@ -88,8 +88,7 @@ private:
 	QList<int> m_downloadQueue;
 	QNetworkReply* m_pDownloadReply;
 	QFile* m_currentDownloadFile;
-	QString m_currentDownloadPath;
-	QString m_currentDownloadCategory;
+	StelAddOnDAO::AddOnInfo m_currentDownloadInfo;
 
 	class StelProgressController* m_progressBar;
 	qint64 m_iLastUpdate;

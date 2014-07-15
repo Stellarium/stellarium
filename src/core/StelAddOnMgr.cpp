@@ -78,11 +78,14 @@ StelAddOnMgr::StelAddOnMgr()
 	m_pStelAddOns.insert(SKY_CULTURE, new AOSkyCulture(m_pStelAddOnDAO));
 	m_pStelAddOns.insert(TEXTURE, new AOTexture(m_pStelAddOnDAO));
 
+	// mark all add-ons as uninstalled
+	m_pStelAddOnDAO->markAllAddOnsAsUninstalled();
+
 	// check add-ons which are already installed
 	QHashIterator<QString, StelAddOn*> aos(m_pStelAddOns);
 	while (aos.hasNext()) {
 	    aos.next();
-	    aos.value()->checkInstalledAddOns();
+	    m_pStelAddOnDAO->markAddOnsAsInstalled(aos.value()->checkInstalledAddOns());
 	}
 }
 
@@ -125,11 +128,9 @@ void StelAddOnMgr::downloadAddOn(const StelAddOnDAO::AddOnInfo addonInfo)
 {
 	Q_ASSERT(m_pDownloadReply==NULL);
 	Q_ASSERT(m_currentDownloadFile==NULL);
-	Q_ASSERT(m_currentDownloadCategory.isEmpty());
-	Q_ASSERT(m_currentDownloadPath.isEmpty());
 	Q_ASSERT(m_progressBar==NULL);
 
-	m_currentDownloadPath = addonInfo.filepath;
+	m_currentDownloadInfo = addonInfo;
 	m_currentDownloadFile = new QFile(addonInfo.filepath);
 	if (!m_currentDownloadFile->open(QIODevice::WriteOnly))
 	{
@@ -139,7 +140,6 @@ void StelAddOnMgr::downloadAddOn(const StelAddOnDAO::AddOnInfo addonInfo)
 	}
 
 	m_bDownloading = true;
-	m_currentDownloadCategory = addonInfo.category;
 	QNetworkRequest req(addonInfo.url);
 	req.setAttribute(QNetworkRequest::CacheSaveControlAttribute, false);
 	req.setAttribute(QNetworkRequest::RedirectionTargetAttribute, false);
@@ -151,14 +151,12 @@ void StelAddOnMgr::downloadAddOn(const StelAddOnDAO::AddOnInfo addonInfo)
 
 	m_progressBar = StelApp::getInstance().addProgressBar();
 	m_progressBar->setValue(0);
-	m_progressBar->setRange(0, addonInfo.downloadSize*1024);
+	m_progressBar->setRange(0, addonInfo.size*1024);
 	m_progressBar->setFormat(QString("%1: %p%").arg(addonInfo.filename));
 }
 
 void StelAddOnMgr::newDownloadedData()
 {
-	Q_ASSERT(!m_currentDownloadCategory.isEmpty());
-	Q_ASSERT(!m_currentDownloadPath.isEmpty());
 	Q_ASSERT(m_currentDownloadFile);
 	Q_ASSERT(m_pDownloadReply);
 	Q_ASSERT(m_progressBar);
@@ -170,8 +168,6 @@ void StelAddOnMgr::newDownloadedData()
 
 void StelAddOnMgr::downloadFinished()
 {
-	Q_ASSERT(!m_currentDownloadCategory.isEmpty());
-	Q_ASSERT(!m_currentDownloadPath.isEmpty());
 	Q_ASSERT(m_currentDownloadFile);
 	Q_ASSERT(m_pDownloadReply);
 	Q_ASSERT(m_progressBar);
@@ -215,9 +211,8 @@ void StelAddOnMgr::downloadFinished()
 	StelApp::getInstance().removeProgressBar(m_progressBar);
 	m_progressBar = NULL;
 
-	installFromFile(m_currentDownloadCategory, m_currentDownloadPath);
-	m_currentDownloadPath.clear();
-	m_currentDownloadCategory.clear();
+	installFromFile(m_currentDownloadInfo);
+	m_currentDownloadInfo = StelAddOnDAO::AddOnInfo();
 	m_bDownloading = false;
 	m_downloadQueue.removeFirst();
 	if (!m_downloadQueue.isEmpty())
@@ -238,7 +233,7 @@ void StelAddOnMgr::installAddOn(const int addonId)
 	// checking if we have this file in add-on path (disk)
 	if (QFile(addonInfo.filepath).exists())
 	{
-		return installFromFile(addonInfo.category, addonInfo.filepath);
+		return installFromFile(addonInfo);
 	}
 
 	// download file
@@ -249,9 +244,13 @@ void StelAddOnMgr::installAddOn(const int addonId)
 	}
 }
 
-void StelAddOnMgr::installFromFile(QString category, QString filePath)
+void StelAddOnMgr::installFromFile(const StelAddOnDAO::AddOnInfo addonInfo)
 {
-	m_pStelAddOns.value(category)->installFromFile(filePath);
+	bool installed = m_pStelAddOns.value(addonInfo.category)
+			->installFromFile(addonInfo.idInstall, addonInfo.filepath);
+
+	m_pStelAddOnDAO->updateAddOnStatus(addonInfo.idInstall, installed);
+
 	if (m_downloadQueue.isEmpty())
 	{
 		emit (updateTableViews());
@@ -261,8 +260,9 @@ void StelAddOnMgr::installFromFile(QString category, QString filePath)
 void StelAddOnMgr::removeAddOn(const int addonId)
 {
 	StelAddOnDAO::AddOnInfo addonInfo = m_pStelAddOnDAO->getAddOnInfo(addonId);
-	if (m_pStelAddOns.value(addonInfo.category)->uninstallAddOn(addonInfo))
+	if (m_pStelAddOns.value(addonInfo.category)->uninstallAddOn(addonInfo.idInstall))
 	{
+		m_pStelAddOnDAO->updateAddOnStatus(addonInfo.idInstall, false);
 		emit (updateTableViews());
 	}
 }
