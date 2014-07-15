@@ -340,12 +340,17 @@ int main(int argc, char **argv)
 		appCanRun = false;
 	}
 
-	if (!(QGLFormat::openGLVersionFlags() & QGLFormat::OpenGL_Version_2_1)) // Check supported version of OpenGL
+	if (!(QGLFormat::openGLVersionFlags() & QGLFormat::OpenGL_Version_2_1) && !(QGLFormat::openGLVersionFlags() & QGLFormat::OpenGL_ES_Version_2_0)) // Check supported version of OpenGL
 	{
-		// OK, minimal required version of OpenGL is 2.1. If platform does not support this
+		// OK, minimal required version of OpenGL is 2.1 (OpenGL ES is 2.0). If platform does not support this
 		// version then say to user about troubles and quit from application.
+		#ifdef Q_OS_WIN
 		qWarning() << "Oops... Insufficient OpenGL version. Please update drivers, graphics hardware, or use MESA (or ANGLE) version.";
 		QMessageBox::warning(0, "Stellarium", q_("Insufficient OpenGL version. Please update drivers, graphics hardware, or use MESA (or ANGLE) version."));
+		#else
+		qWarning() << "Oops... Insufficient OpenGL version. Please update drivers, or graphics hardware.";
+		QMessageBox::warning(0, "Stellarium", q_("Insufficient OpenGL version. Please update drivers, or graphics hardware."));
+		#endif
 		appCanRun = false;
 	}
 
