@@ -65,21 +65,21 @@ bool StelAddOnDAO::createAddonTables()
 
 	addonTables << "CREATE TABLE IF NOT EXISTS " % TABLE_ADDON % " ("
 			"id INTEGER primary key AUTOINCREMENT, "
+			"id_install TEXT UNIQUE, "
 			"category TEXT, "
-			"title TEXT UNIQUE, "
+			"title TEXT, "
 			"description TEXT, "
 			"version TEXT, "
-			"compatibility TEXT, "
+			"first_stel TEXT, "
+			"last_stel TEXT, "
 			"author1 INTEGER, "
 			"author2 INTEGER, "
 			"license INTEGER, "
-			"installed TEXT, "
-			"directory TEXT, "
-			"url TEXT, "
-			"filename TEXT, "
+			"download_url TEXT, "
 			"download_size TEXT, "
 			"checksum TEXT, "
-			"last_update TEXT)";
+			"last_update TEXT, "
+			"installed INT)";
 
 	addonTables << "CREATE TABLE IF NOT EXISTS " % TABLE_CATALOG % " ("
 			"id INTEGER primary key AUTOINCREMENT, "
