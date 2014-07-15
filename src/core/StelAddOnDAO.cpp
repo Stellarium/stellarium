@@ -76,6 +76,7 @@ bool StelAddOnDAO::createAddonTables()
 			"author2 INTEGER, "
 			"license INTEGER, "
 			"download_url TEXT, "
+			"download_filename TEXT, "
 			"download_size TEXT, "
 			"checksum TEXT, "
 			"last_update TEXT, "
