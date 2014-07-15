@@ -21,8 +21,10 @@
 #include "LandscapeMgr.hpp"
 
 AOLandscape::AOLandscape(StelAddOnDAO* pStelAddOnDAO)
-	: m_pStelAddOnDAO(pStelAddOnDAO)
+	: m_pStelAddOnDAO(pStelAddOnDAO),
+	  m_sLandscapeInstallDir(StelFileMgr::getUserDir() % "/landscapes/")
 {
+	StelFileMgr::makeSureDirExistsAndIsWritable(m_sLandscapeInstallDir);
 }
 
 AOLandscape::~AOLandscape()
@@ -31,7 +33,7 @@ AOLandscape::~AOLandscape()
 
 void AOLandscape::checkInstalledAddOns() const
 {
-	QDir landscapeDestination = GETSTELMODULE(LandscapeMgr)->getLandscapeDir();
+	QDir landscapeDestination(m_sLandscapeInstallDir);
 	QStringList landscapes = GETSTELMODULE(LandscapeMgr)->getUserLandscapeIDs();
 	foreach (QString landscape, landscapes) {
 		if (landscapeDestination.cd(landscape))
@@ -50,7 +52,7 @@ void AOLandscape::installFromFile(const QString& filePath) const
 		qWarning() << "FAILED to install " << filePath;
 	}
 	// update database
-	QDir landscapeDestination = GETSTELMODULE(LandscapeMgr)->getLandscapeDir();
+	QDir landscapeDestination(m_sLandscapeInstallDir);
 	if (landscapeDestination.cd(ref))
 	{
 		m_pStelAddOnDAO->updateInstalledAddon(ref % ".zip", "1.0",

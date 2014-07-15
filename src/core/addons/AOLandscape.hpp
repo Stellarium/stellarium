@@ -40,6 +40,7 @@ public:
 
 private:
 	StelAddOnDAO* m_pStelAddOnDAO;
+	const QString m_sLandscapeInstallDir;
 };
 
 #endif // _AOLANDSCAPE_HPP_
