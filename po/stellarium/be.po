@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-06-26 10:33+0700\n"
-"PO-Revision-Date: 2014-06-28 18:31+0000\n"
+"POT-Creation-Date: 2014-07-13 12:59+0700\n"
+"PO-Revision-Date: 2014-07-13 14:31+0000\n"
 "Last-Translator: 375gnu <Unknown>\n"
 "Language-Team: Belarusian <i18n@mova.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-07-12 05:42+0000\n"
+"X-Launchpad-Export-Date: 2014-07-14 05:52+0000\n"
 "X-Generator: Launchpad (build 17111)\n"
 "Language: be\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -22,7 +22,7 @@ msgstr ""
 #: src/core/modules/ConstellationMgr.cpp:107 src/core/modules/StarMgr.cpp:339
 #: src/core/modules/GridLinesMgr.cpp:695 src/core/modules/LandscapeMgr.cpp:353
 #: src/core/modules/NebulaMgr.cpp:126 src/core/modules/SolarSystem.cpp:155
-#: src/core/StelApp.cpp:468 src/core/StelCore.cpp:176
+#: src/core/StelApp.cpp:471 src/core/StelCore.cpp:176
 #: src/core/StelSkyLayerMgr.cpp:87 src/StelMainView.cpp:309
 msgid "Display Options"
 msgstr "Настройкі адлюстраваньня"
@@ -351,7 +351,7 @@ msgstr "Сьляды плянэтаў"
 
 #. TRANSLATORS: Type of object
 #: src/core/modules/StarWrapper.cpp:50 src/core/modules/StarWrapper.cpp:163
-#: src/translations.h:164
+#: src/translations.h:177
 msgid "star"
 msgstr "зорка"
 
@@ -458,7 +458,7 @@ msgstr "Працягласьць зацьменьня: %1%"
 msgid "Rising time: %1%"
 msgstr "Час узыходжаньня: %1%"
 
-#: src/core/StelApp.cpp:468
+#: src/core/StelApp.cpp:471
 msgid "Night mode"
 msgstr "Начны рэжым"
 
@@ -473,7 +473,7 @@ msgstr "Касьмічны карабель"
 msgid "Date and Time"
 msgstr "Дата й час"
 
-#: src/core/StelCore.cpp:175 src/core/StelMovementMgr.cpp:128
+#: src/core/StelCore.cpp:175 src/core/StelMovementMgr.cpp:129
 msgid "Movement and Selection"
 msgstr "Рух і вылучэньне"
 
@@ -1136,28 +1136,28 @@ msgstr "Экліптычныя топацэнтрычныя (даты): %1/%2"
 msgid "Deep-sky objects background images"
 msgstr "Відарысы асноведзі аб'ектаў глыбокага космасу"
 
-#: src/core/StelMovementMgr.cpp:129 src/gui/StelGui.cpp:185
+#: src/core/StelMovementMgr.cpp:130 src/gui/StelGui.cpp:185
 #: src/StelMainView.cpp:308
 msgid "Miscellaneous"
 msgstr "Рознае"
 
-#: src/core/StelMovementMgr.cpp:129
+#: src/core/StelMovementMgr.cpp:130
 msgid "Switch between equatorial and azimuthal mount"
 msgstr "Пераключыцца між экватарыяльным і азімутальным мацаваньнем"
 
-#: src/core/StelMovementMgr.cpp:130
+#: src/core/StelMovementMgr.cpp:131
 msgid "Center on selected object"
 msgstr "Перайсьці да вылучанага аб'екту"
 
-#: src/core/StelMovementMgr.cpp:131
+#: src/core/StelMovementMgr.cpp:132
 msgid "Zoom in on selected object"
 msgstr "Наблізіць вылучаны аб'ект"
 
-#: src/core/StelMovementMgr.cpp:132
+#: src/core/StelMovementMgr.cpp:133
 msgid "Zoom out"
 msgstr "Аддаліць"
 
-#: src/core/StelMovementMgr.cpp:133
+#: src/core/StelMovementMgr.cpp:134
 msgid "Track object"
 msgstr "Сачыць за аб'ектам"
 
@@ -1214,7 +1214,7 @@ msgstr "Кантакт"
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:120
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:130
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:128
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:255
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:254
 msgid "Version"
 msgstr "Вэрсія"
 
@@ -1227,7 +1227,7 @@ msgstr "Вэрсія"
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:121
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:131
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:129
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:256
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:255
 msgid "Author"
 msgstr "Стваральнік"
 
@@ -1235,15 +1235,19 @@ msgstr "Стваральнік"
 msgid "License"
 msgstr "Ліцэнзія"
 
-#: src/gui/ConfigurationDialog.cpp:851
+#: src/gui/ConfigurationDialog.cpp:831
+msgid "Shortcut"
+msgstr "Скарот"
+
+#: src/gui/ConfigurationDialog.cpp:855
 msgid "Running script: "
 msgstr "Выконваецца сцэнар: "
 
-#: src/gui/ConfigurationDialog.cpp:858
+#: src/gui/ConfigurationDialog.cpp:862
 msgid "Running script: [none]"
 msgstr "Выконваецца сцэнар: [ніякі]"
 
-#: src/gui/ConfigurationDialog.cpp:923
+#: src/gui/ConfigurationDialog.cpp:927
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
@@ -1251,16 +1255,16 @@ msgstr ""
 "Новыя каталёґі зорак загружаныя!\n"
 "Перазапусьці Stellarium, каб адлюстраваць іх."
 
-#: src/gui/ConfigurationDialog.cpp:927
+#: src/gui/ConfigurationDialog.cpp:931
 msgid "All available star catalogs have been installed."
 msgstr "Усе аняўныя каталёґі зорак былі ўсталяваныя."
 
-#: src/gui/ConfigurationDialog.cpp:932
+#: src/gui/ConfigurationDialog.cpp:936
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "Загрузка каталёґу %1 з %2"
 
-#: src/gui/ConfigurationDialog.cpp:939
+#: src/gui/ConfigurationDialog.cpp:943
 #, qt-format
 msgid ""
 "Downloading %1...\n"
@@ -1269,7 +1273,7 @@ msgstr ""
 "Загрузка %1…\n"
 "(Гэтае вакно можна закрыць.)"
 
-#: src/gui/ConfigurationDialog.cpp:946
+#: src/gui/ConfigurationDialog.cpp:950
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -1280,7 +1284,7 @@ msgstr ""
 "Колькасьць зорак: %2 млн\n"
 "Дыяпазон велічыняў: %3 — %4"
 
-#: src/gui/ConfigurationDialog.cpp:989 src/gui/ConfigurationDialog.cpp:1024
+#: src/gui/ConfigurationDialog.cpp:993 src/gui/ConfigurationDialog.cpp:1028
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -1289,11 +1293,11 @@ msgstr ""
 "Не атрымалася загрузіць %1:\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:1076
+#: src/gui/ConfigurationDialog.cpp:1080
 msgid "Verifying file integrity..."
 msgstr "Правяраецца суцэльнасць файла…"
 
-#: src/gui/ConfigurationDialog.cpp:1080
+#: src/gui/ConfigurationDialog.cpp:1084
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -1303,123 +1307,123 @@ msgstr ""
 "Файл пашкоджаны."
 
 #. TRANSLATORS: Full phrase is "Algorithm of DeltaT"
-#: src/gui/ConfigurationDialog.cpp:1153
+#: src/gui/ConfigurationDialog.cpp:1157
 msgid "Algorithm of"
 msgstr "Альґарытм"
 
-#: src/gui/ConfigurationDialog.cpp:1164
+#: src/gui/ConfigurationDialog.cpp:1168
 msgid "Without correction"
 msgstr "Без выпраўляньня"
 
-#: src/gui/ConfigurationDialog.cpp:1165
+#: src/gui/ConfigurationDialog.cpp:1169
 msgid "Schoch (1931)"
 msgstr "Шох (1931)"
 
-#: src/gui/ConfigurationDialog.cpp:1166
+#: src/gui/ConfigurationDialog.cpp:1170
 msgid "Clemence (1948)"
 msgstr "Клемэнс (1948)"
 
-#: src/gui/ConfigurationDialog.cpp:1167
+#: src/gui/ConfigurationDialog.cpp:1171
 msgid "IAU (1952)"
 msgstr "МАС (1952)"
 
-#: src/gui/ConfigurationDialog.cpp:1168
+#: src/gui/ConfigurationDialog.cpp:1172
 msgid "Astronomical Ephemeris (1960)"
 msgstr "Астранамічныя эфэмэрыды (1960)"
 
-#: src/gui/ConfigurationDialog.cpp:1169
+#: src/gui/ConfigurationDialog.cpp:1173
 msgid "Tuckerman (1962, 1964) & Goldstine (1973)"
 msgstr "Такерман (1962, 1964) і Ґалдстайн (1973)"
 
-#: src/gui/ConfigurationDialog.cpp:1170
+#: src/gui/ConfigurationDialog.cpp:1174
 msgid "Muller & Stephenson (1975)"
 msgstr "Мюлер і Стэфэнсан (1975)"
 
-#: src/gui/ConfigurationDialog.cpp:1171
+#: src/gui/ConfigurationDialog.cpp:1175
 msgid "Stephenson (1978)"
 msgstr "Стэфэнсан (1978)"
 
-#: src/gui/ConfigurationDialog.cpp:1172
+#: src/gui/ConfigurationDialog.cpp:1176
 msgid "Schmadel & Zech (1979)"
 msgstr "Шмадэль і Зэх (1979)"
 
-#: src/gui/ConfigurationDialog.cpp:1173
+#: src/gui/ConfigurationDialog.cpp:1177
 msgid "Morrison & Stephenson (1982)"
 msgstr "Морысан і Стэфэнсан (1982)"
 
-#: src/gui/ConfigurationDialog.cpp:1174
+#: src/gui/ConfigurationDialog.cpp:1178
 msgid "Stephenson & Morrison (1984)"
 msgstr "Стэфэнсан і Морысан (1984)"
 
-#: src/gui/ConfigurationDialog.cpp:1175
+#: src/gui/ConfigurationDialog.cpp:1179
 msgid "Stephenson & Houlden (1986)"
 msgstr "Стэфэнсан і Гульдэн (1986)"
 
-#: src/gui/ConfigurationDialog.cpp:1176
+#: src/gui/ConfigurationDialog.cpp:1180
 msgid "Espenak (1987, 1989)"
 msgstr "Эспэнак (1987, 1989)"
 
-#: src/gui/ConfigurationDialog.cpp:1177
+#: src/gui/ConfigurationDialog.cpp:1181
 msgid "Borkowski (1988)"
 msgstr "Баркоўскі (1988)"
 
-#: src/gui/ConfigurationDialog.cpp:1178
+#: src/gui/ConfigurationDialog.cpp:1182
 msgid "Schmadel & Zech (1988)"
 msgstr "Шмадэль і Зэх (1988)"
 
-#: src/gui/ConfigurationDialog.cpp:1179
+#: src/gui/ConfigurationDialog.cpp:1183
 msgid "Chapront-Touze & Chapront (1991)"
 msgstr "Шапрон-Тузэ і Шапрон (1991)"
 
-#: src/gui/ConfigurationDialog.cpp:1180
+#: src/gui/ConfigurationDialog.cpp:1184
 msgid "Stephenson & Morrison (1995)"
 msgstr "Стэфэнсан і Морысан (1995)"
 
-#: src/gui/ConfigurationDialog.cpp:1181
+#: src/gui/ConfigurationDialog.cpp:1185
 msgid "Stephenson (1997)"
 msgstr "Стэфэнсан (1997)"
 
-#: src/gui/ConfigurationDialog.cpp:1183
+#: src/gui/ConfigurationDialog.cpp:1187
 msgid "Meeus (1998) (with Chapront, Chapront-Touze & Francou (1997))"
 msgstr "Мэёс (1998) (з Шапронам, Шапронам-Тузэ і Франку (1997))"
 
-#: src/gui/ConfigurationDialog.cpp:1184
+#: src/gui/ConfigurationDialog.cpp:1188
 msgid "JPL Horizons"
 msgstr "Гарызонты ЛРР"
 
-#: src/gui/ConfigurationDialog.cpp:1185
+#: src/gui/ConfigurationDialog.cpp:1189
 msgid "Meeus & Simons (2000)"
 msgstr "Мэёс і Сыманс (2000)"
 
-#: src/gui/ConfigurationDialog.cpp:1186
+#: src/gui/ConfigurationDialog.cpp:1190
 msgid "Montenbruck & Pfleger (2000)"
 msgstr "Монтэнбрук і Пфлеґер (2000)"
 
-#: src/gui/ConfigurationDialog.cpp:1187
+#: src/gui/ConfigurationDialog.cpp:1191
 msgid "Reingold & Dershowitz (2002, 2007)"
 msgstr "Рэйнґальд і Дэршовіц (2002, 2007)"
 
-#: src/gui/ConfigurationDialog.cpp:1188
+#: src/gui/ConfigurationDialog.cpp:1192
 msgid "Morrison & Stephenson (2004, 2005)"
 msgstr "Морысан і Стэфэнсан (2004, 2005)"
 
-#: src/gui/ConfigurationDialog.cpp:1190
+#: src/gui/ConfigurationDialog.cpp:1194
 msgid "Espenak & Meeus (2006)"
 msgstr "Эспэнак і Мэёс (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:1191
+#: src/gui/ConfigurationDialog.cpp:1195
 msgid "Reijs (2006)"
 msgstr "Р'ейс (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:1192
+#: src/gui/ConfigurationDialog.cpp:1196
 msgid "Banjevic (2006)"
 msgstr "Баньевіч (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:1193
+#: src/gui/ConfigurationDialog.cpp:1197
 msgid "Islam, Sadiq & Qureshi (2008, 2013)"
 msgstr "Іслам, Садзік і Курэшы (2008, 2013)"
 
-#: src/gui/ConfigurationDialog.cpp:1194
+#: src/gui/ConfigurationDialog.cpp:1198
 #, qt-format
 msgid "Custom equation of %1T"
 msgstr "Сваё раўнаньне %1T"
@@ -1959,7 +1963,7 @@ msgstr "дзе"
 msgid "year"
 msgstr "год"
 
-#: src/main.cpp:339
+#: src/main.cpp:336
 msgid "This system does not support OpenGL."
 msgstr "Гэтая сыстэма не падтрымлівае OpenGL."
 
@@ -1994,12 +1998,12 @@ msgid "Earth"
 msgstr "Зямля"
 
 #. TRANSLATORS: Name of landscape and Earth's satellite
-#: src/translations.h:37 src/translations.h:204
+#: src/translations.h:37 src/translations.h:217
 msgid "Moon"
 msgstr "Месяц"
 
 #. TRANSLATORS: Name of landscape and planet
-#: src/translations.h:38 src/translations.h:212
+#: src/translations.h:38 src/translations.h:225
 msgid "Mars"
 msgstr "Марс"
 
@@ -2097,7 +2101,7 @@ msgid "Metis"
 msgstr "Мэтыс"
 
 #. TRANSLATORS: Name of landscape and planet
-#: src/translations.h:62 src/translations.h:214
+#: src/translations.h:62 src/translations.h:227
 msgid "Saturn"
 msgstr "Сатурн"
 
@@ -2348,313 +2352,350 @@ msgstr "Дэдал"
 msgid "Icarus"
 msgstr "Ікар"
 
-#. TRANSLATORS: Proper name of comet C/1680 V1
+#. TRANSLATORS: Asteroid (1809) Prometheus
+#: src/translations.h:147
+msgid "Prometheus"
+msgstr "Прамэтэй"
+
 #: src/translations.h:148
+msgid "Prometheus (moon)"
+msgstr "Прамэтэй (месяц)"
+
+#. TRANSLATORS: Asteroid (1810) Epimetheus
+#: src/translations.h:150
+msgid "Epimetheus"
+msgstr "Эпімэтэй"
+
+#: src/translations.h:151
+msgid "Epimetheus (moon)"
+msgstr "Эпімэтэй (месяц)"
+
+#. TRANSLATORS: Asteroid (951) Gaspra
+#: src/translations.h:153
+msgid "Gaspra"
+msgstr "Ґаспра"
+
+#. TRANSLATORS: Asteroid (243) Ida
+#: src/translations.h:155
+msgid "Ida"
+msgstr "Іда"
+
+#. TRANSLATORS: Asteroid (218) Bianca
+#: src/translations.h:157
+msgid "Bianca"
+msgstr "Б'янка"
+
+#: src/translations.h:158
+msgid "Bianca (moon)"
+msgstr "Б'янка (месяц)"
+
+#. TRANSLATORS: Proper name of comet C/1680 V1
+#: src/translations.h:161
 msgid "Great Comet of 1680 (C/1680 V1)"
 msgstr "Вялікая камэта 1680 (C/1680 V1)"
 
 #. TRANSLATORS: Name of supernova SN 1572A and script name
-#: src/translations.h:151
+#: src/translations.h:164
 msgid "Tycho's Supernova"
 msgstr "Звышновая Тыха"
 
 #. TRANSLATORS: Name of supernova SN 1604A
-#: src/translations.h:153
+#: src/translations.h:166
 msgid "Kepler's Supernova"
 msgstr "Звышновая Кеплера"
 
-#: src/translations.h:156
+#: src/translations.h:169
 msgid "N"
 msgstr "Пн"
 
-#: src/translations.h:157
+#: src/translations.h:170
 msgid "S"
 msgstr "Пд"
 
-#: src/translations.h:158
+#: src/translations.h:171
 msgid "E"
 msgstr "У"
 
-#: src/translations.h:159
+#: src/translations.h:172
 msgid "W"
 msgstr "З"
 
 #. TRANSLATORS: Type of object
-#: src/translations.h:166
+#: src/translations.h:179
 msgid "planet"
 msgstr "плянэта"
 
 #. TRANSLATORS: Type of object
-#: src/translations.h:168
+#: src/translations.h:181
 msgid "comet"
 msgstr "камэта"
 
 #. TRANSLATORS: Type of object
-#: src/translations.h:170
+#: src/translations.h:183
 msgid "asteroid"
 msgstr "астэроід"
 
 #. TRANSLATORS: Type of object
-#: src/translations.h:172
+#: src/translations.h:185
 msgid "moon"
 msgstr "месяц"
 
 #. TRANSLATORS: Type of object
-#: src/translations.h:174
+#: src/translations.h:187
 msgid "plutoid"
 msgstr "плютоід"
 
-#: src/translations.h:178
+#: src/translations.h:191
 msgid "Arabic"
 msgstr "Арабскія"
 
-#: src/translations.h:179
+#: src/translations.h:192
 msgid "Aztec"
 msgstr "Ацтэцкія"
 
-#: src/translations.h:180
+#: src/translations.h:193
 msgid "Chinese"
 msgstr "Кітайскія"
 
-#: src/translations.h:181
+#: src/translations.h:194
 msgid "Egyptian"
 msgstr "Эґіпэцкія"
 
-#: src/translations.h:182
+#: src/translations.h:195
 msgid "Inuit"
 msgstr "Інуіцкія"
 
-#: src/translations.h:183
+#: src/translations.h:196
 msgid "Indian Vedic"
 msgstr "Індыйская ведычная"
 
-#: src/translations.h:184
+#: src/translations.h:197
 msgid "Korean"
 msgstr "Карэйскія"
 
-#: src/translations.h:185
+#: src/translations.h:198
 msgid "Lakota"
 msgstr "Лакота"
 
-#: src/translations.h:186
+#: src/translations.h:199
 msgid "Maori"
 msgstr "Маоры"
 
-#: src/translations.h:187
+#: src/translations.h:200
 msgid "Navajo"
 msgstr "Наваха"
 
-#: src/translations.h:188
+#: src/translations.h:201
 msgid "Norse"
 msgstr "Скандынаўскія"
 
-#: src/translations.h:189
+#: src/translations.h:202
 msgid "Polynesian"
 msgstr "Палінэзійскія"
 
-#: src/translations.h:190
+#: src/translations.h:203
 msgid "Romanian"
 msgstr "Румынская"
 
-#: src/translations.h:191
+#: src/translations.h:204
 msgid "Sami"
 msgstr "Саамскія"
 
-#: src/translations.h:192
+#: src/translations.h:205
 msgid "Tupi-Guarani"
 msgstr "Тупі-Ґуарані"
 
-#: src/translations.h:193
+#: src/translations.h:206
 msgid "Tongan"
 msgstr "Тонґа"
 
-#: src/translations.h:194
+#: src/translations.h:207
 msgid "Western"
 msgstr "Заходнія"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:200
+#: src/translations.h:213
 msgid "Guereins"
 msgstr "Ґерэн"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:202
+#: src/translations.h:215
 msgid "Trees"
 msgstr "Дрэвы"
 
 #. TRANSLATORS: Landscape name: Hurricane Ridge
-#: src/translations.h:206
+#: src/translations.h:219
 msgid "Hurricane"
 msgstr "Ураган"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:208
+#: src/translations.h:221
 msgid "Ocean"
 msgstr "Акіян"
 
 #. TRANSLATORS: Landscape name: Garching bei Munchen
-#: src/translations.h:210
+#: src/translations.h:223
 msgid "Garching"
 msgstr "Ґархінґ"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:216
+#: src/translations.h:229
 msgid "Geneva"
 msgstr "Жэнева"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:218
+#: src/translations.h:231
 msgid "Grossmugl"
 msgstr "Ґрасмуґль"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:225
+#: src/translations.h:238
 msgid "Landscape Tour"
 msgstr "Тур па краявідах"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:227
+#: src/translations.h:240
 msgid "Partial Lunar Eclipse"
 msgstr "Частковае зацьменьне Месяца"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:229
+#: src/translations.h:242
 msgid "Total Lunar Eclipse"
 msgstr "Поўнае зацьменьне Месяца"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:231
+#: src/translations.h:244
 msgid "Screensaver"
 msgstr "Засьцерагальнік экрана"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:233
+#: src/translations.h:246
 msgid "Solar Eclipse 2009"
 msgstr "Сонечнае зацьменьне 2009"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:235
+#: src/translations.h:248
 msgid "Startup Script"
 msgstr "Пачатковы сцэнар"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:237
+#: src/translations.h:250
 msgid "Zodiac"
 msgstr "Задыяк"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:239
+#: src/translations.h:252
 msgid "Mercury Triple Sunrise and Sunset"
 msgstr "Патройны ўзыход і захад на Мэркурыі"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:241
+#: src/translations.h:254
 msgid "Double eclipse from Deimos in 2017"
 msgstr "Падвойнае зацьменьне на Дэймасе ў 2017 годзе"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:243
+#: src/translations.h:256
 msgid "Double eclipse from Deimos in 2031"
 msgstr "Падвойнае зацьменьне на Дэймасе ў 2031 годзе"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:245
+#: src/translations.h:258
 msgid "Eclipse from Olympus Mons Jan 10 2068"
 msgstr "Зацьменьне на гары Алімп 10 студзеня 2068 года"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:247
+#: src/translations.h:260
 msgid "Occultation of Earth and Jupiter 2048"
 msgstr "Пакрыцьцё Зямлі й Юпітэра ў 2048 годзе"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:249
+#: src/translations.h:262
 msgid "3 Transits and 2 Eclipses from Deimos 2027"
 msgstr "Тры транзыты й два зацьменьні на Дэймасе ў 2027"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:251
+#: src/translations.h:264
 msgid "Solar System Screensaver"
 msgstr "Засьцерагальнік экрану «Сонечная сыстэма»"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:253
+#: src/translations.h:266
 msgid "Constellations Tour"
 msgstr "Агляд сузор'яў"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:255
+#: src/translations.h:268
 msgid "Sun from different planets"
 msgstr "Сонца, бачнае з розных плянэт"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:257
+#: src/translations.h:270
 msgid "Earth best views from other bodies"
 msgstr "Найлепшыя віды Зямлі зь іншых касьмічных целаў"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:259
+#: src/translations.h:272
 msgid "Transit of Venus"
 msgstr "Транзыт Вэнэры"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:261
+#: src/translations.h:274
 msgid "Analemma"
 msgstr "Аналема"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:263
+#: src/translations.h:276
 msgid "Sky Culture Tour"
 msgstr "Агляд зорных культур"
 
 #. TRANSLATORS: Name and description of script
-#: src/translations.h:265
+#: src/translations.h:278
 msgid "Earth Events from Mercury"
 msgstr "Падзеі на Зямлі, бачныя з Мэркурыя"
 
 #. TRANSLATORS: Name and description of script
-#: src/translations.h:267
+#: src/translations.h:280
 msgid "Earth Events from a floating city on Venus"
 msgstr "Падзеі на Зямлі з плаваючага горада на Вэнэры"
 
 #. TRANSLATORS: Name and description of script
-#: src/translations.h:269
+#: src/translations.h:282
 msgid "Earth Events from Mars"
 msgstr "Падзеі на Зямлі, бачныя з Марса"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:271
+#: src/translations.h:284
 msgid "Earth and Venus Greatest Elongations and Brilliancies from Mars"
 msgstr "Найбольшыя эланґацыі й яркасьці Зямлі й Вэнэры з Марса"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:273
+#: src/translations.h:286
 msgid "Earth and Mars Greatest Elongations and Transits from Callisto"
 msgstr "Найбольшыя эланґацыі й транзыты Зямлі й Марса з Каліста"
 
 #. TRANSLATORS: Description of the landscape tour script.
-#: src/translations.h:279
+#: src/translations.h:292
 msgid "Look around each installed landscape."
 msgstr "Агляд усіх усталяваных краявідаў."
 
 #. TRANSLATORS: Description of the sky culture tour script.
-#: src/translations.h:281
+#: src/translations.h:294
 msgid "Look at each installed sky culture."
 msgstr "Агляд кожнае ўсталяванае культуры."
 
-#: src/translations.h:282
+#: src/translations.h:295
 msgid "Script to demonstrate a partial lunar eclipse."
 msgstr "Сцэнар, які паказвае частковае зацьменьне Месяца."
 
-#: src/translations.h:283
+#: src/translations.h:296
 msgid "Script to demonstrate a total lunar eclipse."
 msgstr "Сцэнар, які паказвае поўнае зацьменьне Месяца."
 
-#: src/translations.h:284
+#: src/translations.h:297
 msgid "A slow, infinite tour of the sky, looking at random objects."
 msgstr "Павольны бясконцы тур па небе, паказвае адвольнае аб'екты."
 
-#: src/translations.h:285
+#: src/translations.h:298
 msgid ""
 "Script to demonstrate a total solar eclipse which has happened in 2009 "
 "(location=Rangpur, Bangladesh)."
@@ -2662,11 +2703,11 @@ msgstr ""
 "Сцэнар, які паказвае поўнае сонечнае зацьменьне, якое было ў 2009 годзе "
 "(месца — Ранґпур, Банґлядэш)."
 
-#: src/translations.h:286
+#: src/translations.h:299
 msgid "Script which runs automatically at startup"
 msgstr "Сцэнар, які аўтаматычна запускаецца на пачатку працы."
 
-#: src/translations.h:287
+#: src/translations.h:300
 msgid ""
 "This script displays the constellations of the Zodiac. That means the "
 "constellations which lie along the line which the Sun traces across the "
@@ -2675,7 +2716,7 @@ msgstr ""
 "Гэты сцэнар паказвае сузор'і Задыяку, г.зн. сузор'і, якія ляжаць уздоўж "
 "лініі, якую за год акрэсьлівае Сонца на нябесным купале."
 
-#: src/translations.h:288
+#: src/translations.h:301
 msgid ""
 "Due to the quirks in Mercury's orbit and rotation at certain spots the sun "
 "will rise & set 3 different times in one Mercury day."
@@ -2683,7 +2724,7 @@ msgstr ""
 "Праз асаблівасьцяў арбіты Мэркурыя й аварачэньня ў пэўных месцах Сонца будзе "
 "ўзыходзіць і заходзіць тры разы за адзін мэркурыянскі дзень."
 
-#: src/translations.h:289
+#: src/translations.h:302
 msgid ""
 "Just before Mars eclipses the sun, Phobos pops out from behind and eclipses "
 "it first. Takes place between Scorpio and Sagittarius on April 26, 2017."
@@ -2691,7 +2732,7 @@ msgstr ""
 "Перад тым як Марс зацьміць Сонца, Фобас выйдзе з-за  Марса й зацьміць Сонца "
 "першым. Гэта адбудзецца між Скарпіёнам і Стральцом 26 красавіка 2017 года."
 
-#: src/translations.h:290
+#: src/translations.h:303
 msgid ""
 "Just before Mars eclipses the sun, Phobos pops out from behind and eclipses "
 "it first. Takes place between Taurus and Gemini on July 23, 2031."
@@ -2699,12 +2740,12 @@ msgstr ""
 "Перад тым як Марс зацьміць Сонца, Фобас выйдзе з-за  Марса й зацьміць Сонца "
 "першым. Гэта адбудзецца між Цяльцом і Блізьнятамі 23 ліпеня 2031 года."
 
-#: src/translations.h:291
+#: src/translations.h:304
 msgid "Phobos eclipsing the Sun as seen from Olympus Mons on Jan 10, 2068."
 msgstr ""
 "Зацьменьне Сонца Фобасам, назіранае з гары Алімп 10 студзеня 2068 года."
 
-#: src/translations.h:292
+#: src/translations.h:305
 msgid ""
 "Phobos occultations of Earth are common, as are occultations of Jupiter. But "
 "occultations of both on the same day are very rare. Here's one that takes "
@@ -2715,7 +2756,7 @@ msgstr ""
 "такіх пакрыцьцяў адбудзецца 23 студзеня 2048 года. Паказана ў сапраўднай "
 "хуткасьці."
 
-#: src/translations.h:293
+#: src/translations.h:306
 msgid ""
 "Phobos races ahead of Mars and transits the sun, passes through it and then "
 "retrogrades back towards the sun and just partially transits it again (only "
@@ -2730,33 +2771,33 @@ msgstr ""
 "цемры між Марсам і Дэймасам. Калі Фобас зьяўляецца з-за Марса, ён усё яшчэ "
 "зацьмёны  ценем Марса і будзе асьветлены пазьней."
 
-#: src/translations.h:294
+#: src/translations.h:307
 msgid ""
 "Screensaver of various happenings in the Solar System. 232 events in all!"
 msgstr ""
 "Засьцерагальнік экрана з рознымі падзеямі ў Сонечнай сыстэмы. Агулам 232 "
 "падзеі!"
 
-#: src/translations.h:295
+#: src/translations.h:308
 msgid "A tour of the western constellations."
 msgstr "Агляд заходніх сузор'яў."
 
-#: src/translations.h:296
+#: src/translations.h:309
 msgid "Look at the Sun from big planets of Solar System and Pluto."
 msgstr "Як выглядае Сонца зь вялікіх плянэт Сонечнай сыстэмы й Плютона."
 
-#: src/translations.h:297
+#: src/translations.h:310
 msgid ""
 "Best views of Earth from other Solar System bodies in the 21st Century."
 msgstr ""
 "Найлепшыя віды Зямлі зь іншых аб'ектаў Сонечнай сыстэмы ў 21 стагодзьдзі."
 
-#: src/translations.h:298
+#: src/translations.h:311
 msgid "Transit of Venus as seen from Sydney Australia, 6th June 2012."
 msgstr ""
 "Транзыт Вэнэры, як ён быў бачны ў аўстралійскім Сыднэі 6 чэрвеня 2012 года."
 
-#: src/translations.h:299
+#: src/translations.h:312
 msgid ""
 "A demonstration of the analemma - the path of the Sun across the sky during "
 "the year."
@@ -2764,7 +2805,7 @@ msgstr ""
 "Гэты сцэнар паказвае аналему — шлях, якім праходзіць Сонца па небе на "
 "працягу года."
 
-#: src/translations.h:300
+#: src/translations.h:313
 msgid ""
 "Flash of the supernova observed by Tycho Brahe in 1572. The Supernovae "
 "plugin has to be enabled."
@@ -2772,1000 +2813,1008 @@ msgstr ""
 "Успышка звышновай, назіранай Тыха Браге ў 1572 годзе. Мусіш задзейнічаць "
 "дадатак «Звышновыя»."
 
-#: src/translations.h:301
+#: src/translations.h:314
 msgid ""
 "Earth and Venus Greatest Elongations and Brilliancies from Mars 2000-3000"
 msgstr "Найбольшыя эланґацыі й яркасьці Зямлі й Вэнэры з Марса 2000-3000"
 
-#: src/translations.h:302
-msgid "Earth Greatest Elongations and Transits from Callisto 2000-3000."
-msgstr "Найбольшыя эланґацыі й транзыты Зямлі й Марса з Каліста 2000-3000."
+#: src/translations.h:315
+msgid ""
+"Earth Greatest Elongations and Transits from Callisto 2000-3000. Why "
+"Callisto? Well of the 4 Galilean Moons, Callisto is the only one outside of "
+"Jupiter's radiation belt. Therefore, if humans ever colonize Jupiter's "
+"moons, Callisto will be the one."
+msgstr ""
+"Найбольшыя эланґацыі й транзыты Зямлі з Каліста 2000-3000. Чаму Каліста? Бо "
+"з 4-х месяцаў Ґалілея толькі Каліста знаходзіцца па-за радыяцыйным пасам "
+"Юпітэра. Таму, калі людзі калі-небудзь будуць калянізаваць месяцы Юпітэра, "
+"Каліста будзе адным зь іх."
 
-#: src/translations.h:306
+#: src/translations.h:319
 msgid "Andorra"
 msgstr "Андора"
 
-#: src/translations.h:307
+#: src/translations.h:320
 msgid "United Arab Emirates"
 msgstr "Аб'яднаныя Арабскія Эміраты"
 
-#: src/translations.h:308
+#: src/translations.h:321
 msgid "Afghanistan"
 msgstr "Аўганістан"
 
-#: src/translations.h:309
+#: src/translations.h:322
 msgid "Antigua and Barbuda"
 msgstr "Антыґуа й Барбуда"
 
-#: src/translations.h:310
+#: src/translations.h:323
 msgid "Anguilla"
 msgstr "Анґілья"
 
-#: src/translations.h:311
+#: src/translations.h:324
 msgid "Albania"
 msgstr "Альбанія"
 
-#: src/translations.h:312
+#: src/translations.h:325
 msgid "Armenia"
 msgstr "Арменія"
 
-#: src/translations.h:313
+#: src/translations.h:326
 msgid "Netherlands Antilles"
 msgstr "Нідэрляндзкія Антыльскія астравы"
 
-#: src/translations.h:314
+#: src/translations.h:327
 msgid "Angola"
 msgstr "Анґола"
 
-#: src/translations.h:315
+#: src/translations.h:328
 msgid "Antarctica"
 msgstr "Антарктыда"
 
-#: src/translations.h:316
+#: src/translations.h:329
 msgid "Argentina"
 msgstr "Арґентына"
 
-#: src/translations.h:317
+#: src/translations.h:330
 msgid "American Samoa"
 msgstr "Амэрыканскае Самоа"
 
-#: src/translations.h:318
+#: src/translations.h:331
 msgid "Austria"
 msgstr "Аўстрыя"
 
-#: src/translations.h:319
+#: src/translations.h:332
 msgid "Australia"
 msgstr "Аўстралія"
 
-#: src/translations.h:320
+#: src/translations.h:333
 msgid "Aruba"
 msgstr "Аруба"
 
-#: src/translations.h:321
+#: src/translations.h:334
 msgid "Azerbaijan"
 msgstr "Азэрбайджан"
 
-#: src/translations.h:322
+#: src/translations.h:335
 msgid "Bosnia and Herzegowina"
 msgstr "Босьнія й Герцаґавіна"
 
-#: src/translations.h:323
+#: src/translations.h:336
 msgid "Barbados"
 msgstr "Барбадас"
 
-#: src/translations.h:324
+#: src/translations.h:337
 msgid "Bangladesh"
 msgstr "Банґлядэш"
 
-#: src/translations.h:325
+#: src/translations.h:338
 msgid "Belgium"
 msgstr "Бэльґія"
 
-#: src/translations.h:326
+#: src/translations.h:339
 msgid "Burkina Faso"
 msgstr "Буркіна-Фасо"
 
-#: src/translations.h:327
+#: src/translations.h:340
 msgid "Bulgaria"
 msgstr "Баўгарыя"
 
-#: src/translations.h:328
+#: src/translations.h:341
 msgid "Bahrain"
 msgstr "Бахрэйн"
 
-#: src/translations.h:329
+#: src/translations.h:342
 msgid "Burundi"
 msgstr "Бурундзі"
 
-#: src/translations.h:330
+#: src/translations.h:343
 msgid "Benin"
 msgstr "Бэнін"
 
-#: src/translations.h:331
+#: src/translations.h:344
 msgid "Bermuda"
 msgstr "Бэрмудзкія астравы"
 
-#: src/translations.h:332
+#: src/translations.h:345
 msgid "Brunei Darussalam"
 msgstr "Брунэй"
 
-#: src/translations.h:333
+#: src/translations.h:346
 msgid "Bolivia"
 msgstr "Балівія"
 
-#: src/translations.h:334
+#: src/translations.h:347
 msgid "Brazil"
 msgstr "Бразылія"
 
-#: src/translations.h:335
+#: src/translations.h:348
 msgid "Bahamas"
 msgstr "Багамскія астравы"
 
-#: src/translations.h:336
+#: src/translations.h:349
 msgid "Bhutan"
 msgstr "Бутан"
 
-#: src/translations.h:337
+#: src/translations.h:350
 msgid "Bouvet Island"
 msgstr "Востраў Бувэ"
 
-#: src/translations.h:338
+#: src/translations.h:351
 msgid "Botswana"
 msgstr "Батсвана"
 
-#: src/translations.h:339
+#: src/translations.h:352
 msgid "Belarus"
 msgstr "Беларусь"
 
-#: src/translations.h:340
+#: src/translations.h:353
 msgid "Belize"
 msgstr "Бэліз"
 
-#: src/translations.h:341
+#: src/translations.h:354
 msgid "Canada"
 msgstr "Канада"
 
-#: src/translations.h:342
+#: src/translations.h:355
 msgid "Cocos Islands"
 msgstr "Какосавыя астравы"
 
-#: src/translations.h:343
+#: src/translations.h:356
 msgid "Democratic Republic of the Congo"
 msgstr "Дэмакратычная рэспубліка Конґа"
 
-#: src/translations.h:344
+#: src/translations.h:357
 msgid "Central African Republic"
 msgstr "Цэнтральна-Афрыканская Рэспубліка"
 
-#: src/translations.h:345
+#: src/translations.h:358
 msgid "Republic of the Congo"
 msgstr "Рэспубліка Конґа"
 
-#: src/translations.h:346
+#: src/translations.h:359
 msgid "Switzerland"
 msgstr "Швайцарыя"
 
-#: src/translations.h:347
+#: src/translations.h:360
 msgid "Cote d'Ivoire"
 msgstr "Кот д'Івуар"
 
-#: src/translations.h:348
+#: src/translations.h:361
 msgid "Cook Islands"
 msgstr "Астравы Кука"
 
-#: src/translations.h:349
+#: src/translations.h:362
 msgid "Chile"
 msgstr "Чылі"
 
-#: src/translations.h:350
+#: src/translations.h:363
 msgid "Cameroon"
 msgstr "Камэрун"
 
-#: src/translations.h:351
+#: src/translations.h:364
 msgid "China"
 msgstr "Кітай"
 
-#: src/translations.h:352
+#: src/translations.h:365
 msgid "Colombia"
 msgstr "Калюмбія"
 
-#: src/translations.h:353
+#: src/translations.h:366
 msgid "Costa Rica"
 msgstr "Коста-Рыка"
 
-#: src/translations.h:354
+#: src/translations.h:367
 msgid "Serbia and Montenegro"
 msgstr "Сэрбія й Чарнагорыя"
 
-#: src/translations.h:355
+#: src/translations.h:368
 msgid "Cuba"
 msgstr "Куба"
 
-#: src/translations.h:356
+#: src/translations.h:369
 msgid "Cape Verde"
 msgstr "Каба-Вэрдэ"
 
-#: src/translations.h:357
+#: src/translations.h:370
 msgid "Christmas Island"
 msgstr "Востраў Раства"
 
-#: src/translations.h:358
+#: src/translations.h:371
 msgid "Cyprus"
 msgstr "Кіпр"
 
-#: src/translations.h:359
+#: src/translations.h:372
 msgid "Czech Republic"
 msgstr "Чэская Рэспубліка"
 
-#: src/translations.h:360
+#: src/translations.h:373
 msgid "Germany"
 msgstr "Нямеччына"
 
-#: src/translations.h:361
+#: src/translations.h:374
 msgid "Djibouti"
 msgstr "Джыбуці"
 
-#: src/translations.h:362
+#: src/translations.h:375
 msgid "Denmark"
 msgstr "Данія"
 
-#: src/translations.h:363
+#: src/translations.h:376
 msgid "Dominica"
 msgstr "Дамініка"
 
-#: src/translations.h:364
+#: src/translations.h:377
 msgid "Dominican Republic"
 msgstr "Дамініканская Рэспубліка"
 
-#: src/translations.h:365
+#: src/translations.h:378
 msgid "Algeria"
 msgstr "Альжыр"
 
-#: src/translations.h:366
+#: src/translations.h:379
 msgid "Ecuador"
 msgstr "Эквадор"
 
-#: src/translations.h:367
+#: src/translations.h:380
 msgid "Estonia"
 msgstr "Эстонія"
 
-#: src/translations.h:368
+#: src/translations.h:381
 msgid "Egypt"
 msgstr "Эґіпет"
 
-#: src/translations.h:369
+#: src/translations.h:382
 msgid "Western Sahara"
 msgstr "Заходняя Сахара"
 
-#: src/translations.h:370
+#: src/translations.h:383
 msgid "Eritrea"
 msgstr "Эрытрэя"
 
-#: src/translations.h:371
+#: src/translations.h:384
 msgid "Spain"
 msgstr "Гішпанія"
 
-#: src/translations.h:372
+#: src/translations.h:385
 msgid "Ethiopia"
 msgstr "Этыёпія"
 
-#: src/translations.h:373
+#: src/translations.h:386
 msgid "Finland"
 msgstr "Фінляндыя"
 
-#: src/translations.h:374
+#: src/translations.h:387
 msgid "Fiji"
 msgstr "Фіджы"
 
-#: src/translations.h:375
+#: src/translations.h:388
 msgid "Falkland Islands"
 msgstr "Фолклэндзкія астравы"
 
-#: src/translations.h:376
+#: src/translations.h:389
 msgid "Micronesia"
 msgstr "Мікранэзія"
 
-#: src/translations.h:377
+#: src/translations.h:390
 msgid "Faroe Islands"
 msgstr "Фарэрскія астравы"
 
-#: src/translations.h:378
+#: src/translations.h:391
 msgid "France"
 msgstr "Францыя"
 
-#: src/translations.h:379
+#: src/translations.h:392
 msgid "Gabon"
 msgstr "Ґабон"
 
-#: src/translations.h:380
+#: src/translations.h:393
 msgid "United Kingdom"
 msgstr "Вялікабрытанія"
 
-#: src/translations.h:381
+#: src/translations.h:394
 msgid "Grenada"
 msgstr "Ґрэнада"
 
-#: src/translations.h:382
+#: src/translations.h:395
 msgid "Georgia"
 msgstr "Грузія"
 
-#: src/translations.h:383
+#: src/translations.h:396
 msgid "French Guiana"
 msgstr "Француская Ґвіяна"
 
-#: src/translations.h:384
+#: src/translations.h:397
 msgid "Ghana"
 msgstr "Гана"
 
-#: src/translations.h:385
+#: src/translations.h:398
 msgid "Gibraltar"
 msgstr "Ґібральтар"
 
-#: src/translations.h:386
+#: src/translations.h:399
 msgid "Greenland"
 msgstr "Ґрэнляндыя"
 
-#: src/translations.h:387
+#: src/translations.h:400
 msgid "Gambia"
 msgstr "Ґамбія"
 
-#: src/translations.h:388
+#: src/translations.h:401
 msgid "Guinea"
 msgstr "Ґвінэя"
 
-#: src/translations.h:389
+#: src/translations.h:402
 msgid "Guadeloupe"
 msgstr "Ґвадэлюпа"
 
-#: src/translations.h:390
+#: src/translations.h:403
 msgid "Equatorial Guinea"
 msgstr "Экватарыяльная Ґвінэя"
 
-#: src/translations.h:391
+#: src/translations.h:404
 msgid "Greece"
 msgstr "Грэцыя"
 
-#: src/translations.h:392
+#: src/translations.h:405
 msgid "South Georgia and the South Sandwich Islands"
 msgstr "Паўднёвая Ґеорґія й Паўднёвыя Сэндвічавыя астравы"
 
-#: src/translations.h:393
+#: src/translations.h:406
 msgid "Guatemala"
 msgstr "Ґватэмала"
 
-#: src/translations.h:394
+#: src/translations.h:407
 msgid "Guam"
 msgstr "Ґуам"
 
-#: src/translations.h:395
+#: src/translations.h:408
 msgid "Guinea-Bissau"
 msgstr "Ґвінэя-Бісаў"
 
-#: src/translations.h:396
+#: src/translations.h:409
 msgid "Guyana"
 msgstr "Ґаяна"
 
-#: src/translations.h:397
+#: src/translations.h:410
 msgid "Hong Kong"
 msgstr "Ганконґ"
 
-#: src/translations.h:398
+#: src/translations.h:411
 msgid "Heard Island and McDonald Islands"
 msgstr "Востраў Герд і Астравы Макдоналд"
 
-#: src/translations.h:399
+#: src/translations.h:412
 msgid "Honduras"
 msgstr "Гандурас"
 
-#: src/translations.h:400
+#: src/translations.h:413
 msgid "Croatia"
 msgstr "Харватыя"
 
-#: src/translations.h:401
+#: src/translations.h:414
 msgid "Haiti"
 msgstr "Гаіці"
 
-#: src/translations.h:402
+#: src/translations.h:415
 msgid "Hungary"
 msgstr "Вугоршчына"
 
-#: src/translations.h:403
+#: src/translations.h:416
 msgid "Indonesia"
 msgstr "Інданэзія"
 
-#: src/translations.h:404
+#: src/translations.h:417
 msgid "Ireland"
 msgstr "Ірляндыя"
 
-#: src/translations.h:405
+#: src/translations.h:418
 msgid "Israel"
 msgstr "Ізраіль"
 
-#: src/translations.h:406
+#: src/translations.h:419
 msgid "India"
 msgstr "Індыя"
 
-#: src/translations.h:407
+#: src/translations.h:420
 msgid "British Indian Ocean Territory"
 msgstr "Брытанская тэрыторыя ў Індыйскім акіяне"
 
-#: src/translations.h:408
+#: src/translations.h:421
 msgid "Iraq"
 msgstr "Ірак"
 
-#: src/translations.h:409
+#: src/translations.h:422
 msgid "Iran"
 msgstr "Іран"
 
-#: src/translations.h:410
+#: src/translations.h:423
 msgid "Iceland"
 msgstr "Ісьляндыя"
 
-#: src/translations.h:411
+#: src/translations.h:424
 msgid "Italy"
 msgstr "Італія"
 
-#: src/translations.h:412
+#: src/translations.h:425
 msgid "Jamaica"
 msgstr "Ямайка"
 
-#: src/translations.h:413
+#: src/translations.h:426
 msgid "Jordan"
 msgstr "Ярданія"
 
-#: src/translations.h:414
+#: src/translations.h:427
 msgid "Japan"
 msgstr "Японія"
 
-#: src/translations.h:415
+#: src/translations.h:428
 msgid "Kenya"
 msgstr "Кенія"
 
-#: src/translations.h:416
+#: src/translations.h:429
 msgid "Kyrgyzstan"
 msgstr "Кыргыстан"
 
-#: src/translations.h:417
+#: src/translations.h:430
 msgid "Cambodia"
 msgstr "Камбоджа"
 
-#: src/translations.h:418
+#: src/translations.h:431
 msgid "Kiribati"
 msgstr "Кірыбаці"
 
-#: src/translations.h:419
+#: src/translations.h:432
 msgid "Comoros"
 msgstr "Каморскія астравы"
 
-#: src/translations.h:420
+#: src/translations.h:433
 msgid "Saint Kitts and Nevis"
 msgstr "Сэн-Кітс і Нэвіс"
 
-#: src/translations.h:421
+#: src/translations.h:434
 msgid "Democratic People's Republic of Korea"
 msgstr "Карэйская Народна-Дэмакратычная Рэспубліка"
 
-#: src/translations.h:422
+#: src/translations.h:435
 msgid "Republic of Korea"
 msgstr "Рэспубліка Карэя"
 
-#: src/translations.h:423
+#: src/translations.h:436
 msgid "Kuwait"
 msgstr "Кувэйт"
 
-#: src/translations.h:424
+#: src/translations.h:437
 msgid "Cayman Islands"
 msgstr "Кайманавы астравы"
 
-#: src/translations.h:425
+#: src/translations.h:438
 msgid "Kazakhstan"
 msgstr "Казахстан"
 
-#: src/translations.h:426
+#: src/translations.h:439
 msgid "Lao"
 msgstr "Лао"
 
-#: src/translations.h:427
+#: src/translations.h:440
 msgid "Lebanon"
 msgstr "Лібан"
 
-#: src/translations.h:428
+#: src/translations.h:441
 msgid "Saint Lucia"
 msgstr "Сэн-Люсія"
 
-#: src/translations.h:429
+#: src/translations.h:442
 msgid "Liechtenstein"
 msgstr "Ліхтэнштайн"
 
-#: src/translations.h:430
+#: src/translations.h:443
 msgid "Sri Lanka"
 msgstr "Шры-Ланка"
 
-#: src/translations.h:431
+#: src/translations.h:444
 msgid "Liberia"
 msgstr "Лібэрыя"
 
-#: src/translations.h:432
+#: src/translations.h:445
 msgid "Lesotho"
 msgstr "Лесота"
 
-#: src/translations.h:433
+#: src/translations.h:446
 msgid "Lithuania"
 msgstr "Летува"
 
-#: src/translations.h:434
+#: src/translations.h:447
 msgid "Luxembourg"
 msgstr "Люксэмбурґ"
 
-#: src/translations.h:435
+#: src/translations.h:448
 msgid "Latvia"
 msgstr "Латвія"
 
-#: src/translations.h:436
+#: src/translations.h:449
 msgid "Libyan Arab Jamahiriya"
 msgstr "Лівійская Арабская Джамахірыя"
 
-#: src/translations.h:437
+#: src/translations.h:450
 msgid "Morocco"
 msgstr "Марока"
 
-#: src/translations.h:438
+#: src/translations.h:451
 msgid "Monaco"
 msgstr "Манака"
 
-#: src/translations.h:439
+#: src/translations.h:452
 msgid "Moldova"
 msgstr "Малдова"
 
-#: src/translations.h:440
+#: src/translations.h:453
 msgid "Madagascar"
 msgstr "Мадаґаскар"
 
-#: src/translations.h:441
+#: src/translations.h:454
 msgid "Marshall Islands"
 msgstr "Маршалавы астравы"
 
-#: src/translations.h:442
+#: src/translations.h:455
 msgid "Macedonia"
 msgstr "Македонія"
 
-#: src/translations.h:443
+#: src/translations.h:456
 msgid "Mali"
 msgstr "Малі"
 
-#: src/translations.h:444
+#: src/translations.h:457
 msgid "Myanmar"
 msgstr "М'янма"
 
-#: src/translations.h:445
+#: src/translations.h:458
 msgid "Mongolia"
 msgstr "Манголія"
 
-#: src/translations.h:446
+#: src/translations.h:459
 msgid "Macau"
 msgstr "Макао"
 
-#: src/translations.h:447
+#: src/translations.h:460
 msgid "Northern Mariana Islands"
 msgstr "Паўночныя Марыянскія астравы"
 
-#: src/translations.h:448
+#: src/translations.h:461
 msgid "Martinique"
 msgstr "Мартыніка"
 
-#: src/translations.h:449
+#: src/translations.h:462
 msgid "Mauritania"
 msgstr "Маўрытанія"
 
-#: src/translations.h:450
+#: src/translations.h:463
 msgid "Montserrat"
 msgstr "Мансэрат"
 
-#: src/translations.h:451
+#: src/translations.h:464
 msgid "Malta"
 msgstr "Мальта"
 
-#: src/translations.h:452
+#: src/translations.h:465
 msgid "Mauritius"
 msgstr "Маўрыкій"
 
-#: src/translations.h:453
+#: src/translations.h:466
 msgid "Maldives"
 msgstr "Мальдыўскія астравы"
 
-#: src/translations.h:454
+#: src/translations.h:467
 msgid "Malawi"
 msgstr "Малаві"
 
-#: src/translations.h:455
+#: src/translations.h:468
 msgid "Mexico"
 msgstr "Мэксыка"
 
-#: src/translations.h:456
+#: src/translations.h:469
 msgid "Malaysia"
 msgstr "Малайзія"
 
-#: src/translations.h:457
+#: src/translations.h:470
 msgid "Mozambique"
 msgstr "Мазамбік"
 
-#: src/translations.h:458
+#: src/translations.h:471
 msgid "Namibia"
 msgstr "Намібія"
 
-#: src/translations.h:459
+#: src/translations.h:472
 msgid "New Caledonia"
 msgstr "Новая Каледонія"
 
-#: src/translations.h:460
+#: src/translations.h:473
 msgid "Niger"
 msgstr "Ніґер"
 
-#: src/translations.h:461
+#: src/translations.h:474
 msgid "Norfolk Island"
 msgstr "Востраў Норфалк"
 
-#: src/translations.h:462
+#: src/translations.h:475
 msgid "Nigeria"
 msgstr "Ніґерыя"
 
-#: src/translations.h:463
+#: src/translations.h:476
 msgid "Nicaragua"
 msgstr "Нікараґуа"
 
-#: src/translations.h:464
+#: src/translations.h:477
 msgid "Netherlands"
 msgstr "Нідэрлянды"
 
-#: src/translations.h:465
+#: src/translations.h:478
 msgid "Norway"
 msgstr "Нарвэгія"
 
-#: src/translations.h:466
+#: src/translations.h:479
 msgid "Nepal"
 msgstr "Нэпал"
 
-#: src/translations.h:467
+#: src/translations.h:480
 msgid "Nauru"
 msgstr "Науру"
 
-#: src/translations.h:468
+#: src/translations.h:481
 msgid "Niue"
 msgstr "Ніуе"
 
-#: src/translations.h:469
+#: src/translations.h:482
 msgid "New Zealand"
 msgstr "Новая Зэляндыя"
 
-#: src/translations.h:470
+#: src/translations.h:483
 msgid "Oman"
 msgstr "Аман"
 
-#: src/translations.h:471
+#: src/translations.h:484
 msgid "Panama"
 msgstr "Панама"
 
-#: src/translations.h:472
+#: src/translations.h:485
 msgid "Peru"
 msgstr "Пэру"
 
-#: src/translations.h:473
+#: src/translations.h:486
 msgid "French Polynesia"
 msgstr "Француская Палінэзія"
 
-#: src/translations.h:474
+#: src/translations.h:487
 msgid "Papua New Guinea"
 msgstr "Папуа–Новая Ґвінэя"
 
-#: src/translations.h:475
+#: src/translations.h:488
 msgid "Philippines"
 msgstr "Філіпіны"
 
-#: src/translations.h:476
+#: src/translations.h:489
 msgid "Pakistan"
 msgstr "Пакістан"
 
-#: src/translations.h:477
+#: src/translations.h:490
 msgid "Poland"
 msgstr "Польшча"
 
-#: src/translations.h:478
+#: src/translations.h:491
 msgid "Saint Pierre and Miquelon"
 msgstr "Сэн-П'ер і Мікелён"
 
-#: src/translations.h:479
+#: src/translations.h:492
 msgid "Pitcairn"
 msgstr "Астравы Піткейрн"
 
-#: src/translations.h:480
+#: src/translations.h:493
 msgid "Puerto Rico"
 msgstr "Пуэрта-Рыка"
 
-#: src/translations.h:481
+#: src/translations.h:494
 msgid "Palestinian Territories"
 msgstr "Палестынскія тэрыторыі"
 
-#: src/translations.h:482
+#: src/translations.h:495
 msgid "Portugal"
 msgstr "Партуґалія"
 
-#: src/translations.h:483
+#: src/translations.h:496
 msgid "Palau"
 msgstr "Палау"
 
-#: src/translations.h:484
+#: src/translations.h:497
 msgid "Paraguay"
 msgstr "Параґвай"
 
-#: src/translations.h:485
+#: src/translations.h:498
 msgid "Qatar"
 msgstr "Катар"
 
-#: src/translations.h:486
+#: src/translations.h:499
 msgid "Réunion"
 msgstr "Рэюньён"
 
-#: src/translations.h:487
+#: src/translations.h:500
 msgid "Romania"
 msgstr "Румынія"
 
-#: src/translations.h:488
+#: src/translations.h:501
 msgid "Serbia"
 msgstr "Сэрбія"
 
-#: src/translations.h:489
+#: src/translations.h:502
 msgid "Russian Federation"
 msgstr "Расійская Фэдэрацыя"
 
-#: src/translations.h:490
+#: src/translations.h:503
 msgid "Rwanda"
 msgstr "Руанда"
 
-#: src/translations.h:491
+#: src/translations.h:504
 msgid "Saudi Arabia"
 msgstr "Саудаўская Арабія"
 
-#: src/translations.h:492
+#: src/translations.h:505
 msgid "Solomon Islands"
 msgstr "Саламонавы Астравы"
 
-#: src/translations.h:493
+#: src/translations.h:506
 msgid "Seychelles"
 msgstr "Сэйшэльскія астравы"
 
-#: src/translations.h:494
+#: src/translations.h:507
 msgid "Sudan"
 msgstr "Судан"
 
-#: src/translations.h:495
+#: src/translations.h:508
 msgid "Sweden"
 msgstr "Швэцыя"
 
-#: src/translations.h:496
+#: src/translations.h:509
 msgid "Singapore"
 msgstr "Сынґапур"
 
-#: src/translations.h:497
+#: src/translations.h:510
 msgid "Saint Helena"
 msgstr "Востраў Сьвятой Алены"
 
-#: src/translations.h:498
+#: src/translations.h:511
 msgid "Slovenia"
 msgstr "Славенія"
 
-#: src/translations.h:499
+#: src/translations.h:512
 msgid "Svalbard and Jan Mayen"
 msgstr "Астравы Свальбард і Ян Маен"
 
-#: src/translations.h:500
+#: src/translations.h:513
 msgid "Slovakia"
 msgstr "Славакія"
 
-#: src/translations.h:501
+#: src/translations.h:514
 msgid "Sierra Leone"
 msgstr "Сьера-Леонэ"
 
-#: src/translations.h:502
+#: src/translations.h:515
 msgid "San Marino"
 msgstr "Сан-Марына"
 
-#: src/translations.h:503
+#: src/translations.h:516
 msgid "Senegal"
 msgstr "Сэнэґал"
 
-#: src/translations.h:504
+#: src/translations.h:517
 msgid "Somalia"
 msgstr "Самалі"
 
-#: src/translations.h:505
+#: src/translations.h:518
 msgid "Suriname"
 msgstr "Сурынам"
 
-#: src/translations.h:506
+#: src/translations.h:519
 msgid "Sao Tome and Principe"
 msgstr "Сан-Тамэ й Прынсыпі"
 
-#: src/translations.h:507
+#: src/translations.h:520
 msgid "El Salvador"
 msgstr "Сальвадор"
 
-#: src/translations.h:508
+#: src/translations.h:521
 msgid "Syrian Arab Republic"
 msgstr "Сірыйская Арабская Рэспубліка"
 
-#: src/translations.h:509
+#: src/translations.h:522
 msgid "Swaziland"
 msgstr "Свазілэнд"
 
-#: src/translations.h:510
+#: src/translations.h:523
 msgid "Turks and Caicos Islands"
 msgstr "Астравы Тэркс і Кэйкас"
 
-#: src/translations.h:511
+#: src/translations.h:524
 msgid "Chad"
 msgstr "Чад"
 
-#: src/translations.h:512
+#: src/translations.h:525
 msgid "French Southern Territories"
 msgstr "Францускія паўднёвыя тэрыторыі"
 
-#: src/translations.h:513
+#: src/translations.h:526
 msgid "Togo"
 msgstr "Тоґа"
 
-#: src/translations.h:514
+#: src/translations.h:527
 msgid "Thailand"
 msgstr "Тайлянд"
 
-#: src/translations.h:515
+#: src/translations.h:528
 msgid "Tajikistan"
 msgstr "Таджыкістан"
 
-#: src/translations.h:516
+#: src/translations.h:529
 msgid "Tokelau"
 msgstr "Такелау"
 
-#: src/translations.h:517
+#: src/translations.h:530
 msgid "East Timor"
 msgstr "Усходні Тымор"
 
-#: src/translations.h:518
+#: src/translations.h:531
 msgid "Turkmenistan"
 msgstr "Туркмэністан"
 
-#: src/translations.h:519
+#: src/translations.h:532
 msgid "Tunisia"
 msgstr "Туніс"
 
-#: src/translations.h:520
+#: src/translations.h:533
 msgid "Tonga"
 msgstr "Тонґа"
 
-#: src/translations.h:521
+#: src/translations.h:534
 msgid "Turkey"
 msgstr "Турцыя"
 
-#: src/translations.h:522
+#: src/translations.h:535
 msgid "Trinidad and Tobago"
 msgstr "Трынідад і Табаґа"
 
-#: src/translations.h:523
+#: src/translations.h:536
 msgid "Tuvalu"
 msgstr "Тувалу"
 
-#: src/translations.h:524
+#: src/translations.h:537
 msgid "Taiwan"
 msgstr "Тайвань"
 
-#: src/translations.h:525
+#: src/translations.h:538
 msgid "Tanzania"
 msgstr "Танзанія"
 
-#: src/translations.h:526
+#: src/translations.h:539
 msgid "Ukraine"
 msgstr "Украіна"
 
-#: src/translations.h:527
+#: src/translations.h:540
 msgid "Uganda"
 msgstr "Уґанда"
 
-#: src/translations.h:528
+#: src/translations.h:541
 msgid "United States Minor Outlying Islands"
 msgstr "Зьнешнія Малыя Астравы (ЗША)"
 
-#: src/translations.h:529
+#: src/translations.h:542
 msgid "United States"
 msgstr "Злучаныя Штаты Амэрыкі"
 
-#: src/translations.h:530
+#: src/translations.h:543
 msgid "Uruguay"
 msgstr "Уруґвай"
 
-#: src/translations.h:531
+#: src/translations.h:544
 msgid "Uzbekistan"
 msgstr "Узбэкістан"
 
-#: src/translations.h:532
+#: src/translations.h:545
 msgid "Vatican City State"
 msgstr "Ватыкан"
 
-#: src/translations.h:533
+#: src/translations.h:546
 msgid "Saint Vincent and the Grenadines"
 msgstr "Сэн-Вінсэнт і Ґрэнадзіны"
 
-#: src/translations.h:534
+#: src/translations.h:547
 msgid "Venezuela"
 msgstr "Вэнэсуэла"
 
-#: src/translations.h:535
+#: src/translations.h:548
 msgid "British Virgin Islands"
 msgstr "Брытанскія Вірґінскія астравы"
 
-#: src/translations.h:536
+#: src/translations.h:549
 msgid "United States Virgin Islands"
 msgstr "Вірґінскія астравы ЗША"
 
-#: src/translations.h:537
+#: src/translations.h:550
 msgid "Viet Nam"
 msgstr "Віетнам"
 
-#: src/translations.h:538
+#: src/translations.h:551
 msgid "Vanuatu"
 msgstr "Вануату"
 
-#: src/translations.h:539
+#: src/translations.h:552
 msgid "Wallis and Futuna"
 msgstr "Астравы Уоліс і Футуна"
 
-#: src/translations.h:540
+#: src/translations.h:553
 msgid "Samoa"
 msgstr "Самоа"
 
-#: src/translations.h:541
+#: src/translations.h:554
 msgid "Yemen"
 msgstr "Емэн"
 
-#: src/translations.h:542
+#: src/translations.h:555
 msgid "Mayotte"
 msgstr "Маёт"
 
-#: src/translations.h:543
+#: src/translations.h:556
 msgid "Yugoslavia"
 msgstr "Югаславія"
 
-#: src/translations.h:544
+#: src/translations.h:557
 msgid "South Africa"
 msgstr "Паўднёвая Афрыка"
 
-#: src/translations.h:545
+#: src/translations.h:558
 msgid "Zambia"
 msgstr "Замбія"
 
-#: src/translations.h:546
+#: src/translations.h:559
 msgid "Zimbabwe"
 msgstr "Зымбабвэ"
 
-#: src/translations.h:550
+#: src/translations.h:563
 msgid "&Undo"
 msgstr "&Адрабіць"
 
-#: src/translations.h:551
+#: src/translations.h:564
 msgid "&Redo"
 msgstr "&Паўтарыць"
 
-#: src/translations.h:552
+#: src/translations.h:565
 msgid "Cu&t"
 msgstr "Вы&разаць"
 
-#: src/translations.h:553
+#: src/translations.h:566
 msgid "&Copy"
 msgstr "&Капіяваць"
 
-#: src/translations.h:554
+#: src/translations.h:567
 msgid "&Paste"
 msgstr "&Уставіць"
 
-#: src/translations.h:555 src/ui_locationDialogGui.h:407
+#: src/translations.h:568 src/ui_locationDialogGui.h:407
 #: plugins/Oculars/src/ui_ocularDialog.h:1074
 #: plugins/Oculars/src/ui_ocularDialog.h:1083
 #: plugins/Oculars/src/ui_ocularDialog.h:1090
@@ -3773,56 +3822,56 @@ msgstr "&Уставіць"
 msgid "Delete"
 msgstr "Выдаліць"
 
-#: src/translations.h:556
+#: src/translations.h:569
 msgid "Select All"
 msgstr "Вылучыць усё"
 
-#: src/translations.h:557
+#: src/translations.h:570
 msgid "Look in:"
 msgstr "Глядзець у:"
 
-#: src/translations.h:558
+#: src/translations.h:571
 msgid "Directory:"
 msgstr "Каталёґ:"
 
-#: src/translations.h:559
+#: src/translations.h:572
 msgid "Folder"
 msgstr "Тэчка"
 
-#: src/translations.h:560
+#: src/translations.h:573
 msgid "&Choose"
 msgstr "&Выбраць"
 
-#: src/translations.h:561 src/ui_configurationDialog.h:1165
+#: src/translations.h:574 src/ui_configurationDialog.h:1167
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:516
 msgid "Cancel"
 msgstr "Скасаваць"
 
-#: src/translations.h:562
+#: src/translations.h:575
 msgid "Files of type:"
 msgstr "Файлы тыпу:"
 
-#: src/translations.h:563
+#: src/translations.h:576
 msgid "Date Modified"
 msgstr "Дата зьмяненьня:"
 
-#: src/translations.h:564
+#: src/translations.h:577
 msgid "Directories"
 msgstr "Каталёґі"
 
-#: src/translations.h:565
+#: src/translations.h:578
 msgid "Computer"
 msgstr "Кампутар"
 
-#: src/translations.h:566
+#: src/translations.h:579
 msgid "&Open"
 msgstr "&Адкрыць"
 
-#: src/translations.h:567
+#: src/translations.h:580
 msgid "File &name:"
 msgstr "&Назва файла:"
 
-#: src/translations.h:568
+#: src/translations.h:581
 msgid "Copy &Link Location"
 msgstr "Капіяваць месца &лучыва"
 
@@ -3839,7 +3888,7 @@ msgstr "Пра праґраму"
 msgid "Log"
 msgstr "Часопіс"
 
-#: src/ui_helpDialogGui.h:290 src/ui_configurationDialog.h:1086
+#: src/ui_helpDialogGui.h:290 src/ui_configurationDialog.h:1088
 msgid "Edit keyboard shortcuts..."
 msgstr "Правіць скароты клявіятуры…"
 
@@ -4085,7 +4134,7 @@ msgstr "Выкарыстоўваць аўтазапаўненьне толькі
 
 #: src/ui_searchDialogGui.h:657 src/ui_viewDialog.h:1251
 #: src/ui_viewDialog.h:1257 src/ui_viewDialog.h:1259
-#: src/ui_configurationDialog.h:1166 src/ui_configurationDialog.h:1177
+#: src/ui_configurationDialog.h:1168 src/ui_configurationDialog.h:1179
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:417
 msgid "Options"
 msgstr "Настройкі"
@@ -4358,19 +4407,19 @@ msgstr "Ужываць гэтую культуру як прадвызначан
 msgid "Visible"
 msgstr "Бачны"
 
-#: src/ui_configurationDialog.h:1000
+#: src/ui_configurationDialog.h:1002
 msgid "Configuration"
 msgstr "Настаўленьні"
 
-#: src/ui_configurationDialog.h:1002
+#: src/ui_configurationDialog.h:1004
 msgid "Program language"
 msgstr "Мова праґрамы"
 
-#: src/ui_configurationDialog.h:1003
+#: src/ui_configurationDialog.h:1005
 msgid "Check updates"
 msgstr "Праверыць абнаўленьні"
 
-#: src/ui_configurationDialog.h:1004
+#: src/ui_configurationDialog.h:1006
 msgid ""
 "Enable checking updates of Stellarium via Internet. Info for updates of "
 "stable versions you can look on the tab \"About\" of \"Help\" window."
@@ -4379,11 +4428,11 @@ msgstr ""
 "абнаўленьні стабільных вэрсій можна паглядзець на закладцы «Пра» вакна "
 "«Даведка»."
 
-#: src/ui_configurationDialog.h:1005
+#: src/ui_configurationDialog.h:1007
 msgid "Default options"
 msgstr "Прадвызначаныя настаўленьні"
 
-#: src/ui_configurationDialog.h:1007
+#: src/ui_configurationDialog.h:1009
 msgid ""
 "Save the settings you've changed this session to be the same the next time "
 "you start Stellarium"
@@ -4391,7 +4440,7 @@ msgstr ""
 "Захаваць настаўленьні, зьмененыя ў гэтай сэсіі, каб яны выкарыстоўваліся пры "
 "наступных запусках Stellarium"
 
-#: src/ui_configurationDialog.h:1009
+#: src/ui_configurationDialog.h:1011
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:390
 #: plugins/FOV/src/ui_fovWindow.h:387
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:276
@@ -4399,17 +4448,17 @@ msgstr ""
 msgid "Save settings"
 msgstr "Захаваць настаўленьні"
 
-#: src/ui_configurationDialog.h:1011
+#: src/ui_configurationDialog.h:1013
 msgid "Restore the default settings that came with Stellarium"
 msgstr "Аднавіць прадвызначаныя настаўленьні Stellarium"
 
-#: src/ui_configurationDialog.h:1013 plugins/FOV/src/ui_fovWindow.h:386
+#: src/ui_configurationDialog.h:1015 plugins/FOV/src/ui_fovWindow.h:386
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:277
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:289
 msgid "Restore defaults"
 msgstr "Аднавіць прадвызначаныя"
 
-#: src/ui_configurationDialog.h:1014
+#: src/ui_configurationDialog.h:1016
 msgid ""
 "Restoring default settings requires a restart of Stellarium. Saving all the "
 "current options includes the current FOV and direction of view for use at "
@@ -4419,212 +4468,212 @@ msgstr ""
 "Захоўваньне ўсіх бягучых выбораў уключае бягучае поле зроку й напрамак "
 "агляду для выкарыстаньня пры наступных запусках."
 
-#: src/ui_configurationDialog.h:1016
+#: src/ui_configurationDialog.h:1018
 msgid "The width of your view when Stellarium starts"
 msgstr "Шырыня прагляду пры запуску Stellarium"
 
-#: src/ui_configurationDialog.h:1019
+#: src/ui_configurationDialog.h:1021
 msgid "The direction you're looking when Stellarium starts"
 msgstr "Напрамак прагляду пры запуску Stellarium"
 
-#: src/ui_configurationDialog.h:1021 src/ui_configurationDialog.h:1188
+#: src/ui_configurationDialog.h:1023 src/ui_configurationDialog.h:1190
 msgid "Selected object information"
 msgstr "Зьвесткі аб вылучаным аб'екце"
 
-#: src/ui_configurationDialog.h:1023
+#: src/ui_configurationDialog.h:1025
 msgid "Display all information available"
 msgstr "Адлюстроўваць усе наяўныя зьвесткі"
 
-#: src/ui_configurationDialog.h:1025
+#: src/ui_configurationDialog.h:1027
 msgid "All available"
 msgstr "Усе наяўныя"
 
-#: src/ui_configurationDialog.h:1027
+#: src/ui_configurationDialog.h:1029
 msgid "Display no information"
 msgstr "Не адлюстроўваць ніякіх зьвестак"
 
-#: src/ui_configurationDialog.h:1029 plugins/Oculars/src/Oculars.cpp:1937
+#: src/ui_configurationDialog.h:1031 plugins/Oculars/src/Oculars.cpp:1937
 #: plugins/Observability/src/Observability.cpp:201
 msgid "None"
 msgstr "Нічога"
 
-#: src/ui_configurationDialog.h:1031
+#: src/ui_configurationDialog.h:1033
 msgid "Display less information"
 msgstr "Адлюстроўваць сьціслыя зьвесткі"
 
-#: src/ui_configurationDialog.h:1033
+#: src/ui_configurationDialog.h:1035
 msgid "Short"
 msgstr "Сьціслыя"
 
-#: src/ui_configurationDialog.h:1035
+#: src/ui_configurationDialog.h:1037
 msgid "Display user settings information"
 msgstr "Паказаць зьвесткі пра карыстальнікавы настройкі"
 
-#: src/ui_configurationDialog.h:1037
+#: src/ui_configurationDialog.h:1039
 msgid "Customized"
 msgstr "Карыстальнікавы"
 
-#: src/ui_configurationDialog.h:1038
+#: src/ui_configurationDialog.h:1040
 msgid "Displayed fields"
 msgstr "Паказаныя палі"
 
-#: src/ui_configurationDialog.h:1039
+#: src/ui_configurationDialog.h:1041
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:277
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:166
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:165
 msgid "Name"
 msgstr "Назва"
 
-#: src/ui_configurationDialog.h:1041
+#: src/ui_configurationDialog.h:1043
 msgid "Geocentric equatorial coordinates, equinox of date"
 msgstr "Ґеацэнтрычныя экватарыяльныя каардынаты, раўнадзенства даты"
 
-#: src/ui_configurationDialog.h:1043
+#: src/ui_configurationDialog.h:1045
 msgid "Right ascension/Declination (of date)"
 msgstr "Прамое ўзыходжаньне/Схіленьне (даты)"
 
-#: src/ui_configurationDialog.h:1044
+#: src/ui_configurationDialog.h:1046
 msgid "Catalog number(s)"
 msgstr "Нумар(ы) у каталёґу"
 
-#: src/ui_configurationDialog.h:1046
+#: src/ui_configurationDialog.h:1048
 msgid "Geocentric equatorial coordinates, equinox of J2000.0"
 msgstr "Ґеацэнтрычныя экватарыяльныя каардынаты, раўнадзенства J2000.0"
 
-#: src/ui_configurationDialog.h:1048
+#: src/ui_configurationDialog.h:1050
 msgid "Right ascension/Declination (J2000)"
 msgstr "Прамое ўзыходжаньне/Схіленьне (J2000)"
 
-#: src/ui_configurationDialog.h:1049
+#: src/ui_configurationDialog.h:1051
 msgid "Absolute magnitude"
 msgstr "Абсалютная велічыня"
 
-#: src/ui_configurationDialog.h:1050
+#: src/ui_configurationDialog.h:1052
 msgid "Galactic coordinates"
 msgstr "Ґаляктычныя каардынаты"
 
-#: src/ui_configurationDialog.h:1051
+#: src/ui_configurationDialog.h:1053
 msgid "Visual magnitude"
 msgstr "Бачная велічыня"
 
-#: src/ui_configurationDialog.h:1053
+#: src/ui_configurationDialog.h:1055
 msgid "Angular or physical size"
 msgstr "Вуглавы ці фізычны памер"
 
-#: src/ui_configurationDialog.h:1055
+#: src/ui_configurationDialog.h:1057
 msgid "Size"
 msgstr "Памер"
 
-#: src/ui_configurationDialog.h:1057
+#: src/ui_configurationDialog.h:1059
 msgid "The type of the object (star, planet, etc.)"
 msgstr "Тып аб'екту (зорка, плянэта,…)"
 
-#: src/ui_configurationDialog.h:1059
+#: src/ui_configurationDialog.h:1061
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:276
 msgid "Type"
 msgstr "Тып"
 
-#: src/ui_configurationDialog.h:1061
+#: src/ui_configurationDialog.h:1063
 msgid "Spectral class, nebula type, etc."
 msgstr "Спэктральная кляса, тып туманнасьці, і г.д."
 
-#: src/ui_configurationDialog.h:1063
+#: src/ui_configurationDialog.h:1065
 msgid "Additional information"
 msgstr "Дадатковыя зьвесткі"
 
-#: src/ui_configurationDialog.h:1065
+#: src/ui_configurationDialog.h:1067
 msgid "Topocentric equatorial coordinates"
 msgstr "Топацэнтрычныя экватарыяльныя каардынаты"
 
-#: src/ui_configurationDialog.h:1067
+#: src/ui_configurationDialog.h:1069
 msgid "Hour angle/Declination"
 msgstr "Гадзінавы вугал/Схіленьне"
 
-#: src/ui_configurationDialog.h:1069
+#: src/ui_configurationDialog.h:1071
 msgid "Horizontal coordinates"
 msgstr "Гарызантальныя каардынаты"
 
-#: src/ui_configurationDialog.h:1071
+#: src/ui_configurationDialog.h:1073
 msgid "Altitude/Azimuth"
 msgstr "Вышыня/Азімут"
 
-#: src/ui_configurationDialog.h:1072
+#: src/ui_configurationDialog.h:1074
 msgid "Distance"
 msgstr "Адлегласьць"
 
-#: src/ui_configurationDialog.h:1074
+#: src/ui_configurationDialog.h:1076
 msgid ""
 "Ecliptic topocentric coordinates, equinox of date and J2000 (only for Earth)"
 msgstr ""
 "Экліптычныя топацэнтрычныя каардынаты, раўнадзенства даты й J2000 (толькі "
 "для Зямлі)"
 
-#: src/ui_configurationDialog.h:1076
+#: src/ui_configurationDialog.h:1078
 msgid "Ecliptic coordinates"
 msgstr "Экліптычныя каардынаты"
 
-#: src/ui_configurationDialog.h:1077
+#: src/ui_configurationDialog.h:1079
 msgid "Control"
 msgstr "Кіраваньне"
 
-#: src/ui_configurationDialog.h:1079
+#: src/ui_configurationDialog.h:1081
 msgid "Allow keyboard to pan and zoom"
 msgstr "Дазволіць перасоўваньне й набліжэньне з дапамогай клявіятуры"
 
-#: src/ui_configurationDialog.h:1081
+#: src/ui_configurationDialog.h:1083
 msgid "Enable keyboard navigation"
 msgstr "Задзейнічаць навіґацыю клявіятурай"
 
-#: src/ui_configurationDialog.h:1083
+#: src/ui_configurationDialog.h:1085
 msgid "Allow mouse to pan (drag) and zoom (mousewheel)"
 msgstr ""
 "Дазволіць перасоўваньне (перацягваньне) й набліжэньне (паварот кола) мышай"
 
-#: src/ui_configurationDialog.h:1085
+#: src/ui_configurationDialog.h:1087
 msgid "Enable mouse navigation"
 msgstr "Задзейнічаць навіґацыю мышай"
 
-#: src/ui_configurationDialog.h:1088
+#: src/ui_configurationDialog.h:1090
 msgid "Hides the mouse cursor when inactive"
 msgstr "Хаваць курсор мышы, калі ён неактыўны"
 
-#: src/ui_configurationDialog.h:1090
+#: src/ui_configurationDialog.h:1092
 msgid "Mouse cursor timeout:"
 msgstr "Затрымка курсора мышы:"
 
-#: src/ui_configurationDialog.h:1092
+#: src/ui_configurationDialog.h:1094
 msgid "seconds"
 msgstr "секунды"
 
-#: src/ui_configurationDialog.h:1094
+#: src/ui_configurationDialog.h:1096
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:191
 msgid "Startup date and time"
 msgstr "Пачатковыя дата й час"
 
-#: src/ui_configurationDialog.h:1096
+#: src/ui_configurationDialog.h:1098
 msgid "Use a specific date and time when Stellarium starts up"
 msgstr "Ужываць пэўныя дату й час на пачатку працы Stellarium"
 
-#: src/ui_configurationDialog.h:1098
+#: src/ui_configurationDialog.h:1100
 msgid "Other:"
 msgstr "Іншыя:"
 
-#: src/ui_configurationDialog.h:1100
+#: src/ui_configurationDialog.h:1102
 msgid "Use current local date and time"
 msgstr "Выкарыстоўваць мясцовыя дату й час"
 
-#: src/ui_configurationDialog.h:1102
+#: src/ui_configurationDialog.h:1104
 msgid "use current"
 msgstr "ужыць бягучыя"
 
-#: src/ui_configurationDialog.h:1104
+#: src/ui_configurationDialog.h:1106
 msgid "Starts Stellarium at system clock date and time"
 msgstr "Ужываць сыстэмныя дату й час на пачатку працы Stellarium"
 
-#: src/ui_configurationDialog.h:1106
+#: src/ui_configurationDialog.h:1108
 msgid "System date and time"
 msgstr "Сыстэмныя дата й час"
 
-#: src/ui_configurationDialog.h:1108
+#: src/ui_configurationDialog.h:1110
 msgid ""
 "Sets the simulation time to the next instance of this time of day when "
 "Stellarium starts"
@@ -4632,23 +4681,23 @@ msgstr ""
 "Удаваць карціну пры часе дня, калі запушчаны Stellarium, але ў зададзены "
 "дзень"
 
-#: src/ui_configurationDialog.h:1110
+#: src/ui_configurationDialog.h:1112
 msgid "System date at:"
 msgstr "Сыстэмная дата:"
 
-#: src/ui_configurationDialog.h:1111
+#: src/ui_configurationDialog.h:1113
 msgid "Time correction"
 msgstr "Выпраўляньне часу"
 
-#: src/ui_configurationDialog.h:1114
+#: src/ui_configurationDialog.h:1116
 msgid "Edit equation"
 msgstr "Правіць раўнаньне"
 
-#: src/ui_configurationDialog.h:1116
+#: src/ui_configurationDialog.h:1118
 msgid "Planetarium options"
 msgstr "Настройкі плянэтарыя"
 
-#: src/ui_configurationDialog.h:1118
+#: src/ui_configurationDialog.h:1120
 msgid ""
 "Spheric mirror distortion is used when projecting Stellarium onto a spheric "
 "mirror for low-cost planetarium systems."
@@ -4656,51 +4705,51 @@ msgstr ""
 "Скажэньне сфэрычнага люстра ужываецца, калі Stellarium праектуе на сфэрычнае "
 "люстра танных плянэтарыяў."
 
-#: src/ui_configurationDialog.h:1120
+#: src/ui_configurationDialog.h:1122
 msgid "Spheric mirror distortion"
 msgstr "Скажэньне сфэрычнага люстра"
 
-#: src/ui_configurationDialog.h:1122
+#: src/ui_configurationDialog.h:1124
 msgid "Mask out everything outside a central circle in the main view"
 msgstr "Хаваць усё па-за цэнтральным колам галоўнага агляду"
 
-#: src/ui_configurationDialog.h:1124
+#: src/ui_configurationDialog.h:1126
 msgid "Disc viewport"
 msgstr "Круглае глядзельнае вакно"
 
-#: src/ui_configurationDialog.h:1126
+#: src/ui_configurationDialog.h:1128
 msgid "Hide other constellations when you click one"
 msgstr "Хаваць іншыя сузор'і, калі пстрыкаеш па нейкім"
 
-#: src/ui_configurationDialog.h:1128
+#: src/ui_configurationDialog.h:1130
 msgid "Select single constellation"
 msgstr "Выбіраць асобнае сузор'е"
 
-#: src/ui_configurationDialog.h:1130
+#: src/ui_configurationDialog.h:1132
 msgid "Align labels with the horizon"
 msgstr "Раўнаваць назвы па лініі далягляду"
 
-#: src/ui_configurationDialog.h:1132
+#: src/ui_configurationDialog.h:1134
 msgid "Gravity labels"
 msgstr "Прыцягваць назвы"
 
-#: src/ui_configurationDialog.h:1134
+#: src/ui_configurationDialog.h:1136
 msgid "Toggle display backgrounds of the nebulae."
 msgstr "Паказваць ці не фон туманнасьцяў."
 
-#: src/ui_configurationDialog.h:1136
+#: src/ui_configurationDialog.h:1138
 msgid "Show nebula background button"
 msgstr "Паказваць ґузік фону туманнасьцяў"
 
-#: src/ui_configurationDialog.h:1138
+#: src/ui_configurationDialog.h:1140
 msgid "Toggle vertical and horizontal image flip buttons."
 msgstr "Пераключыць ґузікі перакульваньня відарыса."
 
-#: src/ui_configurationDialog.h:1140
+#: src/ui_configurationDialog.h:1142
 msgid "Show flip buttons"
 msgstr "Паказваць ґузік перакульваньня"
 
-#: src/ui_configurationDialog.h:1142
+#: src/ui_configurationDialog.h:1144
 msgid ""
 "When enabled, the \"auto zoom out\" key will also set the initial viewing "
 "direction"
@@ -4708,97 +4757,97 @@ msgstr ""
 "Калі задзейнічана, клявіша аўтааддаленьня таксама верне пачатковы напрамак "
 "агляду"
 
-#: src/ui_configurationDialog.h:1144
+#: src/ui_configurationDialog.h:1146
 msgid "Auto zoom out returns to initial direction of view"
 msgstr "«Аўтааддаленьне» вяртае пачатковы напрамак агляду"
 
-#: src/ui_configurationDialog.h:1146
+#: src/ui_configurationDialog.h:1148
 msgid ""
 "Auto-enabling of the atmosphere for bodies with atmosphere in location window"
 msgstr "Аўтазадзейнічаньне атмасфэры ў вакне месцаў для целаў з атмасфэраў"
 
-#: src/ui_configurationDialog.h:1148
+#: src/ui_configurationDialog.h:1150
 msgid "Auto-enabling for the atmosphere"
 msgstr "Аўтазадзейнічаньне атмасфэры"
 
-#: src/ui_configurationDialog.h:1149
+#: src/ui_configurationDialog.h:1151
 msgid "Screenshots"
 msgstr "Здымкі экрана"
 
-#: src/ui_configurationDialog.h:1150
+#: src/ui_configurationDialog.h:1152
 msgid "Screenshot Directory"
 msgstr "Каталёґ для здымкаў экрана"
 
-#: src/ui_configurationDialog.h:1152
+#: src/ui_configurationDialog.h:1154
 msgid "Invert colors"
 msgstr "Інвэртаваць колеры"
 
-#: src/ui_configurationDialog.h:1153
+#: src/ui_configurationDialog.h:1155
 msgid "Star catalog updates"
 msgstr "Абнаўленьні каталёґу зорак"
 
-#: src/ui_configurationDialog.h:1155
+#: src/ui_configurationDialog.h:1157
 msgid "Click here to start downloading"
 msgstr "Пстрыкні сюды, каб пачаць загрузку"
 
-#: src/ui_configurationDialog.h:1157
+#: src/ui_configurationDialog.h:1159
 msgid "Download this file to view even more stars"
 msgstr "Загрузі гэты файл, каб убачыць яшчэ болей зорак"
 
-#: src/ui_configurationDialog.h:1159
+#: src/ui_configurationDialog.h:1161
 msgid "Restart the download"
 msgstr "Пачаць загрузку наноў"
 
-#: src/ui_configurationDialog.h:1161
+#: src/ui_configurationDialog.h:1163
 msgid "Retry"
 msgstr "Ізноў"
 
-#: src/ui_configurationDialog.h:1163
+#: src/ui_configurationDialog.h:1165
 msgid "Stop the download. You can always restart it later"
 msgstr "Спыніць загрузку. Яе заўжды можна пачаць наноў пасьля."
 
-#: src/ui_configurationDialog.h:1168
+#: src/ui_configurationDialog.h:1170
 msgid "Close window when script runs"
 msgstr "Закрыць выкно, калі выконваецца сцэнар"
 
-#: src/ui_configurationDialog.h:1170
+#: src/ui_configurationDialog.h:1172
 msgid "Run the selected script"
 msgstr "Выканаць вылучаны сцэнар"
 
-#: src/ui_configurationDialog.h:1174
+#: src/ui_configurationDialog.h:1176
 msgid "Stop a running script"
 msgstr "Спыніць сцэнар, які выконваецца"
 
-#: src/ui_configurationDialog.h:1178
+#: src/ui_configurationDialog.h:1180
 msgid "Load at startup"
 msgstr "Загружаць на пачатку працы"
 
-#: src/ui_configurationDialog.h:1179
+#: src/ui_configurationDialog.h:1181
 msgid "configure"
 msgstr "наставіць"
 
-#: src/ui_configurationDialog.h:1184
+#: src/ui_configurationDialog.h:1186
 msgid "Main"
 msgstr "Галоўныя"
 
-#: src/ui_configurationDialog.h:1186
+#: src/ui_configurationDialog.h:1188
 msgid "Information"
 msgstr "Зьвесткі"
 
-#: src/ui_configurationDialog.h:1191
+#: src/ui_configurationDialog.h:1193
 msgid "Navigation"
 msgstr "Навіґацыя"
 
-#: src/ui_configurationDialog.h:1193
+#: src/ui_configurationDialog.h:1195
 msgid "Tools"
 msgstr "Інструмэнты"
 
-#: src/ui_configurationDialog.h:1195
+#: src/ui_configurationDialog.h:1197
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:452
 msgid "Scripts"
 msgstr "Сцэнары"
 
-#: src/ui_configurationDialog.h:1197
+#: src/ui_configurationDialog.h:1199
 msgid "Plugins"
 msgstr "Дадаткі"
 
@@ -5017,7 +5066,7 @@ msgstr ""
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:128
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:144
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:137
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:281
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:280
 msgid "Links"
 msgstr "Спасылкі"
 
@@ -5028,7 +5077,7 @@ msgstr "Спасылкі"
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:129
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:145
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:138
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:282
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:281
 #, qt-format
 msgid ""
 "Support is provided via the Launchpad website.  Be sure to put \"%1\" in the "
@@ -5045,7 +5094,7 @@ msgstr ""
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:132
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:148
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:141
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:285
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:284
 #, qt-format
 msgid "If you have a question, you can %1get an answer here%2"
 msgstr "Калі маеш пытаньні, можна %1атрымаць адказ тут%2"
@@ -5058,7 +5107,7 @@ msgstr "Калі маеш пытаньні, можна %1атрымаць адк
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:134
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:150
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:143
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:287
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:286
 #, qt-format
 msgid "Bug reports can be made %1here%2."
 msgstr "Паведамленьні пра хібы можна рабіць %1тут%2."
@@ -5071,7 +5120,7 @@ msgstr "Паведамленьні пра хібы можна рабіць %1т�
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:136
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:152
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:145
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:289
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:288
 msgid ""
 "If you would like to make a feature request, you can create a bug report, "
 "and set the severity to \"wishlist\"."
@@ -6064,7 +6113,7 @@ msgstr "Глядзі %1гэты дакумэнт%2 дзеля падрабязн
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:158
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:174
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:219
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:303
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:302
 msgid "Internet updates disabled"
 msgstr "Абнаўленьне празь Сеціва абязьдзейнена"
 
@@ -6080,8 +6129,8 @@ msgstr "Абнаўленьне празь Сеціва абязьдзейнен�
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:234
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:221
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:283
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:305
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:333
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:304
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:332
 msgid "Updating now..."
 msgstr "Адбываецца абнаўленьне…"
 
@@ -6091,7 +6140,7 @@ msgstr "Адбываецца абнаўленьне…"
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:162
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:178
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:223
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:307
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:306
 msgid "Next update: < 1 minute"
 msgstr "Наступнае абнаўленьне: < 1 хвіліну"
 
@@ -6101,7 +6150,7 @@ msgstr "Наступнае абнаўленьне: < 1 хвіліну"
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:164
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:180
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:225
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:309
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:308
 #, qt-format
 msgid "Next update: %1 minutes"
 msgstr "Наступнае абнаўленьне: %1 хвілін"
@@ -6112,7 +6161,7 @@ msgstr "Наступнае абнаўленьне: %1 хвілін"
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:166
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:182
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:227
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:311
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:310
 #, qt-format
 msgid "Next update: %1 hours"
 msgstr "Наступнае абнаўленьне: %1 гадзін"
@@ -6123,7 +6172,7 @@ msgstr "Наступнае абнаўленьне: %1 гадзін"
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:215
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:237
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:286
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:336
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:335
 msgid "Update error"
 msgstr "Памылка абнаўленьня"
 
@@ -6153,7 +6202,7 @@ msgstr "[новая крыніца]"
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:271
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:272
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:311
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:324
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:323
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:519
 msgid "Update now"
 msgstr "Абнавіць зараз"
@@ -6858,73 +6907,73 @@ msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:242
 #: plugins/Supernovae/src/Supernovae.cpp:719 plugins/Novae/src/Novae.cpp:716
-#: plugins/MeteorShowers/src/MeteorShower.cpp:174
+#: plugins/MeteorShowers/src/MeteorShower.cpp:188
 msgid "January"
 msgstr "Студзень"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:243
 #: plugins/Supernovae/src/Supernovae.cpp:719 plugins/Novae/src/Novae.cpp:716
-#: plugins/MeteorShowers/src/MeteorShower.cpp:175
+#: plugins/MeteorShowers/src/MeteorShower.cpp:189
 msgid "February"
 msgstr "Люты"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:244
 #: plugins/Supernovae/src/Supernovae.cpp:719 plugins/Novae/src/Novae.cpp:716
-#: plugins/MeteorShowers/src/MeteorShower.cpp:176
+#: plugins/MeteorShowers/src/MeteorShower.cpp:190
 msgid "March"
 msgstr "Сакавік"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:245
 #: plugins/Supernovae/src/Supernovae.cpp:719 plugins/Novae/src/Novae.cpp:716
-#: plugins/MeteorShowers/src/MeteorShower.cpp:177
+#: plugins/MeteorShowers/src/MeteorShower.cpp:191
 msgid "April"
 msgstr "Красавік"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:246
 #: plugins/Supernovae/src/Supernovae.cpp:719 plugins/Novae/src/Novae.cpp:716
-#: plugins/MeteorShowers/src/MeteorShower.cpp:178
+#: plugins/MeteorShowers/src/MeteorShower.cpp:192
 msgid "May"
 msgstr "Травень"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:247
 #: plugins/Supernovae/src/Supernovae.cpp:719 plugins/Novae/src/Novae.cpp:716
-#: plugins/MeteorShowers/src/MeteorShower.cpp:179
+#: plugins/MeteorShowers/src/MeteorShower.cpp:193
 msgid "June"
 msgstr "Чэрвень"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:248
 #: plugins/Supernovae/src/Supernovae.cpp:719 plugins/Novae/src/Novae.cpp:716
-#: plugins/MeteorShowers/src/MeteorShower.cpp:180
+#: plugins/MeteorShowers/src/MeteorShower.cpp:194
 msgid "July"
 msgstr "Ліпень"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:249
 #: plugins/Supernovae/src/Supernovae.cpp:719 plugins/Novae/src/Novae.cpp:716
-#: plugins/MeteorShowers/src/MeteorShower.cpp:181
+#: plugins/MeteorShowers/src/MeteorShower.cpp:195
 msgid "August"
 msgstr "Жнівень"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:250
 #: plugins/Supernovae/src/Supernovae.cpp:719 plugins/Novae/src/Novae.cpp:716
-#: plugins/MeteorShowers/src/MeteorShower.cpp:182
+#: plugins/MeteorShowers/src/MeteorShower.cpp:196
 msgid "September"
 msgstr "Верасень"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:251
 #: plugins/Supernovae/src/Supernovae.cpp:719 plugins/Novae/src/Novae.cpp:716
-#: plugins/MeteorShowers/src/MeteorShower.cpp:183
+#: plugins/MeteorShowers/src/MeteorShower.cpp:197
 msgid "October"
 msgstr "Кастрычнік"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:252
 #: plugins/Supernovae/src/Supernovae.cpp:719 plugins/Novae/src/Novae.cpp:716
-#: plugins/MeteorShowers/src/MeteorShower.cpp:184
+#: plugins/MeteorShowers/src/MeteorShower.cpp:198
 msgid "November"
 msgstr "Лістапад"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:253
 #: plugins/Supernovae/src/Supernovae.cpp:719 plugins/Novae/src/Novae.cpp:716
-#: plugins/MeteorShowers/src/MeteorShower.cpp:185
+#: plugins/MeteorShowers/src/MeteorShower.cpp:199
 msgid "December"
 msgstr "Сьнежань"
 
@@ -7673,7 +7722,7 @@ msgid "Bright Novae configuration window"
 msgstr "Вакно настаўленьняў яркіх новых"
 
 #: plugins/Novae/src/Nova.cpp:135 plugins/Pulsars/src/Pulsar.cpp:168
-#: plugins/MeteorShowers/src/MeteorShower.cpp:330
+#: plugins/MeteorShowers/src/MeteorShower.cpp:344
 #, qt-format
 msgid "Type: <b>%1</b> (%2)"
 msgstr "Тып: <b>%1</b> (%2)"
@@ -8225,7 +8274,7 @@ msgstr ""
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:147
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:291
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:290
 #, qt-format
 msgid ""
 "If you want to read full information about the plugin, its history and "
@@ -9024,13 +9073,13 @@ msgstr "Зьмяніць знак раўнаньня"
 msgid "Font size:"
 msgstr "Кегль:"
 
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:71
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:171
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:63
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:163
 msgid "Meteor Showers"
 msgstr "Мэтэорныя ліўні"
 
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:74
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:259
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:66
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:258
 msgid ""
 "This plugin displays meteor showers and a marker for each active and "
 "inactive radiant, showing real information about its activity."
@@ -9038,531 +9087,531 @@ msgstr ""
 "Гэты дадатак паказвае мэтэорныя ліўні і пазнакі актыўных і неактыўных "
 "радыянтаў, адлюстроўваючы сапраўдныя зьвесткі пра іх актыўнасьць."
 
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:172
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:164
 msgid "Show meteor showers"
 msgstr "Паказваць мэтэорныя ліўні"
 
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:173
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:165
 msgid "Radiant labels"
 msgstr "Подпісы радыянтаў"
 
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:174
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:166
 msgid "Meteor Shower configuration window"
 msgstr "Вакно настаўленьняў мэтэорных ліўняў"
 
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:201
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:193
 msgid ""
 "The old showers.json file is no longer compatible - using default file"
 msgstr ""
 "Стары файл showers.json болей не падтрымліваецца, выкарыстаны прадвызначаны"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1239
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1240
 msgid "Quadrantids"
 msgstr "Квадрантыды"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1241
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1242
 msgid "Lyrids"
 msgstr "Лірыды"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1243
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1244
 msgid "α-Centaurids"
 msgstr "α-Цэнтаўрыды"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1245
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1246
 msgid "γ-Normids"
 msgstr "γ-Нарміды"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1247
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1248
 msgid "η-Aquariids"
 msgstr "η-Акварыды"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1249
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1250
 msgid "June Bootids"
 msgstr "Чэрвеньскія баатыды"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1251
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1252
 msgid "Piscis Austrinids"
 msgstr "Пісіс-аўстрыніды"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1253
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1254
 msgid "Southern δ-Aquariids"
 msgstr "Паўднёвыя δ-Акварыды"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1255
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1256
 msgid "α-Capricornids"
 msgstr "α-Капрыкарніды"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1257
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1258
 msgid "α-Aurigids"
 msgstr "α-Аўрыґіды"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1259
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1260
 msgid "September ε-Perseids"
 msgstr "Верасьнёўскія ε-Пэрсэіды"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1261
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1262
 msgid "Draconids"
 msgstr "Драканіды"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1263
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1264
 msgid "Leonids"
 msgstr "Леаніды"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1265
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1266
 msgid "Phoenicids"
 msgstr "Фэніцыды"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1267
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1268
 msgid "Puppid-Velids"
 msgstr "Пупід-Вэліды"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1269
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1270
 msgid "Ursids"
 msgstr "Урсіды"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1271
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1272
 msgid "Perseids"
 msgstr "Пэрсэіды"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1273
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1274
 msgid "δ-Leonids"
 msgstr "δ-Леаніды"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1275
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1276
 msgid "π-Puppids"
 msgstr "π-Пупіды"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1277
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1278
 msgid "June Lyrids"
 msgstr "Чэрвеньскія лірыды"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1279
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1280
 msgid "κ-Cygnids"
 msgstr "κ-Цыґніды"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1281
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1282
 msgid "ε-Lyrids"
 msgstr "ε-Лірыды"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1283
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1284
 msgid "δ-Aurigids"
 msgstr "δ-Аўрыґіды"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1285
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1286
 msgid "ε-Geminids"
 msgstr "ε-Ґемэніды"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1287
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1288
 msgid "Southern Taurids"
 msgstr "Паўднёвыя таўрыды"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1289
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1290
 msgid "Northern Taurids"
 msgstr "Паўночныя таўрыды"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1291
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1292
 msgid "Monocerotids"
 msgstr "Монацэратыды"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1293
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1294
 msgid "α-Monocerotids"
 msgstr "α-Монацэратыды"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1295
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1296
 msgid "σ-Hydrids"
 msgstr "σ-Гідрыды"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1297
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1298
 msgid "Geminids"
 msgstr "Ґемэніды"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1299
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1300
 msgid "Leonis Minorids"
 msgstr "Леаніс-мінарыды"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1301
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1302
 msgid "December Leonis Minorids"
 msgstr "Сьнежаньскія Леаніс-мінарыды"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1303
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1304
 msgid "Comae Berenicids"
 msgstr "Кома-бэрэніцыды"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1305
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1306
 msgid "Orionids"
 msgstr "Арыяніды"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1307
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1308
 msgid "Andromedids"
 msgstr "Андрамэдыды"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1309
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1310
 msgid "η-Lyrids"
 msgstr "η-Лірыды"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1311
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1312
 msgid "α-Scorpiids"
 msgstr "α-Скарпііды"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1313
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1314
 msgid "Ophiuchids"
 msgstr "Афіюхіды"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1315
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1316
 msgid "θ-Ophiuchids"
 msgstr "θ-Афіюхіды"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1317
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1318
 msgid "κ-Serpentids"
 msgstr "κ-Сэрпэнтыды"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1319
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1320
 msgid "θ-Centaurids"
 msgstr "θ-Цэнтаўрыды"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1321
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1322
 msgid "ω-Cetids"
 msgstr "ω-Цэтыды"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1323
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1324
 msgid "Southern ω-Scorpiids"
 msgstr "Паўднёвыя ω-Скарпііды"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1325
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1326
 msgid "Northern ω-Scorpiids"
 msgstr "Паўночныя ω-Скарпііды"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1327
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1328
 msgid "Arietids"
 msgstr "Арыетыды"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1329
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1330
 msgid "π-Cetids"
 msgstr "π-Цэтыды"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1331
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1332
 msgid "δ-Cancrids"
 msgstr "δ-Канкрыды"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1333
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1334
 msgid "τ-Herculids"
 msgstr "τ-Геркуліды"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1335
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1336
 msgid "ρ-Geminids"
 msgstr "ρ-Ґемэніды"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1337
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1338
 msgid "η-Carinids"
 msgstr "η-Карыніды"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1339
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1340
 msgid "η-Craterids"
 msgstr "η-Кратэрыды"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1341
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1342
 msgid "π-Virginids"
 msgstr "π-Вірґініды"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1343
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1344
 msgid "θ-Virginids"
 msgstr "θ-Вірґініды"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1345
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1346
 msgid "May Librids"
 msgstr "Травеньскія лібрыды"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1347
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1348
 msgid "June Scutids"
 msgstr "Чэрвеньскія скутыды"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1349
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1350
 msgid "α-Pisces Australids"
 msgstr "α-Пісіз аўстраліды"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1351
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1352
 msgid "Southern ι-Aquariids"
 msgstr "Паўднёвыя ι-Акварыды"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1353
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1354
 msgid "Northern ι-Aquariids"
 msgstr "Паўночныя ι-Акварыды"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1355
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1356
 msgid "γ-Aquariids"
 msgstr "γ-Акварыды"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1357
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1358
 msgid "Autumn Arietids"
 msgstr "Восеньскія арыетыды"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1359
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1360
 msgid "χ-Orionids"
 msgstr "χ-Арыяніды"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1363
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1364
 msgid "Comet 1P/Halley"
 msgstr "Камэта 1P/Галея"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1365
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1366
 msgid "Comet 7P/Pons-Winnecke"
 msgstr "Камэта 7P/Понса-Вінэке"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1367
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1368
 msgid "Comet 55P/Tempel-Tuttle"
 msgstr "Камэта 55P/Тэмпэля-Тутля"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1369
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1370
 msgid "Comet 96P/Machholz"
 msgstr "Камэта 96P/Махгольца"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1371
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1372
 msgid "Comet 109P/Swift-Tuttle"
 msgstr "Камэта 109P/Свіфта-Тутля"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1373
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1374
 msgid "Comet Thatcher (1861 I)"
 msgstr "Камэта Тэтчэра (1861 I)"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1375
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1376
 msgid "Comet 26P/Grigg-Skjellerup"
 msgstr "Камэта 26P/Ґрыґа-Ск'елерупа"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1377
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1378
 msgid "Comet 21P/Giacobini-Zinner"
 msgstr "Камэта 21P/Джакабіні-Цынэра"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1379
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1380
 msgid "Comet 169P/NEAT"
 msgstr "Камэта 169P/NEAT"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1381
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1382
 msgid "Comet 289P/Blanpain"
 msgstr "Камэта 289P/Бланпэна"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1383
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1384
 msgid "Comet 8P/Tuttle"
 msgstr "Камэта 8P/Тутля"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1385
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1386
 msgid "Comet 3D/Biela"
 msgstr "Камэта 3D/Біелы"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1387
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1388
 msgid "Comet C/1917 F1 (Mellish)"
 msgstr "Камэта C/1917 F1 (Мэлфіша)"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1389
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1390
 msgid "Comet C/1964 N1 (Ikeya)"
 msgstr "Камэта C/1964 N1 (Ікея)"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1391
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1392
 msgid "Comet Schwassmann-Wachmann 3"
 msgstr "Камэта Швасмана-Вахмана 3"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1393
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1394
 msgid "Minor planet 2003 EH1 and Comet C/1490 Y1"
 msgstr "Малая плянэта 2003 EH1 і камэта C/1490 Y1"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1395
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1396
 msgid "Minor planet (4450) Pan"
 msgstr "Малая плянэта (4450) Пан"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1397
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1398
 msgid "Minor planet 2008 ED69"
 msgstr "Малая плянэта 2008 ED69"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1399
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1400
 msgid "Comet 2P/Encke"
 msgstr "Камэта 2P/Энке"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1401
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1402
 msgid "Minor planet 2004 TG10"
 msgstr "Малая плянэта 2004 TG10"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1403
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1404
 msgid "Minor planet (3200) Phaethon"
 msgstr "Малая плянэта (3200) Фаэтон"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:311
+#: plugins/MeteorShowers/src/MeteorShower.cpp:325
 msgid "generic data"
 msgstr "агульныя даньні"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:313
+#: plugins/MeteorShowers/src/MeteorShower.cpp:327
 msgid "real data"
 msgstr "сапраўдныя даньні"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:330
+#: plugins/MeteorShowers/src/MeteorShower.cpp:344
 msgid "meteor shower"
 msgstr "мэтэорны лівень"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:339
+#: plugins/MeteorShowers/src/MeteorShower.cpp:353
 msgid "Radiant drift (per day)"
 msgstr "Адхіленьне радыянту (на дзень)"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:346
+#: plugins/MeteorShowers/src/MeteorShower.cpp:360
 #, qt-format
 msgid "Geocentric meteoric velocity: %1 km/s"
 msgstr "Геацэнтрычная мэтэорная хуткасьць: %1 км/г"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:351
+#: plugins/MeteorShowers/src/MeteorShower.cpp:365
 #, qt-format
 msgid "The population index: %1"
 msgstr "Каэфіцыент населенасьці: %1"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:356
+#: plugins/MeteorShowers/src/MeteorShower.cpp:370
 #, qt-format
 msgid "Parent body: %1"
 msgstr "Бацькоўскае цела: %1"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:362
+#: plugins/MeteorShowers/src/MeteorShower.cpp:376
 msgid "Active"
 msgstr "Актыўныя"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:370
+#: plugins/MeteorShowers/src/MeteorShower.cpp:384
 msgid "Activity"
 msgstr "Актыўнасьць"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:375
+#: plugins/MeteorShowers/src/MeteorShower.cpp:389
 #, qt-format
 msgid "Maximum: %1"
 msgstr "Максымум: %1"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:378
+#: plugins/MeteorShowers/src/MeteorShower.cpp:392
 msgid "Solar longitude is"
 msgstr "Сонечная даўгата —"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:387
+#: plugins/MeteorShowers/src/MeteorShower.cpp:401
 msgid "variable"
 msgstr "зьменная"
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:167
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:166
 msgid "ZHR"
 msgstr "ЗЧЗ"
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:168
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:167
 msgid "Data Type"
 msgstr "Тып даньняў"
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:169
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:168
 msgid "Peak"
 msgstr "Пік"
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:180
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:179
 msgid "Start date greater than end date!"
 msgstr "Пачатковая дата пазьнейшая за канчатковую!"
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:184
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:183
 msgid "Time interval must be less than one year!"
 msgstr "Прамежак часу мусіць быць меншы за адзін год!"
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:204
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:203
 msgid "Variable"
 msgstr "Зьменная"
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:207
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:206
 msgid "Real"
 msgstr "Сапраўдныя"
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:207
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:206
 msgid "Generic"
 msgstr "Агульныя"
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:254
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:253
 msgid "Meteor Showers Plug-in"
 msgstr "Дадатак «Мэтэорныя ліўні»"
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:260
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:259
 msgid "Terms"
 msgstr "Тэрміны"
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:261
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:260
 msgid "Meteor shower"
 msgstr "Мэтэорны лівень"
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:262
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:261
 msgid ""
 "A meteor shower is a celestial event in which a number of meteors are "
 "observed to radiate, or originate, from one point in the night sky. These "
@@ -9582,11 +9631,11 @@ msgstr ""
 "вядомыя як мэтэорныя выбухі і мэтэорныя штормы, якія могуць спарадзіць больш "
 "за 1000 мэтэораў за гадзіну."
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:263
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:262
 msgid "Radiant"
 msgstr "Радыянт"
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:264
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:263
 msgid ""
 "The radiant or apparent radiant of a meteor shower is the point in the sky, "
 "from which (to a planetary observer) meteors appear to originate. The "
@@ -9598,7 +9647,7 @@ msgstr ""
 "напрыклад, — гэта мэтэоры, якія візуальна паходзяць з пункту ўнутры сузор'я "
 "Пэрсэй."
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:265
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:264
 msgid ""
 "An observer might see such a meteor anywhere in the sky but the direction of "
 "motion, when traced back, will point to the radiant. A meteor that does not "
@@ -9610,7 +9659,7 @@ msgstr ""
 "паказвае на вядомы радыянт дадзенага ліўня, вядомы як спарадычны, і не "
 "лічыцца часткай гэтага ліўня."
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:266
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:265
 msgid ""
 "Many showers have a radiant point that changes position during the interval "
 "when it appears. For example, the radiant point for the Delta Aurigids "
@@ -9619,11 +9668,11 @@ msgstr ""
 "Многія ліўня маюць радыянтны пункт, які зьмяняе сваё становішча. Напрыклад, "
 "радыянтны пункт Дэльта-аўрыґідаў перамяшчаецца за ноч больш як на ґрадус."
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:267
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:266
 msgid "Zenithal Hourly Rate (ZHR)"
 msgstr "Зэнітныя часьціня за гадзіну (ЗЧЗ)"
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:268
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:267
 msgid ""
 "In astronomy, the Zenithal Hourly Rate (ZHR) of a meteor shower is the "
 "number of meteors a single observer would see in one hour under a clear, "
@@ -9637,11 +9686,11 @@ msgstr ""
 "знаходзіцца ў зэніце. Часьціня, якую ў сапраўднасьці можна пабачыць, амаль "
 "заўжды меншая, і чым ніжэй радыянт да гарызонту, тым яна меншая."
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:269
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:268
 msgid "Population index"
 msgstr "Каэфіцыент населенасьці"
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:270
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:269
 msgid ""
 "The population index indicates the magnitude distribution of the meteor "
 "showers. The values below 2.5 correspond to distributions where bright "
@@ -9653,38 +9702,38 @@ msgstr ""
 "мэтэоры трапляюцца часьцей за сярэдні ровень, у той час як значэньні большыя "
 "за 3,0 азначаюць, што колькасьць бляклых большая за звычайную."
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:271
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:270
 msgid "Notes"
 msgstr "Нататкі"
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:272
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:271
 msgid ""
 "This plugin was created as project of ESA Summer of Code in Space 2013."
 msgstr ""
 "Гэты дадатак быў створаны як праект ЭКА «Summer of Code in Space» у 2013 "
 "годзе."
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:273
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:272
 msgid "Info"
 msgstr "Зьвесткі"
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:274
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:273
 msgid "Info about meteor showers you can get here:"
 msgstr "Пра мэтэорныя ліўні можна даведацца тут:"
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:277
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:276
 #, qt-format
 msgid "%1Meteor shower%2 - article in Wikipedia"
 msgstr "%1Мэтэорны лівень%2 — артыкул у Вікіпэдыі"
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:279
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:278
 #, qt-format
 msgid "%1International Meteor Organization%2"
 msgstr "%1Міжнародная мэтэорная арґанізацыя%2"
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:343
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:342
 msgid "Meteor showers is updated"
 msgstr "«Мэтэорныя ліўні» абноўленыя"
 
