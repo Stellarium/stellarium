@@ -18,10 +18,10 @@
  */
 
 #include "AOLandscape.hpp"
-#include "LandscapeMgr.hpp"
 
 AOLandscape::AOLandscape(StelAddOnDAO* pStelAddOnDAO)
 	: m_pStelAddOnDAO(pStelAddOnDAO),
+	  m_pLandscapeMgr(GETSTELMODULE(LandscapeMgr)),
 	  m_sLandscapeInstallDir(StelFileMgr::getUserDir() % "/landscapes/")
 {
 	StelFileMgr::makeSureDirExistsAndIsWritable(m_sLandscapeInstallDir);
@@ -31,45 +31,32 @@ AOLandscape::~AOLandscape()
 {
 }
 
-void AOLandscape::checkInstalledAddOns() const
+QStringList AOLandscape::checkInstalledAddOns() const
 {
-	QDir landscapeDestination(m_sLandscapeInstallDir);
-	QStringList landscapes = GETSTELMODULE(LandscapeMgr)->getUserLandscapeIDs();
-	foreach (QString landscape, landscapes) {
-		if (landscapeDestination.cd(landscape))
-		{
-			m_pStelAddOnDAO->updateInstalledAddon(landscape % ".zip", "1.0", landscapeDestination.absolutePath());
-			landscapeDestination.cdUp();
-		}
-	}
+	return m_pLandscapeMgr->getUserLandscapeIDs();
 }
 
-void AOLandscape::installFromFile(const QString& filePath) const
+bool AOLandscape::installFromFile(const QString& idInstall,
+				  const QString& downloadFilepath) const
 {
-	QString ref = GETSTELMODULE(LandscapeMgr)->installLandscapeFromArchive(filePath);
-	if(ref.isEmpty())
-	{
-		qWarning() << "FAILED to install " << filePath;
-	}
-	// update database
-	QDir landscapeDestination(m_sLandscapeInstallDir);
-	if (landscapeDestination.cd(ref))
-	{
-		m_pStelAddOnDAO->updateInstalledAddon(ref % ".zip", "1.0",
-				     landscapeDestination.absolutePath());
-	}
-}
+	Q_UNUSED(idInstall);
 
-bool AOLandscape::uninstallAddOn(const StelAddOnDAO::AddOnInfo &addonInfo) const
-{
-	QString dirName = addonInfo.installedDir.dirName();
-	if(!GETSTELMODULE(LandscapeMgr)->removeLandscape(dirName))
+	// TODO: the method LandscapeMgr::installLandscapeFromArchive must be removed
+	//       and this operation have to be done here.
+	//       the LANDSCAPEID must be the same as idInstall (from db)
+	QString landscapeId = m_pLandscapeMgr->installLandscapeFromArchive(downloadFilepath);
+	if (landscapeId.isEmpty())
 	{
-		qWarning() << "FAILED to remove landscape " << dirName;
 		return false;
 	}
+	return true;
+}
 
-	m_pStelAddOnDAO->updateInstalledAddon(dirName % ".zip", "", "");
-
+bool AOLandscape::uninstallAddOn(const QString& idInstall) const
+{
+	if(!m_pLandscapeMgr->removeLandscape(idInstall))
+	{
+		return false;
+	}
 	return true;
 }

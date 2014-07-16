@@ -20,6 +20,7 @@
 #ifndef _AOLANDSCAPE_HPP_
 #define _AOLANDSCAPE_HPP_
 
+#include "LandscapeMgr.hpp"
 #include "StelAddOn.hpp"
 
 class AOLandscape : public StelAddOn
@@ -30,16 +31,18 @@ public:
 	virtual ~AOLandscape();
 
 	// check landscapes which are already installed.
-	virtual void checkInstalledAddOns() const;
+	virtual QStringList checkInstalledAddOns() const;
 
 	// install landscape from a zip file.
-	virtual void installFromFile(const QString& filePath) const;
+	virtual bool installFromFile(const QString& idInstall,
+				     const QString& downloadFilepath) const;
 
 	// uninstall landscape
-	virtual bool uninstallAddOn(const StelAddOnDAO::AddOnInfo& addonInfo) const;
+	virtual bool uninstallAddOn(const QString& idInstall) const;
 
 private:
 	StelAddOnDAO* m_pStelAddOnDAO;
+	LandscapeMgr* m_pLandscapeMgr;
 	const QString m_sLandscapeInstallDir;
 };
 
