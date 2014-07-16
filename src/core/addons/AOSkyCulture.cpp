@@ -30,30 +30,32 @@ AOSkyCulture::~AOSkyCulture()
 {
 }
 
-void AOSkyCulture::checkInstalledAddOns() const
+QStringList AOSkyCulture::checkInstalledAddOns() const
 {
+	return QStringList();
 }
 
-void AOSkyCulture::installFromFile(const QString& filePath) const
+bool AOSkyCulture::installFromFile(const QString& idInstall,
+				   const QString& downloadFilepath) const
 {
-	QZipReader reader(filePath);
+	QZipReader reader(downloadFilepath);
 	if (reader.status() != QZipReader::NoError)
 	{
 		qWarning() << "Add-On SkyCultures: Unable to open the ZIP archive:"
-			   << QDir::toNativeSeparators(filePath);
-		return;
+			   << QDir::toNativeSeparators(downloadFilepath);
+		return false;
 	}
 
-	if (reader.extractAll(m_sSkyCultureInstallDir)) {
-		qWarning() << "Add-On SkyCultures: New sky culture installed!";
-		m_pStelAddOnDAO->updateInstalledAddon(QFileInfo(filePath).fileName(), "1.0", "");
-	} else {
+	if (!reader.extractAll(m_sSkyCultureInstallDir)) {
 		qWarning() << "Add-On SkyCultures: Unable to install the new sky culture!";
+		return false;
 	}
-	reader.close();
+
+	qWarning() << "Add-On SkyCultures: New sky culture installed!";
+	return true;
 }
 
-bool AOSkyCulture::uninstallAddOn(const StelAddOnDAO::AddOnInfo &addonInfo) const
+bool AOSkyCulture::uninstallAddOn(const QString &idInstall) const
 {
 	return true;
 }

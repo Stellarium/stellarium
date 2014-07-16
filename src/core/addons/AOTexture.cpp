@@ -34,21 +34,23 @@ AOTexture::~AOTexture()
 {
 }
 
-void AOTexture::checkInstalledAddOns() const
+QStringList AOTexture::checkInstalledAddOns() const
 {
 	// TODO: users can change the textures externally,
 	// so probably we'll need to compare md5hashes to be able
 	// to know which are the installed textures
+	return QStringList();
 }
 
-void AOTexture::installFromFile(const QString& filePath) const
+bool AOTexture::installFromFile(const QString& idInstall,
+				const QString& downloadFilepath) const
 {
-	QZipReader reader(filePath);
+	QZipReader reader(downloadFilepath);
 	if (reader.status() != QZipReader::NoError)
 	{
 		qWarning() << "Add-On Texture: Unable to open the ZIP archive:"
-			   << QDir::toNativeSeparators(filePath);
-		return;
+			   << QDir::toNativeSeparators(downloadFilepath);
+		return false;
 	}
 
 	QList<QZipReader::FileInfo> infoList = reader.fileInfoList();
@@ -83,10 +85,11 @@ void AOTexture::installFromFile(const QString& filePath) const
 
 		qWarning() << "Add-On Texture: New texture installed:" << info.filePath;
 	}
-	m_pStelAddOnDAO->updateInstalledAddon(QFileInfo(filePath).fileName(), "1.0", "");
+
+	return true;
 }
 
-bool AOTexture::uninstallAddOn(const StelAddOnDAO::AddOnInfo &addonInfo) const
+bool AOTexture::uninstallAddOn(const QString &idInstall) const
 {
 	return true;
 }

@@ -36,13 +36,14 @@ class StelAddOn : public QObject
 	Q_OBJECT
 public:
 	// check add-ons which are already installed
-	virtual void checkInstalledAddOns() const = 0;
+	virtual QStringList checkInstalledAddOns() const = 0;
 
 	// install add-on from a zip file
-	virtual void installFromFile(const QString& filePath) const = 0;
+	virtual bool installFromFile(const QString& idInstall,
+				     const QString& downloadFilepath) const = 0;
 
 	// uninstall add-on
-	virtual bool uninstallAddOn(const StelAddOnDAO::AddOnInfo& addonInfo) const = 0;
+	virtual bool uninstallAddOn(const QString& idInstall) const = 0;
 };
 
 #endif // _STELADDON_HPP_

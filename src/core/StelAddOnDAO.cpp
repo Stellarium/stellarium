@@ -186,7 +186,7 @@ bool StelAddOnDAO::insertOnDatabase(QString insert)
 void StelAddOnDAO::markAllAddOnsAsUninstalled()
 {
 	QSqlQuery query(m_db);
-	query.prepare("UPDATE addon SET installed=0 ");
+	query.prepare("UPDATE addon SET installed=0");
 	if (!query.exec()) {
 		qWarning() << "Add-On Manager : Could not mark all add-ons as uninstalled!";
 	}

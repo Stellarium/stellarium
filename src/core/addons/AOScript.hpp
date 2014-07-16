@@ -30,13 +30,14 @@ public:
 	virtual ~AOScript();
 
 	// check scripts which are already installed.
-	virtual void checkInstalledAddOns() const;
+	virtual QStringList checkInstalledAddOns() const;
 
 	// install script from a zip file.
-	virtual void installFromFile(const QString& filePath) const;
+	virtual bool installFromFile(const QString& idInstall,
+				     const QString& downloadFilepath) const;
 
 	// uninstall script
-	virtual bool uninstallAddOn(const StelAddOnDAO::AddOnInfo& addonInfo) const;
+	virtual bool uninstallAddOn(const QString& idInstall) const;
 
 private:
 	StelAddOnDAO* m_pStelAddOnDAO;

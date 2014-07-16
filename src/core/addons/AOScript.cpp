@@ -30,18 +30,20 @@ AOScript::~AOScript()
 {
 }
 
-void AOScript::checkInstalledAddOns() const
+QStringList AOScript::checkInstalledAddOns() const
 {
+	return QStringList();
 }
 
-void AOScript::installFromFile(const QString& filePath) const
+bool AOScript::installFromFile(const QString& idInstall,
+			       const QString& downloadFilepath) const
 {
-	QZipReader reader(filePath);
+	QZipReader reader(downloadFilepath);
 	if (reader.status() != QZipReader::NoError)
 	{
 		qWarning() << "Add-On Script: Unable to open the ZIP archive:"
-			   << QDir::toNativeSeparators(filePath);
-		return;
+			   << QDir::toNativeSeparators(downloadFilepath);
+		return false;
 	}
 
 	QList<QZipReader::FileInfo> infoList = reader.fileInfoList();
@@ -63,10 +65,10 @@ void AOScript::installFromFile(const QString& filePath) const
 
 		qWarning() << "Add-On Script: New script installed:" << info.filePath;
 	}
-	m_pStelAddOnDAO->updateInstalledAddon(QFileInfo(filePath).fileName(), "1.0", "");
+	return true;
 }
 
-bool AOScript::uninstallAddOn(const StelAddOnDAO::AddOnInfo &addonInfo) const
+bool AOScript::uninstallAddOn(const QString &idInstall) const
 {
 	return true;
 }

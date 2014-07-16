@@ -30,13 +30,14 @@ public:
 	virtual ~AOSkyCulture();
 
 	// check starlores which are already installed.
-	virtual void checkInstalledAddOns() const;
+	virtual QStringList checkInstalledAddOns() const;
 
 	// install starlore from a zip file.
-	virtual void installFromFile(const QString& filePath) const;
+	virtual bool installFromFile(const QString& idInstall,
+				     const QString& downloadFilepath) const;
 
 	// uninstall starlore
-	virtual bool uninstallAddOn(const StelAddOnDAO::AddOnInfo& addonInfo) const;
+	virtual bool uninstallAddOn(const QString& idInstall) const;
 
 private:
 	StelAddOnDAO* m_pStelAddOnDAO;
