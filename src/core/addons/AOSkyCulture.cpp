@@ -32,7 +32,9 @@ AOSkyCulture::~AOSkyCulture()
 
 QStringList AOSkyCulture::checkInstalledAddOns() const
 {
-	return QStringList();
+	QDir dir(m_sSkyCultureInstallDir);
+	dir.setFilter(QDir::Dirs | QDir::NoSymLinks | QDir::NoDotAndDotDot);
+	return dir.entryList();
 }
 
 bool AOSkyCulture::installFromFile(const QString& idInstall,
