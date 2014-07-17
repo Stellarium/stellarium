@@ -46,16 +46,32 @@ bool AOSkyCulture::installFromFile(const QString& idInstall,
 		return false;
 	}
 
-	if (!reader.extractAll(m_sSkyCultureInstallDir)) {
+	QString destination = m_sSkyCultureInstallDir % idInstall;
+	StelFileMgr::makeSureDirExistsAndIsWritable(destination);
+
+	if (!reader.extractAll(destination)) {
 		qWarning() << "Add-On SkyCultures: Unable to install the new sky culture!";
 		return false;
 	}
 
-	qWarning() << "Add-On SkyCultures: New sky culture installed!";
+	qWarning() << "Add-On SkyCultures: New sky culture" << idInstall << "installed!";
 	return true;
 }
 
 bool AOSkyCulture::uninstallAddOn(const QString &idInstall) const
 {
+	QDir dir(m_sSkyCultureInstallDir % idInstall);
+
+	if (!dir.removeRecursively())
+	{
+		qWarning() << "Add-On SkyCultures : Error! " << idInstall
+			   << "could not be removed. "
+			   << "Some files were deleted, but not all."
+			   << endl
+			   << "Add-On SkyCultures : You can delete manually"
+			   << dir.absolutePath();
+		return false;
+	}
+	qDebug() << "Add-On SkyCultures : Successfully removed" << dir.absolutePath();
 	return true;
 }
