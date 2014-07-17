@@ -260,11 +260,7 @@ void StelAddOnMgr::installFromFile(const StelAddOnDAO::AddOnInfo addonInfo)
 			->installFromFile(addonInfo.idInstall, addonInfo.filepath);
 
 	m_pStelAddOnDAO->updateAddOnStatus(addonInfo.idInstall, installed);
-
-	if (m_downloadQueue.isEmpty())
-	{
-		emit (updateTableViews());
-	}
+	emit (updateTableViews());
 }
 
 void StelAddOnMgr::removeAddOn(const int addonId)
