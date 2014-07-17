@@ -64,6 +64,7 @@ public:
 	}
 signals:
 	void updateTableViews();
+	void skyCulturesChanged();
 
 private slots:
 	void downloadFinished();

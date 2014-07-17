@@ -39,6 +39,7 @@
 #include "MilkyWay.hpp"
 #include "ConstellationMgr.hpp"
 #include "StelStyle.hpp"
+#include "StelAddOnMgr.hpp"
 #include "StelSkyLayerMgr.hpp"
 #include "StelGuiBase.hpp"
 #include "StelGui.hpp"
@@ -282,6 +283,7 @@ void ViewDialog::createDialogContent()
 	const bool b = StelApp::getInstance().getSkyCultureMgr().getCurrentSkyCultureID()==StelApp::getInstance().getSkyCultureMgr().getDefaultSkyCultureID();
 	ui->useAsDefaultSkyCultureCheckBox->setChecked(b);
 	ui->useAsDefaultSkyCultureCheckBox->setEnabled(!b);
+	connect(&StelApp::getInstance().getStelAddOnMgr(), SIGNAL(skyCulturesChanged()), this, SLOT(populateLists()));
 
 	// Sky layers
 	populateSkyLayersList();

@@ -78,6 +78,9 @@ StelAddOnMgr::StelAddOnMgr()
 	m_pStelAddOns.insert(SKY_CULTURE, new AOSkyCulture(m_pStelAddOnDAO));
 	m_pStelAddOns.insert(TEXTURE, new AOTexture(m_pStelAddOnDAO));
 
+	connect(m_pStelAddOns.value(SKY_CULTURE), SIGNAL(skyCulturesChanged()),
+		this, SIGNAL(skyCulturesChanged()));
+
 	// refresh add-ons statuses (it checks which are installed or not)
 	refreshAddOnStatuses();
 }

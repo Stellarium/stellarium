@@ -39,6 +39,9 @@ public:
 	// uninstall starlore
 	virtual bool uninstallAddOn(const QString& idInstall) const;
 
+signals:
+	void skyCulturesChanged() const;
+
 private:
 	StelAddOnDAO* m_pStelAddOnDAO;
 	const QString m_sSkyCultureInstallDir;

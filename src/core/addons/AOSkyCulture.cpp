@@ -57,6 +57,7 @@ bool AOSkyCulture::installFromFile(const QString& idInstall,
 	}
 
 	qWarning() << "Add-On SkyCultures: New sky culture" << idInstall << "installed!";
+	emit(skyCulturesChanged());
 	return true;
 }
 
@@ -74,6 +75,8 @@ bool AOSkyCulture::uninstallAddOn(const QString &idInstall) const
 			   << dir.absolutePath();
 		return false;
 	}
+
 	qDebug() << "Add-On SkyCultures : Successfully removed" << dir.absolutePath();
+	emit(skyCulturesChanged());
 	return true;
 }
