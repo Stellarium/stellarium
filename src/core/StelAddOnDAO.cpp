@@ -198,10 +198,9 @@ void StelAddOnDAO::markAddOnsAsInstalled(QStringList idInstall)
 	{
 		return;
 	}
-
 	QSqlQuery query(m_db);
 	query.prepare(QString("UPDATE addon SET installed=1 "
-			"WHERE id_install IN (%1)").arg(idInstall.join(",")));
+			"WHERE id_install IN ('%1')").arg(idInstall.join(",")));
 	if (!query.exec()) {
 		qWarning() << "Add-On DAO : Could not mark add-ons as installed!";
 	}
@@ -228,8 +227,8 @@ StelAddOnDAO::AddOnInfo StelAddOnDAO::getAddOnInfo(int addonId)
 	}
 
 	QSqlQuery query(m_db);
-	query.prepare("SELECT id_install, category, download_url, "
-		      "download_size, filename, installed "
+	query.prepare("SELECT id_install, category, installed, "
+		      "download_url, download_filename, download_size "
 		      "FROM addon WHERE id=:id");
 	query.bindValue(":id", addonId);
 
@@ -242,8 +241,8 @@ StelAddOnDAO::AddOnInfo StelAddOnDAO::getAddOnInfo(int addonId)
 	const int idInstallColumn = queryRecord.indexOf("id_install");
 	const int categoryColumn = queryRecord.indexOf("category");
 	const int urlColumn = queryRecord.indexOf("download_url");
+	const int filenameColumn = queryRecord.indexOf("download_filename");
 	const int sizeColumn = queryRecord.indexOf("download_size");
-	const int filenameColumn = queryRecord.indexOf("filename");
 	const int installedColumn = queryRecord.indexOf("installed");
 	if (query.next()) {
 		AddOnInfo addonInfo;
