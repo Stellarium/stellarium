@@ -78,15 +78,8 @@ StelAddOnMgr::StelAddOnMgr()
 	m_pStelAddOns.insert(SKY_CULTURE, new AOSkyCulture(m_pStelAddOnDAO));
 	m_pStelAddOns.insert(TEXTURE, new AOTexture(m_pStelAddOnDAO));
 
-	// mark all add-ons as uninstalled
-	m_pStelAddOnDAO->markAllAddOnsAsUninstalled();
-
-	// check add-ons which are already installed
-	QHashIterator<QString, StelAddOn*> aos(m_pStelAddOns);
-	while (aos.hasNext()) {
-	    aos.next();
-	    m_pStelAddOnDAO->markAddOnsAsInstalled(aos.value()->checkInstalledAddOns());
-	}
+	// refresh add-ons statuses (it checks which are installed or not)
+	refreshAddOnStatuses();
 }
 
 StelAddOnMgr::~StelAddOnMgr()
@@ -110,6 +103,19 @@ void StelAddOnMgr::setLastUpdate(qint64 time) {
 	}
 }
 
+void StelAddOnMgr::refreshAddOnStatuses()
+{
+	// mark all add-ons as uninstalled
+	m_pStelAddOnDAO->markAllAddOnsAsUninstalled();
+
+	// check add-ons which are already installed
+	QHashIterator<QString, StelAddOn*> aos(m_pStelAddOns);
+	while (aos.hasNext()) {
+	    aos.next();
+	    m_pStelAddOnDAO->markAddOnsAsInstalled(aos.value()->checkInstalledAddOns());
+	}
+}
+
 bool StelAddOnMgr::updateCatalog(QString webresult)
 {
 	QStringList queries = webresult.split("<br>");
@@ -121,6 +127,10 @@ bool StelAddOnMgr::updateCatalog(QString webresult)
 			return false;
 		}
 	}
+
+	// check add-ons which are already installed
+	refreshAddOnStatuses();
+
 	return true;
 }
 

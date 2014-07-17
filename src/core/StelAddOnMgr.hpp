@@ -100,6 +100,7 @@ private:
 	// sub-classes
 	QHash<QString, StelAddOn*> m_pStelAddOns;
 
+	void refreshAddOnStatuses();
 	void downloadAddOn(const StelAddOnDAO::AddOnInfo addonInfo);
 };
 
