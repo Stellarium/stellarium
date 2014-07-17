@@ -138,7 +138,7 @@ void AddOnDialog::initModel(QTableView* tableView, QString table)
 		model->setHeaderData(2, Qt::Horizontal, q_("Title"));
 		model->setHeaderData(3, Qt::Horizontal, q_("Type"));
 		model->setHeaderData(4, Qt::Horizontal, q_("Last Version"));
-		model->setHeaderData(5, Qt::Horizontal, q_("Installed Version"));
+		model->setHeaderData(5, Qt::Horizontal, q_("Installed"));
 		model->setHeaderData(6, Qt::Horizontal, "");
 	}
 	else
@@ -151,7 +151,7 @@ void AddOnDialog::initModel(QTableView* tableView, QString table)
 		model->setHeaderData(1, Qt::Horizontal, q_("AddOnId"));
 		model->setHeaderData(2, Qt::Horizontal, q_("Title"));
 		model->setHeaderData(3, Qt::Horizontal, q_("Last Version"));
-		model->setHeaderData(4, Qt::Horizontal, q_("Installed Version"));
+		model->setHeaderData(4, Qt::Horizontal, q_("Installed"));
 		model->setHeaderData(5, Qt::Horizontal, "");
 	}
 

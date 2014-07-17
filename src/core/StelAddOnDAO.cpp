@@ -124,7 +124,7 @@ bool StelAddOnDAO::createAddonTables()
 		query.prepare(table);
 		if (!query.exec())
 		{
-			qDebug() << "Add-On Manager : unable to create the addon table."
+			qDebug() << "Add-On DAO : unable to create the addon table."
 				 << m_db.lastError();
 			return false;
 		}
@@ -143,7 +143,7 @@ bool StelAddOnDAO::createTableLicense()
 	);
 	if (!query.exec())
 	{
-		qDebug() << "Add-On Manager : unable to create the license table."
+		qDebug() << "Add-On DAO : unable to create the license table."
 			 << m_db.lastError();
 		return false;
 	}
@@ -162,7 +162,7 @@ bool StelAddOnDAO::createTableAuthor()
 	);
 	if (!query.exec())
 	{
-		qDebug() << "Add-On Manager : unable to create the author table."
+		qDebug() << "Add-On DAO : unable to create the author table."
 			 << m_db.lastError();
 		return false;
 	}
@@ -175,7 +175,7 @@ bool StelAddOnDAO::insertOnDatabase(QString insert)
 	query.prepare(insert);
 	if (!query.exec())
 	{
-		qDebug() << "Add-On Manager : unable to update database."
+		qDebug() << "Add-On DAO : unable to update database."
 			 << m_db.lastError();
 		return false;
 	}
@@ -188,7 +188,7 @@ void StelAddOnDAO::markAllAddOnsAsUninstalled()
 	QSqlQuery query(m_db);
 	query.prepare("UPDATE addon SET installed=0");
 	if (!query.exec()) {
-		qWarning() << "Add-On Manager : Could not mark all add-ons as uninstalled!";
+		qWarning() << "Add-On DAO : Could not mark all add-ons as uninstalled!";
 	}
 }
 
@@ -203,7 +203,7 @@ void StelAddOnDAO::markAddOnsAsInstalled(QStringList idInstall)
 	query.prepare(QString("UPDATE addon SET installed=1 "
 			"WHERE id_install IN (%1)").arg(idInstall.join(",")));
 	if (!query.exec()) {
-		qWarning() << "Add-On Manager : Could not mark add-ons as installed!";
+		qWarning() << "Add-On DAO : Could not mark add-ons as installed!";
 	}
 }
 
@@ -217,7 +217,7 @@ void StelAddOnDAO::updateAddOnStatus(QString idInstall, int installed)
 	 query.bindValue(":id_install", idInstall);
 
 	 if (!query.exec()) {
-		qWarning() << "Add-On Manager :" << m_db.lastError();
+		qWarning() << "Add-On DAO :" << m_db.lastError();
 	}
 }
 
@@ -234,7 +234,7 @@ StelAddOnDAO::AddOnInfo StelAddOnDAO::getAddOnInfo(int addonId)
 	query.bindValue(":id", addonId);
 
 	if (!query.exec()) {
-		qWarning() << "Add-On Manager :" << m_db.lastError();
+		qWarning() << "Add-On DAO :" << m_db.lastError();
 		return AddOnInfo();
 	}
 
