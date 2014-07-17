@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: Thai for stellarium 0.8.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-07-13 12:59+0700\n"
-"PO-Revision-Date: 2014-07-15 01:26+0000\n"
+"PO-Revision-Date: 2014-07-17 05:52+0000\n"
 "Last-Translator: Worachate Boonplod <Unknown>\n"
 "Language-Team: MicKi Alone <Need24Get@msn.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-07-16 05:57+0000\n"
-"X-Generator: Launchpad (build 17112)\n"
+"X-Launchpad-Export-Date: 2014-07-17 05:54+0000\n"
+"X-Generator: Launchpad (build 17114)\n"
 "X-Poedit-Country: THAILAND\n"
 "X-Poedit-Language: Thai\n"
 
@@ -8026,7 +8026,7 @@ msgstr "ใช้สีที่ต่างออกไปสำหรับพ
 #: plugins/Exoplanets/src/Exoplanets.cpp:170
 #: plugins/Exoplanets/src/Exoplanets.cpp:171
 msgid "Exoplanets"
-msgstr "ดาวเคราะห์ระบบอื่น"
+msgstr "ดาวเคราะห์ต่างระบบ"
 
 #: plugins/Exoplanets/src/Exoplanets.cpp:78
 msgid ""
@@ -8034,16 +8034,16 @@ msgid ""
 "derived from the 'Extrasolar Planets Encyclopaedia' at exoplanet.eu"
 msgstr ""
 "โปรแกรมเสริมแสดงตำแหน่งดาวฤกษ์ที่พบว่ามีดาวเคราะห์เป็นบริวาร "
-"ข้อมูลดาวเคราะห์ระบบอื่นมาจาก 'Extrasolar Planets Encyclopaedia' ที่ "
+"ข้อมูลดาวเคราะห์ต่างระบบมาจาก 'Extrasolar Planets Encyclopaedia' ที่ "
 "exoplanet.eu"
 
 #: plugins/Exoplanets/src/Exoplanets.cpp:170
 msgid "Show exoplanets"
-msgstr "แสดงดาวเคราะห์ระบบอื่น"
+msgstr "แสดงดาวเคราะห์ต่างระบบ"
 
 #: plugins/Exoplanets/src/Exoplanets.cpp:171
 msgid "Exoplanets configuration window"
-msgstr "หน้าต่างการตั้งค่าดาวเคราะห์ระบบอื่น"
+msgstr "หน้าต่างการตั้งค่าดาวเคราะห์ต่างระบบ"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:177
 msgid "planetary system"
@@ -8070,7 +8070,7 @@ msgstr "อุณหภูมิยังผล: %1 เคลวิน"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:229
 msgid "Exoplanet"
-msgstr "ดาวเคราะห์ระบบอื่น"
+msgstr "ดาวเคราะห์ต่างระบบ"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:230
 msgid "Period"
@@ -8125,7 +8125,7 @@ msgstr "ESI"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:129
 msgid "Exoplanets Plug-in"
-msgstr "โปรแกรมเสริมดาวเคราะห์ระบบอื่น"
+msgstr "โปรแกรมเสริมดาวเคราะห์ต่างระบบ"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:133
 #, qt-format
@@ -8143,7 +8143,7 @@ msgid ""
 "from \"%1The Habitable Exoplanets Catalog%3\" by %2Planetary Habitability "
 "Laboratory%3."
 msgstr ""
-"รายการและข้อมูลดาวเคราะห์ระบบอื่นที่คาดว่าสิ่งมีชีวิตสามารถอาศัยอยู่ได้ "
+"รายการและข้อมูลดาวเคราะห์ต่างระบบที่คาดว่าสิ่งมีชีวิตสามารถอาศัยอยู่ได้ "
 "มาจาก \"%1The Habitable Exoplanets Catalog%3\" โดย %2Planetary Habitability "
 "Laboratory%3"
 
@@ -8154,6 +8154,9 @@ msgid ""
 "altogether have %2 exoplanets (including %3 potentially habitable "
 "exoplanets)."
 msgstr ""
+"บัญชีปัจจุบันมีข้อมูลระบบดาวเคราะห์ประมาณ %1 ระบบ "
+"ซึ่งมีดาวเคราะห์ต่างระบบรวม %2 ดวง (รวมถึงดาวเคราะห์ต่างระบบจำนวน %3 ดวง "
+"ที่คาดว่าสิ่งมีชีวิตสามารถอาศัยอยู่ได้)"
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:147
@@ -8168,7 +8171,7 @@ msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:162
 msgid "Potential habitable exoplanets"
-msgstr "ดาวเคราะห์ระบบอื่นที่คาดว่าสิ่งมีชีวิตสามารถอาศัยอยู่ได้"
+msgstr "ดาวเคราะห์ต่างระบบที่คาดว่าสิ่งมีชีวิตสามารถอาศัยอยู่ได้"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:163
 msgid ""
@@ -8176,7 +8179,7 @@ msgid ""
 "some information about those planets - habitable class, mean surface "
 "temperature and Earth Similarity Index."
 msgstr ""
-"โปรแกรมเสริมนี้สามารถแสดงดาวเคราะห์ระบบอื่นที่คาดว่าสิ่งมีชีวิตสามารถอยู่อาศั"
+"โปรแกรมเสริมนี้สามารถแสดงดาวเคราะห์ต่างระบบที่คาดว่าสิ่งมีชีวิตสามารถอยู่อาศั"
 "ยได้ (สีส้ม) และข้อมูลเกี่ยวกับดาวเคราะห์นั้น ได้แก่ "
 "ชั้นความสามารถในการอยู่อาศัยได้ อุณหภูมิพื้นผิวเฉลี่ย และดัชนีภาวะคล้ายโลก"
 
@@ -8193,13 +8196,12 @@ msgid ""
 "life, whereas class O or E would only support extremophilic life. Non-"
 "habitable planets are simply given the class X (or NH)."
 msgstr ""
-"จำแนกดาวเคราะห์ระบบอื่นที่คาดว่าสิ่งมีชีวิตสามารถอาศัยอยู่ได้โดยดูจากอุณหภูมิ"
-" ดังนี้ hypopsychroplanets (O หรือ hP) = หนาวเย็นมาก (ต่ำกว่า −50°C), "
-"psychroplanets (P) = หนาวเย็น, mesoplanets (M) = อุณหภูมิปานกลาง (0–50°C), "
-"thermoplanets (T) = ร้อน, hyperthermoplanets (E หรือ hT) = ร้อนมาก (สูงเกิน "
-"100°C) ดาวเคราะห์ในกลุ่ม mesoplanet "
-"ถือเป็นภาวะที่เหมาะสำหรับสิ่งมีชีวิตที่ซับซ้อน ดาวเคราะห์ในชั้น O หรือ E "
-"เหมาะกับสิ่งมีชีวิตในภาวะสุดโต่งเท่านั้น "
+"จำแนกดาวเคราะห์ที่คาดว่าสิ่งมีชีวิตสามารถอาศัยอยู่ได้โดยดูจากอุณหภูมิ ดังนี้ "
+"hypopsychroplanets (O หรือ hP) = หนาวเย็นมาก (ต่ำกว่า −50°C), psychroplanets "
+"(P) = หนาวเย็น, mesoplanets (M) = อุณหภูมิปานกลาง (0–50°C), thermoplanets "
+"(T) = ร้อน, hyperthermoplanets (E หรือ hT) = ร้อนมาก (สูงเกิน 100°C) "
+"ดาวเคราะห์ในกลุ่ม mesoplanet ถือเป็นภาวะที่เหมาะสำหรับสิ่งมีชีวิตที่ซับซ้อน "
+"ดาวเคราะห์ในชั้น O หรือ E เหมาะกับสิ่งมีชีวิตในภาวะสุดโต่งเท่านั้น "
 "ส่วนดาวเคราะห์ระบบอื่นที่คาดว่าสิ่งมีชีวิตไม่สามารถอาศัยอยู่ได้จัดเป็นชั้น X "
 "(หรือ NH)"
 
@@ -8864,6 +8866,11 @@ msgid ""
 "1958; consequently, these stars are also used in navigational aids such as "
 "the 2102D Star Finder and Identifier."
 msgstr ""
+"โปรแกรมเสริมนี้จะทำเครื่องหมายดาวช่วยการเดินหนจำนวน 58 ดวง ได้แก่ ดาวโพลาริส "
+"(ดาวเหนือ) และดาวฤกษ์อีก 57 ดวง ซึ่งแสดงไว้ใน <em>The Nautical Almanac</em> "
+"เผยแพร่โดย Her Majesty's Nautical Almanac Office และ US Naval Observatory "
+"ตั้งแต่ ค.ศ. 1958 ดาวเหล่านี้ยังใช้ในเครื่องมือช่วยการเดินหน เช่น 2102D Star "
+"Finder and Identifier"
 
 #: plugins/NavStars/src/NavStars.cpp:120
 msgid "Mark the navigational stars"
@@ -8988,7 +8995,7 @@ msgstr "พิณ"
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1244
 msgid "α-Centaurids"
-msgstr "α-คนครึ่งม้า"
+msgstr "แอลฟาคนครึ่งม้า"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1246
@@ -9048,7 +9055,7 @@ msgstr "นกฟีนิกซ์"
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1268
 msgid "Puppid-Velids"
-msgstr ""
+msgstr "ท้ายเรือ-ใบเรือ"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1270
@@ -9288,7 +9295,7 @@ msgstr "ดาวหาง 1 พี/แฮลลีย์"
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1366
 msgid "Comet 7P/Pons-Winnecke"
-msgstr ""
+msgstr "ดาวหาง 7 พี/ปงส์-วินเนคเคอ"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1368
@@ -9318,7 +9325,7 @@ msgstr ""
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1378
 msgid "Comet 21P/Giacobini-Zinner"
-msgstr ""
+msgstr "ดาวหาง 21 พี/จาโกบีนี-ซินเนอร์"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1380
@@ -9548,7 +9555,7 @@ msgid ""
 msgstr ""
 "อัตราตกสูงสุดรายชั่วโมง (Zenithal Hourly Rate หรือ ZHR) ของฝนดาวตก "
 "คือจำนวนดาวตกที่ผู้สังเกตคนหนึ่งจะเห็นได้ในเวลา 1 ชั่วโมง "
-"ภายใต้สภาวะที่ท้องฟ้าโปร่ง มืดสนิท (ของเขตโชติมาตรเท่ากับ 6.5) "
+"ภายใต้สภาวะที่ท้องฟ้าโปร่ง มืดสนิท (ขอบเขตโชติมาตรเท่ากับ 6.5) "
 "และจุดกระจายอยู่ที่จุดจอมฟ้า ส่วนใหญ่อัตราตกจริงจะต่ำกว่านี้เสมอ "
 "และลดลงตามมุมเงยที่ต่ำลงของจุดกระจาย"
 
