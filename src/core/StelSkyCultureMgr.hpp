@@ -54,7 +54,10 @@ public:
 	//! Gets the default sky culture name from the application's settings,
 	//! sets that sky culture by calling setCurrentSkyCultureID().
 	void init();
-	
+
+	//! Updates the list of available sky cultures.
+	void updateListOfAvailableSkyCultures();
+
 	//! Get the current sky culture.
 	StelSkyCulture getSkyCulture() const {return currentSkyCulture;}
 	

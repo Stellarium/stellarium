@@ -363,6 +363,7 @@ void ViewDialog::setBortleScaleToolTip(int Bindex)
 void ViewDialog::populateLists()
 {
 	// Fill the culture list widget from the available list
+	StelApp::getInstance().getSkyCultureMgr().updateListOfAvailableSkyCultures();
 	QListWidget* l = ui->culturesListWidget;
 	l->blockSignals(true);
 	l->clear();

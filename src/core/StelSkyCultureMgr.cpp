@@ -34,20 +34,7 @@
 
 StelSkyCultureMgr::StelSkyCultureMgr()
 {
-	QSet<QString> cultureDirNames = StelFileMgr::listContents("skycultures",StelFileMgr::Directory);
-	
-	foreach (const QString& dir, cultureDirNames)
-	{
-		QString pdFile = StelFileMgr::findFile("skycultures/" + dir + "/info.ini");
-		if (pdFile.isEmpty())
-		{
-			qWarning() << "WARNING: unable to successfully read info.ini file from skyculture dir" << QDir::toNativeSeparators(dir);
-			return;
-		}
-		QSettings pd(pdFile, StelIniFormat);
-		dirToNameEnglish[dir].englishName = pd.value("info/name").toString();
-		dirToNameEnglish[dir].author = pd.value("info/author").toString();
-	}	
+	updateListOfAvailableSkyCultures();
 }
 
 
@@ -61,6 +48,34 @@ void StelSkyCultureMgr::init()
 {
 	defaultSkyCultureID = StelApp::getInstance().getSettings()->value("localization/sky_culture", "western").toString();
 	setCurrentSkyCultureID(defaultSkyCultureID);
+}
+
+void StelSkyCultureMgr::updateListOfAvailableSkyCultures()
+{
+	QSet<QString> cultureDirNames = StelFileMgr::listContents("skycultures",StelFileMgr::Directory);
+	dirToNameEnglish.clear();
+	foreach (const QString& dir, cultureDirNames)
+	{
+		QString pdFile = StelFileMgr::findFile("skycultures/" + dir + "/info.ini");
+		if (pdFile.isEmpty())
+		{
+			qWarning() << "WARNING: unable to successfully read info.ini file from skyculture dir"
+				   << QDir::toNativeSeparators(dir);
+			return;
+		}
+		QSettings pd(pdFile, StelIniFormat);
+		dirToNameEnglish[dir].englishName = pd.value("info/name").toString();
+		dirToNameEnglish[dir].author = pd.value("info/author").toString();
+	}
+
+	if (!currentSkyCultureDir.isEmpty() && !dirToNameEnglish.contains(currentSkyCultureDir))
+	{
+		if (getCurrentSkyCultureID() == defaultSkyCultureID)
+		{
+			setDefaultSkyCultureID(dirToNameEnglish.firstKey());
+		}
+		setCurrentSkyCultureID(defaultSkyCultureID);
+	}
 }
 
 //! Set the current sky culture from the passed directory
