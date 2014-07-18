@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: Thai for stellarium 0.8.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-07-13 12:59+0700\n"
-"PO-Revision-Date: 2014-07-17 05:52+0000\n"
+"PO-Revision-Date: 2014-07-17 06:06+0000\n"
 "Last-Translator: Worachate Boonplod <Unknown>\n"
 "Language-Team: MicKi Alone <Need24Get@msn.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-07-17 05:54+0000\n"
+"X-Launchpad-Export-Date: 2014-07-18 04:45+0000\n"
 "X-Generator: Launchpad (build 17114)\n"
 "X-Poedit-Country: THAILAND\n"
 "X-Poedit-Language: Thai\n"
@@ -875,6 +875,11 @@ msgid ""
 "Solar Eclipses: -1900 to +3000</em> (2006). This formula is also used in the "
 "solar, lunar and planetary ephemeris program SOLEX."
 msgstr ""
+"สมการโดย F. Espenak และ J. Meeus โดยตั้งอยู่บนผลงานของ Morrison และ "
+"Stephenson (ค.ศ. 2004) ปรับสมการพหุนามให้เข้ากับค่าจริงในตารางตลอดช่วง ค.ศ. "
+"1600-2000 ใช้ใน %1เว็บไซ์ของนาซา%2 และ <em>Five Millennium Canon of Solar "
+"Eclipses: -1900 to +3000</em> (ค.ศ. 2006) สูตรนี้ยังนำไปใช้ในโปรแกรม SOLEX "
+"ซึ่งเป็นโปรแกรมคำนวณอิเฟเมอริสของดวงอาทิตย์ ดวงจันทร์ และดาวเคราะห์ด้วย"
 
 #: src/core/StelCore.cpp:1567
 msgid "Used by default."
@@ -887,6 +892,9 @@ msgid ""
 "published in article <em>Ancient eclipses and dating the fall of "
 "Babylon</em> (%1)."
 msgstr ""
+"สมการโดย B. Banjevic โดยตั้งอยู่บนผลงานของ Stephenson และ Morrison (ค.ศ. "
+"1984) เผยแพร่ในบทความ <em>Ancient eclipses and dating the fall of "
+"Babylon</em> (%1)"
 
 #: src/core/StelCore.cpp:1573
 #, qt-format
@@ -895,6 +903,9 @@ msgid ""
 "Simons (2000), was published in article <em>Error Minimization of Polynomial "
 "Approximation of DeltaT</em> (%1) and revisited by Sana Islam in 2013."
 msgstr ""
+"สมการจาก S. Islam, M. Sadiq และ M. S. Qureshi โดยตั้งอยู่บนผลงานของ Meeus "
+"และ Simons (ค.ศ. 2000) เผยแพร่ในบทความ <em>Error Minimization of Polynomial "
+"Approximation of DeltaT</em> (%1) และปรับปรุงโดย Sana Islam ใน ค.ศ. 2013"
 
 #: src/core/StelCore.cpp:1576
 #, qt-format
@@ -1190,7 +1201,7 @@ msgstr "สัญญาอนุญาต"
 
 #: src/gui/ConfigurationDialog.cpp:831
 msgid "Shortcut"
-msgstr ""
+msgstr "ปุ่มพิมพ์ลัด"
 
 #: src/gui/ConfigurationDialog.cpp:855
 msgid "Running script: "
@@ -8357,10 +8368,12 @@ msgstr ""
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:324
 msgid "Enable display of the potential habitable exoplanets only"
 msgstr ""
+"เปิดการใช้งานเพื่อแสดงดาวเคราะห์ต่างระบบที่คาดว่าสิ่งมีชีวิตสามารถอาศัยอยู่ได"
+"้เท่านั้น"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:326
 msgid "Show exoplanets button on toolbar"
-msgstr "แสดงปุ่มดาวเคราะห์ระบบอื่นบนแถบเครื่องมือ"
+msgstr "แสดงปุ่มดาวเคราะห์ต่างระบบบนแถบเครื่องมือ"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:330
 msgctxt "tab in plugin windows"

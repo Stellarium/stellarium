@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-07-13 12:59+0700\n"
-"PO-Revision-Date: 2013-08-27 21:37+0000\n"
-"Last-Translator: Ieva <emailas@gmail.com>\n"
+"PO-Revision-Date: 2014-07-17 11:00+0000\n"
+"Last-Translator: Mindaugas Pelionis <mindaugas.pelionis@gmail.com>\n"
 "Language-Team: Lithuanian <lt@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-07-14 06:06+0000\n"
-"X-Generator: Launchpad (build 17111)\n"
+"X-Launchpad-Export-Date: 2014-07-18 04:44+0000\n"
+"X-Generator: Launchpad (build 17114)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:107 src/core/modules/StarMgr.cpp:339
 #: src/core/modules/GridLinesMgr.cpp:695 src/core/modules/LandscapeMgr.cpp:353
@@ -239,7 +239,7 @@ msgstr "Neaprašytas tipas"
 
 #: src/core/modules/NebulaMgr.cpp:126
 msgid "Deep-sky objects"
-msgstr ""
+msgstr "Tolimojo kosmoso objektai"
 
 #: src/core/modules/Planet.cpp:158 src/core/modules/MinorPlanet.cpp:235
 #: src/core/modules/MinorPlanet.cpp:239 src/core/modules/Comet.cpp:173
@@ -263,12 +263,12 @@ msgstr "Nuotolis: %1AU (%2 km)"
 #: src/core/modules/Comet.cpp:210
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 Mio km)"
-msgstr ""
+msgstr "Atstumas: %1 av (%2 mln. km)"
 
 #: src/core/modules/Planet.cpp:199
 #, qt-format
 msgid "Apparent diameter: %1, with rings: %2"
-msgstr ""
+msgstr "Regimasis diametras: %1, su žiedais: %2"
 
 #: src/core/modules/Planet.cpp:205 src/core/modules/MinorPlanet.cpp:267
 #, qt-format
@@ -300,17 +300,17 @@ msgstr ""
 #: src/core/modules/Planet.cpp:228
 #, qt-format
 msgid "Elongation: %1"
-msgstr ""
+msgstr "Elongacija: %1"
 
 #: src/core/modules/Planet.cpp:229
 #, qt-format
 msgid "Phase: %1"
-msgstr ""
+msgstr "Fazė: %1"
 
 #: src/core/modules/Planet.cpp:230
 #, qt-format
 msgid "Illuminated: %1%"
-msgstr ""
+msgstr "Apšviesta: %1%"
 
 #: src/core/modules/MinorPlanet.cpp:208
 #, qt-format
@@ -320,17 +320,17 @@ msgstr ""
 #: src/core/modules/Comet.cpp:186
 #, no-c-format, qt-format
 msgid "Distance from Sun: %1AU (%2 km)"
-msgstr ""
+msgstr "Atstumas nuo Saulės: %1 av (%2 km)"
 
 #: src/core/modules/Comet.cpp:193
 #, no-c-format, qt-format
 msgid "Distance from Sun: %1AU (%2 Mio km)"
-msgstr ""
+msgstr "Atstumas nuo Saulės: %1 av (%2 mln. km)"
 
 #: src/core/modules/Comet.cpp:217
 #, no-c-format, qt-format
 msgid "Speed: %1 km/s"
-msgstr ""
+msgstr "Greitis: %1 km/s"
 
 #: src/core/modules/SolarSystem.cpp:156
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:308
@@ -377,7 +377,7 @@ msgstr ""
 
 #: src/core/modules/StarWrapper.cpp:153
 msgid "eclipsing binary system"
-msgstr ""
+msgstr "užtemdomoji dvinarė sistema"
 
 #: src/core/modules/StarWrapper.cpp:157
 msgid "variable star"
@@ -385,12 +385,12 @@ msgstr "kintamoji žvaigždė"
 
 #: src/core/modules/StarWrapper.cpp:161
 msgid "double star"
-msgstr "dvinarė žvaigždė"
+msgstr "dviguba žvaigždė"
 
 #: src/core/modules/StarWrapper.cpp:168
 #, qt-format
 msgid "Type: <b>%1, %2</b>"
-msgstr ""
+msgstr "Tipas: <b>%1, %2</b>"
 
 #: src/core/modules/StarWrapper.cpp:207
 #, qt-format
