@@ -48,7 +48,6 @@ bool AOScript::installFromFile(const QString& idInstall,
 
 	if (!QFile(downloadFilepath).copy(m_sScriptInstallDir % idInstall % "." % suffix))
 	{
-
 		qWarning() << "Add-On Script: Unable to install" << idInstall;
 		return false;
 	}
@@ -59,5 +58,26 @@ bool AOScript::installFromFile(const QString& idInstall,
 
 bool AOScript::uninstallAddOn(const QString &idInstall) const
 {
+	QFile ssc(m_sScriptInstallDir % idInstall % ".ssc");
+	QFile sts(m_sScriptInstallDir % idInstall % ".sts");
+	bool removed = true;
+
+	if (ssc.exists())
+	{
+		removed = ssc.remove();
+	}
+	else if (sts.exists())
+	{
+		removed = sts.remove();
+	}
+
+	if (!removed)
+	{
+		qWarning() << "Add-On Scripts : Error! " << idInstall
+			   << "could not be removed. ";
+		return false;
+	}
+
+	qDebug() << "Add-On Scripts : Successfully removed" << idInstall;
 	return true;
 }
