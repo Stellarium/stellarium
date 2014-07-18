@@ -449,6 +449,19 @@
              </spacer>
             </item>
             <item>
+             <widget class="QPushButton" name="ipQueryPushButton">
+              <property name="minimumSize">
+               <size>
+                <width>30</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>IP Query</string>
+              </property>
+             </widget>
+            </item>
+            <item>
              <widget class="QPushButton" name="deleteLocationFromListPushButton">
               <property name="enabled">
                <bool>false</bool>

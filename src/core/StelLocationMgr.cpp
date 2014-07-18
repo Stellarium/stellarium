@@ -25,6 +25,13 @@
 #include <QDebug>
 #include <QFile>
 #include <QDir>
+#include <QtNetwork/QNetworkInterface>
+#include <QtNetwork/QNetworkAccessManager>
+#include <QEventLoop>
+#include <QNetworkRequest>
+#include <QNetworkReply>
+#include <QUrl>
+#include <QUrlQuery>
 
 StelLocationMgr::StelLocationMgr()
 {
@@ -306,4 +313,100 @@ bool StelLocationMgr::deleteUserLocation(const QString& id)
 
 	sourcefile.close();
 	return true;
+}
+
+
+//! check if there is an IP connection.
+//  Along the lines of
+//  http://karanbalkar.com/2014/02/detect-internet-connection-using-qt-5-framework/
+//#define DEBUG 1
+bool StelLocationMgr::ipConnectionExists() const
+{
+    QList<QNetworkInterface> ifaces = QNetworkInterface::allInterfaces();
+    bool connectionExists = false;
+
+    for (int i = 0; i < ifaces.count(); i++) {
+
+        QNetworkInterface iface = ifaces.at(i);
+        if ( iface.flags().testFlag(QNetworkInterface::IsUp)
+             && !iface.flags().testFlag(QNetworkInterface::IsLoopBack)) {
+
+#ifdef DEBUG
+            // details of connection
+            qDebug() << "name:" << iface.name() << endl
+                     << "mac:" << iface.hardwareAddress() << endl
+                     << "ip addresses:" << endl;
+#endif
+                for (int j=0; j<iface.addressEntries().count(); j++) {
+#ifdef DEBUG
+                qDebug() << iface.addressEntries().at(j).ip().toString()
+                         << " / " << iface.addressEntries().at(j).netmask().toString() << endl;
+#endif
+                // got an interface which is up, and has an ip address
+                if (connectionExists == false)
+                    connectionExists = true;
+            }
+        }
+    }
+    return connectionExists;
+}
+
+//! lookup location from IP address.
+//  Along the lines of:
+// http://karanbalkar.com/2014/02/sending-a-http-request-using-qt-5-framework/
+const StelLocation StelLocationMgr::locationFromIP()
+{
+// create custom temporary event loop on stack
+    QEventLoop eventLoop;
+
+    // "quit()" the event-loop, when the network request "finished()"
+    QNetworkAccessManager mgr;
+    QObject::connect(&mgr, SIGNAL(finished(QNetworkReply*)), &eventLoop, SLOT(quit()));
+
+    // the HTTP request
+    QNetworkRequest req( QUrl( QString("http://freegeoip.net/csv/") ) );
+    QNetworkReply *reply = mgr.get(req);
+    eventLoop.exec(); // blocks stack until "finished()" has been called
+
+    StelLocation location;
+    if (reply->error() == QNetworkReply::NoError) {
+        //success
+        QByteArray answer=reply->readAll();
+        qDebug() << "Success: read CSV for approximate IP-based location: \n\t" << answer;
+        // TODO: parse answer (CSV string), fill location
+
+        const QStringList& splitline = QString(answer).split(",");
+        float latitude=splitline.at(7).mid(1, splitline.at(7).length()-2).toFloat();
+        float longitude=splitline.at(8).mid(1, splitline.at(8).length()-2).toFloat();
+        // answer/splitline example: "222.222.222.222","AT","Austria","","","","","47.3333","13.3333","",""
+        // The parts from freegeoip are: ip,country_code,country_name,region_code,region_name,city,zipcode,latitude,longitude,metro_code,area_code
+        QString locLine= // we re-pack into a new line that will be parsed back by StelLocation...
+                QString("%1\t%2\t%3\t%4\t%5\t%6\t%7\t0")
+                    .arg(splitline.at(5).length()>2 ? splitline.at(5).mid(1, splitline.at(5).length()-2)  : QString("IP%1").arg(splitline.at(0).mid(1, splitline.at(0).length()-2)))
+                    .arg(splitline.at(4).length()>2 ? splitline.at(4).mid(1, splitline.at(4).length()-2)  : "IPregion")
+                    .arg(splitline.at(2).length()>2 ? splitline.at(2).mid(1, splitline.at(2).length()-2) : "IPcountry") // country
+                    .arg("X") // role: X=user-defined
+                    .arg(0)   // population: unknown
+                    .arg(latitude<0 ? QString("%1S").arg(-latitude, 0, 'f', 6) : QString("%1N").arg(latitude, 0, 'f', 6))
+                    .arg(longitude<0 ? QString("%1W").arg(-longitude, 0, 'f', 6) : QString("%1E").arg(longitude, 0, 'f', 6));
+                    //.arg(0); // altitude: unknown
+                    //.arg(bortleScaleIndex)
+                    //.arg("")		// Reserve for time zone
+                    //.arg(planetName) // will be set to Earth by default anyway.
+                    //.arg(landscapeKey); // we don't have that here...
+
+        qDebug() << "locLine: " << locLine;
+
+        location=StelLocation::createFromLine(locLine);
+
+    }
+    else {
+        //failure
+        qDebug() << "Failure getting IP-based location: \n\t" <<reply->errorString();
+    }
+
+
+
+    delete reply;
+    return location;
 }

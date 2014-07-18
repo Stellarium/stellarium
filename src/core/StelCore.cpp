@@ -114,7 +114,14 @@ void StelCore::init()
 	defaultLocationID = conf->value("init_location/location","error").toString();
 	bool ok;
 	StelLocationMgr* locationMgr = &StelApp::getInstance().getLocationMgr();
-	StelLocation location = locationMgr->locationForString(defaultLocationID);
+	StelLocation location;
+	if (conf->value("init_location/use_ip_geolocation_if_available", "false").toBool()
+			&& locationMgr->ipConnectionExists())
+	{
+		location=locationMgr->locationFromIP();
+	}
+
+	else location = locationMgr->locationForString(defaultLocationID);
 	if (!location.isValid())
 	{
 		qWarning() << "Warning: location" << defaultLocationID << "is unknown.";

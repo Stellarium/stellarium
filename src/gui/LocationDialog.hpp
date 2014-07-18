@@ -97,6 +97,9 @@ private slots:
 	
 	//! Called when the user clicks on the delete button
 	void deleteCurrentLocationFromList();
+
+	//! called when the user clicks on the IP Query button
+	void ipQueryLocation();
 	
 	//! Called when the user wants to use the current location as default
 	void setDefaultLocation();
