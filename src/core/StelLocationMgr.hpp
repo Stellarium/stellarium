@@ -70,6 +70,12 @@ public:
 	//! @param id the location ID
 	bool deleteUserLocation(const QString& id);
 
+	// GZ 201407 blueprint: find location via IP lookup
+	//! check if there is an IP connection
+	bool ipConnectionExists() const;
+	//! find location via online lookup of IP address
+	const StelLocation locationFromIP();
+
 private:
 	void generateBinaryLocationFile(const QString& txtFile, bool isUserLocation, const QString& binFile) const;
 
@@ -84,6 +90,7 @@ private:
 	QMap<QString, StelLocation> locations;
 	
 	StelLocation lastResortLocation;
+
 };
 
 #endif // _STELLOCATIONMGR_HPP_

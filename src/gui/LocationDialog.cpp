@@ -41,6 +41,7 @@
 #include <QTimer>
 #include <QStringListModel>
 
+#include <QMessageBox>
 LocationDialog::LocationDialog(QObject* parent) : StelDialog(parent), isEditingNew(false)
 {
 	ui = new Ui_locationDialogForm;
@@ -100,6 +101,7 @@ void LocationDialog::createDialogContent()
 
 	connect(ui->addLocationToListPushButton, SIGNAL(clicked()), this, SLOT(addCurrentLocationToList()));
 	connect(ui->deleteLocationFromListPushButton, SIGNAL(clicked()), this, SLOT(deleteCurrentLocationFromList()));
+	connect(ui->ipQueryPushButton, SIGNAL(clicked()), this, SLOT(ipQueryLocation()));
 
 	StelCore* core = StelApp::getInstance().getCore();
 	const StelLocation& currentLocation = core->getCurrentLocation();
@@ -235,7 +237,7 @@ void LocationDialog::setFieldsFromLocation(const StelLocation& loc)
 // Update the map for the given location.
 void LocationDialog::setMapForLocation(const StelLocation& loc)
 {
-	// Avoids usless processing
+	// Avoids useless processing
 	if (lastPlanet==loc.planetName)
 		return;
 
@@ -486,4 +488,20 @@ void LocationDialog::updateDefaultLocationControls(bool currentIsDefault)
 	ui->useAsDefaultLocationCheckBox->setChecked(currentIsDefault);
 	ui->useAsDefaultLocationCheckBox->setEnabled(!currentIsDefault);
 	ui->pushButtonReturnToDefault->setEnabled(!currentIsDefault);
+}
+
+// called when the user clicks on the IP Query button
+void LocationDialog::ipQueryLocation()
+{
+	StelLocationMgr &locMgr=StelApp::getInstance().getLocationMgr();
+	if (locMgr.ipConnectionExists())
+	{
+		StelLocation loc = locMgr.locationFromIP();
+		StelApp::getInstance().getCore()->moveObserverTo(loc, 0.0, 0.0);
+		//Update the position of the map pointer and GUI fields.
+		setFieldsFromLocation(loc);
+		ui->mapLabel->setCursorPos(loc.longitude, loc.latitude);
+	}
+	else
+		QMessageBox::warning(0, "Stellarium", q_("IP query for location failed. Are you offline?"));
 }
