@@ -38,33 +38,22 @@ QStringList AOScript::checkInstalledAddOns() const
 bool AOScript::installFromFile(const QString& idInstall,
 			       const QString& downloadFilepath) const
 {
-	QZipReader reader(downloadFilepath);
-	if (reader.status() != QZipReader::NoError)
+	QString suffix = QFileInfo(downloadFilepath).suffix();
+	if (suffix != ".ssc" && suffix != ".sts")
 	{
-		qWarning() << "Add-On Script: Unable to open the ZIP archive:"
-			   << QDir::toNativeSeparators(downloadFilepath);
+		qWarning() << "Add-On Script: Unable to intall" << idInstall
+			   << "The found file is not a .ssc or .sts";
 		return false;
 	}
 
-	QList<QZipReader::FileInfo> infoList = reader.fileInfoList();
-	foreach(QZipReader::FileInfo info, infoList)
+	if (!QFile(downloadFilepath).copy(m_sScriptInstallDir % idInstall % "." % suffix))
 	{
-		if (!info.isFile)
-		{
-			continue;
-		}
 
-		QString installedFilePath = m_sScriptInstallDir % info.filePath;
-		QFile(installedFilePath).remove();
-
-		QByteArray data = reader.fileData(info.filePath);
-		QFile out(installedFilePath);
-		out.open(QIODevice::WriteOnly);
-		out.write(data);
-		out.close();
-
-		qWarning() << "Add-On Script: New script installed:" << info.filePath;
+		qWarning() << "Add-On Script: Unable to install" << idInstall;
+		return false;
 	}
+
+	qDebug() << "Add-On Script: New script installed:" << idInstall;
 	return true;
 }
 
