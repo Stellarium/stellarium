@@ -194,6 +194,10 @@ public:
 	//! @return the path to the locale directory or "" if the locale directory could not be found.
 	static QString getLocaleDir();
 
+	//! get the user directory for locate files (i18n)
+	//! @return the path to the locale user directory or "" if the locale directory could not be found.
+	static QString getLocaleUserDir();
+
 private:
 
 	//! No one can create an instance.

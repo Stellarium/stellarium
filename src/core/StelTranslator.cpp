@@ -52,8 +52,11 @@ StelTranslator::StelTranslator(const QString& adomain, const QString& alangName)
 	: domain(adomain),
 	  langName(alangName)
 {
+	QString localePath("/"+adomain+"/"+getTrueLocaleName()+".qm");
 	translator = new QTranslator();
-	bool res = translator->load(StelFileMgr::getLocaleDir()+"/"+adomain+"/"+getTrueLocaleName()+".qm");
+	bool res = translator->load(StelFileMgr::getLocaleUserDir() + localePath);
+	if (!res)
+		res = translator->load(StelFileMgr::getLocaleDir() + localePath);
 	if (!res)
 		qWarning() << "Couldn't load translations for language " << getTrueLocaleName();
 	if (translator->isEmpty())
@@ -137,10 +140,18 @@ QString StelTranslator::nativeNameToIso639_1Code(const QString& languageName)
 }
 
 //! Get available native language names from directory tree
-QStringList StelTranslator::getAvailableLanguagesNamesNative(const QString& localeDir) const
+QStringList StelTranslator::getAvailableLanguagesNamesNative() const
 {
-	QString tmpDir = localeDir;
-	QStringList codeList = getAvailableIso639_1Codes(tmpDir);
+	QStringList codeList = getAvailableIso639_1Codes(StelFileMgr::getLocaleDir());
+
+	QString localeUserDir = StelFileMgr::getLocaleUserDir();
+	if (QDir(localeUserDir+"/stellarium/").exists())
+	{
+		QStringList codeUserList = getAvailableIso639_1Codes(localeUserDir);
+		codeList += codeUserList;
+		codeList.removeDuplicates();
+	}
+
 	QStringList output;
 	foreach (const QString& lang, codeList)
 	{

@@ -143,7 +143,7 @@ void ConfigurationDialog::createDialogContent()
 	// Fill the language list widget from the available list
 	QComboBox* cb = ui->programLanguageComboBox;
 	cb->clear();
-	cb->addItems(StelTranslator::globalTranslator->getAvailableLanguagesNamesNative(StelFileMgr::getLocaleDir()));
+	cb->addItems(StelTranslator::globalTranslator->getAvailableLanguagesNamesNative());
 	cb->model()->sort(0);
 	updateCurrentLanguage();
 	connect(cb->lineEdit(), SIGNAL(editingFinished()), this, SLOT(updateCurrentLanguage()));

@@ -82,8 +82,8 @@ public:
 	//! Used as a global translator by the whole app
 	static StelTranslator* globalTranslator;
 
-	//! Get available language name in native language from passed locales directory
-	QStringList getAvailableLanguagesNamesNative(const QString& localeDir="") const;	
+	//! Get available language name in native language
+	QStringList getAvailableLanguagesNamesNative() const;
 
 	//! Convert from ISO639-1 langage code to native language name
 	//! @param languageCode the code to look up
