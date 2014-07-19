@@ -318,37 +318,21 @@ bool StelLocationMgr::deleteUserLocation(const QString& id)
 	return true;
 }
 
-
 //! check if there is an IP connection.
-//  Along the lines of
-//  http://karanbalkar.com/2014/02/detect-internet-connection-using-qt-5-framework/
-//#define DEBUG 1
 bool StelLocationMgr::ipConnectionExists() const
 {
     QList<QNetworkInterface> ifaces = QNetworkInterface::allInterfaces();
     bool connectionExists = false;
 
-    for (int i = 0; i < ifaces.count(); i++) {
-
+    for (int i = 0; i < ifaces.count(); i++)
+    {
         QNetworkInterface iface = ifaces.at(i);
         if ( iface.flags().testFlag(QNetworkInterface::IsUp)
-             && !iface.flags().testFlag(QNetworkInterface::IsLoopBack)) {
-
-#ifdef DEBUG
-            // details of connection
-            qDebug() << "name:" << iface.name() << endl
-                     << "mac:" << iface.hardwareAddress() << endl
-                     << "ip addresses:" << endl;
-#endif
-                for (int j=0; j<iface.addressEntries().count(); j++) {
-#ifdef DEBUG
-                qDebug() << iface.addressEntries().at(j).ip().toString()
-                         << " / " << iface.addressEntries().at(j).netmask().toString() << endl;
-#endif
+             && !iface.flags().testFlag(QNetworkInterface::IsLoopBack))
+        {
+            for (int j=0; j<iface.addressEntries().count(); j++)
                 // got an interface which is up, and has an ip address
-                if (connectionExists == false)
-                    connectionExists = true;
-            }
+                if (!connectionExists) connectionExists = true;
         }
     }
     return connectionExists;
@@ -375,8 +359,7 @@ const StelLocation StelLocationMgr::locationFromIP()
     if (reply->error() == QNetworkReply::NoError) {
         //success
         QByteArray answer=reply->readAll();
-        qDebug() << "Success: read CSV for approximate IP-based location: \n\t" << answer;
-        // TODO: parse answer (CSV string), fill location
+        //qDebug() << "Success: read CSV for approximate IP-based location: \n\t" << answer;
 
         const QStringList& splitline = QString(answer).split(",");
         float latitude=splitline.at(7).mid(1, splitline.at(7).length()-2).toFloat();
@@ -392,40 +375,42 @@ const StelLocation StelLocationMgr::locationFromIP()
                     .arg(0)   // population: unknown
                     .arg(latitude<0 ? QString("%1S").arg(-latitude, 0, 'f', 6) : QString("%1N").arg(latitude, 0, 'f', 6))
                     .arg(longitude<0 ? QString("%1W").arg(-longitude, 0, 'f', 6) : QString("%1E").arg(longitude, 0, 'f', 6));
-                    //.arg(0); // altitude: unknown
-                    //.arg(bortleScaleIndex)
-                    //.arg("")		// Reserve for time zone
-                    //.arg(planetName) // will be set to Earth by default anyway.
-                    //.arg(landscapeKey); // we don't have that here...
-
-        qDebug() << "locLine: " << locLine;
-
         location=StelLocation::createFromLine(locLine);
-
     }
     else {
-        //failure
         qDebug() << "Failure getting IP-based location: \n\t" <<reply->errorString();
     }
-
-
-
     delete reply;
     return location;
 }
 
-void StelLocationMgr::pickLocationsNearby(const float longitude, const float latitude, const float radiusDegrees)
+void StelLocationMgr::pickLocationsNearby(const QString planetName, const float longitude, const float latitude, const float radiusDegrees)
 {
     pickedLocations.clear();
     QMapIterator<QString, StelLocation> iter(locations);
-    while (iter.hasNext()){
+    while (iter.hasNext())
+    {
         iter.next();
         StelLocation loc=iter.value();
-        if (StelLocation::distanceDegrees(longitude, latitude, loc.longitude, loc.latitude) <= radiusDegrees)
+        if ( (loc.planetName == planetName) &&
+             (StelLocation::distanceDegrees(longitude, latitude, loc.longitude, loc.latitude) <= radiusDegrees) )
         {
-            qDebug() << "Near location: " << iter.key();
             pickedLocations.insert(iter.key(), iter.value());
         }
+    }
+    modelPickedLocation->setStringList(pickedLocations.keys());
+}
+
+void StelLocationMgr::pickLocationsInCountry(const QString country)
+{
+    qDebug() << "pickLocationsInCountry(): " << country ;
+    pickedLocations.clear();
+    QMapIterator<QString, StelLocation> iter(locations);
+    while (iter.hasNext())
+    {
+        iter.next();
+        StelLocation loc=iter.value();
+        if (loc.country == country) pickedLocations.insert(iter.key(), iter.value());
     }
     modelPickedLocation->setStringList(pickedLocations.keys());
 }
