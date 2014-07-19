@@ -11,14 +11,14 @@ msgstr ""
 "Project-Id-Version: ca\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-07-13 12:59+0700\n"
-"PO-Revision-Date: 2014-03-05 21:22+0000\n"
+"PO-Revision-Date: 2014-07-17 17:11+0000\n"
 "Last-Translator: Daniel Alomar i Claramonte <daniel.adastra@gmail.com>\n"
 "Language-Team: Català <ca@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-07-14 05:54+0000\n"
-"X-Generator: Launchpad (build 17111)\n"
+"X-Launchpad-Export-Date: 2014-07-18 04:44+0000\n"
+"X-Generator: Launchpad (build 17114)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:107 src/core/modules/StarMgr.cpp:339
 #: src/core/modules/GridLinesMgr.cpp:695 src/core/modules/LandscapeMgr.cpp:353
@@ -197,7 +197,7 @@ msgstr ""
 #: src/core/modules/Nebula.cpp:125
 #, qt-format
 msgid "Surface brightness: <b>%1</b>"
-msgstr ""
+msgstr "Brillantor de la superfície: <b>%1</b>"
 
 #: src/core/modules/Nebula.cpp:131
 #, qt-format
@@ -1242,7 +1242,7 @@ msgstr "Llicència"
 
 #: src/gui/ConfigurationDialog.cpp:831
 msgid "Shortcut"
-msgstr ""
+msgstr "Drecera"
 
 #: src/gui/ConfigurationDialog.cpp:855
 msgid "Running script: "
@@ -1783,7 +1783,7 @@ msgstr "Ràtio normal"
 
 #: src/gui/ViewDialog.cpp:586
 msgid "Standard Orionids rate"
-msgstr ""
+msgstr "Taxa Oriònides estàndard"
 
 #: src/gui/ViewDialog.cpp:589
 msgid "Standard Perseids rate"
@@ -1791,11 +1791,11 @@ msgstr "Ràtio de Perseides estàndard"
 
 #: src/gui/ViewDialog.cpp:592
 msgid "Standard Geminids rate"
-msgstr ""
+msgstr "Taxa Gemínides estàndard"
 
 #: src/gui/ViewDialog.cpp:595
 msgid "Exceptional Perseid rate"
-msgstr ""
+msgstr "Taxa Perseides excepcional"
 
 #: src/gui/ViewDialog.cpp:598
 msgid "Meteor storm rate"
@@ -1803,7 +1803,7 @@ msgstr "Rati de la tempesta de meteors"
 
 #: src/gui/ViewDialog.cpp:601
 msgid "Exceptional Draconid rate"
-msgstr ""
+msgstr "Taxa Dracònides excepcional"
 
 #: src/gui/ViewDialog.cpp:604
 msgid "Exceptional Leonid rate"
@@ -1811,11 +1811,11 @@ msgstr "Ràtio de Leònides excepcional"
 
 #: src/gui/ViewDialog.cpp:607
 msgid "Very high rate (1966 Leonids)"
-msgstr ""
+msgstr "Taxa molt alta (1966 Leònides)"
 
 #: src/gui/ViewDialog.cpp:610
 msgid "Highest rate ever (1833 Leonids)"
-msgstr ""
+msgstr "Taxa mes elevada (1833 Leònides)"
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:112
 msgid "Select a ZIP archive that contains a Stellarium landscape"
@@ -2339,7 +2339,7 @@ msgstr "Makemake"
 #. TRANSLATORS: Asteroid (3200) Phaethon
 #: src/translations.h:139
 msgid "Phaethon"
-msgstr ""
+msgstr "Faetó"
 
 #. TRANSLATORS: Asteroid (1866) Sisyphus
 #: src/translations.h:141
@@ -2377,21 +2377,21 @@ msgstr ""
 #. TRANSLATORS: Asteroid (951) Gaspra
 #: src/translations.h:153
 msgid "Gaspra"
-msgstr ""
+msgstr "Gaspra"
 
 #. TRANSLATORS: Asteroid (243) Ida
 #: src/translations.h:155
 msgid "Ida"
-msgstr ""
+msgstr "Ida"
 
 #. TRANSLATORS: Asteroid (218) Bianca
 #: src/translations.h:157
 msgid "Bianca"
-msgstr ""
+msgstr "Bianca"
 
 #: src/translations.h:158
 msgid "Bianca (moon)"
-msgstr ""
+msgstr "Bianca (lluna)"
 
 #. TRANSLATORS: Proper name of comet C/1680 V1
 #: src/translations.h:161
@@ -2660,7 +2660,7 @@ msgstr "Events de la Terra des de Mercuri"
 #. TRANSLATORS: Name and description of script
 #: src/translations.h:280
 msgid "Earth Events from a floating city on Venus"
-msgstr ""
+msgstr "Esdeveniments de la Terra des d'una ciutat flotant a Venus"
 
 #. TRANSLATORS: Name and description of script
 #: src/translations.h:282
@@ -2670,12 +2670,14 @@ msgstr "Events de la Terra des de Mart"
 #. TRANSLATORS: Name of script
 #: src/translations.h:284
 msgid "Earth and Venus Greatest Elongations and Brilliancies from Mars"
-msgstr ""
+msgstr "Elongacions i fulgors més grans de la Terra i Venus des de Mart"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:286
 msgid "Earth and Mars Greatest Elongations and Transits from Callisto"
 msgstr ""
+"Copiar text Elongacions més grans de la Terra i Mart i trànsits des de "
+"Calisto"
 
 #. TRANSLATORS: Description of the landscape tour script.
 #: src/translations.h:292
@@ -2780,6 +2782,8 @@ msgstr ""
 msgid ""
 "Screensaver of various happenings in the Solar System. 232 events in all!"
 msgstr ""
+"Salvapantalles de diversos esdeveniments en el Sistema Solar. 232 "
+"esdeveniments en total!"
 
 #: src/translations.h:308
 msgid "A tour of the western constellations."
@@ -2820,6 +2824,7 @@ msgstr ""
 msgid ""
 "Earth and Venus Greatest Elongations and Brilliancies from Mars 2000-3000"
 msgstr ""
+"Elongacions i fulgors mes grans de la Terra i Venus des de Mart 2000-3000"
 
 #: src/translations.h:315
 msgid ""
@@ -2828,6 +2833,10 @@ msgid ""
 "Jupiter's radiation belt. Therefore, if humans ever colonize Jupiter's "
 "moons, Callisto will be the one."
 msgstr ""
+"Elongacions més grans de la Terra i trànsits de Calisto 2000-3000. Per què "
+"Calisto? Bé, de les 4 llunes galileanes, Calisto és l'única fora del cinturó "
+"de radiació de Júpiter. Per tant, si els éssers humans alguna vegada "
+"colonitzen les llunes de Júpiter, Calisto serà l'elegida."
 
 #: src/translations.h:319
 msgid "Andorra"
@@ -3904,6 +3913,8 @@ msgstr "Ubicació"
 msgid ""
 "Standard list of locations contains only English names (without diacritics!)"
 msgstr ""
+"Llista estàndard de llocs que contenen noms només en anglès (sense "
+"diacrítics!)"
 
 #: src/ui_locationDialogGui.h:404
 msgid "Current location information"
@@ -4274,7 +4285,7 @@ msgstr "Adaptació de l'ull dinàmica"
 
 #: src/ui_viewDialog.h:1196
 msgid "Settings for sporadic meteors"
-msgstr ""
+msgstr "Ajustaments per a meteors esporàdics"
 
 #: src/ui_viewDialog.h:1198
 msgid "Shooting Stars"
