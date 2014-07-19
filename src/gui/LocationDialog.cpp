@@ -102,6 +102,7 @@ void LocationDialog::createDialogContent()
 	connect(ui->addLocationToListPushButton, SIGNAL(clicked()), this, SLOT(addCurrentLocationToList()));
 	connect(ui->deleteLocationFromListPushButton, SIGNAL(clicked()), this, SLOT(deleteCurrentLocationFromList()));
 	connect(ui->ipQueryPushButton, SIGNAL(clicked()), this, SLOT(ipQueryLocation()));
+	connect(ui->resetListPushButton, SIGNAL(clicked()), this, SLOT(resetCompleteList()));
 
 	StelCore* core = StelApp::getInstance().getCore();
 	const StelLocation& currentLocation = core->getCurrentLocation();
@@ -360,6 +361,13 @@ void LocationDialog::setPositionFromMap(double longitude, double latitude)
 	loc.longitude = longitude;
 	setFieldsFromLocation(loc);
 	StelApp::getInstance().getCore()->moveObserverTo(loc, 0.);
+	// GZ NEW: filter location list for nearby cities.
+	StelApp::getInstance().getLocationMgr().pickLocationsNearby(longitude, latitude, 3.0f);
+	QSortFilterProxyModel *proxyModel = new QSortFilterProxyModel(this);
+	proxyModel->setSourceModel((QAbstractItemModel*)StelApp::getInstance().getLocationMgr().getModelPicked());
+	proxyModel->sort(0, Qt::AscendingOrder);
+	proxyModel->setFilterCaseSensitivity(Qt::CaseInsensitive);
+	ui->citiesListView->setModel(proxyModel);
 }
 
 // Called when the planet name is changed by hand
@@ -504,4 +512,14 @@ void LocationDialog::ipQueryLocation()
 	}
 	else
 		QMessageBox::warning(0, "Stellarium", q_("IP query for location failed. Are you offline?"));
+}
+
+// called when user clicks "reset list"
+void LocationDialog::resetCompleteList()
+{
+	QSortFilterProxyModel *proxyModel = new QSortFilterProxyModel(this);
+	proxyModel->setSourceModel((QAbstractItemModel*)StelApp::getInstance().getLocationMgr().getModelAll());
+	proxyModel->sort(0, Qt::AscendingOrder);
+	proxyModel->setFilterCaseSensitivity(Qt::CaseInsensitive);
+	ui->citiesListView->setModel(proxyModel);
 }

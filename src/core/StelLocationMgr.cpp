@@ -43,6 +43,7 @@ StelLocationMgr::StelLocationMgr()
 
 	modelAllLocation = new QStringListModel(this);
 	modelAllLocation->setStringList(locations.keys());
+	modelPickedLocation = new QStringListModel(this); // keep empty for now.
 	
 	// Init to Paris France because it's the center of the world.
 	lastResortLocation = locationForString("Paris, France");
@@ -151,6 +152,8 @@ QMap<QString, StelLocation> StelLocationMgr::loadCities(const QString& fileName,
 
 StelLocationMgr::~StelLocationMgr()
 {
+	delete modelPickedLocation;
+	delete modelAllLocation;
 }
 
 static float parseAngle(const QString& s, bool* ok)
@@ -409,4 +412,20 @@ const StelLocation StelLocationMgr::locationFromIP()
 
     delete reply;
     return location;
+}
+
+void StelLocationMgr::pickLocationsNearby(const float longitude, const float latitude, const float radiusDegrees)
+{
+    pickedLocations.clear();
+    QMapIterator<QString, StelLocation> iter(locations);
+    while (iter.hasNext()){
+        iter.next();
+        StelLocation loc=iter.value();
+        if (StelLocation::distanceDegrees(longitude, latitude, loc.longitude, loc.latitude) <= radiusDegrees)
+        {
+            qDebug() << "Near location: " << iter.key();
+            pickedLocations.insert(iter.key(), iter.value());
+        }
+    }
+    modelPickedLocation->setStringList(pickedLocations.keys());
 }
