@@ -7,7 +7,7 @@
 # using install_name_tool. It copies over all resources needed. It then updates the stellarium binary itself (the load paths).
 #
 # Copyright (C) 2013 Timothy Reaves
-
+# Copyright (C) 2014 Alexander Wolf
 
 import os
 import shutil
@@ -110,6 +110,9 @@ def processFrameworks():
 	allFramework = []
 	# First, copy over the stellarium dependencies
 	frameworks = getListOfLinkedQtFrameworksForFile(os.path.join(installDirectory, 'MacOS/stellarium'))
+	# QtMultimedia?
+	if 'QtMultimedia' in ' '.join(frameworks):
+		frameworks.append(frameworks[-1].replace('QtMultimedia','QtMultimediaWidgets'))
 	for framework in frameworks:
 		copyFrameworkToApp(framework)
 		allFramework.append(framework)
@@ -152,6 +155,10 @@ def processPlugins():
 	copyPluginDirectory('imageformats')
 	copyPluginDirectory('iconengines')
 	copyPluginDirectory('qmltooling')
+	# check multimedia support
+	if 'QtMultimedia' in ' '.join(getListOfLinkedQtFrameworksForFile(os.path.join(installDirectory, 'MacOS/stellarium'))):
+		copyPluginDirectory('mediaservice')
+		copyPluginDirectory('audio')
 
 	# copy over the Cocoa platform plugin; we do  single one here, as we do not want every platform
 	os.mkdir(os.path.join(pluginsDirectory, 'platforms'))
