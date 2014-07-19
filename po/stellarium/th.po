@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: Thai for stellarium 0.8.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-07-13 12:59+0700\n"
-"PO-Revision-Date: 2014-07-17 06:06+0000\n"
+"PO-Revision-Date: 2014-07-19 02:39+0000\n"
 "Last-Translator: Worachate Boonplod <Unknown>\n"
 "Language-Team: MicKi Alone <Need24Get@msn.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-07-18 04:45+0000\n"
+"X-Launchpad-Export-Date: 2014-07-19 05:40+0000\n"
 "X-Generator: Launchpad (build 17114)\n"
 "X-Poedit-Country: THAILAND\n"
 "X-Poedit-Language: Thai\n"
@@ -696,6 +696,10 @@ msgid ""
 "relation was also implicitly adopted in the syzygy tables of Goldstine "
 "(1973)."
 msgstr ""
+"ตารางของ Tuckerman (ค.ศ. 1962, 1964) แสดงตำแหน่งดวงอาทิตย์ ดวงจันทร์ "
+"และดาวเคราะห์ ทุก 5 และ 10 วัน ตั้งแต่ 601 ปีก่อน ค.ศ. ถึง ค.ศ. 1649 "
+"ความสัมพันธ์เดียวกันยังนำไปดัดแปลงใช้ในตารางการร่วมแนว (syzygy) ของ "
+"Goldstine (ค.ศ. 1973)"
 
 #: src/core/StelCore.cpp:1510
 #, qt-format
@@ -837,6 +841,9 @@ msgid ""
 "Personal Computer</em> (2000) provides simple 3rd-order polynomial data fits "
 "for the recent past."
 msgstr ""
+"<em>Astronomy on the Personal Computer</em> (ค.ศ. 2000) ฉบับปรับปรุงครั้งที่ "
+"4 ของ O. Montenbruck และ T. Pfleger ใช้สมการพหุนามกำลัง 3 "
+"ที่ทำให้เข้ากับข้อมูลในอดีตเมื่อไม่นานมานี้"
 
 #: src/core/StelCore.cpp:1558
 msgid ""
@@ -2302,7 +2309,7 @@ msgstr "เฟทอน"
 #. TRANSLATORS: Asteroid (1866) Sisyphus
 #: src/translations.h:141
 msgid "Sisyphus"
-msgstr ""
+msgstr "ซิสซีฟัส"
 
 #. TRANSLATORS: Asteroid (1864) Daedalus
 #: src/translations.h:143
@@ -3803,7 +3810,7 @@ msgstr "โฟลเดอร์"
 
 #: src/translations.h:573
 msgid "&Choose"
-msgstr ""
+msgstr "เลือก"
 
 #: src/translations.h:574 src/ui_configurationDialog.h:1167
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:516
@@ -3868,6 +3875,7 @@ msgstr "ตำแหน่งที่ตั้ง"
 msgid ""
 "Standard list of locations contains only English names (without diacritics!)"
 msgstr ""
+"รายการมาตรฐานของสถานที่ในชื่อภาษาอังกฤษ (ไม่มีเครื่องหมายเสริมสัทอักษร!)"
 
 #: src/ui_locationDialogGui.h:404
 msgid "Current location information"
@@ -4091,7 +4099,7 @@ msgstr "ตัวเลือกการค้นหา"
 
 #: src/ui_searchDialogGui.h:656
 msgid "Use autofill only from the beginning of words"
-msgstr ""
+msgstr "ใช้การเติมคำอัตโนมัติเฉพาะจากจุดเริ่มต้นคำ"
 
 #: src/ui_searchDialogGui.h:657 src/ui_viewDialog.h:1251
 #: src/ui_viewDialog.h:1257 src/ui_viewDialog.h:1259
@@ -4721,10 +4729,11 @@ msgstr "ซูมออกอัตโนมัติเพื่อกลับ
 msgid ""
 "Auto-enabling of the atmosphere for bodies with atmosphere in location window"
 msgstr ""
+"เปิดการใช้งานบรรยากาศของวัตถุที่มีบรรยากาศโดยอัตโนมัติในหน้าต่างสถานที่"
 
 #: src/ui_configurationDialog.h:1150
 msgid "Auto-enabling for the atmosphere"
-msgstr "เปิดใช้งานโดยอัตโนมัติสำหรับบรรยากาศ"
+msgstr "เปิดการใช้งานบรรยากาศโดยอัตโนมัติ"
 
 #: src/ui_configurationDialog.h:1151
 msgid "Screenshots"
@@ -5539,6 +5548,9 @@ msgid ""
 "aligned to North.  I've been unable to do so.  So currently it aligns to the "
 "top of the screen."
 msgstr ""
+"คุณสามารถสลับการใช้งานสายใยเล็ง (crosshair) "
+"ข้าพเจ้าต้องการให้สายใยเล็งวางตัวในแนวเดียวกับทิศเหนือ แต่ไม่สามารถทำได้ "
+"ขณะนี้จึงชี้ไปยังด้านบนของหน้าจอ"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:503
 #, qt-format
@@ -5548,6 +5560,11 @@ msgid ""
 "0.5%1, 2.0%1, and 4.0%1, helping you see what you would expect to see with "
 "the naked eye through the Telrad (or similar) finder."
 msgstr ""
+"คุณสามารถสลับการใช้งานวงกลม Telrad "
+"ซึ่งจะทำได้ก็ต่อเมื่อไม่ได้เปิดมุมมองเลนส์ใกล้ตา โดยจะแสดงวงกลม 3 วง "
+"ที่มีจุดศูนย์กลางร่วมกัน แต่ละวงมีขนาด 0.5%1, 2.0%1, และ 4.0%1 "
+"ช่วยให้คุณสามารถคาดหมายได้ว่าจะเห็นเทห์ฟ้าใดบ้างเมื่อมองผ่าน Telrad finder "
+"หรือเครื่องมืออื่นที่คล้ายกัน"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:504
 msgid "If you find any issues, please let me know.  Enjoy!"
@@ -7747,6 +7764,8 @@ msgid ""
 "visual magnitude 16. The catalogue of quasars was compiled from \"Quasars "
 "and Active Galactic Nuclei\" (13th Ed.)"
 msgstr ""
+"โปรแกรมเสริมเควซาร์แสดงตำแหน่งเควซาร์บางเควซาร์ที่สว่างกว่าโชติมาตร 16 "
+"รวบรวมจากบัญชีเควซาร์ \"Quasars and Active Galactic Nuclei\" (13th Ed.)"
 
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:125
 msgid "Veron+ 2010"
@@ -8363,7 +8382,7 @@ msgstr "แสดงเส้นเวลาการค้นพบดาวเ
 msgid ""
 "Display of the planetary systems, which contains the potential habitable "
 "exoplanets"
-msgstr ""
+msgstr "แสดงระบบดาวเคราะห์ที่อาจเอื้อต่อสิ่งมีชีวิต"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:324
 msgid "Enable display of the potential habitable exoplanets only"
@@ -8998,7 +9017,7 @@ msgstr ""
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1240
 msgid "Quadrantids"
-msgstr "ควอแดรนต์"
+msgstr "ควอดแดรนต์"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1242
@@ -9333,7 +9352,7 @@ msgstr "ดาวหางแทตเชอร์ (1861 I)"
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1376
 msgid "Comet 26P/Grigg-Skjellerup"
-msgstr ""
+msgstr "ดาวหาง 26P/Grigg-Skjellerup"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1378
