@@ -103,6 +103,7 @@ void LocationDialog::createDialogContent()
 	connect(ui->deleteLocationFromListPushButton, SIGNAL(clicked()), this, SLOT(deleteCurrentLocationFromList()));
 	connect(ui->ipQueryPushButton, SIGNAL(clicked()), this, SLOT(ipQueryLocation()));
 	connect(ui->resetListPushButton, SIGNAL(clicked()), this, SLOT(resetCompleteList()));
+	connect(ui->countryNameComboBox, SIGNAL(activated(const QString &)), this, SLOT(filterSitesByCountry()));
 
 	StelCore* core = StelApp::getInstance().getCore();
 	const StelLocation& currentLocation = core->getCurrentLocation();
@@ -361,8 +362,8 @@ void LocationDialog::setPositionFromMap(double longitude, double latitude)
 	loc.longitude = longitude;
 	setFieldsFromLocation(loc);
 	StelApp::getInstance().getCore()->moveObserverTo(loc, 0.);
-	// GZ NEW: filter location list for nearby cities.
-	StelApp::getInstance().getLocationMgr().pickLocationsNearby(longitude, latitude, 3.0f);
+	// GZ: Filter location list for nearby sites. I assume Earth locations are better known. With only few locations on other planets in the list, 30 degrees seem OK.
+	StelApp::getInstance().getLocationMgr().pickLocationsNearby(loc.planetName, longitude, latitude, loc.planetName=="Earth" ? 3.0f: 30.0f);
 	QSortFilterProxyModel *proxyModel = new QSortFilterProxyModel(this);
 	proxyModel->setSourceModel((QAbstractItemModel*)StelApp::getInstance().getLocationMgr().getModelPicked());
 	proxyModel->sort(0, Qt::AscendingOrder);
@@ -392,6 +393,24 @@ void LocationDialog::moveToAnotherPlanet(const QString&)
 				ls->setCurrentLandscapeID(ls->getDefaultLandscapeID());
 		}
 
+		// GZ populate site list with sites only from that planet, or full list for Earth (faster than removing the ~50 non-Earth positions...).
+		StelLocationMgr &locMgr=StelApp::getInstance().getLocationMgr();
+		QSortFilterProxyModel *proxyModel = new QSortFilterProxyModel(this);
+		if (loc.planetName == "Earth")
+		{
+			proxyModel->setSourceModel((QAbstractItemModel*)locMgr.getModelAll());
+		}
+		else
+		{
+			locMgr.pickLocationsNearby(loc.planetName, 0.0f, 0.0f, 180.0f);
+			proxyModel->setSourceModel((QAbstractItemModel*)locMgr.getModelPicked());
+		}
+		proxyModel->sort(0, Qt::AscendingOrder);
+		proxyModel->setFilterCaseSensitivity(Qt::CaseInsensitive);
+		ui->citiesListView->setModel(proxyModel);
+		ui->citySearchLineEdit->clear();
+		connect(ui->citySearchLineEdit, SIGNAL(textChanged(const QString&)), proxyModel, SLOT(setFilterWildcard(const QString&)));
+		ui->citySearchLineEdit->setFocus();
 	}
 	// Planet transition time also set to null to prevent uglyness when
 	// "use landscape location" is enabled for that planet's landscape. --BM
@@ -514,6 +533,7 @@ void LocationDialog::ipQueryLocation()
 	}
 	else
 		QMessageBox::warning(0, "Stellarium", q_("IP query for location failed. Are you offline?"));
+	ui->citySearchLineEdit->setFocus();
 }
 
 // called when user clicks "reset list"
@@ -526,4 +546,24 @@ void LocationDialog::resetCompleteList()
 	ui->citiesListView->setModel(proxyModel);
 	ui->citySearchLineEdit->clear();
 	connect(ui->citySearchLineEdit, SIGNAL(textChanged(const QString&)), proxyModel, SLOT(setFilterWildcard(const QString&)));
+	ui->citySearchLineEdit->setFocus();
+}
+
+// called when user clicks in the country combobox and selects a country. The locations in the list are updated to select only sites in that country.
+void LocationDialog::filterSitesByCountry()
+{
+	QString country=ui->countryNameComboBox->currentData().toString();
+	QSortFilterProxyModel *proxyModel = new QSortFilterProxyModel(this);
+	StelLocationMgr &locMgr=StelApp::getInstance().getLocationMgr();
+
+	locMgr.pickLocationsInCountry(country);
+	proxyModel->setSourceModel((QAbstractItemModel*)locMgr.getModelPicked());
+
+	proxyModel->sort(0, Qt::AscendingOrder);
+	proxyModel->setFilterCaseSensitivity(Qt::CaseInsensitive);
+	ui->citiesListView->setModel(proxyModel);
+	ui->citySearchLineEdit->clear();
+	connect(ui->citySearchLineEdit, SIGNAL(textChanged(const QString&)), proxyModel, SLOT(setFilterWildcard(const QString&)));
+	ui->citySearchLineEdit->setFocus();
+
 }
