@@ -41,6 +41,8 @@ public:
 
 	//! Return the model containing all the city
 	QStringListModel* getModelAll() {return modelAllLocation;}
+	//! GZ: Return the model containing picked (nearby) cities.
+	QStringListModel* getModelPicked() {return modelPickedLocation;}
 
 	//! Return the list of all loaded locations
 	QList<StelLocation> getAll() const {return locations.values();}
@@ -76,6 +78,9 @@ public:
 	//! find location via online lookup of IP address
 	const StelLocation locationFromIP();
 
+	// GZ 201407 blueprint 2: preselect list of locations within @param radiusDegrees of selected (usually screen-clicked) coordinates.
+	void pickLocationsNearby(const float longitude, const float latitude, const float radiusDegrees);
+
 private:
 	void generateBinaryLocationFile(const QString& txtFile, bool isUserLocation, const QString& binFile) const;
 
@@ -85,9 +90,13 @@ private:
 
 	//! Model containing all the city information
 	QStringListModel* modelAllLocation;
+	//! Model containing selected city information
+	QStringListModel* modelPickedLocation;
 
 	//! The list of all loaded locations
 	QMap<QString, StelLocation> locations;
+	//! The list of locations within some radius of coordinates clicked on map.
+	QMap<QString, StelLocation> pickedLocations;
 	
 	StelLocation lastResortLocation;
 

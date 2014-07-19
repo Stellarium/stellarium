@@ -82,6 +82,7 @@ private slots:
 	void updateFromProgram(const StelLocation& location);
 	
 	//! Called when the map is clicked.
+	//! GZ_New: create new list for places nearby and feed into location list box.
 	void setPositionFromMap(double longitude, double latitude);
 	
 	//! Called when the user activates an item from the locations list.
@@ -97,6 +98,9 @@ private slots:
 	
 	//! Called when the user clicks on the delete button
 	void deleteCurrentLocationFromList();
+
+	//! reset city list to complete list (may have been reduced to picked list)
+	void resetCompleteList();
 
 	//! called when the user clicks on the IP Query button
 	void ipQueryLocation();
