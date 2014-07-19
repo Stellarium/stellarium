@@ -32,7 +32,12 @@ AOScript::~AOScript()
 
 QStringList AOScript::checkInstalledAddOns() const
 {
-	return QStringList();
+	QDir dir(m_sScriptInstallDir);
+	dir.setFilter(QDir::Files | QDir::Readable | QDir::NoDotAndDotDot);
+	QStringList nameFilters;
+	nameFilters << "*.ssc" << "*.sts";
+	dir.setNameFilters(nameFilters);
+	return dir.entryList();
 }
 
 bool AOScript::installFromFile(const QString& idInstall,
