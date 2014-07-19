@@ -359,6 +359,16 @@
               </property>
              </widget>
             </item>
+            <item>
+             <widget class="QPushButton" name="resetListPushButton">
+              <property name="toolTip">
+               <string>Reset location list to show all known locations</string>
+              </property>
+              <property name="text">
+               <string>Reset Location List</string>
+              </property>
+             </widget>
+            </item>
            </layout>
           </widget>
          </item>
@@ -455,6 +465,9 @@
                 <width>30</width>
                 <height>0</height>
                </size>
+              </property>
+              <property name="toolTip">
+               <string>Use online service to find approximate location based on your IP address</string>
               </property>
               <property name="text">
                <string>IP Query</string>
