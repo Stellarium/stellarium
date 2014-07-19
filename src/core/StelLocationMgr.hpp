@@ -41,7 +41,7 @@ public:
 
 	//! Return the model containing all the city
 	QStringListModel* getModelAll() {return modelAllLocation;}
-	//! GZ: Return the model containing picked (nearby) cities.
+	//! Return the model containing picked (nearby) cities or cities from a single country, or other preselection.
 	QStringListModel* getModelPicked() {return modelPickedLocation;}
 
 	//! Return the list of all loaded locations
@@ -72,14 +72,17 @@ public:
 	//! @param id the location ID
 	bool deleteUserLocation(const QString& id);
 
-	// GZ 201407 blueprint: find location via IP lookup
-	//! check if there is an IP connection
+	//! Check if there is an IP connection
 	bool ipConnectionExists() const;
-	//! find location via online lookup of IP address
+	//! Find location via online lookup of IP address
 	const StelLocation locationFromIP();
 
-	// GZ 201407 blueprint 2: preselect list of locations within @param radiusDegrees of selected (usually screen-clicked) coordinates.
-	void pickLocationsNearby(const float longitude, const float latitude, const float radiusDegrees);
+	//! Preselect list of locations within @param radiusDegrees of selected (usually screen-clicked) coordinates.
+	//! The list can be retrieved by calling @name getModelPicked().
+	void pickLocationsNearby(const QString planetName, const float longitude, const float latitude, const float radiusDegrees);
+	//! Preselect list of locations in a particular country only.
+	//! The list can be retrieved by calling @name getModelPicked().
+	void pickLocationsInCountry(const QString country);
 
 private:
 	void generateBinaryLocationFile(const QString& txtFile, bool isUserLocation, const QString& binFile) const;
@@ -95,7 +98,7 @@ private:
 
 	//! The list of all loaded locations
 	QMap<QString, StelLocation> locations;
-	//! The list of locations within some radius of coordinates clicked on map.
+	//! The list of locations within some radius of last coordinates clicked on map or selected by country
 	QMap<QString, StelLocation> pickedLocations;
 	
 	StelLocation lastResortLocation;

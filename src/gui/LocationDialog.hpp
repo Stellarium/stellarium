@@ -99,6 +99,9 @@ private slots:
 	//! Called when the user clicks on the delete button
 	void deleteCurrentLocationFromList();
 
+	//! filter city list to show entries from single country only
+	void filterSitesByCountry();
+
 	//! reset city list to complete list (may have been reduced to picked list)
 	void resetCompleteList();
 
