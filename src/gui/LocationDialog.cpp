@@ -368,6 +368,8 @@ void LocationDialog::setPositionFromMap(double longitude, double latitude)
 	proxyModel->sort(0, Qt::AscendingOrder);
 	proxyModel->setFilterCaseSensitivity(Qt::CaseInsensitive);
 	ui->citiesListView->setModel(proxyModel);
+	ui->citySearchLineEdit->clear();
+	connect(ui->citySearchLineEdit, SIGNAL(textChanged(const QString&)), proxyModel, SLOT(setFilterWildcard(const QString&)));
 }
 
 // Called when the planet name is changed by hand
@@ -522,4 +524,6 @@ void LocationDialog::resetCompleteList()
 	proxyModel->sort(0, Qt::AscendingOrder);
 	proxyModel->setFilterCaseSensitivity(Qt::CaseInsensitive);
 	ui->citiesListView->setModel(proxyModel);
+	ui->citySearchLineEdit->clear();
+	connect(ui->citySearchLineEdit, SIGNAL(textChanged(const QString&)), proxyModel, SLOT(setFilterWildcard(const QString&)));
 }
