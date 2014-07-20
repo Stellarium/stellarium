@@ -115,10 +115,9 @@ void StelCore::init()
 	bool ok;
 	StelLocationMgr* locationMgr = &StelApp::getInstance().getLocationMgr();
 	StelLocation location;
-	if (conf->value("init_location/use_ip_geolocation_if_available", "false").toBool()
-			&& locationMgr->ipConnectionExists())
+	if (conf->value("init_location/use_ip_geolocation_if_available", "false").toBool())
 	{
-		location=locationMgr->locationFromIP();
+		locationMgr->locationFromIP();
 	}
 
 	else location = locationMgr->locationForString(defaultLocationID);
