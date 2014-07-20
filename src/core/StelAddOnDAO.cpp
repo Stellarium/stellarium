@@ -65,7 +65,7 @@ bool StelAddOnDAO::createAddonTables()
 
 	addonTables << "CREATE TABLE IF NOT EXISTS " % TABLE_ADDON % " ("
 			"id INTEGER primary key AUTOINCREMENT, "
-			"id_install TEXT UNIQUE, "
+			"id_install TEXT, "
 			"category TEXT, "
 			"title TEXT, "
 			"description TEXT, "
@@ -104,7 +104,8 @@ bool StelAddOnDAO::createAddonTables()
 
 	addonTables << "CREATE TABLE IF NOT EXISTS " % TABLE_LANGUAGE_PACK % " ("
 			"id INTEGER primary key AUTOINCREMENT, "
-			"addon INTEGER UNIQUE)";
+			"addon INTEGER UNIQUE, "
+			"type TEXT)";
 
 	addonTables << "CREATE TABLE IF NOT EXISTS " % TABLE_SCRIPT % " ("
 			"id INTEGER primary key AUTOINCREMENT, "
