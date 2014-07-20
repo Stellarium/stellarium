@@ -40,8 +40,10 @@ IF(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
 ENDIF()
 
 IF(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_COMPILER_IS_GNUCC)
-  # The stars structs rely on gnu gcc packing of bit-fields.
-  SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -mno-ms-bitfields")
+  IF(WIN32)
+    # The stars structs rely on gnu gcc packing of bit-fields.
+    SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -mno-ms-bitfields")
+  ENDIF()
   SET(GCC_VERSION "${CMAKE_CXX_COMPILER_VERSION}")
 ELSE()
   SET(GCC_VERSION "0.0")
