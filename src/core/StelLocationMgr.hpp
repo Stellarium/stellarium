@@ -26,6 +26,8 @@
 #include <QMap>
 
 class QStringListModel;
+class QNetworkReply;
+class QNetworkAccessManager;
 
 //! @class StelLocationMgr
 //! Manage the list of available location.
@@ -72,10 +74,8 @@ public:
 	//! @param id the location ID
 	bool deleteUserLocation(const QString& id);
 
-	//! Check if there is an IP connection
-	bool ipConnectionExists() const;
 	//! Find location via online lookup of IP address
-	const StelLocation locationFromIP();
+	void locationFromIP();
 
 	//! Preselect list of locations within @param radiusDegrees of selected (usually screen-clicked) coordinates.
 	//! The list can be retrieved by calling @name getModelPicked().
@@ -83,6 +83,10 @@ public:
 	//! Preselect list of locations in a particular country only.
 	//! The list can be retrieved by calling @name getModelPicked().
 	void pickLocationsInCountry(const QString country);
+
+public slots:
+	//! Process answer from online lookup of IP address
+	void changeLocationFromNetworkLookup(QNetworkReply *reply);
 
 private:
 	void generateBinaryLocationFile(const QString& txtFile, bool isUserLocation, const QString& binFile) const;
@@ -98,10 +102,13 @@ private:
 
 	//! The list of all loaded locations
 	QMap<QString, StelLocation> locations;
-	//! The list of locations within some radius of last coordinates clicked on map or selected by country
+	//! A list of locations generated on-the-fly by filtering from @name locations
 	QMap<QString, StelLocation> pickedLocations;
 	
 	StelLocation lastResortLocation;
+
+	//!	for IP-based location lookup
+	QNetworkAccessManager *networkAccessMgr;
 
 };
 

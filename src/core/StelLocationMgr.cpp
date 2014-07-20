@@ -17,6 +17,7 @@
  */
 
 #include "StelApp.hpp"
+#include "StelCore.hpp"
 #include "StelFileMgr.hpp"
 #include "StelLocationMgr.hpp"
 #include "StelUtils.hpp"
@@ -27,7 +28,6 @@
 #include <QDir>
 #include <QtNetwork/QNetworkInterface>
 #include <QtNetwork/QNetworkAccessManager>
-#include <QEventLoop>
 #include <QNetworkRequest>
 #include <QNetworkReply>
 #include <QUrl>
@@ -47,6 +47,8 @@ StelLocationMgr::StelLocationMgr()
 	
 	// Init to Paris France because it's the center of the world.
 	lastResortLocation = locationForString("Paris, France");
+	networkAccessMgr = new QNetworkAccessManager(this);
+	connect(networkAccessMgr, SIGNAL(finished(QNetworkReply*)), this, SLOT(changeLocationFromNetworkLookup(QNetworkReply*)));
 }
 
 void StelLocationMgr::generateBinaryLocationFile(const QString& fileName, bool isUserLocation, const QString& binFilePath) const
@@ -154,6 +156,7 @@ StelLocationMgr::~StelLocationMgr()
 {
 	delete modelPickedLocation;
 	delete modelAllLocation;
+	delete networkAccessMgr;
 }
 
 static float parseAngle(const QString& s, bool* ok)
@@ -318,49 +321,20 @@ bool StelLocationMgr::deleteUserLocation(const QString& id)
 	return true;
 }
 
-//! check if there is an IP connection.
-bool StelLocationMgr::ipConnectionExists() const
+// lookup location from IP address.
+void StelLocationMgr::locationFromIP()
 {
-    QList<QNetworkInterface> ifaces = QNetworkInterface::allInterfaces();
-    bool connectionExists = false;
-
-    for (int i = 0; i < ifaces.count(); i++)
-    {
-        QNetworkInterface iface = ifaces.at(i);
-        if ( iface.flags().testFlag(QNetworkInterface::IsUp)
-             && !iface.flags().testFlag(QNetworkInterface::IsLoopBack))
-        {
-            for (int j=0; j<iface.addressEntries().count(); j++)
-                // got an interface which is up, and has an ip address
-                if (!connectionExists) connectionExists = true;
-        }
-    }
-    return connectionExists;
+    QNetworkRequest req( QUrl( QString("http://freegeoip.net/csv/") ) );
+    networkAccessMgr->get(req);
 }
 
-//! lookup location from IP address.
-//  Along the lines of:
-// http://karanbalkar.com/2014/02/sending-a-http-request-using-qt-5-framework/
-const StelLocation StelLocationMgr::locationFromIP()
+// slot that receives IP-based location data from the network.
+void StelLocationMgr::changeLocationFromNetworkLookup(QNetworkReply *reply)
 {
-// create custom temporary event loop on stack
-    QEventLoop eventLoop;
-
-    // "quit()" the event-loop, when the network request "finished()"
-    QNetworkAccessManager mgr;
-    QObject::connect(&mgr, SIGNAL(finished(QNetworkReply*)), &eventLoop, SLOT(quit()));
-
-    // the HTTP request
-    QNetworkRequest req( QUrl( QString("http://freegeoip.net/csv/") ) );
-    QNetworkReply *reply = mgr.get(req);
-    eventLoop.exec(); // blocks stack until "finished()" has been called
-
     StelLocation location;
     if (reply->error() == QNetworkReply::NoError) {
         //success
         QByteArray answer=reply->readAll();
-        //qDebug() << "Success: read CSV for approximate IP-based location: \n\t" << answer;
-
         const QStringList& splitline = QString(answer).split(",");
         float latitude=splitline.at(7).mid(1, splitline.at(7).length()-2).toFloat();
         float longitude=splitline.at(8).mid(1, splitline.at(8).length()-2).toFloat();
@@ -376,12 +350,13 @@ const StelLocation StelLocationMgr::locationFromIP()
                     .arg(latitude<0 ? QString("%1S").arg(-latitude, 0, 'f', 6) : QString("%1N").arg(latitude, 0, 'f', 6))
                     .arg(longitude<0 ? QString("%1W").arg(-longitude, 0, 'f', 6) : QString("%1E").arg(longitude, 0, 'f', 6));
         location=StelLocation::createFromLine(locLine);
+        StelCore *core=StelApp::getInstance().getCore();
+        core->moveObserverTo(location, 0.0f, 0.0f);
     }
     else {
         qDebug() << "Failure getting IP-based location: \n\t" <<reply->errorString();
     }
-    delete reply;
-    return location;
+    reply->deleteLater();
 }
 
 void StelLocationMgr::pickLocationsNearby(const QString planetName, const float longitude, const float latitude, const float radiusDegrees)
@@ -403,7 +378,6 @@ void StelLocationMgr::pickLocationsNearby(const QString planetName, const float 
 
 void StelLocationMgr::pickLocationsInCountry(const QString country)
 {
-    qDebug() << "pickLocationsInCountry(): " << country ;
     pickedLocations.clear();
     QMapIterator<QString, StelLocation> iter(locations);
     while (iter.hasNext())

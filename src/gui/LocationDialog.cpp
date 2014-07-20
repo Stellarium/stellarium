@@ -460,7 +460,7 @@ void LocationDialog::reportEdit()
 	ui->deleteLocationFromListPushButton->setEnabled(locationMgr.canDeleteUserLocation(loc.getID()));
 }
 
-// Called when the user clic on the save button
+// Called when the user clicks on the save button
 void LocationDialog::addCurrentLocationToList()
 {
 	const StelLocation& loc = locationFromFields();
@@ -523,16 +523,7 @@ void LocationDialog::updateDefaultLocationControls(bool currentIsDefault)
 void LocationDialog::ipQueryLocation()
 {
 	StelLocationMgr &locMgr=StelApp::getInstance().getLocationMgr();
-	if (locMgr.ipConnectionExists())
-	{
-		StelLocation loc = locMgr.locationFromIP();
-		StelApp::getInstance().getCore()->moveObserverTo(loc, 0.0, 0.0);
-		//Update the position of the map pointer and GUI fields.
-		setFieldsFromLocation(loc);
-		ui->mapLabel->setCursorPos(loc.longitude, loc.latitude);
-	}
-	else
-		QMessageBox::warning(0, "Stellarium", q_("IP query for location failed. Are you offline?"));
+	locMgr.locationFromIP(); // This just triggers asynchronous lookup.
 	ui->citySearchLineEdit->setFocus();
 }
 
@@ -565,5 +556,4 @@ void LocationDialog::filterSitesByCountry()
 	ui->citySearchLineEdit->clear();
 	connect(ui->citySearchLineEdit, SIGNAL(textChanged(const QString&)), proxyModel, SLOT(setFilterWildcard(const QString&)));
 	ui->citySearchLineEdit->setFocus();
-
 }
