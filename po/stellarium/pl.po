@@ -10,13 +10,13 @@ msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-07-13 12:59+0700\n"
-"PO-Revision-Date: 2014-07-17 14:01+0000\n"
+"PO-Revision-Date: 2014-07-19 13:56+0000\n"
 "Last-Translator: pp/bs <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-07-18 04:45+0000\n"
+"X-Launchpad-Export-Date: 2014-07-20 05:49+0000\n"
 "X-Generator: Launchpad (build 17114)\n"
 "X-Poedit-Country: SPAIN\n"
 "X-Poedit-Language: Spanish\n"
@@ -257,7 +257,7 @@ msgstr "Absolutna  wielkość gwiazdowa: %1"
 #: src/core/modules/Planet.cpp:167
 #, qt-format
 msgid "Obliquity (of date, for Earth): %1"
-msgstr ""
+msgstr "Kąt nachylenia osi (data, dla Ziemi): %1"
 
 #: src/core/modules/Planet.cpp:179 src/core/modules/MinorPlanet.cpp:252
 #: src/core/modules/Comet.cpp:203
@@ -375,11 +375,11 @@ msgstr "gwiazda zmienna pulsująca"
 
 #: src/core/modules/StarWrapper.cpp:148
 msgid "rotating variable star"
-msgstr ""
+msgstr "gwiazda zmienna świecąca niesferycznie"
 
 #: src/core/modules/StarWrapper.cpp:150
 msgid "cataclysmic variable star"
-msgstr ""
+msgstr "gwiazda zmienna wybuchowa"
 
 #: src/core/modules/StarWrapper.cpp:153
 msgid "eclipsing binary system"
@@ -432,12 +432,12 @@ msgstr "Paralaksa: %1\""
 #: src/core/modules/StarWrapper.cpp:230
 #, qt-format
 msgid "Epoch for minimum light: %1 JD"
-msgstr ""
+msgstr "Epoka dla minimalnego światła: %1 JD"
 
 #: src/core/modules/StarWrapper.cpp:232
 #, qt-format
 msgid "Epoch for maximum light: %1 JD"
-msgstr ""
+msgstr "Epoka dla maksymalnego światła: %1 JD"
 
 #: src/core/modules/StarWrapper.cpp:236
 #, qt-format
@@ -1597,7 +1597,7 @@ msgstr "Programista: %1"
 #: src/gui/HelpDialog.cpp:478
 #, qt-format
 msgid "Continuous Integration: %1"
-msgstr ""
+msgstr "Ciągła integracja: %1"
 
 #: src/gui/HelpDialog.cpp:479 src/gui/HelpDialog.cpp:480
 #, qt-format
@@ -2401,7 +2401,7 @@ msgstr ""
 #. TRANSLATORS: Proper name of comet C/1680 V1
 #: src/translations.h:161
 msgid "Great Comet of 1680 (C/1680 V1)"
-msgstr ""
+msgstr "Wielka Kometa z 1680 (C/1680 V1)"
 
 #. TRANSLATORS: Name of supernova SN 1572A and script name
 #: src/translations.h:164
@@ -2553,7 +2553,7 @@ msgstr ""
 #. TRANSLATORS: Name of landscape
 #: src/translations.h:229
 msgid "Geneva"
-msgstr ""
+msgstr "Genewa"
 
 #. TRANSLATORS: Name of landscape
 #: src/translations.h:231
@@ -5171,11 +5171,11 @@ msgstr "Ustawienia"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:185
 msgid "Use dms format for angles"
-msgstr ""
+msgstr "Wyświetlaj kąty w formacie dms (stopnie, minuty, sekundy)"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:186
 msgid "Show position angle"
-msgstr ""
+msgstr "Wyświetlaj kąt pozycji"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:187
 #: plugins/Satellites/src/ui_satellitesDialog.h:714
@@ -8616,12 +8616,12 @@ msgstr "Nie wschodzi."
 #: plugins/Observability/src/Observability.cpp:195
 #, qt-format
 msgid "Culminates at %1 (in %2) at %3 deg."
-msgstr ""
+msgstr "Góruje o %1 (za %2) na wysokości %3 st."
 
 #: plugins/Observability/src/Observability.cpp:196
 #, qt-format
 msgid "Culminated at %1 (%2 ago) at %3 deg."
-msgstr ""
+msgstr "Górowało o %1 (%2 temu) na wysokości %3 st."
 
 #: plugins/Observability/src/Observability.cpp:197
 msgid "Source is not observable."
@@ -10390,6 +10390,12 @@ msgstr ""
 
 #~ msgid "Horizon altitude: 0 deg."
 #~ msgstr "Wysokość horyzontu: 0 st."
+
+#~ msgid "Cosmical rise/set"
+#~ msgstr "Kosmiczny wschód/zachód"
+
+#~ msgid "No Cosmical rise/set."
+#~ msgstr "Brak kosmicznego wschodu/zachodu."
 
 #~ msgid "Acronychal rise/set"
 #~ msgstr "Akroniczny wschód/zachód"
