@@ -239,6 +239,8 @@ SET(stellarium_lib_SRCS
 	core/addons/StelAddOn.hpp
 	core/addons/AOLandscape.cpp
 	core/addons/AOLandscape.hpp
+	core/addons/AOLanguagePack.cpp
+	core/addons/AOLanguagePack.hpp
 	core/addons/AOScript.cpp
 	core/addons/AOScript.hpp
 	core/addons/AOSkyCulture.cpp

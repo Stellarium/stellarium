@@ -27,6 +27,7 @@
 #include <QSqlDatabase>
 
 #include "AOLandscape.hpp"
+#include "AOLanguagePack.hpp"
 #include "AOScript.hpp"
 #include "AOSkyCulture.hpp"
 #include "AOTexture.hpp"

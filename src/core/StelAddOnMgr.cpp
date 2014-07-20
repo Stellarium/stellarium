@@ -74,6 +74,7 @@ StelAddOnMgr::StelAddOnMgr()
 
 	// Init sub-classes
 	m_pStelAddOns.insert(LANDSCAPE, new AOLandscape(m_pStelAddOnDAO));
+	m_pStelAddOns.insert(LANGUAGE_PACK, new AOLanguagePack(m_pStelAddOnDAO));
 	m_pStelAddOns.insert(SCRIPT, new AOScript(m_pStelAddOnDAO));
 	m_pStelAddOns.insert(SKY_CULTURE, new AOSkyCulture(m_pStelAddOnDAO));
 	m_pStelAddOns.insert(TEXTURE, new AOTexture(m_pStelAddOnDAO));
