@@ -206,6 +206,7 @@ void StelAddOnMgr::downloadFinished()
 	if (!redirect.isNull())
 	{
 		// We got a redirection, we need to follow
+		m_currentDownloadFile->reset();
 		m_pDownloadReply->deleteLater();
 		QNetworkRequest req(redirect.toUrl());
 		req.setAttribute(QNetworkRequest::CacheSaveControlAttribute, false);
