@@ -32,7 +32,7 @@ public:
 	// check scripts which are already installed.
 	virtual QStringList checkInstalledAddOns() const;
 
-	// install script from a zip file.
+	// install script from a .ssc or .sts file.
 	virtual bool installFromFile(const QString& idInstall,
 				     const QString& downloadFilepath) const;
 

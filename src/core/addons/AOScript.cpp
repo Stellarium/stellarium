@@ -47,7 +47,7 @@ bool AOScript::installFromFile(const QString& idInstall,
 	if (suffix != ".ssc" && suffix != ".sts")
 	{
 		qWarning() << "Add-On Script: Unable to intall" << idInstall
-			   << "The found file is not a .ssc or .sts";
+			   << "The file found is not a .ssc or .sts";
 		return false;
 	}
 
