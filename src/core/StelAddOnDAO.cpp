@@ -262,3 +262,24 @@ StelAddOnDAO::AddOnInfo StelAddOnDAO::getAddOnInfo(int addonId)
 
 	return AddOnInfo();
 }
+
+QString StelAddOnDAO::getLanguagePackType(const QString& checksum)
+{
+	if (checksum.isEmpty()) {
+		return QString();
+	}
+
+	QString sQuery("SELECT type FROM " % TABLE_LANGUAGE_PACK %
+		       " INNER JOIN addon ON language_pack.addon = addon.id"
+		       " WHERE checksum='" % checksum % "'");
+	QSqlQuery query(m_db);
+	if (!query.exec(sQuery)) {
+		qWarning() << "Add-On DAO Language Type:" << m_db.lastError();
+		return QString();
+	}
+
+	if (query.next()) {
+		return query.value(0).toString();
+	}
+	return QString();
+}

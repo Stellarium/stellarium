@@ -62,6 +62,8 @@ public:
 	void markAddOnsAsInstalled(QStringList idInstall);
 	void updateAddOnStatus(QString idInstall, int installed);
 
+	QString getLanguagePackType(const QString& checksum);
+
 private:
 	QSqlDatabase m_db;
 
