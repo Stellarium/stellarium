@@ -44,6 +44,8 @@ void AddOnDialog::retranslate()
 	if (dialog)
 	{
 		ui->retranslateUi(dialog);
+		ui->stackListWidget->setWrapping(false);
+		updateTabBarListWidgetWidth();
 	}
 }
 
@@ -77,6 +79,28 @@ void AddOnDialog::createDialogContent()
 	// Install and Remove
 	connect(ui->btnInstall, SIGNAL(clicked()), this, SLOT(installSelectedRows()));
 	connect(ui->btnRemove, SIGNAL(clicked()), this, SLOT(removeSelectedRows()));
+
+	updateTabBarListWidgetWidth();
+}
+
+void AddOnDialog::updateTabBarListWidgetWidth()
+{
+	QAbstractItemModel* model = ui->stackListWidget->model();
+	if (!model)
+		return;
+
+	// Update list item sizes after translation
+	ui->stackListWidget->adjustSize();
+
+	int width = 0;
+	for (int row = 0; row < model->rowCount(); row++)
+	{
+		QModelIndex index = model->index(row, 0);
+		width += ui->stackListWidget->sizeHintForIndex(index).width();
+	}
+
+	// Hack to force the window to be resized...
+	ui->stackListWidget->setMinimumWidth(width);
 }
 
 void AddOnDialog::changePage(QListWidgetItem *current, QListWidgetItem *previous)

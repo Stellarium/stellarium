@@ -73,6 +73,7 @@ private:
 	QTableView* m_currentTableView;
 	QList<QHash<int, QCheckBox*> > m_checkBoxes;
 
+	void updateTabBarListWidgetWidth();
 	void initModel(QTableView* tableView, QString table);
 	void setUpTableView(QTableView* tableView);
 	void insertCheckBoxes(QTableView* tableview, int tab);
