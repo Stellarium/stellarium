@@ -41,8 +41,7 @@ public:
 
 private:
 	StelAddOnDAO* m_pStelAddOnDAO;
-	const QString m_sStellariumLocaleInstallDir;
-	const QString m_sStarloreLocaleInstallDir;
+	const QString m_sLocaleInstallDir;
 };
 
 #endif // _AOLANGUAGEPACK_HPP_

@@ -23,11 +23,10 @@
 
 AOLanguagePack::AOLanguagePack(StelAddOnDAO* pStelAddOnDAO)
 	: m_pStelAddOnDAO(pStelAddOnDAO)
-	, m_sStellariumLocaleInstallDir(StelFileMgr::getLocaleUserDir() % "/stellarium")
-	, m_sStarloreLocaleInstallDir(StelFileMgr::getLocaleUserDir() % "/stellarium-skycultures")
+	, m_sLocaleInstallDir(StelFileMgr::getLocaleUserDir())
 {
-	StelFileMgr::makeSureDirExistsAndIsWritable(m_sStellariumLocaleInstallDir);
-	StelFileMgr::makeSureDirExistsAndIsWritable(m_sStarloreLocaleInstallDir);
+	StelFileMgr::makeSureDirExistsAndIsWritable(m_sLocaleInstallDir % "/stellarium");
+	StelFileMgr::makeSureDirExistsAndIsWritable(m_sLocaleInstallDir % "/stellarium-skycultures");
 }
 
 AOLanguagePack::~AOLanguagePack()
@@ -64,24 +63,7 @@ bool AOLanguagePack::installFromFile(const QString& idInstall,
 		return false;
 	}
 
-	QString destination;
-	QString type = m_pStelAddOnDAO->getLanguagePackType(checksum);
-	if (type == "stellarium")
-	{
-		destination = m_sStellariumLocaleInstallDir;
-	}
-	else if (type == "skyculture")
-	{
-		destination = m_sStarloreLocaleInstallDir;
-	}
-	else
-	{
-		qWarning() << "Add-On Language: Unable to identify the language type!"
-			   << QDir::toNativeSeparators(downloadFilepath);
-		return false;
-	}
-
-	destination = destination % "/" % idInstall % ".qm";
+	QString destination = StelFileMgr::getLocaleUserDir() % "/" % idInstall % ".qm";
 	QFile(destination).remove();
 	if (!file.copy(destination))
 	{
