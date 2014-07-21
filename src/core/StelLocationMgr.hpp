@@ -106,7 +106,7 @@ private:
 	
 	StelLocation lastResortLocation;
 
-	//!	for IP-based location lookup
+	//! For IP-based location lookup
 	QNetworkReply *networkReply;
 
 };
