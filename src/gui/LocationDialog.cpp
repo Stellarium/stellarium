@@ -522,6 +522,7 @@ void LocationDialog::updateDefaultLocationControls(bool currentIsDefault)
 // called when the user clicks on the IP Query button
 void LocationDialog::ipQueryLocation()
 {
+	resetCompleteList(); // in case we are on Moon/Mars, we must get list back to show all (earth) locations...
 	StelLocationMgr &locMgr=StelApp::getInstance().getLocationMgr();
 	locMgr.locationFromIP(); // This just triggers asynchronous lookup.
 	ui->citySearchLineEdit->setFocus();
