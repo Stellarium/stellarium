@@ -63,7 +63,7 @@ bool AOLanguagePack::installFromFile(const QString& idInstall,
 		return false;
 	}
 
-	QString destination = StelFileMgr::getLocaleUserDir() % "/" % idInstall % ".qm";
+	QString destination = m_sLocaleInstallDir % "/" % idInstall % ".qm";
 	QFile(destination).remove();
 	if (!file.copy(destination))
 	{
@@ -77,6 +77,23 @@ bool AOLanguagePack::installFromFile(const QString& idInstall,
 
 bool AOLanguagePack::uninstallAddOn(const QString &idInstall) const
 {
-	// TODO
-	return false;
+	QFile file(m_sLocaleInstallDir % "/" % idInstall % ".qm");
+	bool removed = true;
+	if (file.exists())
+	{
+		removed = file.remove();
+	}
+
+	if (removed)
+	{
+		qDebug() << "Add-On Language : Successfully removed" << idInstall;
+	}
+	else
+	{
+		qWarning() << "Add-On Language : Error! " << idInstall
+			   << "could not be removed. ";
+
+	}
+
+	return removed;
 }
