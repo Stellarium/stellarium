@@ -17,6 +17,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
+#include <QCryptographicHash>
+
 #include "AOLanguagePack.hpp"
 
 AOLanguagePack::AOLanguagePack(StelAddOnDAO* pStelAddOnDAO)
@@ -40,8 +42,55 @@ QStringList AOLanguagePack::checkInstalledAddOns() const
 bool AOLanguagePack::installFromFile(const QString& idInstall,
 				     const QString& downloadFilepath) const
 {
-	// TODO
-	return false;
+	if (!downloadFilepath.endsWith(".qm"))
+	{
+		qWarning() << "Add-On Language: Unable to intall" << idInstall
+			   << "The file found is not a .qm";
+		return false;
+	}
+
+	QFile file(downloadFilepath);
+	QString checksum;
+	if (file.open(QIODevice::ReadOnly)) {
+		QCryptographicHash md5(QCryptographicHash::Md5);
+		md5.addData(file.readAll());
+		checksum = md5.result().toHex();
+	}
+
+	if (checksum.isEmpty())
+	{
+		qWarning() << "Add-On Language: Unable to read the file"
+			   << QDir::toNativeSeparators(downloadFilepath);
+		return false;
+	}
+
+	QString destination;
+	QString type = m_pStelAddOnDAO->getLanguagePackType(checksum);
+	if (type == "stellarium")
+	{
+		destination = m_sStellariumLocaleInstallDir;
+	}
+	else if (type == "skyculture")
+	{
+		destination = m_sStarloreLocaleInstallDir;
+	}
+	else
+	{
+		qWarning() << "Add-On Language: Unable to identify the language type!"
+			   << QDir::toNativeSeparators(downloadFilepath);
+		return false;
+	}
+
+	destination = destination % "/" % idInstall % ".qm";
+	QFile(destination).remove();
+	if (!file.copy(destination))
+	{
+		qWarning() << "Add-On Language: Unable to install" << idInstall;
+		return false;
+	}
+
+	qDebug() << "Add-On Language: New language installed:" << idInstall;
+	return true;
 }
 
 bool AOLanguagePack::uninstallAddOn(const QString &idInstall) const
