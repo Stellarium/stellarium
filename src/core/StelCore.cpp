@@ -119,8 +119,11 @@ void StelCore::init()
 	{
 		locationMgr->locationFromIP();
 	}
+	else
+	{
+		location = locationMgr->locationForString(defaultLocationID);
+	}
 
-	else location = locationMgr->locationForString(defaultLocationID);
 	if (!location.isValid())
 	{
 		qWarning() << "Warning: location" << defaultLocationID << "is unknown.";
