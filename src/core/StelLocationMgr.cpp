@@ -47,8 +47,6 @@ StelLocationMgr::StelLocationMgr()
 	
 	// Init to Paris France because it's the center of the world.
 	lastResortLocation = locationForString("Paris, France");
-	networkAccessMgr = new QNetworkAccessManager(this);
-	connect(networkAccessMgr, SIGNAL(finished(QNetworkReply*)), this, SLOT(changeLocationFromNetworkLookup(QNetworkReply*)));
 }
 
 void StelLocationMgr::generateBinaryLocationFile(const QString& fileName, bool isUserLocation, const QString& binFilePath) const
@@ -155,8 +153,9 @@ QMap<QString, StelLocation> StelLocationMgr::loadCities(const QString& fileName,
 StelLocationMgr::~StelLocationMgr()
 {
 	delete modelPickedLocation;
+	modelPickedLocation=NULL;
 	delete modelAllLocation;
-	delete networkAccessMgr;
+	modelAllLocation=NULL;
 }
 
 static float parseAngle(const QString& s, bool* ok)
@@ -325,21 +324,45 @@ bool StelLocationMgr::deleteUserLocation(const QString& id)
 void StelLocationMgr::locationFromIP()
 {
     QNetworkRequest req( QUrl( QString("http://freegeoip.net/csv/") ) );
-    networkAccessMgr->get(req);
+    networkReply=StelApp::getInstance().getNetworkAccessManager()->get(req);
+    connect(networkReply, SIGNAL(finished()), this, SLOT(changeLocationFromNetworkLookup()));
 }
 
 // slot that receives IP-based location data from the network.
-void StelLocationMgr::changeLocationFromNetworkLookup(QNetworkReply *reply)
+void StelLocationMgr::changeLocationFromNetworkLookup()
 {
     StelLocation location;
-    if (reply->error() == QNetworkReply::NoError) {
+    if (networkReply->error() == QNetworkReply::NoError) {
         //success
-        QByteArray answer=reply->readAll();
-        const QStringList& splitline = QString(answer).split(",");
-        float latitude=splitline.at(7).mid(1, splitline.at(7).length()-2).toFloat();
-        float longitude=splitline.at(8).mid(1, splitline.at(8).length()-2).toFloat();
+        // Tested with and without working network connection.
+        QByteArray answer=networkReply->readAll();
         // answer/splitline example: "222.222.222.222","AT","Austria","","","","","47.3333","13.3333","",""
         // The parts from freegeoip are: ip,country_code,country_name,region_code,region_name,city,zipcode,latitude,longitude,metro_code,area_code
+        // longitude and latitude should always be filled.
+        // A few tests:
+        if ((answer.count('"') != 22 ) || (answer.count(',') != 10 ))
+        {
+            qDebug() << "StelLocationMgr: Malformatted answer in IP-based location lookup: \n\t" << answer;
+            qDebug() << "StelLocationMgr: Will not change location.";
+            networkReply->deleteLater();
+            return;
+        }
+        const QStringList& splitline = QString(answer).split(",");
+        if (splitline.count() != 11 )
+        {
+            qDebug() << "StelLocationMgr: Unexpected answer in IP-based location lookup: \n\t" << answer;
+            qDebug() << "StelLocationMgr: Will not change location.";
+            networkReply->deleteLater();
+            return;
+        }
+        if ((splitline.at(7)=="\"\"") || (splitline.at(8)=="\"\"")) // empty coordinates?
+        {
+            qDebug() << "StelLocationMgr: Invalid coordinates from IP-based lookup. Ignoring: \n\t" << answer;
+            networkReply->deleteLater();
+            return;
+        }
+        float latitude=splitline.at(7).mid(1, splitline.at(7).length()-2).toFloat();
+        float longitude=splitline.at(8).mid(1, splitline.at(8).length()-2).toFloat();
         QString locLine= // we re-pack into a new line that will be parsed back by StelLocation...
                 QString("%1\t%2\t%3\t%4\t%5\t%6\t%7\t0")
                     .arg(splitline.at(5).length()>2 ? splitline.at(5).mid(1, splitline.at(5).length()-2)  : QString("IP%1").arg(splitline.at(0).mid(1, splitline.at(0).length()-2)))
@@ -349,14 +372,14 @@ void StelLocationMgr::changeLocationFromNetworkLookup(QNetworkReply *reply)
                     .arg(0)   // population: unknown
                     .arg(latitude<0 ? QString("%1S").arg(-latitude, 0, 'f', 6) : QString("%1N").arg(latitude, 0, 'f', 6))
                     .arg(longitude<0 ? QString("%1W").arg(-longitude, 0, 'f', 6) : QString("%1E").arg(longitude, 0, 'f', 6));
-        location=StelLocation::createFromLine(locLine);
+        location=StelLocation::createFromLine(locLine); // in lack of a regular constructor ;-)
         StelCore *core=StelApp::getInstance().getCore();
         core->moveObserverTo(location, 0.0f, 0.0f);
     }
     else {
-        qDebug() << "Failure getting IP-based location: \n\t" <<reply->errorString();
+        qDebug() << "Failure getting IP-based location: \n\t" <<networkReply->errorString();
     }
-    reply->deleteLater();
+    networkReply->deleteLater();
 }
 
 void StelLocationMgr::pickLocationsNearby(const QString planetName, const float longitude, const float latitude, const float radiusDegrees)
@@ -366,9 +389,9 @@ void StelLocationMgr::pickLocationsNearby(const QString planetName, const float 
     while (iter.hasNext())
     {
         iter.next();
-        StelLocation loc=iter.value();
-        if ( (loc.planetName == planetName) &&
-             (StelLocation::distanceDegrees(longitude, latitude, loc.longitude, loc.latitude) <= radiusDegrees) )
+        const StelLocation *loc=&iter.value();
+        if ( (loc->planetName == planetName) &&
+             (StelLocation::distanceDegrees(longitude, latitude, loc->longitude, loc->latitude) <= radiusDegrees) )
         {
             pickedLocations.insert(iter.key(), iter.value());
         }
@@ -383,8 +406,8 @@ void StelLocationMgr::pickLocationsInCountry(const QString country)
     while (iter.hasNext())
     {
         iter.next();
-        StelLocation loc=iter.value();
-        if (loc.country == country) pickedLocations.insert(iter.key(), iter.value());
+        const StelLocation *loc=&iter.value();
+        if (loc->country == country) pickedLocations.insert(iter.key(), iter.value());
     }
     modelPickedLocation->setStringList(pickedLocations.keys());
 }

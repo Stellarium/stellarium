@@ -27,7 +27,6 @@
 
 class QStringListModel;
 class QNetworkReply;
-class QNetworkAccessManager;
 
 //! @class StelLocationMgr
 //! Manage the list of available location.
@@ -86,7 +85,7 @@ public:
 
 public slots:
 	//! Process answer from online lookup of IP address
-	void changeLocationFromNetworkLookup(QNetworkReply *reply);
+	void changeLocationFromNetworkLookup();
 
 private:
 	void generateBinaryLocationFile(const QString& txtFile, bool isUserLocation, const QString& binFile) const;
@@ -108,7 +107,7 @@ private:
 	StelLocation lastResortLocation;
 
 	//!	for IP-based location lookup
-	QNetworkAccessManager *networkAccessMgr;
+	QNetworkReply *networkReply;
 
 };
 
