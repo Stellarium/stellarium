@@ -26,6 +26,7 @@
 #include <QObject>
 #include <QSqlDatabase>
 
+#include "AOCatalog.hpp"
 #include "AOLandscape.hpp"
 #include "AOLanguagePack.hpp"
 #include "AOScript.hpp"
