@@ -165,6 +165,20 @@ void AddOnDialog::initModel(QTableView* tableView, QString table)
 		model->setHeaderData(5, Qt::Horizontal, q_("Installed"));
 		model->setHeaderData(6, Qt::Horizontal, "");
 	}
+	else if (table == TABLE_LANGUAGE_PACK)
+	{
+		query = "SELECT " % table % ".id, addon.id, title, type, last_update, installed, NULL "
+			"FROM addon INNER JOIN " % table %
+			" ON addon.id = " % table % ".addon";
+		model->setQuery(query);
+		model->setHeaderData(0, Qt::Horizontal, q_("Id"));
+		model->setHeaderData(1, Qt::Horizontal, q_("AddOnId"));
+		model->setHeaderData(2, Qt::Horizontal, q_("Title"));
+		model->setHeaderData(3, Qt::Horizontal, q_("Type"));
+		model->setHeaderData(4, Qt::Horizontal, q_("Last Update"));
+		model->setHeaderData(5, Qt::Horizontal, q_("Installed"));
+		model->setHeaderData(6, Qt::Horizontal, "");
+	}
 	else if (table == TABLE_SKY_CULTURE)
 	{
 		query = "SELECT " % table % ".id, addon.id, title, last_update, installed, NULL "
