@@ -114,9 +114,17 @@ void StelAddOnMgr::refreshAddOnStatuses()
 
 	// check add-ons which are already installed
 	QHashIterator<QString, StelAddOn*> aos(m_pStelAddOns);
-	while (aos.hasNext()) {
-	    aos.next();
-	    m_pStelAddOnDAO->markAddOnsAsInstalled(aos.value()->checkInstalledAddOns());
+	while (aos.hasNext())
+	{
+		aos.next();
+		if (aos.key() == LANGUAGE_PACK)
+		{
+			// TODO: mark as installed from checksum list
+		}
+		else
+		{
+			m_pStelAddOnDAO->markAddOnsAsInstalled(aos.value()->checkInstalledAddOns());
+		}
 	}
 }
 

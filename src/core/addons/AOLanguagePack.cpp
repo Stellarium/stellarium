@@ -35,7 +35,24 @@ AOLanguagePack::~AOLanguagePack()
 
 QStringList AOLanguagePack::checkInstalledAddOns() const
 {
-	return QStringList();
+	QDir::Filters filters(QDir::Files | QDir::Readable | QDir::NoDotAndDotDot);
+	QDir dir(m_sLocaleInstallDir % "/stellarium");
+	QFileInfoList files = dir.entryInfoList(filters);
+
+	dir = QDir(m_sLocaleInstallDir % "/stellarium-skycultures");
+	files += dir.entryInfoList(filters);
+
+	QStringList checksums;
+	foreach (QFileInfo fileinfo, files) {
+		QFile file(fileinfo.absoluteFilePath());
+		if (file.open(QIODevice::ReadOnly)) {
+			QCryptographicHash md5(QCryptographicHash::Md5);
+			md5.addData(file.readAll());
+			checksums.append(md5.result().toHex());
+		}
+	}
+
+	return checksums;
 }
 
 bool AOLanguagePack::installFromFile(const QString& idInstall,
