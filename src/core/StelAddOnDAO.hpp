@@ -60,6 +60,7 @@ public:
 	bool insertOnDatabase(QString insert);
 	void markAllAddOnsAsUninstalled();
 	void markAddOnsAsInstalled(QStringList idInstall);
+	void markAddOnsAsInstalledFromMd5(QStringList checksums);
 	void updateAddOnStatus(QString idInstall, int installed);
 
 	QString getLanguagePackType(const QString& checksum);

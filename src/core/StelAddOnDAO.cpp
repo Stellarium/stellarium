@@ -200,11 +200,26 @@ void StelAddOnDAO::markAddOnsAsInstalled(QStringList idInstall)
 		return;
 	}
 	QSqlQuery query(m_db);
-	query.prepare(QString("UPDATE addon SET installed=1 "
-			"WHERE id_install IN ('%1')").arg(idInstall.join(",")));
-	if (!query.exec()) {
+	QString sQuery = QString("UPDATE addon SET installed=1 "
+				 "WHERE id_install IN ('%1')").arg(idInstall.join("','"));
+	if (!query.exec(sQuery)) {
 		qWarning() << "Add-On DAO : Could not mark add-ons as installed!";
 	}
+}
+
+void StelAddOnDAO::markAddOnsAsInstalledFromMd5(QStringList checksums)
+{
+	if (checksums.isEmpty())
+	{
+		return;
+	}
+	QSqlQuery query(m_db);
+	QString sQuery = QString("UPDATE addon SET installed=1 "
+				 "WHERE checksum IN ('%1')").arg(checksums.join("','"));
+	if (!query.exec(sQuery)) {
+		qWarning() << "Add-On DAO : Could not mark add-ons as installed!";
+	}
+	qDebug() << sQuery;
 }
 
 void StelAddOnDAO::updateAddOnStatus(QString idInstall, int installed)
