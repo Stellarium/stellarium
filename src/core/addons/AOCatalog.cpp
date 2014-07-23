@@ -40,8 +40,24 @@ QStringList AOCatalog::checkInstalledAddOns() const
 bool AOCatalog::installFromFile(const QString& idInstall,
 				const QString& downloadFilepath) const
 {
-	// TODO
-	return false;
+	QString suffix = "." % QFileInfo(downloadFilepath).suffix();
+	if (suffix != ".cat" && suffix != ".json")
+	{
+		qWarning() << "Add-On Catalog: Unable to intall" << idInstall
+			   << "The file found is not a .cat or .json";
+		return false;
+	}
+
+	QString destination = StelFileMgr::getUserDir() % "/" % idInstall % suffix;
+	QFile(destination).remove();
+	if (!QFile(downloadFilepath).copy(destination))
+	{
+		qWarning() << "Add-On Catalog: Unable to install" << idInstall;
+		return false;
+	}
+
+	qDebug() << "Add-On Catalog: New catalog installed:" << idInstall;
+	return true;
 }
 
 bool AOCatalog::uninstallAddOn(const QString &idInstall) const
