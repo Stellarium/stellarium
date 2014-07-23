@@ -220,7 +220,6 @@ void StelAddOnDAO::markAddOnsAsInstalledFromMd5(QStringList checksums)
 	if (!query.exec(sQuery)) {
 		qWarning() << "Add-On DAO : Could not mark add-ons as installed!";
 	}
-	qDebug() << sQuery;
 }
 
 void StelAddOnDAO::updateAddOnStatus(QString idInstall, int installed)
