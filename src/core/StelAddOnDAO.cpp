@@ -95,7 +95,8 @@ bool StelAddOnDAO::createAddonTables()
 			"id INTEGER primary key AUTOINCREMENT, "
 			"catalog INTEGER UNIQUE, "
 			"count INTEGER, "
-			"mag_range TEXT)";
+			"min_mag FLOAT, "
+			"max_mag FLOAT)";
 
 	addonTables << "CREATE TABLE IF NOT EXISTS " % TABLE_LANDSCAPE % " ("
 			"id INTEGER primary key AUTOINCREMENT, "
