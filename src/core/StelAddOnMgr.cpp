@@ -254,10 +254,10 @@ void StelAddOnMgr::installAddOn(const int addonId)
 	}
 
 	StelAddOnDAO::AddOnInfo addonInfo = m_pStelAddOnDAO->getAddOnInfo(addonId);
-	// checking if we have this file in add-on path (disk)
+	// checking if we have this file in the add-on dir (local disk)
 	if (QFile(addonInfo.filepath).exists())
 	{
-		return installFromFile(addonInfo);
+		installFromFile(addonInfo);
 	}
 
 	// download file
