@@ -43,7 +43,7 @@ QStringList AOScript::checkInstalledAddOns() const
 bool AOScript::installFromFile(const QString& idInstall,
 			       const QString& downloadFilepath) const
 {
-	QString suffix = QFileInfo(downloadFilepath).suffix();
+	QString suffix = "." % QFileInfo(downloadFilepath).suffix();
 	if (suffix != ".ssc" && suffix != ".sts")
 	{
 		qWarning() << "Add-On Script: Unable to intall" << idInstall
@@ -51,9 +51,9 @@ bool AOScript::installFromFile(const QString& idInstall,
 		return false;
 	}
 
-	QFile file(downloadFilepath);
-	file.remove();
-	if (!file.copy(m_sScriptInstallDir % idInstall % "." % suffix))
+	QString destination = m_sScriptInstallDir % "/" % idInstall % suffix;
+	QFile(destination).remove();
+	if (!QFile(downloadFilepath).copy(destination))
 	{
 		qWarning() << "Add-On Script: Unable to install" << idInstall;
 		return false;
