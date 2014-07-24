@@ -25,9 +25,11 @@
 #include "ZoneData.hpp"
 #include "StelObjectType.hpp"
 #include <QString>
+#include <QtEndian>
 
 class StelObject;
 
+typedef unsigned char Uint8;
 typedef int Int32;
 typedef unsigned int Uint32;
 typedef short int Int16;
@@ -48,19 +50,11 @@ static inline float IndexToBV(unsigned char bV)
 	return (float)bV*(4.f/127.f)-0.5f;
 }
 
-#if (defined(__sgi) && defined(_COMPILER_VERSION) && !defined(__GNUC__))
-#pragma pack(1)
-#elif defined(_MSC_VER)
-#pragma pack(push, 1)
-#endif
 struct Star1 { // 28 byte
-#ifdef _MSC_VER
-	unsigned int hip:24;		// 24 bits needed
-	unsigned int componentIds:8;	//  8 bits needed
-#else
-	int hip:24;			// 24 bits needed
-	unsigned char componentIds;	//  8 bits needed
-#endif
+	// componentIds		 8 bits
+	// hip				24 bits
+	Uint32 hip_componentIds;
+
 	Int32 x0;			// 32 bits needed
 	Int32 x1;			// 32 bits needed
 	unsigned char bV;		//  8 bits needed
@@ -76,22 +70,20 @@ struct Star1 { // 28 byte
 		pos+=((float)(x1)+movementFactor*dx1)*z->axis1;
 		pos+=z->center;
 	}
+	inline int getHip() const {
+		return qFromLittleEndian(hip_componentIds) & 0x00FFFFFF;
+	}
+	inline int getComponentIds() const {
+		return qFromLittleEndian(hip_componentIds) >> 24;
+	}
+
 	float getBV(void) const {return IndexToBV(bV);}
-	bool hasName() const {return hip;}
+	bool hasName() const {return getHip();}
 	QString getNameI18n(void) const;
 	int hasComponentID(void) const;
 	void repack(bool fromBe);
 	void print(void);
-}
-#if defined(__GNUC__)
-	__attribute__ ((__packed__))
-#endif
-;
-#if (defined(__sgi) && defined(_COMPILER_VERSION) && !defined(__GNUC__))
-#pragma pack(0)
-#elif defined(_MSC_VER)
-#pragma pack(pop)
-#endif
+};
 
 
 #if (defined(__sgi) && defined(_COMPILER_VERSION) && !defined(__GNUC__))

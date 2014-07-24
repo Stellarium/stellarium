@@ -289,7 +289,7 @@ void HipZoneArray::updateHipIndex(HipIndexStruct hipIndex[]) const
 	{
 		for (const Star1 *s = z->getStars()+z->size-1;s>=z->getStars();s--)
 		{
-			const int hip = s->hip;
+			const int hip = s->getHip();
 			if (hip < 0 || NR_OF_HIP < hip)
 			{
 				qDebug() << "ERROR: HipZoneArray::updateHipIndex: invalid HIP number:" << hip;
