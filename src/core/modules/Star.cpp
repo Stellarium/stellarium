@@ -28,17 +28,17 @@
 
 QString Star1::getNameI18n(void) const
 {
-	if (hip)
+	if (getHip())
 	{
-		const QString commonNameI18 = StarMgr::getCommonName(hip);
+		const QString commonNameI18 = StarMgr::getCommonName(getHip());
 		if (!commonNameI18.isEmpty()) return commonNameI18;
 		if (StarMgr::getFlagSciNames())
 		{
-			const QString sciName = StarMgr::getSciName(hip);
+			const QString sciName = StarMgr::getSciName(getHip());
 			if (!sciName.isEmpty()) return sciName;
-			const QString varSciName = StarMgr::getGcvsName(hip);
+			const QString varSciName = StarMgr::getGcvsName(getHip());
 			if (!varSciName.isEmpty() && varSciName!=sciName) return varSciName;
-			return QString("HIP %1").arg(hip);
+			return QString("HIP %1").arg(getHip());
 		}
 	}
 	return QString();
@@ -46,9 +46,9 @@ QString Star1::getNameI18n(void) const
 
 int Star1::hasComponentID(void) const
 {
-	if (componentIds)
+	if (getComponentIds())
 	{
-		return componentIds;
+		return getComponentIds();
 	}
 	return 0;
 }
@@ -160,42 +160,13 @@ static unsigned int UnpackUBits(bool fromBe,const char *addr,int bits_begin, con
 
 void Star1::repack(bool fromBe)
 {
-	const int _hip  = UnpackBits(fromBe,(const char*)this, 0,24);
-	const unsigned int _cids = UnpackUBits(fromBe,(const char*)this,24, 8);
-	const int _x0  = UnpackBits(fromBe,(const char*)this,32,32);
-	const int _x1  = UnpackBits(fromBe,(const char*)this,64,32);
-	const unsigned int _bV = UnpackUBits(fromBe,(const char*)this, 96, 8);
-	const unsigned int _mag = UnpackUBits(fromBe,(const char*)this,104, 8);
-	const unsigned int _spInt = UnpackUBits(fromBe,(const char*)this,112,16);
-	const int _dx0 = UnpackBits(fromBe,(const char*)this,128,32);
-	const int _dx1 = UnpackBits(fromBe,(const char*)this,160,32);
-	const int _plx = UnpackBits(fromBe,(const char*)this,192,32);
-	//Q_ASSERT(hip == _hip);
-	//Q_ASSERT(componentIds == _cids);
-	//Q_ASSERT(x0 == _x0);
-	//Q_ASSERT(x1 == _x1);
-	//Q_ASSERT(bV == _bV);
-	//Q_ASSERT(mag == _mag);
-	//Q_ASSERT(spInt == _spInt);
-	//Q_ASSERT(dx0 == _dx0);
-	//Q_ASSERT(dx1 == _dx1);
-	//Q_ASSERT(plx == _plx);
-	hip = _hip;
-	componentIds = _cids;
-	x0 = _x0;
-	x1 = _x1;
-	bV = _bV;
-	mag = _mag;
-	spInt = _spInt;
-	dx0 = _dx0;
-	dx1 = _dx1;
-	plx = _plx;
+	Q_ASSERT(false);
 }
 
 void Star1::print(void)
 {
-	qDebug() << "hip: " << hip
-		 << ", componentIds: " << ((unsigned int)componentIds)
+	qDebug() << "hip: " << getHip()
+		 << ", componentIds: " << getComponentIds()
 		 << ", x0: " << x0
 		 << ", x1: " << x1
 		 << ", bV: " << ((unsigned int)bV)
