@@ -286,3 +286,14 @@ void StelAddOnMgr::removeAddOn(const int addonId)
 		emit (updateTableViews());
 	}
 }
+
+QString StelAddOnMgr::calculateMd5(QFile file)
+{
+	QString checksum;
+	if (file.open(QIODevice::ReadOnly)) {
+		QCryptographicHash md5(QCryptographicHash::Md5);
+		md5.addData(file.readAll());
+		checksum = md5.result().toHex();
+	}
+	return checksum;
+}
