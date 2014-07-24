@@ -54,6 +54,7 @@ public:
 		bool installed;
 		QString filename;
 		QString filepath;
+		QString checksum;
 	};
 
 	AddOnInfo getAddOnInfo(int addonId);

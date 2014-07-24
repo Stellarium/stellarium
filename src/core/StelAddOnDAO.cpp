@@ -243,7 +243,7 @@ StelAddOnDAO::AddOnInfo StelAddOnDAO::getAddOnInfo(int addonId)
 	}
 
 	QSqlQuery query(m_db);
-	query.prepare("SELECT id_install, category, installed, "
+	query.prepare("SELECT id_install, category, installed, checksum, "
 		      "download_url, download_filename, download_size "
 		      "FROM addon WHERE id=:id");
 	query.bindValue(":id", addonId);
@@ -260,6 +260,7 @@ StelAddOnDAO::AddOnInfo StelAddOnDAO::getAddOnInfo(int addonId)
 	const int filenameColumn = queryRecord.indexOf("download_filename");
 	const int sizeColumn = queryRecord.indexOf("download_size");
 	const int installedColumn = queryRecord.indexOf("installed");
+	const int checksumColumn = queryRecord.indexOf("checksum");
 	if (query.next()) {
 		AddOnInfo addonInfo;
 		addonInfo.idInstall = query.value(idInstallColumn).toString();
@@ -268,6 +269,7 @@ StelAddOnDAO::AddOnInfo StelAddOnDAO::getAddOnInfo(int addonId)
 		addonInfo.size = query.value(sizeColumn).toFloat();
 		addonInfo.filename = query.value(filenameColumn).toString();
 		addonInfo.installed = query.value(installedColumn).toBool();
+		addonInfo.checksum = query.value(checksumColumn).toString();
 
 		QString categoryDir = StelApp::getInstance().getStelAddOnMgr().getDirectory(addonInfo.category);
 		Q_ASSERT(!categoryDir.isEmpty());

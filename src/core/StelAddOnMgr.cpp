@@ -254,10 +254,20 @@ void StelAddOnMgr::installAddOn(const int addonId)
 	}
 
 	StelAddOnDAO::AddOnInfo addonInfo = m_pStelAddOnDAO->getAddOnInfo(addonId);
+	QFile file(addonInfo.filepath);
 	// checking if we have this file in the add-on dir (local disk)
-	if (QFile(addonInfo.filepath).exists())
+	if (file.exists())
 	{
-		installFromFile(addonInfo);
+		if (addonInfo.checksum == calculateMd5(file))
+		{
+			installFromFile(addonInfo);
+		}
+		else
+		{
+			qWarning() << "Add-On Mgr: Error: File "
+				   << addonInfo.filename
+				   << " is corrupt, MD5 mismatch!";
+		}
 	}
 
 	// download file
@@ -287,13 +297,14 @@ void StelAddOnMgr::removeAddOn(const int addonId)
 	}
 }
 
-QString StelAddOnMgr::calculateMd5(QFile file)
+QString StelAddOnMgr::calculateMd5(QFile& file) const
 {
 	QString checksum;
 	if (file.open(QIODevice::ReadOnly)) {
 		QCryptographicHash md5(QCryptographicHash::Md5);
 		md5.addData(file.readAll());
 		checksum = md5.result().toHex();
+		file.close();
 	}
 	return checksum;
 }

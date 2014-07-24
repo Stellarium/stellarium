@@ -105,7 +105,7 @@ private:
 
 	void refreshAddOnStatuses();
 	void downloadAddOn(const StelAddOnDAO::AddOnInfo addonInfo);
-	QString calculateMd5(QFile file);
+	QString calculateMd5(QFile &file) const;
 };
 
 #endif // _STELADDONMGR_HPP_
