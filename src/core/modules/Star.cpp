@@ -194,25 +194,14 @@ void Star2::print(void)
 
 void Star3::repack(bool fromBe)
 {
-	const int _x0  = UnpackBits(fromBe,(const char*)this, 0,18);
-	const int _x1  = UnpackBits(fromBe,(const char*)this,18,18);
-	const unsigned int _bV = UnpackUBits(fromBe,(const char*)this,36, 7);
-	const unsigned int _mag = UnpackUBits(fromBe,(const char*)this,43, 5);
-	//Q_ASSERT(x0 == _x0);
-	//Q_ASSERT(x1 == _x1);
-	//Q_ASSERT(bV == _bV);
-	//Q_ASSERT(mag == _mag);
-	x0 = _x0;
-	x1 = _x1;
-	bV = _bV;
-	mag = _mag;
+	Q_ASSERT(false);
 }
 
 void Star3::print(void)
 {
-	qDebug() << "x0: " << x0
-		 << ", x1: " << x1
-		 << ", bV: " << bV
-		 << ", mag: " << mag;
+	qDebug() << "x0: " << getX0()
+		 << ", x1: " << getX1()
+		 << ", bV: " << getBV()
+		 << ", mag: " << getMag();
 }
 

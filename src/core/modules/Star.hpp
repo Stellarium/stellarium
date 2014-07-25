@@ -151,42 +151,52 @@ struct Star2 {  // 10 byte
 	void print(void);
 };
 
-#if (defined(__sgi) && defined(_COMPILER_VERSION) && !defined(__GNUC__))
-#pragma pack(1)
-#elif defined(_MSC_VER)
-#pragma pack(push, 1)
-#endif
 struct Star3 {  // 6 byte
+	/*
 	int x0:18;		// 18 bits needed
 	int x1:18;		// 18 bits needed
 	unsigned int bV:7;	//  7 bits needed
 	unsigned int mag:5;	//  5 bits needed
-	int getBVIndex() const {return bV;}
-	int getMag() const {return mag;}
+	*/
+	Uint8 d[6];
+
+	inline int getX0() const
+	{
+		Uint32 v = d[0] | d[1] << 8 | (d[2] & 0x3) << 16;
+		return ((Int32)v) << 14 >> 14;
+	}
+
+	inline int getX1() const
+	{
+		Uint32 v = d[2] >> 2 | d[3] << 6 | (d[4] & 0xF) << 14;
+		return ((Int32)v) << 14 >> 14;
+	}
+
+	inline int getBVIndex() const
+	{
+		return d[4] >> 4 | (d[5] & 0x7) << 4;
+	}
+
+	inline int getMag() const
+	{
+		return d[5] >> 3;
+	}
+
 	enum {MaxPosVal=((1<<17)-1)};
 	StelObjectP createStelObject(const SpecialZoneArray<Star3> *a, const SpecialZoneData<Star3> *z) const;
 	void getJ2000Pos(const ZoneData *z,float, Vec3f& pos) const
 	{
 		pos = z->axis0;
-		pos*=(float)(x0);
+		pos*=(float)(getX0());
 		pos+=z->center;
-		pos+=(float)(x1)*z->axis1;
+		pos+=(float)(getX1())*z->axis1;
 	}
-	float getBV() const {return IndexToBV(bV);}
+	float getBV() const {return IndexToBV(getBVIndex());}
 	QString getNameI18n() const {return QString();}
 	int hasComponentID() const {return 0;}
 	bool hasName() const {return false;}
 	void repack(bool fromBe);
 	void print();
-}
-#if defined(__GNUC__)
-	__attribute__ ((__packed__))
-#endif
-;
-#if (defined(__sgi) && defined(_COMPILER_VERSION) && !defined(__GNUC__))
-#pragma pack(0)
-#elif defined(_MSC_VER)
-#pragma pack(pop)
-#endif
+};
 
 #endif // _STAR_HPP_
