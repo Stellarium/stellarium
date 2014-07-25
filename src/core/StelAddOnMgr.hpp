@@ -51,7 +51,7 @@ public:
 
 	QString getDirectory(QString category);
 	void installAddOn(const int addonId);
-	void installFromFile(const StelAddOnDAO::AddOnInfo addonInfo);
+	bool installFromFile(const StelAddOnDAO::AddOnInfo addonInfo);
 	void removeAddOn(const int addonId);
 	bool updateCatalog(QString webresult);
 	void setLastUpdate(qint64 time);

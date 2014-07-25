@@ -254,37 +254,45 @@ void StelAddOnMgr::installAddOn(const int addonId)
 	}
 
 	StelAddOnDAO::AddOnInfo addonInfo = m_pStelAddOnDAO->getAddOnInfo(addonId);
-	QFile file(addonInfo.filepath);
-	// checking if we have this file in the add-on dir (local disk)
-	if (file.exists())
+	if (!installFromFile(addonInfo))
 	{
-		if (addonInfo.checksum == calculateMd5(file))
+		// something goes wrong (file not found OR corrupt),
+		// try downloading it...
+		m_downloadQueue.append(addonId);
+		if (!m_bDownloading)
 		{
-			installFromFile(addonInfo);
+			downloadAddOn(addonInfo);
 		}
-		else
-		{
-			qWarning() << "Add-On Mgr: Error: File "
-				   << addonInfo.filename
-				   << " is corrupt, MD5 mismatch!";
-		}
-	}
-
-	// download file
-	m_downloadQueue.append(addonId);
-	if (!m_bDownloading)
-	{
-		downloadAddOn(addonInfo);
 	}
 }
 
-void StelAddOnMgr::installFromFile(const StelAddOnDAO::AddOnInfo addonInfo)
+bool StelAddOnMgr::installFromFile(const StelAddOnDAO::AddOnInfo addonInfo)
 {
-	bool installed = m_pStelAddOns.value(addonInfo.category)
-			->installFromFile(addonInfo.idInstall, addonInfo.filepath);
+	QFile file(addonInfo.filepath);
+	// checking if we have this file in the add-on dir (local disk)
+	if (!file.exists())
+	{
+		return false;
+	}
+
+	// checking integrity
+	bool installed = false;
+	if (addonInfo.checksum == calculateMd5(file))
+	{
+		// installing file
+		installed = m_pStelAddOns.value(addonInfo.category)
+				->installFromFile(addonInfo.idInstall, addonInfo.filepath);
+	}
+	else
+	{
+		qWarning() << "Add-On Mgr: Error: File "
+			   << addonInfo.filename
+			   << " is corrupt, MD5 mismatch!";
+	}
 
 	m_pStelAddOnDAO->updateAddOnStatus(addonInfo.idInstall, installed);
 	emit (updateTableViews());
+	return installed;
 }
 
 void StelAddOnMgr::removeAddOn(const int addonId)
