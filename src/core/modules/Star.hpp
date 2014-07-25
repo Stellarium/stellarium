@@ -53,6 +53,7 @@ static inline float IndexToBV(unsigned char bV)
 struct Star1 { // 28 byte
 	// componentIds		 8 bits
 	// hip				24 bits
+private:
 	Uint8 d[4];
 
 	Int32 x0;			// 32 bits needed
@@ -61,6 +62,8 @@ struct Star1 { // 28 byte
 	unsigned char mag;		//  8 bits needed
 	Uint16 spInt;			// 16 bits needed
 	Int32 dx0,dx1,plx;		// 32 bits needed (x3)
+
+public:
 	enum {MaxPosVal=0x7FFFFFFF};
 	StelObjectP createStelObject(const SpecialZoneArray<Star1> *a, const SpecialZoneData<Star1> *z) const;
 	void getJ2000Pos(const ZoneData *z,float movementFactor, Vec3f& pos) const
@@ -72,6 +75,10 @@ struct Star1 { // 28 byte
 	}
 	inline int getBVIndex() const {return bV;}
 	inline int getMag() const {return mag;}
+	inline int getSpInt() const {return spInt;}
+	inline int getDx0() const {return dx0;}
+	inline int getDx1() const {return dx1;}
+	inline int getPlx() const {return plx;}
 
 	inline int getHip() const
 	{
