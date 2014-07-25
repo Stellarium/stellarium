@@ -50,18 +50,53 @@ static inline float IndexToBV(unsigned char bV)
 	return (float)bV*(4.f/127.f)-0.5f;
 }
 
+
 struct Star1 { // 28 byte
-	// componentIds		 8 bits
-	// hip				24 bits
+
+	/*
+	          _______________
+	0    hip |               |
+	1        |               |
+	2        |_______________|
+	3   cIds |_______________|
+	4     x0 |               |
+	5        |               |
+	6        |               |
+	7        |_______________|
+	8     x1 |               |
+	9        |               |
+	10       |               |
+	11       |_______________|
+	12    bV |_______________|
+	13   mag |_______________|
+	14 spInt |               |
+	15       |_______________|
+	16   dx0 |               |
+	17       |               |
+	18       |               |
+	19       |_______________|
+	20   dx1 |               |
+	21       |               |
+	22       |               |
+	23       |_______________|
+	24   plx |               |
+	25       |               |
+	26       |               |
+	27       |_______________|
+
+	*/
+
+	// componentIds         8
+	// hip                  24
 	//
-	// Int32 x0;			// 32 bits needed
-	// Int32 x1;			// 32 bits needed
+	// Int32 x0             32
+	// Int32 x1             32
 	//
-	// unsigned char bV;		//  8 bits needed
-	// unsigned char mag;		//  8 bits needed
-	// Uint16 spInt;			// 16 bits needed
+	// unsigned char bV     8
+	// unsigned char mag    8
+	// Uint16 spInt         16
 	//
-	// Int32 dx0,dx1,plx;		// 32 bits needed (x3)
+	// Int32 dx0,dx1,plx    32
 private:
 	Uint8 d[28];
 
@@ -102,15 +137,27 @@ public:
 	void print(void);
 };
 
+
 struct Star2 {  // 10 byte
 
 	/*
-	The original fields, all packed into 'd'.
-	int x0:20;
-	int x1:20;
-	int dx0:14;
-	int dx1:14;
-	unsigned int bV:7;
+	          _______________
+	0     x0 |               |
+	1        |_______        |
+	2     x1 |       |_______|
+	3        |               |
+	4        |_______________|
+	5    dx0 |___            |
+	6    dx1 |   |___________|
+	7        |_______        |
+	8     bV |_______|_______|
+	9    mag |_________|_____| bV
+
+	int x0          :20;
+	int x1          :20;
+	int dx0         :14;
+	int dx1         :14;
+	unsigned int bV :7;
 	unsigned int mag:5;
 	*/
 
@@ -169,11 +216,20 @@ public:
 };
 
 struct Star3 {  // 6 byte
+
 	/*
-	int x0:18;		// 18 bits needed
-	int x1:18;		// 18 bits needed
-	unsigned int bV:7;	//  7 bits needed
-	unsigned int mag:5;	//  5 bits needed
+	          _______________
+	0     x0 |               |
+	1        |___________    |
+	2     x1 |           |___|
+	3        |_______        |
+	4     bV |_______|_______|
+	5    mag |_________|_____| bV
+
+	int x0               :18
+	int x1               :18
+	unsigned int bV      :7
+	unsigned int mag     :5
 	*/
 private:
 	Uint8 d[6];
