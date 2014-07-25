@@ -425,28 +425,6 @@ SpecialZoneArray<Star>::SpecialZoneArray(QFile* file, bool byte_swap,bool use_mm
 						getZones()[z].stars = s;
 						s += getZones()[z].size;
 					}
-					if (
-#if (!defined(__GNUC__))
-						true
-#else
-						byte_swap
-#endif
-					)
-					{
-						s = stars;
-						for (unsigned int i=0;i<nr_of_stars;i++,s++)
-						{
-							s->repack(
-#if Q_BYTE_ORDER == Q_BIG_ENDIAN
-								// need for byte_swap on a BE machine means that catalog is LE
-								!byte_swap
-#else
-								// need for byte_swap on a LE machine means that catalog is BE
-								byte_swap
-#endif
-							);
-						}
-					}
 				}
 				file->close();
 			}
