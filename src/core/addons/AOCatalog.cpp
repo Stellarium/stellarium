@@ -62,6 +62,27 @@ bool AOCatalog::installFromFile(const QString& idInstall,
 
 bool AOCatalog::uninstallAddOn(const QString &idInstall) const
 {
-	// TODO
-	return false;
+	QString suffix = ".cat";
+	if (idInstall.contains("modules"))
+	{
+		suffix = ".json";
+	}
+	QFile file(StelFileMgr::getUserDir() % "/" % idInstall % suffix);
+	bool removed = true;
+	if (file.exists())
+	{
+		removed = file.remove();
+	}
+
+	if (removed)
+	{
+		qDebug() << "Add-On Catalog : Successfully removed" << idInstall;
+	}
+	else
+	{
+		qWarning() << "Add-On Catalog : Error! " << idInstall
+			   << "could not be removed. ";
+	}
+
+	return removed;
 }
