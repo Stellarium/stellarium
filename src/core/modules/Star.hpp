@@ -99,7 +99,6 @@ public:
 	bool hasName() const {return getHip();}
 	QString getNameI18n(void) const;
 	int hasComponentID(void) const;
-	void repack(bool fromBe);
 	void print(void);
 };
 
@@ -166,7 +165,6 @@ public:
 	QString getNameI18n(void) const {return QString();}
 	int hasComponentID(void) const {return 0;}
 	bool hasName() const {return false;}
-	void repack(bool fromBe);
 	void print(void);
 };
 
@@ -216,7 +214,6 @@ public:
 	QString getNameI18n() const {return QString();}
 	int hasComponentID() const {return 0;}
 	bool hasName() const {return false;}
-	void repack(bool fromBe);
 	void print();
 };
 

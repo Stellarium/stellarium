@@ -53,116 +53,6 @@ int Star1::hasComponentID(void) const
 	return 0;
 }
 
-static int UnpackBits(bool fromBe, const char *addr,int bits_begin, const int bits_size)
-{
-	Q_ASSERT(bits_size <= 32);
-	while (bits_begin >= 8)
-	{
-		bits_begin -= 8;
-		addr++;
-	}
-	const int bits_end = bits_begin + bits_size;
-	int rval;
-	if (fromBe)
-	{
-		rval = (int)((( (( (((unsigned int)(unsigned char)(addr[0]))  << 8) |
-		       ((unsigned int)(unsigned char)(addr[1]))) << 8) |
-		       ((unsigned int)(unsigned char)(addr[2]))) << 8) |
-		       ((unsigned int)(unsigned char)(addr[3])));
-		if (bits_end <= 32)
-		{
-			if (bits_begin > 0) rval <<= bits_begin;
-		}
-		else
-		{
-			rval <<= bits_begin;
-			unsigned int rval_lo = (unsigned char)(addr[4]);
-			rval_lo >>= (8-bits_begin);
-			rval |= rval_lo;
-		}
-		if (bits_size < 32) rval >>= (32-bits_size);
-	}
-	else
-	{
-		rval = (int)((( (( (((unsigned int)(unsigned char)(addr[3]))  << 8) |
-		       ((unsigned int)(unsigned char)(addr[2]))) << 8) |
-		       ((unsigned int)(unsigned char)(addr[1]))) << 8) |
-		       ((unsigned int)(unsigned char)(addr[0])));
-		if (bits_end <= 32)
-		{
-			if (bits_end < 32) rval <<= (32-bits_end);
-			if (bits_size < 32) rval >>= (32-bits_size);
-		}
-		else
-		{
-			int rval_hi = addr[4];
-			rval_hi <<= (64-bits_end);
-			rval_hi >>= (32-bits_size);
-			rval = ((unsigned int)rval) >> bits_begin;
-			rval |= rval_hi;
-		}
-	}
-	return rval;
-}
-
-
-
-static unsigned int UnpackUBits(bool fromBe,const char *addr,int bits_begin, const int bits_size)
-{
-	Q_ASSERT(bits_size <= 32);
-	while (bits_begin >= 8)
-	{
-		bits_begin -= 8;
-		addr++;
-	}
-	const int bits_end = bits_begin + bits_size;
-	unsigned int rval;
-	if (fromBe)
-	{
-		rval = (( (( (((unsigned int)(unsigned char)(addr[0]))  << 8) |
-		       ((unsigned int)(unsigned char)(addr[1]))) << 8) |
-		       ((unsigned int)(unsigned char)(addr[2]))) << 8) |
-		       ((unsigned int)(unsigned char)(addr[3]));
-		if (bits_end <= 32)
-		{
-			if (bits_begin > 0) rval <<= bits_begin;
-		}
-		else
-		{
-			rval <<= bits_begin;
-			unsigned int rval_lo = (unsigned char)(addr[4]);
-			rval_lo >>= (8-bits_begin);
-			rval |= rval_lo;
-		}
-		if (bits_size < 32) rval >>= (32-bits_size);
-	}
-	else
-	{
-		rval = (( (( (((unsigned int)(unsigned char)(addr[3]))  << 8) |
-		       ((unsigned int)(unsigned char)(addr[2]))) << 8) |
-		       ((unsigned int)(unsigned char)(addr[1]))) << 8) |
-		       ((unsigned int)(unsigned char)(addr[0]));
-		if (bits_end <= 32)
-		{
-			if (bits_begin > 0) rval >>= bits_begin;
-		}
-		else
-		{
-			unsigned int rval_hi = (unsigned char)(addr[4]);
-			rval_hi <<= (32-bits_begin);
-			rval = rval >> bits_begin;
-			rval |= rval_hi;
-		}
-		if (bits_size < 32) rval &= ((((unsigned int)1)<<bits_size)-1);
-	}
-	return rval;
-}
-
-void Star1::repack(bool fromBe)
-{
-	Q_ASSERT(false);
-}
-
 void Star1::print(void)
 {
 	qDebug() << "hip: " << getHip()
@@ -177,30 +67,12 @@ void Star1::print(void)
 		 << ", plx: " << getPlx();
 }
 
-void Star2::repack(bool fromBe)
-{
-	Q_ASSERT(false);
-}
-
 void Star2::print(void)
 {
 	qDebug() << "x0: " << getX0()
 		 << ", x1: " << getX1()
 		 << ", dx0: " << getDx0()
 		 << ", dx1: " << getDx1()
-		 << ", bV: " << getBV()
-		 << ", mag: " << getMag();
-}
-
-void Star3::repack(bool fromBe)
-{
-	Q_ASSERT(false);
-}
-
-void Star3::print(void)
-{
-	qDebug() << "x0: " << getX0()
-		 << ", x1: " << getX1()
 		 << ", bV: " << getBV()
 		 << ", mag: " << getMag();
 }
