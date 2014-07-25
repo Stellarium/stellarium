@@ -111,8 +111,10 @@ struct Star2 {  // 10 byte
 	unsigned int mag:5;
 	*/
 
+private:
 	Uint8 d[10];
 
+public:
 	inline int getX0() const
 	{
 		Uint32 v = d[0] | d[1] << 8 | (d[2] & 0xF) << 16;
@@ -171,8 +173,10 @@ struct Star3 {  // 6 byte
 	unsigned int bV:7;	//  7 bits needed
 	unsigned int mag:5;	//  5 bits needed
 	*/
+private:
 	Uint8 d[6];
 
+public:
 	inline int getX0() const
 	{
 		Uint32 v = d[0] | d[1] << 8 | (d[2] & 0x3) << 16;
