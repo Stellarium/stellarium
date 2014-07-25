@@ -167,14 +167,14 @@ void Star1::print(void)
 {
 	qDebug() << "hip: " << getHip()
 		 << ", componentIds: " << getComponentIds()
-		 << ", x0: " << x0
-		 << ", x1: " << x1
-		 << ", bV: " << ((unsigned int)bV)
-		 << ", mag: " << ((unsigned int)mag)
-		 << ", spInt: " << spInt
-		 << ", dx0: " << dx0
-		 << ", dx1: " << dx1
-		 << ", plx: " << plx;
+		 << ", x0: " << getX0()
+		 << ", x1: " << getX1()
+		 << ", bV: " << ((unsigned int)getBV())
+		 << ", mag: " << ((unsigned int)getMag())
+		 << ", spInt: " << getSpInt()
+		 << ", dx0: " << getDx0()
+		 << ", dx1: " << getDx1()
+		 << ", plx: " << getPlx();
 }
 
 void Star2::repack(bool fromBe)
