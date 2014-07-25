@@ -53,15 +53,17 @@ static inline float IndexToBV(unsigned char bV)
 struct Star1 { // 28 byte
 	// componentIds		 8 bits
 	// hip				24 bits
+	//
+	// Int32 x0;			// 32 bits needed
+	// Int32 x1;			// 32 bits needed
+	//
+	// unsigned char bV;		//  8 bits needed
+	// unsigned char mag;		//  8 bits needed
+	// Uint16 spInt;			// 16 bits needed
+	//
+	// Int32 dx0,dx1,plx;		// 32 bits needed (x3)
 private:
-	Uint8 d[4];
-
-	Int32 x0;			// 32 bits needed
-	Int32 x1;			// 32 bits needed
-	unsigned char bV;		//  8 bits needed
-	unsigned char mag;		//  8 bits needed
-	Uint16 spInt;			// 16 bits needed
-	Int32 dx0,dx1,plx;		// 32 bits needed (x3)
+	Uint8 d[28];
 
 public:
 	enum {MaxPosVal=0x7FFFFFFF};
@@ -69,16 +71,18 @@ public:
 	void getJ2000Pos(const ZoneData *z,float movementFactor, Vec3f& pos) const
 	{
 		pos = z->axis0;
-		pos*=((float)(x0)+movementFactor*dx0);
-		pos+=((float)(x1)+movementFactor*dx1)*z->axis1;
+		pos*=((float)(getX0())+movementFactor*getDx0());
+		pos+=((float)(getX1())+movementFactor*getDx1())*z->axis1;
 		pos+=z->center;
 	}
-	inline int getBVIndex() const {return bV;}
-	inline int getMag() const {return mag;}
-	inline int getSpInt() const {return spInt;}
-	inline int getDx0() const {return dx0;}
-	inline int getDx1() const {return dx1;}
-	inline int getPlx() const {return plx;}
+	inline int getBVIndex() const {return d[12];}
+	inline int getMag() const {return d[13];}
+	inline int getSpInt() const {return ((Uint16*)d)[6];}
+	inline int getX0() const { return qFromLittleEndian(((Int32*)d)[1]); }
+	inline int getX1() const { return qFromLittleEndian(((Int32*)d)[2]); }
+	inline int getDx0() const {return qFromLittleEndian(((Int32*)d)[4]);}
+	inline int getDx1() const {return qFromLittleEndian(((Int32*)d)[5]);}
+	inline int getPlx() const {return qFromLittleEndian(((Int32*)d)[6]);}
 
 	inline int getHip() const
 	{
@@ -91,7 +95,7 @@ public:
 		return (Int32)d[3];
 	}
 
-	float getBV(void) const {return IndexToBV(bV);}
+	float getBV(void) const {return IndexToBV(getBVIndex());}
 	bool hasName() const {return getHip();}
 	QString getNameI18n(void) const;
 	int hasComponentID(void) const;
