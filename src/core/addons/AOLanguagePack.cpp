@@ -65,24 +65,9 @@ bool AOLanguagePack::installFromFile(const QString& idInstall,
 		return false;
 	}
 
-	QFile file(downloadFilepath);
-	QString checksum;
-	if (file.open(QIODevice::ReadOnly)) {
-		QCryptographicHash md5(QCryptographicHash::Md5);
-		md5.addData(file.readAll());
-		checksum = md5.result().toHex();
-	}
-
-	if (checksum.isEmpty())
-	{
-		qWarning() << "Add-On Language: Unable to read the file"
-			   << QDir::toNativeSeparators(downloadFilepath);
-		return false;
-	}
-
 	QString destination = m_sLocaleInstallDir % "/" % idInstall % ".qm";
 	QFile(destination).remove();
-	if (!file.copy(destination))
+	if (!QFile(downloadFilepath).copy(destination))
 	{
 		qWarning() << "Add-On Language: Unable to install" << idInstall;
 		return false;
