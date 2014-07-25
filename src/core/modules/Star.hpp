@@ -53,7 +53,7 @@ static inline float IndexToBV(unsigned char bV)
 struct Star1 { // 28 byte
 	// componentIds		 8 bits
 	// hip				24 bits
-	Uint32 hip_componentIds;
+	Uint8 d[4];
 
 	Int32 x0;			// 32 bits needed
 	Int32 x1;			// 32 bits needed
@@ -72,12 +72,18 @@ struct Star1 { // 28 byte
 	}
 	inline int getBVIndex() const {return bV;}
 	inline int getMag() const {return mag;}
-	inline int getHip() const {
-		return qFromLittleEndian(hip_componentIds) & 0x00FFFFFF;
+
+	inline int getHip() const
+	{
+		Uint32 v = d[0] | d[1] << 8 | d[2] << 16;
+		return ((Int32)v) << 8 >> 8;
 	}
-	inline int getComponentIds() const {
-		return qFromLittleEndian(hip_componentIds) >> 24;
+
+	inline int getComponentIds() const
+	{
+		return (Int32)d[3];
 	}
+
 	float getBV(void) const {return IndexToBV(bV);}
 	bool hasName() const {return getHip();}
 	QString getNameI18n(void) const;
