@@ -27,6 +27,7 @@
 #include "StelGui.hpp"
 #include "StelTranslator.hpp"
 #include "StelUtils.hpp"
+#include "addons/AddOnTableModel.hpp"
 
 AddOnDialog::AddOnDialog(QObject* parent) : StelDialog(parent)
 {
@@ -148,9 +149,8 @@ void AddOnDialog::setUpTableView(QTableView* tableView)
 
 void AddOnDialog::initModel(QTableView* tableView, QString table)
 {
-	QSqlQueryModel* model = new QSqlQueryModel;
+	AddOnTableModel* model = new AddOnTableModel(table);
 	QString query;
-
 	if (table == TABLE_CATALOG)
 	{
 		query = "SELECT " % table % ".id, addon.id, title, type, version, installed, NULL "

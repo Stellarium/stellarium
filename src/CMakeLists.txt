@@ -236,6 +236,8 @@ SET(stellarium_lib_SRCS
 	core/modules/ZoneArray.hpp
 	core/modules/ZoneData.hpp
 
+	core/addons/AddOnTableModel.cpp
+	core/addons/AddOnTableModel.hpp
 	core/addons/StelAddOn.hpp
 	core/addons/AOCatalog.cpp
 	core/addons/AOCatalog.hpp
