@@ -112,7 +112,7 @@ public:
 	}
 	inline int getBVIndex() const {return d[12];}
 	inline int getMag() const {return d[13];}
-	inline int getSpInt() const {return ((Uint16*)d)[6];}
+	inline int getSpInt() const {return ((Uint16*)d)[7];}
 	inline int getX0() const { return qFromLittleEndian(((Int32*)d)[1]); }
 	inline int getX1() const { return qFromLittleEndian(((Int32*)d)[2]); }
 	inline int getDx0() const {return qFromLittleEndian(((Int32*)d)[4]);}
