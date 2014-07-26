@@ -24,9 +24,7 @@
 
 AOCatalog::AOCatalog(StelAddOnDAO* pStelAddOnDAO)
 	: m_pStelAddOnDAO(pStelAddOnDAO)
-	//, m_sStarCatalogInstallDir(StelFileMgr::getUserDir() % "/stars")
 {
-	//StelFileMgr::makeSureDirExistsAndIsWritable(m_sStarCatalogInstallDir);
 }
 
 AOCatalog::~AOCatalog()

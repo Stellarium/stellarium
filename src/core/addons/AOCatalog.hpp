@@ -41,7 +41,6 @@ public:
 
 private:
 	StelAddOnDAO* m_pStelAddOnDAO;
-	//const QString m_sStarCatalogInstallDir;
 };
 
 #endif // _AOCATALOG_HPP_
