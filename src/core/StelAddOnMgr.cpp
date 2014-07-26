@@ -118,7 +118,7 @@ void StelAddOnMgr::refreshAddOnStatuses()
 	while (aos.hasNext())
 	{
 		aos.next();
-		if (aos.key() == LANGUAGE_PACK)
+		if (aos.key() == CATALOG || aos.key() == LANGUAGE_PACK)
 		{
 			m_pStelAddOnDAO->markAddOnsAsInstalledFromMd5(aos.value()->checkInstalledAddOns());
 		}

@@ -18,6 +18,7 @@
  */
 
 #include <QCryptographicHash>
+#include <QDirIterator>
 
 #include "AOCatalog.hpp"
 
@@ -34,7 +35,28 @@ AOCatalog::~AOCatalog()
 
 QStringList AOCatalog::checkInstalledAddOns() const
 {
-	return QStringList();
+	QStringList files;
+	QDir::Filters filters(QDir::Files | QDir::Readable | QDir::NoDotAndDotDot);
+	QDirIterator it(StelFileMgr::getUserDir() % "/stars", filters, QDirIterator::Subdirectories);
+	while (it.hasNext()) {
+		files.append(it.next());
+	}
+	QDirIterator it2(StelFileMgr::getUserDir() % "/modules", filters, QDirIterator::Subdirectories);
+	while (it2.hasNext()) {
+		files.append(it2.next());
+	}
+
+	QStringList checksums;
+	foreach (QString filepath, files) {
+		QFile file(filepath);
+		if (file.open(QIODevice::ReadOnly)) {
+			QCryptographicHash md5(QCryptographicHash::Md5);
+			md5.addData(file.readAll());
+			checksums.append(md5.result().toHex());
+		}
+	}
+
+	return checksums;
 }
 
 bool AOCatalog::installFromFile(const QString& idInstall,
