@@ -27,6 +27,64 @@
 AddOnTableModel::AddOnTableModel(QString tableName)
 {
 	QString query;
+	if (tableName == TABLE_CATALOG)
+	{
+		query = "SELECT " % tableName % ".id, addon.id, "
+			"title, type, version, installed, NULL "
+			"FROM addon INNER JOIN " % tableName %
+			" ON addon.id = " % tableName % ".addon";
+		setQuery(query);
+		setHeaderData(0, Qt::Horizontal, q_("Id"));
+		setHeaderData(1, Qt::Horizontal, q_("AddOnId"));
+		setHeaderData(2, Qt::Horizontal, q_("Title"));
+		setHeaderData(3, Qt::Horizontal, q_("Type"));
+		setHeaderData(4, Qt::Horizontal, q_("Last Version"));
+		setHeaderData(5, Qt::Horizontal, q_("Installed"));
+		setHeaderData(6, Qt::Horizontal, "");
+	}
+	else if (tableName == TABLE_LANGUAGE_PACK)
+	{
+		query = "SELECT " % tableName % ".id, addon.id, "
+			"title, type, last_update, installed, NULL "
+			"FROM addon INNER JOIN " % tableName %
+			" ON addon.id = " % tableName % ".addon";
+		setQuery(query);
+		setHeaderData(0, Qt::Horizontal, q_("Id"));
+		setHeaderData(1, Qt::Horizontal, q_("AddOnId"));
+		setHeaderData(2, Qt::Horizontal, q_("Title"));
+		setHeaderData(3, Qt::Horizontal, q_("Type"));
+		setHeaderData(4, Qt::Horizontal, q_("Last Update"));
+		setHeaderData(5, Qt::Horizontal, q_("Installed"));
+		setHeaderData(6, Qt::Horizontal, "");
+	}
+	else if (tableName == TABLE_SKY_CULTURE)
+	{
+		query = "SELECT " % tableName % ".id, addon.id, "
+			"title, last_update, installed, NULL "
+			"FROM addon INNER JOIN " % tableName %
+			" ON addon.id = " % tableName % ".addon";
+		setQuery(query);
+		setHeaderData(0, Qt::Horizontal, q_("Id"));
+		setHeaderData(1, Qt::Horizontal, q_("AddOnId"));
+		setHeaderData(2, Qt::Horizontal, q_("Title"));
+		setHeaderData(3, Qt::Horizontal, q_("Last Update"));
+		setHeaderData(4, Qt::Horizontal, q_("Installed"));
+		setHeaderData(5, Qt::Horizontal, "");
+	}
+	else
+	{
+		query = "SELECT " % tableName % ".id, addon.id, "
+			"title, version, installed, NULL "
+			"FROM addon INNER JOIN " % tableName %
+			" ON addon.id = " % tableName % ".addon";
+		setQuery(query);
+		setHeaderData(0, Qt::Horizontal, q_("Id"));
+		setHeaderData(1, Qt::Horizontal, q_("AddOnId"));
+		setHeaderData(2, Qt::Horizontal, q_("Title"));
+		setHeaderData(3, Qt::Horizontal, q_("Last Version"));
+		setHeaderData(4, Qt::Horizontal, q_("Installed"));
+		setHeaderData(5, Qt::Horizontal, "");
+	}
 }
 
 QVariant AddOnTableModel::data(const QModelIndex& index, int role) const
