@@ -25,6 +25,13 @@
 #include "StelAddOnDAO.hpp"
 
 AddOnTableModel::AddOnTableModel(QString tableName)
+	: COLUMN_ID(q_("Id"))
+	, COLUMN_ADDONID(q_("AddOnId"))
+	, COLUMN_TITLE(q_("Title"))
+	, COLUMN_TYPE(q_("Type"))
+	, COLUMN_LASTVERSION(q_("Last Version"))
+	, COLUMN_LASTUPDATE(q_("Last Update"))
+	, COLUMN_INSTALLED(q_("Installed"))
 {
 	QString query;
 	if (tableName == TABLE_CATALOG)
