@@ -136,8 +136,14 @@ void AddOnDialog::changePage(QListWidgetItem *current, QListWidgetItem *previous
 
 }
 
-void AddOnDialog::setUpTableView(QTableView* tableView)
+void AddOnDialog::setUpTableView(QTableView* tableView, QString tableName)
 {
+	AddOnTableModel* model = new AddOnTableModel(tableName);
+	tableView->setModel(model);
+
+	tableView->setColumnHidden(0, true); // hide id
+	tableView->setColumnHidden(1, true); // hide addonid
+
 	tableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 	int lastColumn = tableView->horizontalHeader()->count() - 1;
 	tableView->horizontalHeader()->setSectionResizeMode(lastColumn, QHeaderView::ResizeToContents);
@@ -145,14 +151,6 @@ void AddOnDialog::setUpTableView(QTableView* tableView)
 	tableView->setAlternatingRowColors(false);
 	tableView->setSelectionBehavior(QAbstractItemView::SelectRows);
 	tableView->setEditTriggers(false);
-}
-
-void AddOnDialog::initModel(QTableView* tableView, QString table)
-{
-	AddOnTableModel* model = new AddOnTableModel(table);
-	tableView->setModel(model);
-	tableView->setColumnHidden(0, true); // hide id
-	tableView->setColumnHidden(1, true); // hide addonid
 }
 
 void AddOnDialog::insertCheckBoxes(QTableView* tableview, int tab) {
@@ -185,33 +183,27 @@ void AddOnDialog::populateTables()
 	}
 
 	// CATALOGS
-	initModel(ui->catalogsTableView, TABLE_CATALOG);
-	setUpTableView(ui->catalogsTableView);
+	setUpTableView(ui->catalogsTableView, TABLE_CATALOG);
 	insertCheckBoxes(ui->catalogsTableView, CATALOG);
 
 	// LANDSCAPES
-	initModel(ui->landscapeTableView,TABLE_LANDSCAPE);
-	setUpTableView(ui->landscapeTableView);
+	setUpTableView(ui->landscapeTableView,TABLE_LANDSCAPE);
 	insertCheckBoxes(ui->landscapeTableView, LANDSCAPE);
 
 	// LANGUAGE PACK
-	initModel(ui->languageTableView, TABLE_LANGUAGE_PACK);
-	setUpTableView(ui->languageTableView);
+	setUpTableView(ui->languageTableView, TABLE_LANGUAGE_PACK);
 	insertCheckBoxes(ui->languageTableView, LANGUAGEPACK);
 
 	// SCRIPTS
-	initModel(ui->scriptsTableView, TABLE_SCRIPT);
-	setUpTableView(ui->scriptsTableView);
+	setUpTableView(ui->scriptsTableView, TABLE_SCRIPT);
 	insertCheckBoxes(ui->scriptsTableView, SCRIPT);
 
 	// STARLORE (SKY CULTURE)
-	initModel(ui->starloreTbleView, TABLE_SKY_CULTURE);
-	setUpTableView(ui->starloreTbleView);
+	setUpTableView(ui->starloreTbleView, TABLE_SKY_CULTURE);
 	insertCheckBoxes(ui->starloreTbleView, STARLORE);
 
 	// TEXTURES
-	initModel(ui->texturesTableView, TABLE_TEXTURE);
-	setUpTableView(ui->texturesTableView);
+	setUpTableView(ui->texturesTableView, TABLE_TEXTURE);
 	insertCheckBoxes(ui->texturesTableView, TEXTURE);
 }
 
