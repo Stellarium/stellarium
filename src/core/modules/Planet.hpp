@@ -146,6 +146,7 @@ public:
 	double getMeanSolarDay(void) const;
 
 	const QString& getTextMapName() const {return texMapName;}	
+	const QString getPlanetType() const {return pType;}
 
 	// Compute the z rotation to use from equatorial to geographic coordinates
 	double getSiderealTime(double jd) const;

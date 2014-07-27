@@ -233,7 +233,12 @@ public slots:
 	//! @param planetName the case in-sensistive English planet name.
 	//! @param withExtinction the flag for use extinction effect for magnitudes (default not use)
 	//! @return a magnitude
-	float getPlanetVMagnitude(QString planetName) const;
+	float getPlanetVMagnitude(QString planetName, bool withExtinction=false) const;
+
+	//! Get type for Solar system bodies from scripts
+	//! @param planetName the case in-sensistive English planet name.
+	//! @return a type of planet (planet, moon, asteroid, comet, plutoid)
+	QString getPlanetType(QString planetName) const;
 
 	//! Get distance to Solar system bodies from scripts
 	//! @param planetName the case in-sensistive English planet name.
