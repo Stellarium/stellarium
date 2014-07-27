@@ -22,6 +22,8 @@
 
 #include <QSqlTableModel>
 
+#include "StelTranslator.hpp"
+
 class AddOnTableModel : public QSqlQueryModel
 {
 	Q_OBJECT
@@ -29,6 +31,15 @@ public:
 	AddOnTableModel(QString tableName);
 
 	QVariant data(const QModelIndex& index, int role = Qt :: DisplayRole) const;
+
+private:
+	const QString COLUMN_ID = q_("Id");
+	const QString COLUMN_ADDONID = q_("AddOnId");
+	const QString COLUMN_TITLE = q_("Title");
+	const QString COLUMN_TYPE = q_("Type");
+	const QString COLUMN_LASTVERSION = q_("Last Version");
+	const QString COLUMN_LASTUPDATE = q_("Last Update");
+	const QString COLUMN_INSTALLED = q_("Installed");
 };
 
 #endif // _ADDONTABLEMODEL_HPP_

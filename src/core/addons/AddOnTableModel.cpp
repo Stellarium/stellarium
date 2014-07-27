@@ -17,12 +17,12 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
+#include <QDateTime>
 #include <QtDebug>
 #include <QStringBuilder>
 
 #include "AddOnTableModel.hpp"
 #include "StelAddOnDAO.hpp"
-#include "StelTranslator.hpp"
 
 AddOnTableModel::AddOnTableModel(QString tableName)
 {
@@ -34,12 +34,12 @@ AddOnTableModel::AddOnTableModel(QString tableName)
 			"FROM addon INNER JOIN " % tableName %
 			" ON addon.id = " % tableName % ".addon";
 		setQuery(query);
-		setHeaderData(0, Qt::Horizontal, q_("Id"));
-		setHeaderData(1, Qt::Horizontal, q_("AddOnId"));
-		setHeaderData(2, Qt::Horizontal, q_("Title"));
-		setHeaderData(3, Qt::Horizontal, q_("Type"));
-		setHeaderData(4, Qt::Horizontal, q_("Last Version"));
-		setHeaderData(5, Qt::Horizontal, q_("Installed"));
+		setHeaderData(0, Qt::Horizontal, COLUMN_ID);
+		setHeaderData(1, Qt::Horizontal, COLUMN_ADDONID);
+		setHeaderData(2, Qt::Horizontal, COLUMN_TITLE);
+		setHeaderData(3, Qt::Horizontal, COLUMN_TYPE);
+		setHeaderData(4, Qt::Horizontal, COLUMN_LASTVERSION);
+		setHeaderData(5, Qt::Horizontal, COLUMN_INSTALLED);
 		setHeaderData(6, Qt::Horizontal, "");
 	}
 	else if (tableName == TABLE_LANGUAGE_PACK)
@@ -49,12 +49,12 @@ AddOnTableModel::AddOnTableModel(QString tableName)
 			"FROM addon INNER JOIN " % tableName %
 			" ON addon.id = " % tableName % ".addon";
 		setQuery(query);
-		setHeaderData(0, Qt::Horizontal, q_("Id"));
-		setHeaderData(1, Qt::Horizontal, q_("AddOnId"));
-		setHeaderData(2, Qt::Horizontal, q_("Title"));
-		setHeaderData(3, Qt::Horizontal, q_("Type"));
-		setHeaderData(4, Qt::Horizontal, q_("Last Update"));
-		setHeaderData(5, Qt::Horizontal, q_("Installed"));
+		setHeaderData(0, Qt::Horizontal, COLUMN_ID);
+		setHeaderData(1, Qt::Horizontal, COLUMN_ADDONID);
+		setHeaderData(2, Qt::Horizontal, COLUMN_TITLE);
+		setHeaderData(3, Qt::Horizontal, COLUMN_TYPE);
+		setHeaderData(4, Qt::Horizontal, COLUMN_LASTUPDATE);
+		setHeaderData(5, Qt::Horizontal, COLUMN_INSTALLED);
 		setHeaderData(6, Qt::Horizontal, "");
 	}
 	else if (tableName == TABLE_SKY_CULTURE)
@@ -64,11 +64,11 @@ AddOnTableModel::AddOnTableModel(QString tableName)
 			"FROM addon INNER JOIN " % tableName %
 			" ON addon.id = " % tableName % ".addon";
 		setQuery(query);
-		setHeaderData(0, Qt::Horizontal, q_("Id"));
-		setHeaderData(1, Qt::Horizontal, q_("AddOnId"));
-		setHeaderData(2, Qt::Horizontal, q_("Title"));
-		setHeaderData(3, Qt::Horizontal, q_("Last Update"));
-		setHeaderData(4, Qt::Horizontal, q_("Installed"));
+		setHeaderData(0, Qt::Horizontal, COLUMN_ID);
+		setHeaderData(1, Qt::Horizontal, COLUMN_ADDONID);
+		setHeaderData(2, Qt::Horizontal, COLUMN_TITLE);
+		setHeaderData(3, Qt::Horizontal, COLUMN_LASTUPDATE);
+		setHeaderData(4, Qt::Horizontal, COLUMN_INSTALLED);
 		setHeaderData(5, Qt::Horizontal, "");
 	}
 	else
@@ -78,11 +78,11 @@ AddOnTableModel::AddOnTableModel(QString tableName)
 			"FROM addon INNER JOIN " % tableName %
 			" ON addon.id = " % tableName % ".addon";
 		setQuery(query);
-		setHeaderData(0, Qt::Horizontal, q_("Id"));
-		setHeaderData(1, Qt::Horizontal, q_("AddOnId"));
-		setHeaderData(2, Qt::Horizontal, q_("Title"));
-		setHeaderData(3, Qt::Horizontal, q_("Last Version"));
-		setHeaderData(4, Qt::Horizontal, q_("Installed"));
+		setHeaderData(0, Qt::Horizontal, COLUMN_ID);
+		setHeaderData(1, Qt::Horizontal, COLUMN_ADDONID);
+		setHeaderData(2, Qt::Horizontal, COLUMN_TITLE);
+		setHeaderData(3, Qt::Horizontal, COLUMN_LASTVERSION);
+		setHeaderData(4, Qt::Horizontal, COLUMN_INSTALLED);
 		setHeaderData(5, Qt::Horizontal, "");
 	}
 }
@@ -95,11 +95,6 @@ QVariant AddOnTableModel::data(const QModelIndex& index, int role) const
 	}
 
 	QVariant value = QSqlQueryModel::data(index, role);
-
-	for (int i=0; i<columnCount(); i++)
-	{
-		qDebug() << headerData(i, Qt::Horizontal);
-	}
 
 	return value;
 }
