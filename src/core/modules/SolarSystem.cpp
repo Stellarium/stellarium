@@ -1049,12 +1049,21 @@ StelObjectP SolarSystem::searchByName(const QString& name) const
 	return StelObjectP();
 }
 
-float SolarSystem::getPlanetVMagnitude(QString planetName) const
+float SolarSystem::getPlanetVMagnitude(QString planetName, bool withExtinction) const
 {
 	PlanetP p = searchByEnglishName(planetName);
 	float r = 0.f;
-	r = p->getVMagnitude(StelApp::getInstance().getCore());
+	if (withExtinction)
+		r = p->getVMagnitudeWithExtinction(StelApp::getInstance().getCore());
+	else
+		r = p->getVMagnitude(StelApp::getInstance().getCore());
 	return r;
+}
+
+QString SolarSystem::getPlanetType(QString planetName) const
+{
+	PlanetP p = searchByEnglishName(planetName);
+	return p->getPlanetType();
 }
 
 double SolarSystem::getDistanceToPlanet(QString planetName) const
