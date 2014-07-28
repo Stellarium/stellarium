@@ -102,10 +102,14 @@ QVariant AddOnTableModel::data(const QModelIndex& index, int role) const
 	}
 
 	QVariant value = QSqlQueryModel::data(index, role);
-
-	if (headerData(index.column(), Qt::Horizontal) == COLUMN_LASTUPDATE)
+	QString column = headerData(index.column(), Qt::Horizontal).toString();
+	if (column == COLUMN_LASTUPDATE)
 	{
 		value = qVariantFromValue(QDateTime::fromMSecsSinceEpoch(value.Int*1000));
+	}
+	else if (column == COLUMN_INSTALLED)
+	{
+		value = qVariantFromValue(value.toBool() ? q_("Yes") : q_("No"));
 	}
 
 	return value;
