@@ -143,6 +143,8 @@ void AddOnDialog::setUpTableView(QTableView* tableView, QString tableName)
 
 	tableView->setColumnHidden(0, true); // hide id
 	tableView->setColumnHidden(1, true); // hide addonid
+	tableView->setColumnHidden(2, true); // hide firststel
+	tableView->setColumnHidden(3, true); // hide laststel
 
 	tableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 	int lastColumn = tableView->horizontalHeader()->count() - 1;

@@ -35,6 +35,8 @@ public:
 private:
 	const QString COLUMN_ID;
 	const QString COLUMN_ADDONID;
+	const QString COLUMN_FIRSTSTEL;
+	const QString COLUMN_LASTSTEL;
 	const QString COLUMN_TITLE;
 	const QString COLUMN_TYPE;
 	const QString COLUMN_LASTVERSION;

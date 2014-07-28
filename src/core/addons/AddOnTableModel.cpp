@@ -25,8 +25,10 @@
 #include "StelAddOnDAO.hpp"
 
 AddOnTableModel::AddOnTableModel(QString tableName)
-	: COLUMN_ID(q_("Id"))
-	, COLUMN_ADDONID(q_("AddOnId"))
+	: COLUMN_ID("Id")
+	, COLUMN_ADDONID("AddOnId")
+	, COLUMN_FIRSTSTEL("FirstStel")
+	, COLUMN_LASTSTEL("LastStel")
 	, COLUMN_TITLE(q_("Title"))
 	, COLUMN_TYPE(q_("Type"))
 	, COLUMN_LASTVERSION(q_("Last Version"))
@@ -36,61 +38,69 @@ AddOnTableModel::AddOnTableModel(QString tableName)
 	QString query;
 	if (tableName == TABLE_CATALOG)
 	{
-		query = "SELECT " % tableName % ".id, addon.id, "
+		query = "SELECT " % tableName % ".id, addon.id, first_stel, last_stel, "
 			"title, type, version, installed, NULL "
 			"FROM addon INNER JOIN " % tableName %
 			" ON addon.id = " % tableName % ".addon";
 		setQuery(query);
 		setHeaderData(0, Qt::Horizontal, COLUMN_ID);
 		setHeaderData(1, Qt::Horizontal, COLUMN_ADDONID);
-		setHeaderData(2, Qt::Horizontal, COLUMN_TITLE);
-		setHeaderData(3, Qt::Horizontal, COLUMN_TYPE);
-		setHeaderData(4, Qt::Horizontal, COLUMN_LASTVERSION);
-		setHeaderData(5, Qt::Horizontal, COLUMN_INSTALLED);
-		setHeaderData(6, Qt::Horizontal, "");
+		setHeaderData(2, Qt::Horizontal, COLUMN_FIRSTSTEL);
+		setHeaderData(3, Qt::Horizontal, COLUMN_LASTSTEL);
+		setHeaderData(4, Qt::Horizontal, COLUMN_TITLE);
+		setHeaderData(5, Qt::Horizontal, COLUMN_TYPE);
+		setHeaderData(6, Qt::Horizontal, COLUMN_LASTVERSION);
+		setHeaderData(7, Qt::Horizontal, COLUMN_INSTALLED);
+		setHeaderData(8, Qt::Horizontal, "");
 	}
 	else if (tableName == TABLE_LANGUAGE_PACK)
 	{
-		query = "SELECT " % tableName % ".id, addon.id, "
+		query = "SELECT " % tableName % ".id, addon.id, first_stel, last_stel, "
 			"title, type, last_update, installed, NULL "
 			"FROM addon INNER JOIN " % tableName %
 			" ON addon.id = " % tableName % ".addon";
 		setQuery(query);
 		setHeaderData(0, Qt::Horizontal, COLUMN_ID);
 		setHeaderData(1, Qt::Horizontal, COLUMN_ADDONID);
-		setHeaderData(2, Qt::Horizontal, COLUMN_TITLE);
-		setHeaderData(3, Qt::Horizontal, COLUMN_TYPE);
-		setHeaderData(4, Qt::Horizontal, COLUMN_LASTUPDATE);
-		setHeaderData(5, Qt::Horizontal, COLUMN_INSTALLED);
-		setHeaderData(6, Qt::Horizontal, "");
+		setHeaderData(2, Qt::Horizontal, COLUMN_FIRSTSTEL);
+		setHeaderData(3, Qt::Horizontal, COLUMN_LASTSTEL);
+		setHeaderData(4, Qt::Horizontal, COLUMN_TITLE);
+		setHeaderData(5, Qt::Horizontal, COLUMN_TYPE);
+		setHeaderData(6, Qt::Horizontal, COLUMN_LASTUPDATE);
+		setHeaderData(7, Qt::Horizontal, COLUMN_INSTALLED);
+		setHeaderData(8, Qt::Horizontal, "");
 	}
 	else if (tableName == TABLE_SKY_CULTURE)
 	{
-		query = "SELECT " % tableName % ".id, addon.id, "
+		query = "SELECT " % tableName % ".id, addon.id, first_stel, last_stel, "
 			"title, last_update, installed, NULL "
 			"FROM addon INNER JOIN " % tableName %
 			" ON addon.id = " % tableName % ".addon";
 		setQuery(query);
 		setHeaderData(0, Qt::Horizontal, COLUMN_ID);
 		setHeaderData(1, Qt::Horizontal, COLUMN_ADDONID);
-		setHeaderData(2, Qt::Horizontal, COLUMN_TITLE);
-		setHeaderData(3, Qt::Horizontal, COLUMN_LASTUPDATE);
-		setHeaderData(4, Qt::Horizontal, COLUMN_INSTALLED);
-		setHeaderData(5, Qt::Horizontal, "");
+		setHeaderData(2, Qt::Horizontal, COLUMN_FIRSTSTEL);
+		setHeaderData(3, Qt::Horizontal, COLUMN_LASTSTEL);
+		setHeaderData(4, Qt::Horizontal, COLUMN_TITLE);
+		setHeaderData(5, Qt::Horizontal, COLUMN_LASTUPDATE);
+		setHeaderData(6, Qt::Horizontal, COLUMN_INSTALLED);
+		setHeaderData(7, Qt::Horizontal, "");
 	}
 	else
 	{
-		query = "SELECT " % tableName % ".id, addon.id, "
+		query = "SELECT " % tableName % ".id, addon.id, first_stel, last_stel, "
 			"title, version, installed, NULL "
 			"FROM addon INNER JOIN " % tableName %
 			" ON addon.id = " % tableName % ".addon";
 		setQuery(query);
 		setHeaderData(0, Qt::Horizontal, COLUMN_ID);
 		setHeaderData(1, Qt::Horizontal, COLUMN_ADDONID);
-		setHeaderData(2, Qt::Horizontal, COLUMN_TITLE);
-		setHeaderData(3, Qt::Horizontal, COLUMN_LASTVERSION);
-		setHeaderData(4, Qt::Horizontal, COLUMN_INSTALLED);
-		setHeaderData(5, Qt::Horizontal, "");
+		setHeaderData(2, Qt::Horizontal, COLUMN_FIRSTSTEL);
+		setHeaderData(3, Qt::Horizontal, COLUMN_LASTSTEL);
+		setHeaderData(4, Qt::Horizontal, COLUMN_TITLE);
+		setHeaderData(5, Qt::Horizontal, COLUMN_LASTVERSION);
+		setHeaderData(6, Qt::Horizontal, COLUMN_INSTALLED);
+		setHeaderData(7, Qt::Horizontal, "");
 	}
 }
 
