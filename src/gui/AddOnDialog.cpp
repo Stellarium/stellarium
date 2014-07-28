@@ -45,7 +45,6 @@ void AddOnDialog::retranslate()
 	if (dialog)
 	{
 		ui->retranslateUi(dialog);
-		ui->stackListWidget->setWrapping(false);
 		updateTabBarListWidgetWidth();
 	}
 }
@@ -86,18 +85,20 @@ void AddOnDialog::createDialogContent()
 
 void AddOnDialog::updateTabBarListWidgetWidth()
 {
-	QAbstractItemModel* model = ui->stackListWidget->model();
-	if (!model)
-		return;
+	ui->stackListWidget->setWrapping(false);
 
 	// Update list item sizes after translation
 	ui->stackListWidget->adjustSize();
 
+	QAbstractItemModel* model = ui->stackListWidget->model();
+	if (!model)
+		return;
+
 	int width = 0;
 	for (int row = 0; row < model->rowCount(); row++)
 	{
-		QModelIndex index = model->index(row, 0);
-		width += ui->stackListWidget->sizeHintForIndex(index).width();
+		width += ui->stackListWidget->sizeHintForRow(row);
+		width += ui->stackListWidget->iconSize().width();
 	}
 
 	// Hack to force the window to be resized...
@@ -138,8 +139,7 @@ void AddOnDialog::changePage(QListWidgetItem *current, QListWidgetItem *previous
 
 void AddOnDialog::setUpTableView(QTableView* tableView, QString tableName)
 {
-	AddOnTableModel* model = new AddOnTableModel(tableName);
-	tableView->setModel(model);
+	tableView->setModel(new AddOnTableModel(tableName));
 
 	tableView->setColumnHidden(0, true); // hide id
 	tableView->setColumnHidden(1, true); // hide addonid
