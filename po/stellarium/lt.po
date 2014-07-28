@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-07-13 12:59+0700\n"
-"PO-Revision-Date: 2014-07-23 15:34+0000\n"
+"PO-Revision-Date: 2014-07-27 07:31+0000\n"
 "Last-Translator: Mindaugas Pelionis <mindaugas.pelionis@gmail.com>\n"
 "Language-Team: Lithuanian <lt@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-07-24 05:41+0000\n"
-"X-Generator: Launchpad (build 17114)\n"
+"X-Launchpad-Export-Date: 2014-07-28 06:13+0000\n"
+"X-Generator: Launchpad (build 17131)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:107 src/core/modules/StarMgr.cpp:339
 #: src/core/modules/GridLinesMgr.cpp:695 src/core/modules/LandscapeMgr.cpp:353
@@ -189,7 +189,7 @@ msgstr "Ryškis: <b>%1</b>"
 #: src/core/modules/Nebula.cpp:119
 #, qt-format
 msgid "Surface brightness: <b>%1</b> (extincted to: <b>%2</b>)"
-msgstr ""
+msgstr "Paviršiaus ryškis: <b>%1</b> (nusilpęs iki: <b>%2</b>)"
 
 #: src/core/modules/Nebula.cpp:125
 #, qt-format
@@ -251,7 +251,7 @@ msgstr "Absoliutinis ryškis: %1"
 #: src/core/modules/Planet.cpp:167
 #, qt-format
 msgid "Obliquity (of date, for Earth): %1"
-msgstr ""
+msgstr "Ašies posvyris (datos, Žemei): %1"
 
 #: src/core/modules/Planet.cpp:179 src/core/modules/MinorPlanet.cpp:252
 #: src/core/modules/Comet.cpp:203
@@ -280,7 +280,7 @@ msgstr "Regimasis skersmuo: %1"
 #: src/core/modules/Comet.cpp:232
 #, qt-format
 msgid "Sidereal period: %1 days (%2 a)"
-msgstr ""
+msgstr "Žvaigždinis sukimosi periodas: %1 dienų (%2 a)"
 
 #: src/core/modules/Planet.cpp:220
 #, qt-format
@@ -315,7 +315,7 @@ msgstr "Apšviesta: %1%"
 #: src/core/modules/MinorPlanet.cpp:208
 #, qt-format
 msgid "Provisional designation: %1"
-msgstr ""
+msgstr "Laikinas pavadinimas: %1"
 
 #: src/core/modules/Comet.cpp:186
 #, no-c-format, qt-format
@@ -361,19 +361,19 @@ msgstr "Spalvos rodiklis (B-V): <b>%1</b>"
 
 #: src/core/modules/StarWrapper.cpp:144
 msgid "eruptive variable star"
-msgstr ""
+msgstr "eruptyvinė kintamoji žvaigždė"
 
 #: src/core/modules/StarWrapper.cpp:146
 msgid "pulsating variable star"
-msgstr ""
+msgstr "pulsuojanti kintamoji žvaigždė"
 
 #: src/core/modules/StarWrapper.cpp:148
 msgid "rotating variable star"
-msgstr ""
+msgstr "besisukanti kintamoji žvaigždė"
 
 #: src/core/modules/StarWrapper.cpp:150
 msgid "cataclysmic variable star"
-msgstr ""
+msgstr "kataklizminė kintamoji žvaigždė"
 
 #: src/core/modules/StarWrapper.cpp:153
 msgid "eclipsing binary system"
@@ -448,12 +448,12 @@ msgstr ""
 #: src/core/modules/StarWrapper.cpp:254
 #, qt-format
 msgid "Duration of eclipse: %1%"
-msgstr ""
+msgstr "Užtemimo trukmė: %1%"
 
 #: src/core/modules/StarWrapper.cpp:256
 #, qt-format
 msgid "Rising time: %1%"
-msgstr ""
+msgstr "Patekėjimo laikas: %1%"
 
 #: src/core/StelApp.cpp:471
 msgid "Night mode"
@@ -640,7 +640,7 @@ msgstr "Vertikalusis atspindys"
 
 #: src/core/StelCore.cpp:1489
 msgid "Correction is disabled. Use only if you know what you are doing!"
-msgstr ""
+msgstr "Taisymas atjungtas. Naudokite tik jei žinote, ką darote!"
 
 #: src/core/StelCore.cpp:1492
 #, qt-format
@@ -649,6 +649,9 @@ msgid ""
 "Henriksson in his article <em>Einstein's Theory of Relativity Confirmed by "
 "Ancient Solar Eclipses</em> (%1). See for more info %2here%3."
 msgstr ""
+"Ši istorinė formulė 1931 m. buvo sukurta C. Schoch ir panaudota G. "
+"Henriksson straipsnyje <em>Einšteino reliatyvumo teorija patvirtinta "
+"senovinių saulės užtemimų</em> (%1). Daugiau informacijos %2čia%3."
 
 #: src/core/StelCore.cpp:1495
 #, qt-format
@@ -656,6 +659,8 @@ msgid ""
 "This empirical equation was published by G. M. Clemence in the article "
 "<em>On the system of astronomical constants</em> (%1)."
 msgstr ""
+"Ši empirinė lygtis buvo paskelbta G. M. Clemence straipsnyje <em>Apie "
+"astronominių konstantų sistemą</em> (%1)."
 
 #: src/core/StelCore.cpp:1498
 #, qt-format
@@ -665,6 +670,10 @@ msgid ""
 "<em>Astronomical Formulae for Calculators</em>. It was also adopted in the "
 "PC program SunTracker Pro."
 msgstr ""
+"Ši formulė paremta Saulės, Mėnulio ir planetų stebėjimų, vykusių po 1650 m., "
+"tyrimu, atliktu Spencer Jones (%1) ir panaudotu Jean Meeus jo "
+"<em>Astronominėse formulėse skaičiuotuvams</em>. Ji taip paat naudojama "
+"kompiuterinėje programoje SunTracker Pro."
 
 #: src/core/StelCore.cpp:1502
 msgid ""
@@ -672,6 +681,9 @@ msgid ""
 "adopted in the <em>Astronomical Ephemeris</em> and in the <em>Canon of Solar "
 "Eclipses</em> by Mucke & Meeus (1983)."
 msgstr ""
+"Tai truputį modifikuota IAU (1952) formulės versija, kuri buvo panaudota "
+"Mucke ir Meeus <em>Astronominėse efemeridėse</em> ir <em>Saulės užtemimų "
+"kanone</em> (1983)."
 
 #: src/core/StelCore.cpp:1506
 msgid ""
@@ -680,6 +692,10 @@ msgid ""
 "relation was also implicitly adopted in the syzygy tables of Goldstine "
 "(1973)."
 msgstr ""
+"Tuckerman (1962, 1964) lentelės išvardina Saulės, Mėnulio ir planetų padėtis "
+"5 ir 10 dienų intervalais nuo 601 pr. m. e. iki 1649. Tas pats santykis taip "
+"pat buvo panaudotas Goldstine (1973) sizigijų (trijų kūnų išsidėstymo "
+"vienoje linijoje) lentelėse."
 
 #: src/core/StelCore.cpp:1510
 #, qt-format
@@ -688,6 +704,9 @@ msgid ""
 "article <em>The accelerations of the earth and moon from early astronomical "
 "observations</em> (%1)."
 msgstr ""
+"Ši lygtis buvo publikuota P. M. Muller ir F. R. Stephenson straipsnyje "
+"<em>Žemės ir Mėnulio pagreičiai, remiantis ankstyvaisiais astronominiais "
+"stebėjimais</em> (%1)."
 
 #: src/core/StelCore.cpp:1513
 #, qt-format
@@ -695,6 +714,8 @@ msgid ""
 "This equation was published by F. R. Stephenson in the article <em>Pre-"
 "Telescopic Astronomical Observations</em> (%1)."
 msgstr ""
+"Ši lygtis buvo publikuota F. R. Stephenson straipsnyje <em>Ikiteleskopiniai "
+"astronominiai stebėjimai</em> (%1)."
 
 #: src/core/StelCore.cpp:1516
 #, qt-format
@@ -704,6 +725,11 @@ msgid ""
 "<em>Polynomial approximations for the correction delta T E.T.-U.T. in the "
 "period 1800-1975</em> (%1) as fit through data published by Brouwer (1952)."
 msgstr ""
+"Ši 12-os eilės daugianarė lygtis (pasenusi ir pakeista Schmadel & Zech "
+"(1988)) buvo publikuota L. D. Schmadel ir G. Zech straipsnyje "
+"<em>Apytiksliai daugianariai skaičiavimai deltos T E.T.-U.T. korekcijai 1800-"
+"1975 laikotarpiu</em> (%1) kaip Brouwer (1952) paskelbtų duomenų "
+"aproksimacija."
 
 #: src/core/StelCore.cpp:1519
 msgid ""
