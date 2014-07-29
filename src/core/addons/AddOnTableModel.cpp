@@ -23,6 +23,7 @@
 
 #include "AddOnTableModel.hpp"
 #include "StelAddOnDAO.hpp"
+#include "StelUtils.hpp"
 
 AddOnTableModel::AddOnTableModel(QString tableName)
 	: COLUMN_ID("Id")
@@ -38,8 +39,9 @@ AddOnTableModel::AddOnTableModel(QString tableName)
 	QString query;
 	if (tableName == TABLE_CATALOG)
 	{
-		query = "SELECT " % tableName % ".id, addon.id, first_stel, last_stel, "
-			"title, type, version, installed, NULL "
+		query = "SELECT " % tableName % ".id, addon.id, "
+			"first_stel, last_stel, title, "
+			"type, version, installed, NULL "
 			"FROM addon INNER JOIN " % tableName %
 			" ON addon.id = " % tableName % ".addon";
 		setQuery(query);
@@ -55,8 +57,9 @@ AddOnTableModel::AddOnTableModel(QString tableName)
 	}
 	else if (tableName == TABLE_LANGUAGE_PACK)
 	{
-		query = "SELECT " % tableName % ".id, addon.id, first_stel, last_stel, "
-			"title, type, last_update, installed, NULL "
+		query = "SELECT " % tableName % ".id, addon.id, "
+			"first_stel, last_stel, title, "
+			"type, last_update, installed, NULL "
 			"FROM addon INNER JOIN " % tableName %
 			" ON addon.id = " % tableName % ".addon";
 		setQuery(query);
@@ -72,8 +75,9 @@ AddOnTableModel::AddOnTableModel(QString tableName)
 	}
 	else if (tableName == TABLE_SKY_CULTURE)
 	{
-		query = "SELECT " % tableName % ".id, addon.id, first_stel, last_stel, "
-			"title, last_update, installed, NULL "
+		query = "SELECT " % tableName % ".id, addon.id, "
+			"first_stel, last_stel, title, "
+			"last_update, installed, NULL "
 			"FROM addon INNER JOIN " % tableName %
 			" ON addon.id = " % tableName % ".addon";
 		setQuery(query);
@@ -88,8 +92,9 @@ AddOnTableModel::AddOnTableModel(QString tableName)
 	}
 	else
 	{
-		query = "SELECT " % tableName % ".id, addon.id, first_stel, last_stel, "
-			"title, version, installed, NULL "
+		query = "SELECT " % tableName % ".id, addon.id, "
+			"first_stel, last_stel, title, "
+			"version, installed, NULL "
 			"FROM addon INNER JOIN " % tableName %
 			" ON addon.id = " % tableName % ".addon";
 		setQuery(query);

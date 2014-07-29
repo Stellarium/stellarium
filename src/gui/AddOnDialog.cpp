@@ -139,12 +139,21 @@ void AddOnDialog::changePage(QListWidgetItem *current, QListWidgetItem *previous
 
 void AddOnDialog::setUpTableView(QTableView* tableView, QString tableName)
 {
-	tableView->setModel(new AddOnTableModel(tableName));
+	AddOnTableModel* model = new AddOnTableModel(tableName);
+	tableView->setModel(model);
 
 	tableView->setColumnHidden(0, true); // hide id
 	tableView->setColumnHidden(1, true); // hide addonid
 	tableView->setColumnHidden(2, true); // hide firststel
 	tableView->setColumnHidden(3, true); // hide laststel
+
+	// hide imcompatible add-ons
+	for (int row = 0; row < model->rowCount(); row++)
+	{
+		tableView->setRowHidden(row,
+					!isCompatible(model->index(row, 2).data().toString(),
+						      model->index(row, 3).data().toString()));
+	}
 
 	tableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 	int lastColumn = tableView->horizontalHeader()->count() - 1;
@@ -153,6 +162,28 @@ void AddOnDialog::setUpTableView(QTableView* tableView, QString tableName)
 	tableView->setAlternatingRowColors(false);
 	tableView->setSelectionBehavior(QAbstractItemView::SelectRows);
 	tableView->setEditTriggers(false);
+}
+
+bool AddOnDialog::isCompatible(QString first, QString last)
+{
+	QStringList c = StelUtils::getApplicationVersion().split(".");
+	QStringList f = first.split(".");
+	QStringList l = last.split(".");
+
+	if (c.size() < 3 || f.size() < 3 || l.size() < 3) {
+		return false; // invalid version
+	}
+
+	int currentVersion = QString(c.at(0) % "00" % c.at(1) % "0" % c.at(2)).toInt();
+	int firstVersion = QString(f.at(0) % "00" % f.at(1) % "0" % f.at(2)).toInt();
+	int lastVersion = QString(l.at(0) % "00" % l.at(1) % "0" % l.at(2)).toInt();
+
+	if (currentVersion < firstVersion || currentVersion > lastVersion)
+	{
+		return false; // out of bounds
+	}
+
+	return true;
 }
 
 void AddOnDialog::insertCheckBoxes(QTableView* tableview, int tab) {

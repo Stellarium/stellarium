@@ -75,6 +75,7 @@ private:
 
 	void updateTabBarListWidgetWidth();
 	void setUpTableView(QTableView* tableView, QString tableName);
+	bool isCompatible(QString first, QString last);
 	void insertCheckBoxes(QTableView* tableview, int tab);
 };
 
