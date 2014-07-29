@@ -56,6 +56,7 @@ private slots:
 	void installSelectedRows();
 	void removeSelectedRows();
 	void populateTables();
+	void slotRowSelected(int row, bool checked);
 
 private:
 	//! All categories sorted according to the tab index.
@@ -71,12 +72,13 @@ private:
 
 	QNetworkReply* m_pUpdateCatalogReply;
 	QTableView* m_currentTableView;
-	QList<QHash<int, QCheckBox*> > m_checkBoxes;
+	QHash<Tab, QButtonGroup*> m_checkBoxes;
+	QList<int> m_iSelectedAddOns;
 
 	void updateTabBarListWidgetWidth();
 	void setUpTableView(QTableView* tableView, QString tableName);
 	bool isCompatible(QString first, QString last);
-	void insertCheckBoxes(QTableView* tableview, int tab);
+	void insertCheckBoxes(QTableView* tableview, Tab tab);
 };
 
 #endif // _ADDONDIALOG_HPP_

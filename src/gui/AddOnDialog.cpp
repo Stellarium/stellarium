@@ -186,33 +186,15 @@ bool AddOnDialog::isCompatible(QString first, QString last)
 	return true;
 }
 
-void AddOnDialog::insertCheckBoxes(QTableView* tableview, int tab) {
-	// Insert clean checkboxes to the current tableview
-	QHash<int, QCheckBox*> checkboxes;
-	int lastColumn = tableview->horizontalHeader()->count() - 1;
-	for(int row=0; row<tableview->model()->rowCount(); ++row)
-	{
-		QCheckBox* cbox = new QCheckBox();
-		tableview->setIndexWidget(tableview->model()->index(row, lastColumn), cbox);
-		cbox->setStyleSheet("QCheckBox { padding-left: 8px; }");
-		checkboxes.insert(row, cbox);
-	}
-	m_checkBoxes.insert(tab, checkboxes);
-}
-
 void AddOnDialog::populateTables()
 {
 	// destroying all checkboxes
+	int i = 0;
+	m_iSelectedAddOns.clear();
 	while (!m_checkBoxes.isEmpty())
 	{
-		QHash<int, QCheckBox*> cbs;
-		cbs = m_checkBoxes.takeFirst();
-		int i = 0;
-		while (!cbs.isEmpty())
-		{
-			delete cbs.take(i);
-			i++;
-		}
+		delete m_checkBoxes.take((Tab)i);
+		i++;
 	}
 
 	// CATALOGS
@@ -238,6 +220,23 @@ void AddOnDialog::populateTables()
 	// TEXTURES
 	setUpTableView(ui->texturesTableView, TABLE_TEXTURE);
 	insertCheckBoxes(ui->texturesTableView, TEXTURE);
+}
+
+void AddOnDialog::insertCheckBoxes(QTableView* tableview, Tab tab) {
+	QButtonGroup* checkboxes = new QButtonGroup(this);
+	checkboxes->setExclusive(false);
+	connect(checkboxes, SIGNAL(buttonToggled(int, bool)),
+		this, SLOT(slotRowSelected(int, bool)));
+
+	int lastColumn = tableview->horizontalHeader()->count() - 1;
+	for(int row=0; row < tableview->model()->rowCount(); ++row)
+	{
+		QCheckBox* cbox = new QCheckBox();
+		cbox->setStyleSheet("QCheckBox { padding-left: 8px; }");
+		tableview->setIndexWidget(tableview->model()->index(row, lastColumn), cbox);
+		checkboxes->addButton(cbox, row);
+	}
+	m_checkBoxes.insert(tab, checkboxes);
 }
 
 void AddOnDialog::updateCatalog()
@@ -295,50 +294,29 @@ void AddOnDialog::downloadFinished()
 	populateTables();
 }
 
-void AddOnDialog::installSelectedRows() {
-	int currentTab = ui->stackedWidget->currentIndex();
-	Q_ASSERT(m_checkBoxes.at(currentTab).count() == m_currentTableView->model()->rowCount());
-	QList<int> addonIdList;
-	for (int i=0;i<m_checkBoxes.at(currentTab).count(); ++i)
+void AddOnDialog::slotRowSelected(int row, bool checked)
+{
+	int addOnId = m_currentTableView->model()->index(row, 1).data().toInt();
+	if (checked)
 	{
-		if (!m_checkBoxes.at(currentTab).value(i)->checkState())
-		{
-			continue;
-		}
-		addonIdList.append(m_currentTableView->model()->index(i, 1).data().toInt());
+		m_iSelectedAddOns.append(addOnId);
 	}
-
-	foreach (int addonId , addonIdList) {
-		StelApp::getInstance().getStelAddOnMgr().installAddOn(addonId);
+	else
+	{
+		m_iSelectedAddOns.removeOne(addOnId);
 	}
-
-	// TODO: fix download result
-	/*
-	typedef QPair<QString, bool> Result;
-	QList<Result> resultList; // <title, result>
-	// Display results
-	foreach (Result r, resultList) {
-		// TODO: display it in a nice message box.
-		QString installed = r.second ? " installed!" : " not installed!";
-		qDebug() << "Add-on: " % r.first % installed;
-	}
-	*/
 }
 
-void AddOnDialog::removeSelectedRows() {
-	int currentTab = ui->stackedWidget->currentIndex();
-	Q_ASSERT(m_checkBoxes.at(currentTab).count() == m_currentTableView->model()->rowCount());
-	QList<int> addonIdList;
-	for (int i=0;i<m_checkBoxes.at(currentTab).count(); ++i)
-	{
-		if (!m_checkBoxes.at(currentTab).value(i)->checkState())
-		{
-			continue;
-		}
-		addonIdList.append(m_currentTableView->model()->index(i, 1).data().toInt());
+void AddOnDialog::installSelectedRows()
+{
+	foreach (int addonId , m_iSelectedAddOns) {
+		StelApp::getInstance().getStelAddOnMgr().installAddOn(addonId);
 	}
+}
 
-	foreach (int addonId , addonIdList) {
+void AddOnDialog::removeSelectedRows()
+{
+	foreach (int addonId , m_iSelectedAddOns) {
 		StelApp::getInstance().getStelAddOnMgr().removeAddOn(addonId);
 	}
 }
