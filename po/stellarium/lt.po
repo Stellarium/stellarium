@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-07-13 12:59+0700\n"
-"PO-Revision-Date: 2014-07-27 07:31+0000\n"
+"PO-Revision-Date: 2014-07-28 11:59+0000\n"
 "Last-Translator: Mindaugas Pelionis <mindaugas.pelionis@gmail.com>\n"
 "Language-Team: Lithuanian <lt@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-07-28 06:13+0000\n"
+"X-Launchpad-Export-Date: 2014-07-29 05:56+0000\n"
 "X-Generator: Launchpad (build 17131)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:107 src/core/modules/StarMgr.cpp:339
@@ -737,6 +737,9 @@ msgid ""
 "Programs and Tables from -4000 to +2800</em> (1986) and in the PC "
 "planetarium program RedShift."
 msgstr ""
+"Šis algoritmas buvo panaudotas P. Bretagnon ir L. Simon <em>Planetinės "
+"programos ir lentelės nuo -4000 iki +2800 metų</em> (1986) ir kompiuterinėje "
+"planetariumo programoje RedShift."
 
 #: src/core/StelCore.cpp:1522
 #, qt-format
@@ -816,6 +819,8 @@ msgid ""
 "This polynome was published by J. Meeus and L. Simons in article "
 "<em>Polynomial approximations to Delta T, 1620-2000 AD</em> (%1)."
 msgstr ""
+"Šis daugianaris buvo paskelbtas J. Meeus ir L. Simons straipsnyje "
+"<em>Daugianarės delta T aproksimacijos, 1620-2000 m.e.</em> (%1)."
 
 #: src/core/StelCore.cpp:1555
 msgid ""
@@ -4308,13 +4313,16 @@ msgstr "Programos kalba"
 
 #: src/ui_configurationDialog.h:1005
 msgid "Check updates"
-msgstr ""
+msgstr "Tikrinti atnaujinimą"
 
 #: src/ui_configurationDialog.h:1006
 msgid ""
 "Enable checking updates of Stellarium via Internet. Info for updates of "
 "stable versions you can look on the tab \"About\" of \"Help\" window."
 msgstr ""
+"Įjungti Stellarium atnaujinimo patikrinimą internetu. Informaciją apie "
+"stabilių versijų atnaujinimą galite peržiūrėti \"Pagalbos\" lango kortelėje "
+"\"Apie\"."
 
 #: src/ui_configurationDialog.h:1007
 msgid "Default options"
@@ -5863,7 +5871,7 @@ msgstr ""
 #. TRANSLATORS: Title of a section in the About tab of the Satellites window
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:406
 msgid "TLE data updates"
-msgstr ""
+msgstr "TLE duomenų atnaujinimas"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:407
 msgid ""
@@ -5879,6 +5887,9 @@ msgid ""
 "computer.  This file must be in the same format as the Celestrak updates "
 "(see %1 for an example)."
 msgstr ""
+"Išjungę atnaujinimus internetu, galite atnaujinti naudodamiesi byla jūsų "
+"kompiuteryje. Ši byla turi būti tokiu pat formatu, kaip Celestrak programos "
+"atnaujinimai (žr. %1 kaip pavyzdį)."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:409
 msgid ""
@@ -5928,7 +5939,7 @@ msgstr ""
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:219
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:302
 msgid "Internet updates disabled"
-msgstr ""
+msgstr "Atnaujinimas internetu išjungtas"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:453
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:469
@@ -6095,7 +6106,7 @@ msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:682
 msgid "Updates"
-msgstr ""
+msgstr "Atnaujinimas"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:683
 msgid "Update satellite data from Internet sources"
