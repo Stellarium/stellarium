@@ -107,6 +107,12 @@ void AddOnDialog::updateTabBarListWidgetWidth()
 
 void AddOnDialog::changePage(QListWidgetItem *current, QListWidgetItem *previous)
 {
+	// cleaning checkboxes
+	Tab prev = (Tab) ui->stackedWidget->currentIndex();
+	foreach (QAbstractButton* cbox, m_checkBoxes.value(prev)->buttons()) {
+		cbox->setChecked(false);
+	}
+
 	if (!current)
 	{
 		current = previous;
@@ -134,7 +140,6 @@ void AddOnDialog::changePage(QListWidgetItem *current, QListWidgetItem *previous
 			m_currentTableView = ui->texturesTableView;
 			break;
 	}
-
 }
 
 void AddOnDialog::setUpTableView(QTableView* tableView, QString tableName)
@@ -188,9 +193,10 @@ bool AddOnDialog::isCompatible(QString first, QString last)
 
 void AddOnDialog::populateTables()
 {
+	m_iSelectedAddOns.clear();
+
 	// destroying all checkboxes
 	int i = 0;
-	m_iSelectedAddOns.clear();
 	while (!m_checkBoxes.isEmpty())
 	{
 		delete m_checkBoxes.take((Tab)i);
