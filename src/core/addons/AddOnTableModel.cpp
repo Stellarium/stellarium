@@ -26,15 +26,6 @@
 #include "StelUtils.hpp"
 
 AddOnTableModel::AddOnTableModel(QString tableName)
-	: COLUMN_ID("Id")
-	, COLUMN_ADDONID("AddOnId")
-	, COLUMN_FIRSTSTEL("FirstStel")
-	, COLUMN_LASTSTEL("LastStel")
-	, COLUMN_TITLE(q_("Title"))
-	, COLUMN_TYPE(q_("Type"))
-	, COLUMN_LASTVERSION(q_("Last Version"))
-	, COLUMN_LASTUPDATE(q_("Last Update"))
-	, COLUMN_INSTALLED(q_("Installed"))
 {
 	QString query;
 	if (tableName == TABLE_CATALOG)
@@ -128,4 +119,15 @@ QVariant AddOnTableModel::data(const QModelIndex& index, int role) const
 	}
 
 	return value;
+}
+
+QModelIndex AddOnTableModel::findIndex(int row, const QString& columnName)
+{
+	for (int column = 0; column < columnCount(); column++)
+	{
+		if (columnName == headerData(column, Qt::Horizontal).toString())
+		{
+			return index(row, column);
+		}
+	}
 }

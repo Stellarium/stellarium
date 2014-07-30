@@ -24,6 +24,16 @@
 
 #include "StelTranslator.hpp"
 
+const QString COLUMN_ID("Id");
+const QString COLUMN_ADDONID("AddOnId");
+const QString COLUMN_FIRSTSTEL("FirstStel");
+const QString COLUMN_LASTSTEL("LastStel");
+const QString COLUMN_TITLE(q_("Title"));
+const QString COLUMN_TYPE(q_("Type"));
+const QString COLUMN_LASTVERSION(q_("Last Version"));
+const QString COLUMN_LASTUPDATE(q_("Last Update"));
+const QString COLUMN_INSTALLED(q_("Installed"));
+
 class AddOnTableModel : public QSqlQueryModel
 {
 	Q_OBJECT
@@ -32,16 +42,7 @@ public:
 
 	QVariant data(const QModelIndex& index, int role = Qt :: DisplayRole) const;
 
-private:
-	const QString COLUMN_ID;
-	const QString COLUMN_ADDONID;
-	const QString COLUMN_FIRSTSTEL;
-	const QString COLUMN_LASTSTEL;
-	const QString COLUMN_TITLE;
-	const QString COLUMN_TYPE;
-	const QString COLUMN_LASTVERSION;
-	const QString COLUMN_LASTUPDATE;
-	const QString COLUMN_INSTALLED;
+	QModelIndex findIndex(int row, const QString& columnName);
 };
 
 #endif // _ADDONTABLEMODEL_HPP_
