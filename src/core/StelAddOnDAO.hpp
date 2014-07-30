@@ -37,6 +37,34 @@ const QString TABLE_STAR_CATALOG = "star_catalog";
 const QString TABLE_SKY_CULTURE = "sky_culture";
 const QString TABLE_TEXTURE = "texture";
 
+// database column names
+const QString COLUMN_ID = "id";
+const QString COLUMN_ID_INSTALL = "id_install";
+const QString COLUMN_CATEGORY = "category";
+const QString COLUMN_TITLE = "title";
+const QString COLUMN_DESCRIPTION = "description";
+const QString COLUMN_VERSION = "version";
+const QString COLUMN_FIRST_STEL = "first_stel";
+const QString COLUMN_LAST_STEL = "last_stel";
+const QString COLUMN_AUTHOR1 = "author1";
+const QString COLUMN_AUTHOR2 = "author2";
+const QString COLUMN_LICENSE = "license";
+const QString COLUMN_DOWNLOAD_URL = "download_url";
+const QString COLUMN_DOWNLOAD_FILENAME = "download_filename";
+const QString COLUMN_DOWNLOAD_SIZE = "download_size";
+const QString COLUMN_CHECKSUM = "checksum";
+const QString COLUMN_LAST_UPDATE = "last_update";
+const QString COLUMN_INSTALLED = "installed";
+
+const QString COLUMN_ADDONID = "addon";
+const QString COLUMN_TYPE = "type";
+const QString COLUMN_CATALOG_ID = "catalog";
+const QString COLUMN_COUNT = "count";
+const QString COLUMN_MINMAG = "min_mag";
+const QString COLUMN_MAXMAG = "max_mag";
+const QString COLUMN_THUMBNAIL = "thumbnail";
+
+
 class StelAddOnDAO
 {
 public:

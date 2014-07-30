@@ -64,61 +64,61 @@ bool StelAddOnDAO::createAddonTables()
 	QStringList addonTables;
 
 	addonTables << "CREATE TABLE IF NOT EXISTS " % TABLE_ADDON % " ("
-			"id INTEGER primary key AUTOINCREMENT, "
-			"id_install TEXT, "
-			"category TEXT, "
-			"title TEXT, "
-			"description TEXT, "
-			"version TEXT, "
-			"first_stel TEXT, "
-			"last_stel TEXT, "
-			"author1 INTEGER, "
-			"author2 INTEGER, "
-			"license INTEGER, "
-			"download_url TEXT, "
-			"download_filename TEXT, "
-			"download_size TEXT, "
-			"checksum TEXT, "
-			"last_update TEXT, "
-			"installed INT)";
+			% COLUMN_ID % " INTEGER primary key AUTOINCREMENT, "
+			% COLUMN_ID_INSTALL % " TEXT, "
+			% COLUMN_CATEGORY % " TEXT, "
+			% COLUMN_TITLE % " TEXT, "
+			% COLUMN_DESCRIPTION % " TEXT, "
+			% COLUMN_VERSION % " TEXT, "
+			% COLUMN_FIRST_STEL % " TEXT, "
+			% COLUMN_LAST_STEL % " TEXT, "
+			% COLUMN_AUTHOR1 % " INTEGER, "
+			% COLUMN_AUTHOR2 % " INTEGER, "
+			% COLUMN_LICENSE % " INTEGER, "
+			% COLUMN_DOWNLOAD_URL % " TEXT, "
+			% COLUMN_DOWNLOAD_FILENAME % " TEXT, "
+			% COLUMN_DOWNLOAD_SIZE % " TEXT, "
+			% COLUMN_CHECKSUM % " TEXT, "
+			% COLUMN_LAST_UPDATE % " TEXT, "
+			% COLUMN_INSTALLED % " INT)";
 
 	addonTables << "CREATE TABLE IF NOT EXISTS " % TABLE_CATALOG % " ("
-			"id INTEGER primary key AUTOINCREMENT, "
-			"addon INTEGER UNIQUE, "
-			"type TEXT)";
+			% COLUMN_ID % " INTEGER primary key AUTOINCREMENT, "
+			% COLUMN_ADDONID % " INTEGER UNIQUE, "
+			% COLUMN_TYPE % " TEXT)";
 
 	addonTables << "CREATE TABLE IF NOT EXISTS " % TABLE_PLUGIN_CATALOG % " ("
-			"id INTEGER primary key AUTOINCREMENT, "
-			"catalog INTEGER UNIQUE)";
+			% COLUMN_ID % " INTEGER primary key AUTOINCREMENT, "
+			% COLUMN_CATALOG_ID % " INTEGER UNIQUE)";
 
 	addonTables << "CREATE TABLE IF NOT EXISTS " % TABLE_STAR_CATALOG % " ("
-			"id INTEGER primary key AUTOINCREMENT, "
-			"catalog INTEGER UNIQUE, "
-			"count INTEGER, "
-			"min_mag FLOAT, "
-			"max_mag FLOAT)";
+			% COLUMN_ID % " INTEGER primary key AUTOINCREMENT, "
+			% COLUMN_CATALOG_ID % " INTEGER UNIQUE, "
+			% COLUMN_COUNT % " INTEGER, "
+			% COLUMN_MINMAG % " FLOAT, "
+			% COLUMN_MAXMAG % " FLOAT)";
 
 	addonTables << "CREATE TABLE IF NOT EXISTS " % TABLE_LANDSCAPE % " ("
-			"id INTEGER primary key AUTOINCREMENT, "
-			"addon INTEGER UNIQUE, "
-			"thumbnail TEXT)";
+			% COLUMN_ID % " INTEGER primary key AUTOINCREMENT, "
+			% COLUMN_ADDONID % " INTEGER UNIQUE, "
+			% COLUMN_THUMBNAIL % " TEXT)";
 
 	addonTables << "CREATE TABLE IF NOT EXISTS " % TABLE_LANGUAGE_PACK % " ("
-			"id INTEGER primary key AUTOINCREMENT, "
-			"addon INTEGER UNIQUE, "
-			"type TEXT)";
+		       % COLUMN_ID % " INTEGER primary key AUTOINCREMENT, "
+		       % COLUMN_ADDONID % " INTEGER UNIQUE, "
+		       % COLUMN_TYPE % " TEXT)";
 
 	addonTables << "CREATE TABLE IF NOT EXISTS " % TABLE_SCRIPT % " ("
-			"id INTEGER primary key AUTOINCREMENT, "
-			"addon INTEGER UNIQUE)";
+			% COLUMN_ID % " INTEGER primary key AUTOINCREMENT, "
+			% COLUMN_ADDONID % " INTEGER UNIQUE)";
 
 	addonTables << "CREATE TABLE IF NOT EXISTS " % TABLE_SKY_CULTURE % " ("
-			"id INTEGER primary key AUTOINCREMENT, "
-			"addon INTEGER UNIQUE)";
+			% COLUMN_ID % " INTEGER primary key AUTOINCREMENT, "
+			% COLUMN_ADDONID % " INTEGER UNIQUE)";
 
 	addonTables << "CREATE TABLE IF NOT EXISTS " % TABLE_TEXTURE % " ("
-			"id INTEGER primary key AUTOINCREMENT, "
-			"addon INTEGER UNIQUE)";
+			% COLUMN_ID % " INTEGER primary key AUTOINCREMENT, "
+			% COLUMN_ADDONID % " INTEGER UNIQUE)";
 
 	QSqlQuery query(m_db);
 	foreach (QString table, addonTables)
@@ -177,8 +177,8 @@ bool StelAddOnDAO::insertOnDatabase(QString insert)
 	query.prepare(insert);
 	if (!query.exec())
 	{
-		qDebug() << "Add-On DAO : unable to update database."
-			 << m_db.lastError();
+		qWarning() << "Add-On DAO : unable to update database."
+			   << m_db.lastError() << insert;
 		return false;
 	}
 
