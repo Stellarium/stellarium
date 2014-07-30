@@ -79,6 +79,8 @@ void AddOnDialog::createDialogContent()
 	// Install and Remove
 	connect(ui->btnInstall, SIGNAL(clicked()), this, SLOT(installSelectedRows()));
 	connect(ui->btnRemove, SIGNAL(clicked()), this, SLOT(removeSelectedRows()));
+	ui->btnInstall->setEnabled(false);
+	ui->btnRemove->setEnabled(false);
 
 	updateTabBarListWidgetWidth();
 }
@@ -311,6 +313,11 @@ void AddOnDialog::slotRowSelected(int row, bool checked)
 	{
 		m_iSelectedAddOns.removeOne(addOnId);
 	}
+
+	// it desables buttons when no line is selected.
+	bool allOff = m_iSelectedAddOns.size() <= 0;
+	ui->btnInstall->setEnabled(!allOff);
+	ui->btnRemove->setEnabled(!allOff);
 }
 
 void AddOnDialog::installSelectedRows()
