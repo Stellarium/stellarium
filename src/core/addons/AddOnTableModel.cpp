@@ -27,77 +27,42 @@
 
 AddOnTableModel::AddOnTableModel(QString tableName)
 {
-	QString query;
+	QStringList extraColumns;
 	if (tableName == TABLE_CATALOG)
 	{
-		query = "SELECT " % tableName % ".id, addon.id, "
-			"first_stel, last_stel, title, "
-			"type, version, installed, NULL "
-			"FROM addon INNER JOIN " % tableName %
-			" ON addon.id = " % tableName % ".addon";
-		setQuery(query);
-		setHeaderData(0, Qt::Horizontal, COLUMN_ID);
-		setHeaderData(1, Qt::Horizontal, COLUMN_ADDONID);
-		setHeaderData(2, Qt::Horizontal, COLUMN_FIRSTSTEL);
-		setHeaderData(3, Qt::Horizontal, COLUMN_LASTSTEL);
-		setHeaderData(4, Qt::Horizontal, COLUMN_TITLE);
-		setHeaderData(5, Qt::Horizontal, COLUMN_TYPE);
-		setHeaderData(6, Qt::Horizontal, COLUMN_LASTVERSION);
-		setHeaderData(7, Qt::Horizontal, COLUMN_INSTALLED);
-		setHeaderData(8, Qt::Horizontal, "");
+		extraColumns << COLUMN_TYPE << COLUMN_VERSION;
 	}
 	else if (tableName == TABLE_LANGUAGE_PACK)
 	{
-		query = "SELECT " % tableName % ".id, addon.id, "
-			"first_stel, last_stel, title, "
-			"type, last_update, installed, NULL "
-			"FROM addon INNER JOIN " % tableName %
-			" ON addon.id = " % tableName % ".addon";
-		setQuery(query);
-		setHeaderData(0, Qt::Horizontal, COLUMN_ID);
-		setHeaderData(1, Qt::Horizontal, COLUMN_ADDONID);
-		setHeaderData(2, Qt::Horizontal, COLUMN_FIRSTSTEL);
-		setHeaderData(3, Qt::Horizontal, COLUMN_LASTSTEL);
-		setHeaderData(4, Qt::Horizontal, COLUMN_TITLE);
-		setHeaderData(5, Qt::Horizontal, COLUMN_TYPE);
-		setHeaderData(6, Qt::Horizontal, COLUMN_LASTUPDATE);
-		setHeaderData(7, Qt::Horizontal, COLUMN_INSTALLED);
-		setHeaderData(8, Qt::Horizontal, "");
+		extraColumns << COLUMN_TYPE << COLUMN_LAST_UPDATE;
 	}
 	else if (tableName == TABLE_SKY_CULTURE)
 	{
-		query = "SELECT " % tableName % ".id, addon.id, "
-			"first_stel, last_stel, title, "
-			"last_update, installed, NULL "
-			"FROM addon INNER JOIN " % tableName %
-			" ON addon.id = " % tableName % ".addon";
-		setQuery(query);
-		setHeaderData(0, Qt::Horizontal, COLUMN_ID);
-		setHeaderData(1, Qt::Horizontal, COLUMN_ADDONID);
-		setHeaderData(2, Qt::Horizontal, COLUMN_FIRSTSTEL);
-		setHeaderData(3, Qt::Horizontal, COLUMN_LASTSTEL);
-		setHeaderData(4, Qt::Horizontal, COLUMN_TITLE);
-		setHeaderData(5, Qt::Horizontal, COLUMN_LASTUPDATE);
-		setHeaderData(6, Qt::Horizontal, COLUMN_INSTALLED);
-		setHeaderData(7, Qt::Horizontal, "");
+		extraColumns << COLUMN_LAST_UPDATE;
 	}
 	else
 	{
-		query = "SELECT " % tableName % ".id, addon.id, "
-			"first_stel, last_stel, title, "
-			"version, installed, NULL "
-			"FROM addon INNER JOIN " % tableName %
-			" ON addon.id = " % tableName % ".addon";
-		setQuery(query);
-		setHeaderData(0, Qt::Horizontal, COLUMN_ID);
-		setHeaderData(1, Qt::Horizontal, COLUMN_ADDONID);
-		setHeaderData(2, Qt::Horizontal, COLUMN_FIRSTSTEL);
-		setHeaderData(3, Qt::Horizontal, COLUMN_LASTSTEL);
-		setHeaderData(4, Qt::Horizontal, COLUMN_TITLE);
-		setHeaderData(5, Qt::Horizontal, COLUMN_LASTVERSION);
-		setHeaderData(6, Qt::Horizontal, COLUMN_INSTALLED);
-		setHeaderData(7, Qt::Horizontal, "");
+		extraColumns << COLUMN_VERSION;
 	}
+
+	setQuery(getQuery(tableName, extraColumns));
+}
+
+QString AddOnTableModel::getQuery(QString table, QStringList extraColumns)
+{
+	QString query = "SELECT " % table % ".id, addon.id AS addonid, "
+				"first_stel, last_stel, title,";
+	query = query % extraColumns.join(",") % ", NULL ";
+	query = query % "FROM addon INNER JOIN " % table %
+			" ON addon.id = " % table % ".addon";
+	return query;
+}
+
+void AddOnTableModel::initHeaderData()
+{
+	// TODO
+	//setHeaderData(findColumn(COLUMN_ADDONID), Qt::Horizontal, COLUMN_ADDONID);
+	//setHeaderData(findColumn(COLUMN_ADDONID), Qt::Horizontal, COLUMN_ADDONID);
 }
 
 QVariant AddOnTableModel::data(const QModelIndex& index, int role) const
@@ -109,7 +74,7 @@ QVariant AddOnTableModel::data(const QModelIndex& index, int role) const
 
 	QVariant value = QSqlQueryModel::data(index, role);
 	QString column = headerData(index.column(), Qt::Horizontal).toString();
-	if (column == COLUMN_LASTUPDATE)
+	if (column == COLUMN_LAST_UPDATE)
 	{
 		value = qVariantFromValue(QDateTime::fromMSecsSinceEpoch(value.Int*1000));
 	}
@@ -123,11 +88,17 @@ QVariant AddOnTableModel::data(const QModelIndex& index, int role) const
 
 QModelIndex AddOnTableModel::findIndex(int row, const QString& columnName)
 {
+	return index(row, findColumn(columnName));
+}
+
+int AddOnTableModel::findColumn(const QString& columnName)
+{
 	for (int column = 0; column < columnCount(); column++)
 	{
 		if (columnName == headerData(column, Qt::Horizontal).toString())
 		{
-			return index(row, column);
+			return column;
 		}
 	}
+	return -1;
 }
