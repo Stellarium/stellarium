@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-07-13 12:59+0700\n"
-"PO-Revision-Date: 2014-07-28 11:59+0000\n"
-"Last-Translator: Mindaugas Pelionis <mindaugas.pelionis@gmail.com>\n"
+"PO-Revision-Date: 2014-07-30 08:09+0000\n"
+"Last-Translator: Evie <emailas@gmail.com>\n"
 "Language-Team: Lithuanian <lt@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-07-29 05:56+0000\n"
+"X-Launchpad-Export-Date: 2014-07-31 06:07+0000\n"
 "X-Generator: Launchpad (build 17131)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:107 src/core/modules/StarMgr.cpp:339
@@ -395,12 +395,12 @@ msgstr "Tipas: <b>%1, %2</b>"
 #: src/core/modules/StarWrapper.cpp:207
 #, qt-format
 msgid "Magnitude range: <b>%1</b>%2<b>%3</b> (Photometric system: %4)"
-msgstr ""
+msgstr "Ryškio diapazonas: <b>%1</b>%2<b>%3</b> (Fotometrinė sistema: %4)"
 
 #: src/core/modules/StarWrapper.cpp:209
 #, qt-format
 msgid "Magnitude range: <b>%1</b>%2<b>%3/%4</b> (Photometric system: %5)"
-msgstr ""
+msgstr "Ryškio diapazonas: <b>%1</b>%2<b>%3/%4</b> (Fotometrinė sistema: %5)"
 
 #: src/core/modules/StarWrapper.cpp:216
 #: plugins/Supernovae/src/Supernova.cpp:148 plugins/Novae/src/Nova.cpp:153
@@ -433,7 +433,7 @@ msgstr ""
 #: src/core/modules/StarWrapper.cpp:236
 #, qt-format
 msgid "Period: %1 days"
-msgstr ""
+msgstr "Periodas dienomis: %1"
 
 #: src/core/modules/StarWrapper.cpp:246
 #, qt-format
@@ -748,6 +748,10 @@ msgid ""
 "article <em>Long-term changes in the rotation of the earth - 700 B.C. to "
 "A.D. 1980</em> (%1)."
 msgstr ""
+"Šią formulę paskelbė F. R. Stephenson ir L. V. Morrison straipsnyje "
+"<em>Ilgalaikiai žemės sukimosi pokyčiai - nuo 700 pr. Kr. iki 1980 po Kr. "
+"(Long-term changes in the rotation of the earth - 700 B.C. to A.D. "
+"1980)</em> (%1)."
 
 #: src/core/StelCore.cpp:1525
 msgid "This algorithm is used in the PC planetarium program Guide 7."
@@ -760,6 +764,11 @@ msgid ""
 "Eclipses: 1986-2035</em> (1987) and in his <em>Fifty Year Canon of Lunar "
 "Eclipses: 1986-2035</em> (1989)."
 msgstr ""
+"Šį algoritmą pateikė F. Espenak savo darbuose <em>Saulės užtemimų "
+"penkiasdešimties metų kanonas: 1986-2035 (Fifty Year Canon of Solar "
+"Eclipses: 1986-2035)</em> (1987) ir <em>Mėnulio užtemimų penkiasdešimties "
+"metų kanonas: 1986-2035 (Fifty Year Canon of Lunar Eclipses: 1986-2035)</em> "
+"(1989)"
 
 #: src/core/StelCore.cpp:1531
 #, qt-format
@@ -767,6 +776,8 @@ msgid ""
 "This formula was obtained by K.M. Borkowski (%1) from an analysis of 31 "
 "solar eclipse records dating between 2137 BCE and 1715 CE."
 msgstr ""
+"Šią formulę išgavo K.M. Borkowski (%1) iš 31 saulės užtemimų įrašų (nuo 2137 "
+"pr. Kr. iki 1715 po Kr.) analizės."
 
 #: src/core/StelCore.cpp:1534
 #, qt-format
@@ -893,7 +904,7 @@ msgstr ""
 
 #: src/core/StelCore.cpp:1579 src/core/SimbadSearcher.cpp:133
 msgid "Error"
-msgstr ""
+msgstr "Klaida"
 
 #: src/core/StelCore.cpp:1629
 msgid "with meaningless values outside this range"
@@ -1046,7 +1057,7 @@ msgstr "RA/DE (datos): %1/%2"
 #: src/core/StelObject.cpp:130
 #, qt-format
 msgid "Galactic longitude/latitude: %1/%2"
-msgstr ""
+msgstr "Galaktinė ilguma/platuma : %1/%2"
 
 #: src/core/StelObject.cpp:142 src/core/StelObject.cpp:146
 #, qt-format
@@ -1074,7 +1085,7 @@ msgstr ""
 
 #: src/core/StelSkyLayerMgr.cpp:87
 msgid "Deep-sky objects background images"
-msgstr ""
+msgstr "Giliojo dangaus objektų foniniai piešinukai"
 
 #: src/core/StelMovementMgr.cpp:130 src/gui/StelGui.cpp:185
 #: src/StelMainView.cpp:308
@@ -1103,23 +1114,23 @@ msgstr "Sekti objektą"
 
 #: src/core/SimbadSearcher.cpp:56
 msgid "Network error"
-msgstr ""
+msgstr "Tinklo klaida"
 
 #: src/core/SimbadSearcher.cpp:93 src/core/SimbadSearcher.cpp:105
 msgid "Error parsing position"
-msgstr ""
+msgstr "Klaida analizuojant poziciją"
 
 #: src/core/SimbadSearcher.cpp:131
 msgid "Querying"
-msgstr ""
+msgstr "Vykdoma užklausa"
 
 #: src/core/SimbadSearcher.cpp:135
 msgid "Not found"
-msgstr ""
+msgstr "Nerasta"
 
 #: src/core/SimbadSearcher.cpp:135
 msgid "Found"
-msgstr ""
+msgstr "Rasta"
 
 #: src/gui/ConfigurationDialog.cpp:442
 msgid "Select screenshot directory"
@@ -1156,7 +1167,7 @@ msgstr "Susisiekite"
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:128
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:254
 msgid "Version"
-msgstr ""
+msgstr "Versija"
 
 #: src/gui/ConfigurationDialog.cpp:823
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:75
@@ -1177,7 +1188,7 @@ msgstr "Licencija"
 
 #: src/gui/ConfigurationDialog.cpp:831
 msgid "Shortcut"
-msgstr ""
+msgstr "Trumpinys"
 
 #: src/gui/ConfigurationDialog.cpp:855
 msgid "Running script: "
@@ -1197,7 +1208,7 @@ msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:931
 msgid "All available star catalogs have been installed."
-msgstr ""
+msgstr "Visi galimi žvaigždžių katalogai įdiegti."
 
 #: src/gui/ConfigurationDialog.cpp:936
 #, qt-format
@@ -1249,11 +1260,11 @@ msgstr ""
 #. TRANSLATORS: Full phrase is "Algorithm of DeltaT"
 #: src/gui/ConfigurationDialog.cpp:1157
 msgid "Algorithm of"
-msgstr ""
+msgstr "Algoritmas"
 
 #: src/gui/ConfigurationDialog.cpp:1168
 msgid "Without correction"
-msgstr ""
+msgstr "Be pataisymų"
 
 #: src/gui/ConfigurationDialog.cpp:1169
 msgid "Schoch (1931)"
@@ -1372,22 +1383,26 @@ msgstr ""
 #: src/gui/HelpDialog.cpp:259
 msgid "Oops... Stellarium can't check latest version."
 msgstr ""
+"Ups... Stelariumui nepavyko pasitikrinti, kokia yra egzistuojanti naujausia "
+"versija."
 
 #. TRANSLATORS: This message will be displayed for users if current version of Stellarium is bigger than version from stellarium.org
 #: src/gui/HelpDialog.cpp:281
 msgid "Looks like you are using the development version of Stellarium."
 msgstr ""
+"Panašu, kad jūs naudojate Stellarium versiją, kuri dar programavimo "
+"stadijoje."
 
 #. TRANSLATORS: This message will be displayed for users if current version of Stellarium is smaller than version from stellarium.org
 #: src/gui/HelpDialog.cpp:286
 #, qt-format
 msgid "This version of Stellarium is outdated! Latest version is %1."
-msgstr ""
+msgstr "Ši Stellarium versija jau pasenusi! Vėliausia versija yra %1."
 
 #. TRANSLATORS: This message will be displayed for users if current version of Stellarium is equals with version from stellarium.org
 #: src/gui/HelpDialog.cpp:292
 msgid "This is latest stable version of Stellarium."
-msgstr ""
+msgstr "Jūs įdiegę paskutinę stabilią Stellarium versiją."
 
 #: src/gui/HelpDialog.cpp:322
 msgid "Stellarium Help"
@@ -1533,17 +1548,19 @@ msgstr ""
 #: src/gui/HelpDialog.cpp:479 src/gui/HelpDialog.cpp:480
 #, qt-format
 msgid "Tester: %1"
-msgstr ""
+msgstr "Testuotojas: %1"
 
 #: src/gui/HelpDialog.cpp:481
 msgid "Past Developers"
-msgstr ""
+msgstr "Ankstesni programuotojai"
 
 #: src/gui/HelpDialog.cpp:482
 msgid ""
 "Several people have made significant contributions, but are no longer "
 "active. Their work has made a big difference to the project:"
 msgstr ""
+"Keli žmonės įnešė ryškų indėlį, tačiau nebėra aktyvūs. Jų darbas stipriai "
+"patobulino projektą:"
 
 #: src/gui/HelpDialog.cpp:483
 #, qt-format
@@ -1577,15 +1594,15 @@ msgstr "Nustatyti normalų scenarijaus vykdymo greitį"
 
 #: src/gui/StelGui.cpp:190
 msgid "Stop script execution"
-msgstr ""
+msgstr "Nutraukti kodo vykdymą"
 
 #: src/gui/StelGui.cpp:191
 msgid "Pause script execution"
-msgstr ""
+msgstr "Laikinai sustabdyti kodo vykdymą"
 
 #: src/gui/StelGui.cpp:192
 msgid "Resume script execution"
-msgstr ""
+msgstr "Atnaujinti kodo vykdymą"
 
 #: src/gui/StelGui.cpp:195
 msgid "Script console window"
@@ -1646,60 +1663,60 @@ msgstr "%1m"
 
 #: src/gui/StelGuiItems.cpp:616
 msgid "Field of view"
-msgstr ""
+msgstr "Matomas laukas"
 
 #: src/gui/StelGuiItems.cpp:634
 msgid "Frames per second"
-msgstr ""
+msgstr "Kadrų per sekundę"
 
 #. TRANSLATORS: Short description for Class 1 of the Bortle scale
 #: src/gui/ViewDialog.cpp:325
 msgid "Excellent dark-sky site"
-msgstr ""
+msgstr "Puiki tamsaus dangaus vietovė"
 
 #. TRANSLATORS: Short description for Class 2 of the Bortle scale
 #: src/gui/ViewDialog.cpp:327
 msgid "Typical truly dark site"
-msgstr ""
+msgstr "Tipinė tamsaus dangaus vietovė"
 
 #. TRANSLATORS: Short description for Class 3 of the Bortle scale
 #: src/gui/ViewDialog.cpp:329
 msgid "Rural sky"
-msgstr ""
+msgstr "Kaimo dangus"
 
 #. TRANSLATORS: Short description for Class 4 of the Bortle scale
 #: src/gui/ViewDialog.cpp:331
 msgid "Rural/suburban transition"
-msgstr ""
+msgstr "Kaimo/priemiesčio sankirta"
 
 #. TRANSLATORS: Short description for Class 5 of the Bortle scale
 #: src/gui/ViewDialog.cpp:333
 msgid "Suburban sky"
-msgstr ""
+msgstr "Priemiesčio dangus"
 
 #. TRANSLATORS: Short description for Class 6 of the Bortle scale
 #: src/gui/ViewDialog.cpp:335
 msgid "Bright suburban sky"
-msgstr ""
+msgstr "Šviesus priemiesčio dangus"
 
 #. TRANSLATORS: Short description for Class 7 of the Bortle scale
 #: src/gui/ViewDialog.cpp:337
 msgid "Suburban/urban transition"
-msgstr ""
+msgstr "Priemiesčio/miesto sankirta"
 
 #. TRANSLATORS: Short description for Class 8 of the Bortle scale
 #: src/gui/ViewDialog.cpp:339
 msgid "City sky"
-msgstr ""
+msgstr "Miesto dangus"
 
 #. TRANSLATORS: Short description for Class 9 of the Bortle scale
 #: src/gui/ViewDialog.cpp:341
 msgid "Inner-city sky"
-msgstr ""
+msgstr "Miesto centro dangus"
 
 #: src/gui/ViewDialog.cpp:355
 msgid "The naked-eye limiting magnitude is"
-msgstr ""
+msgstr "Plikai akiai ribinis ryškis yra"
 
 #: src/gui/ViewDialog.cpp:487
 msgid "No description"
@@ -1715,7 +1732,7 @@ msgstr "Normalus dažnis"
 
 #: src/gui/ViewDialog.cpp:586
 msgid "Standard Orionids rate"
-msgstr ""
+msgstr "Standartinis Orionidų dažnis"
 
 #: src/gui/ViewDialog.cpp:589
 msgid "Standard Perseids rate"
@@ -1723,19 +1740,19 @@ msgstr "Standartinis Perseidų"
 
 #: src/gui/ViewDialog.cpp:592
 msgid "Standard Geminids rate"
-msgstr ""
+msgstr "Standartinis Geminidų dažnis"
 
 #: src/gui/ViewDialog.cpp:595
 msgid "Exceptional Perseid rate"
-msgstr ""
+msgstr "Ypač geras Perseidų dažnis"
 
 #: src/gui/ViewDialog.cpp:598
 msgid "Meteor storm rate"
-msgstr ""
+msgstr "Meteorų audros dažnis"
 
 #: src/gui/ViewDialog.cpp:601
 msgid "Exceptional Draconid rate"
-msgstr ""
+msgstr "Ypač geras Drakonidų dažnis"
 
 #: src/gui/ViewDialog.cpp:604
 msgid "Exceptional Leonid rate"
@@ -1743,11 +1760,11 @@ msgstr "Nepaprastas Leonidų"
 
 #: src/gui/ViewDialog.cpp:607
 msgid "Very high rate (1966 Leonids)"
-msgstr ""
+msgstr "Labai aukštas dažnis (1966 Leonidai)"
 
 #: src/gui/ViewDialog.cpp:610
 msgid "Highest rate ever (1833 Leonids)"
-msgstr ""
+msgstr "Aukščiausias pasiektas dažnis (1833 Leonidai)"
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:112
 msgid "Select a ZIP archive that contains a Stellarium landscape"
@@ -1827,47 +1844,47 @@ msgstr "Jūs galite jį pašalinti ištrynę katalogą: %1"
 
 #: src/gui/ScriptConsole.cpp:73
 msgid "quickrun..."
-msgstr ""
+msgstr "greitas paleidimas..."
 
 #: src/gui/ScriptConsole.cpp:74
 msgid "selected text"
-msgstr ""
+msgstr "pažymėtas tekstas"
 
 #: src/gui/ScriptConsole.cpp:75
 msgid "clear text"
-msgstr ""
+msgstr "išvalyti tekstą"
 
 #: src/gui/ScriptConsole.cpp:76
 msgid "clear images"
-msgstr ""
+msgstr "išvalyti piešinukus"
 
 #: src/gui/ScriptConsole.cpp:77
 msgid "natural"
-msgstr ""
+msgstr "natūralu"
 
 #: src/gui/ScriptConsole.cpp:78
 msgid "starchart"
-msgstr ""
+msgstr "žvaigždėlapis"
 
 #: src/gui/SearchDialog.cpp:380
 msgid "Simbad Lookup Error"
-msgstr ""
+msgstr "Simbad Paieškos Klaida"
 
 #: src/gui/SearchDialog.cpp:388
 msgid "Simbad Lookup"
-msgstr ""
+msgstr "Simbad Paieška"
 
 #: src/gui/SearchDialog.cpp:556
 msgid "University of Strasbourg (France)"
-msgstr ""
+msgstr "Strasburgo Universitetas (Prancūzija)"
 
 #: src/gui/SearchDialog.cpp:557
 msgid "Harvard University (USA)"
-msgstr ""
+msgstr "Harvardo Universitetas (JAV)"
 
 #: src/gui/SearchDialog.cpp:616
 msgid "Paste and Search"
-msgstr ""
+msgstr "Įkopijuoti ir ieškoti"
 
 #: src/gui/ShortcutsDialog.cpp:488
 msgid "Action"
@@ -1889,15 +1906,15 @@ msgstr ""
 #: src/gui/CustomDeltaTEquationDialog.cpp:135
 #, qt-format
 msgid "A typical equation for calculation of %1T looks like:"
-msgstr ""
+msgstr "Tipinė %1T skaičiavimo lygtis atrodo taip:"
 
 #: src/gui/CustomDeltaTEquationDialog.cpp:137
 msgid "where"
-msgstr ""
+msgstr "kur"
 
 #: src/gui/CustomDeltaTEquationDialog.cpp:137
 msgid "year"
-msgstr ""
+msgstr "m."
 
 #: src/main.cpp:336
 msgid "This system does not support OpenGL."
@@ -2121,7 +2138,7 @@ msgstr ""
 #. TRANSLATORS: Moon of Pluto (III)
 #: src/translations.h:84
 msgid "Hydra (moon)"
-msgstr ""
+msgstr "Hydra (mėnulis)"
 
 #: src/translations.h:85
 msgid "Eris"
@@ -2129,15 +2146,15 @@ msgstr "Eridė"
 
 #: src/translations.h:86
 msgid "Triton"
-msgstr ""
+msgstr "Tritonas"
 
 #: src/translations.h:87
 msgid "Nereid"
-msgstr ""
+msgstr "Nereidė"
 
 #: src/translations.h:88
 msgid "Naiad"
-msgstr ""
+msgstr "Najadė"
 
 #: src/translations.h:89
 msgid "Thalassa"
@@ -2149,7 +2166,7 @@ msgstr ""
 
 #: src/translations.h:91
 msgid "Galatea"
-msgstr ""
+msgstr "Galatėja"
 
 #: src/translations.h:92
 msgid "Larissa"
@@ -2157,7 +2174,7 @@ msgstr ""
 
 #: src/translations.h:93
 msgid "Proteus"
-msgstr ""
+msgstr "Protėjas"
 
 #: src/translations.h:94
 msgid "Halimede"
@@ -2271,31 +2288,31 @@ msgstr ""
 #. TRANSLATORS: Asteroid (3200) Phaethon
 #: src/translations.h:139
 msgid "Phaethon"
-msgstr ""
+msgstr "Fajetonas"
 
 #. TRANSLATORS: Asteroid (1866) Sisyphus
 #: src/translations.h:141
 msgid "Sisyphus"
-msgstr ""
+msgstr "Sizifas"
 
 #. TRANSLATORS: Asteroid (1864) Daedalus
 #: src/translations.h:143
 msgid "Daedalus"
-msgstr ""
+msgstr "Dedalas"
 
 #. TRANSLATORS: Asteroid (1566) Icarus
 #: src/translations.h:145
 msgid "Icarus"
-msgstr ""
+msgstr "Ikaras"
 
 #. TRANSLATORS: Asteroid (1809) Prometheus
 #: src/translations.h:147
 msgid "Prometheus"
-msgstr ""
+msgstr "Prometėjas"
 
 #: src/translations.h:148
 msgid "Prometheus (moon)"
-msgstr ""
+msgstr "Prometėjas (mėnulis)"
 
 #. TRANSLATORS: Asteroid (1810) Epimetheus
 #: src/translations.h:150
@@ -2328,7 +2345,7 @@ msgstr ""
 #. TRANSLATORS: Proper name of comet C/1680 V1
 #: src/translations.h:161
 msgid "Great Comet of 1680 (C/1680 V1)"
-msgstr ""
+msgstr "Didžioji 1680-ųjų Kometa (C/1680 V1)"
 
 #. TRANSLATORS: Name of supernova SN 1572A and script name
 #: src/translations.h:164
@@ -2338,7 +2355,7 @@ msgstr ""
 #. TRANSLATORS: Name of supernova SN 1604A
 #: src/translations.h:166
 msgid "Kepler's Supernova"
-msgstr ""
+msgstr "Keplerio Supernova"
 
 #: src/translations.h:169
 msgid "N"
@@ -2477,7 +2494,7 @@ msgstr ""
 #. TRANSLATORS: Name of landscape
 #: src/translations.h:229
 msgid "Geneva"
-msgstr ""
+msgstr "Ženeva"
 
 #. TRANSLATORS: Name of landscape
 #: src/translations.h:231
@@ -2492,47 +2509,47 @@ msgstr ""
 #. TRANSLATORS: Name of script
 #: src/translations.h:240
 msgid "Partial Lunar Eclipse"
-msgstr ""
+msgstr "Dalinis Mėnulio Užtemimas"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:242
 msgid "Total Lunar Eclipse"
-msgstr ""
+msgstr "Visiškas Mėnulio Užtemimas"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:244
 msgid "Screensaver"
-msgstr ""
+msgstr "Ekrano užsklanda"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:246
 msgid "Solar Eclipse 2009"
-msgstr ""
+msgstr "2009-ųjų Saulės Užtemimas"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:248
 msgid "Startup Script"
-msgstr ""
+msgstr "Paleidimo kodas"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:250
 msgid "Zodiac"
-msgstr ""
+msgstr "Zodiakas"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:252
 msgid "Mercury Triple Sunrise and Sunset"
-msgstr ""
+msgstr "Merkurijaus trigubas saulėtekis ir saulėlydis"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:254
 msgid "Double eclipse from Deimos in 2017"
-msgstr ""
+msgstr "Dvigubas užtemimas iš Deimo, 2017"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:256
 msgid "Double eclipse from Deimos in 2031"
-msgstr ""
+msgstr "Dvigubas užtemimas iš Deimo, 2031"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:258
@@ -2542,37 +2559,37 @@ msgstr ""
 #. TRANSLATORS: Name of script
 #: src/translations.h:260
 msgid "Occultation of Earth and Jupiter 2048"
-msgstr ""
+msgstr "Žemės ir Jupiterio okultacija 2048"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:262
 msgid "3 Transits and 2 Eclipses from Deimos 2027"
-msgstr ""
+msgstr "3 tranzitai ir 2 užtemimai iš Deimo, 2027"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:264
 msgid "Solar System Screensaver"
-msgstr ""
+msgstr "Saulės sistemos ekrano užsklanda"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:266
 msgid "Constellations Tour"
-msgstr ""
+msgstr "Žvaigždynų turas"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:268
 msgid "Sun from different planets"
-msgstr ""
+msgstr "Saulė iš skirtingų planetų"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:270
 msgid "Earth best views from other bodies"
-msgstr ""
+msgstr "Geriausi Žemės vaizdai iš kitų dangaus kūnų"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:272
 msgid "Transit of Venus"
-msgstr ""
+msgstr "Veneros tranzitas"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:274
@@ -2582,22 +2599,22 @@ msgstr ""
 #. TRANSLATORS: Name of script
 #: src/translations.h:276
 msgid "Sky Culture Tour"
-msgstr ""
+msgstr "Dangaus Kultūrų Turas"
 
 #. TRANSLATORS: Name and description of script
 #: src/translations.h:278
 msgid "Earth Events from Mercury"
-msgstr ""
+msgstr "Žemės Įvykiai iš Merkurijaus"
 
 #. TRANSLATORS: Name and description of script
 #: src/translations.h:280
 msgid "Earth Events from a floating city on Venus"
-msgstr ""
+msgstr "Žemės Įvykiai iš plaukiojančio miesto Veneroje"
 
 #. TRANSLATORS: Name and description of script
 #: src/translations.h:282
 msgid "Earth Events from Mars"
-msgstr ""
+msgstr "Žemės Įvykiai iš MArso"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:284
@@ -2607,39 +2624,41 @@ msgstr ""
 #. TRANSLATORS: Name of script
 #: src/translations.h:286
 msgid "Earth and Mars Greatest Elongations and Transits from Callisto"
-msgstr ""
+msgstr "Žemės ir Marso didžiausios elongacijos ir tranzitai iš Kalisto"
 
 #. TRANSLATORS: Description of the landscape tour script.
 #: src/translations.h:292
 msgid "Look around each installed landscape."
-msgstr ""
+msgstr "Pasižvalgykite po kiekvieną įdiegtą kraštovaizdį"
 
 #. TRANSLATORS: Description of the sky culture tour script.
 #: src/translations.h:294
 msgid "Look at each installed sky culture."
-msgstr ""
+msgstr "Pažvelkite į kiekvieną įdiegtą dangaus stebėjimų kultūrą"
 
 #: src/translations.h:295
 msgid "Script to demonstrate a partial lunar eclipse."
-msgstr ""
+msgstr "Kodas, skirtas pademonstruoti dalinį mėnulio užtemimą"
 
 #: src/translations.h:296
 msgid "Script to demonstrate a total lunar eclipse."
-msgstr ""
+msgstr "Kodas, skirtas pademonstruoti visišką mėnulio užtemimą"
 
 #: src/translations.h:297
 msgid "A slow, infinite tour of the sky, looking at random objects."
-msgstr ""
+msgstr "Lėtas, begalinis turas po dangų, žvalgantis į atsitiktinius objektus"
 
 #: src/translations.h:298
 msgid ""
 "Script to demonstrate a total solar eclipse which has happened in 2009 "
 "(location=Rangpur, Bangladesh)."
 msgstr ""
+"Kodas, skirtas pademonstruoti visišką saulės užtemimą, kuris įvyko 2009 "
+"(vieta= Rangpur, Bangladešas)"
 
 #: src/translations.h:299
 msgid "Script which runs automatically at startup"
-msgstr ""
+msgstr "Kodas, kuris automatiškai paleidžiamas įjungus programą"
 
 #: src/translations.h:300
 msgid ""
@@ -3753,7 +3772,7 @@ msgstr "Atšaukti"
 
 #: src/translations.h:575
 msgid "Files of type:"
-msgstr ""
+msgstr "Failų tipai:"
 
 #: src/translations.h:576
 msgid "Date Modified"
@@ -4028,7 +4047,7 @@ msgstr "Serveris:"
 
 #: src/ui_searchDialogGui.h:655
 msgid "Search options"
-msgstr ""
+msgstr "Paieškos parametrai"
 
 #: src/ui_searchDialogGui.h:656
 msgid "Use autofill only from the beginning of words"
@@ -4075,11 +4094,13 @@ msgstr "Planetos"
 msgid ""
 "Labels and markers for deep-sky objects (star clusters, galaxies and nebulas)"
 msgstr ""
+"Žymekliai ir užrašai giliojo dangaus objektams (žvaigždžių spiečiams, "
+"galaktikoms ir ūkams)"
 
 #: src/ui_viewDialog.h:1159 src/ui_viewDialog.h:1215
 msgctxt "Deep-sky objects"
 msgid "DSOs"
-msgstr ""
+msgstr "GDO"
 
 #: src/ui_viewDialog.h:1160
 msgid "Planets and satellites"
@@ -4111,11 +4132,11 @@ msgstr ""
 
 #: src/ui_viewDialog.h:1170
 msgid "Automatic change of landscape when planet is changed"
-msgstr ""
+msgstr "Automatiškai pakeisti kraštovaizdį kai pakeičiama planeta"
 
 #: src/ui_viewDialog.h:1172
 msgid "Auto select landscapes"
-msgstr ""
+msgstr "Automatiškai parinkti kraštovaizdžius"
 
 #: src/ui_viewDialog.h:1174
 msgid "Show atmosphere"
@@ -4126,10 +4147,12 @@ msgid ""
 "Use light pollution data from locations database and ignore settings for "
 "light pollution below"
 msgstr ""
+"Naudoti šviesos taršos informaciją iš vietovių duomenų bazės ir ignoruoti "
+"žemiau nurodytus šviesos užterštumo nustatymus"
 
 #: src/ui_viewDialog.h:1180
 msgid "Light pollution data from locations database"
-msgstr ""
+msgstr "Šviesos taršos informacija iš vietovių duomenų bazės"
 
 #: src/ui_viewDialog.h:1181
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:401
@@ -4173,7 +4196,7 @@ msgstr "Dinamiškas akių prisitaikymas"
 
 #: src/ui_viewDialog.h:1196
 msgid "Settings for sporadic meteors"
-msgstr ""
+msgstr "Nustatymai pavieniams meteorams"
 
 #: src/ui_viewDialog.h:1198
 msgid "Shooting Stars"
@@ -4181,7 +4204,7 @@ msgstr "Krintančios žvaigždės"
 
 #: src/ui_viewDialog.h:1200
 msgid "Hourly zenith rate"
-msgstr ""
+msgstr "Dažnis per valandą ties zenitu"
 
 #: src/ui_viewDialog.h:1202
 msgctxt "Zenithal Hourly Rate"
@@ -4191,6 +4214,7 @@ msgstr ""
 #: src/ui_viewDialog.h:1205
 msgid "Limit Magnitudes (for unaided/binocular observers)"
 msgstr ""
+"Riboti matomų objektų ryškį (stebėtojams be prietaisų ar su žiūronais)"
 
 #: src/ui_viewDialog.h:1207
 msgid "Limit Magnitudes"
@@ -4198,12 +4222,14 @@ msgstr "Ribojimas pagal ryškį"
 
 #: src/ui_viewDialog.h:1209
 msgid "Limit the magnitude of stars"
-msgstr ""
+msgstr "Riboti rodomas žvaigždžes pagal ryškį"
 
 #: src/ui_viewDialog.h:1213
 msgid ""
 "Limit the magnitude of deep-sky objects (star clusters, galaxies and nebulas)"
 msgstr ""
+"Riboti rodomus giliojo dangaus objektus (žvaigždžių spiečius, galaktikas ir "
+"ūkus) pagal ryškį"
 
 #: src/ui_viewDialog.h:1216
 msgid "Constellations"
@@ -4237,15 +4263,15 @@ msgstr "Dangaus sfera"
 
 #: src/ui_viewDialog.h:1223
 msgid "Equatorial grid (on J2000)"
-msgstr ""
+msgstr "Pusiaujinis tinklelis (J2000)"
 
 #: src/ui_viewDialog.h:1224
 msgid "Equatorial grid (on date)"
-msgstr ""
+msgstr "Pusiaujinis tinklelis (šiai datai)"
 
 #: src/ui_viewDialog.h:1225
 msgid "Ecliptic grid (on J2000)"
-msgstr ""
+msgstr "Ekliptinis tinklelis (J2000)"
 
 #: src/ui_viewDialog.h:1229
 msgid "Show equator line"
@@ -4313,7 +4339,7 @@ msgstr "Programos kalba"
 
 #: src/ui_configurationDialog.h:1005
 msgid "Check updates"
-msgstr "Tikrinti atnaujinimą"
+msgstr "Ieškoti atnaujinimų"
 
 #: src/ui_configurationDialog.h:1006
 msgid ""
@@ -4425,7 +4451,7 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:1045
 msgid "Right ascension/Declination (of date)"
-msgstr ""
+msgstr "Rektascensija/Deklinacija (šiaip datai)"
 
 #: src/ui_configurationDialog.h:1046
 msgid "Catalog number(s)"
@@ -4445,7 +4471,7 @@ msgstr "Absoliutinis ryškis"
 
 #: src/ui_configurationDialog.h:1052
 msgid "Galactic coordinates"
-msgstr ""
+msgstr "Galaktinės koordinatės"
 
 #: src/ui_configurationDialog.h:1053
 msgid "Visual magnitude"
@@ -4461,12 +4487,12 @@ msgstr "Dydis"
 
 #: src/ui_configurationDialog.h:1059
 msgid "The type of the object (star, planet, etc.)"
-msgstr ""
+msgstr "Objekto tipas (žvaigždė, planeta, etc.)"
 
 #: src/ui_configurationDialog.h:1061
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:276
 msgid "Type"
-msgstr ""
+msgstr "Tipas"
 
 #: src/ui_configurationDialog.h:1063
 msgid "Spectral class, nebula type, etc."
@@ -4474,7 +4500,7 @@ msgstr "Spektrinė klasė, ūko tipas ir t.t."
 
 #: src/ui_configurationDialog.h:1065
 msgid "Additional information"
-msgstr ""
+msgstr "Papildoma informacija"
 
 #: src/ui_configurationDialog.h:1067
 msgid "Topocentric equatorial coordinates"
@@ -4503,7 +4529,7 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:1078
 msgid "Ecliptic coordinates"
-msgstr ""
+msgstr "Ekliptinės koordinatės"
 
 #: src/ui_configurationDialog.h:1079
 msgid "Control"
@@ -4535,7 +4561,7 @@ msgstr "Paslėpti pelės žymeklį už:"
 
 #: src/ui_configurationDialog.h:1094
 msgid "seconds"
-msgstr ""
+msgstr "sek."
 
 #: src/ui_configurationDialog.h:1096
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:191
@@ -4628,7 +4654,7 @@ msgstr "Lygiuoti antraštes pagal horizontą"
 
 #: src/ui_configurationDialog.h:1136
 msgid "Toggle display backgrounds of the nebulae."
-msgstr ""
+msgstr "Įjungti/išjungti ūkų paveikslų rodymą"
 
 #: src/ui_configurationDialog.h:1138
 msgid "Show nebula background button"
@@ -4657,11 +4683,11 @@ msgstr "Automatinis atitolinimas gražins pradinę vaizdo kryptį"
 #: src/ui_configurationDialog.h:1148
 msgid ""
 "Auto-enabling of the atmosphere for bodies with atmosphere in location window"
-msgstr ""
+msgstr "Automatinis atmosferos įjungimas objektams su atmosfera"
 
 #: src/ui_configurationDialog.h:1150
 msgid "Auto-enabling for the atmosphere"
-msgstr ""
+msgstr "Automatinis įjungimas atmosferai"
 
 #: src/ui_configurationDialog.h:1151
 msgid "Screenshots"
@@ -5792,7 +5818,7 @@ msgstr ""
 #: plugins/Satellites/src/Satellite.cpp:289
 #, qt-format
 msgid "TEME coordinates (km): %1"
-msgstr ""
+msgstr "TEME koordinatės (km): %1"
 
 #. TRANSLATORS: TEME is an Earth-centered inertial coordinate system
 #: plugins/Satellites/src/Satellite.cpp:297
@@ -6106,7 +6132,7 @@ msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:682
 msgid "Updates"
-msgstr "Atnaujinimas"
+msgstr "Atnaujinimai"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:683
 msgid "Update satellite data from Internet sources"
@@ -6162,7 +6188,7 @@ msgstr ""
 #: plugins/Satellites/src/ui_satellitesDialog.h:700
 #: plugins/Satellites/src/ui_satellitesDialog.h:704
 msgid "Duration of a single segment in seconds"
-msgstr ""
+msgstr "Vieno segmento trukmė sekundėmis"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:702
 msgid "Segment length (s):"
@@ -6469,7 +6495,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:289
 msgid "Slew telescope to coordinates"
-msgstr ""
+msgstr "Pasukti teleskopą į koordinates"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:290
 msgid "De&clination (J2000):"
@@ -6477,7 +6503,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:291
 msgid "&Right Ascension (J2000):"
-msgstr ""
+msgstr "ir Rektascencija (J2000):"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:292
 msgid "&Current object"
@@ -6485,7 +6511,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:294
 msgid "Hours-minutes-seconds format"
-msgstr ""
+msgstr "Valandos-minutės-sekundės formatas"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:296
 msgid "&HMS"
@@ -6493,7 +6519,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:298
 msgid "Degrees-minutes-seconds format"
-msgstr ""
+msgstr "Laipsniai-minutės-sekundės formatas"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:300
 msgid "&DMS"
@@ -7192,7 +7218,7 @@ msgstr ""
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:513
 msgid "Select the type"
-msgstr ""
+msgstr "Pasirinkite tipą"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:514
 msgid "Asteroids"
@@ -7347,7 +7373,7 @@ msgstr "supernova"
 #: plugins/Supernovae/src/Supernova.cpp:145
 #, qt-format
 msgid "Type of supernova: %1"
-msgstr ""
+msgstr "Supernovos tipas: %1"
 
 #: plugins/Supernovae/src/Supernova.cpp:146 plugins/Novae/src/Nova.cpp:151
 #, qt-format
@@ -7386,6 +7412,10 @@ msgid ""
 "can be seen %1here%2 (right scale in days), and this model is used for this "
 "plugin."
 msgstr ""
+"Šis papildinys demonstruoja paprastą skirtingų supernovų šviesos kreivių "
+"modelį. Tipinius šviesos kreivių vaizdus I ir II tipo supernovoms galite "
+"pamatyti %1čia%2 (dešinioji skalė dienomis). Tai yra modelis naudojamas "
+"šiame papildinyje."
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:124
 msgid "Acknowledgments"
@@ -7472,21 +7502,22 @@ msgstr ""
 
 #: plugins/Novae/src/Novae.cpp:74 plugins/Novae/src/Novae.cpp:145
 msgid "Bright Novae"
-msgstr ""
+msgstr "Ryškios Novos"
 
 #: plugins/Novae/src/Novae.cpp:77 plugins/Novae/src/gui/NovaeDialog.cpp:115
 msgid "A plugin that shows some bright novae in the Milky Way galaxy."
 msgstr ""
+"Papildinys, kuris rodo kai kurias Paukščių Tako galaktikos ryškias novas"
 
 #: plugins/Novae/src/Novae.cpp:145
 msgid "Bright Novae configuration window"
-msgstr ""
+msgstr "Ryškios Novos papildinio nustatymų langas"
 
 #: plugins/Novae/src/Nova.cpp:135 plugins/Pulsars/src/Pulsar.cpp:168
 #: plugins/MeteorShowers/src/MeteorShower.cpp:344
 #, qt-format
 msgid "Type: <b>%1</b> (%2)"
-msgstr ""
+msgstr "Tipas: <b>%1</b> (%2)"
 
 #: plugins/Novae/src/Nova.cpp:135
 msgid "nova"
@@ -7494,7 +7525,7 @@ msgstr ""
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:110
 msgid "Bright Novae Plug-in"
-msgstr ""
+msgstr "Ryškios Novos papildinys"
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:116
 msgid ""
@@ -7504,7 +7535,7 @@ msgstr ""
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:118
 msgid "This plugin allows you to see recent bright novae: "
-msgstr ""
+msgstr "Šis papildinys leidžia jums pamatyti nesenas ryškias novas: "
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:121
 #, qt-format
@@ -7544,11 +7575,11 @@ msgstr ""
 
 #: plugins/Novae/src/ui_novaeDialog.h:232
 msgid "Bright Novae Configuration"
-msgstr ""
+msgstr "Papildinio Ryškios Novos konfigūracija"
 
 #: plugins/Novae/src/ui_novaeDialog.h:233
 msgid "Bright Novae Plug-in Configuration"
-msgstr ""
+msgstr "Papildinio Ryškios Novos konfigūracija"
 
 #: plugins/Quasars/src/Quasars.cpp:73 plugins/Quasars/src/Quasars.cpp:170
 #: plugins/Quasars/src/Quasars.cpp:171
@@ -8645,15 +8676,15 @@ msgstr ""
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:269
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:278
 msgid "Equation of Time"
-msgstr ""
+msgstr "Laiko Lygtis"
 
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:58
 msgid "This plugin shows the solution of the equation of time."
-msgstr ""
+msgstr "Šis papildinys rodo laiko lygties sprendimą"
 
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:96
 msgid "Show solution for Equation of Time"
-msgstr ""
+msgstr "Parodyti Lauko Lygties sprendimą"
 
 #. TRANSLATORS: minutes.
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:258
@@ -8669,7 +8700,7 @@ msgstr ""
 
 #: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:80
 msgid "Equation of Time plug-in"
-msgstr ""
+msgstr "Laiko Lygties papildinys"
 
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:270
 msgid ""
@@ -8683,6 +8714,15 @@ msgid ""
 "always followed. Anyone who makes use of a published table or graph should "
 "first check its sign usage."
 msgstr ""
+"Laiko lygtis aprašo neatitikimus tarp dviejų rūšių saulės laiko. Tai yra "
+"matomasis saulės laikas, kuris tiesiogiai seka saulės judesius ir vidutinis "
+"saulės laikas, kuris seka fiktyvią \"vidutinę\" saulė su vidurdieniais, "
+"nutolusiais po 24h. Nėra universaliai priimto laiko lygties žymėjimo "
+"apibrėžimo. Kai kurie šaltiniai žymi jį kaip teigiamą kai saulės laikrodis "
+"lenkia laikrodį; kiti - kai laikrodis lenkia saulės laikrodį. Anglakalbėje "
+"pasaulio dalyje labiau įprastas pirmasis žymėjimas, bet juo vadovaujamasi ne "
+"visada. Bet kas, kas naudosis paskelbtais lentele ar grafiku turėtų "
+"pirmiausiai pasitikrinti jo žymėjimo naudojimą."
 
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:272
 msgid "Show plug-ins button on toolbar"
@@ -8690,7 +8730,7 @@ msgstr ""
 
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:273
 msgid "Use minutes and seconds"
-msgstr ""
+msgstr "Naudoti minutes ir sekundes"
 
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:274
 msgid "Change sign of equation"
@@ -8704,7 +8744,7 @@ msgstr ""
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:63
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:163
 msgid "Meteor Showers"
-msgstr ""
+msgstr "Meteorų Lietūs"
 
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:66
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:258
@@ -8712,18 +8752,21 @@ msgid ""
 "This plugin displays meteor showers and a marker for each active and "
 "inactive radiant, showing real information about its activity."
 msgstr ""
+"Šis papildinys vaizduoja meteorų lietus ir žymeklį kiekvienam aktyviam ir "
+"neaktyviam meteorų šaltiniui (radiantui), pateikdamas realią informaciją "
+"apie jo aktyvumą."
 
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:164
 msgid "Show meteor showers"
-msgstr ""
+msgstr "Reodyti meteorų lietus"
 
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:165
 msgid "Radiant labels"
-msgstr ""
+msgstr "Meteorų šaltinių (radiantų) etiketės"
 
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:166
 msgid "Meteor Shower configuration window"
-msgstr ""
+msgstr "Papildinio Meteorų Lietus nustatymų langas"
 
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:193
 msgid ""
@@ -9150,11 +9193,11 @@ msgstr ""
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:344
 msgid "meteor shower"
-msgstr ""
+msgstr "meteorų lietus"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:353
 msgid "Radiant drift (per day)"
-msgstr ""
+msgstr "Meteoro šaltinio (radianto) poslinkis (per dieną)"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:360
 #, qt-format
@@ -9198,7 +9241,7 @@ msgstr ""
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:167
 msgid "Data Type"
-msgstr ""
+msgstr "Duomenų tipas"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:168
 msgid "Peak"
@@ -9226,7 +9269,7 @@ msgstr ""
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:253
 msgid "Meteor Showers Plug-in"
-msgstr ""
+msgstr "Papildinys Meteorų Lietus"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:259
 msgid "Terms"
@@ -9234,7 +9277,7 @@ msgstr ""
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:260
 msgid "Meteor shower"
-msgstr ""
+msgstr "Meteorų lietus"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:261
 msgid ""
@@ -9247,10 +9290,19 @@ msgid ""
 "known as meteor outbursts and meteor storms, which may produce greater than "
 "1,000 meteors an hour."
 msgstr ""
+"Meteorų lietus yra dangaus reiškinys, kurio metu stebimas tam tikras kiekis "
+"meteorų, spinduliuojamų arba atsirandančių viename nakties dangaus taške. "
+"Šie meteorai atsiranda kai kosminių šiukšlių, vadinamųjų meteoroidų, srautai "
+"įskrenda į Žemės atmosferą itin dideliais greičiais lygiagrečiomis "
+"trajektorijomis. Dauguma meteorų yra smulkesni, nei smėlio grūdelis, todėl "
+"beveik visi jie suyra ir niekada nepasiekia Žemės paviršiaus. Intensyvūs ar "
+"neįprasti meteorų lietūs yra vadinami meteorų audromis ir meteorų "
+"progrūkiais. Jų metu meteorų skaičius gali pasiekti daugiau negu 1000 "
+"meteorų per valandą."
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:262
 msgid "Radiant"
-msgstr ""
+msgstr "Meteorų šaltinis (radiantas)"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:263
 msgid ""
@@ -9259,6 +9311,10 @@ msgid ""
 "Perseids, for example, are meteors which appear to come from a point within "
 "the constellation of Perseus."
 msgstr ""
+"Meteorų šaltinis (radiantas) arba matomasis meteorų šaltinis (radiantas) yra "
+"taškas danguje, kuriame (planetoje esančiam stebėtojui) atrodo, kad "
+"prasideda meteorai. Perseidai, pavyzdžiui, yra meteorai, kurie sudaro "
+"įspūdį, kad pasirodo tam tikrame Persėjo žvaigždyno taške."
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:264
 msgid ""
@@ -9267,6 +9323,10 @@ msgid ""
 "point back to the known radiant for a given shower is known as a sporadic "
 "and is not considered part of that shower."
 msgstr ""
+"Stebėtojas gali matyti tokį meteorą bet kur danguje, bet atsekus judesio "
+"kryptį ji rodys į radiantą. Meteoras, kurio kryptis nėra iš žinomo meteorų "
+"lietaus radianto yra vadinamas pavieniu ir nėra laikomas šio meteorų lietaus "
+"dalimi."
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:265
 msgid ""
@@ -9274,6 +9334,9 @@ msgid ""
 "when it appears. For example, the radiant point for the Delta Aurigids "
 "drifts by more than a degree per night."
 msgstr ""
+"Daug meteorų lietų turi meteorų šaltinį (radiantą), kuris savo pasirodymo "
+"laikotarpiu keičia poziciją. Pavyzdžiui, Delta Aurigidų meteorų šaltinis "
+"(radiantas) pasislenka daugiau negu vienu laipsniu per naktį."
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:266
 msgid "Zenithal Hourly Rate (ZHR)"
@@ -9287,6 +9350,11 @@ msgid ""
 "were at the zenith. The rate that can effectively be seen is nearly always "
 "lower and decreases the closer the radiant is to the horizon."
 msgstr ""
+"Astronomijoje, meteorų lietaus Zenitinis Valandinis Dažnis yra kiekis "
+"meteorų, kuriuos vienas stebėtojas pamatytų per vieną valandą giedrame "
+"tamsiame danguje (ribojant įžiūrimą ryškį iki 6.5), jei meteorų lietaus "
+"šaltinis (radiantas) būtų zenite. Realiai matomas dažnis beveik visada yra "
+"mažesnis ir mažėja šaltiniui (radiantui) artėjant prie horizonto."
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:268
 msgid "Population index"
@@ -9299,6 +9367,10 @@ msgid ""
 "meteors are more frequent than average, while values above 3.0 mean that the "
 "share of faint meteors is larger than usual."
 msgstr ""
+"Užpildymo indeksas nurodo meteorų lietaus ryškio pasiskirstymą. Reikšmės "
+"žemiau 2.5 atitinka pasiskirstymus, kur ryškūs meteorai pasirodo dažniau, "
+"nei vidutiniškai. Reikšmės virš 3.0 reiškia, kad daugiau nei įprasta yra "
+"neryškių meteorų."
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:270
 msgid "Notes"
@@ -9315,31 +9387,31 @@ msgstr ""
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:273
 msgid "Info about meteor showers you can get here:"
-msgstr ""
+msgstr "apie meteorų lietus daugiau informacijos galite rasti čia:"
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:276
 #, qt-format
 msgid "%1Meteor shower%2 - article in Wikipedia"
-msgstr ""
+msgstr "%1Meteor shower%2 - Wikipedia straipsnis anglų kalba"
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:278
 #, qt-format
 msgid "%1International Meteor Organization%2"
-msgstr ""
+msgstr "%1International Meteor Organization%2"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:342
 msgid "Meteor showers is updated"
-msgstr ""
+msgstr "Informacija apie meteorų lietus yra atnaujinta"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:512
 msgid "Meteor Showers Configuration"
-msgstr ""
+msgstr "Papildinio Meteorų Lietus nustatymai"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:513
 msgid "Meteor Showers Plug-in Configuration"
-msgstr ""
+msgstr "Papildinio Meteorų Lietūs nustatymai"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:515
 msgid "Update data from Internet"
@@ -9347,23 +9419,23 @@ msgstr ""
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:523
 msgid "Meteor showers"
-msgstr ""
+msgstr "Meteorų Lietūs"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:524
 msgid "Show meteor showers button on toolbar"
-msgstr ""
+msgstr "Rodyti meteorų lietų mygtuką"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:525
 msgid "Enable display of meteor showers at startup"
-msgstr ""
+msgstr "Įjungti meteorų lietų rodymą paleidus"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:529
 msgid "Color of radiants markers"
-msgstr ""
+msgstr "Meteorų šaltinių (radiantų) žymeklių spalva"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:531
 msgid "Active Radiant - Generic Data"
-msgstr ""
+msgstr "Aktyvus meteorų šaltinis (radiantas) - bendra informacija"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:534
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:541
@@ -9373,23 +9445,23 @@ msgstr ""
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:538
 msgid "Inactive Radiant"
-msgstr ""
+msgstr "Neaktyvus meteorų šaltinis (radiantas)"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:545
 msgid "Active Radiant - Real Data"
-msgstr ""
+msgstr "Aktyvus meteorų šaltinis (radiantas) - realūs duomenys"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:551
 msgid "Radiants for meteor showers"
-msgstr ""
+msgstr "Meteorų lietų šaltiniai (radiantai)"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:552
 msgid "Show labels of radiants"
-msgstr ""
+msgstr "Rodyti meteorų šaltinių (radiantų) etiketes"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:553
 msgid "Show active radiants only"
-msgstr ""
+msgstr "Rodyti tik aktyvius meteorų šaltinius (radiantus)"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:555
 msgid "Label font size (pixels)"
@@ -9397,7 +9469,7 @@ msgstr ""
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:557
 msgid "Radiants"
-msgstr ""
+msgstr "Meteorų šaltiniai (radiantai)"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:558
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:563
@@ -9431,11 +9503,11 @@ msgstr ""
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:279
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:290
 msgid "Pointer Coordinates"
-msgstr ""
+msgstr "Kursoriaus koordinatės"
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:57
 msgid "This plugin shows the coordinates of the mouse pointer."
-msgstr ""
+msgstr "Šis papildinys rodo pelės kursoriaus koordinates"
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:95
 msgid "Show equatorial coordinates (J2000.0) of the mouse pointer"
@@ -9443,7 +9515,7 @@ msgstr ""
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:90
 msgid "Pointer Coordinates plug-in"
-msgstr ""
+msgstr "Kursoriaus Koordinačių papildinys"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:119
 msgid "The top center of the screen"
@@ -9463,7 +9535,7 @@ msgstr ""
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:281
 msgid "Enable display of coordinates at startup"
-msgstr ""
+msgstr "Įjungti koordinačių rodymą paleidus programą"
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:282
 msgid "Show plug-in button on toolbar"
