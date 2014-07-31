@@ -84,7 +84,7 @@ InfoPanel::InfoPanel(QGraphicsItem* parent) : QGraphicsTextItem("", parent)
 		if (conf->value("flag_show_galcoord", false).toBool())
 			infoTextFilters |= StelObject::GalacticCoord;
 		if (conf->value("flag_show_eclcoord", false).toBool())
-			infoTextFilters |= StelObject::EclTopocentricCoord;
+			infoTextFilters |= StelObject::EclipticCoord;
 		conf->endGroup();
 	}
 	else
