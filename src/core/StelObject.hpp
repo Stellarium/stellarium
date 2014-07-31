@@ -56,14 +56,14 @@ public:
 		AbsoluteMagnitude	= 0x00000400, //!< The absolute magnitude
 		GalacticCoord		= 0x00000800, //!< The galactic position
 		ObjectType		= 0x00001000, //!< The type of the object (star, planet, etc.)
-		EclTopocentricCoord	= 0x00002000, //!< The ecliptic topocentric position
+		EclipticCoord		= 0x00002000, //!< The ecliptic position
 		PlainText		= 0x00004000  //!< Strip HTML tags from output
 	};
 	typedef QFlags<InfoStringGroupFlags> InfoStringGroup;
 	Q_FLAGS(InfoStringGroup)
 
 	//! A pre-defined set of specifiers for the getInfoString flags argument to getInfoString
-	static const InfoStringGroupFlags AllInfo = (InfoStringGroupFlags)(Name|CatalogNumber|Magnitude|RaDecJ2000|RaDecOfDate|AltAzi|Distance|Size|Extra|HourAngle|AbsoluteMagnitude|GalacticCoord|ObjectType|EclTopocentricCoord);
+	static const InfoStringGroupFlags AllInfo = (InfoStringGroupFlags)(Name|CatalogNumber|Magnitude|RaDecJ2000|RaDecOfDate|AltAzi|Distance|Size|Extra|HourAngle|AbsoluteMagnitude|GalacticCoord|ObjectType|EclipticCoord);
 	//! A pre-defined set of specifiers for the getInfoString flags argument to getInfoString
 	static const InfoStringGroupFlags ShortInfo = (InfoStringGroupFlags)(Name|CatalogNumber|Magnitude|RaDecJ2000);
 
