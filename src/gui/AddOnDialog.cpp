@@ -62,6 +62,23 @@ void AddOnDialog::createDialogContent()
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()),this, SLOT(retranslate()));
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 
+	// storing all tableViews in a list (easier to iterate)
+	// it must be ordered according to the stackwidget
+	m_tableViews.append(ui->catalogsTableView);
+	m_tableViews.append(ui->landscapeTableView);
+	m_tableViews.append(ui->languageTableView);
+	m_tableViews.append(ui->scriptsTableView);
+	m_tableViews.append(ui->starloreTableView);
+	m_tableViews.append(ui->texturesTableView);
+
+	// mapping enum_tab to table names
+	m_tabToTableName.insert(CATALOG, TABLE_CATALOG);
+	m_tabToTableName.insert(LANDSCAPE, TABLE_LANDSCAPE);
+	m_tabToTableName.insert(LANGUAGEPACK, TABLE_LANGUAGE_PACK);
+	m_tabToTableName.insert(SCRIPT, TABLE_SCRIPT);
+	m_tabToTableName.insert(STARLORE, TABLE_SKY_CULTURE);
+	m_tabToTableName.insert(TEXTURE, TABLE_TEXTURE);
+
 	// build and populate all tableviews
 	populateTables();
 
@@ -80,23 +97,6 @@ void AddOnDialog::createDialogContent()
 	connect(ui->btnRemove, SIGNAL(clicked()), this, SLOT(removeSelectedRows()));
 	ui->btnInstall->setEnabled(false);
 	ui->btnRemove->setEnabled(false);
-
-	// storing all tableViews in a list (easier to iterate)
-	// it must be ordered according to the stackwidget
-	m_tableViews.append(ui->catalogsTableView);
-	m_tableViews.append(ui->landscapeTableView);
-	m_tableViews.append(ui->languageTableView);
-	m_tableViews.append(ui->scriptsTableView);
-	m_tableViews.append(ui->starloreTableView);
-	m_tableViews.append(ui->texturesTableView);
-
-	// mapping enum_tab to table names
-	m_tabToTableName.insert(CATALOG, TABLE_CATALOG);
-	m_tabToTableName.insert(LANDSCAPE, TABLE_LANDSCAPE);
-	m_tabToTableName.insert(LANGUAGEPACK, TABLE_LANGUAGE_PACK);
-	m_tabToTableName.insert(SCRIPT, TABLE_SCRIPT);
-	m_tabToTableName.insert(STARLORE, TABLE_SKY_CULTURE);
-	m_tabToTableName.insert(TEXTURE, TABLE_TEXTURE);
 
 	// fix dialog width
 	updateTabBarListWidgetWidth();
@@ -137,6 +137,45 @@ void AddOnDialog::changePage(QListWidgetItem *current, QListWidgetItem *previous
 		current = previous;
 	}
 	ui->stackedWidget->setCurrentIndex(ui->stackListWidget->row(current));
+}
+
+void AddOnDialog::populateTables()
+{
+	m_iSelectedAddOns.clear();
+
+	// destroying all checkboxes
+	int i = 0;
+	while (!m_checkBoxes.isEmpty())
+	{
+		delete m_checkBoxes.take((Tab)i);
+		i++;
+	}
+
+	int tab = 0;
+	foreach (QTableView* view, m_tableViews)
+	{
+		setUpTableView(view, m_tabToTableName.value((Tab)tab));
+		insertCheckBoxes(view, (Tab)tab);
+		tab++;
+	}
+}
+
+void AddOnDialog::insertCheckBoxes(QTableView* tableview, Tab tab)
+{
+	QButtonGroup* checkboxes = new QButtonGroup(this);
+	checkboxes->setExclusive(false);
+	connect(checkboxes, SIGNAL(buttonToggled(int, bool)),
+		this, SLOT(slotRowSelected(int, bool)));
+
+	int lastColumn = tableview->horizontalHeader()->count() - 1;
+	for(int row=0; row < tableview->model()->rowCount(); ++row)
+	{
+		QCheckBox* cbox = new QCheckBox();
+		cbox->setStyleSheet("QCheckBox { padding-left: 8px; }");
+		tableview->setIndexWidget(tableview->model()->index(row, lastColumn), cbox);
+		checkboxes->addButton(cbox, row);
+	}
+	m_checkBoxes.insert(tab, checkboxes);
 }
 
 void AddOnDialog::setUpTableView(QTableView* tableView, QString tableName)
@@ -187,60 +226,6 @@ bool AddOnDialog::isCompatible(QString first, QString last)
 	}
 
 	return true;
-}
-
-void AddOnDialog::populateTables()
-{
-	m_iSelectedAddOns.clear();
-
-	// destroying all checkboxes
-	int i = 0;
-	while (!m_checkBoxes.isEmpty())
-	{
-		delete m_checkBoxes.take((Tab)i);
-		i++;
-	}
-
-	// CATALOGS
-	setUpTableView(ui->catalogsTableView, TABLE_CATALOG);
-	insertCheckBoxes(ui->catalogsTableView, CATALOG);
-
-	// LANDSCAPES
-	setUpTableView(ui->landscapeTableView,TABLE_LANDSCAPE);
-	insertCheckBoxes(ui->landscapeTableView, LANDSCAPE);
-
-	// LANGUAGE PACK
-	setUpTableView(ui->languageTableView, TABLE_LANGUAGE_PACK);
-	insertCheckBoxes(ui->languageTableView, LANGUAGEPACK);
-
-	// SCRIPTS
-	setUpTableView(ui->scriptsTableView, TABLE_SCRIPT);
-	insertCheckBoxes(ui->scriptsTableView, SCRIPT);
-
-	// STARLORE (SKY CULTURE)
-	setUpTableView(ui->starloreTableView, TABLE_SKY_CULTURE);
-	insertCheckBoxes(ui->starloreTableView, STARLORE);
-
-	// TEXTURES
-	setUpTableView(ui->texturesTableView, TABLE_TEXTURE);
-	insertCheckBoxes(ui->texturesTableView, TEXTURE);
-}
-
-void AddOnDialog::insertCheckBoxes(QTableView* tableview, Tab tab) {
-	QButtonGroup* checkboxes = new QButtonGroup(this);
-	checkboxes->setExclusive(false);
-	connect(checkboxes, SIGNAL(buttonToggled(int, bool)),
-		this, SLOT(slotRowSelected(int, bool)));
-
-	int lastColumn = tableview->horizontalHeader()->count() - 1;
-	for(int row=0; row < tableview->model()->rowCount(); ++row)
-	{
-		QCheckBox* cbox = new QCheckBox();
-		cbox->setStyleSheet("QCheckBox { padding-left: 8px; }");
-		tableview->setIndexWidget(tableview->model()->index(row, lastColumn), cbox);
-		checkboxes->addButton(cbox, row);
-	}
-	m_checkBoxes.insert(tab, checkboxes);
 }
 
 void AddOnDialog::updateCatalog()
