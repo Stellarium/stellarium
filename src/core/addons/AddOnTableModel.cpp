@@ -46,23 +46,33 @@ AddOnTableModel::AddOnTableModel(QString tableName)
 	}
 
 	setQuery(getQuery(tableName, extraColumns));
+	initHeaderData();
 }
 
 QString AddOnTableModel::getQuery(QString table, QStringList extraColumns)
 {
-	QString query = "SELECT " % table % ".id, addon.id AS addonid, "
-				"first_stel, last_stel, title,";
-	query = query % extraColumns.join(",") % ", NULL ";
-	query = query % "FROM addon INNER JOIN " % table %
+	QString query = "SELECT " % table % ".id, addon.id AS addon, first_stel, "
+			"last_stel, title," % extraColumns.join(",") %", installed, NULL "
+			"FROM addon INNER JOIN " % table %
 			" ON addon.id = " % table % ".addon";
 	return query;
 }
 
 void AddOnTableModel::initHeaderData()
 {
-	// TODO
-	//setHeaderData(findColumn(COLUMN_ADDONID), Qt::Horizontal, COLUMN_ADDONID);
-	//setHeaderData(findColumn(COLUMN_ADDONID), Qt::Horizontal, COLUMN_ADDONID);
+	m_columnNameTranslated.insert(q_("Title"), COLUMN_TITLE);
+	m_columnNameTranslated.insert(q_("Type"), COLUMN_TYPE);
+	m_columnNameTranslated.insert(q_("Last Version"), COLUMN_VERSION);
+	m_columnNameTranslated.insert(q_("Last Update"), COLUMN_LAST_UPDATE);
+	m_columnNameTranslated.insert(q_("Installed"), COLUMN_INSTALLED);
+
+	QHashIterator<QString, QString> i(m_columnNameTranslated);
+	while (i.hasNext())
+	{
+		i.next();
+		setHeaderData(findColumn(i.value()), Qt::Horizontal, i.key());
+	}
+	setHeaderData(findColumn("NULL"), Qt::Horizontal, "");
 }
 
 QVariant AddOnTableModel::data(const QModelIndex& index, int role) const
@@ -73,7 +83,9 @@ QVariant AddOnTableModel::data(const QModelIndex& index, int role) const
 	}
 
 	QVariant value = QSqlQueryModel::data(index, role);
-	QString column = headerData(index.column(), Qt::Horizontal).toString();
+	QString column = m_columnNameTranslated.value(headerData(
+				index.column(), Qt::Horizontal).toString());
+
 	if (column == COLUMN_LAST_UPDATE)
 	{
 		value = qVariantFromValue(QDateTime::fromMSecsSinceEpoch(value.Int*1000));
@@ -93,9 +105,13 @@ QModelIndex AddOnTableModel::findIndex(int row, const QString& columnName)
 
 int AddOnTableModel::findColumn(const QString& columnName)
 {
+	QString headerName, rawHeaderName;
 	for (int column = 0; column < columnCount(); column++)
 	{
-		if (columnName == headerData(column, Qt::Horizontal).toString())
+		headerName = headerData(column, Qt::Horizontal).toString();
+		rawHeaderName = m_columnNameTranslated.value(headerName, "");
+		headerName = rawHeaderName.isEmpty() ? headerName : rawHeaderName;
+		if (columnName == headerName)
 		{
 			return column;
 		}

@@ -38,6 +38,9 @@ public:
 private:
 	QString getQuery(QString table, QStringList extraColumns);
 	void initHeaderData();
+
+	// <translatedColumName, rawColumnName>
+	QHash<QString, QString> m_columnNameTranslated;
 };
 
 #endif // _ADDONTABLEMODEL_HPP_
