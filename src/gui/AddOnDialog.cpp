@@ -149,10 +149,11 @@ void AddOnDialog::setUpTableView(QTableView* tableView, QString tableName)
 	AddOnTableModel* model = new AddOnTableModel(tableName);
 	tableView->setModel(model);
 
-	tableView->setColumnHidden(0, true); // hide id
-	tableView->setColumnHidden(1, true); // hide addonid
-	tableView->setColumnHidden(2, true); // hide firststel
-	tableView->setColumnHidden(3, true); // hide laststel
+	// hide internal columns
+	tableView->setColumnHidden(model->findColumn(COLUMN_ID), true);
+	tableView->setColumnHidden(model->findColumn(COLUMN_ADDONID), true);
+	tableView->setColumnHidden(model->findColumn(COLUMN_FIRST_STEL), true);
+	tableView->setColumnHidden(model->findColumn(COLUMN_LAST_STEL), true);
 
 	// hide imcompatible add-ons
 	for (int row = 0; row < model->rowCount(); row++)
@@ -163,7 +164,7 @@ void AddOnDialog::setUpTableView(QTableView* tableView, QString tableName)
 	}
 
 	tableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
-	int lastColumn = tableView->horizontalHeader()->count() - 1;
+	int lastColumn = tableView->horizontalHeader()->count() - 1; // checkbox
 	tableView->horizontalHeader()->setSectionResizeMode(lastColumn, QHeaderView::ResizeToContents);
 	tableView->verticalHeader()->setVisible(false);
 	tableView->setAlternatingRowColors(false);
