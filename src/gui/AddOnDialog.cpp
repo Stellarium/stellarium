@@ -304,17 +304,19 @@ void AddOnDialog::downloadFinished()
 
 void AddOnDialog::slotRowSelected(int row, bool checked)
 {
-	int addOnId = m_currentTableView->model()->index(row, 1).data().toInt();
+	AddOnTableModel* model = (AddOnTableModel*) m_currentTableView->model();
+	int addOnId = model->findIndex(row, COLUMN_ADDONID).data().toInt();
+	bool installed = "Yes" == model->findIndex(row, COLUMN_INSTALLED).data().toString();
 	if (checked)
 	{
-		m_iSelectedAddOns.append(addOnId);
+		m_iSelectedAddOns.append(qMakePair(addOnId, installed));
 	}
 	else
 	{
-		m_iSelectedAddOns.removeOne(addOnId);
+		m_iSelectedAddOns.removeOne(qMakePair(addOnId, installed));
 	}
 
-	// it desables buttons when no line is selected.
+	// it disables the buttons when no line is selected.
 	bool allOff = m_iSelectedAddOns.size() <= 0;
 	ui->btnInstall->setEnabled(!allOff);
 	ui->btnRemove->setEnabled(!allOff);
@@ -322,14 +324,24 @@ void AddOnDialog::slotRowSelected(int row, bool checked)
 
 void AddOnDialog::installSelectedRows()
 {
-	foreach (int addonId , m_iSelectedAddOns) {
-		StelApp::getInstance().getStelAddOnMgr().installAddOn(addonId);
+	for (int i = 0; i < m_iSelectedAddOns.size(); i++)
+	{
+		QPair<int,int> p = m_iSelectedAddOns.at(i);
+		if (!p.second) // not installed
+		{
+			StelApp::getInstance().getStelAddOnMgr().installAddOn(p.first);
+		}
 	}
 }
 
 void AddOnDialog::removeSelectedRows()
 {
-	foreach (int addonId , m_iSelectedAddOns) {
-		StelApp::getInstance().getStelAddOnMgr().removeAddOn(addonId);
+	for (int i = 0; i < m_iSelectedAddOns.size(); i++)
+	{
+		QPair<int,int> p = m_iSelectedAddOns.at(i);
+		if (p.second) // installed
+		{
+			StelApp::getInstance().getStelAddOnMgr().removeAddOn(p.first);
+		}
 	}
 }
