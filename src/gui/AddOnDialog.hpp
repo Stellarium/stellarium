@@ -71,9 +71,10 @@ private:
 	};
 
 	QNetworkReply* m_pUpdateCatalogReply;
-	QTableView* m_currentTableView;
 	QHash<Tab, QButtonGroup*> m_checkBoxes;
 	QList<QPair<int, int> > m_iSelectedAddOns;
+	QList<QTableView*> m_tableViews;
+	QMap<Tab, QString> m_tabToTableName;
 
 	void updateTabBarListWidgetWidth();
 	void setUpTableView(QTableView* tableView, QString tableName);

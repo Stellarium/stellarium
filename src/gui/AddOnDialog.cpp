@@ -74,14 +74,31 @@ void AddOnDialog::createDialogContent()
 		this, SLOT(changePage(QListWidgetItem *, QListWidgetItem*)));
 	ui->stackedWidget->setCurrentIndex(CATALOG);
 	ui->stackListWidget->setCurrentRow(CATALOG);
-	m_currentTableView = ui->catalogsTableView;
 
-	// Install and Remove
+	// buttons: Install and Remove
 	connect(ui->btnInstall, SIGNAL(clicked()), this, SLOT(installSelectedRows()));
 	connect(ui->btnRemove, SIGNAL(clicked()), this, SLOT(removeSelectedRows()));
 	ui->btnInstall->setEnabled(false);
 	ui->btnRemove->setEnabled(false);
 
+	// storing all tableViews in a list (easier to iterate)
+	// it must be ordered according to the stackwidget
+	m_tableViews.append(ui->catalogsTableView);
+	m_tableViews.append(ui->landscapeTableView);
+	m_tableViews.append(ui->languageTableView);
+	m_tableViews.append(ui->scriptsTableView);
+	m_tableViews.append(ui->starloreTableView);
+	m_tableViews.append(ui->texturesTableView);
+
+	// mapping enum_tab to table names
+	m_tabToTableName.insert(CATALOG, TABLE_CATALOG);
+	m_tabToTableName.insert(LANDSCAPE, TABLE_LANDSCAPE);
+	m_tabToTableName.insert(LANGUAGEPACK, TABLE_LANGUAGE_PACK);
+	m_tabToTableName.insert(SCRIPT, TABLE_SCRIPT);
+	m_tabToTableName.insert(STARLORE, TABLE_SKY_CULTURE);
+	m_tabToTableName.insert(TEXTURE, TABLE_TEXTURE);
+
+	// fix dialog width
 	updateTabBarListWidgetWidth();
 }
 
@@ -120,28 +137,6 @@ void AddOnDialog::changePage(QListWidgetItem *current, QListWidgetItem *previous
 		current = previous;
 	}
 	ui->stackedWidget->setCurrentIndex(ui->stackListWidget->row(current));
-
-	switch (ui->stackedWidget->currentIndex())
-	{
-		case CATALOG:
-			m_currentTableView = ui->catalogsTableView;
-			break;
-		case LANDSCAPE:
-			m_currentTableView = ui->landscapeTableView;
-			break;
-		case LANGUAGEPACK:
-			m_currentTableView = ui->languageTableView;
-			break;
-		case SCRIPT:
-			m_currentTableView = ui->scriptsTableView;
-			break;
-		case STARLORE:
-			m_currentTableView = ui->starloreTbleView;
-			break;
-		case TEXTURE:
-			m_currentTableView = ui->texturesTableView;
-			break;
-	}
 }
 
 void AddOnDialog::setUpTableView(QTableView* tableView, QString tableName)
@@ -223,8 +218,8 @@ void AddOnDialog::populateTables()
 	insertCheckBoxes(ui->scriptsTableView, SCRIPT);
 
 	// STARLORE (SKY CULTURE)
-	setUpTableView(ui->starloreTbleView, TABLE_SKY_CULTURE);
-	insertCheckBoxes(ui->starloreTbleView, STARLORE);
+	setUpTableView(ui->starloreTableView, TABLE_SKY_CULTURE);
+	insertCheckBoxes(ui->starloreTableView, STARLORE);
 
 	// TEXTURES
 	setUpTableView(ui->texturesTableView, TABLE_TEXTURE);
@@ -305,7 +300,7 @@ void AddOnDialog::downloadFinished()
 
 void AddOnDialog::slotRowSelected(int row, bool checked)
 {
-	AddOnTableModel* model = (AddOnTableModel*) m_currentTableView->model();
+	AddOnTableModel* model = (AddOnTableModel*) m_tableViews.at(ui->stackedWidget->currentIndex())->model();
 	int addOnId = model->findIndex(row, COLUMN_ADDONID).data().toInt();
 	bool installed = "Yes" == model->findIndex(row, COLUMN_INSTALLED).data().toString();
 	if (checked)
