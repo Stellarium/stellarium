@@ -53,6 +53,8 @@ public:
 		  );
 
 	virtual ~Comet();
+//	//! initialize static variables. Call this once at startup!
+//	void initClass();
 
 	//Inherited from StelObject via Planet
 	//! Get a string with data about the Comet.
@@ -87,6 +89,9 @@ public:
 	//! get sidereal period for comet, days, or returns 0 if not possible (paraboloid, hyperboloid orbit)
 	virtual double getSiderealPeriod() const;
 
+	//! GZ: override from Planet: extend with tail details.
+	virtual void computePosition(const double date);
+
 	//! re-implementation of Planet's draw()
 	virtual void draw(StelCore* core, float maxMagLabels, const QFont& planetNameFont);
 
@@ -120,20 +125,23 @@ private:
 	bool nameIsProvisionalDesignation;
 
 	//GZ Tail additions
+	static const float COMET_MIN_TAIL_LENGTH_AU=0.0025; //! tail drawn only if longer than about 1 moon orbit radius (375000km)
+	bool tailActive;		//! true if there is a tail worth bothering (longer than COMET_MIN_TAIL_LENGTH_AU)? Drawing tails is quite costly.
+	double deltaJDtail;             //! like deltaJD, but time difference between tail geometry updates.
+	double lastJDtail;             //! like lastJD, but time of last tail geometry update.
+	Mat4d gasTailRot;		//! rotation matrix for gas tail parabola
+	Mat4d dustTailRot;		//! rotation matrix for the skewed dust tail parabola
 	float dustTailWidthFactor;      //!< empirical individual broadening of the dust tail end, compared to the gas tail end. Actually, dust tail width=2*comaWidth*dustTailWidthFactor. Default 1.5
 	float dustTailLengthFactor;     //!< empirical individual length of dust tail relative to gas tail. Taken from ssystem.ini, typical value 0.3..0.5, default 0.4
 	float dustTailBrightnessFactor; //!< empirical individual brightness of dust tail relative to gas tail. Taken from ssystem.ini, default 1.5
+	QVector<double> comaVertexArr;
+	QVector<float> comaTexCoordArr; //  --> 2014-08: COULD BE DECLARED static ONCE FOR ALL COMETS!
 	QVector<double> gastailVertexArr;  // computed frequently, describes parabolic shape (along z axis) of gas tail.
 	QVector<double> dusttailVertexArr; // computed frequently, describes parabolic shape (along z axis) of dust tail.
-	QVector<float> gastailTexCoordArr; // computed only once per comet!
-	//QVector<float> dusttailTexCoordArr; // currently identical to gastailVertexArr, has been taken out.
-	QVector<unsigned short> gastailIndices; // computed only once per comet!
-	//QVector<unsigned short> dusttailIndices; // actually no longer required. Re-use gas tail indices.
-	QVector<double> comaVertexArr;
-	QVector<float> comaTexCoordArr;
+	QVector<float> tailTexCoordArr; // computed only once per comet! --> 2014-08: COULD BE DECLARED static ONCE FOR ALL COMETS!
+	QVector<unsigned short> tailIndices; // computed only once per comet! --> 2014-08: COULD BE DECLARED static ONCE FOR ALL COMETS!
 	StelTextureSP comaTexture;
-	StelTextureSP gasTailTexture;
-	//StelTextureSP dusttailTexture;  // it seems not really necessary to have different textures.
+	StelTextureSP tailTexture;      // it seems not really necessary to have different textures. gas tail is just painted blue.
 };
 
 #endif //_COMET_HPP_
