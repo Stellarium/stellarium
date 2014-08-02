@@ -40,6 +40,7 @@
 #define COMET_TAIL_SLICES 16 // segments around the perimeter
 #define COMET_TAIL_STACKS 16 // cuts along the rotational axis
 
+
 Comet::Comet(const QString& englishName,
 		 int flagLighting,
 		 double radius,
@@ -77,6 +78,8 @@ Comet::Comet(const QString& englishName,
 	texMapName = atexMapName;
 	lastOrbitJD =0;
 	deltaJD = StelCore::JD_SECOND;
+	deltaJDtail=15.0*StelCore::JD_MINUTE; // update tail geometry every 15 minutes only
+	lastJDtail=0.0;
 	orbitCached = 0;
 	closeOrbit = acloseOrbit;
 
@@ -86,18 +89,15 @@ Comet::Comet(const QString& englishName,
 
 	gastailVertexArr.clear();
 	dusttailVertexArr.clear();
-	gastailTexCoordArr.clear();
-	//dusttailTexCoordArr.clear();
-	gastailIndices.clear();
-	//dusttailIndices.clear();
+	tailTexCoordArr.clear();
+	tailIndices.clear();
 	comaVertexArr.clear();
 	comaTexCoordArr.clear();
 
 	comaTexture = StelApp::getInstance().getTextureManager().createTextureThread(StelFileMgr::getInstallationDir()+"/textures/cometComa.png", StelTexture::StelTextureParams(true, GL_LINEAR, GL_CLAMP_TO_EDGE));
 	//GZ: tail textures. We use a paraboloid tail body, textured like a fisheye sphere, i.e. center=head. The texture should be something like a mottled star to give some structure.
-	gasTailTexture = StelApp::getInstance().getTextureManager().createTextureThread(StelFileMgr::getInstallationDir()+"/textures/cometTail.png", StelTexture::StelTextureParams(true, GL_LINEAR, GL_CLAMP_TO_EDGE));
-	// GZ: I think we need only one texture for the tails.
-	//dusttailTexture = StelApp::getInstance().getTextureManager().createTextureThread(StelFileMgr::getInstallationDir()+"/textures/cometTail.png", StelTexture::StelTextureParams(true, GL_LINEAR, GL_CLAMP_TO_EDGE));
+	tailTexture = StelApp::getInstance().getTextureManager().createTextureThread(StelFileMgr::getInstallationDir()+"/textures/cometTail.png", StelTexture::StelTextureParams(true, GL_LINEAR, GL_CLAMP_TO_EDGE));
+	//GZ: I think we need only one texture for the tails.
 
 	//Comet specific members
 	absoluteMagnitude = 0;
@@ -112,6 +112,14 @@ Comet::Comet(const QString& englishName,
 	isCometFragment = false;
 	nameIsProvisionalDesignation = false;
 }
+
+//void Comet::initClass() // such a thing may work in ObjectiveC only, not C++. This could initialize what would be "class variables" shared by all instances.
+//{
+//	tailIndices.clear();
+//	tailTexCoordArr.clear();
+//	comaTexCoordArr.clear();
+//	// these arrays could be initialized once and shared by all Comets. HOWTO?
+//}
 
 Comet::~Comet()
 {
@@ -279,6 +287,84 @@ float Comet::getVMagnitude(const StelCore* core) const
 	return apparentMagnitude;
 }
 
+// Compute the position in the parent Planet coordinate system
+// Actually call the provided function to compute the ecliptical position, and buildup the tails!
+void Comet::computePosition(const double date)
+{
+	Planet::computePosition(date);
+	//GZ: I think we can make deltaJD adaptive, depending on distance to sun! For some reason though, this leads to a crash!
+	//deltaJD=StelCore::JD_SECOND * qMax(1.0, qMin(eclipticPos.length(), 20.0));
+
+	if (fabs(lastJDtail-date)>deltaJDtail)
+	{
+		//qDebug() << "Update tail for " << englishName << " at Date: " << StelUtils::julianDayToISO8601String(date);
+		//qDebug() << "   lastJDtail was " << StelUtils::julianDayToISO8601String(lastJDtail);
+		lastJDtail=date;
+
+		// GZ: Moved from draw() :-)
+		// The CometOrbit is in fact available in userDataPtr!
+		CometOrbit* orbit=(CometOrbit*)userDataPtr;
+		Q_ASSERT(orbit);
+		if (!orbit->objectDateValid(date)) return; // out of useful date range. This should allow having hundreds of comet elements.
+
+		if (orbit->getUpdateTails()){
+			// Compute lengths and orientations from orbit object, but only if required.
+			// This part moved from draw() to keep draw() free from too much computation.
+			Vec2f tailFactors=getComaDiameterAndTailLengthAU();
+			//qDebug() << "Comet " << englishName << ": tailFactors: Coma: " << tailFactors[0] << ", tail length [AU]: " << tailFactors[1];
+
+			// Note that we use a diameter larger than what the formula returns. A scale factor of 1.2 is ad-hoc/empirical (GZ), but may look better.
+			computeComa(1.0f*tailFactors[0]);
+
+			tailActive = (tailFactors[1] > COMET_MIN_TAIL_LENGTH_AU); // Inhibit tails drawing if too short. Would be nice to include geometric projection angle, but this is too costly.
+
+			if (tailActive)
+			{
+				float gasTailEndRadius=qMax(tailFactors[0], 0.025f*tailFactors[1]) ; // This avoids too slim gas tails for bright comets like Hale-Bopp.
+				float gasparameter=gasTailEndRadius*gasTailEndRadius/(2.0f*tailFactors[1]); // parabola formula: z=r²/2p, so p=r²/2z
+				// The dust tail is thicker and usually shorter. The factors can be configured in the elements.
+				float dustparameter=gasTailEndRadius*gasTailEndRadius*dustTailWidthFactor*dustTailWidthFactor/(2.0f*dustTailLengthFactor*tailFactors[1]);
+
+				// Find valid parameters to create paraboloid vertex arrays: dustTail, gasTail.
+				computeParabola(gasparameter, gasTailEndRadius, -0.5f*gasparameter, gastailVertexArr,  tailTexCoordArr, tailIndices);
+				// This was for a rotated straight parabola:
+				//computeParabola(dustparameter, 2.0f*tailFactors[0], -0.5f*dustparameter, dusttailVertexArr, dusttailTexCoordArr, dusttailIndices);
+				// Now we make a skewed parabola. Skew factor (xOffset, last arg) is rather ad-hoc/empirical. TBD later: Find physically correct solution.
+				computeParabola(dustparameter, dustTailWidthFactor*gasTailEndRadius, -0.5f*dustparameter, dusttailVertexArr, tailTexCoordArr, tailIndices, 25.0f*orbit->getVelocity().length());
+
+
+				// 2014-08 for 0.13.1 Moved from drawTail() to save lots of computation per frame (There *are* folks downloading all 730 MPC current comet elements...)
+				// Find rotation matrix from 0/0/1 to eclipticPosition: crossproduct for axis (normal vector), dotproduct for angle.
+				Vec3d eclposNrm=eclipticPos; eclposNrm.normalize();
+				gasTailRot=Mat4d::rotation(Vec3d(0.0, 0.0, 1.0)^(eclposNrm), std::acos(Vec3d(0.0, 0.0, 1.0).dot(eclposNrm)) );
+
+				Vec3d velocity=orbit->getVelocity(); // [AU/d]
+				// This was a try to rotate a straight parabola somewhat away from the antisolar direction.
+				//Mat4d dustTailRot=Mat4d::rotation(eclposNrm^(-velocity), 0.15f*std::acos(eclposNrm.dot(-velocity))); // GZ: This scale factor of 0.15 is empirical from photos of Halley and Hale-Bopp.
+				// The curved tail is curved towards positive X. We first rotate around the Z axis into a direction opposite of the motion vector, then again the antisolar rotation applies.
+				// In addition, we let the dust tail already start with a light tilt.
+				dustTailRot=gasTailRot * Mat4d::zrotation(atan2(velocity[1], velocity[0]) + M_PI) * Mat4d::yrotation(5.0f*velocity.length());
+
+				// TODO: If we want to be even faster, rotate vertex arrays here and not in drawTail()!
+				Vec3d* gasVertices=(Vec3d*) (gastailVertexArr.data());
+				Vec3d* dustVertices=(Vec3d*) (dusttailVertexArr.data());
+				for (int i=0; i<COMET_TAIL_SLICES*COMET_TAIL_STACKS+1; ++i)
+				{
+					gasVertices[i].transfo4d(gasTailRot);
+					dustVertices[i].transfo4d(dustTailRot);
+				}
+
+			}
+
+			orbit->setUpdateTails(false); // don't update until position has been recalculated elsewhere
+		}
+		// Note: we can make deltaJDtail adaptive, depending on distance to sun!
+		//deltaJDtail=5.0*StelCore::JD_MINUTE * qMax(0.01, qMin(eclipticPos.length(), 20.0));
+
+	}
+}
+
+
 // Draw the Comet and all the related infos : name, circle etc... GZ: Taken from Planet.cpp 2013-11-05 and extended
 void Comet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFont)
 {
@@ -292,30 +378,30 @@ void Comet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFont
 	// The CometOrbit is in fact available in userDataPtr!
 	CometOrbit* orbit=(CometOrbit*)userDataPtr;
 	Q_ASSERT(orbit);
-	if (!orbit->objectDateValid(core->getJDay())) return; // out of useful date range. This allows having hundreds of comet elements.
+	if (!orbit->objectDateValid(core->getJDay())) return; // don't draw at all out of useful date range. This allows having hundreds of comet elements.
 
-	if (orbit->getUpdateTails()){
-		// Compute lengths and orientations from orbit object, but only if required.
-		// TODO: This part should possibly be moved to another thread to keep draw() free from too much computation.
+/*	if (orbit->getUpdateTails()){
+//		// Compute lengths and orientations from orbit object, but only if required.
+//		// TODO: This part should possibly be moved to another thread to keep draw() free from too much computation.
 
-		Vec2f tailFactors=getComaDiameterAndTailLengthAU();
-		float gasTailEndRadius=qMax(tailFactors[0], 0.025f*tailFactors[1]) ; // This avoids too slim gas tails for bright comets like Hale-Bopp.
-		float gasparameter=gasTailEndRadius*gasTailEndRadius/(2.0f*tailFactors[1]); // parabola formula: z=r²/2p, so p=r²/2z
-		// The dust tail is thicker and usually shorter. The factors can be configured in the elements.
-		float dustparameter=gasTailEndRadius*gasTailEndRadius*dustTailWidthFactor*dustTailWidthFactor/(2.0f*dustTailLengthFactor*tailFactors[1]);
+//		Vec2f tailFactors=getComaDiameterAndTailLengthAU();
+//		float gasTailEndRadius=qMax(tailFactors[0], 0.025f*tailFactors[1]) ; // This avoids too slim gas tails for bright comets like Hale-Bopp.
+//		float gasparameter=gasTailEndRadius*gasTailEndRadius/(2.0f*tailFactors[1]); // parabola formula: z=r²/2p, so p=r²/2z
+//		// The dust tail is thicker and usually shorter. The factors can be configured in the elements.
+//		float dustparameter=gasTailEndRadius*gasTailEndRadius*dustTailWidthFactor*dustTailWidthFactor/(2.0f*dustTailLengthFactor*tailFactors[1]);
 
-		// Find valid parameters to create paraboloid vertex arrays: dustTail, gasTail.
-		computeParabola(gasparameter, gasTailEndRadius, -0.5f*gasparameter, gastailVertexArr,  gastailTexCoordArr, gastailIndices);
-		// This was for a rotated straight parabola:
-		//computeParabola(dustparameter, 2.0f*tailFactors[0], -0.5f*dustparameter, dusttailVertexArr, dusttailTexCoordArr, dusttailIndices);
-		// Now we make a skewed parabola. Skew factor 15 (last arg) ad-hoc/empirical. TBD later: Find physically correct solution.
-		computeParabola(dustparameter, dustTailWidthFactor*gasTailEndRadius, -0.5f*dustparameter, dusttailVertexArr, gastailTexCoordArr, gastailIndices, 25.0f*orbit->getVelocity().length());
+//		// Find valid parameters to create paraboloid vertex arrays: dustTail, gasTail.
+//		computeParabola(gasparameter, gasTailEndRadius, -0.5f*gasparameter, gastailVertexArr,  gastailTexCoordArr, gastailIndices);
+//		// This was for a rotated straight parabola:
+//		//computeParabola(dustparameter, 2.0f*tailFactors[0], -0.5f*dustparameter, dusttailVertexArr, dusttailTexCoordArr, dusttailIndices);
+//		// Now we make a skewed parabola. Skew factor 15 (last arg) ad-hoc/empirical. TBD later: Find physically correct solution.
+//		computeParabola(dustparameter, dustTailWidthFactor*gasTailEndRadius, -0.5f*dustparameter, dusttailVertexArr, gastailTexCoordArr, gastailIndices, 25.0f*orbit->getVelocity().length());
 
-		// Note that we use a diameter larger than what the formula returns. A scale factor of 1.2 is ad-hoc/empirical (GZ), but may look better.
-		computeComa(1.0f*tailFactors[0]);
-		orbit->setUpdateTails(false); // don't update until position has been recalculated elsewhere
-	}
-
+//		// Note that we use a diameter larger than what the formula returns. A scale factor of 1.2 is ad-hoc/empirical (GZ), but may look better.
+//		computeComa(1.0f*tailFactors[0]);
+//		orbit->setUpdateTails(false); // don't update until position has been recalculated elsewhere
+//	}
+*/
 	Mat4d mat = Mat4d::translation(eclipticPos) * rotLocalToParent;
 /*  // We can remove that - a Comet has no parent except for the sun...
 	PlanetP p = parent;
@@ -358,10 +444,12 @@ void Comet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFont
 
 		draw3dModel(core,transfo,screenSz);
 	}
-	// tails should also be drawn if core is off-screen...
-	drawTail(core,transfo,true);  // gas tail
-	drawTail(core,transfo,false); // dust tail
-
+	// tails should also be drawn if comet core is off-screen...
+	if (tailActive)
+	{
+		drawTail(core,transfo,true);  // gas tail
+		drawTail(core,transfo,false); // dust tail
+	}
 	//Coma: this is just a fan disk tilted towards the observer;-)
 	drawComa(core, transfo);
 	return;
@@ -369,25 +457,15 @@ void Comet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFont
 
 void Comet::drawTail(StelCore* core, StelProjector::ModelViewTranformP transfo, bool gas)
 {
-	// Find rotation matrix from 0/0/1 to eclipticPosition: crossproduct for axis (normal vector), dotproduct for angle.
-	Vec3d eclposNrm=eclipticPos; eclposNrm.normalize();
-	Mat4d tailrot=Mat4d::rotation(Vec3d(0.0, 0.0, 1.0)^(eclposNrm), std::acos(Vec3d(0.0, 0.0, 1.0).dot(eclposNrm)) );
+//	StelProjector::ModelViewTranformP transfo2 = transfo->clone();
 
-	StelProjector::ModelViewTranformP transfo2 = transfo->clone();
-	transfo2->combine(tailrot);
-	if (!gas) {
-		CometOrbit* orbit=(CometOrbit*)userDataPtr;
-		Vec3d velocity=orbit->getVelocity(); // [AU/d]
-		// This was a try to rotate a straight parabola somewhat away from the antisolar direction.
-		//Mat4d dustTailRot=Mat4d::rotation(eclposNrm^(-velocity), 0.15f*std::acos(eclposNrm.dot(-velocity))); // GZ: This scale factor of 0.15 is empirical from photos of Halley and Hale-Bopp.
-		// The curved tail is curved towards positive X. We first rotate around the Z axis into a direction opposite of the motion vector, then again the antisolar rotation applies.
-		Mat4d dustTailRot=Mat4d::zrotation(atan2(velocity[1], velocity[0]) + M_PI);
-		transfo2->combine(dustTailRot);
-		// In addition, we let the dust tail already start with a light tilt.
-		Mat4d dustTailYrot=Mat4d::yrotation(5.0f*velocity.length()); // again, this is pretty ad-hoc, feel free to improve!
-		transfo2->combine(dustTailYrot);
-	}
-	StelPainter* sPainter = new StelPainter(core->getProjection(transfo2));
+//	if (gas)
+//		transfo2->combine(gasTailRot);
+//	else
+//		transfo2->combine(dustTailRot);
+
+//	StelPainter* sPainter = new StelPainter(core->getProjection(transfo2));
+	StelPainter* sPainter = new StelPainter(core->getProjection(transfo));
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_ONE, GL_ONE);
 	glDisable(GL_CULL_FACE);
@@ -411,21 +489,21 @@ void Comet::drawTail(StelCore* core, StelProjector::ModelViewTranformP transfo, 
 	magFactor*=(gas? 0.9 : dustTailBrightnessFactor); // TBD: empirical adjustment for texture brightness.
 	magFactor=qMin(magFactor, 1.05f); // Limit excessively bright display.
 
-	gasTailTexture->bind();
+	tailTexture->bind();
 
 	if (gas) {
 		//gasTailTexture->bind();
 		sPainter->setColor(0.15f*magFactor,0.15f*magFactor,0.6f*magFactor);
-		sPainter->setArrays((Vec3d*)gastailVertexArr.constData(), (Vec2f*)gastailTexCoordArr.constData());
-		sPainter->drawFromArray(StelPainter::Triangles, gastailIndices.size(), 0, true, gastailIndices.constData());
+		sPainter->setArrays((Vec3d*)gastailVertexArr.constData(), (Vec2f*)tailTexCoordArr.constData());
+		sPainter->drawFromArray(StelPainter::Triangles, tailIndices.size(), 0, true, tailIndices.constData());
 
 	} else {
 		//dustTailTexture->bind();
 		sPainter->setColor(magFactor, magFactor,0.6f*magFactor);
 		//sPainter->setArrays((Vec3d*)dusttailVertexArr.constData(), (Vec2f*)dusttailTexCoordArr.constData());
 		//sPainter->drawFromArray(StelPainter::Triangles, dusttailIndices.size(), 0, true, dusttailIndices.constData());
-		sPainter->setArrays((Vec3d*)dusttailVertexArr.constData(), (Vec2f*)gastailTexCoordArr.constData());
-		sPainter->drawFromArray(StelPainter::Triangles, gastailIndices.size(), 0, true, gastailIndices.constData());
+		sPainter->setArrays((Vec3d*)dusttailVertexArr.constData(), (Vec2f*)tailTexCoordArr.constData());
+		sPainter->drawFromArray(StelPainter::Triangles, tailIndices.size(), 0, true, tailIndices.constData());
 	}
 	glDisable(GL_BLEND);
 
@@ -493,7 +571,13 @@ void Comet::computeComa(const float diameter)
 // xOffset for the dust tail, this may introduce a bend. Units are x per sqrt(z).
 void Comet::computeParabola(const float parameter, const float radius, const float zshift,
 			    QVector<double>& vertexArr, QVector<float>& texCoordArr, QVector<unsigned short> &indices, const float xOffset) {
-	vertexArr.clear();
+
+	//qDebug() << "Calling computeParabola() on vertexArr of length" << vertexArr.length();
+//	vertexArr.clear();
+	// GZ: keep the array and replace contents. However, using replace() is only slightly faster.
+	if (vertexArr.length() < (3*(COMET_TAIL_SLICES*COMET_TAIL_STACKS+1)))
+		vertexArr.resize(3*(COMET_TAIL_SLICES*COMET_TAIL_STACKS+1));
+	//qDebug() << "vertexArrSize adjusted, has now " << vertexArr.length() << " elements";
 	//texCoordArr.clear();
 	//indices.clear();
 	bool createIndices= indices.empty();
@@ -512,7 +596,9 @@ void Comet::computeParabola(const float parameter, const float radius, const flo
 	}
 	
 	// center point, vertex0
-	vertexArr << 0.0f << 0.0f << zshift;
+//	vertexArr << 0.0 << 0.0 << zshift;
+	vertexArr.replace(0, 0.0); vertexArr.replace(1, 0.0); vertexArr.replace(2, zshift);
+	int vertexArrIndex=3;
 	if (createTexcoords) texCoordArr << 0.5f << 0.5f;
 	// define the indices lying on circles, starting at 1: odd rings have 1/slices+1/2slices, even-numbered rings straight 1/slices
 	// inner ring#1
@@ -523,10 +609,14 @@ void Comet::computeParabola(const float parameter, const float radius, const flo
 		for (i=ring & 1; i<2*COMET_TAIL_SLICES; i+=2) { // i.e., ring1 has shifted vertices, ring2 has even ones.
 			x=xa[i]*radius*ring/COMET_TAIL_STACKS;
 			y=ya[i]*radius*ring/COMET_TAIL_STACKS;
-			vertexArr << x+xShift << y << z;
+//			vertexArr << x+xShift << y << z;
+			vertexArr.replace(vertexArrIndex++, x+xShift);
+			vertexArr.replace(vertexArrIndex++, y);
+			vertexArr.replace(vertexArrIndex++, z);
 			if (createTexcoords) texCoordArr << 0.5+ 0.5*x/radius << 0.5+0.5*y/radius;
 		}
 	}
+	//qDebug() << "vertices done, elements:" << vertexArrIndex;
 	// now link the faces with indices. That's fun... ;-)
 	if (createIndices)
 	{
@@ -555,6 +645,7 @@ void Comet::computeParabola(const float parameter, const float radius, const flo
 			indices << first << (ring+1)*COMET_TAIL_SLICES << ring*COMET_TAIL_SLICES+1;
 		}
 	}
+	//qDebug() << "Comet " << englishName << ": vertexArr.length()=" << vertexArr.length() << " indices.length()=" << indices.length();
 //	qDebug() << "Parabola: Vertex index dump\n";
 //	for (int i=0; i<indices.length(); i+=3)
 //		qDebug() << indices[i] << "-" << indices[i+1] << "-" << indices[i+2] << ":"
