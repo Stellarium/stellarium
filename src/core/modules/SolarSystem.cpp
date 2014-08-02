@@ -817,6 +817,10 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 		}
 		else
 		{
+			// Set possible default name of the normal map for avoiding yin-yang shaped moon
+			// phase when normal map key not exists. Example: moon_normals.png
+			// Details: https://bugs.launchpad.net/stellarium/+bug/1335609
+			QString normalMapName = englishName.toLower().append("_normals.png");
 			p = PlanetP(new Planet(englishName,
 					       pd.value(secname+"/lighting").toBool(),
 					       pd.value(secname+"/radius").toDouble()/AU,
@@ -824,7 +828,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 					       StelUtils::strToVec3f(pd.value(secname+"/color").toString()),
 					       pd.value(secname+"/albedo").toFloat(),
 					       pd.value(secname+"/tex_map").toString(),
-					       pd.value(secname+"/normals_map").toString(),
+					       pd.value(secname+"/normals_map", normalMapName).toString(),
 					       posfunc,
 					       userDataPtr,
 					       osculatingFunc,
@@ -1045,12 +1049,21 @@ StelObjectP SolarSystem::searchByName(const QString& name) const
 	return StelObjectP();
 }
 
-float SolarSystem::getPlanetVMagnitude(QString planetName) const
+float SolarSystem::getPlanetVMagnitude(QString planetName, bool withExtinction) const
 {
 	PlanetP p = searchByEnglishName(planetName);
 	float r = 0.f;
-	r = p->getVMagnitude(StelApp::getInstance().getCore());
+	if (withExtinction)
+		r = p->getVMagnitudeWithExtinction(StelApp::getInstance().getCore());
+	else
+		r = p->getVMagnitude(StelApp::getInstance().getCore());
 	return r;
+}
+
+QString SolarSystem::getPlanetType(QString planetName) const
+{
+	PlanetP p = searchByEnglishName(planetName);
+	return p->getPlanetType();
 }
 
 double SolarSystem::getDistanceToPlanet(QString planetName) const

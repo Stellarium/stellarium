@@ -7,20 +7,20 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-06-03 23:23+0700\n"
-"PO-Revision-Date: 2014-03-27 11:50+0000\n"
+"POT-Creation-Date: 2014-07-13 12:59+0700\n"
+"PO-Revision-Date: 2014-07-03 14:33+0000\n"
 "Last-Translator: abuyop <Unknown>\n"
 "Language-Team: Malay <ms@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-06-04 05:52+0000\n"
-"X-Generator: Launchpad (build 17031)\n"
+"X-Launchpad-Export-Date: 2014-07-14 06:08+0000\n"
+"X-Generator: Launchpad (build 17111)\n"
 
-#: src/core/modules/ConstellationMgr.cpp:107 src/core/modules/StarMgr.cpp:346
-#: src/core/modules/GridLinesMgr.cpp:695 src/core/modules/LandscapeMgr.cpp:354
+#: src/core/modules/ConstellationMgr.cpp:107 src/core/modules/StarMgr.cpp:339
+#: src/core/modules/GridLinesMgr.cpp:695 src/core/modules/LandscapeMgr.cpp:353
 #: src/core/modules/NebulaMgr.cpp:126 src/core/modules/SolarSystem.cpp:155
-#: src/core/StelApp.cpp:468 src/core/StelCore.cpp:176
+#: src/core/StelApp.cpp:471 src/core/StelCore.cpp:176
 #: src/core/StelSkyLayerMgr.cpp:87 src/StelMainView.cpp:309
 msgid "Display Options"
 msgstr "Pilihan Paparan"
@@ -45,13 +45,13 @@ msgstr "Label Buruj"
 msgid "Constellation boundaries"
 msgstr "Sempadan Buruj"
 
-#: src/core/modules/StarMgr.cpp:347 src/ui_viewDialog.h:1154
+#: src/core/modules/StarMgr.cpp:340 src/ui_viewDialog.h:1154
 #: src/ui_viewDialog.h:1186 src/ui_viewDialog.h:1211
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:245
 msgid "Stars"
 msgstr "Bintang"
 
-#: src/core/modules/StarMgr.cpp:348
+#: src/core/modules/StarMgr.cpp:341
 msgid "Stars labels"
 msgstr "Label bintang"
 
@@ -123,53 +123,53 @@ msgstr "Grid Galaksi"
 msgid "Galactic plane"
 msgstr "Satah galaktik"
 
-#: src/core/modules/LandscapeMgr.cpp:355 src/ui_viewDialog.h:1176
+#: src/core/modules/LandscapeMgr.cpp:354 src/ui_viewDialog.h:1176
 msgid "Atmosphere"
 msgstr "Atmosfera"
 
-#: src/core/modules/LandscapeMgr.cpp:356
+#: src/core/modules/LandscapeMgr.cpp:355
 msgid "Fog"
 msgstr "Kabus"
 
-#: src/core/modules/LandscapeMgr.cpp:357 src/ui_viewDialog.h:1248
+#: src/core/modules/LandscapeMgr.cpp:356 src/ui_viewDialog.h:1248
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:303
 msgid "Cardinal points"
 msgstr "Titil Kardinal"
 
-#: src/core/modules/LandscapeMgr.cpp:358
+#: src/core/modules/LandscapeMgr.cpp:357
 msgid "Ground"
 msgstr "Tanah"
 
-#: src/core/modules/LandscapeMgr.cpp:585
+#: src/core/modules/LandscapeMgr.cpp:584
 msgid "Author: "
 msgstr "Pengarang: "
 
-#: src/core/modules/LandscapeMgr.cpp:588
+#: src/core/modules/LandscapeMgr.cpp:587
 msgid "Location: "
 msgstr "Lokasi: "
 
-#: src/core/modules/LandscapeMgr.cpp:593
+#: src/core/modules/LandscapeMgr.cpp:592
 #, qt-format
 msgid ", %1 m"
 msgstr ", %1 m"
 
-#: src/core/modules/LandscapeMgr.cpp:597
+#: src/core/modules/LandscapeMgr.cpp:596
 msgid "Planet: "
 msgstr "Planet "
 
-#: src/core/modules/Nebula.cpp:104 src/core/modules/Planet.cpp:132
-#: src/core/modules/MinorPlanet.cpp:215 src/core/modules/Comet.cpp:154
+#: src/core/modules/Nebula.cpp:104 src/core/modules/Planet.cpp:146
+#: src/core/modules/MinorPlanet.cpp:216 src/core/modules/Comet.cpp:155
 #: src/core/modules/StarWrapper.cpp:50 src/core/modules/StarWrapper.cpp:170
 #: src/core/modules/StarWrapper.cpp:173
-#: plugins/Satellites/src/Satellite.cpp:252
+#: plugins/Satellites/src/Satellite.cpp:251
 #: plugins/Supernovae/src/Supernova.cpp:130 plugins/Quasars/src/Quasar.cpp:100
 #: plugins/Pulsars/src/Pulsar.cpp:157 plugins/Exoplanets/src/Exoplanet.cpp:177
 #, qt-format
 msgid "Type: <b>%1</b>"
 msgstr "Jenis: <b>%1</b>"
 
-#: src/core/modules/Nebula.cpp:109 src/core/modules/Planet.cpp:138
-#: src/core/modules/MinorPlanet.cpp:221 src/core/modules/Comet.cpp:160
+#: src/core/modules/Nebula.cpp:109 src/core/modules/Planet.cpp:152
+#: src/core/modules/MinorPlanet.cpp:222 src/core/modules/Comet.cpp:161
 #: src/core/modules/StarWrapper.cpp:56 src/core/modules/StarWrapper.cpp:180
 #: plugins/Supernovae/src/Supernova.cpp:135 plugins/Novae/src/Nova.cpp:140
 #: plugins/Quasars/src/Quasar.cpp:106 plugins/Exoplanets/src/Exoplanet.cpp:186
@@ -177,8 +177,8 @@ msgstr "Jenis: <b>%1</b>"
 msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>)"
 msgstr "Magnitud: <b>%1</b> (pupus pada: <b>%2</b>)"
 
-#: src/core/modules/Nebula.cpp:112 src/core/modules/Planet.cpp:141
-#: src/core/modules/MinorPlanet.cpp:224 src/core/modules/Comet.cpp:163
+#: src/core/modules/Nebula.cpp:112 src/core/modules/Planet.cpp:155
+#: src/core/modules/MinorPlanet.cpp:225 src/core/modules/Comet.cpp:164
 #: src/core/modules/StarWrapper.cpp:60 src/core/modules/StarWrapper.cpp:183
 #: plugins/Supernovae/src/Supernova.cpp:137 plugins/Novae/src/Nova.cpp:143
 #: plugins/Quasars/src/Quasar.cpp:111 plugins/Exoplanets/src/Exoplanet.cpp:191
@@ -194,7 +194,7 @@ msgstr ""
 #: src/core/modules/Nebula.cpp:125
 #, qt-format
 msgid "Surface brightness: <b>%1</b>"
-msgstr ""
+msgstr "Kecerahan permukaan: <b>%1</b>"
 
 #: src/core/modules/Nebula.cpp:131
 #, qt-format
@@ -241,93 +241,93 @@ msgstr "Jenis yang tidak didokumentasi"
 msgid "Deep-sky objects"
 msgstr "Objek samawi"
 
-#: src/core/modules/Planet.cpp:144 src/core/modules/MinorPlanet.cpp:234
-#: src/core/modules/MinorPlanet.cpp:238 src/core/modules/Comet.cpp:172
+#: src/core/modules/Planet.cpp:158 src/core/modules/MinorPlanet.cpp:235
+#: src/core/modules/MinorPlanet.cpp:239 src/core/modules/Comet.cpp:173
 #: src/core/modules/StarWrapper.cpp:187 plugins/Quasars/src/Quasar.cpp:115
 #, qt-format
 msgid "Absolute Magnitude: %1"
 msgstr "Magnitud Mutlak: %1"
 
-#: src/core/modules/Planet.cpp:153
+#: src/core/modules/Planet.cpp:167
 #, qt-format
 msgid "Obliquity (of date, for Earth): %1"
 msgstr "Keserongan (tarikh, untuk Bumi): %1"
 
-#: src/core/modules/Planet.cpp:165 src/core/modules/MinorPlanet.cpp:251
-#: src/core/modules/Comet.cpp:202
+#: src/core/modules/Planet.cpp:179 src/core/modules/MinorPlanet.cpp:252
+#: src/core/modules/Comet.cpp:203
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 km)"
 msgstr "Jarak: %1AU (%2 km)"
 
-#: src/core/modules/Planet.cpp:172 src/core/modules/MinorPlanet.cpp:258
-#: src/core/modules/Comet.cpp:209
+#: src/core/modules/Planet.cpp:186 src/core/modules/MinorPlanet.cpp:259
+#: src/core/modules/Comet.cpp:210
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 Mio km)"
 msgstr "Jarak: %1AU (%2 Mio km)"
 
-#: src/core/modules/Planet.cpp:185
+#: src/core/modules/Planet.cpp:199
 #, qt-format
 msgid "Apparent diameter: %1, with rings: %2"
 msgstr "Diameter ketara: %1, dengan gelang: %2"
 
-#: src/core/modules/Planet.cpp:191 src/core/modules/MinorPlanet.cpp:266
+#: src/core/modules/Planet.cpp:205 src/core/modules/MinorPlanet.cpp:267
 #, qt-format
 msgid "Apparent diameter: %1"
 msgstr "Diameter ketara: %1"
 
 #. TRANSLATORS: Sidereal (orbital) period for solar system bodies in days and in Julian years (symbol: a)
-#: src/core/modules/Planet.cpp:203 src/core/modules/MinorPlanet.cpp:273
-#: src/core/modules/Comet.cpp:231
+#: src/core/modules/Planet.cpp:217 src/core/modules/MinorPlanet.cpp:274
+#: src/core/modules/Comet.cpp:232
 #, qt-format
 msgid "Sidereal period: %1 days (%2 a)"
 msgstr "Tempoh ikut bintang: %1 hari (%2 a)"
 
-#: src/core/modules/Planet.cpp:206
+#: src/core/modules/Planet.cpp:220
 #, qt-format
 msgid "Sidereal day: %1"
 msgstr "hari ikut bintang: %1"
 
-#: src/core/modules/Planet.cpp:207
+#: src/core/modules/Planet.cpp:221
 #, qt-format
 msgid "Mean solar day: %1"
 msgstr "Min hari suria: %1"
 
-#: src/core/modules/Planet.cpp:213
+#: src/core/modules/Planet.cpp:227
 #, qt-format
 msgid "Phase Angle: %1"
 msgstr "Sudut Fasa: %1"
 
-#: src/core/modules/Planet.cpp:214
+#: src/core/modules/Planet.cpp:228
 #, qt-format
 msgid "Elongation: %1"
 msgstr "Pemanjangan: %1"
 
-#: src/core/modules/Planet.cpp:215
+#: src/core/modules/Planet.cpp:229
 #, qt-format
 msgid "Phase: %1"
 msgstr "Fasa: %1"
 
-#: src/core/modules/Planet.cpp:216
+#: src/core/modules/Planet.cpp:230
 #, qt-format
 msgid "Illuminated: %1%"
 msgstr "Disinari: %1%"
 
-#: src/core/modules/MinorPlanet.cpp:207
+#: src/core/modules/MinorPlanet.cpp:208
 #, qt-format
 msgid "Provisional designation: %1"
 msgstr "Penentuan sementara: %1"
 
-#: src/core/modules/Comet.cpp:185
+#: src/core/modules/Comet.cpp:186
 #, no-c-format, qt-format
 msgid "Distance from Sun: %1AU (%2 km)"
 msgstr "Jaral dari Matahari: %1AU (%2 km)"
 
-#: src/core/modules/Comet.cpp:192
+#: src/core/modules/Comet.cpp:193
 #, no-c-format, qt-format
 msgid "Distance from Sun: %1AU (%2 Mio km)"
 msgstr "Jaral dari Matahari: %1AU (%2 Mio km)"
 
-#: src/core/modules/Comet.cpp:216
+#: src/core/modules/Comet.cpp:217
 #, no-c-format, qt-format
 msgid "Speed: %1 km/s"
 msgstr "Kelajuan: %1 km/s"
@@ -349,7 +349,7 @@ msgstr "Jejak planet"
 
 #. TRANSLATORS: Type of object
 #: src/core/modules/StarWrapper.cpp:50 src/core/modules/StarWrapper.cpp:163
-#: src/translations.h:156
+#: src/translations.h:177
 msgid "star"
 msgstr "bintang"
 
@@ -455,7 +455,7 @@ msgstr "Tempoh masa gerhana: %1%"
 msgid "Rising time: %1%"
 msgstr "Masa terbit: %1%"
 
-#: src/core/StelApp.cpp:468
+#: src/core/StelApp.cpp:471
 msgid "Night mode"
 msgstr "Mod Malam"
 
@@ -470,7 +470,7 @@ msgstr "Kapal Angkasa"
 msgid "Date and Time"
 msgstr "Tarikh dan Masa"
 
-#: src/core/StelCore.cpp:175 src/core/StelMovementMgr.cpp:128
+#: src/core/StelCore.cpp:175 src/core/StelMovementMgr.cpp:129
 msgid "Movement and Selection"
 msgstr "Pergerakan dan Pilihan"
 
@@ -1137,28 +1137,28 @@ msgstr "Toposentrik Ekliptik (tarikh): %1/%2"
 msgid "Deep-sky objects background images"
 msgstr "Imej latar belakang objek langit"
 
-#: src/core/StelMovementMgr.cpp:129 src/gui/StelGui.cpp:185
+#: src/core/StelMovementMgr.cpp:130 src/gui/StelGui.cpp:185
 #: src/StelMainView.cpp:308
 msgid "Miscellaneous"
 msgstr "Pelbagai"
 
-#: src/core/StelMovementMgr.cpp:129
+#: src/core/StelMovementMgr.cpp:130
 msgid "Switch between equatorial and azimuthal mount"
 msgstr "Tukar diantara peletakan khatulistiwa dan azimut"
 
-#: src/core/StelMovementMgr.cpp:130
+#: src/core/StelMovementMgr.cpp:131
 msgid "Center on selected object"
 msgstr "Tengahkan objek pilihan"
 
-#: src/core/StelMovementMgr.cpp:131
+#: src/core/StelMovementMgr.cpp:132
 msgid "Zoom in on selected object"
 msgstr "Zum ke dalam objek yang dipilih"
 
-#: src/core/StelMovementMgr.cpp:132
+#: src/core/StelMovementMgr.cpp:133
 msgid "Zoom out"
 msgstr "Zum keluar"
 
-#: src/core/StelMovementMgr.cpp:133
+#: src/core/StelMovementMgr.cpp:134
 msgid "Track object"
 msgstr "Jejak objek"
 
@@ -1201,7 +1201,7 @@ msgstr "Arah permulaan bagi paparan Az/Alt: %1/%2"
 msgid "Authors"
 msgstr "Pengarang"
 
-#: src/gui/ConfigurationDialog.cpp:738 src/gui/ViewDialog.cpp:441
+#: src/gui/ConfigurationDialog.cpp:738 src/gui/ViewDialog.cpp:439
 msgid "Contact"
 msgstr "Hubungi"
 
@@ -1215,7 +1215,7 @@ msgstr "Hubungi"
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:120
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:130
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:128
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:255
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:254
 msgid "Version"
 msgstr "Versi"
 
@@ -1228,7 +1228,7 @@ msgstr "Versi"
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:121
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:131
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:129
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:256
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:255
 msgid "Author"
 msgstr "Pengarang"
 
@@ -1236,15 +1236,19 @@ msgstr "Pengarang"
 msgid "License"
 msgstr "Lesen"
 
-#: src/gui/ConfigurationDialog.cpp:851
+#: src/gui/ConfigurationDialog.cpp:831
+msgid "Shortcut"
+msgstr ""
+
+#: src/gui/ConfigurationDialog.cpp:855
 msgid "Running script: "
 msgstr "Skrip yang digunakan "
 
-#: src/gui/ConfigurationDialog.cpp:858
+#: src/gui/ConfigurationDialog.cpp:862
 msgid "Running script: [none]"
 msgstr "Skrip yang digunakan"
 
-#: src/gui/ConfigurationDialog.cpp:923
+#: src/gui/ConfigurationDialog.cpp:927
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
@@ -1252,16 +1256,16 @@ msgstr ""
 "Katalog bintang baru sudah selesai dimuat turun!/n\n"
 "Tutup dan buka semula Stellarium untuk paparkannya."
 
-#: src/gui/ConfigurationDialog.cpp:927
+#: src/gui/ConfigurationDialog.cpp:931
 msgid "All available star catalogs have been installed."
 msgstr "Semua katalog bintang yang tersedia telah dipasang."
 
-#: src/gui/ConfigurationDialog.cpp:932
+#: src/gui/ConfigurationDialog.cpp:936
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "Dapatkan katalog %1 dari %2"
 
-#: src/gui/ConfigurationDialog.cpp:939
+#: src/gui/ConfigurationDialog.cpp:943
 #, qt-format
 msgid ""
 "Downloading %1...\n"
@@ -1270,7 +1274,7 @@ msgstr ""
 "Memuat turun %1.../n\n"
 "(Anda boleh tutup tetingkap ini.)"
 
-#: src/gui/ConfigurationDialog.cpp:946
+#: src/gui/ConfigurationDialog.cpp:950
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -1281,7 +1285,7 @@ msgstr ""
 "Kiraan bintang: %2 juta\n"
 "Jarak Magnitud: %3 - %4"
 
-#: src/gui/ConfigurationDialog.cpp:989 src/gui/ConfigurationDialog.cpp:1024
+#: src/gui/ConfigurationDialog.cpp:993 src/gui/ConfigurationDialog.cpp:1028
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -1290,11 +1294,11 @@ msgstr ""
 "Ralat memuat turun %1:/n\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:1076
+#: src/gui/ConfigurationDialog.cpp:1080
 msgid "Verifying file integrity..."
 msgstr "Mengesahkan Integriti fail..."
 
-#: src/gui/ConfigurationDialog.cpp:1080
+#: src/gui/ConfigurationDialog.cpp:1084
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -1304,123 +1308,123 @@ msgstr ""
 "fail telah rosak."
 
 #. TRANSLATORS: Full phrase is "Algorithm of DeltaT"
-#: src/gui/ConfigurationDialog.cpp:1153
+#: src/gui/ConfigurationDialog.cpp:1157
 msgid "Algorithm of"
 msgstr "Algoritma"
 
-#: src/gui/ConfigurationDialog.cpp:1164
+#: src/gui/ConfigurationDialog.cpp:1168
 msgid "Without correction"
 msgstr "Tanpa pembetulan"
 
-#: src/gui/ConfigurationDialog.cpp:1165
+#: src/gui/ConfigurationDialog.cpp:1169
 msgid "Schoch (1931)"
 msgstr "Schoch (1931)"
 
-#: src/gui/ConfigurationDialog.cpp:1166
+#: src/gui/ConfigurationDialog.cpp:1170
 msgid "Clemence (1948)"
 msgstr "Clemence (1948)"
 
-#: src/gui/ConfigurationDialog.cpp:1167
+#: src/gui/ConfigurationDialog.cpp:1171
 msgid "IAU (1952)"
 msgstr "IAU (1952)"
 
-#: src/gui/ConfigurationDialog.cpp:1168
+#: src/gui/ConfigurationDialog.cpp:1172
 msgid "Astronomical Ephemeris (1960)"
 msgstr "Efemeris Astronomi (1960)"
 
-#: src/gui/ConfigurationDialog.cpp:1169
+#: src/gui/ConfigurationDialog.cpp:1173
 msgid "Tuckerman (1962, 1964) & Goldstine (1973)"
 msgstr "Tuckerman (1962, 1964) & Goldstine (1973)"
 
-#: src/gui/ConfigurationDialog.cpp:1170
+#: src/gui/ConfigurationDialog.cpp:1174
 msgid "Muller & Stephenson (1975)"
 msgstr "Muller & Stephenson (1975)"
 
-#: src/gui/ConfigurationDialog.cpp:1171
+#: src/gui/ConfigurationDialog.cpp:1175
 msgid "Stephenson (1978)"
 msgstr "Stephenson (1978)"
 
-#: src/gui/ConfigurationDialog.cpp:1172
+#: src/gui/ConfigurationDialog.cpp:1176
 msgid "Schmadel & Zech (1979)"
 msgstr "Schmadel & Zech (1979)"
 
-#: src/gui/ConfigurationDialog.cpp:1173
+#: src/gui/ConfigurationDialog.cpp:1177
 msgid "Morrison & Stephenson (1982)"
 msgstr "Morrison & Stephenson (1982)"
 
-#: src/gui/ConfigurationDialog.cpp:1174
+#: src/gui/ConfigurationDialog.cpp:1178
 msgid "Stephenson & Morrison (1984)"
 msgstr "Stephenson & Morrison (1984)"
 
-#: src/gui/ConfigurationDialog.cpp:1175
+#: src/gui/ConfigurationDialog.cpp:1179
 msgid "Stephenson & Houlden (1986)"
 msgstr "Stephenson & Houlden (1986)"
 
-#: src/gui/ConfigurationDialog.cpp:1176
+#: src/gui/ConfigurationDialog.cpp:1180
 msgid "Espenak (1987, 1989)"
 msgstr "Espenak (1987, 1989)"
 
-#: src/gui/ConfigurationDialog.cpp:1177
+#: src/gui/ConfigurationDialog.cpp:1181
 msgid "Borkowski (1988)"
 msgstr "Borkowski (1988)"
 
-#: src/gui/ConfigurationDialog.cpp:1178
+#: src/gui/ConfigurationDialog.cpp:1182
 msgid "Schmadel & Zech (1988)"
 msgstr "Schmadel & Zech (1988)"
 
-#: src/gui/ConfigurationDialog.cpp:1179
+#: src/gui/ConfigurationDialog.cpp:1183
 msgid "Chapront-Touze & Chapront (1991)"
 msgstr "Chapront-Touze & Chapront (1991)"
 
-#: src/gui/ConfigurationDialog.cpp:1180
+#: src/gui/ConfigurationDialog.cpp:1184
 msgid "Stephenson & Morrison (1995)"
 msgstr "Stephenson & Morrison (1995)"
 
-#: src/gui/ConfigurationDialog.cpp:1181
+#: src/gui/ConfigurationDialog.cpp:1185
 msgid "Stephenson (1997)"
 msgstr "Stephenson (1997)"
 
-#: src/gui/ConfigurationDialog.cpp:1183
+#: src/gui/ConfigurationDialog.cpp:1187
 msgid "Meeus (1998) (with Chapront, Chapront-Touze & Francou (1997))"
 msgstr "Meeus (1998) (bersama Chapront, Chapront-Touze & Francou (1997))"
 
-#: src/gui/ConfigurationDialog.cpp:1184
+#: src/gui/ConfigurationDialog.cpp:1188
 msgid "JPL Horizons"
 msgstr "Ufuk JPL"
 
-#: src/gui/ConfigurationDialog.cpp:1185
+#: src/gui/ConfigurationDialog.cpp:1189
 msgid "Meeus & Simons (2000)"
 msgstr "Meeus & Simons (2000)"
 
-#: src/gui/ConfigurationDialog.cpp:1186
+#: src/gui/ConfigurationDialog.cpp:1190
 msgid "Montenbruck & Pfleger (2000)"
 msgstr "Montenbruck & Pfleger (2000)"
 
-#: src/gui/ConfigurationDialog.cpp:1187
+#: src/gui/ConfigurationDialog.cpp:1191
 msgid "Reingold & Dershowitz (2002, 2007)"
 msgstr "Reingold & Dershowitz (2002, 2007)"
 
-#: src/gui/ConfigurationDialog.cpp:1188
+#: src/gui/ConfigurationDialog.cpp:1192
 msgid "Morrison & Stephenson (2004, 2005)"
 msgstr "Morrison & Stephenson (2004, 2005)"
 
-#: src/gui/ConfigurationDialog.cpp:1190
+#: src/gui/ConfigurationDialog.cpp:1194
 msgid "Espenak & Meeus (2006)"
 msgstr "Espenak & Meeus (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:1191
+#: src/gui/ConfigurationDialog.cpp:1195
 msgid "Reijs (2006)"
 msgstr "Reijs (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:1192
+#: src/gui/ConfigurationDialog.cpp:1196
 msgid "Banjevic (2006)"
 msgstr "Banjevic (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:1193
+#: src/gui/ConfigurationDialog.cpp:1197
 msgid "Islam, Sadiq & Qureshi (2008, 2013)"
 msgstr "Islam, Sadiq & Qureshi (2008, 2013)"
 
-#: src/gui/ConfigurationDialog.cpp:1194
+#: src/gui/ConfigurationDialog.cpp:1198
 #, qt-format
 msgid "Custom equation of %1T"
 msgstr "Persamaan suai %1T"
@@ -1695,117 +1699,117 @@ msgstr "Sembunyi secara automatik butang palang melintang"
 msgid "Auto hide vertical button bar"
 msgstr "Sembunyi secara automatik butang palang menengak"
 
-#: src/gui/StelGuiItems.cpp:292 src/gui/StelGuiItems.cpp:706
+#: src/gui/StelGuiItems.cpp:293 src/gui/StelGuiItems.cpp:709
 msgid "Space"
 msgstr "ruang"
 
-#: src/gui/StelGuiItems.cpp:575
+#: src/gui/StelGuiItems.cpp:578
 #, c-format, qt-format
 msgid "%1m"
 msgstr "%1m"
 
-#: src/gui/StelGuiItems.cpp:613
+#: src/gui/StelGuiItems.cpp:616
 msgid "Field of view"
 msgstr "Medan pandangan"
 
-#: src/gui/StelGuiItems.cpp:631
+#: src/gui/StelGuiItems.cpp:634
 msgid "Frames per second"
 msgstr "Bingkai per saat"
 
 #. TRANSLATORS: Short description for Class 1 of the Bortle scale
-#: src/gui/ViewDialog.cpp:327
+#: src/gui/ViewDialog.cpp:325
 msgid "Excellent dark-sky site"
 msgstr "Tapak langit-gelap terbaik"
 
 #. TRANSLATORS: Short description for Class 2 of the Bortle scale
-#: src/gui/ViewDialog.cpp:329
+#: src/gui/ViewDialog.cpp:327
 msgid "Typical truly dark site"
 msgstr "Tapak benar-benar gelap tipikal"
 
 #. TRANSLATORS: Short description for Class 3 of the Bortle scale
-#: src/gui/ViewDialog.cpp:331
+#: src/gui/ViewDialog.cpp:329
 msgid "Rural sky"
 msgstr "Langit desa"
 
 #. TRANSLATORS: Short description for Class 4 of the Bortle scale
-#: src/gui/ViewDialog.cpp:333
+#: src/gui/ViewDialog.cpp:331
 msgid "Rural/suburban transition"
 msgstr "Peralihan desa/pinggir bandar"
 
 #. TRANSLATORS: Short description for Class 5 of the Bortle scale
-#: src/gui/ViewDialog.cpp:335
+#: src/gui/ViewDialog.cpp:333
 msgid "Suburban sky"
 msgstr "Langit pinggir bandar"
 
 #. TRANSLATORS: Short description for Class 6 of the Bortle scale
-#: src/gui/ViewDialog.cpp:337
+#: src/gui/ViewDialog.cpp:335
 msgid "Bright suburban sky"
 msgstr "Langiy sub-bandar terang"
 
 #. TRANSLATORS: Short description for Class 7 of the Bortle scale
-#: src/gui/ViewDialog.cpp:339
+#: src/gui/ViewDialog.cpp:337
 msgid "Suburban/urban transition"
 msgstr "Peralihan pinggir-bandar/bandar"
 
 #. TRANSLATORS: Short description for Class 8 of the Bortle scale
-#: src/gui/ViewDialog.cpp:341
+#: src/gui/ViewDialog.cpp:339
 msgid "City sky"
 msgstr "Langit bandar"
 
 #. TRANSLATORS: Short description for Class 9 of the Bortle scale
-#: src/gui/ViewDialog.cpp:343
+#: src/gui/ViewDialog.cpp:341
 msgid "Inner-city sky"
 msgstr "Langit dalam-bandar"
 
-#: src/gui/ViewDialog.cpp:357
+#: src/gui/ViewDialog.cpp:355
 msgid "The naked-eye limiting magnitude is"
 msgstr "Magnitid pengehadan mata-sebenar ialah"
 
-#: src/gui/ViewDialog.cpp:489
+#: src/gui/ViewDialog.cpp:487
 msgid "No description"
 msgstr "Tiada keterangan"
 
-#: src/gui/ViewDialog.cpp:577
+#: src/gui/ViewDialog.cpp:575
 msgid "No shooting stars"
 msgstr "Tiada tahi bintang"
 
-#: src/gui/ViewDialog.cpp:585
+#: src/gui/ViewDialog.cpp:583
 msgid "Normal rate"
 msgstr "Kadar Normal"
 
-#: src/gui/ViewDialog.cpp:588
+#: src/gui/ViewDialog.cpp:586
 msgid "Standard Orionids rate"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:591
+#: src/gui/ViewDialog.cpp:589
 msgid "Standard Perseids rate"
 msgstr "Kadar Persei Piawai"
 
-#: src/gui/ViewDialog.cpp:594
+#: src/gui/ViewDialog.cpp:592
 msgid "Standard Geminids rate"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:597
+#: src/gui/ViewDialog.cpp:595
 msgid "Exceptional Perseid rate"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:600
+#: src/gui/ViewDialog.cpp:598
 msgid "Meteor storm rate"
 msgstr "Kadar ribut meteor"
 
-#: src/gui/ViewDialog.cpp:603
+#: src/gui/ViewDialog.cpp:601
 msgid "Exceptional Draconid rate"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:606
+#: src/gui/ViewDialog.cpp:604
 msgid "Exceptional Leonid rate"
 msgstr "Kadar Leonid khas"
 
-#: src/gui/ViewDialog.cpp:609
+#: src/gui/ViewDialog.cpp:607
 msgid "Very high rate (1966 Leonids)"
-msgstr ""
+msgstr "Kadar sangat tinggi (1966 Leonids)"
 
-#: src/gui/ViewDialog.cpp:612
+#: src/gui/ViewDialog.cpp:610
 msgid "Highest rate ever (1833 Leonids)"
 msgstr ""
 
@@ -1960,7 +1964,7 @@ msgstr "dimana"
 msgid "year"
 msgstr "tahun"
 
-#: src/main.cpp:326
+#: src/main.cpp:336
 msgid "This system does not support OpenGL."
 msgstr "Sistem ini tidak menyokong OpenGL."
 
@@ -1995,12 +1999,12 @@ msgid "Earth"
 msgstr "Bumi"
 
 #. TRANSLATORS: Name of landscape and Earth's satellite
-#: src/translations.h:37 src/translations.h:196
+#: src/translations.h:37 src/translations.h:217
 msgid "Moon"
 msgstr "Bulan"
 
 #. TRANSLATORS: Name of landscape and planet
-#: src/translations.h:38 src/translations.h:204
+#: src/translations.h:38 src/translations.h:225
 msgid "Mars"
 msgstr "Marikh"
 
@@ -2098,7 +2102,7 @@ msgid "Metis"
 msgstr "Metis"
 
 #. TRANSLATORS: Name of landscape and planet
-#: src/translations.h:62 src/translations.h:206
+#: src/translations.h:62 src/translations.h:227
 msgid "Saturn"
 msgstr "Zuhal"
 
@@ -2329,313 +2333,370 @@ msgstr "Varuna"
 msgid "Makemake"
 msgstr "Makemake"
 
+#. TRANSLATORS: Asteroid (3200) Phaethon
+#: src/translations.h:139
+msgid "Phaethon"
+msgstr "Phaethon"
+
+#. TRANSLATORS: Asteroid (1866) Sisyphus
+#: src/translations.h:141
+msgid "Sisyphus"
+msgstr "Sisyphus"
+
+#. TRANSLATORS: Asteroid (1864) Daedalus
+#: src/translations.h:143
+msgid "Daedalus"
+msgstr "Daedalus"
+
+#. TRANSLATORS: Asteroid (1566) Icarus
+#: src/translations.h:145
+msgid "Icarus"
+msgstr "Icarus"
+
+#. TRANSLATORS: Asteroid (1809) Prometheus
+#: src/translations.h:147
+msgid "Prometheus"
+msgstr ""
+
+#: src/translations.h:148
+msgid "Prometheus (moon)"
+msgstr ""
+
+#. TRANSLATORS: Asteroid (1810) Epimetheus
+#: src/translations.h:150
+msgid "Epimetheus"
+msgstr ""
+
+#: src/translations.h:151
+msgid "Epimetheus (moon)"
+msgstr ""
+
+#. TRANSLATORS: Asteroid (951) Gaspra
+#: src/translations.h:153
+msgid "Gaspra"
+msgstr ""
+
+#. TRANSLATORS: Asteroid (243) Ida
+#: src/translations.h:155
+msgid "Ida"
+msgstr ""
+
+#. TRANSLATORS: Asteroid (218) Bianca
+#: src/translations.h:157
+msgid "Bianca"
+msgstr ""
+
+#: src/translations.h:158
+msgid "Bianca (moon)"
+msgstr ""
+
 #. TRANSLATORS: Proper name of comet C/1680 V1
-#: src/translations.h:140
+#: src/translations.h:161
 msgid "Great Comet of 1680 (C/1680 V1)"
 msgstr "Komet Besar 1680 (C/1680 V1)"
 
 #. TRANSLATORS: Name of supernova SN 1572A and script name
-#: src/translations.h:143
+#: src/translations.h:164
 msgid "Tycho's Supernova"
 msgstr "Supernova Tycho"
 
 #. TRANSLATORS: Name of supernova SN 1604A
-#: src/translations.h:145
+#: src/translations.h:166
 msgid "Kepler's Supernova"
 msgstr "Supernova Kepler"
 
-#: src/translations.h:148
+#: src/translations.h:169
 msgid "N"
 msgstr "N"
 
-#: src/translations.h:149
+#: src/translations.h:170
 msgid "S"
 msgstr "S"
 
-#: src/translations.h:150
+#: src/translations.h:171
 msgid "E"
 msgstr "E"
 
-#: src/translations.h:151
+#: src/translations.h:172
 msgid "W"
 msgstr "W"
 
 #. TRANSLATORS: Type of object
-#: src/translations.h:158
+#: src/translations.h:179
 msgid "planet"
 msgstr "planet"
 
 #. TRANSLATORS: Type of object
-#: src/translations.h:160
+#: src/translations.h:181
 msgid "comet"
 msgstr "komet"
 
 #. TRANSLATORS: Type of object
-#: src/translations.h:162
+#: src/translations.h:183
 msgid "asteroid"
 msgstr "asteroid"
 
 #. TRANSLATORS: Type of object
-#: src/translations.h:164
+#: src/translations.h:185
 msgid "moon"
 msgstr "bulan"
 
 #. TRANSLATORS: Type of object
-#: src/translations.h:166
+#: src/translations.h:187
 msgid "plutoid"
 msgstr "plutoid"
 
-#: src/translations.h:170
+#: src/translations.h:191
 msgid "Arabic"
 msgstr "Arab"
 
-#: src/translations.h:171
+#: src/translations.h:192
 msgid "Aztec"
 msgstr "Aztek"
 
-#: src/translations.h:172
+#: src/translations.h:193
 msgid "Chinese"
 msgstr "Cina"
 
-#: src/translations.h:173
+#: src/translations.h:194
 msgid "Egyptian"
 msgstr "Mesir"
 
-#: src/translations.h:174
+#: src/translations.h:195
 msgid "Inuit"
 msgstr "Inuit"
 
-#: src/translations.h:175
+#: src/translations.h:196
 msgid "Indian Vedic"
 msgstr "Veda India"
 
-#: src/translations.h:176
+#: src/translations.h:197
 msgid "Korean"
 msgstr "Korea"
 
-#: src/translations.h:177
+#: src/translations.h:198
 msgid "Lakota"
 msgstr "Lakota"
 
-#: src/translations.h:178
+#: src/translations.h:199
 msgid "Maori"
 msgstr "Maori"
 
-#: src/translations.h:179
+#: src/translations.h:200
 msgid "Navajo"
 msgstr "Navajo"
 
-#: src/translations.h:180
+#: src/translations.h:201
 msgid "Norse"
 msgstr "Norse"
 
-#: src/translations.h:181
+#: src/translations.h:202
 msgid "Polynesian"
 msgstr "Polinesia"
 
-#: src/translations.h:182
+#: src/translations.h:203
 msgid "Romanian"
 msgstr "Romania"
 
-#: src/translations.h:183
+#: src/translations.h:204
 msgid "Sami"
 msgstr "Sami"
 
-#: src/translations.h:184
+#: src/translations.h:205
 msgid "Tupi-Guarani"
 msgstr "Tupi-Guarani"
 
-#: src/translations.h:185
+#: src/translations.h:206
 msgid "Tongan"
 msgstr "Tongan"
 
-#: src/translations.h:186
+#: src/translations.h:207
 msgid "Western"
 msgstr "Barat"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:192
+#: src/translations.h:213
 msgid "Guereins"
 msgstr "Guereins"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:194
+#: src/translations.h:215
 msgid "Trees"
 msgstr "Pepohon"
 
 #. TRANSLATORS: Landscape name: Hurricane Ridge
-#: src/translations.h:198
+#: src/translations.h:219
 msgid "Hurricane"
 msgstr "Ribut Taufan"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:200
+#: src/translations.h:221
 msgid "Ocean"
 msgstr "Lautan"
 
 #. TRANSLATORS: Landscape name: Garching bei Munchen
-#: src/translations.h:202
+#: src/translations.h:223
 msgid "Garching"
 msgstr "Garching"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:208
+#: src/translations.h:229
 msgid "Geneva"
 msgstr "Geneva"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:210
+#: src/translations.h:231
 msgid "Grossmugl"
 msgstr "Grossmugl"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:217
+#: src/translations.h:238
 msgid "Landscape Tour"
 msgstr "mengenal lanskap"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:219
+#: src/translations.h:240
 msgid "Partial Lunar Eclipse"
 msgstr "gerhana bulan separa"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:221
+#: src/translations.h:242
 msgid "Total Lunar Eclipse"
 msgstr "gerhana bulan penuh"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:223
+#: src/translations.h:244
 msgid "Screensaver"
 msgstr "Penyelamat Skrin"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:225
+#: src/translations.h:246
 msgid "Solar Eclipse 2009"
 msgstr "gerhana matahari 2009"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:227
+#: src/translations.h:248
 msgid "Startup Script"
 msgstr "Skrip Permulaan"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:229
+#: src/translations.h:250
 msgid "Zodiac"
 msgstr "Zodiak"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:231
+#: src/translations.h:252
 msgid "Mercury Triple Sunrise and Sunset"
 msgstr "Terbit & Terbenam Matahari Tripel Utarid"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:233
+#: src/translations.h:254
 msgid "Double eclipse from Deimos in 2017"
 msgstr "Gerhana Dubel melalui Deimos pada 2017"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:235
+#: src/translations.h:256
 msgid "Double eclipse from Deimos in 2031"
 msgstr "Gerhana Dubel melalui Deimos pada 2031"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:237
+#: src/translations.h:258
 msgid "Eclipse from Olympus Mons Jan 10 2068"
 msgstr "Gerhana dari Gunung Olympus 10 Jan 2068"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:239
+#: src/translations.h:260
 msgid "Occultation of Earth and Jupiter 2048"
 msgstr "Penghijaban Bumi dan Musytari 2048"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:241
+#: src/translations.h:262
 msgid "3 Transits and 2 Eclipses from Deimos 2027"
 msgstr "3 Lintasan dan 2 Gerhana dari Deimos 2027"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:243
+#: src/translations.h:264
 msgid "Solar System Screensaver"
 msgstr "Penyelamat Skrin Sistem Suria"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:245
+#: src/translations.h:266
 msgid "Constellations Tour"
 msgstr "Jelajah Buruj"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:247
+#: src/translations.h:268
 msgid "Sun from different planets"
 msgstr "Matahari dari planet yang berlainan"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:249
+#: src/translations.h:270
 msgid "Earth best views from other bodies"
 msgstr "Pandangan terbaik bumi dari jasad lain"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:251
+#: src/translations.h:272
 msgid "Transit of Venus"
 msgstr "Pertukaran Venus"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:253
+#: src/translations.h:274
 msgid "Analemma"
 msgstr "Analema"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:255
+#: src/translations.h:276
 msgid "Sky Culture Tour"
 msgstr "Lawatan Peribudaya Langit"
 
 #. TRANSLATORS: Name and description of script
-#: src/translations.h:257
+#: src/translations.h:278
 msgid "Earth Events from Mercury"
 msgstr "Peristiwa Bumi menerusi Utarid"
 
 #. TRANSLATORS: Name and description of script
-#: src/translations.h:259
-msgid "Earth Events from Venus"
-msgstr "Peristiwa Bumi menerusi Zuhrah"
+#: src/translations.h:280
+msgid "Earth Events from a floating city on Venus"
+msgstr ""
 
 #. TRANSLATORS: Name and description of script
-#: src/translations.h:261
+#: src/translations.h:282
 msgid "Earth Events from Mars"
 msgstr "Peristiwa Bumi menerusi Marikh"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:263
-msgid "Earth Greatest Elongations and Brilliancies from Mars"
-msgstr "Pemanjangan dan Penonjolan Terhebat Bumi dari Marikh"
+#: src/translations.h:284
+msgid "Earth and Venus Greatest Elongations and Brilliancies from Mars"
+msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:265
-msgid "Earth and Mars Greatest Elongations from Jupiter"
-msgstr "Pemanjangan Terhebat Bumi dan Marikh dari Musytari"
+#: src/translations.h:286
+msgid "Earth and Mars Greatest Elongations and Transits from Callisto"
+msgstr ""
 
 #. TRANSLATORS: Description of the landscape tour script.
-#: src/translations.h:271
+#: src/translations.h:292
 msgid "Look around each installed landscape."
 msgstr "lihat lanskap yang tersedia"
 
 #. TRANSLATORS: Description of the sky culture tour script.
-#: src/translations.h:273
+#: src/translations.h:294
 msgid "Look at each installed sky culture."
 msgstr "Lihat setiap peribudaya langit yang dipasang."
 
-#: src/translations.h:274
+#: src/translations.h:295
 msgid "Script to demonstrate a partial lunar eclipse."
 msgstr "skrip untuk demonstrasi gerhana bulan separa"
 
-#: src/translations.h:275
+#: src/translations.h:296
 msgid "Script to demonstrate a total lunar eclipse."
 msgstr "skrip untuk demonstrasi gerhana bulan penuh"
 
-#: src/translations.h:276
+#: src/translations.h:297
 msgid "A slow, infinite tour of the sky, looking at random objects."
 msgstr "melihat objek langit secara random"
 
-#: src/translations.h:277
+#: src/translations.h:298
 msgid ""
 "Script to demonstrate a total solar eclipse which has happened in 2009 "
 "(location=Rangpur, Bangladesh)."
@@ -2643,11 +2704,11 @@ msgstr ""
 "skrip untuk demonstrasi gerhana matahari penuh yang berlaku pada 2009 di "
 "Rangpur, Bangladesh"
 
-#: src/translations.h:278
+#: src/translations.h:299
 msgid "Script which runs automatically at startup"
 msgstr "skrip supaya mula dengan automatik pada startup"
 
-#: src/translations.h:279
+#: src/translations.h:300
 msgid ""
 "This script displays the constellations of the Zodiac. That means the "
 "constellations which lie along the line which the Sun traces across the "
@@ -2656,7 +2717,7 @@ msgstr ""
 "skrip ini memaparkan buruj buruj zodiak. Buruj zodiak ialah 12 buruj yang "
 "dilalui oleh orbit matahari dalam masa setahun"
 
-#: src/translations.h:280
+#: src/translations.h:301
 msgid ""
 "Due to the quirks in Mercury's orbit and rotation at certain spots the sun "
 "will rise & set 3 different times in one Mercury day."
@@ -2665,7 +2726,7 @@ msgstr ""
 "matahari akan terbit & terbenam pada 3 masa yang berlainan dalam satu hari "
 "Utarid."
 
-#: src/translations.h:281
+#: src/translations.h:302
 msgid ""
 "Just before Mars eclipses the sun, Phobos pops out from behind and eclipses "
 "it first. Takes place between Scorpio and Sagittarius on April 26, 2017."
@@ -2673,7 +2734,7 @@ msgstr ""
 "Sebelum Marikh melindungi matahari, Phobos timbul dari belakang dan "
 "melindunginya dahulu. Ia berlaku diantara Kala dan Kaus pada 26 April, 2017."
 
-#: src/translations.h:282
+#: src/translations.h:303
 msgid ""
 "Just before Mars eclipses the sun, Phobos pops out from behind and eclipses "
 "it first. Takes place between Taurus and Gemini on July 23, 2031."
@@ -2682,13 +2743,13 @@ msgstr ""
 "melindunginya dahulu. Ia berlaku diantara Lembu Jantan dan Jauza pada 22 "
 "Julai, 2031."
 
-#: src/translations.h:283
+#: src/translations.h:304
 msgid "Phobos eclipsing the Sun as seen from Olympus Mons on Jan 10, 2068."
 msgstr ""
 "Phobos mengelilingi Matahari sepertimana dilihat melalui Olympus Mons pada "
 "Jan 10, 2068."
 
-#: src/translations.h:284
+#: src/translations.h:305
 msgid ""
 "Phobos occultations of Earth are common, as are occultations of Jupiter. But "
 "occultations of both on the same day are very rare. Here's one that takes "
@@ -2699,7 +2760,7 @@ msgstr ""
 "jarang berlaku. Peristiwa ini berlaku pada 1/23/2048. Dalam kelajuan yang "
 "sebenar."
 
-#: src/translations.h:285
+#: src/translations.h:306
 msgid ""
 "Phobos races ahead of Mars and transits the sun, passes through it and then "
 "retrogrades back towards the sun and just partially transits it again (only "
@@ -2715,40 +2776,38 @@ msgstr ""
 "Marikh dengan Deimos. Bila Phobos muncul dari Marikh ia masih digerhana dan "
 "kelihatan kabur di sebalik bayang Marikh, dan akan dicerahkan kemudian nanti."
 
-#: src/translations.h:286
+#: src/translations.h:307
 msgid ""
-"Screensaver of various happenings in the Solar System. 187 events in all!"
+"Screensaver of various happenings in the Solar System. 232 events in all!"
 msgstr ""
-"Penyelamat skrin pelbagai peristiwa yang berlaku dalam Sistem Suria. 187 "
-"peristiwa kesemuanya!"
 
-#: src/translations.h:287
+#: src/translations.h:308
 msgid "A tour of the western constellations."
 msgstr "Lawatan ke buruj barat"
 
-#: src/translations.h:288
+#: src/translations.h:309
 msgid "Look at the Sun from big planets of Solar System and Pluto."
 msgstr "Melihat Matahari daripada planet besar Sistem Suria dan Pluto."
 
-#: src/translations.h:289
+#: src/translations.h:310
 msgid ""
 "Best views of Earth from other Solar System bodies in the 21st Century."
 msgstr ""
 "Pandangan terbaik Bumi dari jasad Sistem Suria lain dalam Abad ke 21."
 
-#: src/translations.h:290
+#: src/translations.h:311
 msgid "Transit of Venus as seen from Sydney Australia, 6th June 2012."
 msgstr ""
 "Lintasan Zuhrah sebagaimana dilihat dari Sydney Australia, 6 Jun 2012."
 
-#: src/translations.h:291
+#: src/translations.h:312
 msgid ""
 "A demonstration of the analemma - the path of the Sun across the sky during "
 "the year."
 msgstr ""
 "Demonstrasi analemma - laluan Matahari merentasi langit sepanjang tahun."
 
-#: src/translations.h:292
+#: src/translations.h:313
 msgid ""
 "Flash of the supernova observed by Tycho Brahe in 1572. The Supernovae "
 "plugin has to be enabled."
@@ -2756,999 +2815,1004 @@ msgstr ""
 "Pancaran supernova yang dicerap oleh Tycho Brahe pada tahun 1572. Pemalam "
 "Supernovae mesti dibenarkan."
 
-#: src/translations.h:293
-msgid "Earth Greatest Elongations and Brilliancies from Mars 2000-3000"
-msgstr "Pemanjangan dan Penonjolan Terhebat Bumi dari Marikh 2000-3000"
+#: src/translations.h:314
+msgid ""
+"Earth and Venus Greatest Elongations and Brilliancies from Mars 2000-3000"
+msgstr ""
 
-#: src/translations.h:294
-msgid "Earth Greatest Elongations from Jupiter 2000-3000"
-msgstr "Pemanjangan Terhebat Bumi dari Musytari 2000-3000"
+#: src/translations.h:315
+msgid ""
+"Earth Greatest Elongations and Transits from Callisto 2000-3000. Why "
+"Callisto? Well of the 4 Galilean Moons, Callisto is the only one outside of "
+"Jupiter's radiation belt. Therefore, if humans ever colonize Jupiter's "
+"moons, Callisto will be the one."
+msgstr ""
 
-#: src/translations.h:298
+#: src/translations.h:319
 msgid "Andorra"
 msgstr "Andorra"
 
-#: src/translations.h:299
+#: src/translations.h:320
 msgid "United Arab Emirates"
 msgstr "Emiriah Arab Bersatu"
 
-#: src/translations.h:300
+#: src/translations.h:321
 msgid "Afghanistan"
 msgstr "Afghanistan"
 
-#: src/translations.h:301
+#: src/translations.h:322
 msgid "Antigua and Barbuda"
 msgstr "Antigua dan Barbuda"
 
-#: src/translations.h:302
+#: src/translations.h:323
 msgid "Anguilla"
 msgstr "Anguilla"
 
-#: src/translations.h:303
+#: src/translations.h:324
 msgid "Albania"
 msgstr "Albania"
 
-#: src/translations.h:304
+#: src/translations.h:325
 msgid "Armenia"
 msgstr "Armenia"
 
-#: src/translations.h:305
+#: src/translations.h:326
 msgid "Netherlands Antilles"
 msgstr "Netherlands Antilles"
 
-#: src/translations.h:306
+#: src/translations.h:327
 msgid "Angola"
 msgstr "Angola"
 
-#: src/translations.h:307
+#: src/translations.h:328
 msgid "Antarctica"
 msgstr "Antartika"
 
-#: src/translations.h:308
+#: src/translations.h:329
 msgid "Argentina"
 msgstr "Argentina"
 
-#: src/translations.h:309
+#: src/translations.h:330
 msgid "American Samoa"
 msgstr "Samoa Amerika"
 
-#: src/translations.h:310
+#: src/translations.h:331
 msgid "Austria"
 msgstr "Austria"
 
-#: src/translations.h:311
+#: src/translations.h:332
 msgid "Australia"
 msgstr "Australia"
 
-#: src/translations.h:312
+#: src/translations.h:333
 msgid "Aruba"
 msgstr "Aruba"
 
-#: src/translations.h:313
+#: src/translations.h:334
 msgid "Azerbaijan"
 msgstr "Azerbaijan"
 
-#: src/translations.h:314
+#: src/translations.h:335
 msgid "Bosnia and Herzegowina"
 msgstr "Bosnia dan Herzegowina"
 
-#: src/translations.h:315
+#: src/translations.h:336
 msgid "Barbados"
 msgstr "Barbados"
 
-#: src/translations.h:316
+#: src/translations.h:337
 msgid "Bangladesh"
 msgstr "Bangladesh"
 
-#: src/translations.h:317
+#: src/translations.h:338
 msgid "Belgium"
 msgstr "Belgium"
 
-#: src/translations.h:318
+#: src/translations.h:339
 msgid "Burkina Faso"
 msgstr "Burkina Faso"
 
-#: src/translations.h:319
+#: src/translations.h:340
 msgid "Bulgaria"
 msgstr "Bulgaria"
 
-#: src/translations.h:320
+#: src/translations.h:341
 msgid "Bahrain"
 msgstr "Bahrain"
 
-#: src/translations.h:321
+#: src/translations.h:342
 msgid "Burundi"
 msgstr "Burundi"
 
-#: src/translations.h:322
+#: src/translations.h:343
 msgid "Benin"
 msgstr "Benin"
 
-#: src/translations.h:323
+#: src/translations.h:344
 msgid "Bermuda"
 msgstr "Bermuda"
 
-#: src/translations.h:324
+#: src/translations.h:345
 msgid "Brunei Darussalam"
 msgstr "Brunei Darussalam"
 
-#: src/translations.h:325
+#: src/translations.h:346
 msgid "Bolivia"
 msgstr "Bolivia"
 
-#: src/translations.h:326
+#: src/translations.h:347
 msgid "Brazil"
 msgstr "Brazil"
 
-#: src/translations.h:327
+#: src/translations.h:348
 msgid "Bahamas"
 msgstr "Bahamas"
 
-#: src/translations.h:328
+#: src/translations.h:349
 msgid "Bhutan"
 msgstr "Bhutan"
 
-#: src/translations.h:329
+#: src/translations.h:350
 msgid "Bouvet Island"
 msgstr "Pulau Bouvet"
 
-#: src/translations.h:330
+#: src/translations.h:351
 msgid "Botswana"
 msgstr "Botswana"
 
-#: src/translations.h:331
+#: src/translations.h:352
 msgid "Belarus"
 msgstr "Belarus"
 
-#: src/translations.h:332
+#: src/translations.h:353
 msgid "Belize"
 msgstr "Belize"
 
-#: src/translations.h:333
+#: src/translations.h:354
 msgid "Canada"
 msgstr "Kanada"
 
-#: src/translations.h:334
+#: src/translations.h:355
 msgid "Cocos Islands"
 msgstr "Kepulauan Coco"
 
-#: src/translations.h:335
+#: src/translations.h:356
 msgid "Democratic Republic of the Congo"
 msgstr "Republik Demokratik Kongo"
 
-#: src/translations.h:336
+#: src/translations.h:357
 msgid "Central African Republic"
 msgstr "Republik Afrika Tengah"
 
-#: src/translations.h:337
+#: src/translations.h:358
 msgid "Republic of the Congo"
 msgstr "Republik Kongo"
 
-#: src/translations.h:338
+#: src/translations.h:359
 msgid "Switzerland"
 msgstr "Switzerland"
 
-#: src/translations.h:339
+#: src/translations.h:360
 msgid "Cote d'Ivoire"
 msgstr "Cote d'Ivoire"
 
-#: src/translations.h:340
+#: src/translations.h:361
 msgid "Cook Islands"
 msgstr "Kepulauan Cook"
 
-#: src/translations.h:341
+#: src/translations.h:362
 msgid "Chile"
 msgstr "Chile"
 
-#: src/translations.h:342
+#: src/translations.h:363
 msgid "Cameroon"
 msgstr "Cameroon"
 
-#: src/translations.h:343
+#: src/translations.h:364
 msgid "China"
 msgstr "China"
 
-#: src/translations.h:344
+#: src/translations.h:365
 msgid "Colombia"
 msgstr "Colombia"
 
-#: src/translations.h:345
+#: src/translations.h:366
 msgid "Costa Rica"
 msgstr "Costa Rica"
 
-#: src/translations.h:346
+#: src/translations.h:367
 msgid "Serbia and Montenegro"
 msgstr "Serbia dan Montenegro"
 
-#: src/translations.h:347
+#: src/translations.h:368
 msgid "Cuba"
 msgstr "Cuba"
 
-#: src/translations.h:348
+#: src/translations.h:369
 msgid "Cape Verde"
 msgstr "Cape Verde"
 
-#: src/translations.h:349
+#: src/translations.h:370
 msgid "Christmas Island"
 msgstr "Pulau Christmas"
 
-#: src/translations.h:350
+#: src/translations.h:371
 msgid "Cyprus"
 msgstr "Cyprus"
 
-#: src/translations.h:351
+#: src/translations.h:372
 msgid "Czech Republic"
 msgstr "Republik Czech"
 
-#: src/translations.h:352
+#: src/translations.h:373
 msgid "Germany"
 msgstr "Jerman"
 
-#: src/translations.h:353
+#: src/translations.h:374
 msgid "Djibouti"
 msgstr "Djibouti"
 
-#: src/translations.h:354
+#: src/translations.h:375
 msgid "Denmark"
 msgstr "Denmark"
 
-#: src/translations.h:355
+#: src/translations.h:376
 msgid "Dominica"
 msgstr "Dominica"
 
-#: src/translations.h:356
+#: src/translations.h:377
 msgid "Dominican Republic"
 msgstr "Republik Dominica"
 
-#: src/translations.h:357
+#: src/translations.h:378
 msgid "Algeria"
 msgstr "Algeria"
 
-#: src/translations.h:358
+#: src/translations.h:379
 msgid "Ecuador"
 msgstr "Ecuador"
 
-#: src/translations.h:359
+#: src/translations.h:380
 msgid "Estonia"
 msgstr "Estonia"
 
-#: src/translations.h:360
+#: src/translations.h:381
 msgid "Egypt"
 msgstr "Mesir"
 
-#: src/translations.h:361
+#: src/translations.h:382
 msgid "Western Sahara"
 msgstr "Sahara Barat"
 
-#: src/translations.h:362
+#: src/translations.h:383
 msgid "Eritrea"
 msgstr "Eritrea"
 
-#: src/translations.h:363
+#: src/translations.h:384
 msgid "Spain"
 msgstr "Sepanyol"
 
-#: src/translations.h:364
+#: src/translations.h:385
 msgid "Ethiopia"
 msgstr "Ethiopia"
 
-#: src/translations.h:365
+#: src/translations.h:386
 msgid "Finland"
 msgstr "Finland"
 
-#: src/translations.h:366
+#: src/translations.h:387
 msgid "Fiji"
 msgstr "Fiji"
 
-#: src/translations.h:367
+#: src/translations.h:388
 msgid "Falkland Islands"
 msgstr "Kepulauan Falkland"
 
-#: src/translations.h:368
+#: src/translations.h:389
 msgid "Micronesia"
 msgstr "Micronesia"
 
-#: src/translations.h:369
+#: src/translations.h:390
 msgid "Faroe Islands"
 msgstr "Kepulauan Faroe"
 
-#: src/translations.h:370
+#: src/translations.h:391
 msgid "France"
 msgstr "Perancis"
 
-#: src/translations.h:371
+#: src/translations.h:392
 msgid "Gabon"
 msgstr "Gabon"
 
-#: src/translations.h:372
+#: src/translations.h:393
 msgid "United Kingdom"
 msgstr "United Kingdom"
 
-#: src/translations.h:373
+#: src/translations.h:394
 msgid "Grenada"
 msgstr "Grenada"
 
-#: src/translations.h:374
+#: src/translations.h:395
 msgid "Georgia"
 msgstr "Georgia"
 
-#: src/translations.h:375
+#: src/translations.h:396
 msgid "French Guiana"
 msgstr "Guyana Perancis"
 
-#: src/translations.h:376
+#: src/translations.h:397
 msgid "Ghana"
 msgstr "Ghana"
 
-#: src/translations.h:377
+#: src/translations.h:398
 msgid "Gibraltar"
 msgstr "Gibraltar"
 
-#: src/translations.h:378
+#: src/translations.h:399
 msgid "Greenland"
 msgstr "Greenland"
 
-#: src/translations.h:379
+#: src/translations.h:400
 msgid "Gambia"
 msgstr "Gambia"
 
-#: src/translations.h:380
+#: src/translations.h:401
 msgid "Guinea"
 msgstr "Guinea"
 
-#: src/translations.h:381
+#: src/translations.h:402
 msgid "Guadeloupe"
 msgstr "Guadeloupe"
 
-#: src/translations.h:382
+#: src/translations.h:403
 msgid "Equatorial Guinea"
 msgstr "Guinea Khatulistiwa"
 
-#: src/translations.h:383
+#: src/translations.h:404
 msgid "Greece"
 msgstr "Yunani"
 
-#: src/translations.h:384
+#: src/translations.h:405
 msgid "South Georgia and the South Sandwich Islands"
 msgstr "Kepulauan Georgia Selatan dan Sandwich Selatan"
 
-#: src/translations.h:385
+#: src/translations.h:406
 msgid "Guatemala"
 msgstr "Guatemala"
 
-#: src/translations.h:386
+#: src/translations.h:407
 msgid "Guam"
 msgstr "Guam"
 
-#: src/translations.h:387
+#: src/translations.h:408
 msgid "Guinea-Bissau"
 msgstr "Guinea-Bissau"
 
-#: src/translations.h:388
+#: src/translations.h:409
 msgid "Guyana"
 msgstr "Guyana"
 
-#: src/translations.h:389
+#: src/translations.h:410
 msgid "Hong Kong"
 msgstr "Hong Kong"
 
-#: src/translations.h:390
+#: src/translations.h:411
 msgid "Heard Island and McDonald Islands"
 msgstr "Kepulauan Heard dan Kepulauan McDonald"
 
-#: src/translations.h:391
+#: src/translations.h:412
 msgid "Honduras"
 msgstr "Honduras"
 
-#: src/translations.h:392
+#: src/translations.h:413
 msgid "Croatia"
 msgstr "Croatia"
 
-#: src/translations.h:393
+#: src/translations.h:414
 msgid "Haiti"
 msgstr "Haiti"
 
-#: src/translations.h:394
+#: src/translations.h:415
 msgid "Hungary"
 msgstr "Hungary"
 
-#: src/translations.h:395
+#: src/translations.h:416
 msgid "Indonesia"
 msgstr "Indonesia"
 
-#: src/translations.h:396
+#: src/translations.h:417
 msgid "Ireland"
 msgstr "Ireland"
 
-#: src/translations.h:397
+#: src/translations.h:418
 msgid "Israel"
 msgstr "Israel"
 
-#: src/translations.h:398
+#: src/translations.h:419
 msgid "India"
 msgstr "India"
 
-#: src/translations.h:399
+#: src/translations.h:420
 msgid "British Indian Ocean Territory"
 msgstr "Wilayah British Indian Ocean"
 
-#: src/translations.h:400
+#: src/translations.h:421
 msgid "Iraq"
 msgstr "Iraq"
 
-#: src/translations.h:401
+#: src/translations.h:422
 msgid "Iran"
 msgstr "Iran"
 
-#: src/translations.h:402
+#: src/translations.h:423
 msgid "Iceland"
 msgstr "Iceland"
 
-#: src/translations.h:403
+#: src/translations.h:424
 msgid "Italy"
 msgstr "Itali"
 
-#: src/translations.h:404
+#: src/translations.h:425
 msgid "Jamaica"
 msgstr "Jamaica"
 
-#: src/translations.h:405
+#: src/translations.h:426
 msgid "Jordan"
 msgstr "Jordan"
 
-#: src/translations.h:406
+#: src/translations.h:427
 msgid "Japan"
 msgstr "Jepun"
 
-#: src/translations.h:407
+#: src/translations.h:428
 msgid "Kenya"
 msgstr "Kenya"
 
-#: src/translations.h:408
+#: src/translations.h:429
 msgid "Kyrgyzstan"
 msgstr "Kyrgyzstan"
 
-#: src/translations.h:409
+#: src/translations.h:430
 msgid "Cambodia"
 msgstr "Kemboja"
 
-#: src/translations.h:410
+#: src/translations.h:431
 msgid "Kiribati"
 msgstr "Kiribati"
 
-#: src/translations.h:411
+#: src/translations.h:432
 msgid "Comoros"
 msgstr "Comoros"
 
-#: src/translations.h:412
+#: src/translations.h:433
 msgid "Saint Kitts and Nevis"
 msgstr "Saint Kitts dan Nevis"
 
-#: src/translations.h:413
+#: src/translations.h:434
 msgid "Democratic People's Republic of Korea"
 msgstr "Republik Demokratik Rakyat Korea"
 
-#: src/translations.h:414
+#: src/translations.h:435
 msgid "Republic of Korea"
 msgstr "Republik Korea"
 
-#: src/translations.h:415
+#: src/translations.h:436
 msgid "Kuwait"
 msgstr "Kuwait"
 
-#: src/translations.h:416
+#: src/translations.h:437
 msgid "Cayman Islands"
 msgstr "Kepulauan Cayman"
 
-#: src/translations.h:417
+#: src/translations.h:438
 msgid "Kazakhstan"
 msgstr "Kazakhstan"
 
-#: src/translations.h:418
+#: src/translations.h:439
 msgid "Lao"
 msgstr "Lao"
 
-#: src/translations.h:419
+#: src/translations.h:440
 msgid "Lebanon"
 msgstr "Lubnan"
 
-#: src/translations.h:420
+#: src/translations.h:441
 msgid "Saint Lucia"
 msgstr "Saint Lucia"
 
-#: src/translations.h:421
+#: src/translations.h:442
 msgid "Liechtenstein"
 msgstr "Liechtenstein"
 
-#: src/translations.h:422
+#: src/translations.h:443
 msgid "Sri Lanka"
 msgstr "Sri Lanka"
 
-#: src/translations.h:423
+#: src/translations.h:444
 msgid "Liberia"
 msgstr "Liberia"
 
-#: src/translations.h:424
+#: src/translations.h:445
 msgid "Lesotho"
 msgstr "Lesotho"
 
-#: src/translations.h:425
+#: src/translations.h:446
 msgid "Lithuania"
 msgstr "Lithuania"
 
-#: src/translations.h:426
+#: src/translations.h:447
 msgid "Luxembourg"
 msgstr "Luxembourg"
 
-#: src/translations.h:427
+#: src/translations.h:448
 msgid "Latvia"
 msgstr "Latvia"
 
-#: src/translations.h:428
+#: src/translations.h:449
 msgid "Libyan Arab Jamahiriya"
 msgstr "Jamahiriya Arab Libya"
 
-#: src/translations.h:429
+#: src/translations.h:450
 msgid "Morocco"
 msgstr "Maghribi"
 
-#: src/translations.h:430
+#: src/translations.h:451
 msgid "Monaco"
 msgstr "Monaco"
 
-#: src/translations.h:431
+#: src/translations.h:452
 msgid "Moldova"
 msgstr "Moldova"
 
-#: src/translations.h:432
+#: src/translations.h:453
 msgid "Madagascar"
 msgstr "Madagascar"
 
-#: src/translations.h:433
+#: src/translations.h:454
 msgid "Marshall Islands"
 msgstr "Kepulauan Marshall"
 
-#: src/translations.h:434
+#: src/translations.h:455
 msgid "Macedonia"
 msgstr "Macedonia"
 
-#: src/translations.h:435
+#: src/translations.h:456
 msgid "Mali"
 msgstr "Mali"
 
-#: src/translations.h:436
+#: src/translations.h:457
 msgid "Myanmar"
 msgstr "Myanmar"
 
-#: src/translations.h:437
+#: src/translations.h:458
 msgid "Mongolia"
 msgstr "Mongolia"
 
-#: src/translations.h:438
+#: src/translations.h:459
 msgid "Macau"
 msgstr "Macau"
 
-#: src/translations.h:439
+#: src/translations.h:460
 msgid "Northern Mariana Islands"
 msgstr "Kepulauan Mariana Utara"
 
-#: src/translations.h:440
+#: src/translations.h:461
 msgid "Martinique"
 msgstr "Martinique"
 
-#: src/translations.h:441
+#: src/translations.h:462
 msgid "Mauritania"
 msgstr "Mauritania"
 
-#: src/translations.h:442
+#: src/translations.h:463
 msgid "Montserrat"
 msgstr "Montserrat"
 
-#: src/translations.h:443
+#: src/translations.h:464
 msgid "Malta"
 msgstr "Malta"
 
-#: src/translations.h:444
+#: src/translations.h:465
 msgid "Mauritius"
 msgstr "Mauritius"
 
-#: src/translations.h:445
+#: src/translations.h:466
 msgid "Maldives"
 msgstr "Maldives"
 
-#: src/translations.h:446
+#: src/translations.h:467
 msgid "Malawi"
 msgstr "Malawi"
 
-#: src/translations.h:447
+#: src/translations.h:468
 msgid "Mexico"
 msgstr "Mexico"
 
-#: src/translations.h:448
+#: src/translations.h:469
 msgid "Malaysia"
 msgstr "Malaysia"
 
-#: src/translations.h:449
+#: src/translations.h:470
 msgid "Mozambique"
 msgstr "Mozambique"
 
-#: src/translations.h:450
+#: src/translations.h:471
 msgid "Namibia"
 msgstr "Namibia"
 
-#: src/translations.h:451
+#: src/translations.h:472
 msgid "New Caledonia"
 msgstr "New Caledonia"
 
-#: src/translations.h:452
+#: src/translations.h:473
 msgid "Niger"
 msgstr "Niger"
 
-#: src/translations.h:453
+#: src/translations.h:474
 msgid "Norfolk Island"
 msgstr "Kepulauan Norfolk"
 
-#: src/translations.h:454
+#: src/translations.h:475
 msgid "Nigeria"
 msgstr "Nigeria"
 
-#: src/translations.h:455
+#: src/translations.h:476
 msgid "Nicaragua"
 msgstr "Nicaragua"
 
-#: src/translations.h:456
+#: src/translations.h:477
 msgid "Netherlands"
 msgstr "Belanda"
 
-#: src/translations.h:457
+#: src/translations.h:478
 msgid "Norway"
 msgstr "Norway"
 
-#: src/translations.h:458
+#: src/translations.h:479
 msgid "Nepal"
 msgstr "Nepal"
 
-#: src/translations.h:459
+#: src/translations.h:480
 msgid "Nauru"
 msgstr "Nauru"
 
-#: src/translations.h:460
+#: src/translations.h:481
 msgid "Niue"
 msgstr "Niue"
 
-#: src/translations.h:461
+#: src/translations.h:482
 msgid "New Zealand"
 msgstr "New Zealand"
 
-#: src/translations.h:462
+#: src/translations.h:483
 msgid "Oman"
 msgstr "Oman"
 
-#: src/translations.h:463
+#: src/translations.h:484
 msgid "Panama"
 msgstr "Panama"
 
-#: src/translations.h:464
+#: src/translations.h:485
 msgid "Peru"
 msgstr "Peru"
 
-#: src/translations.h:465
+#: src/translations.h:486
 msgid "French Polynesia"
 msgstr "Polinesia Perancis"
 
-#: src/translations.h:466
+#: src/translations.h:487
 msgid "Papua New Guinea"
 msgstr "Papua New Guinea"
 
-#: src/translations.h:467
+#: src/translations.h:488
 msgid "Philippines"
 msgstr "Filipina"
 
-#: src/translations.h:468
+#: src/translations.h:489
 msgid "Pakistan"
 msgstr "Pakistan"
 
-#: src/translations.h:469
+#: src/translations.h:490
 msgid "Poland"
 msgstr "Poland"
 
-#: src/translations.h:470
+#: src/translations.h:491
 msgid "Saint Pierre and Miquelon"
 msgstr "Saint Pierre dan Miquelon"
 
-#: src/translations.h:471
+#: src/translations.h:492
 msgid "Pitcairn"
 msgstr "Pitcairn"
 
-#: src/translations.h:472
+#: src/translations.h:493
 msgid "Puerto Rico"
 msgstr "Puerto Rico"
 
-#: src/translations.h:473
+#: src/translations.h:494
 msgid "Palestinian Territories"
 msgstr "Wilayah Palastin"
 
-#: src/translations.h:474
+#: src/translations.h:495
 msgid "Portugal"
 msgstr "Portugis"
 
-#: src/translations.h:475
+#: src/translations.h:496
 msgid "Palau"
 msgstr "Palau"
 
-#: src/translations.h:476
+#: src/translations.h:497
 msgid "Paraguay"
 msgstr "Paraguay"
 
-#: src/translations.h:477
+#: src/translations.h:498
 msgid "Qatar"
 msgstr "Qatar"
 
-#: src/translations.h:478
+#: src/translations.h:499
 msgid "Réunion"
 msgstr "Réunion"
 
-#: src/translations.h:479
+#: src/translations.h:500
 msgid "Romania"
 msgstr "Romania"
 
-#: src/translations.h:480
+#: src/translations.h:501
 msgid "Serbia"
 msgstr "Serbia"
 
-#: src/translations.h:481
+#: src/translations.h:502
 msgid "Russian Federation"
 msgstr "Persekutuan Rusia"
 
-#: src/translations.h:482
+#: src/translations.h:503
 msgid "Rwanda"
 msgstr "Rwanda"
 
-#: src/translations.h:483
+#: src/translations.h:504
 msgid "Saudi Arabia"
 msgstr "Arab Saudi"
 
-#: src/translations.h:484
+#: src/translations.h:505
 msgid "Solomon Islands"
 msgstr "Kepulauan Solomon"
 
-#: src/translations.h:485
+#: src/translations.h:506
 msgid "Seychelles"
 msgstr "Seychelles"
 
-#: src/translations.h:486
+#: src/translations.h:507
 msgid "Sudan"
 msgstr "Sudan"
 
-#: src/translations.h:487
+#: src/translations.h:508
 msgid "Sweden"
 msgstr "Sweden"
 
-#: src/translations.h:488
+#: src/translations.h:509
 msgid "Singapore"
 msgstr "Singapura"
 
-#: src/translations.h:489
+#: src/translations.h:510
 msgid "Saint Helena"
 msgstr "Saint Helena"
 
-#: src/translations.h:490
+#: src/translations.h:511
 msgid "Slovenia"
 msgstr "Slovenia"
 
-#: src/translations.h:491
+#: src/translations.h:512
 msgid "Svalbard and Jan Mayen"
 msgstr "Svalbard dan Jan Mayen"
 
-#: src/translations.h:492
+#: src/translations.h:513
 msgid "Slovakia"
 msgstr "Slovakia"
 
-#: src/translations.h:493
+#: src/translations.h:514
 msgid "Sierra Leone"
 msgstr "Siera Leon"
 
-#: src/translations.h:494
+#: src/translations.h:515
 msgid "San Marino"
 msgstr "San Marino"
 
-#: src/translations.h:495
+#: src/translations.h:516
 msgid "Senegal"
 msgstr "Senegal"
 
-#: src/translations.h:496
+#: src/translations.h:517
 msgid "Somalia"
 msgstr "Somalia"
 
-#: src/translations.h:497
+#: src/translations.h:518
 msgid "Suriname"
 msgstr "Surinam"
 
-#: src/translations.h:498
+#: src/translations.h:519
 msgid "Sao Tome and Principe"
 msgstr "Sao Tome dan Principe"
 
-#: src/translations.h:499
+#: src/translations.h:520
 msgid "El Salvador"
 msgstr "El Salvador"
 
-#: src/translations.h:500
+#: src/translations.h:521
 msgid "Syrian Arab Republic"
 msgstr "Republik Arab Syria"
 
-#: src/translations.h:501
+#: src/translations.h:522
 msgid "Swaziland"
 msgstr "Swaziland"
 
-#: src/translations.h:502
+#: src/translations.h:523
 msgid "Turks and Caicos Islands"
 msgstr "Kepulauan Turks dan Caicos"
 
-#: src/translations.h:503
+#: src/translations.h:524
 msgid "Chad"
 msgstr "Chad"
 
-#: src/translations.h:504
+#: src/translations.h:525
 msgid "French Southern Territories"
 msgstr "Wilayah Selatan Perancis"
 
-#: src/translations.h:505
+#: src/translations.h:526
 msgid "Togo"
 msgstr "Togo"
 
-#: src/translations.h:506
+#: src/translations.h:527
 msgid "Thailand"
 msgstr "Thailand"
 
-#: src/translations.h:507
+#: src/translations.h:528
 msgid "Tajikistan"
 msgstr "Tajikistan"
 
-#: src/translations.h:508
+#: src/translations.h:529
 msgid "Tokelau"
 msgstr "Tokelau"
 
-#: src/translations.h:509
+#: src/translations.h:530
 msgid "East Timor"
 msgstr "Timor Timur"
 
-#: src/translations.h:510
+#: src/translations.h:531
 msgid "Turkmenistan"
 msgstr "Turkmenistan"
 
-#: src/translations.h:511
+#: src/translations.h:532
 msgid "Tunisia"
 msgstr "Tunisia"
 
-#: src/translations.h:512
+#: src/translations.h:533
 msgid "Tonga"
 msgstr "Tonga"
 
-#: src/translations.h:513
+#: src/translations.h:534
 msgid "Turkey"
 msgstr "Turki"
 
-#: src/translations.h:514
+#: src/translations.h:535
 msgid "Trinidad and Tobago"
 msgstr "Trinidad dan Tobago"
 
-#: src/translations.h:515
+#: src/translations.h:536
 msgid "Tuvalu"
 msgstr "Tuvalu"
 
-#: src/translations.h:516
+#: src/translations.h:537
 msgid "Taiwan"
 msgstr "Taiwan"
 
-#: src/translations.h:517
+#: src/translations.h:538
 msgid "Tanzania"
 msgstr "Tanzania"
 
-#: src/translations.h:518
+#: src/translations.h:539
 msgid "Ukraine"
 msgstr "Ukraine"
 
-#: src/translations.h:519
+#: src/translations.h:540
 msgid "Uganda"
 msgstr "Uganda"
 
-#: src/translations.h:520
+#: src/translations.h:541
 msgid "United States Minor Outlying Islands"
 msgstr "Kepulauan Luar Minor Amerika Syarikat"
 
-#: src/translations.h:521
+#: src/translations.h:542
 msgid "United States"
 msgstr "Amerika Syarikat"
 
-#: src/translations.h:522
+#: src/translations.h:543
 msgid "Uruguay"
 msgstr "Uruguay"
 
-#: src/translations.h:523
+#: src/translations.h:544
 msgid "Uzbekistan"
 msgstr "Uzbekistan"
 
-#: src/translations.h:524
+#: src/translations.h:545
 msgid "Vatican City State"
 msgstr "Negara Bandar Vatican"
 
-#: src/translations.h:525
+#: src/translations.h:546
 msgid "Saint Vincent and the Grenadines"
 msgstr "Saint Vincent dan Grenadines"
 
-#: src/translations.h:526
+#: src/translations.h:547
 msgid "Venezuela"
 msgstr "Venezuela"
 
-#: src/translations.h:527
+#: src/translations.h:548
 msgid "British Virgin Islands"
 msgstr "Kepulauan Virgin Britain"
 
-#: src/translations.h:528
+#: src/translations.h:549
 msgid "United States Virgin Islands"
 msgstr "Kepulauan Virgin Amerika Syarikat"
 
-#: src/translations.h:529
+#: src/translations.h:550
 msgid "Viet Nam"
 msgstr "Viet Nam"
 
-#: src/translations.h:530
+#: src/translations.h:551
 msgid "Vanuatu"
 msgstr "Vanuatu"
 
-#: src/translations.h:531
+#: src/translations.h:552
 msgid "Wallis and Futuna"
 msgstr "Wallis dan Futuna"
 
-#: src/translations.h:532
+#: src/translations.h:553
 msgid "Samoa"
 msgstr "Samoa"
 
-#: src/translations.h:533
+#: src/translations.h:554
 msgid "Yemen"
 msgstr "Yaman"
 
-#: src/translations.h:534
+#: src/translations.h:555
 msgid "Mayotte"
 msgstr "Mayotte"
 
-#: src/translations.h:535
+#: src/translations.h:556
 msgid "Yugoslavia"
 msgstr "Yugoslavia"
 
-#: src/translations.h:536
+#: src/translations.h:557
 msgid "South Africa"
 msgstr "Afrika Selatan"
 
-#: src/translations.h:537
+#: src/translations.h:558
 msgid "Zambia"
 msgstr "Zambia"
 
-#: src/translations.h:538
+#: src/translations.h:559
 msgid "Zimbabwe"
 msgstr "Zimbabwe"
 
-#: src/translations.h:542
+#: src/translations.h:563
 msgid "&Undo"
 msgstr "Buat &Asal"
 
-#: src/translations.h:543
+#: src/translations.h:564
 msgid "&Redo"
 msgstr "Buat &Semula"
 
-#: src/translations.h:544
+#: src/translations.h:565
 msgid "Cu&t"
 msgstr "Po&tong"
 
-#: src/translations.h:545
+#: src/translations.h:566
 msgid "&Copy"
 msgstr "Sa&lin"
 
-#: src/translations.h:546
+#: src/translations.h:567
 msgid "&Paste"
 msgstr "Tam&pal"
 
-#: src/translations.h:547 src/ui_locationDialogGui.h:407
+#: src/translations.h:568 src/ui_locationDialogGui.h:407
 #: plugins/Oculars/src/ui_ocularDialog.h:1074
 #: plugins/Oculars/src/ui_ocularDialog.h:1083
 #: plugins/Oculars/src/ui_ocularDialog.h:1090
@@ -3756,56 +3820,56 @@ msgstr "Tam&pal"
 msgid "Delete"
 msgstr "Padam"
 
-#: src/translations.h:548
+#: src/translations.h:569
 msgid "Select All"
 msgstr "Pilih Semua"
 
-#: src/translations.h:549
+#: src/translations.h:570
 msgid "Look in:"
 msgstr "Lihat dalam:"
 
-#: src/translations.h:550
+#: src/translations.h:571
 msgid "Directory:"
 msgstr "Direktori:"
 
-#: src/translations.h:551
+#: src/translations.h:572
 msgid "Folder"
 msgstr "Folder"
 
-#: src/translations.h:552
+#: src/translations.h:573
 msgid "&Choose"
 msgstr "P&ilih"
 
-#: src/translations.h:553 src/ui_configurationDialog.h:1165
+#: src/translations.h:574 src/ui_configurationDialog.h:1167
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:516
 msgid "Cancel"
 msgstr "Batal"
 
-#: src/translations.h:554
+#: src/translations.h:575
 msgid "Files of type:"
 msgstr "Jenis fail:"
 
-#: src/translations.h:555
+#: src/translations.h:576
 msgid "Date Modified"
 msgstr "Tarikh Diubahsuai"
 
-#: src/translations.h:556
+#: src/translations.h:577
 msgid "Directories"
 msgstr "Direktori"
 
-#: src/translations.h:557
+#: src/translations.h:578
 msgid "Computer"
 msgstr "Komputer"
 
-#: src/translations.h:558
+#: src/translations.h:579
 msgid "&Open"
 msgstr "B&uka"
 
-#: src/translations.h:559
+#: src/translations.h:580
 msgid "File &name:"
 msgstr "&Nama fail:"
 
-#: src/translations.h:560
+#: src/translations.h:581
 msgid "Copy &Link Location"
 msgstr "Salin Lokasi P&autan"
 
@@ -3822,7 +3886,7 @@ msgstr "Perihal"
 msgid "Log"
 msgstr "Log"
 
-#: src/ui_helpDialogGui.h:290 src/ui_configurationDialog.h:1086
+#: src/ui_helpDialogGui.h:290 src/ui_configurationDialog.h:1088
 msgid "Edit keyboard shortcuts..."
 msgstr "Sunting pintasan papan kekunci..."
 
@@ -3835,17 +3899,10 @@ msgstr "Segar Semula"
 msgid "Location"
 msgstr "Lokasi"
 
-#: src/ui_locationDialogGui.h:398
+#: src/ui_locationDialogGui.h:398 src/ui_locationDialogGui.h:401
 msgid ""
 "Standard list of locations contains only English names (without diacritics!)"
 msgstr ""
-
-#: src/ui_locationDialogGui.h:401
-msgid ""
-"Standard list of locations is contains only English names (without "
-"diacritics!)"
-msgstr ""
-"Senarai piawai lokasi yang mengandungi nama Inggeris (tanpa diakritik!)"
 
 #: src/ui_locationDialogGui.h:404
 msgid "Current location information"
@@ -4073,7 +4130,7 @@ msgstr "Guna isian-sendiri hanya dari permulaan perkataan"
 
 #: src/ui_searchDialogGui.h:657 src/ui_viewDialog.h:1251
 #: src/ui_viewDialog.h:1257 src/ui_viewDialog.h:1259
-#: src/ui_configurationDialog.h:1166 src/ui_configurationDialog.h:1177
+#: src/ui_configurationDialog.h:1168 src/ui_configurationDialog.h:1179
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:417
 msgid "Options"
 msgstr "Pilihan"
@@ -4343,19 +4400,19 @@ msgstr "Guna budaya langit inisebagai lalai"
 msgid "Visible"
 msgstr "Tampak"
 
-#: src/ui_configurationDialog.h:1000
+#: src/ui_configurationDialog.h:1002
 msgid "Configuration"
 msgstr "Konfigurasi"
 
-#: src/ui_configurationDialog.h:1002
+#: src/ui_configurationDialog.h:1004
 msgid "Program language"
 msgstr "Bahasa Program"
 
-#: src/ui_configurationDialog.h:1003
+#: src/ui_configurationDialog.h:1005
 msgid "Check updates"
 msgstr "Semak kemaskini"
 
-#: src/ui_configurationDialog.h:1004
+#: src/ui_configurationDialog.h:1006
 msgid ""
 "Enable checking updates of Stellarium via Internet. Info for updates of "
 "stable versions you can look on the tab \"About\" of \"Help\" window."
@@ -4364,11 +4421,11 @@ msgstr ""
 "kemaskini bagi versi stabil boleh dilihat pada tetingkap \"Batuan\", tab "
 "\"Perihal\"."
 
-#: src/ui_configurationDialog.h:1005
+#: src/ui_configurationDialog.h:1007
 msgid "Default options"
 msgstr "Pilihan lalai"
 
-#: src/ui_configurationDialog.h:1007
+#: src/ui_configurationDialog.h:1009
 msgid ""
 "Save the settings you've changed this session to be the same the next time "
 "you start Stellarium"
@@ -4376,7 +4433,7 @@ msgstr ""
 "Simpan tetapan yang anda ubah dari sesi ini supaya tetap sama bila anda "
 "mulakan Stellarium dilain masa."
 
-#: src/ui_configurationDialog.h:1009
+#: src/ui_configurationDialog.h:1011
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:390
 #: plugins/FOV/src/ui_fovWindow.h:387
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:276
@@ -4384,17 +4441,17 @@ msgstr ""
 msgid "Save settings"
 msgstr "Simpan tetapan"
 
-#: src/ui_configurationDialog.h:1011
+#: src/ui_configurationDialog.h:1013
 msgid "Restore the default settings that came with Stellarium"
 msgstr "Pulih tetapan lalai yang sedia ada pada Stellarium"
 
-#: src/ui_configurationDialog.h:1013 plugins/FOV/src/ui_fovWindow.h:386
+#: src/ui_configurationDialog.h:1015 plugins/FOV/src/ui_fovWindow.h:386
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:277
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:289
 msgid "Restore defaults"
 msgstr "Pulih lalai"
 
-#: src/ui_configurationDialog.h:1014
+#: src/ui_configurationDialog.h:1016
 msgid ""
 "Restoring default settings requires a restart of Stellarium. Saving all the "
 "current options includes the current FOV and direction of view for use at "
@@ -4404,211 +4461,211 @@ msgstr ""
 "pilihan semasa termasuklah FOV semasa dan arah paparan yang akan digunakan "
 "pada mula semula seterusnya."
 
-#: src/ui_configurationDialog.h:1016
+#: src/ui_configurationDialog.h:1018
 msgid "The width of your view when Stellarium starts"
 msgstr "Kelebaran paparan anda bila Stellarium dimulakan"
 
-#: src/ui_configurationDialog.h:1019
+#: src/ui_configurationDialog.h:1021
 msgid "The direction you're looking when Stellarium starts"
 msgstr "Arah anda melihat bila Stellarium dimulakan"
 
-#: src/ui_configurationDialog.h:1021 src/ui_configurationDialog.h:1188
+#: src/ui_configurationDialog.h:1023 src/ui_configurationDialog.h:1190
 msgid "Selected object information"
 msgstr "Maklumat objek yang dipilih"
 
-#: src/ui_configurationDialog.h:1023
+#: src/ui_configurationDialog.h:1025
 msgid "Display all information available"
 msgstr "Papar semua maklumat yang ada"
 
-#: src/ui_configurationDialog.h:1025
+#: src/ui_configurationDialog.h:1027
 msgid "All available"
 msgstr "Semua yang ada"
 
-#: src/ui_configurationDialog.h:1027
+#: src/ui_configurationDialog.h:1029
 msgid "Display no information"
 msgstr "Jangan paparkan maklumat"
 
-#: src/ui_configurationDialog.h:1029 plugins/Oculars/src/Oculars.cpp:1944
-#: plugins/Observability/src/Observability.cpp:200
+#: src/ui_configurationDialog.h:1031 plugins/Oculars/src/Oculars.cpp:1937
+#: plugins/Observability/src/Observability.cpp:201
 msgid "None"
 msgstr "Tiada"
 
-#: src/ui_configurationDialog.h:1031
+#: src/ui_configurationDialog.h:1033
 msgid "Display less information"
 msgstr "Papar kurang maklumat"
 
-#: src/ui_configurationDialog.h:1033
+#: src/ui_configurationDialog.h:1035
 msgid "Short"
 msgstr "Pendek"
 
-#: src/ui_configurationDialog.h:1035
+#: src/ui_configurationDialog.h:1037
 msgid "Display user settings information"
 msgstr "Papar maklumat tetapan pengguna"
 
-#: src/ui_configurationDialog.h:1037
+#: src/ui_configurationDialog.h:1039
 msgid "Customized"
 msgstr "Tersuai"
 
-#: src/ui_configurationDialog.h:1038
+#: src/ui_configurationDialog.h:1040
 msgid "Displayed fields"
 msgstr "Medan yang dipaparkan"
 
-#: src/ui_configurationDialog.h:1039
+#: src/ui_configurationDialog.h:1041
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:277
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:166
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:165
 msgid "Name"
 msgstr "Nama"
 
-#: src/ui_configurationDialog.h:1041
+#: src/ui_configurationDialog.h:1043
 msgid "Geocentric equatorial coordinates, equinox of date"
 msgstr "Koordinat khatulistiwa bergeopusat, equinoks tarikh"
 
-#: src/ui_configurationDialog.h:1043
+#: src/ui_configurationDialog.h:1045
 msgid "Right ascension/Declination (of date)"
 msgstr "Penaikan/Keserongan (tarikh)"
 
-#: src/ui_configurationDialog.h:1044
+#: src/ui_configurationDialog.h:1046
 msgid "Catalog number(s)"
 msgstr "Nombor katalog"
 
-#: src/ui_configurationDialog.h:1046
+#: src/ui_configurationDialog.h:1048
 msgid "Geocentric equatorial coordinates, equinox of J2000.0"
 msgstr "Koordinat khatulistiwa bergeopusat, equinoks J2000.0"
 
-#: src/ui_configurationDialog.h:1048
+#: src/ui_configurationDialog.h:1050
 msgid "Right ascension/Declination (J2000)"
 msgstr "Penaikan/Keserongan (J2000)"
 
-#: src/ui_configurationDialog.h:1049
+#: src/ui_configurationDialog.h:1051
 msgid "Absolute magnitude"
 msgstr "Magnitud mutlak"
 
-#: src/ui_configurationDialog.h:1050
+#: src/ui_configurationDialog.h:1052
 msgid "Galactic coordinates"
 msgstr "Koordinat bima sakti"
 
-#: src/ui_configurationDialog.h:1051
+#: src/ui_configurationDialog.h:1053
 msgid "Visual magnitude"
 msgstr "Magnitud visual"
 
-#: src/ui_configurationDialog.h:1053
+#: src/ui_configurationDialog.h:1055
 msgid "Angular or physical size"
 msgstr "Saiz bersudut atau fizikal"
 
-#: src/ui_configurationDialog.h:1055
+#: src/ui_configurationDialog.h:1057
 msgid "Size"
 msgstr "Saiz"
 
-#: src/ui_configurationDialog.h:1057
+#: src/ui_configurationDialog.h:1059
 msgid "The type of the object (star, planet, etc.)"
 msgstr "Jenis objek (bintang, planet, dll.)"
 
-#: src/ui_configurationDialog.h:1059
+#: src/ui_configurationDialog.h:1061
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:276
 msgid "Type"
 msgstr "Jenis"
 
-#: src/ui_configurationDialog.h:1061
+#: src/ui_configurationDialog.h:1063
 msgid "Spectral class, nebula type, etc."
 msgstr "Kelas spektral, jenis nebula, dll."
 
-#: src/ui_configurationDialog.h:1063
+#: src/ui_configurationDialog.h:1065
 msgid "Additional information"
 msgstr "Maklumat tambahan"
 
-#: src/ui_configurationDialog.h:1065
+#: src/ui_configurationDialog.h:1067
 msgid "Topocentric equatorial coordinates"
 msgstr "Koordinat khatulistiwa bertopopusat"
 
-#: src/ui_configurationDialog.h:1067
+#: src/ui_configurationDialog.h:1069
 msgid "Hour angle/Declination"
 msgstr "Sudut/Keserongan Jam"
 
-#: src/ui_configurationDialog.h:1069
+#: src/ui_configurationDialog.h:1071
 msgid "Horizontal coordinates"
 msgstr "Koordinat mengufuk"
 
-#: src/ui_configurationDialog.h:1071
+#: src/ui_configurationDialog.h:1073
 msgid "Altitude/Azimuth"
 msgstr "Altitud/Azimut"
 
-#: src/ui_configurationDialog.h:1072
+#: src/ui_configurationDialog.h:1074
 msgid "Distance"
 msgstr "Jarak"
 
-#: src/ui_configurationDialog.h:1074
+#: src/ui_configurationDialog.h:1076
 msgid ""
 "Ecliptic topocentric coordinates, equinox of date and J2000 (only for Earth)"
 msgstr ""
 "Koordinat toposentrik elips, ekuinoks tarikh dan J2000 (hanya untuk bumi)"
 
-#: src/ui_configurationDialog.h:1076
+#: src/ui_configurationDialog.h:1078
 msgid "Ecliptic coordinates"
 msgstr "Koordinat elips"
 
-#: src/ui_configurationDialog.h:1077
+#: src/ui_configurationDialog.h:1079
 msgid "Control"
 msgstr "Kawalan"
 
-#: src/ui_configurationDialog.h:1079
+#: src/ui_configurationDialog.h:1081
 msgid "Allow keyboard to pan and zoom"
 msgstr "Benarkan papan kekunci digunakan untuk bergerak dan zum"
 
-#: src/ui_configurationDialog.h:1081
+#: src/ui_configurationDialog.h:1083
 msgid "Enable keyboard navigation"
 msgstr "Benarkan navigasi papan kekunci"
 
-#: src/ui_configurationDialog.h:1083
+#: src/ui_configurationDialog.h:1085
 msgid "Allow mouse to pan (drag) and zoom (mousewheel)"
 msgstr ""
 "Benarkan tetikus digunakan untuk bergerak (seret) dan zum (roda tetikus)"
 
-#: src/ui_configurationDialog.h:1085
+#: src/ui_configurationDialog.h:1087
 msgid "Enable mouse navigation"
 msgstr "Benarkan pandu arah tetikus"
 
-#: src/ui_configurationDialog.h:1088
+#: src/ui_configurationDialog.h:1090
 msgid "Hides the mouse cursor when inactive"
 msgstr "Sembunyikan kursor tetikus apabila tidak aktif"
 
-#: src/ui_configurationDialog.h:1090
+#: src/ui_configurationDialog.h:1092
 msgid "Mouse cursor timeout:"
 msgstr "Had masa tamat kursor tetikus:"
 
-#: src/ui_configurationDialog.h:1092
+#: src/ui_configurationDialog.h:1094
 msgid "seconds"
 msgstr "saat"
 
-#: src/ui_configurationDialog.h:1094
+#: src/ui_configurationDialog.h:1096
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:191
 msgid "Startup date and time"
 msgstr "Tarikh dan masa permulaan"
 
-#: src/ui_configurationDialog.h:1096
+#: src/ui_configurationDialog.h:1098
 msgid "Use a specific date and time when Stellarium starts up"
 msgstr "Guna tarikh dan masa spesifik bila Stellarium bermula"
 
-#: src/ui_configurationDialog.h:1098
+#: src/ui_configurationDialog.h:1100
 msgid "Other:"
 msgstr "Lain-lain:"
 
-#: src/ui_configurationDialog.h:1100
+#: src/ui_configurationDialog.h:1102
 msgid "Use current local date and time"
 msgstr "Guna tarikh dan masa setempat"
 
-#: src/ui_configurationDialog.h:1102
+#: src/ui_configurationDialog.h:1104
 msgid "use current"
 msgstr "guna yang semasa"
 
-#: src/ui_configurationDialog.h:1104
+#: src/ui_configurationDialog.h:1106
 msgid "Starts Stellarium at system clock date and time"
 msgstr "Mulakan Stellarium menggunakan tarikh dan masa sistem"
 
-#: src/ui_configurationDialog.h:1106
+#: src/ui_configurationDialog.h:1108
 msgid "System date and time"
 msgstr "Tarikh dan masa sistem"
 
-#: src/ui_configurationDialog.h:1108
+#: src/ui_configurationDialog.h:1110
 msgid ""
 "Sets the simulation time to the next instance of this time of day when "
 "Stellarium starts"
@@ -4616,23 +4673,23 @@ msgstr ""
 "Tetapkan masa simulasi pada tika seterusnya pada masa hari ini bila "
 "Stellarium dimulakan"
 
-#: src/ui_configurationDialog.h:1110
+#: src/ui_configurationDialog.h:1112
 msgid "System date at:"
 msgstr "Tarikh sistem pada:"
 
-#: src/ui_configurationDialog.h:1111
+#: src/ui_configurationDialog.h:1113
 msgid "Time correction"
 msgstr "Pembetulan masa"
 
-#: src/ui_configurationDialog.h:1114
+#: src/ui_configurationDialog.h:1116
 msgid "Edit equation"
 msgstr "Sunting persamaan"
 
-#: src/ui_configurationDialog.h:1116
+#: src/ui_configurationDialog.h:1118
 msgid "Planetarium options"
 msgstr "Pilihan Planetarium"
 
-#: src/ui_configurationDialog.h:1118
+#: src/ui_configurationDialog.h:1120
 msgid ""
 "Spheric mirror distortion is used when projecting Stellarium onto a spheric "
 "mirror for low-cost planetarium systems."
@@ -4640,51 +4697,51 @@ msgstr ""
 "Herotan cermin bersfera digunakan apabila Stellarium diunjurkan kepada "
 "cermin bersfera untuk sistem planetarium berkos rendah."
 
-#: src/ui_configurationDialog.h:1120
+#: src/ui_configurationDialog.h:1122
 msgid "Spheric mirror distortion"
 msgstr "Herotan cermin bersfera"
 
-#: src/ui_configurationDialog.h:1122
+#: src/ui_configurationDialog.h:1124
 msgid "Mask out everything outside a central circle in the main view"
 msgstr "Bukakan semuanya diluar pusat bulatan pada paparan utama"
 
-#: src/ui_configurationDialog.h:1124
+#: src/ui_configurationDialog.h:1126
 msgid "Disc viewport"
 msgstr "Port pandang cakera"
 
-#: src/ui_configurationDialog.h:1126
+#: src/ui_configurationDialog.h:1128
 msgid "Hide other constellations when you click one"
 msgstr "Sembunyi buruj lain bila anda klikkannya"
 
-#: src/ui_configurationDialog.h:1128
+#: src/ui_configurationDialog.h:1130
 msgid "Select single constellation"
 msgstr "Pilih satu buruj"
 
-#: src/ui_configurationDialog.h:1130
+#: src/ui_configurationDialog.h:1132
 msgid "Align labels with the horizon"
 msgstr "Jajar label dengan ufuk"
 
-#: src/ui_configurationDialog.h:1132
+#: src/ui_configurationDialog.h:1134
 msgid "Gravity labels"
 msgstr "Label graviti"
 
-#: src/ui_configurationDialog.h:1134
+#: src/ui_configurationDialog.h:1136
 msgid "Toggle display backgrounds of the nebulae."
 msgstr "Togol latar belakang paparan nebula."
 
-#: src/ui_configurationDialog.h:1136
+#: src/ui_configurationDialog.h:1138
 msgid "Show nebula background button"
 msgstr "Papar butang latar belakang nebula"
 
-#: src/ui_configurationDialog.h:1138
+#: src/ui_configurationDialog.h:1140
 msgid "Toggle vertical and horizontal image flip buttons."
 msgstr "Togol butang kalih imej menegak dan melintang."
 
-#: src/ui_configurationDialog.h:1140
+#: src/ui_configurationDialog.h:1142
 msgid "Show flip buttons"
 msgstr "Papar butang kalih"
 
-#: src/ui_configurationDialog.h:1142
+#: src/ui_configurationDialog.h:1144
 msgid ""
 "When enabled, the \"auto zoom out\" key will also set the initial viewing "
 "direction"
@@ -4692,97 +4749,97 @@ msgstr ""
 "Bila dibenarkan, kekunci \"zum keluar automatik\" juga akan ditetapkan pada "
 "arah pandangan asal"
 
-#: src/ui_configurationDialog.h:1144
+#: src/ui_configurationDialog.h:1146
 msgid "Auto zoom out returns to initial direction of view"
 msgstr "Zum keluar secara automatik dikembalikan kepada arah paparan asal"
 
-#: src/ui_configurationDialog.h:1146
+#: src/ui_configurationDialog.h:1148
 msgid ""
 "Auto-enabling of the atmosphere for bodies with atmosphere in location window"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1148
+#: src/ui_configurationDialog.h:1150
 msgid "Auto-enabling for the atmosphere"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1149
+#: src/ui_configurationDialog.h:1151
 msgid "Screenshots"
 msgstr "Cekupan skrin"
 
-#: src/ui_configurationDialog.h:1150
+#: src/ui_configurationDialog.h:1152
 msgid "Screenshot Directory"
 msgstr "Direktori Cekupan skrin"
 
-#: src/ui_configurationDialog.h:1152
+#: src/ui_configurationDialog.h:1154
 msgid "Invert colors"
 msgstr "Warna songsang"
 
-#: src/ui_configurationDialog.h:1153
+#: src/ui_configurationDialog.h:1155
 msgid "Star catalog updates"
 msgstr "Kemaskini katalog bintang"
 
-#: src/ui_configurationDialog.h:1155
+#: src/ui_configurationDialog.h:1157
 msgid "Click here to start downloading"
 msgstr "Klik disini untuk memulakan muat turun"
 
-#: src/ui_configurationDialog.h:1157
+#: src/ui_configurationDialog.h:1159
 msgid "Download this file to view even more stars"
 msgstr "Muat turun fail ini untuk paparkan lebih banyak bintang"
 
-#: src/ui_configurationDialog.h:1159
+#: src/ui_configurationDialog.h:1161
 msgid "Restart the download"
 msgstr "Mula semula muat turun"
 
-#: src/ui_configurationDialog.h:1161
+#: src/ui_configurationDialog.h:1163
 msgid "Retry"
 msgstr "Cuba lagi"
 
-#: src/ui_configurationDialog.h:1163
+#: src/ui_configurationDialog.h:1165
 msgid "Stop the download. You can always restart it later"
 msgstr "Henti muat turun. anda boleh mula semula kemudiannya"
 
-#: src/ui_configurationDialog.h:1168
+#: src/ui_configurationDialog.h:1170
 msgid "Close window when script runs"
 msgstr "Tutup tetingkap ini bila skrip dijalankan"
 
-#: src/ui_configurationDialog.h:1170
+#: src/ui_configurationDialog.h:1172
 msgid "Run the selected script"
 msgstr "Jalankan skrip yang dipilih"
 
-#: src/ui_configurationDialog.h:1174
+#: src/ui_configurationDialog.h:1176
 msgid "Stop a running script"
 msgstr "Henti skrip yang dijalankan"
 
-#: src/ui_configurationDialog.h:1178
+#: src/ui_configurationDialog.h:1180
 msgid "Load at startup"
 msgstr "Muat pada permulaan"
 
-#: src/ui_configurationDialog.h:1179
+#: src/ui_configurationDialog.h:1181
 msgid "configure"
 msgstr "konfigur"
 
-#: src/ui_configurationDialog.h:1184
+#: src/ui_configurationDialog.h:1186
 msgid "Main"
 msgstr "Utama"
 
-#: src/ui_configurationDialog.h:1186
+#: src/ui_configurationDialog.h:1188
 msgid "Information"
 msgstr "Maklumat"
 
-#: src/ui_configurationDialog.h:1191
+#: src/ui_configurationDialog.h:1193
 msgid "Navigation"
 msgstr "Navigasi"
 
-#: src/ui_configurationDialog.h:1193
+#: src/ui_configurationDialog.h:1195
 msgid "Tools"
 msgstr "Alatan"
 
-#: src/ui_configurationDialog.h:1195
+#: src/ui_configurationDialog.h:1197
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:452
 msgid "Scripts"
 msgstr "Skrip"
 
-#: src/ui_configurationDialog.h:1197
+#: src/ui_configurationDialog.h:1199
 msgid "Plugins"
 msgstr "Pemalam"
 
@@ -5000,7 +5057,7 @@ msgstr ""
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:128
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:144
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:137
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:281
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:280
 msgid "Links"
 msgstr "Pautan"
 
@@ -5011,7 +5068,7 @@ msgstr "Pautan"
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:129
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:145
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:138
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:282
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:281
 #, qt-format
 msgid ""
 "Support is provided via the Launchpad website.  Be sure to put \"%1\" in the "
@@ -5028,7 +5085,7 @@ msgstr ""
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:132
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:148
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:141
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:285
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:284
 #, qt-format
 msgid "If you have a question, you can %1get an answer here%2"
 msgstr "Jika anda mempunyai soalan, anda boleh %1dapatkan jawapan disini%2"
@@ -5041,7 +5098,7 @@ msgstr "Jika anda mempunyai soalan, anda boleh %1dapatkan jawapan disini%2"
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:134
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:150
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:143
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:287
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:286
 #, qt-format
 msgid "Bug reports can be made %1here%2."
 msgstr "Laporan boleh dibuat %1disini%2."
@@ -5054,7 +5111,7 @@ msgstr "Laporan boleh dibuat %1disini%2."
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:136
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:152
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:145
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:289
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:288
 msgid ""
 "If you would like to make a feature request, you can create a bug report, "
 "and set the severity to \"wishlist\"."
@@ -5158,12 +5215,12 @@ msgstr "Papar tanda bering kompas sepanjang ufuk"
 msgid "Compass marks"
 msgstr "Tanda kompas"
 
-#: plugins/Oculars/src/Oculars.cpp:80 plugins/Oculars/src/Oculars.cpp:1311
+#: plugins/Oculars/src/Oculars.cpp:79 plugins/Oculars/src/Oculars.cpp:1309
 #: plugins/Oculars/src/ui_ocularDialog.h:1051
 msgid "Oculars"
 msgstr "Okular"
 
-#: plugins/Oculars/src/Oculars.cpp:83
+#: plugins/Oculars/src/Oculars.cpp:82
 msgid ""
 "Shows the sky as if looking through a telescope eyepiece. (Only "
 "magnification and field of view are simulated.) It can also show a sensor "
@@ -5173,205 +5230,205 @@ msgstr ""
 "dan medan paparan disimulasikan). Ia boleh paparkan bingkai penderia dan "
 "pandangan Telrad."
 
-#: plugins/Oculars/src/Oculars.cpp:847
+#: plugins/Oculars/src/Oculars.cpp:845
 msgid "Please select an object before switching to ocular view."
 msgstr "Sila pilih objek sebelum menukar ke paparan okular"
 
-#: plugins/Oculars/src/Oculars.cpp:939
+#: plugins/Oculars/src/Oculars.cpp:937
 msgid "&Previous ocular"
 msgstr "Okular &terdahulu"
 
-#: plugins/Oculars/src/Oculars.cpp:940
+#: plugins/Oculars/src/Oculars.cpp:938
 msgid "&Next ocular"
 msgstr "Okular &berikutnya"
 
-#: plugins/Oculars/src/Oculars.cpp:941
+#: plugins/Oculars/src/Oculars.cpp:939
 msgid "Select &ocular"
 msgstr "Pilih o&kular"
 
-#: plugins/Oculars/src/Oculars.cpp:988
+#: plugins/Oculars/src/Oculars.cpp:986
 msgid "Toggle &crosshair"
 msgstr "Togol reramb&ut silang"
 
-#: plugins/Oculars/src/Oculars.cpp:996
+#: plugins/Oculars/src/Oculars.cpp:994
 msgid "Configure &Oculars"
 msgstr "Konfigur &Okular"
 
-#: plugins/Oculars/src/Oculars.cpp:1004
+#: plugins/Oculars/src/Oculars.cpp:1002
 msgid "Toggle &CCD"
 msgstr "Togol &CCD"
 
-#: plugins/Oculars/src/Oculars.cpp:1011
+#: plugins/Oculars/src/Oculars.cpp:1009
 msgid "Toggle &Telrad"
 msgstr "Togol Tel&rad"
 
-#: plugins/Oculars/src/Oculars.cpp:1020
+#: plugins/Oculars/src/Oculars.cpp:1018
 msgid "&Previous CCD"
 msgstr "CCD &Terdahulu"
 
-#: plugins/Oculars/src/Oculars.cpp:1021
+#: plugins/Oculars/src/Oculars.cpp:1019
 msgid "&Next CCD"
 msgstr "CCD &Berikutnya"
 
-#: plugins/Oculars/src/Oculars.cpp:1022
+#: plugins/Oculars/src/Oculars.cpp:1020
 msgid "&Select CCD"
 msgstr "&Pilih CCD"
 
-#: plugins/Oculars/src/Oculars.cpp:1044
+#: plugins/Oculars/src/Oculars.cpp:1042
 msgid "&Rotate CCD"
 msgstr "P&utar CCD"
 
-#: plugins/Oculars/src/Oculars.cpp:1066
+#: plugins/Oculars/src/Oculars.cpp:1064
 msgid "&Reset rotation"
 msgstr "T&etap semula putaran"
 
-#: plugins/Oculars/src/Oculars.cpp:1312
+#: plugins/Oculars/src/Oculars.cpp:1310
 #: plugins/Oculars/src/ui_ocularDialog.h:1053
 msgid "Ocular view"
 msgstr "Paparan okular"
 
-#: plugins/Oculars/src/Oculars.cpp:1329
+#: plugins/Oculars/src/Oculars.cpp:1327
 msgid "Oculars popup menu"
 msgstr "Menu timbul okular"
 
-#: plugins/Oculars/src/Oculars.cpp:1330
+#: plugins/Oculars/src/Oculars.cpp:1328
 msgid "Show crosshairs"
 msgstr "Papar rerambut silang"
 
-#: plugins/Oculars/src/Oculars.cpp:1331
+#: plugins/Oculars/src/Oculars.cpp:1329
 msgid "Image sensor frame"
 msgstr "Bingkai penderia imej"
 
-#: plugins/Oculars/src/Oculars.cpp:1332
+#: plugins/Oculars/src/Oculars.cpp:1330
 msgid "Telrad sight"
 msgstr "Pandangan telrad"
 
-#: plugins/Oculars/src/Oculars.cpp:1333
+#: plugins/Oculars/src/Oculars.cpp:1331
 msgid "Oculars plugin configuration"
 msgstr "Konfigurasi pemalam okular"
 
-#: plugins/Oculars/src/Oculars.cpp:1335
+#: plugins/Oculars/src/Oculars.cpp:1333
 msgid "Select next telescope"
 msgstr "Pilih teleskop berikutnya"
 
-#: plugins/Oculars/src/Oculars.cpp:1337
+#: plugins/Oculars/src/Oculars.cpp:1335
 msgid "Select previous telescope"
 msgstr "Pilih teleskop terdahulu"
 
-#: plugins/Oculars/src/Oculars.cpp:1339
+#: plugins/Oculars/src/Oculars.cpp:1337
 msgid "Select next eyepiece"
 msgstr "Pilih kanta mata berikutnya"
 
-#: plugins/Oculars/src/Oculars.cpp:1341
+#: plugins/Oculars/src/Oculars.cpp:1339
 msgid "Select previous eyepiece"
 msgstr "Pilih kanta mata terdahulu"
 
-#: plugins/Oculars/src/Oculars.cpp:1582
+#: plugins/Oculars/src/Oculars.cpp:1575
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:500
 #, qt-format
 msgid "Ocular #%1"
 msgstr "Okular #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:1587
+#: plugins/Oculars/src/Oculars.cpp:1580
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:504
 #, qt-format
 msgid "Ocular #%1: %2"
 msgstr "Okular #%1: %2"
 
 #. TRANSLATORS: FL = Focal length
-#: plugins/Oculars/src/Oculars.cpp:1601
+#: plugins/Oculars/src/Oculars.cpp:1594
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:541
 #, qt-format
 msgid "Ocular FL: %1 mm"
 msgstr "JF Ocular: %1 mm"
 
 #. TRANSLATORS: aFOV = apparent field of view
-#: plugins/Oculars/src/Oculars.cpp:1608
+#: plugins/Oculars/src/Oculars.cpp:1601
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:551
 #, qt-format
 msgid "Ocular aFOV: %1"
 msgstr "aFOV Ocular: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1620
+#: plugins/Oculars/src/Oculars.cpp:1613
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:581
 #, qt-format
 msgid "Lens #%1"
 msgstr "Kanta #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:1624
+#: plugins/Oculars/src/Oculars.cpp:1617
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:585
 #, qt-format
 msgid "Lens #%1: %2"
 msgstr "Kanta #%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:1629
+#: plugins/Oculars/src/Oculars.cpp:1622
 msgid "Lens: none"
 msgstr "Kanta: tiada"
 
-#: plugins/Oculars/src/Oculars.cpp:1639 plugins/Oculars/src/Oculars.cpp:1696
+#: plugins/Oculars/src/Oculars.cpp:1632 plugins/Oculars/src/Oculars.cpp:1689
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:738
 #, qt-format
 msgid "Telescope #%1"
 msgstr "Teleskop #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:1644 plugins/Oculars/src/Oculars.cpp:1701
+#: plugins/Oculars/src/Oculars.cpp:1637 plugins/Oculars/src/Oculars.cpp:1694
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:742
 #, qt-format
 msgid "Telescope #%1: %2"
 msgstr "Teleskop #%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:1655
+#: plugins/Oculars/src/Oculars.cpp:1648
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:818
 #, qt-format
 msgid "Magnification: %1"
 msgstr "Pembesaran: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1663
+#: plugins/Oculars/src/Oculars.cpp:1656
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:827
 #, qt-format
 msgid "FOV: %1"
 msgstr "FOV: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1673
+#: plugins/Oculars/src/Oculars.cpp:1666
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:683
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:780
 #, qt-format
 msgid "Dimensions: %1"
 msgstr "Dimensi: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1678
+#: plugins/Oculars/src/Oculars.cpp:1671
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:643
 #, qt-format
 msgid "Sensor #%1"
 msgstr "Penderia #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:1682
+#: plugins/Oculars/src/Oculars.cpp:1675
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:647
 #, qt-format
 msgid "Sensor #%1: %2"
 msgstr "Penderia #%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:1940
+#: plugins/Oculars/src/Oculars.cpp:1933
 msgid "&Lens"
 msgstr "K&anta"
 
-#: plugins/Oculars/src/Oculars.cpp:1941
+#: plugins/Oculars/src/Oculars.cpp:1934
 msgid "&Previous lens"
 msgstr "Kanta t&erdahulu"
 
-#: plugins/Oculars/src/Oculars.cpp:1942
+#: plugins/Oculars/src/Oculars.cpp:1935
 msgid "&Next lens"
 msgstr "Kanta &berikutnya"
 
-#: plugins/Oculars/src/Oculars.cpp:1972
+#: plugins/Oculars/src/Oculars.cpp:1965
 msgid "&Telescope"
 msgstr "&Teleskop"
 
-#: plugins/Oculars/src/Oculars.cpp:1973
+#: plugins/Oculars/src/Oculars.cpp:1966
 msgid "&Previous telescope"
 msgstr "Teleskop &terdahulu"
 
-#: plugins/Oculars/src/Oculars.cpp:1974
+#: plugins/Oculars/src/Oculars.cpp:1967
 msgid "&Next telescope"
 msgstr "Teleskop &berikutnya"
 
@@ -5734,7 +5791,7 @@ msgid "Vertical flip"
 msgstr "Kalih menegak"
 
 #: plugins/Satellites/src/Satellites.cpp:67
-#: plugins/Satellites/src/Satellites.cpp:142
+#: plugins/Satellites/src/Satellites.cpp:141
 #: plugins/Satellites/src/ui_satellitesDialog.h:748
 msgid "Satellites"
 msgstr "Satelit"
@@ -5747,154 +5804,154 @@ msgstr ""
 "Ramalan kedudukan satelit tiruan didalam orbit Bumi yang berpandukan data "
 "TLE NORAD"
 
-#: plugins/Satellites/src/Satellites.cpp:143
+#: plugins/Satellites/src/Satellites.cpp:142
 msgid "Satellite hints"
 msgstr "Pembayang satelit"
 
-#: plugins/Satellites/src/Satellites.cpp:144
+#: plugins/Satellites/src/Satellites.cpp:143
 msgid "Satellite labels"
 msgstr "Label satelit"
 
-#: plugins/Satellites/src/Satellites.cpp:145
+#: plugins/Satellites/src/Satellites.cpp:144
 msgid "Satellites configuration window"
 msgstr "Tetingkap konfigurasi satelit"
 
-#: plugins/Satellites/src/Satellites.cpp:177
+#: plugins/Satellites/src/Satellites.cpp:176
 msgid ""
 "The old satellites.json file is no longer compatible - using default file"
 msgstr "Fail satelit.json lama tidak lagi serasi - menggunakan fail lalai"
 
 #. TRANSLATORS: Satellite group: Bright/naked-eye-visible satellites
-#: plugins/Satellites/src/Satellites.cpp:1676
+#: plugins/Satellites/src/Satellites.cpp:1675
 msgid "visual"
 msgstr "visual"
 
 #. TRANSLATORS: Satellite group: Scientific satellites
-#: plugins/Satellites/src/Satellites.cpp:1678
+#: plugins/Satellites/src/Satellites.cpp:1677
 msgid "scientific"
 msgstr "saintifik"
 
 #. TRANSLATORS: Satellite group: Communication satellites
-#: plugins/Satellites/src/Satellites.cpp:1680
+#: plugins/Satellites/src/Satellites.cpp:1679
 msgid "communications"
 msgstr "komunikasi"
 
 #. TRANSLATORS: Satellite group: Navigation satellites
-#: plugins/Satellites/src/Satellites.cpp:1682
+#: plugins/Satellites/src/Satellites.cpp:1681
 msgid "navigation"
 msgstr "navigasi"
 
 #. TRANSLATORS: Satellite group: Amateur radio (ham) satellites
-#: plugins/Satellites/src/Satellites.cpp:1684
+#: plugins/Satellites/src/Satellites.cpp:1683
 msgid "amateur"
 msgstr "amatur"
 
 #. TRANSLATORS: Satellite group: Weather (meteorological) satellites
-#: plugins/Satellites/src/Satellites.cpp:1686
+#: plugins/Satellites/src/Satellites.cpp:1685
 msgid "weather"
 msgstr "cuaca"
 
 #. TRANSLATORS: Satellite group: Satellites in geostationary orbit
-#: plugins/Satellites/src/Satellites.cpp:1688
+#: plugins/Satellites/src/Satellites.cpp:1687
 msgid "geostationary"
 msgstr "geopegun"
 
 #. TRANSLATORS: Satellite group: Satellites that are no longer functioning
-#: plugins/Satellites/src/Satellites.cpp:1690
+#: plugins/Satellites/src/Satellites.cpp:1689
 msgid "non-operational"
 msgstr "tidak-berfungsi"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GPS constellation (the Global Positioning System)
-#: plugins/Satellites/src/Satellites.cpp:1692
+#: plugins/Satellites/src/Satellites.cpp:1691
 msgid "gps"
 msgstr "gps"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Iridium constellation (Iridium is a proper name)
-#: plugins/Satellites/src/Satellites.cpp:1694
+#: plugins/Satellites/src/Satellites.cpp:1693
 msgid "iridium"
 msgstr "iridium"
 
 #. TRANSLATORS: Satellite description. "Hubble" is a person's name.
-#: plugins/Satellites/src/Satellites.cpp:1705
+#: plugins/Satellites/src/Satellites.cpp:1704
 msgid "The Hubble Space Telescope"
 msgstr "Teleskop Angkasa Hubble"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:1707
+#: plugins/Satellites/src/Satellites.cpp:1706
 msgid "The International Space Station"
 msgstr "Stesen Angkasa Antarabangsa"
 
-#: plugins/Satellites/src/Satellite.cpp:239
-#: plugins/Satellites/src/Satellite.cpp:243
+#: plugins/Satellites/src/Satellite.cpp:238
+#: plugins/Satellites/src/Satellite.cpp:242
 msgid "Catalog #"
 msgstr "Katalog #"
 
-#: plugins/Satellites/src/Satellite.cpp:245
+#: plugins/Satellites/src/Satellite.cpp:244
 msgid "International Designator"
 msgstr "Pereka Antarabangsa"
 
-#: plugins/Satellites/src/Satellite.cpp:252
+#: plugins/Satellites/src/Satellite.cpp:251
 msgid "artificial satellite"
 msgstr "satelit tiruan"
 
-#: plugins/Satellites/src/Satellite.cpp:257
+#: plugins/Satellites/src/Satellite.cpp:256
 #, qt-format
 msgid "Approx. magnitude: <b>%1</b>"
 msgstr "Magnitud anggaran: <b>%1</b>"
 
 #. TRANSLATORS: Slant range: distance between the satellite and the observer
-#: plugins/Satellites/src/Satellite.cpp:267
+#: plugins/Satellites/src/Satellite.cpp:266
 #, qt-format
 msgid "Range (km): %1"
 msgstr "Julat (km): %1"
 
 #. TRANSLATORS: Rate at which the distance changes
-#: plugins/Satellites/src/Satellite.cpp:270
+#: plugins/Satellites/src/Satellite.cpp:269
 #, qt-format
 msgid "Range rate (km/s): %1"
 msgstr "Kadar julat (km/s): %1"
 
 #. TRANSLATORS: Satellite altitude
-#: plugins/Satellites/src/Satellite.cpp:273
+#: plugins/Satellites/src/Satellite.cpp:272
 #, qt-format
 msgid "Altitude (km): %1"
 msgstr "Altitud (km): %1"
 
 #. TRANSLATORS: %1 and %3 are numbers, %2 and %4 - degree signs.
-#: plugins/Satellites/src/Satellite.cpp:276
+#: plugins/Satellites/src/Satellite.cpp:275
 #, qt-format
 msgid "SubPoint (Lat./Long.): %1%2/%3%4"
 msgstr "Sub-Titik (Lat./Long.): %1%2/%3%4"
 
 #. TRANSLATORS: TEME is an Earth-centered inertial coordinate system
-#: plugins/Satellites/src/Satellite.cpp:290
+#: plugins/Satellites/src/Satellite.cpp:289
 #, qt-format
 msgid "TEME coordinates (km): %1"
 msgstr "Koordinat EME (km): %1"
 
 #. TRANSLATORS: TEME is an Earth-centered inertial coordinate system
-#: plugins/Satellites/src/Satellite.cpp:298
+#: plugins/Satellites/src/Satellite.cpp:297
 #, qt-format
 msgid "TEME velocity (km/s): %1"
 msgstr "Kelajuan TEME (km/s): %1"
 
-#: plugins/Satellites/src/Satellite.cpp:306
+#: plugins/Satellites/src/Satellite.cpp:305
 msgid "The satellite and the observer are in sunlight."
 msgstr "Satelit dan pemerhati dalam sinaran matahari."
 
-#: plugins/Satellites/src/Satellite.cpp:309
+#: plugins/Satellites/src/Satellite.cpp:308
 msgid "The satellite is visible."
 msgstr "Satelit kelihatan."
 
-#: plugins/Satellites/src/Satellite.cpp:312
+#: plugins/Satellites/src/Satellite.cpp:311
 msgid "The satellite is eclipsed."
 msgstr "Satelit bergerak secara elips."
 
-#: plugins/Satellites/src/Satellite.cpp:315
+#: plugins/Satellites/src/Satellite.cpp:314
 msgid "The satellite is not visible"
 msgstr "Satelit tidak kelihatan"
 
-#: plugins/Satellites/src/Satellite.cpp:340
+#: plugins/Satellites/src/Satellite.cpp:339
 #, qt-format
 msgid "%1 MHz (%2%3 kHz)"
 msgstr "%1 MHz (%2%3 kHz)"
@@ -6040,7 +6097,7 @@ msgstr "Rujuk %1 dokumen ini %2 untuk perincian."
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:158
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:174
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:219
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:303
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:302
 msgid "Internet updates disabled"
 msgstr "Kemaskini Internet dilumpuhkan"
 
@@ -6056,8 +6113,8 @@ msgstr "Kemaskini Internet dilumpuhkan"
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:234
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:221
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:283
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:305
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:333
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:304
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:332
 msgid "Updating now..."
 msgstr "Mengemaskini sekarang..."
 
@@ -6067,7 +6124,7 @@ msgstr "Mengemaskini sekarang..."
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:162
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:178
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:223
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:307
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:306
 msgid "Next update: < 1 minute"
 msgstr "Kemaskini Berikutnya: < 1 minit"
 
@@ -6077,7 +6134,7 @@ msgstr "Kemaskini Berikutnya: < 1 minit"
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:164
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:180
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:225
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:309
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:308
 #, qt-format
 msgid "Next update: %1 minutes"
 msgstr "Kemaskini Berikutnya: %1 minit"
@@ -6088,7 +6145,7 @@ msgstr "Kemaskini Berikutnya: %1 minit"
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:166
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:182
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:227
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:311
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:310
 #, qt-format
 msgid "Next update: %1 hours"
 msgstr "Kemaskini Berikutnya: %1 jam"
@@ -6099,7 +6156,7 @@ msgstr "Kemaskini Berikutnya: %1 jam"
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:215
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:237
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:286
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:336
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:335
 msgid "Update error"
 msgstr "Ralat kemaskini"
 
@@ -6129,7 +6186,7 @@ msgstr "[sumber baru]"
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:271
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:272
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:311
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:324
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:323
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:519
 msgid "Update now"
 msgstr "Kemaskini sekarang"
@@ -6404,9 +6461,9 @@ msgid "Discard"
 msgstr "Singkir"
 
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:78
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:164
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:170
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:179
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:163
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:169
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:178
 msgid "Telescope Control"
 msgstr "Kawal Teleskop"
 
@@ -6418,21 +6475,21 @@ msgstr ""
 "Pemalam ini membenarkan Stellarium menghantar perintah \"pusing\" ke "
 "teleskop melalui lekapan berkomputer (\"Pergi Ke teleskop\")."
 
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:163
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:217
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:162
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:216
 #, qt-format
 msgid "Move telescope #%1 to selected object"
 msgstr "Alih teleskop #%1 ke objek pilihan"
 
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:169
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:221
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:168
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:220
 #, qt-format
 msgid "Move telescope #%1 to the point currently in the center of the screen"
 msgstr ""
 "Alih teleskop #%1 jw titik yang mana buat masa ini berada ditengah-tengah "
 "skrin"
 
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:179
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:178
 msgid "Move a telescope to a given set of coordinates"
 msgstr "Alih teleskop ke kedudukan koordinat yang diberikan"
 
@@ -6834,73 +6891,73 @@ msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:242
 #: plugins/Supernovae/src/Supernovae.cpp:719 plugins/Novae/src/Novae.cpp:716
-#: plugins/MeteorShowers/src/MeteorShower.cpp:175
+#: plugins/MeteorShowers/src/MeteorShower.cpp:188
 msgid "January"
 msgstr "Januari"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:243
 #: plugins/Supernovae/src/Supernovae.cpp:719 plugins/Novae/src/Novae.cpp:716
-#: plugins/MeteorShowers/src/MeteorShower.cpp:176
+#: plugins/MeteorShowers/src/MeteorShower.cpp:189
 msgid "February"
 msgstr "Februari"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:244
 #: plugins/Supernovae/src/Supernovae.cpp:719 plugins/Novae/src/Novae.cpp:716
-#: plugins/MeteorShowers/src/MeteorShower.cpp:177
+#: plugins/MeteorShowers/src/MeteorShower.cpp:190
 msgid "March"
 msgstr "Mac"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:245
 #: plugins/Supernovae/src/Supernovae.cpp:719 plugins/Novae/src/Novae.cpp:716
-#: plugins/MeteorShowers/src/MeteorShower.cpp:178
+#: plugins/MeteorShowers/src/MeteorShower.cpp:191
 msgid "April"
 msgstr "April"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:246
 #: plugins/Supernovae/src/Supernovae.cpp:719 plugins/Novae/src/Novae.cpp:716
-#: plugins/MeteorShowers/src/MeteorShower.cpp:179
+#: plugins/MeteorShowers/src/MeteorShower.cpp:192
 msgid "May"
 msgstr "Mei"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:247
 #: plugins/Supernovae/src/Supernovae.cpp:719 plugins/Novae/src/Novae.cpp:716
-#: plugins/MeteorShowers/src/MeteorShower.cpp:180
+#: plugins/MeteorShowers/src/MeteorShower.cpp:193
 msgid "June"
 msgstr "Jun"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:248
 #: plugins/Supernovae/src/Supernovae.cpp:719 plugins/Novae/src/Novae.cpp:716
-#: plugins/MeteorShowers/src/MeteorShower.cpp:181
+#: plugins/MeteorShowers/src/MeteorShower.cpp:194
 msgid "July"
 msgstr "Julai"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:249
 #: plugins/Supernovae/src/Supernovae.cpp:719 plugins/Novae/src/Novae.cpp:716
-#: plugins/MeteorShowers/src/MeteorShower.cpp:182
+#: plugins/MeteorShowers/src/MeteorShower.cpp:195
 msgid "August"
 msgstr "Ogos"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:250
 #: plugins/Supernovae/src/Supernovae.cpp:719 plugins/Novae/src/Novae.cpp:716
-#: plugins/MeteorShowers/src/MeteorShower.cpp:183
+#: plugins/MeteorShowers/src/MeteorShower.cpp:196
 msgid "September"
 msgstr "September"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:251
 #: plugins/Supernovae/src/Supernovae.cpp:719 plugins/Novae/src/Novae.cpp:716
-#: plugins/MeteorShowers/src/MeteorShower.cpp:184
+#: plugins/MeteorShowers/src/MeteorShower.cpp:197
 msgid "October"
 msgstr "Oktober"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:252
 #: plugins/Supernovae/src/Supernovae.cpp:719 plugins/Novae/src/Novae.cpp:716
-#: plugins/MeteorShowers/src/MeteorShower.cpp:185
+#: plugins/MeteorShowers/src/MeteorShower.cpp:198
 msgid "November"
 msgstr "November"
 
 #: plugins/TimeZoneConfiguration/src/gui/DefineTimeZoneWindow.cpp:253
 #: plugins/Supernovae/src/Supernovae.cpp:719 plugins/Novae/src/Novae.cpp:716
-#: plugins/MeteorShowers/src/MeteorShower.cpp:186
+#: plugins/MeteorShowers/src/MeteorShower.cpp:199
 msgid "December"
 msgstr "Disember"
 
@@ -7652,7 +7709,7 @@ msgid "Bright Novae configuration window"
 msgstr "Tetingkap konfigurasi Nova cerah"
 
 #: plugins/Novae/src/Nova.cpp:135 plugins/Pulsars/src/Pulsar.cpp:168
-#: plugins/MeteorShowers/src/MeteorShower.cpp:331
+#: plugins/MeteorShowers/src/MeteorShower.cpp:344
 #, qt-format
 msgid "Type: <b>%1</b> (%2)"
 msgstr "Jenis: <b>%1</b> (%2)"
@@ -8203,7 +8260,7 @@ msgstr ""
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:147
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:291
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:290
 #, qt-format
 msgid ""
 "If you want to read full information about the plugin, its history and "
@@ -8416,11 +8473,11 @@ msgctxt "tab in plugin windows"
 msgid "Websites"
 msgstr "Laman Sesawang"
 
-#: plugins/Observability/src/Observability.cpp:66
+#: plugins/Observability/src/Observability.cpp:67
 msgid "Observability Analysis"
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:69
+#: plugins/Observability/src/Observability.cpp:70
 msgid ""
 "Displays an analysis of a selected object's observability (rise, set, and "
 "transit times) for the current date, as well as when it is observable "
@@ -8431,196 +8488,196 @@ msgid ""
 "configuration window.)"
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:169
+#: plugins/Observability/src/Observability.cpp:170
 msgctxt "short month name"
 msgid "Jan"
 msgstr "Jan"
 
-#: plugins/Observability/src/Observability.cpp:170
+#: plugins/Observability/src/Observability.cpp:171
 msgctxt "short month name"
 msgid "Feb"
 msgstr "Feb"
 
-#: plugins/Observability/src/Observability.cpp:171
+#: plugins/Observability/src/Observability.cpp:172
 msgctxt "short month name"
 msgid "Mar"
 msgstr "Mac"
 
-#: plugins/Observability/src/Observability.cpp:172
+#: plugins/Observability/src/Observability.cpp:173
 msgctxt "short month name"
 msgid "Apr"
 msgstr "Apr"
 
-#: plugins/Observability/src/Observability.cpp:173
+#: plugins/Observability/src/Observability.cpp:174
 msgctxt "short month name"
 msgid "May"
 msgstr "Mei"
 
-#: plugins/Observability/src/Observability.cpp:174
+#: plugins/Observability/src/Observability.cpp:175
 msgctxt "short month name"
 msgid "Jun"
 msgstr "Jun"
 
-#: plugins/Observability/src/Observability.cpp:175
+#: plugins/Observability/src/Observability.cpp:176
 msgctxt "short month name"
 msgid "Jul"
 msgstr "Jul"
 
-#: plugins/Observability/src/Observability.cpp:176
+#: plugins/Observability/src/Observability.cpp:177
 msgctxt "short month name"
 msgid "Aug"
 msgstr "Ogs"
 
-#: plugins/Observability/src/Observability.cpp:177
+#: plugins/Observability/src/Observability.cpp:178
 msgctxt "short month name"
 msgid "Sep"
 msgstr "Sep"
 
-#: plugins/Observability/src/Observability.cpp:178
+#: plugins/Observability/src/Observability.cpp:179
 msgctxt "short month name"
 msgid "Oct"
 msgstr "Okt"
 
-#: plugins/Observability/src/Observability.cpp:179
+#: plugins/Observability/src/Observability.cpp:180
 msgctxt "short month name"
 msgid "Nov"
 msgstr "Nov"
 
-#: plugins/Observability/src/Observability.cpp:180
+#: plugins/Observability/src/Observability.cpp:181
 msgctxt "short month name"
 msgid "Dec"
 msgstr "Dis"
 
 #. TRANSLATORS: Short for "hours".
-#: plugins/Observability/src/Observability.cpp:183
+#: plugins/Observability/src/Observability.cpp:184
 msgid "h"
 msgstr "j"
 
 #. TRANSLATORS: Short for "minutes".
-#: plugins/Observability/src/Observability.cpp:185
+#: plugins/Observability/src/Observability.cpp:186
 msgid "m"
 msgstr "m"
 
 #. TRANSLATORS: Short for "seconds".
-#: plugins/Observability/src/Observability.cpp:187
+#: plugins/Observability/src/Observability.cpp:188
 msgid "s"
 msgstr "s"
 
-#: plugins/Observability/src/Observability.cpp:188
+#: plugins/Observability/src/Observability.cpp:189
 #, qt-format
 msgid "Sets at %1 (in %2)"
 msgstr "Terbenam pada %1 (pada %2)"
 
-#: plugins/Observability/src/Observability.cpp:189
+#: plugins/Observability/src/Observability.cpp:190
 #, qt-format
 msgid "Rose at %1 (%2 ago)"
 msgstr "Terbit pada %1 (%2 yang lalu)"
 
-#: plugins/Observability/src/Observability.cpp:190
+#: plugins/Observability/src/Observability.cpp:191
 #, qt-format
 msgid "Set at %1 (%2 ago)"
 msgstr "Terbenam pada %1 (%2 yang lalu)"
 
-#: plugins/Observability/src/Observability.cpp:191
+#: plugins/Observability/src/Observability.cpp:192
 #, qt-format
 msgid "Rises at %1 (in %2)"
 msgstr "Terbit pada %1 (dalam %2)"
 
-#: plugins/Observability/src/Observability.cpp:192
+#: plugins/Observability/src/Observability.cpp:193
 msgid "Circumpolar."
 msgstr "Keliling kutub."
 
-#: plugins/Observability/src/Observability.cpp:193
+#: plugins/Observability/src/Observability.cpp:194
 msgid "No rise."
 msgstr "Tiada terbit."
 
-#: plugins/Observability/src/Observability.cpp:194
+#: plugins/Observability/src/Observability.cpp:195
 #, qt-format
 msgid "Culminates at %1 (in %2) at %3 deg."
 msgstr "Berakhir pada %1 (dalam %2) pada %3 darj."
 
-#: plugins/Observability/src/Observability.cpp:195
+#: plugins/Observability/src/Observability.cpp:196
 #, qt-format
 msgid "Culminated at %1 (%2 ago) at %3 deg."
 msgstr "Berakhir pada %1 (%2 yang lalu) pada %3 darj."
 
-#: plugins/Observability/src/Observability.cpp:196
+#: plugins/Observability/src/Observability.cpp:197
 msgid "Source is not observable."
 msgstr "Sumber tidak boleh dicerap."
 
-#: plugins/Observability/src/Observability.cpp:197
+#: plugins/Observability/src/Observability.cpp:198
 msgid "No acronychal nor cosmical rise/set."
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:198
+#: plugins/Observability/src/Observability.cpp:199
 #, qt-format
 msgid "Greatest elongation: %1 (at %2 deg.)"
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:199
+#: plugins/Observability/src/Observability.cpp:200
 #, qt-format
 msgid "Largest Sun separation: %1 (at %2 deg.)"
 msgstr ""
 
 #. TRANSLATORS: The space at the end is significant - another sentence may follow.
-#: plugins/Observability/src/Observability.cpp:202
+#: plugins/Observability/src/Observability.cpp:203
 #, qt-format
 msgid "Acronychal rise/set: %1/%2. "
 msgstr ""
 
 #. TRANSLATORS: The space at the end is significant - another sentence may follow.
-#: plugins/Observability/src/Observability.cpp:204
+#: plugins/Observability/src/Observability.cpp:205
 msgid "No acronychal rise/set. "
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:205
+#: plugins/Observability/src/Observability.cpp:206
 #, qt-format
 msgid "Cosmical rise/set: %1/%2."
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:206
+#: plugins/Observability/src/Observability.cpp:207
 msgid "No cosmical rise/set."
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:207
+#: plugins/Observability/src/Observability.cpp:208
 msgid "Observable during the whole year."
 msgstr "Boleh dicerap sepanjang tahun."
 
-#: plugins/Observability/src/Observability.cpp:208
+#: plugins/Observability/src/Observability.cpp:209
 msgid "Not observable at dark night."
 msgstr "Tidak boleh dicerap pada waktu malam."
 
-#: plugins/Observability/src/Observability.cpp:209
+#: plugins/Observability/src/Observability.cpp:210
 #, qt-format
 msgid "Nights above horizon: %1"
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:210
+#: plugins/Observability/src/Observability.cpp:211
 msgid "TODAY:"
 msgstr "HARI INI:"
 
-#: plugins/Observability/src/Observability.cpp:211
+#: plugins/Observability/src/Observability.cpp:212
 msgid "THIS YEAR:"
 msgstr "TAHUN INI:"
 
 #. TRANSLATORS: The space at the end is significant - another sentence may follow.
-#: plugins/Observability/src/Observability.cpp:213
+#: plugins/Observability/src/Observability.cpp:214
 #, qt-format
 msgid "Previous Full Moon: %1 %2 at %3:%4. "
 msgstr "Bulan Purnama Terdahulu: %1 %2 pada %3: %4. "
 
-#: plugins/Observability/src/Observability.cpp:214
+#: plugins/Observability/src/Observability.cpp:215
 #, qt-format
 msgid "Next Full Moon: %1 %2 at %3:%4. "
 msgstr "Bulan Purnama Berikutnya: %1 %2 pada %3: %4. "
 
-#: plugins/Observability/src/Observability.cpp:229
 #: plugins/Observability/src/Observability.cpp:230
-#: plugins/Observability/src/Observability.cpp:234
+#: plugins/Observability/src/Observability.cpp:231
+#: plugins/Observability/src/Observability.cpp:235
 msgid "Observability"
 msgstr "Ketercerapan"
 
-#: plugins/Observability/src/Observability.cpp:235
+#: plugins/Observability/src/Observability.cpp:236
 msgid "Observability configuration window"
 msgstr "Tetingkap konfigurasi ketercerapan"
 
@@ -8993,542 +9050,542 @@ msgstr "Ubah isyarat persamaan"
 msgid "Font size:"
 msgstr "Saiz fon:"
 
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:71
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:171
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:63
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:163
 msgid "Meteor Showers"
-msgstr ""
+msgstr "Hujan Meteor"
 
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:74
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:259
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:66
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:258
 msgid ""
 "This plugin displays meteor showers and a marker for each active and "
 "inactive radiant, showing real information about its activity."
 msgstr ""
 
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:172
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:164
 msgid "Show meteor showers"
-msgstr ""
+msgstr "Tunjuk hujan meteor"
 
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:173
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:165
 msgid "Radiant labels"
-msgstr ""
+msgstr "Label radian"
 
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:174
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:166
 msgid "Meteor Shower configuration window"
-msgstr ""
+msgstr "Tetingkap konfigurasi Hujan Meteor"
 
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:201
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:193
 msgid ""
 "The old showers.json file is no longer compatible - using default file"
 msgstr ""
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1239
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1240
 msgid "Quadrantids"
 msgstr ""
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1241
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1242
 msgid "Lyrids"
-msgstr ""
+msgstr "Lyrids"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1243
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1244
 msgid "α-Centaurids"
-msgstr ""
+msgstr "α-Centaurids"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1245
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1246
 msgid "γ-Normids"
-msgstr ""
+msgstr "γ-Normids"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1247
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1248
 msgid "η-Aquariids"
-msgstr ""
+msgstr "η-Aquariids"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1249
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1250
 msgid "June Bootids"
-msgstr ""
+msgstr "June Bootids"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1251
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1252
 msgid "Piscis Austrinids"
-msgstr ""
+msgstr "Piscis Austrinids"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1253
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1254
 msgid "Southern δ-Aquariids"
-msgstr ""
+msgstr "δ-Aquariids Selatan"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1255
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1256
 msgid "α-Capricornids"
-msgstr ""
+msgstr "α-Capricornids"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1257
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1258
 msgid "α-Aurigids"
-msgstr ""
+msgstr "α-Aurigids"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1259
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1260
 msgid "September ε-Perseids"
-msgstr ""
+msgstr "ε-Perseids September"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1261
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1262
 msgid "Draconids"
-msgstr ""
+msgstr "Draconids"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1263
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1264
 msgid "Leonids"
-msgstr ""
+msgstr "Leonids"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1265
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1266
 msgid "Phoenicids"
-msgstr ""
+msgstr "Phoenicids"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1267
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1268
 msgid "Puppid-Velids"
-msgstr ""
+msgstr "Puppid-Velids"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1269
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1270
 msgid "Ursids"
-msgstr ""
+msgstr "Ursids"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1271
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1272
 msgid "Perseids"
-msgstr ""
+msgstr "Perseids"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1273
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1274
 msgid "δ-Leonids"
-msgstr ""
+msgstr "δ-Leonids"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1275
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1276
 msgid "π-Puppids"
-msgstr ""
+msgstr "π-Puppids"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1277
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1278
 msgid "June Lyrids"
-msgstr ""
+msgstr "Lyrids Jun"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1279
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1280
 msgid "κ-Cygnids"
-msgstr ""
+msgstr "κ-Cygnids"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1281
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1282
 msgid "ε-Lyrids"
-msgstr ""
+msgstr "ε-Lyrids"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1283
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1284
 msgid "δ-Aurigids"
-msgstr ""
+msgstr "δ-Aurigids"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1285
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1286
 msgid "ε-Geminids"
-msgstr ""
+msgstr "ε-Geminids"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1287
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1288
 msgid "Southern Taurids"
-msgstr ""
+msgstr "Taurids Selatan"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1289
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1290
 msgid "Northern Taurids"
-msgstr ""
+msgstr "Taurids Utara"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1291
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1292
 msgid "Monocerotids"
-msgstr ""
+msgstr "Monocerotids"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1293
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1294
 msgid "α-Monocerotids"
-msgstr ""
+msgstr "α-Monocerotids"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1295
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1296
 msgid "σ-Hydrids"
-msgstr ""
+msgstr "σ-Hydrids"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1297
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1298
 msgid "Geminids"
-msgstr ""
+msgstr "Geminids"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1299
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1300
 msgid "Leonis Minorids"
-msgstr ""
+msgstr "Leonis Minorids"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1301
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1302
 msgid "December Leonis Minorids"
-msgstr ""
+msgstr "Leonis Minorids Disember"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1303
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1304
 msgid "Comae Berenicids"
-msgstr ""
+msgstr "Comae Berenicids"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1305
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1306
 msgid "Orionids"
-msgstr ""
+msgstr "Orionids"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1307
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1308
 msgid "Andromedids"
-msgstr ""
+msgstr "Andromedids"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1309
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1310
 msgid "η-Lyrids"
-msgstr ""
+msgstr "η-Lyrids"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1311
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1312
 msgid "α-Scorpiids"
-msgstr ""
+msgstr "α-Scorpiids"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1313
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1314
 msgid "Ophiuchids"
-msgstr ""
+msgstr "Ophiuchids"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1315
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1316
 msgid "θ-Ophiuchids"
-msgstr ""
+msgstr "θ-Ophiuchids"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1317
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1318
 msgid "κ-Serpentids"
-msgstr ""
+msgstr "κ-Serpentids"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1319
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1320
 msgid "θ-Centaurids"
-msgstr ""
+msgstr "θ-Centaurids"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1321
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1322
 msgid "ω-Cetids"
-msgstr ""
+msgstr "ω-Cetids"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1323
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1324
 msgid "Southern ω-Scorpiids"
-msgstr ""
+msgstr "ω-Scorpiids Selatan"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1325
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1326
 msgid "Northern ω-Scorpiids"
-msgstr ""
+msgstr "ω-Scorpiids Utara"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1327
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1328
 msgid "Arietids"
-msgstr ""
+msgstr "Arietids"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1329
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1330
 msgid "π-Cetids"
-msgstr ""
+msgstr "π-Cetids"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1331
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1332
 msgid "δ-Cancrids"
-msgstr ""
+msgstr "δ-Cancrids"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1333
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1334
 msgid "τ-Herculids"
-msgstr ""
+msgstr "τ-Herculids"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1335
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1336
 msgid "ρ-Geminids"
-msgstr ""
+msgstr "ρ-Geminids"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1337
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1338
 msgid "η-Carinids"
-msgstr ""
+msgstr "η-Carinids"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1339
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1340
 msgid "η-Craterids"
-msgstr ""
+msgstr "η-Craterids"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1341
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1342
 msgid "π-Virginids"
-msgstr ""
+msgstr "π-Virginids"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1343
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1344
 msgid "θ-Virginids"
-msgstr ""
+msgstr "θ-Virginids"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1345
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1346
 msgid "May Librids"
-msgstr ""
+msgstr "Librids Mei"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1347
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1348
 msgid "June Scutids"
-msgstr ""
+msgstr "Scutids Jun"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1349
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1350
 msgid "α-Pisces Australids"
-msgstr ""
+msgstr "α-Pisces Australids"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1351
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1352
 msgid "Southern ι-Aquariids"
-msgstr ""
+msgstr "ι-Aquariids Selatan"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1353
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1354
 msgid "Northern ι-Aquariids"
-msgstr ""
+msgstr "ι-Aquariids Utara"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1355
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1356
 msgid "γ-Aquariids"
-msgstr ""
+msgstr "γ-Aquariids"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1357
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1358
 msgid "Autumn Arietids"
-msgstr ""
+msgstr "Arietids Musim Luruh"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1359
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1360
 msgid "χ-Orionids"
-msgstr ""
+msgstr "χ-Orionids"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1363
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1364
 msgid "Comet 1P/Halley"
-msgstr ""
+msgstr "Komet 1P/Halley"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1365
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1366
 msgid "Comet 7P/Pons-Winnecke"
-msgstr ""
+msgstr "Komet 7P/Pons-Winnecke"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1367
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1368
 msgid "Comet 55P/Tempel-Tuttle"
-msgstr ""
+msgstr "Komet 55P/Tempel-Tuttle"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1369
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1370
 msgid "Comet 96P/Machholz"
-msgstr ""
+msgstr "Komet 96P/Machholz"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1371
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1372
 msgid "Comet 109P/Swift-Tuttle"
-msgstr ""
+msgstr "Komet 109P/Swift-Tuttle"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1373
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1374
 msgid "Comet Thatcher (1861 I)"
-msgstr ""
+msgstr "Komet Thatcher (1861 I)"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1375
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1376
 msgid "Comet 26P/Grigg-Skjellerup"
-msgstr ""
+msgstr "Komet 26P/Grigg-Skjellerup"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1377
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1378
 msgid "Comet 21P/Giacobini-Zinner"
-msgstr ""
+msgstr "Komet 21P/Giacobini-Zinner"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1379
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1380
 msgid "Comet 169P/NEAT"
-msgstr ""
+msgstr "Komet 169P/NEAT"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1381
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1382
 msgid "Comet 289P/Blanpain"
-msgstr ""
+msgstr "Komet 289P/Blanpain"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1383
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1384
 msgid "Comet 8P/Tuttle"
-msgstr ""
+msgstr "Komet 8P/Tuttle"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1385
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1386
 msgid "Comet 3D/Biela"
-msgstr ""
+msgstr "Komet 3D/Biela"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1387
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1388
 msgid "Comet C/1917 F1 (Mellish)"
-msgstr ""
+msgstr "Komet C/1917 F1 (Mellish)"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1389
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1390
 msgid "Comet C/1964 N1 (Ikeya)"
-msgstr ""
+msgstr "Komet C/1964 N1 (Ikeya)"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1391
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1392
 msgid "Comet Schwassmann-Wachmann 3"
-msgstr ""
+msgstr "Komet Schwassmann-Wachmann 3"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1393
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1394
 msgid "Minor planet 2003 EH1 and Comet C/1490 Y1"
 msgstr ""
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1395
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1396
 msgid "Minor planet (4450) Pan"
 msgstr ""
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1397
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1398
 msgid "Minor planet 2008 ED69"
 msgstr ""
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1399
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1400
 msgid "Comet 2P/Encke"
-msgstr ""
+msgstr "Komet 2P/Encke"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1401
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1402
 msgid "Minor planet 2004 TG10"
 msgstr ""
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1403
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1404
 msgid "Minor planet (3200) Phaethon"
 msgstr ""
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:312
+#: plugins/MeteorShowers/src/MeteorShower.cpp:325
 msgid "generic data"
-msgstr ""
+msgstr "data generik"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:314
+#: plugins/MeteorShowers/src/MeteorShower.cpp:327
 msgid "real data"
-msgstr ""
+msgstr "data sebenar"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:331
+#: plugins/MeteorShowers/src/MeteorShower.cpp:344
 msgid "meteor shower"
-msgstr ""
+msgstr "hujan meteor"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:340
+#: plugins/MeteorShowers/src/MeteorShower.cpp:353
 msgid "Radiant drift (per day)"
 msgstr ""
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:347
+#: plugins/MeteorShowers/src/MeteorShower.cpp:360
 #, qt-format
 msgid "Geocentric meteoric velocity: %1 km/s"
 msgstr ""
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:352
+#: plugins/MeteorShowers/src/MeteorShower.cpp:365
 #, qt-format
 msgid "The population index: %1"
-msgstr ""
+msgstr "Indeks populasi: %1"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:357
+#: plugins/MeteorShowers/src/MeteorShower.cpp:370
 #, qt-format
 msgid "Parent body: %1"
-msgstr ""
-
-#: plugins/MeteorShowers/src/MeteorShower.cpp:363
-msgid "Active"
-msgstr ""
-
-#: plugins/MeteorShowers/src/MeteorShower.cpp:371
-msgid "Activity"
-msgstr ""
+msgstr "Badan induk: %1"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:376
+msgid "Active"
+msgstr "Aktif"
+
+#: plugins/MeteorShowers/src/MeteorShower.cpp:384
+msgid "Activity"
+msgstr "Aktiviti"
+
+#: plugins/MeteorShowers/src/MeteorShower.cpp:389
 #, qt-format
 msgid "Maximum: %1"
-msgstr ""
+msgstr "Maksimum: %1"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:379
+#: plugins/MeteorShowers/src/MeteorShower.cpp:392
 msgid "Solar longitude is"
-msgstr ""
+msgstr "Longitud suria adalah"
 
-#: plugins/MeteorShowers/src/MeteorShower.cpp:388
+#: plugins/MeteorShowers/src/MeteorShower.cpp:401
 msgid "variable"
-msgstr ""
+msgstr "pembolehubah"
+
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:166
+msgid "ZHR"
+msgstr "ZHR"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:167
-msgid "ZHR"
-msgstr ""
+msgid "Data Type"
+msgstr "Jenis Data"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:168
-msgid "Data Type"
-msgstr ""
-
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:169
 msgid "Peak"
-msgstr ""
+msgstr "Puncak"
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:180
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:179
 msgid "Start date greater than end date!"
-msgstr ""
+msgstr "Tarikh mula lebih besar dari tarikh akhir!"
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:184
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:183
 msgid "Time interval must be less than one year!"
-msgstr ""
+msgstr "Sela masa mesti kurang dari satu tahun"
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:204
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:203
 msgid "Variable"
-msgstr ""
+msgstr "Pembolehubah"
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:207
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:206
 msgid "Real"
-msgstr ""
+msgstr "Nyata"
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:207
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:206
 msgid "Generic"
-msgstr ""
+msgstr "Generik"
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:254
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:253
 msgid "Meteor Showers Plug-in"
-msgstr ""
+msgstr "Pemalam Hujan Meteor"
+
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:259
+msgid "Terms"
+msgstr "Penggal"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:260
-msgid "Terms"
-msgstr ""
+msgid "Meteor shower"
+msgstr "Hujan meteor"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:261
-msgid "Meteor shower"
-msgstr ""
-
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:262
 msgid ""
 "A meteor shower is a celestial event in which a number of meteors are "
 "observed to radiate, or originate, from one point in the night sky. These "
@@ -9540,11 +9597,11 @@ msgid ""
 "1,000 meteors an hour."
 msgstr ""
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:263
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:262
 msgid "Radiant"
-msgstr ""
+msgstr "Radian"
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:264
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:263
 msgid ""
 "The radiant or apparent radiant of a meteor shower is the point in the sky, "
 "from which (to a planetary observer) meteors appear to originate. The "
@@ -9552,7 +9609,7 @@ msgid ""
 "the constellation of Perseus."
 msgstr ""
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:265
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:264
 msgid ""
 "An observer might see such a meteor anywhere in the sky but the direction of "
 "motion, when traced back, will point to the radiant. A meteor that does not "
@@ -9560,18 +9617,18 @@ msgid ""
 "and is not considered part of that shower."
 msgstr ""
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:266
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:265
 msgid ""
 "Many showers have a radiant point that changes position during the interval "
 "when it appears. For example, the radiant point for the Delta Aurigids "
 "drifts by more than a degree per night."
 msgstr ""
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:267
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:266
 msgid "Zenithal Hourly Rate (ZHR)"
 msgstr ""
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:268
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:267
 msgid ""
 "In astronomy, the Zenithal Hourly Rate (ZHR) of a meteor shower is the "
 "number of meteors a single observer would see in one hour under a clear, "
@@ -9580,11 +9637,11 @@ msgid ""
 "lower and decreases the closer the radiant is to the horizon."
 msgstr ""
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:269
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:268
 msgid "Population index"
-msgstr ""
+msgstr "Indeks populasi"
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:270
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:269
 msgid ""
 "The population index indicates the magnitude distribution of the meteor "
 "showers. The values below 2.5 correspond to distributions where bright "
@@ -9592,80 +9649,80 @@ msgid ""
 "share of faint meteors is larger than usual."
 msgstr ""
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:271
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:270
 msgid "Notes"
-msgstr ""
+msgstr "Catatan"
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:272
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:271
 msgid ""
 "This plugin was created as project of ESA Summer of Code in Space 2013."
 msgstr ""
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:273
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:272
 msgid "Info"
-msgstr ""
+msgstr "Maklumat"
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:274
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:273
 msgid "Info about meteor showers you can get here:"
-msgstr ""
+msgstr "Maklumat mengenai hujan meteor yang anda boleh dapatkan di sini:"
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:277
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:276
 #, qt-format
 msgid "%1Meteor shower%2 - article in Wikipedia"
-msgstr ""
+msgstr "%1Hujan meteor%2 - artikel dalam Wikipedia"
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:279
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:278
 #, qt-format
 msgid "%1International Meteor Organization%2"
-msgstr ""
+msgstr "%1International Meteor Organization%2"
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:343
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:342
 msgid "Meteor showers is updated"
-msgstr ""
+msgstr "Hujan meteor dikemaskini"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:512
 msgid "Meteor Showers Configuration"
-msgstr ""
+msgstr "Konfigurasi Hujan Meteor"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:513
 msgid "Meteor Showers Plug-in Configuration"
-msgstr ""
+msgstr "Konfigurasi Pemalam Hujan Meteor"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:515
 msgid "Update data from Internet"
-msgstr ""
+msgstr "Kemaskini data dari Internet"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:523
 msgid "Meteor showers"
-msgstr ""
+msgstr "Hujan meteor"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:524
 msgid "Show meteor showers button on toolbar"
-msgstr ""
+msgstr "Tunjuk butang hujan meteor dalam palang alat"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:525
 msgid "Enable display of meteor showers at startup"
-msgstr ""
+msgstr "Benarkan paparan hujan meteor ketika permulaan"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:529
 msgid "Color of radiants markers"
-msgstr ""
+msgstr "Warna penanda radian"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:531
 msgid "Active Radiant - Generic Data"
-msgstr ""
+msgstr "Radian Aktif - Data Generik"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:534
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:541
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:548
 msgid "Change Color"
-msgstr ""
+msgstr "Ubah Warna"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:538
 msgid "Inactive Radiant"
-msgstr ""
+msgstr "Radian Tidak Aktif"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:545
 msgid "Active Radiant - Real Data"
@@ -10474,8 +10531,29 @@ msgstr ""
 #~ msgid "Horizon altitude: 0 deg."
 #~ msgstr "Altitut ufuk: 0 darj."
 
+#~ msgid "Earth Events from Venus"
+#~ msgstr "Peristiwa Bumi menerusi Zuhrah"
+
 #~ msgid "1000"
 #~ msgstr "1000"
+
+#~ msgid "Earth and Mars Greatest Elongations from Jupiter"
+#~ msgstr "Pemanjangan Terhebat Bumi dan Marikh dari Musytari"
+
+#~ msgid ""
+#~ "Screensaver of various happenings in the Solar System. 187 events in all!"
+#~ msgstr ""
+#~ "Penyelamat skrin pelbagai peristiwa yang berlaku dalam Sistem Suria. 187 "
+#~ "peristiwa kesemuanya!"
+
+#~ msgid "Earth Greatest Elongations from Jupiter 2000-3000"
+#~ msgstr "Pemanjangan Terhebat Bumi dari Musytari 2000-3000"
+
+#~ msgid "Earth Greatest Elongations and Brilliancies from Mars 2000-3000"
+#~ msgstr "Pemanjangan dan Penonjolan Terhebat Bumi dari Marikh 2000-3000"
+
+#~ msgid "Earth Greatest Elongations and Brilliancies from Mars"
+#~ msgstr "Pemanjangan dan Penonjolan Terhebat Bumi dari Marikh"
 
 #~ msgid "IAU Comission 53: Extrasolar Planets"
 #~ msgstr "IAU Comission 53: Planet Luar Suria"
@@ -10486,7 +10564,3 @@ msgstr ""
 #~ msgstr ""
 #~ "Pemalam ini menanda 58 bintang bernavigasi bagi Pencari Bintang Kasar 2102-"
 #~ "D, juga ditabulasi dalam Nautical Almanac."
-
-#~ msgid ""
-#~ "Mark it if you want value of FOV is same like at the startup of Stellarium."
-#~ msgstr "Tanda ia jika anda mahu FOV sama seperti dipermulaan Stellarium."

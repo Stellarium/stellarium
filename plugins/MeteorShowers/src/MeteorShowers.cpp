@@ -1,4 +1,5 @@
 /*
+ * Stellarium: Meteor Showers Plug-in
  * Copyright (C) 2013 Marcos Cardinot
  * Copyright (C) 2011 Alexander Wolf
  *
@@ -17,22 +18,16 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#include <QColor>
-#include <QDebug>
 #include <QDir>
-#include <QFileInfo>
-#include <QList>
-#include <QNetworkAccessManager>
 #include <QNetworkReply>
-#include <QTimer>
 #include <QSettings>
+#include <QTimer>
 
 #include "LabelMgr.hpp"
 #include "LandscapeMgr.hpp"
-#include "MeteorShower.hpp"
-#include "MeteorShowers.hpp"
+#include "MeteorMgr.hpp"
 #include "MeteorShowerDialog.hpp"
-#include "MeteorStream.hpp"
+#include "MeteorShowers.hpp"
 #include "Planet.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
@@ -42,15 +37,12 @@
 #include "StelJsonParser.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelObjectMgr.hpp"
-#include "StelPainter.hpp"
 #include "StelProgressController.hpp"
-#include "StelProjector.hpp"
 #include "StelTextureMgr.hpp"
-#include "StelUtils.hpp"
 
 #define CATALOG_FORMAT_VERSION 1 /* Version of format of catalog */
 
-const double MeteorShowers::zhrToWsr = 1.6667f / 3600.f;
+const double MeteorShowers::zhrToWsr = MeteorMgr::zhrToWsr;
 
 /*
  This method is the one called automatically by the StelModuleMgr just
@@ -138,7 +130,7 @@ double MeteorShowers::getCallOrder(StelModuleActionName actionName) const
 {
 	if (actionName == StelModule::ActionDraw)
 	{
-		return StelApp::getInstance().getModuleMgr().getModule("MeteorMgr")->getCallOrder(actionName)+0;
+		return GETSTELMODULE(MeteorMgr)->getCallOrder(actionName)+10.;
 	}
 
 	return 0;
@@ -371,15 +363,11 @@ void MeteorShowers::drawPointer(StelCore* core, StelPainter& painter)
 
 void MeteorShowers::drawStream(StelCore* core, StelPainter& painter)
 {
-	LandscapeMgr* landmgr = (LandscapeMgr*)StelApp::getInstance().getModuleMgr().getModule("LandscapeMgr");
+	LandscapeMgr* landmgr = GETSTELMODULE(LandscapeMgr);
 	if (landmgr->getFlagAtmosphere() && landmgr->getLuminance()>5)
 	{
 		return;
 	}
-
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	glEnable(GL_BLEND);
-	painter.enableTexture2d(false);
 
 	int index = 0;
 	if (active.size() > 0)
@@ -388,7 +376,8 @@ void MeteorShowers::drawStream(StelCore* core, StelPainter& painter)
 		{
 			Q_UNUSED(a);
 			// step through and draw all active meteors
-			for (std::vector<MeteorStream*>::iterator iter = active[index].begin(); iter != active[index].end(); ++iter)
+			std::vector<MeteorStream*>::iterator iter;
+			for (iter = active[index].begin(); iter != active[index].end(); ++iter)
 			{
 				(*iter)->draw(core, painter);
 			}
@@ -480,6 +469,7 @@ void MeteorShowers::updateActiveInfo(void)
 					newData.finish = ms->finish;
 					newData.peak = ms->peak;
 					newData.status = ms->status;
+					newData.colors = ms->colors;
 					activeInfo.append(newData);
 				}
 				else //just overwrites
@@ -505,6 +495,20 @@ void MeteorShowers::update(double deltaTime)
 	}
 
 	StelCore* core = StelApp::getInstance().getCore();
+
+	double tspeed = core->getTimeRate()*86400;  // sky seconds per actual second
+	if (!tspeed) { // is paused?
+		return; // freeze meteors at the current position
+	}
+
+	deltaTime*=1000;
+	// if stellarium has been suspended, don't create huge number of meteors to
+	// make up for lost time!
+	if (deltaTime > 500)
+	{
+		deltaTime = 500;
+	}
+
 	QList<activeData> old_activeInfo;
 
 	//check if the sky date changed
@@ -546,8 +550,6 @@ void MeteorShowers::update(double deltaTime)
 		}
 	}
 
-	deltaTime*=1000;
-
 	std::vector<std::vector<MeteorStream*> >::iterator iterOut;
 	std::vector<MeteorStream*>::iterator iterIn;
 	index = 0;
@@ -578,30 +580,28 @@ void MeteorShowers::update(double deltaTime)
 	index = 0;
 	foreach (const activeData &current, activeInfo)
 	{
+		std::vector<MeteorStream*> aux;
+		if (active.empty() || active.size() < (unsigned) activeInfo.size())
+		{
+			if(tspeed<0 || fabs(tspeed)>1.)
+			{
+				activeInfo.removeAt(index);
+				continue; // don't create new meteors
+			}
+			active.push_back(aux);
+		}
+
 		int ZHR = calculateZHR(current.zhr,
 				       current.variable,
 				       current.start,
 				       current.finish,
 				       current.peak);
 
-		// if stellarium has been suspended, don't create huge number of meteors to
-		// make up for lost time!
-		if (deltaTime > 500)
-		{
-			deltaTime = 500;
-		}
-
 		// determine average meteors per frame needing to be created
 		int mpf = (int)((double)ZHR*zhrToWsr*deltaTime/1000.0 + 0.5);
 		if (mpf<1)
 		{
 			mpf = 1;
-		}
-
-		std::vector<MeteorStream*> aux;
-		if (active.empty() || active.size() < (unsigned) activeInfo.size())
-		{
-			active.push_back(aux);
 		}
 
 		for (int i=0; i<mpf; ++i)
@@ -614,7 +614,8 @@ void MeteorShowers::update(double deltaTime)
 								   current.speed,
 								   current.radiantAlpha,
 								   current.radiantDelta,
-								   current.pidx);
+								   current.pidx,
+								   current.colors);
 				active[index].push_back(m);
 			}
 		}

@@ -304,6 +304,9 @@ private:
 	// Used to collect wheel events
 	QTimer * wheelEventTimer;
 
+	// Accumulated horizontal and vertical wheel event deltas
+	int wheelEventDelta[2];
+
 	float fps;
 	int frame;
 	double timefr, timeBase;		// Used for fps counter

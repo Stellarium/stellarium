@@ -878,7 +878,6 @@ QString LandscapeMgr::installLandscapeFromArchive(QString sourceFilePath, const 
 		return QString();
 	}
 	destinationDir.cd(landscapeID);
-	QString destinationDirPath = destinationDir.absolutePath();
 	foreach(QZipReader::FileInfo info, infoList)
 	{
 		QFileInfo fileInfo(info.filePath);
@@ -886,9 +885,15 @@ QString LandscapeMgr::installLandscapeFromArchive(QString sourceFilePath, const 
 		{
 			QByteArray data = reader.fileData(info.filePath);
 			QFile out(destinationDir.filePath(fileInfo.fileName()));
-			out.open(QIODevice::WriteOnly);
-			out.write(data);
-			out.close();
+			if (out.open(QIODevice::WriteOnly))
+			{
+				out.write(data);
+				out.close();
+			}
+			else
+			{
+				qWarning() << "LandscapeMgr: cannot open " << QDir::toNativeSeparators(fileInfo.absoluteFilePath());
+			}
 		}
 	}
 	reader.close();

@@ -1,4 +1,5 @@
 /*
+ * Stellarium: Meteor Showers Plug-in
  * Copyright (C) 2013 Marcos Cardinot
  * Copyright (C) 2011 Alexander Wolf
  *
@@ -20,27 +21,16 @@
 #ifndef METEORSHOWERS_HPP_
 #define METEORSHOWERS_HPP_
 
+#include <QColor>
+
 #include "MeteorShower.hpp"
 #include "MeteorStream.hpp"
-#include "StelFader.hpp"
-#include "StelModule.hpp"
 #include "StelObjectModule.hpp"
-#include "StelTextureTypes.hpp"
 
-#include <QColor>
-#include <QDateTime>
-#include <QFont>
-#include <QSharedPointer>
-#include <QVariantMap>
-
+class MeteorShowerDialog;
 class QNetworkAccessManager;
 class QNetworkReply;
-class QProgressBar;
-class QSettings;
-class QTimer;
-class MeteorShowerDialog;
 class StelButton;
-class StelPainter;
 
 typedef QSharedPointer<MeteorShower> MeteorShowerP;
 
@@ -365,17 +355,18 @@ private:
 
 	typedef struct
 	{
-		QString showerID;	//! The ID of the meteor shower
-		QDateTime start;	//! First day for activity
-		QDateTime finish;	//! Latest day for activity
-		QDateTime peak;		//! Day with maximum for activity
-		int status;		//! 0:inactive 1:activeRealData 2:activeGenericData
-		int zhr;		//! ZHR of shower
-		QString variable;	//! value of variable for ZHR
-		int speed;		//! Speed of meteors
-		double radiantAlpha;    //! R.A. for radiant of meteor shower
-		double radiantDelta;    //! Dec. for radiant of meteor shower
-		float pidx;		//! Population index
+		QString showerID;		//! The ID of the meteor shower
+		QDateTime start;		//! First day for activity
+		QDateTime finish;		//! Latest day for activity
+		QDateTime peak;			//! Day with maximum for activity
+		int status;			//! 0:inactive 1:activeRealData 2:activeGenericData
+		int zhr;			//! ZHR of shower
+		QString variable;		//! value of variable for ZHR
+		int speed;			//! Speed of meteors
+		float radiantAlpha;		//! R.A. for radiant of meteor shower
+		float radiantDelta;		//! Dec. for radiant of meteor shower
+		float pidx;			//! Population index
+		QList<MeteorShower::colorPair> colors;	//! Population index
 	} activeData;
 
 	QList<activeData> activeInfo;	//! List of active meteors

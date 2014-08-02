@@ -1,3 +1,34 @@
+0.13.0 [2014-07-19]
+This version based on Qt 5 and has new modulated core, and new features (example: normal mapping) and fixes for 115 bugs, includes:
+New plugin: Equation of Time - provides solution for Equation of Time.
+New plugin: Field of View - provides shortcuts for quick changes field of view.
+New plugin: Navigational Stars - marks 58 navigational stars on the sky.
+New plugin: Pointer Coordinates - shows the coordinates of the mouse pointer.
+New plugin: Meteor Showers - provides visualization of meteor showers.
+New translatable strings and new textures.
+New version of the Satellites plugin: introduces star-like satellites and bug fixes.
+New version of the Exoplanets plugin: displaying of the potential habitable exoplanets; improvements for performance and code refactoring.
+New version of the Angle Measure plugin: displaying of the position angle.
+New version of the Quasars plugin: improvements for performance; added marker_color parameter.
+New version of the Pulsars plugin: improvements for performance; display pulsars with glitches; setting color for marker for different types of the pulsars.
+New versions of the Compass Marks, Oculars, Historical Supernovae, Observability analysis and Bright Novae plugins: bug fixing, code refactoring and improvements.
+
+Full list of changes: https://launchpad.net/stellarium/0.13/0.13.0
+
+0.12.4 [2013-09-26]
+Bugfix release.
+- fixed crash Stellarium when enabled binoculars in the Oculars plugin (LP: #1222742);
+- added render nighttime landscapes without lighting (LP: #1223052);
+
+0.12.3 [2013-09-08]
+Bugfix release with new plugin.
+- new plugin - Bright Novae;
+- added intermediate value to ZHR of shooting stars between 80 and 10000 (LP: #1208106);
+- fixed search tool (LP: #1208296, #1211198);
+- fixed behaviour for shortkeys of few plugins (LP: #1208291);
+- fixed Flamsteed designations for few Virgo stars (LP: #1222094);
+- fixed saving Milky Way brightness via GUI (LP: #1220477)
+
 0.12.2 [2013-08-04]
 Bugfix release with few new features.
 New version of the Satellites plug-in (0.8.1):

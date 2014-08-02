@@ -1,4 +1,5 @@
 /*
+ * Stellarium: Meteor Showers Plug-in
  * Copyright (C) 2013 Marcos Cardinot
  * Copyright (C) 2011 Alexander Wolf
  *
@@ -22,16 +23,8 @@
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelModuleMgr.hpp"
-#include "StelObject.hpp"
-#include "StelPainter.hpp"
 #include "StelTexture.hpp"
 #include "StelUtils.hpp"
-
-#include <QDebug>
-#include <QList>
-#include <QTextStream>
-#include <QVariant>
-#include <QVariantMap>
 
 StelTextureSP MeteorShower::radiantTexture;
 float MeteorShower::showLabels = true;
@@ -82,6 +75,17 @@ MeteorShower::MeteorShower(const QVariantMap& map)
 		}
 	}
 
+	if(map.contains("colors"))
+	{
+		foreach(const QVariant &ms, map.value("colors").toList())
+		{
+			QVariantMap colorMap = ms.toMap();
+			QString color = colorMap.value("color").toString();
+			int intensity = colorMap.value("intensity").toInt();
+			colors.append(colorPair(color, intensity));
+		}
+	}
+
 	updateCurrentData(getSkyQDateTime());
 	// ensures that all objects will be drawn once
 	// that's to avoid crashes by trying select a nonexistent object
@@ -122,6 +126,16 @@ QVariantMap MeteorShower::getMap(void)
 		activityList << activityMap;
 	}
 	map["activity"] = activityList;
+
+	QVariantList colorList;
+	foreach(const colorPair &c, colors)
+	{
+		QVariantMap colorMap;
+		colorMap["color"] = c.first;
+		colorMap["intensity"] = c.second;
+		colorList << colorMap;
+	}
+	map["colors"] = colorList;
 
 	return map;
 }

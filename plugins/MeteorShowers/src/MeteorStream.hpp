@@ -1,4 +1,5 @@
 /*
+ * Stellarium: Meteor Showers Plug-in
  * Copyright (C) 2013 Marcos Cardinot
  *
  * This program is free software; you can redistribute it and/or
@@ -19,22 +20,17 @@
 #ifndef _METEORSTREAM_HPP_
 #define _METEORSTREAM_HPP_
 
+#include "Meteor.hpp"
 #include "VecMath.hpp"
+
 class StelCore;
 class StelPainter;
-
-// all in km - altitudes make up meteor range
-#define EARTH_RADIUS 6369.f
-#define VISIBLE_RADIUS 457.8f
-#define HIGH_ALTITUDE 115.f
-#define LOW_ALTITUDE 70.f
 
 //! @class MeteorStream
 //! Models a single meteor.
 //! Control of the meteor rate is performed in the MeteorShowers class.  Once
 //! created, a meteor object only lasts for some amount of time, and then
-//! "dies", after which, the update() member returns false.  The live/dead
-//! status of a meteor may also be determined using the isAlive member.
+//! "dies", after which, the update() member returns false.
 class MeteorStream
 {
 public:
@@ -44,10 +40,11 @@ public:
 	//! @param rDelta the radiant delta in rad
 	//! @param pidx population index
 	MeteorStream(const StelCore*,
-		     double speed,
-		     double radiantAlpha,
-		     double radiantDelta,
-		     float pidx);
+		     int speed,
+		     float radiantAlpha,
+		     float radiantDelta,
+		     float pidx,
+		     QList<MeteorShower::colorPair> colors);
 
 	virtual ~MeteorStream();
 
@@ -61,22 +58,13 @@ public:
 private:
 	bool m_alive;             //! Indicate if the meteor it still visible
 
-	Mat4d m_viewMatrix;       //! View Matrix
-	Vec3d m_obs;              //! Observer position
-	Vec3d m_position;         //! Equatorial coordinate position
-	Vec3d m_posInternal;      //! Middle of train
-	Vec3d m_posTrain;         //! End of train
+	float m_speed;              //! Velocity of meteor in km/s
+	Mat4d m_viewMatrix;         //! View Matrix
+	Meteor::MeteorModel meteor; //! Parameters of meteor model
 
-	double m_speed;           //! Velocity of meteor in km/s
-	float m_pidx;             //! population index
-	double m_xydistance;      //! Distance in XY plane (orthogonal to meteor path) from observer to meteor
-	double m_minDist;         //! Nearest point to observer along path
-	double m_distMultiplier;  //! Scale magnitude due to changes in distance
-
-	double m_startH;          //! Start height above center of earth
-	double m_endH;            //! End height
-
-	float m_mag;              //! Apparent magnitude at head, 0-1
+	QList<Vec4f> m_trainColorArray;
+	QList<Vec4f> m_lineColorArray;
+	int m_segments;                 //! Number of segments along the train
 };
 
 #endif // _METEORSTREAM_HPP_

@@ -46,14 +46,8 @@ void StelAudioMgr::loadSound(const QString& filename, const QString& id)
 	}
 
 	QMediaPlayer* sound = new QMediaPlayer();
-	QString path = filename;
-	if (filename.startsWith('.') || filename.startsWith('/'))
-	{
-		path = QFileInfo(filename).absoluteFilePath();
-		sound->setMedia(QMediaContent(QUrl::fromLocalFile(path)));
-	}
-	else
-		sound->setMedia(QMediaContent(filename));
+	QString path = QFileInfo(filename).absoluteFilePath();
+	sound->setMedia(QMediaContent(QUrl::fromLocalFile(path)));
 	audioObjects[id] = sound;
 }
 

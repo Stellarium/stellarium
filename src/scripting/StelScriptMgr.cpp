@@ -240,6 +240,11 @@ const QString StelScriptMgr::getLicense(const QString& s)
 	return getHeaderSingleLineCommentText(s, "License", "");
 }
 
+const QString StelScriptMgr::getShortcut(const QString& s)
+{
+	return getHeaderSingleLineCommentText(s, "Shortcut", "").trimmed();
+}
+
 const QString StelScriptMgr::getDescription(const QString& s)
 {
 	QFile file(StelFileMgr::findFile("scripts/" + s, StelFileMgr::File));
@@ -285,11 +290,6 @@ const QString StelScriptMgr::getDescription(const QString& s)
 	}
 	file.close();
 	return desc;
-}
-
-const QString StelScriptMgr::getShortcut(const QString& s)
-{
-	return getHeaderSingleLineCommentText(s, "Shortcut", "").trimmed();
 }
 
 bool StelScriptMgr::runPreprocessedScript(const QString &preprocessedScript)

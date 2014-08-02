@@ -1098,7 +1098,7 @@ void Planet::initShader()
 		"    }\n"
 		"\n"
 		"#ifdef IS_MOON\n"
-		"    mediump vec3 normal = normalize(texture2D(normalMap, texc).rgb-0.5);\n"
+		"    mediump vec3 normal = texture2D(normalMap, texc).rgb-vec3(0.5, 0.5, 0);\n"
 		"    normal = normalize(normalX*normal.x+normalY*normal.y+normalZ*normal.z);\n"
 		"    // normal now contains the real surface normal taking normal map into account\n"
 		"    // Use an Oren-Nayar model for rough surfaces\n"

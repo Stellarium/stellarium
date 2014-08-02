@@ -242,6 +242,9 @@ StelApp::StelApp(QObject* parent)
 	wheelEventTimer = new QTimer(this);
 	wheelEventTimer->setInterval(25);
 	wheelEventTimer->setSingleShot(true);
+
+	// Reset delta accumulators
+	wheelEventDelta[0] = wheelEventDelta[1] = 0;
 }
 
 /*************************************************************************
@@ -605,29 +608,28 @@ void StelApp::handleClick(QMouseEvent* inputEvent)
 // This deltaEvent is a work-around for QTBUG-22269
 void StelApp::handleWheel(QWheelEvent* event)
 {
-	// variables used to track the changes
-	static int delta = 0;
-
 	event->setAccepted(false);
-	
-	if (wheelEventTimer->isActive()) {
+
+	const int deltaIndex = event->orientation() == Qt::Horizontal ? 0 : 1;
+	wheelEventDelta[deltaIndex] += event->delta();
+	if (wheelEventTimer->isActive())
+	{
 		// Collect the values. If delta is small enough we wait for more values or the end
 		// of the timer period to process them.
-		delta += event->delta();
-		if (qAbs(delta) < 120)
+		if (qAbs(wheelEventDelta[deltaIndex]) < 120)
 			return;
 	}
 
-	// The first time in, the values will not have been set.
-	if (delta == 0) {
-		delta += event->delta();
-	}
-
 	wheelEventTimer->start();
+
+	// Create a new event with the accumulated delta
 	QWheelEvent deltaEvent(QPoint(event->pos().x()*devicePixelsPerPixel, event->pos().y()*devicePixelsPerPixel),
-			       QPoint(event->globalPos().x()*devicePixelsPerPixel, event->globalPos().y()*devicePixelsPerPixel),
-			       delta, event->buttons(), event->modifiers(), event->orientation());
+	                       QPoint(event->globalPos().x()*devicePixelsPerPixel, event->globalPos().y()*devicePixelsPerPixel),
+	                       wheelEventDelta[deltaIndex], event->buttons(), event->modifiers(), event->orientation());
 	deltaEvent.setAccepted(false);
+	// Reset the collected values
+	wheelEventDelta[deltaIndex] = 0;
+
 	// Send the event to every StelModule
 	foreach (StelModule* i, moduleMgr->getCallOrders(StelModule::ActionHandleMouseClicks)) {
 		i->handleMouseWheel(&deltaEvent);
@@ -636,8 +638,6 @@ void StelApp::handleWheel(QWheelEvent* event)
 			break;
 		}
 	}
-	// Reset the collected values
-	delta = 0;
 }
 
 // Handle mouse move

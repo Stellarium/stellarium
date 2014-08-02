@@ -109,7 +109,6 @@ base_font_size                      = 13
 #This file should be stored into data/ folder.
 #base_font_file                      = DejaVuSans.ttf
 #base_font_name                      = DejaVu Sans
-#safe_font_name                      = Verdana
 mouse_cursor_timeout                = 10
 flag_mouse_cursor_timeout           = false
 day_key_mode                        = calendar

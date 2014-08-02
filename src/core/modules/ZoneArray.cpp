@@ -33,9 +33,10 @@
 #endif
 
 
-static unsigned int stel_bswap_32(unsigned int val) {
-  return (((val) & 0xff000000) >> 24) | (((val) & 0x00ff0000) >>  8) |
-	(((val) & 0x0000ff00) <<  8) | (((val) & 0x000000ff) << 24);
+static unsigned int stel_bswap_32(unsigned int val)
+{
+	return (((val) & 0xff000000) >> 24) | (((val) & 0x00ff0000) >>  8) |
+	       (((val) & 0x0000ff00) <<  8) | (((val) & 0x000000ff) << 24);
 }
 
 static const Vec3f north(0,0,1);

@@ -21,6 +21,10 @@
 
 @page fileStructure File and Directory Structure
 
+@tableofcontents
+
+@section intro_structire Introduction
+
 This article explains the directory and file layout which Stellarium uses from a programmer's perspective, lays out the rationale behind it, and uses examples to illustrate the way things work.
 
 @section directoryStructure Directory Structure
@@ -60,11 +64,11 @@ It is the place where Stellarium's data files are installed on your computer. Th
 Important data files which may be found in the <em>Installation Data Directory</em> include:
 <ul>
 <li><tt>data/ssystem.ini</tt>: the solar system bodies description file</li>
-<li><tt>stars/default/*</tt>: star catalogues</li>
-<li><tt>nebulae/default/*</tt>: nebula textures and data files</li>
+<li><tt>stars/default/</tt>: star catalogues</li>
+<li><tt>nebulae/default/</tt>: nebula textures and data files</li>
 <li><tt>scripts/</tt>: script files</li>
 <li><tt>textures/</tt>: general purpose texture files (button icons etc)</li>
-<li><tt>landscapes/*/*</tt>: landscape textures and data files</li>
+<li><tt>landscapes/</tt>: landscape textures and data files</li>
 </ul>
 
 </li>

@@ -129,6 +129,11 @@ QString getOperatingSystemInfo()
 		case QSysInfo::MV_MAVERICKS:
 			OS = "Mac OS X 10.9 series";
 			break;
+		#ifdef MV_YOSEMITE
+		case QSysInfo::MV_YOSEMITE
+			OS = "Mac OS X 10.10 series";
+			break;
+		#endif
 		default:
 			OS = "Unsupported Mac version";
 			break;

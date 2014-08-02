@@ -148,7 +148,7 @@
       <item row="1" column="0">
        <widget class="QStackedWidget" name="configurationStackedWidget">
         <property name="currentIndex">
-         <number>3</number>
+         <number>1</number>
         </property>
         <widget class="QWidget" name="page">
          <layout class="QVBoxLayout" name="verticalLayout_10">
@@ -633,9 +633,9 @@
               </widget>
              </item>
              <item row="4" column="0">
-              <widget class="QCheckBox" name="checkBoxTEclipticCoords">
+              <widget class="QCheckBox" name="checkBoxEclipticCoords">
                <property name="toolTip">
-                <string>Ecliptic topocentric coordinates, equinox of date and J2000 (only for Earth)</string>
+                <string>Ecliptic coordinates, equinox of date and J2000 (only for Earth)</string>
                </property>
                <property name="text">
                 <string>Ecliptic coordinates</string>
@@ -1060,11 +1060,17 @@
             <layout class="QGridLayout" name="gridLayoutOptions">
              <item row="0" column="0">
               <widget class="QCheckBox" name="sphericMirrorCheckbox">
+               <property name="enabled">
+                <bool>false</bool>
+               </property>
                <property name="toolTip">
                 <string>Spheric mirror distortion is used when projecting Stellarium onto a spheric mirror for low-cost planetarium systems.</string>
                </property>
                <property name="text">
                 <string>Spheric mirror distortion</string>
+               </property>
+               <property name="checkable">
+                <bool>true</bool>
                </property>
               </widget>
              </item>
@@ -1644,7 +1650,7 @@
   <tabstop>checkBoxSize</tabstop>
   <tabstop>checkBoxDistance</tabstop>
   <tabstop>checkBoxType</tabstop>
-  <tabstop>checkBoxTEclipticCoords</tabstop>
+  <tabstop>checkBoxEclipticCoords</tabstop>
   <tabstop>enableKeysNavigationCheckBox</tabstop>
   <tabstop>editShortcutsPushButton</tabstop>
   <tabstop>systemTimeRadio</tabstop>

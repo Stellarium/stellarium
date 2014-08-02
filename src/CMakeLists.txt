@@ -522,6 +522,10 @@ SET(tests_testDates_SRCS
 	tests/testDates.cpp
 	core/StelUtils.hpp
 	core/StelUtils.cpp)
+IF(WIN32)
+	# StelUtils required zlib sources
+	SET(tests_testDates_SRCS ${tests_testDates_SRCS} ${zlib_SRCS})
+ENDIF()
 ADD_EXECUTABLE(testDates EXCLUDE_FROM_ALL ${tests_testDates_SRCS})
 QT5_USE_MODULES(testDates Core Gui Widgets Script Declarative Test)
 TARGET_LINK_LIBRARIES(testDates ${extLinkerOptionTest})
@@ -557,6 +561,10 @@ SET(tests_testStelSphereGeometry_SRCS
 	core/StelTranslator.hpp
 	core/StelTranslator.cpp
 	${glues_lib_SRCS})
+IF(WIN32)
+	# StelUtils required zlib sources
+	SET(tests_testStelSphereGeometry_SRCS ${tests_testStelSphereGeometry_SRCS} ${zlib_SRCS})
+ENDIF()
 ADD_EXECUTABLE(testStelSphereGeometry EXCLUDE_FROM_ALL ${tests_testStelSphereGeometry_SRCS})
 QT5_USE_MODULES(testStelSphereGeometry Core Gui OpenGL Test)
 TARGET_LINK_LIBRARIES(testStelSphereGeometry ${extLinkerOptionTest})
@@ -611,6 +619,10 @@ SET(tests_testDeltaT_SRCS
 	tests/testDeltaT.cpp
 	core/StelUtils.hpp
 	core/StelUtils.cpp)
+IF(WIN32)
+	# StelUtils required zlib sources
+	SET(tests_testDeltaT_SRCS ${tests_testDeltaT_SRCS} ${zlib_SRCS})
+ENDIF()
 ADD_EXECUTABLE(testDeltaT EXCLUDE_FROM_ALL ${tests_testDeltaT_SRCS})
 QT5_USE_MODULES(testDeltaT Core Gui Widgets Script Declarative Test)
 TARGET_LINK_LIBRARIES(testDeltaT ${extLinkerOptionTest})
@@ -621,6 +633,10 @@ SET(tests_testConversions_SRCS
 	tests/testConversions.cpp
 	core/StelUtils.hpp
 	core/StelUtils.cpp)
+IF(WIN32)
+	# StelUtils required zlib sources
+	SET(tests_testConversions_SRCS ${tests_testConversions_SRCS} ${zlib_SRCS})
+ENDIF()
 ADD_EXECUTABLE(testConversions EXCLUDE_FROM_ALL ${tests_testConversions_SRCS})
 QT5_USE_MODULES(testConversions Core Gui Widgets Script Declarative Test)
 TARGET_LINK_LIBRARIES(testConversions ${extLinkerOptionTest})

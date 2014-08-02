@@ -48,7 +48,7 @@ void StelVideoMgr::loadVideo(const QString& filename, const QString& id, float x
 	videoObjects[id]->player = new Phonon::VideoPlayer(Phonon::VideoCategory, videoObjects[id]->widget);
 
 	videoObjects[id]->player->load(Phonon::MediaSource(filename));
-	videoObjects[id]->pWidget = 
+	videoObjects[id]->pWidget =
 		StelMainView::getInstance().scene()->addWidget(videoObjects[id]->widget, Qt::FramelessWindowHint);
 
 	videoObjects[id]->pWidget->setPos(x, y);
@@ -161,8 +161,8 @@ void StelVideoMgr::resizeVideo(const QString& id, float w, float h)
 	{
 		if (videoObjects[id]->pWidget!=NULL)
 		{
-			videoObjects[id]->pWidget->resize(w, h); 
-			videoObjects[id]->player->resize(w, h); 
+			videoObjects[id]->pWidget->resize(w, h);
+			videoObjects[id]->player->resize(w, h);
 		}
 	}
 }

@@ -28,6 +28,7 @@
 #include "StelTranslator.hpp"
 #include "StelUtils.hpp"
 #include "StelActionMgr.hpp"
+#include "StelOpenGL.hpp"
 
 #include <QDeclarativeItem>
 #include <QDebug>
@@ -299,6 +300,7 @@ void StelMainView::init(QSettings* conf)
 	qDebug() << "Driver version string:" << QString(reinterpret_cast<const char*>(glGetString(GL_VERSION)));
 	qDebug() << "GL vendor is" << QString(reinterpret_cast<const char*>(glGetString(GL_VENDOR)));
 	qDebug() << "GL renderer is" << QString(reinterpret_cast<const char*>(glGetString(GL_RENDERER)));
+	qDebug() << "GL shading language version is" << QString(reinterpret_cast<const char*>(glGetString(GL_SHADING_LANGUAGE_VERSION)));
 	
 	stelApp= new StelApp();
 	stelApp->setGui(gui);
