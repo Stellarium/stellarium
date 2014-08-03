@@ -47,8 +47,10 @@ StelAddOnMgr::StelAddOnMgr()
 	// Initialize settings in the main config file
 	if (m_pConfig->childGroups().contains("AddOn"))
 	{
+		m_pConfig->beginGroup("AddOn");
 		m_iLastUpdate = m_pConfig->value("lastUpdate", m_iLastUpdate).toLongLong();
 		m_sUrlUpdate = m_pConfig->value("url", m_sUrlUpdate).toString();
+		m_pConfig->endGroup();
 	}
 	else // If no settings were found, create it with default values
 	{
