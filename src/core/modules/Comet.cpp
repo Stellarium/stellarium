@@ -375,33 +375,16 @@ void Comet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFont
 		return;
 	}
 
+	// GZ: If comet is too faint to be seen, don't bother rendering. (oops, should have been here in 2014-01... ;-)
+	if ((getVMagnitude(core)+2) > core->getSkyDrawer()->getLimitMagnitude())
+	{
+		return;
+	}
 	// The CometOrbit is in fact available in userDataPtr!
 	CometOrbit* orbit=(CometOrbit*)userDataPtr;
 	Q_ASSERT(orbit);
 	if (!orbit->objectDateValid(core->getJDay())) return; // don't draw at all out of useful date range. This allows having hundreds of comet elements.
 
-/*	if (orbit->getUpdateTails()){
-//		// Compute lengths and orientations from orbit object, but only if required.
-//		// TODO: This part should possibly be moved to another thread to keep draw() free from too much computation.
-
-//		Vec2f tailFactors=getComaDiameterAndTailLengthAU();
-//		float gasTailEndRadius=qMax(tailFactors[0], 0.025f*tailFactors[1]) ; // This avoids too slim gas tails for bright comets like Hale-Bopp.
-//		float gasparameter=gasTailEndRadius*gasTailEndRadius/(2.0f*tailFactors[1]); // parabola formula: z=r²/2p, so p=r²/2z
-//		// The dust tail is thicker and usually shorter. The factors can be configured in the elements.
-//		float dustparameter=gasTailEndRadius*gasTailEndRadius*dustTailWidthFactor*dustTailWidthFactor/(2.0f*dustTailLengthFactor*tailFactors[1]);
-
-//		// Find valid parameters to create paraboloid vertex arrays: dustTail, gasTail.
-//		computeParabola(gasparameter, gasTailEndRadius, -0.5f*gasparameter, gastailVertexArr,  gastailTexCoordArr, gastailIndices);
-//		// This was for a rotated straight parabola:
-//		//computeParabola(dustparameter, 2.0f*tailFactors[0], -0.5f*dustparameter, dusttailVertexArr, dusttailTexCoordArr, dusttailIndices);
-//		// Now we make a skewed parabola. Skew factor 15 (last arg) ad-hoc/empirical. TBD later: Find physically correct solution.
-//		computeParabola(dustparameter, dustTailWidthFactor*gasTailEndRadius, -0.5f*dustparameter, dusttailVertexArr, gastailTexCoordArr, gastailIndices, 25.0f*orbit->getVelocity().length());
-
-//		// Note that we use a diameter larger than what the formula returns. A scale factor of 1.2 is ad-hoc/empirical (GZ), but may look better.
-//		computeComa(1.0f*tailFactors[0]);
-//		orbit->setUpdateTails(false); // don't update until position has been recalculated elsewhere
-//	}
-*/
 	Mat4d mat = Mat4d::translation(eclipticPos) * rotLocalToParent;
 /*  // We can remove that - a Comet has no parent except for the sun...
 	PlanetP p = parent;
