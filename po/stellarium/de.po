@@ -10,14 +10,14 @@ msgstr ""
 "Project-Id-Version: de\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-07-31 17:50+0700\n"
-"PO-Revision-Date: 2014-07-16 12:45+0000\n"
+"PO-Revision-Date: 2014-08-02 18:45+0000\n"
 "Last-Translator: gzotti <Georg.Zotti@univie.ac.at>\n"
 "Language-Team: <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-08-01 05:51+0000\n"
-"X-Generator: Launchpad (build 17141)\n"
+"X-Launchpad-Export-Date: 2014-08-03 05:40+0000\n"
+"X-Generator: Launchpad (build 17147)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:107 src/core/modules/StarMgr.cpp:339
 #: src/core/modules/GridLinesMgr.cpp:695 src/core/modules/LandscapeMgr.cpp:353
@@ -1130,12 +1130,12 @@ msgstr "Az/Alt: %1/%2"
 #: src/core/StelObject.cpp:180
 #, qt-format
 msgid "Ecliptic (of J2000): %1/%2"
-msgstr ""
+msgstr "Ekliptik (J2000): %1/%2"
 
 #: src/core/StelObject.cpp:185
 #, qt-format
 msgid "Ecliptic (of date): %1/%2"
-msgstr ""
+msgstr "Ekliptik (des Datums): %1/%2"
 
 #: src/core/StelSkyLayerMgr.cpp:87
 msgid "Deep-sky objects background images"
@@ -1982,11 +1982,15 @@ msgid ""
 "Insufficient OpenGL version. Please update drivers, graphics hardware, or "
 "use MESA (or ANGLE) version."
 msgstr ""
+"Mangelhafte OpenGL-Unterstützung. Bitte Graphikkarten-Treiber aktualisieren, "
+"andere Graphikkarte einbauen, oder die MESA-Version installieren."
 
 #: src/main.cpp:352
 msgid ""
 "Insufficient OpenGL version. Please update drivers, or graphics hardware."
 msgstr ""
+"Mangelhafte OpenGL-Unterstützung. Bitte Graphikkarten-Treiber aktualisieren "
+"oder andere Graphikkarte einbauen."
 
 #: src/StelMainView.cpp:309
 msgid "Save screenshot"
@@ -4636,6 +4640,7 @@ msgstr "Entfernung"
 #: src/ui_configurationDialog.h:1076
 msgid "Ecliptic coordinates, equinox of date and J2000 (only for Earth)"
 msgstr ""
+"Ekliptikale Koordinaten, Äquinoktium des Datums und J2000 (nur für Erde)"
 
 #: src/ui_configurationDialog.h:1078
 msgid "Ecliptic coordinates"
