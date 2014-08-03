@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-07-31 17:50+0700\n"
-"PO-Revision-Date: 2014-07-21 21:44+0000\n"
+"PO-Revision-Date: 2014-08-03 03:12+0000\n"
 "Last-Translator: Tiago S. <Unknown>\n"
 "Language-Team: Portuguese <pt@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-08-01 06:02+0000\n"
-"X-Generator: Launchpad (build 17141)\n"
+"X-Launchpad-Export-Date: 2014-08-03 05:41+0000\n"
+"X-Generator: Launchpad (build 17147)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:107 src/core/modules/StarMgr.cpp:339
 #: src/core/modules/GridLinesMgr.cpp:695 src/core/modules/LandscapeMgr.cpp:353
@@ -1130,12 +1130,12 @@ msgstr "Az/Alt: %1/%2"
 #: src/core/StelObject.cpp:180
 #, qt-format
 msgid "Ecliptic (of J2000): %1/%2"
-msgstr ""
+msgstr "Eclíptica (de J2000): %1/%2"
 
 #: src/core/StelObject.cpp:185
 #, qt-format
 msgid "Ecliptic (of date): %1/%2"
-msgstr ""
+msgstr "Eclíptica (da data): %1/%2"
 
 #: src/core/StelSkyLayerMgr.cpp:87
 msgid "Deep-sky objects background images"
@@ -1981,11 +1981,14 @@ msgid ""
 "Insufficient OpenGL version. Please update drivers, graphics hardware, or "
 "use MESA (or ANGLE) version."
 msgstr ""
+"A versão do OpenGL é insuficiente. Atualize os drivers, a placa gráfica ou "
+"use a versão MESA (ou ANGLE)."
 
 #: src/main.cpp:352
 msgid ""
 "Insufficient OpenGL version. Please update drivers, or graphics hardware."
 msgstr ""
+"A versão do OpenGL é insuficiente. Atualize os drivers ou a placa gráfica."
 
 #: src/StelMainView.cpp:309
 msgid "Save screenshot"
@@ -4638,6 +4641,7 @@ msgstr "Distância"
 #: src/ui_configurationDialog.h:1076
 msgid "Ecliptic coordinates, equinox of date and J2000 (only for Earth)"
 msgstr ""
+"Coordenadas eclípticas, equinócio da data e de J2000 (apenas para a Terra)."
 
 #: src/ui_configurationDialog.h:1078
 msgid "Ecliptic coordinates"
