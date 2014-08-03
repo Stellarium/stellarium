@@ -37,6 +37,7 @@ StelAddOnMgr::StelAddOnMgr()
 	, m_pDownloadReply(NULL)
 	, m_currentDownloadFile(NULL)
 	, m_progressBar(NULL)
+	, m_iLastUpdate(1388966410)
 	, m_sUrlUpdate("http://cardinot.sourceforge.net/getUpdates.php")
 	, m_sDirAddOn(StelFileMgr::getUserDir() % "/addon")
 {
@@ -46,7 +47,8 @@ StelAddOnMgr::StelAddOnMgr()
 	// Initialize settings in the main config file
 	if (m_pConfig->childGroups().contains("AddOn"))
 	{
-		m_sUrlUpdate = m_pConfig->value("url",m_sUrlUpdate).toString();
+		m_iLastUpdate = m_pConfig->value("lastUpdate", m_iLastUpdate).toLongLong();
+		m_sUrlUpdate = m_pConfig->value("url", m_sUrlUpdate).toString();
 	}
 	else // If no settings were found, create it with default values
 	{
@@ -54,6 +56,7 @@ StelAddOnMgr::StelAddOnMgr()
 		m_pConfig->beginGroup("AddOn");
 		// delete all existing settings...
 		m_pConfig->remove("");
+		m_pConfig->setValue("lastUpdate", m_iLastUpdate);
 		m_pConfig->setValue("url", m_sUrlUpdate);
 		m_pConfig->endGroup();
 	}
@@ -73,22 +76,6 @@ StelAddOnMgr::StelAddOnMgr()
 		it.next();
 		StelFileMgr::makeSureDirExistsAndIsWritable(it.value());
 	}
-
-	// create file to store the last update time
-	QString lastUpdate;
-	QFile file(m_sDirAddOn  % "/lastdbupdate.txt");
-	if (file.open(QIODevice::ReadWrite | QIODevice::Text))
-	{
-		QTextStream txt(&file);
-		lastUpdate = txt.readAll();
-		if(lastUpdate.isEmpty())
-		{
-			lastUpdate = "1388966410";
-			txt << lastUpdate;
-		}
-		file.close();
-	}
-	m_iLastUpdate = lastUpdate.toLong();
 
 	// Init sub-classes
 	m_pStelAddOns.insert(CATALOG, new AOCatalog(m_pStelAddOnDAO));
@@ -116,14 +103,10 @@ QString StelAddOnMgr::getDirectory(QString category)
 
 void StelAddOnMgr::setLastUpdate(qint64 time) {
 	m_iLastUpdate = time;
-	// store value it in the txt file
-	QFile file(m_sDirAddOn  % "/lastdbupdate.txt");
-	if (file.open(QIODevice::WriteOnly | QIODevice::Text))
-	{
-		QTextStream txt(&file);
-		txt << QString::number(m_iLastUpdate);
-		file.close();
-	}
+	// update config file
+	m_pConfig->beginGroup("AddOn");
+	m_pConfig->setValue("lastUpdate", m_iLastUpdate);
+	m_pConfig->endGroup();
 }
 
 void StelAddOnMgr::refreshAddOnStatuses()
