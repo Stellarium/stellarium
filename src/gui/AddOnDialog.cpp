@@ -233,8 +233,9 @@ void AddOnDialog::updateCatalog()
 	ui->btnUpdate->setEnabled(false);
 	ui->txtLastUpdate->setText(q_("Updating catalog..."));
 
-	QNetworkRequest req(QUrl("http://cardinot.sourceforge.net/getUpdates.php?time="
-				 % QString::number(StelApp::getInstance().getStelAddOnMgr().getLastUpdate())));
+	QUrl url(StelApp::getInstance().getStelAddOnMgr().getUrlForUpdates());
+	url.setQuery(QString("time=%1").arg(StelApp::getInstance().getStelAddOnMgr().getLastUpdate()));
+	QNetworkRequest req(url);
 	req.setAttribute(QNetworkRequest::CacheSaveControlAttribute, false);
 	req.setAttribute(QNetworkRequest::RedirectionTargetAttribute, false);
 	req.setRawHeader("User-Agent", StelUtils::getApplicationName().toLatin1());

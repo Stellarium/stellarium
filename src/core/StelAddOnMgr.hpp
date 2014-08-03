@@ -64,6 +64,11 @@ public:
 	{
 		return m_iLastUpdate;
 	}
+	QString getUrlForUpdates()
+	{
+		return m_sUrlUpdate;
+	}
+
 signals:
 	void updateTableViews();
 	void skyCulturesChanged();
@@ -86,6 +91,7 @@ private:
 
 	QSqlDatabase m_db;
 	StelAddOnDAO* m_pStelAddOnDAO;
+	QSettings* m_pConfig;
 
 	bool m_bDownloading;
 	QList<int> m_downloadQueue;
@@ -95,6 +101,7 @@ private:
 
 	class StelProgressController* m_progressBar;
 	qint64 m_iLastUpdate;
+	QString m_sUrlUpdate;
 
 	// addon directories
 	const QString m_sDirAddOn;

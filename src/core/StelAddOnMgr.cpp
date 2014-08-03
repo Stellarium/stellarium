@@ -19,6 +19,7 @@
 
 #include <QDebug>
 #include <QFile>
+#include <QSettings>
 #include <QStringBuilder>
 
 #include "LandscapeMgr.hpp"
@@ -31,14 +32,31 @@
 StelAddOnMgr::StelAddOnMgr()
 	: m_db(QSqlDatabase::addDatabase("QSQLITE"))
 	, m_pStelAddOnDAO(new StelAddOnDAO(m_db))
+	, m_pConfig(StelApp::getInstance().getSettings())
 	, m_bDownloading(false)
 	, m_pDownloadReply(NULL)
 	, m_currentDownloadFile(NULL)
 	, m_progressBar(NULL)
+	, m_sUrlUpdate("http://cardinot.sourceforge.net/getUpdates.php")
 	, m_sDirAddOn(StelFileMgr::getUserDir() % "/addon")
 {
 	// creating addon dir
 	StelFileMgr::makeSureDirExistsAndIsWritable(m_sDirAddOn);
+
+	// Initialize settings in the main config file
+	if (m_pConfig->childGroups().contains("AddOn"))
+	{
+		m_sUrlUpdate = m_pConfig->value("url",m_sUrlUpdate).toString();
+	}
+	else // If no settings were found, create it with default values
+	{
+		qDebug() << "StelAddOnMgr: no AddOn section exists in main config file - creating with defaults";
+		m_pConfig->beginGroup("AddOn");
+		// delete all existing settings...
+		m_pConfig->remove("");
+		m_pConfig->setValue("url", m_sUrlUpdate);
+		m_pConfig->endGroup();
+	}
 
 	// Init database
 	Q_ASSERT(m_pStelAddOnDAO->init());
