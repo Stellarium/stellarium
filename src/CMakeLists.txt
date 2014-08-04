@@ -341,7 +341,9 @@ IF(GUI_MODE STREQUAL "Standard")
 		gui/StelDialog.hpp
 		gui/StelDialog.cpp
 		gui/AddOnDialog.hpp
-		gui/AddOnDialog.cpp)
+		gui/AddOnDialog.cpp
+		gui/AddOnWidget.cpp
+		gui/AddOnWidget.hpp)
 
 	################# compiles .ui files ############
 	SET(stellarium_UIS
@@ -355,7 +357,8 @@ IF(GUI_MODE STREQUAL "Standard")
 	gui/AtmosphereDialog.ui
 	gui/CustomDeltaTEquationDialog.ui
 	gui/addRemoveLandscapesDialog.ui
-	gui/addonDialog.ui)
+	gui/addonDialog.ui
+	gui/addonWidget.ui)
 
         IF(ENABLE_SCRIPTING)
             IF(ENABLE_SCRIPT_CONSOLE)
