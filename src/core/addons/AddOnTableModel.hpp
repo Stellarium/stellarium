@@ -20,9 +20,7 @@
 #ifndef _ADDONTABLEMODEL_HPP_
 #define _ADDONTABLEMODEL_HPP_
 
-#include <QSqlTableModel>
-
-#include "StelTranslator.hpp"
+#include <QSqlQueryModel>
 
 class AddOnTableModel : public QSqlQueryModel
 {

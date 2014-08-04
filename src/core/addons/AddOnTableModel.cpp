@@ -23,7 +23,7 @@
 
 #include "AddOnTableModel.hpp"
 #include "StelAddOnDAO.hpp"
-#include "StelUtils.hpp"
+#include "StelTranslator.hpp"
 
 AddOnTableModel::AddOnTableModel(QString tableName)
 {
