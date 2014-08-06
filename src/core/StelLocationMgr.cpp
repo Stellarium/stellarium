@@ -32,9 +32,12 @@
 #include <QNetworkReply>
 #include <QUrl>
 #include <QUrlQuery>
+#include <QSettings>
 
 StelLocationMgr::StelLocationMgr()
 {
+	QSettings* conf = StelApp::getInstance().getSettings();
+
 	// The line below allows to re-generate the location file, you still need to gunzip it manually afterward.
 	// generateBinaryLocationFile("data/base_locations.txt", false, "data/base_locations.bin");
 
@@ -46,7 +49,7 @@ StelLocationMgr::StelLocationMgr()
 	modelPickedLocation = new QStringListModel(this); // keep empty for now.
 	
 	// Init to Paris France because it's the center of the world.
-	lastResortLocation = locationForString("Paris, France");
+	lastResortLocation = locationForString(conf->value("init_location/last_resort_location", "Paris, France").toString());
 }
 
 void StelLocationMgr::generateBinaryLocationFile(const QString& fileName, bool isUserLocation, const QString& binFilePath) const
@@ -332,6 +335,7 @@ void StelLocationMgr::locationFromIP()
 void StelLocationMgr::changeLocationFromNetworkLookup()
 {
 	StelLocation location;
+	StelCore *core=StelApp::getInstance().getCore();
 	if (networkReply->error() == QNetworkReply::NoError) {
 		//success
 		// Tested with and without working network connection.
@@ -373,11 +377,14 @@ void StelLocationMgr::changeLocationFromNetworkLookup()
 				.arg(latitude<0 ? QString("%1S").arg(-latitude, 0, 'f', 6) : QString("%1N").arg(latitude, 0, 'f', 6))
 				.arg(longitude<0 ? QString("%1W").arg(-longitude, 0, 'f', 6) : QString("%1E").arg(longitude, 0, 'f', 6));
 		location=StelLocation::createFromLine(locLine); // in lack of a regular constructor ;-)
-		StelCore *core=StelApp::getInstance().getCore();
 		core->moveObserverTo(location, 0.0f, 0.0f);
+		QSettings* conf = StelApp::getInstance().getSettings();
+		conf->setValue("init_location/last_resort_location", QString("%1, %2").arg(location.name).arg(location.country));
 	}
-	else {
+	else
+	{
 		qDebug() << "Failure getting IP-based location: \n\t" <<networkReply->errorString();
+		core->moveObserverTo(lastResortLocation, 0.0f, 0.0f);
 	}
 	networkReply->deleteLater();
 }
