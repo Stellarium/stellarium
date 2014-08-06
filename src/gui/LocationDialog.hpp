@@ -105,11 +105,11 @@ private slots:
 	//! reset city list to complete list (may have been reduced to picked list)
 	void resetCompleteList();
 
-	//! called when the user clicks on the IP Query button
-	void ipQueryLocation();
+	//! called when the user wants get location from network
+	void ipQueryLocation(bool state);
 	
 	//! Called when the user wants to use the current location as default
-	void setDefaultLocation();
+	void setDefaultLocation(bool state);
 	
 private:
 	QString lastPlanet;

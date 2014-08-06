@@ -111,13 +111,13 @@ void StelCore::init()
 {
 	QSettings* conf = StelApp::getInstance().getSettings();
 
-	defaultLocationID = conf->value("init_location/location","error").toString();
+	defaultLocationID = conf->value("init_location/location", "auto").toString();
 	bool ok;
 	StelLocationMgr* locationMgr = &StelApp::getInstance().getLocationMgr();
-	StelLocation location;
-	if (conf->value("init_location/use_ip_geolocation_if_available", "false").toBool())
+	StelLocation location;	
+	if (defaultLocationID.contains("auto"))
 	{
-		locationMgr->locationFromIP();
+		locationMgr->locationFromIP();		
 	}
 	else
 	{
