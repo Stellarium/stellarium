@@ -255,6 +255,8 @@ SET(stellarium_lib_SRCS
 	core/addons/AOSkyCulture.hpp
 	core/addons/AOTexture.cpp
 	core/addons/AOTexture.hpp
+	core/addons/widget/CheckedHeader.cpp
+	core/addons/widget/CheckedHeader.hpp
 
 	StelMainView.hpp
 	StelMainView.cpp
