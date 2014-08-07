@@ -107,7 +107,7 @@ void LocationDialog::createDialogContent()
 	const StelLocation& currentLocation = core->getCurrentLocation();
 	bool b = (currentLocation.getID() == core->getDefaultLocationID());
 	QSettings* conf = StelApp::getInstance().getSettings();
-	if (conf->value("init_location/location", "auto").toString().contains("auto"))
+	if (conf->value("init_location/location", "auto").toString() == "auto")
 	{
 		ui->useIpQueryCheckBox->setChecked(true);
 		b = false;
@@ -147,7 +147,7 @@ void LocationDialog::updateFromProgram(const StelLocation& currentLocation)
 	// Move to setFieldsFromLocation()? --BM?
 	const bool b = currentLocation.getID() == stelCore->getDefaultLocationID();
 	QSettings* conf = StelApp::getInstance().getSettings();
-	if (!conf->value("init_location/location", "auto").toString().contains("auto"))
+	if (conf->value("init_location/location", "auto").toString() != ("auto"))
 	{
 		updateDefaultLocationControls(b);
 		ui->pushButtonReturnToDefault->setEnabled(!b);
