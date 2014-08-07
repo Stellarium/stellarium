@@ -379,7 +379,7 @@ void StelLocationMgr::changeLocationFromNetworkLookup()
 		location=StelLocation::createFromLine(locLine); // in lack of a regular constructor ;-)
 		core->moveObserverTo(location, 0.0f, 0.0f);
 		QSettings* conf = StelApp::getInstance().getSettings();
-		conf->setValue("init_location/last_resort_location", QString("%1, %2").arg(location.name).arg(location.country));
+		conf->setValue("init_location/last_resort_location", QString("%1, %2").arg(latitude).arg(longitude));
 	}
 	else
 	{
