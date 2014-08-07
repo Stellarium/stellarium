@@ -9,13 +9,13 @@ msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-07-31 17:50+0700\n"
-"PO-Revision-Date: 2014-08-04 05:12+0000\n"
+"PO-Revision-Date: 2014-08-06 20:20+0000\n"
 "Last-Translator: Louis Strous <louis.strous@gmail.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-08-05 06:06+0000\n"
+"X-Launchpad-Export-Date: 2014-08-07 05:41+0000\n"
 "X-Generator: Launchpad (build 17147)\n"
 "X-Poedit-Country: NETHERLANDS\n"
 "X-Poedit-Language: Dutch\n"
@@ -858,6 +858,9 @@ msgid ""
 "Personal Computer</em> (2000) provides simple 3rd-order polynomial data fits "
 "for the recent past."
 msgstr ""
+"De vierde editie van <em>Astronomy on the Personal Computer</em> van O. "
+"Montenbruck en T. Pfleger geeft eenvoudige 3e-graadspolynomen als benadering "
+"voor het recente verleden."
 
 #: src/core/StelCore.cpp:1558
 msgid ""
@@ -866,6 +869,10 @@ msgid ""
 "<em>Calendrical Tabulations</em> (2002). It is based on Jean Meeus' "
 "<em>Astronomical Algorithms</em> (1991)."
 msgstr ""
+"E.M. Reingold en N. Dershowitz geven deze polynoom als benadering in "
+"<em>Calendrical Calculations</em> (3e editie, 2007) en in hun "
+"<em>Calendrical Tabulations</em>.  Het is gebaseerd op <em>Astronomical "
+"Algorithms</em> (1991) van Jean Meeus."
 
 #: src/core/StelCore.cpp:1561
 #, qt-format
@@ -874,6 +881,9 @@ msgid ""
 "in article <em>Historical values of the Earth's clock error %1T and the "
 "calculation of eclipses</em> (%2) with addendum in (%3)."
 msgstr ""
+"Deze belangrijke oplossing werd gepubliceerd door L.V. Morrison en F.R. "
+"Stephenson in het artikel <em>Historical values of the Earth's clock error "
+"%1T and the calculation of eclipses</em> (%2) met addendum in (%3)."
 
 #: src/core/StelCore.cpp:1564
 #, qt-format
@@ -883,6 +893,11 @@ msgid ""
 "cosine and square function. This is based on a possible periodicy described "
 "by Stephenson (%2). See for more info %3here%4."
 msgstr ""
+"Uit de daglengte (LOD; zoals bepaald door Stephenson en Morrison (%2)) "
+"leidde Victor Reijs een %1T-formule af door simplex-optimalisatie met een "
+"cosinus en een vierkante functie.  Dit is gebaseerd op een mogelijke "
+"periodiciteit beschreven door Stephenson (%2).  Zie voor meer informatie "
+"%3hier%4."
 
 #: src/core/StelCore.cpp:1567
 #, qt-format
@@ -893,6 +908,12 @@ msgid ""
 "Solar Eclipses: -1900 to +3000</em> (2006). This formula is also used in the "
 "solar, lunar and planetary ephemeris program SOLEX."
 msgstr ""
+"Deze oplossing door F. Espenak en J. Meeus, gebaseerd op Morrison en "
+"Stephenson (2004) en een polynoombenadering van tabelwaarden voor 1600-2000, "
+"wordt gebruikt voor de %1NASA Eclipse Web Site%2 en in hun <em>Five "
+"Millennium Canon of Solar Eclipses: -1900 to +3000</em> (2006).  Deze "
+"formule wordt ook gebruikt in het zonne-, maan- en "
+"planeetefemeridenprogramma SOLEX."
 
 #: src/core/StelCore.cpp:1567
 msgid "Used by default."
@@ -905,6 +926,9 @@ msgid ""
 "published in article <em>Ancient eclipses and dating the fall of "
 "Babylon</em> (%1)."
 msgstr ""
+"Deze oplossing door B. Banjevic, gebaseerd op Stephenson en Morrison (1984), "
+"werd gepubliceerd in het artikel <em>Ancient eclipses and dating the fall of "
+"Babylon</em> (%1)."
 
 #: src/core/StelCore.cpp:1573
 #, qt-format
@@ -913,6 +937,10 @@ msgid ""
 "Simons (2000), was published in article <em>Error Minimization of Polynomial "
 "Approximation of DeltaT</em> (%1) and revisited by Sana Islam in 2013."
 msgstr ""
+"Deze oplossing door S. Islam, M. Sadiq en M.S. Qureshi, gebaseerd op Meeus "
+"en Simons (2000), werd gepubliceerd in het artikel <em>Error Minimization of "
+"Polynomial Approximation of Delta T</em> (%1) en werd opnieuw besproken door "
+"Sana Islam in 2013."
 
 #: src/core/StelCore.cpp:1576
 #, qt-format
@@ -1101,16 +1129,16 @@ msgstr "Az/Hgte: %1/%2"
 #: src/core/StelObject.cpp:180
 #, qt-format
 msgid "Ecliptic (of J2000): %1/%2"
-msgstr ""
+msgstr "Ecliptica (van J2000): %1/%2"
 
 #: src/core/StelObject.cpp:185
 #, qt-format
 msgid "Ecliptic (of date): %1/%2"
-msgstr ""
+msgstr "Ecliptica (van de datum): %1/%2"
 
 #: src/core/StelSkyLayerMgr.cpp:87
 msgid "Deep-sky objects background images"
-msgstr ""
+msgstr "Deepskyobjectachtergrondafbeeldingen"
 
 #: src/core/StelMovementMgr.cpp:130 src/gui/StelGui.cpp:185
 #: src/StelMainView.cpp:309
@@ -1393,11 +1421,11 @@ msgstr "Reijs (2006)"
 
 #: src/gui/ConfigurationDialog.cpp:1196
 msgid "Banjevic (2006)"
-msgstr ""
+msgstr "Banjevic (2006)"
 
 #: src/gui/ConfigurationDialog.cpp:1197
 msgid "Islam, Sadiq & Qureshi (2008, 2013)"
-msgstr ""
+msgstr "Islam, Sadiq en Qureshi (2008, 2013)"
 
 #: src/gui/ConfigurationDialog.cpp:1198
 #, qt-format
@@ -1407,23 +1435,23 @@ msgstr "Aangepaste vergelijking voor %1T"
 #. TRANSLATORS: This message will be displayed for users if Stellarium can't get info about version from stellarium.org
 #: src/gui/HelpDialog.cpp:259
 msgid "Oops... Stellarium can't check latest version."
-msgstr ""
+msgstr "Oeps... Stellarium kan de nieuwste versie niet opzoeken."
 
 #. TRANSLATORS: This message will be displayed for users if current version of Stellarium is bigger than version from stellarium.org
 #: src/gui/HelpDialog.cpp:281
 msgid "Looks like you are using the development version of Stellarium."
-msgstr ""
+msgstr "Het lijkt erop dat je de ontwikkelversie van Stellarium gebruikt."
 
 #. TRANSLATORS: This message will be displayed for users if current version of Stellarium is smaller than version from stellarium.org
 #: src/gui/HelpDialog.cpp:286
 #, qt-format
 msgid "This version of Stellarium is outdated! Latest version is %1."
-msgstr ""
+msgstr "Deze versie van Stellarium is te oud!  De nieuwste versie is %1."
 
 #. TRANSLATORS: This message will be displayed for users if current version of Stellarium is equals with version from stellarium.org
 #: src/gui/HelpDialog.cpp:292
 msgid "This is latest stable version of Stellarium."
-msgstr ""
+msgstr "Dit is de nieuwste stabiele versie van Stellarium."
 
 #: src/gui/HelpDialog.cpp:322
 msgid "Stellarium Help"
@@ -1483,6 +1511,8 @@ msgid ""
 "Below are listed only the actions with assigned keys. Further actions may be "
 "available via the \"%1\" button."
 msgstr ""
+"Hieronder staan alleen de acties met toegewezen toetsen.  Andere acties "
+"kunnen beschikbaar zijn via de \"%1\"-toets."
 
 #: src/gui/HelpDialog.cpp:402
 msgid ""
@@ -1680,11 +1710,11 @@ msgstr "%1m"
 
 #: src/gui/StelGuiItems.cpp:616
 msgid "Field of view"
-msgstr ""
+msgstr "Gezichtsveld"
 
 #: src/gui/StelGuiItems.cpp:634
 msgid "Frames per second"
-msgstr ""
+msgstr "Beelden per seconde"
 
 #. TRANSLATORS: Short description for Class 1 of the Bortle scale
 #: src/gui/ViewDialog.cpp:325
