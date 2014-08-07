@@ -49,7 +49,7 @@ StelLocationMgr::StelLocationMgr()
 	modelPickedLocation = new QStringListModel(this); // keep empty for now.
 	
 	// Init to Paris France because it's the center of the world.
-	lastResortLocation = locationForString(conf->value("init_location/last_resort_location", "Paris, France").toString());
+	lastResortLocation = locationForString(conf->value("init_location/last_location", "Paris, France").toString());
 }
 
 void StelLocationMgr::generateBinaryLocationFile(const QString& fileName, bool isUserLocation, const QString& binFilePath) const
@@ -379,7 +379,7 @@ void StelLocationMgr::changeLocationFromNetworkLookup()
 		location=StelLocation::createFromLine(locLine); // in lack of a regular constructor ;-)
 		core->moveObserverTo(location, 0.0f, 0.0f);
 		QSettings* conf = StelApp::getInstance().getSettings();
-		conf->setValue("init_location/last_resort_location", QString("%1, %2").arg(latitude).arg(longitude));
+		conf->setValue("init_location/last_location", QString("%1, %2").arg(latitude).arg(longitude));
 	}
 	else
 	{
