@@ -20,6 +20,7 @@
 #ifndef _ADDONTABLEVIEW_HPP_
 #define _ADDONTABLEVIEW_HPP_
 
+#include <QAbstractItemModel>
 #include <QTableView>
 
 class AddOnTableView : public QTableView
@@ -28,6 +29,8 @@ class AddOnTableView : public QTableView
 public:
 	AddOnTableView(QWidget* parent=0);
 	virtual ~AddOnTableView();
+
+	void setModel(QAbstractItemModel* model);
 };
 
 #endif // _ADDONTABLEVIEW_HPP_

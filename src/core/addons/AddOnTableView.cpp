@@ -17,13 +17,30 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
+#include <QHeaderView>
+
 #include "AddOnTableView.hpp"
+#include "widget/CheckedHeader.hpp"
 
 AddOnTableView::AddOnTableView(QWidget* parent)
 	: QTableView(parent)
 {
+	setAutoFillBackground(true);
+	verticalHeader()->setVisible(false);
+	setAlternatingRowColors(false);
+	setSelectionBehavior(QAbstractItemView::SelectRows);
+	setEditTriggers(false);
 }
 
 AddOnTableView::~AddOnTableView()
 {
+}
+
+void AddOnTableView::setModel(QAbstractItemModel* model)
+{
+	QTableView::setModel(model);
+
+	int lastColumn = model->columnCount() - 1; // checkbox column
+	setHorizontalHeader(new CheckedHeader(lastColumn, Qt::Horizontal, this));
+	horizontalHeader()->setSectionResizeMode(lastColumn, QHeaderView::ResizeToContents);
 }
