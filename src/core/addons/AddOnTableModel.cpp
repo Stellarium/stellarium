@@ -46,13 +46,14 @@ AddOnTableModel::AddOnTableModel(QString tableName)
 	}
 
 	setQuery(getQuery(tableName, extraColumns));
+	insertColumn(columnCount()); // checkbox
 	initHeaderData();
 }
 
 QString AddOnTableModel::getQuery(QString table, QStringList extraColumns)
 {
 	QString query = "SELECT " % table % ".id, addon.id AS addon, first_stel, "
-			"last_stel, title," % extraColumns.join(",") %", installed, NULL "
+			"last_stel, title," % extraColumns.join(",") %", installed "
 			"FROM addon INNER JOIN " % table %
 			" ON addon.id = " % table % ".addon";
 	return query;
@@ -72,7 +73,8 @@ void AddOnTableModel::initHeaderData()
 		i.next();
 		setHeaderData(findColumn(i.value()), Qt::Horizontal, i.key());
 	}
-	setHeaderData(findColumn("NULL"), Qt::Horizontal, "");
+
+	setHeaderData(columnCount()-1, Qt::Horizontal, ""); //checkbox
 }
 
 QVariant AddOnTableModel::data(const QModelIndex& index, int role) const
