@@ -579,9 +579,7 @@ void BottomStelBar::updateText(bool updatePos)
 	}
 	if (flagShowLocation && loc->name.isEmpty())
 	{
-		newLocation = q_(loc->planetName)+", "
-		        +StelUtils::radToDmsStr(loc->latitude)+", "
-		        +StelUtils::radToDmsStr(loc->longitude);
+		newLocation = q_(loc->planetName)+", "+StelUtils::decDegToDmsStr(loc->latitude)+", "+StelUtils::decDegToDmsStr(loc->longitude);
 	}
 	if (location->text()!=newLocation)
 	{
@@ -593,12 +591,18 @@ void BottomStelBar::updateText(bool updatePos)
 		if (lat >= 0)
 			pm = "N";
 		else
+		{
 			pm = "S";
+			lat *= -1;
+		}
 		latStr = QString("%1%2%3").arg(pm).arg(lat).arg(QChar(0x00B0));
-		if (lat >= 0)
+		if (lon >= 0)
 			pm = "E";
 		else
+		{
 			pm = "W";
+			lon *= -1;
+		}
 		lonStr = QString("%1%2%3").arg(pm).arg(lon).arg(QChar(0x00B0));
 		location->setToolTip(QString("%1 %2").arg(latStr).arg(lonStr));
 	}

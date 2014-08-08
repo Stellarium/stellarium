@@ -370,6 +370,24 @@ QString radToDmsStr(const double angle, const bool decimal, const bool useD)
 	return str;
 }
 
+// Convert an angle in decimal degrees to a dms formatted string
+QString decDegToDmsStr(const double angle)
+{
+	bool sign = true;
+	unsigned int d,m,s;
+	double dd = angle;
+	if (dd<0.)
+	{
+		sign = false;
+		dd *= -1;
+	}
+
+	d = (unsigned int)dd;
+	m = (unsigned int)((dd-d)*60);
+	s = (unsigned int)((dd-d)*3600.-60.*m);
+
+	return QString("%1%2%3%4\'%5\"").arg(sign?'+':'-').arg(d).arg(QChar(0x00B0)).arg(m,2,10,QLatin1Char('0')).arg(s,2,10,QLatin1Char('0'));
+}
 
 // Convert a dms formatted string to an angle in radian
 double dmsStrToRad(const QString& s)

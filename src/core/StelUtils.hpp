@@ -99,6 +99,10 @@ namespace StelUtils
 	//! @param decimal output decimal second value
 	QString radToDmsStr(const double angle, const bool decimal=false, const bool useD=false);
 
+	//! Convert an angle in decimal degrees to a dms formatted string.
+	//! @param angle input angle in decimal degrees
+	QString decDegToDmsStr(const double angle);
+
 	//! Convert a dms formatted string to an angle in radian
 	//! @param s The input string
 	double dmsStrToRad(const QString& s);
