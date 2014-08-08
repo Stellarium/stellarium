@@ -17,13 +17,13 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#include "AddOnTableModel.hpp"
 #include "AddOnTableProxyModel.hpp"
 
 AddOnTableProxyModel::AddOnTableProxyModel(QString tableName, QObject* parent)
 	: QSortFilterProxyModel(parent)
+	, m_sourceModel(new AddOnTableModel(tableName))
 {
-	setSourceModel(new AddOnTableModel(tableName));
+	setSourceModel(m_sourceModel);
 }
 
 QModelIndex AddOnTableProxyModel::mapFromSource(const QModelIndex& sourceIndex) const
@@ -62,4 +62,14 @@ QVariant AddOnTableProxyModel::data(const QModelIndex &ind, int role) const
 		return QVariant();
 
 	return sourceModel()->data(mapToSource(ind), role);
+}
+
+int AddOnTableProxyModel::findColumn(const QString &columnName)
+{
+	return m_sourceModel->findColumn(columnName);
+}
+
+QModelIndex AddOnTableProxyModel::findIndex(int row, const QString &columnName)
+{
+	return m_sourceModel->findIndex(row, columnName);
 }

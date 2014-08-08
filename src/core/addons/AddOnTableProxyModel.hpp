@@ -22,6 +22,8 @@
 
 #include <QSortFilterProxyModel>
 
+#include "AddOnTableModel.hpp"
+
 class AddOnTableProxyModel : public QSortFilterProxyModel
 {
 	Q_OBJECT
@@ -38,6 +40,12 @@ public:
 	int columnCount(const QModelIndex&) const;
 
 	QVariant data(const QModelIndex &ind, int role) const;
+
+	QModelIndex findIndex(int row, const QString& columnName);
+	int findColumn(const QString& columnName);
+
+private:
+	AddOnTableModel* m_sourceModel;
 };
 
 #endif // _ADDONTABLEPROXYMODEL_HPP_
