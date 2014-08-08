@@ -99,6 +99,14 @@ namespace StelUtils
 	//! @param decimal output decimal second value
 	QString radToDmsStr(const double angle, const bool decimal=false, const bool useD=false);
 
+	//! Convert an angle in decimal degree to +-dms format.
+	//! @param angle input angle in decimal degree
+	//! @param sign true if positive, false otherwise
+	//! @param d degree component
+	//! @param m minute component
+	//! @param s second component
+	void decDegToDms(double angle, bool& sign, unsigned int& d, unsigned int& m, double& s);
+
 	//! Convert an angle in decimal degrees to a dms formatted string.
 	//! @param angle input angle in decimal degrees
 	QString decDegToDmsStr(const double angle);

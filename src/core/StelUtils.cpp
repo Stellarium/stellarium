@@ -370,23 +370,39 @@ QString radToDmsStr(const double angle, const bool decimal, const bool useD)
 	return str;
 }
 
+void decDegToDms(double angle, bool &sign, unsigned int &d, unsigned int &m, double &s)
+{
+	sign = true;
+	if (angle<0.)
+	{
+		sign = false;
+		angle *= -1;
+	}
+
+	d = (unsigned int)angle;
+	m = (unsigned int)((angle-d)*60);
+	s = (angle-d)*3600.-60.*m;
+
+	if (s==60.)
+	{
+		s = 0.;
+		m += 1;
+	}
+	if (m==60)
+	{
+		m = 0;
+		d += 1;
+	}
+}
+
 // Convert an angle in decimal degrees to a dms formatted string
 QString decDegToDmsStr(const double angle)
 {
-	bool sign = true;
-	unsigned int d,m,s;
-	double dd = angle;
-	if (dd<0.)
-	{
-		sign = false;
-		dd *= -1;
-	}
-
-	d = (unsigned int)dd;
-	m = (unsigned int)((dd-d)*60);
-	s = (unsigned int)((dd-d)*3600.-60.*m);
-
-	return QString("%1%2%3%4\'%5\"").arg(sign?'+':'-').arg(d).arg(QChar(0x00B0)).arg(m,2,10,QLatin1Char('0')).arg(s,2,10,QLatin1Char('0'));
+	bool sign;
+	double s;
+	unsigned int d, m;
+	decDegToDms(angle, sign, d, m, s);
+	return QString("%1%2%3%4\'%5\"").arg(sign?'+':'-').arg(d).arg(QChar(0x00B0)).arg(m,2,10,QLatin1Char('0')).arg((unsigned int)s,2,10,QLatin1Char('0'));
 }
 
 // Convert a dms formatted string to an angle in radian
