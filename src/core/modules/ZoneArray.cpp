@@ -289,7 +289,7 @@ void HipZoneArray::updateHipIndex(HipIndexStruct hipIndex[]) const
 	{
 		for (const Star1 *s = z->getStars()+z->size-1;s>=z->getStars();s--)
 		{
-			const int hip = s->hip;
+			const int hip = s->getHip();
 			if (hip < 0 || NR_OF_HIP < hip)
 			{
 				qDebug() << "ERROR: HipZoneArray::updateHipIndex: invalid HIP number:" << hip;
@@ -425,28 +425,6 @@ SpecialZoneArray<Star>::SpecialZoneArray(QFile* file, bool byte_swap,bool use_mm
 						getZones()[z].stars = s;
 						s += getZones()[z].size;
 					}
-					if (
-#if (!defined(__GNUC__))
-						true
-#else
-						byte_swap
-#endif
-					)
-					{
-						s = stars;
-						for (unsigned int i=0;i<nr_of_stars;i++,s++)
-						{
-							s->repack(
-#if Q_BYTE_ORDER == Q_BIG_ENDIAN
-								// need for byte_swap on a BE machine means that catalog is LE
-								!byte_swap
-#else
-								// need for byte_swap on a LE machine means that catalog is BE
-								byte_swap
-#endif
-							);
-						}
-					}
 				}
 				file->close();
 			}
@@ -512,13 +490,13 @@ void SpecialZoneArray<Star>::draw(StelPainter* sPainter, int index, bool isInsid
     for (const Star* s=zoneToDraw->getStars();s<lastStar;++s)
     {
 		// Artifical cutoff per magnitude
-		if (s->mag > cutoffMagStep)
+		if (s->getMag() > cutoffMagStep)
 			break;
     
 		// Because of the test above, the star should always be visible from this point.
 		
 		// Array of 2 numbers containing radius and magnitude
-		const RCMag* tmpRcmag = &rcmag_table[s->mag];
+		const RCMag* tmpRcmag = &rcmag_table[s->getMag()];
 		
 		// Get the star position from the array
 		s->getJ2000Pos(zoneToDraw, movementFactor, vf);
@@ -542,7 +520,7 @@ void SpecialZoneArray<Star>::draw(StelPainter* sPainter, int index, bool isInsid
 				continue;
 		}
 
-		int extinctedMagIndex = s->mag;
+		int extinctedMagIndex = s->getMag();
 		if (withExtinction)
 		{
 			Vec3f altAz(vf);
@@ -550,16 +528,16 @@ void SpecialZoneArray<Star>::draw(StelPainter* sPainter, int index, bool isInsid
 			core->j2000ToAltAzInPlaceNoRefraction(&altAz);
 			float extMagShift=0.0f;
 			extinction.forward(altAz, &extMagShift);
-			extinctedMagIndex = s->mag + (int)(extMagShift/k);
+			extinctedMagIndex = s->getMag() + (int)(extMagShift/k);
 			if (extinctedMagIndex >= cutoffMagStep) // i.e., if extincted it is dimmer than cutoff, so remove
 				continue;
 			tmpRcmag = &rcmag_table[extinctedMagIndex];
 		}
 	
-		if (drawer->drawPointSource(sPainter, vf, *tmpRcmag, s->bV, !isInsideViewport) && s->hasName() && extinctedMagIndex < maxMagStarName && s->hasComponentID()<=1)
+		if (drawer->drawPointSource(sPainter, vf, *tmpRcmag, s->getBVIndex(), !isInsideViewport) && s->hasName() && extinctedMagIndex < maxMagStarName && s->hasComponentID()<=1)
 		{
 			const float offset = tmpRcmag->radius*0.7f;
-			const Vec3f colorr = StelSkyDrawer::indexToColor(s->bV)*0.75f;
+			const Vec3f colorr = StelSkyDrawer::indexToColor(s->getBVIndex())*0.75f;
 			sPainter->setColor(colorr[0], colorr[1], colorr[2],names_brightness);
 			sPainter->drawText(Vec3d(vf[0], vf[1], vf[2]), s->getNameI18n(), 0, offset, offset, false);
 		}
