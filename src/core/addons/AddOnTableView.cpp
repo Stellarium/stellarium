@@ -19,7 +19,9 @@
 
 #include <QHeaderView>
 
+#include "AddOnTableProxyModel.hpp"
 #include "AddOnTableView.hpp"
+#include "StelAddOnDAO.hpp"
 #include "widget/CheckedHeader.hpp"
 
 AddOnTableView::AddOnTableView(QWidget* parent)
@@ -40,7 +42,15 @@ void AddOnTableView::setModel(QAbstractItemModel* model)
 {
 	QTableView::setModel(model);
 
+	// Add checkbox in the last column
 	int lastColumn = model->columnCount() - 1; // checkbox column
 	setHorizontalHeader(new CheckedHeader(lastColumn, Qt::Horizontal, this));
 	horizontalHeader()->setSectionResizeMode(lastColumn, QHeaderView::ResizeToContents);
+
+	// Hide internal columns
+	AddOnTableProxyModel* proxy = (AddOnTableProxyModel*) model;
+	hideColumn(proxy->findColumn(COLUMN_ID));
+	hideColumn(proxy->findColumn(COLUMN_ADDONID));
+	hideColumn(proxy->findColumn(COLUMN_FIRST_STEL));
+	hideColumn(proxy->findColumn(COLUMN_LAST_STEL));
 }
