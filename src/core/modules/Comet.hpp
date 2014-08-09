@@ -34,6 +34,7 @@
 class Comet : public Planet
 {
 public:
+	friend class SolarSystem;               // Solar System initializes static constants.
 	Comet(const QString& englishName,
 	       int flagLighting,
 	       double radius,
@@ -98,7 +99,7 @@ public:
 private:
 	//! @returns estimates for (Coma diameter [AU], gas tail length [AU]).
 	//! Using the formula from Guide found by the GSoC2012 initiative at http://www.projectpluto.com/update7b.htm#comet_tail_formula
-	Vec2f getComaDiameterAndTailLengthAU() const;
+	Vec2f getComaDiameterAndTailLengthAU();
 	void drawTail(StelCore* core, StelProjector::ModelViewTranformP transfo, bool gas);
 	void drawComa(StelCore* core, StelProjector::ModelViewTranformP transfo);
 
@@ -125,6 +126,7 @@ private:
 	bool nameIsProvisionalDesignation;
 
 	//GZ Tail additions
+	Vec2f tailFactors; // result of latest call to getComaDiameterAndTailLengthAU(); Results cached here for infostring. [0]=Coma diameter, [1] gas tail length.
 	static const float COMET_MIN_TAIL_LENGTH_AU=0.0025; //! tail drawn only if longer than about 1 moon orbit radius (375000km)
 	bool tailActive;		//! true if there is a tail worth bothering (longer than COMET_MIN_TAIL_LENGTH_AU)? Drawing tails is quite costly.
 	double deltaJDtail;             //! like deltaJD, but time difference between tail geometry updates.
@@ -135,13 +137,19 @@ private:
 	float dustTailLengthFactor;     //!< empirical individual length of dust tail relative to gas tail. Taken from ssystem.ini, typical value 0.3..0.5, default 0.4
 	float dustTailBrightnessFactor; //!< empirical individual brightness of dust tail relative to gas tail. Taken from ssystem.ini, default 1.5
 	QVector<double> comaVertexArr;
-	QVector<float> comaTexCoordArr; //  --> 2014-08: COULD BE DECLARED static ONCE FOR ALL COMETS!
+	QVector<float> comaTexCoordArr; //  --> 2014-08: could also be declared static, but it is filled by StelPainter...
+
+	// These are to avoid having index arrays for each comet when all are equal.
+	//static bool createComaTextureCoords; Not useful as this array is computed by a call into StelPainter...
+	static bool createTailIndices;
+	static bool createTailTextureCoords;
+
 	QVector<double> gastailVertexArr;  // computed frequently, describes parabolic shape (along z axis) of gas tail.
 	QVector<double> dusttailVertexArr; // computed frequently, describes parabolic shape (along z axis) of dust tail.
-	QVector<float> tailTexCoordArr; // computed only once per comet! --> 2014-08: COULD BE DECLARED static ONCE FOR ALL COMETS!
-	QVector<unsigned short> tailIndices; // computed only once per comet! --> 2014-08: COULD BE DECLARED static ONCE FOR ALL COMETS!
-	StelTextureSP comaTexture;
-	StelTextureSP tailTexture;      // it seems not really necessary to have different textures. gas tail is just painted blue.
+	static QVector<float> tailTexCoordArr; // computed only once for all comets!
+	static QVector<unsigned short> tailIndices; // computed only once for all comets!
+	static StelTextureSP comaTexture;
+	static StelTextureSP tailTexture;      // it seems not really necessary to have different textures. gas tail is just painted blue.
 };
 
 #endif //_COMET_HPP_

@@ -89,14 +89,15 @@ Comet::Comet(const QString& englishName,
 
 	gastailVertexArr.clear();
 	dusttailVertexArr.clear();
-	tailTexCoordArr.clear();
-	tailIndices.clear();
+	//tailTexCoordArr.clear();
+	//tailIndices.clear();
 	comaVertexArr.clear();
-	comaTexCoordArr.clear();
+	//comaTexCoordArr.clear();
 
-	comaTexture = StelApp::getInstance().getTextureManager().createTextureThread(StelFileMgr::getInstallationDir()+"/textures/cometComa.png", StelTexture::StelTextureParams(true, GL_LINEAR, GL_CLAMP_TO_EDGE));
+	// GZ: Textures now static members, initialized by SolarSystem::loadPlanets()
+	//comaTexture = StelApp::getInstance().getTextureManager().createTextureThread(StelFileMgr::getInstallationDir()+"/textures/cometComa.png", StelTexture::StelTextureParams(true, GL_LINEAR, GL_CLAMP_TO_EDGE));
 	//GZ: tail textures. We use a paraboloid tail body, textured like a fisheye sphere, i.e. center=head. The texture should be something like a mottled star to give some structure.
-	tailTexture = StelApp::getInstance().getTextureManager().createTextureThread(StelFileMgr::getInstallationDir()+"/textures/cometTail.png", StelTexture::StelTextureParams(true, GL_LINEAR, GL_CLAMP_TO_EDGE));
+	//tailTexture = StelApp::getInstance().getTextureManager().createTextureThread(StelFileMgr::getInstallationDir()+"/textures/cometTail.png", StelTexture::StelTextureParams(true, GL_LINEAR, GL_CLAMP_TO_EDGE));
 	//GZ: I think we need only one texture for the tails.
 
 	//Comet specific members
@@ -112,14 +113,6 @@ Comet::Comet(const QString& englishName,
 	isCometFragment = false;
 	nameIsProvisionalDesignation = false;
 }
-
-//void Comet::initClass() // such a thing may work in ObjectiveC only, not C++. This could initialize what would be "class variables" shared by all instances.
-//{
-//	tailIndices.clear();
-//	tailTexCoordArr.clear();
-//	comaTexCoordArr.clear();
-//	// these arrays could be initialized once and shared by all Comets. HOWTO?
-//}
 
 Comet::~Comet()
 {
@@ -220,17 +213,29 @@ QString Comet::getInfoString(const StelCore *core, const InfoStringGroup &flags)
 				   .arg(distanceKm / 1.0e6, 0, 'f', 3);
 		}
 		oss << "<br>";
-		// GZ: Add speed. I don't know where to place that bit of information.
+	}
+	if (flags&Extra)
+	{
+		// GZ: Add speed. I don't know where else to place that bit of information.
 		// xgettext:no-c-format
 		oss << QString(q_("Speed: %1 km/s"))
 			   .arg(((CometOrbit*)userDataPtr)->getVelocity().length()*AU/86400.0, 0, 'f', 3);
 		oss << "<br>";
 	}
 
-	/*
 	if (flags&Size)
-		oss << q_("Apparent diameter: %1").arg(StelUtils::radToDmsStr(2.*getAngularSize(core)*M_PI/180., true));
-	*/
+	{
+	//	oss << q_("Apparent diameter: %1").arg(StelUtils::radToDmsStr(2.*getAngularSize(core)*M_PI/180., true));
+		// GZ: Add estimates for coma diameter and tail length.
+		// xgettext:no-c-format
+		oss << QString(q_("Coma diameter (estimate): %1 km"))
+			   .arg(floor(tailFactors[0]*AU/1000.0f)*1000.0f, 0, 'f', 0);
+		oss << "<br>";
+		// xgettext:no-c-format
+		oss << QString(q_("Gas tail length (estimate): %1 Mio km"))
+			   .arg(tailFactors[1]*AU*1e-6, 0, 'G', 3);
+		oss << "<br>";
+	}
 
 	// If semi-major axis not zero then calculate and display orbital period for comet in days
 	double siderealPeriod = getSiderealPeriod();
@@ -310,13 +315,13 @@ void Comet::computePosition(const double date)
 		if (orbit->getUpdateTails()){
 			// Compute lengths and orientations from orbit object, but only if required.
 			// This part moved from draw() to keep draw() free from too much computation.
-			Vec2f tailFactors=getComaDiameterAndTailLengthAU();
+			tailFactors=getComaDiameterAndTailLengthAU();
 			//qDebug() << "Comet " << englishName << ": tailFactors: Coma: " << tailFactors[0] << ", tail length [AU]: " << tailFactors[1];
 
 			// Note that we use a diameter larger than what the formula returns. A scale factor of 1.2 is ad-hoc/empirical (GZ), but may look better.
 			computeComa(1.0f*tailFactors[0]);
 
-			tailActive = (tailFactors[1] > COMET_MIN_TAIL_LENGTH_AU); // Inhibit tails drawing if too short. Would be nice to include geometric projection angle, but this is too costly.
+			tailActive = (tailFactors[1] > tailFactors[0]); // COMET_MIN_TAIL_LENGTH_AU); // Inhibit tails drawing if too short. Would be nice to include geometric projection angle, but this is too costly.
 
 			if (tailActive)
 			{
@@ -376,7 +381,7 @@ void Comet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFont
 	}
 
 	// GZ: If comet is too faint to be seen, don't bother rendering. (oops, should have been here in 2014-01... ;-)
-	if ((getVMagnitude(core)+2) > core->getSkyDrawer()->getLimitMagnitude())
+	if ((getVMagnitude(core)-2.0f) > core->getSkyDrawer()->getLimitMagnitude())
 	{
 		return;
 	}
@@ -531,7 +536,7 @@ void Comet::drawComa(StelCore* core, StelProjector::ModelViewTranformP transfo)
 }
 
 // Formula found at http://www.projectpluto.com/update7b.htm#comet_tail_formula
-Vec2f Comet::getComaDiameterAndTailLengthAU() const
+Vec2f Comet::getComaDiameterAndTailLengthAU()
 {
 	float r = getHeliocentricEclipticPos().length();
 	float mhelio = absoluteMagnitude + slopeParameter * log10(r);
@@ -563,8 +568,11 @@ void Comet::computeParabola(const float parameter, const float radius, const flo
 	//qDebug() << "vertexArrSize adjusted, has now " << vertexArr.length() << " elements";
 	//texCoordArr.clear();
 	//indices.clear();
-	bool createIndices= indices.empty();
-	bool createTexcoords= texCoordArr.empty();
+	// GZ: Avoid useless re-creating things.
+	//bool createTailIndices= indices.empty();
+	//bool createTailTextureCoords= texCoordArr.empty();
+	if (createTailIndices) indices.clear();
+	if (createTailTextureCoords) texCoordArr.clear();
 	int i;
 	// The parabola has triangular faces with vertices on two circles that are rotated against each other. 
 	float xa[2*COMET_TAIL_SLICES];
@@ -582,7 +590,7 @@ void Comet::computeParabola(const float parameter, const float radius, const flo
 //	vertexArr << 0.0 << 0.0 << zshift;
 	vertexArr.replace(0, 0.0); vertexArr.replace(1, 0.0); vertexArr.replace(2, zshift);
 	int vertexArrIndex=3;
-	if (createTexcoords) texCoordArr << 0.5f << 0.5f;
+	if (createTailTextureCoords) texCoordArr << 0.5f << 0.5f;
 	// define the indices lying on circles, starting at 1: odd rings have 1/slices+1/2slices, even-numbered rings straight 1/slices
 	// inner ring#1
 	int ring;
@@ -596,12 +604,12 @@ void Comet::computeParabola(const float parameter, const float radius, const flo
 			vertexArr.replace(vertexArrIndex++, x+xShift);
 			vertexArr.replace(vertexArrIndex++, y);
 			vertexArr.replace(vertexArrIndex++, z);
-			if (createTexcoords) texCoordArr << 0.5+ 0.5*x/radius << 0.5+0.5*y/radius;
+			if (createTailTextureCoords) texCoordArr << 0.5+ 0.5*x/radius << 0.5+0.5*y/radius;
 		}
 	}
 	//qDebug() << "vertices done, elements:" << vertexArrIndex;
-	// now link the faces with indices. That's fun... ;-)
-	if (createIndices)
+	// now link the faces with indices.
+	if (createTailIndices)
 	{
 		for (i=1; i<COMET_TAIL_SLICES; ++i) indices << 0 << i << i+1;
 		indices << 0 << COMET_TAIL_SLICES << 1; // close inner fan.
@@ -636,4 +644,14 @@ void Comet::computeParabola(const float parameter, const float radius, const flo
 //				 << vertexArr[3*indices[i+1]] << vertexArr[3*indices[i+1]+1] << vertexArr[3*indices[i+1]+2] << "/"
 //				 << vertexArr[3*indices[i+2]] << vertexArr[3*indices[i+2]+1] << vertexArr[3*indices[i+2]+2];
 
+	createTailIndices=false;
+	createTailTextureCoords=false;
 }
+
+// These are to avoid having index arrays for each comet when all are equal.
+bool Comet::createTailIndices=true;
+bool Comet::createTailTextureCoords=true;
+StelTextureSP Comet::comaTexture;
+StelTextureSP Comet::tailTexture;
+QVector<float> Comet::tailTexCoordArr; // computed only once FOR ALL COMETS!
+QVector<unsigned short> Comet::tailIndices; // computed only once FOR ALL COMETS!
