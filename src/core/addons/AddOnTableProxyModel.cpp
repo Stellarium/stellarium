@@ -26,6 +26,11 @@ AddOnTableProxyModel::AddOnTableProxyModel(QString tableName, QObject* parent)
 	setSourceModel(m_sourceModel);
 }
 
+AddOnTableModel* AddOnTableProxyModel::sourceModel() const
+{
+	return m_sourceModel;
+}
+
 QModelIndex AddOnTableProxyModel::mapFromSource(const QModelIndex& sourceIndex) const
 {
 	return index(sourceIndex.row()*2, sourceIndex.column());

@@ -30,6 +30,8 @@ class AddOnTableProxyModel : public QSortFilterProxyModel
 public:
 	AddOnTableProxyModel(QString tableName, QObject* parent=0);
 
+	AddOnTableModel* sourceModel() const;
+
 	QModelIndex mapFromSource(const QModelIndex & sourceIndex) const;
 	QModelIndex mapToSource(const QModelIndex & proxyIndex) const;
 
