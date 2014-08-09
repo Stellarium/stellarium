@@ -7,22 +7,22 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-07-13 12:59+0700\n"
+"POT-Creation-Date: 2014-07-31 17:50+0700\n"
 "PO-Revision-Date: 2014-03-20 04:41+0000\n"
 "Last-Translator: Tanmoy Saha <Unknown>\n"
 "Language-Team: stellarium\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-07-14 05:53+0000\n"
-"X-Generator: Launchpad (build 17111)\n"
+"X-Launchpad-Export-Date: 2014-08-01 05:46+0000\n"
+"X-Generator: Launchpad (build 17141)\n"
 "Language: bn\n"
 
 #: src/core/modules/ConstellationMgr.cpp:107 src/core/modules/StarMgr.cpp:339
 #: src/core/modules/GridLinesMgr.cpp:695 src/core/modules/LandscapeMgr.cpp:353
 #: src/core/modules/NebulaMgr.cpp:126 src/core/modules/SolarSystem.cpp:155
 #: src/core/StelApp.cpp:471 src/core/StelCore.cpp:176
-#: src/core/StelSkyLayerMgr.cpp:87 src/StelMainView.cpp:309
+#: src/core/StelSkyLayerMgr.cpp:87 src/StelMainView.cpp:310
 msgid "Display Options"
 msgstr "দৃশ্যপটের বিকল্পগুলি"
 
@@ -462,7 +462,7 @@ msgid "Night mode"
 msgstr "রাত্রিকালীন প্রদর্শণ সুবিধা"
 
 #. TRANSLATORS: "Planet name" displayed when "flying" to another planet with Ctrl+G.
-#: src/core/StelObserver.cpp:281
+#: src/core/StelObserver.cpp:286
 msgid "SpaceShip"
 msgstr "মহাকাশ যান"
 
@@ -1123,20 +1123,20 @@ msgstr "দিগংশ / উন্নতি : %1/%2"
 
 #: src/core/StelObject.cpp:180
 #, qt-format
-msgid "Ecliptic Topocentric (of J2000): %1/%2"
-msgstr "স্থান কেন্দ্রিক সৌরতলীয় অবস্থান (J2000 অনুযায়ী) : %1/%2"
+msgid "Ecliptic (of J2000): %1/%2"
+msgstr ""
 
 #: src/core/StelObject.cpp:185
 #, qt-format
-msgid "Ecliptic Topocentric (of date): %1/%2"
-msgstr "স্থান কেন্দ্রিক সৌরতলীয় অবস্থান (তারিখ অনুযায়ী) : %1/%2"
+msgid "Ecliptic (of date): %1/%2"
+msgstr ""
 
 #: src/core/StelSkyLayerMgr.cpp:87
 msgid "Deep-sky objects background images"
 msgstr "অতিজাগতিক জ্যোতিষ্কগুলির ছবি"
 
 #: src/core/StelMovementMgr.cpp:130 src/gui/StelGui.cpp:185
-#: src/StelMainView.cpp:308
+#: src/StelMainView.cpp:309
 msgid "Miscellaneous"
 msgstr "অন্যান্য"
 
@@ -1962,19 +1962,30 @@ msgstr "যেখানে"
 msgid "year"
 msgstr "বছর"
 
-#: src/main.cpp:336
+#: src/main.cpp:339
 msgid "This system does not support OpenGL."
 msgstr "এই প্রণালীটির গঠন OpenGL ব্যবহার করতে সক্ষম নয় ।"
 
-#: src/StelMainView.cpp:308
+#: src/main.cpp:349
+msgid ""
+"Insufficient OpenGL version. Please update drivers, graphics hardware, or "
+"use MESA (or ANGLE) version."
+msgstr ""
+
+#: src/main.cpp:352
+msgid ""
+"Insufficient OpenGL version. Please update drivers, or graphics hardware."
+msgstr ""
+
+#: src/StelMainView.cpp:309
 msgid "Save screenshot"
 msgstr "দৃশ্যপটের ছবি সংরক্ষণ"
 
-#: src/StelMainView.cpp:309
+#: src/StelMainView.cpp:310
 msgid "Full-screen mode"
 msgstr "সমগ্র পর্দা জুড়ে প্রদর্শণ"
 
-#: src/StelMainView.cpp:415
+#: src/StelMainView.cpp:416
 #, qt-format
 msgid "Stellarium %1"
 msgstr "Stellarium %1"
@@ -4591,11 +4602,8 @@ msgid "Distance"
 msgstr "দূরত্ব"
 
 #: src/ui_configurationDialog.h:1076
-msgid ""
-"Ecliptic topocentric coordinates, equinox of date and J2000 (only for Earth)"
+msgid "Ecliptic coordinates, equinox of date and J2000 (only for Earth)"
 msgstr ""
-"স্থান কেন্দ্রিক সৌরতলীয় স্থানাঙ্ক, বর্তমান বিষুব বিন্দু ও J2000 অনুযায়ী "
-"(শুধুমাত্র পৃথিবীর ক্ষেত্রে)"
 
 #: src/ui_configurationDialog.h:1078
 msgid "Ecliptic coordinates"
@@ -10218,6 +10226,10 @@ msgstr ""
 #~ msgid "When a Script is Running"
 #~ msgstr "একটি কার্যলিপি চলার সময় ব্যবহৃত সহজ ব্যবহারগুলি"
 
+#, qt-format
+#~ msgid "Ecliptic Topocentric (of date): %1/%2"
+#~ msgstr "স্থান কেন্দ্রিক সৌরতলীয় অবস্থান (তারিখ অনুযায়ী) : %1/%2"
+
 #~ msgid ""
 #~ "The Quasars plugin provides visualization of some quasars brighter than 16 "
 #~ "visual magnitude. A catalogue of quasars compiled from \"Quasars and Active "
@@ -10294,6 +10306,16 @@ msgstr ""
 #~ msgstr ""
 #~ "এই প্লাগইন ১০ ঔজ্জ্বল্যতার বেশি ঔজ্জ্বল্যতার কিছু বিখ্যাত অতিনোভা নির্দেশ "
 #~ "করে : "
+
+#, qt-format
+#~ msgid "Ecliptic Topocentric (of J2000): %1/%2"
+#~ msgstr "স্থান কেন্দ্রিক সৌরতলীয় অবস্থান (J2000 অনুযায়ী) : %1/%2"
+
+#~ msgid ""
+#~ "Ecliptic topocentric coordinates, equinox of date and J2000 (only for Earth)"
+#~ msgstr ""
+#~ "স্থান কেন্দ্রিক সৌরতলীয় স্থানাঙ্ক, বর্তমান বিষুব বিন্দু ও J2000 অনুযায়ী "
+#~ "(শুধুমাত্র পৃথিবীর ক্ষেত্রে)"
 
 #~ msgid ""
 #~ "This plugin marks the 58 navigational stars of the 2102-D Rude Star Finder, "

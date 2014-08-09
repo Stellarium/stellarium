@@ -8,15 +8,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nb\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-07-13 12:59+0700\n"
+"POT-Creation-Date: 2014-07-31 17:50+0700\n"
 "PO-Revision-Date: 2014-07-16 19:54+0000\n"
 "Last-Translator: FreewareTips <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-07-17 05:53+0000\n"
-"X-Generator: Launchpad (build 17114)\n"
+"X-Launchpad-Export-Date: 2014-08-01 06:00+0000\n"
+"X-Generator: Launchpad (build 17141)\n"
 "X-Poedit-Country: NORWAY\n"
 "X-Poedit-Language: Norwegian\n"
 
@@ -24,7 +24,7 @@ msgstr ""
 #: src/core/modules/GridLinesMgr.cpp:695 src/core/modules/LandscapeMgr.cpp:353
 #: src/core/modules/NebulaMgr.cpp:126 src/core/modules/SolarSystem.cpp:155
 #: src/core/StelApp.cpp:471 src/core/StelCore.cpp:176
-#: src/core/StelSkyLayerMgr.cpp:87 src/StelMainView.cpp:309
+#: src/core/StelSkyLayerMgr.cpp:87 src/StelMainView.cpp:310
 msgid "Display Options"
 msgstr "Visningsalternativer"
 
@@ -463,7 +463,7 @@ msgid "Night mode"
 msgstr "Nattmodus"
 
 #. TRANSLATORS: "Planet name" displayed when "flying" to another planet with Ctrl+G.
-#: src/core/StelObserver.cpp:281
+#: src/core/StelObserver.cpp:286
 msgid "SpaceShip"
 msgstr "Romskip"
 
@@ -1046,20 +1046,20 @@ msgstr "Az/Alt: %1/%2"
 
 #: src/core/StelObject.cpp:180
 #, qt-format
-msgid "Ecliptic Topocentric (of J2000): %1/%2"
-msgstr "Ekliptisk toposentrisk (J2000): %1/%2"
+msgid "Ecliptic (of J2000): %1/%2"
+msgstr ""
 
 #: src/core/StelObject.cpp:185
 #, qt-format
-msgid "Ecliptic Topocentric (of date): %1/%2"
-msgstr "Ekliptisk toposentrisk (d.d.): %1/%2"
+msgid "Ecliptic (of date): %1/%2"
+msgstr ""
 
 #: src/core/StelSkyLayerMgr.cpp:87
 msgid "Deep-sky objects background images"
 msgstr "Bakgrunnsbilder for deep-sky-objekter"
 
 #: src/core/StelMovementMgr.cpp:130 src/gui/StelGui.cpp:185
-#: src/StelMainView.cpp:308
+#: src/StelMainView.cpp:309
 msgid "Miscellaneous"
 msgstr "Diverse"
 
@@ -1882,19 +1882,30 @@ msgstr "hvor"
 msgid "year"
 msgstr "år"
 
-#: src/main.cpp:336
+#: src/main.cpp:339
 msgid "This system does not support OpenGL."
 msgstr "Datamaskinen din støtter ikke OpenGL."
 
-#: src/StelMainView.cpp:308
+#: src/main.cpp:349
+msgid ""
+"Insufficient OpenGL version. Please update drivers, graphics hardware, or "
+"use MESA (or ANGLE) version."
+msgstr ""
+
+#: src/main.cpp:352
+msgid ""
+"Insufficient OpenGL version. Please update drivers, or graphics hardware."
+msgstr ""
+
+#: src/StelMainView.cpp:309
 msgid "Save screenshot"
 msgstr "Lagre skjermbilde"
 
-#: src/StelMainView.cpp:309
+#: src/StelMainView.cpp:310
 msgid "Full-screen mode"
 msgstr "Fullskjermmodus"
 
-#: src/StelMainView.cpp:415
+#: src/StelMainView.cpp:416
 #, qt-format
 msgid "Stellarium %1"
 msgstr "Stellarium %1"
@@ -4522,11 +4533,8 @@ msgid "Distance"
 msgstr "Avstand"
 
 #: src/ui_configurationDialog.h:1076
-msgid ""
-"Ecliptic topocentric coordinates, equinox of date and J2000 (only for Earth)"
+msgid "Ecliptic coordinates, equinox of date and J2000 (only for Earth)"
 msgstr ""
-"Ekliptiske toposentriske koordinater, datoens jevndøgn og J2000 (bare for "
-"jorden)"
 
 #: src/ui_configurationDialog.h:1078
 msgid "Ecliptic coordinates"
@@ -10405,6 +10413,10 @@ msgstr "Plass for visning:"
 #~ msgstr ""
 #~ "Dette skriptet viser analemmaen - solens bane over himmelen i løpet av året."
 
+#, qt-format
+#~ msgid "Ecliptic Topocentric (of date): %1/%2"
+#~ msgstr "Ekliptisk toposentrisk (d.d.): %1/%2"
+
 #~ msgid ""
 #~ "Phobos occultations of Earth are common, as are occultations of Jupiter. But "
 #~ "Occultations of both on the same day are very rare. Here's one that takes "
@@ -10457,3 +10469,13 @@ msgstr "Plass for visning:"
 #~ msgstr ""
 #~ "Dette programtillegget markerer de 58 navigasjonsstjernene til 2102-D Rude "
 #~ "Star Finder, er også oppført i Nautical Almanac."
+
+#, qt-format
+#~ msgid "Ecliptic Topocentric (of J2000): %1/%2"
+#~ msgstr "Ekliptisk toposentrisk (J2000): %1/%2"
+
+#~ msgid ""
+#~ "Ecliptic topocentric coordinates, equinox of date and J2000 (only for Earth)"
+#~ msgstr ""
+#~ "Ekliptiske toposentriske koordinater, datoens jevndøgn og J2000 (bare for "
+#~ "jorden)"
