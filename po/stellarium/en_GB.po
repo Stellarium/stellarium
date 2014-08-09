@@ -7,21 +7,21 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-07-13 12:59+0700\n"
-"PO-Revision-Date: 2014-07-13 15:34+0000\n"
-"Last-Translator: gzotti <Georg.Zotti@univie.ac.at>\n"
+"POT-Creation-Date: 2014-07-31 17:50+0700\n"
+"PO-Revision-Date: 2014-08-01 16:54+0000\n"
+"Last-Translator: Andi Chandler <Unknown>\n"
 "Language-Team: English (United Kingdom) <en_GB@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-07-14 06:21+0000\n"
-"X-Generator: Launchpad (build 17111)\n"
+"X-Launchpad-Export-Date: 2014-08-02 05:43+0000\n"
+"X-Generator: Launchpad (build 17147)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:107 src/core/modules/StarMgr.cpp:339
 #: src/core/modules/GridLinesMgr.cpp:695 src/core/modules/LandscapeMgr.cpp:353
 #: src/core/modules/NebulaMgr.cpp:126 src/core/modules/SolarSystem.cpp:155
 #: src/core/StelApp.cpp:471 src/core/StelCore.cpp:176
-#: src/core/StelSkyLayerMgr.cpp:87 src/StelMainView.cpp:309
+#: src/core/StelSkyLayerMgr.cpp:87 src/StelMainView.cpp:310
 msgid "Display Options"
 msgstr "Display Options"
 
@@ -460,7 +460,7 @@ msgid "Night mode"
 msgstr "Night mode"
 
 #. TRANSLATORS: "Planet name" displayed when "flying" to another planet with Ctrl+G.
-#: src/core/StelObserver.cpp:281
+#: src/core/StelObserver.cpp:286
 msgid "SpaceShip"
 msgstr "Spaceship"
 
@@ -1115,20 +1115,20 @@ msgstr "Az/Alt: %1/%2"
 
 #: src/core/StelObject.cpp:180
 #, qt-format
-msgid "Ecliptic Topocentric (of J2000): %1/%2"
-msgstr "Ecliptic Topocentric (of J2000): %1/%2"
+msgid "Ecliptic (of J2000): %1/%2"
+msgstr "Ecliptic (of J2000): %1/%2"
 
 #: src/core/StelObject.cpp:185
 #, qt-format
-msgid "Ecliptic Topocentric (of date): %1/%2"
-msgstr "Ecliptic Topocentric (of date): %1/%2"
+msgid "Ecliptic (of date): %1/%2"
+msgstr "Ecliptic (of date): %1/%2"
 
 #: src/core/StelSkyLayerMgr.cpp:87
 msgid "Deep-sky objects background images"
 msgstr "Deep-sky objects background images"
 
 #: src/core/StelMovementMgr.cpp:130 src/gui/StelGui.cpp:185
-#: src/StelMainView.cpp:308
+#: src/StelMainView.cpp:309
 msgid "Miscellaneous"
 msgstr "Miscellaneous"
 
@@ -1953,19 +1953,33 @@ msgstr "where"
 msgid "year"
 msgstr "year"
 
-#: src/main.cpp:336
+#: src/main.cpp:339
 msgid "This system does not support OpenGL."
 msgstr "This system does not support OpenGL."
 
-#: src/StelMainView.cpp:308
+#: src/main.cpp:349
+msgid ""
+"Insufficient OpenGL version. Please update drivers, graphics hardware, or "
+"use MESA (or ANGLE) version."
+msgstr ""
+"Insufficient OpenGL version. Please update drivers, graphics hardware, or "
+"use MESA (or ANGLE) version."
+
+#: src/main.cpp:352
+msgid ""
+"Insufficient OpenGL version. Please update drivers, or graphics hardware."
+msgstr ""
+"Insufficient OpenGL version. Please update drivers, or graphics hardware."
+
+#: src/StelMainView.cpp:309
 msgid "Save screenshot"
 msgstr "Save screenshot"
 
-#: src/StelMainView.cpp:309
+#: src/StelMainView.cpp:310
 msgid "Full-screen mode"
 msgstr "Full-screen mode"
 
-#: src/StelMainView.cpp:415
+#: src/StelMainView.cpp:416
 #, qt-format
 msgid "Stellarium %1"
 msgstr "Stellarium %1"
@@ -4586,10 +4600,8 @@ msgid "Distance"
 msgstr "Distance"
 
 #: src/ui_configurationDialog.h:1076
-msgid ""
-"Ecliptic topocentric coordinates, equinox of date and J2000 (only for Earth)"
-msgstr ""
-"Ecliptic topocentric coordinates, equinox of date and J2000 (only for Earth)"
+msgid "Ecliptic coordinates, equinox of date and J2000 (only for Earth)"
+msgstr "Ecliptic coordinates, equinox of date and J2000 (only for Earth)"
 
 #: src/ui_configurationDialog.h:1078
 msgid "Ecliptic coordinates"
@@ -5666,6 +5678,7 @@ msgstr "Use degrees and minutes for FOV of CCD"
 msgid ""
 "Mark it if you want the FOV value the same like at the startup of Stellarium."
 msgstr ""
+"Mark it if you want the FOV value the same like at the startup of Stellarium."
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1070
 msgid "Restore FOV to initial values"
@@ -9705,7 +9718,7 @@ msgstr "%1International Meteor Organization%2"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:342
 msgid "Meteor showers is updated"
-msgstr ""
+msgstr "Meteor showers is updated"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:512
 msgid "Meteor Showers Configuration"
@@ -10477,6 +10490,10 @@ msgstr "Place of the string:"
 #~ msgid "Edit Primary Shortcut"
 #~ msgstr "Edit Primary Shortcut"
 
+#, qt-format
+#~ msgid "Ecliptic Topocentric (of date): %1/%2"
+#~ msgstr "Ecliptic Topocentric (of date): %1/%2"
+
 #~ msgid "Sun altitude at twilight: 0 deg."
 #~ msgstr "Sun altitude at twilight: 0 deg."
 
@@ -10575,3 +10592,12 @@ msgstr "Place of the string:"
 #~ msgstr ""
 #~ "This plugin marks the 58 navigational stars of the 2102-D Rude Star Finder, "
 #~ "also tabulated in the Nautical Almanac."
+
+#, qt-format
+#~ msgid "Ecliptic Topocentric (of J2000): %1/%2"
+#~ msgstr "Ecliptic Topocentric (of J2000): %1/%2"
+
+#~ msgid ""
+#~ "Ecliptic topocentric coordinates, equinox of date and J2000 (only for Earth)"
+#~ msgstr ""
+#~ "Ecliptic topocentric coordinates, equinox of date and J2000 (only for Earth)"

@@ -8,15 +8,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-07-13 12:59+0700\n"
-"PO-Revision-Date: 2013-07-24 09:39+0000\n"
-"Last-Translator: Peter Eijlander <peter.eijlander@xs4all.nl>\n"
+"POT-Creation-Date: 2014-07-31 17:50+0700\n"
+"PO-Revision-Date: 2014-08-07 10:59+0000\n"
+"Last-Translator: Johan <eentotenmetdrie+UbuntuOne@gmail.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-07-14 05:56+0000\n"
-"X-Generator: Launchpad (build 17111)\n"
+"X-Launchpad-Export-Date: 2014-08-08 05:57+0000\n"
+"X-Generator: Launchpad (build 17156)\n"
 "X-Poedit-Country: NETHERLANDS\n"
 "X-Poedit-Language: Dutch\n"
 
@@ -24,7 +24,7 @@ msgstr ""
 #: src/core/modules/GridLinesMgr.cpp:695 src/core/modules/LandscapeMgr.cpp:353
 #: src/core/modules/NebulaMgr.cpp:126 src/core/modules/SolarSystem.cpp:155
 #: src/core/StelApp.cpp:471 src/core/StelCore.cpp:176
-#: src/core/StelSkyLayerMgr.cpp:87 src/StelMainView.cpp:309
+#: src/core/StelSkyLayerMgr.cpp:87 src/StelMainView.cpp:310
 msgid "Display Options"
 msgstr "Weergaveopties"
 
@@ -56,7 +56,7 @@ msgstr "Sterren"
 
 #: src/core/modules/StarMgr.cpp:341
 msgid "Stars labels"
-msgstr ""
+msgstr "Sterrennamen"
 
 #: src/core/modules/GridLinesMgr.cpp:546 src/ui_viewDialog.h:1235
 msgid "Meridian"
@@ -115,7 +115,7 @@ msgstr "Equatoriaal J2000 raster"
 
 #: src/core/modules/GridLinesMgr.cpp:703
 msgid "Ecliptic J2000 grid"
-msgstr ""
+msgstr "Eclipticaal coördinatenrooster J2000"
 
 #: src/core/modules/GridLinesMgr.cpp:704 src/ui_viewDialog.h:1227
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:365
@@ -192,12 +192,12 @@ msgstr "Helderheid: <b>%1</b>"
 #: src/core/modules/Nebula.cpp:119
 #, qt-format
 msgid "Surface brightness: <b>%1</b> (extincted to: <b>%2</b>)"
-msgstr ""
+msgstr "Oppervlaktehelderheid: <b>%1</b> (met extinctie: <b>%2</b>)"
 
 #: src/core/modules/Nebula.cpp:125
 #, qt-format
 msgid "Surface brightness: <b>%1</b>"
-msgstr ""
+msgstr "Oppervlaktehelderheid <b>%1</b>"
 
 #: src/core/modules/Nebula.cpp:131
 #, qt-format
@@ -242,7 +242,7 @@ msgstr "Ongedocumenteerd type"
 
 #: src/core/modules/NebulaMgr.cpp:126
 msgid "Deep-sky objects"
-msgstr ""
+msgstr "Deepskyobjecten"
 
 #: src/core/modules/Planet.cpp:158 src/core/modules/MinorPlanet.cpp:235
 #: src/core/modules/MinorPlanet.cpp:239 src/core/modules/Comet.cpp:173
@@ -254,7 +254,7 @@ msgstr "Absolute helderheid: %1"
 #: src/core/modules/Planet.cpp:167
 #, qt-format
 msgid "Obliquity (of date, for Earth): %1"
-msgstr ""
+msgstr "Helling van de ecliptica (van de datum, voor de Aarde): %1"
 
 #: src/core/modules/Planet.cpp:179 src/core/modules/MinorPlanet.cpp:252
 #: src/core/modules/Comet.cpp:203
@@ -266,7 +266,7 @@ msgstr "Afstand: %1 AE (%2 km)"
 #: src/core/modules/Comet.cpp:210
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 Mio km)"
-msgstr ""
+msgstr "Afstand %1 AE (%2 miljoen km)"
 
 #: src/core/modules/Planet.cpp:199
 #, qt-format
@@ -298,12 +298,12 @@ msgstr "Middelbare zonnedag %1"
 #: src/core/modules/Planet.cpp:227
 #, qt-format
 msgid "Phase Angle: %1"
-msgstr ""
+msgstr "Fasehoek: %1"
 
 #: src/core/modules/Planet.cpp:228
 #, qt-format
 msgid "Elongation: %1"
-msgstr ""
+msgstr "Elongatie: %1"
 
 #: src/core/modules/Planet.cpp:229
 #, qt-format
@@ -318,22 +318,22 @@ msgstr "Verlicht: %1%"
 #: src/core/modules/MinorPlanet.cpp:208
 #, qt-format
 msgid "Provisional designation: %1"
-msgstr ""
+msgstr "Voorlopige naam: %1"
 
 #: src/core/modules/Comet.cpp:186
 #, no-c-format, qt-format
 msgid "Distance from Sun: %1AU (%2 km)"
-msgstr ""
+msgstr "Afstand vanaf de Zon: %1 AE (%2 km)"
 
 #: src/core/modules/Comet.cpp:193
 #, no-c-format, qt-format
 msgid "Distance from Sun: %1AU (%2 Mio km)"
-msgstr ""
+msgstr "Afstand vanaf de Zon: %1 AE (%2 miljoen km)"
 
 #: src/core/modules/Comet.cpp:217
 #, no-c-format, qt-format
 msgid "Speed: %1 km/s"
-msgstr ""
+msgstr "Snelheid: %1 km/s"
 
 #: src/core/modules/SolarSystem.cpp:156
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:308
@@ -360,31 +360,31 @@ msgstr "ster"
 #: plugins/Quasars/src/Quasar.cpp:121
 #, qt-format
 msgid "Color Index (B-V): <b>%1</b>"
-msgstr ""
+msgstr "Kleurindex (B-V): <b>%1</b>"
 
 #: src/core/modules/StarWrapper.cpp:144
 msgid "eruptive variable star"
-msgstr ""
+msgstr "eruptieve veranderlijke ster"
 
 #: src/core/modules/StarWrapper.cpp:146
 msgid "pulsating variable star"
-msgstr ""
+msgstr "pulserende veranderlijke ster"
 
 #: src/core/modules/StarWrapper.cpp:148
 msgid "rotating variable star"
-msgstr ""
+msgstr "rotatieveranderlijke ster"
 
 #: src/core/modules/StarWrapper.cpp:150
 msgid "cataclysmic variable star"
-msgstr ""
+msgstr "explosieve veranderlijke ster"
 
 #: src/core/modules/StarWrapper.cpp:153
 msgid "eclipsing binary system"
-msgstr ""
+msgstr "bedekkingsveranderlijke ster"
 
 #: src/core/modules/StarWrapper.cpp:157
 msgid "variable star"
-msgstr ""
+msgstr "veranderlijke ster"
 
 #: src/core/modules/StarWrapper.cpp:161
 msgid "double star"
@@ -393,17 +393,17 @@ msgstr "dubbelster"
 #: src/core/modules/StarWrapper.cpp:168
 #, qt-format
 msgid "Type: <b>%1, %2</b>"
-msgstr ""
+msgstr "Type: <b>%1, %2</b>"
 
 #: src/core/modules/StarWrapper.cpp:207
 #, qt-format
 msgid "Magnitude range: <b>%1</b>%2<b>%3</b> (Photometric system: %4)"
-msgstr ""
+msgstr "Magnitudebereik: <b>%1</b>%2<b>%3</b> (Fotometrisch systeem: %4)"
 
 #: src/core/modules/StarWrapper.cpp:209
 #, qt-format
 msgid "Magnitude range: <b>%1</b>%2<b>%3/%4</b> (Photometric system: %5)"
-msgstr ""
+msgstr "Magnitudebereik: <b>%1</b>%2<b>%3/%4</b> (Fotometrisch systeem: %5)"
 
 #: src/core/modules/StarWrapper.cpp:216
 #: plugins/Supernovae/src/Supernova.cpp:148 plugins/Novae/src/Nova.cpp:153
@@ -426,44 +426,44 @@ msgstr "Parallax: %1\""
 #: src/core/modules/StarWrapper.cpp:230
 #, qt-format
 msgid "Epoch for minimum light: %1 JD"
-msgstr ""
+msgstr "Epoche voor helderheidsminimum: JD %1"
 
 #: src/core/modules/StarWrapper.cpp:232
 #, qt-format
 msgid "Epoch for maximum light: %1 JD"
-msgstr ""
+msgstr "Epoche voor helderheidsmaximum: JD %1"
 
 #: src/core/modules/StarWrapper.cpp:236
 #, qt-format
 msgid "Period: %1 days"
-msgstr ""
+msgstr "Periode: %1 dagen"
 
 #: src/core/modules/StarWrapper.cpp:246
 #, qt-format
 msgid "Next minimum light: %1 UTC"
-msgstr ""
+msgstr "Eerstvolgende helderheidsminimum: %1 UTC"
 
 #: src/core/modules/StarWrapper.cpp:248
 #, qt-format
 msgid "Next maximum light: %1 UTC"
-msgstr ""
+msgstr "Eerstvolgende helderheidsmaximum: %1 UTC"
 
 #: src/core/modules/StarWrapper.cpp:254
 #, qt-format
 msgid "Duration of eclipse: %1%"
-msgstr ""
+msgstr "Lengte van verduistering: %1%"
 
 #: src/core/modules/StarWrapper.cpp:256
 #, qt-format
 msgid "Rising time: %1%"
-msgstr ""
+msgstr "Tijd van opkomst: %1%"
 
 #: src/core/StelApp.cpp:471
 msgid "Night mode"
 msgstr "Nachtmodus"
 
 #. TRANSLATORS: "Planet name" displayed when "flying" to another planet with Ctrl+G.
-#: src/core/StelObserver.cpp:281
+#: src/core/StelObserver.cpp:286
 msgid "SpaceShip"
 msgstr "RuimteSchip"
 
@@ -539,43 +539,43 @@ msgstr "Voeg 1 siderische week toe"
 
 #: src/core/StelCore.cpp:193
 msgid "Add 1 sidereal month"
-msgstr ""
+msgstr "Ga 1 siderische maand verder"
 
 #: src/core/StelCore.cpp:194
 msgid "Add 1 sidereal year"
-msgstr ""
+msgstr "Ga 1 siderisch jaar verder"
 
 #: src/core/StelCore.cpp:195
 msgid "Add 1 sidereal century"
-msgstr ""
+msgstr "Ga 1 siderische eeuw verder"
 
 #: src/core/StelCore.cpp:196
 msgid "Add 1 synodic month"
-msgstr ""
+msgstr "Ga 1 synodische maand verder"
 
 #: src/core/StelCore.cpp:197
 msgid "Add 1 draconic month"
-msgstr ""
+msgstr "Ga 1 draconitische maand verder"
 
 #: src/core/StelCore.cpp:198
 msgid "Add 1 draconic year"
-msgstr ""
+msgstr "Ga 1 draconitisch jaar verder"
 
 #: src/core/StelCore.cpp:199
 msgid "Add 1 anomalistic month"
-msgstr ""
+msgstr "Ga 1 anomalistische maand verder"
 
 #: src/core/StelCore.cpp:200
 msgid "Add 1 mean tropical month"
-msgstr ""
+msgstr "Ga 1 middelbare tropische maand verder"
 
 #: src/core/StelCore.cpp:201
 msgid "Add 1 mean tropical year"
-msgstr ""
+msgstr "Ga 1 middelbaar tropisch jaar verder"
 
 #: src/core/StelCore.cpp:202
 msgid "Add 1 mean tropical century"
-msgstr ""
+msgstr "Ga 1 middelbare tropische eeuw verder"
 
 #: src/core/StelCore.cpp:203
 msgid "Subtract 1 sidereal day"
@@ -587,43 +587,43 @@ msgstr "Trek 1 siderische week af"
 
 #: src/core/StelCore.cpp:205
 msgid "Subtract 1 sidereal month"
-msgstr ""
+msgstr "Ga 1 siderische maand terug"
 
 #: src/core/StelCore.cpp:206
 msgid "Subtract 1 sidereal year"
-msgstr ""
+msgstr "Ga 1 siderisch jaar terug"
 
 #: src/core/StelCore.cpp:207
 msgid "Subtract 1 sidereal century"
-msgstr ""
+msgstr "Ga 1 siderische eeuw terug"
 
 #: src/core/StelCore.cpp:208
 msgid "Subtract 1 synodic month"
-msgstr ""
+msgstr "Ga 1 synodische maand terug"
 
 #: src/core/StelCore.cpp:209
 msgid "Subtract 1 draconic month"
-msgstr ""
+msgstr "Ga 1 draconitische maand terug"
 
 #: src/core/StelCore.cpp:210
 msgid "Subtract 1 draconic year"
-msgstr ""
+msgstr "Ga 1 draconitisch jaar terug"
 
 #: src/core/StelCore.cpp:211
 msgid "Subtract 1 anomalistic month"
-msgstr ""
+msgstr "Ga 1 anomalistische maand terug"
 
 #: src/core/StelCore.cpp:212
 msgid "Subtract 1 mean tropical month"
-msgstr ""
+msgstr "Ga 1 middelbare tropische maand terug"
 
 #: src/core/StelCore.cpp:213
 msgid "Subtract 1 mean tropical year"
-msgstr ""
+msgstr "Ga 1 middelbaar tropisch jaar terug"
 
 #: src/core/StelCore.cpp:214
 msgid "Subtract 1 mean tropical century"
-msgstr ""
+msgstr "Ga 1 middelbare tropische eeuw terug"
 
 #: src/core/StelCore.cpp:216
 msgid "Set home planet to selected planet"
@@ -631,7 +631,7 @@ msgstr "Stel de thuisplaneet in op de geselecteerde planeet"
 
 #: src/core/StelCore.cpp:217
 msgid "Go to home"
-msgstr ""
+msgstr "Ga naar huis"
 
 #: src/core/StelCore.cpp:218
 msgid "Flip scene horizontally"
@@ -697,6 +697,10 @@ msgid ""
 "relation was also implicitly adopted in the syzygy tables of Goldstine "
 "(1973)."
 msgstr ""
+"De tabellen van Tuckerman (1962, 1964) geven de posities van de Zon, Maan en "
+"planeten met intervallen van 5 en 10 dagen van 601 v.Chr. tot 1649 n.Chr.  "
+"In de syzygietabellen van Goldstine (1973) wordt dezelfde relatie impliciet "
+"gebruikt."
 
 #: src/core/StelCore.cpp:1510
 #, qt-format
@@ -749,6 +753,9 @@ msgid ""
 "article <em>Long-term changes in the rotation of the earth - 700 B.C. to "
 "A.D. 1980</em> (%1)."
 msgstr ""
+"Deze formule werd gepubliceerd door F.R. Stephenson en L.V. Morrison in het "
+"artikel <em>Long-term changes in the rotation of the earth - 700 B.C. to "
+"A.D. 1980</em> (%1)."
 
 #: src/core/StelCore.cpp:1525
 msgid "This algorithm is used in the PC planetarium program Guide 7."
@@ -760,6 +767,9 @@ msgid ""
 "Eclipses: 1986-2035</em> (1987) and in his <em>Fifty Year Canon of Lunar "
 "Eclipses: 1986-2035</em> (1989)."
 msgstr ""
+"Dit algoritme werd gegeven door F. Espenak in zijn <em>Fifty Year Canon of "
+"Solar Eclipses: 1986-2035</em> (1987) en in zijn <em>Fifty Year Canon of "
+"Lunar Eclipses: 1986-2035</em> (1989)."
 
 #: src/core/StelCore.cpp:1531
 #, qt-format
@@ -767,6 +777,8 @@ msgid ""
 "This formula was obtained by K.M. Borkowski (%1) from an analysis of 31 "
 "solar eclipse records dating between 2137 BCE and 1715 CE."
 msgstr ""
+"K.M. Borowski (%1) vond deze formule na analyse van 31 waarnemingen van "
+"zonsverduisteringen tussen 2137 v.Chr. en 1715 n.Chr."
 
 #: src/core/StelCore.cpp:1534
 #, qt-format
@@ -776,6 +788,10 @@ msgid ""
 "Period 1800-1988</em> (%1) as data fit through values given by Stephenson & "
 "Morrison (1984)."
 msgstr ""
+"Deze polynoomvergelijking van 12e orde werd gepubliceerd door L.D. Schmadel "
+"en G. Zech in het artikel <em>Empirical Transformations from U.T. to E.T. "
+"for the Period 1800-1988</em> (%1) als aanpassing aan waarden gegeven door "
+"Stephenson & Morrison (1984)."
 
 #: src/core/StelCore.cpp:1537
 msgid ""
@@ -783,6 +799,9 @@ msgid ""
 "version of the ELP 2000-85 lunar theory in their <em>Lunar Tables and "
 "Programs from 4000 B.C. to A.D. 8000</em> (1991)."
 msgstr ""
+"Deze formule werd gebruikt door M. Chapront-Touze & J. Chapront in de "
+"verkorte versie van de \"ELP 2000-85\"-theorie van de Maan in hun <em>Lunar "
+"Tables and Programs from 4000 B.C. to A.D. 8000</em> (1991)."
 
 #: src/core/StelCore.cpp:1540
 #, qt-format
@@ -791,6 +810,9 @@ msgid ""
 "article <em>Long-Term Fluctuations in the Earth's Rotation: 700 BC to AD "
 "1990</em> (%1)."
 msgstr ""
+"Deze formule werd gepubliceerd door F.R. Stephenson en L.V. Morrison in het "
+"artikel <em>Long-Term Fluctuations in the Earth's Rotation: 700 BC to AD "
+"1990</em> (%1)."
 
 #: src/core/StelCore.cpp:1543
 #, qt-format
@@ -807,6 +829,9 @@ msgid ""
 "used. Table for 1620..2000, and includes a variant of Chapront, Chapront-"
 "Touze & Francou (1997) for dates outside 1620..2000."
 msgstr ""
+"Uit J. Meeus, <em>Astronomical Algorithms</em> (2e editie, 1998), en "
+"algemeen gebruikt.  Tabel voor 1620-2000, met een variant van Chapront, "
+"Chapront-Touze & Francou (1997) voor jaartallen buiten 1620-2000."
 
 #: src/core/StelCore.cpp:1549
 #, qt-format
@@ -814,6 +839,9 @@ msgid ""
 "The JPL Solar System Dynamics Group of the NASA Jet Propulsion Laboratory "
 "use this formula in their interactive website %1JPL Horizons%2."
 msgstr ""
+"De JPL Solar System Dynamics Group van het NASA JPL Jet Propulsion-"
+"laboratorium gebruikt deze formule in hun interactieve websitr %1JPL "
+"Horizons%2."
 
 #: src/core/StelCore.cpp:1552
 #, qt-format
@@ -821,6 +849,8 @@ msgid ""
 "This polynome was published by J. Meeus and L. Simons in article "
 "<em>Polynomial approximations to Delta T, 1620-2000 AD</em> (%1)."
 msgstr ""
+"Dit polynoom werd gepubliceerd door J. Meeus en L. Simons in het artikel "
+"<em>Polynomial approximations to Delta T, 1620-2000 AD</em> (%1)."
 
 #: src/core/StelCore.cpp:1555
 msgid ""
@@ -828,6 +858,9 @@ msgid ""
 "Personal Computer</em> (2000) provides simple 3rd-order polynomial data fits "
 "for the recent past."
 msgstr ""
+"De vierde editie van <em>Astronomy on the Personal Computer</em> van O. "
+"Montenbruck en T. Pfleger geeft eenvoudige 3e-graadspolynomen als benadering "
+"voor het recente verleden."
 
 #: src/core/StelCore.cpp:1558
 msgid ""
@@ -836,6 +869,10 @@ msgid ""
 "<em>Calendrical Tabulations</em> (2002). It is based on Jean Meeus' "
 "<em>Astronomical Algorithms</em> (1991)."
 msgstr ""
+"E.M. Reingold en N. Dershowitz geven deze polynoom als benadering in "
+"<em>Calendrical Calculations</em> (3e editie, 2007) en in hun "
+"<em>Calendrical Tabulations</em>.  Het is gebaseerd op <em>Astronomical "
+"Algorithms</em> (1991) van Jean Meeus."
 
 #: src/core/StelCore.cpp:1561
 #, qt-format
@@ -844,6 +881,9 @@ msgid ""
 "in article <em>Historical values of the Earth's clock error %1T and the "
 "calculation of eclipses</em> (%2) with addendum in (%3)."
 msgstr ""
+"Deze belangrijke oplossing werd gepubliceerd door L.V. Morrison en F.R. "
+"Stephenson in het artikel <em>Historical values of the Earth's clock error "
+"%1T and the calculation of eclipses</em> (%2) met addendum in (%3)."
 
 #: src/core/StelCore.cpp:1564
 #, qt-format
@@ -853,6 +893,11 @@ msgid ""
 "cosine and square function. This is based on a possible periodicy described "
 "by Stephenson (%2). See for more info %3here%4."
 msgstr ""
+"Uit de daglengte (LOD; zoals bepaald door Stephenson en Morrison (%2)) "
+"leidde Victor Reijs een %1T-formule af door simplex-optimalisatie met een "
+"cosinus en een vierkante functie.  Dit is gebaseerd op een mogelijke "
+"periodiciteit beschreven door Stephenson (%2).  Zie voor meer informatie "
+"%3hier%4."
 
 #: src/core/StelCore.cpp:1567
 #, qt-format
@@ -863,6 +908,12 @@ msgid ""
 "Solar Eclipses: -1900 to +3000</em> (2006). This formula is also used in the "
 "solar, lunar and planetary ephemeris program SOLEX."
 msgstr ""
+"Deze oplossing door F. Espenak en J. Meeus, gebaseerd op Morrison en "
+"Stephenson (2004) en een polynoombenadering van tabelwaarden voor 1600-2000, "
+"wordt gebruikt voor de %1NASA Eclipse Web Site%2 en in hun <em>Five "
+"Millennium Canon of Solar Eclipses: -1900 to +3000</em> (2006).  Deze "
+"formule wordt ook gebruikt in het zonne-, maan- en "
+"planeetefemeridenprogramma SOLEX."
 
 #: src/core/StelCore.cpp:1567
 msgid "Used by default."
@@ -875,6 +926,9 @@ msgid ""
 "published in article <em>Ancient eclipses and dating the fall of "
 "Babylon</em> (%1)."
 msgstr ""
+"Deze oplossing door B. Banjevic, gebaseerd op Stephenson en Morrison (1984), "
+"werd gepubliceerd in het artikel <em>Ancient eclipses and dating the fall of "
+"Babylon</em> (%1)."
 
 #: src/core/StelCore.cpp:1573
 #, qt-format
@@ -883,6 +937,10 @@ msgid ""
 "Simons (2000), was published in article <em>Error Minimization of Polynomial "
 "Approximation of DeltaT</em> (%1) and revisited by Sana Islam in 2013."
 msgstr ""
+"Deze oplossing door S. Islam, M. Sadiq en M.S. Qureshi, gebaseerd op Meeus "
+"en Simons (2000), werd gepubliceerd in het artikel <em>Error Minimization of "
+"Polynomial Approximation of Delta T</em> (%1) en werd opnieuw besproken door "
+"Sana Islam in 2013."
 
 #: src/core/StelCore.cpp:1576
 #, qt-format
@@ -1070,20 +1128,20 @@ msgstr "Az/Hgte: %1/%2"
 
 #: src/core/StelObject.cpp:180
 #, qt-format
-msgid "Ecliptic Topocentric (of J2000): %1/%2"
-msgstr ""
+msgid "Ecliptic (of J2000): %1/%2"
+msgstr "Ecliptica (van J2000): %1/%2"
 
 #: src/core/StelObject.cpp:185
 #, qt-format
-msgid "Ecliptic Topocentric (of date): %1/%2"
-msgstr ""
+msgid "Ecliptic (of date): %1/%2"
+msgstr "Ecliptica (van de datum): %1/%2"
 
 #: src/core/StelSkyLayerMgr.cpp:87
 msgid "Deep-sky objects background images"
-msgstr ""
+msgstr "Deepskyobjectachtergrondafbeeldingen"
 
 #: src/core/StelMovementMgr.cpp:130 src/gui/StelGui.cpp:185
-#: src/StelMainView.cpp:308
+#: src/StelMainView.cpp:309
 msgid "Miscellaneous"
 msgstr "Diversen"
 
@@ -1363,11 +1421,11 @@ msgstr "Reijs (2006)"
 
 #: src/gui/ConfigurationDialog.cpp:1196
 msgid "Banjevic (2006)"
-msgstr ""
+msgstr "Banjevic (2006)"
 
 #: src/gui/ConfigurationDialog.cpp:1197
 msgid "Islam, Sadiq & Qureshi (2008, 2013)"
-msgstr ""
+msgstr "Islam, Sadiq en Qureshi (2008, 2013)"
 
 #: src/gui/ConfigurationDialog.cpp:1198
 #, qt-format
@@ -1377,23 +1435,23 @@ msgstr "Aangepaste vergelijking voor %1T"
 #. TRANSLATORS: This message will be displayed for users if Stellarium can't get info about version from stellarium.org
 #: src/gui/HelpDialog.cpp:259
 msgid "Oops... Stellarium can't check latest version."
-msgstr ""
+msgstr "Oeps... Stellarium kan de nieuwste versie niet opzoeken."
 
 #. TRANSLATORS: This message will be displayed for users if current version of Stellarium is bigger than version from stellarium.org
 #: src/gui/HelpDialog.cpp:281
 msgid "Looks like you are using the development version of Stellarium."
-msgstr ""
+msgstr "Het lijkt erop dat je de ontwikkelversie van Stellarium gebruikt."
 
 #. TRANSLATORS: This message will be displayed for users if current version of Stellarium is smaller than version from stellarium.org
 #: src/gui/HelpDialog.cpp:286
 #, qt-format
 msgid "This version of Stellarium is outdated! Latest version is %1."
-msgstr ""
+msgstr "Deze versie van Stellarium is te oud!  De nieuwste versie is %1."
 
 #. TRANSLATORS: This message will be displayed for users if current version of Stellarium is equals with version from stellarium.org
 #: src/gui/HelpDialog.cpp:292
 msgid "This is latest stable version of Stellarium."
-msgstr ""
+msgstr "Dit is de nieuwste stabiele versie van Stellarium."
 
 #: src/gui/HelpDialog.cpp:322
 msgid "Stellarium Help"
@@ -1453,6 +1511,8 @@ msgid ""
 "Below are listed only the actions with assigned keys. Further actions may be "
 "available via the \"%1\" button."
 msgstr ""
+"Hieronder staan alleen de acties met toegewezen toetsen.  Andere acties "
+"kunnen beschikbaar zijn via de \"%1\"-toets."
 
 #: src/gui/HelpDialog.cpp:402
 msgid ""
@@ -1650,11 +1710,11 @@ msgstr "%1m"
 
 #: src/gui/StelGuiItems.cpp:616
 msgid "Field of view"
-msgstr ""
+msgstr "Gezichtsveld"
 
 #: src/gui/StelGuiItems.cpp:634
 msgid "Frames per second"
-msgstr ""
+msgstr "Beelden per seconde"
 
 #. TRANSLATORS: Short description for Class 1 of the Bortle scale
 #: src/gui/ViewDialog.cpp:325
@@ -1872,7 +1932,7 @@ msgstr "Harvard Universiteit (VS)"
 
 #: src/gui/SearchDialog.cpp:616
 msgid "Paste and Search"
-msgstr ""
+msgstr "Plakken en Zoeken"
 
 #: src/gui/ShortcutsDialog.cpp:488
 msgid "Action"
@@ -1906,22 +1966,33 @@ msgstr "waarin"
 msgid "year"
 msgstr "jaar"
 
-#: src/main.cpp:336
+#: src/main.cpp:339
 msgid "This system does not support OpenGL."
 msgstr "Dit systeem heeft geen ondersteuning voor OpenGL."
 
-#: src/StelMainView.cpp:308
+#: src/main.cpp:349
+msgid ""
+"Insufficient OpenGL version. Please update drivers, graphics hardware, or "
+"use MESA (or ANGLE) version."
+msgstr ""
+
+#: src/main.cpp:352
+msgid ""
+"Insufficient OpenGL version. Please update drivers, or graphics hardware."
+msgstr ""
+
+#: src/StelMainView.cpp:309
 msgid "Save screenshot"
 msgstr "Schermafbeelding opslaan"
 
-#: src/StelMainView.cpp:309
+#: src/StelMainView.cpp:310
 msgid "Full-screen mode"
 msgstr "Volledig scherm modus"
 
-#: src/StelMainView.cpp:415
+#: src/StelMainView.cpp:416
 #, qt-format
 msgid "Stellarium %1"
-msgstr ""
+msgstr "Stellarium %1"
 
 #: src/translations.h:33 plugins/Exoplanets/src/Exoplanet.cpp:217
 #: plugins/Exoplanets/src/Exoplanet.cpp:221
@@ -4507,8 +4578,7 @@ msgid "Distance"
 msgstr "Aftsand"
 
 #: src/ui_configurationDialog.h:1076
-msgid ""
-"Ecliptic topocentric coordinates, equinox of date and J2000 (only for Earth)"
+msgid "Ecliptic coordinates, equinox of date and J2000 (only for Earth)"
 msgstr ""
 
 #: src/ui_configurationDialog.h:1078
@@ -9440,7 +9510,7 @@ msgstr ""
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:57
 msgid "This plugin shows the coordinates of the mouse pointer."
-msgstr ""
+msgstr "Deze plug-in toont de coördinaten van de muisaanwijzer"
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:95
 msgid "Show equatorial coordinates (J2000.0) of the mouse pointer"
@@ -9472,7 +9542,7 @@ msgstr ""
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:282
 msgid "Show plug-in button on toolbar"
-msgstr ""
+msgstr "Toon plug-inknop in werkbalk"
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:285
 msgid "Place of the string with coordinates of the mouse pointer"
