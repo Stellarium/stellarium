@@ -9,15 +9,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium-uk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-07-13 12:59+0700\n"
-"PO-Revision-Date: 2014-07-13 14:38+0000\n"
+"POT-Creation-Date: 2014-07-31 17:50+0700\n"
+"PO-Revision-Date: 2014-07-31 19:23+0000\n"
 "Last-Translator: Yuri Chornoivan <yurchor@gmail.com>\n"
 "Language-Team: Ukrainian <translation@linux.org.ua>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-07-14 06:19+0000\n"
-"X-Generator: Launchpad (build 17111)\n"
+"X-Launchpad-Export-Date: 2014-08-01 06:09+0000\n"
+"X-Generator: Launchpad (build 17141)\n"
 "X-Poedit-Country: UKRAINE\n"
 "Language: uk\n"
 "X-Poedit-Language: Ukrainian\n"
@@ -27,7 +27,7 @@ msgstr ""
 #: src/core/modules/GridLinesMgr.cpp:695 src/core/modules/LandscapeMgr.cpp:353
 #: src/core/modules/NebulaMgr.cpp:126 src/core/modules/SolarSystem.cpp:155
 #: src/core/StelApp.cpp:471 src/core/StelCore.cpp:176
-#: src/core/StelSkyLayerMgr.cpp:87 src/StelMainView.cpp:309
+#: src/core/StelSkyLayerMgr.cpp:87 src/StelMainView.cpp:310
 msgid "Display Options"
 msgstr "Параметри показу"
 
@@ -467,7 +467,7 @@ msgid "Night mode"
 msgstr "Нічний режим"
 
 #. TRANSLATORS: "Planet name" displayed when "flying" to another planet with Ctrl+G.
-#: src/core/StelObserver.cpp:281
+#: src/core/StelObserver.cpp:286
 msgid "SpaceShip"
 msgstr "Космічний корабель"
 
@@ -1141,20 +1141,20 @@ msgstr "Аз/Висота: %1/%2"
 
 #: src/core/StelObject.cpp:180
 #, qt-format
-msgid "Ecliptic Topocentric (of J2000): %1/%2"
-msgstr "Екліптичні топоцентричні (для J2000): %1/%2"
+msgid "Ecliptic (of J2000): %1/%2"
+msgstr "Екліптичні (епоха J2000): %1/%2"
 
 #: src/core/StelObject.cpp:185
 #, qt-format
-msgid "Ecliptic Topocentric (of date): %1/%2"
-msgstr "Екліптичні топоцентричні (на дату): %1/%2"
+msgid "Ecliptic (of date): %1/%2"
+msgstr "Екліптичні (дата): %1/%2"
 
 #: src/core/StelSkyLayerMgr.cpp:87
 msgid "Deep-sky objects background images"
 msgstr "Зображення тла для далеких об’єктів"
 
 #: src/core/StelMovementMgr.cpp:130 src/gui/StelGui.cpp:185
-#: src/StelMainView.cpp:308
+#: src/StelMainView.cpp:309
 msgid "Miscellaneous"
 msgstr "Інше"
 
@@ -1980,19 +1980,34 @@ msgstr "де"
 msgid "year"
 msgstr "рік"
 
-#: src/main.cpp:336
+#: src/main.cpp:339
 msgid "This system does not support OpenGL."
 msgstr "Система не підтримує OpenGL."
 
-#: src/StelMainView.cpp:308
+#: src/main.cpp:349
+msgid ""
+"Insufficient OpenGL version. Please update drivers, graphics hardware, or "
+"use MESA (or ANGLE) version."
+msgstr ""
+"Недостатньо нова версія OpenGL. Будь ласка, оновіть драйвери, графічне "
+"обладнання або скористайтеся версією драйвера зі складу MESA (або ANGLE)."
+
+#: src/main.cpp:352
+msgid ""
+"Insufficient OpenGL version. Please update drivers, or graphics hardware."
+msgstr ""
+"Недостатньо нова версія OpenGL. Будь ласка, оновіть драйвери або графічне "
+"обладнання."
+
+#: src/StelMainView.cpp:309
 msgid "Save screenshot"
 msgstr "Зберегти знімок екрана"
 
-#: src/StelMainView.cpp:309
+#: src/StelMainView.cpp:310
 msgid "Full-screen mode"
 msgstr "Повноекранний режим"
 
-#: src/StelMainView.cpp:415
+#: src/StelMainView.cpp:416
 #, qt-format
 msgid "Stellarium %1"
 msgstr "Stellarium %1"
@@ -4625,11 +4640,10 @@ msgid "Distance"
 msgstr "Відстань"
 
 #: src/ui_configurationDialog.h:1076
-msgid ""
-"Ecliptic topocentric coordinates, equinox of date and J2000 (only for Earth)"
+msgid "Ecliptic coordinates, equinox of date and J2000 (only for Earth)"
 msgstr ""
-"Екліптичні топоцентричні координати, рівнодення для вказаної дати та J2000 "
-"(лише для Землі)"
+"Екліптичні координати, рівнодення на поточну дату та на епоху J2000 (лише "
+"для Землі)"
 
 #: src/ui_configurationDialog.h:1078
 msgid "Ecliptic coordinates"
@@ -10649,6 +10663,10 @@ msgstr "Розташування рядка:"
 #~ msgid "Edit Alternative Shortcut"
 #~ msgstr "Змінити альтернативне скорочення"
 
+#, qt-format
+#~ msgid "Ecliptic Topocentric (of date): %1/%2"
+#~ msgstr "Екліптичні топоцентричні (на дату): %1/%2"
+
 #~ msgid "Sun altitude at twilight: 0 deg."
 #~ msgstr "Висота сонця у сутінках: 0°"
 
@@ -10690,3 +10708,13 @@ msgstr "Розташування рядка:"
 #~ "За допомогою цього додатка програма може позначати 58 навігаційних зірок з "
 #~ "каталогу 2102-D Rude Star Finder, таблиці для яких також можна знайти у "
 #~ "a«Календарі мореплавця»."
+
+#~ msgid ""
+#~ "Ecliptic topocentric coordinates, equinox of date and J2000 (only for Earth)"
+#~ msgstr ""
+#~ "Екліптичні топоцентричні координати, рівнодення для вказаної дати та J2000 "
+#~ "(лише для Землі)"
+
+#, qt-format
+#~ msgid "Ecliptic Topocentric (of J2000): %1/%2"
+#~ msgstr "Екліптичні топоцентричні (для J2000): %1/%2"

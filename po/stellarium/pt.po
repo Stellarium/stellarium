@@ -7,21 +7,21 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-07-13 12:59+0700\n"
-"PO-Revision-Date: 2014-07-04 02:14+0000\n"
+"POT-Creation-Date: 2014-07-31 17:50+0700\n"
+"PO-Revision-Date: 2014-08-03 03:12+0000\n"
 "Last-Translator: Tiago S. <Unknown>\n"
 "Language-Team: Portuguese <pt@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-07-14 06:12+0000\n"
-"X-Generator: Launchpad (build 17111)\n"
+"X-Launchpad-Export-Date: 2014-08-04 05:52+0000\n"
+"X-Generator: Launchpad (build 17147)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:107 src/core/modules/StarMgr.cpp:339
 #: src/core/modules/GridLinesMgr.cpp:695 src/core/modules/LandscapeMgr.cpp:353
 #: src/core/modules/NebulaMgr.cpp:126 src/core/modules/SolarSystem.cpp:155
 #: src/core/StelApp.cpp:471 src/core/StelCore.cpp:176
-#: src/core/StelSkyLayerMgr.cpp:87 src/StelMainView.cpp:309
+#: src/core/StelSkyLayerMgr.cpp:87 src/StelMainView.cpp:310
 msgid "Display Options"
 msgstr "Opções de Exibição"
 
@@ -461,7 +461,7 @@ msgid "Night mode"
 msgstr "Modo nocturno"
 
 #. TRANSLATORS: "Planet name" displayed when "flying" to another planet with Ctrl+G.
-#: src/core/StelObserver.cpp:281
+#: src/core/StelObserver.cpp:286
 msgid "SpaceShip"
 msgstr "Espaçonave"
 
@@ -1129,20 +1129,20 @@ msgstr "Az/Alt: %1/%2"
 
 #: src/core/StelObject.cpp:180
 #, qt-format
-msgid "Ecliptic Topocentric (of J2000): %1/%2"
-msgstr "Eclíptica topocêntrica (em J2000): %1/%2"
+msgid "Ecliptic (of J2000): %1/%2"
+msgstr "Eclíptica (de J2000): %1/%2"
 
 #: src/core/StelObject.cpp:185
 #, qt-format
-msgid "Ecliptic Topocentric (of date): %1/%2"
-msgstr "Eclíptica/Topocêntrica (da data): %1/%2"
+msgid "Ecliptic (of date): %1/%2"
+msgstr "Eclíptica (da data): %1/%2"
 
 #: src/core/StelSkyLayerMgr.cpp:87
 msgid "Deep-sky objects background images"
 msgstr "Imagens de fundo de objectos do céu profundo"
 
 #: src/core/StelMovementMgr.cpp:130 src/gui/StelGui.cpp:185
-#: src/StelMainView.cpp:308
+#: src/StelMainView.cpp:309
 msgid "Miscellaneous"
 msgstr "Diversos"
 
@@ -1242,7 +1242,7 @@ msgstr "Licença"
 
 #: src/gui/ConfigurationDialog.cpp:831
 msgid "Shortcut"
-msgstr ""
+msgstr "Atalho"
 
 #: src/gui/ConfigurationDialog.cpp:855
 msgid "Running script: "
@@ -1972,19 +1972,33 @@ msgstr "onde"
 msgid "year"
 msgstr "ano"
 
-#: src/main.cpp:336
+#: src/main.cpp:339
 msgid "This system does not support OpenGL."
 msgstr "Este sistema não suporta OpenGL."
 
-#: src/StelMainView.cpp:308
+#: src/main.cpp:349
+msgid ""
+"Insufficient OpenGL version. Please update drivers, graphics hardware, or "
+"use MESA (or ANGLE) version."
+msgstr ""
+"A versão do OpenGL é insuficiente. Atualize os drivers, a placa gráfica ou "
+"use a versão MESA (ou ANGLE)."
+
+#: src/main.cpp:352
+msgid ""
+"Insufficient OpenGL version. Please update drivers, or graphics hardware."
+msgstr ""
+"A versão do OpenGL é insuficiente. Atualize os drivers ou a placa gráfica."
+
+#: src/StelMainView.cpp:309
 msgid "Save screenshot"
 msgstr "Gravar captura de ecrã"
 
-#: src/StelMainView.cpp:309
+#: src/StelMainView.cpp:310
 msgid "Full-screen mode"
 msgstr "Modo de ecrã completo"
 
-#: src/StelMainView.cpp:415
+#: src/StelMainView.cpp:416
 #, qt-format
 msgid "Stellarium %1"
 msgstr "Stellarium %1"
@@ -2364,39 +2378,39 @@ msgstr "Ícaro"
 #. TRANSLATORS: Asteroid (1809) Prometheus
 #: src/translations.h:147
 msgid "Prometheus"
-msgstr ""
+msgstr "Prometeu"
 
 #: src/translations.h:148
 msgid "Prometheus (moon)"
-msgstr ""
+msgstr "Prometeu (lua)"
 
 #. TRANSLATORS: Asteroid (1810) Epimetheus
 #: src/translations.h:150
 msgid "Epimetheus"
-msgstr ""
+msgstr "Epimeteu"
 
 #: src/translations.h:151
 msgid "Epimetheus (moon)"
-msgstr ""
+msgstr "Epimeteu (lua)"
 
 #. TRANSLATORS: Asteroid (951) Gaspra
 #: src/translations.h:153
 msgid "Gaspra"
-msgstr ""
+msgstr "Gaspra"
 
 #. TRANSLATORS: Asteroid (243) Ida
 #: src/translations.h:155
 msgid "Ida"
-msgstr ""
+msgstr "Ida"
 
 #. TRANSLATORS: Asteroid (218) Bianca
 #: src/translations.h:157
 msgid "Bianca"
-msgstr ""
+msgstr "Bianca"
 
 #: src/translations.h:158
 msgid "Bianca (moon)"
-msgstr ""
+msgstr "Bianca (lua)"
 
 #. TRANSLATORS: Proper name of comet C/1680 V1
 #: src/translations.h:161
@@ -2843,6 +2857,11 @@ msgid ""
 "Jupiter's radiation belt. Therefore, if humans ever colonize Jupiter's "
 "moons, Callisto will be the one."
 msgstr ""
+"<p align=\"justify\">As maiores elongações e trânsitos da Terra a partir de "
+"Calisto, entre 2000 e 3000. Por que Calisto? Bem, dos quatro satélites "
+"galileanos, Calisto é o único fora do cinturão de radiação de Júpiter. Por "
+"isso, se algum dia os seres humanos colonizarem uma lua de Júpiter, ela será "
+"Calisto."
 
 #: src/translations.h:319
 msgid "Andorra"
@@ -4620,11 +4639,9 @@ msgid "Distance"
 msgstr "Distância"
 
 #: src/ui_configurationDialog.h:1076
-msgid ""
-"Ecliptic topocentric coordinates, equinox of date and J2000 (only for Earth)"
+msgid "Ecliptic coordinates, equinox of date and J2000 (only for Earth)"
 msgstr ""
-"Coordenadas eclípticas topocêntricas, equinócio da data e de J200 (apenas "
-"para a Terra)"
+"Coordenadas eclípticas, equinócio da data e de J2000 (apenas para a Terra)."
 
 #: src/ui_configurationDialog.h:1078
 msgid "Ecliptic coordinates"
@@ -10264,6 +10281,10 @@ msgstr "Lugar da cadeia de caractéres:"
 #~ msgid "Magnitude: <b>%1</b> (B-V: <b>%2</b>)"
 #~ msgstr "Magnitude: <b>%1</b> (B-V: <b>%2</b>)"
 
+#, qt-format
+#~ msgid "Ecliptic Topocentric (of date): %1/%2"
+#~ msgstr "Eclíptica/Topocêntrica (da data): %1/%2"
+
 #~ msgid ""
 #~ "Screensaver of various happenings in the Solar System. 171 events in all!"
 #~ msgstr ""
@@ -10703,3 +10724,13 @@ msgstr "Lugar da cadeia de caractéres:"
 #~ msgstr ""
 #~ "Este complemento marca 58 estrelas navegacionais do 2102-D Rude Star Finder, "
 #~ "também tabuladas no Almanaque Náutico."
+
+#, qt-format
+#~ msgid "Ecliptic Topocentric (of J2000): %1/%2"
+#~ msgstr "Eclíptica topocêntrica (em J2000): %1/%2"
+
+#~ msgid ""
+#~ "Ecliptic topocentric coordinates, equinox of date and J2000 (only for Earth)"
+#~ msgstr ""
+#~ "Coordenadas eclípticas topocêntricas, equinócio da data e de J200 (apenas "
+#~ "para a Terra)"

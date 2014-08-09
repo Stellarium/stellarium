@@ -7,21 +7,21 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-07-13 12:59+0700\n"
+"POT-Creation-Date: 2014-07-31 17:50+0700\n"
 "PO-Revision-Date: 2014-01-11 11:44+0000\n"
 "Last-Translator: Jeong, Tae-Min <jtm71@chollian.net>\n"
 "Language-Team: Korean <ko@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-07-14 06:05+0000\n"
-"X-Generator: Launchpad (build 17111)\n"
+"X-Launchpad-Export-Date: 2014-08-01 05:56+0000\n"
+"X-Generator: Launchpad (build 17141)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:107 src/core/modules/StarMgr.cpp:339
 #: src/core/modules/GridLinesMgr.cpp:695 src/core/modules/LandscapeMgr.cpp:353
 #: src/core/modules/NebulaMgr.cpp:126 src/core/modules/SolarSystem.cpp:155
 #: src/core/StelApp.cpp:471 src/core/StelCore.cpp:176
-#: src/core/StelSkyLayerMgr.cpp:87 src/StelMainView.cpp:309
+#: src/core/StelSkyLayerMgr.cpp:87 src/StelMainView.cpp:310
 msgid "Display Options"
 msgstr "화면 표시 설정"
 
@@ -460,7 +460,7 @@ msgid "Night mode"
 msgstr "야간 모드"
 
 #. TRANSLATORS: "Planet name" displayed when "flying" to another planet with Ctrl+G.
-#: src/core/StelObserver.cpp:281
+#: src/core/StelObserver.cpp:286
 msgid "SpaceShip"
 msgstr "우주선"
 
@@ -1054,20 +1054,20 @@ msgstr "방위/고도: %1/%2"
 
 #: src/core/StelObject.cpp:180
 #, qt-format
-msgid "Ecliptic Topocentric (of J2000): %1/%2"
+msgid "Ecliptic (of J2000): %1/%2"
 msgstr ""
 
 #: src/core/StelObject.cpp:185
 #, qt-format
-msgid "Ecliptic Topocentric (of date): %1/%2"
-msgstr "황도지점: %1/%2"
+msgid "Ecliptic (of date): %1/%2"
+msgstr ""
 
 #: src/core/StelSkyLayerMgr.cpp:87
 msgid "Deep-sky objects background images"
 msgstr "딥스카이 천체 배경이미지"
 
 #: src/core/StelMovementMgr.cpp:130 src/gui/StelGui.cpp:185
-#: src/StelMainView.cpp:308
+#: src/StelMainView.cpp:309
 msgid "Miscellaneous"
 msgstr "기타"
 
@@ -1882,19 +1882,30 @@ msgstr "어디서"
 msgid "year"
 msgstr "년"
 
-#: src/main.cpp:336
+#: src/main.cpp:339
 msgid "This system does not support OpenGL."
 msgstr "이 시스템은 OpenGL을 지원하지 않습니다."
 
-#: src/StelMainView.cpp:308
+#: src/main.cpp:349
+msgid ""
+"Insufficient OpenGL version. Please update drivers, graphics hardware, or "
+"use MESA (or ANGLE) version."
+msgstr ""
+
+#: src/main.cpp:352
+msgid ""
+"Insufficient OpenGL version. Please update drivers, or graphics hardware."
+msgstr ""
+
+#: src/StelMainView.cpp:309
 msgid "Save screenshot"
 msgstr "스크린샷 저장"
 
-#: src/StelMainView.cpp:309
+#: src/StelMainView.cpp:310
 msgid "Full-screen mode"
 msgstr "전체 화면 모드"
 
-#: src/StelMainView.cpp:415
+#: src/StelMainView.cpp:416
 #, qt-format
 msgid "Stellarium %1"
 msgstr "스텔라리움 %1"
@@ -4477,8 +4488,7 @@ msgid "Distance"
 msgstr "거리"
 
 #: src/ui_configurationDialog.h:1076
-msgid ""
-"Ecliptic topocentric coordinates, equinox of date and J2000 (only for Earth)"
+msgid "Ecliptic coordinates, equinox of date and J2000 (only for Earth)"
 msgstr ""
 
 #: src/ui_configurationDialog.h:1078
@@ -9752,6 +9762,10 @@ msgstr ""
 
 #~ msgid "(geometric)"
 #~ msgstr "(기하학적)"
+
+#, qt-format
+#~ msgid "Ecliptic Topocentric (of date): %1/%2"
+#~ msgstr "황도지점: %1/%2"
 
 #, qt-format
 #~ msgid "Apparent Magnitude: <b>%1</b> (by extinction)"
