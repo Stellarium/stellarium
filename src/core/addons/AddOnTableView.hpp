@@ -31,6 +31,9 @@ public:
 	virtual ~AddOnTableView();
 
 	void setModel(QAbstractItemModel* model);
+
+private:
+	bool isCompatible(QString first, QString last);
 };
 
 #endif // _ADDONTABLEVIEW_HPP_

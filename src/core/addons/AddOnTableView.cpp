@@ -18,10 +18,12 @@
  */
 
 #include <QHeaderView>
+#include <QStringBuilder>
 
 #include "AddOnTableProxyModel.hpp"
 #include "AddOnTableView.hpp"
 #include "StelAddOnDAO.hpp"
+#include "StelUtils.hpp"
 #include "widget/CheckedHeader.hpp"
 
 AddOnTableView::AddOnTableView(QWidget* parent)
@@ -54,4 +56,34 @@ void AddOnTableView::setModel(QAbstractItemModel* model)
 	hideColumn(proxy->findColumn(COLUMN_ADDONID));
 	hideColumn(proxy->findColumn(COLUMN_FIRST_STEL));
 	hideColumn(proxy->findColumn(COLUMN_LAST_STEL));
+
+	// Hide imcompatible add-ons
+	for (int row=0; row < model->rowCount(); row=row+2)
+	{
+		QString first = model->index(row, 2).data().toString();
+		QString last = model->index(row, 3).data().toString();
+		setRowHidden(row, !isCompatible(first, last));
+	}
+}
+
+bool AddOnTableView::isCompatible(QString first, QString last)
+{
+	QStringList c = StelUtils::getApplicationVersion().split(".");
+	QStringList f = first.split(".");
+	QStringList l = last.split(".");
+
+	if (c.size() < 3 || f.size() < 3 || l.size() < 3) {
+		return false; // invalid version
+	}
+
+	int currentVersion = QString(c.at(0) % "00" % c.at(1) % "0" % c.at(2)).toInt();
+	int firstVersion = QString(f.at(0) % "00" % f.at(1) % "0" % f.at(2)).toInt();
+	int lastVersion = QString(l.at(0) % "00" % l.at(1) % "0" % l.at(2)).toInt();
+
+	if (currentVersion < firstVersion || currentVersion > lastVersion)
+	{
+		return false; // out of bounds
+	}
+
+	return true;
 }
