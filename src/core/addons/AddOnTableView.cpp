@@ -45,6 +45,7 @@ void AddOnTableView::setModel(QAbstractItemModel* model)
 	// Add checkbox in the last column
 	int lastColumn = model->columnCount() - 1; // checkbox column
 	setHorizontalHeader(new CheckedHeader(lastColumn, Qt::Horizontal, this));
+	horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 	horizontalHeader()->setSectionResizeMode(lastColumn, QHeaderView::ResizeToContents);
 
 	// Hide internal columns
