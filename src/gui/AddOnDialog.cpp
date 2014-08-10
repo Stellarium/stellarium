@@ -18,16 +18,16 @@
 */
 
 #include <QDateTime>
-#include <QSqlQueryModel>
 #include <QStringBuilder>
 
 #include "AddOnDialog.hpp"
+#include "AddOnWidget.hpp"
 #include "ui_addonDialog.h"
 #include "StelApp.hpp"
 #include "StelGui.hpp"
 #include "StelTranslator.hpp"
-#include "StelUtils.hpp"
 #include "addons/AddOnTableModel.hpp"
+#include "addons/AddOnTableProxyModel.hpp"
 
 AddOnDialog::AddOnDialog(QObject* parent) : StelDialog(parent)
 {
@@ -152,9 +152,9 @@ void AddOnDialog::populateTables()
 	}
 
 	int tab = 0;
-	foreach (QTableView* view, m_tableViews)
+	foreach (AddOnTableView* view, m_tableViews)
 	{
-		setUpTableView(view, m_tabToTableName.value((Tab)tab));
+		view->setModel(new AddOnTableProxyModel(m_tabToTableName.value((Tab)tab), this));
 		insertCheckBoxes(view, (Tab)tab);
 		tab++;
 	}
@@ -168,64 +168,15 @@ void AddOnDialog::insertCheckBoxes(QTableView* tableview, Tab tab)
 		this, SLOT(slotRowSelected(int, bool)));
 
 	int lastColumn = tableview->horizontalHeader()->count() - 1;
-	for(int row=0; row < tableview->model()->rowCount(); ++row)
+	for(int row=0; row < tableview->model()->rowCount(); row=row+2)
 	{
 		QCheckBox* cbox = new QCheckBox();
 		cbox->setStyleSheet("QCheckBox { padding-left: 8px; }");
+		cbox->setAutoFillBackground(true);
 		tableview->setIndexWidget(tableview->model()->index(row, lastColumn), cbox);
 		checkboxes->addButton(cbox, row);
 	}
 	m_checkBoxes.insert(tab, checkboxes);
-}
-
-void AddOnDialog::setUpTableView(QTableView* tableView, QString tableName)
-{
-	AddOnTableModel* model = new AddOnTableModel(tableName);
-	tableView->setModel(model);
-
-	// hide internal columns
-	tableView->setColumnHidden(model->findColumn(COLUMN_ID), true);
-	tableView->setColumnHidden(model->findColumn(COLUMN_ADDONID), true);
-	tableView->setColumnHidden(model->findColumn(COLUMN_FIRST_STEL), true);
-	tableView->setColumnHidden(model->findColumn(COLUMN_LAST_STEL), true);
-
-	// hide imcompatible add-ons
-	for (int row = 0; row < model->rowCount(); row++)
-	{
-		tableView->setRowHidden(row,
-					!isCompatible(model->index(row, 2).data().toString(),
-						      model->index(row, 3).data().toString()));
-	}
-
-	tableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
-	int lastColumn = tableView->horizontalHeader()->count() - 1; // checkbox
-	tableView->horizontalHeader()->setSectionResizeMode(lastColumn, QHeaderView::ResizeToContents);
-	tableView->verticalHeader()->setVisible(false);
-	tableView->setAlternatingRowColors(false);
-	tableView->setSelectionBehavior(QAbstractItemView::SelectRows);
-	tableView->setEditTriggers(false);
-}
-
-bool AddOnDialog::isCompatible(QString first, QString last)
-{
-	QStringList c = StelUtils::getApplicationVersion().split(".");
-	QStringList f = first.split(".");
-	QStringList l = last.split(".");
-
-	if (c.size() < 3 || f.size() < 3 || l.size() < 3) {
-		return false; // invalid version
-	}
-
-	int currentVersion = QString(c.at(0) % "00" % c.at(1) % "0" % c.at(2)).toInt();
-	int firstVersion = QString(f.at(0) % "00" % f.at(1) % "0" % f.at(2)).toInt();
-	int lastVersion = QString(l.at(0) % "00" % l.at(1) % "0" % l.at(2)).toInt();
-
-	if (currentVersion < firstVersion || currentVersion > lastVersion)
-	{
-		return false; // out of bounds
-	}
-
-	return true;
 }
 
 void AddOnDialog::updateCatalog()

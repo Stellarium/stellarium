@@ -20,14 +20,15 @@
 #ifndef _ADDONDIALOG_HPP_
 #define _ADDONDIALOG_HPP_
 
-#include "StelAddOnMgr.hpp"
-#include "StelDialog.hpp"
-
 #include <QCheckBox>
 #include <QListWidgetItem>
 #include <QNetworkReply>
 #include <QObject>
 #include <QTableView>
+
+#include "AddOnTableView.hpp"
+#include "StelAddOnMgr.hpp"
+#include "StelDialog.hpp"
 
 class Ui_addonDialogForm;
 
@@ -73,12 +74,10 @@ private:
 	QNetworkReply* m_pUpdateCatalogReply;
 	QHash<Tab, QButtonGroup*> m_checkBoxes;
 	QList<QPair<int, int> > m_iSelectedAddOns;
-	QList<QTableView*> m_tableViews;
+	QList<AddOnTableView*> m_tableViews;
 	QMap<Tab, QString> m_tabToTableName;
 
 	void updateTabBarListWidgetWidth();
-	void setUpTableView(QTableView* tableView, QString tableName);
-	bool isCompatible(QString first, QString last);
 	void insertCheckBoxes(QTableView* tableview, Tab tab);
 };
 
