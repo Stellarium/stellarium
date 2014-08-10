@@ -126,11 +126,7 @@ void StelSkyItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
 	// XXX: to reintroduce
 	//distortPos(&pos);
 	pos.setY(height() - 1 - pos.y());
-	QMouseEvent newEvent(QEvent::MouseButtonPress,
-								QPoint(pos.x(), pos.y()),
-								event->button(),
-								event->buttons(),
-								event->modifiers());
+	QMouseEvent newEvent(QEvent::MouseButtonPress, QPoint(pos.x(), pos.y()), event->button(), event->buttons(), event->modifiers());
 	StelApp::getInstance().handleClick(&newEvent);
 }
 
@@ -140,11 +136,7 @@ void StelSkyItem::mouseReleaseEvent(QGraphicsSceneMouseEvent* event)
 	// XXX: to reintroduce
 	// distortPos(&pos);
 	pos.setY(height() - 1 - pos.y());
-	QMouseEvent newEvent(QEvent::MouseButtonRelease,
-								QPoint(pos.x(), pos.y()),
-								event->button(),
-								event->buttons(),
-								event->modifiers());
+	QMouseEvent newEvent(QEvent::MouseButtonRelease, QPoint(pos.x(), pos.y()), event->button(), event->buttons(), event->modifiers());
 	StelApp::getInstance().handleClick(&newEvent);
 }
 
