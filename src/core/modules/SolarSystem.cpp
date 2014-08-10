@@ -69,7 +69,7 @@ SolarSystem::SolarSystem()
 	, flagMarker(false)
 	, allTrails(NULL)
 {
-	planetNameFont.setPixelSize(StelApp::getInstance().getSettings()->value("gui/base_font_size", 13).toInt());
+	planetNameFont.setPixelSize(StelApp::getInstance().getBaseFontSize());
 	setObjectName("SolarSystem");
 }
 
