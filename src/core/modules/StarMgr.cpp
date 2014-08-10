@@ -135,8 +135,7 @@ StarMgr::StarMgr(void)
 		qFatal("ERROR: StarMgr::StarMgr: no memory");
 	}
 	maxGeodesicGridLevel = -1;
-	lastMaxSearchLevel = -1;
-	starFont.setPixelSize(StelApp::getInstance().getSettings()->value("gui/base_font_size", 13).toInt());
+	lastMaxSearchLevel = -1;	
 	objectMgr = GETSTELMODULE(StelObjectMgr);
 	Q_ASSERT(objectMgr);
 }
@@ -319,7 +318,7 @@ void StarMgr::init()
 	}
 
 	loadData(starSettings);
-	starFont.setPixelSize(StelApp::getInstance().getSettings()->value("gui/base_font_size", 13).toInt());
+	starFont.setPixelSize(StelApp::getInstance().getBaseFontSize());
 
 	setFlagStars(conf->value("astro/flag_stars", true).toBool());
 	setFlagLabels(conf->value("astro/flag_star_name",true).toBool());

@@ -361,7 +361,8 @@ QStandardItem* ShortcutsDialog::updateGroup(const QString& group)
 	// setup bold font for group lines
 	QFont rootFont = groupItem->font();
 	rootFont.setBold(true);
-	rootFont.setPixelSize(14);
+	// Font size is 14
+	rootFont.setPixelSize(StelApp::getInstance().getBaseFontSize()+1);
 	groupItem->setFont(rootFont);
 	if (isNew)
 		mainModel->appendRow(groupItem);

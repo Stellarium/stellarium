@@ -150,7 +150,8 @@ Oculars::Oculars():
 	flagInitFOVUsage(false),
 	reticleRotation(0)
 {
-	font.setPixelSize(14);
+	// Font size is 14
+	font.setPixelSize(StelApp::getInstance().getBaseFontSize()+1);
 
 	ccds = QList<CCD *>();
 	oculars = QList<Ocular *>();
