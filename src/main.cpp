@@ -25,6 +25,9 @@
 #include "CLIProcessor.hpp"
 #include "StelIniParser.hpp"
 #include "StelUtils.hpp"
+#ifndef DISABLE_SCRIPTING
+#include "StelScriptOutput.hpp"
+#endif
 
 #include <QDebug>
 
@@ -184,6 +187,10 @@ int main(int argc, char **argv)
 	// Start logging.
 	StelLogger::init(StelFileMgr::getUserDir()+"/log.txt");
 	StelLogger::writeLog(argStr);
+
+	#ifndef DISABLE_SCRIPTING
+	StelScriptOutput::init(StelFileMgr::getUserDir()+"/output.txt");
+	#endif
 
 	// OK we start the full program.
 	// Print the console splash and get on with loading the program
