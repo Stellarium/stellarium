@@ -335,10 +335,12 @@ BottomStelBar::BottomStelBar(QGraphicsItem* parent,
 	QColor color = QColor::fromRgbF(1,1,1,1);
 	setColor(color);
 
-	datetime->font().setPixelSize(12);
-	location->font().setPixelSize(12);
-	fov->font().setPixelSize(12);
-	fps->font().setPixelSize(12);
+	// Font size is 12
+	int baseFontSize = StelApp::getInstance().getBaseFontSize()-1;
+	datetime->font().setPixelSize(baseFontSize);
+	location->font().setPixelSize(baseFontSize);
+	fov->font().setPixelSize(baseFontSize);
+	fps->font().setPixelSize(baseFontSize);
 
 	flagShowTime = true;
 	flagShowLocation = true;

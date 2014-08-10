@@ -59,7 +59,6 @@ ConstellationMgr::ConstellationMgr(StarMgr *_hip_stars)
 	setObjectName("ConstellationMgr");
 	Q_ASSERT(hipStarMgr);
 	isolateSelected = false;
-	asterFont.setPixelSize(15);
 }
 
 ConstellationMgr::~ConstellationMgr()
