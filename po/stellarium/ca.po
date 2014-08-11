@@ -11,14 +11,14 @@ msgstr ""
 "Project-Id-Version: ca\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-07-31 17:50+0700\n"
-"PO-Revision-Date: 2014-07-17 17:11+0000\n"
+"PO-Revision-Date: 2014-08-10 16:26+0000\n"
 "Last-Translator: Daniel Alomar i Claramonte <daniel.adastra@gmail.com>\n"
 "Language-Team: Català <ca@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-08-01 05:48+0000\n"
-"X-Generator: Launchpad (build 17141)\n"
+"X-Launchpad-Export-Date: 2014-08-11 05:41+0000\n"
+"X-Generator: Launchpad (build 17156)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:107 src/core/modules/StarMgr.cpp:339
 #: src/core/modules/GridLinesMgr.cpp:695 src/core/modules/LandscapeMgr.cpp:353
@@ -192,7 +192,7 @@ msgstr "Magnitud: <b>%1</b>"
 #: src/core/modules/Nebula.cpp:119
 #, qt-format
 msgid "Surface brightness: <b>%1</b> (extincted to: <b>%2</b>)"
-msgstr ""
+msgstr "Brillantor superficial: <b>%1</b> (Extint a: <b>%2</b>)"
 
 #: src/core/modules/Nebula.cpp:125
 #, qt-format
@@ -1130,12 +1130,12 @@ msgstr "Az/Alt: %1/%2"
 #: src/core/StelObject.cpp:180
 #, qt-format
 msgid "Ecliptic (of J2000): %1/%2"
-msgstr ""
+msgstr "Eclíptica (de J2000): %1/%2"
 
 #: src/core/StelObject.cpp:185
 #, qt-format
 msgid "Ecliptic (of date): %1/%2"
-msgstr ""
+msgstr "Eclíptica (de la data): %1/%2"
 
 #: src/core/StelSkyLayerMgr.cpp:87
 msgid "Deep-sky objects background images"
@@ -1976,11 +1976,15 @@ msgid ""
 "Insufficient OpenGL version. Please update drivers, graphics hardware, or "
 "use MESA (or ANGLE) version."
 msgstr ""
+"Versió OpenGL insuficient. Si us plau, actualitzi els controladors de "
+"maquinari de gràfics, o utilitzi una versió MESA (o ANGLE)."
 
 #: src/main.cpp:352
 msgid ""
 "Insufficient OpenGL version. Please update drivers, or graphics hardware."
 msgstr ""
+"Versió OpenGL insuficient. Si us plau, actualitzi els controladors o "
+"maquinari de gràfics."
 
 #: src/StelMainView.cpp:309
 msgid "Save screenshot"
@@ -2355,35 +2359,35 @@ msgstr "Faetó"
 #. TRANSLATORS: Asteroid (1866) Sisyphus
 #: src/translations.h:141
 msgid "Sisyphus"
-msgstr ""
+msgstr "Sisyphus"
 
 #. TRANSLATORS: Asteroid (1864) Daedalus
 #: src/translations.h:143
 msgid "Daedalus"
-msgstr ""
+msgstr "Daedalus"
 
 #. TRANSLATORS: Asteroid (1566) Icarus
 #: src/translations.h:145
 msgid "Icarus"
-msgstr ""
+msgstr "Icarus"
 
 #. TRANSLATORS: Asteroid (1809) Prometheus
 #: src/translations.h:147
 msgid "Prometheus"
-msgstr ""
+msgstr "Prometheus"
 
 #: src/translations.h:148
 msgid "Prometheus (moon)"
-msgstr ""
+msgstr "Prometheus (lluna)"
 
 #. TRANSLATORS: Asteroid (1810) Epimetheus
 #: src/translations.h:150
 msgid "Epimetheus"
-msgstr ""
+msgstr "Epimetheus"
 
 #: src/translations.h:151
 msgid "Epimetheus (moon)"
-msgstr ""
+msgstr "Epimetheus (lluna)"
 
 #. TRANSLATORS: Asteroid (951) Gaspra
 #: src/translations.h:153
@@ -4624,6 +4628,7 @@ msgstr "Distància"
 #: src/ui_configurationDialog.h:1076
 msgid "Ecliptic coordinates, equinox of date and J2000 (only for Earth)"
 msgstr ""
+"Coordenades eclíptica, equinocci de data i J2000 (només per a la Terra)"
 
 #: src/ui_configurationDialog.h:1078
 msgid "Ecliptic coordinates"
@@ -4782,6 +4787,8 @@ msgstr "L'allunyament automàtic torna a la direcció inicial de la vista"
 msgid ""
 "Auto-enabling of the atmosphere for bodies with atmosphere in location window"
 msgstr ""
+"Auto-habilitació de l'atmosfera per als cossos amb l'atmosfera a la finestra "
+"d'ubicació"
 
 #: src/ui_configurationDialog.h:1150
 msgid "Auto-enabling for the atmosphere"
