@@ -22,10 +22,10 @@
 
 #include "AddOnDialog.hpp"
 #include "AddOnWidget.hpp"
-#include "ui_addonDialog.h"
 #include "StelApp.hpp"
 #include "StelGui.hpp"
 #include "StelTranslator.hpp"
+#include "ui_addonDialog.h"
 #include "addons/AddOnTableModel.hpp"
 #include "addons/AddOnTableProxyModel.hpp"
 

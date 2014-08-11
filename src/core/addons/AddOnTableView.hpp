@@ -30,6 +30,7 @@ public:
 	AddOnTableView(QWidget* parent=0);
 	virtual ~AddOnTableView();
 
+	void selectionChanged(const QItemSelection& selected, const QItemSelection& deselected);
 	void setModel(QAbstractItemModel* model);
 
 private:

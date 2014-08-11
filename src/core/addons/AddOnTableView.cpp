@@ -40,6 +40,27 @@ AddOnTableView::~AddOnTableView()
 {
 }
 
+void AddOnTableView::selectionChanged(const QItemSelection& selected, const QItemSelection& deselected)
+{
+	if (!deselected.isEmpty())
+	{
+		int row = deselected.first().top();
+		if (!(row % 2))
+		{
+			hideRow(row + 1);
+		}
+	}
+	if (!selected.isEmpty())
+	{
+		int row = selected.first().top();
+		if (!(row % 2))
+		{
+			showRow(row + 1);
+		}
+	}
+	update();
+}
+
 void AddOnTableView::setModel(QAbstractItemModel* model)
 {
 	QTableView::setModel(model);
