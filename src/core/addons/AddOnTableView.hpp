@@ -23,6 +23,8 @@
 #include <QAbstractItemModel>
 #include <QTableView>
 
+#include "AddOnWidget.hpp"
+
 class AddOnTableView : public QTableView
 {
 	Q_OBJECT
@@ -34,6 +36,8 @@ public:
 	void setModel(QAbstractItemModel* model);
 
 private:
+	QHash<int, AddOnWidget*> m_pWidgets;
+	void insertAddOnWidget(int row);
 	bool isCompatible(QString first, QString last);
 };
 

@@ -55,10 +55,23 @@ void AddOnTableView::selectionChanged(const QItemSelection& selected, const QIte
 		int row = selected.first().top();
 		if (!(row % 2))
 		{
+			insertAddOnWidget(row + 1);
 			showRow(row + 1);
 		}
 	}
 	update();
+}
+
+void AddOnTableView::insertAddOnWidget(int row)
+{
+	if (m_pWidgets.contains(row))
+	{
+		return;
+	}
+	AddOnWidget* widget = new AddOnWidget(this);
+	setRowHeight(row, widget->height());
+	setIndexWidget(model()->index(row, 0), widget);
+	m_pWidgets.insert(row, widget);
 }
 
 void AddOnTableView::setModel(QAbstractItemModel* model)
