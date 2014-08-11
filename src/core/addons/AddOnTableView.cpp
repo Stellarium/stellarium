@@ -64,6 +64,13 @@ void AddOnTableView::setModel(QAbstractItemModel* model)
 		QString last = model->index(row, 3).data().toString();
 		setRowHidden(row, !isCompatible(first, last));
 	}
+
+	// Hide and span empty rows
+	for (int row=1; row < model->rowCount(); row=row+2)
+	{
+		setSpan(row, 0, 1, model->columnCount());
+		hideRow(row);
+	}
 }
 
 bool AddOnTableView::isCompatible(QString first, QString last)
