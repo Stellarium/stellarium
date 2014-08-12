@@ -128,7 +128,7 @@ void AddOnDialog::changePage(QListWidgetItem *current, QListWidgetItem *previous
 {
 	// cleaning checkboxes
 	Tab prev = (Tab) ui->stackedWidget->currentIndex();
-	foreach (QAbstractButton* cbox, m_checkBoxes.value(prev)->buttons()) {
+	foreach (QAbstractButton* cbox, m_checkBoxGroups.value(prev)->buttons()) {
 		cbox->setChecked(false);
 	}
 
@@ -145,9 +145,9 @@ void AddOnDialog::populateTables()
 
 	// destroying all checkboxes
 	int i = 0;
-	while (!m_checkBoxes.isEmpty())
+	while (!m_checkBoxGroups.isEmpty())
 	{
-		delete m_checkBoxes.take((Tab)i);
+		delete m_checkBoxGroups.take((Tab)i);
 		i++;
 	}
 
@@ -176,7 +176,7 @@ void AddOnDialog::insertCheckBoxes(QTableView* tableview, Tab tab)
 		tableview->setIndexWidget(tableview->model()->index(row, lastColumn), cbox);
 		checkboxes->addButton(cbox, row);
 	}
-	m_checkBoxes.insert(tab, checkboxes);
+	m_checkBoxGroups.insert(tab, checkboxes);
 }
 
 void AddOnDialog::updateCatalog()

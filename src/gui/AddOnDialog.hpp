@@ -72,7 +72,7 @@ private:
 	};
 
 	QNetworkReply* m_pUpdateCatalogReply;
-	QHash<Tab, QButtonGroup*> m_checkBoxes;
+	QHash<Tab, QButtonGroup*> m_checkBoxGroups;
 	QList<QPair<int, int> > m_iSelectedAddOns;
 	QList<AddOnTableView*> m_tableViews;
 	QMap<Tab, QString> m_tabToTableName;
