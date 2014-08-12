@@ -38,6 +38,11 @@ AddOnTableView::AddOnTableView(QWidget* parent)
 
 AddOnTableView::~AddOnTableView()
 {
+	for (int row=1; row < model()->rowCount(); row=row+2)
+	{
+		delete m_pWidgets.take(row);
+	}
+	m_pWidgets.clear();
 }
 
 void AddOnTableView::selectionChanged(const QItemSelection& selected, const QItemSelection& deselected)
