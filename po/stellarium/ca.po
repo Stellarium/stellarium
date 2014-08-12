@@ -11,13 +11,13 @@ msgstr ""
 "Project-Id-Version: ca\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-07-31 17:50+0700\n"
-"PO-Revision-Date: 2014-08-10 16:26+0000\n"
+"PO-Revision-Date: 2014-08-11 17:42+0000\n"
 "Last-Translator: Daniel Alomar i Claramonte <daniel.adastra@gmail.com>\n"
 "Language-Team: Català <ca@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-08-11 05:41+0000\n"
+"X-Launchpad-Export-Date: 2014-08-12 05:55+0000\n"
 "X-Generator: Launchpad (build 17156)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:107 src/core/modules/StarMgr.cpp:339
@@ -4792,7 +4792,7 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:1150
 msgid "Auto-enabling for the atmosphere"
-msgstr ""
+msgstr "Auto-activat per l'atmosfera"
 
 #: src/ui_configurationDialog.h:1151
 msgid "Screenshots"
@@ -5713,11 +5713,11 @@ msgstr "Utilitzeu graus i minuts per FOV de la CCD"
 #: plugins/Oculars/src/ui_ocularDialog.h:1068
 msgid ""
 "Mark it if you want the FOV value the same like at the startup of Stellarium."
-msgstr ""
+msgstr "Marca-ho si vols el valor del CDV igual que a l'inici de Stellarium."
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1070
 msgid "Restore FOV to initial values"
-msgstr ""
+msgstr "Restaura el CDV als valors inicials"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1071
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:225
@@ -8450,7 +8450,7 @@ msgstr "L'Arxiu d'Exoplanetes de la NASA"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:194
 msgid "IAU Commission 53: Extrasolar Planets"
-msgstr ""
+msgstr "Comissió UAI 53: Els planetes extrasolars"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:195
 msgid "ExoMol"
@@ -8513,10 +8513,12 @@ msgid ""
 "Display of the planetary systems, which contains the potential habitable "
 "exoplanets"
 msgstr ""
+"Visualització dels sistemes planetaris, que conté els potencials exoplanetes "
+"habitables"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:324
 msgid "Enable display of the potential habitable exoplanets only"
-msgstr ""
+msgstr "Activeu la visualització només dels possibles exoplanetes habitables"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:326
 msgid "Show exoplanets button on toolbar"
@@ -8534,7 +8536,7 @@ msgstr "Llocs web"
 
 #: plugins/Observability/src/Observability.cpp:67
 msgid "Observability Analysis"
-msgstr ""
+msgstr "Anàlisi d'observavilitat"
 
 #: plugins/Observability/src/Observability.cpp:70
 msgid ""
@@ -8546,6 +8548,13 @@ msgid ""
 "setting. (Explanations are provided in the 'About' tab of the plugin's "
 "configuration window.)"
 msgstr ""
+"Mostra un anàlisi d'observabilitat d'un objecte seleccionat (hora d'ortus, "
+"d'ocàs,  i de trànsit) per a la data actual, així com quan s'observa a "
+"través de l'any. Un objecte se suposa que és observable si està per sobre de "
+"l'horitzó durant una fracció de la nit. També s'inclouen les dates de la "
+"major separació del Sol i els valors acrònics i còsmics de l'ortus i l'ocàs. "
+"(La informació es proporcionada a la pestanya \"Quant a\" Ode la finestra de "
+"configuració del plug-in.)"
 
 #: plugins/Observability/src/Observability.cpp:170
 msgctxt "short month name"
@@ -8666,37 +8675,37 @@ msgstr "La font no és observable."
 
 #: plugins/Observability/src/Observability.cpp:198
 msgid "No acronychal nor cosmical rise/set."
-msgstr ""
+msgstr "Ni acrònic ni còsmic ortus/ocàs"
 
 #: plugins/Observability/src/Observability.cpp:199
 #, qt-format
 msgid "Greatest elongation: %1 (at %2 deg.)"
-msgstr ""
+msgstr "Màxima elongació: %1 (a %2 graun.)"
 
 #: plugins/Observability/src/Observability.cpp:200
 #, qt-format
 msgid "Largest Sun separation: %1 (at %2 deg.)"
-msgstr ""
+msgstr "Major separació del sol: %1 (a %2 graus.)"
 
 #. TRANSLATORS: The space at the end is significant - another sentence may follow.
 #: plugins/Observability/src/Observability.cpp:203
 #, qt-format
 msgid "Acronychal rise/set: %1/%2. "
-msgstr ""
+msgstr "Ortus/ocàs acrònic : %1/%2. "
 
 #. TRANSLATORS: The space at the end is significant - another sentence may follow.
 #: plugins/Observability/src/Observability.cpp:205
 msgid "No acronychal rise/set. "
-msgstr ""
+msgstr "Sense ortus/ocàs acrònic. "
 
 #: plugins/Observability/src/Observability.cpp:206
 #, qt-format
 msgid "Cosmical rise/set: %1/%2."
-msgstr ""
+msgstr "Ortus/ocàs còsmic: %1/%2."
 
 #: plugins/Observability/src/Observability.cpp:207
 msgid "No cosmical rise/set."
-msgstr ""
+msgstr "Sense ortus/ocàs còsmic."
 
 #: plugins/Observability/src/Observability.cpp:208
 msgid "Observable during the whole year."
@@ -8709,7 +8718,7 @@ msgstr "No és observable en la nit fosca."
 #: plugins/Observability/src/Observability.cpp:210
 #, qt-format
 msgid "Nights above horizon: %1"
-msgstr ""
+msgstr "Nits per sobre l'horitzó: %1."
 
 #: plugins/Observability/src/Observability.cpp:211
 msgid "TODAY:"
@@ -8920,7 +8929,7 @@ msgstr ""
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:195
 #, qt-format
 msgid "Sun altitude at twilight: %1 deg."
-msgstr ""
+msgstr "Altitud del Sol al crepuscle:: %1 graus."
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:201
 #, qt-format
