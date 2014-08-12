@@ -42,7 +42,8 @@ void CheckedHeader::paintSection(QPainter* painter, const QRect& rect, int logic
 		}
 
 		QSize size(10,10);
-		QPoint point(rect.x()+8, rect.y() + rect.height()/2 - size.height()/2);
+		QPoint point(rect.x() + rect.width()/2 - size.width()/2,
+			     rect.y() + rect.height()/2 - size.height()/2);
 		option.rect = QRect(point, size);
 
 		if (m_bChecked)
