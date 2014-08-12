@@ -188,10 +188,6 @@ int main(int argc, char **argv)
 	StelLogger::init(StelFileMgr::getUserDir()+"/log.txt");
 	StelLogger::writeLog(argStr);
 
-	#ifndef DISABLE_SCRIPTING
-	StelScriptOutput::init(StelFileMgr::getUserDir()+"/output.txt");
-	#endif
-
 	// OK we start the full program.
 	// Print the console splash and get on with loading the program
 	QString versionLine = QString("This is %1 - http://www.stellarium.org").arg(StelUtils::getApplicationName());
@@ -295,6 +291,14 @@ int main(int argc, char **argv)
 
 	Q_ASSERT(confSettings);
 	qDebug() << "Config file is: " << QDir::toNativeSeparators(configFileFullPath);
+
+	#ifndef DISABLE_SCRIPTING
+	QString outputFile = StelFileMgr::getUserDir()+"/output.txt";
+	if (confSettings->value("main/use_separate_output_file", false).toBool())
+		outputFile = StelFileMgr::getUserDir()+"/output-"+QDateTime::currentDateTime().toString("yyyyMMdd-HHmmss")+".txt";
+	StelScriptOutput::init(outputFile);
+	#endif
+
 
 	// Override config file values from CLI.
 	CLIProcessor::parseCLIArgsPostConfig(argList, confSettings);
