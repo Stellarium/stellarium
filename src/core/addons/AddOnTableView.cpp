@@ -33,6 +33,7 @@ AddOnTableView::AddOnTableView(QWidget* parent)
 	verticalHeader()->setVisible(false);
 	setAlternatingRowColors(false);
 	setSelectionBehavior(QAbstractItemView::SelectRows);
+	setSelectionMode(QAbstractItemView::SingleSelection);
 	setEditTriggers(false);
 }
 
@@ -45,23 +46,32 @@ AddOnTableView::~AddOnTableView()
 	m_pWidgets.clear();
 }
 
+void AddOnTableView::mousePressEvent(QMouseEvent *e)
+{
+	QTableView::mousePressEvent(e);
+	if (!indexAt(e->pos()).isValid())
+	{
+		clearSelection();
+	}
+}
+
 void AddOnTableView::selectionChanged(const QItemSelection& selected, const QItemSelection& deselected)
 {
 	if (!deselected.isEmpty())
 	{
-		int row = deselected.first().top();
-		if (!(row % 2))
+		int drow = deselected.first().top() + 1;
+		if (drow % 2)
 		{
-			hideRow(row + 1);
+			hideRow(drow);
 		}
 	}
 	if (!selected.isEmpty())
 	{
-		int row = selected.first().top();
-		if (!(row % 2))
+		int srow = selected.first().top() + 1;
+		if (srow % 2)
 		{
-			insertAddOnWidget(row + 1);
-			showRow(row + 1);
+			insertAddOnWidget(srow);
+			showRow(srow);
 		}
 	}
 	update();
