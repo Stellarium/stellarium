@@ -297,6 +297,9 @@ private:
 	//! Remove constellations from selected objects
 	void deselectConstellations(void);
 
+	void setFlagStippledBoundaries(bool b) { stippledBoundaries = b; }
+	bool getFlagStippledBoundaries(void) const { return stippledBoundaries; }
+
 	std::vector<Constellation*> selected; // More than one can be selected at a time
 
 	Constellation* isStarIn(const StelObject *s) const;
@@ -317,6 +320,7 @@ private:
 	bool boundariesDisplayed;
 	bool linesDisplayed;
 	bool namesDisplayed;
+	bool stippledBoundaries;
 };
 
 #endif // _CONSTELLATIONMGR_HPP_
