@@ -68,13 +68,14 @@ private:
 		LANGUAGEPACK,
 		SCRIPT,
 		STARLORE,
-		TEXTURE
+		TEXTURE,
+		COUNT
 	};
 
 	QNetworkReply* m_pUpdateCatalogReply;
+	QHash<Tab, AddOnTableView*> m_tableViews;
 	QHash<Tab, QButtonGroup*> m_checkBoxGroups;
 	QList<QPair<int, int> > m_iSelectedAddOns;
-	QList<AddOnTableView*> m_tableViews;
 	QMap<Tab, QString> m_tabToTableName;
 
 	void updateTabBarListWidgetWidth();

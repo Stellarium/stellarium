@@ -62,14 +62,13 @@ void AddOnDialog::createDialogContent()
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()),this, SLOT(retranslate()));
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 
-	// storing all tableViews in a list (easier to iterate)
-	// it must be ordered according to the stackwidget
-	m_tableViews.append(ui->catalogsTableView);
-	m_tableViews.append(ui->landscapeTableView);
-	m_tableViews.append(ui->languageTableView);
-	m_tableViews.append(ui->scriptsTableView);
-	m_tableViews.append(ui->starloreTableView);
-	m_tableViews.append(ui->texturesTableView);
+	// hashing all tableViews
+	m_tableViews.insert(CATALOG, ui->catalogsTableView);
+	m_tableViews.insert(LANDSCAPE, ui->landscapeTableView);
+	m_tableViews.insert(LANGUAGEPACK, ui->languageTableView);
+	m_tableViews.insert(SCRIPT, ui->scriptsTableView);
+	m_tableViews.insert(STARLORE, ui->starloreTableView);
+	m_tableViews.insert(TEXTURE, ui->texturesTableView);
 
 	// mapping enum_tab to table names
 	m_tabToTableName.insert(CATALOG, TABLE_CATALOG);
@@ -151,12 +150,11 @@ void AddOnDialog::populateTables()
 		i++;
 	}
 
-	int tab = 0;
-	foreach (AddOnTableView* view, m_tableViews)
-	{
-		view->setModel(new AddOnTableProxyModel(m_tabToTableName.value((Tab)tab), this));
-		insertCheckBoxes(view, (Tab)tab);
-		tab++;
+	for (int itab=0; itab<COUNT; itab++) {
+		Tab tab = (Tab)itab;
+		AddOnTableView* view = m_tableViews.value(tab);
+		view->setModel(new AddOnTableProxyModel(m_tabToTableName.value(tab), this));
+		insertCheckBoxes(view, tab);
 	}
 }
 
@@ -237,7 +235,7 @@ void AddOnDialog::downloadFinished()
 
 void AddOnDialog::slotRowSelected(int row, bool checked)
 {
-	AddOnTableModel* model = (AddOnTableModel*) m_tableViews.at(ui->stackedWidget->currentIndex())->model();
+	AddOnTableModel* model = (AddOnTableModel*) m_tableViews.value((Tab)ui->stackedWidget->currentIndex())->model();
 	int addOnId = model->findIndex(row, COLUMN_ADDONID).data().toInt();
 	bool installed = "Yes" == model->findIndex(row, COLUMN_INSTALLED).data().toString();
 	if (checked)
