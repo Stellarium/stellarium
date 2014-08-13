@@ -48,11 +48,13 @@ AddOnTableView::~AddOnTableView()
 
 void AddOnTableView::mousePressEvent(QMouseEvent *e)
 {
-	QTableView::mousePressEvent(e);
-	if (!indexAt(e->pos()).isValid())
+	QModelIndex index = indexAt(e->pos());
+	if (!index.isValid() || !isRowHidden(index.row() + 1))
 	{
 		clearSelection();
+		return;
 	}
+	selectRow(index.row());
 }
 
 void AddOnTableView::selectionChanged(const QItemSelection& selected, const QItemSelection& deselected)
