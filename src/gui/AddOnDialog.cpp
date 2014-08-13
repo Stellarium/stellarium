@@ -127,17 +127,22 @@ void AddOnDialog::changePage(QListWidgetItem *current, QListWidgetItem *previous
 {
 	Tab prev = (Tab) ui->stackedWidget->currentIndex();
 	// cleaning checkboxes
-	if (m_checkBoxGroups.value(prev))
+	QButtonGroup* group = m_checkBoxGroups.value(prev);
+	if (group)
 	{
-		foreach (QAbstractButton* cbox, m_checkBoxGroups.value(prev)->buttons()) {
+		foreach (QAbstractButton* cbox, group->buttons())
+		{
 			cbox->setChecked(false);
 		}
 	}
-
-	if (!current)
+	// cleaning selection
+	AddOnTableView* lastView = m_tableViews.value(prev);
+	if (lastView)
 	{
-		current = previous;
+		lastView->clearSelection();
 	}
+
+	current = current ? current : previous;
 	ui->stackedWidget->setCurrentIndex(ui->stackListWidget->row(current));
 }
 
