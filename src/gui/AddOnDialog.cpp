@@ -125,10 +125,13 @@ void AddOnDialog::updateTabBarListWidgetWidth()
 
 void AddOnDialog::changePage(QListWidgetItem *current, QListWidgetItem *previous)
 {
-	// cleaning checkboxes
 	Tab prev = (Tab) ui->stackedWidget->currentIndex();
-	foreach (QAbstractButton* cbox, m_checkBoxGroups.value(prev)->buttons()) {
-		cbox->setChecked(false);
+	// cleaning checkboxes
+	if (m_checkBoxGroups.value(prev))
+	{
+		foreach (QAbstractButton* cbox, m_checkBoxGroups.value(prev)->buttons()) {
+			cbox->setChecked(false);
+		}
 	}
 
 	if (!current)
