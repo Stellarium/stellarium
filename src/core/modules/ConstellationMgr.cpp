@@ -87,8 +87,7 @@ void ConstellationMgr::init()
 	asterFont.setPixelSize(conf->value("viewing/constellation_font_size", 14).toInt());
 	setFlagLines(conf->value("viewing/flag_constellation_drawing").toBool());
 	setFlagLabels(conf->value("viewing/flag_constellation_name").toBool());
-	setFlagBoundaries(conf->value("viewing/flag_constellation_boundaries",false).toBool());
-	setFlagStippledBoundaries(conf->value("viewing/flag_stippled_boundaries",false).toBool());
+	setFlagBoundaries(conf->value("viewing/flag_constellation_boundaries",false).toBool());	
 	setArtIntensity(conf->value("viewing/constellation_art_intensity", 0.5f).toFloat());
 	setArtFadeDuration(conf->value("viewing/constellation_art_fade_duration",2.f).toFloat());
 	setFlagArt(conf->value("viewing/flag_constellation_art").toBool());
@@ -1091,18 +1090,11 @@ void ConstellationMgr::drawBoundaries(StelPainter& sPainter) const
 {
 	sPainter.enableTexture2d(false);
 	glDisable(GL_BLEND);
-	if (getFlagStippledBoundaries())
-	{
-		glLineStipple(2, 0x3333);
-		glEnable(GL_LINE_STIPPLE);
-	}
 	vector < Constellation * >::const_iterator iter;
 	for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
 	{
 		(*iter)->drawBoundaryOptim(sPainter);
-	}
-	if (getFlagStippledBoundaries())
-		glDisable(GL_LINE_STIPPLE);
+	}	
 }
 
 StelObjectP ConstellationMgr::searchByNameI18n(const QString& nameI18n) const
