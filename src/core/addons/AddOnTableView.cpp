@@ -17,6 +17,7 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
+#include <QCheckBox>
 #include <QHeaderView>
 #include <QStringBuilder>
 
@@ -28,6 +29,7 @@
 
 AddOnTableView::AddOnTableView(QWidget* parent)
 	: QTableView(parent)
+	, m_pCheckboxGroup(new QButtonGroup(this))
 {
 	setAutoFillBackground(true);
 	verticalHeader()->setVisible(false);
@@ -35,15 +37,23 @@ AddOnTableView::AddOnTableView(QWidget* parent)
 	setSelectionBehavior(QAbstractItemView::SelectRows);
 	setSelectionMode(QAbstractItemView::SingleSelection);
 	setEditTriggers(false);
+
+	m_pCheckboxGroup->setExclusive(false);
+	connect(m_pCheckboxGroup, SIGNAL(buttonToggled(int, bool)),
+		this, SLOT(slotRowChecked(int, bool)));
 }
 
 AddOnTableView::~AddOnTableView()
 {
-	for (int row=1; row < model()->rowCount(); row=row+2)
+	int i = 0;
+	while (!m_widgets.isEmpty())
 	{
-		delete m_pWidgets.take(row);
+		delete m_widgets.take(i);
+		i++;
 	}
-	m_pWidgets.clear();
+	m_widgets.clear();
+
+	m_pCheckboxGroup->deleteLater();
 }
 
 void AddOnTableView::mousePressEvent(QMouseEvent *e)
@@ -81,25 +91,47 @@ void AddOnTableView::selectionChanged(const QItemSelection& selected, const QIte
 
 void AddOnTableView::insertAddOnWidget(int row)
 {
-	if (m_pWidgets.contains(row))
+	if (m_widgets.contains(row))
 	{
 		return;
 	}
 	AddOnWidget* widget = new AddOnWidget(this);
 	setRowHeight(row, widget->height());
 	setIndexWidget(model()->index(row, 0), widget);
-	m_pWidgets.insert(row, widget);
+	m_widgets.insert(row, widget);
 }
 
 void AddOnTableView::setModel(QAbstractItemModel* model)
 {
 	QTableView::setModel(model);
 
-	// Add checkbox in the last column
+	m_iSelectedAddOns.clear();
+
+	// Add checkbox in the last column (header)
 	int lastColumn = model->columnCount() - 1; // checkbox column
 	setHorizontalHeader(new CheckedHeader(lastColumn, Qt::Horizontal, this));
 	horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 	horizontalHeader()->setSectionResizeMode(lastColumn, QHeaderView::ResizeToContents);
+
+	// Hide imcompatible add-ons
+	// Insert checkboxes to the checkboxgroup (rows)
+	for (int row=0; row < model->rowCount(); row=row+2)
+	{
+		QString first = model->index(row, 2).data().toString();
+		QString last = model->index(row, 3).data().toString();
+		if (isCompatible(first, last))
+		{
+			QCheckBox* cbox = new QCheckBox();
+			cbox->setStyleSheet("QCheckBox { padding-left: 8px; }");
+			cbox->setAutoFillBackground(true);
+			setIndexWidget(model->index(row, lastColumn), cbox);
+			m_pCheckboxGroup->addButton(cbox, row);
+		}
+		else
+		{
+			hideRow(row);
+		}
+	}
 
 	// Hide internal columns
 	AddOnTableProxyModel* proxy = (AddOnTableProxyModel*) model;
@@ -107,14 +139,6 @@ void AddOnTableView::setModel(QAbstractItemModel* model)
 	hideColumn(proxy->findColumn(COLUMN_ADDONID));
 	hideColumn(proxy->findColumn(COLUMN_FIRST_STEL));
 	hideColumn(proxy->findColumn(COLUMN_LAST_STEL));
-
-	// Hide imcompatible add-ons
-	for (int row=0; row < model->rowCount(); row=row+2)
-	{
-		QString first = model->index(row, 2).data().toString();
-		QString last = model->index(row, 3).data().toString();
-		setRowHidden(row, !isCompatible(first, last));
-	}
 
 	// Hide and span empty rows
 	for (int row=1; row < model->rowCount(); row=row+2)
@@ -144,4 +168,47 @@ bool AddOnTableView::isCompatible(QString first, QString last)
 	}
 
 	return true;
+}
+
+void AddOnTableView::clearSelection()
+{
+	QTableView::clearSelection();
+	setAllChecked(false);
+}
+
+void AddOnTableView::setAllChecked(bool checked)
+{
+	foreach (QAbstractButton* cbox,m_pCheckboxGroup->buttons())
+	{
+		cbox->setChecked(checked);
+	}
+}
+
+void AddOnTableView::slotRowChecked(int row, bool checked)
+{
+	AddOnTableProxyModel* model = (AddOnTableProxyModel*) this->model();
+	int addOnId = model->findIndex(row, COLUMN_ADDONID).data().toInt();
+	bool installed = "Yes" == model->findIndex(row, COLUMN_INSTALLED).data().toString();
+	if (checked)
+	{
+		m_iSelectedAddOns.append(qMakePair(addOnId, installed));
+		if (installed)
+		{
+			emit(somethingToInstall(true));
+		}
+		else
+		{
+			emit(somethingToRemove(true));
+		}
+	}
+	else
+	{
+		m_iSelectedAddOns.removeOne(qMakePair(addOnId, installed));
+	}
+
+	if (m_iSelectedAddOns.size() <= 0)
+	{
+		emit(somethingToInstall(false));
+		emit(somethingToRemove(false));
+	}
 }

@@ -21,6 +21,7 @@
 #define _ADDONTABLEVIEW_HPP_
 
 #include <QAbstractItemModel>
+#include <QButtonGroup>
 #include <QTableView>
 
 #include "AddOnWidget.hpp"
@@ -36,8 +37,22 @@ public:
 	void selectionChanged(const QItemSelection& selected, const QItemSelection& deselected);
 	void setModel(QAbstractItemModel* model);
 
+	void clearSelection();
+	void setAllChecked(bool checked);
+	QList<QPair<int, int> > getSelectedAddons() { return m_iSelectedAddOns; }
+
+signals:
+	// these signals are useful to handle the status of the install/remove buttons
+	void somethingToInstall(bool yes);
+	void somethingToRemove(bool yes);
+
+private slots:
+	void slotRowChecked(int row, bool checked);
+
 private:
-	QHash<int, AddOnWidget*> m_pWidgets;
+	QButtonGroup* m_pCheckboxGroup;
+	QHash<int, AddOnWidget*> m_widgets;
+	QList<QPair<int, int> > m_iSelectedAddOns;
 	void insertAddOnWidget(int row);
 	bool isCompatible(QString first, QString last);
 };

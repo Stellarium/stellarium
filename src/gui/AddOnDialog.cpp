@@ -125,18 +125,7 @@ void AddOnDialog::updateTabBarListWidgetWidth()
 
 void AddOnDialog::changePage(QListWidgetItem *current, QListWidgetItem *previous)
 {
-	Tab prev = (Tab) ui->stackedWidget->currentIndex();
-	// cleaning checkboxes
-	QButtonGroup* group = m_checkBoxGroups.value(prev);
-	if (group)
-	{
-		foreach (QAbstractButton* cbox, group->buttons())
-		{
-			cbox->setChecked(false);
-		}
-	}
-	// cleaning selection
-	AddOnTableView* lastView = m_tableViews.value(prev);
+	AddOnTableView* lastView = m_tableViews.value((Tab)ui->stackedWidget->currentIndex());
 	if (lastView)
 	{
 		lastView->clearSelection();
@@ -148,41 +137,11 @@ void AddOnDialog::changePage(QListWidgetItem *current, QListWidgetItem *previous
 
 void AddOnDialog::populateTables()
 {
-	m_iSelectedAddOns.clear();
-
-	// destroying all checkboxes
-	int i = 0;
-	while (!m_checkBoxGroups.isEmpty())
-	{
-		delete m_checkBoxGroups.take((Tab)i);
-		i++;
-	}
-
 	for (int itab=0; itab<COUNT; itab++) {
 		Tab tab = (Tab)itab;
 		AddOnTableView* view = m_tableViews.value(tab);
 		view->setModel(new AddOnTableProxyModel(m_tabToTableName.value(tab), this));
-		insertCheckBoxes(view, tab);
 	}
-}
-
-void AddOnDialog::insertCheckBoxes(QTableView* tableview, Tab tab)
-{
-	QButtonGroup* checkboxes = new QButtonGroup(this);
-	checkboxes->setExclusive(false);
-	connect(checkboxes, SIGNAL(buttonToggled(int, bool)),
-		this, SLOT(slotRowSelected(int, bool)));
-
-	int lastColumn = tableview->horizontalHeader()->count() - 1;
-	for(int row=0; row < tableview->model()->rowCount(); row=row+2)
-	{
-		QCheckBox* cbox = new QCheckBox();
-		cbox->setStyleSheet("QCheckBox { padding-left: 8px; }");
-		cbox->setAutoFillBackground(true);
-		tableview->setIndexWidget(tableview->model()->index(row, lastColumn), cbox);
-		checkboxes->addButton(cbox, row);
-	}
-	m_checkBoxGroups.insert(tab, checkboxes);
 }
 
 void AddOnDialog::updateCatalog()
@@ -241,31 +200,13 @@ void AddOnDialog::downloadFinished()
 	populateTables();
 }
 
-void AddOnDialog::slotRowSelected(int row, bool checked)
-{
-	AddOnTableModel* model = (AddOnTableModel*) m_tableViews.value((Tab)ui->stackedWidget->currentIndex())->model();
-	int addOnId = model->findIndex(row, COLUMN_ADDONID).data().toInt();
-	bool installed = "Yes" == model->findIndex(row, COLUMN_INSTALLED).data().toString();
-	if (checked)
-	{
-		m_iSelectedAddOns.append(qMakePair(addOnId, installed));
-	}
-	else
-	{
-		m_iSelectedAddOns.removeOne(qMakePair(addOnId, installed));
-	}
-
-	// it disables the buttons when no line is selected.
-	bool allOff = m_iSelectedAddOns.size() <= 0;
-	ui->btnInstall->setEnabled(!allOff);
-	ui->btnRemove->setEnabled(!allOff);
-}
-
 void AddOnDialog::installSelectedRows()
 {
-	for (int i = 0; i < m_iSelectedAddOns.size(); i++)
+	AddOnTableView* view = m_tableViews.value((Tab)ui->stackedWidget->currentIndex());
+	QList<QPair<int, int> > selected = view->getSelectedAddons();
+	for (int i = 0; i < selected.size(); i++)
 	{
-		QPair<int,int> p = m_iSelectedAddOns.at(i);
+		QPair<int,int> p = selected.at(i);
 		if (!p.second) // not installed
 		{
 			StelApp::getInstance().getStelAddOnMgr().installAddOn(p.first);
@@ -275,9 +216,11 @@ void AddOnDialog::installSelectedRows()
 
 void AddOnDialog::removeSelectedRows()
 {
-	for (int i = 0; i < m_iSelectedAddOns.size(); i++)
+	AddOnTableView* view = m_tableViews.value((Tab)ui->stackedWidget->currentIndex());
+	QList<QPair<int, int> > selected = view->getSelectedAddons();
+	for (int i = 0; i < selected.size(); i++)
 	{
-		QPair<int,int> p = m_iSelectedAddOns.at(i);
+		QPair<int,int> p = selected.at(i);
 		if (p.second) // installed
 		{
 			StelApp::getInstance().getStelAddOnMgr().removeAddOn(p.first);
