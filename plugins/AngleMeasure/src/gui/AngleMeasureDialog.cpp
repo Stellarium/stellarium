@@ -60,6 +60,10 @@ void AngleMeasureDialog::createDialogContent()
 	connect(ui->useDmsFormatCheckBox, SIGNAL(toggled(bool)), am, SLOT(useDmsFormat(bool)));
 	ui->showPositionAngleCheckBox->setChecked(am->isPaDisplayed());
 	connect(ui->showPositionAngleCheckBox, SIGNAL(toggled(bool)), am, SLOT(showPositionAngle(bool)));
+	//GZ Next 3
+	connect(ui->showPositionAngleHorizontalCheckBox, SIGNAL(toggled(bool)), am, SLOT(showPositionAngleHor(bool)));
+	connect(ui->showEquatorialCheckBox, SIGNAL(toggled(bool)), am, SLOT(showEquatorial(bool)));
+	connect(ui->showHorizontalCheckBox, SIGNAL(toggled(bool)), am, SLOT(showHorizontal(bool)));
 
 	connect(ui->saveSettingsButton, SIGNAL(clicked()), this, SLOT(saveAngleMeasureSettings()));
 	connect(ui->restoreDefaultsButton, SIGNAL(clicked()), this, SLOT(resetAngleMeasureSettings()));
@@ -73,7 +77,7 @@ void AngleMeasureDialog::setAboutHtml(void)
 	html += "<h2>" + q_("Angle Measure Plug-in") + "</h2><table width=\"90%\">";
 	html += "<tr width=\"30%\"><td><strong>" + q_("Version") + ":</strong></td><td>" + ANGLEMEASURE_VERSION + "</td></tr>";
 	html += "<tr><td><strong>" + q_("Author") + ":</strong></td><td>Matthew Gates</td></tr>";
-	html += "<tr><td><strong>" + q_("Contributors") + ":</strong></td><td>Bogdan Marinov<br />Alexander Wolf &lt;alex.v.wolf@gmail.com&gt;</td></tr>";
+	html += "<tr><td><strong>" + q_("Contributors") + ":</strong></td><td>Bogdan Marinov<br />Alexander Wolf &lt;alex.v.wolf@gmail.com&gt; <br />Georg Zotti</td></tr>";
 	html += "</table>";
 
 	html += "<p>" + q_("The Angle Measure plugin is a small tool which is used to measure the angular distance between two points on the sky (and calculation of position angle between those two points).") + "</p>";

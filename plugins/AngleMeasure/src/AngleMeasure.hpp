@@ -25,6 +25,7 @@
 #include "VecMath.hpp"
 #include "StelModule.hpp"
 #include "StelFader.hpp"
+#include "StelCore.hpp"
 
 class QTimer;
 class QPixmap;
@@ -62,6 +63,11 @@ public:
 	bool isEnabled() const {return flagShowAngleMeasure;}
 	bool isDmsFormat() const { return flagUseDmsFormat; }
 	bool isPaDisplayed() const { return flagShowPA; }
+	// GZ 3 new
+	bool isEquatorial() const { return flagShowEquatorial; }
+	bool isHorizontal() const { return flagShowHorizontal; }
+	bool isHorPaDisplayed() const { return flagShowHorizontalPA; }
+
 
 	//! Restore the plug-in's settings to the default state.
 	//! Replace the plug-in's settings in Stellarium's configuration file
@@ -88,6 +94,10 @@ public slots:
 	void enableAngleMeasure(bool b);
 	void useDmsFormat(bool b);
 	void showPositionAngle(bool b);
+	// GZ NEW
+	void showPositionAngleHor(bool b);
+	void showEquatorial(bool b);
+	void showHorizontal(bool b);
 
 private slots:
 	void updateMessageText();
@@ -115,11 +125,27 @@ private:
 	double angle;
 	bool flagUseDmsFormat;
 	bool flagShowPA;
+	// GZ NEW
+	bool flagShowEquatorial;
+	bool flagShowHorizontal;
+	bool flagShowHorizontalPA;
+	Vec3f horTextColor;
+	Vec3f horLineColor;
+	Vec3d startPointHor;
+	Vec3d endPointHor;
+	Vec3d perp1StartPointHor;
+	Vec3d perp1EndPointHor;
+	Vec3d perp2StartPointHor;
+	Vec3d perp2EndPointHor;
+	double angleHor;
+
+
 	StelButton* toolbarButton;
 
 	void calculateEnds();
-	QString calculateAngle(void) const;
+	QString calculateAngle(bool horizontal=false) const;
 	QString calculatePositionAngle(const Vec3d p1, const Vec3d p2) const;
+	void drawOne(StelCore *core, const StelCore::FrameType frameType, const StelCore::RefractionMode refractionMode, const Vec3f txtColor, const Vec3f lineColor);
 
 	QSettings* conf;
 
