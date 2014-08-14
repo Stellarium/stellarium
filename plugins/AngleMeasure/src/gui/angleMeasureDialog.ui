@@ -162,9 +162,33 @@
            </widget>
           </item>
           <item>
+           <widget class="QCheckBox" name="showEquatorialCheckBox">
+            <property name="text">
+             <string>NEW SWITCH: Show in equatorial coords (like before)</string>
+            </property>
+            <property name="checked">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
            <widget class="QCheckBox" name="showPositionAngleCheckBox">
             <property name="text">
-             <string>Show position angle</string>
+             <string>Show position angle in equatorial system</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="showHorizontalCheckBox">
+            <property name="text">
+             <string>NEW: Show in horizontal coordinates</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="showPositionAngleHorizontalCheckBox">
+            <property name="text">
+             <string>Show position angle in horizontal system (e.g. Dobson starhopping)</string>
             </property>
            </widget>
           </item>
