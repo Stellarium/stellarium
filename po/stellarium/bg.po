@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-08-12 20:19+0700\n"
-"PO-Revision-Date: 2013-07-25 13:11+0000\n"
-"Last-Translator: Bogdan Marinov <daggerstab@gmail.com>\n"
+"PO-Revision-Date: 2014-08-13 09:50+0000\n"
+"Last-Translator: Yordan Darakchiev <iordan93@gmail.com>\n"
 "Language-Team: Bulgarian <bg@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-08-13 05:50+0000\n"
+"X-Launchpad-Export-Date: 2014-08-14 05:39+0000\n"
 "X-Generator: Launchpad (build 17156)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:106 src/core/modules/StarMgr.cpp:338
@@ -23,7 +23,7 @@ msgstr ""
 #: src/core/StelApp.cpp:473 src/core/StelCore.cpp:176
 #: src/core/StelSkyLayerMgr.cpp:87 src/StelMainView.cpp:302
 msgid "Display Options"
-msgstr "Настройки на показваното"
+msgstr "Настройки на изгледа"
 
 #: src/core/modules/ConstellationMgr.cpp:107
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:279
@@ -112,7 +112,7 @@ msgstr "Екваториална мрежа (J2000)"
 
 #: src/core/modules/GridLinesMgr.cpp:705
 msgid "Ecliptic J2000 grid"
-msgstr ""
+msgstr "Еклиптична мрежа (J2000)"
 
 #: src/core/modules/GridLinesMgr.cpp:706 src/ui_viewDialog.h:1227
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:365
@@ -189,12 +189,12 @@ msgstr "Величина: <b>%1</b>"
 #: src/core/modules/Nebula.cpp:119
 #, qt-format
 msgid "Surface brightness: <b>%1</b> (extincted to: <b>%2</b>)"
-msgstr ""
+msgstr "Яркост: <b>%1</b> (с екстинкция: <b>%2</b>)"
 
 #: src/core/modules/Nebula.cpp:125
 #, qt-format
 msgid "Surface brightness: <b>%1</b>"
-msgstr ""
+msgstr "Яркост: <b>%1</b>"
 
 #: src/core/modules/Nebula.cpp:131
 #, qt-format
@@ -263,7 +263,7 @@ msgstr "Разстояние: %1 а.е. (%2 km)"
 #: src/core/modules/Comet.cpp:210
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 Mio km)"
-msgstr ""
+msgstr "Разстояние: %1AU (%2 Mio км)"
 
 #: src/core/modules/Planet.cpp:199
 #, qt-format
@@ -280,7 +280,7 @@ msgstr "Видим диаметър: %1"
 #: src/core/modules/Comet.cpp:232
 #, qt-format
 msgid "Sidereal period: %1 days (%2 a)"
-msgstr ""
+msgstr "Сидеричен период: %1 дни (%2 a)"
 
 #: src/core/modules/Planet.cpp:220
 #, qt-format
@@ -290,17 +290,17 @@ msgstr "Звезден ден: %1"
 #: src/core/modules/Planet.cpp:221
 #, qt-format
 msgid "Mean solar day: %1"
-msgstr ""
+msgstr "Среден слънчев ден: %1"
 
 #: src/core/modules/Planet.cpp:227
 #, qt-format
 msgid "Phase Angle: %1"
-msgstr ""
+msgstr "Фазов ъгъл: %1"
 
 #: src/core/modules/Planet.cpp:228
 #, qt-format
 msgid "Elongation: %1"
-msgstr ""
+msgstr "Елонгация: %1"
 
 #: src/core/modules/Planet.cpp:229
 #, qt-format
@@ -320,7 +320,7 @@ msgstr "Временно означение: %1"
 #: src/core/modules/Comet.cpp:186
 #, no-c-format, qt-format
 msgid "Distance from Sun: %1AU (%2 km)"
-msgstr ""
+msgstr "Разстояние от Слънцето: %1AU (%2 км)"
 
 #: src/core/modules/Comet.cpp:193
 #, no-c-format, qt-format
@@ -330,7 +330,7 @@ msgstr ""
 #: src/core/modules/Comet.cpp:217
 #, no-c-format, qt-format
 msgid "Speed: %1 km/s"
-msgstr ""
+msgstr "Скорост: %1 км/с"
 
 #: src/core/modules/SolarSystem.cpp:156
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:308
@@ -357,7 +357,7 @@ msgstr "звезда"
 #: plugins/Quasars/src/Quasar.cpp:121
 #, qt-format
 msgid "Color Index (B-V): <b>%1</b>"
-msgstr ""
+msgstr "Цветови индекс (B-V): <b>%1</b>"
 
 #: src/core/modules/StarWrapper.cpp:144
 msgid "eruptive variable star"
@@ -373,7 +373,7 @@ msgstr ""
 
 #: src/core/modules/StarWrapper.cpp:150
 msgid "cataclysmic variable star"
-msgstr ""
+msgstr "катаклизмична променлива"
 
 #: src/core/modules/StarWrapper.cpp:153
 msgid "eclipsing binary system"
@@ -390,7 +390,7 @@ msgstr "двойна звезда"
 #: src/core/modules/StarWrapper.cpp:168
 #, qt-format
 msgid "Type: <b>%1, %2</b>"
-msgstr ""
+msgstr "Тип: <b>%1, %2</b>"
 
 #: src/core/modules/StarWrapper.cpp:207
 #, qt-format
@@ -448,12 +448,12 @@ msgstr ""
 #: src/core/modules/StarWrapper.cpp:254
 #, qt-format
 msgid "Duration of eclipse: %1%"
-msgstr ""
+msgstr "Продължителност на затъмнението: %1%"
 
 #: src/core/modules/StarWrapper.cpp:256
 #, qt-format
 msgid "Rising time: %1%"
-msgstr ""
+msgstr "Момент на изгрева: %1%"
 
 #: src/core/StelApp.cpp:473
 msgid "Night mode"
@@ -536,43 +536,43 @@ msgstr "Добавяне на 1 звездна седмица"
 
 #: src/core/StelCore.cpp:193
 msgid "Add 1 sidereal month"
-msgstr ""
+msgstr "Добавяне на 1 звезден месец"
 
 #: src/core/StelCore.cpp:194
 msgid "Add 1 sidereal year"
-msgstr ""
+msgstr "Добавяне на 1 звездна година"
 
 #: src/core/StelCore.cpp:195
 msgid "Add 1 sidereal century"
-msgstr ""
+msgstr "Добавяне на 1 звезден век"
 
 #: src/core/StelCore.cpp:196
 msgid "Add 1 synodic month"
-msgstr ""
+msgstr "Добавяне на 1 синодичен месец"
 
 #: src/core/StelCore.cpp:197
 msgid "Add 1 draconic month"
-msgstr ""
+msgstr "Добавяне на 1 драконичен месец"
 
 #: src/core/StelCore.cpp:198
 msgid "Add 1 draconic year"
-msgstr ""
+msgstr "Добавяне на 1 драконична година"
 
 #: src/core/StelCore.cpp:199
 msgid "Add 1 anomalistic month"
-msgstr ""
+msgstr "Добавяне на 1 аномалистичен месец"
 
 #: src/core/StelCore.cpp:200
 msgid "Add 1 mean tropical month"
-msgstr ""
+msgstr "Добавяне на 1 среден тропичен месец"
 
 #: src/core/StelCore.cpp:201
 msgid "Add 1 mean tropical year"
-msgstr ""
+msgstr "Добавяне на 1 средна тропична година"
 
 #: src/core/StelCore.cpp:202
 msgid "Add 1 mean tropical century"
-msgstr ""
+msgstr "Добавяне на 1 среден тропичен век"
 
 #: src/core/StelCore.cpp:203
 msgid "Subtract 1 sidereal day"
@@ -584,43 +584,43 @@ msgstr "Изваждане на 1 звездна седмица"
 
 #: src/core/StelCore.cpp:205
 msgid "Subtract 1 sidereal month"
-msgstr ""
+msgstr "Изваждане на 1 звезден месец"
 
 #: src/core/StelCore.cpp:206
 msgid "Subtract 1 sidereal year"
-msgstr ""
+msgstr "Изваждане на 1 звездна година"
 
 #: src/core/StelCore.cpp:207
 msgid "Subtract 1 sidereal century"
-msgstr ""
+msgstr "Изваждане на 1 звезден век"
 
 #: src/core/StelCore.cpp:208
 msgid "Subtract 1 synodic month"
-msgstr ""
+msgstr "Изваждане на 1 синодичен месец"
 
 #: src/core/StelCore.cpp:209
 msgid "Subtract 1 draconic month"
-msgstr ""
+msgstr "Изваждане на 1 драконичен месец"
 
 #: src/core/StelCore.cpp:210
 msgid "Subtract 1 draconic year"
-msgstr ""
+msgstr "Изваждане на 1 драконична година"
 
 #: src/core/StelCore.cpp:211
 msgid "Subtract 1 anomalistic month"
-msgstr ""
+msgstr "Изваждане на 1 аномалистичен месец"
 
 #: src/core/StelCore.cpp:212
 msgid "Subtract 1 mean tropical month"
-msgstr ""
+msgstr "Изваждане на 1 среден тропичен месец"
 
 #: src/core/StelCore.cpp:213
 msgid "Subtract 1 mean tropical year"
-msgstr ""
+msgstr "Изваждане на 1 средна тропична година"
 
 #: src/core/StelCore.cpp:214
 msgid "Subtract 1 mean tropical century"
-msgstr ""
+msgstr "Изваждане на 1 среден тропичен век"
 
 #: src/core/StelCore.cpp:216
 msgid "Set home planet to selected planet"
@@ -1014,7 +1014,7 @@ msgstr "Ректасцензия/Деклинация (по дата): %1/%2"
 #: src/core/StelObject.cpp:130
 #, qt-format
 msgid "Galactic longitude/latitude: %1/%2"
-msgstr ""
+msgstr "Галактична дължина/ширина: %1/%2"
 
 #: src/core/StelObject.cpp:142 src/core/StelObject.cpp:146
 #, qt-format
@@ -1042,7 +1042,7 @@ msgstr ""
 
 #: src/core/StelSkyLayerMgr.cpp:87
 msgid "Deep-sky objects background images"
-msgstr ""
+msgstr "Изображения на обекти от дълбокото небе"
 
 #: src/core/StelMovementMgr.cpp:130 src/gui/StelGui.cpp:185
 #: src/StelMainView.cpp:301
@@ -1087,7 +1087,7 @@ msgstr "Не са намерени съвпадения"
 
 #: src/core/SimbadSearcher.cpp:135
 msgid "Found"
-msgstr ""
+msgstr "Открито"
 
 #: src/gui/ConfigurationDialog.cpp:442
 msgid "Select screenshot directory"
@@ -1145,7 +1145,7 @@ msgstr "Лиценз"
 
 #: src/gui/ConfigurationDialog.cpp:831
 msgid "Shortcut"
-msgstr ""
+msgstr "Клавишна комбинация"
 
 #: src/gui/ConfigurationDialog.cpp:855
 msgid "Running script: "
@@ -1221,19 +1221,19 @@ msgstr "Алгоритъм за"
 
 #: src/gui/ConfigurationDialog.cpp:1168
 msgid "Without correction"
-msgstr ""
+msgstr "Без корекция"
 
 #: src/gui/ConfigurationDialog.cpp:1169
 msgid "Schoch (1931)"
-msgstr ""
+msgstr "Schoch (1931)"
 
 #: src/gui/ConfigurationDialog.cpp:1170
 msgid "Clemence (1948)"
-msgstr ""
+msgstr "Clemence (1948)"
 
 #: src/gui/ConfigurationDialog.cpp:1171
 msgid "IAU (1952)"
-msgstr ""
+msgstr "МАС (1952)"
 
 #: src/gui/ConfigurationDialog.cpp:1172
 msgid "Astronomical Ephemeris (1960)"
@@ -1241,59 +1241,59 @@ msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:1173
 msgid "Tuckerman (1962, 1964) & Goldstine (1973)"
-msgstr ""
+msgstr "Tuckerman (1962, 1964) и Goldstine (1973)"
 
 #: src/gui/ConfigurationDialog.cpp:1174
 msgid "Muller & Stephenson (1975)"
-msgstr ""
+msgstr "Muller и Stephenson (1975)"
 
 #: src/gui/ConfigurationDialog.cpp:1175
 msgid "Stephenson (1978)"
-msgstr ""
+msgstr "Stephenson (1978)"
 
 #: src/gui/ConfigurationDialog.cpp:1176
 msgid "Schmadel & Zech (1979)"
-msgstr ""
+msgstr "Schmadel и Zech (1979)"
 
 #: src/gui/ConfigurationDialog.cpp:1177
 msgid "Morrison & Stephenson (1982)"
-msgstr ""
+msgstr "Morrison и Stephenson (1982)"
 
 #: src/gui/ConfigurationDialog.cpp:1178
 msgid "Stephenson & Morrison (1984)"
-msgstr ""
+msgstr "Stephenson и Morrison (1984)"
 
 #: src/gui/ConfigurationDialog.cpp:1179
 msgid "Stephenson & Houlden (1986)"
-msgstr ""
+msgstr "Stephenson и Houlden (1986)"
 
 #: src/gui/ConfigurationDialog.cpp:1180
 msgid "Espenak (1987, 1989)"
-msgstr ""
+msgstr "Espenak (1987, 1989)"
 
 #: src/gui/ConfigurationDialog.cpp:1181
 msgid "Borkowski (1988)"
-msgstr ""
+msgstr "Borkowski (1988)"
 
 #: src/gui/ConfigurationDialog.cpp:1182
 msgid "Schmadel & Zech (1988)"
-msgstr ""
+msgstr "Schmadel и Zech (1988)"
 
 #: src/gui/ConfigurationDialog.cpp:1183
 msgid "Chapront-Touze & Chapront (1991)"
-msgstr ""
+msgstr "Chapront-Touze и Chapront (1991)"
 
 #: src/gui/ConfigurationDialog.cpp:1184
 msgid "Stephenson & Morrison (1995)"
-msgstr ""
+msgstr "Stephenson и Morrison (1995)"
 
 #: src/gui/ConfigurationDialog.cpp:1185
 msgid "Stephenson (1997)"
-msgstr ""
+msgstr "Stephenson (1997)"
 
 #: src/gui/ConfigurationDialog.cpp:1187
 msgid "Meeus (1998) (with Chapront, Chapront-Touze & Francou (1997))"
-msgstr ""
+msgstr "Meeus (1998) (с Chapront, Chapront-Touze и Francou (1997))"
 
 #: src/gui/ConfigurationDialog.cpp:1188
 msgid "JPL Horizons"
