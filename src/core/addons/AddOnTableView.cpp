@@ -194,11 +194,11 @@ void AddOnTableView::slotRowChecked(int row, bool checked)
 		m_iSelectedAddOns.append(qMakePair(addOnId, installed));
 		if (installed)
 		{
-			emit(somethingToInstall(true));
+			emit(somethingToRemove(true));
 		}
 		else
 		{
-			emit(somethingToRemove(true));
+			emit(somethingToInstall(true));
 		}
 	}
 	else

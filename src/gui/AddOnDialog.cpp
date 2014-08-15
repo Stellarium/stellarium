@@ -96,6 +96,12 @@ void AddOnDialog::createDialogContent()
 	connect(ui->btnRemove, SIGNAL(clicked()), this, SLOT(removeSelectedRows()));
 	ui->btnInstall->setEnabled(false);
 	ui->btnRemove->setEnabled(false);
+	for (int itab=0; itab<COUNT; itab++) {
+		Tab tab = (Tab)itab;
+		AddOnTableView* view = m_tableViews.value(tab);
+		connect(view, SIGNAL(somethingToInstall(bool)), ui->btnInstall, SLOT(setEnabled(bool)));
+		connect(view, SIGNAL(somethingToRemove(bool)), ui->btnRemove, SLOT(setEnabled(bool)));
+	}
 
 	// fix dialog width
 	updateTabBarListWidgetWidth();
