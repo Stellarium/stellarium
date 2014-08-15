@@ -105,7 +105,8 @@ void AddOnTableView::setModel(QAbstractItemModel* model)
 {
 	QTableView::setModel(model);
 
-	m_iSelectedAddOns.clear();
+	m_iSelectedAddOnsToInstall.clear();
+	m_iSelectedAddOnsToRemove.clear();
 
 	// Add checkbox in the last column (header)
 	int lastColumn = model->columnCount() - 1; // checkbox column
@@ -191,24 +192,27 @@ void AddOnTableView::slotRowChecked(int row, bool checked)
 	bool installed = "Yes" == model->findIndex(row, COLUMN_INSTALLED).data().toString();
 	if (checked)
 	{
-		m_iSelectedAddOns.append(qMakePair(addOnId, installed));
 		if (installed)
 		{
-			emit(somethingToRemove(true));
+			m_iSelectedAddOnsToRemove.append(addOnId);
 		}
 		else
 		{
-			emit(somethingToInstall(true));
+			m_iSelectedAddOnsToInstall.append(addOnId);
 		}
 	}
 	else
 	{
-		m_iSelectedAddOns.removeOne(qMakePair(addOnId, installed));
+		if (installed)
+		{
+			m_iSelectedAddOnsToRemove.removeOne(addOnId);
+		}
+		else
+		{
+			m_iSelectedAddOnsToInstall.removeOne(addOnId);
+		}
 	}
 
-	if (m_iSelectedAddOns.size() <= 0)
-	{
-		emit(somethingToInstall(false));
-		emit(somethingToRemove(false));
-	}
+	emit(somethingToInstall(m_iSelectedAddOnsToInstall.size() > 0));
+	emit(somethingToRemove(m_iSelectedAddOnsToRemove.size() > 0));
 }

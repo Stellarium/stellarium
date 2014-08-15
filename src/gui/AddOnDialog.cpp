@@ -209,27 +209,17 @@ void AddOnDialog::downloadFinished()
 void AddOnDialog::installSelectedRows()
 {
 	AddOnTableView* view = m_tableViews.value((Tab)ui->stackedWidget->currentIndex());
-	QList<QPair<int, int> > selected = view->getSelectedAddons();
-	for (int i = 0; i < selected.size(); i++)
+	foreach (int addon, view->getSelectedAddonsToInstall())
 	{
-		QPair<int,int> p = selected.at(i);
-		if (!p.second) // not installed
-		{
-			StelApp::getInstance().getStelAddOnMgr().installAddOn(p.first);
-		}
+		StelApp::getInstance().getStelAddOnMgr().installAddOn(addon);
 	}
 }
 
 void AddOnDialog::removeSelectedRows()
 {
 	AddOnTableView* view = m_tableViews.value((Tab)ui->stackedWidget->currentIndex());
-	QList<QPair<int, int> > selected = view->getSelectedAddons();
-	for (int i = 0; i < selected.size(); i++)
+	foreach (int addon, view->getSelectedAddonsToRemove())
 	{
-		QPair<int,int> p = selected.at(i);
-		if (p.second) // installed
-		{
-			StelApp::getInstance().getStelAddOnMgr().removeAddOn(p.first);
-		}
+		StelApp::getInstance().getStelAddOnMgr().removeAddOn(addon);
 	}
 }

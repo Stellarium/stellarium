@@ -39,7 +39,8 @@ public:
 
 	void clearSelection();
 	void setAllChecked(bool checked);
-	QList<QPair<int, int> > getSelectedAddons() { return m_iSelectedAddOns; }
+	QList<int> getSelectedAddonsToInstall() { return m_iSelectedAddOnsToInstall; }
+	QList<int> getSelectedAddonsToRemove() { return m_iSelectedAddOnsToRemove; }
 
 signals:
 	// these signals are useful to handle the status of the install/remove buttons
@@ -52,7 +53,8 @@ private slots:
 private:
 	QButtonGroup* m_pCheckboxGroup;
 	QHash<int, AddOnWidget*> m_widgets;
-	QList<QPair<int, int> > m_iSelectedAddOns;
+	QList<int> m_iSelectedAddOnsToInstall;
+	QList<int> m_iSelectedAddOnsToRemove;
 	void insertAddOnWidget(int row);
 	bool isCompatible(QString first, QString last);
 };
