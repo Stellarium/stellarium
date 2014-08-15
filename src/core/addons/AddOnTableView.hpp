@@ -38,7 +38,6 @@ public:
 	void setModel(QAbstractItemModel* model);
 
 	void clearSelection();
-	void setAllChecked(bool checked);
 	QList<int> getSelectedAddonsToInstall() { return m_iSelectedAddOnsToInstall; }
 	QList<int> getSelectedAddonsToRemove() { return m_iSelectedAddOnsToRemove; }
 
@@ -46,6 +45,9 @@ signals:
 	// these signals are useful to handle the status of the install/remove buttons
 	void somethingToInstall(bool yes);
 	void somethingToRemove(bool yes);
+
+public slots:
+	void setAllChecked(bool checked);
 
 private slots:
 	void slotRowChecked(int row, bool checked);

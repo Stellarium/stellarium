@@ -110,10 +110,12 @@ void AddOnTableView::setModel(QAbstractItemModel* model)
 
 	// Add checkbox in the last column (header)
 	int lastColumn = model->columnCount() - 1; // checkbox column
-	setHorizontalHeader(new CheckedHeader(lastColumn, Qt::Horizontal, this));
+	CheckedHeader* checkedHeader = new CheckedHeader(lastColumn, Qt::Horizontal, this);
+	setHorizontalHeader(checkedHeader);
 	horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 	horizontalHeader()->setSectionResizeMode(lastColumn, QHeaderView::ResizeToContents);
 	horizontalHeader()->setVisible(true);
+	connect(checkedHeader, SIGNAL(toggled(bool)), this, SLOT(setAllChecked(bool)), Qt::UniqueConnection);
 
 	// Hide imcompatible add-ons
 	// Insert checkboxes to the checkboxgroup (rows)
