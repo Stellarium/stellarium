@@ -251,7 +251,7 @@ void StelAddOnMgr::downloadFinished()
 
 void StelAddOnMgr::installAddOn(const int addonId)
 {
-	if (m_downloadQueue.contains(addonId))
+	if (m_downloadQueue.contains(addonId) || addonId < 1)
 	{
 		return;
 	}
@@ -300,6 +300,11 @@ bool StelAddOnMgr::installFromFile(const StelAddOnDAO::AddOnInfo addonInfo)
 
 void StelAddOnMgr::removeAddOn(const int addonId)
 {
+	if (addonId < 1)
+	{
+		return;
+	}
+
 	StelAddOnDAO::AddOnInfo addonInfo = m_pStelAddOnDAO->getAddOnInfo(addonId);
 	if (m_pStelAddOns.value(addonInfo.category)->uninstallAddOn(addonInfo.idInstall))
 	{
