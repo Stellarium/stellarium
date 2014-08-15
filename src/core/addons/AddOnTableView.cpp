@@ -113,6 +113,7 @@ void AddOnTableView::setModel(QAbstractItemModel* model)
 	setHorizontalHeader(new CheckedHeader(lastColumn, Qt::Horizontal, this));
 	horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 	horizontalHeader()->setSectionResizeMode(lastColumn, QHeaderView::ResizeToContents);
+	horizontalHeader()->setVisible(true);
 
 	// Hide imcompatible add-ons
 	// Insert checkboxes to the checkboxgroup (rows)
