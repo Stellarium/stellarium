@@ -110,8 +110,9 @@ public:
 
 private:
 	int minorPlanetNumber;
-	double absoluteMagnitude;
-	double slopeParameter;
+	// GZ: Enough to have those as float.
+	float absoluteMagnitude;
+	float  slopeParameter;
 	double semiMajorAxis;
 
 	bool nameIsProvisionalDesignation;

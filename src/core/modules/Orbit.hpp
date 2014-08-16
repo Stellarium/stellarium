@@ -43,7 +43,7 @@ public:
                     double epoch, // = 2451545.0,
                     double parentRotObliquity, // = 0.0,
                     double parentRotAscendingnode, // = 0.0
-					double parentRotJ2000Longitude  // = 0.0
+		    double parentRotJ2000Longitude  // = 0.0
                     );
 
 	// Compute position for a specified Julian date and return coordinates
