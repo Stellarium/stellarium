@@ -242,7 +242,7 @@ flag_nebula_magnitude_limit         = false
 nebula_magnitude_limit              = 8.5
 
 [init_location]
-location                            = Paris, France
+location                            = auto
 landscape_name                      = guereins
 
 [files]
