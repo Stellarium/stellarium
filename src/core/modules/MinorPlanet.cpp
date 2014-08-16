@@ -2,6 +2,7 @@
  * Stellarium
  * Copyright (C) 2002 Fabien Chereau (some old code from the Planet class)
  * Copyright (C) 2010 Bogdan Marinov
+ * Copyright (C) 2013-14 Georg Zotti (accuracy&speedup)
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -290,13 +291,16 @@ float MinorPlanet::getVMagnitude(const StelCore* core) const
 		return Planet::getVMagnitude(core);
 	}
 
-	// GZ Try that in float... speed diffference is negligible, though.
+	//Calculate phase angle
+	//(Code copied from Planet::getVMagnitude())
+	//(this is actually vector subtraction + the cosine theorem :))
+	// GZ Try now in float... speed difference is negligible, though.
 	const Vec3d& observerHelioPos = core->getObserverHeliocentricEclipticPos();
 	const float observerRq = observerHelioPos.lengthSquared();
 	const Vec3d& planetHelioPos = getHeliocentricEclipticPos();
 	const float planetRq = planetHelioPos.lengthSquared();
 	const float observerPlanetRq = (observerHelioPos - planetHelioPos).lengthSquared();
-	const float  cos_chi = (observerPlanetRq + planetRq - observerRq)/(2.0*std::sqrt(observerPlanetRq*planetRq));
+	const float cos_chi = (observerPlanetRq + planetRq - observerRq)/(2.0*std::sqrt(observerPlanetRq*planetRq));
 	const float phaseAngle = std::acos(cos_chi);
 
 	//Calculate reduced magnitude (magnitude without the influence of distance)

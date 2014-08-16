@@ -1,6 +1,7 @@
 /*
  * Stellarium
  * Copyright (C) 2010 Bogdan Marinov
+ * Copyright (C) 2014 Georg Zotti (orbit fix, tails, speedup)
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -28,8 +29,9 @@
 	Some of the code in this class is re-used from the parent Planet class.
 	\todo Implement better comet rendering (star-like objects, no physical body).
 	\todo (Long-term) Photo realistic comet rendering, see https://blueprints.launchpad.net/stellarium/+spec/realistic-comet-rendering
-	2013-12: New algorithms for position computation following Paul Heafner: Fundamental Ephemeris Computations (Willmann-Bell 1999).
-	2014-01: Parabolic tails appropriately scaled/rotated. Much is currently empirical, leaving room for physics-based improvements.
+	2013-12: GZ: New algorithms for position computation following Paul Heafner: Fundamental Ephemeris Computations (Willmann-Bell 1999).
+	2014-01: GZ: Parabolic tails appropriately scaled/rotated. Much is currently empirical, leaving room for physics-based improvements.
+	2014-08: GZ: speedup in case hundresds of comets are loaded.
   */
 class Comet : public Planet
 {
