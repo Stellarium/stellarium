@@ -32,7 +32,10 @@ Please see the INSTALL file.
 3. REQUIREMENTS
 --------------------------------------------------------------------------------
 Windows or linux/POSIX or CYGWIN or MACOSX environment
-A 3d OpenGL 2.1+ acceleration card and a good CPU.
+A 3d OpenGL 2.1+ acceleration card with GLSL1.30 and a good CPU.
+On Windows, ANGLE can be used if graphics card supports DirectX9+ with PS_3_0.
+If all else fails, MESA can be used to emulate the graphics card, 
+of course with a massive slowdown.
 
 --------------------------------------------------------------------------------
 4. QUICK START
