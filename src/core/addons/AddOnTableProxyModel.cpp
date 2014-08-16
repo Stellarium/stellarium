@@ -76,5 +76,5 @@ int AddOnTableProxyModel::findColumn(const QString &columnName)
 
 QModelIndex AddOnTableProxyModel::findIndex(int row, const QString &columnName)
 {
-	return m_sourceModel->findIndex(row, columnName);
+	return m_sourceModel->findIndex(row/2, columnName);
 }
