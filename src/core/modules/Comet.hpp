@@ -127,7 +127,7 @@ private:
 
 	//GZ Tail additions
 	Vec2f tailFactors; // result of latest call to getComaDiameterAndTailLengthAU(); Results cached here for infostring. [0]=Coma diameter, [1] gas tail length.
-	static const float COMET_MIN_TAIL_LENGTH_AU=0.0025; //! tail drawn only if longer than about 1 moon orbit radius (375000km)
+
 	bool tailActive;		//! true if there is a tail worth bothering (longer than COMET_MIN_TAIL_LENGTH_AU)? Drawing tails is quite costly.
 	double deltaJDtail;             //! like deltaJD, but time difference between tail geometry updates.
 	double lastJDtail;             //! like lastJD, but time of last tail geometry update.
