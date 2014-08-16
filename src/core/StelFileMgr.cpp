@@ -401,17 +401,8 @@ QString StelFileMgr::getScreenshotDir()
 
 void StelFileMgr::setScreenshotDir(const QString& newDir)
 {
+	makeSureDirExistsAndIsWritable(newDir);
 	QFileInfo userDirFI(newDir);
-	if (!userDirFI.exists() || !userDirFI.isDir())
-	{
-		qWarning() << "WARNING StelFileMgr::setScreenshotDir dir does not exist: " << QDir::toNativeSeparators(userDirFI.filePath());
-		throw std::runtime_error("NOT_VALID");
-	}
-	else if (!userDirFI.isWritable())
-	{
-		qWarning() << "WARNING StelFileMgr::setScreenshotDir dir is not writable: " << QDir::toNativeSeparators(userDirFI.filePath());
-		throw std::runtime_error("NOT_VALID");
-	}
 	screenshotDir = userDirFI.filePath();
 }
 
