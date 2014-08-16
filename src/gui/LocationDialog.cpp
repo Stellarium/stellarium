@@ -134,12 +134,6 @@ void LocationDialog::updateFromProgram(const StelLocation& currentLocation)
 		return;
 	
 	StelCore* stelCore = StelApp::getInstance().getCore();
-	//const StelLocation& currentLocation = stelCore->getCurrentLocation();
-
-	// Hack to avoid the coord spinbox receiving the focus and triggering
-	// "new location" editing mode.
-	// Disable hack below because it change behaviour of spinboxes and added difficulties of changes for this spinboxes --AW
-	// ui->citySearchLineEdit->setFocus();
 
 	isEditingNew = false;
 	
@@ -180,8 +174,6 @@ void LocationDialog::disconnectEditSignals()
 	disconnect(ui->altitudeSpinBox, SIGNAL(valueChanged(int)), this, SLOT(setPositionFromCoords(int)));
 	disconnect(ui->planetNameComboBox, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(moveToAnotherPlanet(const QString&)));
 	disconnect(ui->countryNameComboBox, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(reportEdit()));
-	// Why an edit should be reported even if the country is not changed? --BM
-	//disconnect(ui->countryNameComboBox, SIGNAL(activated(const QString&)), this, SLOT(comboBoxChanged(const QString&)));
 	disconnect(ui->cityNameLineEdit, SIGNAL(textEdited(const QString&)), this, SLOT(reportEdit()));
 }
 
@@ -192,8 +184,6 @@ void LocationDialog::connectEditSignals()
 	connect(ui->altitudeSpinBox, SIGNAL(valueChanged(int)), this, SLOT(setPositionFromCoords(int)));
 	connect(ui->planetNameComboBox, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(moveToAnotherPlanet(const QString&)));
 	connect(ui->countryNameComboBox, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(reportEdit()));
-	// Why an edit should be reported even if the country is not changed? --BM
-	//connect(ui->countryNameComboBox, SIGNAL(activated(const QString&)), this, SLOT(comboBoxChanged(const QString&)));
 	connect(ui->cityNameLineEdit, SIGNAL(textEdited(const QString&)), this, SLOT(reportEdit()));
 }
 
@@ -509,9 +499,6 @@ void LocationDialog::setDefaultLocation(bool state)
 		updateDefaultLocationControls(isDefault);
 		ui->pushButtonReturnToDefault->setEnabled(!isDefault);
 		ui->useIpQueryCheckBox->setChecked(!state);
-		//The focus need to be switched to another control, otherwise
-		//ui->latitudeSpinBox receives it and emits a valueChanged() signal when
-		//the window is closed.
 		ui->citySearchLineEdit->setFocus();
 		connectEditSignals();
 	}

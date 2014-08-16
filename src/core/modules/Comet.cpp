@@ -89,16 +89,7 @@ Comet::Comet(const QString& englishName,
 
 	gastailVertexArr.clear();
 	dusttailVertexArr.clear();
-	//tailTexCoordArr.clear();
-	//tailIndices.clear();
 	comaVertexArr.clear();
-	//comaTexCoordArr.clear();
-
-	// GZ: Textures now static members, initialized by SolarSystem::loadPlanets()
-	//comaTexture = StelApp::getInstance().getTextureManager().createTextureThread(StelFileMgr::getInstallationDir()+"/textures/cometComa.png", StelTexture::StelTextureParams(true, GL_LINEAR, GL_CLAMP_TO_EDGE));
-	//GZ: tail textures. We use a paraboloid tail body, textured like a fisheye sphere, i.e. center=head. The texture should be something like a mottled star to give some structure.
-	//tailTexture = StelApp::getInstance().getTextureManager().createTextureThread(StelFileMgr::getInstallationDir()+"/textures/cometTail.png", StelTexture::StelTextureParams(true, GL_LINEAR, GL_CLAMP_TO_EDGE));
-	//GZ: I think we need only one texture for the tails.
 
 	//Comet specific members
 	absoluteMagnitude = 0;
@@ -225,7 +216,6 @@ QString Comet::getInfoString(const StelCore *core, const InfoStringGroup &flags)
 
 	if (flags&Size)
 	{
-	//	oss << q_("Apparent diameter: %1").arg(StelUtils::radToDmsStr(2.*getAngularSize(core)*M_PI/180., true));
 		// GZ: Add estimates for coma diameter and tail length.
 		// xgettext:no-c-format
 		oss << QString(q_("Coma diameter (estimate): %1 km"))
@@ -302,8 +292,6 @@ void Comet::computePosition(const double date)
 
 	if (fabs(lastJDtail-date)>deltaJDtail)
 	{
-		//qDebug() << "Update tail for " << englishName << " at Date: " << StelUtils::julianDayToISO8601String(date);
-		//qDebug() << "   lastJDtail was " << StelUtils::julianDayToISO8601String(lastJDtail);
 		lastJDtail=date;
 
 		// GZ: Moved from draw() :-)
@@ -316,7 +304,6 @@ void Comet::computePosition(const double date)
 			// Compute lengths and orientations from orbit object, but only if required.
 			// This part moved from draw() to keep draw() free from too much computation.
 			tailFactors=getComaDiameterAndTailLengthAU();
-			//qDebug() << "Comet " << englishName << ": tailFactors: Coma: " << tailFactors[0] << ", tail length [AU]: " << tailFactors[1];
 
 			// Note that we use a diameter larger than what the formula returns. A scale factor of 1.2 is ad-hoc/empirical (GZ), but may look better.
 			computeComa(1.0f*tailFactors[0]);
@@ -391,14 +378,6 @@ void Comet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFont
 	if (!orbit->objectDateValid(core->getJDay())) return; // don't draw at all out of useful date range. This allows having hundreds of comet elements.
 
 	Mat4d mat = Mat4d::translation(eclipticPos) * rotLocalToParent;
-/*  // We can remove that - a Comet has no parent except for the sun...
-	PlanetP p = parent;
-	while (p && p->parent)
-	{
-		mat = Mat4d::translation(p->eclipticPos) * mat * p->rotLocalToParent;
-		p = p->parent;
-	}
-*/
 	// This removed totally the Planet shaking bug!!!
 	StelProjector::ModelViewTranformP transfo = core->getHeliocentricEclipticModelViewTransform();
 	transfo->combine(mat);
@@ -445,14 +424,6 @@ void Comet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFont
 
 void Comet::drawTail(StelCore* core, StelProjector::ModelViewTranformP transfo, bool gas)
 {
-//	StelProjector::ModelViewTranformP transfo2 = transfo->clone();
-
-//	if (gas)
-//		transfo2->combine(gasTailRot);
-//	else
-//		transfo2->combine(dustTailRot);
-
-//	StelPainter* sPainter = new StelPainter(core->getProjection(transfo2));
 	StelPainter* sPainter = new StelPainter(core->getProjection(transfo));
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_ONE, GL_ONE);
@@ -461,7 +432,6 @@ void Comet::drawTail(StelCore* core, StelProjector::ModelViewTranformP transfo, 
 	// GZ: If we use getVMagnitudeWithExtinction(), a head extincted in the horizon mist can completely hide an otherwise frighteningly long tail.
 	// we must use unextincted mag, but mix/dim with atmosphere/sky brightness.
 	// In addition, light falloff is a bit reduced for better visibility. Power basis should be 0.4, we use 0.6.
-	//float magfactor=std::pow(0.4f , getVMagnitudeWithExtinction(core));
 	float magFactor=std::pow(0.6f , getVMagnitude(core));
 	if (core->getSkyDrawer()->getFlagHasAtmosphere())
 	{
@@ -480,16 +450,12 @@ void Comet::drawTail(StelCore* core, StelProjector::ModelViewTranformP transfo, 
 	tailTexture->bind();
 
 	if (gas) {
-		//gasTailTexture->bind();
 		sPainter->setColor(0.15f*magFactor,0.15f*magFactor,0.6f*magFactor);
 		sPainter->setArrays((Vec3d*)gastailVertexArr.constData(), (Vec2f*)tailTexCoordArr.constData());
 		sPainter->drawFromArray(StelPainter::Triangles, tailIndices.size(), 0, true, tailIndices.constData());
 
 	} else {
-		//dustTailTexture->bind();
 		sPainter->setColor(magFactor, magFactor,0.6f*magFactor);
-		//sPainter->setArrays((Vec3d*)dusttailVertexArr.constData(), (Vec2f*)dusttailTexCoordArr.constData());
-		//sPainter->drawFromArray(StelPainter::Triangles, dusttailIndices.size(), 0, true, dusttailIndices.constData());
 		sPainter->setArrays((Vec3d*)dusttailVertexArr.constData(), (Vec2f*)tailTexCoordArr.constData());
 		sPainter->drawFromArray(StelPainter::Triangles, tailIndices.size(), 0, true, tailIndices.constData());
 	}
@@ -560,17 +526,9 @@ void Comet::computeComa(const float diameter)
 void Comet::computeParabola(const float parameter, const float radius, const float zshift,
 			    QVector<double>& vertexArr, QVector<float>& texCoordArr, QVector<unsigned short> &indices, const float xOffset) {
 
-	//qDebug() << "Calling computeParabola() on vertexArr of length" << vertexArr.length();
-//	vertexArr.clear();
 	// GZ: keep the array and replace contents. However, using replace() is only slightly faster.
 	if (vertexArr.length() < (3*(COMET_TAIL_SLICES*COMET_TAIL_STACKS+1)))
 		vertexArr.resize(3*(COMET_TAIL_SLICES*COMET_TAIL_STACKS+1));
-	//qDebug() << "vertexArrSize adjusted, has now " << vertexArr.length() << " elements";
-	//texCoordArr.clear();
-	//indices.clear();
-	// GZ: Avoid useless re-creating things.
-	//bool createTailIndices= indices.empty();
-	//bool createTailTextureCoords= texCoordArr.empty();
 	if (createTailIndices) indices.clear();
 	if (createTailTextureCoords) texCoordArr.clear();
 	int i;
@@ -586,8 +544,6 @@ void Comet::computeParabola(const float parameter, const float radius, const flo
 		ya[i]=cos(i*da);
 	}
 	
-	// center point, vertex0
-//	vertexArr << 0.0 << 0.0 << zshift;
 	vertexArr.replace(0, 0.0); vertexArr.replace(1, 0.0); vertexArr.replace(2, zshift);
 	int vertexArrIndex=3;
 	if (createTailTextureCoords) texCoordArr << 0.5f << 0.5f;
@@ -600,14 +556,12 @@ void Comet::computeParabola(const float parameter, const float radius, const flo
 		for (i=ring & 1; i<2*COMET_TAIL_SLICES; i+=2) { // i.e., ring1 has shifted vertices, ring2 has even ones.
 			x=xa[i]*radius*ring/COMET_TAIL_STACKS;
 			y=ya[i]*radius*ring/COMET_TAIL_STACKS;
-//			vertexArr << x+xShift << y << z;
 			vertexArr.replace(vertexArrIndex++, x+xShift);
 			vertexArr.replace(vertexArrIndex++, y);
 			vertexArr.replace(vertexArrIndex++, z);
 			if (createTailTextureCoords) texCoordArr << 0.5+ 0.5*x/radius << 0.5+0.5*y/radius;
 		}
 	}
-	//qDebug() << "vertices done, elements:" << vertexArrIndex;
 	// now link the faces with indices.
 	if (createTailIndices)
 	{
@@ -636,14 +590,6 @@ void Comet::computeParabola(const float parameter, const float radius, const flo
 			indices << first << (ring+1)*COMET_TAIL_SLICES << ring*COMET_TAIL_SLICES+1;
 		}
 	}
-	//qDebug() << "Comet " << englishName << ": vertexArr.length()=" << vertexArr.length() << " indices.length()=" << indices.length();
-//	qDebug() << "Parabola: Vertex index dump\n";
-//	for (int i=0; i<indices.length(); i+=3)
-//		qDebug() << indices[i] << "-" << indices[i+1] << "-" << indices[i+2] << ":"
-//				 << vertexArr[3*indices[i]]   << vertexArr[3*indices[i]+1]   << vertexArr[3*indices[i]+2]   << "/"
-//				 << vertexArr[3*indices[i+1]] << vertexArr[3*indices[i+1]+1] << vertexArr[3*indices[i+1]+2] << "/"
-//				 << vertexArr[3*indices[i+2]] << vertexArr[3*indices[i+2]+1] << vertexArr[3*indices[i+2]+2];
-
 	createTailIndices=false;
 	createTailTextureCoords=false;
 }
