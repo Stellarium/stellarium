@@ -54,8 +54,6 @@ public:
 		  );
 
 	virtual ~Comet();
-//	//! initialize static variables. Call this once at startup!
-//	void initClass();
 
 	//Inherited from StelObject via Planet
 	//! Get a string with data about the Comet.
@@ -140,7 +138,6 @@ private:
 	QVector<float> comaTexCoordArr; //  --> 2014-08: could also be declared static, but it is filled by StelPainter...
 
 	// These are to avoid having index arrays for each comet when all are equal.
-	//static bool createComaTextureCoords; Not useful as this array is computed by a call into StelPainter...
 	static bool createTailIndices;
 	static bool createTailTextureCoords;
 

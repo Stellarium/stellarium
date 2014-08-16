@@ -143,16 +143,6 @@ void MinorPlanet::setSemiMajorAxis(double value)
 	semiMajorAxis = value;
 	// GZ: in case we have very many asteroids, this helps improving speed usually without sacrificing accuracy:
 	deltaJD = 2.0*semiMajorAxis*StelCore::JD_SECOND;
-	// GZ: patched for 2012DA14 and other NEA rendez-vous. Actually, deltaJD is now dynamic w.r.t. observer distance!
-//	if (semiMajorAxis < 1.666)
-//	{
-//		deltaJD = 0.1*StelCore::JD_SECOND;
-//	}
-//	if (semiMajorAxis < 1.25)
-//	{
-//		deltaJD = 0.001*StelCore::JD_SECOND;
-//	}
-
 }
 
 void MinorPlanet::setMinorPlanetNumber(int number)
@@ -276,12 +266,6 @@ QString MinorPlanet::getInfoString(const StelCore *core, const InfoStringGroup &
 		oss << q_("Sidereal period: %1 days (%2 a)").arg(QString::number(siderealPeriod, 'f', 2)).arg(QString::number(siderealPeriod/365.25, 'f', 3)) << "<br>";
 	}
 
-	//This doesn't work, even if setOpenExternalLinks(true) is used in InfoPanel
-	/*
-	if (flags&Extra)
-		oss << QString("<br><a href=\"http://ssd.jpl.nasa.gov/sbdb.cgi?sstr=%1\">JPL Small-Body Database Browser</a>").arg( (minorPlanetNumber) ? QString::number(minorPlanetNumber) : englishName );
-	*/
-
 	postProcessInfoString(str, flags);
 
 	return str;
@@ -306,28 +290,6 @@ float MinorPlanet::getVMagnitude(const StelCore* core) const
 		return Planet::getVMagnitude(core);
 	}
 
-	//Calculate phase angle
-	//(Code copied from Planet::getVMagnitude())
-	//(LOL, this is actually vector subtraction + the cosine theorem :))
-//	const Vec3d& observerHelioPos = core->getObserverHeliocentricEclipticPos();
-//	const double observerRq = observerHelioPos.lengthSquared();
-//	const Vec3d& planetHelioPos = getHeliocentricEclipticPos();
-//	const double planetRq = planetHelioPos.lengthSquared();
-//	const double observerPlanetRq = (observerHelioPos - planetHelioPos).lengthSquared();
-//	const double cos_chi = (observerPlanetRq + planetRq - observerRq)/(2.0*sqrt(observerPlanetRq*planetRq));
-//	double phaseAngle = std::acos(cos_chi);
-
-//	//Calculate reduced magnitude (magnitude without the influence of distance)
-//	//Source of the formulae: http://www.britastro.org/asteroids/dymock4.pdf
-//	const double phi1 = std::exp(-3.33 * std::pow(std::tan(phaseAngle/2), 0.63));
-//	const double phi2 = std::exp(-1.87 * std::pow(std::tan(phaseAngle/2), 1.22));
-//	double reducedMagnitude = absoluteMagnitude - 2.5 * std::log10( (1 - slopeParameter) * phi1 + slopeParameter * phi2 );
-
-//	//Calculate apparent magnitude
-//	//TODO: See if you can "collapse" some calculations
-//	// -- GZ: NO! This is also in Meeus, Astr.Alg. 1998, p.231 and authoritative by IAU commission 20, New Delhi November 1985.
-//	//       (you can collapse and leave away the reducedMagnitude varable, but this is cosmetic)
-//	double apparentMagnitude = reducedMagnitude + 5 * std::log10(std::sqrt(planetRq * observerPlanetRq));
 	// GZ Try that in float... speed diffference is negligible, though.
 	const Vec3d& observerHelioPos = core->getObserverHeliocentricEclipticPos();
 	const float observerRq = observerHelioPos.lengthSquared();
@@ -345,9 +307,6 @@ float MinorPlanet::getVMagnitude(const StelCore* core) const
 	float reducedMagnitude = absoluteMagnitude - 2.5f * std::log10( (1.0f - slopeParameter) * phi1 + slopeParameter * phi2 );
 
 	//Calculate apparent magnitude
-	//TODO: See if you can "collapse" some calculations
-	// -- GZ: NO! This is also in Meeus, Astr.Alg. 1998, p.231 and authoritative by IAU commission 20, New Delhi November 1985.
-	//       (you can collapse and leave away the reducedMagnitude varable, but this is cosmetic)
 	float apparentMagnitude = reducedMagnitude + 5.0f * std::log10(std::sqrt(planetRq * observerPlanetRq));
 
 	return apparentMagnitude;
@@ -380,8 +339,6 @@ QString MinorPlanet::renderProvisionalDesignationinHtml(QString plainTextName)
 	}
 	else
 	{
-		//qDebug() << "renderProvisionalDesignationinHtml():" << plainTextName
-		//         << "is not a provisional designation in plain text.";
 		return QString();
 	}
 }
