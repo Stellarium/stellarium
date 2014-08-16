@@ -107,6 +107,8 @@ void AddOnTableView::setModel(QAbstractItemModel* model)
 
 	m_iSelectedAddOnsToInstall.clear();
 	m_iSelectedAddOnsToRemove.clear();
+	emit(somethingToInstall(false));
+	emit(somethingToRemove(false));
 
 	// Add checkbox in the last column (header)
 	int lastColumn = model->columnCount() - 1; // checkbox column
