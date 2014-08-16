@@ -9,13 +9,13 @@ msgstr ""
 "Project-Id-Version: Stellarium 0.10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-08-12 20:19+0700\n"
-"PO-Revision-Date: 2014-02-23 15:45+0000\n"
-"Last-Translator: Alexander Wolf <Unknown>\n"
+"PO-Revision-Date: 2014-08-15 20:31+0000\n"
+"Last-Translator: misibacsi <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-08-13 05:56+0000\n"
+"X-Launchpad-Export-Date: 2014-08-16 05:44+0000\n"
 "X-Generator: Launchpad (build 17156)\n"
 "X-Poedit-Language: Hungarian\n"
 
@@ -322,17 +322,17 @@ msgstr "Átmeneti jelölés: %1"
 #: src/core/modules/Comet.cpp:186
 #, no-c-format, qt-format
 msgid "Distance from Sun: %1AU (%2 km)"
-msgstr ""
+msgstr "Távolság a Naptól: %1CsE (%2 km)"
 
 #: src/core/modules/Comet.cpp:193
 #, no-c-format, qt-format
 msgid "Distance from Sun: %1AU (%2 Mio km)"
-msgstr ""
+msgstr "Távolság a Naptól: %1CsE (%2 millió km)"
 
 #: src/core/modules/Comet.cpp:217
 #, no-c-format, qt-format
 msgid "Speed: %1 km/s"
-msgstr ""
+msgstr "Sebesség: %1 km/s"
 
 #: src/core/modules/SolarSystem.cpp:156
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:308
@@ -1224,7 +1224,7 @@ msgstr "Licensz"
 
 #: src/gui/ConfigurationDialog.cpp:831
 msgid "Shortcut"
-msgstr ""
+msgstr "Gyorsmenü"
 
 #: src/gui/ConfigurationDialog.cpp:855
 msgid "Running script: "
@@ -1416,23 +1416,23 @@ msgstr "%1T egyéni kiszámítása"
 #. TRANSLATORS: This message will be displayed for users if Stellarium can't get info about version from stellarium.org
 #: src/gui/HelpDialog.cpp:259
 msgid "Oops... Stellarium can't check latest version."
-msgstr ""
+msgstr "Nem sikerült a Stellarium legújabb verzióját ellenőrizni."
 
 #. TRANSLATORS: This message will be displayed for users if current version of Stellarium is bigger than version from stellarium.org
 #: src/gui/HelpDialog.cpp:281
 msgid "Looks like you are using the development version of Stellarium."
-msgstr ""
+msgstr "Ez a Stellarium fejlesztői verziója."
 
 #. TRANSLATORS: This message will be displayed for users if current version of Stellarium is smaller than version from stellarium.org
 #: src/gui/HelpDialog.cpp:286
 #, qt-format
 msgid "This version of Stellarium is outdated! Latest version is %1."
-msgstr ""
+msgstr "Ez a Stellarium elavult verziója. A legfrissebb: %1"
 
 #. TRANSLATORS: This message will be displayed for users if current version of Stellarium is equals with version from stellarium.org
 #: src/gui/HelpDialog.cpp:292
 msgid "This is latest stable version of Stellarium."
-msgstr ""
+msgstr "Ez a Stellarium legfrissebb stabil verziója."
 
 #: src/gui/HelpDialog.cpp:322
 msgid "Stellarium Help"
@@ -3805,19 +3805,19 @@ msgstr "Törlés"
 
 #: src/translations.h:569
 msgid "Select All"
-msgstr ""
+msgstr "Összes kijelölése"
 
 #: src/translations.h:570
 msgid "Look in:"
-msgstr ""
+msgstr "Keresés:"
 
 #: src/translations.h:571
 msgid "Directory:"
-msgstr ""
+msgstr "Mappa:"
 
 #: src/translations.h:572
 msgid "Folder"
-msgstr ""
+msgstr "Mappa"
 
 #: src/translations.h:573
 msgid "&Choose"
@@ -3838,7 +3838,7 @@ msgstr "Módosítás dátuma"
 
 #: src/translations.h:577
 msgid "Directories"
-msgstr ""
+msgstr "Mappák"
 
 #: src/translations.h:578
 msgid "Computer"
@@ -4394,7 +4394,7 @@ msgstr "A program nyelve"
 
 #: src/ui_configurationDialog.h:1005
 msgid "Check updates"
-msgstr ""
+msgstr "Frissítés ellenőrzése"
 
 #: src/ui_configurationDialog.h:1006
 msgid ""
@@ -7751,7 +7751,7 @@ msgstr "Veron+ 2010"
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:127
 #, qt-format
 msgid "The current catalog contains info about %1 quasars."
-msgstr ""
+msgstr "A jelenlegi katalógus %1 kvazárról tartalmaz információt."
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:138
@@ -7964,7 +7964,7 @@ msgstr ""
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:128
 #, qt-format
 msgid "Current catalog contains info about %1 pulsars."
-msgstr ""
+msgstr "A jelenlegi katalógus %1 pulzárról tartalmaz információt."
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:130
 msgid "Note"
@@ -8296,7 +8296,7 @@ msgstr "Exoplanet Catalogue megnyitása"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:199
 msgid "The Habitable Exoplanets Catalog"
-msgstr ""
+msgstr "Habitable Exoplanets Catalog"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:293
 msgid "Exoplanets is updated"
@@ -8360,7 +8360,7 @@ msgstr "Weboldalak"
 
 #: plugins/Observability/src/Observability.cpp:67
 msgid "Observability Analysis"
-msgstr ""
+msgstr "Láthatósági elemzés"
 
 #: plugins/Observability/src/Observability.cpp:70
 msgid ""
@@ -8372,6 +8372,11 @@ msgid ""
 "setting. (Explanations are provided in the 'About' tab of the plugin's "
 "configuration window.)"
 msgstr ""
+"A kiválasztott objektum láthatóságát mutatja (kelési, nyugvási és áthaladási "
+"idő) az aktuális dátumra, illetve a teljes évre. Láthatónak feltételezzük, "
+"ha az éjszaka egy részén a horizont fölött tartózkodik. Mutatja a Naptól "
+"való legnagyobb távolságot, az akronikus és a kozmikus kelés és nyugvás "
+"idejét. Magyarázat a névjegynél."
 
 #: plugins/Observability/src/Observability.cpp:170
 msgctxt "short month name"
@@ -8492,37 +8497,37 @@ msgstr "A forrás nem megfigyelhető."
 
 #: plugins/Observability/src/Observability.cpp:198
 msgid "No acronychal nor cosmical rise/set."
-msgstr ""
+msgstr "Nincs sem akronikus, sem kozmikus kelés/nyugvás."
 
 #: plugins/Observability/src/Observability.cpp:199
 #, qt-format
 msgid "Greatest elongation: %1 (at %2 deg.)"
-msgstr ""
+msgstr "Legnagyobb elongáció:  %1 (%2 foknál)"
 
 #: plugins/Observability/src/Observability.cpp:200
 #, qt-format
 msgid "Largest Sun separation: %1 (at %2 deg.)"
-msgstr ""
+msgstr "Legnagyobb Naptávolság: %1 (%2 foknál)"
 
 #. TRANSLATORS: The space at the end is significant - another sentence may follow.
 #: plugins/Observability/src/Observability.cpp:203
 #, qt-format
 msgid "Acronychal rise/set: %1/%2. "
-msgstr ""
+msgstr "Akronikus kelés/nyugvás: %1/%2. "
 
 #. TRANSLATORS: The space at the end is significant - another sentence may follow.
 #: plugins/Observability/src/Observability.cpp:205
 msgid "No acronychal rise/set. "
-msgstr ""
+msgstr "Nincs akronikus kelés/nyugvás. "
 
 #: plugins/Observability/src/Observability.cpp:206
 #, qt-format
 msgid "Cosmical rise/set: %1/%2."
-msgstr ""
+msgstr "Kozmikus kelés/nyugvás: %1/%2."
 
 #: plugins/Observability/src/Observability.cpp:207
 msgid "No cosmical rise/set."
-msgstr ""
+msgstr "Nincs kozmikus kelés/nyugvás."
 
 #: plugins/Observability/src/Observability.cpp:208
 msgid "Observable during the whole year."
@@ -8535,7 +8540,7 @@ msgstr "Nem figyelhető meg."
 #: plugins/Observability/src/Observability.cpp:210
 #, qt-format
 msgid "Nights above horizon: %1"
-msgstr ""
+msgstr "Éjszakák a horizont fölött: %1"
 
 #: plugins/Observability/src/Observability.cpp:211
 msgid "TODAY:"
@@ -8821,7 +8826,7 @@ msgstr ""
 
 #: plugins/NavStars/src/NavStars.cpp:50 plugins/NavStars/src/NavStars.cpp:119
 msgid "Navigational Stars"
-msgstr ""
+msgstr "Navigációs csillagok"
 
 #. TRANSLATORS: The emphasis tags mark a book title.
 #: plugins/NavStars/src/NavStars.cpp:54
@@ -8832,10 +8837,13 @@ msgid ""
 "1958; consequently, these stars are also used in navigational aids such as "
 "the 2102D Star Finder and Identifier."
 msgstr ""
+"Ez a bővítmény 58 navigációs csillagot jelöl meg, amiket a <em>The Nautical "
+"Almanac</em> listáz. A könyvet a  Her Majesty's Nautical Almanac Office és a "
+"US Naval Observatory közösen adja ki 1958 óta."
 
 #: plugins/NavStars/src/NavStars.cpp:120
 msgid "Mark the navigational stars"
-msgstr ""
+msgstr "A navigációs csillagok jelölése"
 
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:55
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:96
@@ -8844,31 +8852,31 @@ msgstr ""
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:269
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:278
 msgid "Equation of Time"
-msgstr ""
+msgstr "Időegyenlet"
 
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:58
 msgid "This plugin shows the solution of the equation of time."
-msgstr ""
+msgstr "A bővítmény az időegyenlet megoldását mutatja."
 
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:96
 msgid "Show solution for Equation of Time"
-msgstr ""
+msgstr "Az időegyenlet megoldásának mutatása."
 
 #. TRANSLATORS: minutes.
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:258
 msgctxt "time"
 msgid "m"
-msgstr ""
+msgstr "m"
 
 #. TRANSLATORS: seconds.
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:260
 msgctxt "time"
 msgid "s"
-msgstr ""
+msgstr "s"
 
 #: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:80
 msgid "Equation of Time plug-in"
-msgstr ""
+msgstr "Időegyenlet bővítmény"
 
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:270
 msgid ""
@@ -8882,6 +8890,10 @@ msgid ""
 "always followed. Anyone who makes use of a published table or graph should "
 "first check its sign usage."
 msgstr ""
+"Az időegyenlet kétféle idő különbségét adja meg: az egyik a látszó szoláris "
+"idő, a másik az elképzelt, egyenletesen haladó Nap által meghatározott idő. "
+"Az időegyenletnek nincs általánosan elfogadott előjele. Itt akkor vesszük "
+"pozitívnak, ha a napóra által meghatározott idő a helyi idő előtt jár."
 
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:272
 msgid "Show plug-ins button on toolbar"
@@ -8889,21 +8901,21 @@ msgstr ""
 
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:273
 msgid "Use minutes and seconds"
-msgstr ""
+msgstr "Perc és másodperc használata"
 
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:274
 msgid "Change sign of equation"
-msgstr ""
+msgstr "Előjelváltás"
 
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:275
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:283
 msgid "Font size:"
-msgstr ""
+msgstr "Betűméret:"
 
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:63
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:163
 msgid "Meteor Showers"
-msgstr ""
+msgstr "Meteorraj"
 
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:66
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:258
@@ -8914,15 +8926,15 @@ msgstr ""
 
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:164
 msgid "Show meteor showers"
-msgstr ""
+msgstr "Meteorrajok mutatása"
 
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:165
 msgid "Radiant labels"
-msgstr ""
+msgstr "Radiánscímkék"
 
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:166
 msgid "Meteor Shower configuration window"
-msgstr ""
+msgstr "Meteorraj beállító ablak"
 
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:193
 msgid ""
@@ -8992,7 +9004,7 @@ msgstr ""
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1264
 msgid "Leonids"
-msgstr ""
+msgstr "Leonidák"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1266
@@ -9012,7 +9024,7 @@ msgstr ""
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1272
 msgid "Perseids"
-msgstr ""
+msgstr "Perseidák"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1274
@@ -9052,17 +9064,17 @@ msgstr ""
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1288
 msgid "Southern Taurids"
-msgstr ""
+msgstr "Déli Tauridák"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1290
 msgid "Northern Taurids"
-msgstr ""
+msgstr "Északi Tauridák"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1292
 msgid "Monocerotids"
-msgstr ""
+msgstr "Monocerotidák"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1294
@@ -9077,7 +9089,7 @@ msgstr ""
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1298
 msgid "Geminids"
-msgstr ""
+msgstr "Geminidák"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1300
@@ -9152,7 +9164,7 @@ msgstr ""
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1328
 msgid "Arietids"
-msgstr ""
+msgstr "Arietidák"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1330
@@ -9227,7 +9239,7 @@ msgstr ""
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1358
 msgid "Autumn Arietids"
-msgstr ""
+msgstr "Őszi Arietidák"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1360
@@ -9237,77 +9249,77 @@ msgstr ""
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1364
 msgid "Comet 1P/Halley"
-msgstr ""
+msgstr "1P/Halley üstökös"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1366
 msgid "Comet 7P/Pons-Winnecke"
-msgstr ""
+msgstr "7P/Pons-Winnecke üstökös"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1368
 msgid "Comet 55P/Tempel-Tuttle"
-msgstr ""
+msgstr "55P/Tempel-Tuttle üstökös"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1370
 msgid "Comet 96P/Machholz"
-msgstr ""
+msgstr "96P/Machholz üstökös"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1372
 msgid "Comet 109P/Swift-Tuttle"
-msgstr ""
+msgstr "109P/Swift-Tuttle üstökös"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1374
 msgid "Comet Thatcher (1861 I)"
-msgstr ""
+msgstr "Thatcher (1861 I) üstökös"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1376
 msgid "Comet 26P/Grigg-Skjellerup"
-msgstr ""
+msgstr "26P/Grigg-Skjellerup üstökös"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1378
 msgid "Comet 21P/Giacobini-Zinner"
-msgstr ""
+msgstr "21P/Giacobini-Zinner üstökös"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1380
 msgid "Comet 169P/NEAT"
-msgstr ""
+msgstr "169P/NEAT üstökös"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1382
 msgid "Comet 289P/Blanpain"
-msgstr ""
+msgstr "289P/Blanpain üstökös"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1384
 msgid "Comet 8P/Tuttle"
-msgstr ""
+msgstr "8P/Tuttle üstökös"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1386
 msgid "Comet 3D/Biela"
-msgstr ""
+msgstr "3D/Biela üstökös"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1388
 msgid "Comet C/1917 F1 (Mellish)"
-msgstr ""
+msgstr "C/1917 F1 (Mellish) üstökös"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1390
 msgid "Comet C/1964 N1 (Ikeya)"
-msgstr ""
+msgstr "C/1964 N1 (Ikeya) üstökös"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1392
 msgid "Comet Schwassmann-Wachmann 3"
-msgstr ""
+msgstr "Schwassmann-Wachmann 3 üstökös"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1394
@@ -9327,7 +9339,7 @@ msgstr ""
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1400
 msgid "Comet 2P/Encke"
-msgstr ""
+msgstr "2P/Encke üstökös"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1402
@@ -9349,7 +9361,7 @@ msgstr ""
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:344
 msgid "meteor shower"
-msgstr ""
+msgstr "meteorraj"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:353
 msgid "Radiant drift (per day)"
@@ -9358,17 +9370,17 @@ msgstr ""
 #: plugins/MeteorShowers/src/MeteorShower.cpp:360
 #, qt-format
 msgid "Geocentric meteoric velocity: %1 km/s"
-msgstr ""
+msgstr "Geocentrikus meteorsebesség: %1 km/s"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:365
 #, qt-format
 msgid "The population index: %1"
-msgstr ""
+msgstr "Populációs index: %1"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:370
 #, qt-format
 msgid "Parent body: %1"
-msgstr ""
+msgstr "Szülőobjektum: %1"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:376
 msgid "Active"
@@ -9381,7 +9393,7 @@ msgstr ""
 #: plugins/MeteorShowers/src/MeteorShower.cpp:389
 #, qt-format
 msgid "Maximum: %1"
-msgstr ""
+msgstr "Maximum: %1"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:392
 msgid "Solar longitude is"
@@ -9389,43 +9401,43 @@ msgstr ""
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:401
 msgid "variable"
-msgstr ""
+msgstr "változó"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:166
 msgid "ZHR"
-msgstr ""
+msgstr "ZHR"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:167
 msgid "Data Type"
-msgstr ""
+msgstr "Adattípus"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:168
 msgid "Peak"
-msgstr ""
+msgstr "Csúcs"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:179
 msgid "Start date greater than end date!"
-msgstr ""
+msgstr "A kezdődátum nagyobb, mint a végdátum!"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:183
 msgid "Time interval must be less than one year!"
-msgstr ""
+msgstr "Az időintervallum legfeljebb 1 év lehet."
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:203
 msgid "Variable"
-msgstr ""
+msgstr "Változó"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:206
 msgid "Real"
-msgstr ""
+msgstr "Valós"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:206
 msgid "Generic"
-msgstr ""
+msgstr "Általános"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:253
 msgid "Meteor Showers Plug-in"
-msgstr ""
+msgstr "Meteorraj bővítmény"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:259
 msgid "Terms"
@@ -9433,7 +9445,7 @@ msgstr ""
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:260
 msgid "Meteor shower"
-msgstr ""
+msgstr "Meteorraj"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:261
 msgid ""
@@ -9446,10 +9458,16 @@ msgid ""
 "known as meteor outbursts and meteor storms, which may produce greater than "
 "1,000 meteors an hour."
 msgstr ""
+"A meteorraj olyan égi jelenség, melynek során meteorok figyelhetők meg az "
+"égbolton, amik látszólag az ég egy bizonyos pontja felől közelednek. A "
+"meteorok egymással párhuzamos pályán haladnak és nagy sebességgel ütköznek a "
+"Föld légkörébe. A legtöbb meteor kisebb mint egy homokszem, így legtöbbjük "
+"felizzik és megsemmisül, a Föld felszínét nem érik el. Intenzív "
+"meteorhullásról beszélünk, ha óránként 1000 (vagy több) meteor látható."
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:262
 msgid "Radiant"
-msgstr ""
+msgstr "Radiáns"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:263
 msgid ""
@@ -9489,7 +9507,7 @@ msgstr ""
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:268
 msgid "Population index"
-msgstr ""
+msgstr "Populációs index"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:269
 msgid ""
@@ -9501,7 +9519,7 @@ msgstr ""
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:270
 msgid "Notes"
-msgstr ""
+msgstr "Megjegyzések"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:271
 msgid ""
@@ -9526,7 +9544,7 @@ msgstr ""
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:278
 #, qt-format
 msgid "%1International Meteor Organization%2"
-msgstr ""
+msgstr "%1International Meteor Organization%2"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:342
 msgid "Meteor showers is updated"
@@ -9534,19 +9552,19 @@ msgstr ""
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:512
 msgid "Meteor Showers Configuration"
-msgstr ""
+msgstr "Meteorraj beállítások"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:513
 msgid "Meteor Showers Plug-in Configuration"
-msgstr ""
+msgstr "Meteorraj beállítások"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:515
 msgid "Update data from Internet"
-msgstr ""
+msgstr "Frissítés internetről"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:523
 msgid "Meteor showers"
-msgstr ""
+msgstr "Meteorrajok"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:524
 msgid "Show meteor showers button on toolbar"
@@ -9568,7 +9586,7 @@ msgstr ""
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:541
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:548
 msgid "Change Color"
-msgstr ""
+msgstr "Szín megváltoztatása"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:538
 msgid "Inactive Radiant"
@@ -9576,19 +9594,19 @@ msgstr ""
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:545
 msgid "Active Radiant - Real Data"
-msgstr ""
+msgstr "Aktív radiáns - valós adatok"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:551
 msgid "Radiants for meteor showers"
-msgstr ""
+msgstr "Meteorraj radiánsok"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:552
 msgid "Show labels of radiants"
-msgstr ""
+msgstr "Radiánsok címkéi"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:553
 msgid "Show active radiants only"
-msgstr ""
+msgstr "Csak aktív radiánsok mutatása"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:555
 msgid "Label font size (pixels)"
@@ -9596,12 +9614,12 @@ msgstr ""
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:557
 msgid "Radiants"
-msgstr ""
+msgstr "Radiánsok"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:558
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:563
 msgid "Search"
-msgstr ""
+msgstr "Keres"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:559
 msgid "From:"
@@ -9618,11 +9636,11 @@ msgstr ""
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:564
 msgid "Results"
-msgstr ""
+msgstr "Eredmények"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:565
 msgid "Search Events"
-msgstr ""
+msgstr "Esemény keresése"
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:54
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:95
