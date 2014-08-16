@@ -111,10 +111,19 @@ void StelCore::init()
 {
 	QSettings* conf = StelApp::getInstance().getSettings();
 
-	defaultLocationID = conf->value("init_location/location","error").toString();
+	defaultLocationID = conf->value("init_location/location", "auto").toString();
 	bool ok;
 	StelLocationMgr* locationMgr = &StelApp::getInstance().getLocationMgr();
-	StelLocation location = locationMgr->locationForString(defaultLocationID);
+	StelLocation location;
+	if (defaultLocationID == "auto")
+	{
+		locationMgr->locationFromIP();
+	}
+	else
+	{
+		location = locationMgr->locationForString(defaultLocationID);
+	}
+
 	if (!location.isValid())
 	{
 		qWarning() << "Warning: location" << defaultLocationID << "is unknown.";
