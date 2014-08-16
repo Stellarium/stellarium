@@ -39,7 +39,7 @@
 // for compute tail shape
 #define COMET_TAIL_SLICES 16 // segments around the perimeter
 #define COMET_TAIL_STACKS 16 // cuts along the rotational axis
-
+static const float COMET_MIN_TAIL_LENGTH_AU=0.0025; // tail drawn only if longer than about 1 moon orbit radius (375000km)
 
 Comet::Comet(const QString& englishName,
 		 int flagLighting,
