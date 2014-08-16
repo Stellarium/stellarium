@@ -1,6 +1,7 @@
 /*
  * Stellarium
  * Copyright (C) 2010 Bogdan Marinov
+ * Copyright (C) 2013-14 Georg Zotti (accuracy&speedup)
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -110,7 +111,6 @@ public:
 
 private:
 	int minorPlanetNumber;
-	// GZ: Enough to have those as float.
 	float absoluteMagnitude;
 	float  slopeParameter;
 	double semiMajorAxis;
