@@ -31,7 +31,7 @@
 	\todo (Long-term) Photo realistic comet rendering, see https://blueprints.launchpad.net/stellarium/+spec/realistic-comet-rendering
 	2013-12: GZ: New algorithms for position computation following Paul Heafner: Fundamental Ephemeris Computations (Willmann-Bell 1999).
 	2014-01: GZ: Parabolic tails appropriately scaled/rotated. Much is currently empirical, leaving room for physics-based improvements.
-	2014-08: GZ: speedup in case hundresds of comets are loaded.
+	2014-08: GZ: speedup in case hundreds of comets are loaded.
   */
 class Comet : public Planet
 {
@@ -127,7 +127,6 @@ private:
 
 	//GZ Tail additions
 	Vec2f tailFactors; // result of latest call to getComaDiameterAndTailLengthAU(); Results cached here for infostring. [0]=Coma diameter, [1] gas tail length.
-
 	bool tailActive;		//! true if there is a tail worth bothering (longer than COMET_MIN_TAIL_LENGTH_AU)? Drawing tails is quite costly.
 	double deltaJDtail;             //! like deltaJD, but time difference between tail geometry updates.
 	double lastJDtail;             //! like lastJD, but time of last tail geometry update.
