@@ -39,7 +39,6 @@
 // for compute tail shape
 #define COMET_TAIL_SLICES 16 // segments around the perimeter
 #define COMET_TAIL_STACKS 16 // cuts along the rotational axis
-static const float COMET_MIN_TAIL_LENGTH_AU=0.0025; // tail drawn only if longer than about 1 moon orbit radius (375000km)
 
 Comet::Comet(const QString& englishName,
 		 int flagLighting,
@@ -308,7 +307,7 @@ void Comet::computePosition(const double date)
 			// Note that we use a diameter larger than what the formula returns. A scale factor of 1.2 is ad-hoc/empirical (GZ), but may look better.
 			computeComa(1.0f*tailFactors[0]);
 
-			tailActive = (tailFactors[1] > tailFactors[0]); // COMET_MIN_TAIL_LENGTH_AU); // Inhibit tails drawing if too short. Would be nice to include geometric projection angle, but this is too costly.
+			tailActive = (tailFactors[1] > tailFactors[0]); // Inhibit tails drawing if too short. Would be nice to include geometric projection angle, but this is too costly.
 
 			if (tailActive)
 			{
@@ -345,14 +344,12 @@ void Comet::computePosition(const double date)
 					gasVertices[i].transfo4d(gasTailRot);
 					dustVertices[i].transfo4d(dustTailRot);
 				}
-
 			}
 
 			orbit->setUpdateTails(false); // don't update until position has been recalculated elsewhere
 		}
 		// Note: we can make deltaJDtail adaptive, depending on distance to sun!
 		//deltaJDtail=5.0*StelCore::JD_MINUTE * qMax(0.01, qMin(eclipticPos.length(), 20.0));
-
 	}
 }
 
@@ -363,7 +360,7 @@ void Comet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFont
 	if (hidden)
 		return;
 	if (getEnglishName() == core->getCurrentLocation().planetName)
-	{ // GZ moved this up. Maybe even don't do that? E.g., draw tail while riding the comet? Decide later.
+	{ // GZ: Maybe even don't do that? E.g., draw tail while riding the comet? Decide later.
 		return;
 	}
 
