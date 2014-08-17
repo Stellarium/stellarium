@@ -22,6 +22,9 @@
 
 #include <QWidget>
 
+#include "StelAddOnMgr.hpp"
+#include "StelApp.hpp"
+
 class Ui_AddOnWidget;
 
 class AddOnWidget : public QWidget
@@ -31,8 +34,11 @@ public:
 	AddOnWidget(QWidget *parent = 0);
 	virtual ~AddOnWidget();
 
+	void init(int addonId);
+
 private:
 	Ui_AddOnWidget* ui;
+	StelAddOnDAO* m_pStelAddOnDAO;
 };
 
 #endif // _ADDONWIDGET_HPP

@@ -85,7 +85,20 @@ public:
 		QString checksum;
 	};
 
+	struct WidgetInfo {
+		QString description;
+		QString licenseName;
+		QString licenseUrl;
+		QString a1Name;
+		QString a1Email;
+		QString a1Url;
+		QString a2Name;
+		QString a2Email;
+		QString a2Url;
+	};
+
 	AddOnInfo getAddOnInfo(int addonId);
+	WidgetInfo getAddOnWidgetInfo(int addonId);
 	bool insertOnDatabase(QString insert);
 	void markAllAddOnsAsUninstalled();
 	void markAddOnsAsInstalled(QStringList idInstall);

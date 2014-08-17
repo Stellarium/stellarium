@@ -280,6 +280,56 @@ StelAddOnDAO::AddOnInfo StelAddOnDAO::getAddOnInfo(int addonId)
 	return AddOnInfo();
 }
 
+StelAddOnDAO::WidgetInfo StelAddOnDAO::getAddOnWidgetInfo(int addonId)
+{
+	if (addonId < 1) {
+		return WidgetInfo();
+	}
+
+	QSqlQuery query(m_db);
+	query.prepare("SELECT description,"
+		      "license.name AS licenseName, license.url AS licenseUrl,"
+		      "a1.name AS a1Name, a1.email AS a1Email, a1.url AS a1Url,"
+		      "a2.name AS a2Name, a2.email AS a2Email, a2.url AS a2Url "
+		      "FROM author a1 LEFT JOIN addon ON a1.id = addon.author1 "
+		      "LEFT JOIN author a2 ON a2.id = addon.author2 "
+		      "LEFT JOIN license ON license.id = addon.license "
+		      "WHERE addon.id=:id");
+	query.bindValue(":id", addonId);
+
+	if (!query.exec()) {
+		qWarning() << "Add-On DAO : WidgetInfo failed!" << m_db.lastError();
+		return WidgetInfo();
+	}
+
+	QSqlRecord queryRecord = query.record();
+	const int descriptionColumn = queryRecord.indexOf("description");
+	const int licenseNameColumn = queryRecord.indexOf("licenseName");
+	const int licenseUrlColumn = queryRecord.indexOf("licenseUrl");
+	const int a1NameColumn = queryRecord.indexOf("a1Name");
+	const int a1EmailColumn = queryRecord.indexOf("a1Email");
+	const int a1UrlColumn = queryRecord.indexOf("a1Url");
+	const int a2NameColumn = queryRecord.indexOf("a2Name");
+	const int a2EmailColumn = queryRecord.indexOf("a2Email");
+	const int a2UrlColumn = queryRecord.indexOf("a2Url");
+
+	if (query.next()) {
+		WidgetInfo widgetInfo;
+		widgetInfo.description = query.value(descriptionColumn).toString();
+		widgetInfo.licenseName =  query.value(licenseNameColumn).toString();
+		widgetInfo.licenseUrl = query.value(licenseUrlColumn).toString();
+		widgetInfo.a1Name = query.value(a1NameColumn).toString();
+		widgetInfo.a1Email = query.value(a1EmailColumn).toString();
+		widgetInfo.a1Url = query.value(a1UrlColumn).toString();
+		widgetInfo.a2Name = query.value(a2NameColumn).toString();
+		widgetInfo.a2Email = query.value(a2EmailColumn).toString();
+		widgetInfo.a2Url = query.value(a2UrlColumn).toString();
+		return widgetInfo;
+	}
+
+	return WidgetInfo();
+}
+
 QString StelAddOnDAO::getLanguagePackType(const QString& checksum)
 {
 	if (checksum.isEmpty()) {

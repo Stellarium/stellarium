@@ -31,7 +31,7 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <layout class="QGridLayout" name="gridLayout">
+  <layout class="QGridLayout" name="gridLayout" columnstretch="0,100">
    <item row="0" column="1">
     <widget class="QLabel" name="txtAuthor">
      <property name="text">
@@ -53,8 +53,8 @@
      </property>
     </widget>
    </item>
-   <item row="2" column="0">
-    <widget class="QTextBrowser" name="textBrowser">
+   <item row="2" column="0" colspan="2">
+    <widget class="QTextBrowser" name="txtDescription">
      <property name="focusPolicy">
       <enum>Qt::NoFocus</enum>
      </property>

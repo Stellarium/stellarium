@@ -60,14 +60,9 @@ public:
 		return QDateTime::fromMSecsSinceEpoch(m_iLastUpdate*1000)
 				.toString("dd MMM yyyy - hh:mm:ss");
 	}
-	qint64 getLastUpdate()
-	{
-		return m_iLastUpdate;
-	}
-	QString getUrlForUpdates()
-	{
-		return m_sUrlUpdate;
-	}
+	qint64 getLastUpdate() { return m_iLastUpdate; }
+	QString getUrlForUpdates() { return m_sUrlUpdate; }
+	StelAddOnDAO* getStelAddOnDAO() { return m_pStelAddOnDAO; }
 
 signals:
 	void updateTableViews();

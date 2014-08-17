@@ -23,6 +23,7 @@
 AddOnWidget::AddOnWidget(QWidget *parent)
 	: QWidget(parent)
 	, ui(new Ui_AddOnWidget)
+	, m_pStelAddOnDAO(StelApp::getInstance().getStelAddOnMgr().getStelAddOnDAO())
 {
 	ui->setupUi(this);
 }
@@ -31,4 +32,11 @@ AddOnWidget::~AddOnWidget()
 {
 	delete ui;
 	ui = NULL;
+}
+
+void AddOnWidget::init(int addonId)
+{
+	StelAddOnDAO::WidgetInfo info = m_pStelAddOnDAO->getAddOnWidgetInfo(addonId);
+	ui->txtAuthor->setText(info.a1Name);
+	ui->txtDescription->setText(info.description);
 }

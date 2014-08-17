@@ -95,9 +95,12 @@ void AddOnTableView::insertAddOnWidget(int row)
 	{
 		return;
 	}
+	AddOnTableProxyModel* model = (AddOnTableProxyModel*) this->model();
+	int addOnId = model->findIndex(row, COLUMN_ADDONID).data().toInt();
 	AddOnWidget* widget = new AddOnWidget(this);
+	widget->init(addOnId);
 	setRowHeight(row, widget->height());
-	setIndexWidget(model()->index(row, 0), widget);
+	setIndexWidget(model->index(row, 0), widget);
 	m_widgets.insert(row, widget);
 }
 
