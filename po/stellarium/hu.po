@@ -8,21 +8,21 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Stellarium 0.10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-08-12 20:19+0700\n"
-"PO-Revision-Date: 2014-08-15 20:31+0000\n"
+"POT-Creation-Date: 2014-08-16 23:32+0700\n"
+"PO-Revision-Date: 2014-08-16 09:01+0000\n"
 "Last-Translator: misibacsi <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-08-16 05:44+0000\n"
+"X-Launchpad-Export-Date: 2014-08-17 05:49+0000\n"
 "X-Generator: Launchpad (build 17156)\n"
 "X-Poedit-Language: Hungarian\n"
 
 #: src/core/modules/ConstellationMgr.cpp:106 src/core/modules/StarMgr.cpp:338
 #: src/core/modules/GridLinesMgr.cpp:697 src/core/modules/LandscapeMgr.cpp:354
 #: src/core/modules/NebulaMgr.cpp:126 src/core/modules/SolarSystem.cpp:155
-#: src/core/StelApp.cpp:473 src/core/StelCore.cpp:176
+#: src/core/StelApp.cpp:473 src/core/StelCore.cpp:185
 #: src/core/StelSkyLayerMgr.cpp:87 src/StelMainView.cpp:302
 msgid "Display Options"
 msgstr "Megjelenítés beállításai"
@@ -160,7 +160,7 @@ msgid "Planet: "
 msgstr "Égi objektum: "
 
 #: src/core/modules/Nebula.cpp:104 src/core/modules/Planet.cpp:146
-#: src/core/modules/MinorPlanet.cpp:216 src/core/modules/Comet.cpp:155
+#: src/core/modules/MinorPlanet.cpp:218 src/core/modules/Comet.cpp:156
 #: src/core/modules/StarWrapper.cpp:50 src/core/modules/StarWrapper.cpp:170
 #: src/core/modules/StarWrapper.cpp:173
 #: plugins/Satellites/src/Satellite.cpp:252
@@ -171,7 +171,7 @@ msgid "Type: <b>%1</b>"
 msgstr "Típus: <b>%1</b>"
 
 #: src/core/modules/Nebula.cpp:109 src/core/modules/Planet.cpp:152
-#: src/core/modules/MinorPlanet.cpp:222 src/core/modules/Comet.cpp:161
+#: src/core/modules/MinorPlanet.cpp:224 src/core/modules/Comet.cpp:162
 #: src/core/modules/StarWrapper.cpp:56 src/core/modules/StarWrapper.cpp:180
 #: plugins/Supernovae/src/Supernova.cpp:135 plugins/Novae/src/Nova.cpp:140
 #: plugins/Quasars/src/Quasar.cpp:106 plugins/Exoplanets/src/Exoplanet.cpp:186
@@ -180,7 +180,7 @@ msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>)"
 msgstr "Magnitúdó: <b>%1</b> (ennyire elhalványulva: <b>%2</b>)"
 
 #: src/core/modules/Nebula.cpp:112 src/core/modules/Planet.cpp:155
-#: src/core/modules/MinorPlanet.cpp:225 src/core/modules/Comet.cpp:164
+#: src/core/modules/MinorPlanet.cpp:227 src/core/modules/Comet.cpp:165
 #: src/core/modules/StarWrapper.cpp:60 src/core/modules/StarWrapper.cpp:183
 #: plugins/Supernovae/src/Supernova.cpp:137 plugins/Novae/src/Nova.cpp:143
 #: plugins/Quasars/src/Quasar.cpp:111 plugins/Exoplanets/src/Exoplanet.cpp:191
@@ -196,7 +196,7 @@ msgstr ""
 #: src/core/modules/Nebula.cpp:125
 #, qt-format
 msgid "Surface brightness: <b>%1</b>"
-msgstr ""
+msgstr "Felszíni fényesség: <b>%1</b>"
 
 #: src/core/modules/Nebula.cpp:131
 #, qt-format
@@ -243,8 +243,8 @@ msgstr "Nem dokumentált típus"
 msgid "Deep-sky objects"
 msgstr "Mélyég-objektumok"
 
-#: src/core/modules/Planet.cpp:158 src/core/modules/MinorPlanet.cpp:235
-#: src/core/modules/MinorPlanet.cpp:239 src/core/modules/Comet.cpp:173
+#: src/core/modules/Planet.cpp:158 src/core/modules/MinorPlanet.cpp:237
+#: src/core/modules/MinorPlanet.cpp:241 src/core/modules/Comet.cpp:174
 #: src/core/modules/StarWrapper.cpp:187 plugins/Quasars/src/Quasar.cpp:115
 #, qt-format
 msgid "Absolute Magnitude: %1"
@@ -255,14 +255,14 @@ msgstr "Abszolút fényesség: %1"
 msgid "Obliquity (of date, for Earth): %1"
 msgstr "Ferdeség (aktuális, Föld): %1"
 
-#: src/core/modules/Planet.cpp:179 src/core/modules/MinorPlanet.cpp:252
-#: src/core/modules/Comet.cpp:203
+#: src/core/modules/Planet.cpp:179 src/core/modules/MinorPlanet.cpp:254
+#: src/core/modules/Comet.cpp:204
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 km)"
 msgstr "Távolság: %1 CSE (%2 km)"
 
-#: src/core/modules/Planet.cpp:186 src/core/modules/MinorPlanet.cpp:259
-#: src/core/modules/Comet.cpp:210
+#: src/core/modules/Planet.cpp:186 src/core/modules/MinorPlanet.cpp:261
+#: src/core/modules/Comet.cpp:211
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 Mio km)"
 msgstr "Távolság: %1CsE (%2 millió km)"
@@ -272,14 +272,14 @@ msgstr "Távolság: %1CsE (%2 millió km)"
 msgid "Apparent diameter: %1, with rings: %2"
 msgstr "Látszó átmérő: %1, gyűrűkkel: %2"
 
-#: src/core/modules/Planet.cpp:205 src/core/modules/MinorPlanet.cpp:267
+#: src/core/modules/Planet.cpp:205 src/core/modules/MinorPlanet.cpp:269
 #, qt-format
 msgid "Apparent diameter: %1"
 msgstr "Látszó átmérő: %1"
 
 #. TRANSLATORS: Sidereal (orbital) period for solar system bodies in days and in Julian years (symbol: a)
-#: src/core/modules/Planet.cpp:217 src/core/modules/MinorPlanet.cpp:274
-#: src/core/modules/Comet.cpp:232
+#: src/core/modules/Planet.cpp:217 src/core/modules/MinorPlanet.cpp:276
+#: src/core/modules/Comet.cpp:245
 #, qt-format
 msgid "Sidereal period: %1 days (%2 a)"
 msgstr "Sziderikus periódus: %1 nap (%2 év)"
@@ -314,25 +314,35 @@ msgstr "Fázis: %1"
 msgid "Illuminated: %1%"
 msgstr "Megvilágítva: %1%"
 
-#: src/core/modules/MinorPlanet.cpp:208
+#: src/core/modules/MinorPlanet.cpp:210
 #, qt-format
 msgid "Provisional designation: %1"
 msgstr "Átmeneti jelölés: %1"
 
-#: src/core/modules/Comet.cpp:186
+#: src/core/modules/Comet.cpp:187
 #, no-c-format, qt-format
 msgid "Distance from Sun: %1AU (%2 km)"
 msgstr "Távolság a Naptól: %1CsE (%2 km)"
 
-#: src/core/modules/Comet.cpp:193
+#: src/core/modules/Comet.cpp:194
 #, no-c-format, qt-format
 msgid "Distance from Sun: %1AU (%2 Mio km)"
 msgstr "Távolság a Naptól: %1CsE (%2 millió km)"
 
-#: src/core/modules/Comet.cpp:217
+#: src/core/modules/Comet.cpp:221
 #, no-c-format, qt-format
 msgid "Speed: %1 km/s"
 msgstr "Sebesség: %1 km/s"
+
+#: src/core/modules/Comet.cpp:231
+#, no-c-format, qt-format
+msgid "Coma diameter (estimate): %1 km"
+msgstr ""
+
+#: src/core/modules/Comet.cpp:235
+#, no-c-format, qt-format
+msgid "Gas tail length (estimate): %1 Mio km"
+msgstr ""
 
 #: src/core/modules/SolarSystem.cpp:156
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:308
@@ -466,185 +476,185 @@ msgstr "Éjszakai mód"
 msgid "SpaceShip"
 msgstr "Űrhajó"
 
-#: src/core/StelCore.cpp:174 src/gui/StelGui.cpp:183
+#: src/core/StelCore.cpp:183 src/gui/StelGui.cpp:183
 #: src/ui_dateTimeDialogGui.h:297
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:172
 msgid "Date and Time"
 msgstr "Dátum és idő"
 
-#: src/core/StelCore.cpp:175 src/core/StelMovementMgr.cpp:129
+#: src/core/StelCore.cpp:184 src/core/StelMovementMgr.cpp:129
 msgid "Movement and Selection"
 msgstr "Mozgás és kijelölés"
 
-#: src/core/StelCore.cpp:178
+#: src/core/StelCore.cpp:187
 msgid "Increase time speed"
 msgstr "Idő gyorsítása"
 
-#: src/core/StelCore.cpp:179
+#: src/core/StelCore.cpp:188
 msgid "Decrease time speed"
 msgstr "Idő lassítása"
 
-#: src/core/StelCore.cpp:180
+#: src/core/StelCore.cpp:189
 msgid "Increase time speed (a little)"
 msgstr "Növelje az idő sebességét (egy kicsit)"
 
-#: src/core/StelCore.cpp:181
+#: src/core/StelCore.cpp:190
 msgid "Decrease time speed (a little)"
 msgstr "Csökkentse az idő sebességét (egy kicsit)"
 
-#: src/core/StelCore.cpp:182
+#: src/core/StelCore.cpp:191
 msgid "Set normal time rate"
 msgstr "Valós sebesség visszaállítása"
 
-#: src/core/StelCore.cpp:183
+#: src/core/StelCore.cpp:192
 msgid "Set time rate to zero"
 msgstr "Az időráta nullára állítása"
 
-#: src/core/StelCore.cpp:184
+#: src/core/StelCore.cpp:193
 msgid "Set time to now"
 msgstr "Vissza a jelenbe"
 
-#: src/core/StelCore.cpp:185
+#: src/core/StelCore.cpp:194
 msgid "Add 1 solar hour"
 msgstr "1 szoláris órával előre"
 
-#: src/core/StelCore.cpp:186
+#: src/core/StelCore.cpp:195
 msgid "Add 1 solar day"
 msgstr "1 szoláris nappal előre"
 
-#: src/core/StelCore.cpp:187
+#: src/core/StelCore.cpp:196
 msgid "Add 1 solar week"
 msgstr "7 szoláris nappal előre"
 
-#: src/core/StelCore.cpp:188
+#: src/core/StelCore.cpp:197
 msgid "Subtract 1 solar hour"
 msgstr "1 szoláris órával vissza"
 
-#: src/core/StelCore.cpp:189
+#: src/core/StelCore.cpp:198
 msgid "Subtract 1 solar day"
 msgstr "1 szoláris nappal vissza"
 
-#: src/core/StelCore.cpp:190
+#: src/core/StelCore.cpp:199
 msgid "Subtract 1 solar week"
 msgstr "7 szoláris nappal vissza"
 
-#: src/core/StelCore.cpp:191
+#: src/core/StelCore.cpp:200
 msgid "Add 1 sidereal day"
 msgstr "1 csillagnappal előre"
 
-#: src/core/StelCore.cpp:192
+#: src/core/StelCore.cpp:201
 msgid "Add 1 sidereal week"
 msgstr "7 csillagnappal előre"
 
-#: src/core/StelCore.cpp:193
+#: src/core/StelCore.cpp:202
 msgid "Add 1 sidereal month"
 msgstr "+1 sziderikus hónap"
 
-#: src/core/StelCore.cpp:194
+#: src/core/StelCore.cpp:203
 msgid "Add 1 sidereal year"
 msgstr "+1 sziderikus év"
 
-#: src/core/StelCore.cpp:195
+#: src/core/StelCore.cpp:204
 msgid "Add 1 sidereal century"
 msgstr "+1 sziderikus évszázad"
 
-#: src/core/StelCore.cpp:196
+#: src/core/StelCore.cpp:205
 msgid "Add 1 synodic month"
 msgstr "+1 szinodikus hónap"
 
-#: src/core/StelCore.cpp:197
+#: src/core/StelCore.cpp:206
 msgid "Add 1 draconic month"
 msgstr "+1 drakonikus hónap"
 
-#: src/core/StelCore.cpp:198
+#: src/core/StelCore.cpp:207
 msgid "Add 1 draconic year"
 msgstr "+1 drakonikus év"
 
-#: src/core/StelCore.cpp:199
+#: src/core/StelCore.cpp:208
 msgid "Add 1 anomalistic month"
 msgstr "+1 anomális hónap"
 
-#: src/core/StelCore.cpp:200
+#: src/core/StelCore.cpp:209
 msgid "Add 1 mean tropical month"
 msgstr "+1 tropikus hónap"
 
-#: src/core/StelCore.cpp:201
+#: src/core/StelCore.cpp:210
 msgid "Add 1 mean tropical year"
 msgstr "+1 átlagos tropikus év"
 
-#: src/core/StelCore.cpp:202
+#: src/core/StelCore.cpp:211
 msgid "Add 1 mean tropical century"
 msgstr "+1 tropikus évszázad"
 
-#: src/core/StelCore.cpp:203
+#: src/core/StelCore.cpp:212
 msgid "Subtract 1 sidereal day"
 msgstr "1 csillagnappal vissza"
 
-#: src/core/StelCore.cpp:204
+#: src/core/StelCore.cpp:213
 msgid "Subtract 1 sidereal week"
 msgstr "7 csillagnappal vissza"
 
-#: src/core/StelCore.cpp:205
+#: src/core/StelCore.cpp:214
 msgid "Subtract 1 sidereal month"
 msgstr "-1 sziderikus hónap"
 
-#: src/core/StelCore.cpp:206
+#: src/core/StelCore.cpp:215
 msgid "Subtract 1 sidereal year"
 msgstr "-1 sziderikus év"
 
-#: src/core/StelCore.cpp:207
+#: src/core/StelCore.cpp:216
 msgid "Subtract 1 sidereal century"
 msgstr "-1 sziderikus évszázad"
 
-#: src/core/StelCore.cpp:208
+#: src/core/StelCore.cpp:217
 msgid "Subtract 1 synodic month"
 msgstr "-1 szinodikus hónap"
 
-#: src/core/StelCore.cpp:209
+#: src/core/StelCore.cpp:218
 msgid "Subtract 1 draconic month"
 msgstr "-1 drakonikus hónap"
 
-#: src/core/StelCore.cpp:210
+#: src/core/StelCore.cpp:219
 msgid "Subtract 1 draconic year"
 msgstr "-1 drakonikus év"
 
-#: src/core/StelCore.cpp:211
+#: src/core/StelCore.cpp:220
 msgid "Subtract 1 anomalistic month"
 msgstr "-1 anomális hónap"
 
-#: src/core/StelCore.cpp:212
+#: src/core/StelCore.cpp:221
 msgid "Subtract 1 mean tropical month"
 msgstr "-1 tropikus hónap"
 
-#: src/core/StelCore.cpp:213
+#: src/core/StelCore.cpp:222
 msgid "Subtract 1 mean tropical year"
 msgstr "-1 átlagos tropikus év"
 
-#: src/core/StelCore.cpp:214
+#: src/core/StelCore.cpp:223
 msgid "Subtract 1 mean tropical century"
 msgstr "-1 tropikus évszázad"
 
-#: src/core/StelCore.cpp:216
+#: src/core/StelCore.cpp:225
 msgid "Set home planet to selected planet"
 msgstr "Váltás a kijelölt bolygóra"
 
-#: src/core/StelCore.cpp:217
+#: src/core/StelCore.cpp:226
 msgid "Go to home"
 msgstr "Vissza haza"
 
-#: src/core/StelCore.cpp:218
+#: src/core/StelCore.cpp:227
 msgid "Flip scene horizontally"
 msgstr "Kép tükrözése vízszintesen"
 
-#: src/core/StelCore.cpp:219
+#: src/core/StelCore.cpp:228
 msgid "Flip scene vertically"
 msgstr "Kép tükrözése függőlegesen"
 
-#: src/core/StelCore.cpp:1489
+#: src/core/StelCore.cpp:1498
 msgid "Correction is disabled. Use only if you know what you are doing!"
 msgstr "Korrekció kikapcsolva. Csak akkor alkalmazd, ha tudod mit csinálsz."
 
-#: src/core/StelCore.cpp:1492
+#: src/core/StelCore.cpp:1501
 #, qt-format
 msgid ""
 "This historical formula was obtained by C. Schoch in 1931 and was used by G. "
@@ -655,7 +665,7 @@ msgstr ""
 "az  <em>Einstein's Theory of Relativity Confirmed by Ancient Solar "
 "Eclipses</em> (%1) című cikkében. További információk %2itt%3."
 
-#: src/core/StelCore.cpp:1495
+#: src/core/StelCore.cpp:1504
 #, qt-format
 msgid ""
 "This empirical equation was published by G. M. Clemence in the article "
@@ -664,7 +674,7 @@ msgstr ""
 "Ezt a gyakorlati képletet  G. M. Clemence adta meg <em>On the system of "
 "astronomical constants</em> című cikkében (%1)."
 
-#: src/core/StelCore.cpp:1498
+#: src/core/StelCore.cpp:1507
 #, qt-format
 msgid ""
 "This formula is based on a study of post-1650 observations of the Sun, the "
@@ -677,7 +687,7 @@ msgstr ""
 "Formulae for Calculators</em> című munkájában. Az eljárást a PC-re írt "
 "SunTracker Pro program is használja."
 
-#: src/core/StelCore.cpp:1502
+#: src/core/StelCore.cpp:1511
 msgid ""
 "This is a slightly modified version of the IAU (1952) formula which was "
 "adopted in the <em>Astronomical Ephemeris</em> and in the <em>Canon of Solar "
@@ -687,7 +697,7 @@ msgstr ""
 "az 1983  <em>Astronomical Ephemeris</em> és a <em>Canon of Solar "
 "Eclipses</em> című munkáikban felhasználtak."
 
-#: src/core/StelCore.cpp:1506
+#: src/core/StelCore.cpp:1515
 msgid ""
 "The tables of Tuckerman (1962, 1964) list the positions of the Sun, the Moon "
 "and the planets at 5- and 10-day intervals from 601 BCE to 1649 CE. The same "
@@ -699,7 +709,7 @@ msgstr ""
 "ig. Ugyanezt az összefüggést alkalmazta   Goldstine a szembeállásokat megadó "
 "táblázatában (1973)."
 
-#: src/core/StelCore.cpp:1510
+#: src/core/StelCore.cpp:1519
 #, qt-format
 msgid ""
 "This equation was published by P. M. Muller and F. R. Stephenson in the "
@@ -710,7 +720,7 @@ msgstr ""
 "accelerations of the earth and moon from early astronomical "
 "observations</em> című cikkében (%1)."
 
-#: src/core/StelCore.cpp:1513
+#: src/core/StelCore.cpp:1522
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson in the article <em>Pre-"
@@ -719,7 +729,7 @@ msgstr ""
 "Ezt a képletet F. R. Stephenson publikálta  a <em>Pre-Telescopic "
 "Astronomical Observations</em> című cikkében (%1)."
 
-#: src/core/StelCore.cpp:1516
+#: src/core/StelCore.cpp:1525
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation (outdated and superseded by Schmadel & "
@@ -732,7 +742,7 @@ msgstr ""
 "1975</em> (%1) című cikkében.   Korszerűbb és pontosabb változatát Schmadel "
 "& Zech közölte 1988-ban."
 
-#: src/core/StelCore.cpp:1519
+#: src/core/StelCore.cpp:1528
 msgid ""
 "This algorithm was adopted in P. Bretagnon & L. Simon's <em>Planetary "
 "Programs and Tables from -4000 to +2800</em> (1986) and in the PC "
@@ -742,7 +752,7 @@ msgstr ""
 "and Tables from -4000 to +2800</em> (1986) című cikkében és a RedShift nevű "
 "PC-s planetáriumprogram is ezt használja."
 
-#: src/core/StelCore.cpp:1522
+#: src/core/StelCore.cpp:1531
 #, qt-format
 msgid ""
 "This formula was published by F. R. Stephenson and L. V. Morrison in the "
@@ -753,12 +763,12 @@ msgstr ""
 "changes in the rotation of the earth - 700 B.C. to A.D. 1980</em> (%1) című "
 "cikkében."
 
-#: src/core/StelCore.cpp:1525
+#: src/core/StelCore.cpp:1534
 msgid "This algorithm is used in the PC planetarium program Guide 7."
 msgstr ""
 "Ezt az algoritmust használja a Guide 7 nevű PC-s planetárium-program."
 
-#: src/core/StelCore.cpp:1528
+#: src/core/StelCore.cpp:1537
 msgid ""
 "This algorithm was given by F. Espenak in his <em>Fifty Year Canon of Solar "
 "Eclipses: 1986-2035</em> (1987) and in his <em>Fifty Year Canon of Lunar "
@@ -768,7 +778,7 @@ msgstr ""
 "Eclipses: 1986-2035</em> (1987) című, és a <em>Fifty Year Canon of Lunar "
 "Eclipses: 1986-2035</em> (1989) című cikkében."
 
-#: src/core/StelCore.cpp:1531
+#: src/core/StelCore.cpp:1540
 #, qt-format
 msgid ""
 "This formula was obtained by K.M. Borkowski (%1) from an analysis of 31 "
@@ -777,7 +787,7 @@ msgstr ""
 "Ezt a képletet K.M. Borkowski (%1) adta meg 31 napfogyatkozás adatainak "
 "elemzése után  (i.e. 2137 és i.e. 1715 között)."
 
-#: src/core/StelCore.cpp:1534
+#: src/core/StelCore.cpp:1543
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation was published by L. D. Schmadel and G. "
@@ -790,7 +800,7 @@ msgstr ""
 "cikkében, ezek az adatok illeszkedtek legjobban a Stephenson és Morrison "
 "(1984) által megadott értékekhez."
 
-#: src/core/StelCore.cpp:1537
+#: src/core/StelCore.cpp:1546
 msgid ""
 "This formula was adopted by M. Chapront-Touze & J. Chapront in the shortened "
 "version of the ELP 2000-85 lunar theory in their <em>Lunar Tables and "
@@ -800,7 +810,7 @@ msgstr ""
 "rövidített változata alapján. Cikkük <em>Lunar Tables and Programs from 4000 "
 "B.C. to A.D. 8000</em> (1991) címmel jelent meg."
 
-#: src/core/StelCore.cpp:1540
+#: src/core/StelCore.cpp:1549
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson and L. V. Morrison in the "
@@ -811,7 +821,7 @@ msgstr ""
 "Fluctuations in the Earth's Rotation: 700 BC to AD 1990</em> (%1) című "
 "cikkben közölték."
 
-#: src/core/StelCore.cpp:1543
+#: src/core/StelCore.cpp:1552
 #, qt-format
 msgid ""
 "F. R. Stephenson published this formula in his book <em>Historical Eclipses "
@@ -820,7 +830,7 @@ msgstr ""
 "F. R. Stephenson publikálta ezt a képletet  a <em>Historical Eclipses and "
 "Earth's Rotation</em> (%1) című könyvében."
 
-#: src/core/StelCore.cpp:1546
+#: src/core/StelCore.cpp:1555
 msgid ""
 "From J. Meeus, <em>Astronomical Algorithms</em> (2nd ed., 1998), and widely "
 "used. Table for 1620..2000, and includes a variant of Chapront, Chapront-"
@@ -831,7 +841,7 @@ msgstr ""
 "Chapront, Chapront-Touze és Francou (1997) kiegészítésével az  ezen kívüli "
 "időszakokra."
 
-#: src/core/StelCore.cpp:1549
+#: src/core/StelCore.cpp:1558
 #, qt-format
 msgid ""
 "The JPL Solar System Dynamics Group of the NASA Jet Propulsion Laboratory "
@@ -840,7 +850,7 @@ msgstr ""
 "A JPL Solar System Dynamics Group (NASA), és a Jet Propulsion Laboratory "
 "használja ezt a képletet interaktív weboldalukon: %1JPL Horizons%2."
 
-#: src/core/StelCore.cpp:1552
+#: src/core/StelCore.cpp:1561
 #, qt-format
 msgid ""
 "This polynome was published by J. Meeus and L. Simons in article "
@@ -849,7 +859,7 @@ msgstr ""
 "Ezt a polinomot J. Meeus és L. Simons közli  a <em>Polynomial approximations "
 "to Delta T, 1620-2000 AD</em> (%1) című cikkében."
 
-#: src/core/StelCore.cpp:1555
+#: src/core/StelCore.cpp:1564
 msgid ""
 "The fourth edition of O. Montenbruck & T. Pfleger's <em>Astronomy on the "
 "Personal Computer</em> (2000) provides simple 3rd-order polynomial data fits "
@@ -860,7 +870,7 @@ msgstr ""
 "fokú képletet  is megadnak, ami jól illeszkedik a legutóbbi időszak "
 "adataihoz."
 
-#: src/core/StelCore.cpp:1558
+#: src/core/StelCore.cpp:1567
 msgid ""
 "E. M. Reingold & N. Dershowitz present this polynomial data fit in "
 "<em>Calendrical Calculations</em> (3rd ed. 2007) and in their "
@@ -872,7 +882,7 @@ msgstr ""
 "(2002) című könyvükben. A képlet Jean Meeus <em>Astronomical Algorithms</em> "
 "(1991) című munkáján alapszik."
 
-#: src/core/StelCore.cpp:1561
+#: src/core/StelCore.cpp:1570
 #, qt-format
 msgid ""
 "This important solution was published by L. V. Morrison and F. R. Stephenson "
@@ -883,7 +893,7 @@ msgstr ""
 "values of the Earth's clock error %1T and the calculation of eclipses</em> "
 "(%2)  című cikkében jelent meg. Kiegészítés:  (%3)."
 
-#: src/core/StelCore.cpp:1564
+#: src/core/StelCore.cpp:1573
 #, qt-format
 msgid ""
 "From the Length of Day (LOD; as determined by Stephenson & Morrison (%2)), "
@@ -892,7 +902,7 @@ msgid ""
 "by Stephenson (%2). See for more info %3here%4."
 msgstr ""
 
-#: src/core/StelCore.cpp:1567
+#: src/core/StelCore.cpp:1576
 #, qt-format
 msgid ""
 "This solution by F. Espenak and J. Meeus, based on Morrison & Stephenson "
@@ -908,11 +918,11 @@ msgstr ""
 "alkalmazza a Nap, a Hold és a bolygók efemeriszét számító SOLEX "
 "csillagászati program is."
 
-#: src/core/StelCore.cpp:1567
+#: src/core/StelCore.cpp:1576
 msgid "Used by default."
 msgstr "Alapértelmezés."
 
-#: src/core/StelCore.cpp:1570
+#: src/core/StelCore.cpp:1579
 #, qt-format
 msgid ""
 "This solution by B. Banjevic, based on Stephenson & Morrison (1984), was "
@@ -923,7 +933,7 @@ msgstr ""
 "megjelent az <em>Ancient eclipses and dating the fall of Babylon</em> "
 "cikkben  (%1)."
 
-#: src/core/StelCore.cpp:1573
+#: src/core/StelCore.cpp:1582
 #, qt-format
 msgid ""
 "This solution by S. Islam, M. Sadiq and M. S. Qureshi, based on Meeus & "
@@ -934,42 +944,42 @@ msgstr ""
 "munkáján alapul, ez <em>Error Minimization of Polynomial Approximation of "
 "DeltaT</em> (%1) címmel jelent meg, átdolgozva Sana Islam által 2013-ban."
 
-#: src/core/StelCore.cpp:1576
+#: src/core/StelCore.cpp:1585
 #, qt-format
 msgid ""
 "This is a quadratic formula for calculation of %1T with coefficients defined "
 "by the user."
 msgstr ""
 
-#: src/core/StelCore.cpp:1579 src/core/SimbadSearcher.cpp:133
+#: src/core/StelCore.cpp:1588 src/core/SimbadSearcher.cpp:133
 msgid "Error"
 msgstr "Hiba"
 
-#: src/core/StelCore.cpp:1629
+#: src/core/StelCore.cpp:1638
 msgid "with meaningless values outside this range"
 msgstr ""
 
-#: src/core/StelCore.cpp:1655
+#: src/core/StelCore.cpp:1664
 msgid ""
 "with a mean error of less than one second, max. error 1.9s, and meaningless "
 "values outside this range"
 msgstr ""
 
-#: src/core/StelCore.cpp:1677 src/core/StelCore.cpp:1682
-#: src/core/StelCore.cpp:1709 src/core/StelCore.cpp:1714
+#: src/core/StelCore.cpp:1686 src/core/StelCore.cpp:1691
+#: src/core/StelCore.cpp:1718 src/core/StelCore.cpp:1723
 msgid "with zero values outside this range"
 msgstr ""
 
-#: src/core/StelCore.cpp:1687
+#: src/core/StelCore.cpp:1696
 msgid "with a typical 1-second accuracy and zero values outside this range"
 msgstr ""
 
-#: src/core/StelCore.cpp:1724
+#: src/core/StelCore.cpp:1733
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2, %3."
 msgstr ""
 
-#: src/core/StelCore.cpp:1726
+#: src/core/StelCore.cpp:1735
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2."
 msgstr "Érvényességi időszak: %1 és %2 év között"
@@ -1679,7 +1689,7 @@ msgstr "Vízszintes gombsáv automatikus elrejtése"
 msgid "Auto hide vertical button bar"
 msgstr "Függőleges gombsáv automatikus elrejtése"
 
-#: src/gui/StelGuiItems.cpp:293 src/gui/StelGuiItems.cpp:711
+#: src/gui/StelGuiItems.cpp:293 src/gui/StelGuiItems.cpp:715
 msgid "Space"
 msgstr "Szóköz"
 
@@ -1688,11 +1698,11 @@ msgstr "Szóköz"
 msgid "%1m"
 msgstr "%1 m"
 
-#: src/gui/StelGuiItems.cpp:618
+#: src/gui/StelGuiItems.cpp:622
 msgid "Field of view"
 msgstr ""
 
-#: src/gui/StelGuiItems.cpp:636
+#: src/gui/StelGuiItems.cpp:640
 msgid "Frames per second"
 msgstr "Másodpercenkénti képkockaszám"
 
@@ -1953,11 +1963,15 @@ msgid ""
 "Insufficient OpenGL version. Please update drivers, graphics hardware, or "
 "use MESA (or ANGLE) version."
 msgstr ""
+"Az OpenGL verziója nem elégséges. Kérjük frissítse a megjelenítő hardverét "
+"vagy meghajtóprogramját, vagy használja a MESA vagy ANGLE változatokat."
 
 #: src/main.cpp:365
 msgid ""
 "Insufficient OpenGL version. Please update drivers, or graphics hardware."
 msgstr ""
+"Az OpenGL verziója nem elégséges. Kérjük frissítse a megjelenítő hardverét "
+"vagy meghajtóprogramját."
 
 #: src/StelMainView.cpp:301
 msgid "Save screenshot"
@@ -2327,27 +2341,27 @@ msgstr "Makemake"
 #. TRANSLATORS: Asteroid (3200) Phaethon
 #: src/translations.h:139
 msgid "Phaethon"
-msgstr ""
+msgstr "3200 Phaethon"
 
 #. TRANSLATORS: Asteroid (1866) Sisyphus
 #: src/translations.h:141
 msgid "Sisyphus"
-msgstr ""
+msgstr "1866 Sisyphus"
 
 #. TRANSLATORS: Asteroid (1864) Daedalus
 #: src/translations.h:143
 msgid "Daedalus"
-msgstr ""
+msgstr "1864 Daedalus"
 
 #. TRANSLATORS: Asteroid (1566) Icarus
 #: src/translations.h:145
 msgid "Icarus"
-msgstr ""
+msgstr "1566 Icarus"
 
 #. TRANSLATORS: Asteroid (1809) Prometheus
 #: src/translations.h:147
 msgid "Prometheus"
-msgstr ""
+msgstr "1809 Prometheus"
 
 #: src/translations.h:148
 msgid "Prometheus (moon)"
@@ -2356,7 +2370,7 @@ msgstr ""
 #. TRANSLATORS: Asteroid (1810) Epimetheus
 #: src/translations.h:150
 msgid "Epimetheus"
-msgstr ""
+msgstr "1810 Epimetheus"
 
 #: src/translations.h:151
 msgid "Epimetheus (moon)"
@@ -2365,17 +2379,17 @@ msgstr ""
 #. TRANSLATORS: Asteroid (951) Gaspra
 #: src/translations.h:153
 msgid "Gaspra"
-msgstr ""
+msgstr "951 Gaspra"
 
 #. TRANSLATORS: Asteroid (243) Ida
 #: src/translations.h:155
 msgid "Ida"
-msgstr ""
+msgstr "243 Ida"
 
 #. TRANSLATORS: Asteroid (218) Bianca
 #: src/translations.h:157
 msgid "Bianca"
-msgstr ""
+msgstr "218 Bianca"
 
 #: src/translations.h:158
 msgid "Bianca (moon)"
@@ -2384,7 +2398,7 @@ msgstr ""
 #. TRANSLATORS: Proper name of comet C/1680 V1
 #: src/translations.h:161
 msgid "Great Comet of 1680 (C/1680 V1)"
-msgstr ""
+msgstr "C/1680 V1 üstökös"
 
 #. TRANSLATORS: Name of supernova SN 1572A and script name
 #: src/translations.h:164
@@ -2765,7 +2779,7 @@ msgstr ""
 #: src/translations.h:307
 msgid ""
 "Screensaver of various happenings in the Solar System. 232 events in all!"
-msgstr ""
+msgstr "A Naprendszer 232 eseményét mutató képernyőkímélő program."
 
 #: src/translations.h:308
 msgid "A tour of the western constellations."
@@ -3795,7 +3809,7 @@ msgstr "&Másolás"
 msgid "&Paste"
 msgstr "&Beillesztés"
 
-#: src/translations.h:568 src/ui_locationDialogGui.h:407
+#: src/translations.h:568 src/ui_locationDialogGui.h:432
 #: plugins/Oculars/src/ui_ocularDialog.h:1074
 #: plugins/Oculars/src/ui_ocularDialog.h:1083
 #: plugins/Oculars/src/ui_ocularDialog.h:1090
@@ -3830,7 +3844,7 @@ msgstr "Mégsem"
 
 #: src/translations.h:575
 msgid "Files of type:"
-msgstr ""
+msgstr "Fájltípus:"
 
 #: src/translations.h:576
 msgid "Date Modified"
@@ -3877,38 +3891,34 @@ msgstr "Gyorsbillentyűk szerkesztése..."
 msgid "Refresh"
 msgstr "Frissít"
 
-#: src/ui_locationDialogGui.h:394
+#: src/ui_locationDialogGui.h:403
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:145
 msgid "Location"
 msgstr "Hely"
 
-#: src/ui_locationDialogGui.h:398 src/ui_locationDialogGui.h:401
+#: src/ui_locationDialogGui.h:407 src/ui_locationDialogGui.h:410
 msgid ""
 "Standard list of locations contains only English names (without diacritics!)"
 msgstr ""
 
-#: src/ui_locationDialogGui.h:404
+#: src/ui_locationDialogGui.h:414
+msgid "Reset location list to show all known locations"
+msgstr ""
+
+#: src/ui_locationDialogGui.h:416
+msgid "Reset Location List"
+msgstr ""
+
+#: src/ui_locationDialogGui.h:417
 msgid "Current location information"
 msgstr "A beállított megfigyelési hely adatai"
 
-#: src/ui_locationDialogGui.h:405
-msgid "Use as default"
-msgstr "Beállítás alapértelmezettnek"
-
-#: src/ui_locationDialogGui.h:406
-msgid "Return to default"
-msgstr "Alapbeállítás"
-
-#: src/ui_locationDialogGui.h:408
-msgid "Add to list"
-msgstr "Hozzáadás"
-
-#: src/ui_locationDialogGui.h:409
+#: src/ui_locationDialogGui.h:418
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:146
 msgid "Latitude:"
 msgstr "Szélesség:"
 
-#: src/ui_locationDialogGui.h:411 src/ui_locationDialogGui.h:415
+#: src/ui_locationDialogGui.h:420 src/ui_locationDialogGui.h:424
 msgid ""
 "You can enter values in decimal degrees, or using dms format, for example: "
 "+1d 12m 8s"
@@ -3916,39 +3926,55 @@ msgstr ""
 "Az érték fokban vagy fok-perc-másodperc hármasban adható meg. Például: +1d "
 "12m 8s"
 
-#: src/ui_locationDialogGui.h:413
+#: src/ui_locationDialogGui.h:422
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:149
 msgid "Longitude:"
 msgstr "Hosszúság:"
 
-#: src/ui_locationDialogGui.h:417
+#: src/ui_locationDialogGui.h:426
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:152
 msgid "Altitude:"
 msgstr "Magasság:"
 
-#: src/ui_locationDialogGui.h:419
+#: src/ui_locationDialogGui.h:428
 msgid "Enter the altitude in meter"
 msgstr "Add meg a magasságot méterben"
 
-#: src/ui_locationDialogGui.h:421
+#: src/ui_locationDialogGui.h:430
 msgid " m"
 msgstr " m"
 
-#: src/ui_locationDialogGui.h:422
+#: src/ui_locationDialogGui.h:431
+msgid "Return to default location"
+msgstr ""
+
+#: src/ui_locationDialogGui.h:433
+msgid "Add to list"
+msgstr "Hozzáadás"
+
+#: src/ui_locationDialogGui.h:434
 msgid "Name/City:"
 msgstr "Név/város:"
 
-#: src/ui_locationDialogGui.h:423
+#: src/ui_locationDialogGui.h:435
 msgid "New Location"
 msgstr "Új helyszín"
 
-#: src/ui_locationDialogGui.h:424
+#: src/ui_locationDialogGui.h:436
 msgid "Country:"
 msgstr "Ország:"
 
-#: src/ui_locationDialogGui.h:425
+#: src/ui_locationDialogGui.h:437
 msgid "Planet:"
 msgstr "Égitest:"
+
+#: src/ui_locationDialogGui.h:438
+msgid "Use current location as default"
+msgstr ""
+
+#: src/ui_locationDialogGui.h:439
+msgid "Get location from Network"
+msgstr ""
 
 #: src/ui_searchDialogGui.h:558
 msgid "Find Object"
@@ -4159,7 +4185,7 @@ msgstr ""
 #: src/ui_viewDialog.h:1159 src/ui_viewDialog.h:1215
 msgctxt "Deep-sky objects"
 msgid "DSOs"
-msgstr ""
+msgstr "Mélyég objektumok"
 
 #: src/ui_viewDialog.h:1160
 msgid "Planets and satellites"
@@ -4735,10 +4761,12 @@ msgstr "Automatikus kicsinyítéskor visszaáll az eredeti látóirány"
 msgid ""
 "Auto-enabling of the atmosphere for bodies with atmosphere in location window"
 msgstr ""
+"A légköri hatás automatikus bekapcsolása a légkörrel rendelkező "
+"objektumoknál."
 
 #: src/ui_configurationDialog.h:1150
 msgid "Auto-enabling for the atmosphere"
-msgstr ""
+msgstr "Automatikus bekapcsolás légkörnél"
 
 #: src/ui_configurationDialog.h:1151
 msgid "Screenshots"
@@ -8147,6 +8175,8 @@ msgid ""
 "from \"%1The Habitable Exoplanets Catalog%3\" by %2Planetary Habitability "
 "Laboratory%3."
 msgstr ""
+"A lehetséges lakható exobolygók listája innen származik:  \"%1The Habitable "
+"Exoplanets Catalog%3\", összeállítója: %2Planetary Habitability Laboratory%3."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:136
 #, qt-format
@@ -8155,6 +8185,8 @@ msgid ""
 "altogether have %2 exoplanets (including %3 potentially habitable "
 "exoplanets)."
 msgstr ""
+"A jelenlegi katalógusban %1 csillagrendszer van %2 exobolygóval (ezen belül "
+"%3 elvileg lakható)."
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:147
@@ -8164,6 +8196,8 @@ msgid ""
 "If you want to read full information about the plugin, its history and "
 "format of the catalog you can %1get info here%2."
 msgstr ""
+"További információ erről a bővítményről és a katalógus formátumáról  %1 itt "
+"érhető el %2."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:162
 msgid "Potential habitable exoplanets"
@@ -8241,6 +8275,7 @@ msgstr "Exobolygók elnevezései (IAU)"
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:186
 msgid "Some Astronomers and Groups active in extrasolar planets studies"
 msgstr ""
+"Néhány csillagász és csoport, akik aktívak az exobolygók tanulmányozásában"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:186
 msgid "update: 16 April 2012"
@@ -8276,11 +8311,11 @@ msgstr "The NASA Exoplanet Archive"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:194
 msgid "IAU Commission 53: Extrasolar Planets"
-msgstr ""
+msgstr "IAU Commission 53: Extrasolar Planets"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:195
 msgid "ExoMol"
-msgstr ""
+msgstr "ExoMol"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:196
 msgid "The Habitable Zone Gallery"
@@ -8338,11 +8373,11 @@ msgstr "Exobolygók felfedezési sorrendben"
 msgid ""
 "Display of the planetary systems, which contains the potential habitable "
 "exoplanets"
-msgstr ""
+msgstr "Csillagrendszerek mutatása, ahol elvileg lakható bolygó található"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:324
 msgid "Enable display of the potential habitable exoplanets only"
-msgstr ""
+msgstr "Csak a lakható exobolygók mutatása"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:326
 msgid "Show exoplanets button on toolbar"
@@ -8772,7 +8807,7 @@ msgstr "Megfigyelési feltételek"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:351
 msgid "Showing options"
-msgstr ""
+msgstr "Opciók"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:352
 msgid "Today's ephemeris (rise, set, and transit times)"
@@ -8923,6 +8958,8 @@ msgid ""
 "This plugin displays meteor showers and a marker for each active and "
 "inactive radiant, showing real information about its activity."
 msgstr ""
+"Ez a bővítmény az aktív és inaktív meteorrajokat mutatja és a radiánsokat "
+"is, valós információk alapján."
 
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:164
 msgid "Show meteor showers"
@@ -8940,66 +8977,68 @@ msgstr "Meteorraj beállító ablak"
 msgid ""
 "The old showers.json file is no longer compatible - using default file"
 msgstr ""
+"A régi  showers.json fájl nem kompatibilis ezzel a verzióval. "
+"Alapértelmezett használata."
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1240
 msgid "Quadrantids"
-msgstr ""
+msgstr "Quadrantidák"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1242
 msgid "Lyrids"
-msgstr ""
+msgstr "Lyridák"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1244
 msgid "α-Centaurids"
-msgstr ""
+msgstr "α-Centauridák"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1246
 msgid "γ-Normids"
-msgstr ""
+msgstr "γ-Normidák"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1248
 msgid "η-Aquariids"
-msgstr ""
+msgstr "η-Aquariidák"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1250
 msgid "June Bootids"
-msgstr ""
+msgstr "Júniusi Bootidák"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1252
 msgid "Piscis Austrinids"
-msgstr ""
+msgstr "Piscis Austrinidák"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1254
 msgid "Southern δ-Aquariids"
-msgstr ""
+msgstr "Déli δ-Aquariidák"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1256
 msgid "α-Capricornids"
-msgstr ""
+msgstr "α-Capricornidák"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1258
 msgid "α-Aurigids"
-msgstr ""
+msgstr "α-Aurigidák"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1260
 msgid "September ε-Perseids"
-msgstr ""
+msgstr "Szeptemberi ε-Perseidák"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1262
 msgid "Draconids"
-msgstr ""
+msgstr "Draconidák"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1264
@@ -9009,17 +9048,17 @@ msgstr "Leonidák"
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1266
 msgid "Phoenicids"
-msgstr ""
+msgstr "Phoenicidák"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1268
 msgid "Puppid-Velids"
-msgstr ""
+msgstr "Puppid-Velidák"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1270
 msgid "Ursids"
-msgstr ""
+msgstr "Ursidák"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1272
@@ -9029,37 +9068,37 @@ msgstr "Perseidák"
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1274
 msgid "δ-Leonids"
-msgstr ""
+msgstr "δ-Leonidák"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1276
 msgid "π-Puppids"
-msgstr ""
+msgstr "π-Puppidák"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1278
 msgid "June Lyrids"
-msgstr ""
+msgstr "Júniusi Lyridák"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1280
 msgid "κ-Cygnids"
-msgstr ""
+msgstr "κ-Cygnidák"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1282
 msgid "ε-Lyrids"
-msgstr ""
+msgstr "ε-Lyridák"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1284
 msgid "δ-Aurigids"
-msgstr ""
+msgstr "δ-Aurigidák"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1286
 msgid "ε-Geminids"
-msgstr ""
+msgstr "ε-Geminidák"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1288
@@ -9079,12 +9118,12 @@ msgstr "Monocerotidák"
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1294
 msgid "α-Monocerotids"
-msgstr ""
+msgstr "α-Monocerotidák"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1296
 msgid "σ-Hydrids"
-msgstr ""
+msgstr "σ-Hydridák"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1298
@@ -9094,72 +9133,72 @@ msgstr "Geminidák"
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1300
 msgid "Leonis Minorids"
-msgstr ""
+msgstr "Leonis Minoridák"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1302
 msgid "December Leonis Minorids"
-msgstr ""
+msgstr "Decemberi Leonis Minoridák"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1304
 msgid "Comae Berenicids"
-msgstr ""
+msgstr "Comae Berenicidák"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1306
 msgid "Orionids"
-msgstr ""
+msgstr "Orionidák"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1308
 msgid "Andromedids"
-msgstr ""
+msgstr "Andromedidák"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1310
 msgid "η-Lyrids"
-msgstr ""
+msgstr "η-Lyridák"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1312
 msgid "α-Scorpiids"
-msgstr ""
+msgstr "α-Scorpiidák"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1314
 msgid "Ophiuchids"
-msgstr ""
+msgstr "Ophiuchidák"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1316
 msgid "θ-Ophiuchids"
-msgstr ""
+msgstr "θ-Ophiuchidák"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1318
 msgid "κ-Serpentids"
-msgstr ""
+msgstr "κ-Serpentidák"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1320
 msgid "θ-Centaurids"
-msgstr ""
+msgstr "θ-Centauridák"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1322
 msgid "ω-Cetids"
-msgstr ""
+msgstr "ω-Cetidák"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1324
 msgid "Southern ω-Scorpiids"
-msgstr ""
+msgstr "Déli ω-Scorpiidák"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1326
 msgid "Northern ω-Scorpiids"
-msgstr ""
+msgstr "Északi ω-Scorpiidák"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1328
@@ -9169,72 +9208,72 @@ msgstr "Arietidák"
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1330
 msgid "π-Cetids"
-msgstr ""
+msgstr "π-Cetidák"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1332
 msgid "δ-Cancrids"
-msgstr ""
+msgstr "δ-Cancridák"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1334
 msgid "τ-Herculids"
-msgstr ""
+msgstr "τ-Herculidák"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1336
 msgid "ρ-Geminids"
-msgstr ""
+msgstr "ρ-Geminidák"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1338
 msgid "η-Carinids"
-msgstr ""
+msgstr "η-Carinidák"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1340
 msgid "η-Craterids"
-msgstr ""
+msgstr "η-Crateridák"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1342
 msgid "π-Virginids"
-msgstr ""
+msgstr "π-Virginidák"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1344
 msgid "θ-Virginids"
-msgstr ""
+msgstr "θ-Virginidák"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1346
 msgid "May Librids"
-msgstr ""
+msgstr "Májusi Libridák"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1348
 msgid "June Scutids"
-msgstr ""
+msgstr "Júniusi Scutidák"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1350
 msgid "α-Pisces Australids"
-msgstr ""
+msgstr "α-Pisces Australidák"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1352
 msgid "Southern ι-Aquariids"
-msgstr ""
+msgstr "Déli ι-Aquariidák"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1354
 msgid "Northern ι-Aquariids"
-msgstr ""
+msgstr "Északi ι-Aquariidák"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1356
 msgid "γ-Aquariids"
-msgstr ""
+msgstr "γ-Aquariidák"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1358
@@ -9244,7 +9283,7 @@ msgstr "Őszi Arietidák"
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1360
 msgid "χ-Orionids"
-msgstr ""
+msgstr "χ-Orionidák"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1364
@@ -9329,12 +9368,12 @@ msgstr ""
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1396
 msgid "Minor planet (4450) Pan"
-msgstr ""
+msgstr "4450 Pan kisbolygó"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1398
 msgid "Minor planet 2008 ED69"
-msgstr ""
+msgstr "2008 ED69 kisbolygó"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1400
@@ -9344,20 +9383,20 @@ msgstr "2P/Encke üstökös"
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1402
 msgid "Minor planet 2004 TG10"
-msgstr ""
+msgstr "2004 TG10 kisbolygó"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1404
 msgid "Minor planet (3200) Phaethon"
-msgstr ""
+msgstr "3200 Phaethon kisbolygó"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:325
 msgid "generic data"
-msgstr ""
+msgstr "általános adat"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:327
 msgid "real data"
-msgstr ""
+msgstr "valós adat"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:344
 msgid "meteor shower"
@@ -9365,7 +9404,7 @@ msgstr "meteorraj"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:353
 msgid "Radiant drift (per day)"
-msgstr ""
+msgstr "Napi radiánseltolódás"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:360
 #, qt-format
@@ -9384,11 +9423,11 @@ msgstr "Szülőobjektum: %1"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:376
 msgid "Active"
-msgstr ""
+msgstr "Aktív"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:384
 msgid "Activity"
-msgstr ""
+msgstr "Aktivitás"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:389
 #, qt-format
@@ -9476,6 +9515,8 @@ msgid ""
 "Perseids, for example, are meteors which appear to come from a point within "
 "the constellation of Perseus."
 msgstr ""
+"Egy meteorraj radiánsa az égbolton az a pont, ahonnan (egy bolygón lévő "
+"megfigyelő számára) a meteorok látszólagosan kiindulnak."
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:264
 msgid ""
@@ -9484,6 +9525,10 @@ msgid ""
 "point back to the known radiant for a given shower is known as a sporadic "
 "and is not considered part of that shower."
 msgstr ""
+"A megfigyelő a meteorokat bárhol megpillanthatja az égbolton, de a mozgásuk "
+"kiindulópontja a radiáns. Amelyik meteor nem ebből a forrás felől látszik "
+"mozogni, azt sporadikus meteornak nevezzük, és nem tartjuk a meteorrajhoz "
+"tartozónak."
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:265
 msgid ""
@@ -9491,10 +9536,12 @@ msgid ""
 "when it appears. For example, the radiant point for the Delta Aurigids "
 "drifts by more than a degree per night."
 msgstr ""
+"Sok meteorraj radiánspontja idővel változik. A Delta Aurigidák radiánsa "
+"például több mint egy fokot változik egyetlen éjszaka alatt."
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:266
 msgid "Zenithal Hourly Rate (ZHR)"
-msgstr ""
+msgstr "Meteorok óránkénti száma (ZHR)"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:267
 msgid ""
@@ -9504,6 +9551,11 @@ msgid ""
 "were at the zenith. The rate that can effectively be seen is nearly always "
 "lower and decreases the closer the radiant is to the horizon."
 msgstr ""
+"A csillagászatban a meteorok óránkénti száma (angol rövidítéssel: ZHR) "
+"azoknak a meteoroknak a száma, amit a megfigyelő a tiszta és sötét égbolton "
+"látna, ha a meteorok a zenit felől közelítenének. Ez egy elméleti maximális "
+"érték, amitől a gyakorlatban mindig kevesebb látszik, főleg, ha a radiáns a "
+"horizont közelében van."
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:268
 msgid "Population index"
@@ -9516,6 +9568,9 @@ msgid ""
 "meteors are more frequent than average, while values above 3.0 mean that the "
 "share of faint meteors is larger than usual."
 msgstr ""
+"A populációs index a meteorok magnitúdójának eloszlása. A 2,5 alatti értékek "
+"olyan eloszlást mutatnak, amiben gyakoriak a fényes meteorok. A 3 fölötti "
+"értékeknél az átlagos meteorok gyakoribbak."
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:270
 msgid "Notes"
@@ -9525,20 +9580,22 @@ msgstr "Megjegyzések"
 msgid ""
 "This plugin was created as project of ESA Summer of Code in Space 2013."
 msgstr ""
+"Ez a bővítmény az ESA \"Summer of Code in Space 2013\" projektje részeként "
+"készült."
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:272
 msgid "Info"
-msgstr ""
+msgstr "Infó"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:273
 msgid "Info about meteor showers you can get here:"
-msgstr ""
+msgstr "A meteorrajokról további információ itt:"
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:276
 #, qt-format
 msgid "%1Meteor shower%2 - article in Wikipedia"
-msgstr ""
+msgstr "%1Meteorraj%2 - Wikipédia szócikk"
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:278
@@ -9548,7 +9605,7 @@ msgstr "%1International Meteor Organization%2"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:342
 msgid "Meteor showers is updated"
-msgstr ""
+msgstr "Meteorrajok frissítve"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:512
 msgid "Meteor Showers Configuration"
@@ -9576,7 +9633,7 @@ msgstr ""
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:529
 msgid "Color of radiants markers"
-msgstr ""
+msgstr "Radiánsjelölők színe"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:531
 msgid "Active Radiant - Generic Data"
@@ -9590,7 +9647,7 @@ msgstr "Szín megváltoztatása"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:538
 msgid "Inactive Radiant"
-msgstr ""
+msgstr "Inaktív radiáns"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:545
 msgid "Active Radiant - Real Data"
@@ -9610,7 +9667,7 @@ msgstr "Csak aktív radiánsok mutatása"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:555
 msgid "Label font size (pixels)"
-msgstr ""
+msgstr "Címke pixelmérete"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:557
 msgid "Radiants"
@@ -9628,7 +9685,7 @@ msgstr ""
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:560
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:562
 msgid "dd/MMM/yyyy"
-msgstr ""
+msgstr "nn/HHH/éééé"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:561
 msgid "To:"
@@ -9942,6 +9999,9 @@ msgstr ""
 #~ msgid "Light pollution: "
 #~ msgstr "Fényszennyezés: "
 
+#~ msgid "Use as default"
+#~ msgstr "Beállítás alapértelmezettnek"
+
 #~ msgid "Startup FOV: XX"
 #~ msgstr "Kezdeti látószög: XX"
 
@@ -9997,6 +10057,9 @@ msgstr ""
 #~ msgstr ""
 #~ "Képernyőkímélő a Naprendszer eseményeinek ábrázolásával (összesen 171 "
 #~ "esemény!)"
+
+#~ msgid "Return to default"
+#~ msgstr "Alapbeállítás"
 
 #~ msgid "Longitude/Latitude (J2000)"
 #~ msgstr "Hosszúság/szélesség (J2000)"

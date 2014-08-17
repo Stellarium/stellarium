@@ -7,20 +7,20 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-08-12 20:19+0700\n"
+"POT-Creation-Date: 2014-08-16 23:32+0700\n"
 "PO-Revision-Date: 2014-05-03 01:41+0000\n"
 "Last-Translator: ShunjinZHENG <zhengshunjin@gmail.com>\n"
 "Language-Team: Chinese (Hong Kong) <zh_HK@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-08-13 06:15+0000\n"
+"X-Launchpad-Export-Date: 2014-08-17 06:06+0000\n"
 "X-Generator: Launchpad (build 17156)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:106 src/core/modules/StarMgr.cpp:338
 #: src/core/modules/GridLinesMgr.cpp:697 src/core/modules/LandscapeMgr.cpp:354
 #: src/core/modules/NebulaMgr.cpp:126 src/core/modules/SolarSystem.cpp:155
-#: src/core/StelApp.cpp:473 src/core/StelCore.cpp:176
+#: src/core/StelApp.cpp:473 src/core/StelCore.cpp:185
 #: src/core/StelSkyLayerMgr.cpp:87 src/StelMainView.cpp:302
 msgid "Display Options"
 msgstr "显示选项"
@@ -158,7 +158,7 @@ msgid "Planet: "
 msgstr "行星： "
 
 #: src/core/modules/Nebula.cpp:104 src/core/modules/Planet.cpp:146
-#: src/core/modules/MinorPlanet.cpp:216 src/core/modules/Comet.cpp:155
+#: src/core/modules/MinorPlanet.cpp:218 src/core/modules/Comet.cpp:156
 #: src/core/modules/StarWrapper.cpp:50 src/core/modules/StarWrapper.cpp:170
 #: src/core/modules/StarWrapper.cpp:173
 #: plugins/Satellites/src/Satellite.cpp:252
@@ -169,7 +169,7 @@ msgid "Type: <b>%1</b>"
 msgstr "类型：<b>%1</b>"
 
 #: src/core/modules/Nebula.cpp:109 src/core/modules/Planet.cpp:152
-#: src/core/modules/MinorPlanet.cpp:222 src/core/modules/Comet.cpp:161
+#: src/core/modules/MinorPlanet.cpp:224 src/core/modules/Comet.cpp:162
 #: src/core/modules/StarWrapper.cpp:56 src/core/modules/StarWrapper.cpp:180
 #: plugins/Supernovae/src/Supernova.cpp:135 plugins/Novae/src/Nova.cpp:140
 #: plugins/Quasars/src/Quasar.cpp:106 plugins/Exoplanets/src/Exoplanet.cpp:186
@@ -178,7 +178,7 @@ msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>)"
 msgstr "星等：<b>%1</b>（大气消光后：<b>%2</b>）"
 
 #: src/core/modules/Nebula.cpp:112 src/core/modules/Planet.cpp:155
-#: src/core/modules/MinorPlanet.cpp:225 src/core/modules/Comet.cpp:164
+#: src/core/modules/MinorPlanet.cpp:227 src/core/modules/Comet.cpp:165
 #: src/core/modules/StarWrapper.cpp:60 src/core/modules/StarWrapper.cpp:183
 #: plugins/Supernovae/src/Supernova.cpp:137 plugins/Novae/src/Nova.cpp:143
 #: plugins/Quasars/src/Quasar.cpp:111 plugins/Exoplanets/src/Exoplanet.cpp:191
@@ -241,8 +241,8 @@ msgstr "未收录类型"
 msgid "Deep-sky objects"
 msgstr "深空天体"
 
-#: src/core/modules/Planet.cpp:158 src/core/modules/MinorPlanet.cpp:235
-#: src/core/modules/MinorPlanet.cpp:239 src/core/modules/Comet.cpp:173
+#: src/core/modules/Planet.cpp:158 src/core/modules/MinorPlanet.cpp:237
+#: src/core/modules/MinorPlanet.cpp:241 src/core/modules/Comet.cpp:174
 #: src/core/modules/StarWrapper.cpp:187 plugins/Quasars/src/Quasar.cpp:115
 #, qt-format
 msgid "Absolute Magnitude: %1"
@@ -253,14 +253,14 @@ msgstr "绝对星等: %1"
 msgid "Obliquity (of date, for Earth): %1"
 msgstr "自转轴倾角(当前日期，相对于地球轨道面): %1"
 
-#: src/core/modules/Planet.cpp:179 src/core/modules/MinorPlanet.cpp:252
-#: src/core/modules/Comet.cpp:203
+#: src/core/modules/Planet.cpp:179 src/core/modules/MinorPlanet.cpp:254
+#: src/core/modules/Comet.cpp:204
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 km)"
 msgstr "距离: %1 天文单位(%2 千米)"
 
-#: src/core/modules/Planet.cpp:186 src/core/modules/MinorPlanet.cpp:259
-#: src/core/modules/Comet.cpp:210
+#: src/core/modules/Planet.cpp:186 src/core/modules/MinorPlanet.cpp:261
+#: src/core/modules/Comet.cpp:211
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 Mio km)"
 msgstr "距离: %1AU (%2百万km)"
@@ -270,14 +270,14 @@ msgstr "距离: %1AU (%2百万km)"
 msgid "Apparent diameter: %1, with rings: %2"
 msgstr "视直径: %1, 包括环: %2"
 
-#: src/core/modules/Planet.cpp:205 src/core/modules/MinorPlanet.cpp:267
+#: src/core/modules/Planet.cpp:205 src/core/modules/MinorPlanet.cpp:269
 #, qt-format
 msgid "Apparent diameter: %1"
 msgstr "视直径: %1"
 
 #. TRANSLATORS: Sidereal (orbital) period for solar system bodies in days and in Julian years (symbol: a)
-#: src/core/modules/Planet.cpp:217 src/core/modules/MinorPlanet.cpp:274
-#: src/core/modules/Comet.cpp:232
+#: src/core/modules/Planet.cpp:217 src/core/modules/MinorPlanet.cpp:276
+#: src/core/modules/Comet.cpp:245
 #, qt-format
 msgid "Sidereal period: %1 days (%2 a)"
 msgstr "公转轨道周期：%1天 (%2儒略年)"
@@ -312,25 +312,35 @@ msgstr "相: %1"
 msgid "Illuminated: %1%"
 msgstr "被照亮的部分: %1%"
 
-#: src/core/modules/MinorPlanet.cpp:208
+#: src/core/modules/MinorPlanet.cpp:210
 #, qt-format
 msgid "Provisional designation: %1"
 msgstr "临时编号: %1"
 
-#: src/core/modules/Comet.cpp:186
+#: src/core/modules/Comet.cpp:187
 #, no-c-format, qt-format
 msgid "Distance from Sun: %1AU (%2 km)"
 msgstr "距太阳距离: %1AU (%2 km)"
 
-#: src/core/modules/Comet.cpp:193
+#: src/core/modules/Comet.cpp:194
 #, no-c-format, qt-format
 msgid "Distance from Sun: %1AU (%2 Mio km)"
 msgstr "距太阳距离: %1AU (%2百万km)"
 
-#: src/core/modules/Comet.cpp:217
+#: src/core/modules/Comet.cpp:221
 #, no-c-format, qt-format
 msgid "Speed: %1 km/s"
 msgstr "速度: %1 km/s"
+
+#: src/core/modules/Comet.cpp:231
+#, no-c-format, qt-format
+msgid "Coma diameter (estimate): %1 km"
+msgstr ""
+
+#: src/core/modules/Comet.cpp:235
+#, no-c-format, qt-format
+msgid "Gas tail length (estimate): %1 Mio km"
+msgstr ""
 
 #: src/core/modules/SolarSystem.cpp:156
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:308
@@ -464,185 +474,185 @@ msgstr "夜间模式"
 msgid "SpaceShip"
 msgstr "太空船"
 
-#: src/core/StelCore.cpp:174 src/gui/StelGui.cpp:183
+#: src/core/StelCore.cpp:183 src/gui/StelGui.cpp:183
 #: src/ui_dateTimeDialogGui.h:297
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:172
 msgid "Date and Time"
 msgstr "日期及时间"
 
-#: src/core/StelCore.cpp:175 src/core/StelMovementMgr.cpp:129
+#: src/core/StelCore.cpp:184 src/core/StelMovementMgr.cpp:129
 msgid "Movement and Selection"
 msgstr "移动和选择"
 
-#: src/core/StelCore.cpp:178
+#: src/core/StelCore.cpp:187
 msgid "Increase time speed"
 msgstr "加快时间流逝"
 
-#: src/core/StelCore.cpp:179
+#: src/core/StelCore.cpp:188
 msgid "Decrease time speed"
 msgstr "减缓时间流逝"
 
-#: src/core/StelCore.cpp:180
+#: src/core/StelCore.cpp:189
 msgid "Increase time speed (a little)"
 msgstr "加快时间流逝（小幅度）"
 
-#: src/core/StelCore.cpp:181
+#: src/core/StelCore.cpp:190
 msgid "Decrease time speed (a little)"
 msgstr "减缓时间流逝（小幅度）"
 
-#: src/core/StelCore.cpp:182
+#: src/core/StelCore.cpp:191
 msgid "Set normal time rate"
 msgstr "正常时间速度"
 
-#: src/core/StelCore.cpp:183
+#: src/core/StelCore.cpp:192
 msgid "Set time rate to zero"
 msgstr "停止时间流逝"
 
-#: src/core/StelCore.cpp:184
+#: src/core/StelCore.cpp:193
 msgid "Set time to now"
 msgstr "跳至当前时刻"
 
-#: src/core/StelCore.cpp:185
+#: src/core/StelCore.cpp:194
 msgid "Add 1 solar hour"
 msgstr "增加 1 太阳时"
 
-#: src/core/StelCore.cpp:186
+#: src/core/StelCore.cpp:195
 msgid "Add 1 solar day"
 msgstr "增加 1 太阳日"
 
-#: src/core/StelCore.cpp:187
+#: src/core/StelCore.cpp:196
 msgid "Add 1 solar week"
 msgstr "增加 1 太阳周"
 
-#: src/core/StelCore.cpp:188
+#: src/core/StelCore.cpp:197
 msgid "Subtract 1 solar hour"
 msgstr "减少1 太阳时"
 
-#: src/core/StelCore.cpp:189
+#: src/core/StelCore.cpp:198
 msgid "Subtract 1 solar day"
 msgstr "减少 1 太阳日"
 
-#: src/core/StelCore.cpp:190
+#: src/core/StelCore.cpp:199
 msgid "Subtract 1 solar week"
 msgstr "减少 1 太阳周"
 
-#: src/core/StelCore.cpp:191
+#: src/core/StelCore.cpp:200
 msgid "Add 1 sidereal day"
 msgstr "增加 1 恒星日"
 
-#: src/core/StelCore.cpp:192
+#: src/core/StelCore.cpp:201
 msgid "Add 1 sidereal week"
 msgstr "增加 1 恒星周"
 
-#: src/core/StelCore.cpp:193
+#: src/core/StelCore.cpp:202
 msgid "Add 1 sidereal month"
 msgstr "恒星月加1"
 
-#: src/core/StelCore.cpp:194
+#: src/core/StelCore.cpp:203
 msgid "Add 1 sidereal year"
 msgstr "恒星年加1"
 
-#: src/core/StelCore.cpp:195
+#: src/core/StelCore.cpp:204
 msgid "Add 1 sidereal century"
 msgstr "增加1恒星世纪"
 
-#: src/core/StelCore.cpp:196
+#: src/core/StelCore.cpp:205
 msgid "Add 1 synodic month"
 msgstr "增加1朔望月"
 
-#: src/core/StelCore.cpp:197
+#: src/core/StelCore.cpp:206
 msgid "Add 1 draconic month"
 msgstr "增加1交点月"
 
-#: src/core/StelCore.cpp:198
+#: src/core/StelCore.cpp:207
 msgid "Add 1 draconic year"
 msgstr "增加1交点年"
 
-#: src/core/StelCore.cpp:199
+#: src/core/StelCore.cpp:208
 msgid "Add 1 anomalistic month"
 msgstr "增加1近点月"
 
-#: src/core/StelCore.cpp:200
+#: src/core/StelCore.cpp:209
 msgid "Add 1 mean tropical month"
 msgstr "增加1平分至月"
 
-#: src/core/StelCore.cpp:201
+#: src/core/StelCore.cpp:210
 msgid "Add 1 mean tropical year"
 msgstr "增加1平回归年"
 
-#: src/core/StelCore.cpp:202
+#: src/core/StelCore.cpp:211
 msgid "Add 1 mean tropical century"
 msgstr "增加1平回归世纪"
 
-#: src/core/StelCore.cpp:203
+#: src/core/StelCore.cpp:212
 msgid "Subtract 1 sidereal day"
 msgstr "减少 1 恒星日"
 
-#: src/core/StelCore.cpp:204
+#: src/core/StelCore.cpp:213
 msgid "Subtract 1 sidereal week"
 msgstr "减少 1 恒星周"
 
-#: src/core/StelCore.cpp:205
+#: src/core/StelCore.cpp:214
 msgid "Subtract 1 sidereal month"
 msgstr "恒星月减1"
 
-#: src/core/StelCore.cpp:206
+#: src/core/StelCore.cpp:215
 msgid "Subtract 1 sidereal year"
 msgstr "恒星年减1"
 
-#: src/core/StelCore.cpp:207
+#: src/core/StelCore.cpp:216
 msgid "Subtract 1 sidereal century"
 msgstr "减少1恒星世纪"
 
-#: src/core/StelCore.cpp:208
+#: src/core/StelCore.cpp:217
 msgid "Subtract 1 synodic month"
 msgstr "减少1朔望月"
 
-#: src/core/StelCore.cpp:209
+#: src/core/StelCore.cpp:218
 msgid "Subtract 1 draconic month"
 msgstr "减少1交点月"
 
-#: src/core/StelCore.cpp:210
+#: src/core/StelCore.cpp:219
 msgid "Subtract 1 draconic year"
 msgstr "减少1交点年"
 
-#: src/core/StelCore.cpp:211
+#: src/core/StelCore.cpp:220
 msgid "Subtract 1 anomalistic month"
 msgstr "减少1近点月"
 
-#: src/core/StelCore.cpp:212
+#: src/core/StelCore.cpp:221
 msgid "Subtract 1 mean tropical month"
 msgstr "减少1平分至月"
 
-#: src/core/StelCore.cpp:213
+#: src/core/StelCore.cpp:222
 msgid "Subtract 1 mean tropical year"
 msgstr "减少1平回归年"
 
-#: src/core/StelCore.cpp:214
+#: src/core/StelCore.cpp:223
 msgid "Subtract 1 mean tropical century"
 msgstr "减少1平回归世纪"
 
-#: src/core/StelCore.cpp:216
+#: src/core/StelCore.cpp:225
 msgid "Set home planet to selected planet"
 msgstr "将选择的行星设为预设位置"
 
-#: src/core/StelCore.cpp:217
+#: src/core/StelCore.cpp:226
 msgid "Go to home"
 msgstr "返回"
 
-#: src/core/StelCore.cpp:218
+#: src/core/StelCore.cpp:227
 msgid "Flip scene horizontally"
 msgstr "水平翻转"
 
-#: src/core/StelCore.cpp:219
+#: src/core/StelCore.cpp:228
 msgid "Flip scene vertically"
 msgstr "垂直翻转"
 
-#: src/core/StelCore.cpp:1489
+#: src/core/StelCore.cpp:1498
 msgid "Correction is disabled. Use only if you know what you are doing!"
 msgstr "目前禁止修正。如果您不了解您正在做什么，请不要使用此功能！"
 
-#: src/core/StelCore.cpp:1492
+#: src/core/StelCore.cpp:1501
 #, qt-format
 msgid ""
 "This historical formula was obtained by C. Schoch in 1931 and was used by G. "
@@ -653,7 +663,7 @@ msgstr ""
 "在他的文章《古代的日食证明了爱因斯坦的相对论》[<em>Einstein's Theory of Relativity Confirmed by "
 "Ancient Solar Eclipses</em>]（%1）。要了解更多信息，请点击%2这里%3。"
 
-#: src/core/StelCore.cpp:1495
+#: src/core/StelCore.cpp:1504
 #, qt-format
 msgid ""
 "This empirical equation was published by G. M. Clemence in the article "
@@ -662,7 +672,7 @@ msgstr ""
 "这个经验公式由 G. M. Clemence 在文章《关于天文常数系统》[<em>On the system of astronomical "
 "constants</em>]（%1）中公布。"
 
-#: src/core/StelCore.cpp:1498
+#: src/core/StelCore.cpp:1507
 #, qt-format
 msgid ""
 "This formula is based on a study of post-1650 observations of the Sun, the "
@@ -674,7 +684,7 @@ msgstr ""
 "在他的《用于计算器的天文学公式》[<em>Astronomical Formulae for Calculators</em>] 中使用。计算机程序 "
 "SunTracker Pro 也使用了这一公式。"
 
-#: src/core/StelCore.cpp:1502
+#: src/core/StelCore.cpp:1511
 msgid ""
 "This is a slightly modified version of the IAU (1952) formula which was "
 "adopted in the <em>Astronomical Ephemeris</em> and in the <em>Canon of Solar "
@@ -684,7 +694,7 @@ msgstr ""
 "Ephemeris</em>]和《日食的法规》[<em>Canon of Solar Eclipses</em>]中使用的 IAU (1952) "
 "公式稍加修改之后的版本。"
 
-#: src/core/StelCore.cpp:1506
+#: src/core/StelCore.cpp:1515
 msgid ""
 "The tables of Tuckerman (1962, 1964) list the positions of the Sun, the Moon "
 "and the planets at 5- and 10-day intervals from 601 BCE to 1649 CE. The same "
@@ -694,7 +704,7 @@ msgstr ""
 "塔克曼[Tuckerman]的表格（1962年，1964年）以5天和10天的间隔列出了太阳、月球和行星从公元前601年到公元1649年的位置。戈德斯坦[G"
 "oldstine]的表格（1973年）也含蓄地采用了相同的关系。"
 
-#: src/core/StelCore.cpp:1510
+#: src/core/StelCore.cpp:1519
 #, qt-format
 msgid ""
 "This equation was published by P. M. Muller and F. R. Stephenson in the "
@@ -705,7 +715,7 @@ msgstr ""
 "accelerations of the earth and moon from early astronomical "
 "observations</em>] （%1）中公布。"
 
-#: src/core/StelCore.cpp:1513
+#: src/core/StelCore.cpp:1522
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson in the article <em>Pre-"
@@ -714,7 +724,7 @@ msgstr ""
 "此公式由 F. R. Stephenson 在文章《望远镜前的天文学观测》[<em>Pre-Telescopic Astronomical "
 "Observations</em>]（%1）中公布。"
 
-#: src/core/StelCore.cpp:1516
+#: src/core/StelCore.cpp:1525
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation (outdated and superseded by Schmadel & "
@@ -727,7 +737,7 @@ msgstr ""
 "the correction delta T E.T.-U.T. in the period 1800-1975</em>]（%1）中公布。它与 "
 "Brouwer 于1952年公布的数据相吻合。"
 
-#: src/core/StelCore.cpp:1519
+#: src/core/StelCore.cpp:1528
 msgid ""
 "This algorithm was adopted in P. Bretagnon & L. Simon's <em>Planetary "
 "Programs and Tables from -4000 to +2800</em> (1986) and in the PC "
@@ -736,7 +746,7 @@ msgstr ""
 "此算法于1986年被 P. Bretagnon 和 L. Simon 在《从 -4000 到 +2800 的行星程序和表格》[<em>Planetary "
 "Programs and Tables from -4000 to +2800</em> ]中，以及计算机程序 RedShift 中被采用。"
 
-#: src/core/StelCore.cpp:1522
+#: src/core/StelCore.cpp:1531
 #, qt-format
 msgid ""
 "This formula was published by F. R. Stephenson and L. V. Morrison in the "
@@ -746,11 +756,11 @@ msgstr ""
 "这一公式由 F. R. Stephenson 和 L. V. Morrison 在题为《地球自转的长周期变化 - 700 B.C. 到 A.D. "
 "1980》(%1)的论文中发表。"
 
-#: src/core/StelCore.cpp:1525
+#: src/core/StelCore.cpp:1534
 msgid "This algorithm is used in the PC planetarium program Guide 7."
 msgstr "天文馆程序 Guide 7 中使用了此算法。"
 
-#: src/core/StelCore.cpp:1528
+#: src/core/StelCore.cpp:1537
 msgid ""
 "This algorithm was given by F. Espenak in his <em>Fifty Year Canon of Solar "
 "Eclipses: 1986-2035</em> (1987) and in his <em>Fifty Year Canon of Lunar "
@@ -760,14 +770,14 @@ msgstr ""
 "Eclipses: 1986-2035</em> ]（1987年）以及《五十年的日食法规：1986-2035》[<em>Fifty Year Canon "
 "of Solar Eclipses: 1986-2035</em> ]（1989年） 中给出。"
 
-#: src/core/StelCore.cpp:1531
+#: src/core/StelCore.cpp:1540
 #, qt-format
 msgid ""
 "This formula was obtained by K.M. Borkowski (%1) from an analysis of 31 "
 "solar eclipse records dating between 2137 BCE and 1715 CE."
 msgstr "这一公式由 K.M. Borkowski (%1) 在分析了 2137 BCE 到 1715 CE 之间的31次日食数据过后得出。"
 
-#: src/core/StelCore.cpp:1534
+#: src/core/StelCore.cpp:1543
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation was published by L. D. Schmadel and G. "
@@ -779,14 +789,14 @@ msgstr ""
 "from U.T. to E.T. for the Period 1800-1988</em> (%1) 中发布，方程用 Stephenson & "
 "Morrison (1984) 给出的数据拟合而成。"
 
-#: src/core/StelCore.cpp:1537
+#: src/core/StelCore.cpp:1546
 msgid ""
 "This formula was adopted by M. Chapront-Touze & J. Chapront in the shortened "
 "version of the ELP 2000-85 lunar theory in their <em>Lunar Tables and "
 "Programs from 4000 B.C. to A.D. 8000</em> (1991)."
 msgstr "该公式是"
 
-#: src/core/StelCore.cpp:1540
+#: src/core/StelCore.cpp:1549
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson and L. V. Morrison in the "
@@ -796,7 +806,7 @@ msgstr ""
 "这方程由 F. R. Stephenson 及 L. V. Morrison 在论文 <em>Long-Term Fluctuations in the "
 "Earth's Rotation: 700 BC to AD 1990</em> (%1) 中发表。"
 
-#: src/core/StelCore.cpp:1543
+#: src/core/StelCore.cpp:1552
 #, qt-format
 msgid ""
 "F. R. Stephenson published this formula in his book <em>Historical Eclipses "
@@ -805,21 +815,21 @@ msgstr ""
 "F. R. Stephenson 在他的书 <em>Historical Eclipses and Earth's Rotation</em> (%1) "
 "中发表了这个公式。"
 
-#: src/core/StelCore.cpp:1546
+#: src/core/StelCore.cpp:1555
 msgid ""
 "From J. Meeus, <em>Astronomical Algorithms</em> (2nd ed., 1998), and widely "
 "used. Table for 1620..2000, and includes a variant of Chapront, Chapront-"
 "Touze & Francou (1997) for dates outside 1620..2000."
 msgstr ""
 
-#: src/core/StelCore.cpp:1549
+#: src/core/StelCore.cpp:1558
 #, qt-format
 msgid ""
 "The JPL Solar System Dynamics Group of the NASA Jet Propulsion Laboratory "
 "use this formula in their interactive website %1JPL Horizons%2."
 msgstr ""
 
-#: src/core/StelCore.cpp:1552
+#: src/core/StelCore.cpp:1561
 #, qt-format
 msgid ""
 "This polynome was published by J. Meeus and L. Simons in article "
@@ -828,14 +838,14 @@ msgstr ""
 "此多项式由 J. Meeus 和 L. Simons 在文章《公元1620年-2000年ΔT 的多项式近似》[<em>Polynomial "
 "approximations to Delta T, 1620-2000 AD</em>]（%1）中公布。"
 
-#: src/core/StelCore.cpp:1555
+#: src/core/StelCore.cpp:1564
 msgid ""
 "The fourth edition of O. Montenbruck & T. Pfleger's <em>Astronomy on the "
 "Personal Computer</em> (2000) provides simple 3rd-order polynomial data fits "
 "for the recent past."
 msgstr ""
 
-#: src/core/StelCore.cpp:1558
+#: src/core/StelCore.cpp:1567
 msgid ""
 "E. M. Reingold & N. Dershowitz present this polynomial data fit in "
 "<em>Calendrical Calculations</em> (3rd ed. 2007) and in their "
@@ -846,7 +856,7 @@ msgstr ""
 "2007）及 <em>Calendrical Tabulations</em> （2002）中发表了多项式数据拟合结果。方法基于 Jean Meeus "
 "的 <em>Astronomical Algorithms</em> （1991）。"
 
-#: src/core/StelCore.cpp:1561
+#: src/core/StelCore.cpp:1570
 #, qt-format
 msgid ""
 "This important solution was published by L. V. Morrison and F. R. Stephenson "
@@ -854,7 +864,7 @@ msgid ""
 "calculation of eclipses</em> (%2) with addendum in (%3)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1564
+#: src/core/StelCore.cpp:1573
 #, qt-format
 msgid ""
 "From the Length of Day (LOD; as determined by Stephenson & Morrison (%2)), "
@@ -863,7 +873,7 @@ msgid ""
 "by Stephenson (%2). See for more info %3here%4."
 msgstr ""
 
-#: src/core/StelCore.cpp:1567
+#: src/core/StelCore.cpp:1576
 #, qt-format
 msgid ""
 "This solution by F. Espenak and J. Meeus, based on Morrison & Stephenson "
@@ -873,11 +883,11 @@ msgid ""
 "solar, lunar and planetary ephemeris program SOLEX."
 msgstr ""
 
-#: src/core/StelCore.cpp:1567
+#: src/core/StelCore.cpp:1576
 msgid "Used by default."
 msgstr "默认使用。"
 
-#: src/core/StelCore.cpp:1570
+#: src/core/StelCore.cpp:1579
 #, qt-format
 msgid ""
 "This solution by B. Banjevic, based on Stephenson & Morrison (1984), was "
@@ -885,7 +895,7 @@ msgid ""
 "Babylon</em> (%1)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1573
+#: src/core/StelCore.cpp:1582
 #, qt-format
 msgid ""
 "This solution by S. Islam, M. Sadiq and M. S. Qureshi, based on Meeus & "
@@ -893,42 +903,42 @@ msgid ""
 "Approximation of DeltaT</em> (%1) and revisited by Sana Islam in 2013."
 msgstr ""
 
-#: src/core/StelCore.cpp:1576
+#: src/core/StelCore.cpp:1585
 #, qt-format
 msgid ""
 "This is a quadratic formula for calculation of %1T with coefficients defined "
 "by the user."
 msgstr "这是一个用于计算 %1T 的二次方程，系数由用户定义。"
 
-#: src/core/StelCore.cpp:1579 src/core/SimbadSearcher.cpp:133
+#: src/core/StelCore.cpp:1588 src/core/SimbadSearcher.cpp:133
 msgid "Error"
 msgstr "错误"
 
-#: src/core/StelCore.cpp:1629
+#: src/core/StelCore.cpp:1638
 msgid "with meaningless values outside this range"
 msgstr "超出范围的无意义数值"
 
-#: src/core/StelCore.cpp:1655
+#: src/core/StelCore.cpp:1664
 msgid ""
 "with a mean error of less than one second, max. error 1.9s, and meaningless "
 "values outside this range"
 msgstr "平均误差小于1秒，最大误差1.9秒，其余都是超出范围的无意义数值"
 
-#: src/core/StelCore.cpp:1677 src/core/StelCore.cpp:1682
-#: src/core/StelCore.cpp:1709 src/core/StelCore.cpp:1714
+#: src/core/StelCore.cpp:1686 src/core/StelCore.cpp:1691
+#: src/core/StelCore.cpp:1718 src/core/StelCore.cpp:1723
 msgid "with zero values outside this range"
 msgstr ""
 
-#: src/core/StelCore.cpp:1687
+#: src/core/StelCore.cpp:1696
 msgid "with a typical 1-second accuracy and zero values outside this range"
 msgstr "精确度一般在一秒内，超出该范围的数据无价值"
 
-#: src/core/StelCore.cpp:1724
+#: src/core/StelCore.cpp:1733
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2, %3."
 msgstr "在 %1 年和 %2，%3 年之间有效"
 
-#: src/core/StelCore.cpp:1726
+#: src/core/StelCore.cpp:1735
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2."
 msgstr "在 %1 年和 %2 年之间有效"
@@ -1612,7 +1622,7 @@ msgstr "自动隐藏水平工具栏"
 msgid "Auto hide vertical button bar"
 msgstr "自动隐藏垂直工具栏"
 
-#: src/gui/StelGuiItems.cpp:293 src/gui/StelGuiItems.cpp:711
+#: src/gui/StelGuiItems.cpp:293 src/gui/StelGuiItems.cpp:715
 msgid "Space"
 msgstr "空格键"
 
@@ -1621,11 +1631,11 @@ msgstr "空格键"
 msgid "%1m"
 msgstr "%1 米"
 
-#: src/gui/StelGuiItems.cpp:618
+#: src/gui/StelGuiItems.cpp:622
 msgid "Field of view"
 msgstr "视野"
 
-#: src/gui/StelGuiItems.cpp:636
+#: src/gui/StelGuiItems.cpp:640
 msgid "Frames per second"
 msgstr "帧每秒"
 
@@ -3706,7 +3716,7 @@ msgstr "&复制"
 msgid "&Paste"
 msgstr "&粘贴"
 
-#: src/translations.h:568 src/ui_locationDialogGui.h:407
+#: src/translations.h:568 src/ui_locationDialogGui.h:432
 #: plugins/Oculars/src/ui_ocularDialog.h:1074
 #: plugins/Oculars/src/ui_ocularDialog.h:1083
 #: plugins/Oculars/src/ui_ocularDialog.h:1090
@@ -3788,76 +3798,88 @@ msgstr "编辑键盘快捷键..."
 msgid "Refresh"
 msgstr "重新整理"
 
-#: src/ui_locationDialogGui.h:394
+#: src/ui_locationDialogGui.h:403
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:145
 msgid "Location"
 msgstr "所在位置"
 
-#: src/ui_locationDialogGui.h:398 src/ui_locationDialogGui.h:401
+#: src/ui_locationDialogGui.h:407 src/ui_locationDialogGui.h:410
 msgid ""
 "Standard list of locations contains only English names (without diacritics!)"
 msgstr ""
 
-#: src/ui_locationDialogGui.h:404
+#: src/ui_locationDialogGui.h:414
+msgid "Reset location list to show all known locations"
+msgstr ""
+
+#: src/ui_locationDialogGui.h:416
+msgid "Reset Location List"
+msgstr ""
+
+#: src/ui_locationDialogGui.h:417
 msgid "Current location information"
 msgstr "当前位置信息"
 
-#: src/ui_locationDialogGui.h:405
-msgid "Use as default"
-msgstr "设成预设值"
-
-#: src/ui_locationDialogGui.h:406
-msgid "Return to default"
-msgstr "返回默认"
-
-#: src/ui_locationDialogGui.h:408
-msgid "Add to list"
-msgstr "加入列表"
-
-#: src/ui_locationDialogGui.h:409
+#: src/ui_locationDialogGui.h:418
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:146
 msgid "Latitude:"
 msgstr "纬度:"
 
-#: src/ui_locationDialogGui.h:411 src/ui_locationDialogGui.h:415
+#: src/ui_locationDialogGui.h:420 src/ui_locationDialogGui.h:424
 msgid ""
 "You can enter values in decimal degrees, or using dms format, for example: "
 "+1d 12m 8s"
 msgstr "您可以输入十进位度数，或是使用 dms 格式，例如: +1d 12m 8s"
 
-#: src/ui_locationDialogGui.h:413
+#: src/ui_locationDialogGui.h:422
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:149
 msgid "Longitude:"
 msgstr "经度:"
 
-#: src/ui_locationDialogGui.h:417
+#: src/ui_locationDialogGui.h:426
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:152
 msgid "Altitude:"
 msgstr "海拔:"
 
-#: src/ui_locationDialogGui.h:419
+#: src/ui_locationDialogGui.h:428
 msgid "Enter the altitude in meter"
 msgstr "输入海拔高度(以米为单位)"
 
-#: src/ui_locationDialogGui.h:421
+#: src/ui_locationDialogGui.h:430
 msgid " m"
 msgstr " m"
 
-#: src/ui_locationDialogGui.h:422
+#: src/ui_locationDialogGui.h:431
+msgid "Return to default location"
+msgstr ""
+
+#: src/ui_locationDialogGui.h:433
+msgid "Add to list"
+msgstr "加入列表"
+
+#: src/ui_locationDialogGui.h:434
 msgid "Name/City:"
 msgstr "地名/城市:"
 
-#: src/ui_locationDialogGui.h:423
+#: src/ui_locationDialogGui.h:435
 msgid "New Location"
 msgstr "新位置"
 
-#: src/ui_locationDialogGui.h:424
+#: src/ui_locationDialogGui.h:436
 msgid "Country:"
 msgstr "国家/地区:"
 
-#: src/ui_locationDialogGui.h:425
+#: src/ui_locationDialogGui.h:437
 msgid "Planet:"
 msgstr "行星:"
+
+#: src/ui_locationDialogGui.h:438
+msgid "Use current location as default"
+msgstr ""
+
+#: src/ui_locationDialogGui.h:439
+msgid "Get location from Network"
+msgstr ""
 
 #: src/ui_searchDialogGui.h:558
 msgid "Find Object"
@@ -9631,6 +9653,9 @@ msgstr ""
 #~ msgid "Form"
 #~ msgstr "格式"
 
+#~ msgid "Use as default"
+#~ msgstr "设成预设值"
+
 #~ msgid "Light pollution: "
 #~ msgstr "光污染: "
 
@@ -9942,6 +9967,9 @@ msgstr ""
 
 #~ msgid "Look at Sun from big planets of Solar system and Pluto."
 #~ msgstr "从太阳系各大行星以及冥王星所看到的太阳。"
+
+#~ msgid "Return to default"
+#~ msgstr "返回默认"
 
 #~ msgid ""
 #~ "A plugin that shows some historical supernovae brighter than visual "
