@@ -868,12 +868,12 @@ void Planet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFon
 	if (hidden)
 		return;
 	// GZ: Try to improve speed for minor planets: test if visible at all.
-	// For a full catalog of NEAs (11000 objects), with this and resetting deltaJD according to distance, rendering time went 4.5fps->12fps.
-	// BUG: This code broke the eclipses (IMHO it should be apply within MinorPlanet class)
-	//if ((getVMagnitude(core)-1.0f) > core->getSkyDrawer()->getLimitMagnitude())
-	//{
-	//	return;
-	//}
+	// For a full catalog of NEAs (11000 objects), with this and resetting deltaJD according to distance, rendering time went 4.5fps->12fps.	
+	// AW: Apply this rule to asteroids only
+	if (((getVMagnitude(core)-1.0f) > core->getSkyDrawer()->getLimitMagnitude()) && pType=="asteroid")
+	{
+		return;
+	}
 
 	Mat4d mat = Mat4d::translation(eclipticPos) * rotLocalToParent;
 	PlanetP p = parent;
