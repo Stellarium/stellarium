@@ -79,6 +79,11 @@ void AddOnTableModel::initHeaderData()
 
 QVariant AddOnTableModel::data(const QModelIndex& index, int role) const
 {
+	if (role == Qt::TextAlignmentRole)
+	{
+	  return Qt::AlignCenter;
+	}
+
 	if (!index.isValid() || role != Qt::DisplayRole)
 	{
 		return QVariant();
