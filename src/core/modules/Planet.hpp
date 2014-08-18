@@ -74,6 +74,22 @@ class Planet : public StelObject
 {
 public:
 	friend class SolarSystem;
+
+	// GZ This must replace the QString pType ASAP!
+	Q_ENUMS(PlanetType)
+	//! numeric typecodes for the type descriptions in ssystem.ini
+	// GZ: These are slightly faster than string comparisons in time-critical comparisons.
+	enum PlanetType
+	{
+		tStar,
+		tPlanet,
+		tMoon,
+		tAsteroid,
+		tPlutoid,
+		tComet,
+		tUNDEFINED
+	};
+
 	Planet(const QString& englishName,
 	       int flagLighting,
 	       double radius,
@@ -89,9 +105,10 @@ public:
 	       bool hidden,
 	       bool hasAtmosphere,
 	       bool hasHalo,
-	       const QString &pType);
+	       const QString &pTypeStr);
 
 	virtual ~Planet();
+	static void init(); //! GZ New: initializes static vars. Must be called before creating first planet.
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods inherited from StelObject
@@ -146,7 +163,8 @@ public:
 	double getMeanSolarDay(void) const;
 
 	const QString& getTextMapName() const {return texMapName;}	
-	const QString getPlanetType() const {return pType;}
+	//const QString getPlanetType() const {return pTypeStr;}
+	const PlanetType getPlanetType() const {return pType;}
 
 	// Compute the z rotation to use from equatorial to geographic coordinates
 	double getSiderealTime(double jd) const;
@@ -292,10 +310,12 @@ protected:
 	bool hidden;                     // useful for fake planets used as observation positions - not drawn or labeled
 	bool atmosphere;                 // Does the planet have an atmosphere?
 	bool halo;                       // Does the planet have a halo?
-	QString pType;			 // Type of body
+	// QString pTypeStr;			 // Type of body, old version just had a string here.
+	PlanetType pType;                // GZ this is now a proper type...
 
 	static Vec3f labelColor;
 	static StelTextureSP hintCircleTex;
+	static QMap<PlanetType, QString> pTypeMap; // GZ: maps fast type to english name.
 	
 	// Shader-related variables
 	struct PlanetShaderVars {

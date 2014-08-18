@@ -50,7 +50,7 @@ public:
 		    OsculatingFunctType *osculatingFunc,
 		    bool closeOrbit,
 		    bool hidden,
-		    const QString &pType);
+		    const QString &pTypeStr);
 
 	~MinorPlanet();
 
