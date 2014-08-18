@@ -71,7 +71,7 @@ Planet::Planet(const QString& englishName,
 	       bool hidden,
 	       bool hasAtmosphere,
 	       bool hasHalo,
-	       const QString& pType)
+	       const QString& pTypeStr)
 	: englishName(englishName),
 	  flagLighting(flagLighting),
 	  radius(radius),
@@ -88,8 +88,8 @@ Planet::Planet(const QString& englishName,
 	  parent(NULL),
 	  hidden(hidden),
 	  atmosphere(hasAtmosphere),
-	  halo(hasHalo),
-	  pType(pType)
+	  halo(hasHalo)//,
+	  //pTypeStr(pType)
 {
 	texMapName = atexMapName;
 	normalMapName = anormalMapName;
@@ -99,6 +99,8 @@ Planet::Planet(const QString& englishName,
 	closeOrbit = acloseOrbit;
 	deltaOrbitJD = 0;
 	distance = 0;
+
+	pType=pTypeMap.key(pTypeStr, Planet::tUNDEFINED);
 
 	eclipticPos=Vec3d(0.,0.,0.);
 	rotLocalToParent = Mat4d::identity();
@@ -111,6 +113,20 @@ Planet::Planet(const QString& englishName,
 		deltaJD = 0.001*StelCore::JD_SECOND;
 	}
 	flagLabels = true;
+}
+
+QMap<Planet::PlanetType, QString> Planet::pTypeMap;
+
+// GZ Must be called before first planet is created. Loads pTypeMap.
+void Planet::init()
+{
+	pTypeMap.insert(Planet::tStar,     "star");
+	pTypeMap.insert(Planet::tPlanet,   "planet");
+	pTypeMap.insert(Planet::tMoon,     "moon");
+	pTypeMap.insert(Planet::tAsteroid, "asteroid");
+	pTypeMap.insert(Planet::tPlutoid,  "plutoid");
+	pTypeMap.insert(Planet::tComet,    "comet");
+	pTypeMap.insert(Planet::tUNDEFINED, "UNDEFINED"); // something must be broken before we ever see this!
 }
 
 Planet::~Planet()
@@ -142,8 +158,8 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 
 	if (flags&ObjectType)
 	{
-		if (pType.length()>0)
-			oss << q_("Type: <b>%1</b>").arg(q_(pType)) << "<br />";
+		//if (pTypeStr.length()>0)
+			oss << q_("Type: <b>%1</b>").arg(q_(Planet::pTypeMap.value(pType))) << "<br />";
 	}
 
 	if (flags&Magnitude)
@@ -574,7 +590,8 @@ double Planet::getMeanSolarDay() const
 	if (englishName=="Venus" || englishName=="Uranus" || englishName=="Pluto")
 		sign = -1;
 
-	if (pType.contains("moon"))
+	//if (pTypeStr.contains("moon"))
+	if (pType==Planet::tMoon)
 	{
 		// duration of mean solar day on moon are same as synodic month on this moon
 		double a = parent->getSiderealPeriod()/sday;
@@ -646,7 +663,7 @@ double Planet::computeDistance(const Vec3d& obsHelioPos)
 {
 	distance = (obsHelioPos-getHeliocentricEclipticPos()).length();
 	// GZ: improve fps by juggling updates for asteroids. They must be fast if close to observer, but can be slow if further away.
-	if (pType == "asteroid")
+	if (pType == Planet::tAsteroid)
 			deltaJD=distance*StelCore::JD_SECOND;
 	return distance;
 }
@@ -870,7 +887,7 @@ void Planet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFon
 	// GZ: Try to improve speed for minor planets: test if visible at all.
 	// For a full catalog of NEAs (11000 objects), with this and resetting deltaJD according to distance, rendering time went 4.5fps->12fps.	
 	// AW: Apply this rule to asteroids only
-	if (((getVMagnitude(core)-1.0f) > core->getSkyDrawer()->getLimitMagnitude()) && pType=="asteroid")
+	if (((getVMagnitude(core)-1.0f) > core->getSkyDrawer()->getLimitMagnitude()) && pType==Planet::tAsteroid)
 	{
 		return;
 	}
