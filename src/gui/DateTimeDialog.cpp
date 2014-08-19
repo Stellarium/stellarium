@@ -39,8 +39,8 @@ DateTimeDialog::DateTimeDialog(QObject* parent) :
   hour(0),
   minute(0),
   second(0),
-  jd(1),
-  mjd(1)
+  jd(0),
+  mjd(0)
 {
 	ui = new Ui_dateTimeDialogForm;
 }
