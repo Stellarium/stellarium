@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-08-16 23:32+0700\n"
-"PO-Revision-Date: 2014-08-01 16:54+0000\n"
+"PO-Revision-Date: 2014-08-18 12:32+0000\n"
 "Last-Translator: Andi Chandler <Unknown>\n"
 "Language-Team: English (United Kingdom) <en_GB@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-08-17 06:05+0000\n"
+"X-Launchpad-Export-Date: 2014-08-19 06:07+0000\n"
 "X-Generator: Launchpad (build 17156)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:106 src/core/modules/StarMgr.cpp:338
@@ -335,12 +335,12 @@ msgstr "Speed: %1 km/s"
 #: src/core/modules/Comet.cpp:231
 #, no-c-format, qt-format
 msgid "Coma diameter (estimate): %1 km"
-msgstr ""
+msgstr "Coma diameter (estimate): %1 km"
 
 #: src/core/modules/Comet.cpp:235
 #, no-c-format, qt-format
 msgid "Gas tail length (estimate): %1 Mio km"
-msgstr ""
+msgstr "Gas tail length (estimate): %1 Mio km"
 
 #: src/core/modules/SolarSystem.cpp:156
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:308
@@ -3922,11 +3922,11 @@ msgstr ""
 
 #: src/ui_locationDialogGui.h:414
 msgid "Reset location list to show all known locations"
-msgstr ""
+msgstr "Reset location list to show all known locations"
 
 #: src/ui_locationDialogGui.h:416
 msgid "Reset Location List"
-msgstr ""
+msgstr "Reset Location List"
 
 #: src/ui_locationDialogGui.h:417
 msgid "Current location information"
@@ -3965,7 +3965,7 @@ msgstr " m"
 
 #: src/ui_locationDialogGui.h:431
 msgid "Return to default location"
-msgstr ""
+msgstr "Return to default location"
 
 #: src/ui_locationDialogGui.h:433
 msgid "Add to list"
@@ -3989,11 +3989,11 @@ msgstr "Planet:"
 
 #: src/ui_locationDialogGui.h:438
 msgid "Use current location as default"
-msgstr ""
+msgstr "Use current location as default"
 
 #: src/ui_locationDialogGui.h:439
 msgid "Get location from Network"
-msgstr ""
+msgstr "Get location from Network"
 
 #: src/ui_searchDialogGui.h:558
 msgid "Find Object"
@@ -4967,7 +4967,7 @@ msgstr "save script to file"
 
 #: src/ui_scriptConsole.h:366
 msgid "clear"
-msgstr ""
+msgstr "clear"
 
 #: src/ui_scriptConsole.h:370
 msgid "pre-process script using SSC preprocessor"

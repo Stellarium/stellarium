@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-08-16 23:32+0700\n"
-"PO-Revision-Date: 2013-10-09 02:29+0000\n"
-"Last-Translator: ballpen <Unknown>\n"
+"PO-Revision-Date: 2014-08-18 15:27+0000\n"
+"Last-Translator: chyngyz <Unknown>\n"
 "Language-Team: Kirghiz <ky@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-08-17 05:51+0000\n"
+"X-Launchpad-Export-Date: 2014-08-19 06:06+0000\n"
 "X-Generator: Launchpad (build 17156)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:106 src/core/modules/StarMgr.cpp:338
@@ -478,7 +478,7 @@ msgstr "Космостук аппарат"
 #: src/ui_dateTimeDialogGui.h:297
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:172
 msgid "Date and Time"
-msgstr "Дата жана убакыт"
+msgstr "Күн жана убакыт"
 
 #: src/core/StelCore.cpp:184 src/core/StelMovementMgr.cpp:129
 msgid "Movement and Selection"
@@ -1584,7 +1584,7 @@ msgstr "Асман жана байкоонун ырастоо терезеси"
 
 #: src/gui/StelGui.cpp:202
 msgid "Date/time window"
-msgstr "Дата/убакыт терезеси"
+msgstr "Күн/убакыт терезеси"
 
 #: src/gui/StelGui.cpp:203
 msgid "Location window"
@@ -3747,7 +3747,7 @@ msgstr ""
 
 #: src/translations.h:576
 msgid "Date Modified"
-msgstr ""
+msgstr "Өзгөртүлгөн күнү"
 
 #: src/translations.h:577
 msgid "Directories"
@@ -3776,7 +3776,7 @@ msgstr "Жардам"
 
 #: src/ui_helpDialogGui.h:285
 msgid "About"
-msgstr "Программа жөнүндө"
+msgstr "Программа тууралуу"
 
 #: src/ui_helpDialogGui.h:287 src/ui_scriptConsole.h:387
 msgid "Log"
@@ -3784,11 +3784,11 @@ msgstr "Журнал"
 
 #: src/ui_helpDialogGui.h:290 src/ui_configurationDialog.h:1088
 msgid "Edit keyboard shortcuts..."
-msgstr ""
+msgstr "Ариптактанын тез баскычын түзөтүү..."
 
 #: src/ui_helpDialogGui.h:291
 msgid "Refresh"
-msgstr "Жаңыртуу"
+msgstr "Жаңылоо"
 
 #: src/ui_locationDialogGui.h:403
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:145
@@ -4511,7 +4511,7 @@ msgstr "Панорама кылуу жана чоңойтуу үчүн клав�
 
 #: src/ui_configurationDialog.h:1083
 msgid "Enable keyboard navigation"
-msgstr "Клавиатура навигациясын колдонуу"
+msgstr "Ариптакта навигациясын колдонуу"
 
 #: src/ui_configurationDialog.h:1085
 msgid "Allow mouse to pan (drag) and zoom (mousewheel)"
@@ -4538,7 +4538,7 @@ msgstr ""
 #: src/ui_configurationDialog.h:1096
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:191
 msgid "Startup date and time"
-msgstr "Алгачкы дата жана убакыт"
+msgstr "Баштапкы күнү жана убакыты"
 
 #: src/ui_configurationDialog.h:1098
 msgid "Use a specific date and time when Stellarium starts up"
@@ -4550,7 +4550,7 @@ msgstr "Башка:"
 
 #: src/ui_configurationDialog.h:1102
 msgid "Use current local date and time"
-msgstr ""
+msgstr "Кезектеги жергиликтүү күндү жана убакытты колдонуу"
 
 #: src/ui_configurationDialog.h:1104
 msgid "use current"
@@ -4562,7 +4562,7 @@ msgstr "Системалык саат датасы жана убактысынд
 
 #: src/ui_configurationDialog.h:1108
 msgid "System date and time"
-msgstr "Системалык дата жана убакыт"
+msgstr "Системалык күн жана убакыт"
 
 #: src/ui_configurationDialog.h:1110
 msgid ""
@@ -4572,7 +4572,7 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:1112
 msgid "System date at:"
-msgstr "Системалык дата:"
+msgstr "Системалык күн:"
 
 #: src/ui_configurationDialog.h:1113
 msgid "Time correction"
@@ -4669,7 +4669,7 @@ msgstr "Өңдөрдү тескерилетүү"
 
 #: src/ui_configurationDialog.h:1155
 msgid "Star catalog updates"
-msgstr "Жылдыз каталогунун жаңыртуулары"
+msgstr "Жылдыз каталогунун жаңылоолору"
 
 #: src/ui_configurationDialog.h:1157
 msgid "Click here to start downloading"
@@ -4772,7 +4772,7 @@ msgstr ""
 
 #: src/ui_shortcutsDialog.h:195
 msgid "Keyboard Shortcuts"
-msgstr ""
+msgstr "Ариптактанын тез баскычтары"
 
 #: src/ui_shortcutsDialog.h:199
 msgid "Restore Defaults"
@@ -5074,7 +5074,7 @@ msgstr "Ырастоолорду жарыяланбасча сактоо"
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:291
 msgctxt "tab in plugin windows"
 msgid "About"
-msgstr ""
+msgstr "Плагин тууралуу"
 
 #: plugins/CompassMarks/src/CompassMarks.cpp:54
 #: plugins/CompassMarks/src/CompassMarks.cpp:97
@@ -5919,7 +5919,7 @@ msgstr "%1Ушу документ%2ти детальдар үчүн карап �
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:219
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:302
 msgid "Internet updates disabled"
-msgstr "Интернет жаңыртуулары колдонулбайт"
+msgstr "Интернет аркылуу жаңылоо өчүп турат"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:453
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:469
@@ -5946,7 +5946,7 @@ msgstr "Азыр жаңыртылуу..."
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:223
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:306
 msgid "Next update: < 1 minute"
-msgstr "Кийинки жаңыртуу: %1 мүнөт"
+msgstr "Кийинки жаңылоо: < 1 минута"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:460
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:167
@@ -5957,7 +5957,7 @@ msgstr "Кийинки жаңыртуу: %1 мүнөт"
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:308
 #, qt-format
 msgid "Next update: %1 minutes"
-msgstr "Кийинки жаңыртуу: %1 мүнөт"
+msgstr "Кийинки жаңылоо: %1 минута"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:462
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:169
@@ -5968,7 +5968,7 @@ msgstr "Кийинки жаңыртуу: %1 мүнөт"
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:310
 #, qt-format
 msgid "Next update: %1 hours"
-msgstr "Кийинки жаңыртуу: %1 саат"
+msgstr "Кийинки жаңылоо: %1 саат"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:472
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:200
@@ -5978,7 +5978,7 @@ msgstr "Кийинки жаңыртуу: %1 саат"
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:286
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:335
 msgid "Update error"
-msgstr "Жаңыртуу катасы"
+msgstr "Жаңылоо катасы"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:485
 #, qt-format
@@ -6009,7 +6009,7 @@ msgstr "[жаңы булак]"
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:323
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:519
 msgid "Update now"
-msgstr "Азыр жаңыртуу"
+msgstr "Азыр жаңылоо"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:603
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:188
@@ -6047,7 +6047,7 @@ msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:899
 msgid "Select TLE Update File"
-msgstr "TLE жаңыртуу файлын тандоо"
+msgstr "TLE жаңылоо файлын тандоо"
 
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:144
 msgid "Downloading data..."
@@ -6058,7 +6058,7 @@ msgid ""
 "Stellarium is downloading satellite data from the update sources. Please "
 "wait..."
 msgstr ""
-"Жаңыртуу булактарынан Stellarium жолдош маалыматын жүктөп жатат. Күтө "
+"Жаңылоо булактарынан Stellarium жолдош маалыматтарын жүктөөдө. Күтүп "
 "туруңуз..."
 
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:161
@@ -6089,7 +6089,7 @@ msgstr "Жолдоштор ырастоосу"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:682
 msgid "Updates"
-msgstr ""
+msgstr "Жаңылоолор"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:683
 msgid "Update satellite data from Internet sources"
@@ -6103,7 +6103,7 @@ msgstr ""
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:308
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:516
 msgid "Last update:"
-msgstr "Соңку жаңыртуу:"
+msgstr "Соңку жаңылоо:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:685
 msgid "On update, add all new satellites from the selected source(s)"
@@ -6206,7 +6206,7 @@ msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:744
 msgid "Do not update"
-msgstr ""
+msgstr "Жаңылабоо"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:745
 msgid "Description:"
@@ -6250,7 +6250,7 @@ msgstr "Көбүрөөк жолдоштор"
 
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:213
 msgid "Get data from update sources"
-msgstr "Жаңыртуу булактарынан маалыматты алуу"
+msgstr "Жаңылоо булактарынан маалыматтарды алуу"
 
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:214
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:524
@@ -6858,7 +6858,7 @@ msgstr "Которуу убактысы:"
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:459
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:463
 msgid "Date:"
-msgstr "Дата:"
+msgstr "Күнү:"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:460
 msgid "Daylight saving time end"
@@ -6927,7 +6927,7 @@ msgstr "24-саат форматы"
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:399
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:199
 msgid "Date display format"
-msgstr "Дата көрсөтүү форматы"
+msgstr "Датаны көрсөтүү калыбы"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:401
 msgid "yyyy-mm-dd (ISO 8601)"
@@ -6969,7 +6969,7 @@ msgstr ""
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:181
 msgid "Startup date/time preset"
-msgstr "Алгачкы дата/убакыт пресети"
+msgstr "Баштапкы дата/убакыт орнотулушу"
 
 #. TRANSLATORS: The current system time is used at startup
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:188
@@ -7236,7 +7236,7 @@ msgstr "Бар болгон объекттердин үстүнөн жазуу"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:531
 msgid "Update existing objects"
-msgstr "Бар болгон объекттерди жаңыртуу"
+msgstr "Бар болгон объектилерди жаңылоо"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:532
 msgid "Update only the orbital elements"
@@ -7403,7 +7403,7 @@ msgstr ""
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:184
 #, qt-format
 msgid "Next update: %1 days"
-msgstr "Кийинки жаңыртуу: %1 күн"
+msgstr "Кийинки жаңылоо: %1 күн"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:207
 msgid "Historical supernovae is updated"
@@ -8052,7 +8052,7 @@ msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:186
 msgid "update: 16 April 2012"
-msgstr ""
+msgstr "жаңылоо: 2012-ж. 16 апрель"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:187
 msgid "The Exoplanet Data Explorer"
@@ -8108,7 +8108,7 @@ msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:293
 msgid "Exoplanets is updated"
-msgstr "Экзопланеталар жаңыртылды"
+msgstr "Экзопланеталар жаңыланды"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:303
 msgid "Exoplanets Configuration"
