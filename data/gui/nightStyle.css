@@ -889,3 +889,25 @@ AddOnTableView::item:selected {
 	border-radius: 0px;
 	background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(177, 130, 43), stop: 1 rgb(210, 207, 133));
 }
+
+/**************** AddOnWidget ***************/
+
+AddOnWidget {
+	margin-top: 2px;
+	margin-bottom: 6px;
+	background-color: rgba(31, 31, 31, 60%);
+	border: none;
+	border-style: inset;
+	border-radius: 10px;
+}
+
+AddOnWidget QLabel {
+	font-size: 10px;
+	color: rgb(220, 223, 214);
+}
+
+AddOnWidget QTextBrowser {
+	font-size: 10px;
+	color: rgb(220, 223, 214);
+	background-color: rgba(31, 31, 31, 75%);
+}
