@@ -36,6 +36,8 @@ public:
 
 	void init(int addonId);
 
+	void paintEvent(QPaintEvent*);
+
 private:
 	Ui_AddOnWidget* ui;
 	StelAddOnDAO* m_pStelAddOnDAO;

@@ -17,6 +17,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 */
 
+#include <QPainter>
+
 #include "AddOnWidget.hpp"
 #include "ui_addonWidget.h"
 
@@ -33,6 +35,14 @@ AddOnWidget::~AddOnWidget()
 	delete ui;
 	ui = NULL;
 }
+
+void AddOnWidget::paintEvent(QPaintEvent*)
+ {
+     QStyleOption opt;
+     opt.init(this);
+     QPainter p(this);
+     style()->drawPrimitive(QStyle::PE_Widget, &opt, &p, this);
+ }
 
 void AddOnWidget::init(int addonId)
 {
