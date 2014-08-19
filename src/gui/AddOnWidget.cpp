@@ -17,6 +17,7 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 */
 
+#include <QStringBuilder>
 #include <QPainter>
 
 #include "AddOnWidget.hpp"
@@ -47,6 +48,19 @@ void AddOnWidget::paintEvent(QPaintEvent*)
 void AddOnWidget::init(int addonId)
 {
 	StelAddOnDAO::WidgetInfo info = m_pStelAddOnDAO->getAddOnWidgetInfo(addonId);
-	ui->txtAuthor->setText(info.a1Name);
+
+	QString author1 = info.a1Name;
+	if (!info.a1Url.isEmpty())
+		author1 = author1 % " <" % info.a1Url % ">";
+	if (!info.a1Email.isEmpty())
+		author1 = author1 % " <" % info.a1Email % ">";
+
+	QString author2 = info.a2Name;
+	if (!info.a2Url.isEmpty())
+		author2 = author2 % " <" % info.a2Url % ">";
+	if (!info.a2Email.isEmpty())
+		author2 = author2 % " <" % info.a2Email % ">";
+
+	ui->txtAuthor->setText(author2.isEmpty() ? author1 : author1 % "\n" % author2);
 	ui->txtDescription->setText(info.description);
 }
