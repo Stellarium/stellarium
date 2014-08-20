@@ -132,7 +132,7 @@ void AddOnTableView::setModel(QAbstractItemModel* model)
 		if (isCompatible(first, last))
 		{
 			QCheckBox* cbox = new QCheckBox();
-			cbox->setStyleSheet("QCheckBox { padding-left: 8px; }");
+			cbox->setStyleSheet("QCheckBox { margin-left: 8px; margin-right: 8px; margin-bottom: 2px; }");
 			cbox->setAutoFillBackground(true);
 			setIndexWidget(model->index(row, lastColumn), cbox);
 			m_pCheckboxGroup->addButton(cbox, row);
