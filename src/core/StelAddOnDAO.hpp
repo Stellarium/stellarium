@@ -95,6 +95,7 @@ public:
 		QString a2Name;
 		QString a2Email;
 		QString a2Url;
+		QString downloadSize;
 	};
 
 	AddOnInfo getAddOnInfo(int addonId);

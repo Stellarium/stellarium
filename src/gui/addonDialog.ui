@@ -392,7 +392,11 @@
         <widget class="QWidget" name="catalogs">
          <layout class="QVBoxLayout" name="verticalLayout">
           <item>
-           <widget class="AddOnTableView" name="catalogsTableView"/>
+           <widget class="AddOnTableView" name="catalogsTableView">
+            <property name="selectionBehavior">
+             <enum>QAbstractItemView::SelectRows</enum>
+            </property>
+           </widget>
           </item>
          </layout>
         </widget>

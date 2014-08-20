@@ -69,4 +69,7 @@ void AddOnWidget::init(int addonId)
 
 	// License (name and url)
 	ui->txtLicense->setText(info.licenseName % " <" % info.licenseUrl % ">");
+
+	// Download Size
+	ui->txtSize->setText(info.downloadSize % " MB");
 }
