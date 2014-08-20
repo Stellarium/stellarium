@@ -314,8 +314,8 @@ StelAddOnDAO::WidgetInfo StelAddOnDAO::getAddOnWidgetInfo(int addonId)
 	const int a2EmailColumn = queryRecord.indexOf("a2Email");
 	const int a2UrlColumn = queryRecord.indexOf("a2Url");
 
+	WidgetInfo widgetInfo;
 	if (query.next()) {
-		WidgetInfo widgetInfo;
 		widgetInfo.description = query.value(descriptionColumn).toString();
 		widgetInfo.downloadSize = query.value(downloadSizeColumn).toString();
 		widgetInfo.licenseName =  query.value(licenseNameColumn).toString();
@@ -326,10 +326,26 @@ StelAddOnDAO::WidgetInfo StelAddOnDAO::getAddOnWidgetInfo(int addonId)
 		widgetInfo.a2Name = query.value(a2NameColumn).toString();
 		widgetInfo.a2Email = query.value(a2EmailColumn).toString();
 		widgetInfo.a2Url = query.value(a2UrlColumn).toString();
-		return widgetInfo;
+	}
+	return widgetInfo;
+}
+
+QHash<QString, QString> StelAddOnDAO::getThumbnails()
+{
+	QString sQuery("SELECT id_install, thumbnail "
+		       "FROM landscape INNER JOIN addon "
+		       "ON landscape.addon = addon.id");
+	QSqlQuery query(m_db);
+	if (!query.exec(sQuery)) {
+		qWarning() << "Add-On DAO Thumbnails:" << m_db.lastError() << sQuery;
+		return QHash<QString, QString>();
 	}
 
-	return WidgetInfo();
+	QHash<QString, QString> res;
+	while (query.next()) {
+		res.insert(query.value(0).toString(), query.value(1).toString());
+	}
+	return res;
 }
 
 QString StelAddOnDAO::getLanguagePackType(const QString& checksum)
@@ -347,8 +363,9 @@ QString StelAddOnDAO::getLanguagePackType(const QString& checksum)
 		return QString();
 	}
 
+	QString res;
 	if (query.next()) {
-		return query.value(0).toString();
+		res = query.value(0).toString();
 	}
-	return QString();
+	return res;
 }

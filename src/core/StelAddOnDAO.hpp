@@ -106,6 +106,7 @@ public:
 	void markAddOnsAsInstalledFromMd5(QStringList checksums);
 	void updateAddOnStatus(QString idInstall, int installed);
 
+	QHash<QString, QString> getThumbnails();
 	QString getLanguagePackType(const QString& checksum);
 
 private:
