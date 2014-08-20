@@ -49,6 +49,7 @@ void AddOnWidget::init(int addonId)
 {
 	StelAddOnDAO::WidgetInfo info = m_pStelAddOnDAO->getAddOnWidgetInfo(addonId);
 
+	// Authors (name, email and url)
 	QString author1 = info.a1Name;
 	if (!info.a1Url.isEmpty())
 		author1 = author1 % " <" % info.a1Url % ">";
@@ -62,5 +63,10 @@ void AddOnWidget::init(int addonId)
 		author2 = author2 % " <" % info.a2Email % ">";
 
 	ui->txtAuthor->setText(author2.isEmpty() ? author1 : author1 % "\n" % author2);
+
+	// Description
 	ui->txtDescription->setText(info.description);
+
+	// License (name and url)
+	ui->txtLicense->setText(info.licenseName % " <" % info.licenseUrl % ">");
 }
