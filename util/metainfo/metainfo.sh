@@ -15,7 +15,7 @@ xmlstarlet ed -d "//*[@xml:lang]" $metainfo_file > $tmpxmlfile
 
 # get rid of the .xml extension and dirname
 metainfo_file_basename=$(basename $metainfo_file)
-dataname="${metainfo_file_basename%.xml*}"
+dataname="stellarium-metainfo"
 
 # create pot file stellarium.appdata.xml -> stellarium.appdata.pot
 itstool -i $ASMETAINFOITS -o $podir/$dataname.pot $tmpxmlfile
