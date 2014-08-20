@@ -2,6 +2,7 @@
 
 # Tool for extract of the translatable lines from XML file and generation of the localized metainfo file.
 # This is modified KDE script (Original source: http://websvn.kde.org/trunk/l10n-kde4/scripts/extract_metainfo.sh)
+# Required itstool >=1.2.0
 
 ROOT=../..
 ASMETAINFOITS=./as-metainfo.its
