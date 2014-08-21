@@ -49,7 +49,8 @@ public:
 	StelAddOnMgr();
 	virtual ~StelAddOnMgr();
 
-	QString getDirectory(QString category);
+	QString getThumbnailDir() { return m_sDirThumbnail; }
+	QString getDirectory(QString category) { return m_dirs.value(category, ""); }
 	void installAddOn(const int addonId);
 	bool installFromFile(const StelAddOnDAO::AddOnInfo addonInfo);
 	void removeAddOn(const int addonId);
@@ -100,6 +101,7 @@ private:
 
 	// addon directories
 	const QString m_sDirAddOn;
+	const QString m_sDirThumbnail;
 	QHash<QString, QString> m_dirs;
 
 	// sub-classes

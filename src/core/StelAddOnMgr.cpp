@@ -40,9 +40,11 @@ StelAddOnMgr::StelAddOnMgr()
 	, m_iLastUpdate(1388966410)
 	, m_sUrlUpdate("http://cardinot.sourceforge.net/getUpdates.php")
 	, m_sDirAddOn(StelFileMgr::getUserDir() % "/addon")
+	, m_sDirThumbnail(m_sDirAddOn % "/" % "thumbnail/")
 {
 	// creating addon dir
 	StelFileMgr::makeSureDirExistsAndIsWritable(m_sDirAddOn);
+	StelFileMgr::makeSureDirExistsAndIsWritable(m_sDirThumbnail);
 
 	// Initialize settings in the main config file
 	if (m_pConfig->childGroups().contains("AddOn"))
@@ -81,7 +83,7 @@ StelAddOnMgr::StelAddOnMgr()
 
 	// Init sub-classes
 	m_pStelAddOns.insert(CATALOG, new AOCatalog(m_pStelAddOnDAO));
-	m_pStelAddOns.insert(LANDSCAPE, new AOLandscape(m_pStelAddOnDAO));
+	m_pStelAddOns.insert(LANDSCAPE, new AOLandscape(m_pStelAddOnDAO, m_sDirThumbnail));
 	m_pStelAddOns.insert(LANGUAGE_PACK, new AOLanguagePack(m_pStelAddOnDAO));
 	m_pStelAddOns.insert(SCRIPT, new AOScript(m_pStelAddOnDAO));
 	m_pStelAddOns.insert(SKY_CULTURE, new AOSkyCulture(m_pStelAddOnDAO));
@@ -96,11 +98,6 @@ StelAddOnMgr::StelAddOnMgr()
 
 StelAddOnMgr::~StelAddOnMgr()
 {
-}
-
-QString StelAddOnMgr::getDirectory(QString category)
-{
-	return m_dirs.value(category);
 }
 
 void StelAddOnMgr::setLastUpdate(qint64 time) {
@@ -143,6 +140,9 @@ bool StelAddOnMgr::updateCatalog(QString webresult)
 			return false;
 		}
 	}
+
+	// download landscape thumbnails
+	((AOLandscape*) m_pStelAddOns.value(LANDSCAPE))->downloadThumbnails();
 
 	// check add-ons which are already installed
 	refreshAddOnStatuses();
