@@ -109,7 +109,7 @@ void AOLandscape::downloadFinished()
 	if (m_pNetworkReply->error() == QNetworkReply::NoError) {
 	    QPixmap pixmap;
 	    if (pixmap.loadFromData(m_pNetworkReply->readAll())) {
-		    pixmap.save(m_sThumbnailDir % m_thumbnails.key(m_thumbnailQueue.first()), "jpg");
+		    pixmap.save(m_sThumbnailDir % m_thumbnails.key(m_thumbnailQueue.first()) % ".jpg");
 	    }
 	}
 
