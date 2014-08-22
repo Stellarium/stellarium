@@ -109,6 +109,7 @@ void AddOnTableView::setModel(QAbstractItemModel* model)
 {
 	QTableView::setModel(model);
 
+	m_widgets.clear();
 	m_iSelectedAddOnsToInstall.clear();
 	m_iSelectedAddOnsToRemove.clear();
 	emit(somethingToInstall(false));
