@@ -287,7 +287,7 @@ StelAddOnDAO::WidgetInfo StelAddOnDAO::getAddOnWidgetInfo(int addonId)
 	}
 
 	QSqlQuery query(m_db);
-	query.prepare("SELECT description, download_size,"
+	query.prepare("SELECT id_install, description, download_size,"
 		      "license.name AS licenseName, license.url AS licenseUrl,"
 		      "a1.name AS a1Name, a1.email AS a1Email, a1.url AS a1Url,"
 		      "a2.name AS a2Name, a2.email AS a2Email, a2.url AS a2Url "
@@ -303,6 +303,7 @@ StelAddOnDAO::WidgetInfo StelAddOnDAO::getAddOnWidgetInfo(int addonId)
 	}
 
 	QSqlRecord queryRecord = query.record();
+	const int idInstallColumn = queryRecord.indexOf("id_install");
 	const int descriptionColumn = queryRecord.indexOf("description");
 	const int downloadSizeColumn = queryRecord.indexOf("download_size");
 	const int licenseNameColumn = queryRecord.indexOf("licenseName");
@@ -316,6 +317,7 @@ StelAddOnDAO::WidgetInfo StelAddOnDAO::getAddOnWidgetInfo(int addonId)
 
 	WidgetInfo widgetInfo;
 	if (query.next()) {
+		widgetInfo.idInstall = query.value(idInstallColumn).toString();
 		widgetInfo.description = query.value(descriptionColumn).toString();
 		widgetInfo.downloadSize = query.value(downloadSizeColumn).toString();
 		widgetInfo.licenseName =  query.value(licenseNameColumn).toString();

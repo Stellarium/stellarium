@@ -27,6 +27,7 @@ AddOnWidget::AddOnWidget(QWidget *parent)
 	: QWidget(parent)
 	, ui(new Ui_AddOnWidget)
 	, m_pStelAddOnDAO(StelApp::getInstance().getStelAddOnMgr().getStelAddOnDAO())
+	, m_sThumbnailDir(StelApp::getInstance().getStelAddOnMgr().getThumbnailDir())
 {
 	ui->setupUi(this);
 }
@@ -72,4 +73,17 @@ void AddOnWidget::init(int addonId)
 
 	// Download Size
 	ui->txtSize->setText(info.downloadSize % " MB");
+
+	// Thumbnail
+	QPixmap thumbnail(m_sThumbnailDir % info.idInstall % ".jpg");
+	if (thumbnail.isNull())
+	{
+		ui->thumbnail->setVisible(false);
+	}
+	else
+	{
+		thumbnail = thumbnail.scaled(100, 100, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+		ui->thumbnail->setPixmap(thumbnail);
+		ui->thumbnail->resize(thumbnail.size());
+	}
 }

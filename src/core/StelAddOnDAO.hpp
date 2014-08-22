@@ -86,7 +86,9 @@ public:
 	};
 
 	struct WidgetInfo {
+		QString idInstall;
 		QString description;
+		QString downloadSize;
 		QString licenseName;
 		QString licenseUrl;
 		QString a1Name;
@@ -95,7 +97,6 @@ public:
 		QString a2Name;
 		QString a2Email;
 		QString a2Url;
-		QString downloadSize;
 	};
 
 	AddOnInfo getAddOnInfo(int addonId);

@@ -41,6 +41,7 @@ public:
 private:
 	Ui_AddOnWidget* ui;
 	StelAddOnDAO* m_pStelAddOnDAO;
+	QString m_sThumbnailDir;
 };
 
 #endif // _ADDONWIDGET_HPP
