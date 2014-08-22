@@ -44,7 +44,7 @@ bool StelAddOnDAO::init()
 	qDebug() << "Add-On Database status:" << m_db.databaseName() << "=" << ok;
 	if (m_db.lastError().isValid())
 	{
-	    qDebug() << "Error loading Add-On database:" << m_db.lastError();
+	    qWarning() << "Error loading Add-On database:" << m_db.lastError();
 	    return false;
 	}
 
@@ -53,6 +53,7 @@ bool StelAddOnDAO::init()
 	    !createTableLicense() ||
 	    !createTableAuthor())
 	{
+		qWarning() << "Add-On DAO : Failed to create tables!" << m_db.lastError();
 		return false;
 	}
 

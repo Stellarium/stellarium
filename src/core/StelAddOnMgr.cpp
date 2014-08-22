@@ -66,7 +66,7 @@ StelAddOnMgr::StelAddOnMgr()
 	}
 
 	// Init database
-	Q_ASSERT(m_pStelAddOnDAO->init());
+	m_pStelAddOnDAO->init();
 
 	// creating sub-dirs
 	m_dirs.insert(CATALOG, m_sDirAddOn % "/" % CATALOG % "/");
