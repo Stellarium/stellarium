@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-08-16 23:32+0700\n"
+"POT-Creation-Date: 2014-08-22 07:29+0700\n"
 "PO-Revision-Date: 2012-05-08 17:21+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Moldavian <mo@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-08-17 05:54+0000\n"
-"X-Generator: Launchpad (build 17156)\n"
+"X-Launchpad-Export-Date: 2014-08-22 05:59+0000\n"
+"X-Generator: Launchpad (build 17163)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:106 src/core/modules/StarMgr.cpp:338
 #: src/core/modules/GridLinesMgr.cpp:697 src/core/modules/LandscapeMgr.cpp:354
@@ -158,7 +158,7 @@ msgid "Planet: "
 msgstr ""
 
 #: src/core/modules/Nebula.cpp:104 src/core/modules/Planet.cpp:146
-#: src/core/modules/MinorPlanet.cpp:218 src/core/modules/Comet.cpp:156
+#: src/core/modules/MinorPlanet.cpp:209 src/core/modules/Comet.cpp:146
 #: src/core/modules/StarWrapper.cpp:50 src/core/modules/StarWrapper.cpp:170
 #: src/core/modules/StarWrapper.cpp:173
 #: plugins/Satellites/src/Satellite.cpp:252
@@ -169,7 +169,7 @@ msgid "Type: <b>%1</b>"
 msgstr ""
 
 #: src/core/modules/Nebula.cpp:109 src/core/modules/Planet.cpp:152
-#: src/core/modules/MinorPlanet.cpp:224 src/core/modules/Comet.cpp:162
+#: src/core/modules/MinorPlanet.cpp:215 src/core/modules/Comet.cpp:152
 #: src/core/modules/StarWrapper.cpp:56 src/core/modules/StarWrapper.cpp:180
 #: plugins/Supernovae/src/Supernova.cpp:135 plugins/Novae/src/Nova.cpp:140
 #: plugins/Quasars/src/Quasar.cpp:106 plugins/Exoplanets/src/Exoplanet.cpp:186
@@ -178,7 +178,7 @@ msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>)"
 msgstr ""
 
 #: src/core/modules/Nebula.cpp:112 src/core/modules/Planet.cpp:155
-#: src/core/modules/MinorPlanet.cpp:227 src/core/modules/Comet.cpp:165
+#: src/core/modules/MinorPlanet.cpp:218 src/core/modules/Comet.cpp:155
 #: src/core/modules/StarWrapper.cpp:60 src/core/modules/StarWrapper.cpp:183
 #: plugins/Supernovae/src/Supernova.cpp:137 plugins/Novae/src/Nova.cpp:143
 #: plugins/Quasars/src/Quasar.cpp:111 plugins/Exoplanets/src/Exoplanet.cpp:191
@@ -241,8 +241,8 @@ msgstr ""
 msgid "Deep-sky objects"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:158 src/core/modules/MinorPlanet.cpp:237
-#: src/core/modules/MinorPlanet.cpp:241 src/core/modules/Comet.cpp:174
+#: src/core/modules/Planet.cpp:158 src/core/modules/MinorPlanet.cpp:228
+#: src/core/modules/MinorPlanet.cpp:232 src/core/modules/Comet.cpp:164
 #: src/core/modules/StarWrapper.cpp:187 plugins/Quasars/src/Quasar.cpp:115
 #, qt-format
 msgid "Absolute Magnitude: %1"
@@ -253,14 +253,14 @@ msgstr ""
 msgid "Obliquity (of date, for Earth): %1"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:179 src/core/modules/MinorPlanet.cpp:254
-#: src/core/modules/Comet.cpp:204
+#: src/core/modules/Planet.cpp:179 src/core/modules/MinorPlanet.cpp:245
+#: src/core/modules/Comet.cpp:194
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 km)"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:186 src/core/modules/MinorPlanet.cpp:261
-#: src/core/modules/Comet.cpp:211
+#: src/core/modules/Planet.cpp:186 src/core/modules/MinorPlanet.cpp:252
+#: src/core/modules/Comet.cpp:201
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 Mio km)"
 msgstr ""
@@ -270,14 +270,14 @@ msgstr ""
 msgid "Apparent diameter: %1, with rings: %2"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:205 src/core/modules/MinorPlanet.cpp:269
+#: src/core/modules/Planet.cpp:205 src/core/modules/MinorPlanet.cpp:260
 #, qt-format
 msgid "Apparent diameter: %1"
 msgstr ""
 
 #. TRANSLATORS: Sidereal (orbital) period for solar system bodies in days and in Julian years (symbol: a)
-#: src/core/modules/Planet.cpp:217 src/core/modules/MinorPlanet.cpp:276
-#: src/core/modules/Comet.cpp:245
+#: src/core/modules/Planet.cpp:217 src/core/modules/MinorPlanet.cpp:267
+#: src/core/modules/Comet.cpp:234
 #, qt-format
 msgid "Sidereal period: %1 days (%2 a)"
 msgstr ""
@@ -312,32 +312,32 @@ msgstr ""
 msgid "Illuminated: %1%"
 msgstr ""
 
-#: src/core/modules/MinorPlanet.cpp:210
+#: src/core/modules/MinorPlanet.cpp:201
 #, qt-format
 msgid "Provisional designation: %1"
 msgstr ""
 
-#: src/core/modules/Comet.cpp:187
+#: src/core/modules/Comet.cpp:177
 #, no-c-format, qt-format
 msgid "Distance from Sun: %1AU (%2 km)"
 msgstr ""
 
-#: src/core/modules/Comet.cpp:194
+#: src/core/modules/Comet.cpp:184
 #, no-c-format, qt-format
 msgid "Distance from Sun: %1AU (%2 Mio km)"
 msgstr ""
 
-#: src/core/modules/Comet.cpp:221
+#: src/core/modules/Comet.cpp:211
 #, no-c-format, qt-format
 msgid "Speed: %1 km/s"
 msgstr ""
 
-#: src/core/modules/Comet.cpp:231
+#: src/core/modules/Comet.cpp:220
 #, no-c-format, qt-format
 msgid "Coma diameter (estimate): %1 km"
 msgstr ""
 
-#: src/core/modules/Comet.cpp:235
+#: src/core/modules/Comet.cpp:224
 #, no-c-format, qt-format
 msgid "Gas tail length (estimate): %1 Mio km"
 msgstr ""
@@ -475,7 +475,7 @@ msgid "SpaceShip"
 msgstr ""
 
 #: src/core/StelCore.cpp:183 src/gui/StelGui.cpp:183
-#: src/ui_dateTimeDialogGui.h:297
+#: src/ui_dateTimeDialogGui.h:365
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:172
 msgid "Date and Time"
 msgstr ""
@@ -3722,6 +3722,14 @@ msgstr ""
 
 #: src/translations.h:581
 msgid "Copy &Link Location"
+msgstr ""
+
+#: src/ui_dateTimeDialogGui.h:369
+msgid "Julian Date"
+msgstr ""
+
+#: src/ui_dateTimeDialogGui.h:372
+msgid "Modified Julian Date"
 msgstr ""
 
 #: src/ui_helpDialogGui.h:277 src/ui_helpDialogGui.h:283
