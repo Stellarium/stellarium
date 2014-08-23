@@ -84,7 +84,7 @@ Comet::Comet(const QString& englishName,
 
 	eclipticPos=Vec3d(0.,0.,0.);
 	rotLocalToParent = Mat4d::identity();
-	texMap = StelApp::getInstance().getTextureManager().createTextureThread(StelFileMgr::getInstallationDir()+"/textures/"+texMapName, StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT));
+	texMap = StelApp::getInstance().getTextureManager().createTextureThread(StelFileMgr::findFile("textures/"+texMapName), StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT));
 
 	gastailVertexArr.clear();
 	dusttailVertexArr.clear();
