@@ -21,13 +21,9 @@
 
 AOTexture::AOTexture(StelAddOnDAO* pStelAddOnDAO)
 	: m_pStelAddOnDAO(pStelAddOnDAO)
-	, m_sTexturesInstallDir(StelFileMgr::getInstallationDir() % "/textures/")
+	, m_sTexturesInstallDir(StelFileMgr::getUserDir() % "/textures/")
 {
-	if (!QDir(m_sTexturesInstallDir).exists())
-	{
-		qWarning() << "Add-On Texture: Unable to find the textures directory:"
-			   << QDir::toNativeSeparators(m_sTexturesInstallDir);
-	}
+	StelFileMgr::makeSureDirExistsAndIsWritable(m_sTexturesInstallDir);
 }
 
 AOTexture::~AOTexture()
