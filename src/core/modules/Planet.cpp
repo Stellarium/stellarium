@@ -312,12 +312,12 @@ Vec3d Planet::getJ2000EquatorialPos(const StelCore *core) const
 
 // Compute the position in the parent Planet coordinate system
 // Actually call the provided function to compute the ecliptical position
-void Planet::computePositionWithoutOrbits(const double date)
+void Planet::computePositionWithoutOrbits(const double dateJD)
 {
-	if (fabs(lastJD-date)>deltaJD)
+	if (fabs(lastJD-dateJD)>deltaJD)
 	{
-		coordFunc(date, eclipticPos, userDataPtr);
-		lastJD = date;
+		coordFunc(dateJD, eclipticPos, userDataPtr);
+		lastJD = dateJD;
 	}
 }
 
@@ -374,22 +374,22 @@ QVector<const Planet*> Planet::getCandidatesForShadow() const
 	return res;
 }
 
-void Planet::computePosition(const double date)
+void Planet::computePosition(const double dateJD)
 {
 
-	if (orbitFader.getInterstate()>0.000001 && deltaOrbitJD > 0 && (fabs(lastOrbitJD-date)>deltaOrbitJD || !orbitCached))
+	if (orbitFader.getInterstate()>0.000001 && deltaOrbitJD > 0 && (fabs(lastOrbitJD-dateJD)>deltaOrbitJD || !orbitCached))
 	{
 		double calc_date;
 		// int delta_points = (int)(0.5 + (date - lastOrbitJD)/date_increment);
 		int delta_points;
 
-		if( date > lastOrbitJD )
+		if( dateJD > lastOrbitJD )
 		{
-			delta_points = (int)(0.5 + (date - lastOrbitJD)/deltaOrbitJD);
+			delta_points = (int)(0.5 + (dateJD - lastOrbitJD)/deltaOrbitJD);
 		}
 		else
 		{
-			delta_points = (int)(-0.5 + (date - lastOrbitJD)/deltaOrbitJD);
+			delta_points = (int)(-0.5 + (dateJD - lastOrbitJD)/deltaOrbitJD);
 		}
 		double new_date = lastOrbitJD + delta_points*deltaOrbitJD;
 
@@ -409,7 +409,7 @@ void Planet::computePosition(const double date)
 					computeTransMatrix(calc_date);
 					if (osculatingFunc)
 					{
-						(*osculatingFunc)(date,calc_date,eclipticPos);
+						(*osculatingFunc)(dateJD,calc_date,eclipticPos);
 					}
 					else
 					{
@@ -439,7 +439,7 @@ void Planet::computePosition(const double date)
 
 					computeTransMatrix(calc_date);
 					if (osculatingFunc) {
-						(*osculatingFunc)(date,calc_date,eclipticPos);
+						(*osculatingFunc)(dateJD,calc_date,eclipticPos);
 					}
 					else
 					{
@@ -464,11 +464,11 @@ void Planet::computePosition(const double date)
 			// update all points (less efficient)
 			for( int d=0; d<ORBIT_SEGMENTS; d++ )
 			{
-				calc_date = date + (d-ORBIT_SEGMENTS/2)*deltaOrbitJD;
+				calc_date = dateJD + (d-ORBIT_SEGMENTS/2)*deltaOrbitJD;
 				computeTransMatrix(calc_date);
 				if (osculatingFunc)
 				{
-					(*osculatingFunc)(date,calc_date,eclipticPos);
+					(*osculatingFunc)(dateJD,calc_date,eclipticPos);
 				}
 				else
 				{
@@ -478,25 +478,25 @@ void Planet::computePosition(const double date)
 				orbit[d] = getHeliocentricEclipticPos();
 			}
 
-			lastOrbitJD = date;
+			lastOrbitJD = dateJD;
 			if (!osculatingFunc) orbitCached = 1;
 		}
 
 
 		// calculate actual Planet position
-		coordFunc(date, eclipticPos, userDataPtr);
+		coordFunc(dateJD, eclipticPos, userDataPtr);
 
-		lastJD = date;
+		lastJD = dateJD;
 
 	}
-	else if (fabs(lastJD-date)>deltaJD)
+	else if (fabs(lastJD-dateJD)>deltaJD)
 	{
 		// calculate actual Planet position
-		coordFunc(date, eclipticPos, userDataPtr);
+		coordFunc(dateJD, eclipticPos, userDataPtr);
 		// XXX: do we need to do that even when the orbit is not visible?
 		for( int d=0; d<ORBIT_SEGMENTS; d++ )
 			orbit[d]=getHeliocentricPos(orbitP[d]);
-		lastJD = date;
+		lastJD = dateJD;
 	}
 
 }
@@ -641,9 +641,13 @@ void Planet::setHeliocentricEclipticPos(const Vec3d &pos)
 }
 
 // Compute the distance to the given position in heliocentric coordinate (in AU)
+// This is called by SolarSystem::draw()
 double Planet::computeDistance(const Vec3d& obsHelioPos)
 {
 	distance = (obsHelioPos-getHeliocentricEclipticPos()).length();
+	// GZ: improve fps by juggling updates for asteroids. They must be fast if close to observer, but can be slow if further away.
+	if (pType == "asteroid")
+			deltaJD=distance*StelCore::JD_SECOND;
 	return distance;
 }
 
@@ -694,8 +698,8 @@ float Planet::getVMagnitude(const StelCore* core) const
 	const Vec3d& planetHelioPos = getHeliocentricEclipticPos();
 	const double planetRq = planetHelioPos.lengthSquared();
 	const double observerPlanetRq = (observerHelioPos - planetHelioPos).lengthSquared();
-	const double cos_chi = (observerPlanetRq + planetRq - observerRq)/(2.0*sqrt(observerPlanetRq*planetRq));
-	double phase = std::acos(cos_chi);
+	const double cos_chi = (observerPlanetRq + planetRq - observerRq)/(2.0*std::sqrt(observerPlanetRq*planetRq));
+	const double phase = std::acos(cos_chi);
 
 	double shadowFactor = 1.;
 	// Check if the satellite is inside the inner shadow of the parent planet:
@@ -863,6 +867,13 @@ void Planet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFon
 {
 	if (hidden)
 		return;
+	// GZ: Try to improve speed for minor planets: test if visible at all.
+	// For a full catalog of NEAs (11000 objects), with this and resetting deltaJD according to distance, rendering time went 4.5fps->12fps.	
+	// AW: Apply this rule to asteroids only
+	if (((getVMagnitude(core)-1.0f) > core->getSkyDrawer()->getLimitMagnitude()) && pType=="asteroid")
+	{
+		return;
+	}
 
 	Mat4d mat = Mat4d::translation(eclipticPos) * rotLocalToParent;
 	PlanetP p = parent;
@@ -895,7 +906,7 @@ void Planet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFon
 	    && screenPos[0]>viewport_left - screenSz && screenPos[0] < viewport_left + prj->getViewportWidth() + screenSz)
 	{
 		// Draw the name, and the circle if it's not too close from the body it's turning around
-		// this prevents name overlaping (ie for jupiter satellites)
+		// this prevents name overlapping (e.g. for Jupiter's satellites)
 		float ang_dist = 300.f*atan(getEclipticPos().length()/getEquinoxEquatorialPos(core).length())/core->getMovementMgr()->getCurrentFov();
 		if (ang_dist==0.f)
 			ang_dist = 1.f; // if ang_dist == 0, the Planet is sun..

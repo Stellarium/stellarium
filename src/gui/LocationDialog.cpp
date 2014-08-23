@@ -99,22 +99,30 @@ void LocationDialog::createDialogContent()
 	connect(ui->mapLabel, SIGNAL(positionChanged(double, double)), this, SLOT(setPositionFromMap(double, double)));
 
 	connect(ui->addLocationToListPushButton, SIGNAL(clicked()), this, SLOT(addCurrentLocationToList()));
-	connect(ui->deleteLocationFromListPushButton, SIGNAL(clicked()), this, SLOT(deleteCurrentLocationFromList()));
+	connect(ui->deleteLocationFromListPushButton, SIGNAL(clicked()), this, SLOT(deleteCurrentLocationFromList()));	
+	connect(ui->resetListPushButton, SIGNAL(clicked()), this, SLOT(resetCompleteList()));
+	connect(ui->countryNameComboBox, SIGNAL(activated(const QString &)), this, SLOT(filterSitesByCountry()));
 
 	StelCore* core = StelApp::getInstance().getCore();
 	const StelLocation& currentLocation = core->getCurrentLocation();
-	setFieldsFromLocation(currentLocation);
+	bool b = (currentLocation.getID() == core->getDefaultLocationID());
+	QSettings* conf = StelApp::getInstance().getSettings();
+	if (conf->value("init_location/location", "auto").toString() == "auto")
+	{
+		ui->useIpQueryCheckBox->setChecked(true);
+		b = false;
+	}
 
-	const bool b = (currentLocation.getID() == core->getDefaultLocationID());
+	setFieldsFromLocation(currentLocation);
 	updateDefaultLocationControls(b);
-	connect(ui->useAsDefaultLocationCheckBox, SIGNAL(clicked()), this, SLOT(setDefaultLocation()));
-	connect(ui->pushButtonReturnToDefault, SIGNAL(clicked()),
-	        core, SLOT(returnToDefaultLocation()));
+
+	connect(ui->useIpQueryCheckBox, SIGNAL(clicked(bool)), this, SLOT(ipQueryLocation(bool)));
+	connect(ui->useAsDefaultLocationCheckBox, SIGNAL(clicked(bool)), this, SLOT(setDefaultLocation(bool)));
+	connect(ui->pushButtonReturnToDefault, SIGNAL(clicked()), core, SLOT(returnToDefaultLocation()));
 
 	connectEditSignals();
 	
-	connect(core, SIGNAL(locationChanged(StelLocation)),
-	        this, SLOT(updateFromProgram(StelLocation)));
+	connect(core, SIGNAL(locationChanged(StelLocation)), this, SLOT(updateFromProgram(StelLocation)));
 
 	ui->citySearchLineEdit->setFocus();
 }
@@ -126,19 +134,18 @@ void LocationDialog::updateFromProgram(const StelLocation& currentLocation)
 		return;
 	
 	StelCore* stelCore = StelApp::getInstance().getCore();
-	//const StelLocation& currentLocation = stelCore->getCurrentLocation();
-
-	// Hack to avoid the coord spinbox receiving the focus and triggering
-	// "new location" editing mode.
-	// Disable hack below because it change behaviour of spinboxes and added difficulties of changes for this spinboxes --AW
-	// ui->citySearchLineEdit->setFocus();
 
 	isEditingNew = false;
 	
 	// Check that the use as default check box needs to be updated
 	// Move to setFieldsFromLocation()? --BM?
 	const bool b = currentLocation.getID() == stelCore->getDefaultLocationID();
-	updateDefaultLocationControls(b);
+	QSettings* conf = StelApp::getInstance().getSettings();
+	if (conf->value("init_location/location", "auto").toString() != ("auto"))
+	{
+		updateDefaultLocationControls(b);
+		ui->pushButtonReturnToDefault->setEnabled(!b);
+	}
 
 	const QString& key1 = currentLocation.getID();
 	const QString& key2 = locationFromFields().getID();
@@ -167,10 +174,7 @@ void LocationDialog::disconnectEditSignals()
 	disconnect(ui->altitudeSpinBox, SIGNAL(valueChanged(int)), this, SLOT(setPositionFromCoords(int)));
 	disconnect(ui->planetNameComboBox, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(moveToAnotherPlanet(const QString&)));
 	disconnect(ui->countryNameComboBox, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(reportEdit()));
-	// Why an edit should be reported even if the country is not changed? --BM
-	//disconnect(ui->countryNameComboBox, SIGNAL(activated(const QString&)), this, SLOT(comboBoxChanged(const QString&)));
-	disconnect(ui->cityNameLineEdit, SIGNAL(textEdited(const QString&)),
-	           this, SLOT(reportEdit()));
+	disconnect(ui->cityNameLineEdit, SIGNAL(textEdited(const QString&)), this, SLOT(reportEdit()));
 }
 
 void LocationDialog::connectEditSignals()
@@ -180,10 +184,7 @@ void LocationDialog::connectEditSignals()
 	connect(ui->altitudeSpinBox, SIGNAL(valueChanged(int)), this, SLOT(setPositionFromCoords(int)));
 	connect(ui->planetNameComboBox, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(moveToAnotherPlanet(const QString&)));
 	connect(ui->countryNameComboBox, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(reportEdit()));
-	// Why an edit should be reported even if the country is not changed? --BM
-	//connect(ui->countryNameComboBox, SIGNAL(activated(const QString&)), this, SLOT(comboBoxChanged(const QString&)));
-	connect(ui->cityNameLineEdit, SIGNAL(textEdited(const QString&)),
-	        this, SLOT(reportEdit()));
+	connect(ui->cityNameLineEdit, SIGNAL(textEdited(const QString&)), this, SLOT(reportEdit()));
 }
 
 void LocationDialog::setFieldsFromLocation(const StelLocation& loc)
@@ -235,7 +236,7 @@ void LocationDialog::setFieldsFromLocation(const StelLocation& loc)
 // Update the map for the given location.
 void LocationDialog::setMapForLocation(const StelLocation& loc)
 {
-	// Avoids usless processing
+	// Avoids useless processing
 	if (lastPlanet==loc.planetName)
 		return;
 
@@ -358,6 +359,15 @@ void LocationDialog::setPositionFromMap(double longitude, double latitude)
 	loc.longitude = longitude;
 	setFieldsFromLocation(loc);
 	StelApp::getInstance().getCore()->moveObserverTo(loc, 0.);
+	// GZ: Filter location list for nearby sites. I assume Earth locations are better known. With only few locations on other planets in the list, 30 degrees seem OK.
+	StelApp::getInstance().getLocationMgr().pickLocationsNearby(loc.planetName, longitude, latitude, loc.planetName=="Earth" ? 3.0f: 30.0f);
+	QSortFilterProxyModel *proxyModel = new QSortFilterProxyModel(this);
+	proxyModel->setSourceModel((QAbstractItemModel*)StelApp::getInstance().getLocationMgr().getModelPicked());
+	proxyModel->sort(0, Qt::AscendingOrder);
+	proxyModel->setFilterCaseSensitivity(Qt::CaseInsensitive);
+	ui->citiesListView->setModel(proxyModel);
+	ui->citySearchLineEdit->clear();
+	connect(ui->citySearchLineEdit, SIGNAL(textChanged(const QString&)), proxyModel, SLOT(setFilterWildcard(const QString&)));
 }
 
 // Called when the planet name is changed by hand
@@ -380,6 +390,24 @@ void LocationDialog::moveToAnotherPlanet(const QString&)
 				ls->setCurrentLandscapeID(ls->getDefaultLandscapeID());
 		}
 
+		// GZ populate site list with sites only from that planet, or full list for Earth (faster than removing the ~50 non-Earth positions...).
+		StelLocationMgr &locMgr=StelApp::getInstance().getLocationMgr();
+		QSortFilterProxyModel *proxyModel = new QSortFilterProxyModel(this);
+		if (loc.planetName == "Earth")
+		{
+			proxyModel->setSourceModel((QAbstractItemModel*)locMgr.getModelAll());
+		}
+		else
+		{
+			locMgr.pickLocationsNearby(loc.planetName, 0.0f, 0.0f, 180.0f);
+			proxyModel->setSourceModel((QAbstractItemModel*)locMgr.getModelPicked());
+		}
+		proxyModel->sort(0, Qt::AscendingOrder);
+		proxyModel->setFilterCaseSensitivity(Qt::CaseInsensitive);
+		ui->citiesListView->setModel(proxyModel);
+		ui->citySearchLineEdit->clear();
+		connect(ui->citySearchLineEdit, SIGNAL(textChanged(const QString&)), proxyModel, SLOT(setFilterWildcard(const QString&)));
+		ui->citySearchLineEdit->setFocus();
 	}
 	// Planet transition time also set to null to prevent uglyness when
 	// "use landscape location" is enabled for that planet's landscape. --BM
@@ -429,7 +457,7 @@ void LocationDialog::reportEdit()
 	ui->deleteLocationFromListPushButton->setEnabled(locationMgr.canDeleteUserLocation(loc.getID()));
 }
 
-// Called when the user clic on the save button
+// Called when the user clicks on the save button
 void LocationDialog::addCurrentLocationToList()
 {
 	const StelLocation& loc = locationFromFields();
@@ -456,22 +484,24 @@ void LocationDialog::addCurrentLocationToList()
 }
 
 // Called when the user wants to use the current location as default
-void LocationDialog::setDefaultLocation()
+void LocationDialog::setDefaultLocation(bool state)
 {
-	StelCore* core = StelApp::getInstance().getCore();
-	QString currentLocationId = core->getCurrentLocation().getID();
-	core->setDefaultLocationID(currentLocationId);
+	if (state)
+	{
+		StelCore* core = StelApp::getInstance().getCore();
+		QString currentLocationId = core->getCurrentLocation().getID();
+		core->setDefaultLocationID(currentLocationId);
 
-	// Why this code even exists? After the previous code, this should always
-	// be true, except if setting the default location somehow fails. --BM
-	bool isDefault = (currentLocationId == core->getDefaultLocationID());
-	disconnectEditSignals();
-	updateDefaultLocationControls(isDefault);
-	//The focus need to be switched to another control, otherwise
-	//ui->latitudeSpinBox receives it and emits a valueChanged() signal when
-	//the window is closed.
-	ui->citySearchLineEdit->setFocus();
-	connectEditSignals();
+		// Why this code even exists? After the previous code, this should always
+		// be true, except if setting the default location somehow fails. --BM
+		bool isDefault = (currentLocationId == core->getDefaultLocationID());
+		disconnectEditSignals();
+		updateDefaultLocationControls(isDefault);
+		ui->pushButtonReturnToDefault->setEnabled(!isDefault);
+		ui->useIpQueryCheckBox->setChecked(!state);
+		ui->citySearchLineEdit->setFocus();
+		connectEditSignals();
+	}
 }
 
 // Called when the user clicks on the delete button
@@ -484,6 +514,54 @@ void LocationDialog::deleteCurrentLocationFromList()
 void LocationDialog::updateDefaultLocationControls(bool currentIsDefault)
 {
 	ui->useAsDefaultLocationCheckBox->setChecked(currentIsDefault);
-	ui->useAsDefaultLocationCheckBox->setEnabled(!currentIsDefault);
-	ui->pushButtonReturnToDefault->setEnabled(!currentIsDefault);
+	ui->useAsDefaultLocationCheckBox->setEnabled(!currentIsDefault);	
+}
+
+// called when the user clicks on the IP Query button
+void LocationDialog::ipQueryLocation(bool state)
+{
+	if (state)
+	{
+		QSettings* conf = StelApp::getInstance().getSettings();
+		conf->setValue("init_location/location", "auto");
+		disconnectEditSignals();
+		resetCompleteList(); // in case we are on Moon/Mars, we must get list back to show all (earth) locations...
+		StelLocationMgr &locMgr=StelApp::getInstance().getLocationMgr();
+		locMgr.locationFromIP(); // This just triggers asynchronous lookup.
+		ui->useAsDefaultLocationCheckBox->setChecked(!state);
+		ui->pushButtonReturnToDefault->setEnabled(!state);
+		connectEditSignals();
+		ui->citySearchLineEdit->setFocus();
+	}
+}
+
+// called when user clicks "reset list"
+void LocationDialog::resetCompleteList()
+{
+	QSortFilterProxyModel *proxyModel = new QSortFilterProxyModel(this);
+	proxyModel->setSourceModel((QAbstractItemModel*)StelApp::getInstance().getLocationMgr().getModelAll());
+	proxyModel->sort(0, Qt::AscendingOrder);
+	proxyModel->setFilterCaseSensitivity(Qt::CaseInsensitive);
+	ui->citiesListView->setModel(proxyModel);
+	ui->citySearchLineEdit->clear();
+	connect(ui->citySearchLineEdit, SIGNAL(textChanged(const QString&)), proxyModel, SLOT(setFilterWildcard(const QString&)));
+	ui->citySearchLineEdit->setFocus();
+}
+
+// called when user clicks in the country combobox and selects a country. The locations in the list are updated to select only sites in that country.
+void LocationDialog::filterSitesByCountry()
+{
+	QString country=ui->countryNameComboBox->currentData().toString();
+	QSortFilterProxyModel *proxyModel = new QSortFilterProxyModel(this);
+	StelLocationMgr &locMgr=StelApp::getInstance().getLocationMgr();
+
+	locMgr.pickLocationsInCountry(country);
+	proxyModel->setSourceModel((QAbstractItemModel*)locMgr.getModelPicked());
+
+	proxyModel->sort(0, Qt::AscendingOrder);
+	proxyModel->setFilterCaseSensitivity(Qt::CaseInsensitive);
+	ui->citiesListView->setModel(proxyModel);
+	ui->citySearchLineEdit->clear();
+	connect(ui->citySearchLineEdit, SIGNAL(textChanged(const QString&)), proxyModel, SLOT(setFilterWildcard(const QString&)));
+	ui->citySearchLineEdit->setFocus();
 }

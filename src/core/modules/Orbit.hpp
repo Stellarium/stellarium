@@ -43,7 +43,7 @@ public:
                     double epoch, // = 2451545.0,
                     double parentRotObliquity, // = 0.0,
                     double parentRotAscendingnode, // = 0.0
-					double parentRotJ2000Longitude  // = 0.0
+		    double parentRotJ2000Longitude  // = 0.0
                     );
 
 	// Compute position for a specified Julian date and return coordinates
@@ -91,8 +91,8 @@ public:
              double parentRotJ2000Longitude
              );
 
-    // Compute the orbit for a specified Julian date and return a "stellarium compliant" function
-    // GZ: new optional variable: updateSpeedVector, true required for dust tail orientation!
+    // Compute the orbit for a specified Julian day and return a "stellarium compliant" function
+    // GZ: new optional variable: updateVelocityVector, true required for dust tail orientation!
   void positionAtTimevInVSOP87Coordinates(double JD, double* v, bool updateVelocityVector=true);
   // updating the tails is a bit expensive. try not to overdo it.
   bool getUpdateTails() const {return updateTails;}
@@ -104,7 +104,7 @@ private:
   const double e;  //! eccentricity
   const double i;  //! inclination
   const double Om; //! longitude of ascending node
-  const double w;  //! argument of perihel // GZ RENAMED from o
+  const double w;  //! argument of perihel
   const double t0; //! time of perihel, JDE
   const double n;  //! mean motion (for parabolic orbits: W/dt in Heafner's presentation)
   Vec3d rdot;      //! GZ: velocity vector. Caches velocity from last position computation, [AU/d]

@@ -75,8 +75,8 @@ QString StarWrapperBase::getInfoString(const StelCore *core, const InfoStringGro
 
 QString StarWrapper1::getEnglishName(void) const
 {
-	if (s->hip)
-		return QString("HIP %1").arg(s->hip);
+	if (s->getHip())
+		return QString("HIP %1").arg(s->getHip());
 	return StarWrapperBase::getEnglishName();
 }
 
@@ -85,24 +85,24 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 	QString str;
 
 	QTextStream oss(&str);
-	const QString varType = StarMgr::getGcvsVariabilityType(s->hip);
-	const float maxVMag = StarMgr::getGcvsMaxMagnitude(s->hip);
-	const float magFlag = StarMgr::getGcvsMagnitudeFlag(s->hip);
-	const float minVMag = StarMgr::getGcvsMinMagnitude(s->hip);
-	const float min2VMag = StarMgr::getGcvsMinMagnitude(s->hip, false);
-	const QString photoVSys = StarMgr::getGcvsPhotometricSystem(s->hip);
-	const double vEpoch = StarMgr::getGcvsEpoch(s->hip);
-	const double vPeriod = StarMgr::getGcvsPeriod(s->hip);
-	const int vMm = StarMgr::getGcvsMM(s->hip);
-	if (s->hip)
+	const QString varType = StarMgr::getGcvsVariabilityType(s->getHip());
+	const float maxVMag = StarMgr::getGcvsMaxMagnitude(s->getHip());
+	const float magFlag = StarMgr::getGcvsMagnitudeFlag(s->getHip());
+	const float minVMag = StarMgr::getGcvsMinMagnitude(s->getHip());
+	const float min2VMag = StarMgr::getGcvsMinMagnitude(s->getHip(), false);
+	const QString photoVSys = StarMgr::getGcvsPhotometricSystem(s->getHip());
+	const double vEpoch = StarMgr::getGcvsEpoch(s->getHip());
+	const double vPeriod = StarMgr::getGcvsPeriod(s->getHip());
+	const int vMm = StarMgr::getGcvsMM(s->getHip());
+	if (s->getHip())
 	{
 		if ((flags&Name) || (flags&CatalogNumber))
 			oss << "<h2>";
 
-		const QString commonNameI18 = StarMgr::getCommonName(s->hip);
-		const QString sciName = StarMgr::getSciName(s->hip);
-		const QString addSciName = StarMgr::getSciAdditionalName(s->hip);
-		const QString varSciName = StarMgr::getGcvsName(s->hip);
+		const QString commonNameI18 = StarMgr::getCommonName(s->getHip());
+		const QString sciName = StarMgr::getSciName(s->getHip());
+		const QString addSciName = StarMgr::getSciAdditionalName(s->getHip());
+		const QString varSciName = StarMgr::getGcvsName(s->getHip());
 
 		bool nameWasEmpty=true;
 		if (flags&Name)
@@ -125,9 +125,9 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 			oss << " - ";
 
 		if (flags&CatalogNumber || (nameWasEmpty && (flags&Name)))
-			oss << "HIP " << s->hip;
-		if (s->componentIds)
-			oss << " " << StarMgr::convertToComponentIds(s->componentIds);
+			oss << "HIP " << s->getHip();
+		if (s->getComponentIds())
+			oss << " " << StarMgr::convertToComponentIds(s->getComponentIds());
 
 		if ((flags&Name) || (flags&CatalogNumber))
 			oss << "</h2>";
@@ -157,14 +157,14 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 				varstartype = q_("variable star");
 		}
 
-		if (s->componentIds)
+		if (s->getComponentIds())
 			startype = q_("double star");
 		else
 			startype = q_("star");
 
 		if (!varType.isEmpty())
 		{
-			if (s->componentIds)
+			if (s->getComponentIds())
 				oss << q_("Type: <b>%1, %2</b>").arg(varstartype).arg(startype);
 			else
 				oss << q_("Type: <b>%1</b>").arg(varstartype);
@@ -183,8 +183,8 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 			oss << q_("Magnitude: <b>%1</b>").arg(QString::number(getVMagnitude(core), 'f', 2)) << "<br>";
 	}
 
-	if ((flags&AbsoluteMagnitude) && s->plx && !isNan(s->plx) && !isInf(s->plx))
-		oss << q_("Absolute Magnitude: %1").arg(getVMagnitude(core)+5.*(1.+std::log10(0.00001*s->plx)), 0, 'f', 2) << "<br>";
+	if ((flags&AbsoluteMagnitude) && s->getPlx ()&& !isNan(s->getPlx()) && !isInf(s->getPlx()))
+		oss << q_("Absolute Magnitude: %1").arg(getVMagnitude(core)+5.*(1.+std::log10(0.00001*s->getPlx())), 0, 'f', 2) << "<br>";
 
 	if (flags&Extra)
 	{
@@ -212,16 +212,16 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 
 	oss << getPositionInfoString(core, flags);
 
-	if ((flags&Distance) && s->plx && !isNan(s->plx) && !isInf(s->plx))
-		oss << q_("Distance: %1 Light Years").arg((AU/(SPEED_OF_LIGHT*86400*365.25)) / (s->plx*((0.00001/3600)*(M_PI/180))), 0, 'f', 2) << "<br>";
+	if ((flags&Distance) && s->getPlx ()&& !isNan(s->getPlx()) && !isInf(s->getPlx()))
+		oss << q_("Distance: %1 Light Years").arg((AU/(SPEED_OF_LIGHT*86400*365.25)) / (s->getPlx()*((0.00001/3600)*(M_PI/180))), 0, 'f', 2) << "<br>";
 
 	if (flags&Extra)
 	{
-		if (s->spInt)
-			oss << q_("Spectral Type: %1").arg(StarMgr::convertToSpectralType(s->spInt)) << "<br />";
+		if (s->getSpInt())
+			oss << q_("Spectral Type: %1").arg(StarMgr::convertToSpectralType(s->getSpInt())) << "<br />";
 
-		if (s->plx)
-			oss << q_("Parallax: %1\"").arg(0.00001*s->plx, 0, 'f', 5) << "<br />";
+		if (s->getPlx())
+			oss << q_("Parallax: %1\"").arg(0.00001*s->getPlx(), 0, 'f', 5) << "<br />";
 
 		if (vEpoch>0)
 		{

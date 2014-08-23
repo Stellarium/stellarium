@@ -155,7 +155,6 @@ static void InitEll(const double q, const double n, const double e, const double
 //! @param rdotz: z component of velocity vector, AU/d
 void Init3D(const double i, const double Omega, const double w, const double rCosNu, const double rSinNu,
             double &rx,double &ry,double &rz, double &rdotx, double &rdoty, double &rdotz, const bool withVelVector=false, const double e=0.0, const double q=0.0) {
-//        qDebug() << "Init3D";
   const double cw = cos(w);
   const double sw = sin(w);
   const double cOm = cos(Omega);
@@ -192,29 +191,21 @@ CometOrbit::CometOrbit(double pericenterDistance,
                        double timeAtPerihelion,
                        double orbitGoodDays,
                        double meanMotion,              // GZ: for parabolics, this is W/dt in Heafner's lettering
-                       double parentRotObliquity,      // GZ: I don't see any use for this, should be 0 for comets.
-                       double parentRotAscendingnode,  // GZ: I don't see any use for this, should be 0 for comets.
-                       double parentRotJ2000Longitude) // GZ: I don't see any use for this, should be 0 for comets.
+		       double parentRotObliquity,
+		       double parentRotAscendingnode,
+		       double parentRotJ2000Longitude)
                       //)
             :q(pericenterDistance),e(eccentricity),i(inclination),
             Om(ascendingNode),w(argOfPerhelion),t0(timeAtPerihelion),
 	    n(meanMotion), updateTails(true), orbitGood(orbitGoodDays) {
-//        qDebug() << "CometOrbit::()";
   rdot.set(0.0, 0.0, 0.0);
-  const double c_obl = cos(parentRotObliquity);         // 1?
-  const double s_obl = sin(parentRotObliquity);         // 0?
-  const double c_nod = cos(parentRotAscendingnode);     // 1?
-  const double s_nod = sin(parentRotAscendingnode);     // 0?
-  const double cj = cos(parentRotJ2000Longitude);       // 1?
-  const double sj = sin(parentRotJ2000Longitude);       // 0?
-  // GZ: Test my assumptions before breaking anything...
-//  Q_ASSERT(c_obl==1.0);
-//  Q_ASSERT(c_nod==1.0);
-//  Q_ASSERT(cj   ==1.0);
-//  Q_ASSERT(s_obl==0.0);
-//  Q_ASSERT(s_nod==0.0);
-//  Q_ASSERT(sj   ==0.0);
-  // GZ NO, this is necessary!
+  const double c_obl = cos(parentRotObliquity);
+  const double s_obl = sin(parentRotObliquity);
+  const double c_nod = cos(parentRotAscendingnode);
+  const double s_nod = sin(parentRotAscendingnode);
+  const double cj = cos(parentRotJ2000Longitude);
+  const double sj = sin(parentRotJ2000Longitude);
+
 //  rotateToVsop87[0] =  c_nod;
 //  rotateToVsop87[1] = -s_nod * c_obl;
 //  rotateToVsop87[2] =  s_nod * s_obl;
@@ -224,15 +215,15 @@ CometOrbit::CometOrbit(double pericenterDistance,
 //  rotateToVsop87[6] =  0.0;
 //  rotateToVsop87[7] =          s_obl;
 //  rotateToVsop87[8] =          c_obl;
-  rotateToVsop87[0] =  c_nod*cj-s_nod*c_obl*sj; // 1 in case of comet orbiting the sun, these names are misleading, however they do the right thing.
-  rotateToVsop87[1] = -c_nod*sj-s_nod*c_obl*cj; // 0 OK, this is NOT an identity matrix...
-  rotateToVsop87[2] =           s_nod*s_obl;    // 0
-  rotateToVsop87[3] =  s_nod*cj+c_nod*c_obl*sj; // 0
-  rotateToVsop87[4] = -s_nod*sj+c_nod*c_obl*cj; // 1
-  rotateToVsop87[5] =          -c_nod*s_obl;    // 0
-  rotateToVsop87[6] =                 s_obl*sj; // 0
-  rotateToVsop87[7] =                 s_obl*cj; // 0
-  rotateToVsop87[8] =                 c_obl;    // 1
+  rotateToVsop87[0] =  c_nod*cj-s_nod*c_obl*sj;
+  rotateToVsop87[1] = -c_nod*sj-s_nod*c_obl*cj;
+  rotateToVsop87[2] =           s_nod*s_obl;
+  rotateToVsop87[3] =  s_nod*cj+c_nod*c_obl*sj;
+  rotateToVsop87[4] = -s_nod*sj+c_nod*c_obl*cj;
+  rotateToVsop87[5] =          -c_nod*s_obl;
+  rotateToVsop87[6] =                 s_obl*sj;
+  rotateToVsop87[7] =                 s_obl*cj;
+  rotateToVsop87[8] =                 c_obl;
 //  qDebug() << "CometOrbit::()...done";
 }
 
@@ -250,16 +241,12 @@ void CometOrbit::positionAtTimevInVSOP87Coordinates(double JD, double *v, bool u
   else InitPar(q,n,JD,rCosNu,rSinNu);
   double p0,p1,p2, s0, s1, s2;
   Init3D(i,Om,w,rCosNu,rSinNu,p0,p1,p2, s0, s1, s2, updateVelocityVector, e, q);
-  // GZ: The next 3 lines are meaningless for a comet orbiting the sun. Or not?
   v[0] = rotateToVsop87[0]*p0 + rotateToVsop87[1]*p1 + rotateToVsop87[2]*p2;
   v[1] = rotateToVsop87[3]*p0 + rotateToVsop87[4]*p1 + rotateToVsop87[5]*p2;
   v[2] = rotateToVsop87[6]*p0 + rotateToVsop87[7]*p1 + rotateToVsop87[8]*p2;
-  //GZ replace with:
-  //v[0]=p0;
-  //v[1]=p1;
-  //v[2]=p2;
+
   if (updateVelocityVector) {
-      rdot.set(s0, s1, s2); // TODO: ROTATE?
+      rdot.set(s0, s1, s2);
       updateTails=true;
   }
 }
@@ -312,7 +299,7 @@ struct SolveKeplerFunc1 : public unary_function<double, double>
     double ecc;
     double M;
 
-    SolveKeplerFunc1(double _ecc, double _M) : ecc(_ecc), M(_M) {};
+    SolveKeplerFunc1(double _ecc, double _M) : ecc(_ecc), M(_M) {}
 
     double operator()(double x) const
     {
@@ -329,7 +316,7 @@ struct SolveKeplerFunc2 : public unary_function<double, double>
     double ecc;
     double M;
 
-    SolveKeplerFunc2(double _ecc, double _M) : ecc(_ecc), M(_M) {};
+    SolveKeplerFunc2(double _ecc, double _M) : ecc(_ecc), M(_M) {}
 
     double operator()(double x) const
     {
@@ -352,7 +339,7 @@ struct SolveKeplerLaguerreConway : public unary_function<double, double>
     double ecc;
     double M;
 
-    SolveKeplerLaguerreConway(double _ecc, double _M) : ecc(_ecc), M(_M) {};
+    SolveKeplerLaguerreConway(double _ecc, double _M) : ecc(_ecc), M(_M) {}
     // cf Heafner, Fundamental Ephemeris Computations p.73
     // GZ: note&add Heafner's initial guess for E!
     double operator()(double E) const
@@ -373,7 +360,7 @@ struct SolveKeplerLaguerreConwayHyp : public unary_function<double, double>
     double ecc;
     double M;
 
-    SolveKeplerLaguerreConwayHyp(double _ecc, double _M) : ecc(_ecc), M(_M) {};
+    SolveKeplerLaguerreConwayHyp(double _ecc, double _M) : ecc(_ecc), M(_M) {}
     // cf Heafner, Fundamental Ephemeris Computations p.73
     double operator()(double x) const
     {
@@ -418,7 +405,7 @@ double EllipticalOrbit::eccentricAnomaly(const double M) const
     {
         // Extremely stable Laguerre-Conway method for solving Kepler's
         // equation.  Only use this for high-eccentricity orbits, as it
-        // requires more calcuation.
+	// requires more calculation.
         double E = M + 0.85 * eccentricity * sign(sin(M));
         Solution sol = solveIteration_fixed(SolveKeplerLaguerreConway(eccentricity, M), E, 8);
         return sol.first;

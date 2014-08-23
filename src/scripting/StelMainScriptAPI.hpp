@@ -614,6 +614,10 @@ public slots:
 	//! @param s the message to be displayed on the console.
 	void debug(const QString& s);
 
+	//! print an output message from script
+	//! @param s the message to be displayed on the output file.
+	void output(const QString& s);
+
 	//! Get the current application language.
 	//! @return two letter language code, e.g. "en", or "de" and so on.
 	QString getAppLanguage();

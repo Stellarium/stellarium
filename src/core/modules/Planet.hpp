@@ -156,8 +156,8 @@ public:
 	const RotationElements &getRotationElements(void) const {return re;}
 
 	// Compute the position in the parent Planet coordinate system
-	void computePositionWithoutOrbits(const double date);
-	void computePosition(const double date);
+	void computePositionWithoutOrbits(const double dateJD);
+	virtual void computePosition(const double dateJD);// GZ: gets overridden in Comet!
 
 	// Compute the transformation matrix from the local Planet coordinate to the parent Planet coordinate
 	void computeTransMatrix(double date);

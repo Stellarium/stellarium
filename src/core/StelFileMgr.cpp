@@ -126,12 +126,15 @@ void StelFileMgr::init()
 	// Then add the installation directory to the search path
 	fileLocations.append(installDir);
 
-	QString screenshotDirSuffix = "/Stellarium";
-	if (!QStandardPaths::standardLocations(QStandardPaths::PicturesLocation).isEmpty())
-		screenshotDir = QStandardPaths::standardLocations(QStandardPaths::PicturesLocation)[0].append(screenshotDirSuffix);
-	else
-		screenshotDir = userDir.append(screenshotDirSuffix);
-
+	// Wasn't set path to screenshots directory via --screenshot-dir?
+	if (screenshotDir.isEmpty())
+	{
+		QString screenshotDirSuffix = "/Stellarium";
+		if (!QStandardPaths::standardLocations(QStandardPaths::PicturesLocation).isEmpty())
+			screenshotDir = QStandardPaths::standardLocations(QStandardPaths::PicturesLocation)[0].append(screenshotDirSuffix);
+		else
+			screenshotDir = userDir.append(screenshotDirSuffix);
+	}
 	makeSureDirExistsAndIsWritable(screenshotDir);
 }
 
@@ -398,17 +401,8 @@ QString StelFileMgr::getScreenshotDir()
 
 void StelFileMgr::setScreenshotDir(const QString& newDir)
 {
+	makeSureDirExistsAndIsWritable(newDir);
 	QFileInfo userDirFI(newDir);
-	if (!userDirFI.exists() || !userDirFI.isDir())
-	{
-		qWarning() << "WARNING StelFileMgr::setScreenshotDir dir does not exist: " << QDir::toNativeSeparators(userDirFI.filePath());
-		throw std::runtime_error("NOT_VALID");
-	}
-	else if (!userDirFI.isWritable())
-	{
-		qWarning() << "WARNING StelFileMgr::setScreenshotDir dir is not writable: " << QDir::toNativeSeparators(userDirFI.filePath());
-		throw std::runtime_error("NOT_VALID");
-	}
 	screenshotDir = userDirFI.filePath();
 }
 

@@ -370,6 +370,8 @@ void StelApp::init(QSettings* conf)
 	confSettings = conf;
 
 	devicePixelsPerPixel = QOpenGLContext::currentContext()->screen()->devicePixelRatio();
+
+	setBaseFontSize(confSettings->value("gui/base_font_size", 13).toInt());
 	
 	core = new StelCore();
 	if (saveProjW!=-1 && saveProjH!=-1)

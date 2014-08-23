@@ -59,7 +59,6 @@ ConstellationMgr::ConstellationMgr(StarMgr *_hip_stars)
 	setObjectName("ConstellationMgr");
 	Q_ASSERT(hipStarMgr);
 	isolateSelected = false;
-	asterFont.setPixelSize(15);
 }
 
 ConstellationMgr::~ConstellationMgr()
@@ -88,12 +87,12 @@ void ConstellationMgr::init()
 	asterFont.setPixelSize(conf->value("viewing/constellation_font_size", 14).toInt());
 	setFlagLines(conf->value("viewing/flag_constellation_drawing").toBool());
 	setFlagLabels(conf->value("viewing/flag_constellation_name").toBool());
-	setFlagBoundaries(conf->value("viewing/flag_constellation_boundaries",false).toBool());
+	setFlagBoundaries(conf->value("viewing/flag_constellation_boundaries",false).toBool());	
 	setArtIntensity(conf->value("viewing/constellation_art_intensity", 0.5f).toFloat());
 	setArtFadeDuration(conf->value("viewing/constellation_art_fade_duration",2.f).toFloat());
 	setFlagArt(conf->value("viewing/flag_constellation_art").toBool());
 	setFlagIsolateSelected(conf->value("viewing/flag_constellation_isolate_selected",
-					   conf->value("viewing/flag_constellation_pick", false).toBool() ).toBool());
+			       conf->value("viewing/flag_constellation_pick", false).toBool() ).toBool());
 
 	StelObjectMgr *objectManager = GETSTELMODULE(StelObjectMgr);
 	objectManager->registerStelObjectMgr(this);
@@ -1095,7 +1094,7 @@ void ConstellationMgr::drawBoundaries(StelPainter& sPainter) const
 	for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
 	{
 		(*iter)->drawBoundaryOptim(sPainter);
-	}
+	}	
 }
 
 StelObjectP ConstellationMgr::searchByNameI18n(const QString& nameI18n) const

@@ -31,6 +31,7 @@ private slots:
 	void testDMSToRad();
 	void testRadToHMS();
 	void testRadToDMS();
+	void testDDToDMS();
 };
 
 #endif // _TESTCONVERSIONS_HPP_

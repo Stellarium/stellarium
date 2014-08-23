@@ -44,6 +44,7 @@ public slots:
 	void preprocessScript();
 	void scriptEnded();
 	void appendLogLine(const QString& s);
+	void appendOutputLine(const QString& s);
 	void includeBrowse();
 	void quickRun(int idx);
 	void rowColumnChanged();

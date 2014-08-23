@@ -2,6 +2,7 @@
  * Stellarium
  * Copyright (C) 2002 Fabien Chereau (some old code from the Planet class)
  * Copyright (C) 2010 Bogdan Marinov
+ * Copyright (C) 2013-14 Georg Zotti (accuracy&speedup)
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -141,16 +142,8 @@ MinorPlanet::~MinorPlanet()
 void MinorPlanet::setSemiMajorAxis(double value)
 {
 	semiMajorAxis = value;
-	// GZ: patched for 2012DA14 and other NEA rendez-vous:
-	if (semiMajorAxis < 1.666)
-	{
-		deltaJD = 0.1*StelCore::JD_SECOND;
-	}
-	if (semiMajorAxis < 1.25)
-	{
-		deltaJD = 0.001*StelCore::JD_SECOND;
-	}
-
+	// GZ: in case we have very many asteroids, this helps improving speed usually without sacrificing accuracy:
+	deltaJD = 2.0*semiMajorAxis*StelCore::JD_SECOND;
 }
 
 void MinorPlanet::setMinorPlanetNumber(int number)
@@ -274,12 +267,6 @@ QString MinorPlanet::getInfoString(const StelCore *core, const InfoStringGroup &
 		oss << q_("Sidereal period: %1 days (%2 a)").arg(QString::number(siderealPeriod, 'f', 2)).arg(QString::number(siderealPeriod/365.25, 'f', 3)) << "<br>";
 	}
 
-	//This doesn't work, even if setOpenExternalLinks(true) is used in InfoPanel
-	/*
-	if (flags&Extra)
-		oss << QString("<br><a href=\"http://ssd.jpl.nasa.gov/sbdb.cgi?sstr=%1\">JPL Small-Body Database Browser</a>").arg( (minorPlanetNumber) ? QString::number(minorPlanetNumber) : englishName );
-	*/
-
 	postProcessInfoString(str, flags);
 
 	return str;
@@ -306,26 +293,25 @@ float MinorPlanet::getVMagnitude(const StelCore* core) const
 
 	//Calculate phase angle
 	//(Code copied from Planet::getVMagnitude())
-	//(LOL, this is actually vector subtraction + the cosine theorem :))
+	//(this is actually vector subtraction + the cosine theorem :))
+	// GZ Try now in float... speed difference is negligible, though.
 	const Vec3d& observerHelioPos = core->getObserverHeliocentricEclipticPos();
-	const double observerRq = observerHelioPos.lengthSquared();
+	const float observerRq = observerHelioPos.lengthSquared();
 	const Vec3d& planetHelioPos = getHeliocentricEclipticPos();
-	const double planetRq = planetHelioPos.lengthSquared();
-	const double observerPlanetRq = (observerHelioPos - planetHelioPos).lengthSquared();
-	const double cos_chi = (observerPlanetRq + planetRq - observerRq)/(2.0*sqrt(observerPlanetRq*planetRq));
-	double phaseAngle = std::acos(cos_chi);
+	const float planetRq = planetHelioPos.lengthSquared();
+	const float observerPlanetRq = (observerHelioPos - planetHelioPos).lengthSquared();
+	const float cos_chi = (observerPlanetRq + planetRq - observerRq)/(2.0*std::sqrt(observerPlanetRq*planetRq));
+	const float phaseAngle = std::acos(cos_chi);
 
 	//Calculate reduced magnitude (magnitude without the influence of distance)
 	//Source of the formulae: http://www.britastro.org/asteroids/dymock4.pdf
-	const double phi1 = std::exp(-3.33 * std::pow(std::tan(phaseAngle/2), 0.63));
-	const double phi2 = std::exp(-1.87 * std::pow(std::tan(phaseAngle/2), 1.22));
-	double reducedMagnitude = absoluteMagnitude - 2.5 * std::log10( (1 - slopeParameter) * phi1 + slopeParameter * phi2 );
+	const float tanPhaseAngleHalf=std::tan(phaseAngle*0.5f);
+	const float phi1 = std::exp(-3.33f * std::pow(tanPhaseAngleHalf, 0.63f));
+	const float phi2 = std::exp(-1.87f * std::pow(tanPhaseAngleHalf, 1.22f));
+	float reducedMagnitude = absoluteMagnitude - 2.5f * std::log10( (1.0f - slopeParameter) * phi1 + slopeParameter * phi2 );
 
 	//Calculate apparent magnitude
-	//TODO: See if you can "collapse" some calculations
-	// -- GZ: NO! This is also in Meeus, Astr.Alg. 1998, p.231 and authoritative by IAU commission 20, New Delhi November 1985.
-	//       (you can collapse and leave away the reducedMagnitude varable, but this is cosmetic)
-	double apparentMagnitude = reducedMagnitude + 5 * std::log10(std::sqrt(planetRq * observerPlanetRq));
+	float apparentMagnitude = reducedMagnitude + 5.0f * std::log10(std::sqrt(planetRq * observerPlanetRq));
 
 	return apparentMagnitude;
 }
@@ -357,8 +343,6 @@ QString MinorPlanet::renderProvisionalDesignationinHtml(QString plainTextName)
 	}
 	else
 	{
-		//qDebug() << "renderProvisionalDesignationinHtml():" << plainTextName
-		//         << "is not a provisional designation in plain text.";
 		return QString();
 	}
 }

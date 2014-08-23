@@ -361,34 +361,34 @@ void StelMainScriptAPI::setDiskViewport(bool b)
 }
 
 void StelMainScriptAPI::loadSkyImage(const QString& id, const QString& filename,
-						 double ra0, double dec0,
-						 double ra1, double dec1,
-						 double ra2, double dec2,
-						 double ra3, double dec3,
-								 double minRes, double maxBright, bool visible)
+				     double ra0, double dec0,
+				     double ra1, double dec1,
+				     double ra2, double dec2,
+				     double ra3, double dec3,
+				     double minRes, double maxBright, bool visible)
 {
 	QString path = "scripts/" + filename;
 	emit(requestLoadSkyImage(id, path, ra0, dec0, ra1, dec1, ra2, dec2, ra3, dec3, minRes, maxBright, visible));
 }
 
 void StelMainScriptAPI::loadSkyImage(const QString& id, const QString& filename,
-									 const QString& ra0, const QString& dec0,
-									 const QString& ra1, const QString& dec1,
-									 const QString& ra2, const QString& dec2,
-									 const QString& ra3, const QString& dec3,
-									 double minRes, double maxBright, bool visible)
+				     const QString& ra0, const QString& dec0,
+				     const QString& ra1, const QString& dec1,
+				     const QString& ra2, const QString& dec2,
+				     const QString& ra3, const QString& dec3,
+				     double minRes, double maxBright, bool visible)
 {
 	loadSkyImage(id, filename,
-				 StelUtils::getDecAngle(ra0) *180./M_PI, StelUtils::getDecAngle(dec0)*180./M_PI,
-				 StelUtils::getDecAngle(ra1) *180./M_PI, StelUtils::getDecAngle(dec1)*180./M_PI,
-				 StelUtils::getDecAngle(ra2) *180./M_PI, StelUtils::getDecAngle(dec2)*180./M_PI,
-				 StelUtils::getDecAngle(ra3) *180./M_PI, StelUtils::getDecAngle(dec3)*180./M_PI,
-				 minRes, maxBright, visible);
+		     StelUtils::getDecAngle(ra0) *180./M_PI, StelUtils::getDecAngle(dec0)*180./M_PI,
+		     StelUtils::getDecAngle(ra1) *180./M_PI, StelUtils::getDecAngle(dec1)*180./M_PI,
+		     StelUtils::getDecAngle(ra2) *180./M_PI, StelUtils::getDecAngle(dec2)*180./M_PI,
+		     StelUtils::getDecAngle(ra3) *180./M_PI, StelUtils::getDecAngle(dec3)*180./M_PI,
+		     minRes, maxBright, visible);
 }
 
 void StelMainScriptAPI::loadSkyImage(const QString& id, const QString& filename,
-									 double ra, double dec, double angSize, double rotation,
-									 double minRes, double maxBright, bool visible)
+				     double ra, double dec, double angSize, double rotation,
+				     double minRes, double maxBright, bool visible)
 {
 	Vec3f XYZ;
 	static const float RADIUS_NEB = 1.;
@@ -396,15 +396,15 @@ void StelMainScriptAPI::loadSkyImage(const QString& id, const QString& filename,
 	XYZ*=RADIUS_NEB;
 	float texSize = RADIUS_NEB * sin(angSize/2/60*M_PI/180);
 	Mat4f matPrecomp = Mat4f::translation(XYZ) *
-					   Mat4f::zrotation(ra*M_PI/180.) *
-					   Mat4f::yrotation(-dec*M_PI/180.) *
-					   Mat4f::xrotation(rotation*M_PI/180.);
+			   Mat4f::zrotation(ra*M_PI/180.) *
+			   Mat4f::yrotation(-dec*M_PI/180.) *
+			   Mat4f::xrotation(rotation*M_PI/180.);
 
 	Vec3f corners[4];
-		corners[0] = matPrecomp * Vec3f(0.f,-texSize,-texSize);
-		corners[1] = matPrecomp * Vec3f(0.f,-texSize, texSize);
-		corners[2] = matPrecomp * Vec3f(0.f, texSize,-texSize);
-		corners[3] = matPrecomp * Vec3f(0.f, texSize, texSize);
+	corners[0] = matPrecomp * Vec3f(0.f,-texSize,-texSize);
+	corners[1] = matPrecomp * Vec3f(0.f,-texSize, texSize);
+	corners[2] = matPrecomp * Vec3f(0.f, texSize,-texSize);
+	corners[3] = matPrecomp * Vec3f(0.f, texSize, texSize);
 
 	// convert back to ra/dec (radians)
 	Vec3f cornersRaDec[4];
@@ -412,38 +412,40 @@ void StelMainScriptAPI::loadSkyImage(const QString& id, const QString& filename,
 		StelUtils::rectToSphe(&cornersRaDec[i][0], &cornersRaDec[i][1], corners[i]);
 
 	loadSkyImage(id, filename,
-				 cornersRaDec[0][0]*180./M_PI, cornersRaDec[0][1]*180./M_PI,
-				 cornersRaDec[1][0]*180./M_PI, cornersRaDec[1][1]*180./M_PI,
-				 cornersRaDec[3][0]*180./M_PI, cornersRaDec[3][1]*180./M_PI,
-				 cornersRaDec[2][0]*180./M_PI, cornersRaDec[2][1]*180./M_PI,
-				 minRes, maxBright, visible);
+		     cornersRaDec[0][0]*180./M_PI, cornersRaDec[0][1]*180./M_PI,
+		     cornersRaDec[1][0]*180./M_PI, cornersRaDec[1][1]*180./M_PI,
+		     cornersRaDec[3][0]*180./M_PI, cornersRaDec[3][1]*180./M_PI,
+		     cornersRaDec[2][0]*180./M_PI, cornersRaDec[2][1]*180./M_PI,
+		     minRes, maxBright, visible);
 }
 
 
 
 void StelMainScriptAPI::loadSkyImage(const QString& id, const QString& filename,
-									 const QString& ra, const QString& dec, double angSize, double rotation,
-									 double minRes, double maxBright, bool visible)
+				     const QString& ra, const QString& dec,
+				     double angSize, double rotation,
+				     double minRes, double maxBright, bool visible)
 {
 	loadSkyImage(id, filename, StelUtils::getDecAngle(ra)*180./M_PI,
-				 StelUtils::getDecAngle(dec)*180./M_PI, angSize,
-				 rotation, minRes, maxBright, visible);
+		     StelUtils::getDecAngle(dec)*180./M_PI, angSize,
+		     rotation, minRes, maxBright, visible);
 }
 
 void StelMainScriptAPI::loadSkyImageAltAz(const QString& id, const QString& filename,
-						 double alt0, double azi0,
-						 double alt1, double azi1,
-						 double alt2, double azi2,
-						 double alt3, double azi3,
-								 double minRes, double maxBright, bool visible)
+					  double alt0, double azi0,
+					  double alt1, double azi1,
+					  double alt2, double azi2,
+					  double alt3, double azi3,
+					  double minRes, double maxBright, bool visible)
 {
 	QString path = "scripts/" + filename;
 	emit(requestLoadSkyImageAltAz(id, path, alt0, azi0, alt1, azi1, alt2, azi2, alt3, azi3, minRes, maxBright, visible));
 }
 
 void StelMainScriptAPI::loadSkyImageAltAz(const QString& id, const QString& filename,
-									 double alt, double azi, double angSize, double rotation,
-									 double minRes, double maxBright, bool visible)
+					  double alt, double azi,
+					  double angSize, double rotation,
+					  double minRes, double maxBright, bool visible)
 {
 	Vec3f XYZ;
 	static const float RADIUS_NEB = 1.;
@@ -452,15 +454,15 @@ void StelMainScriptAPI::loadSkyImageAltAz(const QString& id, const QString& file
 	XYZ*=RADIUS_NEB;
 	float texSize = RADIUS_NEB * sin(angSize/2/60*M_PI/180);
 	Mat4f matPrecomp = Mat4f::translation(XYZ) *
-					   Mat4f::zrotation((180-azi)*M_PI/180.) *
-					   Mat4f::yrotation(-alt*M_PI/180.) *
-					   Mat4f::xrotation((rotation+90)*M_PI/180.);
+			   Mat4f::zrotation((180-azi)*M_PI/180.) *
+			   Mat4f::yrotation(-alt*M_PI/180.) *
+			   Mat4f::xrotation((rotation+90)*M_PI/180.);
 
 	Vec3f corners[4];
-		corners[0] = matPrecomp * Vec3f(0.f,-texSize,-texSize);
-		corners[1] = matPrecomp * Vec3f(0.f,-texSize, texSize);
-		corners[2] = matPrecomp * Vec3f(0.f, texSize,-texSize);
-		corners[3] = matPrecomp * Vec3f(0.f, texSize, texSize);
+	corners[0] = matPrecomp * Vec3f(0.f,-texSize,-texSize);
+	corners[1] = matPrecomp * Vec3f(0.f,-texSize, texSize);
+	corners[2] = matPrecomp * Vec3f(0.f, texSize,-texSize);
+	corners[3] = matPrecomp * Vec3f(0.f, texSize, texSize);
 
 	// convert back to alt/azi (radians)
 	Vec3f cornersAltAz[4];
@@ -468,11 +470,11 @@ void StelMainScriptAPI::loadSkyImageAltAz(const QString& id, const QString& file
 		StelUtils::rectToSphe(&cornersAltAz[i][0], &cornersAltAz[i][1], corners[i]);
 
 	loadSkyImageAltAz(id, filename,
-				 cornersAltAz[0][0]*180./M_PI, cornersAltAz[0][1]*180./M_PI,
-				 cornersAltAz[1][0]*180./M_PI, cornersAltAz[1][1]*180./M_PI,
-				 cornersAltAz[3][0]*180./M_PI, cornersAltAz[3][1]*180./M_PI,
-				 cornersAltAz[2][0]*180./M_PI, cornersAltAz[2][1]*180./M_PI,
-				 minRes, maxBright, visible);
+			  cornersAltAz[0][0]*180./M_PI, cornersAltAz[0][1]*180./M_PI,
+			  cornersAltAz[1][0]*180./M_PI, cornersAltAz[1][1]*180./M_PI,
+			  cornersAltAz[3][0]*180./M_PI, cornersAltAz[3][1]*180./M_PI,
+			  cornersAltAz[2][0]*180./M_PI, cornersAltAz[2][1]*180./M_PI,
+			  minRes, maxBright, visible);
 }
 
 void StelMainScriptAPI::removeSkyImage(const QString& id)
@@ -620,6 +622,11 @@ void StelMainScriptAPI::debug(const QString& s)
 {
 	qDebug() << "script: " << s;
 	StelApp::getInstance().getScriptMgr().debug(s);
+}
+
+void StelMainScriptAPI::output(const QString &s)
+{
+	StelApp::getInstance().getScriptMgr().output(s);
 }
 
 double StelMainScriptAPI::jdFromDateString(const QString& dt, const QString& spec)

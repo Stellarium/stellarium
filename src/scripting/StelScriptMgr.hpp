@@ -136,9 +136,13 @@ public slots:
 	//! execution rate.
 	double getScriptRate();
 
-	//! cause the emission of the scriptDebug signal.  This is so that functions in
+	//! cause the emission of the scriptDebug signal. This is so that functions in
 	//! StelMainScriptAPI can explicitly send information to the ScriptConsole
 	void debug(const QString& msg);
+
+	//! cause the emission of the scriptOutput signal. This is so that functions in
+	//! StelMainScriptAPI can explicitly send information to the ScriptConsole
+	void output(const QString& msg);
 
 	//! Pause a running script.
 	void pauseScript();
@@ -155,7 +159,9 @@ signals:
 	//! Notification when a script has stopped running 
 	void scriptStopped();
 	//! Notification of a script event - warnings, current execution line etc.
-	void scriptDebug(const QString&);
+	void scriptDebug(const QString&);	
+	//! Notification of a script event - output line.
+	void scriptOutput(const QString&);
 
 private:
 	// Utility functions for preprocessor

@@ -168,6 +168,10 @@ public:
 	//! computer screen with 96 pixel per inch (reference for tuning sizes).
 	float getGlobalScalingRatio() const {return globalScalingRatio;}
 	void setGlobalScalingRatio(float r) {globalScalingRatio=r;}
+
+	//! Get the size of font
+	int getBaseFontSize() const { return baseFontSize; }
+	void setBaseFontSize(int s) { baseFontSize=s; }
 	
 	//! Get the GUI instance implementing the abstract GUI interface.
 	StelGuiBase* getGui() const {return stelGui;}
@@ -337,6 +341,8 @@ private:
 	qint64 totalUsedCacheSize;
 
 	QList<StelProgressController*> progressControllers;
+
+	int baseFontSize;
 };
 
 #endif // _STELAPP_HPP_

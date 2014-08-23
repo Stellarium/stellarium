@@ -67,7 +67,7 @@ QFrame#TitleBar {
 	background: none;
 }
 
-#dateTimeDialogForm QSpinBox {
+#dateTimeDialogForm QSpinBox, #dateTimeDialogForm QDoubleSpinBox {
 	border-image: none;
 	border: 0px;
 	background: rgba(0, 0, 0, 0%);
@@ -79,7 +79,7 @@ QFrame#TitleBar {
 	padding-right: 3px;
 }
 
-#dateTimeDialogForm QSpinBox::up-button {
+#dateTimeDialogForm QSpinBox::up-button, #dateTimeDialogForm QDoubleSpinBox::up-button {
 	subcontrol-origin: border;
 	subcontrol-position: top center;
 	margin: 0;
@@ -89,14 +89,14 @@ QFrame#TitleBar {
 	image: none;
 }
 
-#dateTimeDialogForm QSpinBox::up-arrow {
+#dateTimeDialogForm QSpinBox::up-arrow, #dateTimeDialogForm QDoubleSpinBox::up-arrow {
 	image: url(:/graphicGui/spinup.png);
 	subcontrol-origin: border;
 	subcontrol-position: bottom center;
 	padding-bottom: 20px;
 }
 
-#dateTimeDialogForm QSpinBox::down-button {
+#dateTimeDialogForm QSpinBox::down-button, #dateTimeDialogForm QDoubleSpinBox::down-button {
 	subcontrol-origin: border;
 	subcontrol-position: bottom center;
 	margin: 0;
@@ -106,7 +106,7 @@ QFrame#TitleBar {
 	image: none;
 }
 
-#dateTimeDialogForm QSpinBox::down-arrow {
+#dateTimeDialogForm QSpinBox::down-arrow, #dateTimeDialogForm QDoubleSpinBox::down-arrow {
 	image: url(:/graphicGui/spindown.png);
 	subcontrol-origin: border;
 	subcontrol-position: top center;

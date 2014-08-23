@@ -25,6 +25,9 @@
 #include "CLIProcessor.hpp"
 #include "StelIniParser.hpp"
 #include "StelUtils.hpp"
+#ifndef DISABLE_SCRIPTING
+#include "StelScriptOutput.hpp"
+#endif
 
 #include <QDebug>
 
@@ -289,6 +292,14 @@ int main(int argc, char **argv)
 	Q_ASSERT(confSettings);
 	qDebug() << "Config file is: " << QDir::toNativeSeparators(configFileFullPath);
 
+	#ifndef DISABLE_SCRIPTING
+	QString outputFile = StelFileMgr::getUserDir()+"/output.txt";
+	if (confSettings->value("main/use_separate_output_file", false).toBool())
+		outputFile = StelFileMgr::getUserDir()+"/output-"+QDateTime::currentDateTime().toString("yyyyMMdd-HHmmss")+".txt";
+	StelScriptOutput::init(outputFile);
+	#endif
+
+
 	// Override config file values from CLI.
 	CLIProcessor::parseCLIArgsPostConfig(argList, confSettings);
 
@@ -342,10 +353,10 @@ int main(int argc, char **argv)
 		appCanRun = false;
 	}
 
-	if (!(QGLFormat::openGLVersionFlags() & QGLFormat::OpenGL_Version_2_1) && !(QGLFormat::openGLVersionFlags() & QGLFormat::OpenGL_ES_Version_2_0)) // Check supported version of OpenGL
+	if (!(QGLFormat::openGLVersionFlags() & QGLFormat::OpenGL_Version_3_0) && !(QGLFormat::openGLVersionFlags() & QGLFormat::OpenGL_ES_Version_2_0)) // Check supported version of OpenGL
 	{
-		// OK, minimal required version of OpenGL is 2.1 (OpenGL ES is 2.0). If platform does not support this
-		// version then say to user about troubles and quit from application.
+		// OK, minimal required version of OpenGL is 3.0 and OpenGL Shading Language is 1.30 (or OpenGL ES is 2.0 and GLSL ES is 2.0).
+		// If platform does not support this version then say to user about troubles and quit from application.
 		#ifdef Q_OS_WIN
 		qWarning() << "Oops... Insufficient OpenGL version. Please update drivers, graphics hardware, or use MESA (or ANGLE) version.";
 		QMessageBox::warning(0, "Stellarium", q_("Insufficient OpenGL version. Please update drivers, graphics hardware, or use MESA (or ANGLE) version."));

@@ -279,6 +279,8 @@ ENDIF()
 
 IF(ENABLE_SCRIPTING)
 	SET(stellarium_lib_SRCS ${stellarium_lib_SRCS}
+		scripting/StelScriptOutput.hpp
+		scripting/StelScriptOutput.cpp
 		scripting/StelScriptMgr.cpp
 		scripting/StratoscriptPreprocessor.cpp
 		scripting/StelScriptMgr.hpp
