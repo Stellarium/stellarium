@@ -109,6 +109,7 @@ public:
 	void updateAddOnStatus(QString idInstall, int installed);
 
 	QHash<QString, QString> getThumbnails();
+	QStringList getListOfTextures(int addonId);
 	QString getLanguagePackType(const QString& checksum);
 
 private:

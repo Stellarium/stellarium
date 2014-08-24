@@ -352,6 +352,28 @@ QHash<QString, QString> StelAddOnDAO::getThumbnails()
 	return res;
 }
 
+QStringList StelAddOnDAO::getListOfTextures(int addonId)
+{
+	if (addonId < 1) {
+		qWarning() << "Add-On DAO ListOfTextures: Invalid addonId!";
+		return QStringList();
+	}
+
+	QSqlQuery query(m_db);
+	query.prepare("SELECT textures FROM texture WHERE addon=:id");
+	query.bindValue(":id", addonId);
+	if (!query.exec()) {
+		qWarning() << "Add-On DAO ListOfTextures:" << m_db.lastError();
+		return QStringList();
+	}
+
+	QStringList res;
+	if (query.next()) {
+		res = query.value(0).toString().split(",");
+	}
+	return res;
+}
+
 QString StelAddOnDAO::getLanguagePackType(const QString& checksum)
 {
 	if (checksum.isEmpty()) {

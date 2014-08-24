@@ -31,7 +31,7 @@ class AddOnWidget : public QWidget
 {
 Q_OBJECT
 public:
-	AddOnWidget(QWidget *parent = 0);
+	AddOnWidget(QWidget* parent);
 	virtual ~AddOnWidget();
 
 	void init(int addonId);

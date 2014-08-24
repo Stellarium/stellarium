@@ -19,11 +19,12 @@
 
 #include <QStringBuilder>
 #include <QPainter>
+#include <QtDebug>
 
 #include "AddOnWidget.hpp"
 #include "ui_addonWidget.h"
 
-AddOnWidget::AddOnWidget(QWidget *parent)
+AddOnWidget::AddOnWidget(QWidget* parent)
 	: QWidget(parent)
 	, ui(new Ui_AddOnWidget)
 	, m_pStelAddOnDAO(StelApp::getInstance().getStelAddOnMgr().getStelAddOnDAO())
@@ -85,5 +86,15 @@ void AddOnWidget::init(int addonId)
 		thumbnail = thumbnail.scaled(100, 100, Qt::KeepAspectRatio, Qt::SmoothTransformation);
 		ui->thumbnail->setPixmap(thumbnail);
 		ui->thumbnail->resize(thumbnail.size());
+	}
+
+	// List of files - applicable only for textures
+	if (parentWidget()->objectName() == "texturesTableView")
+	{
+		ui->listWidget->insertItems(0, m_pStelAddOnDAO->getListOfTextures(addonId));
+	}
+	else
+	{
+		ui->listWidget->setVisible(false);
 	}
 }
