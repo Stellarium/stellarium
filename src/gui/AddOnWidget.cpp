@@ -89,12 +89,14 @@ void AddOnWidget::init(int addonId)
 	}
 
 	// List of files - applicable only for textures
+	ui->listWidget->setVisible(false);
 	if (parentWidget()->objectName() == "texturesTableView")
 	{
-		ui->listWidget->insertItems(0, m_pStelAddOnDAO->getListOfTextures(addonId));
-	}
-	else
-	{
-		ui->listWidget->setVisible(false);
+		QStringList textures = m_pStelAddOnDAO->getListOfTextures(addonId);
+		if (textures.size() > 1)
+		{
+			ui->listWidget->insertItems(0, textures);
+			ui->listWidget->setVisible(true);
+		}
 	}
 }
