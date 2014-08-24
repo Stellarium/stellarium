@@ -911,3 +911,8 @@ AddOnWidget QTextBrowser {
 	color: rgb(220, 223, 214);
 	background-color: rgba(31, 31, 31, 75%);
 }
+
+AddOnWidget QListWidget {
+	font-size: 8px;
+	background-color: rgba(31, 31, 31, 75%);
+}
