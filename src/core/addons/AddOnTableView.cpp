@@ -36,6 +36,7 @@ AddOnTableView::AddOnTableView(QWidget* parent)
 	setAlternatingRowColors(false);
 	setSelectionBehavior(QAbstractItemView::SelectRows);
 	setSelectionMode(QAbstractItemView::SingleSelection);
+	setFocusPolicy(Qt::NoFocus);
 	setEditTriggers(false);
 	setShowGrid(false);
 
