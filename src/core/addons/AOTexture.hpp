@@ -43,6 +43,10 @@ private:
 	StelAddOnDAO* m_pStelAddOnDAO;
 	const QString m_sTexturesInstallDir;
 
+	// In order to enable us to know which are the installed textures,
+	// it will store the texture name and the id_install (enough to identify the source)
+	QSettings* m_pInstalledTextures;
+
 	bool installFromZip(QString idInstall, QString downloadedFilepath) const;
 	bool installFromImg(QString idInstall, QString downloadedFilepath) const;
 };

@@ -17,11 +17,14 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
+#include <QSettings>
+
 #include "AOTexture.hpp"
 
 AOTexture::AOTexture(StelAddOnDAO* pStelAddOnDAO)
 	: m_pStelAddOnDAO(pStelAddOnDAO)
 	, m_sTexturesInstallDir(StelFileMgr::getUserDir() % "/textures/")
+	, m_pInstalledTextures(new QSettings(m_sTexturesInstallDir % "installedTextures.ini", QSettings::IniFormat))
 {
 	StelFileMgr::makeSureDirExistsAndIsWritable(m_sTexturesInstallDir);
 }
@@ -77,12 +80,16 @@ bool AOTexture::installFromZip(QString idInstall, QString downloadedFilepath) co
 		{
 			continue;
 		}
+
 		QFile file(m_sTexturesInstallDir % info.filePath);
 		file.remove(); // overwrite
 		QByteArray data = reader.fileData(info.filePath);
 		file.open(QIODevice::WriteOnly);
 		file.write(data);
 		file.close();
+
+		m_pInstalledTextures->setValue(info.filePath, idInstall);
+
 		qDebug() << "Add-On Texture: New texture installed:" << info.filePath;
 	}
 
@@ -91,18 +98,18 @@ bool AOTexture::installFromZip(QString idInstall, QString downloadedFilepath) co
 
 bool AOTexture::installFromImg(QString idInstall, QString downloadedFilepath) const
 {
-	QFile downloadedFile(downloadedFilepath);
-	QString destination = m_sTexturesInstallDir % downloadedFile.fileName();
+	QString filename = QFileInfo(downloadedFilepath).fileName();
+	QString destination = m_sTexturesInstallDir % filename;
 	QFile(destination).remove();
-	if (!downloadedFile.copy(destination))
+	if (!QFile(downloadedFilepath).copy(destination))
 	{
-		qWarning() << "Add-On Texture: Unable to install"
-			   << QDir::toNativeSeparators(downloadedFile.fileName());
+		qWarning() << "Add-On Texture: Unable to install" << filename;
 		return false;
 	}
 
-	qDebug() << "Add-On Texture: New texture installed:"
-		 << QDir::toNativeSeparators(downloadedFile.fileName());
+	m_pInstalledTextures->setValue(filename, idInstall);
+
+	qDebug() << "Add-On Texture: New texture installed:" << filename;
 	return true;
 }
 
