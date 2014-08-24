@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-08-22 07:29+0700\n"
-"PO-Revision-Date: 2014-08-18 15:27+0000\n"
+"PO-Revision-Date: 2014-08-23 15:05+0000\n"
 "Last-Translator: chyngyz <Unknown>\n"
 "Language-Team: Kirghiz <ky@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-08-23 06:22+0000\n"
+"X-Launchpad-Export-Date: 2014-08-24 05:59+0000\n"
 "X-Generator: Launchpad (build 17163)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:106 src/core/modules/StarMgr.cpp:338
@@ -73,51 +73,51 @@ msgstr "Горизонт"
 
 #: src/core/modules/GridLinesMgr.cpp:564
 msgid "Galactic Plane"
-msgstr "Галактика тегиздиги"
+msgstr "Галактиканын тегиздиги"
 
 #: src/core/modules/GridLinesMgr.cpp:698
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:331
 msgid "Equatorial grid"
-msgstr "Экватор тору"
+msgstr "Экватордун торчосу"
 
 #: src/core/modules/GridLinesMgr.cpp:699 src/ui_viewDialog.h:1226
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:326
 msgid "Azimuthal grid"
-msgstr "Азимут тору"
+msgstr "Азимуттун торчосу"
 
 #: src/core/modules/GridLinesMgr.cpp:700
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:346
 msgid "Ecliptic line"
-msgstr "Эклиптика сызыгы"
+msgstr "Эклиптиканын сызыгы"
 
 #: src/core/modules/GridLinesMgr.cpp:701
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:341
 msgid "Equator line"
-msgstr "Экватор сызыгы"
+msgstr "Экватордун сызыгы"
 
 #: src/core/modules/GridLinesMgr.cpp:702
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:321
 msgid "Meridian line"
-msgstr "Меридиан сызыгы"
+msgstr "Меридиандын сызыгы"
 
 #: src/core/modules/GridLinesMgr.cpp:703
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:360
 msgid "Horizon line"
-msgstr "Горизонт сызыгы"
+msgstr "Горизонттун сызыгы"
 
 #: src/core/modules/GridLinesMgr.cpp:704
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:336
 msgid "Equatorial J2000 grid"
-msgstr "Экватор тору J2000"
+msgstr "Экватордун торчосу J2000"
 
 #: src/core/modules/GridLinesMgr.cpp:705
 msgid "Ecliptic J2000 grid"
-msgstr "Эклиптика тору J2000"
+msgstr "Эклиптиканын торчосу J2000"
 
 #: src/core/modules/GridLinesMgr.cpp:706 src/ui_viewDialog.h:1227
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:365
 msgid "Galactic grid"
-msgstr "Галактика тору"
+msgstr "Галактиканын торчосу"
 
 #: src/core/modules/GridLinesMgr.cpp:707 src/ui_viewDialog.h:1247
 msgid "Galactic plane"
@@ -129,12 +129,12 @@ msgstr "Атмосфера"
 
 #: src/core/modules/LandscapeMgr.cpp:356
 msgid "Fog"
-msgstr "Чаң-түтүн"
+msgstr "Туман"
 
 #: src/core/modules/LandscapeMgr.cpp:357 src/ui_viewDialog.h:1248
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:303
 msgid "Cardinal points"
-msgstr "Дүйнө тараптары"
+msgstr "Дүйнөнүн тараптары"
 
 #: src/core/modules/LandscapeMgr.cpp:358
 msgid "Ground"
@@ -155,7 +155,7 @@ msgstr ", %1 м"
 
 #: src/core/modules/LandscapeMgr.cpp:597
 msgid "Planet: "
-msgstr "Планетасы: "
+msgstr "Планета: "
 
 #: src/core/modules/Nebula.cpp:104 src/core/modules/Planet.cpp:146
 #: src/core/modules/MinorPlanet.cpp:209 src/core/modules/Comet.cpp:146
@@ -166,7 +166,7 @@ msgstr "Планетасы: "
 #: plugins/Pulsars/src/Pulsar.cpp:157 plugins/Exoplanets/src/Exoplanet.cpp:177
 #, qt-format
 msgid "Type: <b>%1</b>"
-msgstr "Түрү: <b>%1</b>"
+msgstr "Тиби: <b>%1</b>"
 
 #: src/core/modules/Nebula.cpp:109 src/core/modules/Planet.cpp:152
 #: src/core/modules/MinorPlanet.cpp:215 src/core/modules/Comet.cpp:152
@@ -215,11 +215,11 @@ msgstr "Шардык жылдыз чогулушу"
 
 #: src/core/modules/Nebula.cpp:384
 msgid "Nebula"
-msgstr "Жыбыраган калың жылдыз"
+msgstr "Тумандуулук"
 
 #: src/core/modules/Nebula.cpp:387
 msgid "Planetary nebula"
-msgstr "Планетарийлик жыбыраган калың жылдыз"
+msgstr "Планетарийлик тумандуулук"
 
 #: src/core/modules/Nebula.cpp:390
 msgid "Dark Nebula"
@@ -227,7 +227,7 @@ msgstr ""
 
 #: src/core/modules/Nebula.cpp:393
 msgid "Cluster associated with nebulosity"
-msgstr "Жылдыз чогулушу, жыбыраган калың жылдыз менен байланышкан"
+msgstr "Тумандуулук менен байланыштуу жылдыз чогулушу"
 
 #: src/core/modules/Nebula.cpp:396
 msgid "Unknown"
@@ -235,7 +235,7 @@ msgstr "Белгисиз"
 
 #: src/core/modules/Nebula.cpp:399
 msgid "Undocumented type"
-msgstr "Документтелбеген түр"
+msgstr "Документтелбеген тип"
 
 #: src/core/modules/NebulaMgr.cpp:126
 msgid "Deep-sky objects"
@@ -400,7 +400,7 @@ msgstr ""
 #: src/core/modules/StarWrapper.cpp:168
 #, qt-format
 msgid "Type: <b>%1, %2</b>"
-msgstr "Түрү: <b>%1, %2</b>"
+msgstr "Тиби: <b>%1, %2</b>"
 
 #: src/core/modules/StarWrapper.cpp:207
 #, qt-format
@@ -423,7 +423,7 @@ msgstr "Аралыгы: %1 жарыктык жылы"
 #: plugins/Exoplanets/src/Exoplanet.cpp:201
 #, qt-format
 msgid "Spectral Type: %1"
-msgstr "Спектр түрү: %1"
+msgstr "Спектрдик тиби: %1"
 
 #: src/core/modules/StarWrapper.cpp:224
 #, qt-format
@@ -478,7 +478,7 @@ msgstr "Космостук аппарат"
 #: src/ui_dateTimeDialogGui.h:365
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:172
 msgid "Date and Time"
-msgstr "Күн жана убакыт"
+msgstr "Дата жана убакыт"
 
 #: src/core/StelCore.cpp:184 src/core/StelMovementMgr.cpp:129
 msgid "Movement and Selection"
@@ -486,23 +486,23 @@ msgstr "Ташуу жана тандоо"
 
 #: src/core/StelCore.cpp:187
 msgid "Increase time speed"
-msgstr "Убакыттын жүрүшүн тездетүү"
+msgstr "Убакыттын ылдамдыгын жогорулатуу"
 
 #: src/core/StelCore.cpp:188
 msgid "Decrease time speed"
-msgstr "Убакыттын жүрүшүн басаңдатуу"
+msgstr "Убакыттын ылдамдыгын төмөндөтүү"
 
 #: src/core/StelCore.cpp:189
 msgid "Increase time speed (a little)"
-msgstr "Убакыттын өтүшүн ылдамдатуу (кичине)"
+msgstr "Убакыттын ылдамдыгын (бир аз) жогорулатуу"
 
 #: src/core/StelCore.cpp:190
 msgid "Decrease time speed (a little)"
-msgstr "Убакыттын өтүшүн басаңдатуу (кичине)"
+msgstr "Убакыттын ылдамдыгын (бир аз) төмөндөтүү"
 
 #: src/core/StelCore.cpp:191
 msgid "Set normal time rate"
-msgstr "Убакыттын кадимкидей жүрүшү"
+msgstr "Убакыттын ылдамдыгын түшүрүү"
 
 #: src/core/StelCore.cpp:192
 msgid "Set time rate to zero"
@@ -510,7 +510,7 @@ msgstr "Убакытты токтотуу"
 
 #: src/core/StelCore.cpp:193
 msgid "Set time to now"
-msgstr "Кезектеги убакыт"
+msgstr "Убакытты азырга коюу"
 
 #: src/core/StelCore.cpp:194
 msgid "Add 1 solar hour"
