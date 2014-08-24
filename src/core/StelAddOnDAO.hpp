@@ -63,6 +63,7 @@ const QString COLUMN_COUNT = "count";
 const QString COLUMN_MINMAG = "min_mag";
 const QString COLUMN_MAXMAG = "max_mag";
 const QString COLUMN_THUMBNAIL = "thumbnail";
+const QString COLUMN_TEXTURES = "textures";
 
 
 class StelAddOnDAO
