@@ -42,6 +42,9 @@ public:
 private:
 	StelAddOnDAO* m_pStelAddOnDAO;
 	const QString m_sTexturesInstallDir;
+
+	bool installFromZip(QString idInstall, QString downloadedFilepath) const;
+	bool installFromImg(QString idInstall, QString downloadedFilepath) const;
 };
 
 #endif // _AOTEXTURE_HPP_

@@ -41,6 +41,27 @@ QStringList AOTexture::checkInstalledAddOns() const
 bool AOTexture::installFromFile(const QString& idInstall,
 				const QString& downloadedFilepath) const
 {
+	bool installed = false;
+	QString suffix = QFileInfo(downloadedFilepath).suffix();
+	if (suffix == "zip")
+	{
+		installed = installFromZip(idInstall, downloadedFilepath);
+	}
+	else if (suffix == "png")
+	{
+		installed = installFromImg(idInstall, downloadedFilepath);
+	}
+	else
+	{
+		qWarning() << "Add-On Texture: Unable to intall" << idInstall
+			   << "The file found is not a .zip or .png";
+	}
+
+	return installed;
+}
+
+bool AOTexture::installFromZip(QString idInstall, QString downloadedFilepath) const
+{
 	QZipReader reader(downloadedFilepath);
 	if (reader.status() != QZipReader::NoError)
 	{
@@ -79,9 +100,26 @@ bool AOTexture::installFromFile(const QString& idInstall,
 		out.write(data);
 		out.close();
 
-		qWarning() << "Add-On Texture: New texture installed:" << info.filePath;
+		qDebug() << "Add-On Texture: New texture installed:" << info.filePath;
 	}
 
+	return true;
+}
+
+bool AOTexture::installFromImg(QString idInstall, QString downloadedFilepath) const
+{
+	QFile downloadedFile(downloadedFilepath);
+	QString destination = m_sTexturesInstallDir % downloadedFile.fileName();
+	QFile(destination).remove();
+	if (!downloadedFile.copy(destination))
+	{
+		qWarning() << "Add-On Texture: Unable to install"
+			   << QDir::toNativeSeparators(downloadedFile.fileName());
+		return false;
+	}
+
+	qDebug() << "Add-On Texture: New texture installed:"
+		 << QDir::toNativeSeparators(downloadedFile.fileName());
 	return true;
 }
 
