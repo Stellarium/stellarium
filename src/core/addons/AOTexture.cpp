@@ -77,29 +77,12 @@ bool AOTexture::installFromZip(QString idInstall, QString downloadedFilepath) co
 		{
 			continue;
 		}
-
-		QString installedFilePath = m_sTexturesInstallDir % info.filePath;
-		QFile installedFile(installedFilePath);
-		if (!installedFile.exists())
-		{
-			qWarning() << "Add-On Texture: Unable to find the file:"
-				   << QDir::toNativeSeparators(installedFilePath);
-			continue;
-		}
-
-		if (!installedFile.remove())
-		{
-			qWarning() << "Add-On Texture: Unable to overwrite :"
-				   << QDir::toNativeSeparators(installedFilePath);
-			continue;
-		}
-
+		QFile file(m_sTexturesInstallDir % info.filePath);
+		file.remove(); // overwrite
 		QByteArray data = reader.fileData(info.filePath);
-		QFile out(installedFilePath);
-		out.open(QIODevice::WriteOnly);
-		out.write(data);
-		out.close();
-
+		file.open(QIODevice::WriteOnly);
+		file.write(data);
+		file.close();
 		qDebug() << "Add-On Texture: New texture installed:" << info.filePath;
 	}
 
