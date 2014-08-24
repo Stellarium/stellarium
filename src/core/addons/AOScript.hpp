@@ -34,7 +34,7 @@ public:
 
 	// install script from a .ssc or .sts file.
 	virtual bool installFromFile(const QString& idInstall,
-				     const QString& downloadFilepath) const;
+				     const QString& downloadedFilepath) const;
 
 	// uninstall script
 	virtual bool uninstallAddOn(const QString& idInstall) const;

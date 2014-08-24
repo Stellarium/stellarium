@@ -40,7 +40,7 @@ public:
 
 	// install add-on from a zip file
 	virtual bool installFromFile(const QString& idInstall,
-				     const QString& downloadFilepath) const = 0;
+				     const QString& downloadedFilepath) const = 0;
 
 	// uninstall add-on
 	virtual bool uninstallAddOn(const QString& idInstall) const = 0;

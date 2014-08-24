@@ -34,7 +34,7 @@ public:
 
 	// install starlore from a zip file.
 	virtual bool installFromFile(const QString& idInstall,
-				     const QString& downloadFilepath) const;
+				     const QString& downloadedFilepath) const;
 
 	// uninstall starlore
 	virtual bool uninstallAddOn(const QString& idInstall) const;

@@ -46,14 +46,14 @@ QStringList AOLandscape::checkInstalledAddOns() const
 }
 
 bool AOLandscape::installFromFile(const QString& idInstall,
-				  const QString& downloadFilepath) const
+				  const QString& downloadedFilepath) const
 {
 	Q_UNUSED(idInstall);
 
 	// TODO: the method LandscapeMgr::installLandscapeFromArchive must be removed
 	//       and this operation have to be done here.
 	//       the LANDSCAPEID must be the same as idInstall (from db)
-	QString landscapeId = m_pLandscapeMgr->installLandscapeFromArchive(downloadFilepath);
+	QString landscapeId = m_pLandscapeMgr->installLandscapeFromArchive(downloadedFilepath);
 	if (landscapeId.isEmpty())
 	{
 		return false;

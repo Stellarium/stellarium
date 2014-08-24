@@ -38,13 +38,13 @@ QStringList AOSkyCulture::checkInstalledAddOns() const
 }
 
 bool AOSkyCulture::installFromFile(const QString& idInstall,
-				   const QString& downloadFilepath) const
+				   const QString& downloadedFilepath) const
 {
-	QZipReader reader(downloadFilepath);
+	QZipReader reader(downloadedFilepath);
 	if (reader.status() != QZipReader::NoError)
 	{
 		qWarning() << "Add-On SkyCultures: Unable to open the ZIP archive:"
-			   << QDir::toNativeSeparators(downloadFilepath);
+			   << QDir::toNativeSeparators(downloadedFilepath);
 		return false;
 	}
 

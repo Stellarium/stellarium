@@ -39,13 +39,13 @@ QStringList AOTexture::checkInstalledAddOns() const
 }
 
 bool AOTexture::installFromFile(const QString& idInstall,
-				const QString& downloadFilepath) const
+				const QString& downloadedFilepath) const
 {
-	QZipReader reader(downloadFilepath);
+	QZipReader reader(downloadedFilepath);
 	if (reader.status() != QZipReader::NoError)
 	{
 		qWarning() << "Add-On Texture: Unable to open the ZIP archive:"
-			   << QDir::toNativeSeparators(downloadFilepath);
+			   << QDir::toNativeSeparators(downloadedFilepath);
 		return false;
 	}
 
