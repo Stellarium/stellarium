@@ -203,7 +203,7 @@ void StelAddOnDAO::markAddOnsAsInstalled(QStringList idInstall)
 		return;
 	}
 	QSqlQuery query(m_db);
-	QString sQuery = QString("UPDATE addon SET installed=1 "
+	QString sQuery = QString("UPDATE addon SET installed=2 "
 				 "WHERE id_install IN ('%1')").arg(idInstall.join("','"));
 	if (!query.exec(sQuery)) {
 		qWarning() << "Add-On DAO : Could not mark add-ons as installed!"
@@ -218,7 +218,7 @@ void StelAddOnDAO::markAddOnsAsInstalledFromMd5(QStringList checksums)
 		return;
 	}
 	QSqlQuery query(m_db);
-	QString sQuery = QString("UPDATE addon SET installed=1 "
+	QString sQuery = QString("UPDATE addon SET installed=2 "
 				 "WHERE checksum IN ('%1')").arg(checksums.join("','"));
 	if (!query.exec(sQuery)) {
 		qWarning() << "Add-On DAO : Could not mark add-ons as installed (from md5)!"
@@ -325,7 +325,7 @@ StelAddOnDAO::AddOnInfo StelAddOnDAO::getAddOnInfo(int addonId)
 		addonInfo.url = QUrl(query.value(urlColumn).toString());
 		addonInfo.size = query.value(sizeColumn).toFloat();
 		addonInfo.filename = query.value(filenameColumn).toString();
-		addonInfo.installed = query.value(installedColumn).toBool();
+		addonInfo.installed = query.value(installedColumn).toInt();
 		addonInfo.checksum = query.value(checksumColumn).toString();
 
 		QString categoryDir = StelApp::getInstance().getStelAddOnMgr().getDirectory(addonInfo.category);

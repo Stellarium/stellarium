@@ -99,7 +99,13 @@ QVariant AddOnTableModel::data(const QModelIndex& index, int role) const
 	}
 	else if (column == COLUMN_INSTALLED)
 	{
-		value = qVariantFromValue(value.toBool() ? q_("Yes") : q_("No"));
+		int status = value.toInt();
+		if (status == 2)
+			value = qVariantFromValue(q_("Yes"));
+		else if (status == 1)
+			value = qVariantFromValue(q_("Partially"));
+		else
+			value = qVariantFromValue(q_("No"));
 	}
 
 	return value;
