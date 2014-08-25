@@ -115,8 +115,7 @@ void AddOnTableView::slotTextureChecked(int checked)
 {
 	AddOnWidget* widget = (AddOnWidget*) this->sender();
 	int row = m_widgets.key(widget);
-	qDebug() << row << checked;
-	m_pCheckboxGroup->button(row-1)->setChecked(checked);
+	((QCheckBox*) m_pCheckboxGroup->button(row-1))->setCheckState((Qt::CheckState) checked);
 }
 
 void AddOnTableView::setModel(QAbstractItemModel* model)
@@ -213,7 +212,7 @@ void AddOnTableView::slotRowChecked(int row, bool checked)
 {
 	AddOnTableProxyModel* model = (AddOnTableProxyModel*) this->model();
 	int addOnId = model->findIndex(row, COLUMN_ADDONID).data().toInt();
-	bool installed = "Yes" == model->findIndex(row, COLUMN_INSTALLED).data().toString();
+	int installed = model->findIndex(row, COLUMN_INSTALLED).data(Qt::EditRole).toInt();
 	if (checked)
 	{
 		if (installed)

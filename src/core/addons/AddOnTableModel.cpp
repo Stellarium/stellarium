@@ -84,7 +84,7 @@ QVariant AddOnTableModel::data(const QModelIndex& index, int role) const
 	  return Qt::AlignCenter;
 	}
 
-	if (!index.isValid() || role != Qt::DisplayRole)
+	if (!index.isValid() || (role != Qt::DisplayRole && role != Qt::EditRole))
 	{
 		return QVariant();
 	}
@@ -97,7 +97,7 @@ QVariant AddOnTableModel::data(const QModelIndex& index, int role) const
 	{
 		value = qVariantFromValue(QDateTime::fromMSecsSinceEpoch(value.Int*1000));
 	}
-	else if (column == COLUMN_INSTALLED)
+	else if (column == COLUMN_INSTALLED && role == Qt::DisplayRole)
 	{
 		int status = value.toInt();
 		if (status == 2)
