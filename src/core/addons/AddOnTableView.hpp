@@ -48,6 +48,7 @@ signals:
 
 public slots:
 	void setAllChecked(bool checked);
+	void slotTextureChecked(int checked);
 
 private slots:
 	void slotRowChecked(int row, bool checked);

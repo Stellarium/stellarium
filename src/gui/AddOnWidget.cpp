@@ -17,9 +17,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 */
 
-#include <QStringBuilder>
 #include <QPainter>
-#include <QtDebug>
+#include <QStringBuilder>
 
 #include "AddOnWidget.hpp"
 #include "ui_addonWidget.h"
@@ -31,6 +30,8 @@ AddOnWidget::AddOnWidget(QWidget* parent)
 	, m_sThumbnailDir(StelApp::getInstance().getStelAddOnMgr().getThumbnailDir())
 {
 	ui->setupUi(this);
+	connect(ui->listWidget, SIGNAL(itemChanged(QListWidgetItem*)),
+		this, SLOT(slotItemChanged(QListWidgetItem*)));
 }
 
 AddOnWidget::~AddOnWidget()
@@ -40,12 +41,12 @@ AddOnWidget::~AddOnWidget()
 }
 
 void AddOnWidget::paintEvent(QPaintEvent*)
- {
-     QStyleOption opt;
-     opt.init(this);
-     QPainter p(this);
-     style()->drawPrimitive(QStyle::PE_Widget, &opt, &p, this);
- }
+{
+	QStyleOption opt;
+	opt.init(this);
+	QPainter p(this);
+	style()->drawPrimitive(QStyle::PE_Widget, &opt, &p, this);
+}
 
 void AddOnWidget::init(int addonId)
 {
@@ -89,6 +90,7 @@ void AddOnWidget::init(int addonId)
 	}
 
 	// List of files - applicable only for textures
+	m_textureState.clear();
 	ui->listWidget->setVisible(false);
 	if (parentWidget()->objectName() == "texturesTableView")
 	{
@@ -102,7 +104,7 @@ void AddOnWidget::init(int addonId)
 				QListWidgetItem* item = new QListWidgetItem(text, ui->listWidget);
 				item->setFlags(item->flags() | Qt::ItemIsUserCheckable);
 				item->setCheckState(Qt::Unchecked);
-
+				m_textureState.append(0);
 				if (set.second.at(i).toInt())
 				{
 					text = text % " (installed)";
@@ -112,5 +114,20 @@ void AddOnWidget::init(int addonId)
 			}
 			ui->listWidget->setVisible(true);
 		}
+	}
+}
+
+void AddOnWidget::slotItemChanged(QListWidgetItem *item)
+{
+	if (ui->listWidget->isVisible())
+	{
+
+		m_textureState[ui->listWidget->row(item)] = item->checkState();
+		if (!m_textureState.contains(0))
+			emit(textureChecked(2));
+		else if (!m_textureState.contains(2))
+			emit(textureChecked(0));
+		else
+			emit(textureChecked(1));
 	}
 }

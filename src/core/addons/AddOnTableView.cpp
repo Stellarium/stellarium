@@ -104,6 +104,19 @@ void AddOnTableView::insertAddOnWidget(int row)
 	setRowHeight(row, widget->height());
 	setIndexWidget(model->index(row, 0), widget);
 	m_widgets.insert(row, widget);
+	if (objectName() == "texturesTableView")
+	{
+		connect(widget, SIGNAL(textureChecked(int)),
+			this, SLOT(slotTextureChecked(int)));
+	}
+}
+
+void AddOnTableView::slotTextureChecked(int checked)
+{
+	AddOnWidget* widget = (AddOnWidget*) this->sender();
+	int row = m_widgets.key(widget);
+	qDebug() << row << checked;
+	m_pCheckboxGroup->button(row-1)->setChecked(checked);
 }
 
 void AddOnTableView::setModel(QAbstractItemModel* model)

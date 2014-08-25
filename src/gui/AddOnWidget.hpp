@@ -20,6 +20,7 @@
 #ifndef _ADDONWIDGET_HPP
 #define _ADDONWIDGET_HPP
 
+#include <QListWidgetItem>
 #include <QWidget>
 
 #include "StelAddOnMgr.hpp"
@@ -38,10 +39,17 @@ public:
 
 	void paintEvent(QPaintEvent*);
 
+signals:
+	void textureChecked(int mainCheckState);
+
+private slots:
+	void slotItemChanged(QListWidgetItem* item);
+
 private:
 	Ui_AddOnWidget* ui;
 	StelAddOnDAO* m_pStelAddOnDAO;
 	QString m_sThumbnailDir;
+	QList<int> m_textureState;
 };
 
 #endif // _ADDONWIDGET_HPP
