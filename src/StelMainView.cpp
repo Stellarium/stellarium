@@ -47,6 +47,7 @@
 #include <QWidget>
 #include <QWindow>
 #include <QDeclarativeContext>
+#include <QPinchGesture>
 
 #include <clocale>
 
@@ -66,9 +67,12 @@ protected:
 	void wheelEvent(QGraphicsSceneWheelEvent *event);
 	void keyPressEvent(QKeyEvent *event);
 	void keyReleaseEvent(QKeyEvent *event);
+	bool event(QEvent * e);
 private:
 	double previousPaintTime;
 	void onSizeChanged();
+	void pinchTriggered(QPinchGesture *gesture);
+	bool gestureEvent(QGestureEvent *event);
 };
 
 //! Initialize and render Stellarium gui.
@@ -87,6 +91,8 @@ StelSkyItem::StelSkyItem(QDeclarativeItem* parent)
 	setObjectName("SkyItem");
 	setFlag(QGraphicsItem::ItemHasNoContents, false);
 	setAcceptHoverEvents(true);
+	setAcceptTouchEvents(true);
+	grabGesture(Qt::PinchGesture);
 	setAcceptedMouseButtons(Qt::LeftButton | Qt::RightButton | Qt::MiddleButton);
 	connect(this, &StelSkyItem::widthChanged, this, &StelSkyItem::onSizeChanged);
 	connect(this, &StelSkyItem::heightChanged, this, &StelSkyItem::onSizeChanged);
@@ -157,6 +163,53 @@ void StelSkyItem::wheelEvent(QGraphicsSceneWheelEvent *event)
 	pos.setY(height() - 1 - pos.y());
 	QWheelEvent newEvent(QPoint(pos.x(),pos.y()), event->delta(), event->buttons(), event->modifiers(), event->orientation());
 	StelApp::getInstance().handleWheel(&newEvent);
+}
+
+bool StelSkyItem::event(QEvent * e)
+{
+	switch (e->type()){
+	case QEvent::TouchBegin:
+	case QEvent::TouchUpdate:
+	case QEvent::TouchEnd:
+	{
+		QTouchEvent *touchEvent = static_cast<QTouchEvent *>(e);
+		QList<QTouchEvent::TouchPoint> touchPoints = touchEvent->touchPoints();
+
+		if (touchPoints.count() == 1)
+			setAcceptedMouseButtons(Qt::LeftButton | Qt::RightButton | Qt::MiddleButton);
+
+		return true;
+	}
+		break;
+
+	case QEvent::Gesture:
+		setAcceptedMouseButtons(0);
+		return gestureEvent(static_cast<QGestureEvent*>(e));
+		break;
+
+	default:
+		return false;
+	}
+}
+
+bool StelSkyItem::gestureEvent(QGestureEvent *event)
+{
+	if (QGesture *pinch = event->gesture(Qt::PinchGesture))
+		pinchTriggered(static_cast<QPinchGesture *>(pinch));
+
+	return true;
+}
+
+void StelSkyItem::pinchTriggered(QPinchGesture *gesture)
+{
+	QPinchGesture::ChangeFlags changeFlags = gesture->changeFlags();
+	if (changeFlags & QPinchGesture::ScaleFactorChanged) {
+		qreal zoom = gesture->scaleFactor();
+
+		if (zoom < 2 && zoom > 0.5){
+			StelApp::getInstance().handlePinch(zoom, true);
+		}
+	}
 }
 
 void StelSkyItem::keyPressEvent(QKeyEvent* event)
