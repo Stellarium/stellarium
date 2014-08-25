@@ -267,7 +267,7 @@ void StelAddOnDAO::markTexturesAsInstalled(const QStringList& items)
 			if (items.contains(item)) // texture installed
 			{
 				countInstalled++;
-				installedTextures.append("1");
+				installedTextures.append("2");
 				continue;
 			}
 			// texture not installed
@@ -432,24 +432,37 @@ QHash<QString, QString> StelAddOnDAO::getThumbnails()
 	return res;
 }
 
-QStringList StelAddOnDAO::getListOfTextures(int addonId)
+QPair<QStringList, QStringList> StelAddOnDAO::getListOfTextures(int addonId)
 {
 	if (addonId < 1) {
 		qWarning() << "Add-On DAO ListOfTextures: Invalid addonId!";
-		return QStringList();
+		return QPair<QStringList, QStringList>();
 	}
 
 	QSqlQuery query(m_db);
-	query.prepare("SELECT textures FROM texture WHERE addon=:id");
+	query.prepare("SELECT textures, installed_textures FROM texture WHERE addon=:id");
 	query.bindValue(":id", addonId);
 	if (!query.exec()) {
 		qWarning() << "Add-On DAO ListOfTextures:" << m_db.lastError();
-		return QStringList();
+		return QPair<QStringList, QStringList>();
 	}
 
-	QStringList res;
+	QPair<QStringList, QStringList> res;
 	if (query.next()) {
-		res = query.value(0).toString().split(",");
+		QStringList textures = query.value(0).toString().split(",");
+		QStringList installed = query.value(1).toString().split(",");
+		if (installed.size() <= 1) // mark all as not installed
+		{
+			installed.clear();
+			for (int i=0; i < textures.size(); i++)
+				installed.append("0");
+		}
+		else if (installed.size() != textures.size())
+		{
+			qWarning() << "Add-On DAO ListOfTextures: Inconsistent results!";
+			return QPair<QStringList, QStringList>();
+		}
+		res = qMakePair(textures, installed);
 	}
 	return res;
 }

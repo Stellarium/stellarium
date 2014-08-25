@@ -92,10 +92,24 @@ void AddOnWidget::init(int addonId)
 	ui->listWidget->setVisible(false);
 	if (parentWidget()->objectName() == "texturesTableView")
 	{
-		QStringList textures = m_pStelAddOnDAO->getListOfTextures(addonId);
-		if (textures.size() > 1)
+		// <textures, installed>
+		QPair<QStringList, QStringList> set = m_pStelAddOnDAO->getListOfTextures(addonId);
+		if (set.first.size() > 1) // display list just when it is a texture set
 		{
-			ui->listWidget->insertItems(0, textures);
+			for (int i=0; i < set.first.size(); i++)
+			{
+				QString text = set.first.at(i);
+				QListWidgetItem* item = new QListWidgetItem(text, ui->listWidget);
+				item->setFlags(item->flags() | Qt::ItemIsUserCheckable);
+				item->setCheckState(Qt::Unchecked);
+
+				if (set.second.at(i).toInt())
+				{
+					text = text % " (installed)";
+					item->setText(text);
+					item->setTextColor(QColor("green"));
+				}
+			}
 			ui->listWidget->setVisible(true);
 		}
 	}
