@@ -64,6 +64,7 @@
 #include <QFileDialog>
 #include <QComboBox>
 #include <QDir>
+#include <QScroller>
 
 ConfigurationDialog::ConfigurationDialog(StelGui* agui, QObject* parent)
 	: StelDialog(parent)
@@ -156,6 +157,12 @@ void ConfigurationDialog::createDialogContent()
 	connect(ui->downloadCancelButton, SIGNAL(clicked()), this, SLOT(cancelDownload()));
 	connect(ui->downloadRetryButton, SIGNAL(clicked()), this, SLOT(downloadStars()));
 	resetStarCatalogControls();
+
+	//Kinetic scrolling for tablet pc and pc
+	QScroller::grabGesture(ui->pluginsListWidget, QScroller::LeftMouseButtonGesture);
+	QScroller::scroller(ui->pluginsListWidget);
+	QScroller::grabGesture(ui->scriptListWidget, QScroller::LeftMouseButtonGesture);
+	QScroller::scroller(ui->scriptListWidget);
 
 	// Selected object info
 	if (gui->getInfoTextFilters() == StelObject::InfoStringGroup(0))

@@ -40,6 +40,7 @@
 #include <QSortFilterProxyModel>
 #include <QTimer>
 #include <QStringListModel>
+#include <QScroller>
 
 LocationDialog::LocationDialog(QObject* parent) : StelDialog(parent), isEditingNew(false)
 {
@@ -86,6 +87,10 @@ void LocationDialog::createDialogContent()
 	proxyModel->sort(0, Qt::AscendingOrder);
 	proxyModel->setFilterCaseSensitivity(Qt::CaseInsensitive);
 	ui->citiesListView->setModel(proxyModel);
+
+	//Kinetic scrolling for tablet pc and pc
+	QScroller::grabGesture(ui->citiesListView, QScroller::LeftMouseButtonGesture);
+	QScroller::scroller(ui->citiesListView);
 
 	populatePlanetList();
 	populateCountryList();
