@@ -121,7 +121,7 @@ bool StelAddOnDAO::createAddonTables()
 			% COLUMN_ID % " INTEGER primary key AUTOINCREMENT, "
 			% COLUMN_ADDONID % " INTEGER UNIQUE, "
 			% COLUMN_TEXTURES % " TEXT, "
-			% COLUMN_INSTALLED_TEXTURES % " TEXT)";
+			% COLUMN_INSTALLED_TEXTURES % " TEXT DEFAULT 0)";
 
 	QSqlQuery query(m_db);
 	foreach (QString table, addonTables)
