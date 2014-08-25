@@ -106,6 +106,7 @@ public:
 	void markAllAddOnsAsUninstalled();
 	void markAddOnsAsInstalled(QStringList idInstall);
 	void markAddOnsAsInstalledFromMd5(QStringList checksums);
+	void markTexturesAsInstalled(const QStringList& items);
 	void updateAddOnStatus(QString idInstall, int installed);
 
 	QHash<QString, QString> getThumbnails();

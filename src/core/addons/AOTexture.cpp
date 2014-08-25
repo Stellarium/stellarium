@@ -33,12 +33,23 @@ AOTexture::~AOTexture()
 {
 }
 
+// It relies on the installedTextures.ini file
 QStringList AOTexture::checkInstalledAddOns() const
 {
-	// TODO: users can change the textures externally,
-	// so probably we'll need to compare md5hashes to be able
-	// to know which are the installed textures
-	return QStringList();
+	QStringList res;
+	foreach (QString texture, m_pInstalledTextures->allKeys())
+	{
+		// removing non-existent textures
+		if (!QFile(m_sTexturesInstallDir % texture).exists())
+		{
+			m_pInstalledTextures->remove(texture);
+			continue;
+		}
+		QString installId = m_pInstalledTextures->value(texture).toString();
+		res.append(installId % "/" % texture);
+	}
+	res.sort();
+	return res;
 }
 
 bool AOTexture::installFromFile(const QString& idInstall,

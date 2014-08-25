@@ -206,7 +206,8 @@ void StelAddOnDAO::markAddOnsAsInstalled(QStringList idInstall)
 	QString sQuery = QString("UPDATE addon SET installed=1 "
 				 "WHERE id_install IN ('%1')").arg(idInstall.join("','"));
 	if (!query.exec(sQuery)) {
-		qWarning() << "Add-On DAO : Could not mark add-ons as installed!";
+		qWarning() << "Add-On DAO : Could not mark add-ons as installed!"
+			   << m_db.lastError() << sQuery;
 	}
 }
 
@@ -220,7 +221,61 @@ void StelAddOnDAO::markAddOnsAsInstalledFromMd5(QStringList checksums)
 	QString sQuery = QString("UPDATE addon SET installed=1 "
 				 "WHERE checksum IN ('%1')").arg(checksums.join("','"));
 	if (!query.exec(sQuery)) {
-		qWarning() << "Add-On DAO : Could not mark add-ons as installed!";
+		qWarning() << "Add-On DAO : Could not mark add-ons as installed (from md5)!"
+			   << m_db.lastError() << sQuery;
+	}
+}
+
+void StelAddOnDAO::markTexturesAsInstalled(const QStringList& items)
+{
+	if (items.isEmpty())
+	{
+		return;
+	}
+
+	// get installIds
+	QStringList installIds;
+	foreach (QString item, items) {
+		QString installId = item.split("/")[0];
+		if (!installIds.contains(installId))
+			installIds.append(installId);
+	}
+
+	// get list of textures from database by each installId
+	QSqlQuery query(m_db);
+	QString sQuery = QString("SELECT id_install, textures "
+				 "FROM texture INNER JOIN addon "
+				 "ON texture.addon = addon.id "
+				 "WHERE id_install IN ('%1')").arg(installIds.join("','"));
+	if (!query.exec(sQuery)) {
+		qWarning() << "Add-On DAO : Could not get textures from list of id_install!"
+			   << m_db.lastError() << sQuery;
+		return;
+	}
+	while (query.next())
+	{
+		QString idInstall = query.value(0).toString();
+		QStringList textures = query.value(1).toString().split(",");
+		int countItems = 0;
+		int countInstalled = 0;
+		foreach (QString texture, textures) {
+			countItems++;
+			QString item = idInstall % "/" % texture;
+			if (items.contains(item))
+				countInstalled++;
+		}
+
+		// get status
+		int installed;
+		if (countInstalled == 0)
+			installed = 0; // not installed
+		else if (countInstalled < countItems)
+			installed = 1; // partial
+		else
+			installed = 2; // all textures installed
+
+		// update database
+		updateAddOnStatus(idInstall, installed);
 	}
 }
 

@@ -122,6 +122,10 @@ void StelAddOnMgr::refreshAddOnStatuses()
 		{
 			m_pStelAddOnDAO->markAddOnsAsInstalledFromMd5(aos.value()->checkInstalledAddOns());
 		}
+		else if (aos.key() == TEXTURE)
+		{
+			m_pStelAddOnDAO->markTexturesAsInstalled(aos.value()->checkInstalledAddOns());
+		}
 		else
 		{
 			m_pStelAddOnDAO->markAddOnsAsInstalled(aos.value()->checkInstalledAddOns());

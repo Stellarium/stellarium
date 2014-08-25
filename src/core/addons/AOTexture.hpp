@@ -30,6 +30,7 @@ public:
 	virtual ~AOTexture();
 
 	// check textures which are already installed.
+	// @return "installId/texture"
 	virtual QStringList checkInstalledAddOns() const;
 
 	// install texture from a zip file.
