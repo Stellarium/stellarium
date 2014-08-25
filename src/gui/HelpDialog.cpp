@@ -38,6 +38,7 @@
 #include <QDir>
 #include <QProcess>
 #include <QSysInfo>
+#include <QScroller>
 
 #include "ui_helpDialogGui.h"
 #include "HelpDialog.hpp"
@@ -123,6 +124,14 @@ void HelpDialog::createDialogContent()
 		updateState = CompleteNoUpdates;
 		updateJSON();
 	}
+
+	//Kinetic scrolling for tablet pc and pc
+	QScroller::grabGesture(ui->helpBrowser, QScroller::LeftMouseButtonGesture);
+	QScroller::scroller(ui->helpBrowser);
+	QScroller::grabGesture(ui->aboutBrowser, QScroller::LeftMouseButtonGesture);
+	QScroller::scroller(ui->aboutBrowser);
+	QScroller::grabGesture(ui->logBrowser, QScroller::LeftMouseButtonGesture);
+	QScroller::scroller(ui->logBrowser);
 
 	// Help page
 	updateText();

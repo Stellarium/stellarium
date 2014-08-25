@@ -20,6 +20,7 @@
 #include <QDialog>
 #include <QStandardItemModel>
 #include <QDebug>
+#include <QScroller>
 
 #include "StelApp.hpp"
 #include "StelTranslator.hpp"
@@ -291,6 +292,10 @@ void ShortcutsDialog::createDialogContent()
 	ui->shortcutsTreeView->header()->setSectionsMovable(false);
 	ui->shortcutsTreeView->sortByColumn(0, Qt::AscendingOrder);
 	
+	//Kinetic scrolling for tablet pc and pc
+	QScroller::grabGesture(ui->shortcutsTreeView, QScroller::LeftMouseButtonGesture);
+	QScroller::scroller(ui->shortcutsTreeView);
+
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
 	connect(ui->shortcutsTreeView->selectionModel(),
 	        SIGNAL(currentChanged(QModelIndex,QModelIndex)),
