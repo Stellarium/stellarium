@@ -42,6 +42,7 @@
 #include <QLineEdit>
 #include <QComboBox>
 #include <QMenu>
+#include <QScroller>
 
 #include "SimbadSearcher.hpp"
 
@@ -213,6 +214,10 @@ void SearchDialog::createDialogContent()
 	ui->RAAngleSpinBox->setDisplayFormat(AngleSpinBox::HMSLetters);
 	ui->DEAngleSpinBox->setDisplayFormat(AngleSpinBox::DMSSymbols);
 	ui->DEAngleSpinBox->setPrefixType(AngleSpinBox::NormalPlus);
+
+	//Kinetic scrolling for tablet pc and pc
+	QScroller::grabGesture(ui->objectsListWidget, QScroller::LeftMouseButtonGesture);
+	QScroller::scroller(ui->objectsListWidget);
 
 	connect(ui->RAAngleSpinBox, SIGNAL(valueChanged()), this, SLOT(manualPositionChanged()));
 	connect(ui->DEAngleSpinBox, SIGNAL(valueChanged()), this, SLOT(manualPositionChanged()));

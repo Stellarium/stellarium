@@ -53,6 +53,7 @@
 #include <QTimer>
 #include <QDialog>
 #include <QStringList>
+#include <QScroller>
 
 ViewDialog::ViewDialog(QObject* parent) : StelDialog(parent)
 {
@@ -121,6 +122,16 @@ void ViewDialog::createDialogContent()
 	ui->stackListWidget->setCurrentRow(0);
 
 	//ui->viewTabWidget->removeTab(4);
+
+	//Kinetic scrolling for tablet pc and pc
+	QList<QWidget *> addscroll;
+	addscroll << ui->projectionListWidget << ui->culturesListWidget << ui->skyCultureTextBrowser << ui->landscapesListWidget;
+
+	foreach(QWidget * w, addscroll)
+	{
+		QScroller::grabGesture(w, QScroller::LeftMouseButtonGesture);
+		QScroller::scroller(w);
+	}
 
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 
