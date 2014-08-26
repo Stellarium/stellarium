@@ -17,7 +17,6 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#include <QCheckBox>
 #include <QHeaderView>
 #include <QStringBuilder>
 
@@ -42,6 +41,8 @@ AddOnTableView::AddOnTableView(QWidget* parent)
 
 	m_pCheckboxGroup->setExclusive(false);
 	connect(m_pCheckboxGroup, SIGNAL(buttonToggled(int, bool)),
+		this, SIGNAL(rowChecked(int, bool)));
+	connect(m_pCheckboxGroup, SIGNAL(buttonToggled(int, bool)),
 		this, SLOT(slotRowChecked(int, bool)));
 }
 
@@ -56,66 +57,6 @@ AddOnTableView::~AddOnTableView()
 	m_widgets.clear();
 
 	m_pCheckboxGroup->deleteLater();
-}
-
-void AddOnTableView::mousePressEvent(QMouseEvent *e)
-{
-	QModelIndex index = indexAt(e->pos());
-	if (!index.isValid() || !isRowHidden(index.row() + 1))
-	{
-		clearSelection();
-		return;
-	}
-	selectRow(index.row());
-}
-
-void AddOnTableView::selectionChanged(const QItemSelection& selected, const QItemSelection& deselected)
-{
-	if (!deselected.isEmpty())
-	{
-		int drow = deselected.first().top() + 1;
-		if (drow % 2)
-		{
-			hideRow(drow);
-		}
-	}
-	if (!selected.isEmpty())
-	{
-		int srow = selected.first().top() + 1;
-		if (srow % 2)
-		{
-			insertAddOnWidget(srow);
-			showRow(srow);
-		}
-	}
-	update();
-}
-
-void AddOnTableView::insertAddOnWidget(int row)
-{
-	if (m_widgets.contains(row))
-	{
-		return;
-	}
-	AddOnTableProxyModel* model = (AddOnTableProxyModel*) this->model();
-	int addOnId = model->findIndex(row, COLUMN_ADDONID).data().toInt();
-	AddOnWidget* widget = new AddOnWidget(this);
-	widget->init(addOnId);
-	setRowHeight(row, widget->height());
-	setIndexWidget(model->index(row, 0), widget);
-	m_widgets.insert(row, widget);
-	if (objectName() == "texturesTableView")
-	{
-		connect(widget, SIGNAL(textureChecked(int)),
-			this, SLOT(slotTextureChecked(int)));
-	}
-}
-
-void AddOnTableView::slotTextureChecked(int checked)
-{
-	AddOnWidget* widget = (AddOnWidget*) this->sender();
-	int row = m_widgets.key(widget);
-	((QCheckBox*) m_pCheckboxGroup->button(row-1))->setCheckState((Qt::CheckState) checked);
 }
 
 void AddOnTableView::setModel(QAbstractItemModel* model)
@@ -194,45 +135,124 @@ bool AddOnTableView::isCompatible(QString first, QString last)
 	return true;
 }
 
-void AddOnTableView::clearSelection()
+void AddOnTableView::mousePressEvent(QMouseEvent *e)
 {
-	QTableView::clearSelection();
-	setAllChecked(false);
+	QModelIndex index = indexAt(e->pos());
+	if (!index.isValid() || !isRowHidden(index.row() + 1))
+	{
+		clearSelection();
+		return;
+	}
+	selectRow(index.row());
+}
+
+void AddOnTableView::selectionChanged(const QItemSelection& selected, const QItemSelection& deselected)
+{
+	int wRow; // addonwidget row
+	if (!deselected.isEmpty())
+	{
+		wRow = deselected.first().top() + 1;
+		if (wRow % 2)
+		{
+			hideRow(wRow);
+		}
+	}
+	if (!selected.isEmpty())
+	{
+		wRow = selected.first().top() + 1;
+		if (wRow % 2)
+		{
+			insertAddOnWidget(wRow);
+			showRow(wRow);
+		}
+	}
+	update();
+}
+
+AddOnWidget* AddOnTableView::insertAddOnWidget(int wRow)
+{
+	if (m_widgets.contains(wRow))
+	{
+		return m_widgets.value(wRow);
+	}
+	AddOnTableProxyModel* model = (AddOnTableProxyModel*) this->model();
+	int addOnId = model->findIndex(wRow, COLUMN_ADDONID).data().toInt();
+	AddOnWidget* widget = new AddOnWidget(this, wRow);
+	widget->init(addOnId);
+	setRowHeight(wRow, widget->height());
+	setIndexWidget(model->index(wRow, 0), widget);
+	m_widgets.insert(wRow, widget);
+	if (objectName() == "texturesTableView")
+	{
+		connect(widget, SIGNAL(checkRow(int, int)),
+			this, SLOT(slotCheckRow(int, int)));
+	}
+	return m_widgets.value(wRow);
+}
+
+void AddOnTableView::slotCheckRow(int pRow, int checked)
+{
+	m_pCheckboxGroup->blockSignals(true);
+	QCheckBox* cbox = getCheckBox(pRow);
+	cbox->setCheckState((Qt::CheckState) checked);
+	slotRowChecked(pRow, checked);
+	m_pCheckboxGroup->blockSignals(false);
 }
 
 void AddOnTableView::setAllChecked(bool checked)
 {
-	foreach (QAbstractButton* cbox,m_pCheckboxGroup->buttons())
+	for (int row=0; row < model()->rowCount(); row=row+2)
 	{
-		cbox->setChecked(checked);
+		slotCheckRow(row, checked?2:0);
+		emit(rowChecked(row, checked));
 	}
 }
 
-void AddOnTableView::slotRowChecked(int row, bool checked)
+void AddOnTableView::slotRowChecked(int pRow, bool checked)
 {
 	AddOnTableProxyModel* model = (AddOnTableProxyModel*) this->model();
-	int addOnId = model->findIndex(row, COLUMN_ADDONID).data().toInt();
-	int installed = model->findIndex(row, COLUMN_INSTALLED).data(Qt::EditRole).toInt();
+	int addOnId = model->findIndex(pRow, COLUMN_ADDONID).data().toInt();
+	int installed = model->findIndex(pRow, COLUMN_INSTALLED).data(Qt::EditRole).toInt();
 	if (checked)
 	{
-		if (installed)
+		if (installed == 2)
 		{
-			m_iSelectedAddOnsToRemove.append(addOnId);
+			m_iSelectedAddOnsToRemove.insert(addOnId, QStringList());
+		}
+		else if (installed == 1) // partially
+		{
+			AddOnWidget* widget = insertAddOnWidget(pRow+1);
+			QStringList install = widget->getTexturesToInstall();
+			if (install.isEmpty())
+				m_iSelectedAddOnsToInstall.remove(addOnId);
+			else
+				m_iSelectedAddOnsToInstall.insert(addOnId, install);
+
+			QStringList remove = widget->getTexturesToRemove();
+			if (remove.isEmpty())
+				m_iSelectedAddOnsToRemove.remove(addOnId);
+			else
+				m_iSelectedAddOnsToRemove.insert(addOnId, remove);
 		}
 		else
 		{
-			m_iSelectedAddOnsToInstall.append(addOnId);
+			m_iSelectedAddOnsToInstall.insert(addOnId, QStringList());
 		}
 	}
 	else
 	{
-		if (installed)
+		if (installed == 2)
 		{
-			m_iSelectedAddOnsToRemove.removeOne(addOnId);
+			m_iSelectedAddOnsToRemove.remove(addOnId);
+		}
+		else if (installed == 1) // partially
+		{
+			m_iSelectedAddOnsToInstall.remove(addOnId);
+			m_iSelectedAddOnsToRemove.remove(addOnId);
 		}
 		else
 		{
-			m_iSelectedAddOnsToInstall.removeOne(addOnId);
+			m_iSelectedAddOnsToInstall.remove(addOnId);
 		}
 	}
 

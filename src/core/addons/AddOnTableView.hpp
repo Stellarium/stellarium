@@ -22,6 +22,7 @@
 
 #include <QAbstractItemModel>
 #include <QButtonGroup>
+#include <QCheckBox>
 #include <QTableView>
 
 #include "AddOnWidget.hpp"
@@ -37,28 +38,29 @@ public:
 	void selectionChanged(const QItemSelection& selected, const QItemSelection& deselected);
 	void setModel(QAbstractItemModel* model);
 
-	void clearSelection();
-	QList<int> getSelectedAddonsToInstall() { return m_iSelectedAddOnsToInstall; }
-	QList<int> getSelectedAddonsToRemove() { return m_iSelectedAddOnsToRemove; }
+	QHash<int, QStringList> getSelectedAddonsToInstall() { return m_iSelectedAddOnsToInstall; }
+	QHash<int, QStringList> getSelectedAddonsToRemove() { return m_iSelectedAddOnsToRemove; }
+	QCheckBox* getCheckBox(int pRow) { return (QCheckBox*) m_pCheckboxGroup->button(pRow); }
 
 signals:
 	// these signals are useful to handle the status of the install/remove buttons
 	void somethingToInstall(bool yes);
 	void somethingToRemove(bool yes);
+	void rowChecked(int row, bool checked);
 
 public slots:
 	void setAllChecked(bool checked);
-	void slotTextureChecked(int checked);
 
 private slots:
-	void slotRowChecked(int row, bool checked);
+	void slotCheckRow(int pRow, int checked);
+	void slotRowChecked(int pRow, bool checked);
 
 private:
 	QButtonGroup* m_pCheckboxGroup;
 	QHash<int, AddOnWidget*> m_widgets;
-	QList<int> m_iSelectedAddOnsToInstall;
-	QList<int> m_iSelectedAddOnsToRemove;
-	void insertAddOnWidget(int row);
+	QHash<int, QStringList> m_iSelectedAddOnsToInstall;
+	QHash<int, QStringList> m_iSelectedAddOnsToRemove;
+	AddOnWidget* insertAddOnWidget(int wRow);
 	bool isCompatible(QString first, QString last);
 };
 

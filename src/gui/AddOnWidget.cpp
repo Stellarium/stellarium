@@ -17,14 +17,17 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 */
 
+#include <QCheckBox>
 #include <QPainter>
 #include <QStringBuilder>
 
+#include "AddOnTableView.hpp"
 #include "AddOnWidget.hpp"
 #include "ui_addonWidget.h"
 
-AddOnWidget::AddOnWidget(QWidget* parent)
+AddOnWidget::AddOnWidget(QWidget* parent, int row)
 	: QWidget(parent)
+	, m_iRow(row)
 	, ui(new Ui_AddOnWidget)
 	, m_pStelAddOnDAO(StelApp::getInstance().getStelAddOnMgr().getStelAddOnDAO())
 	, m_sThumbnailDir(StelApp::getInstance().getStelAddOnMgr().getThumbnailDir())
@@ -32,6 +35,8 @@ AddOnWidget::AddOnWidget(QWidget* parent)
 	ui->setupUi(this);
 	connect(ui->listWidget, SIGNAL(itemChanged(QListWidgetItem*)),
 		this, SLOT(slotItemChanged(QListWidgetItem*)));
+	connect(((AddOnTableView*)parent), SIGNAL(rowChecked(int, bool)),
+		this, SLOT(slotCheckAllTextures(int, bool)));
 }
 
 AddOnWidget::~AddOnWidget()
@@ -90,10 +95,12 @@ void AddOnWidget::init(int addonId)
 	}
 
 	// List of files - applicable only for textures
-	m_textureState.clear();
 	ui->listWidget->setVisible(false);
 	if (parentWidget()->objectName() == "texturesTableView")
 	{
+		m_sSelectedTexturesToInstall.clear();
+		m_sSelectedTexturesToRemove.clear();
+
 		// <textures, installed>
 		QPair<QStringList, QStringList> set = m_pStelAddOnDAO->getListOfTextures(addonId);
 		if (set.first.size() > 1) // display list just when it is a texture set
@@ -103,8 +110,8 @@ void AddOnWidget::init(int addonId)
 				QString text = set.first.at(i);
 				QListWidgetItem* item = new QListWidgetItem(text, ui->listWidget);
 				item->setFlags(item->flags() | Qt::ItemIsUserCheckable);
-				item->setCheckState(Qt::Unchecked);
-				m_textureState.append(0);
+				QCheckBox* parentCheckbox = ((AddOnTableView*)parentWidget())->getCheckBox(m_iRow-1);
+				item->setCheckState(parentCheckbox->checkState());
 				if (set.second.at(i).toInt())
 				{
 					text = text % " (installed)";
@@ -117,17 +124,61 @@ void AddOnWidget::init(int addonId)
 	}
 }
 
+void AddOnWidget::slotCheckAllTextures(int pRow, bool checked)
+{
+	if (ui->listWidget->count() && pRow+1 == m_iRow)
+	{
+		m_sSelectedTexturesToInstall.clear();
+		m_sSelectedTexturesToRemove.clear();
+		ui->listWidget->blockSignals(true);
+		for (int i=0; i<ui->listWidget->count(); i++)
+		{
+			ui->listWidget->item(i)->setCheckState(checked?Qt::Checked:Qt::Unchecked);
+			slotItemChanged(ui->listWidget->item(i));
+		}
+		ui->listWidget->blockSignals(false);
+	}
+}
+
 void AddOnWidget::slotItemChanged(QListWidgetItem *item)
 {
-	if (ui->listWidget->isVisible())
+	if (ui->listWidget->count())
 	{
-
-		m_textureState[ui->listWidget->row(item)] = item->checkState();
-		if (!m_textureState.contains(0))
-			emit(textureChecked(2));
-		else if (!m_textureState.contains(2))
-			emit(textureChecked(0));
+		if (item->checkState())
+		{
+			if (item->textColor() == QColor("green")) // installed
+			{
+				m_sSelectedTexturesToRemove.append(item->text());
+			}
+			else
+			{
+				m_sSelectedTexturesToInstall.append(item->text());
+			}
+		}
 		else
-			emit(textureChecked(1));
+		{
+			if (item->textColor() == QColor("green")) // installed
+			{
+				m_sSelectedTexturesToRemove.removeOne(item->text());
+			}
+			else
+			{
+				m_sSelectedTexturesToInstall.removeOne(item->text());
+			}
+		}
+
+		int count = m_sSelectedTexturesToInstall.size() + m_sSelectedTexturesToRemove.size();
+		if (count == ui->listWidget->count())
+		{
+			emit(checkRow(m_iRow-1, 2));  // all checked
+		}
+		else if (count == 0)
+		{
+			emit(checkRow(m_iRow-1, 0));  // all unchecked
+		}
+		else
+		{
+			emit(checkRow(m_iRow-1, 1));  // partially
+		}
 	}
 }

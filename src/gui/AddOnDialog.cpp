@@ -135,6 +135,7 @@ void AddOnDialog::changePage(QListWidgetItem *current, QListWidgetItem *previous
 	if (lastView)
 	{
 		lastView->clearSelection();
+		lastView->setAllChecked(false);
 	}
 
 	current = current ? current : previous;
@@ -209,17 +210,19 @@ void AddOnDialog::downloadFinished()
 void AddOnDialog::installSelectedRows()
 {
 	AddOnTableView* view = m_tableViews.value((Tab)ui->stackedWidget->currentIndex());
-	foreach (int addon, view->getSelectedAddonsToInstall())
-	{
-		StelApp::getInstance().getStelAddOnMgr().installAddOn(addon);
+	QHashIterator<int, QStringList> i(view->getSelectedAddonsToInstall());
+	while (i.hasNext()) {
+	    i.next();
+	    StelApp::getInstance().getStelAddOnMgr().installAddOn(i.key(), i.value());
 	}
 }
 
 void AddOnDialog::removeSelectedRows()
 {
 	AddOnTableView* view = m_tableViews.value((Tab)ui->stackedWidget->currentIndex());
-	foreach (int addon, view->getSelectedAddonsToRemove())
-	{
-		StelApp::getInstance().getStelAddOnMgr().removeAddOn(addon);
+	QHashIterator<int, QStringList> i(view->getSelectedAddonsToRemove());
+	while (i.hasNext()) {
+	    i.next();
+	    StelApp::getInstance().getStelAddOnMgr().removeAddOn(i.key(), i.value());
 	}
 }

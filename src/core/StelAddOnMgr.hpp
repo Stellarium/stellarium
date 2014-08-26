@@ -51,9 +51,9 @@ public:
 
 	QString getThumbnailDir() { return m_sDirThumbnail; }
 	QString getDirectory(QString category) { return m_dirs.value(category, ""); }
-	void installAddOn(const int addonId);
+	void installAddOn(const int addonId, const QStringList files);
 	bool installFromFile(const StelAddOnDAO::AddOnInfo addonInfo);
-	void removeAddOn(const int addonId);
+	void removeAddOn(const int addonId, const QStringList files);
 	bool updateCatalog(QString webresult);
 	void setLastUpdate(qint64 time);
 	QString getLastUpdateString()

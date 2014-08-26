@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Stellarium
  * Copyright (C) 2014 Marcos Cardinot
  *
@@ -32,24 +32,29 @@ class AddOnWidget : public QWidget
 {
 Q_OBJECT
 public:
-	AddOnWidget(QWidget* parent);
+	AddOnWidget(QWidget* parent, int row);
 	virtual ~AddOnWidget();
 
 	void init(int addonId);
+	QStringList getTexturesToInstall() { return m_sSelectedTexturesToInstall; }
+	QStringList getTexturesToRemove() { return m_sSelectedTexturesToRemove; }
 
 	void paintEvent(QPaintEvent*);
 
 signals:
-	void textureChecked(int mainCheckState);
+	void checkRow(int pRow, int checked);
 
 private slots:
 	void slotItemChanged(QListWidgetItem* item);
+	void slotCheckAllTextures(int pRow, bool checked);
 
 private:
+	const int m_iRow;
 	Ui_AddOnWidget* ui;
 	StelAddOnDAO* m_pStelAddOnDAO;
 	QString m_sThumbnailDir;
-	QList<int> m_textureState;
+	QStringList m_sSelectedTexturesToInstall;
+	QStringList m_sSelectedTexturesToRemove;
 };
 
 #endif // _ADDONWIDGET_HPP

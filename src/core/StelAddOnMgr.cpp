@@ -253,7 +253,7 @@ void StelAddOnMgr::downloadFinished()
 	}
 }
 
-void StelAddOnMgr::installAddOn(const int addonId)
+void StelAddOnMgr::installAddOn(const int addonId, const QStringList files)
 {
 	if (m_downloadQueue.contains(addonId) || addonId < 1)
 	{
@@ -302,7 +302,7 @@ bool StelAddOnMgr::installFromFile(const StelAddOnDAO::AddOnInfo addonInfo)
 	return installed;
 }
 
-void StelAddOnMgr::removeAddOn(const int addonId)
+void StelAddOnMgr::removeAddOn(const int addonId, const QStringList files)
 {
 	if (addonId < 1)
 	{
