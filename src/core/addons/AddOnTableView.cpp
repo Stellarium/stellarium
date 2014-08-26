@@ -24,10 +24,10 @@
 #include "AddOnTableView.hpp"
 #include "StelAddOnDAO.hpp"
 #include "StelUtils.hpp"
-#include "widget/CheckedHeader.hpp"
 
 AddOnTableView::AddOnTableView(QWidget* parent)
 	: QTableView(parent)
+	, m_pCheckedHeader(NULL)
 	, m_pCheckboxGroup(new QButtonGroup(this))
 {
 	setAutoFillBackground(true);
@@ -71,12 +71,13 @@ void AddOnTableView::setModel(QAbstractItemModel* model)
 
 	// Add checkbox in the last column (header)
 	int lastColumn = model->columnCount() - 1; // checkbox column
-	CheckedHeader* checkedHeader = new CheckedHeader(lastColumn, Qt::Horizontal, this);
-	setHorizontalHeader(checkedHeader);
+	m_pCheckedHeader = new CheckedHeader(lastColumn, Qt::Horizontal, this);
+	setHorizontalHeader(m_pCheckedHeader);
 	horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 	horizontalHeader()->setSectionResizeMode(lastColumn, QHeaderView::ResizeToContents);
 	horizontalHeader()->setVisible(true);
-	connect(checkedHeader, SIGNAL(toggled(bool)), this, SLOT(setAllChecked(bool)), Qt::UniqueConnection);
+	connect(m_pCheckedHeader, SIGNAL(toggled(bool)),
+		this, SLOT(setAllChecked(bool)), Qt::UniqueConnection);
 
 	// Hide imcompatible add-ons
 	// Insert checkboxes to the checkboxgroup (rows)
@@ -258,4 +259,16 @@ void AddOnTableView::slotRowChecked(int pRow, bool checked)
 
 	emit(somethingToInstall(m_iSelectedAddOnsToInstall.size() > 0));
 	emit(somethingToRemove(m_iSelectedAddOnsToRemove.size() > 0));
+
+	// update checkbox header
+	if (m_pCheckedHeader)
+	{
+		int countChecked = m_iSelectedAddOnsToInstall.size() + m_iSelectedAddOnsToRemove.size();
+		if (model->sourceModel()->rowCount() == countChecked) // all rows checked ?
+		{
+			m_pCheckedHeader->setChecked(true);
+		} else if (countChecked == 0){
+			m_pCheckedHeader->setChecked(false);
+		}
+	}
 }

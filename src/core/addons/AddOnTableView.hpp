@@ -26,6 +26,7 @@
 #include <QTableView>
 
 #include "AddOnWidget.hpp"
+#include "widget/CheckedHeader.hpp"
 
 class AddOnTableView : public QTableView
 {
@@ -56,6 +57,7 @@ private slots:
 	void slotRowChecked(int pRow, bool checked);
 
 private:
+	CheckedHeader* m_pCheckedHeader;
 	QButtonGroup* m_pCheckboxGroup;
 	QHash<int, AddOnWidget*> m_widgets;
 	QHash<int, QStringList> m_iSelectedAddOnsToInstall;
