@@ -263,8 +263,14 @@ void AddOnTableView::slotRowChecked(int pRow, bool checked)
 	// update checkbox header
 	if (m_pCheckedHeader)
 	{
-		int countChecked = m_iSelectedAddOnsToInstall.size() + m_iSelectedAddOnsToRemove.size();
-		if (model->sourceModel()->rowCount() == countChecked) // all rows checked ?
+		int countChecked = 0;
+		foreach (QAbstractButton* cbox, m_pCheckboxGroup->buttons())
+		{
+			if (cbox->isChecked())
+				countChecked++;
+		}
+
+		if (countChecked ==	model->sourceModel()->rowCount()) // all rows checked ?
 		{
 			m_pCheckedHeader->setChecked(true);
 		} else if (countChecked == 0){
