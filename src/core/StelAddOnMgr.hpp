@@ -65,6 +65,7 @@ public:
 	qint64 getLastUpdate() { return m_iLastUpdate; }
 	QString getUrlForUpdates() { return m_sUrlUpdate; }
 	StelAddOnDAO* getStelAddOnDAO() { return m_pStelAddOnDAO; }
+	StelAddOn* getStelAddOnInstance(QString category) { return m_pStelAddOns.value(category); }
 
 signals:
 	void updateTableViews();

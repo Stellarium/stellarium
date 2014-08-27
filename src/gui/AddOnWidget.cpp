@@ -95,27 +95,31 @@ void AddOnWidget::init(int addonId)
 	}
 
 	// List of files - for now, applicable only for textures
+	ui->listWidget->clear();
+	m_sSelectedFilesToInstall.clear();
+	m_sSelectedFilesToRemove.clear();
 	ui->listWidget->setVisible(false);
 	if (parentWidget()->objectName() == "texturesTableView")
 	{
-		m_sSelectedFilesToInstall.clear();
-		m_sSelectedFilesToRemove.clear();
-
-		// <textures, installed>
-		QPair<QStringList, QStringList> set = m_pStelAddOnDAO->getListOfTextures(addonId);
-		if (set.first.size() > 1) // display list just when it is a texture set
+		QStringList textures = m_pStelAddOnDAO->getListOfTextures(addonId);
+		if (textures.size() > 1) // display list just when it is a texture set
 		{
-			for (int i=0; i < set.first.size(); i++)
+			QStringList installedTextures;
+			installedTextures = StelApp::getInstance().getStelAddOnMgr().getStelAddOnInstance(TEXTURE)->checkInstalledAddOns();
+			installedTextures = installedTextures.filter(info.idInstall);
+			for (int i=0; i < installedTextures.count(); i++) {
+				installedTextures[i] = installedTextures[i].split("/")[1];
+			}
+
+			foreach (QString texture, textures)
 			{
-				QString text = set.first.at(i);
-				QListWidgetItem* item = new QListWidgetItem(text, ui->listWidget);
+				QListWidgetItem* item = new QListWidgetItem(texture, ui->listWidget);
 				item->setFlags(item->flags() | Qt::ItemIsUserCheckable);
 				QCheckBox* parentCheckbox = ((AddOnTableView*)parentWidget())->getCheckBox(m_iRow-1);
 				item->setCheckState(parentCheckbox->checkState());
-				if (set.second.at(i).toInt())
+				if (installedTextures.contains(texture))
 				{
-					text = text % " (installed)";
-					item->setText(text);
+					item->setText(item->text() % " (installed)");
 					item->setTextColor(QColor("green"));
 				}
 			}

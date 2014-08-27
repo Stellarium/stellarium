@@ -112,7 +112,7 @@ public:
 	void updateTextureStatus(int addonId, QString installedTextures);
 
 	QHash<QString, QString> getThumbnails();
-	QPair<QStringList, QStringList> getListOfTextures(int addonId);
+	QStringList getListOfTextures(int addonId);
 	QString getLanguagePackType(const QString& checksum);
 
 private:
