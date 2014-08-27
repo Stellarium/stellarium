@@ -18,14 +18,14 @@ msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-08-22 07:29+0700\n"
-"PO-Revision-Date: 2014-08-24 12:02+0000\n"
+"PO-Revision-Date: 2014-08-26 17:35+0000\n"
 "Last-Translator: Nicolas Martignoni <Unknown>\n"
 "Language-Team: <fr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-08-25 06:42+0000\n"
-"X-Generator: Launchpad (build 17163)\n"
+"X-Launchpad-Export-Date: 2014-08-27 06:25+0000\n"
+"X-Generator: Launchpad (build 17174)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:106 src/core/modules/StarMgr.cpp:338
 #: src/core/modules/GridLinesMgr.cpp:697 src/core/modules/LandscapeMgr.cpp:354
@@ -3992,8 +3992,8 @@ msgid ""
 "You can enter values in decimal degrees, or using dms format, for example: "
 "+1d 12m 8s"
 msgstr ""
-"Vous pouvez entrer des valeurs en degrés décimaux ou sexagésimaux (degrés, "
-"minutes, secondes), p. ex. : +1d 12m 8s"
+"Vous pouvez saisir des valeurs en degrés décimaux ou sexagésimaux (degrés, "
+"minutes, secondes), p. ex. : +46d 47m 21s"
 
 #: src/ui_locationDialogGui.h:422
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:149
@@ -4007,7 +4007,7 @@ msgstr "Altitude :"
 
 #: src/ui_locationDialogGui.h:428
 msgid "Enter the altitude in meter"
-msgstr "Entrer l'altitude en mètres"
+msgstr "Saisir l'altitude en mètres"
 
 #: src/ui_locationDialogGui.h:430
 msgid " m"
@@ -6522,8 +6522,8 @@ msgid ""
 "Enter or edit the URL of the selected source. Changes are saved by pressing "
 "Enter."
 msgstr ""
-"Entrez ou éditez l'URL de la source sélectionnée. Les changements seront "
-"sauvegardés en appuyant sur Entrée."
+"Saisir ou modifier l'URL de la source sélectionnée. Les changements seront "
+"enregistrés en appuyant sur Entrée."
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:754
 msgid "Add new source"
@@ -7437,7 +7437,7 @@ msgstr "Erreur, portion de couleur \"%1\" inconnue"
 
 #: plugins/TextUserInterface/src/TuiNodeActivate.cpp:48
 msgid " [RETURN to activate]"
-msgstr " [ENTREE pour activer]"
+msgstr " [RETOUR pour activer]"
 
 #: plugins/SolarSystemEditor/src/SolarSystemEditor.cpp:57
 msgid "Solar System Editor"
