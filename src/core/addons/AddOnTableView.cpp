@@ -222,7 +222,7 @@ void AddOnTableView::slotRowChecked(int pRow, bool checked)
 
 		if (installed == 2)
 		{
-			m_iSelectedAddOnsToRemove.insert(addOnId, selectedFilesToInstall);
+			m_iSelectedAddOnsToRemove.insert(addOnId, selectedFilesToRemove);
 		}
 		else if (installed == 1) // partially
 		{
@@ -238,7 +238,7 @@ void AddOnTableView::slotRowChecked(int pRow, bool checked)
 		}
 		else
 		{
-			m_iSelectedAddOnsToInstall.insert(addOnId, QStringList());
+			m_iSelectedAddOnsToInstall.insert(addOnId, selectedFilesToInstall);
 		}
 	}
 	else
