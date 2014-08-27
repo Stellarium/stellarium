@@ -36,7 +36,7 @@ AddOnWidget::AddOnWidget(QWidget* parent, int row)
 	connect(ui->listWidget, SIGNAL(itemChanged(QListWidgetItem*)),
 		this, SLOT(slotItemChanged(QListWidgetItem*)));
 	connect(((AddOnTableView*)parent), SIGNAL(rowChecked(int, bool)),
-		this, SLOT(slotCheckAllTextures(int, bool)));
+		this, SLOT(slotCheckAllFiles(int, bool)));
 }
 
 AddOnWidget::~AddOnWidget()
@@ -94,12 +94,12 @@ void AddOnWidget::init(int addonId)
 		ui->thumbnail->resize(thumbnail.size());
 	}
 
-	// List of files - applicable only for textures
+	// List of files - for now, applicable only for textures
 	ui->listWidget->setVisible(false);
 	if (parentWidget()->objectName() == "texturesTableView")
 	{
-		m_sSelectedTexturesToInstall.clear();
-		m_sSelectedTexturesToRemove.clear();
+		m_sSelectedFilesToInstall.clear();
+		m_sSelectedFilesToRemove.clear();
 
 		// <textures, installed>
 		QPair<QStringList, QStringList> set = m_pStelAddOnDAO->getListOfTextures(addonId);
@@ -124,12 +124,12 @@ void AddOnWidget::init(int addonId)
 	}
 }
 
-void AddOnWidget::slotCheckAllTextures(int pRow, bool checked)
+void AddOnWidget::slotCheckAllFiles(int pRow, bool checked)
 {
 	if (ui->listWidget->count() && pRow+1 == m_iRow)
 	{
-		m_sSelectedTexturesToInstall.clear();
-		m_sSelectedTexturesToRemove.clear();
+		m_sSelectedFilesToInstall.clear();
+		m_sSelectedFilesToRemove.clear();
 		ui->listWidget->blockSignals(true);
 		for (int i=0; i<ui->listWidget->count(); i++)
 		{
@@ -148,26 +148,26 @@ void AddOnWidget::slotItemChanged(QListWidgetItem *item)
 		{
 			if (item->textColor() == QColor("green")) // installed
 			{
-				m_sSelectedTexturesToRemove.append(item->text());
+				m_sSelectedFilesToRemove.append(item->text());
 			}
 			else
 			{
-				m_sSelectedTexturesToInstall.append(item->text());
+				m_sSelectedFilesToInstall.append(item->text());
 			}
 		}
 		else
 		{
 			if (item->textColor() == QColor("green")) // installed
 			{
-				m_sSelectedTexturesToRemove.removeOne(item->text());
+				m_sSelectedFilesToRemove.removeOne(item->text());
 			}
 			else
 			{
-				m_sSelectedTexturesToInstall.removeOne(item->text());
+				m_sSelectedFilesToInstall.removeOne(item->text());
 			}
 		}
 
-		int count = m_sSelectedTexturesToInstall.size() + m_sSelectedTexturesToRemove.size();
+		int count = m_sSelectedFilesToInstall.size() + m_sSelectedFilesToRemove.size();
 		if (count == ui->listWidget->count())
 		{
 			emit(checkRow(m_iRow-1, 2));  // all checked

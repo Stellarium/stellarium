@@ -217,8 +217,8 @@ void AddOnTableView::slotRowChecked(int pRow, bool checked)
 	int installed = model->findIndex(pRow, COLUMN_INSTALLED).data(Qt::EditRole).toInt();
 	if (checked)
 	{
-		QStringList selectedFilesToInstall = widget->getTexturesToInstall();
-		QStringList selectedFilesToRemove = widget->getTexturesToRemove();
+		QStringList selectedFilesToInstall = widget->getSelectedFilesToInstall();
+		QStringList selectedFilesToRemove = widget->getSelectedFilesToRemove();
 
 		if (installed == 2)
 		{

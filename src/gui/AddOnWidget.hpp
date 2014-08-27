@@ -36,8 +36,8 @@ public:
 	virtual ~AddOnWidget();
 
 	void init(int addonId);
-	QStringList getTexturesToInstall() { return m_sSelectedTexturesToInstall; }
-	QStringList getTexturesToRemove() { return m_sSelectedTexturesToRemove; }
+	QStringList getSelectedFilesToInstall() { return m_sSelectedFilesToInstall; }
+	QStringList getSelectedFilesToRemove() { return m_sSelectedFilesToRemove; }
 
 	void paintEvent(QPaintEvent*);
 
@@ -46,15 +46,15 @@ signals:
 
 private slots:
 	void slotItemChanged(QListWidgetItem* item);
-	void slotCheckAllTextures(int pRow, bool checked);
+	void slotCheckAllFiles(int pRow, bool checked);
 
 private:
 	const int m_iRow;
 	Ui_AddOnWidget* ui;
 	StelAddOnDAO* m_pStelAddOnDAO;
 	QString m_sThumbnailDir;
-	QStringList m_sSelectedTexturesToInstall;
-	QStringList m_sSelectedTexturesToRemove;
+	QStringList m_sSelectedFilesToInstall;
+	QStringList m_sSelectedFilesToRemove;
 };
 
 #endif // _ADDONWIDGET_HPP
