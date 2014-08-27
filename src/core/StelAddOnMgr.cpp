@@ -286,7 +286,7 @@ bool StelAddOnMgr::installFromFile(const StelAddOnDAO::AddOnInfo addonInfo,
 	}
 
 	// checking integrity
-	bool installed = false;
+	int installed = 0;
 	if (addonInfo.checksum == calculateMd5(file))
 	{
 		// installing files

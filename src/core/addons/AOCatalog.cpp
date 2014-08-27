@@ -57,9 +57,9 @@ QStringList AOCatalog::checkInstalledAddOns() const
 	return checksums;
 }
 
-bool AOCatalog::installFromFile(const QString& idInstall,
-				const QString& downloadedFilepath,
-				const QStringList& selectedFiles) const
+int AOCatalog::installFromFile(const QString& idInstall,
+			       const QString& downloadedFilepath,
+			       const QStringList& selectedFiles) const
 {
 	Q_UNUSED(selectedFiles); // not applicable - always install all files
 
@@ -68,7 +68,7 @@ bool AOCatalog::installFromFile(const QString& idInstall,
 	{
 		qWarning() << "Add-On Catalog: Unable to intall" << idInstall
 			   << "The file found is not a .cat or .json";
-		return false;
+		return 0;
 	}
 
 	QString destination = StelFileMgr::getUserDir() % "/" % idInstall % suffix;
@@ -76,11 +76,11 @@ bool AOCatalog::installFromFile(const QString& idInstall,
 	if (!QFile(downloadedFilepath).copy(destination))
 	{
 		qWarning() << "Add-On Catalog: Unable to install" << idInstall;
-		return false;
+		return 0;
 	}
 
 	qDebug() << "Add-On Catalog: New catalog installed:" << idInstall;
-	return true;
+	return 2;
 }
 
 bool AOCatalog::uninstallAddOn(const QString &idInstall) const

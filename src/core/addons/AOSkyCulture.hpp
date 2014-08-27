@@ -33,9 +33,9 @@ public:
 	virtual QStringList checkInstalledAddOns() const;
 
 	// install starlore from a zip file.
-	virtual bool installFromFile(const QString& idInstall,
-				     const QString& downloadedFilepath,
-				     const QStringList& selectedFiles) const;
+	virtual int installFromFile(const QString& idInstall,
+				    const QString& downloadedFilepath,
+				    const QStringList& selectedFiles) const;
 
 	// uninstall starlore
 	virtual bool uninstallAddOn(const QString& idInstall) const;

@@ -37,9 +37,9 @@ QStringList AOSkyCulture::checkInstalledAddOns() const
 	return dir.entryList();
 }
 
-bool AOSkyCulture::installFromFile(const QString& idInstall,
-				   const QString& downloadedFilepath,
-				   const QStringList& selectedFiles) const
+int AOSkyCulture::installFromFile(const QString& idInstall,
+				  const QString& downloadedFilepath,
+				  const QStringList& selectedFiles) const
 {
 	Q_UNUSED(selectedFiles); // not applicable - always install all files
 
@@ -48,7 +48,7 @@ bool AOSkyCulture::installFromFile(const QString& idInstall,
 	{
 		qWarning() << "Add-On SkyCultures: Unable to open the ZIP archive:"
 			   << QDir::toNativeSeparators(downloadedFilepath);
-		return false;
+		return 0;
 	}
 
 	QString destination = m_sSkyCultureInstallDir % idInstall;
@@ -56,12 +56,12 @@ bool AOSkyCulture::installFromFile(const QString& idInstall,
 
 	if (!reader.extractAll(destination)) {
 		qWarning() << "Add-On SkyCultures: Unable to install the new sky culture!";
-		return false;
+		return 0;
 	}
 
 	qWarning() << "Add-On SkyCultures: New sky culture" << idInstall << "installed!";
 	emit(skyCulturesChanged());
-	return true;
+	return 2;
 }
 
 bool AOSkyCulture::uninstallAddOn(const QString &idInstall) const

@@ -55,9 +55,9 @@ QStringList AOLanguagePack::checkInstalledAddOns() const
 	return checksums;
 }
 
-bool AOLanguagePack::installFromFile(const QString& idInstall,
-				     const QString& downloadedFilepath,
-				     const QStringList& selectedFiles) const
+int AOLanguagePack::installFromFile(const QString& idInstall,
+				    const QString& downloadedFilepath,
+				    const QStringList& selectedFiles) const
 {
 	Q_UNUSED(selectedFiles); // not applicable - always install all files
 
@@ -65,7 +65,7 @@ bool AOLanguagePack::installFromFile(const QString& idInstall,
 	{
 		qWarning() << "Add-On Language: Unable to intall" << idInstall
 			   << "The file found is not a .qm";
-		return false;
+		return 0;
 	}
 
 	QString destination = m_sLocaleInstallDir % "/" % idInstall % ".qm";
@@ -73,11 +73,11 @@ bool AOLanguagePack::installFromFile(const QString& idInstall,
 	if (!QFile(downloadedFilepath).copy(destination))
 	{
 		qWarning() << "Add-On Language: Unable to install" << idInstall;
-		return false;
+		return 0;
 	}
 
 	qDebug() << "Add-On Language: New language installed:" << idInstall;
-	return true;
+	return 2;
 }
 
 bool AOLanguagePack::uninstallAddOn(const QString &idInstall) const

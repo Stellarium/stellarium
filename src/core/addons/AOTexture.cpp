@@ -52,11 +52,11 @@ QStringList AOTexture::checkInstalledAddOns() const
 	return res;
 }
 
-bool AOTexture::installFromFile(const QString& idInstall,
-				const QString& downloadedFilepath,
-				const QStringList& selectedFiles) const
+int AOTexture::installFromFile(const QString& idInstall,
+			       const QString& downloadedFilepath,
+			       const QStringList& selectedFiles) const
 {
-	bool installed = false;
+	int installed = 0;
 	QString suffix = QFileInfo(downloadedFilepath).suffix();
 	if (suffix == "zip")
 	{
@@ -75,16 +75,17 @@ bool AOTexture::installFromFile(const QString& idInstall,
 	return installed;
 }
 
-bool AOTexture::installFromZip(QString idInstall, QString downloadedFilepath, QStringList selectedFiles) const
+int AOTexture::installFromZip(QString idInstall, QString downloadedFilepath, QStringList selectedFiles) const
 {
 	QZipReader reader(downloadedFilepath);
 	if (reader.status() != QZipReader::NoError)
 	{
 		qWarning() << "Add-On Texture: Unable to open the ZIP archive:"
 			   << QDir::toNativeSeparators(downloadedFilepath);
-		return false;
+		return 0;
 	}
 
+	int installed = 2;
 	QList<QZipReader::FileInfo> infoList = reader.fileInfoList();
 	foreach(QZipReader::FileInfo info, infoList)
 	{
@@ -95,6 +96,7 @@ bool AOTexture::installFromZip(QString idInstall, QString downloadedFilepath, QS
 
 		if (!selectedFiles.contains(info.filePath))
 		{
+			installed = 1; // partially
 			continue;
 		}
 
@@ -110,10 +112,10 @@ bool AOTexture::installFromZip(QString idInstall, QString downloadedFilepath, QS
 		qDebug() << "Add-On Texture: New texture installed:" << info.filePath;
 	}
 
-	return true;
+	return installed;
 }
 
-bool AOTexture::installFromImg(QString idInstall, QString downloadedFilepath) const
+int AOTexture::installFromImg(QString idInstall, QString downloadedFilepath) const
 {
 	QString filename = QFileInfo(downloadedFilepath).fileName();
 	QString destination = m_sTexturesInstallDir % filename;
@@ -121,13 +123,13 @@ bool AOTexture::installFromImg(QString idInstall, QString downloadedFilepath) co
 	if (!QFile(downloadedFilepath).copy(destination))
 	{
 		qWarning() << "Add-On Texture: Unable to install" << filename;
-		return false;
+		return 0;
 	}
 
 	m_pInstalledTextures->setValue(filename, idInstall);
 
 	qDebug() << "Add-On Texture: New texture installed:" << filename;
-	return true;
+	return 2;
 }
 
 bool AOTexture::uninstallAddOn(const QString &idInstall) const

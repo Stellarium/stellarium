@@ -33,7 +33,7 @@ public:
 	virtual QStringList checkInstalledAddOns() const;
 
 	// install catalog.
-	virtual bool installFromFile(const QString& idInstall,
+	virtual int installFromFile(const QString& idInstall,
 				     const QString& downloadedFilepath,
 				     const QStringList& selectedFiles) const;
 

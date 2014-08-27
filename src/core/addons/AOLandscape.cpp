@@ -45,9 +45,9 @@ QStringList AOLandscape::checkInstalledAddOns() const
 	return m_pLandscapeMgr->getUserLandscapeIDs();
 }
 
-bool AOLandscape::installFromFile(const QString& idInstall,
-				  const QString& downloadedFilepath,
-				  const QStringList& selectedFiles) const
+int AOLandscape::installFromFile(const QString& idInstall,
+				 const QString& downloadedFilepath,
+				 const QStringList& selectedFiles) const
 {
 	Q_UNUSED(idInstall);
 	Q_UNUSED(selectedFiles); // not applicable - always install all files
@@ -58,9 +58,9 @@ bool AOLandscape::installFromFile(const QString& idInstall,
 	QString landscapeId = m_pLandscapeMgr->installLandscapeFromArchive(downloadedFilepath);
 	if (landscapeId.isEmpty())
 	{
-		return false;
+		return 0;
 	}
-	return true;
+	return 2;
 }
 
 bool AOLandscape::uninstallAddOn(const QString& idInstall) const
