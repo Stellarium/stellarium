@@ -154,23 +154,28 @@ bool StelAddOnMgr::updateCatalog(QString webresult)
 	return true;
 }
 
-void StelAddOnMgr::downloadAddOn(const StelAddOnDAO::AddOnInfo addonInfo)
+void StelAddOnMgr::downloadNextAddOn()
 {
+	if (m_bDownloading)
+	{
+		return;
+	}
+
 	Q_ASSERT(m_pDownloadReply==NULL);
 	Q_ASSERT(m_currentDownloadFile==NULL);
 	Q_ASSERT(m_progressBar==NULL);
 
-	m_currentDownloadInfo = addonInfo;
-	m_currentDownloadFile = new QFile(addonInfo.filepath);
+	m_currentDownloadInfo = m_pStelAddOnDAO->getAddOnInfo(m_downloadQueue.firstKey());
+	m_currentDownloadFile = new QFile(m_currentDownloadInfo.filepath);
 	if (!m_currentDownloadFile->open(QIODevice::WriteOnly))
 	{
 		qWarning() << "Can't open a writable file: "
-			   << QDir::toNativeSeparators(addonInfo.filepath);
+			   << QDir::toNativeSeparators(m_currentDownloadInfo.filepath);
 		return;
 	}
 
 	m_bDownloading = true;
-	QNetworkRequest req(addonInfo.url);
+	QNetworkRequest req(m_currentDownloadInfo.url);
 	req.setAttribute(QNetworkRequest::CacheSaveControlAttribute, false);
 	req.setAttribute(QNetworkRequest::RedirectionTargetAttribute, false);
 	req.setRawHeader("User-Agent", StelUtils::getApplicationName().toLatin1());
@@ -181,8 +186,8 @@ void StelAddOnMgr::downloadAddOn(const StelAddOnDAO::AddOnInfo addonInfo)
 
 	m_progressBar = StelApp::getInstance().addProgressBar();
 	m_progressBar->setValue(0);
-	m_progressBar->setRange(0, addonInfo.size*1024);
-	m_progressBar->setFormat(QString("%1: %p%").arg(addonInfo.filename));
+	m_progressBar->setRange(0, m_currentDownloadInfo.size*1024);
+	m_progressBar->setFormat(QString("%1: %p%").arg(m_currentDownloadInfo.filename));
 }
 
 void StelAddOnMgr::newDownloadedData()
@@ -242,18 +247,18 @@ void StelAddOnMgr::downloadFinished()
 	StelApp::getInstance().removeProgressBar(m_progressBar);
 	m_progressBar = NULL;
 
-	installFromFile(m_currentDownloadInfo);
+	installFromFile(m_currentDownloadInfo, m_downloadQueue.first());
 	m_currentDownloadInfo = StelAddOnDAO::AddOnInfo();
 	m_bDownloading = false;
-	m_downloadQueue.removeFirst();
+	m_downloadQueue.remove(m_downloadQueue.firstKey());
 	if (!m_downloadQueue.isEmpty())
 	{
 		// next download
-		downloadAddOn(m_pStelAddOnDAO->getAddOnInfo(m_downloadQueue.first()));
+		downloadNextAddOn();
 	}
 }
 
-void StelAddOnMgr::installAddOn(const int addonId, const QStringList files)
+void StelAddOnMgr::installAddOn(const int addonId, const QStringList selectedFiles)
 {
 	if (m_downloadQueue.contains(addonId) || addonId < 1)
 	{
@@ -261,19 +266,17 @@ void StelAddOnMgr::installAddOn(const int addonId, const QStringList files)
 	}
 
 	StelAddOnDAO::AddOnInfo addonInfo = m_pStelAddOnDAO->getAddOnInfo(addonId);
-	if (!installFromFile(addonInfo))
+	if (!installFromFile(addonInfo, selectedFiles))
 	{
 		// something goes wrong (file not found OR corrupt),
 		// try downloading it...
-		m_downloadQueue.append(addonId);
-		if (!m_bDownloading)
-		{
-			downloadAddOn(addonInfo);
-		}
+		m_downloadQueue.insert(addonId, selectedFiles);
+		downloadNextAddOn();
 	}
 }
 
-bool StelAddOnMgr::installFromFile(const StelAddOnDAO::AddOnInfo addonInfo)
+bool StelAddOnMgr::installFromFile(const StelAddOnDAO::AddOnInfo addonInfo,
+				   const QStringList selectedFiles)
 {
 	QFile file(addonInfo.filepath);
 	// checking if we have this file in the add-on dir (local disk)
@@ -286,9 +289,11 @@ bool StelAddOnMgr::installFromFile(const StelAddOnDAO::AddOnInfo addonInfo)
 	bool installed = false;
 	if (addonInfo.checksum == calculateMd5(file))
 	{
-		// installing file
+		// installing files
 		installed = m_pStelAddOns.value(addonInfo.category)
-				->installFromFile(addonInfo.idInstall, addonInfo.filepath);
+				->installFromFile(addonInfo.idInstall,
+						  addonInfo.filepath,
+						  selectedFiles);
 	}
 	else
 	{

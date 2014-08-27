@@ -53,13 +53,14 @@ QStringList AOTexture::checkInstalledAddOns() const
 }
 
 bool AOTexture::installFromFile(const QString& idInstall,
-				const QString& downloadedFilepath) const
+				const QString& downloadedFilepath,
+				const QStringList& selectedFiles) const
 {
 	bool installed = false;
 	QString suffix = QFileInfo(downloadedFilepath).suffix();
 	if (suffix == "zip")
 	{
-		installed = installFromZip(idInstall, downloadedFilepath);
+		installed = installFromZip(idInstall, downloadedFilepath, selectedFiles);
 	}
 	else if (suffix == "png")
 	{
@@ -74,7 +75,7 @@ bool AOTexture::installFromFile(const QString& idInstall,
 	return installed;
 }
 
-bool AOTexture::installFromZip(QString idInstall, QString downloadedFilepath) const
+bool AOTexture::installFromZip(QString idInstall, QString downloadedFilepath, QStringList selectedFiles) const
 {
 	QZipReader reader(downloadedFilepath);
 	if (reader.status() != QZipReader::NoError)
@@ -88,6 +89,11 @@ bool AOTexture::installFromZip(QString idInstall, QString downloadedFilepath) co
 	foreach(QZipReader::FileInfo info, infoList)
 	{
 		if (!info.isFile)
+		{
+			continue;
+		}
+
+		if (!selectedFiles.contains(info.filePath))
 		{
 			continue;
 		}

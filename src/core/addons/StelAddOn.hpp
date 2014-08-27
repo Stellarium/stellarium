@@ -38,9 +38,10 @@ public:
 	// check add-ons which are already installed
 	virtual QStringList checkInstalledAddOns() const = 0;
 
-	// install add-on from a zip file
+	// install add-on from a available file
 	virtual bool installFromFile(const QString& idInstall,
-				     const QString& downloadedFilepath) const = 0;
+				     const QString& downloadedFilepath,
+				     const QStringList& filesToInstall) const = 0;
 
 	// uninstall add-on
 	virtual bool uninstallAddOn(const QString& idInstall) const = 0;

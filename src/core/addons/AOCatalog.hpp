@@ -34,7 +34,8 @@ public:
 
 	// install catalog.
 	virtual bool installFromFile(const QString& idInstall,
-				     const QString& downloadedFilepath) const;
+				     const QString& downloadedFilepath,
+				     const QStringList& selectedFiles) const;
 
 	// uninstall catalog
 	virtual bool uninstallAddOn(const QString& idInstall) const;

@@ -35,7 +35,8 @@ public:
 
 	// install landscape from a zip file.
 	virtual bool installFromFile(const QString& idInstall,
-				     const QString& downloadedFilepath) const;
+				     const QString& downloadedFilepath,
+				     const QStringList& selectedFiles) const;
 
 	// uninstall landscape
 	virtual bool uninstallAddOn(const QString& idInstall) const;

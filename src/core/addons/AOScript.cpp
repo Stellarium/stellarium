@@ -41,8 +41,11 @@ QStringList AOScript::checkInstalledAddOns() const
 }
 
 bool AOScript::installFromFile(const QString& idInstall,
-			       const QString& downloadedFilepath) const
+			       const QString& downloadedFilepath,
+			       const QStringList& selectedFiles) const
 {
+	Q_UNUSED(selectedFiles); // not applicable - always install all files
+
 	QString suffix = "." % QFileInfo(downloadedFilepath).suffix();
 	if (suffix != ".ssc" && suffix != ".sts")
 	{

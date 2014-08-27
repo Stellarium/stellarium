@@ -46,9 +46,11 @@ QStringList AOLandscape::checkInstalledAddOns() const
 }
 
 bool AOLandscape::installFromFile(const QString& idInstall,
-				  const QString& downloadedFilepath) const
+				  const QString& downloadedFilepath,
+				  const QStringList& selectedFiles) const
 {
 	Q_UNUSED(idInstall);
+	Q_UNUSED(selectedFiles); // not applicable - always install all files
 
 	// TODO: the method LandscapeMgr::installLandscapeFromArchive must be removed
 	//       and this operation have to be done here.

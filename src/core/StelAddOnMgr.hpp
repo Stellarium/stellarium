@@ -51,8 +51,9 @@ public:
 
 	QString getThumbnailDir() { return m_sDirThumbnail; }
 	QString getDirectory(QString category) { return m_dirs.value(category, ""); }
-	void installAddOn(const int addonId, const QStringList files);
-	bool installFromFile(const StelAddOnDAO::AddOnInfo addonInfo);
+	void installAddOn(const int addonId, const QStringList selectedFiles);
+	bool installFromFile(const StelAddOnDAO::AddOnInfo addonInfo,
+			     const QStringList selectedFiles);
 	void removeAddOn(const int addonId, const QStringList files);
 	bool updateCatalog(QString webresult);
 	void setLastUpdate(qint64 time);
@@ -90,7 +91,7 @@ private:
 	QSettings* m_pConfig;
 
 	bool m_bDownloading;
-	QList<int> m_downloadQueue;
+	QMap<int, QStringList> m_downloadQueue; // <addonId, selectedFiles>
 	QNetworkReply* m_pDownloadReply;
 	QFile* m_currentDownloadFile;
 	StelAddOnDAO::AddOnInfo m_currentDownloadInfo;
@@ -108,7 +109,7 @@ private:
 	QHash<QString, StelAddOn*> m_pStelAddOns;
 
 	void refreshAddOnStatuses();
-	void downloadAddOn(const StelAddOnDAO::AddOnInfo addonInfo);
+	void downloadNextAddOn();
 	QString calculateMd5(QFile &file) const;
 };
 

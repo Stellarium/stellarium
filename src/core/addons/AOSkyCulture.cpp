@@ -38,8 +38,11 @@ QStringList AOSkyCulture::checkInstalledAddOns() const
 }
 
 bool AOSkyCulture::installFromFile(const QString& idInstall,
-				   const QString& downloadedFilepath) const
+				   const QString& downloadedFilepath,
+				   const QStringList& selectedFiles) const
 {
+	Q_UNUSED(selectedFiles); // not applicable - always install all files
+
 	QZipReader reader(downloadedFilepath);
 	if (reader.status() != QZipReader::NoError)
 	{

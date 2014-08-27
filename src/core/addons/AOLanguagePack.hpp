@@ -34,7 +34,8 @@ public:
 
 	// install language pack from a .qm file.
 	virtual bool installFromFile(const QString& idInstall,
-				     const QString& downloadedFilepath) const;
+				     const QString& downloadedFilepath,
+				     const QStringList& selectedFiles) const;
 
 	// uninstall language pack
 	virtual bool uninstallAddOn(const QString& idInstall) const;
