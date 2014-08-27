@@ -211,29 +211,30 @@ void AddOnTableView::setAllChecked(bool checked)
 
 void AddOnTableView::slotRowChecked(int pRow, bool checked)
 {
+	AddOnWidget* widget = insertAddOnWidget(pRow+1);
 	AddOnTableProxyModel* model = (AddOnTableProxyModel*) this->model();
 	int addOnId = model->findIndex(pRow, COLUMN_ADDONID).data().toInt();
 	int installed = model->findIndex(pRow, COLUMN_INSTALLED).data(Qt::EditRole).toInt();
 	if (checked)
 	{
+		QStringList selectedFilesToInstall = widget->getTexturesToInstall();
+		QStringList selectedFilesToRemove = widget->getTexturesToRemove();
+
 		if (installed == 2)
 		{
-			m_iSelectedAddOnsToRemove.insert(addOnId, QStringList());
+			m_iSelectedAddOnsToRemove.insert(addOnId, selectedFilesToInstall);
 		}
 		else if (installed == 1) // partially
 		{
-			AddOnWidget* widget = insertAddOnWidget(pRow+1);
-			QStringList install = widget->getTexturesToInstall();
-			if (install.isEmpty())
+			if (selectedFilesToInstall.isEmpty())
 				m_iSelectedAddOnsToInstall.remove(addOnId);
 			else
-				m_iSelectedAddOnsToInstall.insert(addOnId, install);
+				m_iSelectedAddOnsToInstall.insert(addOnId, selectedFilesToInstall);
 
-			QStringList remove = widget->getTexturesToRemove();
-			if (remove.isEmpty())
+			if (selectedFilesToRemove.isEmpty())
 				m_iSelectedAddOnsToRemove.remove(addOnId);
 			else
-				m_iSelectedAddOnsToRemove.insert(addOnId, remove);
+				m_iSelectedAddOnsToRemove.insert(addOnId, selectedFilesToRemove);
 		}
 		else
 		{
