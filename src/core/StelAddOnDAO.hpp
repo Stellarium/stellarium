@@ -109,7 +109,6 @@ public:
 	void markAddOnsAsInstalledFromMd5(QStringList checksums);
 	void markTexturesAsInstalled(const QStringList& items);
 	void updateAddOnStatus(QString idInstall, int installed);
-	void updateTextureStatus(int addonId, QString installedTextures);
 
 	QHash<QString, QString> getThumbnails();
 	QStringList getListOfTextures(int addonId);

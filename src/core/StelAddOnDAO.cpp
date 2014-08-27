@@ -120,8 +120,7 @@ bool StelAddOnDAO::createAddonTables()
 	addonTables << "CREATE TABLE IF NOT EXISTS " % TABLE_TEXTURE % " ("
 			% COLUMN_ID % " INTEGER primary key AUTOINCREMENT, "
 			% COLUMN_ADDONID % " INTEGER UNIQUE, "
-			% COLUMN_TEXTURES % " TEXT, "
-			% COLUMN_INSTALLED_TEXTURES % " TEXT DEFAULT 0)";
+			% COLUMN_TEXTURES % " TEXT)";
 
 	QSqlQuery query(m_db);
 	foreach (QString table, addonTables)
@@ -242,7 +241,7 @@ void StelAddOnDAO::markTexturesAsInstalled(const QStringList& items)
 			installIds.append(installId);
 	}
 
-	// get list of textures from database by each installId
+	// get list of textures from database by each idInstall
 	QSqlQuery query(m_db);
 	QString sQuery = QString("SELECT addon, id_install, textures "
 				 "FROM texture INNER JOIN addon "
@@ -253,7 +252,6 @@ void StelAddOnDAO::markTexturesAsInstalled(const QStringList& items)
 			   << m_db.lastError() << sQuery;
 		return;
 	}
-	QStringList installedTextures;
 	while (query.next())
 	{
 		int addonId = query.value(0).toInt();
@@ -267,11 +265,8 @@ void StelAddOnDAO::markTexturesAsInstalled(const QStringList& items)
 			if (items.contains(item)) // texture installed
 			{
 				countInstalled++;
-				installedTextures.append("2");
 				continue;
 			}
-			// texture not installed
-			installedTextures.append("0");
 		}
 
 		// get addon status (texture set)
@@ -279,13 +274,12 @@ void StelAddOnDAO::markTexturesAsInstalled(const QStringList& items)
 		if (countInstalled == 0)
 			installed = 0; // not installed
 		else if (countInstalled < countItems)
-			installed = 1; // partial
+			installed = 1; // partially
 		else
 			installed = 2; // all textures installed
 
 		// update database
 		updateAddOnStatus(idInstall, installed);
-		updateTextureStatus(addonId, installedTextures.join(","));
 	}
 }
 
@@ -301,20 +295,6 @@ void StelAddOnDAO::updateAddOnStatus(QString idInstall, int installed)
 	 if (!query.exec()) {
 		qWarning() << "Add-On DAO : Unable to update addon status!"
 			   << m_db.lastError();
-	}
-}
-
-void StelAddOnDAO::updateTextureStatus(int addonId, QString installedTextures)
-{
-	 QSqlQuery query(m_db);
-	 QString sQuery = QString("UPDATE texture "
-				  "SET installed_textures='%1' "
-				  "WHERE addon=%2")
-			 .arg(installedTextures)
-			 .arg(addonId);
-	 if (!query.exec(sQuery)) {
-		qWarning() << "Add-On DAO : Unable to update texture status!"
-			   << m_db.lastError() << sQuery;
 	}
 }
 
