@@ -94,13 +94,13 @@ int AOTexture::installFromZip(QString idInstall, QString downloadedFilepath, QSt
 			continue;
 		}
 
-		if (!selectedFiles.contains(info.filePath))
+		QFile file(m_sTexturesInstallDir % info.filePath);
+		if (!selectedFiles.contains(info.filePath) && !file.exists())
 		{
 			installed = 1; // partially
 			continue;
 		}
 
-		QFile file(m_sTexturesInstallDir % info.filePath);
 		file.remove(); // overwrite
 		QByteArray data = reader.fileData(info.filePath);
 		file.open(QIODevice::WriteOnly);
