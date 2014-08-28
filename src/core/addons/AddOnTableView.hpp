@@ -36,6 +36,7 @@ public:
 	virtual ~AddOnTableView();
 
 	void mousePressEvent(QMouseEvent* e);
+	void mouseDoubleClickEvent(QMouseEvent* e);
 	void selectionChanged(const QItemSelection& selected, const QItemSelection& deselected);
 	void setModel(QAbstractItemModel* model);
 

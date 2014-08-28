@@ -136,6 +136,15 @@ bool AddOnTableView::isCompatible(QString first, QString last)
 	return true;
 }
 
+void AddOnTableView::mouseDoubleClickEvent(QMouseEvent *e)
+{
+	QModelIndex index = indexAt(e->pos());
+	if (index.isValid() && !index.row()%2)
+	{
+		slotCheckRow(index.row(), 2);
+	}
+}
+
 void AddOnTableView::mousePressEvent(QMouseEvent *e)
 {
 	QModelIndex index = indexAt(e->pos());
