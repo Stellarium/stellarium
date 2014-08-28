@@ -152,7 +152,9 @@ void AddOnWidget::slotItemChanged(QListWidgetItem *item)
 		{
 			if (item->textColor() == QColor("green")) // installed
 			{
-				m_sSelectedFilesToRemove.append(item->text());
+				QString texture = item->text();
+				texture = texture.left(texture.indexOf(" (installed)"));
+				m_sSelectedFilesToRemove.append(texture);
 			}
 			else
 			{
@@ -163,7 +165,9 @@ void AddOnWidget::slotItemChanged(QListWidgetItem *item)
 		{
 			if (item->textColor() == QColor("green")) // installed
 			{
-				m_sSelectedFilesToRemove.removeOne(item->text());
+				QString texture = item->text();
+				texture = texture.left(texture.indexOf(" (installed)"));
+				m_sSelectedFilesToRemove.removeOne(texture);
 			}
 			else
 			{

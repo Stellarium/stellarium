@@ -135,5 +135,34 @@ int AOTexture::installFromImg(QString idInstall, QString downloadedFilepath) con
 int AOTexture::uninstallAddOn(const QString& idInstall,
 			      const QStringList& selectedFiles) const
 {
-	return true;
+	int filesRemoved = 0;
+	foreach (QString texture, m_pInstalledTextures->allKeys())
+	{
+		if (selectedFiles.contains(texture) && idInstall == m_pInstalledTextures->value(texture))
+		{
+			QFile file(m_sTexturesInstallDir % texture);
+			if (file.remove())
+			{
+				qDebug() << "Add-On Texture : texture removed" << texture;
+				m_pInstalledTextures->remove(texture);
+				filesRemoved++;
+			}
+			else
+			{
+				qWarning() << "Add-On Texture : unable to remove" << texture;
+			}
+		}
+	}
+
+	if (filesRemoved == selectedFiles.count())
+	{
+		qDebug() << "Add-On Textures : Successfully removed" << idInstall;
+		return 2; // completely removed
+	}
+	else if (filesRemoved > 0)
+	{
+		return 1; // partially removed
+	}
+
+	return 0; // failed!
 }
