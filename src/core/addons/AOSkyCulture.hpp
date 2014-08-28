@@ -38,8 +38,8 @@ public:
 				    const QStringList& selectedFiles) const;
 
 	// uninstall starlore
-	virtual bool uninstallAddOn(const QString& idInstall,
-				    const QStringList& selectedFiles) const;
+	virtual int uninstallAddOn(const QString& idInstall,
+				   const QStringList& selectedFiles) const;
 
 signals:
 	void skyCulturesChanged() const;

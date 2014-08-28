@@ -39,8 +39,8 @@ public:
 				    const QStringList& selectedFiles) const;
 
 	// uninstall landscape
-	virtual bool uninstallAddOn(const QString& idInstall,
-				    const QStringList& selectedFiles) const;
+	virtual int uninstallAddOn(const QString& idInstall,
+				   const QStringList& selectedFiles) const;
 
 	// download thumbnails
 	void downloadThumbnails();

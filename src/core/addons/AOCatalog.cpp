@@ -83,8 +83,8 @@ int AOCatalog::installFromFile(const QString& idInstall,
 	return 2;
 }
 
-bool AOCatalog::uninstallAddOn(const QString &idInstall,
-			       const QStringList& selectedFiles) const
+int AOCatalog::uninstallAddOn(const QString &idInstall,
+			      const QStringList& selectedFiles) const
 {
 	Q_UNUSED(selectedFiles); // not applicable - always install all files
 

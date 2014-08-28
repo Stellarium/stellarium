@@ -63,8 +63,8 @@ int AOLandscape::installFromFile(const QString& idInstall,
 	return 2;
 }
 
-bool AOLandscape::uninstallAddOn(const QString& idInstall,
-				 const QStringList& selectedFiles) const
+int AOLandscape::uninstallAddOn(const QString& idInstall,
+				const QStringList& selectedFiles) const
 {
 	Q_UNUSED(selectedFiles); // not applicable - always install all files
 

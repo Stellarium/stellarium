@@ -39,7 +39,7 @@ public:
 				    const QStringList& selectedFiles) const;
 
 	// uninstall texture
-	virtual bool uninstallAddOn(const QString& idInstall,
+	virtual int uninstallAddOn(const QString& idInstall,
 				    const QStringList& selectedFiles) const;
 
 private:

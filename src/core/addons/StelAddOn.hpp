@@ -44,8 +44,8 @@ public:
 				    const QStringList& selectedFiles) const = 0;
 
 	// uninstall add-on
-	virtual bool uninstallAddOn(const QString& idInstall,
-				    const QStringList& selectedFiles) const = 0;
+	virtual int uninstallAddOn(const QString& idInstall,
+				   const QStringList& selectedFiles) const = 0;
 };
 
 #endif // _STELADDON_HPP_

@@ -80,8 +80,8 @@ int AOLanguagePack::installFromFile(const QString& idInstall,
 	return 2;
 }
 
-bool AOLanguagePack::uninstallAddOn(const QString &idInstall,
-				    const QStringList& selectedFiles) const
+int AOLanguagePack::uninstallAddOn(const QString &idInstall,
+				   const QStringList& selectedFiles) const
 {
 	Q_UNUSED(selectedFiles); // not applicable - always install all files
 
