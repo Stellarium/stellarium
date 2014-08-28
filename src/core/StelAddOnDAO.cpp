@@ -200,6 +200,7 @@ void StelAddOnDAO::markAddOnsAsInstalled(QStringList idInstall)
 {
 	if (idInstall.isEmpty())
 	{
+		qWarning() << "Add-On DAO markAddOnsAsInstalled: list of idInstall is empty!";
 		return;
 	}
 	QSqlQuery query(m_db);
@@ -230,6 +231,7 @@ void StelAddOnDAO::markTexturesAsInstalled(const QStringList& items)
 {
 	if (items.isEmpty())
 	{
+		qWarning() << "Add-On DAO markTexturesAsInstalled: list of textures is empty!";
 		return;
 	}
 
@@ -300,6 +302,7 @@ void StelAddOnDAO::updateAddOnStatus(QString idInstall, int installed)
 StelAddOnDAO::AddOnInfo StelAddOnDAO::getAddOnInfo(int addonId)
 {
 	if (addonId < 1) {
+		qWarning() << "Add-On DAO getAddOnInfo: invalid addon id!";
 		return AddOnInfo();
 	}
 
@@ -344,6 +347,7 @@ StelAddOnDAO::AddOnInfo StelAddOnDAO::getAddOnInfo(int addonId)
 StelAddOnDAO::WidgetInfo StelAddOnDAO::getAddOnWidgetInfo(int addonId)
 {
 	if (addonId < 1) {
+		qWarning() << "Add-On DAO getAddOnWidgetInfo: invalid addon id!";
 		return WidgetInfo();
 	}
 
@@ -436,6 +440,7 @@ QStringList StelAddOnDAO::getListOfTextures(int addonId)
 QString StelAddOnDAO::getLanguagePackType(const QString& checksum)
 {
 	if (checksum.isEmpty()) {
+		qWarning() << "Add-On DAO Language Type: empty checksum!";
 		return QString();
 	}
 
