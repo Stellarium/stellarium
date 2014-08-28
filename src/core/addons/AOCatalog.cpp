@@ -83,8 +83,11 @@ int AOCatalog::installFromFile(const QString& idInstall,
 	return 2;
 }
 
-bool AOCatalog::uninstallAddOn(const QString &idInstall) const
+bool AOCatalog::uninstallAddOn(const QString &idInstall,
+			       const QStringList& selectedFiles) const
 {
+	Q_UNUSED(selectedFiles); // not applicable - always install all files
+
 	QString suffix = ".cat";
 	if (idInstall.contains("modules"))
 	{

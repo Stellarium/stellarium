@@ -41,10 +41,11 @@ public:
 	// install add-on from a available file
 	virtual int installFromFile(const QString& idInstall,
 				    const QString& downloadedFilepath,
-				    const QStringList& filesToInstall) const = 0;
+				    const QStringList& selectedFiles) const = 0;
 
 	// uninstall add-on
-	virtual bool uninstallAddOn(const QString& idInstall) const = 0;
+	virtual bool uninstallAddOn(const QString& idInstall,
+				    const QStringList& selectedFiles) const = 0;
 };
 
 #endif // _STELADDON_HPP_

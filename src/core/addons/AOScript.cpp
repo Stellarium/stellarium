@@ -66,8 +66,11 @@ int AOScript::installFromFile(const QString& idInstall,
 	return 2;
 }
 
-bool AOScript::uninstallAddOn(const QString &idInstall) const
+bool AOScript::uninstallAddOn(const QString& idInstall,
+			      const QStringList& selectedFiles) const
 {
+	Q_UNUSED(selectedFiles); // not applicable - always install all files
+
 	QFile ssc(m_sScriptInstallDir % idInstall % ".ssc");
 	QFile sts(m_sScriptInstallDir % idInstall % ".sts");
 	bool removed = true;

@@ -80,8 +80,11 @@ int AOLanguagePack::installFromFile(const QString& idInstall,
 	return 2;
 }
 
-bool AOLanguagePack::uninstallAddOn(const QString &idInstall) const
+bool AOLanguagePack::uninstallAddOn(const QString &idInstall,
+				    const QStringList& selectedFiles) const
 {
+	Q_UNUSED(selectedFiles); // not applicable - always install all files
+
 	QFile file(m_sLocaleInstallDir % "/" % idInstall % ".qm");
 	bool removed = true;
 	if (file.exists())

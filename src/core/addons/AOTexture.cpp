@@ -132,7 +132,8 @@ int AOTexture::installFromImg(QString idInstall, QString downloadedFilepath) con
 	return 2;
 }
 
-bool AOTexture::uninstallAddOn(const QString &idInstall) const
+bool AOTexture::uninstallAddOn(const QString& idInstall,
+			       const QStringList& selectedFiles) const
 {
 	return true;
 }

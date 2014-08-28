@@ -64,8 +64,11 @@ int AOSkyCulture::installFromFile(const QString& idInstall,
 	return 2;
 }
 
-bool AOSkyCulture::uninstallAddOn(const QString &idInstall) const
+bool AOSkyCulture::uninstallAddOn(const QString &idInstall,
+				  const QStringList& selectedFiles) const
 {
+	Q_UNUSED(selectedFiles); // not applicable - always install all files
+
 	QDir dir(m_sSkyCultureInstallDir % idInstall);
 
 	if (!dir.removeRecursively())
