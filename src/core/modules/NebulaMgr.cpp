@@ -881,3 +881,34 @@ QStringList NebulaMgr::listMatchingObjects(const QString& objPrefix, int maxNbIt
 	return result;
 }
 
+QStringList NebulaMgr::listAllObjects(bool inEnglish) const
+{
+	QStringList result;
+	foreach(const NebulaP& n, nebArray)
+	{
+		if (n->NGC_nb>0)
+			result << QString("NGC %1").arg(n->NGC_nb);
+
+		if (n->IC_nb>0)
+			result << QString("IC %1").arg(n->IC_nb);
+
+		if (n->M_nb>0)
+			result << QString("M%1").arg(n->M_nb);
+
+		if (n->C_nb>0)
+			result << QString("C%1").arg(n->C_nb);
+
+		if (!n->getEnglishName().isEmpty())
+		{
+			if (inEnglish)
+				result << n->getEnglishName();
+			else
+				result << n->getNameI18n();
+		}
+	}
+
+	result.removeDuplicates();
+	return result;
+}
+
+
