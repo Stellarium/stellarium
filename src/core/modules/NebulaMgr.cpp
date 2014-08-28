@@ -885,7 +885,8 @@ QStringList NebulaMgr::listAllObjects(bool inEnglish) const
 {
 	QStringList result;
 	foreach(const NebulaP& n, nebArray)
-	{
+	{		
+		/*
 		if (n->NGC_nb>0)
 			result << QString("NGC %1").arg(n->NGC_nb);
 
@@ -897,6 +898,7 @@ QStringList NebulaMgr::listAllObjects(bool inEnglish) const
 
 		if (n->C_nb>0)
 			result << QString("C%1").arg(n->C_nb);
+		*/
 
 		if (!n->getEnglishName().isEmpty())
 		{
@@ -907,7 +909,7 @@ QStringList NebulaMgr::listAllObjects(bool inEnglish) const
 		}
 	}
 
-	result.removeDuplicates();
+	//result.removeDuplicates();
 	return result;
 }
 

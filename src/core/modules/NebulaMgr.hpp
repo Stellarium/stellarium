@@ -105,7 +105,7 @@ public:
 	//! @param useStartOfWords the autofill mode for returned objects names
 	//! @return a list of matching object name by order of relevance, or an empty list if nothing match
 	virtual QStringList listMatchingObjects(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false) const;
-	// empty for now
+	//! @note Loading deep-sky objects with the proper names only.
 	virtual QStringList listAllObjects(bool inEnglish) const;
 	virtual QString getName() const { return "Deep-sky objects"; }
 
