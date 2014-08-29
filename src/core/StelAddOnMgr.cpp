@@ -118,17 +118,23 @@ void StelAddOnMgr::refreshAddOnStatuses()
 	while (aos.hasNext())
 	{
 		aos.next();
+		QStringList list = aos.value()->checkInstalledAddOns();
+		if (list.isEmpty())
+		{
+			continue;
+		}
+
 		if (aos.key() == CATALOG || aos.key() == LANGUAGE_PACK)
 		{
-			m_pStelAddOnDAO->markAddOnsAsInstalledFromMd5(aos.value()->checkInstalledAddOns());
+			m_pStelAddOnDAO->markAddOnsAsInstalledFromMd5(list);
 		}
 		else if (aos.key() == TEXTURE)
 		{
-			m_pStelAddOnDAO->markTexturesAsInstalled(aos.value()->checkInstalledAddOns());
+			m_pStelAddOnDAO->markTexturesAsInstalled(list);
 		}
 		else
 		{
-			m_pStelAddOnDAO->markAddOnsAsInstalled(aos.value()->checkInstalledAddOns());
+			m_pStelAddOnDAO->markAddOnsAsInstalled(list);
 		}
 	}
 }
