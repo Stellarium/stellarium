@@ -95,10 +95,15 @@ int AOTexture::installFromZip(QString idInstall, QString downloadedFilepath, QSt
 		}
 
 		QFile file(m_sTexturesInstallDir % info.filePath);
-		if (!selectedFiles.contains(info.filePath) && !file.exists())
+
+		// when selectedFiles is empty, intall all files
+		if (!selectedFiles.isEmpty())
 		{
-			installed = 1; // partially
-			continue;
+			if (!selectedFiles.contains(info.filePath) && !file.exists())
+			{
+				installed = 1; // partially
+				continue;
+			}
 		}
 
 		file.remove(); // overwrite
@@ -138,7 +143,12 @@ int AOTexture::uninstallAddOn(const QString& idInstall,
 	int filesRemoved = 0;
 	foreach (QString texture, m_pInstalledTextures->allKeys())
 	{
-		if (selectedFiles.contains(texture) && idInstall == m_pInstalledTextures->value(texture))
+		if (idInstall != m_pInstalledTextures->value(texture))
+		{
+			continue;
+		}
+
+		if (selectedFiles.isEmpty() || selectedFiles.contains(texture))
 		{
 			QFile file(m_sTexturesInstallDir % texture);
 			if (file.remove())
@@ -157,11 +167,12 @@ int AOTexture::uninstallAddOn(const QString& idInstall,
 	if (filesRemoved == selectedFiles.count())
 	{
 		qDebug() << "Add-On Textures : Successfully removed" << idInstall;
-		return 2; // completely removed
+		return 2;
 	}
 	else if (filesRemoved > 0)
 	{
-		return 1; // partially removed
+		qDebug() << "Add-On Textures : Partially removed" << idInstall;
+		return 1;
 	}
 
 	return 0; // failed!
