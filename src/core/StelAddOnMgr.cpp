@@ -40,8 +40,8 @@ StelAddOnMgr::StelAddOnMgr()
 	, m_progressBar(NULL)
 	, m_iLastUpdate(1388966410)
 	, m_sUrlUpdate("http://cardinot.sourceforge.net/getUpdates.php")
-	, m_sAddOnDir(StelFileMgr::getUserDir() % "/addon")
-	, m_sThumbnailDir(m_sAddOnDir % "/" % "thumbnail/")
+	, m_sAddOnDir(StelFileMgr::getUserDir() % "/addon/")
+	, m_sThumbnailDir(m_sAddOnDir % "/thumbnail/")
 {
 	// creating addon dir
 	StelFileMgr::makeSureDirExistsAndIsWritable(m_sAddOnDir);
@@ -70,12 +70,12 @@ StelAddOnMgr::StelAddOnMgr()
 	m_pStelAddOnDAO->init();
 
 	// creating sub-dirs
-	m_dirs.insert(CATALOG, m_sAddOnDir % "/" % CATALOG % "/");
-	m_dirs.insert(LANDSCAPE, m_sAddOnDir % "/" % LANDSCAPE % "/");
-	m_dirs.insert(LANGUAGE_PACK, m_sAddOnDir % "/" % LANGUAGE_PACK % "/");
-	m_dirs.insert(SCRIPT, m_sAddOnDir % "/" % SCRIPT % "/");
-	m_dirs.insert(SKY_CULTURE, m_sAddOnDir % "/" % SKY_CULTURE % "/");
-	m_dirs.insert(TEXTURE, m_sAddOnDir % "/" % TEXTURE % "/");
+	m_dirs.insert(CATALOG, m_sAddOnDir % CATALOG % "/");
+	m_dirs.insert(LANDSCAPE, m_sAddOnDir % LANDSCAPE % "/");
+	m_dirs.insert(LANGUAGE_PACK, m_sAddOnDir % LANGUAGE_PACK % "/");
+	m_dirs.insert(SCRIPT, m_sAddOnDir % SCRIPT % "/");
+	m_dirs.insert(SKY_CULTURE, m_sAddOnDir % SKY_CULTURE % "/");
+	m_dirs.insert(TEXTURE, m_sAddOnDir % TEXTURE % "/");
 	QHashIterator<QString, QString> it(m_dirs);
 	while (it.hasNext()) {
 		it.next();

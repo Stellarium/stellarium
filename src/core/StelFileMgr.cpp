@@ -408,16 +408,9 @@ void StelFileMgr::setScreenshotDir(const QString& newDir)
 
 QString StelFileMgr::getLocaleUserDir()
 {
-#ifdef ENABLE_NLS
 	QString localePath = getUserDir() + "/translations";
-	if (!QFileInfo(localePath).exists())
-	{
-		return QString();
-	}
+	makeSureDirExistsAndIsWritable(localePath);
 	return localePath;
-#else
-	return QString();
-#endif
 }
 
 QString StelFileMgr::getLocaleDir()
