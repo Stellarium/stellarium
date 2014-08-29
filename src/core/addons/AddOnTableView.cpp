@@ -121,8 +121,9 @@ void AddOnTableView::mouseDoubleClickEvent(QMouseEvent *e)
 	if (index.isValid() && !(row%2))
 	{
 		// toogle state
-		bool state = getCheckBox(row)->checkState();
-		slotCheckRow(index.row(), state?0:2);
+		bool checked = getCheckBox(row)->checkState();
+		slotCheckRow(index.row(), checked?0:2);
+		emit(rowChecked(row, !checked));
 	}
 }
 
