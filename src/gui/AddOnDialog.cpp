@@ -39,8 +39,6 @@ AddOnDialog::~AddOnDialog()
 {
 	delete ui;
 	ui = NULL;
-	m_pUpdateCatalogReply->deleteLater();
-	m_pUpdateCatalogReply = NULL;
 }
 
 void AddOnDialog::retranslate()

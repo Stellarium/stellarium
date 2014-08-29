@@ -99,10 +99,6 @@ StelAddOnMgr::StelAddOnMgr()
 
 StelAddOnMgr::~StelAddOnMgr()
 {
-	m_pAddOnNetworkReply->deleteLater();
-	m_pAddOnNetworkReply = NULL;
-	m_pThumbnailNetworkReply->deleteLater();
-	m_pThumbnailNetworkReply = NULL;
 }
 
 void StelAddOnMgr::setLastUpdate(qint64 time) {
