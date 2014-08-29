@@ -52,7 +52,6 @@ protected:
 private slots:
 	void changePage(QListWidgetItem *current, QListWidgetItem *previous);
 	void updateCatalog();
-	void downloadError(QNetworkReply::NetworkError);
 	void downloadFinished();
 	void installSelectedRows();
 	void removeSelectedRows();

@@ -38,6 +38,8 @@ AddOnDialog::~AddOnDialog()
 {
 	delete ui;
 	ui = NULL;
+	m_pUpdateCatalogReply->deleteLater();
+	m_pUpdateCatalogReply = NULL;
 }
 
 void AddOnDialog::retranslate()
@@ -158,50 +160,43 @@ void AddOnDialog::updateCatalog()
 
 	QUrl url(StelApp::getInstance().getStelAddOnMgr().getUrlForUpdates());
 	url.setQuery(QString("time=%1").arg(StelApp::getInstance().getStelAddOnMgr().getLastUpdate()));
+
 	QNetworkRequest req(url);
-	req.setAttribute(QNetworkRequest::CacheSaveControlAttribute, false);
-	req.setAttribute(QNetworkRequest::RedirectionTargetAttribute, false);
 	req.setRawHeader("User-Agent", StelUtils::getApplicationName().toLatin1());
 	m_pUpdateCatalogReply = StelApp::getInstance().getNetworkAccessManager()->get(req);
 	m_pUpdateCatalogReply->setReadBufferSize(1024*1024*2);
-	connect(m_pUpdateCatalogReply, SIGNAL(finished()), this, SLOT(downloadFinished()));
-	connect(m_pUpdateCatalogReply, SIGNAL(error(QNetworkReply::NetworkError)),
-		this, SLOT(downloadError(QNetworkReply::NetworkError)));
-}
 
-void AddOnDialog::downloadError(QNetworkReply::NetworkError)
-{
-	Q_ASSERT(m_pUpdateCatalogReply);
-	qWarning() << "Error updating database catalog!" << m_pUpdateCatalogReply->errorString();
-	ui->btnUpdate->setEnabled(true);
-	ui->txtLastUpdate->setText(q_("Database update failed!"));
+	m_pUpdateCatalogReply = StelApp::getInstance().getNetworkAccessManager()->get(req);
+	connect(m_pUpdateCatalogReply, SIGNAL(finished()), this, SLOT(downloadFinished()));
 }
 
 void AddOnDialog::downloadFinished()
 {
-	Q_ASSERT(m_pUpdateCatalogReply);
+	ui->btnUpdate->setEnabled(true);
 	if (m_pUpdateCatalogReply->error() != QNetworkReply::NoError)
 	{
+		qWarning() << "AddOnDialog : unable to update the database!" << m_pUpdateCatalogReply->errorString();
+		ui->txtLastUpdate->setText(q_("Database update failed!"));
+
 		m_pUpdateCatalogReply->deleteLater();
 		m_pUpdateCatalogReply = NULL;
 		return;
 	}
 
-	QByteArray data = m_pUpdateCatalogReply->readAll();
-	QString result(data);
+	QString result(m_pUpdateCatalogReply->readAll());
+	m_pUpdateCatalogReply->deleteLater();
+	m_pUpdateCatalogReply = NULL;
 
 	if (!result.isEmpty())
 	{
 		if(!StelApp::getInstance().getStelAddOnMgr().updateCatalog(result))
 		{
-			ui->btnUpdate->setEnabled(true);
 			ui->txtLastUpdate->setText(q_("Database update failed!"));
 			return;
 		}
 	}
 
 	qint64 currentTime = QDateTime::currentMSecsSinceEpoch()/1000;
-	ui->btnUpdate->setEnabled(true);
 	StelApp::getInstance().getStelAddOnMgr().setLastUpdate(currentTime);
 	ui->txtLastUpdate->setText(StelApp::getInstance().getStelAddOnMgr().getLastUpdateString());
 	populateTables();
