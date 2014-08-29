@@ -173,6 +173,7 @@ AddOnWidget* AddOnTableView::insertAddOnWidget(int wRow)
 	widget->init(addOnId);
 	setRowHeight(wRow, widget->height());
 	setIndexWidget(model->index(wRow, 0), widget);
+	widget->setVisible(false);
 	m_widgets.insert(wRow, widget);
 	if (objectName() == "texturesTableView")
 	{
@@ -262,7 +263,7 @@ void AddOnTableView::slotRowChecked(int pRow, bool checked)
 				countChecked++;
 		}
 
-		if (countChecked ==	model->sourceModel()->rowCount()) // all rows checked ?
+		if (countChecked == model->sourceModel()->rowCount()) // all rows checked ?
 		{
 			m_pCheckedHeader->setChecked(true);
 		} else if (countChecked == 0){
