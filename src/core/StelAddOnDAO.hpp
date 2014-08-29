@@ -101,8 +101,10 @@ public:
 		QString a2Url;
 	};
 
+	int getAddOnId(QString checksum);
 	AddOnInfo getAddOnInfo(int addonId);
 	WidgetInfo getAddOnWidgetInfo(int addonId);
+
 	bool insertOnDatabase(QString insert);
 	void markAllAddOnsAsUninstalled();
 	void markAddOnsAsInstalled(QStringList idInstall);

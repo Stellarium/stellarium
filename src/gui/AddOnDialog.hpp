@@ -53,6 +53,7 @@ private slots:
 	void changePage(QListWidgetItem *current, QListWidgetItem *previous);
 	void updateCatalog();
 	void downloadFinished();
+	void installFromFile();
 	void installSelectedRows();
 	void removeSelectedRows();
 	void populateTables();

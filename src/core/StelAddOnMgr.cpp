@@ -313,6 +313,19 @@ bool StelAddOnMgr::installFromFile(const StelAddOnDAO::AddOnInfo addonInfo,
 	return installed;
 }
 
+void StelAddOnMgr::installFromFile(const QString& filePath)
+{
+	QFile file(filePath);
+	int addonId = m_pStelAddOnDAO->getAddOnId(calculateMd5(file));
+	if (addonId < 1)
+	{
+		qWarning() << "Add-On InstallFromFile : Unable to install"
+			   << filePath << "File is not compatible!";
+		return;
+	}
+	installFromFile(m_pStelAddOnDAO->getAddOnInfo(addonId), QStringList());
+}
+
 void StelAddOnMgr::removeAddOn(const int addonId, const QStringList selectedFiles)
 {
 	if (addonId < 1)

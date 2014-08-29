@@ -54,6 +54,7 @@ public:
 	void installAddOn(const int addonId, const QStringList selectedFiles);
 	bool installFromFile(const StelAddOnDAO::AddOnInfo addonInfo,
 			     const QStringList selectedFiles);
+	void installFromFile(const QString& filePath);
 	void removeAddOn(const int addonId, const QStringList files);
 	bool updateCatalog(QString webresult);
 	void setLastUpdate(qint64 time);

@@ -313,7 +313,7 @@ StelAddOnDAO::AddOnInfo StelAddOnDAO::getAddOnInfo(int addonId)
 	query.bindValue(":id", addonId);
 
 	if (!query.exec()) {
-		qWarning() << "Add-On DAO :" << m_db.lastError();
+		qWarning() << "Add-On DAO getAddOnInfo :" << m_db.lastError();
 		return AddOnInfo();
 	}
 
@@ -342,6 +342,27 @@ StelAddOnDAO::AddOnInfo StelAddOnDAO::getAddOnInfo(int addonId)
 	}
 
 	return AddOnInfo();
+}
+
+int StelAddOnDAO::getAddOnId(QString checksum)
+{
+	if (checksum.isEmpty()) {
+		qWarning() << "Add-On DAO getAddOnId: empty checksum!";
+		return -1;
+	}
+
+	QSqlQuery query(m_db);
+	if (!query.exec("SELECT id FROM addon WHERE checksum='"%checksum%"'")) {
+		qWarning() << "Add-On DAO getAddOnId:" << m_db.lastError();
+		return -1;
+	}
+
+	int res = -1;
+	if (query.next())
+	{
+		res = query.value(0).toInt();
+	}
+	return res;
 }
 
 StelAddOnDAO::WidgetInfo StelAddOnDAO::getAddOnWidgetInfo(int addonId)

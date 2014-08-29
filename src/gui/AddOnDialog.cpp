@@ -18,6 +18,7 @@
 */
 
 #include <QDateTime>
+#include <QFileDialog>
 #include <QStringBuilder>
 
 #include "AddOnDialog.hpp"
@@ -104,6 +105,9 @@ void AddOnDialog::createDialogContent()
 		connect(view, SIGNAL(somethingToInstall(bool)), ui->btnInstall, SLOT(setEnabled(bool)));
 		connect(view, SIGNAL(somethingToRemove(bool)), ui->btnRemove, SLOT(setEnabled(bool)));
 	}
+
+	// button Install from File
+	connect(ui->btnInstallFromFile, SIGNAL(clicked()), this, SLOT(installFromFile()));
 
 	// fix dialog width
 	updateTabBarListWidgetWidth();
@@ -200,6 +204,15 @@ void AddOnDialog::downloadFinished()
 	StelApp::getInstance().getStelAddOnMgr().setLastUpdate(currentTime);
 	ui->txtLastUpdate->setText(StelApp::getInstance().getStelAddOnMgr().getLastUpdateString());
 	populateTables();
+}
+
+void AddOnDialog::installFromFile()
+{
+	QString filePath = QFileDialog::getOpenFileName(NULL, q_("Select the add-on"), QDir::homePath());
+	if (QFile(filePath).exists())
+	{
+		StelApp::getInstance().getStelAddOnMgr().installFromFile(filePath);
+	}
 }
 
 void AddOnDialog::installSelectedRows()

@@ -511,6 +511,13 @@
           </widget>
          </item>
          <item>
+          <widget class="QPushButton" name="btnInstallFromFile">
+           <property name="text">
+            <string>Install from File</string>
+           </property>
+          </widget>
+         </item>
+         <item>
           <widget class="QPushButton" name="btnInstall">
            <property name="text">
             <string>Install</string>
