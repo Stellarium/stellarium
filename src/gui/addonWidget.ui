@@ -68,6 +68,9 @@
      <property name="textInteractionFlags">
       <set>Qt::LinksAccessibleByKeyboard|Qt::LinksAccessibleByMouse|Qt::TextBrowserInteraction|Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
      </property>
+     <property name="placeholderText">
+      <string>No description provided.</string>
+     </property>
     </widget>
    </item>
    <item row="2" column="4">
