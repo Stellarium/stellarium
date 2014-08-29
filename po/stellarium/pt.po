@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-08-22 07:29+0700\n"
-"PO-Revision-Date: 2014-08-13 21:20+0000\n"
+"PO-Revision-Date: 2014-08-28 20:33+0000\n"
 "Last-Translator: Tiago S. <Unknown>\n"
 "Language-Team: Portuguese <pt@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-08-23 06:29+0000\n"
-"X-Generator: Launchpad (build 17163)\n"
+"X-Launchpad-Export-Date: 2014-08-29 06:06+0000\n"
+"X-Generator: Launchpad (build 17176)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:106 src/core/modules/StarMgr.cpp:338
 #: src/core/modules/GridLinesMgr.cpp:697 src/core/modules/LandscapeMgr.cpp:354
@@ -335,12 +335,12 @@ msgstr "Velocidade: %1 km/s"
 #: src/core/modules/Comet.cpp:220
 #, no-c-format, qt-format
 msgid "Coma diameter (estimate): %1 km"
-msgstr ""
+msgstr "Diâmetro da coma (estimado): %1 km"
 
 #: src/core/modules/Comet.cpp:224
 #, no-c-format, qt-format
 msgid "Gas tail length (estimate): %1 Mio km"
-msgstr ""
+msgstr "Comprimento da cauda de gás (estimado): %1 Mio km"
 
 #: src/core/modules/SolarSystem.cpp:156
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:308
@@ -3920,11 +3920,11 @@ msgstr "Copiar o Endereço da &Ligação"
 
 #: src/ui_dateTimeDialogGui.h:369
 msgid "Julian Date"
-msgstr ""
+msgstr "Data Juliana"
 
 #: src/ui_dateTimeDialogGui.h:372
 msgid "Modified Julian Date"
-msgstr ""
+msgstr "Data Juliana Modificada"
 
 #: src/ui_helpDialogGui.h:277 src/ui_helpDialogGui.h:283
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:418
@@ -3961,10 +3961,11 @@ msgstr ""
 #: src/ui_locationDialogGui.h:414
 msgid "Reset location list to show all known locations"
 msgstr ""
+"Redefine a lista de localizações de modo a mostrar todos os locais conhecidos"
 
 #: src/ui_locationDialogGui.h:416
 msgid "Reset Location List"
-msgstr ""
+msgstr "Redefinir a lista de localizações"
 
 #: src/ui_locationDialogGui.h:417
 msgid "Current location information"
@@ -4003,7 +4004,7 @@ msgstr " m"
 
 #: src/ui_locationDialogGui.h:431
 msgid "Return to default location"
-msgstr ""
+msgstr "Retornar à localização padrão"
 
 #: src/ui_locationDialogGui.h:433
 msgid "Add to list"
@@ -4027,11 +4028,11 @@ msgstr "Planeta:"
 
 #: src/ui_locationDialogGui.h:438
 msgid "Use current location as default"
-msgstr ""
+msgstr "Utilizar a localização atual como padrão"
 
 #: src/ui_locationDialogGui.h:439
 msgid "Get location from Network"
-msgstr ""
+msgstr "Obter uma localização a partir da rede"
 
 #: src/ui_searchDialogGui.h:558
 msgid "Find Object"
