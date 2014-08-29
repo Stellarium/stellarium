@@ -85,6 +85,7 @@ public:
 		QString filename;
 		QString filepath;
 		QString checksum;
+		bool isCompatible;
 	};
 
 	struct WidgetInfo {

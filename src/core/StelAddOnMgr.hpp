@@ -56,6 +56,7 @@ public:
 			     const QStringList selectedFiles);
 	void installFromFile(const QString& filePath);
 	void removeAddOn(const int addonId, const QStringList files);
+	bool isCompatible(QString first, QString last);
 	bool updateCatalog(QString webresult);
 	void setLastUpdate(qint64 time);
 	QString getLastUpdateString()

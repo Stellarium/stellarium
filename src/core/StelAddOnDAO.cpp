@@ -307,8 +307,8 @@ StelAddOnDAO::AddOnInfo StelAddOnDAO::getAddOnInfo(int addonId)
 	}
 
 	QSqlQuery query(m_db);
-	query.prepare("SELECT id_install, category, installed, checksum, "
-		      "download_url, download_filename, download_size "
+	query.prepare("SELECT id_install, first_stel, last_stel, category, installed, "
+		      "checksum, download_url, download_filename, download_size "
 		      "FROM addon WHERE id=:id");
 	query.bindValue(":id", addonId);
 
@@ -319,6 +319,8 @@ StelAddOnDAO::AddOnInfo StelAddOnDAO::getAddOnInfo(int addonId)
 
 	QSqlRecord queryRecord = query.record();
 	const int idInstallColumn = queryRecord.indexOf("id_install");
+	const int firstStelColumn = queryRecord.indexOf("first_stel");
+	const int lastStelColumn = queryRecord.indexOf("last_stel");
 	const int categoryColumn = queryRecord.indexOf("category");
 	const int urlColumn = queryRecord.indexOf("download_url");
 	const int filenameColumn = queryRecord.indexOf("download_filename");
@@ -334,6 +336,10 @@ StelAddOnDAO::AddOnInfo StelAddOnDAO::getAddOnInfo(int addonId)
 		addonInfo.filename = query.value(filenameColumn).toString();
 		addonInfo.installed = query.value(installedColumn).toInt();
 		addonInfo.checksum = query.value(checksumColumn).toString();
+
+		QString first_stel = query.value(firstStelColumn).toString();
+		QString last_stel = query.value(lastStelColumn).toString();
+		addonInfo.isCompatible = StelApp::getInstance().getStelAddOnMgr().isCompatible(first_stel, last_stel);
 
 		QString categoryDir = StelApp::getInstance().getStelAddOnMgr().getDirectory(addonInfo.category);
 		Q_ASSERT(!categoryDir.isEmpty());
@@ -352,8 +358,10 @@ int StelAddOnDAO::getAddOnId(QString checksum)
 	}
 
 	QSqlQuery query(m_db);
-	if (!query.exec("SELECT id FROM addon WHERE checksum='"%checksum%"'")) {
-		qWarning() << "Add-On DAO getAddOnId:" << m_db.lastError();
+	QString sQuery = "SELECT id FROM addon WHERE checksum='" % checksum % "'";
+	if (!query.exec(sQuery)) {
+		qWarning() << "Add-On DAO getAddOnId:"
+			   << m_db.lastError() << sQuery;
 		return -1;
 	}
 

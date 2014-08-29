@@ -22,7 +22,7 @@
 
 #include "AddOnTableProxyModel.hpp"
 #include "AddOnTableView.hpp"
-#include "StelAddOnDAO.hpp"
+#include "StelAddOnMgr.hpp"
 #include "StelUtils.hpp"
 
 AddOnTableView::AddOnTableView(QWidget* parent)
@@ -85,7 +85,7 @@ void AddOnTableView::setModel(QAbstractItemModel* model)
 	{
 		QString first = model->index(row, 2).data().toString();
 		QString last = model->index(row, 3).data().toString();
-		if (isCompatible(first, last))
+		if (StelApp::getInstance().getStelAddOnMgr().isCompatible(first, last))
 		{
 			QCheckBox* cbox = new QCheckBox();
 			cbox->setStyleSheet("QCheckBox { margin-left: 8px; margin-right: 8px; margin-bottom: 2px; }");
@@ -112,28 +112,6 @@ void AddOnTableView::setModel(QAbstractItemModel* model)
 		setSpan(row, 0, 1, model->columnCount());
 		hideRow(row);
 	}
-}
-
-bool AddOnTableView::isCompatible(QString first, QString last)
-{
-	QStringList c = StelUtils::getApplicationVersion().split(".");
-	QStringList f = first.split(".");
-	QStringList l = last.split(".");
-
-	if (c.size() < 3 || f.size() < 3 || l.size() < 3) {
-		return false; // invalid version
-	}
-
-	int currentVersion = QString(c.at(0) % "00" % c.at(1) % "0" % c.at(2)).toInt();
-	int firstVersion = QString(f.at(0) % "00" % f.at(1) % "0" % f.at(2)).toInt();
-	int lastVersion = QString(l.at(0) % "00" % l.at(1) % "0" % l.at(2)).toInt();
-
-	if (currentVersion < firstVersion || currentVersion > lastVersion)
-	{
-		return false; // out of bounds
-	}
-
-	return true;
 }
 
 void AddOnTableView::mouseDoubleClickEvent(QMouseEvent *e)

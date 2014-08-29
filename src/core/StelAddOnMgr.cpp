@@ -317,13 +317,19 @@ void StelAddOnMgr::installFromFile(const QString& filePath)
 {
 	QFile file(filePath);
 	int addonId = m_pStelAddOnDAO->getAddOnId(calculateMd5(file));
-	if (addonId < 1)
+	StelAddOnDAO::AddOnInfo addonInfo;
+	if (addonId > 0)
+	{
+		addonInfo = m_pStelAddOnDAO->getAddOnInfo(addonId);
+	}
+
+	if (!addonInfo.isCompatible)
 	{
 		qWarning() << "Add-On InstallFromFile : Unable to install"
 			   << filePath << "File is not compatible!";
-		return;
 	}
-	installFromFile(m_pStelAddOnDAO->getAddOnInfo(addonId), QStringList());
+
+	installFromFile(addonInfo, QStringList());
 }
 
 void StelAddOnMgr::removeAddOn(const int addonId, const QStringList selectedFiles)
@@ -351,4 +357,26 @@ QString StelAddOnMgr::calculateMd5(QFile& file) const
 		file.close();
 	}
 	return checksum;
+}
+
+bool StelAddOnMgr::isCompatible(QString first, QString last)
+{
+	QStringList c = StelUtils::getApplicationVersion().split(".");
+	QStringList f = first.split(".");
+	QStringList l = last.split(".");
+
+	if (c.size() < 3 || f.size() < 3 || l.size() < 3) {
+		return false; // invalid version
+	}
+
+	int currentVersion = QString(c.at(0) % "00" % c.at(1) % "0" % c.at(2)).toInt();
+	int firstVersion = QString(f.at(0) % "00" % f.at(1) % "0" % f.at(2)).toInt();
+	int lastVersion = QString(l.at(0) % "00" % l.at(1) % "0" % l.at(2)).toInt();
+
+	if (currentVersion < firstVersion || currentVersion > lastVersion)
+	{
+		return false; // out of bounds
+	}
+
+	return true;
 }
