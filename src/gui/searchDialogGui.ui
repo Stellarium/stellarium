@@ -751,6 +751,12 @@
          <property name="toolTip">
           <string>Some objects may be found after activation respective plug-ins</string>
          </property>
+         <property name="editable">
+          <bool>true</bool>
+         </property>
+         <property name="insertPolicy">
+          <enum>QComboBox::NoInsert</enum>
+         </property>
         </widget>
        </item>
        <item row="2" column="0" colspan="3">
