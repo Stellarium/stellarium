@@ -343,7 +343,7 @@ BottomStelBar::BottomStelBar(QGraphicsItem* parent,
 	fps->font().setPixelSize(baseFontSize);
 
 	QSettings* confSettings = StelApp::getInstance().getSettings();
-	setFlagShowTime(confSettings->value("gui/flag_show_time", true).toBool());
+	setFlagShowTime(confSettings->value("gui/flag_show_datetime", true).toBool());
 	setFlagShowLocation(confSettings->value("gui/flag_show_location", true).toBool());
 	setFlagShowFov(confSettings->value("gui/flag_show_fov", true).toBool());
 	setFlagShowFps(confSettings->value("gui/flag_show_fps", true).toBool());
