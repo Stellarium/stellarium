@@ -19,6 +19,7 @@
 
 #include <QDebug>
 #include <QFile>
+#include <QPixmap>
 #include <QSettings>
 #include <QStringBuilder>
 
@@ -34,17 +35,17 @@ StelAddOnMgr::StelAddOnMgr()
 	, m_pStelAddOnDAO(new StelAddOnDAO(m_db))
 	, m_pConfig(StelApp::getInstance().getSettings())
 	, m_bDownloading(false)
-	, m_pDownloadReply(NULL)
+	, m_pAddOnNetworkReply(NULL)
 	, m_currentDownloadFile(NULL)
 	, m_progressBar(NULL)
 	, m_iLastUpdate(1388966410)
 	, m_sUrlUpdate("http://cardinot.sourceforge.net/getUpdates.php")
-	, m_sDirAddOn(StelFileMgr::getUserDir() % "/addon")
-	, m_sDirThumbnail(m_sDirAddOn % "/" % "thumbnail/")
+	, m_sAddOnDir(StelFileMgr::getUserDir() % "/addon")
+	, m_sThumbnailDir(m_sAddOnDir % "/" % "thumbnail/")
 {
 	// creating addon dir
-	StelFileMgr::makeSureDirExistsAndIsWritable(m_sDirAddOn);
-	StelFileMgr::makeSureDirExistsAndIsWritable(m_sDirThumbnail);
+	StelFileMgr::makeSureDirExistsAndIsWritable(m_sAddOnDir);
+	StelFileMgr::makeSureDirExistsAndIsWritable(m_sThumbnailDir);
 
 	// Initialize settings in the main config file
 	if (m_pConfig->childGroups().contains("AddOn"))
@@ -69,12 +70,12 @@ StelAddOnMgr::StelAddOnMgr()
 	m_pStelAddOnDAO->init();
 
 	// creating sub-dirs
-	m_dirs.insert(CATALOG, m_sDirAddOn % "/" % CATALOG % "/");
-	m_dirs.insert(LANDSCAPE, m_sDirAddOn % "/" % LANDSCAPE % "/");
-	m_dirs.insert(LANGUAGE_PACK, m_sDirAddOn % "/" % LANGUAGE_PACK % "/");
-	m_dirs.insert(SCRIPT, m_sDirAddOn % "/" % SCRIPT % "/");
-	m_dirs.insert(SKY_CULTURE, m_sDirAddOn % "/" % SKY_CULTURE % "/");
-	m_dirs.insert(TEXTURE, m_sDirAddOn % "/" % TEXTURE % "/");
+	m_dirs.insert(CATALOG, m_sAddOnDir % "/" % CATALOG % "/");
+	m_dirs.insert(LANDSCAPE, m_sAddOnDir % "/" % LANDSCAPE % "/");
+	m_dirs.insert(LANGUAGE_PACK, m_sAddOnDir % "/" % LANGUAGE_PACK % "/");
+	m_dirs.insert(SCRIPT, m_sAddOnDir % "/" % SCRIPT % "/");
+	m_dirs.insert(SKY_CULTURE, m_sAddOnDir % "/" % SKY_CULTURE % "/");
+	m_dirs.insert(TEXTURE, m_sAddOnDir % "/" % TEXTURE % "/");
 	QHashIterator<QString, QString> it(m_dirs);
 	while (it.hasNext()) {
 		it.next();
@@ -83,7 +84,7 @@ StelAddOnMgr::StelAddOnMgr()
 
 	// Init sub-classes
 	m_pStelAddOns.insert(CATALOG, new AOCatalog(m_pStelAddOnDAO));
-	m_pStelAddOns.insert(LANDSCAPE, new AOLandscape(m_pStelAddOnDAO, m_sDirThumbnail));
+	m_pStelAddOns.insert(LANDSCAPE, new AOLandscape(m_pStelAddOnDAO, m_sThumbnailDir));
 	m_pStelAddOns.insert(LANGUAGE_PACK, new AOLanguagePack(m_pStelAddOnDAO));
 	m_pStelAddOns.insert(SCRIPT, new AOScript(m_pStelAddOnDAO));
 	m_pStelAddOns.insert(SKY_CULTURE, new AOSkyCulture(m_pStelAddOnDAO));
@@ -98,6 +99,10 @@ StelAddOnMgr::StelAddOnMgr()
 
 StelAddOnMgr::~StelAddOnMgr()
 {
+	m_pAddOnNetworkReply->deleteLater();
+	m_pAddOnNetworkReply = NULL;
+	m_pThumbnailNetworkReply->deleteLater();
+	m_pThumbnailNetworkReply = NULL;
 }
 
 void StelAddOnMgr::setLastUpdate(qint64 time) {
@@ -151,8 +156,19 @@ bool StelAddOnMgr::updateCatalog(QString webresult)
 		}
 	}
 
-	// download landscape thumbnails
-	((AOLandscape*) m_pStelAddOns.value(LANDSCAPE))->downloadThumbnails();
+	// download thumbnails
+	m_thumbnails = m_pStelAddOnDAO->getThumbnails(LANDSCAPE);
+	m_thumbnails = m_thumbnails.unite(m_pStelAddOnDAO->getThumbnails(SCRIPT));
+	m_thumbnails = m_thumbnails.unite(m_pStelAddOnDAO->getThumbnails(TEXTURE));
+	QHashIterator<QString, QString> i(m_thumbnails); // <id_install, url>
+	while (i.hasNext()) {
+	    i.next();
+	    if (!QFile(m_sThumbnailDir % i.key() % ".jpg").exists())
+	    {
+		    m_thumbnailQueue.append(i.value());
+	    }
+	}
+	downloadNextThumbnail();
 
 	// check add-ons which are already installed
 	refreshAddOnStatuses();
@@ -160,108 +176,34 @@ bool StelAddOnMgr::updateCatalog(QString webresult)
 	return true;
 }
 
-void StelAddOnMgr::downloadNextAddOn()
+void StelAddOnMgr::downloadNextThumbnail()
 {
-	if (m_bDownloading)
-	{
-		return;
+	if (m_thumbnailQueue.isEmpty()) {
+	    return;
 	}
 
-	Q_ASSERT(m_pDownloadReply==NULL);
-	Q_ASSERT(m_currentDownloadFile==NULL);
-	Q_ASSERT(m_progressBar==NULL);
-
-	m_currentDownloadInfo = m_pStelAddOnDAO->getAddOnInfo(m_downloadQueue.firstKey());
-	m_currentDownloadFile = new QFile(m_currentDownloadInfo.filepath);
-	if (!m_currentDownloadFile->open(QIODevice::WriteOnly))
-	{
-		qWarning() << "Can't open a writable file: "
-			   << QDir::toNativeSeparators(m_currentDownloadInfo.filepath);
-		return;
-	}
-
-	m_bDownloading = true;
-	QNetworkRequest req(m_currentDownloadInfo.url);
-	req.setAttribute(QNetworkRequest::CacheSaveControlAttribute, false);
-	req.setAttribute(QNetworkRequest::RedirectionTargetAttribute, false);
-	req.setRawHeader("User-Agent", StelUtils::getApplicationName().toLatin1());
-	m_pDownloadReply = StelApp::getInstance().getNetworkAccessManager()->get(req);
-	m_pDownloadReply->setReadBufferSize(1024*1024*2);
-	connect(m_pDownloadReply, SIGNAL(readyRead()), this, SLOT(newDownloadedData()));
-	connect(m_pDownloadReply, SIGNAL(finished()), this, SLOT(downloadFinished()));
-
-	m_progressBar = StelApp::getInstance().addProgressBar();
-	m_progressBar->setValue(0);
-	m_progressBar->setRange(0, m_currentDownloadInfo.size*1024);
-	m_progressBar->setFormat(QString("%1: %p%").arg(m_currentDownloadInfo.filename));
+	QUrl url(m_thumbnailQueue.first());
+	m_pThumbnailNetworkReply = StelApp::getInstance().getNetworkAccessManager()->get(QNetworkRequest(url));
+	connect(m_pThumbnailNetworkReply, SIGNAL(finished()), this, SLOT(downloadThumbnailFinished()));
 }
 
-void StelAddOnMgr::newDownloadedData()
+void StelAddOnMgr::downloadThumbnailFinished()
 {
-	Q_ASSERT(m_currentDownloadFile);
-	Q_ASSERT(m_pDownloadReply);
-	Q_ASSERT(m_progressBar);
-
-	int size = m_pDownloadReply->bytesAvailable();
-	m_progressBar->setValue((float)m_progressBar->getValue()+(float)size/1024);
-	m_currentDownloadFile->write(m_pDownloadReply->read(size));
-}
-
-void StelAddOnMgr::downloadFinished()
-{
-	Q_ASSERT(m_currentDownloadFile);
-	Q_ASSERT(m_pDownloadReply);
-	Q_ASSERT(m_progressBar);
-
-	if (m_pDownloadReply->error() != QNetworkReply::NoError)
-	{
-		qWarning() << "Add-on Mgr: FAILED to download" << m_pDownloadReply->url()
-			   << " Error:" << m_pDownloadReply->errorString();
-		m_currentDownloadFile->close();
-		m_currentDownloadFile->deleteLater();
-		m_currentDownloadFile = NULL;
-		m_pDownloadReply->deleteLater();
-		m_pDownloadReply = NULL;
-		StelApp::getInstance().removeProgressBar(m_progressBar);
-		m_progressBar = NULL;
-		return;
+	if (m_thumbnailQueue.isEmpty() || m_pThumbnailNetworkReply == NULL) {
+	    return;
 	}
 
-	Q_ASSERT(m_pDownloadReply->bytesAvailable()==0);
-
-	const QVariant& redirect = m_pDownloadReply->attribute(QNetworkRequest::RedirectionTargetAttribute);
-	if (!redirect.isNull())
-	{
-		// We got a redirection, we need to follow
-		m_currentDownloadFile->reset();
-		m_pDownloadReply->deleteLater();
-		QNetworkRequest req(redirect.toUrl());
-		req.setAttribute(QNetworkRequest::CacheSaveControlAttribute, false);
-		req.setRawHeader("User-Agent", StelUtils::getApplicationName().toLatin1());
-		m_pDownloadReply = StelApp::getInstance().getNetworkAccessManager()->get(req);
-		m_pDownloadReply->setReadBufferSize(1024*1024*2);
-		connect(m_pDownloadReply, SIGNAL(readyRead()), this, SLOT(newDownloadedData()));
-		connect(m_pDownloadReply, SIGNAL(finished()), this, SLOT(downloadFinished()));
-		return;
+	if (m_pThumbnailNetworkReply->error() == QNetworkReply::NoError) {
+	    QPixmap pixmap;
+	    if (pixmap.loadFromData(m_pThumbnailNetworkReply->readAll())) {
+		    pixmap.save(m_sThumbnailDir % m_thumbnails.key(m_thumbnailQueue.first()) % ".jpg");
+	    }
 	}
 
-	m_currentDownloadFile->close();
-	m_currentDownloadFile->deleteLater();
-	m_currentDownloadFile = NULL;
-	m_pDownloadReply->deleteLater();
-	m_pDownloadReply = NULL;
-	StelApp::getInstance().removeProgressBar(m_progressBar);
-	m_progressBar = NULL;
-
-	installFromFile(m_currentDownloadInfo, m_downloadQueue.first());
-	m_currentDownloadInfo = StelAddOnDAO::AddOnInfo();
-	m_bDownloading = false;
-	m_downloadQueue.remove(m_downloadQueue.firstKey());
-	if (!m_downloadQueue.isEmpty())
-	{
-		// next download
-		downloadNextAddOn();
-	}
+	m_pThumbnailNetworkReply->deleteLater();
+	m_pThumbnailNetworkReply = NULL;
+	m_thumbnailQueue.removeFirst();
+	downloadNextThumbnail();
 }
 
 void StelAddOnMgr::installAddOn(const int addonId, const QStringList selectedFiles)
@@ -379,4 +321,108 @@ bool StelAddOnMgr::isCompatible(QString first, QString last)
 	}
 
 	return true;
+}
+
+void StelAddOnMgr::downloadNextAddOn()
+{
+	if (m_bDownloading)
+	{
+		return;
+	}
+
+	Q_ASSERT(m_pAddOnNetworkReply==NULL);
+	Q_ASSERT(m_currentDownloadFile==NULL);
+	Q_ASSERT(m_progressBar==NULL);
+
+	m_currentDownloadInfo = m_pStelAddOnDAO->getAddOnInfo(m_downloadQueue.firstKey());
+	m_currentDownloadFile = new QFile(m_currentDownloadInfo.filepath);
+	if (!m_currentDownloadFile->open(QIODevice::WriteOnly))
+	{
+		qWarning() << "Can't open a writable file: "
+			   << QDir::toNativeSeparators(m_currentDownloadInfo.filepath);
+		return;
+	}
+
+	m_bDownloading = true;
+	QNetworkRequest req(m_currentDownloadInfo.url);
+	req.setAttribute(QNetworkRequest::CacheSaveControlAttribute, false);
+	req.setAttribute(QNetworkRequest::RedirectionTargetAttribute, false);
+	req.setRawHeader("User-Agent", StelUtils::getApplicationName().toLatin1());
+	m_pAddOnNetworkReply = StelApp::getInstance().getNetworkAccessManager()->get(req);
+	m_pAddOnNetworkReply->setReadBufferSize(1024*1024*2);
+	connect(m_pAddOnNetworkReply, SIGNAL(readyRead()), this, SLOT(newDownloadedData()));
+	connect(m_pAddOnNetworkReply, SIGNAL(finished()), this, SLOT(downloadAddOnFinished()));
+
+	m_progressBar = StelApp::getInstance().addProgressBar();
+	m_progressBar->setValue(0);
+	m_progressBar->setRange(0, m_currentDownloadInfo.size*1024);
+	m_progressBar->setFormat(QString("%1: %p%").arg(m_currentDownloadInfo.filename));
+}
+
+void StelAddOnMgr::newDownloadedData()
+{
+	Q_ASSERT(m_currentDownloadFile);
+	Q_ASSERT(m_pAddOnNetworkReply);
+	Q_ASSERT(m_progressBar);
+
+	int size = m_pAddOnNetworkReply->bytesAvailable();
+	m_progressBar->setValue((float)m_progressBar->getValue()+(float)size/1024);
+	m_currentDownloadFile->write(m_pAddOnNetworkReply->read(size));
+}
+
+void StelAddOnMgr::downloadAddOnFinished()
+{
+	Q_ASSERT(m_currentDownloadFile);
+	Q_ASSERT(m_pAddOnNetworkReply);
+	Q_ASSERT(m_progressBar);
+
+	if (m_pAddOnNetworkReply->error() != QNetworkReply::NoError)
+	{
+		qWarning() << "Add-on Mgr: FAILED to download" << m_pAddOnNetworkReply->url()
+			   << " Error:" << m_pAddOnNetworkReply->errorString();
+		m_currentDownloadFile->close();
+		m_currentDownloadFile->deleteLater();
+		m_currentDownloadFile = NULL;
+		m_pAddOnNetworkReply->deleteLater();
+		m_pAddOnNetworkReply = NULL;
+		StelApp::getInstance().removeProgressBar(m_progressBar);
+		m_progressBar = NULL;
+		return;
+	}
+
+	Q_ASSERT(m_pAddOnNetworkReply->bytesAvailable()==0);
+
+	const QVariant& redirect = m_pAddOnNetworkReply->attribute(QNetworkRequest::RedirectionTargetAttribute);
+	if (!redirect.isNull())
+	{
+		// We got a redirection, we need to follow
+		m_currentDownloadFile->reset();
+		m_pAddOnNetworkReply->deleteLater();
+		QNetworkRequest req(redirect.toUrl());
+		req.setAttribute(QNetworkRequest::CacheSaveControlAttribute, false);
+		req.setRawHeader("User-Agent", StelUtils::getApplicationName().toLatin1());
+		m_pAddOnNetworkReply = StelApp::getInstance().getNetworkAccessManager()->get(req);
+		m_pAddOnNetworkReply->setReadBufferSize(1024*1024*2);
+		connect(m_pAddOnNetworkReply, SIGNAL(readyRead()), this, SLOT(newDownloadedData()));
+		connect(m_pAddOnNetworkReply, SIGNAL(finished()), this, SLOT(downloadFinished()));
+		return;
+	}
+
+	m_currentDownloadFile->close();
+	m_currentDownloadFile->deleteLater();
+	m_currentDownloadFile = NULL;
+	m_pAddOnNetworkReply->deleteLater();
+	m_pAddOnNetworkReply = NULL;
+	StelApp::getInstance().removeProgressBar(m_progressBar);
+	m_progressBar = NULL;
+
+	installFromFile(m_currentDownloadInfo, m_downloadQueue.first());
+	m_currentDownloadInfo = StelAddOnDAO::AddOnInfo();
+	m_bDownloading = false;
+	m_downloadQueue.remove(m_downloadQueue.firstKey());
+	if (!m_downloadQueue.isEmpty())
+	{
+		// next download
+		downloadNextAddOn();
+	}
 }

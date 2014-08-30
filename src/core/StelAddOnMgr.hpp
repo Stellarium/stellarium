@@ -49,7 +49,7 @@ public:
 	StelAddOnMgr();
 	virtual ~StelAddOnMgr();
 
-	QString getThumbnailDir() { return m_sDirThumbnail; }
+	QString getThumbnailDir() { return m_sThumbnailDir; }
 	QString getDirectory(QString category) { return m_dirs.value(category, ""); }
 	void installAddOn(const int addonId, const QStringList selectedFiles);
 	bool installFromFile(const StelAddOnDAO::AddOnInfo addonInfo,
@@ -74,7 +74,8 @@ signals:
 	void skyCulturesChanged();
 
 private slots:
-	void downloadFinished();
+	void downloadThumbnailFinished();
+	void downloadAddOnFinished();
 	void newDownloadedData();
 
 private:
@@ -95,7 +96,7 @@ private:
 
 	bool m_bDownloading;
 	QMap<int, QStringList> m_downloadQueue; // <addonId, selectedFiles>
-	QNetworkReply* m_pDownloadReply;
+	QNetworkReply* m_pAddOnNetworkReply;
 	QFile* m_currentDownloadFile;
 	StelAddOnDAO::AddOnInfo m_currentDownloadInfo;
 
@@ -103,9 +104,13 @@ private:
 	qint64 m_iLastUpdate;
 	QString m_sUrlUpdate;
 
+	QNetworkReply* m_pThumbnailNetworkReply;
+	QHash<QString, QString> m_thumbnails;
+	QStringList m_thumbnailQueue;
+
 	// addon directories
-	const QString m_sDirAddOn;
-	const QString m_sDirThumbnail;
+	const QString m_sAddOnDir;
+	const QString m_sThumbnailDir;
 	QHash<QString, QString> m_dirs;
 
 	// sub-classes
@@ -114,6 +119,9 @@ private:
 	void refreshAddOnStatuses();
 	void downloadNextAddOn();
 	QString calculateMd5(QFile &file) const;
+
+	// download thumbnails
+	void downloadNextThumbnail();
 };
 
 #endif // _STELADDONMGR_HPP_

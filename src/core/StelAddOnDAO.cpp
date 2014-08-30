@@ -428,11 +428,11 @@ StelAddOnDAO::WidgetInfo StelAddOnDAO::getAddOnWidgetInfo(int addonId)
 	return widgetInfo;
 }
 
-QHash<QString, QString> StelAddOnDAO::getThumbnails()
+QHash<QString, QString> StelAddOnDAO::getThumbnails(QString table)
 {
 	QString sQuery("SELECT id_install, thumbnail "
-		       "FROM landscape INNER JOIN addon "
-		       "ON landscape.addon = addon.id");
+		       "FROM " % table % " INNER JOIN addon "
+		       "ON " % table % ".addon = addon.id");
 	QSqlQuery query(m_db);
 	if (!query.exec(sQuery)) {
 		qWarning() << "Add-On DAO Thumbnails:" << m_db.lastError() << sQuery;

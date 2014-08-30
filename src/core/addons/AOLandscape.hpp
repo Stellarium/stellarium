@@ -42,23 +42,10 @@ public:
 	virtual int uninstallAddOn(const QString& idInstall,
 				   const QStringList& selectedFiles) const;
 
-	// download thumbnails
-	void downloadThumbnails();
-
-private slots:
-	void downloadFinished();
-
 private:
-	QString m_sThumbnailDir;
-	QNetworkReply* m_pNetworkReply;
-	QHash<QString, QString> m_thumbnails;
-	QStringList m_thumbnailQueue;
-
 	StelAddOnDAO* m_pStelAddOnDAO;
 	LandscapeMgr* m_pLandscapeMgr;
 	const QString m_sLandscapeInstallDir;
-
-	void downloadNextThumbnail();
 };
 
 #endif // _AOLANDSCAPE_HPP_
