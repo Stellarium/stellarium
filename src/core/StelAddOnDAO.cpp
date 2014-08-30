@@ -111,7 +111,8 @@ bool StelAddOnDAO::createAddonTables()
 
 	addonTables << "CREATE TABLE IF NOT EXISTS " % TABLE_SCRIPT % " ("
 			% COLUMN_ID % " INTEGER primary key AUTOINCREMENT, "
-			% COLUMN_ADDONID % " INTEGER UNIQUE)";
+			% COLUMN_ADDONID % " INTEGER UNIQUE, "
+			% COLUMN_THUMBNAIL % " TEXT)";
 
 	addonTables << "CREATE TABLE IF NOT EXISTS " % TABLE_SKY_CULTURE % " ("
 			% COLUMN_ID % " INTEGER primary key AUTOINCREMENT, "
@@ -120,7 +121,8 @@ bool StelAddOnDAO::createAddonTables()
 	addonTables << "CREATE TABLE IF NOT EXISTS " % TABLE_TEXTURE % " ("
 			% COLUMN_ID % " INTEGER primary key AUTOINCREMENT, "
 			% COLUMN_ADDONID % " INTEGER UNIQUE, "
-			% COLUMN_TEXTURES % " TEXT)";
+			% COLUMN_TEXTURES % " TEXT, "
+			% COLUMN_THUMBNAIL % " TEXT)";
 
 	QSqlQuery query(m_db);
 	foreach (QString table, addonTables)
