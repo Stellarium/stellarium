@@ -83,12 +83,12 @@ StelAddOnMgr::StelAddOnMgr()
 	}
 
 	// Init sub-classes
-	m_pStelAddOns.insert(CATALOG, new AOCatalog(m_pStelAddOnDAO));
-	m_pStelAddOns.insert(LANDSCAPE, new AOLandscape(m_pStelAddOnDAO, m_sThumbnailDir));
-	m_pStelAddOns.insert(LANGUAGE_PACK, new AOLanguagePack(m_pStelAddOnDAO));
-	m_pStelAddOns.insert(SCRIPT, new AOScript(m_pStelAddOnDAO));
-	m_pStelAddOns.insert(SKY_CULTURE, new AOSkyCulture(m_pStelAddOnDAO));
-	m_pStelAddOns.insert(TEXTURE, new AOTexture(m_pStelAddOnDAO));
+	m_pStelAddOns.insert(CATALOG, new AOCatalog());
+	m_pStelAddOns.insert(LANDSCAPE, new AOLandscape());
+	m_pStelAddOns.insert(LANGUAGE_PACK, new AOLanguagePack());
+	m_pStelAddOns.insert(SCRIPT, new AOScript());
+	m_pStelAddOns.insert(SKY_CULTURE, new AOSkyCulture());
+	m_pStelAddOns.insert(TEXTURE, new AOTexture());
 
 	connect(m_pStelAddOns.value(SKY_CULTURE), SIGNAL(skyCulturesChanged()),
 		this, SIGNAL(skyCulturesChanged()));
@@ -404,7 +404,7 @@ void StelAddOnMgr::downloadAddOnFinished()
 		m_pAddOnNetworkReply = StelApp::getInstance().getNetworkAccessManager()->get(req);
 		m_pAddOnNetworkReply->setReadBufferSize(1024*1024*2);
 		connect(m_pAddOnNetworkReply, SIGNAL(readyRead()), this, SLOT(newDownloadedData()));
-		connect(m_pAddOnNetworkReply, SIGNAL(finished()), this, SLOT(downloadFinished()));
+		connect(m_pAddOnNetworkReply, SIGNAL(finished()), this, SLOT(downloadAddOnFinished()));
 		return;
 	}
 

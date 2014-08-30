@@ -26,7 +26,7 @@ class AOScript : public StelAddOn
 {
 	Q_OBJECT
 public:
-	AOScript(StelAddOnDAO* pStelAddOnDAO);
+	AOScript();
 	virtual ~AOScript();
 
 	// check scripts which are already installed.
@@ -42,7 +42,6 @@ public:
 				   const QStringList& selectedFiles) const;
 
 private:
-	StelAddOnDAO* m_pStelAddOnDAO;
 	const QString m_sScriptInstallDir;
 };
 

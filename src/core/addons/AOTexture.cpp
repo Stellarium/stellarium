@@ -21,9 +21,8 @@
 
 #include "AOTexture.hpp"
 
-AOTexture::AOTexture(StelAddOnDAO* pStelAddOnDAO)
-	: m_pStelAddOnDAO(pStelAddOnDAO)
-	, m_sTexturesInstallDir(StelFileMgr::getUserDir() % "/textures/")
+AOTexture::AOTexture()
+	: m_sTexturesInstallDir(StelFileMgr::getUserDir() % "/textures/")
 	, m_pInstalledTextures(new QSettings(m_sTexturesInstallDir % "installedTextures.ini", QSettings::IniFormat))
 {
 	StelFileMgr::makeSureDirExistsAndIsWritable(m_sTexturesInstallDir);

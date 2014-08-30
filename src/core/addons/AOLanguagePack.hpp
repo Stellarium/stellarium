@@ -26,7 +26,7 @@ class AOLanguagePack : public StelAddOn
 {
 	Q_OBJECT
 public:
-	AOLanguagePack(StelAddOnDAO* pStelAddOnDAO);
+	AOLanguagePack();
 	virtual ~AOLanguagePack();
 
 	// check language packs which are already installed.
@@ -42,7 +42,6 @@ public:
 				   const QStringList& selectedFiles) const;
 
 private:
-	StelAddOnDAO* m_pStelAddOnDAO;
 	const QString m_sLocaleInstallDir;
 };
 

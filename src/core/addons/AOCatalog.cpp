@@ -22,8 +22,7 @@
 
 #include "AOCatalog.hpp"
 
-AOCatalog::AOCatalog(StelAddOnDAO* pStelAddOnDAO)
-	: m_pStelAddOnDAO(pStelAddOnDAO)
+AOCatalog::AOCatalog()
 {
 }
 

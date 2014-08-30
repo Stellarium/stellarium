@@ -26,7 +26,7 @@ class AOSkyCulture : public StelAddOn
 {
 	Q_OBJECT
 public:
-	AOSkyCulture(StelAddOnDAO* pStelAddOnDAO);
+	AOSkyCulture();
 	virtual ~AOSkyCulture();
 
 	// check starlores which are already installed.
@@ -45,7 +45,6 @@ signals:
 	void skyCulturesChanged() const;
 
 private:
-	StelAddOnDAO* m_pStelAddOnDAO;
 	const QString m_sSkyCultureInstallDir;
 };
 

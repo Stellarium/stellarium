@@ -21,9 +21,8 @@
 
 #include "AOLanguagePack.hpp"
 
-AOLanguagePack::AOLanguagePack(StelAddOnDAO* pStelAddOnDAO)
-	: m_pStelAddOnDAO(pStelAddOnDAO)
-	, m_sLocaleInstallDir(StelFileMgr::getLocaleUserDir())
+AOLanguagePack::AOLanguagePack()
+	: m_sLocaleInstallDir(StelFileMgr::getLocaleUserDir())
 {
 	StelFileMgr::makeSureDirExistsAndIsWritable(m_sLocaleInstallDir % "/stellarium");
 	StelFileMgr::makeSureDirExistsAndIsWritable(m_sLocaleInstallDir % "/stellarium-skycultures");

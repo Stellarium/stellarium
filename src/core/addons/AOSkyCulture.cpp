@@ -19,9 +19,8 @@
 
 #include "AOSkyCulture.hpp"
 
-AOSkyCulture::AOSkyCulture(StelAddOnDAO* pStelAddOnDAO)
-	: m_pStelAddOnDAO(pStelAddOnDAO)
-	, m_sSkyCultureInstallDir(StelFileMgr::getUserDir() % "/skycultures/")
+AOSkyCulture::AOSkyCulture()
+	: m_sSkyCultureInstallDir(StelFileMgr::getUserDir() % "/skycultures/")
 {
 	StelFileMgr::makeSureDirExistsAndIsWritable(m_sSkyCultureInstallDir);
 }

@@ -27,7 +27,7 @@ class AOLandscape : public StelAddOn
 {
 	Q_OBJECT
 public:
-	AOLandscape(StelAddOnDAO* pStelAddOnDAO, QString thumbnailDir);
+	AOLandscape();
 	virtual ~AOLandscape();
 
 	// check landscapes which are already installed.
@@ -43,7 +43,6 @@ public:
 				   const QStringList& selectedFiles) const;
 
 private:
-	StelAddOnDAO* m_pStelAddOnDAO;
 	LandscapeMgr* m_pLandscapeMgr;
 	const QString m_sLandscapeInstallDir;
 };

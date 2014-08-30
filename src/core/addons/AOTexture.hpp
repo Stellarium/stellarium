@@ -26,7 +26,7 @@ class AOTexture : public StelAddOn
 {
 	Q_OBJECT
 public:
-	AOTexture(StelAddOnDAO* pStelAddOnDAO);
+	AOTexture();
 	virtual ~AOTexture();
 
 	// check textures which are already installed.
@@ -43,12 +43,11 @@ public:
 				    const QStringList& selectedFiles) const;
 
 private:
-	StelAddOnDAO* m_pStelAddOnDAO;
 	const QString m_sTexturesInstallDir;
 
 	// In order to enable us to know which are the installed textures,
 	// it will store the texture name and the id_install (enough to identify the source)
-	QSettings* m_pInstalledTextures;
+	QSettings* m_pInstalledTextures; // .ini file
 
 	int installFromZip(QString idInstall, QString downloadedFilepath, QStringList filesToInstall) const;
 	int installFromImg(QString idInstall, QString downloadedFilepath) const;

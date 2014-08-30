@@ -19,9 +19,8 @@
 
 #include "AOLandscape.hpp"
 
-AOLandscape::AOLandscape(StelAddOnDAO* pStelAddOnDAO, QString thumbnailDir)
-	: m_pStelAddOnDAO(pStelAddOnDAO)
-	, m_pLandscapeMgr(GETSTELMODULE(LandscapeMgr))
+AOLandscape::AOLandscape()
+	: m_pLandscapeMgr(GETSTELMODULE(LandscapeMgr))
 	, m_sLandscapeInstallDir(StelFileMgr::getUserDir() % "/landscapes/")
 {
 	StelFileMgr::makeSureDirExistsAndIsWritable(m_sLandscapeInstallDir);

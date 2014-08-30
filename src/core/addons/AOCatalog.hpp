@@ -26,7 +26,7 @@ class AOCatalog : public StelAddOn
 {
 	Q_OBJECT
 public:
-	AOCatalog(StelAddOnDAO* pStelAddOnDAO);
+	AOCatalog();
 	virtual ~AOCatalog();
 
 	// check catalogs which are already installed.
@@ -40,9 +40,6 @@ public:
 	// uninstall catalog
 	virtual int uninstallAddOn(const QString& idInstall,
 				   const QStringList& selectedFiles) const;
-
-private:
-	StelAddOnDAO* m_pStelAddOnDAO;
 };
 
 #endif // _AOCATALOG_HPP_

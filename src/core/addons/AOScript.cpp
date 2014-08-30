@@ -19,9 +19,8 @@
 
 #include "AOScript.hpp"
 
-AOScript::AOScript(StelAddOnDAO* pStelAddOnDAO)
-	: m_pStelAddOnDAO(pStelAddOnDAO)
-	, m_sScriptInstallDir(StelFileMgr::getUserDir() % "/scripts/")
+AOScript::AOScript()
+	: m_sScriptInstallDir(StelFileMgr::getUserDir() % "/scripts/")
 {
 	StelFileMgr::makeSureDirExistsAndIsWritable(m_sScriptInstallDir);
 }
