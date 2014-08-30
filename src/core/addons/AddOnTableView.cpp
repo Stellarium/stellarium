@@ -18,6 +18,7 @@
  */
 
 #include <QHeaderView>
+#include <QScrollBar>
 #include <QStringBuilder>
 
 #include "AddOnTableProxyModel.hpp"
@@ -39,6 +40,9 @@ AddOnTableView::AddOnTableView(QWidget* parent)
 	setEditTriggers(false);
 	setShowGrid(false);
 
+	connect(verticalScrollBar(), SIGNAL(valueChanged(int)),
+		this, SLOT(scrollValueChanged(int)));
+
 	m_pCheckboxGroup->setExclusive(false);
 	connect(m_pCheckboxGroup, SIGNAL(buttonToggled(int, bool)),
 		this, SIGNAL(rowChecked(int, bool)));
@@ -57,6 +61,13 @@ AddOnTableView::~AddOnTableView()
 	m_widgets.clear();
 
 	m_pCheckboxGroup->deleteLater();
+}
+
+void AddOnTableView::scrollValueChanged(int)
+{
+	// hack to ensures paint update
+	hide();
+	show();
 }
 
 void AddOnTableView::setModel(QAbstractItemModel* model)

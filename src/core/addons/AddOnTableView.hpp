@@ -54,6 +54,7 @@ public slots:
 	void setAllChecked(bool checked);
 
 private slots:
+	void scrollValueChanged(int);
 	void slotCheckRow(int pRow, int checked);
 	void slotRowChecked(int pRow, bool checked);
 
