@@ -7,17 +7,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-08-22 07:29+0700\n"
-"PO-Revision-Date: 2014-07-22 14:35+0000\n"
+"POT-Creation-Date: 2014-08-29 22:42+0700\n"
+"PO-Revision-Date: 2014-08-29 06:37+0000\n"
 "Last-Translator: Gerardo Giordano <gergio75@gmail.com>\n"
 "Language-Team: Italian <it@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-08-23 06:21+0000\n"
-"X-Generator: Launchpad (build 17163)\n"
+"X-Launchpad-Export-Date: 2014-08-30 06:06+0000\n"
+"X-Generator: Launchpad (build 17176)\n"
 
-#: src/core/modules/ConstellationMgr.cpp:106 src/core/modules/StarMgr.cpp:338
+#: src/core/modules/ConstellationMgr.cpp:106 src/core/modules/StarMgr.cpp:346
 #: src/core/modules/GridLinesMgr.cpp:697 src/core/modules/LandscapeMgr.cpp:354
 #: src/core/modules/NebulaMgr.cpp:126 src/core/modules/SolarSystem.cpp:155
 #: src/core/StelApp.cpp:473 src/core/StelCore.cpp:185
@@ -28,7 +28,7 @@ msgstr "Opzioni di Visualizzazione"
 #: src/core/modules/ConstellationMgr.cpp:107
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:279
 msgid "Constellation lines"
-msgstr "Linee costellazioni"
+msgstr "Linne delle costellazioni"
 
 #: src/core/modules/ConstellationMgr.cpp:108
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:289
@@ -45,13 +45,13 @@ msgstr "Nomi delle costellazioni"
 msgid "Constellation boundaries"
 msgstr "Confini delle costellazioni"
 
-#: src/core/modules/StarMgr.cpp:339 src/ui_viewDialog.h:1154
+#: src/core/modules/StarMgr.cpp:347 src/ui_viewDialog.h:1154
 #: src/ui_viewDialog.h:1186 src/ui_viewDialog.h:1211
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:245
 msgid "Stars"
 msgstr "Stelle"
 
-#: src/core/modules/StarMgr.cpp:340
+#: src/core/modules/StarMgr.cpp:348
 msgid "Stars labels"
 msgstr "Nomi delle stelle"
 
@@ -73,22 +73,22 @@ msgstr "Orizzonte"
 
 #: src/core/modules/GridLinesMgr.cpp:564
 msgid "Galactic Plane"
-msgstr "Piano galattico"
+msgstr "Piano Galattico"
 
 #: src/core/modules/GridLinesMgr.cpp:698
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:331
 msgid "Equatorial grid"
-msgstr "Griglia coordinate equatoriali"
+msgstr "Griglia equatoriale"
 
 #: src/core/modules/GridLinesMgr.cpp:699 src/ui_viewDialog.h:1226
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:326
 msgid "Azimuthal grid"
-msgstr "Griglia coordinate Azimuthali"
+msgstr "Griglia azimutale"
 
 #: src/core/modules/GridLinesMgr.cpp:700
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:346
 msgid "Ecliptic line"
-msgstr "Eclittica"
+msgstr "Linea dell'Eclittica"
 
 #: src/core/modules/GridLinesMgr.cpp:701
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:341
@@ -98,7 +98,7 @@ msgstr "Linea dell'Equatore"
 #: src/core/modules/GridLinesMgr.cpp:702
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:321
 msgid "Meridian line"
-msgstr "Meridiano Locale"
+msgstr "Linea del Meridiano"
 
 #: src/core/modules/GridLinesMgr.cpp:703
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:360
@@ -108,20 +108,20 @@ msgstr "Linea dell'orizzonte"
 #: src/core/modules/GridLinesMgr.cpp:704
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:336
 msgid "Equatorial J2000 grid"
-msgstr "Griglia coordinate equatoriali (epoca Gen2000)"
+msgstr "Griglia equatoriale J2000"
 
 #: src/core/modules/GridLinesMgr.cpp:705
 msgid "Ecliptic J2000 grid"
-msgstr "Griglia ellittica J2000"
+msgstr "Griglia Eclittica J2000"
 
 #: src/core/modules/GridLinesMgr.cpp:706 src/ui_viewDialog.h:1227
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:365
 msgid "Galactic grid"
-msgstr "Griglia galattica"
+msgstr "Griglia Galattica"
 
 #: src/core/modules/GridLinesMgr.cpp:707 src/ui_viewDialog.h:1247
 msgid "Galactic plane"
-msgstr "Piano galattico"
+msgstr "Piano Galattico"
 
 #: src/core/modules/LandscapeMgr.cpp:355 src/ui_viewDialog.h:1176
 msgid "Atmosphere"
@@ -207,11 +207,11 @@ msgstr "Galassia"
 
 #: src/core/modules/Nebula.cpp:378
 msgid "Open cluster"
-msgstr "Ammasso aperto"
+msgstr "Ammasso Aperto"
 
 #: src/core/modules/Nebula.cpp:381
 msgid "Globular cluster"
-msgstr "Ammasso globulare"
+msgstr "Ammasso Globulare"
 
 #: src/core/modules/Nebula.cpp:384
 msgid "Nebula"
@@ -219,11 +219,11 @@ msgstr "Nebulosa"
 
 #: src/core/modules/Nebula.cpp:387
 msgid "Planetary nebula"
-msgstr "Nebulosa planetaria"
+msgstr "Nebulosa Planetaria"
 
 #: src/core/modules/Nebula.cpp:390
 msgid "Dark Nebula"
-msgstr "Nebulosa oscura"
+msgstr "Nebulosa Oscura"
 
 #: src/core/modules/Nebula.cpp:393
 msgid "Cluster associated with nebulosity"
@@ -239,7 +239,7 @@ msgstr "Tipo non documentato"
 
 #: src/core/modules/NebulaMgr.cpp:126
 msgid "Deep-sky objects"
-msgstr "Oggetti del profondo cielo"
+msgstr "Oggetti del Profondo Cielo"
 
 #: src/core/modules/Planet.cpp:158 src/core/modules/MinorPlanet.cpp:228
 #: src/core/modules/MinorPlanet.cpp:232 src/core/modules/Comet.cpp:164
@@ -263,7 +263,7 @@ msgstr "Distanza: %1UA (%2 km)"
 #: src/core/modules/Comet.cpp:201
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 Mio km)"
-msgstr "Distanza: %1AU (%2 Mio km)"
+msgstr "Distanza: %1AU (%2 Mln km)"
 
 #: src/core/modules/Planet.cpp:199
 #, qt-format
@@ -285,17 +285,17 @@ msgstr "Periodo siderale: %1 giorni (%2 a)"
 #: src/core/modules/Planet.cpp:220
 #, qt-format
 msgid "Sidereal day: %1"
-msgstr "Giorno siderale: %1"
+msgstr "Giorno Siderale: %1"
 
 #: src/core/modules/Planet.cpp:221
 #, qt-format
 msgid "Mean solar day: %1"
-msgstr "Giorno solare medio: %1"
+msgstr "Giorno Solare Medio: %1"
 
 #: src/core/modules/Planet.cpp:227
 #, qt-format
 msgid "Phase Angle: %1"
-msgstr "Angolo di fase: %1"
+msgstr "Angolo di Fase: %1"
 
 #: src/core/modules/Planet.cpp:228
 #, qt-format
@@ -325,7 +325,7 @@ msgstr "Distanza dal Sole: %1AU (%2 km)"
 #: src/core/modules/Comet.cpp:184
 #, no-c-format, qt-format
 msgid "Distance from Sun: %1AU (%2 Mio km)"
-msgstr "Distanza dal Sole: %1AU (%2 Mio km)"
+msgstr "Distanza dal Sole: %1AU (%2 Mln km)"
 
 #: src/core/modules/Comet.cpp:211
 #, no-c-format, qt-format
@@ -335,12 +335,12 @@ msgstr "Velocità: %1 km/s"
 #: src/core/modules/Comet.cpp:220
 #, no-c-format, qt-format
 msgid "Coma diameter (estimate): %1 km"
-msgstr ""
+msgstr "Diametro Cometa (estimate): %1 km"
 
 #: src/core/modules/Comet.cpp:224
 #, no-c-format, qt-format
 msgid "Gas tail length (estimate): %1 Mio km"
-msgstr ""
+msgstr "Lunghezza coda dei gas (estimate): %1 Mln km"
 
 #: src/core/modules/SolarSystem.cpp:156
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:308
@@ -355,7 +355,7 @@ msgstr "Orbite pianeti"
 #: src/core/modules/SolarSystem.cpp:158
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:316
 msgid "Planet trails"
-msgstr "Orbite dei pianeti"
+msgstr "Traiettorie pianeti"
 
 #. TRANSLATORS: Type of object
 #: src/core/modules/StarWrapper.cpp:50 src/core/modules/StarWrapper.cpp:163
@@ -367,7 +367,7 @@ msgstr "stella"
 #: plugins/Quasars/src/Quasar.cpp:121
 #, qt-format
 msgid "Color Index (B-V): <b>%1</b>"
-msgstr "Indice del colore (B-V): <b>%1</b>"
+msgstr "Indice di Colore (B-V): <b>%1</b>"
 
 #: src/core/modules/StarWrapper.cpp:144
 msgid "eruptive variable star"
@@ -405,13 +405,13 @@ msgstr "Tipo: <b>%1, %2</b>"
 #: src/core/modules/StarWrapper.cpp:207
 #, qt-format
 msgid "Magnitude range: <b>%1</b>%2<b>%3</b> (Photometric system: %4)"
-msgstr "Gamma di magnitudo: <b>%1</b>%2<b>%3</b> (Sistema fotometrico: %4)"
+msgstr "Gamma di magnitudine: <b>%1</b>%2<b>%3</b> (Sistema fotometrico: %4)"
 
 #: src/core/modules/StarWrapper.cpp:209
 #, qt-format
 msgid "Magnitude range: <b>%1</b>%2<b>%3/%4</b> (Photometric system: %5)"
 msgstr ""
-"Gamma di magnitudo: <b>%1</b>%2<b>%3/%4</b> (Sistema fotometrico: %5)"
+"Gamma di magnitudine: <b>%1</b>%2<b>%3/%4</b> (Sistema fotometrico: %5)"
 
 #: src/core/modules/StarWrapper.cpp:216
 #: plugins/Supernovae/src/Supernova.cpp:148 plugins/Novae/src/Nova.cpp:153
@@ -434,12 +434,12 @@ msgstr "Parallasse: %1\""
 #: src/core/modules/StarWrapper.cpp:230
 #, qt-format
 msgid "Epoch for minimum light: %1 JD"
-msgstr "Epoch per luminosità minima: %1 JD"
+msgstr ""
 
 #: src/core/modules/StarWrapper.cpp:232
 #, qt-format
 msgid "Epoch for maximum light: %1 JD"
-msgstr "Epoch per luminosità massima: %1 JD"
+msgstr ""
 
 #: src/core/modules/StarWrapper.cpp:236
 #, qt-format
@@ -1684,20 +1684,20 @@ msgstr "Nascondi automaticamente la barra orizzontale dei comandi"
 msgid "Auto hide vertical button bar"
 msgstr "Nascondi automaticamente la barra verticale dei comandi"
 
-#: src/gui/StelGuiItems.cpp:293 src/gui/StelGuiItems.cpp:715
+#: src/gui/StelGuiItems.cpp:293 src/gui/StelGuiItems.cpp:732
 msgid "Space"
 msgstr "Spazio"
 
-#: src/gui/StelGuiItems.cpp:580
+#: src/gui/StelGuiItems.cpp:590
 #, c-format, qt-format
 msgid "%1m"
 msgstr "%1m"
 
-#: src/gui/StelGuiItems.cpp:622
+#: src/gui/StelGuiItems.cpp:639
 msgid "Field of view"
 msgstr "Campo di vista"
 
-#: src/gui/StelGuiItems.cpp:640
+#: src/gui/StelGuiItems.cpp:657
 msgid "Frames per second"
 msgstr "Fotogrammi al secondo"
 
