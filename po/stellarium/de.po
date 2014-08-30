@@ -9,17 +9,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: de\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-08-22 07:29+0700\n"
-"PO-Revision-Date: 2014-08-14 16:47+0000\n"
+"POT-Creation-Date: 2014-08-29 22:42+0700\n"
+"PO-Revision-Date: 2014-08-29 16:33+0000\n"
 "Last-Translator: gzotti <Georg.Zotti@univie.ac.at>\n"
 "Language-Team: <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-08-23 06:16+0000\n"
-"X-Generator: Launchpad (build 17163)\n"
+"X-Launchpad-Export-Date: 2014-08-30 06:00+0000\n"
+"X-Generator: Launchpad (build 17176)\n"
 
-#: src/core/modules/ConstellationMgr.cpp:106 src/core/modules/StarMgr.cpp:338
+#: src/core/modules/ConstellationMgr.cpp:106 src/core/modules/StarMgr.cpp:346
 #: src/core/modules/GridLinesMgr.cpp:697 src/core/modules/LandscapeMgr.cpp:354
 #: src/core/modules/NebulaMgr.cpp:126 src/core/modules/SolarSystem.cpp:155
 #: src/core/StelApp.cpp:473 src/core/StelCore.cpp:185
@@ -47,13 +47,13 @@ msgstr "Sternbildbezeichnungen"
 msgid "Constellation boundaries"
 msgstr "Sternbildgrenzen"
 
-#: src/core/modules/StarMgr.cpp:339 src/ui_viewDialog.h:1154
+#: src/core/modules/StarMgr.cpp:347 src/ui_viewDialog.h:1154
 #: src/ui_viewDialog.h:1186 src/ui_viewDialog.h:1211
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:245
 msgid "Stars"
 msgstr "Sterne"
 
-#: src/core/modules/StarMgr.cpp:340
+#: src/core/modules/StarMgr.cpp:348
 msgid "Stars labels"
 msgstr "Sternbezeichnungen"
 
@@ -337,12 +337,12 @@ msgstr "Geschwindigkeit: %1 km/s"
 #: src/core/modules/Comet.cpp:220
 #, no-c-format, qt-format
 msgid "Coma diameter (estimate): %1 km"
-msgstr ""
+msgstr "Koma-Durchmesser (Schätzung): %1 km"
 
 #: src/core/modules/Comet.cpp:224
 #, no-c-format, qt-format
 msgid "Gas tail length (estimate): %1 Mio km"
-msgstr ""
+msgstr "Länge des Gasschweifs (Schätzung): %1 Mio km"
 
 #: src/core/modules/SolarSystem.cpp:156
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:308
@@ -1713,20 +1713,20 @@ msgstr "Horizontale Schaltflächenleiste automatisch ausblenden"
 msgid "Auto hide vertical button bar"
 msgstr "Vertikale Schaltflächenleiste automatisch ausblenden"
 
-#: src/gui/StelGuiItems.cpp:293 src/gui/StelGuiItems.cpp:715
+#: src/gui/StelGuiItems.cpp:293 src/gui/StelGuiItems.cpp:732
 msgid "Space"
 msgstr "Leertaste"
 
-#: src/gui/StelGuiItems.cpp:580
+#: src/gui/StelGuiItems.cpp:590
 #, c-format, qt-format
 msgid "%1m"
 msgstr "%1m"
 
-#: src/gui/StelGuiItems.cpp:622
+#: src/gui/StelGuiItems.cpp:639
 msgid "Field of view"
 msgstr "Sichtfeld"
 
-#: src/gui/StelGuiItems.cpp:640
+#: src/gui/StelGuiItems.cpp:657
 msgid "Frames per second"
 msgstr "Bilder pro Sekunde"
 
@@ -3922,11 +3922,11 @@ msgstr "&Verknüpfungsadresse kopieren"
 
 #: src/ui_dateTimeDialogGui.h:369
 msgid "Julian Date"
-msgstr ""
+msgstr "Julianische Tagnummer"
 
 #: src/ui_dateTimeDialogGui.h:372
 msgid "Modified Julian Date"
-msgstr ""
+msgstr "Modifizierte Julianische Tagnummer"
 
 #: src/ui_helpDialogGui.h:277 src/ui_helpDialogGui.h:283
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:418
@@ -3962,11 +3962,11 @@ msgstr ""
 
 #: src/ui_locationDialogGui.h:414
 msgid "Reset location list to show all known locations"
-msgstr ""
+msgstr "Gesamtheit der bekannten Orte wiederherstellen"
 
 #: src/ui_locationDialogGui.h:416
 msgid "Reset Location List"
-msgstr ""
+msgstr "Ortsliste zurücksetzen"
 
 #: src/ui_locationDialogGui.h:417
 msgid "Current location information"
@@ -4005,7 +4005,7 @@ msgstr " m"
 
 #: src/ui_locationDialogGui.h:431
 msgid "Return to default location"
-msgstr ""
+msgstr "Zum Standardsort zurückkehren"
 
 #: src/ui_locationDialogGui.h:433
 msgid "Add to list"
@@ -4029,11 +4029,11 @@ msgstr "Planet:"
 
 #: src/ui_locationDialogGui.h:438
 msgid "Use current location as default"
-msgstr ""
+msgstr "Aktuellen Ort als Standard setzen"
 
 #: src/ui_locationDialogGui.h:439
 msgid "Get location from Network"
-msgstr ""
+msgstr "Standort automatisch aus Netzwerk ermitteln"
 
 #: src/ui_searchDialogGui.h:558
 msgid "Find Object"
@@ -5019,7 +5019,7 @@ msgstr "Speichere Skript in Datei"
 
 #: src/ui_scriptConsole.h:366
 msgid "clear"
-msgstr ""
+msgstr "löschen"
 
 #: src/ui_scriptConsole.h:370
 msgid "pre-process script using SSC preprocessor"
