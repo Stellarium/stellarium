@@ -38,22 +38,22 @@ class Comet : public Planet
 public:
 	friend class SolarSystem;               // Solar System initializes static constants.
 	Comet(const QString& englishName,
-	       int flagLighting,
-	       double radius,
-	       double oblateness,
-	       Vec3f color,
-	       float albedo,
-	       const QString& texMapName,
-	       posFuncType _coordFunc,
-	       void* userDataPtr,
-	       OsculatingFunctType *osculatingFunc,
-	       bool closeOrbit,
-	       bool hidden,
-		   const QString &pType,
-		   float dustTailWidthFact=1.5f,
-		   float dustTailLengthFact=0.4f,
-		   float dustTailBrightnessFact=1.5f
-		  );
+	      int flagLighting,
+	      double radius,
+	      double oblateness,
+	      Vec3f color,
+	      float albedo,
+	      const QString& texMapName,
+	      posFuncType _coordFunc,
+	      void* userDataPtr,
+	      OsculatingFunctType *osculatingFunc,
+	      bool closeOrbit,
+	      bool hidden,
+	      const QString &pTypeStr,
+	      float dustTailWidthFact=1.5f,
+	      float dustTailLengthFact=0.4f,
+	      float dustTailBrightnessFact=1.5f
+	);
 
 	virtual ~Comet();
 
