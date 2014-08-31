@@ -78,16 +78,18 @@ public:
 	// GZ This must replace the QString pType ASAP!
 	Q_ENUMS(PlanetType)
 	//! numeric typecodes for the type descriptions in ssystem.ini
-	// GZ: These are slightly faster than string comparisons in time-critical comparisons.
+	// GZ: Until 0.13 QStrings were used for types.
+	// GZ: Enums are slightly faster than string comparisons in time-critical comparisons.
+	// GZ: If other types are introduced, add here and the string in init().
 	enum PlanetType
 	{
-		tStar,
-		tPlanet,
-		tMoon,
-		tAsteroid,
-		tPlutoid,
-		tComet,
-		tUNDEFINED
+		tStar,                   // ssystem.ini: type="star"
+		tPlanet,                 // ssystem.ini: type="planet"
+		tMoon,                   // ssystem.ini: type="moon"
+		tAsteroid,               // ssystem.ini: type="asteroid"
+		tPlutoid,                // ssystem.ini: type="plutoid"
+		tComet,                  // ssystem.ini: type="comet"
+		tUNDEFINED               // ssystem.ini: type=<anything else>
 	};
 
 	Planet(const QString& englishName,
@@ -108,7 +110,10 @@ public:
 	       const QString &pTypeStr);
 
 	virtual ~Planet();
-	static void init(); //! GZ New: initializes static vars. Must be called before creating first planet.
+
+	//! Initializes static vars. Must be called before creating first planet.
+	// Currently ensured by SolarSystem::init()
+	static void init();
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods inherited from StelObject

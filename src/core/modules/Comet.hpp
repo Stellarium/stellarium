@@ -53,7 +53,7 @@ public:
 	      float dustTailWidthFact=1.5f,
 	      float dustTailLengthFact=0.4f,
 	      float dustTailBrightnessFact=1.5f
-			);
+	);
 
 	virtual ~Comet();
 
