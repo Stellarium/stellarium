@@ -44,12 +44,12 @@ class StelFileMgr
 public:
 	//! @enum Flags used as named bitfield flags as specifiers to filter results of StelFileMgr methods.
 	enum Flags {
-		RemovableMedia = 0x00000001,  //!< Search on removable media if present (default is not to).
-		Writable       = 0x00000002,  //!< Only return writable paths. For directories this means
-									  //!< that it is possible to create files within the directory.
-		Directory      = 0x00000004, //!< Exclude non-directories.
-		File           = 0x00000008, //!< Exclude non-files.
-		New            = 0x00000010 //!< Exclude existing paths.
+		RemovableMedia = 0x00000001,	//!< Search on removable media if present (default is not to).
+		Writable       = 0x00000002,	//!< Only return writable paths. For directories this means
+						//!< that it is possible to create files within the directory.
+		Directory      = 0x00000004,	//!< Exclude non-directories.
+		File           = 0x00000008,	//!< Exclude non-files.
+		New            = 0x00000010	//!< Exclude existing paths.
 	};
 
 	//! Initialize the directories.
