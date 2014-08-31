@@ -75,7 +75,6 @@ class Planet : public StelObject
 public:
 	friend class SolarSystem;
 
-	// GZ This must replace the QString pType ASAP!
 	Q_ENUMS(PlanetType)
 	//! numeric typecodes for the type descriptions in ssystem.ini
 	// GZ: Until 0.13 QStrings were used for types.
@@ -83,13 +82,13 @@ public:
 	// GZ: If other types are introduced, add here and the string in init().
 	enum PlanetType
 	{
-		tStar,                   // ssystem.ini: type="star"
-		tPlanet,                 // ssystem.ini: type="planet"
-		tMoon,                   // ssystem.ini: type="moon"
-		tAsteroid,               // ssystem.ini: type="asteroid"
-		tPlutoid,                // ssystem.ini: type="plutoid"
-		tComet,                  // ssystem.ini: type="comet"
-		tUNDEFINED               // ssystem.ini: type=<anything else>
+		isStar,                   // ssystem.ini: type="star"
+		isPlanet,                 // ssystem.ini: type="planet"
+		isMoon,                   // ssystem.ini: type="moon"
+		isAsteroid,               // ssystem.ini: type="asteroid"
+		isPlutoid,                // ssystem.ini: type="plutoid"
+		isComet,                  // ssystem.ini: type="comet"
+		isUNDEFINED               // ssystem.ini: type=<anything else>
 	};
 
 	Planet(const QString& englishName,
@@ -99,7 +98,7 @@ public:
 	       Vec3f color,
 	       float albedo,
 	       const QString& texMapName,
-		   const QString& normalMapName,
+	       const QString& normalMapName,
 	       posFuncType _coordFunc,
 	       void* userDataPtr,
 	       OsculatingFunctType *osculatingFunc,
