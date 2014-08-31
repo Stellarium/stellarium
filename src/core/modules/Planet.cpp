@@ -120,6 +120,12 @@ QMap<Planet::PlanetType, QString> Planet::pTypeMap;
 // GZ Must be called before first planet is created. Loads pTypeMap.
 void Planet::init()
 {
+	if (pTypeMap.count() > 0 )
+	{
+		// This should never happen. But it's uncritical.
+		qDebug() << "Planet::init(): Non-empty static map. This is a programming error, but we can fix that.";
+		pTypeMap.clear();
+	}
 	pTypeMap.insert(Planet::tStar,     "star");
 	pTypeMap.insert(Planet::tPlanet,   "planet");
 	pTypeMap.insert(Planet::tMoon,     "moon");
@@ -887,6 +893,7 @@ void Planet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFon
 	// GZ: Try to improve speed for minor planets: test if visible at all.
 	// For a full catalog of NEAs (11000 objects), with this and resetting deltaJD according to distance, rendering time went 4.5fps->12fps.	
 	// AW: Apply this rule to asteroids only
+	// GZ: change pType to enum again for slight speedup.
 	if (((getVMagnitude(core)-1.0f) > core->getSkyDrawer()->getLimitMagnitude()) && pType==Planet::tAsteroid)
 	{
 		return;
