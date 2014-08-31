@@ -881,3 +881,85 @@ QStringList NebulaMgr::listMatchingObjects(const QString& objPrefix, int maxNbIt
 	return result;
 }
 
+QStringList NebulaMgr::listAllObjects(bool inEnglish) const
+{
+	QStringList result;
+	foreach(const NebulaP& n, nebArray)
+	{		
+		if (!n->getEnglishName().isEmpty())
+		{
+			if (inEnglish)
+				result << n->getEnglishName();
+			else
+				result << n->getNameI18n();
+		}
+	}
+	return result;
+}
+
+QStringList NebulaMgr::listAllObjectsByType(const QString &objType, bool inEnglish) const
+{
+	QStringList result;
+	int type = objType.toInt();
+	switch (type)
+	{
+		case 0: // Bright galaxies?
+			foreach(const NebulaP& n, nebArray)
+			{
+				if (n->nType==type && n->mag<=10.)
+				{
+					if (!n->getEnglishName().isEmpty())
+					{
+						if (inEnglish)
+							result << n->getEnglishName();
+						else
+							result << n->getNameI18n();
+					}
+					else if (n->NGC_nb>0)
+						result << QString("NGC %1").arg(n->NGC_nb);
+					else
+						result << QString("IC %1").arg(n->IC_nb);
+
+				}
+			}
+			break;
+		case 10: // Messier Catalogue?
+			foreach(const NebulaP& n, nebArray)
+			{
+				if (n->M_nb>0)
+					result << QString("M%1").arg(n->M_nb);
+			}
+			break;
+		case 11: // Caldwell Catalogue?
+			foreach(const NebulaP& n, nebArray)
+			{
+				if (n->C_nb>0)
+					result << QString("C%1").arg(n->C_nb);
+			}
+			break;
+		default:
+			foreach(const NebulaP& n, nebArray)
+			{
+				if (n->nType==type)
+				{
+					if (!n->getEnglishName().isEmpty())
+					{
+						if (inEnglish)
+							result << n->getEnglishName();
+						else
+							result << n->getNameI18n();
+					}
+					else if (n->NGC_nb>0)
+						result << QString("NGC %1").arg(n->NGC_nb);
+					else
+						result << QString("IC %1").arg(n->IC_nb);
+
+				}
+			}
+			break;
+	}
+
+	result.removeDuplicates();
+	return result;
+}
+

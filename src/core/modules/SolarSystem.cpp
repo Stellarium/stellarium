@@ -1376,21 +1376,23 @@ QStringList SolarSystem::listMatchingObjects(const QString& objPrefix, int maxNb
 	return result;
 }
 
-QStringList SolarSystem::listAllObjects(bool inEnglish) const
+QStringList SolarSystem::listAllObjectsByType(const QString &objType, bool inEnglish) const
 {
 	QStringList result;
 	if (inEnglish)
 	{
 		foreach(const PlanetP& p, systemPlanets)
 		{
-			result << p->getEnglishName();
+			if (Planet::pTypeMap.value(p->getPlanetType())==objType)
+				result << p->getEnglishName();
 		}
 	}
 	else
 	{
 		foreach(const PlanetP& p, systemPlanets)
 		{
-			result << p->getNameI18n();
+			if (Planet::pTypeMap.value(p->getPlanetType())==objType)
+				result << p->getNameI18n();
 		}
 	}
 	return result;
