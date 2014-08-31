@@ -79,15 +79,14 @@ private slots:
 	void newDownloadedData();
 
 private:
-	//! @enum InstallState
+	//! @enum AddOnStatus
 	//! Used for keeping track of the download/update status
-	enum InstallState
+	enum AddOnStatus
 	{
-		Installed,
-		Complete,
-		CompleteUpdates,
-		DownloadError,
-		OtherError
+		NotInstalled,
+		PartiallyInstalled,
+		FullyInstalled,
+		Installing
 	};
 
 	QSqlDatabase m_db;

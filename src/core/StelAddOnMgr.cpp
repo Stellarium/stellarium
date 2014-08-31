@@ -214,8 +214,10 @@ void StelAddOnMgr::installAddOn(const int addonId, const QStringList selectedFil
 	{
 		// something goes wrong (file not found OR corrupt),
 		// try downloading it...
+		m_pStelAddOnDAO->updateAddOnStatus(addonInfo.idInstall, Installing);
 		m_downloadQueue.insert(addonId, selectedFiles);
 		downloadNextAddOn();
+		emit(updateTableViews());
 	}
 }
 
