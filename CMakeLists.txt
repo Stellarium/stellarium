@@ -56,7 +56,7 @@ IF(WIN32)
     SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -fexceptions -fident -mthreads -mwindows")
   ELSE()
     # Prevent MSVC from complaining about M_PI no matter where <cmath> is included first
-    ADD_DEFINITIONS(-D_USE_MATH_DEFINES)
+    ADD_DEFINITIONS(-D_USE_MATH_DEFINES /D "_CRT_SECURE_NO_WARNINGS")
   ENDIF()
 ELSE()
   SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Wextra -Wno-unused-parameter")
