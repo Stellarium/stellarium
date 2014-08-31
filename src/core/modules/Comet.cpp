@@ -142,7 +142,7 @@ QString Comet::getInfoString(const StelCore *core, const InfoStringGroup &flags)
 
 	if (flags&ObjectType)
 	{
-		oss << q_("Type: <b>%1</b>").arg(q_(Planet::pTypeMap.value(pType))) << "<br />";
+		oss << q_("Type: <b>%1</b>").arg(q_(getPlanetTypeString())) << "<br />";
 	}
 
 	if (flags&Magnitude)

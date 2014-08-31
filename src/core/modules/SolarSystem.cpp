@@ -1070,7 +1070,7 @@ float SolarSystem::getPlanetVMagnitude(QString planetName, bool withExtinction) 
 QString SolarSystem::getPlanetType(QString planetName) const
 {
 	PlanetP p = searchByEnglishName(planetName);
-	return Planet::pTypeMap.value(p->getPlanetType());
+	return p->getPlanetTypeString();
 }
 
 double SolarSystem::getDistanceToPlanet(QString planetName) const
@@ -1383,7 +1383,7 @@ QStringList SolarSystem::listAllObjectsByType(const QString &objType, bool inEng
 	{
 		foreach(const PlanetP& p, systemPlanets)
 		{
-			if (Planet::pTypeMap.value(p->getPlanetType())==objType)
+			if (p->getPlanetTypeString()==objType)
 				result << p->getEnglishName();
 		}
 	}
@@ -1391,7 +1391,7 @@ QStringList SolarSystem::listAllObjectsByType(const QString &objType, bool inEng
 	{
 		foreach(const PlanetP& p, systemPlanets)
 		{
-			if (Planet::pTypeMap.value(p->getPlanetType())==objType)
+			if (p->getPlanetTypeString()==objType)
 				result << p->getNameI18n();
 		}
 	}
