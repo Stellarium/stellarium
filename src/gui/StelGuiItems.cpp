@@ -342,8 +342,13 @@ BottomStelBar::BottomStelBar(QGraphicsItem* parent,
 	fov->font().setPixelSize(baseFontSize);
 	fps->font().setPixelSize(baseFontSize);
 
-	flagShowTime = true;
-	flagShowLocation = true;
+	QSettings* confSettings = StelApp::getInstance().getSettings();
+	setFlagShowTime(confSettings->value("gui/flag_show_datetime", true).toBool());
+	setFlagShowLocation(confSettings->value("gui/flag_show_location", true).toBool());
+	setFlagShowFov(confSettings->value("gui/flag_show_fov", true).toBool());
+	setFlagShowFps(confSettings->value("gui/flag_show_fps", true).toBool());
+	setFlagTimeJd(confSettings->value("gui/flag_time_jd", false).toBool());
+	setFlagFovDms(confSettings->value("gui/flag_fov_dms", false).toBool());
 }
 
 BottomStelBar::~BottomStelBar()
@@ -553,11 +558,16 @@ void BottomStelBar::updateText(bool updatePos)
 	}
 
 	// Add in a DeltaT correction. Divide DeltaT by 86400 to convert from seconds to days.
-	QString newDate = flagShowTime ? StelApp::getInstance().getLocaleMgr().getPrintableDateLocal(jd-deltaT/86400.) +"   "
+	QString newDate = getFlagShowTime() ? StelApp::getInstance().getLocaleMgr().getPrintableDateLocal(jd-deltaT/86400.) +"   "
 			+StelApp::getInstance().getLocaleMgr().getPrintableTimeLocal(jd-deltaT/86400.) : " ";
+	if (getFlagTimeJd())
+	{
+		newDate = QString("%1").arg(jd+StelApp::getInstance().getLocaleMgr().getGMTShift(jd)/24.-deltaT/86400., 0, 'f', 5); // UTC -> local tz
+	}
+
 	if (datetime->text()!=newDate)
 	{
-		updatePos = true;
+		updatePos = true;		
 		datetime->setText(newDate);
 		if (displayDeltaT && core->getCurrentDeltaTAlgorithm()!=StelCore::WithoutCorrection)
 		{
@@ -575,11 +585,11 @@ void BottomStelBar::updateText(bool updatePos)
 
 	QString newLocation = "";
 	const StelLocation* loc = &core->getCurrentLocation();
-	if (flagShowLocation && !loc->name.isEmpty())
+	if (getFlagShowLocation() && !loc->name.isEmpty())
 	{
 		newLocation = q_(loc->planetName) +", "+loc->name + ", "+q_("%1m").arg(loc->altitude);
 	}
-	if (flagShowLocation && loc->name.isEmpty())
+	if (getFlagShowLocation() && loc->name.isEmpty())
 	{
 		newLocation = q_(loc->planetName)+", "+StelUtils::decDegToDmsStr(loc->latitude)+", "+StelUtils::decDegToDmsStr(loc->longitude);
 	}
@@ -609,14 +619,21 @@ void BottomStelBar::updateText(bool updatePos)
 		location->setToolTip(QString("%1 %2").arg(latStr).arg(lonStr));
 	}
 
-	QSettings* confSettings = StelApp::getInstance().getSettings();
 	QString str;
 	QTextStream wos(&str);
-	wos << "FOV " << qSetRealNumberPrecision(3) << core->getMovementMgr()->getCurrentFov() << QChar(0x00B0);
+	if (getFlagFovDms())
+	{
+		wos << "FOV " << StelUtils::decDegToDmsStr(core->getMovementMgr()->getCurrentFov());
+	}
+	else
+	{
+		wos << "FOV " << qSetRealNumberPrecision(3) << core->getMovementMgr()->getCurrentFov() << QChar(0x00B0);
+	}
+
 	if (fov->text()!=str)
 	{
 		updatePos = true;
-		if (confSettings->value("gui/flag_show_fov", true).toBool())
+		if (getFlagShowFov())
 		{
 			fov->setText(str);
 			fov->setToolTip(q_("Field of view"));
@@ -634,7 +651,7 @@ void BottomStelBar::updateText(bool updatePos)
 	if (fps->text()!=str)
 	{
 		updatePos = true;
-		if (confSettings->value("gui/flag_show_fps", true).toBool())
+		if (getFlagShowFps())
 		{
 			fps->setText(str);
 			fps->setToolTip(q_("Frames per second"));
