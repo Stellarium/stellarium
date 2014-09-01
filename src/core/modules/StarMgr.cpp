@@ -567,6 +567,7 @@ int StarMgr::loadCommonNames(const QString& commonNameFile)
 	int totalRecords=0;
 	int lineNumber=0;
 	QString record;
+	// Allow empty and comment lines where first char (after optional blanks) is #
 	QRegExp commentRx("^(\\s*#.*|\\s*)$");
 	// record structure is delimited with a | character.  We will
 	// use a QRegExp to extract the fields. with whitespace padding permitted
