@@ -7,21 +7,21 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Thai for stellarium 0.8.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-08-31 11:21+0700\n"
+"POT-Creation-Date: 2014-08-31 17:40+0700\n"
 "PO-Revision-Date: 2014-07-19 02:39+0000\n"
 "Last-Translator: Worachate Boonplod <Unknown>\n"
 "Language-Team: MicKi Alone <Need24Get@msn.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-08-31 06:15+0000\n"
+"X-Launchpad-Export-Date: 2014-09-01 06:25+0000\n"
 "X-Generator: Launchpad (build 17176)\n"
 "X-Poedit-Country: THAILAND\n"
 "X-Poedit-Language: Thai\n"
 
 #: src/core/modules/ConstellationMgr.cpp:106 src/core/modules/StarMgr.cpp:346
 #: src/core/modules/GridLinesMgr.cpp:697 src/core/modules/LandscapeMgr.cpp:354
-#: src/core/modules/NebulaMgr.cpp:126 src/core/modules/SolarSystem.cpp:155
+#: src/core/modules/NebulaMgr.cpp:126 src/core/modules/SolarSystem.cpp:156
 #: src/core/StelApp.cpp:473 src/core/StelCore.cpp:185
 #: src/core/StelSkyLayerMgr.cpp:87 src/StelMainView.cpp:302
 msgid "Display Options"
@@ -159,8 +159,8 @@ msgstr ", %1 ม."
 msgid "Planet: "
 msgstr "ดาวเคราะห์: "
 
-#: src/core/modules/Nebula.cpp:104 src/core/modules/Planet.cpp:146
-#: src/core/modules/MinorPlanet.cpp:209 src/core/modules/Comet.cpp:146
+#: src/core/modules/Nebula.cpp:104 src/core/modules/Planet.cpp:168
+#: src/core/modules/MinorPlanet.cpp:208 src/core/modules/Comet.cpp:145
 #: src/core/modules/StarWrapper.cpp:50 src/core/modules/StarWrapper.cpp:170
 #: src/core/modules/StarWrapper.cpp:173
 #: plugins/Satellites/src/Satellite.cpp:252
@@ -170,8 +170,8 @@ msgstr "ดาวเคราะห์: "
 msgid "Type: <b>%1</b>"
 msgstr "ชนิด: <b>%1</b>"
 
-#: src/core/modules/Nebula.cpp:109 src/core/modules/Planet.cpp:152
-#: src/core/modules/MinorPlanet.cpp:215 src/core/modules/Comet.cpp:152
+#: src/core/modules/Nebula.cpp:109 src/core/modules/Planet.cpp:174
+#: src/core/modules/MinorPlanet.cpp:214 src/core/modules/Comet.cpp:151
 #: src/core/modules/StarWrapper.cpp:56 src/core/modules/StarWrapper.cpp:180
 #: plugins/Supernovae/src/Supernova.cpp:135 plugins/Novae/src/Nova.cpp:140
 #: plugins/Quasars/src/Quasar.cpp:106 plugins/Exoplanets/src/Exoplanet.cpp:186
@@ -179,8 +179,8 @@ msgstr "ชนิด: <b>%1</b>"
 msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>)"
 msgstr "โชติมาตร: <b>%1</b> (จางลงไปที่: <b>%2</b>)"
 
-#: src/core/modules/Nebula.cpp:112 src/core/modules/Planet.cpp:155
-#: src/core/modules/MinorPlanet.cpp:218 src/core/modules/Comet.cpp:155
+#: src/core/modules/Nebula.cpp:112 src/core/modules/Planet.cpp:177
+#: src/core/modules/MinorPlanet.cpp:217 src/core/modules/Comet.cpp:154
 #: src/core/modules/StarWrapper.cpp:60 src/core/modules/StarWrapper.cpp:183
 #: plugins/Supernovae/src/Supernova.cpp:137 plugins/Novae/src/Nova.cpp:143
 #: plugins/Quasars/src/Quasar.cpp:111 plugins/Exoplanets/src/Exoplanet.cpp:191
@@ -247,73 +247,73 @@ msgstr "ยังไม่ได้ระบุในเอกสาร"
 msgid "Deep-sky objects"
 msgstr "วัตถุท้องฟ้าห้วงลึก"
 
-#: src/core/modules/Planet.cpp:158 src/core/modules/MinorPlanet.cpp:228
-#: src/core/modules/MinorPlanet.cpp:232 src/core/modules/Comet.cpp:164
+#: src/core/modules/Planet.cpp:180 src/core/modules/MinorPlanet.cpp:227
+#: src/core/modules/MinorPlanet.cpp:231 src/core/modules/Comet.cpp:163
 #: src/core/modules/StarWrapper.cpp:187 plugins/Quasars/src/Quasar.cpp:115
 #, qt-format
 msgid "Absolute Magnitude: %1"
 msgstr "โชติมาตรสัมบูรณ์: %1"
 
-#: src/core/modules/Planet.cpp:167
+#: src/core/modules/Planet.cpp:189
 #, qt-format
 msgid "Obliquity (of date, for Earth): %1"
 msgstr "ความเอียงของสุริยวิถี (ของวัน, สำหรับโลก): %1"
 
-#: src/core/modules/Planet.cpp:179 src/core/modules/MinorPlanet.cpp:245
-#: src/core/modules/Comet.cpp:194
+#: src/core/modules/Planet.cpp:201 src/core/modules/MinorPlanet.cpp:244
+#: src/core/modules/Comet.cpp:193
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 km)"
 msgstr "ระยะห่าง: %1 หน่วยดาราศาสตร์ (%2 กม.)"
 
-#: src/core/modules/Planet.cpp:186 src/core/modules/MinorPlanet.cpp:252
-#: src/core/modules/Comet.cpp:201
+#: src/core/modules/Planet.cpp:208 src/core/modules/MinorPlanet.cpp:251
+#: src/core/modules/Comet.cpp:200
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 Mio km)"
 msgstr "ระยะห่าง : %1AU (%2 ล้าน กม.)"
 
-#: src/core/modules/Planet.cpp:199
+#: src/core/modules/Planet.cpp:221
 #, qt-format
 msgid "Apparent diameter: %1, with rings: %2"
 msgstr "เส้นผ่านศูนย์กลางปรากฏ: %1, วงแหวน: %2"
 
-#: src/core/modules/Planet.cpp:205 src/core/modules/MinorPlanet.cpp:260
+#: src/core/modules/Planet.cpp:227 src/core/modules/MinorPlanet.cpp:259
 #, qt-format
 msgid "Apparent diameter: %1"
 msgstr "เส้นผ่านศูนย์กลางปรากฏ: %1"
 
 #. TRANSLATORS: Sidereal (orbital) period for solar system bodies in days and in Julian years (symbol: a)
-#: src/core/modules/Planet.cpp:217 src/core/modules/MinorPlanet.cpp:267
-#: src/core/modules/Comet.cpp:234
+#: src/core/modules/Planet.cpp:239 src/core/modules/MinorPlanet.cpp:266
+#: src/core/modules/Comet.cpp:233
 #, qt-format
 msgid "Sidereal period: %1 days (%2 a)"
 msgstr "คาบดาราคติ: %1 วัน (%2 a)"
 
-#: src/core/modules/Planet.cpp:220
+#: src/core/modules/Planet.cpp:242
 #, qt-format
 msgid "Sidereal day: %1"
 msgstr "วันดาราคติ: %1"
 
-#: src/core/modules/Planet.cpp:221
+#: src/core/modules/Planet.cpp:243
 #, qt-format
 msgid "Mean solar day: %1"
 msgstr "วันสุริยคติปานกลาง: %1"
 
-#: src/core/modules/Planet.cpp:227
+#: src/core/modules/Planet.cpp:249
 #, qt-format
 msgid "Phase Angle: %1"
 msgstr "มุมดิถี: %1"
 
-#: src/core/modules/Planet.cpp:228
+#: src/core/modules/Planet.cpp:250
 #, qt-format
 msgid "Elongation: %1"
 msgstr "มุมห่างจากดวงอาทิตย์: %1"
 
-#: src/core/modules/Planet.cpp:229
+#: src/core/modules/Planet.cpp:251
 #, qt-format
 msgid "Phase: %1"
 msgstr "ดิถี: %1"
 
-#: src/core/modules/Planet.cpp:230
+#: src/core/modules/Planet.cpp:252
 #, qt-format
 msgid "Illuminated: %1%"
 msgstr "ส่วนสว่าง: %1%"
@@ -323,42 +323,42 @@ msgstr "ส่วนสว่าง: %1%"
 msgid "Provisional designation: %1"
 msgstr "ชื่อชั่วคราว: %1"
 
-#: src/core/modules/Comet.cpp:177
+#: src/core/modules/Comet.cpp:176
 #, no-c-format, qt-format
 msgid "Distance from Sun: %1AU (%2 km)"
 msgstr "ระยะห่างจากดวงอาทิตย์: %1หน่วยดาราศาสตร์ (%2 กม.)"
 
-#: src/core/modules/Comet.cpp:184
+#: src/core/modules/Comet.cpp:183
 #, no-c-format, qt-format
 msgid "Distance from Sun: %1AU (%2 Mio km)"
 msgstr "ระยะห่างจากดวงอาทิตย์: %1หน่วยดาราศาสตร์ (%2 ล้าน กม.)"
 
-#: src/core/modules/Comet.cpp:211
+#: src/core/modules/Comet.cpp:210
 #, no-c-format, qt-format
 msgid "Speed: %1 km/s"
 msgstr "อัตราเร็ว: %1 กม./วินาที"
 
-#: src/core/modules/Comet.cpp:220
+#: src/core/modules/Comet.cpp:219
 #, no-c-format, qt-format
 msgid "Coma diameter (estimate): %1 km"
 msgstr ""
 
-#: src/core/modules/Comet.cpp:224
+#: src/core/modules/Comet.cpp:223
 #, no-c-format, qt-format
 msgid "Gas tail length (estimate): %1 Mio km"
 msgstr ""
 
-#: src/core/modules/SolarSystem.cpp:156
+#: src/core/modules/SolarSystem.cpp:157
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:308
 msgid "Planet labels"
 msgstr "ชื่อดาวเคราะห์"
 
-#: src/core/modules/SolarSystem.cpp:157
+#: src/core/modules/SolarSystem.cpp:158
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:312
 msgid "Planet orbits"
 msgstr "วงโคจรดาวเคราะห์"
 
-#: src/core/modules/SolarSystem.cpp:158
+#: src/core/modules/SolarSystem.cpp:159
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:316
 msgid "Planet trails"
 msgstr "รอยการเคลื่อนที่ของดาวเคราะห์"
@@ -418,55 +418,56 @@ msgstr "พิสัยโชติมาตร: <b>%1</b>%2<b>%3</b> (ระบ
 msgid "Magnitude range: <b>%1</b>%2<b>%3/%4</b> (Photometric system: %5)"
 msgstr "พิสัยโชติมาตร: <b>%1</b>%2<b>%3/%4</b> (ระบบการวัดแสง: %5)"
 
-#: src/core/modules/StarWrapper.cpp:216
-#: plugins/Supernovae/src/Supernova.cpp:148 plugins/Novae/src/Nova.cpp:153
-#: plugins/Exoplanets/src/Exoplanet.cpp:206
+#. TRANSLATORS: Unit of measure for distance - Light Years
+#: src/core/modules/StarWrapper.cpp:218
+#: plugins/Supernovae/src/Supernova.cpp:150 plugins/Novae/src/Nova.cpp:155
+#: plugins/Exoplanets/src/Exoplanet.cpp:207
 #, qt-format
-msgid "Distance: %1 Light Years"
-msgstr "ระยะทาง: %1 ปีแสง"
+msgid "Distance: %1 ly"
+msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:221
+#: src/core/modules/StarWrapper.cpp:224
 #: plugins/Exoplanets/src/Exoplanet.cpp:201
 #, qt-format
 msgid "Spectral Type: %1"
 msgstr "ชนิดสเปกตรัม: %1"
 
-#: src/core/modules/StarWrapper.cpp:224
+#: src/core/modules/StarWrapper.cpp:227
 #, qt-format
 msgid "Parallax: %1\""
 msgstr "แพรัลแลกซ์: %1\""
 
-#: src/core/modules/StarWrapper.cpp:230
+#: src/core/modules/StarWrapper.cpp:233
 #, qt-format
 msgid "Epoch for minimum light: %1 JD"
 msgstr "จางที่สุดเมื่อ: %1 JD"
 
-#: src/core/modules/StarWrapper.cpp:232
+#: src/core/modules/StarWrapper.cpp:235
 #, qt-format
 msgid "Epoch for maximum light: %1 JD"
 msgstr "สว่างที่สุดเมื่อ: %1 JD"
 
-#: src/core/modules/StarWrapper.cpp:236
+#: src/core/modules/StarWrapper.cpp:239
 #, qt-format
 msgid "Period: %1 days"
 msgstr "คาบ: %1 วัน"
 
-#: src/core/modules/StarWrapper.cpp:246
+#: src/core/modules/StarWrapper.cpp:249
 #, qt-format
 msgid "Next minimum light: %1 UTC"
 msgstr "จางที่สุดครั้งถัดไป: %1 UTC"
 
-#: src/core/modules/StarWrapper.cpp:248
+#: src/core/modules/StarWrapper.cpp:251
 #, qt-format
 msgid "Next maximum light: %1 UTC"
 msgstr "สว่างที่สุดครั้งถัดไป: %1 UTC"
 
-#: src/core/modules/StarWrapper.cpp:254
+#: src/core/modules/StarWrapper.cpp:257
 #, qt-format
 msgid "Duration of eclipse: %1%"
 msgstr "สัดส่วนของช่วงเวลาอุปราคา : %1%"
 
-#: src/core/modules/StarWrapper.cpp:256
+#: src/core/modules/StarWrapper.cpp:259
 #, qt-format
 msgid "Rising time: %1%"
 msgstr "เวลาขึ้น : %1%"
@@ -1078,41 +1079,41 @@ msgid ""
 msgstr ""
 "การฉายแบบออร์โทกราฟิกเกี่ยวข้องกับทัศนมิติ แต่จุดรวมสายตาอยู่ที่ระยะอนันต์"
 
-#: src/core/StelObject.cpp:116
+#: src/core/StelObject.cpp:117
 #, qt-format
 msgid "RA/DE (J2000): %1/%2"
 msgstr "ไรต์แอสเซนชัน/เดคลิเนชัน (J2000): %1/%2"
 
-#: src/core/StelObject.cpp:123
+#: src/core/StelObject.cpp:124
 #, qt-format
 msgid "RA/DE (of date): %1/%2"
 msgstr "ไรต์แอสเซนชัน/เดคลิเนชัน (ของวัน): %1/%2"
 
-#: src/core/StelObject.cpp:130
+#: src/core/StelObject.cpp:131
 #, qt-format
 msgid "Galactic longitude/latitude: %1/%2"
 msgstr "ลองจิจูด/ละติจูดดาราจักร : %1/%2"
 
-#: src/core/StelObject.cpp:142 src/core/StelObject.cpp:146
+#: src/core/StelObject.cpp:143 src/core/StelObject.cpp:147
 #, qt-format
 msgid "Hour angle/DE: %1/%2"
 msgstr "มุมชั่วโมง/เดคลิเนชัน: %1/%2"
 
-#: src/core/StelObject.cpp:142 src/core/StelObject.cpp:164
+#: src/core/StelObject.cpp:143 src/core/StelObject.cpp:165
 msgid "(apparent)"
 msgstr "(ปรากฏ)"
 
-#: src/core/StelObject.cpp:164 src/core/StelObject.cpp:168
+#: src/core/StelObject.cpp:165 src/core/StelObject.cpp:169
 #, qt-format
 msgid "Az/Alt: %1/%2"
 msgstr "มุมทิศ/มุมเงย: %1/%2"
 
-#: src/core/StelObject.cpp:180
+#: src/core/StelObject.cpp:181
 #, qt-format
 msgid "Ecliptic (of J2000): %1/%2"
 msgstr ""
 
-#: src/core/StelObject.cpp:185
+#: src/core/StelObject.cpp:186
 #, qt-format
 msgid "Ecliptic (of date): %1/%2"
 msgstr ""
@@ -1955,13 +1956,13 @@ msgstr "ปี"
 msgid "This system does not support OpenGL."
 msgstr "ระบบนี้ไม่รองรับ OpenGL"
 
-#: src/main.cpp:362
+#: src/main.cpp:363
 msgid ""
 "Insufficient OpenGL version. Please update drivers, graphics hardware, or "
 "use MESA (or ANGLE) version."
 msgstr ""
 
-#: src/main.cpp:365
+#: src/main.cpp:366
 msgid ""
 "Insufficient OpenGL version. Please update drivers, or graphics hardware."
 msgstr ""
@@ -1979,8 +1980,8 @@ msgstr "โหมดเต็มจอ"
 msgid "Stellarium %1"
 msgstr "Stellarium %1"
 
-#: src/translations.h:33 plugins/Exoplanets/src/Exoplanet.cpp:217
-#: plugins/Exoplanets/src/Exoplanet.cpp:221
+#: src/translations.h:33 plugins/Exoplanets/src/Exoplanet.cpp:218
+#: plugins/Exoplanets/src/Exoplanet.cpp:222
 msgid "Sun"
 msgstr "ดวงอาทิตย์"
 
@@ -8191,77 +8192,77 @@ msgstr "หน้าต่างการตั้งค่าดาวเคร
 msgid "planetary system"
 msgstr "ระบบดาวเคราะห์"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:213
+#: plugins/Exoplanets/src/Exoplanet.cpp:214
 msgid "Metallicity"
 msgstr "ความเป็นโลหะ"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:217
-#: plugins/Exoplanets/src/Exoplanet.cpp:231
+#: plugins/Exoplanets/src/Exoplanet.cpp:218
+#: plugins/Exoplanets/src/Exoplanet.cpp:232
 msgid "Mass"
 msgstr "มวล"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:221
-#: plugins/Exoplanets/src/Exoplanet.cpp:232
+#: plugins/Exoplanets/src/Exoplanet.cpp:222
+#: plugins/Exoplanets/src/Exoplanet.cpp:233
 msgid "Radius"
 msgstr "รัศมี"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:225
+#: plugins/Exoplanets/src/Exoplanet.cpp:226
 #, qt-format
 msgid "Effective temperature: %1 K"
 msgstr "อุณหภูมิยังผล: %1 เคลวิน"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:229
+#: plugins/Exoplanets/src/Exoplanet.cpp:230
 msgid "Exoplanet"
 msgstr "ดาวเคราะห์ต่างระบบ"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:230
+#: plugins/Exoplanets/src/Exoplanet.cpp:231
 msgid "Period"
 msgstr "คาบ"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:230
+#: plugins/Exoplanets/src/Exoplanet.cpp:231
 msgid "days"
 msgstr "วัน"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:231
 #: plugins/Exoplanets/src/Exoplanet.cpp:232
+#: plugins/Exoplanets/src/Exoplanet.cpp:233
 msgid "Jup"
 msgstr "ดาวพฤหัสบดี"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:233
+#: plugins/Exoplanets/src/Exoplanet.cpp:234
 msgid "Semi-Major Axis"
 msgstr "กึ่งแกนเอก"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:233
+#: plugins/Exoplanets/src/Exoplanet.cpp:234
 msgid "AU"
 msgstr "หน่วยดาราศาสตร์"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:234
+#: plugins/Exoplanets/src/Exoplanet.cpp:235
 msgid "Eccentricity"
 msgstr "ความเยื้องศูนย์กลาง"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:235
+#: plugins/Exoplanets/src/Exoplanet.cpp:236
 msgid "Inclination"
 msgstr "มุมเอียง"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:236
+#: plugins/Exoplanets/src/Exoplanet.cpp:237
 msgid "Angle Distance"
 msgstr "ระยะห่างเชิงมุม"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:237
+#: plugins/Exoplanets/src/Exoplanet.cpp:238
 msgid "Discovered year"
 msgstr "ค.ศ. ที่ค้นพบ"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:238
+#: plugins/Exoplanets/src/Exoplanet.cpp:239
 msgid "Habitable class"
 msgstr "ชั้นการอยู่อาศัยได้"
 
 #. TRANSLATORS: Full phrase is "Mean Surface Temperature"
-#: plugins/Exoplanets/src/Exoplanet.cpp:240
+#: plugins/Exoplanets/src/Exoplanet.cpp:241
 msgid "Mean surface temp."
 msgstr "อุณหภูมิพื้นผิวเฉลี่ย"
 
 #. TRANSLATORS: ESI = Earth Similarity Index
-#: plugins/Exoplanets/src/Exoplanet.cpp:242
+#: plugins/Exoplanets/src/Exoplanet.cpp:243
 msgid "ESI"
 msgstr "ESI"
 
@@ -10143,6 +10144,10 @@ msgstr "ตำแหน่ง:"
 
 #~ msgid "Set UI Locale: "
 #~ msgstr "เลือกภาษา: "
+
+#, qt-format
+#~ msgid "Distance: %1 Light Years"
+#~ msgstr "ระยะทาง: %1 ปีแสง"
 
 #~ msgid "Hourly zenith rate:"
 #~ msgstr "อัตราสูงสุดที่เหนือศีรษะ:"
