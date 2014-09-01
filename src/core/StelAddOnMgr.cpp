@@ -34,7 +34,7 @@ StelAddOnMgr::StelAddOnMgr()
 	: m_db(QSqlDatabase::addDatabase("QSQLITE"))
 	, m_pStelAddOnDAO(new StelAddOnDAO(m_db))
 	, m_pConfig(StelApp::getInstance().getSettings())
-	, m_bDownloading(false)
+	, m_iDownloadingId(0)
 	, m_pAddOnNetworkReply(NULL)
 	, m_currentDownloadFile(NULL)
 	, m_progressBar(NULL)
@@ -323,7 +323,7 @@ bool StelAddOnMgr::isCompatible(QString first, QString last)
 
 void StelAddOnMgr::downloadNextAddOn()
 {
-	if (m_bDownloading)
+	if (m_iDownloadingId)
 	{
 		return;
 	}
@@ -332,7 +332,8 @@ void StelAddOnMgr::downloadNextAddOn()
 	Q_ASSERT(m_currentDownloadFile==NULL);
 	Q_ASSERT(m_progressBar==NULL);
 
-	m_currentDownloadInfo = m_pStelAddOnDAO->getAddOnInfo(m_downloadQueue.firstKey());
+	m_iDownloadingId = m_downloadQueue.firstKey();
+	m_currentDownloadInfo = m_pStelAddOnDAO->getAddOnInfo(m_iDownloadingId);
 	m_currentDownloadFile = new QFile(m_currentDownloadInfo.filepath);
 	if (!m_currentDownloadFile->open(QIODevice::WriteOnly))
 	{
@@ -341,7 +342,6 @@ void StelAddOnMgr::downloadNextAddOn()
 		return;
 	}
 
-	m_bDownloading = true;
 	QNetworkRequest req(m_currentDownloadInfo.url);
 	req.setAttribute(QNetworkRequest::CacheSaveControlAttribute, false);
 	req.setAttribute(QNetworkRequest::RedirectionTargetAttribute, false);
@@ -414,10 +414,10 @@ void StelAddOnMgr::downloadAddOnFinished()
 	StelApp::getInstance().removeProgressBar(m_progressBar);
 	m_progressBar = NULL;
 
-	installFromFile(m_currentDownloadInfo, m_downloadQueue.first());
+	installFromFile(m_currentDownloadInfo, m_downloadQueue.value(m_iDownloadingId));
 	m_currentDownloadInfo = StelAddOnDAO::AddOnInfo();
-	m_bDownloading = false;
-	m_downloadQueue.remove(m_downloadQueue.firstKey());
+	m_downloadQueue.remove(m_iDownloadingId);
+	m_iDownloadingId = 0;
 	if (!m_downloadQueue.isEmpty())
 	{
 		// next download

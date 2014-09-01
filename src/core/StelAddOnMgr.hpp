@@ -93,7 +93,7 @@ private:
 	StelAddOnDAO* m_pStelAddOnDAO;
 	QSettings* m_pConfig;
 
-	bool m_bDownloading;
+	int m_iDownloadingId;
 	QMap<int, QStringList> m_downloadQueue; // <addonId, selectedFiles>
 	QNetworkReply* m_pAddOnNetworkReply;
 	QFile* m_currentDownloadFile;
