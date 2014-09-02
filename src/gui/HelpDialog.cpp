@@ -38,7 +38,6 @@
 #include <QDir>
 #include <QProcess>
 #include <QSysInfo>
-#include <QScroller>
 
 #include "ui_helpDialogGui.h"
 #include "HelpDialog.hpp"
@@ -53,6 +52,8 @@
 #include "StelStyle.hpp"
 #include "StelActionMgr.hpp"
 #include "StelJsonParser.hpp"
+#include "StelMovementMgr.hpp"
+#include "StelModuleMgr.hpp"
 
 HelpDialog::HelpDialog(QObject* parent)
 	: StelDialog(parent)
@@ -97,6 +98,8 @@ void HelpDialog::styleChanged()
 
 void HelpDialog::createDialogContent()
 {
+	StelMovementMgr* mvmgr = GETSTELMODULE(StelMovementMgr);
+
 	ui->setupUi(dialog);
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
 	ui->stackedWidget->setCurrentIndex(0);
@@ -126,12 +129,9 @@ void HelpDialog::createDialogContent()
 	}
 
 	//Kinetic scrolling for tablet pc and pc
-	QScroller::grabGesture(ui->helpBrowser, QScroller::LeftMouseButtonGesture);
-	QScroller::scroller(ui->helpBrowser);
-	QScroller::grabGesture(ui->aboutBrowser, QScroller::LeftMouseButtonGesture);
-	QScroller::scroller(ui->aboutBrowser);
-	QScroller::grabGesture(ui->logBrowser, QScroller::LeftMouseButtonGesture);
-	QScroller::scroller(ui->logBrowser);
+	QList<QWidget *> addscroll;
+	addscroll << ui->helpBrowser << ui->aboutBrowser << ui->logBrowser;
+	mvmgr->listKineticScrolling(addscroll);
 
 	// Help page
 	updateText();

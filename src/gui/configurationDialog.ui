@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>497</width>
-    <height>495</height>
+    <height>570</height>
    </rect>
   </property>
   <layout class="QVBoxLayout">
@@ -148,7 +148,7 @@
       <item row="1" column="0">
        <widget class="QStackedWidget" name="configurationStackedWidget">
         <property name="currentIndex">
-         <number>1</number>
+         <number>2</number>
         </property>
         <widget class="QWidget" name="page">
          <layout class="QVBoxLayout" name="verticalLayout_10">
@@ -763,6 +763,13 @@
                 </spacer>
                </item>
               </layout>
+             </item>
+             <item row="2" column="0">
+              <widget class="QCheckBox" name="enableKineticScrollingCheckBox">
+               <property name="text">
+                <string>Enable kinetic scrolling (need restart)</string>
+               </property>
+              </widget>
              </item>
             </layout>
            </widget>
