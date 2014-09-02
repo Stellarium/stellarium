@@ -38,6 +38,7 @@
 #include <QDir>
 #include <QProcess>
 #include <QSysInfo>
+#include <QGLFormat>
 
 #include "ui_helpDialogGui.h"
 #include "HelpDialog.hpp"
@@ -135,8 +136,7 @@ void HelpDialog::createDialogContent()
 
 	// Help page
 	updateText();
-	connect(ui->editShortcutsButton, SIGNAL(clicked()),
-	        this, SLOT(showShortcutsWindow()));
+	connect(ui->editShortcutsButton, SIGNAL(clicked()), this, SLOT(showShortcutsWindow()));
 
 	// Log page
 	ui->logPathLabel->setText(QString("%1/log.txt:").arg(StelFileMgr::getUserDir()));
@@ -231,6 +231,35 @@ QString HelpDialog::getLatestVersionFromJson()
 	return jsonVersion;
 }
 
+int HelpDialog::getRequiredOpenGLVersionFromJson()
+{
+	int jsonVersion = 0;
+	QFile jsonDataFile(jsonDataPath);
+	if (!jsonDataFile.open(QIODevice::ReadOnly))
+	{
+		qWarning() << "HelpDialog::getRequiredOpenGLVersionFromJson() cannot open " << QDir::toNativeSeparators(jsonDataPath);
+		return jsonVersion;
+	}
+
+	QVariantMap map;
+	try
+	{
+		map = StelJsonParser::parse(&jsonDataFile).toMap();
+		if (map.contains("requiredOpenGLVersion"))
+		{
+			jsonVersion = map.value("requiredOpenGLVersion").toInt();
+		}
+		jsonDataFile.close();
+	}
+	catch(std::runtime_error& e)
+	{
+		qDebug() << "HelpDialog::getRequiredOpenGLVersionFromJson() error:" << e.what();
+	}
+
+	//qDebug() << "HelpDialog::getRequiredOpenGLVersionFromJson() required OpenGL version from file:" << jsonVersion;
+	return jsonVersion;
+}
+
 /*
   Replace the JSON file with the default from the compiled-in resource
 */
@@ -254,13 +283,14 @@ void HelpDialog::restoreDefaultJsonFile(void)
 void HelpDialog::readJsonFile()
 {
 	QString version = getLatestVersionFromJson();
+	unsigned int OpenGLversion = getRequiredOpenGLVersionFromJson();
 	if (version!=currentVersion)
 	{
-		setUpdatesMessage(true, version);
+		setUpdatesMessage(true, version, OpenGLversion);
 	}
 }
 
-void HelpDialog::setUpdatesMessage(bool hasUpdates, QString version)
+void HelpDialog::setUpdatesMessage(bool hasUpdates, QString version, int OpenGL)
 {
 	if (version.contains("unknown"))
 	{
@@ -293,7 +323,11 @@ void HelpDialog::setUpdatesMessage(bool hasUpdates, QString version)
 		{
 			// TRANSLATORS: This message will be displayed for users if current version of Stellarium is smaller than version from stellarium.org
 			updatesMessage = q_("This version of Stellarium is outdated! Latest version is %1.").arg(version);
-		}
+			if (!(QGLFormat::openGLVersionFlags() & OpenGL))
+			{
+				updatesMessage.append(q_(" Sorry, your hardware is not compatible with newest version of Stellarium!"));
+			}
+		}		
 	}
 	else
 	{
