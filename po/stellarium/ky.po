@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-08-31 17:40+0700\n"
-"PO-Revision-Date: 2014-08-31 17:55+0000\n"
+"PO-Revision-Date: 2014-09-01 08:42+0000\n"
 "Last-Translator: chyngyz <Unknown>\n"
 "Language-Team: Kirghiz <ky@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-09-01 06:12+0000\n"
-"X-Generator: Launchpad (build 17176)\n"
+"X-Launchpad-Export-Date: 2014-09-02 06:31+0000\n"
+"X-Generator: Launchpad (build 17192)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:106 src/core/modules/StarMgr.cpp:346
 #: src/core/modules/GridLinesMgr.cpp:697 src/core/modules/LandscapeMgr.cpp:354
@@ -261,13 +261,13 @@ msgstr ""
 #: src/core/modules/Comet.cpp:193
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 km)"
-msgstr "Аралыгы: %1AU (%2 km)"
+msgstr "Аралыгы: %1 а. б. (%2 км)"
 
 #: src/core/modules/Planet.cpp:208 src/core/modules/MinorPlanet.cpp:251
 #: src/core/modules/Comet.cpp:200
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 Mio km)"
-msgstr "Аралыгы: %1AU (%2 Mio км)"
+msgstr "Аралыгы: %1 а. б. (%2 Mio км)"
 
 #: src/core/modules/Planet.cpp:221
 #, qt-format
@@ -289,12 +289,12 @@ msgstr "Сидерикалык мезгили: %1 күн (%2 a)"
 #: src/core/modules/Planet.cpp:242
 #, qt-format
 msgid "Sidereal day: %1"
-msgstr "Сидерикалык күнү: %1"
+msgstr "Сидерикалык күн: %1"
 
 #: src/core/modules/Planet.cpp:243
 #, qt-format
 msgid "Mean solar day: %1"
-msgstr "Орточо күндүн күнү: %1"
+msgstr ""
 
 #: src/core/modules/Planet.cpp:249
 #, qt-format
@@ -324,12 +324,12 @@ msgstr ""
 #: src/core/modules/Comet.cpp:176
 #, no-c-format, qt-format
 msgid "Distance from Sun: %1AU (%2 km)"
-msgstr "Күнгө карата аралык: %1AU (%2 км)"
+msgstr "Күнгө карата аралык: %1 а. б. (%2 км)"
 
 #: src/core/modules/Comet.cpp:183
 #, no-c-format, qt-format
 msgid "Distance from Sun: %1AU (%2 Mio km)"
-msgstr "Күнгө карата аралык: %1AU (%2 Mio км)"
+msgstr "Күнгө карата аралык: %1 а. б. (%2 Mio км)"
 
 #: src/core/modules/Comet.cpp:210
 #, no-c-format, qt-format
@@ -433,7 +433,7 @@ msgstr ""
 #: src/core/modules/StarWrapper.cpp:227
 #, qt-format
 msgid "Parallax: %1\""
-msgstr "Параллакс:%1\""
+msgstr "Параллакс: %1\""
 
 #: src/core/modules/StarWrapper.cpp:233
 #, qt-format
@@ -998,9 +998,9 @@ msgid ""
 "preserves direction and shapes but distorts size, in an increasing degree "
 "away from the equator."
 msgstr ""
-"Меркатордун проекциясы эң көп колдонулган картография проекциясынын бири "
-"болот. Бул багытты жана форманы сактайт, бирок экватордон алыстатканда "
-"өлчөмдү ийрейтет."
+"Меркатордун проекциясы эң көп колдонулган картографиялык проекциялардын "
+"бири. Бул багыт жана калыпты сактаганы менен экватордон алыстаган сайын "
+"өлчөмүн бурмалайт."
 
 #: src/core/StelProjectorClasses.cpp:322
 msgid "Orthographic"
@@ -1011,8 +1011,6 @@ msgid ""
 "Orthographic projection is related to perspective projection, but the point "
 "of perspective is set to an infinite distance."
 msgstr ""
-"Ортографикалык проекция перспективалык проекция менен байланыштуу, бирок "
-"перспективанын орду чексиздикке коюлган."
 
 #: src/core/StelObject.cpp:117
 #, qt-format
@@ -2570,7 +2568,7 @@ msgstr ""
 #. TRANSLATORS: Name of script
 #: src/translations.h:275
 msgid "Total Lunar Eclipse"
-msgstr "Толук ай тутулуусу"
+msgstr "Айдын толук тутулуусу"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:277
@@ -2694,27 +2692,26 @@ msgstr ""
 
 #: src/translations.h:328
 msgid "Script to demonstrate a partial lunar eclipse."
-msgstr "Жарым-жартылай ай тутулуусун көрсөтүү үчүн сценарий."
+msgstr "Айдын толук эмес тутулуусун көрсөткөн сценарий."
 
 #: src/translations.h:329
 msgid "Script to demonstrate a total lunar eclipse."
-msgstr "Толук ай тутулуусун көрсөтүү үчүн сценарий."
+msgstr "Айдын толук тутулуусун көрсөткөн сценарий."
 
 #: src/translations.h:330
 msgid "A slow, infinite tour of the sky, looking at random objects."
-msgstr "Асмандагы кокустук объекттерди көрсөткөн чексиз жай сейили."
+msgstr ""
 
 #: src/translations.h:331
 msgid ""
 "Script to demonstrate a total solar eclipse which has happened in 2009 "
 "(location=Rangpur, Bangladesh)."
 msgstr ""
-"2009 жылы болгон күн тутулуусун көрсөтүү үчүн сценарий (жер - Рангпур, "
-"Бангладеш)."
+"2009 жылы болгон күн тутулуусун көрсөткөн сценарий (Рангпур, Бангладеш)."
 
 #: src/translations.h:332
 msgid "Script which runs automatically at startup"
-msgstr "Башында автоматтуу түрдө жүргүзүлүүчү сценарий"
+msgstr ""
 
 #: src/translations.h:333
 msgid ""
@@ -2722,7 +2719,6 @@ msgid ""
 "constellations which lie along the line which the Sun traces across the "
 "celestial sphere over the course of a year."
 msgstr ""
-"Бир жылдын ичинде Зодиактын сызыгынан өткөн күндү бул сценарий көрсөтөт."
 
 #: src/translations.h:334
 msgid ""
@@ -2840,7 +2836,7 @@ msgstr "Армения"
 
 #: src/translations.h:359
 msgid "Netherlands Antilles"
-msgstr "Нидерланддардын Антилдери"
+msgstr ""
 
 #: src/translations.h:360
 msgid "Angola"
@@ -2912,7 +2908,7 @@ msgstr "Бенин"
 
 #: src/translations.h:377
 msgid "Bermuda"
-msgstr "Бермуддар"
+msgstr ""
 
 #: src/translations.h:378
 msgid "Brunei Darussalam"
@@ -2928,7 +2924,7 @@ msgstr "Бразилия"
 
 #: src/translations.h:381
 msgid "Bahamas"
-msgstr "Багамалар"
+msgstr "Багама"
 
 #: src/translations.h:382
 msgid "Bhutan"
@@ -2980,7 +2976,7 @@ msgstr "Пил Сөөгүнүн жээги"
 
 #: src/translations.h:394
 msgid "Cook Islands"
-msgstr "Куктун аралдары"
+msgstr "Кук аралдары"
 
 #: src/translations.h:395
 msgid "Chile"
@@ -3024,7 +3020,7 @@ msgstr "Кипр"
 
 #: src/translations.h:405
 msgid "Czech Republic"
-msgstr "Чех Республикасы"
+msgstr "Чехия Республикасы"
 
 #: src/translations.h:406
 msgid "Germany"
@@ -3044,7 +3040,7 @@ msgstr "Доминика"
 
 #: src/translations.h:410
 msgid "Dominican Republic"
-msgstr "Доминикан Республикасы"
+msgstr "Доминика Республикасы"
 
 #: src/translations.h:411
 msgid "Algeria"
@@ -3216,7 +3212,7 @@ msgstr "Индия"
 
 #: src/translations.h:453
 msgid "British Indian Ocean Territory"
-msgstr "Индия океанындагы Британдык территориясы"
+msgstr "Индия океанындагы Британ аймагы"
 
 #: src/translations.h:454
 msgid "Iraq"
@@ -3244,7 +3240,7 @@ msgstr "Иордания"
 
 #: src/translations.h:460
 msgid "Japan"
-msgstr "Япония"
+msgstr "Жапония"
 
 #: src/translations.h:461
 msgid "Kenya"
@@ -3252,7 +3248,7 @@ msgstr "Кения"
 
 #: src/translations.h:462
 msgid "Kyrgyzstan"
-msgstr "Кыргыз Республикасы"
+msgstr "Кыргызстан"
 
 #: src/translations.h:463
 msgid "Cambodia"
@@ -3272,7 +3268,7 @@ msgstr "Сент-Китс жана Невис"
 
 #: src/translations.h:467
 msgid "Democratic People's Republic of Korea"
-msgstr "Корей Элдик Демократиялык Республикасы"
+msgstr "Корея Элдик-Демократиялык Республикасы"
 
 #: src/translations.h:468
 msgid "Republic of Korea"
@@ -3284,7 +3280,7 @@ msgstr "Кувейт"
 
 #: src/translations.h:470
 msgid "Cayman Islands"
-msgstr "Кайманов аралдары"
+msgstr "Кайман аралдары"
 
 #: src/translations.h:471
 msgid "Kazakhstan"
@@ -3332,7 +3328,7 @@ msgstr "Латвия"
 
 #: src/translations.h:482
 msgid "Libyan Arab Jamahiriya"
-msgstr "Ливий Араб Жамахириясы"
+msgstr "Ливия Араб Жамахириясы"
 
 #: src/translations.h:483
 msgid "Morocco"
@@ -3352,7 +3348,7 @@ msgstr "Мадагаскар"
 
 #: src/translations.h:487
 msgid "Marshall Islands"
-msgstr "Маршаллов аралдары"
+msgstr "Маршалл аралдары"
 
 #: src/translations.h:488
 msgid "Macedonia"
@@ -3400,7 +3396,7 @@ msgstr "Мавтрития"
 
 #: src/translations.h:499
 msgid "Maldives"
-msgstr "Мальдивалар"
+msgstr "Мальдива"
 
 #: src/translations.h:500
 msgid "Malawi"
@@ -3444,7 +3440,7 @@ msgstr "Никарагуа"
 
 #: src/translations.h:510
 msgid "Netherlands"
-msgstr "Нидерланддар"
+msgstr "Нидерланды"
 
 #: src/translations.h:511
 msgid "Norway"
@@ -3488,7 +3484,7 @@ msgstr "Папуа-Жаңы Гвинея"
 
 #: src/translations.h:521
 msgid "Philippines"
-msgstr "Филиппиндер"
+msgstr "Филиппины"
 
 #: src/translations.h:522
 msgid "Pakistan"
@@ -3512,7 +3508,7 @@ msgstr "Пуэрто-Рико"
 
 #: src/translations.h:527
 msgid "Palestinian Territories"
-msgstr "Палестиналык автономия"
+msgstr "Палестина автономиясы"
 
 #: src/translations.h:528
 msgid "Portugal"
@@ -3544,7 +3540,7 @@ msgstr "Сербия"
 
 #: src/translations.h:535
 msgid "Russian Federation"
-msgstr "Орусия Федерациясы"
+msgstr "Россия Федерациясы"
 
 #: src/translations.h:536
 msgid "Rwanda"
@@ -3556,11 +3552,11 @@ msgstr "Сауд Аравиясы"
 
 #: src/translations.h:538
 msgid "Solomon Islands"
-msgstr "Соломонов Аралдары"
+msgstr "Соломон Аралдары"
 
 #: src/translations.h:539
 msgid "Seychelles"
-msgstr "Сейшель аралдары"
+msgstr "Сейшел аралдары"
 
 #: src/translations.h:540
 msgid "Sudan"
@@ -3576,7 +3572,7 @@ msgstr "Сингапур"
 
 #: src/translations.h:543
 msgid "Saint Helena"
-msgstr "Олуя Еленанын аралы"
+msgstr "Ыйык Еленанын аралы"
 
 #: src/translations.h:544
 msgid "Slovenia"
@@ -3612,7 +3608,7 @@ msgstr "Суринам"
 
 #: src/translations.h:552
 msgid "Sao Tome and Principe"
-msgstr "Сан-Томе жана Принсили"
+msgstr "Сан-Томе жана Принсипи"
 
 #: src/translations.h:553
 msgid "El Salvador"
@@ -3636,7 +3632,7 @@ msgstr "Чад"
 
 #: src/translations.h:558
 msgid "French Southern Territories"
-msgstr "Француз Түштүк Территориялары"
+msgstr ""
 
 #: src/translations.h:559
 msgid "Togo"
@@ -3700,7 +3696,7 @@ msgstr "Уганда"
 
 #: src/translations.h:574
 msgid "United States Minor Outlying Islands"
-msgstr "АКШнын тышкы кичи аралдары"
+msgstr ""
 
 #: src/translations.h:575
 msgid "United States"
@@ -3728,11 +3724,11 @@ msgstr "Венесуэла"
 
 #: src/translations.h:581
 msgid "British Virgin Islands"
-msgstr "Британдык Виргин аралдары"
+msgstr "Британ Вирджин аралдары"
 
 #: src/translations.h:582
 msgid "United States Virgin Islands"
-msgstr "АКШнын Виргин аралдары"
+msgstr "АКШнын Вирджин аралдары"
 
 #: src/translations.h:583
 msgid "Viet Nam"
@@ -3878,16 +3874,16 @@ msgstr "Журнал"
 
 #: src/ui_helpDialogGui.h:290 src/ui_configurationDialog.h:1088
 msgid "Edit keyboard shortcuts..."
-msgstr "Ариптактанын тез баскычын түзөтүү..."
+msgstr "Баскычтактанын кыскартмасын түзөтүү..."
 
 #: src/ui_helpDialogGui.h:291
 msgid "Refresh"
-msgstr "Жаңылоо"
+msgstr "Жаңыртуу"
 
 #: src/ui_locationDialogGui.h:403
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:145
 msgid "Location"
-msgstr "Жайгашкан жери"
+msgstr ""
 
 #: src/ui_locationDialogGui.h:407 src/ui_locationDialogGui.h:410
 msgid ""
@@ -3904,7 +3900,7 @@ msgstr ""
 
 #: src/ui_locationDialogGui.h:417
 msgid "Current location information"
-msgstr "Кезектеги жайгашкан жери жөнүндөгү маалымат"
+msgstr ""
 
 #: src/ui_locationDialogGui.h:418
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:146
@@ -3916,8 +3912,6 @@ msgid ""
 "You can enter values in decimal degrees, or using dms format, for example: "
 "+1d 12m 8s"
 msgstr ""
-"Сиз чоңдуктарды ондук градустар менен киргизе аласыз, же dms (гмс) форматын "
-"колдонуп, мисалы: +1d 12m 8s"
 
 #: src/ui_locationDialogGui.h:422
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:149
@@ -3931,7 +3925,7 @@ msgstr "Бийиктиги:"
 
 #: src/ui_locationDialogGui.h:428
 msgid "Enter the altitude in meter"
-msgstr "Бийиктикти метр менен киргизиңиз"
+msgstr "Бийиктигин метр менен киргизиңиз"
 
 #: src/ui_locationDialogGui.h:430
 msgid " m"
@@ -3975,7 +3969,7 @@ msgstr "Объектти издөө"
 
 #: src/ui_searchDialogGui.h:561
 msgid "Find Object or Position"
-msgstr "Объект же турган жерди табуу"
+msgstr ""
 
 #: src/ui_searchDialogGui.h:564 src/ui_searchDialogGui.h:568
 msgid "Use tab key for select of found items"
@@ -4079,7 +4073,7 @@ msgstr "омега"
 
 #: src/ui_searchDialogGui.h:644
 msgid "Greek letters for Bayer designations"
-msgstr "Байер белгилөөлөрү үчүн грек тамгалары"
+msgstr ""
 
 #: src/ui_searchDialogGui.h:645
 msgid "Object"
@@ -4087,11 +4081,11 @@ msgstr "Объект"
 
 #: src/ui_searchDialogGui.h:646
 msgid "RA/Dec (J2000):"
-msgstr "Тик чыгуу/Эңкейүү (J2000):"
+msgstr ""
 
 #: src/ui_searchDialogGui.h:647
 msgid "Position"
-msgstr "Турган жер"
+msgstr ""
 
 #: src/ui_searchDialogGui.h:649
 msgid "Some objects may be found after activation respective plug-ins"
@@ -4099,7 +4093,7 @@ msgstr ""
 
 #: src/ui_searchDialogGui.h:651
 msgid "names in English"
-msgstr "англисче аттар"
+msgstr "англисче аттары"
 
 #: src/ui_searchDialogGui.h:652
 msgid "Search in list..."
@@ -4112,7 +4106,7 @@ msgstr "Тизмелер"
 
 #: src/ui_searchDialogGui.h:654
 msgid "On-line astronomical database SIMBAD"
-msgstr "SIMBAD онлайн астрономиялык маалымат базасы"
+msgstr "SIMBAD онлайн астрономиялык берилме базасы"
 
 #: src/ui_searchDialogGui.h:655
 msgid "Extend search with SIMBAD"
@@ -4157,11 +4151,11 @@ msgstr "Ландшафт"
 #: src/ui_viewDialog.h:1150
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:228
 msgid "Starlore"
-msgstr "Жылдыздар жөнүндөгү билим"
+msgstr "Жылдыз таануу"
 
 #: src/ui_viewDialog.h:1153
 msgid "Labels and Markers"
-msgstr "Аттар жана маркерлер"
+msgstr "Аталыштар жана белгилер"
 
 #: src/ui_viewDialog.h:1157
 msgid ""
@@ -4175,7 +4169,7 @@ msgstr ""
 
 #: src/ui_viewDialog.h:1160
 msgid "Planets and satellites"
-msgstr "Планеталар жана жолдоштор"
+msgstr "Планеталар жана жандоочулар"
 
 #: src/ui_viewDialog.h:1161
 msgid "Show planets"
@@ -4191,7 +4185,7 @@ msgstr "Планеталардын орбиталарын көрсөтүү"
 
 #: src/ui_viewDialog.h:1164
 msgid "Simulate light speed"
-msgstr "Жарыктын ылдамдыгын моделдөө"
+msgstr "Жарык ылдамдыгынын моделин түзүү"
 
 #: src/ui_viewDialog.h:1165
 msgid "Scale Moon"
@@ -4244,7 +4238,7 @@ msgstr "Абсолюттук чоңойтуу:"
 #: src/ui_viewDialog.h:1188
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:252
 msgid "Relative scale:"
-msgstr "Салыштырмалуу чоңойтуу:"
+msgstr ""
 
 #: src/ui_viewDialog.h:1189
 msgid "Milky Way brightness:"
@@ -4261,7 +4255,7 @@ msgstr ""
 
 #: src/ui_viewDialog.h:1194
 msgid "Dynamic eye adaptation"
-msgstr "Сезгичтиктин динамикалык адаптациясы"
+msgstr ""
 
 #: src/ui_viewDialog.h:1196
 msgid "Settings for sporadic meteors"
@@ -4269,7 +4263,7 @@ msgstr ""
 
 #: src/ui_viewDialog.h:1198
 msgid "Shooting Stars"
-msgstr "Метеорлор"
+msgstr "Учуучу жылдыздар"
 
 #: src/ui_viewDialog.h:1200
 msgid "Hourly zenith rate"
@@ -4303,19 +4297,19 @@ msgstr "Топ жылдыздар"
 
 #: src/ui_viewDialog.h:1217
 msgid "Show lines"
-msgstr "Сызыктарды көрсөтүү"
+msgstr "Сызыктарын көрсөтүү"
 
 #: src/ui_viewDialog.h:1218
 msgid "Show labels"
-msgstr "Аттарды көрсөтүү"
+msgstr "Аталыштарын көрсөтүү"
 
 #: src/ui_viewDialog.h:1219
 msgid "Show boundaries"
-msgstr "Чек араларды көрсөтүү"
+msgstr "Чек араларын көрсөтүү"
 
 #: src/ui_viewDialog.h:1220
 msgid "Show art"
-msgstr "Сүрөттөрдү көрсөтүү"
+msgstr "Сүрөттөрүн көрсөтүү"
 
 #. TRANSLATORS: Refers to constellation art
 #: src/ui_viewDialog.h:1221
@@ -4381,7 +4375,7 @@ msgstr "Туура келүүчү планетаны жана турган же�
 
 #: src/ui_viewDialog.h:1255
 msgid "Use this landscape as default"
-msgstr "Бул ландшафтты жарыяланбас түрүндө колдонуу"
+msgstr ""
 
 #: src/ui_viewDialog.h:1256
 msgid "Use brightness settings for landscapes"
@@ -4389,7 +4383,7 @@ msgstr ""
 
 #: src/ui_viewDialog.h:1258
 msgid "Use this sky culture as default"
-msgstr "Бул асман маданиятын жарыяланбас түрүндө колдонуу"
+msgstr ""
 
 #: src/ui_viewDialog.h:1260
 msgid "Visible"
@@ -4415,7 +4409,7 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:1007
 msgid "Default options"
-msgstr "Жарыяланбас опциялары"
+msgstr ""
 
 #: src/ui_configurationDialog.h:1009
 msgid ""
@@ -4433,13 +4427,13 @@ msgstr "Ырастоолорду сактоо"
 
 #: src/ui_configurationDialog.h:1013
 msgid "Restore the default settings that came with Stellarium"
-msgstr "Баштапкы ырастоолор"
+msgstr ""
 
 #: src/ui_configurationDialog.h:1015 plugins/FOV/src/ui_fovWindow.h:386
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:277
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:289
 msgid "Restore defaults"
-msgstr "Жарыяланбас калыбына келтирүү"
+msgstr ""
 
 #: src/ui_configurationDialog.h:1016
 msgid ""
@@ -4447,9 +4441,6 @@ msgid ""
 "current options includes the current FOV and direction of view for use at "
 "next startup."
 msgstr ""
-"Жарыяланбасча ырастоолорду калыбына келтирүү Stellarium'дун кайта "
-"жүргүзүүсүн талап кылат. Кезектеги КТМ жана көрүнүш багыты менен кошо бүт "
-"опциялар эмки сеанс үчүн сакталышат."
 
 #: src/ui_configurationDialog.h:1018
 msgid "The width of your view when Stellarium starts"
@@ -4597,17 +4588,15 @@ msgstr "Башкаруу"
 
 #: src/ui_configurationDialog.h:1081
 msgid "Allow keyboard to pan and zoom"
-msgstr "Панорама кылуу жана чоңойтуу үчүн клавиатурага уруксат берүү"
+msgstr ""
 
 #: src/ui_configurationDialog.h:1083
 msgid "Enable keyboard navigation"
-msgstr "Ариптакта навигациясын колдонуу"
+msgstr "Баскычтакта навигациясын колдонуу"
 
 #: src/ui_configurationDialog.h:1085
 msgid "Allow mouse to pan (drag) and zoom (mousewheel)"
 msgstr ""
-"Панорама кылуу (ташуу) жана чоңойтуу (чычкан дөнгөлөгү) үчүн чычканга "
-"уруксат берүү"
 
 #: src/ui_configurationDialog.h:1087
 msgid "Enable mouse navigation"
@@ -4623,12 +4612,12 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:1094
 msgid "seconds"
-msgstr ""
+msgstr "секунда"
 
 #: src/ui_configurationDialog.h:1096
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:191
 msgid "Startup date and time"
-msgstr "Баштапкы күнү жана убакыты"
+msgstr "Баштапкы дата жана убакыт"
 
 #: src/ui_configurationDialog.h:1098
 msgid "Use a specific date and time when Stellarium starts up"
@@ -4652,7 +4641,7 @@ msgstr "Системалык саат датасы жана убактысынд
 
 #: src/ui_configurationDialog.h:1108
 msgid "System date and time"
-msgstr "Системалык күн жана убакыт"
+msgstr "Системалык дата жана убакыт"
 
 #: src/ui_configurationDialog.h:1110
 msgid ""
@@ -4662,7 +4651,7 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:1112
 msgid "System date at:"
-msgstr "Системалык күн:"
+msgstr "Системалык дата:"
 
 #: src/ui_configurationDialog.h:1113
 msgid "Time correction"
@@ -5132,7 +5121,7 @@ msgstr ""
 #: plugins/Observability/src/ui_ObservabilityDialog.h:357
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:526
 msgid "Restore default settings"
-msgstr "Жарыяланбас ырастоолорду калыбына келтирүү"
+msgstr ""
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:188
 #: plugins/Satellites/src/ui_satellitesDialog.h:715
@@ -5144,7 +5133,7 @@ msgstr "Жарыяланбас ырастоолорду калыбына кел�
 #: plugins/Observability/src/ui_ObservabilityDialog.h:358
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:527
 msgid "Save settings as default"
-msgstr "Ырастоолорду жарыяланбасча сактоо"
+msgstr ""
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:190
 #: plugins/Oculars/src/ui_ocularDialog.h:1108
@@ -6641,7 +6630,7 @@ msgstr "Координат системасы:"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:490
 msgid "J2000 (default)"
-msgstr "J2000 (жарыяланбас)"
+msgstr ""
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:491
 msgid "Equinox of the date (JNow)"
@@ -6968,7 +6957,7 @@ msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:385
 msgid "Use system settings (default)"
-msgstr "Системалык ырастоолорду колдонуу (жарыяланбас)"
+msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:386
 msgid "Universal Coordinated Time (UTC)"
@@ -7004,7 +6993,7 @@ msgstr "Убакыт көрсөтүү форматы"
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:396
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:400
 msgid "System default"
-msgstr "Системалык жарыяланбас"
+msgstr ""
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:397
 msgid "12-hour format"
@@ -7168,7 +7157,7 @@ msgstr "Башкаруу"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:481
 msgid "Load default configuration"
-msgstr "Жарыяланбас ырастоону жүктөө"
+msgstr ""
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:482
 msgid "Save current configuration"
@@ -7351,7 +7340,7 @@ msgstr ""
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:298
 msgid "Reset to defaults"
-msgstr "Жарыяланбаска түшүрүү"
+msgstr ""
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:299
 msgid "Copy/replace the Solar System file"
@@ -7945,7 +7934,7 @@ msgstr "Экзопланеталарды көрсөтүү"
 
 #: plugins/Exoplanets/src/Exoplanets.cpp:171
 msgid "Exoplanets configuration window"
-msgstr "\"Экзопланеталар\" плагинин ырастоо терезеси"
+msgstr "\"Экзопланеталар\" плагинин баптоо терезеси"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:177
 msgid "planetary system"
@@ -7997,11 +7986,11 @@ msgstr "а. б."
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:235
 msgid "Eccentricity"
-msgstr "Эксцентриситет"
+msgstr ""
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:236
 msgid "Inclination"
-msgstr "Эңкейиш"
+msgstr ""
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:237
 msgid "Angle Distance"
@@ -8134,7 +8123,7 @@ msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:186
 msgid "update: 16 April 2012"
-msgstr "жаңылоо: 2012-ж. 16 апрель"
+msgstr "жаңылоо: 16 апрель 2012-ж."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:187
 msgid "The Exoplanet Data Explorer"
@@ -8194,15 +8183,15 @@ msgstr "Экзопланеталар жаңыланды"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:303
 msgid "Exoplanets Configuration"
-msgstr "Экзопланеталар ырастоосу"
+msgstr "Экзопланеталар ишкуралымы"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:304
 msgid "Exoplanets Plug-in Configuration"
-msgstr "Экзопланеталар плагининин ырастоосу"
+msgstr "Экзопланеталар плагининин ишкуралымы"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:306
 msgid "Update exoplanets data from Internet"
-msgstr "Экзопланеталар маалыматын интернеттен жаңыртуу"
+msgstr "Экзопланеталар маалыматын интернеттен жаңылоо"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:312
 msgid "Settings for exoplanets"
@@ -9422,7 +9411,7 @@ msgstr ""
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:541
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:548
 msgid "Change Color"
-msgstr ""
+msgstr "Түсүн өзгөртүү"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:538
 msgid "Inactive Radiant"
@@ -9455,7 +9444,7 @@ msgstr ""
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:558
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:563
 msgid "Search"
-msgstr ""
+msgstr "Издөө"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:559
 msgid "From:"
@@ -9468,11 +9457,11 @@ msgstr ""
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:561
 msgid "To:"
-msgstr ""
+msgstr "Кимге:"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:564
 msgid "Results"
-msgstr ""
+msgstr "Натыйжалар"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:565
 msgid "Search Events"
