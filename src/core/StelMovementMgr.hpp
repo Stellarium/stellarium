@@ -92,6 +92,9 @@ public:
 
 	void setDragTriggerDistance(float d) {dragTriggerDistance=d;}
 
+	//! Kinetic scrolling for lists.
+	void listKineticScrolling(QList<QWidget *> addscroll);
+
 public slots:
 	//! Toggle current mount mode between equatorial and altazimuthal
 	void toggleMountMode() {if (getMountMode()==MountAltAzimuthal) setMountMode(MountEquinoxEquatorial); else setMountMode(MountAltAzimuthal);}
@@ -135,6 +138,11 @@ public slots:
 	bool getFlagEnableMoveKeys() const {return flagEnableMoveKeys;}
 	//! Set whether keys can control movement
 	void setFlagEnableMoveKeys(bool b) {flagEnableMoveKeys=b;}
+
+	//! Get whether keys can control kinetic scrolling
+	bool getFlagEnableKineticScrolling() const { return flagEnableKineticScrolling;}
+	//! Set whether keys can control kinetic scrolling
+	void setFlagEnableKineticScrolling(bool b) {flagEnableKineticScrolling = b;}
 
 	//! Get whether being at the edge of the screen activates movement
 	bool getFlagEnableMoveAtScreenEdge() const {return flagEnableMoveAtScreenEdge;}
@@ -259,6 +267,7 @@ private:
 
 	bool flagEnableZoomKeys;
 	bool flagEnableMoveKeys;
+	bool flagEnableKineticScrolling;
 	float keyMoveSpeed;              // Speed of keys movement
 	float keyZoomSpeed;              // Speed of keys zoom
 	bool flagMoveSlow;
