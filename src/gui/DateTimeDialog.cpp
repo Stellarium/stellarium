@@ -122,14 +122,16 @@ bool DateTimeDialog::valid(int y, int m, int d, int h, int min, int s)
 bool DateTimeDialog::validJd(double jday)
 {
 	pushToWidgets();
-	StelApp::getInstance().getCore()->setJDay(jday);
+	// local tz -> UTC
+	StelApp::getInstance().getCore()->setJDay(jday-StelApp::getInstance().getLocaleMgr().getGMTShift(jday)/24.+StelApp::getInstance().getCore()->getDeltaT(jday)/86400.);
 	return true;
 }
 
 bool DateTimeDialog::validMjd(double mjday)
 {
 	pushToWidgets();
-	StelApp::getInstance().getCore()->setMJDay(mjday);
+	// local tz -> UTC
+	StelApp::getInstance().getCore()->setMJDay(mjday-StelApp::getInstance().getLocaleMgr().getGMTShift(mjday)/24.+StelApp::getInstance().getCore()->getDeltaT(mjday)/86400.);
 	return true;
 }
 

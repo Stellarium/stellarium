@@ -72,6 +72,8 @@ public:
 
 	virtual QStringList listAllObjects(bool inEnglish) const = 0;
 
+	virtual QStringList listAllObjectsByType(const QString& objType, bool inEnglish) const = 0;
+
 	virtual QString getName() const = 0;
 };
 
