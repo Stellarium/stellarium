@@ -32,6 +32,7 @@
 
 #include <QRegExp>
 #include <QDebug>
+#include <QSettings>
 
 Vec3d StelObject::getEquinoxEquatorialPos(const StelCore* core) const
 {
@@ -203,7 +204,14 @@ void StelObject::postProcessInfoString(QString& str, const InfoStringGroup& flag
 	}
 	else
 	{
-		str.prepend(QString("<font color=%1>").arg(StelUtils::vec3fToHtmlColor(getInfoColor())));
+		Vec3f color = getInfoColor();
+		StelCore* core = StelApp::getInstance().getCore();
+		if (core->isDay() && core->getSkyDrawer()->getFlagHasAtmosphere()==true)
+		{
+			// Let's make info text is more readable when atmosphere enabled at daylight.
+			color = StelUtils::strToVec3f(StelApp::getInstance().getSettings()->value("color/daylight_color", "0.0,0.0,0.0").toString());
+		}
+		str.prepend(QString("<font color=%1>").arg(StelUtils::vec3fToHtmlColor(color)));
 		str.append(QString("</font>"));
 	}
 }

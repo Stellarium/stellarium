@@ -185,7 +185,40 @@ class Translations
 		N_("moon");
 		// TRANSLATORS: Type of object
 		N_("plutoid");
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("Planets");
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("Comets");
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("Asteroids");
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("Moons");
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("Plutoids");
 
+		// =====================================================================
+		// List of deep-sky objects types
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("Bright galaxies");
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("Open star clusters");
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("Globular star clusters");
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("Nebulae");
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("Planetary nebulae");
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("Dark nebulae");
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("Irregular galaxies");
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("Clusters associated with nebulosity");
+		// TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
+		N_("Messier Catalogue");
+		// TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
+		N_("Caldwell Catalogue");
+		
 		// =====================================================================
 		// Constellation cultures
 		N_("Arabic");

@@ -52,7 +52,7 @@ Comet::Comet(const QString& englishName,
 		 OsculatingFunctType *osculatingFunc,
 		 bool acloseOrbit,
 		 bool hidden,
-		 const QString& pType,
+		 const QString& pTypeStr,
 		 float dustTailWidthFact, float dustTailLengthFact, float dustTailBrightnessFact)
 	: Planet (englishName,
 		  flagLighting,
@@ -69,7 +69,7 @@ Comet::Comet(const QString& englishName,
 		  hidden,
 		  false, //No atmosphere
 		  true, //halo
-		  pType),
+		  pTypeStr),
 	  dustTailWidthFactor(dustTailWidthFact),
 	  dustTailLengthFactor(dustTailLengthFact),
 	  dustTailBrightnessFactor(dustTailBrightnessFact)
@@ -142,8 +142,7 @@ QString Comet::getInfoString(const StelCore *core, const InfoStringGroup &flags)
 
 	if (flags&ObjectType)
 	{
-		if (pType.length()>0)
-			oss << q_("Type: <b>%1</b>").arg(q_(pType)) << "<br />";
+		oss << q_("Type: <b>%1</b>").arg(q_(getPlanetTypeString())) << "<br />";
 	}
 
 	if (flags&Magnitude)

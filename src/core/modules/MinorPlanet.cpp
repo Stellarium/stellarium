@@ -45,7 +45,7 @@ MinorPlanet::MinorPlanet(const QString& englishName,
 			 OsculatingFunctType *osculatingFunc,
 			 bool acloseOrbit,
 			 bool hidden,
-			 const QString &pType)
+			 const QString &pTypeStr)
 	: Planet (englishName,
 		  flagLighting,
 		  radius,
@@ -61,7 +61,7 @@ MinorPlanet::MinorPlanet(const QString& englishName,
 		  hidden,
 		  false, //No atmosphere
 		  true,  //Halo
-		  pType)
+		  pTypeStr)
 {
 	texMapName = atexMapName;
 	lastOrbitJD =0;
@@ -205,8 +205,7 @@ QString MinorPlanet::getInfoString(const StelCore *core, const InfoStringGroup &
 
 	if (flags&ObjectType)
 	{
-		if (pType.length()>0)
-			oss << q_("Type: <b>%1</b>").arg(q_(pType)) << "<br />";
+		oss << q_("Type: <b>%1</b>").arg(q_(getPlanetTypeString())) << "<br />";
 	}
 
 	if (flags&Magnitude)

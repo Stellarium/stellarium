@@ -281,9 +281,21 @@ QStringList StelObjectMgr::listAllModuleObjects(const QString &moduleId, bool in
 {
 	// search for module
 	StelObjectModule* module = NULL;
+	QStringList result, list;
+	QString objModule, objType;
+	bool subSet = false;
+	if (moduleId.contains(":"))
+	{
+		subSet = true;
+		list = moduleId.split(":", QString::SkipEmptyParts);
+		objModule = list.at(0);
+		objType = list.at(1);
+	}
+	else
+		objModule = moduleId;
 	foreach(StelObjectModule* m, objectsModule)
 	{
-		if (m->objectName() == moduleId)
+		if (m->objectName() == objModule)
 		{
 			module = m;
 			break;
@@ -291,10 +303,14 @@ QStringList StelObjectMgr::listAllModuleObjects(const QString &moduleId, bool in
 	}
 	if (module == NULL)
 	{
-		qWarning() << "Can't find module with id " << moduleId;
+		qWarning() << "Can't find module with id " << objModule;
 		return QStringList();
 	}
-	return module->listAllObjects(inEnglish);
+	if (subSet)
+		result = module->listAllObjectsByType(objType, inEnglish);
+	else
+		result = module->listAllObjects(inEnglish);
+	return result;
 }
 
 QMap<QString, QString> StelObjectMgr::objectModulesMap() const
@@ -303,6 +319,29 @@ QMap<QString, QString> StelObjectMgr::objectModulesMap() const
 	foreach(const StelObjectModule* m, objectsModule)
 	{
 		result[m->objectName()] = m->getName();
+		// Celestial objects from Solar system by type
+		if (m->objectName()=="SolarSystem")
+		{
+			result["SolarSystem:planet"] = "Planets";
+			result["SolarSystem:moon"] = "Moons";
+			result["SolarSystem:asteroid"] = "Asteroids";
+			result["SolarSystem:comet"] = "Comets";
+			result["SolarSystem:plutoid"] = "Plutoids";
+		}
+		// Deep-sky objects by type + couple amateur catalogue
+		if (m->objectName()=="NebulaMgr")
+		{
+			result["NebulaMgr:0"] = "Bright galaxies";
+			result["NebulaMgr:1"] = "Open star clusters";
+			result["NebulaMgr:2"] = "Globular star clusters";
+			result["NebulaMgr:3"] = "Nebulae";
+			result["NebulaMgr:4"] = "Planetary nebulae";
+			result["NebulaMgr:5"] = "Dark nebulae";
+			result["NebulaMgr:6"] = "Irregular galaxies";
+			result["NebulaMgr:7"] = "Clusters associated with nebulosity";
+			result["NebulaMgr:10"] = "Messier Catalogue";
+			result["NebulaMgr:11"] = "Caldwell Catalogue";
+		}
 	}
 	return result;
 }
