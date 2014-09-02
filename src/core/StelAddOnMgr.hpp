@@ -117,6 +117,7 @@ private:
 
 	void refreshAddOnStatuses();
 	void downloadNextAddOn();
+	void cancelAllDownloads();
 	QString calculateMd5(QFile &file) const;
 
 	// download thumbnails

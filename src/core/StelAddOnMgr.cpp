@@ -339,6 +339,7 @@ void StelAddOnMgr::downloadNextAddOn()
 	{
 		qWarning() << "Can't open a writable file: "
 			   << QDir::toNativeSeparators(m_currentDownloadInfo.filepath);
+		cancelAllDownloads();
 		return;
 	}
 
@@ -423,4 +424,32 @@ void StelAddOnMgr::downloadAddOnFinished()
 		// next download
 		downloadNextAddOn();
 	}
+}
+
+void StelAddOnMgr::cancelAllDownloads()
+{
+	qDebug() << "Add-On Mgr: Canceling all downloads!";
+
+	if (m_currentDownloadFile)
+	{
+		m_currentDownloadFile->close();
+		m_currentDownloadFile->deleteLater();
+		m_currentDownloadFile = NULL;
+	}
+
+	if (m_pAddOnNetworkReply)
+	{
+		m_pAddOnNetworkReply->deleteLater();
+		m_pAddOnNetworkReply = NULL;
+	}
+
+	if (m_progressBar)
+	{
+		StelApp::getInstance().removeProgressBar(m_progressBar);
+		m_progressBar = NULL;
+	}
+
+	m_downloadQueue.clear();
+	m_iDownloadingId = 0;
+	emit(updateTableViews());
 }
