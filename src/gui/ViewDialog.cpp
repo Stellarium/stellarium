@@ -44,6 +44,7 @@
 #include "StelGui.hpp"
 #include "StelGuiItems.hpp"
 #include "StelActionMgr.hpp"
+#include "StelMovementMgr.hpp"
 
 #include <QDebug>
 #include <QFrame>
@@ -53,7 +54,6 @@
 #include <QTimer>
 #include <QDialog>
 #include <QStringList>
-#include <QScroller>
 
 ViewDialog::ViewDialog(QObject* parent) : StelDialog(parent)
 {
@@ -114,6 +114,8 @@ void ViewDialog::connectGroupBox(QGroupBox* groupBox, const QString& actionId)
 
 void ViewDialog::createDialogContent()
 {
+	StelMovementMgr* mvmgr = GETSTELMODULE(StelMovementMgr);
+
 	ui->setupUi(dialog);
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
 
@@ -126,12 +128,7 @@ void ViewDialog::createDialogContent()
 	//Kinetic scrolling for tablet pc and pc
 	QList<QWidget *> addscroll;
 	addscroll << ui->projectionListWidget << ui->culturesListWidget << ui->skyCultureTextBrowser << ui->landscapesListWidget;
-
-	foreach(QWidget * w, addscroll)
-	{
-		QScroller::grabGesture(w, QScroller::LeftMouseButtonGesture);
-		QScroller::scroller(w);
-	}
+	mvmgr->listKineticScrolling(addscroll);
 
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 

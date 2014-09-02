@@ -20,7 +20,6 @@
 #include <QDialog>
 #include <QStandardItemModel>
 #include <QDebug>
-#include <QScroller>
 
 #include "StelApp.hpp"
 #include "StelTranslator.hpp"
@@ -28,6 +27,8 @@
 #include "ShortcutLineEdit.hpp"
 #include "ShortcutsDialog.hpp"
 #include "ui_shortcutsDialog.h"
+#include "StelMovementMgr.hpp"
+#include "StelModuleMgr.hpp"
 
 
 ShortcutsFilterModel::ShortcutsFilterModel(QObject* parent) :
@@ -280,6 +281,8 @@ void ShortcutsDialog::switchToEditors(const QModelIndex& index)
 
 void ShortcutsDialog::createDialogContent()
 {
+	StelMovementMgr* mvmgr = GETSTELMODULE(StelMovementMgr);
+
 	ui->setupUi(dialog);
 	
 	resetModel();
@@ -293,8 +296,9 @@ void ShortcutsDialog::createDialogContent()
 	ui->shortcutsTreeView->sortByColumn(0, Qt::AscendingOrder);
 	
 	//Kinetic scrolling for tablet pc and pc
-	QScroller::grabGesture(ui->shortcutsTreeView, QScroller::LeftMouseButtonGesture);
-	QScroller::scroller(ui->shortcutsTreeView);
+	QList<QWidget *> addscroll;
+	addscroll << ui->shortcutsTreeView;
+	mvmgr->listKineticScrolling(addscroll);
 
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
 	connect(ui->shortcutsTreeView->selectionModel(),

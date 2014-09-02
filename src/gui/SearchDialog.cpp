@@ -42,7 +42,6 @@
 #include <QLineEdit>
 #include <QComboBox>
 #include <QMenu>
-#include <QScroller>
 
 #include "SimbadSearcher.hpp"
 
@@ -199,6 +198,8 @@ void SearchDialog::styleChanged()
 // Initialize the dialog widgets and connect the signals/slots
 void SearchDialog::createDialogContent()
 {
+	StelMovementMgr* mvmgr = GETSTELMODULE(StelMovementMgr);
+
 	ui->setupUi(dialog);
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
@@ -216,8 +217,9 @@ void SearchDialog::createDialogContent()
 	ui->DEAngleSpinBox->setPrefixType(AngleSpinBox::NormalPlus);
 
 	//Kinetic scrolling for tablet pc and pc
-	QScroller::grabGesture(ui->objectsListWidget, QScroller::LeftMouseButtonGesture);
-	QScroller::scroller(ui->objectsListWidget);
+	QList<QWidget *> addscroll;
+	addscroll << ui->objectsListWidget;
+	mvmgr->listKineticScrolling(addscroll);
 
 	connect(ui->RAAngleSpinBox, SIGNAL(valueChanged()), this, SLOT(manualPositionChanged()));
 	connect(ui->DEAngleSpinBox, SIGNAL(valueChanged()), this, SLOT(manualPositionChanged()));

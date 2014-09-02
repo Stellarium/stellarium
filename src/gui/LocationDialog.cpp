@@ -33,6 +33,7 @@
 #include "StelLocaleMgr.hpp"
 #include "StelGui.hpp"
 #include "StelGuiItems.hpp"
+#include "StelMovementMgr.hpp"
 
 #include <QSettings>
 #include <QDebug>
@@ -40,7 +41,6 @@
 #include <QSortFilterProxyModel>
 #include <QTimer>
 #include <QStringListModel>
-#include <QScroller>
 
 LocationDialog::LocationDialog(QObject* parent) : StelDialog(parent), isEditingNew(false)
 {
@@ -72,6 +72,8 @@ void LocationDialog::styleChanged()
 // Initialize the dialog widgets and connect the signals/slots
 void LocationDialog::createDialogContent()
 {
+	StelMovementMgr* mvmgr = GETSTELMODULE(StelMovementMgr);
+
 	// We try to directly connect to the observer slots as much as we can
 	ui->setupUi(dialog);
 
@@ -89,8 +91,9 @@ void LocationDialog::createDialogContent()
 	ui->citiesListView->setModel(proxyModel);
 
 	//Kinetic scrolling for tablet pc and pc
-	QScroller::grabGesture(ui->citiesListView, QScroller::LeftMouseButtonGesture);
-	QScroller::scroller(ui->citiesListView);
+	QList<QWidget *> addscroll;
+	addscroll << ui->citiesListView;
+	mvmgr->listKineticScrolling(addscroll);
 
 	populatePlanetList();
 	populateCountryList();
