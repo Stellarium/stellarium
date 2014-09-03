@@ -379,6 +379,7 @@ void StelAddOnMgr::downloadAddOnFinished()
 	{
 		qWarning() << "Add-on Mgr: FAILED to download" << m_pAddOnNetworkReply->url()
 			   << " Error:" << m_pAddOnNetworkReply->errorString();
+
 		m_currentDownloadFile->close();
 		m_currentDownloadFile->deleteLater();
 		m_currentDownloadFile = NULL;
@@ -386,6 +387,16 @@ void StelAddOnMgr::downloadAddOnFinished()
 		m_pAddOnNetworkReply = NULL;
 		StelApp::getInstance().removeProgressBar(m_progressBar);
 		m_progressBar = NULL;
+
+		m_currentDownloadInfo = StelAddOnDAO::AddOnInfo();
+		m_downloadQueue.remove(m_iDownloadingId);
+		m_iDownloadingId = 0;
+		if (!m_downloadQueue.isEmpty())
+		{
+			// next download
+			downloadNextAddOn();
+		}
+
 		return;
 	}
 
