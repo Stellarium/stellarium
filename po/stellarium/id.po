@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-08-31 17:40+0700\n"
-"PO-Revision-Date: 2013-09-08 11:13+0000\n"
+"PO-Revision-Date: 2014-09-02 09:46+0000\n"
 "Last-Translator: Ardian Wardhana <Unknown>\n"
 "Language-Team: Indonesian <id@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-09-01 06:10+0000\n"
-"X-Generator: Launchpad (build 17176)\n"
+"X-Launchpad-Export-Date: 2014-09-03 05:56+0000\n"
+"X-Generator: Launchpad (build 17196)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:106 src/core/modules/StarMgr.cpp:346
 #: src/core/modules/GridLinesMgr.cpp:697 src/core/modules/LandscapeMgr.cpp:354
@@ -189,12 +189,12 @@ msgstr "Magnitudo: <b>%1</b>"
 #: src/core/modules/Nebula.cpp:119
 #, qt-format
 msgid "Surface brightness: <b>%1</b> (extincted to: <b>%2</b>)"
-msgstr ""
+msgstr "Kecerlangan permukaan: <b>%1</b> (terekstingsi ke: <b>%2</b>)"
 
 #: src/core/modules/Nebula.cpp:125
 #, qt-format
 msgid "Surface brightness: <b>%1</b>"
-msgstr ""
+msgstr "Kecerlangan permukaan: <b>%1</b>"
 
 #: src/core/modules/Nebula.cpp:131
 #, qt-format
@@ -223,11 +223,11 @@ msgstr "Nebula planeter"
 
 #: src/core/modules/Nebula.cpp:390
 msgid "Dark nebula"
-msgstr ""
+msgstr "Nebula gelap"
 
 #: src/core/modules/Nebula.cpp:393
 msgid "Irregular galaxy"
-msgstr ""
+msgstr "Galaksi irregular"
 
 #: src/core/modules/Nebula.cpp:396
 msgid "Cluster associated with nebulosity"
@@ -243,7 +243,7 @@ msgstr "Tipe tidak terdokumentasi"
 
 #: src/core/modules/NebulaMgr.cpp:126
 msgid "Deep-sky objects"
-msgstr ""
+msgstr "Objek langit dalam"
 
 #: src/core/modules/Planet.cpp:180 src/core/modules/MinorPlanet.cpp:227
 #: src/core/modules/MinorPlanet.cpp:231 src/core/modules/Comet.cpp:163
@@ -267,7 +267,7 @@ msgstr "Jarak: %1AU (%2 km)"
 #: src/core/modules/Comet.cpp:200
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 Mio km)"
-msgstr ""
+msgstr "Jarak: %1AU (%2 juta km)"
 
 #: src/core/modules/Planet.cpp:221
 #, qt-format
@@ -324,27 +324,27 @@ msgstr "Nama sementara: %1"
 #: src/core/modules/Comet.cpp:176
 #, no-c-format, qt-format
 msgid "Distance from Sun: %1AU (%2 km)"
-msgstr ""
+msgstr "Jarak dari Matahari: %1AU (%2 km)"
 
 #: src/core/modules/Comet.cpp:183
 #, no-c-format, qt-format
 msgid "Distance from Sun: %1AU (%2 Mio km)"
-msgstr ""
+msgstr "Jarak dari Matahari: %1AU (%2 juta km)"
 
 #: src/core/modules/Comet.cpp:210
 #, no-c-format, qt-format
 msgid "Speed: %1 km/s"
-msgstr ""
+msgstr "Kecepatan: %1 km/det"
 
 #: src/core/modules/Comet.cpp:219
 #, no-c-format, qt-format
 msgid "Coma diameter (estimate): %1 km"
-msgstr ""
+msgstr "Diameter koma (perkiraan): %1km"
 
 #: src/core/modules/Comet.cpp:223
 #, no-c-format, qt-format
 msgid "Gas tail length (estimate): %1 Mio km"
-msgstr ""
+msgstr "Panjang ekor gas (perkiraan): %1 juta km"
 
 #: src/core/modules/SolarSystem.cpp:157
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:308
@@ -371,7 +371,7 @@ msgstr "bintang"
 #: plugins/Quasars/src/Quasar.cpp:121
 #, qt-format
 msgid "Color Index (B-V): <b>%1</b>"
-msgstr ""
+msgstr "Indeks warna (B-V): <b>%1</b>"
 
 #: src/core/modules/StarWrapper.cpp:144
 msgid "eruptive variable star"
@@ -387,7 +387,7 @@ msgstr "Bintang variabel berotasi"
 
 #: src/core/modules/StarWrapper.cpp:150
 msgid "cataclysmic variable star"
-msgstr ""
+msgstr "Bintang variabel kataklismik"
 
 #: src/core/modules/StarWrapper.cpp:153
 msgid "eclipsing binary system"
@@ -422,7 +422,7 @@ msgstr "Jangjauan magnitudo: <b>%1</b>%2<b>%3/%4</b> (Sistem fotometri: %5)"
 #: plugins/Exoplanets/src/Exoplanet.cpp:207
 #, qt-format
 msgid "Distance: %1 ly"
-msgstr ""
+msgstr "Jarak: %1 tc"
 
 #: src/core/modules/StarWrapper.cpp:224
 #: plugins/Exoplanets/src/Exoplanet.cpp:201
@@ -438,12 +438,12 @@ msgstr "Paralaks: %1\""
 #: src/core/modules/StarWrapper.cpp:233
 #, qt-format
 msgid "Epoch for minimum light: %1 JD"
-msgstr ""
+msgstr "Epos cahaya minimum: %1 JD"
 
 #: src/core/modules/StarWrapper.cpp:235
 #, qt-format
 msgid "Epoch for maximum light: %1 JD"
-msgstr ""
+msgstr "Epos cahaya maksimum: %1 JD"
 
 #: src/core/modules/StarWrapper.cpp:239
 #, qt-format
@@ -559,7 +559,7 @@ msgstr "Tambah 1 tahun sideris"
 
 #: src/core/StelCore.cpp:204
 msgid "Add 1 sidereal century"
-msgstr ""
+msgstr "Tambah 1  abad sideris"
 
 #: src/core/StelCore.cpp:205
 msgid "Add 1 synodic month"
@@ -571,7 +571,7 @@ msgstr "Tambahkan 1 bulan drakonis"
 
 #: src/core/StelCore.cpp:207
 msgid "Add 1 draconic year"
-msgstr ""
+msgstr "Tambah 1 tahun draconic"
 
 #: src/core/StelCore.cpp:208
 msgid "Add 1 anomalistic month"
@@ -587,7 +587,7 @@ msgstr "Tambah 1 tahu tropikal"
 
 #: src/core/StelCore.cpp:211
 msgid "Add 1 mean tropical century"
-msgstr ""
+msgstr "Tambah 1 tahun tropis rerata"
 
 #: src/core/StelCore.cpp:212
 msgid "Subtract 1 sidereal day"
@@ -607,7 +607,7 @@ msgstr "Kurangi 1 tahun sideris"
 
 #: src/core/StelCore.cpp:216
 msgid "Subtract 1 sidereal century"
-msgstr ""
+msgstr "Kurangi 1 abad sideris"
 
 #: src/core/StelCore.cpp:217
 msgid "Subtract 1 synodic month"
@@ -635,7 +635,7 @@ msgstr "Kurangi 1 tahun tropikal"
 
 #: src/core/StelCore.cpp:223
 msgid "Subtract 1 mean tropical century"
-msgstr ""
+msgstr "Kurangi 1 tahun tropis rerata"
 
 #: src/core/StelCore.cpp:225
 msgid "Set home planet to selected planet"
@@ -730,6 +730,8 @@ msgid ""
 "This equation was published by F. R. Stephenson in the article <em>Pre-"
 "Telescopic Astronomical Observations</em> (%1)."
 msgstr ""
+"Persamaan ini dipublikasikan oleh F. R. Stephenson pada artikel <em>Pre-"
+"Telescopic Astronomical Observations</em> (%1)."
 
 #: src/core/StelCore.cpp:1525
 #, qt-format
@@ -869,7 +871,7 @@ msgstr ""
 
 #: src/core/StelCore.cpp:1576
 msgid "Used by default."
-msgstr ""
+msgstr "Digunakan secara default"
 
 #: src/core/StelCore.cpp:1579
 #, qt-format
@@ -1067,16 +1069,16 @@ msgstr "Azimut/Ketinggian: %1/%2"
 #: src/core/StelObject.cpp:181
 #, qt-format
 msgid "Ecliptic (of J2000): %1/%2"
-msgstr ""
+msgstr "Ekliptika (J2000): %1/%2"
 
 #: src/core/StelObject.cpp:186
 #, qt-format
 msgid "Ecliptic (of date): %1/%2"
-msgstr ""
+msgstr "Ekliptika (saat ini): %1/%2"
 
 #: src/core/StelSkyLayerMgr.cpp:87
 msgid "Deep-sky objects background images"
-msgstr ""
+msgstr "Gambar latar objek langit dalam"
 
 #: src/core/StelMovementMgr.cpp:130 src/gui/StelGui.cpp:185
 #: src/StelMainView.cpp:301
@@ -1179,7 +1181,7 @@ msgstr "Lisensi"
 
 #: src/gui/ConfigurationDialog.cpp:831
 msgid "Shortcut"
-msgstr ""
+msgstr "Jalan Pintas"
 
 #: src/gui/ConfigurationDialog.cpp:855
 msgid "Running script: "
@@ -1251,7 +1253,7 @@ msgstr ""
 #. TRANSLATORS: Full phrase is "Algorithm of DeltaT"
 #: src/gui/ConfigurationDialog.cpp:1157
 msgid "Algorithm of"
-msgstr ""
+msgstr "Algoritma"
 
 #: src/gui/ConfigurationDialog.cpp:1168
 msgid "Without correction"
@@ -1390,11 +1392,12 @@ msgstr ""
 msgid ""
 " Sorry, your hardware is not compatible with newest version of Stellarium!"
 msgstr ""
+" Maaf, perangkat keras anda tidak sesuai dengan versi terbaru Stellarium!"
 
 #. TRANSLATORS: This message will be displayed for users if current version of Stellarium is equals with version from stellarium.org
 #: src/gui/HelpDialog.cpp:326
 msgid "This is latest stable version of Stellarium."
-msgstr ""
+msgstr "Ini merupakan versi stabil termutakhir dari Stellarium."
 
 #: src/gui/HelpDialog.cpp:356
 msgid "Stellarium Help"
@@ -1655,7 +1658,7 @@ msgstr "%1m"
 
 #: src/gui/StelGuiItems.cpp:639
 msgid "Field of view"
-msgstr ""
+msgstr "Medan pandang"
 
 #: src/gui/StelGuiItems.cpp:657
 msgid "Frames per second"
@@ -1664,27 +1667,27 @@ msgstr ""
 #. TRANSLATORS: Short description for Class 1 of the Bortle scale
 #: src/gui/ViewDialog.cpp:325
 msgid "Excellent dark-sky site"
-msgstr ""
+msgstr "Tempat yang sangat gelap"
 
 #. TRANSLATORS: Short description for Class 2 of the Bortle scale
 #: src/gui/ViewDialog.cpp:327
 msgid "Typical truly dark site"
-msgstr ""
+msgstr "Tempat yang gelap"
 
 #. TRANSLATORS: Short description for Class 3 of the Bortle scale
 #: src/gui/ViewDialog.cpp:329
 msgid "Rural sky"
-msgstr ""
+msgstr "Langit pedesaan"
 
 #. TRANSLATORS: Short description for Class 4 of the Bortle scale
 #: src/gui/ViewDialog.cpp:331
 msgid "Rural/suburban transition"
-msgstr ""
+msgstr "Langit pinggir perkotaan"
 
 #. TRANSLATORS: Short description for Class 5 of the Bortle scale
 #: src/gui/ViewDialog.cpp:333
 msgid "Suburban sky"
-msgstr ""
+msgstr "Langit perkotaan"
 
 #. TRANSLATORS: Short description for Class 6 of the Bortle scale
 #: src/gui/ViewDialog.cpp:335
