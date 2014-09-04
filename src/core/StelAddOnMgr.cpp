@@ -380,13 +380,7 @@ void StelAddOnMgr::downloadAddOnFinished()
 		qWarning() << "Add-on Mgr: FAILED to download" << m_pAddOnNetworkReply->url()
 			   << " Error:" << m_pAddOnNetworkReply->errorString();
 
-		m_currentDownloadFile->close();
-		m_currentDownloadFile->deleteLater();
-		m_currentDownloadFile = NULL;
-		m_pAddOnNetworkReply->deleteLater();
-		m_pAddOnNetworkReply = NULL;
-		StelApp::getInstance().removeProgressBar(m_progressBar);
-		m_progressBar = NULL;
+		finishCurrentDownload();
 
 		m_currentDownloadInfo = StelAddOnDAO::AddOnInfo();
 		m_downloadQueue.remove(m_iDownloadingId);
@@ -418,13 +412,7 @@ void StelAddOnMgr::downloadAddOnFinished()
 		return;
 	}
 
-	m_currentDownloadFile->close();
-	m_currentDownloadFile->deleteLater();
-	m_currentDownloadFile = NULL;
-	m_pAddOnNetworkReply->deleteLater();
-	m_pAddOnNetworkReply = NULL;
-	StelApp::getInstance().removeProgressBar(m_progressBar);
-	m_progressBar = NULL;
+	finishCurrentDownload();
 
 	installFromFile(m_currentDownloadInfo, m_downloadQueue.value(m_iDownloadingId));
 	m_currentDownloadInfo = StelAddOnDAO::AddOnInfo();
@@ -437,10 +425,8 @@ void StelAddOnMgr::downloadAddOnFinished()
 	}
 }
 
-void StelAddOnMgr::cancelAllDownloads()
+void StelAddOnMgr::finishCurrentDownload()
 {
-	qDebug() << "Add-On Mgr: Canceling all downloads!";
-
 	if (m_currentDownloadFile)
 	{
 		m_currentDownloadFile->close();
@@ -459,8 +445,13 @@ void StelAddOnMgr::cancelAllDownloads()
 		StelApp::getInstance().removeProgressBar(m_progressBar);
 		m_progressBar = NULL;
 	}
+}
 
-	m_downloadQueue.clear();
+void StelAddOnMgr::cancelAllDownloads()
+{
+	qDebug() << "Add-On Mgr: Canceling all downloads!";
+	finishCurrentDownload();
 	m_iDownloadingId = 0;
+	m_downloadQueue.clear();
 	emit(updateTableViews());
 }

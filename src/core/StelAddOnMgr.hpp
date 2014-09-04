@@ -117,6 +117,7 @@ private:
 
 	void refreshAddOnStatuses();
 	void downloadNextAddOn();
+	void finishCurrentDownload();
 	void cancelAllDownloads();
 	QString calculateMd5(QFile &file) const;
 
