@@ -375,45 +375,33 @@ void StelAddOnMgr::downloadAddOnFinished()
 	Q_ASSERT(m_pAddOnNetworkReply);
 	Q_ASSERT(m_progressBar);
 
-	if (m_pAddOnNetworkReply->error() != QNetworkReply::NoError)
+	if (m_pAddOnNetworkReply->error() == QNetworkReply::NoError)
+	{
+		Q_ASSERT(m_pAddOnNetworkReply->bytesAvailable()==0);
+
+		const QVariant& redirect = m_pAddOnNetworkReply->attribute(QNetworkRequest::RedirectionTargetAttribute);
+		if (!redirect.isNull())
+		{
+			// We got a redirection, we need to follow
+			m_currentDownloadFile->reset();
+			m_pAddOnNetworkReply->deleteLater();
+			QNetworkRequest req(redirect.toUrl());
+			req.setAttribute(QNetworkRequest::CacheSaveControlAttribute, false);
+			req.setRawHeader("User-Agent", StelUtils::getApplicationName().toLatin1());
+			m_pAddOnNetworkReply = StelApp::getInstance().getNetworkAccessManager()->get(req);
+			m_pAddOnNetworkReply->setReadBufferSize(1024*1024*2);
+			connect(m_pAddOnNetworkReply, SIGNAL(readyRead()), this, SLOT(newDownloadedData()));
+			connect(m_pAddOnNetworkReply, SIGNAL(finished()), this, SLOT(downloadAddOnFinished()));
+			return;
+		}
+	}
+	else
 	{
 		qWarning() << "Add-on Mgr: FAILED to download" << m_pAddOnNetworkReply->url()
 			   << " Error:" << m_pAddOnNetworkReply->errorString();
-
-		finishCurrentDownload();
-
-		m_currentDownloadInfo = StelAddOnDAO::AddOnInfo();
-		m_downloadQueue.remove(m_iDownloadingId);
-		m_iDownloadingId = 0;
-		if (!m_downloadQueue.isEmpty())
-		{
-			// next download
-			downloadNextAddOn();
-		}
-
-		return;
-	}
-
-	Q_ASSERT(m_pAddOnNetworkReply->bytesAvailable()==0);
-
-	const QVariant& redirect = m_pAddOnNetworkReply->attribute(QNetworkRequest::RedirectionTargetAttribute);
-	if (!redirect.isNull())
-	{
-		// We got a redirection, we need to follow
-		m_currentDownloadFile->reset();
-		m_pAddOnNetworkReply->deleteLater();
-		QNetworkRequest req(redirect.toUrl());
-		req.setAttribute(QNetworkRequest::CacheSaveControlAttribute, false);
-		req.setRawHeader("User-Agent", StelUtils::getApplicationName().toLatin1());
-		m_pAddOnNetworkReply = StelApp::getInstance().getNetworkAccessManager()->get(req);
-		m_pAddOnNetworkReply->setReadBufferSize(1024*1024*2);
-		connect(m_pAddOnNetworkReply, SIGNAL(readyRead()), this, SLOT(newDownloadedData()));
-		connect(m_pAddOnNetworkReply, SIGNAL(finished()), this, SLOT(downloadAddOnFinished()));
-		return;
 	}
 
 	finishCurrentDownload();
-
 	installFromFile(m_currentDownloadInfo, m_downloadQueue.value(m_iDownloadingId));
 	m_currentDownloadInfo = StelAddOnDAO::AddOnInfo();
 	m_downloadQueue.remove(m_iDownloadingId);
