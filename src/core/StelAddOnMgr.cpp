@@ -282,7 +282,7 @@ void StelAddOnMgr::removeAddOn(const int addonId, const QStringList selectedFile
 	StelAddOnDAO::AddOnInfo addonInfo = m_pStelAddOnDAO->getAddOnInfo(addonId);
 	if (m_pStelAddOns.value(addonInfo.category)->uninstallAddOn(addonInfo.idInstall, selectedFiles))
 	{
-		m_pStelAddOnDAO->updateAddOnStatus(addonInfo.idInstall, false);
+		m_pStelAddOnDAO->updateAddOnStatus(addonInfo.idInstall, NotInstalled);
 		emit (updateTableViews());
 	}
 }
