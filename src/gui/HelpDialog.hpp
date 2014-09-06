@@ -30,6 +30,7 @@ class Ui_helpDialogForm;
 class QListWidgetItem;
 class QNetworkAccessManager;
 class QNetworkReply;
+class StelGui;
 
 class HelpDialog : public StelDialog
 {
@@ -45,7 +46,7 @@ public:
 		OtherError		//!< Other error
 	};
 
-	HelpDialog(QObject* parent);
+	HelpDialog(StelGui* agui, QObject* parent);
 	~HelpDialog();
 
 	//! Notify that the application style changed
@@ -122,6 +123,8 @@ private:
 	QString jsonDataPath;
 	QString currentVersion;
 	QString updatesMessage;
+
+	StelGui* gui;
 };
 
 #endif /*_HELPDIALOG_HPP_*/

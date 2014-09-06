@@ -32,8 +32,6 @@
 #include <QSettings>
 #include <QKeyEvent>
 #include <QDebug>
-#include <QScroller>
-#include <QComboBox>
 
 StelMovementMgr::StelMovementMgr(StelCore* acore)
 	: currentFov(60.)
@@ -52,7 +50,6 @@ StelMovementMgr::StelMovementMgr(StelCore* acore)
 	, mouseZoomSpeed(30)
 	, flagEnableZoomKeys(true)
 	, flagEnableMoveKeys(true)
-	, flagEnableKineticScrolling(false)
 	, keyMoveSpeed(0.00025)
 	, keyZoomSpeed(0.00025)
 	, flagMoveSlow(false)
@@ -98,7 +95,6 @@ void StelMovementMgr::init()
 	mouseZoomSpeed = conf->value("navigation/mouse_zoom",30).toInt();
 	flagEnableZoomKeys = conf->value("navigation/flag_enable_zoom_keys").toBool();
 	flagEnableMoveKeys = conf->value("navigation/flag_enable_move_keys").toBool();
-	flagEnableKineticScrolling = conf->value("navigation/flag_enable_kinetic_scrolling",true).toBool();
 	keyMoveSpeed = conf->value("navigation/move_speed",0.0004f).toFloat();
 	keyZoomSpeed = conf->value("navigation/zoom_speed", 0.0004f).toFloat();
 	autoMoveDuration = conf->value ("navigation/auto_move_duration",1.5f).toFloat();
@@ -309,18 +305,6 @@ void StelMovementMgr::handleMouseWheel(QWheelEvent* event)
 	zoomTo(getAimFov() * zoomFactor, zoomDuration);
 
 	event->accept();
-}
-
-void StelMovementMgr::listKineticScrolling(QList<QWidget *> addscroll)
-{
-	if (flagEnableKineticScrolling == false)
-		return;
-
-	foreach(QWidget * w, addscroll)
-	{
-		QScroller::grabGesture(w, QScroller::LeftMouseButtonGesture);
-		QScroller::scroller(w);
-	}
 }
 
 void StelMovementMgr::addTimeDragPoint(int x, int y)

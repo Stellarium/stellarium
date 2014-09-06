@@ -27,8 +27,7 @@
 #include "ShortcutLineEdit.hpp"
 #include "ShortcutsDialog.hpp"
 #include "ui_shortcutsDialog.h"
-#include "StelMovementMgr.hpp"
-#include "StelModuleMgr.hpp"
+#include "StelGui.hpp"
 
 
 ShortcutsFilterModel::ShortcutsFilterModel(QObject* parent) :
@@ -61,11 +60,12 @@ bool ShortcutsFilterModel::filterAcceptsRow(int source_row, const QModelIndex &s
 }
 
 
-ShortcutsDialog::ShortcutsDialog(QObject* parent) :
+ShortcutsDialog::ShortcutsDialog(StelGui* agui, QObject* parent) :
 	StelDialog(parent),
 	ui(new Ui_shortcutsDialogForm),
 	filterModel(new ShortcutsFilterModel(this)),
-	mainModel(new QStandardItemModel(this))
+	mainModel(new QStandardItemModel(this)),
+	gui(agui)
 {
 	actionMgr = StelApp::getInstance().getStelActionManager();
 }
@@ -281,8 +281,6 @@ void ShortcutsDialog::switchToEditors(const QModelIndex& index)
 
 void ShortcutsDialog::createDialogContent()
 {
-	StelMovementMgr* mvmgr = GETSTELMODULE(StelMovementMgr);
-
 	ui->setupUi(dialog);
 	
 	resetModel();
@@ -298,7 +296,7 @@ void ShortcutsDialog::createDialogContent()
 	//Kinetic scrolling for tablet pc and pc
 	QList<QWidget *> addscroll;
 	addscroll << ui->shortcutsTreeView;
-	mvmgr->listKineticScrolling(addscroll);
+	gui->installKineticScrolling(addscroll);
 
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
 	connect(ui->shortcutsTreeView->selectionModel(),

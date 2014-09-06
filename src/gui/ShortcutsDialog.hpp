@@ -33,6 +33,8 @@ class ShortcutLineEdit;
 class QStandardItemModel;
 class QStandardItem;
 
+class StelGui;
+
 
 //! Custom filter class for filtering tree sub-items.
 //! (The standard QSortFilterProxyModel shows child items only if the
@@ -55,7 +57,7 @@ class ShortcutsDialog : public StelDialog
 	Q_OBJECT
 
 public:
-	ShortcutsDialog(QObject* parent);
+	ShortcutsDialog(StelGui* agui, QObject* parent);
 	~ShortcutsDialog();
 
 	//! higlight items that have collisions with current lineEdits' state according to css.
@@ -90,6 +92,8 @@ protected:
 	virtual void createDialogContent();
 
 private:
+	StelGui* gui;
+
 	//! checks whether given item can be changed by editors.
 	static bool itemIsEditable(QStandardItem *item);
 	//! Concatenate the header, key codes and footer to build

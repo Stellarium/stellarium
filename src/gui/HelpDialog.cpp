@@ -53,13 +53,12 @@
 #include "StelStyle.hpp"
 #include "StelActionMgr.hpp"
 #include "StelJsonParser.hpp"
-#include "StelMovementMgr.hpp"
-#include "StelModuleMgr.hpp"
 
-HelpDialog::HelpDialog(QObject* parent)
+HelpDialog::HelpDialog(StelGui* agui, QObject* parent)
 	: StelDialog(parent)
 	, updateState(CompleteNoUpdates)
 	, downloadMgr(NULL)
+	, gui(agui)
 {
 	ui = new Ui_helpDialogForm;
 
@@ -99,8 +98,6 @@ void HelpDialog::styleChanged()
 
 void HelpDialog::createDialogContent()
 {
-	StelMovementMgr* mvmgr = GETSTELMODULE(StelMovementMgr);
-
 	ui->setupUi(dialog);
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
 	ui->stackedWidget->setCurrentIndex(0);
@@ -132,7 +129,7 @@ void HelpDialog::createDialogContent()
 	//Kinetic scrolling for tablet pc and pc
 	QList<QWidget *> addscroll;
 	addscroll << ui->helpBrowser << ui->aboutBrowser << ui->logBrowser;
-	mvmgr->listKineticScrolling(addscroll);
+	gui->installKineticScrolling(addscroll);
 
 	// Help page
 	updateText();

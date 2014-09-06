@@ -30,6 +30,8 @@
 // pre declaration of the ui class
 class Ui_searchDialogForm;
 
+class StelGui;
+
 struct stringLengthCompare
 {
 	bool operator()(const QString &s1, const QString &s2) const
@@ -75,7 +77,7 @@ class SearchDialog : public StelDialog
 	Q_OBJECT
 
 public:
-	SearchDialog(QObject* parent);
+	SearchDialog(StelGui* agui, QObject* parent);
 	virtual ~SearchDialog();
 	//! Notify that the application style changed
 	void styleChanged();
@@ -131,6 +133,8 @@ private slots:
 	void pasteAndGo();
 
 private:
+	StelGui* gui;
+
 	class SimbadSearcher* simbadSearcher;
 	class SimbadLookupReply* simbadReply;
 	QMap<QString, Vec3d> simbadResults;

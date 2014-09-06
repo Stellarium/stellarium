@@ -44,7 +44,6 @@
 #include "StelGui.hpp"
 #include "StelGuiItems.hpp"
 #include "StelActionMgr.hpp"
-#include "StelMovementMgr.hpp"
 
 #include <QDebug>
 #include <QFrame>
@@ -55,7 +54,7 @@
 #include <QDialog>
 #include <QStringList>
 
-ViewDialog::ViewDialog(QObject* parent) : StelDialog(parent)
+ViewDialog::ViewDialog(StelGui* agui, QObject* parent) : StelDialog(parent), gui(agui)
 {
 	ui = new Ui_viewDialogForm;
 	addRemoveLandscapesDialog = NULL;
@@ -114,8 +113,6 @@ void ViewDialog::connectGroupBox(QGroupBox* groupBox, const QString& actionId)
 
 void ViewDialog::createDialogContent()
 {
-	StelMovementMgr* mvmgr = GETSTELMODULE(StelMovementMgr);
-
 	ui->setupUi(dialog);
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
 
@@ -128,7 +125,7 @@ void ViewDialog::createDialogContent()
 	//Kinetic scrolling for tablet pc and pc
 	QList<QWidget *> addscroll;
 	addscroll << ui->projectionListWidget << ui->culturesListWidget << ui->skyCultureTextBrowser << ui->landscapesListWidget;
-	mvmgr->listKineticScrolling(addscroll);
+	gui->installKineticScrolling(addscroll);
 
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 
