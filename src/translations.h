@@ -230,6 +230,7 @@ class Translations
 		N_("Korean");
 		N_("Lakota");
 		N_("Maori");
+		N_("Mongolian");
 		N_("Navajo");
 		N_("Norse");
 		N_("Polynesian");
