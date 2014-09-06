@@ -30,11 +30,13 @@ class QListWidgetItem;
 class AddRemoveLandscapesDialog;
 class AtmosphereDialog;
 
+class StelGui;
+
 class ViewDialog : public StelDialog
 {
 Q_OBJECT
 public:
-	ViewDialog(QObject* parent);
+	ViewDialog(StelGui* agui, QObject* parent);
 	virtual ~ViewDialog();
 	//! Notify that the application style changed
 	void styleChanged();
@@ -75,6 +77,8 @@ private slots:
 
 	void changePage(QListWidgetItem *current, QListWidgetItem *previous);
 private:
+	StelGui* gui;
+
 	//! convenience method to link a checkbox to a StelAction.
 	void connectCheckBox(class QCheckBox* checkBox, const QString& actionId);
 	void connectGroupBox(class QGroupBox* groupBox, const QString& actionId);

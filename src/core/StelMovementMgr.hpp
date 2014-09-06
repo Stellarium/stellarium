@@ -92,9 +92,6 @@ public:
 
 	void setDragTriggerDistance(float d) {dragTriggerDistance=d;}
 
-	//! Kinetic scrolling for lists.
-	void listKineticScrolling(QList<QWidget *> addscroll);
-
 public slots:
 	//! Toggle current mount mode between equatorial and altazimuthal
 	void toggleMountMode() {if (getMountMode()==MountAltAzimuthal) setMountMode(MountEquinoxEquatorial); else setMountMode(MountAltAzimuthal);}
@@ -262,7 +259,6 @@ private:
 
 	bool flagEnableZoomKeys;
 	bool flagEnableMoveKeys;
-	bool flagEnableKineticScrolling;
 	float keyMoveSpeed;              // Speed of keys movement
 	float keyZoomSpeed;              // Speed of keys zoom
 	bool flagMoveSlow;
