@@ -139,11 +139,6 @@ public slots:
 	//! Set whether keys can control movement
 	void setFlagEnableMoveKeys(bool b) {flagEnableMoveKeys=b;}
 
-	//! Get whether keys can control kinetic scrolling
-	bool getFlagEnableKineticScrolling() const { return flagEnableKineticScrolling;}
-	//! Set whether keys can control kinetic scrolling
-	void setFlagEnableKineticScrolling(bool b) {flagEnableKineticScrolling = b;}
-
 	//! Get whether being at the edge of the screen activates movement
 	bool getFlagEnableMoveAtScreenEdge() const {return flagEnableMoveAtScreenEdge;}
 	//! Set whether being at the edge of the screen activates movement
