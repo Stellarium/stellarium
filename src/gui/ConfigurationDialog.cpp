@@ -160,7 +160,7 @@ void ConfigurationDialog::createDialogContent()
 	//Kinetic scrolling for tablet pc and pc
 	QList<QWidget *> addscroll;
 	addscroll << ui->pluginsListWidget << ui->scriptListWidget;
-	mvmgr->listKineticScrolling(addscroll);
+	gui->installKineticScrolling(addscroll);
 
 	// Selected object info
 	if (gui->getInfoTextFilters() == StelObject::InfoStringGroup(0))
