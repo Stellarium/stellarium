@@ -82,7 +82,6 @@ StelMovementMgr::StelMovementMgr(StelCore* acore)
 
 StelMovementMgr::~StelMovementMgr()
 {
-	StelApp::getInstance().getSettings()->setValue("navigation/flag_enable_kinetic_scrolling", flagEnableKineticScrolling);
 }
 
 void StelMovementMgr::init()
