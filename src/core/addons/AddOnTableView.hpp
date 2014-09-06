@@ -52,6 +52,7 @@ signals:
 
 public slots:
 	void setAllChecked(bool checked);
+	void slotDataUpdated();
 
 private slots:
 	void scrollValueChanged(int);

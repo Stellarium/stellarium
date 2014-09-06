@@ -70,6 +70,7 @@ public:
 	StelAddOn* getStelAddOnInstance(QString category) { return m_pStelAddOns.value(category); }
 
 signals:
+	void dataUpdated();
 	void updateTableViews();
 	void skyCulturesChanged();
 

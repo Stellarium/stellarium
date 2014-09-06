@@ -19,6 +19,7 @@
 
 #include <QHeaderView>
 #include <QScrollBar>
+#include <QSqlQuery>
 #include <QStringBuilder>
 
 #include "AddOnTableProxyModel.hpp"
@@ -48,6 +49,9 @@ AddOnTableView::AddOnTableView(QWidget* parent)
 		this, SIGNAL(rowChecked(int, bool)));
 	connect(m_pCheckboxGroup, SIGNAL(buttonToggled(int, bool)),
 		this, SLOT(slotRowChecked(int, bool)));
+
+	connect(&StelApp::getInstance().getStelAddOnMgr(), SIGNAL(dataUpdated()),
+		this, SLOT(slotDataUpdated()));
 }
 
 AddOnTableView::~AddOnTableView()
@@ -63,9 +67,14 @@ AddOnTableView::~AddOnTableView()
 	m_pCheckboxGroup->deleteLater();
 }
 
+void AddOnTableView::slotDataUpdated() {
+	((AddOnTableProxyModel*) model())->sourceModel()->query().exec();
+	update();
+}
+
 void AddOnTableView::scrollValueChanged(int)
 {
-	// hack to ensures paint update
+	// hack to ensure repaint
 	hide();
 	show();
 }
