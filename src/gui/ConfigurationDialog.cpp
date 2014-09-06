@@ -206,11 +206,9 @@ void ConfigurationDialog::createDialogContent()
 	connect(ui->fixedDateTimeEdit, SIGNAL(dateTimeChanged(QDateTime)), core, SLOT(setPresetSkyTime(QDateTime)));
 
 	ui->enableKeysNavigationCheckBox->setChecked(mvmgr->getFlagEnableMoveKeys() || mvmgr->getFlagEnableZoomKeys());
-	ui->enableKineticScrollingCheckBox->setChecked(mvmgr->getFlagEnableKineticScrolling());
 	ui->enableMouseNavigationCheckBox->setChecked(mvmgr->getFlagEnableMouseNavigation());
 	connect(ui->enableKeysNavigationCheckBox, SIGNAL(toggled(bool)), mvmgr, SLOT(setFlagEnableMoveKeys(bool)));
 	connect(ui->enableKeysNavigationCheckBox, SIGNAL(toggled(bool)), mvmgr, SLOT(setFlagEnableZoomKeys(bool)));
-	connect(ui->enableKineticScrollingCheckBox, SIGNAL(toggled(bool)), mvmgr, SLOT(setFlagEnableKineticScrolling(bool)));
 	connect(ui->enableMouseNavigationCheckBox, SIGNAL(toggled(bool)), mvmgr, SLOT(setFlagEnableMouseNavigation(bool)));
 	connect(ui->fixedDateTimeCurrentButton, SIGNAL(clicked()), this, SLOT(setFixedDateTimeToCurrent()));
 	connect(ui->editShortcutsPushButton, SIGNAL(clicked()),
@@ -633,7 +631,6 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	conf->setValue("navigation/flag_enable_zoom_keys", mvmgr->getFlagEnableZoomKeys());
 	conf->setValue("navigation/flag_enable_mouse_navigation", mvmgr->getFlagEnableMouseNavigation());
 	conf->setValue("navigation/flag_enable_move_keys", mvmgr->getFlagEnableMoveKeys());
-	conf->setValue("navigation/flag_enable_kinetic_scrolling", mvmgr->getFlagEnableKineticScrolling());
 	conf->setValue("navigation/startup_time_mode", core->getStartupTimeMode());
 	conf->setValue("navigation/today_time", core->getInitTodayTime());
 	conf->setValue("navigation/preset_sky_time", core->getPresetSkyTime());
