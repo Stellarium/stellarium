@@ -293,26 +293,26 @@ void DefineTimeZoneWindow::updateDayNumberMaximum(int monthIndex, QSpinBox *spin
 	int maximum = 31;
 	switch (monthIndex)
 	{
-	case 0: //January
-	case 2: //March
-	case 4: //May
-	case 6: //July
-	case 7: //August
-	case 9: //October
-	case 11: //December
-		maximum = 31;
-		break;
-	case 3: //April
-	case 5: //June
-	case 8: //September
-	case 10: //November
-		maximum = 30;
-		break;
-	case 1: //February
-		maximum = 29;
-		break;
-	default:
-		;//
+		case 0: //January
+		case 2: //March
+		case 4: //May
+		case 6: //July
+		case 7: //August
+		case 9: //October
+		case 11: //December
+			maximum = 31;
+			break;
+		case 3: //April
+		case 5: //June
+		case 8: //September
+		case 10: //November
+			maximum = 30;
+			break;
+		case 1: //February
+			maximum = 29;
+			break;
+		default:
+			;//
 	}
 
 	if (spinBoxDay->value() > maximum)
