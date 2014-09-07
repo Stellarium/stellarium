@@ -105,7 +105,7 @@ void AddOnWidget::init(int addonId)
 		if (textures.size() > 1) // display list just when it is a texture set
 		{
 			QStringList installedTextures;
-			installedTextures = StelApp::getInstance().getStelAddOnMgr().getStelAddOnInstance(TEXTURE)->checkInstalledAddOns();
+			installedTextures = StelApp::getInstance().getStelAddOnMgr().getStelAddOnInstance(CATEGORY_TEXTURE)->checkInstalledAddOns();
 			installedTextures = installedTextures.filter(info.idInstall);
 			for (int i=0; i < installedTextures.count(); i++) {
 				installedTextures[i] = installedTextures[i].split("/")[1];

@@ -35,12 +35,12 @@
 #include "StelAddOnDAO.hpp"
 
 // categories (database column addon.category)
-const QString CATALOG = "catalog";
-const QString LANDSCAPE = "landscape";
-const QString LANGUAGE_PACK = "language_pack";
-const QString SCRIPT = "script";
-const QString SKY_CULTURE = "sky_culture";
-const QString TEXTURE = "texture";
+const QString CATEGORY_CATALOG = "catalog";
+const QString CATEGORY_LANDSCAPE = "landscape";
+const QString CATEGORY_LANGUAGE_PACK = "language_pack";
+const QString CATEGORY_SCRIPT = "script";
+const QString CATEGORY_SKY_CULTURE = "sky_culture";
+const QString CATEGORY_TEXTURE = "texture";
 
 class StelAddOnMgr : public QObject
 {

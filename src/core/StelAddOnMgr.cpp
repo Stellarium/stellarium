@@ -70,12 +70,12 @@ StelAddOnMgr::StelAddOnMgr()
 	m_pStelAddOnDAO->init();
 
 	// creating sub-dirs
-	m_dirs.insert(CATALOG, m_sAddOnDir % CATALOG % "/");
-	m_dirs.insert(LANDSCAPE, m_sAddOnDir % LANDSCAPE % "/");
-	m_dirs.insert(LANGUAGE_PACK, m_sAddOnDir % LANGUAGE_PACK % "/");
-	m_dirs.insert(SCRIPT, m_sAddOnDir % SCRIPT % "/");
-	m_dirs.insert(SKY_CULTURE, m_sAddOnDir % SKY_CULTURE % "/");
-	m_dirs.insert(TEXTURE, m_sAddOnDir % TEXTURE % "/");
+	m_dirs.insert(CATEGORY_CATALOG, m_sAddOnDir % CATEGORY_CATALOG % "/");
+	m_dirs.insert(CATEGORY_LANDSCAPE, m_sAddOnDir % CATEGORY_LANDSCAPE % "/");
+	m_dirs.insert(CATEGORY_LANGUAGE_PACK, m_sAddOnDir % CATEGORY_LANGUAGE_PACK % "/");
+	m_dirs.insert(CATEGORY_SCRIPT, m_sAddOnDir % CATEGORY_SCRIPT % "/");
+	m_dirs.insert(CATEGORY_SKY_CULTURE, m_sAddOnDir % CATEGORY_SKY_CULTURE % "/");
+	m_dirs.insert(CATEGORY_TEXTURE, m_sAddOnDir % CATEGORY_TEXTURE % "/");
 	QHashIterator<QString, QString> it(m_dirs);
 	while (it.hasNext()) {
 		it.next();
@@ -83,14 +83,14 @@ StelAddOnMgr::StelAddOnMgr()
 	}
 
 	// Init sub-classes
-	m_pStelAddOns.insert(CATALOG, new AOCatalog());
-	m_pStelAddOns.insert(LANDSCAPE, new AOLandscape());
-	m_pStelAddOns.insert(LANGUAGE_PACK, new AOLanguagePack());
-	m_pStelAddOns.insert(SCRIPT, new AOScript());
-	m_pStelAddOns.insert(SKY_CULTURE, new AOSkyCulture());
-	m_pStelAddOns.insert(TEXTURE, new AOTexture());
+	m_pStelAddOns.insert(CATEGORY_CATALOG, new AOCatalog());
+	m_pStelAddOns.insert(CATEGORY_LANDSCAPE, new AOLandscape());
+	m_pStelAddOns.insert(CATEGORY_LANGUAGE_PACK, new AOLanguagePack());
+	m_pStelAddOns.insert(CATEGORY_SCRIPT, new AOScript());
+	m_pStelAddOns.insert(CATEGORY_SKY_CULTURE, new AOSkyCulture());
+	m_pStelAddOns.insert(CATEGORY_TEXTURE, new AOTexture());
 
-	connect(m_pStelAddOns.value(SKY_CULTURE), SIGNAL(skyCulturesChanged()),
+	connect(m_pStelAddOns.value(CATEGORY_SKY_CULTURE), SIGNAL(skyCulturesChanged()),
 		this, SIGNAL(skyCulturesChanged()));
 
 	// refresh add-ons statuses (it checks which are installed or not)
@@ -125,11 +125,11 @@ void StelAddOnMgr::refreshAddOnStatuses()
 			continue;
 		}
 
-		if (aos.key() == CATALOG || aos.key() == LANGUAGE_PACK)
+		if (aos.key() == CATEGORY_CATALOG || aos.key() == CATEGORY_LANGUAGE_PACK)
 		{
 			m_pStelAddOnDAO->markAddOnsAsInstalledFromMd5(list);
 		}
-		else if (aos.key() == TEXTURE)
+		else if (aos.key() == CATEGORY_TEXTURE)
 		{
 			m_pStelAddOnDAO->markTexturesAsInstalled(list);
 		}
@@ -153,9 +153,9 @@ bool StelAddOnMgr::updateCatalog(QString webresult)
 	}
 
 	// download thumbnails
-	m_thumbnails = m_pStelAddOnDAO->getThumbnails(LANDSCAPE);
-	m_thumbnails = m_thumbnails.unite(m_pStelAddOnDAO->getThumbnails(SCRIPT));
-	m_thumbnails = m_thumbnails.unite(m_pStelAddOnDAO->getThumbnails(TEXTURE));
+	m_thumbnails = m_pStelAddOnDAO->getThumbnails(CATEGORY_LANDSCAPE);
+	m_thumbnails = m_thumbnails.unite(m_pStelAddOnDAO->getThumbnails(CATEGORY_SCRIPT));
+	m_thumbnails = m_thumbnails.unite(m_pStelAddOnDAO->getThumbnails(CATEGORY_TEXTURE));
 	QHashIterator<QString, QString> i(m_thumbnails); // <id_install, url>
 	while (i.hasNext()) {
 	    i.next();
