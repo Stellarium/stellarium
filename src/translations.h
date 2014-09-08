@@ -223,6 +223,7 @@ class Translations
 		// Constellation cultures
 		N_("Arabic");
 		N_("Aztec");
+		N_("Boorong");
 		N_("Chinese");
 		N_("Egyptian");
 		N_("Inuit");
