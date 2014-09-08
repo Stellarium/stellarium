@@ -63,6 +63,14 @@ void AddOnDialog::createDialogContent()
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()),this, SLOT(retranslate()));
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 
+	// naming tables according to the category
+	ui->catalogsTableView->setObjectName(CATEGORY_CATALOG);
+	ui->landscapeTableView->setObjectName(CATEGORY_LANDSCAPE);
+	ui->languageTableView->setObjectName(CATEGORY_LANGUAGE_PACK);
+	ui->scriptsTableView->setObjectName(CATEGORY_SCRIPT);
+	ui->starloreTableView->setObjectName(CATEGORY_SKY_CULTURE);
+	ui->texturesTableView->setObjectName(CATEGORY_TEXTURE);
+
 	// hashing all tableViews
 	m_tableViews.insert(CATALOG, ui->catalogsTableView);
 	m_tableViews.insert(LANDSCAPE, ui->landscapeTableView);
