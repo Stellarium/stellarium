@@ -58,6 +58,11 @@ void SolarSystemManagerWindow::createDialogContent()
 {
 	ui->setupUi(dialog);
 
+	//Kinetic scrolling for tablet pc and pc
+	QList<QWidget *> addscroll;
+	addscroll << ui->listWidgetObjects;
+	installKineticScrolling(addscroll);
+
 	//Signals
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()),
 	        this, SLOT(retranslate()));
