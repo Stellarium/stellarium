@@ -26,7 +26,6 @@
 #include "StelMovementMgr.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelTranslator.hpp"
-#include "StelGui.hpp"
 
 #include "StelObjectMgr.hpp"
 #include "StelUtils.hpp"
@@ -124,7 +123,7 @@ void CompletionLabel::updateText()
 
 const char* SearchDialog::DEF_SIMBAD_URL = "http://simbad.u-strasbg.fr/";
 
-SearchDialog::SearchDialog(StelGui* agui, QObject* parent) : StelDialog(parent), simbadReply(NULL), gui(agui)
+SearchDialog::SearchDialog(QObject* parent) : StelDialog(parent), simbadReply(NULL)
 {
 	ui = new Ui_searchDialogForm;
 	simbadSearcher = new SimbadSearcher(this);
@@ -218,7 +217,7 @@ void SearchDialog::createDialogContent()
 	//Kinetic scrolling for tablet pc and pc
 	QList<QWidget *> addscroll;
 	addscroll << ui->objectsListWidget;
-	gui->installKineticScrolling(addscroll);
+	installKineticScrolling(addscroll);
 
 	connect(ui->RAAngleSpinBox, SIGNAL(valueChanged()), this, SLOT(manualPositionChanged()));
 	connect(ui->DEAngleSpinBox, SIGNAL(valueChanged()), this, SLOT(manualPositionChanged()));

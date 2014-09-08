@@ -54,7 +54,7 @@
 #include <QDialog>
 #include <QStringList>
 
-ViewDialog::ViewDialog(StelGui* agui, QObject* parent) : StelDialog(parent), gui(agui)
+ViewDialog::ViewDialog(QObject* parent) : StelDialog(parent)
 {
 	ui = new Ui_viewDialogForm;
 	addRemoveLandscapesDialog = NULL;
@@ -125,7 +125,7 @@ void ViewDialog::createDialogContent()
 	//Kinetic scrolling for tablet pc and pc
 	QList<QWidget *> addscroll;
 	addscroll << ui->projectionListWidget << ui->culturesListWidget << ui->skyCultureTextBrowser << ui->landscapesListWidget;
-	gui->installKineticScrolling(addscroll);
+	StelDialog::installKineticScrolling(addscroll);
 
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 

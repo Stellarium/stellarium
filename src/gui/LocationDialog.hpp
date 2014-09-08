@@ -26,13 +26,12 @@
 class Ui_locationDialogForm;
 class QModelIndex;
 class StelLocation;
-class StelGui;
 
 class LocationDialog : public StelDialog
 {
 	Q_OBJECT
 public:
-	LocationDialog(StelGui* agui, QObject* parent);
+	LocationDialog(QObject* parent);
 	virtual ~LocationDialog();
 	//! Notify that the application style changed
 	void styleChanged();
@@ -113,8 +112,6 @@ private slots:
 	void setDefaultLocation(bool state);
 	
 private:
-	StelGui* gui;
-
 	QString lastPlanet;
 	//! Updates the check state and the enabled/disabled status.
 	void updateDefaultLocationControls(bool currentIsDefault);
