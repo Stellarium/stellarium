@@ -1,5 +1,6 @@
 ADD_SUBDIRECTORY( arabic )
 ADD_SUBDIRECTORY( aztec )
+ADD_SUBDIRECTORY( boorong )
 ADD_SUBDIRECTORY( chinese ) 
 ADD_SUBDIRECTORY( egyptian ) 
 ADD_SUBDIRECTORY( inuit ) 
