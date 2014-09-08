@@ -164,7 +164,7 @@ void StelDialog::installKineticScrolling(QList<QWidget *> addscroll)
 
 	foreach(QWidget * w, addscroll)
 	{
-		QScroller::grabGesture(w, QScroller::LeftMouseButtonGesture);
+		QScroller::grabGesture(w, QScroller::TouchGesture); // Enable kinetic scrolling for devices with touch screens or a touchpads. Need testing!
 		QScroller::scroller(w);
 	}
 }
