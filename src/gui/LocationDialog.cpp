@@ -41,7 +41,7 @@
 #include <QTimer>
 #include <QStringListModel>
 
-LocationDialog::LocationDialog(StelGui* agui, QObject* parent) : StelDialog(parent), isEditingNew(false), gui(agui)
+LocationDialog::LocationDialog(QObject* parent) : StelDialog(parent), isEditingNew(false)
 {
 	ui = new Ui_locationDialogForm;
 }
@@ -90,7 +90,7 @@ void LocationDialog::createDialogContent()
 	//Kinetic scrolling for tablet pc and pc
 	QList<QWidget *> addscroll;
 	addscroll << ui->citiesListView;
-	gui->installKineticScrolling(addscroll);
+	installKineticScrolling(addscroll);
 
 	populatePlanetList();
 	populateCountryList();

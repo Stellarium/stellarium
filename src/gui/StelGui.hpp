@@ -91,9 +91,6 @@ public:
 	//! returns true if the gui has complted init process.
 	bool initComplete(void) const;
 
-	//! Kinetic scrolling for lists.
-	void installKineticScrolling(QList<QWidget *> addscroll);
-
 #ifdef ENABLE_SCRIPT_CONSOLE
 	ScriptConsole* getScriptConsole() {return scriptConsole;}
 #endif
@@ -116,11 +113,6 @@ public slots:
 	
 	//! Define whether the button toggling nebulae background should be visible
 	void setFlagShowNebulaBackgroundButton(bool b);
-
-	//! Get whether keys can control kinetic scrolling
-	bool getFlagEnableKineticScrolling() const { return flagEnableKineticScrolling; }
-    //! Set whether keys can control kinetic scrolling
-	void setFlagEnableKineticScrolling(bool b) { flagEnableKineticScrolling = b; }
 
 	//! Get the auto-hide status of the horizontal toolbar.
 	bool getAutoHideHorizontalButtonBar() const;
@@ -200,8 +192,6 @@ private:
 	StelButton* btShowNebulaeBackground;
 
 	bool initDone;
-
-	bool flagEnableKineticScrolling;
 
 	QSizeF savedProgressBarSize;
 

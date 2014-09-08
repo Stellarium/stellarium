@@ -73,7 +73,6 @@
 #include <QPalette>
 #include <QColor>
 #include <QAction>
-#include <QScroller>
 
 StelGuiBase* StelStandardGuiPluginInterface::getStelGuiBase() const
 {
@@ -105,7 +104,6 @@ StelGui::StelGui()
 	, flipVert(NULL)
 	, flipHoriz(NULL)
 	, flagShowNebulaBackgroundButton(false)
-	, flagEnableKineticScrolling(true)
 	, btShowNebulaeBackground(NULL)
 	, initDone(false)
 {
@@ -163,12 +161,12 @@ void StelGui::init(QGraphicsWidget *atopLevelGraphicsWidget)
 
 	StelGuiBase::init(atopLevelGraphicsWidget);
 	skyGui = new SkyGui(atopLevelGraphicsWidget);
-	locationDialog = new LocationDialog(this, atopLevelGraphicsWidget);
-	helpDialog = new HelpDialog(this, atopLevelGraphicsWidget);
+	locationDialog = new LocationDialog(atopLevelGraphicsWidget);
+	helpDialog = new HelpDialog(atopLevelGraphicsWidget);
 	dateTimeDialog = new DateTimeDialog(atopLevelGraphicsWidget);
-	searchDialog = new SearchDialog(this, atopLevelGraphicsWidget);
-	viewDialog = new ViewDialog(this, atopLevelGraphicsWidget);
-	shortcutsDialog = new ShortcutsDialog(this, atopLevelGraphicsWidget);
+	searchDialog = new SearchDialog(atopLevelGraphicsWidget);
+	viewDialog = new ViewDialog(atopLevelGraphicsWidget);
+	shortcutsDialog = new ShortcutsDialog(atopLevelGraphicsWidget);
 	configurationDialog = new ConfigurationDialog(this, atopLevelGraphicsWidget);
 #ifdef ENABLE_SCRIPT_CONSOLE
 	scriptConsole = new ScriptConsole();
@@ -359,8 +357,6 @@ void StelGui::init(QGraphicsWidget *atopLevelGraphicsWidget)
 	// add the flip buttons if requested in the config
 	setFlagShowFlipButtons(conf->value("gui/flag_show_flip_buttons", false).toBool());
 	setFlagShowNebulaBackgroundButton(conf->value("gui/flag_show_nebulae_background_button", false).toBool());
-
-	setFlagEnableKineticScrolling(conf->value("gui/flag_enable_kinetic_scrolling", true).toBool());
 
 	///////////////////////////////////////////////////////////////////////
 	// Create the main base widget
@@ -589,18 +585,6 @@ void StelGui::resumeScript()
 	StelApp::getInstance().getScriptMgr().resumeScript();
 }
 #endif
-
-void StelGui::installKineticScrolling(QList<QWidget *> addscroll)
-{
-	if (getFlagEnableKineticScrolling() == false)
-		return;
-
-	foreach(QWidget * w, addscroll)
-	{
-		QScroller::grabGesture(w, QScroller::LeftMouseButtonGesture);
-		QScroller::scroller(w);
-	}
-}
 
 void StelGui::setFlagShowFlipButtons(bool b)
 {
