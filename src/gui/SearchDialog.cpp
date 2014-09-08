@@ -214,6 +214,11 @@ void SearchDialog::createDialogContent()
 	ui->DEAngleSpinBox->setDisplayFormat(AngleSpinBox::DMSSymbols);
 	ui->DEAngleSpinBox->setPrefixType(AngleSpinBox::NormalPlus);
 
+	//Kinetic scrolling for tablet pc and pc
+	QList<QWidget *> addscroll;
+	addscroll << ui->objectsListWidget;
+	installKineticScrolling(addscroll);
+
 	connect(ui->RAAngleSpinBox, SIGNAL(valueChanged()), this, SLOT(manualPositionChanged()));
 	connect(ui->DEAngleSpinBox, SIGNAL(valueChanged()), this, SLOT(manualPositionChanged()));
     
