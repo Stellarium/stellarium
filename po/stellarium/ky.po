@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-09-05 10:26+0700\n"
-"PO-Revision-Date: 2014-09-03 13:17+0000\n"
+"PO-Revision-Date: 2014-09-08 01:24+0000\n"
 "Last-Translator: chyngyz <Unknown>\n"
 "Language-Team: Kirghiz <ky@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-09-06 06:14+0000\n"
+"X-Launchpad-Export-Date: 2014-09-08 06:27+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:106 src/core/modules/StarMgr.cpp:346
@@ -23,7 +23,7 @@ msgstr ""
 #: src/core/StelApp.cpp:473 src/core/StelCore.cpp:185
 #: src/core/StelSkyLayerMgr.cpp:87 src/StelMainView.cpp:302
 msgid "Display Options"
-msgstr ""
+msgstr "Көрсөтүү параметрлери"
 
 #: src/core/modules/ConstellationMgr.cpp:107
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:279
@@ -103,7 +103,7 @@ msgstr "Меридиандын сызыгы"
 #: src/core/modules/GridLinesMgr.cpp:703
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:360
 msgid "Horizon line"
-msgstr "Горизонттун сызыгы"
+msgstr "Горизонт сызыгы"
 
 #: src/core/modules/GridLinesMgr.cpp:704
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:336
@@ -227,7 +227,7 @@ msgstr "Күңүрт тумандуулук"
 
 #: src/core/modules/Nebula.cpp:393
 msgid "Irregular galaxy"
-msgstr ""
+msgstr "Туура эмес галактика"
 
 #: src/core/modules/Nebula.cpp:396
 msgid "Cluster associated with nebulosity"
@@ -243,7 +243,7 @@ msgstr "Документтелбеген тип"
 
 #: src/core/modules/NebulaMgr.cpp:126
 msgid "Deep-sky objects"
-msgstr ""
+msgstr "Терең космостун объектилери"
 
 #: src/core/modules/Planet.cpp:180 src/core/modules/MinorPlanet.cpp:227
 #: src/core/modules/MinorPlanet.cpp:231 src/core/modules/Comet.cpp:163
@@ -267,7 +267,7 @@ msgstr "Аралыгы: %1 а. б. (%2 км)"
 #: src/core/modules/Comet.cpp:200
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 Mio km)"
-msgstr "Аралыгы: %1 а. б. (%2 Mio км)"
+msgstr "Аралыгы: %1 а. б. (%2 млн. км)"
 
 #: src/core/modules/Planet.cpp:221
 #, qt-format
@@ -329,7 +329,7 @@ msgstr "Күнгө карата аралык: %1 а. б. (%2 км)"
 #: src/core/modules/Comet.cpp:183
 #, no-c-format, qt-format
 msgid "Distance from Sun: %1AU (%2 Mio km)"
-msgstr "Күнгө карата аралык: %1 а. б. (%2 Mio км)"
+msgstr "Күнгө карата аралык: %1 а. б. (%2 млн. км)"
 
 #: src/core/modules/Comet.cpp:210
 #, no-c-format, qt-format
@@ -344,7 +344,7 @@ msgstr ""
 #: src/core/modules/Comet.cpp:223
 #, no-c-format, qt-format
 msgid "Gas tail length (estimate): %1 Mio km"
-msgstr ""
+msgstr "Газ куйругунун узундугу (болжол менен): %1 млн. км"
 
 #: src/core/modules/SolarSystem.cpp:157
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:308
@@ -375,11 +375,11 @@ msgstr ""
 
 #: src/core/modules/StarWrapper.cpp:144
 msgid "eruptive variable star"
-msgstr ""
+msgstr "эрупциялуу өзгөрмө жылдыз"
 
 #: src/core/modules/StarWrapper.cpp:146
 msgid "pulsating variable star"
-msgstr ""
+msgstr "пульсациялоочу өзгөрмө жылдыз"
 
 #: src/core/modules/StarWrapper.cpp:148
 msgid "rotating variable star"
@@ -395,7 +395,7 @@ msgstr ""
 
 #: src/core/modules/StarWrapper.cpp:157
 msgid "variable star"
-msgstr ""
+msgstr "өзгөрмө жылдыз"
 
 #: src/core/modules/StarWrapper.cpp:161
 msgid "double star"
@@ -428,7 +428,7 @@ msgstr "Аралыгы: %1 ж. жылы"
 #: plugins/Exoplanets/src/Exoplanet.cpp:201
 #, qt-format
 msgid "Spectral Type: %1"
-msgstr ""
+msgstr "Спектралдык класс: %1"
 
 #: src/core/modules/StarWrapper.cpp:227
 #, qt-format
@@ -507,7 +507,7 @@ msgstr "Убакыттын ылдамдыгын (бир аз) төмөндөтү
 
 #: src/core/StelCore.cpp:191
 msgid "Set normal time rate"
-msgstr ""
+msgstr "Нормалдуу убакыт ылдамдыгына коюу"
 
 #: src/core/StelCore.cpp:192
 msgid "Set time rate to zero"
@@ -515,7 +515,7 @@ msgstr ""
 
 #: src/core/StelCore.cpp:193
 msgid "Set time to now"
-msgstr ""
+msgstr "Убакытты азырга коюу"
 
 #: src/core/StelCore.cpp:194
 msgid "Add 1 solar hour"
@@ -1015,12 +1015,12 @@ msgstr ""
 #: src/core/StelObject.cpp:117
 #, qt-format
 msgid "RA/DE (J2000): %1/%2"
-msgstr ""
+msgstr "Түз чыгыш/Эңкейүү (J2000): %1/%2"
 
 #: src/core/StelObject.cpp:124
 #, qt-format
 msgid "RA/DE (of date): %1/%2"
-msgstr ""
+msgstr "Түз чыгыш/Эңкейүү (дата боюнча): %1/%2"
 
 #: src/core/StelObject.cpp:131
 #, qt-format
@@ -1030,7 +1030,7 @@ msgstr ""
 #: src/core/StelObject.cpp:143 src/core/StelObject.cpp:147
 #, qt-format
 msgid "Hour angle/DE: %1/%2"
-msgstr ""
+msgstr "Саат бурчу/DE: %1/%2"
 
 #: src/core/StelObject.cpp:143 src/core/StelObject.cpp:165
 msgid "(apparent)"
@@ -1049,7 +1049,7 @@ msgstr "Эклиптика (J2000): %1/%2"
 #: src/core/StelObject.cpp:186
 #, qt-format
 msgid "Ecliptic (of date): %1/%2"
-msgstr ""
+msgstr "Эклиптика (дата боюнча): %1/%2"
 
 #: src/core/StelSkyLayerMgr.cpp:87
 msgid "Deep-sky objects background images"
@@ -1062,11 +1062,11 @@ msgstr ""
 
 #: src/core/StelMovementMgr.cpp:130
 msgid "Switch between equatorial and azimuthal mount"
-msgstr ""
+msgstr "Экватордук менен азимуттук чыгуунун арасынан которуу"
 
 #: src/core/StelMovementMgr.cpp:131
 msgid "Center on selected object"
-msgstr ""
+msgstr "Тандалган объектиге каратуу"
 
 #: src/core/StelMovementMgr.cpp:132
 msgid "Zoom in on selected object"
@@ -1597,7 +1597,7 @@ msgstr "Дата/убакыт терезеси"
 
 #: src/gui/StelGui.cpp:203
 msgid "Location window"
-msgstr ""
+msgstr "Жайгашкан жери терезеси"
 
 #: src/gui/StelGui.cpp:204
 msgid "Shortcuts window"
@@ -2327,12 +2327,12 @@ msgstr ""
 #. TRANSLATORS: Name of supernova SN 1572A and script name
 #: src/translations.h:164
 msgid "Tycho's Supernova"
-msgstr "Тихо Брагенин жаңы жылдызы"
+msgstr "Тихо Брагенин өтө жаңы жылдызы"
 
 #. TRANSLATORS: Name of supernova SN 1604A
 #: src/translations.h:166
 msgid "Kepler's Supernova"
-msgstr "Иоганн Кеплердин жаңы жылдызы"
+msgstr "Иоганн Кеплердин өтө жаңы жылдызы"
 
 #: src/translations.h:169
 msgid "N"
@@ -2637,7 +2637,7 @@ msgstr ""
 #. TRANSLATORS: Name of script
 #: src/translations.h:302
 msgid "Sun from different planets"
-msgstr ""
+msgstr "Башка планеталардын күндөрү"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:304
@@ -3853,7 +3853,7 @@ msgstr ""
 
 #: src/translations.h:615
 msgid "Copy &Link Location"
-msgstr ""
+msgstr "&Шилтеменин дарегин көчүрүү"
 
 #: src/ui_dateTimeDialogGui.h:369
 msgid "Julian Date"
@@ -3887,7 +3887,7 @@ msgstr "Жаңыртуу"
 #: src/ui_locationDialogGui.h:403
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:145
 msgid "Location"
-msgstr ""
+msgstr "Жайгашкан жери"
 
 #: src/ui_locationDialogGui.h:407 src/ui_locationDialogGui.h:410
 msgid ""
@@ -3900,16 +3900,16 @@ msgstr ""
 
 #: src/ui_locationDialogGui.h:416
 msgid "Reset Location List"
-msgstr ""
+msgstr "Жайгашкан жеринин тизмесин алып таштоо"
 
 #: src/ui_locationDialogGui.h:417
 msgid "Current location information"
-msgstr ""
+msgstr "Учурдагы жайгашкан жериңиз тууралуу маалымат"
 
 #: src/ui_locationDialogGui.h:418
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:146
 msgid "Latitude:"
-msgstr "Кеңдиги:"
+msgstr "Кеңдик:"
 
 #: src/ui_locationDialogGui.h:420 src/ui_locationDialogGui.h:424
 msgid ""
@@ -3920,12 +3920,12 @@ msgstr ""
 #: src/ui_locationDialogGui.h:422
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:149
 msgid "Longitude:"
-msgstr "Узундугу:"
+msgstr "Узундук:"
 
 #: src/ui_locationDialogGui.h:426
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:152
 msgid "Altitude:"
-msgstr "Бийиктиги:"
+msgstr "Бийиктик:"
 
 #: src/ui_locationDialogGui.h:428
 msgid "Enter the altitude in meter"
@@ -3949,15 +3949,15 @@ msgstr "Аты/шаары:"
 
 #: src/ui_locationDialogGui.h:435
 msgid "New Location"
-msgstr "Жаңы жайгашкан жери"
+msgstr "Жаңы жер"
 
 #: src/ui_locationDialogGui.h:436
 msgid "Country:"
-msgstr "Өлкөсү:"
+msgstr "Өлкө:"
 
 #: src/ui_locationDialogGui.h:437
 msgid "Planet:"
-msgstr "Планетасы:"
+msgstr "Планета:"
 
 #: src/ui_locationDialogGui.h:438
 msgid "Use current location as default"
@@ -3965,7 +3965,7 @@ msgstr ""
 
 #: src/ui_locationDialogGui.h:439
 msgid "Get location from Network"
-msgstr ""
+msgstr "IP-дарегиңиз боюнча аныктоо"
 
 #: src/ui_searchDialogGui.h:560
 msgid "Find Object"
@@ -4085,7 +4085,7 @@ msgstr "Объект"
 
 #: src/ui_searchDialogGui.h:646
 msgid "RA/Dec (J2000):"
-msgstr ""
+msgstr "Түз чыгыш/Эңк. (J2000):"
 
 #: src/ui_searchDialogGui.h:647
 msgid "Position"
@@ -4145,7 +4145,7 @@ msgstr "Асман"
 
 #: src/ui_viewDialog.h:1146
 msgid "Markings"
-msgstr "Белгилөөлөр"
+msgstr "Белгилер"
 
 #: src/ui_viewDialog.h:1148
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:406
@@ -4159,7 +4159,7 @@ msgstr "Жылдыз таануу"
 
 #: src/ui_viewDialog.h:1153
 msgid "Labels and Markers"
-msgstr "Аталыштар жана белгилер"
+msgstr "Аталыштар жана маркерлер"
 
 #: src/ui_viewDialog.h:1157
 msgid ""
@@ -4347,7 +4347,7 @@ msgstr "Меридиандын сызыгын көрсөтүү"
 
 #: src/ui_viewDialog.h:1237
 msgid "Show horizon line"
-msgstr "Горизонттун сызыгын көрсөтүү"
+msgstr "Горизонт сызыгын көрсөтүү"
 
 #: src/ui_viewDialog.h:1241
 msgid "Show ecliptic line"
@@ -4399,7 +4399,7 @@ msgstr "Ырастоо"
 
 #: src/ui_configurationDialog.h:1004
 msgid "Program language"
-msgstr "Программа тили"
+msgstr "Программанын тили"
 
 #: src/ui_configurationDialog.h:1005
 msgid "Check updates"
@@ -4507,7 +4507,7 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:1045
 msgid "Right ascension/Declination (of date)"
-msgstr "Түз чыгыш/Эңкейүү (of date)"
+msgstr "Түз чыгыш/Эңкейүү (дата боюнча)"
 
 #: src/ui_configurationDialog.h:1046
 msgid "Catalog number(s)"
@@ -4552,7 +4552,7 @@ msgstr "Түр"
 
 #: src/ui_configurationDialog.h:1063
 msgid "Spectral class, nebula type, etc."
-msgstr ""
+msgstr "Спектралдык класс, тумандуулуктун тиби, ж. б."
 
 #: src/ui_configurationDialog.h:1065
 msgid "Additional information"
@@ -4564,7 +4564,7 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:1069
 msgid "Hour angle/Declination"
-msgstr ""
+msgstr "Саат бурчу/Эңкейүү"
 
 #: src/ui_configurationDialog.h:1071
 msgid "Horizontal coordinates"
@@ -4867,7 +4867,7 @@ msgstr ""
 
 #: src/ui_AtmosphereDialog.h:175
 msgid "Atmosphere Details"
-msgstr ""
+msgstr "Атмосферанын параметрлери"
 
 #: src/ui_AtmosphereDialog.h:177
 msgid "Refraction Settings"
@@ -5864,7 +5864,7 @@ msgstr "TEME координаталары (км): %1"
 #: plugins/Satellites/src/Satellite.cpp:298
 #, qt-format
 msgid "TEME velocity (km/s): %1"
-msgstr "TEME ылдамдыгы (с/км): %1"
+msgstr "TEME ылдамдыгы (км/с): %1"
 
 #: plugins/Satellites/src/Satellite.cpp:306
 msgid "The satellite and the observer are in sunlight."
@@ -6889,7 +6889,7 @@ msgstr "Сааттык алкак плагини"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:448
 msgid "Define a time zone"
-msgstr "Сааттык алкагын аныктоо"
+msgstr "Сааттык алкакты аныктоо"
 
 #: plugins/TimeZoneConfiguration/src/ui_defineTimeZone.h:450
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:381
@@ -7013,11 +7013,11 @@ msgstr "жжжж-аа-кк (ISO 8601)"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:402
 msgid "dd-mm-yyyy"
-msgstr ""
+msgstr "кк-аа-жжжж"
 
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:403
 msgid "mm-dd-yyyy"
-msgstr ""
+msgstr "аа-кк-жжжж"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:89
 msgid "Text User Interface"
@@ -7039,7 +7039,7 @@ msgstr "Учурдагы дата/убакыт"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:179
 msgid "Set time zone"
-msgstr "Сааттык алкагын орнотуу"
+msgstr "Сааттык алкакты орнотуу"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:180
 msgid "Day keys"
@@ -7061,15 +7061,15 @@ msgstr ""
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:198
 msgid "mmddyyyy"
-msgstr ""
+msgstr "ааккжжжж"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:198
 msgid "ddmmyyyy"
-msgstr ""
+msgstr "ккаажжжж"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:198
 msgid "yyyymmdd"
-msgstr ""
+msgstr "жжжжаакк"
 
 #. TRANSLATORS: 12-hour time format
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:207
@@ -7378,7 +7378,7 @@ msgstr "Күн системасы"
 #: plugins/Supernovae/src/Supernovae.cpp:71
 #: plugins/Supernovae/src/Supernovae.cpp:148
 msgid "Historical Supernovae"
-msgstr "Тарыхый жаңы жылдыздар"
+msgstr "Тарыхый өтө жаңы жылдыздар"
 
 #: plugins/Supernovae/src/Supernovae.cpp:74
 msgid "This plugin allows you to see some bright historical supernovae."
@@ -7386,16 +7386,16 @@ msgstr ""
 
 #: plugins/Supernovae/src/Supernovae.cpp:148
 msgid "Historical Supernovae configuration window"
-msgstr "\"Тарыхый жаңы жылдыздар\" плагинин баптоо терезеси"
+msgstr "\"Тарыхый өтө жаңы жылдыздар\" плагинин баптоо терезеси"
 
 #: plugins/Supernovae/src/Supernova.cpp:130
 msgid "supernova"
-msgstr "жаңы жылдыз"
+msgstr "өтө жаңы жылдыз"
 
 #: plugins/Supernovae/src/Supernova.cpp:145
 #, qt-format
 msgid "Type of supernova: %1"
-msgstr "Жаңы жылдыздын тиби: %1"
+msgstr "Өтө жаңы жылдыздын тиби: %1"
 
 #: plugins/Supernovae/src/Supernova.cpp:146 plugins/Novae/src/Nova.cpp:151
 #, qt-format
@@ -7477,15 +7477,15 @@ msgstr "Кийинки жаңылоо: %1 күн"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:207
 msgid "Historical supernovae is updated"
-msgstr "Тарыхый жаңы жылдыздар жаңыланды"
+msgstr "Тарыхый өтө жаңы жылдыздар жаңыланды"
 
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:229
 msgid "Historical Supernovae Configuration"
-msgstr "Тарыхый жаңы жылдыздарды баптоо"
+msgstr "Тарыхый өтө жаңы жылдыздарды баптоо"
 
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:230
 msgid "Historical Supernovae Plug-in Configuration"
-msgstr "Тарыхый жаңы жылдыздар плагининин баптоо"
+msgstr "Тарыхый өтө жаңы жылдыздар плагининин баптоо"
 
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:232
 #: plugins/Novae/src/ui_novaeDialog.h:235
@@ -7520,7 +7520,7 @@ msgstr "[кийинки жаңырлоо тууралуу маалымат]"
 
 #: plugins/Novae/src/Novae.cpp:74 plugins/Novae/src/Novae.cpp:145
 msgid "Bright Novae"
-msgstr ""
+msgstr "Жарык жаңы жылдыздар"
 
 #: plugins/Novae/src/Novae.cpp:77 plugins/Novae/src/gui/NovaeDialog.cpp:115
 msgid "A plugin that shows some bright novae in the Milky Way galaxy."
@@ -7538,11 +7538,11 @@ msgstr ""
 
 #: plugins/Novae/src/Nova.cpp:135
 msgid "nova"
-msgstr ""
+msgstr "жаңы жылдыз"
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:110
 msgid "Bright Novae Plug-in"
-msgstr ""
+msgstr "Жаңы жылдыздар плагини"
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:116
 msgid ""
@@ -7588,7 +7588,7 @@ msgstr ""
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:204
 msgid "Novae is updated"
-msgstr ""
+msgstr "Жаңы жылдыздар жаңыланды"
 
 #: plugins/Novae/src/ui_novaeDialog.h:232
 msgid "Bright Novae Configuration"
@@ -7625,7 +7625,7 @@ msgstr "квазар"
 #: plugins/Quasars/src/Quasar.cpp:131
 #, qt-format
 msgid "Z (redshift): %1"
-msgstr ""
+msgstr "Z (кызыл жылышуу): %1"
 
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:117
 msgid "Quasars Plug-in"
@@ -7772,7 +7772,7 @@ msgstr ""
 #: plugins/Pulsars/src/Pulsar.cpp:214
 #, qt-format
 msgid "Annual parallax: %1 mas"
-msgstr ""
+msgstr "Жылдык параллакс: %1 бурчтук мс"
 
 #: plugins/Pulsars/src/Pulsar.cpp:218
 #, qt-format
@@ -8478,7 +8478,7 @@ msgstr ""
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:136
 msgid "Horizon altitude:"
-msgstr ""
+msgstr "Горизонт бийиктиги:"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:136
 msgid ""
@@ -9452,7 +9452,7 @@ msgstr ""
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:560
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:562
 msgid "dd/MMM/yyyy"
-msgstr ""
+msgstr "кк/ААА/жжжж"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:561
 msgid "To:"
