@@ -52,7 +52,7 @@ signals:
 
 public slots:
 	void setAllChecked(bool checked);
-	void slotDataUpdated();
+	void slotDataUpdated(const QString& category);
 
 private slots:
 	void scrollValueChanged(int);

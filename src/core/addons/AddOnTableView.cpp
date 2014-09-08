@@ -50,8 +50,8 @@ AddOnTableView::AddOnTableView(QWidget* parent)
 	connect(m_pCheckboxGroup, SIGNAL(buttonToggled(int, bool)),
 		this, SLOT(slotRowChecked(int, bool)));
 
-	connect(&StelApp::getInstance().getStelAddOnMgr(), SIGNAL(dataUpdated()),
-		this, SLOT(slotDataUpdated()));
+	connect(&StelApp::getInstance().getStelAddOnMgr(), SIGNAL(dataUpdated(const QString&)),
+		this, SLOT(slotDataUpdated(const QString&)));
 }
 
 AddOnTableView::~AddOnTableView()
@@ -67,9 +67,12 @@ AddOnTableView::~AddOnTableView()
 	m_pCheckboxGroup->deleteLater();
 }
 
-void AddOnTableView::slotDataUpdated() {
-	((AddOnTableProxyModel*) model())->sourceModel()->query().exec();
-	update();
+void AddOnTableView::slotDataUpdated(const QString& category) {
+	if (objectName() == category)
+	{
+		((AddOnTableProxyModel*) model())->sourceModel()->query().exec();
+		update();
+	}
 }
 
 void AddOnTableView::scrollValueChanged(int)

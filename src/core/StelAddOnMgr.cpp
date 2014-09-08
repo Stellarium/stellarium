@@ -217,7 +217,7 @@ void StelAddOnMgr::installAddOn(const int addonId, const QStringList selectedFil
 		m_pStelAddOnDAO->updateAddOnStatus(addonInfo.idInstall, Installing);
 		m_downloadQueue.insert(addonId, selectedFiles);
 		downloadNextAddOn();
-		emit (dataUpdated());
+		emit (dataUpdated(addonInfo.category));
 	}
 }
 
@@ -249,7 +249,7 @@ bool StelAddOnMgr::installFromFile(const StelAddOnDAO::AddOnInfo addonInfo,
 	}
 
 	m_pStelAddOnDAO->updateAddOnStatus(addonInfo.idInstall, installed);
-	emit (dataUpdated());
+	emit (dataUpdated(addonInfo.category));
 	return installed;
 }
 
@@ -283,7 +283,7 @@ void StelAddOnMgr::removeAddOn(const int addonId, const QStringList selectedFile
 	if (m_pStelAddOns.value(addonInfo.category)->uninstallAddOn(addonInfo.idInstall, selectedFiles))
 	{
 		m_pStelAddOnDAO->updateAddOnStatus(addonInfo.idInstall, NotInstalled);
-		emit (dataUpdated());
+		emit (dataUpdated(addonInfo.category));
 	}
 }
 
