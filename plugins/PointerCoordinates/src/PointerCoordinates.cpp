@@ -143,9 +143,9 @@ void PointerCoordinates::draw(StelCore *core)
 				cy -= M_PI*2;
 
 			coordsText = QString("%1: %2/%3")
-					.arg(qc_("Alt/Az", "abbreviated in the plugin"))
-					.arg(StelUtils::radToDmsStr(cx))
-					.arg(StelUtils::radToDmsStr(cy));
+					.arg(qc_("Az/Alt", "abbreviated in the plugin"))
+					.arg(StelUtils::radToDmsStr(cy))
+					.arg(StelUtils::radToDmsStr(cx));
 			break;
 		case Ecliptic:
 			double lambda, beta;

@@ -122,6 +122,11 @@ void ViewDialog::createDialogContent()
 
 	//ui->viewTabWidget->removeTab(4);
 
+	//Kinetic scrolling for tablet pc and pc
+	QList<QWidget *> addscroll;
+	addscroll << ui->projectionListWidget << ui->culturesListWidget << ui->skyCultureTextBrowser << ui->landscapesListWidget;
+	StelDialog::installKineticScrolling(addscroll);
+
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 
 	populateLists();

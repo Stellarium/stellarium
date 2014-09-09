@@ -28,6 +28,7 @@
 #include <QGraphicsProxyWidget>
 #include <QStyleOptionGraphicsItem>
 #include <QSettings>
+#include <QScroller>
 
 class CustomProxy : public QGraphicsProxyWidget
 {
@@ -153,5 +154,17 @@ void StelDialog::setVisible(bool v)
 		emit visibleChanged(false);
 		//proxy->clearFocus();
 		StelMainView::getInstance().focusSky();
+	}
+}
+
+void StelDialog::installKineticScrolling(QList<QWidget *> addscroll)
+{
+	if (StelApp::getInstance().getSettings()->value("gui/flag_enable_kinetic_scrolling", true).toBool() == false)
+		return;
+
+	foreach(QWidget * w, addscroll)
+	{
+		QScroller::grabGesture(w, QScroller::TouchGesture); // Enable kinetic scrolling for devices with touch screens or a touchpads. Need testing!
+		QScroller::scroller(w);
 	}
 }
