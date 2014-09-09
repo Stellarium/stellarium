@@ -7,20 +7,20 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-08-31 11:21+0700\n"
+"POT-Creation-Date: 2014-09-05 10:26+0700\n"
 "PO-Revision-Date: 2014-03-20 04:41+0000\n"
 "Last-Translator: Tanmoy Saha <Unknown>\n"
 "Language-Team: stellarium\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-08-31 05:52+0000\n"
-"X-Generator: Launchpad (build 17176)\n"
+"X-Launchpad-Export-Date: 2014-09-06 06:00+0000\n"
+"X-Generator: Launchpad (build 17196)\n"
 "Language: bn\n"
 
 #: src/core/modules/ConstellationMgr.cpp:106 src/core/modules/StarMgr.cpp:346
 #: src/core/modules/GridLinesMgr.cpp:697 src/core/modules/LandscapeMgr.cpp:354
-#: src/core/modules/NebulaMgr.cpp:126 src/core/modules/SolarSystem.cpp:155
+#: src/core/modules/NebulaMgr.cpp:126 src/core/modules/SolarSystem.cpp:156
 #: src/core/StelApp.cpp:473 src/core/StelCore.cpp:185
 #: src/core/StelSkyLayerMgr.cpp:87 src/StelMainView.cpp:302
 msgid "Display Options"
@@ -158,8 +158,8 @@ msgstr ", %1 মিটার"
 msgid "Planet: "
 msgstr "গ্রহ "
 
-#: src/core/modules/Nebula.cpp:104 src/core/modules/Planet.cpp:146
-#: src/core/modules/MinorPlanet.cpp:209 src/core/modules/Comet.cpp:146
+#: src/core/modules/Nebula.cpp:104 src/core/modules/Planet.cpp:168
+#: src/core/modules/MinorPlanet.cpp:208 src/core/modules/Comet.cpp:145
 #: src/core/modules/StarWrapper.cpp:50 src/core/modules/StarWrapper.cpp:170
 #: src/core/modules/StarWrapper.cpp:173
 #: plugins/Satellites/src/Satellite.cpp:252
@@ -169,8 +169,8 @@ msgstr "গ্রহ "
 msgid "Type: <b>%1</b>"
 msgstr "ধরন : <b>%1</b>"
 
-#: src/core/modules/Nebula.cpp:109 src/core/modules/Planet.cpp:152
-#: src/core/modules/MinorPlanet.cpp:215 src/core/modules/Comet.cpp:152
+#: src/core/modules/Nebula.cpp:109 src/core/modules/Planet.cpp:174
+#: src/core/modules/MinorPlanet.cpp:214 src/core/modules/Comet.cpp:151
 #: src/core/modules/StarWrapper.cpp:56 src/core/modules/StarWrapper.cpp:180
 #: plugins/Supernovae/src/Supernova.cpp:135 plugins/Novae/src/Nova.cpp:140
 #: plugins/Quasars/src/Quasar.cpp:106 plugins/Exoplanets/src/Exoplanet.cpp:186
@@ -178,8 +178,8 @@ msgstr "ধরন : <b>%1</b>"
 msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>)"
 msgstr "ঔজ্জ্বল্যতা : <b>%1</b> (হ্রাস পেয়ে: <b>%2</b>)"
 
-#: src/core/modules/Nebula.cpp:112 src/core/modules/Planet.cpp:155
-#: src/core/modules/MinorPlanet.cpp:218 src/core/modules/Comet.cpp:155
+#: src/core/modules/Nebula.cpp:112 src/core/modules/Planet.cpp:177
+#: src/core/modules/MinorPlanet.cpp:217 src/core/modules/Comet.cpp:154
 #: src/core/modules/StarWrapper.cpp:60 src/core/modules/StarWrapper.cpp:183
 #: plugins/Supernovae/src/Supernova.cpp:137 plugins/Novae/src/Nova.cpp:143
 #: plugins/Quasars/src/Quasar.cpp:111 plugins/Exoplanets/src/Exoplanet.cpp:191
@@ -246,73 +246,73 @@ msgstr "নথিভুক্ত না করা জ্যোতিষ্ক"
 msgid "Deep-sky objects"
 msgstr "অতিজাগতিক জ্যোতিষ্কসমূহ"
 
-#: src/core/modules/Planet.cpp:158 src/core/modules/MinorPlanet.cpp:228
-#: src/core/modules/MinorPlanet.cpp:232 src/core/modules/Comet.cpp:164
+#: src/core/modules/Planet.cpp:180 src/core/modules/MinorPlanet.cpp:227
+#: src/core/modules/MinorPlanet.cpp:231 src/core/modules/Comet.cpp:163
 #: src/core/modules/StarWrapper.cpp:187 plugins/Quasars/src/Quasar.cpp:115
 #, qt-format
 msgid "Absolute Magnitude: %1"
 msgstr "পরম ঔজ্জ্বল্য : %1"
 
-#: src/core/modules/Planet.cpp:167
+#: src/core/modules/Planet.cpp:189
 #, qt-format
 msgid "Obliquity (of date, for Earth): %1"
 msgstr "পৃথিবীর অক্ষের তীর্যকতা (তারিখ অনুযায়ী) : %1"
 
-#: src/core/modules/Planet.cpp:179 src/core/modules/MinorPlanet.cpp:245
-#: src/core/modules/Comet.cpp:194
+#: src/core/modules/Planet.cpp:201 src/core/modules/MinorPlanet.cpp:244
+#: src/core/modules/Comet.cpp:193
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 km)"
 msgstr "দূরত্ব : %1 জ্যোতির্বৈজ্ঞানিক একক (%2 কিমি)"
 
-#: src/core/modules/Planet.cpp:186 src/core/modules/MinorPlanet.cpp:252
-#: src/core/modules/Comet.cpp:201
+#: src/core/modules/Planet.cpp:208 src/core/modules/MinorPlanet.cpp:251
+#: src/core/modules/Comet.cpp:200
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 Mio km)"
 msgstr "দূরত্ব : %1 জ্যোতির্বৈজ্ঞানিক একক (%2 মিলিয়ন কিমি)"
 
-#: src/core/modules/Planet.cpp:199
+#: src/core/modules/Planet.cpp:221
 #, qt-format
 msgid "Apparent diameter: %1, with rings: %2"
 msgstr "অাপাত ব্যাস : %1, বলয় সহ : %2"
 
-#: src/core/modules/Planet.cpp:205 src/core/modules/MinorPlanet.cpp:260
+#: src/core/modules/Planet.cpp:227 src/core/modules/MinorPlanet.cpp:259
 #, qt-format
 msgid "Apparent diameter: %1"
 msgstr "আপাত ব্যাস : %1"
 
 #. TRANSLATORS: Sidereal (orbital) period for solar system bodies in days and in Julian years (symbol: a)
-#: src/core/modules/Planet.cpp:217 src/core/modules/MinorPlanet.cpp:267
-#: src/core/modules/Comet.cpp:234
+#: src/core/modules/Planet.cpp:239 src/core/modules/MinorPlanet.cpp:266
+#: src/core/modules/Comet.cpp:233
 #, qt-format
 msgid "Sidereal period: %1 days (%2 a)"
 msgstr "প্রদক্ষিণ কাল : %1 দিন (%2 বছর)"
 
-#: src/core/modules/Planet.cpp:220
+#: src/core/modules/Planet.cpp:242
 #, qt-format
 msgid "Sidereal day: %1"
 msgstr "নক্ষত্র দিবস : %1"
 
-#: src/core/modules/Planet.cpp:221
+#: src/core/modules/Planet.cpp:243
 #, qt-format
 msgid "Mean solar day: %1"
 msgstr "গড় সৌর দিবস : %1"
 
-#: src/core/modules/Planet.cpp:227
+#: src/core/modules/Planet.cpp:249
 #, qt-format
 msgid "Phase Angle: %1"
 msgstr "কৌনিক দশা : %1"
 
-#: src/core/modules/Planet.cpp:228
+#: src/core/modules/Planet.cpp:250
 #, qt-format
 msgid "Elongation: %1"
 msgstr "দ্রাঘন বা সূর্যের সাথে কৌনিক দূরত্ব : %1"
 
-#: src/core/modules/Planet.cpp:229
+#: src/core/modules/Planet.cpp:251
 #, qt-format
 msgid "Phase: %1"
 msgstr "দৃশ্যমান দশা : %1 অংশ"
 
-#: src/core/modules/Planet.cpp:230
+#: src/core/modules/Planet.cpp:252
 #, qt-format
 msgid "Illuminated: %1%"
 msgstr "দৃশ্যমান দীপ্তি : %1%"
@@ -322,42 +322,42 @@ msgstr "দৃশ্যমান দীপ্তি : %1%"
 msgid "Provisional designation: %1"
 msgstr "প্রারম্ভিক অস্থায়ী নাম : %1"
 
-#: src/core/modules/Comet.cpp:177
+#: src/core/modules/Comet.cpp:176
 #, no-c-format, qt-format
 msgid "Distance from Sun: %1AU (%2 km)"
 msgstr "সূর্য থেকে দূরত্ব : %1 জ্যোতির্বৈজ্ঞানিক একক (%2 কিমি)"
 
-#: src/core/modules/Comet.cpp:184
+#: src/core/modules/Comet.cpp:183
 #, no-c-format, qt-format
 msgid "Distance from Sun: %1AU (%2 Mio km)"
 msgstr "সূর্য থেকে দূরত্ব : %1 জ্যোতির্বৈজ্ঞানিক একক (%2 মিলিয়ন কিমি)"
 
-#: src/core/modules/Comet.cpp:211
+#: src/core/modules/Comet.cpp:210
 #, no-c-format, qt-format
 msgid "Speed: %1 km/s"
 msgstr "গতিবেগ : %1 কিমি/সেকেন্ড"
 
-#: src/core/modules/Comet.cpp:220
+#: src/core/modules/Comet.cpp:219
 #, no-c-format, qt-format
 msgid "Coma diameter (estimate): %1 km"
 msgstr ""
 
-#: src/core/modules/Comet.cpp:224
+#: src/core/modules/Comet.cpp:223
 #, no-c-format, qt-format
 msgid "Gas tail length (estimate): %1 Mio km"
 msgstr ""
 
-#: src/core/modules/SolarSystem.cpp:156
+#: src/core/modules/SolarSystem.cpp:157
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:308
 msgid "Planet labels"
 msgstr "গ্রহের নাম"
 
-#: src/core/modules/SolarSystem.cpp:157
+#: src/core/modules/SolarSystem.cpp:158
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:312
 msgid "Planet orbits"
 msgstr "গ্রহের কক্ষপথ"
 
-#: src/core/modules/SolarSystem.cpp:158
+#: src/core/modules/SolarSystem.cpp:159
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:316
 msgid "Planet trails"
 msgstr "গ্রহের গমনপথ"
@@ -418,55 +418,56 @@ msgid "Magnitude range: <b>%1</b>%2<b>%3/%4</b> (Photometric system: %5)"
 msgstr ""
 "ঔজ্জ্বল্যতার সীমা : <b>%1</b>%2<b>%3/%4</b> (আলোকমিতি ব্যবস্থায় : %5)"
 
-#: src/core/modules/StarWrapper.cpp:216
-#: plugins/Supernovae/src/Supernova.cpp:148 plugins/Novae/src/Nova.cpp:153
-#: plugins/Exoplanets/src/Exoplanet.cpp:206
+#. TRANSLATORS: Unit of measure for distance - Light Years
+#: src/core/modules/StarWrapper.cpp:218
+#: plugins/Supernovae/src/Supernova.cpp:150 plugins/Novae/src/Nova.cpp:155
+#: plugins/Exoplanets/src/Exoplanet.cpp:207
 #, qt-format
-msgid "Distance: %1 Light Years"
-msgstr "দূরত্ব : %1 আলোকবর্ষ"
+msgid "Distance: %1 ly"
+msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:221
+#: src/core/modules/StarWrapper.cpp:224
 #: plugins/Exoplanets/src/Exoplanet.cpp:201
 #, qt-format
 msgid "Spectral Type: %1"
 msgstr "বর্ণালীর প্রকৃতি : %1"
 
-#: src/core/modules/StarWrapper.cpp:224
+#: src/core/modules/StarWrapper.cpp:227
 #, qt-format
 msgid "Parallax: %1\""
 msgstr "লম্বণ : %1\""
 
-#: src/core/modules/StarWrapper.cpp:230
+#: src/core/modules/StarWrapper.cpp:233
 #, qt-format
 msgid "Epoch for minimum light: %1 JD"
 msgstr "সর্বনিম্ন ঔজ্জ্বল্যের দশা : %1 জুলিয়ান দিন"
 
-#: src/core/modules/StarWrapper.cpp:232
+#: src/core/modules/StarWrapper.cpp:235
 #, qt-format
 msgid "Epoch for maximum light: %1 JD"
 msgstr "সর্বোচ্চ ঔজ্জ্বল্যের দশা : %1 জুলিয়ান দিন"
 
-#: src/core/modules/StarWrapper.cpp:236
+#: src/core/modules/StarWrapper.cpp:239
 #, qt-format
 msgid "Period: %1 days"
 msgstr "পর্যায়কাল : %1 দিন"
 
-#: src/core/modules/StarWrapper.cpp:246
+#: src/core/modules/StarWrapper.cpp:249
 #, qt-format
 msgid "Next minimum light: %1 UTC"
 msgstr "পরবর্তী সর্বনিম্ন ঔজ্জ্বল্য : %1 UTC"
 
-#: src/core/modules/StarWrapper.cpp:248
+#: src/core/modules/StarWrapper.cpp:251
 #, qt-format
 msgid "Next maximum light: %1 UTC"
 msgstr "পরবর্তী সর্বোচ্চ ঔজ্জ্বল্য : %1 UTC"
 
-#: src/core/modules/StarWrapper.cpp:254
+#: src/core/modules/StarWrapper.cpp:257
 #, qt-format
 msgid "Duration of eclipse: %1%"
 msgstr "গ্রহণের সময়কাল : %1%"
 
-#: src/core/modules/StarWrapper.cpp:256
+#: src/core/modules/StarWrapper.cpp:259
 #, qt-format
 msgid "Rising time: %1%"
 msgstr "উদয় : %1%"
@@ -1106,41 +1107,41 @@ msgstr ""
 "এই মানচিত্র পদ্ধতি দর্শনানুপাত মানচিত্র পদ্ধতির মতই তবে এখানে পর্যবেক্ষককে "
 "অসীমে নেওয়া হয়ে থাকে ।"
 
-#: src/core/StelObject.cpp:116
+#: src/core/StelObject.cpp:117
 #, qt-format
 msgid "RA/DE (J2000): %1/%2"
 msgstr "বিষুবাংশ / বিষুবলম্ব (J2000 অনুযায়ী) : %1/%2"
 
-#: src/core/StelObject.cpp:123
+#: src/core/StelObject.cpp:124
 #, qt-format
 msgid "RA/DE (of date): %1/%2"
 msgstr "বিষুবাংশ / বিষুবলম্ব (তারিখ অনুযায়ী) : %1/%2"
 
-#: src/core/StelObject.cpp:130
+#: src/core/StelObject.cpp:131
 #, qt-format
 msgid "Galactic longitude/latitude: %1/%2"
 msgstr "ছায়াপথীয় দ্রাঘিমাংশ ও অক্ষাংশ : %1/%2"
 
-#: src/core/StelObject.cpp:142 src/core/StelObject.cpp:146
+#: src/core/StelObject.cpp:143 src/core/StelObject.cpp:147
 #, qt-format
 msgid "Hour angle/DE: %1/%2"
 msgstr "ঘন্টা কোণ / বিষুবলম্ব : %1/%2"
 
-#: src/core/StelObject.cpp:142 src/core/StelObject.cpp:164
+#: src/core/StelObject.cpp:143 src/core/StelObject.cpp:165
 msgid "(apparent)"
 msgstr "(আপাত)"
 
-#: src/core/StelObject.cpp:164 src/core/StelObject.cpp:168
+#: src/core/StelObject.cpp:165 src/core/StelObject.cpp:169
 #, qt-format
 msgid "Az/Alt: %1/%2"
 msgstr "দিগংশ / উন্নতি : %1/%2"
 
-#: src/core/StelObject.cpp:180
+#: src/core/StelObject.cpp:181
 #, qt-format
 msgid "Ecliptic (of J2000): %1/%2"
 msgstr ""
 
-#: src/core/StelObject.cpp:185
+#: src/core/StelObject.cpp:186
 #, qt-format
 msgid "Ecliptic (of date): %1/%2"
 msgstr ""
@@ -1985,13 +1986,13 @@ msgstr "বছর"
 msgid "This system does not support OpenGL."
 msgstr "এই প্রণালীটির গঠন OpenGL ব্যবহার করতে সক্ষম নয় ।"
 
-#: src/main.cpp:362
+#: src/main.cpp:363
 msgid ""
 "Insufficient OpenGL version. Please update drivers, graphics hardware, or "
 "use MESA (or ANGLE) version."
 msgstr ""
 
-#: src/main.cpp:365
+#: src/main.cpp:366
 msgid ""
 "Insufficient OpenGL version. Please update drivers, or graphics hardware."
 msgstr ""
@@ -2009,8 +2010,8 @@ msgstr "সমগ্র পর্দা জুড়ে প্রদর্শণ
 msgid "Stellarium %1"
 msgstr "Stellarium %1"
 
-#: src/translations.h:33 plugins/Exoplanets/src/Exoplanet.cpp:217
-#: plugins/Exoplanets/src/Exoplanet.cpp:221
+#: src/translations.h:33 plugins/Exoplanets/src/Exoplanet.cpp:218
+#: plugins/Exoplanets/src/Exoplanet.cpp:222
 msgid "Sun"
 msgstr "সূর্য"
 
@@ -2027,12 +2028,12 @@ msgid "Earth"
 msgstr "পৃথিবী"
 
 #. TRANSLATORS: Name of landscape and Earth's satellite
-#: src/translations.h:37 src/translations.h:250
+#: src/translations.h:37 src/translations.h:251
 msgid "Moon"
 msgstr "চন্দ্র"
 
 #. TRANSLATORS: Name of landscape and planet
-#: src/translations.h:38 src/translations.h:258
+#: src/translations.h:38 src/translations.h:259
 msgid "Mars"
 msgstr "মঙ্গল"
 
@@ -2130,7 +2131,7 @@ msgid "Metis"
 msgstr "মেতিস (Metis)"
 
 #. TRANSLATORS: Name of landscape and planet
-#: src/translations.h:62 src/translations.h:260
+#: src/translations.h:62 src/translations.h:261
 msgid "Saturn"
 msgstr "শনি"
 
@@ -2588,232 +2589,236 @@ msgid "Maori"
 msgstr "মাওরী"
 
 #: src/translations.h:233
+msgid "Mongolian"
+msgstr ""
+
+#: src/translations.h:234
 msgid "Navajo"
 msgstr "নাভাজো"
 
-#: src/translations.h:234
+#: src/translations.h:235
 msgid "Norse"
 msgstr "নর দেশীয়"
 
-#: src/translations.h:235
+#: src/translations.h:236
 msgid "Polynesian"
 msgstr "পলিনেশীয়"
 
-#: src/translations.h:236
+#: src/translations.h:237
 msgid "Romanian"
 msgstr "রোমানীয়"
 
-#: src/translations.h:237
+#: src/translations.h:238
 msgid "Sami"
 msgstr "সামী"
 
-#: src/translations.h:238
+#: src/translations.h:239
 msgid "Tupi-Guarani"
 msgstr "তাপী-গুয়ারানী"
 
-#: src/translations.h:239
+#: src/translations.h:240
 msgid "Tongan"
 msgstr "টোংগা"
 
-#: src/translations.h:240
+#: src/translations.h:241
 msgid "Western"
 msgstr "পশ্চিমী"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:246
+#: src/translations.h:247
 msgid "Guereins"
 msgstr "গুয়েরেইন"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:248
+#: src/translations.h:249
 msgid "Trees"
 msgstr "জঙ্গল"
 
 #. TRANSLATORS: Landscape name: Hurricane Ridge
-#: src/translations.h:252
+#: src/translations.h:253
 msgid "Hurricane"
 msgstr "হ্যরিকেন"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:254
+#: src/translations.h:255
 msgid "Ocean"
 msgstr "সমুদ্র"
 
 #. TRANSLATORS: Landscape name: Garching bei Munchen
-#: src/translations.h:256
+#: src/translations.h:257
 msgid "Garching"
 msgstr "গারচিং"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:262
+#: src/translations.h:263
 msgid "Geneva"
 msgstr "জেনিভা"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:264
+#: src/translations.h:265
 msgid "Grossmugl"
 msgstr "গ্রসমুগ"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:271
+#: src/translations.h:272
 msgid "Landscape Tour"
 msgstr "ভূমিরূপগুলি ঘুরে দেখা"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:273
+#: src/translations.h:274
 msgid "Partial Lunar Eclipse"
 msgstr "খন্ডগ্রাস চন্দ্রগ্রহণ"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:275
+#: src/translations.h:276
 msgid "Total Lunar Eclipse"
 msgstr "পূর্ণগ্রাস চন্দ্রগ্রহণ"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:277
+#: src/translations.h:278
 msgid "Screensaver"
 msgstr "স্ক্রীনসেভার (Screensaver)"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:279
+#: src/translations.h:280
 msgid "Solar Eclipse 2009"
 msgstr "২০০৯ এর সূর্যগ্রহণ"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:281
+#: src/translations.h:282
 msgid "Startup Script"
 msgstr "শুরুর কার্যলিপি"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:283
+#: src/translations.h:284
 msgid "Zodiac"
 msgstr "রাশিচক্র"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:285
+#: src/translations.h:286
 msgid "Mercury Triple Sunrise and Sunset"
 msgstr "বুধের আকাশে এক দিনে তিনটি সূর্যোদয় ও সূর্যাস্ত"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:287
+#: src/translations.h:288
 msgid "Double eclipse from Deimos in 2017"
 msgstr "ডিমোসের আকাশে দৃশ্যমান ২০১৭ এর দ্বৈত গ্রহন"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:289
+#: src/translations.h:290
 msgid "Double eclipse from Deimos in 2031"
 msgstr "ডিমোসের আকাশে দৃশ্যমান ২০৩১ এর দ্বৈত গ্রহন"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:291
+#: src/translations.h:292
 msgid "Eclipse from Olympus Mons Jan 10 2068"
 msgstr ""
 "১০ই জানুয়ারি, ২০৬৮ সালে অলিম্পাস পর্বত থেকে মঙ্গলের আকাশে দৃশ্যমান গ্রহণ"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:293
+#: src/translations.h:294
 msgid "Occultation of Earth and Jupiter 2048"
 msgstr "২০৪৮ সাল : পৃথিবী ও বৃহস্পতির সমাপতন"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:295
+#: src/translations.h:296
 msgid "3 Transits and 2 Eclipses from Deimos 2027"
 msgstr "ডিমোসের আকাশে দৃশ্যমান ২০২৭ এর ২টি গ্রহন ও ৩টি সরণ"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:297
+#: src/translations.h:298
 msgid "Solar System Screensaver"
 msgstr "সৌরজগত স্ক্রিনসেভার"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:299
+#: src/translations.h:300
 msgid "Constellations Tour"
 msgstr "তারামণ্ডল গুলি ঘুরে দেখা"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:301
+#: src/translations.h:302
 msgid "Sun from different planets"
 msgstr "অন্যান্য গ্রহগুলির আকাশে সূর্যের দৃশ্যমান চেহারা"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:303
+#: src/translations.h:304
 msgid "Earth best views from other bodies"
 msgstr "অন্যান্য গ্রহ উপগ্রহ থেকে পৃথিবীর দৃশ্যমান চেহারা"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:305
+#: src/translations.h:306
 msgid "Transit of Venus"
 msgstr "শুক্রের সরণ"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:307
+#: src/translations.h:308
 msgid "Analemma"
 msgstr "সূর্যায়ণ"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:309
+#: src/translations.h:310
 msgid "Sky Culture Tour"
 msgstr "মহাকাশচর্চার নানা সংস্কৃতিগুলি ঘুরে দেখা"
 
 #. TRANSLATORS: Name and description of script
-#: src/translations.h:311
+#: src/translations.h:312
 msgid "Earth Events from Mercury"
 msgstr "বুধের আকাশে পৃথিবীর কার্যকলাপ"
 
 #. TRANSLATORS: Name and description of script
-#: src/translations.h:313
+#: src/translations.h:314
 msgid "Earth Events from a floating city on Venus"
 msgstr ""
 
 #. TRANSLATORS: Name and description of script
-#: src/translations.h:315
+#: src/translations.h:316
 msgid "Earth Events from Mars"
 msgstr "মঙ্গলের আকাশে পৃথিবীর কার্যকলাপ"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:317
+#: src/translations.h:318
 msgid "Earth and Venus Greatest Elongations and Brilliancies from Mars"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:319
+#: src/translations.h:320
 msgid "Earth and Mars Greatest Elongations and Transits from Callisto"
 msgstr ""
 
 #. TRANSLATORS: Description of the landscape tour script.
-#: src/translations.h:325
+#: src/translations.h:326
 msgid "Look around each installed landscape."
 msgstr "সবকটি ভূমিরূপ ঘুরে দেখুন ।"
 
 #. TRANSLATORS: Description of the sky culture tour script.
-#: src/translations.h:327
+#: src/translations.h:328
 msgid "Look at each installed sky culture."
 msgstr "মহাকাশচর্চার বিভিন্ন সংস্কৃতিগুলি ঘুরে দেখুন ।"
 
-#: src/translations.h:328
+#: src/translations.h:329
 msgid "Script to demonstrate a partial lunar eclipse."
 msgstr "খন্ডগ্রাস চন্দ্রগ্রহণ দেখানোর কার্যলিপি ।"
 
-#: src/translations.h:329
+#: src/translations.h:330
 msgid "Script to demonstrate a total lunar eclipse."
 msgstr "পূর্ণগ্রাস চন্দ্রগ্রহণ দেখানোর কার্যলিপি ।"
 
-#: src/translations.h:330
+#: src/translations.h:331
 msgid "A slow, infinite tour of the sky, looking at random objects."
 msgstr "একটি অলস, অসীম মহাকাশ ভ্রমণ ।"
 
-#: src/translations.h:331
+#: src/translations.h:332
 msgid ""
 "Script to demonstrate a total solar eclipse which has happened in 2009 "
 "(location=Rangpur, Bangladesh)."
 msgstr ""
 "২০০৯ এর পূর্ণগ্রাস সূর্যগ্রহণ দেখানোর কার্যলিপি । (বাংলাদেশের রংপুর থেকে)"
 
-#: src/translations.h:332
+#: src/translations.h:333
 msgid "Script which runs automatically at startup"
 msgstr "প্রারম্ভে স্বয়ংক্রিয়রূপে সঞ্চালিত কার্যলিপি"
 
-#: src/translations.h:333
+#: src/translations.h:334
 msgid ""
 "This script displays the constellations of the Zodiac. That means the "
 "constellations which lie along the line which the Sun traces across the "
@@ -2822,7 +2827,7 @@ msgstr ""
 "এই কার্যলিপিটি রাশিচক্রগুলি দেখায় মানে সেই সমস্ত নক্ষত্রমন্ডলগুলি, যারা "
 "বাত্সরিক সৌরপথে পড়ে ।"
 
-#: src/translations.h:334
+#: src/translations.h:335
 msgid ""
 "Due to the quirks in Mercury's orbit and rotation at certain spots the sun "
 "will rise & set 3 different times in one Mercury day."
@@ -2830,7 +2835,7 @@ msgstr ""
 "কক্ষপথ ও অক্ষের উপর আবর্তনের অদ্ভূত বিশিষ্টতার জন্য বুধের কোথাও কোথাও এক "
 "দিনে তিনবার সূর্যোদয় ও সূর্যাস্ত হয় ।"
 
-#: src/translations.h:335
+#: src/translations.h:336
 msgid ""
 "Just before Mars eclipses the sun, Phobos pops out from behind and eclipses "
 "it first. Takes place between Scorpio and Sagittarius on April 26, 2017."
@@ -2838,7 +2843,7 @@ msgstr ""
 "২৬ শে এপ্রিল, ২০১৭ সাল : বৃশ্চিক ও ধনু রাশির মাঝে মঙ্গল গ্রহ সূর্যকে গ্রাস "
 "করার আগেই তার পিছন থেকে ফোবস এসে সূর্যকে প্রথমে গ্রাস করে ফেলে ।"
 
-#: src/translations.h:336
+#: src/translations.h:337
 msgid ""
 "Just before Mars eclipses the sun, Phobos pops out from behind and eclipses "
 "it first. Takes place between Taurus and Gemini on July 23, 2031."
@@ -2846,13 +2851,13 @@ msgstr ""
 "২৩ শে এপ্রিল, ২০৩১ সাল : বৃষ ও মিথুন রাশির মাঝে মঙ্গল গ্রহ সূর্যকে গ্রাস "
 "করার আগেই তার পিছন থেকে ফোবস এসে সূর্যকে প্রথমে গ্রাস করে ফেলে ।"
 
-#: src/translations.h:337
+#: src/translations.h:338
 msgid "Phobos eclipsing the Sun as seen from Olympus Mons on Jan 10, 2068."
 msgstr ""
 "১০ই জানুয়ারি, ২০৬৮ সালে মঙ্গলের অলিম্পাস পর্বত থেকে ফোবস দ্বারা সূর্যগ্রহন "
 "দেখা য়ায ।"
 
-#: src/translations.h:338
+#: src/translations.h:339
 msgid ""
 "Phobos occultations of Earth are common, as are occultations of Jupiter. But "
 "occultations of both on the same day are very rare. Here's one that takes "
@@ -2861,7 +2866,7 @@ msgstr ""
 "ফোবোস-পৃথিবী সমাপতন ও ফোবোস-বৃহস্পতি সমাপতন খুবই সাধারণ ব্যাপার । তবে একসাথে "
 "একই দিনে দুটো ঘটা খুবই দুর্লভ, যার একটা ২৩/০১/২০৪৮ তে হবে ।"
 
-#: src/translations.h:339
+#: src/translations.h:340
 msgid ""
 "Phobos races ahead of Mars and transits the sun, passes through it and then "
 "retrogrades back towards the sun and just partially transits it again (only "
@@ -2875,39 +2880,39 @@ msgstr ""
 "এরপর মঙ্গল সূর্যের পূর্ণ গ্রহণ ঘটায়, আর ফোবোস মঙ্গলের ছায়ায় ঢাকা পড়ে যায় । "
 "ফোবসের নিষ্ক্রমণের পরও তা মঙ্গলের ছায়ায় আরও কিছু সময় অনুজ্জ্বল হয়ে থাকে ।"
 
-#: src/translations.h:340
+#: src/translations.h:341
 msgid ""
 "Screensaver of various happenings in the Solar System. 232 events in all!"
 msgstr ""
 
-#: src/translations.h:341
+#: src/translations.h:342
 msgid "A tour of the western constellations."
 msgstr "এটি পশ্চিমী সংস্কৃতির তারামন্ডলগুলির একটি ভ্রমণ মাত্র ।"
 
-#: src/translations.h:342
+#: src/translations.h:343
 msgid "Look at the Sun from big planets of Solar System and Pluto."
 msgstr "প্লুটো ও সৌরজগতের বড় গ্রহগুলি থেকে সূর্য দর্শণ ।"
 
-#: src/translations.h:343
+#: src/translations.h:344
 msgid ""
 "Best views of Earth from other Solar System bodies in the 21st Century."
 msgstr ""
 "এটি (একবিংশ শতাব্দীতে) সৌরজগতের অন্যান্য বস্তুগুলির আকাশে দৃশ্যমান পৃথিবীর "
 "শ্রেষ্ঠ দৃশ্যগুলির একটি সংগ্রহ ।"
 
-#: src/translations.h:344
+#: src/translations.h:345
 msgid "Transit of Venus as seen from Sydney Australia, 6th June 2012."
 msgstr ""
 "৬ই জুন, ২০১২ সালে অস্ট্রেলিয়ার সিডনি থেকে দৃশ্যমান সুক্রের সরণটি দেখায় ।"
 
-#: src/translations.h:345
+#: src/translations.h:346
 msgid ""
 "A demonstration of the analemma - the path of the Sun across the sky during "
 "the year."
 msgstr ""
 "এই স্ক্রিপটি সূর্যায়ণ অর্থাৎ সূর্যের সারা বছরের পরিক্রমণটি পথ দেখায় ।"
 
-#: src/translations.h:346
+#: src/translations.h:347
 msgid ""
 "Flash of the supernova observed by Tycho Brahe in 1572. The Supernovae "
 "plugin has to be enabled."
@@ -2915,12 +2920,12 @@ msgstr ""
 "১৫৭২ সালে টাইকো ব্রাহের দেখা অতিনোভা বিস্ফোরণটি দেখায় । তবে এক্ষেত্রে "
 "অতিনোভা সরঞ্জামটি অবশ্যই সক্রিয় থাকতে হবে ।"
 
-#: src/translations.h:347
+#: src/translations.h:348
 msgid ""
 "Earth and Venus Greatest Elongations and Brilliancies from Mars 2000-3000"
 msgstr ""
 
-#: src/translations.h:348
+#: src/translations.h:349
 msgid ""
 "Earth Greatest Elongations and Transits from Callisto 2000-3000. Why "
 "Callisto? Well of the 4 Galilean Moons, Callisto is the only one outside of "
@@ -2928,991 +2933,991 @@ msgid ""
 "moons, Callisto will be the one."
 msgstr ""
 
-#: src/translations.h:352
+#: src/translations.h:353
 msgid "Andorra"
 msgstr "অ্যান্ডোরা"
 
-#: src/translations.h:353
+#: src/translations.h:354
 msgid "United Arab Emirates"
 msgstr "সংযুক্ত আরব আমিরশাহী"
 
-#: src/translations.h:354
+#: src/translations.h:355
 msgid "Afghanistan"
 msgstr "আফগানিস্তান"
 
-#: src/translations.h:355
+#: src/translations.h:356
 msgid "Antigua and Barbuda"
 msgstr "অ্যান্টিগুয়া এবং বার্বুডা"
 
-#: src/translations.h:356
+#: src/translations.h:357
 msgid "Anguilla"
 msgstr "অ্যাংগুইলা"
 
-#: src/translations.h:357
+#: src/translations.h:358
 msgid "Albania"
 msgstr "আলবেনিয়া"
 
-#: src/translations.h:358
+#: src/translations.h:359
 msgid "Armenia"
 msgstr "আর্মেনিয়া"
 
-#: src/translations.h:359
+#: src/translations.h:360
 msgid "Netherlands Antilles"
 msgstr "নেদারল্যান্ডস অ্যান্টেলিস"
 
-#: src/translations.h:360
+#: src/translations.h:361
 msgid "Angola"
 msgstr "অ্যাঙ্গোলা"
 
-#: src/translations.h:361
+#: src/translations.h:362
 msgid "Antarctica"
 msgstr "আন্টার্টিকা"
 
-#: src/translations.h:362
+#: src/translations.h:363
 msgid "Argentina"
 msgstr "আর্জেন্টিনা"
 
-#: src/translations.h:363
+#: src/translations.h:364
 msgid "American Samoa"
 msgstr "আমেরিকান সামোয়া"
 
-#: src/translations.h:364
+#: src/translations.h:365
 msgid "Austria"
 msgstr "অস্ট্রিয়া"
 
-#: src/translations.h:365
+#: src/translations.h:366
 msgid "Australia"
 msgstr "অস্ট্রেলিয়া"
 
-#: src/translations.h:366
+#: src/translations.h:367
 msgid "Aruba"
 msgstr "আরুবা"
 
-#: src/translations.h:367
+#: src/translations.h:368
 msgid "Azerbaijan"
 msgstr "আজারবাইজান"
 
-#: src/translations.h:368
+#: src/translations.h:369
 msgid "Bosnia and Herzegowina"
 msgstr "বসনিয়া এবং হ্যাতজাগোভীণা"
 
-#: src/translations.h:369
+#: src/translations.h:370
 msgid "Barbados"
 msgstr "বার্বাডোস"
 
-#: src/translations.h:370
+#: src/translations.h:371
 msgid "Bangladesh"
 msgstr "বাংলাদেশ"
 
-#: src/translations.h:371
+#: src/translations.h:372
 msgid "Belgium"
 msgstr "বেলজিয়াম"
 
-#: src/translations.h:372
+#: src/translations.h:373
 msgid "Burkina Faso"
 msgstr "বারকিনা ফাসো"
 
-#: src/translations.h:373
+#: src/translations.h:374
 msgid "Bulgaria"
 msgstr "বুলগেরিয়া"
 
-#: src/translations.h:374
+#: src/translations.h:375
 msgid "Bahrain"
 msgstr "বাহরীন"
 
-#: src/translations.h:375
+#: src/translations.h:376
 msgid "Burundi"
 msgstr "বুরুন্ডি"
 
-#: src/translations.h:376
+#: src/translations.h:377
 msgid "Benin"
 msgstr "বেনিন"
 
-#: src/translations.h:377
+#: src/translations.h:378
 msgid "Bermuda"
 msgstr "বার্মুডা"
 
-#: src/translations.h:378
+#: src/translations.h:379
 msgid "Brunei Darussalam"
 msgstr "ব্রুনেই দারুস্‌সালাম"
 
-#: src/translations.h:379
+#: src/translations.h:380
 msgid "Bolivia"
 msgstr "বলিভিয়া"
 
-#: src/translations.h:380
+#: src/translations.h:381
 msgid "Brazil"
 msgstr "ব্রাজিল"
 
-#: src/translations.h:381
+#: src/translations.h:382
 msgid "Bahamas"
 msgstr "বাহামা দ্বীপপুঞ্জ"
 
-#: src/translations.h:382
+#: src/translations.h:383
 msgid "Bhutan"
 msgstr "ভুটান"
 
-#: src/translations.h:383
+#: src/translations.h:384
 msgid "Bouvet Island"
 msgstr "বুভেট দ্বীপ"
 
-#: src/translations.h:384
+#: src/translations.h:385
 msgid "Botswana"
 msgstr "বটসোয়ানা"
 
-#: src/translations.h:385
+#: src/translations.h:386
 msgid "Belarus"
 msgstr "বেলারুস"
 
-#: src/translations.h:386
+#: src/translations.h:387
 msgid "Belize"
 msgstr "বেলিজ"
 
-#: src/translations.h:387
+#: src/translations.h:388
 msgid "Canada"
 msgstr "কানাডা"
 
-#: src/translations.h:388
+#: src/translations.h:389
 msgid "Cocos Islands"
 msgstr "কোকো দ্বীপপুঞ্জ"
 
-#: src/translations.h:389
+#: src/translations.h:390
 msgid "Democratic Republic of the Congo"
 msgstr "কঙ্গোর গনতন্ত্রী প্রজাতন্ত্র"
 
-#: src/translations.h:390
+#: src/translations.h:391
 msgid "Central African Republic"
 msgstr "কেন্দ্রীয় আফ্রিকান প্রজাতন্ত্র"
 
-#: src/translations.h:391
+#: src/translations.h:392
 msgid "Republic of the Congo"
 msgstr "কঙ্গো প্রজাতন্ত্র"
 
-#: src/translations.h:392
+#: src/translations.h:393
 msgid "Switzerland"
 msgstr "সুইজারল্যাণ্ড"
 
-#: src/translations.h:393
+#: src/translations.h:394
 msgid "Cote d'Ivoire"
 msgstr "আইভরি কোস্ট"
 
-#: src/translations.h:394
+#: src/translations.h:395
 msgid "Cook Islands"
 msgstr "কুক দ্বীপপুঞ্জ"
 
-#: src/translations.h:395
+#: src/translations.h:396
 msgid "Chile"
 msgstr "চিলি"
 
-#: src/translations.h:396
+#: src/translations.h:397
 msgid "Cameroon"
 msgstr "ক্যামেরুন"
 
-#: src/translations.h:397
+#: src/translations.h:398
 msgid "China"
 msgstr "চীন"
 
-#: src/translations.h:398
+#: src/translations.h:399
 msgid "Colombia"
 msgstr "কলোম্বিয়া"
 
-#: src/translations.h:399
+#: src/translations.h:400
 msgid "Costa Rica"
 msgstr "কোস্টা রিকা"
 
-#: src/translations.h:400
+#: src/translations.h:401
 msgid "Serbia and Montenegro"
 msgstr "সার্বিয়া এবং মন্টিনিগ্রো"
 
-#: src/translations.h:401
+#: src/translations.h:402
 msgid "Cuba"
 msgstr "কিউবা"
 
-#: src/translations.h:402
+#: src/translations.h:403
 msgid "Cape Verde"
 msgstr "কেপ ভার্দে"
 
-#: src/translations.h:403
+#: src/translations.h:404
 msgid "Christmas Island"
 msgstr "ক্রিস্টমাস দ্বীপ"
 
-#: src/translations.h:404
+#: src/translations.h:405
 msgid "Cyprus"
 msgstr "সাইপ্রাস"
 
-#: src/translations.h:405
+#: src/translations.h:406
 msgid "Czech Republic"
 msgstr "চেক প্রজাতন্ত্র"
 
-#: src/translations.h:406
+#: src/translations.h:407
 msgid "Germany"
 msgstr "জার্মানী"
 
-#: src/translations.h:407
+#: src/translations.h:408
 msgid "Djibouti"
 msgstr "জিবুতি"
 
-#: src/translations.h:408
+#: src/translations.h:409
 msgid "Denmark"
 msgstr "ডেনমার্ক"
 
-#: src/translations.h:409
+#: src/translations.h:410
 msgid "Dominica"
 msgstr "ডোমিনিকা"
 
-#: src/translations.h:410
+#: src/translations.h:411
 msgid "Dominican Republic"
 msgstr "ডমিনিকান প্রজাতন্ত্র"
 
-#: src/translations.h:411
+#: src/translations.h:412
 msgid "Algeria"
 msgstr "আলজেরিয়া"
 
-#: src/translations.h:412
+#: src/translations.h:413
 msgid "Ecuador"
 msgstr "ইকুয়েডোর"
 
-#: src/translations.h:413
+#: src/translations.h:414
 msgid "Estonia"
 msgstr "এস্তোনিয়া"
 
-#: src/translations.h:414
+#: src/translations.h:415
 msgid "Egypt"
 msgstr "মিশর"
 
-#: src/translations.h:415
+#: src/translations.h:416
 msgid "Western Sahara"
 msgstr "পশ্চিম সাহারা"
 
-#: src/translations.h:416
+#: src/translations.h:417
 msgid "Eritrea"
 msgstr "ইরিট্রিয়া"
 
-#: src/translations.h:417
+#: src/translations.h:418
 msgid "Spain"
 msgstr "স্পেন"
 
-#: src/translations.h:418
+#: src/translations.h:419
 msgid "Ethiopia"
 msgstr "ইথিওপিয়া"
 
-#: src/translations.h:419
+#: src/translations.h:420
 msgid "Finland"
 msgstr "ফিনল্যান্ড"
 
-#: src/translations.h:420
+#: src/translations.h:421
 msgid "Fiji"
 msgstr "ফিজি"
 
-#: src/translations.h:421
+#: src/translations.h:422
 msgid "Falkland Islands"
 msgstr "ফকল্যান্ড দ্বীপপুঞ্জ"
 
-#: src/translations.h:422
+#: src/translations.h:423
 msgid "Micronesia"
 msgstr "মাইক্রোনেশিয়া"
 
-#: src/translations.h:423
+#: src/translations.h:424
 msgid "Faroe Islands"
 msgstr "ফ্যারো দ্বীপপূঞ্জ"
 
-#: src/translations.h:424
+#: src/translations.h:425
 msgid "France"
 msgstr "ফ্রান্স"
 
-#: src/translations.h:425
+#: src/translations.h:426
 msgid "Gabon"
 msgstr "গ্যাবন"
 
-#: src/translations.h:426
+#: src/translations.h:427
 msgid "United Kingdom"
 msgstr "যুক্তরাজ্য"
 
-#: src/translations.h:427
+#: src/translations.h:428
 msgid "Grenada"
 msgstr "গ্রেনাডা"
 
-#: src/translations.h:428
+#: src/translations.h:429
 msgid "Georgia"
 msgstr "জর্জিয়া"
 
-#: src/translations.h:429
+#: src/translations.h:430
 msgid "French Guiana"
 msgstr "ফেঞ্চ গায়ানা"
 
-#: src/translations.h:430
+#: src/translations.h:431
 msgid "Ghana"
 msgstr "ঘানা"
 
-#: src/translations.h:431
+#: src/translations.h:432
 msgid "Gibraltar"
 msgstr "জিব্রাল্টার"
 
-#: src/translations.h:432
+#: src/translations.h:433
 msgid "Greenland"
 msgstr "গ্রীনল্যান্ড"
 
-#: src/translations.h:433
+#: src/translations.h:434
 msgid "Gambia"
 msgstr "জামবিয়া"
 
-#: src/translations.h:434
+#: src/translations.h:435
 msgid "Guinea"
 msgstr "গিনি"
 
-#: src/translations.h:435
+#: src/translations.h:436
 msgid "Guadeloupe"
 msgstr "গুয়াডুলুপ"
 
-#: src/translations.h:436
+#: src/translations.h:437
 msgid "Equatorial Guinea"
 msgstr "ইকুয়েটরিয়াল গিনি"
 
-#: src/translations.h:437
+#: src/translations.h:438
 msgid "Greece"
 msgstr "গ্রীস"
 
-#: src/translations.h:438
+#: src/translations.h:439
 msgid "South Georgia and the South Sandwich Islands"
 msgstr "দক্ষিণ জর্জিয়া এবং দক্ষিণ স্যান্ডউইচ দ্বীপপুঞ্জ"
 
-#: src/translations.h:439
+#: src/translations.h:440
 msgid "Guatemala"
 msgstr "গুয়াটেমালা"
 
-#: src/translations.h:440
+#: src/translations.h:441
 msgid "Guam"
 msgstr "গুয়াম"
 
-#: src/translations.h:441
+#: src/translations.h:442
 msgid "Guinea-Bissau"
 msgstr "গিনি-বিসাউ"
 
-#: src/translations.h:442
+#: src/translations.h:443
 msgid "Guyana"
 msgstr "গায়ানা"
 
-#: src/translations.h:443
+#: src/translations.h:444
 msgid "Hong Kong"
 msgstr "হং কং"
 
-#: src/translations.h:444
+#: src/translations.h:445
 msgid "Heard Island and McDonald Islands"
 msgstr "হার্ড দ্বীপ ও ম্যাকডোনাল্ড দ্বীপপুঞ্জ"
 
-#: src/translations.h:445
+#: src/translations.h:446
 msgid "Honduras"
 msgstr "হণ্ডুরাস"
 
-#: src/translations.h:446
+#: src/translations.h:447
 msgid "Croatia"
 msgstr "ক্রোয়েশিয়া"
 
-#: src/translations.h:447
+#: src/translations.h:448
 msgid "Haiti"
 msgstr "হাইতি"
 
-#: src/translations.h:448
+#: src/translations.h:449
 msgid "Hungary"
 msgstr "হাঙ্গেরী"
 
-#: src/translations.h:449
+#: src/translations.h:450
 msgid "Indonesia"
 msgstr "ইন্দোনেশিয়া"
 
-#: src/translations.h:450
+#: src/translations.h:451
 msgid "Ireland"
 msgstr "আয়ারল্যান্ড"
 
-#: src/translations.h:451
+#: src/translations.h:452
 msgid "Israel"
 msgstr "ইজরায়েল"
 
-#: src/translations.h:452
+#: src/translations.h:453
 msgid "India"
 msgstr "ভারত"
 
-#: src/translations.h:453
+#: src/translations.h:454
 msgid "British Indian Ocean Territory"
 msgstr "ব্রিটিশ ভারত মহাসাগরীয় ভূখন্ড"
 
-#: src/translations.h:454
+#: src/translations.h:455
 msgid "Iraq"
 msgstr "ইরাক"
 
-#: src/translations.h:455
+#: src/translations.h:456
 msgid "Iran"
 msgstr "ইরান"
 
-#: src/translations.h:456
+#: src/translations.h:457
 msgid "Iceland"
 msgstr "আইসল্যান্ড"
 
-#: src/translations.h:457
+#: src/translations.h:458
 msgid "Italy"
 msgstr "ইতালি"
 
-#: src/translations.h:458
+#: src/translations.h:459
 msgid "Jamaica"
 msgstr "জ্যামাইকা"
 
-#: src/translations.h:459
+#: src/translations.h:460
 msgid "Jordan"
 msgstr "জর্ডন"
 
-#: src/translations.h:460
+#: src/translations.h:461
 msgid "Japan"
 msgstr "জাপান"
 
-#: src/translations.h:461
+#: src/translations.h:462
 msgid "Kenya"
 msgstr "কেনিয়া"
 
-#: src/translations.h:462
+#: src/translations.h:463
 msgid "Kyrgyzstan"
 msgstr "কির্গিজস্তান"
 
-#: src/translations.h:463
+#: src/translations.h:464
 msgid "Cambodia"
 msgstr "কম্বোডিয়া"
 
-#: src/translations.h:464
+#: src/translations.h:465
 msgid "Kiribati"
 msgstr "কিরিবাটি"
 
-#: src/translations.h:465
+#: src/translations.h:466
 msgid "Comoros"
 msgstr "কমোরোস"
 
-#: src/translations.h:466
+#: src/translations.h:467
 msgid "Saint Kitts and Nevis"
 msgstr "সেইন্ট কিটস এন্ড নেভিস"
 
-#: src/translations.h:467
+#: src/translations.h:468
 msgid "Democratic People's Republic of Korea"
 msgstr "জনগণতান্ত্রিক কোরিয়া প্রজাতন্ত্র"
 
-#: src/translations.h:468
+#: src/translations.h:469
 msgid "Republic of Korea"
 msgstr "কোরিয়া প্রজাতন্ত্র"
 
-#: src/translations.h:469
+#: src/translations.h:470
 msgid "Kuwait"
 msgstr "কুয়েত"
 
-#: src/translations.h:470
+#: src/translations.h:471
 msgid "Cayman Islands"
 msgstr "কেম্যান দ্বীপপুঞ্জ"
 
-#: src/translations.h:471
+#: src/translations.h:472
 msgid "Kazakhstan"
 msgstr "কাজাখস্তান"
 
-#: src/translations.h:472
+#: src/translations.h:473
 msgid "Lao"
 msgstr "লাও"
 
-#: src/translations.h:473
+#: src/translations.h:474
 msgid "Lebanon"
 msgstr "লেবানন"
 
-#: src/translations.h:474
+#: src/translations.h:475
 msgid "Saint Lucia"
 msgstr "সেন্ট লুসিয়া"
 
-#: src/translations.h:475
+#: src/translations.h:476
 msgid "Liechtenstein"
 msgstr "লিখটেনস্টাইন"
 
-#: src/translations.h:476
+#: src/translations.h:477
 msgid "Sri Lanka"
 msgstr "শ্রী লঙ্কা"
 
-#: src/translations.h:477
+#: src/translations.h:478
 msgid "Liberia"
 msgstr "লাইবিরিয়া"
 
-#: src/translations.h:478
+#: src/translations.h:479
 msgid "Lesotho"
 msgstr "লেসোথো"
 
-#: src/translations.h:479
+#: src/translations.h:480
 msgid "Lithuania"
 msgstr "লিথুয়েনিয়া"
 
-#: src/translations.h:480
+#: src/translations.h:481
 msgid "Luxembourg"
 msgstr "লুক্সেমবর্গ"
 
-#: src/translations.h:481
+#: src/translations.h:482
 msgid "Latvia"
 msgstr "লাতভিয়া"
 
-#: src/translations.h:482
+#: src/translations.h:483
 msgid "Libyan Arab Jamahiriya"
 msgstr "লিবিয়ান আরব জামাহিরিয়া"
 
-#: src/translations.h:483
+#: src/translations.h:484
 msgid "Morocco"
 msgstr "মরক্কো"
 
-#: src/translations.h:484
+#: src/translations.h:485
 msgid "Monaco"
 msgstr "মোনাকো"
 
-#: src/translations.h:485
+#: src/translations.h:486
 msgid "Moldova"
 msgstr "মলডোভা"
 
-#: src/translations.h:486
+#: src/translations.h:487
 msgid "Madagascar"
 msgstr "মাদাগাস্কার"
 
-#: src/translations.h:487
+#: src/translations.h:488
 msgid "Marshall Islands"
 msgstr "মার্শাল দ্বীপপুঞ্জ"
 
-#: src/translations.h:488
+#: src/translations.h:489
 msgid "Macedonia"
 msgstr "ম্যাসিডোনিয়া"
 
-#: src/translations.h:489
+#: src/translations.h:490
 msgid "Mali"
 msgstr "মালি"
 
-#: src/translations.h:490
+#: src/translations.h:491
 msgid "Myanmar"
 msgstr "মায়ানমার"
 
-#: src/translations.h:491
+#: src/translations.h:492
 msgid "Mongolia"
 msgstr "মোঙ্গোলিয়া"
 
-#: src/translations.h:492
+#: src/translations.h:493
 msgid "Macau"
 msgstr "ম্যাকাও"
 
-#: src/translations.h:493
+#: src/translations.h:494
 msgid "Northern Mariana Islands"
 msgstr "উত্তর মারিয়ানা দ্বীপপুঞ্জ"
 
-#: src/translations.h:494
+#: src/translations.h:495
 msgid "Martinique"
 msgstr "মার্টিনিক্"
 
-#: src/translations.h:495
+#: src/translations.h:496
 msgid "Mauritania"
 msgstr "মরিটানিয়া"
 
-#: src/translations.h:496
+#: src/translations.h:497
 msgid "Montserrat"
 msgstr "মন্টসেরাট"
 
-#: src/translations.h:497
+#: src/translations.h:498
 msgid "Malta"
 msgstr "মাল্টা"
 
-#: src/translations.h:498
+#: src/translations.h:499
 msgid "Mauritius"
 msgstr "মরিশাস"
 
-#: src/translations.h:499
+#: src/translations.h:500
 msgid "Maldives"
 msgstr "মালদ্বীপ"
 
-#: src/translations.h:500
+#: src/translations.h:501
 msgid "Malawi"
 msgstr "মালায়ি"
 
-#: src/translations.h:501
+#: src/translations.h:502
 msgid "Mexico"
 msgstr "মেক্সিকো"
 
-#: src/translations.h:502
+#: src/translations.h:503
 msgid "Malaysia"
 msgstr "মালয়েশিয়া"
 
-#: src/translations.h:503
+#: src/translations.h:504
 msgid "Mozambique"
 msgstr "মোজাম্বিক"
 
-#: src/translations.h:504
+#: src/translations.h:505
 msgid "Namibia"
 msgstr "নামিবিয়া"
 
-#: src/translations.h:505
+#: src/translations.h:506
 msgid "New Caledonia"
 msgstr "নিউ ক্যালিডোনিয়া"
 
-#: src/translations.h:506
+#: src/translations.h:507
 msgid "Niger"
 msgstr "নিজের"
 
-#: src/translations.h:507
+#: src/translations.h:508
 msgid "Norfolk Island"
 msgstr "নরফোক দ্বীপপুঞ্জ"
 
-#: src/translations.h:508
+#: src/translations.h:509
 msgid "Nigeria"
 msgstr "নাইজেরিয়া"
 
-#: src/translations.h:509
+#: src/translations.h:510
 msgid "Nicaragua"
 msgstr "নিকারাগুয়া"
 
-#: src/translations.h:510
+#: src/translations.h:511
 msgid "Netherlands"
 msgstr "নেদারল্যান্ডস"
 
-#: src/translations.h:511
+#: src/translations.h:512
 msgid "Norway"
 msgstr "নরওয়ে"
 
-#: src/translations.h:512
+#: src/translations.h:513
 msgid "Nepal"
 msgstr "নেপাল"
 
-#: src/translations.h:513
+#: src/translations.h:514
 msgid "Nauru"
 msgstr "নাউরু"
 
-#: src/translations.h:514
+#: src/translations.h:515
 msgid "Niue"
 msgstr "নিউয়ে"
 
-#: src/translations.h:515
+#: src/translations.h:516
 msgid "New Zealand"
 msgstr "নিউ জিল্যাণ্ড"
 
-#: src/translations.h:516
+#: src/translations.h:517
 msgid "Oman"
 msgstr "ওমান"
 
-#: src/translations.h:517
+#: src/translations.h:518
 msgid "Panama"
 msgstr "পানামা"
 
-#: src/translations.h:518
+#: src/translations.h:519
 msgid "Peru"
 msgstr "পেরু"
 
-#: src/translations.h:519
+#: src/translations.h:520
 msgid "French Polynesia"
 msgstr "ফেঞ্চ পলিনেশিয়া"
 
-#: src/translations.h:520
+#: src/translations.h:521
 msgid "Papua New Guinea"
 msgstr "পাপুয়া নিউ গিনি"
 
-#: src/translations.h:521
+#: src/translations.h:522
 msgid "Philippines"
 msgstr "ফিলিপিনস"
 
-#: src/translations.h:522
+#: src/translations.h:523
 msgid "Pakistan"
 msgstr "পাকিস্তান"
 
-#: src/translations.h:523
+#: src/translations.h:524
 msgid "Poland"
 msgstr "পোল্যান্ড"
 
-#: src/translations.h:524
+#: src/translations.h:525
 msgid "Saint Pierre and Miquelon"
 msgstr "সেন্ট পিয়ের এবং মিকেলন"
 
-#: src/translations.h:525
+#: src/translations.h:526
 msgid "Pitcairn"
 msgstr "পিটক্যাইর্ন"
 
-#: src/translations.h:526
+#: src/translations.h:527
 msgid "Puerto Rico"
 msgstr "পোর্টো রিকো"
 
-#: src/translations.h:527
+#: src/translations.h:528
 msgid "Palestinian Territories"
 msgstr "প্যালিস্তেনিয়ান আঞ্চল"
 
-#: src/translations.h:528
+#: src/translations.h:529
 msgid "Portugal"
 msgstr "পর্তুগাল"
 
-#: src/translations.h:529
+#: src/translations.h:530
 msgid "Palau"
 msgstr "পালাউ"
 
-#: src/translations.h:530
+#: src/translations.h:531
 msgid "Paraguay"
 msgstr "প্যারাগুয়ে"
 
-#: src/translations.h:531
+#: src/translations.h:532
 msgid "Qatar"
 msgstr "কাতার"
 
-#: src/translations.h:532
+#: src/translations.h:533
 msgid "Réunion"
 msgstr "রিইউনিয়ন"
 
-#: src/translations.h:533
+#: src/translations.h:534
 msgid "Romania"
 msgstr "রোমানিয়া"
 
-#: src/translations.h:534
+#: src/translations.h:535
 msgid "Serbia"
 msgstr "সার্বিয়া"
 
-#: src/translations.h:535
+#: src/translations.h:536
 msgid "Russian Federation"
 msgstr "রুশ ফেডারেশন"
 
-#: src/translations.h:536
+#: src/translations.h:537
 msgid "Rwanda"
 msgstr "রোয়ান্ডা"
 
-#: src/translations.h:537
+#: src/translations.h:538
 msgid "Saudi Arabia"
 msgstr "সৌদি আরব"
 
-#: src/translations.h:538
+#: src/translations.h:539
 msgid "Solomon Islands"
 msgstr "সলোমন দ্বীপপুঞ্জ"
 
-#: src/translations.h:539
+#: src/translations.h:540
 msgid "Seychelles"
 msgstr "সেশিলস"
 
-#: src/translations.h:540
+#: src/translations.h:541
 msgid "Sudan"
 msgstr "সুদান"
 
-#: src/translations.h:541
+#: src/translations.h:542
 msgid "Sweden"
 msgstr "সুইডেন"
 
-#: src/translations.h:542
+#: src/translations.h:543
 msgid "Singapore"
 msgstr "সিঙ্গাপুর"
 
-#: src/translations.h:543
+#: src/translations.h:544
 msgid "Saint Helena"
 msgstr "সেন্ট হেলেনা"
 
-#: src/translations.h:544
+#: src/translations.h:545
 msgid "Slovenia"
 msgstr "স্লোভেনিয়া"
 
-#: src/translations.h:545
+#: src/translations.h:546
 msgid "Svalbard and Jan Mayen"
 msgstr "স্ভ্যালবার্ড ও জান মেয়েন"
 
-#: src/translations.h:546
+#: src/translations.h:547
 msgid "Slovakia"
 msgstr "স্লোভাকিয়া"
 
-#: src/translations.h:547
+#: src/translations.h:548
 msgid "Sierra Leone"
 msgstr "সিয়েরা লিওন"
 
-#: src/translations.h:548
+#: src/translations.h:549
 msgid "San Marino"
 msgstr "সান মারিনো"
 
-#: src/translations.h:549
+#: src/translations.h:550
 msgid "Senegal"
 msgstr "সেনেগাল"
 
-#: src/translations.h:550
+#: src/translations.h:551
 msgid "Somalia"
 msgstr "সোমালিয়া"
 
-#: src/translations.h:551
+#: src/translations.h:552
 msgid "Suriname"
 msgstr "সুরিনাম"
 
-#: src/translations.h:552
+#: src/translations.h:553
 msgid "Sao Tome and Principe"
 msgstr "সাও টোম এবং প্রিন্সিপে"
 
-#: src/translations.h:553
+#: src/translations.h:554
 msgid "El Salvador"
 msgstr "এল সালভাডোর"
 
-#: src/translations.h:554
+#: src/translations.h:555
 msgid "Syrian Arab Republic"
 msgstr "সিরিয় আরব প্রজাতন্ত্র"
 
-#: src/translations.h:555
+#: src/translations.h:556
 msgid "Swaziland"
 msgstr "সোয়াজিল্যান্ড"
 
-#: src/translations.h:556
+#: src/translations.h:557
 msgid "Turks and Caicos Islands"
 msgstr "টার্কস এবং কাইকোস দ্বীপপুঞ্জ"
 
-#: src/translations.h:557
+#: src/translations.h:558
 msgid "Chad"
 msgstr "চাদ"
 
-#: src/translations.h:558
+#: src/translations.h:559
 msgid "French Southern Territories"
 msgstr "ফ্রেঞ্চ সাউদার্ন অঞ্চল"
 
-#: src/translations.h:559
+#: src/translations.h:560
 msgid "Togo"
 msgstr "টোগো"
 
-#: src/translations.h:560
+#: src/translations.h:561
 msgid "Thailand"
 msgstr "থাইল্যান্ড"
 
-#: src/translations.h:561
+#: src/translations.h:562
 msgid "Tajikistan"
 msgstr "তাজাকিস্তান"
 
-#: src/translations.h:562
+#: src/translations.h:563
 msgid "Tokelau"
 msgstr "টোকালাউ"
 
-#: src/translations.h:563
+#: src/translations.h:564
 msgid "East Timor"
 msgstr "পূর্ব তিমূর"
 
-#: src/translations.h:564
+#: src/translations.h:565
 msgid "Turkmenistan"
 msgstr "তুর্কমেনিস্তান"
 
-#: src/translations.h:565
+#: src/translations.h:566
 msgid "Tunisia"
 msgstr "টিউনিসিয়া"
 
-#: src/translations.h:566
+#: src/translations.h:567
 msgid "Tonga"
 msgstr "টোংগা"
 
-#: src/translations.h:567
+#: src/translations.h:568
 msgid "Turkey"
 msgstr "তুরস্ক"
 
-#: src/translations.h:568
+#: src/translations.h:569
 msgid "Trinidad and Tobago"
 msgstr "ত্রিনিদাদ এবং টোবাগো"
 
-#: src/translations.h:569
+#: src/translations.h:570
 msgid "Tuvalu"
 msgstr "টুভালু"
 
-#: src/translations.h:570
+#: src/translations.h:571
 msgid "Taiwan"
 msgstr "তাইওয়ান"
 
-#: src/translations.h:571
+#: src/translations.h:572
 msgid "Tanzania"
 msgstr "তানজানিয়া"
 
-#: src/translations.h:572
+#: src/translations.h:573
 msgid "Ukraine"
 msgstr "ইউক্রেন"
 
-#: src/translations.h:573
+#: src/translations.h:574
 msgid "Uganda"
 msgstr "উগান্ডা"
 
-#: src/translations.h:574
+#: src/translations.h:575
 msgid "United States Minor Outlying Islands"
 msgstr "যুক্তরাষ্ট্রের প্রান্তবর্তী ক্ষুদ্র দ্বীপপুঞ্জ"
 
-#: src/translations.h:575
+#: src/translations.h:576
 msgid "United States"
 msgstr "মার্কিন যুক্তরাষ্ট্র"
 
-#: src/translations.h:576
+#: src/translations.h:577
 msgid "Uruguay"
 msgstr "উরুগুয়ে"
 
-#: src/translations.h:577
+#: src/translations.h:578
 msgid "Uzbekistan"
 msgstr "উজবেকিস্তান"
 
-#: src/translations.h:578
+#: src/translations.h:579
 msgid "Vatican City State"
 msgstr "ভ্যাটিকেন সিটি রাজ্য"
 
-#: src/translations.h:579
+#: src/translations.h:580
 msgid "Saint Vincent and the Grenadines"
 msgstr "সেইন্ট ভিনসেন্ট ও গ্রানাডাইন্স"
 
-#: src/translations.h:580
+#: src/translations.h:581
 msgid "Venezuela"
 msgstr "ভেনিজুয়েলা"
 
-#: src/translations.h:581
+#: src/translations.h:582
 msgid "British Virgin Islands"
 msgstr "ব্রিটিশ ভার্জিন দ্বীপপুঞ্জ"
 
-#: src/translations.h:582
+#: src/translations.h:583
 msgid "United States Virgin Islands"
 msgstr "যুক্তরাষ্ট্র ভার্জিন দ্বীপপুঞ্জ"
 
-#: src/translations.h:583
+#: src/translations.h:584
 msgid "Viet Nam"
 msgstr "ভিয়েতনাম"
 
-#: src/translations.h:584
+#: src/translations.h:585
 msgid "Vanuatu"
 msgstr "ভানুয়াতু"
 
-#: src/translations.h:585
+#: src/translations.h:586
 msgid "Wallis and Futuna"
 msgstr "ওয়ালিস এবং ফুটুনা"
 
-#: src/translations.h:586
+#: src/translations.h:587
 msgid "Samoa"
 msgstr "সামোয়া"
 
-#: src/translations.h:587
+#: src/translations.h:588
 msgid "Yemen"
 msgstr "ইয়েমেন"
 
-#: src/translations.h:588
+#: src/translations.h:589
 msgid "Mayotte"
 msgstr "মায়োট"
 
-#: src/translations.h:589
+#: src/translations.h:590
 msgid "Yugoslavia"
 msgstr "যুগোস্লাভিয়া"
 
-#: src/translations.h:590
+#: src/translations.h:591
 msgid "South Africa"
 msgstr "দক্ষিণ আফ্রিকা"
 
-#: src/translations.h:591
+#: src/translations.h:592
 msgid "Zambia"
 msgstr "জাম্বিয়া"
 
-#: src/translations.h:592
+#: src/translations.h:593
 msgid "Zimbabwe"
 msgstr "জিম্বাবোয়ে"
 
-#: src/translations.h:596
+#: src/translations.h:597
 msgid "&Undo"
 msgstr "&পূর্বাবস্থায় ফিরুন"
 
-#: src/translations.h:597
+#: src/translations.h:598
 msgid "&Redo"
 msgstr "&পুনরায় করুন"
 
-#: src/translations.h:598
+#: src/translations.h:599
 msgid "Cu&t"
 msgstr "&কেটে নিন"
 
-#: src/translations.h:599
+#: src/translations.h:600
 msgid "&Copy"
 msgstr "&অনুকরন করুন"
 
-#: src/translations.h:600
+#: src/translations.h:601
 msgid "&Paste"
 msgstr "অনুলিপি &জুড়ুন"
 
-#: src/translations.h:601 src/ui_locationDialogGui.h:432
+#: src/translations.h:602 src/ui_locationDialogGui.h:432
 #: plugins/Oculars/src/ui_ocularDialog.h:1074
 #: plugins/Oculars/src/ui_ocularDialog.h:1083
 #: plugins/Oculars/src/ui_ocularDialog.h:1090
@@ -3920,56 +3925,56 @@ msgstr "অনুলিপি &জুড়ুন"
 msgid "Delete"
 msgstr "মুছে ফেলুন"
 
-#: src/translations.h:602
+#: src/translations.h:603
 msgid "Select All"
 msgstr "সব নির্বাচন করুন"
 
-#: src/translations.h:603
+#: src/translations.h:604
 msgid "Look in:"
 msgstr "নির্বাচন স্থল :"
 
-#: src/translations.h:604
+#: src/translations.h:605
 msgid "Directory:"
 msgstr "ডিরেক্টরি :"
 
-#: src/translations.h:605
+#: src/translations.h:606
 msgid "Folder"
 msgstr "ফোল্ডার"
 
-#: src/translations.h:606
+#: src/translations.h:607
 msgid "&Choose"
 msgstr "&বেছে নিন"
 
-#: src/translations.h:607 src/ui_configurationDialog.h:1167
+#: src/translations.h:608 src/ui_configurationDialog.h:1167
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:516
 msgid "Cancel"
 msgstr "বাতিল করুন"
 
-#: src/translations.h:608
+#: src/translations.h:609
 msgid "Files of type:"
 msgstr "ধরণ :"
 
-#: src/translations.h:609
+#: src/translations.h:610
 msgid "Date Modified"
 msgstr "শেষ সম্পাদনা"
 
-#: src/translations.h:610
+#: src/translations.h:611
 msgid "Directories"
 msgstr "ডিরেক্টরি সমূহ"
 
-#: src/translations.h:611
+#: src/translations.h:612
 msgid "Computer"
 msgstr "কম্পিউটার"
 
-#: src/translations.h:612
+#: src/translations.h:613
 msgid "&Open"
 msgstr "&খুলুন"
 
-#: src/translations.h:613
+#: src/translations.h:614
 msgid "File &name:"
 msgstr "নথির &নাম :"
 
-#: src/translations.h:614
+#: src/translations.h:615
 msgid "Copy &Link Location"
 msgstr ""
 
@@ -8233,77 +8238,77 @@ msgstr "বহির গ্রহগুলির বৈশিষ্ট্য ব
 msgid "planetary system"
 msgstr "গ্রহ প্রনালী"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:213
+#: plugins/Exoplanets/src/Exoplanet.cpp:214
 msgid "Metallicity"
 msgstr "ধাতুময়তা"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:217
-#: plugins/Exoplanets/src/Exoplanet.cpp:231
+#: plugins/Exoplanets/src/Exoplanet.cpp:218
+#: plugins/Exoplanets/src/Exoplanet.cpp:232
 msgid "Mass"
 msgstr "ভর"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:221
-#: plugins/Exoplanets/src/Exoplanet.cpp:232
+#: plugins/Exoplanets/src/Exoplanet.cpp:222
+#: plugins/Exoplanets/src/Exoplanet.cpp:233
 msgid "Radius"
 msgstr "ব্যাসার্ধ"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:225
+#: plugins/Exoplanets/src/Exoplanet.cpp:226
 #, qt-format
 msgid "Effective temperature: %1 K"
 msgstr "কার্যকর তাপমাত্রা : %1 কেলভিন"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:229
+#: plugins/Exoplanets/src/Exoplanet.cpp:230
 msgid "Exoplanet"
 msgstr "বহির গ্রহ"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:230
+#: plugins/Exoplanets/src/Exoplanet.cpp:231
 msgid "Period"
 msgstr "পর্যায়কাল"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:230
+#: plugins/Exoplanets/src/Exoplanet.cpp:231
 msgid "days"
 msgstr "দিন"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:231
 #: plugins/Exoplanets/src/Exoplanet.cpp:232
+#: plugins/Exoplanets/src/Exoplanet.cpp:233
 msgid "Jup"
 msgstr "বৃহস্পতি"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:233
+#: plugins/Exoplanets/src/Exoplanet.cpp:234
 msgid "Semi-Major Axis"
 msgstr "প্রধান অক্ষ"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:233
+#: plugins/Exoplanets/src/Exoplanet.cpp:234
 msgid "AU"
 msgstr "জ্যোতির্বৈজ্ঞানিক একক"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:234
+#: plugins/Exoplanets/src/Exoplanet.cpp:235
 msgid "Eccentricity"
 msgstr "উত্কেন্দ্রতা"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:235
+#: plugins/Exoplanets/src/Exoplanet.cpp:236
 msgid "Inclination"
 msgstr "তীর্যকতা"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:236
+#: plugins/Exoplanets/src/Exoplanet.cpp:237
 msgid "Angle Distance"
 msgstr "কৌনিক দূরত্ব"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:237
+#: plugins/Exoplanets/src/Exoplanet.cpp:238
 msgid "Discovered year"
 msgstr "আবিষ্কারের সাল"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:238
+#: plugins/Exoplanets/src/Exoplanet.cpp:239
 msgid "Habitable class"
 msgstr "বসবাসযোগ্য"
 
 #. TRANSLATORS: Full phrase is "Mean Surface Temperature"
-#: plugins/Exoplanets/src/Exoplanet.cpp:240
+#: plugins/Exoplanets/src/Exoplanet.cpp:241
 msgid "Mean surface temp."
 msgstr "ভূমির গড় উষ্ণতা ।"
 
 #. TRANSLATORS: ESI = Earth Similarity Index
-#: plugins/Exoplanets/src/Exoplanet.cpp:242
+#: plugins/Exoplanets/src/Exoplanet.cpp:243
 msgid "ESI"
 msgstr "ভূসদৃশ্যতা"
 
@@ -10185,6 +10190,10 @@ msgstr ""
 #, qt-format
 #~ msgid "Magnitude: <b>%1</b> (B-V: <b>%2</b>)"
 #~ msgstr "ঔজ্জ্বল্য : <b>%1</b> (B-V: <b>%2</b>)"
+
+#, qt-format
+#~ msgid "Distance: %1 Light Years"
+#~ msgstr "দূরত্ব : %1 আলোকবর্ষ"
 
 #~ msgid "Additional info (Extra 3)"
 #~ msgstr "অতিরিক্ত তথ্য ৩"
