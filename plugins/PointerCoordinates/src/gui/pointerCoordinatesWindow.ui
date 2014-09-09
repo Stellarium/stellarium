@@ -184,7 +184,7 @@
           <item>
            <widget class="QLabel" name="labelCoordinatesDescription">
             <property name="text">
-             <string>Show equatorial coordinates of the mouse cursor for epoch J2000.0</string>
+             <string>Show coordinates of the mouse cursor on the screen.</string>
             </property>
             <property name="wordWrap">
              <bool>true</bool>
@@ -228,6 +228,30 @@
            </widget>
           </item>
           <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_4">
+            <item>
+             <widget class="QLabel" name="labelCoordinateSystem">
+              <property name="toolTip">
+               <string>Which coordinate system will be used for displaying</string>
+              </property>
+              <property name="text">
+               <string>Coordinates:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QComboBox" name="coordinateSystemComboBox">
+              <property name="editable">
+               <bool>false</bool>
+              </property>
+              <property name="insertPolicy">
+               <enum>QComboBox::NoInsert</enum>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
            <layout class="QHBoxLayout" name="horizontalLayout">
             <item>
              <widget class="QLabel" name="labelFontSize">
@@ -266,7 +290,7 @@
             <item>
              <widget class="QComboBox" name="placeComboBox">
               <property name="editable">
-               <bool>true</bool>
+               <bool>false</bool>
               </property>
               <property name="insertPolicy">
                <enum>QComboBox::NoInsert</enum>
