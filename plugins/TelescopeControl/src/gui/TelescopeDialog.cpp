@@ -99,6 +99,11 @@ void TelescopeDialog::createDialogContent()
 {
 	ui->setupUi(dialog);
 	
+	//Kinetic scrolling for tablet pc and pc
+	QList<QWidget *> addscroll;
+	addscroll << ui->telescopeTreeView << ui->textBrowserHelp << ui->textBrowserAbout;
+	installKineticScrolling(addscroll);
+
 	//Inherited connect
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
