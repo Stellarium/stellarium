@@ -162,11 +162,11 @@ QString StelObject::getPositionInfoString(const StelCore *core, const InfoString
 			az = 3.*M_PI - az;  // N is zero, E is 90 degrees
 			if (az > M_PI*2)
 				az -= M_PI*2;
-			res += q_("Az/Alt: %1/%2").arg(StelUtils::radToDmsStr(az), StelUtils::radToDmsStr(alt)) + " " + q_("(apparent)") + "<br>";
+			res += q_("Alt/Az: %1/%2").arg(StelUtils::radToDmsStr(alt), StelUtils::radToDmsStr(az)) + " " + q_("(apparent)") + "<br>";
 		}
 		else
 		{
-			res += q_("Az/Alt: %1/%2").arg(StelUtils::radToDmsStr(az), StelUtils::radToDmsStr(alt)) + " " + "<br>";
+			res += q_("Alt/Az: %1/%2").arg(StelUtils::radToDmsStr(alt), StelUtils::radToDmsStr(az)) + " " + "<br>";
 		}
 	}
 
@@ -178,12 +178,12 @@ QString StelObject::getPositionInfoString(const StelCore *core, const InfoString
 		StelUtils::rectToSphe(&ra_equ,&dec_equ,getEquinoxEquatorialPos(core));
 		StelUtils::ctRadec2Ecl(ra_equ, dec_equ, ecl, &lambda, &beta);
 		if (lambda<0) lambda+=2.0*M_PI;
-		res += q_("Ecliptic (of J2000): %1/%2").arg(StelUtils::radToDmsStr(lambda, true), StelUtils::radToDmsStr(beta, true)) + "<br>";
+		res += q_("Ecliptic longitude/latitude (of J2000): %1/%2").arg(StelUtils::radToDmsStr(lambda, true), StelUtils::radToDmsStr(beta, true)) + "<br>";
 		ecl= ssystem->getEarth()->getRotObliquity(core->getJDay());
 		StelUtils::rectToSphe(&ra_equ,&dec_equ,getEquinoxEquatorialPos(core));
 		StelUtils::ctRadec2Ecl(ra_equ, dec_equ, ecl, &lambda, &beta);
 		if (lambda<0) lambda+=2.0*M_PI;
-		res += q_("Ecliptic (of date): %1/%2").arg(StelUtils::radToDmsStr(lambda, true), StelUtils::radToDmsStr(beta, true)) + "<br>";
+		res += q_("Ecliptic longitude/latitude (of date): %1/%2").arg(StelUtils::radToDmsStr(lambda, true), StelUtils::radToDmsStr(beta, true)) + "<br>";
 	}
 	return res;
 }
