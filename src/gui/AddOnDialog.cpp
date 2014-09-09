@@ -229,6 +229,7 @@ void AddOnDialog::installSelectedRows()
 		i.next();
 		StelApp::getInstance().getStelAddOnMgr().installAddOn(i.key(), i.value());
 	}
+	view->setAllChecked(false);
 }
 
 void AddOnDialog::removeSelectedRows()
@@ -239,4 +240,5 @@ void AddOnDialog::removeSelectedRows()
 		i.next();
 		StelApp::getInstance().getStelAddOnMgr().removeAddOn(i.key(), i.value());
 	}
+	view->setAllChecked(false);
 }
