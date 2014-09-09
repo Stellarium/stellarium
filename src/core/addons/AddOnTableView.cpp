@@ -198,7 +198,7 @@ AddOnWidget* AddOnTableView::insertAddOnWidget(int wRow)
 	setIndexWidget(model->index(wRow, 0), widget);
 	widget->setVisible(false);
 	m_widgets.insert(wRow, widget);
-	if (objectName() == "texturesTableView")
+	if (objectName() == CATEGORY_TEXTURE)
 	{
 		connect(widget, SIGNAL(checkRow(int, int)),
 			this, SLOT(slotCheckRow(int, int)));
