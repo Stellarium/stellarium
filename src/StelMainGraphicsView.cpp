@@ -130,6 +130,10 @@ Q_IMPORT_PLUGIN(Pulsars)
 Q_IMPORT_PLUGIN(Exoplanets)
 #endif
 
+#ifdef USE_STATIC_PLUGIN_FOV
+Q_IMPORT_PLUGIN(FOV)
+#endif
+
 #ifdef USE_STATIC_PLUGIN_OBSERVABILITY
 Q_IMPORT_PLUGIN(Observability)
 #endif

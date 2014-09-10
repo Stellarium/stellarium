@@ -215,6 +215,7 @@ SET(USE_PLUGIN_SIMPLEDRAWLINE 0 CACHE BOOL "Define whether the Simple Draw Line 
 SET(USE_PLUGIN_ANGLEMEASURE 1 CACHE BOOL "Define whether the AngleMeasure plugin should be created.")
 SET(USE_PLUGIN_COMPASSMARKS 1 CACHE BOOL "Define whether the CompassMarks plugin should be created.")
 SET(USE_PLUGIN_EXOPLANETS 1 CACHE BOOL "Define whether the Exoplanets plugin should be created.")
+SET(USE_PLUGIN_FOV 1 CACHE BOOL "Define whether the Field of View plugin should be created.")
 SET(USE_PLUGIN_LOGBOOK 0 CACHE BOOL "Define whether the LogBook plugin should be created.")
 SET(USE_PLUGIN_NOVAE 1 CACHE BOOL "Define whether the Novae plugin should be created.")
 SET(USE_PLUGIN_OBSERVABILITY 1 CACHE BOOL "Define whether the Observability plugin should be created.")
