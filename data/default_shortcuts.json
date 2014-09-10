@@ -1053,6 +1053,20 @@
 				}
 			}
 		},
+		"PluginNavStars":
+		{
+			"pluginId" : "NavStars",
+			"actions" :
+			{
+				"actionShow_NavStars":
+				{
+					"text": "Show navigational stars",
+					"primaryKey": "",
+					"checkable": true,
+					"autorepeat": false
+				}
+			}
+		},
 		"PluginRendererStatistics":
 		{
 			"pluginId" : "RendererStatistics",
