@@ -124,13 +124,6 @@ QString StelObject::getPositionInfoString(const StelCore *core, const InfoString
 		res += q_("RA/DE (of date): %1/%2").arg(StelUtils::radToHmsStr(ra_equ), StelUtils::radToDmsStr(dec_equ)) + "<br>";
 	}
 
-	if (flags&GalacticCoord)
-	{
-		double glong, glat;
-		StelUtils::rectToSphe(&glong, &glat, getGalacticPos(core));
-		res += q_("Galactic longitude/latitude: %1/%2").arg(StelUtils::radToDmsStr(glong,true), StelUtils::radToDmsStr(glat,true)) + "<br>";
-	}
-
 	if (flags&HourAngle)
 	{
 		double dec_sidereal, ra_sidereal;
@@ -185,6 +178,14 @@ QString StelObject::getPositionInfoString(const StelCore *core, const InfoString
 		if (lambda<0) lambda+=2.0*M_PI;
 		res += q_("Ecliptic longitude/latitude (of date): %1/%2").arg(StelUtils::radToDmsStr(lambda, true), StelUtils::radToDmsStr(beta, true)) + "<br>";
 	}
+
+	if (flags&GalacticCoord)
+	{
+		double glong, glat;
+		StelUtils::rectToSphe(&glong, &glat, getGalacticPos(core));
+		res += q_("Galactic longitude/latitude: %1/%2").arg(StelUtils::radToDmsStr(glong,true), StelUtils::radToDmsStr(glat,true)) + "<br>";
+	}
+
 	return res;
 }
 
