@@ -532,7 +532,7 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	conf->setValue("viewing/flag_horizon_line", glmgr->getFlagHorizonLine());
 	conf->setValue("viewing/flag_equatorial_J2000_grid", glmgr->getFlagEquatorJ2000Grid());
 	conf->setValue("viewing/flag_galactic_grid", glmgr->getFlagGalacticGrid());
-	conf->setValue("viewing/flag_galactic_plane_line", glmgr->getFlagGalacticPlaneLine());
+	conf->setValue("viewing/flag_galactic_equator_line", glmgr->getFlagGalacticEquatorLine());
 	conf->setValue("viewing/flag_cardinal_points", lmgr->getFlagCardinalsPoints());
 	conf->setValue("viewing/flag_constellation_drawing", cmgr->getFlagLines());
 	conf->setValue("viewing/flag_constellation_name", cmgr->getFlagLabels());
