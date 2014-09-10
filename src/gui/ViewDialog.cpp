@@ -267,7 +267,7 @@ void ViewDialog::createDialogContent()
 	connectCheckBox(ui->showHorizonLineCheckBox, "actionShow_Horizon_Line");
 	connectCheckBox(ui->showEquatorialGridCheckBox, "actionShow_Equatorial_Grid");
 	connectCheckBox(ui->showGalacticGridCheckBox, "actionShow_Galactic_Grid");
-	connectCheckBox(ui->showGalacticPlaneLineCheckBox, "actionShow_Galactic_Plane_Line");
+	connectCheckBox(ui->showGalacticEquatorLineCheckBox, "actionShow_Galactic_Equator_Line");
 	connectCheckBox(ui->showAzimuthalGridCheckBox, "actionShow_Azimuthal_Grid");
 	connectCheckBox(ui->showEquatorialJ2000GridCheckBox, "actionShow_Equatorial_J2000_Grid");
 	connectCheckBox(ui->showEclipticGridJ2000CheckBox, "actionShow_Ecliptic_J2000_Grid");
