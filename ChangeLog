@@ -1,11 +1,18 @@
+- Fixed: Galactic plane renamed to correct: Galactic equator
+- Fixed: Speed issues when computing lots of comets
+- Added: Light layer for old_style landscapes
+- Added: Auto-detect location via network lookup.
+
 0.13.0 [2014-07-19]
-This version based on Qt 5 and has new modulated core, and new features (example: normal mapping) and fixes for 115 bugs, includes:
+This version based on Qt 5 and has new modulated core, and new features (example: normal mapping) and fixes for 115 bugs, including:
 New plugin: Equation of Time - provides solution for Equation of Time.
 New plugin: Field of View - provides shortcuts for quick changes field of view.
 New plugin: Navigational Stars - marks 58 navigational stars on the sky.
 New plugin: Pointer Coordinates - shows the coordinates of the mouse pointer.
 New plugin: Meteor Showers - provides visualization of meteor showers.
 New translatable strings and new textures.
+Improved Landscapes: New Polygonal type, texture saving for shperical, and optional light pollution/streetlight layer.
+Comet Tails
 New version of the Satellites plugin: introduces star-like satellites and bug fixes.
 New version of the Exoplanets plugin: displaying of the potential habitable exoplanets; improvements for performance and code refactoring.
 New version of the Angle Measure plugin: displaying of the position angle.
