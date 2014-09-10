@@ -87,7 +87,8 @@ private:
 		NotInstalled,
 		PartiallyInstalled,
 		FullyInstalled,
-		Installing
+		Installing,
+		Corrupted
 	};
 
 	QSqlDatabase m_db;

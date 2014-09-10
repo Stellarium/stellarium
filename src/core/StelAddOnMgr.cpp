@@ -232,25 +232,26 @@ bool StelAddOnMgr::installFromFile(const StelAddOnDAO::AddOnInfo addonInfo,
 	}
 
 	// checking integrity
-	int installed = 0;
+	int status;
 	if (addonInfo.checksum == calculateMd5(file))
 	{
 		// installing files
-		installed = m_pStelAddOns.value(addonInfo.category)
+		status = m_pStelAddOns.value(addonInfo.category)
 				->installFromFile(addonInfo.idInstall,
 						  addonInfo.filepath,
 						  selectedFiles);
 	}
 	else
 	{
+		status = Corrupted;
 		qWarning() << "Add-On Mgr: Error: File "
 			   << addonInfo.filename
 			   << " is corrupt, MD5 mismatch!";
 	}
 
-	m_pStelAddOnDAO->updateAddOnStatus(addonInfo.idInstall, installed);
+	m_pStelAddOnDAO->updateAddOnStatus(addonInfo.idInstall, status);
 	emit (dataUpdated(addonInfo.category));
-	return installed;
+	return status;
 }
 
 void StelAddOnMgr::installFromFile(const QString& filePath)

@@ -100,7 +100,9 @@ QVariant AddOnTableModel::data(const QModelIndex& index, int role) const
 	else if (column == COLUMN_INSTALLED && role == Qt::DisplayRole)
 	{
 		int status = value.toInt();
-		if (status == 3)
+		if (status == 4)
+			value = qVariantFromValue(q_("Corrupted"));
+		else if (status == 3)
 			value = qVariantFromValue(q_("Installing"));
 		else if (status == 2)
 			value = qVariantFromValue(q_("Yes"));
