@@ -8,14 +8,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Stellarium 0.10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-09-10 00:03+0700\n"
+"POT-Creation-Date: 2014-09-10 21:41+0700\n"
 "PO-Revision-Date: 2014-08-16 09:01+0000\n"
 "Last-Translator: misibacsi <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-09-10 06:23+0000\n"
+"X-Launchpad-Export-Date: 2014-09-11 06:17+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 "X-Poedit-Language: Hungarian\n"
 
@@ -74,8 +74,8 @@ msgid "Horizon"
 msgstr "Horizont"
 
 #: src/core/modules/GridLinesMgr.cpp:564
-msgid "Galactic Plane"
-msgstr "Galaktikus sík"
+msgid "Galactic Equator"
+msgstr ""
 
 #: src/core/modules/GridLinesMgr.cpp:698
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:331
@@ -122,8 +122,8 @@ msgid "Galactic grid"
 msgstr "Galaktikus hálózat"
 
 #: src/core/modules/GridLinesMgr.cpp:707 src/ui_viewDialog.h:1247
-msgid "Galactic plane"
-msgstr "Galaktikus sík"
+msgid "Galactic equator"
+msgstr ""
 
 #: src/core/modules/LandscapeMgr.cpp:355 src/ui_viewDialog.h:1176
 msgid "Atmosphere"
@@ -1105,34 +1105,34 @@ msgstr "RA, D (J2000): %1, %2"
 msgid "RA/DE (of date): %1/%2"
 msgstr "RA, D (pillanatnyi): %1, %2"
 
-#: src/core/StelObject.cpp:131
-#, qt-format
-msgid "Galactic longitude/latitude: %1/%2"
-msgstr "Galaktikus hosszúság/szélesség : %1/%2"
-
-#: src/core/StelObject.cpp:143 src/core/StelObject.cpp:147
+#: src/core/StelObject.cpp:136 src/core/StelObject.cpp:140
 #, qt-format
 msgid "Hour angle/DE: %1/%2"
 msgstr "Óraszög, D: %1, %2"
 
-#: src/core/StelObject.cpp:143 src/core/StelObject.cpp:165
+#: src/core/StelObject.cpp:136 src/core/StelObject.cpp:158
 msgid "(apparent)"
 msgstr "(látszó)"
 
-#: src/core/StelObject.cpp:165 src/core/StelObject.cpp:169
+#: src/core/StelObject.cpp:158 src/core/StelObject.cpp:162
 #, qt-format
 msgid "Az/Alt: %1/%2"
 msgstr "Az/Alt: %1/%2"
 
-#: src/core/StelObject.cpp:181
+#: src/core/StelObject.cpp:174
 #, qt-format
 msgid "Ecliptic longitude/latitude (of J2000): %1/%2"
 msgstr ""
 
-#: src/core/StelObject.cpp:186
+#: src/core/StelObject.cpp:179
 #, qt-format
 msgid "Ecliptic longitude/latitude (of date): %1/%2"
 msgstr ""
+
+#: src/core/StelObject.cpp:186
+#, qt-format
+msgid "Galactic longitude/latitude: %1/%2"
+msgstr "Galaktikus hosszúság/szélesség : %1/%2"
 
 #: src/core/StelSkyLayerMgr.cpp:87
 msgid "Deep-sky objects background images"
@@ -4470,8 +4470,8 @@ msgid "Show ecliptic line"
 msgstr "Ekliptika vonala"
 
 #: src/ui_viewDialog.h:1245
-msgid "Show Galactic plane line"
-msgstr "Galaktikus sík mutatása"
+msgid "Show Galactic equator line"
+msgstr ""
 
 #: src/ui_viewDialog.h:1249
 msgid "Projection"
@@ -7300,8 +7300,8 @@ msgid "Nebula hints"
 msgstr "Tippek ködökhöz"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:370
-msgid "Galactic plane line"
-msgstr "Galaktikus sík vonala"
+msgid "Galactic equator line"
+msgstr ""
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:399
 msgid "Effects"
@@ -10175,6 +10175,9 @@ msgstr ""
 #~ msgid "(geometric)"
 #~ msgstr "(geometrikus)"
 
+#~ msgid "Galactic Plane"
+#~ msgstr "Galaktikus sík"
+
 #, qt-format
 #~ msgid "Galactic longitude/latitude (J2000): %1/%2"
 #~ msgstr "Galaktikus hosszúság/szélesség (J2000): %1/%2"
@@ -10190,6 +10193,9 @@ msgstr ""
 #~ msgstr ""
 #~ "Képernyőkímélő a Naprendszer eseményeinek ábrázolásával (összesen 171 "
 #~ "esemény!)"
+
+#~ msgid "Galactic plane"
+#~ msgstr "Galaktikus sík"
 
 #~ msgid "Return to default"
 #~ msgstr "Alapbeállítás"
@@ -10259,6 +10265,9 @@ msgstr ""
 #~ msgid "Telescope Control Plugin"
 #~ msgstr "Távcsővezérlő plug-in"
 
+#~ msgid "Show Galactic plane line"
+#~ msgstr "Galaktikus sík mutatása"
+
 #~ msgid "Additional information 3"
 #~ msgstr "További információk 3"
 
@@ -10283,6 +10292,9 @@ msgstr ""
 #, qt-format
 #~ msgid "Updated %1/%2 satellite(s); %3 missing"
 #~ msgstr "%1/%2 műhold frissítve; %3 hiányzik"
+
+#~ msgid "Galactic plane line"
+#~ msgstr "Galaktikus sík vonala"
 
 #~ msgid "Display mode for quasars"
 #~ msgstr "Kvazárok megjelenítési módja"
