@@ -69,6 +69,21 @@ public:
 	StelAddOnDAO* getStelAddOnDAO() { return m_pStelAddOnDAO; }
 	StelAddOn* getStelAddOnInstance(QString category) { return m_pStelAddOns.value(category); }
 
+	//! @enum AddOnStatus
+	//! Used for keeping track of the download/update status
+	enum AddOnStatus
+	{
+		NotInstalled,
+		PartiallyInstalled,
+		FullyInstalled,
+		Installing,
+		Corrupted,
+		InvalidFormat,
+		UnableToWrite,
+		UnableToRead
+
+	};
+
 signals:
 	void dataUpdated(const QString& category);
 	void updateTableViews();
@@ -80,17 +95,6 @@ private slots:
 	void newDownloadedData();
 
 private:
-	//! @enum AddOnStatus
-	//! Used for keeping track of the download/update status
-	enum AddOnStatus
-	{
-		NotInstalled,
-		PartiallyInstalled,
-		FullyInstalled,
-		Installing,
-		Corrupted
-	};
-
 	QSqlDatabase m_db;
 	StelAddOnDAO* m_pStelAddOnDAO;
 	QSettings* m_pConfig;

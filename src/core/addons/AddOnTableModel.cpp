@@ -100,7 +100,13 @@ QVariant AddOnTableModel::data(const QModelIndex& index, int role) const
 	else if (column == COLUMN_INSTALLED && role == Qt::DisplayRole)
 	{
 		int status = value.toInt();
-		if (status == 4)
+		if (status == 7)
+			value = qVariantFromValue(q_("Unable to read"));
+		else if (status == 6)
+			value = qVariantFromValue(q_("Unable to write"));
+		else if (status == 5)
+			value = qVariantFromValue(q_("Invalid format"));
+		else if (status == 4)
 			value = qVariantFromValue(q_("Corrupted"));
 		else if (status == 3)
 			value = qVariantFromValue(q_("Installing"));
