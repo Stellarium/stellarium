@@ -21,6 +21,7 @@
 #include <QDirIterator>
 
 #include "AOCatalog.hpp"
+#include "StelAddOnMgr.hpp"
 
 AOCatalog::AOCatalog()
 {
@@ -67,7 +68,7 @@ int AOCatalog::installFromFile(const QString& idInstall,
 	{
 		qWarning() << "Add-On Catalog: Unable to intall" << idInstall
 			   << "The file found is not a .cat or .json";
-		return 0;
+		return StelAddOnMgr::InvalidFormat;
 	}
 
 	QString destination = StelFileMgr::getUserDir() % "/" % idInstall % suffix;
@@ -75,11 +76,11 @@ int AOCatalog::installFromFile(const QString& idInstall,
 	if (!QFile(downloadedFilepath).copy(destination))
 	{
 		qWarning() << "Add-On Catalog: Unable to install" << idInstall;
-		return 0;
+		return StelAddOnMgr::UnableToWrite;
 	}
 
 	qDebug() << "Add-On Catalog: New catalog installed:" << idInstall;
-	return 2;
+	return StelAddOnMgr::FullyInstalled;
 }
 
 int AOCatalog::uninstallAddOn(const QString &idInstall,

@@ -20,6 +20,7 @@
 #include <QSettings>
 
 #include "AOTexture.hpp"
+#include "StelAddOnMgr.hpp"
 
 AOTexture::AOTexture()
 	: m_sTexturesInstallDir(StelFileMgr::getUserDir() % "/textures/")
@@ -55,7 +56,7 @@ int AOTexture::installFromFile(const QString& idInstall,
 			       const QString& downloadedFilepath,
 			       const QStringList& selectedFiles) const
 {
-	int installed = 0;
+	int installed;
 	QString suffix = QFileInfo(downloadedFilepath).suffix();
 	if (suffix == "zip")
 	{
@@ -69,6 +70,7 @@ int AOTexture::installFromFile(const QString& idInstall,
 	{
 		qWarning() << "Add-On Texture: Unable to intall" << idInstall
 			   << "The file found is not a .zip or .png";
+		installed = StelAddOnMgr::InvalidFormat;
 	}
 
 	return installed;
@@ -81,10 +83,10 @@ int AOTexture::installFromZip(QString idInstall, QString downloadedFilepath, QSt
 	{
 		qWarning() << "Add-On Texture: Unable to open the ZIP archive:"
 			   << QDir::toNativeSeparators(downloadedFilepath);
-		return 0;
+		return StelAddOnMgr::UnableToRead;
 	}
 
-	int installed = 2;
+	int installed = StelAddOnMgr::FullyInstalled;
 	QList<QZipReader::FileInfo> infoList = reader.fileInfoList();
 	foreach(QZipReader::FileInfo info, infoList)
 	{
@@ -100,7 +102,7 @@ int AOTexture::installFromZip(QString idInstall, QString downloadedFilepath, QSt
 		{
 			if (!selectedFiles.contains(info.filePath) && !file.exists())
 			{
-				installed = 1; // partially
+				installed = StelAddOnMgr::PartiallyInstalled;
 				continue;
 			}
 		}
@@ -127,13 +129,13 @@ int AOTexture::installFromImg(QString idInstall, QString downloadedFilepath) con
 	if (!QFile(downloadedFilepath).copy(destination))
 	{
 		qWarning() << "Add-On Texture: Unable to install" << filename;
-		return 0;
+		return StelAddOnMgr::UnableToWrite;
 	}
 
 	m_pInstalledTextures->setValue(filename, idInstall);
 
 	qDebug() << "Add-On Texture: New texture installed:" << filename;
-	return 2;
+	return StelAddOnMgr::FullyInstalled;
 }
 
 int AOTexture::uninstallAddOn(const QString& idInstall,

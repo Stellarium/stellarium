@@ -18,6 +18,7 @@
  */
 
 #include "AOScript.hpp"
+#include "StelAddOnMgr.hpp"
 
 AOScript::AOScript()
 	: m_sScriptInstallDir(StelFileMgr::getUserDir() % "/scripts/")
@@ -50,7 +51,7 @@ int AOScript::installFromFile(const QString& idInstall,
 	{
 		qWarning() << "Add-On Script: Unable to intall" << idInstall
 			   << "The file found is not a .ssc or .sts";
-		return 0;
+		return StelAddOnMgr::InvalidFormat;
 	}
 
 	QString destination = m_sScriptInstallDir % "/" % idInstall % suffix;
@@ -58,11 +59,11 @@ int AOScript::installFromFile(const QString& idInstall,
 	if (!QFile(downloadedFilepath).copy(destination))
 	{
 		qWarning() << "Add-On Script: Unable to install" << idInstall;
-		return 0;
+		return StelAddOnMgr::UnableToWrite;
 	}
 
 	qDebug() << "Add-On Script: New script installed:" << idInstall;
-	return 2;
+	return StelAddOnMgr::FullyInstalled;
 }
 
 int AOScript::uninstallAddOn(const QString& idInstall,

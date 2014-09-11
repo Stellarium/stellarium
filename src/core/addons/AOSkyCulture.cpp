@@ -18,6 +18,7 @@
  */
 
 #include "AOSkyCulture.hpp"
+#include "StelAddOnMgr.hpp"
 
 AOSkyCulture::AOSkyCulture()
 	: m_sSkyCultureInstallDir(StelFileMgr::getUserDir() % "/skycultures/")
@@ -47,7 +48,7 @@ int AOSkyCulture::installFromFile(const QString& idInstall,
 	{
 		qWarning() << "Add-On SkyCultures: Unable to open the ZIP archive:"
 			   << QDir::toNativeSeparators(downloadedFilepath);
-		return 0;
+		return StelAddOnMgr::UnableToRead;
 	}
 
 	QString destination = m_sSkyCultureInstallDir % idInstall;
@@ -55,12 +56,12 @@ int AOSkyCulture::installFromFile(const QString& idInstall,
 
 	if (!reader.extractAll(destination)) {
 		qWarning() << "Add-On SkyCultures: Unable to install the new sky culture!";
-		return 0;
+		return StelAddOnMgr::UnableToRead;
 	}
 
 	qWarning() << "Add-On SkyCultures: New sky culture" << idInstall << "installed!";
 	emit(skyCulturesChanged());
-	return 2;
+	return StelAddOnMgr::FullyInstalled;
 }
 
 int AOSkyCulture::uninstallAddOn(const QString &idInstall,

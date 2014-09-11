@@ -18,6 +18,7 @@
  */
 
 #include "AOLandscape.hpp"
+#include "StelAddOnMgr.hpp"
 
 AOLandscape::AOLandscape()
 	: m_pLandscapeMgr(GETSTELMODULE(LandscapeMgr))
@@ -48,9 +49,9 @@ int AOLandscape::installFromFile(const QString& idInstall,
 	QString landscapeId = m_pLandscapeMgr->installLandscapeFromArchive(downloadedFilepath);
 	if (landscapeId.isEmpty())
 	{
-		return 0;
+		return StelAddOnMgr::NotInstalled;
 	}
-	return 2;
+	return StelAddOnMgr::FullyInstalled;
 }
 
 int AOLandscape::uninstallAddOn(const QString& idInstall,

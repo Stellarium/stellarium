@@ -20,6 +20,7 @@
 #include <QCryptographicHash>
 
 #include "AOLanguagePack.hpp"
+#include "StelAddOnMgr.hpp"
 
 AOLanguagePack::AOLanguagePack()
 	: m_sLocaleInstallDir(StelFileMgr::getLocaleUserDir())
@@ -64,7 +65,7 @@ int AOLanguagePack::installFromFile(const QString& idInstall,
 	{
 		qWarning() << "Add-On Language: Unable to intall" << idInstall
 			   << "The file found is not a .qm";
-		return 0;
+		return StelAddOnMgr::InvalidFormat;
 	}
 
 	QString destination = m_sLocaleInstallDir % "/" % idInstall % ".qm";
@@ -72,11 +73,11 @@ int AOLanguagePack::installFromFile(const QString& idInstall,
 	if (!QFile(downloadedFilepath).copy(destination))
 	{
 		qWarning() << "Add-On Language: Unable to install" << idInstall;
-		return 0;
+		return StelAddOnMgr::UnableToWrite;
 	}
 
 	qDebug() << "Add-On Language: New language installed:" << idInstall;
-	return 2;
+	return StelAddOnMgr::FullyInstalled;
 }
 
 int AOLanguagePack::uninstallAddOn(const QString &idInstall,
