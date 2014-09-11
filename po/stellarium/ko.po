@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-09-10 00:03+0700\n"
+"POT-Creation-Date: 2014-09-10 21:41+0700\n"
 "PO-Revision-Date: 2014-09-01 00:50+0000\n"
 "Last-Translator: windazol <ys11791@gmail.com>\n"
 "Language-Team: Korean <ko@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-09-10 06:25+0000\n"
+"X-Launchpad-Export-Date: 2014-09-11 06:20+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 "Language: ko\n"
 
@@ -73,8 +73,8 @@ msgid "Horizon"
 msgstr "지평선"
 
 #: src/core/modules/GridLinesMgr.cpp:564
-msgid "Galactic Plane"
-msgstr "은하면"
+msgid "Galactic Equator"
+msgstr ""
 
 #: src/core/modules/GridLinesMgr.cpp:698
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:331
@@ -121,8 +121,8 @@ msgid "Galactic grid"
 msgstr "은하좌표계 격자"
 
 #: src/core/modules/GridLinesMgr.cpp:707 src/ui_viewDialog.h:1247
-msgid "Galactic plane"
-msgstr "은하면"
+msgid "Galactic equator"
+msgstr ""
 
 #: src/core/modules/LandscapeMgr.cpp:355 src/ui_viewDialog.h:1176
 msgid "Atmosphere"
@@ -1073,34 +1073,34 @@ msgstr "적경/적위 (J2000): %1/%2"
 msgid "RA/DE (of date): %1/%2"
 msgstr "적경/적위 (현재): %1/%2"
 
-#: src/core/StelObject.cpp:131
-#, qt-format
-msgid "Galactic longitude/latitude: %1/%2"
-msgstr "은경/은위: %1/%2"
-
-#: src/core/StelObject.cpp:143 src/core/StelObject.cpp:147
+#: src/core/StelObject.cpp:136 src/core/StelObject.cpp:140
 #, qt-format
 msgid "Hour angle/DE: %1/%2"
 msgstr "시간각/적위: %1/%2"
 
-#: src/core/StelObject.cpp:143 src/core/StelObject.cpp:165
+#: src/core/StelObject.cpp:136 src/core/StelObject.cpp:158
 msgid "(apparent)"
 msgstr "(겉보기)"
 
-#: src/core/StelObject.cpp:165 src/core/StelObject.cpp:169
+#: src/core/StelObject.cpp:158 src/core/StelObject.cpp:162
 #, qt-format
 msgid "Az/Alt: %1/%2"
 msgstr "방위각/고도: %1/%2"
 
-#: src/core/StelObject.cpp:181
+#: src/core/StelObject.cpp:174
 #, qt-format
 msgid "Ecliptic longitude/latitude (of J2000): %1/%2"
 msgstr ""
 
-#: src/core/StelObject.cpp:186
+#: src/core/StelObject.cpp:179
 #, qt-format
 msgid "Ecliptic longitude/latitude (of date): %1/%2"
 msgstr ""
+
+#: src/core/StelObject.cpp:186
+#, qt-format
+msgid "Galactic longitude/latitude: %1/%2"
+msgstr "은경/은위: %1/%2"
 
 #: src/core/StelSkyLayerMgr.cpp:87
 msgid "Deep-sky objects background images"
@@ -4412,8 +4412,8 @@ msgid "Show ecliptic line"
 msgstr "황도 보기"
 
 #: src/ui_viewDialog.h:1245
-msgid "Show Galactic plane line"
-msgstr "은하면 보기"
+msgid "Show Galactic equator line"
+msgstr ""
 
 #: src/ui_viewDialog.h:1249
 msgid "Projection"
@@ -7201,8 +7201,8 @@ msgid "Nebula hints"
 msgstr "성운 힌트"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:370
-msgid "Galactic plane line"
-msgstr "은하면"
+msgid "Galactic equator line"
+msgstr ""
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:399
 msgid "Effects"
@@ -9987,8 +9987,20 @@ msgstr ""
 #~ msgid "(geometric)"
 #~ msgstr "(기하학적)"
 
+#~ msgid "Galactic Plane"
+#~ msgstr "은하면"
+
 #~ msgid "Return to default"
 #~ msgstr "기본값으로 이동"
+
+#~ msgid "Galactic plane"
+#~ msgstr "은하면"
+
+#~ msgid "Show Galactic plane line"
+#~ msgstr "은하면 보기"
+
+#~ msgid "Galactic plane line"
+#~ msgstr "은하면"
 
 #~ msgid "Dark Nebula"
 #~ msgstr "암흑성운"

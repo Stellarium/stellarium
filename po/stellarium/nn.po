@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-09-10 00:03+0700\n"
+"POT-Creation-Date: 2014-09-10 21:41+0700\n"
 "PO-Revision-Date: 2012-11-24 19:42+0000\n"
 "Last-Translator: Alexander Mackinnon Jansen <alexander.jansen@hesbynett.no>\n"
 "Language-Team: Norwegian Nynorsk <nn@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-09-10 06:30+0000\n"
+"X-Launchpad-Export-Date: 2014-09-11 06:24+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:106 src/core/modules/StarMgr.cpp:346
@@ -72,8 +72,8 @@ msgid "Horizon"
 msgstr "Horisont"
 
 #: src/core/modules/GridLinesMgr.cpp:564
-msgid "Galactic Plane"
-msgstr "Galaktisk plan"
+msgid "Galactic Equator"
+msgstr ""
 
 #: src/core/modules/GridLinesMgr.cpp:698
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:331
@@ -120,8 +120,8 @@ msgid "Galactic grid"
 msgstr "Galaktisk nett"
 
 #: src/core/modules/GridLinesMgr.cpp:707 src/ui_viewDialog.h:1247
-msgid "Galactic plane"
-msgstr "Galaktisk plan"
+msgid "Galactic equator"
+msgstr ""
 
 #: src/core/modules/LandscapeMgr.cpp:355 src/ui_viewDialog.h:1176
 msgid "Atmosphere"
@@ -1026,33 +1026,33 @@ msgstr "RA/DE (J2000): %1/%2"
 msgid "RA/DE (of date): %1/%2"
 msgstr "RA/DE (av dato): %1/%2"
 
-#: src/core/StelObject.cpp:131
-#, qt-format
-msgid "Galactic longitude/latitude: %1/%2"
-msgstr ""
-
-#: src/core/StelObject.cpp:143 src/core/StelObject.cpp:147
+#: src/core/StelObject.cpp:136 src/core/StelObject.cpp:140
 #, qt-format
 msgid "Hour angle/DE: %1/%2"
 msgstr "Timevinkel/DE: %1/%2"
 
-#: src/core/StelObject.cpp:143 src/core/StelObject.cpp:165
+#: src/core/StelObject.cpp:136 src/core/StelObject.cpp:158
 msgid "(apparent)"
 msgstr "(tilsynelatande)"
 
-#: src/core/StelObject.cpp:165 src/core/StelObject.cpp:169
+#: src/core/StelObject.cpp:158 src/core/StelObject.cpp:162
 #, qt-format
 msgid "Az/Alt: %1/%2"
 msgstr "Az/Alt: %1/%2"
 
-#: src/core/StelObject.cpp:181
+#: src/core/StelObject.cpp:174
 #, qt-format
 msgid "Ecliptic longitude/latitude (of J2000): %1/%2"
 msgstr ""
 
-#: src/core/StelObject.cpp:186
+#: src/core/StelObject.cpp:179
 #, qt-format
 msgid "Ecliptic longitude/latitude (of date): %1/%2"
+msgstr ""
+
+#: src/core/StelObject.cpp:186
+#, qt-format
+msgid "Galactic longitude/latitude: %1/%2"
 msgstr ""
 
 #: src/core/StelSkyLayerMgr.cpp:87
@@ -4385,8 +4385,8 @@ msgid "Show ecliptic line"
 msgstr "Vis ekliptikken"
 
 #: src/ui_viewDialog.h:1245
-msgid "Show Galactic plane line"
-msgstr "Vis linje for det galaktiske planet"
+msgid "Show Galactic equator line"
+msgstr ""
 
 #: src/ui_viewDialog.h:1249
 msgid "Projection"
@@ -7234,8 +7234,8 @@ msgid "Nebula hints"
 msgstr "Stjernetåkehint"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:370
-msgid "Galactic plane line"
-msgstr "Line for det galaktiske planet"
+msgid "Galactic equator line"
+msgstr ""
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:399
 msgid "Effects"
@@ -10022,8 +10022,14 @@ msgstr ""
 #~ msgid "(geometric)"
 #~ msgstr "(geometrisk)"
 
+#~ msgid "Galactic Plane"
+#~ msgstr "Galaktisk plan"
+
 #~ msgid "When a Script is Running"
 #~ msgstr "Når eit skript køyrer"
+
+#~ msgid "Galactic plane"
+#~ msgstr "Galaktisk plan"
 
 #, qt-format
 #~ msgid "Apparent Magnitude: <b>%1</b> (by extinction)"
@@ -10061,6 +10067,9 @@ msgstr ""
 #~ msgid "0"
 #~ msgstr "0"
 
+#~ msgid "Galactic plane line"
+#~ msgstr "Line for det galaktiske planet"
+
 #, qt-format
 #~ msgid "Ecliptic Topocentric (of date): %1/%2"
 #~ msgstr "Ekliptisk toposentrisk (d.d.): %1/%2"
@@ -10090,6 +10099,9 @@ msgstr ""
 
 #~ msgid "Run landscapes script from file"
 #~ msgstr "Køyr landskapskript fra fil"
+
+#~ msgid "Show Galactic plane line"
+#~ msgstr "Vis linje for det galaktiske planet"
 
 #~ msgid "Additional information 3"
 #~ msgstr "Tilleggsinformasjon 3"

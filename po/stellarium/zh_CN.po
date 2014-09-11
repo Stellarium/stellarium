@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-09-10 00:03+0700\n"
+"POT-Creation-Date: 2014-09-10 21:41+0700\n"
 "PO-Revision-Date: 2014-05-03 01:41+0000\n"
 "Last-Translator: ShunjinZHENG <zhengshunjin@gmail.com>\n"
 "Language-Team: Chinese (Hong Kong) <zh_HK@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-09-10 06:43+0000\n"
+"X-Launchpad-Export-Date: 2014-09-11 06:35+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:106 src/core/modules/StarMgr.cpp:346
@@ -72,8 +72,8 @@ msgid "Horizon"
 msgstr "地平线"
 
 #: src/core/modules/GridLinesMgr.cpp:564
-msgid "Galactic Plane"
-msgstr "银道面"
+msgid "Galactic Equator"
+msgstr ""
 
 #: src/core/modules/GridLinesMgr.cpp:698
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:331
@@ -120,8 +120,8 @@ msgid "Galactic grid"
 msgstr "银道坐标网格"
 
 #: src/core/modules/GridLinesMgr.cpp:707 src/ui_viewDialog.h:1247
-msgid "Galactic plane"
-msgstr "银道面"
+msgid "Galactic equator"
+msgstr ""
 
 #: src/core/modules/LandscapeMgr.cpp:355 src/ui_viewDialog.h:1176
 msgid "Atmosphere"
@@ -1046,34 +1046,34 @@ msgstr "赤经/赤纬 (J2000): %1/%2"
 msgid "RA/DE (of date): %1/%2"
 msgstr "赤经/赤纬(当前日期纪元): %1/%2"
 
-#: src/core/StelObject.cpp:131
-#, qt-format
-msgid "Galactic longitude/latitude: %1/%2"
-msgstr "银经/银纬：%1/%2"
-
-#: src/core/StelObject.cpp:143 src/core/StelObject.cpp:147
+#: src/core/StelObject.cpp:136 src/core/StelObject.cpp:140
 #, qt-format
 msgid "Hour angle/DE: %1/%2"
 msgstr "时角/赤纬: %1/%2"
 
-#: src/core/StelObject.cpp:143 src/core/StelObject.cpp:165
+#: src/core/StelObject.cpp:136 src/core/StelObject.cpp:158
 msgid "(apparent)"
 msgstr "(视觉)"
 
-#: src/core/StelObject.cpp:165 src/core/StelObject.cpp:169
+#: src/core/StelObject.cpp:158 src/core/StelObject.cpp:162
 #, qt-format
 msgid "Az/Alt: %1/%2"
 msgstr "方位角/高度角: %1/%2"
 
-#: src/core/StelObject.cpp:181
+#: src/core/StelObject.cpp:174
 #, qt-format
 msgid "Ecliptic longitude/latitude (of J2000): %1/%2"
 msgstr ""
 
-#: src/core/StelObject.cpp:186
+#: src/core/StelObject.cpp:179
 #, qt-format
 msgid "Ecliptic longitude/latitude (of date): %1/%2"
 msgstr ""
+
+#: src/core/StelObject.cpp:186
+#, qt-format
+msgid "Galactic longitude/latitude: %1/%2"
+msgstr "银经/银纬：%1/%2"
 
 #: src/core/StelSkyLayerMgr.cpp:87
 msgid "Deep-sky objects background images"
@@ -4371,8 +4371,8 @@ msgid "Show ecliptic line"
 msgstr "显示黄道线"
 
 #: src/ui_viewDialog.h:1245
-msgid "Show Galactic plane line"
-msgstr "显示银道平面"
+msgid "Show Galactic equator line"
+msgstr ""
 
 #: src/ui_viewDialog.h:1249
 msgid "Projection"
@@ -7133,8 +7133,8 @@ msgid "Nebula hints"
 msgstr "星云标记"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:370
-msgid "Galactic plane line"
-msgstr "银道线"
+msgid "Galactic equator line"
+msgstr ""
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:399
 msgid "Effects"
@@ -9944,6 +9944,9 @@ msgstr ""
 #~ "1604A（10月8日）、SN 1680A（8月15日）、SN 1885A（8月17日）、SN 1895B（7月5日）、SN "
 #~ "1937C（8月21日）、SN 1972E（5月8日）、SN 1987A（2月24日）和SN 2011FE（9月13日）。"
 
+#~ msgid "Galactic Plane"
+#~ msgstr "银道面"
+
 #~ msgid "clear script"
 #~ msgstr "清除脚本"
 
@@ -10062,6 +10065,9 @@ msgstr ""
 #~ msgstr ""
 #~ "类星体插件提供一些视星等超过16等的类星体的可视化模拟。类星体星表数据根据 \"Quasars and Active Galactic Nuclei\" "
 #~ "(13th Ed.) 编制。"
+
+#~ msgid "Show Galactic plane line"
+#~ msgstr "显示银道平面"
 
 #, qt-format
 #~ msgid "Ecliptic Geocentric (of date): %1/%2"
@@ -10195,6 +10201,12 @@ msgstr ""
 
 #~ msgid "Oculars Plugin"
 #~ msgstr "目镜视角插件"
+
+#~ msgid "Galactic plane line"
+#~ msgstr "银道线"
+
+#~ msgid "Galactic plane"
+#~ msgstr "银道面"
 
 #~ msgid "Galactic coordinates, equinox of J2000.0"
 #~ msgstr "银道坐标系，纪元J2000.0"
