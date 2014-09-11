@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-09-10 00:03+0700\n"
-"PO-Revision-Date: 2014-09-06 19:08+0000\n"
+"POT-Creation-Date: 2014-09-10 21:41+0700\n"
+"PO-Revision-Date: 2014-09-10 07:33+0000\n"
 "Last-Translator: Manuel Rosales <manuel.rosales@mundo-r.com>\n"
 "Language-Team: Galician <gl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-09-10 06:20+0000\n"
+"X-Launchpad-Export-Date: 2014-09-11 06:15+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:106 src/core/modules/StarMgr.cpp:346
@@ -72,8 +72,8 @@ msgid "Horizon"
 msgstr "Horizonte"
 
 #: src/core/modules/GridLinesMgr.cpp:564
-msgid "Galactic Plane"
-msgstr "Plano Galáctico"
+msgid "Galactic Equator"
+msgstr ""
 
 #: src/core/modules/GridLinesMgr.cpp:698
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:331
@@ -120,8 +120,8 @@ msgid "Galactic grid"
 msgstr "Grella galáctica"
 
 #: src/core/modules/GridLinesMgr.cpp:707 src/ui_viewDialog.h:1247
-msgid "Galactic plane"
-msgstr "Plano galáctico"
+msgid "Galactic equator"
+msgstr ""
 
 #: src/core/modules/LandscapeMgr.cpp:355 src/ui_viewDialog.h:1176
 msgid "Atmosphere"
@@ -1114,34 +1114,34 @@ msgstr "AR/DE (J2000): %1/%2"
 msgid "RA/DE (of date): %1/%2"
 msgstr "AR/DE (de data): %1/%2"
 
-#: src/core/StelObject.cpp:131
-#, qt-format
-msgid "Galactic longitude/latitude: %1/%2"
-msgstr "Lonxitude/latitude galácticas: %1/%2"
-
-#: src/core/StelObject.cpp:143 src/core/StelObject.cpp:147
+#: src/core/StelObject.cpp:136 src/core/StelObject.cpp:140
 #, qt-format
 msgid "Hour angle/DE: %1/%2"
 msgstr "Ángulo horario/DE: %1/%2"
 
-#: src/core/StelObject.cpp:143 src/core/StelObject.cpp:165
+#: src/core/StelObject.cpp:136 src/core/StelObject.cpp:158
 msgid "(apparent)"
 msgstr "(aparente)"
 
-#: src/core/StelObject.cpp:165 src/core/StelObject.cpp:169
+#: src/core/StelObject.cpp:158 src/core/StelObject.cpp:162
 #, qt-format
 msgid "Az/Alt: %1/%2"
 msgstr "Az/Alt: %1/%2"
 
-#: src/core/StelObject.cpp:181
+#: src/core/StelObject.cpp:174
 #, qt-format
 msgid "Ecliptic longitude/latitude (of J2000): %1/%2"
-msgstr ""
+msgstr "Lonxitude/latitude da eclíptica (de J2000): %1/%2"
+
+#: src/core/StelObject.cpp:179
+#, qt-format
+msgid "Ecliptic longitude/latitude (of date): %1/%2"
+msgstr "Lonxitude/latitude da eclíptica (de data): %1/%2"
 
 #: src/core/StelObject.cpp:186
 #, qt-format
-msgid "Ecliptic longitude/latitude (of date): %1/%2"
-msgstr ""
+msgid "Galactic longitude/latitude: %1/%2"
+msgstr "Lonxitude/latitude galácticas: %1/%2"
 
 #: src/core/StelSkyLayerMgr.cpp:87
 msgid "Deep-sky objects background images"
@@ -2560,7 +2560,7 @@ msgstr "Azteca"
 
 #: src/translations.h:226
 msgid "Boorong"
-msgstr ""
+msgstr "Boorong"
 
 #: src/translations.h:227
 msgid "Chinese"
@@ -4501,8 +4501,8 @@ msgid "Show ecliptic line"
 msgstr "Amosar a liña eclíptica"
 
 #: src/ui_viewDialog.h:1245
-msgid "Show Galactic plane line"
-msgstr "Amosar a liña do plano galáctico"
+msgid "Show Galactic equator line"
+msgstr ""
 
 #: src/ui_viewDialog.h:1249
 msgid "Projection"
@@ -7398,8 +7398,8 @@ msgid "Nebula hints"
 msgstr "Información de nebulosas"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:370
-msgid "Galactic plane line"
-msgstr "Liña do plano galáctico"
+msgid "Galactic equator line"
+msgstr ""
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:399
 msgid "Effects"
@@ -9992,27 +9992,27 @@ msgstr "Este plugin amosa as coordendadas do punteiro do rato"
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:97
 msgid "Show coordinates of the mouse pointer"
-msgstr ""
+msgstr "Amosar coordinadas do punteiro do rato"
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:135
 msgctxt "abbreviated in the plugin"
 msgid "RA/Dec (J2000.0)"
-msgstr ""
+msgstr "RA/Dec (J2000.0)"
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:146
 msgctxt "abbreviated in the plugin"
 msgid "Az/Alt"
-msgstr ""
+msgstr "Az/Alt"
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:156
 msgctxt "abbreviated in the plugin"
 msgid "Ecl. Long/Lat (J2000.0)"
-msgstr ""
+msgstr "Ecl. Lonx/Lat (J2000.0)"
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:165
 msgctxt "abbreviated in the plugin"
 msgid "HA/Dec"
-msgstr ""
+msgstr "HA/Dec"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:101
 msgid "Pointer Coordinates plug-in"
@@ -10032,15 +10032,15 @@ msgstr "O ángulo inferior dereito da pantalla"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:153
 msgid "Right ascension/Declination (J2000.0)"
-msgstr ""
+msgstr "Ascensión recta/Declinación (J2000.0)"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:155
 msgid "Ecliptic Longitude/Latitude (J2000.0)"
-msgstr ""
+msgstr "Lonxitude/Latitude da Eclíptica (J2000.0)"
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:300
 msgid "Show coordinates of the mouse cursor on the screen."
-msgstr ""
+msgstr "Amosar coordinadas do cursor do rato na pantalla"
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:301
 msgid "Enable display of coordinates at startup"
@@ -10052,11 +10052,11 @@ msgstr "Amosar o botón de plugin na barra de ferramentas"
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:304
 msgid "Which coordinate system will be used for displaying"
-msgstr ""
+msgstr "Sistema de coordenadas que será usado visualmente"
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:306
 msgid "Coordinates:"
-msgstr ""
+msgstr "Coordenadas:"
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:309
 msgid "Place of the string with coordinates of the mouse pointer"
@@ -10365,6 +10365,15 @@ msgstr "Situar o texto:"
 #~ msgid "Obliquity (of date): %1"
 #~ msgstr "Oblicuidade (de data): %1"
 
+#~ msgid "Galactic Plane"
+#~ msgstr "Plano Galáctico"
+
+#~ msgid "Galactic plane"
+#~ msgstr "Plano galáctico"
+
+#~ msgid "Galactic plane line"
+#~ msgstr "Liña do plano galáctico"
+
 #~ msgid "Crosshairs"
 #~ msgstr "Cruz"
 
@@ -10479,6 +10488,9 @@ msgstr "Situar o texto:"
 
 #~ msgid "extragalactic (in MC) pulsar"
 #~ msgstr "púlsar extragaláctico (en MC)"
+
+#~ msgid "Show Galactic plane line"
+#~ msgstr "Amosar a liña do plano galáctico"
 
 #~ msgid "Display the equatorial position (J2000 ref)"
 #~ msgstr "Ver a posición ecuatorial (J2000 ref)"

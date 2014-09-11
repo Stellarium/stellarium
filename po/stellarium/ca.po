@@ -10,14 +10,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ca\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-09-10 00:03+0700\n"
+"POT-Creation-Date: 2014-09-10 21:41+0700\n"
 "PO-Revision-Date: 2014-08-11 17:42+0000\n"
 "Last-Translator: Daniel Alomar i Claramonte <daniel.adastra@gmail.com>\n"
 "Language-Team: Català <ca@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-09-10 06:14+0000\n"
+"X-Launchpad-Export-Date: 2014-09-11 06:09+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:106 src/core/modules/StarMgr.cpp:346
@@ -75,8 +75,8 @@ msgid "Horizon"
 msgstr "Horitzó"
 
 #: src/core/modules/GridLinesMgr.cpp:564
-msgid "Galactic Plane"
-msgstr "Plà galàctic"
+msgid "Galactic Equator"
+msgstr ""
 
 #: src/core/modules/GridLinesMgr.cpp:698
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:331
@@ -123,8 +123,8 @@ msgid "Galactic grid"
 msgstr "Graella galàctica"
 
 #: src/core/modules/GridLinesMgr.cpp:707 src/ui_viewDialog.h:1247
-msgid "Galactic plane"
-msgstr "Plà galàctic"
+msgid "Galactic equator"
+msgstr ""
 
 #: src/core/modules/LandscapeMgr.cpp:355 src/ui_viewDialog.h:1176
 msgid "Atmosphere"
@@ -1123,34 +1123,34 @@ msgstr "RA/DE (J2000): %1/%2"
 msgid "RA/DE (of date): %1/%2"
 msgstr "AR/DE (de data): %1/%2"
 
-#: src/core/StelObject.cpp:131
-#, qt-format
-msgid "Galactic longitude/latitude: %1/%2"
-msgstr "Longitud/latitud galàctica: %1/%2"
-
-#: src/core/StelObject.cpp:143 src/core/StelObject.cpp:147
+#: src/core/StelObject.cpp:136 src/core/StelObject.cpp:140
 #, qt-format
 msgid "Hour angle/DE: %1/%2"
 msgstr "Angle horari/DE: %1/%2"
 
-#: src/core/StelObject.cpp:143 src/core/StelObject.cpp:165
+#: src/core/StelObject.cpp:136 src/core/StelObject.cpp:158
 msgid "(apparent)"
 msgstr "(aparent)"
 
-#: src/core/StelObject.cpp:165 src/core/StelObject.cpp:169
+#: src/core/StelObject.cpp:158 src/core/StelObject.cpp:162
 #, qt-format
 msgid "Az/Alt: %1/%2"
 msgstr "Az/Alt: %1/%2"
 
-#: src/core/StelObject.cpp:181
+#: src/core/StelObject.cpp:174
 #, qt-format
 msgid "Ecliptic longitude/latitude (of J2000): %1/%2"
 msgstr ""
 
-#: src/core/StelObject.cpp:186
+#: src/core/StelObject.cpp:179
 #, qt-format
 msgid "Ecliptic longitude/latitude (of date): %1/%2"
 msgstr ""
+
+#: src/core/StelObject.cpp:186
+#, qt-format
+msgid "Galactic longitude/latitude: %1/%2"
+msgstr "Longitud/latitud galàctica: %1/%2"
 
 #: src/core/StelSkyLayerMgr.cpp:87
 msgid "Deep-sky objects background images"
@@ -4514,8 +4514,8 @@ msgid "Show ecliptic line"
 msgstr "Mostra la línia de la eclíptica"
 
 #: src/ui_viewDialog.h:1245
-msgid "Show Galactic plane line"
-msgstr "Mostra la línia del plànol Galàctic"
+msgid "Show Galactic equator line"
+msgstr ""
 
 #: src/ui_viewDialog.h:1249
 msgid "Projection"
@@ -7411,8 +7411,8 @@ msgid "Nebula hints"
 msgstr "Consells de nebulosa"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:370
-msgid "Galactic plane line"
-msgstr "Línia del pla galàctic"
+msgid "Galactic equator line"
+msgstr ""
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:399
 msgid "Effects"
@@ -10353,6 +10353,9 @@ msgstr ""
 #~ msgid "Crosshairs"
 #~ msgstr "Punts de mira"
 
+#~ msgid "Galactic plane"
+#~ msgstr "Plà galàctic"
+
 #, qt-format
 #~ msgid "Apparent Magnitude: <b>%1</b> (by extinction)"
 #~ msgstr "Magnitud aparent: <b>%1</b> (per extinció)"
@@ -10364,6 +10367,12 @@ msgstr ""
 #, qt-format
 #~ msgid "Magnitude: <b>%1</b> (B-V: <b>%2</b>)"
 #~ msgstr "Magnitud: <b>%1</b> (B-V: <b>%2</b>)"
+
+#~ msgid "Galactic Plane"
+#~ msgstr "Plà galàctic"
+
+#~ msgid "Galactic plane line"
+#~ msgstr "Línia del pla galàctic"
 
 #~ msgid "clear script"
 #~ msgstr "neteja l'script"
@@ -10470,6 +10479,9 @@ msgstr ""
 
 #~ msgid "Display the hour angle + DE (of date)"
 #~ msgstr "Mostra l'angle (hora) + DE (de la data)"
+
+#~ msgid "Show Galactic plane line"
+#~ msgstr "Mostra la línia del plànol Galàctic"
 
 #~ msgid ""
 #~ "Support is provided via the Launchpad website.  Be sure to put \"Satellites "

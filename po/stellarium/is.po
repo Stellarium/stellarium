@@ -10,14 +10,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 20130131_stellarium_stellarium-is\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-09-10 00:03+0700\n"
+"POT-Creation-Date: 2014-09-10 21:41+0700\n"
 "PO-Revision-Date: 2013-05-17 23:23+0000\n"
 "Last-Translator: Sverrir Gudmundsson <Unknown>\n"
 "Language-Team: Icelandic <translation-team-is@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-09-10 06:23+0000\n"
+"X-Launchpad-Export-Date: 2014-09-11 06:17+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 "Language: is\n"
 
@@ -76,8 +76,8 @@ msgid "Horizon"
 msgstr "Sjóndeildarhringur"
 
 #: src/core/modules/GridLinesMgr.cpp:564
-msgid "Galactic Plane"
-msgstr "Flötur vetrarbrautar"
+msgid "Galactic Equator"
+msgstr ""
 
 #: src/core/modules/GridLinesMgr.cpp:698
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:331
@@ -124,8 +124,8 @@ msgid "Galactic grid"
 msgstr "Vetrarbrautarhnit"
 
 #: src/core/modules/GridLinesMgr.cpp:707 src/ui_viewDialog.h:1247
-msgid "Galactic plane"
-msgstr "Flötur vetrarbrautar"
+msgid "Galactic equator"
+msgstr ""
 
 #: src/core/modules/LandscapeMgr.cpp:355 src/ui_viewDialog.h:1176
 msgid "Atmosphere"
@@ -1023,33 +1023,33 @@ msgstr "Stjörnulengd/Stjörnubreidd (J2000): %1/%2"
 msgid "RA/DE (of date): %1/%2"
 msgstr "Stjörnulengd/Stjörnubreidd (m.v. dagsetningu): %1/%2"
 
-#: src/core/StelObject.cpp:131
-#, qt-format
-msgid "Galactic longitude/latitude: %1/%2"
-msgstr ""
-
-#: src/core/StelObject.cpp:143 src/core/StelObject.cpp:147
+#: src/core/StelObject.cpp:136 src/core/StelObject.cpp:140
 #, qt-format
 msgid "Hour angle/DE: %1/%2"
 msgstr "Tímahorn/Stjörnubreidd: %1/%2"
 
-#: src/core/StelObject.cpp:143 src/core/StelObject.cpp:165
+#: src/core/StelObject.cpp:136 src/core/StelObject.cpp:158
 msgid "(apparent)"
 msgstr "(á himninum)"
 
-#: src/core/StelObject.cpp:165 src/core/StelObject.cpp:169
+#: src/core/StelObject.cpp:158 src/core/StelObject.cpp:162
 #, qt-format
 msgid "Az/Alt: %1/%2"
 msgstr "Áttarhorn/Stjörnuhæð: %1/%2"
 
-#: src/core/StelObject.cpp:181
+#: src/core/StelObject.cpp:174
 #, qt-format
 msgid "Ecliptic longitude/latitude (of J2000): %1/%2"
 msgstr ""
 
-#: src/core/StelObject.cpp:186
+#: src/core/StelObject.cpp:179
 #, qt-format
 msgid "Ecliptic longitude/latitude (of date): %1/%2"
+msgstr ""
+
+#: src/core/StelObject.cpp:186
+#, qt-format
+msgid "Galactic longitude/latitude: %1/%2"
 msgstr ""
 
 #: src/core/StelSkyLayerMgr.cpp:87
@@ -4370,8 +4370,8 @@ msgid "Show ecliptic line"
 msgstr "Sýna sólbaugslínu"
 
 #: src/ui_viewDialog.h:1245
-msgid "Show Galactic plane line"
-msgstr "Sýna vetrarbrautarlínu"
+msgid "Show Galactic equator line"
+msgstr ""
 
 #: src/ui_viewDialog.h:1249
 msgid "Projection"
@@ -7141,8 +7141,8 @@ msgid "Nebula hints"
 msgstr "Vísbendingar um stjörnuþokur"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:370
-msgid "Galactic plane line"
-msgstr "Lýna fyrir vetrarbrautarflöt"
+msgid "Galactic equator line"
+msgstr ""
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:399
 msgid "Effects"
@@ -9921,6 +9921,15 @@ msgstr ""
 #~ msgid "Crosshairs"
 #~ msgstr "Krossmið"
 
+#~ msgid "Galactic Plane"
+#~ msgstr "Flötur vetrarbrautar"
+
+#~ msgid "Galactic plane"
+#~ msgstr "Flötur vetrarbrautar"
+
+#~ msgid "Galactic plane line"
+#~ msgstr "Lýna fyrir vetrarbrautarflöt"
+
 #, qt-format
 #~ msgid "Apparent Magnitude: <b>%1</b> (by extinction)"
 #~ msgstr "Sýndarbirtustig: <b>%1</b> (með ljósdeyfingu)"
@@ -9941,6 +9950,9 @@ msgstr ""
 
 #~ msgid "An object's name"
 #~ msgstr "Nafn fyrirbæris"
+
+#~ msgid "Show Galactic plane line"
+#~ msgstr "Sýna vetrarbrautarlínu"
 
 #~ msgid "Display the equatorial position (J2000 ref)"
 #~ msgstr "Sýna staðsetningu í miðbaugshnitum (J2000)"
