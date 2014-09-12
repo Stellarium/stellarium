@@ -99,7 +99,7 @@
 #define glIsShader(...)             GLFUNC_(glIsShader(__VA_ARGS__))
 #define glLinkProgram(...)          GLFUNC_(glLinkProgram(__VA_ARGS__))
 #define glProgramParameteri(...)    GLFUNC_(glProgramParameteri(__VA_ARGS__)) // GZ TRIAL
-#define glProgramParameteriEXT(...)    GLFUNC_(glProgramParameteri(__VA_ARGS__)) // GZ TRIAL
+#define glProgramParameteriEXT(...)    GLFUNC_(glProgramParameteriEXT(__VA_ARGS__)) // GZ TRIAL
 #define glReleaseShaderCompiler(...)    GLFUNC_(glReleaseShaderCompiler(__VA_ARGS__))
 #define glRenderbufferStorage(...)  GLFUNC_(glRenderbufferStorage(__VA_ARGS__))
 #define glSampleCoverage(...)       GLFUNC_(glSampleCoverage(__VA_ARGS__))
