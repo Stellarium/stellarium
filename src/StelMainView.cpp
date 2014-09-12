@@ -350,7 +350,7 @@ void StelMainView::init(QSettings* conf)
 	qDebug() << "GL Shading Language version is" << QString(reinterpret_cast<const char*>(glGetString(GL_SHADING_LANGUAGE_VERSION)));
 	
 	// Only give extended info if called on command line, for diagnostic.
-	if (qApp->property("dump_OpenGL_diagnostics").toBool())
+	if (qApp->property("dump_OpenGL_details").toBool())
 		dumpOpenGLdiagnostics();
 
 	stelApp= new StelApp();
