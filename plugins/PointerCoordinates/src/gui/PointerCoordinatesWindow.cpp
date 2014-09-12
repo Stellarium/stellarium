@@ -151,9 +151,11 @@ void PointerCoordinatesWindow::populateCoordinateSystemsList()
 	//For each algorithm, display the localized name and store the key as user
 	//data. Unfortunately, there's no other way to do this than with a cycle.
 	csys->addItem(q_("Right ascension/Declination (J2000.0)"), "RaDecJ2000");
+	csys->addItem(q_("Right ascension/Declination"), "RaDec");
 	csys->addItem(q_("Hour angle/Declination"), "HourAngle");
 	csys->addItem(q_("Ecliptic Longitude/Latitude (J2000.0)"), "Ecliptic");
 	csys->addItem(q_("Altitude/Azimuth"), "AltAzi");
+	csys->addItem(q_("Galactic Longitude/Latitude"), "Galactic");
 
 	//Restore the selection
 	index = csys->findData(selectedSystemId, Qt::UserRole, Qt::MatchCaseSensitive);

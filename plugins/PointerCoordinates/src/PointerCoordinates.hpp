@@ -55,9 +55,11 @@ public:
 	enum CoordinateSystem
 	{
 		RaDecJ2000,
+		RaDec,
 		HourAngle,
 		Ecliptic,
-		AltAzi
+		AltAzi,
+		Galactic
 	};
 
 
