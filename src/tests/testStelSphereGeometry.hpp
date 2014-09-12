@@ -30,7 +30,7 @@ Q_OBJECT
 private slots:
 	void initTestCase();
 	void testOctahedronPolygon();
-	// void testSphericalCap(); FIXME: Doesn't pass on Windows
+	void testSphericalCap();
 	void testContains();
 	void testPlaneIntersect2();
 	void testGreatCircleIntersection();
