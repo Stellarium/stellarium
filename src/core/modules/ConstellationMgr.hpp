@@ -137,6 +137,7 @@ public:
 	//! @return a vector of matching object name by order of relevance, or an empty vector if nothing match
 	virtual QStringList listMatchingObjects(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false) const;
 	virtual QStringList listAllObjects(bool inEnglish) const;
+	virtual QStringList listAllObjectsByType(const QString& objType, bool inEnglish) const { Q_UNUSED(objType) Q_UNUSED(inEnglish) return QStringList(); }
 	virtual QString getName() const { return "Constellations"; }
 
 	///////////////////////////////////////////////////////////////////////////

@@ -84,6 +84,11 @@ void SatellitesImportDialog::setVisible(bool visible)
 void SatellitesImportDialog::createDialogContent()
 {
 	ui->setupUi(dialog);
+
+	//Kinetic scrolling for tablet pc and pc
+	QList<QWidget *> addscroll;
+	addscroll << ui->listView;
+	installKineticScrolling(addscroll);
 	
 	connect(ui->closeStelWindow, SIGNAL(clicked()),
 	        this, SLOT(close()));

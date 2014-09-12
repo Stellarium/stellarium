@@ -122,7 +122,8 @@ public:
 	//! @param useStartOfWords the autofill mode for returned objects names.
 	//! @return a list of matching object name by order of relevance, or an empty list if nothing matches.
 	virtual QStringList listMatchingObjects(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false) const;
-	virtual QStringList listAllObjects(bool inEnglish) const;
+	virtual QStringList listAllObjects(bool inEnglish) const { Q_UNUSED(inEnglish) return QStringList(); }
+	virtual QStringList listAllObjectsByType(const QString& objType, bool inEnglish) const;
 	virtual QString getName() const { return "Solar System"; }
 
 public slots:

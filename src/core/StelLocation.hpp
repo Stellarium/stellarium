@@ -74,6 +74,9 @@ public:
 	//! Parse a location from a line serialization
 	static StelLocation createFromLine(const QString& line);
 
+	//! Compute great-circle distance between two locations
+	static float distanceDegrees(const float long1, const float lat1, const float long2, const float lat2);
+
 	//! Used privately by the StelLocationMgr
 	bool isUserLocation;
 

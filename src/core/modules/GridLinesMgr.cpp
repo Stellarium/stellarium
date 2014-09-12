@@ -72,7 +72,7 @@ public:
 		ECLIPTIC,
 		MERIDIAN,
 		HORIZON,
-		GALACTICPLANE
+		GALACTICEQUATOR
 	};
 	// Create and precompute positions of a SkyGrid
 	SkyLine(SKY_LINE_TYPE _line_type = EQUATOR);
@@ -99,7 +99,8 @@ private:
 // rms added color as parameter
 SkyGrid::SkyGrid(StelCore::FrameType frame) : color(0.2,0.2,0.2), frameType(frame)
 {
-	font.setPixelSize(12);
+	// Font size is 12
+	font.setPixelSize(StelApp::getInstance().getBaseFontSize()-1);
 }
 
 SkyGrid::~SkyGrid()
@@ -522,7 +523,8 @@ void SkyGrid::draw(const StelCore* core) const
 
 SkyLine::SkyLine(SKY_LINE_TYPE _line_type) : color(0.f, 0.f, 1.f)
 {
-	font.setPixelSize(14);
+	// Font size is 14
+	font.setPixelSize(StelApp::getInstance().getBaseFontSize()+1);
 	line_type = _line_type;
 
 	updateLabel();
@@ -557,9 +559,9 @@ void SkyLine::updateLabel()
 			frameType = StelCore::FrameAltAz;
 			label = q_("Horizon");
 			break;
-		case GALACTICPLANE:
+		case GALACTICEQUATOR:
 			frameType = StelCore::FrameGalactic;
-			label = q_("Galactic Plane");
+			label = q_("Galactic Equator");
 			break;
 	}
 }
@@ -645,7 +647,7 @@ GridLinesMgr::GridLinesMgr()
 	eclipticLine = new SkyLine(SkyLine::ECLIPTIC);
 	meridianLine = new SkyLine(SkyLine::MERIDIAN);
 	horizonLine = new SkyLine(SkyLine::HORIZON);
-	galacticPlaneLine = new SkyLine(SkyLine::GALACTICPLANE);
+	galacticEquatorLine = new SkyLine(SkyLine::GALACTICEQUATOR);
 }
 
 GridLinesMgr::~GridLinesMgr()
@@ -659,7 +661,7 @@ GridLinesMgr::~GridLinesMgr()
 	delete eclipticLine;
 	delete meridianLine;
 	delete horizonLine;
-	delete galacticPlaneLine;
+	delete galacticEquatorLine;
 }
 
 /*************************************************************************
@@ -686,7 +688,7 @@ void GridLinesMgr::init()
 	setFlagEclipticLine(conf->value("viewing/flag_ecliptic_line").toBool());
 	setFlagMeridianLine(conf->value("viewing/flag_meridian_line").toBool());
 	setFlagHorizonLine(conf->value("viewing/flag_horizon_line").toBool());
-	setFlagGalacticPlaneLine(conf->value("viewing/flag_galactic_plane_line").toBool());
+	setFlagGalacticEquatorLine(conf->value("viewing/flag_galactic_equator_line").toBool());
 	
 	StelApp& app = StelApp::getInstance();
 	connect(&app, SIGNAL(colorSchemeChanged(const QString&)), this, SLOT(setStelStyle(const QString&)));
@@ -702,7 +704,7 @@ void GridLinesMgr::init()
 	addAction("actionShow_Equatorial_J2000_Grid", displayGroup, N_("Equatorial J2000 grid"), "equatorJ2000GridDisplayed");
 	addAction("actionShow_Ecliptic_J2000_Grid", displayGroup, N_("Ecliptic J2000 grid"), "eclipticJ2000GridDisplayed");
 	addAction("actionShow_Galactic_Grid", displayGroup, N_("Galactic grid"), "galacticGridDisplayed");
-	addAction("actionShow_Galactic_Plane_Line", displayGroup, N_("Galactic plane"), "galacticPlaneLineDisplayed");
+	addAction("actionShow_Galactic_Equator_Line", displayGroup, N_("Galactic equator"), "galacticEquatorLineDisplayed");
 }
 
 void GridLinesMgr::update(double deltaTime)
@@ -717,7 +719,7 @@ void GridLinesMgr::update(double deltaTime)
 	eclipticLine->update(deltaTime);
 	meridianLine->update(deltaTime);
 	horizonLine->update(deltaTime);
-	galacticPlaneLine->update(deltaTime);
+	galacticEquatorLine->update(deltaTime);
 }
 
 void GridLinesMgr::draw(StelCore* core)
@@ -731,7 +733,7 @@ void GridLinesMgr::draw(StelCore* core)
 	eclipticLine->draw(core);
 	meridianLine->draw(core);
 	horizonLine->draw(core);
-	galacticPlaneLine->draw(core);
+	galacticEquatorLine->draw(core);
 }
 
 void GridLinesMgr::setStelStyle(const QString& section)
@@ -749,7 +751,7 @@ void GridLinesMgr::setStelStyle(const QString& section)
 	setColorEclipticLine(StelUtils::strToVec3f(conf->value(section+"/ecliptic_color", defaultColor).toString()));
 	setColorMeridianLine(StelUtils::strToVec3f(conf->value(section+"/meridian_color", defaultColor).toString()));
 	setColorHorizonLine(StelUtils::strToVec3f(conf->value(section+"/horizon_color", defaultColor).toString()));
-	setColorGalacticPlaneLine(StelUtils::strToVec3f(conf->value(section+"/galactic_plane_color", defaultColor).toString()));
+	setColorGalacticEquatorLine(StelUtils::strToVec3f(conf->value(section+"/galactic_equator_color", defaultColor).toString()));
 }
 
 void GridLinesMgr::updateLineLabels()
@@ -758,7 +760,7 @@ void GridLinesMgr::updateLineLabels()
 	eclipticLine->updateLabel();
 	meridianLine->updateLabel();
 	horizonLine->updateLabel();
-	galacticPlaneLine->updateLabel();
+	galacticEquatorLine->updateLabel();
 }
 
 //! Set flag for displaying Azimuthal Grid
@@ -987,27 +989,27 @@ void GridLinesMgr::setColorHorizonLine(const Vec3f& newColor)
 	}
 }
 
-//! Set flag for displaying GalacticPlane Line
-void GridLinesMgr::setFlagGalacticPlaneLine(const bool displayed)
+//! Set flag for displaying Galactic Equator Line
+void GridLinesMgr::setFlagGalacticEquatorLine(const bool displayed)
 {
-	if(displayed != galacticPlaneLine->isDisplayed()) {
-		galacticPlaneLine->setDisplayed(displayed);
-		emit galacticPlaneLineDisplayedChanged(displayed);
+	if(displayed != galacticEquatorLine->isDisplayed()) {
+		galacticEquatorLine->setDisplayed(displayed);
+		emit galacticEquatorLineDisplayedChanged(displayed);
 	}
 }
-//! Get flag for displaying GalacticPlane Line
-bool GridLinesMgr::getFlagGalacticPlaneLine(void) const
+//! Get flag for displaying Galactic Equator Line
+bool GridLinesMgr::getFlagGalacticEquatorLine(void) const
 {
-	return galacticPlaneLine->isDisplayed();
+	return galacticEquatorLine->isDisplayed();
 }
-Vec3f GridLinesMgr::getColorGalacticPlaneLine(void) const
+Vec3f GridLinesMgr::getColorGalacticEquatorLine(void) const
 {
-	return galacticPlaneLine->getColor();
+	return galacticEquatorLine->getColor();
 }
-void GridLinesMgr::setColorGalacticPlaneLine(const Vec3f& newColor)
+void GridLinesMgr::setColorGalacticEquatorLine(const Vec3f& newColor)
 {
-	if(newColor != galacticPlaneLine->getColor()) {
-		galacticPlaneLine->setColor(newColor);
-		emit galacticPlaneLineColorChanged(newColor);
+	if(newColor != galacticEquatorLine->getColor()) {
+		galacticEquatorLine->setColor(newColor);
+		emit galacticEquatorLineColorChanged(newColor);
 	}
 }
