@@ -136,6 +136,13 @@ void PointerCoordinates::draw(StelCore *core)
 					.arg(StelUtils::radToHmsStr(cx, true))
 					.arg(StelUtils::radToDmsStr(cy, true));
 			break;
+		case RaDec:
+			StelUtils::rectToSphe(&cx,&cy,core->j2000ToEquinoxEqu(mousePosition)); // Calculate RA/DE and show it...
+			coordsText = QString("%1: %2/%3")
+					.arg(qc_("RA/Dec", "abbreviated in the plugin"))
+					.arg(StelUtils::radToHmsStr(cx, true))
+					.arg(StelUtils::radToDmsStr(cy, true));
+			break;
 		case AltAzi:
 			StelUtils::rectToSphe(&cy,&cx,core->j2000ToAltAz(mousePosition, StelCore::RefractionAuto));
 			cy = 3.*M_PI - cy;  // N is zero, E is 90 degrees
@@ -147,10 +154,17 @@ void PointerCoordinates::draw(StelCore *core)
 					.arg(StelUtils::radToDmsStr(cy))
 					.arg(StelUtils::radToDmsStr(cx));
 			break;
+		case Galactic:
+			StelUtils::rectToSphe(&cx,&cy,core->j2000ToGalactic(mousePosition)); // Calculate galactic position and show it...
+			coordsText = QString("%1: %2/%3")
+					.arg(qc_("Gal. Long/Lat", "abbreviated in the plugin"))
+					.arg(StelUtils::radToDmsStr(cx, true))
+					.arg(StelUtils::radToDmsStr(cy, true));
+			break;
 		case Ecliptic:
 			double lambda, beta;
-			StelUtils::rectToSphe(&cx,&cy,core->j2000ToEquinoxEqu(mousePosition)); // Calculate ecliptic position (of date) and show it...
-			StelUtils::ctRadec2Ecl(cx, cy, GETSTELMODULE(SolarSystem)->getEarth()->getRotObliquity(2451545.0), &lambda, &beta);
+			StelUtils::rectToSphe(&cx,&cy,core->j2000ToEquinoxEqu(mousePosition));
+			StelUtils::ctRadec2Ecl(cx, cy, GETSTELMODULE(SolarSystem)->getEarth()->getRotObliquity(2451545.0), &lambda, &beta); // Calculate ecliptic position and show it...
 			if (lambda<0) lambda+=2.0*M_PI;
 			coordsText = QString("%1: %2/%3")
 					.arg(qc_("Ecl. Long/Lat (J2000.0)", "abbreviated in the plugin"))
@@ -165,7 +179,7 @@ void PointerCoordinates::draw(StelCore *core)
 					.arg(qc_("HA/Dec", "abbreviated in the plugin"))
 					.arg(StelUtils::radToHmsStr(cx))
 					.arg(StelUtils::radToDmsStr(cy));
-			break;
+			break;		
 	}
 
 	sPainter.drawText(getCoordinatesPlace(coordsText).first, getCoordinatesPlace(coordsText).second, coordsText);
