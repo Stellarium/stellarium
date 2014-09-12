@@ -111,10 +111,19 @@ void StelCore::init()
 {
 	QSettings* conf = StelApp::getInstance().getSettings();
 
-	defaultLocationID = conf->value("init_location/location","error").toString();
+	defaultLocationID = conf->value("init_location/location", "auto").toString();
 	bool ok;
 	StelLocationMgr* locationMgr = &StelApp::getInstance().getLocationMgr();
-	StelLocation location = locationMgr->locationForString(defaultLocationID);
+	StelLocation location;
+	if (defaultLocationID == "auto")
+	{
+		locationMgr->locationFromIP();
+	}
+	else
+	{
+		location = locationMgr->locationForString(defaultLocationID);
+	}
+
 	if (!location.isValid())
 	{
 		qWarning() << "Warning: location" << defaultLocationID << "is unknown.";
@@ -1731,4 +1740,10 @@ QString StelCore::getCurrentDeltaTAlgorithmValidRange(double jDay, QString *mark
 		*marker = "?";
 
 	return QString(" %1").arg(validRange);
+}
+
+bool StelCore::isDay() const
+{
+	const Vec3d& sunPos = GETSTELMODULE(SolarSystem)->getSun()->getAltAzPosGeometric(this);
+	return sunPos[2] > -0.12; // Nautical twilight
 }

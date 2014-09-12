@@ -44,6 +44,7 @@ void PointerCoordinatesWindow::retranslate()
 		ui->retranslateUi(dialog);
 		updateAboutText();
 		populateCoordinatesPlacesList();
+		populateCoordinateSystemsList();
 	}
 }
 
@@ -71,6 +72,16 @@ void PointerCoordinatesWindow::createDialogContent()
 	}
 	ui->placeComboBox->setCurrentIndex(idx);
 	connect(ui->placeComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(setCoordinatesPlace(int)));
+
+	populateCoordinateSystemsList();
+	idx = ui->coordinateSystemComboBox->findData(coord->getCurrentCoordinateSystemKey(), Qt::UserRole, Qt::MatchCaseSensitive);
+	if (idx==-1)
+	{
+		// Use RaDecJ2000 as default
+		idx = ui->coordinateSystemComboBox->findData(QVariant("RaDecJ2000"), Qt::UserRole, Qt::MatchCaseSensitive);
+	}
+	ui->coordinateSystemComboBox->setCurrentIndex(idx);
+	connect(ui->coordinateSystemComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(setCoordinateSystem(int)));
 
 	connect(ui->pushButtonSave, SIGNAL(clicked()), this, SLOT(saveCoordinatesSettings()));
 	connect(ui->pushButtonReset, SIGNAL(clicked()), this, SLOT(resetCoordinatesSettings()));
@@ -126,8 +137,40 @@ void PointerCoordinatesWindow::populateCoordinatesPlacesList()
 	places->blockSignals(false);
 }
 
+void PointerCoordinatesWindow::populateCoordinateSystemsList()
+{
+	Q_ASSERT(ui->coordinateSystemComboBox);
+
+	QComboBox* csys = ui->coordinateSystemComboBox;
+
+	//Save the current selection to be restored later
+	csys->blockSignals(true);
+	int index = csys->currentIndex();
+	QVariant selectedSystemId = csys->itemData(index);
+	csys->clear();
+	//For each algorithm, display the localized name and store the key as user
+	//data. Unfortunately, there's no other way to do this than with a cycle.
+	csys->addItem(q_("Right ascension/Declination (J2000.0)"), "RaDecJ2000");
+	csys->addItem(q_("Right ascension/Declination"), "RaDec");
+	csys->addItem(q_("Hour angle/Declination"), "HourAngle");
+	csys->addItem(q_("Ecliptic Longitude/Latitude (J2000.0)"), "Ecliptic");
+	csys->addItem(q_("Altitude/Azimuth"), "AltAzi");
+	csys->addItem(q_("Galactic Longitude/Latitude"), "Galactic");
+
+	//Restore the selection
+	index = csys->findData(selectedSystemId, Qt::UserRole, Qt::MatchCaseSensitive);
+	csys->setCurrentIndex(index);
+	csys->blockSignals(false);
+}
+
 void PointerCoordinatesWindow::setCoordinatesPlace(int placeID)
 {
 	QString currentPlaceID = ui->placeComboBox->itemData(placeID).toString();
 	coord->setCurrentCoordinatesPlaceKey(currentPlaceID);
+}
+
+void PointerCoordinatesWindow::setCoordinateSystem(int csID)
+{
+	QString currentCsId = ui->coordinateSystemComboBox->itemData(csID).toString();
+	coord->setCurrentCoordinateSystemKey(currentCsId);
 }

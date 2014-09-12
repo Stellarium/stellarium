@@ -32,6 +32,7 @@
 
 #include <QRegExp>
 #include <QDebug>
+#include <QSettings>
 
 Vec3d StelObject::getEquinoxEquatorialPos(const StelCore* core) const
 {
@@ -123,13 +124,6 @@ QString StelObject::getPositionInfoString(const StelCore *core, const InfoString
 		res += q_("RA/DE (of date): %1/%2").arg(StelUtils::radToHmsStr(ra_equ), StelUtils::radToDmsStr(dec_equ)) + "<br>";
 	}
 
-	if (flags&GalacticCoord)
-	{
-		double glong, glat;
-		StelUtils::rectToSphe(&glong, &glat, getGalacticPos(core));
-		res += q_("Galactic longitude/latitude: %1/%2").arg(StelUtils::radToDmsStr(glong,true), StelUtils::radToDmsStr(glat,true)) + "<br>";
-	}
-
 	if (flags&HourAngle)
 	{
 		double dec_sidereal, ra_sidereal;
@@ -137,13 +131,13 @@ QString StelObject::getPositionInfoString(const StelCore *core, const InfoString
 		ra_sidereal = 2.*M_PI-ra_sidereal;
 		if (withAtmosphere)
 		{
-		    StelUtils::rectToSphe(&ra_sidereal,&dec_sidereal,getSiderealPosApparent(core));
-		    ra_sidereal = 2.*M_PI-ra_sidereal;
-		    res += q_("Hour angle/DE: %1/%2").arg(StelUtils::radToHmsStr(ra_sidereal), StelUtils::radToDmsStr(dec_sidereal)) + " " + q_("(apparent)") + "<br>";
+			StelUtils::rectToSphe(&ra_sidereal,&dec_sidereal,getSiderealPosApparent(core));
+			ra_sidereal = 2.*M_PI-ra_sidereal;
+			res += q_("Hour angle/DE: %1/%2").arg(StelUtils::radToHmsStr(ra_sidereal), StelUtils::radToDmsStr(dec_sidereal)) + " " + q_("(apparent)") + "<br>";
 		}
 		else
 		{
-		    res += q_("Hour angle/DE: %1/%2").arg(StelUtils::radToHmsStr(ra_sidereal), StelUtils::radToDmsStr(dec_sidereal)) + " " + "<br>";
+			res += q_("Hour angle/DE: %1/%2").arg(StelUtils::radToHmsStr(ra_sidereal), StelUtils::radToDmsStr(dec_sidereal)) + " " + "<br>";
 		}
 	}
 
@@ -157,15 +151,15 @@ QString StelObject::getPositionInfoString(const StelCore *core, const InfoString
 			az -= M_PI*2;
 		if (withAtmosphere)
 		{
-		    StelUtils::rectToSphe(&az,&alt,getAltAzPosApparent(core));
-		    az = 3.*M_PI - az;  // N is zero, E is 90 degrees
-		    if (az > M_PI*2)
-			    az -= M_PI*2;
-		    res += q_("Az/Alt: %1/%2").arg(StelUtils::radToDmsStr(az), StelUtils::radToDmsStr(alt)) + " " + q_("(apparent)") + "<br>";
+			StelUtils::rectToSphe(&az,&alt,getAltAzPosApparent(core));
+			az = 3.*M_PI - az;  // N is zero, E is 90 degrees
+			if (az > M_PI*2)
+				az -= M_PI*2;
+			res += q_("Az/Alt: %1/%2").arg(StelUtils::radToDmsStr(az), StelUtils::radToDmsStr(alt)) + " " + q_("(apparent)") + "<br>";
 		}
 		else
 		{
-		    res += q_("Az/Alt: %1/%2").arg(StelUtils::radToDmsStr(az), StelUtils::radToDmsStr(alt)) + " " + "<br>";
+			res += q_("Az/Alt: %1/%2").arg(StelUtils::radToDmsStr(az), StelUtils::radToDmsStr(alt)) + " " + "<br>";
 		}
 	}
 
@@ -174,16 +168,24 @@ QString StelObject::getPositionInfoString(const StelCore *core, const InfoString
 		static SolarSystem *ssystem=GETSTELMODULE(SolarSystem);
 		double ecl= ssystem->getEarth()->getRotObliquity(2451545.0);
 		double ra_equ, dec_equ, lambda, beta;		
-		StelUtils::rectToSphe(&ra_equ,&dec_equ,getEquinoxEquatorialPos(core));
+		StelUtils::rectToSphe(&ra_equ,&dec_equ,getJ2000EquatorialPos(core));
 		StelUtils::ctRadec2Ecl(ra_equ, dec_equ, ecl, &lambda, &beta);
 		if (lambda<0) lambda+=2.0*M_PI;
-		res += q_("Ecliptic (of J2000): %1/%2").arg(StelUtils::radToDmsStr(lambda, true), StelUtils::radToDmsStr(beta, true)) + "<br>";
+		res += q_("Ecliptic longitude/latitude (of J2000): %1/%2").arg(StelUtils::radToDmsStr(lambda, true), StelUtils::radToDmsStr(beta, true)) + "<br>";
 		ecl= ssystem->getEarth()->getRotObliquity(core->getJDay());
 		StelUtils::rectToSphe(&ra_equ,&dec_equ,getEquinoxEquatorialPos(core));
 		StelUtils::ctRadec2Ecl(ra_equ, dec_equ, ecl, &lambda, &beta);
 		if (lambda<0) lambda+=2.0*M_PI;
-		res += q_("Ecliptic (of date): %1/%2").arg(StelUtils::radToDmsStr(lambda, true), StelUtils::radToDmsStr(beta, true)) + "<br>";
+		res += q_("Ecliptic longitude/latitude (of date): %1/%2").arg(StelUtils::radToDmsStr(lambda, true), StelUtils::radToDmsStr(beta, true)) + "<br>";
 	}
+
+	if (flags&GalacticCoord)
+	{
+		double glong, glat;
+		StelUtils::rectToSphe(&glong, &glat, getGalacticPos(core));
+		res += q_("Galactic longitude/latitude: %1/%2").arg(StelUtils::radToDmsStr(glong,true), StelUtils::radToDmsStr(glat,true)) + "<br>";
+	}
+
 	return res;
 }
 
@@ -203,7 +205,14 @@ void StelObject::postProcessInfoString(QString& str, const InfoStringGroup& flag
 	}
 	else
 	{
-		str.prepend(QString("<font color=%1>").arg(StelUtils::vec3fToHtmlColor(getInfoColor())));
+		Vec3f color = getInfoColor();
+		StelCore* core = StelApp::getInstance().getCore();
+		if (core->isDay() && core->getSkyDrawer()->getFlagHasAtmosphere()==true)
+		{
+			// Let's make info text is more readable when atmosphere enabled at daylight.
+			color = StelUtils::strToVec3f(StelApp::getInstance().getSettings()->value("color/daylight_color", "0.0,0.0,0.0").toString());
+		}
+		str.prepend(QString("<font color=%1>").arg(StelUtils::vec3fToHtmlColor(color)));
 		str.append(QString("</font>"));
 	}
 }

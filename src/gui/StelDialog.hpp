@@ -78,6 +78,9 @@ protected:
 	//! The main dialog
 	QWidget* dialog;
 	class CustomProxy* proxy;
+
+	//! Kinetic scrolling for lists.
+	void installKineticScrolling(QList<QWidget *> addscroll);
 };
 
 #endif // _STELDIALOG_HPP_
