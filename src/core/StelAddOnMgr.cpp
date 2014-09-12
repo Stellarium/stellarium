@@ -341,6 +341,7 @@ void StelAddOnMgr::downloadNextAddOn()
 		qWarning() << "Can't open a writable file: "
 			   << QDir::toNativeSeparators(m_currentDownloadInfo.filepath);
 		cancelAllDownloads();
+		emit (addOnMgrMsg(UnableToWriteFiles));
 		return;
 	}
 

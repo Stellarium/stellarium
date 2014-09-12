@@ -69,6 +69,12 @@ public:
 	StelAddOnDAO* getStelAddOnDAO() { return m_pStelAddOnDAO; }
 	StelAddOn* getStelAddOnInstance(QString category) { return m_pStelAddOns.value(category); }
 
+	//! @enum AddOnMgrMsg
+	enum AddOnMgrMsg
+	{
+		UnableToWriteFiles
+	};
+
 	//! @enum AddOnStatus
 	//! Used for keeping track of the download/update status
 	enum AddOnStatus
@@ -81,10 +87,10 @@ public:
 		InvalidFormat,
 		UnableToWrite,
 		UnableToRead
-
 	};
 
 signals:
+	void addOnMgrMsg(const AddOnMgrMsg msg);
 	void dataUpdated(const QString& category);
 	void updateTableViews();
 	void skyCulturesChanged();
