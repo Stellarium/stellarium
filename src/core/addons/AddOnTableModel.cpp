@@ -23,6 +23,7 @@
 
 #include "AddOnTableModel.hpp"
 #include "StelAddOnDAO.hpp"
+#include "StelAddOnMgr.hpp"
 #include "StelTranslator.hpp"
 
 AddOnTableModel::AddOnTableModel(QString tableName)
@@ -99,23 +100,32 @@ QVariant AddOnTableModel::data(const QModelIndex& index, int role) const
 	}
 	else if (column == COLUMN_INSTALLED && role == Qt::DisplayRole)
 	{
-		int status = value.toInt();
-		if (status == 7)
-			value = qVariantFromValue(q_("Unable to read"));
-		else if (status == 6)
-			value = qVariantFromValue(q_("Unable to write"));
-		else if (status == 5)
-			value = qVariantFromValue(q_("Invalid format"));
-		else if (status == 4)
-			value = qVariantFromValue(q_("Corrupted"));
-		else if (status == 3)
-			value = qVariantFromValue(q_("Installing"));
-		else if (status == 2)
-			value = qVariantFromValue(q_("Yes"));
-		else if (status == 1)
-			value = qVariantFromValue(q_("Partially"));
-		else
-			value = qVariantFromValue(q_("No"));
+		switch (value.toInt())
+		{
+			case StelAddOnMgr::PartiallyInstalled:
+				value = qVariantFromValue(q_("Partially"));
+				break;
+			case StelAddOnMgr::FullyInstalled:
+				value = qVariantFromValue(q_("Yes"));
+				break;
+			case StelAddOnMgr::Installing:
+				value = qVariantFromValue(q_("Installing"));
+				break;
+			case StelAddOnMgr::Corrupted:
+				value = qVariantFromValue(q_("Corrupted"));
+				break;
+			case StelAddOnMgr::InvalidFormat:
+				value = qVariantFromValue(q_("Invalid format"));
+				break;
+			case StelAddOnMgr::UnableToWrite:
+				value = qVariantFromValue(q_("Unable to write"));
+				break;
+			case StelAddOnMgr::UnableToRead:
+				value = qVariantFromValue(q_("Unable to read"));
+				break;
+			default:
+				value = qVariantFromValue(q_("No"));
+		}
 	}
 
 	return value;
