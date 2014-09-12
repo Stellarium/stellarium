@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-09-10 21:41+0700\n"
+"POT-Creation-Date: 2014-09-12 19:40+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -4526,7 +4526,7 @@ msgid "Topocentric equatorial coordinates"
 msgstr ""
 
 #: src/ui_configurationDialog.h:1069
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:154
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:155
 msgid "Hour angle/Declination"
 msgstr ""
 
@@ -4535,7 +4535,7 @@ msgid "Horizontal coordinates"
 msgstr ""
 
 #: src/ui_configurationDialog.h:1073
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:156
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:157
 msgid "Altitude/Azimuth"
 msgstr ""
 
@@ -9443,17 +9443,27 @@ msgctxt "abbreviated in the plugin"
 msgid "RA/Dec (J2000.0)"
 msgstr ""
 
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:146
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:142
+msgctxt "abbreviated in the plugin"
+msgid "RA/Dec"
+msgstr ""
+
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:153
 msgctxt "abbreviated in the plugin"
 msgid "Az/Alt"
 msgstr ""
 
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:156
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:160
+msgctxt "abbreviated in the plugin"
+msgid "Gal. Long/Lat"
+msgstr ""
+
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:170
 msgctxt "abbreviated in the plugin"
 msgid "Ecl. Long/Lat (J2000.0)"
 msgstr ""
 
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:165
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:179
 msgctxt "abbreviated in the plugin"
 msgid "HA/Dec"
 msgstr ""
@@ -9478,8 +9488,16 @@ msgstr ""
 msgid "Right ascension/Declination (J2000.0)"
 msgstr ""
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:155
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:154
+msgid "Right ascension/Declination"
+msgstr ""
+
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:156
 msgid "Ecliptic Longitude/Latitude (J2000.0)"
+msgstr ""
+
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:158
+msgid "Galactic Longitude/Latitude"
 msgstr ""
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:300
