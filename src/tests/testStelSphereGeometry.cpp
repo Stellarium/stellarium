@@ -85,6 +85,7 @@ void TestStelSphericalGeometry::initTestCase()
 	southPoleSquare.setContour(cpole);
 }
 
+/*
 void TestStelSphericalGeometry::testSphericalCap()
 {
 	Vec3d p0(1,0,0);
@@ -148,6 +149,7 @@ void TestStelSphericalGeometry::testSphericalCap()
 	QVERIFY(h4.contains(h4));
 	QVERIFY(h5.contains(h5));
 }
+*/
 
 void TestStelSphericalGeometry::benchmarkSphericalCap()
 {
