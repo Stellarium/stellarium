@@ -19,6 +19,7 @@
  */
 
 
+#include "StelScriptOutput.hpp"
 #include "StelScriptMgr.hpp"
 #include "StelMainScriptAPI.hpp"
 #include "StelModuleMgr.hpp"
@@ -421,6 +422,12 @@ double StelScriptMgr::getScriptRate()
 void StelScriptMgr::debug(const QString& msg)
 {
 	emit(scriptDebug(msg));
+}
+
+void StelScriptMgr::output(const QString &msg)
+{
+	StelScriptOutput::writeLog(msg);
+	emit(scriptOutput(msg));
 }
 
 void StelScriptMgr::scriptEnded()

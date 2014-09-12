@@ -346,7 +346,7 @@
       <item alignment="Qt::AlignTop">
        <widget class="QStackedWidget" name="stackedWidget">
         <property name="currentIndex">
-         <number>0</number>
+         <number>1</number>
         </property>
         <widget class="QWidget" name="page">
          <layout class="QGridLayout" name="gridLayout">
@@ -1455,12 +1455,12 @@
                   </widget>
                  </item>
                  <item>
-                  <widget class="QCheckBox" name="showGalacticPlaneLineCheckBox">
+                  <widget class="QCheckBox" name="showGalacticEquatorLineCheckBox">
                    <property name="toolTip">
-                    <string>Show Galactic plane line</string>
+                    <string>Show Galactic equator line</string>
                    </property>
                    <property name="text">
-                    <string>Galactic plane</string>
+                    <string>Galactic equator</string>
                    </property>
                   </widget>
                  </item>
@@ -2016,7 +2016,7 @@
   <tabstop>showMeridianLineCheckBox</tabstop>
   <tabstop>showHorizonLineCheckBox</tabstop>
   <tabstop>showEclipticLineCheckBox</tabstop>
-  <tabstop>showGalacticPlaneLineCheckBox</tabstop>
+  <tabstop>showGalacticEquatorLineCheckBox</tabstop>
   <tabstop>showConstellationLinesCheckBox</tabstop>
   <tabstop>showConstellationLabelsCheckBox</tabstop>
   <tabstop>showConstellationBoundariesCheckBox</tabstop>
