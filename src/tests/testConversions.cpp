@@ -171,3 +171,44 @@ void TestConversions::testRadToDMS()
 		QVERIFY2(std::abs(angle1-angle2)<=ERROR_LIMIT, qPrintable(QString("%1rad=%2%3d%4m%5s").arg(rad).arg(s).arg(dego).arg(mino).arg(seco)));
 	}
 }
+
+void TestConversions::testDDToDMS()
+{
+	QVariantList data;
+
+	data << 0. << 0 << 0 << 0.;
+	data << 10. << 10 << 0 << 0.;
+	data << -13.5 << -13 << 30 << 0.;
+	data << 30.263888889 << 30 << 15 << 50.;
+	data << -90.1 << -90 << 6 << 0.;
+	data << 128.9999 << 128 << 59 << 59.64;
+	data << 360.6 << 360 << 36 << 0.;
+	data << -180.786 << -180 << 47 << 9.6;
+	data << -0.01 << -0 << 0 << 36.;
+	data << -0.039 << -0 << 2 << 20.4;
+
+	while (data.count()>=4)
+	{
+		double angle, sec, seco, angle1, angle2;
+		int deg, min;
+		unsigned int dego, mino;
+		bool sign;
+		QString s = "+";
+		angle	= data.takeFirst().toDouble();
+		deg	= data.takeFirst().toInt();
+		min	= data.takeFirst().toInt();
+		sec	= data.takeFirst().toDouble();
+		if (angle>=0)
+			angle1 = sec+min*60+deg*3600;
+		else
+			angle1 = -1*(sec+min*60+std::abs((double)deg)*3600);
+		StelUtils::decDegToDms(angle, sign, dego, mino, seco);
+		angle2 = seco+mino*60+dego*3600;
+		if (!sign)
+		{
+			angle2 *= -1;
+			s = "-";
+		}
+		QVERIFY2(std::abs(angle1-angle2)<=ERROR_LIMIT, qPrintable(QString("%1degrees=%2%3d%4m%5s").arg(angle).arg(s).arg(dego).arg(mino).arg(seco)));
+	}
+}

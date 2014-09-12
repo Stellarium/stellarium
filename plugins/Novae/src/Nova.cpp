@@ -150,7 +150,10 @@ QString Nova::getInfoString(const StelCore* core, const InfoStringGroup& flags) 
 	{
 		oss << q_("Maximum brightness: %1").arg(getMaxBrightnessDate(peakJD)) << "<br>";
 		if (distance>0)
-			oss << q_("Distance: %1 Light Years").arg(distance*1000) << "<br>";
+		{
+			//TRANSLATORS: Unit of measure for distance - Light Years
+			oss << q_("Distance: %1 ly").arg(distance*1000) << "<br>";
+		}
 	}
 
 	postProcessInfoString(str, flags);

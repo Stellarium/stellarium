@@ -387,7 +387,10 @@ QString Nebula::getTypeString(void) const
 			wsType = q_("Planetary nebula");
 			break;
 		case NebDn:
-			wsType = q_("Dark Nebula");
+			wsType = q_("Dark nebula");
+			break;
+		case NebIg:
+			wsType = q_("Irregular galaxy");
 			break;
 		case NebCn:
 			wsType = q_("Cluster associated with nebulosity");
