@@ -85,6 +85,7 @@ void TestStelSphericalGeometry::initTestCase()
 	southPoleSquare.setContour(cpole);
 }
 
+//FIXME: Doesn't pass on Windows
 void TestStelSphericalGeometry::testSphericalCap()
 {
 	Vec3d p0(1,0,0);

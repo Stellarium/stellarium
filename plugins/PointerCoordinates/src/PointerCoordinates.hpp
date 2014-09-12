@@ -35,6 +35,7 @@ class PointerCoordinates : public StelModule
 {
 	Q_OBJECT
 	Q_ENUMS(CoordinatesPlace)
+	Q_ENUMS(CoordinateSystem)
 	Q_PROPERTY(bool enabled
 		   READ isEnabled
 		   WRITE enableCoordinates)
@@ -47,6 +48,18 @@ public:
 		TopCenter,		//!< The top center of the screen
 		TopRight,		//!< In center of the top right half of the screen
 		RightBottomCorner	//!< The right bottom corner of the screen
+	};
+
+	//! @enum CoordinateSystem
+	//! Available coordinate systems
+	enum CoordinateSystem
+	{
+		RaDecJ2000,
+		RaDec,
+		HourAngle,
+		Ecliptic,
+		AltAzi,
+		Galactic
 	};
 
 
@@ -124,6 +137,22 @@ public slots:
 	//! Set the current place of the string with coordinates from its key
 	void setCurrentCoordinatesPlaceKey(QString key);
 
+	//! Set the current coordinate system
+	void setCurrentCoordinateSystem(CoordinateSystem cs)
+	{
+		currentCoordinateSystem = cs;
+	}
+	//! Get the current coordinate system
+	CoordinateSystem getCurrentCoordinateSystem() const
+	{
+		return currentCoordinateSystem;
+	}
+	//! Get the current coordinate system key
+	QString getCurrentCoordinateSystemKey(void) const;
+	//! Set the current coordinate system from its key
+	void setCurrentCoordinateSystemKey(QString key);
+
+
 private:
 	PointerCoordinatesWindow* mainWindow;
 	QSettings* conf;
@@ -131,6 +160,8 @@ private:
 
 	// The current place for string with coordinates
 	CoordinatesPlace currentPlace;
+	// The current coordinate system
+	CoordinateSystem currentCoordinateSystem;
 
 	QFont font;
 	bool flagShowCoordinates;

@@ -186,6 +186,13 @@
            </widget>
           </item>
           <item>
+           <widget class="QCheckBox" name="azAltEndOnSkyCheckBox">
+            <property name="text">
+             <string>NEW: Attach end point to rotating sky</string>
+            </property>
+           </widget>
+          </item>
+          <item>
            <widget class="QCheckBox" name="showPositionAngleHorizontalCheckBox">
             <property name="text">
              <string>Show position angle in horizontal system (e.g. Dobson starhopping)</string>

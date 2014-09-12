@@ -62,7 +62,8 @@ public:
 	//! Get the version from the "latestVersion" value in the updates.json file
 	//! @return version string, e.g. "0.12.4"
 	QString getLatestVersionFromJson(void);
-	void setUpdatesMessage(bool hasUpdates, QString version="");
+	int getRequiredOpenGLVersionFromJson(void);
+	void setUpdatesMessage(bool hasUpdates, QString version="", int OpenGL=0);
 	QString getUpdatesMessage();
 
 public slots:

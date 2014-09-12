@@ -110,7 +110,7 @@ Oculars::Oculars():
 	flagEclipticJ2000Grid(false),
 	flagMeridianLine(false),
 	flagHorizonLine(false),
-	flagGalacticPlaneLine(false),
+	flagGalacticEquatorLine(false),
 	flagAdaptation(false),
 	flagLimitStars(false),
 	magLimitStars(0.0),
@@ -1773,7 +1773,7 @@ void Oculars::unzoomOcular()
 	gridManager->setFlagEclipticJ2000Grid(flagEclipticJ2000Grid);
 	gridManager->setFlagMeridianLine(flagMeridianLine);
 	gridManager->setFlagHorizonLine(flagHorizonLine);
-	gridManager->setFlagGalacticPlaneLine(flagGalacticPlaneLine);
+	gridManager->setFlagGalacticEquatorLine(flagGalacticEquatorLine);
 	skyManager->setFlagLuminanceAdaptation(flagAdaptation);
 	skyManager->setFlagStarMagnitudeLimit(flagLimitStars);
 	skyManager->setFlagNebulaMagnitudeLimit(flagLimitDSOs);
@@ -1816,7 +1816,7 @@ void Oculars::zoom(bool zoomedIn)
 			flagEclipticJ2000Grid = gridManager->getFlagEclipticJ2000Grid();
 			flagMeridianLine = gridManager->getFlagMeridianLine();
 			flagHorizonLine = gridManager->getFlagHorizonLine();
-			flagGalacticPlaneLine = gridManager->getFlagGalacticPlaneLine();
+			flagGalacticEquatorLine = gridManager->getFlagGalacticEquatorLine();
 
 			StelSkyDrawer *skyManager = core->getSkyDrawer();
 			// Current state
@@ -1856,7 +1856,7 @@ void Oculars::zoomOcular()
 	gridManager->setFlagEclipticJ2000Grid(false);
 	gridManager->setFlagMeridianLine(false);
 	gridManager->setFlagHorizonLine(false);
-	gridManager->setFlagGalacticPlaneLine(false);
+	gridManager->setFlagGalacticEquatorLine(false);
 	skyManager->setFlagLuminanceAdaptation(false);
 	
 	movementManager->setFlagTracking(true);

@@ -65,7 +65,12 @@ void ObservabilityDialog::createDialogContent()
 	        SIGNAL(languageChanged()), this, SLOT(retranslate()));
 
 	Observability* plugin = GETSTELMODULE(Observability);
-	
+
+	//Kinetic scrolling for tablet pc and pc
+	QList<QWidget *> addscroll;
+	addscroll << ui->aboutTextBrowser;
+	installKineticScrolling(addscroll);
+
 	// Settings:
 	
 	// clicked() is called only when the user makes an input,

@@ -47,7 +47,7 @@ $dbuser	= "exoplanet";
 $dbpass	= "exoplanet";
 
 $UA = LWP::UserAgent->new(keep_alive => 1, timeout => 360);
-$UA->agent("Mozilla/5.0 (Stellarium Exoplanets Catalog Updater 1.2; http://stellarium.org/)");
+$UA->agent("Mozilla/5.0 (Stellarium Exoplanets Catalog Updater 2.0; http://stellarium.org/)");
 $request = HTTP::Request->new('GET', $URL);
 $responce = $UA->request($request);
 
@@ -93,6 +93,37 @@ $initCnt = @ipcnt[0];
 
 $sth = $dbh->do(q{TRUNCATE planets});
 
+# parse first line for guessing format of catalog
+$currformat = $catalog[0];
+$currformat =~ s/\#//gi;
+$currformat =~ s/\s//gi;
+$status  = $csvdata->parse($currformat);
+@fdata = ();
+@fdata = $csvdata->fields();
+%column = ();
+for ($i=0;$i<scalar(@fdata);$i++) {
+	if ($fdata[$i] eq "name") {		$column{'pname'} = $i;		}
+	if ($fdata[$i] eq "mass") {		$column{'pmass'} = $i;		}
+	if ($fdata[$i] eq "radius") {		$column{'pradius'} = $i;	}
+	if ($fdata[$i] eq "orbital_period") {	$column{'pperiod'} = $i;	}
+	if ($fdata[$i] eq "semi_major_axis") {	$column{'paxis'} = $i;		}
+	if ($fdata[$i] eq "eccentricity") {	$column{'pecc'} = $i;		}
+	if ($fdata[$i] eq "inclination") {	$column{'pincl'} = $i;		}
+	if ($fdata[$i] eq "angular_distance") {	$column{'angdist'} = $i;	}
+	if ($fdata[$i] eq "discovered") {	$column{'discovered'} = $i;	}
+	if ($fdata[$i] eq "star_name") {	$column{'starname'} = $i;	}
+	if ($fdata[$i] eq "ra") {		$column{'sra'} = $i;		}
+	if ($fdata[$i] eq "dec") {		$column{'sdec'} = $i;		}
+	if ($fdata[$i] eq "mag_v") {		$column{'svmag'} = $i;		}
+	if ($fdata[$i] eq "star_distance") {	$column{'sdist'} = $i;		}
+	if ($fdata[$i] eq "star_metallicity") {	$column{'smetal'} = $i;		}
+	if ($fdata[$i] eq "star_mass") {	$column{'smass'} = $i;		}
+	if ($fdata[$i] eq "star_radius") {	$column{'sradius'} = $i;	}
+	if ($fdata[$i] eq "star_sp_type") {	$column{'sstype'} = $i;		}
+	if ($fdata[$i] eq "star_teff") {	$column{'sefftemp'} = $i;	}
+}
+
+# parse other all lines for get data
 for ($i=1;$i<scalar(@catalog);$i++) {
 	$currdata = $catalog[$i];
 	$currdata =~ s/nan//gi;
@@ -102,7 +133,7 @@ for ($i=1;$i<scalar(@catalog);$i++) {
 	@psdata = $csvdata->fields();
 
 	@cfname = ();
-	@cfname = split(" ",$psdata[0]);
+	@cfname = split(" ",$psdata[$column{'pname'}]);
 	
 	if (scalar(@cfname)==4) {
 		$csname = $cfname[0]." ".$cfname[1]." ".$cfname[2];
@@ -115,24 +146,24 @@ for ($i=1;$i<scalar(@catalog);$i++) {
 		$pname = $cfname[1];
 	}
 	
-	$pmass		= $psdata[1];	# planet mass
-	$pradius	= $psdata[4];	# planet radius
-	$pperiod	= $psdata[7];	# planet period
-	$paxis		= $psdata[10];	# planet axis
-	$pecc		= $psdata[13];	# planet eccentricity
-	$pincl		= $psdata[21];	# planet inclination
-	$angdist	= $psdata[16];	# planet angular distance
-	$discovered	= $psdata[37];	# planet discovered
-	$starname	= $psdata[48];	# star name
-	$sRA		= $psdata[49];	# star RA
-	$sDec		= $psdata[50];	# star dec
-	$sVmag		= $psdata[51];	# star v magnitude
-	$sdist		= $psdata[56];	# star distance
-	$smetal		= $psdata[57];	# star metallicity
-	$smass		= $psdata[58];	# star mass
-	$sradius	= $psdata[59];	# star radius
-	$sstype		= $psdata[60];	# star spectral type
-	$sefftemp	= $psdata[62];	# star effective temperature
+	$pmass		= $psdata[$column{'pmass'}];		# planet mass
+	$pradius	= $psdata[$column{'pradius'}];		# planet radius
+	$pperiod	= $psdata[$column{'pperiod'}];		# planet period
+	$paxis		= $psdata[$column{'paxis'}];		# planet axis
+	$pecc		= $psdata[$column{'pecc'}];		# planet eccentricity
+	$pincl		= $psdata[$column{'pincl'}];		# planet inclination
+	$angdist	= $psdata[$column{'angdist'}];		# planet angular distance
+	$discovered	= $psdata[$column{'discovered'}];	# planet discovered
+	$starname	= $psdata[$column{'starname'}];		# star name
+	$sRA		= $psdata[$column{'sra'}];		# star RA
+	$sDec		= $psdata[$column{'sdec'}];		# star dec
+	$sVmag		= $psdata[$column{'svmag'}];		# star v magnitude
+	$sdist		= $psdata[$column{'sdist'}];		# star distance
+	$smetal		= $psdata[$column{'smetal'}];		# star metallicity
+	$smass		= $psdata[$column{'smass'}];		# star mass
+	$sradius	= $psdata[$column{'sradius'}];		# star radius
+	$sstype		= $psdata[$column{'sstype'}];		# star spectral type
+	$sefftemp	= $psdata[$column{'sefftemp'}];		# star effective temperature
 	
 	$part = $sRA/15;
 	$hour = int($part);
