@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-09-10 21:41+0700\n"
+"POT-Creation-Date: 2014-09-12 19:40+0700\n"
 "PO-Revision-Date: 2014-09-11 18:14+0000\n"
 "Last-Translator: Andi Chandler <Unknown>\n"
 "Language-Team: English (United Kingdom) <en_GB@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-09-12 06:00+0000\n"
+"X-Launchpad-Export-Date: 2014-09-13 06:58+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:106 src/core/modules/StarMgr.cpp:346
@@ -4706,7 +4706,7 @@ msgid "Topocentric equatorial coordinates"
 msgstr "Topocentric equatorial coordinates"
 
 #: src/ui_configurationDialog.h:1069
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:154
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:155
 msgid "Hour angle/Declination"
 msgstr "Hour angle/Declination"
 
@@ -4715,7 +4715,7 @@ msgid "Horizontal coordinates"
 msgstr "Horizontal coordinates"
 
 #: src/ui_configurationDialog.h:1073
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:156
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:157
 msgid "Altitude/Azimuth"
 msgstr "Altitude/Azimuth"
 
@@ -9949,17 +9949,27 @@ msgctxt "abbreviated in the plugin"
 msgid "RA/Dec (J2000.0)"
 msgstr "RA/Dec (J2000.0)"
 
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:146
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:142
+msgctxt "abbreviated in the plugin"
+msgid "RA/Dec"
+msgstr ""
+
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:153
 msgctxt "abbreviated in the plugin"
 msgid "Az/Alt"
 msgstr "Az/Alt"
 
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:156
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:160
+msgctxt "abbreviated in the plugin"
+msgid "Gal. Long/Lat"
+msgstr ""
+
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:170
 msgctxt "abbreviated in the plugin"
 msgid "Ecl. Long/Lat (J2000.0)"
 msgstr "Ecl. Long/Lat (J2000.0)"
 
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:165
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:179
 msgctxt "abbreviated in the plugin"
 msgid "HA/Dec"
 msgstr "HA/Dec"
@@ -9984,9 +9994,17 @@ msgstr "The right bottom corner of the screen"
 msgid "Right ascension/Declination (J2000.0)"
 msgstr "Right ascension/Declination (J2000.0)"
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:155
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:154
+msgid "Right ascension/Declination"
+msgstr ""
+
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:156
 msgid "Ecliptic Longitude/Latitude (J2000.0)"
 msgstr "Ecliptic Longitude/Latitude (J2000.0)"
+
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:158
+msgid "Galactic Longitude/Latitude"
+msgstr ""
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:300
 msgid "Show coordinates of the mouse cursor on the screen."
