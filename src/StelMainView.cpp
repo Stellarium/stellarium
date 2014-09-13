@@ -48,6 +48,8 @@
 #include <QWindow>
 #include <QDeclarativeContext>
 #include <QPinchGesture>
+#include <QOpenGLShader>
+#include <QOpenGLShaderProgram>
 
 #include <clocale>
 
@@ -347,6 +349,10 @@ void StelMainView::init(QSettings* conf)
 	qDebug() << "GL renderer is" << QString(reinterpret_cast<const char*>(glGetString(GL_RENDERER)));
 	qDebug() << "GL Shading Language version is" << QString(reinterpret_cast<const char*>(glGetString(GL_SHADING_LANGUAGE_VERSION)));
 	
+	// Only give extended info if called on command line, for diagnostic.
+	if (qApp->property("dump_OpenGL_details").toBool())
+		dumpOpenGLdiagnostics();
+
 	stelApp= new StelApp();
 	stelApp->setGui(gui);
 	stelApp->init(conf);
@@ -354,7 +360,6 @@ void StelMainView::init(QSettings* conf)
 	actionMgr->addAction("actionSave_Screenshot_Global", N_("Miscellaneous"), N_("Save screenshot"), this, "saveScreenShot()", "Ctrl+S");
 	actionMgr->addAction("actionSet_Full_Screen_Global", N_("Display Options"), N_("Full-screen mode"), this, "fullScreen", "F11");
 	
-
 	StelPainter::initGLShaders();
 
 	setResizeMode(QDeclarativeView::SizeRootObjectToView);
@@ -447,6 +452,72 @@ QString StelMainView::getSupportedOpenGLVersion() const
 
 	return ver.join(", ");
 }
+
+void StelMainView::dumpOpenGLdiagnostics() const
+{
+	// GZ: Debug info about OpenGL capabilities.
+	QOpenGLContext *context = QOpenGLContext::currentContext();
+	if (context)
+	{
+		context->functions()->initializeOpenGLFunctions();
+		qDebug() << "initializeOpenGLFunctions()...";
+	}
+	else
+		qDebug() << "No OpenGL context";
+
+	QOpenGLFunctions::OpenGLFeatures oglFeatures=context->functions()->openGLFeatures();
+	qDebug() << "OpenGL Features:";
+	qDebug() << " - glActiveTexture() function is" << (oglFeatures&QOpenGLFunctions::Multitexture ? "" : "NOT") << "available.";
+	qDebug() << " - Shader functions are" << (oglFeatures&QOpenGLFunctions::Shaders ? "" : "NOT ") << "available.";
+	qDebug() << " - Vertex and index buffer functions are" << (oglFeatures&QOpenGLFunctions::Buffers ? "" : "NOT") << "available.";
+	qDebug() << " - Framebuffer object functions are" << (oglFeatures&QOpenGLFunctions::Framebuffers ? "" : "NOT") << "available.";
+	qDebug() << " - glBlendColor() is" << (oglFeatures&QOpenGLFunctions::BlendColor ? "" : "NOT") << "available.";
+	qDebug() << " - glBlendEquation() is" << (oglFeatures&QOpenGLFunctions::BlendEquation ? "" : "NOT") << "available.";
+	qDebug() << " - glBlendEquationSeparate() is" << (oglFeatures&QOpenGLFunctions::BlendEquationSeparate ? "" : "NOT") << "available.";
+	qDebug() << " - glBlendFuncSeparate() is" << (oglFeatures&QOpenGLFunctions::BlendFuncSeparate ? "" : "NOT") << "available.";
+	qDebug() << " - Blend subtract mode is" << (oglFeatures&QOpenGLFunctions::BlendSubtract ? "" : "NOT") << "available.";
+	qDebug() << " - Compressed texture functions are" << (oglFeatures&QOpenGLFunctions::CompressedTextures ? "" : "NOT") << "available.";
+	qDebug() << " - glSampleCoverage() function is" << (oglFeatures&QOpenGLFunctions::Multisample ? "" : "NOT") << "available.";
+	qDebug() << " - Separate stencil functions are" << (oglFeatures&QOpenGLFunctions::StencilSeparate ? "" : "NOT") << "available.";
+	qDebug() << " - Non power of two textures are" << (oglFeatures&QOpenGLFunctions::NPOTTextures ? "" : "NOT") << "available.";
+	qDebug() << " - Non power of two textures can" << (oglFeatures&QOpenGLFunctions::NPOTTextureRepeat ? "" : "NOT") << "use GL_REPEAT as wrap parameter.";
+	qDebug() << " - The fixed function pipeline is" << (oglFeatures&QOpenGLFunctions::FixedFunctionPipeline ? "" : "NOT") << "available.";
+
+	qDebug() << "OpenGL shader capabilities and details:";
+	qDebug() << " - Vertex Shader:" << (QOpenGLShader::hasOpenGLShaders(QOpenGLShader::Vertex, context) ? "YES" : "NO");
+	qDebug() << " - Fragment Shader:" << (QOpenGLShader::hasOpenGLShaders(QOpenGLShader::Fragment, context) ? "YES" : "NO");
+	qDebug() << " - Geometry Shader:" << (QOpenGLShader::hasOpenGLShaders(QOpenGLShader::Geometry, context) ? "YES" : "NO");
+	qDebug() << " - TessellationControl Shader:" << (QOpenGLShader::hasOpenGLShaders(QOpenGLShader::TessellationControl, context) ? "YES" : "NO");
+	qDebug() << " - TessellationEvaluation Shader:" << (QOpenGLShader::hasOpenGLShaders(QOpenGLShader::TessellationEvaluation, context) ? "YES" : "NO");
+	qDebug() << " - Compute Shader:" << (QOpenGLShader::hasOpenGLShaders(QOpenGLShader::Compute, context) ? "YES" : "NO");
+
+	// GZ: List available extensions. Not sure if this is in any way useful?
+	QSet<QByteArray> extensionSet=context->extensions();
+	qDebug() << "We have" << extensionSet.count() << "OpenGL extensions:";
+	QMap<QString, QString> extensionMap;
+	QSetIterator<QByteArray> iter(extensionSet);
+	while (iter.hasNext())
+	{
+		extensionMap.insert(QString(iter.peekNext()), QString(iter.peekNext()));
+		iter.next();
+	}
+	QMapIterator<QString, QString> iter2(extensionMap);
+	while (iter2.hasNext())
+		qDebug() << " - " << iter2.next().key();
+
+	QFunctionPointer programParameterPtr =context->getProcAddress("glProgramParameteri");
+	if (programParameterPtr == 0)
+		qDebug() << "glProgramParameteri cannot be resolved here. BAD!";
+	//else
+	//	qDebug() << "glProgramParameteri can be resolved. GOOD!";
+	programParameterPtr =context->getProcAddress("glProgramParameteriEXT");
+	if (programParameterPtr == 0)
+		qDebug() << "glProgramParameteriEXT cannot be resolved here. BAD!";
+	//else
+	//	qDebug() << "glProgramParameteriEXT can be resolved here. GOOD!";
+
+}
+
 
 void StelMainView::deinit()
 {
