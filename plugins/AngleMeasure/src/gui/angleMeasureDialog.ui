@@ -164,7 +164,7 @@
           <item>
            <widget class="QCheckBox" name="showEquatorialCheckBox">
             <property name="text">
-             <string>NEW SWITCH: Show in equatorial coords (like before)</string>
+             <string>Show in equatorial coordinates</string>
             </property>
             <property name="checked">
              <bool>true</bool>
@@ -173,6 +173,9 @@
           </item>
           <item>
            <widget class="QCheckBox" name="showPositionAngleCheckBox">
+            <property name="enabled">
+             <bool>true</bool>
+            </property>
             <property name="text">
              <string>Show position angle in equatorial system</string>
             </property>
@@ -181,16 +184,27 @@
           <item>
            <widget class="QCheckBox" name="showHorizontalCheckBox">
             <property name="text">
-             <string>NEW: Show in horizontal coordinates</string>
+             <string>Show in horizontal coordinates</string>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QCheckBox" name="azAltEndOnSkyCheckBox">
-            <property name="text">
-             <string>NEW: Attach end point to rotating sky</string>
-            </property>
-           </widget>
+           <layout class="QHBoxLayout" name="horizontalLayout">
+            <item>
+             <widget class="QCheckBox" name="azAltStartOnSkyCheckBox">
+              <property name="text">
+               <string>Attach start point to rotating sky</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QCheckBox" name="azAltEndOnSkyCheckBox">
+              <property name="text">
+               <string>Attach end point to rotating sky</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
           </item>
           <item>
            <widget class="QCheckBox" name="showPositionAngleHorizontalCheckBox">

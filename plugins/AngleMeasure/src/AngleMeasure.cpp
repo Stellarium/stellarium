@@ -67,10 +67,12 @@ AngleMeasure::AngleMeasure()
 	, angle(0.)
 	, flagUseDmsFormat(false)
 	, flagShowPA(false)
-	// GZ 3 next
+	// GZ 5 next
 	, flagShowEquatorial(false)
 	, flagShowHorizontal(false)
 	, flagShowHorizontalPA(false)
+	, flagShowHorizontalStartSkylinked(false)
+	, flagShowHorizontalEndSkylinked(false)
 	, toolbarButton(NULL)
 {
 	setObjectName("AngleMeasure");
@@ -121,6 +123,12 @@ void AngleMeasure::init()
 	perp1EndPoint.set(0.,0.,0.);
 	perp2StartPoint.set(0.,0.,0.);
 	perp2EndPoint.set(0.,0.,0.);
+	startPointHor.set(0.,0.,0.);
+	endPointHor.set(0.,0.,0.);
+	perp1StartPointHor.set(0.,0.,0.);
+	perp1EndPointHor.set(0.,0.,0.);
+	perp2StartPointHor.set(0.,0.,0.);
+	perp2EndPointHor.set(0.,0.,0.);
 
 	StelApp& app = StelApp::getInstance();
 
@@ -156,6 +164,19 @@ void AngleMeasure::update(double deltaTime)
 {
 	messageFader.update((int)(deltaTime*1000));
 	lineVisible.update((int)(deltaTime*1000));
+	static StelCore *core=StelApp::getInstance().getCore();
+
+	// if altAz endpoint linked to the rotating sky, move point 2, i.e., convert endPoint to endPointHor
+	if (flagShowHorizontalStartSkylinked)
+	{
+		startPointHor = core->equinoxEquToAltAz(startPoint, StelCore::RefractionAuto);
+		calculateEnds();
+	}
+	if (flagShowHorizontalEndSkylinked)
+	{
+		endPointHor = core->equinoxEquToAltAz(endPoint, StelCore::RefractionAuto);
+		calculateEnds();
+	}
 }
 
 
@@ -191,7 +212,7 @@ void AngleMeasure::drawOne(StelCore *core, const StelCore::FrameType frameType, 
 			{
 				painter.setColor(txtColor[0], txtColor[1], txtColor[2], lineVisible.getInterstate());
 				if (flagShowHorizontalPA)
-					displayedText = QString("%1 (%2%3)").arg(calculateAngle(), messagePA, calculatePositionAngle(startPointHor, endPointHor));
+					displayedText = QString("%1 (%2%3)").arg(calculateAngle(true), messagePA, calculatePositionAngle(startPointHor, endPointHor));
 				else
 					displayedText = calculateAngle(true);
 				painter.drawText(xy[0], xy[1], displayedText, 0, 15, -5);
@@ -356,37 +377,28 @@ bool AngleMeasure::handleMouseMoves(int x, int y, Qt::MouseButtons)
 
 void AngleMeasure::calculateEnds(void)
 {
-	Vec3d v0 = endPoint - startPoint;
-	Vec3d v1 = Vec3d(0,0,0) - startPoint;
+	if (flagShowEquatorial)
+		calculateEndsOneLine(startPoint,    endPoint,    perp1StartPoint,    perp1EndPoint,    perp2StartPoint,    perp2EndPoint,    angle);
+	if (flagShowHorizontal)
+		calculateEndsOneLine(startPointHor, endPointHor, perp1StartPointHor, perp1EndPointHor, perp2StartPointHor, perp2EndPointHor, angleHor);
+}
+
+void AngleMeasure::calculateEndsOneLine(const Vec3d start, const Vec3d end, Vec3d &perp1Start, Vec3d &perp1End, Vec3d &perp2Start, Vec3d &perp2End, double &angle)
+{
+	Vec3d v0 = end - start;
+	Vec3d v1 = Vec3d(0,0,0) - start;
 	Vec3d p = v0 ^ v1;
 	p *= 0.08;  // end width
-	perp1StartPoint.set(startPoint[0]-p[0],startPoint[1]-p[1],startPoint[2]-p[2]);
-	perp1EndPoint.set(startPoint[0]+p[0],startPoint[1]+p[1],startPoint[2]+p[2]);
+	perp1Start.set(start[0]-p[0],start[1]-p[1],start[2]-p[2]);
+	perp1End.set(start[0]+p[0],start[1]+p[1],start[2]+p[2]);
 
-	v1 = Vec3d(0,0,0) - endPoint;
+	v1 = Vec3d(0,0,0) - end;
 	p = v0 ^ v1;
 	p *= 0.08;  // end width
-	perp2StartPoint.set(endPoint[0]-p[0],endPoint[1]-p[1],endPoint[2]-p[2]);
-	perp2EndPoint.set(endPoint[0]+p[0],endPoint[1]+p[1],endPoint[2]+p[2]);
+	perp2Start.set(end[0]-p[0],end[1]-p[1],end[2]-p[2]);
+	perp2End.set(end[0]+p[0],end[1]+p[1],end[2]+p[2]);
 
-	angle = startPoint.angle(endPoint);
-
-	// Repeat for horizontals
-	v0 = endPointHor - startPointHor;
-	v1 = Vec3d(0,0,0) - startPointHor;
-	p = v0 ^ v1;
-	p *= 0.08;  // end width
-	perp1StartPointHor.set(startPointHor[0]-p[0],startPointHor[1]-p[1],startPointHor[2]-p[2]);
-	perp1EndPointHor.set(startPointHor[0]+p[0],startPointHor[1]+p[1],startPointHor[2]+p[2]);
-
-	v1 = Vec3d(0,0,0) - endPointHor;
-	p = v0 ^ v1;
-	p *= 0.08;  // end width
-	perp2StartPointHor.set(endPointHor[0]-p[0],endPointHor[1]-p[1],endPointHor[2]-p[2]);
-	perp2EndPointHor.set(endPointHor[0]+p[0],endPointHor[1]+p[1],endPointHor[2]+p[2]);
-
-	angleHor = startPointHor.angle(endPointHor);
-
+	angle = start.angle(end);
 }
 
 // GZ Misnomer! should be called formatAngleString()
@@ -436,7 +448,14 @@ void AngleMeasure::showHorizontal(bool b)
 {
 	flagShowHorizontal = b;
 }
-
+void AngleMeasure::showHorizontalStartSkylinked(bool b)
+{
+	flagShowHorizontalStartSkylinked = b;
+}
+void AngleMeasure::showHorizontalEndSkylinked(bool b)
+{
+	flagShowHorizontalEndSkylinked = b;
+}
 void AngleMeasure::useDmsFormat(bool b)
 {
 	flagUseDmsFormat=b;
@@ -474,8 +493,8 @@ void AngleMeasure::restoreDefaultSettings()
 	conf->setValue("text_color", "0,0.5,1");
 	conf->setValue("line_color", "0,0.5,1");
 	// GZ 2 new
-	conf->setValue("hor_text_color", "0.4,0.3,0.2");
-	conf->setValue("hor_line_color", "0.4,0.3,0.2");
+	conf->setValue("text_color_horizontal", "0.5,0.3,0.2");
+	conf->setValue("line_color_horizontal", "0.5,0.3,0.2");
 	conf->endGroup();
 }
 
@@ -487,12 +506,14 @@ void AngleMeasure::loadSettings()
 	showPositionAngle(conf->value("show_position_angle", false).toBool());
 	textColor = StelUtils::strToVec3f(conf->value("text_color", "0,0.5,1").toString());
 	lineColor = StelUtils::strToVec3f(conf->value("line_color", "0,0.5,1").toString());
-	// GZ 5 new
-	horTextColor = StelUtils::strToVec3f(conf->value("hor_text_color", "0.4,0.3,0.2").toString());
-	horLineColor = StelUtils::strToVec3f(conf->value("hor_line_color", "0.4,0.3,0.2").toString());
+	// GZ 7 new
+	horTextColor = StelUtils::strToVec3f(conf->value("text_color_horizontal", "0.4,0.3,0.2").toString());
+	horLineColor = StelUtils::strToVec3f(conf->value("line_color_horizontal", "0.4,0.3,0.2").toString());
 	showPositionAngleHor(conf->value("show_position_angle_horizontal", false).toBool());
 	flagShowEquatorial = conf->value("show_equatorial", true).toBool();
 	flagShowHorizontal = conf->value("show_horizontal", false).toBool();
+	flagShowHorizontalStartSkylinked = conf->value("link_horizontal_start_to_sky", false).toBool();
+	flagShowHorizontalEndSkylinked = conf->value("link_horizontal_end_to_sky", false).toBool();
 
 	conf->endGroup();
 }
@@ -503,10 +524,12 @@ void AngleMeasure::saveSettings()
 
 	conf->setValue("angle_format_dms", isDmsFormat());
 	conf->setValue("show_position_angle", isPaDisplayed());
-	// GZ 3 new
+	// GZ 4 new
 	conf->setValue("show_position_angle_horizontal", isHorPaDisplayed());
 	conf->setValue("show_equatorial", isEquatorial());
 	conf->setValue("show_horizontal", isHorizontal());
+	conf->setValue("link_horizontal_start_to_sky", isHorizontalStartSkylinked());
+	conf->setValue("link_horizontal_end_to_sky", isHorizontalEndSkylinked());
 
 	conf->endGroup();
 }
