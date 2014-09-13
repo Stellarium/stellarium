@@ -467,21 +467,21 @@ void StelMainView::dumpOpenGLdiagnostics() const
 
 	QOpenGLFunctions::OpenGLFeatures oglFeatures=context->functions()->openGLFeatures();
 	qDebug() << "OpenGL Features:";
-	qDebug() << " - glActiveTexture() function is" << (oglFeatures&QOpenGLFunctions::Multitexture ? "" : "NOT") << "available.";
-	qDebug() << " - Shader functions are" << (oglFeatures&QOpenGLFunctions::Shaders ? "" : "NOT ") << "available.";
-	qDebug() << " - Vertex and index buffer functions are" << (oglFeatures&QOpenGLFunctions::Buffers ? "" : "NOT") << "available.";
-	qDebug() << " - Framebuffer object functions are" << (oglFeatures&QOpenGLFunctions::Framebuffers ? "" : "NOT") << "available.";
-	qDebug() << " - glBlendColor() is" << (oglFeatures&QOpenGLFunctions::BlendColor ? "" : "NOT") << "available.";
-	qDebug() << " - glBlendEquation() is" << (oglFeatures&QOpenGLFunctions::BlendEquation ? "" : "NOT") << "available.";
-	qDebug() << " - glBlendEquationSeparate() is" << (oglFeatures&QOpenGLFunctions::BlendEquationSeparate ? "" : "NOT") << "available.";
-	qDebug() << " - glBlendFuncSeparate() is" << (oglFeatures&QOpenGLFunctions::BlendFuncSeparate ? "" : "NOT") << "available.";
-	qDebug() << " - Blend subtract mode is" << (oglFeatures&QOpenGLFunctions::BlendSubtract ? "" : "NOT") << "available.";
-	qDebug() << " - Compressed texture functions are" << (oglFeatures&QOpenGLFunctions::CompressedTextures ? "" : "NOT") << "available.";
-	qDebug() << " - glSampleCoverage() function is" << (oglFeatures&QOpenGLFunctions::Multisample ? "" : "NOT") << "available.";
-	qDebug() << " - Separate stencil functions are" << (oglFeatures&QOpenGLFunctions::StencilSeparate ? "" : "NOT") << "available.";
-	qDebug() << " - Non power of two textures are" << (oglFeatures&QOpenGLFunctions::NPOTTextures ? "" : "NOT") << "available.";
-	qDebug() << " - Non power of two textures can" << (oglFeatures&QOpenGLFunctions::NPOTTextureRepeat ? "" : "NOT") << "use GL_REPEAT as wrap parameter.";
-	qDebug() << " - The fixed function pipeline is" << (oglFeatures&QOpenGLFunctions::FixedFunctionPipeline ? "" : "NOT") << "available.";
+	qDebug() << " - glActiveTexture() function" << (oglFeatures&QOpenGLFunctions::Multitexture ? "is" : "is NOT") << "available.";
+	qDebug() << " - Shader functions" << (oglFeatures&QOpenGLFunctions::Shaders ? "are" : "are NOT ") << "available.";
+	qDebug() << " - Vertex and index buffer functions" << (oglFeatures&QOpenGLFunctions::Buffers ? "are" : "are NOT") << "available.";
+	qDebug() << " - Framebuffer object functions" << (oglFeatures&QOpenGLFunctions::Framebuffers ? "are" : "are NOT") << "available.";
+	qDebug() << " - glBlendColor()" << (oglFeatures&QOpenGLFunctions::BlendColor ? "is" : "is NOT") << "available.";
+	qDebug() << " - glBlendEquation()" << (oglFeatures&QOpenGLFunctions::BlendEquation ? "is" : "is NOT") << "available.";
+	qDebug() << " - glBlendEquationSeparate()" << (oglFeatures&QOpenGLFunctions::BlendEquationSeparate ? "is" : "is NOT") << "available.";
+	qDebug() << " - glBlendFuncSeparate()" << (oglFeatures&QOpenGLFunctions::BlendFuncSeparate ? "is" : "is NOT") << "available.";
+	qDebug() << " - Blend subtract mode" << (oglFeatures&QOpenGLFunctions::BlendSubtract ? "is" : "is NOT") << "available.";
+	qDebug() << " - Compressed texture functions" << (oglFeatures&QOpenGLFunctions::CompressedTextures ? "are" : "are NOT") << "available.";
+	qDebug() << " - glSampleCoverage() function" << (oglFeatures&QOpenGLFunctions::Multisample ? "is" : "is NOT") << "available.";
+	qDebug() << " - Separate stencil functions" << (oglFeatures&QOpenGLFunctions::StencilSeparate ? "are" : "are NOT") << "available.";
+	qDebug() << " - Non power of two textures" << (oglFeatures&QOpenGLFunctions::NPOTTextures ? "are" : "are NOT") << "available.";
+	qDebug() << " - Non power of two textures" << (oglFeatures&QOpenGLFunctions::NPOTTextureRepeat ? "can" : "CANNOT") << "use GL_REPEAT as wrap parameter.";
+	qDebug() << " - The fixed function pipeline" << (oglFeatures&QOpenGLFunctions::FixedFunctionPipeline ? "is" : "is NOT") << "available.";
 
 	qDebug() << "OpenGL shader capabilities and details:";
 	qDebug() << " - Vertex Shader:" << (QOpenGLShader::hasOpenGLShaders(QOpenGLShader::Vertex, context) ? "YES" : "NO");
@@ -498,12 +498,13 @@ void StelMainView::dumpOpenGLdiagnostics() const
 	QSetIterator<QByteArray> iter(extensionSet);
 	while (iter.hasNext())
 	{
-		extensionMap.insert(QString(iter.peekNext()), QString(iter.peekNext()));
+		if (!iter.peekNext().isEmpty()) // Don't insert empty lines
+			extensionMap.insert(QString(iter.peekNext()), QString(iter.peekNext()));
 		iter.next();
 	}
 	QMapIterator<QString, QString> iter2(extensionMap);
 	while (iter2.hasNext())
-		qDebug() << " - " << iter2.next().key();
+		qDebug() << " -" << iter2.next().key();
 
 	QFunctionPointer programParameterPtr =context->getProcAddress("glProgramParameteri");
 	if (programParameterPtr == 0)
