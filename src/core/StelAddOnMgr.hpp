@@ -72,6 +72,7 @@ public:
 	//! @enum AddOnMgrMsg
 	enum AddOnMgrMsg
 	{
+		RestartRequired,
 		UnableToWriteFiles
 	};
 

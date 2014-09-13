@@ -249,6 +249,12 @@ bool StelAddOnMgr::installFromFile(const StelAddOnDAO::AddOnInfo addonInfo,
 			   << " is corrupt, MD5 mismatch!";
 	}
 
+	if ((status == PartiallyInstalled || status == FullyInstalled) &&
+		(addonInfo.category == CATEGORY_LANGUAGE_PACK || addonInfo.category == CATEGORY_TEXTURE))
+	{
+		emit (addOnMgrMsg(RestartRequired));
+	}
+
 	m_pStelAddOnDAO->updateAddOnStatus(addonInfo.idInstall, status);
 	emit (dataUpdated(addonInfo.category));
 	return status;
@@ -285,6 +291,11 @@ void StelAddOnMgr::removeAddOn(const int addonId, const QStringList selectedFile
 	{
 		m_pStelAddOnDAO->updateAddOnStatus(addonInfo.idInstall, NotInstalled);
 		emit (dataUpdated(addonInfo.category));
+
+		if (addonInfo.category == CATEGORY_LANGUAGE_PACK || addonInfo.category == CATEGORY_TEXTURE)
+		{
+			emit (addOnMgrMsg(RestartRequired));
+		}
 	}
 }
 
