@@ -60,7 +60,7 @@ void AddOnDialog::createDialogContent()
 		this, SLOT(populateTables()));
 
 	ui->setupUi(dialog);
-	connect(&StelApp::getInstance(), SIGNAL(languageChanged()),this, SLOT(retranslate()));
+	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 
 	// naming tables according to the category
@@ -115,8 +115,26 @@ void AddOnDialog::createDialogContent()
 	// button Install from File
 	connect(ui->btnInstallFromFile, SIGNAL(clicked()), this, SLOT(installFromFile()));
 
+	// display the AddOnMgr message
+	connect(&StelApp::getInstance().getStelAddOnMgr(), SIGNAL(addOnMgrMsg(StelAddOnMgr::AddOnMgrMsg)),
+		this, SLOT(slotUpdateMsg(StelAddOnMgr::AddOnMgrMsg)));
+
 	// fix dialog width
 	updateTabBarListWidgetWidth();
+}
+
+void AddOnDialog::slotUpdateMsg(const StelAddOnMgr::AddOnMgrMsg msg)
+{
+	QString txt;
+	switch (msg) {
+		case StelAddOnMgr::RestartRequired:
+			txt = q_("Restart requiried!");
+			break;
+		case StelAddOnMgr::UnableToWriteFiles:
+			txt = q_("Unable to write files!");
+			break;
+	}
+	ui->msg->setText(txt);
 }
 
 void AddOnDialog::updateTabBarListWidgetWidth()

@@ -51,6 +51,7 @@ protected:
 
 private slots:
 	void changePage(QListWidgetItem *current, QListWidgetItem *previous);
+	void slotUpdateMsg(const StelAddOnMgr::AddOnMgrMsg msg);
 	void updateCatalog();
 	void downloadFinished();
 	void installFromFile();

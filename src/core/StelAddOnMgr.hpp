@@ -91,7 +91,7 @@ public:
 	};
 
 signals:
-	void addOnMgrMsg(const AddOnMgrMsg msg);
+	void addOnMgrMsg(StelAddOnMgr::AddOnMgrMsg);
 	void dataUpdated(const QString& category);
 	void updateTableViews();
 	void skyCulturesChanged();
