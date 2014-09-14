@@ -125,16 +125,19 @@ void AddOnDialog::createDialogContent()
 
 void AddOnDialog::slotUpdateMsg(const StelAddOnMgr::AddOnMgrMsg msg)
 {
-	QString txt;
+	QString txt, toolTip;
 	switch (msg) {
 		case StelAddOnMgr::RestartRequired:
-			txt = q_("Restart requiried!");
+			txt = q_("Stellarium restart requiried!");
+			toolTip = q_("You must restart the Stellarium to make some changes take effect.");
 			break;
 		case StelAddOnMgr::UnableToWriteFiles:
 			txt = q_("Unable to write files!");
+			toolTip = q_("The user directory is not writable. Please check the permissions on that directory.");
 			break;
 	}
 	ui->msg->setText(txt);
+	ui->msg->setToolTip(toolTip);
 }
 
 void AddOnDialog::updateTabBarListWidgetWidth()
