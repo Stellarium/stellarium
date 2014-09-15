@@ -204,7 +204,7 @@ void SearchDialog::setCurrentCoordinateSystemKey(QString key)
 	CoordinateSystem coordSystem = (CoordinateSystem)en.keyToValue(key.toLatin1().data());
 	if (coordSystem<0)
 	{
-		qWarning() << "Unknown coordinate system: " << key << "setting \"equatorial\" instead";
+		qWarning() << "[Search Tool] Unknown coordinate system: " << key << "setting \"equatorialJ2000\" instead";
 		coordSystem = equatorialJ2000;
 	}
 	setCurrentCoordinateSystem(coordSystem);
@@ -310,7 +310,6 @@ void SearchDialog::createDialogContent()
 	}
 	ui->coordinateSystemComboBox->setCurrentIndex(idx);
 	connect(ui->coordinateSystemComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(setCoordinateSystem(int)));
-
 	connect(ui->AxisXSpinBox, SIGNAL(valueChanged()), this, SLOT(manualPositionChanged()));
 	connect(ui->AxisYSpinBox, SIGNAL(valueChanged()), this, SLOT(manualPositionChanged()));
     
