@@ -87,7 +87,8 @@ public:
 		Corrupted,
 		InvalidFormat,
 		UnableToWrite,
-		UnableToRead
+		UnableToRead,
+		DownloadFailed
 	};
 
 signals:

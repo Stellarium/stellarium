@@ -407,13 +407,14 @@ void StelAddOnMgr::downloadAddOnFinished()
 			connect(m_pAddOnNetworkReply, SIGNAL(finished()), this, SLOT(downloadAddOnFinished()));
 			return;
 		}
-
 		installFromFile(m_currentDownloadInfo, m_downloadQueue.value(m_iDownloadingId));
 	}
 	else
 	{
 		qWarning() << "Add-on Mgr: FAILED to download" << m_pAddOnNetworkReply->url()
 			   << " Error:" << m_pAddOnNetworkReply->errorString();
+		m_pStelAddOnDAO->updateAddOnStatus(m_currentDownloadInfo.idInstall, DownloadFailed);
+		emit (dataUpdated(m_currentDownloadInfo.category));
 	}
 
 	finishCurrentDownload();
