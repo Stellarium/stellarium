@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-09-12 19:40+0700\n"
-"PO-Revision-Date: 2014-09-10 02:01+0000\n"
+"PO-Revision-Date: 2014-09-14 12:53+0000\n"
 "Last-Translator: Tiago S. <Unknown>\n"
 "Language-Team: Portuguese <pt@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-09-13 06:48+0000\n"
+"X-Launchpad-Export-Date: 2014-09-15 06:12+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:106 src/core/modules/StarMgr.cpp:346
@@ -73,7 +73,7 @@ msgstr "Horizonte"
 
 #: src/core/modules/GridLinesMgr.cpp:564
 msgid "Galactic Equator"
-msgstr ""
+msgstr "Equador Galáctico"
 
 #: src/core/modules/GridLinesMgr.cpp:698
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:331
@@ -121,7 +121,7 @@ msgstr "Grelha galáctica"
 
 #: src/core/modules/GridLinesMgr.cpp:707 src/ui_viewDialog.h:1247
 msgid "Galactic equator"
-msgstr ""
+msgstr "Equador galáctico"
 
 #: src/core/modules/LandscapeMgr.cpp:355 src/ui_viewDialog.h:1176
 msgid "Atmosphere"
@@ -4531,7 +4531,7 @@ msgstr "Mostrar linha eclíptica"
 
 #: src/ui_viewDialog.h:1245
 msgid "Show Galactic equator line"
-msgstr ""
+msgstr "Mostrar a linha do Equador galáctico"
 
 #: src/ui_viewDialog.h:1249
 msgid "Projection"
@@ -7446,7 +7446,7 @@ msgstr "Indicações de nebulosas"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:370
 msgid "Galactic equator line"
-msgstr ""
+msgstr "Linha do Equador galáctico"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:399
 msgid "Effects"
@@ -10060,7 +10060,7 @@ msgstr "Ascensão reta/Declinação (J2000.0)"
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:142
 msgctxt "abbreviated in the plugin"
 msgid "RA/Dec"
-msgstr ""
+msgstr "AR/Dec"
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:153
 msgctxt "abbreviated in the plugin"
@@ -10070,7 +10070,7 @@ msgstr "Az/Alt"
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:160
 msgctxt "abbreviated in the plugin"
 msgid "Gal. Long/Lat"
-msgstr ""
+msgstr "Long/Lat Galáctica"
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:170
 msgctxt "abbreviated in the plugin"
@@ -10104,7 +10104,7 @@ msgstr "Ascensão reta/Declinação (J2000.0)"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:154
 msgid "Right ascension/Declination"
-msgstr ""
+msgstr "Ascensão reta/Declinação"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:156
 msgid "Ecliptic Longitude/Latitude (J2000.0)"
@@ -10112,7 +10112,7 @@ msgstr "Longitude/Latitude Eclíptica (J2000.0)"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:158
 msgid "Galactic Longitude/Latitude"
-msgstr ""
+msgstr "Longitude/Latitude Galáctica"
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:300
 msgid "Show coordinates of the mouse cursor on the screen."
