@@ -80,10 +80,10 @@ public:
 	//! Available coordinate systems
 	enum CoordinateSystem
 	{
-		RaDecJ2000,
-		RaDec,
-		AltAzi,
-		Galactic
+		equatorialJ2000,
+		equatorial,
+		horizontal,
+		galactic
 	};
 
 	SearchDialog(QObject* parent);

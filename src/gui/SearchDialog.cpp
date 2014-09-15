@@ -166,7 +166,7 @@ SearchDialog::SearchDialog(QObject* parent) : StelDialog(parent), simbadReply(NU
 	useSimbad = conf->value("search/flag_search_online", true).toBool();	
 	useStartOfWords = conf->value("search/flag_start_words", false).toBool();
 	simbadServerUrl = conf->value("search/simbad_server_url", DEF_SIMBAD_URL).toString();
-	setCurrentCoordinateSystemKey(conf->value("search/coordinate_system", "RaDecJ2000").toString());
+	setCurrentCoordinateSystemKey(conf->value("search/coordinate_system", "equatorialJ2000").toString());
 }
 
 SearchDialog::~SearchDialog()
@@ -204,8 +204,8 @@ void SearchDialog::setCurrentCoordinateSystemKey(QString key)
 	CoordinateSystem coordSystem = (CoordinateSystem)en.keyToValue(key.toLatin1().data());
 	if (coordSystem<0)
 	{
-		qWarning() << "Unknown coordinate system: " << key << "setting \"RaDecJ2000\" instead";
-		coordSystem = RaDecJ2000;
+		qWarning() << "Unknown coordinate system: " << key << "setting \"equatorial\" instead";
+		coordSystem = equatorialJ2000;
 	}
 	setCurrentCoordinateSystem(coordSystem);
 }
@@ -228,10 +228,10 @@ void SearchDialog::populateCoordinateSystemsList()
 	csys->clear();
 	//For each coordinate system, display the localized name and store the key as user
 	//data. Unfortunately, there's no other way to do this than with a cycle.
-	csys->addItem(qc_("Equatorial (J2000.0)", "coordinate system"), "RaDecJ2000");
-	csys->addItem(qc_("Equatorial", "coordinate system"), "RaDec");
-	csys->addItem(qc_("Horizontal", "coordinate system"), "AltAzi");
-	csys->addItem(qc_("Galactic", "coordinate system"), "Galactic");
+	csys->addItem(qc_("Equatorial (J2000.0)", "coordinate system"), "equatorialJ2000");
+	csys->addItem(qc_("Equatorial", "coordinate system"), "equatorial");
+	csys->addItem(qc_("Horizontal", "coordinate system"), "horizontal");
+	csys->addItem(qc_("Galactic", "coordinate system"), "galactic");
 
 	//Restore the selection
 	index = csys->findData(selectedSystemId, Qt::UserRole, Qt::MatchCaseSensitive);
@@ -242,15 +242,15 @@ void SearchDialog::populateCoordinateSystemsList()
 void SearchDialog::populateCoordinateAxis()
 {
 	switch (getCurrentCoordinateSystem()) {
-		case RaDecJ2000:
-		case RaDec:
+		case equatorialJ2000:
+		case equatorial:
 			ui->AxisXLabel->setText(q_("Right ascension"));
 			ui->AxisXSpinBox->setDisplayFormat(AngleSpinBox::HMSLetters);
 			ui->AxisYLabel->setText(q_("Declination"));
 			ui->AxisYSpinBox->setDisplayFormat(AngleSpinBox::DMSSymbols);
 			ui->AxisYSpinBox->setPrefixType(AngleSpinBox::NormalPlus);
 			break;
-		case AltAzi:
+		case horizontal:
 			ui->AxisXLabel->setText(q_("Azimuth"));
 			ui->AxisXSpinBox->setDisplayFormat(AngleSpinBox::DMSLetters);
 			ui->AxisXSpinBox->setPrefixType(AngleSpinBox::NormalPlus);
@@ -258,7 +258,7 @@ void SearchDialog::populateCoordinateAxis()
 			ui->AxisYSpinBox->setDisplayFormat(AngleSpinBox::DMSSymbols);
 			ui->AxisYSpinBox->setPrefixType(AngleSpinBox::NormalPlus);
 			break;
-		case Galactic:
+		case galactic:
 			ui->AxisXLabel->setText(q_("Longitude"));
 			ui->AxisXSpinBox->setDisplayFormat(AngleSpinBox::DMSLetters);
 			ui->AxisXSpinBox->setPrefixType(AngleSpinBox::NormalPlus);
@@ -305,8 +305,8 @@ void SearchDialog::createDialogContent()
 	int idx = ui->coordinateSystemComboBox->findData(getCurrentCoordinateSystemKey(), Qt::UserRole, Qt::MatchCaseSensitive);
 	if (idx==-1)
 	{
-		// Use RaDecJ2000 as default
-		idx = ui->coordinateSystemComboBox->findData(QVariant("RaDecJ2000"), Qt::UserRole, Qt::MatchCaseSensitive);
+		// Use equatorialJ2000 as default
+		idx = ui->coordinateSystemComboBox->findData(QVariant("equatorialJ2000"), Qt::UserRole, Qt::MatchCaseSensitive);
 	}
 	ui->coordinateSystemComboBox->setCurrentIndex(idx);
 	connect(ui->coordinateSystemComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(setCoordinateSystem(int)));
@@ -402,14 +402,14 @@ void SearchDialog::manualPositionChanged()
 	StelMovementMgr* mvmgr = GETSTELMODULE(StelMovementMgr);	
 	Vec3d pos;
 	switch (getCurrentCoordinateSystem()) {
-		case RaDecJ2000:
+		case equatorialJ2000:
 			StelUtils::spheToRect(ui->AxisXSpinBox->valueRadians(), ui->AxisYSpinBox->valueRadians(), pos);
 			break;
-		case RaDec:
+		case equatorial:
 			StelUtils::spheToRect(ui->AxisXSpinBox->valueRadians(), ui->AxisYSpinBox->valueRadians(), pos);
 			pos = core->equinoxEquToJ2000(pos);
 			break;
-		case AltAzi:
+		case horizontal:
 			double cx;
 			cx = 3.*M_PI - ui->AxisXSpinBox->valueRadians(); // N is zero, E is 90 degrees
 			if (cx > M_PI*2)
@@ -417,7 +417,7 @@ void SearchDialog::manualPositionChanged()
 			StelUtils::spheToRect(cx, ui->AxisYSpinBox->valueRadians(), pos);
 			pos = core->altAzToJ2000(pos);
 			break;
-		case Galactic:
+		case galactic:
 			StelUtils::spheToRect(ui->AxisXSpinBox->valueRadians(), ui->AxisYSpinBox->valueRadians(), pos);
 			pos = core->galacticToJ2000(pos);
 			break;
