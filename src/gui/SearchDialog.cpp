@@ -42,6 +42,7 @@
 #include <QLineEdit>
 #include <QComboBox>
 #include <QMenu>
+#include <QMetaEnum>
 
 #include "SimbadSearcher.hpp"
 
@@ -161,11 +162,11 @@ SearchDialog::SearchDialog(QObject* parent) : StelDialog(parent), simbadReply(NU
 	greekLetters.insert("psi", QString(QChar(0x03C8)));
 	greekLetters.insert("omega", QString(QChar(0x03C9)));
 
-	QSettings* conf = StelApp::getInstance().getSettings();
-	Q_ASSERT(conf);
+	conf = StelApp::getInstance().getSettings();
 	useSimbad = conf->value("search/flag_search_online", true).toBool();	
 	useStartOfWords = conf->value("search/flag_start_words", false).toBool();
 	simbadServerUrl = conf->value("search/simbad_server_url", DEF_SIMBAD_URL).toString();
+	setCurrentCoordinateSystemKey(conf->value("search/coordinate_system", "RaDecJ2000").toString());
 }
 
 SearchDialog::~SearchDialog()
@@ -186,6 +187,8 @@ void SearchDialog::retranslate()
 		ui->retranslateUi(dialog);
 		ui->lineEditSearchSkyObject->setText(text);
 		populateSimbadServerList();
+		populateCoordinateSystemsList();
+		populateCoordinateAxis();
 		updateListTab();
 	}
 }
@@ -193,6 +196,87 @@ void SearchDialog::retranslate()
 void SearchDialog::styleChanged()
 {
 	// Nothing for now
+}
+
+void SearchDialog::setCurrentCoordinateSystemKey(QString key)
+{
+	const QMetaEnum& en = metaObject()->enumerator(metaObject()->indexOfEnumerator("CoordinateSystem"));
+	CoordinateSystem coordSystem = (CoordinateSystem)en.keyToValue(key.toLatin1().data());
+	if (coordSystem<0)
+	{
+		qWarning() << "Unknown coordinate system: " << key << "setting \"RaDecJ2000\" instead";
+		coordSystem = RaDecJ2000;
+	}
+	setCurrentCoordinateSystem(coordSystem);
+}
+
+QString SearchDialog::getCurrentCoordinateSystemKey() const
+{
+	return metaObject()->enumerator(metaObject()->indexOfEnumerator("CoordinateSystem")).key(currentCoordinateSystem);
+}
+
+void SearchDialog::populateCoordinateSystemsList()
+{
+	Q_ASSERT(ui->coordinateSystemComboBox);
+
+	QComboBox* csys = ui->coordinateSystemComboBox;
+
+	//Save the current selection to be restored later
+	csys->blockSignals(true);
+	int index = csys->currentIndex();
+	QVariant selectedSystemId = csys->itemData(index);
+	csys->clear();
+	//For each coordinate system, display the localized name and store the key as user
+	//data. Unfortunately, there's no other way to do this than with a cycle.
+	csys->addItem(qc_("Equatorial (J2000.0)", "coordinate system"), "RaDecJ2000");
+	csys->addItem(qc_("Equatorial", "coordinate system"), "RaDec");
+	csys->addItem(qc_("Horizontal", "coordinate system"), "AltAzi");
+	csys->addItem(qc_("Galactic", "coordinate system"), "Galactic");
+
+	//Restore the selection
+	index = csys->findData(selectedSystemId, Qt::UserRole, Qt::MatchCaseSensitive);
+	csys->setCurrentIndex(index);
+	csys->blockSignals(false);
+}
+
+void SearchDialog::populateCoordinateAxis()
+{
+	switch (getCurrentCoordinateSystem()) {
+		case RaDecJ2000:
+		case RaDec:
+			ui->AxisXLabel->setText(q_("Right ascension"));
+			ui->AxisXSpinBox->setDisplayFormat(AngleSpinBox::HMSLetters);
+			ui->AxisYLabel->setText(q_("Declination"));
+			ui->AxisYSpinBox->setDisplayFormat(AngleSpinBox::DMSSymbols);
+			ui->AxisYSpinBox->setPrefixType(AngleSpinBox::NormalPlus);
+			break;
+		case AltAzi:
+			ui->AxisXLabel->setText(q_("Azimuth"));
+			ui->AxisXSpinBox->setDisplayFormat(AngleSpinBox::DMSLetters);
+			ui->AxisXSpinBox->setPrefixType(AngleSpinBox::NormalPlus);
+			ui->AxisYLabel->setText(q_("Altitude"));
+			ui->AxisYSpinBox->setDisplayFormat(AngleSpinBox::DMSSymbols);
+			ui->AxisYSpinBox->setPrefixType(AngleSpinBox::NormalPlus);
+			break;
+		case Galactic:
+			ui->AxisXLabel->setText(q_("Longitude"));
+			ui->AxisXSpinBox->setDisplayFormat(AngleSpinBox::DMSLetters);
+			ui->AxisXSpinBox->setPrefixType(AngleSpinBox::NormalPlus);
+			ui->AxisYLabel->setText(q_("Latitude"));
+			ui->AxisYSpinBox->setDisplayFormat(AngleSpinBox::DMSSymbols);
+			ui->AxisYSpinBox->setPrefixType(AngleSpinBox::NormalPlus);
+			break;
+	}
+}
+
+void SearchDialog::setCoordinateSystem(int csID)
+{
+	QString currentCoordinateSystemID = ui->coordinateSystemComboBox->itemData(csID).toString();
+	setCurrentCoordinateSystemKey(currentCoordinateSystemID);
+	populateCoordinateAxis();
+	ui->AxisXSpinBox->setRadians(0.);
+	ui->AxisYSpinBox->setRadians(0.);
+	conf->setValue("search/coordinate_system", currentCoordinateSystemID);
 }
 
 // Initialize the dialog widgets and connect the signals/slots
@@ -209,18 +293,26 @@ void SearchDialog::createDialogContent()
 	connect(ui->lineEditSearchSkyObject, SIGNAL(selectionChanged()), this, SLOT(setHasSelectedFlag()));
 	connect(ui->lineEditSearchSkyObject, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(showContextMenu(QPoint)));
 
-	ui->lineEditSearchSkyObject->installEventFilter(this);
-	ui->RAAngleSpinBox->setDisplayFormat(AngleSpinBox::HMSLetters);
-	ui->DEAngleSpinBox->setDisplayFormat(AngleSpinBox::DMSSymbols);
-	ui->DEAngleSpinBox->setPrefixType(AngleSpinBox::NormalPlus);
+	ui->lineEditSearchSkyObject->installEventFilter(this);	
 
 	//Kinetic scrolling for tablet pc and pc
 	QList<QWidget *> addscroll;
 	addscroll << ui->objectsListWidget;
 	installKineticScrolling(addscroll);
 
-	connect(ui->RAAngleSpinBox, SIGNAL(valueChanged()), this, SLOT(manualPositionChanged()));
-	connect(ui->DEAngleSpinBox, SIGNAL(valueChanged()), this, SLOT(manualPositionChanged()));
+	populateCoordinateSystemsList();
+	populateCoordinateAxis();
+	int idx = ui->coordinateSystemComboBox->findData(getCurrentCoordinateSystemKey(), Qt::UserRole, Qt::MatchCaseSensitive);
+	if (idx==-1)
+	{
+		// Use RaDecJ2000 as default
+		idx = ui->coordinateSystemComboBox->findData(QVariant("RaDecJ2000"), Qt::UserRole, Qt::MatchCaseSensitive);
+	}
+	ui->coordinateSystemComboBox->setCurrentIndex(idx);
+	connect(ui->coordinateSystemComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(setCoordinateSystem(int)));
+
+	connect(ui->AxisXSpinBox, SIGNAL(valueChanged()), this, SLOT(manualPositionChanged()));
+	connect(ui->AxisYSpinBox, SIGNAL(valueChanged()), this, SLOT(manualPositionChanged()));
     
 	connect(ui->alphaPushButton, SIGNAL(clicked(bool)), this, SLOT(greekLetterClicked()));
 	connect(ui->betaPushButton, SIGNAL(clicked(bool)), this, SLOT(greekLetterClicked()));
@@ -251,7 +343,7 @@ void SearchDialog::createDialogContent()
 	ui->checkBoxUseSimbad->setChecked(useSimbad);
 
 	populateSimbadServerList();
-	int idx = ui->serverListComboBox->findData(simbadServerUrl, Qt::UserRole, Qt::MatchCaseSensitive);
+	idx = ui->serverListComboBox->findData(simbadServerUrl, Qt::UserRole, Qt::MatchCaseSensitive);
 	if (idx==-1)
 	{
 		// Use University of Strasbourg as default
@@ -281,37 +373,55 @@ void SearchDialog::setHasSelectedFlag()
 
 void SearchDialog::enableSimbadSearch(bool enable)
 {
-	useSimbad = enable;
-	
-	QSettings* conf = StelApp::getInstance().getSettings();
-	Q_ASSERT(conf);
+	useSimbad = enable;	
 	conf->setValue("search/flag_search_online", useSimbad);	
 }
 
 void SearchDialog::enableStartOfWordsAutofill(bool enable)
 {
 	useStartOfWords = enable;
-
-	QSettings* conf = StelApp::getInstance().getSettings();
-	Q_ASSERT(conf);
 	conf->setValue("search/flag_start_words", useStartOfWords);
 }
 
 void SearchDialog::setSimpleStyle()
 {
-	ui->RAAngleSpinBox->setVisible(false);
-	ui->DEAngleSpinBox->setVisible(false);
+	ui->AxisXSpinBox->setVisible(false);
+	ui->AxisXSpinBox->setVisible(false);
 	ui->simbadStatusLabel->setVisible(false);
-	ui->raDecLabel->setVisible(false);
+	ui->AxisXLabel->setVisible(false);
+	ui->AxisYLabel->setVisible(false);
+	ui->coordinateSystemLabel->setVisible(false);
+	ui->coordinateSystemComboBox->setVisible(false);
 }
 
 
 void SearchDialog::manualPositionChanged()
 {
 	ui->completionLabel->clearValues();
-	StelMovementMgr* mvmgr = GETSTELMODULE(StelMovementMgr);
+	StelCore* core = StelApp::getInstance().getCore();
+	StelMovementMgr* mvmgr = GETSTELMODULE(StelMovementMgr);	
 	Vec3d pos;
-	StelUtils::spheToRect(ui->RAAngleSpinBox->valueRadians(), ui->DEAngleSpinBox->valueRadians(), pos);
+	switch (getCurrentCoordinateSystem()) {
+		case RaDecJ2000:
+			StelUtils::spheToRect(ui->AxisXSpinBox->valueRadians(), ui->AxisYSpinBox->valueRadians(), pos);
+			break;
+		case RaDec:
+			StelUtils::spheToRect(ui->AxisXSpinBox->valueRadians(), ui->AxisYSpinBox->valueRadians(), pos);
+			pos = core->equinoxEquToJ2000(pos);
+			break;
+		case AltAzi:
+			double cx;
+			cx = 3.*M_PI - ui->AxisXSpinBox->valueRadians(); // N is zero, E is 90 degrees
+			if (cx > M_PI*2)
+				cx -= M_PI*2;
+			StelUtils::spheToRect(cx, ui->AxisYSpinBox->valueRadians(), pos);
+			pos = core->altAzToJ2000(pos);
+			break;
+		case Galactic:
+			StelUtils::spheToRect(ui->AxisXSpinBox->valueRadians(), ui->AxisYSpinBox->valueRadians(), pos);
+			pos = core->galacticToJ2000(pos);
+			break;
+	}
 	mvmgr->setFlagTracking(false);
 	mvmgr->moveToJ2000(pos, 0.05);
 }
@@ -575,8 +685,6 @@ void SearchDialog::selectSimbadServer(int index)
 	else
 		simbadServerUrl = ui->serverListComboBox->itemData(index).toString();
 
-	QSettings* conf = StelApp::getInstance().getSettings();
-	Q_ASSERT(conf);
 	conf->setValue("search/simbad_server_url", simbadServerUrl);
 }
 
