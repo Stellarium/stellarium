@@ -130,20 +130,25 @@ void PointerCoordinates::draw(StelCore *core)
 	switch (getCurrentCoordinateSystem())
 	{
 		case RaDecJ2000:
+		{
 			StelUtils::rectToSphe(&cx,&cy,mousePosition); // Calculate RA/DE (J2000.0) and show it...
 			coordsText = QString("%1: %2/%3")
 					.arg(qc_("RA/Dec (J2000.0)", "abbreviated in the plugin"))
 					.arg(StelUtils::radToHmsStr(cx, true))
 					.arg(StelUtils::radToDmsStr(cy, true));
 			break;
+		}
 		case RaDec:
+		{
 			StelUtils::rectToSphe(&cx,&cy,core->j2000ToEquinoxEqu(mousePosition)); // Calculate RA/DE and show it...
 			coordsText = QString("%1: %2/%3")
 					.arg(qc_("RA/Dec", "abbreviated in the plugin"))
 					.arg(StelUtils::radToHmsStr(cx, true))
 					.arg(StelUtils::radToDmsStr(cy, true));
 			break;
+		}
 		case AltAzi:
+		{
 			StelUtils::rectToSphe(&cy,&cx,core->j2000ToAltAz(mousePosition, StelCore::RefractionAuto));
 			cy = 3.*M_PI - cy;  // N is zero, E is 90 degrees
 			if (cy > M_PI*2)
@@ -154,14 +159,18 @@ void PointerCoordinates::draw(StelCore *core)
 					.arg(StelUtils::radToDmsStr(cy))
 					.arg(StelUtils::radToDmsStr(cx));
 			break;
+		}
 		case Galactic:
+		{
 			StelUtils::rectToSphe(&cx,&cy,core->j2000ToGalactic(mousePosition)); // Calculate galactic position and show it...
 			coordsText = QString("%1: %2/%3")
 					.arg(qc_("Gal. Long/Lat", "abbreviated in the plugin"))
 					.arg(StelUtils::radToDmsStr(cx, true))
 					.arg(StelUtils::radToDmsStr(cy, true));
 			break;
+		}
 		case Ecliptic:
+		{
 			double lambda, beta;
 			StelUtils::rectToSphe(&cx,&cy,core->j2000ToEquinoxEqu(mousePosition));
 			StelUtils::ctRadec2Ecl(cx, cy, GETSTELMODULE(SolarSystem)->getEarth()->getRotObliquity(2451545.0), &lambda, &beta); // Calculate ecliptic position and show it...
@@ -171,7 +180,9 @@ void PointerCoordinates::draw(StelCore *core)
 					.arg(StelUtils::radToDmsStr(lambda, true))
 					.arg(StelUtils::radToDmsStr(beta, true));
 			break;
+		}
 		case HourAngle:
+		{
 			Vec3d v = core->j2000ToAltAz(mousePosition, StelCore::RefractionAuto);
 			StelUtils::rectToSphe(&cx,&cy,Mat4d::zrotation(-core->getLocalSiderealTime()+((core->getDeltaT(core->getJDay())/240.)*M_PI/180.))*core->altAzToEquinoxEqu(v, StelCore::RefractionOff));
 			cx = 2.*M_PI-cx;
@@ -180,6 +191,7 @@ void PointerCoordinates::draw(StelCore *core)
 					.arg(StelUtils::radToHmsStr(cx))
 					.arg(StelUtils::radToDmsStr(cy));
 			break;		
+		}
 	}
 
 	sPainter.drawText(getCoordinatesPlace(coordsText).first, getCoordinatesPlace(coordsText).second, coordsText);
@@ -315,17 +327,23 @@ QPair<int, int> PointerCoordinates::getCoordinatesPlace(QString text)
 	switch(getCurrentCoordinatesPlace())
 	{
 		case TopCenter:
+		{
 			x = gui->getSkyGui()->getSkyGuiWidth()/2 - fs.width()/2;
 			y = gui->getSkyGui()->getSkyGuiHeight() - fs.height()*coeff;
 			break;
+		}
 		case TopRight:
+		{
 			x = 3*gui->getSkyGui()->getSkyGuiWidth()/4 - fs.width()/2;
 			y = gui->getSkyGui()->getSkyGuiHeight() - fs.height()*coeff;
 			break;
+		}
 		case RightBottomCorner:
+		{
 			x = gui->getSkyGui()->getSkyGuiWidth() - fs.width() - 10*coeff;
 			y = fs.height();
 			break;
+		}
 	}
 	return qMakePair(x, y);
 }
