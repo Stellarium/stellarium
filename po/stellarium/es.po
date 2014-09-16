@@ -9,14 +9,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-09-12 19:40+0700\n"
+"POT-Creation-Date: 2014-09-15 20:49+0700\n"
 "PO-Revision-Date: 2014-09-15 04:14+0000\n"
 "Last-Translator: José A. Macas D. <josedurazo92@gmail.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-09-15 06:13+0000\n"
+"X-Launchpad-Export-Date: 2014-09-16 06:54+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 "Language: es_ES\n"
 
@@ -24,7 +24,7 @@ msgstr ""
 #: src/core/modules/GridLinesMgr.cpp:697 src/core/modules/LandscapeMgr.cpp:354
 #: src/core/modules/NebulaMgr.cpp:126 src/core/modules/SolarSystem.cpp:156
 #: src/core/StelApp.cpp:473 src/core/StelCore.cpp:185
-#: src/core/StelSkyLayerMgr.cpp:87 src/StelMainView.cpp:355
+#: src/core/StelSkyLayerMgr.cpp:87 src/StelMainView.cpp:361
 msgid "Display Options"
 msgstr "Opciones de visualización"
 
@@ -1155,7 +1155,7 @@ msgid "Deep-sky objects background images"
 msgstr "Imágenes de fondo de objetos del espacio profundo"
 
 #: src/core/StelMovementMgr.cpp:130 src/gui/StelGui.cpp:185
-#: src/StelMainView.cpp:354
+#: src/StelMainView.cpp:360
 msgid "Miscellaneous"
 msgstr "Miscelánea"
 
@@ -1938,23 +1938,67 @@ msgstr "natural"
 msgid "starchart"
 msgstr "carta estelar"
 
-#: src/gui/SearchDialog.cpp:385
+#: src/gui/SearchDialog.cpp:231
+msgctxt "coordinate system"
+msgid "Equatorial (J2000.0)"
+msgstr ""
+
+#: src/gui/SearchDialog.cpp:232
+msgctxt "coordinate system"
+msgid "Equatorial"
+msgstr ""
+
+#: src/gui/SearchDialog.cpp:233
+msgctxt "coordinate system"
+msgid "Horizontal"
+msgstr ""
+
+#: src/gui/SearchDialog.cpp:234
+msgctxt "coordinate system"
+msgid "Galactic"
+msgstr ""
+
+#: src/gui/SearchDialog.cpp:247
+msgid "Right ascension"
+msgstr ""
+
+#: src/gui/SearchDialog.cpp:249
+msgid "Declination"
+msgstr ""
+
+#: src/gui/SearchDialog.cpp:254
+msgid "Azimuth"
+msgstr ""
+
+#: src/gui/SearchDialog.cpp:257
+msgid "Altitude"
+msgstr ""
+
+#: src/gui/SearchDialog.cpp:262
+msgid "Longitude"
+msgstr ""
+
+#: src/gui/SearchDialog.cpp:265
+msgid "Latitude"
+msgstr ""
+
+#: src/gui/SearchDialog.cpp:495
 msgid "Simbad Lookup Error"
 msgstr "Error de Búsqueda Simbad"
 
-#: src/gui/SearchDialog.cpp:393
+#: src/gui/SearchDialog.cpp:503
 msgid "Simbad Lookup"
 msgstr "Búsqueda Simbad"
 
-#: src/gui/SearchDialog.cpp:561
+#: src/gui/SearchDialog.cpp:671
 msgid "University of Strasbourg (France)"
 msgstr "Universidad de Strasbourg (Francia)"
 
-#: src/gui/SearchDialog.cpp:562
+#: src/gui/SearchDialog.cpp:672
 msgid "Harvard University (USA)"
 msgstr "Universidad de Harvard (EUA)"
 
-#: src/gui/SearchDialog.cpp:621
+#: src/gui/SearchDialog.cpp:729
 msgid "Paste and Search"
 msgstr "Pegar y buscar"
 
@@ -2007,15 +2051,15 @@ msgstr ""
 "Versión insuficiente de OpenGL. Por favor actualice controladores, hardware "
 "de gráficos."
 
-#: src/StelMainView.cpp:354
+#: src/StelMainView.cpp:360
 msgid "Save screenshot"
 msgstr "Guardar captura de pantalla"
 
-#: src/StelMainView.cpp:355
+#: src/StelMainView.cpp:361
 msgid "Full-screen mode"
 msgstr "Modo de pantalla completa"
 
-#: src/StelMainView.cpp:461
+#: src/StelMainView.cpp:533
 #, qt-format
 msgid "Stellarium %1"
 msgstr "Stellarium %1"
@@ -4126,170 +4170,176 @@ msgstr "Usar la ubicación actual como por defecto"
 msgid "Get location from Network"
 msgstr "Obtener ubicación desde Red"
 
-#: src/ui_searchDialogGui.h:560
+#: src/ui_searchDialogGui.h:606
 msgid "Find Object"
 msgstr "Encontrar Objeto"
 
-#: src/ui_searchDialogGui.h:561
+#: src/ui_searchDialogGui.h:607
 msgid "Find Object or Position"
 msgstr "Encontrar el objeto o la posición"
 
-#: src/ui_searchDialogGui.h:564 src/ui_searchDialogGui.h:568
+#: src/ui_searchDialogGui.h:610 src/ui_searchDialogGui.h:614
 msgid "Use tab key for select of found items"
 msgstr "Utilice la tecla tab para seleccionar objetos encontrados"
 
-#: src/ui_searchDialogGui.h:573
+#: src/ui_searchDialogGui.h:619
 msgid "iota"
 msgstr "iota"
 
-#: src/ui_searchDialogGui.h:576
+#: src/ui_searchDialogGui.h:622
 msgid "alpha"
 msgstr "alpha"
 
-#: src/ui_searchDialogGui.h:579
+#: src/ui_searchDialogGui.h:625
 msgid "beta"
 msgstr "beta"
 
-#: src/ui_searchDialogGui.h:582
+#: src/ui_searchDialogGui.h:628
 msgid "gamma"
 msgstr "gamma"
 
-#: src/ui_searchDialogGui.h:585
+#: src/ui_searchDialogGui.h:631
 msgid "delta"
 msgstr "delta"
 
-#: src/ui_searchDialogGui.h:588
+#: src/ui_searchDialogGui.h:634
 msgid "epsilon"
 msgstr "epsilon"
 
-#: src/ui_searchDialogGui.h:591
+#: src/ui_searchDialogGui.h:637
 msgid "zeta"
 msgstr "zeta"
 
-#: src/ui_searchDialogGui.h:594
+#: src/ui_searchDialogGui.h:640
 msgid "eta"
 msgstr "eta"
 
-#: src/ui_searchDialogGui.h:597
+#: src/ui_searchDialogGui.h:643
 msgid "theta"
 msgstr "teta"
 
-#: src/ui_searchDialogGui.h:600
+#: src/ui_searchDialogGui.h:646
 msgid "kappa"
 msgstr "kappa"
 
-#: src/ui_searchDialogGui.h:603
+#: src/ui_searchDialogGui.h:649
 msgid "lambda"
 msgstr "lambda"
 
-#: src/ui_searchDialogGui.h:606
+#: src/ui_searchDialogGui.h:652
 msgid "mu"
 msgstr "mu"
 
-#: src/ui_searchDialogGui.h:609
+#: src/ui_searchDialogGui.h:655
 msgid "nu"
 msgstr "nu"
 
-#: src/ui_searchDialogGui.h:612
+#: src/ui_searchDialogGui.h:658
 msgid "xi"
 msgstr "xi"
 
-#: src/ui_searchDialogGui.h:615
+#: src/ui_searchDialogGui.h:661
 msgid "omicron"
 msgstr "omicron"
 
-#: src/ui_searchDialogGui.h:618
+#: src/ui_searchDialogGui.h:664
 msgid "pi"
 msgstr "pi"
 
-#: src/ui_searchDialogGui.h:621
+#: src/ui_searchDialogGui.h:667
 msgid "rho"
 msgstr "ro"
 
-#: src/ui_searchDialogGui.h:624
+#: src/ui_searchDialogGui.h:670
 msgid "sigma"
 msgstr "sigma"
 
-#: src/ui_searchDialogGui.h:627
+#: src/ui_searchDialogGui.h:673
 msgid "tau"
 msgstr "tau"
 
-#: src/ui_searchDialogGui.h:630
+#: src/ui_searchDialogGui.h:676
 msgid "upsilon"
 msgstr "upsilon"
 
-#: src/ui_searchDialogGui.h:633
+#: src/ui_searchDialogGui.h:679
 msgid "phi"
 msgstr "phi"
 
-#: src/ui_searchDialogGui.h:636
+#: src/ui_searchDialogGui.h:682
 msgid "chi"
 msgstr "chi"
 
-#: src/ui_searchDialogGui.h:639
+#: src/ui_searchDialogGui.h:685
 msgid "psi"
 msgstr "psi"
 
-#: src/ui_searchDialogGui.h:642
+#: src/ui_searchDialogGui.h:688
 msgid "omega"
 msgstr "omega"
 
-#: src/ui_searchDialogGui.h:644
+#: src/ui_searchDialogGui.h:690
 msgid "Greek letters for Bayer designations"
 msgstr "Letras griegas para las designaciones de Bayer"
 
-#: src/ui_searchDialogGui.h:645
+#: src/ui_searchDialogGui.h:691
 msgid "Object"
 msgstr "Objeto"
 
-#: src/ui_searchDialogGui.h:646
-msgid "RA/Dec (J2000):"
-msgstr "AR/Dec (J2000):"
+#: src/ui_searchDialogGui.h:693
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:489
+msgid "Coordinate system:"
+msgstr "Sistema de coordenadas:"
 
-#: src/ui_searchDialogGui.h:647
+#: src/ui_searchDialogGui.h:695
+msgid ""
+"Note: this tool doesn't apply the refraction correction for coordinates."
+msgstr ""
+
+#: src/ui_searchDialogGui.h:696
 msgid "Position"
 msgstr "Posición"
 
-#: src/ui_searchDialogGui.h:649
+#: src/ui_searchDialogGui.h:698
 msgid "Some objects may be found after activation respective plug-ins"
 msgstr ""
 "Algunos objetos pueden ser encontrados después de activar sus respectivos "
 "complementos"
 
-#: src/ui_searchDialogGui.h:651
+#: src/ui_searchDialogGui.h:700
 msgid "names in English"
 msgstr "nombres en inglés"
 
-#: src/ui_searchDialogGui.h:652
+#: src/ui_searchDialogGui.h:701
 msgid "Search in list..."
 msgstr "Buscar en lista..."
 
-#: src/ui_searchDialogGui.h:653
+#: src/ui_searchDialogGui.h:702
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:525
 msgid "Lists"
 msgstr "Listas"
 
-#: src/ui_searchDialogGui.h:654
+#: src/ui_searchDialogGui.h:703
 msgid "On-line astronomical database SIMBAD"
 msgstr "Base de datos astronómica en línea SIMBAD"
 
-#: src/ui_searchDialogGui.h:655
+#: src/ui_searchDialogGui.h:704
 msgid "Extend search with SIMBAD"
 msgstr "Extender búsqueda con SIMBAD"
 
-#: src/ui_searchDialogGui.h:656
+#: src/ui_searchDialogGui.h:705
 msgid "Server:"
 msgstr "Servidor:"
 
-#: src/ui_searchDialogGui.h:657
+#: src/ui_searchDialogGui.h:706
 msgid "Search options"
 msgstr "Opciones de búsqueda"
 
-#: src/ui_searchDialogGui.h:658
+#: src/ui_searchDialogGui.h:707
 msgid "Use autofill only from the beginning of words"
 msgstr "Utilizar autorelleno únicamente desde el inicio de las palabras"
 
-#: src/ui_searchDialogGui.h:659 src/ui_viewDialog.h:1251
+#: src/ui_searchDialogGui.h:708 src/ui_viewDialog.h:1251
 #: src/ui_viewDialog.h:1257 src/ui_viewDialog.h:1259
 #: src/ui_configurationDialog.h:1168 src/ui_configurationDialog.h:1179
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:417
@@ -6927,10 +6977,6 @@ msgstr ""
 "El tiempo aproximado que le toma a las señales del telescopio en alcanzar "
 "Stellarium.\n"
 "Incremente este valor si la retícula se salta."
-
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:489
-msgid "Coordinate system:"
-msgstr "Sistema de coordenadas:"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:490
 msgid "J2000 (default)"
@@ -10333,6 +10379,9 @@ msgstr "Lugar de la cadena:"
 
 #~ msgid "Get catalog x of y"
 #~ msgstr "Obtener catálogo x de y"
+
+#~ msgid "RA/Dec (J2000):"
+#~ msgstr "AR/Dec (J2000):"
 
 #~ msgid "When a Script is Running"
 #~ msgstr "Cuando se Ejecuta un Script"

@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Thai for stellarium 0.8.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-09-12 19:40+0700\n"
+"POT-Creation-Date: 2014-09-15 20:49+0700\n"
 "PO-Revision-Date: 2014-09-09 05:34+0000\n"
 "Last-Translator: Worachate Boonplod <Unknown>\n"
 "Language-Team: MicKi Alone <Need24Get@msn.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-09-13 06:54+0000\n"
+"X-Launchpad-Export-Date: 2014-09-16 06:56+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 "X-Poedit-Country: THAILAND\n"
 "X-Poedit-Language: Thai\n"
@@ -23,7 +23,7 @@ msgstr ""
 #: src/core/modules/GridLinesMgr.cpp:697 src/core/modules/LandscapeMgr.cpp:354
 #: src/core/modules/NebulaMgr.cpp:126 src/core/modules/SolarSystem.cpp:156
 #: src/core/StelApp.cpp:473 src/core/StelCore.cpp:185
-#: src/core/StelSkyLayerMgr.cpp:87 src/StelMainView.cpp:355
+#: src/core/StelSkyLayerMgr.cpp:87 src/StelMainView.cpp:361
 msgid "Display Options"
 msgstr "ตัวเลือกการแสดงผล"
 
@@ -1123,7 +1123,7 @@ msgid "Deep-sky objects background images"
 msgstr "ภาพพื้นหลังของวัตถุท้องฟ้าห้วงลึก"
 
 #: src/core/StelMovementMgr.cpp:130 src/gui/StelGui.cpp:185
-#: src/StelMainView.cpp:354
+#: src/StelMainView.cpp:360
 msgid "Miscellaneous"
 msgstr "จิปาถะ"
 
@@ -1902,23 +1902,67 @@ msgstr "ธรรมชาติ"
 msgid "starchart"
 msgstr "แผนที่ดาว"
 
-#: src/gui/SearchDialog.cpp:385
+#: src/gui/SearchDialog.cpp:231
+msgctxt "coordinate system"
+msgid "Equatorial (J2000.0)"
+msgstr ""
+
+#: src/gui/SearchDialog.cpp:232
+msgctxt "coordinate system"
+msgid "Equatorial"
+msgstr ""
+
+#: src/gui/SearchDialog.cpp:233
+msgctxt "coordinate system"
+msgid "Horizontal"
+msgstr ""
+
+#: src/gui/SearchDialog.cpp:234
+msgctxt "coordinate system"
+msgid "Galactic"
+msgstr ""
+
+#: src/gui/SearchDialog.cpp:247
+msgid "Right ascension"
+msgstr ""
+
+#: src/gui/SearchDialog.cpp:249
+msgid "Declination"
+msgstr ""
+
+#: src/gui/SearchDialog.cpp:254
+msgid "Azimuth"
+msgstr ""
+
+#: src/gui/SearchDialog.cpp:257
+msgid "Altitude"
+msgstr ""
+
+#: src/gui/SearchDialog.cpp:262
+msgid "Longitude"
+msgstr ""
+
+#: src/gui/SearchDialog.cpp:265
+msgid "Latitude"
+msgstr ""
+
+#: src/gui/SearchDialog.cpp:495
 msgid "Simbad Lookup Error"
 msgstr "เกิดข้อผิดพลาดในการค้นหาบน Simbad"
 
-#: src/gui/SearchDialog.cpp:393
+#: src/gui/SearchDialog.cpp:503
 msgid "Simbad Lookup"
 msgstr "การค้นหาบน Simbad"
 
-#: src/gui/SearchDialog.cpp:561
+#: src/gui/SearchDialog.cpp:671
 msgid "University of Strasbourg (France)"
 msgstr "มหาวิทยาลัยสทราซบูร์ (ฝรั่งเศส)"
 
-#: src/gui/SearchDialog.cpp:562
+#: src/gui/SearchDialog.cpp:672
 msgid "Harvard University (USA)"
 msgstr "มหาวิทยาลัยฮาร์วาร์ด (สหรัฐอเมริกา)"
 
-#: src/gui/SearchDialog.cpp:621
+#: src/gui/SearchDialog.cpp:729
 msgid "Paste and Search"
 msgstr "วางและค้นหา"
 
@@ -1967,15 +2011,15 @@ msgid ""
 "Insufficient OpenGL version. Please update drivers, or graphics hardware."
 msgstr ""
 
-#: src/StelMainView.cpp:354
+#: src/StelMainView.cpp:360
 msgid "Save screenshot"
 msgstr "บันทึกภาพหน้าจอ"
 
-#: src/StelMainView.cpp:355
+#: src/StelMainView.cpp:361
 msgid "Full-screen mode"
 msgstr "โหมดเต็มจอ"
 
-#: src/StelMainView.cpp:461
+#: src/StelMainView.cpp:533
 #, qt-format
 msgid "Stellarium %1"
 msgstr "Stellarium %1"
@@ -4076,168 +4120,174 @@ msgstr ""
 msgid "Get location from Network"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:560
+#: src/ui_searchDialogGui.h:606
 msgid "Find Object"
 msgstr "ค้นหาวัตถุท้องฟ้า"
 
-#: src/ui_searchDialogGui.h:561
+#: src/ui_searchDialogGui.h:607
 msgid "Find Object or Position"
 msgstr "ค้นหาวัตถุหรือตำแหน่ง"
 
-#: src/ui_searchDialogGui.h:564 src/ui_searchDialogGui.h:568
+#: src/ui_searchDialogGui.h:610 src/ui_searchDialogGui.h:614
 msgid "Use tab key for select of found items"
 msgstr "ใช้ปุ่มแท็บเลือกรายการที่พบ"
 
-#: src/ui_searchDialogGui.h:573
+#: src/ui_searchDialogGui.h:619
 msgid "iota"
 msgstr "ไอโอตา"
 
-#: src/ui_searchDialogGui.h:576
+#: src/ui_searchDialogGui.h:622
 msgid "alpha"
 msgstr "แอลฟา"
 
-#: src/ui_searchDialogGui.h:579
+#: src/ui_searchDialogGui.h:625
 msgid "beta"
 msgstr "บีตา"
 
-#: src/ui_searchDialogGui.h:582
+#: src/ui_searchDialogGui.h:628
 msgid "gamma"
 msgstr "แกมมา"
 
-#: src/ui_searchDialogGui.h:585
+#: src/ui_searchDialogGui.h:631
 msgid "delta"
 msgstr "เดลตา"
 
-#: src/ui_searchDialogGui.h:588
+#: src/ui_searchDialogGui.h:634
 msgid "epsilon"
 msgstr "เอปไซลอน"
 
-#: src/ui_searchDialogGui.h:591
+#: src/ui_searchDialogGui.h:637
 msgid "zeta"
 msgstr "ซีตา"
 
-#: src/ui_searchDialogGui.h:594
+#: src/ui_searchDialogGui.h:640
 msgid "eta"
 msgstr "อีตา"
 
-#: src/ui_searchDialogGui.h:597
+#: src/ui_searchDialogGui.h:643
 msgid "theta"
 msgstr "ทีตา"
 
-#: src/ui_searchDialogGui.h:600
+#: src/ui_searchDialogGui.h:646
 msgid "kappa"
 msgstr "แคปปา"
 
-#: src/ui_searchDialogGui.h:603
+#: src/ui_searchDialogGui.h:649
 msgid "lambda"
 msgstr "แลมบ์ดา"
 
-#: src/ui_searchDialogGui.h:606
+#: src/ui_searchDialogGui.h:652
 msgid "mu"
 msgstr "มิว"
 
-#: src/ui_searchDialogGui.h:609
+#: src/ui_searchDialogGui.h:655
 msgid "nu"
 msgstr "นิว"
 
-#: src/ui_searchDialogGui.h:612
+#: src/ui_searchDialogGui.h:658
 msgid "xi"
 msgstr "ไซ"
 
-#: src/ui_searchDialogGui.h:615
+#: src/ui_searchDialogGui.h:661
 msgid "omicron"
 msgstr "โอไมครอน"
 
-#: src/ui_searchDialogGui.h:618
+#: src/ui_searchDialogGui.h:664
 msgid "pi"
 msgstr "พาย"
 
-#: src/ui_searchDialogGui.h:621
+#: src/ui_searchDialogGui.h:667
 msgid "rho"
 msgstr "โร"
 
-#: src/ui_searchDialogGui.h:624
+#: src/ui_searchDialogGui.h:670
 msgid "sigma"
 msgstr "ซิกมา"
 
-#: src/ui_searchDialogGui.h:627
+#: src/ui_searchDialogGui.h:673
 msgid "tau"
 msgstr "เทา"
 
-#: src/ui_searchDialogGui.h:630
+#: src/ui_searchDialogGui.h:676
 msgid "upsilon"
 msgstr "อิปไซลอน"
 
-#: src/ui_searchDialogGui.h:633
+#: src/ui_searchDialogGui.h:679
 msgid "phi"
 msgstr "ฟาย"
 
-#: src/ui_searchDialogGui.h:636
+#: src/ui_searchDialogGui.h:682
 msgid "chi"
 msgstr "ไค"
 
-#: src/ui_searchDialogGui.h:639
+#: src/ui_searchDialogGui.h:685
 msgid "psi"
 msgstr "ซาย"
 
-#: src/ui_searchDialogGui.h:642
+#: src/ui_searchDialogGui.h:688
 msgid "omega"
 msgstr "โอเมกา"
 
-#: src/ui_searchDialogGui.h:644
+#: src/ui_searchDialogGui.h:690
 msgid "Greek letters for Bayer designations"
 msgstr "อักษรกรีกสำหรับระบบของเบเยอร์"
 
-#: src/ui_searchDialogGui.h:645
+#: src/ui_searchDialogGui.h:691
 msgid "Object"
 msgstr "วัตถุ"
 
-#: src/ui_searchDialogGui.h:646
-msgid "RA/Dec (J2000):"
-msgstr "ไรต์แอสเซนชัน/เดคลิเนชัน (J2000):"
+#: src/ui_searchDialogGui.h:693
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:489
+msgid "Coordinate system:"
+msgstr "ระบบพิกัด:"
 
-#: src/ui_searchDialogGui.h:647
+#: src/ui_searchDialogGui.h:695
+msgid ""
+"Note: this tool doesn't apply the refraction correction for coordinates."
+msgstr ""
+
+#: src/ui_searchDialogGui.h:696
 msgid "Position"
 msgstr "ตำแหน่ง"
 
-#: src/ui_searchDialogGui.h:649
+#: src/ui_searchDialogGui.h:698
 msgid "Some objects may be found after activation respective plug-ins"
 msgstr "บางวัตถุจะค้นหาได้เมื่อเปิดใช้งานโปรแกรมเสริมนั้นแล้ว"
 
-#: src/ui_searchDialogGui.h:651
+#: src/ui_searchDialogGui.h:700
 msgid "names in English"
 msgstr "ชื่อในภาษาอังกฤษ"
 
-#: src/ui_searchDialogGui.h:652
+#: src/ui_searchDialogGui.h:701
 msgid "Search in list..."
 msgstr "ค้นหาในรายการ..."
 
-#: src/ui_searchDialogGui.h:653
+#: src/ui_searchDialogGui.h:702
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:525
 msgid "Lists"
 msgstr "รายการ"
 
-#: src/ui_searchDialogGui.h:654
+#: src/ui_searchDialogGui.h:703
 msgid "On-line astronomical database SIMBAD"
 msgstr "ฐานข้อมูลดาราศาสตร์ออนไลน์ SIMBAD"
 
-#: src/ui_searchDialogGui.h:655
+#: src/ui_searchDialogGui.h:704
 msgid "Extend search with SIMBAD"
 msgstr "ครอบคลุมการค้นหาใน SIMBAD"
 
-#: src/ui_searchDialogGui.h:656
+#: src/ui_searchDialogGui.h:705
 msgid "Server:"
 msgstr "เซิร์ฟเวอร์:"
 
-#: src/ui_searchDialogGui.h:657
+#: src/ui_searchDialogGui.h:706
 msgid "Search options"
 msgstr "ตัวเลือกการค้นหา"
 
-#: src/ui_searchDialogGui.h:658
+#: src/ui_searchDialogGui.h:707
 msgid "Use autofill only from the beginning of words"
 msgstr "ใช้การเติมคำอัตโนมัติเฉพาะจากจุดเริ่มต้นคำ"
 
-#: src/ui_searchDialogGui.h:659 src/ui_viewDialog.h:1251
+#: src/ui_searchDialogGui.h:708 src/ui_viewDialog.h:1251
 #: src/ui_viewDialog.h:1257 src/ui_viewDialog.h:1259
 #: src/ui_configurationDialog.h:1168 src/ui_configurationDialog.h:1179
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:417
@@ -6825,10 +6875,6 @@ msgid ""
 msgstr ""
 "เวลาคร่าว ๆ ที่สัญญาณจากกล้องโทรทรรศน์เดินทางถึง Stellarium\n"
 "เพิ่มค่านี้หากมีการกระโดดข้ามเส้นกรอบ"
-
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:489
-msgid "Coordinate system:"
-msgstr "ระบบพิกัด:"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:490
 msgid "J2000 (default)"
@@ -10118,6 +10164,9 @@ msgstr "ตำแหน่ง:"
 
 #~ msgid "Use as default"
 #~ msgstr "ใช้เป็นค่าเริ่มต้น"
+
+#~ msgid "RA/Dec (J2000):"
+#~ msgstr "ไรต์แอสเซนชัน/เดคลิเนชัน (J2000):"
 
 #~ msgid "Startup FOV: XX"
 #~ msgstr "พื้นที่การมองเห็นเริ่มต้น: XX"

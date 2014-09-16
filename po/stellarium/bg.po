@@ -7,21 +7,21 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-09-12 19:40+0700\n"
-"PO-Revision-Date: 2014-08-13 09:50+0000\n"
-"Last-Translator: Yordan Darakchiev <iordan93@gmail.com>\n"
+"POT-Creation-Date: 2014-09-15 20:49+0700\n"
+"PO-Revision-Date: 2014-09-15 16:40+0000\n"
+"Last-Translator: Alexander Wolf <Unknown>\n"
 "Language-Team: Bulgarian <bg@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-09-13 06:28+0000\n"
+"X-Launchpad-Export-Date: 2014-09-16 06:30+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:106 src/core/modules/StarMgr.cpp:346
 #: src/core/modules/GridLinesMgr.cpp:697 src/core/modules/LandscapeMgr.cpp:354
 #: src/core/modules/NebulaMgr.cpp:126 src/core/modules/SolarSystem.cpp:156
 #: src/core/StelApp.cpp:473 src/core/StelCore.cpp:185
-#: src/core/StelSkyLayerMgr.cpp:87 src/StelMainView.cpp:355
+#: src/core/StelSkyLayerMgr.cpp:87 src/StelMainView.cpp:361
 msgid "Display Options"
 msgstr "Настройки на изгледа"
 
@@ -243,7 +243,7 @@ msgstr "Недокументиран"
 
 #: src/core/modules/NebulaMgr.cpp:126
 msgid "Deep-sky objects"
-msgstr ""
+msgstr "Обекти от дълбокото небе"
 
 #: src/core/modules/Planet.cpp:180 src/core/modules/MinorPlanet.cpp:227
 #: src/core/modules/MinorPlanet.cpp:231 src/core/modules/Comet.cpp:163
@@ -255,7 +255,7 @@ msgstr "Абсолютна величина: %1"
 #: src/core/modules/Planet.cpp:189
 #, qt-format
 msgid "Obliquity (of date, for Earth): %1"
-msgstr ""
+msgstr "Наклон на орбитата (за текущата дата, от Земята): %1"
 
 #: src/core/modules/Planet.cpp:201 src/core/modules/MinorPlanet.cpp:244
 #: src/core/modules/Comet.cpp:193
@@ -643,7 +643,7 @@ msgstr "Задаване на избраната планета като отп�
 
 #: src/core/StelCore.cpp:226
 msgid "Go to home"
-msgstr ""
+msgstr "Връщане в началото"
 
 #: src/core/StelCore.cpp:227
 msgid "Flip scene horizontally"
@@ -655,7 +655,7 @@ msgstr "Обръщане на сцената по вертикала"
 
 #: src/core/StelCore.cpp:1498
 msgid "Correction is disabled. Use only if you know what you are doing!"
-msgstr ""
+msgstr "Корекциите са забранени. Използвайте само ако знаете какво правите!"
 
 #: src/core/StelCore.cpp:1501
 #, qt-format
@@ -671,6 +671,9 @@ msgid ""
 "This empirical equation was published by G. M. Clemence in the article "
 "<em>On the system of astronomical constants</em> (%1)."
 msgstr ""
+"Това емпирично установено уравнение е публикувано от G. M. Clemence в "
+"статията <em>За системата от астрономични константи (On the system of "
+"astronomical constants)</em> (%1)."
 
 #: src/core/StelCore.cpp:1507
 #, qt-format
@@ -703,6 +706,10 @@ msgid ""
 "article <em>The accelerations of the earth and moon from early astronomical "
 "observations</em> (%1)."
 msgstr ""
+"Това уравнение е публикувано от P. M. Muller и F. R. Stephenson в статията "
+"<em>Ускоренията на Земята и Луната от ранни астрономически наблюдения (The "
+"accelerations of the earth and moon from early astronomical "
+"observations)</em> (%1)."
 
 #: src/core/StelCore.cpp:1522
 #, qt-format
@@ -1060,7 +1067,7 @@ msgid "Deep-sky objects background images"
 msgstr "Изображения на обекти от дълбокото небе"
 
 #: src/core/StelMovementMgr.cpp:130 src/gui/StelGui.cpp:185
-#: src/StelMainView.cpp:354
+#: src/StelMainView.cpp:360
 msgid "Miscellaneous"
 msgstr "Други"
 
@@ -1836,23 +1843,67 @@ msgstr ""
 msgid "starchart"
 msgstr "небесен атлас"
 
-#: src/gui/SearchDialog.cpp:385
+#: src/gui/SearchDialog.cpp:231
+msgctxt "coordinate system"
+msgid "Equatorial (J2000.0)"
+msgstr ""
+
+#: src/gui/SearchDialog.cpp:232
+msgctxt "coordinate system"
+msgid "Equatorial"
+msgstr ""
+
+#: src/gui/SearchDialog.cpp:233
+msgctxt "coordinate system"
+msgid "Horizontal"
+msgstr "Хоризонтални"
+
+#: src/gui/SearchDialog.cpp:234
+msgctxt "coordinate system"
+msgid "Galactic"
+msgstr "Галактически"
+
+#: src/gui/SearchDialog.cpp:247
+msgid "Right ascension"
+msgstr ""
+
+#: src/gui/SearchDialog.cpp:249
+msgid "Declination"
+msgstr "Деклинация"
+
+#: src/gui/SearchDialog.cpp:254
+msgid "Azimuth"
+msgstr "Азимут"
+
+#: src/gui/SearchDialog.cpp:257
+msgid "Altitude"
+msgstr "Височина"
+
+#: src/gui/SearchDialog.cpp:262
+msgid "Longitude"
+msgstr "Дължина"
+
+#: src/gui/SearchDialog.cpp:265
+msgid "Latitude"
+msgstr "Ширина"
+
+#: src/gui/SearchDialog.cpp:495
 msgid "Simbad Lookup Error"
 msgstr ""
 
-#: src/gui/SearchDialog.cpp:393
+#: src/gui/SearchDialog.cpp:503
 msgid "Simbad Lookup"
 msgstr ""
 
-#: src/gui/SearchDialog.cpp:561
+#: src/gui/SearchDialog.cpp:671
 msgid "University of Strasbourg (France)"
 msgstr ""
 
-#: src/gui/SearchDialog.cpp:562
+#: src/gui/SearchDialog.cpp:672
 msgid "Harvard University (USA)"
 msgstr ""
 
-#: src/gui/SearchDialog.cpp:621
+#: src/gui/SearchDialog.cpp:729
 msgid "Paste and Search"
 msgstr ""
 
@@ -1884,7 +1935,7 @@ msgstr ""
 
 #: src/gui/CustomDeltaTEquationDialog.cpp:137
 msgid "year"
-msgstr ""
+msgstr "година"
 
 #: src/main.cpp:352
 msgid "This system does not support OpenGL."
@@ -1901,15 +1952,15 @@ msgid ""
 "Insufficient OpenGL version. Please update drivers, or graphics hardware."
 msgstr ""
 
-#: src/StelMainView.cpp:354
+#: src/StelMainView.cpp:360
 msgid "Save screenshot"
 msgstr "Записване на снимка на екрана"
 
-#: src/StelMainView.cpp:355
+#: src/StelMainView.cpp:361
 msgid "Full-screen mode"
 msgstr "Цял екран"
 
-#: src/StelMainView.cpp:461
+#: src/StelMainView.cpp:533
 #, qt-format
 msgid "Stellarium %1"
 msgstr ""
@@ -2424,12 +2475,12 @@ msgstr ""
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:208
 msgid "Nebulae"
-msgstr ""
+msgstr "Мъглявини"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:210
 msgid "Planetary nebulae"
-msgstr ""
+msgstr "Планетарна мъглявина"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:212
@@ -2498,7 +2549,7 @@ msgstr "Маорска"
 
 #: src/translations.h:234
 msgid "Mongolian"
-msgstr ""
+msgstr "Монголска"
 
 #: src/translations.h:235
 msgid "Navajo"
@@ -2514,7 +2565,7 @@ msgstr "Полинезийска"
 
 #: src/translations.h:238
 msgid "Romanian"
-msgstr ""
+msgstr "Румънска"
 
 #: src/translations.h:239
 msgid "Sami"
@@ -2560,7 +2611,7 @@ msgstr "Гархинг"
 #. TRANSLATORS: Name of landscape
 #: src/translations.h:264
 msgid "Geneva"
-msgstr ""
+msgstr "Женева"
 
 #. TRANSLATORS: Name of landscape
 #: src/translations.h:266
@@ -3794,23 +3845,23 @@ msgstr "Зимбабве"
 
 #: src/translations.h:598
 msgid "&Undo"
-msgstr ""
+msgstr "&Отмяна"
 
 #: src/translations.h:599
 msgid "&Redo"
-msgstr ""
+msgstr "&Възстанови"
 
 #: src/translations.h:600
 msgid "Cu&t"
-msgstr ""
+msgstr "Изре&жи"
 
 #: src/translations.h:601
 msgid "&Copy"
-msgstr ""
+msgstr "&Копирай"
 
 #: src/translations.h:602
 msgid "&Paste"
-msgstr ""
+msgstr "&Постави"
 
 #: src/translations.h:603 src/ui_locationDialogGui.h:432
 #: plugins/Oculars/src/ui_ocularDialog.h:1074
@@ -3822,19 +3873,19 @@ msgstr "Изтриване"
 
 #: src/translations.h:604
 msgid "Select All"
-msgstr ""
+msgstr "Избери всички"
 
 #: src/translations.h:605
 msgid "Look in:"
-msgstr ""
+msgstr "Търси в:"
 
 #: src/translations.h:606
 msgid "Directory:"
-msgstr ""
+msgstr "Директория:"
 
 #: src/translations.h:607
 msgid "Folder"
-msgstr ""
+msgstr "Папка"
 
 #: src/translations.h:608
 msgid "&Choose"
@@ -3851,19 +3902,19 @@ msgstr ""
 
 #: src/translations.h:611
 msgid "Date Modified"
-msgstr ""
+msgstr "Дата на промяна"
 
 #: src/translations.h:612
 msgid "Directories"
-msgstr ""
+msgstr "Директории"
 
 #: src/translations.h:613
 msgid "Computer"
-msgstr ""
+msgstr "Компютър"
 
 #: src/translations.h:614
 msgid "&Open"
-msgstr ""
+msgstr "&Отвори"
 
 #: src/translations.h:615
 msgid "File &name:"
@@ -3871,7 +3922,7 @@ msgstr ""
 
 #: src/translations.h:616
 msgid "Copy &Link Location"
-msgstr ""
+msgstr "Копиране &адреса на препратката"
 
 #: src/ui_dateTimeDialogGui.h:369
 msgid "Julian Date"
@@ -3987,168 +4038,174 @@ msgstr ""
 msgid "Get location from Network"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:560
+#: src/ui_searchDialogGui.h:606
 msgid "Find Object"
 msgstr "Намиране на обект"
 
-#: src/ui_searchDialogGui.h:561
+#: src/ui_searchDialogGui.h:607
 msgid "Find Object or Position"
 msgstr "Намиране на обект или координати"
 
-#: src/ui_searchDialogGui.h:564 src/ui_searchDialogGui.h:568
+#: src/ui_searchDialogGui.h:610 src/ui_searchDialogGui.h:614
 msgid "Use tab key for select of found items"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:573
+#: src/ui_searchDialogGui.h:619
 msgid "iota"
 msgstr "йота"
 
-#: src/ui_searchDialogGui.h:576
+#: src/ui_searchDialogGui.h:622
 msgid "alpha"
 msgstr "алфа"
 
-#: src/ui_searchDialogGui.h:579
+#: src/ui_searchDialogGui.h:625
 msgid "beta"
 msgstr "бета"
 
-#: src/ui_searchDialogGui.h:582
+#: src/ui_searchDialogGui.h:628
 msgid "gamma"
 msgstr "гама"
 
-#: src/ui_searchDialogGui.h:585
+#: src/ui_searchDialogGui.h:631
 msgid "delta"
 msgstr "делта"
 
-#: src/ui_searchDialogGui.h:588
+#: src/ui_searchDialogGui.h:634
 msgid "epsilon"
 msgstr "епсилон"
 
-#: src/ui_searchDialogGui.h:591
+#: src/ui_searchDialogGui.h:637
 msgid "zeta"
 msgstr "зета"
 
-#: src/ui_searchDialogGui.h:594
+#: src/ui_searchDialogGui.h:640
 msgid "eta"
 msgstr "ета"
 
-#: src/ui_searchDialogGui.h:597
+#: src/ui_searchDialogGui.h:643
 msgid "theta"
 msgstr "тета"
 
-#: src/ui_searchDialogGui.h:600
+#: src/ui_searchDialogGui.h:646
 msgid "kappa"
 msgstr "капа"
 
-#: src/ui_searchDialogGui.h:603
+#: src/ui_searchDialogGui.h:649
 msgid "lambda"
 msgstr "ламбда"
 
-#: src/ui_searchDialogGui.h:606
+#: src/ui_searchDialogGui.h:652
 msgid "mu"
 msgstr "мю"
 
-#: src/ui_searchDialogGui.h:609
+#: src/ui_searchDialogGui.h:655
 msgid "nu"
 msgstr "ню"
 
-#: src/ui_searchDialogGui.h:612
+#: src/ui_searchDialogGui.h:658
 msgid "xi"
 msgstr "кси"
 
-#: src/ui_searchDialogGui.h:615
+#: src/ui_searchDialogGui.h:661
 msgid "omicron"
 msgstr "омикрон"
 
-#: src/ui_searchDialogGui.h:618
+#: src/ui_searchDialogGui.h:664
 msgid "pi"
 msgstr "пи"
 
-#: src/ui_searchDialogGui.h:621
+#: src/ui_searchDialogGui.h:667
 msgid "rho"
 msgstr "ро"
 
-#: src/ui_searchDialogGui.h:624
+#: src/ui_searchDialogGui.h:670
 msgid "sigma"
 msgstr "сигма"
 
-#: src/ui_searchDialogGui.h:627
+#: src/ui_searchDialogGui.h:673
 msgid "tau"
 msgstr "тау"
 
-#: src/ui_searchDialogGui.h:630
+#: src/ui_searchDialogGui.h:676
 msgid "upsilon"
 msgstr "ипсилон"
 
-#: src/ui_searchDialogGui.h:633
+#: src/ui_searchDialogGui.h:679
 msgid "phi"
 msgstr "фи"
 
-#: src/ui_searchDialogGui.h:636
+#: src/ui_searchDialogGui.h:682
 msgid "chi"
 msgstr "хи"
 
-#: src/ui_searchDialogGui.h:639
+#: src/ui_searchDialogGui.h:685
 msgid "psi"
 msgstr "пси"
 
-#: src/ui_searchDialogGui.h:642
+#: src/ui_searchDialogGui.h:688
 msgid "omega"
 msgstr "омега"
 
-#: src/ui_searchDialogGui.h:644
+#: src/ui_searchDialogGui.h:690
 msgid "Greek letters for Bayer designations"
 msgstr "Гръцки букви за Байерови означения"
 
-#: src/ui_searchDialogGui.h:645
+#: src/ui_searchDialogGui.h:691
 msgid "Object"
 msgstr "Обект"
 
-#: src/ui_searchDialogGui.h:646
-msgid "RA/Dec (J2000):"
-msgstr "Рект/Дек (J2000):"
+#: src/ui_searchDialogGui.h:693
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:489
+msgid "Coordinate system:"
+msgstr "Координатна система:"
 
-#: src/ui_searchDialogGui.h:647
+#: src/ui_searchDialogGui.h:695
+msgid ""
+"Note: this tool doesn't apply the refraction correction for coordinates."
+msgstr ""
+
+#: src/ui_searchDialogGui.h:696
 msgid "Position"
 msgstr "Координати"
 
-#: src/ui_searchDialogGui.h:649
+#: src/ui_searchDialogGui.h:698
 msgid "Some objects may be found after activation respective plug-ins"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:651
+#: src/ui_searchDialogGui.h:700
 msgid "names in English"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:652
+#: src/ui_searchDialogGui.h:701
 msgid "Search in list..."
 msgstr ""
 
-#: src/ui_searchDialogGui.h:653
+#: src/ui_searchDialogGui.h:702
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:525
 msgid "Lists"
 msgstr "Списъци"
 
-#: src/ui_searchDialogGui.h:654
+#: src/ui_searchDialogGui.h:703
 msgid "On-line astronomical database SIMBAD"
 msgstr "Онлайн астрономическа база данни SIMBAD"
 
-#: src/ui_searchDialogGui.h:655
+#: src/ui_searchDialogGui.h:704
 msgid "Extend search with SIMBAD"
 msgstr "Разширяване на търсенето със SIMBAD"
 
-#: src/ui_searchDialogGui.h:656
+#: src/ui_searchDialogGui.h:705
 msgid "Server:"
 msgstr "Сървър:"
 
-#: src/ui_searchDialogGui.h:657
+#: src/ui_searchDialogGui.h:706
 msgid "Search options"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:658
+#: src/ui_searchDialogGui.h:707
 msgid "Use autofill only from the beginning of words"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:659 src/ui_viewDialog.h:1251
+#: src/ui_searchDialogGui.h:708 src/ui_viewDialog.h:1251
 #: src/ui_viewDialog.h:1257 src/ui_viewDialog.h:1259
 #: src/ui_configurationDialog.h:1168 src/ui_configurationDialog.h:1179
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:417
@@ -4217,7 +4274,7 @@ msgstr "Увеличена Луна"
 
 #: src/ui_viewDialog.h:1167
 msgid "Scale factor"
-msgstr ""
+msgstr "Коефициент на мащабиране"
 
 #: src/ui_viewDialog.h:1170
 msgid "Automatic change of landscape when planet is changed"
@@ -4423,7 +4480,7 @@ msgstr "Език на програмата"
 
 #: src/ui_configurationDialog.h:1005
 msgid "Check updates"
-msgstr ""
+msgstr "Проверка за обновления"
 
 #: src/ui_configurationDialog.h:1006
 msgid ""
@@ -4582,7 +4639,7 @@ msgstr "Спектрален клас, вид мъглявина, и други"
 
 #: src/ui_configurationDialog.h:1065
 msgid "Additional information"
-msgstr ""
+msgstr "Допълнителна информация"
 
 #: src/ui_configurationDialog.h:1067
 msgid "Topocentric equatorial coordinates"
@@ -4893,7 +4950,7 @@ msgstr ""
 
 #: src/ui_shortcutsDialog.h:195
 msgid "Keyboard Shortcuts"
-msgstr ""
+msgstr "Клавишни комбинации"
 
 #: src/ui_shortcutsDialog.h:199
 msgid "Restore Defaults"
@@ -5039,7 +5096,7 @@ msgstr ""
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:81
 #: plugins/Oculars/src/gui/OcularDialog.cpp:499
 msgid "Contributors"
-msgstr ""
+msgstr "Сътрудници"
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:84
 msgid ""
@@ -6209,7 +6266,7 @@ msgstr "[всички]"
 #. TRANSLATORS: Displayed in the satellite group selection box.
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:698
 msgid "New group..."
-msgstr ""
+msgstr "Нова група..."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:904
 msgid "Select TLE Update File"
@@ -6254,7 +6311,7 @@ msgstr "Конфигурация на Спътници"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:682
 msgid "Updates"
-msgstr ""
+msgstr "Обновления"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:683
 msgid "Update satellite data from Internet sources"
@@ -6722,10 +6779,6 @@ msgid ""
 msgstr ""
 "Приблизителното време, за което сигналите от телескопа достигат Stellarium.\n"
 "Трябва да бъде увеличено, ако Increase this value if the reticle is skipping."
-
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:489
-msgid "Coordinate system:"
-msgstr "Координатна система:"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:490
 msgid "J2000 (default)"
@@ -8364,12 +8417,12 @@ msgstr ""
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:330
 msgctxt "tab in plugin windows"
 msgid "Info"
-msgstr ""
+msgstr "Информация"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:331
 msgctxt "tab in plugin windows"
 msgid "Websites"
-msgstr ""
+msgstr "Уеб сайтове"
 
 #: plugins/Observability/src/Observability.cpp:67
 msgid "Observability Analysis"
@@ -8846,13 +8899,13 @@ msgstr ""
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:258
 msgctxt "time"
 msgid "m"
-msgstr ""
+msgstr "м"
 
 #. TRANSLATORS: seconds.
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:260
 msgctxt "time"
 msgid "s"
-msgstr ""
+msgstr "с"
 
 #: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:80
 msgid "Equation of Time plug-in"
@@ -8886,7 +8939,7 @@ msgstr ""
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:275
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:307
 msgid "Font size:"
-msgstr ""
+msgstr "Размер на шрифта:"
 
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:63
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:163
@@ -9360,11 +9413,11 @@ msgstr ""
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:376
 msgid "Active"
-msgstr ""
+msgstr "Активен"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:384
 msgid "Activity"
-msgstr ""
+msgstr "Активност"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:389
 #, qt-format
@@ -9377,7 +9430,7 @@ msgstr ""
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:401
 msgid "variable"
-msgstr ""
+msgstr "променлива"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:171
 msgid "ZHR"
@@ -9385,11 +9438,11 @@ msgstr ""
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:172
 msgid "Data Type"
-msgstr ""
+msgstr "Вид данни"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:173
 msgid "Peak"
-msgstr ""
+msgstr "Връх"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:184
 msgid "Start date greater than end date!"
@@ -9401,15 +9454,15 @@ msgstr ""
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:208
 msgid "Variable"
-msgstr ""
+msgstr "Променлив"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:211
 msgid "Real"
-msgstr ""
+msgstr "Реално"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:211
 msgid "Generic"
-msgstr ""
+msgstr "Типично"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:258
 msgid "Meteor Showers Plug-in"
@@ -9489,7 +9542,7 @@ msgstr ""
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:275
 msgid "Notes"
-msgstr ""
+msgstr "Записки"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:276
 msgid ""
@@ -9498,7 +9551,7 @@ msgstr ""
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:277
 msgid "Info"
-msgstr ""
+msgstr "Информация"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:278
 msgid "Info about meteor showers you can get here:"
@@ -9945,6 +9998,9 @@ msgstr ""
 #, qt-format
 #~ msgid "Distance: %1 Light Years"
 #~ msgstr "Разстояние: %1 светлинни години"
+
+#~ msgid "RA/Dec (J2000):"
+#~ msgstr "Рект/Дек (J2000):"
 
 #~ msgid "Planets labels"
 #~ msgstr "Етикети на планетите"
