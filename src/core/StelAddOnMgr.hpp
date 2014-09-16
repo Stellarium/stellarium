@@ -88,6 +88,7 @@ public:
 		InvalidFormat,
 		UnableToWrite,
 		UnableToRead,
+		UnableToRemove,
 		DownloadFailed
 	};
 

@@ -123,6 +123,9 @@ QVariant AddOnTableModel::data(const QModelIndex& index, int role) const
 			case StelAddOnMgr::UnableToRead:
 				value = qVariantFromValue(q_("Unable to read"));
 				break;
+			case StelAddOnMgr::UnableToRemove:
+				value = qVariantFromValue(q_("Unable to remove"));
+				break;
 			case StelAddOnMgr::DownloadFailed:
 				value = qVariantFromValue(q_("Download failed"));
 				break;

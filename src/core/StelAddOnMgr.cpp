@@ -288,16 +288,15 @@ void StelAddOnMgr::removeAddOn(const int addonId, const QStringList selectedFile
 	}
 
 	StelAddOnDAO::AddOnInfo addonInfo = m_pStelAddOnDAO->getAddOnInfo(addonId);
-	if (m_pStelAddOns.value(addonInfo.category)->uninstallAddOn(addonInfo.idInstall, selectedFiles))
-	{
-		m_pStelAddOnDAO->updateAddOnStatus(addonInfo.idInstall, NotInstalled);
-		emit (dataUpdated(addonInfo.category));
 
-		if (addonInfo.category == CATEGORY_LANGUAGE_PACK || addonInfo.category == CATEGORY_TEXTURE)
-		{
-			emit (addOnMgrMsg(RestartRequired));
-		}
+	bool removed = m_pStelAddOns.value(addonInfo.category)->uninstallAddOn(addonInfo.idInstall, selectedFiles);
+	if (removed && (addonInfo.category == CATEGORY_LANGUAGE_PACK || addonInfo.category == CATEGORY_TEXTURE))
+	{
+		emit (addOnMgrMsg(RestartRequired));
 	}
+
+	m_pStelAddOnDAO->updateAddOnStatus(addonInfo.idInstall, removed ? NotInstalled : UnableToRemove);
+	emit (dataUpdated(addonInfo.category));
 }
 
 QString StelAddOnMgr::calculateMd5(QFile& file) const
