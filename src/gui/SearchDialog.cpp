@@ -244,13 +244,16 @@ void SearchDialog::populateCoordinateAxis()
 	switch (getCurrentCoordinateSystem()) {
 		case equatorialJ2000:
 		case equatorial:
+		{
 			ui->AxisXLabel->setText(q_("Right ascension"));
 			ui->AxisXSpinBox->setDisplayFormat(AngleSpinBox::HMSLetters);
 			ui->AxisYLabel->setText(q_("Declination"));
 			ui->AxisYSpinBox->setDisplayFormat(AngleSpinBox::DMSSymbols);
 			ui->AxisYSpinBox->setPrefixType(AngleSpinBox::NormalPlus);
 			break;
+		}
 		case horizontal:
+		{
 			ui->AxisXLabel->setText(q_("Azimuth"));
 			ui->AxisXSpinBox->setDisplayFormat(AngleSpinBox::DMSLetters);
 			ui->AxisXSpinBox->setPrefixType(AngleSpinBox::NormalPlus);
@@ -258,7 +261,9 @@ void SearchDialog::populateCoordinateAxis()
 			ui->AxisYSpinBox->setDisplayFormat(AngleSpinBox::DMSSymbols);
 			ui->AxisYSpinBox->setPrefixType(AngleSpinBox::NormalPlus);
 			break;
+		}
 		case galactic:
+		{
 			ui->AxisXLabel->setText(q_("Longitude"));
 			ui->AxisXSpinBox->setDisplayFormat(AngleSpinBox::DMSLetters);
 			ui->AxisXSpinBox->setPrefixType(AngleSpinBox::NormalPlus);
@@ -266,6 +271,7 @@ void SearchDialog::populateCoordinateAxis()
 			ui->AxisYSpinBox->setDisplayFormat(AngleSpinBox::DMSSymbols);
 			ui->AxisYSpinBox->setPrefixType(AngleSpinBox::NormalPlus);
 			break;
+		}
 	}
 }
 
@@ -402,13 +408,18 @@ void SearchDialog::manualPositionChanged()
 	Vec3d pos;
 	switch (getCurrentCoordinateSystem()) {
 		case equatorialJ2000:
+		{
 			StelUtils::spheToRect(ui->AxisXSpinBox->valueRadians(), ui->AxisYSpinBox->valueRadians(), pos);
 			break;
+		}
 		case equatorial:
+		{
 			StelUtils::spheToRect(ui->AxisXSpinBox->valueRadians(), ui->AxisYSpinBox->valueRadians(), pos);
 			pos = core->equinoxEquToJ2000(pos);
 			break;
+		}
 		case horizontal:
+		{
 			double cx;
 			cx = 3.*M_PI - ui->AxisXSpinBox->valueRadians(); // N is zero, E is 90 degrees
 			if (cx > M_PI*2)
@@ -416,10 +427,13 @@ void SearchDialog::manualPositionChanged()
 			StelUtils::spheToRect(cx, ui->AxisYSpinBox->valueRadians(), pos);
 			pos = core->altAzToJ2000(pos);
 			break;
+		}
 		case galactic:
+		{
 			StelUtils::spheToRect(ui->AxisXSpinBox->valueRadians(), ui->AxisYSpinBox->valueRadians(), pos);
 			pos = core->galacticToJ2000(pos);
 			break;
+		}
 	}
 	mvmgr->setFlagTracking(false);
 	mvmgr->moveToJ2000(pos, 0.05);
