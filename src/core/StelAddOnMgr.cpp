@@ -274,6 +274,7 @@ void StelAddOnMgr::installFromFile(const QString& filePath)
 	{
 		qWarning() << "Add-On InstallFromFile : Unable to install"
 			   << filePath << "File is not compatible!";
+		return;
 	}
 
 	installFromFile(addonInfo, QStringList());
