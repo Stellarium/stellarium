@@ -31,6 +31,8 @@ class StelObjectMgr;
 class StelLocaleMgr;
 class StelModuleMgr;
 class StelSkyCultureMgr;
+class StelViewportEffect;
+class QOpenGLFramebufferObject;
 class QSettings;
 class QNetworkAccessManager;
 class QNetworkReply;
@@ -189,6 +191,12 @@ public:
 	//! The StelApp instance remains the owner of the controller.
 	StelProgressController* addProgressBar();
 	void removeProgressBar(StelProgressController* p);
+
+	//! Define the type of viewport effect to use
+	//! @param effectName must be one of 'none', 'framebufferOnly', 'sphericMirrorDistorter'
+	void setViewportEffect(const QString& effectName);
+	//! Get the type of viewport effect currently used
+	QString getViewportEffect() const;
 	
 	///////////////////////////////////////////////////////////////////////////
 	// Scriptable methods
@@ -239,6 +247,9 @@ private:
 	void handlePinch(qreal scale, bool started);
 
 	void initScriptMgr(QSettings* conf);
+
+	void prepareRenderBuffer();
+	void applyRenderBuffer();
 
 	// The StelApp singleton
 	static StelApp* singleton;
@@ -338,6 +349,11 @@ private:
 	QList<StelProgressController*> progressControllers;
 
 	int baseFontSize;
+
+	// Framebuffer object used for viewport effects.
+	QOpenGLFramebufferObject* renderBuffer;
+
+	StelViewportEffect* viewportEffect;
 };
 
 #endif // _STELAPP_HPP_
