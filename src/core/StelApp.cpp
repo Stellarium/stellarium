@@ -46,6 +46,7 @@
 #include "StelSkyLayerMgr.hpp"
 #include "StelAudioMgr.hpp"
 #include "StelVideoMgr.hpp"
+#include "StelViewportEffect.hpp"
 #include "StelGuiBase.hpp"
 #include "StelPainter.hpp"
 #ifndef DISABLE_SCRIPTING
@@ -65,6 +66,7 @@
 #include <QNetworkProxy>
 #include <QNetworkReply>
 #include <QOpenGLContext>
+#include <QOpenGLFramebufferObject>
 #include <QString>
 #include <QStringList>
 #include <QSysInfo>
@@ -214,6 +216,8 @@ StelApp::StelApp(QObject* parent)
 	, initialized(false)
 	, saveProjW(-1)
 	, saveProjH(-1)
+	, renderBuffer(NULL)
+	, viewportEffect(NULL)
 {
 	// Stat variables
 	nbDownloadedFiles=0;
@@ -551,11 +555,33 @@ void StelApp::update(double deltaTime)
 	stelObjectMgr->update(deltaTime);
 }
 
+void StelApp::prepareRenderBuffer()
+{
+	if (!viewportEffect) return;
+	if (!renderBuffer)
+	{
+		StelProjector::StelProjectorParams params = core->getCurrentStelProjectorParams();
+		int w = params.viewportXywh[2];
+		int h = params.viewportXywh[3];
+		viewportEffect = new StelViewportDistorterFisheyeToSphericMirror(w, h);
+		renderBuffer = new QOpenGLFramebufferObject(w, h, QOpenGLFramebufferObject::CombinedDepthStencil);
+	}
+	renderBuffer->bind();
+}
+
+void StelApp::applyRenderBuffer()
+{
+	if (!renderBuffer) return;
+	renderBuffer->release();
+	viewportEffect->paintViewportBuffer(renderBuffer);
+}
+
 //! Main drawing function called at each frame
 void StelApp::draw()
 {
 	if (!initialized)
 		return;
+	prepareRenderBuffer();
 	core->preDraw();
 
 	const QList<StelModule*> modules = moduleMgr->getCallOrders(StelModule::ActionDraw);
@@ -564,6 +590,7 @@ void StelApp::draw()
 		module->draw(core);
 	}
 	core->postDraw();
+	applyRenderBuffer();
 }
 
 /*************************************************************************
@@ -577,6 +604,11 @@ void StelApp::glWindowHasBeenResized(float x, float y, float w, float h)
 	{
 		saveProjW = w;
 		saveProjH = h;
+	}
+	if (renderBuffer)
+	{
+		delete renderBuffer;
+		renderBuffer = NULL;
 	}
 }
 
@@ -743,4 +775,40 @@ void StelApp::setDevicePixelsPerPixel(float dppp)
 		params.devicePixelsPerPixel = devicePixelsPerPixel;
 		core->setCurrentStelProjectorParams(params);
 	}
+}
+
+void StelApp::setViewportEffect(const QString& name)
+{
+	if (name == getViewportEffect()) return;
+	if (renderBuffer)
+	{
+		delete renderBuffer;
+		renderBuffer = NULL;
+	}
+	if (viewportEffect)
+	{
+		delete viewportEffect;
+		viewportEffect = NULL;
+	}
+	if (name == "none") return;
+
+	StelProjector::StelProjectorParams params = core->getCurrentStelProjectorParams();
+	int w = params.viewportXywh[2];
+	int h = params.viewportXywh[3];
+	if (name == "sphericMirrorDistorter")
+	{
+		viewportEffect = new StelViewportDistorterFisheyeToSphericMirror(w, h);
+	}
+	else
+	{
+		qDebug() << "unknown viewport effect name:" << name;
+		Q_ASSERT(false);
+	}
+}
+
+QString StelApp::getViewportEffect() const
+{
+	if (viewportEffect)
+		return viewportEffect->getName();
+	return "none";
 }
