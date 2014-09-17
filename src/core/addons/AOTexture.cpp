@@ -168,13 +168,13 @@ int AOTexture::uninstallAddOn(const QString& idInstall,
 	if (filesRemoved == selectedFiles.count())
 	{
 		qDebug() << "Add-On Textures : Successfully removed" << idInstall;
-		return 2;
+		return StelAddOnMgr::NotInstalled;
 	}
 	else if (filesRemoved > 0)
 	{
 		qDebug() << "Add-On Textures : Partially removed" << idInstall;
-		return 1;
+		return StelAddOnMgr::PartiallyInstalled;
 	}
 
-	return 0; // failed!
+	return StelAddOnMgr::UnableToRemove; // failed!
 }

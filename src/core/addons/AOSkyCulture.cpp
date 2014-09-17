@@ -70,7 +70,6 @@ int AOSkyCulture::uninstallAddOn(const QString &idInstall,
 	Q_UNUSED(selectedFiles); // not applicable - always install all files
 
 	QDir dir(m_sSkyCultureInstallDir % idInstall);
-
 	if (!dir.removeRecursively())
 	{
 		qWarning() << "Add-On SkyCultures : Error! " << idInstall
@@ -79,10 +78,9 @@ int AOSkyCulture::uninstallAddOn(const QString &idInstall,
 			   << endl
 			   << "Add-On SkyCultures : You can delete manually"
 			   << dir.absolutePath();
-		return false;
+		return StelAddOnMgr::PartiallyRemoved;
 	}
-
 	qDebug() << "Add-On SkyCultures : Successfully removed" << dir.absolutePath();
 	emit(skyCulturesChanged());
-	return true;
+	return StelAddOnMgr::NotInstalled;
 }

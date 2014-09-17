@@ -92,16 +92,12 @@ int AOLanguagePack::uninstallAddOn(const QString &idInstall,
 		removed = file.remove();
 	}
 
-	if (removed)
-	{
-		qDebug() << "Add-On Language : Successfully removed" << idInstall;
-	}
-	else
+	if (!removed)
 	{
 		qWarning() << "Add-On Language : Error! " << idInstall
 			   << "could not be removed. ";
-
+		return StelAddOnMgr::UnableToRemove;
 	}
-
-	return removed;
+	qDebug() << "Add-On Language : Successfully removed" << idInstall;
+	return StelAddOnMgr::NotInstalled;
 }

@@ -100,15 +100,12 @@ int AOCatalog::uninstallAddOn(const QString &idInstall,
 		removed = file.remove();
 	}
 
-	if (removed)
-	{
-		qDebug() << "Add-On Catalog : Successfully removed" << idInstall;
-	}
-	else
+	if (!removed)
 	{
 		qWarning() << "Add-On Catalog : Error! " << idInstall
 			   << "could not be removed. ";
+		return StelAddOnMgr::UnableToRemove;
 	}
-
-	return removed;
+	qDebug() << "Add-On Catalog : Successfully removed" << idInstall;
+	return StelAddOnMgr::NotInstalled;
 }

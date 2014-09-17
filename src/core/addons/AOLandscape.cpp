@@ -61,7 +61,7 @@ int AOLandscape::uninstallAddOn(const QString& idInstall,
 
 	if(!m_pLandscapeMgr->removeLandscape(idInstall))
 	{
-		return false;
+		return StelAddOnMgr::UnableToRemove;
 	}
-	return true;
+	return StelAddOnMgr::NotInstalled;
 }

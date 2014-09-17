@@ -126,6 +126,9 @@ QVariant AddOnTableModel::data(const QModelIndex& index, int role) const
 			case StelAddOnMgr::UnableToRemove:
 				value = qVariantFromValue(q_("Unable to remove"));
 				break;
+			case StelAddOnMgr::PartiallyRemoved:
+				value = qVariantFromValue(q_("Partially removed"));
+				break;
 			case StelAddOnMgr::DownloadFailed:
 				value = qVariantFromValue(q_("Download failed"));
 				break;

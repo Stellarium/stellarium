@@ -88,9 +88,9 @@ int AOScript::uninstallAddOn(const QString& idInstall,
 	{
 		qWarning() << "Add-On Scripts : Error! " << idInstall
 			   << "could not be removed. ";
-		return false;
+		return StelAddOnMgr::UnableToRemove;
 	}
 
 	qDebug() << "Add-On Scripts : Successfully removed" << idInstall;
-	return true;
+	return StelAddOnMgr::NotInstalled;
 }

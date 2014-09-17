@@ -89,6 +89,7 @@ public:
 		UnableToWrite,
 		UnableToRead,
 		UnableToRemove,
+		PartiallyRemoved,
 		DownloadFailed
 	};
 
