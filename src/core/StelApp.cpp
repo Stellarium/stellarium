@@ -615,9 +615,14 @@ void StelApp::glWindowHasBeenResized(float x, float y, float w, float h)
 // Handle mouse clics
 void StelApp::handleClick(QMouseEvent* inputEvent)
 {
-	inputEvent->setAccepted(false);
-	
-	QMouseEvent event(inputEvent->type(), QPoint(inputEvent->pos().x()*devicePixelsPerPixel, inputEvent->pos().y()*devicePixelsPerPixel), inputEvent->button(), inputEvent->buttons(), inputEvent->modifiers());
+	QPointF pos = inputEvent->pos();
+	float x, y;
+	x = pos.x();
+	y = pos.y();
+	if (viewportEffect)
+		viewportEffect->distortXY(x, y);
+
+	QMouseEvent event(inputEvent->type(), QPoint(x*devicePixelsPerPixel, y*devicePixelsPerPixel), inputEvent->button(), inputEvent->buttons(), inputEvent->modifiers());
 	event.setAccepted(false);
 	
 	// Send the event to every StelModule
@@ -669,8 +674,10 @@ void StelApp::handleWheel(QWheelEvent* event)
 }
 
 // Handle mouse move
-void StelApp::handleMove(int x, int y, Qt::MouseButtons b)
+void StelApp::handleMove(float x, float y, Qt::MouseButtons b)
 {
+	if (viewportEffect)
+		viewportEffect->distortXY(x, y);
 	// Send the event to every StelModule
 	foreach (StelModule* i, moduleMgr->getCallOrders(StelModule::ActionHandleMouseMoves))
 	{
