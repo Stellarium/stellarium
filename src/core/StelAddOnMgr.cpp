@@ -407,6 +407,7 @@ void StelAddOnMgr::downloadAddOnFinished()
 			connect(m_pAddOnNetworkReply, SIGNAL(finished()), this, SLOT(downloadAddOnFinished()));
 			return;
 		}
+		finishCurrentDownload();
 		installFromFile(m_currentDownloadInfo, m_downloadQueue.value(m_iDownloadingId));
 	}
 	else
@@ -415,9 +416,9 @@ void StelAddOnMgr::downloadAddOnFinished()
 			   << " Error:" << m_pAddOnNetworkReply->errorString();
 		m_pStelAddOnDAO->updateAddOnStatus(m_currentDownloadInfo.idInstall, DownloadFailed);
 		emit (dataUpdated(m_currentDownloadInfo.category));
+		finishCurrentDownload();
 	}
 
-	finishCurrentDownload();
 	m_currentDownloadInfo = StelAddOnDAO::AddOnInfo();
 	m_downloadQueue.remove(m_iDownloadingId);
 	m_iDownloadingId = 0;
