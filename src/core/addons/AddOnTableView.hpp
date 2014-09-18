@@ -51,6 +51,7 @@ signals:
 	void rowChecked(int row, bool checked);
 
 public slots:
+	void clearSelection();
 	void setAllChecked(bool checked);
 	void slotDataUpdated(const QString& category);
 

@@ -161,6 +161,14 @@ void AddOnTableView::mousePressEvent(QMouseEvent *e)
 	selectRow(index.row());
 }
 
+void AddOnTableView::clearSelection()
+{
+	QTableView::clearSelection();
+	m_iSelectedAddOnsToInstall.clear();
+	m_iSelectedAddOnsToRemove.clear();
+	setAllChecked(false);
+}
+
 void AddOnTableView::selectionChanged(const QItemSelection& selected, const QItemSelection& deselected)
 {
 	int wRow; // addonwidget row
@@ -273,8 +281,8 @@ void AddOnTableView::slotRowChecked(int pRow, bool checked)
 		}
 	}
 
-	emit(somethingToInstall(m_iSelectedAddOnsToInstall.size() > 0));
-	emit(somethingToRemove(m_iSelectedAddOnsToRemove.size() > 0));
+	emit (somethingToInstall(m_iSelectedAddOnsToInstall.size() > 0));
+	emit (somethingToRemove(m_iSelectedAddOnsToRemove.size() > 0));
 
 	// update checkbox header
 	if (m_pCheckedHeader)

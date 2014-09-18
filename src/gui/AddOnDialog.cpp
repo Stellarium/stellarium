@@ -168,7 +168,6 @@ void AddOnDialog::changePage(QListWidgetItem *current, QListWidgetItem *previous
 	if (lastView)
 	{
 		lastView->clearSelection();
-		lastView->setAllChecked(false);
 	}
 
 	current = current ? current : previous;
@@ -250,7 +249,7 @@ void AddOnDialog::installSelectedRows()
 		i.next();
 		StelApp::getInstance().getStelAddOnMgr().installAddOn(i.key(), i.value());
 	}
-	view->setAllChecked(false);
+	view->clearSelection();
 }
 
 void AddOnDialog::removeSelectedRows()
@@ -261,5 +260,5 @@ void AddOnDialog::removeSelectedRows()
 		i.next();
 		StelApp::getInstance().getStelAddOnMgr().removeAddOn(i.key(), i.value());
 	}
-	view->setAllChecked(false);
+	view->clearSelection();
 }
