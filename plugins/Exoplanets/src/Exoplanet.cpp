@@ -203,7 +203,8 @@ QString Exoplanet::getInfoString(const StelCore* core, const InfoStringGroup& fl
 
 	if (flags&Distance && distance>0)
 	{
-		oss << q_("Distance: %1 Light Years").arg(QString::number(distance/0.306601, 'f', 2)) << "<br>";
+		//TRANSLATORS: Unit of measure for distance - Light Years
+		oss << q_("Distance: %1 ly").arg(QString::number(distance/0.306601, 'f', 2)) << "<br>";
 	}
 
 	if (flags&Extra)

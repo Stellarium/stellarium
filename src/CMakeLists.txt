@@ -523,6 +523,11 @@ INSTALL(TARGETS stellarium DESTINATION bin)
 ################################## Build unit tests #########################################
 #############################################################################################
 
+SET(STELLARIUM_TESTS)
+MACRO(ADD_TEST NAME)
+	SET(STELLARIUM_TESTS ${STELLARIUM_TESTS} ${NAME})
+ENDMACRO()
+
 SET(extLinkerOptionTest ${QT_QTCORE_LIBRARY} ${QT_QTNETWORK_LIBRARY} ${QT_QTTEST_LIBRARY} ${QT_QTGUI_LIBRARY} ${QT_QTOPENGL_LIBRARY} ${OPENGL_LIBRARIES} ${ZLIB_LIBRARIES})
 
 # Custom target used to build all tests at once
@@ -541,6 +546,7 @@ ADD_EXECUTABLE(testDates EXCLUDE_FROM_ALL ${tests_testDates_SRCS})
 QT5_USE_MODULES(testDates Core Gui Widgets Script Declarative Test)
 TARGET_LINK_LIBRARIES(testDates ${extLinkerOptionTest})
 ADD_DEPENDENCIES(buildTests testDates)
+ADD_TEST(testDates)
 
 SET(tests_testStelFileMgr_SRCS
 	tests/testStelFileMgr.hpp
@@ -551,6 +557,7 @@ ADD_EXECUTABLE(testStelFileMgr EXCLUDE_FROM_ALL ${tests_testStelFileMgr_SRCS})
 QT5_USE_MODULES(testStelFileMgr Core Gui Widgets Script Declarative Test)
 TARGET_LINK_LIBRARIES(testStelFileMgr ${extLinkerOptionTest})
 ADD_DEPENDENCIES(buildTests testStelFileMgr)
+ADD_TEST(testStelFileMgr)
 
 SET(tests_testStelSphereGeometry_SRCS
 	tests/testStelSphereGeometry.hpp
@@ -580,6 +587,7 @@ ADD_EXECUTABLE(testStelSphereGeometry EXCLUDE_FROM_ALL ${tests_testStelSphereGeo
 QT5_USE_MODULES(testStelSphereGeometry Core Gui OpenGL Test)
 TARGET_LINK_LIBRARIES(testStelSphereGeometry ${extLinkerOptionTest})
 ADD_DEPENDENCIES(buildTests testStelSphereGeometry)
+ADD_TEST(testStelSphereGeometry)
 
 #SET(tests_testStelSphericalIndex_SRCS
 #	tests/testStelSphericalIndex.hpp
@@ -615,6 +623,7 @@ ADD_EXECUTABLE(testStelJsonParser EXCLUDE_FROM_ALL ${tests_testStelJsonParser_SR
 QT5_USE_MODULES(testStelJsonParser Core Gui Widgets Script Declarative Test)
 TARGET_LINK_LIBRARIES(testStelJsonParser ${extLinkerOptionTest})
 ADD_DEPENDENCIES(buildTests testStelJsonParser)
+ADD_TEST(testStelJsonParser)
 
 SET(tests_testStelVertexArray_SRCS
 	tests/testStelVertexArray.hpp
@@ -624,6 +633,7 @@ ADD_EXECUTABLE(testStelVertexArray EXCLUDE_FROM_ALL ${tests_testStelVertexArray_
 QT5_USE_MODULES(testStelVertexArray Core Gui Test OpenGL)
 TARGET_LINK_LIBRARIES(testStelVertexArray ${extLinkerOptionTest})
 ADD_DEPENDENCIES(buildTests testStelVertexArray)
+ADD_TEST(testStelVertexArray)
 
 SET(tests_testDeltaT_SRCS
 	tests/testDeltaT.hpp
@@ -638,6 +648,7 @@ ADD_EXECUTABLE(testDeltaT EXCLUDE_FROM_ALL ${tests_testDeltaT_SRCS})
 QT5_USE_MODULES(testDeltaT Core Gui Widgets Script Declarative Test)
 TARGET_LINK_LIBRARIES(testDeltaT ${extLinkerOptionTest})
 ADD_DEPENDENCIES(buildTests testDeltaT)
+ADD_TEST(testDeltaT)
 
 SET(tests_testConversions_SRCS
 	tests/testConversions.hpp
@@ -652,17 +663,15 @@ ADD_EXECUTABLE(testConversions EXCLUDE_FROM_ALL ${tests_testConversions_SRCS})
 QT5_USE_MODULES(testConversions Core Gui Widgets Script Declarative Test)
 TARGET_LINK_LIBRARIES(testConversions ${extLinkerOptionTest})
 ADD_DEPENDENCIES(buildTests testConversions)
-
+ADD_TEST(testConversions)
 
 ADD_CUSTOM_TARGET(tests COMMENT "Run the Stellarium unit tests")
-ADD_CUSTOM_COMMAND(TARGET tests POST_BUILD COMMAND ./testDates WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/src/)
-ADD_CUSTOM_COMMAND(TARGET tests POST_BUILD COMMAND ./testStelFileMgr WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/src/)
-ADD_CUSTOM_COMMAND(TARGET tests POST_BUILD COMMAND ./testStelSphereGeometry WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/src/)
-#ADD_CUSTOM_COMMAND(TARGET tests POST_BUILD COMMAND ./testStelSphericalIndex WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/src/)
-#ADD_CUSTOM_COMMAND(TARGET tests POST_BUILD COMMAND ./testStelVertexBuffer WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/src/)
-ADD_CUSTOM_COMMAND(TARGET tests POST_BUILD COMMAND ./testStelJsonParser WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/src/)
-ADD_CUSTOM_COMMAND(TARGET tests POST_BUILD COMMAND ./testStelVertexArray WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/src/)
-ADD_CUSTOM_COMMAND(TARGET tests POST_BUILD COMMAND ./testDeltaT WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/src/)
-ADD_CUSTOM_COMMAND(TARGET tests POST_BUILD COMMAND ./testConversions WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/src/)
+FOREACH(NAME ${STELLARIUM_TESTS})
+	IF(MSVC)
+		ADD_CUSTOM_COMMAND(TARGET tests POST_BUILD COMMAND ./${CMAKE_BUILD_TYPE}/${NAME}.exe WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/src)
+	ELSE()
+		ADD_CUSTOM_COMMAND(TARGET tests POST_BUILD COMMAND ./${NAME} WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/src)
+	ENDIF()
+ENDFOREACH()
 ADD_DEPENDENCIES(tests buildTests)
 

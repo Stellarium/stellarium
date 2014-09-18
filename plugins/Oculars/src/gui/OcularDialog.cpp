@@ -341,6 +341,11 @@ void OcularDialog::createDialogContent()
 	ui->ocularListView->setModel(ocularTableModel);
 	ui->telescopeListView->setModel(telescopeTableModel);
 	ui->lensListView->setModel(lensTableModel);
+
+	//Kinetic scrolling for tablet pc and pc
+	QList<QWidget *> addscroll;
+	addscroll << ui->textBrowser << ui->telescopeListView << ui->ccdListView << ui->ocularListView << ui->lensListView;
+	installKineticScrolling(addscroll);
 	
 	//Now the rest of the actions.
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));

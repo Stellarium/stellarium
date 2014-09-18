@@ -115,6 +115,7 @@ day_key_mode                        = calendar
 selected_object_info                = all
 auto_hide_horizontal_toolbar        = true
 auto_hide_vertical_toolbar          = true
+flag_enable_kinetic_scrolling       = true
 
 [color]
 default_color                       = 0.5,0.5,0.7
@@ -124,7 +125,7 @@ azimuthal_color                     = 0.3,0.2,0.1
 equatorial_color                    = 0.1,0.2,0.3
 equatorial_J2000_color              = 0.1,0.3,0.4
 galactic_color                      = 0.0,0.3,0.2
-galactic_plane_color                = 0.5,0.3,0.1
+galactic_equator_color              = 0.5,0.3,0.1
 equator_color                       = 0.2,0.2,0.6
 ecliptic_color                      = 0.6,0.2,0.2
 ecliptic_J2000_color                = 0.3,0.3,0.1
@@ -197,7 +198,7 @@ flag_equatorial_grid                = false
 flag_equatorial_J2000_grid          = false
 flag_ecliptic_J2000_grid            = false
 flag_galactic_grid                  = false
-flag_galactic_plane_line            = false
+flag_galactic_equator_line          = false
 flag_equator_line                   = false
 flag_ecliptic_line                  = false
 flag_meridian_line                  = false

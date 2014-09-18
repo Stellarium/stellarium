@@ -367,10 +367,10 @@ void TextUserInterface::init()
 					 SLOT(setColorGalacticGrid(Vec3f)),
 					 gridLinesMgr->getColorGalacticGrid(),
 					 m5, m5_18);
-	TuiNode* m5_20 = new TuiNodeColor(N_("Galactic plane line"),
+	TuiNode* m5_20 = new TuiNodeColor(N_("Galactic equator line"),
 					 gridLinesMgr,
-					 SLOT(setColorGalacticPlaneLine(Vec3f)),
-					 gridLinesMgr->getColorGalacticPlaneLine(),
+					 SLOT(setColorGalacticEquatorLine(Vec3f)),
+					 gridLinesMgr->getColorGalacticEquatorLine(),
 					 m5, m5_19);
 
 	m5_1->setNextNode(m5_2);

@@ -136,6 +136,8 @@ QStringList StelSkyCultureMgr::getSkyCultureListI18(void)
 		i.next();
 		cultures += q_(i.value().englishName);
 	}
+	// Sort for GUI use. Note that e.g. German Umlauts are sorted after Z. TODO: Fix this!
+	cultures.sort(Qt::CaseInsensitive);
 	return cultures;
 }
 

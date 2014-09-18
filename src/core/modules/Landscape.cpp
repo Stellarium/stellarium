@@ -277,7 +277,7 @@ void LandscapeOldStyle::load(const QSettings& landscapeIni, const QString& lands
 
 	// Load sides textures
 	nbSideTexs = landscapeIni.value("landscape/nbsidetex", 0).toInt();
-	sideTexs = new StelTextureSP[nbSideTexs];
+	sideTexs = new StelTextureSP[2*nbSideTexs]; // 0.14: allow upper half for light textures!
 	for (int i=0; i<nbSideTexs; ++i)
 	{
 		QString textureKey = QString("landscape/tex%1").arg(i);
@@ -290,6 +290,16 @@ void LandscapeOldStyle::load(const QSettings& landscapeIni, const QString& lands
 			QImage *image = new QImage(texturePath);
 			sidesImages.append(image); // indices identical to those in sideTexs
 		}
+		// Also allow light textures. The light textures must cover the same geometry as the sides. It is allowed that not all or even any light textures are present!
+		textureKey = QString("landscape/light%1").arg(i);
+		textureName = landscapeIni.value(textureKey).toString();
+		if (textureName.length())
+		{
+			const QString lightTexturePath = getTexturePath(textureName, landscapeId);
+			sideTexs[nbSideTexs+i] = StelApp::getInstance().getTextureManager().createTexture(lightTexturePath);
+		}
+		else
+			sideTexs[nbSideTexs+i].clear();
 	}
 	if ( (!horizonPolygon) && calibrated )
 	{
@@ -302,14 +312,15 @@ void LandscapeOldStyle::load(const QSettings& landscapeIni, const QString& lands
 	int texnum;
 	for (int i=0;i<nbSide;++i)
 	{
-		QString key = QString("landscape/side%1").arg(i);
-		QString description = landscapeIni.value(key).toString();
+		QString key = QString("landscape/side%1").arg(i);                             // e.g. side0
+		QString description = landscapeIni.value(key).toString();                     // e.g. tex0:0:0:1:1
 		//sscanf(s.toLocal8Bit(),"tex%d:%f:%f:%f:%f",&texnum,&a,&b,&c,&d);
 		QStringList parameters = description.split(':');
 		//TODO: How should be handled an invalid texture description?
-		QString textureName = parameters.value(0);
-		texnum = textureName.right(textureName.length() - 3).toInt();
+		QString textureName = parameters.value(0);                                    // tex0
+		texnum = textureName.right(textureName.length() - 3).toInt();                 // 0
 		sides[i].tex = sideTexs[texnum];
+		sides[i].tex_illum = sideTexs[nbSide+texnum];
 		sides[i].texCoords[0] = parameters.at(1).toFloat();
 		sides[i].texCoords[1] = parameters.at(2).toFloat();
 		sides[i].texCoords[2] = parameters.at(3).toFloat();
@@ -441,6 +452,7 @@ void LandscapeOldStyle::load(const QSettings& landscapeIni, const QString& lands
 			precompSide.arr.texCoords.resize(0);
 			precompSide.arr.indices.resize(0);
 			precompSide.tex=sideTexs[ti];
+			precompSide.light=false;
 
 			float tx0 = sides[ti].texCoords[0];
 			const float d_tx = (sides[ti].texCoords[2]-sides[ti].texCoords[0]) / slices_per_side;
@@ -477,6 +489,13 @@ void LandscapeOldStyle::load(const QSettings& landscapeIni, const QString& lands
 				tx0 = tx1;
 			}
 			precomputedSides.append(precompSide);
+			if (sideTexs[ti+nbSide])
+			{
+				precompSide.light=true;
+				precompSide.tex=sideTexs[ti+nbSide];
+				precomputedSides.append(precompSide);	// These sides are not called by strict index!
+									// May be 9 for 8 sidetexs plus 1-only light panel
+			}
 		}
 	}
 }
@@ -493,10 +512,17 @@ void LandscapeOldStyle::draw(StelCore* core)
 		return;
 	if (drawGroundFirst)
 		drawGround(core, painter);
-	drawDecor(core, painter);
+	drawDecor(core, painter, false);
 	if (!drawGroundFirst)
 		drawGround(core, painter);
 	drawFog(core, painter);
+
+	// GZ: ALSO HERE - Self-luminous layer (Light pollution etc). This looks striking!
+	if (lightScapeBrightness>0.0f && core->getSkyDrawer()->getFlagHasAtmosphere())
+	{
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE);
+		drawDecor(core, painter, true); // GZ: NEW
+	}
 
 	// If a horizon line also has been defined, draw it.
 	if (horizonPolygon && (horizonPolygonLineColor[0] >= 0))
@@ -541,7 +567,7 @@ void LandscapeOldStyle::drawFog(StelCore* core, StelPainter& sPainter) const
 }
 
 // Draw the side textures
-void LandscapeOldStyle::drawDecor(StelCore* core, StelPainter& sPainter) const
+void LandscapeOldStyle::drawDecor(StelCore* core, StelPainter& sPainter, const bool drawLight) const
 {
 	StelProjector::ModelViewTranformP transfo = core->getAltAzModelViewTransform(StelCore::RefractionOff);
 	transfo->combine(Mat4d::zrotation(-(angleRotateZ+angleRotateZOffset)));
@@ -549,12 +575,18 @@ void LandscapeOldStyle::drawDecor(StelCore* core, StelPainter& sPainter) const
 
 	if (!landFader.getInterstate())
 		return;
-	sPainter.setColor(landscapeBrightness, landscapeBrightness, landscapeBrightness, landFader.getInterstate());
+	if (drawLight)
+		sPainter.setColor(lightScapeBrightness, lightScapeBrightness, lightScapeBrightness, landFader.getInterstate());
+	else
+		sPainter.setColor(landscapeBrightness, landscapeBrightness, landscapeBrightness, landFader.getInterstate());
 
 	foreach (const LOSSide& side, precomputedSides)
 	{
-		side.tex->bind();
-		sPainter.drawSphericalTriangles(side.arr, true, NULL, false);
+		if (side.light==drawLight)
+		{
+			side.tex->bind();
+			sPainter.drawSphericalTriangles(side.arr, true, NULL, false);
+		}
 	}
 }
 

@@ -76,6 +76,11 @@ void SupernovaeDialog::createDialogContent()
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()),
 		this, SLOT(retranslate()));
 
+	//Kinetic scrolling for tablet pc and pc
+	QList<QWidget *> addscroll;
+	addscroll << ui->aboutTextBrowser;
+	installKineticScrolling(addscroll);
+
 	// Settings tab / updates group
 	connect(ui->internetUpdatesCheckbox, SIGNAL(stateChanged(int)), this, SLOT(setUpdatesEnabled(int)));
 	connect(ui->updateButton, SIGNAL(clicked()), this, SLOT(updateJSON()));

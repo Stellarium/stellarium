@@ -74,6 +74,23 @@ class Planet : public StelObject
 {
 public:
 	friend class SolarSystem;
+
+	Q_ENUMS(PlanetType)
+	//! numeric typecodes for the type descriptions in ssystem.ini
+	// GZ: Until 0.13 QStrings were used for types.
+	// GZ: Enums are slightly faster than string comparisons in time-critical comparisons.
+	// GZ: If other types are introduced, add here and the string in init().
+	enum PlanetType
+	{
+		isStar,                   // ssystem.ini: type="star"
+		isPlanet,                 // ssystem.ini: type="planet"
+		isMoon,                   // ssystem.ini: type="moon"
+		isAsteroid,               // ssystem.ini: type="asteroid"
+		isPlutoid,                // ssystem.ini: type="plutoid"
+		isComet,                  // ssystem.ini: type="comet"
+		isUNDEFINED               // ssystem.ini: type=<anything else>
+	};
+
 	Planet(const QString& englishName,
 	       int flagLighting,
 	       double radius,
@@ -81,7 +98,7 @@ public:
 	       Vec3f color,
 	       float albedo,
 	       const QString& texMapName,
-		   const QString& normalMapName,
+	       const QString& normalMapName,
 	       posFuncType _coordFunc,
 	       void* userDataPtr,
 	       OsculatingFunctType *osculatingFunc,
@@ -89,9 +106,13 @@ public:
 	       bool hidden,
 	       bool hasAtmosphere,
 	       bool hasHalo,
-	       const QString &pType);
+	       const QString &pTypeStr);
 
 	virtual ~Planet();
+
+	//! Initializes static vars. Must be called before creating first planet.
+	// Currently ensured by SolarSystem::init()
+	static void init();
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods inherited from StelObject
@@ -146,7 +167,8 @@ public:
 	double getMeanSolarDay(void) const;
 
 	const QString& getTextMapName() const {return texMapName;}	
-	const QString getPlanetType() const {return pType;}
+	const QString getPlanetTypeString() const {return pTypeMap.value(pType);}
+	PlanetType getPlanetType() const {return pType;}
 
 	// Compute the z rotation to use from equatorial to geographic coordinates
 	double getSiderealTime(double jd) const;
@@ -292,10 +314,12 @@ protected:
 	bool hidden;                     // useful for fake planets used as observation positions - not drawn or labeled
 	bool atmosphere;                 // Does the planet have an atmosphere?
 	bool halo;                       // Does the planet have a halo?
-	QString pType;			 // Type of body
+	// QString pTypeStr;			 // Type of body, old version just had a string here.
+	PlanetType pType;                // GZ this is now a proper type...
 
 	static Vec3f labelColor;
 	static StelTextureSP hintCircleTex;
+	static QMap<PlanetType, QString> pTypeMap; // GZ: maps fast type to english name.
 	
 	// Shader-related variables
 	struct PlanetShaderVars {

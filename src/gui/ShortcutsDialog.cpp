@@ -291,6 +291,11 @@ void ShortcutsDialog::createDialogContent()
 	ui->shortcutsTreeView->header()->setSectionsMovable(false);
 	ui->shortcutsTreeView->sortByColumn(0, Qt::AscendingOrder);
 	
+	//Kinetic scrolling for tablet pc and pc
+	QList<QWidget *> addscroll;
+	addscroll << ui->shortcutsTreeView;
+	installKineticScrolling(addscroll);
+
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
 	connect(ui->shortcutsTreeView->selectionModel(),
 	        SIGNAL(currentChanged(QModelIndex,QModelIndex)),

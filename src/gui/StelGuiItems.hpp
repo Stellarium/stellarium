@@ -214,8 +214,22 @@ public:
 
 	//! Set whether time must be displayed in the bottom bar
 	void setFlagShowTime(bool b) {flagShowTime=b;}
+	bool getFlagShowTime() { return flagShowTime; }
 	//! Set whether location info must be displayed in the bottom bar
 	void setFlagShowLocation(bool b) {flagShowLocation=b;}
+	bool getFlagShowLocation() { return flagShowLocation; }
+	//! Set whether FPS info must be displayed in the bottom bar
+	void setFlagShowFps(bool b) {flagShowFps=b;}
+	bool getFlagShowFps() { return flagShowFps; }
+	//! Set whether FOV info must be displayed in the bottom bar
+	void setFlagShowFov(bool b) {flagShowFov=b;}
+	bool getFlagShowFov() { return flagShowFov; }
+	//! Set whether DMS format for FOV info must be displayed in the bottom bar
+	void setFlagFovDms(bool b) {flagFovDms=b;}
+	bool getFlagFovDms() { return flagFovDms; }
+	//! Set whether JD for time info must be displayed in the bottom bar
+	void setFlagTimeJd(bool b) {flagTimeJd=b;}
+	bool getFlagTimeJd() { return flagTimeJd; }
 
 signals:
 	void sizeChanged();
@@ -259,6 +273,10 @@ private:
 
 	bool flagShowTime;
 	bool flagShowLocation;
+	bool flagShowFps;
+	bool flagShowFov;
+	bool flagFovDms;
+	bool flagTimeJd;
 
 	QGraphicsSimpleTextItem* helpLabel;
 };

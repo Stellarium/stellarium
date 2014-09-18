@@ -90,6 +90,11 @@ void MeteorShowerDialog::createDialogContent()
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
 	plugin = GETSTELMODULE(MeteorShowers);
 
+	//Kinetic scrolling for tablet pc and pc
+	QList<QWidget *> addscroll;
+	addscroll << ui->listEvents << ui->aboutTextBrowser;
+	installKineticScrolling(addscroll);
+
 	// Settings tab / updates group	
 	connect(ui->internetUpdates, SIGNAL(clicked(bool)), this, SLOT(setUpdatesEnabled(bool)));
 	connect(ui->updateButton, SIGNAL(clicked()), this, SLOT(updateJSON()));

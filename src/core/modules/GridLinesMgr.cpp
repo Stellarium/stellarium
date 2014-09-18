@@ -29,7 +29,7 @@
 #include "StelCore.hpp"
 #include "StelPainter.hpp"
 #include "StelSkyDrawer.hpp"
-#include "StelMovementMgr.hpp"
+#include "StelGui.hpp"
 
 #include <set>
 #include <QSettings>
@@ -72,7 +72,7 @@ public:
 		ECLIPTIC,
 		MERIDIAN,
 		HORIZON,
-		GALACTICPLANE
+		GALACTICEQUATOR
 	};
 	// Create and precompute positions of a SkyGrid
 	SkyLine(SKY_LINE_TYPE _line_type = EQUATOR);
@@ -167,96 +167,118 @@ void viewportEdgeIntersectCallback(const Vec3d& screenPos, const Vec3d& directio
 	direc.normalize();
 	const Vec4f tmpColor = d->sPainter->getColor();
 	d->sPainter->setColor(d->textColor[0], d->textColor[1], d->textColor[2], d->textColor[3]);
+	bool withDecimalDegree = dynamic_cast<StelGui*>(StelApp::getInstance().getGui())->getFlagShowDecimalDegrees();
 
 	QString text;
 	if (d->text.isEmpty())
 	{
 		// We are in the case of meridians, we need to determine which of the 2 labels (3h or 15h to use)
 		Vec3d tmpV;
-		d->sPainter->getProjector()->unProject(screenPos, tmpV);		
-		double cFOV = StelApp::getInstance().getCore()->getMovementMgr()->getCurrentFov();
-		double lon, lat;
+		d->sPainter->getProjector()->unProject(screenPos, tmpV);
+		double lon, lat, textAngle;
 		StelUtils::rectToSphe(&lon, &lat, tmpV);
 		switch (d->frameType)
 		{
 			case StelCore::FrameAltAz:
 			{
-				double raAngle = M_PI-d->raAngle;
-				if (cFOV<50.)
-					text = StelUtils::radToDmsStrAdapt(raAngle);
-				else
-				{
-					lon = M_PI-lon;
-					if (raAngle<0)
-						raAngle=+2.*M_PI;
-					if (lon<0)
-						lon=+2.*M_PI;
+				double raAngle = ::fmod(M_PI-d->raAngle,2.*M_PI);
+				lon = ::fmod(M_PI-lon,2.*M_PI);
 
-					if (std::fabs(2.*M_PI-lon)<0.01)
-					{
-						// We are at meridian 0
-						lon = 0.;
-					}
-					if (std::fabs(lon-raAngle) < 0.01)
-						text = StelUtils::radToDmsStrAdapt(raAngle);
-					else
-					{
-						const double delta = raAngle<M_PI ? M_PI : -M_PI;
-						if (raAngle==2*M_PI && delta==-M_PI)
-						{
-							text = StelUtils::radToDmsStrAdapt(0);
-						}
-						else
-						{
-							text = StelUtils::radToDmsStrAdapt(raAngle+delta);
-						}
-					}
-				}
-				break;
+				if (std::fabs(2.*M_PI-lon)<0.001) // We are at meridian 0
+					lon = 0.;
+
+				const double delta = raAngle<M_PI ? M_PI : -M_PI;				
+				if (std::fabs(lon-raAngle) < 0.01 || (lon==0. && raAngle!=M_PI))					
+					textAngle = raAngle;
+				else
+					textAngle = raAngle+delta;
+
+				if (raAngle==2*M_PI && delta==-M_PI)
+					textAngle = 0;
+
+				if (withDecimalDegree)
+					text = StelUtils::radToDecDegStr(textAngle);
+				else
+					text = StelUtils::radToDmsStrAdapt(textAngle);
+
+				break;			
 			}
-			case StelCore::FrameObservercentricEcliptic:
+			case StelCore::FrameObservercentricEcliptic:						
+			{
+				double raAngle = d->raAngle;
+				if (raAngle<0.)
+					raAngle += 2.*M_PI;
+
+				if (lon<0.)
+					lon += 2*M_PI;
+
+				if (std::fabs(2.*M_PI-lon)<0.001) // We are at meridian 0
+					lon = 0.;
+
+				const double delta = raAngle<M_PI ? M_PI : -M_PI;
+				if (std::fabs(lon-raAngle) < 1. || lon==0.)
+					textAngle = raAngle;
+				else
+					textAngle = raAngle+delta;
+
+				if (raAngle==2*M_PI && delta==-M_PI)
+					textAngle = 0;
+
+				if (withDecimalDegree)
+					text = StelUtils::radToDecDegStr(textAngle);
+				else
+					text = StelUtils::radToDmsStrAdapt(textAngle);
+
+				break;			
+			}
 			case StelCore::FrameGalactic:
 			{
 				double raAngle = M_PI-d->raAngle;
 				lon = M_PI-lon;
+
 				if (raAngle<0)
 					raAngle=+2.*M_PI;
+
 				if (lon<0)
 					lon=+2.*M_PI;
 
-				if (std::fabs(2.*M_PI-lon)<0.01)
+				if (std::fabs(2.*M_PI-lon)<0.01) // We are at meridian 0
+					lon = 0.;
+
+				if (std::fabs(lon-raAngle) < 0.01)
+					textAngle = -raAngle+M_PI;
+				else
+				{
+					const double delta = raAngle<M_PI ? M_PI : -M_PI;
+					textAngle = -raAngle-delta+M_PI;
+				}
+
+				if (withDecimalDegree)
+					text = StelUtils::radToDecDegStr(textAngle);
+				else
+					text = StelUtils::radToDmsStrAdapt(textAngle);
+				break;
+			}
+			default:			
+			{
+				if (std::fabs(2.*M_PI-lon)<0.001)
 				{
 					// We are at meridian 0
 					lon = 0.;
 				}
-				if (std::fabs(lon-raAngle) < 0.01)
-					text = StelUtils::radToDmsStrAdapt(-raAngle+M_PI);
+				const double delta = d->raAngle<M_PI ? M_PI : -M_PI;
+				if (std::fabs(lon-d->raAngle) < 1. || lon==0. || d->raAngle==M_PI)
+					textAngle = d->raAngle;
 				else
-				{
-					const double delta = raAngle<M_PI ? M_PI : -M_PI;
-					text = StelUtils::radToDmsStrAdapt(-raAngle-delta+M_PI);
-				}
-				break;
-			}
-			default:
-			{
-				if (cFOV<50.)
-					text = StelUtils::radToHmsStrAdapt(d->raAngle);
+					textAngle = d->raAngle+delta;
+
+				if (d->raAngle+delta==0.)
+					textAngle = M_PI;
+
+				if (withDecimalDegree)
+					text = StelUtils::radToDecDegStr(textAngle,false,true);
 				else
-				{
-					if (std::fabs(2.*M_PI-lon)<0.01)
-					{
-						// We are at meridian 0
-						lon = 0.;
-					}
-					if (std::fabs(lon-d->raAngle) < 0.01)
-						text = StelUtils::radToHmsStrAdapt(d->raAngle);
-					else
-					{
-						const double delta = d->raAngle<M_PI ? M_PI : -M_PI;
-						text = StelUtils::radToHmsStrAdapt(d->raAngle+delta);
-					}
-				}
+					text = StelUtils::radToHmsStrAdapt(textAngle);
 			}
 		}
 	}
@@ -284,6 +306,8 @@ void SkyGrid::draw(const StelCore* core) const
 	const StelProjectorP prj = core->getProjection(frameType, frameType!=StelCore::FrameAltAz ? StelCore::RefractionAuto : StelCore::RefractionOff);
 	if (!fader.getInterstate())
 		return;
+
+	bool withDecimalDegree = dynamic_cast<StelGui*>(StelApp::getInstance().getGui())->getFlagShowDecimalDegrees();
 
 	// Look for all meridians and parallels intersecting with the disk bounding the viewport
 	// Check whether the pole are in the viewport
@@ -421,7 +445,10 @@ void SkyGrid::draw(const StelCore* core) const
 	for (i=0; i<maxNbIter; ++i)
 	{
 		StelUtils::rectToSphe(&lon2, &lat2, fpt);
-		userData.text = StelUtils::radToDmsStrAdapt(lat2);
+		if (withDecimalDegree)
+			userData.text = StelUtils::radToDecDegStr(lat2);
+		else
+			userData.text = StelUtils::radToDmsStrAdapt(lat2);
 
 		parallelSphericalCap.d = fpt[2];
 		if (parallelSphericalCap.d>0.9999999)
@@ -475,7 +502,10 @@ void SkyGrid::draw(const StelCore* core) const
 		for (int j=0; j<maxNbIter-i; ++j)
 		{
 			StelUtils::rectToSphe(&lon2, &lat2, fpt);
-			userData.text = StelUtils::radToDmsStrAdapt(lat2);
+			if (withDecimalDegree)
+				userData.text = StelUtils::radToDecDegStr(lat2);
+			else
+				userData.text = StelUtils::radToDmsStrAdapt(lat2);
 
 			parallelSphericalCap.d = fpt[2];
 			const Vec3d rotCenter(0,0,parallelSphericalCap.d);
@@ -559,9 +589,9 @@ void SkyLine::updateLabel()
 			frameType = StelCore::FrameAltAz;
 			label = q_("Horizon");
 			break;
-		case GALACTICPLANE:
+		case GALACTICEQUATOR:
 			frameType = StelCore::FrameGalactic;
-			label = q_("Galactic Plane");
+			label = q_("Galactic Equator");
 			break;
 	}
 }
@@ -647,7 +677,7 @@ GridLinesMgr::GridLinesMgr()
 	eclipticLine = new SkyLine(SkyLine::ECLIPTIC);
 	meridianLine = new SkyLine(SkyLine::MERIDIAN);
 	horizonLine = new SkyLine(SkyLine::HORIZON);
-	galacticPlaneLine = new SkyLine(SkyLine::GALACTICPLANE);
+	galacticEquatorLine = new SkyLine(SkyLine::GALACTICEQUATOR);
 }
 
 GridLinesMgr::~GridLinesMgr()
@@ -661,7 +691,7 @@ GridLinesMgr::~GridLinesMgr()
 	delete eclipticLine;
 	delete meridianLine;
 	delete horizonLine;
-	delete galacticPlaneLine;
+	delete galacticEquatorLine;
 }
 
 /*************************************************************************
@@ -688,7 +718,7 @@ void GridLinesMgr::init()
 	setFlagEclipticLine(conf->value("viewing/flag_ecliptic_line").toBool());
 	setFlagMeridianLine(conf->value("viewing/flag_meridian_line").toBool());
 	setFlagHorizonLine(conf->value("viewing/flag_horizon_line").toBool());
-	setFlagGalacticPlaneLine(conf->value("viewing/flag_galactic_plane_line").toBool());
+	setFlagGalacticEquatorLine(conf->value("viewing/flag_galactic_equator_line").toBool());
 	
 	StelApp& app = StelApp::getInstance();
 	connect(&app, SIGNAL(colorSchemeChanged(const QString&)), this, SLOT(setStelStyle(const QString&)));
@@ -704,7 +734,7 @@ void GridLinesMgr::init()
 	addAction("actionShow_Equatorial_J2000_Grid", displayGroup, N_("Equatorial J2000 grid"), "equatorJ2000GridDisplayed");
 	addAction("actionShow_Ecliptic_J2000_Grid", displayGroup, N_("Ecliptic J2000 grid"), "eclipticJ2000GridDisplayed");
 	addAction("actionShow_Galactic_Grid", displayGroup, N_("Galactic grid"), "galacticGridDisplayed");
-	addAction("actionShow_Galactic_Plane_Line", displayGroup, N_("Galactic plane"), "galacticPlaneLineDisplayed");
+	addAction("actionShow_Galactic_Equator_Line", displayGroup, N_("Galactic equator"), "galacticEquatorLineDisplayed");
 }
 
 void GridLinesMgr::update(double deltaTime)
@@ -719,7 +749,7 @@ void GridLinesMgr::update(double deltaTime)
 	eclipticLine->update(deltaTime);
 	meridianLine->update(deltaTime);
 	horizonLine->update(deltaTime);
-	galacticPlaneLine->update(deltaTime);
+	galacticEquatorLine->update(deltaTime);
 }
 
 void GridLinesMgr::draw(StelCore* core)
@@ -733,7 +763,7 @@ void GridLinesMgr::draw(StelCore* core)
 	eclipticLine->draw(core);
 	meridianLine->draw(core);
 	horizonLine->draw(core);
-	galacticPlaneLine->draw(core);
+	galacticEquatorLine->draw(core);
 }
 
 void GridLinesMgr::setStelStyle(const QString& section)
@@ -751,7 +781,7 @@ void GridLinesMgr::setStelStyle(const QString& section)
 	setColorEclipticLine(StelUtils::strToVec3f(conf->value(section+"/ecliptic_color", defaultColor).toString()));
 	setColorMeridianLine(StelUtils::strToVec3f(conf->value(section+"/meridian_color", defaultColor).toString()));
 	setColorHorizonLine(StelUtils::strToVec3f(conf->value(section+"/horizon_color", defaultColor).toString()));
-	setColorGalacticPlaneLine(StelUtils::strToVec3f(conf->value(section+"/galactic_plane_color", defaultColor).toString()));
+	setColorGalacticEquatorLine(StelUtils::strToVec3f(conf->value(section+"/galactic_equator_color", defaultColor).toString()));
 }
 
 void GridLinesMgr::updateLineLabels()
@@ -760,7 +790,7 @@ void GridLinesMgr::updateLineLabels()
 	eclipticLine->updateLabel();
 	meridianLine->updateLabel();
 	horizonLine->updateLabel();
-	galacticPlaneLine->updateLabel();
+	galacticEquatorLine->updateLabel();
 }
 
 //! Set flag for displaying Azimuthal Grid
@@ -989,27 +1019,27 @@ void GridLinesMgr::setColorHorizonLine(const Vec3f& newColor)
 	}
 }
 
-//! Set flag for displaying GalacticPlane Line
-void GridLinesMgr::setFlagGalacticPlaneLine(const bool displayed)
+//! Set flag for displaying Galactic Equator Line
+void GridLinesMgr::setFlagGalacticEquatorLine(const bool displayed)
 {
-	if(displayed != galacticPlaneLine->isDisplayed()) {
-		galacticPlaneLine->setDisplayed(displayed);
-		emit galacticPlaneLineDisplayedChanged(displayed);
+	if(displayed != galacticEquatorLine->isDisplayed()) {
+		galacticEquatorLine->setDisplayed(displayed);
+		emit galacticEquatorLineDisplayedChanged(displayed);
 	}
 }
-//! Get flag for displaying GalacticPlane Line
-bool GridLinesMgr::getFlagGalacticPlaneLine(void) const
+//! Get flag for displaying Galactic Equator Line
+bool GridLinesMgr::getFlagGalacticEquatorLine(void) const
 {
-	return galacticPlaneLine->isDisplayed();
+	return galacticEquatorLine->isDisplayed();
 }
-Vec3f GridLinesMgr::getColorGalacticPlaneLine(void) const
+Vec3f GridLinesMgr::getColorGalacticEquatorLine(void) const
 {
-	return galacticPlaneLine->getColor();
+	return galacticEquatorLine->getColor();
 }
-void GridLinesMgr::setColorGalacticPlaneLine(const Vec3f& newColor)
+void GridLinesMgr::setColorGalacticEquatorLine(const Vec3f& newColor)
 {
-	if(newColor != galacticPlaneLine->getColor()) {
-		galacticPlaneLine->setColor(newColor);
-		emit galacticPlaneLineColorChanged(newColor);
+	if(newColor != galacticEquatorLine->getColor()) {
+		galacticEquatorLine->setColor(newColor);
+		emit galacticEquatorLineColorChanged(newColor);
 	}
 }

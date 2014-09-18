@@ -25,6 +25,7 @@
 #include <QDeclarativeView>
 #include <QCoreApplication>
 #include <QEventLoop>
+#include <QOpenGLContext>
 
 class QDeclarativeItem;
 class QGLWidget;
@@ -147,6 +148,8 @@ private:
 	void startMainLoop();
 	
 	QString getSupportedOpenGLVersion() const;
+	//! provide extensive OpenGL dignostics in logfile.
+	void dumpOpenGLdiagnostics() const;
 
 	//! The StelMainView singleton
 	static StelMainView* singleton;

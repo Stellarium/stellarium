@@ -47,6 +47,9 @@
 #include <QWidget>
 #include <QWindow>
 #include <QDeclarativeContext>
+#include <QPinchGesture>
+#include <QOpenGLShader>
+#include <QOpenGLShaderProgram>
 
 #include <clocale>
 
@@ -66,9 +69,12 @@ protected:
 	void wheelEvent(QGraphicsSceneWheelEvent *event);
 	void keyPressEvent(QKeyEvent *event);
 	void keyReleaseEvent(QKeyEvent *event);
+	bool event(QEvent * e);
 private:
 	double previousPaintTime;
 	void onSizeChanged();
+	void pinchTriggered(QPinchGesture *gesture);
+	bool gestureEvent(QGestureEvent *event);
 };
 
 //! Initialize and render Stellarium gui.
@@ -87,6 +93,8 @@ StelSkyItem::StelSkyItem(QDeclarativeItem* parent)
 	setObjectName("SkyItem");
 	setFlag(QGraphicsItem::ItemHasNoContents, false);
 	setAcceptHoverEvents(true);
+	setAcceptTouchEvents(true);
+	grabGesture(Qt::PinchGesture);
 	setAcceptedMouseButtons(Qt::LeftButton | Qt::RightButton | Qt::MiddleButton);
 	connect(this, &StelSkyItem::widthChanged, this, &StelSkyItem::onSizeChanged);
 	connect(this, &StelSkyItem::heightChanged, this, &StelSkyItem::onSizeChanged);
@@ -157,6 +165,53 @@ void StelSkyItem::wheelEvent(QGraphicsSceneWheelEvent *event)
 	pos.setY(height() - 1 - pos.y());
 	QWheelEvent newEvent(QPoint(pos.x(),pos.y()), event->delta(), event->buttons(), event->modifiers(), event->orientation());
 	StelApp::getInstance().handleWheel(&newEvent);
+}
+
+bool StelSkyItem::event(QEvent * e)
+{
+	switch (e->type()){
+	case QEvent::TouchBegin:
+	case QEvent::TouchUpdate:
+	case QEvent::TouchEnd:
+	{
+		QTouchEvent *touchEvent = static_cast<QTouchEvent *>(e);
+		QList<QTouchEvent::TouchPoint> touchPoints = touchEvent->touchPoints();
+
+		if (touchPoints.count() == 1)
+			setAcceptedMouseButtons(Qt::LeftButton | Qt::RightButton | Qt::MiddleButton);
+
+		return true;
+	}
+		break;
+
+	case QEvent::Gesture:
+		setAcceptedMouseButtons(0);
+		return gestureEvent(static_cast<QGestureEvent*>(e));
+		break;
+
+	default:
+		return false;
+	}
+}
+
+bool StelSkyItem::gestureEvent(QGestureEvent *event)
+{
+	if (QGesture *pinch = event->gesture(Qt::PinchGesture))
+		pinchTriggered(static_cast<QPinchGesture *>(pinch));
+
+	return true;
+}
+
+void StelSkyItem::pinchTriggered(QPinchGesture *gesture)
+{
+	QPinchGesture::ChangeFlags changeFlags = gesture->changeFlags();
+	if (changeFlags & QPinchGesture::ScaleFactorChanged) {
+		qreal zoom = gesture->scaleFactor();
+
+		if (zoom < 2 && zoom > 0.5){
+			StelApp::getInstance().handlePinch(zoom, true);
+		}
+	}
 }
 
 void StelSkyItem::keyPressEvent(QKeyEvent* event)
@@ -294,6 +349,10 @@ void StelMainView::init(QSettings* conf)
 	qDebug() << "GL renderer is" << QString(reinterpret_cast<const char*>(glGetString(GL_RENDERER)));
 	qDebug() << "GL Shading Language version is" << QString(reinterpret_cast<const char*>(glGetString(GL_SHADING_LANGUAGE_VERSION)));
 	
+	// Only give extended info if called on command line, for diagnostic.
+	if (qApp->property("dump_OpenGL_details").toBool())
+		dumpOpenGLdiagnostics();
+
 	stelApp= new StelApp();
 	stelApp->setGui(gui);
 	stelApp->init(conf);
@@ -301,7 +360,6 @@ void StelMainView::init(QSettings* conf)
 	actionMgr->addAction("actionSave_Screenshot_Global", N_("Miscellaneous"), N_("Save screenshot"), this, "saveScreenShot()", "Ctrl+S");
 	actionMgr->addAction("actionSet_Full_Screen_Global", N_("Display Options"), N_("Full-screen mode"), this, "fullScreen", "F11");
 	
-
 	StelPainter::initGLShaders();
 
 	setResizeMode(QDeclarativeView::SizeRootObjectToView);
@@ -394,6 +452,73 @@ QString StelMainView::getSupportedOpenGLVersion() const
 
 	return ver.join(", ");
 }
+
+void StelMainView::dumpOpenGLdiagnostics() const
+{
+	// GZ: Debug info about OpenGL capabilities.
+	QOpenGLContext *context = QOpenGLContext::currentContext();
+	if (context)
+	{
+		context->functions()->initializeOpenGLFunctions();
+		qDebug() << "initializeOpenGLFunctions()...";
+	}
+	else
+		qDebug() << "No OpenGL context";
+
+	QOpenGLFunctions::OpenGLFeatures oglFeatures=context->functions()->openGLFeatures();
+	qDebug() << "OpenGL Features:";
+	qDebug() << " - glActiveTexture() function" << (oglFeatures&QOpenGLFunctions::Multitexture ? "is" : "is NOT") << "available.";
+	qDebug() << " - Shader functions" << (oglFeatures&QOpenGLFunctions::Shaders ? "are" : "are NOT ") << "available.";
+	qDebug() << " - Vertex and index buffer functions" << (oglFeatures&QOpenGLFunctions::Buffers ? "are" : "are NOT") << "available.";
+	qDebug() << " - Framebuffer object functions" << (oglFeatures&QOpenGLFunctions::Framebuffers ? "are" : "are NOT") << "available.";
+	qDebug() << " - glBlendColor()" << (oglFeatures&QOpenGLFunctions::BlendColor ? "is" : "is NOT") << "available.";
+	qDebug() << " - glBlendEquation()" << (oglFeatures&QOpenGLFunctions::BlendEquation ? "is" : "is NOT") << "available.";
+	qDebug() << " - glBlendEquationSeparate()" << (oglFeatures&QOpenGLFunctions::BlendEquationSeparate ? "is" : "is NOT") << "available.";
+	qDebug() << " - glBlendFuncSeparate()" << (oglFeatures&QOpenGLFunctions::BlendFuncSeparate ? "is" : "is NOT") << "available.";
+	qDebug() << " - Blend subtract mode" << (oglFeatures&QOpenGLFunctions::BlendSubtract ? "is" : "is NOT") << "available.";
+	qDebug() << " - Compressed texture functions" << (oglFeatures&QOpenGLFunctions::CompressedTextures ? "are" : "are NOT") << "available.";
+	qDebug() << " - glSampleCoverage() function" << (oglFeatures&QOpenGLFunctions::Multisample ? "is" : "is NOT") << "available.";
+	qDebug() << " - Separate stencil functions" << (oglFeatures&QOpenGLFunctions::StencilSeparate ? "are" : "are NOT") << "available.";
+	qDebug() << " - Non power of two textures" << (oglFeatures&QOpenGLFunctions::NPOTTextures ? "are" : "are NOT") << "available.";
+	qDebug() << " - Non power of two textures" << (oglFeatures&QOpenGLFunctions::NPOTTextureRepeat ? "can" : "CANNOT") << "use GL_REPEAT as wrap parameter.";
+	qDebug() << " - The fixed function pipeline" << (oglFeatures&QOpenGLFunctions::FixedFunctionPipeline ? "is" : "is NOT") << "available.";
+
+	qDebug() << "OpenGL shader capabilities and details:";
+	qDebug() << " - Vertex Shader:" << (QOpenGLShader::hasOpenGLShaders(QOpenGLShader::Vertex, context) ? "YES" : "NO");
+	qDebug() << " - Fragment Shader:" << (QOpenGLShader::hasOpenGLShaders(QOpenGLShader::Fragment, context) ? "YES" : "NO");
+	qDebug() << " - Geometry Shader:" << (QOpenGLShader::hasOpenGLShaders(QOpenGLShader::Geometry, context) ? "YES" : "NO");
+	qDebug() << " - TessellationControl Shader:" << (QOpenGLShader::hasOpenGLShaders(QOpenGLShader::TessellationControl, context) ? "YES" : "NO");
+	qDebug() << " - TessellationEvaluation Shader:" << (QOpenGLShader::hasOpenGLShaders(QOpenGLShader::TessellationEvaluation, context) ? "YES" : "NO");
+	qDebug() << " - Compute Shader:" << (QOpenGLShader::hasOpenGLShaders(QOpenGLShader::Compute, context) ? "YES" : "NO");
+
+	// GZ: List available extensions. Not sure if this is in any way useful?
+	QSet<QByteArray> extensionSet=context->extensions();
+	qDebug() << "We have" << extensionSet.count() << "OpenGL extensions:";
+	QMap<QString, QString> extensionMap;
+	QSetIterator<QByteArray> iter(extensionSet);
+	while (iter.hasNext())
+	{
+		if (!iter.peekNext().isEmpty()) // Don't insert empty lines
+			extensionMap.insert(QString(iter.peekNext()), QString(iter.peekNext()));
+		iter.next();
+	}
+	QMapIterator<QString, QString> iter2(extensionMap);
+	while (iter2.hasNext())
+		qDebug() << " -" << iter2.next().key();
+
+	QFunctionPointer programParameterPtr =context->getProcAddress("glProgramParameteri");
+	if (programParameterPtr == 0)
+		qDebug() << "glProgramParameteri cannot be resolved here. BAD!";
+	//else
+	//	qDebug() << "glProgramParameteri can be resolved. GOOD!";
+	programParameterPtr =context->getProcAddress("glProgramParameteriEXT");
+	if (programParameterPtr == 0)
+		qDebug() << "glProgramParameteriEXT cannot be resolved here. BAD!";
+	//else
+	//	qDebug() << "glProgramParameteriEXT can be resolved here. GOOD!";
+
+}
+
 
 void StelMainView::deinit()
 {

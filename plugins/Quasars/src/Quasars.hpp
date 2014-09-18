@@ -101,6 +101,8 @@ public:
 	virtual QStringList listMatchingObjects(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false) const;
 
 	virtual QStringList listAllObjects(bool inEnglish) const;
+	virtual QStringList listAllObjectsByType(const QString& objType, bool inEnglish) const { Q_UNUSED(objType) Q_UNUSED(inEnglish) return QStringList(); }
+
 	virtual QString getName() const { return "Quasars"; }
 
 	//! get a Quasar object by identifier

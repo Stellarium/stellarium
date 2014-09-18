@@ -156,7 +156,7 @@ protected:
 	QString name;          //! Read from landscape.ini:[landscape]name
 	QString author;        //! Read from landscape.ini:[landscape]author
 	QString description;   //! Read from landscape.ini:[landscape]description
-	//float nightBrightness;
+
 	float minBrightness;   //! Read from landscape.ini:[landscape]minimal_brightness. Allows minimum visibility that cannot be underpowered.
 	float landscapeBrightness;  //! brightness [0..1] to draw the landscape. Computed by the LandscapeMgr.
 	float lightScapeBrightness; //! can be used to draw nightscape texture (e.g. city light pollution), if available. Computed by the LandscapeMgr.
@@ -197,6 +197,8 @@ protected:
 //! As of V0.13, [landscape]calibrated=true and [landscape]tan_mode=true go together for cylindrical panoramas.
 //! It is more involved to configure, but may still be preferred if you require the resolution, e.g. for alignment studies
 //! for archaeoastronomy. In this case, don't forget to set calibrated=true in landscape.ini.
+//! Since V0.13.1, also this landscape has a self-luminous (light pollution) option: Configure light<n> entries with textures overlaid the tex<n> textures. Only textures with light are necessary!
+//! Can be easily made using layers with e.g. Photoshop or Gimp.
 class LandscapeOldStyle : public Landscape
 {
 public:
@@ -210,12 +212,14 @@ protected:
 	typedef struct
 	{
 		StelTextureSP tex;
+		StelTextureSP tex_illum; // optional light texture.
 		float texCoords[4];
 	} landscapeTexCoord;
 
 private:
 	void drawFog(StelCore* core, StelPainter&) const;
-	void drawDecor(StelCore* core, StelPainter&) const;
+	// GZ NEW: drawLight selects only the self-illuminating panels.
+	void drawDecor(StelCore* core, StelPainter&, const bool drawLight=false) const;
 	void drawGround(StelCore* core, StelPainter&) const;
 	QVector<double> groundVertexArr;
 	QVector<float> groundTexCoordArr;
@@ -242,6 +246,7 @@ private:
 	{
 		StelVertexArray arr;
 		StelTextureSP tex;
+		bool light; // GZ NEW: true if texture is self-lighting.
 	};
 
 	QList<LOSSide> precomputedSides;

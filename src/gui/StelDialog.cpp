@@ -28,6 +28,7 @@
 #include <QGraphicsProxyWidget>
 #include <QStyleOptionGraphicsItem>
 #include <QSettings>
+#include <QScroller>
 
 class CustomProxy : public QGraphicsProxyWidget
 {
@@ -153,5 +154,19 @@ void StelDialog::setVisible(bool v)
 		emit visibleChanged(false);
 		//proxy->clearFocus();
 		StelMainView::getInstance().focusSky();
+	}
+}
+
+void StelDialog::installKineticScrolling(QList<QWidget *> addscroll)
+{
+	return; // Temporary disable feature, bug in Qt: https://bugreports.qt-project.org/browse/QTBUG-41299
+
+	if (StelApp::getInstance().getSettings()->value("gui/flag_enable_kinetic_scrolling", true).toBool() == false)
+		return;
+
+	foreach(QWidget * w, addscroll)
+	{
+		QScroller::grabGesture(w, QScroller::LeftMouseButtonGesture);
+		QScroller::scroller(w);
 	}
 }

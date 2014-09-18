@@ -29,6 +29,7 @@
 #include "StelGuiItems.hpp"
 #include "StelObjectMgr.hpp"
 #include "StelUtils.hpp"
+#include "SolarSystem.hpp"
 #include "PointerCoordinates.hpp"
 #include "PointerCoordinatesWindow.hpp"
 
@@ -61,6 +62,7 @@ StelPluginInfo PointerCoordinatesStelPluginInterface::getPluginInfo() const
 
 PointerCoordinates::PointerCoordinates()
 	: currentPlace(TopRight)
+	, currentCoordinateSystem(RaDecJ2000)
 	, flagShowCoordinates(false)
 	, flagEnableAtStartup(false)
 	, flagShowCoordinatesButton(false)
@@ -92,7 +94,7 @@ void PointerCoordinates::init()
 	// populate settings from main config file.
 	loadConfiguration();
 
-	addAction("actionShow_MousePointer_Coordinates", N_("Pointer Coordinates"), N_("Show equatorial coordinates (J2000.0) of the mouse pointer"), "enabled", "");
+	addAction("actionShow_MousePointer_Coordinates", N_("Pointer Coordinates"), N_("Show coordinates of the mouse pointer"), "enabled", "");
 
 	enableCoordinates(getFlagEnableAtStartup());
 	setFlagShowCoordinatesButton(flagShowCoordinatesButton);
@@ -123,9 +125,74 @@ void PointerCoordinates::draw(StelCore *core)
 	// calculate position of mouse cursor via position of center of the screen (and invert axis Y)
 	prj->unProject(prj->getViewportPosX()+wh+mx, prj->getViewportPosY()+hh+1-my, mousePosition);
 
-	double dec_j2000, ra_j2000;
-	StelUtils::rectToSphe(&ra_j2000,&dec_j2000,mousePosition); // Calculate RA/DE (J2000.0) and show it...
-	QString coordsText = QString("%1/%2").arg(StelUtils::radToHmsStr(ra_j2000, true)).arg(StelUtils::radToDmsStr(dec_j2000, true));
+	QString coordsText;
+	double cx, cy;
+	switch (getCurrentCoordinateSystem())
+	{
+		case RaDecJ2000:
+		{
+			StelUtils::rectToSphe(&cx,&cy,mousePosition); // Calculate RA/DE (J2000.0) and show it...
+			coordsText = QString("%1: %2/%3")
+					.arg(qc_("RA/Dec (J2000.0)", "abbreviated in the plugin"))
+					.arg(StelUtils::radToHmsStr(cx, true))
+					.arg(StelUtils::radToDmsStr(cy, true));
+			break;
+		}
+		case RaDec:
+		{
+			StelUtils::rectToSphe(&cx,&cy,core->j2000ToEquinoxEqu(mousePosition)); // Calculate RA/DE and show it...
+			coordsText = QString("%1: %2/%3")
+					.arg(qc_("RA/Dec", "abbreviated in the plugin"))
+					.arg(StelUtils::radToHmsStr(cx, true))
+					.arg(StelUtils::radToDmsStr(cy, true));
+			break;
+		}
+		case AltAzi:
+		{
+			StelUtils::rectToSphe(&cy,&cx,core->j2000ToAltAz(mousePosition, StelCore::RefractionAuto));
+			cy = 3.*M_PI - cy;  // N is zero, E is 90 degrees
+			if (cy > M_PI*2)
+				cy -= M_PI*2;
+
+			coordsText = QString("%1: %2/%3")
+					.arg(qc_("Az/Alt", "abbreviated in the plugin"))
+					.arg(StelUtils::radToDmsStr(cy))
+					.arg(StelUtils::radToDmsStr(cx));
+			break;
+		}
+		case Galactic:
+		{
+			StelUtils::rectToSphe(&cx,&cy,core->j2000ToGalactic(mousePosition)); // Calculate galactic position and show it...
+			coordsText = QString("%1: %2/%3")
+					.arg(qc_("Gal. Long/Lat", "abbreviated in the plugin"))
+					.arg(StelUtils::radToDmsStr(cx, true))
+					.arg(StelUtils::radToDmsStr(cy, true));
+			break;
+		}
+		case Ecliptic:
+		{
+			double lambda, beta;
+			StelUtils::rectToSphe(&cx,&cy,core->j2000ToEquinoxEqu(mousePosition));
+			StelUtils::ctRadec2Ecl(cx, cy, GETSTELMODULE(SolarSystem)->getEarth()->getRotObliquity(2451545.0), &lambda, &beta); // Calculate ecliptic position and show it...
+			if (lambda<0) lambda+=2.0*M_PI;
+			coordsText = QString("%1: %2/%3")
+					.arg(qc_("Ecl. Long/Lat (J2000.0)", "abbreviated in the plugin"))
+					.arg(StelUtils::radToDmsStr(lambda, true))
+					.arg(StelUtils::radToDmsStr(beta, true));
+			break;
+		}
+		case HourAngle:
+		{
+			Vec3d v = core->j2000ToAltAz(mousePosition, StelCore::RefractionAuto);
+			StelUtils::rectToSphe(&cx,&cy,Mat4d::zrotation(-core->getLocalSiderealTime()+((core->getDeltaT(core->getJDay())/240.)*M_PI/180.))*core->altAzToEquinoxEqu(v, StelCore::RefractionOff));
+			cx = 2.*M_PI-cx;
+			coordsText = QString("%1: %2/%3")
+					.arg(qc_("HA/Dec", "abbreviated in the plugin"))
+					.arg(StelUtils::radToHmsStr(cx))
+					.arg(StelUtils::radToDmsStr(cy));
+			break;		
+		}
+	}
 
 	sPainter.drawText(getCoordinatesPlace(coordsText).first, getCoordinatesPlace(coordsText).second, coordsText);
 }
@@ -175,6 +242,7 @@ void PointerCoordinates::loadConfiguration(void)
 	setFontSize(conf->value("font_size", 14).toInt());
 	flagShowCoordinatesButton = conf->value("flag_show_button", true).toBool();
 	setCurrentCoordinatesPlaceKey(conf->value("current_displaying_place", "TopRight").toString());
+	setCurrentCoordinateSystemKey(conf->value("current_coordinate_system", "RaDecJ2000").toString());
 
 	conf->endGroup();
 }
@@ -186,6 +254,7 @@ void PointerCoordinates::saveConfiguration(void)
 	conf->setValue("enable_at_startup", getFlagEnableAtStartup());
 	conf->setValue("flag_show_button", getFlagShowCoordinatesButton());
 	conf->setValue("current_displaying_place", getCurrentCoordinatesPlaceKey());
+	conf->setValue("current_coordinate_system", getCurrentCoordinateSystemKey());
 	//conf->setValue("text_color", "1,0.5,0");
 	conf->setValue("font_size", getFontSize());
 
@@ -232,6 +301,23 @@ QString PointerCoordinates::getCurrentCoordinatesPlaceKey() const
 	return metaObject()->enumerator(metaObject()->indexOfEnumerator("CoordinatesPlace")).key(currentPlace);
 }
 
+void PointerCoordinates::setCurrentCoordinateSystemKey(QString key)
+{
+	const QMetaEnum& en = metaObject()->enumerator(metaObject()->indexOfEnumerator("CoordinateSystem"));
+	CoordinateSystem coordSystem = (CoordinateSystem)en.keyToValue(key.toLatin1().data());
+	if (coordSystem<0)
+	{
+		qWarning() << "Unknown coordinate system: " << key << "setting \"RaDecJ2000\" instead";
+		coordSystem = RaDecJ2000;
+	}
+	setCurrentCoordinateSystem(coordSystem);
+}
+
+QString PointerCoordinates::getCurrentCoordinateSystemKey() const
+{
+	return metaObject()->enumerator(metaObject()->indexOfEnumerator("CoordinateSystem")).key(currentCoordinateSystem);
+}
+
 QPair<int, int> PointerCoordinates::getCoordinatesPlace(QString text)
 {
 	int x = 0, y = 0;
@@ -241,17 +327,23 @@ QPair<int, int> PointerCoordinates::getCoordinatesPlace(QString text)
 	switch(getCurrentCoordinatesPlace())
 	{
 		case TopCenter:
+		{
 			x = gui->getSkyGui()->getSkyGuiWidth()/2 - fs.width()/2;
 			y = gui->getSkyGui()->getSkyGuiHeight() - fs.height()*coeff;
 			break;
+		}
 		case TopRight:
+		{
 			x = 3*gui->getSkyGui()->getSkyGuiWidth()/4 - fs.width()/2;
 			y = gui->getSkyGui()->getSkyGuiHeight() - fs.height()*coeff;
 			break;
+		}
 		case RightBottomCorner:
+		{
 			x = gui->getSkyGui()->getSkyGuiWidth() - fs.width() - 10*coeff;
 			y = fs.height();
 			break;
+		}
 	}
 	return qMakePair(x, y);
 }

@@ -119,6 +119,7 @@ void SolarSystem::init()
 	QSettings* conf = StelApp::getInstance().getSettings();
 	Q_ASSERT(conf);
 
+	Planet::init();
 	loadPlanets();	// Load planets data
 
 	// Compute position and matrix of sun and all the satellites (ie planets)
@@ -1069,7 +1070,7 @@ float SolarSystem::getPlanetVMagnitude(QString planetName, bool withExtinction) 
 QString SolarSystem::getPlanetType(QString planetName) const
 {
 	PlanetP p = searchByEnglishName(planetName);
-	return p->getPlanetType();
+	return p->getPlanetTypeString();
 }
 
 double SolarSystem::getDistanceToPlanet(QString planetName) const
@@ -1375,21 +1376,23 @@ QStringList SolarSystem::listMatchingObjects(const QString& objPrefix, int maxNb
 	return result;
 }
 
-QStringList SolarSystem::listAllObjects(bool inEnglish) const
+QStringList SolarSystem::listAllObjectsByType(const QString &objType, bool inEnglish) const
 {
 	QStringList result;
 	if (inEnglish)
 	{
 		foreach(const PlanetP& p, systemPlanets)
 		{
-			result << p->getEnglishName();
+			if (p->getPlanetTypeString()==objType)
+				result << p->getEnglishName();
 		}
 	}
 	else
 	{
 		foreach(const PlanetP& p, systemPlanets)
 		{
-			result << p->getNameI18n();
+			if (p->getPlanetTypeString()==objType)
+				result << p->getNameI18n();
 		}
 	}
 	return result;

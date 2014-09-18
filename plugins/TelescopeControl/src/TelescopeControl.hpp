@@ -101,6 +101,7 @@ public:
 	virtual QStringList listMatchingObjects(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false) const;
 	// empty as its not celestial objects
 	virtual QStringList listAllObjects(bool inEnglish) const { Q_UNUSED(inEnglish) return QStringList(); }
+	virtual QStringList listAllObjectsByType(const QString& objType, bool inEnglish) const { Q_UNUSED(objType) Q_UNUSED(inEnglish) return QStringList(); }
 	virtual QString getName() const { return "Telescope Control"; }
 	virtual bool configureGui(bool show = true);
 	

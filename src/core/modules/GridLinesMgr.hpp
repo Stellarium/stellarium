@@ -100,14 +100,14 @@ class GridLinesMgr : public StelModule
 			   READ getColorHorizonLine
 			   WRITE setColorHorizonLine
 			   NOTIFY horizonLineColorChanged)
-	Q_PROPERTY(bool galacticPlaneLineDisplayed
-			   READ getFlagGalacticPlaneLine
-			   WRITE setFlagGalacticPlaneLine
-			   NOTIFY galacticPlaneLineDisplayedChanged)
-	Q_PROPERTY(Vec3f galacticPlaneLineColor
-			   READ getColorGalacticPlaneLine
-			   WRITE setColorGalacticPlaneLine
-			   NOTIFY galacticPlaneLineColorChanged)
+	Q_PROPERTY(bool galacticEquatorLineDisplayed
+			   READ getFlagGalacticEquatorLine
+			   WRITE setFlagGalacticEquatorLine
+			   NOTIFY galacticEquatorLineDisplayedChanged)
+	Q_PROPERTY(Vec3f galacticEquatorLineColor
+			   READ getColorGalacticEquatorLine
+			   WRITE setColorGalacticEquatorLine
+			   NOTIFY galacticEquatorLineColorChanged)
 
 public:
 	GridLinesMgr();
@@ -266,19 +266,25 @@ public slots:
 	//! @endcode
 	void setColorHorizonLine(const Vec3f& newColor);
 
-	//! Setter for displaying Galactic Plane Line.
-	void setFlagGalacticPlaneLine(const bool displayed);
-	//! Accessor for displaying Galactic Plane Line.
-	bool getFlagGalacticPlaneLine(void) const;
-	//! Get the current color of the Galactic Plane Line.
-	Vec3f getColorGalacticPlaneLine(void) const;
-	//! Set the color of the Galactic Plane Line.
-	//! @param newColor The color of galactic plane line
+	//! Setter for displaying Galactic Equator Line.
+	void setFlagGalacticEquatorLine(const bool displayed);
+	//! @deprecated Setter for displaying Galactic "Plane" (i.e., Equator) Line. Left here for compatibility with older scripts.
+	//! @note will be delete in version 0.14
+	void setFlagGalacticPlaneLine(const bool displayed) { setFlagGalacticEquatorLine(displayed); }
+	//! Accessor for displaying Galactic Equator Line.
+	bool getFlagGalacticEquatorLine(void) const;
+	//! @deprecated Accessor for displaying Galactic "Plane" (i.e., Equator) Line. Left here for compatibility with older scripts.
+	//! @note will be delete in version 0.14
+	bool getFlagGalacticPlaneLine(void) const { return getFlagGalacticEquatorLine(); }
+	//! Get the current color of the Galactic Equator Line.
+	Vec3f getColorGalacticEquatorLine(void) const;
+	//! Set the color of the Galactic Equator Line.
+	//! @param newColor The color of galactic equator line
 	//! @code
 	//! // example of usage in scripts
-	//! GridLinesMgr.setColorGalacticPlaneLine(Vec3f(1.0,0.0,0.0));
+	//! GridLinesMgr.setColorGalacticEquatorLine(Vec3f(1.0,0.0,0.0));
 	//! @endcode
-	void setColorGalacticPlaneLine(const Vec3f& newColor);
+	void setColorGalacticEquatorLine(const Vec3f& newColor);
 signals:
 	void azimuthalGridDisplayedChanged(const bool) const;
 	void azimuthalGridColorChanged(const Vec3f & newColor) const;
@@ -298,8 +304,8 @@ signals:
 	void meridianLineColorChanged(const Vec3f & newColor) const;
 	void horizonLineDisplayedChanged(const bool displayed) const;
 	void horizonLineColorChanged(const Vec3f & newColor) const;
-	void galacticPlaneLineDisplayedChanged(const bool displayed) const;
-	void galacticPlaneLineColorChanged(const Vec3f & newColor) const;
+	void galacticEquatorLineDisplayedChanged(const bool displayed) const;
+	void galacticEquatorLineColorChanged(const Vec3f & newColor) const;
 
 
 private slots:
@@ -320,7 +326,7 @@ private:
 	SkyLine * eclipticLine; 	// Ecliptic line
 	SkyLine * meridianLine; 	// Meridian line
 	SkyLine * horizonLine;		// Horizon line
-	SkyLine * galacticPlaneLine;	// line depciting the Galacitc plane as defined by the IAU definition of Galactic coordinates
+	SkyLine * galacticEquatorLine;	// line depicting the Galactic equator as defined by the IAU definition of Galactic coordinates (System II, 1958)
 };
 
 #endif // _GRIDLINESMGR_HPP_
