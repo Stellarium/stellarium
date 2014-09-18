@@ -248,7 +248,9 @@ QString radToDecDegStr(const double angle, const bool useD, const bool useC)
 	str = QString("%1%2%3").arg((sign?"+":"-"), QString::number(deg, 'f', 4), degsign);
 	if (useC)
 	{
-		deg = deg>0. ? 360.-deg : ::abs(deg);
+		if (!sign)
+			deg = 360. - deg;
+
 		str = QString("+%1%2").arg(QString::number(deg, 'f', 4), degsign);
 	}
 
