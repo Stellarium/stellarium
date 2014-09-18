@@ -45,9 +45,8 @@ public:
 	QCheckBox* getCheckBox(int pRow) { return (QCheckBox*) m_pCheckboxGroup->button(pRow); }
 
 signals:
-	// these signals are useful to handle the status of the install/remove buttons
-	void somethingToInstall(bool yes);
-	void somethingToRemove(bool yes);
+	// useful to handle the status of the install/remove buttons
+	void selectedAddOns(int toInstall, int toRemove);
 	void rowChecked(int row, bool checked);
 
 public slots:

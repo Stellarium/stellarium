@@ -89,8 +89,7 @@ void AddOnTableView::setModel(QAbstractItemModel* model)
 	m_widgets.clear();
 	m_iSelectedAddOnsToInstall.clear();
 	m_iSelectedAddOnsToRemove.clear();
-	emit(somethingToInstall(false));
-	emit(somethingToRemove(false));
+	emit (selectedAddOns(0, 0));
 
 	// Add checkbox in the last column (header)
 	int lastColumn = model->columnCount() - 1; // checkbox column
@@ -281,8 +280,7 @@ void AddOnTableView::slotRowChecked(int pRow, bool checked)
 		}
 	}
 
-	emit (somethingToInstall(m_iSelectedAddOnsToInstall.size() > 0));
-	emit (somethingToRemove(m_iSelectedAddOnsToRemove.size() > 0));
+	emit (selectedAddOns(m_iSelectedAddOnsToInstall.size(), m_iSelectedAddOnsToRemove.size()));
 
 	// update checkbox header
 	if (m_pCheckedHeader)

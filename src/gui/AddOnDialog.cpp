@@ -108,8 +108,7 @@ void AddOnDialog::createDialogContent()
 	for (int itab=0; itab<COUNT; itab++) {
 		Tab tab = (Tab)itab;
 		AddOnTableView* view = m_tableViews.value(tab);
-		connect(view, SIGNAL(somethingToInstall(bool)), ui->btnInstall, SLOT(setEnabled(bool)));
-		connect(view, SIGNAL(somethingToRemove(bool)), ui->btnRemove, SLOT(setEnabled(bool)));
+		connect(view, SIGNAL(selectedAddOns(int,int)), this, SLOT(slotUpdateButtons(int,int)));
 	}
 
 	// button Install from File
@@ -121,6 +120,16 @@ void AddOnDialog::createDialogContent()
 
 	// fix dialog width
 	updateTabBarListWidgetWidth();
+}
+
+void AddOnDialog::slotUpdateButtons(int amountToInstall, int amountToRemove)
+{
+	ui->btnInstall->setEnabled(amountToInstall > 0);
+	ui->btnRemove->setEnabled(amountToRemove > 0);
+	QString txtInstall = QString("%1 (%2)").arg(q_("Install")).arg(amountToInstall);
+	QString txtRemove = QString("%1 (%2)").arg(q_("Remove")).arg(amountToRemove);
+	ui->btnInstall->setText(txtInstall);
+	ui->btnRemove->setText(txtRemove);
 }
 
 void AddOnDialog::slotUpdateMsg(const StelAddOnMgr::AddOnMgrMsg msg)
