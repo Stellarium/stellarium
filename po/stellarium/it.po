@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-09-15 20:49+0700\n"
-"PO-Revision-Date: 2014-09-08 20:36+0000\n"
+"PO-Revision-Date: 2014-09-17 18:33+0000\n"
 "Last-Translator: Gio <gio.scino@gmail.com>\n"
 "Language-Team: Italian <it@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-09-16 06:41+0000\n"
+"X-Launchpad-Export-Date: 2014-09-18 05:56+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:106 src/core/modules/StarMgr.cpp:346
@@ -73,7 +73,7 @@ msgstr "Orizzonte"
 
 #: src/core/modules/GridLinesMgr.cpp:564
 msgid "Galactic Equator"
-msgstr ""
+msgstr "Equatore Galattico"
 
 #: src/core/modules/GridLinesMgr.cpp:698
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:331
@@ -121,7 +121,7 @@ msgstr "Griglia galattica"
 
 #: src/core/modules/GridLinesMgr.cpp:707 src/ui_viewDialog.h:1247
 msgid "Galactic equator"
-msgstr ""
+msgstr "Equatore galattico"
 
 #: src/core/modules/LandscapeMgr.cpp:355 src/ui_viewDialog.h:1176
 msgid "Atmosphere"
@@ -1136,12 +1136,12 @@ msgstr "Az/Alt: %1/%2"
 #: src/core/StelObject.cpp:174
 #, qt-format
 msgid "Ecliptic longitude/latitude (of J2000): %1/%2"
-msgstr ""
+msgstr "Longitudine eclittica/latitudine (di J2000): %1/%2"
 
 #: src/core/StelObject.cpp:179
 #, qt-format
 msgid "Ecliptic longitude/latitude (of date): %1/%2"
-msgstr ""
+msgstr "Longitudine eclittica/latitudine (della data): %1/%2"
 
 #: src/core/StelObject.cpp:186
 #, qt-format
@@ -1940,46 +1940,46 @@ msgstr "carta stellare"
 #: src/gui/SearchDialog.cpp:231
 msgctxt "coordinate system"
 msgid "Equatorial (J2000.0)"
-msgstr ""
+msgstr "Equatoriale (J2000.0)"
 
 #: src/gui/SearchDialog.cpp:232
 msgctxt "coordinate system"
 msgid "Equatorial"
-msgstr ""
+msgstr "Equatoriale"
 
 #: src/gui/SearchDialog.cpp:233
 msgctxt "coordinate system"
 msgid "Horizontal"
-msgstr ""
+msgstr "Orizzontale"
 
 #: src/gui/SearchDialog.cpp:234
 msgctxt "coordinate system"
 msgid "Galactic"
-msgstr ""
+msgstr "Galattico"
 
 #: src/gui/SearchDialog.cpp:247
 msgid "Right ascension"
-msgstr ""
+msgstr "Ascensione retta"
 
 #: src/gui/SearchDialog.cpp:249
 msgid "Declination"
-msgstr ""
+msgstr "Declinazione"
 
 #: src/gui/SearchDialog.cpp:254
 msgid "Azimuth"
-msgstr ""
+msgstr "Azimut"
 
 #: src/gui/SearchDialog.cpp:257
 msgid "Altitude"
-msgstr ""
+msgstr "Altitudine"
 
 #: src/gui/SearchDialog.cpp:262
 msgid "Longitude"
-msgstr ""
+msgstr "Longitudine"
 
 #: src/gui/SearchDialog.cpp:265
 msgid "Latitude"
-msgstr ""
+msgstr "Latitudine"
 
 #: src/gui/SearchDialog.cpp:495
 msgid "Simbad Lookup Error"
@@ -4293,6 +4293,8 @@ msgstr "Sistema di coordinate:"
 msgid ""
 "Note: this tool doesn't apply the refraction correction for coordinates."
 msgstr ""
+"Nota: questo strumento non si applica alla correzione della rifrazione per "
+"le coordinate."
 
 #: src/ui_searchDialogGui.h:696
 msgid "Position"
@@ -4570,7 +4572,7 @@ msgstr "Mostra l'eclittica"
 
 #: src/ui_viewDialog.h:1245
 msgid "Show Galactic equator line"
-msgstr ""
+msgstr "Mostra la linea dell' equatore Galattico"
 
 #: src/ui_viewDialog.h:1249
 msgid "Projection"
@@ -7471,7 +7473,7 @@ msgstr "Suggerimenti per nebulose"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:370
 msgid "Galactic equator line"
-msgstr ""
+msgstr "Linea dell' equatore galattico"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:399
 msgid "Effects"
@@ -10074,37 +10076,37 @@ msgstr "Questo plugin mostra le coordinate del puntatore del mouse."
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:97
 msgid "Show coordinates of the mouse pointer"
-msgstr ""
+msgstr "Mostra coordinate del puntatore mouse"
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:135
 msgctxt "abbreviated in the plugin"
 msgid "RA/Dec (J2000.0)"
-msgstr ""
+msgstr "RA/Dec (J2000.0)"
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:142
 msgctxt "abbreviated in the plugin"
 msgid "RA/Dec"
-msgstr ""
+msgstr "RA/Dec"
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:153
 msgctxt "abbreviated in the plugin"
 msgid "Az/Alt"
-msgstr ""
+msgstr "Az/Alt"
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:160
 msgctxt "abbreviated in the plugin"
 msgid "Gal. Long/Lat"
-msgstr ""
+msgstr "Gal. Long/Lat"
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:170
 msgctxt "abbreviated in the plugin"
 msgid "Ecl. Long/Lat (J2000.0)"
-msgstr ""
+msgstr "Ecl. Long/Lat (J2000.0)"
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:179
 msgctxt "abbreviated in the plugin"
 msgid "HA/Dec"
-msgstr ""
+msgstr "HA/Dec"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:101
 msgid "Pointer Coordinates plug-in"
@@ -10124,23 +10126,23 @@ msgstr "L'angolo in basso a destra dello schermo"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:153
 msgid "Right ascension/Declination (J2000.0)"
-msgstr ""
+msgstr "Ascensione/Declinazione retta (J2000.0)"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:154
 msgid "Right ascension/Declination"
-msgstr ""
+msgstr "Ascensione/Declinazione retta"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:156
 msgid "Ecliptic Longitude/Latitude (J2000.0)"
-msgstr ""
+msgstr "Longitudine/Latitudine eclittica (J2000.0)"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:158
 msgid "Galactic Longitude/Latitude"
-msgstr ""
+msgstr "Latitudine/Longitudine galattica"
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:300
 msgid "Show coordinates of the mouse cursor on the screen."
-msgstr ""
+msgstr "Mostra le coordinate del cursore del mouse sullo schermo."
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:301
 msgid "Enable display of coordinates at startup"
@@ -10152,11 +10154,11 @@ msgstr "Mostra pulsante plug-in nella barra degli strumenti"
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:304
 msgid "Which coordinate system will be used for displaying"
-msgstr ""
+msgstr "Quale sistema di coordinate sarà utilizzato per la visualizzazione"
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:306
 msgid "Coordinates:"
-msgstr ""
+msgstr "Coordinate:"
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:309
 msgid "Place of the string with coordinates of the mouse pointer"
