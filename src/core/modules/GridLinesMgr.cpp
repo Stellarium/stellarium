@@ -29,6 +29,7 @@
 #include "StelCore.hpp"
 #include "StelPainter.hpp"
 #include "StelSkyDrawer.hpp"
+#include "StelGui.hpp"
 
 #include <set>
 #include <QSettings>
@@ -166,6 +167,7 @@ void viewportEdgeIntersectCallback(const Vec3d& screenPos, const Vec3d& directio
 	direc.normalize();
 	const Vec4f tmpColor = d->sPainter->getColor();
 	d->sPainter->setColor(d->textColor[0], d->textColor[1], d->textColor[2], d->textColor[3]);
+	bool withDecimalDegree = dynamic_cast<StelGui*>(StelApp::getInstance().getGui())->getFlagShowDecimalDegrees();
 
 	QString text;
 	if (d->text.isEmpty())
@@ -173,7 +175,7 @@ void viewportEdgeIntersectCallback(const Vec3d& screenPos, const Vec3d& directio
 		// We are in the case of meridians, we need to determine which of the 2 labels (3h or 15h to use)
 		Vec3d tmpV;
 		d->sPainter->getProjector()->unProject(screenPos, tmpV);
-		double lon, lat;
+		double lon, lat, textAngle;
 		StelUtils::rectToSphe(&lon, &lat, tmpV);
 		switch (d->frameType)
 		{
@@ -185,14 +187,20 @@ void viewportEdgeIntersectCallback(const Vec3d& screenPos, const Vec3d& directio
 				if (std::fabs(2.*M_PI-lon)<0.001) // We are at meridian 0
 					lon = 0.;
 
-				const double delta = raAngle<M_PI ? M_PI : -M_PI;
-				if (std::fabs(lon-raAngle) < 0.01 || (lon==0. && raAngle!=M_PI))
-					text = StelUtils::radToDmsStrAdapt(raAngle);
+				const double delta = raAngle<M_PI ? M_PI : -M_PI;				
+				if (std::fabs(lon-raAngle) < 0.01 || (lon==0. && raAngle!=M_PI))					
+					textAngle = raAngle;
 				else
-					text = StelUtils::radToDmsStrAdapt(raAngle+delta);
+					textAngle = raAngle+delta;
 
 				if (raAngle==2*M_PI && delta==-M_PI)
-					text = StelUtils::radToDmsStrAdapt(0);
+					textAngle = 0;
+
+				if (withDecimalDegree)
+					text = StelUtils::radToDecDegStr(textAngle);
+				else
+					text = StelUtils::radToDmsStrAdapt(textAngle);
+
 				break;			
 			}
 			case StelCore::FrameObservercentricEcliptic:						
@@ -209,12 +217,17 @@ void viewportEdgeIntersectCallback(const Vec3d& screenPos, const Vec3d& directio
 
 				const double delta = raAngle<M_PI ? M_PI : -M_PI;
 				if (std::fabs(lon-raAngle) < 1. || lon==0.)
-					text = StelUtils::radToDmsStrAdapt(raAngle);
+					textAngle = raAngle;
 				else
-					text = StelUtils::radToDmsStrAdapt(raAngle+delta);
+					textAngle = raAngle+delta;
 
 				if (raAngle==2*M_PI && delta==-M_PI)
-					text = StelUtils::radToDmsStrAdapt(0);
+					textAngle = 0;
+
+				if (withDecimalDegree)
+					text = StelUtils::radToDecDegStr(textAngle);
+				else
+					text = StelUtils::radToDmsStrAdapt(textAngle);
 
 				break;			
 			}
@@ -233,12 +246,17 @@ void viewportEdgeIntersectCallback(const Vec3d& screenPos, const Vec3d& directio
 					lon = 0.;
 
 				if (std::fabs(lon-raAngle) < 0.01)
-					text = StelUtils::radToDmsStrAdapt(-raAngle+M_PI);
+					textAngle = -raAngle+M_PI;
 				else
 				{
 					const double delta = raAngle<M_PI ? M_PI : -M_PI;
-					text = StelUtils::radToDmsStrAdapt(-raAngle-delta+M_PI);
+					textAngle = -raAngle-delta+M_PI;
 				}
+
+				if (withDecimalDegree)
+					text = StelUtils::radToDecDegStr(textAngle);
+				else
+					text = StelUtils::radToDmsStrAdapt(textAngle);
 				break;
 			}
 			default:			
@@ -250,12 +268,17 @@ void viewportEdgeIntersectCallback(const Vec3d& screenPos, const Vec3d& directio
 				}
 				const double delta = d->raAngle<M_PI ? M_PI : -M_PI;
 				if (std::fabs(lon-d->raAngle) < 1. || lon==0. || d->raAngle==M_PI)
-					text = StelUtils::radToHmsStrAdapt(d->raAngle);
+					textAngle = d->raAngle;
 				else
-					text = StelUtils::radToHmsStrAdapt(d->raAngle+delta);
+					textAngle = d->raAngle+delta;
 
 				if (d->raAngle+delta==0.)
-					text = StelUtils::radToHmsStrAdapt(M_PI);
+					textAngle = M_PI;
+
+				if (withDecimalDegree)
+					text = StelUtils::radToDecDegStr(textAngle,false,true);
+				else
+					text = StelUtils::radToHmsStrAdapt(textAngle);
 			}
 		}
 	}
@@ -283,6 +306,8 @@ void SkyGrid::draw(const StelCore* core) const
 	const StelProjectorP prj = core->getProjection(frameType, frameType!=StelCore::FrameAltAz ? StelCore::RefractionAuto : StelCore::RefractionOff);
 	if (!fader.getInterstate())
 		return;
+
+	bool withDecimalDegree = dynamic_cast<StelGui*>(StelApp::getInstance().getGui())->getFlagShowDecimalDegrees();
 
 	// Look for all meridians and parallels intersecting with the disk bounding the viewport
 	// Check whether the pole are in the viewport
@@ -420,7 +445,10 @@ void SkyGrid::draw(const StelCore* core) const
 	for (i=0; i<maxNbIter; ++i)
 	{
 		StelUtils::rectToSphe(&lon2, &lat2, fpt);
-		userData.text = StelUtils::radToDmsStrAdapt(lat2);
+		if (withDecimalDegree)
+			userData.text = StelUtils::radToDecDegStr(lat2);
+		else
+			userData.text = StelUtils::radToDmsStrAdapt(lat2);
 
 		parallelSphericalCap.d = fpt[2];
 		if (parallelSphericalCap.d>0.9999999)
@@ -474,7 +502,10 @@ void SkyGrid::draw(const StelCore* core) const
 		for (int j=0; j<maxNbIter-i; ++j)
 		{
 			StelUtils::rectToSphe(&lon2, &lat2, fpt);
-			userData.text = StelUtils::radToDmsStrAdapt(lat2);
+			if (withDecimalDegree)
+				userData.text = StelUtils::radToDecDegStr(lat2);
+			else
+				userData.text = StelUtils::radToDmsStrAdapt(lat2);
 
 			parallelSphericalCap.d = fpt[2];
 			const Vec3d rotCenter(0,0,parallelSphericalCap.d);
