@@ -350,6 +350,8 @@ IF(GUI_MODE STREQUAL "Standard")
 		gui/StelDialog.cpp
 		gui/AddOnDialog.hpp
 		gui/AddOnDialog.cpp
+		gui/AddOnSettingsDialog.hpp
+		gui/AddOnSettingsDialog.cpp
 		gui/AddOnWidget.cpp
 		gui/AddOnWidget.hpp)
 
@@ -366,6 +368,7 @@ IF(GUI_MODE STREQUAL "Standard")
 	gui/CustomDeltaTEquationDialog.ui
 	gui/addRemoveLandscapesDialog.ui
 	gui/addonDialog.ui
+	gui/addonSettingsDialog.ui
 	gui/addonWidget.ui)
 
         IF(ENABLE_SCRIPTING)

@@ -26,6 +26,7 @@
 #include <QObject>
 #include <QTableView>
 
+#include "AddOnSettingsDialog.hpp"
 #include "AddOnTableView.hpp"
 #include "StelAddOnMgr.hpp"
 #include "StelDialog.hpp"
@@ -36,8 +37,8 @@ class AddOnDialog : public StelDialog
 {
 Q_OBJECT
 public:
-    AddOnDialog(QObject* parent);
-    virtual ~AddOnDialog();
+	AddOnDialog(QObject* parent);
+	virtual ~AddOnDialog();
 	//! Notify that the application style changed
 	void styleChanged();
 
@@ -53,6 +54,7 @@ private slots:
 	void changePage(QListWidgetItem *current, QListWidgetItem *previous);
 	void slotUpdateMsg(const StelAddOnMgr::AddOnMgrMsg msg);
 	void slotUpdateButtons(int amountToInstall, int amountToRemove);
+	void slotOpenSettings();
 	void updateCatalog();
 	void downloadFinished();
 	void installFromFile();
@@ -72,6 +74,8 @@ private:
 		TEXTURE,
 		COUNT
 	};
+
+	AddOnSettingsDialog* m_pSettingsDialog;
 
 	QNetworkReply* m_pUpdateCatalogReply;
 	QHash<Tab, AddOnTableView*> m_tableViews;

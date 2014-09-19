@@ -30,9 +30,11 @@
 #include "addons/AddOnTableModel.hpp"
 #include "addons/AddOnTableProxyModel.hpp"
 
-AddOnDialog::AddOnDialog(QObject* parent) : StelDialog(parent)
+AddOnDialog::AddOnDialog(QObject* parent)
+	: StelDialog(parent)
+	, m_pSettingsDialog(new AddOnSettingsDialog())
 {
-    ui = new Ui_addonDialogForm;
+	ui = new Ui_addonDialogForm;
 }
 
 AddOnDialog::~AddOnDialog()
@@ -62,6 +64,9 @@ void AddOnDialog::createDialogContent()
 	ui->setupUi(dialog);
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
+
+	// settings dialog
+	connect(ui->btnSettings, SIGNAL(clicked(bool)), this, SLOT(slotOpenSettings()));
 
 	// naming tables according to the category
 	ui->catalogsTableView->setObjectName(CATEGORY_CATALOG);
@@ -120,6 +125,11 @@ void AddOnDialog::createDialogContent()
 
 	// fix dialog width
 	updateTabBarListWidgetWidth();
+}
+
+void AddOnDialog::slotOpenSettings()
+{
+	m_pSettingsDialog->setVisible(true);
 }
 
 void AddOnDialog::slotUpdateButtons(int amountToInstall, int amountToRemove)
