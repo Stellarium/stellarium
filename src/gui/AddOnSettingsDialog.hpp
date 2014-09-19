@@ -30,7 +30,6 @@ Q_OBJECT
 public:
 	AddOnSettingsDialog();
 	virtual ~AddOnSettingsDialog();
-	void styleChanged();
 
 public slots:
 	void retranslate();

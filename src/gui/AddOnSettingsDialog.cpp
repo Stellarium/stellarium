@@ -42,10 +42,6 @@ void AddOnSettingsDialog::retranslate()
 	}
 }
 
-void AddOnSettingsDialog::styleChanged()
-{
-}
-
 void AddOnSettingsDialog::createDialogContent()
 {
 	ui->setupUi(dialog);
