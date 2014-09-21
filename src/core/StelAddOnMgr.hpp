@@ -34,7 +34,7 @@
 #include "AOTexture.hpp"
 #include "StelAddOnDAO.hpp"
 
-#define ADDON_MANAGER_VERSION 0.0.2
+#define ADDON_MANAGER_VERSION "0.0.2"
 
 // categories (database column addon.category)
 const QString CATEGORY_CATALOG = "catalog";
