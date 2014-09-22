@@ -28,6 +28,8 @@
 #include "StelTranslator.hpp"
 
 AddOnSettingsDialog::AddOnSettingsDialog()
+	: m_iUpdateFrequency(0)
+	, m_iUpdateTime(0)
 {
 	ui = new Ui_addonSettingsDialogForm;
 }
@@ -42,8 +44,8 @@ void AddOnSettingsDialog::retranslate()
 {
 	if (dialog)
 	{
-		setAboutHtml();
 		ui->retranslateUi(dialog);
+		setAboutHtml();
 	}
 }
 
@@ -53,6 +55,15 @@ void AddOnSettingsDialog::createDialogContent()
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 
+	// General tab
+	ui->updateFrequency->addItem(q_("Every day"), 1);
+	ui->updateFrequency->addItem(q_("Every three days"), 3);
+	ui->updateFrequency->addItem(q_("Every week"), 7);
+
+	connect(ui->autoUpdate, SIGNAL(clicked(bool)), this, SLOT(setAutoUpdate(bool)));
+	connect(ui->updateFrequency, SIGNAL(currentIndexChanged(int)), this, SLOT(setUpdateFrequency(int)));
+	connect(ui->updateTime, SIGNAL(timeChanged(QTime)), this, SLOT(setUpdateTime(QTime)));
+
 	// About tab
 	setAboutHtml();
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
@@ -60,6 +71,22 @@ void AddOnSettingsDialog::createDialogContent()
 	{
 		ui->txtAbout->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
 	}
+}
+
+void AddOnSettingsDialog::setAutoUpdate(bool enabled)
+{
+	ui->updateFrequency->setEnabled(enabled);
+	ui->updateTime->setEnabled(enabled);
+}
+
+void AddOnSettingsDialog::setUpdateFrequency(int index)
+{
+	m_iUpdateFrequency = ui->updateFrequency->itemData(index).toInt();
+}
+
+void AddOnSettingsDialog::setUpdateTime(QTime time)
+{
+	m_iUpdateTime = time.hour();
 }
 
 void AddOnSettingsDialog::setAboutHtml()

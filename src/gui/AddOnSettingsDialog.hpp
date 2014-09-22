@@ -39,7 +39,15 @@ protected:
 	virtual void createDialogContent();
 	Ui_addonSettingsDialogForm* ui;
 
+private slots:
+	void setAutoUpdate(bool enabled);
+	void setUpdateFrequency(int index);
+	void setUpdateTime(QTime time);
+
 private:
+	int m_iUpdateFrequency;
+	int m_iUpdateTime;
+
 	void setAboutHtml();
 };
 
