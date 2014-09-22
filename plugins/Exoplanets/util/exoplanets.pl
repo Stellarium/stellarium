@@ -3,7 +3,7 @@
 #
 # Tool for generate catalog of exoplanets
 #
-# Copyright (C) 2013 Alexander Wolf
+# Copyright (C) 2013, 2014 Alexander Wolf
 #
 # Permission is hereby granted, free of charge, to any person obtaining a
 # copy of this software and associated documentation files (the "Software"),
@@ -47,7 +47,7 @@ $dbuser	= "exoplanet";
 $dbpass	= "exoplanet";
 
 $UA = LWP::UserAgent->new(keep_alive => 1, timeout => 360);
-$UA->agent("Mozilla/5.0 (Stellarium Exoplanets Catalog Updater 2.0; http://stellarium.org/)");
+$UA->agent("Mozilla/5.0 (Stellarium Exoplanets Catalog Updater 2.1; http://stellarium.org/)");
 $request = HTTP::Request->new('GET', $URL);
 $responce = $UA->request($request);
 
@@ -186,6 +186,11 @@ for ($i=1;$i<scalar(@catalog);$i++) {
 	
 	$outRA = $hour."h".abs($mint)."m".abs($sect)."s";
 	$outDE = $deg."d".abs($min)."m".abs($sec)."s";
+	# fixed bug for 24 Sex
+	if ($starname =~ m/24\s+Sex/gi) {
+		$outDE = "-".$outDE;
+	}
+
 	
 	$sname = $starname;
 
