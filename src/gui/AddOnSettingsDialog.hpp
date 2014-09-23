@@ -20,6 +20,7 @@
 #ifndef _ADDONSETTINGSDIALOG_HPP_
 #define _ADDONSETTINGSDIALOG_HPP_
 
+#include "StelAddOnMgr.hpp"
 #include "StelDialog.hpp"
 
 class Ui_addonSettingsDialogForm;
@@ -45,10 +46,10 @@ private slots:
 	void setUpdateTime(QTime time);
 
 private:
-	int m_iUpdateFrequency;
-	int m_iUpdateTime;
+	StelAddOnMgr* m_pStelAddOnMgr;
 
 	void setAboutHtml();
+	void setCurrentUpdateFrequency(int days);
 };
 
 #endif // _ADDONSETTINGSDIALOG_HPP_

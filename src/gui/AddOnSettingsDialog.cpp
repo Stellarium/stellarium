@@ -22,14 +22,12 @@
 #include "AddOnSettingsDialog.hpp"
 #include "ui_addonSettingsDialog.h"
 
-#include "StelAddOnMgr.hpp"
 #include "StelApp.hpp"
 #include "StelGui.hpp"
 #include "StelTranslator.hpp"
 
 AddOnSettingsDialog::AddOnSettingsDialog()
-	: m_iUpdateFrequency(0)
-	, m_iUpdateTime(0)
+	: m_pStelAddOnMgr(&StelApp::getInstance().getStelAddOnMgr())
 {
 	ui = new Ui_addonSettingsDialogForm;
 }
@@ -59,6 +57,9 @@ void AddOnSettingsDialog::createDialogContent()
 	ui->updateFrequency->addItem(q_("Every day"), 1);
 	ui->updateFrequency->addItem(q_("Every three days"), 3);
 	ui->updateFrequency->addItem(q_("Every week"), 7);
+	setCurrentUpdateFrequency(m_pStelAddOnMgr->getUpdateFrequencyDays());
+	ui->updateTime->setTime(QTime(m_pStelAddOnMgr->getUpdateFrequencyHour(), 0));
+
 
 	connect(ui->autoUpdate, SIGNAL(clicked(bool)), this, SLOT(setAutoUpdate(bool)));
 	connect(ui->updateFrequency, SIGNAL(currentIndexChanged(int)), this, SLOT(setUpdateFrequency(int)));
@@ -73,6 +74,21 @@ void AddOnSettingsDialog::createDialogContent()
 	}
 }
 
+void AddOnSettingsDialog::setCurrentUpdateFrequency(int days)
+{
+	for (int index=0; index<ui->updateFrequency->count(); index++)
+	{
+		if (days == ui->updateFrequency->itemData(index).toInt())
+		{
+			ui->updateFrequency->setCurrentIndex(index);
+			return;
+		}
+	}
+	// using 7 days as default
+	m_pStelAddOnMgr->setUpdateFrequencyDays(7);
+	setCurrentUpdateFrequency(m_pStelAddOnMgr->getUpdateFrequencyDays());
+}
+
 void AddOnSettingsDialog::setAutoUpdate(bool enabled)
 {
 	ui->updateFrequency->setEnabled(enabled);
@@ -81,12 +97,12 @@ void AddOnSettingsDialog::setAutoUpdate(bool enabled)
 
 void AddOnSettingsDialog::setUpdateFrequency(int index)
 {
-	m_iUpdateFrequency = ui->updateFrequency->itemData(index).toInt();
+	m_pStelAddOnMgr->setUpdateFrequencyDays(ui->updateFrequency->itemData(index).toInt());
 }
 
 void AddOnSettingsDialog::setUpdateTime(QTime time)
 {
-	m_iUpdateTime = time.hour();
+	m_pStelAddOnMgr->setUpdateFrequencyHour(time.hour());
 }
 
 void AddOnSettingsDialog::setAboutHtml()
