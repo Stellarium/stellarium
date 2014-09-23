@@ -60,6 +60,8 @@ public:
 	void removeAddOn(const int addonId, const QStringList files);
 	bool isCompatible(QString first, QString last);
 	bool updateCatalog(QString webresult);
+	void setUpdateFrequencyDays(int days);
+	void setUpdateFrequencyHour(int hour);
 	void setLastUpdate(qint64 time);
 	QString getLastUpdateString()
 	{
@@ -67,6 +69,8 @@ public:
 				.toString("dd MMM yyyy - hh:mm:ss");
 	}
 	qint64 getLastUpdate() { return m_iLastUpdate; }
+	int getUpdateFrequencyDays() { return m_iUpdateFrequencyDays; }
+	int getUpdateFrequencyHour() { return m_iUpdateFrequencyHour; }
 	QString getUrlForUpdates() { return m_sUrlUpdate; }
 	StelAddOnDAO* getStelAddOnDAO() { return m_pStelAddOnDAO; }
 	StelAddOn* getStelAddOnInstance(QString category) { return m_pStelAddOns.value(category); }
@@ -119,6 +123,8 @@ private:
 
 	class StelProgressController* m_progressBar;
 	qint64 m_iLastUpdate;
+	int m_iUpdateFrequencyDays;
+	int m_iUpdateFrequencyHour;
 	QString m_sUrlUpdate;
 
 	QNetworkReply* m_pThumbnailNetworkReply;

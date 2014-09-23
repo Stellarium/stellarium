@@ -39,6 +39,8 @@ StelAddOnMgr::StelAddOnMgr()
 	, m_currentDownloadFile(NULL)
 	, m_progressBar(NULL)
 	, m_iLastUpdate(1388966410)
+	, m_iUpdateFrequencyDays(7)
+	, m_iUpdateFrequencyHour(12)
 	, m_sUrlUpdate("http://cardinot.sourceforge.net/getUpdates.php")
 	, m_sAddOnDir(StelFileMgr::getUserDir() % "/addon/")
 	, m_sThumbnailDir(m_sAddOnDir % "/thumbnail/")
@@ -52,6 +54,8 @@ StelAddOnMgr::StelAddOnMgr()
 	{
 		m_pConfig->beginGroup("AddOn");
 		m_iLastUpdate = m_pConfig->value("last_update", m_iLastUpdate).toLongLong();
+		m_iUpdateFrequencyDays = m_pConfig->value("upload_frequency_days", m_iUpdateFrequencyDays).toInt();
+		m_iUpdateFrequencyHour = m_pConfig->value("upload_frequency_hour", m_iUpdateFrequencyHour).toInt();
 		m_sUrlUpdate = m_pConfig->value("url", m_sUrlUpdate).toString();
 		m_pConfig->endGroup();
 	}
@@ -62,6 +66,8 @@ StelAddOnMgr::StelAddOnMgr()
 		// delete all existing settings...
 		m_pConfig->remove("");
 		m_pConfig->setValue("last_update", m_iLastUpdate);
+		m_pConfig->setValue("upload_frequency_days", m_iUpdateFrequencyDays);
+		m_pConfig->setValue("upload_frequency_hour", m_iUpdateFrequencyHour);
 		m_pConfig->setValue("url", m_sUrlUpdate);
 		m_pConfig->endGroup();
 	}
@@ -106,6 +112,22 @@ void StelAddOnMgr::setLastUpdate(qint64 time) {
 	// update config file
 	m_pConfig->beginGroup("AddOn");
 	m_pConfig->setValue("last_update", m_iLastUpdate);
+	m_pConfig->endGroup();
+}
+
+void StelAddOnMgr::setUpdateFrequencyDays(int days) {
+	m_iUpdateFrequencyDays = days;
+	// update config file
+	m_pConfig->beginGroup("AddOn");
+	m_pConfig->setValue("upload_frequency_days", m_iUpdateFrequencyDays);
+	m_pConfig->endGroup();
+}
+
+void StelAddOnMgr::setUpdateFrequencyHour(int hour) {
+	m_iUpdateFrequencyHour = hour;
+	// update config file
+	m_pConfig->beginGroup("AddOn");
+	m_pConfig->setValue("upload_frequency_hour", m_iUpdateFrequencyHour);
 	m_pConfig->endGroup();
 }
 
