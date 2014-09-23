@@ -51,7 +51,7 @@ StelAddOnMgr::StelAddOnMgr()
 	if (m_pConfig->childGroups().contains("AddOn"))
 	{
 		m_pConfig->beginGroup("AddOn");
-		m_iLastUpdate = m_pConfig->value("lastUpdate", m_iLastUpdate).toLongLong();
+		m_iLastUpdate = m_pConfig->value("last_update", m_iLastUpdate).toLongLong();
 		m_sUrlUpdate = m_pConfig->value("url", m_sUrlUpdate).toString();
 		m_pConfig->endGroup();
 	}
@@ -61,7 +61,7 @@ StelAddOnMgr::StelAddOnMgr()
 		m_pConfig->beginGroup("AddOn");
 		// delete all existing settings...
 		m_pConfig->remove("");
-		m_pConfig->setValue("lastUpdate", m_iLastUpdate);
+		m_pConfig->setValue("last_update", m_iLastUpdate);
 		m_pConfig->setValue("url", m_sUrlUpdate);
 		m_pConfig->endGroup();
 	}
@@ -105,7 +105,7 @@ void StelAddOnMgr::setLastUpdate(qint64 time) {
 	m_iLastUpdate = time;
 	// update config file
 	m_pConfig->beginGroup("AddOn");
-	m_pConfig->setValue("lastUpdate", m_iLastUpdate);
+	m_pConfig->setValue("last_update", m_iLastUpdate);
 	m_pConfig->endGroup();
 }
 
