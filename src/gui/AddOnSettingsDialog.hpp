@@ -20,16 +20,18 @@
 #ifndef _ADDONSETTINGSDIALOG_HPP_
 #define _ADDONSETTINGSDIALOG_HPP_
 
+#include "AddOnDialog.hpp"
 #include "StelAddOnMgr.hpp"
 #include "StelDialog.hpp"
 
+class AddOnDialog;
 class Ui_addonSettingsDialogForm;
 
 class AddOnSettingsDialog : public StelDialog
 {
-Q_OBJECT
+	Q_OBJECT
 public:
-	AddOnSettingsDialog();
+	AddOnSettingsDialog(AddOnDialog* addOnDialog);
 	virtual ~AddOnSettingsDialog();
 
 public slots:
@@ -46,6 +48,7 @@ private slots:
 	void setUpdateTime(QTime time);
 
 private:
+	AddOnDialog* m_pAddOnDialog;
 	StelAddOnMgr* m_pStelAddOnMgr;
 
 	void setAboutHtml();

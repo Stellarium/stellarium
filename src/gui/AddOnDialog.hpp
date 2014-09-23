@@ -31,6 +31,7 @@
 #include "StelAddOnMgr.hpp"
 #include "StelDialog.hpp"
 
+class AddOnSettingsDialog;
 class Ui_addonDialogForm;
 
 class AddOnDialog : public StelDialog
@@ -44,6 +45,7 @@ public:
 
 public slots:
 	void retranslate();
+	void updateCatalog();
 
 protected:
 	Ui_addonDialogForm* ui;
@@ -55,7 +57,6 @@ private slots:
 	void slotUpdateMsg(const StelAddOnMgr::AddOnMgrMsg msg);
 	void slotUpdateButtons(int amountToInstall, int amountToRemove);
 	void slotOpenSettings();
-	void updateCatalog();
 	void downloadFinished();
 	void installFromFile();
 	void installSelectedRows();

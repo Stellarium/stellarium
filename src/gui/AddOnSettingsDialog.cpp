@@ -18,6 +18,7 @@
 */
 
 #include <QStringBuilder>
+#include <QTimer>
 
 #include "AddOnSettingsDialog.hpp"
 #include "ui_addonSettingsDialog.h"
@@ -26,8 +27,9 @@
 #include "StelGui.hpp"
 #include "StelTranslator.hpp"
 
-AddOnSettingsDialog::AddOnSettingsDialog()
-	: m_pStelAddOnMgr(&StelApp::getInstance().getStelAddOnMgr())
+AddOnSettingsDialog::AddOnSettingsDialog(AddOnDialog* pAddOnDialog)
+	: m_pAddOnDialog(pAddOnDialog)
+	, m_pStelAddOnMgr(&StelApp::getInstance().getStelAddOnMgr())
 {
 	ui = new Ui_addonSettingsDialogForm;
 }
@@ -59,7 +61,6 @@ void AddOnSettingsDialog::createDialogContent()
 	ui->updateFrequency->addItem(q_("Every week"), 7);
 	setCurrentUpdateFrequency(m_pStelAddOnMgr->getUpdateFrequencyDays());
 	ui->updateTime->setTime(QTime(m_pStelAddOnMgr->getUpdateFrequencyHour(), 0));
-
 
 	connect(ui->autoUpdate, SIGNAL(clicked(bool)), this, SLOT(setAutoUpdate(bool)));
 	connect(ui->updateFrequency, SIGNAL(currentIndexChanged(int)), this, SLOT(setUpdateFrequency(int)));

@@ -32,7 +32,7 @@
 
 AddOnDialog::AddOnDialog(QObject* parent)
 	: StelDialog(parent)
-	, m_pSettingsDialog(new AddOnSettingsDialog())
+	, m_pSettingsDialog(new AddOnSettingsDialog(this))
 {
 	ui = new Ui_addonDialogForm;
 }
