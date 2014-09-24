@@ -66,6 +66,11 @@ void AddOnSettingsDialog::createDialogContent()
 	connect(ui->updateFrequency, SIGNAL(currentIndexChanged(int)), this, SLOT(setUpdateFrequency(int)));
 	connect(ui->updateTime, SIGNAL(timeChanged(QTime)), this, SLOT(setUpdateTime(QTime)));
 
+	QTimer* timer = new QTimer(this);
+	connect(timer, SIGNAL(timeout()), this, SLOT(updateCatalog()));
+	timer->start(600000);
+	updateCatalog();
+
 	// About tab
 	setAboutHtml();
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
@@ -104,6 +109,18 @@ void AddOnSettingsDialog::setUpdateFrequency(int index)
 void AddOnSettingsDialog::setUpdateTime(QTime time)
 {
 	m_pStelAddOnMgr->setUpdateFrequencyHour(time.hour());
+}
+
+void AddOnSettingsDialog::updateCatalog()
+{
+	QDateTime lastUpdate = QDateTime::fromTime_t(m_pStelAddOnMgr->getLastUpdate());
+	QDateTime nextUpdate = lastUpdate.addDays(m_pStelAddOnMgr->getUpdateFrequencyDays());
+	nextUpdate.setTime(QTime(m_pStelAddOnMgr->getUpdateFrequencyHour(), 0));
+
+	if (QDateTime::currentDateTime() >= nextUpdate)
+	{
+		m_pAddOnDialog->updateCatalog();
+	}
 }
 
 void AddOnSettingsDialog::setAboutHtml()

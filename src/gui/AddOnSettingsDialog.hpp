@@ -43,6 +43,7 @@ protected:
 	Ui_addonSettingsDialogForm* ui;
 
 private slots:
+	void updateCatalog();
 	void setAutoUpdate(bool enabled);
 	void setUpdateFrequency(int index);
 	void setUpdateTime(QTime time);
