@@ -145,7 +145,7 @@ int main(int argc, char **argv)
 	QCoreApplication::setOrganizationName("stellarium");
 
 	// LP:1335611: Avoid troubles with search of the paths of the plugins (deployments troubles) --AW
-	#if QT_VERSION==QT_VERSION_CHECK(5, 3, 1)
+	#if QT_VERSION>=QT_VERSION_CHECK(5, 3, 1)
 	QCoreApplication::addLibraryPath(".");
 	#endif
 	
