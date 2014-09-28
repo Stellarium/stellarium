@@ -9,13 +9,13 @@ msgstr ""
 "Project-Id-Version: Stellarium 0.10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-09-18 19:41+0700\n"
-"PO-Revision-Date: 2014-08-16 09:01+0000\n"
+"PO-Revision-Date: 2014-09-27 19:02+0000\n"
 "Last-Translator: misibacsi <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-09-19 06:25+0000\n"
+"X-Launchpad-Export-Date: 2014-09-28 05:45+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 "X-Poedit-Language: Hungarian\n"
 
@@ -75,7 +75,7 @@ msgstr "Horizont"
 
 #: src/core/modules/GridLinesMgr.cpp:594
 msgid "Galactic Equator"
-msgstr ""
+msgstr "Galaktikus egyenlítő"
 
 #: src/core/modules/GridLinesMgr.cpp:728
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:331
@@ -123,7 +123,7 @@ msgstr "Galaktikus hálózat"
 
 #: src/core/modules/GridLinesMgr.cpp:737 src/ui_viewDialog.h:1247
 msgid "Galactic equator"
-msgstr ""
+msgstr "Galaktikus egyenlítő"
 
 #: src/core/modules/LandscapeMgr.cpp:355 src/ui_viewDialog.h:1176
 msgid "Atmosphere"
@@ -225,11 +225,11 @@ msgstr "Planetáris köd"
 
 #: src/core/modules/Nebula.cpp:390
 msgid "Dark nebula"
-msgstr ""
+msgstr "Sötétköd"
 
 #: src/core/modules/Nebula.cpp:393
 msgid "Irregular galaxy"
-msgstr ""
+msgstr "Szabálytalan galaxis"
 
 #: src/core/modules/Nebula.cpp:396
 msgid "Cluster associated with nebulosity"
@@ -341,12 +341,12 @@ msgstr "Sebesség: %1 km/s"
 #: src/core/modules/Comet.cpp:219
 #, no-c-format, qt-format
 msgid "Coma diameter (estimate): %1 km"
-msgstr ""
+msgstr "A kóma átmérője (becsült érték): %1 km"
 
 #: src/core/modules/Comet.cpp:223
 #, no-c-format, qt-format
 msgid "Gas tail length (estimate): %1 Mio km"
-msgstr ""
+msgstr "A gázcsóva hossza  (becsült érték): %1 km"
 
 #: src/core/modules/SolarSystem.cpp:157
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:308
@@ -424,7 +424,7 @@ msgstr ""
 #: plugins/Exoplanets/src/Exoplanet.cpp:207
 #, qt-format
 msgid "Distance: %1 ly"
-msgstr ""
+msgstr "Távolság: %1 fé"
 
 #: src/core/modules/StarWrapper.cpp:224
 #: plugins/Exoplanets/src/Exoplanet.cpp:201
@@ -1124,12 +1124,12 @@ msgstr "Az/Alt: %1/%2"
 #: src/core/StelObject.cpp:189 src/core/StelObject.cpp:191
 #, qt-format
 msgid "Ecliptic longitude/latitude (of J2000): %1/%2"
-msgstr ""
+msgstr "Ekliptikus hosszúság/szélesség (J2000): %1/%2"
 
 #: src/core/StelObject.cpp:197 src/core/StelObject.cpp:199
 #, qt-format
 msgid "Ecliptic longitude/latitude (of date): %1/%2"
-msgstr ""
+msgstr "Ekliptikus hosszúság/szélesség (dátum szerint): %1/%2"
 
 #: src/core/StelObject.cpp:207 src/core/StelObject.cpp:209
 #, qt-format
@@ -1450,6 +1450,8 @@ msgstr "Ez a Stellarium elavult verziója. A legfrissebb: %1"
 msgid ""
 " Sorry, your hardware is not compatible with newest version of Stellarium!"
 msgstr ""
+" Sajnáljuk, az Ön hardvere nem kompatibilis a Stellarium legújabb "
+"verziójának futtatásához."
 
 #. TRANSLATORS: This message will be displayed for users if current version of Stellarium is equals with version from stellarium.org
 #: src/gui/HelpDialog.cpp:331
@@ -1919,46 +1921,46 @@ msgstr "csillagtérkép"
 #: src/gui/SearchDialog.cpp:231
 msgctxt "coordinate system"
 msgid "Equatorial (J2000.0)"
-msgstr ""
+msgstr "Ekvatoriális (J2000.0)"
 
 #: src/gui/SearchDialog.cpp:232
 msgctxt "coordinate system"
 msgid "Equatorial"
-msgstr ""
+msgstr "Ekvatoriális"
 
 #: src/gui/SearchDialog.cpp:233
 msgctxt "coordinate system"
 msgid "Horizontal"
-msgstr ""
+msgstr "Horizontális"
 
 #: src/gui/SearchDialog.cpp:234
 msgctxt "coordinate system"
 msgid "Galactic"
-msgstr ""
+msgstr "Galaktikus"
 
 #: src/gui/SearchDialog.cpp:248
 msgid "Right ascension"
-msgstr ""
+msgstr "Rektaszcenzió"
 
 #: src/gui/SearchDialog.cpp:250
 msgid "Declination"
-msgstr ""
+msgstr "Deklináció"
 
 #: src/gui/SearchDialog.cpp:257
 msgid "Azimuth"
-msgstr ""
+msgstr "Azimut"
 
 #: src/gui/SearchDialog.cpp:260
 msgid "Altitude"
-msgstr ""
+msgstr "Magasság"
 
 #: src/gui/SearchDialog.cpp:267
 msgid "Longitude"
-msgstr ""
+msgstr "Hosszúság"
 
 #: src/gui/SearchDialog.cpp:270
 msgid "Latitude"
-msgstr ""
+msgstr "Szélesség"
 
 #: src/gui/SearchDialog.cpp:508
 msgid "Simbad Lookup Error"
@@ -1978,7 +1980,7 @@ msgstr "Harvard Egyetem (USA)"
 
 #: src/gui/SearchDialog.cpp:742
 msgid "Paste and Search"
-msgstr ""
+msgstr "Beilleszt és keres"
 
 #: src/gui/ShortcutsDialog.cpp:494
 msgid "Action"
@@ -2421,7 +2423,7 @@ msgstr "1809 Prometheus"
 
 #: src/translations.h:148
 msgid "Prometheus (moon)"
-msgstr ""
+msgstr "Prométheusz (hold)"
 
 #. TRANSLATORS: Asteroid (1810) Epimetheus
 #: src/translations.h:150
@@ -2430,7 +2432,7 @@ msgstr "1810 Epimetheus"
 
 #: src/translations.h:151
 msgid "Epimetheus (moon)"
-msgstr ""
+msgstr "Epimetheus (hold)"
 
 #. TRANSLATORS: Asteroid (951) Gaspra
 #: src/translations.h:153
@@ -2449,7 +2451,7 @@ msgstr "218 Bianca"
 
 #: src/translations.h:158
 msgid "Bianca (moon)"
-msgstr ""
+msgstr "Bianca (hold)"
 
 #. TRANSLATORS: Proper name of comet C/1680 V1
 #: src/translations.h:161
@@ -2527,47 +2529,47 @@ msgstr "Aszteroidák"
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:195
 msgid "Moons"
-msgstr ""
+msgstr "Holdak"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:197
 msgid "Plutoids"
-msgstr ""
+msgstr "Plutoidák"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:202
 msgid "Bright galaxies"
-msgstr ""
+msgstr "Fényes galaxisok"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:204
 msgid "Open star clusters"
-msgstr ""
+msgstr "Nyílt csillaghalmazok"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:206
 msgid "Globular star clusters"
-msgstr ""
+msgstr "Gömbhalmazok"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:208
 msgid "Nebulae"
-msgstr ""
+msgstr "Ködök"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:210
 msgid "Planetary nebulae"
-msgstr ""
+msgstr "Planetáris ködök"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:212
 msgid "Dark nebulae"
-msgstr ""
+msgstr "Sötét ködök"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:214
 msgid "Irregular galaxies"
-msgstr ""
+msgstr "Szabálytalan galaxisok"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:216
@@ -2577,12 +2579,12 @@ msgstr ""
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:218
 msgid "Messier Catalogue"
-msgstr ""
+msgstr "Messier katalógus"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:220
 msgid "Caldwell Catalogue"
-msgstr ""
+msgstr "Caldwell katalógus"
 
 #: src/translations.h:224
 msgid "Arabic"
@@ -2626,7 +2628,7 @@ msgstr "Maori"
 
 #: src/translations.h:234
 msgid "Mongolian"
-msgstr ""
+msgstr "Mongol"
 
 #: src/translations.h:235
 msgid "Navajo"
@@ -2804,7 +2806,7 @@ msgstr "Földi események a Merkúrról nézve"
 #. TRANSLATORS: Name and description of script
 #: src/translations.h:315
 msgid "Earth Events from a floating city on Venus"
-msgstr ""
+msgstr "Földi események egy Vénusz légkörében lebegő városból"
 
 #. TRANSLATORS: Name and description of script
 #: src/translations.h:317
@@ -2815,11 +2817,14 @@ msgstr "Földi események a Marsról nézve"
 #: src/translations.h:319
 msgid "Earth and Venus Greatest Elongations and Brilliancies from Mars"
 msgstr ""
+"A Föld és a Vénusz legnagyobb látszó távolsága és fényessége a Marsról nézve"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:321
 msgid "Earth and Mars Greatest Elongations and Transits from Callisto"
 msgstr ""
+"A Föld és a Mars legnagyobb látszó távolsága és átvonulása a Callistóról "
+"nézve"
 
 #. TRANSLATORS: Description of the landscape tour script.
 #: src/translations.h:327
@@ -2957,6 +2962,8 @@ msgstr ""
 msgid ""
 "Earth and Venus Greatest Elongations and Brilliancies from Mars 2000-3000"
 msgstr ""
+"A Föld és a Vénusz legnagyobb látszó távolsága és fényessége a Marsról nézve "
+"2000-3000 között"
 
 #: src/translations.h:350
 msgid ""
@@ -2965,6 +2972,10 @@ msgid ""
 "Jupiter's radiation belt. Therefore, if humans ever colonize Jupiter's "
 "moons, Callisto will be the one."
 msgstr ""
+"A Föld legnagyobb látszó távolsága és átvonulása a Callistóról nézve 2000-"
+"3000 között. Azért a Callisto, mert ez az egyetlen a négy Galilei-holdból, "
+"melyik a Jupiter sugárzási övezetén kívül van, így egy lehetséges emberi "
+"kolonizáció célpontja."
 
 #: src/translations.h:354
 msgid "Andorra"
@@ -4013,11 +4024,11 @@ msgstr ""
 
 #: src/ui_dateTimeDialogGui.h:369
 msgid "Julian Date"
-msgstr ""
+msgstr "Julián dátum"
 
 #: src/ui_dateTimeDialogGui.h:372
 msgid "Modified Julian Date"
-msgstr ""
+msgstr "Módosított Julián dátum"
 
 #: src/ui_helpDialogGui.h:277 src/ui_helpDialogGui.h:283
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:418
@@ -4049,14 +4060,17 @@ msgstr "Hely"
 msgid ""
 "Standard list of locations contains only English names (without diacritics!)"
 msgstr ""
+"A földrajzi helyek standard listája csak ékezet nélküli angol neveket "
+"tartalmaz."
 
 #: src/ui_locationDialogGui.h:414
 msgid "Reset location list to show all known locations"
 msgstr ""
+"A földrajzi helyek listájának újragenerálása, hogy minden név látható legyen"
 
 #: src/ui_locationDialogGui.h:416
 msgid "Reset Location List"
-msgstr ""
+msgstr "A földrajzi helyek listájának újragenerálása"
 
 #: src/ui_locationDialogGui.h:417
 msgid "Current location information"
@@ -4095,7 +4109,7 @@ msgstr " m"
 
 #: src/ui_locationDialogGui.h:431
 msgid "Return to default location"
-msgstr ""
+msgstr "Vissza az alapértelmezett helyhez"
 
 #: src/ui_locationDialogGui.h:433
 msgid "Add to list"
@@ -4119,11 +4133,11 @@ msgstr "Égitest:"
 
 #: src/ui_locationDialogGui.h:438
 msgid "Use current location as default"
-msgstr ""
+msgstr "A jelenlegi hely legyen az alapértelmezett"
 
 #: src/ui_locationDialogGui.h:439
 msgid "Get location from Network"
-msgstr ""
+msgstr "Hely megállapítása az internetes szolgáltatótól"
 
 #: src/ui_searchDialogGui.h:606
 msgid "Find Object"
@@ -4383,10 +4397,12 @@ msgid ""
 "Use light pollution data from locations database and ignore settings for "
 "light pollution below"
 msgstr ""
+"Fényszennyezési értékek használata adatbázisból, figyelmen kívül hagyva a "
+"lenti beállítást"
 
 #: src/ui_viewDialog.h:1180
 msgid "Light pollution data from locations database"
-msgstr ""
+msgstr "Fényszennyezési értékek használata adatbázisból"
 
 #: src/ui_viewDialog.h:1181
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:401
@@ -4430,7 +4446,7 @@ msgstr "Dinamikus szem adaptálása"
 
 #: src/ui_viewDialog.h:1196
 msgid "Settings for sporadic meteors"
-msgstr ""
+msgstr "Sporadikus meteorok beállításai"
 
 #: src/ui_viewDialog.h:1198
 msgid "Shooting Stars"
@@ -4495,15 +4511,15 @@ msgstr "Éggömb"
 
 #: src/ui_viewDialog.h:1223
 msgid "Equatorial grid (on J2000)"
-msgstr ""
+msgstr "Egyenlítői háló (J2000)"
 
 #: src/ui_viewDialog.h:1224
 msgid "Equatorial grid (on date)"
-msgstr ""
+msgstr "Egyenlítői háló (dátum szerint)"
 
 #: src/ui_viewDialog.h:1225
 msgid "Ecliptic grid (on J2000)"
-msgstr ""
+msgstr "Ekliptikus háló (J2000)"
 
 #: src/ui_viewDialog.h:1229
 msgid "Show equator line"
@@ -4523,7 +4539,7 @@ msgstr "Ekliptika vonala"
 
 #: src/ui_viewDialog.h:1245
 msgid "Show Galactic equator line"
-msgstr ""
+msgstr "Galaktikus egyenlítő mutatása"
 
 #: src/ui_viewDialog.h:1249
 msgid "Projection"
@@ -4578,6 +4594,8 @@ msgid ""
 "Enable checking updates of Stellarium via Internet. Info for updates of "
 "stable versions you can look on the tab \"About\" of \"Help\" window."
 msgstr ""
+"A Stellarium új verziójának keresése, és erre vonatkozó infó a \"Súgó\" "
+"ablak \"Névjegy\" fülén látható."
 
 #: src/ui_configurationDialog.h:1013
 msgid "Default options"
@@ -4923,11 +4941,11 @@ msgstr "Automatikus bekapcsolás légkörnél"
 
 #: src/ui_configurationDialog.h:1158
 msgid "Use decimal degrees for coordinates"
-msgstr ""
+msgstr "Decimális fokok a koordinátáknál"
 
 #: src/ui_configurationDialog.h:1160
 msgid "Use decimal degrees"
-msgstr ""
+msgstr "Decimális fokok használata"
 
 #: src/ui_configurationDialog.h:1161
 msgid "Screenshots"
@@ -5106,7 +5124,7 @@ msgstr "szkript mentése fájlba"
 
 #: src/ui_scriptConsole.h:366
 msgid "clear"
-msgstr ""
+msgstr "törlés"
 
 #: src/ui_scriptConsole.h:370
 msgid "pre-process script using SSC preprocessor"
@@ -5309,7 +5327,7 @@ msgstr ""
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:186
 msgid "Show position angle"
-msgstr ""
+msgstr "Pozíciós szög mutatása"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:187
 #: plugins/Satellites/src/ui_satellitesDialog.h:714
@@ -7357,7 +7375,7 @@ msgstr "Tippek ködökhöz"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:370
 msgid "Galactic equator line"
-msgstr ""
+msgstr "Galaktikus egyenlítő"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:399
 msgid "Effects"
@@ -7688,7 +7706,7 @@ msgstr "Ez a bővítmény néhány fényes, történelmi szupernóvát mutat: "
 #: plugins/Novae/src/gui/NovaeDialog.cpp:125
 #, qt-format
 msgid "This list altogether contains %1 stars."
-msgstr ""
+msgstr "A lista %1 csillagot tartalmaz."
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:124
 #, qt-format
@@ -7698,7 +7716,7 @@ msgstr "%1-nél fényesebb szupernóvák"
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:126
 #: plugins/Novae/src/gui/NovaeDialog.cpp:127
 msgid "Light curves"
-msgstr ""
+msgstr "Fénygörbék"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:127
 #, qt-format
@@ -8915,7 +8933,7 @@ msgstr ""
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:200
 #, qt-format
 msgid "Sun altitude at twilight: %1 deg."
-msgstr ""
+msgstr "A Nap magassága hajnalban: %1 fok"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:206
 #, qt-format
@@ -9778,7 +9796,7 @@ msgstr ""
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:525
 msgid "Enable display of meteor showers at startup"
-msgstr ""
+msgstr "Meteorrajok mutatása induláskor"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:529
 msgid "Color of radiants markers"
@@ -9829,7 +9847,7 @@ msgstr "Keres"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:559
 msgid "From:"
-msgstr ""
+msgstr "Innen:"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:560
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:562
@@ -9838,7 +9856,7 @@ msgstr "nn/HHH/éééé"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:561
 msgid "To:"
-msgstr ""
+msgstr "Ide:"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:564
 msgid "Results"
@@ -9867,32 +9885,32 @@ msgstr ""
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:136
 msgctxt "abbreviated in the plugin"
 msgid "RA/Dec (J2000.0)"
-msgstr ""
+msgstr "RA/Dekl. (J2000.0)"
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:145
 msgctxt "abbreviated in the plugin"
 msgid "RA/Dec"
-msgstr ""
+msgstr "RA/Dekl."
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:158
 msgctxt "abbreviated in the plugin"
 msgid "Az/Alt"
-msgstr ""
+msgstr "Az/Alt"
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:167
 msgctxt "abbreviated in the plugin"
 msgid "Gal. Long/Lat"
-msgstr ""
+msgstr "Gal. Long/Lat"
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:179
 msgctxt "abbreviated in the plugin"
 msgid "Ecl. Long/Lat (J2000.0)"
-msgstr ""
+msgstr "Ecl. Long/Lat (J2000.0)"
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:190
 msgctxt "abbreviated in the plugin"
 msgid "HA/Dec"
-msgstr ""
+msgstr "HA/Dec"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:101
 msgid "Pointer Coordinates plug-in"
@@ -9900,7 +9918,7 @@ msgstr ""
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:130
 msgid "The top center of the screen"
-msgstr ""
+msgstr "A képernyő felső közepe"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:131
 msgid "In center of the top right half of the screen"
@@ -9912,19 +9930,19 @@ msgstr ""
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:153
 msgid "Right ascension/Declination (J2000.0)"
-msgstr ""
+msgstr "Rektaszcenzió/deklináció (J2000.0)"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:154
 msgid "Right ascension/Declination"
-msgstr ""
+msgstr "Rektaszcenzió/deklináció"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:156
 msgid "Ecliptic Longitude/Latitude (J2000.0)"
-msgstr ""
+msgstr "Ekliptikus hosszúság/szélesség (J2000.0)"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:158
 msgid "Galactic Longitude/Latitude"
-msgstr ""
+msgstr "Galaktikus hosszúság/szélesség"
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:300
 msgid "Show coordinates of the mouse cursor on the screen."
