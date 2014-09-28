@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-09-18 19:41+0700\n"
-"PO-Revision-Date: 2014-07-13 20:35+0000\n"
-"Last-Translator: Sten Persson <utsuddaren@gmail.com>\n"
+"PO-Revision-Date: 2014-09-27 19:41+0000\n"
+"Last-Translator: Anders Jonsson <Unknown>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-09-19 06:38+0000\n"
+"X-Launchpad-Export-Date: 2014-09-28 05:46+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:106 src/core/modules/StarMgr.cpp:346
@@ -223,11 +223,11 @@ msgstr "Planetär nebulosa"
 
 #: src/core/modules/Nebula.cpp:390
 msgid "Dark nebula"
-msgstr ""
+msgstr "Mörk nebulosa"
 
 #: src/core/modules/Nebula.cpp:393
 msgid "Irregular galaxy"
-msgstr ""
+msgstr "Oregelbunden galax"
 
 #: src/core/modules/Nebula.cpp:396
 msgid "Cluster associated with nebulosity"
@@ -339,7 +339,7 @@ msgstr "Hastighet: %1 km/s"
 #: src/core/modules/Comet.cpp:219
 #, no-c-format, qt-format
 msgid "Coma diameter (estimate): %1 km"
-msgstr ""
+msgstr "Komadiameter (beräknad): %1 km"
 
 #: src/core/modules/Comet.cpp:223
 #, no-c-format, qt-format
@@ -422,7 +422,7 @@ msgstr "Magnitudintervall: <b>%1</b>%2<b>%3/%4</b> (Fotometriskt system: %5)"
 #: plugins/Exoplanets/src/Exoplanet.cpp:207
 #, qt-format
 msgid "Distance: %1 ly"
-msgstr ""
+msgstr "Avstånd: %1 ljusår"
 
 #: src/core/modules/StarWrapper.cpp:224
 #: plugins/Exoplanets/src/Exoplanet.cpp:201
@@ -1960,7 +1960,7 @@ msgstr ""
 
 #: src/gui/SearchDialog.cpp:257
 msgid "Azimuth"
-msgstr ""
+msgstr "Azimut"
 
 #: src/gui/SearchDialog.cpp:260
 msgid "Altitude"
@@ -2537,12 +2537,12 @@ msgstr "Asteroider"
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:195
 msgid "Moons"
-msgstr ""
+msgstr "Månar"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:197
 msgid "Plutoids"
-msgstr ""
+msgstr "Plutoider"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:202
@@ -2552,32 +2552,32 @@ msgstr ""
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:204
 msgid "Open star clusters"
-msgstr ""
+msgstr "Öppna stjärnhopar"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:206
 msgid "Globular star clusters"
-msgstr ""
+msgstr "Klotformiga stjärnhopar"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:208
 msgid "Nebulae"
-msgstr ""
+msgstr "Nebulosor"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:210
 msgid "Planetary nebulae"
-msgstr ""
+msgstr "Planetariska nebulosor"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:212
 msgid "Dark nebulae"
-msgstr ""
+msgstr "Mörka nebulosor"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:214
 msgid "Irregular galaxies"
-msgstr ""
+msgstr "Oregelbundna galaxer"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:216
@@ -2587,12 +2587,12 @@ msgstr ""
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:218
 msgid "Messier Catalogue"
-msgstr ""
+msgstr "Messiers katalog"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:220
 msgid "Caldwell Catalogue"
-msgstr ""
+msgstr "Caldwells katalog"
 
 #: src/translations.h:224
 msgid "Arabic"
@@ -4031,11 +4031,11 @@ msgstr ""
 
 #: src/ui_dateTimeDialogGui.h:369
 msgid "Julian Date"
-msgstr ""
+msgstr "Julianskt datum"
 
 #: src/ui_dateTimeDialogGui.h:372
 msgid "Modified Julian Date"
-msgstr ""
+msgstr "Modifierat Julianskt datum"
 
 #: src/ui_helpDialogGui.h:277 src/ui_helpDialogGui.h:283
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:418
@@ -5475,7 +5475,7 @@ msgstr "Visa hårkors"
 
 #: plugins/Oculars/src/Oculars.cpp:1330
 msgid "Image sensor frame"
-msgstr "Bildsensorruta"
+msgstr "Bildsensorram"
 
 #: plugins/Oculars/src/Oculars.cpp:1331
 msgid "Telrad sight"
@@ -5644,31 +5644,31 @@ msgstr "Nästa teleskop"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:262
 msgid "Rotate the sensor frame 15 degrees counterclockwise"
-msgstr ""
+msgstr "Rotera sensorramen 15 grader moturs"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:275
 msgid "Rotate the sensor frame 5 degrees counterclockwise"
-msgstr ""
+msgstr "Rotera sensorramen 5 grader moturs"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:288
 msgid "Rotate the sensor frame 1 degree counterclockwise"
-msgstr ""
+msgstr "Rotera sensorramen 1 grad moturs"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:301
 msgid "Reset the sensor frame rotation"
-msgstr ""
+msgstr "Återställ sensorramens rotation"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:314
 msgid "Rotate the sensor frame 1 degree clockwise"
-msgstr ""
+msgstr "Rotera sensorramen 1 grad medurs"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:327
 msgid "Rotate the sensor frame 5 degrees clockwise"
-msgstr ""
+msgstr "Rotera sensorramen 5 grader medurs"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:340
 msgid "Rotate the sensor frame 15 degrees clockwise"
-msgstr ""
+msgstr "Rotera sensorramen 15 grader medurs"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:544
 msgid "Effective focal length of the ocular"
@@ -5738,9 +5738,9 @@ msgid ""
 "will populate some samples to get your started."
 msgstr ""
 "Det här tillägget skall simulera vad du ser genom ett okular. Det här "
-"konfigurations-fönstret kan användas till att lägga till, ändra eller ta "
-"bort okular och teleskop såväl som CCD-sensorer. Första gången appen körs "
-"kommer ett antal exempel skapas."
+"konfigurationsfönstret kan användas till att lägga till, ändra eller ta bort "
+"okular och teleskop såväl som CCD-sensorer. Första gången appen körs kommer "
+"ett antal exempel skapas."
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:506
 msgid ""
@@ -6241,7 +6241,7 @@ msgstr ""
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:424
 #, qt-format
 msgid "See %1this document%2 for details."
-msgstr ""
+msgstr "Se %1detta dokument%2 för detaljer."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:456
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:166
@@ -6315,12 +6315,12 @@ msgstr "Fel vid uppdatering"
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:490
 #, qt-format
 msgid "Updated %1/%2 satellite(s); %3 added; %4 removed"
-msgstr ""
+msgstr "Uppdaterade %1/%2 satellit(er); %3 tillagda; %4 borttagna"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:492
 #, qt-format
 msgid "Updated %1/%2 satellite(s); %3 added; %4 missing"
-msgstr ""
+msgstr "Uppdaterade %1/%2 satellit(er); %3 tillagda; %4 saknas"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:554
 msgid "[new source]"
@@ -6375,7 +6375,7 @@ msgstr "[alla]"
 #. TRANSLATORS: Displayed in the satellite group selection box.
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:698
 msgid "New group..."
-msgstr ""
+msgstr "Ny grupp..."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:904
 msgid "Select TLE Update File"
@@ -6383,7 +6383,7 @@ msgstr "Välj TLE-uppdateringsfil"
 
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:149
 msgid "Downloading data..."
-msgstr ""
+msgstr "Hämtar data..."
 
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:150
 msgid ""
@@ -6448,7 +6448,7 @@ msgstr ""
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:309
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:517
 msgid "Update frequency (hours):"
-msgstr ""
+msgstr "Uppdateringsfrekvens (timmar):"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:689
 msgid "Labels"
@@ -6535,7 +6535,7 @@ msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:744
 msgid "Do not update"
-msgstr ""
+msgstr "Uppdatera inte"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:745
 msgid "Description:"
