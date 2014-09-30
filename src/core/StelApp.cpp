@@ -469,6 +469,9 @@ void StelApp::init(QSettings* conf)
 	emit colorSchemeChanged("color");
 	setVisionModeNight(confSettings->value("viewing/flag_night").toBool());
 
+	// Enable viewport effect at startup if he set
+	setViewportEffect(confSettings->value("video/viewport_effect", "none").toString());
+
 	// Proxy Initialisation
 	setupHttpProxy();
 	updateI18n();
