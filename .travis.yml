@@ -25,7 +25,7 @@ before_install:
   - "tar -xzvf cmake-2.8.11.tar.gz"
 
   - "mkdir qt5"
-  - "wget -q -O qt5.zip http://cardinot.net/files/qt513.zip"
+  - "wget -q -O qt5.zip http://cardinot.net/files/qt531.zip"
   - "unzip -qq qt5.zip -d qt5"
 
 install:
