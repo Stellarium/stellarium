@@ -255,8 +255,8 @@ void StelGui::init(QGraphicsWidget *atopLevelGraphicsWidget)
 	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow, "actionShow_Search_Window_Global");
 	skyGui->winBar->addButton(b);
 
-	pxmapOn = QPixmap(":/graphicGui/7-on-plugins.png");
-	pxmapOff = QPixmap(":/graphicGui/7-off-plugins.png");
+	pxmapOn = QPixmap(":/graphicGui/10-on-addon-manager.png");
+	pxmapOff = QPixmap(":/graphicGui/10-off-addon-manager.png");
 	b = new StelButton(NULL, pxmapOn, pxmapOff, pxmapGlow, "actionShow_AddOn_Window_Global");
 	skyGui->winBar->addButton(b);
 
