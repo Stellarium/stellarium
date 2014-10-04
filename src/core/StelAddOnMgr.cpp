@@ -44,7 +44,7 @@ StelAddOnMgr::StelAddOnMgr()
 	, m_iUpdateFrequencyHour(12)
 	, m_sUrlUpdate("http://cardinot.sourceforge.net/getUpdates.php")
 	, m_sAddOnDir(StelFileMgr::getUserDir() % "/addon/")
-	, m_sThumbnailDir(m_sAddOnDir % "/thumbnail/")
+	, m_sThumbnailDir(m_sAddOnDir % "thumbnail/")
 	, m_sJsonPath(m_sAddOnDir % "addons.json")
 {
 	// creating addon dir
