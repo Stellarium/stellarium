@@ -51,6 +51,7 @@ public:
 	StelAddOnMgr();
 	virtual ~StelAddOnMgr();
 
+	void readJson(const QJsonObject &json);
 	QString getThumbnailDir() { return m_sThumbnailDir; }
 	QString getDirectory(QString category) { return m_dirs.value(category, ""); }
 	void installAddOn(const int addonId, const QStringList selectedFiles);
@@ -135,6 +136,8 @@ private:
 	const QString m_sAddOnDir;
 	const QString m_sThumbnailDir;
 	QHash<QString, QString> m_dirs;
+
+	QString m_sJsonPath;
 
 	// sub-classes
 	QHash<QString, StelAddOn*> m_pStelAddOns;
