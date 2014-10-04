@@ -1,6 +1,6 @@
 ########### install files ###############
 
-INSTALL(FILES stellarium.ico ssystem.ini base_locations.bin.gz DejaVuSans.ttf default_config.ini updates.json DejaVuSansMono.ttf iso639-1.utf8 iso3166-1-alpha-2.utf8 countryCodes.dat constellations_boundaries.dat DESTINATION share/${PACKAGE}/data)
+INSTALL(FILES stellarium.ico ssystem.ini base_locations.bin.gz DejaVuSans.ttf default_config.ini default_addons.json updates.json DejaVuSansMono.ttf iso639-1.utf8 iso3166-1-alpha-2.utf8 countryCodes.dat constellations_boundaries.dat DESTINATION share/${PACKAGE}/data)
 
 IF (BUILD_FOR_MAEMO)
   INSTALL(FILES maemo/stellarium.desktop DESTINATION /usr/share/applications/hildon)
