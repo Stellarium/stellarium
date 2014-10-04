@@ -35,6 +35,7 @@
 #include "StelAddOnDAO.hpp"
 
 #define ADDON_MANAGER_VERSION "0.0.2"
+#define ADDON_MANAGER_CATALOG_VERSION 1
 
 // categories (database column addon.category)
 const QString CATEGORY_CATALOG = "catalog";
@@ -51,7 +52,6 @@ public:
 	StelAddOnMgr();
 	virtual ~StelAddOnMgr();
 
-	void readJson(const QJsonObject &json);
 	QString getThumbnailDir() { return m_sThumbnailDir; }
 	QString getDirectory(QString category) { return m_dirs.value(category, ""); }
 	void installAddOn(const int addonId, const QStringList selectedFiles);
@@ -141,6 +141,9 @@ private:
 
 	// sub-classes
 	QHash<QString, StelAddOn*> m_pStelAddOns;
+
+	void restoreDefaultJsonFile();
+	void readJson(const QJsonObject& json);
 
 	void refreshAddOnStatuses();
 	void downloadNextAddOn();

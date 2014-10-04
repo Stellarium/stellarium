@@ -19,6 +19,7 @@
 
 #include <QDebug>
 #include <QFile>
+#include <QJsonArray>
 #include <QJsonDocument>
 #include <QPixmap>
 #include <QSettings>
@@ -79,33 +80,23 @@ StelAddOnMgr::StelAddOnMgr()
 	{
 		qDebug() << "Add-On Mgr: addons.json does not exist - copying default file to"
 			 << QDir::toNativeSeparators(m_sJsonPath);
-
-		QFile defaultJson(StelFileMgr::getInstallationDir() % "/data/default_addons.json");
-		if (defaultJson.copy(m_sJsonPath))
-		{
-			qDebug() << "Add-On Mgr: default_addons.json was copied to" << m_sJsonPath;
-			// The resource is read only, and the new file inherits this...  make sure the new file
-			// is writable by the Stellarium process so that updates can be done.
-			QFile jsonFile(m_sJsonPath);
-			jsonFile.setPermissions(jsonFile.permissions() | QFile::WriteOwner);
-			// cleaning last_update var
-			m_pConfig->remove("AddOn/last_update");
-			m_iLastUpdate = 1388966410;
-		}
-		else
-		{
-			qWarning() << "Add-On Mgr: cannot copy JSON resource to"
-				   << QDir::toNativeSeparators(m_sJsonPath);
-		}
+		restoreDefaultJsonFile();
 	}
 
 	// loading json file
 	QFile jsonFile(m_sJsonPath);
 	if (jsonFile.open(QIODevice::ReadOnly))
 	{
+		QJsonObject json(QJsonDocument::fromJson(jsonFile.readAll()).object());
+		if (json["name"].toString() != "Add-Ons Catalog" ||
+			json["format-version"].toInt() != ADDON_MANAGER_CATALOG_VERSION)
+		{
+			qWarning()  << "Add-On Mgr: The current addons.json file is not compatible - using default file";
+			restoreDefaultJsonFile();
+		}
 		qDebug() << "Add-On Mgr: loading catalog file:"
 			 << QDir::toNativeSeparators(m_sJsonPath);
-		readJson(QJsonDocument::fromJson(jsonFile.readAll()).object());
+		readJson(json);
 	}
 	else
 	{
@@ -148,7 +139,26 @@ StelAddOnMgr::~StelAddOnMgr()
 {
 }
 
-void StelAddOnMgr::readJson(const QJsonObject &json)
+void StelAddOnMgr::restoreDefaultJsonFile()
+{
+	QFile defaultJson(StelFileMgr::getInstallationDir() % "/data/default_addons.json");
+	if (defaultJson.copy(m_sJsonPath))
+	{
+		qDebug() << "Add-On Mgr: default_addons.json was copied to" << m_sJsonPath;
+		QFile jsonFile(m_sJsonPath);
+		jsonFile.setPermissions(jsonFile.permissions() | QFile::WriteOwner);
+		// cleaning last_update var
+		m_pConfig->remove("AddOn/last_update");
+		m_iLastUpdate = 1388966410;
+	}
+	else
+	{
+		qWarning() << "Add-On Mgr: cannot copy JSON resource to"
+			   << QDir::toNativeSeparators(m_sJsonPath);
+	}
+}
+
+void StelAddOnMgr::readJson(const QJsonObject& json)
 {
 	// TODO
 }
