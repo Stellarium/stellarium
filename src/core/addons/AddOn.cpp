@@ -27,7 +27,6 @@ AddOn::AddOn(const QVariantMap& map)
 	m_sType = map.value("type").toString();
 	m_sInstallID = map.value("install-id").toString();
 	m_sTitle = map.value("title").toString();
-
 	m_sDescription = map.value("description").toString();
 	m_sVersion = map.value("version").toString();
 	m_sFirstStel = map.value("first-stel").toString();
@@ -40,6 +39,13 @@ AddOn::AddOn(const QVariantMap& map)
 	m_sInstalledSize = map.value("installed-size").toString();
 	m_sChecksum = map.value("checksum").toString();
 	m_sThumbnail = map.value("thumbnail").toString();
+
+	// early returns if the mandatory fields are not present
+	if (m_sType.isEmpty() || m_sInstallID.isEmpty() || m_sTitle.isEmpty() || m_sDownloadURL.isEmpty()
+		|| m_sDownloadFilename.isEmpty() || m_sDownloadSize.isEmpty() || m_sChecksum.isEmpty())
+	{
+		return;
+	}
 
 	if (map.contains("authors"))
 	{
