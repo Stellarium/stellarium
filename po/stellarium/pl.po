@@ -10,13 +10,13 @@ msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-09-18 19:41+0700\n"
-"PO-Revision-Date: 2014-09-15 14:38+0000\n"
-"Last-Translator: Alexander Wolf <Unknown>\n"
+"PO-Revision-Date: 2014-10-04 01:59+0000\n"
+"Last-Translator: pp/bs <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-09-19 06:34+0000\n"
+"X-Launchpad-Export-Date: 2014-10-05 05:57+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 "X-Poedit-Country: SPAIN\n"
 "X-Poedit-Language: Spanish\n"
@@ -233,7 +233,7 @@ msgstr "Mgławice ciemne"
 
 #: src/core/modules/Nebula.cpp:393
 msgid "Irregular galaxy"
-msgstr ""
+msgstr "Galaktyka nieregularna"
 
 #: src/core/modules/Nebula.cpp:396
 msgid "Cluster associated with nebulosity"
@@ -345,12 +345,12 @@ msgstr "Prędkość: %1 km/s"
 #: src/core/modules/Comet.cpp:219
 #, no-c-format, qt-format
 msgid "Coma diameter (estimate): %1 km"
-msgstr ""
+msgstr "Ś): %1 km"
 
 #: src/core/modules/Comet.cpp:223
 #, no-c-format, qt-format
 msgid "Gas tail length (estimate): %1 Mio km"
-msgstr ""
+msgstr "Długość ogona gazowego (szacunkowa): %1 mln km"
 
 #: src/core/modules/SolarSystem.cpp:157
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:308
@@ -377,7 +377,7 @@ msgstr "gwiazda"
 #: plugins/Quasars/src/Quasar.cpp:121
 #, qt-format
 msgid "Color Index (B-V): <b>%1</b>"
-msgstr ""
+msgstr "Wskaźnik barwy (B-V): <b>%1</b>"
 
 #: src/core/modules/StarWrapper.cpp:144
 msgid "eruptive variable star"
@@ -431,7 +431,7 @@ msgstr ""
 #: plugins/Exoplanets/src/Exoplanet.cpp:207
 #, qt-format
 msgid "Distance: %1 ly"
-msgstr ""
+msgstr "Odległość: %1 lat świetlnych"
 
 #: src/core/modules/StarWrapper.cpp:224
 #: plugins/Exoplanets/src/Exoplanet.cpp:201
@@ -472,7 +472,7 @@ msgstr "Następne maksymalne światło: %1 UTC"
 #: src/core/modules/StarWrapper.cpp:257
 #, qt-format
 msgid "Duration of eclipse: %1%"
-msgstr "Duration of eclipse: %1%"
+msgstr "Czas trwania zaćmienia: %1%"
 
 #: src/core/modules/StarWrapper.cpp:259
 #, qt-format
@@ -516,11 +516,11 @@ msgstr "Zmniejsz tempo upływu czasu (nieznacznie)"
 
 #: src/core/StelCore.cpp:191
 msgid "Set normal time rate"
-msgstr "Ustaw normalną prędkość upływu czasu"
+msgstr "Ustaw normalne tempo upływu czasu"
 
 #: src/core/StelCore.cpp:192
 msgid "Set time rate to zero"
-msgstr "Ustaw prędkość upływu czasu na zero"
+msgstr "Ustaw tempo upływu czasu na zero"
 
 #: src/core/StelCore.cpp:193
 msgid "Set time to now"
@@ -1154,7 +1154,7 @@ msgstr "Długość/szerokość galaktyczna: %1/%2"
 
 #: src/core/StelSkyLayerMgr.cpp:87
 msgid "Deep-sky objects background images"
-msgstr ""
+msgstr "Obrazy obiektów głębokiego nieba"
 
 #: src/core/StelMovementMgr.cpp:130 src/gui/StelGui.cpp:186
 #: src/StelMainView.cpp:360
@@ -1471,6 +1471,7 @@ msgstr ""
 msgid ""
 " Sorry, your hardware is not compatible with newest version of Stellarium!"
 msgstr ""
+" Niestety, twój sprzęt nie jest kompatybilny z najnowszą wersją Stellarium!"
 
 #. TRANSLATORS: This message will be displayed for users if current version of Stellarium is equals with version from stellarium.org
 #: src/gui/HelpDialog.cpp:331
@@ -1666,7 +1667,7 @@ msgstr "Spowolnij wykonywanie skryptu"
 
 #: src/gui/StelGui.cpp:190
 msgid "Set the normal script execution rate"
-msgstr "Ustaw normalną prędkość wykonywania skryptu"
+msgstr "Ustaw normalne tempo wykonywania skryptu"
 
 #: src/gui/StelGui.cpp:191
 msgid "Stop script execution"
@@ -1808,7 +1809,7 @@ msgstr "Normalna intensywność"
 
 #: src/gui/ViewDialog.cpp:591
 msgid "Standard Orionids rate"
-msgstr ""
+msgstr "Typowa aktywność Orionidów"
 
 #: src/gui/ViewDialog.cpp:594
 msgid "Standard Perseids rate"
@@ -1816,19 +1817,19 @@ msgstr "Typowa aktywność Perseidów"
 
 #: src/gui/ViewDialog.cpp:597
 msgid "Standard Geminids rate"
-msgstr ""
+msgstr "Typowa aktywność Geminidów"
 
 #: src/gui/ViewDialog.cpp:600
 msgid "Exceptional Perseid rate"
-msgstr ""
+msgstr "Wyjątkowa aktywność Perseidów"
 
 #: src/gui/ViewDialog.cpp:603
 msgid "Meteor storm rate"
-msgstr ""
+msgstr "Aktywność burzy meteorów"
 
 #: src/gui/ViewDialog.cpp:606
 msgid "Exceptional Draconid rate"
-msgstr ""
+msgstr "Wyjątkowa aktywność Drakonidów"
 
 #: src/gui/ViewDialog.cpp:609
 msgid "Exceptional Leonid rate"
@@ -1836,11 +1837,11 @@ msgstr "Wysoka aktywność Leonidów"
 
 #: src/gui/ViewDialog.cpp:612
 msgid "Very high rate (1966 Leonids)"
-msgstr ""
+msgstr "Bardzo wysoka aktywność (Leonidy 1966)"
 
 #: src/gui/ViewDialog.cpp:615
 msgid "Highest rate ever (1833 Leonids)"
-msgstr ""
+msgstr "Najwyższa aktywność (Leonidy 1833)"
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:112
 msgid "Select a ZIP archive that contains a Stellarium landscape"
@@ -1957,16 +1958,16 @@ msgstr ""
 #: src/gui/SearchDialog.cpp:233
 msgctxt "coordinate system"
 msgid "Horizontal"
-msgstr ""
+msgstr "Horyzontalny"
 
 #: src/gui/SearchDialog.cpp:234
 msgctxt "coordinate system"
 msgid "Galactic"
-msgstr ""
+msgstr "Galaktyczny"
 
 #: src/gui/SearchDialog.cpp:248
 msgid "Right ascension"
-msgstr ""
+msgstr "Rektascensja"
 
 #: src/gui/SearchDialog.cpp:250
 msgid "Declination"
@@ -2047,11 +2048,14 @@ msgid ""
 "Insufficient OpenGL version. Please update drivers, graphics hardware, or "
 "use MESA (or ANGLE) version."
 msgstr ""
+"Niewystarczająca wersja OpenGL. Zaktualizuj sterowniki, kartę graficzną albo "
+"użyj wersji MESA (lub ANGLE)."
 
 #: src/main.cpp:366
 msgid ""
 "Insufficient OpenGL version. Please update drivers, or graphics hardware."
 msgstr ""
+"Niewystarczająca wersja OpenGL. Zaktualizuj sterowniki lub kartę graficzną."
 
 #: src/StelMainView.cpp:360
 msgid "Save screenshot"
@@ -2554,27 +2558,27 @@ msgstr "Asteroidy"
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:195
 msgid "Moons"
-msgstr ""
+msgstr "Księżyce"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:197
 msgid "Plutoids"
-msgstr ""
+msgstr "Plutoidy"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:202
 msgid "Bright galaxies"
-msgstr ""
+msgstr "Jasne galaktyki"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:204
 msgid "Open star clusters"
-msgstr ""
+msgstr "Gromady otwarte"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:206
 msgid "Globular star clusters"
-msgstr ""
+msgstr "Gromady kuliste"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:208
@@ -2589,12 +2593,12 @@ msgstr "Mgławice planetarne"
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:212
 msgid "Dark nebulae"
-msgstr ""
+msgstr "Ciemne mgławice"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:214
 msgid "Irregular galaxies"
-msgstr ""
+msgstr "Galaktyki nieregularne"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:216
@@ -2604,12 +2608,12 @@ msgstr ""
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:218
 msgid "Messier Catalogue"
-msgstr ""
+msgstr "Katalog Messiera"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:220
 msgid "Caldwell Catalogue"
-msgstr ""
+msgstr "Katalog Caldwella"
 
 #: src/translations.h:224
 msgid "Arabic"
@@ -2830,7 +2834,7 @@ msgstr "Zjawiska z Ziemią widzianą z Merkurego"
 #. TRANSLATORS: Name and description of script
 #: src/translations.h:315
 msgid "Earth Events from a floating city on Venus"
-msgstr ""
+msgstr "Zjawiska z Ziemią widzianą z unoszącego się miasta na Wenus"
 
 #. TRANSLATORS: Name and description of script
 #: src/translations.h:317
@@ -2952,6 +2956,8 @@ msgstr ""
 msgid ""
 "Screensaver of various happenings in the Solar System. 232 events in all!"
 msgstr ""
+"Wygaszacz ekranu wyświetlający różne zdarzenia w Układzie Słonecznym. "
+"Łącznie 232 zjawiska!"
 
 #: src/translations.h:343
 msgid "A tour of the western constellations."
@@ -4087,10 +4093,11 @@ msgstr ""
 #: src/ui_locationDialogGui.h:414
 msgid "Reset location list to show all known locations"
 msgstr ""
+"Zresetuj listę lokalizacji, aby wyświetlić wszystkie znane lokalizacje"
 
 #: src/ui_locationDialogGui.h:416
 msgid "Reset Location List"
-msgstr ""
+msgstr "Zresetuj listę lokalizacji"
 
 #: src/ui_locationDialogGui.h:417
 msgid "Current location information"
@@ -4129,7 +4136,7 @@ msgstr " m"
 
 #: src/ui_locationDialogGui.h:431
 msgid "Return to default location"
-msgstr ""
+msgstr "Wróć do lokalizacji domyślnej"
 
 #: src/ui_locationDialogGui.h:433
 msgid "Add to list"
@@ -4153,7 +4160,7 @@ msgstr "Planeta:"
 
 #: src/ui_locationDialogGui.h:438
 msgid "Use current location as default"
-msgstr ""
+msgstr "Użyj aktualnej lokalizacji jako domyślnej"
 
 #: src/ui_locationDialogGui.h:439
 msgid "Get location from Network"
@@ -4284,6 +4291,7 @@ msgstr "Układ współrzędnych:"
 msgid ""
 "Note: this tool doesn't apply the refraction correction for coordinates."
 msgstr ""
+"Uwaga: to narzędzie nie stosuje korekcji refrakcji dla współrzędnych."
 
 #: src/ui_searchDialogGui.h:696
 msgid "Position"
@@ -4365,8 +4373,8 @@ msgstr "Etykiety i znaczniki"
 msgid ""
 "Labels and markers for deep-sky objects (star clusters, galaxies and nebulas)"
 msgstr ""
-"Etykiety i znaczniki obiektów głębokiego nieba (gromady gwiazd, galaktyki i "
-"mgławice)"
+"Etykiety i znaczniki obiektów głębokiego nieba (gromad gwiazd, galaktyk i "
+"mgławic)"
 
 #: src/ui_viewDialog.h:1159 src/ui_viewDialog.h:1215
 msgctxt "Deep-sky objects"
@@ -4475,12 +4483,12 @@ msgstr "Meteory"
 
 #: src/ui_viewDialog.h:1200
 msgid "Hourly zenith rate"
-msgstr ""
+msgstr "Zenitalna liczba godzinna (ZHR)"
 
 #: src/ui_viewDialog.h:1202
 msgctxt "Zenithal Hourly Rate"
 msgid "ZHR:"
-msgstr ""
+msgstr "ZHR:"
 
 #: src/ui_viewDialog.h:1205
 msgid "Limit Magnitudes (for unaided/binocular observers)"
@@ -9917,7 +9925,7 @@ msgstr "Od:"
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:560
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:562
 msgid "dd/MMM/yyyy"
-msgstr ""
+msgstr "dd/MMM/rrrr"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:561
 msgid "To:"
@@ -9929,7 +9937,7 @@ msgstr "Wyniki"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:565
 msgid "Search Events"
-msgstr "Szukaj wydarzeń"
+msgstr "Szukaj zjawisk"
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:55
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:97
@@ -9945,7 +9953,7 @@ msgstr "Ta wtyczka pokazuje współrzędne wskaźnika myszy."
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:97
 msgid "Show coordinates of the mouse pointer"
-msgstr ""
+msgstr "Pokaż współrzędne wskaźnika myszy"
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:136
 msgctxt "abbreviated in the plugin"
@@ -9995,11 +10003,11 @@ msgstr "Prawy dolny róg ekranu"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:153
 msgid "Right ascension/Declination (J2000.0)"
-msgstr ""
+msgstr "Rektascensja/Deklinacja (J2000.0)"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:154
 msgid "Right ascension/Declination"
-msgstr ""
+msgstr "Rektascensja/Deklinacja"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:156
 msgid "Ecliptic Longitude/Latitude (J2000.0)"
@@ -10011,11 +10019,11 @@ msgstr ""
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:300
 msgid "Show coordinates of the mouse cursor on the screen."
-msgstr ""
+msgstr "Pokaż współrzędne kursora myszy na ekranie."
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:301
 msgid "Enable display of coordinates at startup"
-msgstr ""
+msgstr "Włącz wyświetlanie współrzędnych po uruchomieniu programu"
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:302
 msgid "Show plug-in button on toolbar"
@@ -10023,11 +10031,11 @@ msgstr "Pokaż przycisk wtyczki na pasku narzędzi"
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:304
 msgid "Which coordinate system will be used for displaying"
-msgstr ""
+msgstr "Który układ współrzędnych będzie używany do wyświetlania"
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:306
 msgid "Coordinates:"
-msgstr ""
+msgstr "Współrzędne:"
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:309
 msgid "Place of the string with coordinates of the mouse pointer"
