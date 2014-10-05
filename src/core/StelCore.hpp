@@ -291,6 +291,8 @@ public:
 
 	bool isDay() const;
 
+	double getCurrentEpoch() const;
+
 public slots:
 	//! Set the current ProjectionType to use
 	void setCurrentProjectionType(ProjectionType type);
