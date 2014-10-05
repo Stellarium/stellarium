@@ -1747,3 +1747,11 @@ bool StelCore::isDay() const
 	const Vec3d& sunPos = GETSTELMODULE(SolarSystem)->getSun()->getAltAzPosGeometric(this);
 	return sunPos[2] > -0.12; // Nautical twilight
 }
+
+double StelCore::getCurrentEpoch() const
+{
+	int year, month, day;
+	StelUtils::getDateFromJulianDay(getJDay(), &year, &month, &day);
+	QDate date = QDate::fromString(QString("%1.%2.%3").arg(year, 4, 10, QLatin1Char('0')).arg(month).arg(day), "yyyy.M.d");
+	return double(year) + double(date.dayOfYear())/double(date.daysInYear());
+}
