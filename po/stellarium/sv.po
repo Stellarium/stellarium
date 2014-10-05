@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-09-18 19:41+0700\n"
-"PO-Revision-Date: 2014-07-13 20:35+0000\n"
-"Last-Translator: Sten Persson <utsuddaren@gmail.com>\n"
+"PO-Revision-Date: 2014-10-04 22:28+0000\n"
+"Last-Translator: Anders Jonsson <Unknown>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-09-19 06:38+0000\n"
+"X-Launchpad-Export-Date: 2014-10-05 05:58+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:106 src/core/modules/StarMgr.cpp:346
@@ -223,11 +223,11 @@ msgstr "Planetär nebulosa"
 
 #: src/core/modules/Nebula.cpp:390
 msgid "Dark nebula"
-msgstr ""
+msgstr "Mörk nebulosa"
 
 #: src/core/modules/Nebula.cpp:393
 msgid "Irregular galaxy"
-msgstr ""
+msgstr "Oregelbunden galax"
 
 #: src/core/modules/Nebula.cpp:396
 msgid "Cluster associated with nebulosity"
@@ -339,7 +339,7 @@ msgstr "Hastighet: %1 km/s"
 #: src/core/modules/Comet.cpp:219
 #, no-c-format, qt-format
 msgid "Coma diameter (estimate): %1 km"
-msgstr ""
+msgstr "Komadiameter (beräknad): %1 km"
 
 #: src/core/modules/Comet.cpp:223
 #, no-c-format, qt-format
@@ -422,7 +422,7 @@ msgstr "Magnitudintervall: <b>%1</b>%2<b>%3/%4</b> (Fotometriskt system: %5)"
 #: plugins/Exoplanets/src/Exoplanet.cpp:207
 #, qt-format
 msgid "Distance: %1 ly"
-msgstr ""
+msgstr "Avstånd: %1 ljusår"
 
 #: src/core/modules/StarWrapper.cpp:224
 #: plugins/Exoplanets/src/Exoplanet.cpp:201
@@ -1891,7 +1891,7 @@ msgid ""
 "The selected file is not a ZIP archive or does not contain a Stellarium "
 "landscape."
 msgstr ""
-"Den valda filen är inte ett ZIP arkiv eller innehåller inte ett Stellarium-"
+"Den valda filen är inte ett ZIP-arkiv eller innehåller inte ett Stellarium-"
 "landskap."
 
 #. TRANSLATORS: The parameter is the duplicate name or identifier.
@@ -1960,7 +1960,7 @@ msgstr ""
 
 #: src/gui/SearchDialog.cpp:257
 msgid "Azimuth"
-msgstr ""
+msgstr "Azimut"
 
 #: src/gui/SearchDialog.cpp:260
 msgid "Altitude"
@@ -1972,7 +1972,7 @@ msgstr ""
 
 #: src/gui/SearchDialog.cpp:270
 msgid "Latitude"
-msgstr ""
+msgstr "Latitud"
 
 #: src/gui/SearchDialog.cpp:508
 msgid "Simbad Lookup Error"
@@ -2537,12 +2537,12 @@ msgstr "Asteroider"
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:195
 msgid "Moons"
-msgstr ""
+msgstr "Månar"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:197
 msgid "Plutoids"
-msgstr ""
+msgstr "Plutoider"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:202
@@ -2552,32 +2552,32 @@ msgstr ""
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:204
 msgid "Open star clusters"
-msgstr ""
+msgstr "Öppna stjärnhopar"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:206
 msgid "Globular star clusters"
-msgstr ""
+msgstr "Klotformiga stjärnhopar"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:208
 msgid "Nebulae"
-msgstr ""
+msgstr "Nebulosor"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:210
 msgid "Planetary nebulae"
-msgstr ""
+msgstr "Planetariska nebulosor"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:212
 msgid "Dark nebulae"
-msgstr ""
+msgstr "Mörka nebulosor"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:214
 msgid "Irregular galaxies"
-msgstr ""
+msgstr "Oregelbundna galaxer"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:216
@@ -2587,12 +2587,12 @@ msgstr ""
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:218
 msgid "Messier Catalogue"
-msgstr ""
+msgstr "Messiers katalog"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:220
 msgid "Caldwell Catalogue"
-msgstr ""
+msgstr "Caldwells katalog"
 
 #: src/translations.h:224
 msgid "Arabic"
@@ -4031,11 +4031,11 @@ msgstr ""
 
 #: src/ui_dateTimeDialogGui.h:369
 msgid "Julian Date"
-msgstr ""
+msgstr "Julianskt datum"
 
 #: src/ui_dateTimeDialogGui.h:372
 msgid "Modified Julian Date"
-msgstr ""
+msgstr "Modifierat Julianskt datum"
 
 #: src/ui_helpDialogGui.h:277 src/ui_helpDialogGui.h:283
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:418
@@ -5475,7 +5475,7 @@ msgstr "Visa hårkors"
 
 #: plugins/Oculars/src/Oculars.cpp:1330
 msgid "Image sensor frame"
-msgstr "Bildsensorruta"
+msgstr "Bildsensorram"
 
 #: plugins/Oculars/src/Oculars.cpp:1331
 msgid "Telrad sight"
@@ -5644,31 +5644,31 @@ msgstr "Nästa teleskop"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:262
 msgid "Rotate the sensor frame 15 degrees counterclockwise"
-msgstr ""
+msgstr "Rotera sensorramen 15 grader moturs"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:275
 msgid "Rotate the sensor frame 5 degrees counterclockwise"
-msgstr ""
+msgstr "Rotera sensorramen 5 grader moturs"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:288
 msgid "Rotate the sensor frame 1 degree counterclockwise"
-msgstr ""
+msgstr "Rotera sensorramen 1 grad moturs"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:301
 msgid "Reset the sensor frame rotation"
-msgstr ""
+msgstr "Återställ sensorramens rotation"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:314
 msgid "Rotate the sensor frame 1 degree clockwise"
-msgstr ""
+msgstr "Rotera sensorramen 1 grad medurs"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:327
 msgid "Rotate the sensor frame 5 degrees clockwise"
-msgstr ""
+msgstr "Rotera sensorramen 5 grader medurs"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:340
 msgid "Rotate the sensor frame 15 degrees clockwise"
-msgstr ""
+msgstr "Rotera sensorramen 15 grader medurs"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:544
 msgid "Effective focal length of the ocular"
@@ -5738,9 +5738,9 @@ msgid ""
 "will populate some samples to get your started."
 msgstr ""
 "Det här tillägget skall simulera vad du ser genom ett okular. Det här "
-"konfigurations-fönstret kan användas till att lägga till, ändra eller ta "
-"bort okular och teleskop såväl som CCD-sensorer. Första gången appen körs "
-"kommer ett antal exempel skapas."
+"konfigurationsfönstret kan användas till att lägga till, ändra eller ta bort "
+"okular och teleskop såväl som CCD-sensorer. Första gången appen körs kommer "
+"ett antal exempel skapas."
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:506
 msgid ""
@@ -6241,7 +6241,7 @@ msgstr ""
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:424
 #, qt-format
 msgid "See %1this document%2 for details."
-msgstr ""
+msgstr "Se %1detta dokument%2 för detaljer."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:456
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:166
@@ -6315,12 +6315,12 @@ msgstr "Fel vid uppdatering"
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:490
 #, qt-format
 msgid "Updated %1/%2 satellite(s); %3 added; %4 removed"
-msgstr ""
+msgstr "Uppdaterade %1/%2 satellit(er); %3 tillagda; %4 borttagna"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:492
 #, qt-format
 msgid "Updated %1/%2 satellite(s); %3 added; %4 missing"
-msgstr ""
+msgstr "Uppdaterade %1/%2 satellit(er); %3 tillagda; %4 saknas"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:554
 msgid "[new source]"
@@ -6375,7 +6375,7 @@ msgstr "[alla]"
 #. TRANSLATORS: Displayed in the satellite group selection box.
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:698
 msgid "New group..."
-msgstr ""
+msgstr "Ny grupp..."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:904
 msgid "Select TLE Update File"
@@ -6383,7 +6383,7 @@ msgstr "Välj TLE-uppdateringsfil"
 
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:149
 msgid "Downloading data..."
-msgstr ""
+msgstr "Hämtar data..."
 
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:150
 msgid ""
@@ -6448,7 +6448,7 @@ msgstr ""
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:309
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:517
 msgid "Update frequency (hours):"
-msgstr ""
+msgstr "Uppdateringsfrekvens (timmar):"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:689
 msgid "Labels"
@@ -6503,7 +6503,7 @@ msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:724
 msgid "Remove the selected satellites"
-msgstr ""
+msgstr "Ta bort de valda satelliterna"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:728
 msgid "Save changes"
@@ -6535,7 +6535,7 @@ msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:744
 msgid "Do not update"
-msgstr ""
+msgstr "Uppdatera inte"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:745
 msgid "Description:"
@@ -6575,7 +6575,7 @@ msgstr "Källor"
 
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:211
 msgid "More Satellites"
-msgstr ""
+msgstr "Fler satelliter"
 
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:213
 msgid "Get data from update sources"
@@ -6588,17 +6588,17 @@ msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:215
 msgid "New satellites"
-msgstr ""
+msgstr "Nya satelliter"
 
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:216
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:533
 msgid "Mark all"
-msgstr ""
+msgstr "Markera alla"
 
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:217
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:534
 msgid "Mark none"
-msgstr ""
+msgstr "Markera ingen"
 
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:218
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:535
@@ -6924,7 +6924,7 @@ msgstr "TCP port:"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:505
 msgid "User interface settings"
-msgstr ""
+msgstr "Inställningar för användargränssnitt"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:507
 msgid "Show circles with fixed angular size around the telescope reticle"
@@ -7506,7 +7506,7 @@ msgstr ""
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:516
 msgid "Select the source"
-msgstr ""
+msgstr "Välj källan"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:517
 msgid "Download a list of objects from the Internet"
@@ -7514,11 +7514,11 @@ msgstr ""
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:518
 msgid "Select a source from the list:"
-msgstr ""
+msgstr "Välj en källa från listan:"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:519
 msgid "Or enter a URL:"
-msgstr ""
+msgstr "Eller ange en URL:"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:520
 msgid "Add this URL to the bookmarks list"
@@ -7530,7 +7530,7 @@ msgstr ""
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:522
 msgid "A file containing a list of objects"
-msgstr ""
+msgstr "En fil som innehåller en lista över objekt"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:523
 msgid "Get orbital elements"
@@ -7556,11 +7556,11 @@ msgstr ""
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:530
 msgid "Overwrite existing objects"
-msgstr ""
+msgstr "Skriv över existerande objekt"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:531
 msgid "Update existing objects"
-msgstr ""
+msgstr "Uppdatera existerande objekt"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:532
 msgid "Update only the orbital elements"
@@ -7568,7 +7568,7 @@ msgstr ""
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:536
 msgid "Add objects"
-msgstr ""
+msgstr "Lägg till objekt"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:293
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:304
@@ -7632,7 +7632,7 @@ msgstr ""
 #: plugins/Supernovae/src/Supernovae.cpp:71
 #: plugins/Supernovae/src/Supernovae.cpp:148
 msgid "Historical Supernovae"
-msgstr ""
+msgstr "Historiska supernovor"
 
 #: plugins/Supernovae/src/Supernovae.cpp:74
 msgid "This plugin allows you to see some bright historical supernovae."
@@ -7644,12 +7644,12 @@ msgstr "Konfigurationsfönster för historiska supernovor"
 
 #: plugins/Supernovae/src/Supernova.cpp:130
 msgid "supernova"
-msgstr ""
+msgstr "supernova"
 
 #: plugins/Supernovae/src/Supernova.cpp:145
 #, qt-format
 msgid "Type of supernova: %1"
-msgstr ""
+msgstr "Typ av supernova: %1"
 
 #: plugins/Supernovae/src/Supernova.cpp:146 plugins/Novae/src/Nova.cpp:151
 #, qt-format
@@ -7658,17 +7658,18 @@ msgstr ""
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:116
 msgid "Historical Supernovae Plug-in"
-msgstr ""
+msgstr "Insticksmodulen Historiska supernovor"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:121
 msgid "This plugin allows you to see some bright historical supernovae: "
 msgstr ""
+"Denna insticksmodul låter dig se några ljusstarka historiska supernovor: "
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:123
 #: plugins/Novae/src/gui/NovaeDialog.cpp:125
 #, qt-format
 msgid "This list altogether contains %1 stars."
-msgstr ""
+msgstr "Denna lista innehåller totalt %1 stjärnor."
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:124
 #, qt-format
@@ -7701,7 +7702,7 @@ msgstr ""
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:132
 msgid "Sergei Blinnikov"
-msgstr ""
+msgstr "Sergei Blinnikov"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:134
 msgid "Institute for Theoretical and Experimental Physics"
@@ -7710,7 +7711,7 @@ msgstr ""
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:135
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:143
 msgid "in Russia"
-msgstr ""
+msgstr "i Ryssland"
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:146
@@ -7727,15 +7728,15 @@ msgstr ""
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:189
 #, qt-format
 msgid "Next update: %1 days"
-msgstr ""
+msgstr "Nästa uppdatering: %1 dagar"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:212
 msgid "Historical supernovae is updated"
-msgstr ""
+msgstr "Historiska supernovor är uppdaterade"
 
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:229
 msgid "Historical Supernovae Configuration"
-msgstr ""
+msgstr "Inställning för Historiska supernovor"
 
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:230
 msgid "Historical Supernovae Plug-in Configuration"
@@ -7761,7 +7762,7 @@ msgstr "Uppdatera från internet"
 #: plugins/Quasars/src/ui_quasarsDialog.h:263
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:269
 msgid "Update frequency (days):"
-msgstr ""
+msgstr "Uppdateringsfrekvens (dagar):"
 
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:236
 #: plugins/Novae/src/ui_novaeDialog.h:239
@@ -7788,7 +7789,7 @@ msgstr ""
 #: plugins/MeteorShowers/src/MeteorShower.cpp:344
 #, qt-format
 msgid "Type: <b>%1</b> (%2)"
-msgstr ""
+msgstr "Typ: <b>%1</b> (%2)"
 
 #: plugins/Novae/src/Nova.cpp:135
 msgid "nova"
@@ -7874,7 +7875,7 @@ msgstr "Konfigurationsfönster för kvasarer"
 
 #: plugins/Quasars/src/Quasar.cpp:100
 msgid "quasar"
-msgstr ""
+msgstr "kvasar"
 
 #: plugins/Quasars/src/Quasar.cpp:131
 #, qt-format
@@ -7947,7 +7948,7 @@ msgstr ""
 #: plugins/Pulsars/src/Pulsars.cpp:73 plugins/Pulsars/src/Pulsars.cpp:169
 #: plugins/Pulsars/src/Pulsars.cpp:170
 msgid "Pulsars"
-msgstr ""
+msgstr "Pulsarer"
 
 #: plugins/Pulsars/src/Pulsars.cpp:76
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:129
@@ -7966,7 +7967,7 @@ msgstr "Konfigurationsfönster för  pulsarer"
 
 #: plugins/Pulsars/src/Pulsar.cpp:157
 msgid "pulsar"
-msgstr ""
+msgstr "pulsar"
 
 #: plugins/Pulsars/src/Pulsar.cpp:162
 msgid "has one registered glitch"
@@ -8000,7 +8001,7 @@ msgstr ""
 #. TRANSLATORS: Unit of measure for distance - centimeters
 #: plugins/Pulsars/src/Pulsar.cpp:192
 msgid "cm"
-msgstr ""
+msgstr "cm"
 
 #. TRANSLATORS: Unit of measure for distance - parsecs
 #: plugins/Pulsars/src/Pulsar.cpp:195
@@ -8048,7 +8049,7 @@ msgstr ""
 #: plugins/Pulsars/src/Pulsar.cpp:231 plugins/Pulsars/src/Pulsar.cpp:243
 #: plugins/Pulsars/src/Pulsar.cpp:255
 msgid "MHz"
-msgstr ""
+msgstr "MHz"
 
 #. TRANSLATORS: mJy is milliJansky(10-26W/m2/Hz)
 #: plugins/Pulsars/src/Pulsar.cpp:234 plugins/Pulsars/src/Pulsar.cpp:246
@@ -8123,7 +8124,7 @@ msgstr ""
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:140
 msgid "Vladimir Samodourov"
-msgstr ""
+msgstr "Vladimir Samodourov"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:142
 msgid "Pushchino Radio Astronomy Observatory"
@@ -8131,7 +8132,7 @@ msgstr ""
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:145
 msgid "Maciej Serylak"
-msgstr ""
+msgstr "Maciej Serylak"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:147
 msgid "Nancay Radioastronomical Observatory"
@@ -8139,7 +8140,7 @@ msgstr ""
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:148
 msgid "in France"
-msgstr ""
+msgstr "i Frankrike"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:249
 msgid "Pulsars is updated"
@@ -8151,7 +8152,7 @@ msgstr ""
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:272
 msgid "Settings for pulsars"
-msgstr ""
+msgstr "Inställningar för pulsarer"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:274
 msgid "Plot all pulsars without labels"
@@ -8173,7 +8174,7 @@ msgstr ""
 #: plugins/Exoplanets/src/Exoplanets.cpp:170
 #: plugins/Exoplanets/src/Exoplanets.cpp:171
 msgid "Exoplanets"
-msgstr ""
+msgstr "Exoplaneter"
 
 #: plugins/Exoplanets/src/Exoplanets.cpp:78
 msgid ""
@@ -8191,30 +8192,30 @@ msgstr "Konfigurationsfönster för exoplaneter"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:177
 msgid "planetary system"
-msgstr ""
+msgstr "planetsystem"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:214
 msgid "Metallicity"
-msgstr ""
+msgstr "Metallicitet"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:218
 #: plugins/Exoplanets/src/Exoplanet.cpp:232
 msgid "Mass"
-msgstr ""
+msgstr "Massa"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:222
 #: plugins/Exoplanets/src/Exoplanet.cpp:233
 msgid "Radius"
-msgstr ""
+msgstr "Radie"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:226
 #, qt-format
 msgid "Effective temperature: %1 K"
-msgstr ""
+msgstr "Effektiv temperatur: %1 K"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:230
 msgid "Exoplanet"
-msgstr ""
+msgstr "Exoplanet"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:231
 msgid "Period"
@@ -8222,7 +8223,7 @@ msgstr ""
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:231
 msgid "days"
-msgstr ""
+msgstr "dagar"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:232
 #: plugins/Exoplanets/src/Exoplanet.cpp:233
@@ -8243,7 +8244,7 @@ msgstr ""
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:236
 msgid "Inclination"
-msgstr ""
+msgstr "Inklination"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:237
 msgid "Angle Distance"
@@ -8483,12 +8484,12 @@ msgstr ""
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:330
 msgctxt "tab in plugin windows"
 msgid "Info"
-msgstr ""
+msgstr "Info"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:331
 msgctxt "tab in plugin windows"
 msgid "Websites"
-msgstr ""
+msgstr "Webbplatser"
 
 #: plugins/Observability/src/Observability.cpp:67
 msgid "Observability Analysis"
@@ -8508,62 +8509,62 @@ msgstr ""
 #: plugins/Observability/src/Observability.cpp:170
 msgctxt "short month name"
 msgid "Jan"
-msgstr ""
+msgstr "Jan"
 
 #: plugins/Observability/src/Observability.cpp:171
 msgctxt "short month name"
 msgid "Feb"
-msgstr ""
+msgstr "Feb"
 
 #: plugins/Observability/src/Observability.cpp:172
 msgctxt "short month name"
 msgid "Mar"
-msgstr ""
+msgstr "Mar"
 
 #: plugins/Observability/src/Observability.cpp:173
 msgctxt "short month name"
 msgid "Apr"
-msgstr ""
+msgstr "Apr"
 
 #: plugins/Observability/src/Observability.cpp:174
 msgctxt "short month name"
 msgid "May"
-msgstr ""
+msgstr "Maj"
 
 #: plugins/Observability/src/Observability.cpp:175
 msgctxt "short month name"
 msgid "Jun"
-msgstr ""
+msgstr "Jun"
 
 #: plugins/Observability/src/Observability.cpp:176
 msgctxt "short month name"
 msgid "Jul"
-msgstr ""
+msgstr "Jul"
 
 #: plugins/Observability/src/Observability.cpp:177
 msgctxt "short month name"
 msgid "Aug"
-msgstr ""
+msgstr "Aug"
 
 #: plugins/Observability/src/Observability.cpp:178
 msgctxt "short month name"
 msgid "Sep"
-msgstr ""
+msgstr "Sep"
 
 #: plugins/Observability/src/Observability.cpp:179
 msgctxt "short month name"
 msgid "Oct"
-msgstr ""
+msgstr "Okt"
 
 #: plugins/Observability/src/Observability.cpp:180
 msgctxt "short month name"
 msgid "Nov"
-msgstr ""
+msgstr "Nov"
 
 #: plugins/Observability/src/Observability.cpp:181
 msgctxt "short month name"
 msgid "Dec"
-msgstr ""
+msgstr "Dec"
 
 #. TRANSLATORS: Short for "hours".
 #: plugins/Observability/src/Observability.cpp:184
@@ -8578,7 +8579,7 @@ msgstr "m"
 #. TRANSLATORS: Short for "seconds".
 #: plugins/Observability/src/Observability.cpp:188
 msgid "s"
-msgstr ""
+msgstr "s"
 
 #: plugins/Observability/src/Observability.cpp:189
 #, qt-format
@@ -8671,11 +8672,11 @@ msgstr ""
 
 #: plugins/Observability/src/Observability.cpp:211
 msgid "TODAY:"
-msgstr ""
+msgstr "IDAG:"
 
 #: plugins/Observability/src/Observability.cpp:212
 msgid "THIS YEAR:"
-msgstr ""
+msgstr "I ÅR:"
 
 #. TRANSLATORS: The space at the end is significant - another sentence may follow.
 #: plugins/Observability/src/Observability.cpp:214
@@ -8811,7 +8812,7 @@ msgstr ""
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:147
 msgid "Full Moon:"
-msgstr ""
+msgstr "Fullmåne:"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:147
 msgid ""
@@ -8960,7 +8961,7 @@ msgstr ""
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:260
 msgctxt "time"
 msgid "s"
-msgstr ""
+msgstr "s"
 
 #: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:80
 msgid "Equation of Time plug-in"
@@ -8985,7 +8986,7 @@ msgstr ""
 
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:273
 msgid "Use minutes and seconds"
-msgstr ""
+msgstr "Använd minuter och sekunder"
 
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:274
 msgid "Change sign of equation"
@@ -8994,7 +8995,7 @@ msgstr ""
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:275
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:307
 msgid "Font size:"
-msgstr ""
+msgstr "Typsnittsstorlek:"
 
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:63
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:163
@@ -9472,7 +9473,7 @@ msgstr ""
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:384
 msgid "Activity"
-msgstr ""
+msgstr "Aktivitet"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:389
 #, qt-format
@@ -9701,7 +9702,7 @@ msgstr ""
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:559
 msgid "From:"
-msgstr ""
+msgstr "Från:"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:560
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:562
@@ -9710,11 +9711,11 @@ msgstr ""
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:561
 msgid "To:"
-msgstr ""
+msgstr "Till:"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:564
 msgid "Results"
-msgstr ""
+msgstr "Resultat"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:565
 msgid "Search Events"
@@ -9816,7 +9817,7 @@ msgstr ""
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:306
 msgid "Coordinates:"
-msgstr ""
+msgstr "Koordinater:"
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:309
 msgid "Place of the string with coordinates of the mouse pointer"
