@@ -33,6 +33,7 @@
 #include "AOSkyCulture.hpp"
 #include "AOTexture.hpp"
 #include "StelAddOnDAO.hpp"
+#include "addons/AddOn.hpp"
 
 #define ADDON_MANAGER_VERSION "0.0.2"
 #define ADDON_MANAGER_CATALOG_VERSION 1
@@ -138,12 +139,13 @@ private:
 	QHash<QString, QString> m_dirs;
 
 	QString m_sJsonPath;
+	QMap<qint64, AddOn*> m_addons;
 
 	// sub-classes
 	QHash<QString, StelAddOn*> m_pStelAddOns;
 
 	void restoreDefaultJsonFile();
-	void readJson(const QJsonObject& json);
+	void readJsonObject(const QJsonObject& addOns);
 
 	void refreshAddOnStatuses();
 	void downloadNextAddOn();

@@ -26,8 +26,10 @@ class AddOn : public QObject
 {
 	Q_OBJECT
 public:
-	AddOn(const QVariantMap &map);
+	AddOn(const qint64 addOnId, const QVariantMap &map);
 	virtual ~AddOn();
+
+	bool isLoaded() { return m_bLoaded; }
 
 private:
 	typedef struct
@@ -37,8 +39,9 @@ private:
 		QString url;
 	} Authors;
 
+	qint64 m_iAddOnId;
 	QString m_sType;
-	QString m_sInstallID;
+	QString m_sInstallId;
 	QString m_sTitle;
 	QString m_sDescription;
 	QString m_sVersion;

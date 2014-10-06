@@ -17,15 +17,17 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
+#include <QtDebug>
 #include <QVariantMap>
 
 #include "AddOn.hpp"
 
-AddOn::AddOn(const QVariantMap& map)
-	: m_bLoaded(false)
+AddOn::AddOn(const qint64 addOnId, const QVariantMap& map)
+	: m_iAddOnId(addOnId)
+	, m_bLoaded(false)
 {
 	m_sType = map.value("type").toString();
-	m_sInstallID = map.value("install-id").toString();
+	m_sInstallId = map.value("install-id").toString();
 	m_sTitle = map.value("title").toString();
 	m_sDescription = map.value("description").toString();
 	m_sVersion = map.value("version").toString();
@@ -41,9 +43,11 @@ AddOn::AddOn(const QVariantMap& map)
 	m_sThumbnail = map.value("thumbnail").toString();
 
 	// early returns if the mandatory fields are not present
-	if (m_sType.isEmpty() || m_sInstallID.isEmpty() || m_sTitle.isEmpty() || m_sDownloadURL.isEmpty()
+	if (m_sType.isEmpty() || m_sInstallId.isEmpty() || m_sTitle.isEmpty() || m_sDownloadURL.isEmpty()
 		|| m_sDownloadFilename.isEmpty() || m_sDownloadSize.isEmpty() || m_sChecksum.isEmpty())
 	{
+		qWarning() << "Add-On Catalog : Error! Add-on" << m_iAddOnId
+			   << "does not have all the required fields!";
 		return;
 	}
 

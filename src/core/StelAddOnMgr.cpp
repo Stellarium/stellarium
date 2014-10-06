@@ -96,7 +96,7 @@ StelAddOnMgr::StelAddOnMgr()
 		}
 		qDebug() << "Add-On Mgr: loading catalog file:"
 			 << QDir::toNativeSeparators(m_sJsonPath);
-		readJson(json);
+		readJsonObject(json["add-ons"].toObject());
 	}
 	else
 	{
@@ -158,9 +158,27 @@ void StelAddOnMgr::restoreDefaultJsonFile()
 	}
 }
 
-void StelAddOnMgr::readJson(const QJsonObject& json)
+void StelAddOnMgr::readJsonObject(const QJsonObject& addOns)
 {
-	// TODO
+	QVariantMap map = addOns.toVariantMap();
+	int duplicated = addOns.size() - map.size();
+	if (duplicated)
+	{
+		qWarning() << "Add-On Mgr : Error! The addons.json file has"
+			   << duplicated << "duplicated keys!";
+	}
+
+	QVariantMap::iterator i;
+	for (i = map.begin(); i != map.end(); ++i)
+	{
+		qint64 addOnId = i.key().toLongLong();
+		QVariantMap attributes = i.value().toMap();
+		AddOn* addOn(new AddOn(addOnId, attributes));
+		if (addOn->isLoaded())
+		{
+			m_addons.insert(addOnId, addOn);
+		}
+	}
 }
 
 void StelAddOnMgr::setLastUpdate(qint64 time) {
