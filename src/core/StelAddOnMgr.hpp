@@ -38,6 +38,13 @@
 #define ADDON_MANAGER_VERSION "0.0.2"
 #define ADDON_MANAGER_CATALOG_VERSION 1
 
+const QString TYPE_CATALOG = "catalog";
+const QString TYPE_LANDSCAPE = "landscape";
+const QString TYPE_LANGUAGE_PACK = "language_pack";
+const QString TYPE_SCRIPT = "script";
+const QString TYPE_SKY_CULTURE = "sky_culture";
+const QString TYPE_TEXTURE = "texture";
+
 // categories (database column addon.category)
 const QString CATEGORY_CATALOG = "catalog";
 const QString CATEGORY_LANDSCAPE = "landscape";
@@ -138,8 +145,9 @@ private:
 	const QString m_sThumbnailDir;
 	QHash<QString, QString> m_dirs;
 
+	typedef QMap<qint64, AddOn*> AddOnMap;
 	QString m_sJsonPath;
-	QMap<qint64, AddOn*> m_addons;
+	QHash<QString, AddOnMap> m_addons;
 
 	// sub-classes
 	QHash<QString, StelAddOn*> m_pStelAddOns;

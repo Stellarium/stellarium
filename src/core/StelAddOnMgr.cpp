@@ -176,7 +176,9 @@ void StelAddOnMgr::readJsonObject(const QJsonObject& addOns)
 		AddOn* addOn(new AddOn(addOnId, attributes));
 		if (addOn->isLoaded())
 		{
-			m_addons.insert(addOnId, addOn);
+			AddOnMap amap;
+			amap.insert(addOnId, addOn);
+			m_addons.insert(addOn->getType(), amap);
 		}
 	}
 }

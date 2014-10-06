@@ -33,6 +33,7 @@ public:
 
 	quint64 getAddOnId() { return m_iAddOnId; }
 	QString getTitle() { return m_sTitle; }
+	QString getType() { return m_sType; }
 
 private:
 	typedef struct
