@@ -9,21 +9,21 @@ msgid ""
 msgstr ""
 "Project-Id-Version: de\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-09-18 19:41+0700\n"
+"POT-Creation-Date: 2014-10-05 18:17+0700\n"
 "PO-Revision-Date: 2014-09-29 11:17+0000\n"
 "Last-Translator: gzotti <Georg.Zotti@univie.ac.at>\n"
 "Language-Team: <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-09-30 06:28+0000\n"
+"X-Launchpad-Export-Date: 2014-10-06 05:58+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:106 src/core/modules/StarMgr.cpp:346
 #: src/core/modules/GridLinesMgr.cpp:727 src/core/modules/LandscapeMgr.cpp:354
 #: src/core/modules/NebulaMgr.cpp:126 src/core/modules/SolarSystem.cpp:156
-#: src/core/StelApp.cpp:473 src/core/StelCore.cpp:185
-#: src/core/StelSkyLayerMgr.cpp:87 src/StelMainView.cpp:361
+#: src/core/StelApp.cpp:480 src/core/StelCore.cpp:185
+#: src/core/StelSkyLayerMgr.cpp:87 src/StelMainView.cpp:353
 msgid "Display Options"
 msgstr "Anzeigeeinstellungen"
 
@@ -474,7 +474,7 @@ msgstr "Verfinsterungsdauer: %1%"
 msgid "Rising time: %1%"
 msgstr "Anstiegszeit: %1%"
 
-#: src/core/StelApp.cpp:473
+#: src/core/StelApp.cpp:480
 msgid "Night mode"
 msgstr "Nachtmodus"
 
@@ -1113,43 +1113,33 @@ msgstr ""
 "Die orthographische Projektion ist mit der perspektivischen Projektion "
 "verwandt, jedoch ist der Beobachtungspunkt unendlich weit entfernt."
 
-#: src/core/StelObject.cpp:120 src/core/StelObject.cpp:122
-#, qt-format
-msgid "RA/DE (J2000): %1/%2"
-msgstr "RA/DE (J2000): %1/%2"
+#: src/core/StelObject.cpp:121 src/core/StelObject.cpp:123
+#: src/core/StelObject.cpp:131 src/core/StelObject.cpp:133
+msgid "RA/DE"
+msgstr ""
 
-#: src/core/StelObject.cpp:130 src/core/StelObject.cpp:132
-#, qt-format
-msgid "RA/DE (of date): %1/%2"
-msgstr "RA/DE (des Datums): %1/%2"
-
-#: src/core/StelObject.cpp:144 src/core/StelObject.cpp:148
+#: src/core/StelObject.cpp:145 src/core/StelObject.cpp:149
 #, qt-format
 msgid "Hour angle/DE: %1/%2"
 msgstr "Stundenwinkel/DE: %1/%2"
 
-#: src/core/StelObject.cpp:144 src/core/StelObject.cpp:167
-#: src/core/StelObject.cpp:169
+#: src/core/StelObject.cpp:145 src/core/StelObject.cpp:168
+#: src/core/StelObject.cpp:170
 msgid "(apparent)"
 msgstr "(scheinbar)"
 
-#: src/core/StelObject.cpp:167 src/core/StelObject.cpp:169
-#: src/core/StelObject.cpp:174 src/core/StelObject.cpp:176
+#: src/core/StelObject.cpp:168 src/core/StelObject.cpp:170
+#: src/core/StelObject.cpp:175 src/core/StelObject.cpp:177
 #, qt-format
 msgid "Az/Alt: %1/%2"
 msgstr "Az/Alt: %1/%2"
 
-#: src/core/StelObject.cpp:189 src/core/StelObject.cpp:191
-#, qt-format
-msgid "Ecliptic longitude/latitude (of J2000): %1/%2"
-msgstr "Ekliptikale Länge/Breite (J2000): %1/%2"
+#: src/core/StelObject.cpp:190 src/core/StelObject.cpp:192
+#: src/core/StelObject.cpp:198 src/core/StelObject.cpp:200
+msgid "Ecliptic longitude/latitude"
+msgstr ""
 
-#: src/core/StelObject.cpp:197 src/core/StelObject.cpp:199
-#, qt-format
-msgid "Ecliptic longitude/latitude (of date): %1/%2"
-msgstr "Ekliptikale Länge/Breite (zum Datum): %1/%2"
-
-#: src/core/StelObject.cpp:207 src/core/StelObject.cpp:209
+#: src/core/StelObject.cpp:208 src/core/StelObject.cpp:210
 #, qt-format
 msgid "Galactic longitude/latitude: %1/%2"
 msgstr "Galaktische Länge/Breite: %1/%2"
@@ -1159,7 +1149,7 @@ msgid "Deep-sky objects background images"
 msgstr "Hintergrundbilder für Deep-Sky-Objekte"
 
 #: src/core/StelMovementMgr.cpp:130 src/gui/StelGui.cpp:186
-#: src/StelMainView.cpp:360
+#: src/StelMainView.cpp:352
 msgid "Miscellaneous"
 msgstr "Verschiedenes"
 
@@ -1203,30 +1193,30 @@ msgstr "Nicht gefunden"
 msgid "Found"
 msgstr "Gefunden"
 
-#: src/gui/ConfigurationDialog.cpp:447
+#: src/gui/ConfigurationDialog.cpp:444
 msgid "Select screenshot directory"
 msgstr "Ordner für Bildschirmfotos auswählen"
 
-#: src/gui/ConfigurationDialog.cpp:678
+#: src/gui/ConfigurationDialog.cpp:674
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr "Anfängliches Gesichtsfeld: %1%2"
 
-#: src/gui/ConfigurationDialog.cpp:686
+#: src/gui/ConfigurationDialog.cpp:682
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "Anfängliche Blickrichtung in Az/Alt: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:743
+#: src/gui/ConfigurationDialog.cpp:739
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:390
 msgid "Authors"
 msgstr "Autoren"
 
-#: src/gui/ConfigurationDialog.cpp:744 src/gui/ViewDialog.cpp:444
+#: src/gui/ConfigurationDialog.cpp:740 src/gui/ViewDialog.cpp:444
 msgid "Contact"
 msgstr "Ansprechpartner"
 
-#: src/gui/ConfigurationDialog.cpp:746
+#: src/gui/ConfigurationDialog.cpp:742
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:79
 #: plugins/Oculars/src/gui/OcularDialog.cpp:497
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:389
@@ -1240,7 +1230,7 @@ msgstr "Ansprechpartner"
 msgid "Version"
 msgstr "Version"
 
-#: src/gui/ConfigurationDialog.cpp:829
+#: src/gui/ConfigurationDialog.cpp:825
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:80
 #: plugins/Oculars/src/gui/OcularDialog.cpp:498
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:118
@@ -1253,23 +1243,23 @@ msgstr "Version"
 msgid "Author"
 msgstr "Autor"
 
-#: src/gui/ConfigurationDialog.cpp:833
+#: src/gui/ConfigurationDialog.cpp:829
 msgid "License"
 msgstr "Lizenz"
 
-#: src/gui/ConfigurationDialog.cpp:837
+#: src/gui/ConfigurationDialog.cpp:833
 msgid "Shortcut"
 msgstr "Tastenkürzel"
 
-#: src/gui/ConfigurationDialog.cpp:861
+#: src/gui/ConfigurationDialog.cpp:857
 msgid "Running script: "
 msgstr "Ausgeführtes Skript: "
 
-#: src/gui/ConfigurationDialog.cpp:868
+#: src/gui/ConfigurationDialog.cpp:864
 msgid "Running script: [none]"
 msgstr "Ausgeführtes Skript: [keines]"
 
-#: src/gui/ConfigurationDialog.cpp:933
+#: src/gui/ConfigurationDialog.cpp:929
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
@@ -1277,16 +1267,16 @@ msgstr ""
 "Herunterladen neuer Sternkataloge beendet!\n"
 "Starten Sie Stellarium neu, um sie anzuzeigen."
 
-#: src/gui/ConfigurationDialog.cpp:937
+#: src/gui/ConfigurationDialog.cpp:933
 msgid "All available star catalogs have been installed."
 msgstr "Alle verfügbaren Sternkataloge wurden installiert."
 
-#: src/gui/ConfigurationDialog.cpp:942
+#: src/gui/ConfigurationDialog.cpp:938
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "Katalog %1 von %2 laden"
 
-#: src/gui/ConfigurationDialog.cpp:949
+#: src/gui/ConfigurationDialog.cpp:945
 #, qt-format
 msgid ""
 "Downloading %1...\n"
@@ -1295,7 +1285,7 @@ msgstr ""
 "Lade %1...\n"
 "(Sie können dieses Fenster schließen.)"
 
-#: src/gui/ConfigurationDialog.cpp:956
+#: src/gui/ConfigurationDialog.cpp:952
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -1306,7 +1296,7 @@ msgstr ""
 "Anzahl der Sterne: %2 Millionen\n"
 "Magnitudenspanne: %3 - %4"
 
-#: src/gui/ConfigurationDialog.cpp:999 src/gui/ConfigurationDialog.cpp:1034
+#: src/gui/ConfigurationDialog.cpp:995 src/gui/ConfigurationDialog.cpp:1030
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -1315,11 +1305,11 @@ msgstr ""
 "Fehler beim Herunterladen von %1:\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:1086
+#: src/gui/ConfigurationDialog.cpp:1082
 msgid "Verifying file integrity..."
 msgstr "Überprüfe Dateiintegrität..."
 
-#: src/gui/ConfigurationDialog.cpp:1090
+#: src/gui/ConfigurationDialog.cpp:1086
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -1329,123 +1319,123 @@ msgstr ""
 "Datei ist beschädigt."
 
 #. TRANSLATORS: Full phrase is "Algorithm of DeltaT"
-#: src/gui/ConfigurationDialog.cpp:1163
+#: src/gui/ConfigurationDialog.cpp:1159
 msgid "Algorithm of"
 msgstr "Algorithmus für"
 
-#: src/gui/ConfigurationDialog.cpp:1174
+#: src/gui/ConfigurationDialog.cpp:1170
 msgid "Without correction"
 msgstr "Ohne Korrektur"
 
-#: src/gui/ConfigurationDialog.cpp:1175
+#: src/gui/ConfigurationDialog.cpp:1171
 msgid "Schoch (1931)"
 msgstr "Schoch (1931)"
 
-#: src/gui/ConfigurationDialog.cpp:1176
+#: src/gui/ConfigurationDialog.cpp:1172
 msgid "Clemence (1948)"
 msgstr "Clemence (1948)"
 
-#: src/gui/ConfigurationDialog.cpp:1177
+#: src/gui/ConfigurationDialog.cpp:1173
 msgid "IAU (1952)"
 msgstr "IAU (1952)"
 
-#: src/gui/ConfigurationDialog.cpp:1178
+#: src/gui/ConfigurationDialog.cpp:1174
 msgid "Astronomical Ephemeris (1960)"
 msgstr "Astronomical Ephemeris (1960)"
 
-#: src/gui/ConfigurationDialog.cpp:1179
+#: src/gui/ConfigurationDialog.cpp:1175
 msgid "Tuckerman (1962, 1964) & Goldstine (1973)"
 msgstr "Tuckerman (1962, 1964) und Goldstine (1973)"
 
-#: src/gui/ConfigurationDialog.cpp:1180
+#: src/gui/ConfigurationDialog.cpp:1176
 msgid "Muller & Stephenson (1975)"
 msgstr "Muller und Stephenson (1975)"
 
-#: src/gui/ConfigurationDialog.cpp:1181
+#: src/gui/ConfigurationDialog.cpp:1177
 msgid "Stephenson (1978)"
 msgstr "Stephenson (1978)"
 
-#: src/gui/ConfigurationDialog.cpp:1182
+#: src/gui/ConfigurationDialog.cpp:1178
 msgid "Schmadel & Zech (1979)"
 msgstr "Schmadel und Zech (1979)"
 
-#: src/gui/ConfigurationDialog.cpp:1183
+#: src/gui/ConfigurationDialog.cpp:1179
 msgid "Morrison & Stephenson (1982)"
 msgstr "Morrison und Stephenson (1982)"
 
-#: src/gui/ConfigurationDialog.cpp:1184
+#: src/gui/ConfigurationDialog.cpp:1180
 msgid "Stephenson & Morrison (1984)"
 msgstr "Stephenson und Morrison (1984)"
 
-#: src/gui/ConfigurationDialog.cpp:1185
+#: src/gui/ConfigurationDialog.cpp:1181
 msgid "Stephenson & Houlden (1986)"
 msgstr "Stephenson und Houlden (1986)"
 
-#: src/gui/ConfigurationDialog.cpp:1186
+#: src/gui/ConfigurationDialog.cpp:1182
 msgid "Espenak (1987, 1989)"
 msgstr "Espenak (1987, 1989)"
 
-#: src/gui/ConfigurationDialog.cpp:1187
+#: src/gui/ConfigurationDialog.cpp:1183
 msgid "Borkowski (1988)"
 msgstr "Borkowski (1988)"
 
-#: src/gui/ConfigurationDialog.cpp:1188
+#: src/gui/ConfigurationDialog.cpp:1184
 msgid "Schmadel & Zech (1988)"
 msgstr "Schmadel und Zech (1988)"
 
-#: src/gui/ConfigurationDialog.cpp:1189
+#: src/gui/ConfigurationDialog.cpp:1185
 msgid "Chapront-Touze & Chapront (1991)"
 msgstr "Chapront-Touze und Chapront (1991)"
 
-#: src/gui/ConfigurationDialog.cpp:1190
+#: src/gui/ConfigurationDialog.cpp:1186
 msgid "Stephenson & Morrison (1995)"
 msgstr "Stephenson und Morrison (1995)"
 
-#: src/gui/ConfigurationDialog.cpp:1191
+#: src/gui/ConfigurationDialog.cpp:1187
 msgid "Stephenson (1997)"
 msgstr "Stephenson (1997)"
 
-#: src/gui/ConfigurationDialog.cpp:1193
+#: src/gui/ConfigurationDialog.cpp:1189
 msgid "Meeus (1998) (with Chapront, Chapront-Touze & Francou (1997))"
 msgstr "Meeus (1998) (mit Chapront, Chapront-Touze & Francou (1997))"
 
-#: src/gui/ConfigurationDialog.cpp:1194
+#: src/gui/ConfigurationDialog.cpp:1190
 msgid "JPL Horizons"
 msgstr "JPL Horizons"
 
-#: src/gui/ConfigurationDialog.cpp:1195
+#: src/gui/ConfigurationDialog.cpp:1191
 msgid "Meeus & Simons (2000)"
 msgstr "Meeus und Simons (2000)"
 
-#: src/gui/ConfigurationDialog.cpp:1196
+#: src/gui/ConfigurationDialog.cpp:1192
 msgid "Montenbruck & Pfleger (2000)"
 msgstr "Montenbruck und Pfleger (2000)"
 
-#: src/gui/ConfigurationDialog.cpp:1197
+#: src/gui/ConfigurationDialog.cpp:1193
 msgid "Reingold & Dershowitz (2002, 2007)"
 msgstr "Reingold & Dershowitz (2002, 2007)"
 
-#: src/gui/ConfigurationDialog.cpp:1198
+#: src/gui/ConfigurationDialog.cpp:1194
 msgid "Morrison & Stephenson (2004, 2005)"
 msgstr "Morrison und Stephenson (2004, 2005)"
 
-#: src/gui/ConfigurationDialog.cpp:1200
+#: src/gui/ConfigurationDialog.cpp:1196
 msgid "Espenak & Meeus (2006)"
 msgstr "Espenak und Meeus (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:1201
+#: src/gui/ConfigurationDialog.cpp:1197
 msgid "Reijs (2006)"
 msgstr "Reijs (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:1202
+#: src/gui/ConfigurationDialog.cpp:1198
 msgid "Banjevic (2006)"
 msgstr "Banjevic (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:1203
+#: src/gui/ConfigurationDialog.cpp:1199
 msgid "Islam, Sadiq & Qureshi (2008, 2013)"
 msgstr "Islam, Sadiq & Qureshi (2008, 2013)"
 
-#: src/gui/ConfigurationDialog.cpp:1204
+#: src/gui/ConfigurationDialog.cpp:1200
 #, qt-format
 msgid "Custom equation of %1T"
 msgstr "Benutzerdefinierte Gleichung für %1T"
@@ -2060,15 +2050,15 @@ msgstr ""
 "Mangelhafte OpenGL-Unterstützung. Bitte Graphikkarten-Treiber aktualisieren "
 "oder andere Graphikkarte einbauen."
 
-#: src/StelMainView.cpp:360
+#: src/StelMainView.cpp:352
 msgid "Save screenshot"
 msgstr "Bildschirmfoto speichern"
 
-#: src/StelMainView.cpp:361
+#: src/StelMainView.cpp:353
 msgid "Full-screen mode"
 msgstr "Vollbildmodus"
 
-#: src/StelMainView.cpp:533
+#: src/StelMainView.cpp:525
 #, qt-format
 msgid "Stellarium %1"
 msgstr "Stellarium %1"
@@ -4030,7 +4020,7 @@ msgstr "Ordner"
 msgid "&Choose"
 msgstr "Aus&wählen"
 
-#: src/translations.h:609 src/ui_configurationDialog.h:1177
+#: src/translations.h:609 src/ui_configurationDialog.h:1176
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:516
 msgid "Cancel"
 msgstr "Abbrechen"
@@ -4084,7 +4074,7 @@ msgstr "Über"
 msgid "Log"
 msgstr "Protokolldatei"
 
-#: src/ui_helpDialogGui.h:290 src/ui_configurationDialog.h:1094
+#: src/ui_helpDialogGui.h:290 src/ui_configurationDialog.h:1093
 msgid "Edit keyboard shortcuts..."
 msgstr "Tastenkombinationen bearbeiten …"
 
@@ -4349,7 +4339,7 @@ msgstr "Wortsuche ab Wortanfang"
 
 #: src/ui_searchDialogGui.h:708 src/ui_viewDialog.h:1251
 #: src/ui_viewDialog.h:1257 src/ui_viewDialog.h:1259
-#: src/ui_configurationDialog.h:1178 src/ui_configurationDialog.h:1189
+#: src/ui_configurationDialog.h:1177 src/ui_configurationDialog.h:1188
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:417
 msgid "Options"
 msgstr "Einstellungen"
@@ -4618,19 +4608,19 @@ msgstr "Benutze diese Sternbilddarstellung als Standardvorgabe"
 msgid "Visible"
 msgstr "Sichtbar"
 
-#: src/ui_configurationDialog.h:1008
+#: src/ui_configurationDialog.h:1007
 msgid "Configuration"
 msgstr "Konfiguration"
 
-#: src/ui_configurationDialog.h:1010
+#: src/ui_configurationDialog.h:1009
 msgid "Program language"
 msgstr "Programmsprache"
 
-#: src/ui_configurationDialog.h:1011
+#: src/ui_configurationDialog.h:1010
 msgid "Check updates"
 msgstr "Auf Updates prüfen"
 
-#: src/ui_configurationDialog.h:1012
+#: src/ui_configurationDialog.h:1011
 msgid ""
 "Enable checking updates of Stellarium via Internet. Info for updates of "
 "stable versions you can look on the tab \"About\" of \"Help\" window."
@@ -4639,11 +4629,11 @@ msgstr ""
 "zu Updates stabiler Versionen gibt es unter dem Menüpunkt \"Über...\" im "
 "Hilfefenster."
 
-#: src/ui_configurationDialog.h:1013
+#: src/ui_configurationDialog.h:1012
 msgid "Default options"
 msgstr "Standardeinstellungen"
 
-#: src/ui_configurationDialog.h:1015
+#: src/ui_configurationDialog.h:1014
 msgid ""
 "Save the settings you've changed this session to be the same the next time "
 "you start Stellarium"
@@ -4651,7 +4641,7 @@ msgstr ""
 "Die Einstellungen, die während dieser Sitzung geändert wurden, speichern, um "
 "sie auch beim nächsten Programmstart zu verwenden."
 
-#: src/ui_configurationDialog.h:1017
+#: src/ui_configurationDialog.h:1016
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:390
 #: plugins/FOV/src/ui_fovWindow.h:387
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:276
@@ -4659,17 +4649,17 @@ msgstr ""
 msgid "Save settings"
 msgstr "Einstellungen speichern"
 
-#: src/ui_configurationDialog.h:1019
+#: src/ui_configurationDialog.h:1018
 msgid "Restore the default settings that came with Stellarium"
 msgstr "Die Standardeinstellungen von Stellarium wieder herstellen."
 
-#: src/ui_configurationDialog.h:1021 plugins/FOV/src/ui_fovWindow.h:386
+#: src/ui_configurationDialog.h:1020 plugins/FOV/src/ui_fovWindow.h:386
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:277
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:313
 msgid "Restore defaults"
 msgstr "Standardeinstellungen wiederherstellen"
 
-#: src/ui_configurationDialog.h:1022
+#: src/ui_configurationDialog.h:1021
 msgid ""
 "Restoring default settings requires a restart of Stellarium. Saving all the "
 "current options includes the current FOV and direction of view for use at "
@@ -4680,212 +4670,212 @@ msgstr ""
 "schließt das derzeitige Blickfeld und die Blickrichtung für den nächsten "
 "Neustart mit ein."
 
-#: src/ui_configurationDialog.h:1024
+#: src/ui_configurationDialog.h:1023
 msgid "The width of your view when Stellarium starts"
 msgstr "Den Horizont einstellen, mit dem Stellarium startet"
 
-#: src/ui_configurationDialog.h:1027
+#: src/ui_configurationDialog.h:1026
 msgid "The direction you're looking when Stellarium starts"
 msgstr "Die Richtung, in die Sie sehen, wenn Stellarium startet"
 
-#: src/ui_configurationDialog.h:1029 src/ui_configurationDialog.h:1200
+#: src/ui_configurationDialog.h:1028 src/ui_configurationDialog.h:1199
 msgid "Selected object information"
 msgstr "Informationen über das angewählte Objekt"
 
-#: src/ui_configurationDialog.h:1031
+#: src/ui_configurationDialog.h:1030
 msgid "Display all information available"
 msgstr "jede verfügbare Information anzeigen"
 
-#: src/ui_configurationDialog.h:1033
+#: src/ui_configurationDialog.h:1032
 msgid "All available"
 msgstr "Alles verfügbare"
 
-#: src/ui_configurationDialog.h:1035
+#: src/ui_configurationDialog.h:1034
 msgid "Display no information"
 msgstr "keine Information anzeigen"
 
-#: src/ui_configurationDialog.h:1037 plugins/Oculars/src/Oculars.cpp:1938
+#: src/ui_configurationDialog.h:1036 plugins/Oculars/src/Oculars.cpp:1938
 #: plugins/Observability/src/Observability.cpp:201
 msgid "None"
 msgstr "Ohne"
 
-#: src/ui_configurationDialog.h:1039
+#: src/ui_configurationDialog.h:1038
 msgid "Display less information"
 msgstr "weniger Information anzeigen"
 
-#: src/ui_configurationDialog.h:1041
+#: src/ui_configurationDialog.h:1040
 msgid "Short"
 msgstr "Kurz"
 
-#: src/ui_configurationDialog.h:1043
+#: src/ui_configurationDialog.h:1042
 msgid "Display user settings information"
 msgstr "Benutzereinstellungen anzeigen"
 
-#: src/ui_configurationDialog.h:1045
+#: src/ui_configurationDialog.h:1044
 msgid "Customized"
 msgstr "Angepaßt"
 
-#: src/ui_configurationDialog.h:1046
+#: src/ui_configurationDialog.h:1045
 msgid "Displayed fields"
 msgstr "Angezeigte Felder"
 
-#: src/ui_configurationDialog.h:1047
+#: src/ui_configurationDialog.h:1046
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:282
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:170
 msgid "Name"
 msgstr "Name"
 
-#: src/ui_configurationDialog.h:1049
+#: src/ui_configurationDialog.h:1048
 msgid "Geocentric equatorial coordinates, equinox of date"
 msgstr "Geozentrische äquatoriale Koordinaten zum Äquinoktium des Datums"
 
-#: src/ui_configurationDialog.h:1051
+#: src/ui_configurationDialog.h:1050
 msgid "Right ascension/Declination (of date)"
 msgstr "Rektaszension und Deklination (Äquinoktium des Datums)"
 
-#: src/ui_configurationDialog.h:1052
+#: src/ui_configurationDialog.h:1051
 msgid "Catalog number(s)"
 msgstr "Katalognummer(n)"
 
-#: src/ui_configurationDialog.h:1054
+#: src/ui_configurationDialog.h:1053
 msgid "Geocentric equatorial coordinates, equinox of J2000.0"
 msgstr "Geozentrische äquatoriale Koordinaten (Äquinoktium J2000.0)"
 
-#: src/ui_configurationDialog.h:1056
+#: src/ui_configurationDialog.h:1055
 msgid "Right ascension/Declination (J2000)"
 msgstr "Rektaszension und Deklination (Äquinoktium J2000.0)"
 
-#: src/ui_configurationDialog.h:1057
+#: src/ui_configurationDialog.h:1056
 msgid "Absolute magnitude"
 msgstr "Absolute Helligkeit"
 
-#: src/ui_configurationDialog.h:1058
+#: src/ui_configurationDialog.h:1057
 msgid "Galactic coordinates"
 msgstr "Galaktische Koordinaten"
 
-#: src/ui_configurationDialog.h:1059
+#: src/ui_configurationDialog.h:1058
 msgid "Visual magnitude"
 msgstr "Scheinbare Helligkeit"
 
-#: src/ui_configurationDialog.h:1061
+#: src/ui_configurationDialog.h:1060
 msgid "Angular or physical size"
 msgstr "Winkel- oder physische Größe"
 
-#: src/ui_configurationDialog.h:1063
+#: src/ui_configurationDialog.h:1062
 msgid "Size"
 msgstr "Größe"
 
-#: src/ui_configurationDialog.h:1065
+#: src/ui_configurationDialog.h:1064
 msgid "The type of the object (star, planet, etc.)"
 msgstr "Objekttyp (Stern, Planet, etc.)"
 
-#: src/ui_configurationDialog.h:1067
+#: src/ui_configurationDialog.h:1066
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:281
 msgid "Type"
 msgstr "Typ"
 
-#: src/ui_configurationDialog.h:1069
+#: src/ui_configurationDialog.h:1068
 msgid "Spectral class, nebula type, etc."
 msgstr "Spektralklasse, Nebeltyp, etc."
 
-#: src/ui_configurationDialog.h:1071
+#: src/ui_configurationDialog.h:1070
 msgid "Additional information"
 msgstr "Zusätzliche Information"
 
-#: src/ui_configurationDialog.h:1073
+#: src/ui_configurationDialog.h:1072
 msgid "Topocentric equatorial coordinates"
 msgstr "Topozentrische äquatoriale Koordinaten"
 
-#: src/ui_configurationDialog.h:1075
+#: src/ui_configurationDialog.h:1074
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:155
 msgid "Hour angle/Declination"
 msgstr "Stundenwinkel/Deklination"
 
-#: src/ui_configurationDialog.h:1077
+#: src/ui_configurationDialog.h:1076
 msgid "Horizontal coordinates"
 msgstr "Horizontale Koordinaten"
 
-#: src/ui_configurationDialog.h:1079
+#: src/ui_configurationDialog.h:1078
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:157
 msgid "Altitude/Azimuth"
 msgstr "Azimut/Höhe"
 
-#: src/ui_configurationDialog.h:1080
+#: src/ui_configurationDialog.h:1079
 msgid "Distance"
 msgstr "Entfernung"
 
-#: src/ui_configurationDialog.h:1082
+#: src/ui_configurationDialog.h:1081
 msgid "Ecliptic coordinates, equinox of date and J2000 (only for Earth)"
 msgstr ""
 "Ekliptikale Koordinaten, Äquinoktium des Datums und J2000 (nur für Erde)"
 
-#: src/ui_configurationDialog.h:1084
+#: src/ui_configurationDialog.h:1083
 msgid "Ecliptic coordinates"
 msgstr "Ekliptikale Koordinaten"
 
-#: src/ui_configurationDialog.h:1085
+#: src/ui_configurationDialog.h:1084
 msgid "Control"
 msgstr "Steuerung"
 
-#: src/ui_configurationDialog.h:1087
+#: src/ui_configurationDialog.h:1086
 msgid "Allow keyboard to pan and zoom"
 msgstr "Tastatur zum Schwenken und Zoomen verwenden"
 
-#: src/ui_configurationDialog.h:1089
+#: src/ui_configurationDialog.h:1088
 msgid "Enable keyboard navigation"
 msgstr "Tastaturnavigation aktivieren"
 
-#: src/ui_configurationDialog.h:1091
+#: src/ui_configurationDialog.h:1090
 msgid "Allow mouse to pan (drag) and zoom (mousewheel)"
 msgstr "Maus zum Schwenken (Ziehen) und Zoomen (Mausrad) verwenden"
 
-#: src/ui_configurationDialog.h:1093
+#: src/ui_configurationDialog.h:1092
 msgid "Enable mouse navigation"
 msgstr "Mausnavigation aktivieren"
 
-#: src/ui_configurationDialog.h:1096
+#: src/ui_configurationDialog.h:1095
 msgid "Hides the mouse cursor when inactive"
 msgstr "Mauszeiger ausblenden, wenn inaktiv"
 
-#: src/ui_configurationDialog.h:1098
+#: src/ui_configurationDialog.h:1097
 msgid "Mouse cursor timeout:"
 msgstr "Mauszeiger-Timeout:"
 
-#: src/ui_configurationDialog.h:1100
+#: src/ui_configurationDialog.h:1099
 msgid "seconds"
 msgstr "Sekunden"
 
-#: src/ui_configurationDialog.h:1102
+#: src/ui_configurationDialog.h:1101
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:191
 msgid "Startup date and time"
 msgstr "Datum und Uhrzeit beim Programmstart"
 
-#: src/ui_configurationDialog.h:1104
+#: src/ui_configurationDialog.h:1103
 msgid "Use a specific date and time when Stellarium starts up"
 msgstr ""
 "Setzt das Datum und die Zeit beim Start von Stellarium auf einen festen Wert"
 
-#: src/ui_configurationDialog.h:1106
+#: src/ui_configurationDialog.h:1105
 msgid "Other:"
 msgstr "Andere:"
 
-#: src/ui_configurationDialog.h:1108
+#: src/ui_configurationDialog.h:1107
 msgid "Use current local date and time"
 msgstr "Verwende aktuelles lokales Datum und Uhrzeit"
 
-#: src/ui_configurationDialog.h:1110
+#: src/ui_configurationDialog.h:1109
 msgid "use current"
 msgstr "Aktuelle Zeit verwenden"
 
-#: src/ui_configurationDialog.h:1112
+#: src/ui_configurationDialog.h:1111
 msgid "Starts Stellarium at system clock date and time"
 msgstr "Startet Stellarium mit Systemdatum und -zeit"
 
-#: src/ui_configurationDialog.h:1114
+#: src/ui_configurationDialog.h:1113
 msgid "System date and time"
 msgstr "Systemdatum und -zeit"
 
-#: src/ui_configurationDialog.h:1116
+#: src/ui_configurationDialog.h:1115
 msgid ""
 "Sets the simulation time to the next instance of this time of day when "
 "Stellarium starts"
@@ -4893,23 +4883,23 @@ msgstr ""
 "Setzt die von Stellarium beim Start verwendete Zeit auf das nächste "
 "Vorkommen dieser Tageszeit"
 
-#: src/ui_configurationDialog.h:1118
+#: src/ui_configurationDialog.h:1117
 msgid "System date at:"
 msgstr "Systemzeit bei:"
 
-#: src/ui_configurationDialog.h:1119
+#: src/ui_configurationDialog.h:1118
 msgid "Time correction"
 msgstr "Zeitkorrektur"
 
-#: src/ui_configurationDialog.h:1122
+#: src/ui_configurationDialog.h:1121
 msgid "Edit equation"
 msgstr "Formel bearbeiten"
 
-#: src/ui_configurationDialog.h:1124
+#: src/ui_configurationDialog.h:1123
 msgid "Planetarium options"
 msgstr "Planetariumseinstellungen"
 
-#: src/ui_configurationDialog.h:1126
+#: src/ui_configurationDialog.h:1125
 msgid ""
 "Spheric mirror distortion is used when projecting Stellarium onto a spheric "
 "mirror for low-cost planetarium systems."
@@ -4918,51 +4908,51 @@ msgstr ""
 "Stellarium auf einen kugelförmigen Spiegel projiziert wird (für ein "
 "einfaches Planetarium)."
 
-#: src/ui_configurationDialog.h:1128
+#: src/ui_configurationDialog.h:1127
 msgid "Spheric mirror distortion"
 msgstr "Verzerrung für sphärische Projektion"
 
-#: src/ui_configurationDialog.h:1130
+#: src/ui_configurationDialog.h:1129
 msgid "Mask out everything outside a central circle in the main view"
 msgstr "Alles bis auf einen zentralen Kreis in der Hauptansicht ausblenden"
 
-#: src/ui_configurationDialog.h:1132
+#: src/ui_configurationDialog.h:1131
 msgid "Disc viewport"
 msgstr "Scheibenförmiges Darstellungsfeld"
 
-#: src/ui_configurationDialog.h:1134
+#: src/ui_configurationDialog.h:1133
 msgid "Hide other constellations when you click one"
 msgstr "Die anderen Sternbilder verbergen, wenn Sie auf eines klicken"
 
-#: src/ui_configurationDialog.h:1136
+#: src/ui_configurationDialog.h:1135
 msgid "Select single constellation"
 msgstr "Einzelnes Sternbild auswählen"
 
-#: src/ui_configurationDialog.h:1138
+#: src/ui_configurationDialog.h:1137
 msgid "Align labels with the horizon"
 msgstr "Beschriftung am Horizont ausrichten"
 
-#: src/ui_configurationDialog.h:1140
+#: src/ui_configurationDialog.h:1139
 msgid "Gravity labels"
 msgstr "Schwerkraftbeschriftung"
 
-#: src/ui_configurationDialog.h:1142
+#: src/ui_configurationDialog.h:1141
 msgid "Toggle display backgrounds of the nebulae."
 msgstr "Umschalten des Anzeige von Deep-Sky-Bildern."
 
-#: src/ui_configurationDialog.h:1144
+#: src/ui_configurationDialog.h:1143
 msgid "Show nebula background button"
 msgstr "Zeige Schaltfläche für Deep-Sky-Bilder"
 
-#: src/ui_configurationDialog.h:1146
+#: src/ui_configurationDialog.h:1145
 msgid "Toggle vertical and horizontal image flip buttons."
 msgstr "Schaltflächen für horizontale und vertikale Spiegelung vertauschen."
 
-#: src/ui_configurationDialog.h:1148
+#: src/ui_configurationDialog.h:1147
 msgid "Show flip buttons"
 msgstr "Spiegelungsschaltflächen anzeigen"
 
-#: src/ui_configurationDialog.h:1150
+#: src/ui_configurationDialog.h:1149
 msgid ""
 "When enabled, the \"auto zoom out\" key will also set the initial viewing "
 "direction"
@@ -4970,108 +4960,108 @@ msgstr ""
 "Mit dieser Option stellt die Taste \"automatisch herauszoomen\" auch die "
 "anfängliche Blickrichtung ein."
 
-#: src/ui_configurationDialog.h:1152
+#: src/ui_configurationDialog.h:1151
 msgid "Auto zoom out returns to initial direction of view"
 msgstr ""
 "\"Automatisch herauszoomen\" kehrt zur anfänglichen Blickrichtung zurück"
 
-#: src/ui_configurationDialog.h:1154
+#: src/ui_configurationDialog.h:1153
 msgid ""
 "Auto-enabling of the atmosphere for bodies with atmosphere in location window"
 msgstr ""
 "Automatische Aktivierung der Atmosphäre bei Auswahl von Standorten auf "
 "Planeten mit Atmosphäre im Ortsfenster"
 
-#: src/ui_configurationDialog.h:1156
+#: src/ui_configurationDialog.h:1155
 msgid "Auto-enabling for the atmosphere"
 msgstr "Auto-Aktivierung der Atmosphäre"
 
-#: src/ui_configurationDialog.h:1158
+#: src/ui_configurationDialog.h:1157
 msgid "Use decimal degrees for coordinates"
 msgstr "Verwende Dezimalgrad für Koordinaten"
 
-#: src/ui_configurationDialog.h:1160
+#: src/ui_configurationDialog.h:1159
 msgid "Use decimal degrees"
 msgstr "Verwende Dezimalgrad"
 
-#: src/ui_configurationDialog.h:1161
+#: src/ui_configurationDialog.h:1160
 msgid "Screenshots"
 msgstr "Bildschirmfotos"
 
-#: src/ui_configurationDialog.h:1162
+#: src/ui_configurationDialog.h:1161
 msgid "Screenshot Directory"
 msgstr "Bildschirmfoto-Ordner"
 
-#: src/ui_configurationDialog.h:1164
+#: src/ui_configurationDialog.h:1163
 msgid "Invert colors"
 msgstr "Farben invertieren"
 
-#: src/ui_configurationDialog.h:1165
+#: src/ui_configurationDialog.h:1164
 msgid "Star catalog updates"
 msgstr "Sternkatalog-Aktualisierungen"
 
-#: src/ui_configurationDialog.h:1167
+#: src/ui_configurationDialog.h:1166
 msgid "Click here to start downloading"
 msgstr "Auf diese Schaltfläche klicken, um den Download-Vorgang zu starten"
 
-#: src/ui_configurationDialog.h:1169
+#: src/ui_configurationDialog.h:1168
 msgid "Download this file to view even more stars"
 msgstr "Laden Sie diese Datei herunter, um noch mehr Sterne zu sehen"
 
-#: src/ui_configurationDialog.h:1171
+#: src/ui_configurationDialog.h:1170
 msgid "Restart the download"
 msgstr "Erneut herunterladen"
 
-#: src/ui_configurationDialog.h:1173
+#: src/ui_configurationDialog.h:1172
 msgid "Retry"
 msgstr "Wiederholen"
 
-#: src/ui_configurationDialog.h:1175
+#: src/ui_configurationDialog.h:1174
 msgid "Stop the download. You can always restart it later"
 msgstr "Den Download-Vorgang anhalten. Sie können diesen später wiederholen."
 
-#: src/ui_configurationDialog.h:1180
+#: src/ui_configurationDialog.h:1179
 msgid "Close window when script runs"
 msgstr "Fenster schließen, wenn Skript läuft"
 
-#: src/ui_configurationDialog.h:1182
+#: src/ui_configurationDialog.h:1181
 msgid "Run the selected script"
 msgstr "Führe das gewählte Skript aus"
 
-#: src/ui_configurationDialog.h:1186
+#: src/ui_configurationDialog.h:1185
 msgid "Stop a running script"
 msgstr "Beende ein laufendes Skript"
 
-#: src/ui_configurationDialog.h:1190
+#: src/ui_configurationDialog.h:1189
 msgid "Load at startup"
 msgstr "Beim Start laden"
 
-#: src/ui_configurationDialog.h:1191
+#: src/ui_configurationDialog.h:1190
 msgid "configure"
 msgstr "Konfigurieren"
 
-#: src/ui_configurationDialog.h:1196
+#: src/ui_configurationDialog.h:1195
 msgid "Main"
 msgstr "Allgemein"
 
-#: src/ui_configurationDialog.h:1198
+#: src/ui_configurationDialog.h:1197
 msgid "Information"
 msgstr "Information"
 
-#: src/ui_configurationDialog.h:1203
+#: src/ui_configurationDialog.h:1202
 msgid "Navigation"
 msgstr "Navigation"
 
-#: src/ui_configurationDialog.h:1205
+#: src/ui_configurationDialog.h:1204
 msgid "Tools"
 msgstr "Werkzeuge"
 
-#: src/ui_configurationDialog.h:1207
+#: src/ui_configurationDialog.h:1206
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:452
 msgid "Scripts"
 msgstr "Skripte"
 
-#: src/ui_configurationDialog.h:1209
+#: src/ui_configurationDialog.h:1208
 msgid "Plugins"
 msgstr "Erweiterungen"
 
@@ -10326,6 +10316,14 @@ msgstr "Platz der Anzeige:"
 
 #~ msgid "Mouse cursor timeout (seconds):"
 #~ msgstr "Mauszeiger-Timeout (Sekunden):"
+
+#, qt-format
+#~ msgid "RA/DE (of date): %1/%2"
+#~ msgstr "RA/DE (des Datums): %1/%2"
+
+#, qt-format
+#~ msgid "RA/DE (J2000): %1/%2"
+#~ msgstr "RA/DE (J2000): %1/%2"
 
 #~ msgid "USB Script: "
 #~ msgstr "USB-Skript: "

@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Thai for stellarium 0.8.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-09-18 19:41+0700\n"
+"POT-Creation-Date: 2014-10-05 18:17+0700\n"
 "PO-Revision-Date: 2014-09-18 02:20+0000\n"
 "Last-Translator: Worachate Boonplod <Unknown>\n"
 "Language-Team: MicKi Alone <Need24Get@msn.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-09-19 06:40+0000\n"
+"X-Launchpad-Export-Date: 2014-10-06 06:20+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 "X-Poedit-Country: THAILAND\n"
 "X-Poedit-Language: Thai\n"
@@ -22,8 +22,8 @@ msgstr ""
 #: src/core/modules/ConstellationMgr.cpp:106 src/core/modules/StarMgr.cpp:346
 #: src/core/modules/GridLinesMgr.cpp:727 src/core/modules/LandscapeMgr.cpp:354
 #: src/core/modules/NebulaMgr.cpp:126 src/core/modules/SolarSystem.cpp:156
-#: src/core/StelApp.cpp:473 src/core/StelCore.cpp:185
-#: src/core/StelSkyLayerMgr.cpp:87 src/StelMainView.cpp:361
+#: src/core/StelApp.cpp:480 src/core/StelCore.cpp:185
+#: src/core/StelSkyLayerMgr.cpp:87 src/StelMainView.cpp:353
 msgid "Display Options"
 msgstr "ตัวเลือกการแสดงผล"
 
@@ -472,7 +472,7 @@ msgstr "สัดส่วนของช่วงเวลาอุปราค
 msgid "Rising time: %1%"
 msgstr "เวลาขึ้น : %1%"
 
-#: src/core/StelApp.cpp:473
+#: src/core/StelApp.cpp:480
 msgid "Night mode"
 msgstr "โหมดกลางคืน"
 
@@ -1079,43 +1079,33 @@ msgid ""
 msgstr ""
 "การฉายแบบออร์โทกราฟิกเกี่ยวข้องกับทัศนมิติ แต่จุดรวมสายตาอยู่ที่ระยะอนันต์"
 
-#: src/core/StelObject.cpp:120 src/core/StelObject.cpp:122
-#, qt-format
-msgid "RA/DE (J2000): %1/%2"
-msgstr "ไรต์แอสเซนชัน/เดคลิเนชัน (J2000): %1/%2"
+#: src/core/StelObject.cpp:121 src/core/StelObject.cpp:123
+#: src/core/StelObject.cpp:131 src/core/StelObject.cpp:133
+msgid "RA/DE"
+msgstr ""
 
-#: src/core/StelObject.cpp:130 src/core/StelObject.cpp:132
-#, qt-format
-msgid "RA/DE (of date): %1/%2"
-msgstr "ไรต์แอสเซนชัน/เดคลิเนชัน (ของวัน): %1/%2"
-
-#: src/core/StelObject.cpp:144 src/core/StelObject.cpp:148
+#: src/core/StelObject.cpp:145 src/core/StelObject.cpp:149
 #, qt-format
 msgid "Hour angle/DE: %1/%2"
 msgstr "มุมชั่วโมง/เดคลิเนชัน: %1/%2"
 
-#: src/core/StelObject.cpp:144 src/core/StelObject.cpp:167
-#: src/core/StelObject.cpp:169
+#: src/core/StelObject.cpp:145 src/core/StelObject.cpp:168
+#: src/core/StelObject.cpp:170
 msgid "(apparent)"
 msgstr "(ปรากฏ)"
 
-#: src/core/StelObject.cpp:167 src/core/StelObject.cpp:169
-#: src/core/StelObject.cpp:174 src/core/StelObject.cpp:176
+#: src/core/StelObject.cpp:168 src/core/StelObject.cpp:170
+#: src/core/StelObject.cpp:175 src/core/StelObject.cpp:177
 #, qt-format
 msgid "Az/Alt: %1/%2"
 msgstr "มุมทิศ/มุมเงย: %1/%2"
 
-#: src/core/StelObject.cpp:189 src/core/StelObject.cpp:191
-#, qt-format
-msgid "Ecliptic longitude/latitude (of J2000): %1/%2"
-msgstr "ลองจิจูด/ละติจูดฟ้า (J2000): %1/%2"
+#: src/core/StelObject.cpp:190 src/core/StelObject.cpp:192
+#: src/core/StelObject.cpp:198 src/core/StelObject.cpp:200
+msgid "Ecliptic longitude/latitude"
+msgstr ""
 
-#: src/core/StelObject.cpp:197 src/core/StelObject.cpp:199
-#, qt-format
-msgid "Ecliptic longitude/latitude (of date): %1/%2"
-msgstr "ลองจิจูด/ละติจูดฟ้า (ของวัน): %1/%2"
-
-#: src/core/StelObject.cpp:207 src/core/StelObject.cpp:209
+#: src/core/StelObject.cpp:208 src/core/StelObject.cpp:210
 #, qt-format
 msgid "Galactic longitude/latitude: %1/%2"
 msgstr "ลองจิจูด/ละติจูดดาราจักร : %1/%2"
@@ -1125,7 +1115,7 @@ msgid "Deep-sky objects background images"
 msgstr "ภาพพื้นหลังของวัตถุท้องฟ้าห้วงลึก"
 
 #: src/core/StelMovementMgr.cpp:130 src/gui/StelGui.cpp:186
-#: src/StelMainView.cpp:360
+#: src/StelMainView.cpp:352
 msgid "Miscellaneous"
 msgstr "จิปาถะ"
 
@@ -1169,30 +1159,30 @@ msgstr "หาไม่พบ"
 msgid "Found"
 msgstr "พบ"
 
-#: src/gui/ConfigurationDialog.cpp:447
+#: src/gui/ConfigurationDialog.cpp:444
 msgid "Select screenshot directory"
 msgstr "เลือกไดเร็กทอรีสำหรับเก็บภาพหน้าจอ"
 
-#: src/gui/ConfigurationDialog.cpp:678
+#: src/gui/ConfigurationDialog.cpp:674
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr "พื้นที่การมองเห็นเริ่มต้น: %1%2"
 
-#: src/gui/ConfigurationDialog.cpp:686
+#: src/gui/ConfigurationDialog.cpp:682
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "ทิศทางการเริ่มต้นของการมองมุมทิศ/มุมเงย: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:743
+#: src/gui/ConfigurationDialog.cpp:739
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:390
 msgid "Authors"
 msgstr "ผู้สร้าง"
 
-#: src/gui/ConfigurationDialog.cpp:744 src/gui/ViewDialog.cpp:444
+#: src/gui/ConfigurationDialog.cpp:740 src/gui/ViewDialog.cpp:444
 msgid "Contact"
 msgstr "ติดต่อ"
 
-#: src/gui/ConfigurationDialog.cpp:746
+#: src/gui/ConfigurationDialog.cpp:742
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:79
 #: plugins/Oculars/src/gui/OcularDialog.cpp:497
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:389
@@ -1206,7 +1196,7 @@ msgstr "ติดต่อ"
 msgid "Version"
 msgstr "รุ่น"
 
-#: src/gui/ConfigurationDialog.cpp:829
+#: src/gui/ConfigurationDialog.cpp:825
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:80
 #: plugins/Oculars/src/gui/OcularDialog.cpp:498
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:118
@@ -1219,23 +1209,23 @@ msgstr "รุ่น"
 msgid "Author"
 msgstr "ผู้สร้าง"
 
-#: src/gui/ConfigurationDialog.cpp:833
+#: src/gui/ConfigurationDialog.cpp:829
 msgid "License"
 msgstr "สัญญาอนุญาต"
 
-#: src/gui/ConfigurationDialog.cpp:837
+#: src/gui/ConfigurationDialog.cpp:833
 msgid "Shortcut"
 msgstr "ปุ่มพิมพ์ลัด"
 
-#: src/gui/ConfigurationDialog.cpp:861
+#: src/gui/ConfigurationDialog.cpp:857
 msgid "Running script: "
 msgstr "สคริปต์ที่กำลังดำเนินงานอยู่: "
 
-#: src/gui/ConfigurationDialog.cpp:868
+#: src/gui/ConfigurationDialog.cpp:864
 msgid "Running script: [none]"
 msgstr "สคริปต์ที่กำลังดำเนินงานอยู่: [ไม่มี]"
 
-#: src/gui/ConfigurationDialog.cpp:933
+#: src/gui/ConfigurationDialog.cpp:929
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
@@ -1243,16 +1233,16 @@ msgstr ""
 "เสร็จสิ้นการดาวน์โหลดบัญชีดาวใหม่!\n"
 "เริ่ม Stellarium ใหม่เพื่อแสดง"
 
-#: src/gui/ConfigurationDialog.cpp:937
+#: src/gui/ConfigurationDialog.cpp:933
 msgid "All available star catalogs have been installed."
 msgstr "บัญชีดาวที่มีอยู่ทั้งหมดได้รับการติดตั้งแล้ว"
 
-#: src/gui/ConfigurationDialog.cpp:942
+#: src/gui/ConfigurationDialog.cpp:938
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "รับวัตถุหรือดวงดาว %1 จาก %2"
 
-#: src/gui/ConfigurationDialog.cpp:949
+#: src/gui/ConfigurationDialog.cpp:945
 #, qt-format
 msgid ""
 "Downloading %1...\n"
@@ -1261,7 +1251,7 @@ msgstr ""
 "กำลังดาวน์โหลด %1...\n"
 "(คุณสามารถปิดหน้าต่างนี้ได้)"
 
-#: src/gui/ConfigurationDialog.cpp:956
+#: src/gui/ConfigurationDialog.cpp:952
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -1272,7 +1262,7 @@ msgstr ""
 "จำนวนดาว: %2 ล้านดวง\n"
 "พิสัยโชติมาตร: %3 - %4"
 
-#: src/gui/ConfigurationDialog.cpp:999 src/gui/ConfigurationDialog.cpp:1034
+#: src/gui/ConfigurationDialog.cpp:995 src/gui/ConfigurationDialog.cpp:1030
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -1281,11 +1271,11 @@ msgstr ""
 "เกิดข้อผิดพลาดในการดาวน์โหลด %1:\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:1086
+#: src/gui/ConfigurationDialog.cpp:1082
 msgid "Verifying file integrity..."
 msgstr "กำลังทวนสอบบูรณภาพของแฟ้มข้อมูล..."
 
-#: src/gui/ConfigurationDialog.cpp:1090
+#: src/gui/ConfigurationDialog.cpp:1086
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -1295,124 +1285,124 @@ msgstr ""
 "ไฟล์เสียหาย"
 
 #. TRANSLATORS: Full phrase is "Algorithm of DeltaT"
-#: src/gui/ConfigurationDialog.cpp:1163
+#: src/gui/ConfigurationDialog.cpp:1159
 msgid "Algorithm of"
 msgstr "วิธีคำนวณ"
 
-#: src/gui/ConfigurationDialog.cpp:1174
+#: src/gui/ConfigurationDialog.cpp:1170
 msgid "Without correction"
 msgstr "ไม่มีการปรับแก้"
 
-#: src/gui/ConfigurationDialog.cpp:1175
+#: src/gui/ConfigurationDialog.cpp:1171
 msgid "Schoch (1931)"
 msgstr "Schoch (1931)"
 
-#: src/gui/ConfigurationDialog.cpp:1176
+#: src/gui/ConfigurationDialog.cpp:1172
 msgid "Clemence (1948)"
 msgstr "Clemence (1948)"
 
-#: src/gui/ConfigurationDialog.cpp:1177
+#: src/gui/ConfigurationDialog.cpp:1173
 msgid "IAU (1952)"
 msgstr "IAU (1952)"
 
-#: src/gui/ConfigurationDialog.cpp:1178
+#: src/gui/ConfigurationDialog.cpp:1174
 msgid "Astronomical Ephemeris (1960)"
 msgstr "Astronomical Ephemeris (1960)"
 
-#: src/gui/ConfigurationDialog.cpp:1179
+#: src/gui/ConfigurationDialog.cpp:1175
 msgid "Tuckerman (1962, 1964) & Goldstine (1973)"
 msgstr "Tuckerman (1962, 1964) & Goldstine (1973)"
 
-#: src/gui/ConfigurationDialog.cpp:1180
+#: src/gui/ConfigurationDialog.cpp:1176
 msgid "Muller & Stephenson (1975)"
 msgstr "Muller & Stephenson (1975)"
 
-#: src/gui/ConfigurationDialog.cpp:1181
+#: src/gui/ConfigurationDialog.cpp:1177
 msgid "Stephenson (1978)"
 msgstr "Stephenson (1978)"
 
-#: src/gui/ConfigurationDialog.cpp:1182
+#: src/gui/ConfigurationDialog.cpp:1178
 msgid "Schmadel & Zech (1979)"
 msgstr "Schmadel & Zech (1979)"
 
-#: src/gui/ConfigurationDialog.cpp:1183
+#: src/gui/ConfigurationDialog.cpp:1179
 msgid "Morrison & Stephenson (1982)"
 msgstr "Morrison & Stephenson (1982)"
 
-#: src/gui/ConfigurationDialog.cpp:1184
+#: src/gui/ConfigurationDialog.cpp:1180
 msgid "Stephenson & Morrison (1984)"
 msgstr "Stephenson & Morrison (1984)"
 
-#: src/gui/ConfigurationDialog.cpp:1185
+#: src/gui/ConfigurationDialog.cpp:1181
 msgid "Stephenson & Houlden (1986)"
 msgstr "Stephenson & Houlden (1986)"
 
-#: src/gui/ConfigurationDialog.cpp:1186
+#: src/gui/ConfigurationDialog.cpp:1182
 msgid "Espenak (1987, 1989)"
 msgstr "Espenak (1987, 1989)"
 
-#: src/gui/ConfigurationDialog.cpp:1187
+#: src/gui/ConfigurationDialog.cpp:1183
 msgid "Borkowski (1988)"
 msgstr "Borkowski (1988)"
 
-#: src/gui/ConfigurationDialog.cpp:1188
+#: src/gui/ConfigurationDialog.cpp:1184
 msgid "Schmadel & Zech (1988)"
 msgstr "Schmadel & Zech (1988)"
 
-#: src/gui/ConfigurationDialog.cpp:1189
+#: src/gui/ConfigurationDialog.cpp:1185
 msgid "Chapront-Touze & Chapront (1991)"
 msgstr "Chapront-Touze & Chapront (1991)"
 
-#: src/gui/ConfigurationDialog.cpp:1190
+#: src/gui/ConfigurationDialog.cpp:1186
 msgid "Stephenson & Morrison (1995)"
 msgstr "Stephenson & Morrison (1995)"
 
-#: src/gui/ConfigurationDialog.cpp:1191
+#: src/gui/ConfigurationDialog.cpp:1187
 msgid "Stephenson (1997)"
 msgstr "Stephenson (1997)"
 
-#: src/gui/ConfigurationDialog.cpp:1193
+#: src/gui/ConfigurationDialog.cpp:1189
 msgid "Meeus (1998) (with Chapront, Chapront-Touze & Francou (1997))"
 msgstr ""
 "Meeus (ค.ศ. 1998) (กับ Chapront, Chapront-Touze & Francou (ค.ศ. 1997))"
 
-#: src/gui/ConfigurationDialog.cpp:1194
+#: src/gui/ConfigurationDialog.cpp:1190
 msgid "JPL Horizons"
 msgstr "JPL Horizons"
 
-#: src/gui/ConfigurationDialog.cpp:1195
+#: src/gui/ConfigurationDialog.cpp:1191
 msgid "Meeus & Simons (2000)"
 msgstr "Meeus & Simons (2000)"
 
-#: src/gui/ConfigurationDialog.cpp:1196
+#: src/gui/ConfigurationDialog.cpp:1192
 msgid "Montenbruck & Pfleger (2000)"
 msgstr "Montenbruck & Pfleger (2000)"
 
-#: src/gui/ConfigurationDialog.cpp:1197
+#: src/gui/ConfigurationDialog.cpp:1193
 msgid "Reingold & Dershowitz (2002, 2007)"
 msgstr "Reingold & Dershowitz (2002, 2007)"
 
-#: src/gui/ConfigurationDialog.cpp:1198
+#: src/gui/ConfigurationDialog.cpp:1194
 msgid "Morrison & Stephenson (2004, 2005)"
 msgstr "Morrison & Stephenson (2004, 2005)"
 
-#: src/gui/ConfigurationDialog.cpp:1200
+#: src/gui/ConfigurationDialog.cpp:1196
 msgid "Espenak & Meeus (2006)"
 msgstr "Espenak & Meeus (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:1201
+#: src/gui/ConfigurationDialog.cpp:1197
 msgid "Reijs (2006)"
 msgstr "Reijs (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:1202
+#: src/gui/ConfigurationDialog.cpp:1198
 msgid "Banjevic (2006)"
 msgstr "Banjevic (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:1203
+#: src/gui/ConfigurationDialog.cpp:1199
 msgid "Islam, Sadiq & Qureshi (2008, 2013)"
 msgstr "Islam, Sadiq & Qureshi (2008, 2013)"
 
-#: src/gui/ConfigurationDialog.cpp:1204
+#: src/gui/ConfigurationDialog.cpp:1200
 #, qt-format
 msgid "Custom equation of %1T"
 msgstr "สมการ %1T ที่กำหนดเอง"
@@ -2013,15 +2003,15 @@ msgid ""
 "Insufficient OpenGL version. Please update drivers, or graphics hardware."
 msgstr ""
 
-#: src/StelMainView.cpp:360
+#: src/StelMainView.cpp:352
 msgid "Save screenshot"
 msgstr "บันทึกภาพหน้าจอ"
 
-#: src/StelMainView.cpp:361
+#: src/StelMainView.cpp:353
 msgid "Full-screen mode"
 msgstr "โหมดเต็มจอ"
 
-#: src/StelMainView.cpp:533
+#: src/StelMainView.cpp:525
 #, qt-format
 msgid "Stellarium %1"
 msgstr "Stellarium %1"
@@ -3974,7 +3964,7 @@ msgstr "โฟลเดอร์"
 msgid "&Choose"
 msgstr "เลือก"
 
-#: src/translations.h:609 src/ui_configurationDialog.h:1177
+#: src/translations.h:609 src/ui_configurationDialog.h:1176
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:516
 msgid "Cancel"
 msgstr "ยกเลิก"
@@ -4028,7 +4018,7 @@ msgstr "เกี่ยวกับ"
 msgid "Log"
 msgstr "บันทึก"
 
-#: src/ui_helpDialogGui.h:290 src/ui_configurationDialog.h:1094
+#: src/ui_helpDialogGui.h:290 src/ui_configurationDialog.h:1093
 msgid "Edit keyboard shortcuts..."
 msgstr "แก้ปุ่มลัดแป้นพิมพ์..."
 
@@ -4291,7 +4281,7 @@ msgstr "ใช้การเติมคำอัตโนมัติเฉพ
 
 #: src/ui_searchDialogGui.h:708 src/ui_viewDialog.h:1251
 #: src/ui_viewDialog.h:1257 src/ui_viewDialog.h:1259
-#: src/ui_configurationDialog.h:1178 src/ui_configurationDialog.h:1189
+#: src/ui_configurationDialog.h:1177 src/ui_configurationDialog.h:1188
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:417
 msgid "Options"
 msgstr "ตัวเลือก"
@@ -4558,19 +4548,19 @@ msgstr "ใช้คุณลักษณะท้องฟ้านี้เป
 msgid "Visible"
 msgstr "มองเห็นได้"
 
-#: src/ui_configurationDialog.h:1008
+#: src/ui_configurationDialog.h:1007
 msgid "Configuration"
 msgstr "การตั้งค่า"
 
-#: src/ui_configurationDialog.h:1010
+#: src/ui_configurationDialog.h:1009
 msgid "Program language"
 msgstr "ภาษาของโปรแกรม"
 
-#: src/ui_configurationDialog.h:1011
+#: src/ui_configurationDialog.h:1010
 msgid "Check updates"
 msgstr "ตรวจสอบการปรับปรุงข้อมูล"
 
-#: src/ui_configurationDialog.h:1012
+#: src/ui_configurationDialog.h:1011
 msgid ""
 "Enable checking updates of Stellarium via Internet. Info for updates of "
 "stable versions you can look on the tab \"About\" of \"Help\" window."
@@ -4579,11 +4569,11 @@ msgstr ""
 "สำหรับข้อมูลการปรับปรุงโปรแกรมรุ่นเสถียร ให้ดูที่แท็บ \"เกี่ยวกับ\" "
 "ในหน้าต่าง \"วิธีใช้\""
 
-#: src/ui_configurationDialog.h:1013
+#: src/ui_configurationDialog.h:1012
 msgid "Default options"
 msgstr "ตัวเลือกปริยาย"
 
-#: src/ui_configurationDialog.h:1015
+#: src/ui_configurationDialog.h:1014
 msgid ""
 "Save the settings you've changed this session to be the same the next time "
 "you start Stellarium"
@@ -4591,7 +4581,7 @@ msgstr ""
 "บันทึกการตั้งค่าที่คุณได้เปลี่ยนแปลงนี้ ให้เป็นแบบเดียวกันเมื่อเริ่ม "
 "Stellarium ในครั้งต่อไป"
 
-#: src/ui_configurationDialog.h:1017
+#: src/ui_configurationDialog.h:1016
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:390
 #: plugins/FOV/src/ui_fovWindow.h:387
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:276
@@ -4599,17 +4589,17 @@ msgstr ""
 msgid "Save settings"
 msgstr "บันทึกการตั้งค่าต่าง ๆ"
 
-#: src/ui_configurationDialog.h:1019
+#: src/ui_configurationDialog.h:1018
 msgid "Restore the default settings that came with Stellarium"
 msgstr "คืนค่าเดิมที่มาพร้อมกับ Stellarium"
 
-#: src/ui_configurationDialog.h:1021 plugins/FOV/src/ui_fovWindow.h:386
+#: src/ui_configurationDialog.h:1020 plugins/FOV/src/ui_fovWindow.h:386
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:277
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:313
 msgid "Restore defaults"
 msgstr "คืนค่าเริ่มต้นเดิม"
 
-#: src/ui_configurationDialog.h:1022
+#: src/ui_configurationDialog.h:1021
 msgid ""
 "Restoring default settings requires a restart of Stellarium. Saving all the "
 "current options includes the current FOV and direction of view for use at "
@@ -4619,232 +4609,232 @@ msgstr ""
 "บันทึกทุกตัวเลือกปัจจุบัน รวมทั้งพื้นที่การมองเห็น "
 "และทิศทางของมุมมองสำหรับใช้ในการเริ่มต้นถัดไป"
 
-#: src/ui_configurationDialog.h:1024
+#: src/ui_configurationDialog.h:1023
 msgid "The width of your view when Stellarium starts"
 msgstr "ความกว้างของมุมมองเมื่อเริ่มต้น Stellarium"
 
-#: src/ui_configurationDialog.h:1027
+#: src/ui_configurationDialog.h:1026
 msgid "The direction you're looking when Stellarium starts"
 msgstr "ทิศทางที่คุณต้องการเมื่อเริ่ม Stellarium"
 
-#: src/ui_configurationDialog.h:1029 src/ui_configurationDialog.h:1200
+#: src/ui_configurationDialog.h:1028 src/ui_configurationDialog.h:1199
 msgid "Selected object information"
 msgstr "ข้อมูลวัตถุที่เลือก"
 
-#: src/ui_configurationDialog.h:1031
+#: src/ui_configurationDialog.h:1030
 msgid "Display all information available"
 msgstr "แสดงข้อมูลทั้งหมด"
 
-#: src/ui_configurationDialog.h:1033
+#: src/ui_configurationDialog.h:1032
 msgid "All available"
 msgstr "ทั้งหมดที่มี"
 
-#: src/ui_configurationDialog.h:1035
+#: src/ui_configurationDialog.h:1034
 msgid "Display no information"
 msgstr "ไม่แสดงข้อมูล"
 
-#: src/ui_configurationDialog.h:1037 plugins/Oculars/src/Oculars.cpp:1938
+#: src/ui_configurationDialog.h:1036 plugins/Oculars/src/Oculars.cpp:1938
 #: plugins/Observability/src/Observability.cpp:201
 msgid "None"
 msgstr "ไม่มี"
 
-#: src/ui_configurationDialog.h:1039
+#: src/ui_configurationDialog.h:1038
 msgid "Display less information"
 msgstr "แสดงข้อมูลโดยสังเขป"
 
-#: src/ui_configurationDialog.h:1041
+#: src/ui_configurationDialog.h:1040
 msgid "Short"
 msgstr "สั้น"
 
-#: src/ui_configurationDialog.h:1043
+#: src/ui_configurationDialog.h:1042
 msgid "Display user settings information"
 msgstr "แสดงข้อมูลการตั้งค่าโดยผู้ใช้"
 
-#: src/ui_configurationDialog.h:1045
+#: src/ui_configurationDialog.h:1044
 msgid "Customized"
 msgstr "ได้รับการปรับแต่ง"
 
-#: src/ui_configurationDialog.h:1046
+#: src/ui_configurationDialog.h:1045
 msgid "Displayed fields"
 msgstr "ขอบเขตที่แสดง"
 
-#: src/ui_configurationDialog.h:1047
+#: src/ui_configurationDialog.h:1046
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:282
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:170
 msgid "Name"
 msgstr "ชื่อ"
 
-#: src/ui_configurationDialog.h:1049
+#: src/ui_configurationDialog.h:1048
 msgid "Geocentric equatorial coordinates, equinox of date"
 msgstr "พิกัดศูนย์สูตรศูนย์โลก, วิษุวัตของวัน"
 
-#: src/ui_configurationDialog.h:1051
+#: src/ui_configurationDialog.h:1050
 msgid "Right ascension/Declination (of date)"
 msgstr "ไรต์แอสเซนชัน/เดคลิเนชัน (ของวัน)"
 
-#: src/ui_configurationDialog.h:1052
+#: src/ui_configurationDialog.h:1051
 msgid "Catalog number(s)"
 msgstr "หมายเลขบัญชี"
 
-#: src/ui_configurationDialog.h:1054
+#: src/ui_configurationDialog.h:1053
 msgid "Geocentric equatorial coordinates, equinox of J2000.0"
 msgstr "พิกัดศูนย์สูตรศูนย์โลก, วิษุวัต J2000.0"
 
-#: src/ui_configurationDialog.h:1056
+#: src/ui_configurationDialog.h:1055
 msgid "Right ascension/Declination (J2000)"
 msgstr "ไรต์แอสเซนชัน/เดคลิเนชัน (J2000)"
 
-#: src/ui_configurationDialog.h:1057
+#: src/ui_configurationDialog.h:1056
 msgid "Absolute magnitude"
 msgstr "โชติมาตรสัมบูรณ์"
 
-#: src/ui_configurationDialog.h:1058
+#: src/ui_configurationDialog.h:1057
 msgid "Galactic coordinates"
 msgstr "พิกัดดาราจักร"
 
-#: src/ui_configurationDialog.h:1059
+#: src/ui_configurationDialog.h:1058
 msgid "Visual magnitude"
 msgstr "โชติมาตรปรากฏ"
 
-#: src/ui_configurationDialog.h:1061
+#: src/ui_configurationDialog.h:1060
 msgid "Angular or physical size"
 msgstr "ขนาดจริงหรือขนาดเชิงมุม"
 
-#: src/ui_configurationDialog.h:1063
+#: src/ui_configurationDialog.h:1062
 msgid "Size"
 msgstr "ขนาด"
 
-#: src/ui_configurationDialog.h:1065
+#: src/ui_configurationDialog.h:1064
 msgid "The type of the object (star, planet, etc.)"
 msgstr "ชนิดของวัตถุ (ดาวฤกษ์, ดาวเคราะห์ ฯลฯ)"
 
-#: src/ui_configurationDialog.h:1067
+#: src/ui_configurationDialog.h:1066
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:281
 msgid "Type"
 msgstr "ชนิด"
 
-#: src/ui_configurationDialog.h:1069
+#: src/ui_configurationDialog.h:1068
 msgid "Spectral class, nebula type, etc."
 msgstr "ชนิดสเปกตรัม, ชนิดเนบิวลา, ฯลฯ"
 
-#: src/ui_configurationDialog.h:1071
+#: src/ui_configurationDialog.h:1070
 msgid "Additional information"
 msgstr "รายละเอียดเพิ่มเติม"
 
-#: src/ui_configurationDialog.h:1073
+#: src/ui_configurationDialog.h:1072
 msgid "Topocentric equatorial coordinates"
 msgstr "พิกัดศูนย์สูตรจากผิวโลก"
 
-#: src/ui_configurationDialog.h:1075
+#: src/ui_configurationDialog.h:1074
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:155
 msgid "Hour angle/Declination"
 msgstr "มุมชั่วโมง/เดคลิเนชัน"
 
-#: src/ui_configurationDialog.h:1077
+#: src/ui_configurationDialog.h:1076
 msgid "Horizontal coordinates"
 msgstr "พิกัดขอบฟ้า"
 
-#: src/ui_configurationDialog.h:1079
+#: src/ui_configurationDialog.h:1078
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:157
 msgid "Altitude/Azimuth"
 msgstr "มุมเงย/มุมทิศ"
 
-#: src/ui_configurationDialog.h:1080
+#: src/ui_configurationDialog.h:1079
 msgid "Distance"
 msgstr "ระยะห่าง"
 
-#: src/ui_configurationDialog.h:1082
+#: src/ui_configurationDialog.h:1081
 msgid "Ecliptic coordinates, equinox of date and J2000 (only for Earth)"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1084
+#: src/ui_configurationDialog.h:1083
 msgid "Ecliptic coordinates"
 msgstr "พิกัดสุริยวิถี"
 
-#: src/ui_configurationDialog.h:1085
+#: src/ui_configurationDialog.h:1084
 msgid "Control"
 msgstr "ควบคุม"
 
-#: src/ui_configurationDialog.h:1087
+#: src/ui_configurationDialog.h:1086
 msgid "Allow keyboard to pan and zoom"
 msgstr "ใช้แป้นพิมพ์เพื่อกวาดและซูม"
 
-#: src/ui_configurationDialog.h:1089
+#: src/ui_configurationDialog.h:1088
 msgid "Enable keyboard navigation"
 msgstr "เปิดใช้การนำทางผ่านแป้นพิมพ์"
 
-#: src/ui_configurationDialog.h:1091
+#: src/ui_configurationDialog.h:1090
 msgid "Allow mouse to pan (drag) and zoom (mousewheel)"
 msgstr "ใช้เมาส์ในการกวาด (ลากเมาส์) และซูม (หมุนล้อของเมาส์)"
 
-#: src/ui_configurationDialog.h:1093
+#: src/ui_configurationDialog.h:1092
 msgid "Enable mouse navigation"
 msgstr "เปิดใช้การนำทางด้วยเมาส์"
 
-#: src/ui_configurationDialog.h:1096
+#: src/ui_configurationDialog.h:1095
 msgid "Hides the mouse cursor when inactive"
 msgstr "ซ่อนตัวชี้เมาส์เมื่อไม่มีการใช้งาน"
 
-#: src/ui_configurationDialog.h:1098
+#: src/ui_configurationDialog.h:1097
 msgid "Mouse cursor timeout:"
 msgstr "เวลาที่แสดงตัวชี้เมาส์:"
 
-#: src/ui_configurationDialog.h:1100
+#: src/ui_configurationDialog.h:1099
 msgid "seconds"
 msgstr "วินาที"
 
-#: src/ui_configurationDialog.h:1102
+#: src/ui_configurationDialog.h:1101
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:191
 msgid "Startup date and time"
 msgstr "วันและเวลาเริ่มต้น"
 
-#: src/ui_configurationDialog.h:1104
+#: src/ui_configurationDialog.h:1103
 msgid "Use a specific date and time when Stellarium starts up"
 msgstr "ใช้วันที่และเวลาที่เจาะจงเมื่อเริ่ม Stellarium"
 
-#: src/ui_configurationDialog.h:1106
+#: src/ui_configurationDialog.h:1105
 msgid "Other:"
 msgstr "อื่น ๆ :"
 
-#: src/ui_configurationDialog.h:1108
+#: src/ui_configurationDialog.h:1107
 msgid "Use current local date and time"
 msgstr "ใช้วันและเวลาท้องถิ่นในขณะนี้"
 
-#: src/ui_configurationDialog.h:1110
+#: src/ui_configurationDialog.h:1109
 msgid "use current"
 msgstr "ใช้ค่าขณะนี้"
 
-#: src/ui_configurationDialog.h:1112
+#: src/ui_configurationDialog.h:1111
 msgid "Starts Stellarium at system clock date and time"
 msgstr "เริ่ม Stellarium ตามวันและเวลาของระบบ"
 
-#: src/ui_configurationDialog.h:1114
+#: src/ui_configurationDialog.h:1113
 msgid "System date and time"
 msgstr "ใช้วันที่และเวลาของระบบ"
 
-#: src/ui_configurationDialog.h:1116
+#: src/ui_configurationDialog.h:1115
 msgid ""
 "Sets the simulation time to the next instance of this time of day when "
 "Stellarium starts"
 msgstr "ตั้งค่าเวลาของการจำลองเหตุการณ์หากวันที่ตรงกับการใช้งาน Stellarium"
 
-#: src/ui_configurationDialog.h:1118
+#: src/ui_configurationDialog.h:1117
 msgid "System date at:"
 msgstr "เวลาของระบบ:"
 
-#: src/ui_configurationDialog.h:1119
+#: src/ui_configurationDialog.h:1118
 msgid "Time correction"
 msgstr "ค่าตรวจแก้เวลา"
 
-#: src/ui_configurationDialog.h:1122
+#: src/ui_configurationDialog.h:1121
 msgid "Edit equation"
 msgstr "แก้ไขสมการ"
 
-#: src/ui_configurationDialog.h:1124
+#: src/ui_configurationDialog.h:1123
 msgid "Planetarium options"
 msgstr "ตัวเลือกท้องฟ้าจำลอง"
 
-#: src/ui_configurationDialog.h:1126
+#: src/ui_configurationDialog.h:1125
 msgid ""
 "Spheric mirror distortion is used when projecting Stellarium onto a spheric "
 "mirror for low-cost planetarium systems."
@@ -4852,51 +4842,51 @@ msgstr ""
 "ปรับภาพเป็นการสะท้อนผิวโค้งสำหรับการใช้ในการฉายภาพลงบนกระจกโค้งของระบบท้องฟ้า"
 "จำลองราคาประหยัด"
 
-#: src/ui_configurationDialog.h:1128
+#: src/ui_configurationDialog.h:1127
 msgid "Spheric mirror distortion"
 msgstr "ปรับภาพให้เหมือนสะท้อนกระจกโค้งทรงกลม"
 
-#: src/ui_configurationDialog.h:1130
+#: src/ui_configurationDialog.h:1129
 msgid "Mask out everything outside a central circle in the main view"
 msgstr "บังส่วนที่อยู่นอกมุมมองรูปวงกลม"
 
-#: src/ui_configurationDialog.h:1132
+#: src/ui_configurationDialog.h:1131
 msgid "Disc viewport"
 msgstr "มุมมองรูปวงกลม"
 
-#: src/ui_configurationDialog.h:1134
+#: src/ui_configurationDialog.h:1133
 msgid "Hide other constellations when you click one"
 msgstr "ซ่อนกลุ่มดาวอื่นเมื่อคลิกที่กลุ่มดาวกลุ่มหนึ่ง"
 
-#: src/ui_configurationDialog.h:1136
+#: src/ui_configurationDialog.h:1135
 msgid "Select single constellation"
 msgstr "เลือกกลุ่มดาวหนึ่ง"
 
-#: src/ui_configurationDialog.h:1138
+#: src/ui_configurationDialog.h:1137
 msgid "Align labels with the horizon"
 msgstr "วางป้ายอักษรให้อยู่ในแนวขนานกับขอบฟ้า"
 
-#: src/ui_configurationDialog.h:1140
+#: src/ui_configurationDialog.h:1139
 msgid "Gravity labels"
 msgstr "ป้ายแสดงความโน้มถ่วง"
 
-#: src/ui_configurationDialog.h:1142
+#: src/ui_configurationDialog.h:1141
 msgid "Toggle display backgrounds of the nebulae."
 msgstr "สลับการแสดงภาพพื้นหลังของเนบิวลา"
 
-#: src/ui_configurationDialog.h:1144
+#: src/ui_configurationDialog.h:1143
 msgid "Show nebula background button"
 msgstr "แสดงปุ่มภาพพื้นหลังของเนบิวลา"
 
-#: src/ui_configurationDialog.h:1146
+#: src/ui_configurationDialog.h:1145
 msgid "Toggle vertical and horizontal image flip buttons."
 msgstr "สลับปุ่มพลิกภาพแนวตั้งและแนวนอน"
 
-#: src/ui_configurationDialog.h:1148
+#: src/ui_configurationDialog.h:1147
 msgid "Show flip buttons"
 msgstr "แสดงปุ่มพลิก"
 
-#: src/ui_configurationDialog.h:1150
+#: src/ui_configurationDialog.h:1149
 msgid ""
 "When enabled, the \"auto zoom out\" key will also set the initial viewing "
 "direction"
@@ -4904,106 +4894,106 @@ msgstr ""
 "เมื่อกำหนดให้ทำงาน, ปุ่ม \"ย่อภาพอัตโนมัติ\" "
 "จะถูกกำหนดเป็นค่าเริ่มต้นในทิศทางการมอง"
 
-#: src/ui_configurationDialog.h:1152
+#: src/ui_configurationDialog.h:1151
 msgid "Auto zoom out returns to initial direction of view"
 msgstr "ซูมออกอัตโนมัติเพื่อกลับไปยังทิศทางของมุมมองเริ่มต้น"
 
-#: src/ui_configurationDialog.h:1154
+#: src/ui_configurationDialog.h:1153
 msgid ""
 "Auto-enabling of the atmosphere for bodies with atmosphere in location window"
 msgstr ""
 "เปิดการใช้งานบรรยากาศของวัตถุที่มีบรรยากาศโดยอัตโนมัติในหน้าต่างสถานที่"
 
-#: src/ui_configurationDialog.h:1156
+#: src/ui_configurationDialog.h:1155
 msgid "Auto-enabling for the atmosphere"
 msgstr "เปิดการใช้งานบรรยากาศโดยอัตโนมัติ"
 
-#: src/ui_configurationDialog.h:1158
+#: src/ui_configurationDialog.h:1157
 msgid "Use decimal degrees for coordinates"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1160
+#: src/ui_configurationDialog.h:1159
 msgid "Use decimal degrees"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1161
+#: src/ui_configurationDialog.h:1160
 msgid "Screenshots"
 msgstr "ภาพหน้าจอ"
 
-#: src/ui_configurationDialog.h:1162
+#: src/ui_configurationDialog.h:1161
 msgid "Screenshot Directory"
 msgstr "ไดเร็กทอรีที่บันทึกภาพหน้าจอ"
 
-#: src/ui_configurationDialog.h:1164
+#: src/ui_configurationDialog.h:1163
 msgid "Invert colors"
 msgstr "กลับสี"
 
-#: src/ui_configurationDialog.h:1165
+#: src/ui_configurationDialog.h:1164
 msgid "Star catalog updates"
 msgstr "ปรับปรุงบัญชีดาว"
 
-#: src/ui_configurationDialog.h:1167
+#: src/ui_configurationDialog.h:1166
 msgid "Click here to start downloading"
 msgstr "คลิกที่นี่เพื่อเริ่มการดาวน์โหลด"
 
-#: src/ui_configurationDialog.h:1169
+#: src/ui_configurationDialog.h:1168
 msgid "Download this file to view even more stars"
 msgstr "ดาวน์โหลดแฟ้มนี้เพื่อเพิ่มจำนวนดาวให้มากขึ้น"
 
-#: src/ui_configurationDialog.h:1171
+#: src/ui_configurationDialog.h:1170
 msgid "Restart the download"
 msgstr "เริ่มต้นการดาวน์โหลดใหม่"
 
-#: src/ui_configurationDialog.h:1173
+#: src/ui_configurationDialog.h:1172
 msgid "Retry"
 msgstr "ลองซ้ำ"
 
-#: src/ui_configurationDialog.h:1175
+#: src/ui_configurationDialog.h:1174
 msgid "Stop the download. You can always restart it later"
 msgstr "หยุดการดาวน์โหลด คุณสามารถเริ่มต้นใหม่ได้ในภายหลัง"
 
-#: src/ui_configurationDialog.h:1180
+#: src/ui_configurationDialog.h:1179
 msgid "Close window when script runs"
 msgstr "ปิดหน้าต่างเมื่อสคริปต์ทำงาน"
 
-#: src/ui_configurationDialog.h:1182
+#: src/ui_configurationDialog.h:1181
 msgid "Run the selected script"
 msgstr "สั่งให้สคริปต์ที่เลือกไว้ทำงาน"
 
-#: src/ui_configurationDialog.h:1186
+#: src/ui_configurationDialog.h:1185
 msgid "Stop a running script"
 msgstr "หยุดสคริปต์ที่กำลังทำงานอยู่"
 
-#: src/ui_configurationDialog.h:1190
+#: src/ui_configurationDialog.h:1189
 msgid "Load at startup"
 msgstr "โหลดเมื่อเริ่มต้นระบบ"
 
-#: src/ui_configurationDialog.h:1191
+#: src/ui_configurationDialog.h:1190
 msgid "configure"
 msgstr "ปรับแต่ง"
 
-#: src/ui_configurationDialog.h:1196
+#: src/ui_configurationDialog.h:1195
 msgid "Main"
 msgstr "หลัก"
 
-#: src/ui_configurationDialog.h:1198
+#: src/ui_configurationDialog.h:1197
 msgid "Information"
 msgstr "ข้อมูล"
 
-#: src/ui_configurationDialog.h:1203
+#: src/ui_configurationDialog.h:1202
 msgid "Navigation"
 msgstr "นำทาง"
 
-#: src/ui_configurationDialog.h:1205
+#: src/ui_configurationDialog.h:1204
 msgid "Tools"
 msgstr "เครื่องมือ"
 
-#: src/ui_configurationDialog.h:1207
+#: src/ui_configurationDialog.h:1206
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:452
 msgid "Scripts"
 msgstr "สคริปต์"
 
-#: src/ui_configurationDialog.h:1209
+#: src/ui_configurationDialog.h:1208
 msgid "Plugins"
 msgstr "โปรแกรมเสริม"
 
@@ -10141,6 +10131,14 @@ msgstr "ตำแหน่ง:"
 
 #~ msgid "Art brightness: "
 #~ msgstr "ความสว่างของภาพวาด: "
+
+#, qt-format
+#~ msgid "RA/DE (J2000): %1/%2"
+#~ msgstr "ไรต์แอสเซนชัน/เดคลิเนชัน (J2000): %1/%2"
+
+#, qt-format
+#~ msgid "RA/DE (of date): %1/%2"
+#~ msgstr "ไรต์แอสเซนชัน/เดคลิเนชัน (ของวัน): %1/%2"
 
 #~ msgid "Limiting Magnitude: "
 #~ msgstr "การจำกัดค่าความสว่าง "
