@@ -21,11 +21,13 @@
 #include <QStringBuilder>
 
 #include "JsonTableModel.hpp"
+#include "StelTranslator.hpp"
 
-JsonTableModel::JsonTableModel(QMap<qint64, AddOn*> addons, QObject* parent)
+JsonTableModel::JsonTableModel(QString type, QMap<qint64, AddOn*> addons, QObject* parent)
 	: QAbstractTableModel(parent)
 	, m_addons(addons)
 {
+	m_iColumns << Title << Type << Version;
 }
 
 int JsonTableModel::rowCount(const QModelIndex &parent) const
@@ -37,26 +39,32 @@ int JsonTableModel::rowCount(const QModelIndex &parent) const
 int JsonTableModel::columnCount(const QModelIndex &parent) const
 {
 	Q_UNUSED(parent);
-	return 2;
+	return m_iColumns.size();
 }
 
 QVariant JsonTableModel::data(const QModelIndex &index, int role) const
 {
-	if (!index.isValid() || index.row() >= m_addons.size() || index.row() < 0)
+	if (!index.isValid() || index.row() >= m_addons.size() || index.row() < 0 || role != Qt::DisplayRole)
 	{
 		return QVariant();
 	}
 
-	if (role == Qt::DisplayRole)
-	{
-		AddOn* addon = m_addons.values().at(index.row());
-		if (index.column() == 0)
-			return addon->getAddOnId();
-		else if (index.column() == 1)
-			return addon->getTitle();
+	QVariant value;
+	AddOn* addon = m_addons.values().at(index.row());
+	Column column = m_iColumns.at(index.row());
+	switch (column) {
+		case Title:
+			value = addon->getTitle();
+			break;
+		case Type:
+			value = addon->getType();
+			break;
+		case Version:
+			value = addon->getVersion();
+			break;
 	}
 
-	return QVariant();
+	return value;
 }
 
 QVariant JsonTableModel::headerData(int section, Qt::Orientation orientation, int role) const
@@ -66,17 +74,18 @@ QVariant JsonTableModel::headerData(int section, Qt::Orientation orientation, in
 		return QVariant();
 	}
 
-	switch (section)
-	{
-		case 0:
-			return tr("ID");
-
-		case 1:
-			return tr("Title");
-
-		default:
-			return QVariant();
+	QString value;
+	switch ((Column) section) {
+		case Title:
+			value = q_("Title");
+			break;
+		case Type:
+			value = q_("Type");
+			break;
+		case Version:
+			value = q_("Version");
+			break;
 	}
 
-	return QVariant();
+	return qVariantFromValue(value);
 }

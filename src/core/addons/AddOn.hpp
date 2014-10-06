@@ -34,6 +34,7 @@ public:
 	quint64 getAddOnId() { return m_iAddOnId; }
 	QString getTitle() { return m_sTitle; }
 	QString getType() { return m_sType; }
+	QString getVersion() { return m_sVersion; }
 
 private:
 	typedef struct

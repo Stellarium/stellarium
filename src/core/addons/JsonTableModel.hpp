@@ -28,7 +28,7 @@ class JsonTableModel : public QAbstractTableModel
 {
 	Q_OBJECT
 public:
-	JsonTableModel(QMap<qint64, AddOn*> addons, QObject *parent=0);
+	JsonTableModel(QString type, QMap<qint64, AddOn*> addons, QObject *parent=0);
 
 	int rowCount(const QModelIndex &parent) const;
 	int columnCount(const QModelIndex &parent) const;
@@ -36,7 +36,14 @@ public:
 	QVariant headerData(int section, Qt::Orientation orientation, int role) const;
 
 private:
+	enum Column {
+		Title,
+		Type,
+		Version
+	};
+
 	QMap<qint64, AddOn*> m_addons;
+	QList<Column> m_iColumns;
 };
 
 #endif // _JSONTABLEMODEL_HPP_
