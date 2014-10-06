@@ -17,50 +17,26 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _ADDON_HPP_
-#define _ADDON_HPP_
+#ifndef _JSONTABLEMODEL_HPP_
+#define _JSONTABLEMODEL_HPP_
 
-#include <QObject>
+#include <QAbstractTableModel>
 
-class AddOn : public QObject
+#include "addons/AddOn.hpp"
+
+class JsonTableModel : public QAbstractTableModel
 {
 	Q_OBJECT
 public:
-	AddOn(const qint64 addOnId, const QVariantMap &map);
-	virtual ~AddOn();
+	JsonTableModel(QMap<qint64, AddOn*> addons, QObject *parent=0);
 
-	bool isLoaded() { return m_bLoaded; }
-
-	quint64 getAddOnId() { return m_iAddOnId; }
-	QString getTitle() { return m_sTitle; }
+	int rowCount(const QModelIndex &parent) const;
+	int columnCount(const QModelIndex &parent) const;
+	QVariant data(const QModelIndex& index, int role = Qt :: DisplayRole) const;
+	QVariant headerData(int section, Qt::Orientation orientation, int role) const;
 
 private:
-	typedef struct
-	{
-		QString name;
-		QString email;
-		QString url;
-	} Authors;
-
-	qint64 m_iAddOnId;
-	QString m_sType;
-	QString m_sInstallId;
-	QString m_sTitle;
-	QString m_sDescription;
-	QString m_sVersion;
-	QString m_sFirstStel;
-	QString m_sLastStel;
-	QString m_sLicense;
-	QString m_sLicenseURL;
-	QString m_sDownloadURL;
-	QString m_sDownloadFilename;
-	QString m_sDownloadSize;
-	QString m_sInstalledSize;
-	QString m_sChecksum;
-	QString m_sThumbnail;
-	QList<Authors> m_authors;
-
-	bool m_bLoaded;
+	QMap<qint64, AddOn*> m_addons;
 };
 
-#endif // _ADDON_HPP_
+#endif // _JSONTABLEMODEL_HPP_
