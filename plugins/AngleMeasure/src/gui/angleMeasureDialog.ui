@@ -162,10 +162,105 @@
            </widget>
           </item>
           <item>
-           <widget class="QCheckBox" name="showPositionAngleCheckBox">
-            <property name="text">
-             <string>Show position angle</string>
+           <widget class="QGroupBox" name="showEquatorial_GroupBox">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
             </property>
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>80</height>
+             </size>
+            </property>
+            <property name="title">
+             <string>Show in Equatorial Coordinates</string>
+            </property>
+            <property name="flat">
+             <bool>true</bool>
+            </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
+            <widget class="QCheckBox" name="showPositionAngleCheckBox">
+             <property name="enabled">
+              <bool>true</bool>
+             </property>
+             <property name="geometry">
+              <rect>
+               <x>26</x>
+               <y>40</y>
+               <width>400</width>
+               <height>17</height>
+              </rect>
+             </property>
+             <property name="text">
+              <string>Display with position angle</string>
+             </property>
+            </widget>
+           </widget>
+          </item>
+          <item>
+           <widget class="QGroupBox" name="showHorizontal_GroupBox">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>135</height>
+             </size>
+            </property>
+            <property name="title">
+             <string>Show in Horizontal Coordinates</string>
+            </property>
+            <property name="flat">
+             <bool>true</bool>
+            </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
+            <widget class="QCheckBox" name="showPositionAngleHorizontalCheckBox">
+             <property name="geometry">
+              <rect>
+               <x>26</x>
+               <y>40</y>
+               <width>484</width>
+               <height>17</height>
+              </rect>
+             </property>
+             <property name="toolTip">
+              <string>(e.g. for Dobson starhopping)</string>
+             </property>
+             <property name="text">
+              <string>Display with position angle </string>
+             </property>
+            </widget>
+            <widget class="QCheckBox" name="azAltStartOnSkyCheckBox">
+             <property name="geometry">
+              <rect>
+               <x>26</x>
+               <y>65</y>
+               <width>400</width>
+               <height>17</height>
+              </rect>
+             </property>
+             <property name="text">
+              <string>Attach start point to rotating sky</string>
+             </property>
+            </widget>
+            <widget class="QCheckBox" name="azAltEndOnSkyCheckBox">
+             <property name="geometry">
+              <rect>
+               <x>26</x>
+               <y>90</y>
+               <width>400</width>
+               <height>17</height>
+              </rect>
+             </property>
+             <property name="text">
+              <string>Attach end point to rotating sky</string>
+             </property>
+            </widget>
            </widget>
           </item>
          </layout>
