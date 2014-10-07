@@ -243,6 +243,8 @@ void PointerCoordinates::loadConfiguration(void)
 	flagShowCoordinatesButton = conf->value("flag_show_button", true).toBool();
 	setCurrentCoordinatesPlaceKey(conf->value("current_displaying_place", "TopRight").toString());
 	setCurrentCoordinateSystemKey(conf->value("current_coordinate_system", "RaDecJ2000").toString());
+	QStringList cc = conf->value("custom_coordinates", "1,1").toString().split(",");
+	setCustomCoordinatesPlace(cc[0].toInt(), cc[1].toInt());
 
 	conf->endGroup();
 }
@@ -255,6 +257,8 @@ void PointerCoordinates::saveConfiguration(void)
 	conf->setValue("flag_show_button", getFlagShowCoordinatesButton());
 	conf->setValue("current_displaying_place", getCurrentCoordinatesPlaceKey());
 	conf->setValue("current_coordinate_system", getCurrentCoordinateSystemKey());
+	QPair<int, int> cc = getCustomCoordinatesPlace();
+	conf->setValue("custom_coordinates", QString("%1,%2").arg(cc.first).arg(cc.second));
 	//conf->setValue("text_color", "1,0.5,0");
 	conf->setValue("font_size", getFontSize());
 
@@ -344,7 +348,19 @@ QPair<int, int> PointerCoordinates::getCoordinatesPlace(QString text)
 			y = fs.height();
 			break;
 		}
+		case Custom:
+		{
+			QPair<int, int> xy = getCustomCoordinatesPlace();
+			x = xy.first;
+			y = gui->getSkyGui()->getSkyGuiHeight() - xy.second - fs.height();
+			break;
+		}
 	}
 	return qMakePair(x, y);
+}
+
+void PointerCoordinates::setCustomCoordinatesPlace(int x, int y)
+{
+	customPosition = qMakePair(x, y);
 }
 

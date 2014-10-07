@@ -47,7 +47,8 @@ public:
 	{
 		TopCenter,		//!< The top center of the screen
 		TopRight,		//!< In center of the top right half of the screen
-		RightBottomCorner	//!< The right bottom corner of the screen
+		RightBottomCorner,	//!< The right bottom corner of the screen
+		Custom			//!< The custom position on the screen
 	};
 
 	//! @enum CoordinateSystem
@@ -106,6 +107,11 @@ public:
 
 	QPair<int, int> getCoordinatesPlace(QString text);
 
+	QPair<int, int> getCustomCoordinatesPlace()
+	{
+		return customPosition;
+	}
+
 public slots:
 	//! Enable plugin usage
 	void enableCoordinates(bool b);
@@ -152,6 +158,7 @@ public slots:
 	//! Set the current coordinate system from its key
 	void setCurrentCoordinateSystemKey(QString key);
 
+	void setCustomCoordinatesPlace(int x, int y);
 
 private:
 	PointerCoordinatesWindow* mainWindow;
@@ -171,6 +178,7 @@ private:
 	Vec3d coordinatesPoint;
 	int fontSize;
 	StelButton* toolbarButton;
+	QPair<int, int> customPosition;
 };
 
 
