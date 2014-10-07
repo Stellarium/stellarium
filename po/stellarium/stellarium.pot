@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-10-05 18:17+0700\n"
+"POT-Creation-Date: 2014-10-07 22:29+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -4430,7 +4430,7 @@ msgstr ""
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:390
 #: plugins/FOV/src/ui_fovWindow.h:387
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:276
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:312
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:356
 msgid "Save settings"
 msgstr ""
 
@@ -4440,7 +4440,7 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:1020 plugins/FOV/src/ui_fovWindow.h:386
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:277
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:313
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:357
 msgid "Restore defaults"
 msgstr ""
 
@@ -4568,7 +4568,7 @@ msgid "Topocentric equatorial coordinates"
 msgstr ""
 
 #: src/ui_configurationDialog.h:1074
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:155
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:164
 msgid "Hour angle/Declination"
 msgstr ""
 
@@ -4577,7 +4577,7 @@ msgid "Horizontal coordinates"
 msgstr ""
 
 #: src/ui_configurationDialog.h:1078
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:157
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:166
 msgid "Altitude/Azimuth"
 msgstr ""
 
@@ -5167,7 +5167,7 @@ msgstr ""
 #: plugins/FOV/src/ui_fovWindow.h:405
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:279
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:566
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:315
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:359
 msgctxt "tab in plugin windows"
 msgid "About"
 msgstr ""
@@ -6437,7 +6437,7 @@ msgstr ""
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:102
 #: plugins/FOV/src/gui/FOVWindow.cpp:79
 #: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:81
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:102
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:110
 #, qt-format
 msgid "Version %1"
 msgstr ""
@@ -8742,7 +8742,7 @@ msgid "Change sign of equation"
 msgstr ""
 
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:275
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:307
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:343
 msgid "Font size:"
 msgstr ""
 
@@ -9470,9 +9470,9 @@ msgstr ""
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:55
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:97
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:297
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:299
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:314
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:333
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:335
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:358
 msgid "Pointer Coordinates"
 msgstr ""
 
@@ -9514,62 +9514,78 @@ msgctxt "abbreviated in the plugin"
 msgid "HA/Dec"
 msgstr ""
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:101
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:109
 msgid "Pointer Coordinates plug-in"
 msgstr ""
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:130
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:138
 msgid "The top center of the screen"
 msgstr ""
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:131
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:139
 msgid "In center of the top right half of the screen"
 msgstr ""
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:132
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:140
 msgid "The right bottom corner of the screen"
 msgstr ""
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:153
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:141
+msgid "Custom position"
+msgstr ""
+
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:162
 msgid "Right ascension/Declination (J2000.0)"
 msgstr ""
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:154
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:163
 msgid "Right ascension/Declination"
 msgstr ""
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:156
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:165
 msgid "Ecliptic Longitude/Latitude (J2000.0)"
 msgstr ""
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:158
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:167
 msgid "Galactic Longitude/Latitude"
 msgstr ""
 
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:300
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:197
+msgid "Coordinates of custom position:"
+msgstr ""
+
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:336
 msgid "Show coordinates of the mouse cursor on the screen."
 msgstr ""
 
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:301
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:337
 msgid "Enable display of coordinates at startup"
 msgstr ""
 
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:302
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:338
 msgid "Show plug-in button on toolbar"
 msgstr ""
 
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:304
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:340
 msgid "Which coordinate system will be used for displaying"
 msgstr ""
 
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:306
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:342
 msgid "Coordinates:"
 msgstr ""
 
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:309
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:345
 msgid "Place of the string with coordinates of the mouse pointer"
 msgstr ""
 
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:311
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:347
 msgid "Place of the string:"
+msgstr ""
+
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:349
+msgid "Coordinate X"
+msgstr ""
+
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:353
+msgid "Coordinate Y"
 msgstr ""
