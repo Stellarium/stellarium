@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2009 Matthew Gates
+ * Copyright (C) 2014 Georg Zotti
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -67,7 +68,6 @@ public:
 	bool isEnabled() const {return flagShowAngleMeasure;}
 	bool isDmsFormat() const { return flagUseDmsFormat; }
 	bool isPaDisplayed() const { return flagShowPA; }
-	// GZ 4 new
 	bool isEquatorial() const { return flagShowEquatorial; }
 	bool isHorizontal() const { return flagShowHorizontal; }
 	bool isHorizontalStartSkylinked() const { return flagShowHorizontalStartSkylinked; }
@@ -100,7 +100,6 @@ public slots:
 	void enableAngleMeasure(bool b);
 	void useDmsFormat(bool b);
 	void showPositionAngle(bool b);
-	// GZ NEW
 	void showPositionAngleHor(bool b);
 	void showEquatorial(bool b);
 	void showHorizontal(bool b);
@@ -133,7 +132,6 @@ private:
 	double angle;
 	bool flagUseDmsFormat;
 	bool flagShowPA;
-	// GZ NEW
 	bool flagShowEquatorial;
 	bool flagShowHorizontal;
 	bool flagShowHorizontalPA;

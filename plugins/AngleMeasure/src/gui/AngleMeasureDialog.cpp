@@ -1,7 +1,7 @@
 /*
  * Angle Measure plug-in for Stellarium
  *
- * Copyright (C) 2014 Alexander Wolf
+ * Copyright (C) 2014 Alexander Wolf, Georg Zotti
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -65,7 +65,6 @@ void AngleMeasureDialog::createDialogContent()
 	connect(ui->useDmsFormatCheckBox, SIGNAL(toggled(bool)), am, SLOT(useDmsFormat(bool)));
 	ui->showPositionAngleCheckBox->setChecked(am->isPaDisplayed());
 	connect(ui->showPositionAngleCheckBox, SIGNAL(toggled(bool)), am, SLOT(showPositionAngle(bool)));
-	//GZ Next 10
 	ui->showPositionAngleHorizontalCheckBox->setChecked(am->isHorPaDisplayed());
 	connect(ui->showPositionAngleHorizontalCheckBox, SIGNAL(toggled(bool)), am, SLOT(showPositionAngleHor(bool)));
 	ui->showEquatorialCheckBox->setChecked(am->isEquatorial());
@@ -93,7 +92,7 @@ void AngleMeasureDialog::setAboutHtml(void)
 	html += "</table>";
 
 	html += "<p>" + q_("The Angle Measure plugin is a small tool which is used to measure the angular distance between two points on the sky (and calculation of position angle between those two points).") + "</p>";
-	html += "<p>" + q_("The end points in horizontal mode can be linked to the rotating sky, which may be helpful to keep relations between landscape and some celestial object or (with both linked) for Dobsonian starhopping.") + "</p>";
+	html += "<p>" + q_("Start and end points in horizontal mode can be linked to the rotating sky, which may be helpful to keep relations between landscape and some celestial object or (with both linked) for Dobsonian starhopping.") + "</p>";
 	html += "<p>" + q_("*goes misty eyed* I recall measuring the size of the Cassini Division when I was a student. It was not the high academic glamor one might expect... It was cloudy... It was rainy... The observatory lab had some old scopes set up at one end, pointing at a <em>photograph</em> of Saturn at the other end of the lab. We measured. We calculated. We wished we were in Hawaii.") + "</p>";
 
 	html += "<h3>" + q_("Links") + "</h3>";
