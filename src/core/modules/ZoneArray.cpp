@@ -505,12 +505,11 @@ void SpecialZoneArray<Star>::draw(StelPainter* sPainter, int index, bool isInsid
 		// beginning the stars actually outside viewport.
 		if (!isInsideViewport)
 		{
+			vf.normalize();
 			bool isVisible = true;
 			foreach (const SphericalCap& cap, boundingCaps)
 			{
-				// Don't use if (!cap.contains(vf)) here because we don't want to normalize the vector yet, but know
-				// that it's almost normalized, enough for manually computing the intersection avoiding the assert.
-				if (vf[0]*static_cast<float>(cap.n[0])+vf[1]*static_cast<float>(cap.n[1])+vf[2]*static_cast<float>(cap.n[2])<static_cast<float>(cap.d))
+				if (!cap.contains(vf))
 				{
 					isVisible = false;
 					continue;
