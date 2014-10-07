@@ -21,6 +21,8 @@
 #include <QVariantMap>
 
 #include "AddOn.hpp"
+#include "StelAddOnMgr.hpp"
+#include "StelApp.hpp"
 
 AddOn::AddOn(const qint64 addOnId, const QVariantMap& map)
 	: m_iAddOnId(addOnId)
@@ -51,11 +53,19 @@ AddOn::AddOn(const qint64 addOnId, const QVariantMap& map)
 	}
 
 	// early returns if the mandatory fields are not present
-	if (m_sInstallId.isEmpty() || m_sTitle.isEmpty() || m_sDownloadURL.isEmpty()
-		|| m_sDownloadFilename.isEmpty() || m_sDownloadSize.isEmpty() || m_sChecksum.isEmpty())
+	if (m_sInstallId.isEmpty() || m_sTitle.isEmpty()
+		|| m_sFirstStel.isEmpty() || m_sLastStel.isEmpty()
+		|| m_sDownloadURL.isEmpty() || m_sDownloadFilename.isEmpty()
+		|| m_sDownloadSize.isEmpty() || m_sChecksum.isEmpty())
 	{
 		qWarning() << "Add-On Catalog : Error! Add-on" << m_iAddOnId
 			   << "does not have all the required fields!";
+		return;
+	}
+
+	// checking compatibility
+	if (!StelApp::getInstance().getStelAddOnMgr().isCompatible(m_sFirstStel, m_sLastStel))
+	{
 		return;
 	}
 
