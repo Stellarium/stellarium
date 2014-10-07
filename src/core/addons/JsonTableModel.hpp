@@ -28,7 +28,7 @@ class JsonTableModel : public QAbstractTableModel
 {
 	Q_OBJECT
 public:
-	JsonTableModel(QString type, QMap<qint64, AddOn*> addons, QObject *parent=0);
+	JsonTableModel(AddOn::Type type, QMap<qint64, AddOn*> addons, QObject *parent=0);
 
 	int rowCount(const QModelIndex &parent) const;
 	int columnCount(const QModelIndex &parent) const;
@@ -39,7 +39,8 @@ private:
 	enum Column {
 		Title,
 		Type,
-		Version
+		Version,
+		Checkbox
 	};
 
 	QMap<qint64, AddOn*> m_addons;

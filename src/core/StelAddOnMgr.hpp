@@ -50,32 +50,7 @@ class StelAddOnMgr : public QObject
 {
 	Q_OBJECT
 public:
-	StelAddOnMgr();
-	virtual ~StelAddOnMgr();
-
-	QString getThumbnailDir() { return m_sThumbnailDir; }
-	QString getDirectory(QString category) { return m_dirs.value(category, ""); }
-	void installAddOn(const int addonId, const QStringList selectedFiles);
-	bool installFromFile(const StelAddOnDAO::AddOnInfo addonInfo,
-			     const QStringList selectedFiles);
-	void installFromFile(const QString& filePath);
-	void removeAddOn(const int addonId, const QStringList files);
-	bool isCompatible(QString first, QString last);
-	bool updateCatalog(QString webresult);
-	void setUpdateFrequencyDays(int days);
-	void setUpdateFrequencyHour(int hour);
-	void setLastUpdate(qint64 time);
-	QString getLastUpdateString()
-	{
-		return QDateTime::fromMSecsSinceEpoch(m_iLastUpdate*1000)
-				.toString("dd MMM yyyy - hh:mm:ss");
-	}
-	qint64 getLastUpdate() { return m_iLastUpdate; }
-	int getUpdateFrequencyDays() { return m_iUpdateFrequencyDays; }
-	int getUpdateFrequencyHour() { return m_iUpdateFrequencyHour; }
-	QString getUrlForUpdates() { return m_sUrlUpdate; }
-	StelAddOnDAO* getStelAddOnDAO() { return m_pStelAddOnDAO; }
-	StelAddOn* getStelAddOnInstance(QString category) { return m_pStelAddOns.value(category); }
+	typedef QMap<qint64, AddOn*> AddOnMap;
 
 	//! @enum AddOnMgrMsg
 	enum AddOnMgrMsg
@@ -100,6 +75,34 @@ public:
 		PartiallyRemoved,
 		DownloadFailed
 	};
+
+	StelAddOnMgr();
+	virtual ~StelAddOnMgr();
+
+	AddOnMap getAddOnMap(AddOn::Type type) { return m_addons.value(type); }
+	QString getThumbnailDir() { return m_sThumbnailDir; }
+	QString getDirectory(QString category) { return m_dirs.value(category, ""); }
+	void installAddOn(const int addonId, const QStringList selectedFiles);
+	bool installFromFile(const StelAddOnDAO::AddOnInfo addonInfo,
+			     const QStringList selectedFiles);
+	void installFromFile(const QString& filePath);
+	void removeAddOn(const int addonId, const QStringList files);
+	bool isCompatible(QString first, QString last);
+	bool updateCatalog(QString webresult);
+	void setUpdateFrequencyDays(int days);
+	void setUpdateFrequencyHour(int hour);
+	void setLastUpdate(qint64 time);
+	QString getLastUpdateString()
+	{
+		return QDateTime::fromMSecsSinceEpoch(m_iLastUpdate*1000)
+				.toString("dd MMM yyyy - hh:mm:ss");
+	}
+	qint64 getLastUpdate() { return m_iLastUpdate; }
+	int getUpdateFrequencyDays() { return m_iUpdateFrequencyDays; }
+	int getUpdateFrequencyHour() { return m_iUpdateFrequencyHour; }
+	QString getUrlForUpdates() { return m_sUrlUpdate; }
+	StelAddOnDAO* getStelAddOnDAO() { return m_pStelAddOnDAO; }
+	StelAddOn* getStelAddOnInstance(QString category) { return m_pStelAddOns.value(category); }
 
 signals:
 	void addOnMgrMsg(StelAddOnMgr::AddOnMgrMsg);
@@ -138,7 +141,6 @@ private:
 	const QString m_sThumbnailDir;
 	QHash<QString, QString> m_dirs;
 
-	typedef QMap<qint64, AddOn*> AddOnMap;
 	QString m_sJsonPath;
 	QHash<AddOn::Type, AddOnMap> m_addons;
 

@@ -23,11 +23,14 @@
 #include "JsonTableModel.hpp"
 #include "StelTranslator.hpp"
 
-JsonTableModel::JsonTableModel(QString type, QMap<qint64, AddOn*> addons, QObject* parent)
+JsonTableModel::JsonTableModel(AddOn::Type type, QMap<qint64, AddOn*> addons, QObject* parent)
 	: QAbstractTableModel(parent)
 	, m_addons(addons)
 {
-	m_iColumns << Title << Type << Version;
+	switch (type) {
+		default:
+			m_iColumns << Title << Type << Version << Checkbox;
+	}
 }
 
 int JsonTableModel::rowCount(const QModelIndex &parent) const
@@ -51,7 +54,7 @@ QVariant JsonTableModel::data(const QModelIndex &index, int role) const
 
 	QVariant value;
 	AddOn* addon = m_addons.values().at(index.row());
-	Column column = m_iColumns.at(index.row());
+	Column column = m_iColumns.at(index.column());
 	switch (column) {
 		case Title:
 			value = addon->getTitle();
@@ -62,9 +65,12 @@ QVariant JsonTableModel::data(const QModelIndex &index, int role) const
 		case Version:
 			value = addon->getVersion();
 			break;
+		case Checkbox:
+			value = "";
+			break;
 	}
 
-	return value;
+	return qVariantFromValue(value);
 }
 
 QVariant JsonTableModel::headerData(int section, Qt::Orientation orientation, int role) const
@@ -84,6 +90,9 @@ QVariant JsonTableModel::headerData(int section, Qt::Orientation orientation, in
 			break;
 		case Version:
 			value = q_("Version");
+			break;
+		case Checkbox:
+			value = "";
 			break;
 	}
 
