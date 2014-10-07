@@ -227,8 +227,7 @@ void ConfigurationDialog::createDialogContent()
 	// Tools tab
 	ConstellationMgr* cmgr = GETSTELMODULE(ConstellationMgr);
 	Q_ASSERT(cmgr);
-	// XXX: to reintroduce.
-	// ui->sphericMirrorCheckbox->setChecked(StelMainView::getInstance().getStelAppGraphicsWidget()->getViewportEffect() == "sphericMirrorDistorter");
+	ui->sphericMirrorCheckbox->setChecked(StelApp::getInstance().getViewportEffect() == "sphericMirrorDistorter");
 	connect(ui->sphericMirrorCheckbox, SIGNAL(toggled(bool)), this, SLOT(setSphericMirror(bool)));
 	ui->gravityLabelCheckbox->setChecked(proj->getFlagGravityLabels());
 	connect(ui->gravityLabelCheckbox, SIGNAL(toggled(bool)), StelApp::getInstance().getCore(), SLOT(setFlagGravityLabels(bool)));
@@ -364,14 +363,12 @@ void ConfigurationDialog::setSphericMirror(bool b)
 	{
 		savedProjectionType = core->getCurrentProjectionType();
 		core->setCurrentProjectionType(StelCore::ProjectionFisheye);
-		// XXX: to reintroduce
-		// StelMainView::getInstance().getStelAppGraphicsWidget()->setViewportEffect("sphericMirrorDistorter");
+		StelApp::getInstance().setViewportEffect("sphericMirrorDistorter");
 	}
 	else
 	{
 		core->setCurrentProjectionType((StelCore::ProjectionType)savedProjectionType);
-		// XXX: to reintroduce
-		// StelMainView::getInstance().getStelAppGraphicsWidget()->setViewportEffect("none");
+		StelApp::getInstance().setViewportEffect("none");
 	}
 }
 
@@ -645,8 +642,7 @@ void ConfigurationDialog::saveCurrentViewOptions()
 
 	// configuration dialog / tools tab
 	conf->setValue("gui/flag_show_flip_buttons", gui->getFlagShowFlipButtons());
-	// XXX: to reintroduce.
-	// conf->setValue("video/viewport_effect", StelMainView::getInstance().getStelAppGraphicsWidget()->getViewportEffect());
+	conf->setValue("video/viewport_effect", StelApp::getInstance().getViewportEffect());
 	conf->setValue("projection/viewport", StelProjector::maskTypeToString(proj->getMaskType()));
 	conf->setValue("viewing/flag_gravity_labels", proj->getFlagGravityLabels());
 	conf->setValue("navigation/auto_zoom_out_resets_direction", mvmgr->getFlagAutoZoomOutResetsDirection());

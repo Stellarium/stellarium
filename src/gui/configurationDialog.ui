@@ -1060,9 +1060,6 @@
             <layout class="QGridLayout" name="gridLayoutOptions">
              <item row="0" column="0">
               <widget class="QCheckBox" name="sphericMirrorCheckbox">
-               <property name="enabled">
-                <bool>false</bool>
-               </property>
                <property name="toolTip">
                 <string>Spheric mirror distortion is used when projecting Stellarium onto a spheric mirror for low-cost planetarium systems.</string>
                </property>

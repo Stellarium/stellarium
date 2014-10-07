@@ -289,7 +289,11 @@ public:
 	//! @return valid range
 	QString getCurrentDeltaTAlgorithmValidRange(double jDay, QString* marker) const;
 
+	//! Checks for current time of day - it's night or day?
 	bool isDay() const;
+
+	//! Get value of the current Julian epoch
+	double getCurrentEpoch() const;
 
 public slots:
 	//! Set the current ProjectionType to use

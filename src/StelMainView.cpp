@@ -131,8 +131,6 @@ void StelSkyItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
 	//To get back the focus from dialogs
 	this->setFocus(true);
 	QPointF pos = event->scenePos();
-	// XXX: to reintroduce
-	//distortPos(&pos);
 	pos.setY(height() - 1 - pos.y());
 	QMouseEvent newEvent(QEvent::MouseButtonPress, QPoint(pos.x(), pos.y()), event->button(), event->buttons(), event->modifiers());
 	StelApp::getInstance().handleClick(&newEvent);
@@ -141,8 +139,6 @@ void StelSkyItem::mousePressEvent(QGraphicsSceneMouseEvent *event)
 void StelSkyItem::mouseReleaseEvent(QGraphicsSceneMouseEvent* event)
 {
 	QPointF pos = event->scenePos();
-	// XXX: to reintroduce
-	// distortPos(&pos);
 	pos.setY(height() - 1 - pos.y());
 	QMouseEvent newEvent(QEvent::MouseButtonRelease, QPoint(pos.x(), pos.y()), event->button(), event->buttons(), event->modifiers());
 	StelApp::getInstance().handleClick(&newEvent);
@@ -151,8 +147,6 @@ void StelSkyItem::mouseReleaseEvent(QGraphicsSceneMouseEvent* event)
 void StelSkyItem::mouseMoveEvent(QGraphicsSceneMouseEvent* event)
 {
 	QPointF pos = event->scenePos();
-	// XXX: to reintroduce
-	// distortPos(&pos);
 	pos.setY(height() - 1 - pos.y());
 	StelApp::getInstance().handleMove(pos.x(), pos.y(), event->buttons());
 }
@@ -160,8 +154,6 @@ void StelSkyItem::mouseMoveEvent(QGraphicsSceneMouseEvent* event)
 void StelSkyItem::wheelEvent(QGraphicsSceneWheelEvent *event)
 {
 	QPointF pos = event->scenePos();
-	// XXX: to reintroduce
-	// distortPos(&pos);
 	pos.setY(height() - 1 - pos.y());
 	QWheelEvent newEvent(QPoint(pos.x(),pos.y()), event->delta(), event->buttons(), event->modifiers(), event->orientation());
 	StelApp::getInstance().handleWheel(&newEvent);
