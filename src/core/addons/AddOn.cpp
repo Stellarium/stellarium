@@ -24,9 +24,10 @@
 
 AddOn::AddOn(const qint64 addOnId, const QVariantMap& map)
 	: m_iAddOnId(addOnId)
+	, m_eType(INVALID)
 	, m_bLoaded(false)
 {
-	m_sType = map.value("type").toString();
+	m_eType = fromStringToType(map.value("type").toString());
 	m_sInstallId = map.value("install-id").toString();
 	m_sTitle = map.value("title").toString();
 	m_sDescription = map.value("description").toString();
@@ -42,8 +43,15 @@ AddOn::AddOn(const qint64 addOnId, const QVariantMap& map)
 	m_sChecksum = map.value("checksum").toString();
 	m_sThumbnail = map.value("thumbnail").toString();
 
+	if (m_eType == INVALID)
+	{
+		qWarning() << "Add-On Catalog : Error! Add-on" << m_iAddOnId
+			   << "does not have a valid type!";
+		return;
+	}
+
 	// early returns if the mandatory fields are not present
-	if (m_sType.isEmpty() || m_sInstallId.isEmpty() || m_sTitle.isEmpty() || m_sDownloadURL.isEmpty()
+	if (m_sInstallId.isEmpty() || m_sTitle.isEmpty() || m_sDownloadURL.isEmpty()
 		|| m_sDownloadFilename.isEmpty() || m_sDownloadSize.isEmpty() || m_sChecksum.isEmpty())
 	{
 		qWarning() << "Add-On Catalog : Error! Add-on" << m_iAddOnId
@@ -69,4 +77,40 @@ AddOn::AddOn(const qint64 addOnId, const QVariantMap& map)
 
 AddOn::~AddOn()
 {
+}
+
+AddOn::Type AddOn::fromStringToType(QString string)
+{
+	if (string == "landscape")
+	{
+		return Landscape;
+	}
+	else if (string == "language_pack")
+	{
+		return Language_Pack;
+	}
+	else if (string == "plugin_catalog")
+	{
+		return Plugin_Catalog;
+	}
+	else if (string == "script")
+	{
+		return Script;
+	}
+	else if (string == "sky_culture")
+	{
+		return Sky_Culture;
+	}
+	else if (string == "star_catalog")
+	{
+		return Star_Catalog;
+	}
+	else if (string == "texture")
+	{
+		return Texture;
+	}
+	else
+	{
+		return INVALID;
+	}
 }

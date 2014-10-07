@@ -29,11 +29,25 @@ public:
 	AddOn(const qint64 addOnId, const QVariantMap &map);
 	virtual ~AddOn();
 
+	//! @enum Type
+	//! Add-on type
+	enum Type
+	{
+		Landscape,
+		Language_Pack,
+		Plugin_Catalog,
+		Script,
+		Sky_Culture,
+		Star_Catalog,
+		Texture,
+		INVALID
+	};
+
 	bool isLoaded() { return m_bLoaded; }
 
 	quint64 getAddOnId() { return m_iAddOnId; }
 	QString getTitle() { return m_sTitle; }
-	QString getType() { return m_sType; }
+	Type getType() { return m_eType; }
 	QString getVersion() { return m_sVersion; }
 
 private:
@@ -45,7 +59,7 @@ private:
 	} Authors;
 
 	qint64 m_iAddOnId;
-	QString m_sType;
+	Type m_eType;
 	QString m_sInstallId;
 	QString m_sTitle;
 	QString m_sDescription;
@@ -63,6 +77,8 @@ private:
 	QList<Authors> m_authors;
 
 	bool m_bLoaded;
+
+	Type fromStringToType(QString string);
 };
 
 #endif // _ADDON_HPP_
