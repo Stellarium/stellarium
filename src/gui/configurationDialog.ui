@@ -1060,9 +1060,6 @@
             <layout class="QGridLayout" name="gridLayoutOptions">
              <item row="0" column="0">
               <widget class="QCheckBox" name="sphericMirrorCheckbox">
-               <property name="enabled">
-                <bool>false</bool>
-               </property>
                <property name="toolTip">
                 <string>Spheric mirror distortion is used when projecting Stellarium onto a spheric mirror for low-cost planetarium systems.</string>
                </property>
@@ -1124,7 +1121,7 @@
                </property>
               </widget>
              </item>
-             <item row="3" column="0" colspan="2">
+             <item row="4" column="0" colspan="2">
               <widget class="QCheckBox" name="autoZoomResetsDirectionCheckbox">
                <property name="toolTip">
                 <string>When enabled, the &quot;auto zoom out&quot; key will also set the initial viewing direction</string>
@@ -1134,13 +1131,23 @@
                </property>
               </widget>
              </item>
-             <item row="4" column="0">
+             <item row="3" column="0">
               <widget class="QCheckBox" name="autoEnableAtmosphereCheckBox">
                <property name="toolTip">
                 <string>Auto-enabling of the atmosphere for bodies with atmosphere in location window</string>
                </property>
                <property name="text">
                 <string>Auto-enabling for the atmosphere</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="1">
+              <widget class="QCheckBox" name="decimalDegreeCheckBox">
+               <property name="toolTip">
+                <string>Use decimal degrees for coordinates</string>
+               </property>
+               <property name="text">
+                <string>Use decimal degrees</string>
                </property>
               </widget>
              </item>

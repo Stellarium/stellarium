@@ -226,12 +226,15 @@ void LocationDialog::setFieldsFromLocation(const StelLocation& loc)
 
 	SolarSystem* ssm = GETSTELMODULE(SolarSystem);
 	PlanetP p = ssm->searchByEnglishName(loc.planetName);
-	LandscapeMgr* ls = GETSTELMODULE(LandscapeMgr);
+	LandscapeMgr* ls = GETSTELMODULE(LandscapeMgr);	
 	if (ls->getFlagAtmosphereAutoEnable())
 	{
-		QSettings* conf = StelApp::getInstance().getSettings();
-		ls->setFlagAtmosphere(p->hasAtmosphere() & conf->value("landscape/flag_atmosphere", true).toBool());
-		ls->setFlagFog(p->hasAtmosphere() & conf->value("landscape/flag_fog", true).toBool());
+		if (loc.planetName != StelApp::getInstance().getCore()->getCurrentLocation().planetName)
+		{
+			QSettings* conf = StelApp::getInstance().getSettings();
+			ls->setFlagAtmosphere(p->hasAtmosphere() & conf->value("landscape/flag_atmosphere", true).toBool());
+			ls->setFlagFog(p->hasAtmosphere() & conf->value("landscape/flag_fog", true).toBool());
+		}
 	}
 
 	// Reactivate edit signals

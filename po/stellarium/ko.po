@@ -7,22 +7,22 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-09-05 10:26+0700\n"
-"PO-Revision-Date: 2014-09-01 00:50+0000\n"
+"POT-Creation-Date: 2014-09-18 19:41+0700\n"
+"PO-Revision-Date: 2014-09-23 10:39+0000\n"
 "Last-Translator: windazol <ys11791@gmail.com>\n"
 "Language-Team: Korean <ko@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-09-06 06:15+0000\n"
+"X-Launchpad-Export-Date: 2014-09-24 06:04+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 "Language: ko\n"
 
 #: src/core/modules/ConstellationMgr.cpp:106 src/core/modules/StarMgr.cpp:346
-#: src/core/modules/GridLinesMgr.cpp:697 src/core/modules/LandscapeMgr.cpp:354
+#: src/core/modules/GridLinesMgr.cpp:727 src/core/modules/LandscapeMgr.cpp:354
 #: src/core/modules/NebulaMgr.cpp:126 src/core/modules/SolarSystem.cpp:156
 #: src/core/StelApp.cpp:473 src/core/StelCore.cpp:185
-#: src/core/StelSkyLayerMgr.cpp:87 src/StelMainView.cpp:302
+#: src/core/StelSkyLayerMgr.cpp:87 src/StelMainView.cpp:361
 msgid "Display Options"
 msgstr "화면 설정"
 
@@ -56,73 +56,73 @@ msgstr "별"
 msgid "Stars labels"
 msgstr "별 이름"
 
-#: src/core/modules/GridLinesMgr.cpp:548 src/ui_viewDialog.h:1235
+#: src/core/modules/GridLinesMgr.cpp:578 src/ui_viewDialog.h:1235
 msgid "Meridian"
 msgstr "자오선"
 
-#: src/core/modules/GridLinesMgr.cpp:552 src/ui_viewDialog.h:1243
+#: src/core/modules/GridLinesMgr.cpp:582 src/ui_viewDialog.h:1243
 msgid "Ecliptic"
 msgstr "황도"
 
-#: src/core/modules/GridLinesMgr.cpp:556 src/ui_viewDialog.h:1231
+#: src/core/modules/GridLinesMgr.cpp:586 src/ui_viewDialog.h:1231
 msgid "Equator"
 msgstr "적도"
 
-#: src/core/modules/GridLinesMgr.cpp:560 src/ui_viewDialog.h:1239
+#: src/core/modules/GridLinesMgr.cpp:590 src/ui_viewDialog.h:1239
 msgid "Horizon"
 msgstr "지평선"
 
-#: src/core/modules/GridLinesMgr.cpp:564
-msgid "Galactic Plane"
-msgstr "은하면"
+#: src/core/modules/GridLinesMgr.cpp:594
+msgid "Galactic Equator"
+msgstr "은하적도"
 
-#: src/core/modules/GridLinesMgr.cpp:698
+#: src/core/modules/GridLinesMgr.cpp:728
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:331
 msgid "Equatorial grid"
 msgstr "적도좌표계 격자"
 
-#: src/core/modules/GridLinesMgr.cpp:699 src/ui_viewDialog.h:1226
+#: src/core/modules/GridLinesMgr.cpp:729 src/ui_viewDialog.h:1226
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:326
 msgid "Azimuthal grid"
 msgstr "지평좌표계 격자"
 
-#: src/core/modules/GridLinesMgr.cpp:700
+#: src/core/modules/GridLinesMgr.cpp:730
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:346
 msgid "Ecliptic line"
 msgstr "황도"
 
-#: src/core/modules/GridLinesMgr.cpp:701
+#: src/core/modules/GridLinesMgr.cpp:731
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:341
 msgid "Equator line"
 msgstr "적도"
 
-#: src/core/modules/GridLinesMgr.cpp:702
+#: src/core/modules/GridLinesMgr.cpp:732
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:321
 msgid "Meridian line"
 msgstr "자오선"
 
-#: src/core/modules/GridLinesMgr.cpp:703
+#: src/core/modules/GridLinesMgr.cpp:733
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:360
 msgid "Horizon line"
 msgstr "지평선"
 
-#: src/core/modules/GridLinesMgr.cpp:704
+#: src/core/modules/GridLinesMgr.cpp:734
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:336
 msgid "Equatorial J2000 grid"
 msgstr "적도좌표계 격자(J2000)"
 
-#: src/core/modules/GridLinesMgr.cpp:705
+#: src/core/modules/GridLinesMgr.cpp:735
 msgid "Ecliptic J2000 grid"
 msgstr "황도좌표계 격자(J2000)"
 
-#: src/core/modules/GridLinesMgr.cpp:706 src/ui_viewDialog.h:1227
+#: src/core/modules/GridLinesMgr.cpp:736 src/ui_viewDialog.h:1227
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:365
 msgid "Galactic grid"
 msgstr "은하좌표계 격자"
 
-#: src/core/modules/GridLinesMgr.cpp:707 src/ui_viewDialog.h:1247
-msgid "Galactic plane"
-msgstr "은하면"
+#: src/core/modules/GridLinesMgr.cpp:737 src/ui_viewDialog.h:1247
+msgid "Galactic equator"
+msgstr "은하적도"
 
 #: src/core/modules/LandscapeMgr.cpp:355 src/ui_viewDialog.h:1176
 msgid "Atmosphere"
@@ -224,11 +224,11 @@ msgstr "행성상성운"
 
 #: src/core/modules/Nebula.cpp:390
 msgid "Dark nebula"
-msgstr ""
+msgstr "암흑성운"
 
 #: src/core/modules/Nebula.cpp:393
 msgid "Irregular galaxy"
-msgstr ""
+msgstr "불규칙은하"
 
 #: src/core/modules/Nebula.cpp:396
 msgid "Cluster associated with nebulosity"
@@ -320,7 +320,7 @@ msgstr "밝은 부분: %1%"
 #: src/core/modules/MinorPlanet.cpp:201
 #, qt-format
 msgid "Provisional designation: %1"
-msgstr "일시적인 지명: %1"
+msgstr "임시 명칭: %1"
 
 #: src/core/modules/Comet.cpp:176
 #, no-c-format, qt-format
@@ -423,7 +423,7 @@ msgstr "등급 범위: <b>%1</b>%2<b>%3/%4</b> (측광계: %5)"
 #: plugins/Exoplanets/src/Exoplanet.cpp:207
 #, qt-format
 msgid "Distance: %1 ly"
-msgstr ""
+msgstr "거리: %1 광년"
 
 #: src/core/modules/StarWrapper.cpp:224
 #: plugins/Exoplanets/src/Exoplanet.cpp:201
@@ -480,7 +480,7 @@ msgstr "야간 모드"
 msgid "SpaceShip"
 msgstr "우주선"
 
-#: src/core/StelCore.cpp:183 src/gui/StelGui.cpp:183
+#: src/core/StelCore.cpp:183 src/gui/StelGui.cpp:184
 #: src/ui_dateTimeDialogGui.h:365
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:172
 msgid "Date and Time"
@@ -1063,51 +1063,53 @@ msgid ""
 "of perspective is set to an infinite distance."
 msgstr "정사도법은 투시도법과 비슷하나, 원근점을 무한한 거리에 놓습니다."
 
-#: src/core/StelObject.cpp:117
+#: src/core/StelObject.cpp:120 src/core/StelObject.cpp:122
 #, qt-format
 msgid "RA/DE (J2000): %1/%2"
 msgstr "적경/적위 (J2000): %1/%2"
 
-#: src/core/StelObject.cpp:124
+#: src/core/StelObject.cpp:130 src/core/StelObject.cpp:132
 #, qt-format
 msgid "RA/DE (of date): %1/%2"
 msgstr "적경/적위 (현재): %1/%2"
 
-#: src/core/StelObject.cpp:131
-#, qt-format
-msgid "Galactic longitude/latitude: %1/%2"
-msgstr "은경/은위: %1/%2"
-
-#: src/core/StelObject.cpp:143 src/core/StelObject.cpp:147
+#: src/core/StelObject.cpp:144 src/core/StelObject.cpp:148
 #, qt-format
 msgid "Hour angle/DE: %1/%2"
 msgstr "시간각/적위: %1/%2"
 
-#: src/core/StelObject.cpp:143 src/core/StelObject.cpp:165
+#: src/core/StelObject.cpp:144 src/core/StelObject.cpp:167
+#: src/core/StelObject.cpp:169
 msgid "(apparent)"
 msgstr "(겉보기)"
 
-#: src/core/StelObject.cpp:165 src/core/StelObject.cpp:169
+#: src/core/StelObject.cpp:167 src/core/StelObject.cpp:169
+#: src/core/StelObject.cpp:174 src/core/StelObject.cpp:176
 #, qt-format
 msgid "Az/Alt: %1/%2"
 msgstr "방위각/고도: %1/%2"
 
-#: src/core/StelObject.cpp:181
+#: src/core/StelObject.cpp:189 src/core/StelObject.cpp:191
 #, qt-format
-msgid "Ecliptic (of J2000): %1/%2"
+msgid "Ecliptic longitude/latitude (of J2000): %1/%2"
 msgstr "황경/황위 (J2000): %1/%2"
 
-#: src/core/StelObject.cpp:186
+#: src/core/StelObject.cpp:197 src/core/StelObject.cpp:199
 #, qt-format
-msgid "Ecliptic (of date): %1/%2"
+msgid "Ecliptic longitude/latitude (of date): %1/%2"
 msgstr "황경/황위 (현재): %1/%2"
+
+#: src/core/StelObject.cpp:207 src/core/StelObject.cpp:209
+#, qt-format
+msgid "Galactic longitude/latitude: %1/%2"
+msgstr "은경/은위: %1/%2"
 
 #: src/core/StelSkyLayerMgr.cpp:87
 msgid "Deep-sky objects background images"
 msgstr "딥스카이 천체 배경 이미지"
 
-#: src/core/StelMovementMgr.cpp:130 src/gui/StelGui.cpp:185
-#: src/StelMainView.cpp:301
+#: src/core/StelMovementMgr.cpp:130 src/gui/StelGui.cpp:186
+#: src/StelMainView.cpp:360
 msgid "Miscellaneous"
 msgstr "기타"
 
@@ -1151,73 +1153,73 @@ msgstr "찾지 못함"
 msgid "Found"
 msgstr "찾아냄"
 
-#: src/gui/ConfigurationDialog.cpp:442
+#: src/gui/ConfigurationDialog.cpp:447
 msgid "Select screenshot directory"
 msgstr "스크린샷 경로 지정"
 
-#: src/gui/ConfigurationDialog.cpp:672
+#: src/gui/ConfigurationDialog.cpp:678
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr "초기 시야각: %1%2"
 
-#: src/gui/ConfigurationDialog.cpp:680
+#: src/gui/ConfigurationDialog.cpp:686
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "초기 시야 방향 방위각/고도: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:737
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:385
+#: src/gui/ConfigurationDialog.cpp:743
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:390
 msgid "Authors"
 msgstr "저자"
 
-#: src/gui/ConfigurationDialog.cpp:738 src/gui/ViewDialog.cpp:439
+#: src/gui/ConfigurationDialog.cpp:744 src/gui/ViewDialog.cpp:444
 msgid "Contact"
 msgstr "연락처"
 
-#: src/gui/ConfigurationDialog.cpp:740
-#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:74
-#: plugins/Oculars/src/gui/OcularDialog.cpp:492
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:384
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:112
-#: plugins/Novae/src/gui/NovaeDialog.cpp:111
+#: src/gui/ConfigurationDialog.cpp:746
+#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:79
+#: plugins/Oculars/src/gui/OcularDialog.cpp:497
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:389
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:117
+#: plugins/Novae/src/gui/NovaeDialog.cpp:116
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:118
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:120
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:125
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:130
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:128
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:254
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:133
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:259
 msgid "Version"
 msgstr "버전"
 
-#: src/gui/ConfigurationDialog.cpp:823
-#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:75
-#: plugins/Oculars/src/gui/OcularDialog.cpp:493
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:113
-#: plugins/Novae/src/gui/NovaeDialog.cpp:112
+#: src/gui/ConfigurationDialog.cpp:829
+#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:80
+#: plugins/Oculars/src/gui/OcularDialog.cpp:498
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:118
+#: plugins/Novae/src/gui/NovaeDialog.cpp:117
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:119
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:121
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:126
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:131
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:129
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:255
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:134
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:260
 msgid "Author"
 msgstr "저자"
 
-#: src/gui/ConfigurationDialog.cpp:827
+#: src/gui/ConfigurationDialog.cpp:833
 msgid "License"
 msgstr "라이선스"
 
-#: src/gui/ConfigurationDialog.cpp:831
+#: src/gui/ConfigurationDialog.cpp:837
 msgid "Shortcut"
 msgstr "단축키"
 
-#: src/gui/ConfigurationDialog.cpp:855
+#: src/gui/ConfigurationDialog.cpp:861
 msgid "Running script: "
 msgstr "실행 중인 스크립트: "
 
-#: src/gui/ConfigurationDialog.cpp:862
+#: src/gui/ConfigurationDialog.cpp:868
 msgid "Running script: [none]"
 msgstr "실행 중인 스크립트: [없음]"
 
-#: src/gui/ConfigurationDialog.cpp:927
+#: src/gui/ConfigurationDialog.cpp:933
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
@@ -1225,16 +1227,16 @@ msgstr ""
 "새 별 목록을 모두 내려받았습니다!\n"
 "새 별을 보려면 스텔라리움을 재시작하세요."
 
-#: src/gui/ConfigurationDialog.cpp:931
+#: src/gui/ConfigurationDialog.cpp:937
 msgid "All available star catalogs have been installed."
 msgstr "모든 별 목록이 설치되었습니다."
 
-#: src/gui/ConfigurationDialog.cpp:936
+#: src/gui/ConfigurationDialog.cpp:942
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "%2개 중 %1번째 목록 받기"
 
-#: src/gui/ConfigurationDialog.cpp:943
+#: src/gui/ConfigurationDialog.cpp:949
 #, qt-format
 msgid ""
 "Downloading %1...\n"
@@ -1243,7 +1245,7 @@ msgstr ""
 "%1 내려받는 중... \n"
 "(이 창을 닫아도 됩니다.)"
 
-#: src/gui/ConfigurationDialog.cpp:950
+#: src/gui/ConfigurationDialog.cpp:956
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -1254,7 +1256,7 @@ msgstr ""
 "별 갯수: %2 백만\n"
 "등급 범위: %3 - %4"
 
-#: src/gui/ConfigurationDialog.cpp:993 src/gui/ConfigurationDialog.cpp:1028
+#: src/gui/ConfigurationDialog.cpp:999 src/gui/ConfigurationDialog.cpp:1034
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -1263,11 +1265,11 @@ msgstr ""
 "%1을 내려받는 중 오류 발생:\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:1080
+#: src/gui/ConfigurationDialog.cpp:1086
 msgid "Verifying file integrity..."
 msgstr "파일 무결성 검사 중..."
 
-#: src/gui/ConfigurationDialog.cpp:1084
+#: src/gui/ConfigurationDialog.cpp:1090
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -1277,243 +1279,243 @@ msgstr ""
 "파일이 손상되었습니다."
 
 #. TRANSLATORS: Full phrase is "Algorithm of DeltaT"
-#: src/gui/ConfigurationDialog.cpp:1157
+#: src/gui/ConfigurationDialog.cpp:1163
 msgid "Algorithm of"
 msgstr "알고리즘"
 
-#: src/gui/ConfigurationDialog.cpp:1168
+#: src/gui/ConfigurationDialog.cpp:1174
 msgid "Without correction"
 msgstr "보정 없음"
 
-#: src/gui/ConfigurationDialog.cpp:1169
+#: src/gui/ConfigurationDialog.cpp:1175
 msgid "Schoch (1931)"
 msgstr "Schoch (1931)"
 
-#: src/gui/ConfigurationDialog.cpp:1170
+#: src/gui/ConfigurationDialog.cpp:1176
 msgid "Clemence (1948)"
 msgstr "Clemence (1948)"
 
-#: src/gui/ConfigurationDialog.cpp:1171
+#: src/gui/ConfigurationDialog.cpp:1177
 msgid "IAU (1952)"
 msgstr "IAU (1952)"
 
-#: src/gui/ConfigurationDialog.cpp:1172
+#: src/gui/ConfigurationDialog.cpp:1178
 msgid "Astronomical Ephemeris (1960)"
 msgstr "Astronomical Ephemeris (1960)"
 
-#: src/gui/ConfigurationDialog.cpp:1173
+#: src/gui/ConfigurationDialog.cpp:1179
 msgid "Tuckerman (1962, 1964) & Goldstine (1973)"
 msgstr "Tuckerman (1962, 1964) & Goldstine (1973)"
 
-#: src/gui/ConfigurationDialog.cpp:1174
+#: src/gui/ConfigurationDialog.cpp:1180
 msgid "Muller & Stephenson (1975)"
 msgstr "Muller & Stephenson (1975)"
 
-#: src/gui/ConfigurationDialog.cpp:1175
+#: src/gui/ConfigurationDialog.cpp:1181
 msgid "Stephenson (1978)"
 msgstr "Stephenson (1978)"
 
-#: src/gui/ConfigurationDialog.cpp:1176
+#: src/gui/ConfigurationDialog.cpp:1182
 msgid "Schmadel & Zech (1979)"
 msgstr "Schmadel & Zech (1979)"
 
-#: src/gui/ConfigurationDialog.cpp:1177
+#: src/gui/ConfigurationDialog.cpp:1183
 msgid "Morrison & Stephenson (1982)"
 msgstr "Morrison & Stephenson (1982)"
 
-#: src/gui/ConfigurationDialog.cpp:1178
+#: src/gui/ConfigurationDialog.cpp:1184
 msgid "Stephenson & Morrison (1984)"
 msgstr "Stephenson & Morrison (1984)"
 
-#: src/gui/ConfigurationDialog.cpp:1179
+#: src/gui/ConfigurationDialog.cpp:1185
 msgid "Stephenson & Houlden (1986)"
 msgstr "Stephenson & Houlden (1986)"
 
-#: src/gui/ConfigurationDialog.cpp:1180
+#: src/gui/ConfigurationDialog.cpp:1186
 msgid "Espenak (1987, 1989)"
 msgstr "Espenak (1987, 1989)"
 
-#: src/gui/ConfigurationDialog.cpp:1181
+#: src/gui/ConfigurationDialog.cpp:1187
 msgid "Borkowski (1988)"
 msgstr "Borkowski (1988)"
 
-#: src/gui/ConfigurationDialog.cpp:1182
+#: src/gui/ConfigurationDialog.cpp:1188
 msgid "Schmadel & Zech (1988)"
 msgstr "Schmadel & Zech (1988)"
 
-#: src/gui/ConfigurationDialog.cpp:1183
+#: src/gui/ConfigurationDialog.cpp:1189
 msgid "Chapront-Touze & Chapront (1991)"
 msgstr "Chapront-Touze & Chapront (1991)"
 
-#: src/gui/ConfigurationDialog.cpp:1184
+#: src/gui/ConfigurationDialog.cpp:1190
 msgid "Stephenson & Morrison (1995)"
 msgstr "Stephenson & Morrison (1995)"
 
-#: src/gui/ConfigurationDialog.cpp:1185
+#: src/gui/ConfigurationDialog.cpp:1191
 msgid "Stephenson (1997)"
 msgstr "Stephenson (1997)"
 
-#: src/gui/ConfigurationDialog.cpp:1187
+#: src/gui/ConfigurationDialog.cpp:1193
 msgid "Meeus (1998) (with Chapront, Chapront-Touze & Francou (1997))"
 msgstr "Meeus (1998) (with Chapront, Chapront-Touze & Francou (1997))"
 
-#: src/gui/ConfigurationDialog.cpp:1188
+#: src/gui/ConfigurationDialog.cpp:1194
 msgid "JPL Horizons"
 msgstr "JPL Horizons"
 
-#: src/gui/ConfigurationDialog.cpp:1189
+#: src/gui/ConfigurationDialog.cpp:1195
 msgid "Meeus & Simons (2000)"
 msgstr "Meeus & Simons (2000)"
 
-#: src/gui/ConfigurationDialog.cpp:1190
+#: src/gui/ConfigurationDialog.cpp:1196
 msgid "Montenbruck & Pfleger (2000)"
 msgstr "Montenbruck & Pfleger (2000)"
 
-#: src/gui/ConfigurationDialog.cpp:1191
+#: src/gui/ConfigurationDialog.cpp:1197
 msgid "Reingold & Dershowitz (2002, 2007)"
 msgstr "Reingold & Dershowitz (2002, 2007)"
 
-#: src/gui/ConfigurationDialog.cpp:1192
+#: src/gui/ConfigurationDialog.cpp:1198
 msgid "Morrison & Stephenson (2004, 2005)"
 msgstr "Morrison & Stephenson (2004, 2005)"
 
-#: src/gui/ConfigurationDialog.cpp:1194
+#: src/gui/ConfigurationDialog.cpp:1200
 msgid "Espenak & Meeus (2006)"
 msgstr "Espenak & Meeus (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:1195
+#: src/gui/ConfigurationDialog.cpp:1201
 msgid "Reijs (2006)"
 msgstr "Reijs (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:1196
+#: src/gui/ConfigurationDialog.cpp:1202
 msgid "Banjevic (2006)"
 msgstr "Banjevic (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:1197
+#: src/gui/ConfigurationDialog.cpp:1203
 msgid "Islam, Sadiq & Qureshi (2008, 2013)"
 msgstr "Islam, Sadiq & Qureshi (2008, 2013)"
 
-#: src/gui/ConfigurationDialog.cpp:1198
+#: src/gui/ConfigurationDialog.cpp:1204
 #, qt-format
 msgid "Custom equation of %1T"
 msgstr "사용자 정의 %1T 공식"
 
 #. TRANSLATORS: This message will be displayed for users if Stellarium can't get info about version from stellarium.org
-#: src/gui/HelpDialog.cpp:289
+#: src/gui/HelpDialog.cpp:294
 msgid "Oops... Stellarium can't check latest version."
 msgstr "이런... 스텔라리움이 최신 버전을 확인할 수 없습니다."
 
 #. TRANSLATORS: This message will be displayed for users if current version of Stellarium is bigger than version from stellarium.org
-#: src/gui/HelpDialog.cpp:311
+#: src/gui/HelpDialog.cpp:316
 msgid "Looks like you are using the development version of Stellarium."
 msgstr "최신 개발자 버전의 스텔라리움을 사용하고 있습니다."
 
 #. TRANSLATORS: This message will be displayed for users if current version of Stellarium is smaller than version from stellarium.org
-#: src/gui/HelpDialog.cpp:316
+#: src/gui/HelpDialog.cpp:321
 #, qt-format
 msgid "This version of Stellarium is outdated! Latest version is %1."
 msgstr "이 스텔라리움은 예전 버전입니다! 최신 버전은 %1입니다."
 
-#: src/gui/HelpDialog.cpp:319
+#: src/gui/HelpDialog.cpp:324
 msgid ""
 " Sorry, your hardware is not compatible with newest version of Stellarium!"
-msgstr ""
+msgstr " 하드웨어가 최신 버전의 스텔라리움과 호환되지 않습니다!"
 
 #. TRANSLATORS: This message will be displayed for users if current version of Stellarium is equals with version from stellarium.org
-#: src/gui/HelpDialog.cpp:326
+#: src/gui/HelpDialog.cpp:331
 msgid "This is latest stable version of Stellarium."
-msgstr "최신 정식 버전의 스텔라리움을 사용학 있습니다."
+msgstr "최신 안정화 버전의 스텔라리움을 사용하고 있습니다."
 
-#: src/gui/HelpDialog.cpp:356
+#: src/gui/HelpDialog.cpp:361
 msgid "Stellarium Help"
 msgstr "스텔라리움 도움말"
 
-#: src/gui/HelpDialog.cpp:361 src/gui/HelpDialog.cpp:366
+#: src/gui/HelpDialog.cpp:366 src/gui/HelpDialog.cpp:371
 msgid "Keys"
 msgstr "조작키"
 
-#: src/gui/HelpDialog.cpp:363 src/gui/HelpDialog.cpp:435
+#: src/gui/HelpDialog.cpp:368 src/gui/HelpDialog.cpp:440
 msgid "Further Reading"
 msgstr "참고 목록"
 
-#: src/gui/HelpDialog.cpp:370
+#: src/gui/HelpDialog.cpp:375
 msgid "Pan view around the sky"
 msgstr "회전하며 하늘 보기"
 
-#: src/gui/HelpDialog.cpp:371
+#: src/gui/HelpDialog.cpp:376
 msgid "Arrow keys & left mouse drag"
 msgstr "방향키 & 마우스 왼쪽 드래그"
 
-#: src/gui/HelpDialog.cpp:373
+#: src/gui/HelpDialog.cpp:378
 msgid "Zoom in/out"
 msgstr "확대/축소"
 
-#: src/gui/HelpDialog.cpp:375
+#: src/gui/HelpDialog.cpp:380
 msgid "Page Up/Down"
 msgstr "Page Up/Down"
 
-#: src/gui/HelpDialog.cpp:377
+#: src/gui/HelpDialog.cpp:382
 msgid "CTRL + Up/Down"
 msgstr "CTRL + 위/아래"
 
-#: src/gui/HelpDialog.cpp:380
+#: src/gui/HelpDialog.cpp:385
 msgid "Select object"
 msgstr "천체 선택"
 
-#: src/gui/HelpDialog.cpp:381
+#: src/gui/HelpDialog.cpp:386
 msgid "Left click"
 msgstr "마우스 왼쪽 클릭"
 
-#: src/gui/HelpDialog.cpp:389
+#: src/gui/HelpDialog.cpp:394
 msgid "Clear selection"
 msgstr "선택 해제"
 
-#: src/gui/HelpDialog.cpp:390
+#: src/gui/HelpDialog.cpp:395
 msgid "Right click"
 msgstr "마우스 오른쪽 클릭"
 
-#: src/gui/HelpDialog.cpp:392
+#: src/gui/HelpDialog.cpp:397
 msgid "CTRL + Left click"
 msgstr "CTRL + 마우스 왼쪽 클릭"
 
-#: src/gui/HelpDialog.cpp:397
+#: src/gui/HelpDialog.cpp:402
 #, qt-format
 msgid ""
 "Below are listed only the actions with assigned keys. Further actions may be "
 "available via the \"%1\" button."
 msgstr "이 아래는 조작키가 지정된 동작들만 표시됩니다. 더 많은 동작들은 \"%1\" 버튼을 눌러 사용할 수 있습니다."
 
-#: src/gui/HelpDialog.cpp:436
+#: src/gui/HelpDialog.cpp:441
 msgid ""
 "The following links are external web links, and will launch your web "
 "browser:\n"
 msgstr "다음 링크들은 외부 웹 링크이며, 당신의 웹 브라우저를 실행할 것입니다:\n"
 
-#: src/gui/HelpDialog.cpp:437
+#: src/gui/HelpDialog.cpp:442
 msgid "The Stellarium User Guide"
 msgstr "스텔라리움 사용자 안내서"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:441
+#: src/gui/HelpDialog.cpp:446
 msgid "{Frequently Asked Questions} about Stellarium.  Answers too."
 msgstr "{자주 묻는 질문들} - 스텔라리움에 관련된 질문과 답변이 있습니다."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:446
+#: src/gui/HelpDialog.cpp:451
 msgid ""
 "{The Stellarium Wiki} - General information.  You can also find user-"
 "contributed landscapes and scripts here."
 msgstr "{스텔라리움 위키} - 종합적인 정보가 있습니다. 다른 사용자가 올린 풍경과 스크립트도 찾아볼 수 있습니다."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:451
+#: src/gui/HelpDialog.cpp:456
 msgid ""
 "{Support ticket system} - if you need help using Stellarium, post a support "
 "request here and we'll try to help."
 msgstr "{질문 문의하기} - 만약 스텔라리움을 사용하면서 도움이 필요할 때, 여기에 지원 요청을 하시면 도와드리겠습니다."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:456
+#: src/gui/HelpDialog.cpp:461
 msgid ""
 "{Bug reporting and feature request system} - if something doesn't work "
 "properly or is missing and is not listed in the tracker, you can open bug "
@@ -1523,141 +1525,141 @@ msgstr ""
 "있습니다."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:461
+#: src/gui/HelpDialog.cpp:466
 msgid "{Forums} - discuss Stellarium with other users."
 msgstr "{포럼} - 다른 사용자와 스텔라리움에 대해 이야기하세요."
 
-#: src/gui/HelpDialog.cpp:501
+#: src/gui/HelpDialog.cpp:506
 msgid "Developers"
 msgstr "만든 사람들"
 
-#: src/gui/HelpDialog.cpp:502
+#: src/gui/HelpDialog.cpp:507
 #, qt-format
 msgid "Project coordinator & lead developer: %1"
 msgstr "프로젝트 책임자 & 핵심 개발자: %1"
 
-#: src/gui/HelpDialog.cpp:503
+#: src/gui/HelpDialog.cpp:508
 #, qt-format
 msgid "Doc author/developer: %1"
 msgstr "문서 저자/개발자: %1"
 
-#: src/gui/HelpDialog.cpp:504 src/gui/HelpDialog.cpp:505
-#: src/gui/HelpDialog.cpp:506 src/gui/HelpDialog.cpp:507
-#: src/gui/HelpDialog.cpp:508 src/gui/HelpDialog.cpp:509
-#: src/gui/HelpDialog.cpp:510 src/gui/HelpDialog.cpp:511
-#: src/gui/HelpDialog.cpp:518 src/gui/HelpDialog.cpp:519
-#: src/gui/HelpDialog.cpp:520 src/gui/HelpDialog.cpp:521
+#: src/gui/HelpDialog.cpp:509 src/gui/HelpDialog.cpp:510
+#: src/gui/HelpDialog.cpp:511 src/gui/HelpDialog.cpp:512
+#: src/gui/HelpDialog.cpp:513 src/gui/HelpDialog.cpp:514
+#: src/gui/HelpDialog.cpp:515 src/gui/HelpDialog.cpp:516
+#: src/gui/HelpDialog.cpp:523 src/gui/HelpDialog.cpp:524
+#: src/gui/HelpDialog.cpp:525 src/gui/HelpDialog.cpp:526
 #, qt-format
 msgid "Developer: %1"
 msgstr "개발자: %1"
 
-#: src/gui/HelpDialog.cpp:512
+#: src/gui/HelpDialog.cpp:517
 #, qt-format
 msgid "Continuous Integration: %1"
 msgstr "지속적인 통합: %1"
 
-#: src/gui/HelpDialog.cpp:513 src/gui/HelpDialog.cpp:514
+#: src/gui/HelpDialog.cpp:518 src/gui/HelpDialog.cpp:519
 #, qt-format
 msgid "Tester: %1"
 msgstr "테스터: %1"
 
-#: src/gui/HelpDialog.cpp:515
+#: src/gui/HelpDialog.cpp:520
 msgid "Past Developers"
 msgstr "과거 개발자들"
 
-#: src/gui/HelpDialog.cpp:516
+#: src/gui/HelpDialog.cpp:521
 msgid ""
 "Several people have made significant contributions, but are no longer "
 "active. Their work has made a big difference to the project:"
 msgstr "여러 사람들이 상당한 기여를 했지만, 더 이상 참여하지 않습니다. 그들은 프로젝트에 큰 변화를 만들어냈습니다:"
 
-#: src/gui/HelpDialog.cpp:517
+#: src/gui/HelpDialog.cpp:522
 #, qt-format
 msgid "Graphic/other designer: %1"
 msgstr "그래픽/기타 디자이너: %1"
 
-#: src/gui/HelpDialog.cpp:522 src/gui/HelpDialog.cpp:523
+#: src/gui/HelpDialog.cpp:527 src/gui/HelpDialog.cpp:528
 #, qt-format
 msgid "OSX Developer: %1"
 msgstr "OSX 개발자: %1"
 
-#: src/gui/StelGui.cpp:184
+#: src/gui/StelGui.cpp:185
 msgid "Windows"
 msgstr "창"
 
-#: src/gui/StelGui.cpp:186
+#: src/gui/StelGui.cpp:187
 msgid "Quit"
 msgstr "종료"
 
-#: src/gui/StelGui.cpp:187
+#: src/gui/StelGui.cpp:188
 msgid "Speed up the script execution rate"
 msgstr "스크립트 실행 속도 증가"
 
-#: src/gui/StelGui.cpp:188
+#: src/gui/StelGui.cpp:189
 msgid "Slow down the script execution rate"
 msgstr "스크립트 실행 속도 감소"
 
-#: src/gui/StelGui.cpp:189
+#: src/gui/StelGui.cpp:190
 msgid "Set the normal script execution rate"
 msgstr "스크립트 실행 속도를 보통으로"
 
-#: src/gui/StelGui.cpp:190
+#: src/gui/StelGui.cpp:191
 msgid "Stop script execution"
 msgstr "스크립트 정지"
 
-#: src/gui/StelGui.cpp:191
+#: src/gui/StelGui.cpp:192
 msgid "Pause script execution"
 msgstr "스크립트 일시정지"
 
-#: src/gui/StelGui.cpp:192
+#: src/gui/StelGui.cpp:193
 msgid "Resume script execution"
 msgstr "스크립트 다시 시작"
 
-#: src/gui/StelGui.cpp:195
+#: src/gui/StelGui.cpp:196
 msgid "Script console window"
 msgstr "스크립트 콘솔 창"
 
-#: src/gui/StelGui.cpp:198
+#: src/gui/StelGui.cpp:199
 msgid "Help window"
 msgstr "도움말 창"
 
-#: src/gui/StelGui.cpp:199
+#: src/gui/StelGui.cpp:200
 msgid "Configuration window"
 msgstr "설정 창"
 
-#: src/gui/StelGui.cpp:200
+#: src/gui/StelGui.cpp:201
 msgid "Search window"
 msgstr "검색 창"
 
-#: src/gui/StelGui.cpp:201
+#: src/gui/StelGui.cpp:202
 msgid "Sky and viewing options window"
 msgstr "하늘과 보기 설정 창"
 
-#: src/gui/StelGui.cpp:202
+#: src/gui/StelGui.cpp:203
 msgid "Date/time window"
 msgstr "날짜/시간 창"
 
-#: src/gui/StelGui.cpp:203
+#: src/gui/StelGui.cpp:204
 msgid "Location window"
 msgstr "위치 창"
 
-#: src/gui/StelGui.cpp:204
+#: src/gui/StelGui.cpp:205
 msgid "Shortcuts window"
 msgstr "단축키 창"
 
-#: src/gui/StelGui.cpp:205
+#: src/gui/StelGui.cpp:206
 msgid "Copy selected object information to clipboard"
 msgstr "선택한 천체 정보를 클립보드로 복사"
 
-#: src/gui/StelGui.cpp:206
+#: src/gui/StelGui.cpp:207
 msgid "Toggle visibility of GUI"
 msgstr "GUI 켜기/끄기"
 
-#: src/gui/StelGui.cpp:212
+#: src/gui/StelGui.cpp:213
 msgid "Auto hide horizontal button bar"
 msgstr "수평 버튼 바 자동 숨기기"
 
-#: src/gui/StelGui.cpp:213
+#: src/gui/StelGui.cpp:214
 msgid "Auto hide vertical button bar"
 msgstr "수직 버튼 바 자동 숨기기"
 
@@ -1679,99 +1681,99 @@ msgid "Frames per second"
 msgstr "초당 프레임 수"
 
 #. TRANSLATORS: Short description for Class 1 of the Bortle scale
-#: src/gui/ViewDialog.cpp:325
+#: src/gui/ViewDialog.cpp:330
 msgid "Excellent dark-sky site"
 msgstr "매우 어두운 밤하늘"
 
 #. TRANSLATORS: Short description for Class 2 of the Bortle scale
-#: src/gui/ViewDialog.cpp:327
+#: src/gui/ViewDialog.cpp:332
 msgid "Typical truly dark site"
 msgstr "일반적인 어두운 밤하늘"
 
 #. TRANSLATORS: Short description for Class 3 of the Bortle scale
-#: src/gui/ViewDialog.cpp:329
+#: src/gui/ViewDialog.cpp:334
 msgid "Rural sky"
 msgstr "시골의 하늘"
 
 #. TRANSLATORS: Short description for Class 4 of the Bortle scale
-#: src/gui/ViewDialog.cpp:331
+#: src/gui/ViewDialog.cpp:336
 msgid "Rural/suburban transition"
 msgstr "시골과 교외 중간 지역의 하늘"
 
 #. TRANSLATORS: Short description for Class 5 of the Bortle scale
-#: src/gui/ViewDialog.cpp:333
+#: src/gui/ViewDialog.cpp:338
 msgid "Suburban sky"
 msgstr "교외의 하늘"
 
 #. TRANSLATORS: Short description for Class 6 of the Bortle scale
-#: src/gui/ViewDialog.cpp:335
+#: src/gui/ViewDialog.cpp:340
 msgid "Bright suburban sky"
 msgstr "밝은 교외의 하늘"
 
 #. TRANSLATORS: Short description for Class 7 of the Bortle scale
-#: src/gui/ViewDialog.cpp:337
+#: src/gui/ViewDialog.cpp:342
 msgid "Suburban/urban transition"
 msgstr "교외와 도시 중간 지역의 하늘"
 
 #. TRANSLATORS: Short description for Class 8 of the Bortle scale
-#: src/gui/ViewDialog.cpp:339
+#: src/gui/ViewDialog.cpp:344
 msgid "City sky"
 msgstr "도시의 하늘"
 
 #. TRANSLATORS: Short description for Class 9 of the Bortle scale
-#: src/gui/ViewDialog.cpp:341
+#: src/gui/ViewDialog.cpp:346
 msgid "Inner-city sky"
 msgstr "도심부의 하늘"
 
-#: src/gui/ViewDialog.cpp:355
+#: src/gui/ViewDialog.cpp:360
 msgid "The naked-eye limiting magnitude is"
 msgstr "육안 한계등급은"
 
-#: src/gui/ViewDialog.cpp:487
+#: src/gui/ViewDialog.cpp:492
 msgid "No description"
 msgstr "설명 없음"
 
-#: src/gui/ViewDialog.cpp:575
+#: src/gui/ViewDialog.cpp:580
 msgid "No shooting stars"
 msgstr "유성 없음"
 
-#: src/gui/ViewDialog.cpp:583
+#: src/gui/ViewDialog.cpp:588
 msgid "Normal rate"
 msgstr "정상 비율"
 
-#: src/gui/ViewDialog.cpp:586
+#: src/gui/ViewDialog.cpp:591
 msgid "Standard Orionids rate"
 msgstr "표준 오리온자리 유성우 비율"
 
-#: src/gui/ViewDialog.cpp:589
+#: src/gui/ViewDialog.cpp:594
 msgid "Standard Perseids rate"
 msgstr "표준 페르세우스 유성우 비율"
 
-#: src/gui/ViewDialog.cpp:592
+#: src/gui/ViewDialog.cpp:597
 msgid "Standard Geminids rate"
 msgstr "표준 쌍둥이자리 유성우 비율"
 
-#: src/gui/ViewDialog.cpp:595
+#: src/gui/ViewDialog.cpp:600
 msgid "Exceptional Perseid rate"
 msgstr "예외적인 페르세우스 유성우 비율"
 
-#: src/gui/ViewDialog.cpp:598
+#: src/gui/ViewDialog.cpp:603
 msgid "Meteor storm rate"
 msgstr "유성폭풍 비율"
 
-#: src/gui/ViewDialog.cpp:601
+#: src/gui/ViewDialog.cpp:606
 msgid "Exceptional Draconid rate"
 msgstr "예외적인 용자리 유성우 비율"
 
-#: src/gui/ViewDialog.cpp:604
+#: src/gui/ViewDialog.cpp:609
 msgid "Exceptional Leonid rate"
 msgstr "예외적인 사자자리 유성우 빈도수 비율"
 
-#: src/gui/ViewDialog.cpp:607
+#: src/gui/ViewDialog.cpp:612
 msgid "Very high rate (1966 Leonids)"
 msgstr "매우 높은 비율(1966년 사자자리 유성우)"
 
-#: src/gui/ViewDialog.cpp:610
+#: src/gui/ViewDialog.cpp:615
 msgid "Highest rate ever (1833 Leonids)"
 msgstr "역대 최고 비율(1833년 사자자리 유성우)"
 
@@ -1874,35 +1876,79 @@ msgstr "원래대로"
 msgid "starchart"
 msgstr "성도"
 
-#: src/gui/SearchDialog.cpp:380
+#: src/gui/SearchDialog.cpp:231
+msgctxt "coordinate system"
+msgid "Equatorial (J2000.0)"
+msgstr ""
+
+#: src/gui/SearchDialog.cpp:232
+msgctxt "coordinate system"
+msgid "Equatorial"
+msgstr ""
+
+#: src/gui/SearchDialog.cpp:233
+msgctxt "coordinate system"
+msgid "Horizontal"
+msgstr ""
+
+#: src/gui/SearchDialog.cpp:234
+msgctxt "coordinate system"
+msgid "Galactic"
+msgstr ""
+
+#: src/gui/SearchDialog.cpp:248
+msgid "Right ascension"
+msgstr ""
+
+#: src/gui/SearchDialog.cpp:250
+msgid "Declination"
+msgstr ""
+
+#: src/gui/SearchDialog.cpp:257
+msgid "Azimuth"
+msgstr ""
+
+#: src/gui/SearchDialog.cpp:260
+msgid "Altitude"
+msgstr ""
+
+#: src/gui/SearchDialog.cpp:267
+msgid "Longitude"
+msgstr ""
+
+#: src/gui/SearchDialog.cpp:270
+msgid "Latitude"
+msgstr ""
+
+#: src/gui/SearchDialog.cpp:508
 msgid "Simbad Lookup Error"
 msgstr "Simbad 검색 오류"
 
-#: src/gui/SearchDialog.cpp:388
+#: src/gui/SearchDialog.cpp:516
 msgid "Simbad Lookup"
 msgstr "Simbad 검색"
 
-#: src/gui/SearchDialog.cpp:556
+#: src/gui/SearchDialog.cpp:684
 msgid "University of Strasbourg (France)"
 msgstr "스트라스부르 대학교 (프랑스)"
 
-#: src/gui/SearchDialog.cpp:557
+#: src/gui/SearchDialog.cpp:685
 msgid "Harvard University (USA)"
 msgstr "하버드 대학교 (미국)"
 
-#: src/gui/SearchDialog.cpp:616
+#: src/gui/SearchDialog.cpp:742
 msgid "Paste and Search"
 msgstr ""
 
-#: src/gui/ShortcutsDialog.cpp:489
+#: src/gui/ShortcutsDialog.cpp:494
 msgid "Action"
 msgstr "동작"
 
-#: src/gui/ShortcutsDialog.cpp:490 src/ui_shortcutsDialog.h:197
+#: src/gui/ShortcutsDialog.cpp:495 src/ui_shortcutsDialog.h:197
 msgid "Primary shortcut"
 msgstr "기본 단축키"
 
-#: src/gui/ShortcutsDialog.cpp:491 src/ui_shortcutsDialog.h:198
+#: src/gui/ShortcutsDialog.cpp:496 src/ui_shortcutsDialog.h:198
 msgid "Alternative shortcut"
 msgstr "대체 단축키"
 
@@ -1940,15 +1986,15 @@ msgid ""
 "Insufficient OpenGL version. Please update drivers, or graphics hardware."
 msgstr "OpenGL 버전이 낮습니다. 드라이브나 그래픽 하드웨어를 업데이트해주세요."
 
-#: src/StelMainView.cpp:301
+#: src/StelMainView.cpp:360
 msgid "Save screenshot"
 msgstr "스크린샷 저장"
 
-#: src/StelMainView.cpp:302
+#: src/StelMainView.cpp:361
 msgid "Full-screen mode"
 msgstr "전체 화면 모드"
 
-#: src/StelMainView.cpp:408
+#: src/StelMainView.cpp:533
 #, qt-format
 msgid "Stellarium %1"
 msgstr "스텔라리움 %1"
@@ -1971,12 +2017,12 @@ msgid "Earth"
 msgstr "지구"
 
 #. TRANSLATORS: Name of landscape and Earth's satellite
-#: src/translations.h:37 src/translations.h:251
+#: src/translations.h:37 src/translations.h:252
 msgid "Moon"
 msgstr "달"
 
 #. TRANSLATORS: Name of landscape and planet
-#: src/translations.h:38 src/translations.h:259
+#: src/translations.h:38 src/translations.h:260
 msgid "Mars"
 msgstr "화성"
 
@@ -2074,7 +2120,7 @@ msgid "Metis"
 msgstr "메티스"
 
 #. TRANSLATORS: Name of landscape and planet
-#: src/translations.h:62 src/translations.h:261
+#: src/translations.h:62 src/translations.h:262
 msgid "Saturn"
 msgstr "토성"
 
@@ -2504,262 +2550,266 @@ msgid "Aztec"
 msgstr "아즈텍"
 
 #: src/translations.h:226
+msgid "Boorong"
+msgstr ""
+
+#: src/translations.h:227
 msgid "Chinese"
 msgstr "중국"
 
-#: src/translations.h:227
+#: src/translations.h:228
 msgid "Egyptian"
 msgstr "이집트"
 
-#: src/translations.h:228
+#: src/translations.h:229
 msgid "Inuit"
 msgstr "이뉴잇"
 
-#: src/translations.h:229
+#: src/translations.h:230
 msgid "Indian Vedic"
 msgstr "인도 베다"
 
-#: src/translations.h:230
+#: src/translations.h:231
 msgid "Korean"
 msgstr "한국"
 
-#: src/translations.h:231
+#: src/translations.h:232
 msgid "Lakota"
 msgstr "라코타 인디언"
 
-#: src/translations.h:232
+#: src/translations.h:233
 msgid "Maori"
 msgstr "마오리"
 
-#: src/translations.h:233
+#: src/translations.h:234
 msgid "Mongolian"
 msgstr ""
 
-#: src/translations.h:234
+#: src/translations.h:235
 msgid "Navajo"
 msgstr "나바호"
 
-#: src/translations.h:235
+#: src/translations.h:236
 msgid "Norse"
 msgstr "고대 스칸디나비아"
 
-#: src/translations.h:236
+#: src/translations.h:237
 msgid "Polynesian"
 msgstr "폴리네시아"
 
-#: src/translations.h:237
+#: src/translations.h:238
 msgid "Romanian"
 msgstr "로마"
 
-#: src/translations.h:238
+#: src/translations.h:239
 msgid "Sami"
 msgstr "스칸디나비아"
 
-#: src/translations.h:239
+#: src/translations.h:240
 msgid "Tupi-Guarani"
 msgstr "투피-과라니"
 
-#: src/translations.h:240
+#: src/translations.h:241
 msgid "Tongan"
 msgstr "통가"
 
-#: src/translations.h:241
+#: src/translations.h:242
 msgid "Western"
 msgstr "서양"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:247
+#: src/translations.h:248
 msgid "Guereins"
 msgstr "Guereins"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:249
+#: src/translations.h:250
 msgid "Trees"
 msgstr "나무"
 
 #. TRANSLATORS: Landscape name: Hurricane Ridge
-#: src/translations.h:253
+#: src/translations.h:254
 msgid "Hurricane"
 msgstr "허리케인 릿지"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:255
+#: src/translations.h:256
 msgid "Ocean"
 msgstr "바다"
 
 #. TRANSLATORS: Landscape name: Garching bei Munchen
-#: src/translations.h:257
+#: src/translations.h:258
 msgid "Garching"
 msgstr "Garching"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:263
+#: src/translations.h:264
 msgid "Geneva"
 msgstr "Geneva"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:265
+#: src/translations.h:266
 msgid "Grossmugl"
 msgstr "Grossmugl"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:272
+#: src/translations.h:273
 msgid "Landscape Tour"
 msgstr "풍경 둘러보기"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:274
+#: src/translations.h:275
 msgid "Partial Lunar Eclipse"
 msgstr "부분월식"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:276
+#: src/translations.h:277
 msgid "Total Lunar Eclipse"
 msgstr "개기월식"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:278
+#: src/translations.h:279
 msgid "Screensaver"
 msgstr "화면 보호기"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:280
+#: src/translations.h:281
 msgid "Solar Eclipse 2009"
 msgstr "2009년 일식"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:282
+#: src/translations.h:283
 msgid "Startup Script"
 msgstr "시작 스크립트"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:284
+#: src/translations.h:285
 msgid "Zodiac"
 msgstr "황도 12궁"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:286
+#: src/translations.h:287
 msgid "Mercury Triple Sunrise and Sunset"
 msgstr "수성에서 보는 3번의 일출과 일몰"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:288
+#: src/translations.h:289
 msgid "Double eclipse from Deimos in 2017"
 msgstr "2017년 데이모스에서 보는 2번의 식"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:290
+#: src/translations.h:291
 msgid "Double eclipse from Deimos in 2031"
 msgstr "2031년 데이모스에서 보는 2번의 식"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:292
+#: src/translations.h:293
 msgid "Eclipse from Olympus Mons Jan 10 2068"
 msgstr "2068년 1월 10일 올림푸스 산에서 보는 식"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:294
+#: src/translations.h:295
 msgid "Occultation of Earth and Jupiter 2048"
 msgstr "2048년 지구와 목성의 엄폐"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:296
+#: src/translations.h:297
 msgid "3 Transits and 2 Eclipses from Deimos 2027"
 msgstr "데이모스 2027에서 보는 3번의 통과와 2번의 식"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:298
+#: src/translations.h:299
 msgid "Solar System Screensaver"
 msgstr "태양계 화면 보호기"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:300
+#: src/translations.h:301
 msgid "Constellations Tour"
 msgstr "별자리 둘러보기"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:302
+#: src/translations.h:303
 msgid "Sun from different planets"
 msgstr "다른 행성들에서 보이는 태양"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:304
+#: src/translations.h:305
 msgid "Earth best views from other bodies"
 msgstr "다른 천체에서 바라본 지구의 가장 좋은 모습"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:306
+#: src/translations.h:307
 msgid "Transit of Venus"
 msgstr "금성의 통과"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:308
+#: src/translations.h:309
 msgid "Analemma"
 msgstr "아날렘마"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:310
+#: src/translations.h:311
 msgid "Sky Culture Tour"
 msgstr "하늘 문화 둘러보기"
 
 #. TRANSLATORS: Name and description of script
-#: src/translations.h:312
+#: src/translations.h:313
 msgid "Earth Events from Mercury"
 msgstr "수성에서 보는 지구 이벤트들"
 
 #. TRANSLATORS: Name and description of script
-#: src/translations.h:314
+#: src/translations.h:315
 msgid "Earth Events from a floating city on Venus"
 msgstr "금성의 공중부양 도시에서 보는 지구 이벤트들"
 
 #. TRANSLATORS: Name and description of script
-#: src/translations.h:316
+#: src/translations.h:317
 msgid "Earth Events from Mars"
 msgstr "화성에서 보는 지구 이벤트들"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:318
+#: src/translations.h:319
 msgid "Earth and Venus Greatest Elongations and Brilliancies from Mars"
 msgstr "화성에서 보는 지구와 금성의 최대 이각과 최대 광도"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:320
+#: src/translations.h:321
 msgid "Earth and Mars Greatest Elongations and Transits from Callisto"
 msgstr "칼리스토에서 보는 지구와 화성의 최대 이각과 통과"
 
 #. TRANSLATORS: Description of the landscape tour script.
-#: src/translations.h:326
+#: src/translations.h:327
 msgid "Look around each installed landscape."
 msgstr "설치된 풍경들을 둘러봅니다."
 
 #. TRANSLATORS: Description of the sky culture tour script.
-#: src/translations.h:328
+#: src/translations.h:329
 msgid "Look at each installed sky culture."
 msgstr "설치된 하늘 문화들을 둘러봅니다."
 
-#: src/translations.h:329
+#: src/translations.h:330
 msgid "Script to demonstrate a partial lunar eclipse."
 msgstr "부분월식을 보여주는 스크립트"
 
-#: src/translations.h:330
+#: src/translations.h:331
 msgid "Script to demonstrate a total lunar eclipse."
 msgstr "개기월식을 보여주는 스크립트"
 
-#: src/translations.h:331
+#: src/translations.h:332
 msgid "A slow, infinite tour of the sky, looking at random objects."
 msgstr "임의의 천체를 둘러보며 하늘을 느리고 무한하게 여행합니다."
 
-#: src/translations.h:332
+#: src/translations.h:333
 msgid ""
 "Script to demonstrate a total solar eclipse which has happened in 2009 "
 "(location=Rangpur, Bangladesh)."
 msgstr "2009년에 일어난 개기일식을 보여주는 스크립트 (위치=Rangpur, 방글라데시)"
 
-#: src/translations.h:333
+#: src/translations.h:334
 msgid "Script which runs automatically at startup"
 msgstr "프로그램을 시작할 때 자동으로 실행하는 스크립트"
 
-#: src/translations.h:334
+#: src/translations.h:335
 msgid ""
 "This script displays the constellations of the Zodiac. That means the "
 "constellations which lie along the line which the Sun traces across the "
@@ -2767,13 +2817,13 @@ msgid ""
 msgstr ""
 "이 스크립트는 황도 12궁의 별자리들을 표시합니다. 이 별자리들은 1년 동안 천구에서 태양이 가로지르는 가상의 길 주위의 별자리들입니다."
 
-#: src/translations.h:335
+#: src/translations.h:336
 msgid ""
 "Due to the quirks in Mercury's orbit and rotation at certain spots the sun "
 "will rise & set 3 different times in one Mercury day."
 msgstr "특정 지점에서 수성의 궤도와 공전이 교묘하게 맞물리면서 태양이 수성의 하루 동안 3번 뜨고 지게 됩니다."
 
-#: src/translations.h:336
+#: src/translations.h:337
 msgid ""
 "Just before Mars eclipses the sun, Phobos pops out from behind and eclipses "
 "it first. Takes place between Scorpio and Sagittarius on April 26, 2017."
@@ -2781,7 +2831,7 @@ msgstr ""
 "화성이 태양을 가리기 직전에 포보스가 화성 뒤에서 튀어나와 먼저 식을 이룹니다. 이 현상은 2017년 4월 26일에 전갈자리와 궁수자리 "
 "사이에서 일어납니다."
 
-#: src/translations.h:337
+#: src/translations.h:338
 msgid ""
 "Just before Mars eclipses the sun, Phobos pops out from behind and eclipses "
 "it first. Takes place between Taurus and Gemini on July 23, 2031."
@@ -2789,11 +2839,11 @@ msgstr ""
 "화성이 태양을 가리기 직전에 포보스가 화성 뒤에서 튀어나와 먼저 식을 이룹니다. 이 현상은 2031년 7월 23일에 황소자리와 쌍둥이자리 "
 "사이에서 일어납니다."
 
-#: src/translations.h:338
+#: src/translations.h:339
 msgid "Phobos eclipsing the Sun as seen from Olympus Mons on Jan 10, 2068."
 msgstr "2068년 1월 10일에 화성의 올림푸스 산에서 포보스와 태양의 식 현상을 볼 수 있습니다."
 
-#: src/translations.h:339
+#: src/translations.h:340
 msgid ""
 "Phobos occultations of Earth are common, as are occultations of Jupiter. But "
 "occultations of both on the same day are very rare. Here's one that takes "
@@ -2802,7 +2852,7 @@ msgstr ""
 "포보스가 지구를 엄폐하는 것은 흔한 일입니다. 그리고 목성를 엄폐하는 것도 흔한 일입니다. 그러나 같은 날에 두 엄폐가 모두 일어나는 "
 "것은 매우 드문 일입니다. 이 스크립트는 2048년 1월 23일에 이런 일이 발생하는 것을 보여줍니다. 속도는 실제 속도입니다."
 
-#: src/translations.h:340
+#: src/translations.h:341
 msgid ""
 "Phobos races ahead of Mars and transits the sun, passes through it and then "
 "retrogrades back towards the sun and just partially transits it again (only "
@@ -2815,46 +2865,46 @@ msgstr ""
 "뒤 화성이 태양을 가리며 식을 이루고, 포보스는 그 때 화성과 데이모스 사이에서 다시 통과합니다. 포보스가 화성에서 빠져나올 때 포보스는 "
 "아직 식 중이기 때문에 화성의 그림자에서 흐릿하게 빛나고, 잠시 후 밝아집니다."
 
-#: src/translations.h:341
+#: src/translations.h:342
 msgid ""
 "Screensaver of various happenings in the Solar System. 232 events in all!"
 msgstr "태양계의 다양한 현상들을 보여주는 화면 보호기입니다. 총 232개 이벤트가 있습니다!"
 
-#: src/translations.h:342
+#: src/translations.h:343
 msgid "A tour of the western constellations."
 msgstr "서양 별자리 둘러보기"
 
-#: src/translations.h:343
+#: src/translations.h:344
 msgid "Look at the Sun from big planets of Solar System and Pluto."
 msgstr "태양계의 거대 행성들과 명왕성에서 태양을 바라보세요."
 
-#: src/translations.h:344
+#: src/translations.h:345
 msgid ""
 "Best views of Earth from other Solar System bodies in the 21st Century."
 msgstr "21세기에 다른 태양계 천체에서 바라본 지구의 가장 좋은 모습을 제공합니다."
 
-#: src/translations.h:345
+#: src/translations.h:346
 msgid "Transit of Venus as seen from Sydney Australia, 6th June 2012."
 msgstr "호주의 시드니에서 2012년 6월 6일에 관측된 금성의 통과입니다."
 
-#: src/translations.h:346
+#: src/translations.h:347
 msgid ""
 "A demonstration of the analemma - the path of the Sun across the sky during "
 "the year."
 msgstr "Analemma(아날렘마)의 정의 - 1년 동안 태양이 하늘을 가로지르는 8자 모양의 경로"
 
-#: src/translations.h:347
+#: src/translations.h:348
 msgid ""
 "Flash of the supernova observed by Tycho Brahe in 1572. The Supernovae "
 "plugin has to be enabled."
 msgstr "1572년 티코 브라헤가 관측한 초신성 폭발입니다. 초신성 플러그인을 활성화해야 합니다."
 
-#: src/translations.h:348
+#: src/translations.h:349
 msgid ""
 "Earth and Venus Greatest Elongations and Brilliancies from Mars 2000-3000"
 msgstr "2000년부터 3000년까지 화성에서 보는 지구와 금성의 최대 이각과 최대 광도"
 
-#: src/translations.h:349
+#: src/translations.h:350
 msgid ""
 "Earth Greatest Elongations and Transits from Callisto 2000-3000. Why "
 "Callisto? Well of the 4 Galilean Moons, Callisto is the only one outside of "
@@ -2864,991 +2914,991 @@ msgstr ""
 "2000년부터 3000년까지 칼리스토에서 보는 지구와 화성의 최대 이각과 통과. 왜 칼리스토냐고요? 갈릴레이 위성 4개 중 칼리스토는 "
 "목성의 자기장대에서 벗어난 유일한 위성입니다. 그러므로 만약 인류가 목성의 위성을 식민지로 삼는다면, 칼리스토가 그 대상이 되겠죠."
 
-#: src/translations.h:353
+#: src/translations.h:354
 msgid "Andorra"
 msgstr "안도라"
 
-#: src/translations.h:354
+#: src/translations.h:355
 msgid "United Arab Emirates"
 msgstr "아랍에미리트"
 
-#: src/translations.h:355
+#: src/translations.h:356
 msgid "Afghanistan"
 msgstr "아프카니스탄"
 
-#: src/translations.h:356
+#: src/translations.h:357
 msgid "Antigua and Barbuda"
 msgstr "앤티가바부다"
 
-#: src/translations.h:357
+#: src/translations.h:358
 msgid "Anguilla"
 msgstr "앙골라"
 
-#: src/translations.h:358
+#: src/translations.h:359
 msgid "Albania"
 msgstr "알바니아"
 
-#: src/translations.h:359
+#: src/translations.h:360
 msgid "Armenia"
 msgstr "아르메니아"
 
-#: src/translations.h:360
+#: src/translations.h:361
 msgid "Netherlands Antilles"
 msgstr "네덜란드령 안틸 제도"
 
-#: src/translations.h:361
+#: src/translations.h:362
 msgid "Angola"
 msgstr "앙골라"
 
-#: src/translations.h:362
+#: src/translations.h:363
 msgid "Antarctica"
 msgstr "남극 대륙"
 
-#: src/translations.h:363
+#: src/translations.h:364
 msgid "Argentina"
 msgstr "아르헨티나"
 
-#: src/translations.h:364
+#: src/translations.h:365
 msgid "American Samoa"
 msgstr "미국령 사모아"
 
-#: src/translations.h:365
+#: src/translations.h:366
 msgid "Austria"
 msgstr "오스트리아"
 
-#: src/translations.h:366
+#: src/translations.h:367
 msgid "Australia"
 msgstr "오스트레일리아"
 
-#: src/translations.h:367
+#: src/translations.h:368
 msgid "Aruba"
 msgstr "아루바"
 
-#: src/translations.h:368
+#: src/translations.h:369
 msgid "Azerbaijan"
 msgstr "아제르바이잔"
 
-#: src/translations.h:369
+#: src/translations.h:370
 msgid "Bosnia and Herzegowina"
 msgstr "보스니아 헤르체고비나"
 
-#: src/translations.h:370
+#: src/translations.h:371
 msgid "Barbados"
 msgstr "바베이도스"
 
-#: src/translations.h:371
+#: src/translations.h:372
 msgid "Bangladesh"
 msgstr "방글라데시"
 
-#: src/translations.h:372
+#: src/translations.h:373
 msgid "Belgium"
 msgstr "벨기에"
 
-#: src/translations.h:373
+#: src/translations.h:374
 msgid "Burkina Faso"
 msgstr "부르키나파소"
 
-#: src/translations.h:374
+#: src/translations.h:375
 msgid "Bulgaria"
 msgstr "불가리아"
 
-#: src/translations.h:375
+#: src/translations.h:376
 msgid "Bahrain"
 msgstr "바레인"
 
-#: src/translations.h:376
+#: src/translations.h:377
 msgid "Burundi"
 msgstr "부룬디"
 
-#: src/translations.h:377
+#: src/translations.h:378
 msgid "Benin"
 msgstr "베냉"
 
-#: src/translations.h:378
+#: src/translations.h:379
 msgid "Bermuda"
 msgstr "버뮤다 제도"
 
-#: src/translations.h:379
+#: src/translations.h:380
 msgid "Brunei Darussalam"
 msgstr "브루나이"
 
-#: src/translations.h:380
+#: src/translations.h:381
 msgid "Bolivia"
 msgstr "볼리비아"
 
-#: src/translations.h:381
+#: src/translations.h:382
 msgid "Brazil"
 msgstr "브라질"
 
-#: src/translations.h:382
+#: src/translations.h:383
 msgid "Bahamas"
 msgstr "바하마 제도"
 
-#: src/translations.h:383
+#: src/translations.h:384
 msgid "Bhutan"
 msgstr "부탄"
 
-#: src/translations.h:384
+#: src/translations.h:385
 msgid "Bouvet Island"
 msgstr "부베 섬"
 
-#: src/translations.h:385
+#: src/translations.h:386
 msgid "Botswana"
 msgstr "보츠와나"
 
-#: src/translations.h:386
+#: src/translations.h:387
 msgid "Belarus"
 msgstr "벨라루스"
 
-#: src/translations.h:387
+#: src/translations.h:388
 msgid "Belize"
 msgstr "벨리즈"
 
-#: src/translations.h:388
+#: src/translations.h:389
 msgid "Canada"
 msgstr "캐나다"
 
-#: src/translations.h:389
+#: src/translations.h:390
 msgid "Cocos Islands"
 msgstr "코코스 섬"
 
-#: src/translations.h:390
+#: src/translations.h:391
 msgid "Democratic Republic of the Congo"
 msgstr "콩고민주공화국"
 
-#: src/translations.h:391
+#: src/translations.h:392
 msgid "Central African Republic"
 msgstr "중앙아프리카공화국"
 
-#: src/translations.h:392
+#: src/translations.h:393
 msgid "Republic of the Congo"
 msgstr "콩고"
 
-#: src/translations.h:393
+#: src/translations.h:394
 msgid "Switzerland"
 msgstr "스위스"
 
-#: src/translations.h:394
+#: src/translations.h:395
 msgid "Cote d'Ivoire"
 msgstr "코트디부아르"
 
-#: src/translations.h:395
+#: src/translations.h:396
 msgid "Cook Islands"
 msgstr "쿡 제도"
 
-#: src/translations.h:396
+#: src/translations.h:397
 msgid "Chile"
 msgstr "칠레"
 
-#: src/translations.h:397
+#: src/translations.h:398
 msgid "Cameroon"
 msgstr "카메룬"
 
-#: src/translations.h:398
+#: src/translations.h:399
 msgid "China"
 msgstr "중국"
 
-#: src/translations.h:399
+#: src/translations.h:400
 msgid "Colombia"
 msgstr "콜롬비아"
 
-#: src/translations.h:400
+#: src/translations.h:401
 msgid "Costa Rica"
 msgstr "코스타리카"
 
-#: src/translations.h:401
+#: src/translations.h:402
 msgid "Serbia and Montenegro"
 msgstr "세르비아 몬테네그로"
 
-#: src/translations.h:402
+#: src/translations.h:403
 msgid "Cuba"
 msgstr "쿠바"
 
-#: src/translations.h:403
+#: src/translations.h:404
 msgid "Cape Verde"
 msgstr "카보베르데"
 
-#: src/translations.h:404
+#: src/translations.h:405
 msgid "Christmas Island"
 msgstr "크리스마스 섬"
 
-#: src/translations.h:405
+#: src/translations.h:406
 msgid "Cyprus"
 msgstr "키프로스"
 
-#: src/translations.h:406
+#: src/translations.h:407
 msgid "Czech Republic"
 msgstr "체코"
 
-#: src/translations.h:407
+#: src/translations.h:408
 msgid "Germany"
 msgstr "독일"
 
-#: src/translations.h:408
+#: src/translations.h:409
 msgid "Djibouti"
 msgstr "지부티"
 
-#: src/translations.h:409
+#: src/translations.h:410
 msgid "Denmark"
 msgstr "덴마크"
 
-#: src/translations.h:410
+#: src/translations.h:411
 msgid "Dominica"
 msgstr "도미니카연방"
 
-#: src/translations.h:411
+#: src/translations.h:412
 msgid "Dominican Republic"
 msgstr "도미니카공화국"
 
-#: src/translations.h:412
+#: src/translations.h:413
 msgid "Algeria"
 msgstr "알제리"
 
-#: src/translations.h:413
+#: src/translations.h:414
 msgid "Ecuador"
 msgstr "에콰도르"
 
-#: src/translations.h:414
+#: src/translations.h:415
 msgid "Estonia"
 msgstr "에스토니아"
 
-#: src/translations.h:415
+#: src/translations.h:416
 msgid "Egypt"
 msgstr "이집트"
 
-#: src/translations.h:416
+#: src/translations.h:417
 msgid "Western Sahara"
 msgstr "서사하라"
 
-#: src/translations.h:417
+#: src/translations.h:418
 msgid "Eritrea"
 msgstr "에리트레아"
 
-#: src/translations.h:418
+#: src/translations.h:419
 msgid "Spain"
 msgstr "스페인"
 
-#: src/translations.h:419
+#: src/translations.h:420
 msgid "Ethiopia"
 msgstr "에티오피아"
 
-#: src/translations.h:420
+#: src/translations.h:421
 msgid "Finland"
 msgstr "핀란드"
 
-#: src/translations.h:421
+#: src/translations.h:422
 msgid "Fiji"
 msgstr "피지"
 
-#: src/translations.h:422
+#: src/translations.h:423
 msgid "Falkland Islands"
 msgstr "포클랜드 제도"
 
-#: src/translations.h:423
+#: src/translations.h:424
 msgid "Micronesia"
 msgstr "미크로네시아"
 
-#: src/translations.h:424
+#: src/translations.h:425
 msgid "Faroe Islands"
 msgstr "페로 제도"
 
-#: src/translations.h:425
+#: src/translations.h:426
 msgid "France"
 msgstr "프랑스"
 
-#: src/translations.h:426
+#: src/translations.h:427
 msgid "Gabon"
 msgstr "가봉"
 
-#: src/translations.h:427
+#: src/translations.h:428
 msgid "United Kingdom"
 msgstr "영국"
 
-#: src/translations.h:428
+#: src/translations.h:429
 msgid "Grenada"
 msgstr "그레나다"
 
-#: src/translations.h:429
+#: src/translations.h:430
 msgid "Georgia"
 msgstr "조지아"
 
-#: src/translations.h:430
+#: src/translations.h:431
 msgid "French Guiana"
 msgstr "프랑스령 기아나"
 
-#: src/translations.h:431
+#: src/translations.h:432
 msgid "Ghana"
 msgstr "가나"
 
-#: src/translations.h:432
+#: src/translations.h:433
 msgid "Gibraltar"
 msgstr "지브롤터"
 
-#: src/translations.h:433
+#: src/translations.h:434
 msgid "Greenland"
 msgstr "그린란드"
 
-#: src/translations.h:434
+#: src/translations.h:435
 msgid "Gambia"
 msgstr "감비아"
 
-#: src/translations.h:435
+#: src/translations.h:436
 msgid "Guinea"
 msgstr "기니"
 
-#: src/translations.h:436
+#: src/translations.h:437
 msgid "Guadeloupe"
 msgstr "과들루프"
 
-#: src/translations.h:437
+#: src/translations.h:438
 msgid "Equatorial Guinea"
 msgstr "적도 기니"
 
-#: src/translations.h:438
+#: src/translations.h:439
 msgid "Greece"
 msgstr "그리스"
 
-#: src/translations.h:439
+#: src/translations.h:440
 msgid "South Georgia and the South Sandwich Islands"
 msgstr "사우스조지아 사우스샌드위치 제도"
 
-#: src/translations.h:440
+#: src/translations.h:441
 msgid "Guatemala"
 msgstr "과테말라"
 
-#: src/translations.h:441
+#: src/translations.h:442
 msgid "Guam"
 msgstr "괌"
 
-#: src/translations.h:442
+#: src/translations.h:443
 msgid "Guinea-Bissau"
 msgstr "기니비사우"
 
-#: src/translations.h:443
+#: src/translations.h:444
 msgid "Guyana"
 msgstr "가이아나"
 
-#: src/translations.h:444
+#: src/translations.h:445
 msgid "Hong Kong"
 msgstr "홍콩"
 
-#: src/translations.h:445
+#: src/translations.h:446
 msgid "Heard Island and McDonald Islands"
 msgstr "허드 맥도널드 제도"
 
-#: src/translations.h:446
+#: src/translations.h:447
 msgid "Honduras"
 msgstr "온두라스"
 
-#: src/translations.h:447
+#: src/translations.h:448
 msgid "Croatia"
 msgstr "크로아티아"
 
-#: src/translations.h:448
+#: src/translations.h:449
 msgid "Haiti"
 msgstr "아이티"
 
-#: src/translations.h:449
+#: src/translations.h:450
 msgid "Hungary"
 msgstr "헝가리"
 
-#: src/translations.h:450
+#: src/translations.h:451
 msgid "Indonesia"
 msgstr "인도네시아"
 
-#: src/translations.h:451
+#: src/translations.h:452
 msgid "Ireland"
 msgstr "아일랜드"
 
-#: src/translations.h:452
+#: src/translations.h:453
 msgid "Israel"
 msgstr "이스라엘"
 
-#: src/translations.h:453
+#: src/translations.h:454
 msgid "India"
 msgstr "인도"
 
-#: src/translations.h:454
+#: src/translations.h:455
 msgid "British Indian Ocean Territory"
 msgstr "영국령 인도양 식민지"
 
-#: src/translations.h:455
+#: src/translations.h:456
 msgid "Iraq"
 msgstr "이라크"
 
-#: src/translations.h:456
+#: src/translations.h:457
 msgid "Iran"
 msgstr "이란"
 
-#: src/translations.h:457
+#: src/translations.h:458
 msgid "Iceland"
 msgstr "아이슬란드"
 
-#: src/translations.h:458
+#: src/translations.h:459
 msgid "Italy"
 msgstr "이탈리아"
 
-#: src/translations.h:459
+#: src/translations.h:460
 msgid "Jamaica"
 msgstr "자메이카"
 
-#: src/translations.h:460
+#: src/translations.h:461
 msgid "Jordan"
 msgstr "요르단"
 
-#: src/translations.h:461
+#: src/translations.h:462
 msgid "Japan"
 msgstr "일본"
 
-#: src/translations.h:462
+#: src/translations.h:463
 msgid "Kenya"
 msgstr "케냐"
 
-#: src/translations.h:463
+#: src/translations.h:464
 msgid "Kyrgyzstan"
 msgstr "키르기스스탄"
 
-#: src/translations.h:464
+#: src/translations.h:465
 msgid "Cambodia"
 msgstr "캄보디아"
 
-#: src/translations.h:465
+#: src/translations.h:466
 msgid "Kiribati"
 msgstr "키리바시"
 
-#: src/translations.h:466
+#: src/translations.h:467
 msgid "Comoros"
 msgstr "코모로"
 
-#: src/translations.h:467
+#: src/translations.h:468
 msgid "Saint Kitts and Nevis"
 msgstr "세인트키츠네비스"
 
-#: src/translations.h:468
+#: src/translations.h:469
 msgid "Democratic People's Republic of Korea"
 msgstr "북한"
 
-#: src/translations.h:469
+#: src/translations.h:470
 msgid "Republic of Korea"
 msgstr "대한민국"
 
-#: src/translations.h:470
+#: src/translations.h:471
 msgid "Kuwait"
 msgstr "쿠웨이트"
 
-#: src/translations.h:471
+#: src/translations.h:472
 msgid "Cayman Islands"
 msgstr "케이맨 제도"
 
-#: src/translations.h:472
+#: src/translations.h:473
 msgid "Kazakhstan"
 msgstr "카자흐스탄"
 
-#: src/translations.h:473
+#: src/translations.h:474
 msgid "Lao"
 msgstr "라오스"
 
-#: src/translations.h:474
+#: src/translations.h:475
 msgid "Lebanon"
 msgstr "레바논"
 
-#: src/translations.h:475
+#: src/translations.h:476
 msgid "Saint Lucia"
 msgstr "세인트루시아"
 
-#: src/translations.h:476
+#: src/translations.h:477
 msgid "Liechtenstein"
 msgstr "리히텐슈타인"
 
-#: src/translations.h:477
+#: src/translations.h:478
 msgid "Sri Lanka"
 msgstr "스리랑카"
 
-#: src/translations.h:478
+#: src/translations.h:479
 msgid "Liberia"
 msgstr "라이베리아"
 
-#: src/translations.h:479
+#: src/translations.h:480
 msgid "Lesotho"
 msgstr "레소토"
 
-#: src/translations.h:480
+#: src/translations.h:481
 msgid "Lithuania"
 msgstr "리투아니아"
 
-#: src/translations.h:481
+#: src/translations.h:482
 msgid "Luxembourg"
 msgstr "룩셈부르크"
 
-#: src/translations.h:482
+#: src/translations.h:483
 msgid "Latvia"
 msgstr "라트비아"
 
-#: src/translations.h:483
+#: src/translations.h:484
 msgid "Libyan Arab Jamahiriya"
 msgstr "리비아"
 
-#: src/translations.h:484
+#: src/translations.h:485
 msgid "Morocco"
 msgstr "모로코"
 
-#: src/translations.h:485
+#: src/translations.h:486
 msgid "Monaco"
 msgstr "모나코"
 
-#: src/translations.h:486
+#: src/translations.h:487
 msgid "Moldova"
 msgstr "몰도바"
 
-#: src/translations.h:487
+#: src/translations.h:488
 msgid "Madagascar"
 msgstr "마다가스카르"
 
-#: src/translations.h:488
+#: src/translations.h:489
 msgid "Marshall Islands"
 msgstr "마셜 제도"
 
-#: src/translations.h:489
+#: src/translations.h:490
 msgid "Macedonia"
 msgstr "마케도니아"
 
-#: src/translations.h:490
+#: src/translations.h:491
 msgid "Mali"
 msgstr "말리"
 
-#: src/translations.h:491
+#: src/translations.h:492
 msgid "Myanmar"
 msgstr "미얀마"
 
-#: src/translations.h:492
+#: src/translations.h:493
 msgid "Mongolia"
 msgstr "몽골"
 
-#: src/translations.h:493
+#: src/translations.h:494
 msgid "Macau"
 msgstr "마카오"
 
-#: src/translations.h:494
+#: src/translations.h:495
 msgid "Northern Mariana Islands"
 msgstr "북마리아나 제도"
 
-#: src/translations.h:495
+#: src/translations.h:496
 msgid "Martinique"
 msgstr "마르티니크"
 
-#: src/translations.h:496
+#: src/translations.h:497
 msgid "Mauritania"
 msgstr "모리타니"
 
-#: src/translations.h:497
+#: src/translations.h:498
 msgid "Montserrat"
 msgstr "몬세라트"
 
-#: src/translations.h:498
+#: src/translations.h:499
 msgid "Malta"
 msgstr "몰타"
 
-#: src/translations.h:499
+#: src/translations.h:500
 msgid "Mauritius"
 msgstr "모리셔스"
 
-#: src/translations.h:500
+#: src/translations.h:501
 msgid "Maldives"
 msgstr "몰디브"
 
-#: src/translations.h:501
+#: src/translations.h:502
 msgid "Malawi"
 msgstr "말라위"
 
-#: src/translations.h:502
+#: src/translations.h:503
 msgid "Mexico"
 msgstr "멕시코"
 
-#: src/translations.h:503
+#: src/translations.h:504
 msgid "Malaysia"
 msgstr "말레이시아"
 
-#: src/translations.h:504
+#: src/translations.h:505
 msgid "Mozambique"
 msgstr "모잠비크"
 
-#: src/translations.h:505
+#: src/translations.h:506
 msgid "Namibia"
 msgstr "나미비아"
 
-#: src/translations.h:506
+#: src/translations.h:507
 msgid "New Caledonia"
 msgstr "뉴칼레도니아"
 
-#: src/translations.h:507
+#: src/translations.h:508
 msgid "Niger"
 msgstr "니제르"
 
-#: src/translations.h:508
+#: src/translations.h:509
 msgid "Norfolk Island"
 msgstr "노퍽 섬"
 
-#: src/translations.h:509
+#: src/translations.h:510
 msgid "Nigeria"
 msgstr "나이지리아"
 
-#: src/translations.h:510
+#: src/translations.h:511
 msgid "Nicaragua"
 msgstr "니카라과"
 
-#: src/translations.h:511
+#: src/translations.h:512
 msgid "Netherlands"
 msgstr "네덜란드"
 
-#: src/translations.h:512
+#: src/translations.h:513
 msgid "Norway"
 msgstr "노르웨이"
 
-#: src/translations.h:513
+#: src/translations.h:514
 msgid "Nepal"
 msgstr "네팔"
 
-#: src/translations.h:514
+#: src/translations.h:515
 msgid "Nauru"
 msgstr "나우루"
 
-#: src/translations.h:515
+#: src/translations.h:516
 msgid "Niue"
 msgstr "니우에"
 
-#: src/translations.h:516
+#: src/translations.h:517
 msgid "New Zealand"
 msgstr "뉴질랜드"
 
-#: src/translations.h:517
+#: src/translations.h:518
 msgid "Oman"
 msgstr "오만"
 
-#: src/translations.h:518
+#: src/translations.h:519
 msgid "Panama"
 msgstr "파나마"
 
-#: src/translations.h:519
+#: src/translations.h:520
 msgid "Peru"
 msgstr "페루"
 
-#: src/translations.h:520
+#: src/translations.h:521
 msgid "French Polynesia"
 msgstr "프랑스령 폴리네시아"
 
-#: src/translations.h:521
+#: src/translations.h:522
 msgid "Papua New Guinea"
 msgstr "파푸아뉴기니"
 
-#: src/translations.h:522
+#: src/translations.h:523
 msgid "Philippines"
 msgstr "필리핀"
 
-#: src/translations.h:523
+#: src/translations.h:524
 msgid "Pakistan"
 msgstr "파키스탄"
 
-#: src/translations.h:524
+#: src/translations.h:525
 msgid "Poland"
 msgstr "폴란드"
 
-#: src/translations.h:525
+#: src/translations.h:526
 msgid "Saint Pierre and Miquelon"
 msgstr "생피에르 미클롱"
 
-#: src/translations.h:526
+#: src/translations.h:527
 msgid "Pitcairn"
 msgstr "핏케언 제도"
 
-#: src/translations.h:527
+#: src/translations.h:528
 msgid "Puerto Rico"
 msgstr "푸에르토리코"
 
-#: src/translations.h:528
+#: src/translations.h:529
 msgid "Palestinian Territories"
 msgstr "팔레스타인"
 
-#: src/translations.h:529
+#: src/translations.h:530
 msgid "Portugal"
 msgstr "포르투갈"
 
-#: src/translations.h:530
+#: src/translations.h:531
 msgid "Palau"
 msgstr "팔라우"
 
-#: src/translations.h:531
+#: src/translations.h:532
 msgid "Paraguay"
 msgstr "파라과이"
 
-#: src/translations.h:532
+#: src/translations.h:533
 msgid "Qatar"
 msgstr "카타르"
 
-#: src/translations.h:533
+#: src/translations.h:534
 msgid "Réunion"
 msgstr "레위니옹"
 
-#: src/translations.h:534
+#: src/translations.h:535
 msgid "Romania"
 msgstr "루마니아"
 
-#: src/translations.h:535
+#: src/translations.h:536
 msgid "Serbia"
 msgstr "세르비아"
 
-#: src/translations.h:536
+#: src/translations.h:537
 msgid "Russian Federation"
 msgstr "러시아 연방"
 
-#: src/translations.h:537
+#: src/translations.h:538
 msgid "Rwanda"
 msgstr "르완다"
 
-#: src/translations.h:538
+#: src/translations.h:539
 msgid "Saudi Arabia"
 msgstr "사우디아라비아"
 
-#: src/translations.h:539
+#: src/translations.h:540
 msgid "Solomon Islands"
 msgstr "솔로몬 제도"
 
-#: src/translations.h:540
+#: src/translations.h:541
 msgid "Seychelles"
 msgstr "세이셸"
 
-#: src/translations.h:541
+#: src/translations.h:542
 msgid "Sudan"
 msgstr "수단"
 
-#: src/translations.h:542
+#: src/translations.h:543
 msgid "Sweden"
 msgstr "스웨덴"
 
-#: src/translations.h:543
+#: src/translations.h:544
 msgid "Singapore"
 msgstr "싱가포르"
 
-#: src/translations.h:544
+#: src/translations.h:545
 msgid "Saint Helena"
 msgstr "세인트 헬레나"
 
-#: src/translations.h:545
+#: src/translations.h:546
 msgid "Slovenia"
 msgstr "슬로베니아"
 
-#: src/translations.h:546
+#: src/translations.h:547
 msgid "Svalbard and Jan Mayen"
 msgstr "스발바르 얀마옌 제도"
 
-#: src/translations.h:547
+#: src/translations.h:548
 msgid "Slovakia"
 msgstr "슬로바키아"
 
-#: src/translations.h:548
+#: src/translations.h:549
 msgid "Sierra Leone"
 msgstr "시에라리온"
 
-#: src/translations.h:549
+#: src/translations.h:550
 msgid "San Marino"
 msgstr "산마리노"
 
-#: src/translations.h:550
+#: src/translations.h:551
 msgid "Senegal"
 msgstr "세네갈"
 
-#: src/translations.h:551
+#: src/translations.h:552
 msgid "Somalia"
 msgstr "소말리아"
 
-#: src/translations.h:552
+#: src/translations.h:553
 msgid "Suriname"
 msgstr "수리남"
 
-#: src/translations.h:553
+#: src/translations.h:554
 msgid "Sao Tome and Principe"
 msgstr "상투메 프린시페"
 
-#: src/translations.h:554
+#: src/translations.h:555
 msgid "El Salvador"
 msgstr "엘살바도르"
 
-#: src/translations.h:555
+#: src/translations.h:556
 msgid "Syrian Arab Republic"
 msgstr "시리아"
 
-#: src/translations.h:556
+#: src/translations.h:557
 msgid "Swaziland"
 msgstr "스와질란드"
 
-#: src/translations.h:557
+#: src/translations.h:558
 msgid "Turks and Caicos Islands"
 msgstr "터크스 케이커스 제도"
 
-#: src/translations.h:558
+#: src/translations.h:559
 msgid "Chad"
 msgstr "차드"
 
-#: src/translations.h:559
+#: src/translations.h:560
 msgid "French Southern Territories"
 msgstr "프랑스령 남부 영토"
 
-#: src/translations.h:560
+#: src/translations.h:561
 msgid "Togo"
 msgstr "토고"
 
-#: src/translations.h:561
+#: src/translations.h:562
 msgid "Thailand"
 msgstr "태국"
 
-#: src/translations.h:562
+#: src/translations.h:563
 msgid "Tajikistan"
 msgstr "타지키스탄"
 
-#: src/translations.h:563
+#: src/translations.h:564
 msgid "Tokelau"
 msgstr "토켈라우 제도"
 
-#: src/translations.h:564
+#: src/translations.h:565
 msgid "East Timor"
 msgstr "동티모르"
 
-#: src/translations.h:565
+#: src/translations.h:566
 msgid "Turkmenistan"
 msgstr "투르크메니스탄"
 
-#: src/translations.h:566
+#: src/translations.h:567
 msgid "Tunisia"
 msgstr "튀니지"
 
-#: src/translations.h:567
+#: src/translations.h:568
 msgid "Tonga"
 msgstr "통가"
 
-#: src/translations.h:568
+#: src/translations.h:569
 msgid "Turkey"
 msgstr "터키"
 
-#: src/translations.h:569
+#: src/translations.h:570
 msgid "Trinidad and Tobago"
 msgstr "트리니다드토바고"
 
-#: src/translations.h:570
+#: src/translations.h:571
 msgid "Tuvalu"
 msgstr "투발루"
 
-#: src/translations.h:571
+#: src/translations.h:572
 msgid "Taiwan"
 msgstr "대만"
 
-#: src/translations.h:572
+#: src/translations.h:573
 msgid "Tanzania"
 msgstr "탄자니아"
 
-#: src/translations.h:573
+#: src/translations.h:574
 msgid "Ukraine"
 msgstr "우크라이나"
 
-#: src/translations.h:574
+#: src/translations.h:575
 msgid "Uganda"
 msgstr "우간다"
 
-#: src/translations.h:575
+#: src/translations.h:576
 msgid "United States Minor Outlying Islands"
 msgstr "미국령 군소 제도"
 
-#: src/translations.h:576
+#: src/translations.h:577
 msgid "United States"
 msgstr "미국"
 
-#: src/translations.h:577
+#: src/translations.h:578
 msgid "Uruguay"
 msgstr "우루과이"
 
-#: src/translations.h:578
+#: src/translations.h:579
 msgid "Uzbekistan"
 msgstr "우즈베키스탄"
 
-#: src/translations.h:579
+#: src/translations.h:580
 msgid "Vatican City State"
 msgstr "바티칸 시국"
 
-#: src/translations.h:580
+#: src/translations.h:581
 msgid "Saint Vincent and the Grenadines"
 msgstr "세인트 빈센트 그레나딘"
 
-#: src/translations.h:581
+#: src/translations.h:582
 msgid "Venezuela"
 msgstr "베네수엘라"
 
-#: src/translations.h:582
+#: src/translations.h:583
 msgid "British Virgin Islands"
 msgstr "영국령 버진아일랜드"
 
-#: src/translations.h:583
+#: src/translations.h:584
 msgid "United States Virgin Islands"
 msgstr "미국령 버진아일랜드"
 
-#: src/translations.h:584
+#: src/translations.h:585
 msgid "Viet Nam"
 msgstr "베트남"
 
-#: src/translations.h:585
+#: src/translations.h:586
 msgid "Vanuatu"
 msgstr "바누아투"
 
-#: src/translations.h:586
+#: src/translations.h:587
 msgid "Wallis and Futuna"
 msgstr "월리스 푸투나 제도"
 
-#: src/translations.h:587
+#: src/translations.h:588
 msgid "Samoa"
 msgstr "사모아"
 
-#: src/translations.h:588
+#: src/translations.h:589
 msgid "Yemen"
 msgstr "예멘"
 
-#: src/translations.h:589
+#: src/translations.h:590
 msgid "Mayotte"
 msgstr "마요트"
 
-#: src/translations.h:590
+#: src/translations.h:591
 msgid "Yugoslavia"
 msgstr "유고슬라비아"
 
-#: src/translations.h:591
+#: src/translations.h:592
 msgid "South Africa"
 msgstr "남아프리카공화국"
 
-#: src/translations.h:592
+#: src/translations.h:593
 msgid "Zambia"
 msgstr "잠비아"
 
-#: src/translations.h:593
+#: src/translations.h:594
 msgid "Zimbabwe"
 msgstr "짐바브웨"
 
-#: src/translations.h:597
+#: src/translations.h:598
 msgid "&Undo"
 msgstr "실행 취소(&U)"
 
-#: src/translations.h:598
+#: src/translations.h:599
 msgid "&Redo"
 msgstr "다시 실행(&R)"
 
-#: src/translations.h:599
+#: src/translations.h:600
 msgid "Cu&t"
 msgstr "잘라내기(&t)"
 
-#: src/translations.h:600
+#: src/translations.h:601
 msgid "&Copy"
 msgstr "복사(&C)"
 
-#: src/translations.h:601
+#: src/translations.h:602
 msgid "&Paste"
 msgstr "붙여넣기(&P)"
 
-#: src/translations.h:602 src/ui_locationDialogGui.h:432
+#: src/translations.h:603 src/ui_locationDialogGui.h:432
 #: plugins/Oculars/src/ui_ocularDialog.h:1074
 #: plugins/Oculars/src/ui_ocularDialog.h:1083
 #: plugins/Oculars/src/ui_ocularDialog.h:1090
@@ -3856,56 +3906,56 @@ msgstr "붙여넣기(&P)"
 msgid "Delete"
 msgstr "삭제"
 
-#: src/translations.h:603
+#: src/translations.h:604
 msgid "Select All"
 msgstr "모두 선택"
 
-#: src/translations.h:604
+#: src/translations.h:605
 msgid "Look in:"
 msgstr ""
 
-#: src/translations.h:605
+#: src/translations.h:606
 msgid "Directory:"
 msgstr "디렉토리:"
 
-#: src/translations.h:606
+#: src/translations.h:607
 msgid "Folder"
 msgstr "폴더"
 
-#: src/translations.h:607
+#: src/translations.h:608
 msgid "&Choose"
 msgstr "선택(&C)"
 
-#: src/translations.h:608 src/ui_configurationDialog.h:1167
+#: src/translations.h:609 src/ui_configurationDialog.h:1177
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:516
 msgid "Cancel"
 msgstr "취소"
 
-#: src/translations.h:609
+#: src/translations.h:610
 msgid "Files of type:"
 msgstr ""
 
-#: src/translations.h:610
+#: src/translations.h:611
 msgid "Date Modified"
 msgstr ""
 
-#: src/translations.h:611
+#: src/translations.h:612
 msgid "Directories"
 msgstr ""
 
-#: src/translations.h:612
+#: src/translations.h:613
 msgid "Computer"
 msgstr "컴퓨터"
 
-#: src/translations.h:613
+#: src/translations.h:614
 msgid "&Open"
 msgstr "열기(&O)"
 
-#: src/translations.h:614
+#: src/translations.h:615
 msgid "File &name:"
 msgstr "파일 이름(&n):"
 
-#: src/translations.h:615
+#: src/translations.h:616
 msgid "Copy &Link Location"
 msgstr "링크 주소 복사(&L)"
 
@@ -3930,7 +3980,7 @@ msgstr "프로그램 정보"
 msgid "Log"
 msgstr "로그"
 
-#: src/ui_helpDialogGui.h:290 src/ui_configurationDialog.h:1088
+#: src/ui_helpDialogGui.h:290 src/ui_configurationDialog.h:1094
 msgid "Edit keyboard shortcuts..."
 msgstr "키보드 단축키 편집..."
 
@@ -4021,170 +4071,176 @@ msgstr "현재 위치를 기본으로 설정"
 msgid "Get location from Network"
 msgstr "네트워크에서 위치 받아오기"
 
-#: src/ui_searchDialogGui.h:560
+#: src/ui_searchDialogGui.h:606
 msgid "Find Object"
 msgstr "천체 찾기"
 
-#: src/ui_searchDialogGui.h:561
+#: src/ui_searchDialogGui.h:607
 msgid "Find Object or Position"
 msgstr "천체 또는 위치 찾기"
 
-#: src/ui_searchDialogGui.h:564 src/ui_searchDialogGui.h:568
+#: src/ui_searchDialogGui.h:610 src/ui_searchDialogGui.h:614
 msgid "Use tab key for select of found items"
 msgstr "Tab 키로 천체를 선택하세요"
 
-#: src/ui_searchDialogGui.h:573
+#: src/ui_searchDialogGui.h:619
 msgid "iota"
 msgstr "이오타"
 
-#: src/ui_searchDialogGui.h:576
+#: src/ui_searchDialogGui.h:622
 msgid "alpha"
 msgstr "알파"
 
-#: src/ui_searchDialogGui.h:579
+#: src/ui_searchDialogGui.h:625
 msgid "beta"
 msgstr "베타"
 
-#: src/ui_searchDialogGui.h:582
+#: src/ui_searchDialogGui.h:628
 msgid "gamma"
 msgstr "감마"
 
-#: src/ui_searchDialogGui.h:585
+#: src/ui_searchDialogGui.h:631
 msgid "delta"
 msgstr "델타"
 
-#: src/ui_searchDialogGui.h:588
+#: src/ui_searchDialogGui.h:634
 msgid "epsilon"
 msgstr "엡실론"
 
-#: src/ui_searchDialogGui.h:591
+#: src/ui_searchDialogGui.h:637
 msgid "zeta"
 msgstr "제타"
 
-#: src/ui_searchDialogGui.h:594
+#: src/ui_searchDialogGui.h:640
 msgid "eta"
 msgstr "에타"
 
-#: src/ui_searchDialogGui.h:597
+#: src/ui_searchDialogGui.h:643
 msgid "theta"
 msgstr "세타"
 
-#: src/ui_searchDialogGui.h:600
+#: src/ui_searchDialogGui.h:646
 msgid "kappa"
 msgstr "카파"
 
-#: src/ui_searchDialogGui.h:603
+#: src/ui_searchDialogGui.h:649
 msgid "lambda"
 msgstr "람다"
 
-#: src/ui_searchDialogGui.h:606
+#: src/ui_searchDialogGui.h:652
 msgid "mu"
 msgstr "뮤"
 
-#: src/ui_searchDialogGui.h:609
+#: src/ui_searchDialogGui.h:655
 msgid "nu"
 msgstr "누"
 
-#: src/ui_searchDialogGui.h:612
+#: src/ui_searchDialogGui.h:658
 msgid "xi"
 msgstr "크사이"
 
-#: src/ui_searchDialogGui.h:615
+#: src/ui_searchDialogGui.h:661
 msgid "omicron"
 msgstr "오미크론"
 
-#: src/ui_searchDialogGui.h:618
+#: src/ui_searchDialogGui.h:664
 msgid "pi"
 msgstr "파이"
 
-#: src/ui_searchDialogGui.h:621
+#: src/ui_searchDialogGui.h:667
 msgid "rho"
 msgstr "로"
 
-#: src/ui_searchDialogGui.h:624
+#: src/ui_searchDialogGui.h:670
 msgid "sigma"
 msgstr "시그마"
 
-#: src/ui_searchDialogGui.h:627
+#: src/ui_searchDialogGui.h:673
 msgid "tau"
 msgstr "타우"
 
-#: src/ui_searchDialogGui.h:630
+#: src/ui_searchDialogGui.h:676
 msgid "upsilon"
 msgstr "입실론"
 
-#: src/ui_searchDialogGui.h:633
+#: src/ui_searchDialogGui.h:679
 msgid "phi"
 msgstr "파이"
 
-#: src/ui_searchDialogGui.h:636
+#: src/ui_searchDialogGui.h:682
 msgid "chi"
 msgstr "카이"
 
-#: src/ui_searchDialogGui.h:639
+#: src/ui_searchDialogGui.h:685
 msgid "psi"
 msgstr "프사이"
 
-#: src/ui_searchDialogGui.h:642
+#: src/ui_searchDialogGui.h:688
 msgid "omega"
 msgstr "오메가"
 
-#: src/ui_searchDialogGui.h:644
+#: src/ui_searchDialogGui.h:690
 msgid "Greek letters for Bayer designations"
 msgstr "바이어 명명법을 위한 그리스 문자"
 
-#: src/ui_searchDialogGui.h:645
+#: src/ui_searchDialogGui.h:691
 msgid "Object"
 msgstr "천체"
 
-#: src/ui_searchDialogGui.h:646
-msgid "RA/Dec (J2000):"
-msgstr "적경/적위 (J2000):"
+#: src/ui_searchDialogGui.h:693
+#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:489
+msgid "Coordinate system:"
+msgstr "좌표계:"
 
-#: src/ui_searchDialogGui.h:647
+#: src/ui_searchDialogGui.h:695
+msgid ""
+"Note: this tool doesn't apply the refraction correction for coordinates."
+msgstr ""
+
+#: src/ui_searchDialogGui.h:696
 msgid "Position"
 msgstr "위치"
 
-#: src/ui_searchDialogGui.h:649
+#: src/ui_searchDialogGui.h:698
 msgid "Some objects may be found after activation respective plug-ins"
 msgstr "일부 천체들은 필요한 플러그인을 활성화한 뒤에 찾을 수 있습니다."
 
-#: src/ui_searchDialogGui.h:651
+#: src/ui_searchDialogGui.h:700
 msgid "names in English"
 msgstr "영어 이름"
 
-#: src/ui_searchDialogGui.h:652
+#: src/ui_searchDialogGui.h:701
 msgid "Search in list..."
 msgstr "목록 검색하기..."
 
-#: src/ui_searchDialogGui.h:653
+#: src/ui_searchDialogGui.h:702
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:525
 msgid "Lists"
 msgstr "목록"
 
-#: src/ui_searchDialogGui.h:654
+#: src/ui_searchDialogGui.h:703
 msgid "On-line astronomical database SIMBAD"
 msgstr "온라인 천체 데이터베이스 SIMBAD"
 
-#: src/ui_searchDialogGui.h:655
+#: src/ui_searchDialogGui.h:704
 msgid "Extend search with SIMBAD"
 msgstr "SIMBAD로 확장 검색"
 
-#: src/ui_searchDialogGui.h:656
+#: src/ui_searchDialogGui.h:705
 msgid "Server:"
 msgstr "서버:"
 
-#: src/ui_searchDialogGui.h:657
+#: src/ui_searchDialogGui.h:706
 msgid "Search options"
 msgstr "검색 옵션"
 
-#: src/ui_searchDialogGui.h:658
+#: src/ui_searchDialogGui.h:707
 msgid "Use autofill only from the beginning of words"
 msgstr "단어의 처음 부분에서만 자동 완성 사용"
 
-#: src/ui_searchDialogGui.h:659 src/ui_viewDialog.h:1251
+#: src/ui_searchDialogGui.h:708 src/ui_viewDialog.h:1251
 #: src/ui_viewDialog.h:1257 src/ui_viewDialog.h:1259
-#: src/ui_configurationDialog.h:1168 src/ui_configurationDialog.h:1179
+#: src/ui_configurationDialog.h:1178 src/ui_configurationDialog.h:1189
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:417
 msgid "Options"
 msgstr "설정"
@@ -4408,8 +4464,8 @@ msgid "Show ecliptic line"
 msgstr "황도 보기"
 
 #: src/ui_viewDialog.h:1245
-msgid "Show Galactic plane line"
-msgstr "은하면 보기"
+msgid "Show Galactic equator line"
+msgstr ""
 
 #: src/ui_viewDialog.h:1249
 msgid "Projection"
@@ -4447,430 +4503,440 @@ msgstr "이 하늘 문화를 기본값으로 사용"
 msgid "Visible"
 msgstr "표시하기"
 
-#: src/ui_configurationDialog.h:1002
+#: src/ui_configurationDialog.h:1008
 msgid "Configuration"
 msgstr "설정"
 
-#: src/ui_configurationDialog.h:1004
+#: src/ui_configurationDialog.h:1010
 msgid "Program language"
 msgstr "프로그램 언어"
 
-#: src/ui_configurationDialog.h:1005
+#: src/ui_configurationDialog.h:1011
 msgid "Check updates"
 msgstr "업데이트 확인"
 
-#: src/ui_configurationDialog.h:1006
+#: src/ui_configurationDialog.h:1012
 msgid ""
 "Enable checking updates of Stellarium via Internet. Info for updates of "
 "stable versions you can look on the tab \"About\" of \"Help\" window."
 msgstr ""
 "인터넷을 통해 스텔라리움 업데이트 여부를 확인합니다. 업데이트 정보는 \"도움말\" 창의 \"프로그램 정보\"에서 볼 수 있습니다."
 
-#: src/ui_configurationDialog.h:1007
+#: src/ui_configurationDialog.h:1013
 msgid "Default options"
 msgstr "기본 설정"
 
-#: src/ui_configurationDialog.h:1009
+#: src/ui_configurationDialog.h:1015
 msgid ""
 "Save the settings you've changed this session to be the same the next time "
 "you start Stellarium"
 msgstr "사용 중 변경한 사항을 스텔라리움을 시작할 때에 적용되도록 저장합니다."
 
-#: src/ui_configurationDialog.h:1011
+#: src/ui_configurationDialog.h:1017
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:390
 #: plugins/FOV/src/ui_fovWindow.h:387
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:276
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:288
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:312
 msgid "Save settings"
 msgstr "설정 저장"
 
-#: src/ui_configurationDialog.h:1013
+#: src/ui_configurationDialog.h:1019
 msgid "Restore the default settings that came with Stellarium"
 msgstr "스텔라리움의 기본 설정으로 되돌립니다."
 
-#: src/ui_configurationDialog.h:1015 plugins/FOV/src/ui_fovWindow.h:386
+#: src/ui_configurationDialog.h:1021 plugins/FOV/src/ui_fovWindow.h:386
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:277
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:289
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:313
 msgid "Restore defaults"
 msgstr "기본값 복원"
 
-#: src/ui_configurationDialog.h:1016
+#: src/ui_configurationDialog.h:1022
 msgid ""
 "Restoring default settings requires a restart of Stellarium. Saving all the "
 "current options includes the current FOV and direction of view for use at "
 "next startup."
 msgstr "설정 기본값 복원은 스텔라리움을 재시작해야 합니다. 시야각과 시야 방향 설정은 다음에 프로그램을 시작할 때 반영합니다."
 
-#: src/ui_configurationDialog.h:1018
+#: src/ui_configurationDialog.h:1024
 msgid "The width of your view when Stellarium starts"
 msgstr "시작시 시야 폭"
 
-#: src/ui_configurationDialog.h:1021
+#: src/ui_configurationDialog.h:1027
 msgid "The direction you're looking when Stellarium starts"
 msgstr "시작시 시야 방향"
 
-#: src/ui_configurationDialog.h:1023 src/ui_configurationDialog.h:1190
+#: src/ui_configurationDialog.h:1029 src/ui_configurationDialog.h:1200
 msgid "Selected object information"
 msgstr "선택한 천체 정보"
 
-#: src/ui_configurationDialog.h:1025
+#: src/ui_configurationDialog.h:1031
 msgid "Display all information available"
 msgstr "가능한 모든 정보 보기"
 
-#: src/ui_configurationDialog.h:1027
+#: src/ui_configurationDialog.h:1033
 msgid "All available"
 msgstr "모두"
 
-#: src/ui_configurationDialog.h:1029
+#: src/ui_configurationDialog.h:1035
 msgid "Display no information"
 msgstr "정보 보이지 않음"
 
-#: src/ui_configurationDialog.h:1031 plugins/Oculars/src/Oculars.cpp:1938
+#: src/ui_configurationDialog.h:1037 plugins/Oculars/src/Oculars.cpp:1938
 #: plugins/Observability/src/Observability.cpp:201
 msgid "None"
 msgstr "없음"
 
-#: src/ui_configurationDialog.h:1033
+#: src/ui_configurationDialog.h:1039
 msgid "Display less information"
 msgstr "정보 일부만 표시"
 
-#: src/ui_configurationDialog.h:1035
+#: src/ui_configurationDialog.h:1041
 msgid "Short"
 msgstr "짧게"
 
-#: src/ui_configurationDialog.h:1037
+#: src/ui_configurationDialog.h:1043
 msgid "Display user settings information"
 msgstr "사용자가 설정한 정보 보기"
 
-#: src/ui_configurationDialog.h:1039
+#: src/ui_configurationDialog.h:1045
 msgid "Customized"
 msgstr "사용자 정의"
 
-#: src/ui_configurationDialog.h:1040
+#: src/ui_configurationDialog.h:1046
 msgid "Displayed fields"
 msgstr "표시 항목"
 
-#: src/ui_configurationDialog.h:1041
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:277
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:165
+#: src/ui_configurationDialog.h:1047
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:282
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:170
 msgid "Name"
 msgstr "이름"
 
-#: src/ui_configurationDialog.h:1043
+#: src/ui_configurationDialog.h:1049
 msgid "Geocentric equatorial coordinates, equinox of date"
 msgstr "현재 지구 중심 적도좌표계 좌표"
 
-#: src/ui_configurationDialog.h:1045
+#: src/ui_configurationDialog.h:1051
 msgid "Right ascension/Declination (of date)"
 msgstr "적경/적위(현재)"
 
-#: src/ui_configurationDialog.h:1046
+#: src/ui_configurationDialog.h:1052
 msgid "Catalog number(s)"
 msgstr "카탈로그 번호"
 
-#: src/ui_configurationDialog.h:1048
+#: src/ui_configurationDialog.h:1054
 msgid "Geocentric equatorial coordinates, equinox of J2000.0"
 msgstr "J2000.0 지구 중심 적도좌표계 좌표"
 
-#: src/ui_configurationDialog.h:1050
+#: src/ui_configurationDialog.h:1056
 msgid "Right ascension/Declination (J2000)"
 msgstr "적경/적위(J2000)"
 
-#: src/ui_configurationDialog.h:1051
+#: src/ui_configurationDialog.h:1057
 msgid "Absolute magnitude"
 msgstr "절대등급"
 
-#: src/ui_configurationDialog.h:1052
+#: src/ui_configurationDialog.h:1058
 msgid "Galactic coordinates"
 msgstr "은경/은위"
 
-#: src/ui_configurationDialog.h:1053
+#: src/ui_configurationDialog.h:1059
 msgid "Visual magnitude"
 msgstr "겉보기등급"
 
-#: src/ui_configurationDialog.h:1055
+#: src/ui_configurationDialog.h:1061
 msgid "Angular or physical size"
 msgstr "각지름 또는 물리적 크기"
 
-#: src/ui_configurationDialog.h:1057
+#: src/ui_configurationDialog.h:1063
 msgid "Size"
 msgstr "크기"
 
-#: src/ui_configurationDialog.h:1059
+#: src/ui_configurationDialog.h:1065
 msgid "The type of the object (star, planet, etc.)"
 msgstr "천체의 종류(별, 행성, 기타 등등)"
 
-#: src/ui_configurationDialog.h:1061
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:276
+#: src/ui_configurationDialog.h:1067
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:281
 msgid "Type"
 msgstr "종류"
 
-#: src/ui_configurationDialog.h:1063
+#: src/ui_configurationDialog.h:1069
 msgid "Spectral class, nebula type, etc."
 msgstr "분광형, 성운 종류, 기타 등등"
 
-#: src/ui_configurationDialog.h:1065
+#: src/ui_configurationDialog.h:1071
 msgid "Additional information"
 msgstr "추가 정보"
 
-#: src/ui_configurationDialog.h:1067
+#: src/ui_configurationDialog.h:1073
 msgid "Topocentric equatorial coordinates"
 msgstr "관측자 중심 적도좌표계"
 
-#: src/ui_configurationDialog.h:1069
+#: src/ui_configurationDialog.h:1075
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:155
 msgid "Hour angle/Declination"
 msgstr "시간각/적위"
 
-#: src/ui_configurationDialog.h:1071
+#: src/ui_configurationDialog.h:1077
 msgid "Horizontal coordinates"
 msgstr "지평좌표계"
 
-#: src/ui_configurationDialog.h:1073
+#: src/ui_configurationDialog.h:1079
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:157
 msgid "Altitude/Azimuth"
 msgstr "고도/방위각"
 
-#: src/ui_configurationDialog.h:1074
+#: src/ui_configurationDialog.h:1080
 msgid "Distance"
 msgstr "거리"
 
-#: src/ui_configurationDialog.h:1076
+#: src/ui_configurationDialog.h:1082
 msgid "Ecliptic coordinates, equinox of date and J2000 (only for Earth)"
 msgstr "현재와 J2000의 황도좌표계 좌표 (지구에서 볼 때)"
 
-#: src/ui_configurationDialog.h:1078
+#: src/ui_configurationDialog.h:1084
 msgid "Ecliptic coordinates"
 msgstr "황경/황위"
 
-#: src/ui_configurationDialog.h:1079
+#: src/ui_configurationDialog.h:1085
 msgid "Control"
 msgstr "제어"
 
-#: src/ui_configurationDialog.h:1081
+#: src/ui_configurationDialog.h:1087
 msgid "Allow keyboard to pan and zoom"
 msgstr "키보드로 회전과 줌을 가능하게 합니다"
 
-#: src/ui_configurationDialog.h:1083
+#: src/ui_configurationDialog.h:1089
 msgid "Enable keyboard navigation"
 msgstr "키보드 탐색 활성화"
 
-#: src/ui_configurationDialog.h:1085
+#: src/ui_configurationDialog.h:1091
 msgid "Allow mouse to pan (drag) and zoom (mousewheel)"
 msgstr "마우스로 회전(드래그)과 줌(마우스 휠)을 가능하게 합니다"
 
-#: src/ui_configurationDialog.h:1087
+#: src/ui_configurationDialog.h:1093
 msgid "Enable mouse navigation"
 msgstr "마우스 탐색 활성화"
 
-#: src/ui_configurationDialog.h:1090
+#: src/ui_configurationDialog.h:1096
 msgid "Hides the mouse cursor when inactive"
 msgstr "멈췄을 때 마우스 커서 숨기기"
 
-#: src/ui_configurationDialog.h:1092
+#: src/ui_configurationDialog.h:1098
 msgid "Mouse cursor timeout:"
 msgstr "마우스 커서 제한시간:"
 
-#: src/ui_configurationDialog.h:1094
+#: src/ui_configurationDialog.h:1100
 msgid "seconds"
 msgstr "초"
 
-#: src/ui_configurationDialog.h:1096
+#: src/ui_configurationDialog.h:1102
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:191
 msgid "Startup date and time"
 msgstr "시작시 날짜 및 시각"
 
-#: src/ui_configurationDialog.h:1098
+#: src/ui_configurationDialog.h:1104
 msgid "Use a specific date and time when Stellarium starts up"
 msgstr "스텔라리움을 시작할 때 특정한 날짜 및 시각을 사용합니다."
 
-#: src/ui_configurationDialog.h:1100
+#: src/ui_configurationDialog.h:1106
 msgid "Other:"
 msgstr "기타:"
 
-#: src/ui_configurationDialog.h:1102
+#: src/ui_configurationDialog.h:1108
 msgid "Use current local date and time"
 msgstr "현재 지방시를 사용합니다"
 
-#: src/ui_configurationDialog.h:1104
+#: src/ui_configurationDialog.h:1110
 msgid "use current"
 msgstr "현재 시간 사용"
 
-#: src/ui_configurationDialog.h:1106
+#: src/ui_configurationDialog.h:1112
 msgid "Starts Stellarium at system clock date and time"
 msgstr "시스템 날짜 및 시각으로 스텔라리움을 시작합니다."
 
-#: src/ui_configurationDialog.h:1108
+#: src/ui_configurationDialog.h:1114
 msgid "System date and time"
 msgstr "시스템 날짜 및 시각"
 
-#: src/ui_configurationDialog.h:1110
+#: src/ui_configurationDialog.h:1116
 msgid ""
 "Sets the simulation time to the next instance of this time of day when "
 "Stellarium starts"
 msgstr "스텔라리움을 시작할 때 시뮬레이션 시각을 다음 시각으로 맞춥니다."
 
-#: src/ui_configurationDialog.h:1112
+#: src/ui_configurationDialog.h:1118
 msgid "System date at:"
 msgstr "시각 지정:"
 
-#: src/ui_configurationDialog.h:1113
+#: src/ui_configurationDialog.h:1119
 msgid "Time correction"
 msgstr "시간 보정"
 
-#: src/ui_configurationDialog.h:1116
+#: src/ui_configurationDialog.h:1122
 msgid "Edit equation"
 msgstr "공식 편집"
 
-#: src/ui_configurationDialog.h:1118
+#: src/ui_configurationDialog.h:1124
 msgid "Planetarium options"
 msgstr "플라네타리움 설정"
 
-#: src/ui_configurationDialog.h:1120
+#: src/ui_configurationDialog.h:1126
 msgid ""
 "Spheric mirror distortion is used when projecting Stellarium onto a spheric "
 "mirror for low-cost planetarium systems."
 msgstr "구면경 왜곡은 저가형 플라네타리움 시스템에서 구면경에 스텔라리움을 투영할 때 사용합니다."
 
-#: src/ui_configurationDialog.h:1122
+#: src/ui_configurationDialog.h:1128
 msgid "Spheric mirror distortion"
 msgstr "구면경 왜곡"
 
-#: src/ui_configurationDialog.h:1124
+#: src/ui_configurationDialog.h:1130
 msgid "Mask out everything outside a central circle in the main view"
 msgstr "화면 중심의 원 바깥쪽에 있는 모든 것을 표시하지 않습니다"
 
-#: src/ui_configurationDialog.h:1126
+#: src/ui_configurationDialog.h:1132
 msgid "Disc viewport"
 msgstr "원형 뷰포트"
 
-#: src/ui_configurationDialog.h:1128
+#: src/ui_configurationDialog.h:1134
 msgid "Hide other constellations when you click one"
 msgstr "별자리를 클릭할 때에 다른 별자리 감추기"
 
-#: src/ui_configurationDialog.h:1130
+#: src/ui_configurationDialog.h:1136
 msgid "Select single constellation"
 msgstr "하나의 별자리 선택"
 
-#: src/ui_configurationDialog.h:1132
+#: src/ui_configurationDialog.h:1138
 msgid "Align labels with the horizon"
 msgstr "수평으로 이름표를 정렬합니다"
 
-#: src/ui_configurationDialog.h:1134
+#: src/ui_configurationDialog.h:1140
 msgid "Gravity labels"
 msgstr "중력 이름표"
 
-#: src/ui_configurationDialog.h:1136
+#: src/ui_configurationDialog.h:1142
 msgid "Toggle display backgrounds of the nebulae."
 msgstr "성운의 화면 배경을 켜고 끕니다."
 
-#: src/ui_configurationDialog.h:1138
+#: src/ui_configurationDialog.h:1144
 msgid "Show nebula background button"
 msgstr "성운 배경 버튼 보여주기"
 
-#: src/ui_configurationDialog.h:1140
+#: src/ui_configurationDialog.h:1146
 msgid "Toggle vertical and horizontal image flip buttons."
 msgstr "화면 상하 반전과 좌우 반전 단추를 켜고 끕니다."
 
-#: src/ui_configurationDialog.h:1142
+#: src/ui_configurationDialog.h:1148
 msgid "Show flip buttons"
 msgstr "반전 단추 보기"
 
-#: src/ui_configurationDialog.h:1144
+#: src/ui_configurationDialog.h:1150
 msgid ""
 "When enabled, the \"auto zoom out\" key will also set the initial viewing "
 "direction"
 msgstr "활성화되면 \"자동 축소\" 키를 눌렀을 때 초기 시야 방향으로도 돌아갑니다"
 
-#: src/ui_configurationDialog.h:1146
+#: src/ui_configurationDialog.h:1152
 msgid "Auto zoom out returns to initial direction of view"
 msgstr "자동 축소 키로 초기 시야 방향으로 돌아가기"
 
-#: src/ui_configurationDialog.h:1148
+#: src/ui_configurationDialog.h:1154
 msgid ""
 "Auto-enabling of the atmosphere for bodies with atmosphere in location window"
 msgstr "위치 창의 설정에 맞춰 대기를 자동 활성화합니다."
 
-#: src/ui_configurationDialog.h:1150
+#: src/ui_configurationDialog.h:1156
 msgid "Auto-enabling for the atmosphere"
 msgstr "대기 자동 활성화"
 
-#: src/ui_configurationDialog.h:1151
+#: src/ui_configurationDialog.h:1158
+msgid "Use decimal degrees for coordinates"
+msgstr ""
+
+#: src/ui_configurationDialog.h:1160
+msgid "Use decimal degrees"
+msgstr ""
+
+#: src/ui_configurationDialog.h:1161
 msgid "Screenshots"
 msgstr "스크린샷"
 
-#: src/ui_configurationDialog.h:1152
+#: src/ui_configurationDialog.h:1162
 msgid "Screenshot Directory"
 msgstr "스크린샷 경로"
 
-#: src/ui_configurationDialog.h:1154
+#: src/ui_configurationDialog.h:1164
 msgid "Invert colors"
 msgstr "색 반전"
 
-#: src/ui_configurationDialog.h:1155
+#: src/ui_configurationDialog.h:1165
 msgid "Star catalog updates"
 msgstr "별 목록 업데이트"
 
-#: src/ui_configurationDialog.h:1157
+#: src/ui_configurationDialog.h:1167
 msgid "Click here to start downloading"
 msgstr "내려받으려면 클릭하세요."
 
-#: src/ui_configurationDialog.h:1159
+#: src/ui_configurationDialog.h:1169
 msgid "Download this file to view even more stars"
 msgstr "더 많은 별을 볼 수 있게 파일 내려받기"
 
-#: src/ui_configurationDialog.h:1161
+#: src/ui_configurationDialog.h:1171
 msgid "Restart the download"
 msgstr "내려받기 다시 시작"
 
-#: src/ui_configurationDialog.h:1163
+#: src/ui_configurationDialog.h:1173
 msgid "Retry"
 msgstr "다시 시도"
 
-#: src/ui_configurationDialog.h:1165
+#: src/ui_configurationDialog.h:1175
 msgid "Stop the download. You can always restart it later"
 msgstr "내려받기 중단. 이후 언제라도 다시 받을 수 있습니다."
 
-#: src/ui_configurationDialog.h:1170
+#: src/ui_configurationDialog.h:1180
 msgid "Close window when script runs"
 msgstr "스크립트 실행 중에 창 닫기"
 
-#: src/ui_configurationDialog.h:1172
+#: src/ui_configurationDialog.h:1182
 msgid "Run the selected script"
 msgstr "선택한 스크립트 실행"
 
-#: src/ui_configurationDialog.h:1176
+#: src/ui_configurationDialog.h:1186
 msgid "Stop a running script"
 msgstr "실행 중인 스크립트 정지"
 
-#: src/ui_configurationDialog.h:1180
+#: src/ui_configurationDialog.h:1190
 msgid "Load at startup"
 msgstr "시작시 불러오기"
 
-#: src/ui_configurationDialog.h:1181
+#: src/ui_configurationDialog.h:1191
 msgid "configure"
 msgstr "설정"
 
-#: src/ui_configurationDialog.h:1186
+#: src/ui_configurationDialog.h:1196
 msgid "Main"
 msgstr "주 설정"
 
-#: src/ui_configurationDialog.h:1188
+#: src/ui_configurationDialog.h:1198
 msgid "Information"
 msgstr "정보"
 
-#: src/ui_configurationDialog.h:1193
+#: src/ui_configurationDialog.h:1203
 msgid "Navigation"
 msgstr "탐색"
 
-#: src/ui_configurationDialog.h:1195
+#: src/ui_configurationDialog.h:1205
 msgid "Tools"
 msgstr "도구"
 
-#: src/ui_configurationDialog.h:1197
+#: src/ui_configurationDialog.h:1207
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:452
 msgid "Scripts"
 msgstr "스크립트"
 
-#: src/ui_configurationDialog.h:1199
+#: src/ui_configurationDialog.h:1209
 msgid "Plugins"
 msgstr "플러그인"
 
@@ -5043,16 +5109,16 @@ msgstr "마우스 오른쪽 버튼 클릭으로 끝지점을 변경합니다."
 msgid "PA="
 msgstr "위치각="
 
-#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:73
+#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:78
 msgid "Angle Measure Plug-in"
 msgstr "각도 측정 플러그인"
 
-#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:76
-#: plugins/Oculars/src/gui/OcularDialog.cpp:494
+#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:81
+#: plugins/Oculars/src/gui/OcularDialog.cpp:499
 msgid "Contributors"
 msgstr "도움을 주신 분"
 
-#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:79
+#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:84
 msgid ""
 "The Angle Measure plugin is a small tool which is used to measure the "
 "angular distance between two points on the sky (and calculation of position "
@@ -5060,7 +5126,7 @@ msgid ""
 msgstr ""
 "각도 측정 플러그인은 하늘의 두 점 사이의 각도를 측정하는 작은 도구입니다(그리고 두 점 사이의 위치각도 계산할 수 있습니다)."
 
-#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:80
+#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:85
 msgid ""
 "*goes misty eyed* I recall measuring the size of the Cassini Division when I "
 "was a student. It was not the high academic glamor one might expect... It "
@@ -5072,25 +5138,25 @@ msgstr ""
 "끼고... 비도 오고... 그 때 관측실 한 쪽 끝에 망원경이 설치되어 있었고, 다른 쪽에 토성의 <em>사진</em>을 걸어서 그 쪽을 "
 "향하고 있었습니다. 우린 그걸 재서 계산했습니다. 우리가 하와이에 있었으면 했죠."
 
-#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:82
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:421
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:131
-#: plugins/Novae/src/gui/NovaeDialog.cpp:128
+#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:87
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:426
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:136
+#: plugins/Novae/src/gui/NovaeDialog.cpp:133
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:128
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:144
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:149
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:137
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:280
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:285
 msgid "Links"
 msgstr "링크"
 
-#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:83
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:422
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:132
-#: plugins/Novae/src/gui/NovaeDialog.cpp:129
+#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:88
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:427
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:137
+#: plugins/Novae/src/gui/NovaeDialog.cpp:134
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:129
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:145
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:150
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:138
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:281
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:286
 #, qt-format
 msgid ""
 "Support is provided via the Launchpad website.  Be sure to put \"%1\" in the "
@@ -5098,47 +5164,47 @@ msgid ""
 msgstr "기술지원은 Launchpad 웹사이트를 통해 제공됩니다. 게시할 때 제목에 \"%1\"을 넣어야합니다."
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
-#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:86
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:425
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:135
-#: plugins/Novae/src/gui/NovaeDialog.cpp:132
+#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:91
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:430
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:140
+#: plugins/Novae/src/gui/NovaeDialog.cpp:137
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:132
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:148
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:153
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:141
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:284
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:289
 #, qt-format
 msgid "If you have a question, you can %1get an answer here%2"
 msgstr "만일 질문이 있다면, %1이 곳%2에서 답변을 받을 수 있습니다."
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
-#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:88
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:427
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:137
-#: plugins/Novae/src/gui/NovaeDialog.cpp:134
+#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:93
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:432
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:142
+#: plugins/Novae/src/gui/NovaeDialog.cpp:139
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:134
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:150
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:155
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:143
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:286
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:291
 #, qt-format
 msgid "Bug reports can be made %1here%2."
 msgstr "버그 제보는 %1이 곳%2에서 받고 있습니다."
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
-#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:90
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:429
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:139
-#: plugins/Novae/src/gui/NovaeDialog.cpp:136
+#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:95
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:434
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:144
+#: plugins/Novae/src/gui/NovaeDialog.cpp:141
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:136
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:152
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:157
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:145
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:288
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:293
 msgid ""
 "If you would like to make a feature request, you can create a bug report, "
 "and set the severity to \"wishlist\"."
 msgstr "기능을 제안하고자 한다면, 버그 제보를 한 뒤 심각도를 \"위시리스트\"로 설정하면 됩니다."
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
-#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:92
+#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:97
 #, qt-format
 msgid ""
 "If you want to read full information about this plugin and its history, you "
@@ -5213,7 +5279,7 @@ msgstr "기본값으로 설정 저장"
 #: plugins/FOV/src/ui_fovWindow.h:405
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:279
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:566
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:291
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:315
 msgctxt "tab in plugin windows"
 msgid "About"
 msgstr "정보"
@@ -5554,19 +5620,19 @@ msgid ""
 "Actual field of view provided by this ocular/lens/telescope combination"
 msgstr "이 접안부/렌즈/망원경 조합이 지원하는 실제 시야각"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:491
+#: plugins/Oculars/src/gui/OcularDialog.cpp:496
 msgid "Oculars Plug-in"
 msgstr "접안렌즈 플러그인"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:494
+#: plugins/Oculars/src/gui/OcularDialog.cpp:499
 msgid "Barlow lens feature"
 msgstr "바로우 렌즈 부분"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:498
+#: plugins/Oculars/src/gui/OcularDialog.cpp:503
 msgid "Overview"
 msgstr "개요"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:500
+#: plugins/Oculars/src/gui/OcularDialog.cpp:505
 msgid ""
 "This plugin is intended to simulate what you would see through an eyepiece.  "
 "This configuration dialog can be used to add, modify, or delete eyepieces "
@@ -5576,7 +5642,7 @@ msgstr ""
 "이 플러그인은 당신이 접안렌즈를 통해 볼 수 있는 시야를 재현합니다. 설정에서 접안렌즈와 망원경와 CCD 센서를 추가, 수정 또는 삭제할 "
 "수 있습니다. 맨 처음 시작할 때 몇몇 샘플이 주어집니다."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:501
+#: plugins/Oculars/src/gui/OcularDialog.cpp:506
 msgid ""
 "You can choose to scale the image you see on the screen.  This is intended "
 "to show you a better comparison of what one eyepiece/telescope combination "
@@ -5590,7 +5656,7 @@ msgstr ""
 "위함입니다. 같은 접안렌즈를 초점거리가 다른 두 망원경에 대면 서로 다른 시야를 가지게 됩니다. 이 때 이미지의 배율이 높으면 버려지는 "
 "화면의 양이 늘어난다는 상반관계가 존재하므로 필요하지 않은 경우에는 사용하지 않는 것을 권합니다."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:502
+#: plugins/Oculars/src/gui/OcularDialog.cpp:507
 msgid ""
 "You can toggle a crosshair in the view.  Ideally, I wanted this to be "
 "aligned to North.  I've been unable to do so.  So currently it aligns to the "
@@ -5599,7 +5665,7 @@ msgstr ""
 "여러분은 시야에서 십자표시를 켜고 끌 수 있습니다. 이상적으론 이 십자표시가 북쪽으로 정렬되어야 하지만 그렇게 할 수 없었습니다.  "
 "그래서 지금은 화면의 위에 맞춰 정렬됩니다."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:503
+#: plugins/Oculars/src/gui/OcularDialog.cpp:508
 #, qt-format
 msgid ""
 "You can toggle a Telrad finder; this can only be done when you have not "
@@ -5610,28 +5676,28 @@ msgstr ""
 "여러분은 텔라드 파인더를 켜고 끌 수 있습니다; 이 때 접안렌즈로 보고 있지 않은 상태여야 합니다. 이 기능은 중심이 같은 0.5%1, "
 "2.0%1, 4.0%1의 크기의 원을 그려 텔라드(혹은 비슷한) 파인더를 맨눈으로 보았을 때 어떻게 보이는지를 짐작하게 해 줍니다."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:504
+#: plugins/Oculars/src/gui/OcularDialog.cpp:509
 msgid "If you find any issues, please let me know.  Enjoy!"
 msgstr "당신이 어떠한 문제를 발견했다면 즉시 알려주세요."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:507
+#: plugins/Oculars/src/gui/OcularDialog.cpp:512
 msgid "Hot Keys"
 msgstr "단축키"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:508
+#: plugins/Oculars/src/gui/OcularDialog.cpp:513
 msgid "The plug-in's key bindings can be edited in the General Tab."
 msgstr "플러그인 단축키는 일반 탭에서 편집할 수 있습니다."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:522
 #: plugins/Oculars/src/gui/OcularDialog.cpp:527
+#: plugins/Oculars/src/gui/OcularDialog.cpp:532
 msgid "[no key defined]"
 msgstr "[설정된 키가 없습니다]"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:531
+#: plugins/Oculars/src/gui/OcularDialog.cpp:536
 msgid "Switches on/off the ocular overlay."
 msgstr "접안부 오버레이 켜기/끄기"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:535
+#: plugins/Oculars/src/gui/OcularDialog.cpp:540
 msgid "Opens the pop-up navigation menu."
 msgstr "팝업 탐색 메뉴 열기"
 
@@ -5956,26 +6022,26 @@ msgstr "인공위성이 보이지 않습니다."
 msgid "%1 MHz (%2%3 kHz)"
 msgstr "%1 MHz (%2%3 kHz)"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:383
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:388
 msgid "Stellarium Satellites Plugin"
 msgstr "스텔라리움 인공위성 플러그인"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:389
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:394
 msgid ""
 "The Satellites plugin predicts the positions of artificial satellites in "
 "Earth orbit."
 msgstr "인공위성 플러그인은 지구를 도는 인공위성의 위치를 예측합니다."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:391
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:396
 msgid "Notes for users"
 msgstr "사용자를 위한 주의사항"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:392
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:397
 msgid ""
 "Satellites and their orbits are only shown when the observer is on Earth."
 msgstr "인공위성과 인공위성의 궤도는 관측자가 지구에 있을 때만 표시됩니다."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:393
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:398
 msgid ""
 "Predicted positions are only good for a fairly short time (on the order of "
 "days, weeks or perhaps a month into the past and future). Expect high "
@@ -5983,7 +6049,7 @@ msgid ""
 msgstr ""
 "위치 예측은 매우 짧은 시간(앞뒤로 며칠, 몇 주, 어쩌면 한 달 정도)에서만 정확합니다. 이 범위를 벗어나면 위치가 매우 불확실해집니다."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:394
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:399
 msgid ""
 "Orbital elements go out of date pretty quickly (over mere weeks, sometimes "
 "days).  To get useful data out, you need to update the TLE data regularly."
@@ -5992,7 +6058,7 @@ msgstr ""
 "업데이트해야합니다."
 
 #. TRANSLATORS: The translated names of the button and the tab are filled in automatically. You can check the original names in Stellarium. File names are not translated.
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:396
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:401
 #, qt-format
 msgid ""
 "Clicking the \"%1\" button in the \"%2\" tab of this dialog will revert to "
@@ -6002,18 +6068,18 @@ msgstr ""
 "\"%2\" 탭의 \"%1\" 버튼을 누르면 기본 %3 파일로 복구됩니다. 예전 파일은 %4로 백업됩니다. 이 파일들은 사용자 자료 "
 "디렉토리 \"modules/Satellites/\"에서 찾을 수 있습니다."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:402
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:407
 msgid ""
 "The Satellites plugin is still under development.  Some features are "
 "incomplete, missing or buggy."
 msgstr "인공위성 플러그인은 아직 개발중입니다. 일부 기능은 불완전하거나 작동되지 않거나 버그가 발생할 수 있습니다."
 
 #. TRANSLATORS: Title of a section in the About tab of the Satellites window
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:406
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:411
 msgid "TLE data updates"
 msgstr "TLE 데이터 업데이트"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:407
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:412
 msgid ""
 "The Satellites plugin can automatically download TLE data from Internet "
 "sources, and by default the plugin will do this if the existing data is more "
@@ -6022,7 +6088,7 @@ msgstr ""
 "인공위성 플러그인은 자동으로 인터넷상의 소스에서 TLE 데이터를 다운로드 할 수 있으며, 기본적으로 데이터가 72시간 이상이 지났을 때 "
 "플러그인이 데이터를 다운로드합니다. "
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:408
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:413
 #, qt-format
 msgid ""
 "If you disable Internet updates, you may update from a file on your "
@@ -6032,18 +6098,18 @@ msgstr ""
 "만약 인터넷 업데이트를 사용하지 않도록 설정하면, 컴퓨터에 있는 파일로 업데이트를 할 수 있습니다. 이 파일은 Celestrak "
 "업데이트와 같은 형식이어야 합니다(예시는 %1을 참조)."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:409
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:414
 msgid ""
 "<b>Note:</b> if the name of a satellite in update data has anything in "
 "square brackets at the end, it will be removed before the data is used."
 msgstr ""
 "<b>주:</b> 만약 업데이트한 자료에서 인공위성 이름의 끝에 붙은 중괄호 안에 어떤 내용이 있다면, 데이터가 쓰이기 이전에 제거됩니다."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:412
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:417
 msgid "Adding new satellites"
 msgstr "새로운 인공위성 추가하기"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:413
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:418
 msgid ""
 "1. Make sure the satellite(s) you wish to add are included in one of the "
 "URLs listed in the Sources tab of the satellites configuration dialog. 2. Go "
@@ -6053,17 +6119,17 @@ msgstr ""
 "1. 당신이 추가하고자하는 인공위성(들)이 인공위성 설정 창의 소스 탭에 있는 URL 중 하나에 포함되어 있는지 확인합니다. 2. "
 "인공위성 탭으로 이동하여 '+' 버튼을 클릭합니다. 추가하려는 인공위성(들)을 선택하고 \"추가\"버튼을 누릅니다."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:415
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:420
 msgid "Technical notes"
 msgstr "기술 주석"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:416
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:421
 msgid ""
 "Positions are calculated using the SGP4 & SDP4 methods, using NORAD TLE data "
 "as the input. "
 msgstr "위치는 NORAD TLE 데이터를 받아 SGP4 & SDP4 방법을 이용하여 계산합니다. "
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:417
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:422
 msgid ""
 "The orbital calculation code is written by Jose Luis Canales according to "
 "the revised Spacetrack Report #3 (including Spacetrack Report #6). "
@@ -6072,175 +6138,175 @@ msgstr ""
 "포함)에 따라 작성했습니다. "
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:419
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:424
 #, qt-format
 msgid "See %1this document%2 for details."
 msgstr "세부사항은 %1이 문서%2를 참고하세요."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:451
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:161
-#: plugins/Novae/src/gui/NovaeDialog.cpp:158
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:456
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:166
+#: plugins/Novae/src/gui/NovaeDialog.cpp:163
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:158
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:174
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:179
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:219
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:302
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:307
 msgid "Internet updates disabled"
 msgstr "인터넷 업데이트를 할 수 없습니다."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:453
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:469
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:163
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:197
-#: plugins/Novae/src/gui/NovaeDialog.cpp:160
-#: plugins/Novae/src/gui/NovaeDialog.cpp:194
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:458
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:474
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:168
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:202
+#: plugins/Novae/src/gui/NovaeDialog.cpp:165
+#: plugins/Novae/src/gui/NovaeDialog.cpp:199
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:160
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:212
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:176
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:234
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:181
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:239
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:221
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:283
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:304
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:332
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:309
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:337
 msgid "Updating now..."
 msgstr "지금 업데이트중입니다."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:458
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:165
-#: plugins/Novae/src/gui/NovaeDialog.cpp:162
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:463
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:170
+#: plugins/Novae/src/gui/NovaeDialog.cpp:167
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:162
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:178
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:183
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:223
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:306
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:311
 msgid "Next update: < 1 minute"
 msgstr "다음 업데이트: 1분 미만"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:460
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:167
-#: plugins/Novae/src/gui/NovaeDialog.cpp:164
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:465
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:172
+#: plugins/Novae/src/gui/NovaeDialog.cpp:169
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:164
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:180
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:185
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:225
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:308
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:313
 #, qt-format
 msgid "Next update: %1 minutes"
 msgstr "다음 업데이트: %1 분"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:462
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:169
-#: plugins/Novae/src/gui/NovaeDialog.cpp:166
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:467
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:174
+#: plugins/Novae/src/gui/NovaeDialog.cpp:171
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:166
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:182
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:187
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:227
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:310
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:315
 #, qt-format
 msgid "Next update: %1 hours"
 msgstr "다음 업데이트 : %1 시간"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:472
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:200
-#: plugins/Novae/src/gui/NovaeDialog.cpp:197
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:477
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:205
+#: plugins/Novae/src/gui/NovaeDialog.cpp:202
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:215
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:237
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:242
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:286
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:335
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:340
 msgid "Update error"
 msgstr "업데이트 오류"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:485
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:490
 #, qt-format
 msgid "Updated %1/%2 satellite(s); %3 added; %4 removed"
 msgstr "%1/%2 인공위성이 업데이트되었습니다; %3 추가됨; %4 제거됨"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:487
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:492
 #, qt-format
 msgid "Updated %1/%2 satellite(s); %3 added; %4 missing"
 msgstr "%1/%2 인공위성이 업데이트되었습니다; %3 추가됨; %4 없어짐"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:549
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:554
 msgid "[new source]"
 msgstr "[새로운 소스]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:601
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:606
 #: plugins/Satellites/src/ui_satellitesDialog.h:686
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:186
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:191
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:237
-#: plugins/Novae/src/gui/NovaeDialog.cpp:183
+#: plugins/Novae/src/gui/NovaeDialog.cpp:188
 #: plugins/Novae/src/ui_novaeDialog.h:240
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:183
 #: plugins/Quasars/src/ui_quasarsDialog.h:265
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:199
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:204
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:271
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:272
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:311
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:323
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:328
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:519
 msgid "Update now"
 msgstr "지금 업데이트"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:603
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:188
-#: plugins/Novae/src/gui/NovaeDialog.cpp:185
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:608
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:193
+#: plugins/Novae/src/gui/NovaeDialog.cpp:190
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:185
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:201
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:206
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:274
 msgid "Update from files"
 msgstr "파일에서 업데이트"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:645
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:650
 msgid "[orbit calculation error]"
 msgstr "[궤도 계산 오류]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:646
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:651
 msgid "[all newly added]"
 msgstr "[새로 추가된 위성]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:647
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:652
 msgid "[all not displayed]"
 msgstr "[모든 표시되지 않은 위성]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:648
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:653
 msgid "[all displayed]"
 msgstr "[모든 표시된 위성]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:649
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:654
 msgid "[all]"
 msgstr "[전부]"
 
 #. TRANSLATORS: Displayed in the satellite group selection box.
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:693
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:698
 msgid "New group..."
 msgstr "새 그룹..."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:899
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:904
 msgid "Select TLE Update File"
 msgstr "TLE 업데이트 파일을 선택하세요"
 
-#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:144
+#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:149
 msgid "Downloading data..."
 msgstr "데이터를 다운로드중입니다..."
 
-#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:145
+#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:150
 msgid ""
 "Stellarium is downloading satellite data from the update sources. Please "
 "wait..."
 msgstr "Stellarium이 업데이트 소스로부터 인공위성 데이터를 다운로드중입니다. 잠시만 기다려주세요..."
 
-#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:161
+#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:166
 msgid "Select TLE source file(s)..."
 msgstr "TLE 소스파일을 선택하세요..."
 
-#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:176
-#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:177
-#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:236
-#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:237
+#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:181
+#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:182
+#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:241
+#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:242
 msgid "Processing data..."
 msgstr "데이터 처리..."
 
-#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:231
+#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:236
 msgid "No data could be downloaded. Try again later."
 msgstr "데이터를 다운로드할 수 없습니다. 나중에 다시 시도하세요."
 
-#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:364
+#: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:369
 #, qt-format
 msgid "Catalog Number: %1"
 msgstr "카탈로그 번호: %1"
@@ -6502,30 +6568,30 @@ msgstr "연결 끊김"
 msgid "Stopped"
 msgstr "멈춤"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:242
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:247
 msgid "Telescope Control plug-in"
 msgstr "망원경 제어 플러그인"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:243
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:248
 #: plugins/TimeZoneConfiguration/src/gui/TimeZoneConfigurationWindow.cpp:105
-#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:97
+#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:102
 #: plugins/FOV/src/gui/FOVWindow.cpp:79
 #: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:81
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:91
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:102
 #, qt-format
 msgid "Version %1"
 msgstr "버전 %1"
 
 #. TRANSLATORS: Symbol for "number"
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:273
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:278
 msgid "#"
 msgstr "#"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:275
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:280
 msgid "Status"
 msgstr "상태"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:292
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:297
 #, qt-format
 msgid ""
 "To slew a connected telescope to an object (for example, a star), select "
@@ -6537,7 +6603,7 @@ msgstr ""
 "현재 화면 중앙으로 이동하려면, Alt 키를 누른 상태에서 망원경의 번호를 누르세요."
 
 #. TRANSLATORS: Currently, it is very unlikely if not impossible to actually see this text. :)
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:299
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:304
 msgid ""
 "No device model descriptions are available. Stellarium will not be able to "
 "control a telescope on its own, but it is still possible to do it through an "
@@ -6547,65 +6613,65 @@ msgstr ""
 "연결할 수는 있습니다."
 
 #. TRANSLATORS: The translated name of the Add button is automatically inserted.
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:304
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:309
 #, qt-format
 msgid "Press the \"%1\" button to set up a new telescope connection."
 msgstr "새로운 망원경 연결을 설정하려면 \"%1\" 버튼을 누르세요."
 
 #. TRANSLATORS: Telescope connection type
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:318
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:323
 msgid "local, Stellarium"
 msgstr "로컬, 스텔라리움"
 
 #. TRANSLATORS: Telescope connection type
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:322
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:327
 msgid "local, external"
 msgstr "로컬, 외부"
 
 #. TRANSLATORS: Telescope connection type
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:326
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:331
 msgid "remote, unknown"
 msgstr "원격, 알려지지 않음"
 
 #. TRANSLATORS: Telescope connection type
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:330
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:335
 msgid "virtual"
 msgstr "가상"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:752
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:757
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:395
 msgid "Start"
 msgstr "시작"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:753
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:758
 msgid "Start the selected local telescope"
 msgstr "선택된 로컬 망원경을 시작하세요."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:758
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:763
 msgid "Stop"
 msgstr "멈춤"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:759
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:764
 msgid "Stop the selected local telescope"
 msgstr "선택된 로컬 망원경을 정지하세요."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:764
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:769
 msgid "Connect"
 msgstr "연결"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:765
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:770
 msgid "Connect to the selected telescope"
 msgstr "선택된 망원경을 연결하세요."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:770
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:775
 msgid "Disconnect"
 msgstr "연결 해제"
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:771
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:776
 msgid "Disconnect from the selected telescope"
 msgstr "선택된 망원경으로부터 접속을 해제하세요."
 
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:792
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:797
 msgid "Select a directory"
 msgstr "디렉토리 선택"
 
@@ -6713,10 +6779,6 @@ msgid ""
 msgstr ""
 "망원경에서 신호가 스텔라리움까지 가는 데 걸리는 대략적인 시간\n"
 "십자선을 건너 뛰는 경우에는 값이 증가시키세요."
-
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:489
-msgid "Coordinate system:"
-msgstr "좌표계:"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:490
 msgid "J2000 (default)"
@@ -7195,8 +7257,8 @@ msgid "Nebula hints"
 msgstr "성운 힌트"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:370
-msgid "Galactic plane line"
-msgstr "은하면"
+msgid "Galactic equator line"
+msgstr ""
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:399
 msgid "Effects"
@@ -7321,12 +7383,12 @@ msgstr ""
 "들어 \"%3\"로 검색하면 %4, 즉 헬리 혜성이 나오지만, \"%5\"로 검색하면 소행성 %6가 나옵니다."
 
 #. TRANSLATORS: Appears as the text of hyperlinks linking to websites. :)
-#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:88
+#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:93
 msgid "website"
 msgstr "웹사이트"
 
 #. TRANSLATORS: IAU = International Astronomical Union
-#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:92
+#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:97
 #, qt-format
 msgid ""
 "You can import comet and asteroid data formatted in the export formats of "
@@ -7338,7 +7400,7 @@ msgstr ""
 "수도 있고, 인터넷에서 목록을 다운로드할 수도 있고, 온라인으로 Minor Planet and Comet Ephemeris "
 "Service(MPES)를 검색할 수도 있습니다."
 
-#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:96
+#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:101
 msgid "Solar System Editor plug-in"
 msgstr "태양계 편집기 플러그인"
 
@@ -7506,31 +7568,31 @@ msgstr "초신성의 종류: %1"
 msgid "Maximum brightness: %1"
 msgstr "최대 밝기: %1"
 
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:111
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:116
 msgid "Historical Supernovae Plug-in"
 msgstr "역사적인 초신성 플러그인"
 
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:116
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:121
 msgid "This plugin allows you to see some bright historical supernovae: "
 msgstr "이 플러그인은 몇몇 역사적인 밝은 초신성을 보여줍니다. "
 
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:118
-#: plugins/Novae/src/gui/NovaeDialog.cpp:120
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:123
+#: plugins/Novae/src/gui/NovaeDialog.cpp:125
 #, qt-format
 msgid "This list altogether contains %1 stars."
 msgstr "이 목록은 총 %1개의 별을 포함합니다."
 
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:119
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:124
 #, qt-format
 msgid "All those supernovae are brighter %1 at peak of brightness."
 msgstr "이 초신성들은 모두 최대 밝기일 때 %1보다 밝습니다."
 
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:121
-#: plugins/Novae/src/gui/NovaeDialog.cpp:122
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:126
+#: plugins/Novae/src/gui/NovaeDialog.cpp:127
 msgid "Light curves"
 msgstr "광도 곡선"
 
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:122
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:127
 #, qt-format
 msgid ""
 "This plugin implements a simple model of light curves for different "
@@ -7541,47 +7603,47 @@ msgstr ""
 "이 플러그인은 초신성의 광도 곡선의 간단한 모델을 포함합니다. I형과 II형 초신성의 일반적인 광도 곡선 모양은 %1여기%2에서 볼 수 "
 "있고(가로 단위는 일), 이 모델이 이 플러그인에 사용되었습니다."
 
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:124
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:129
 msgid "Acknowledgments"
 msgstr "감사의 말씀"
 
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:125
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:133
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:130
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:138
 msgid ""
 "We thank the following people for their contribution and valuable comments:"
 msgstr "개발에 기여해 주시고 소중한 의견을 주신 아래 분들께 감사의 말씀을 드립니다 :"
 
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:127
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:132
 msgid "Sergei Blinnikov"
 msgstr "Sergei Blinnikov"
 
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:129
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:134
 msgid "Institute for Theoretical and Experimental Physics"
 msgstr "이론 및 실험 물리학 연구소,"
 
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:130
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:138
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:135
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:143
 msgid "in Russia"
 msgstr "러시아"
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:141
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:154
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:146
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:159
 #, qt-format
 msgid ""
 "If you want to read full information about this plugin, its history and "
 "format of catalog, you can %1get info here%2."
 msgstr "이 플러그인에 대한 모든 정보와 역사, 카탈로그 형식을 읽고 싶으시다면, %1이 곳%2에서 정보를 얻을 수 있습니다."
 
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:171
-#: plugins/Novae/src/gui/NovaeDialog.cpp:168
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:176
+#: plugins/Novae/src/gui/NovaeDialog.cpp:173
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:168
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:184
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:189
 #, qt-format
 msgid "Next update: %1 days"
 msgstr "다음 업데이트: %1일 후"
 
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:207
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:212
 msgid "Historical supernovae is updated"
 msgstr "역사적인 초신성이 업데이트되었습니다."
 
@@ -7628,7 +7690,7 @@ msgstr "[다음 업데이트 정보]"
 msgid "Bright Novae"
 msgstr "밝은 신성"
 
-#: plugins/Novae/src/Novae.cpp:77 plugins/Novae/src/gui/NovaeDialog.cpp:115
+#: plugins/Novae/src/Novae.cpp:77 plugins/Novae/src/gui/NovaeDialog.cpp:120
 msgid "A plugin that shows some bright novae in the Milky Way galaxy."
 msgstr "우리 은하의 몇몇 밝은 신성을 보여주는 플러그인."
 
@@ -7646,11 +7708,11 @@ msgstr "종류: <b>%1</b>(%2)"
 msgid "nova"
 msgstr "신성"
 
-#: plugins/Novae/src/gui/NovaeDialog.cpp:110
+#: plugins/Novae/src/gui/NovaeDialog.cpp:115
 msgid "Bright Novae Plug-in"
 msgstr "밝은 신성 플러그인"
 
-#: plugins/Novae/src/gui/NovaeDialog.cpp:116
+#: plugins/Novae/src/gui/NovaeDialog.cpp:121
 msgid ""
 "You can find novae via search tool by entering designation of nova or its "
 "common name (e.g. 'Nova Cygni 1975' or 'V1500 Cyg')."
@@ -7658,43 +7720,43 @@ msgstr ""
 "검색 도구에 신성 이름이나 일반적인 이름(예 : 'Nova Cygni 1975' 또는 'V1500 Cyg')을 입력하여 신성을 찾을 수 "
 "있습니다."
 
-#: plugins/Novae/src/gui/NovaeDialog.cpp:118
+#: plugins/Novae/src/gui/NovaeDialog.cpp:123
 msgid "This plugin allows you to see recent bright novae: "
 msgstr "이 플러그인은 다음과 같은 밝은 신성들을 볼 수 있게 합니다: "
 
-#: plugins/Novae/src/gui/NovaeDialog.cpp:121
+#: plugins/Novae/src/gui/NovaeDialog.cpp:126
 #, qt-format
 msgid "All those novae are brighter than %1 at peak of brightness."
 msgstr "이 신성들은 모두 최대 밝기일 때 %1보다 밝습니다."
 
-#: plugins/Novae/src/gui/NovaeDialog.cpp:123
+#: plugins/Novae/src/gui/NovaeDialog.cpp:128
 msgid ""
 "This plugin uses a very simple model for calculation of light curves for "
 "novae stars."
 msgstr "이 플러그인은 신성의 광도 곡선 계산을 위해 매우 간단한 모델을 사용합니다."
 
-#: plugins/Novae/src/gui/NovaeDialog.cpp:124
+#: plugins/Novae/src/gui/NovaeDialog.cpp:129
 #, qt-format
 msgid ""
 "This model is based on time for decay by %1 magnitudes from the maximum "
 "value, where %1 is 2, 3, 6 and 9."
 msgstr "이 모델은 %1이 2, 3, 6, 9일 때 밝기가 최대 등급에서 %1등급만큼 증가되는 시간을 기초로 합니다."
 
-#: plugins/Novae/src/gui/NovaeDialog.cpp:125
+#: plugins/Novae/src/gui/NovaeDialog.cpp:130
 msgid ""
 "If a nova has no values for decay of magnitude then this plugin will use "
 "generalized values for it."
 msgstr "만일 신성의 등급 감소 값이 없는 경우, 플러그인은 일반적인 값을 사용합니다."
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
-#: plugins/Novae/src/gui/NovaeDialog.cpp:138
+#: plugins/Novae/src/gui/NovaeDialog.cpp:143
 #, qt-format
 msgid ""
 "If you want to read full information about this plugin, its history and "
 "catalog format, you can %1get info here%2."
 msgstr "이 플러그인에 대한 모든 정보와 역사, 카탈로그 형식을 읽고 싶으시다면, %1이 곳%2에서 정보를 얻을 수 있습니다."
 
-#: plugins/Novae/src/gui/NovaeDialog.cpp:204
+#: plugins/Novae/src/gui/NovaeDialog.cpp:209
 msgid "Novae is updated"
 msgstr "신성이 업데이트되었습니다."
 
@@ -7808,7 +7870,7 @@ msgid "Pulsars"
 msgstr "펄서"
 
 #: plugins/Pulsars/src/Pulsars.cpp:76
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:124
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:129
 msgid ""
 "This plugin plots the position of various pulsars, with object information "
 "about each one."
@@ -7950,11 +8012,11 @@ msgid ""
 "radio emission"
 msgstr "엑스선 열복사 펄스를 내보내지만 전파 방출은 감지되지 않는 독립된 중성자별"
 
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:119
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:124
 msgid "Pulsars Plug-in"
 msgstr "펄서 플러그인"
 
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:125
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:130
 #, qt-format
 msgid ""
 "Pulsar data is derived from 'The ATNF Pulsar Catalogue'  (Manchester, R. N., "
@@ -7965,44 +8027,44 @@ msgstr ""
 "A. & Hobbs, M., Astron. J., 129, 1993-2006 (2005) (%1astro-ph/0412641%2))에서 "
 "얻었습니다."
 
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:128
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:133
 #, qt-format
 msgid "Current catalog contains info about %1 pulsars."
 msgstr "현재 카탈로그는 %1개의 펄서를 포함하고 있습니다."
 
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:130
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:135
 msgid "Note"
 msgstr "참고"
 
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:131
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:136
 msgid "pulsar identifiers have the prefix 'PSR'"
 msgstr "펄서 식별자는 접두어로 'PSR'을 가지고 있습니다."
 
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:132
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:137
 msgid "Acknowledgment"
 msgstr "감사의 말씀"
 
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:135
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:140
 msgid "Vladimir Samodourov"
 msgstr "Vladimir Samodourov"
 
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:137
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:142
 msgid "Pushchino Radio Astronomy Observatory"
 msgstr "Pushchino 전파천문대,"
 
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:140
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:145
 msgid "Maciej Serylak"
 msgstr "Maciej Serylak"
 
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:142
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:147
 msgid "Nancay Radioastronomical Observatory"
 msgstr "Nançay 전파천문대,"
 
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:143
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:148
 msgid "in France"
 msgstr "프랑스"
 
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:244
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:249
 msgid "Pulsars is updated"
 msgstr "펄서가 업데이트되었습니다."
 
@@ -8163,7 +8225,7 @@ msgstr "현재 카탈로그는 %1개 행성계와 %2개 외계 행성(%3개의 �
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:147
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:290
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:295
 #, qt-format
 msgid ""
 "If you want to read full information about the plugin, its history and "
@@ -8575,11 +8637,11 @@ msgstr "관측"
 msgid "Observability configuration window"
 msgstr "관측 구성창"
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:127
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:132
 msgid "Observability Plug-in"
 msgstr "관측 플러그인"
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:131
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:136
 msgid ""
 "Plugin that analyzes the observability of the selected source (or the screen "
 "center, if no source is selected). The plugin can show rise, transit, and "
@@ -8591,15 +8653,15 @@ msgid ""
 "for their advice.<br><br>Ivan Marti-Vidal (Onsala Space Observatory)"
 msgstr ""
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:133
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:138
 msgid "Explanation of some parameters"
 msgstr "일부 매개 변수에 대한 설명"
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:134
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:139
 msgid "Sun altitude at twilight:"
 msgstr "박명시 태양고도"
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:134
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:139
 msgid ""
 "Any celestial object will be considered visible when the Sun is below this "
 "altitude. The altitude at astronomical twilight ranges usually between -12 "
@@ -8609,21 +8671,21 @@ msgstr ""
 "태양이 이 고도 아래에 위치할 때 어떤 천구의 천체는 볼수 있을겁니다. 천문박명의 고도는 약 -12도에서 -18도 범위입니다. 이 값은 "
 "관측할 수 있는 Epoch의 범위의 추정에 사용합니다(아래를 보세요)."
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:136
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:141
 msgid "Horizon altitude:"
 msgstr "수평선 고도:"
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:136
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:141
 msgid ""
 "Minimum observable altitude (due to mountains, buildings, or just a limited "
 "telescope mount)."
 msgstr "최소 관측가능한 고도 (산과 빌딩 또는 제한된 망원경 가대로 인해)"
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:138
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:143
 msgid "Today ephemeris:"
 msgstr "오늘의 천체력:"
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:138
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:143
 msgid ""
 "Self-explanatory. The program will show the rise, set, and culmination "
 "(transit) times. The exact times for these ephemeris are given in two ways: "
@@ -8631,11 +8693,11 @@ msgid ""
 "time)."
 msgstr ""
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:139
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:144
 msgid "Acronychal/Cosmical rise/set:"
 msgstr "저녁의/우주적인 일출/일몰:"
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:139
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:144
 msgid ""
 "The Acronychal rise (or set) of an object happens when the object rises (or "
 "sets) just when the Sun sets (or rises), respectively. The exact dates of "
@@ -8648,11 +8710,11 @@ msgid ""
 "between Cosmical set and rise."
 msgstr ""
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:140
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:145
 msgid "Largest Sun separation:"
 msgstr "가장 큰 태양 분리:"
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:140
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:145
 msgid ""
 "Happens when the angular separation between the Sun and the celestial object "
 "are maximum. In most cases, this is equivalent to say that the Equatorial "
@@ -8667,11 +8729,11 @@ msgstr ""
 "태양은 천체에 반대편에 위치합니다. 천체가 태양으로부터 가능한 최대 각도 분리(행성이나 별이면 상관없음)에 있을 때, 그것은 자정에 거의 "
 "최고점이고, 그 적경이 하늘의 가장 어두운 영역. 즉, 그 특정 천체를 관측할 수 있는 '최적의' 밤입니다."
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:141
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:146
 msgid "Nights with source above horizon:"
 msgstr "수평선 위 광원을 지닌 밤:"
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:141
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:146
 msgid ""
 "The program computes the range of dates when the celestial object is above "
 "the horizon at least during one moment of the night. By 'night', the program "
@@ -8691,22 +8753,22 @@ msgid ""
 "by the user) will be implemented in future versions of this plugin."
 msgstr ""
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:142
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:147
 msgid "Full Moon:"
 msgstr "보름달:"
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:142
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:147
 msgid ""
 "When the Moon is selected, the program can compute the exact closest dates "
 "of the Moon's opposition to the Sun."
 msgstr "달이 선택되었을때, 프로그램은 태양에서 달의 반대편의 정확하고 가까운 날짜를 계산할 수 있습니다."
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:195
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:200
 #, qt-format
 msgid "Sun altitude at twilight: %1 deg."
 msgstr ""
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:201
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:206
 #, qt-format
 msgid "Horizon altitude: %1 deg."
 msgstr ""
@@ -8874,7 +8936,7 @@ msgid "Change sign of equation"
 msgstr ""
 
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:275
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:283
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:307
 msgid "Font size:"
 msgstr ""
 
@@ -8884,7 +8946,7 @@ msgid "Meteor Showers"
 msgstr ""
 
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:66
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:258
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:263
 msgid ""
 "This plugin displays meteor showers and a marker for each active and "
 "inactive radiant, showing real information about its activity."
@@ -9369,51 +9431,51 @@ msgstr ""
 msgid "variable"
 msgstr ""
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:166
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:171
 msgid "ZHR"
 msgstr ""
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:167
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:172
 msgid "Data Type"
 msgstr ""
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:168
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:173
 msgid "Peak"
 msgstr ""
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:179
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:184
 msgid "Start date greater than end date!"
 msgstr ""
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:183
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:188
 msgid "Time interval must be less than one year!"
 msgstr ""
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:203
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:208
 msgid "Variable"
 msgstr ""
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:206
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:211
 msgid "Real"
 msgstr ""
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:206
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:211
 msgid "Generic"
 msgstr ""
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:253
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:258
 msgid "Meteor Showers Plug-in"
 msgstr ""
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:259
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:264
 msgid "Terms"
 msgstr ""
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:260
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:265
 msgid "Meteor shower"
 msgstr ""
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:261
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:266
 msgid ""
 "A meteor shower is a celestial event in which a number of meteors are "
 "observed to radiate, or originate, from one point in the night sky. These "
@@ -9425,11 +9487,11 @@ msgid ""
 "1,000 meteors an hour."
 msgstr ""
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:262
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:267
 msgid "Radiant"
 msgstr ""
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:263
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:268
 msgid ""
 "The radiant or apparent radiant of a meteor shower is the point in the sky, "
 "from which (to a planetary observer) meteors appear to originate. The "
@@ -9437,7 +9499,7 @@ msgid ""
 "the constellation of Perseus."
 msgstr ""
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:264
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:269
 msgid ""
 "An observer might see such a meteor anywhere in the sky but the direction of "
 "motion, when traced back, will point to the radiant. A meteor that does not "
@@ -9445,18 +9507,18 @@ msgid ""
 "and is not considered part of that shower."
 msgstr ""
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:265
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:270
 msgid ""
 "Many showers have a radiant point that changes position during the interval "
 "when it appears. For example, the radiant point for the Delta Aurigids "
 "drifts by more than a degree per night."
 msgstr ""
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:266
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:271
 msgid "Zenithal Hourly Rate (ZHR)"
 msgstr ""
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:267
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:272
 msgid ""
 "In astronomy, the Zenithal Hourly Rate (ZHR) of a meteor shower is the "
 "number of meteors a single observer would see in one hour under a clear, "
@@ -9465,11 +9527,11 @@ msgid ""
 "lower and decreases the closer the radiant is to the horizon."
 msgstr ""
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:268
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:273
 msgid "Population index"
 msgstr ""
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:269
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:274
 msgid ""
 "The population index indicates the magnitude distribution of the meteor "
 "showers. The values below 2.5 correspond to distributions where bright "
@@ -9477,36 +9539,36 @@ msgid ""
 "share of faint meteors is larger than usual."
 msgstr ""
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:270
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:275
 msgid "Notes"
 msgstr ""
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:271
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:276
 msgid ""
 "This plugin was created as project of ESA Summer of Code in Space 2013."
 msgstr ""
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:272
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:277
 msgid "Info"
 msgstr ""
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:273
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:278
 msgid "Info about meteor showers you can get here:"
 msgstr ""
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:276
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:281
 #, qt-format
 msgid "%1Meteor shower%2 - article in Wikipedia"
 msgstr ""
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:278
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:283
 #, qt-format
 msgid "%1International Meteor Organization%2"
 msgstr ""
 
-#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:342
+#: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:347
 msgid "Meteor showers is updated"
 msgstr ""
 
@@ -9602,55 +9664,109 @@ msgstr ""
 msgid "Search Events"
 msgstr ""
 
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:54
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:95
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:277
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:279
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:290
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:55
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:97
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:297
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:299
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:314
 msgid "Pointer Coordinates"
 msgstr ""
 
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:57
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:58
 msgid "This plugin shows the coordinates of the mouse pointer."
 msgstr ""
 
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:95
-msgid "Show equatorial coordinates (J2000.0) of the mouse pointer"
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:97
+msgid "Show coordinates of the mouse pointer"
 msgstr ""
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:90
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:136
+msgctxt "abbreviated in the plugin"
+msgid "RA/Dec (J2000.0)"
+msgstr ""
+
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:145
+msgctxt "abbreviated in the plugin"
+msgid "RA/Dec"
+msgstr ""
+
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:158
+msgctxt "abbreviated in the plugin"
+msgid "Az/Alt"
+msgstr ""
+
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:167
+msgctxt "abbreviated in the plugin"
+msgid "Gal. Long/Lat"
+msgstr ""
+
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:179
+msgctxt "abbreviated in the plugin"
+msgid "Ecl. Long/Lat (J2000.0)"
+msgstr ""
+
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:190
+msgctxt "abbreviated in the plugin"
+msgid "HA/Dec"
+msgstr ""
+
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:101
 msgid "Pointer Coordinates plug-in"
 msgstr ""
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:119
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:130
 msgid "The top center of the screen"
 msgstr ""
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:120
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:131
 msgid "In center of the top right half of the screen"
 msgstr ""
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:121
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:132
 msgid "The right bottom corner of the screen"
 msgstr ""
 
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:280
-msgid "Show equatorial coordinates of the mouse cursor for epoch J2000.0"
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:153
+msgid "Right ascension/Declination (J2000.0)"
 msgstr ""
 
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:281
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:154
+msgid "Right ascension/Declination"
+msgstr ""
+
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:156
+msgid "Ecliptic Longitude/Latitude (J2000.0)"
+msgstr ""
+
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:158
+msgid "Galactic Longitude/Latitude"
+msgstr ""
+
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:300
+msgid "Show coordinates of the mouse cursor on the screen."
+msgstr ""
+
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:301
 msgid "Enable display of coordinates at startup"
 msgstr ""
 
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:282
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:302
 msgid "Show plug-in button on toolbar"
 msgstr ""
 
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:285
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:304
+msgid "Which coordinate system will be used for displaying"
+msgstr ""
+
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:306
+msgid "Coordinates:"
+msgstr ""
+
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:309
 msgid "Place of the string with coordinates of the mouse pointer"
 msgstr ""
 
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:287
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:311
 msgid "Place of the string:"
 msgstr ""
 
@@ -9873,6 +9989,9 @@ msgstr ""
 #~ msgid "Nebulas background images"
 #~ msgstr "성운 배경 그림"
 
+#~ msgid "RA/Dec (J2000):"
+#~ msgstr "적경/적위 (J2000):"
+
 #~ msgid "Get catalog x of y"
 #~ msgstr "y 의 x 목록 가져오기"
 
@@ -9945,8 +10064,20 @@ msgstr ""
 #~ msgid "(geometric)"
 #~ msgstr "(기하학적)"
 
+#~ msgid "Galactic Plane"
+#~ msgstr "은하면"
+
 #~ msgid "Return to default"
 #~ msgstr "기본값으로 이동"
+
+#~ msgid "Galactic plane"
+#~ msgstr "은하면"
+
+#~ msgid "Show Galactic plane line"
+#~ msgstr "은하면 보기"
+
+#~ msgid "Galactic plane line"
+#~ msgstr "은하면"
 
 #~ msgid "Dark Nebula"
 #~ msgstr "암흑성운"
