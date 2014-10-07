@@ -174,7 +174,7 @@ void StelAddOnMgr::readJsonObject(const QJsonObject& addOns)
 		qint64 addOnId = i.key().toLongLong();
 		QVariantMap attributes = i.value().toMap();
 		AddOn* addOn(new AddOn(addOnId, attributes));
-		if (addOn->isLoaded())
+		if (addOn->isValid())
 		{
 			AddOnMap amap;
 			amap.insert(addOnId, addOn);

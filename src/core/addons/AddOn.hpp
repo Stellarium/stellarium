@@ -43,7 +43,7 @@ public:
 		INVALID
 	};
 
-	bool isLoaded() { return m_bLoaded; }
+	bool isValid() { return m_bIsValid; }
 
 	quint64 getAddOnId() { return m_iAddOnId; }
 	QString getTitle() { return m_sTitle; }
@@ -76,7 +76,7 @@ private:
 	QString m_sThumbnail;
 	QList<Authors> m_authors;
 
-	bool m_bLoaded;
+	bool m_bIsValid;
 
 	Type fromStringToType(QString string);
 };

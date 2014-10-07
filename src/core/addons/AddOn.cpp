@@ -25,7 +25,7 @@
 AddOn::AddOn(const qint64 addOnId, const QVariantMap& map)
 	: m_iAddOnId(addOnId)
 	, m_eType(INVALID)
-	, m_bLoaded(false)
+	, m_bIsValid(false)
 {
 	m_eType = fromStringToType(map.value("type").toString());
 	m_sInstallId = map.value("install-id").toString();
@@ -72,7 +72,7 @@ AddOn::AddOn(const qint64 addOnId, const QVariantMap& map)
 		}
 	}
 
-	m_bLoaded = true;
+	m_bIsValid = true;
 }
 
 AddOn::~AddOn()
