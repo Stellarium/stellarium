@@ -73,8 +73,19 @@ QT_FORWARD_DECLARE_CLASS(QListWidgetItem)
 class SearchDialog : public StelDialog
 {
 	Q_OBJECT
+	Q_ENUMS(CoordinateSystem)
 
 public:
+	//! @enum CoordinateSystem
+	//! Available coordinate systems
+	enum CoordinateSystem
+	{
+		equatorialJ2000,
+		equatorial,
+		horizontal,
+		galactic
+	};
+
 	SearchDialog(QObject* parent);
 	virtual ~SearchDialog();
 	//! Notify that the application style changed
@@ -85,6 +96,25 @@ public slots:
 	void retranslate();
 	//! This style only displays the text search field and the search button
 	void setSimpleStyle();
+
+	//! Set the current coordinate system
+	void setCurrentCoordinateSystem(CoordinateSystem cs)
+	{
+		currentCoordinateSystem = cs;
+	}
+	//! Get the current coordinate system
+	CoordinateSystem getCurrentCoordinateSystem() const
+	{
+		return currentCoordinateSystem;
+	}
+	//! Get the current coordinate system key
+	QString getCurrentCoordinateSystemKey(void) const;
+	//! Set the current coordinate system from its key
+	void setCurrentCoordinateSystemKey(QString key);
+
+	void setCoordinateSystem(int csID);
+	void populateCoordinateSystemsList();
+	void populateCoordinateAxis();
 
 protected:
 	Ui_searchDialogForm* ui;
@@ -135,6 +165,7 @@ private:
 	class SimbadLookupReply* simbadReply;
 	QMap<QString, Vec3d> simbadResults;
 	class StelObjectMgr* objectMgr;
+	class QSettings* conf;
 	
 	QString substituteGreek(const QString& keyString);
 	QString getGreekLetterByName(const QString& potentialGreekLetterName);
@@ -149,6 +180,9 @@ private:
 	void populateSimbadServerList();
 	//! URL of the default SIMBAD server (Strasbourg).
 	static const char* DEF_SIMBAD_URL;
+
+	// The current coordinate system
+	CoordinateSystem currentCoordinateSystem;
 };
 
 #endif // _SEARCHDIALOG_HPP_
