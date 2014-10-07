@@ -67,10 +67,10 @@ void AngleMeasureDialog::createDialogContent()
 	connect(ui->showPositionAngleCheckBox, SIGNAL(toggled(bool)), am, SLOT(showPositionAngle(bool)));
 	ui->showPositionAngleHorizontalCheckBox->setChecked(am->isHorPaDisplayed());
 	connect(ui->showPositionAngleHorizontalCheckBox, SIGNAL(toggled(bool)), am, SLOT(showPositionAngleHor(bool)));
-	ui->showEquatorialCheckBox->setChecked(am->isEquatorial());
-	connect(ui->showEquatorialCheckBox, SIGNAL(toggled(bool)), am, SLOT(showEquatorial(bool)));
-	ui->showHorizontalCheckBox->setChecked(am->isHorizontal());
-	connect(ui->showHorizontalCheckBox, SIGNAL(toggled(bool)), am, SLOT(showHorizontal(bool)));
+	ui->showEquatorial_GroupBox->setChecked(am->isEquatorial());
+	connect(ui->showEquatorial_GroupBox, SIGNAL(toggled(bool)), am, SLOT(showEquatorial(bool)));
+	ui->showHorizontal_GroupBox->setChecked(am->isHorizontal());
+	connect(ui->showHorizontal_GroupBox, SIGNAL(toggled(bool)), am, SLOT(showHorizontal(bool)));
 	ui->azAltStartOnSkyCheckBox->setChecked(am->isHorizontalStartSkylinked());
 	connect(ui->azAltStartOnSkyCheckBox, SIGNAL(toggled(bool)), am, SLOT(showHorizontalStartSkylinked(bool)));
 	ui->azAltEndOnSkyCheckBox->setChecked(am->isHorizontalEndSkylinked());
