@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2009 Matthew Gates
+ * Copyright (C) 2014 Georg Zotti
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -67,7 +68,6 @@ AngleMeasure::AngleMeasure()
 	, angle(0.)
 	, flagUseDmsFormat(false)
 	, flagShowPA(false)
-	// GZ 5 next
 	, flagShowEquatorial(false)
 	, flagShowHorizontal(false)
 	, flagShowHorizontalPA(false)
@@ -166,7 +166,7 @@ void AngleMeasure::update(double deltaTime)
 	lineVisible.update((int)(deltaTime*1000));
 	static StelCore *core=StelApp::getInstance().getCore();
 
-	// if altAz endpoint linked to the rotating sky, move point 2, i.e., convert endPoint to endPointHor
+	// if altAz endpoint linked to the rotating sky, move respective point(s)
 	if (flagShowHorizontalStartSkylinked)
 	{
 		startPointHor = core->equinoxEquToAltAz(startPoint, StelCore::RefractionAuto);
@@ -221,11 +221,8 @@ void AngleMeasure::drawOne(StelCore *core, const StelCore::FrameType frameType, 
 
 		glDisable(GL_TEXTURE_2D);
 		// OpenGL ES 2.0 doesn't have GL_LINE_SMOOTH
-		// GZ TODO: RE-ENABLE PER COMPILE-TIME DEFINE?
 		// glEnable(GL_LINE_SMOOTH);
 		glEnable(GL_BLEND);
-
-		// TODO Test frame and decide which startpoint, perppoint,  etc...
 
 		// main line is a great circle
 		painter.setColor(lineColor[0], lineColor[1], lineColor[2], lineVisible.getInterstate());
@@ -267,18 +264,17 @@ void AngleMeasure::draw(StelCore* core)
 {
 	if (lineVisible.getInterstate() < 0.000001f && messageFader.getInterstate() < 0.000001f)
 		return;
-	if (flagShowEquatorial)
-	{
-		drawOne(core, StelCore::FrameEquinoxEqu, StelCore::RefractionAuto, textColor, lineColor);
-	}
 	if (flagShowHorizontal)
 	{
 		drawOne(core, StelCore::FrameAltAz, StelCore::RefractionOff, horTextColor, horLineColor);
 	}
+	if (flagShowEquatorial)
+	{
+		drawOne(core, StelCore::FrameEquinoxEqu, StelCore::RefractionAuto, textColor, lineColor);
+	}
 }
 
 QString AngleMeasure::calculatePositionAngle(const Vec3d p1, const Vec3d p2) const
-// GZ TBD Maybe horizontal system has inverted angular sense? Then add optional flag.
 {
 	double y = cos(p2.latitude())*sin(p2.longitude()-p1.longitude());
 	double x = cos(p1.latitude())*sin(p2.latitude()) - sin(p1.latitude())*cos(p2.latitude())*cos(p2.longitude()-p1.longitude());
@@ -435,7 +431,6 @@ void AngleMeasure::showPositionAngle(bool b)
 	flagShowPA = b;
 }
 
-// GZ new
 void AngleMeasure::showPositionAngleHor(bool b)
 {
 	flagShowHorizontalPA = b;
@@ -492,9 +487,8 @@ void AngleMeasure::restoreDefaultSettings()
 	conf->beginGroup("AngleMeasure");
 	conf->setValue("text_color", "0,0.5,1");
 	conf->setValue("line_color", "0,0.5,1");
-	// GZ 2 new
-	conf->setValue("text_color_horizontal", "0.5,0.3,0.2");
-	conf->setValue("line_color_horizontal", "0.5,0.3,0.2");
+	conf->setValue("text_color_horizontal", "0.9,0.6,0.4");
+	conf->setValue("line_color_horizontal", "0.9,0.6,0.4");
 	conf->endGroup();
 }
 
@@ -506,9 +500,8 @@ void AngleMeasure::loadSettings()
 	showPositionAngle(conf->value("show_position_angle", false).toBool());
 	textColor = StelUtils::strToVec3f(conf->value("text_color", "0,0.5,1").toString());
 	lineColor = StelUtils::strToVec3f(conf->value("line_color", "0,0.5,1").toString());
-	// GZ 7 new
-	horTextColor = StelUtils::strToVec3f(conf->value("text_color_horizontal", "0.4,0.3,0.2").toString());
-	horLineColor = StelUtils::strToVec3f(conf->value("line_color_horizontal", "0.4,0.3,0.2").toString());
+	horTextColor = StelUtils::strToVec3f(conf->value("text_color_horizontal", "0.9,0.6,0.4").toString());
+	horLineColor = StelUtils::strToVec3f(conf->value("line_color_horizontal", "0.9,0.6,0.4").toString());
 	showPositionAngleHor(conf->value("show_position_angle_horizontal", false).toBool());
 	flagShowEquatorial = conf->value("show_equatorial", true).toBool();
 	flagShowHorizontal = conf->value("show_horizontal", false).toBool();
@@ -524,7 +517,6 @@ void AngleMeasure::saveSettings()
 
 	conf->setValue("angle_format_dms", isDmsFormat());
 	conf->setValue("show_position_angle", isPaDisplayed());
-	// GZ 4 new
 	conf->setValue("show_position_angle_horizontal", isHorPaDisplayed());
 	conf->setValue("show_equatorial", isEquatorial());
 	conf->setValue("show_horizontal", isHorizontal());
