@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Thai for stellarium 0.8.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-10-05 18:17+0700\n"
+"POT-Creation-Date: 2014-10-08 02:15+0700\n"
 "PO-Revision-Date: 2014-09-18 02:20+0000\n"
 "Last-Translator: Worachate Boonplod <Unknown>\n"
 "Language-Team: MicKi Alone <Need24Get@msn.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-10-06 06:20+0000\n"
+"X-Launchpad-Export-Date: 2014-10-08 06:27+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 "X-Poedit-Country: THAILAND\n"
 "X-Poedit-Language: Thai\n"
@@ -1183,7 +1183,7 @@ msgid "Contact"
 msgstr "ติดต่อ"
 
 #: src/gui/ConfigurationDialog.cpp:742
-#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:79
+#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:89
 #: plugins/Oculars/src/gui/OcularDialog.cpp:497
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:389
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:117
@@ -1197,7 +1197,7 @@ msgid "Version"
 msgstr "รุ่น"
 
 #: src/gui/ConfigurationDialog.cpp:825
-#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:80
+#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:90
 #: plugins/Oculars/src/gui/OcularDialog.cpp:498
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:118
 #: plugins/Novae/src/gui/NovaeDialog.cpp:117
@@ -4585,7 +4585,7 @@ msgstr ""
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:390
 #: plugins/FOV/src/ui_fovWindow.h:387
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:276
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:312
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:356
 msgid "Save settings"
 msgstr "บันทึกการตั้งค่าต่าง ๆ"
 
@@ -4595,7 +4595,7 @@ msgstr "คืนค่าเดิมที่มาพร้อมกับ St
 
 #: src/ui_configurationDialog.h:1020 plugins/FOV/src/ui_fovWindow.h:386
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:277
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:313
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:357
 msgid "Restore defaults"
 msgstr "คืนค่าเริ่มต้นเดิม"
 
@@ -4726,7 +4726,7 @@ msgid "Topocentric equatorial coordinates"
 msgstr "พิกัดศูนย์สูตรจากผิวโลก"
 
 #: src/ui_configurationDialog.h:1074
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:155
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:164
 msgid "Hour angle/Declination"
 msgstr "มุมชั่วโมง/เดคลิเนชัน"
 
@@ -4735,7 +4735,7 @@ msgid "Horizontal coordinates"
 msgstr "พิกัดขอบฟ้า"
 
 #: src/ui_configurationDialog.h:1078
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:157
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:166
 msgid "Altitude/Azimuth"
 msgstr "มุมเงย/มุมทิศ"
 
@@ -5138,50 +5138,50 @@ msgstr "รวมไดเร็กทอรี:"
 msgid "..."
 msgstr "..."
 
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:56
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:124
-#: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:189
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:57
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:136
+#: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:244
 msgid "Angle Measure"
 msgstr "วัดมุม"
 
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:59
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:60
 msgid "Provides an angle measurement tool"
 msgstr "แสดงเครื่องมือวัดมุม"
 
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:124
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:136
 msgid "Angle measure"
 msgstr "วัดมุม"
 
 #. TRANSLATORS: instructions for using the AngleMeasure plugin.
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:355
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:462
 msgid "The Angle Measure is enabled:"
 msgstr "เครื่องมือวัดมุมเปิดใช้งาน:"
 
 #. TRANSLATORS: instructions for using the AngleMeasure plugin.
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:357
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:464
 msgid "Drag with the left button to measure, left-click to clear."
 msgstr "วัดมุมโดยกดปุ่มซ้ายของเมาส์แล้วลาก, คลิกซ้ายเพื่อล้างค่า"
 
 #. TRANSLATORS: instructions for using the AngleMeasure plugin.
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:359
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:466
 msgid "Right-clicking changes the end point only."
 msgstr "คลิกขวาเพื่อเปลี่ยนเฉพาะจุดสิ้นสุด"
 
 #. TRANSLATORS: PA is abbreviation for phrase "Position Angle"
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:361
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:468
 msgid "PA="
 msgstr "PA="
 
-#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:78
+#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:88
 msgid "Angle Measure Plug-in"
 msgstr "โปรแกรมเสริมการวัดมุม"
 
-#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:81
+#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:91
 #: plugins/Oculars/src/gui/OcularDialog.cpp:499
 msgid "Contributors"
 msgstr "ผู้ร่วมสมทบ"
 
-#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:84
+#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:94
 msgid ""
 "The Angle Measure plugin is a small tool which is used to measure the "
 "angular distance between two points on the sky (and calculation of position "
@@ -5190,7 +5190,14 @@ msgstr ""
 "โปรแกรมเสริมการวัดมุมเป็นเครื่องมือที่ใช้สำหรับวัดระยะห่างเชิงมุมระหว่างจุดสอ"
 "งจุดบนท้องฟ้า และคำนวณมุมตำแหน่ง (PA) ระหว่างสองจุดนั้น"
 
-#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:85
+#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:95
+msgid ""
+"Start and end points in horizontal mode can be linked to the rotating sky, "
+"which may be helpful to keep relations between landscape and some celestial "
+"object or (with both linked) for Dobsonian starhopping."
+msgstr ""
+
+#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:96
 msgid ""
 "*goes misty eyed* I recall measuring the size of the Cassini Division when I "
 "was a student. It was not the high academic glamor one might expect... It "
@@ -5199,7 +5206,7 @@ msgid ""
 "the lab. We measured. We calculated. We wished we were in Hawaii."
 msgstr ""
 
-#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:87
+#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:98
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:426
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:136
 #: plugins/Novae/src/gui/NovaeDialog.cpp:133
@@ -5210,7 +5217,7 @@ msgstr ""
 msgid "Links"
 msgstr "ลิงก์"
 
-#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:88
+#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:99
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:427
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:137
 #: plugins/Novae/src/gui/NovaeDialog.cpp:134
@@ -5227,7 +5234,7 @@ msgstr ""
 "ในหัวเรื่อง เมื่อส่งข้อความ"
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
-#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:91
+#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:102
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:430
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:140
 #: plugins/Novae/src/gui/NovaeDialog.cpp:137
@@ -5240,7 +5247,7 @@ msgid "If you have a question, you can %1get an answer here%2"
 msgstr "หากมีคำถาม คุณสามารถ%1ถามได้ที่นี่%2"
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
-#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:93
+#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:104
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:432
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:142
 #: plugins/Novae/src/gui/NovaeDialog.cpp:139
@@ -5253,7 +5260,7 @@ msgid "Bug reports can be made %1here%2."
 msgstr "รายงานข้อผิดพลาดได้%1ที่นี่%2"
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
-#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:95
+#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:106
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:434
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:144
 #: plugins/Novae/src/gui/NovaeDialog.cpp:141
@@ -5269,7 +5276,7 @@ msgstr ""
 "คุณสามารถร้องขอโดยสร้างรายงานข้อผิดพลาด แล้วตั้งค่าเป็น \"wishlist\""
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
-#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:97
+#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:108
 #, qt-format
 msgid ""
 "If you want to read full information about this plugin and its history, you "
@@ -5278,36 +5285,52 @@ msgstr ""
 "หากคุณต้องการข้อมูลโดยละเอียด และประวัติเกี่ยวกับโปรแกรมเสริมนี้ "
 "คุณสามารถอ่านได้%1จากที่นี่%2"
 
-#: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:181
+#: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:228
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:263
 msgid "Pulsars Configuration"
 msgstr "การตั้งค่าพัลซาร์"
 
-#: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:182
+#: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:229
 msgid "Angle Measure Plug-in Configuration"
 msgstr "การปรับแต่งโปรแกรมเสริมการวัดมุม"
 
-#: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:184
-#: plugins/Satellites/src/ui_satellitesDialog.h:716
-#: plugins/Supernovae/src/ui_supernovaeDialog.h:240
-#: plugins/Novae/src/ui_novaeDialog.h:243
-#: plugins/Quasars/src/ui_quasarsDialog.h:275
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:282
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:329
-#: plugins/Observability/src/ui_ObservabilityDialog.h:359
-#: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:528
-msgid "Settings"
-msgstr "ตั้งค่า"
+#: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:231
+msgid "Show in Equatorial Coordinates"
+msgstr ""
 
-#: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:185
+#: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:232
+msgid "Display with position angle"
+msgstr ""
+
+#: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:233
+msgid "Show in Horizontal Coordinates"
+msgstr ""
+
+#: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:235
+msgid "(e.g. for Dobson starhopping)"
+msgstr ""
+
+#: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:237
+msgid "Display with position angle "
+msgstr ""
+
+#: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:238
+msgid "Attach start point to rotating sky"
+msgstr ""
+
+#: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:239
+msgid "Attach end point to rotating sky"
+msgstr ""
+
+#: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:240
+msgid "Format"
+msgstr ""
+
+#: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:241
 msgid "Use dms format for angles"
 msgstr "ใช้รูปแบบ องศา ลิปดา พิลิปดา สำหรับมุม"
 
-#: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:186
-msgid "Show position angle"
-msgstr "แสดงมุมตำแหน่ง"
-
-#: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:187
+#: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:242
 #: plugins/Satellites/src/ui_satellitesDialog.h:714
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:238
 #: plugins/Novae/src/ui_novaeDialog.h:241
@@ -5319,7 +5342,7 @@ msgstr "แสดงมุมตำแหน่ง"
 msgid "Restore default settings"
 msgstr "คืนค่าเริ่มต้นเดิม"
 
-#: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:188
+#: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:243
 #: plugins/Satellites/src/ui_satellitesDialog.h:715
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:239
 #: plugins/Novae/src/ui_novaeDialog.h:242
@@ -5331,7 +5354,7 @@ msgstr "คืนค่าเริ่มต้นเดิม"
 msgid "Save settings as default"
 msgstr "บันทึกการตั้งค่าต่าง ๆ ให้เป็นค่าเริ่มต้น"
 
-#: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:190
+#: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:245
 #: plugins/Oculars/src/ui_ocularDialog.h:1108
 #: plugins/Satellites/src/ui_satellitesDialog.h:762
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:419
@@ -5346,7 +5369,7 @@ msgstr "บันทึกการตั้งค่าต่าง ๆ ให�
 #: plugins/FOV/src/ui_fovWindow.h:405
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:279
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:566
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:315
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:359
 msgctxt "tab in plugin windows"
 msgid "About"
 msgstr "เกี่ยวกับ"
@@ -6478,6 +6501,17 @@ msgstr "ความยาวของส่วนที่จางลง:"
 msgid "Realistic mode for the artificial satellites"
 msgstr "โหมดเหมือนจริงสำหรับดาวเทียม"
 
+#: plugins/Satellites/src/ui_satellitesDialog.h:716
+#: plugins/Supernovae/src/ui_supernovaeDialog.h:240
+#: plugins/Novae/src/ui_novaeDialog.h:243
+#: plugins/Quasars/src/ui_quasarsDialog.h:275
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:282
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:329
+#: plugins/Observability/src/ui_ObservabilityDialog.h:359
+#: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:528
+msgid "Settings"
+msgstr "ตั้งค่า"
+
 #: plugins/Satellites/src/ui_satellitesDialog.h:718
 msgid "Double-click a satellite to start tracking it."
 msgstr "คลิกสองครั้งที่ดาวเทียมเพื่อเริ่มติดตามดาวเทียมดวงนั้น"
@@ -6666,7 +6700,7 @@ msgstr "โปรแกรมเสริมควบคุมกล้องโ
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:102
 #: plugins/FOV/src/gui/FOVWindow.cpp:79
 #: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:81
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:102
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:110
 #, qt-format
 msgid "Version %1"
 msgstr "รุ่น %1"
@@ -9146,7 +9180,7 @@ msgid "Change sign of equation"
 msgstr "เปลี่ยนเครื่องมือของสมการ"
 
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:275
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:307
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:343
 msgid "Font size:"
 msgstr "ขนาดตัวอักษร:"
 
@@ -9902,9 +9936,9 @@ msgstr "ค้นหาเหตุการณ์"
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:55
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:97
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:297
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:299
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:314
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:333
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:335
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:358
 msgid "Pointer Coordinates"
 msgstr "พิกัดของตัวชี้"
 
@@ -9946,65 +9980,81 @@ msgctxt "abbreviated in the plugin"
 msgid "HA/Dec"
 msgstr ""
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:101
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:109
 msgid "Pointer Coordinates plug-in"
 msgstr "โปรแกรมเสริมพิกัดของตัวชี้"
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:130
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:138
 msgid "The top center of the screen"
 msgstr "กึ่งกลางด้านบนของจอ"
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:131
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:139
 msgid "In center of the top right half of the screen"
 msgstr "กึ่งกลางด้านบนในครึ่งขวาของจอ"
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:132
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:140
 msgid "The right bottom corner of the screen"
 msgstr "ด้านล่างขวาของจอ"
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:153
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:141
+msgid "Custom position"
+msgstr ""
+
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:162
 msgid "Right ascension/Declination (J2000.0)"
 msgstr "ไรต์แอสเซนชัน/เดคลิเนชัน (J2000.0)"
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:154
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:163
 msgid "Right ascension/Declination"
 msgstr "ไรต์แอสเซนชัน/เดคลิเนชัน"
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:156
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:165
 msgid "Ecliptic Longitude/Latitude (J2000.0)"
 msgstr "ลองจิจูด/ละติจูดฟ้า (J2000.0)"
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:158
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:167
 msgid "Galactic Longitude/Latitude"
 msgstr "ลองจิจูด/ละติจูดดาราจักร"
 
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:300
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:197
+msgid "Coordinates of custom position:"
+msgstr ""
+
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:336
 msgid "Show coordinates of the mouse cursor on the screen."
 msgstr "แสดงพิกัดของตัวชี้เมาส์บนหน้าจอ"
 
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:301
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:337
 msgid "Enable display of coordinates at startup"
 msgstr "เปิดใช้งานการแสดงพิกัดเมื่อเริ่มโปรแกรม"
 
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:302
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:338
 msgid "Show plug-in button on toolbar"
 msgstr "แสดงปุ่มโปรแกรมเสริมบนแถบเครื่องมือ"
 
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:304
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:340
 msgid "Which coordinate system will be used for displaying"
 msgstr "ระบบพิกัดใดที่จะใช้แสดง"
 
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:306
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:342
 msgid "Coordinates:"
 msgstr "พิกัด:"
 
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:309
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:345
 msgid "Place of the string with coordinates of the mouse pointer"
 msgstr "ตำแหน่งที่จะแสดงพิกัดของตัวชี้เมาส์"
 
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:311
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:347
 msgid "Place of the string:"
 msgstr "ตำแหน่ง:"
+
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:349
+msgid "Coordinate X"
+msgstr ""
+
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:353
+msgid "Coordinate Y"
+msgstr ""
 
 #~ msgid "Ecliptic Line"
 #~ msgstr "เส้นสุริยวิถี"
