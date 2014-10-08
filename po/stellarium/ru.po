@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-10-05 18:17+0700\n"
-"PO-Revision-Date: 2014-10-06 19:48+0000\n"
+"POT-Creation-Date: 2014-10-08 02:15+0700\n"
+"PO-Revision-Date: 2014-10-08 05:41+0000\n"
 "Last-Translator: Alexander Wolf <Unknown>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-10-07 05:55+0000\n"
+"X-Launchpad-Export-Date: 2014-10-08 06:24+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:106 src/core/modules/StarMgr.cpp:346
@@ -1212,7 +1212,7 @@ msgid "Contact"
 msgstr "Обратная связь"
 
 #: src/gui/ConfigurationDialog.cpp:742
-#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:79
+#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:89
 #: plugins/Oculars/src/gui/OcularDialog.cpp:497
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:389
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:117
@@ -1226,7 +1226,7 @@ msgid "Version"
 msgstr "Версия"
 
 #: src/gui/ConfigurationDialog.cpp:825
-#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:80
+#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:90
 #: plugins/Oculars/src/gui/OcularDialog.cpp:498
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:118
 #: plugins/Novae/src/gui/NovaeDialog.cpp:117
@@ -4624,7 +4624,7 @@ msgstr "Сохранить эти настройки для всех после�
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:390
 #: plugins/FOV/src/ui_fovWindow.h:387
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:276
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:312
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:356
 msgid "Save settings"
 msgstr "Сохранить настройки"
 
@@ -4634,7 +4634,7 @@ msgstr "Первоначальные настройки"
 
 #: src/ui_configurationDialog.h:1020 plugins/FOV/src/ui_fovWindow.h:386
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:277
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:313
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:357
 msgid "Restore defaults"
 msgstr "Первоначальные настройки"
 
@@ -4765,7 +4765,7 @@ msgid "Topocentric equatorial coordinates"
 msgstr "Топоцентрические экваториальные координаты"
 
 #: src/ui_configurationDialog.h:1074
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:155
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:164
 msgid "Hour angle/Declination"
 msgstr "Часовой угол/Склонение"
 
@@ -4774,7 +4774,7 @@ msgid "Horizontal coordinates"
 msgstr "Горизонтальные координаты"
 
 #: src/ui_configurationDialog.h:1078
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:157
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:166
 msgid "Altitude/Azimuth"
 msgstr "Высота/Азимут"
 
@@ -5179,51 +5179,51 @@ msgstr "Включая каталог:"
 msgid "..."
 msgstr "..."
 
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:56
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:124
-#: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:189
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:57
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:136
+#: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:244
 msgid "Angle Measure"
 msgstr "Угломер"
 
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:59
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:60
 msgid "Provides an angle measurement tool"
 msgstr "Этот плагин позволяет проводить угловые измерения"
 
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:124
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:136
 msgid "Angle measure"
 msgstr "Угломер"
 
 #. TRANSLATORS: instructions for using the AngleMeasure plugin.
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:355
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:462
 msgid "The Angle Measure is enabled:"
 msgstr "Угломер включён:"
 
 #. TRANSLATORS: instructions for using the AngleMeasure plugin.
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:357
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:464
 msgid "Drag with the left button to measure, left-click to clear."
 msgstr ""
 "Перетаскивание с левой кнопкой мыши включает имерение, щелчек - очистку."
 
 #. TRANSLATORS: instructions for using the AngleMeasure plugin.
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:359
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:466
 msgid "Right-clicking changes the end point only."
 msgstr "Щелчек правой кнопкой мыши изменяет конечную точку."
 
 #. TRANSLATORS: PA is abbreviation for phrase "Position Angle"
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:361
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:468
 msgid "PA="
 msgstr "ПУ="
 
-#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:78
+#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:88
 msgid "Angle Measure Plug-in"
 msgstr "Плагин \"Угломер\""
 
-#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:81
+#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:91
 #: plugins/Oculars/src/gui/OcularDialog.cpp:499
 msgid "Contributors"
 msgstr "Внесшие вклад"
 
-#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:84
+#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:94
 msgid ""
 "The Angle Measure plugin is a small tool which is used to measure the "
 "angular distance between two points on the sky (and calculation of position "
@@ -5233,7 +5233,14 @@ msgstr ""
 "углового расстояния между двумя точками на небе (и расчета позиционного угла "
 "между этими двумя точками)."
 
-#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:85
+#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:95
+msgid ""
+"Start and end points in horizontal mode can be linked to the rotating sky, "
+"which may be helpful to keep relations between landscape and some celestial "
+"object or (with both linked) for Dobsonian starhopping."
+msgstr ""
+
+#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:96
 msgid ""
 "*goes misty eyed* I recall measuring the size of the Cassini Division when I "
 "was a student. It was not the high academic glamor one might expect... It "
@@ -5248,7 +5255,7 @@ msgstr ""
 "и направленных на <em>фотографию</em> Сатурна на другом конце лаборатории. "
 "Мы измерили. Мы рассчитали. Мы представляли, что мы были на Гавайях."
 
-#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:87
+#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:98
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:426
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:136
 #: plugins/Novae/src/gui/NovaeDialog.cpp:133
@@ -5259,7 +5266,7 @@ msgstr ""
 msgid "Links"
 msgstr "Ссылки"
 
-#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:88
+#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:99
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:427
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:137
 #: plugins/Novae/src/gui/NovaeDialog.cpp:134
@@ -5276,7 +5283,7 @@ msgstr ""
 "\"%1\" в тему при отправке."
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
-#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:91
+#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:102
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:430
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:140
 #: plugins/Novae/src/gui/NovaeDialog.cpp:137
@@ -5289,7 +5296,7 @@ msgid "If you have a question, you can %1get an answer here%2"
 msgstr "Если у вас есть вопрос, то получить ответ можно %1здесь%2"
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
-#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:93
+#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:104
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:432
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:142
 #: plugins/Novae/src/gui/NovaeDialog.cpp:139
@@ -5302,7 +5309,7 @@ msgid "Bug reports can be made %1here%2."
 msgstr "Сообщить об ошибке можно %1здесь%2."
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
-#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:95
+#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:106
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:434
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:144
 #: plugins/Novae/src/gui/NovaeDialog.cpp:141
@@ -5318,43 +5325,59 @@ msgstr ""
 "об ошибке и установить степень важности на «wishlist»."
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
-#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:97
+#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:108
 #, qt-format
 msgid ""
 "If you want to read full information about this plugin and its history, you "
 "can %1get info here%2."
 msgstr "Получить полную информацию о плагине и его истории можно %1здесь%2."
 
-#: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:181
+#: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:228
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:263
 msgid "Pulsars Configuration"
 msgstr "Настройка пульсаров"
 
-#: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:182
+#: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:229
 msgid "Angle Measure Plug-in Configuration"
 msgstr "Конфигурация плагина"
 
-#: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:184
-#: plugins/Satellites/src/ui_satellitesDialog.h:716
-#: plugins/Supernovae/src/ui_supernovaeDialog.h:240
-#: plugins/Novae/src/ui_novaeDialog.h:243
-#: plugins/Quasars/src/ui_quasarsDialog.h:275
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:282
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:329
-#: plugins/Observability/src/ui_ObservabilityDialog.h:359
-#: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:528
-msgid "Settings"
-msgstr "Настройки"
+#: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:231
+msgid "Show in Equatorial Coordinates"
+msgstr "Показать в экваториальных координатах"
 
-#: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:185
+#: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:232
+msgid "Display with position angle"
+msgstr "Отображать с позиционным углом"
+
+#: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:233
+msgid "Show in Horizontal Coordinates"
+msgstr "Показать в горизонтальных координатах"
+
+#: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:235
+msgid "(e.g. for Dobson starhopping)"
+msgstr ""
+
+#: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:237
+msgid "Display with position angle "
+msgstr "Отображать с позиционным углом "
+
+#: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:238
+msgid "Attach start point to rotating sky"
+msgstr ""
+
+#: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:239
+msgid "Attach end point to rotating sky"
+msgstr ""
+
+#: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:240
+msgid "Format"
+msgstr "Формат"
+
+#: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:241
 msgid "Use dms format for angles"
 msgstr "Использовать формат dms для углов"
 
-#: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:186
-msgid "Show position angle"
-msgstr "Показывать позиционный угол"
-
-#: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:187
+#: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:242
 #: plugins/Satellites/src/ui_satellitesDialog.h:714
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:238
 #: plugins/Novae/src/ui_novaeDialog.h:241
@@ -5366,7 +5389,7 @@ msgstr "Показывать позиционный угол"
 msgid "Restore default settings"
 msgstr "Первоначальные настройки"
 
-#: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:188
+#: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:243
 #: plugins/Satellites/src/ui_satellitesDialog.h:715
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:239
 #: plugins/Novae/src/ui_novaeDialog.h:242
@@ -5378,7 +5401,7 @@ msgstr "Первоначальные настройки"
 msgid "Save settings as default"
 msgstr "Сохранить настройки"
 
-#: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:190
+#: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:245
 #: plugins/Oculars/src/ui_ocularDialog.h:1108
 #: plugins/Satellites/src/ui_satellitesDialog.h:762
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:419
@@ -5393,7 +5416,7 @@ msgstr "Сохранить настройки"
 #: plugins/FOV/src/ui_fovWindow.h:405
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:279
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:566
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:315
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:359
 msgctxt "tab in plugin windows"
 msgid "About"
 msgstr "О плагине"
@@ -6551,6 +6574,17 @@ msgstr "Длина:"
 msgid "Realistic mode for the artificial satellites"
 msgstr "Реалистичный режим для искусственных спутников"
 
+#: plugins/Satellites/src/ui_satellitesDialog.h:716
+#: plugins/Supernovae/src/ui_supernovaeDialog.h:240
+#: plugins/Novae/src/ui_novaeDialog.h:243
+#: plugins/Quasars/src/ui_quasarsDialog.h:275
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:282
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:329
+#: plugins/Observability/src/ui_ObservabilityDialog.h:359
+#: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:528
+msgid "Settings"
+msgstr "Настройки"
+
 #: plugins/Satellites/src/ui_satellitesDialog.h:718
 msgid "Double-click a satellite to start tracking it."
 msgstr "Дважды щелкните по спутнику чтобы начать его отслеживать."
@@ -6739,7 +6773,7 @@ msgstr "Плагин \"Управление телескопом\""
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:102
 #: plugins/FOV/src/gui/FOVWindow.cpp:79
 #: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:81
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:102
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:110
 #, qt-format
 msgid "Version %1"
 msgstr "Версия %1"
@@ -9258,7 +9292,7 @@ msgid "Change sign of equation"
 msgstr "Изменить знак уравнения"
 
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:275
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:307
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:343
 msgid "Font size:"
 msgstr "Размер шрифта:"
 
@@ -10020,9 +10054,9 @@ msgstr "Поиск событий"
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:55
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:97
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:297
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:299
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:314
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:333
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:335
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:358
 msgid "Pointer Coordinates"
 msgstr "Координаты указателя"
 
@@ -10064,65 +10098,81 @@ msgctxt "abbreviated in the plugin"
 msgid "HA/Dec"
 msgstr "Ч.У./Скл."
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:101
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:109
 msgid "Pointer Coordinates plug-in"
 msgstr "Плагин \"Координаты указателя\""
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:130
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:138
 msgid "The top center of the screen"
 msgstr "Верх середины экрана"
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:131
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:139
 msgid "In center of the top right half of the screen"
 msgstr "В центре верхней правой половины экрана"
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:132
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:140
 msgid "The right bottom corner of the screen"
 msgstr "Правый нижний угол экрана"
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:153
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:141
+msgid "Custom position"
+msgstr "Пользовательское местоположение"
+
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:162
 msgid "Right ascension/Declination (J2000.0)"
 msgstr "Прямое восхождение/Склонение (J2000.0)"
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:154
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:163
 msgid "Right ascension/Declination"
 msgstr "Прямое восхождение/Склонение"
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:156
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:165
 msgid "Ecliptic Longitude/Latitude (J2000.0)"
 msgstr "Эклиптическая долгота/широта (J2000.0)"
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:158
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:167
 msgid "Galactic Longitude/Latitude"
 msgstr "Галактическая долгота/широта"
 
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:300
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:197
+msgid "Coordinates of custom position:"
+msgstr "Коордитаны пользовательского местоположения:"
+
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:336
 msgid "Show coordinates of the mouse cursor on the screen."
 msgstr "Показывает координаты курсора мыши на экране."
 
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:301
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:337
 msgid "Enable display of coordinates at startup"
 msgstr "Включить показ координат при запуске"
 
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:302
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:338
 msgid "Show plug-in button on toolbar"
 msgstr "Показывать кнопку плагина на панели инструментов"
 
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:304
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:340
 msgid "Which coordinate system will be used for displaying"
 msgstr "Какая система координат будет использоваться для показа"
 
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:306
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:342
 msgid "Coordinates:"
 msgstr "Координаты:"
 
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:309
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:345
 msgid "Place of the string with coordinates of the mouse pointer"
 msgstr "Местоположение строки с координатами указателя мыши"
 
-#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:311
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:347
 msgid "Place of the string:"
 msgstr "Местоположение строки:"
+
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:349
+msgid "Coordinate X"
+msgstr "Координата X"
+
+#: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:353
+msgid "Coordinate Y"
+msgstr "Координата Y"
 
 #~ msgid "Equator Line"
 #~ msgstr "Линия экватора"
