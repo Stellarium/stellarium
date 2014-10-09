@@ -10,13 +10,13 @@ msgstr ""
 "Project-Id-Version: stellarium-uk\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-10-08 02:15+0700\n"
-"PO-Revision-Date: 2014-10-05 12:58+0000\n"
+"PO-Revision-Date: 2014-10-08 16:08+0000\n"
 "Last-Translator: Yuri Chornoivan <yurchor@gmail.com>\n"
 "Language-Team: Ukrainian <translation@linux.org.ua>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-10-08 06:28+0000\n"
+"X-Launchpad-Export-Date: 2014-10-09 05:58+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 "X-Poedit-Country: UKRAINE\n"
 "Language: uk\n"
@@ -5270,6 +5270,10 @@ msgid ""
 "which may be helpful to keep relations between landscape and some celestial "
 "object or (with both linked) for Dobsonian starhopping."
 msgstr ""
+"Початкову і кінцеву точки у горизонтальному режимі можна пов’язати із небом, "
+"що обертається. Це корисно для збереження прив’язки певного об’єкта до "
+"ландшафту або (якщо пов’язано обидві точки) для переходу між зірками за "
+"Добсоном."
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:96
 msgid ""
@@ -5376,35 +5380,35 @@ msgstr "Налаштування додатка вимірювання куті�
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:231
 msgid "Show in Equatorial Coordinates"
-msgstr ""
+msgstr "Показати у екваторіальних координатах"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:232
 msgid "Display with position angle"
-msgstr ""
+msgstr "Показати з кутом позиції"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:233
 msgid "Show in Horizontal Coordinates"
-msgstr ""
+msgstr "Показати у горизонтальних координатах"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:235
 msgid "(e.g. for Dobson starhopping)"
-msgstr ""
+msgstr "(наприклад для добсонівського переходу між зірками)"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:237
 msgid "Display with position angle "
-msgstr ""
+msgstr "Показати з кутом позиції "
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:238
 msgid "Attach start point to rotating sky"
-msgstr ""
+msgstr "Долучати дані щодо початкової точки під час обертання неба"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:239
 msgid "Attach end point to rotating sky"
-msgstr ""
+msgstr "Долучати дані щодо кінцевої точки під час обертання неба"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:240
 msgid "Format"
-msgstr ""
+msgstr "Формат"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:241
 msgid "Use dms format for angles"
@@ -10173,7 +10177,7 @@ msgstr "У правому нижньому куті екрана"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:141
 msgid "Custom position"
-msgstr ""
+msgstr "Нетипова позиція"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:162
 msgid "Right ascension/Declination (J2000.0)"
@@ -10193,7 +10197,7 @@ msgstr "Галактична довгота/широта"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:197
 msgid "Coordinates of custom position:"
-msgstr ""
+msgstr "Координати нетипової позиції:"
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:336
 msgid "Show coordinates of the mouse cursor on the screen."
@@ -10225,11 +10229,11 @@ msgstr "Розташування рядка:"
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:349
 msgid "Coordinate X"
-msgstr ""
+msgstr "Координата X"
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:353
 msgid "Coordinate Y"
-msgstr ""
+msgstr "Координата Y"
 
 #~ msgid "Equatorial Grid"
 #~ msgstr "Екваторіальна сітка"
