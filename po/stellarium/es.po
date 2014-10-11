@@ -10,13 +10,13 @@ msgstr ""
 "Project-Id-Version: es\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-10-08 02:15+0700\n"
-"PO-Revision-Date: 2014-09-19 13:45+0000\n"
+"PO-Revision-Date: 2014-10-10 06:54+0000\n"
 "Last-Translator: José A. Macas D. <josedurazo92@gmail.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-10-08 06:26+0000\n"
+"X-Launchpad-Export-Date: 2014-10-11 04:40+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 "Language: es_ES\n"
 
@@ -1114,7 +1114,7 @@ msgstr ""
 #: src/core/StelObject.cpp:121 src/core/StelObject.cpp:123
 #: src/core/StelObject.cpp:131 src/core/StelObject.cpp:133
 msgid "RA/DE"
-msgstr ""
+msgstr "AR/DEC"
 
 #: src/core/StelObject.cpp:145 src/core/StelObject.cpp:149
 #, qt-format
@@ -1135,7 +1135,7 @@ msgstr "Az/Alt: %1/%2"
 #: src/core/StelObject.cpp:190 src/core/StelObject.cpp:192
 #: src/core/StelObject.cpp:198 src/core/StelObject.cpp:200
 msgid "Ecliptic longitude/latitude"
-msgstr ""
+msgstr "Longitud/latitud eclíptica"
 
 #: src/core/StelObject.cpp:208 src/core/StelObject.cpp:210
 #, qt-format
@@ -5366,15 +5366,15 @@ msgstr "Configuración del Complemento de Medición de Ángulos"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:231
 msgid "Show in Equatorial Coordinates"
-msgstr ""
+msgstr "Mostrar en coordenadas ecuatoriales"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:232
 msgid "Display with position angle"
-msgstr ""
+msgstr "Mostrar con ángulo de posición"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:233
 msgid "Show in Horizontal Coordinates"
-msgstr ""
+msgstr "Mostrar coordenadas horizontales"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:235
 msgid "(e.g. for Dobson starhopping)"
@@ -5382,7 +5382,7 @@ msgstr ""
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:237
 msgid "Display with position angle "
-msgstr ""
+msgstr "Mostrar con ángulo de posición "
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:238
 msgid "Attach start point to rotating sky"
@@ -5394,7 +5394,7 @@ msgstr ""
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:240
 msgid "Format"
-msgstr ""
+msgstr "Formato"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:241
 msgid "Use dms format for angles"
@@ -10182,7 +10182,7 @@ msgstr "Longitud/Latitud galáctica"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:197
 msgid "Coordinates of custom position:"
-msgstr ""
+msgstr "Coordenadas de posición personalizada:"
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:336
 msgid "Show coordinates of the mouse cursor on the screen."
@@ -10214,11 +10214,11 @@ msgstr "Lugar de la cadena:"
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:349
 msgid "Coordinate X"
-msgstr ""
+msgstr "Coordenada X"
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:353
 msgid "Coordinate Y"
-msgstr ""
+msgstr "Coordenada Y"
 
 #~ msgid "Ecliptic Line"
 #~ msgstr "Eclíptica"

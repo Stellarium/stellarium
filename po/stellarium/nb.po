@@ -9,13 +9,13 @@ msgstr ""
 "Project-Id-Version: nb\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-10-08 02:15+0700\n"
-"PO-Revision-Date: 2014-10-06 16:14+0000\n"
+"PO-Revision-Date: 2014-10-10 14:52+0000\n"
 "Last-Translator: FreewareTips <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-10-08 06:22+0000\n"
+"X-Launchpad-Export-Date: 2014-10-11 04:39+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 "X-Poedit-Country: NORWAY\n"
 "X-Poedit-Language: Norwegian\n"
@@ -81,7 +81,7 @@ msgstr "Galaktisk ekvator"
 #: src/core/modules/GridLinesMgr.cpp:728
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:331
 msgid "Equatorial grid"
-msgstr "Ekvatorialt nett"
+msgstr "Ekvatorialnett"
 
 #: src/core/modules/GridLinesMgr.cpp:729 src/ui_viewDialog.h:1226
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:326
@@ -111,7 +111,7 @@ msgstr "Horisontlinje"
 #: src/core/modules/GridLinesMgr.cpp:734
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:336
 msgid "Equatorial J2000 grid"
-msgstr "Ekvatorialt J2000-nett"
+msgstr "Ekvatorialnett (J2000)"
 
 #: src/core/modules/GridLinesMgr.cpp:735
 msgid "Ecliptic J2000 grid"
@@ -258,7 +258,7 @@ msgstr "Absolutt magnitude: %1"
 #: src/core/modules/Planet.cpp:189
 #, qt-format
 msgid "Obliquity (of date, for Earth): %1"
-msgstr "Aksehelning (d.d., for jorden): %1"
+msgstr "Aksehelning (av dato, for jorden): %1"
 
 #: src/core/modules/Planet.cpp:201 src/core/modules/MinorPlanet.cpp:244
 #: src/core/modules/Comet.cpp:193
@@ -1033,7 +1033,7 @@ msgstr ""
 #: src/core/StelObject.cpp:121 src/core/StelObject.cpp:123
 #: src/core/StelObject.cpp:131 src/core/StelObject.cpp:133
 msgid "RA/DE"
-msgstr ""
+msgstr "RA/DE"
 
 #: src/core/StelObject.cpp:145 src/core/StelObject.cpp:149
 #, qt-format
@@ -4438,11 +4438,11 @@ msgstr "Himmelhvelving"
 
 #: src/ui_viewDialog.h:1223
 msgid "Equatorial grid (on J2000)"
-msgstr "Ekvatorialt nett (J2000)"
+msgstr "Ekvatorialnett (J2000)"
 
 #: src/ui_viewDialog.h:1224
 msgid "Equatorial grid (on date)"
-msgstr "Ekvatorialt nett (d.d.)"
+msgstr "Ekvatorialnett (på dato)"
 
 #: src/ui_viewDialog.h:1225
 msgid "Ecliptic grid (on J2000)"
@@ -4621,11 +4621,11 @@ msgstr "Navn"
 
 #: src/ui_configurationDialog.h:1048
 msgid "Geocentric equatorial coordinates, equinox of date"
-msgstr "Geosentriske ekvatoriale koordinater, datoens jevndøgn"
+msgstr "Geosentriske ekvatorialkoordinater, jevndøgn av dato"
 
 #: src/ui_configurationDialog.h:1050
 msgid "Right ascension/Declination (of date)"
-msgstr "Rektasensjon/Deklinasjon (d.d.)"
+msgstr "Rektasensjon/Deklinasjon (dato)"
 
 #: src/ui_configurationDialog.h:1051
 msgid "Catalog number(s)"
@@ -4633,7 +4633,7 @@ msgstr "Katalognummer"
 
 #: src/ui_configurationDialog.h:1053
 msgid "Geocentric equatorial coordinates, equinox of J2000.0"
-msgstr "Geosentriske ekvatoriale koordinater, jevndøgn J2000.0"
+msgstr "Geosentriske ekvatorialkoordinater, jevndøgn J2000.0"
 
 #: src/ui_configurationDialog.h:1055
 msgid "Right ascension/Declination (J2000)"
@@ -4678,7 +4678,7 @@ msgstr "Tilleggsinformasjon"
 
 #: src/ui_configurationDialog.h:1072
 msgid "Topocentric equatorial coordinates"
-msgstr "Toposentriske ekvatoriale koordinater"
+msgstr "Toposentriske ekvatorialkoordinater"
 
 #: src/ui_configurationDialog.h:1074
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:164
@@ -4687,7 +4687,7 @@ msgstr "Timevinkel/Deklinasjon"
 
 #: src/ui_configurationDialog.h:1076
 msgid "Horizontal coordinates"
-msgstr "Horisontale koordinater"
+msgstr "Horisontalkoordinater"
 
 #: src/ui_configurationDialog.h:1078
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:166
@@ -4700,7 +4700,7 @@ msgstr "Avstand"
 
 #: src/ui_configurationDialog.h:1081
 msgid "Ecliptic coordinates, equinox of date and J2000 (only for Earth)"
-msgstr "Ekliptiske koordinater, datoens jevndøgn og J2000 (bare for jorden)"
+msgstr "Ekliptiske koordinater, jevndøgn av dato og J2000 (bare for jorden)"
 
 #: src/ui_configurationDialog.h:1083
 msgid "Ecliptic coordinates"
@@ -5252,15 +5252,15 @@ msgstr "Innstilling av programtillegg for vinkelmål"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:231
 msgid "Show in Equatorial Coordinates"
-msgstr ""
+msgstr "Vis i ekvatorialkoordinater"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:232
 msgid "Display with position angle"
-msgstr ""
+msgstr "Vis med posisjonsvinkel"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:233
 msgid "Show in Horizontal Coordinates"
-msgstr ""
+msgstr "Vis i horisontalkoordinater"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:235
 msgid "(e.g. for Dobson starhopping)"
@@ -5268,7 +5268,7 @@ msgstr ""
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:237
 msgid "Display with position angle "
-msgstr ""
+msgstr "Vis med posisjonsvinkel "
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:238
 msgid "Attach start point to rotating sky"
@@ -5280,7 +5280,7 @@ msgstr ""
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:240
 msgid "Format"
-msgstr ""
+msgstr "Format"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:241
 msgid "Use dms format for angles"
