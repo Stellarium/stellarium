@@ -281,6 +281,8 @@ public:
 	//! @return valid range
 	QString getCurrentDeltaTAlgorithmValidRange(double jDay, QString* marker) const;
 
+	bool isDay() const;
+
 public slots:
 	//! Set the current ProjectionType to use
 	void setCurrentProjectionType(ProjectionType type);

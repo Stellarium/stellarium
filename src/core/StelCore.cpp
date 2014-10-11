@@ -1677,3 +1677,9 @@ QString StelCore::getCurrentDeltaTAlgorithmValidRange(double jDay, QString *mark
 
 	return QString(" %1").arg(validRange);
 }
+
+bool StelCore::isDay() const
+{
+	const Vec3d& sunPos = GETSTELMODULE(SolarSystem)->getSun()->getAltAzPosGeometric(this);
+	return sunPos[2] > -0.12; // Nautical twilight
+}
