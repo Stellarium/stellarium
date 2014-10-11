@@ -93,7 +93,7 @@ void LocationDialog::createDialogContent()
 
 	connect(ui->citySearchLineEdit, SIGNAL(textChanged(const QString&)), proxyModel, SLOT(setFilterWildcard(const QString&)));
 	connect(ui->citiesListView, SIGNAL(clicked(const QModelIndex&)),
-	        this, SLOT(setPositionFromList(const QModelIndex&)));
+		this, SLOT(setPositionFromList(const QModelIndex&)));
 
 	// Connect all the QT signals
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
@@ -110,12 +110,12 @@ void LocationDialog::createDialogContent()
 	updateDefaultLocationControls(b);
 	connect(ui->useAsDefaultLocationCheckBox, SIGNAL(clicked()), this, SLOT(setDefaultLocation()));
 	connect(ui->pushButtonReturnToDefault, SIGNAL(clicked()),
-	        core, SLOT(returnToDefaultLocation()));
+		core, SLOT(returnToDefaultLocation()));
 
 	connectEditSignals();
 	
 	connect(core, SIGNAL(locationChanged(StelLocation)),
-	        this, SLOT(updateFromProgram(StelLocation)));
+		this, SLOT(updateFromProgram(StelLocation)));
 
 	ui->citySearchLineEdit->setFocus();
 }
@@ -159,7 +159,7 @@ void LocationDialog::disconnectEditSignals()
 	// Why an edit should be reported even if the country is not changed? --BM
 	//disconnect(ui->countryNameComboBox, SIGNAL(activated(const QString&)), this, SLOT(comboBoxChanged(const QString&)));
 	disconnect(ui->cityNameLineEdit, SIGNAL(textEdited(const QString&)),
-	           this, SLOT(reportEdit()));
+		   this, SLOT(reportEdit()));
 }
 
 void LocationDialog::connectEditSignals()
@@ -172,7 +172,7 @@ void LocationDialog::connectEditSignals()
 	// Why an edit should be reported even if the country is not changed? --BM
 	//connect(ui->countryNameComboBox, SIGNAL(activated(const QString&)), this, SLOT(comboBoxChanged(const QString&)));
 	connect(ui->cityNameLineEdit, SIGNAL(textEdited(const QString&)),
-	        this, SLOT(reportEdit()));
+		this, SLOT(reportEdit()));
 }
 
 void LocationDialog::setFieldsFromLocation(const StelLocation& loc)
