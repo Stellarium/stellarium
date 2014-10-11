@@ -118,9 +118,9 @@ QString StelObject::getPositionInfoString(const StelCore *core, const InfoString
 		double dec_j2000, ra_j2000;
 		StelUtils::rectToSphe(&ra_j2000,&dec_j2000,getJ2000EquatorialPos(core));
 		if (withDecimalDegree)
-			res += q_("RA/DE") + QString(" (J%1): %2/%3").arg(QString::number(2000.f, 'f', 1), StelUtils::radToDecDegStr(ra_j2000,false,true), StelUtils::radToDecDegStr(dec_j2000)) + "<br>";
+			res += q_("RA/Dec") + QString(" (J%1): %2/%3").arg(QString::number(2000.f, 'f', 1), StelUtils::radToDecDegStr(ra_j2000,false,true), StelUtils::radToDecDegStr(dec_j2000)) + "<br>";
 		else
-			res += q_("RA/DE") + QString(" (J%1): %2/%3").arg(QString::number(2000.f, 'f', 1), StelUtils::radToHmsStr(ra_j2000,true), StelUtils::radToDmsStr(dec_j2000,true)) + "<br>";
+			res += q_("RA/Dec") + QString(" (J%1): %2/%3").arg(QString::number(2000.f, 'f', 1), StelUtils::radToHmsStr(ra_j2000,true), StelUtils::radToDmsStr(dec_j2000,true)) + "<br>";
 	}
 
 	if (flags&RaDecOfDate)
@@ -128,9 +128,9 @@ QString StelObject::getPositionInfoString(const StelCore *core, const InfoString
 		double dec_equ, ra_equ;
 		StelUtils::rectToSphe(&ra_equ,&dec_equ,getEquinoxEquatorialPos(core));
 		if (withDecimalDegree)
-			res += q_("RA/DE") + QString(" (J%1): %2/%3").arg(QString::number(currentEpoch, 'f', 1), StelUtils::radToDecDegStr(ra_equ,false,true), StelUtils::radToDecDegStr(dec_equ)) + "<br>";
+			res += q_("RA/Dec") + QString(" (J%1): %2/%3").arg(QString::number(currentEpoch, 'f', 1), StelUtils::radToDecDegStr(ra_equ,false,true), StelUtils::radToDecDegStr(dec_equ)) + "<br>";
 		else
-			res += q_("RA/DE") + QString(" (J%1): %2/%3").arg(QString::number(currentEpoch, 'f', 1), StelUtils::radToHmsStr(ra_equ,true), StelUtils::radToDmsStr(dec_equ,true)) + "<br>";
+			res += q_("RA/Dec") + QString(" (J%1): %2/%3").arg(QString::number(currentEpoch, 'f', 1), StelUtils::radToHmsStr(ra_equ,true), StelUtils::radToDmsStr(dec_equ,true)) + "<br>";
 	}
 
 	if (flags&HourAngle)
