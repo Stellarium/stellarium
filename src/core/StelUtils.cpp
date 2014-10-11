@@ -99,6 +99,11 @@ QString getOperatingSystemInfo()
 			OS = "Windows 8.1";
 			break;
 		#endif
+		#ifdef WV_WINDOWS10
+		case QSysInfo::WV_WINDOWS10:
+			OS = "Windows 10";
+			break;
+		#endif
 		default:
 			OS = "Unsupported Windows version";
 			break;
