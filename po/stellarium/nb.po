@@ -8,14 +8,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nb\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-10-08 02:15+0700\n"
-"PO-Revision-Date: 2014-10-10 14:52+0000\n"
+"POT-Creation-Date: 2014-10-11 16:31+0700\n"
+"PO-Revision-Date: 2014-10-11 16:14+0000\n"
 "Last-Translator: FreewareTips <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-10-11 04:39+0000\n"
+"X-Launchpad-Export-Date: 2014-10-12 06:11+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 "X-Poedit-Country: NORWAY\n"
 "X-Poedit-Language: Norwegian\n"
@@ -115,7 +115,7 @@ msgstr "Ekvatorialnett (J2000)"
 
 #: src/core/modules/GridLinesMgr.cpp:735
 msgid "Ecliptic J2000 grid"
-msgstr "Ekliptisk J2000-nett"
+msgstr "Ekliptisk nett (J2000)"
 
 #: src/core/modules/GridLinesMgr.cpp:736 src/ui_viewDialog.h:1227
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:365
@@ -1032,8 +1032,8 @@ msgstr ""
 
 #: src/core/StelObject.cpp:121 src/core/StelObject.cpp:123
 #: src/core/StelObject.cpp:131 src/core/StelObject.cpp:133
-msgid "RA/DE"
-msgstr "RA/DE"
+msgid "RA/Dec"
+msgstr "RA/Dec"
 
 #: src/core/StelObject.cpp:145 src/core/StelObject.cpp:149
 #, qt-format
@@ -6888,7 +6888,7 @@ msgstr "J2000 (standard)"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:491
 msgid "Equinox of the date (JNow)"
-msgstr "Datoens jevndøgn (JNow)"
+msgstr "Jevndøgn av datoen (JNow)"
 
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:493
 msgid ""
@@ -9961,7 +9961,7 @@ msgstr "Nedre høyre hjørne av skjermen"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:141
 msgid "Custom position"
-msgstr ""
+msgstr "Tilpasset plassering"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:162
 msgid "Right ascension/Declination (J2000.0)"
@@ -9981,7 +9981,7 @@ msgstr "Galaktisk lengde/bredde"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:197
 msgid "Coordinates of custom position:"
-msgstr ""
+msgstr "Koordinater for tilpasset plassering:"
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:336
 msgid "Show coordinates of the mouse cursor on the screen."
@@ -10013,11 +10013,11 @@ msgstr "Plass for visning:"
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:349
 msgid "Coordinate X"
-msgstr ""
+msgstr "Koordinat X"
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:353
 msgid "Coordinate Y"
-msgstr ""
+msgstr "Koordinat Y"
 
 #~ msgid "Equator Line"
 #~ msgstr "Ekvatorlinje"
