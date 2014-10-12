@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-10-08 02:15+0700\n"
-"PO-Revision-Date: 2014-09-30 09:08+0000\n"
+"POT-Creation-Date: 2014-10-11 16:31+0700\n"
+"PO-Revision-Date: 2014-10-11 17:46+0000\n"
 "Last-Translator: Tuomas Teipainen <tmsteipainen1@gmail.com>\n"
 "Language-Team: Finnish <fi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-10-08 06:10+0000\n"
+"X-Launchpad-Export-Date: 2014-10-12 05:58+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:106 src/core/modules/StarMgr.cpp:346
@@ -1103,8 +1103,8 @@ msgstr ""
 
 #: src/core/StelObject.cpp:121 src/core/StelObject.cpp:123
 #: src/core/StelObject.cpp:131 src/core/StelObject.cpp:133
-msgid "RA/DE"
-msgstr ""
+msgid "RA/Dec"
+msgstr "Rekt./Dekl."
 
 #: src/core/StelObject.cpp:145 src/core/StelObject.cpp:149
 #, qt-format
@@ -1125,7 +1125,7 @@ msgstr "Atsim./Kork.: %1/%2"
 #: src/core/StelObject.cpp:190 src/core/StelObject.cpp:192
 #: src/core/StelObject.cpp:198 src/core/StelObject.cpp:200
 msgid "Ecliptic longitude/latitude"
-msgstr ""
+msgstr "Ekliptinen pituus/leveys"
 
 #: src/core/StelObject.cpp:208 src/core/StelObject.cpp:210
 #, qt-format
@@ -5232,6 +5232,9 @@ msgid ""
 "which may be helpful to keep relations between landscape and some celestial "
 "object or (with both linked) for Dobsonian starhopping."
 msgstr ""
+"Atsimutaalijalustan kanssa alku- ja loppupisteet on mahdollista liittää "
+"kiertyvään taivaaseen, josta voi olla apua etsittäessä kohteita "
+"tähtihyppelyllä."
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:96
 msgid ""
@@ -5337,35 +5340,35 @@ msgstr "Kulmanmittaustyökalun asetukset"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:231
 msgid "Show in Equatorial Coordinates"
-msgstr ""
+msgstr "Näytä ekvatoriaalikoordinaateina"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:232
 msgid "Display with position angle"
-msgstr ""
+msgstr "Näytä asentokulma"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:233
 msgid "Show in Horizontal Coordinates"
-msgstr ""
+msgstr "Näytä horisontaalikordinaatteina"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:235
 msgid "(e.g. for Dobson starhopping)"
-msgstr ""
+msgstr "(esim. tähtihyppelylle)"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:237
 msgid "Display with position angle "
-msgstr ""
+msgstr "Näytä asentokulma "
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:238
 msgid "Attach start point to rotating sky"
-msgstr ""
+msgstr "Liitä alkupiste kiertyvään taivaaseen"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:239
 msgid "Attach end point to rotating sky"
-msgstr ""
+msgstr "Liitä loppupiste kiertyvään taivaaseen"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:240
 msgid "Format"
-msgstr ""
+msgstr "Muoto"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:241
 msgid "Use dms format for angles"
@@ -10084,7 +10087,7 @@ msgstr "Ruudun oikea alanurkka"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:141
 msgid "Custom position"
-msgstr ""
+msgstr "Mukautettu paikka"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:162
 msgid "Right ascension/Declination (J2000.0)"
@@ -10104,7 +10107,7 @@ msgstr "Galaktinen Pituus/Leveys"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:197
 msgid "Coordinates of custom position:"
-msgstr ""
+msgstr "Mukautetun paikan koordinaatit:"
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:336
 msgid "Show coordinates of the mouse cursor on the screen."
@@ -10136,11 +10139,11 @@ msgstr "Tekstin paikka:"
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:349
 msgid "Coordinate X"
-msgstr ""
+msgstr "Koordinaatti X"
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:353
 msgid "Coordinate Y"
-msgstr ""
+msgstr "Koordinaatti Y"
 
 #~ msgid "Equatorial Grid"
 #~ msgstr "Ekvatoriaaliasteikko"
