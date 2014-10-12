@@ -80,13 +80,13 @@ ConfigurationDialog::ConfigurationDialog(StelGui* agui, QObject* parent)
 	isDownloadingStarCatalog = false;
 	savedProjectionType = StelApp::getInstance().getCore()->getCurrentProjectionType();
 	// Get info about operating system
-	QString OS = StelUtils::getOperatingSystemInfo();
-	if (OS.contains("Linux"))
-		OS = "Linux";
-	if (OS.contains("FreeBSD"))
-		OS = "FreeBSD";
+	QString platform = StelUtils::getOperatingSystemInfo();
+	if (platform.contains("Linux"))
+		platform = "Linux";
+	if (platform.contains("FreeBSD"))
+		platform = "FreeBSD";
 	// Set user agent as "Stellarium/$version$ ($platform$)"
-	userAgent = QString("Stellarium/%1 (%2)").arg(StelUtils::getApplicationVersion()).arg(OS);
+	userAgent = QString("Stellarium/%1 (%2)").arg(StelUtils::getApplicationVersion()).arg(platform);
 }
 
 ConfigurationDialog::~ConfigurationDialog()
@@ -1015,12 +1015,9 @@ void ConfigurationDialog::downloadStars()
 	QNetworkRequest req(nextStarCatalogToDownload.value("url").toString());
 	req.setAttribute(QNetworkRequest::CacheSaveControlAttribute, false);
 	req.setAttribute(QNetworkRequest::RedirectionTargetAttribute, false);
-	req.setAttribute(QNetworkRequest::CookieLoadControlAttribute, false);
-	req.setAttribute(QNetworkRequest::CookieSaveControlAttribute, false);
 	req.setRawHeader("User-Agent", userAgent.toLatin1());
 	starCatalogDownloadReply = StelApp::getInstance().getNetworkAccessManager()->get(req);
-	starCatalogDownloadReply->setReadBufferSize(1024*1024*2);
-	connect(starCatalogDownloadReply, SIGNAL(readyRead()), this, SLOT(newStarCatalogData()));
+	starCatalogDownloadReply->setReadBufferSize(1024*1024*2);	
 	connect(starCatalogDownloadReply, SIGNAL(finished()), this, SLOT(downloadFinished()));
 	connect(starCatalogDownloadReply, SIGNAL(error(QNetworkReply::NetworkError)), this, SLOT(downloadError(QNetworkReply::NetworkError)));
 
@@ -1072,8 +1069,6 @@ void ConfigurationDialog::downloadFinished()
 		QNetworkRequest req(redirect.toUrl());
 		req.setAttribute(QNetworkRequest::CacheSaveControlAttribute, false);
 		req.setAttribute(QNetworkRequest::RedirectionTargetAttribute, false);
-		req.setAttribute(QNetworkRequest::CookieLoadControlAttribute, false);
-		req.setAttribute(QNetworkRequest::CookieSaveControlAttribute, false);
 		req.setRawHeader("User-Agent", userAgent.toLatin1());
 		starCatalogDownloadReply = StelApp::getInstance().getNetworkAccessManager()->get(req);
 		starCatalogDownloadReply->setReadBufferSize(1024*1024*2);
