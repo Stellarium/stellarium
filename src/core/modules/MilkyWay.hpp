@@ -57,7 +57,7 @@ public slots:
 	//! Get Milky Way intensity.
 	double getIntensity() const {return intensity;}
 	//! Set Milky Way intensity.
-	void setIntensity(double aintensity) {intensity = aintensity;}
+	void setIntensity(double aintensity) {intensity = aintensity; debugOne=true;}
 	
 	//! Get the color used for rendering the milky way
 	Vec3f getColor() const {return color;}
@@ -71,11 +71,15 @@ public slots:
 	
 private:
 	StelTextureSP tex;
-	Vec3f color;
+	Vec3f color; // global color
 	float intensity;
 	class LinearFader* fader;
 
 	struct StelVertexArray* vertexArray;
+	bool debugOne;
+	// GZ: array to hold vertex colors (the final values, for proper extinction). Must be re-computed in update()
+	// QVector<Vec3f> *vertexColors; --> now integrated in StelVertexArray
+
 };
 
 #endif // _MILKYWAY_HPP_
