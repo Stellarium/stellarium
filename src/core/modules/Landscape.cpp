@@ -585,7 +585,7 @@ void LandscapeOldStyle::drawDecor(StelCore* core, StelPainter& sPainter, const b
 		if (side.light==drawLight)
 		{
 			side.tex->bind();
-			sPainter.drawSphericalTriangles(side.arr, true, NULL, false);
+			sPainter.drawSphericalTriangles(side.arr, true, false, NULL, false);
 		}
 	}
 }

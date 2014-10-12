@@ -45,9 +45,10 @@ public:
 	//! Define the drawing mode when drawing polygons
 	enum SphericalPolygonDrawMode
 	{
-		SphericalPolygonDrawModeFill=0,			//!< Draw the interior of the polygon
-		SphericalPolygonDrawModeBoundary=1,		//!< Draw the boundary of the polygon
-		SphericalPolygonDrawModeTextureFill=2	//!< Draw the interior of the polygon filled with the current texture
+		SphericalPolygonDrawModeFill=0,				//!< Draw the interior of the polygon
+		SphericalPolygonDrawModeBoundary=1,			//!< Draw the boundary of the polygon
+		SphericalPolygonDrawModeTextureFill=2,			//!< Draw the interior of the polygon filled with the current texture
+		SphericalPolygonDrawModeTextureFillColormodulated=3	//!< Draw the interior of the polygon filled with the current texture multiplied by vertex colors
 	};
 
 	//! Define the drawing mode when drawing vertex
@@ -97,7 +98,7 @@ public:
 
 	void drawGreatCircleArcs(const StelVertexArray& va, const SphericalCap* clippingCap=NULL);
 
-	void drawSphericalTriangles(const StelVertexArray& va, const bool textured, const SphericalCap* clippingCap=NULL, const bool doSubDivide=true, const double maxSqDistortion=5.);
+	void drawSphericalTriangles(const StelVertexArray& va, const bool textured, const bool colored, const SphericalCap* clippingCap=NULL, const bool doSubDivide=true, const double maxSqDistortion=5.);
 
 	//! Draw a small circle arc between points start and stop with rotation point in rotCenter.
 	//! The angle between start and stop must be < 180 deg.
@@ -304,8 +305,11 @@ private:
 	//! @param vertices a pointer to an array of 3 vertices.
 	//! @param edgeFlags a pointer to an array of 3 flags indicating whether the next segment is an edge.
 	//! @param texturePos a pointer to an array of 3 texture coordinates, or NULL if the triangle should not be textured.
+	//! @param colors a pointer to an array of 3 colors, or NULL if the triangle should not be vertex-colored. If texture and color coords are present, texture is modulated by vertex colors. (e.g. extinction)
 	void projectSphericalTriangle(const SphericalCap* clippingCap, const Vec3d* vertices, QVarLengthArray<Vec3f, 4096>* outVertices,
-			const Vec2f* texturePos=NULL, QVarLengthArray<Vec2f, 4096>* outTexturePos=NULL, const double maxSqDistortion=5., const int nbI=0,
+			const Vec2f* texturePos=NULL, QVarLengthArray<Vec2f, 4096>* outTexturePos=NULL,
+			const Vec3f* colors=NULL, QVarLengthArray<Vec3f, 4096>* outColors=NULL,
+			const double maxSqDistortion=5., const int nbI=0,
 			const bool checkDisc1=true, const bool checkDisc2=true, const bool checkDisc3=true) const;
 
 	void drawTextGravity180(float x, float y, const QString& str, const float xshift = 0, const float yshift = 0);
