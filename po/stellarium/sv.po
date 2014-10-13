@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-10-11 16:31+0700\n"
-"PO-Revision-Date: 2014-10-04 22:28+0000\n"
+"PO-Revision-Date: 2014-10-12 09:34+0000\n"
 "Last-Translator: Anders Jonsson <Unknown>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-10-12 06:17+0000\n"
+"X-Launchpad-Export-Date: 2014-10-13 05:45+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:106 src/core/modules/StarMgr.cpp:346
@@ -1112,7 +1112,7 @@ msgstr ""
 #: src/core/StelObject.cpp:145 src/core/StelObject.cpp:149
 #, qt-format
 msgid "Hour angle/DE: %1/%2"
-msgstr "Tidsvinkel/DE: %1/%2"
+msgstr "Timvinkel/DE: %1/%2"
 
 #: src/core/StelObject.cpp:145 src/core/StelObject.cpp:168
 #: src/core/StelObject.cpp:170
@@ -1146,7 +1146,7 @@ msgstr "Diverse"
 
 #: src/core/StelMovementMgr.cpp:130
 msgid "Switch between equatorial and azimuthal mount"
-msgstr "Byt mellan ekvatorial och azimutal motering"
+msgstr "Byt mellan ekvatoriell och azimutal montering"
 
 #: src/core/StelMovementMgr.cpp:131
 msgid "Center on selected object"
@@ -1942,11 +1942,11 @@ msgstr ""
 
 #: src/gui/SearchDialog.cpp:248
 msgid "Right ascension"
-msgstr ""
+msgstr "Rektascension"
 
 #: src/gui/SearchDialog.cpp:250
 msgid "Declination"
-msgstr ""
+msgstr "Deklination"
 
 #: src/gui/SearchDialog.cpp:257
 msgid "Azimuth"
@@ -4299,7 +4299,7 @@ msgstr "Alternativ för sökning"
 
 #: src/ui_searchDialogGui.h:707
 msgid "Use autofill only from the beginning of words"
-msgstr ""
+msgstr "Använd automatisk ifyllning endast från början av ord"
 
 #: src/ui_searchDialogGui.h:708 src/ui_viewDialog.h:1251
 #: src/ui_viewDialog.h:1257 src/ui_viewDialog.h:1259
@@ -4692,7 +4692,7 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:1050
 msgid "Right ascension/Declination (of date)"
-msgstr ""
+msgstr "Rektascension/Deklination (av datum)"
 
 #: src/ui_configurationDialog.h:1051
 msgid "Catalog number(s)"
@@ -4704,7 +4704,7 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:1055
 msgid "Right ascension/Declination (J2000)"
-msgstr ""
+msgstr "Rektascension/Deklination (J2000)"
 
 #: src/ui_configurationDialog.h:1056
 msgid "Absolute magnitude"
@@ -4750,7 +4750,7 @@ msgstr ""
 #: src/ui_configurationDialog.h:1074
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:164
 msgid "Hour angle/Declination"
-msgstr ""
+msgstr "Timvinkel/Deklination"
 
 #: src/ui_configurationDialog.h:1076
 msgid "Horizontal coordinates"
@@ -6814,7 +6814,7 @@ msgstr "De&clination (J2000):"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:291
 msgid "&Right Ascension (J2000):"
-msgstr ""
+msgstr "&Rektascension (J2000):"
 
 #: plugins/TelescopeControl/src/ui_slewDialog.h:292
 msgid "&Current object"
@@ -8942,7 +8942,7 @@ msgstr ""
 
 #: plugins/NavStars/src/NavStars.cpp:50 plugins/NavStars/src/NavStars.cpp:119
 msgid "Navigational Stars"
-msgstr ""
+msgstr "Navigationsstjärnor"
 
 #. TRANSLATORS: The emphasis tags mark a book title.
 #: plugins/NavStars/src/NavStars.cpp:54
@@ -8956,7 +8956,7 @@ msgstr ""
 
 #: plugins/NavStars/src/NavStars.cpp:120
 msgid "Mark the navigational stars"
-msgstr ""
+msgstr "Markera navigationsstjärnorna"
 
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:55
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:96
@@ -9813,11 +9813,11 @@ msgstr ""
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:162
 msgid "Right ascension/Declination (J2000.0)"
-msgstr ""
+msgstr "Rektascension/Deklination (J2000.0)"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:163
 msgid "Right ascension/Declination"
-msgstr ""
+msgstr "Rektascension/Deklination"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:165
 msgid "Ecliptic Longitude/Latitude (J2000.0)"
