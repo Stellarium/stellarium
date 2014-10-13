@@ -33,19 +33,19 @@ class QThread;
 class StelTextureMgr : QObject
 {
 public:
-	//! Initialize some variable from the openGL contex.
+	//! Initialize some variable from the openGL context.
 	//! Must be called after the creation of the GLContext.
 	void init();
 
 	//! Load an image from a file and create a new texture from it
 	//! @param filename the texture file name, can be absolute path if starts with '/' otherwise
-	//!    the file will be looked in stellarium standard textures directories.
+	//!    the file will be looked for in Stellarium's standard textures directories.
 	//! @param params the texture creation parameters.
 	StelTextureSP createTexture(const QString& filename, const StelTexture::StelTextureParams& params=StelTexture::StelTextureParams());
 
 	//! Load an image from a file and create a new texture from it in a new thread.
 	//! @param url the texture file name or URL, can be absolute path if starts with '/' otherwise
-	//!    the file will be looked in stellarium standard textures directories.
+	//!    the file will be looked for in Stellarium's standard textures directories.
 	//! @param params the texture creation parameters.
 	//! @param lazyLoading define whether the texture should be actually loaded only when needed, i.e. when bind() is called the first time.
 	StelTextureSP createTextureThread(const QString& url, const StelTexture::StelTextureParams& params=StelTexture::StelTextureParams(), bool lazyLoading=true);
