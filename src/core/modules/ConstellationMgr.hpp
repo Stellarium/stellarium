@@ -47,15 +47,15 @@ class ConstellationMgr : public StelObjectModule
 			   READ getFlagArt
 			   WRITE setFlagArt
 			   NOTIFY artDisplayedChanged)
-	Q_PROPERTY(bool artFadeDuration
+	Q_PROPERTY(float artFadeDuration
 			   READ getArtFadeDuration
 			   WRITE setArtFadeDuration
 			   NOTIFY artFadeDurationChanged)
-	Q_PROPERTY(bool artIntensity
+	Q_PROPERTY(float artIntensity
 			   READ getArtIntensity
 			   WRITE setArtIntensity
 			   NOTIFY artIntensityChanged)
-	Q_PROPERTY(bool boundariesColor
+	Q_PROPERTY(Vec3f boundariesColor
 			   READ getBoundariesColor
 			   WRITE setBoundariesColor
 			   NOTIFY boundariesColorChanged)
@@ -63,7 +63,7 @@ class ConstellationMgr : public StelObjectModule
 			   READ getFlagBoundaries
 			   WRITE setFlagBoundaries
 			   NOTIFY boundariesDisplayedChanged)
-	Q_PROPERTY(bool fontSize
+	Q_PROPERTY(float fontSize
 			   READ getFontSize
 			   WRITE setFontSize
 			   NOTIFY fontSizeChanged)
@@ -71,7 +71,7 @@ class ConstellationMgr : public StelObjectModule
 			   READ getFlagIsolateSelected
 			   WRITE setFlagIsolateSelected
 			   NOTIFY isolateSelectedChanged)
-	Q_PROPERTY(bool linesColor
+	Q_PROPERTY(Vec3f linesColor
 			   READ getLinesColor
 			   WRITE setLinesColor
 			   NOTIFY linesColorChanged)
@@ -79,7 +79,7 @@ class ConstellationMgr : public StelObjectModule
 			   READ getFlagLines
 			   WRITE setFlagLines
 			   NOTIFY linesDisplayedChanged)
-	Q_PROPERTY(bool namesColor
+	Q_PROPERTY(Vec3f namesColor
 			   READ getLabelsColor
 			   WRITE setLabelsColor
 			   NOTIFY namesColorChanged)
