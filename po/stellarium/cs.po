@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-10-11 16:31+0700\n"
-"PO-Revision-Date: 2014-07-05 12:10+0000\n"
-"Last-Translator: PRTgeologist <Unknown>\n"
+"PO-Revision-Date: 2014-10-13 07:42+0000\n"
+"Last-Translator: Alexander Wolf <Unknown>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-10-12 05:57+0000\n"
+"X-Launchpad-Export-Date: 2014-10-14 06:08+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:106 src/core/modules/StarMgr.cpp:346
@@ -223,7 +223,7 @@ msgstr "Planetární mlhovina"
 
 #: src/core/modules/Nebula.cpp:390
 msgid "Dark nebula"
-msgstr ""
+msgstr "Tmavá mlhovina"
 
 #: src/core/modules/Nebula.cpp:393
 msgid "Irregular galaxy"
@@ -267,7 +267,7 @@ msgstr "Vzdálenost: %1AU (%2 km)"
 #: src/core/modules/Comet.cpp:200
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 Mio km)"
-msgstr ""
+msgstr "Vzdálenost: %1AU (%2 mil. km)"
 
 #: src/core/modules/Planet.cpp:221
 #, qt-format
@@ -1235,7 +1235,7 @@ msgstr "Licence"
 
 #: src/gui/ConfigurationDialog.cpp:833
 msgid "Shortcut"
-msgstr ""
+msgstr "Zkratka"
 
 #: src/gui/ConfigurationDialog.cpp:857
 msgid "Running script: "
@@ -1430,7 +1430,7 @@ msgstr "Vlastní rovnice %1T"
 #. TRANSLATORS: This message will be displayed for users if Stellarium can't get info about version from stellarium.org
 #: src/gui/HelpDialog.cpp:294
 msgid "Oops... Stellarium can't check latest version."
-msgstr ""
+msgstr "Oj...Stellarium není schopno zkontrolovat nejnovější verzi."
 
 #. TRANSLATORS: This message will be displayed for users if current version of Stellarium is bigger than version from stellarium.org
 #: src/gui/HelpDialog.cpp:316
@@ -1441,7 +1441,7 @@ msgstr ""
 #: src/gui/HelpDialog.cpp:321
 #, qt-format
 msgid "This version of Stellarium is outdated! Latest version is %1."
-msgstr ""
+msgstr "Tato verze Stellaria je stará! Nejnovější verze je %1."
 
 #: src/gui/HelpDialog.cpp:324
 msgid ""
@@ -1940,19 +1940,19 @@ msgstr ""
 
 #: src/gui/SearchDialog.cpp:250
 msgid "Declination"
-msgstr ""
+msgstr "Deklinace"
 
 #: src/gui/SearchDialog.cpp:257
 msgid "Azimuth"
-msgstr ""
+msgstr "Azimut"
 
 #: src/gui/SearchDialog.cpp:260
 msgid "Altitude"
-msgstr ""
+msgstr "Výška"
 
 #: src/gui/SearchDialog.cpp:267
 msgid "Longitude"
-msgstr ""
+msgstr "Délka"
 
 #: src/gui/SearchDialog.cpp:270
 msgid "Latitude"
@@ -2546,12 +2546,12 @@ msgstr ""
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:208
 msgid "Nebulae"
-msgstr ""
+msgstr "Mlhoviny"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:210
 msgid "Planetary nebulae"
-msgstr ""
+msgstr "Planetární mlhoviny"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:212
@@ -2620,7 +2620,7 @@ msgstr "Maorská"
 
 #: src/translations.h:234
 msgid "Mongolian"
-msgstr ""
+msgstr "Mongolské"
 
 #: src/translations.h:235
 msgid "Navajo"
@@ -2682,7 +2682,7 @@ msgstr "Garching"
 #. TRANSLATORS: Name of landscape
 #: src/translations.h:264
 msgid "Geneva"
-msgstr ""
+msgstr "Ženeva"
 
 #. TRANSLATORS: Name of landscape
 #: src/translations.h:266
@@ -2812,7 +2812,7 @@ msgstr ""
 #. TRANSLATORS: Name of script
 #: src/translations.h:321
 msgid "Earth and Mars Greatest Elongations and Transits from Callisto"
-msgstr ""
+msgstr "Největší elongace a přechody Země a Marsu viděny z Kalista."
 
 #. TRANSLATORS: Description of the landscape tour script.
 #: src/translations.h:327
@@ -3965,11 +3965,11 @@ msgstr "Hledat v:"
 
 #: src/translations.h:606
 msgid "Directory:"
-msgstr ""
+msgstr "Adresář:"
 
 #: src/translations.h:607
 msgid "Folder"
-msgstr ""
+msgstr "Složka"
 
 #: src/translations.h:608
 msgid "&Choose"
@@ -3986,27 +3986,27 @@ msgstr "Soubory typu:"
 
 #: src/translations.h:611
 msgid "Date Modified"
-msgstr ""
+msgstr "Datum změny"
 
 #: src/translations.h:612
 msgid "Directories"
-msgstr ""
+msgstr "Složky"
 
 #: src/translations.h:613
 msgid "Computer"
-msgstr ""
+msgstr "Počítač"
 
 #: src/translations.h:614
 msgid "&Open"
-msgstr ""
+msgstr "&Otevřít"
 
 #: src/translations.h:615
 msgid "File &name:"
-msgstr ""
+msgstr "Jmé&no souboru:"
 
 #: src/translations.h:616
 msgid "Copy &Link Location"
-msgstr ""
+msgstr "Kopírovat &umístění odkazu"
 
 #: src/ui_dateTimeDialogGui.h:369
 msgid "Julian Date"
@@ -4361,7 +4361,7 @@ msgstr "Zvětšení Měsíce"
 
 #: src/ui_viewDialog.h:1167
 msgid "Scale factor"
-msgstr ""
+msgstr "Faktor škálování"
 
 #: src/ui_viewDialog.h:1170
 msgid "Automatic change of landscape when planet is changed"
@@ -4567,7 +4567,7 @@ msgstr "Jazyk programu"
 
 #: src/ui_configurationDialog.h:1010
 msgid "Check updates"
-msgstr ""
+msgstr "Zkontrolovat aktualizace"
 
 #: src/ui_configurationDialog.h:1011
 msgid ""
@@ -4696,7 +4696,7 @@ msgstr "Absoulutní magnituda"
 
 #: src/ui_configurationDialog.h:1057
 msgid "Galactic coordinates"
-msgstr ""
+msgstr "Galaktické souřadnice"
 
 #: src/ui_configurationDialog.h:1058
 msgid "Visual magnitude"
@@ -4725,7 +4725,7 @@ msgstr "Spektrální třídy, typ mlhoviny, atd."
 
 #: src/ui_configurationDialog.h:1070
 msgid "Additional information"
-msgstr ""
+msgstr "Dodatečné informace"
 
 #: src/ui_configurationDialog.h:1072
 msgid "Topocentric equatorial coordinates"
@@ -4755,7 +4755,7 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:1083
 msgid "Ecliptic coordinates"
-msgstr ""
+msgstr "Souřadnice ekliptiky"
 
 #: src/ui_configurationDialog.h:1084
 msgid "Control"
@@ -5103,7 +5103,7 @@ msgstr "uložit skript do souboru"
 
 #: src/ui_scriptConsole.h:366
 msgid "clear"
-msgstr ""
+msgstr "vyčistit"
 
 #: src/ui_scriptConsole.h:370
 msgid "pre-process script using SSC preprocessor"
@@ -5186,7 +5186,7 @@ msgstr ""
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:91
 #: plugins/Oculars/src/gui/OcularDialog.cpp:499
 msgid "Contributors"
-msgstr ""
+msgstr "Přispěvatelé"
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:94
 msgid ""
@@ -5327,7 +5327,7 @@ msgstr ""
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:240
 msgid "Format"
-msgstr ""
+msgstr "Format"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:241
 msgid "Use dms format for angles"
@@ -7887,13 +7887,15 @@ msgstr "nova"
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:115
 msgid "Bright Novae Plug-in"
-msgstr ""
+msgstr "Plugin Jasné novy"
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:121
 msgid ""
 "You can find novae via search tool by entering designation of nova or its "
 "common name (e.g. 'Nova Cygni 1975' or 'V1500 Cyg')."
 msgstr ""
+"Novy můžete nalézt zadáním označení novy nebo jejího známého jména v poli "
+"vyhledávání (např. „Nova Cygni 1975“ nebo „V1500 Cyg“)."
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:123
 msgid "This plugin allows you to see recent bright novae: "
@@ -7931,6 +7933,8 @@ msgid ""
 "If you want to read full information about this plugin, its history and "
 "catalog format, you can %1get info here%2."
 msgstr ""
+"Jestliže si chcete přečíst více informací o tomto pluginu, jeho historii a "
+"formátu katalogu, můžete tak učinit %1zde%2."
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:209
 msgid "Novae is updated"
@@ -7938,11 +7942,11 @@ msgstr ""
 
 #: plugins/Novae/src/ui_novaeDialog.h:232
 msgid "Bright Novae Configuration"
-msgstr ""
+msgstr "Nastavení Jasných nov"
 
 #: plugins/Novae/src/ui_novaeDialog.h:233
 msgid "Bright Novae Plug-in Configuration"
-msgstr ""
+msgstr "Nastavení pluginu Jasné novy"
 
 #: plugins/Quasars/src/Quasars.cpp:73 plugins/Quasars/src/Quasars.cpp:170
 #: plugins/Quasars/src/Quasars.cpp:171
@@ -8468,7 +8472,7 @@ msgstr "Exoplanety: interaktivní verze XKCD 1071"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:183
 msgid "HEK (The Hunt for Exomoons with Kepler)"
-msgstr ""
+msgstr "LEMK (Lov exoplanetárních měsíců s Keplerem)"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:184
 msgid "Exoplanets in binaries and multiple systems (Richard Schwarz)"
@@ -8596,7 +8600,7 @@ msgstr "Informace"
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:331
 msgctxt "tab in plugin windows"
 msgid "Websites"
-msgstr ""
+msgstr "Webové stránky"
 
 #: plugins/Observability/src/Observability.cpp:67
 msgid "Observability Analysis"
@@ -9111,13 +9115,13 @@ msgstr ""
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:258
 msgctxt "time"
 msgid "m"
-msgstr ""
+msgstr "m"
 
 #. TRANSLATORS: seconds.
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:260
 msgctxt "time"
 msgid "s"
-msgstr ""
+msgstr "s"
 
 #: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:80
 msgid "Equation of Time plug-in"
@@ -9151,7 +9155,7 @@ msgstr ""
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:275
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:343
 msgid "Font size:"
-msgstr ""
+msgstr "Velikost fontu:"
 
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:63
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:163
