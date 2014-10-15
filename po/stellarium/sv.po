@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-10-11 16:31+0700\n"
-"PO-Revision-Date: 2014-10-12 09:34+0000\n"
+"PO-Revision-Date: 2014-10-14 21:59+0000\n"
 "Last-Translator: Anders Jonsson <Unknown>\n"
 "Language-Team: Swedish <tp-sv@listor.tp-sv.se>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-10-13 05:45+0000\n"
+"X-Launchpad-Export-Date: 2014-10-15 05:47+0000\n"
 "X-Generator: Launchpad (build 17196)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:106 src/core/modules/StarMgr.cpp:346
@@ -1453,6 +1453,7 @@ msgstr ""
 msgid ""
 " Sorry, your hardware is not compatible with newest version of Stellarium!"
 msgstr ""
+" Din hårdvara är inte kompatibel med den senaste versionen av Stellarium!"
 
 #. TRANSLATORS: This message will be displayed for users if current version of Stellarium is equals with version from stellarium.org
 #: src/gui/HelpDialog.cpp:331
@@ -1954,11 +1955,11 @@ msgstr "Azimut"
 
 #: src/gui/SearchDialog.cpp:260
 msgid "Altitude"
-msgstr ""
+msgstr "Altitud"
 
 #: src/gui/SearchDialog.cpp:267
 msgid "Longitude"
-msgstr ""
+msgstr "Longitud"
 
 #: src/gui/SearchDialog.cpp:270
 msgid "Latitude"
@@ -2023,11 +2024,14 @@ msgid ""
 "Insufficient OpenGL version. Please update drivers, graphics hardware, or "
 "use MESA (or ANGLE) version."
 msgstr ""
+"Otillräcklig OpenGL-version. Uppdatera drivrutiner, grafikhårdvara, eller "
+"använd MESA- eller ANGLE-versionen."
 
 #: src/main.cpp:366
 msgid ""
 "Insufficient OpenGL version. Please update drivers, or graphics hardware."
 msgstr ""
+"Otillräcklig OpenGL-version. Uppdatera drivrutiner eller grafikhårdvara."
 
 #: src/StelMainView.cpp:352
 msgid "Save screenshot"
@@ -2537,7 +2541,7 @@ msgstr "Plutoider"
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:202
 msgid "Bright galaxies"
-msgstr ""
+msgstr "Ljusstarka galaxer"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:204
@@ -2798,17 +2802,17 @@ msgstr "Stjärnbildsmytologisk rundtur"
 #. TRANSLATORS: Name and description of script
 #: src/translations.h:313
 msgid "Earth Events from Mercury"
-msgstr "Jord händelser sett från Merkurius"
+msgstr "Jordhändelser sett från Merkurius"
 
 #. TRANSLATORS: Name and description of script
 #: src/translations.h:315
 msgid "Earth Events from a floating city on Venus"
-msgstr "Jordhändelser från en flytande stad på Venus"
+msgstr "Jordhändelser sett från en flytande stad på Venus"
 
 #. TRANSLATORS: Name and description of script
 #: src/translations.h:317
 msgid "Earth Events from Mars"
-msgstr "Jord-händelser sett från Mars"
+msgstr "Jordhändelser sett från Mars"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:319
@@ -4060,11 +4064,11 @@ msgstr ""
 
 #: src/ui_locationDialogGui.h:414
 msgid "Reset location list to show all known locations"
-msgstr ""
+msgstr "Återställ platslista till att visa alla kända platser"
 
 #: src/ui_locationDialogGui.h:416
 msgid "Reset Location List"
-msgstr ""
+msgstr "Återställ platslista"
 
 #: src/ui_locationDialogGui.h:417
 msgid "Current location information"
@@ -4103,7 +4107,7 @@ msgstr " m"
 
 #: src/ui_locationDialogGui.h:431
 msgid "Return to default location"
-msgstr ""
+msgstr "Återvänd till standardplats"
 
 #: src/ui_locationDialogGui.h:433
 msgid "Add to list"
@@ -4127,11 +4131,11 @@ msgstr "Planet:"
 
 #: src/ui_locationDialogGui.h:438
 msgid "Use current location as default"
-msgstr ""
+msgstr "Använd aktuell plats som standard"
 
 #: src/ui_locationDialogGui.h:439
 msgid "Get location from Network"
-msgstr ""
+msgstr "Hämta plats från nätverk"
 
 #: src/ui_searchDialogGui.h:606
 msgid "Find Object"
@@ -4589,7 +4593,7 @@ msgid ""
 "stable versions you can look on the tab \"About\" of \"Help\" window."
 msgstr ""
 "Aktivera sökning efter uppdateringar av Stellarium via internet. Info om "
-"nya, stabila versioner kan du hitta under fliken \"Om\" i \"Hjälp\" fönstret."
+"nya, stabila versioner kan du hitta under fliken \"Om\" i \"Hjälp\"-fönstret."
 
 #: src/ui_configurationDialog.h:1012
 msgid "Default options"
@@ -6435,7 +6439,7 @@ msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:683
 msgid "Update satellite data from Internet sources"
-msgstr ""
+msgstr "Uppdatera satellitdata från internetkällor"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:684
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:234
@@ -6449,13 +6453,15 @@ msgstr "Senaste uppdatering:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:685
 msgid "On update, add all new satellites from the selected source(s)"
-msgstr ""
+msgstr "Lägg till alla nya satelliter från de valda källorna vid uppdatering"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:687
 msgid ""
 "On update, remove the satellites that are no longer listed in the update "
 "sources"
 msgstr ""
+"Ta bort satelliterna som inte längre listas i uppdateringskällorna vid "
+"uppdatering"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:688
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:309
@@ -6578,6 +6584,8 @@ msgid ""
 "Satellites in the marked source lists will be automatically added on the "
 "next update if they are not already in the collection."
 msgstr ""
+"Satelliter i de markerade källistorna kommer läggas till automatiskt vid "
+"nästa uppdatering om de inte redan finns i samlingen."
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:751
 msgid ""
@@ -6603,7 +6611,7 @@ msgstr "Fler satelliter"
 
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:213
 msgid "Get data from update sources"
-msgstr ""
+msgstr "Hämta data från uppdateringskällor"
 
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:214
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:524
@@ -7771,7 +7779,7 @@ msgstr ""
 #: plugins/Quasars/src/ui_quasarsDialog.h:260
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:266
 msgid "Update catalog from Internet"
-msgstr ""
+msgstr "Uppdatera katalog från internet"
 
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:233
 #: plugins/Novae/src/ui_novaeDialog.h:236
@@ -8401,7 +8409,7 @@ msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:186
 msgid "update: 16 April 2012"
-msgstr ""
+msgstr "uppdatering: 16 April 2012"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:187
 msgid "The Exoplanet Data Explorer"
@@ -9663,7 +9671,7 @@ msgstr ""
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:515
 msgid "Update data from Internet"
-msgstr ""
+msgstr "Uppdatera data från internet"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:523
 msgid "Meteor showers"
