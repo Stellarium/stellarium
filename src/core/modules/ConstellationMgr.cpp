@@ -150,6 +150,9 @@ void ConstellationMgr::updateSkyCulture(const QString& skyCultureDir)
 	else
 		loadNames(fic);
 
+	// load seasonal rules
+	loadSeasonalRules(StelFileMgr::findFile("skycultures/" + skyCultureDir + "/seasonal_rules.fab"));
+
 	// Translate constellation names for the new sky culture
 	updateI18n();
 
@@ -668,6 +671,88 @@ void ConstellationMgr::loadNames(const QString& namesFile)
 	}
 	commonNameFile.close();
 	qDebug() << "Loaded" << readOk << "/" << totalRecords << "constellation names";
+}
+
+void ConstellationMgr::loadSeasonalRules(const QString& rulesFile)
+{
+	// Constellation not loaded yet
+	if (asterisms.empty()) return;
+
+	bool flag = true;
+	if (rulesFile.isEmpty())
+		flag = false;
+
+	// clear previous names
+	vector < Constellation * >::const_iterator iter;
+	for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
+	{
+		(*iter)->beginSeason = 1;
+		(*iter)->endSeason = 12;
+		(*iter)->seasonalRuleEnabled = flag;
+	}
+
+	// Current starlore didn't support the seasonal rules
+	if (!flag)
+		return;
+
+	// Open file
+	QFile seasonalRulesFile(rulesFile);
+	if (!seasonalRulesFile.open(QIODevice::ReadOnly | QIODevice::Text))
+	{
+		qDebug() << "Cannot open file" << QDir::toNativeSeparators(rulesFile);
+		return;
+	}
+
+	// Now parse the file
+	// lines to ignore which start with a # or are empty
+	QRegExp commentRx("^(\\s*#.*|\\s*)$");
+
+	// lines which look like records - we use the RE to extract the fields
+	// which will be available in recRx.capturedTexts()
+	QRegExp recRx("^\\s*(\\w+)\\s+(\\w+)\\s+(\\w+)\\n");
+
+	// Some more variables to use in the parsing
+	Constellation *aster;
+	QString record, shortName;
+
+	// keep track of how many records we processed.
+	int totalRecords=0;
+	int readOk=0;
+	int lineNumber=0;
+	while (!seasonalRulesFile.atEnd())
+	{
+		record = QString::fromUtf8(seasonalRulesFile.readLine());
+		lineNumber++;
+
+		// Skip comments
+		if (commentRx.exactMatch(record))
+			continue;
+
+		totalRecords++;
+
+		if (!recRx.exactMatch(record))
+		{
+			qWarning() << "ERROR - cannot parse record at line" << lineNumber << "in seasonal rules file" << QDir::toNativeSeparators(rulesFile);
+		}
+		else
+		{
+			shortName = recRx.capturedTexts().at(1);
+			aster = findFromAbbreviation(shortName);
+			// If the constellation exists, set the English name
+			if (aster != NULL)
+			{
+				aster->beginSeason = recRx.capturedTexts().at(2).toInt();
+				aster->endSeason = recRx.capturedTexts().at(3).toInt();
+				readOk++;
+			}
+			else
+			{
+				qWarning() << "WARNING - constellation abbreviation" << shortName << "not found when loading seasonal rules for constellations";
+			}
+		}
+	}
+	seasonalRulesFile.close();
+	qDebug() << "Loaded" << readOk << "/" << totalRecords << "seasonal rules";
 }
 
 void ConstellationMgr::updateI18n()
