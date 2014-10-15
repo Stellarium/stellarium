@@ -271,6 +271,11 @@ private:
 	//!    the boundary separates.
 	//! @param conCatFile the path to the file which contains the constellation boundary data.
 	bool loadBoundaries(const QString& conCatFile);
+
+	//! Read seasonal rules for displaying constellations from the given file.
+	//! @param rulesFile Name of the file containing the seasonal rules
+	void loadSeasonalRules(const QString& rulesFile);
+
         //! Draw the constellation lines at the epoch given by the StelCore.
 	void drawLines(StelPainter& sPainter, const StelCore* core) const;
 	//! Draw the constellation art.
