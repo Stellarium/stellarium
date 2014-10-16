@@ -1,6 +1,7 @@
 /*
  * Stellarium
  * Copyright (C) 2002 Fabien Chereau
+ * Copyright (C) 2014 Georg Zotti (extinction parts)
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -63,18 +64,24 @@ void MilkyWay::init()
 	setFlagShow(conf->value("astro/flag_milky_way").toBool());
 	setIntensity(conf->value("astro/milky_way_intensity",1.f).toFloat());
 
-	vertexArray = new StelVertexArray(StelPainter::computeSphereNoLight(1.f,1.f,20,20,1));
+	vertexArray = new StelVertexArray(StelPainter::computeSphereNoLight(1.f,1.f,36,18,1)); // GZ orig: slices=stacks=20. // GZ:
 	vertexArray->colors.resize(vertexArray->vertex.length());
 	vertexArray->colors.fill(Vec3f(1.0, 0.3, 0.9));
+
+	// GZ It appears cleaner to properly transform the vertex coordinates already here.
+	// The texture had to be rotated and shifted compared to 0.13.0
+	StelCore* core=StelApp::getInstance().getCore();
+	for (int i=0; i<vertexArray->vertex.size(); ++i)
+	{
+		Vec3d tmp=vertexArray->vertex.at(i);
+		vertexArray->vertex.replace(i, core->galacticToJ2000(tmp));
+	}
 }
 
 
 void MilkyWay::update(double deltaTime)
 {
 	fader->update((int)(deltaTime*1000));
-
-	// TODO: Fill colors array with extincted versions of 1/1/1.
-	// i.e. project Milky Way, read all vertices' horizon-relative z values, adjust colors.
 }
 
 void MilkyWay::setFlagShow(bool b){*fader = b;}
@@ -86,11 +93,13 @@ void MilkyWay::draw(StelCore* core)
 		return;
 
 	StelProjector::ModelViewTranformP transfo = core->getJ2000ModelViewTransform();
-	transfo->combine(Mat4d::xrotation(M_PI/180.*23.)*
-					 Mat4d::yrotation(M_PI/180.*120.)*
-					 Mat4d::zrotation(M_PI/180.*7.));
+	// GZ: No idea where this came from. Empirical correction? Now the vertices have been replaced already in init().
+	// (the "official" angles are not integers...)
+//	transfo->combine(Mat4d::xrotation(M_PI/180.*23.)*
+//					 Mat4d::yrotation(M_PI/180.*120.)*
+//					 Mat4d::zrotation(M_PI/180.*7.));
 
-	const StelProjectorP prj = core->getProjection(transfo);
+	const StelProjectorP prj = core->getProjection(transfo); // GZ: Maybe this can now be simplified?
 	StelToneReproducer* eye = core->getToneReproducer();
 
 	Q_ASSERT(tex);	// A texture must be loaded before calling this
@@ -118,50 +127,23 @@ void MilkyWay::draw(StelCore* core)
 
 	if (withExtinction)
 	{
-		// GZ: We must process the rotated vertices to find elevation.
-		QVector<Vec3d> rotatedMilkywayVertices(vertexArray->vertex);
-
-
-		// TODO: Rotate a copy of the milky way vertices so that vertex coordinates reflect azimuthal positions.
-		// We can use this fast version. The difference causes by refraction in this case is negligible.
-		// core->j2000ToAltAzInPlaceNoRefraction(transfo-> * rotatedMilkywayVertices.data());
-		// Alternative: something along the lines of:
-		// prj->forward(rotatedMilkywayVertices); // ???
-
-		// mag vector is used for fast extinction. We set the vertex color array afterwards.
-//		QVector<float> extinctionMag;
-//		extinctionMag.resize(rotatedMilkywayVertices.length());
-//		extinctionMag.fill(0.0f);
-//		core->getSkyDrawer()->getExtinction().forward(&(rotatedMilkywayVertices.constData()), extinctionMag.data());
-//		// Now we have an array of mag difference values for each vertex of the Milky Way vertexArray.
-//		// The globally derived color must be modulated by the extinction magnitude and brought to every vertex color.
-
-//		//QVector<float>::const_iterator magIter;
-//		vertexArray->colors.clear();
-//		//for (magIter=extinctionMag.begin(); magIter != extinctionMag.end(); ++magIter)
-//		float oneMag;
-//		foreach(oneMag, extinctionMag)
-//		{
-//			// compute a simple factor from magnitude loss.
-//			//float extinctionFactor=std::pow(0.4f , magIter.value()); // drop of one magnitude: factor 2.5 or 40%
-//			float extinctionFactor=std::pow(0.4f , oneMag); // drop of one magnitude: factor 2.5 or 40%
-//			Vec3f thisColor=Vec3f(c[0]*extinctionFactor, c[1]*extinctionFactor, c[2]*extinctionFactor);
-//			vertexArray->colors.append(thisColor);
-//		}
+		// GZ: We must process the vertices to find geometric altitudes in order to compute vertex colors.
 		Extinction extinction=core->getSkyDrawer()->getExtinction();
 		vertexArray->colors.clear();
-		QVector<Vec3d>::const_iterator iter;
-		for (iter=rotatedMilkywayVertices.begin(); iter !=rotatedMilkywayVertices.end(); ++iter)
-		{
-			float oneMag=0.0f;
-			Vec3d tmp(iter->v[0], iter->v[1], iter->v[2]);
-			extinction.forward(tmp, &oneMag);
-			if (debugOne)
-				qDebug() << "Vector: " << iter->v[0] << "/" << iter->v[1] << "/" << iter->v[2] << ":" << oneMag;
-			float extinctionFactor=std::pow(0.4f , oneMag); // drop of one magnitude: factor 2.5 or 40%
-			Vec3f thisColor=Vec3f(3.0f*c[0], c[1]*8.0f*extinctionFactor, c[2]*extinctionFactor);
-			vertexArray->colors.append(thisColor);
 
+		for (int i=0; i<vertexArray->vertex.size(); ++i)
+		{
+			Vec3d vertJ2000(vertexArray->vertex.at(i));
+			Vec3d vertAltAz=core->j2000ToAltAz(vertJ2000, StelCore::RefractionOn);
+
+			float oneMag=0.0f;
+			vertAltAz.normalize(); // necessary?
+			extinction.forward(vertAltAz, &oneMag);
+			if (debugOne)
+				qDebug() << "Vector: " << vertAltAz.v[0] << "/" << vertAltAz.v[1] << "/" << vertAltAz.v[2] << ":" << oneMag;
+			float extinctionFactor=std::pow(0.4f , oneMag); // drop of one magnitude: factor 2.5 or 40%
+			Vec3f thisColor=Vec3f(c[0]*extinctionFactor, c[1]*extinctionFactor, c[2]*extinctionFactor);
+			vertexArray->colors.append(thisColor);
 		}
 		debugOne=false; // stop log dump after one frame.
 	}
