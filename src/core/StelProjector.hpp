@@ -45,7 +45,7 @@ public:
 	//! Shared pointer on a ModelViewTranform instance (implement reference counting)
 	typedef QSharedPointer<ModelViewTranform> ModelViewTranformP;
 
-	//! @class PreModelViewFunc
+	//! @class ModelViewTranform
 	//! Allows to define non linear operations in addition to the standard linear (Matrix 4d) ModelView transformation.
 	class ModelViewTranform
 	{
