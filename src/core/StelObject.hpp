@@ -134,7 +134,7 @@ public:
 	virtual float getVMagnitude(const StelCore* core) const;
 	
 	//! Return object's apparent V magnitude as seen from observer including extinction.
-	//! GZ 2014-01-02: Extinction obviously only if atmosphere=on.
+	//! Extinction obviously only if atmosphere=on.
 	float getVMagnitudeWithExtinction(const StelCore* core) const;
 
 	//! Return a priority value which is used to discriminate objects by priority

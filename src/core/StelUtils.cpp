@@ -546,13 +546,11 @@ void rectToSphe(double *lng, double *lat, const Vec3f& v)
 	*lng = atan2(v[1],v[0]);
 }
 
-// GZ: some additions. I need those just for quick conversions for text display.
 void ctRadec2Ecl(const double raRad, const double decRad, const double eclRad, double *lambdaRad, double *betaRad)
 {
 	*lambdaRad=std::atan2(std::sin(raRad)*std::cos(eclRad)+std::tan(decRad)*std::sin(eclRad), std::cos(raRad));
 	*betaRad=std::asin(std::sin(decRad)*std::cos(eclRad)-std::cos(decRad)*std::sin(eclRad)*std::sin(raRad));
 }
-// GZ: done
 
 double getDecAngle(const QString& str)
 {
@@ -1265,8 +1263,6 @@ double getDeltaTByEspenakMeeus(const double jDay)
 	// "Five Millennium Canon of Solar Eclipses" [Espenak and Meeus, 2006]
 	// A summary is described here:
 	// http://eclipse.gsfc.nasa.gov/SEhelp/deltatpoly2004.html
-	// GZ: I replaced the std::pow() calls by Horner's scheme with reversed factors, it's more accurate and efficient.
-	//     Old code left for readability, but can also be deleted.
 
 	double y = year+((month-1)*30.5+day/31*30.5)/366;
 
@@ -1532,7 +1528,7 @@ double getDeltaTByChaprontTouze(const double jDay)
 
 // Implementation of algorithm by JPL Horizons for DeltaT computation
 double getDeltaTByJPLHorizons(const double jDay)
-{ // GZ: TODO: FIXME! It does not make sense to have zeros after 1620 in a JPL Horizons compatible implementation!
+{ // TODO: FIXME! It does not make sense to have zeros after 1620 in a JPL Horizons compatible implementation!
 	int year, month, day;
 	double u;
 	double deltaT = 0.;
@@ -1716,16 +1712,16 @@ double getDeltaTByMeeusSimons(const double jDay)
 }
 
 // Implementation of algorithm by Reingold & Dershowitz (Cal. Calc. 1997, 2001, 2007, Cal. Tab. 2002) for DeltaT computation.
-// GZ: Created as yet another multi-segment polynomial fit through the table in Meeus: Astronomical Algorithms (1991).
-// GZ: Note that only the Third edition (2007) adds the 1700-1799 term.
-// GZ: More efficient reimplementation with stricter adherence to the source.
+// Created as yet another multi-segment polynomial fit through the table in Meeus: Astronomical Algorithms (1991).
+// Note that only the Third edition (2007) adds the 1700-1799 term.
+// More efficient reimplementation with stricter adherence to the source.
 double getDeltaTByReingoldDershowitz(const double jDay)
 {
 	int year, month, day;	
 	getDateFromJulianDay(jDay, &year, &month, &day);
-	// GZ: R&D don't use a float-fraction year, but explicitly only the integer year! And R&D use a proleptic Gregorian year before 1582.
-	// GZ: We cannot do that, but the difference is negligible.
-	// GZ: FIXME: why are displayed values so far off the computed values? It seems currently broken!
+	// R&D don't use a float-fraction year, but explicitly only the integer year! And R&D use a proleptic Gregorian year before 1582.
+	// We cannot do that, but the difference is negligible.
+	// FIXME: why are displayed values so far off the computed values? It seems currently broken!
 	double deltaT=0.0; // If it returns 0, there is a bug!
 
 	if ((year >= 2019) || (year < 1620))
@@ -1945,7 +1941,7 @@ float* ComputeCosSinRho(const int segments)
 //! Compute cosines and sines around part of a circle (from top to bottom) which is split in "segments" parts.
 //! Values are stored in the global static array cos_sin_rho.
 //! Used for the sin/cos values along a meridian.
-//! GZ: allow leaving away pole caps. The array now contains values for the region minAngle+segments*phi
+//! This allows leaving away pole caps. The array now contains values for the region minAngle+segments*phi
 //! @param dRho a difference angle between the stops
 //! @param segments number of segments
 //! @param minAngle start angle inside the half-circle. maxAngle=minAngle+segments*phi

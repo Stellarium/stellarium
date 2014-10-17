@@ -40,7 +40,6 @@ MilkyWay::MilkyWay()
 	: color(1.f, 1.f, 1.f)
 	, intensity(1.)
 	, vertexArray()
-	, debugOne(true)
 {
 	setObjectName("MilkyWay");
 	fader = new LinearFader();
@@ -66,7 +65,7 @@ void MilkyWay::init()
 	// GZ: I cut the original milkyway.png 512x512 to 512x256. Center line was shifted southwards by 32 pixels to keep Magellanic Clouds visible.
 	// 256px were 90 degrees. 128:45, 64:22.5, 32:11.25. So this spherical ring goes from -45-11.25 to 45-11.25.
 
-	vertexArray = new StelVertexArray(StelPainter::computeSphereNoLight(1.f,1.f,72,18,1, true, (90.0f-33.75f)*M_PI/180.0f, (90.0f+56.25f)*M_PI/180.0f)); // GZ orig: slices=stacks=20. // GZ:
+	vertexArray = new StelVertexArray(StelPainter::computeSphereNoLight(1.f,1.f,45,15,1, true, (90.0f-33.75f)*M_PI/180.0f, (90.0f+56.25f)*M_PI/180.0f)); // GZ orig: slices=stacks=20. // GZ:
 	vertexArray->colors.resize(vertexArray->vertex.length());
 	vertexArray->colors.fill(Vec3f(1.0, 0.3, 0.9));
 
@@ -129,7 +128,7 @@ void MilkyWay::draw(StelCore* core)
 
 	if (withExtinction)
 	{
-		// GZ: We must process the vertices to find geometric altitudes in order to compute vertex colors.
+		// We must process the vertices to find geometric altitudes in order to compute vertex colors.
 		Extinction extinction=core->getSkyDrawer()->getExtinction();
 		vertexArray->colors.clear();
 
@@ -137,25 +136,20 @@ void MilkyWay::draw(StelCore* core)
 		{
 			Vec3d vertJ2000(vertexArray->vertex.at(i));
 			Vec3d vertAltAz=core->j2000ToAltAz(vertJ2000, StelCore::RefractionOn);
+			Q_ASSERT(vertAltAz.lengthSquared()-1.0 < 0.001f);
 
 			float oneMag=0.0f;
-			Q_ASSERT(vertAltAz.lengthSquared()-1.0 < 0.001f);
-			//vertAltAz.normalize(); // necessary?
 			extinction.forward(vertAltAz, &oneMag);
-			if (debugOne)
-				qDebug() << "Vector: " << vertAltAz.v[0] << "/" << vertAltAz.v[1] << "/" << vertAltAz.v[2] << ":" << oneMag;
 			float extinctionFactor=std::pow(0.4f , oneMag); // drop of one magnitude: factor 2.5 or 40%
 			Vec3f thisColor=Vec3f(c[0]*extinctionFactor, c[1]*extinctionFactor, c[2]*extinctionFactor);
 			vertexArray->colors.append(thisColor);
 		}
-		debugOne=false; // stop log dump after one frame.
 	}
 	else
 		vertexArray->colors.fill(Vec3f(c[0], c[1], c[2]));
 
 
 	StelPainter sPainter(prj);
-	//sPainter.setColor(c[0],c[1],c[2]);
 	glEnable(GL_CULL_FACE);
 	sPainter.enableTexture2d(true);
 	glDisable(GL_BLEND);

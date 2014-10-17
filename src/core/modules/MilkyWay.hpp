@@ -76,10 +76,6 @@ private:
 	class LinearFader* fader;
 
 	struct StelVertexArray* vertexArray;
-	bool debugOne;
-	// GZ: array to hold vertex colors (the final values, for proper extinction). Must be re-computed in update()
-	// QVector<Vec3f> *vertexColors; --> now integrated in StelVertexArray
-
 };
 
 #endif // _MILKYWAY_HPP_
