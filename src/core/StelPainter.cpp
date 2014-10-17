@@ -1180,7 +1180,7 @@ void StelPainter::projectSphericalTriangle(const SphericalCap* clippingCap, cons
 
 static QVarLengthArray<Vec3f, 4096> polygonVertexArray;
 static QVarLengthArray<Vec2f, 4096> polygonTextureCoordArray;
-static QVarLengthArray<Vec3f, 4096> polygonColorArray;  // GZ NEW
+static QVarLengthArray<Vec3f, 4096> polygonColorArray;
 static QVarLengthArray<unsigned int, 4096> indexArray;
 
 void StelPainter::drawGreatCircleArcs(const StelVertexArray& va, const SphericalCap* clippingCap)
@@ -1226,7 +1226,7 @@ public:
 	// Project a single triangle and add it into the output arrays
 	inline void operator()(const Vec3d* v0, const Vec3d* v1, const Vec3d* v2,
 						   const Vec2f* t0, const Vec2f* t1, const Vec2f* t2,
-						   const Vec3f* c0, const Vec3f* c1, const Vec3f* c2, // NEW GZ
+						   const Vec3f* c0, const Vec3f* c1, const Vec3f* c2,
 						   unsigned int, unsigned int, unsigned)
 	{
 		// XXX: we may optimize more by putting the declaration and the test outside of this method.
@@ -1270,7 +1270,7 @@ private:
 	StelPainter* painter;
 	const SphericalCap* clippingCap;
 	QVarLengthArray<Vec3f, 4096>* outVertices;
-	QVarLengthArray<Vec3f, 4096>* outColors; // GZ NEW
+	QVarLengthArray<Vec3f, 4096>* outColors;
 	QVarLengthArray<Vec2f, 4096>* outTexturePos;
 	double maxSqDistortion;
 };
@@ -1360,7 +1360,7 @@ void StelPainter::drawSphericalRegion(const SphericalRegion* poly, SphericalPoly
 			glEnable(GL_CULL_FACE);
 			// The polygon is already tesselated as triangles
 			if (doSubDivise || prj->intersectViewportDiscontinuity(poly->getBoundingCap()))
-				// GZ: new flag for color-modulated textured mode (for Milky Way/extincted)
+				// flag for color-modulated textured mode (e.g. for Milky Way/extincted)
 				drawSphericalTriangles(poly->getFillVertexArray(), drawMode>=SphericalPolygonDrawModeTextureFill, drawMode==SphericalPolygonDrawModeTextureFillColormodulated, clippingCap, doSubDivise, maxSqDistortion);
 			else
 				drawStelVertexArray(poly->getFillVertexArray(), false);
@@ -1523,7 +1523,7 @@ void StelPainter::drawLine2d(const float x1, const float y1, const float x2, con
 
 ///////////////////////////////////////////////////////////////////////////
 // Drawing methods for general (non-linear) mode.
-// GZ This used to draw a full sphere. Now it's possible to have a spherical zone only.
+// This used to draw a full sphere. Since 0.13 it's possible to have a spherical zone only.
 void StelPainter::sSphere(const float radius, const float oneMinusOblateness, const int slices, const int stacks, const int orientInside, const bool flipTexture, const float topAngle, const float bottomAngle)
 {
 	GLfloat x, y, z;
@@ -1551,7 +1551,7 @@ void StelPainter::sSphere(const float radius, const float oneMinusOblateness, co
 		const float drho = (bottomAngle-topAngle) / stacks; // deltaRho:  originally just 180degrees/stacks, now the range clamped.
 		cos_sin_rho = StelUtils::ComputeCosSinRhoZone(drho, stacks, M_PI-bottomAngle);
 	}
-	// GZ: Allow parameters so that pole regions may remain free.
+	// Allow parameters so that pole regions may remain free.
 	const float* cos_sin_rho_p;
 
 	const float* cos_sin_theta = StelUtils::ComputeCosSinTheta(slices);
@@ -1564,7 +1564,7 @@ void StelPainter::sSphere(const float radius, const float oneMinusOblateness, co
 	const GLfloat ds = (flipTexture ? -1.f : 1.f) / slices;
 	const GLfloat dt = nsign / stacks; // from inside texture is reversed
 
-	// draw intermediate  as quad strips
+	// draw intermediate as quad strips
 	static QVector<double> vertexArr;
 	static QVector<float> texCoordArr;
 	static QVector<float> colorArr;
@@ -1634,7 +1634,7 @@ StelVertexArray StelPainter::computeSphereNoLight(const float radius, const floa
 		const float drho = (bottomAngle-topAngle) / stacks; // deltaRho:  originally just 180degrees/stacks, now the range clamped.
 		cos_sin_rho = StelUtils::ComputeCosSinRhoZone(drho, stacks, M_PI-bottomAngle);
 	}
-	// GZ: Allow parameters so that pole regions may remain free.
+	// Allow parameters so that pole regions may remain free.
 	const float* cos_sin_rho_p;
 
 	const float* cos_sin_theta = StelUtils::ComputeCosSinTheta(slices);
@@ -1647,7 +1647,7 @@ StelVertexArray StelPainter::computeSphereNoLight(const float radius, const floa
 	const GLfloat ds = (flipTexture ? -1.f : 1.f) / slices;
 	const GLfloat dt = nsign / stacks; // from inside texture is reversed
 
-	// draw intermediate  as quad strips
+	// draw intermediate as quad strips
 	for (i = 0,cos_sin_rho_p = cos_sin_rho; i < stacks; ++i,cos_sin_rho_p+=2)
 	{
 		s = !flipTexture ? 0.f : 1.f;
