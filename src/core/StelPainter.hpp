@@ -166,7 +166,7 @@ public:
 	//! @param slices: number of vertical segments ("meridian zones")
 	//! @param stacks: number of horizontal segments ("latitude zones")
 	//! @param orientInside: 1 to have normals point inside, e.g. for landscape horizons
-	//! @param flipTexture: if texture should be mapped to inside of shere, e.g. landscape horizons.
+	//! @param flipTexture: if texture should be mapped to inside of sphere, e.g. landscape horizons.
 	//! @param topAngle GZ: new parameter. An opening angle [radians] at top of the sphere. Useful if there is an empty
 	//!        region around the top pole, like for a spherical equirectangular horizon panorama (@class SphericalLandscape).
 	//!        Example: your horizon line (pano photo) goes up to 26 degrees altitude (highest mountains/trees):
@@ -179,8 +179,19 @@ public:
 				 const float topAngle=0.0f, const float bottomAngle=M_PI);
 
 	//! Generate a StelVertexArray for a sphere.
+	//! @param radius
+	//! @param oneMinusOblateness
+	//! @param slices: number of vertical segments ("meridian zones")
+	//! @param stacks: number of horizontal segments ("latitude zones")
+	//! @param orientInside: 1 to have normals point inside, e.g. for Milky Way, Zodiacal Light, etc.
+	//! @param flipTexture: if texture should be mapped to inside of sphere, e.g. Milky Way.
+	//! @param topAngle GZ: new parameter. An opening angle [radians] at top of the sphere. Useful if there is an empty
+	//!        region around the top pole, like North Galactic Pole.
+	//! @param bottomAngle GZ: new parameter. An opening angle [radians] at bottom of the sphere. Useful if there is an empty
+	//!        region around the bottom pole, like South Galactic Pole.
 	static StelVertexArray computeSphereNoLight(const float radius, const float oneMinusOblateness, const int slices, const int stacks,
-												const int orientInside = 0, const bool flipTexture = false);
+						    const int orientInside = 0, const bool flipTexture = false,
+						    const float topAngle=0.0f, const float bottomAngle=M_PI);
 
 	//! Re-implementation of gluCylinder : glu is overridden for non-standard projection.
 	void sCylinder(const float radius, const float height, const int slices, const int orientInside = 0);

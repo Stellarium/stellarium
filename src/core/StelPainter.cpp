@@ -1219,7 +1219,7 @@ public:
 	VertexArrayProjector(const StelVertexArray& ar, StelPainter* apainter, const SphericalCap* aclippingCap,
 						 QVarLengthArray<Vec3f, 4096>* aoutVertices, QVarLengthArray<Vec2f, 4096>* aoutTexturePos=NULL, QVarLengthArray<Vec3f, 4096>* aoutColors=NULL, double amaxSqDistortion=5.)
 		   : vertexArray(ar), painter(apainter), clippingCap(aclippingCap), outVertices(aoutVertices),
-			 outTexturePos(aoutTexturePos), outColors(aoutColors), maxSqDistortion(amaxSqDistortion)
+			 outColors(aoutColors), outTexturePos(aoutTexturePos), maxSqDistortion(amaxSqDistortion)
 	{
 	}
 
@@ -1544,7 +1544,7 @@ void StelPainter::sSphere(const float radius, const float oneMinusOblateness, co
 
 	const float* cos_sin_rho = NULL;
 	Q_ASSERT(topAngle<bottomAngle); // don't forget: These are opening angles counted from top.
-	if ((bottomAngle>3.1415) && (topAngle<0.0001)) // safety margin.
+	if ((bottomAngle>3.1415f) && (topAngle<0.0001f)) // safety margin.
 		cos_sin_rho = StelUtils::ComputeCosSinRho(stacks);
 	else
 	{
@@ -1606,7 +1606,8 @@ void StelPainter::sSphere(const float radius, const float oneMinusOblateness, co
 	drawFromArray(Triangles, indiceArr.size(), 0, true, indiceArr.constData());
 }
 
-StelVertexArray StelPainter::computeSphereNoLight(const float radius, const float oneMinusOblateness, const int slices, const int stacks, const int orientInside, const bool flipTexture)
+StelVertexArray StelPainter::computeSphereNoLight(const float radius, const float oneMinusOblateness, const int slices, const int stacks,
+						  const int orientInside, const bool flipTexture, const float topAngle, const float bottomAngle)
 {
 	StelVertexArray result(StelVertexArray::Triangles);
 	GLfloat x, y, z;
@@ -1624,7 +1625,16 @@ StelVertexArray StelPainter::computeSphereNoLight(const float radius, const floa
 		t=1.f;
 	}
 
-	const float* cos_sin_rho = StelUtils::ComputeCosSinRho(stacks);
+	const float* cos_sin_rho = NULL; //StelUtils::ComputeCosSinRho(stacks);
+	Q_ASSERT(topAngle<bottomAngle); // don't forget: These are opening angles counted from top.
+	if ((bottomAngle>3.1415f) && (topAngle<0.0001f)) // safety margin.
+		cos_sin_rho = StelUtils::ComputeCosSinRho(stacks);
+	else
+	{
+		const float drho = (bottomAngle-topAngle) / stacks; // deltaRho:  originally just 180degrees/stacks, now the range clamped.
+		cos_sin_rho = StelUtils::ComputeCosSinRhoZone(drho, stacks, M_PI-bottomAngle);
+	}
+	// GZ: Allow parameters so that pole regions may remain free.
 	const float* cos_sin_rho_p;
 
 	const float* cos_sin_theta = StelUtils::ComputeCosSinTheta(slices);
