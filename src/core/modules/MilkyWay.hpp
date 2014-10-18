@@ -57,7 +57,7 @@ public slots:
 	//! Get Milky Way intensity.
 	double getIntensity() const {return intensity;}
 	//! Set Milky Way intensity.
-	void setIntensity(double aintensity) {intensity = aintensity; debugOne=true;}
+	void setIntensity(double aintensity) {intensity = aintensity;}
 	
 	//! Get the color used for rendering the milky way
 	Vec3f getColor() const {return color;}
