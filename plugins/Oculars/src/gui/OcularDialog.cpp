@@ -430,6 +430,7 @@ void OcularDialog::createDialogContent()
 	ocularMapper->addMapping(ui->ocularFL, 2);
 	ocularMapper->addMapping(ui->ocularFieldStop, 3);
 	ocularMapper->addMapping(ui->binocularsCheckBox, 4, "checked");
+	ocularMapper->addMapping(ui->permanentCrosshairCheckBox, 5, "checked");
 	ocularMapper->toFirst();
 	connect(ui->ocularListView->selectionModel() , SIGNAL(currentRowChanged(QModelIndex, QModelIndex)),
 					ocularMapper, SLOT(setCurrentModelIndex(QModelIndex)));
