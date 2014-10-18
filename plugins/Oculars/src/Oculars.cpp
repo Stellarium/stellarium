@@ -671,7 +671,7 @@ void Oculars::setScreenFOVForCCD()
 			actualFOVx = actualFOVy;
 		}
 		movementManager->setFlagTracking(true);
-		movementManager->zoomTo(actualFOVx * 3.0, 0.0);
+		movementManager->zoomTo(actualFOVx * 1.75, 0.0);
 	}
 }
 
@@ -1210,6 +1210,8 @@ void Oculars::toggleCCD(bool show)
 		}
 	}
 
+	StelCore *core = StelApp::getInstance().getCore();
+	StelMovementMgr *movementManager = core->getMovementMgr();
 	if (show) {
 		//Mutually exclusive with the ocular mode
 		hideUsageMessageIfDisplayed();
@@ -1233,6 +1235,8 @@ void Oculars::toggleCCD(bool show)
 		}
 		flagShowCCD = true;
 		setScreenFOVForCCD();
+		movementManager->setFlagEnableZoomKeys(false);
+		movementManager->setFlagEnableMouseNavigation(false);
 
 		if (guiPanel) {
 			guiPanel->showCcdGui();
@@ -1240,11 +1244,11 @@ void Oculars::toggleCCD(bool show)
 	} else {
 		flagShowCCD = false;
 
-		//Zoom out
-		StelCore *core = StelApp::getInstance().getCore();
-		StelMovementMgr *movementManager = core->getMovementMgr();
+		//Zoom out		
 		movementManager->zoomTo(movementManager->getInitFov());
 		movementManager->setFlagTracking(false);
+		movementManager->setFlagEnableZoomKeys(true);
+		movementManager->setFlagEnableMouseNavigation(true);
 		core->setFlipHorz(false);
 		core->setFlipVert(false);
 
@@ -1502,37 +1506,6 @@ void Oculars::paintOcularMask(const StelCore *core)
 										 inner,
 										 reticleRotation);
 	}
-
-	// FIXME: Enable usage QML shaders
-	// XXX: for some reason I cannot get to make the glu functions work when
-	// compiling with Qt5!
-	// XXX: GLU can't work with OpenGL ES --AW
-	/*
-	StelCore *core = StelApp::getInstance().getCore();
-	StelProjector::StelProjectorParams params = core->getCurrentStelProjectorParams();
-
-	glDisable(GL_BLEND);
-	glColor3f(0.f,0.f,0.f);
-	glPushMatrix();
-	glTranslated(params.viewportCenter[0], params.viewportCenter[1], 0.0);
-	GLUquadricObj *quadric = gluNewQuadric();
-
-	GLdouble inner = 0.5 * params.viewportFovDiameter;
-
-	// See if we need to scale the mask
-	if (useMaxEyepieceAngle && oculars[selectedOcularIndex]->appearentFOV() > 0.0 && !oculars[selectedOcularIndex]->isBinoculars()) {
-		inner = oculars[selectedOcularIndex]->appearentFOV() * inner / maxEyepieceAngle;
-	}
-
-	GLdouble outer = params.viewportXywh[2] + params.viewportXywh[3];
-	// Draw the mask
-	gluDisk(quadric, inner, outer, 256, 1);
-	// the gray circle
-	glColor3f(0.15f,0.15f,0.15f);
-	gluDisk(quadric, inner - 1.0, inner, 256, 1);
-	gluDeleteQuadric(quadric);
-	glPopMatrix();
-	*/
 }
 
 void Oculars::paintText(const StelCore* core)
