@@ -35,6 +35,7 @@
 #include <QSettings>
 
 StelLocationMgr::StelLocationMgr()
+	: networkReply(NULL)
 {
 	QSettings* conf = StelApp::getInstance().getSettings();
 
