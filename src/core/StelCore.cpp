@@ -111,10 +111,19 @@ void StelCore::init()
 {
 	QSettings* conf = StelApp::getInstance().getSettings();
 
-	defaultLocationID = conf->value("init_location/location","error").toString();
+	defaultLocationID = conf->value("init_location/location", "auto").toString();
 	bool ok;
 	StelLocationMgr* locationMgr = &StelApp::getInstance().getLocationMgr();
-	StelLocation location = locationMgr->locationForString(defaultLocationID);
+	StelLocation location;
+	if (defaultLocationID == "auto")
+	{
+		locationMgr->locationFromIP();
+	}
+	else
+	{
+		location = locationMgr->locationForString(defaultLocationID);
+	}
+
 	if (!location.isValid())
 	{
 		qWarning() << "Warning: location" << defaultLocationID << "is unknown.";
@@ -151,7 +160,7 @@ void StelCore::init()
 	}
 	setInitTodayTime(QTime::fromString(conf->value("navigation/today_time", "22:00").toString()));
 	startupTimeMode = conf->value("navigation/startup_time_mode", "actual").toString().toLower();
-	if (startupTimeMode=="preset")
+	if (startupTimeMode=="preset")	
 		setJDay(presetSkyTime - StelUtils::getGMTShiftFromQT(presetSkyTime) * JD_HOUR);
 	else if (startupTimeMode=="today")
 		setTodayTime(getInitTodayTime());
@@ -917,7 +926,8 @@ void StelCore::setTodayTime(const QTime& target)
 	{
 		dt.setTime(target);
 		// don't forget to adjust for timezone / daylight savings.
-		setJDay(StelUtils::qDateTimeToJd(dt)-(StelUtils::getGMTShiftFromQT(StelUtils::getJDFromSystem()) * JD_HOUR));
+		double JD = StelUtils::qDateTimeToJd(dt)-(StelUtils::getGMTShiftFromQT(StelUtils::getJDFromSystem()) * JD_HOUR);
+		setJDay(JD + getDeltaT(JD)/86400);
 	}
 	else
 	{
@@ -1731,4 +1741,18 @@ QString StelCore::getCurrentDeltaTAlgorithmValidRange(double jDay, QString *mark
 		*marker = "?";
 
 	return QString(" %1").arg(validRange);
+}
+
+bool StelCore::isDay() const
+{
+	const Vec3d& sunPos = GETSTELMODULE(SolarSystem)->getSun()->getAltAzPosGeometric(this);
+	return sunPos[2] > -0.12; // Nautical twilight
+}
+
+double StelCore::getCurrentEpoch() const
+{
+	int year, month, day;
+	StelUtils::getDateFromJulianDay(getJDay(), &year, &month, &day);
+	QDate date = QDate::fromString(QString("%1.%2.%3").arg(year, 4, 10, QLatin1Char('0')).arg(month).arg(day), "yyyy.M.d");
+	return double(year) + double(date.dayOfYear())/double(date.daysInYear());
 }

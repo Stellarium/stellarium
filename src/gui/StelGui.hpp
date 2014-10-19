@@ -72,7 +72,7 @@ public:
 	//! Load a Qt style sheet to define the widgets style
 	void loadStyle(const QString& fileName);
 	
-	//! Get the button bar at the bottom of the screensetDateTime
+	//! Get the button bar at the bottom of the screen
 	BottomStelBar* getButtonBar() const;
 	
 	//! Get the button bar of the left of the screen
@@ -88,7 +88,9 @@ public:
 	//! Get whether the button toggling nebulae background is visible
 	bool getFlagShowNebulaBackgroundButton() const;
 
-	//! returns true if the gui has complted init process.
+	bool getFlagShowDecimalDegrees() const;
+
+	//! returns true if the gui has completed init process.
 	bool initComplete(void) const;
 
 #ifdef ENABLE_SCRIPT_CONSOLE
@@ -113,6 +115,8 @@ public slots:
 	
 	//! Define whether the button toggling nebulae background should be visible
 	void setFlagShowNebulaBackgroundButton(bool b);
+
+	void setFlagShowDecimalDegrees(bool b);
 
 	//! Get the auto-hide status of the horizontal toolbar.
 	bool getAutoHideHorizontalButtonBar() const;
@@ -192,6 +196,8 @@ private:
 	StelButton* btShowNebulaeBackground;
 
 	bool initDone;
+
+	bool flagShowDecimalDegrees;
 
 	QSizeF savedProgressBarSize;
 

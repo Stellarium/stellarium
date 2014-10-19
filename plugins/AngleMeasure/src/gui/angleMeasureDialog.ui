@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>530</width>
-    <height>372</height>
+    <height>409</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -146,25 +146,88 @@
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_3">
        <item>
-        <widget class="QGroupBox" name="displayBox">
+        <widget class="QGroupBox" name="showEquatorial_GroupBox">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
          <property name="title">
-          <string>Settings</string>
+          <string>Show in Equatorial Coordinates</string>
          </property>
          <property name="flat">
           <bool>true</bool>
          </property>
-         <layout class="QVBoxLayout" name="verticalLayout">
-          <item>
-           <widget class="QCheckBox" name="useDmsFormatCheckBox">
+         <property name="checkable">
+          <bool>true</bool>
+         </property>
+         <layout class="QGridLayout" name="gridLayout">
+          <item row="0" column="0">
+           <widget class="QCheckBox" name="showPositionAngleCheckBox">
+            <property name="enabled">
+             <bool>true</bool>
+            </property>
             <property name="text">
-             <string>Use dms format for angles</string>
+             <string>Display with position angle</string>
             </property>
            </widget>
           </item>
-          <item>
-           <widget class="QCheckBox" name="showPositionAngleCheckBox">
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="showHorizontal_GroupBox">
+         <property name="title">
+          <string>Show in Horizontal Coordinates</string>
+         </property>
+         <property name="flat">
+          <bool>true</bool>
+         </property>
+         <property name="checkable">
+          <bool>true</bool>
+         </property>
+         <layout class="QGridLayout" name="gridLayout_2">
+          <item row="0" column="0">
+           <widget class="QCheckBox" name="showPositionAngleHorizontalCheckBox">
+            <property name="toolTip">
+             <string>(e.g. for Dobson starhopping)</string>
+            </property>
             <property name="text">
-             <string>Show position angle</string>
+             <string>Display with position angle </string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QCheckBox" name="azAltStartOnSkyCheckBox">
+            <property name="text">
+             <string>Attach start point to rotating sky</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <widget class="QCheckBox" name="azAltEndOnSkyCheckBox">
+            <property name="text">
+             <string>Attach end point to rotating sky</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="displayBox">
+         <property name="title">
+          <string>Format</string>
+         </property>
+         <property name="flat">
+          <bool>true</bool>
+         </property>
+         <layout class="QGridLayout" name="gridLayout_3">
+          <item row="0" column="0">
+           <widget class="QCheckBox" name="useDmsFormatCheckBox">
+            <property name="text">
+             <string>Use dms format for angles</string>
             </property>
            </widget>
           </item>

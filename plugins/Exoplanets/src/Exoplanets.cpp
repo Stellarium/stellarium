@@ -102,7 +102,7 @@ Exoplanets::Exoplanets()
 	setObjectName("Exoplanets");
 	exoplanetsConfigDialog = new ExoplanetsDialog();
 	conf = StelApp::getInstance().getSettings();
-	font.setPixelSize(conf->value("gui/base_font_size", 13).toInt());
+	font.setPixelSize(StelApp::getInstance().getBaseFontSize());
 }
 
 /*

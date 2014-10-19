@@ -25,6 +25,9 @@
 #include "CLIProcessor.hpp"
 #include "StelIniParser.hpp"
 #include "StelUtils.hpp"
+#ifndef DISABLE_SCRIPTING
+#include "StelScriptOutput.hpp"
+#endif
 
 #include <QDebug>
 
@@ -142,7 +145,7 @@ int main(int argc, char **argv)
 	QCoreApplication::setOrganizationName("stellarium");
 
 	// LP:1335611: Avoid troubles with search of the paths of the plugins (deployments troubles) --AW
-	#if QT_VERSION==QT_VERSION_CHECK(5, 3, 1)
+	#if QT_VERSION>=QT_VERSION_CHECK(5, 3, 1)
 	QCoreApplication::addLibraryPath(".");
 	#endif
 	
@@ -289,6 +292,14 @@ int main(int argc, char **argv)
 	Q_ASSERT(confSettings);
 	qDebug() << "Config file is: " << QDir::toNativeSeparators(configFileFullPath);
 
+	#ifndef DISABLE_SCRIPTING
+	QString outputFile = StelFileMgr::getUserDir()+"/output.txt";
+	if (confSettings->value("main/use_separate_output_file", false).toBool())
+		outputFile = StelFileMgr::getUserDir()+"/output-"+QDateTime::currentDateTime().toString("yyyyMMdd-HHmmss")+".txt";
+	StelScriptOutput::init(outputFile);
+	#endif
+
+
 	// Override config file values from CLI.
 	CLIProcessor::parseCLIArgsPostConfig(argList, confSettings);
 
@@ -310,14 +321,16 @@ int main(int argc, char **argv)
 			qWarning() << "ERROR while loading custom font " << QDir::toNativeSeparators(fileFont);
 	}
 
-	QString baseFont = confSettings->value("gui/base_font_name", "DejaVu Sans").toString();
-
 	// Set the default application font and font size.
 	// Note that style sheet will possibly override this setting.
 #ifdef Q_OS_WIN
+	// Let's try avoid ugly font rendering on Windows.
+	// Details: https://sourceforge.net/p/stellarium/discussion/278769/thread/810a1e5c/
+	QString baseFont = confSettings->value("gui/base_font_name", "Verdana").toString();
 	QFont tmpFont(baseFont);
 	tmpFont.setStyleHint(QFont::AnyStyle, QFont::OpenGLCompatible);
 #else
+	QString baseFont = confSettings->value("gui/base_font_name", "DejaVu Sans").toString();
 	QFont tmpFont(baseFont);
 #endif
 	tmpFont.setPixelSize(confSettings->value("gui/base_font_size", 13).toInt());
@@ -342,8 +355,9 @@ int main(int argc, char **argv)
 
 	if (!(QGLFormat::openGLVersionFlags() & QGLFormat::OpenGL_Version_2_1) && !(QGLFormat::openGLVersionFlags() & QGLFormat::OpenGL_ES_Version_2_0)) // Check supported version of OpenGL
 	{
-		// OK, minimal required version of OpenGL is 2.1 (OpenGL ES is 2.0). If platform does not support this
-		// version then say to user about troubles and quit from application.
+		// OK, minimal required version of OpenGL is 2.1 and OpenGL Shading Language is 1.20 (or OpenGL ES is 2.0 and GLSL ES is 2.0).
+		// Recommended OpenGL 3.0 and OpenGL Shading Language 1.30 and above.
+		// If platform does not support this version then say to user about troubles and quit from application.
 		#ifdef Q_OS_WIN
 		qWarning() << "Oops... Insufficient OpenGL version. Please update drivers, graphics hardware, or use MESA (or ANGLE) version.";
 		QMessageBox::warning(0, "Stellarium", q_("Insufficient OpenGL version. Please update drivers, graphics hardware, or use MESA (or ANGLE) version."));
