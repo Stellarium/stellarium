@@ -46,6 +46,7 @@
 #include "StelSkyLayerMgr.hpp"
 #include "StelAudioMgr.hpp"
 #include "StelVideoMgr.hpp"
+#include "StelViewportEffect.hpp"
 #include "StelGuiBase.hpp"
 #include "StelPainter.hpp"
 #ifndef DISABLE_SCRIPTING
@@ -65,6 +66,7 @@
 #include <QNetworkProxy>
 #include <QNetworkReply>
 #include <QOpenGLContext>
+#include <QOpenGLFramebufferObject>
 #include <QString>
 #include <QStringList>
 #include <QSysInfo>
@@ -214,6 +216,9 @@ StelApp::StelApp(QObject* parent)
 	, initialized(false)
 	, saveProjW(-1)
 	, saveProjH(-1)
+	, baseFontSize(13)
+	, renderBuffer(NULL)
+	, viewportEffect(NULL)
 {
 	// Stat variables
 	nbDownloadedFiles=0;
@@ -367,6 +372,8 @@ void StelApp::init(QSettings* conf)
 	confSettings = conf;
 
 	devicePixelsPerPixel = QOpenGLContext::currentContext()->screen()->devicePixelRatio();
+
+	setBaseFontSize(confSettings->value("gui/base_font_size", 13).toInt());
 	
 	core = new StelCore();
 	if (saveProjW!=-1 && saveProjH!=-1)
@@ -463,6 +470,9 @@ void StelApp::init(QSettings* conf)
 	emit colorSchemeChanged("color");
 	setVisionModeNight(confSettings->value("viewing/flag_night").toBool());
 
+	// Enable viewport effect at startup if he set
+	setViewportEffect(confSettings->value("video/viewport_effect", "none").toString());
+
 	// Proxy Initialisation
 	setupHttpProxy();
 	updateI18n();
@@ -549,11 +559,33 @@ void StelApp::update(double deltaTime)
 	stelObjectMgr->update(deltaTime);
 }
 
+void StelApp::prepareRenderBuffer()
+{
+	if (!viewportEffect) return;
+	if (!renderBuffer)
+	{
+		StelProjector::StelProjectorParams params = core->getCurrentStelProjectorParams();
+		int w = params.viewportXywh[2];
+		int h = params.viewportXywh[3];
+		viewportEffect = new StelViewportDistorterFisheyeToSphericMirror(w, h);
+		renderBuffer = new QOpenGLFramebufferObject(w, h, QOpenGLFramebufferObject::CombinedDepthStencil);
+	}
+	renderBuffer->bind();
+}
+
+void StelApp::applyRenderBuffer()
+{
+	if (!renderBuffer) return;
+	renderBuffer->release();
+	viewportEffect->paintViewportBuffer(renderBuffer);
+}
+
 //! Main drawing function called at each frame
 void StelApp::draw()
 {
 	if (!initialized)
 		return;
+	prepareRenderBuffer();
 	core->preDraw();
 
 	const QList<StelModule*> modules = moduleMgr->getCallOrders(StelModule::ActionDraw);
@@ -562,6 +594,7 @@ void StelApp::draw()
 		module->draw(core);
 	}
 	core->postDraw();
+	applyRenderBuffer();
 }
 
 /*************************************************************************
@@ -576,14 +609,24 @@ void StelApp::glWindowHasBeenResized(float x, float y, float w, float h)
 		saveProjW = w;
 		saveProjH = h;
 	}
+	if (renderBuffer)
+	{
+		delete renderBuffer;
+		renderBuffer = NULL;
+	}
 }
 
 // Handle mouse clics
 void StelApp::handleClick(QMouseEvent* inputEvent)
 {
-	inputEvent->setAccepted(false);
-	
-	QMouseEvent event(inputEvent->type(), QPoint(inputEvent->pos().x()*devicePixelsPerPixel, inputEvent->pos().y()*devicePixelsPerPixel), inputEvent->button(), inputEvent->buttons(), inputEvent->modifiers());
+	QPointF pos = inputEvent->pos();
+	float x, y;
+	x = pos.x();
+	y = pos.y();
+	if (viewportEffect)
+		viewportEffect->distortXY(x, y);
+
+	QMouseEvent event(inputEvent->type(), QPoint(x*devicePixelsPerPixel, y*devicePixelsPerPixel), inputEvent->button(), inputEvent->buttons(), inputEvent->modifiers());
 	event.setAccepted(false);
 	
 	// Send the event to every StelModule
@@ -635,8 +678,10 @@ void StelApp::handleWheel(QWheelEvent* event)
 }
 
 // Handle mouse move
-void StelApp::handleMove(int x, int y, Qt::MouseButtons b)
+void StelApp::handleMove(float x, float y, Qt::MouseButtons b)
 {
+	if (viewportEffect)
+		viewportEffect->distortXY(x, y);
 	// Send the event to every StelModule
 	foreach (StelModule* i, moduleMgr->getCallOrders(StelModule::ActionHandleMouseMoves))
 	{
@@ -741,4 +786,40 @@ void StelApp::setDevicePixelsPerPixel(float dppp)
 		params.devicePixelsPerPixel = devicePixelsPerPixel;
 		core->setCurrentStelProjectorParams(params);
 	}
+}
+
+void StelApp::setViewportEffect(const QString& name)
+{
+	if (name == getViewportEffect()) return;
+	if (renderBuffer)
+	{
+		delete renderBuffer;
+		renderBuffer = NULL;
+	}
+	if (viewportEffect)
+	{
+		delete viewportEffect;
+		viewportEffect = NULL;
+	}
+	if (name == "none") return;
+
+	StelProjector::StelProjectorParams params = core->getCurrentStelProjectorParams();
+	int w = params.viewportXywh[2];
+	int h = params.viewportXywh[3];
+	if (name == "sphericMirrorDistorter")
+	{
+		viewportEffect = new StelViewportDistorterFisheyeToSphericMirror(w, h);
+	}
+	else
+	{
+		qDebug() << "unknown viewport effect name:" << name;
+		Q_ASSERT(false);
+	}
+}
+
+QString StelApp::getViewportEffect() const
+{
+	if (viewportEffect)
+		return viewportEffect->getName();
+	return "none";
 }

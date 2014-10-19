@@ -110,7 +110,7 @@ Oculars::Oculars():
 	flagEclipticJ2000Grid(false),
 	flagMeridianLine(false),
 	flagHorizonLine(false),
-	flagGalacticPlaneLine(false),
+	flagGalacticEquatorLine(false),
 	flagAdaptation(false),
 	flagLimitStars(false),
 	magLimitStars(0.0),
@@ -150,7 +150,8 @@ Oculars::Oculars():
 	flagInitFOVUsage(false),
 	reticleRotation(0)
 {
-	font.setPixelSize(14);
+	// Font size is 14
+	font.setPixelSize(StelApp::getInstance().getBaseFontSize()+1);
 
 	ccds = QList<CCD *>();
 	oculars = QList<Ocular *>();
@@ -670,7 +671,7 @@ void Oculars::setScreenFOVForCCD()
 			actualFOVx = actualFOVy;
 		}
 		movementManager->setFlagTracking(true);
-		movementManager->zoomTo(actualFOVx * 3.0, 0.0);
+		movementManager->zoomTo(actualFOVx * 1.75, 0.0);
 	}
 }
 
@@ -1209,6 +1210,8 @@ void Oculars::toggleCCD(bool show)
 		}
 	}
 
+	StelCore *core = StelApp::getInstance().getCore();
+	StelMovementMgr *movementManager = core->getMovementMgr();
 	if (show) {
 		//Mutually exclusive with the ocular mode
 		hideUsageMessageIfDisplayed();
@@ -1232,6 +1235,8 @@ void Oculars::toggleCCD(bool show)
 		}
 		flagShowCCD = true;
 		setScreenFOVForCCD();
+		movementManager->setFlagEnableZoomKeys(false);
+		movementManager->setFlagEnableMouseNavigation(false);
 
 		if (guiPanel) {
 			guiPanel->showCcdGui();
@@ -1239,11 +1244,11 @@ void Oculars::toggleCCD(bool show)
 	} else {
 		flagShowCCD = false;
 
-		//Zoom out
-		StelCore *core = StelApp::getInstance().getCore();
-		StelMovementMgr *movementManager = core->getMovementMgr();
+		//Zoom out		
 		movementManager->zoomTo(movementManager->getInitFov());
 		movementManager->setFlagTracking(false);
+		movementManager->setFlagEnableZoomKeys(true);
+		movementManager->setFlagEnableMouseNavigation(true);
 		core->setFlipHorz(false);
 		core->setFlipVert(false);
 
@@ -1502,36 +1507,10 @@ void Oculars::paintOcularMask(const StelCore *core)
 										 reticleRotation);
 	}
 
-	// FIXME: Enable usage QML shaders
-	// XXX: for some reason I cannot get to make the glu functions work when
-	// compiling with Qt5!
-	// XXX: GLU can't work with OpenGL ES --AW
-	/*
-	StelCore *core = StelApp::getInstance().getCore();
-	StelProjector::StelProjectorParams params = core->getCurrentStelProjectorParams();
-
-	glDisable(GL_BLEND);
-	glColor3f(0.f,0.f,0.f);
-	glPushMatrix();
-	glTranslated(params.viewportCenter[0], params.viewportCenter[1], 0.0);
-	GLUquadricObj *quadric = gluNewQuadric();
-
-	GLdouble inner = 0.5 * params.viewportFovDiameter;
-
-	// See if we need to scale the mask
-	if (useMaxEyepieceAngle && oculars[selectedOcularIndex]->appearentFOV() > 0.0 && !oculars[selectedOcularIndex]->isBinoculars()) {
-		inner = oculars[selectedOcularIndex]->appearentFOV() * inner / maxEyepieceAngle;
+	if (oculars[selectedOcularIndex]->hasPermanentCrosshair())
+	{
+		paintCrosshairs();
 	}
-
-	GLdouble outer = params.viewportXywh[2] + params.viewportXywh[3];
-	// Draw the mask
-	gluDisk(quadric, inner, outer, 256, 1);
-	// the gray circle
-	glColor3f(0.15f,0.15f,0.15f);
-	gluDisk(quadric, inner - 1.0, inner, 256, 1);
-	gluDeleteQuadric(quadric);
-	glPopMatrix();
-	*/
 }
 
 void Oculars::paintText(const StelCore* core)
@@ -1772,7 +1751,7 @@ void Oculars::unzoomOcular()
 	gridManager->setFlagEclipticJ2000Grid(flagEclipticJ2000Grid);
 	gridManager->setFlagMeridianLine(flagMeridianLine);
 	gridManager->setFlagHorizonLine(flagHorizonLine);
-	gridManager->setFlagGalacticPlaneLine(flagGalacticPlaneLine);
+	gridManager->setFlagGalacticEquatorLine(flagGalacticEquatorLine);
 	skyManager->setFlagLuminanceAdaptation(flagAdaptation);
 	skyManager->setFlagStarMagnitudeLimit(flagLimitStars);
 	skyManager->setFlagNebulaMagnitudeLimit(flagLimitDSOs);
@@ -1815,7 +1794,7 @@ void Oculars::zoom(bool zoomedIn)
 			flagEclipticJ2000Grid = gridManager->getFlagEclipticJ2000Grid();
 			flagMeridianLine = gridManager->getFlagMeridianLine();
 			flagHorizonLine = gridManager->getFlagHorizonLine();
-			flagGalacticPlaneLine = gridManager->getFlagGalacticPlaneLine();
+			flagGalacticEquatorLine = gridManager->getFlagGalacticEquatorLine();
 
 			StelSkyDrawer *skyManager = core->getSkyDrawer();
 			// Current state
@@ -1855,7 +1834,7 @@ void Oculars::zoomOcular()
 	gridManager->setFlagEclipticJ2000Grid(false);
 	gridManager->setFlagMeridianLine(false);
 	gridManager->setFlagHorizonLine(false);
-	gridManager->setFlagGalacticPlaneLine(false);
+	gridManager->setFlagGalacticEquatorLine(false);
 	skyManager->setFlagLuminanceAdaptation(false);
 	
 	movementManager->setFlagTracking(true);

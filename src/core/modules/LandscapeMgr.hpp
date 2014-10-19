@@ -71,7 +71,7 @@ public:
 	//! Initialize the LandscapeManager class.
 	//! Operations performed:
 	//! - Load the default landscape as specified in the application configuration
-	//! - Set up landscape-releated display flags from ini parser object
+	//! - Set up landscape-related display flags from ini parser object
 	virtual void init();
 
 	//! Draw the landscape graphics, cardinal points and atmosphere.
@@ -80,12 +80,12 @@ public:
 	//! Update time-dependent state.
 	//! Includes:
 	//! - Landscape, atmosphere and cardinal point on/off fading.
-	//! - Atmophere colour calulation based on location, position of sun
+	//! - Atmophere colour calculation based on location, position of sun
 	//!   and moon.
-	//! - updates adaptation lumenescence lased on visible bright objects.
+	//! - updates adaptation luminescence based on visible bright objects.
 	virtual void update(double deltaTime);
 
-	//! Get the order in which this module will draw it's objects relative to other modules.
+	//! Get the order in which this module will draw its objects relative to other modules.
 	virtual double getCallOrder(StelModuleActionName actionName) const;
 
 
@@ -154,10 +154,10 @@ public slots:
 	//! @return false if the new landscape could not be set (e.g. no landscape of that ID was found). True on success.
 	bool setDefaultLandscapeID(const QString& id);
 
-	//! Return a pseudo HTML formated string with all informations on the current landscape
+	//! Return a pseudo HTML formatted string with all informations on the current landscape
 	QString getCurrentLandscapeHtmlDescription() const;
 
-	//! Return a pseudo HTML formated string with information from description or ini file
+	//! Return a pseudo HTML formatted string with information from description or ini file
 	QString getDescription() const;
 
 	//! Get flag for displaying Landscape.
@@ -285,7 +285,7 @@ public slots:
 	//! If the function encounters any file that can't be deleted
 	//! it aborts the operation (previously deleted files are not restored).
 	//! Landscapes that were packaged with Stellarium can't be removed,
-	//! thanks to the #packagedtLandscapeIDs list.
+	//! thanks to the #packagedLandscapeIDs list.
 	//! @param landscapeID an installed landscape's identifier (the folder name)
 	//! @todo Find a better way to pass error messages.
 	bool removeLandscape(const QString landscapeID);

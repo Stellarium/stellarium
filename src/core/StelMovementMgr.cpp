@@ -321,6 +321,9 @@ void StelMovementMgr::addTimeDragPoint(int x, int y)
 
 bool StelMovementMgr::handlePinch(qreal scale, bool started)
 {
+	if (flagEnableMouseNavigation == false)
+		return true;
+
 	static double previousFov = 0;
 	if (started)
 		previousFov = getAimFov();

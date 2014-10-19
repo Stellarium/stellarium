@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2009 Matthew Gates
+ * Copyright (C) 2014 Georg Zotti
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -25,6 +26,7 @@
 #include "VecMath.hpp"
 #include "StelModule.hpp"
 #include "StelFader.hpp"
+#include "StelCore.hpp"
 
 class QTimer;
 class QPixmap;
@@ -33,6 +35,10 @@ class AngleMeasureDialog;
 
 //! Main class of the Angle Measure plug-in.
 //! Provides an on-screen angle measuring tool.
+//! GZ extended in 2014-09, enough to call it V4.0
+//! Equatorial Mode (original): mark start,end: distance/position angle in the sky, line rotates with sky, spherical angles influenced by refraction (numbers given on celestial sphere).
+//! Horizontal Mode: mark start,end: distance/position angle in alt/azimuthal coordinates, line stays fixed in alt-az system. Angle may be different near to horizon because of refraction!
+//! It is possible to link start and/or end to the sky. Distance/position angle still always in alt/azimuthal coordinates.
 class AngleMeasure : public StelModule
 {
 	Q_OBJECT
@@ -62,6 +68,12 @@ public:
 	bool isEnabled() const {return flagShowAngleMeasure;}
 	bool isDmsFormat() const { return flagUseDmsFormat; }
 	bool isPaDisplayed() const { return flagShowPA; }
+	bool isEquatorial() const { return flagShowEquatorial; }
+	bool isHorizontal() const { return flagShowHorizontal; }
+	bool isHorizontalStartSkylinked() const { return flagShowHorizontalStartSkylinked; }
+	bool isHorizontalEndSkylinked() const { return flagShowHorizontalEndSkylinked; }
+	bool isHorPaDisplayed() const { return flagShowHorizontalPA; }
+
 
 	//! Restore the plug-in's settings to the default state.
 	//! Replace the plug-in's settings in Stellarium's configuration file
@@ -88,6 +100,11 @@ public slots:
 	void enableAngleMeasure(bool b);
 	void useDmsFormat(bool b);
 	void showPositionAngle(bool b);
+	void showPositionAngleHor(bool b);
+	void showEquatorial(bool b);
+	void showHorizontal(bool b);
+	void showHorizontalStartSkylinked(bool b);
+	void showHorizontalEndSkylinked(bool b);
 
 private slots:
 	void updateMessageText();
@@ -115,11 +132,29 @@ private:
 	double angle;
 	bool flagUseDmsFormat;
 	bool flagShowPA;
+	bool flagShowEquatorial;
+	bool flagShowHorizontal;
+	bool flagShowHorizontalPA;
+	bool flagShowHorizontalStartSkylinked;
+	bool flagShowHorizontalEndSkylinked;
+	Vec3f horTextColor;
+	Vec3f horLineColor;
+	Vec3d startPointHor;
+	Vec3d endPointHor;
+	Vec3d perp1StartPointHor;
+	Vec3d perp1EndPointHor;
+	Vec3d perp2StartPointHor;
+	Vec3d perp2EndPointHor;
+	double angleHor;
+
+
 	StelButton* toolbarButton;
 
 	void calculateEnds();
-	QString calculateAngle(void) const;
+	void calculateEndsOneLine(const Vec3d start, const Vec3d end, Vec3d &perp1Start, Vec3d &perp1End, Vec3d &perp2Start, Vec3d &perp2End, double &angle);
+	QString calculateAngle(bool horizontal=false) const;
 	QString calculatePositionAngle(const Vec3d p1, const Vec3d p2) const;
+	void drawOne(StelCore *core, const StelCore::FrameType frameType, const StelCore::RefractionMode refractionMode, const Vec3f txtColor, const Vec3f lineColor);
 
 	QSettings* conf;
 

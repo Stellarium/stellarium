@@ -79,7 +79,8 @@ Satellite::Satellite(const QString& identifier, const QVariantMap& map)
 	if (!map.contains("name") || !map.contains("tle1") || !map.contains("tle2"))
 		return;
 
-	font.setPixelSize(16);
+	// Font size is 16
+	font.setPixelSize(StelApp::getInstance().getBaseFontSize()+3);
 
 	id = identifier;
 	name  = map.value("name").toString();

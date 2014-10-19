@@ -341,6 +341,11 @@ void OcularDialog::createDialogContent()
 	ui->ocularListView->setModel(ocularTableModel);
 	ui->telescopeListView->setModel(telescopeTableModel);
 	ui->lensListView->setModel(lensTableModel);
+
+	//Kinetic scrolling for tablet pc and pc
+	QList<QWidget *> addscroll;
+	addscroll << ui->textBrowser << ui->telescopeListView << ui->ccdListView << ui->ocularListView << ui->lensListView;
+	installKineticScrolling(addscroll);
 	
 	//Now the rest of the actions.
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
@@ -425,6 +430,7 @@ void OcularDialog::createDialogContent()
 	ocularMapper->addMapping(ui->ocularFL, 2);
 	ocularMapper->addMapping(ui->ocularFieldStop, 3);
 	ocularMapper->addMapping(ui->binocularsCheckBox, 4, "checked");
+	ocularMapper->addMapping(ui->permanentCrosshairCheckBox, 5, "checked");
 	ocularMapper->toFirst();
 	connect(ui->ocularListView->selectionModel() , SIGNAL(currentRowChanged(QModelIndex, QModelIndex)),
 					ocularMapper, SLOT(setCurrentModelIndex(QModelIndex)));

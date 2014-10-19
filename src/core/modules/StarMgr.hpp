@@ -140,8 +140,9 @@ public:
 	//! @param useStartOfWords the autofill mode for returned objects names
 	//! @return a list of matching object name by order of relevance, or an empty list if nothing match
 	virtual QStringList listMatchingObjects(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false) const;
-	// empty, as there's too much stars for displaying at once
-	virtual QStringList listAllObjects(bool inEnglish) const { Q_UNUSED(inEnglish) return QStringList(); }
+	//! @note Loading stars with the common names only.
+	virtual QStringList listAllObjects(bool inEnglish) const;	
+	virtual QStringList listAllObjectsByType(const QString& objType, bool inEnglish) const { Q_UNUSED(objType) Q_UNUSED(inEnglish) return QStringList(); }
 	virtual QString getName() const { return "Stars"; }
 
 public slots:
@@ -214,6 +215,12 @@ public:
 	//! @param hip The Hipparcos number of star
 	//! @return translated scientific name of variable star
 	static QString getGcvsName(int hip);
+
+	//! Get the (English) common name for a star with a specified
+	//! Hipparcos catalogue number.
+	//! @param hip The Hipparcos number of star
+	//! @return translated common name of star
+	static QString getCommonEnglishName(int hip);
 
 	//! Get the type of variability for a variable star with a specified
 	//! Hipparcos catalogue number.
@@ -297,6 +304,7 @@ private:
 	//! Loads common names for stars from a file.
 	//! Called when the SkyCulture is updated.
 	//! @param the path to a file containing the common names for bright stars.
+	//! @note Stellarium doesn't support sky cultures made prior version 0.10.6 now!
 	int loadCommonNames(const QString& commonNameFile);
 
 	//! Loads scientific names for stars from a file.
