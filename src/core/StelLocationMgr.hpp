@@ -26,6 +26,7 @@
 #include <QMap>
 
 class QStringListModel;
+class QNetworkReply;
 
 //! @class StelLocationMgr
 //! Manage the list of available location.
@@ -41,6 +42,8 @@ public:
 
 	//! Return the model containing all the city
 	QStringListModel* getModelAll() {return modelAllLocation;}
+	//! Return the model containing picked (nearby) cities or cities from a single country, or other preselection.
+	QStringListModel* getModelPicked() {return modelPickedLocation;}
 
 	//! Return the list of all loaded locations
 	QList<StelLocation> getAll() const {return locations.values();}
@@ -70,6 +73,20 @@ public:
 	//! @param id the location ID
 	bool deleteUserLocation(const QString& id);
 
+	//! Find location via online lookup of IP address
+	void locationFromIP();
+
+	//! Preselect list of locations within @param radiusDegrees of selected (usually screen-clicked) coordinates.
+	//! The list can be retrieved by calling @name getModelPicked().
+	void pickLocationsNearby(const QString planetName, const float longitude, const float latitude, const float radiusDegrees);
+	//! Preselect list of locations in a particular country only.
+	//! The list can be retrieved by calling @name getModelPicked().
+	void pickLocationsInCountry(const QString country);
+
+public slots:
+	//! Process answer from online lookup of IP address
+	void changeLocationFromNetworkLookup();
+
 private:
 	void generateBinaryLocationFile(const QString& txtFile, bool isUserLocation, const QString& binFile) const;
 
@@ -79,11 +96,19 @@ private:
 
 	//! Model containing all the city information
 	QStringListModel* modelAllLocation;
+	//! Model containing selected city information
+	QStringListModel* modelPickedLocation;
 
 	//! The list of all loaded locations
 	QMap<QString, StelLocation> locations;
+	//! A list of locations generated on-the-fly by filtering from @name locations
+	QMap<QString, StelLocation> pickedLocations;
 	
 	StelLocation lastResortLocation;
+
+	//! For IP-based location lookup
+	QNetworkReply *networkReply;
+
 };
 
 #endif // _STELLOCATIONMGR_HPP_

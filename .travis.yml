@@ -25,8 +25,10 @@ before_install:
   - "tar -xzvf cmake-2.8.11.tar.gz"
 
   - "mkdir qt5"
-  - "wget -q -O qt5.zip http://cardinot.net/files/qt510.zip"
+  - "wget -q -O qt5.zip http://cardinot.net/files/qt521.zip"
   - "unzip -qq qt5.zip -d qt5"
+  - "export PATH=`pwd`/qt5/bin:$PATH"
+  - "export QT_PLUGIN_PATH=`pwd`/qt5/plugins"
 
 install:
   - "cd libarchive-3.1.2"

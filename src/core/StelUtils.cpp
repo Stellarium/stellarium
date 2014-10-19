@@ -95,8 +95,13 @@ QString getOperatingSystemInfo()
 			break;
 		#endif
 		#ifdef WV_WINDOWS8_1
-		case QSysInfo::WV_WINDOWS8_1
+		case QSysInfo::WV_WINDOWS8_1:
 			OS = "Windows 8.1";
+			break;
+		#endif
+		#ifdef WV_WINDOWS10
+		case QSysInfo::WV_WINDOWS10:
+			OS = "Windows 10";
 			break;
 		#endif
 		default:
@@ -130,7 +135,7 @@ QString getOperatingSystemInfo()
 			OS = "Mac OS X 10.9 series";
 			break;
 		#ifdef MV_YOSEMITE
-		case QSysInfo::MV_YOSEMITE
+		case QSysInfo::MV_YOSEMITE:
 			OS = "Mac OS X 10.10 series";
 			break;
 		#endif
@@ -220,6 +225,41 @@ void radToDms(double angle, bool& sign, unsigned int& d, unsigned int& m, double
 		m = 0.;
 		d += 1;
 	}	
+}
+
+void radToDecDeg(double rad, bool &sign, double &deg)
+{
+	rad = std::fmod(rad,2.0*M_PI);
+	sign=true;
+	if (rad<0)
+	{
+		rad *= -1;
+		sign = false;
+	}
+	deg = rad*180./M_PI;
+}
+
+QString radToDecDegStr(const double angle, const bool useD, const bool useC)
+{
+	QChar degsign('d');
+	QString str;
+	if (!useD)
+	{
+		degsign = 0x00B0;
+	}
+	bool sign;
+	double deg;
+	StelUtils::radToDecDeg(angle, sign, deg);
+	str = QString("%1%2%3").arg((sign?"+":"-"), QString::number(deg, 'f', 4), degsign);
+	if (useC)
+	{
+		if (!sign)
+			deg = 360. - deg;
+
+		str = QString("+%1%2").arg(QString::number(deg, 'f', 4), degsign);
+	}
+
+	return str;
 }
 
 /*************************************************************************
@@ -370,6 +410,40 @@ QString radToDmsStr(const double angle, const bool decimal, const bool useD)
 	return str;
 }
 
+void decDegToDms(double angle, bool &sign, unsigned int &d, unsigned int &m, double &s)
+{
+	sign = true;
+	if (angle<0.)
+	{
+		sign = false;
+		angle *= -1;
+	}
+
+	d = (unsigned int)angle;
+	m = (unsigned int)((angle-d)*60);
+	s = (angle-d)*3600.-60.*m;
+
+	if (s==60.)
+	{
+		s = 0.;
+		m += 1;
+	}
+	if (m==60)
+	{
+		m = 0;
+		d += 1;
+	}
+}
+
+// Convert an angle in decimal degrees to a dms formatted string
+QString decDegToDmsStr(const double angle)
+{
+	bool sign;
+	double s;
+	unsigned int d, m;
+	decDegToDms(angle, sign, d, m, s);
+	return QString("%1%2%3%4\'%5\"").arg(sign?'+':'-').arg(d).arg(QChar(0x00B0)).arg(m,2,10,QLatin1Char('0')).arg((unsigned int)s,2,10,QLatin1Char('0'));
+}
 
 // Convert a dms formatted string to an angle in radian
 double dmsStrToRad(const QString& s)

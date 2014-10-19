@@ -30,7 +30,6 @@
 #include "StelToneReproducer.hpp"
 #include "StelTranslator.hpp"
 #include "StelGeodesicGrid.hpp"
-#include "StelTranslator.hpp"
 #include "StelApp.hpp"
 #include "StelTextureMgr.hpp"
 #include "StelObjectMgr.hpp"
@@ -64,7 +63,7 @@ static QStringList component_array;
 // This number must be incremented each time the content or file format of the stars catalogs change
 // It can also be incremented when the defaultStarsConfig.json file change.
 // It should always matchs the version field of the defaultStarsConfig.json file
-static const int StarCatalogFormatVersion = 6;
+static const int StarCatalogFormatVersion = 7;
 
 // Initialise statics
 bool StarMgr::flagSciNames = true;
@@ -135,8 +134,7 @@ StarMgr::StarMgr(void)
 		qFatal("ERROR: StarMgr::StarMgr: no memory");
 	}
 	maxGeodesicGridLevel = -1;
-	lastMaxSearchLevel = -1;
-	starFont.setPixelSize(StelApp::getInstance().getSettings()->value("gui/base_font_size", 13).toInt());
+	lastMaxSearchLevel = -1;	
 	objectMgr = GETSTELMODULE(StelObjectMgr);
 	Q_ASSERT(objectMgr);
 }
@@ -168,6 +166,15 @@ QString StarMgr::getCommonName(int hip)
 		return it.value();
 	return QString();
 }
+
+QString StarMgr::getCommonEnglishName(int hip)
+{
+	QHash<int,QString>::const_iterator it(commonNamesMap.find(hip));
+	if (it!=commonNamesMap.end())
+		return it.value();
+	return QString();
+}
+
 
 QString StarMgr::getSciName(int hip)
 {
@@ -319,7 +326,7 @@ void StarMgr::init()
 	}
 
 	loadData(starSettings);
-	starFont.setPixelSize(StelApp::getInstance().getSettings()->value("gui/base_font_size", 13).toInt());
+	starFont.setPixelSize(StelApp::getInstance().getBaseFontSize());
 
 	setFlagStars(conf->value("astro/flag_stars", true).toBool());
 	setFlagLabels(conf->value("astro/flag_star_name",true).toBool());
@@ -560,13 +567,15 @@ int StarMgr::loadCommonNames(const QString& commonNameFile)
 	int totalRecords=0;
 	int lineNumber=0;
 	QString record;
+	// Allow empty and comment lines where first char (after optional blanks) is #
 	QRegExp commentRx("^(\\s*#.*|\\s*)$");
 	// record structure is delimited with a | character.  We will
 	// use a QRegExp to extract the fields. with whitespace padding permitted
 	// (i.e. it will be stripped automatically) Example record strings:
-	// " 10819|c_And"
-	// "113726|1_And"
-	QRegExp recordRx("^\\s*(\\d+)\\s*\\|(.*)\\n");
+	// "   677|_("Alpheratz")"
+	// "113368|_("Fomalhaut")"
+	// Note: Stellarium doesn't support sky cultures made prior version 0.10.6 now!
+	QRegExp recordRx("^\\s*(\\d+)\\s*\\|_[(]\"(.*)\"[)]\\s*\\n");
 
 	while(!cnFile.atEnd())
 	{
@@ -601,9 +610,7 @@ int StarMgr::loadCommonNames(const QString& commonNameFile)
 				continue;
 			}
 
-			// Fix for translate star names 
-			// englishCommonName.replace('_', ' ');
-			const QString commonNameI18n = q_(englishCommonName);
+			const QString commonNameI18n = englishCommonName;
 			QString commonNameI18n_cap = commonNameI18n.toUpper();
 
 			commonNamesMap[hip] = englishCommonName;
@@ -941,17 +948,13 @@ QList<StelObjectP > StarMgr::searchAround(const Vec3d& vv, double limFov, const 
 //! The translation is done using gettext with translated strings defined in translations.h
 void StarMgr::updateI18n()
 {
-	QRegExp transRx("_[(]\"(.*)\"[)]");
 	const StelTranslator& trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
 	commonNamesMapI18n.clear();
 	commonNamesIndexI18n.clear();
 	for (QHash<int,QString>::ConstIterator it(commonNamesMap.constBegin());it!=commonNamesMap.constEnd();it++)
 	{
 		const int i = it.key();
-		transRx.exactMatch(it.value());
-		QString tt = transRx.capturedTexts().at(1);
-		const QString t = trans.qtranslate(tt);
-		//const QString t(trans.qtranslate(it.value()));
+		const QString t(trans.qtranslate(it.value()));
 		commonNamesMapI18n[i] = t;
 		commonNamesIndexI18n[t.toUpper()] = i;
 	}
@@ -1028,18 +1031,25 @@ StelObjectP StarMgr::searchByName(const QString& name) const
 		return searchHP(rx.capturedTexts().at(2).toInt());
 	}
 
-	// Search by sci name
-	QMap<QString,int>::const_iterator it = sciNamesIndexI18n.find(objw);
-	if (it!=sciNamesIndexI18n.end())
+	// Search by I18n common name
+	QMap<QString,int>::const_iterator it(commonNamesIndex.find(objw));
+	if (it!=commonNamesIndex.end())
 	{
 		return searchHP(it.value());
 	}
 
-	// Search by additional sci name
-	QMap<QString,int>::const_iterator it2 = sciAdditionalNamesIndexI18n.find(objw);
-	if (it2!=sciAdditionalNamesIndexI18n.end())
+	// Search by sci name
+	QMap<QString,int>::const_iterator it2 = sciNamesIndexI18n.find(objw);
+	if (it2!=sciNamesIndexI18n.end())
 	{
 		return searchHP(it2.value());
+	}
+
+	// Search by additional sci name
+	QMap<QString,int>::const_iterator it3 = sciAdditionalNamesIndexI18n.find(objw);
+	if (it3!=sciAdditionalNamesIndexI18n.end())
+	{
+		return searchHP(it3.value());
 	}
 
 	return StelObjectP();
@@ -1173,7 +1183,7 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 			{
 				if (maxNbItem==0)
 					break;
-				result << getCommonName(it.value());
+				result << getCommonEnglishName(it.value());
 				--maxNbItem;
 			}
 			else
@@ -1190,7 +1200,7 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 			{
 				if (maxNbItem==0)
 					break;
-				result << getCommonName(i.value());
+				result << getCommonEnglishName(i.value());
 				--maxNbItem;
 			}
 		}
@@ -1298,4 +1308,28 @@ void StarMgr::updateSkyCulture(const QString& skyCultureDir)
 	// Turn on sci names/catalog names for western culture only
 	setFlagSciNames(skyCultureDir.startsWith("western"));
 	updateI18n();
+}
+
+QStringList StarMgr::listAllObjects(bool inEnglish) const
+{
+	QStringList result;
+	if (inEnglish)
+	{
+		QMapIterator<QString, int> i(commonNamesIndex);
+		while (i.hasNext())
+		{
+			i.next();
+			result << getCommonEnglishName(i.value());
+		}
+	}
+	else
+	{
+		QMapIterator<QString, int> i(commonNamesIndexI18n);
+		while (i.hasNext())
+		{
+			i.next();
+			result << getCommonName(i.value());
+		}
+	}
+	return result;
 }

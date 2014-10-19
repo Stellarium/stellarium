@@ -47,15 +47,15 @@ class ConstellationMgr : public StelObjectModule
 			   READ getFlagArt
 			   WRITE setFlagArt
 			   NOTIFY artDisplayedChanged)
-	Q_PROPERTY(bool artFadeDuration
+	Q_PROPERTY(float artFadeDuration
 			   READ getArtFadeDuration
 			   WRITE setArtFadeDuration
 			   NOTIFY artFadeDurationChanged)
-	Q_PROPERTY(bool artIntensity
+	Q_PROPERTY(float artIntensity
 			   READ getArtIntensity
 			   WRITE setArtIntensity
 			   NOTIFY artIntensityChanged)
-	Q_PROPERTY(bool boundariesColor
+	Q_PROPERTY(Vec3f boundariesColor
 			   READ getBoundariesColor
 			   WRITE setBoundariesColor
 			   NOTIFY boundariesColorChanged)
@@ -63,7 +63,7 @@ class ConstellationMgr : public StelObjectModule
 			   READ getFlagBoundaries
 			   WRITE setFlagBoundaries
 			   NOTIFY boundariesDisplayedChanged)
-	Q_PROPERTY(bool fontSize
+	Q_PROPERTY(float fontSize
 			   READ getFontSize
 			   WRITE setFontSize
 			   NOTIFY fontSizeChanged)
@@ -71,7 +71,7 @@ class ConstellationMgr : public StelObjectModule
 			   READ getFlagIsolateSelected
 			   WRITE setFlagIsolateSelected
 			   NOTIFY isolateSelectedChanged)
-	Q_PROPERTY(bool linesColor
+	Q_PROPERTY(Vec3f linesColor
 			   READ getLinesColor
 			   WRITE setLinesColor
 			   NOTIFY linesColorChanged)
@@ -79,7 +79,7 @@ class ConstellationMgr : public StelObjectModule
 			   READ getFlagLines
 			   WRITE setFlagLines
 			   NOTIFY linesDisplayedChanged)
-	Q_PROPERTY(bool namesColor
+	Q_PROPERTY(Vec3f namesColor
 			   READ getLabelsColor
 			   WRITE setLabelsColor
 			   NOTIFY namesColorChanged)
@@ -137,6 +137,7 @@ public:
 	//! @return a vector of matching object name by order of relevance, or an empty vector if nothing match
 	virtual QStringList listMatchingObjects(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false) const;
 	virtual QStringList listAllObjects(bool inEnglish) const;
+	virtual QStringList listAllObjectsByType(const QString& objType, bool inEnglish) const { Q_UNUSED(objType) Q_UNUSED(inEnglish) return QStringList(); }
 	virtual QString getName() const { return "Constellations"; }
 
 	///////////////////////////////////////////////////////////////////////////
@@ -270,6 +271,11 @@ private:
 	//!    the boundary separates.
 	//! @param conCatFile the path to the file which contains the constellation boundary data.
 	bool loadBoundaries(const QString& conCatFile);
+
+	//! Read seasonal rules for displaying constellations from the given file.
+	//! @param rulesFile Name of the file containing the seasonal rules
+	void loadSeasonalRules(const QString& rulesFile);
+
         //! Draw the constellation lines at the epoch given by the StelCore.
 	void drawLines(StelPainter& sPainter, const StelCore* core) const;
 	//! Draw the constellation art.

@@ -34,6 +34,8 @@ public:
 	~DateTimeDialog();
 	double newJd();
 	bool valid(int y, int m, int d, int h, int min, int s);
+	bool validJd(double jday);
+	bool validMjd(double mjday);
 	//! Notify that the application style changed
 	void styleChanged();
 public slots:
@@ -63,6 +65,10 @@ private slots:
 	void minuteChanged(int nm);
 	//! year slider or dial changed
 	void secondChanged(int ns);
+	//! JD slider or dial changed
+	void jdChanged(double njd);
+	//! MJD slider or dial changed
+	void mjdChanged(double nmjd);
 
 private:
 	Ui_dateTimeDialogForm* ui;
@@ -72,6 +78,8 @@ private:
 	int hour;
 	int minute;
 	int second;
+	double jd;
+	double mjd;
 	void pushToWidgets();
 };
 

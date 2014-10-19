@@ -262,11 +262,16 @@ void SpaceShipObserver::update(double deltaTime)
 		timeToGo = 0.;
 		currentLocation = moveTargetLocation;
 		LandscapeMgr* ls = GETSTELMODULE(LandscapeMgr);
+		SolarSystem* ss = GETSTELMODULE(SolarSystem);
 		if (ls->getFlagLandscapeAutoSelection())
 		{
-			// If we have a landscape for target planet then set it, otherwise use default landscape
+			QString pType = ss->getPlanetType(currentLocation.planetName);
+			// If we have a landscape for target planet then set it or check and use
+			// landscape type of target planet, otherwise use default landscape
 			if (ls->getAllLandscapeNames().indexOf(currentLocation.planetName)>0)
 				ls->setCurrentLandscapeName(currentLocation.planetName);
+			else if (ls->getAllLandscapeIDs().indexOf(pType)>0)
+				ls->setCurrentLandscapeID(pType);
 			else
 				ls->setCurrentLandscapeID(ls->getDefaultLandscapeID());
 		}

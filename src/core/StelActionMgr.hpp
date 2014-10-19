@@ -40,7 +40,10 @@ public:
 		, checked(false)
 		, global(false)
 		, target(NULL)
-		, property(NULL) {}
+		, property(NULL)
+	#ifndef USE_QUICKVIEW
+		, qAction(NULL) {}
+	#endif
 
 	StelAction(const QString& actionId,
 	           const QString& groupId,

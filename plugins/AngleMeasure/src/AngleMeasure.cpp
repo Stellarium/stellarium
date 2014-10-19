@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2009 Matthew Gates
+ * Copyright (C) 2014 Georg Zotti
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -54,7 +55,7 @@ StelPluginInfo AngleMeasureStelPluginInterface::getPluginInfo() const
 	StelPluginInfo info;
 	info.id = "AngleMeasure";
 	info.displayedName = N_("Angle Measure");
-	info.authors = "Matthew Gates";
+	info.authors = "Matthew Gates, Bogdan Marinov, Alexander Wolf, Georg Zotti";
 	info.contact = "http://porpoisehead.net/";
 	info.description = N_("Provides an angle measurement tool");
 	info.version = ANGLEMEASURE_VERSION;
@@ -67,6 +68,11 @@ AngleMeasure::AngleMeasure()
 	, angle(0.)
 	, flagUseDmsFormat(false)
 	, flagShowPA(false)
+	, flagShowEquatorial(false)
+	, flagShowHorizontal(false)
+	, flagShowHorizontalPA(false)
+	, flagShowHorizontalStartSkylinked(false)
+	, flagShowHorizontalEndSkylinked(false)
 	, toolbarButton(NULL)
 {
 	setObjectName("AngleMeasure");
@@ -117,6 +123,12 @@ void AngleMeasure::init()
 	perp1EndPoint.set(0.,0.,0.);
 	perp2StartPoint.set(0.,0.,0.);
 	perp2EndPoint.set(0.,0.,0.);
+	startPointHor.set(0.,0.,0.);
+	endPointHor.set(0.,0.,0.);
+	perp1StartPointHor.set(0.,0.,0.);
+	perp1EndPointHor.set(0.,0.,0.);
+	perp2StartPointHor.set(0.,0.,0.);
+	perp2EndPointHor.set(0.,0.,0.);
 
 	StelApp& app = StelApp::getInstance();
 
@@ -152,15 +164,25 @@ void AngleMeasure::update(double deltaTime)
 {
 	messageFader.update((int)(deltaTime*1000));
 	lineVisible.update((int)(deltaTime*1000));
+	static StelCore *core=StelApp::getInstance().getCore();
+
+	// if altAz endpoint linked to the rotating sky, move respective point(s)
+	if (flagShowHorizontalStartSkylinked)
+	{
+		startPointHor = core->equinoxEquToAltAz(startPoint, StelCore::RefractionAuto);
+		calculateEnds();
+	}
+	if (flagShowHorizontalEndSkylinked)
+	{
+		endPointHor = core->equinoxEquToAltAz(endPoint, StelCore::RefractionAuto);
+		calculateEnds();
+	}
 }
 
-//! Draw any parts on the screen which are for our module
-void AngleMeasure::draw(StelCore* core)
+
+void AngleMeasure::drawOne(StelCore *core, const StelCore::FrameType frameType, const StelCore::RefractionMode refractionMode, const Vec3f txtColor, const Vec3f lineColor)
 {
-	if (lineVisible.getInterstate() < 0.000001f && messageFader.getInterstate() < 0.000001f)
-		return;
-	
-	const StelProjectorP prj = core->getProjection(StelCore::FrameEquinoxEqu);
+	const StelProjectorP prj = core->getProjection(frameType, refractionMode);
 	StelPainter painter(prj);
 	painter.setFont(font);
 
@@ -169,36 +191,61 @@ void AngleMeasure::draw(StelCore* core)
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		glEnable(GL_BLEND);
 		glEnable(GL_TEXTURE_2D);
-		
+
 		Vec3d xy;
 		QString displayedText;
-		if (prj->project(perp1EndPoint,xy))
+		if (frameType==StelCore::FrameEquinoxEqu)
 		{
-			painter.setColor(textColor[0], textColor[1], textColor[2], lineVisible.getInterstate());
-			if (flagShowPA)
-				displayedText = QString("%1 (%2%3)").arg(calculateAngle(), messagePA, calculatePositionAngle(startPoint, endPoint));
-			else
-				displayedText = calculateAngle();
-			painter.drawText(xy[0], xy[1], displayedText, 0, 15, 15);
+			if (prj->project(perp1EndPoint,xy))
+			{
+				painter.setColor(txtColor[0], txtColor[1], txtColor[2], lineVisible.getInterstate());
+				if (flagShowPA)
+					displayedText = QString("%1 (%2%3)").arg(calculateAngle(), messagePA, calculatePositionAngle(startPoint, endPoint));
+				else
+					displayedText = calculateAngle();
+				painter.drawText(xy[0], xy[1], displayedText, 0, 15, 15);
+			}
+		}
+		else
+		{
+			if (prj->project(perp1EndPointHor,xy))
+			{
+				painter.setColor(txtColor[0], txtColor[1], txtColor[2], lineVisible.getInterstate());
+				if (flagShowHorizontalPA)
+					displayedText = QString("%1 (%2%3)").arg(calculateAngle(true), messagePA, calculatePositionAngle(startPointHor, endPointHor));
+				else
+					displayedText = calculateAngle(true);
+				painter.drawText(xy[0], xy[1], displayedText, 0, 15, -5);
+			}
 		}
 
 		glDisable(GL_TEXTURE_2D);
 		// OpenGL ES 2.0 doesn't have GL_LINE_SMOOTH
 		// glEnable(GL_LINE_SMOOTH);
 		glEnable(GL_BLEND);
-		
-		// main line is a great circle		
+
+		// main line is a great circle
 		painter.setColor(lineColor[0], lineColor[1], lineColor[2], lineVisible.getInterstate());
-		painter.drawGreatCircleArc(startPoint, endPoint, NULL);
+		if (frameType==StelCore::FrameEquinoxEqu)
+		{
+			painter.drawGreatCircleArc(startPoint, endPoint, NULL);
 
-		// End lines
-		painter.drawGreatCircleArc(perp1StartPoint, perp1EndPoint, NULL);
-		painter.drawGreatCircleArc(perp2StartPoint, perp2EndPoint, NULL);
+			// End lines
+			painter.drawGreatCircleArc(perp1StartPoint, perp1EndPoint, NULL);
+			painter.drawGreatCircleArc(perp2StartPoint, perp2EndPoint, NULL);
+		}
+		else
+		{
+			painter.drawGreatCircleArc(startPointHor, endPointHor, NULL);
+
+			// End lines
+			painter.drawGreatCircleArc(perp1StartPointHor, perp1EndPointHor, NULL);
+			painter.drawGreatCircleArc(perp2StartPointHor, perp2EndPointHor, NULL);
+		}
 	}
-
 	if (messageFader.getInterstate() > 0.000001f)
 	{
-		painter.setColor(textColor[0], textColor[1], textColor[2], messageFader.getInterstate());
+		painter.setColor(txtColor[0], txtColor[1], txtColor[2], messageFader.getInterstate());
 		int x = 83;
 		int y = 120;
 		int ls = painter.getFontMetrics().lineSpacing();
@@ -208,19 +255,39 @@ void AngleMeasure::draw(StelCore* core)
 		y -= ls;
 		painter.drawText(x, y, messageRightButton);
 	}
+
+
+}
+
+//! Draw any parts on the screen which are for our module
+void AngleMeasure::draw(StelCore* core)
+{
+	if (lineVisible.getInterstate() < 0.000001f && messageFader.getInterstate() < 0.000001f)
+		return;
+	if (flagShowHorizontal)
+	{
+		drawOne(core, StelCore::FrameAltAz, StelCore::RefractionOff, horTextColor, horLineColor);
+	}
+	if (flagShowEquatorial)
+	{
+		drawOne(core, StelCore::FrameEquinoxEqu, StelCore::RefractionAuto, textColor, lineColor);
+	}
 }
 
 QString AngleMeasure::calculatePositionAngle(const Vec3d p1, const Vec3d p2) const
 {
 	double y = cos(p2.latitude())*sin(p2.longitude()-p1.longitude());
 	double x = cos(p1.latitude())*sin(p2.latitude()) - sin(p1.latitude())*cos(p2.latitude())*cos(p2.longitude()-p1.longitude());
-	double r = std::atan(y/x);
-	if (x<0)
-		r += M_PI;
-	if (y<0)
-		r += 2*M_PI;
-	if (r>(2*M_PI))
-		r -= 2*M_PI;
+	double r = std::atan2(y,x);
+	// GZ ATAN2 makes many tests unnecessary...
+//	if (x<0)
+//		r += M_PI;
+//	if (y<0)
+//		r += 2*M_PI;
+//	if (r>(2*M_PI))
+//		r -= 2*M_PI;
+	if (r<0)
+		r+= 2*M_PI;
 
 	unsigned int d, m;
 	double s;
@@ -249,12 +316,16 @@ void AngleMeasure::handleMouseClicks(class QMouseEvent* event)
 	{
 		const StelProjectorP prj = StelApp::getInstance().getCore()->getProjection(StelCore::FrameEquinoxEqu);
 		prj->unProject(event->x(),event->y(),startPoint);
+		const StelProjectorP prjHor = StelApp::getInstance().getCore()->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
+		prjHor->unProject(event->x(),event->y(),startPointHor);
+
 
 		// first click reset the line... only draw it after we've dragged a little.
 		if (!dragging)
 		{
 			lineVisible = false;
 			endPoint = startPoint;
+			endPointHor=startPointHor;
 		}
 		else
 			lineVisible = true;
@@ -275,6 +346,8 @@ void AngleMeasure::handleMouseClicks(class QMouseEvent* event)
 	{
 		const StelProjectorP prj = StelApp::getInstance().getCore()->getProjection(StelCore::FrameEquinoxEqu);
 		prj->unProject(event->x(),event->y(),endPoint);
+		const StelProjectorP prjHor = StelApp::getInstance().getCore()->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
+		prjHor->unProject(event->x(),event->y(),endPointHor);
 		calculateEnds();
 		event->setAccepted(true);
 		return;
@@ -288,6 +361,8 @@ bool AngleMeasure::handleMouseMoves(int x, int y, Qt::MouseButtons)
 	{
 		const StelProjectorP prj = StelApp::getInstance().getCore()->getProjection(StelCore::FrameEquinoxEqu);
 		prj->unProject(x,y,endPoint);
+		const StelProjectorP prjHor = StelApp::getInstance().getCore()->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
+		prjHor->unProject(x,y,endPointHor);
 		calculateEnds();
 		lineVisible = true;
 		return true;
@@ -298,29 +373,41 @@ bool AngleMeasure::handleMouseMoves(int x, int y, Qt::MouseButtons)
 
 void AngleMeasure::calculateEnds(void)
 {
-	Vec3d v0 = endPoint - startPoint;
-	Vec3d v1 = Vec3d(0,0,0) - startPoint;
-	Vec3d p = v0 ^ v1;
-	p *= 0.08;  // end width
-	perp1StartPoint.set(startPoint[0]-p[0],startPoint[1]-p[1],startPoint[2]-p[2]);
-	perp1EndPoint.set(startPoint[0]+p[0],startPoint[1]+p[1],startPoint[2]+p[2]);
-
-	v1 = Vec3d(0,0,0) - endPoint;
-	p = v0 ^ v1;
-	p *= 0.08;  // end width
-	perp2StartPoint.set(endPoint[0]-p[0],endPoint[1]-p[1],endPoint[2]-p[2]);
-	perp2EndPoint.set(endPoint[0]+p[0],endPoint[1]+p[1],endPoint[2]+p[2]);
-
-	angle = startPoint.angle(endPoint);
+	if (flagShowEquatorial)
+		calculateEndsOneLine(startPoint,    endPoint,    perp1StartPoint,    perp1EndPoint,    perp2StartPoint,    perp2EndPoint,    angle);
+	if (flagShowHorizontal)
+		calculateEndsOneLine(startPointHor, endPointHor, perp1StartPointHor, perp1EndPointHor, perp2StartPointHor, perp2EndPointHor, angleHor);
 }
 
-QString AngleMeasure::calculateAngle() const
+void AngleMeasure::calculateEndsOneLine(const Vec3d start, const Vec3d end, Vec3d &perp1Start, Vec3d &perp1End, Vec3d &perp2Start, Vec3d &perp2End, double &angle)
+{
+	Vec3d v0 = end - start;
+	Vec3d v1 = Vec3d(0,0,0) - start;
+	Vec3d p = v0 ^ v1;
+	p *= 0.08;  // end width
+	perp1Start.set(start[0]-p[0],start[1]-p[1],start[2]-p[2]);
+	perp1End.set(start[0]+p[0],start[1]+p[1],start[2]+p[2]);
+
+	v1 = Vec3d(0,0,0) - end;
+	p = v0 ^ v1;
+	p *= 0.08;  // end width
+	perp2Start.set(end[0]-p[0],end[1]-p[1],end[2]-p[2]);
+	perp2End.set(end[0]+p[0],end[1]+p[1],end[2]+p[2]);
+
+	angle = start.angle(end);
+}
+
+// GZ Misnomer! should be called formatAngleString()
+QString AngleMeasure::calculateAngle(bool horizontal) const
 {
 	unsigned int d, m;
 	double s;
 	bool sign;
 
-	StelUtils::radToDms(angle, sign, d, m, s);
+	if (horizontal)
+		StelUtils::radToDms(angleHor, sign, d, m, s);
+	else
+		StelUtils::radToDms(angle, sign, d, m, s);
 	if (flagUseDmsFormat)
 		return QString("%1d %2m %3s").arg(d).arg(m).arg(s, 0, 'f', 2);
 	else
@@ -344,6 +431,26 @@ void AngleMeasure::showPositionAngle(bool b)
 	flagShowPA = b;
 }
 
+void AngleMeasure::showPositionAngleHor(bool b)
+{
+	flagShowHorizontalPA = b;
+}
+void AngleMeasure::showEquatorial(bool b)
+{
+	flagShowEquatorial = b;
+}
+void AngleMeasure::showHorizontal(bool b)
+{
+	flagShowHorizontal = b;
+}
+void AngleMeasure::showHorizontalStartSkylinked(bool b)
+{
+	flagShowHorizontalStartSkylinked = b;
+}
+void AngleMeasure::showHorizontalEndSkylinked(bool b)
+{
+	flagShowHorizontalEndSkylinked = b;
+}
 void AngleMeasure::useDmsFormat(bool b)
 {
 	flagUseDmsFormat=b;
@@ -380,6 +487,8 @@ void AngleMeasure::restoreDefaultSettings()
 	conf->beginGroup("AngleMeasure");
 	conf->setValue("text_color", "0,0.5,1");
 	conf->setValue("line_color", "0,0.5,1");
+	conf->setValue("text_color_horizontal", "0.9,0.6,0.4");
+	conf->setValue("line_color_horizontal", "0.9,0.6,0.4");
 	conf->endGroup();
 }
 
@@ -391,6 +500,13 @@ void AngleMeasure::loadSettings()
 	showPositionAngle(conf->value("show_position_angle", false).toBool());
 	textColor = StelUtils::strToVec3f(conf->value("text_color", "0,0.5,1").toString());
 	lineColor = StelUtils::strToVec3f(conf->value("line_color", "0,0.5,1").toString());
+	horTextColor = StelUtils::strToVec3f(conf->value("text_color_horizontal", "0.9,0.6,0.4").toString());
+	horLineColor = StelUtils::strToVec3f(conf->value("line_color_horizontal", "0.9,0.6,0.4").toString());
+	showPositionAngleHor(conf->value("show_position_angle_horizontal", false).toBool());
+	flagShowEquatorial = conf->value("show_equatorial", true).toBool();
+	flagShowHorizontal = conf->value("show_horizontal", false).toBool();
+	flagShowHorizontalStartSkylinked = conf->value("link_horizontal_start_to_sky", false).toBool();
+	flagShowHorizontalEndSkylinked = conf->value("link_horizontal_end_to_sky", false).toBool();
 
 	conf->endGroup();
 }
@@ -401,6 +517,11 @@ void AngleMeasure::saveSettings()
 
 	conf->setValue("angle_format_dms", isDmsFormat());
 	conf->setValue("show_position_angle", isPaDisplayed());
+	conf->setValue("show_position_angle_horizontal", isHorPaDisplayed());
+	conf->setValue("show_equatorial", isEquatorial());
+	conf->setValue("show_horizontal", isHorizontal());
+	conf->setValue("link_horizontal_start_to_sky", isHorizontalStartSkylinked());
+	conf->setValue("link_horizontal_end_to_sky", isHorizontalEndSkylinked());
 
 	conf->endGroup();
 }
