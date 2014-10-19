@@ -1,7 +1,25 @@
-- Fixed: Galactic plane renamed to correct: Galactic equator
-- Fixed: Speed issues when computing lots of comets
+0.13.1 [2014-10-19]
+Bugfix release with few new features.
 - Added: Light layer for old_style landscapes
 - Added: Auto-detect location via network lookup.
+- Added: Seasonal rules for displaying constellations
+- Added: Coordinates can be displayed as decimal degrees (LP: #1106743)
+- Added: Support of multi-touch gestures on Windows 8 (LP: #1165754)
+- Added: FOV on bottom bar can be displayed in DMS rather than fractional degrees (LP: #1361582)
+- Added: Oculars plugins support eyepieces with permanent crosshairs (LP: #1364139)
+- Added: Pointer Coordinates Plugin can displayed not only RA/Dec (J2000.0) (LP: #1365784, #1377995)
+- Added: Angle Measure Plugin can measure positional angles to the horizon now (LP: #1208143)
+- Added: Search tool can search position not only for RA/Dec (J2000.0) (LP: #1358706)
+- Fixed: Galactic plane renamed to correct: Galactic equator (LP: #1367744)
+- Fixed: Speed issues when computing lots of comets (LP: #1350418)
+- Fixed: Spherical mirror distortion work correctly now (LP: #676260, #1338252)
+- Fixed: Location coordinates on the bottom bar displayed correctly now (LP: #1357799)
+- Fixed: Ecliptic coordinates for J2000.0 and grids diplayed correctly now (LP: #1366567, #1369166)
+- Fixed: Rule for select a celestial objects (LP: #1357917)
+- Fixed: Loading extra star catalogs (LP: #1329500, #1379241)
+- Fixed: Creates spurious directory on startup (LP: #1357758)
+- Fixed: Various GUI/rendering improvements (LP: #1380502, #1320065, #1338252, #1096050, #1376550, #1382689)
+- Fixed: "missing disk in drive <whatever>" (LP: #1371183)
 
 0.13.0 [2014-07-19]
 This version based on Qt 5 and has new modulated core, and new features (example: normal mapping) and fixes for 115 bugs, including:
