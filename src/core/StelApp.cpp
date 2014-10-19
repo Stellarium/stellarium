@@ -216,6 +216,7 @@ StelApp::StelApp(QObject* parent)
 	, initialized(false)
 	, saveProjW(-1)
 	, saveProjH(-1)
+	, baseFontSize(13)
 	, renderBuffer(NULL)
 	, viewportEffect(NULL)
 {

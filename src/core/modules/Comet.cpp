@@ -70,6 +70,7 @@ Comet::Comet(const QString& englishName,
 		  false, //No atmosphere
 		  true, //halo
 		  pTypeStr),
+	  tailActive(false),
 	  dustTailWidthFactor(dustTailWidthFact),
 	  dustTailLengthFactor(dustTailLengthFact),
 	  dustTailBrightnessFactor(dustTailBrightnessFact)
