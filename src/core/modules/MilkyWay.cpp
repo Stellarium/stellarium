@@ -59,24 +59,28 @@ void MilkyWay::init()
 	QSettings* conf = StelApp::getInstance().getSettings();
 	Q_ASSERT(conf);
 
-	tex = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/milkyway.png");
+	//tex = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/milkyway.png");
+	tex = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/milkyway_2048.png");
 	setFlagShow(conf->value("astro/flag_milky_way").toBool());
 	setIntensity(conf->value("astro/milky_way_intensity",1.f).toFloat());
 	// GZ: I cut the original milkyway.png 512x512 to 512x256. Center line was shifted southwards by 32 pixels to keep Magellanic Clouds visible.
 	// 256px were 90 degrees. 128:45, 64:22.5, 32:11.25. So this spherical ring goes from -45-11.25 to 45-11.25.
 
-	vertexArray = new StelVertexArray(StelPainter::computeSphereNoLight(1.f,1.f,45,15,1, true, (90.0f-33.75f)*M_PI/180.0f, (90.0f+56.25f)*M_PI/180.0f)); // GZ orig: slices=stacks=20. // GZ:
+	// A new texture was provided by Fabien. Better resolution, but in equatorial coordinates. I had to enhance it a bit, and shift it by 90 degrees.
+	// GZ: Note that a full sphere (i.e., a texture not aligned to galactic coordinates) costs performance!
+	//vertexArray = new StelVertexArray(StelPainter::computeSphereNoLight(1.f,1.f,45,15,1, true, (90.0f-33.75f)*M_PI/180.0f, (90.0f+56.25f)*M_PI/180.0f)); // GZ orig: slices=stacks=20.
+	vertexArray = new StelVertexArray(StelPainter::computeSphereNoLight(1.f,1.f,45,15,1, true)); // GZ orig: slices=stacks=20.
 	vertexArray->colors.resize(vertexArray->vertex.length());
 	vertexArray->colors.fill(Vec3f(1.0, 0.3, 0.9));
 
-	// GZ It appears cleaner to properly transform the vertex coordinates already here.
+	// If we have a texture in galactic coordinates, we can transform the vertex coordinates already here.
 	// The texture had to be rotated/flipped and shifted compared to 0.13.0
-	StelCore* core=StelApp::getInstance().getCore();
-	for (int i=0; i<vertexArray->vertex.size(); ++i)
-	{
-		Vec3d tmp=vertexArray->vertex.at(i);
-		vertexArray->vertex.replace(i, core->galacticToJ2000(tmp));
-	}
+//	StelCore* core=StelApp::getInstance().getCore();
+//	for (int i=0; i<vertexArray->vertex.size(); ++i)
+//	{
+//		Vec3d tmp=vertexArray->vertex.at(i);
+//		vertexArray->vertex.replace(i, core->galacticToJ2000(tmp));
+//	}
 }
 
 
@@ -109,13 +113,19 @@ void MilkyWay::draw(StelCore* core)
 	// since milky way is always seen white RGB value in the texture (1.0,1.0,1.0)
 	Vec3f c = Vec3f(0.34165f, 0.429666f, 0.63586f);
 
-	float lum = core->getSkyDrawer()->surfacebrightnessToLuminance(13.5f);
+	//float lum = core->getSkyDrawer()->surfacebrightnessToLuminance(13.5f);
+	float lum = core->getSkyDrawer()->surfacebrightnessToLuminance(10.5f); // GZ I am trying a new value here. Not sure how to calibrate.
 
 	// Get the luminance scaled between 0 and 1
 	float aLum =eye->adaptLuminanceScaled(lum*fader->getInterstate());
 
 	// Bound a maximum luminance
 	aLum = qMin(0.38f, aLum*2.f);
+
+	// GZ I have the impression we must also adjust milky way to light pollution.
+	// Is there any way to calibrate this?
+	int bortle=core->getSkyDrawer()->getBortleScaleIndex();
+	aLum*=(10.0f-bortle)*0.1f;
 
 	// intensity of 1.0 is "proper", but allow boost for dim screens
 	c*=aLum*intensity;
@@ -129,6 +139,7 @@ void MilkyWay::draw(StelCore* core)
 	if (withExtinction)
 	{
 		// We must process the vertices to find geometric altitudes in order to compute vertex colors.
+		// Note that there is a visible boost of extintion for higher Bortle indices. I must reflect that as well.
 		Extinction extinction=core->getSkyDrawer()->getExtinction();
 		vertexArray->colors.clear();
 
@@ -139,7 +150,7 @@ void MilkyWay::draw(StelCore* core)
 
 			float oneMag=0.0f;
 			extinction.forward(vertAltAz, &oneMag);
-			float extinctionFactor=std::pow(0.4f , oneMag); // drop of one magnitude: factor 2.5 or 40%
+			float extinctionFactor=std::pow(0.4f , oneMag) * (1.0f-bortle*0.1f); // drop of one magnitude: factor 2.5 or 40%
 			Vec3f thisColor=Vec3f(c[0]*extinctionFactor, c[1]*extinctionFactor, c[2]*extinctionFactor);
 			vertexArray->colors.append(thisColor);
 		}
