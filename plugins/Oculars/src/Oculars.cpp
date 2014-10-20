@@ -1236,7 +1236,6 @@ void Oculars::toggleCCD(bool show)
 		flagShowCCD = true;
 		setScreenFOVForCCD();
 		movementManager->setFlagEnableZoomKeys(false);
-		movementManager->setFlagEnableMouseNavigation(false);
 
 		if (guiPanel) {
 			guiPanel->showCcdGui();
@@ -1248,7 +1247,6 @@ void Oculars::toggleCCD(bool show)
 		movementManager->zoomTo(movementManager->getInitFov());
 		movementManager->setFlagTracking(false);
 		movementManager->setFlagEnableZoomKeys(true);
-		movementManager->setFlagEnableMouseNavigation(true);
 		core->setFlipHorz(false);
 		core->setFlipVert(false);
 
