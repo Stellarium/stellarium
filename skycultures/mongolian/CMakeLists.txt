@@ -8,6 +8,5 @@ INSTALL(FILES info.ini star_names.fab DESTINATION share/${PACKAGE}/skycultures/m
 INSTALL(DIRECTORY ./ DESTINATION share/${PACKAGE}/skycultures/mongolian
 	FILES_MATCHING PATTERN "constellation*" 
 	PATTERN "*.png" 
-	PATTERN "*.jpg" 
 	PATTERN "description.*.utf8" 
 	PATTERN "CMakeFiles" EXCLUDE )
