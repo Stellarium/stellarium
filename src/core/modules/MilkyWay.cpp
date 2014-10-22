@@ -111,21 +111,22 @@ void MilkyWay::draw(StelCore* core)
 
 	// This RGB color corresponds to the night blue scotopic color = 0.25, 0.25 in xyY mode.
 	// since milky way is always seen white RGB value in the texture (1.0,1.0,1.0)
-	Vec3f c = Vec3f(0.34165f, 0.429666f, 0.63586f);
+	// Vec3f c = Vec3f(0.34165f, 0.429666f, 0.63586f);
+	// GZ: This is the same color, just brighter to have Blue=1.
+	Vec3f c = Vec3f(0.53730381f, .675724216f, 1.0f);
 
-	//float lum = core->getSkyDrawer()->surfacebrightnessToLuminance(13.5f);
-	float lum = core->getSkyDrawer()->surfacebrightnessToLuminance(10.5f); // GZ I am trying a new value here. Not sure how to calibrate.
+	float lum = core->getSkyDrawer()->surfacebrightnessToLuminance(13.5f); // Source? How to calibrate the new texture?
 
 	// Get the luminance scaled between 0 and 1
 	float aLum =eye->adaptLuminanceScaled(lum*fader->getInterstate());
 
-	// Bound a maximum luminance
+	// Bound a maximum luminance. GZ: Is there any reference/reason, or just trial and error?
 	aLum = qMin(0.38f, aLum*2.f);
 
 	// GZ I have the impression we must also adjust milky way to light pollution.
 	// Is there any way to calibrate this?
 	int bortle=core->getSkyDrawer()->getBortleScaleIndex();
-	aLum*=(10.0f-bortle)*0.1f;
+	aLum*=(11.0f-bortle)*0.1f;
 
 	// intensity of 1.0 is "proper", but allow boost for dim screens
 	c*=aLum*intensity;
@@ -139,7 +140,7 @@ void MilkyWay::draw(StelCore* core)
 	if (withExtinction)
 	{
 		// We must process the vertices to find geometric altitudes in order to compute vertex colors.
-		// Note that there is a visible boost of extintion for higher Bortle indices. I must reflect that as well.
+		// Note that there is a visible boost of extinction for higher Bortle indices. I must reflect that as well.
 		Extinction extinction=core->getSkyDrawer()->getExtinction();
 		vertexArray->colors.clear();
 
@@ -157,7 +158,6 @@ void MilkyWay::draw(StelCore* core)
 	}
 	else
 		vertexArray->colors.fill(Vec3f(c[0], c[1], c[2]));
-
 
 	StelPainter sPainter(prj);
 	glEnable(GL_CULL_FACE);
