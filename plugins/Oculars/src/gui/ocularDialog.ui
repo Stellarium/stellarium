@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>887</width>
-    <height>427</height>
+    <width>650</width>
+    <height>433</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -342,6 +342,16 @@
               <widget class="QCheckBox" name="checkBoxDecimalDegrees">
                <property name="text">
                 <string>Use degrees and minutes for FOV of CCD</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QCheckBox" name="checkBoxSensorsZooming">
+               <property name="toolTip">
+                <string>Please enable it for avoiding of flips the whole sky from the telescope's settings.</string>
+               </property>
+               <property name="text">
+                <string>Disable zoom keys for CCD</string>
                </property>
               </widget>
              </item>
