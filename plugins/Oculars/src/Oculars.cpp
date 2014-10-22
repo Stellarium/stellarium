@@ -148,6 +148,7 @@ Oculars::Oculars():
 	actualFOV(0),
 	initialFOV(0),
 	flagInitFOVUsage(false),
+	flagDisableZoomForCCD(true),
 	reticleRotation(0)
 {
 	// Font size is 14
@@ -585,6 +586,7 @@ void Oculars::init()
 		setFlagDecimalDegrees(settings->value("use_decimal_degrees", false).toBool());
 		setFlagLimitMagnitude(settings->value("limit_stellar_magnitude", true).toBool());
 		setFlagInitFovUsage(settings->value("use_initial_fov", false).toBool());
+		setFlagDisableZoomForCCD(settings->value("disable_zoom_keys", true).toBool());
 	} catch (std::runtime_error& e) {
 		qWarning() << "WARNING: unable to locate ocular.ini file or create a default one for Ocular plugin: " << e.what();
 		ready = false;
@@ -1211,7 +1213,7 @@ void Oculars::toggleCCD(bool show)
 	}
 
 	StelCore *core = StelApp::getInstance().getCore();
-	StelMovementMgr *movementManager = core->getMovementMgr();
+	StelMovementMgr *movementManager = core->getMovementMgr();	
 	if (show) {
 		//Mutually exclusive with the ocular mode
 		hideUsageMessageIfDisplayed();
@@ -1235,7 +1237,9 @@ void Oculars::toggleCCD(bool show)
 		}
 		flagShowCCD = true;
 		setScreenFOVForCCD();
-		movementManager->setFlagEnableZoomKeys(false);
+		bool flag = getFlagDisableZoomForCCD();
+		movementManager->setFlagEnableZoomKeys(!flag);
+		movementManager->setFlagEnableMouseNavigation(!flag);
 
 		if (guiPanel) {
 			guiPanel->showCcdGui();
@@ -1246,7 +1250,11 @@ void Oculars::toggleCCD(bool show)
 		//Zoom out		
 		movementManager->zoomTo(movementManager->getInitFov());
 		movementManager->setFlagTracking(false);
-		movementManager->setFlagEnableZoomKeys(true);
+		if (getFlagDisableZoomForCCD())
+		{
+			movementManager->setFlagEnableZoomKeys(true);
+			movementManager->setFlagEnableMouseNavigation(true);
+		}
 		core->setFlipHorz(false);
 		core->setFlipVert(false);
 
@@ -2000,6 +2008,18 @@ void Oculars::setFlagInitFovUsage(const bool b)
 bool Oculars::getFlagInitFovUsage() const
 {
 	return flagInitFOVUsage;
+}
+
+void Oculars::setFlagDisableZoomForCCD(const bool b)
+{
+	flagDisableZoomForCCD = b;
+	settings->setValue("disable_zoom_keys", b);
+	settings->sync();
+}
+
+bool Oculars::getFlagDisableZoomForCCD() const
+{
+	return flagDisableZoomForCCD;
 }
 
 QString Oculars::getDimensionsString(double fovX, double fovY) const
