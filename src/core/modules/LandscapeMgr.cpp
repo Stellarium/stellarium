@@ -295,7 +295,7 @@ void LandscapeMgr::update(double deltaTime)
 	}
 	else
 	{   float lightscapeBrightness=0.0f;
-		// night pollution brightness is mixed in at -3...-8 degrees.
+		// light pollution layer is mixed in at -3...-8 degrees.
 		if (sunPos[2]<-0.14f) lightscapeBrightness=1.0f;
 		else if (sunPos[2]<-0.05f) lightscapeBrightness = 1.0f-(sunPos[2]+0.14)/(-0.05+0.14);
 		landscape->setBrightness(landscapeBrightness, lightscapeBrightness);
@@ -337,7 +337,8 @@ void LandscapeMgr::init()
 	setDefaultMinimalBrightness(conf->value("landscape/minimal_brightness", 0.01).toFloat());
 	setFlagLandscapeUseMinimalBrightness(conf->value("landscape/flag_minimal_brightness", false).toBool());
 	setFlagLandscapeSetsMinimalBrightness(conf->value("landscape/flag_landscape_sets_minimal_brightness",false).toBool());
-	setFlagAtmosphereAutoEnable(conf->value("viewing/flag_atmopshere_auto_enable",true).toBool());
+	setFlagAtmosphereAutoEnable(conf->value("viewing/flag_atmosphere_auto_enable",true).toBool());
+	setFlagIllumination(conf->value("landscape/flag_enable_illumination_layer", true).toBool());
 
 	bool ok =true;
 	setAtmosphereBortleLightPollution(conf->value("stars/init_bortle_scale",3).toInt(&ok));
@@ -356,6 +357,7 @@ void LandscapeMgr::init()
 	addAction("actionShow_Fog", displayGroup, N_("Fog"), "fogDisplayed", "F");
 	addAction("actionShow_Cardinal_Points", displayGroup, N_("Cardinal points"), "cardinalsPointsDisplayed", "Q");
 	addAction("actionShow_Ground", displayGroup, N_("Ground"), "landscapeDisplayed", "G");
+	addAction("actionShow_LandscapeIllumination", displayGroup, N_("Illumination"), "illuminationDisplayed", "Shift+G");
 }
 
 void LandscapeMgr::setStelStyle(const QString& section)
@@ -386,6 +388,7 @@ bool LandscapeMgr::setCurrentLandscapeID(const QString& id)
 		// Copy display parameters from previous landscape to new one
 		newLandscape->setFlagShow(landscape->getFlagShow());
 		newLandscape->setFlagShowFog(landscape->getFlagShowFog());
+		newLandscape->setFlagShowIllumination(landscape->getFlagShowIllumination());
 		delete landscape;
 		landscape = newLandscape;
 	}
@@ -508,6 +511,19 @@ void LandscapeMgr::setFlagFog(const bool displayed)
 bool LandscapeMgr::getFlagFog() const
 {
 	return landscape->getFlagShowFog();
+}
+
+void LandscapeMgr::setFlagIllumination(const bool displayed)
+{
+	if (landscape->getFlagShowIllumination() != displayed) {
+		landscape->setFlagShowIllumination(displayed);
+		emit illuminationDisplayedChanged(displayed);
+	}
+}
+
+bool LandscapeMgr::getFlagIllumination() const
+{
+	return landscape->getFlagShowIllumination();
 }
 
 void LandscapeMgr::setFlagLandscapeAutoSelection(bool enableAutoSelect)
@@ -637,8 +653,10 @@ void LandscapeMgr::setFlagAtmosphere(const bool displayed)
 		atmosphere->setFlagShow(displayed);
 		StelApp::getInstance().getCore()->getSkyDrawer()->setFlagHasAtmosphere(displayed);
 		emit atmosphereDisplayedChanged(displayed);
-		if (StelApp::getInstance().getSettings()->value("landscape/flag_fog", true).toBool())
-			setFlagFog(displayed); // sync of visibility of fog because this is atmospheric phenomena
+		//if (StelApp::getInstance().getSettings()->value("landscape/flag_fog", true).toBool())
+		//	setFlagFog(displayed); // sync of visibility of fog because this is atmospheric phenomena
+		// GZ This did not work as it may have been intended. Switch off fog, switch off atmosphere. Switch on atmosphere, and you have fog?
+		// --> Fog is only drawn in Landscape if atmosphere is switched on!
 	}
 }
 
