@@ -186,6 +186,7 @@ minimal_brightness                  = 0.01
 flag_minimal_brightness             = false
 # This allows use of a minimum value even given in the respective landscape.ini
 flag_landscape_sets_minimal_brightness = false
+flag_enable_illumination_layer      = true
 
 [viewing]
 flag_constellation_drawing          = false

@@ -346,7 +346,7 @@
       <item alignment="Qt::AlignTop">
        <widget class="QStackedWidget" name="stackedWidget">
         <property name="currentIndex">
-         <number>1</number>
+         <number>2</number>
         </property>
         <widget class="QWidget" name="page">
          <layout class="QGridLayout" name="gridLayout">
@@ -1643,22 +1643,6 @@
             </property>
            </widget>
           </item>
-          <item row="2" column="1">
-           <widget class="QPushButton" name="pushButtonAddRemoveLandscapes">
-            <property name="minimumSize">
-             <size>
-              <width>0</width>
-              <height>37</height>
-             </size>
-            </property>
-            <property name="styleSheet">
-             <string notr="true">margin-left: 10px; margin-right: 10px; margin-bottom:10px;</string>
-            </property>
-            <property name="text">
-             <string>Add/remove landscapes...</string>
-            </property>
-           </widget>
-          </item>
           <item row="1" column="1">
            <widget class="QGroupBox" name="landscapeOptionsGroupBox">
             <property name="sizePolicy">
@@ -1721,7 +1705,33 @@
                </property>
               </widget>
              </item>
+             <item row="5" column="0">
+              <widget class="QCheckBox" name="landscapeIlluminationCheckBox">
+               <property name="text">
+                <string>Show illumination layer (bright windows, light pollution, etc.)</string>
+               </property>
+               <property name="checked">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
             </layout>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QPushButton" name="pushButtonAddRemoveLandscapes">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>37</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">margin-left: 10px; margin-right: 10px; margin-bottom:10px;</string>
+            </property>
+            <property name="text">
+             <string>Add/remove landscapes...</string>
+            </property>
            </widget>
           </item>
          </layout>
