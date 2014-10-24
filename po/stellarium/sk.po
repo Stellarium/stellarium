@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-10-22 19:47+0700\n"
-"PO-Revision-Date: 2014-06-23 13:23+0000\n"
+"PO-Revision-Date: 2014-10-23 10:21+0000\n"
 "Last-Translator: Pavol Gajdoš <Unknown>\n"
 "Language-Team: Slovak <sk@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-10-23 06:07+0000\n"
+"X-Launchpad-Export-Date: 2014-10-24 05:38+0000\n"
 "X-Generator: Launchpad (build 17203)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:106 src/core/modules/StarMgr.cpp:346
@@ -73,7 +73,7 @@ msgstr "Horizont"
 
 #: src/core/modules/GridLinesMgr.cpp:594
 msgid "Galactic Equator"
-msgstr ""
+msgstr "Galaktický Rovník"
 
 #: src/core/modules/GridLinesMgr.cpp:728
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:331
@@ -121,7 +121,7 @@ msgstr "Galaktická mriežka"
 
 #: src/core/modules/GridLinesMgr.cpp:737 src/ui_viewDialog.h:1247
 msgid "Galactic equator"
-msgstr ""
+msgstr "Galaktický rovník"
 
 #: src/core/modules/LandscapeMgr.cpp:355 src/ui_viewDialog.h:1176
 msgid "Atmosphere"
@@ -223,11 +223,11 @@ msgstr "Planetárna hmlovina"
 
 #: src/core/modules/Nebula.cpp:390
 msgid "Dark nebula"
-msgstr ""
+msgstr "Tmavá hmlovina"
 
 #: src/core/modules/Nebula.cpp:393
 msgid "Irregular galaxy"
-msgstr ""
+msgstr "Nepravidelná galaxia"
 
 #: src/core/modules/Nebula.cpp:396
 msgid "Cluster associated with nebulosity"
@@ -425,7 +425,7 @@ msgstr ""
 #: plugins/Exoplanets/src/Exoplanet.cpp:207
 #, qt-format
 msgid "Distance: %1 ly"
-msgstr ""
+msgstr "Vzdialenosť: %1 ly"
 
 #: src/core/modules/StarWrapper.cpp:224
 #: plugins/Exoplanets/src/Exoplanet.cpp:201
@@ -1100,7 +1100,7 @@ msgstr ""
 #: src/core/StelObject.cpp:121 src/core/StelObject.cpp:123
 #: src/core/StelObject.cpp:131 src/core/StelObject.cpp:133
 msgid "RA/Dec"
-msgstr ""
+msgstr "RA/Dec"
 
 #: src/core/StelObject.cpp:145 src/core/StelObject.cpp:149
 #, qt-format
@@ -1121,7 +1121,7 @@ msgstr "Azimut/výška: %1/%2"
 #: src/core/StelObject.cpp:190 src/core/StelObject.cpp:192
 #: src/core/StelObject.cpp:198 src/core/StelObject.cpp:200
 msgid "Ecliptic longitude/latitude"
-msgstr ""
+msgstr "Ekliptikálna dĺžka/šírka"
 
 #: src/core/StelObject.cpp:208 src/core/StelObject.cpp:210
 #, qt-format
@@ -1915,46 +1915,46 @@ msgstr "hviezdna mapka"
 #: src/gui/SearchDialog.cpp:231
 msgctxt "coordinate system"
 msgid "Equatorial (J2000.0)"
-msgstr ""
+msgstr "Rovník (J2000.0)"
 
 #: src/gui/SearchDialog.cpp:232
 msgctxt "coordinate system"
 msgid "Equatorial"
-msgstr ""
+msgstr "Rovníkové"
 
 #: src/gui/SearchDialog.cpp:233
 msgctxt "coordinate system"
 msgid "Horizontal"
-msgstr ""
+msgstr "Horizontálne"
 
 #: src/gui/SearchDialog.cpp:234
 msgctxt "coordinate system"
 msgid "Galactic"
-msgstr ""
+msgstr "Galaktické"
 
 #: src/gui/SearchDialog.cpp:248
 msgid "Right ascension"
-msgstr ""
+msgstr "Rektascenzia"
 
 #: src/gui/SearchDialog.cpp:250
 msgid "Declination"
-msgstr ""
+msgstr "Deklinácia"
 
 #: src/gui/SearchDialog.cpp:257
 msgid "Azimuth"
-msgstr ""
+msgstr "Azimut"
 
 #: src/gui/SearchDialog.cpp:260
 msgid "Altitude"
-msgstr ""
+msgstr "Výška"
 
 #: src/gui/SearchDialog.cpp:267
 msgid "Longitude"
-msgstr ""
+msgstr "Dĺžka"
 
 #: src/gui/SearchDialog.cpp:270
 msgid "Latitude"
-msgstr ""
+msgstr "Šírka"
 
 #: src/gui/SearchDialog.cpp:508
 msgid "Simbad Lookup Error"
@@ -2409,39 +2409,39 @@ msgstr "Icarus"
 #. TRANSLATORS: Asteroid (1809) Prometheus
 #: src/translations.h:147
 msgid "Prometheus"
-msgstr ""
+msgstr "Prometheus"
 
 #: src/translations.h:148
 msgid "Prometheus (moon)"
-msgstr ""
+msgstr "Prometheus (mesiac)"
 
 #. TRANSLATORS: Asteroid (1810) Epimetheus
 #: src/translations.h:150
 msgid "Epimetheus"
-msgstr ""
+msgstr "Epimetheus"
 
 #: src/translations.h:151
 msgid "Epimetheus (moon)"
-msgstr ""
+msgstr "Epimetheus (mesiac)"
 
 #. TRANSLATORS: Asteroid (951) Gaspra
 #: src/translations.h:153
 msgid "Gaspra"
-msgstr ""
+msgstr "Gaspra"
 
 #. TRANSLATORS: Asteroid (243) Ida
 #: src/translations.h:155
 msgid "Ida"
-msgstr ""
+msgstr "Ida"
 
 #. TRANSLATORS: Asteroid (218) Bianca
 #: src/translations.h:157
 msgid "Bianca"
-msgstr ""
+msgstr "Bianca"
 
 #: src/translations.h:158
 msgid "Bianca (moon)"
-msgstr ""
+msgstr "Bianca (mesiac)"
 
 #. TRANSLATORS: Proper name of comet C/1680 V1
 #: src/translations.h:161
@@ -2519,7 +2519,7 @@ msgstr "Asteroidy"
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:195
 msgid "Moons"
-msgstr ""
+msgstr "Mesiace"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:197
@@ -2529,37 +2529,37 @@ msgstr ""
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:202
 msgid "Bright galaxies"
-msgstr ""
+msgstr "Jasné galaxie"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:204
 msgid "Open star clusters"
-msgstr ""
+msgstr "Otvorené hviezdokopy"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:206
 msgid "Globular star clusters"
-msgstr ""
+msgstr "Guľové hviezdokopy"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:208
 msgid "Nebulae"
-msgstr ""
+msgstr "Hmloviny"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:210
 msgid "Planetary nebulae"
-msgstr ""
+msgstr "Planetárne hmloviny"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:212
 msgid "Dark nebulae"
-msgstr ""
+msgstr "Tmavé hmloviny"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:214
 msgid "Irregular galaxies"
-msgstr ""
+msgstr "Nepravidelné galaxie"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:216
@@ -5901,7 +5901,7 @@ msgstr "zZP:"
 #: plugins/Oculars/src/ui_ocularDialog.h:1092
 #: plugins/Oculars/src/ui_ocularDialog.h:1119
 msgid "Focal length:"
-msgstr "Hĺbka zaostrenia:"
+msgstr "Ohnisková vzdialenosť:"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1093
 msgid "Field stop:"
