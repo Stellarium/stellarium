@@ -546,7 +546,7 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	conf->setValue("viewing/flag_constellation_isolate_selected", cmgr->getFlagIsolateSelected());
 	conf->setValue("viewing/flag_landscape_autoselection", lmgr->getFlagLandscapeAutoSelection());
 	conf->setValue("viewing/flag_light_pollution_database", lmgr->getFlagUseLightPollutionFromDatabase());
-	conf->setValue("viewing/flag_atmopshere_auto_enable", lmgr->getFlagAtmosphereAutoEnable());
+	conf->setValue("viewing/flag_atmosphere_auto_enable", lmgr->getFlagAtmosphereAutoEnable());
 	conf->setValue("viewing/constellation_art_intensity", cmgr->getArtIntensity());
 	conf->setValue("viewing/flag_night", StelApp::getInstance().getVisionModeNight());
 	conf->setValue("astro/flag_star_name", smgr->getFlagLabels());
@@ -564,6 +564,7 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	conf->setValue("landscape/flag_atmosphere", lmgr->getFlagAtmosphere());
 	conf->setValue("landscape/flag_brightness", lmgr->getFlagLandscapeSetsMinimalBrightness());
 	conf->setValue("landscape/flag_fog", lmgr->getFlagFog());
+	conf->setValue("landscape/flag_enable_illumination_layer", lmgr->getFlagIllumination());
 	conf->setValue("stars/init_bortle_scale", core->getSkyDrawer()->getBortleScaleIndex());
         conf->setValue("landscape/atmospheric_extinction_coefficient", core->getSkyDrawer()->getExtinctionCoefficient());
         conf->setValue("landscape/pressure_mbar", core->getSkyDrawer()->getAtmospherePressure());
