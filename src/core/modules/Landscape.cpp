@@ -518,7 +518,7 @@ void LandscapeOldStyle::draw(StelCore* core)
 	drawFog(core, painter);
 
 	// Self-luminous layer (Light pollution etc). This looks striking!
-	if (lightScapeBrightness>0.0f && getFlagShowIllumination())
+	if (lightScapeBrightness>0.0f && illumFader.getInterstate())
 	{
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE);
 		drawDecor(core, painter, true);
@@ -830,7 +830,7 @@ void LandscapeFisheye::draw(StelCore* core)
 		sPainter.sSphereMap(radius,cols,rows,texFov,1);
 	}
 
-	if (mapTexIllum && lightScapeBrightness>0.0f && getFlagShowIllumination())
+	if (mapTexIllum && lightScapeBrightness>0.0f && illumFader.getInterstate())
 	{
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE);
 		sPainter.setColor(illumFader.getInterstate()*lightScapeBrightness,
@@ -988,7 +988,7 @@ void LandscapeSpherical::draw(StelCore* core)
 	}
 
 	// Self-luminous layer (Light pollution etc). This looks striking!
-	if (mapTexIllum && (lightScapeBrightness>0.0f) && getFlagShowIllumination())
+	if (mapTexIllum && (lightScapeBrightness>0.0f) && illumFader.getInterstate())
 	{
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE);
 		sPainter.setColor(lightScapeBrightness*illumFader.getInterstate(),
