@@ -85,9 +85,10 @@ namespace StelUtils
 
 	//! Convert an angle in radian to a decimal degree string.
 	//! @param angle input angle in radian
+	//! @param precision
 	//! @param useD Define if letter "d" must be used instead of deg sign
 	//! @param useC Define if function should use 0-360 degrees
-	QString radToDecDegStr(const double angle, const bool useD=false, const bool useC=false);
+	QString radToDecDegStr(const double angle, const int precision = 4, const bool useD=false, const bool useC=false);
 
 	//! Convert an angle in radian to a hms formatted string.
 	//! If the second, minute part is == 0, it is not output
