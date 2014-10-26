@@ -87,10 +87,12 @@ void LocationDialog::createDialogContent()
 	proxyModel->setFilterCaseSensitivity(Qt::CaseInsensitive);
 	ui->citiesListView->setModel(proxyModel);
 
+#ifdef Q_OS_WIN
 	//Kinetic scrolling for tablet pc and pc
 	QList<QWidget *> addscroll;
 	addscroll << ui->citiesListView;
 	installKineticScrolling(addscroll);
+#endif
 
 	populatePlanetList();
 	populateCountryList();
