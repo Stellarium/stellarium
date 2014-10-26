@@ -125,10 +125,12 @@ void HelpDialog::createDialogContent()
 		updateJSON();
 	}
 
+#ifdef Q_OS_WIN
 	//Kinetic scrolling for tablet pc and pc
 	QList<QWidget *> addscroll;
 	addscroll << ui->helpBrowser << ui->aboutBrowser << ui->logBrowser;
 	installKineticScrolling(addscroll);
+#endif
 
 	// Help page
 	updateText();
