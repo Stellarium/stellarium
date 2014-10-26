@@ -239,24 +239,24 @@ void radToDecDeg(double rad, bool &sign, double &deg)
 	deg = rad*180./M_PI;
 }
 
-QString radToDecDegStr(const double angle, const bool useD, const bool useC)
+QString radToDecDegStr(const double angle, const int precision, const bool useD, const bool useC)
 {
 	QChar degsign('d');
-	QString str;
+	QString str;	
 	if (!useD)
 	{
-		degsign = 0x00B0;
+		degsign = 0x00B0;		
 	}
 	bool sign;
 	double deg;
 	StelUtils::radToDecDeg(angle, sign, deg);
-	str = QString("%1%2%3").arg((sign?"+":"-"), QString::number(deg, 'f', 4), degsign);
+	str = QString("%1%2%3").arg((sign?"+":"-"), QString::number(deg, 'f', precision), degsign);
 	if (useC)
 	{
 		if (!sign)
 			deg = 360. - deg;
 
-		str = QString("+%1%2").arg(QString::number(deg, 'f', 4), degsign);
+		str = QString("+%1%2").arg(QString::number(deg, 'f', precision), degsign);
 	}
 
 	return str;
@@ -311,15 +311,15 @@ QString radToHmsStr(const double angle, const bool decimal)
 	QString carry;
 	if (decimal)
 	{
-		width=4;
-		precision=1;
-		carry="60.0";
+		width=5;
+		precision=2;
+		carry="60.00";
 	}
 	else
 	{
-		width=2;
-		precision=0;
-		carry="60";
+		width=4;
+		precision=1;
+		carry="60.0";
 	}
 
 	// handle carry case (when seconds are rounded up)
