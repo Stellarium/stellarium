@@ -165,10 +165,12 @@ void ConfigurationDialog::createDialogContent()
 	connect(ui->downloadRetryButton, SIGNAL(clicked()), this, SLOT(downloadStars()));
 	resetStarCatalogControls();
 
+#ifdef Q_OS_WIN
 	//Kinetic scrolling for tablet pc and pc
 	QList<QWidget *> addscroll;
 	addscroll << ui->pluginsListWidget << ui->scriptListWidget;
 	installKineticScrolling(addscroll);
+#endif
 
 	// Selected object info
 	if (gui->getInfoTextFilters() == StelObject::InfoStringGroup(0))

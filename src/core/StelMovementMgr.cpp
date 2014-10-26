@@ -321,8 +321,10 @@ void StelMovementMgr::addTimeDragPoint(int x, int y)
 
 bool StelMovementMgr::handlePinch(qreal scale, bool started)
 {
+#ifdef Q_OS_WIN
 	if (flagEnableMouseNavigation == false)
 		return true;
+#endif
 
 	static double previousFov = 0;
 	if (started)
