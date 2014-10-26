@@ -773,7 +773,15 @@ void StelCore::returnToHome()
 	// Using returnToDefaultLocation() and getCurrentLocation() introduce issue, because for flying
 	// between planets using SpaceShip and second method give does not exist data
 	StelLocationMgr& locationMgr = StelApp::getInstance().getLocationMgr();
-	StelLocation loc = locationMgr.locationForString(defaultLocationID);
+	StelLocation loc;
+	if (defaultLocationID == "auto")
+	{
+		locationMgr.locationFromIP();
+		loc = locationMgr.getLastResortLocation();
+	}
+	else
+		loc = locationMgr.locationForString(defaultLocationID);
+
 	if (loc.isValid())
 		moveObserverTo(loc, 0.);
 
