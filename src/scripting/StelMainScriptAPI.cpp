@@ -1078,13 +1078,12 @@ void StelMainScriptAPI::moveToRaDecJ2000(const QString& ra, const QString& dec, 
 
 	GETSTELMODULE(StelObjectMgr)->unSelect();
 
-	Vec3d aimJ2000, aimEquofDate;
+	Vec3d aimJ2000;
 	double dRa = StelUtils::getDecAngle(ra);
 	double dDec = StelUtils::getDecAngle(dec);
 
-	StelUtils::spheToRect(dRa,dDec,aimJ2000);
-	aimEquofDate = StelApp::getInstance().getCore()->j2000ToEquinoxEqu(aimJ2000);
-	mvmgr->moveToJ2000(aimEquofDate, duration);
+	StelUtils::spheToRect(dRa,dDec,aimJ2000);	
+	mvmgr->moveToJ2000(aimJ2000, duration);
 }
 
 QString StelMainScriptAPI::getAppLanguage()
