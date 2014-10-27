@@ -100,7 +100,7 @@ StelVertexArray StelVertexArray::removeDiscontinuousTriangles(const StelProjecto
 				Q_ASSERT(false);
 		}
 	}
-	// Just in case we don't have any triangles, we also remove all the vertex.
+	// Just in case we don't have any triangles, we also remove all the vertices.
 	// This is because we can't specify an empty indexed VertexArray.
 	// FIXME: we should use an attribute for indexed array.
 	if (ret.indices.isEmpty())
@@ -114,6 +114,7 @@ QDataStream& operator<<(QDataStream& out, const StelVertexArray& p)
 {
 	out << p.vertex;
 	out << p.texCoords;
+	out << p.colors; // GZ NEW
 	out << p.indices;
 	out << (unsigned int)p.primitiveType;
 	return out;
@@ -123,6 +124,7 @@ QDataStream& operator>>(QDataStream& in, StelVertexArray& p)
 {
 	in >> p.vertex;
 	in >> p.texCoords;
+	in >> p.colors; // GZ NEW
 	in >> p.indices;
 	unsigned int t;
 	in >> t;
