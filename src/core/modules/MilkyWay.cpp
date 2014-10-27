@@ -96,7 +96,7 @@ void MilkyWay::draw(StelCore* core)
 	// This is the same color, just brighter to have Blue=1.
 	Vec3f c = Vec3f(0.53730381f, .675724216f, 1.0f);
 
-	float lum = core->getSkyDrawer()->surfacebrightnessToLuminance(13.5f); // Source? How to calibrate the new texture?
+	float lum = core->getSkyDrawer()->surfacebrightnessToLuminance(12.5f); // Source? How to calibrate the new texture?
 
 	// Get the luminance scaled between 0 and 1
 	float aLum =eye->adaptLuminanceScaled(lum*fader->getInterstate());
@@ -132,7 +132,7 @@ void MilkyWay::draw(StelCore* core)
 
 			float oneMag=0.0f;
 			extinction.forward(vertAltAz, &oneMag);
-			float extinctionFactor=std::pow(0.4f , oneMag) * (1.0f-bortle*0.1f); // drop of one magnitude: factor 2.5 or 40%
+			float extinctionFactor=std::pow(0.4f , oneMag) * (1.1f-bortle*0.1f); // drop of one magnitude: factor 2.5 or 40%
 			Vec3f thisColor=Vec3f(c[0]*extinctionFactor, c[1]*extinctionFactor, c[2]*extinctionFactor);
 			vertexArray->colors.append(thisColor);
 		}
