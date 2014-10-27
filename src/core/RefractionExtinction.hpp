@@ -45,7 +45,7 @@
 class Extinction
 {
 public:
-	//! Define the extinction strategy for rendering underground objects (usefull when ground is not rendered)
+	//! Define the extinction strategy for rendering underground objects (useful when ground is not rendered)
 	enum UndergroundExtinctionMode {
 		UndergroundExtinctionZero = 0,	//!< Zero extinction: stars visible in full brightness
 		UndergroundExtinctionMax = 1,   //!< Maximum extinction: coef 42, i.e practically invisible

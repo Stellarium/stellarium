@@ -30,6 +30,7 @@
 class StelPainter;
 class QDataStream;
 
+// This only draws nebula icons. For the DSO images, see StelSkylayerMgr and StelSkyImageTile.
 class Nebula : public StelObject
 {
 friend class NebulaMgr;
