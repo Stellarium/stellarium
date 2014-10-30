@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-10-26 14:07+0600\n"
-"PO-Revision-Date: 2014-10-20 23:42+0000\n"
+"PO-Revision-Date: 2014-10-29 09:44+0000\n"
 "Last-Translator: Andi Chandler <Unknown>\n"
 "Language-Team: English (United Kingdom) <en_GB@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-10-27 06:03+0000\n"
+"X-Launchpad-Export-Date: 2014-10-30 06:04+0000\n"
 "X-Generator: Launchpad (build 17203)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:106 src/core/modules/StarMgr.cpp:346
@@ -142,7 +142,7 @@ msgstr "Ground"
 
 #: src/core/modules/LandscapeMgr.cpp:360
 msgid "Illumination"
-msgstr ""
+msgstr "Illumination"
 
 #: src/core/modules/LandscapeMgr.cpp:601
 msgid "Author: "
@@ -4566,7 +4566,7 @@ msgstr "Use brightness settings for landscapes"
 
 #: src/ui_viewDialog.h:1263
 msgid "Show illumination layer (bright windows, light pollution, etc.)"
-msgstr ""
+msgstr "Show illumination layer (bright windows, light pollution, etc.)"
 
 #: src/ui_viewDialog.h:1264
 msgid "Add/remove landscapes..."
@@ -5888,10 +5888,12 @@ msgid ""
 "Please enable it for avoiding of flips the whole sky from the telescope's "
 "settings."
 msgstr ""
+"Please enable it for avoiding of flips the whole sky from the telescope's "
+"settings."
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1081
 msgid "Disable zoom keys for CCD"
-msgstr ""
+msgstr "Disable zoom keys for CCD"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1083
 msgid ""
