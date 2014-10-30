@@ -229,6 +229,8 @@ SET(stellarium_lib_SRCS
 	core/modules/StarWrapper.cpp
 	core/modules/StarWrapper.hpp
 	core/modules/ZoneArray.cpp
+	core/modules/ZodiacalLight.hpp
+	core/modules/ZodiacalLight.cpp
 	core/modules/ZoneArray.hpp
 	core/modules/ZoneData.hpp
 	StelMainView.hpp
