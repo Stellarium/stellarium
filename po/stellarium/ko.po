@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-10-26 14:07+0600\n"
-"PO-Revision-Date: 2014-10-25 11:18+0000\n"
+"PO-Revision-Date: 2014-10-30 12:12+0000\n"
 "Last-Translator: windazol <ys11791@gmail.com>\n"
 "Language-Team: Korean <ko@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-10-27 05:50+0000\n"
-"X-Generator: Launchpad (build 17203)\n"
+"X-Launchpad-Export-Date: 2014-10-31 05:44+0000\n"
+"X-Generator: Launchpad (build 17211)\n"
 "Language: ko\n"
 
 #: src/core/modules/ConstellationMgr.cpp:106 src/core/modules/StarMgr.cpp:346
@@ -143,7 +143,7 @@ msgstr "지면"
 
 #: src/core/modules/LandscapeMgr.cpp:360
 msgid "Illumination"
-msgstr ""
+msgstr "조명"
 
 #: src/core/modules/LandscapeMgr.cpp:601
 msgid "Author: "
@@ -4487,7 +4487,7 @@ msgstr "풍경 밝기 설정을 사용"
 
 #: src/ui_viewDialog.h:1263
 msgid "Show illumination layer (bright windows, light pollution, etc.)"
-msgstr ""
+msgstr "조명층 보이기(밝은 창문, 광공해, 기타 등등)"
 
 #: src/ui_viewDialog.h:1264
 msgid "Add/remove landscapes..."
@@ -5768,7 +5768,7 @@ msgstr "CCD 시야각을 도와 분으로 표시"
 msgid ""
 "Please enable it for avoiding of flips the whole sky from the telescope's "
 "settings."
-msgstr ""
+msgstr "하늘이 망원경 설정에서 벗어나는 것을 막기 위해 활성화해 주십시오."
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1081
 msgid "Disable zoom keys for CCD"
@@ -7306,7 +7306,7 @@ msgstr "성운 힌트"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:370
 msgid "Galactic equator line"
-msgstr ""
+msgstr "은하적도"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:399
 msgid "Effects"
@@ -7910,7 +7910,7 @@ msgstr "시작할 때 퀘이사 보이기"
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:272
 msgid "Show quasars button on toolbar"
-msgstr "툴바에서 퀘이사 버튼 보이기"
+msgstr "툴바에 퀘이사 버튼 표시"
 
 #: plugins/Pulsars/src/Pulsars.cpp:73 plugins/Pulsars/src/Pulsars.cpp:169
 #: plugins/Pulsars/src/Pulsars.cpp:170
@@ -8134,7 +8134,7 @@ msgstr "펄서 분포 표시하기"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:278
 msgid "Show pulsars button on toolbar"
-msgstr "툴바에서 펄서 버튼 보이기"
+msgstr "툴바에 펄서 버튼 표시"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:279
 msgid "Use separate color for pulsars with glitches"
@@ -8339,7 +8339,7 @@ msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:181
 msgid "General professional Web sites relevant to extrasolar planets"
-msgstr "외계 행성에 관련된 일반 전문 웹 사이트"
+msgstr "외계 행성관련 일반적인 전문 웹 사이트"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:182
 msgid "Exoplanets: an interactive version of XKCD 1071"
@@ -8347,19 +8347,19 @@ msgstr "외계행성: XKCD 1071의 상호작용 버전"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:183
 msgid "HEK (The Hunt for Exomoons with Kepler)"
-msgstr "HEK (케플러를 이용해 외계달을 추적)"
+msgstr "HEK (The Hunt for Exomoons with Kepler)"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:184
 msgid "Exoplanets in binaries and multiple systems (Richard Schwarz)"
-msgstr "이중 및 다중 시스템의 외계행성 (리차드 슈바츠)"
+msgstr "쌍성계 및 다중성계의 외계 행성 (Richard Schwarz)"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:185
 msgid "Naming exoplanets (IAU)"
-msgstr "이름있는 외계행성(IAU)"
+msgstr "외계행성 명명법(IAU)"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:186
 msgid "Some Astronomers and Groups active in extrasolar planets studies"
-msgstr "외계 행성 연구의 일부 천문학자와 그룹"
+msgstr "외계 행성을 연구하는 몇몇 천문학자와 그룹들"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:186
 msgid "update: 16 April 2012"
@@ -8367,15 +8367,15 @@ msgstr "업데이트: 2012년 4월 16일"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:187
 msgid "The Exoplanet Data Explorer"
-msgstr "외계행성 데이타 탐색"
+msgstr "외계행성 데이터 탐색기"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:188
 msgid "The Anglo-Australian Planet Search"
-msgstr "The Anglo-Australian 행성 연구소"
+msgstr "The Anglo-Australian Planet Search"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:189
 msgid "Geneva Extrasolar Planet Search Programmes"
-msgstr "제네바 외계 행성 검색 프로그램"
+msgstr "제네바 외계 행성 탐색 프로그램"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:190
 msgid "OLBIN (Optical Long-Baseline Interferometry News)"
@@ -8383,19 +8383,19 @@ msgstr "OLBIN (Optical Long-Baseline Interferometry News)"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:191
 msgid "NASA's Exoplanet Exploration Program"
-msgstr "나사의 외계행성 탐사 프로그램"
+msgstr "NASA의 외계 행성 탐사 프로그램"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:192
 msgid "Pulsar planets"
-msgstr "펄사 행성들"
+msgstr "펄서 행성들"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:193
 msgid "The NASA Exoplanet Archive"
-msgstr "나사 외계행성 보관소"
+msgstr "NASA 외계 행성 목록"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:194
 msgid "IAU Commission 53: Extrasolar Planets"
-msgstr ""
+msgstr "IAU 위원회 53: 외계 행성"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:195
 msgid "ExoMol"
@@ -8411,61 +8411,61 @@ msgstr "PlanetQuest - 또 다른 지구를 위한 탐사"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:198
 msgid "Open Exoplanet Catalogue"
-msgstr "외계행성 카탈로그 열기"
+msgstr "외계 행성 카탈로그 열기"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:199
 msgid "The Habitable Exoplanets Catalog"
-msgstr "Habitable 외계행성 카탈로그"
+msgstr "거주 가능한 외계 행성 카탈로그"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:293
 msgid "Exoplanets is updated"
-msgstr "외계행성이 업데이트되었습니다."
+msgstr "외계 행성이 업데이트되었습니다."
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:303
 msgid "Exoplanets Configuration"
-msgstr "외계행성 구성"
+msgstr "외계행성 설정"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:304
 msgid "Exoplanets Plug-in Configuration"
-msgstr "외계행성 플로그인 구성"
+msgstr "외계 행성 플러그인 설정"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:306
 msgid "Update exoplanets data from Internet"
-msgstr "인터넷으로부터 외계행성 데이터가 업데이트 되었습니다."
+msgstr "인터넷으로 외계 행성 데이터 업데이트"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:312
 msgid "Settings for exoplanets"
-msgstr "외계행성을 위한 세팅"
+msgstr "외계 행성 설정"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:314
 msgid "Plot all systems with exoplanets without labels"
-msgstr "이름표(라벨)없이 외계행성을 가지고 모든 시스템을 표시(플롯)하세요."
+msgstr "외계행성을 가진 모든 행성계를 이름표 없이 표시하세요."
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:316
 msgid "Enable display of distribution for exoplanets"
-msgstr "외계 행성에 대한 분포의 표시 활성화"
+msgstr "외계 행성 분포 표시 활성화"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:318
 msgid "Display exoplanets since their discovery"
-msgstr "외계행성이 발견된 이후 표시하세요."
+msgstr "외계 행성을 행성이 발견된 날짜 이후부터 표시하세요."
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:320
 msgid "Enable timeline discovery of exoplanets"
-msgstr "외계행성의 타임 라인 검색을 사용"
+msgstr "발견 연도에 따라 외계 행성 표시"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:322
 msgid ""
 "Display of the planetary systems, which contains the potential habitable "
 "exoplanets"
-msgstr ""
+msgstr "거주할 수 있는 가능성이 있는 외계 행성을 포함하는 행성계만 표시합니다."
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:324
 msgid "Enable display of the potential habitable exoplanets only"
-msgstr ""
+msgstr "거주 가능한 외계 행성만 표시"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:326
 msgid "Show exoplanets button on toolbar"
-msgstr "도구 모음(툴바)에서 외계행성 버튼 표시"
+msgstr "툴바에 외계 행성 버튼 표시"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:330
 msgctxt "tab in plugin windows"
