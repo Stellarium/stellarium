@@ -46,6 +46,7 @@
 #include <QTimer>
 #include <QWidget>
 #include <QWindow>
+#include <QMessageBox>
 #include <QDeclarativeContext>
 #ifdef Q_OS_WIN
 	#include <QPinchGesture>
@@ -349,11 +350,55 @@ void StelMainView::init(QSettings* conf)
 	qDebug() << "Driver version string:" << QString(reinterpret_cast<const char*>(glGetString(GL_VERSION)));
 	qDebug() << "GL vendor is" << QString(reinterpret_cast<const char*>(glGetString(GL_VENDOR)));
 	qDebug() << "GL renderer is" << QString(reinterpret_cast<const char*>(glGetString(GL_RENDERER)));
-	qDebug() << "GL Shading Language version is" << QString(reinterpret_cast<const char*>(glGetString(GL_SHADING_LANGUAGE_VERSION)));
+	QString glslString(reinterpret_cast<const char*>(glGetString(GL_SHADING_LANGUAGE_VERSION)));
+	qDebug() << "GL Shading Language version is" << glslString;
 	
 	// Only give extended info if called on command line, for diagnostic.
 	if (qApp->property("dump_OpenGL_details").toBool())
 		dumpOpenGLdiagnostics();
+
+	// If GLSL version is less than 1.30, Stellarium cannot run properly. Depending on whatever driver/implementation details,
+	// Stellarium may crash or show only minor graphical errors. We show a soft-crash panel that can be suppressed by a startup option.
+	QRegExp glslRegExp("^(\\d\\.\\d\\d)");
+	int pos=glslRegExp.indexIn(glslString);
+	if (pos >-1)
+	{
+		float glslVersion=glslRegExp.cap(1).toFloat();
+		qDebug() << "GLSL Version Number after parsing: " << glslVersion;
+		if (glslVersion<1.3)
+		{
+			qDebug() << "This is not enough: we need GLSL1.30.";
+			qDebug() << "You should update graphics drivers, graphics hardware, or use the MESA version.";
+			qDebug() << "Else, please try to use an older version with --safe-mode";
+
+			if (qApp->property("ignore_OpenGL_errors").toBool())
+			{
+				qDebug() << "Option --ignore-opengl-errors given, continuing despite warnings. Expect problems.";
+			}
+			else
+			{
+				qDebug() << "You can try to run in an unsupported degraded mode by adding startup option";
+				qDebug() << "--ignore-opengl-errors. But more than likely problems will persist.";
+				QMessageBox::StandardButton answerButton=
+				QMessageBox::critical(0, "Stellarium", q_("Your OpenGL subsystem has problems. See log for details.\nIgnore and try to continue in degraded mode anyway?"),
+						      QMessageBox::Ignore|QMessageBox::Abort, QMessageBox::Abort);
+				if (answerButton == QMessageBox::Abort)
+				{
+					qDebug() << "Aborting due to OpenGL initialization problems.";
+					exit(0);
+				}
+				else
+					qDebug() << "Ignoring all warnings, continuing...";
+			}
+		}
+		else
+			qDebug() << "GLSL version is fine, we should not see a graphics problem.";
+	}
+	else
+	{
+		qDebug() << "Cannot parse GLSL version string. This may indicate future problems.";
+		qDebug() << "Please send a bug report that includes this log file.";
+	}
 
 	stelApp= new StelApp();
 	stelApp->setGui(gui);
@@ -507,6 +552,8 @@ void StelMainView::dumpOpenGLdiagnostics() const
 	QMapIterator<QString, QString> iter2(extensionMap);
 	while (iter2.hasNext())
 		qDebug() << " -" << iter2.next().key();
+	// Apparently EXT_gpu_shader4 is required for GLSL1.3. (http://en.wikipedia.org/wiki/OpenGL#OpenGL_3.0).
+	qDebug() << "EXT_gpu_shader4" << (extensionSet.contains(("EXT_gpu_shader4")) ? "present, OK." : "MISSING!");
 
 	QFunctionPointer programParameterPtr =context->getProcAddress("glProgramParameteri");
 	if (programParameterPtr == 0)
