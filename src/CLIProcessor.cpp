@@ -56,6 +56,7 @@ void CLIProcessor::parseCLIArgsPreConfig(const QStringList& argList)
 			  //<< "--safe-mode (or -s)     : Disable GL shaders and use older GL engine\n"
 			  << "--dump-opengl-details (or -d) : dump information about OpenGL support to logfile\n"
 			  << "                          Try this is you have graphics problems\n"
+			  << "--ignore-opengl-errors  : Suppress warning panels, ignore errors\n"
 		          << "--full-screen (or -f)   : With argument \"yes\" or \"no\" over-rides\n"
 		          << "                          the full screen setting in the config file\n"
 		          << "--screenshot-dir        : Specify directory to save screenshots\n"
@@ -123,6 +124,8 @@ void CLIProcessor::parseCLIArgsPostConfig(const QStringList& argList, QSettings*
 	{
 		bool dumpOpenGLDetails = argsGetOption(argList, "-d", "--dump-opengl-details");
 		qApp->setProperty("dump_OpenGL_details", dumpOpenGLDetails);
+		bool ignoreOpenGLErrors = argsGetOption(argList, "", "--ignore-opengl-errors");
+		qApp->setProperty("ignore_OpenGL_errors", ignoreOpenGLErrors);
 		fullScreen = argsGetYesNoOption(argList, "-f", "--full-screen", -1);
 		landscapeId = argsGetOptionWithArg(argList, "", "--landscape", "").toString();
 		homePlanet = argsGetOptionWithArg(argList, "", "--home-planet", "").toString();
