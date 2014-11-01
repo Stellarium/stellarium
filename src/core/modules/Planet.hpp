@@ -76,6 +76,7 @@ public:
 	friend class SolarSystem;
 
 	Q_ENUMS(PlanetType)
+	Q_ENUMS(ApparentMagnitudeAlgorithm)
 	//! numeric typecodes for the type descriptions in ssystem.ini
 	// GZ: Until 0.13 QStrings were used for types.
 	// GZ: Enums are slightly faster than string comparisons in time-critical comparisons.
@@ -89,6 +90,14 @@ public:
 		isPlutoid,                // ssystem.ini: type="plutoid"
 		isComet,                  // ssystem.ini: type="comet"
 		isUNDEFINED               // ssystem.ini: type=<anything else>
+	};
+
+	enum ApparentMagnitudeAlgorithm
+	{
+		Planesas,	// Algorithm provided by Pere Planesas (Observatorio Astronomico Nacional)
+		Mueller,	// G. Mueller, based on visual observations 1877-91. [Expl.Suppl.1961]
+		Harris,		// Astronomical Almanac 1984 and later. These give V (instrumental) magnitudes (D.L. Harris)
+		UndefinedAlgorithm
 	};
 
 	Planet(const QString& englishName,
@@ -169,6 +178,10 @@ public:
 	const QString& getTextMapName() const {return texMapName;}	
 	const QString getPlanetTypeString() const {return pTypeMap.value(pType);}
 	PlanetType getPlanetType() const {return pType;}
+
+	ApparentMagnitudeAlgorithm getApparentMagnitudeAlgorithm() const { return vMagAlgorithm; }
+	const QString getApparentMagnitudeAlgorithmString() const { return vMagAlgorithmMap.value(vMagAlgorithm); }
+	void setApparentMagnitudeAlgorithm(QString algorithm);
 
 	// Compute the z rotation to use from equatorial to geographic coordinates
 	double getSiderealTime(double jd) const;
@@ -313,13 +326,15 @@ protected:
 	bool flagLabels;                 // Define whether labels should be displayed
 	bool hidden;                     // useful for fake planets used as observation positions - not drawn or labeled
 	bool atmosphere;                 // Does the planet have an atmosphere?
-	bool halo;                       // Does the planet have a halo?
-	// QString pTypeStr;			 // Type of body, old version just had a string here.
-	PlanetType pType;                // GZ this is now a proper type...
+	bool halo;                       // Does the planet have a halo?	
+	PlanetType pType;                // Type of body
+
+	ApparentMagnitudeAlgorithm vMagAlgorithm;
 
 	static Vec3f labelColor;
 	static StelTextureSP hintCircleTex;
-	static QMap<PlanetType, QString> pTypeMap; // GZ: maps fast type to english name.
+	static QMap<PlanetType, QString> pTypeMap; // Maps fast type to english name.
+	static QMap<ApparentMagnitudeAlgorithm, QString> vMagAlgorithmMap;
 	
 	// Shader-related variables
 	struct PlanetShaderVars {
