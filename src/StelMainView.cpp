@@ -369,26 +369,29 @@ void StelMainView::init(QSettings* conf)
 		{
 			qDebug() << "This is not enough: we need GLSL1.30.";
 			qDebug() << "You should update graphics drivers, graphics hardware, or use the MESA version.";
-			qDebug() << "Else, please try to use an older version with --safe-mode";
+			qDebug() << "Else, please try to use an older version, and try there with --safe-mode";
 
-			if (qApp->property("ignore_OpenGL_errors").toBool())
+			if (conf->value("main/ignore_opengl_warning", false).toBool())
 			{
-				qDebug() << "Option --ignore-opengl-errors given, continuing despite warnings. Expect problems.";
+				qDebug() << "Config option main/ignore_opengl_warning found, continuing. Expect problems.";
 			}
 			else
 			{
-				qDebug() << "You can try to run in an unsupported degraded mode by adding startup option";
-				qDebug() << "--ignore-opengl-errors. But more than likely problems will persist.";
+				qDebug() << "You can try to run in an unsupported degraded mode by ignoring the warning and continuing.";
+				qDebug() << "But more than likely problems will persist.";
 				QMessageBox::StandardButton answerButton=
-				QMessageBox::critical(0, "Stellarium", q_("Your OpenGL subsystem has problems. See log for details.\nIgnore and try to continue in degraded mode anyway?"),
+				QMessageBox::critical(0, "Stellarium", q_("Your OpenGL subsystem has problems. See log for details.\nIgnore and suppress this notice in the future and try to continue in degraded mode anyway?"),
 						      QMessageBox::Ignore|QMessageBox::Abort, QMessageBox::Abort);
 				if (answerButton == QMessageBox::Abort)
 				{
-					qDebug() << "Aborting due to OpenGL initialization problems.";
+					qDebug() << "Aborting due to OpenGL/GLSL version problems.";
 					exit(0);
 				}
 				else
-					qDebug() << "Ignoring all warnings, continuing...";
+				{
+					qDebug() << "Ignoring all warnings, continuing without further question.";
+					conf->setValue("main/ignore_opengl_warning", true);
+				}
 			}
 		}
 		else
