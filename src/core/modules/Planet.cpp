@@ -101,9 +101,10 @@ Planet::Planet(const QString& englishName,
 
 	// Initialize pType with the key found in pTypeMap, or mark planet type as undefined.
 	// The latter condition should obviously never happen.
-	pType=pTypeMap.key(pTypeStr, Planet::isUNDEFINED);
+	pType = pTypeMap.key(pTypeStr, Planet::isUNDEFINED);
+	vMagAlgorithm = Planet::UndefinedAlgorithm;
 
-	eclipticPos=Vec3d(0.,0.,0.);
+	eclipticPos = Vec3d(0.,0.,0.);
 	rotLocalToParent = Mat4d::identity();
 	texMap = StelApp::getInstance().getTextureManager().createTextureThread(StelFileMgr::getInstallationDir()+"/textures/"+texMapName, StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT));
 	normalMap = StelApp::getInstance().getTextureManager().createTextureThread(StelFileMgr::getInstallationDir()+"/textures/"+normalMapName, StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT));
@@ -117,6 +118,7 @@ Planet::Planet(const QString& englishName,
 }
 
 QMap<Planet::PlanetType, QString> Planet::pTypeMap;
+QMap<Planet::ApparentMagnitudeAlgorithm, QString> Planet::vMagAlgorithmMap;
 
 // called in SolarSystem::init() before first planet is created. Loads pTypeMap.
 void Planet::init()
@@ -133,7 +135,17 @@ void Planet::init()
 	pTypeMap.insert(Planet::isAsteroid, "asteroid");
 	pTypeMap.insert(Planet::isPlutoid,  "plutoid");
 	pTypeMap.insert(Planet::isComet,    "comet");
-	pTypeMap.insert(Planet::isUNDEFINED, "UNDEFINED"); // something must be broken before we ever see this!
+	pTypeMap.insert(Planet::isUNDEFINED,"UNDEFINED"); // something must be broken before we ever see this!
+
+	if (vMagAlgorithmMap.count() > 0)
+	{
+		qDebug() << "Planet::init(): Non-empty static map. This is a programming error, but we can fix that.";
+		vMagAlgorithmMap.clear();
+	}
+	vMagAlgorithmMap.insert(Planet::Planesas,	"planesas");
+	vMagAlgorithmMap.insert(Planet::Mueller,	"mueller");
+	vMagAlgorithmMap.insert(Planet::Harris,		"harris");
+	vMagAlgorithmMap.insert(Planet::UndefinedAlgorithm, "");
 }
 
 Planet::~Planet()
@@ -760,108 +772,135 @@ float Planet::getVMagnitude(const StelCore* core) const
 	{
 		const double phaseDeg=phase*180./M_PI;
 		const double d = 5. * log10(sqrt(observerPlanetRq*planetRq));
-		//double f1 = phaseDeg/100.;
 
-		/*
-		// Algorithm provided by Pere Planesas (Observatorio Astronomico Nacional)
-		if (englishName=="Mercury")
-		{
-			if ( phaseDeg > 150. ) f1 = 1.5;
-			return -0.36 + d + 3.8*f1 - 2.73*f1*f1 + 2*f1*f1*f1;
-		}
-		if (englishName=="Venus")
-			return -4.29 + d + 0.09*f1 + 2.39*f1*f1 - 0.65*f1*f1*f1;
-		if (englishName=="Mars")
-			return -1.52 + d + 0.016*phaseDeg;
-		if (englishName=="Jupiter")
-			return -9.25 + d + 0.005*phaseDeg;
-		if (englishName=="Saturn")
-		{
-			// TODO re-add rings computation
-			// double rings = -2.6*sinx + 1.25*sinx*sinx;
-			return -8.88 + d + 0.044*phaseDeg;// + rings;
-		}
-		if (englishName=="Uranus")
-			return -7.19 + d + 0.0028*phaseDeg;
-		if (englishName=="Neptune")
-			return -6.87 + d;
-		if (englishName=="Pluto")
-			return -1.01 + d + 0.041*phaseDeg;
-		*/
 		// GZ: I prefer the values given by Meeus, Astronomical Algorithms (1992).
 		// There are two solutions:
 		// (1) G. Mueller, based on visual observations 1877-91. [Expl.Suppl.1961]
 		// (2) Astronomical Almanac 1984 and later. These give V (instrumental) magnitudes.
 		// The structure is almost identical, just the numbers are different!
 		// I activate (1) for now, because we want to simulate the eye's impression. (Esp. Venus!)
-		// (1)
-		if (englishName=="Mercury")
-		    {
-			double ph50=phaseDeg-50.0;
-			return 1.16 + d + 0.02838*ph50 + 0.0001023*ph50*ph50;
-		    }
-		if (englishName=="Venus")
-			return -4.0 + d + 0.01322*phaseDeg + 0.0000004247*phaseDeg*phaseDeg*phaseDeg;
-		if (englishName=="Mars")
-			return -1.3 + d + 0.01486*phaseDeg;
-		if (englishName=="Jupiter")
-			return -8.93 + d;
-		if (englishName=="Saturn")
+		// AW: (2) activated by default
+
+		switch (core->getCurrentPlanet()->getApparentMagnitudeAlgorithm())
 		{
-			// add rings computation
-			// GZ: implemented from Meeus, Astr.Alg.1992
-			const double jd=core->getJDay();
-			const double T=(jd-2451545.0)/36525.0;
-			const double i=((0.000004*T-0.012998)*T+28.075216)*M_PI/180.0;
-			const double Omega=((0.000412*T+1.394681)*T+169.508470)*M_PI/180.0;
-			SolarSystem *ssystem=GETSTELMODULE(SolarSystem);
-			const Vec3d saturnEarth=getHeliocentricEclipticPos() - ssystem->getEarth()->getHeliocentricEclipticPos();
-			double lambda=atan2(saturnEarth[1], saturnEarth[0]);
-			double beta=atan2(saturnEarth[2], sqrt(saturnEarth[0]*saturnEarth[0]+saturnEarth[1]*saturnEarth[1]));
-			const double sinB=sin(i)*cos(beta)*sin(lambda-Omega)-cos(i)*sin(beta);
-			double rings = -2.6*fabs(sinB) + 1.25*sinB*sinB; // sinx=sinB, saturnicentric latitude of earth. longish, see Meeus.
-			return -8.68 + d + 0.044*phaseDeg + rings;
+			case Planesas:
+			{
+				// Algorithm provided by Pere Planesas (Observatorio Astronomico Nacional)
+				double f1 = phaseDeg/100.;
+
+				if (englishName=="Mercury")
+				{
+					if ( phaseDeg > 150. ) f1 = 1.5;
+					return -0.36 + d + 3.8*f1 - 2.73*f1*f1 + 2*f1*f1*f1;
+				}
+				if (englishName=="Venus")
+					return -4.29 + d + 0.09*f1 + 2.39*f1*f1 - 0.65*f1*f1*f1;
+				if (englishName=="Mars")
+					return -1.52 + d + 0.016*phaseDeg;
+				if (englishName=="Jupiter")
+					return -9.25 + d + 0.005*phaseDeg;
+				if (englishName=="Saturn")
+				{
+					// add rings computation
+					// implemented from Meeus, Astr.Alg.1992
+					const double jd=core->getJDay();
+					const double T=(jd-2451545.0)/36525.0;
+					const double i=((0.000004*T-0.012998)*T+28.075216)*M_PI/180.0;
+					const double Omega=((0.000412*T+1.394681)*T+169.508470)*M_PI/180.0;
+					static SolarSystem *ssystem=GETSTELMODULE(SolarSystem);
+					const Vec3d saturnEarth=getHeliocentricEclipticPos() - ssystem->getEarth()->getHeliocentricEclipticPos();
+					double lambda=atan2(saturnEarth[1], saturnEarth[0]);
+					double beta=atan2(saturnEarth[2], sqrt(saturnEarth[0]*saturnEarth[0]+saturnEarth[1]*saturnEarth[1]));
+					const double sinx=sin(i)*cos(beta)*sin(lambda-Omega)-cos(i)*sin(beta);
+					double rings = -2.6*sinx + 1.25*sinx*sinx;
+					return -8.88 + d + 0.044*phaseDeg + rings;
+				}
+				if (englishName=="Uranus")
+					return -7.19 + d + 0.0028*phaseDeg;
+				if (englishName=="Neptune")
+					return -6.87 + d;
+				if (englishName=="Pluto")
+					return -1.01 + d + 0.041*phaseDeg;
+
+				break;
+			}
+			case Mueller:
+			{
+				// (1)
+				if (englishName=="Mercury")
+				{
+					double ph50=phaseDeg-50.0;
+					return 1.16 + d + 0.02838*ph50 + 0.0001023*ph50*ph50;
+				}
+				if (englishName=="Venus")
+					return -4.0 + d + 0.01322*phaseDeg + 0.0000004247*phaseDeg*phaseDeg*phaseDeg;
+				if (englishName=="Mars")
+					return -1.3 + d + 0.01486*phaseDeg;
+				if (englishName=="Jupiter")
+					return -8.93 + d;
+				if (englishName=="Saturn")
+				{
+					// add rings computation
+					// implemented from Meeus, Astr.Alg.1992
+					const double jd=core->getJDay();
+					const double T=(jd-2451545.0)/36525.0;
+					const double i=((0.000004*T-0.012998)*T+28.075216)*M_PI/180.0;
+					const double Omega=((0.000412*T+1.394681)*T+169.508470)*M_PI/180.0;
+					SolarSystem *ssystem=GETSTELMODULE(SolarSystem);
+					const Vec3d saturnEarth=getHeliocentricEclipticPos() - ssystem->getEarth()->getHeliocentricEclipticPos();
+					double lambda=atan2(saturnEarth[1], saturnEarth[0]);
+					double beta=atan2(saturnEarth[2], sqrt(saturnEarth[0]*saturnEarth[0]+saturnEarth[1]*saturnEarth[1]));
+					const double sinB=sin(i)*cos(beta)*sin(lambda-Omega)-cos(i)*sin(beta);
+					double rings = -2.6*fabs(sinB) + 1.25*sinB*sinB; // sinx=sinB, saturnicentric latitude of earth. longish, see Meeus.
+					return -8.68 + d + 0.044*phaseDeg + rings;
+				}
+				if (englishName=="Uranus")
+					return -6.85 + d;
+				if (englishName=="Neptune")
+					return -7.05 + d;
+				if (englishName=="Pluto")
+					return -1.0 + d;
+
+				break;
+			}
+			case Harris:
+			case UndefinedAlgorithm:	// activated by default
+			{
+				// (2)
+				if (englishName=="Mercury")
+					return 0.42 + d + .038*phaseDeg - 0.000273*phaseDeg*phaseDeg + 0.000002*phaseDeg*phaseDeg*phaseDeg;
+				if (englishName=="Venus")
+					return -4.40 + d + 0.0009*phaseDeg + 0.000239*phaseDeg*phaseDeg - 0.00000065*phaseDeg*phaseDeg*phaseDeg;
+				if (englishName=="Mars")
+					return -1.52 + d + 0.016*phaseDeg;
+				if (englishName=="Jupiter")
+					return -9.40 + d + 0.005*phaseDeg;
+				if (englishName=="Saturn")
+				{
+					// add rings computation
+					// implemented from Meeus, Astr.Alg.1992
+					const double jd=core->getJDay();
+					const double T=(jd-2451545.0)/36525.0;
+					const double i=((0.000004*T-0.012998)*T+28.075216)*M_PI/180.0;
+					const double Omega=((0.000412*T+1.394681)*T+169.508470)*M_PI/180.0;
+					static SolarSystem *ssystem=GETSTELMODULE(SolarSystem);
+					const Vec3d saturnEarth=getHeliocentricEclipticPos() - ssystem->getEarth()->getHeliocentricEclipticPos();
+					double lambda=atan2(saturnEarth[1], saturnEarth[0]);
+					double beta=atan2(saturnEarth[2], sqrt(saturnEarth[0]*saturnEarth[0]+saturnEarth[1]*saturnEarth[1]));
+					const double sinB=sin(i)*cos(beta)*sin(lambda-Omega)-cos(i)*sin(beta);
+					double rings = -2.6*fabs(sinB) + 1.25*sinB*sinB; // sinx=sinB, saturnicentric latitude of earth. longish, see Meeus.
+					return -8.88 + d + 0.044*phaseDeg + rings;
+				}
+				if (englishName=="Uranus")
+					return -7.19f + d;
+				if (englishName=="Neptune")
+					return -6.87f + d;
+				if (englishName=="Pluto")
+					return -1.00f + d;
+
+				break;
+			}
 		}
-		if (englishName=="Uranus")
-			return -6.85 + d;
-		if (englishName=="Neptune")
-			return -7.05 + d;
-		if (englishName=="Pluto")
-			return -1.0 + d;
-		/*
-		// (2)
-		if (englishName=="Mercury")
-			return 0.42 + d + .038*phaseDeg - 0.000273*phaseDeg*phaseDeg + 0.000002*phaseDeg*phaseDeg*phaseDeg;
-		if (englishName=="Venus")
-			return -4.40 + d + 0.0009*phaseDeg + 0.000239*phaseDeg*phaseDeg - 0.00000065*phaseDeg*phaseDeg*phaseDeg;
-		if (englishName=="Mars")
-			return -1.52 + d + 0.016*phaseDeg;
-		if (englishName=="Jupiter")
-			return -9.40 + d + 0.005*phaseDeg;
-		if (englishName=="Saturn")
-		{
-			// add rings computation
-			// GZ: implemented from Meeus, Astr.Alg.1992
-			const double jd=core->getJDay();
-			const double T=(jd-2451545.0)/36525.0;
-			const double i=((0.000004*T-0.012998)*T+28.075216)*M_PI/180.0;
-			const double Omega=((0.000412*T+1.394681)*T+169.508470)*M_PI/180.0;
-			static SolarSystem *ssystem=GETSTELMODULE(SolarSystem);
-			const Vec3d saturnEarth=getHeliocentricEclipticPos() - ssystem->getEarth()->getHeliocentricEclipticPos();
-			double lambda=atan2(saturnEarth[1], saturnEarth[0]);
-			double beta=atan2(saturnEarth[2], sqrt(saturnEarth[0]*saturnEarth[0]+saturnEarth[1]*saturnEarth[1]));
-			const double sinB=sin(i)*cos(beta)*sin(lambda-Omega)-cos(i)*sin(beta);
-			double rings = -2.6*fabs(sinB) + 1.25*sinB*sinB; // sinx=sinB, saturnicentric latitude of earth. longish, see Meeus.
-			return -8.88 + d + 0.044*phaseDeg + rings;
-		}
-		if (englishName=="Uranus")
-			return -7.19f + d;
-		if (englishName=="Neptune")
-			return -6.87f + d;
-		if (englishName=="Pluto")
-			return -1.00f + d;
-	*/
-	// TODO: decide which set of formulae is best?
 	}
 
 	// This formula seems to give wrong results
@@ -1706,4 +1745,9 @@ void Planet::update(int deltaTime)
 	hintFader.update(deltaTime);
 	labelsFader.update(deltaTime);
 	orbitFader.update(deltaTime);
+}
+
+void Planet::setApparentMagnitudeAlgorithm(QString algorithm)
+{
+	vMagAlgorithm = vMagAlgorithmMap.key(algorithm.toLower(), Planet::UndefinedAlgorithm);
 }
