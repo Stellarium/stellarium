@@ -55,6 +55,9 @@ QOpenGLShaderProgram* Planet::ringPlanetShaderProgram=NULL;
 Planet::RingPlanetShaderVars Planet::ringPlanetShaderVars;
 QOpenGLShaderProgram* Planet::moonShaderProgram=NULL;
 Planet::MoonShaderVars Planet::moonShaderVars;
+
+QMap<Planet::PlanetType, QString> Planet::pTypeMap;
+QMap<Planet::ApparentMagnitudeAlgorithm, QString> Planet::vMagAlgorithmMap;
 	
 Planet::Planet(const QString& englishName,
 	       int flagLighting,
@@ -116,9 +119,6 @@ Planet::Planet(const QString& englishName,
 	}
 	flagLabels = true;
 }
-
-QMap<Planet::PlanetType, QString> Planet::pTypeMap;
-QMap<Planet::ApparentMagnitudeAlgorithm, QString> Planet::vMagAlgorithmMap;
 
 // called in SolarSystem::init() before first planet is created. Loads pTypeMap.
 void Planet::init()
