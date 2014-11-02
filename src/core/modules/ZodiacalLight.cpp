@@ -66,7 +66,9 @@ void ZodiacalLight::init()
 	// pixel arithmetics used to prepare 8bit gray map: (val-50)/6.36 to keep brightness from overflowing.
 	// TODO (maybe later): split this object into a spherical component with hole 60x80degrees around the sun, and a brighter mesh 60x80.
 	// By separating these meshes there should be no texture overlap problems. However, I have no good data for this hole.
+	//tex = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/zodiacal_2004_pwr0p2_M2_mul18.png");
 	tex = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/zodiacallight_2004.png");
+//	tex = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/zodiacal_2004_m55by8.png");
 	setFlagShow(conf->value("astro/flag_zodiacal_light", true).toBool());
 	setIntensity(conf->value("astro/zodiacal_light_intensity",1.f).toFloat());
 
@@ -135,14 +137,14 @@ void ZodiacalLight::draw(StelCore* core)
 	Vec3f c = Vec3f(1.0f, 1.0f, 1.0f);
 
 	// ZL is quite sensitive to light pollution. I scale to make it less visible.
-	float lum = core->getSkyDrawer()->surfacebrightnessToLuminance(8.0f*+0.5*bortle);
+	float lum = core->getSkyDrawer()->surfacebrightnessToLuminance(5.0f*+0.5*bortle);
 
 	// Get the luminance scaled between 0 and 1
 	float aLum =eye->adaptLuminanceScaled(lum*fader->getInterstate());
 
 	// Bound a maximum luminance (minimum?)
-	//aLum = qMin(0.38f, aLum*2.f);
-	aLum = qMin(0.1f, aLum*2.f); // value 0.22 pure guessing!
+	aLum = qMin(0.38f, aLum*2.f);
+	//aLum = qMin(0.1f, aLum*2.f); // value 0.1 pure guessing!
 
 	// intensity of 1.0 is "proper", but allow boost for dim screens
 	c*=aLum*intensity;
