@@ -136,6 +136,9 @@ void SolarSystem::init()
 	setFlagOrbits(conf->value("astro/flag_planets_orbits").toBool());
 	setFlagLightTravelTime(conf->value("astro/flag_light_travel_time", false).toBool());
 	setFlagMarkers(conf->value("astro/flag_planets_markers", true).toBool());
+	// Set the algorithm from Astronomical Almanac for computation of apparent magnitudes for
+	// planets in case  observer on the Earth by default
+	setApparentMagnitudeAlgorithmOnEarth(conf->value("astro/apparent_magnitude_algorithm", "Harris").toString());
 
 	recreateTrails();
 
@@ -1519,4 +1522,16 @@ void SolarSystem::reloadPlanets()
 
 	// Restore translations
 	updateI18n();
+}
+
+// Set the algorithm for computation of apparent magnitudes for planets in case  observer on the Earth
+void SolarSystem::setApparentMagnitudeAlgorithmOnEarth(QString algorithm)
+{
+	getEarth()->setApparentMagnitudeAlgorithm(algorithm);
+}
+
+// Get the algorithm used for computation of apparent magnitudes for planets in case  observer on the Earth
+QString SolarSystem::getApparentMagnitudeAlgorithmOnEarth() const
+{
+	return getEarth()->getApparentMagnitudeAlgorithmString();
 }
