@@ -164,7 +164,10 @@ public slots:
 	//! - glatJ2000 : galactic latitude in (J2000 frame) decimal degrees
 	//! - vmag : visual magnitude
 	//! - vmage : visual magnitude (extincted)
-	//! - size : angular size in decimal degrees
+	//! - size: angular size in radians
+	//! - size-dd : angular size in decimal degrees
+	//! - size-deg : angular size in decimal degrees (formatted string)
+	//! - size-dms : angular size in DMS format
 	//! - localized-name : localized name
 	QVariantMap getObjectInfo(const QString& name);
 
@@ -181,8 +184,11 @@ public slots:
 	//! - glongJ2000 : galactic longitude (J2000 frame) in decimal degrees
 	//! - glatJ2000 : galactic latitude in (J2000 frame) decimal degrees
 	//! - vmag : visual magnitude
-	//! - vmage : visual magnitude (extincted)
-	//! - size : angular size in decimal degrees
+	//! - vmage : visual magnitude (extincted)	
+	//! - size: angular size in radians
+	//! - size-dd : angular size in decimal degrees
+	//! - size-deg : angular size in decimal degrees (formatted string)
+	//! - size-dms : angular size in DMS format
 	//! - name : english name
 	//! - localized-name : localized name
 	QVariantMap getSelectedObjectInfo();
