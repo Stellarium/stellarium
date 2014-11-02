@@ -64,6 +64,7 @@ StelPluginInfo AngleMeasureStelPluginInterface::getPluginInfo() const
 
 AngleMeasure::AngleMeasure()
 	: flagShowAngleMeasure(false)
+	, withDecimalDegree(false)
 	, dragging(false)
 	, angle(0.)
 	, flagUseDmsFormat(false)
@@ -165,6 +166,8 @@ void AngleMeasure::update(double deltaTime)
 	messageFader.update((int)(deltaTime*1000));
 	lineVisible.update((int)(deltaTime*1000));
 	static StelCore *core=StelApp::getInstance().getCore();
+
+	withDecimalDegree = dynamic_cast<StelGui*>(StelApp::getInstance().getGui())->getFlagShowDecimalDegrees();
 
 	// if altAz endpoint linked to the rotating sky, move respective point(s)
 	if (flagShowHorizontalStartSkylinked)
@@ -292,11 +295,23 @@ QString AngleMeasure::calculatePositionAngle(const Vec3d p1, const Vec3d p2) con
 	unsigned int d, m;
 	double s;
 	bool sign;
-	StelUtils::radToDms(r, sign, d, m, s);
-	if (flagUseDmsFormat)
-		return QString("%1d %2m %3s").arg(d).arg(m).arg(s, 0, 'f', 2);
+
+	if (withDecimalDegree)
+	{
+		StelUtils::radToDecDeg(r, sign, s);
+		if (flagUseDmsFormat)
+			return QString("%1d").arg(s, 0, 'f', 5);
+		else
+			return QString("%1%2").arg(s, 0, 'f', 5).arg(QChar(0x00B0));
+	}
 	else
-		return QString("%1%2 %3' %4\"").arg(d).arg(QChar(0x00B0)).arg(m).arg(s, 0, 'f', 2);
+	{
+		StelUtils::radToDms(r, sign, d, m, s);
+		if (flagUseDmsFormat)
+			return QString("%1d %2m %3s").arg(d).arg(m).arg(s, 0, 'f', 2);
+		else
+			return QString("%1%2 %3' %4\"").arg(d).arg(QChar(0x00B0)).arg(m).arg(s, 0, 'f', 2);
+	}
 }
 
 void AngleMeasure::handleKeys(QKeyEvent* event)
@@ -404,14 +419,29 @@ QString AngleMeasure::calculateAngle(bool horizontal) const
 	double s;
 	bool sign;
 
-	if (horizontal)
-		StelUtils::radToDms(angleHor, sign, d, m, s);
+	if (withDecimalDegree)
+	{
+		if (horizontal)
+			StelUtils::radToDecDeg(angleHor, sign, s);
+		else
+			StelUtils::radToDecDeg(angle, sign, s);
+
+		if (flagUseDmsFormat)
+			return QString("%1d").arg(s, 0, 'f', 5);
+		else
+			return QString("%1%2").arg(s, 0, 'f', 5).arg(QChar(0x00B0));
+	}
 	else
-		StelUtils::radToDms(angle, sign, d, m, s);
-	if (flagUseDmsFormat)
-		return QString("%1d %2m %3s").arg(d).arg(m).arg(s, 0, 'f', 2);
-	else
-		return QString("%1%2 %3' %4\"").arg(d).arg(QChar(0x00B0)).arg(m).arg(s, 0, 'f', 2);
+	{
+		if (horizontal)
+			StelUtils::radToDms(angleHor, sign, d, m, s);
+		else
+			StelUtils::radToDms(angle, sign, d, m, s);
+		if (flagUseDmsFormat)
+			return QString("%1d %2m %3s").arg(d).arg(m).arg(s, 0, 'f', 2);
+		else
+			return QString("%1%2 %3' %4\"").arg(d).arg(QChar(0x00B0)).arg(m).arg(s, 0, 'f', 2);
+	}
 }
 
 void AngleMeasure::enableAngleMeasure(bool b)

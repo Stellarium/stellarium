@@ -113,6 +113,7 @@ private slots:
 private:
 	QFont font;
 	bool flagShowAngleMeasure;
+	bool withDecimalDegree;
 	LinearFader lineVisible;
 	LinearFader messageFader;
 	QTimer* messageTimer;
