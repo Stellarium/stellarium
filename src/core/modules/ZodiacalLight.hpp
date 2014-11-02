@@ -31,6 +31,15 @@
 //! S. M. Kwon, S. S. Hong, J. L. Weinberg
 //! An observational model of the zzodiacal light brightness distribution
 //! New Astronomy 10 (2004) 91-107. doi:10.1016/j.newast.2004.05.004
+//! I hand-edited the table in Excel, filling the hole aroud the sun with values based on
+//! Leinert 1975: Zodiacal Light - A Measure of the Interplanetary Environment. Space Science Reviews 18, 281-339.
+//! From the combined table, a texture was created using ArcGIS:
+//! 3D Analyst Toolbox -> From File -> ASCII 3D to Feature Class
+//! 3D Analyst Toolbox -> Raster Interpolation -> IDW: cell size: 1 (degree), power:2, distance:8(fixed), min:10pts.
+//! This float32 texture with values 57..1E6 had to be converted to a regular 8bit grayscale texture.
+//! V1: Linear texture: values over about 2100 can be full-white. (val-55)/8
+//! V2: computation that balances S10 better: Use a Gamma value of 2.5 to convert: (val-55)^0.4
+//! NO, all these textures look bad. I will edit them as 3D landscape...
 class ZodiacalLight : public StelModule
 {
 	Q_OBJECT
