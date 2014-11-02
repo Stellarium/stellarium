@@ -784,7 +784,16 @@ QVariantMap StelMainScriptAPI::getObjectInfo(const QString& name)
 	map.insert("vmage", obj->getVMagnitudeWithExtinction(core));
 
 	// angular size
-	map.insert("size", obj->getAngularSize(core));
+	double angularSize = 2.*obj->getAngularSize(core)*M_PI/180.;
+	bool sign;
+	double deg;
+	StelUtils::radToDecDeg(angularSize, sign, deg);
+	if (!sign)
+		deg *= -1;
+	map.insert("size", angularSize);
+	map.insert("size-dd", deg);
+	map.insert("size-deg", StelUtils::radToDecDegStr(angularSize, 5));
+	map.insert("size-dms", StelUtils::radToDmsStr(angularSize, true));
 
 	// localized name
 	map.insert("localized-name", obj->getNameI18n());
@@ -864,7 +873,16 @@ QVariantMap StelMainScriptAPI::getSelectedObjectInfo()
 	map.insert("vmage", obj->getVMagnitudeWithExtinction(core));
 
 	// angular size
-	map.insert("size", obj->getAngularSize(core));
+	double angularSize = 2.*obj->getAngularSize(core)*M_PI/180.;
+	bool sign;
+	double deg;
+	StelUtils::radToDecDeg(angularSize, sign, deg);
+	if (!sign)
+		deg *= -1;
+	map.insert("size", angularSize);
+	map.insert("size-dd", deg);
+	map.insert("size-deg", StelUtils::radToDecDegStr(angularSize, 5));
+	map.insert("size-dms", StelUtils::radToDmsStr(angularSize, true));
 
 	// english name or designation & localized name
 	map.insert("name", obj->getEnglishName());
