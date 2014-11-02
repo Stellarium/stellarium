@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-10-26 14:07+0600\n"
-"PO-Revision-Date: 2014-10-13 07:39+0000\n"
-"Last-Translator: Alexander Wolf <Unknown>\n"
+"PO-Revision-Date: 2014-11-01 10:03+0000\n"
+"Last-Translator: Manuel Rosales <manuel.rosales@mundo-r.com>\n"
 "Language-Team: Galician <gl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-10-27 05:45+0000\n"
-"X-Generator: Launchpad (build 17203)\n"
+"X-Launchpad-Export-Date: 2014-11-02 05:45+0000\n"
+"X-Generator: Launchpad (build 17211)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:106 src/core/modules/StarMgr.cpp:346
 #: src/core/modules/GridLinesMgr.cpp:727 src/core/modules/LandscapeMgr.cpp:355
@@ -73,7 +73,7 @@ msgstr "Horizonte"
 
 #: src/core/modules/GridLinesMgr.cpp:594
 msgid "Galactic Equator"
-msgstr ""
+msgstr "Ecuador Galáctico"
 
 #: src/core/modules/GridLinesMgr.cpp:728
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:331
@@ -121,7 +121,7 @@ msgstr "Grella galáctica"
 
 #: src/core/modules/GridLinesMgr.cpp:737 src/ui_viewDialog.h:1254
 msgid "Galactic equator"
-msgstr ""
+msgstr "Ecuador galáctico"
 
 #: src/core/modules/LandscapeMgr.cpp:356 src/ui_viewDialog.h:1183
 msgid "Atmosphere"
@@ -142,7 +142,7 @@ msgstr "Chan"
 
 #: src/core/modules/LandscapeMgr.cpp:360
 msgid "Illumination"
-msgstr ""
+msgstr "Iluminación"
 
 #: src/core/modules/LandscapeMgr.cpp:601
 msgid "Author: "
@@ -1132,7 +1132,7 @@ msgstr "Az/Alt: %1/%2"
 #: src/core/StelObject.cpp:190 src/core/StelObject.cpp:192
 #: src/core/StelObject.cpp:198 src/core/StelObject.cpp:200
 msgid "Ecliptic longitude/latitude"
-msgstr ""
+msgstr "Lonxitude/Latitude da eclíptica"
 
 #: src/core/StelObject.cpp:208 src/core/StelObject.cpp:210
 #, qt-format
@@ -1926,7 +1926,7 @@ msgstr "gráfico de estrelas"
 #: src/gui/SearchDialog.cpp:231
 msgctxt "coordinate system"
 msgid "Equatorial (J2000.0)"
-msgstr ""
+msgstr "Ecuatorial (J2000.0)"
 
 #: src/gui/SearchDialog.cpp:232
 msgctxt "coordinate system"
@@ -1945,7 +1945,7 @@ msgstr "Galáctico"
 
 #: src/gui/SearchDialog.cpp:248
 msgid "Right ascension"
-msgstr ""
+msgstr "Ascensión recta"
 
 #: src/gui/SearchDialog.cpp:250
 msgid "Declination"
@@ -4271,6 +4271,8 @@ msgstr "Sistema de coordenadas:"
 msgid ""
 "Note: this tool doesn't apply the refraction correction for coordinates."
 msgstr ""
+"Nota: esta ferramenta non pode aplicar a corrección de refracción por "
+"coordenadas"
 
 #: src/ui_searchDialogGui.h:696
 msgid "Position"
@@ -4548,7 +4550,7 @@ msgstr "Amosar a liña eclíptica"
 
 #: src/ui_viewDialog.h:1252
 msgid "Show Galactic equator line"
-msgstr ""
+msgstr "Amosar a liña do ecuador galáctico"
 
 #: src/ui_viewDialog.h:1256
 msgid "Projection"
@@ -4576,7 +4578,7 @@ msgstr "Usar axustes de brillo para as paisaxes"
 
 #: src/ui_viewDialog.h:1263
 msgid "Show illumination layer (bright windows, light pollution, etc.)"
-msgstr ""
+msgstr "Amosar a capa de iluminación (ventá de brillo, polución lumínica...)"
 
 #: src/ui_viewDialog.h:1264
 msgid "Add/remove landscapes..."
@@ -4953,11 +4955,11 @@ msgstr "Activación automática da atmosfera"
 
 #: src/ui_configurationDialog.h:1157
 msgid "Use decimal degrees for coordinates"
-msgstr ""
+msgstr "Usar graos decimais para as coordenadas"
 
 #: src/ui_configurationDialog.h:1159
 msgid "Use decimal degrees"
-msgstr ""
+msgstr "Usar graos decimais"
 
 #: src/ui_configurationDialog.h:1160
 msgid "Screenshots"
@@ -5239,6 +5241,9 @@ msgid ""
 "which may be helpful to keep relations between landscape and some celestial "
 "object or (with both linked) for Dobsonian starhopping."
 msgstr ""
+"Os puntos de inicio e final no modo horizontal pódense ligar ao ceo xirando, "
+"o que pode ser útil para manter as relacións entre a paisaxe e algún obxecto "
+"celeste ou (con ambos ligados) para un Dobsoniano."
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:96
 msgid ""
@@ -5344,31 +5349,31 @@ msgstr "Configuración do plugin de Medición do ángulo."
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:231
 msgid "Show in Equatorial Coordinates"
-msgstr ""
+msgstr "Amosar en Coordinadas Ecuatoriais"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:232
 msgid "Display with position angle"
-msgstr ""
+msgstr "Amosar con ángulo de posición"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:233
 msgid "Show in Horizontal Coordinates"
-msgstr ""
+msgstr "Amosar en Coordinadas Horizontais"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:235
 msgid "(e.g. for Dobson starhopping)"
-msgstr ""
+msgstr "(e.g. para telescopios Dobson)"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:237
 msgid "Display with position angle "
-msgstr ""
+msgstr "Amosar co ángulo de posición "
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:238
 msgid "Attach start point to rotating sky"
-msgstr ""
+msgstr "Establecer punto de inicio para a rotación do ceo"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:239
 msgid "Attach end point to rotating sky"
-msgstr ""
+msgstr "Establecer punto final para a rotación do ceo"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:240
 msgid "Format"
@@ -5897,10 +5902,12 @@ msgid ""
 "Please enable it for avoiding of flips the whole sky from the telescope's "
 "settings."
 msgstr ""
+"Actívao para evitar  o xiro de todo o ceo a partir das definicións do "
+"telescopio."
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1081
 msgid "Disable zoom keys for CCD"
-msgstr ""
+msgstr "Desactivar claves de zoom para CCD"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1083
 msgid ""
@@ -5959,7 +5966,7 @@ msgstr "Binoculares"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1095
 msgid "Has a permanent cross-hairs"
-msgstr ""
+msgstr "Ten unha mira de cruz permanente"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1097
 #: plugins/Oculars/src/ui_ocularDialog.h:1103
@@ -7501,7 +7508,7 @@ msgstr "Información de nebulosas"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:370
 msgid "Galactic equator line"
-msgstr ""
+msgstr "Liña do ecuador galáctico"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:399
 msgid "Effects"
@@ -10114,7 +10121,7 @@ msgstr "Az/Alt"
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:167
 msgctxt "abbreviated in the plugin"
 msgid "Gal. Long/Lat"
-msgstr ""
+msgstr "Gal. Lonx/Lat"
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:179
 msgctxt "abbreviated in the plugin"
@@ -10144,7 +10151,7 @@ msgstr "O ángulo inferior dereito da pantalla"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:141
 msgid "Custom position"
-msgstr ""
+msgstr "Posición personalizada"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:162
 msgid "Right ascension/Declination (J2000.0)"
@@ -10152,7 +10159,7 @@ msgstr "Ascensión recta/Declinación (J2000.0)"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:163
 msgid "Right ascension/Declination"
-msgstr ""
+msgstr "Ascensión recta/Declinación"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:165
 msgid "Ecliptic Longitude/Latitude (J2000.0)"
@@ -10160,11 +10167,11 @@ msgstr "Lonxitude/Latitude da Eclíptica (J2000.0)"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:167
 msgid "Galactic Longitude/Latitude"
-msgstr ""
+msgstr "Lonxitude/Latitude galáctica"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:197
 msgid "Coordinates of custom position:"
-msgstr ""
+msgstr "Coordenadas da posición personalizada:"
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:336
 msgid "Show coordinates of the mouse cursor on the screen."
@@ -10196,11 +10203,11 @@ msgstr "Situar o texto:"
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:349
 msgid "Coordinate X"
-msgstr ""
+msgstr "Coordenada X"
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:353
 msgid "Coordinate Y"
-msgstr ""
+msgstr "Coordenada Y"
 
 #~ msgid "Cardinal Points"
 #~ msgstr "Puntos cardinais"
