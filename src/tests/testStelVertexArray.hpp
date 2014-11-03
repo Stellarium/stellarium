@@ -21,7 +21,7 @@
 #define _TESTSTELVERTEXARRAY_HPP_
 
 #include <QObject>
-#include <QtTest>
+#include <QTest>
 
 #include "StelVertexArray.hpp"
 

@@ -14,6 +14,8 @@
 #ifndef _SOLVE_HPP_
 #define _SOLVE_HPP_
 
+#include "config.h"
+
 #include <utility>
 
 // Solve a function using the bisection method.  Returns a pair

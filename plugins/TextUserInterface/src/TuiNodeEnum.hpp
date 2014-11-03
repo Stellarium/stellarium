@@ -50,7 +50,8 @@ signals:
 private:
 	int currentIdx;
 	QStringList stringList;
-	
+    QString defValue;
+
 };
 
 #endif /*_TUINODEENUM*/

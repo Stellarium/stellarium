@@ -20,7 +20,6 @@
 #ifndef _STELTEXTUREMGR_HPP_
 #define _STELTEXTUREMGR_HPP_
 
-#include <QtOpenGL>
 #include "StelTexture.hpp"
 #include <QObject>
 
@@ -34,33 +33,26 @@ class QThread;
 class StelTextureMgr : QObject
 {
 public:
-	StelTextureMgr();
-	virtual ~StelTextureMgr();
-
-	//! Initialize some variable from the openGL contex.
+	//! Initialize some variable from the openGL context.
 	//! Must be called after the creation of the GLContext.
 	void init();
 
 	//! Load an image from a file and create a new texture from it
 	//! @param filename the texture file name, can be absolute path if starts with '/' otherwise
-	//!    the file will be looked in stellarium standard textures directories.
+	//!    the file will be looked for in Stellarium's standard textures directories.
 	//! @param params the texture creation parameters.
 	StelTextureSP createTexture(const QString& filename, const StelTexture::StelTextureParams& params=StelTexture::StelTextureParams());
 
 	//! Load an image from a file and create a new texture from it in a new thread.
 	//! @param url the texture file name or URL, can be absolute path if starts with '/' otherwise
-	//!    the file will be looked in stellarium standard textures directories.
+	//!    the file will be looked for in Stellarium's standard textures directories.
 	//! @param params the texture creation parameters.
-	//! @param fileExtension the file extension to assume. If not set the extension is determined from url
 	//! @param lazyLoading define whether the texture should be actually loaded only when needed, i.e. when bind() is called the first time.
-	StelTextureSP createTextureThread(const QString& url, const StelTexture::StelTextureParams& params=StelTexture::StelTextureParams(), const QString& fileExtension=QString(), bool lazyLoading=true);
+	StelTextureSP createTextureThread(const QString& url, const StelTexture::StelTextureParams& params=StelTexture::StelTextureParams(), bool lazyLoading=true);
 
 private:
 	friend class StelTexture;
 	friend class ImageLoader;
-
-	//! A thread that is used by the TextureLoader object to avoid pausing the main thread too long.
-	QThread* loaderThread;
 };
 
 

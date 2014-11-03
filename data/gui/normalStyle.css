@@ -67,7 +67,7 @@ QFrame#TitleBar {
 	background: none;
 }
 
-#dateTimeDialogForm QSpinBox {
+#dateTimeDialogForm QSpinBox, #dateTimeDialogForm QDoubleSpinBox {
 	border-image: none;
 	border: 0px;
 	background: rgba(0, 0, 0, 0%);
@@ -79,7 +79,7 @@ QFrame#TitleBar {
 	padding-right: 3px;
 }
 
-#dateTimeDialogForm QSpinBox::up-button {
+#dateTimeDialogForm QSpinBox::up-button, #dateTimeDialogForm QDoubleSpinBox::up-button {
 	subcontrol-origin: border;
 	subcontrol-position: top center;
 	margin: 0;
@@ -89,14 +89,14 @@ QFrame#TitleBar {
 	image: none;
 }
 
-#dateTimeDialogForm QSpinBox::up-arrow {
+#dateTimeDialogForm QSpinBox::up-arrow, #dateTimeDialogForm QDoubleSpinBox::up-arrow {
 	image: url(:/graphicGui/spinup.png);
 	subcontrol-origin: border;
 	subcontrol-position: bottom center;
 	padding-bottom: 20px;
 }
 
-#dateTimeDialogForm QSpinBox::down-button {
+#dateTimeDialogForm QSpinBox::down-button, #dateTimeDialogForm QDoubleSpinBox::down-button {
 	subcontrol-origin: border;
 	subcontrol-position: bottom center;
 	margin: 0;
@@ -106,7 +106,7 @@ QFrame#TitleBar {
 	image: none;
 }
 
-#dateTimeDialogForm QSpinBox::down-arrow {
+#dateTimeDialogForm QSpinBox::down-arrow, #dateTimeDialogForm QDoubleSpinBox::down-arrow {
 	image: url(:/graphicGui/spindown.png);
 	subcontrol-origin: border;
 	subcontrol-position: top center;
@@ -138,6 +138,14 @@ QLineEdit {
 	font-size: 12px;
 }
 
+QLineEdit[enabled="false"] {
+	background: rgb(90, 90, 90);
+}
+
+QLineEdit[collision="true"] {
+	color: red;
+}
+
 QTextEdit {
 	border: 1px solid rgb(0, 0, 0);
 	border-radius: 0px;
@@ -156,6 +164,12 @@ QTextBrowser {
 
 QTextBrowser#helpBrowser,QTextBrowser#aboutBrowser {
 	padding-left:11px;
+}
+
+QTextBrowser#deltaTAlgorithmDescription, QTextBrowser#projectionTextBrowser {
+        background: transparent;
+        padding: 0px;
+        margin: 0px;
 }
 
 /***************************************************SearchDialog********************************************************/
@@ -226,21 +240,13 @@ QPushButton#closeStelWindow {
 
 QPushButton#pushButtonGotoSearchSkyObject {
         border-radius: 0px;
-        border-left: none;
+        /* border-left: none; */
         padding: 2px;
         image: url(:/graphicGui/searchButtonImage.png);
 }
 
 QPushButton:hover#closeStelWindow {
 	background-image: url(:/graphicGui/closeButton-hover.png);
-}
-
-QPushButton#pushButtonMoveSensorUp, QPushButton#pushButtonMoveOcularUp, QPushButton#pushButtonMoveTelescopeUp {
-        image: url(:/graphicGui/spinup.png);
-}
-
-QPushButton#pushButtonMoveSensorDown, QPushButton#pushButtonMoveOcularDown, QPushButton#pushButtonMoveTelescopeDown {
-        image: url(:/graphicGui/spindown.png);
 }
 
 QPushButton#removeSatellitesButton, QPushButton#deleteSourceButton {
@@ -544,6 +550,10 @@ QCheckBox::indicator:checked {
 	image: url(:/graphicGui/checkbox-checked.png);
 }
 
+QCheckBox::indicator:indeterminate {
+	image: url(:/graphicGui/checkbox-partial.png);
+}
+
 QCheckBox::indicator:unchecked {
 	image: url(:/graphicGui/checkbox-unchecked.png);
 }
@@ -560,8 +570,19 @@ QListWidget::indicator:checked, QListView::indicator:checked {
 	image: url(:/graphicGui/checkbox-checked.png);
 }
 
+QListWidget::indicator:indeterminate, QListView::indicator:indeterminate {
+	image: url(:/graphicGui/checkbox-partial.png);
+}
+
 QListWidget::indicator:unchecked, QListView::indicator:unchecked {
 	image: url(:/graphicGui/checkbox-unchecked.png);
+}
+
+QListWidget::indicator, QListView::indicator {
+	width: 16px;
+	height: 16px;
+	margin: 0px;
+	background: none;
 }
 
 QRadioButton {
@@ -776,6 +797,18 @@ color: rgb(255,255,255);
 QTreeView::item:!enabled#treeView {
 color : rgb(58,59,62);
 }
+
+QTreeView::branch:has-children:!has-siblings:closed,
+QTreeView::branch:closed:has-children:has-siblings {
+         border-image: none;
+         image: url(:/graphicGui/spinright.png);
+}
+
+QTreeView::branch:open:has-children:!has-siblings,
+QTreeView::branch:open:has-children:has-siblings  {
+         border-image: none;
+         image: url(:/graphicGui/spindown.png);
+ }
 
 QHeaderView::section {
 	background-color: rgb(31, 31, 31);

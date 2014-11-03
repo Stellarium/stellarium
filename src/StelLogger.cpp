@@ -18,6 +18,7 @@
  */
 
 #include "StelLogger.hpp"
+#include "StelUtils.hpp"
 
 #include <QDateTime>
 #include <QProcess>
@@ -34,108 +35,14 @@ void StelLogger::init(const QString& logFilePath)
 	logFile.setFileName(logFilePath);
 
 	if (logFile.open(QIODevice::WriteOnly | QIODevice::Truncate | QIODevice::Text | QIODevice::Unbuffered))
-		qInstallMsgHandler(StelLogger::debugLogHandler);
+		qInstallMessageHandler(StelLogger::debugLogHandler);
 
 	// write timestamp
 	writeLog(QString("%1").arg(QDateTime::currentDateTime().toString(Qt::ISODate)));
+	// write info about operating system
+	writeLog(StelUtils::getOperatingSystemInfo());
 
-	// write OS version
-#ifdef Q_OS_WIN
-	switch(QSysInfo::WindowsVersion)
-	{
-		case QSysInfo::WV_95:
-			writeLog("Windows 95");
-			break;
-		case QSysInfo::WV_98:
-			writeLog("Windows 98");
-			break;
-		case QSysInfo::WV_Me:
-			writeLog("Windows Me");
-			break;
-		case QSysInfo::WV_NT:
-			writeLog("Windows NT");
-			break;
-		case QSysInfo::WV_2000:
-			writeLog("Windows 2000");
-			break;
-		case QSysInfo::WV_XP:
-			writeLog("Windows XP");
-			break;
-		case QSysInfo::WV_2003:
-			writeLog("Windows Server 2003");
-			break;
-		case QSysInfo::WV_VISTA:
-			writeLog("Windows Vista");
-			break;
-		case QSysInfo::WV_WINDOWS7:
-			writeLog("Windows 7");
-			break;
-		#ifdef WV_WINDOWS8
-		case QSysInfo::WV_WINDOWS8:
-			writeLog("Windows 8");
-			break;
-		#endif
-		default:
-			writeLog("Unsupported Windows version");
-			break;
-	}
-
-	// somebody writing something useful for Macs would be great here
-#elif defined Q_OS_MAC
-	switch(QSysInfo::MacintoshVersion)
-	{
-		case QSysInfo::MV_10_3:
-			writeLog("Mac OS X 10.3");
-			break;
-		case QSysInfo::MV_10_4:
-			writeLog("Mac OS X 10.4");
-			break;
-		case QSysInfo::MV_10_5:
-			writeLog("Mac OS X 10.5");
-			break;
-		case QSysInfo::MV_10_6:
-			writeLog("Mac OS X 10.6");
-			break;
-		#ifdef MV_10_7
-		case QSysInfo::MV_10_7:
-			writeLog("Mac OS X 10.7");
-			break;
-		#endif
-		#ifdef MV_10_8
-		case QSysInfo::MV_10_8:
-			writeLog("Mac OS X 10.8");
-			break;
-		#endif
-		default:
-			writeLog("Unsupported Mac version");
-			break;
-	}
-
-#elif defined Q_OS_LINUX
-	QFile procVersion("/proc/version");
-	if(!procVersion.open(QIODevice::ReadOnly | QIODevice::Text))
-		writeLog("Unknown Linux version");
-	else
-	{
-		QString version = procVersion.readAll();
-		if(version.right(1) == "\n")
-			version.chop(1);
-		writeLog(version);
-		procVersion.close();
-	}
-#elif defined Q_OS_BSD4
-	// Check FreeBSD, NetBSD, OpenBSD and DragonFly BSD
-	QProcess uname;
-	uname.start("/usr/bin/uname -srm");
-	uname.waitForStarted();
-	uname.waitForFinished();
-	const QString BSDsystem = uname.readAllStandardOutput();
-	writeLog(BSDsystem.trimmed());
-#else
-	writeLog("Unknown operating system");
-#endif
-
-	// write GCC version
+	// write compiler version
 #if defined __GNUC__ && !defined __clang__
 	#ifdef __MINGW32__
 		#define COMPILER "MinGW GCC"
@@ -145,6 +52,8 @@ void StelLogger::init(const QString& logFilePath)
 	writeLog(QString("Compiled using %1 %2.%3.%4").arg(COMPILER).arg(__GNUC__).arg(__GNUC_MINOR__).arg(__GNUC_PATCHLEVEL__));
 #elif defined __clang__
 	writeLog(QString("Compiled using %1 %2.%3.%4").arg("Clang").arg(__clang_major__).arg(__clang_minor__).arg(__clang_patchlevel__));
+#elif defined _MSC_VER
+	writeLog(QString("Compiled using %1").arg(getMsvcVersionString(_MSC_VER)));
 #else
 	writeLog("Unknown compiler");
 #endif
@@ -251,13 +160,13 @@ void StelLogger::init(const QString& logFilePath)
 	int i;
 	for(i = 0; lRet == ERROR_SUCCESS; i++)
 	{
-		lRet = RegOpenKeyEx(HKEY_LOCAL_MACHINE,
-					TEXT(qPrintable(QString("%1\\%2").arg(procKey).arg(i))),
+		lRet = RegOpenKeyExA(HKEY_LOCAL_MACHINE,
+					qPrintable(QString("%1\\%2").arg(procKey).arg(i)),
 					0, KEY_QUERY_VALUE, &hKey);
 
 		if(lRet == ERROR_SUCCESS)
 		{
-			if(RegQueryValueEx(hKey, "~MHz", NULL, &dwType, (LPBYTE)&numVal, &dwSize) == ERROR_SUCCESS)
+			if(RegQueryValueExA(hKey, "~MHz", NULL, &dwType, (LPBYTE)&numVal, &dwSize) == ERROR_SUCCESS)
 				writeLog(QString("Processor speed: %1 MHz").arg(numVal));
 			else
 				writeLog("Could not get processor speed.");
@@ -270,7 +179,7 @@ void StelLogger::init(const QString& logFilePath)
 
 		if (lRet == ERROR_SUCCESS)
 		{
-			if (RegQueryValueEx(hKey, "ProcessorNameString", NULL, &dwType, (LPBYTE)&nameStr, &nameSize) == ERROR_SUCCESS)
+			if (RegQueryValueExA(hKey, "ProcessorNameString", NULL, &dwType, (LPBYTE)&nameStr, &nameSize) == ERROR_SUCCESS)
 				writeLog(QString("Processor name: %1").arg(nameStr));
 			else
 				writeLog("Could not get processor name.");
@@ -313,7 +222,7 @@ void StelLogger::init(const QString& logFilePath)
 	}
 
 #elif defined Q_OS_BSD4
-	QProcess dmesg
+	QProcess dmesg;
 	dmesg.start("/sbin/dmesg", QIODevice::ReadOnly);
 	dmesg.waitForStarted();
 	dmesg.waitForFinished();
@@ -340,13 +249,13 @@ void StelLogger::init(const QString& logFilePath)
 
 void StelLogger::deinit()
 {
-	qInstallMsgHandler(0);
+	qInstallMessageHandler(0);
 	logFile.close();
 }
 
-void StelLogger::debugLogHandler(QtMsgType, const char* msg)
+void StelLogger::debugLogHandler(QtMsgType, const QMessageLogContext&, const QString& msg)
 {
-	fprintf(stderr, "%s\n", msg);
+	fprintf(stderr, "%s\n", msg.toUtf8().constData());
 	writeLog(QString(msg));
 }
 
@@ -355,4 +264,33 @@ void StelLogger::writeLog(QString msg)
 	msg += "\n";
 	logFile.write(qPrintable(msg), msg.size());
 	log += msg;
+}
+
+QString StelLogger::getMsvcVersionString(int ver)
+{
+	QString version;
+	switch(ver)
+	{
+		case 1310:
+			version = "MSVC++ 7.1 (Visual Studio 2003)";
+			break;
+		case 1400:
+			version = "MSVC++ 8.0 (Visual Studio 2005)";
+			break;
+		case 1500:
+			version = "MSVC++ 9.0 (Visual Studio 2008)";
+			break;
+		case 1600:
+			version = "MSVC++ 10.0 (Visual Studio 2010)";
+			break;
+		case 1700:
+			version = "MSVC++ 11.0 (Visual Studio 2012)";
+			break;
+		case 1800:
+			version = "MSVC++ 12.0 (Visual Studio 2013)";
+			break;
+		default:
+			version = "unknown MSVC++ version";
+	}
+	return version;
 }

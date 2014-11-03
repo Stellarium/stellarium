@@ -1,9 +1,9 @@
 [Desktop Entry]
-Encoding=UTF-8
-Version=0.11.3
+Version=1.0
 Type=Application
 Name=Stellarium
 GenericName=Desktop planetarium
+GenericName[es]=Planetario de escritorio
 GenericName[ru]=Настольный планетарий
 Exec=stellarium
 Icon=stellarium
@@ -11,25 +11,24 @@ StartupNotify=false
 Terminal=false
 Categories=Astronomy;Education;Science;
 Comment=Planetarium
+Comment[es]=Planetario
 Comment[fr]=Planétarium
 Comment[ru]=Планетарий
+Keywords=astronomy;planetarium;
 
-Actions=Window;Fullscreen;Safemode
+Actions=Window;Fullscreen;Debugmode;
 
 [Desktop Action Window]
 Name=Open in window
 Name[ru]=Открыть в окне
 Exec=stellarium -f no
-OnlyShowIn=Unity
 
 [Desktop Action Fullscreen]
 Name=Open in fullscreen
 Name[ru]=Открыть в полноэкранном режиме
 Exec=stellarium -f yes
-OnlyShowIn=Unity
 
-[Desktop Action Safemode]
-Name=Open in safe mode
-Name[ru]=Открыть в безопасном режиме
-Exec=stellarium --safe-mode
-OnlyShowIn=Unity
+[Desktop Action Debugmode]
+Name=Open in debug mode
+Name[ru]=Открыть в режиме отладки
+Exec=stellarium --dump-opengl-details

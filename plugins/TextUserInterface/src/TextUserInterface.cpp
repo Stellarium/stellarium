@@ -35,6 +35,7 @@
 #include "StelModuleMgr.hpp"
 #include "StarMgr.hpp"
 #include "StelMovementMgr.hpp"
+#include "StelObjectMgr.hpp"
 #include "StelSkyDrawer.hpp"
 #include "ConstellationMgr.hpp"
 #include "NebulaMgr.hpp"
@@ -43,7 +44,7 @@
 #include "GridLinesMgr.hpp"
 #include "MilkyWay.hpp"
 #include "StelLocation.hpp"
-#include "StelMainGraphicsView.hpp"
+#include "StelMainView.hpp"
 #include "StelSkyCultureMgr.hpp"
 #include "StelFileMgr.hpp"
 #include "StelUtils.hpp"
@@ -53,10 +54,16 @@
 #include "StelGui.hpp"
 #include "StelGuiItems.hpp"// Funny thing to include in a TEXT user interface...
 
-#include <QtOpenGL>
 #include <QKeyEvent>
 #include <QDebug>
 #include <QLabel>
+#include <QTime>
+#include <QProcess>
+#include <QDir>
+#ifdef DISABLE_SCRIPTING
+#include "QSettings" // WTF?
+#endif
+
 
 /*************************************************************************
  Utility functions
@@ -83,17 +90,21 @@ StelPluginInfo TextUserInterfaceStelPluginInterface::getPluginInfo() const
 	info.authors = "Matthew Gates";
 	info.contact = "http://porpoisehead.net/";
 	info.description = N_("Plugin implementation of 0.9.x series Text User Interface (TUI), used in planetarium systems");
+	info.version = TUI_PLUGIN_VERSION;
 	return info;
 }
-
-Q_EXPORT_PLUGIN2(TextUserInterface, TextUserInterfaceStelPluginInterface)
 
 
 /*************************************************************************
  Constructor
 *************************************************************************/
 TextUserInterface::TextUserInterface()
-	: dummyDialog(this), tuiActive(false), currentNode(NULL)
+	: dummyDialog(this)
+	, tuiActive(false)
+	, tuiDateTime(false)
+	, tuiObjInfo(false)
+	, tuiGravityUi(false)
+	, currentNode(NULL)
 {
 	setObjectName("TextUserInterface");	
 }
@@ -223,7 +234,7 @@ void TextUserInterface::init()
 	TuiNode* m3_2 = new TuiNodeEnum(N_("Language"),
 	                                this, 
 	                                SLOT(setAppLanguage(QString)), 
-									StelTranslator::globalTranslator.getAvailableLanguagesNamesNative(StelFileMgr::getLocaleDir()),
+									StelTranslator::globalTranslator->getAvailableLanguagesNamesNative(StelFileMgr::getLocaleDir()),
 					StelTranslator::iso639_1CodeToNativeName(localeMgr.getAppLanguage()),
 	                                m3, m3_1);
 	m3_1->setNextNode(m3_2);
@@ -356,10 +367,10 @@ void TextUserInterface::init()
 					 SLOT(setColorGalacticGrid(Vec3f)),
 					 gridLinesMgr->getColorGalacticGrid(),
 					 m5, m5_18);
-	TuiNode* m5_20 = new TuiNodeColor(N_("Galactic plane line"),
+	TuiNode* m5_20 = new TuiNodeColor(N_("Galactic equator line"),
 					 gridLinesMgr,
-					 SLOT(setColorGalacticPlaneLine(Vec3f)),
-					 gridLinesMgr->getColorGalacticPlaneLine(),
+					 SLOT(setColorGalacticEquatorLine(Vec3f)),
+					 gridLinesMgr->getColorGalacticEquatorLine(),
 					 m5, m5_19);
 
 	m5_1->setNextNode(m5_2);
@@ -388,8 +399,8 @@ void TextUserInterface::init()
 	TuiNode* m6 = new TuiNode(N_("Effects"), NULL, m5);
 	m5->setNextNode(m6);
 	TuiNode* m6_1 = new TuiNodeInt(N_("Light pollution:"),
-	                               landscapeMgr,
-	                               SLOT(setAtmosphereBortleLightPollution(int)),
+				       this,
+				       SLOT(setBortleScale(int)),
 	                               3, 1, 9, 1,
 	                               m6);
 	TuiNode* m6_2 = new TuiNodeEnum(N_("Landscape"),
@@ -406,9 +417,9 @@ void TextUserInterface::init()
 	                                m6, m6_2);
 	TuiNode* m6_4 = new TuiNode(N_("Magnitude scaling multiplier"),
 	                                    m6, m6_3);
-	TuiNode* m6_5 = new TuiNodeFloat(N_("Milky Way intensity:"),
+	TuiNode* m6_5 = new TuiNodeDouble(N_("Milky Way intensity:"),
 	                                 GETSTELMODULE(MilkyWay),
-	                                 SLOT(setIntensity(float)),
+					 SLOT(setIntensity(double)),
 	                                 GETSTELMODULE(MilkyWay)->getIntensity(),
 	                                 0, 10.0, 0.1, 
 	                                 m6, m6_4);
@@ -440,7 +451,7 @@ void TextUserInterface::init()
 	#ifndef DISABLE_SCRIPTING
 	TuiNode* m7 = new TuiNode(N_("Scripts"), NULL, m6);
 	m6->setNextNode(m7);	
-	StelScriptMgr& scriptMgr = StelMainGraphicsView::getInstance().getScriptMgr();
+	StelScriptMgr& scriptMgr = StelApp::getInstance().getScriptMgr();
 	TuiNode* m7_1 = new TuiNodeEnum(N_("Run local script"),
 	                                &scriptMgr,
 	                                SLOT(runScript(QString)),
@@ -471,7 +482,8 @@ void TextUserInterface::init()
 	TuiNode* m8_2 = new TuiNodeActivate(N_("Save current configuration"),
 	                                    this, SLOT(saveDefaultSettings()),
 	                                    m8, m8_1);
-	TuiNode* m8_3 = new TuiNode(N_("Shut down"), m8, m8_2);
+	TuiNode* m8_3 = new TuiNodeActivate(N_("Shut down"), this, SLOT(shutDown()), 
+					    m8, m8_2);
 	m8_1->setNextNode(m8_2);
 	m8_2->setNextNode(m8_3);
 	m8_3->setNextNode(m8_1);
@@ -491,6 +503,9 @@ void TextUserInterface::loadConfiguration(void)
 	Q_ASSERT(conf);
 
 	font.setPixelSize(conf->value("tui/tui_font_size", 15).toInt());
+	tuiDateTime = conf->value("tui/flag_show_tui_datetime", false).toBool();
+	tuiObjInfo = conf->value("tui/flag_show_tui_short_obj_info", false).toBool();
+	tuiGravityUi = conf->value("tui/flag_show_gravity_ui", false).toBool();
 }
 
 /*************************************************************************
@@ -498,37 +513,106 @@ void TextUserInterface::loadConfiguration(void)
 *************************************************************************/
 void TextUserInterface::draw(StelCore* core)
 {
-	if (tuiActive)
+	if (!tuiActive && !tuiDateTime && !tuiObjInfo)
+		return;
+
+	int x = 0, y = 0;
+	int xVc = 0, yVc = 0;
+	int pixOffset = 15;
+	int fovOffsetX = 0, fovOffsetY=0;
+	bool fovMaskDisk = false;
+
+	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+	if (gui!=NULL)
 	{
-		int x = 0, y = 0;
-		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 		if (gui->getVisible())
 		{
 			QGraphicsItem* bottomBar = dynamic_cast<QGraphicsItem*>(gui->getButtonBar());
-			LeftStelBar* sideBar = gui->getWindowsButtonBar();			
+			LeftStelBar* sideBar = gui->getWindowsButtonBar();
 			x = (sideBar) ? sideBar->boundingRectNoHelpLabel().right() : 50;
 			y = (bottomBar) ? bottomBar->boundingRect().height() : 50;
 		}
+	}
 
-		// Alternate x,y for Disk viewport
-		if (core->getProjection(StelCore::FrameJ2000)->getMaskType() == StelProjector::MaskDisk)
-		{
-			StelProjector::StelProjectorParams projParams = core->getCurrentStelProjectorParams();
-			x = projParams.viewportCenter[0] - projParams.viewportFovDiameter/2;
-			y = projParams.viewportCenter[1];
+	// Alternate x,y for Disk viewport
+	if (core->getProjection(StelCore::FrameJ2000)->getMaskType() == StelProjector::MaskDisk)
+	{
+		fovMaskDisk = true;
+		StelProjector::StelProjectorParams projParams = core->getCurrentStelProjectorParams();
+		xVc = projParams.viewportCenter[0];
+		yVc = projParams.viewportCenter[1];
+		fovOffsetX = projParams.viewportFovDiameter*std::sin(20.f)/2;
+		fovOffsetY = projParams.viewportFovDiameter*std::cos(20.f)/2;
+	}
+	else 
+	{
+		xVc = core->getProjection(StelCore::FrameJ2000)->getViewportWidth()/2;
+	}
+
+	if (tuiActive)
+	{
+		int text_x = x + pixOffset, text_y = y + pixOffset;
+		if (fovMaskDisk) {
+			text_x = xVc - fovOffsetX + pixOffset;
+			text_y = yVc - fovOffsetY + pixOffset;
 		}
-		
-		x += 20;
-		y += 15;
-
+			
 		QString tuiText = q_("[no TUI node]");
-		if (currentNode!=NULL)
+		if (currentNode!=NULL) {
 			tuiText = currentNode->getDisplayText();
+		}
+
+		StelPainter painter(core->getProjection(StelCore::FrameJ2000));
+		painter.setFont(font);
+		painter.setColor(0.3,1,0.3);
+		painter.drawText(text_x, text_y, tuiText, 0, 0, 0, !tuiGravityUi);
+	}
+
+	if (tuiDateTime) 
+	{
+		double jd = core->getJDay();
+		int text_x = x + xVc*2/3, text_y = y + pixOffset;
+
+		QString newDate = StelApp::getInstance().getLocaleMgr().getPrintableDateLocal(jd) + "   "
+                       +StelApp::getInstance().getLocaleMgr().getPrintableTimeLocal(jd);
+		 
+		if (fovMaskDisk) {
+			text_x = xVc + fovOffsetY - pixOffset;
+			text_y = yVc - fovOffsetX + pixOffset;
+		}
 
 		StelPainter painter(core->getProjection(StelCore::FrameAltAz));
 		painter.setFont(font);
 		painter.setColor(0.3,1,0.3);
-		painter.drawText(x, y, tuiText, 0, 0, 0, false);
+		painter.drawText(text_x, text_y, newDate, 0, 0, 0, !tuiGravityUi);
+	}
+
+	if (tuiObjInfo) 
+	{
+		QString objInfo = ""; 
+		StelObject::InfoStringGroup tuiInfo(StelObject::Name|StelObject::CatalogNumber
+				|StelObject::Distance|StelObject::PlainText);
+		int text_x = x + xVc*4/3, text_y = y + pixOffset; 
+
+		QList<StelObjectP> selectedObj = GETSTELMODULE(StelObjectMgr)->getSelectedObject();
+		if (selectedObj.isEmpty()) {
+			objInfo = "";	
+		} else {
+			objInfo = selectedObj[0]->getInfoString(core, tuiInfo);
+			objInfo.replace("\n"," ");
+			objInfo.replace("Distance:"," ");
+			objInfo.replace("Light Years","ly");
+		}
+
+		if (fovMaskDisk) {
+			text_x = xVc + fovOffsetX - pixOffset;
+			text_y = yVc + fovOffsetY - pixOffset;
+		}
+
+		StelPainter painter(core->getProjection(StelCore::FrameJ2000));
+		painter.setFont(font);
+		painter.setColor(0.3,1,0.3);
+		painter.drawText(text_x, text_y, objInfo, 0, 0, 0, !tuiGravityUi);
 	}
 }
 
@@ -739,6 +823,20 @@ void TextUserInterface::saveDefaultSettings(void)
 	qDebug() << "TextUserInterface::saveDefaultSettings done";
 }
 
+void TextUserInterface::shutDown()
+{
+	QSettings* conf = StelApp::getInstance().getSettings();
+	QString shutdownCmd = QDir::fromNativeSeparators(conf->value("tui/admin_shutdown_cmd", "").toString());
+	int err; 
+	if (!(err = QProcess::execute(shutdownCmd))) {
+		qDebug() << "[TextUserInterface] shutdown error, QProcess::execute():" << err;
+	}
+}
 
-
-
+void TextUserInterface::setBortleScale(int bortle)
+{
+	LandscapeMgr* landscapeMgr = GETSTELMODULE(LandscapeMgr);
+	StelSkyDrawer* skyDrawer = StelApp::getInstance().getCore()->getSkyDrawer();
+	landscapeMgr->setAtmosphereBortleLightPollution(bortle);
+	skyDrawer->setBortleScaleIndex(bortle);
+}

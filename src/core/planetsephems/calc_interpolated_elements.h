@@ -23,10 +23,10 @@ SOFTWARE.
 ****************************************************************/
 
 extern
-void CalcInterpolatedElements(double t,double elem[],
-                              int dim,
-                              void (*calc_func)(double t,double elem[]),
-                              double delta_t,
+void CalcInterpolatedElements(const double t,double elem[],
+                              const int dim,
+                              void (*calc_func)(const double t,double elem[]),
+                              const double delta_t,
                               double *t0,double e0[],
                               double *t1,double e1[],
                               double *t2,double e2[]);

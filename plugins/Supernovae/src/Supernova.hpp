@@ -19,6 +19,8 @@
 #ifndef _SUPERNOVA_HPP_
 #define _SUPERNOVA_HPP_ 1
 
+#include "config.h"
+
 #include <QVariant>
 #include <QString>
 #include <QStringList>
@@ -28,7 +30,6 @@
 
 #include "StelObject.hpp"
 #include "StelTextureTypes.hpp"
-#include "StelPainter.hpp"
 #include "StelFader.hpp"
 
 class StelPainter;
@@ -54,7 +55,6 @@ public:
 	{
 		return "Supernova";
 	}
-	virtual float getSelectPriority(const StelCore* core) const;
 
 	//! Get an HTML string to describe the object
 	//! @param core A pointer to the core
@@ -65,16 +65,10 @@ public:
 	{
 		return XYZ;
 	}
-	virtual float getVMagnitude(const StelCore* core, bool withExtinction=false) const;
+	virtual float getVMagnitude(const StelCore* core) const;
 	virtual double getAngularSize(const StelCore* core) const;
-	virtual QString getNameI18n(void) const
-	{
-		return designation;
-	}
-	virtual QString getEnglishName(void) const
-	{
-		return designation;
-	}
+	virtual QString getNameI18n(void) const;
+	virtual QString getEnglishName(void) const;
 
 	void update(double deltaTime);
 
@@ -98,6 +92,8 @@ private:
 	double distance;		   //! Distance to supernova (10^3 ly)
 
 	LinearFader labelsFader;
+
+	QString getMaxBrightnessDate(const double JD) const;
 };
 
 #endif // _SUPERNOVA_HPP_

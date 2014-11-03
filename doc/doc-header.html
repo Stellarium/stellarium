@@ -1,25 +1,47 @@
-<?xml version="1.0" encoding="utf-8"?>
-<html>
-    <head>
-      <title>$title</title>
-      <LINK HREF="doxygen.css" REL="stylesheet" TYPE="text/css">
-    </HEAD>
-    <BODY BGCOLOR="#FFFFFF">
-<table border="0" cellpadding="0" cellspacing="0" width="100%">
-<tr>
-<td align="left" valign="top" width="32" rowspan="2"><a href="http://www.stellarium.org"><img src="stellarium-logo.png" align="left" border="0" /></a></td>
-<td width="1" rowspan="2">&nbsp;&nbsp;</td>
-<td style="font-size:120%;font-weight:bolder;">$projectname $projectnumber</td>
-<td align="right" valign="top" width="230" rowspan="2"></td></tr><tr>
-<td class="postheader" valign="center">
- <a href="index.html">Home</a>&nbsp;&middot;
- <a href="namespaces.html">All&nbsp;Namespaces</a>&nbsp;&middot;
- <a href="classes.html">All&nbsp;Classes</a>&nbsp;&middot;
- <a href="functions.html">Functions</a>&nbsp;&middot;
- <a href="codingStyle.html">Coding Style</a>&nbsp;&middot;
- <a href="scripting.html">Scripting</a>&nbsp;&middot;
- <a href="plugins.html">Plugins</a>&nbsp;&middot;
- <a href="fileStructure.html">File Structure</a>
-</td>
-</tr>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<!--BEGIN PROJECT_NAME--><title>$projectname: $title</title><!--END PROJECT_NAME-->
+<!--BEGIN !PROJECT_NAME--><title>$title</title><!--END !PROJECT_NAME-->
+<link href="$relpath$tabs.css" rel="stylesheet" type="text/css"/>
+<link href="$relpath$doxygen.css" rel="stylesheet" type="text/css" />
+$treeview
+$search
+$mathjax
+</head>
+<body>
+<div id="top"><!-- do not remove this div! -->
+
+<!--BEGIN TITLEAREA-->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <!--BEGIN PROJECT_LOGO-->
+  <td id="projectlogo"><img alt="Logo" src="$relpath$$projectlogo"/></td>
+  <!--END PROJECT_LOGO-->
+  <!--BEGIN PROJECT_NAME-->
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">$projectname <!--BEGIN PROJECT_NUMBER-->$projectnumber<!--END PROJECT_NUMBER--></div>
+   <!--BEGIN PROJECT_BRIEF--><div id="projectbrief">$projectbrief</div><!--END PROJECT_BRIEF-->
+  </td>
+  <!--END PROJECT_NAME-->
+  <!--BEGIN !PROJECT_NAME-->
+   <!--BEGIN PROJECT_BRIEF-->
+    <td style="padding-left: 0.5em;">
+    <div id="projectbrief">$projectbrief</div>
+    </td>
+   <!--END PROJECT_BRIEF-->
+  <!--END !PROJECT_NAME-->
+  <!--BEGIN DISABLE_INDEX-->
+   <!--BEGIN SEARCHENGINE-->
+   <td>$searchbox</td>
+   <!--END SEARCHENGINE-->
+  <!--END DISABLE_INDEX-->
+ </tr>
+ </tbody>
 </table>
+</div>
+<!--END TITLEAREA-->

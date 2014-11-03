@@ -48,7 +48,7 @@ gSatWrapper::gSatWrapper(QString designation, QString tle1,QString tle2)
 	// The TLE library actually modifies the TLE strings, which is annoying (because
 	// when we get updates, we want to check if there has been a change by using ==
 	// with the original.  Thus we make a copy to send to the TLE library.
-	QByteArray t1(tle1.toAscii().data()), t2(tle2.toAscii().data());
+	QByteArray t1(tle1.toLatin1().data()), t2(tle2.toLatin1().data());
 
 	// Also, the TLE library expects no more than 130 characters length input.  We
 	// shouldn't have sane input with a TLE longer than about 80, but just in case
@@ -56,7 +56,7 @@ gSatWrapper::gSatWrapper(QString designation, QString tle1,QString tle2)
 	t1.truncate(130);
 	t2.truncate(130);
 
-	pSatellite = new gSatTEME(designation.toAscii().data(),
+	pSatellite = new gSatTEME(designation.toLatin1().data(),
 	                          t1.data(),
 	                          t2.data());
 	updateEpoch();
@@ -214,21 +214,34 @@ void  gSatWrapper::getSlantRange(double &ao_slantRange, double &ao_slantRangeRat
         ao_slantRangeRate = slantRange.dot(slantRangeVelocity)/ao_slantRange;
 }
 
+Vec3d gSatWrapper::getSunECIPos()
+{
+	// All positions in ECI system are positions referenced in a StelCore::EquinoxEq system centered in the earth centre
+	Vec3d observerECIPos;
+	Vec3d observerECIVel;
+	Vec3d sunECIPos;
+	Vec3d sunEquinoxEqPos;
+
+	calcObserverECIPosition(observerECIPos, observerECIVel);
+
+	SolarSystem *solsystem = (SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("SolarSystem");
+	sunEquinoxEqPos        = solsystem->getSun()->getEquinoxEquatorialPos(StelApp::getInstance().getCore());
+
+	//sunEquinoxEqPos is measured in AU. we need meassure it in Km
+	sunECIPos.set(sunEquinoxEqPos[0]*AU, sunEquinoxEqPos[1]*AU, sunEquinoxEqPos[2]*AU);
+	sunECIPos = sunECIPos + observerECIPos; //Change ref system centre
+
+	return sunECIPos;
+}
+
 // Operation getVisibilityPredict
 // @brief This operation predicts the satellite visibility contidions.
 int gSatWrapper::getVisibilityPredict()
 {
-
-
-	// All positions in ECI system are positions referenced in a StelCore::EquinoxEq system centered in the earth centre
-	Vec3d observerECIPos;
-	Vec3d observerECIVel;
 	Vec3d satECIPos;
 	Vec3d satAltAzPos;
 	Vec3d sunECIPos;
-	Vec3d sunEquinoxEqPos;
 	Vec3d sunAltAzPos;
-
 
 	double sunSatAngle, Dist;
 	int   visibility;
@@ -237,17 +250,11 @@ int gSatWrapper::getVisibilityPredict()
 
 	if (satAltAzPos[2] > 0)
 	{
-		calcObserverECIPosition(observerECIPos, observerECIVel);
-
 		satECIPos = getTEMEPos();
-		SolarSystem *solsystem = (SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("SolarSystem");
-		sunEquinoxEqPos        = solsystem->getSun()->getEquinoxEquatorialPos(StelApp::getInstance().getCore());
+		SolarSystem *solsystem = (SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("SolarSystem");		
 		sunAltAzPos        = solsystem->getSun()->getAltAzPosGeometric(StelApp::getInstance().getCore());
 
-		//sunEquinoxEqPos is measured in AU. we need meassure it in Km
-		sunECIPos.set(sunEquinoxEqPos[0]*AU, sunEquinoxEqPos[1]*AU, sunEquinoxEqPos[2]*AU);
-		sunECIPos = sunECIPos + observerECIPos; //Change ref system centre
-
+		sunECIPos = getSunECIPos();
 
 		if (sunAltAzPos[2] > 0.0)
 		{
@@ -272,6 +279,12 @@ int gSatWrapper::getVisibilityPredict()
 		visibility = NOT_VISIBLE;
 
 	return visibility; //TODO: put correct return
+}
+
+double gSatWrapper::getPhaseAngle()
+{
+	Vec3d sunECIPos = getSunECIPos();
+	return sunECIPos.angle(getTEMEPos());
 }
 
 

@@ -21,8 +21,28 @@
 #   anyway.)
 
 ADD_CUSTOM_TARGET(translations)
-ADD_CUSTOM_TARGET(generate-pot)
-ADD_CUSTOM_TARGET(update-po)
+
+IF(NOT MSVC)
+    # These packages are now used only to generate .pot and .po files
+    FIND_PACKAGE(Gettext)
+    FIND_PACKAGE(XGettext)
+
+    IF(${XGETTEXT_FOUND})
+	ADD_CUSTOM_TARGET(generate-pot)
+    ENDIF()
+
+    IF(${GETTEXT_FOUND})
+	ADD_CUSTOM_TARGET(update-po)
+    ENDIF()
+ENDIF()
+
+FIND_PACKAGE(Qt5LinguistTools REQUIRED)
+GET_TARGET_PROPERTY(lupdate_executable Qt5::lupdate IMPORTED_LOCATION)
+GET_FILENAME_COMPONENT(qtbindirectory ${lupdate_executable} PATH)
+SET(lconvert_executable "${qtbindirectory}/lconvert")
+
+# Creates translations directory if it doesn't exist
+file(MAKE_DIRECTORY ${CMAKE_BINARY_DIR}/translations)
 
 # GETTEXT_CREATE_TRANSLATIONS(domain [DEFAULT_TARGET] lang1 ... langN)
 #
@@ -39,16 +59,20 @@ ADD_CUSTOM_TARGET(update-po)
 #
 MACRO(GETTEXT_CREATE_TRANSLATIONS _domain _firstLang)
 
+    file(MAKE_DIRECTORY ${CMAKE_BINARY_DIR}/translations/${_domain})
+
     SET(_gmoFiles)
     GET_FILENAME_COMPONENT(_absPotFile ${_domain}.pot ABSOLUTE)
 
-    # Update these PO files when building the "update-po-<DOMAIN>" and
-    # "update-po" targets.
-    ADD_CUSTOM_TARGET(update-po-${_domain})
-    ADD_DEPENDENCIES(update-po update-po-${_domain})
+    IF(${GETTEXT_FOUND})
+        # Update these PO files when building the "update-po-<DOMAIN>" and
+        # "update-po" targets.
+        ADD_CUSTOM_TARGET(update-po-${_domain})
+        ADD_DEPENDENCIES(update-po update-po-${_domain})
 
-    # Make sure the POT file is updated before updating the PO files.
-    ADD_DEPENDENCIES(update-po-${_domain} generate-pot-${_domain})
+        # Make sure the POT file is updated before updating the PO files.
+        ADD_DEPENDENCIES(update-po-${_domain} generate-pot-${_domain})
+    ENDIF()
 
     SET(_addToAll)
     IF(${_firstLang} STREQUAL "DEFAULT_TARGET")
@@ -59,35 +83,37 @@ MACRO(GETTEXT_CREATE_TRANSLATIONS _domain _firstLang)
     FOREACH (_lang ${ARGN})
         GET_FILENAME_COMPONENT(_absFile ${_lang}.po ABSOLUTE)
         FILE(RELATIVE_PATH _relFile ${PROJECT_SOURCE_DIR} ${_absFile})
-        SET(_gmoFile ${CMAKE_CURRENT_BINARY_DIR}/${_lang}.gmo)
+        SET(_gmoFile ${CMAKE_BINARY_DIR}/translations/${_domain}/${_lang}.qm)
 
-        # Convert a PO file into a GMO file.
+        # Convert a PO file into a qm file.
         ADD_CUSTOM_COMMAND(
             OUTPUT ${_gmoFile} 
-            COMMAND ${GETTEXT_MSGFMT_EXECUTABLE} -o ${_gmoFile} ${_absFile}
+            COMMAND ${lconvert_executable} -i ${_absFile} -o ${_gmoFile} 
             DEPENDS ${_absFile}
         )
 
-        # Update the PO file unconditionally when building the
-        # "update-po-<DOMAIN>" target. Note that to see the file being
-        # processed, we have to run "cmake -E echo", because the
-        # COMMENT is not displayed by cmake...
-        ADD_CUSTOM_COMMAND(
-            TARGET update-po-${_domain}
-            POST_BUILD
-            COMMAND ${CMAKE_COMMAND} -E echo "** Updating ${_relFile}"
-            COMMAND ${GETTEXT_MSGMERGE_EXECUTABLE}
-                --quiet --update -m --backup=none -s
-                ${_absFile} ${_absPotFile}
-            VERBATIM
-        )
+        IF(${GETTEXT_MSGMERGE_EXECUTABLE})
+			# Update the PO file unconditionally when building the
+			# "update-po-<DOMAIN>" target. Note that to see the file being
+			# processed, we have to run "cmake -E echo", because the
+			# COMMENT is not displayed by cmake...
+			ADD_CUSTOM_COMMAND(
+				TARGET update-po-${_domain}
+				POST_BUILD
+				COMMAND ${CMAKE_COMMAND} -E echo "** Updating ${_relFile}"
+				COMMAND ${GETTEXT_MSGMERGE_EXECUTABLE}
+					--quiet --update -m --backup=none -s
+					${_absFile} ${_absPotFile}
+				VERBATIM
+			)
+		ENDIF()
 
-        INSTALL(FILES ${_gmoFile} DESTINATION share/locale/${_lang}/LC_MESSAGES RENAME ${_domain}.mo)
+        INSTALL(FILES ${_gmoFile} DESTINATION share/${PACKAGE}/translations/${_domain}/)
         SET(_gmoFiles ${_gmoFiles} ${_gmoFile})
 
    ENDFOREACH (_lang)
 
-   # Create the GMO files when building the "translations-<DOMAIN>" and
+   # Create the .qm files when building the "translations-<DOMAIN>" and
    # "translations" targets.
    ADD_CUSTOM_TARGET(translations-${_domain} ${_addToAll} DEPENDS ${_gmoFiles})
    ADD_DEPENDENCIES(translations translations-${_domain})

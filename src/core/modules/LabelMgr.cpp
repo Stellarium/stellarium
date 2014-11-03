@@ -36,7 +36,6 @@
 #include <vector>
 #include <QString>
 #include <QDebug>
-#include <QtOpenGL>
 
 // Base class from which other label types inherit
 class StelLabel

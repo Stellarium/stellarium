@@ -27,6 +27,7 @@
 #include "StelDialog.hpp"
 #include "StelStyle.hpp"
 #include "Telescope.hpp"
+#include "Lens.hpp"
 
 class Ui_ocularDialogForm;
 
@@ -46,7 +47,7 @@ class OcularDialog : public StelDialog
 	Q_OBJECT
 
 public:
-	OcularDialog(Oculars* plugin, QList<CCD *>* ccds, QList<Ocular *>* oculars, QList<Telescope *>* telescopes);
+	OcularDialog(Oculars* plugin, QList<CCD *>* ccds, QList<Ocular *>* oculars, QList<Telescope *>* telescopes, QList<Lens *>* lense);
 	virtual ~OcularDialog();
 	//! Notify that the application style changed
 	void styleChanged();
@@ -57,15 +58,19 @@ public slots:
 	void deleteSelectedCCD();
 	void deleteSelectedOcular();
 	void deleteSelectedTelescope();
+	void deleteSelectedLens();
 	void insertNewCCD();
 	void insertNewOcular();
 	void insertNewTelescope();
+	void insertNewLens();
 	void moveUpSelectedSensor();
 	void moveUpSelectedOcular();
 	void moveUpSelectedTelescope();
+	void moveUpSelectedLens();
 	void moveDownSelectedSensor();
 	void moveDownSelectedOcular();
 	void moveDownSelectedTelescope();
+	void moveDownSelectedLens();
 	void retranslate();
 
 signals:
@@ -87,22 +92,19 @@ private slots:
 private:
 	Oculars* plugin;
 
-	QDataWidgetMapper*			ccdMapper;
-	QList<CCD *>*					ccds;
+	QDataWidgetMapper*		ccdMapper;
+	QList<CCD *>*			ccds;
 	PropertyBasedTableModel*	ccdTableModel;
-	QDataWidgetMapper*			ocularMapper;
-	QList<Ocular *>*				oculars;
+	QDataWidgetMapper*		ocularMapper;
+	QList<Ocular *>*		oculars;
 	PropertyBasedTableModel*	ocularTableModel;
-	QDataWidgetMapper*			telescopeMapper;
-	QList<Telescope *>*			telescopes;
+	QDataWidgetMapper*		telescopeMapper;
+	QList<Telescope *>*		telescopes;
 	PropertyBasedTableModel*	telescopeTableModel;
-	QDoubleValidator*				validatorOcularAFOV;
-	QDoubleValidator*				validatorOcularEFL;
-	QDoubleValidator*				validatorTelescopeDiameter;
-	QDoubleValidator*				validatorTelescopeFL;
-	QRegExpValidator*				validatorName;
-	QIntValidator*					validatorPositiveInt;
-	QDoubleValidator*				validatorPositiveDouble;
+	QDataWidgetMapper*		lensMapper;
+	QList<Lens *>*			lense;
+	PropertyBasedTableModel*	lensTableModel;
+	QRegExpValidator*		validatorName;
 };
 
 #endif // _OCULARDIALOG_HPP_

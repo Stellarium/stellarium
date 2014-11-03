@@ -119,6 +119,8 @@ class Translations
 		N_("Metis");
 		// TRANSLATORS: Asteroid (10) Hygiea
 		N_("Hygiea");
+		// TRANSLATORS: Asteroid (41) Daphne
+		N_("Daphne");
 		// TRANSLATORS: Asteroid (1221) Amor
 		N_("Amor");
 		// TRANSLATORS: Asteroid (99942) Apophis
@@ -129,6 +131,34 @@ class Translations
 		N_("Eros");
 		// TRANSLATORS: Asteroid (624) Hektor
 		N_("Hektor");
+		// TRANSLATORS: Asteroid (20000) Varuna
+		N_("Varuna");
+		// TRANSLATORS: Asteroid (136472) Makemake
+		N_("Makemake");
+		// TRANSLATORS: Asteroid (3200) Phaethon
+		N_("Phaethon");
+		// TRANSLATORS: Asteroid (1866) Sisyphus
+		N_("Sisyphus");
+		// TRANSLATORS: Asteroid (1864) Daedalus
+		N_("Daedalus");
+		// TRANSLATORS: Asteroid (1566) Icarus
+		N_("Icarus");
+		// TRANSLATORS: Asteroid (1809) Prometheus
+		N_("Prometheus");
+		N_("Prometheus (moon)");
+		// TRANSLATORS: Asteroid (1810) Epimetheus
+		N_("Epimetheus");
+		N_("Epimetheus (moon)");
+		// TRANSLATORS: Asteroid (951) Gaspra
+		N_("Gaspra");
+		// TRANSLATORS: Asteroid (243) Ida
+		N_("Ida");
+		// TRANSLATORS: Asteroid (218) Bianca
+		N_("Bianca");
+		N_("Bianca (moon)");
+		
+		// TRANSLATORS: Proper name of comet C/1680 V1
+		N_("Great Comet of 1680 (C/1680 V1)");
 		
 		// TRANSLATORS: Name of supernova SN 1572A and script name
 		N_("Tycho's Supernova");
@@ -141,23 +171,79 @@ class Translations
 		N_("E");	// East
 		N_("W");	// West
 
+		// =====================================================================
+		// List of types solar system bodies
+		// TRANSLATORS: Type of object
+		N_("star");
+		// TRANSLATORS: Type of object
+		N_("planet");
+		// TRANSLATORS: Type of object
+		N_("comet");
+		// TRANSLATORS: Type of object
+		N_("asteroid");
+		// TRANSLATORS: Type of object
+		N_("moon");
+		// TRANSLATORS: Type of object
+		N_("plutoid");
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("Planets");
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("Comets");
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("Asteroids");
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("Moons");
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("Plutoids");
+
+		// =====================================================================
+		// List of deep-sky objects types
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("Bright galaxies");
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("Open star clusters");
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("Globular star clusters");
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("Nebulae");
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("Planetary nebulae");
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("Dark nebulae");
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("Irregular galaxies");
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("Clusters associated with nebulosity");
+		// TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
+		N_("Messier Catalogue");
+		// TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
+		N_("Caldwell Catalogue");
+		
+		// =====================================================================
 		// Constellation cultures
 		N_("Arabic");
 		N_("Aztec");
+		N_("Boorong");
 		N_("Chinese");
 		N_("Egyptian");
 		N_("Inuit");
+		N_("Indian Vedic");
 		N_("Korean");
 		N_("Lakota");
 		N_("Maori");
+		N_("Mongolian");
 		N_("Navajo");
 		N_("Norse");
 		N_("Polynesian");
+		N_("Romanian");
 		N_("Sami");
 		N_("Tupi-Guarani");
+		N_("Tongan");
 		N_("Western");
 
-		// Landscapes names
+		
+		// =====================================================================
+		// Landscape names
 		// TRANSLATORS: Name of landscape
 		N_("Guereins");
 		// TRANSLATORS: Name of landscape
@@ -174,8 +260,15 @@ class Translations
 		N_("Mars");
 		// TRANSLATORS: Name of landscape and planet
 		N_("Saturn");
+		// TRANSLATORS: Name of landscape
+		N_("Geneva");
+		// TRANSLATORS: Name of landscape
+		N_("Grossmugl");
 
-		// Scripts names
+
+		
+		// =====================================================================
+		// Script names
 		// TRANSLATORS: Name of script
 		N_("Landscape Tour");
 		// TRANSLATORS: Name of script
@@ -201,7 +294,7 @@ class Translations
 		// TRANSLATORS: Name of script
 		N_("Occultation of Earth and Jupiter 2048");
 		// TRANSLATORS: Name of script
-		N_("A Quintuple eclipse from Deimos 2027");
+		N_("3 Transits and 2 Eclipses from Deimos 2027");
 		// TRANSLATORS: Name of script
 		N_("Solar System Screensaver");
 		// TRANSLATORS: Name of script
@@ -214,9 +307,26 @@ class Translations
 		N_("Transit of Venus");
 		// TRANSLATORS: Name of script
 		N_("Analemma");
-
-		// Scripts description
+		// TRANSLATORS: Name of script
+		N_("Sky Culture Tour");
+		// TRANSLATORS: Name and description of script
+		N_("Earth Events from Mercury");
+		// TRANSLATORS: Name and description of script
+		N_("Earth Events from a floating city on Venus");
+		// TRANSLATORS: Name and description of script
+		N_("Earth Events from Mars");
+		// TRANSLATORS: Name of script
+		N_("Earth and Venus Greatest Elongations and Brilliancies from Mars");
+		// TRANSLATORS: Name of script
+		N_("Earth and Mars Greatest Elongations and Transits from Callisto");
+		
+		// =====================================================================
+		// Script descriptions
+		
+		// TRANSLATORS: Description of the landscape tour script.
 		N_("Look around each installed landscape.");
+		// TRANSLATORS: Description of the sky culture tour script.
+		N_("Look at each installed sky culture.");
 		N_("Script to demonstrate a partial lunar eclipse.");
 		N_("Script to demonstrate a total lunar eclipse.");
 		N_("A slow, infinite tour of the sky, looking at random objects.");
@@ -226,16 +336,20 @@ class Translations
 		N_("Due to the quirks in Mercury's orbit and rotation at certain spots the sun will rise & set 3 different times in one Mercury day.");
 		N_("Just before Mars eclipses the sun, Phobos pops out from behind and eclipses it first. Takes place between Scorpio and Sagittarius on April 26, 2017.");
 		N_("Just before Mars eclipses the sun, Phobos pops out from behind and eclipses it first. Takes place between Taurus and Gemini on July 23, 2031.");
-		N_("Phobos Eclipses the sun as seen from Olympus Mons Jan 10, 2068.");
-		N_("Phobos occultations of Earth are common, as are occultations of Jupiter. But Occultations of both on the same day are very rare. Here's one that takes place 1/23/2048. In real speed.");		N_("Phobos races ahead of Mars and eclipses the sun, passes thru it and then retrogrades back towards the sun and just partially eclipses it (only seen in the SH) again, then Mars totally eclipses the sun and Phobos, and then as Phobos emerges from the sun it passes through Mars' shadow and dims.");
-		N_("Screensaver of various happenings in the Solar System. 171 events in all!");
-		N_("A tour via western constellations.");
-		N_("Look at Sun from big planets of Solar system and Pluto.");
-		N_("Earth best views from other Solar system bodies in the 21st Century.");
-		N_("Transit of Venus as seen from Sydney Australia 6th June 2012.");
-		N_("This script shows the analemma - the path of the Sun across the sky during the year.");
-		N_("Flash of supernova which was observed by Tycho Brahe in 1572 year. For demos need enable plugin for supernovae.");
-
+		N_("Phobos eclipsing the Sun as seen from Olympus Mons on Jan 10, 2068.");
+		N_("Phobos occultations of Earth are common, as are occultations of Jupiter. But occultations of both on the same day are very rare. Here's one that takes place 1/23/2048. In real speed.");
+		N_("Phobos races ahead of Mars and transits the sun, passes through it and then retrogrades back towards the sun and just partially transits it again (only seen in the southern hemisphere of Deimos), then Mars totally eclipses the sun while Phobos transits in darkness between Mars and Deimos. When Phobos emerges from Mars it is still eclipsed and dimmed in Mars' shadow, only to light up later.");
+		N_("Screensaver of various happenings in the Solar System. 232 events in all!");
+		N_("A tour of the western constellations.");
+		N_("Look at the Sun from big planets of Solar System and Pluto.");
+		N_("Best views of Earth from other Solar System bodies in the 21st Century.");
+		N_("Transit of Venus as seen from Sydney Australia, 6th June 2012.");
+		N_("A demonstration of the analemma - the path of the Sun across the sky during the year.");
+		N_("Flash of the supernova observed by Tycho Brahe in 1572. The Supernovae plugin has to be enabled.");
+		N_("Earth and Venus Greatest Elongations and Brilliancies from Mars 2000-3000");
+		N_("Earth Greatest Elongations and Transits from Callisto 2000-3000. Why Callisto? Well of the 4 Galilean Moons, Callisto is the only one outside of Jupiter's radiation belt. Therefore, if humans ever colonize Jupiter's moons, Callisto will be the one.");
+		
+		// =====================================================================
 		// List of countries
 		N_("Andorra");
 		N_("United Arab Emirates");
@@ -479,5 +593,26 @@ class Translations
 		N_("Zambia");
 		N_("Zimbabwe");
 
+		// =====================================================================
+		// List of GUI elements (Qt's dialogs)
+		N_("&Undo");
+		N_("&Redo");
+		N_("Cu&t");
+		N_("&Copy");
+		N_("&Paste");
+		N_("Delete");
+		N_("Select All");
+		N_("Look in:");
+		N_("Directory:");
+		N_("Folder");
+		N_("&Choose");
+		N_("Cancel");
+		N_("Files of type:");
+		N_("Date Modified");
+		N_("Directories");
+		N_("Computer");
+		N_("&Open");
+		N_("File &name:");
+		N_("Copy &Link Location");
 	}
 };

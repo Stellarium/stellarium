@@ -26,7 +26,10 @@
 #include <QDebug>
 #include <iostream>
 
-#include <QApplication>
+#include <QGuiApplication>
+#include <QDir>
+
+#include <stdio.h>
 
 void CLIProcessor::parseCLIArgsPreConfig(const QStringList& argList)
 {
@@ -50,8 +53,9 @@ void CLIProcessor::parseCLIArgsPreConfig(const QStringList& argList)
 		          << "--help (or -h)          : This cruft.\n"
 		          << "--config-file (or -c)   : Use an alternative name for the config file\n"
 		          << "--user-dir (or -u)      : Use an alternative user data directory\n"
-		          << "--safe-mode (or -s)     : Disable GL shaders and use older GL engine\n"
-		          << "                          Try this is you have graphics problems\n"
+			  //<< "--safe-mode (or -s)     : Disable GL shaders and use older GL engine\n"
+			  << "--dump-opengl-details (or -d) : dump information about OpenGL support to logfile\n"
+			  << "                          Try this is you have graphics problems\n"
 		          << "--full-screen (or -f)   : With argument \"yes\" or \"no\" over-rides\n"
 		          << "                          the full screen setting in the config file\n"
 		          << "--screenshot-dir        : Specify directory to save screenshots\n"
@@ -73,24 +77,22 @@ void CLIProcessor::parseCLIArgsPreConfig(const QStringList& argList)
 		exit(0);
 	}
 
+	/*
 	if (argsGetOption(argList, "-s", "--safe-mode"))
 	{
 		qApp->setProperty("onetime_safe_mode", true);
 	}
+	*/
 
 	if (argsGetOption(argList, "", "--list-landscapes"))
 	{
 		const QSet<QString>& landscapeIds = StelFileMgr::listContents("landscapes", StelFileMgr::Directory);
 		foreach (const QString& i, landscapeIds)
 		{
-			try
-			{
-				// finding the file will throw an exception if it is not found
-				// in that case we won't output the landscape ID as it cannot work
-				StelFileMgr::findFile("landscapes/" + i + "/landscape.ini");
+			// finding the file will throw an exception if it is not found
+			// in that case we won't output the landscape ID as it cannot work
+			if (!StelFileMgr::findFile("landscapes/" + i + "/landscape.ini").isEmpty())
 				std::cout << qPrintable(i) << std::endl;
-			}
-			catch (std::runtime_error& e){}
 		}
 		exit(0);
 	}
@@ -119,6 +121,8 @@ void CLIProcessor::parseCLIArgsPostConfig(const QStringList& argList, QSettings*
 	QString projectionType, screenshotDir, multiresImage, startupScript;
 	try
 	{
+		bool dumpOpenGLDetails = argsGetOption(argList, "-d", "--dump-opengl-details");
+		qApp->setProperty("dump_OpenGL_details", dumpOpenGLDetails);
 		fullScreen = argsGetYesNoOption(argList, "-f", "--full-screen", -1);
 		landscapeId = argsGetOptionWithArg(argList, "", "--landscape", "").toString();
 		homePlanet = argsGetOptionWithArg(argList, "", "--home-planet", "").toString();
@@ -219,7 +223,7 @@ void CLIProcessor::parseCLIArgsPostConfig(const QStringList& argList, QSettings*
 	{
 		try
 		{
-			QString newShotDir = argsGetOptionWithArg(argList, "", "--screenshot-dir", "").toString();
+			QString newShotDir = QDir::fromNativeSeparators(argsGetOptionWithArg(argList, "", "--screenshot-dir", "").toString());
 			if (!newShotDir.isEmpty())
 				StelFileMgr::setScreenshotDir(newShotDir);
 		}
@@ -230,7 +234,7 @@ void CLIProcessor::parseCLIArgsPostConfig(const QStringList& argList, QSettings*
 	}
 	else
 	{
-		const QString& confScreenshotDir = confSettings->value("main/screenshot_dir", "").toString();
+		const QString& confScreenshotDir = QDir::fromNativeSeparators(confSettings->value("main/screenshot_dir", "").toString());
 		if (!confScreenshotDir.isEmpty())
 		{
 			try

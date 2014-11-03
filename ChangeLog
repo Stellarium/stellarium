@@ -1,4 +1,176 @@
-0.11.4 [in development]
+0.13.1 [2014-10-19]
+Bugfix release with few new features.
+- Added: Light layer for old_style landscapes
+- Added: Auto-detect location via network lookup.
+- Added: Seasonal rules for displaying constellations
+- Added: Coordinates can be displayed as decimal degrees (LP: #1106743)
+- Added: Support of multi-touch gestures on Windows 8 (LP: #1165754)
+- Added: FOV on bottom bar can be displayed in DMS rather than fractional degrees (LP: #1361582)
+- Added: Oculars plugins support eyepieces with permanent crosshairs (LP: #1364139)
+- Added: Pointer Coordinates Plugin can displayed not only RA/Dec (J2000.0) (LP: #1365784, #1377995)
+- Added: Angle Measure Plugin can measure positional angles to the horizon now (LP: #1208143)
+- Added: Search tool can search position not only for RA/Dec (J2000.0) (LP: #1358706)
+- Fixed: Galactic plane renamed to correct: Galactic equator (LP: #1367744)
+- Fixed: Speed issues when computing lots of comets (LP: #1350418)
+- Fixed: Spherical mirror distortion work correctly now (LP: #676260, #1338252)
+- Fixed: Location coordinates on the bottom bar displayed correctly now (LP: #1357799)
+- Fixed: Ecliptic coordinates for J2000.0 and grids diplayed correctly now (LP: #1366567, #1369166)
+- Fixed: Rule for select a celestial objects (LP: #1357917)
+- Fixed: Loading extra star catalogs (LP: #1329500, #1379241)
+- Fixed: Creates spurious directory on startup (LP: #1357758)
+- Fixed: Various GUI/rendering improvements (LP: #1380502, #1320065, #1338252, #1096050, #1376550, #1382689)
+- Fixed: "missing disk in drive <whatever>" (LP: #1371183)
+
+Full list of changes: https://launchpad.net/stellarium/+milestone/0.13.1
+
+0.13.0 [2014-07-19]
+This version based on Qt 5 and has new modulated core, and new features (example: normal mapping) and fixes for 115 bugs, including:
+New plugin: Equation of Time - provides solution for Equation of Time.
+New plugin: Field of View - provides shortcuts for quick changes field of view.
+New plugin: Navigational Stars - marks 58 navigational stars on the sky.
+New plugin: Pointer Coordinates - shows the coordinates of the mouse pointer.
+New plugin: Meteor Showers - provides visualization of meteor showers.
+New translatable strings and new textures.
+Improved Landscapes: New Polygonal type, texture saving for shperical, and optional light pollution/streetlight layer.
+Comet Tails
+New version of the Satellites plugin: introduces star-like satellites and bug fixes.
+New version of the Exoplanets plugin: displaying of the potential habitable exoplanets; improvements for performance and code refactoring.
+New version of the Angle Measure plugin: displaying of the position angle.
+New version of the Quasars plugin: improvements for performance; added marker_color parameter.
+New version of the Pulsars plugin: improvements for performance; display pulsars with glitches; setting color for marker for different types of the pulsars.
+New versions of the Compass Marks, Oculars, Historical Supernovae, Observability analysis and Bright Novae plugins: bug fixing, code refactoring and improvements.
+
+Full list of changes: https://launchpad.net/stellarium/0.13/0.13.0
+
+0.12.4 [2013-09-26]
+Bugfix release.
+- fixed crash Stellarium when enabled binoculars in the Oculars plugin (LP: #1222742);
+- added render nighttime landscapes without lighting (LP: #1223052);
+
+0.12.3 [2013-09-08]
+Bugfix release with new plugin.
+- new plugin - Bright Novae;
+- added intermediate value to ZHR of shooting stars between 80 and 10000 (LP: #1208106);
+- fixed search tool (LP: #1208296, #1211198);
+- fixed behaviour for shortkeys of few plugins (LP: #1208291);
+- fixed Flamsteed designations for few Virgo stars (LP: #1222094);
+- fixed saving Milky Way brightness via GUI (LP: #1220477)
+
+0.12.2 [2013-08-04]
+Bugfix release with few new features.
+New version of the Satellites plug-in (0.8.1):
+- automatic adding of new satellites on update from selected update sources;
+by default, only new naked-eye satellites are auto-added
+- automatic removal of satellites if they are no longer listed in the update
+sources
+- "user-defined" flag protecting satellites from update/removal
+- satellites can be added to/removed from satellite groups from the GUI
+- custom satellite groups can be defined
+- the default satellite group names and satellite descriptions are translatable
+Added:
+- Variable stars support (LP: #665014)
+- Automatic change of landscape on planet change (LP: #1173254)
+- Flamsteed designation for stars and search tool (LP: #1190503)
+Changed:
+- Repacked default star catalogs (LP: #926588)
+- Update DSO features (LP: #1115035, #1172402, #1180493)
+- Improved Quasars plugin (LP: #1169232, #1181688)
+- Improved Pulsars plugin (LP: #1169230, #1181688)
+- Improved Oculars plugin (LP: #1170239, #1188340)
+- Improved Historical Supernovae plugin (LP: #1180962)
+- Improved Observability analysis plugin (LP: #1171182)
+- Improved Exoplanets plugin (LP: #1177871)
+- Improved Satellites plugin (LP: #955780)
+- Improved search tool (LP: #1181534, #1184599, #1180962)
+- Improved scripting engine (LP: #1202637, #1091626)
+Fixed:
+- Satellites plugin cause crash when enabled in distant past (LP: #955780)
+- Landscape colour saturation at summer noon (LP: #1115364)
+- wrong rendering of Planet's shadow (LP: #1131847)
+- stellarium crashes (LP: #1157930, #1177871, #1194838, #1173355, #1184599)
+- mismatched malloc/delete (LP: #1172931)
+- error in template code (LP: #1178257)
+- undefined template function in vecmath (LP: #1178391)
+- Setting Startup date and time (Other:) sets time to UTC, not my local (EDT) time (LP: #1198570)
+- Debug messages don't completely convert paths to local directory separator (LP: #682633)
+- Garbled text hovering over time/date (LP: #1176424)
+- Set time to now (Icon not illuminated) (LP: #1178498)
+- Tongan translation discrepancies (LP: #1181945)
+- POD document (LP: #1184459)
+- No orbits displayed for some planets' satellites (LP: #834727)
+
+0.12.1 [2013-04-21]
+Bugfix release with few new features.
+Added:
+- Use different formulae for DeltaT calculations (LP: #1106658)
+- Show/hide starts at magnitude > X feature (LP: #880256, #1132010)
+- Added translations for Inno Setup installer (LP: #1159080)
+- Added Caldwell catalog
+- New skyculture: Tongan
+- New feature for Oculars plugin: support Barlow/Shapley lenses
+- Control brightness of the milky way (LP: #1106755)
+- Satellites plugin: New Galileo satellites (LP: #1169252)
+- Control brightness of the landscapes at startup (LP: #1149882, #603376)
+Changed:
+- Repacked default star catalogs (LP: #1124221)
+- Repacked locations catalog (LP: #1131036)
+- Refactored GUI
+- Update textures for DSO (LP: #1126959, #1114645)
+- Improved accuracy for NEO (LP: #1100766, #1080154)
+Fixed:
+- Sidereal day & sunrise/sunset (LP: #1106754)
+- Wrong solar day (LP: #1113249)
+- Pluto and Charon are not tidally locked in Stellarium (LP: #968738)
+- Search problem in different language (LP: #1131034)
+- Bortle light pollution scale setting not working (LP: #1121630)
+- The preference of "Render Solar Shadow" cannot be saved (LP: #1114279)
+- Background color of the night sky (LP: #1085375)
+- Time is slightly off (from system time) (LP: #1113222)
+- Dynamic plugins don't load on windows (LP: #1168958)
+- Cursor jumps out of altitude input box (LP: #1156112)
+- Missing splash screen on Windows and Mac OS X (LP: #1131942)
+- Satellite event times differ (LP: #1114644)
+- Plugin "Time Zone" display problem on Mac OSX (LP: #1114330)
+- Yellow/Black Checkered Flag while Object Picture is Loading (LP: #1113064)
+- Omega Centauri strange appearance on Mac (LP: #1114645)
+- Planet display bug (LP: #1114036)
+- Star on meridian has wrong hour angle (LP: #1131206)
+- Location window spin box up/down behavior (LP: #1093229)
+
+0.12.0 [2013-01-31]
+New rendering engine, editable keybindings, bug fixes and improvements.
+
+Added:
+- New rendering engine (LP: #673183)
+- Editable keybindings (LP: #1098851, #1035635, #832256, #789002)
+- Scripting for plugins (LP: #1040242)
+- Some transneptunian objects (LP: #899084, #1051205)
+- New geographical locations (LP: #1051803)
+- New textures for DSO
+- DeltaT and lunar acceleration computation (LP: #575621)
+
+Changed:
+- Improving the scripting engine (LP: #1059368)
+- Improving the plugins (LP: #1082167, #1042714)
+- Improving the coordinate grids (LP: #1036294)
+- Improving the constellation boundaries (LP: #1039072)
+- Improving the search tool
+
+Fixed:
+- Clang Wself-assign warning during build process on some platforms (LP: #1097358)
+- Bugs in Observability plugin (LP: #1042059, #1054599, #1053058)
+- Bugs in TUI plugin (LP: #1083380)
+- Bugs in Satellites plugin (LP: #1048220)
+- Bugs in Compass plugin (LP: #695891)
+- Bugs in scripting engine (LP: #1046518, #1092781)
+- Font corruption bugs (LP: #597633, #778747, #819278, #903310)
+- Screen flashing in fullscreen mode (LP: #716695, #824788)
+- Lost nebula images (LP: #1042393, #1051038)
+- Bugs in Night Vision mode (LP: #578367)
+- Bugs in GUI and Core (LP: #1090722, #1082510, #1071455, #1071458, #1056868, #1054600, #1045111, #1040944, #1077545)
+- Crashes (LP: #1043640, #1044654, #1045783)
+
+0.11.4 [2012-08-26]
 Bug fix release with new features.
 
 Added:
@@ -15,8 +187,8 @@ Added:
 - Apply atmosphere effect only on bodies with atmosphere (LP: #971875)
 
 Fixed:
-- Various Stellarium freezes and crashed (LP: #1005155, #1030913, #940638, #992267, #1033380, #951967)
-- Various plugins issues (LP: #751381, #892027, #1006134)
+- Various Stellarium freezes and crashed (LP: #1005155, #1030913, #940638, #992267, #1033380, #951967, #1040054)
+- Various plugins issues (LP: #751381, #892027, #1006134, #1040066, #1040085)
 - Various issues for nebulae (LP: #1026021, #744517)
 - Add/subtract one sidereal year jumps wrong amount (LP: #1006208)
 - Various small issues, typos and mistakes (LP: #1022506, #1032469, #1019247, #985204)

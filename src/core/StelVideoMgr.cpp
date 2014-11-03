@@ -17,15 +17,16 @@
  */
 
 #include "StelVideoMgr.hpp"
-#include "StelMainGraphicsView.hpp"
+#include "StelMainView.hpp"
 #include <QDebug>
+#include <QDir>
 
 
 StelVideoMgr::StelVideoMgr()
 {
 }
 
-#ifdef HAVE_QT_PHONON
+#if 0
 StelVideoMgr::~StelVideoMgr()
 {
 	foreach(QString id, videoObjects.keys())
@@ -47,8 +48,8 @@ void StelVideoMgr::loadVideo(const QString& filename, const QString& id, float x
 	videoObjects[id]->player = new Phonon::VideoPlayer(Phonon::VideoCategory, videoObjects[id]->widget);
 
 	videoObjects[id]->player->load(Phonon::MediaSource(filename));
-	videoObjects[id]->pWidget = 
-		StelMainGraphicsView::getInstance().scene()->addWidget(videoObjects[id]->widget, Qt::FramelessWindowHint);
+	videoObjects[id]->pWidget =
+		StelMainView::getInstance().scene()->addWidget(videoObjects[id]->widget, Qt::FramelessWindowHint);
 
 	videoObjects[id]->pWidget->setPos(x, y);
 	videoObjects[id]->pWidget->setOpacity(alpha);
@@ -160,8 +161,8 @@ void StelVideoMgr::resizeVideo(const QString& id, float w, float h)
 	{
 		if (videoObjects[id]->pWidget!=NULL)
 		{
-			videoObjects[id]->pWidget->resize(w, h); 
-			videoObjects[id]->player->resize(w, h); 
+			videoObjects[id]->pWidget->resize(w, h);
+			videoObjects[id]->player->resize(w, h);
 		}
 	}
 }
@@ -177,10 +178,10 @@ void StelVideoMgr::showVideo(const QString& id, bool show)
 	}
 }
 
-#else  // HAVE_QT_PHONON
+#else 
 void StelVideoMgr::loadVideo(const QString& filename, const QString& id, float x, float y, bool show, float alpha)
 {
-	qWarning() << "[StelVideoMgr] This build of Stellarium does not support video - cannot load video" << filename << id << x << y << show << alpha;
+	qWarning() << "[StelVideoMgr] This build of Stellarium does not support video - cannot load video" << QDir::toNativeSeparators(filename) << id << x << y << show << alpha;
 }
 StelVideoMgr::~StelVideoMgr() {;}
 void StelVideoMgr::playVideo(const QString&) {;}

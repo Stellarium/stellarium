@@ -21,6 +21,7 @@
 #include "SolarSystemEditor.hpp"
 #include "SolarSystemManagerWindow.hpp"
 
+#include "StelUtils.hpp"
 #include "StelApp.hpp"
 #include "StelGui.hpp"
 #include "StelGuiItems.hpp"
@@ -57,10 +58,9 @@ StelPluginInfo SolarSystemEditorStelPluginInterface::getPluginInfo() const
 	info.authors = "Bogdan Marinov";
 	info.contact = "http://stellarium.org";
 	info.description = N_("An interface for adding asteroids and comets to Stellarium. It can download object lists from the Minor Planet Center's website and perform searches in its online database. Still a work in progress.");
+	info.version = SOLARSYSTEMEDITOR_VERSION;
 	return info;
 }
-
-Q_EXPORT_PLUGIN2(SolarSystemEditor, SolarSystemEditorStelPluginInterface)
 
 SolarSystemEditor::SolarSystemEditor()
 {
@@ -95,7 +95,7 @@ void SolarSystemEditor::init()
 	else
 	{
 		//TODO: Better error message
-		qDebug() << "Something is horribly wrong:" << StelFileMgr::getInstallationDir();
+		qDebug() << "Something is horribly wrong:" << QDir::toNativeSeparators(StelFileMgr::getInstallationDir());
 		return;
 	}
 
@@ -196,12 +196,12 @@ bool SolarSystemEditor::cloneSolarSystemConfigurationFile()
 	QDir userDataDirectory(StelFileMgr::getUserDir());
 	if (!userDataDirectory.exists())
 	{
-		qDebug() << "Unable to find user data directory:" << userDataDirectory.absolutePath();
+		qDebug() << "Unable to find user data directory:" << QDir::toNativeSeparators(userDataDirectory.absolutePath());
 		return false;
 	}
 	if (!userDataDirectory.exists("data") && !userDataDirectory.mkdir("data"))
 	{
-		qDebug() << "Unable to create a \"data\" subdirectory in" << userDataDirectory.absolutePath();
+		qDebug() << "Unable to create a \"data\" subdirectory in" << QDir::toNativeSeparators(userDataDirectory.absolutePath());
 		return false;
 	}
 
@@ -213,7 +213,7 @@ bool SolarSystemEditor::cloneSolarSystemConfigurationFile()
 
 	if (QFile::exists(defaultSolarSystemFilePath))
 	{
-		qDebug() << "Trying to copy ssystem.ini to" << customSolarSystemFilePath;
+		qDebug() << "Trying to copy ssystem.ini to" << QDir::toNativeSeparators(customSolarSystemFilePath);
 		return QFile::copy(defaultSolarSystemFilePath, customSolarSystemFilePath);
 	}
 	else
@@ -229,7 +229,7 @@ bool SolarSystemEditor::resetSolarSystemConfigurationFile()
 	{
 		if (!QFile::remove((customSolarSystemFilePath)))
 		{
-			qWarning() << "Unable to delete" << customSolarSystemFilePath
+			qWarning() << "Unable to delete" << QDir::toNativeSeparators(customSolarSystemFilePath)
 			         << endl << "Please remove the file manually.";
 			return false;
 		}
@@ -280,7 +280,7 @@ bool SolarSystemEditor::replaceSolarSystemConfigurationFileWith(QString filePath
 	QSettings settings(filePath, QSettings::IniFormat);
 	if (settings.status() != QSettings::NoError)
 	{
-		qWarning() << filePath << "is not a valid configuration file.";
+		qWarning() << QDir::toNativeSeparators(filePath) << "is not a valid configuration file.";
 		return false;
 	}
 
@@ -370,7 +370,7 @@ bool SolarSystemEditor::removeSsoWithName(QString name)
 	//Make sure that the file exists
 	if (!QFile::exists(customSolarSystemFilePath))
 	{
-		qDebug() << "Can't remove" << name << "to ssystem.ini: Unable to find" << customSolarSystemFilePath;
+		qDebug() << "Can't remove" << name << "to ssystem.ini: Unable to find" << QDir::toNativeSeparators(customSolarSystemFilePath);
 		return false;
 	}
 
@@ -378,7 +378,7 @@ bool SolarSystemEditor::removeSsoWithName(QString name)
 	QSettings settings(customSolarSystemFilePath, QSettings::IniFormat);
 	if (settings.status() != QSettings::NoError)
 	{
-		qDebug() << "Error opening ssystem.ini:" << customSolarSystemFilePath;
+		qDebug() << "Error opening ssystem.ini:" << QDir::toNativeSeparators(customSolarSystemFilePath);
 		return false;
 	}
 
@@ -419,6 +419,7 @@ bool SolarSystemEditor::removeSsoWithName(QString name)
 SsoElements SolarSystemEditor::readMpcOneLineCometElements(QString oneLineElements)
 {
 	SsoElements result;
+	//qDebug() << "readMpcOneLineCometElements started..."; // GZ
 
 	QRegExp mpcParser("^\\s*(\\d{4})?([A-Z])((?:\\w{6}|\\s{6})?[0a-zA-Z])?\\s+(\\d{4})\\s+(\\d{2})\\s+(\\d{1,2}\\.\\d{3,4})\\s+(\\d{1,2}\\.\\d{5,6})\\s+(\\d\\.\\d{5,6})\\s+(\\d{1,3}\\.\\d{3,4})\\s+(\\d{1,3}\\.\\d{3,4})\\s+(\\d{1,3}\\.\\d{3,4})\\s+(?:(\\d{4})(\\d\\d)(\\d\\d))?\\s+(\\-?\\d{1,2}\\.\\d)\\s+(\\d{1,2}\\.\\d)\\s+(\\S.{1,54}\\S)(?:\\s+(\\S.*))?$");//
 
@@ -470,6 +471,8 @@ SsoElements SolarSystemEditor::readMpcOneLineCometElements(QString oneLineElemen
 	//"comet_orbit" is used for all cases:
 	//"ell_orbit" interprets distances as kilometers, not AUs
 	result.insert("coord_func","comet_orbit");
+	// GZ: moved next line below!
+	//result.insert("orbit_good", 1000); // default validity for osculating elements, days
 
 	result.insert("lighting", false);
 	result.insert("color", "1.0, 1.0, 1.0");
@@ -508,6 +511,18 @@ SsoElements SolarSystemEditor::readMpcOneLineCometElements(QString oneLineElemen
 	double inclination = mpcParser.cap(11).toDouble(&ok);
 	result.insert("orbit_Inclination", inclination);
 
+	// GZ: We should reduce orbit_good for elliptical orbits to one half period before/after perihel!
+	if (eccentricity < 1.0)
+	{
+		// Heafner, p.71
+		const double mu=(0.01720209895*0.01720209895); // GAUSS_GRAV_CONST^2
+		const double meanMotion=std::sqrt(mu/(perihelionDistance*perihelionDistance*perihelionDistance)); // radians/day
+		double period=M_PI*2.0 / meanMotion; // period, days
+		result.insert("orbit_good", qMin(1000, (int) floor(0.5*period))); // validity for elliptical osculating elements, days. Goes from aphel to next aphel or max 1000 days.
+	}
+	else
+		result.insert("orbit_good", 1000); // default validity for osculating elements, days
+
 	double absoluteMagnitude = mpcParser.cap(15).toDouble(&ok);
 	result.insert("absolute_magnitude", absoluteMagnitude);
 
@@ -517,8 +532,11 @@ SsoElements SolarSystemEditor::readMpcOneLineCometElements(QString oneLineElemen
 
 	double radius = 5; //Fictitious
 	result.insert("radius", radius);
-	result.insert("albedo", 1);
-
+	result.insert("albedo", 0.1); // GZ 2014-01-10: Comets are very dark, should even be 0.03!
+	result.insert("dust_lengthfactor", 0.4); // dust tail length w.r.t. gas tail length
+	result.insert("dust_brightnessfactor", 1.5); // dust tail brightness w.r.t. gas tail.
+	result.insert("dust_widthfactor", 1.5); // opening w.r.t. gas tail opening width.
+	//qDebug() << "readMpcOneLineCometElements done\n";
 	return result;
 }
 
@@ -567,11 +585,11 @@ SsoElements SolarSystemEditor::readMpcOneLineMinorPlanetElements(QString oneLine
 			QChar prefix = packedMinorPlanetNumber.cap(1).at(0);
 			if (prefix.isUpper())
 			{
-				minorPlanetNumber += ((10 + prefix.toAscii() - 'A') * 10000);
+				minorPlanetNumber += ((10 + prefix.toLatin1() - 'A') * 10000);
 			}
 			else
 			{
-				minorPlanetNumber += ((10 + prefix.toAscii() - 'a' + 26) * 10000);
+				minorPlanetNumber += ((10 + prefix.toLatin1() - 'a' + 26) * 10000);
 			}
 		}
 		else
@@ -699,7 +717,7 @@ SsoElements SolarSystemEditor::readMpcOneLineMinorPlanetElements(QString oneLine
 		return SsoElements();
 	}
 	int year = packedDateFormat.cap(2).toInt();
-	switch (packedDateFormat.cap(1).at(0).toAscii())
+	switch (packedDateFormat.cap(1).at(0).toLatin1())
 	{
 		case 'I':
 			year += 1800;
@@ -986,7 +1004,7 @@ QList<SsoElements> SolarSystemEditor::readMpcOneLineCometElementsFromFile(QStrin
 
 	if (!QFile::exists(filePath))
 	{
-		qDebug() << "Can't find" << filePath;
+		qDebug() << "Can't find" << QDir::toNativeSeparators(filePath);
 		return objectList;
 	}
 
@@ -1026,7 +1044,7 @@ QList<SsoElements> SolarSystemEditor::readMpcOneLineCometElementsFromFile(QStrin
 	}
 	else
 	{
-		qDebug() << "Unable to open for reading" << filePath;
+		qDebug() << "Unable to open for reading" << QDir::toNativeSeparators(filePath);
 		qDebug() << "File error:" << mpcElementsFile.errorString();
 		return objectList;
 	}
@@ -1040,7 +1058,7 @@ QList<SsoElements> SolarSystemEditor::readMpcOneLineMinorPlanetElementsFromFile(
 
 	if (!QFile::exists(filePath))
 	{
-		qDebug() << "Can't find" << filePath;
+		qDebug() << "Can't find" << QDir::toNativeSeparators(filePath);
 		return objectList;
 	}
 
@@ -1080,7 +1098,7 @@ QList<SsoElements> SolarSystemEditor::readMpcOneLineMinorPlanetElementsFromFile(
 	}
 	else
 	{
-		qDebug() << "Unable to open for reading" << filePath;
+		qDebug() << "Unable to open for reading" << QDir::toNativeSeparators(filePath);
 		qDebug() << "File error:" << mpcElementsFile.errorString();
 		return objectList;
 	}
@@ -1094,7 +1112,7 @@ QList<SsoElements> SolarSystemEditor::readXEphemOneLineElementsFromFile(QString 
 
 	if (!QFile::exists(filePath))
 	{
-		qDebug() << "Can't find" << filePath;
+		qDebug() << "Can't find" << QDir::toNativeSeparators(filePath);
 		return objectList;
 	}
 
@@ -1139,7 +1157,7 @@ QList<SsoElements> SolarSystemEditor::readXEphemOneLineElementsFromFile(QString 
 	}
 	else
 	{
-		qDebug() << "Unable to open for reading" << filePath;
+		qDebug() << "Unable to open for reading" << QDir::toNativeSeparators(filePath);
 		qDebug() << "File error:" << xEphemElementsFile.errorString();
 		return objectList;
 	}
@@ -1149,6 +1167,7 @@ QList<SsoElements> SolarSystemEditor::readXEphemOneLineElementsFromFile(QString 
 
 bool SolarSystemEditor::appendToSolarSystemConfigurationFile(QList<SsoElements> objectList)
 {
+	qDebug() << "appendToSolarSystemConfigurationFile begin ... "; // GZ
 	if (objectList.isEmpty())
 	{
 		return false;
@@ -1157,7 +1176,7 @@ bool SolarSystemEditor::appendToSolarSystemConfigurationFile(QList<SsoElements> 
 	//Check if the configuration file exists
 	if (!QFile::exists(customSolarSystemFilePath))
 	{
-		qDebug() << "Can't append object data to ssystem.ini: Unable to find" << customSolarSystemFilePath;
+		qDebug() << "Can't append object data to ssystem.ini: Unable to find" << QDir::toNativeSeparators(customSolarSystemFilePath);
 		return false;
 	}
 
@@ -1168,7 +1187,7 @@ bool SolarSystemEditor::appendToSolarSystemConfigurationFile(QList<SsoElements> 
 	QSettings * solarSystemSettings = new QSettings(customSolarSystemFilePath, QSettings::IniFormat);
 	if (solarSystemSettings->status() != QSettings::NoError)
 	{
-		qDebug() << "Error opening ssystem.ini:" << customSolarSystemFilePath;
+		qDebug() << "Error opening ssystem.ini:" << QDir::toNativeSeparators(customSolarSystemFilePath);
 		return false;
 	}
 	foreach (SsoElements object, objectList)
@@ -1230,11 +1249,13 @@ bool SolarSystemEditor::appendToSolarSystemConfigurationFile(QList<SsoElements> 
 		}
 
 		solarSystemConfigurationFile.close();
+		qDebug() << "appendToSolarSystemConfigurationFile appended: " << appendedAtLeastOne; // GZ
+
 		return appendedAtLeastOne;
 	}
 	else
 	{
-		qDebug() << "Unable to open for writing" << customSolarSystemFilePath;
+		qDebug() << "Unable to open for writing" << QDir::toNativeSeparators(customSolarSystemFilePath);
 		return false;
 	}
 }
@@ -1264,14 +1285,14 @@ bool SolarSystemEditor::updateSolarSystemConfigurationFile(QList<SsoElements> ob
 	//Check if the configuration file exists
 	if (!QFile::exists(customSolarSystemFilePath))
 	{
-		qDebug() << "Can't update ssystem.ini: Unable to find" << customSolarSystemFilePath;
+		qDebug() << "Can't update ssystem.ini: Unable to find" << QDir::toNativeSeparators(customSolarSystemFilePath);
 		return false;
 	}
 
 	QSettings solarSystem(customSolarSystemFilePath, QSettings::IniFormat);
 	if (solarSystem.status() != QSettings::NoError)
 	{
-		qDebug() << "Error opening ssystem.ini:" << customSolarSystemFilePath;
+		qDebug() << "Error opening ssystem.ini:" << QDir::toNativeSeparators(customSolarSystemFilePath);
 		return false;
 	}
 	QStringList existingSections = solarSystem.childGroups();
@@ -1283,6 +1304,10 @@ bool SolarSystemEditor::updateSolarSystemConfigurationFile(QList<SsoElements> ob
 			<< "orbit_AscendingNode"
 			<< "orbit_Eccentricity"
 			<< "orbit_Epoch"
+			<< "orbit_good"                                // GZ ADDITION (4x)
+			<< "dust_lengthfactor"
+			<< "dust_brightnessfactor"
+			<< "dust_widthfactor"
 			<< "orbit_Inclination"
 			<< "orbit_LongOfPericenter"
 			<< "orbit_MeanAnomaly"
@@ -1432,7 +1457,7 @@ int SolarSystemEditor::unpackDayOrMonthNumber(QChar digit)
 
 	if (digit.isUpper())
 	{
-		char letter = digit.toAscii();
+		char letter = digit.toLatin1();
 		if (letter < 'A' || letter > 'V')
 			return 0;
 		return (10 + (letter - 'A'));
@@ -1466,9 +1491,9 @@ int SolarSystemEditor::unpackAlphanumericNumber (QChar prefix, int lastDigit)
 	if (prefix.isDigit())
 		cycleCount += prefix.digitValue() * 10;
 	else if (prefix.isLetter() && prefix.isUpper())
-		cycleCount += (10 + prefix.toAscii() - QChar('A').toAscii()) * 10;
+		cycleCount += (10 + prefix.toLatin1() - QChar('A').toLatin1()) * 10;
 	else if (prefix.isLetter() && prefix.isLower())
-		cycleCount += (10 + prefix.toAscii() - QChar('a').toAscii()) * 10 + 26*10;
+		cycleCount += (10 + prefix.toLatin1() - QChar('a').toLatin1()) * 10 + 26*10;
 	else
 		cycleCount = 0; //Error
 

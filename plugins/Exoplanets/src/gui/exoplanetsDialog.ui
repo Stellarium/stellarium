@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>530</width>
-    <height>483</height>
+    <height>501</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,7 +17,16 @@
    <property name="spacing">
     <number>0</number>
    </property>
-   <property name="margin">
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
     <number>0</number>
    </property>
    <item>
@@ -125,6 +134,9 @@
    </item>
    <item>
     <widget class="QTabWidget" name="tabs">
+     <property name="currentIndex">
+      <number>0</number>
+     </property>
      <property name="documentMode">
       <bool>false</bool>
      </property>
@@ -227,6 +239,59 @@
         </widget>
        </item>
        <item>
+        <widget class="QGroupBox" name="displayBox">
+         <property name="title">
+          <string>Settings for exoplanets</string>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout">
+          <item>
+           <widget class="QCheckBox" name="displayModeCheckBox">
+            <property name="toolTip">
+             <string>Plot all systems with exoplanets without labels</string>
+            </property>
+            <property name="text">
+             <string>Enable display of distribution for exoplanets</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="timelineModeCheckBox">
+            <property name="toolTip">
+             <string>Display exoplanets since their discovery</string>
+            </property>
+            <property name="text">
+             <string>Enable timeline discovery of exoplanets</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="habitableModeCheckBox">
+            <property name="toolTip">
+             <string>Display of the planetary systems, which contains the potential habitable exoplanets</string>
+            </property>
+            <property name="text">
+             <string>Enable display of the potential habitable exoplanets only</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="displayAtStartupCheckBox">
+            <property name="text">
+             <string>Enable display at startup</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="displayShowExoplanetsButton">
+            <property name="text">
+             <string>Show exoplanets button on toolbar</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
         <spacer name="verticalSpacer_3">
          <property name="orientation">
           <enum>Qt::Vertical</enum>
@@ -271,11 +336,51 @@
        </item>
       </layout>
      </widget>
+     <widget class="QWidget" name="infoTab">
+      <attribute name="title">
+       <string comment="tab in plugin windows">Info</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayoutInfoBox">
+       <property name="spacing">
+        <number>9</number>
+       </property>
+       <item>
+        <widget class="QTextBrowser" name="infoTextBrowser">
+         <property name="openExternalLinks">
+          <bool>true</bool>
+         </property>
+         <property name="openLinks">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="websitesTab">
+      <attribute name="title">
+       <string comment="tab in plugin windows">Websites</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayoutWebsitesBox">
+       <property name="spacing">
+        <number>9</number>
+       </property>
+       <item>
+        <widget class="QTextBrowser" name="websitesTextBrowser">
+         <property name="openExternalLinks">
+          <bool>true</bool>
+         </property>
+         <property name="openLinks">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
      <widget class="QWidget" name="aboutTab">
       <attribute name="title">
        <string comment="tab in plugin windows">About</string>
       </attribute>
-      <layout class="QVBoxLayout" name="verticalLayout_11">
+      <layout class="QVBoxLayout" name="verticalLayoutAboutBox">
        <property name="spacing">
         <number>9</number>
        </property>

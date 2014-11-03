@@ -24,7 +24,6 @@
 #include <QObject>
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
-#include <QProgressBar>
 #include <QStandardItemModel>
 #include "StelDialog.hpp"
 
@@ -116,8 +115,8 @@ private:
 	QNetworkAccessManager * networkManager;
 	QNetworkReply * downloadReply;
 	QNetworkReply * queryReply;
-	QProgressBar * downloadProgressBar;
-	QProgressBar * queryProgressBar;
+	class StelProgressController * downloadProgressBar;
+	class StelProgressController * queryProgressBar;
 	void startDownload(QString url);
 	void deleteDownloadProgressBar();
 	void deleteQueryProgressBar();

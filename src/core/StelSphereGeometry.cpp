@@ -17,13 +17,13 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#include <QDebug>
-#include <QBuffer>
-#include <stdexcept>
-
 #include "StelSphereGeometry.hpp"
 #include "StelUtils.hpp"
 #include "StelJsonParser.hpp"
+
+#include <QDebug>
+#include <QBuffer>
+#include <stdexcept>
 
 // Definition of static constants.
 int SphericalRegionP::metaTypeId = SphericalRegionP::initialize();
@@ -187,8 +187,8 @@ SphericalRegionP SphericalRegion::getIntersection(const SphericalRegion* r) cons
 		default:
 			return getIntersectionDefault(r);
 	}
-	Q_ASSERT(0);
-	return SphericalRegionP();
+	// Q_ASSERT(0);
+	// return SphericalRegionP();
 }
 SphericalRegionP SphericalRegion::getIntersection(const SphericalPolygon& r) const {return getIntersectionDefault(&r);}
 SphericalRegionP SphericalRegion::getIntersection(const SphericalConvexPolygon& r) const {return getIntersectionDefault(&r);}
@@ -216,8 +216,8 @@ SphericalRegionP SphericalRegion::getUnion(const SphericalRegion* r) const
 		default:
 			return getUnionDefault(r);
 	}
-	Q_ASSERT(0);
-	return SphericalRegionP();
+	// Q_ASSERT(0);
+	// return SphericalRegionP();
 }
 SphericalRegionP SphericalRegion::getUnion(const SphericalPolygon& r) const {return getUnionDefault(&r);}
 SphericalRegionP SphericalRegion::getUnion(const SphericalConvexPolygon& r) const {return getUnionDefault(&r);}
@@ -246,8 +246,8 @@ SphericalRegionP SphericalRegion::getSubtraction(const SphericalRegion* r) const
 		default:
 			return getSubtractionDefault(r);
 	}
-	Q_ASSERT(0);
-	return SphericalRegionP();
+	// Q_ASSERT(0);
+	// return SphericalRegionP();
 }
 SphericalRegionP SphericalRegion::getSubtraction(const SphericalPolygon& r) const {return getSubtractionDefault(&r);}
 SphericalRegionP SphericalRegion::getSubtraction(const SphericalConvexPolygon& r) const {return getSubtractionDefault(&r);}
@@ -709,7 +709,8 @@ struct TriangleSerializer
 
 	TriangleSerializer() {}
 	inline void operator()(const Vec3d* v1, const Vec3d* v2, const Vec3d* v3,
-						   const Vec2f* , const Vec2f* , const Vec2f* ,
+			       const Vec2f* , const Vec2f* , const Vec2f* ,
+			       const Vec3f* , const Vec3f* , const Vec3f* , // GZ NEW
 						   unsigned int , unsigned int , unsigned int )
 	{
 		QVariantList triangle;
@@ -1151,7 +1152,8 @@ struct TriangleDumper
 
 	TriangleDumper() {}
 	inline void operator()(const Vec3d* v1, const Vec3d* v2, const Vec3d* v3,
-						   const Vec2f* , const Vec2f* , const Vec2f* ,
+			       const Vec2f* , const Vec2f* , const Vec2f* ,
+			       const Vec3f* , const Vec3f* , const Vec3f* , // GZ NEW
 						   unsigned int , unsigned int , unsigned int )
 	{
 		QVector<Vec3d> triangle;
@@ -1373,8 +1375,8 @@ SphericalRegionP SphericalRegionP::loadFromQVariant(const QVariantMap& map)
 		}
 		return SphericalRegionP(new SphericalTexturedPolygon(contours));
 	}
-	Q_ASSERT(0);
-	return SphericalRegionP(new SphericalCap());
+	// Q_ASSERT(0);
+	// return SphericalRegionP(new SphericalCap());
 }
 
 void SphericalRegionP::serializeToJson(const QVariant& jsonObject, QIODevice* output, int indentLevel)

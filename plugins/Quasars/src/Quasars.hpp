@@ -22,7 +22,6 @@
 #include "StelObjectModule.hpp"
 #include "StelObject.hpp"
 #include "StelTextureTypes.hpp"
-#include "StelPainter.hpp"
 #include "Quasar.hpp"
 #include <QFont>
 #include <QVariantMap>
@@ -34,9 +33,10 @@ class StelPainter;
 
 class QNetworkAccessManager;
 class QNetworkReply;
-class QProgressBar;
 class QSettings;
 class QTimer;
+class QPixmap;
+class StelButton;
 class QuasarsDialog;
 
 typedef QSharedPointer<Quasar> QuasarP;
@@ -45,7 +45,8 @@ typedef QSharedPointer<Quasar> QuasarP;
 class Quasars : public StelObjectModule
 {
 	Q_OBJECT
-public:	
+	Q_PROPERTY(bool quasarsVisible READ getFlagShowQuasars WRITE setFlagShowQuasars)
+public:
 	//! @enum UpdateState
 	//! Used for keeping for track of the download/update status
 	enum UpdateState {
@@ -88,8 +89,21 @@ public:
 	//! Find and return the list of at most maxNbItem objects auto-completing the passed object I18n name.
 	//! @param objPrefix the case insensitive first letters of the searched object
 	//! @param maxNbItem the maximum number of returned object names
+	//! @param useStartOfWords the autofill mode for returned objects names
 	//! @return a list of matching object name by order of relevance, or an empty list if nothing match
-	virtual QStringList listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem=5) const;
+	virtual QStringList listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false) const;
+
+	//! Find and return the list of at most maxNbItem objects auto-completing the passed object English name.
+	//! @param objPrefix the case insensitive first letters of the searched object
+	//! @param maxNbItem the maximum number of returned object names
+	//! @param useStartOfWords the autofill mode for returned objects names
+	//! @return a list of matching object name by order of relevance, or an empty list if nothing match
+	virtual QStringList listMatchingObjects(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false) const;
+
+	virtual QStringList listAllObjects(bool inEnglish) const;
+	virtual QStringList listAllObjectsByType(const QString& objType, bool inEnglish) const { Q_UNUSED(objType) Q_UNUSED(inEnglish) return QStringList(); }
+
+	virtual QString getName() const { return "Quasars"; }
 
 	//! get a Quasar object by identifier
 	QuasarP getByID(const QString& id);
@@ -117,8 +131,12 @@ public:
 	//! @param b if true, updates will be enabled, else they will be disabled
 	void setUpdatesEnabled(bool b) {updatesEnabled=b;}
 
-	bool getDisplayMode(void) {return distributionEnabled;}
-	void setDisplayMode(bool b) {distributionEnabled=b;}
+	bool getDisplayMode(void);
+	void setDisplayMode(bool b);
+	QString getMarkerColor(void);
+	void setMarkerColor(QString c);
+	void setEnableAtStartup(bool b) { enableAtStartup=b; }
+	bool getEnableAtStartup(void) { return enableAtStartup; }
 
 	//! get the date and time the TLE elements were updated
 	QDateTime getLastUpdate(void) {return lastUpdate;}
@@ -133,6 +151,9 @@ public:
 	//! Get the current updateState
 	UpdateState getUpdateState(void) {return updateState;}
 
+	//! Get count of quasars from catalog
+	int getCountQuasars(void) {return QsrCount;}
+
 signals:
 	//! @param state the new update state.
 	void updateStateChanged(Quasars::UpdateState state);
@@ -145,6 +166,13 @@ public slots:
 	//! module.ini file and update the local JSON file.
 	void updateJSON(void);
 
+	void setFlagShowQuasars(bool b) { flagShowQuasars=b; }
+	bool getFlagShowQuasars(void) { return flagShowQuasars; }
+
+	//! Define whether the button toggling quasars should be visible
+	void setFlagShowQuasarsButton(bool b);
+	bool getFlagShowQuasarsButton(void) { return flagShowQuasarsButton; }
+
 	//! Display a message. This is used for plugin-specific warnings and such
 	void displayMessage(const QString& message, const QString hexColor="#999999");
 	void messageTimeout(void);
@@ -155,6 +183,9 @@ private:
 
 	// if existing, delete Satellites section in main config.ini, then create with default values
 	void restoreDefaultConfigIni(void);
+
+	// Upgrade config.ini: rename old key settings to new
+	void upgradeConfigIni(void);
 
 	//! replace the json file with the default from the compiled-in resource
 	void restoreDefaultJsonFile(void);
@@ -167,9 +198,13 @@ private:
 	//! @return true on OK, false on failure
 	bool backupJsonFile(bool deleteOriginal=false);
 
-	//! Get the version from the "version" value in the catalog.json file
-	//! @return version string, e.g. "0.2.1"
-	int getJsonFileVersion(void);
+	//! Get the version from the "version of the format" value in the catalog.json file
+	//! @return version string, e.g. "1"
+	int getJsonFileFormatVersion(void);
+
+	//! Check format of the catalog of quasars
+	//! @return valid boolean, e.g. "true"
+	bool checkJsonFileFormat(void);
 
 	//! parse JSON file and load quasars to map
 	QVariantMap loadQSOMap(QString path=QString());
@@ -179,27 +214,34 @@ private:
 
 	QString catalogJsonPath;
 
+	int QsrCount;
+
 	StelTextureSP texPointer;
 	QList<QuasarP> QSO;
 
 	// variables and functions for the updater
 	UpdateState updateState;
 	QNetworkAccessManager* downloadMgr;
-	QString updateUrl;
-	QString updateFile;
-	QProgressBar* progressBar;
+	QString updateUrl;	
 	QTimer* updateTimer;
 	QTimer* messageTimer;
 	QList<int> messageIDs;
 	bool updatesEnabled;
 	QDateTime lastUpdate;
-	int updateFrequencyDays;
-	bool distributionEnabled;
+	int updateFrequencyDays;	
+	bool enableAtStartup;
 
 	QSettings* conf;
 
 	// GUI
 	QuasarsDialog* configDialog;
+	bool flagShowQuasars;
+	bool flagShowQuasarsButton;
+	QPixmap* OnIcon;
+	QPixmap* OffIcon;
+	QPixmap* GlowIcon;
+	StelButton* toolbarButton;
+	class StelProgressController* progressBar;
 
 private slots:
 	//! check to see if an update is required.  This is called periodically by a timer
@@ -211,7 +253,7 @@ private slots:
 };
 
 
-#include "fixx11h.h"
+
 #include <QObject>
 #include "StelPluginInterface.hpp"
 
@@ -219,6 +261,7 @@ private slots:
 class QuasarsStelPluginInterface : public QObject, public StelPluginInterface
 {
 	Q_OBJECT
+	Q_PLUGIN_METADATA(IID "stellarium.StelGuiPluginInterface/1.0")
 	Q_INTERFACES(StelPluginInterface)
 public:
 	virtual StelModule* getStelModule() const;

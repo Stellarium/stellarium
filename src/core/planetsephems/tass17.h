@@ -67,7 +67,7 @@ extern "C" {
 #define TASS17_IAPETUS   6
 
 void GetTass17Coor(double jd,int body,double *xyz);
-void GetTass17OsculatingCoor(double jd0,double jd,int body,double *xyz);
+void GetTass17OsculatingCoor(const double jd0,const double jd, const int body,double *xyz);
 
 #ifdef __cplusplus
 }

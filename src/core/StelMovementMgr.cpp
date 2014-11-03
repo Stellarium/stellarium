@@ -23,29 +23,53 @@
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelUtils.hpp"
+#include "StelTranslator.hpp"
+#include "ConstellationMgr.hpp"
 
+#include <cmath>
 #include <QString>
 #include <QTextStream>
 #include <QSettings>
 #include <QKeyEvent>
 #include <QDebug>
 
-StelMovementMgr::StelMovementMgr(StelCore* acore) : core(acore),
-	flagLockEquPos(false),
-	flagTracking(false),
-	isMouseMovingHoriz(false),
-	isMouseMovingVert(false),
-	flagEnableMouseNavigation(true),
-	keyMoveSpeed(0.00025),
-	flagMoveSlow(false),
-	flagAutoMove(false),
-	deltaFov(0.),
-	deltaAlt(0.),
-	deltaAz(0.),
-	dragTimeMode(false),
-	flagAutoZoom(0),
-	flagAutoZoomOutResetsDirection(0),
-	dragTriggerDistance(4.f)
+StelMovementMgr::StelMovementMgr(StelCore* acore)
+	: currentFov(60.)
+	, initFov(60.)
+	, minFov(0.0001)
+	, maxFov(100.)
+	, initConstellationIntensity(0.45)
+	, core(acore)
+	, objectMgr(NULL)
+	, flagLockEquPos(false)
+	, flagTracking(false)
+	, isMouseMovingHoriz(false)
+	, isMouseMovingVert(false)
+	, flagEnableMoveAtScreenEdge(false)
+	, flagEnableMouseNavigation(true)
+	, mouseZoomSpeed(30)
+	, flagEnableZoomKeys(true)
+	, flagEnableMoveKeys(true)
+	, keyMoveSpeed(0.00025)
+	, keyZoomSpeed(0.00025)
+	, flagMoveSlow(false)
+	, movementsSpeedFactor(1.5)
+	, flagAutoMove(false)
+	, zoomingMode(0)
+	, deltaFov(0.)
+	, deltaAlt(0.)
+	, deltaAz(0.)
+	, flagManualZoom(false)
+	, autoMoveDuration(1.5)
+	, hasDragged(false)
+	, previousX(0)
+	, previousY(0)
+	, beforeTimeDragTimeRate(0.)
+	, dragTimeMode(false)
+	, zoomMove()
+	, flagAutoZoom(0)
+	, flagAutoZoomOutResetsDirection(0)
+	, dragTriggerDistance(4.f)
 {
 	setObjectName("StelMovementMgr");
 	isDragging = false;
@@ -84,6 +108,7 @@ void StelMovementMgr::init()
 	maxFov = 100.;
 	initFov = conf->value("navigation/init_fov",60.f).toFloat();
 	currentFov = initFov;
+	setInitConstellationIntensity(conf->value("viewing/constellation_art_intensity", 0.5f).toFloat());
 
 	Vec3f tmp = StelUtils::strToVec3f(conf->value("navigation/init_view_pos").toString());
 	initViewPos.set(tmp[0], tmp[1], tmp[2]);
@@ -102,6 +127,13 @@ void StelMovementMgr::init()
 			setMountMode(StelMovementMgr::MountEquinoxEquatorial);
 		}
 	}
+
+	QString movementGroup = N_("Movement and Selection");
+	addAction("actionSwitch_Equatorial_Mount", N_("Miscellaneous"), N_("Switch between equatorial and azimuthal mount"), "equatorialMount", "Ctrl+M");
+	addAction("actionGoto_Selected_Object", movementGroup, N_("Center on selected object"), "setFlagTracking()", "Space");
+	addAction("actionZoom_In_Auto", movementGroup, N_("Zoom in on selected object"), "autoZoomIn()", "/");
+	addAction("actionZoom_Out_Auto", movementGroup, N_("Zoom out"), "autoZoomOut()", "\\");
+	addAction("actionSet_Tracking", movementGroup, N_("Track object"), "tracking", "T");
 }
 
 void StelMovementMgr::setMountMode(MountMode m)
@@ -272,9 +304,16 @@ void StelMovementMgr::handleMouseWheel(QWheelEvent* event)
 {
 	if (flagEnableMouseNavigation==false)
 		return;
-	int numDegrees = event->delta() / 8;
-	int numSteps = numDegrees / 15;
-	zoomTo(getAimFov()-mouseZoomSpeed*numSteps*getAimFov()/60., 0.2);
+
+	// Manage only vertical wheel event
+	if (event->orientation() != Qt::Vertical)
+		return;
+  
+	const float numSteps = event->delta() / 120.f;
+	const float zoomFactor = std::exp(-mouseZoomSpeed * numSteps / 60.f);
+	const float zoomDuration = 0.2f * qAbs(numSteps);
+	zoomTo(getAimFov() * zoomFactor, zoomDuration);
+
 	event->accept();
 }
 
@@ -288,6 +327,21 @@ void StelMovementMgr::addTimeDragPoint(int x, int y)
 	timeDragHistory.append(e);
 	if (timeDragHistory.size()>3)
 		timeDragHistory.removeFirst();
+}
+
+bool StelMovementMgr::handlePinch(qreal scale, bool started)
+{
+#ifdef Q_OS_WIN
+	if (flagEnableMouseNavigation == false)
+		return true;
+#endif
+
+	static double previousFov = 0;
+	if (started)
+		previousFov = getAimFov();
+	if (scale>0)
+		zoomTo(previousFov/scale, 0);
+	return true;
 }
 
 void StelMovementMgr::handleMouseClicks(QMouseEvent* event)
@@ -380,7 +434,8 @@ void StelMovementMgr::handleMouseClicks(QMouseEvent* event)
 					{
 						setFlagTracking(false);
 					}
-					event->accept();
+					//GZ: You must comment out this line for testing Landscape transparency debug prints.
+					//event->accept();
 					return;
 				}
 			}
@@ -753,7 +808,7 @@ void StelMovementMgr::moveToJ2000(const Vec3d& aim, float moveDuration, int zoom
 	move.aim=aim;
 	move.aim.normalize();
 	move.aim*=2.;
-	move.start=viewDirectionJ2000;
+	move.start=viewDirectionJ2000;	
 	move.start.normalize();
 	move.speed=1.f/(moveDuration*1000);
 	move.coef=0.;
@@ -851,7 +906,7 @@ void StelMovementMgr::dragView(int x1, int y1, int x2, int y2)
 		v1[2]=0; v1.normalize();
 		v2[2]=0; v2.normalize();
 		double angle = (v2^v1)[2];
-		double deltaDay = angle/(2.*M_PI)*core->getLocalSideralDayLength();
+		double deltaDay = angle/(2.*M_PI)*core->getLocalSiderealDayLength();
 		core->setJDay(core->getJDay()+deltaDay);
 		addTimeDragPoint(x2, y2);
 	}
@@ -917,6 +972,20 @@ void StelMovementMgr::changeFov(double deltaFov)
 	// if we are zooming in or out
 	if (deltaFov)
 		setFov(currentFov + deltaFov);
+}
+
+void StelMovementMgr::changeConstellationArtIntensity()
+{
+	ConstellationMgr *cmgr = GETSTELMODULE(ConstellationMgr);
+	if (cmgr->getFlagArt())
+	{
+		double artInt = getInitConstellationIntensity();
+		// Fade out constellation art when FOV less 2 degrees
+		if (currentFov<=2.)
+			artInt *= currentFov>1.? (currentFov-1.) : 0. ;
+
+		cmgr->setArtIntensity(artInt);
+	}
 }
 
 double StelMovementMgr::getAimFov(void) const

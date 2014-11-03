@@ -20,14 +20,20 @@
 #ifndef _STELSPHEREGEOMETRY_HPP_
 #define _STELSPHEREGEOMETRY_HPP_
 
+#include "config.h"
+
+#include "OctahedronPolygon.hpp"
+#include "StelVertexArray.hpp"
+#include "VecMath.hpp"
+
 #include <QVector>
 #include <QVariant>
 #include <QDebug>
 #include <QSharedPointer>
 #include <QVarLengthArray>
-#include "VecMath.hpp"
-#include "OctahedronPolygon.hpp"
-#include "StelVertexArray.hpp"
+#include <QDataStream>
+
+#include <stdio.h>
 
 class SphericalRegion;
 class SphericalPolygon;
@@ -266,6 +272,7 @@ private:
 //! It is a disc on the sphere, a region above a circle on the unit sphere.
 class SphericalCap : public SphericalRegion
 {
+	using SphericalRegion::contains;
 public:
 	//! Construct a SphericalCap with a 90 deg aperture and an undefined direction.
 	SphericalCap() : d(0) {;}
@@ -276,7 +283,17 @@ public:
 	//! Construct a SphericalCap from its direction and aperture.
 	//! @param an a unit vector indicating the direction.
 	//! @param ar cosinus of the aperture.
-	SphericalCap(const Vec3d& an, double ar) : n(an), d(ar) {Q_ASSERT(d==0 || std::fabs(n.lengthSquared()-1.)<0.0000001);}
+	SphericalCap(const Vec3d& an, double ar) : n(an), d(ar) {//n.normalize();
+		Q_ASSERT(d==0 || std::fabs(n.lengthSquared()-1.)<0.0000001);}
+	// FIXME: GZ reports 2013-03-02: apparently the Q_ASSERT is here because n should be normalized at this point, but
+	// for efficiency n.normalize() should not be called at this point.
+	// However, when zooming in a bit in Hammer-Aitoff and Mercator projections, this Assertion fires.
+	// Atmosphere must be active
+	// It may have to do with DSO texture rendering.
+	// found at r5863.
+	// n.normalize() prevents this for now, but may cost performance.
+	// AARGH - activating n.normalize() inhibits mouse-identification/selection of stars!
+	// May be compiler dependent (seen on Win/MinGW), AW cannot confirm it on Linux.
 
 	//! Copy constructor.
 	SphericalCap(const SphericalCap& other) : SphericalRegion(), n(other.n), d(other.d) {;}
@@ -481,8 +498,8 @@ public:
 	static const SphericalRegionP staticInstance;
 };
 
-//! @class AllSkySphericalRegion
-//! Special SphericalRegion for the whole sphere.
+//! @class EmptySphericalRegion
+//! Special SphericalRegion for --- UMM, WHAT EXACTLY?
 class EmptySphericalRegion : public SphericalRegion
 {
 public:
@@ -524,8 +541,8 @@ public:
 };
 
 
-//! @class SphericalPolygonBase
-//! Abstract class defining default implementations for some spherical geometry methods.
+//! @class SphericalPolygon
+//! Class defining default implementations for some spherical geometry methods.
 //! All methods are reentrant.
 class SphericalPolygon : public SphericalRegion
 {
@@ -720,8 +737,8 @@ protected:
 };
 
 
-//! @class SphericalConvexPolygonSet
-//! A special case of SphericalPolygon for which the polygon is composed of disjoint convex polygons.
+// ! @class SphericalConvexPolygonSet
+// ! A special case of SphericalPolygon for which the polygon is composed of disjoint convex polygons.
 //class SphericalConvexPolygonSet : public SphericalRegion
 //{
 //public:

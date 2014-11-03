@@ -16,8 +16,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#include "StelTextureMgr.hpp"
 #include "StelSkyImageTile.hpp"
+#include "StelTextureMgr.hpp"
 #include "StelApp.hpp"
 #include "StelFileMgr.hpp"
 #include "StelUtils.hpp"
@@ -29,6 +29,8 @@
 #include "StelPainter.hpp"
 
 #include <QDebug>
+
+#include <stdio.h>
 
 StelSkyImageTile::StelSkyImageTile()
 {
@@ -244,26 +246,46 @@ bool StelSkyImageTile::drawTile(StelCore* core, StelPainter& sPainter)
 	}
 
 	// Draw the real texture for this image
-	const float ad_lum = (luminance>0) ? core->getToneReproducer()->adaptLuminanceScaled(luminance) : 1.f;
+	float ad_lum = (luminance>0) ? core->getToneReproducer()->adaptLuminanceScaled(luminance) : 1.f;
+	ad_lum=std::min(1.f, ad_lum);
 	Vec4f color;
 	if (alphaBlend==true || texFader->state()==QTimeLine::Running)
 	{
 		if (!alphaBlend)
 			glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
+		else
+			glBlendFunc(GL_ONE, GL_ONE);
 		glEnable(GL_BLEND);
 		color.set(ad_lum,ad_lum,ad_lum, texFader->currentValue());
 	}
 	else
 	{
 		glDisable(GL_BLEND);
-		color.set(ad_lum,ad_lum,ad_lum, 1.);
+		color.set(ad_lum,ad_lum,ad_lum, 1.f);
 	}
 
-	sPainter.setColor(color[0], color[1], color[2], color[3]);
+	const bool withExtinction=(core->getSkyDrawer()->getFlagHasAtmosphere() && core->getSkyDrawer()->getExtinction().getExtinctionCoefficient()>=0.01f);
+	
 	sPainter.enableTexture2d(true);
 	foreach (const SphericalRegionP& poly, skyConvexPolygons)
 	{
+		Vec4f extinctedColor = color;
+		if (withExtinction)
+		{
+			Vec3d bary= poly->getPointInside(); // This is a J000.0 vector that points "somewhere" in the first triangle.
+			Vec3d altAz = core->j2000ToAltAz(bary, StelCore::RefractionOff);
+			float extinctionMagnitude=0.0f;
+			altAz.normalize();
+			core->getSkyDrawer()->getExtinction().forward(altAz, &extinctionMagnitude);
+			// compute a simple factor from magnitude loss.
+			float extinctionFactor=std::pow(0.4f , extinctionMagnitude); // drop of one magnitude: factor 2.5 or 40%
+			extinctedColor[0]*=fabs(extinctionFactor);
+			extinctedColor[1]*=fabs(extinctionFactor);
+			extinctedColor[2]*=fabs(extinctionFactor);
+		}
+		sPainter.setColor(extinctedColor[0], extinctedColor[1], extinctedColor[2], extinctedColor[3]);
 		sPainter.drawSphericalRegion(poly.data(), StelPainter::SphericalPolygonDrawModeTextureFill);
+		
 	}
 
 #ifdef DEBUG_STELSKYIMAGE_TILE
@@ -283,8 +305,6 @@ bool StelSkyImageTile::drawTile(StelCore* core, StelPainter& sPainter)
 		sPainter.enableTexture2d(true);
 	}
 #endif
-	if (!alphaBlend)
-		glBlendFunc(GL_ONE, GL_ONE); // Revert
 
 	return true;
 }
@@ -350,6 +370,7 @@ void StelSkyImageTile::loadFromQVariantMap(const QVariantMap& map)
 
 	if (map.contains("maxBrightness"))
 	{
+		// maxBrightness is the maximum nebula brightness in Vmag/arcmin^2
 		luminance = map.value("maxBrightness").toFloat(&ok);
 		if (!ok)
 			throw std::runtime_error("maxBrightness expect a float value");
@@ -422,11 +443,8 @@ void StelSkyImageTile::loadFromQVariantMap(const QVariantMap& map)
 		}
 		else
 		{
-			try
-			{
-				absoluteImageURI = StelFileMgr::findFile(baseUrl+imageUrl);
-			}
-			catch (std::runtime_error& er)
+			absoluteImageURI = StelFileMgr::findFile(baseUrl+imageUrl);
+			if (absoluteImageURI.isEmpty())
 			{
 				// Maybe the user meant a file in stellarium local files
 				absoluteImageURI = imageUrl;

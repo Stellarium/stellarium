@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>541</width>
-    <height>469</height>
+    <width>531</width>
+    <height>459</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,7 +17,16 @@
    <property name="spacing">
     <number>0</number>
    </property>
-   <property name="margin">
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
     <number>0</number>
    </property>
    <item>
@@ -229,7 +238,7 @@
        <item>
         <widget class="QGroupBox" name="displayBox">
          <property name="title">
-          <string>Display mode for pulsars</string>
+          <string>Settings for pulsars</string>
          </property>
          <property name="flat">
           <bool>true</bool>
@@ -237,8 +246,32 @@
          <layout class="QVBoxLayout" name="verticalLayout">
           <item>
            <widget class="QCheckBox" name="displayModeCheckBox">
+            <property name="toolTip">
+             <string>Plot all pulsars without labels</string>
+            </property>
             <property name="text">
              <string>Enable display of distribution for pulsars</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="displayAtStartupCheckBox">
+            <property name="text">
+             <string>Enable display at startup</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="displayShowPulsarsButton">
+            <property name="text">
+             <string>Show pulsars button on toolbar</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="displaySeparateColorsCheckBox">
+            <property name="text">
+             <string>Use separate color for pulsars with glitches</string>
             </property>
            </widget>
           </item>

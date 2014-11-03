@@ -33,7 +33,7 @@
 #include <QDebug>
 #include <QStringList>
 
-StelObjectMgr::StelObjectMgr() : searchRadiusPixel(30.f), distanceWeight(1.f)
+StelObjectMgr::StelObjectMgr() : searchRadiusPixel(25.f), distanceWeight(1.f)
 {
 	setObjectName("StelObjectMgr");
 	objectPointerVisibility = true;
@@ -132,6 +132,17 @@ StelObjectP StelObjectMgr::cleverFind(const StelCore* core, const Vec3d& v) cons
 	foreach (const StelObjectModule* m, objectsModule)
 		candidates += m->searchAround(v, fov_around, core);
 
+	// GZ 2014-08-17: This should be exactly the sky's limit magnitude (or even more, but not less!), else visible stars cannot be clicked.
+	float limitMag = core->getSkyDrawer()->getLimitMagnitude(); // -2.f;
+	QList<StelObjectP> tmp;
+	foreach (const StelObjectP& obj, candidates)
+	{
+		if (obj->getSelectPriority(core)<=limitMag)
+			tmp.append(obj);
+	}
+	
+	candidates = tmp;
+	
 	// Now select the object minimizing the function y = distance(in pixel) + magnitude
 	Vec3d winpos;
 	prj->project(v, winpos);
@@ -228,7 +239,7 @@ QList<StelObjectP> StelObjectMgr::getSelectedObject(const QString& type)
  Find and return the list of at most maxNbItem objects auto-completing
  passed object I18 name
 *************************************************************************/
-QStringList StelObjectMgr::listMatchingObjectsI18n(const QString& objPrefix, unsigned int maxNbItem) const
+QStringList StelObjectMgr::listMatchingObjectsI18n(const QString& objPrefix, unsigned int maxNbItem, bool useStartOfWords) const
 {
 	QStringList result;
 
@@ -236,11 +247,101 @@ QStringList StelObjectMgr::listMatchingObjectsI18n(const QString& objPrefix, uns
 	foreach (const StelObjectModule* m, objectsModule)
 	{
 		// Get matching object for this module
-		QStringList matchingObj = m->listMatchingObjectsI18n(objPrefix, maxNbItem);
+		QStringList matchingObj = m->listMatchingObjectsI18n(objPrefix, maxNbItem, useStartOfWords);
 		result += matchingObj;
 		maxNbItem-=matchingObj.size();
 	}
 
 	result.sort();
+	return result;
+}
+
+/*************************************************************************
+ Find and return the list of at most maxNbItem objects auto-completing
+ passed object English name
+*************************************************************************/
+QStringList StelObjectMgr::listMatchingObjects(const QString& objPrefix, unsigned int maxNbItem, bool useStartOfWords) const
+{
+	QStringList result;
+
+	// For all StelObjectmodules..
+	foreach (const StelObjectModule* m, objectsModule)
+	{
+		// Get matching object for this module
+		QStringList matchingObj = m->listMatchingObjects(objPrefix, maxNbItem, useStartOfWords);
+		result += matchingObj;
+		maxNbItem-=matchingObj.size();
+	}
+
+	result.sort();
+	return result;
+}
+
+QStringList StelObjectMgr::listAllModuleObjects(const QString &moduleId, bool inEnglish) const
+{
+	// search for module
+	StelObjectModule* module = NULL;
+	QStringList result, list;
+	QString objModule, objType;
+	bool subSet = false;
+	if (moduleId.contains(":"))
+	{
+		subSet = true;
+		list = moduleId.split(":", QString::SkipEmptyParts);
+		objModule = list.at(0);
+		objType = list.at(1);
+	}
+	else
+		objModule = moduleId;
+	foreach(StelObjectModule* m, objectsModule)
+	{
+		if (m->objectName() == objModule)
+		{
+			module = m;
+			break;
+		}
+	}
+	if (module == NULL)
+	{
+		qWarning() << "Can't find module with id " << objModule;
+		return QStringList();
+	}
+	if (subSet)
+		result = module->listAllObjectsByType(objType, inEnglish);
+	else
+		result = module->listAllObjects(inEnglish);
+	return result;
+}
+
+QMap<QString, QString> StelObjectMgr::objectModulesMap() const
+{
+	QMap<QString, QString> result;
+	foreach(const StelObjectModule* m, objectsModule)
+	{
+		result[m->objectName()] = m->getName();
+		// Celestial objects from Solar system by type
+		if (m->objectName()=="SolarSystem")
+		{
+			result["SolarSystem:planet"] = "Planets";
+			result["SolarSystem:moon"] = "Moons";
+			result["SolarSystem:asteroid"] = "Asteroids";
+			result["SolarSystem:comet"] = "Comets";
+			result["SolarSystem:plutoid"] = "Plutoids";
+		}
+		// Deep-sky objects by type + couple amateur catalogue
+		if (m->objectName()=="NebulaMgr")
+		{
+			result["NebulaMgr:0"] = "Bright galaxies";
+			result["NebulaMgr:1"] = "Open star clusters";
+			result["NebulaMgr:2"] = "Globular star clusters";
+			result["NebulaMgr:3"] = "Nebulae";
+			result["NebulaMgr:4"] = "Planetary nebulae";
+			result["NebulaMgr:5"] = "Dark nebulae";
+			result["NebulaMgr:6"] = "Irregular galaxies";
+			result["NebulaMgr:7"] = "Clusters associated with nebulosity";
+			result["NebulaMgr:10"] = "Messier Catalogue";
+			result["NebulaMgr:11"] = "Caldwell Catalogue";
+		}
+	}
 	return result;
 }

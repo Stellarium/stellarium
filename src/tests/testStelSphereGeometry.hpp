@@ -21,7 +21,7 @@
 #define _TESTSTELSPHERICALGEOMETRY_HPP_
 
 #include <QObject>
-#include <QtTest>
+#include <QTest>
 #include "StelSphereGeometry.hpp"
 
 class TestStelSphericalGeometry : public QObject

@@ -18,13 +18,6 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#include <vector>
-#include <QDebug>
-#include <QFile>
-#include <QSettings>
-#include <QRegExp>
-#include <QString>
-#include <QStringList>
 
 #include "ConstellationMgr.hpp"
 #include "Constellation.hpp"
@@ -42,11 +35,22 @@
 #include "StelPainter.hpp"
 #include "StelSkyDrawer.hpp"
 
+#include <vector>
+#include <QDebug>
+#include <QFile>
+#include <QSettings>
+#include <QRegExp>
+#include <QString>
+#include <QStringList>
+#include <QDir>
+
 using namespace std;
 
 // constructor which loads all data from appropriate files
 ConstellationMgr::ConstellationMgr(StarMgr *_hip_stars)
 	: hipStarMgr(_hip_stars),
+	  artFadeDuration(1.),
+	  artIntensity(0),
 	  artDisplayed(0),
 	  boundariesDisplayed(0),
 	  linesDisplayed(0),
@@ -55,7 +59,6 @@ ConstellationMgr::ConstellationMgr(StarMgr *_hip_stars)
 	setObjectName("ConstellationMgr");
 	Q_ASSERT(hipStarMgr);
 	isolateSelected = false;
-	asterFont.setPixelSize(15);
 }
 
 ConstellationMgr::~ConstellationMgr()
@@ -81,15 +84,15 @@ void ConstellationMgr::init()
 	Q_ASSERT(conf);
 
 	lastLoadedSkyCulture = "dummy";
-	asterFont.setPixelSize(conf->value("viewing/constellation_font_size", 16).toInt());
+	asterFont.setPixelSize(conf->value("viewing/constellation_font_size", 14).toInt());
 	setFlagLines(conf->value("viewing/flag_constellation_drawing").toBool());
 	setFlagLabels(conf->value("viewing/flag_constellation_name").toBool());
-	setFlagBoundaries(conf->value("viewing/flag_constellation_boundaries",false).toBool());
+	setFlagBoundaries(conf->value("viewing/flag_constellation_boundaries",false).toBool());	
 	setArtIntensity(conf->value("viewing/constellation_art_intensity", 0.5f).toFloat());
 	setArtFadeDuration(conf->value("viewing/constellation_art_fade_duration",2.f).toFloat());
 	setFlagArt(conf->value("viewing/flag_constellation_art").toBool());
 	setFlagIsolateSelected(conf->value("viewing/flag_constellation_isolate_selected",
-					   conf->value("viewing/flag_constellation_pick", false).toBool() ).toBool());
+			       conf->value("viewing/flag_constellation_pick", false).toBool() ).toBool());
 
 	StelObjectMgr *objectManager = GETSTELMODULE(StelObjectMgr);
 	objectManager->registerStelObjectMgr(this);
@@ -99,6 +102,12 @@ void ConstellationMgr::init()
 	connect(app, SIGNAL(languageChanged()), this, SLOT(updateI18n()));
 	connect(app, SIGNAL(skyCultureChanged(const QString&)), this, SLOT(updateSkyCulture(const QString&)));
 	connect(app, SIGNAL(colorSchemeChanged(const QString&)), this, SLOT(setStelStyle(const QString&)));
+
+	QString displayGroup = N_("Display Options");
+	addAction("actionShow_Constellation_Lines", displayGroup, N_("Constellation lines"), "linesDisplayed", "C");
+	addAction("actionShow_Constellation_Art", displayGroup, N_("Constellation art"), "artDisplayed", "R");
+	addAction("actionShow_Constellation_Labels", displayGroup, N_("Constellation labels"), "namesDisplayed", "V");
+	addAction("actionShow_Constellation_Boundaries", displayGroup, N_("Constellation boundaries"), "boundariesDisplayed", "B");
 }
 
 /*************************************************************************
@@ -119,47 +128,53 @@ void ConstellationMgr::updateSkyCulture(const QString& skyCultureDir)
 
 	// Find constellation art.  If this doesn't exist, warn, but continue using ""
 	// the loadLinesAndArt function knows how to handle this (just loads lines).
-	QString conArtFile;
-	try
+	QString conArtFile = StelFileMgr::findFile("skycultures/"+skyCultureDir+"/constellationsart.fab");
+	if (conArtFile.isEmpty())
 	{
-		conArtFile = StelFileMgr::findFile("skycultures/"+skyCultureDir+"/constellationsart.fab");
-	}
-	catch (std::runtime_error& e)
-	{
-		qDebug() << "No constellationsart.fab file found for sky culture " << skyCultureDir;
+		qDebug() << "No constellationsart.fab file found for sky culture " << QDir::toNativeSeparators(skyCultureDir);
 	}
 
-	try
+	// first of all, remove constellations from the list of selected objects in StelObjectMgr, since we are going to delete them
+	deselectConstellations();
+
+	QString fic = StelFileMgr::findFile("skycultures/"+skyCultureDir+"/constellationship.fab");
+	if (fic.isEmpty())
+		qWarning() << "ERROR loading constellation lines and art from file: " << fic;
+	else
+		loadLinesAndArt(fic, conArtFile, skyCultureDir);
+
+	// load constellation names
+	fic = StelFileMgr::findFile("skycultures/" + skyCultureDir + "/constellation_names.eng.fab");
+	if (fic.isEmpty())
+		qWarning() << "ERROR loading constellation names from file: " << fic;
+	else
+		loadNames(fic);
+
+	// load seasonal rules
+	loadSeasonalRules(StelFileMgr::findFile("skycultures/" + skyCultureDir + "/seasonal_rules.fab"));
+
+	// Translate constellation names for the new sky culture
+	updateI18n();
+
+	// load constellation boundaries
+	// First try load constellation boundaries from sky culture
+	fic = StelFileMgr::findFile("skycultures/" + skyCultureDir + "/constellations_boundaries.dat");
+	bool existBoundaries = false;
+	if (fic.isEmpty())
 	{
-		// first of all, remove constellations from the list of selected objects in StelObjectMgr, since we are going to delete them
-		deselectConstellations();
-
-		loadLinesAndArt(StelFileMgr::findFile("skycultures/"+skyCultureDir+"/constellationship.fab"), conArtFile, skyCultureDir);
-
-		// load constellation names
-		loadNames(StelFileMgr::findFile("skycultures/" + skyCultureDir + "/constellation_names.eng.fab"));
-
-		// Translate constellation names for the new sky culture
-		updateI18n();
+		qWarning() << "ERROR loading constellation boundaries file in sky culture: " << skyCultureDir;
+		// OK, Second try load generic constellation boundaries
+		fic = StelFileMgr::findFile("data/constellations_boundaries.dat");
+		if (fic.isEmpty())
+			qWarning() << "ERROR loading main constellation boundaries file: " << fic;
+		else
+			existBoundaries = true;
 	}
-	catch (std::runtime_error& e)
-	{
-		qWarning() << "ERROR: while loading new constellation data for sky culture "
-			<< skyCultureDir << ", reason: " << e.what() << endl;
-	}
+	else
+		existBoundaries = true;
 
-	// TODO: do we need to have an else { clearBoundaries(); } ?
-        if (skyCultureDir.startsWith("western"))
-	{
-		try
-		{
-			loadBoundaries(StelFileMgr::findFile("data/constellations_boundaries.dat"));
-		}
-		catch (std::runtime_error& e)
-		{
-			qWarning() << "ERROR loading constellation boundaries file: " << e.what();
-		}
-	}
+	if (existBoundaries)
+		loadBoundaries(fic);
 
 	lastLoadedSkyCulture = skyCultureDir;
 }
@@ -302,7 +317,7 @@ void ConstellationMgr::loadLinesAndArt(const QString &fileName, const QString &a
 	QFile in(fileName);
 	if (!in.open(QIODevice::ReadOnly | QIODevice::Text))
 	{
-		qWarning() << "Can't open constellation data file" << fileName  << "for culture" << cultureName;
+		qWarning() << "Can't open constellation data file" << QDir::toNativeSeparators(fileName)  << "for culture" << cultureName;
 		Q_ASSERT(0);
 	}
 
@@ -367,7 +382,7 @@ void ConstellationMgr::loadLinesAndArt(const QString &fileName, const QString &a
 	QFile fic(artfileName);
 	if (!fic.open(QIODevice::ReadOnly | QIODevice::Text))
 	{
-		qWarning() << "Can't open constellation art file" << fileName  << "for culture" << cultureName;
+		qWarning() << "Can't open constellation art file" << QDir::toNativeSeparators(fileName)  << "for culture" << cultureName;
 		return;
 	}
 
@@ -426,31 +441,15 @@ void ConstellationMgr::loadLinesAndArt(const QString &fileName, const QString &a
 		}
 		else
 		{
-			QString texturePath(texfile);
-			try
+			QString texturePath = StelFileMgr::findFile("skycultures/"+cultureName+"/"+texfile);
+			if (texturePath.isEmpty())
 			{
-				texturePath = StelFileMgr::findFile("skycultures/"+cultureName+"/"+texfile);
-			}
-			catch (std::runtime_error& e)
-			{
-				// if the texture isn't found in the skycultures/[culture] directory,
-				// try the central textures diectory.
-				qWarning() << "WARNING, could not locate texture file " << texfile
-					 << " in the skycultures/" << cultureName
-					 << " directory...  looking in general textures/ directory...";
-				try
-				{
-					texturePath = StelFileMgr::findFile(QString("textures/")+texfile);
-				}
-				catch(std::exception& e2)
-				{
-					qWarning() << "ERROR: could not find texture, " << texfile << ": " << e2.what();
-				}
+				qWarning() << "ERROR: could not find texture, " << QDir::toNativeSeparators(texfile);
 			}
 
 			cons->artTexture = StelApp::getInstance().getTextureManager().createTextureThread(texturePath);
 
-			int texSizeX, texSizeY;
+			int texSizeX = 0, texSizeY = 0;
 			if (cons->artTexture==NULL || !cons->artTexture->getDimensions(texSizeX, texSizeY))
 			{
 				qWarning() << "Texture dimension not available";
@@ -618,7 +617,7 @@ void ConstellationMgr::loadNames(const QString& namesFile)
 	QFile commonNameFile(namesFile);
 	if (!commonNameFile.open(QIODevice::ReadOnly | QIODevice::Text))
 	{
-		qDebug() << "Cannot open file" << namesFile;
+		qDebug() << "Cannot open file" << QDir::toNativeSeparators(namesFile);
 		return;
 	}
 
@@ -651,7 +650,7 @@ void ConstellationMgr::loadNames(const QString& namesFile)
 
 		if (!recRx.exactMatch(record))
 		{
-			qWarning() << "ERROR - cannot parse record at line" << lineNumber << "in constellation names file" << namesFile;
+			qWarning() << "ERROR - cannot parse record at line" << lineNumber << "in constellation names file" << QDir::toNativeSeparators(namesFile);
 		}
 		else
 		{
@@ -674,9 +673,91 @@ void ConstellationMgr::loadNames(const QString& namesFile)
 	qDebug() << "Loaded" << readOk << "/" << totalRecords << "constellation names";
 }
 
+void ConstellationMgr::loadSeasonalRules(const QString& rulesFile)
+{
+	// Constellation not loaded yet
+	if (asterisms.empty()) return;
+
+	bool flag = true;
+	if (rulesFile.isEmpty())
+		flag = false;
+
+	// clear previous names
+	vector < Constellation * >::const_iterator iter;
+	for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
+	{
+		(*iter)->beginSeason = 1;
+		(*iter)->endSeason = 12;
+		(*iter)->seasonalRuleEnabled = flag;
+	}
+
+	// Current starlore didn't support the seasonal rules
+	if (!flag)
+		return;
+
+	// Open file
+	QFile seasonalRulesFile(rulesFile);
+	if (!seasonalRulesFile.open(QIODevice::ReadOnly | QIODevice::Text))
+	{
+		qDebug() << "Cannot open file" << QDir::toNativeSeparators(rulesFile);
+		return;
+	}
+
+	// Now parse the file
+	// lines to ignore which start with a # or are empty
+	QRegExp commentRx("^(\\s*#.*|\\s*)$");
+
+	// lines which look like records - we use the RE to extract the fields
+	// which will be available in recRx.capturedTexts()
+	QRegExp recRx("^\\s*(\\w+)\\s+(\\w+)\\s+(\\w+)\\n");
+
+	// Some more variables to use in the parsing
+	Constellation *aster;
+	QString record, shortName;
+
+	// keep track of how many records we processed.
+	int totalRecords=0;
+	int readOk=0;
+	int lineNumber=0;
+	while (!seasonalRulesFile.atEnd())
+	{
+		record = QString::fromUtf8(seasonalRulesFile.readLine());
+		lineNumber++;
+
+		// Skip comments
+		if (commentRx.exactMatch(record))
+			continue;
+
+		totalRecords++;
+
+		if (!recRx.exactMatch(record))
+		{
+			qWarning() << "ERROR - cannot parse record at line" << lineNumber << "in seasonal rules file" << QDir::toNativeSeparators(rulesFile);
+		}
+		else
+		{
+			shortName = recRx.capturedTexts().at(1);
+			aster = findFromAbbreviation(shortName);
+			// If the constellation exists, set the English name
+			if (aster != NULL)
+			{
+				aster->beginSeason = recRx.capturedTexts().at(2).toInt();
+				aster->endSeason = recRx.capturedTexts().at(3).toInt();
+				readOk++;
+			}
+			else
+			{
+				qWarning() << "WARNING - constellation abbreviation" << shortName << "not found when loading seasonal rules for constellations";
+			}
+		}
+	}
+	seasonalRulesFile.close();
+	qDebug() << "Loaded" << readOk << "/" << totalRecords << "seasonal rules";
+}
+
 void ConstellationMgr::updateI18n()
 {
-	StelTranslator trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
+	const StelTranslator& trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
 	vector < Constellation * >::const_iterator iter;
 	for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
 	{
@@ -698,15 +779,14 @@ void ConstellationMgr::update(double deltaTime)
 void ConstellationMgr::setArtIntensity(const double intensity)
 {
 	if (artIntensity != intensity)
-	{
 		artIntensity = intensity;
-		vector < Constellation * >::const_iterator iter;
-		for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
-		{
-			(*iter)->artFader.setMaxValue(artIntensity);
-		}
-		emit artIntensityChanged(intensity);
+
+	vector < Constellation * >::const_iterator iter;
+	for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
+	{
+		(*iter)->artFader.setMaxValue(artIntensity);
 	}
+	emit artIntensityChanged(intensity);
 }
 
 double ConstellationMgr::getArtIntensity() const
@@ -716,16 +796,15 @@ double ConstellationMgr::getArtIntensity() const
 
 void ConstellationMgr::setArtFadeDuration(const float duration)
 {
-	if(artFadeDuration != duration)
-	{
+	if (artFadeDuration != duration)
 		artFadeDuration = duration;
-		vector < Constellation * >::const_iterator iter;
-		for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
-		{
-			(*iter)->artFader.setDuration((int) (duration * 1000.f));
-		}
-		emit artFadeDurationChanged(duration);
+
+	vector < Constellation * >::const_iterator iter;
+	for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
+	{
+		(*iter)->artFader.setDuration((int) (duration * 1000.f));
 	}
+	emit artFadeDurationChanged(duration);
 }
 
 float ConstellationMgr::getArtFadeDuration() const
@@ -1031,7 +1110,7 @@ bool ConstellationMgr::loadBoundaries(const QString& boundaryFile)
 	QFile dataFile(boundaryFile);
 	if (!dataFile.open(QIODevice::ReadOnly | QIODevice::Text))
 	{
-		qWarning() << "Boundary file " << boundaryFile << " not found";
+		qWarning() << "Boundary file " << QDir::toNativeSeparators(boundaryFile) << " not found";
 		return false;
 	}
 
@@ -1096,18 +1175,11 @@ void ConstellationMgr::drawBoundaries(StelPainter& sPainter) const
 {
 	sPainter.enableTexture2d(false);
 	glDisable(GL_BLEND);
-#ifndef USE_OPENGL_ES2
-	glLineStipple(2, 0x3333);
-	glEnable(GL_LINE_STIPPLE);
-#endif
 	vector < Constellation * >::const_iterator iter;
 	for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
 	{
 		(*iter)->drawBoundaryOptim(sPainter);
-	}
-#ifndef USE_OPENGL_ES2
-	glDisable(GL_LINE_STIPPLE);
-#endif
+	}	
 }
 
 StelObjectP ConstellationMgr::searchByNameI18n(const QString& nameI18n) const
@@ -1138,22 +1210,85 @@ StelObjectP ConstellationMgr::searchByName(const QString& name) const
 	return NULL;
 }
 
-QStringList ConstellationMgr::listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem) const
+QStringList ConstellationMgr::listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem, bool useStartOfWords) const
 {
 	QStringList result;
 	if (maxNbItem==0) return result;
 
-	QString objw = objPrefix.toUpper();
-
+	QString cn;
+	bool find;
 	vector < Constellation * >::const_iterator iter;
 	for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
 	{
-		QString constw = (*iter)->getNameI18n().mid(0, objw.size()).toUpper();
-		if (constw==objw)
+		cn = (*iter)->getNameI18n();
+		find = false;
+		if (useStartOfWords)
 		{
-			result << (*iter)->getNameI18n();
+			if (objPrefix.toUpper()==cn.mid(0, objPrefix.size()).toUpper())
+				find = true;
+		}
+		else
+		{
+			if (cn.contains(objPrefix,Qt::CaseInsensitive))
+				find = true;
+		}
+		if (find)
+		{
+			result << cn;
 			if (result.size()==maxNbItem)
 				return result;
+		}
+	}
+	return result;
+}
+
+QStringList ConstellationMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords) const
+{
+	QStringList result;
+	if (maxNbItem==0) return result;
+
+	QString cn;
+	bool find;
+	vector < Constellation * >::const_iterator iter;
+	for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
+	{
+		cn = (*iter)->getEnglishName();
+		find = false;
+		if (useStartOfWords)
+		{
+			if (objPrefix.toUpper()==cn.mid(0, objPrefix.size()).toUpper())
+				find = true;
+		}
+		else
+		{
+			if (cn.contains(objPrefix,Qt::CaseInsensitive))
+				find = true;
+		}
+		if (find)
+		{
+			result << cn;
+			if (result.size()==maxNbItem)
+				return result;
+		}
+	}
+	return result;
+}
+
+QStringList ConstellationMgr::listAllObjects(bool inEnglish) const
+{
+	QStringList result;
+	if (inEnglish)
+	{
+		foreach(Constellation* constellation, asterisms)
+		{
+			result << constellation->getEnglishName();
+		}
+	}
+	else
+	{
+		foreach(Constellation* constellation, asterisms)
+		{
+			result << constellation->getNameI18n();
 		}
 	}
 	return result;

@@ -19,10 +19,11 @@
 #ifndef STELSKYLAYER_HPP
 #define STELSKYLAYER_HPP
 
+#include "StelCore.hpp"
+
 #include <QObject>
 #include <QString>
 #include <QSharedPointer>
-#include "StelCore.hpp"
 
 class StelCore;
 class StelPainter;
@@ -34,7 +35,7 @@ class StelSkyLayer : public QObject
 {
 	Q_OBJECT
 public:
-	StelSkyLayer(QObject* parent=NULL) : QObject(parent) {;}
+	StelSkyLayer(QObject* parent=NULL) : QObject(parent), frameType(StelCore::FrameJ2000) {;}
 
 	//! Draws the content of the layer.
 	virtual void draw(StelCore* core, StelPainter& sPainter, float opacity=1.)=0;

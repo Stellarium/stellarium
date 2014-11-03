@@ -1,4 +1,12 @@
 
 ########### install files ###############
 
-INSTALL(FILES constellation_names.eng.fab constellationship.fab constellationsart.fab star_names.fab info.ini description.ar.utf8 description.be.utf8 description.pt_BR.utf8 description.en.utf8 description.it.utf8 description.ru.utf8 description.uk.utf8 blubber-container.png breastbone.png caribou.png collarbones.png dogs.png lamp-stand.png runners.png the-one-behind.png two-in-front.png two-placed-far-apart.png two-sunbeams.png DESTINATION share/${PACKAGE}/skycultures/inuit)
+# install info.ini and star_names.fab
+INSTALL(FILES info.ini star_names.fab DESTINATION share/${PACKAGE}/skycultures/inuit )
+
+# install constellations data, artwork and descriptions
+INSTALL(DIRECTORY ./ DESTINATION share/${PACKAGE}/skycultures/inuit
+	FILES_MATCHING PATTERN "constellation*" 
+	PATTERN "*.png" 
+	PATTERN "description.*.utf8" 
+	PATTERN "CMakeFiles" EXCLUDE )

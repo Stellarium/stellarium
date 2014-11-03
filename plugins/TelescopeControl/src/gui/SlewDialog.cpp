@@ -67,12 +67,13 @@ void SlewDialog::createDialogContent()
 	connect(ui->radioButtonDMS, SIGNAL(toggled(bool)), this, SLOT(setFormatDMS(bool)));
 	connect(ui->radioButtonDecimal, SIGNAL(toggled(bool)), this, SLOT(setFormatDecimal(bool)));
 
-	connect(ui->pushButtonSlew, SIGNAL(pressed()), this, SLOT(slew()));
-	connect(ui->pushButtonConfigure, SIGNAL(pressed()), this, SLOT(showConfiguration()));
+	connect(ui->pushButtonSlew, SIGNAL(clicked()), this, SLOT(slew()));
+	connect(ui->pushButtonConfigure, SIGNAL(clicked()), this, SLOT(showConfiguration()));
 
 	connect(telescopeManager, SIGNAL(clientConnected(int, QString)), this, SLOT(addTelescope(int, QString)));
 	connect(telescopeManager, SIGNAL(clientDisconnected(int)), this, SLOT(removeTelescope(int)));
-
+        //
+        connect(ui->pushButtonCurrent,SIGNAL(clicked()),this,SLOT(getCurrentObjectInfo()));
 	//Coordinates are in HMS by default:
 	ui->radioButtonHMS->setChecked(true);
 
@@ -178,3 +179,15 @@ void SlewDialog::slew()
 
 	telescopeManager->telescopeGoto(slot, targetPosition);
 }
+
+void SlewDialog::getCurrentObjectInfo(){
+    const QList<StelObjectP>& selected = GETSTELMODULE(StelObjectMgr)->getSelectedObject();
+    if (!selected.isEmpty()) {
+        double dec_j2000 = 0;
+        double ra_j2000 = 0;
+        StelUtils::rectToSphe(&ra_j2000,&dec_j2000,selected[0]->getJ2000EquatorialPos(StelApp::getInstance().getCore()));
+        ui->spinBoxRA->setRadians(ra_j2000);
+        ui->spinBoxDec->setRadians(dec_j2000);
+    }
+}
+

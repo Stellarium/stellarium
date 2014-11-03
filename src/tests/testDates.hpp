@@ -21,7 +21,7 @@
 #define _TESTDATES_HPP_
 
 #include <QObject>
-#include <QtTest>
+#include <QTest>
 
 class TestDates : public QObject
 {

@@ -165,29 +165,13 @@ void ManualImportWindow::selectTextureFile(QLineEdit * filePathLineEdit)
 	QString currentFileName = filePathLineEdit->text();
 	if (currentFileName.isEmpty())
 	{
-		try
-		{
-			texturesDirectoryPath = StelFileMgr::findFile("textures", StelFileMgr::Directory);
-		}
-		catch (std::runtime_error &e)
-		{
-			qDebug() << e.what();
+		texturesDirectoryPath = StelFileMgr::findFile("textures", StelFileMgr::Directory);
+		if (texturesDirectoryPath.isEmpty())
 			return;
-		}
 	}
 	else
 	{
-		QString currentFilePath;
-		try
-		{
-			currentFilePath = StelFileMgr::findFile("textures/" + currentFileName, StelFileMgr::File);
-		}
-		catch (std::runtime_error &e)
-		{
-			qDebug() << e.what();
-			filePathLineEdit->clear();
-			return;
-		}
+		QString currentFilePath = StelFileMgr::findFile("textures/" + currentFileName, StelFileMgr::File);
 		if (currentFilePath.isEmpty())
 		{
 			filePathLineEdit->clear();

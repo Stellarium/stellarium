@@ -23,7 +23,6 @@
 #include "StelPainter.hpp"
 #include "StelObject.hpp"
 #include "Planet.hpp"
-#include <QtOpenGL>
 
 TrailGroup::TrailGroup(float te) : timeExtent(te), opacity(1.f)
 {
@@ -47,7 +46,7 @@ void TrailGroup::draw(StelCore* core, StelPainter* sPainter)
 		if (hpl!=NULL)
 		{
 			// Avoid drawing the trails if the object is the home planet
-			QString homePlanetName = hpl==NULL ? "" : hpl->getEnglishName();
+			QString homePlanetName = hpl->getEnglishName();
 			if (homePlanetName==StelApp::getInstance().getCore()->getCurrentLocation().planetName)
 				continue;
 		}

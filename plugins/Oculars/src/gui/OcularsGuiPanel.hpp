@@ -61,7 +61,8 @@ private slots:
 	//! Updates the information that depends on the current telescope.
 	//! Called in both updateOcularControls() and updateCcdControls().
 	void updateTelescopeControls();
-
+	//! Updates the information that depends on the current lens
+	void updateLensControls();
 	//! Sets the color scheme (day/night mode)
 	void setColorScheme(const QString& schemeName);
 
@@ -78,6 +79,7 @@ private:
 	//! Mini-toolbar holding StelButtons
 	QGraphicsWidget* buttonBar;
 	QGraphicsWidget* ocularControls;
+	QGraphicsWidget* lensControls;
 	QGraphicsWidget* ccdControls;
 	QGraphicsWidget* telescopeControls;
 
@@ -95,6 +97,10 @@ private:
 	StelButton* nextTelescopeButton;
 	StelButton* prevCcdButton;
 	StelButton* nextCcdButton;
+	StelButton* prevLensButton;
+	StelButton* nextLensButton;
+	QGraphicsTextItem* fieldLensName;
+	QGraphicsTextItem* fieldLensMultipler;
 	QGraphicsTextItem* fieldOcularName;
 	QGraphicsTextItem* fieldOcularFl;
 	QGraphicsTextItem* fieldOcularAfov;
@@ -118,13 +124,12 @@ private:
 	void setOcularControlsVisible(bool show);
 	void setCcdControlsVisible(bool show);
 	void setTelescopeControlsVisible(bool show);
+	void setLensControlsVisible(bool show);
 	//! Updates the positions of the buttons inside the button bar.
 	void updateMainButtonsPositions();
 
 	void setControlsColor(const QColor& color);
 	void setControlsFont(const QFont& font);
-	//! Sets the night mode flag on all StelButton-s.
-	void setButtonsNightMode(bool nightMode);
 
 	static QPixmap createPixmapFromText(const QString& text,
 	                                    int width,

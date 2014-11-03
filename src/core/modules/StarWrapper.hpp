@@ -20,7 +20,6 @@
 #ifndef _STARWRAPPER_HPP_
 #define _STARWRAPPER_HPP_
 
-#include <QString>
 #include "StelObject.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
@@ -28,9 +27,9 @@
 #include "Star.hpp"
 #include "StelSkyDrawer.hpp"
 
-namespace BigStarCatalogExtension {
+#include <QString>
 
-template <class Star> struct SpecialZoneArray;
+template <class Star> class SpecialZoneArray;
 template <class Star> struct SpecialZoneData;
 
 
@@ -83,20 +82,13 @@ protected:
 	}
 	Vec3f getInfoColor(void) const
 	{
-		return StelApp::getInstance().getVisionModeNight() ? Vec3f(0.8, 0.0, 0.0) : StelSkyDrawer::indexToColor(s->bV);
+		return StelSkyDrawer::indexToColor(s->getBVIndex());
 	}
-	float getVMagnitude(const StelCore* core, bool withExtinction=false) const
+	float getVMagnitude(const StelCore* core) const
 	{
-	    float extinctionMag=0.0; // track magnitude loss
-	    if (withExtinction && core->getSkyDrawer()->getFlagHasAtmosphere())
-	    {
-		double alt=getAltAzPosApparent(core)[2];
-		core->getSkyDrawer()->getExtinction().forward(&alt, &extinctionMag);
-	    }
-
-		return 0.001f*a->mag_min + s->mag*(0.001f*a->mag_range)/a->mag_steps  + extinctionMag;
+		Q_UNUSED(core);
+		return 0.001f*a->mag_min + s->getMag()*(0.001f*a->mag_range)/a->mag_steps;
 	}
-	float getSelectPriority(const StelCore* core) const {return getVMagnitude(core, false);}
 	float getBV(void) const {return s->getBV();}
 	QString getEnglishName(void) const {return QString();}
 	QString getNameI18n(void) const {return s->getNameI18n();}
@@ -122,9 +114,8 @@ public:
 	//! <li> RaDecJ2000
 	//! <li> RaDec
 	//! <li> AltAzi
-	//! <li> Extra1 (spectral type)
-	//! <li> Distance
-	//! <li> Extra2 (parallax)
+	//! <li> Extra (spectral type, parallax)
+	//! <li> Distance	
 	//! <li> PlainText </ul>
 	//! @param core the StelCore object.
 	//! @param flags a set of InfoStringGroup items to include in the return value.
@@ -149,6 +140,5 @@ public:
 			   const Star3 *s) : StarWrapper<Star3>(a,z,s) {;}
 };
 
-} // namespace BigStarCatalogExtension
 
 #endif // _STARWRAPPER_HPP_

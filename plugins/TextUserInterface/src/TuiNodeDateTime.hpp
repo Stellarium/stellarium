@@ -19,6 +19,8 @@
 #ifndef _TUINODEDATETIME_HPP_
 #define _TUINODEDATETIME_HPP_ 1
 
+#include "config.h"
+
 #include "TuiNodeEditable.hpp"
 #include <QObject>
 #include <QString>

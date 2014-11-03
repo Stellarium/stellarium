@@ -29,7 +29,12 @@
 class StelMovementMgr : public StelModule
 {
 	Q_OBJECT
-
+	Q_PROPERTY(bool equatorialMount
+			   READ getEquatorialMount
+			   WRITE setEquatorialMount)
+	Q_PROPERTY(bool tracking
+			   READ getFlagTracking
+			   WRITE setFlagTracking)
 public:
 
 	//! Possible mount modes defining the reference frame in which head movements occur.
@@ -66,6 +71,8 @@ public:
 	//virtual void selectedObjectChangeCallBack(StelModuleSelectAction action=StelModule::ReplaceSelection);
 	// GZ: allow some keypress interaction by plugins.
 	virtual double getCallOrder(StelModuleActionName actionName) const;
+	//! Handle pinch gesture.
+	virtual bool handlePinch(qreal scale, bool started);
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods specific to StelMovementMgr
@@ -87,7 +94,7 @@ public:
 	void setMovementSpeedFactor(float s) {movementsSpeedFactor=s;}
 	float getMovementSpeedFactor() const {return movementsSpeedFactor;}
 
-        void setDragTriggerDistance(float d) {dragTriggerDistance=d;}
+	void setDragTriggerDistance(float d) {dragTriggerDistance=d;}
 
 public slots:
 	//! Toggle current mount mode between equatorial and altazimuthal
@@ -198,6 +205,7 @@ public slots:
 	void setMountMode(MountMode m);
 	//! Get current mount type defining the reference frame in which head movements occur.
 	MountMode getMountMode(void) const {return mountMode;}
+	bool getEquatorialMount(void) const {return mountMode == MountEquinoxEquatorial;}
 
 	void setDragTimeMode(bool b) {dragTimeMode=b;}
 	bool getDragTimeMode() const {return dragTimeMode;}
@@ -205,6 +213,11 @@ public slots:
 private slots:
 	//! Called when the selected object changes.
 	void selectedObjectChange(StelModule::StelModuleSelectAction action);
+
+	//! Return the initial value of intensity of art of constellations.
+	double getInitConstellationIntensity() const {return initConstellationIntensity;}
+	//! Set the initial value of intensity of art of constellations.
+	void setInitConstellationIntensity(double v) {initConstellationIntensity=v;}
 	
 private:
 	Vec3d j2000ToMountFrame(const Vec3d& v) const;
@@ -214,6 +227,7 @@ private:
 	double initFov;    // The FOV at startup
 	double minFov;     // Minimum FOV in degree
 	double maxFov;     // Maximum FOV in degree
+	double initConstellationIntensity;   // The initial constellation art intensity (level at startup)
 
 	void setFov(double f)
 	{
@@ -222,8 +236,11 @@ private:
 			currentFov = maxFov;
 		if (f<minFov)
 			currentFov = minFov;
+
+		changeConstellationArtIntensity();
 	}
 	void changeFov(double deltaFov);
+	void changeConstellationArtIntensity();
 
 	void updateVisionVector(double deltaTime);
 	void updateAutoZoom(double deltaTime); // Update autoZoom if activated

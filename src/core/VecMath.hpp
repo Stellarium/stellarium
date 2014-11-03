@@ -24,6 +24,8 @@
 #ifndef _VECMATH_H_
 #define _VECMATH_H_
 
+#include "config.h"
+
 #include <cmath>
 #include <QString>
 
@@ -81,7 +83,7 @@ template<class T> class Vector2
 {
 public:
 	inline Vector2();
-        inline Vector2(T);
+    inline Vector2(T);
 	inline Vector2(T, T);
 
 	inline Vector2& operator=(const T*);
@@ -95,10 +97,10 @@ public:
 	inline operator const T*() const;
 	inline operator T*();
 
-	inline Vector2& operator+=(const Vector2<T>&);
-	inline Vector2& operator-=(const Vector2<T>&);
-	inline Vector2& operator*=(T);
-	inline Vector2& operator/=(T);
+	inline void operator+=(const Vector2<T>&);
+	inline void operator-=(const Vector2<T>&);
+	inline void operator*=(T);
+	inline void operator/=(T);
 
 	inline Vector2 operator-(const Vector2<T>&) const;
 	inline Vector2 operator+(const Vector2<T>&) const;
@@ -147,10 +149,10 @@ public:
 	inline const T* data() const {return v;}
 	inline T* data() {return v;}
 
-	inline Vector3& operator+=(const Vector3<T>&);
-	inline Vector3& operator-=(const Vector3<T>&);
-	inline Vector3& operator*=(T);
-	inline Vector3& operator/=(T);
+	inline void operator+=(const Vector3<T>&);
+	inline void operator-=(const Vector3<T>&);
+	inline void operator*=(T);
+	inline void operator/=(T);
 
 	inline Vector3 operator-(const Vector3<T>&) const;
 	inline Vector3 operator+(const Vector3<T>&) const;
@@ -210,10 +212,10 @@ public:
 	inline operator T*();
 	inline operator const T*() const;
 
-	inline Vector4& operator+=(const Vector4<T>&);
-	inline Vector4& operator-=(const Vector4<T>&);
-	inline Vector4& operator*=(T);
-	inline Vector4& operator/=(T);
+	inline void operator+=(const Vector4<T>&);
+	inline void operator-=(const Vector4<T>&);
+	inline void operator*=(T);
+	inline void operator/=(T);
 
 	inline Vector4 operator-(const Vector4<T>&) const;
 	inline Vector4 operator+(const Vector4<T>&) const;
@@ -276,49 +278,52 @@ template<class T> class Matrix3
 template<class T> class Matrix4
 {
  public:
-        Matrix4();
-        Matrix4(T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T);
-        Matrix4(const T*);
-        Matrix4(const Vector4<T>&, const Vector4<T>&,
-                        const Vector4<T>&, const Vector4<T>&);
+	Matrix4();
+	Matrix4(T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T);
+	Matrix4(const T*);
+	Matrix4(const Vector4<T>&, const Vector4<T>&,
+			const Vector4<T>&, const Vector4<T>&);
 
-        inline Matrix4& operator=(const T*);
-        inline void set(T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T);
+	inline Matrix4& operator=(const T*);
+	inline void set(T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T);
 
-        inline T& operator[](int);
-        inline operator T*();
-        inline operator const T*() const;
+	inline T& operator[](int);
+	inline operator T*();
+	inline operator const T*() const;
 
-        inline Matrix4 operator-(const Matrix4<T>&) const;
-        inline Matrix4 operator+(const Matrix4<T>&) const;
-        inline Matrix4 operator*(const Matrix4<T>&) const;
+	inline Matrix4 operator-(const Matrix4<T>&) const;
+	inline Matrix4 operator+(const Matrix4<T>&) const;
+	inline Matrix4 operator*(const Matrix4<T>&) const;
 
-        inline Vector3<T> operator*(const Vector3<T>&) const;
-        inline Vector3<T> multiplyWithoutTranslation(const Vector3<T>& a) const;
-        inline Vector4<T> operator*(const Vector4<T>&) const;
+	inline Vector3<T> operator*(const Vector3<T>&) const;
+	inline Vector3<T> multiplyWithoutTranslation(const Vector3<T>& a) const;
+	inline Vector4<T> operator*(const Vector4<T>&) const;
 
-        inline void transfo(Vector3<T>&) const;
+	inline void transfo(Vector3<T>&) const;
 
-        static Matrix4<T> identity();
-        static Matrix4<T> translation(const Vector3<T>&);
+	static Matrix4<T> identity();
+	static Matrix4<T> translation(const Vector3<T>&);
 
-        //    static Matrix4<T> rotation(const Vector3<T>&);
-        static Matrix4<T> rotation(const Vector3<T>&, T);
-        static Matrix4<T> xrotation(T);
-        static Matrix4<T> yrotation(T);
-        static Matrix4<T> zrotation(T);
-        static Matrix4<T> scaling(const Vector3<T>&);
-        static Matrix4<T> scaling(T);
+	//    static Matrix4<T> rotation(const Vector3<T>&);
+	static Matrix4<T> rotation(const Vector3<T>&, T);
+	static Matrix4<T> xrotation(T);
+	static Matrix4<T> yrotation(T);
+	static Matrix4<T> zrotation(T);
+	static Matrix4<T> scaling(const Vector3<T>&);
+	static Matrix4<T> scaling(T);
 
-        Matrix4<T> transpose() const;
-        Matrix4<T> inverse() const;
+	Matrix4<T> transpose() const;
+	Matrix4<T> inverse() const;
 
-        //Returns the upper 3x3 Matrix of the current 4x4 Matrix
-        Matrix3<T> upper3x3() const;
+    //Returns the upper 3x3 Matrix of the current 4x4 Matrix
+    Matrix3<T> upper3x3() const;
 
-        inline void print(void) const;
+	inline Vector4<T> getRow(const int row) const;
+	inline Vector4<T> getColumn(const int column) const;
 
-        T r[16];
+	inline void print(void) const;
+
+	T r[16];
 };
 
 //! Serialization routines.
@@ -392,22 +397,24 @@ template<class T> Vector2<T>::operator T*()
 }
 
 
-template<class T> Vector2<T>& Vector2<T>::operator+=(const Vector2<T>& a)
+template<class T> void Vector2<T>::operator+=(const Vector2<T>& a)
 {
 	v[0] += a.v[0]; v[1] += a.v[1];
-	return *this;
 }
 
-template<class T> Vector2<T>& Vector2<T>::operator-=(const Vector2<T>& a)
+template<class T> void Vector2<T>::operator-=(const Vector2<T>& a)
 {
 	v[0] -= a.v[0]; v[1] -= a.v[1];
-	return *this;
 }
 
-template<class T> Vector2<T>& Vector2<T>::operator*=(T s)
+template<class T> void Vector2<T>::operator*=(T s)
 {
 	v[0] *= s; v[1] *= s;
-	return *this;
+}
+
+template<class T> void Vector2<T>::operator/=(T s)
+{
+	v[0] /= s; v[1] /= s;
 }
 
 template<class T> Vector2<T> Vector2<T>::operator-() const
@@ -548,28 +555,24 @@ template<class T> Vector3<T>::operator T*()
 	return v;
 }
 
-template<class T> Vector3<T>& Vector3<T>::operator+=(const Vector3<T>& a)
+template<class T> void Vector3<T>::operator+=(const Vector3<T>& a)
 {
 	v[0] += a.v[0]; v[1] += a.v[1]; v[2] += a.v[2];
-	return *this;
 }
 
-template<class T> Vector3<T>& Vector3<T>::operator-=(const Vector3<T>& a)
+template<class T> void Vector3<T>::operator-=(const Vector3<T>& a)
 {
 	v[0] -= a.v[0]; v[1] -= a.v[1]; v[2] -= a.v[2];
-	return *this;
 }
 
-template<class T> Vector3<T>& Vector3<T>::operator*=(T s)
+template<class T> void Vector3<T>::operator*=(T s)
 {
 	v[0] *= s; v[1] *= s; v[2] *= s;
-	return *this;
 }
 
-template<class T> Vector3<T>& Vector3<T>::operator/=(T s)
+template<class T> void Vector3<T>::operator/=(T s)
 {
 	v[0] /= s; v[1] /= s; v[2] /= s;
-	return *this;
 }
 
 template<class T> Vector3<T> Vector3<T>::operator-() const
@@ -746,22 +749,24 @@ template<class T> Vector4<T>::operator const T*() const
 	return v;
 }
 
-template<class T> Vector4<T>& Vector4<T>::operator+=(const Vector4<T>& a)
+template<class T> void Vector4<T>::operator+=(const Vector4<T>& a)
 {
 	v[0] += a.v[0]; v[1] += a.v[1]; v[2] += a.v[2]; v[3] += a.v[3];
-	return *this;
 }
 
-template<class T> Vector4<T>& Vector4<T>::operator-=(const Vector4<T>& a)
+template<class T> void Vector4<T>::operator-=(const Vector4<T>& a)
 {
-	v[0] -= a.v[0]; v[1] -= a.v[1]; v[2] -= a.v[2]; v[3] -= a/v[3];
-	return *this;
+	v[0] -= a.v[0]; v[1] -= a.v[1]; v[2] -= a.v[2]; v[3] -= a.v[3];
 }
 
-template<class T> Vector4<T>& Vector4<T>::operator*=(T s)
+template<class T> void Vector4<T>::operator*=(T s)
 {
 	v[0] *= s; v[1] *= s; v[2] *= s; v[3] *= s;
-	return *this;
+}
+
+template<class T> void Vector4<T>::operator/=(T s)
+{
+	v[0] /= s; v[1] /= s; v[2] /= s; v[3] /= s;
 }
 
 template<class T> Vector4<T> Vector4<T>::operator-() const
@@ -899,7 +904,7 @@ template<class T> Matrix3<T> Matrix3<T>::transpose() const
 template<class T> Matrix3<T> Matrix3<T>::operator*(const Matrix3<T>& a) const
 {
 #define MATMUL(R, C) (r[R] * a.r[C] + r[R+3] * a.r[C+1] + r[R+6] * a.r[C+2])
-    return Matrix4<T>(MATMUL(0,0), MATMUL(1,0), MATMUL(2,0),
+    return Matrix3<T>(MATMUL(0,0), MATMUL(1,0), MATMUL(2,0),
                       MATMUL(0,3), MATMUL(1,3), MATMUL(2,3),
                       MATMUL(0,6), MATMUL(1,6), MATMUL(2,6));
 #undef MATMUL
@@ -1429,6 +1434,15 @@ template<class T> Matrix3<T> Matrix4<T>::upper3x3() const
     return Matrix3<T>(r[0], r[4], r[8],
                       r[1], r[5], r[9],
                       r[2], r[6], r[10]);
+}
+template<class T> Vector4<T> Matrix4<T>::getRow(const int row) const
+{
+	return Vector4<T>(r[0 + row], r[4 + row], r[8 + row], r[12 + row]);
+}
+
+template<class T> Vector4<T> Matrix4<T>::getColumn(const int column) const
+{
+	return Vector4<T>(r[0 + column * 4], r[1 + column * 4], r[2 + column * 4], r[3 + column * 4]);
 }
 
 template<class T> void Matrix4<T>::print(void) const
