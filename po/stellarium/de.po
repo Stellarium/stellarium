@@ -10,14 +10,14 @@ msgstr ""
 "Project-Id-Version: de\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-10-26 14:07+0600\n"
-"PO-Revision-Date: 2014-10-13 07:30+0000\n"
-"Last-Translator: Alexander Wolf <Unknown>\n"
+"PO-Revision-Date: 2014-11-02 21:14+0000\n"
+"Last-Translator: gzotti <Georg.Zotti@univie.ac.at>\n"
 "Language-Team: <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-10-27 05:44+0000\n"
-"X-Generator: Launchpad (build 17203)\n"
+"X-Launchpad-Export-Date: 2014-11-03 05:59+0000\n"
+"X-Generator: Launchpad (build 17211)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:106 src/core/modules/StarMgr.cpp:346
 #: src/core/modules/GridLinesMgr.cpp:727 src/core/modules/LandscapeMgr.cpp:355
@@ -144,7 +144,7 @@ msgstr "Boden"
 
 #: src/core/modules/LandscapeMgr.cpp:360
 msgid "Illumination"
-msgstr ""
+msgstr "Beleuchtung"
 
 #: src/core/modules/LandscapeMgr.cpp:601
 msgid "Author: "
@@ -4603,6 +4603,8 @@ msgstr "Helligkeitseinstellungen für Landschaften verwenden"
 #: src/ui_viewDialog.h:1263
 msgid "Show illumination layer (bright windows, light pollution, etc.)"
 msgstr ""
+"Zeige selbstleuchtende Elemente im Vordergrund (erleuchtete Fenster, "
+"Straßenlampen, Lichtverschmutzung, ...)"
 
 #: src/ui_viewDialog.h:1264
 msgid "Add/remove landscapes..."
