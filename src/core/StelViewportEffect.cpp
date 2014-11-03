@@ -374,6 +374,8 @@ void StelViewportDistorterFisheyeToSphericMirror::paintViewportBuffer(const QOpe
 	StelPainter sPainter(StelApp::getInstance().getCore()->getProjection2d());
 	sPainter.enableTexture2d(true);
 	glBindTexture(GL_TEXTURE_2D, buf->texture());
+	GL(glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR));
+	GL(glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR));
 	glDisable(GL_BLEND);
 
 	sPainter.enableClientStates(true, true, true);
@@ -386,5 +388,7 @@ void StelViewportDistorterFisheyeToSphericMirror::paintViewportBuffer(const QOpe
 		sPainter.drawFromArray(StelPainter::TriangleStrip, (max_x+1)*2, j*(max_x+1)*2, false);
 	}
 	sPainter.enableClientStates(false);
+	GL(glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST));
+	GL(glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST));
 }
 
