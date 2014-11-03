@@ -17,16 +17,19 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
+#include "tests/testStelSphericalIndex.hpp"
+
 #include <QObject>
-#include <QtDebug>
-#include <QtTest>
+#include <QDebug>
+#include <QTest>
+
 #include <stdexcept>
 
 #include "StelSphereGeometry.hpp"
 #include "StelUtils.hpp"
-#include "tests/testStelSphericalIndex.hpp"
 
-QTEST_MAIN(TestStelSphericalIndex);
+
+QTEST_MAIN(TestStelSphericalIndex)
 
 class TestRegionObject : public StelRegionObject
 {
@@ -43,7 +46,7 @@ void TestStelSphericalIndex::initTestCase()
 struct CountFuncObject
 {
 	CountFuncObject() : count(0) {;}
-	void operator()(const StelRegionObjectP& obj)
+	void operator()(const StelRegionObject* /* obj */)
 	{
 		count++;
 	}

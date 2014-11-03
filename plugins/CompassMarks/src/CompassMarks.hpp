@@ -24,13 +24,15 @@
 #include "StelFader.hpp"
 #include <QFont>
 
-class QPixmap;
 class StelButton;
 
-//! This is an example of a plug-in which can be dynamically loaded into stellarium
+//! Main class of the Compass Marks plug-in.
+//! Provides a ring of marks indicating azimuth on the horizon,
+//! like a compass dial.
 class CompassMarks : public StelModule
 {
 	Q_OBJECT
+	Q_PROPERTY(bool marksVisible READ getCompassMarks WRITE setCompassMarks NOTIFY compassMarksChanged)
 public:
 	CompassMarks();
 	virtual ~CompassMarks();
@@ -42,25 +44,43 @@ public:
 	virtual void draw(StelCore* core);
 	virtual double getCallOrder(StelModuleActionName actionName) const;
 
+	bool getCompassMarks() const {return markFader;}
+
 public slots:
 	void setCompassMarks(bool b);
-	
+
+	//! Load the plug-in's settings from the configuration file.
+	//! Settings are kept in the "CompassMarks" section in Stellarium's
+	//! configuration file. If no such section exists, it will load default
+	//! values.
+	//! @see saveSettings(), restoreDefaultSettings()
+	void loadConfiguration();
+	//! Save the plug-in's settings to the configuration file.
+	//! @warning markColor is not saved.
+	//! @todo find a way to save color values without "rounding drift"
+	//! (this is especially important for restoring default color values).
+	//! @see loadSettings(), restoreDefaultSettings()
+	void saveConfiguration();
+	void restoreDefaultConfiguration();
+
+signals:
+	void compassMarksChanged(bool);
 private slots:
 	void cardinalPointsChanged(bool b);
 
 private:
-	// Font used for displaying our text
+	QSettings* conf;
+	//! Whether the marks should be displayed at startup.
+	bool displayedAtStartup;
+	//! Font used for displaying bearing numbers.
 	QFont font;
 	Vec3f markColor;
 	LinearFader markFader;
-	QPixmap* pxmapGlow;
-	QPixmap* pxmapOnIcon;
-	QPixmap* pxmapOffIcon;
 	StelButton* toolbarButton;
 	bool cardinalPointsState;
 };
 
-#include "fixx11h.h"
+
 #include <QObject>
 #include "StelPluginInterface.hpp"
 
@@ -68,6 +88,7 @@ private:
 class CompassMarksStelPluginInterface : public QObject, public StelPluginInterface
 {
 	Q_OBJECT
+	Q_PLUGIN_METADATA(IID "stellarium.StelGuiPluginInterface/1.0")
 	Q_INTERFACES(StelPluginInterface)
 public:
 	virtual StelModule* getStelModule() const;

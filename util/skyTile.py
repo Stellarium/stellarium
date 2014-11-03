@@ -1,5 +1,7 @@
 #!/usr/bin/python
+#
 # Fabien Chereau fchereau@eso.org
+#
 
 import os
 import gzip

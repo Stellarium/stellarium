@@ -62,7 +62,7 @@ public:
 	QString getNameI18n(void) const {return nameI18n;}
 	Vec3f getInfoColor(void) const
 	{
-		return StelApp::getInstance().getVisionModeNight() ? Vec3f(0.8, 0.2, 0.2) : Vec3f(1, 1, 1);
+		return Vec3f(1, 1, 1);
 	}
 	//! TelescopeClient supports the following InfoStringGroup flags:
 	//! - Name

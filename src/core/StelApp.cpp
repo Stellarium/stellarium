@@ -22,7 +22,6 @@
 #include "StelCore.hpp"
 #include "StelUtils.hpp"
 #include "StelTextureMgr.hpp"
-#include "StelLoadingBar.hpp"
 #include "StelObjectMgr.hpp"
 #include "ConstellationMgr.hpp"
 #include "NebulaMgr.hpp"
@@ -36,7 +35,9 @@
 #include "StelIniParser.hpp"
 #include "StelProjector.hpp"
 #include "StelLocationMgr.hpp"
+#include "StelActionMgr.hpp"
 
+#include "StelProgressController.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelSkyCultureMgr.hpp"
@@ -45,24 +46,133 @@
 #include "StelSkyLayerMgr.hpp"
 #include "StelAudioMgr.hpp"
 #include "StelVideoMgr.hpp"
+#include "StelViewportEffect.hpp"
 #include "StelGuiBase.hpp"
 #include "StelPainter.hpp"
+#ifndef DISABLE_SCRIPTING
+ #include "StelScriptMgr.hpp"
+ #include "StelMainScriptAPIProxy.hpp"
+#endif
 
+
+#include <cstdlib>
 #include <iostream>
-#include <QStringList>
-#include <QString>
+#include <QDebug>
 #include <QFile>
 #include <QFileInfo>
-#include <QTextStream>
 #include <QMouseEvent>
-#include <QDebug>
 #include <QNetworkAccessManager>
-#include <QSysInfo>
-#include <QNetworkProxy>
-#include <QMessageBox>
 #include <QNetworkDiskCache>
+#include <QNetworkProxy>
 #include <QNetworkReply>
-#include <cstdlib>
+#include <QOpenGLContext>
+#include <QOpenGLFramebufferObject>
+#include <QString>
+#include <QStringList>
+#include <QSysInfo>
+#include <QTextStream>
+#include <QTimer>
+#include <QDir>
+#include <QCoreApplication>
+#include <QScreen>
+
+Q_IMPORT_PLUGIN(StelStandardGuiPluginInterface)
+
+#ifdef USE_STATIC_PLUGIN_VIRGO
+Q_IMPORT_PLUGIN(VirGOStelPluginInterface)
+#endif
+
+#ifdef USE_STATIC_PLUGIN_SVMT
+Q_IMPORT_PLUGIN(SVMTStelPluginInterface)
+#endif
+
+#ifdef USE_STATIC_PLUGIN_HELLOSTELMODULE
+Q_IMPORT_PLUGIN(HelloStelModuleStelPluginInterface)
+#endif
+
+#ifdef USE_STATIC_PLUGIN_SIMPLEDRAWLINE
+Q_IMPORT_PLUGIN(SimpleDrawLineStelPluginInterface)
+#endif
+
+#ifdef USE_STATIC_PLUGIN_ANGLEMEASURE
+Q_IMPORT_PLUGIN(AngleMeasureStelPluginInterface)
+#endif
+
+#ifdef USE_STATIC_PLUGIN_COMPASSMARKS
+Q_IMPORT_PLUGIN(CompassMarksStelPluginInterface)
+#endif
+
+#ifdef USE_STATIC_PLUGIN_SATELLITES
+Q_IMPORT_PLUGIN(SatellitesStelPluginInterface)
+#endif
+
+#ifdef USE_STATIC_PLUGIN_TEXTUSERINTERFACE
+Q_IMPORT_PLUGIN(TextUserInterfaceStelPluginInterface)
+#endif
+
+#ifdef USE_STATIC_PLUGIN_LOGBOOK
+Q_IMPORT_PLUGIN(LogBookStelPluginInterface)
+#endif
+
+#ifdef USE_STATIC_PLUGIN_OCULARS
+Q_IMPORT_PLUGIN(OcularsStelPluginInterface)
+#endif
+
+#ifdef USE_STATIC_PLUGIN_TELESCOPECONTROL
+Q_IMPORT_PLUGIN(TelescopeControlStelPluginInterface)
+#endif
+
+#ifdef USE_STATIC_PLUGIN_SOLARSYSTEMEDITOR
+Q_IMPORT_PLUGIN(SolarSystemEditorStelPluginInterface)
+#endif
+
+#ifdef USE_STATIC_PLUGIN_TIMEZONECONFIGURATION
+Q_IMPORT_PLUGIN(TimeZoneConfigurationStelPluginInterface)
+#endif
+
+#ifdef USE_STATIC_PLUGIN_METEORSHOWERS
+Q_IMPORT_PLUGIN(MeteorShowersStelPluginInterface)
+#endif
+
+#ifdef USE_STATIC_PLUGIN_NAVSTARS
+Q_IMPORT_PLUGIN(NavStarsStelPluginInterface)
+#endif
+
+#ifdef USE_STATIC_PLUGIN_NOVAE
+Q_IMPORT_PLUGIN(NovaeStelPluginInterface)
+#endif
+
+#ifdef USE_STATIC_PLUGIN_SUPERNOVAE
+Q_IMPORT_PLUGIN(SupernovaeStelPluginInterface)
+#endif
+
+#ifdef USE_STATIC_PLUGIN_QUASARS
+Q_IMPORT_PLUGIN(QuasarsStelPluginInterface)
+#endif
+
+#ifdef USE_STATIC_PLUGIN_PULSARS
+Q_IMPORT_PLUGIN(PulsarsStelPluginInterface)
+#endif
+
+#ifdef USE_STATIC_PLUGIN_EXOPLANETS
+Q_IMPORT_PLUGIN(ExoplanetsStelPluginInterface)
+#endif
+
+#ifdef USE_STATIC_PLUGIN_EQUATIONOFTIME
+Q_IMPORT_PLUGIN(EquationOfTimeStelPluginInterface)
+#endif
+
+#ifdef USE_STATIC_PLUGIN_FOV
+Q_IMPORT_PLUGIN(FOVStelPluginInterface)
+#endif
+
+#ifdef USE_STATIC_PLUGIN_POINTERCOORDINATES
+Q_IMPORT_PLUGIN(PointerCoordinatesStelPluginInterface)
+#endif
+
+#ifdef USE_STATIC_PLUGIN_OBSERVABILITY
+Q_IMPORT_PLUGIN(ObservabilityStelPluginInterface)
+#endif
 
 // Initialize static variables
 StelApp* StelApp::singleton = NULL;
@@ -84,9 +194,31 @@ void StelApp::deinitStatic()
  Create and initialize the main Stellarium application.
 *************************************************************************/
 StelApp::StelApp(QObject* parent)
-	: QObject(parent), core(NULL), stelGui(NULL), fps(0),
-	  frame(0), timefr(0.), timeBase(0.), flagNightVision(false),
-	  confSettings(NULL), initialized(false), saveProjW(-1), saveProjH(-1), drawState(0)
+	: QObject(parent)
+	, core(NULL)
+	, planetLocationMgr(NULL)
+	, audioMgr(NULL)
+	, videoMgr(NULL)
+	, skyImageMgr(NULL)
+#ifndef DISABLE_SCRIPTING
+	, scriptAPIProxy(NULL)
+	, scriptMgr(NULL)
+#endif
+	, stelGui(NULL)
+	, devicePixelsPerPixel(1.f)
+	, globalScalingRatio(1.f)
+	, fps(0)
+	, frame(0)
+	, timefr(0.)
+	, timeBase(0.)
+	, flagNightVision(false)
+	, confSettings(NULL)
+	, initialized(false)
+	, saveProjW(-1)
+	, saveProjH(-1)
+	, baseFontSize(13)
+	, renderBuffer(NULL)
+	, viewportEffect(NULL)
 {
 	// Stat variables
 	nbDownloadedFiles=0;
@@ -102,12 +234,20 @@ StelApp::StelApp(QObject* parent)
 	textureMgr=NULL;
 	moduleMgr=NULL;
 	networkAccessManager=NULL;
+	actionMgr = NULL;
 
 	// Can't create 2 StelApp instances
 	Q_ASSERT(!singleton);
 	singleton = this;
 
 	moduleMgr = new StelModuleMgr();
+
+	wheelEventTimer = new QTimer(this);
+	wheelEventTimer->setInterval(25);
+	wheelEventTimer->setSingleShot(true);
+
+	// Reset delta accumulators
+	wheelEventDelta[0] = wheelEventDelta[1] = 0;
 }
 
 /*************************************************************************
@@ -133,6 +273,7 @@ StelApp::~StelApp()
 	delete textureMgr; textureMgr=NULL;
 	delete planetLocationMgr; planetLocationMgr=NULL;
 	delete moduleMgr; moduleMgr=NULL; // Delete the secondary instance
+	delete actionMgr; actionMgr = NULL;
 
 	Q_ASSERT(singleton);
 	singleton = NULL;
@@ -205,50 +346,49 @@ void StelApp::setupHttpProxy()
 	}
 }
 
+#ifndef DISABLE_SCRIPTING
+void StelApp::initScriptMgr(QSettings *conf)
+{
+	scriptAPIProxy = new StelMainScriptAPIProxy(this);
+	scriptMgr = new StelScriptMgr(this);
+	scriptMgr->addModules();
+	QString startupScript;
+	if (qApp->property("onetime_startup_script").isValid())
+		startupScript = qApp->property("onetime_startup_script").toString();
+	else
+		startupScript = conf->value("scripts/startup_script", "startup.ssc").toString();
+	// Use a queued slot call to start the script only once the main qApp event loop is running...
+	QMetaObject::invokeMethod(scriptMgr,
+				  "runScript",
+				  Qt::QueuedConnection,
+				  Q_ARG(QString, startupScript));
+}
+#else
+void StelApp::initScriptMgr(QSettings *conf) {Q_UNUSED(conf);}
+#endif
+
 void StelApp::init(QSettings* conf)
 {
 	confSettings = conf;
 
+	devicePixelsPerPixel = QOpenGLContext::currentContext()->screen()->devicePixelRatio();
+
+	setBaseFontSize(confSettings->value("gui/base_font_size", 13).toInt());
+	
 	core = new StelCore();
 	if (saveProjW!=-1 && saveProjH!=-1)
 		core->windowHasBeenResized(0, 0, saveProjW, saveProjH);
 
-#ifndef USE_OPENGL_ES2
-	// Avoid using GL Shaders by default since it causes so many problems with broken drivers.
-	useGLShaders = confSettings->value("main/use_glshaders", false).toBool();
-	useGLShaders = useGLShaders && QGLShaderProgram::hasOpenGLShaderPrograms() && !qApp->property("onetime_safe_mode").isValid();
-
-	// We use OpenGL 2.1 features in our shaders
-	useGLShaders = useGLShaders && (QGLFormat::openGLVersionFlags().testFlag(QGLFormat::OpenGL_Version_2_1) || QGLFormat::openGLVersionFlags().testFlag(QGLFormat::OpenGL_ES_Version_2_0));
-#else
-	useGLShaders = true;
-#endif
-
 	// Initialize AFTER creation of openGL context
 	textureMgr = new StelTextureMgr();
 	textureMgr->init();
-
-	QString splashFileName = "textures/logo24bits.png";
-
-#ifdef BUILD_FOR_MAEMO
-	StelLoadingBar loadingBar(splashFileName, "", 25, 320, 101, 800, 400);
-#else
- #ifdef BZR_REVISION
-	StelLoadingBar loadingBar(splashFileName, QString("BZR r%1").arg(BZR_REVISION), 25, 320, 101);
- #elif SVN_REVISION
-	StelLoadingBar loadingBar(splashFileName, QString("SVN r%1").arg(SVN_REVISION), 25, 320, 101);
- #else
-	StelLoadingBar loadingBar(splashFileName, PACKAGE_VERSION, 45, 320, 121);
- #endif
-#endif
-	loadingBar.draw();
 
 	networkAccessManager = new QNetworkAccessManager(this);
 	// Activate http cache if Qt version >= 4.5
 	QNetworkDiskCache* cache = new QNetworkDiskCache(networkAccessManager);
 	QString cachePath = StelFileMgr::getCacheDir();
 
-	qDebug() << "Cache directory is: " << cachePath;
+	qDebug() << "Cache directory is: " << QDir::toNativeSeparators(cachePath);
 	cache->setCacheDirectory(cachePath);
 	networkAccessManager->setCache(cache);
 	connect(networkAccessManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(reportFileDownloadFinished(QNetworkReply*)));
@@ -261,6 +401,7 @@ void StelApp::init(QSettings* conf)
 	localeMgr = new StelLocaleMgr();
 	skyCultureMgr = new StelSkyCultureMgr();
 	planetLocationMgr = new StelLocationMgr();
+	actionMgr = new StelActionMgr();
 
 	localeMgr->init();
 
@@ -312,7 +453,7 @@ void StelApp::init(QSettings* conf)
 	getModuleMgr().registerModule(gridLines);
 
 	// Meteors
-	MeteorMgr* meteors = new MeteorMgr(10, 60);
+	MeteorMgr* meteors = new MeteorMgr(10, 72);
 	meteors->init();
 	getModuleMgr().registerModule(meteors);
 
@@ -323,14 +464,21 @@ void StelApp::init(QSettings* conf)
 
 	skyCultureMgr->init();
 
+	initScriptMgr(conf);
+
 	// Initialisation of the color scheme
-	bool tmp = confSettings->value("viewing/flag_night").toBool();
-	flagNightVision=!tmp;  // fool caching
-	setVisionModeNight(tmp);
+	emit colorSchemeChanged("color");
+	setVisionModeNight(confSettings->value("viewing/flag_night").toBool());
+
+	// Enable viewport effect at startup if he set
+	setViewportEffect(confSettings->value("video/viewport_effect", "none").toString());
 
 	// Proxy Initialisation
 	setupHttpProxy();
 	updateI18n();
+
+	// Init actions.
+	actionMgr->addAction("actionShow_Night_Mode", N_("Display Options"), N_("Night mode"), this, "nightMode");
 
 	initialized = true;
 }
@@ -353,9 +501,39 @@ void StelApp::initPlugIns()
 	}
 }
 
+void StelApp::deinit()
+{
+#ifndef DISABLE_SCRIPTING
+	if (scriptMgr->scriptIsRunning())
+		scriptMgr->stopScript();
+#endif
+	QCoreApplication::processEvents();
+	getModuleMgr().unloadAllPlugins();
+	QCoreApplication::processEvents();
+	
+	StelPainter::deinitGLShaders();
+}
+
+
+StelProgressController* StelApp::addProgressBar()
+{
+	StelProgressController* p = new StelProgressController();
+	progressControllers.append(p);
+	emit(progressBarAdded(p));
+	return p;
+}
+
+void StelApp::removeProgressBar(StelProgressController* p)
+{
+	progressControllers.removeOne(p);	
+	emit(progressBarRemoved(p));
+	delete p;
+}
+
+
 void StelApp::update(double deltaTime)
 {
-	 if (!initialized)
+	if (!initialized)
 		return;
 
 	++frame;
@@ -367,7 +545,7 @@ void StelApp::update(double deltaTime)
 		frame = 0;
 		timeBase+=1.;
 	}
-
+		
 	core->update(deltaTime);
 
 	moduleMgr->update();
@@ -381,38 +559,42 @@ void StelApp::update(double deltaTime)
 	stelObjectMgr->update(deltaTime);
 }
 
-//! Iterate through the drawing sequence.
-bool StelApp::drawPartial()
+void StelApp::prepareRenderBuffer()
 {
-	if (drawState == 0)
+	if (!viewportEffect) return;
+	if (!renderBuffer)
 	{
-		if (!initialized)
-			return false;
-		core->preDraw();
-		drawState = 1;
-		return true;
+		StelProjector::StelProjectorParams params = core->getCurrentStelProjectorParams();
+		int w = params.viewportXywh[2];
+		int h = params.viewportXywh[3];
+		viewportEffect = new StelViewportDistorterFisheyeToSphericMirror(w, h);
+		renderBuffer = new QOpenGLFramebufferObject(w, h, QOpenGLFramebufferObject::CombinedDepthStencil);
 	}
+	renderBuffer->bind();
+}
 
-	const QList<StelModule*> modules = moduleMgr->getCallOrders(StelModule::ActionDraw);
-	int index = drawState - 1;
-	if (index < modules.size())
-	{
-		if (modules[index]->drawPartial(core))
-			return true;
-		drawState++;
-		return true;
-	}
-	core->postDraw();
-	drawState = 0;
-	return false;
+void StelApp::applyRenderBuffer()
+{
+	if (!renderBuffer) return;
+	renderBuffer->release();
+	viewportEffect->paintViewportBuffer(renderBuffer);
 }
 
 //! Main drawing function called at each frame
 void StelApp::draw()
 {
-	Q_ASSERT(drawState == 0);
-	while (drawPartial()) {}
-	Q_ASSERT(drawState == 0);
+	if (!initialized)
+		return;
+	prepareRenderBuffer();
+	core->preDraw();
+
+	const QList<StelModule*> modules = moduleMgr->getCallOrders(StelModule::ActionDraw);
+	foreach(StelModule* module, modules)
+	{
+		module->draw(core);
+	}
+	core->postDraw();
+	applyRenderBuffer();
 }
 
 /*************************************************************************
@@ -427,41 +609,83 @@ void StelApp::glWindowHasBeenResized(float x, float y, float w, float h)
 		saveProjW = w;
 		saveProjH = h;
 	}
+	if (renderBuffer)
+	{
+		delete renderBuffer;
+		renderBuffer = NULL;
+	}
 }
 
 // Handle mouse clics
-void StelApp::handleClick(QMouseEvent* event)
+void StelApp::handleClick(QMouseEvent* inputEvent)
 {
-	event->setAccepted(false);
+	QPointF pos = inputEvent->pos();
+	float x, y;
+	x = pos.x();
+	y = pos.y();
+	if (viewportEffect)
+		viewportEffect->distortXY(x, y);
+
+	QMouseEvent event(inputEvent->type(), QPoint(x*devicePixelsPerPixel, y*devicePixelsPerPixel), inputEvent->button(), inputEvent->buttons(), inputEvent->modifiers());
+	event.setAccepted(false);
+	
 	// Send the event to every StelModule
 	foreach (StelModule* i, moduleMgr->getCallOrders(StelModule::ActionHandleMouseClicks))
 	{
-		i->handleMouseClicks(event);
-		if (event->isAccepted())
+		i->handleMouseClicks(&event);
+		if (event.isAccepted())
+		{
+			inputEvent->setAccepted(true);
 			return;
+		}
 	}
 }
 
 // Handle mouse wheel.
+// This deltaEvent is a work-around for QTBUG-22269
 void StelApp::handleWheel(QWheelEvent* event)
 {
 	event->setAccepted(false);
-	// Send the event to every StelModule
-	foreach (StelModule* i, moduleMgr->getCallOrders(StelModule::ActionHandleMouseClicks))
+
+	const int deltaIndex = event->orientation() == Qt::Horizontal ? 0 : 1;
+	wheelEventDelta[deltaIndex] += event->delta();
+	if (wheelEventTimer->isActive())
 	{
-		i->handleMouseWheel(event);
-		if (event->isAccepted())
+		// Collect the values. If delta is small enough we wait for more values or the end
+		// of the timer period to process them.
+		if (qAbs(wheelEventDelta[deltaIndex]) < 120)
 			return;
+	}
+
+	wheelEventTimer->start();
+
+	// Create a new event with the accumulated delta
+	QWheelEvent deltaEvent(QPoint(event->pos().x()*devicePixelsPerPixel, event->pos().y()*devicePixelsPerPixel),
+	                       QPoint(event->globalPos().x()*devicePixelsPerPixel, event->globalPos().y()*devicePixelsPerPixel),
+	                       wheelEventDelta[deltaIndex], event->buttons(), event->modifiers(), event->orientation());
+	deltaEvent.setAccepted(false);
+	// Reset the collected values
+	wheelEventDelta[deltaIndex] = 0;
+
+	// Send the event to every StelModule
+	foreach (StelModule* i, moduleMgr->getCallOrders(StelModule::ActionHandleMouseClicks)) {
+		i->handleMouseWheel(&deltaEvent);
+		if (deltaEvent.isAccepted()) {
+			event->accept();
+			break;
+		}
 	}
 }
 
 // Handle mouse move
-void StelApp::handleMove(int x, int y, Qt::MouseButtons b)
+void StelApp::handleMove(float x, float y, Qt::MouseButtons b)
 {
+	if (viewportEffect)
+		viewportEffect->distortXY(x, y);
 	// Send the event to every StelModule
 	foreach (StelModule* i, moduleMgr->getCallOrders(StelModule::ActionHandleMouseMoves))
 	{
-		if (i->handleMouseMoves(x, y, b))
+		if (i->handleMouseMoves(x*devicePixelsPerPixel, y*devicePixelsPerPixel, b))
 			return;
 	}
 }
@@ -470,6 +694,15 @@ void StelApp::handleMove(int x, int y, Qt::MouseButtons b)
 void StelApp::handleKeys(QKeyEvent* event)
 {
 	event->setAccepted(false);
+	// First try to trigger a shortcut.
+	if (event->type() == QEvent::KeyPress)
+	{
+		if (getStelActionManager()->pushKey(event->key() + event->modifiers()))
+		{
+			event->setAccepted(true);
+			return;
+		}
+	}
 	// Send the event to every StelModule
 	foreach (StelModule* i, moduleMgr->getCallOrders(StelModule::ActionHandleKeys))
 	{
@@ -479,6 +712,16 @@ void StelApp::handleKeys(QKeyEvent* event)
 	}
 }
 
+// Handle pinch on multi touch devices
+void StelApp::handlePinch(qreal scale, bool started)
+{
+	// Send the event to every StelModule
+	foreach (StelModule* i, moduleMgr->getCallOrders(StelModule::ActionHandleMouseMoves))
+	{
+		if (i->handlePinch(scale, started))
+			return;
+	}
+}
 
 //! Set flag for activating night vision mode
 void StelApp::setVisionModeNight(bool b)
@@ -486,7 +729,7 @@ void StelApp::setVisionModeNight(bool b)
 	if (flagNightVision!=b)
 	{
 		flagNightVision=b;
-		emit(colorSchemeChanged(b ? "night_color" : "color"));
+		emit(visionNightModeChanged(b));
 	}
 }
 
@@ -525,4 +768,58 @@ void StelApp::reportFileDownloadFinished(QNetworkReply* reply)
 		++nbDownloadedFiles;
 		totalDownloadedSize+=reply->bytesAvailable();
 	}
+}
+
+void StelApp::quit()
+{
+	emit aboutToQuit();
+	QCoreApplication::exit(0);
+}
+
+void StelApp::setDevicePixelsPerPixel(float dppp)
+{
+	// Check that the device-independent pixel size didn't change
+	if (devicePixelsPerPixel!=dppp)
+	{
+		devicePixelsPerPixel = dppp;
+		StelProjector::StelProjectorParams params = core->getCurrentStelProjectorParams();
+		params.devicePixelsPerPixel = devicePixelsPerPixel;
+		core->setCurrentStelProjectorParams(params);
+	}
+}
+
+void StelApp::setViewportEffect(const QString& name)
+{
+	if (name == getViewportEffect()) return;
+	if (renderBuffer)
+	{
+		delete renderBuffer;
+		renderBuffer = NULL;
+	}
+	if (viewportEffect)
+	{
+		delete viewportEffect;
+		viewportEffect = NULL;
+	}
+	if (name == "none") return;
+
+	StelProjector::StelProjectorParams params = core->getCurrentStelProjectorParams();
+	int w = params.viewportXywh[2];
+	int h = params.viewportXywh[3];
+	if (name == "sphericMirrorDistorter")
+	{
+		viewportEffect = new StelViewportDistorterFisheyeToSphericMirror(w, h);
+	}
+	else
+	{
+		qDebug() << "unknown viewport effect name:" << name;
+		Q_ASSERT(false);
+	}
+}
+
+QString StelApp::getViewportEffect() const
+{
+	if (viewportEffect)
+		return viewportEffect->getName();
+	return "none";
 }

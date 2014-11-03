@@ -14,7 +14,7 @@
  * 
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
 #ifndef _STELNOGUI_HPP_
@@ -36,7 +36,6 @@ public:
 	virtual const StelObject::InfoStringGroup& getInfoTextFilters() const {return dummyInfoTextFilter;}
 	virtual class QProgressBar* addProgressBar();
 	virtual QAction* addGuiActions(const QString& actionName, const QString& text, const QString& shortCut, const QString& helpGroup, bool checkable=true, bool autoRepeat=false) {return NULL;}
-	virtual QAction* getGuiActions(const QString& actionName) {return NULL;}
 	virtual void forceRefreshGui() {;}	
 	virtual void setVisible(bool b) {visible=b;}
 	virtual bool getVisible() const {return visible;}

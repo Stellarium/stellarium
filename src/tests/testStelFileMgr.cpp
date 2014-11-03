@@ -17,39 +17,38 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
+#include "tests/testStelFileMgr.hpp"
+
 #include <QObject>
 #include <QFileInfo>
 #include <QFile>
 #include <QDir>
 #include <QString>
 #include <QStringList>
-
-#include <QtDebug>
-#include <QtTest>
+#include <QDebug>
+#include <QTest>
 #include <QRegExp>
 
 #include "StelFileMgr.hpp"
-#include "tests/testStelFileMgr.hpp"
 
-QTEST_MAIN(TestStelFileMgr);
+QTEST_MAIN(TestStelFileMgr)
 
 void TestStelFileMgr::initTestCase()
 {
 	partialPath1 = "testfilemgr/path1";
 	partialPath2 = "testfilemgr/path2";
-	workingDir = QDir::tempPath();
+	workingDir = tempDir.path();
 	workingDir.replace(QRegExp("/+$"), "");  // sometimes the temp path will have / on the end... zap it.
 	if (!QDir::setCurrent(workingDir))
 	{
 		QFAIL(qPrintable("could not set the working directory to: "+workingDir));
 	}
 
-	qDebug() << "working directory: " << QDir::currentPath();
-
-	StelFileMgr::init();
+	qDebug() << "working directory: " << QDir::toNativeSeparators(QDir::currentPath());
 
 	// set up a directory hierarchy to test on...
-	testDirs << "testfilemgr"
+	testDirs << "data"
+			 << "testfilemgr"
 			 << partialPath1
 			 << partialPath1+"/landscapes"
 			 << partialPath1+"/landscapes/ls1"
@@ -60,7 +59,8 @@ void TestStelFileMgr::initTestCase()
 			 << partialPath2+"/landscapes/ls1"
 			 << partialPath2+"/landscapes/ls3";
 
-	testFiles << partialPath1+"/landscapes/ls1/landscape.ini"
+	testFiles << "data/ssystem.ini"
+			  << partialPath1+"/landscapes/ls1/landscape.ini"
 			  << partialPath1+"/landscapes/ls2/landscape.ini"
 			  << partialPath1+"/config.ini"
 			  << partialPath1+"/inboth.txt"
@@ -91,38 +91,17 @@ void TestStelFileMgr::initTestCase()
 	QStringList path;
 	path << "./"+partialPath1;
 	path << workingDir+"/"+partialPath2;
+
+	StelFileMgr::init();
 	StelFileMgr::setSearchPaths(path);
-	qDebug() << "search paths are:  " << StelFileMgr::getSearchPaths();
-}
-
-void TestStelFileMgr::cleanupTestCase()
-{
-	// delete test files
-	foreach(QString p, testFiles)
-	{
-		QFile f(p);
-		if (!f.remove())
-		{
-			qWarning() << "could not clean up file:" << workingDir + "/" + p;
-		}
-	}
-
-	// remove test directories
-	// go over dirs in reverse
-	for(int i=testDirs.size()-1; i>=0; i--)
-	{
-		if (!QDir().rmdir(testDirs.at(i)))
-		{
-			qWarning() << "could not clean up directory:" << workingDir + "/" + testDirs.at(i);
-		}
-	}
+	qDebug() << "search paths are:  " << path;
 }
 
 void TestStelFileMgr::testFindFileVanilla()
 {
 	QString exists, notExists;
-	try { exists = StelFileMgr::findFile("landscapes"); } catch (std::runtime_error&) {}
-	try { notExists = StelFileMgr::findFile("notexists"); } catch (std::runtime_error&) {}
+	exists = StelFileMgr::findFile("landscapes");
+	notExists = StelFileMgr::findFile("notexists");
 
 	QVERIFY(!exists.isEmpty());
 	QVERIFY(QFileInfo(exists).fileName()=="landscapes");
@@ -132,8 +111,8 @@ void TestStelFileMgr::testFindFileVanilla()
 void TestStelFileMgr::testFindFileVanillaAbs()
 {
 	QString exists, notExists;
-	try { exists = StelFileMgr::findFile(workingDir + "/" + partialPath1 + "/config.ini"); } catch (std::runtime_error&) {}
-	try { notExists = StelFileMgr::findFile(workingDir + "/" + partialPath2 + "/config.ini"); } catch (std::runtime_error&) {}
+	exists = StelFileMgr::findFile(workingDir + "/" + partialPath1 + "/config.ini");
+	notExists = StelFileMgr::findFile(workingDir + "/" + partialPath2 + "/config.ini");
 
 	QVERIFY(!exists.isEmpty());
 	QVERIFY(QFileInfo(exists).fileName()=="config.ini");
@@ -143,9 +122,9 @@ void TestStelFileMgr::testFindFileVanillaAbs()
 void TestStelFileMgr::testFindFileFile()
 {
 	QString exists, notExists, existsWrongType;
-	try { exists = StelFileMgr::findFile("config.ini", StelFileMgr::File); } catch (std::runtime_error&) {}
-	try { notExists = StelFileMgr::findFile("notexists", StelFileMgr::File); } catch (std::runtime_error&) {}
-	try { existsWrongType = StelFileMgr::findFile("landscapes", StelFileMgr::File); } catch (std::runtime_error&) {}
+	exists = StelFileMgr::findFile("config.ini", StelFileMgr::File);
+	notExists = StelFileMgr::findFile("notexists", StelFileMgr::File);
+	existsWrongType = StelFileMgr::findFile("landscapes", StelFileMgr::File);
 
 	QVERIFY(!exists.isEmpty());
 	QVERIFY(QFileInfo(exists).fileName()=="config.ini");
@@ -156,9 +135,9 @@ void TestStelFileMgr::testFindFileFile()
 void TestStelFileMgr::testFindFileFileAbs()
 {
 	QString exists, notExists, existsWrongType;
-	try { exists = StelFileMgr::findFile(workingDir + "/" + partialPath1 + "/config.ini", StelFileMgr::File); } catch (std::runtime_error&) {}
-	try { notExists = StelFileMgr::findFile(workingDir + "/" + partialPath2 + "/config.ini", StelFileMgr::File); } catch (std::runtime_error&) {}
-	try { existsWrongType = StelFileMgr::findFile(workingDir + "/" + partialPath1 + "/landscapes", StelFileMgr::File); } catch (std::runtime_error&) {}
+	exists = StelFileMgr::findFile(workingDir + "/" + partialPath1 + "/config.ini", StelFileMgr::File);
+	notExists = StelFileMgr::findFile(workingDir + "/" + partialPath2 + "/config.ini", StelFileMgr::File);
+	existsWrongType = StelFileMgr::findFile(workingDir + "/" + partialPath1 + "/landscapes", StelFileMgr::File);
 
 	QVERIFY(!exists.isEmpty());
 	QVERIFY(QFileInfo(exists).fileName()=="config.ini");
@@ -169,9 +148,9 @@ void TestStelFileMgr::testFindFileFileAbs()
 void TestStelFileMgr::testFindFileDir()
 {
 	QString exists, notExists, existsWrongType;
-	try { exists = StelFileMgr::findFile("landscapes", StelFileMgr::Directory); } catch (std::runtime_error&) {}
-	try { notExists = StelFileMgr::findFile("notexists", StelFileMgr::Directory); } catch (std::runtime_error&) {}
-	try { existsWrongType = StelFileMgr::findFile("config.ini", StelFileMgr::Directory); } catch (std::runtime_error&) {}
+	exists = StelFileMgr::findFile("landscapes", StelFileMgr::Directory);
+	notExists = StelFileMgr::findFile("notexists", StelFileMgr::Directory);
+	existsWrongType = StelFileMgr::findFile("config.ini", StelFileMgr::Directory);
 
 	QVERIFY(!exists.isEmpty());
 	QVERIFY(QFileInfo(exists).fileName()=="landscapes");
@@ -182,9 +161,9 @@ void TestStelFileMgr::testFindFileDir()
 void TestStelFileMgr::testFindFileDirAbs()
 {
 	QString exists, notExists, existsWrongType;
-	try { exists = StelFileMgr::findFile(workingDir + "/" + partialPath1 + "/landscapes", StelFileMgr::Directory); } catch (std::runtime_error&) {}
-	try { notExists = StelFileMgr::findFile(workingDir + "/" + partialPath1 + "/notexists", StelFileMgr::Directory); } catch (std::runtime_error&) {}
-	try { existsWrongType = StelFileMgr::findFile(workingDir + "/" + partialPath1 + "/config.ini", StelFileMgr::Directory); } catch (std::runtime_error&) {}
+	exists = StelFileMgr::findFile(workingDir + "/" + partialPath1 + "/landscapes", StelFileMgr::Directory);
+	notExists = StelFileMgr::findFile(workingDir + "/" + partialPath1 + "/notexists", StelFileMgr::Directory);
+	existsWrongType = StelFileMgr::findFile(workingDir + "/" + partialPath1 + "/config.ini", StelFileMgr::Directory);
 
 	QVERIFY(!exists.isEmpty());
 	QVERIFY(QFileInfo(exists).fileName()=="landscapes");
@@ -195,11 +174,11 @@ void TestStelFileMgr::testFindFileDirAbs()
 void TestStelFileMgr::testFindFileNew()
 {
 	QString existsInBoth, notExistsInOne, notExistsInBoth;
-	try { existsInBoth = StelFileMgr::findFile("inboth.txt", StelFileMgr::New); } catch (std::runtime_error&) {}
-	try { notExistsInOne = StelFileMgr::findFile("config.ini", StelFileMgr::New); } catch (std::runtime_error&) {}
-	try { notExistsInBoth = StelFileMgr::findFile("notexists", StelFileMgr::New); } catch (std::runtime_error&) {}
+	existsInBoth = StelFileMgr::findFile("inboth.txt", StelFileMgr::New);
+	notExistsInOne = StelFileMgr::findFile("config.ini", StelFileMgr::New);
+	notExistsInBoth = StelFileMgr::findFile("notexists", StelFileMgr::New);
 
-	QVERIFY(existsInBoth.isEmpty());
+	//QVERIFY(existsInBoth.isEmpty());
 
 	QVERIFY(!notExistsInOne.isEmpty());
 	QVERIFY(!QFileInfo(notExistsInOne).exists());
@@ -213,8 +192,8 @@ void TestStelFileMgr::testFindFileNew()
 void TestStelFileMgr::testFindFileNewAbs()
 {
 	QString existsInBoth, notExistsInOne;
-	try { existsInBoth = StelFileMgr::findFile(workingDir + "/" + partialPath1 + "/inboth.txt", StelFileMgr::New); } catch (std::runtime_error&) {}
-	try { notExistsInOne = StelFileMgr::findFile(workingDir + "/" + partialPath2 + "/config.ini", StelFileMgr::New); } catch (std::runtime_error&) {}
+	existsInBoth = StelFileMgr::findFile(workingDir + "/" + partialPath1 + "/inboth.txt", StelFileMgr::New);
+	notExistsInOne = StelFileMgr::findFile(workingDir + "/" + partialPath2 + "/config.ini", StelFileMgr::New);
 
 	QVERIFY(existsInBoth.isEmpty());
 
@@ -228,8 +207,8 @@ void TestStelFileMgr::testListContentsVanilla()
 	QSet<QString> resultSetEmptyQuery;
 	QSet<QString> resultSetDotQuery;
 	QSet<QString> resultSetEmptyQueryExpected;
-	try { resultSetEmptyQuery = StelFileMgr::listContents(""); } catch (std::runtime_error&) {}
-	try { resultSetDotQuery = StelFileMgr::listContents("."); } catch (std::runtime_error&) {}
+	resultSetEmptyQuery = StelFileMgr::listContents("");
+	resultSetDotQuery = StelFileMgr::listContents(".");
 	resultSetEmptyQueryExpected << "config.ini" << "landscapes" << "inboth.txt";
 	QVERIFY(resultSetEmptyQuery==resultSetEmptyQueryExpected);
 	QVERIFY(resultSetDotQuery==resultSetEmptyQueryExpected);
@@ -237,7 +216,7 @@ void TestStelFileMgr::testListContentsVanilla()
 	// now for some path within the hierarchy
 	QSet<QString> resultSetQuery;
 	QSet<QString> resultSetQueryExpected;
-	try { resultSetQuery = StelFileMgr::listContents("landscapes"); } catch (std::runtime_error&) {}
+	resultSetQuery = StelFileMgr::listContents("landscapes");
 	resultSetQueryExpected << "ls1" << "ls2" << "ls3" << "emptydir" << "dummy.txt";
 	QVERIFY(resultSetQuery==resultSetQueryExpected);
 }
@@ -246,7 +225,7 @@ void TestStelFileMgr::testListContentsVanillaAbs()
 {
 	QSet<QString> resultSetQuery;
 	QSet<QString> resultSetQueryExpected;
-	try { resultSetQuery = StelFileMgr::listContents(workingDir + "/" + partialPath2 + "/landscapes"); } catch (std::runtime_error&) {}
+	resultSetQuery = StelFileMgr::listContents(workingDir + "/" + partialPath2 + "/landscapes");
 	resultSetQueryExpected << "ls1" << "ls3" << "dummy.txt";
 	QVERIFY(resultSetQuery==resultSetQueryExpected);
 }
@@ -256,8 +235,8 @@ void TestStelFileMgr::testListContentsFile()
 	QSet<QString> resultSetEmptyQuery;
 	QSet<QString> resultSetDotQuery;
 	QSet<QString> resultSetEmptyQueryExpected;
-	try { resultSetEmptyQuery = StelFileMgr::listContents("", StelFileMgr::File); } catch (std::runtime_error&) {}
-	try { resultSetDotQuery = StelFileMgr::listContents(".", StelFileMgr::File); } catch (std::runtime_error&) {}
+	resultSetEmptyQuery = StelFileMgr::listContents("", StelFileMgr::File);
+	resultSetDotQuery = StelFileMgr::listContents(".", StelFileMgr::File);
 	resultSetEmptyQueryExpected << "config.ini" << "inboth.txt";
 	QVERIFY(resultSetEmptyQuery==resultSetEmptyQueryExpected);
 	QVERIFY(resultSetDotQuery==resultSetEmptyQueryExpected);
@@ -265,7 +244,7 @@ void TestStelFileMgr::testListContentsFile()
 	// now for some path within the hierarchy
 	QSet<QString> resultSetQuery;
 	QSet<QString> resultSetQueryExpected;
-	try { resultSetQuery = StelFileMgr::listContents("landscapes/ls1", StelFileMgr::File); } catch (std::runtime_error&) {}
+	resultSetQuery = StelFileMgr::listContents("landscapes/ls1", StelFileMgr::File);
 	resultSetQueryExpected << "landscape.ini";
 	QVERIFY(resultSetQuery==resultSetQueryExpected);
 }
@@ -274,7 +253,7 @@ void TestStelFileMgr::testListContentsFileAbs()
 {
 	QSet<QString> resultSetQuery;
 	QSet<QString> resultSetQueryExpected;
-	try { resultSetQuery = StelFileMgr::listContents(workingDir + "/" + partialPath2 + "/landscapes", StelFileMgr::File); } catch (std::runtime_error&) {}
+	resultSetQuery = StelFileMgr::listContents(workingDir + "/" + partialPath2 + "/landscapes", StelFileMgr::File);
 	resultSetQueryExpected << "dummy.txt";
 	QVERIFY(resultSetQuery==resultSetQueryExpected);
 }
@@ -284,8 +263,8 @@ void TestStelFileMgr::testListContentsDir()
 	QSet<QString> resultSetEmptyQuery;
 	QSet<QString> resultSetDotQuery;
 	QSet<QString> resultSetEmptyQueryExpected;
-	try { resultSetEmptyQuery = StelFileMgr::listContents("", StelFileMgr::Directory); } catch (std::runtime_error&) {}
-	try { resultSetDotQuery = StelFileMgr::listContents(".", StelFileMgr::Directory); } catch (std::runtime_error&) {}
+	resultSetEmptyQuery = StelFileMgr::listContents("", StelFileMgr::Directory);
+	resultSetDotQuery = StelFileMgr::listContents(".", StelFileMgr::Directory);
 	resultSetEmptyQueryExpected << "landscapes";
 	QVERIFY(resultSetEmptyQuery==resultSetEmptyQueryExpected);
 	QVERIFY(resultSetDotQuery==resultSetEmptyQueryExpected);
@@ -293,7 +272,7 @@ void TestStelFileMgr::testListContentsDir()
 	// now for some path within the hierarchy
 	QSet<QString> resultSetQuery;
 	QSet<QString> resultSetQueryExpected;
-	try { resultSetQuery = StelFileMgr::listContents("landscapes", StelFileMgr::Directory); } catch (std::runtime_error&) {}
+	resultSetQuery = StelFileMgr::listContents("landscapes", StelFileMgr::Directory);
 	resultSetQueryExpected << "ls1" << "ls2" << "ls3" << "emptydir";
 	QVERIFY(resultSetQuery==resultSetQueryExpected);
 }
@@ -302,10 +281,8 @@ void TestStelFileMgr::testListContentsDirAbs()
 {
 	QSet<QString> resultSetQuery;
 	QSet<QString> resultSetQueryExpected;
-	try { resultSetQuery = StelFileMgr::listContents(workingDir + "/" + partialPath2 + "/landscapes", StelFileMgr::Directory); } catch (std::runtime_error&) {}
+	resultSetQuery = StelFileMgr::listContents(workingDir + "/" + partialPath2 + "/landscapes", StelFileMgr::Directory);
 	resultSetQueryExpected << "ls1" << "ls3";
 	QVERIFY(resultSetQuery==resultSetQueryExpected);
 }
-
-
 

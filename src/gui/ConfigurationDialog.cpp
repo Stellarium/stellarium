@@ -21,16 +21,17 @@
 
 #include "Dialog.hpp"
 #include "ConfigurationDialog.hpp"
-#include "StelMainGraphicsView.hpp"
-#include "StelMainWindow.hpp"
+#include "CustomDeltaTEquationDialog.hpp"
+#include "StelMainView.hpp"
 #include "ui_configurationDialog.h"
-#include "StelAppGraphicsWidget.hpp"
 #include "StelApp.hpp"
 #include "StelFileMgr.hpp"
 #include "StelCore.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelProjector.hpp"
 #include "StelObjectMgr.hpp"
+#include "StelActionMgr.hpp"
+#include "StelProgressController.hpp"
 
 #include "StelCore.hpp"
 #include "StelMovementMgr.hpp"
@@ -47,6 +48,7 @@
 #include "StarMgr.hpp"
 #include "NebulaMgr.hpp"
 #include "GridLinesMgr.hpp"
+#include "MilkyWay.hpp"
 #ifndef DISABLE_SCRIPTING
 #include "StelScriptMgr.hpp"
 #endif
@@ -60,19 +62,39 @@
 #include <QDebug>
 #include <QFile>
 #include <QFileDialog>
+#include <QComboBox>
+#include <QDir>
 
-ConfigurationDialog::ConfigurationDialog(StelGui* agui) : StelDialog(agui), starCatalogDownloadReply(NULL), currentDownloadFile(NULL), progressBar(NULL), gui(agui)
+ConfigurationDialog::ConfigurationDialog(StelGui* agui, QObject* parent)
+	: StelDialog(parent)
+	, nextStarCatalogToDownloadIndex(0)
+	, starCatalogsCount(0)
+	, starCatalogDownloadReply(NULL)
+	, currentDownloadFile(NULL)
+	, progressBar(NULL)
+	, gui(agui)
 {
 	ui = new Ui_configurationDialogForm;
+	customDeltaTEquationDialog = NULL;
 	hasDownloadedStarCatalog = false;
 	isDownloadingStarCatalog = false;
-	savedProjectionType = StelApp::getInstance().getCore()->getCurrentProjectionType();	
+	savedProjectionType = StelApp::getInstance().getCore()->getCurrentProjectionType();
+	// Get info about operating system
+	QString platform = StelUtils::getOperatingSystemInfo();
+	if (platform.contains("Linux"))
+		platform = "Linux";
+	if (platform.contains("FreeBSD"))
+		platform = "FreeBSD";
+	// Set user agent as "Stellarium/$version$ ($platform$)"
+	userAgent = QString("Stellarium/%1 (%2)").arg(StelUtils::getApplicationVersion()).arg(platform);
 }
 
 ConfigurationDialog::~ConfigurationDialog()
 {
 	delete ui;
-	ui = 0;
+	ui = NULL;
+	delete customDeltaTEquationDialog;
+	customDeltaTEquationDialog = NULL;
 }
 
 void ConfigurationDialog::retranslate()
@@ -99,31 +121,14 @@ void ConfigurationDialog::retranslate()
 
 		//Plug-in information
 		populatePluginsList();
+
+		populateDeltaTAlgorithmsList();		
 	}
 }
 
 void ConfigurationDialog::styleChanged()
 {
 	// Nothing for now
-}
-
-void ConfigurationDialog::updateIconsColor()
-{
-	QPixmap pixmap(50, 50);
-	QStringList icons;
-	icons << "main" << "info" << "navigation" << "tools" << "scripts" << "plugins";
-	bool redIcon = false;
-	if (StelApp::getInstance().getVisionModeNight())
-		redIcon = true;
-
-	foreach(const QString &iconName, icons)
-	{
-		pixmap.load(":/graphicGui/tabicon-" + iconName +".png");
-		if (redIcon)
-			pixmap = StelButton::makeRed(pixmap);
-
-		ui->stackListWidget->item(icons.indexOf(iconName))->setIcon(QIcon(pixmap));
-	}
 }
 
 void ConfigurationDialog::createDialogContent()
@@ -135,38 +140,37 @@ void ConfigurationDialog::createDialogContent()
 
 	ui->setupUi(dialog);
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
-	connect(&StelApp::getInstance(), SIGNAL(colorSchemeChanged(QString)), this, SLOT(updateIconsColor()));
 
 	// Set the main tab activated by default
 	ui->configurationStackedWidget->setCurrentIndex(0);
-	updateIconsColor();
 	ui->stackListWidget->setCurrentRow(0);
 
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 
 	// Main tab
 	// Fill the language list widget from the available list
-	QString appLang = StelApp::getInstance().getLocaleMgr().getAppLanguage();
 	QComboBox* cb = ui->programLanguageComboBox;
 	cb->clear();
-	cb->addItems(StelTranslator::globalTranslator.getAvailableLanguagesNamesNative(StelFileMgr::getLocaleDir()));
+	cb->addItems(StelTranslator::globalTranslator->getAvailableLanguagesNamesNative(StelFileMgr::getLocaleDir()));
 	cb->model()->sort(0);
-	QString l2 = StelTranslator::iso639_1CodeToNativeName(appLang);
-	int lt = cb->findText(l2, Qt::MatchExactly);
-	if (lt == -1 && appLang.contains('_'))
-	{
-		l2 = appLang.left(appLang.indexOf('_'));
-		l2=StelTranslator::iso639_1CodeToNativeName(l2);
-		lt = cb->findText(l2, Qt::MatchExactly);
-	}
-	if (lt!=-1)
-		cb->setCurrentIndex(lt);
+	updateCurrentLanguage();
+	connect(cb->lineEdit(), SIGNAL(editingFinished()), this, SLOT(updateCurrentLanguage()));
 	connect(cb, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(selectLanguage(const QString&)));
+
+	ui->groupBoxUpdates->setChecked(StelApp::getInstance().getSettings()->value("main/check_updates_enabled", true).toBool());
+	connect(ui->groupBoxUpdates, SIGNAL(toggled(bool)), this, SLOT(setUpdatesFlag(bool)));
 
 	connect(ui->getStarsButton, SIGNAL(clicked()), this, SLOT(downloadStars()));
 	connect(ui->downloadCancelButton, SIGNAL(clicked()), this, SLOT(cancelDownload()));
 	connect(ui->downloadRetryButton, SIGNAL(clicked()), this, SLOT(downloadStars()));
 	resetStarCatalogControls();
+
+#ifdef Q_OS_WIN
+	//Kinetic scrolling for tablet pc and pc
+	QList<QWidget *> addscroll;
+	addscroll << ui->pluginsListWidget << ui->scriptListWidget;
+	installKineticScrolling(addscroll);
+#endif
 
 	// Selected object info
 	if (gui->getInfoTextFilters() == StelObject::InfoStringGroup(0))
@@ -190,8 +194,7 @@ void ConfigurationDialog::createDialogContent()
 	connect(ui->noSelectedInfoRadio, SIGNAL(released()), this, SLOT(setNoSelectedInfo()));
 	connect(ui->allSelectedInfoRadio, SIGNAL(released()), this, SLOT(setAllSelectedInfo()));
 	connect(ui->briefSelectedInfoRadio, SIGNAL(released()), this, SLOT(setBriefSelectedInfo()));
-	connect(ui->buttonGroupDisplayedFields, SIGNAL(buttonClicked(int)),
-	        this, SLOT(setSelectedInfoFromCheckBoxes()));
+	connect(ui->buttonGroupDisplayedFields, SIGNAL(buttonClicked(int)), this, SLOT(setSelectedInfoFromCheckBoxes()));
 	
 	// Navigation tab
 	// Startup time
@@ -217,11 +220,24 @@ void ConfigurationDialog::createDialogContent()
 	connect(ui->enableKeysNavigationCheckBox, SIGNAL(toggled(bool)), mvmgr, SLOT(setFlagEnableZoomKeys(bool)));
 	connect(ui->enableMouseNavigationCheckBox, SIGNAL(toggled(bool)), mvmgr, SLOT(setFlagEnableMouseNavigation(bool)));
 	connect(ui->fixedDateTimeCurrentButton, SIGNAL(clicked()), this, SLOT(setFixedDateTimeToCurrent()));
+	connect(ui->editShortcutsPushButton, SIGNAL(clicked()), this, SLOT(showShortcutsWindow()));
+
+	// Delta-T
+	populateDeltaTAlgorithmsList();	
+	int idx = ui->deltaTAlgorithmComboBox->findData(core->getCurrentDeltaTAlgorithmKey(), Qt::UserRole, Qt::MatchCaseSensitive);
+	if (idx==-1)
+	{
+		// Use Espenak & Meeus (2006) as default
+		idx = ui->deltaTAlgorithmComboBox->findData(QVariant("EspenakMeeus"), Qt::UserRole, Qt::MatchCaseSensitive);
+	}
+	ui->deltaTAlgorithmComboBox->setCurrentIndex(idx);
+	connect(ui->deltaTAlgorithmComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(setDeltaTAlgorithm(int)));
+	connect(ui->pushButtonCustomDeltaTEquationDialog, SIGNAL(clicked()), this, SLOT(showCustomDeltaTEquationDialog()));
 
 	// Tools tab
 	ConstellationMgr* cmgr = GETSTELMODULE(ConstellationMgr);
 	Q_ASSERT(cmgr);
-	ui->sphericMirrorCheckbox->setChecked(StelMainGraphicsView::getInstance().getStelAppGraphicsWidget()->getViewportEffect() == "sphericMirrorDistorter");
+	ui->sphericMirrorCheckbox->setChecked(StelApp::getInstance().getViewportEffect() == "sphericMirrorDistorter");
 	connect(ui->sphericMirrorCheckbox, SIGNAL(toggled(bool)), this, SLOT(setSphericMirror(bool)));
 	ui->gravityLabelCheckbox->setChecked(proj->getFlagGravityLabels());
 	connect(ui->gravityLabelCheckbox, SIGNAL(toggled(bool)), StelApp::getInstance().getCore(), SLOT(setFlagGravityLabels(bool)));
@@ -238,8 +254,11 @@ void ConfigurationDialog::createDialogContent()
 	ui->showNebulaBgButtonCheckbox->setChecked(gui->getFlagShowNebulaBackgroundButton());
 	connect(ui->showNebulaBgButtonCheckbox, SIGNAL(toggled(bool)), gui, SLOT(setFlagShowNebulaBackgroundButton(bool)));
 
-	ui->mouseTimeoutCheckbox->setChecked(StelMainGraphicsView::getInstance().getFlagCursorTimeout());
-	ui->mouseTimeoutSpinBox->setValue(StelMainGraphicsView::getInstance().getCursorTimeout());
+	ui->decimalDegreeCheckBox->setChecked(gui->getFlagShowDecimalDegrees());
+	connect(ui->decimalDegreeCheckBox, SIGNAL(toggled(bool)), gui, SLOT(setFlagShowDecimalDegrees(bool)));
+
+	ui->mouseTimeoutCheckbox->setChecked(StelMainView::getInstance().getFlagCursorTimeout());
+	ui->mouseTimeoutSpinBox->setValue(StelMainView::getInstance().getCursorTimeout());
 	connect(ui->mouseTimeoutCheckbox, SIGNAL(clicked()), this, SLOT(cursorTimeOutChanged()));
 	connect(ui->mouseTimeoutCheckbox, SIGNAL(toggled(bool)), this, SLOT(cursorTimeOutChanged()));
 	connect(ui->mouseTimeoutSpinBox, SIGNAL(valueChanged(double)), this, SLOT(cursorTimeOutChanged(double)));
@@ -251,12 +270,16 @@ void ConfigurationDialog::createDialogContent()
 	connect(ui->screenshotDirEdit, SIGNAL(textChanged(QString)), this, SLOT(selectScreenshotDir(QString)));
 	connect(ui->screenshotBrowseButton, SIGNAL(clicked()), this, SLOT(browseForScreenshotDir()));
 
-	ui->invertScreenShotColorsCheckBox->setChecked(StelMainGraphicsView::getInstance().getFlagInvertScreenShotColors());
-	connect(ui->invertScreenShotColorsCheckBox, SIGNAL(toggled(bool)), &StelMainGraphicsView::getInstance(), SLOT(setFlagInvertScreenShotColors(bool)));
+	ui->invertScreenShotColorsCheckBox->setChecked(StelMainView::getInstance().getFlagInvertScreenShotColors());
+	connect(ui->invertScreenShotColorsCheckBox, SIGNAL(toggled(bool)), &StelMainView::getInstance(), SLOT(setFlagInvertScreenShotColors(bool)));
+
+	LandscapeMgr *lmgr = GETSTELMODULE(LandscapeMgr);
+	ui->autoEnableAtmosphereCheckBox->setChecked(lmgr->getFlagAtmosphereAutoEnable());
+	connect(ui->autoEnableAtmosphereCheckBox, SIGNAL(toggled(bool)), lmgr, SLOT(setFlagAtmosphereAutoEnable(bool)));
 
 	// script tab controls
 	#ifndef DISABLE_SCRIPTING
-	StelScriptMgr& scriptMgr = StelMainGraphicsView::getInstance().getScriptMgr();
+	StelScriptMgr& scriptMgr = StelApp::getInstance().getScriptMgr();
 	connect(ui->scriptListWidget, SIGNAL(currentTextChanged(const QString&)), this, SLOT(scriptSelectionChanged(const QString&)));
 	connect(ui->runScriptButton, SIGNAL(clicked()), this, SLOT(runScriptClicked()));
 	connect(ui->stopScriptButton, SIGNAL(clicked()), this, SLOT(stopScriptClicked()));
@@ -272,8 +295,9 @@ void ConfigurationDialog::createDialogContent()
 	#endif
 
 	// plugins control
-	connect(ui->pluginsListWidget, SIGNAL(currentTextChanged(const QString&)), this, SLOT(pluginsSelectionChanged(const QString&)));
+	connect(ui->pluginsListWidget, SIGNAL(currentItemChanged(QListWidgetItem*, QListWidgetItem*)), this, SLOT(pluginsSelectionChanged(QListWidgetItem*, QListWidgetItem*)));
 	connect(ui->pluginLoadAtStartupCheckBox, SIGNAL(stateChanged(int)), this, SLOT(loadAtStartupChanged(int)));
+	connect(ui->pluginsListWidget, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(pluginConfigureCurrentSelection()));
 	connect(ui->pluginConfigureButton, SIGNAL(clicked()), this, SLOT(pluginConfigureCurrentSelection()));
 	populatePluginsList();
 
@@ -281,12 +305,37 @@ void ConfigurationDialog::createDialogContent()
 	updateTabBarListWidgetWidth();
 }
 
+void ConfigurationDialog::setUpdatesFlag(bool b)
+{
+	StelApp::getInstance().getSettings()->setValue("main/check_updates_enabled", b);
+}
+
+void ConfigurationDialog::updateCurrentLanguage()
+{
+	QComboBox* cb = ui->programLanguageComboBox;
+	QString appLang = StelApp::getInstance().getLocaleMgr().getAppLanguage();
+	QString l2 = StelTranslator::iso639_1CodeToNativeName(appLang);
+
+	if (cb->currentText() == l2)
+		return;
+
+	int lt = cb->findText(l2, Qt::MatchExactly);
+	if (lt == -1 && appLang.contains('_'))
+	{
+		l2 = appLang.left(appLang.indexOf('_'));
+		l2=StelTranslator::iso639_1CodeToNativeName(l2);
+		lt = cb->findText(l2, Qt::MatchExactly);
+	}
+	if (lt!=-1)
+		cb->setCurrentIndex(lt);
+}
+
 void ConfigurationDialog::selectLanguage(const QString& langName)
 {
 	QString code = StelTranslator::nativeNameToIso639_1Code(langName);
 	StelApp::getInstance().getLocaleMgr().setAppLanguage(code);
 	StelApp::getInstance().getLocaleMgr().setSkyLanguage(code);
-	StelMainWindow::getInstance().initTitleI18n();
+	StelMainView::getInstance().initTitleI18n();
 }
 
 void ConfigurationDialog::setStartupTimeMode()
@@ -300,6 +349,13 @@ void ConfigurationDialog::setStartupTimeMode()
 
 	StelApp::getInstance().getCore()->setInitTodayTime(ui->todayTimeSpinBox->time());
 	StelApp::getInstance().getCore()->setPresetSkyTime(ui->fixedDateTimeEdit->dateTime());
+}
+
+void ConfigurationDialog::showShortcutsWindow()
+{
+	StelAction* action = StelApp::getInstance().getStelActionManager()->findAction("actionShow_Shortcuts_Window_Global");
+	if (action)
+		action->setChecked(true);
 }
 
 void ConfigurationDialog::setDiskViewport(bool b)
@@ -317,12 +373,12 @@ void ConfigurationDialog::setSphericMirror(bool b)
 	{
 		savedProjectionType = core->getCurrentProjectionType();
 		core->setCurrentProjectionType(StelCore::ProjectionFisheye);
-		StelMainGraphicsView::getInstance().getStelAppGraphicsWidget()->setViewportEffect("sphericMirrorDistorter");
+		StelApp::getInstance().setViewportEffect("sphericMirrorDistorter");
 	}
 	else
 	{
 		core->setCurrentProjectionType((StelCore::ProjectionType)savedProjectionType);
-		StelMainGraphicsView::getInstance().getStelAppGraphicsWidget()->setViewportEffect("none");
+		StelApp::getInstance().setViewportEffect("none");
 	}
 }
 
@@ -352,7 +408,7 @@ void ConfigurationDialog::setSelectedInfoFromCheckBoxes()
 		ui->customSelectedInfoRadio->setChecked(true);
 	
 	StelObject::InfoStringGroup flags(0);
-	
+
 	if (ui->checkBoxName->isChecked())
 		flags |= StelObject::Name;
 	if (ui->checkBoxCatalogNumbers->isChecked())
@@ -373,21 +429,23 @@ void ConfigurationDialog::setSelectedInfoFromCheckBoxes()
 		flags |= StelObject::Distance;
 	if (ui->checkBoxSize->isChecked())
 		flags |= StelObject::Size;
-	if (ui->checkBoxExtra1->isChecked())
-		flags |= StelObject::Extra1;
-	if (ui->checkBoxExtra2->isChecked())
-		flags |= StelObject::Extra2;
-	if (ui->checkBoxExtra3->isChecked())
-		flags |= StelObject::Extra3;
-	
+	if (ui->checkBoxExtra->isChecked())
+		flags |= StelObject::Extra;
+	if (ui->checkBoxGalacticCoordinates->isChecked())
+		flags |= StelObject::GalacticCoord;
+	if (ui->checkBoxType->isChecked())
+		flags |= StelObject::ObjectType;
+	if (ui->checkBoxEclipticCoords->isChecked())
+		flags |= StelObject::EclipticCoord;
+
 	gui->setInfoTextFilters(flags);
 }
 
 
 void ConfigurationDialog::cursorTimeOutChanged()
 {
-	StelMainGraphicsView::getInstance().setFlagCursorTimeout(ui->mouseTimeoutCheckbox->isChecked());
-	StelMainGraphicsView::getInstance().setCursorTimeout(ui->mouseTimeoutSpinBox->value());
+	StelMainView::getInstance().setFlagCursorTimeout(ui->mouseTimeoutCheckbox->isChecked());
+	StelMainView::getInstance().setCursorTimeout(ui->mouseTimeoutSpinBox->value());
 }
 
 void ConfigurationDialog::browseForScreenshotDir()
@@ -412,6 +470,7 @@ void ConfigurationDialog::selectScreenshotDir(const QString& dir)
 	}
 	catch (std::runtime_error& e)
 	{
+		Q_UNUSED(e);
 		// nop
 		// this will happen when people are only half way through typing dirs
 	}
@@ -452,13 +511,23 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	conf->setValue("stars/relative_scale", skyd->getRelativeStarScale());
 	conf->setValue("stars/flag_star_twinkle", skyd->getFlagTwinkle());
 	conf->setValue("stars/star_twinkle_amount", skyd->getTwinkleAmount());
+	conf->setValue("astro/flag_star_magnitude_limit",
+	               skyd->getFlagStarMagnitudeLimit());
+	conf->setValue("astro/star_magnitude_limit",
+	               skyd->getCustomStarMagnitudeLimit());
+	conf->setValue("astro/flag_nebula_magnitude_limit",
+	               skyd->getFlagNebulaMagnitudeLimit());
+	conf->setValue("astro/nebula_magnitude_limit",
+	               skyd->getCustomNebulaMagnitudeLimit());
 	conf->setValue("viewing/use_luminance_adaptation", skyd->getFlagLuminanceAdaptation());
 	conf->setValue("astro/flag_planets", ssmgr->getFlagPlanets());
 	conf->setValue("astro/flag_planets_hints", ssmgr->getFlagHints());
 	conf->setValue("astro/flag_planets_orbits", ssmgr->getFlagOrbits());
 	conf->setValue("astro/flag_light_travel_time", ssmgr->getFlagLightTravelTime());
 	conf->setValue("viewing/flag_moon_scaled", ssmgr->getFlagMoonScale());
+	conf->setValue("viewing/moon_scale", ssmgr->getMoonScale());
 	conf->setValue("astro/meteor_rate", mmgr->getZHR());
+	conf->setValue("astro/milky_way_intensity", GETSTELMODULE(MilkyWay)->getIntensity());
 
 	// view dialog / markings tab settings
 	conf->setValue("viewing/flag_azimuthal_grid", glmgr->getFlagAzimuthalGrid());
@@ -470,13 +539,16 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	conf->setValue("viewing/flag_horizon_line", glmgr->getFlagHorizonLine());
 	conf->setValue("viewing/flag_equatorial_J2000_grid", glmgr->getFlagEquatorJ2000Grid());
 	conf->setValue("viewing/flag_galactic_grid", glmgr->getFlagGalacticGrid());
-	conf->setValue("viewing/flag_galactic_plane_line", glmgr->getFlagGalacticPlaneLine());
+	conf->setValue("viewing/flag_galactic_equator_line", glmgr->getFlagGalacticEquatorLine());
 	conf->setValue("viewing/flag_cardinal_points", lmgr->getFlagCardinalsPoints());
 	conf->setValue("viewing/flag_constellation_drawing", cmgr->getFlagLines());
 	conf->setValue("viewing/flag_constellation_name", cmgr->getFlagLabels());
 	conf->setValue("viewing/flag_constellation_boundaries", cmgr->getFlagBoundaries());
 	conf->setValue("viewing/flag_constellation_art", cmgr->getFlagArt());
 	conf->setValue("viewing/flag_constellation_isolate_selected", cmgr->getFlagIsolateSelected());
+	conf->setValue("viewing/flag_landscape_autoselection", lmgr->getFlagLandscapeAutoSelection());
+	conf->setValue("viewing/flag_light_pollution_database", lmgr->getFlagUseLightPollutionFromDatabase());
+	conf->setValue("viewing/flag_atmosphere_auto_enable", lmgr->getFlagAtmosphereAutoEnable());
 	conf->setValue("viewing/constellation_art_intensity", cmgr->getArtIntensity());
 	conf->setValue("viewing/flag_night", StelApp::getInstance().getVisionModeNight());
 	conf->setValue("astro/flag_star_name", smgr->getFlagLabels());
@@ -492,8 +564,10 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	conf->setValue("landscape/flag_landscape_sets_location", lmgr->getFlagLandscapeSetsLocation());
 	conf->setValue("landscape/flag_landscape", lmgr->getFlagLandscape());
 	conf->setValue("landscape/flag_atmosphere", lmgr->getFlagAtmosphere());
+	conf->setValue("landscape/flag_brightness", lmgr->getFlagLandscapeSetsMinimalBrightness());
 	conf->setValue("landscape/flag_fog", lmgr->getFlagFog());
-	conf->setValue("stars/init_bortle_scale", core->getSkyDrawer()->getBortleScale());
+	conf->setValue("landscape/flag_enable_illumination_layer", lmgr->getFlagIllumination());
+	conf->setValue("stars/init_bortle_scale", core->getSkyDrawer()->getBortleScaleIndex());
         conf->setValue("landscape/atmospheric_extinction_coefficient", core->getSkyDrawer()->getExtinctionCoefficient());
         conf->setValue("landscape/pressure_mbar", core->getSkyDrawer()->getAtmospherePressure());
         conf->setValue("landscape/temperature_C", core->getSkyDrawer()->getAtmosphereTemperature());
@@ -533,7 +607,7 @@ void ConfigurationDialog::saveCurrentViewOptions()
 		conf->setValue("flag_show_radecj2000",
 		               (bool) (flags & StelObject::RaDecJ2000));
 		conf->setValue("flag_show_radecofdate",
-		               (bool) (flags & StelObject::RaDecOfDate));
+			       (bool) (flags & StelObject::RaDecOfDate));
 		conf->setValue("flag_show_hourangle",
 		               (bool) (flags & StelObject::HourAngle));
 		conf->setValue("flag_show_altaz",
@@ -542,12 +616,14 @@ void ConfigurationDialog::saveCurrentViewOptions()
 		               (bool) (flags & StelObject::Distance));
 		conf->setValue("flag_show_size",
 		               (bool) (flags & StelObject::Size));
-		conf->setValue("flag_show_extra1",
-		               (bool) (flags & StelObject::Extra1));
-		conf->setValue("flag_show_extra2",
-		               (bool) (flags & StelObject::Extra2));
-		conf->setValue("flag_show_extra3",
-		               (bool) (flags & StelObject::Extra3));
+		conf->setValue("flag_show_extra",
+			       (bool) (flags & StelObject::Extra));
+		conf->setValue("flag_show_galcoord",
+			       (bool) (flags & StelObject::GalacticCoord));
+		conf->setValue("flag_show_type",
+			       (bool) (flags & StelObject::ObjectType));
+		conf->setValue("flag_show_eclcoord",
+			       (bool) (flags & StelObject::EclipticCoord));
 		conf->endGroup();
 	}
 
@@ -555,6 +631,7 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	conf->setValue("gui/auto_hide_horizontal_toolbar", gui->getAutoHideHorizontalButtonBar());
 	conf->setValue("gui/auto_hide_vertical_toolbar", gui->getAutoHideVerticalButtonBar());
 	conf->setValue("gui/flag_show_nebulae_background_button", gui->getFlagShowNebulaBackgroundButton());
+	conf->setValue("gui/flag_show_decimal_degrees", gui->getFlagShowDecimalDegrees());
 
 	mvmgr->setInitFov(mvmgr->getCurrentFov());
 	mvmgr->setInitViewDirectionToCurrent();
@@ -566,6 +643,7 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	conf->setValue("navigation/startup_time_mode", core->getStartupTimeMode());
 	conf->setValue("navigation/today_time", core->getInitTodayTime());
 	conf->setValue("navigation/preset_sky_time", core->getPresetSkyTime());
+	conf->setValue("navigation/time_correction_algorithm", core->getCurrentDeltaTAlgorithmKey());
 	conf->setValue("navigation/init_fov", mvmgr->getInitFov());
 	if (mvmgr->getMountMode() == StelMovementMgr::MountAltAzimuthal)
 		conf->setValue("navigation/viewing_mode", "horizon");
@@ -575,21 +653,21 @@ void ConfigurationDialog::saveCurrentViewOptions()
 
 	// configuration dialog / tools tab
 	conf->setValue("gui/flag_show_flip_buttons", gui->getFlagShowFlipButtons());
-	conf->setValue("video/viewport_effect", StelMainGraphicsView::getInstance().getStelAppGraphicsWidget()->getViewportEffect());
+	conf->setValue("video/viewport_effect", StelApp::getInstance().getViewportEffect());
 	conf->setValue("projection/viewport", StelProjector::maskTypeToString(proj->getMaskType()));
 	conf->setValue("viewing/flag_gravity_labels", proj->getFlagGravityLabels());
 	conf->setValue("navigation/auto_zoom_out_resets_direction", mvmgr->getFlagAutoZoomOutResetsDirection());
-	conf->setValue("gui/flag_mouse_cursor_timeout", StelMainGraphicsView::getInstance().getFlagCursorTimeout());
-	conf->setValue("gui/mouse_cursor_timeout", StelMainGraphicsView::getInstance().getCursorTimeout());
+	conf->setValue("gui/flag_mouse_cursor_timeout", StelMainView::getInstance().getFlagCursorTimeout());
+	conf->setValue("gui/mouse_cursor_timeout", StelMainView::getInstance().getCursorTimeout());
 
 	conf->setValue("main/screenshot_dir", StelFileMgr::getScreenshotDir());
-	conf->setValue("main/invert_screenshots_colors", StelMainGraphicsView::getInstance().getFlagInvertScreenShotColors());
+	conf->setValue("main/invert_screenshots_colors", StelMainView::getInstance().getFlagInvertScreenShotColors());
 
 	// full screen and window size
-	conf->setValue("video/fullscreen", StelMainWindow::getInstance().getFullScreen());
-	if (!StelMainWindow::getInstance().getFullScreen())
+	conf->setValue("video/fullscreen", StelMainView::getInstance().isFullScreen());
+	if (!StelMainView::getInstance().isFullScreen())
 	{
-		StelMainWindow& mainWindow = StelMainWindow::getInstance();
+		QWidget& mainWindow = StelMainView::getInstance();
 		conf->setValue("video/screen_w", mainWindow.size().width());
 		conf->setValue("video/screen_h", mainWindow.size().height());
 		conf->setValue("video/screen_x", mainWindow.x());
@@ -625,29 +703,44 @@ void ConfigurationDialog::setDefaultViewOptions()
 
 void ConfigurationDialog::populatePluginsList()
 {
-	int prevSel = ui->pluginsListWidget->currentRow();
-	ui->pluginsListWidget->clear();
-	const QList<StelModuleMgr::PluginDescriptor> pluginsList = StelApp::getInstance().getModuleMgr().getPluginsList();
+	QListWidget *plugins = ui->pluginsListWidget;
+	plugins->blockSignals(true);
+	int currentRow = plugins->currentRow();
+	QString selectedPluginId = "";
+	if (currentRow>0)
+		 selectedPluginId = plugins->currentItem()->data(Qt::UserRole).toString();
+
+	plugins->clear();
+	QString selectedPluginName = "";
+	const QList<StelModuleMgr::PluginDescriptor> pluginsList = StelApp::getInstance().getModuleMgr().getPluginsList();	
 	foreach (const StelModuleMgr::PluginDescriptor& desc, pluginsList)
 	{
 		QString label = q_(desc.info.displayedName);
 		QListWidgetItem* item = new QListWidgetItem(label);
 		item->setData(Qt::UserRole, desc.info.id);
-		ui->pluginsListWidget->addItem(item);
+		plugins->addItem(item);
+		if (currentRow>0 && item->data(Qt::UserRole).toString()==selectedPluginId)
+			selectedPluginName = label;
 	}
+	plugins->sortItems(Qt::AscendingOrder);
+	plugins->blockSignals(false);
 	// If we had a valid previous selection (i.e. not first time we populate), restore it
-	if (prevSel >= 0 && prevSel < ui->pluginsListWidget->count())
-		ui->pluginsListWidget->setCurrentRow(prevSel);
+
+	if (!selectedPluginName.isEmpty())
+		plugins->setCurrentItem(plugins->findItems(selectedPluginName, Qt::MatchExactly).at(0));
 	else
-		ui->pluginsListWidget->setCurrentRow(0);
+		plugins->setCurrentRow(0);
+
+
 }
 
-void ConfigurationDialog::pluginsSelectionChanged(const QString& s)
+void ConfigurationDialog::pluginsSelectionChanged(QListWidgetItem* item, QListWidgetItem* previousItem)
 {
+	Q_UNUSED(previousItem);
 	const QList<StelModuleMgr::PluginDescriptor> pluginsList = StelApp::getInstance().getModuleMgr().getPluginsList();
 	foreach (const StelModuleMgr::PluginDescriptor& desc, pluginsList)
 	{
-		if (s==q_(desc.info.displayedName))//TODO: Use ID!
+		if (item->data(Qt::UserRole).toString()==desc.info.id)
 		{
 			QString html = "<html><head></head><body>";
 			html += "<h2>" + q_(desc.info.displayedName) + "</h2>";			
@@ -656,6 +749,8 @@ void ConfigurationDialog::pluginsSelectionChanged(const QString& s)
 			html += "<p>" + q_(d) + "</p>";
 			html += "<p><strong>" + q_("Authors") + "</strong>: " + desc.info.authors;
 			html += "<br /><strong>" + q_("Contact") + "</strong>: " + desc.info.contact;
+			if (!desc.info.version.isEmpty())
+				html += "<br /><strong>" + q_("Version") + "</strong>: " + desc.info.version;
 			html += "</p></body></html>";
 			ui->pluginsInfoBrowser->setHtml(html);
 			ui->pluginLoadAtStartupCheckBox->setChecked(desc.loadAtStartup);
@@ -681,7 +776,7 @@ void ConfigurationDialog::pluginConfigureCurrentSelection()
 	{
 		if (id == desc.info.id)
 		{
-			StelModule* pmod = moduleMgr.getModule(desc.info.id);
+			StelModule* pmod = moduleMgr.getModule(desc.info.id, QObject::sender()->objectName()=="pluginsListWidget");
 			if (pmod != NULL)
 			{
 				pmod->configureGui(true);
@@ -713,7 +808,7 @@ void ConfigurationDialog::loadAtStartupChanged(int state)
 void ConfigurationDialog::populateScriptsList(void)
 {
 	int prevSel = ui->scriptListWidget->currentRow();	
-	StelScriptMgr& scriptMgr = StelMainGraphicsView::getInstance().getScriptMgr();	
+	StelScriptMgr& scriptMgr = StelApp::getInstance().getScriptMgr();	
 	ui->scriptListWidget->clear();	
 	ui->scriptListWidget->addItems(scriptMgr.getScriptList());	
 	// If we had a valid previous selection (i.e. not first time we populate), restore it
@@ -727,7 +822,7 @@ void ConfigurationDialog::scriptSelectionChanged(const QString& s)
 {
 	if (s.isEmpty())
 		return;	
-	StelScriptMgr& scriptMgr = StelMainGraphicsView::getInstance().getScriptMgr();	
+	StelScriptMgr& scriptMgr = StelApp::getInstance().getScriptMgr();	
 	//ui->scriptInfoBrowser->document()->setDefaultStyleSheet(QString(StelApp::getInstance().getCurrentStelStyle()->htmlStyleSheet));
 	QString html = "<html><head></head><body>";
 	html += "<h2>" + q_(scriptMgr.getName(s).trimmed()) + "</h2>";
@@ -742,8 +837,12 @@ void ConfigurationDialog::scriptSelectionChanged(const QString& s)
 	}
 	if (!scriptMgr.getLicense(s).trimmed().isEmpty())
 	{
-		html += "<strong>" + q_("License") + "</strong>: " + scriptMgr.getLicense(s);
+		html += "<strong>" + q_("License") + "</strong>: " + scriptMgr.getLicense(s) + "<br />";
 	}	
+	if (!scriptMgr.getShortcut(s).trimmed().isEmpty())
+	{
+		html += "<strong>" + q_("Shortcut") + "</strong>: " + scriptMgr.getShortcut(s);
+	}
 	html += "</p></body></html>";
 	ui->scriptInfoBrowser->setHtml(html);	
 }
@@ -752,7 +851,7 @@ void ConfigurationDialog::runScriptClicked(void)
 {
 	if (ui->closeWindowAtScriptRunCheckbox->isChecked())
 		this->close();	
-	StelScriptMgr& scriptMgr = StelMainGraphicsView::getInstance().getScriptMgr();
+	StelScriptMgr& scriptMgr = StelApp::getInstance().getScriptMgr();
 	if (ui->scriptListWidget->currentItem())
 	{
 		scriptMgr.runScript(ui->scriptListWidget->currentItem()->text());
@@ -761,14 +860,12 @@ void ConfigurationDialog::runScriptClicked(void)
 
 void ConfigurationDialog::stopScriptClicked(void)
 {
-	GETSTELMODULE(LabelMgr)->deleteAllLabels();
-	GETSTELMODULE(ScreenImageMgr)->deleteAllImages();	
-	StelMainGraphicsView::getInstance().getScriptMgr().stopScript();	
+	StelApp::getInstance().getScriptMgr().stopScript();
 }
 
 void ConfigurationDialog::aScriptIsRunning(void)
 {	
-	ui->scriptStatusLabel->setText(q_("Running script: ") + StelMainGraphicsView::getInstance().getScriptMgr().runningScriptId());
+	ui->scriptStatusLabel->setText(q_("Running script: ") + StelApp::getInstance().getScriptMgr().runningScriptId());
 	ui->runScriptButton->setEnabled(false);
 	ui->stopScriptButton->setEnabled(true);	
 }
@@ -784,7 +881,9 @@ void ConfigurationDialog::aScriptHasStopped(void)
 
 void ConfigurationDialog::setFixedDateTimeToCurrent(void)
 {
-	ui->fixedDateTimeEdit->setDateTime(StelUtils::jdToQDateTime(StelApp::getInstance().getCore()->getJDay()));
+	StelCore* core = StelApp::getInstance().getCore();
+	double JD = core->getJDay();
+	ui->fixedDateTimeEdit->setDateTime(StelUtils::jdToQDateTime(JD+StelUtils::getGMTShiftFromQT(JD)/24-core->getDeltaT(JD)/86400));
 	ui->fixedTimeRadio->setChecked(true);
 	setStartupTimeMode();
 }
@@ -885,7 +984,7 @@ void ConfigurationDialog::newStarCatalogData()
 	Q_ASSERT(progressBar);
 
 	int size = starCatalogDownloadReply->bytesAvailable();
-	progressBar->setValue((float)progressBar->value()+(float)size/1024);
+	progressBar->setValue((float)progressBar->getValue()+(float)size/1024);
 	currentDownloadFile->write(starCatalogDownloadReply->read(size));
 }
 
@@ -901,7 +1000,7 @@ void ConfigurationDialog::downloadStars()
 	currentDownloadFile = new QFile(path);
 	if (!currentDownloadFile->open(QIODevice::WriteOnly))
 	{
-		qWarning() << "Can't open a writable file for storing new star catalog: " << path;
+		qWarning() << "Can't open a writable file for storing new star catalog: " << QDir::toNativeSeparators(path);
 		currentDownloadFile->deleteLater();
 		currentDownloadFile = NULL;
 		ui->downloadLabel->setText(q_("Error downloading %1:\n%2").arg(nextStarCatalogToDownload.value("id").toString()).arg(QString("Can't open a writable file for storing new star catalog: %1").arg(path)));
@@ -919,17 +1018,15 @@ void ConfigurationDialog::downloadStars()
 	QNetworkRequest req(nextStarCatalogToDownload.value("url").toString());
 	req.setAttribute(QNetworkRequest::CacheSaveControlAttribute, false);
 	req.setAttribute(QNetworkRequest::RedirectionTargetAttribute, false);
-	req.setRawHeader("User-Agent", StelUtils::getApplicationName().toAscii());
+	req.setRawHeader("User-Agent", userAgent.toLatin1());
 	starCatalogDownloadReply = StelApp::getInstance().getNetworkAccessManager()->get(req);
-	starCatalogDownloadReply->setReadBufferSize(1024*1024*2);
-	connect(starCatalogDownloadReply, SIGNAL(readyRead()), this, SLOT(newStarCatalogData()));
+	starCatalogDownloadReply->setReadBufferSize(1024*1024*2);	
 	connect(starCatalogDownloadReply, SIGNAL(finished()), this, SLOT(downloadFinished()));
 	connect(starCatalogDownloadReply, SIGNAL(error(QNetworkReply::NetworkError)), this, SLOT(downloadError(QNetworkReply::NetworkError)));
 
-	progressBar = StelApp::getInstance().getGui()->addProgressBar();
+	progressBar = StelApp::getInstance().addProgressBar();
 	progressBar->setValue(0);
-	progressBar->setMaximum(nextStarCatalogToDownload.value("sizeMb").toDouble()*1024);
-	progressBar->setVisible(true);
+	progressBar->setRange(0, nextStarCatalogToDownload.value("sizeMb").toDouble()*1024);
 	progressBar->setFormat(QString("%1: %p%").arg(nextStarCatalogToDownload.value("id").toString()));
 }
 
@@ -960,7 +1057,7 @@ void ConfigurationDialog::downloadFinished()
 		currentDownloadFile->close();
 		currentDownloadFile->deleteLater();
 		currentDownloadFile = NULL;
-		progressBar->deleteLater();
+		StelApp::getInstance().removeProgressBar(progressBar);
 		progressBar=NULL;
 		return;
 	}
@@ -974,7 +1071,8 @@ void ConfigurationDialog::downloadFinished()
 		starCatalogDownloadReply->deleteLater();
 		QNetworkRequest req(redirect.toUrl());
 		req.setAttribute(QNetworkRequest::CacheSaveControlAttribute, false);
-		req.setRawHeader("User-Agent", StelUtils::getApplicationName().toAscii());
+		req.setAttribute(QNetworkRequest::RedirectionTargetAttribute, false);
+		req.setRawHeader("User-Agent", userAgent.toLatin1());
 		starCatalogDownloadReply = StelApp::getInstance().getNetworkAccessManager()->get(req);
 		starCatalogDownloadReply->setReadBufferSize(1024*1024*2);
 		connect(starCatalogDownloadReply, SIGNAL(readyRead()), this, SLOT(newStarCatalogData()));
@@ -989,7 +1087,7 @@ void ConfigurationDialog::downloadFinished()
 	currentDownloadFile = NULL;
 	starCatalogDownloadReply->deleteLater();
 	starCatalogDownloadReply = NULL;
-	progressBar->deleteLater();
+	StelApp::getInstance().removeProgressBar(progressBar);
 	progressBar=NULL;
 
 	ui->downloadLabel->setText(q_("Verifying file integrity..."));
@@ -1022,9 +1120,10 @@ void ConfigurationDialog::updateSelectedInfoCheckBoxes()
 	ui->checkBoxAltAz->setChecked(flags & StelObject::AltAzi);
 	ui->checkBoxDistance->setChecked(flags & StelObject::Distance);
 	ui->checkBoxSize->setChecked(flags & StelObject::Size);
-	ui->checkBoxExtra1->setChecked(flags & StelObject::Extra1);
-	ui->checkBoxExtra2->setChecked(flags & StelObject::Extra2);
-	ui->checkBoxExtra3->setChecked(flags & StelObject::Extra3);
+	ui->checkBoxExtra->setChecked(flags & StelObject::Extra);
+	ui->checkBoxGalacticCoordinates->setChecked(flags & StelObject::GalacticCoord);
+	ui->checkBoxType->setChecked(flags & StelObject::ObjectType);
+	ui->checkBoxEclipticCoords->setChecked(flags & StelObject::EclipticCoord);
 }
 
 void ConfigurationDialog::updateTabBarListWidgetWidth()
@@ -1061,4 +1160,86 @@ void ConfigurationDialog::updateTabBarListWidgetWidth()
 	// ... and allow manual resize later.
 	ui->stackListWidget->setMinimumWidth(0);
 	*/
+}
+
+void ConfigurationDialog::populateDeltaTAlgorithmsList()
+{
+	Q_ASSERT(ui->deltaTAlgorithmComboBox);
+
+	// TRANSLATORS: Full phrase is "Algorithm of DeltaT"
+	ui->deltaTLabel->setText(QString("%1 %2T:").arg(q_("Algorithm of")).arg(QChar(0x0394)));
+
+	QComboBox* algorithms = ui->deltaTAlgorithmComboBox;
+
+	//Save the current selection to be restored later
+	algorithms->blockSignals(true);
+	int index = algorithms->currentIndex();
+	QVariant selectedAlgorithmId = algorithms->itemData(index);
+	algorithms->clear();
+	//For each algorithm, display the localized name and store the key as user
+	//data. Unfortunately, there's no other way to do this than with a cycle.
+	algorithms->addItem(q_("Without correction"), "WithoutCorrection");
+	algorithms->addItem(q_("Schoch (1931)"), "Schoch");
+	algorithms->addItem(q_("Clemence (1948)"), "Clemence");
+	algorithms->addItem(q_("IAU (1952)"), "IAU");
+	algorithms->addItem(q_("Astronomical Ephemeris (1960)"), "AstronomicalEphemeris");
+	algorithms->addItem(q_("Tuckerman (1962, 1964) & Goldstine (1973)"), "TuckermanGoldstine");
+	algorithms->addItem(q_("Muller & Stephenson (1975)"), "MullerStephenson");
+	algorithms->addItem(q_("Stephenson (1978)"), "Stephenson1978");
+	algorithms->addItem(q_("Schmadel & Zech (1979)"), "SchmadelZech1979");
+	algorithms->addItem(q_("Morrison & Stephenson (1982)"), "MorrisonStephenson1982");
+	algorithms->addItem(q_("Stephenson & Morrison (1984)"), "StephensonMorrison1984");
+	algorithms->addItem(q_("Stephenson & Houlden (1986)"), "StephensonHoulden");
+	algorithms->addItem(q_("Espenak (1987, 1989)"), "Espenak");
+	algorithms->addItem(q_("Borkowski (1988)"), "Borkowski");
+	algorithms->addItem(q_("Schmadel & Zech (1988)"), "SchmadelZech1988");
+	algorithms->addItem(q_("Chapront-Touze & Chapront (1991)"), "ChaprontTouze");	
+	algorithms->addItem(q_("Stephenson & Morrison (1995)"), "StephensonMorrison1995");
+	algorithms->addItem(q_("Stephenson (1997)"), "Stephenson1997");
+	// The dropdown label is too long for the string, and Meeus 1998 is very popular, this should be in the beginning of the tag.
+	algorithms->addItem(q_("Meeus (1998) (with Chapront, Chapront-Touze & Francou (1997))"), "ChaprontMeeus");
+	algorithms->addItem(q_("JPL Horizons"), "JPLHorizons");	
+	algorithms->addItem(q_("Meeus & Simons (2000)"), "MeeusSimons");
+	algorithms->addItem(q_("Montenbruck & Pfleger (2000)"), "MontenbruckPfleger");
+	algorithms->addItem(q_("Reingold & Dershowitz (2002, 2007)"), "ReingoldDershowitz");
+	algorithms->addItem(q_("Morrison & Stephenson (2004, 2005)"), "MorrisonStephenson2004");
+	// Espenak & Meeus (2006) used by default
+	algorithms->addItem(q_("Espenak & Meeus (2006)").append(" *"), "EspenakMeeus");
+	algorithms->addItem(q_("Reijs (2006)"), "Reijs");
+	algorithms->addItem(q_("Banjevic (2006)"), "Banjevic");
+	algorithms->addItem(q_("Islam, Sadiq & Qureshi (2008, 2013)"), "IslamSadiqQureshi");
+	algorithms->addItem(q_("Custom equation of %1T").arg(QChar(0x0394)), "Custom");
+
+	//Restore the selection
+	index = algorithms->findData(selectedAlgorithmId, Qt::UserRole, Qt::MatchCaseSensitive);
+	algorithms->setCurrentIndex(index);
+	//algorithms->model()->sort(0);
+	algorithms->blockSignals(false);
+	setDeltaTAlgorithmDescription();
+}
+
+void ConfigurationDialog::setDeltaTAlgorithm(int algorithmID)
+{
+	StelCore* core = StelApp::getInstance().getCore();
+	QString currentAlgorithm = ui->deltaTAlgorithmComboBox->itemData(algorithmID).toString();
+	core->setCurrentDeltaTAlgorithmKey(currentAlgorithm);
+	setDeltaTAlgorithmDescription();
+	if (currentAlgorithm.contains("Custom"))
+		ui->pushButtonCustomDeltaTEquationDialog->setEnabled(true);
+	else
+		ui->pushButtonCustomDeltaTEquationDialog->setEnabled(false);
+}
+
+void ConfigurationDialog::setDeltaTAlgorithmDescription()
+{
+	ui->deltaTAlgorithmDescription->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
+	ui->deltaTAlgorithmDescription->setHtml(StelApp::getInstance().getCore()->getCurrentDeltaTAlgorithmDescription());
+}
+
+void ConfigurationDialog::showCustomDeltaTEquationDialog()
+{
+	if (customDeltaTEquationDialog == NULL)
+		customDeltaTEquationDialog = new CustomDeltaTEquationDialog();
+
+	customDeltaTEquationDialog->setVisible(true);
 }

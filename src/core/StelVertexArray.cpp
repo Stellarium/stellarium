@@ -28,28 +28,28 @@ StelVertexArray StelVertexArray::removeDiscontinuousTriangles(const StelProjecto
 	{
 		switch (primitiveType)
 		{
-		case Triangles:
-		{
-			QVector<unsigned int> indicesOrig = ret.indices;
-			ret.indices.resize(0);
-			for (int i = 0; i < indicesOrig.size(); i += 3)
+			case Triangles:
 			{
-				if (prj->intersectViewportDiscontinuity(vertex.at(indicesOrig.at(i)), vertex.at(indicesOrig.at(i+1))) ||
-					prj->intersectViewportDiscontinuity(vertex.at(indicesOrig.at(i+1)), vertex.at(indicesOrig.at(i+2))) ||
-					prj->intersectViewportDiscontinuity(vertex.at(indicesOrig.at(i+2)), vertex.at(indicesOrig.at(i))))
+				QVector<unsigned short> indicesOrig = ret.indices;
+				ret.indices.resize(0);
+				for (int i = 0; i < indicesOrig.size(); i += 3)
 				{
-					// We have a discontinuity.
+					if (prj->intersectViewportDiscontinuity(vertex.at(indicesOrig.at(i)), vertex.at(indicesOrig.at(i+1))) ||
+							prj->intersectViewportDiscontinuity(vertex.at(indicesOrig.at(i+1)), vertex.at(indicesOrig.at(i+2))) ||
+							prj->intersectViewportDiscontinuity(vertex.at(indicesOrig.at(i+2)), vertex.at(indicesOrig.at(i))))
+					{
+						// We have a discontinuity.
+					}
+					else
+					{
+						ret.indices << indicesOrig.at(i) << indicesOrig.at(i+1) << indicesOrig.at(i+2);
+					}
 				}
-				else
-				{
-					ret.indices << indicesOrig.at(i) << indicesOrig.at(i+1) << indicesOrig.at(i+2);
-				}
+				break;
 			}
-			break;
-		}
-		default:
-			// Unsupported
-			Q_ASSERT(false);
+			default:
+				// Unsupported
+				Q_ASSERT(false);
 		}
 	}
 	else
@@ -59,48 +59,48 @@ StelVertexArray StelVertexArray::removeDiscontinuousTriangles(const StelProjecto
 		// We have different algorithms for different original mode
 		switch (primitiveType)
 		{
-		case TriangleStrip:
-			ret.indices.reserve(vertex.size() * 3);
-			for (int i = 2; i < vertex.size(); ++i)
-			{
-				if (prj->intersectViewportDiscontinuity(vertex[i], vertex[i-1]) ||
-					prj->intersectViewportDiscontinuity(vertex[i-1], vertex[i-2]) ||
-					prj->intersectViewportDiscontinuity(vertex[i-2], vertex[i]))
+			case TriangleStrip:
+				ret.indices.reserve(vertex.size() * 3);
+				for (int i = 2; i < vertex.size(); ++i)
 				{
-					// We have a discontinuity.
-				}
-				else
-				{
-					if (i % 2 == 0)
-						ret.indices << i-2 << i-1 << i;
+					if (prj->intersectViewportDiscontinuity(vertex[i], vertex[i-1]) ||
+							prj->intersectViewportDiscontinuity(vertex[i-1], vertex[i-2]) ||
+							prj->intersectViewportDiscontinuity(vertex[i-2], vertex[i]))
+					{
+						// We have a discontinuity.
+					}
 					else
-						ret.indices << i-2 << i << i-1;
+					{
+						if (i % 2 == 0)
+							ret.indices << i-2 << i-1 << i;
+						else
+							ret.indices << i-2 << i << i-1;
+					}
 				}
-			}
-			break;
+				break;
 
-		case Triangles:
-			ret.indices.reserve(vertex.size());
-			for (int i = 0; i < vertex.size(); i += 3)
-			{
-				if (prj->intersectViewportDiscontinuity(vertex.at(i), vertex.at(i+1)) ||
-					prj->intersectViewportDiscontinuity(vertex.at(i+1), vertex.at(i+2)) ||
-					prj->intersectViewportDiscontinuity(vertex.at(i+2), vertex.at(i)))
+			case Triangles:
+				ret.indices.reserve(vertex.size());
+				for (int i = 0; i < vertex.size(); i += 3)
 				{
-					// We have a discontinuity.
+					if (prj->intersectViewportDiscontinuity(vertex.at(i), vertex.at(i+1)) ||
+							prj->intersectViewportDiscontinuity(vertex.at(i+1), vertex.at(i+2)) ||
+							prj->intersectViewportDiscontinuity(vertex.at(i+2), vertex.at(i)))
+					{
+						// We have a discontinuity.
+					}
+					else
+					{
+						ret.indices << i << i+1 << i+2;
+					}
 				}
-				else
-				{
-					ret.indices << i << i+1 << i+2;
-				}
-			}
-			break;
+				break;
 
-		default:
-			Q_ASSERT(false);
+			default:
+				Q_ASSERT(false);
 		}
 	}
-	// Just in case we don't have any triangles, we also remove all the vertex.
+	// Just in case we don't have any triangles, we also remove all the vertices.
 	// This is because we can't specify an empty indexed VertexArray.
 	// FIXME: we should use an attribute for indexed array.
 	if (ret.indices.isEmpty())
@@ -114,6 +114,7 @@ QDataStream& operator<<(QDataStream& out, const StelVertexArray& p)
 {
 	out << p.vertex;
 	out << p.texCoords;
+	out << p.colors; // GZ NEW
 	out << p.indices;
 	out << (unsigned int)p.primitiveType;
 	return out;
@@ -123,6 +124,7 @@ QDataStream& operator>>(QDataStream& in, StelVertexArray& p)
 {
 	in >> p.vertex;
 	in >> p.texCoords;
+	in >> p.colors; // GZ NEW
 	in >> p.indices;
 	unsigned int t;
 	in >> t;

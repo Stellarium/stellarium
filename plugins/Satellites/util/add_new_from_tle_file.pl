@@ -5,6 +5,13 @@
 # satellites.json, and if not, outputs appropriately formatted JSON entries.
 # The new satellites are added to the groups passed as parameters.
 
+# SUGGESTION: Instead of striping the Celestrak status code (the char in []
+# sometimes added after the name), use it to set the "non-operation" group
+# instead of arbitrarily adding it to all sats from certain sources
+# (see download_tle_find_new.sh)
+# Key from Celestrak.com: [+] = Operational, [-] = Nonoperational,
+# for others see at the bottom of http://celestrak.com/NORAD/elements/master.asp
+
 #my $groups = "\"scientific\", \"weather\", \"non-operational\"";
 map { s/^/"/; s/$/"/; } @ARGV;
 my $groups = join(", ", @ARGV);

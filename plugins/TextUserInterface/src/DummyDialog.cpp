@@ -19,7 +19,7 @@
 
 
 #include "DummyDialog.hpp"
-#include "StelMainGraphicsView.hpp"
+#include "StelMainView.hpp"
 
 #include <QDebug>
 #include <QDialog>
@@ -67,9 +67,11 @@ class CustomProxy : public QGraphicsProxyWidget
 		}
 };
 
-DummyDialog::DummyDialog(StelModule* eventHandler) : dialog(NULL)
+DummyDialog::DummyDialog(StelModule* eventHandler)
+	: proxy(NULL)
+	, dialog(NULL)
+	, evtHandler(eventHandler)
 {
-	evtHandler = eventHandler;
 }
 
 DummyDialog::~DummyDialog()
@@ -80,7 +82,7 @@ DummyDialog::~DummyDialog()
 void DummyDialog::close()
 {
 	emit visibleChanged(false);
-	StelMainGraphicsView::getInstance().scene()->setActiveWindow(0);
+	StelMainView::getInstance().scene()->setActiveWindow(0);
 }
 
 void DummyDialog::setVisible(bool v)
@@ -90,7 +92,7 @@ void DummyDialog::setVisible(bool v)
 		if (dialog)
 		{
 			dialog->show();
-			StelMainGraphicsView::getInstance().scene()->setActiveWindow(proxy);
+			StelMainView::getInstance().scene()->setActiveWindow(proxy);
 			proxy->setFocus();
 			return;
 		}
@@ -100,11 +102,11 @@ void DummyDialog::setVisible(bool v)
 		
 		proxy = new CustomProxy(NULL, Qt::Tool);
 		proxy->setWidget(dialog);
-		StelMainGraphicsView::getInstance().scene()->addItem(proxy);
+		StelMainView::getInstance().scene()->addItem(proxy);
 		proxy->setWindowFrameMargins(2,0,2,2);
 		proxy->setCacheMode(QGraphicsItem::DeviceCoordinateCache); 
 		proxy->setZValue(100);
-		StelMainGraphicsView::getInstance().scene()->setActiveWindow(proxy);
+		StelMainView::getInstance().scene()->setActiveWindow(proxy);
 		proxy->setFocus();
 	}
 	else
@@ -112,7 +114,7 @@ void DummyDialog::setVisible(bool v)
 		dialog->hide();
 		emit visibleChanged(false);
 		//proxy->clearFocus();
-		StelMainGraphicsView::getInstance().scene()->setActiveWindow(0);
+		StelMainView::getInstance().scene()->setActiveWindow(0);
 	}
 }
 

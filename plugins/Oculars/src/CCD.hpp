@@ -24,6 +24,7 @@
 #include <QSettings>
 
 class Telescope;
+class Lens;
 
 class CCD : public QObject
 {
@@ -40,6 +41,7 @@ public:
 	Q_INVOKABLE CCD(const QObject& other);
 	virtual ~CCD();
 	static CCD* ccdFromSettings(QSettings* theSettings, int ccdIndex);
+	void writeToSettings(QSettings * settings, const int index);
 	static CCD* ccdModel();
 
 	QString name() const;
@@ -62,8 +64,8 @@ public:
 	  * The formula for this calculation comes from the Yerkes observatory.
 	  * fov degrees = 2PI/360degrees * chipDimension mm / telescope FL mm
 	  */
-	double getActualFOVx(Telescope *telescope) const;
-	double getActualFOVy(Telescope *telescope) const;
+	double getActualFOVx(Telescope *telescope, Lens *lens) const;
+	double getActualFOVy(Telescope *telescope, Lens *lens) const;
 	QMap<int, QString> propertyMap();
 private:
 	QString m_name;

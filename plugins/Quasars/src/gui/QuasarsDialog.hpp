@@ -27,6 +27,7 @@
 
 class Ui_quasarsDialog;
 class QTimer;
+class Quasars;
 
 class QuasarsDialog : public StelDialog
 {
@@ -48,6 +49,8 @@ private slots:
 	void setUpdateValues(int days);
 	void setUpdatesEnabled(int checkState);
 	void setDistributionEnabled(int checkState);
+	void setDisplayAtStartupEnabled(int checkState);
+	void setDisplayShowQuasarsButton(int checkState);
 	void updateStateReceiver(Quasars::UpdateState state);
         void updateCompleteReceiver();
 	void restoreDefaults(void);
@@ -56,6 +59,7 @@ private slots:
 
 private:
 	Ui_quasarsDialog* ui;
+	Quasars* qsr;
 	void setAboutHtml(void);
 	void updateGuiFromSettings(void);
 	QTimer* updateTimer;

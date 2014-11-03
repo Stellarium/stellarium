@@ -20,39 +20,75 @@
 #ifndef _SATELLITE_HPP_
 #define _SATELLITE_HPP_ 1
 
-#include <QVariant>
-#include <QString>
-#include <QStringList>
+#include <QDateTime>
 #include <QFont>
 #include <QList>
-#include <QDateTime>
+#include <QSharedPointer>
+#include <QString>
+#include <QStringList>
+#include <QVariant>
 
 #include "StelObject.hpp"
 #include "StelTextureTypes.hpp"
 #include "StelSphereGeometry.hpp"
-
-#include "StelPainter.hpp"
 #include "gSatWrapper.hpp"
 
 
 class StelPainter;
 class StelLocation;
 
+//! Radio communication channel properties.
 typedef struct
 {
-	double frequency;
-	QString modulation;
-	QString description;
-} commLink;
+	double frequency; //!< Channel frequency in MHz.
+	QString modulation; //!< Signal modulation mode.
+	QString description; //!< Channel description.
+} CommLink;
+
+//! Description of the data roles used in SatellitesListModel.
+enum SatelliteDataRole {
+	SatIdRole = Qt::UserRole,
+	SatDescriptionRole,
+	SatFlagsRole,
+	SatGroupsRole,
+	FirstLineRole,
+	SecondLineRole
+};
+
+//! Type for sets of satellite group IDs.
+typedef QSet<QString> GroupSet;
+
+//! Flag type reflecting internal flags of Satellite.
+enum SatFlag
+{
+	SatNoFlags = 0x0,
+	SatDisplayed = 0x1,
+	SatNotDisplayed = 0x2,
+	SatUser = 0x4,
+	SatOrbit = 0x8,
+	SatNew = 0x10,
+	SatError = 0x20
+};
+typedef QFlags<SatFlag> SatFlags;
+Q_DECLARE_OPERATORS_FOR_FLAGS(SatFlags)
+
+// Allows the type to be used by QVariant
+Q_DECLARE_METATYPE(GroupSet)
+Q_DECLARE_METATYPE(SatFlags)
 
 //! @class Satellite
-//! A Satellite object represents one satellite in Earth orbit.
-//! Details about the satellite are passed using a QVariant which contains
-//! a map of data from the json file.
+//! A representation of a satellite in Earth orbit.
+//! Details about the satellite are passed with a JSON-representation structure
+//! that contains a @ref satcat "satellite catalog" entry.
+//! 
+//! Thanks to operator<() overloading, container classes (QList, QMap, etc)
+//! with Satellite or SatelliteP objects can be sorted by satellite name/ID.
 class Satellite : public StelObject
 {
 	friend class Satellites;
 	friend class SatellitesDialog;
+	friend class SatellitesListModel;
+	
 public:
 	//! \param identifier unique identifier (currently the Catalog Number)
 	//! \param data a QMap which contains the details of the satellite
@@ -72,16 +108,15 @@ public:
 
 	//! Get an HTML string to describe the object
 	//! @param core A pointer to the core
-	//! @flags a set of flags with information types to include.
+	//! @param flags a set of flags with information types to include.
 	//! Supported types for Satellite objects:
 	//! - Name: designation in large type with the description underneath
 	//! - RaDecJ2000, RaDecOfDate, HourAngle, AltAzi
-	//! - Extra1: range, rage rate and altitude of satellite above the Earth
-	//! - Extra2: Comms frequencies, modulation types and so on.
+	//! - Extra: range, rage rate and altitude of satellite above the Earth, comms frequencies, modulation types and so on.
 	virtual QString getInfoString(const StelCore *core, const InfoStringGroup& flags) const;
 	virtual Vec3f getInfoColor(void) const;
 	virtual Vec3d getJ2000EquatorialPos(const StelCore*) const;
-	virtual float getVMagnitude(const StelCore* core=NULL, bool withExtinction=false) const;
+	virtual float getVMagnitude(const StelCore* core) const;
 	virtual double getAngularSize(const StelCore* core) const;
 	virtual QString getNameI18n(void) const
 	{
@@ -111,10 +146,21 @@ public:
 	void setNew() {newlyAdded = true;}
 	bool isNew() const {return newlyAdded;}
 	
-	static QString extractInternationalDesignator(const QString& tle1);
+	//! Get internal flags as a single value.
+	SatFlags getFlags();
+	//! Sets the internal flags in one operation (only display flags)!
+	void setFlags(const SatFlags& flags);
+	
+	//! Parse TLE line to extract International Designator and launch year.
+	//! Sets #internationalDesignator and #jdLaunchYearJan1.
+	void parseInternationalDesignator(const QString& tle1);
+	
+	//! Needed for sorting lists (if this ever happens...).
+	//! Compares #name fields. If equal, #id fields, which can't be.
+	bool operator<(const Satellite& another) const;
 
-public:
-	void enableDrawOrbit(bool b);
+	//! Calculation of illuminated fraction of the satellite.
+	float calculateIlluminatedFraction() const;
 
 private:
 	//draw orbits methods
@@ -123,33 +169,50 @@ private:
 	//! returns 0 - 1.0 for the DRAWORBIT_FADE_NUMBER segments at
 	//! each end of an orbit, with 1 in the middle.
 	float calculateOrbitSegmentIntensity(int segNum);
-	void setNightColors(bool night);
 
 private:
 	bool initialized;
-	bool visible;
-	bool orbitVisible;  // draw orbit enabled/disabled
+	//! Flag indicating whether the satellite should be displayed.
+	//! Should not be confused with the pedicted visibility of the 
+	//! actual satellite to the observer.
+	bool displayed;
+	//! Flag indicating whether an orbit section should be displayed.
+	bool orbitDisplayed;  // draw orbit enabled/disabled
+	//! Flag indicating that the satellite is user-defined.
+	//! This means that its TLE set shouldn't be updated and the satellite
+	//! itself shouldn't be removed if auto-remove is enabled.
+	bool userDefined;
+	//! Flag indicating that the satellite was added during the current session.
 	bool newlyAdded;
 	bool orbitValid;
 
 	//! Identifier of the satellite, must be unique within the list.
-	//! Currently, the Satellite Catalog Number is used. It is contained in both
-	//! numbered lines of TLE sets.
+	//! Currently, the Satellite Catalog Number/NORAD Number is used,
+	//! as it is unique and it is contained in both lines of TLE sets.
 	QString id;
 	//! Human-readable name of the satellite.
 	//! Usually the string in the "Title line" of TLE sets.
 	QString name;
 	//! Longer description of the satellite.
 	QString description;
-	//! International Designator / COSPAR designation / NSSDC ID
+	//! International Designator / COSPAR designation / NSSDC ID.
 	QString internationalDesignator;
-	//! Contains the J2000 position 
+	//! Julian date of Jan 1st of the launch year.
+	//! Used to hide satellites before their launch date.
+	//! Extracted from TLE set with parseInternationalDesignator().
+	//! It defaults to 1 Jan 1957 if extraction fails.
+	double jdLaunchYearJan1;
+	//! Standard visual magnitude of the satellite.
+	double stdMag;
+	//! Contains the J2000 position.
 	Vec3d XYZ;
 	QPair< QByteArray, QByteArray > tleElements;
 	double height, range, rangeRate;
-	QList<commLink> comms;
+	QList<CommLink> comms;
 	Vec3f hintColor;
-	QStringList groupIDs;
+	//! Identifiers of the groups to which the satellite belongs.
+	//! See @ref groups.
+	GroupSet groups;
 	QDateTime lastUpdated;
 
 	static StelTextureSP hintTexture;
@@ -160,27 +223,31 @@ private:
 	static int   orbitLineFadeSegments;
 	static int   orbitLineSegmentDuration; //measured in seconds
 	static bool  orbitLinesFlag;
+	static bool  realisticModeFlag;
+	//! Mask controlling which info display flags should be honored.
+	static StelObject::InfoStringGroupFlags flagsMask;
 
-	void draw(const StelCore* core, StelPainter& painter, float maxMagHints);
+	void draw(StelCore *core, StelPainter& painter, float maxMagHints);
 
-        //Satellite Orbit Position calculation
-        gSatWrapper *pSatWrapper;
-        Vec3d position;
-        Vec3d velocity;
-        Vec3d latLongSubPointPosition;
-        Vec3d elAzPosition;
-        int   visibility;
+	//Satellite Orbit Position calculation
+	gSatWrapper *pSatWrapper;
+	Vec3d	position;
+	Vec3d	velocity;
+	Vec3d	latLongSubPointPosition;
+	Vec3d	elAzPosition;
+	int	visibility;
+	double	phaseAngle; // phase angle for the satellite
 
 	//Satellite Orbit Draw
 	QFont     font;
-	Vec3f     orbitColorNormal;
-	Vec3f     orbitColorNight;
-	Vec3f*    orbitColor;
+	Vec3f    orbitColor;
 	double    lastEpochCompForOrbit; //measured in Julian Days
 	double    epochTime;  //measured in Julian Days
 	QList<Vec3d> orbitPoints; //orbit points represented by ElAzPos vectors
-
 };
+
+typedef QSharedPointer<Satellite> SatelliteP;
+bool operator<(const SatelliteP& left, const SatelliteP& right);
 
 #endif // _SATELLITE_HPP_ 
 

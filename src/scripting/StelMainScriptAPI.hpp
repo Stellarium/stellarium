@@ -51,6 +51,13 @@ public slots:
 	//! @return the Julian Date
 	double getJDay() const;
 
+	//! Set the current date in Modified Julian Day
+	//! @param MJD the Modified Julian Date
+	void setMJDay(double MJD);
+	//! Get the current date in Modified Julian Day
+	//! @return the Modified Julian Date
+	double getMJDay() const;
+
 	//! set the date in ISO format, e.g. "2008-03-24T13:21:01"
 	//! @param dt the date string to use.  Formats:
 	//! - ISO, e.g. "2008-03-24T13:21:01"
@@ -60,15 +67,20 @@ public slots:
 	//!   You may also append " sidereal" to use sidereal days and so on.
 	//!   You can also use "now" at the start.  For example:
 	//!   "now + 3 hours sidereal"
-	//!   Note: you must use the plural all the time, even when the number
-	//!   of the unit is 1.  i.e. use "+ 1 days" not "+1 day".
-	//! Note: when sidereal time is used, the length of time for
+	//! @note you must use the plural all the time, even when the number
+	//! of the unit is 1.  i.e. use "+ 1 days" not "+1 day".
+	//! @note when sidereal time is used, the length of time for
 	//! each unit is dependent on the current planet.  By contrast
 	//! when sidereal timeis not specified (i.e. solar time is used)
 	//! the value is conventional - i.e. 1 day means 1 Earth Solar day.
 	//! @param spec "local" or "utc" - only has an effect when
-	//! the ISO date type is used.
-	void setDate(const QString& dt, const QString& spec="utc");
+	//! the ISO date type is used. Defaults to "utc".
+	//! @param enableDeltaT is \a true or \a false - enable Delta-T correction or not.
+	//! Defaults to "true".
+	//! @note for fully compatibles behavior of this function with the version 0.11.4
+	//! or earlier, you should call \b core.setDeltaTAlgorithm("WithoutCorrection");
+	//! before running \b core.setDate(); for disabling DeltaT correction.
+	void setDate(const QString& dt, const QString& spec="utc", const bool& enableDeltaT=true);
 
 	//! get the simulation date and time as a string in ISO format,
 	//! e.g. "2008-03-24T13:21:01"
@@ -76,6 +88,25 @@ public slots:
 	//! else it is local time.
 	//! @return the current simulation time.
 	QString getDate(const QString& spec="utc");
+
+	//! get the DeltaT for the simulation date and time as a string
+	//! in HMS format, e.g. "0h1m68.2s"
+	//! @return the DeltaT for current simulation time.
+	QString getDeltaT() const;
+
+	//! get the DeltaT equation name for the simulation date and time as a string
+	//! @return name of the DeltaT equation
+	QString getDeltaTAlgorithm() const;
+
+	//! set equation of the DeltaT for the simulation date and time
+	//! @param algorithmName is name of equation, e.g. "WithoutCorrection" or "EspenakMeeus"
+	//! @note list of possible names of equation for DeltaT: WithoutCorrection, Schoch, Clemence, IAU,
+	//! AstronomicalEphemeris, TuckermanGoldstine, MullerStephenson, Stephenson1978, SchmadelZech1979,
+	//! MorrisonStephenson1982, StephensonMorrison1984, StephensonHoulden, Espenak, Borkowski,
+	//! SchmadelZech1988, ChaprontTouze, StephensonMorrison1995, Stephenson1997, ChaprontMeeus,
+	//! JPLHorizons, MeeusSimons, MontenbruckPfleger, ReingoldDershowitz, MorrisonStephenson2004,
+	//! EspenakMeeus, Reijs, Banjevic, IslamSadiqQureshi, Custom.
+	void setDeltaTAlgorithm(QString algorithmName);
 
 	//! Set time speed in JDay/sec
 	//! @param ts the new rate of passage of time as a multiple of real time.
@@ -111,10 +142,74 @@ public slots:
 	//! - altitude-geometric : geometric altitude angle in decimal degrees
 	//! - azimuth-geometric : geometric azimuth angle in decimal degrees
 	//! - ra : right ascension angle (current date frame) in decimal degrees
-	//! - dec : declenation angle in (current date frame) decimal degrees
+	//! - dec : declination angle in (current date frame) decimal degrees
 	//! - raJ2000 : right ascension angle (J2000 frame) in decimal degrees
-	//! - decJ2000 : declenation angle in (J2000 frame) decimal degrees
+	//! - decJ2000 : declination angle in (J2000 frame) decimal degrees
+	//! @deprecated Use getObjectInfo()
 	QVariantMap getObjectPosition(const QString& name);
+
+	//! Fetch a map with data about an object's position, magnitude and so on
+	//! @param name is the English name of the object for which data will be
+	//! returned.
+	//! @return a map of object data.  Keys:
+	//! - altitude : apparent altitude angle in decimal degrees
+	//! - azimuth : apparent azimuth angle in decimal degrees
+	//! - altitude-geometric : geometric altitude angle in decimal degrees
+	//! - azimuth-geometric : geometric azimuth angle in decimal degrees
+	//! - ra : right ascension angle (current date frame) in decimal degrees
+	//! - dec : declination angle in (current date frame) decimal degrees
+	//! - raJ2000 : right ascension angle (J2000 frame) in decimal degrees
+	//! - decJ2000 : declination angle in (J2000 frame) decimal degrees
+	//! - glongJ2000 : galactic longitude (J2000 frame) in decimal degrees
+	//! - glatJ2000 : galactic latitude in (J2000 frame) decimal degrees
+	//! - vmag : visual magnitude
+	//! - vmage : visual magnitude (extincted)
+	//! - size: angular size in radians
+	//! - size-dd : angular size in decimal degrees
+	//! - size-deg : angular size in decimal degrees (formatted string)
+	//! - size-dms : angular size in DMS format
+	//! - localized-name : localized name
+	//! - distance : distance to object in AU (for Solar system objects only!)
+	//! - phase : phase of object (for Solar system objects only!)
+	//! - illumination : phase of object in percentages (for Solar system objects only!)
+	//! - phase-angle : phase angle of object in radians (for Solar system objects only!)
+	//! - phase-angle-dms : phase angle of object in DMS (for Solar system objects only!)
+	//! - phase-angle-deg : phase angle of object in decimal degrees (for Solar system objects only!)
+	//! - elongation : elongation of object in radians (for Solar system objects only!)
+	//! - elongation-dms : elongation of object in DMS (for Solar system objects only!)
+	//! - elongation-deg : elongation of object in decimal degrees (for Solar system objects only!)
+	QVariantMap getObjectInfo(const QString& name);
+
+	//! Fetch a map with data about an latest selected object's position, magnitude and so on
+	//! @return a map of object data.  Keys:
+	//! - altitude : apparent altitude angle in decimal degrees
+	//! - azimuth : apparent azimuth angle in decimal degrees
+	//! - altitude-geometric : geometric altitude angle in decimal degrees
+	//! - azimuth-geometric : geometric azimuth angle in decimal degrees
+	//! - ra : right ascension angle (current date frame) in decimal degrees
+	//! - dec : declination angle in (current date frame) decimal degrees
+	//! - raJ2000 : right ascension angle (J2000 frame) in decimal degrees
+	//! - decJ2000 : declination angle in (J2000 frame) decimal degrees
+	//! - glongJ2000 : galactic longitude (J2000 frame) in decimal degrees
+	//! - glatJ2000 : galactic latitude in (J2000 frame) decimal degrees
+	//! - vmag : visual magnitude
+	//! - vmage : visual magnitude (extincted)	
+	//! - size: angular size in radians
+	//! - size-dd : angular size in decimal degrees
+	//! - size-deg : angular size in decimal degrees (formatted string)
+	//! - size-dms : angular size in DMS format
+	//! - name : english name
+	//! - localized-name : localized name
+	//! - distance : distance to object in AU (for Solar system objects only!)
+	//! - phase : phase of object (for Solar system objects only!)
+	//! - illumination : phase of object in percentages (for Solar system objects only!)
+	//! - phase-angle : phase angle of object in radians (for Solar system objects only!)
+	//! - phase-angle-dms : phase angle of object in DMS (for Solar system objects only!)
+	//! - phase-angle-deg : phase angle of object in decimal degrees (for Solar system objects only!)
+	//! - elongation : elongation of object in radians (for Solar system objects only!)
+	//! - elongation-dms : elongation of object in DMS (for Solar system objects only!)
+	//! - elongation-deg : elongation of object in decimal degrees (for Solar system objects only!)
+	QVariantMap getSelectedObjectInfo();
 
 	//! Clear the display options, setting a "standard" view.
 	//! Preset states:
@@ -210,6 +305,9 @@ public slots:
 	//! - latitude : latitude in decimal degrees
 	//! - planet : name of planet
 	//! - location : city and country
+	//! - sidereal-year : duration of the sidereal year on the planet in Earth's days (since 0.12.0)
+	//! - sidereal-day : duration of the sidereal day on the planet in Earth's hours (since 0.12.0)
+	//! - solar-day : duration of the mean solar day on the planet in Earth's hours (since 0.12.0)
 	QVariantMap getObserverLocationInfo();
 
 	//! Save a screenshot.
@@ -298,6 +396,14 @@ public slots:
 	//! @param id the ID of the sky culture to set, e.g. western or inuit etc.
 	void setSkyCulture(const QString& id);
 
+	//! Find out the current sky culture and get it English name
+	//! @return the English name of the current sky culture
+	QString getSkyCultureName();
+
+	//! Find out the current sky culture and get it localized name
+	//! @return the translated name of the current sky culture
+	QString getSkyCultureNameI18n();
+
 	//! Get the current status of the gravity labels option
 	//! @return true if gravity labels are enabled, else false
 	bool getFlagGravityLabels();
@@ -314,13 +420,13 @@ public slots:
 	//! path is specified, "scripts/" will be prefixed before the
 	//! image is searched for using StelFileMgr.
 	//! @param ra0 The right ascension of the first corner of the image in degrees
-	//! @param dec0 The declenation of the first corner of the image in degrees
+	//! @param dec0 The declination of the first corner of the image in degrees
 	//! @param ra1 The right ascension of the second corner of the image in degrees
-	//! @param dec1 The declenation of the second corner of the image in degrees
+	//! @param dec1 The declination of the second corner of the image in degrees
 	//! @param ra2 The right ascension of the third corner of the image in degrees
-	//! @param dec2 The declenation of the third corner of the image in degrees
+	//! @param dec2 The declination of the third corner of the image in degrees
 	//! @param ra3 The right ascension of the fourth corner of the image in degrees
-	//! @param dec3 The declenation of the fourth corner of the image in degrees
+	//! @param dec3 The declination of the fourth corner of the image in degrees
 	//! @param minRes The minimum resolution setting for the image
 	//! @param maxBright The maximum brightness setting for the image
 	//! @param visible The initial visibility of the image
@@ -350,7 +456,7 @@ public slots:
 	//! path is specified, "scripts/" will be prefixed before the
 	//! image is searched for using StelFileMgr.
 	//! @param ra The right ascension of the center of the image in J2000 frame degrees
-	//! @param dec The declenation of the center of the image in J2000 frame degrees
+	//! @param dec The declination of the center of the image in J2000 frame degrees
 	//! @param angSize The angular size of the image in arc minutes
 	//! @param rotation The clockwise rotation angle of the image in degrees
 	//! @param minRes The minimum resolution setting for the image
@@ -532,6 +638,10 @@ public slots:
 	//! @param s the message to be displayed on the console.
 	void debug(const QString& s);
 
+	//! print an output message from script
+	//! @param s the message to be displayed on the output file.
+	void output(const QString& s);
+
 	//! Get the current application language.
 	//! @return two letter language code, e.g. "en", or "de" and so on.
 	QString getAppLanguage();
@@ -550,6 +660,18 @@ public slots:
 
 	//! Go to defaults position and direction of view
 	void goHome();
+
+	//! Show or hide the Milky Way.
+	//! @param b if true, show the Milky Way, if false, hide the Milky Way.
+	void setMilkyWayVisible(bool b);
+
+	//! Set Milky Way intensity.
+	//! @param i value of intensity for the Milky Way
+	void setMilkyWayIntensity(double i);
+
+	//! Get Milky Way intensity.
+	//! @return value of Milky Way intensity, e.g. "1.2"
+	double getMilkyWayIntensity();
 
 	//! For use in setDate and waitFor
 	//! For parameter descriptions see setDate().

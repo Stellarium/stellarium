@@ -28,6 +28,8 @@
 //! @class StelProjector
 //! Provide the main interface to all operations of projecting coordinates from sky to screen.
 //! The StelProjector also defines the viewport size and position.
+//! All positions in pixels are in real device pixels, which is not the same as device independent pixels. On a mac with
+//! retina screen, there are 2 device pixels per pixels.
 //! All methods from this class are threadsafe. The usual usage is to create local instances of StelProjectorP using the
 //! getProjection() method from StelCore where needed.
 //! For performing drawing using a particular projection, refer to the StelPainter class.
@@ -43,7 +45,7 @@ public:
 	//! Shared pointer on a ModelViewTranform instance (implement reference counting)
 	typedef QSharedPointer<ModelViewTranform> ModelViewTranformP;
 
-	//! @class PreModelViewFunc
+	//! @class ModelViewTranform
 	//! Allows to define non linear operations in addition to the standard linear (Matrix 4d) ModelView transformation.
 	class ModelViewTranform
 	{
@@ -91,7 +93,20 @@ public:
 	//! Contains all the param needed to initialize a StelProjector
 	struct StelProjectorParams
 	{
-		StelProjectorParams() : viewportXywh(0, 0, 256, 256), fov(60.f), gravityLabels(false), defautAngleForGravityText(0.f), maskType(MaskNone), viewportCenter(128.f, 128.f), flipHorz(false), flipVert(false) {;}
+		StelProjectorParams()
+			: viewportXywh(0, 0, 256, 256)
+			, fov(60.f)
+			, gravityLabels(false)
+			, defautAngleForGravityText(0.f)
+			, maskType(MaskNone)
+			, zNear(0.f)
+			, zFar(0.f)
+			, viewportCenter(128.f, 128.f)
+			, viewportFovDiameter(0.f)
+			, flipHorz(false)
+			, flipVert(false)
+			, devicePixelsPerPixel(1.f) {;}
+
 		Vector4<int> viewportXywh;      //! posX, posY, width, height
 		float fov;                      //! FOV in degrees
 		bool gravityLabels;             //! the flag to use gravity labels or not
@@ -101,6 +116,7 @@ public:
 		Vec2f viewportCenter;           //! Viewport center in screen pixel
 		float viewportFovDiameter;      //! diameter of the FOV disk in pixel
 		bool flipHorz, flipVert;        //! Whether to flip in horizontal or vertical directions
+		float devicePixelsPerPixel;     //! The number of device pixel per "Device Independent Pixels" (value is usually 1, but 2 for mac retina screens)
 	};
 
 	//! Destructor
@@ -159,6 +175,9 @@ public:
 	//! Get the viewport height in pixels.
 	int getViewportHeight() const;
 
+	//! Get the number of device pixels per "Device Independent Pixels" (value is usually 1, but 2 for mac retina screens).
+	float getDevicePixelsPerPixel() const {return devicePixelsPerPixel;}
+	
 	//! Return a convex polygon on the sphere which includes the viewport in the current frame.
 	//! @param marginX an extra margin in pixel which extends the polygon size in the X direction.
 	//! @param marginY an extra margin in pixel which extends the polygon size in the Y direction.
@@ -262,7 +281,18 @@ public:
 
 protected:
 	//! Private constructor. Only StelCore can create instances of StelProjector.
-	StelProjector(ModelViewTranformP amodelViewTransform) : modelViewTransform(amodelViewTransform) {;}
+	StelProjector(ModelViewTranformP amodelViewTransform)
+		: modelViewTransform(amodelViewTransform),
+		  flipHorz(0.f),
+		  flipVert(0.f),
+		  pixelPerRad(0.f),
+		  maskType(MaskNone),
+		  zNear(0.f),
+		  oneOverZNearMinusZFar(0.f),
+		  viewportFovDiameter(0.f),
+		  gravityLabels(true),
+		  defautAngleForGravityText(0.f),
+		  devicePixelsPerPixel(1.f) {;}
 
 	//! Return whether the projection presents discontinuities. Used for optimization.
 	virtual bool hasDiscontinuity() const =0;
@@ -289,6 +319,7 @@ protected:
 	bool gravityLabels;                 // should label text align with the horizon?
 	float defautAngleForGravityText;    // a rotation angle to apply to gravity text (only if gravityLabels is set to false)
 	SphericalCap boundingCap;           // Bounding cap of the whole viewport
+	float devicePixelsPerPixel;         // The number of device pixel per "Device Independent Pixels" (value is usually 1, but 2 for mac retina screens)
 
 private:
 	//! Initialise the StelProjector from a param instance.

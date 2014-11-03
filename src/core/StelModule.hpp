@@ -20,6 +20,8 @@
 #ifndef _STELMODULE_HPP_
 #define _STELMODULE_HPP_
 
+#include "config.h"
+
 #include <QString>
 #include <QObject>
 
@@ -48,6 +50,7 @@ class QSettings;
 //!	Load the given color style
 class StelModule : public QObject
 {
+	Q_OBJECT
 	// Do not add Q_OBJECT here!!
 	// This make this class compiled by the Qt moc compiler and for some unknown reasons makes it impossible to dynamically
 	// load plugins on windows.
@@ -67,12 +70,6 @@ public:
 	//! Execute all the drawing functions for this module.
 	//! @param core the core to use for the drawing
 	virtual void draw(StelCore* core) {Q_UNUSED(core);}
-
-	//! Iterate through the drawing sequence.
-	//! This allow us to split the slow drawing operation into small parts,
-	//! we can then decide to pause the painting for this frame and used the cached image instead.
-	//! @return true if we should continue drawing (by calling the method again)
-	virtual bool drawPartial(StelCore* core);
 
 	//! Update the module with respect to the time.
 	//! @param deltaTime the time increment in second since last call.
@@ -104,6 +101,12 @@ public:
 	//! @return set the event as accepted if it was intercepted
 	virtual void handleKeys(class QKeyEvent* e) {Q_UNUSED(e);}
 
+	//! Handle pinch gesture events.
+	//! @param scale the value of the pinch gesture.
+	//! @param started define whether the pinch has just started.
+	//! @return true if the event was intercepted.
+	virtual bool handlePinch(qreal scale, bool started) {Q_UNUSED(scale); Q_UNUSED(started); return false;}
+
 	//! Enum used when selecting objects to define whether to add to, replace, or remove from the existing selection list.
 	enum StelModuleSelectAction
 	{
@@ -134,6 +137,22 @@ public:
 	//! @param show if true, make the configuration GUI visible.  If false, hide the config GUI if there is one.
 	//! @return true if the module has a configuration GUI, else false.
 	virtual bool configureGui(bool show=true) {Q_UNUSED(show); return false;}
+
+protected:
+
+	//! convenience methods to add an action to the StelActionMgr object.
+	class StelAction* addAction(const QString& id, const QString& groupId, const QString& text,
+	                            QObject* target, const char* slot,
+	                            const QString& shortcut="", const QString& altShortcut="");
+
+	//! convenience methods to add an action to the StelActionMgr object.
+	class StelAction* addAction(const QString& id, const QString& groupId, const QString& text,
+	                            const char* slot,
+	                            const QString& shortcut="", const QString& altShortcut="") {
+		return addAction(id, groupId, text, this, slot, shortcut, altShortcut);
+	}
 };
+
+Q_DECLARE_METATYPE(StelModule::StelModuleSelectAction)
 
 #endif // _STELMODULE_HPP_

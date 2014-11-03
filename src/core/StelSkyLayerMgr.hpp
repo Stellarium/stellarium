@@ -19,21 +19,21 @@
 #ifndef _STELSKYLAYERMGR_HPP_
 #define _STELSKYLAYERMGR_HPP_
 
+#include "StelModule.hpp"
+#include "StelSkyLayer.hpp"
+
 #include <QString>
 #include <QStringList>
 #include <QMap>
 
-#include "StelModule.hpp"
-#include "StelSkyLayer.hpp"
-
 class StelCore;
 class StelSkyImageTile;
-class QProgressBar;
 
 //! Manage the sky background images, including DSS and deep sky objects images
 class StelSkyLayerMgr : public StelModule
 {
 	Q_OBJECT
+	Q_PROPERTY(bool visible READ getFlagShow WRITE setFlagShow)
 
 public:
 	StelSkyLayerMgr();
@@ -70,14 +70,14 @@ public:
 
 	StelSkyLayerP getSkyLayer(const QString& key) const;
 
+	//! Get whether Sky Background should be displayed
+	bool getFlagShow() const {return flagShow;}
+
 public slots:
 	///////////////////////////////////////////////////////////////////////////
 	// Properties setters and getters
 	//! Set whether Sky Background should be displayed
 	void setFlagShow(bool b) {flagShow = b;}
-	//! Get whether Sky Background should be displayed
-	bool getFlagShow() const {return flagShow;}
-
 	//! Load an image from a file. This should not be called directly from
 	//! scripts because it is not thread safe.  Instead use the simiarly
 	//! named function in the core scripting object.
@@ -85,13 +85,13 @@ public slots:
 	//! @param filename the name of the image file to load.  Will be
 	//! searched for using StelFileMgr, so partial names are fine.
 	//! @param ra0 right ascention of corner 0 in degrees
-	//! @param dec0 declenation of corner 0 in degrees
+	//! @param dec0 declination of corner 0 in degrees
 	//! @param ra1 right ascention of corner 1 in degrees
-	//! @param dec1 declenation of corner 1 in degrees
+	//! @param dec1 declination of corner 1 in degrees
 	//! @param ra2 right ascention of corner 2 in degrees
-	//! @param dec2 declenation of corner 2 in degrees
+	//! @param dec2 declination of corner 2 in degrees
 	//! @param ra3 right ascention of corner 3 in degrees
-	//! @param dec3 declenation of corner 3 in degrees
+	//! @param dec3 declination of corner 3 in degrees
 	//! @param minRes the minimum resolution setting for the image
 	//! @param maxBright the maximum brightness setting for the image
 	//! @param visible initial visibility setting
@@ -180,7 +180,7 @@ private:
 		SkyLayerElem(StelSkyLayerP t, bool show=true);
 		~SkyLayerElem();
 		StelSkyLayerP layer;
-		QProgressBar* progressBar;
+		class StelProgressController* progressBar;
 		bool show;
 	};
 

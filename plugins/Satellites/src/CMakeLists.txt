@@ -28,6 +28,10 @@ SET(Satellites_SRCS
   Satellite.cpp
   Satellites.hpp
   Satellites.cpp
+  SatellitesListModel.hpp
+  SatellitesListModel.cpp
+  SatellitesListFilterModel.hpp
+  SatellitesListFilterModel.cpp
   gui/SatellitesDialog.hpp
   gui/SatellitesDialog.cpp
   gui/SatellitesImportDialog.hpp
@@ -38,53 +42,24 @@ SET(SatellitesDialog_UIS
   gui/satellitesDialog.ui
   gui/satellitesImportDialog.ui
 )
-QT4_WRAP_UI(SatellitesDialog_UIS_H ${SatellitesDialog_UIS})
+QT5_WRAP_UI(SatellitesDialog_UIS_H ${SatellitesDialog_UIS})
 
 SET(Satellites_RES ../resources/Satellites.qrc)
-QT4_ADD_RESOURCES(Satellites_RES_CXX ${Satellites_RES})
+QT5_ADD_RESOURCES(Satellites_RES_CXX ${Satellites_RES})
 
-# Add here all the files which require moc compilation
-# that is, all the headers with SIGNAL/SLOTS/PLUGIN_INTERFACE etc..
-SET(Satellites_MOC_HDRS
-  Satellites.hpp
-  gui/SatellitesDialog.hpp
-  gui/SatellitesImportDialog.hpp
-)
+SET(extLinkerOption ${OPENGL_LIBRARIES})
 
-# After this call, Satellites_MOC_SRCS = moc_Satellites.cxx
-QT4_WRAP_CPP(Satellites_MOC_SRCS ${Satellites_MOC_HDRS})
-
-SET(extLinkerOption ${QT_LIBRARIES} ${OPENGL_LIBRARIES} ${ICONV_LIBRARIES} ${INTL_LIBRARIES})
-
-############### For building the dynamic library ######################
-IF(BUILD_DYNAMIC_PLUGINS)
-	ADD_LIBRARY(Satellites MODULE ${Satellites_SRCS} ${Satellites_MOC_SRCS} ${Satellites_RES_CXX} ${SatellitesDialog_UIS_H})
-	IF(APPLE)
-		FIND_LIBRARY(OPENGL_LIBRARY OpenGL)
-		MARK_AS_ADVANCED(OPENGL_LIBRARY)
-		SET_TARGET_PROPERTIES(Satellites PROPERTIES LINK_FLAGS "-undefined dynamic_lookup" SUFFIX ".dylib")
-	ENDIF()
-
-	IF(WIN32)
-		SET_TARGET_PROPERTIES(Satellites PROPERTIES LINK_FLAGS "-enable-runtime-pseudo-reloc -Wl,--allow-multiple-definition" )
-		SET(StelMain stelMain)
-	ELSE(WIN32)
-		SET(StelMain )
-	ENDIF(WIN32)
-
-	TARGET_LINK_LIBRARIES(Satellites ${StelMain} ${extLinkerOption})
-	INSTALL(TARGETS Satellites DESTINATION "modules/Satellites")
+ADD_LIBRARY(Satellites-static STATIC ${Satellites_SRCS} ${Satellites_RES_CXX} ${SatellitesDialog_UIS_H})
+QT5_USE_MODULES(Satellites-static Core Declarative Network OpenGL)
+# The library target "Satellites-static" has a default OUTPUT_NAME of "Satellites-static", so change it.
+SET_TARGET_PROPERTIES(Satellites-static PROPERTIES OUTPUT_NAME "Satellites")
+TARGET_LINK_LIBRARIES(Satellites-static ${StelMain} ${extLinkerOption})
+IF(MSVC)
+  SET_TARGET_PROPERTIES(Satellites-static PROPERTIES COMPILE_FLAGS "-DQT_STATICPLUGIN")
+ELSE()
+  SET_TARGET_PROPERTIES(Satellites-static PROPERTIES COMPILE_FLAGS "-DQT_STATICPLUGIN -Wno-unused-parameter")
 ENDIF()
-
-############### For building the static library ######################
-IF(BUILD_STATIC_PLUGINS)
-	ADD_LIBRARY(Satellites-static STATIC ${Satellites_SRCS} ${Satellites_MOC_SRCS} ${Satellites_RES_CXX} ${SatellitesDialog_UIS_H})
-	# The library target "Satellites-static" has a default OUTPUT_NAME of "Satellites-static", so change it.
-	SET_TARGET_PROPERTIES(Satellites-static PROPERTIES OUTPUT_NAME "Satellites")
-	TARGET_LINK_LIBRARIES(Satellites-static ${StelMain} ${extLinkerOption})
-        SET_TARGET_PROPERTIES(Satellites-static PROPERTIES COMPILE_FLAGS "-DQT_STATICPLUGIN -Wno-unused-parameter")
-	ADD_DEPENDENCIES(AllStaticPlugins Satellites-static)
-ENDIF()
+ADD_DEPENDENCIES(AllStaticPlugins Satellites-static)
 
 
 

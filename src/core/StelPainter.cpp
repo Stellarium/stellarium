@@ -18,7 +18,6 @@
  */
 
 #include "StelPainter.hpp"
-#include <QtOpenGL>
 
 #include "StelApp.hpp"
 #include "StelLocaleMgr.hpp"
@@ -34,59 +33,52 @@
 #include <QMutex>
 #include <QVarLengthArray>
 #include <QPaintEngine>
+#include <QCache>
+#include <QOpenGLPaintDevice>
+#include <QOpenGLShader>
 
-#ifndef GL_MULTISAMPLE
-#define GL_MULTISAMPLE  0x809D
-#endif
 
 #ifndef NDEBUG
 QMutex* StelPainter::globalMutex = new QMutex();
 #endif
 
-QPainter* StelPainter::qPainter = NULL;
-QGLContext* StelPainter::glContext = NULL;
+QOpenGLShaderProgram* StelPainter::texturesShaderProgram=NULL;
+QOpenGLShaderProgram* StelPainter::basicShaderProgram=NULL;
+QOpenGLShaderProgram* StelPainter::colorShaderProgram=NULL;
+QOpenGLShaderProgram* StelPainter::texturesColorShaderProgram=NULL;
+StelPainter::BasicShaderVars StelPainter::basicShaderVars;
+StelPainter::TexturesShaderVars StelPainter::texturesShaderVars;
+StelPainter::BasicShaderVars StelPainter::colorShaderVars;
+StelPainter::TexturesColorShaderVars StelPainter::texturesColorShaderVars;
 
-#ifdef STELPAINTER_GL2
- QGLShaderProgram* StelPainter::colorShaderProgram=NULL;
- QGLShaderProgram* StelPainter::texturesShaderProgram=NULL;
- QGLShaderProgram* StelPainter::basicShaderProgram=NULL;
- QGLShaderProgram* StelPainter::texturesColorShaderProgram=NULL;
- StelPainter::BasicShaderVars StelPainter::basicShaderVars;
- StelPainter::TexturesShaderVars StelPainter::texturesShaderVars;
- StelPainter::TexturesColorShaderVars StelPainter::texturesColorShaderVars;
-#endif
-
-void StelPainter::setQPainter(QPainter* p)
+StelPainter::GLState::GLState()
 {
-	qPainter=p;
-	if (p==NULL)
-		return;
+	blend = glIsEnabled(GL_BLEND);
+	glGetIntegerv(GL_BLEND_SRC_RGB, &blendSrcRGB);
+	glGetIntegerv(GL_BLEND_DST_RGB, &blendDstRGB);
+	glGetIntegerv(GL_BLEND_SRC_ALPHA, &blendSrcAlpha);
+	glGetIntegerv(GL_BLEND_DST_ALPHA, &blendDstAlpha);
+}
 
-	if (p->paintEngine()->type() != QPaintEngine::OpenGL && p->paintEngine()->type() != QPaintEngine::OpenGL2)
+StelPainter::GLState::~GLState()
+{
+	if (blend)
 	{
-		qCritical("StelPainter::setQPainter(): StelPainter needs a QGLWidget to be set as viewport on the graphics view");
-		return;
+		glEnable(GL_BLEND);
+		glBlendFuncSeparate(blendSrcRGB, blendDstRGB, blendSrcAlpha, blendDstAlpha);
 	}
-	QGLWidget* glwidget = dynamic_cast<QGLWidget*>(p->device());
-	if (glwidget && glwidget->context()!=glContext)
+	else
 	{
-		qCritical("StelPainter::setQPainter(): StelPainter needs to paint on a GLWidget with the same GL context as the one used for initialization.");
-		return;
+		glDisable(GL_BLEND);
 	}
 }
 
-void StelPainter::makeMainGLContextCurrent()
+bool StelPainter::linkProg(QOpenGLShaderProgram* prog, const QString& name)
 {
-	Q_ASSERT(glContext!=NULL);
-	Q_ASSERT(glContext->isValid());
-	glContext->makeCurrent();
-}
-
-void StelPainter::swapBuffer()
-{
-	Q_ASSERT(glContext!=NULL);
-	Q_ASSERT(glContext->isValid());
-	glContext->swapBuffers();
+	bool ret = prog->link();
+	if (!ret || (!prog->log().isEmpty() && !prog->log().contains("Link was successful")))
+		qWarning() << QString("StelPainter: Warnings while linking %1 shader program:\n%2").arg(name, prog->log());
+	return ret;
 }
 
 StelPainter::StelPainter(const StelProjectorP& proj) : prj(proj)
@@ -95,6 +87,7 @@ StelPainter::StelPainter(const StelProjectorP& proj) : prj(proj)
 
 #ifndef NDEBUG
 	Q_ASSERT(globalMutex);
+	
 	GLenum er = glGetError();
 	if (er!=GL_NO_ERROR)
 	{
@@ -109,25 +102,6 @@ StelPainter::StelPainter(const StelProjectorP& proj) : prj(proj)
 	}
 #endif
 
-	Q_ASSERT(qPainter);
-	qPainter->beginNativePainting();
-
-#ifndef STELPAINTER_GL2
-	// Save openGL projection state
-	glMatrixMode(GL_TEXTURE);
-	glPushMatrix();
-	glMatrixMode(GL_PROJECTION);
-	glPushMatrix();
-	glMatrixMode(GL_MODELVIEW);
-	glPushMatrix();
-	glLoadIdentity();
-
-	glDisable(GL_LIGHTING);
-	glDisable(GL_MULTISAMPLE);
-	glDisable(GL_DITHER);
-	glDisable(GL_ALPHA_TEST);
-	glEnable(GL_LINE_SMOOTH);
-#endif
 	glDisable(GL_DEPTH_TEST);
 	glDisable(GL_CULL_FACE);
 	// Fix some problem when using Qt OpenGL2 engine
@@ -135,7 +109,6 @@ StelPainter::StelPainter(const StelProjectorP& proj) : prj(proj)
 	// Deactivate drawing in depth buffer by default
 	glDepthMask(GL_FALSE);
 	enableTexture2d(false);
-	setShadeModel(StelPainter::ShadeModelFlat);
 	setProjector(proj);
 }
 
@@ -145,29 +118,10 @@ void StelPainter::setProjector(const StelProjectorP& p)
 	// Init GL viewport to current projector values
 	glViewport(prj->viewportXywh[0], prj->viewportXywh[1], prj->viewportXywh[2], prj->viewportXywh[3]);
 	glFrontFace(prj->needGlFrontFaceCW()?GL_CW:GL_CCW);
-#ifndef STELPAINTER_GL2
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-	// Set the real openGL projection and modelview matrix to 2d orthographic projection
-	// thus we never need to change to 2dMode from now on before drawing
-	glMultMatrixf(prj->getProjectionMatrix());
-	glMatrixMode(GL_MODELVIEW);
-#endif
 }
 
 StelPainter::~StelPainter()
 {
-	Q_ASSERT(qPainter);
-
-#ifndef STELPAINTER_GL2
-	// Restore openGL projection state for Qt drawings
-	glMatrixMode(GL_TEXTURE);
-	glPopMatrix();
-	glMatrixMode(GL_PROJECTION);
-	glPopMatrix();
-	glMatrixMode(GL_MODELVIEW);
-	glPopMatrix();
-#endif
 #ifndef NDEBUG
 	GLenum er = glGetError();
 	if (er!=GL_NO_ERROR)
@@ -176,7 +130,6 @@ StelPainter::~StelPainter()
 			qFatal("Invalid openGL operation detected in ~StelPainter()");
 	}
 #endif
-	qPainter->endNativePainting();
 
 #ifndef NDEBUG
 	// We are done with this StelPainter
@@ -187,34 +140,22 @@ StelPainter::~StelPainter()
 
 void StelPainter::setFont(const QFont& font)
 {
-	Q_ASSERT(qPainter);
-	qPainter->setFont(font);
+	currentFont = font;
 }
 
 void StelPainter::setColor(float r, float g, float b, float a)
 {
-#ifndef STELPAINTER_GL2
-	glColor4f(r,g,b,a);
-#else
 	currentColor.set(r,g,b,a);
-#endif
 }
 
 Vec4f StelPainter::getColor() const
 {
-#ifndef STELPAINTER_GL2
-	GLfloat tmpColor[4];
-	glGetFloatv(GL_CURRENT_COLOR, tmpColor);
-	return Vec4f(tmpColor[0], tmpColor[1], tmpColor[2], tmpColor[3]);
-#else
 	return currentColor;
-#endif
 }
 
 QFontMetrics StelPainter::getFontMetrics() const
 {
-	Q_ASSERT(qPainter);
-	return qPainter->fontMetrics();
+	return QFontMetrics(currentFont);
 }
 
 
@@ -284,59 +225,6 @@ void StelPainter::drawViewportShape(void)
 	enableClientStates(false);
 }
 
-#define MAX_STACKS 4096
-static float cos_sin_rho[2*(MAX_STACKS+1)];
-#define MAX_SLICES 4096
-static float cos_sin_theta[2*(MAX_SLICES+1)];
-
-static void ComputeCosSinTheta(float phi,int segments)
-{
-	float *cos_sin = cos_sin_theta;
-	float *cos_sin_rev = cos_sin + 2*(segments+1);
-	const float c = std::cos(phi);
-	const float s = std::sin(phi);
-	*cos_sin++ = 1.f;
-	*cos_sin++ = 0.f;
-	*--cos_sin_rev = -cos_sin[-1];
-	*--cos_sin_rev =  cos_sin[-2];
-	*cos_sin++ = c;
-	*cos_sin++ = s;
-	*--cos_sin_rev = -cos_sin[-1];
-	*--cos_sin_rev =  cos_sin[-2];
-	while (cos_sin < cos_sin_rev)
-	{
-		cos_sin[0] = cos_sin[-2]*c - cos_sin[-1]*s;
-		cos_sin[1] = cos_sin[-2]*s + cos_sin[-1]*c;
-		cos_sin += 2;
-		*--cos_sin_rev = -cos_sin[-1];
-		*--cos_sin_rev =  cos_sin[-2];
-	}
-}
-
-static void ComputeCosSinRho(float phi, int segments)
-{
-	float *cos_sin = cos_sin_rho;
-	float *cos_sin_rev = cos_sin + 2*(segments+1);
-	const float c = cos(phi);
-	const float s = sin(phi);
-	*cos_sin++ = 1.f;
-	*cos_sin++ = 0.f;
-	*--cos_sin_rev =  cos_sin[-1];
-	*--cos_sin_rev = -cos_sin[-2];
-	*cos_sin++ = c;
-	*cos_sin++ = s;
-	*--cos_sin_rev =  cos_sin[-1];
-	*--cos_sin_rev = -cos_sin[-2];
-	while (cos_sin < cos_sin_rev)
-	{
-		cos_sin[0] = cos_sin[-2]*c - cos_sin[-1]*s;
-		cos_sin[1] = cos_sin[-2]*s + cos_sin[-1]*c;
-		cos_sin += 2;
-		*--cos_sin_rev =  cos_sin[-1];
-		*--cos_sin_rev = -cos_sin[-2];
-		segments--;
-	}
-}
 
 
 void StelPainter::computeFanDisk(float radius, int innerFanSlices, int level, QVector<double>& vertexArr, QVector<float>& texCoordArr)
@@ -350,9 +238,8 @@ void StelPainter::computeFanDisk(float radius, int innerFanSlices, int level, QV
 		rad[i] = rad[i+1]*(1.f-M_PI/(innerFanSlices<<(i+1)))*2.f/3.f;
 	}
 	int slices = innerFanSlices<<level;
-	const float dtheta = 2.f * M_PI / slices;
-	Q_ASSERT(slices<=MAX_SLICES);
-	ComputeCosSinTheta(dtheta,slices);
+	
+	float* cos_sin_theta = StelUtils::ComputeCosSinTheta(slices);
 	float* cos_sin_theta_p;
 	int slices_step = 2;
 	float x,y,xa,ya;
@@ -402,122 +289,65 @@ void StelPainter::computeFanDisk(float radius, int innerFanSlices, int level, QV
 	// draw the inner polygon
 	slices_step>>=1;
 	cos_sin_theta_p=cos_sin_theta;
-	x = rad[0]*cos_sin_theta_p[0];
-	y = rad[0]*cos_sin_theta_p[1];
-	texCoordArr << 0.5f+x/radius << 0.5f+y/radius;
-	vertexArr << x << y << 0;
-	cos_sin_theta_p+=2*slices_step;
-	x = rad[0]*cos_sin_theta_p[0];
-	y = rad[0]*cos_sin_theta_p[1];
-	texCoordArr << 0.5f+x/radius << 0.5f+y/radius;
-	vertexArr << x << y << 0;
-	cos_sin_theta_p+=2*slices_step;
-	x = rad[0]*cos_sin_theta_p[0];
-	y = rad[0]*cos_sin_theta_p[1];
-	texCoordArr << 0.5f+x/radius << 0.5f+y/radius;
-	vertexArr << x << y << 0;
 
-}
-
-void StelPainter::sRing(float rMin, float rMax, int slices, int stacks, int orientInside)
-{
-	float x,y;
-	int j;
-
-	static Vec3f lightPos3;
-	static Vec4f ambientLight;
-	static Vec4f diffuseLight;
-	float c;
-	const bool isLightOn = light.isEnabled();
-	if (isLightOn)
+	if (slices==1)
 	{
-		lightPos3.set(light.getPosition()[0], light.getPosition()[1], light.getPosition()[2]);
-		Vec3f tmpv(0.f);
-		prj->getModelViewTransform()->forward(tmpv); // -posCenterEye
-		//lightPos3 -= tmpv;
-		//lightPos3 = prj->modelViewMatrixf.transpose().multiplyWithoutTranslation(lightPos3);
-		prj->getModelViewTransform()->getApproximateLinearTransfo().transpose().multiplyWithoutTranslation(Vec3d(lightPos3[0], lightPos3[1], lightPos3[2]));
-		prj->getModelViewTransform()->backward(lightPos3);
-		lightPos3.normalize();
-		ambientLight = light.getAmbient();
-		diffuseLight = light.getDiffuse();
+		x = rad[0]*cos_sin_theta_p[0];
+		y = rad[0]*cos_sin_theta_p[1];
+		texCoordArr << 0.5f+x/radius << 0.5f+y/radius;
+		vertexArr << x << y << 0;
+		cos_sin_theta_p+=2*slices_step;
+		x = rad[0]*cos_sin_theta_p[0];
+		y = rad[0]*cos_sin_theta_p[1];
+		texCoordArr << 0.5f+x/radius << 0.5f+y/radius;
+		vertexArr << x << y << 0;
+		cos_sin_theta_p+=2*slices_step;
+		x = rad[0]*cos_sin_theta_p[0];
+		y = rad[0]*cos_sin_theta_p[1];
+		texCoordArr << 0.5f+x/radius << 0.5f+y/radius;
+		vertexArr << x << y << 0;
 	}
-
-	const float nsign = orientInside?-1.f:1.f;
-
-	const float dr = (rMax-rMin) / stacks;
-	const float dtheta = 2.f * M_PI / slices;
-	if (slices < 0) slices = -slices;
-	Q_ASSERT(slices<=MAX_SLICES);
-	ComputeCosSinTheta(dtheta,slices);
-	float *cos_sin_theta_p;
-
-	static QVector<double> vertexArr;
-	static QVector<float> texCoordArr;
-	static QVector<float> colorArr;
-
-	// draw intermediate stacks as quad strips
-	for (float r = rMin; r < rMax; r+=dr)
+	else
 	{
-		const float tex_r0 = (r-rMin)/(rMax-rMin);
-		const float tex_r1 = (r+dr-rMin)/(rMax-rMin);
-		vertexArr.resize(0);
-		texCoordArr.resize(0);
-		colorArr.resize(0);
-		for (j=0,cos_sin_theta_p=cos_sin_theta; j<=slices; ++j,cos_sin_theta_p+=2)
+		j=0;
+		while (j<slices)
 		{
-			x = r*cos_sin_theta_p[0];
-			y = r*cos_sin_theta_p[1];
-			if (isLightOn)
-			{
-				c = nsign * (lightPos3[0]*x + lightPos3[1]*y);
-				if (c<0) {c=0;}
-				colorArr << c*diffuseLight[0] + ambientLight[0] << c*diffuseLight[1] + ambientLight[1] << c*diffuseLight[2] + ambientLight[2];
-			}
-			texCoordArr << tex_r0 << 0.5f;
-			vertexArr << x << y << 0.f;
-			x = (r+dr)*cos_sin_theta_p[0];
-			y = (r+dr)*cos_sin_theta_p[1];
-			if (isLightOn)
-			{
-				c = nsign * (lightPos3[0]*x + lightPos3[1]*y);
-				if (c<0) {c=0;}
-				colorArr << c*diffuseLight[0] + ambientLight[0] << c*diffuseLight[1] + ambientLight[1] << c*diffuseLight[2] + ambientLight[2];
-			}
-			texCoordArr << tex_r1 << 0.5f;
-			vertexArr << x << y << 0.f;
+			texCoordArr << 0.5f << 0.5f;
+			vertexArr << 0 << 0 << 0;
+			x = rad[0]*cos_sin_theta_p[0];
+			y = rad[0]*cos_sin_theta_p[1];
+			texCoordArr << 0.5f+x/radius << 0.5f+y/radius;
+			vertexArr << x << y << 0;
+			j+=slices_step;
+			cos_sin_theta_p+=2*slices_step;
+			x = rad[0]*cos_sin_theta_p[0];
+			y = rad[0]*cos_sin_theta_p[1];
+			texCoordArr << 0.5f+x/radius << 0.5f+y/radius;
+			vertexArr << x << y << 0;
 		}
-
-		if (isLightOn)
-			setArrays((Vec3d*)vertexArr.constData(), (Vec2f*)texCoordArr.constData(), (Vec3f*)colorArr.constData());
-		else
-			setArrays((Vec3d*)vertexArr.constData(), (Vec2f*)texCoordArr.constData());
-		drawFromArray(TriangleStrip, vertexArr.size()/3);
 	}
+
+
 }
 
-static void sSphereMapTexCoordFast(float rho_div_fov, float costheta, float sintheta, QVector<float>& out)
+static void sSphereMapTexCoordFast(float rho_div_fov, const float costheta, const float sintheta, QVector<float>& out)
 {
 	if (rho_div_fov>0.5f)
 		rho_div_fov=0.5f;
 	out << 0.5f + rho_div_fov * costheta << 0.5f + rho_div_fov * sintheta;
 }
 
-void StelPainter::sSphereMap(float radius, int slices, int stacks, float textureFov, int orientInside)
+void StelPainter::sSphereMap(const float radius, const int slices, const int stacks, const float textureFov, const int orientInside)
 {
 	float rho,x,y,z;
 	int i, j;
+	const float* cos_sin_rho = StelUtils::ComputeCosSinRho(stacks);
+	const float* cos_sin_rho_p;
+
+	const float* cos_sin_theta = StelUtils::ComputeCosSinTheta(slices);
+	const float* cos_sin_theta_p;
+
 	float drho = M_PI / stacks;
-	Q_ASSERT(stacks<=MAX_STACKS);
-	ComputeCosSinRho(drho,stacks);
-	float* cos_sin_rho_p;
-
-	const float dtheta = 2.f * M_PI / slices;
-	Q_ASSERT(slices<=MAX_SLICES);
-
-	ComputeCosSinTheta(dtheta,slices);
-	float* cos_sin_theta_p;
-
 	drho/=textureFov;
 
 	// texturing: s goes from 0.0/0.25/0.5/0.75/1.0 at +y/+x/-y/-x/+y axis
@@ -580,35 +410,51 @@ void StelPainter::sSphereMap(float radius, int slices, int stacks, float texture
 	}
 }
 
-void StelPainter::drawTextGravity180(float x, float y, const QString& ws, float xshift, float yshift)
+void StelPainter::drawTextGravity180(float x, float y, const QString& ws, const float xshift, const float yshift)
 {
-	float dx, dy, d, theta, psi;
+	float dx, dy, d, theta, theta_o, psi;
 	dx = x - prj->viewportCenter[0];
 	dy = y - prj->viewportCenter[1];
 	d = std::sqrt(dx*dx + dy*dy);
+	float limit = 120.;
 
 	// If the text is too far away to be visible in the screen return
 	if (d>qMax(prj->viewportXywh[3], prj->viewportXywh[2])*2)
 		return;
 	theta = std::atan2(dy - 1, dx);
-	psi = std::atan2((float)qPainter->fontMetrics().width(ws)/ws.length(),d + 1) * 180./M_PI;
-	if (psi>5) {
+	theta_o = M_PI + std::atan2(dx, dy - 1);
+	psi = std::atan2((float)getFontMetrics().width(ws)/ws.length(),d + 1) * 180./M_PI;
+	if (psi>5)
 		psi = 5;
-	}
 
-	float cWidth = (float)qPainter->fontMetrics().width(ws)/ws.length();
+	float cWidth = (float)getFontMetrics().width(ws)/ws.length();
 	float xVc = prj->viewportCenter[0] + xshift;
 	float yVc = prj->viewportCenter[1] + yshift;
 
+	const float cosr = std::cos(-theta_o * M_PI/180.);
+	const float sinr = std::sin(-theta_o * M_PI/180.);
+	float xom = x + xshift*cosr - yshift*sinr;
+	float yom = y + yshift*sinr + yshift*cosr;
+
 	QString lang = StelApp::getInstance().getLocaleMgr().getAppLanguage();
-	if (!QString("ar fa ur he yi").contains(lang)) {
-        	for (int i=0; i<ws.length(); ++i)
-	        {
-			x = d * std::cos (theta) + xVc ;
-			y = d * std::sin (theta) + yVc ; 
-			drawText(x, y, ws[i], 90. + theta*180./M_PI, 0., 0.);
-			// Compute how much the character contributes to the angle
-			theta += psi * M_PI/180. * (1 + ((float)qPainter->fontMetrics().width(ws[i]) - cWidth)/ cWidth);
+	if (!QString("ar fa ckb ug ur he yi").contains(lang))
+	{
+		for (int i=0; i<ws.length(); ++i)
+		{
+			if (d<limit)
+			{
+				drawText(xom, yom, ws[i], -theta_o*180./M_PI+psi*i, 0., 0.);
+				xom += cWidth*std::cos(-theta_o+psi*i * M_PI/180.);
+				yom += cWidth*std::sin(-theta_o+psi*i * M_PI/180.);
+			}
+			else
+			{
+				x = d * std::cos(theta) + xVc ;
+				y = d * std::sin(theta) + yVc ;
+				drawText(x, y, ws[i], 90. + theta*180./M_PI, 0., 0.);
+				// Compute how much the character contributes to the angle
+				theta += psi * M_PI/180. * (1 + ((float)getFontMetrics().width(ws[i]) - cWidth)/ cWidth);
+			}
 		}
 	}
 	else
@@ -616,19 +462,28 @@ void StelPainter::drawTextGravity180(float x, float y, const QString& ws, float 
 		int slen = ws.length();
 		for (int i=0;i<slen;i++)
 		{
-			x = d * std::cos (theta) + xVc;
-			y = d * std::sin (theta) + yVc; 
-			drawText(x, y, ws[slen-1-i], 90. + theta*180./M_PI, 0., 0.);
-			theta += psi * M_PI/180. * (1 + ((float)qPainter->fontMetrics().width(ws[slen-1-i]) - cWidth)/ cWidth);
+			if (d<limit)
+			{
+				drawText(xom, yom, ws[slen-1-i], -theta_o*180./M_PI+psi*i, 0., 0.);
+				xom += cWidth*std::cos(-theta_o+psi*i * M_PI/180.);
+				yom += cWidth*std::sin(-theta_o+psi*i * M_PI/180.);
+			}
+			else
+			{
+				x = d * std::cos (theta) + xVc;
+				y = d * std::sin (theta) + yVc;
+				drawText(x, y, ws[slen-1-i], 90. + theta*180./M_PI, 0., 0.);
+				theta += psi * M_PI/180. * (1 + ((float)getFontMetrics().width(ws[slen-1-i]) - cWidth)/ cWidth);
+			}
 		}
 	}
 }
 
-void StelPainter::drawText(const Vec3d& v, const QString& str, float angleDeg, float xshift, float yshift, bool noGravity)
+void StelPainter::drawText(const Vec3d& v, const QString& str, const float angleDeg, const float xshift, const float yshift, const bool noGravity)
 {
 	Vec3d win;
-	prj->project(v, win);
-	drawText(win[0], win[1], str, angleDeg, xshift, yshift, noGravity);
+	if (prj->project(v, win))
+		drawText(win[0], win[1], str, angleDeg, xshift, yshift, noGravity);
 }
 
 /*************************************************************************
@@ -641,8 +496,15 @@ struct StringTexture
 	GLuint texture;
 	int width;
 	int height;
+	int subTexWidth;
+	int subTexHeight;
 
-	StringTexture() : texture(0) {;}
+	StringTexture()
+		: texture(0),
+		  width(0),
+		  height(0),
+		  subTexWidth(0),
+		  subTexHeight(0) {;}
 	~StringTexture()
 	{
 		if (texture != 0)
@@ -650,96 +512,54 @@ struct StringTexture
 	}
 };
 
-
-void StelPainter::drawText(float x, float y, const QString& str, float angleDeg, float xshift, float yshift, bool noGravity)
+void StelPainter::drawText(float x, float y, const QString& str, float angleDeg, float xshift, float yshift, const bool noGravity)
 {
-	Q_ASSERT(qPainter);
+	StelPainter::GLState state; // Will restore the opengl state at the end of the function.
 	if (prj->gravityLabels && !noGravity)
 	{
 		drawTextGravity180(x, y, str, xshift, yshift);
 	}
 	else
 	{
-		static const int cacheLimitByte = 10000000;
-		static QCache<QByteArray,StringTexture> texCache(cacheLimitByte);
-		int pixelSize = qPainter->font().pixelSize();
-		QByteArray hash = str.toUtf8() + QByteArray::number(pixelSize);
-
-		const StringTexture* cachedTex = texCache.object(hash);
-		if (cachedTex == NULL)	// need to create texture
-		{
-			// Create temp image and render text into it
-			QRect strRect = getFontMetrics().boundingRect(str);
-                        QPixmap strImage(strRect.width()+1+(int)(0.02f*strRect.width()), strRect.height());
-			strImage.fill(Qt::transparent);
-
-			QPainter painter(&strImage);
-			painter.setFont(qPainter->font());
-			painter.setRenderHints(QPainter::TextAntialiasing, true);
-			painter.setPen(Qt::white);
-			painter.drawText(-strRect.x(), -strRect.y(), str);
-
-			// Create and bind texture, and add it to the list of cached textures
-			StringTexture* newTex = new StringTexture();
-			newTex->texture = StelPainter::glContext->bindTexture(strImage, GL_TEXTURE_2D, GL_RGBA, QGLContext::NoBindOption);
-			newTex->width = strImage.width();
-			newTex->height = strImage.height();
-			texCache.insert(hash, newTex, 3*newTex->width*newTex->height);
-			cachedTex=newTex;
-		}
-		else
-		{
-			// The texture was found in the cache
-//			++cacheNumHits;
-			glBindTexture(GL_TEXTURE_2D, cachedTex->texture);
-		}
+		QOpenGLPaintDevice device;
+		device.setSize(QSize(prj->getViewportWidth(), prj->getViewportHeight()));
+		// This doesn't seem to work correctly, so implement the hack below instead.
+		// Maybe check again later, or check on mac with retina..
+		// device.setDevicePixelRatio(prj->getDevicePixelsPerPixel());
+		// painter.setFont(currentFont);
 		
-//		if (cacheNumLookups % 1000 == 0)
-//		{
-//			qDebug() << "Cache hits: " << cacheNumHits << "/" << cacheNumLookups << "(" << (float)cacheNumHits/cacheNumLookups*100.0 << "%)";
-//			cacheNumHits=0;
-//			cacheNumLookups=0;
-//		}
+		QPainter painter(&device);
+		painter.beginNativePainting();
+		
+		QFont tmpFont = currentFont;
+		tmpFont.setPixelSize(currentFont.pixelSize()*prj->getDevicePixelsPerPixel()*StelApp::getInstance().getGlobalScalingRatio());
+		painter.setFont(tmpFont);
+		painter.setPen(QColor(currentColor[0]*255, currentColor[1]*255, currentColor[2]*255, currentColor[3]*255));
+		
+		xshift*=StelApp::getInstance().getGlobalScalingRatio();
+		yshift*=StelApp::getInstance().getGlobalScalingRatio();
+		
+		y = prj->getViewportHeight()-y;
+		yshift = -yshift;
 
 		// Translate/rotate
 		if (!noGravity)
 			angleDeg += prj->defautAngleForGravityText;
 
-		enableTexture2d(true);
-		static float vertexData[8];
-		static const float texCoordData[] = {0.,1., 1.,1., 0.,0., 1.,0.};
-		// compute the vertex coordinates applying the translation and the rotation
-		static const float vertexBase[] = {0., 0., 1., 0., 0., 1., 1., 1.};
-		if (std::fabs(angleDeg)>1.f*M_PI/180.f)
+		if (std::fabs(angleDeg)>1.f)
 		{
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-			const float cosr = std::cos(angleDeg * M_PI/180.);
-			const float sinr = std::sin(angleDeg * M_PI/180.);
-			for (int i = 0; i < 8; i+=2)
-			{
-				vertexData[i] = x + (cachedTex->width*vertexBase[i]+xshift) * cosr - (cachedTex->height*vertexBase[i+1]+yshift) * sinr;
-				vertexData[i+1] = y  + (cachedTex->width*vertexBase[i]+xshift) * sinr + (cachedTex->height*vertexBase[i+1]+yshift) * cosr;
-			}
+			QTransform m;
+			m.translate(x, y);
+			m.rotate(-angleDeg);
+			painter.setTransform(m);
+			painter.drawText(xshift, yshift, str);
 		}
 		else
 		{
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-			for (int i = 0; i < 8; i+=2)
-			{
-				vertexData[i] = x + cachedTex->width*vertexBase[i]+xshift;
-				vertexData[i+1] = y  + cachedTex->height*vertexBase[i+1]+yshift;
-			}
+			painter.drawText(x+xshift, y+yshift, str);
 		}
-
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-		glEnable(GL_BLEND);
-		enableClientStates(true, true);
-		setVertexPointer(2, GL_FLOAT, vertexData);
-		setTexCoordPointer(2, GL_FLOAT, texCoordData);
-		drawFromArray(TriangleStrip, 4, 0, false);
-		enableClientStates(false);
+		
+		painter.endNativePainting();
 	}
 }
 
@@ -879,8 +699,8 @@ void StelPainter::drawSmallCircleArc(const Vec3d& start, const Vec3d& stop, cons
 // Project the passed triangle on the screen ensuring that it will look smooth, even for non linear distortion
 // by splitting it into subtriangles.
 void StelPainter::projectSphericalTriangle(const SphericalCap* clippingCap, const Vec3d* vertices, QVarLengthArray<Vec3f, 4096>* outVertices,
-		const Vec2f* texturePos, QVarLengthArray<Vec2f, 4096>* outTexturePos,
-		double maxSqDistortion, int nbI, bool checkDisc1, bool checkDisc2, bool checkDisc3) const
+		const Vec2f* texturePos, QVarLengthArray<Vec2f, 4096>* outTexturePos, const Vec3f *colors, QVarLengthArray<Vec3f, 4096> *outColors,
+		const double maxSqDistortion, const int nbI, const bool checkDisc1, const bool checkDisc2, const bool checkDisc3) const
 {
 	Q_ASSERT(fabs(vertices[0].length()-1.)<0.00001);
 	Q_ASSERT(fabs(vertices[1].length()-1.)<0.00001);
@@ -938,6 +758,8 @@ void StelPainter::projectSphericalTriangle(const SphericalCap* clippingCap, cons
 		outVertices->append(Vec3f(e0[0], e0[1], e0[2])); outVertices->append(Vec3f(e1[0], e1[1], e1[2])); outVertices->append(Vec3f(e2[0], e2[1], e2[2]));
 		if (outTexturePos)
 			outTexturePos->append(texturePos,3);
+		if (outColors)
+			outColors->append(colors,3);
 		return;
 	}
 
@@ -952,6 +774,8 @@ void StelPainter::projectSphericalTriangle(const SphericalCap* clippingCap, cons
 		outVertices->append(Vec3f(e0[0], e0[1], e0[2])); outVertices->append(Vec3f(e1[0], e1[1], e2[2])); outVertices->append(Vec3f(e2[0], e2[1], e2[2]));
 		if (outTexturePos)
 			outTexturePos->append(texturePos,3);
+		if (outColors)
+			outColors->append(colors,3);
 		return;
 	}
 
@@ -959,6 +783,7 @@ void StelPainter::projectSphericalTriangle(const SphericalCap* clippingCap, cons
 	// Depending on which combination of sides of the triangle has to be split a different strategy is used.
 	Vec3d va[3];
 	Vec2f ta[3];
+	Vec3f ca[3];
 	// Only 1 side has to be split: split the triangle in 2
 	if (cDiscontinuity1 && !cDiscontinuity2 && !cDiscontinuity3)
 	{
@@ -972,7 +797,13 @@ void StelPainter::projectSphericalTriangle(const SphericalCap* clippingCap, cons
 			ta[1]=(texturePos[0]+texturePos[1])*0.5;
 			ta[2]=texturePos[2];
 		}
-		projectSphericalTriangle(clippingCap, va, outVertices, ta, outTexturePos, maxSqDistortion, nbI+1, true, true, false);
+		if (outColors)
+		{
+			ca[0]=colors[0];
+			ca[1]=(colors[0]+colors[1])*0.5;
+			ca[2]=colors[2];
+		}
+		projectSphericalTriangle(clippingCap, va, outVertices, ta, outTexturePos, ca, outColors, maxSqDistortion, nbI+1, true, true, false);
 
 		//va[0]=vertices[0]+vertices[1];
 		//va[0].normalize();
@@ -985,7 +816,13 @@ void StelPainter::projectSphericalTriangle(const SphericalCap* clippingCap, cons
 			ta[1]=texturePos[1];
 			ta[2]=texturePos[2];
 		}
-		projectSphericalTriangle(clippingCap, va, outVertices, ta, outTexturePos, maxSqDistortion, nbI+1, true, false, true);
+		if (outColors)
+		{
+			ca[0]=(colors[0]+colors[1])*0.5;
+			ca[1]=colors[1];
+			ca[2]=colors[2];
+		}
+		projectSphericalTriangle(clippingCap, va, outVertices, ta, outTexturePos, ca, outColors, maxSqDistortion, nbI+1, true, false, true);
 		return;
 	}
 
@@ -1001,7 +838,13 @@ void StelPainter::projectSphericalTriangle(const SphericalCap* clippingCap, cons
 			ta[1]=texturePos[1];
 			ta[2]=(texturePos[1]+texturePos[2])*0.5;
 		}
-		projectSphericalTriangle(clippingCap, va, outVertices, ta, outTexturePos, maxSqDistortion, nbI+1, false, true, true);
+		if (outColors)
+		{
+			ca[0]=colors[0];
+			ca[1]=colors[1];
+			ca[2]=(colors[1]+colors[2])*0.5;
+		}
+		projectSphericalTriangle(clippingCap, va, outVertices, ta, outTexturePos, ca, outColors, maxSqDistortion, nbI+1, false, true, true);
 
 		va[0]=vertices[0];
 		//va[1]=vertices[1]+vertices[2];
@@ -1014,7 +857,13 @@ void StelPainter::projectSphericalTriangle(const SphericalCap* clippingCap, cons
 			ta[1]=(texturePos[1]+texturePos[2])*0.5;
 			ta[2]=texturePos[2];
 		}
-		projectSphericalTriangle(clippingCap, va, outVertices, ta, outTexturePos, maxSqDistortion, nbI+1, true, true, false);
+		if (outColors)
+		{
+			ca[0]=colors[0];
+			ca[1]=(colors[1]+colors[2])*0.5;
+			ca[2]=colors[2];
+		}
+		projectSphericalTriangle(clippingCap, va, outVertices, ta, outTexturePos, ca, outColors, maxSqDistortion, nbI+1, true, true, false);
 		return;
 	}
 
@@ -1030,7 +879,13 @@ void StelPainter::projectSphericalTriangle(const SphericalCap* clippingCap, cons
 			ta[1]=texturePos[1];
 			ta[2]=(texturePos[0]+texturePos[2])*0.5;
 		}
-		projectSphericalTriangle(clippingCap, va, outVertices, ta, outTexturePos, maxSqDistortion, nbI+1, false, true, true);
+		if (outColors)
+		{
+			ca[0]=colors[0];
+			ca[1]=colors[1];
+			ca[2]=(colors[0]+colors[2])*0.5;
+		}
+		projectSphericalTriangle(clippingCap, va, outVertices, ta, outTexturePos, ca, outColors, maxSqDistortion, nbI+1, false, true, true);
 
 		//va[0]=vertices[0]+vertices[2];
 		//va[0].normalize();
@@ -1043,7 +898,13 @@ void StelPainter::projectSphericalTriangle(const SphericalCap* clippingCap, cons
 			ta[1]=texturePos[1];
 			ta[2]=texturePos[2];
 		}
-		projectSphericalTriangle(clippingCap, va, outVertices, ta, outTexturePos, maxSqDistortion, nbI+1, true, false, true);
+		if (outColors)
+		{
+			ca[0]=(colors[0]+colors[2])*0.5;
+			ca[1]=colors[1];
+			ca[2]=colors[2];
+		}
+		projectSphericalTriangle(clippingCap, va, outVertices, ta, outTexturePos, ca, outColors, maxSqDistortion, nbI+1, true, false, true);
 		return;
 	}
 
@@ -1061,7 +922,13 @@ void StelPainter::projectSphericalTriangle(const SphericalCap* clippingCap, cons
 			ta[1]=(texturePos[0]+texturePos[1])*0.5;
 			ta[2]=(texturePos[1]+texturePos[2])*0.5;
 		}
-		projectSphericalTriangle(clippingCap, va, outVertices, ta, outTexturePos, maxSqDistortion, nbI+1);
+		if (outColors)
+		{
+			ca[0]=colors[0];
+			ca[1]=(colors[0]+colors[1])*0.5;
+			ca[2]=(colors[1]+colors[2])*0.5;
+		}
+		projectSphericalTriangle(clippingCap, va, outVertices, ta, outTexturePos, ca, outColors, maxSqDistortion, nbI+1);
 
 		//va[0]=vertices[0]+vertices[1];
 		//va[0].normalize();
@@ -1075,7 +942,13 @@ void StelPainter::projectSphericalTriangle(const SphericalCap* clippingCap, cons
 			ta[1]=texturePos[1];
 			ta[2]=(texturePos[1]+texturePos[2])*0.5;
 		}
-		projectSphericalTriangle(clippingCap, va, outVertices, ta, outTexturePos, maxSqDistortion, nbI+1);
+		if (outColors)
+		{
+			ca[0]=(colors[0]+colors[1])*0.5;
+			ca[1]=colors[1];
+			ca[2]=(colors[1]+colors[2])*0.5;
+		}
+		projectSphericalTriangle(clippingCap, va, outVertices, ta, outTexturePos, ca, outColors, maxSqDistortion, nbI+1);
 
 		va[0]=vertices[0];
 		//va[1]=vertices[1]+vertices[2];
@@ -1088,7 +961,13 @@ void StelPainter::projectSphericalTriangle(const SphericalCap* clippingCap, cons
 			ta[1]=(texturePos[1]+texturePos[2])*0.5;
 			ta[2]=texturePos[2];
 		}
-		projectSphericalTriangle(clippingCap, va, outVertices, ta, outTexturePos, maxSqDistortion, nbI+1, true, true, false);
+		if (outColors)
+		{
+			ca[0]=colors[0];
+			ca[1]=(colors[1]+colors[2])*0.5;
+			ca[2]=colors[2];
+		}
+		projectSphericalTriangle(clippingCap, va, outVertices, ta, outTexturePos, ca, outColors, maxSqDistortion, nbI+1, true, true, false);
 		return;
 	}
 	if (cDiscontinuity1 && !cDiscontinuity2 && cDiscontinuity3)
@@ -1104,7 +983,13 @@ void StelPainter::projectSphericalTriangle(const SphericalCap* clippingCap, cons
 			ta[1]=(texturePos[0]+texturePos[1])*0.5;
 			ta[2]=(texturePos[0]+texturePos[2])*0.5;
 		}
-		projectSphericalTriangle(clippingCap, va, outVertices, ta, outTexturePos, maxSqDistortion, nbI+1);
+		if (outColors)
+		{
+			ca[0]=colors[0];
+			ca[1]=(colors[0]+colors[1])*0.5;
+			ca[2]=(colors[0]+colors[2])*0.5;
+		}
+		projectSphericalTriangle(clippingCap, va, outVertices, ta, outTexturePos, ca, outColors, maxSqDistortion, nbI+1);
 
 		//va[0]=vertices[0]+vertices[1];
 		//va[0].normalize();
@@ -1118,7 +1003,13 @@ void StelPainter::projectSphericalTriangle(const SphericalCap* clippingCap, cons
 			ta[1]=texturePos[2];
 			ta[2]=(texturePos[0]+texturePos[2])*0.5;
 		}
-		projectSphericalTriangle(clippingCap, va, outVertices, ta, outTexturePos, maxSqDistortion, nbI+1);
+		if (outColors)
+		{
+			ca[0]=(colors[0]+colors[1])*0.5;
+			ca[1]=colors[2];
+			ca[2]=(colors[0]+colors[2])*0.5;
+		}
+		projectSphericalTriangle(clippingCap, va, outVertices, ta, outTexturePos, ca, outColors, maxSqDistortion, nbI+1);
 
 
 		//va[0]=vertices[0]+vertices[1];
@@ -1131,7 +1022,13 @@ void StelPainter::projectSphericalTriangle(const SphericalCap* clippingCap, cons
 			ta[1]=texturePos[1];
 			ta[2]=texturePos[2];
 		}
-		projectSphericalTriangle(clippingCap, va, outVertices, ta, outTexturePos, maxSqDistortion, nbI+1, true, false, true);
+		if (outColors)
+		{
+			ca[0]=(colors[0]+colors[1])*0.5;
+			ca[1]=colors[1];
+			ca[2]=colors[2];
+		}
+		projectSphericalTriangle(clippingCap, va, outVertices, ta, outTexturePos, ca, outColors, maxSqDistortion, nbI+1, true, false, true);
 
 		return;
 	}
@@ -1147,7 +1044,13 @@ void StelPainter::projectSphericalTriangle(const SphericalCap* clippingCap, cons
 			ta[1]=texturePos[1];
 			ta[2]=(texturePos[1]+texturePos[2])*0.5;
 		}
-		projectSphericalTriangle(clippingCap, va, outVertices, ta, outTexturePos, maxSqDistortion, nbI+1, false, true, true);
+		if (outColors)
+		{
+			ca[0]=colors[0];
+			ca[1]=colors[1];
+			ca[2]=(colors[1]+colors[2])*0.5;
+		}
+		projectSphericalTriangle(clippingCap, va, outVertices, ta, outTexturePos, ca, outColors, maxSqDistortion, nbI+1, false, true, true);
 
 		//va[0]=vertices[1]+vertices[2];
 		//va[0].normalize();
@@ -1161,7 +1064,13 @@ void StelPainter::projectSphericalTriangle(const SphericalCap* clippingCap, cons
 			ta[1]=texturePos[2];
 			ta[2]=(texturePos[0]+texturePos[2])*0.5;
 		}
-		projectSphericalTriangle(clippingCap, va, outVertices, ta, outTexturePos, maxSqDistortion, nbI+1);
+		if (outColors)
+		{
+			ca[0]=(colors[1]+colors[2])*0.5;
+			ca[1]=colors[2];
+			ca[2]=(colors[0]+colors[2])*0.5;
+		}
+		projectSphericalTriangle(clippingCap, va, outVertices, ta, outTexturePos, ca, outColors, maxSqDistortion, nbI+1);
 
 		va[1]=va[0];
 		va[0]=vertices[0];
@@ -1175,7 +1084,13 @@ void StelPainter::projectSphericalTriangle(const SphericalCap* clippingCap, cons
 			ta[1]=(texturePos[1]+texturePos[2])*0.5;
 			ta[2]=(texturePos[0]+texturePos[2])*0.5;
 		}
-		projectSphericalTriangle(clippingCap, va, outVertices, ta, outTexturePos, maxSqDistortion, nbI+1);
+		if (outColors)
+		{
+			ca[0]=colors[0];
+			ca[1]=(colors[1]+colors[2])*0.5;
+			ca[2]=(colors[0]+colors[2])*0.5;
+		}
+		projectSphericalTriangle(clippingCap, va, outVertices, ta, outTexturePos, ca, outColors, maxSqDistortion, nbI+1);
 		return;
 	}
 
@@ -1192,7 +1107,13 @@ void StelPainter::projectSphericalTriangle(const SphericalCap* clippingCap, cons
 		ta[1]=(texturePos[1]+texturePos[2])*0.5;
 		ta[2]=(texturePos[0]+texturePos[2])*0.5;
 	}
-	projectSphericalTriangle(clippingCap, va, outVertices, ta, outTexturePos, maxSqDistortion, nbI+1);
+	if (outColors)
+	{
+		ca[0]=(colors[0]+colors[1])*0.5;
+		ca[1]=(colors[1]+colors[2])*0.5;
+		ca[2]=(colors[0]+colors[2])*0.5;
+	}
+	projectSphericalTriangle(clippingCap, va, outVertices, ta, outTexturePos, ca, outColors, maxSqDistortion, nbI+1);
 
 	va[1]=va[0];
 	va[0]=vertices[0];
@@ -1206,7 +1127,13 @@ void StelPainter::projectSphericalTriangle(const SphericalCap* clippingCap, cons
 		ta[1]=(texturePos[0]+texturePos[1])*0.5;
 		ta[2]=(texturePos[0]+texturePos[2])*0.5;
 	}
-	projectSphericalTriangle(clippingCap, va, outVertices, ta, outTexturePos, maxSqDistortion, nbI+1);
+	if (outColors)
+	{
+		ca[0]=colors[0];
+		ca[1]=(colors[0]+colors[1])*0.5;
+		ca[2]=(colors[0]+colors[2])*0.5;
+	}
+	projectSphericalTriangle(clippingCap, va, outVertices, ta, outTexturePos, ca, outColors, maxSqDistortion, nbI+1);
 
 	//va[0]=vertices[0]+vertices[1];
 	//va[0].normalize();
@@ -1220,7 +1147,13 @@ void StelPainter::projectSphericalTriangle(const SphericalCap* clippingCap, cons
 		ta[1]=texturePos[1];
 		ta[2]=(texturePos[1]+texturePos[2])*0.5;
 	}
-	projectSphericalTriangle(clippingCap, va, outVertices, ta, outTexturePos, maxSqDistortion, nbI+1);
+	if (outColors)
+	{
+		ca[0]=(colors[0]+colors[1])*0.5;
+		ca[1]=colors[1];
+		ca[2]=(colors[1]+colors[2])*0.5;
+	}
+	projectSphericalTriangle(clippingCap, va, outVertices, ta, outTexturePos, ca, outColors, maxSqDistortion, nbI+1);
 
 	va[0]=vertices[0];va[0]+=vertices[2];
 	va[0].normalize();
@@ -1234,13 +1167,20 @@ void StelPainter::projectSphericalTriangle(const SphericalCap* clippingCap, cons
 		ta[1]=(texturePos[1]+texturePos[2])*0.5;
 		ta[2]=texturePos[2];
 	}
-	projectSphericalTriangle(clippingCap, va, outVertices, ta, outTexturePos, maxSqDistortion, nbI+1);
+	if (outColors)
+	{
+		ca[0]=(colors[0]+colors[2])*0.5;
+		ca[1]=(colors[1]+colors[2])*0.5;
+		ca[2]=colors[2];
+	}
+	projectSphericalTriangle(clippingCap, va, outVertices, ta, outTexturePos, ca, outColors, maxSqDistortion, nbI+1);
 
 	return;
 }
 
 static QVarLengthArray<Vec3f, 4096> polygonVertexArray;
 static QVarLengthArray<Vec2f, 4096> polygonTextureCoordArray;
+static QVarLengthArray<Vec3f, 4096> polygonColorArray;
 static QVarLengthArray<unsigned int, 4096> indexArray;
 
 void StelPainter::drawGreatCircleArcs(const StelVertexArray& va, const SphericalCap* clippingCap)
@@ -1277,26 +1217,38 @@ class VertexArrayProjector
 {
 public:
 	VertexArrayProjector(const StelVertexArray& ar, StelPainter* apainter, const SphericalCap* aclippingCap,
-						 QVarLengthArray<Vec3f, 4096>* aoutVertices, QVarLengthArray<Vec2f, 4096>* aoutTexturePos=NULL, double amaxSqDistortion=5.)
+						 QVarLengthArray<Vec3f, 4096>* aoutVertices, QVarLengthArray<Vec2f, 4096>* aoutTexturePos=NULL, QVarLengthArray<Vec3f, 4096>* aoutColors=NULL, double amaxSqDistortion=5.)
 		   : vertexArray(ar), painter(apainter), clippingCap(aclippingCap), outVertices(aoutVertices),
-			 outTexturePos(aoutTexturePos), maxSqDistortion(amaxSqDistortion)
+			 outColors(aoutColors), outTexturePos(aoutTexturePos), maxSqDistortion(amaxSqDistortion)
 	{
 	}
 
 	// Project a single triangle and add it into the output arrays
 	inline void operator()(const Vec3d* v0, const Vec3d* v1, const Vec3d* v2,
 						   const Vec2f* t0, const Vec2f* t1, const Vec2f* t2,
+						   const Vec3f* c0, const Vec3f* c1, const Vec3f* c2,
 						   unsigned int, unsigned int, unsigned)
 	{
 		// XXX: we may optimize more by putting the declaration and the test outside of this method.
 		const Vec3d tmpVertex[3] = {*v0, *v1, *v2};
-		if (outTexturePos)
+		if ( (outTexturePos) && (outColors))
 		{
 			const Vec2f tmpTexture[3] = {*t0, *t1, *t2};
-			painter->projectSphericalTriangle(clippingCap, tmpVertex, outVertices, tmpTexture, outTexturePos, maxSqDistortion);
+			const Vec3f tmpColor[3] = {*c0, *c1, *c2};
+			painter->projectSphericalTriangle(clippingCap, tmpVertex, outVertices, tmpTexture, outTexturePos, tmpColor, outColors, maxSqDistortion);
+		}
+		else if (outTexturePos)
+		{
+			const Vec2f tmpTexture[3] = {*t0, *t1, *t2};
+			painter->projectSphericalTriangle(clippingCap, tmpVertex, outVertices, tmpTexture, outTexturePos, NULL, NULL, maxSqDistortion);
+		}
+		else if (outColors)
+		{
+			const Vec3f tmpColor[3] = {*c0, *c1, *c2};
+			painter->projectSphericalTriangle(clippingCap, tmpVertex, outVertices, NULL, NULL, tmpColor, outColors, maxSqDistortion);
 		}
 		else
-			painter->projectSphericalTriangle(clippingCap, tmpVertex, outVertices, NULL, NULL, maxSqDistortion);
+			painter->projectSphericalTriangle(clippingCap, tmpVertex, outVertices, NULL, NULL, NULL, NULL, maxSqDistortion);
 	}
 
 	// Draw the resulting arrays
@@ -1305,7 +1257,10 @@ public:
 		painter->setVertexPointer(3, GL_FLOAT, outVertices->constData());
 		if (outTexturePos)
 			painter->setTexCoordPointer(2, GL_FLOAT, outTexturePos->constData());
-		painter->enableClientStates(true, outTexturePos != NULL);
+		if (outColors)
+			painter->setColorPointer(3, GL_FLOAT, outColors->constData());
+
+		painter->enableClientStates(true, outTexturePos != NULL, outColors != NULL);
 		painter->drawFromArray(StelPainter::Triangles, outVertices->size(), 0, false);
 		painter->enableClientStates(false);
 	}
@@ -1315,11 +1270,12 @@ private:
 	StelPainter* painter;
 	const SphericalCap* clippingCap;
 	QVarLengthArray<Vec3f, 4096>* outVertices;
+	QVarLengthArray<Vec3f, 4096>* outColors;
 	QVarLengthArray<Vec2f, 4096>* outTexturePos;
 	double maxSqDistortion;
 };
 
-void StelPainter::drawStelVertexArray(const StelVertexArray& arr, bool checkDiscontinuity)
+void StelPainter::drawStelVertexArray(const StelVertexArray& arr, const bool checkDiscontinuity)
 {
 	if (checkDiscontinuity && prj->hasDiscontinuity())
 	{
@@ -1332,11 +1288,23 @@ void StelPainter::drawStelVertexArray(const StelVertexArray& arr, bool checkDisc
 	if (arr.isTextured())
 	{
 		setTexCoordPointer(2, GL_FLOAT, arr.texCoords.constData());
-		enableClientStates(true, true);
+		if (arr.isColored())
+		{
+			setColorPointer(3, GL_FLOAT, arr.colors.constData());
+			enableClientStates(true, true, true);
+		}
+		else
+			enableClientStates(true, true, false);
 	}
 	else
 	{
-		enableClientStates(true, false);
+		if (arr.isColored())
+		{
+			setColorPointer(3, GL_FLOAT, arr.colors.constData());
+			enableClientStates(true, false, true);
+		}
+		else
+			enableClientStates(true, false, false);
 	}
 	if (arr.isIndexed())
 		drawFromArray((StelPainter::DrawingMode)arr.primitiveType, arr.indices.size(), 0, true, arr.indices.constData());
@@ -1346,17 +1314,15 @@ void StelPainter::drawStelVertexArray(const StelVertexArray& arr, bool checkDisc
 	enableClientStates(false);
 }
 
-void StelPainter::drawSphericalTriangles(const StelVertexArray& va, bool textured, const SphericalCap* clippingCap, bool doSubDivide, double maxSqDistortion)
+void StelPainter::drawSphericalTriangles(const StelVertexArray& va, const bool textured, const bool colored, const SphericalCap* clippingCap, const bool doSubDivide, const double maxSqDistortion)
 {
 	if (va.vertex.isEmpty())
 		return;
 
 	Q_ASSERT(va.vertex.size()>2);
-#ifndef STELPAINTER_GL2
-	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-#endif
 	polygonVertexArray.clear();
 	polygonTextureCoordArray.clear();
+
 	indexArray.clear();
 
 	if (!doSubDivide)
@@ -1369,14 +1335,14 @@ void StelPainter::drawSphericalTriangles(const StelVertexArray& va, bool texture
 	// the last case.  It is the slowest, it process the triangles one by one.
 	{
 		// Project all the triangles of the VertexArray into our buffer arrays.
-		VertexArrayProjector result = va.foreachTriangle(VertexArrayProjector(va, this, clippingCap, &polygonVertexArray, textured ? &polygonTextureCoordArray : NULL, maxSqDistortion));
+		VertexArrayProjector result = va.foreachTriangle(VertexArrayProjector(va, this, clippingCap, &polygonVertexArray, textured ? &polygonTextureCoordArray : NULL, colored ? &polygonColorArray : NULL, maxSqDistortion));
 		result.drawResult();
 		return;
 	}
 }
 
 // Draw the given SphericalPolygon.
-void StelPainter::drawSphericalRegion(const SphericalRegion* poly, SphericalPolygonDrawMode drawMode, const SphericalCap* clippingCap, bool doSubDivise, double maxSqDistortion)
+void StelPainter::drawSphericalRegion(const SphericalRegion* poly, SphericalPolygonDrawMode drawMode, const SphericalCap* clippingCap, const bool doSubDivise, const double maxSqDistortion)
 {
 	if (!prj->getBoundingCap().intersects(poly->getBoundingCap()))
 		return;
@@ -1394,7 +1360,8 @@ void StelPainter::drawSphericalRegion(const SphericalRegion* poly, SphericalPoly
 			glEnable(GL_CULL_FACE);
 			// The polygon is already tesselated as triangles
 			if (doSubDivise || prj->intersectViewportDiscontinuity(poly->getBoundingCap()))
-				drawSphericalTriangles(poly->getFillVertexArray(), drawMode==SphericalPolygonDrawModeTextureFill, clippingCap, doSubDivise, maxSqDistortion);
+				// flag for color-modulated textured mode (e.g. for Milky Way/extincted)
+				drawSphericalTriangles(poly->getFillVertexArray(), drawMode>=SphericalPolygonDrawModeTextureFill, drawMode==SphericalPolygonDrawModeTextureFillColormodulated, clippingCap, doSubDivise, maxSqDistortion);
 			else
 				drawStelVertexArray(poly->getFillVertexArray(), false);
 
@@ -1409,7 +1376,7 @@ void StelPainter::drawSphericalRegion(const SphericalRegion* poly, SphericalPoly
 /*************************************************************************
  draw a simple circle, 2d viewport coordinates in pixel
 *************************************************************************/
-void StelPainter::drawCircle(float x, float y, float r)
+void StelPainter::drawCircle(const float x, const float y, float r)
 {
 	if (r <= 1.0)
 		return;
@@ -1441,10 +1408,14 @@ void StelPainter::drawCircle(float x, float y, float r)
 }
 
 
-void StelPainter::drawSprite2dMode(float x, float y, float radius)
+void StelPainter::drawSprite2dMode(const float x, const float y, float radius)
 {
 	static float vertexData[] = {-10.,-10.,10.,-10., 10.,10., -10.,10.};
 	static const float texCoordData[] = {0.,0., 1.,0., 0.,1., 1.,1.};
+	
+	// Takes into account device pixel density and global scale ratio, as we are drawing 2D stuff.
+	radius *= prj->getDevicePixelsPerPixel()*StelApp::getInstance().getGlobalScalingRatio();
+	
 	vertexData[0]=x-radius; vertexData[1]=y-radius;
 	vertexData[2]=x+radius; vertexData[3]=y-radius;
 	vertexData[4]=x-radius; vertexData[5]=y+radius;
@@ -1456,14 +1427,19 @@ void StelPainter::drawSprite2dMode(float x, float y, float radius)
 	enableClientStates(false);
 }
 
-void StelPainter::drawSprite2dMode(const Vec3d& v, float radius)
+void StelPainter::drawSprite2dModeNoDeviceScale(const float x, const float y, const float radius)
 {
-	Vec3d win;
-	prj->project(v, win);
-	drawSprite2dMode(win[0], win[1], radius);
+	drawSprite2dMode(x, y, radius/(prj->getDevicePixelsPerPixel()*StelApp::getInstance().getGlobalScalingRatio()));
 }
 
-void StelPainter::drawSprite2dMode(float x, float y, float radius, float rotation)
+void StelPainter::drawSprite2dMode(const Vec3d& v, const float radius)
+{
+	Vec3d win;
+	if (prj->project(v, win))
+		drawSprite2dMode(win[0], win[1], radius);
+}
+
+void StelPainter::drawSprite2dMode(const float x, const float y, float radius, const float rotation)
 {
 	static float vertexData[8];
 	static const float texCoordData[] = {0.,0., 1.,0., 0.,1., 1.,1.};
@@ -1472,6 +1448,10 @@ void StelPainter::drawSprite2dMode(float x, float y, float radius, float rotatio
 	static const float vertexBase[] = {-1., -1., 1., -1., -1., 1., 1., 1.};
 	const float cosr = std::cos(rotation / 180 * M_PI);
 	const float sinr = std::sin(rotation / 180 * M_PI);
+	
+	// Takes into account device pixel density and global scale ratio, as we are drawing 2D stuff.
+	radius *= prj->getDevicePixelsPerPixel()*StelApp::getInstance().getGlobalScalingRatio();
+	
 	for (int i = 0; i < 8; i+=2)
 	{
 		vertexData[i] = x + radius * vertexBase[i] * cosr - radius * vertexBase[i+1] * sinr;
@@ -1485,7 +1465,7 @@ void StelPainter::drawSprite2dMode(float x, float y, float radius, float rotatio
 	enableClientStates(false);
 }
 
-void StelPainter::drawRect2d(float x, float y, float width, float height, bool textured)
+void StelPainter::drawRect2d(const float x, const float y, const float width, const float height, const bool textured)
 {
 	static float vertexData[] = {-10.,-10.,10.,-10., 10.,10., -10.,10.};
 	static const float texCoordData[] = {0.,0., 1.,0., 0.,1., 1.,1.};
@@ -1511,7 +1491,7 @@ void StelPainter::drawRect2d(float x, float y, float width, float height, bool t
 /*************************************************************************
  Draw a GL_POINT at the given position
 *************************************************************************/
-void StelPainter::drawPoint2d(float x, float y)
+void StelPainter::drawPoint2d(const float x, const float y)
 {
 	static float vertexData[] = {0.,0.};
 	vertexData[0]=x;
@@ -1527,7 +1507,7 @@ void StelPainter::drawPoint2d(float x, float y)
 /*************************************************************************
  Draw a line between the 2 points.
 *************************************************************************/
-void StelPainter::drawLine2d(float x1, float y1, float x2, float y2)
+void StelPainter::drawLine2d(const float x1, const float y1, const float x2, const float y2)
 {
 	static float vertexData[] = {0.,0.,0.,0.};
 	vertexData[0]=x1;
@@ -1542,31 +1522,10 @@ void StelPainter::drawLine2d(float x1, float y1, float x2, float y2)
 }
 
 ///////////////////////////////////////////////////////////////////////////
-// Drawing methods for general (non-linear) mode
-void StelPainter::sSphere(float radius, float oneMinusOblateness, int slices, int stacks, int orientInside, bool flipTexture)
+// Drawing methods for general (non-linear) mode.
+// This used to draw a full sphere. Since 0.13 it's possible to have a spherical zone only.
+void StelPainter::sSphere(const float radius, const float oneMinusOblateness, const int slices, const int stacks, const int orientInside, const bool flipTexture, const float topAngle, const float bottomAngle)
 {
-	// It is really good for performance to have Vec4f,Vec3f objects
-	// static rather than on the stack. But why?
-	// Is the constructor/destructor so expensive?
-	static Vec3f lightPos3;
-	static Vec4f ambientLight;
-	static Vec4f diffuseLight;
-	float c;
-	const bool isLightOn = light.isEnabled();
-	if (isLightOn)
-	{
-		lightPos3.set(light.getPosition()[0], light.getPosition()[1], light.getPosition()[2]);
-		Vec3f tmpv(0.f);
-		prj->getModelViewTransform()->forward(tmpv); // -posCenterEye
-		//lightPos3 -= tmpv;
-		//lightPos3 = prj->modelViewMatrixf.transpose().multiplyWithoutTranslation(lightPos3);
-		prj->getModelViewTransform()->getApproximateLinearTransfo().transpose().multiplyWithoutTranslation(Vec3d(lightPos3[0], lightPos3[1], lightPos3[2]));
-		prj->getModelViewTransform()->backward(lightPos3);
-		lightPos3.normalize();
-		ambientLight = light.getAmbient();
-		diffuseLight = light.getDiffuse();
-	}
-
 	GLfloat x, y, z;
 	GLfloat s=0.f, t=0.f;
 	GLint i, j;
@@ -1583,14 +1542,19 @@ void StelPainter::sSphere(float radius, float oneMinusOblateness, int slices, in
 		t=1.f;
 	}
 
-	const float drho = M_PI / stacks;
-	Q_ASSERT(stacks<=MAX_STACKS);
-	ComputeCosSinRho(drho,stacks);
-	float* cos_sin_rho_p;
+	const float* cos_sin_rho = NULL;
+	Q_ASSERT(topAngle<bottomAngle); // don't forget: These are opening angles counted from top.
+	if ((bottomAngle>3.1415f) && (topAngle<0.0001f)) // safety margin.
+		cos_sin_rho = StelUtils::ComputeCosSinRho(stacks);
+	else
+	{
+		const float drho = (bottomAngle-topAngle) / stacks; // deltaRho:  originally just 180degrees/stacks, now the range clamped.
+		cos_sin_rho = StelUtils::ComputeCosSinRhoZone(drho, stacks, M_PI-bottomAngle);
+	}
+	// Allow parameters so that pole regions may remain free.
+	const float* cos_sin_rho_p;
 
-	const float dtheta = 2.f * M_PI / slices;
-	Q_ASSERT(slices<=MAX_SLICES);
-	ComputeCosSinTheta(dtheta,slices);
+	const float* cos_sin_theta = StelUtils::ComputeCosSinTheta(slices);
 	const float *cos_sin_theta_p;
 
 	// texturing: s goes from 0.0/0.25/0.5/0.75/1.0 at +y/+x/-y/-x/+y axis
@@ -1600,11 +1564,11 @@ void StelPainter::sSphere(float radius, float oneMinusOblateness, int slices, in
 	const GLfloat ds = (flipTexture ? -1.f : 1.f) / slices;
 	const GLfloat dt = nsign / stacks; // from inside texture is reversed
 
-	// draw intermediate  as quad strips
+	// draw intermediate as quad strips
 	static QVector<double> vertexArr;
 	static QVector<float> texCoordArr;
 	static QVector<float> colorArr;
-	static QVector<unsigned int> indiceArr;
+	static QVector<unsigned short> indiceArr;
 
 	texCoordArr.resize(0);
 	vertexArr.resize(0);
@@ -1620,23 +1584,11 @@ void StelPainter::sSphere(float radius, float oneMinusOblateness, int slices, in
 			y = cos_sin_theta_p[0] * cos_sin_rho_p[1];
 			z = nsign * cos_sin_rho_p[0];
 			texCoordArr << s << t;
-			if (isLightOn)
-			{
-				c = nsign * (lightPos3[0]*x*oneMinusOblateness + lightPos3[1]*y*oneMinusOblateness + lightPos3[2]*z);
-				if (c<0) {c=0;}
-				colorArr << c*diffuseLight[0] + ambientLight[0] << c*diffuseLight[1] + ambientLight[1] << c*diffuseLight[2] + ambientLight[2];
-			}
 			vertexArr << x * radius << y * radius << z * oneMinusOblateness * radius;
 			x = -cos_sin_theta_p[1] * cos_sin_rho_p[3];
 			y = cos_sin_theta_p[0] * cos_sin_rho_p[3];
 			z = nsign * cos_sin_rho_p[2];
 			texCoordArr << s << t - dt;
-			if (isLightOn)
-			{
-				c = nsign * (lightPos3[0]*x*oneMinusOblateness + lightPos3[1]*y*oneMinusOblateness + lightPos3[2]*z);
-				if (c<0) {c=0;}
-				colorArr << c*diffuseLight[0] + ambientLight[0] << c*diffuseLight[1] + ambientLight[1] << c*diffuseLight[2] + ambientLight[2];
-			}
 			vertexArr << x * radius << y * radius << z * oneMinusOblateness * radius;
 			s += ds;
 		}
@@ -1650,14 +1602,12 @@ void StelPainter::sSphere(float radius, float oneMinusOblateness, int slices, in
 	}
 
 	// Draw the array now
-	if (isLightOn)
-		setArrays((Vec3d*)vertexArr.constData(), (Vec2f*)texCoordArr.constData(), (Vec3f*)colorArr.constData());
-	else
-		setArrays((Vec3d*)vertexArr.constData(), (Vec2f*)texCoordArr.constData());
+	setArrays((Vec3d*)vertexArr.constData(), (Vec2f*)texCoordArr.constData());
 	drawFromArray(Triangles, indiceArr.size(), 0, true, indiceArr.constData());
 }
 
-StelVertexArray StelPainter::computeSphereNoLight(float radius, float oneMinusOblateness, int slices, int stacks, int orientInside, bool flipTexture)
+StelVertexArray StelPainter::computeSphereNoLight(const float radius, const float oneMinusOblateness, const int slices, const int stacks,
+						  const int orientInside, const bool flipTexture, const float topAngle, const float bottomAngle)
 {
 	StelVertexArray result(StelVertexArray::Triangles);
 	GLfloat x, y, z;
@@ -1675,14 +1625,19 @@ StelVertexArray StelPainter::computeSphereNoLight(float radius, float oneMinusOb
 		t=1.f;
 	}
 
-	const float drho = M_PI / stacks;
-	Q_ASSERT(stacks<=MAX_STACKS);
-	ComputeCosSinRho(drho,stacks);
-	float* cos_sin_rho_p;
+	const float* cos_sin_rho = NULL; //StelUtils::ComputeCosSinRho(stacks);
+	Q_ASSERT(topAngle<bottomAngle); // don't forget: These are opening angles counted from top.
+	if ((bottomAngle>3.1415f) && (topAngle<0.0001f)) // safety margin.
+		cos_sin_rho = StelUtils::ComputeCosSinRho(stacks);
+	else
+	{
+		const float drho = (bottomAngle-topAngle) / stacks; // deltaRho:  originally just 180degrees/stacks, now the range clamped.
+		cos_sin_rho = StelUtils::ComputeCosSinRhoZone(drho, stacks, M_PI-bottomAngle);
+	}
+	// Allow parameters so that pole regions may remain free.
+	const float* cos_sin_rho_p;
 
-	const float dtheta = 2.f * M_PI / slices;
-	Q_ASSERT(slices<=MAX_SLICES);
-	ComputeCosSinTheta(dtheta,slices);
+	const float* cos_sin_theta = StelUtils::ComputeCosSinTheta(slices);
 	const float *cos_sin_theta_p;
 
 	// texturing: s goes from 0.0/0.25/0.5/0.75/1.0 at +y/+x/-y/-x/+y axis
@@ -1692,7 +1647,7 @@ StelVertexArray StelPainter::computeSphereNoLight(float radius, float oneMinusOb
 	const GLfloat ds = (flipTexture ? -1.f : 1.f) / slices;
 	const GLfloat dt = nsign / stacks; // from inside texture is reversed
 
-	// draw intermediate  as quad strips
+	// draw intermediate as quad strips
 	for (i = 0,cos_sin_rho_p = cos_sin_rho; i < stacks; ++i,cos_sin_rho_p+=2)
 	{
 		s = !flipTexture ? 0.f : 1.f;
@@ -1719,12 +1674,10 @@ StelVertexArray StelPainter::computeSphereNoLight(float radius, float oneMinusOb
 		t -= dt;
 	}
 	return result;
-	//setArrays((Vec3d*)vertexArr.constData(), (Vec2f*)texCoordArr.constData());
-	//drawFromArray(Triangles, indiceArr.size(), 0, true, indiceArr.constData());
 }
 
 // Reimplementation of gluCylinder : glu is overrided for non standard projection
-void StelPainter::sCylinder(float radius, float height, int slices, int orientInside)
+void StelPainter::sCylinder(const float radius, const float height, const int slices, const int orientInside)
 {
 	if (orientInside)
 		glCullFace(GL_FRONT);
@@ -1754,45 +1707,16 @@ void StelPainter::sCylinder(float radius, float height, int slices, int orientIn
 		glCullFace(GL_BACK);
 }
 
-
-void StelPainter::setPointSize(qreal size)
+void StelPainter::enableTexture2d(const bool b)
 {
-#ifndef STELPAINTER_GL2
-	glPointSize(size);
-#else
-	Q_UNUSED(size);
-#endif
-}
-
-void StelPainter::setShadeModel(ShadeModel m)
-{
-#ifndef STELPAINTER_GL2
-	glShadeModel(m);
-#else
-	Q_UNUSED(m);
-#endif
-}
-
-void StelPainter::enableTexture2d(bool b)
-{
-#ifndef STELPAINTER_GL2
-	if (b)
-		glEnable(GL_TEXTURE_2D);
-	else
-		glDisable(GL_TEXTURE_2D);
-#else
 	texture2dEnabled = b;
-#endif
 }
 
-void StelPainter::initSystemGLInfo(QGLContext* ctx)
+void StelPainter::initGLShaders()
 {
-	Q_ASSERT(glContext==NULL);
-	glContext = ctx;
-
-#ifdef STELPAINTER_GL2
+	qWarning() << "Intializing basic GL shaders... ";
 	// Basic shader: just vertex filled with plain color
-	QGLShader *vshader3 = new QGLShader(QGLShader::Vertex);
+	QOpenGLShader vshader3(QOpenGLShader::Vertex);
 	const char *vsrc3 =
 		"attribute mediump vec3 vertex;\n"
 		"uniform mediump mat4 projectionMatrix;\n"
@@ -1800,51 +1724,63 @@ void StelPainter::initSystemGLInfo(QGLContext* ctx)
 		"{\n"
 		"    gl_Position = projectionMatrix*vec4(vertex, 1.);\n"
 		"}\n";
-	vshader3->compileSourceCode(vsrc3);
-	QGLShader *fshader3 = new QGLShader(QGLShader::Fragment);
+	vshader3.compileSourceCode(vsrc3);
+	if (!vshader3.log().isEmpty()) { qWarning() << "StelPainter: Warnings while compiling vshader3: " << vshader3.log(); }
+	QOpenGLShader fshader3(QOpenGLShader::Fragment);
 	const char *fsrc3 =
 		"uniform mediump vec4 color;\n"
 		"void main(void)\n"
 		"{\n"
 		"    gl_FragColor = color;\n"
 		"}\n";
-	fshader3->compileSourceCode(fsrc3);
-	basicShaderProgram = new QGLShaderProgram(QGLContext::currentContext());
-	basicShaderProgram->addShader(vshader3);
-	basicShaderProgram->addShader(fshader3);
-	basicShaderProgram->link();
+	fshader3.compileSourceCode(fsrc3);
+	if (!fshader3.log().isEmpty()) { qWarning() << "StelPainter: Warnings while compiling fshader3: " << fshader3.log(); }
+	basicShaderProgram = new QOpenGLShaderProgram(QOpenGLContext::currentContext());
+	basicShaderProgram->addShader(&vshader3);
+	basicShaderProgram->addShader(&fshader3);
+	linkProg(basicShaderProgram, "basicShaderProgram");
 	basicShaderVars.projectionMatrix = basicShaderProgram->uniformLocation("projectionMatrix");
 	basicShaderVars.color = basicShaderProgram->uniformLocation("color");
 	basicShaderVars.vertex = basicShaderProgram->attributeLocation("vertex");
+	
 
-	// Color shader program: color specified per vertex
-	QGLShader *vshader1 = new QGLShader(QGLShader::Vertex);
-	const char *vsrc1 =
-		"attribute highp vec3 vertex;\n"
+	// Basic shader: vertex filled with interpolated color
+	QOpenGLShader vshaderInterpolatedColor(QOpenGLShader::Vertex);
+	const char *vshaderInterpolatedColorSrc =
+		"attribute mediump vec3 vertex;\n"
 		"attribute mediump vec4 color;\n"
 		"uniform mediump mat4 projectionMatrix;\n"
-		"varying mediump vec4 outColor;\n"
+		"varying mediump vec4 fragcolor;\n"
 		"void main(void)\n"
 		"{\n"
-		"    outColor = color;\n"
 		"    gl_Position = projectionMatrix*vec4(vertex, 1.);\n"
+		"    fragcolor = color;\n"
 		"}\n";
-	vshader1->compileSourceCode(vsrc1);
-	QGLShader *fshader1 = new QGLShader(QGLShader::Fragment);
-	const char *fsrc1 =
-		"varying mediump vec4 outColor;\n"
+	vshaderInterpolatedColor.compileSourceCode(vshaderInterpolatedColorSrc);
+	if (!vshaderInterpolatedColor.log().isEmpty()) {
+	  qWarning() << "StelPainter: Warnings while compiling vshaderInterpolatedColor: " << vshaderInterpolatedColor.log();
+	}
+	QOpenGLShader fshaderInterpolatedColor(QOpenGLShader::Fragment);
+	const char *fshaderInterpolatedColorSrc =
+		"varying mediump vec4 fragcolor;\n"
 		"void main(void)\n"
 		"{\n"
-		"    gl_FragColor = outColor;\n"
+		"    gl_FragColor = fragcolor;\n"
 		"}\n";
-	fshader1->compileSourceCode(fsrc1);
-	colorShaderProgram = new QGLShaderProgram(QGLContext::currentContext());
-	colorShaderProgram->addShader(vshader1);
-	colorShaderProgram->addShader(fshader1);
-	colorShaderProgram->link();
-
+	fshaderInterpolatedColor.compileSourceCode(fshaderInterpolatedColorSrc);
+	if (!fshaderInterpolatedColor.log().isEmpty()) {
+	  qWarning() << "StelPainter: Warnings while compiling fshaderInterpolatedColor: " << fshaderInterpolatedColor.log();
+	}
+	colorShaderProgram = new QOpenGLShaderProgram(QOpenGLContext::currentContext());
+	colorShaderProgram->addShader(&vshaderInterpolatedColor);
+	colorShaderProgram->addShader(&fshaderInterpolatedColor);
+	linkProg(colorShaderProgram, "colorShaderProgram");
+	colorShaderVars.projectionMatrix = colorShaderProgram->uniformLocation("projectionMatrix");
+	colorShaderVars.color = colorShaderProgram->attributeLocation("color");
+	colorShaderVars.vertex = colorShaderProgram->attributeLocation("vertex");
+	
 	// Basic texture shader program
-	QGLShader *vshader2 = new QGLShader(QGLShader::Vertex);
+	QOpenGLShader vshader2(QOpenGLShader::Vertex);
 	const char *vsrc2 =
 		"attribute highp vec3 vertex;\n"
 		"attribute mediump vec2 texCoord;\n"
@@ -1855,8 +1791,10 @@ void StelPainter::initSystemGLInfo(QGLContext* ctx)
 		"    gl_Position = projectionMatrix * vec4(vertex, 1.);\n"
 		"    texc = texCoord;\n"
 		"}\n";
-	vshader2->compileSourceCode(vsrc2);
-	QGLShader *fshader2 = new QGLShader(QGLShader::Fragment);
+	vshader2.compileSourceCode(vsrc2);
+	if (!vshader2.log().isEmpty()) { qWarning() << "StelPainter: Warnings while compiling vshader2: " << vshader2.log(); }
+
+	QOpenGLShader fshader2(QOpenGLShader::Fragment);
 	const char *fsrc2 =
 		"varying mediump vec2 texc;\n"
 		"uniform sampler2D tex;\n"
@@ -1865,11 +1803,13 @@ void StelPainter::initSystemGLInfo(QGLContext* ctx)
 		"{\n"
 		"    gl_FragColor = texture2D(tex, texc)*texColor;\n"
 		"}\n";
-	fshader2->compileSourceCode(fsrc2);
-	texturesShaderProgram = new QGLShaderProgram(QGLContext::currentContext());
-	texturesShaderProgram->addShader(vshader2);
-	texturesShaderProgram->addShader(fshader2);
-	texturesShaderProgram->link();
+	fshader2.compileSourceCode(fsrc2);
+	if (!fshader2.log().isEmpty()) { qWarning() << "StelPainter: Warnings while compiling fshader2: " << fshader2.log(); }
+
+	texturesShaderProgram = new QOpenGLShaderProgram(QOpenGLContext::currentContext());
+	texturesShaderProgram->addShader(&vshader2);
+	texturesShaderProgram->addShader(&fshader2);
+	linkProg(texturesShaderProgram, "texturesShaderProgram");
 	texturesShaderVars.projectionMatrix = texturesShaderProgram->uniformLocation("projectionMatrix");
 	texturesShaderVars.texCoord = texturesShaderProgram->attributeLocation("texCoord");
 	texturesShaderVars.vertex = texturesShaderProgram->attributeLocation("vertex");
@@ -1877,7 +1817,7 @@ void StelPainter::initSystemGLInfo(QGLContext* ctx)
 	texturesShaderVars.texture = texturesShaderProgram->uniformLocation("tex");
 
 	// Texture shader program + interpolated color per vertex
-	QGLShader *vshader4 = new QGLShader(QGLShader::Vertex);
+	QOpenGLShader vshader4(QOpenGLShader::Vertex);
 	const char *vsrc4 =
 		"attribute highp vec3 vertex;\n"
 		"attribute mediump vec2 texCoord;\n"
@@ -1891,8 +1831,10 @@ void StelPainter::initSystemGLInfo(QGLContext* ctx)
 		"    texc = texCoord;\n"
 		"    outColor = color;\n"
 		"}\n";
-	vshader4->compileSourceCode(vsrc4);
-	QGLShader *fshader4 = new QGLShader(QGLShader::Fragment);
+	vshader4.compileSourceCode(vsrc4);
+	if (!vshader4.log().isEmpty()) { qWarning() << "StelPainter: Warnings while compiling vshader4: " << vshader4.log(); }
+
+	QOpenGLShader fshader4(QOpenGLShader::Fragment);
 	const char *fsrc4 =
 		"varying mediump vec2 texc;\n"
 		"varying mediump vec4 outColor;\n"
@@ -1901,75 +1843,73 @@ void StelPainter::initSystemGLInfo(QGLContext* ctx)
 		"{\n"
 		"    gl_FragColor = texture2D(tex, texc)*outColor;\n"
 		"}\n";
-	fshader4->compileSourceCode(fsrc4);
-	texturesColorShaderProgram = new QGLShaderProgram(QGLContext::currentContext());
-	texturesColorShaderProgram->addShader(vshader4);
-	texturesColorShaderProgram->addShader(fshader4);
-	texturesColorShaderProgram->link();
+	fshader4.compileSourceCode(fsrc4);
+	if (!fshader4.log().isEmpty()) { qWarning() << "StelPainter: Warnings while compiling fshader4: " << fshader4.log(); }
+
+	texturesColorShaderProgram = new QOpenGLShaderProgram(QOpenGLContext::currentContext());
+	texturesColorShaderProgram->addShader(&vshader4);
+	texturesColorShaderProgram->addShader(&fshader4);
+	linkProg(texturesColorShaderProgram, "texturesColorShaderProgram");
 	texturesColorShaderVars.projectionMatrix = texturesColorShaderProgram->uniformLocation("projectionMatrix");
 	texturesColorShaderVars.texCoord = texturesColorShaderProgram->attributeLocation("texCoord");
 	texturesColorShaderVars.vertex = texturesColorShaderProgram->attributeLocation("vertex");
 	texturesColorShaderVars.color = texturesColorShaderProgram->attributeLocation("color");
 	texturesColorShaderVars.texture = texturesColorShaderProgram->uniformLocation("tex");
-
-#endif
 }
 
-void StelPainter::setArrays(const Vec3d* vertice, const Vec2f* texCoords, const Vec3f* colorArray, const Vec3f* normalArray)
+
+void StelPainter::deinitGLShaders()
 {
-        enableClientStates(vertice, texCoords, colorArray, normalArray);
-	setVertexPointer(3, GL_DOUBLE, vertice);
+	delete basicShaderProgram;
+	basicShaderProgram = NULL;
+	delete colorShaderProgram;
+	colorShaderProgram = NULL;
+	delete texturesShaderProgram;
+	texturesShaderProgram = NULL;
+	delete texturesColorShaderProgram;
+	texturesColorShaderProgram = NULL;
+}
+
+
+void StelPainter::setArrays(const Vec3d* vertices, const Vec2f* texCoords, const Vec3f* colorArray, const Vec3f* normalArray)
+{
+	enableClientStates(vertices, texCoords, colorArray, normalArray);
+	setVertexPointer(3, GL_DOUBLE, vertices);
 	setTexCoordPointer(2, GL_FLOAT, texCoords);
 	setColorPointer(3, GL_FLOAT, colorArray);
-        setNormalPointer(GL_FLOAT, normalArray);
+	setNormalPointer(GL_FLOAT, normalArray);
 }
 
-void StelPainter::enableClientStates(bool vertex, bool texture, bool color, bool normal)
+void StelPainter::setArrays(const Vec3f* vertices, const Vec2f* texCoords, const Vec3f* colorArray, const Vec3f* normalArray)
+{
+	enableClientStates(vertices, texCoords, colorArray, normalArray);
+	setVertexPointer(3, GL_FLOAT, vertices);
+	setTexCoordPointer(2, GL_FLOAT, texCoords);
+	setColorPointer(3, GL_FLOAT, colorArray);
+	setNormalPointer(GL_FLOAT, normalArray);
+}
+
+void StelPainter::enableClientStates(const bool vertex, const bool texture, const bool color, const bool normal)
 {
 	vertexArray.enabled = vertex;
 	texCoordArray.enabled = texture;
 	colorArray.enabled = color;
-        normalArray.enabled = normal;
+	normalArray.enabled = normal;
 }
 
-void StelPainter::drawFromArray(DrawingMode mode, int count, int offset, bool doProj, const unsigned int* indices, int stride)
+void StelPainter::drawFromArray(const DrawingMode mode, const int count, const int offset, const bool doProj, const unsigned short* indices)
 {
 	ArrayDesc projectedVertexArray = vertexArray;
 	if (doProj)
 	{
 		// Project the vertex array using current projection
 		if (indices)
-                        projectedVertexArray = projectArray(vertexArray, stride, count, indices + offset);
+			projectedVertexArray = projectArray(vertexArray, 0, count, indices + offset);
 		else
 			projectedVertexArray = projectArray(vertexArray, offset, count, NULL);
 	}
 
-#ifndef STELPAINTER_GL2
-	// Enable the client state and set the opengl array for each array
-	Q_ASSERT(projectedVertexArray.enabled);
-	Q_ASSERT(projectedVertexArray.pointer);
-	glEnableClientState(GL_VERTEX_ARRAY);
-        glVertexPointer(projectedVertexArray.size, projectedVertexArray.type, stride, projectedVertexArray.pointer);
-	if (texCoordArray.enabled)
-	{
-		Q_ASSERT(texCoordArray.pointer);
-		glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-                glTexCoordPointer(texCoordArray.size, texCoordArray.type, stride, texCoordArray.pointer);
-	}
-	if (normalArray.enabled)
-	{
-		Q_ASSERT(normalArray.pointer);
-		glEnableClientState(GL_NORMAL_ARRAY);
-                glNormalPointer(normalArray.type, stride, normalArray.pointer);
-	}
-	if (colorArray.enabled)
-	{
-		Q_ASSERT(colorArray.pointer);
-		glEnableClientState(GL_COLOR_ARRAY);
-                glColorPointer(colorArray.size, colorArray.type, stride, colorArray.pointer);
-        }
-#else
-	QGLShaderProgram* pr=NULL;
+	QOpenGLShaderProgram* pr=NULL;
 
 	const Mat4f& m = getProjector()->getProjectionMatrix();
 	const QMatrix4x4 qMat(m[0], m[4], m[8], m[12], m[1], m[5], m[9], m[13], m[2], m[6], m[10], m[14], m[3], m[7], m[11], m[15]);
@@ -1978,7 +1918,7 @@ void StelPainter::drawFromArray(DrawingMode mode, int count, int offset, bool do
 	{
 		pr = basicShaderProgram;
 		pr->bind();
-                pr->setAttributeArray(basicShaderVars.vertex, (const GLfloat*)projectedVertexArray.pointer, projectedVertexArray.size, stride);
+		pr->setAttributeArray(basicShaderVars.vertex, (const GLfloat*)projectedVertexArray.pointer, projectedVertexArray.size);
 		pr->enableAttributeArray(basicShaderVars.vertex);
 		pr->setUniformValue(basicShaderVars.projectionMatrix, qMat);
 		pr->setUniformValue(basicShaderVars.color, currentColor[0], currentColor[1], currentColor[2], currentColor[3]);
@@ -1987,47 +1927,49 @@ void StelPainter::drawFromArray(DrawingMode mode, int count, int offset, bool do
 	{
 		pr = texturesShaderProgram;
 		pr->bind();
-                pr->setAttributeArray(texturesShaderVars.vertex, (const GLfloat*)projectedVertexArray.pointer, projectedVertexArray.size, stride);
+		pr->setAttributeArray(texturesShaderVars.vertex, (const GLfloat*)projectedVertexArray.pointer, projectedVertexArray.size);
 		pr->enableAttributeArray(texturesShaderVars.vertex);
 		pr->setUniformValue(texturesShaderVars.projectionMatrix, qMat);
 		pr->setUniformValue(texturesShaderVars.texColor, currentColor[0], currentColor[1], currentColor[2], currentColor[3]);
-                pr->setAttributeArray(texturesShaderVars.texCoord, (const GLfloat*)texCoordArray.pointer, 2, stride);
+		pr->setAttributeArray(texturesShaderVars.texCoord, (const GLfloat*)texCoordArray.pointer, 2);
 		pr->enableAttributeArray(texturesShaderVars.texCoord);
 		//pr->setUniformValue(texturesShaderVars.texture, 0);    // use texture unit 0
 	}
 	else if (texCoordArray.enabled && colorArray.enabled && !normalArray.enabled)
 	{
-                pr = texturesColorShaderProgram;
+		pr = texturesColorShaderProgram;
 		pr->bind();
-                pr->setAttributeArray(texturesColorShaderVars.vertex, (const GLfloat*)projectedVertexArray.pointer, projectedVertexArray.size, stride);
+		pr->setAttributeArray(texturesColorShaderVars.vertex, (const GLfloat*)projectedVertexArray.pointer, projectedVertexArray.size);
 		pr->enableAttributeArray(texturesColorShaderVars.vertex);
 		pr->setUniformValue(texturesColorShaderVars.projectionMatrix, qMat);
-                pr->setAttributeArray(texturesColorShaderVars.texCoord, (const GLfloat*)texCoordArray.pointer, 2, stride);
+		pr->setAttributeArray(texturesColorShaderVars.texCoord, (const GLfloat*)texCoordArray.pointer, 2);
 		pr->enableAttributeArray(texturesColorShaderVars.texCoord);
-                pr->setAttributeArray(texturesColorShaderVars.color, (const GLfloat*)colorArray.pointer, colorArray.size, stride);
+		pr->setAttributeArray(texturesColorShaderVars.color, (const GLfloat*)colorArray.pointer, colorArray.size);
 		pr->enableAttributeArray(texturesColorShaderVars.color);
 		//pr->setUniformValue(texturesShaderVars.texture, 0);    // use texture unit 0
+	}
+	else if (!texCoordArray.enabled && colorArray.enabled && !normalArray.enabled)
+	{
+		pr = colorShaderProgram;
+		pr->bind();
+		pr->setAttributeArray(colorShaderVars.vertex, (const GLfloat*)projectedVertexArray.pointer, projectedVertexArray.size);
+		pr->enableAttributeArray(colorShaderVars.vertex);
+		pr->setUniformValue(colorShaderVars.projectionMatrix, qMat);
+		pr->setAttributeArray(colorShaderVars.color, (const GLfloat*)colorArray.pointer, colorArray.size);
+		pr->enableAttributeArray(colorShaderVars.color);
 	}
 	else
 	{
 		qDebug() << "Unhandled parameters." << texCoordArray.enabled << colorArray.enabled << normalArray.enabled;
-		qDebug() << "Light: " << light.isEnabled();
+		Q_ASSERT(0);
 		return;
 	}
-#endif
+	
 	if (indices)
-		glDrawElements(mode, count, GL_UNSIGNED_INT, indices + offset);
+		glDrawElements(mode, count, GL_UNSIGNED_SHORT, indices + offset);
 	else
 		glDrawArrays(mode, offset, count);
-#ifndef STELPAINTER_GL2
-	glDisableClientState(GL_VERTEX_ARRAY);
-	if (texCoordArray.enabled)
-		glDisableClientState(GL_TEXTURE_COORD_ARRAY);
-	if (normalArray.enabled)
-		glDisableClientState(GL_NORMAL_ARRAY);
-	if (colorArray.enabled)
-		glDisableClientState(GL_COLOR_ARRAY);
-#else
+
 	if (pr==texturesColorShaderProgram)
 	{
 		pr->disableAttributeArray(texturesColorShaderVars.texCoord);
@@ -2039,17 +1981,21 @@ void StelPainter::drawFromArray(DrawingMode mode, int count, int offset, bool do
 		pr->disableAttributeArray(texturesShaderVars.texCoord);
 		pr->disableAttributeArray(texturesShaderVars.vertex);
 	}
-	else if (pr == texturesShaderProgram)
+	else if (pr == basicShaderProgram)
 	{
 		pr->disableAttributeArray(basicShaderVars.vertex);
 	}
+	else if (pr == colorShaderProgram)
+	{
+		pr->disableAttributeArray(colorShaderVars.vertex);
+		pr->disableAttributeArray(colorShaderVars.color);
+	}
 	if (pr)
 		pr->release();
-#endif
 }
 
 
-StelPainter::ArrayDesc StelPainter::projectArray(const StelPainter::ArrayDesc& array, int offset, int count, const unsigned int* indices)
+StelPainter::ArrayDesc StelPainter::projectArray(const StelPainter::ArrayDesc& array, int offset, int count, const unsigned short* indices)
 {
 	// XXX: we should use a more generic way to test whether or not to do the projection.
 	if (dynamic_cast<StelProjector2d*>(prj.data()))
@@ -2071,7 +2017,7 @@ StelPainter::ArrayDesc StelPainter::projectArray(const StelPainter::ArrayDesc& a
 	} else
 	{
 		// we need to find the max value of the indices !
-		unsigned int max = 0;
+		unsigned short max = 0;
 		for (int i = offset; i < offset + count; ++i)
 		{
 			max = std::max(max, indices[i]);
@@ -2088,69 +2034,3 @@ StelPainter::ArrayDesc StelPainter::projectArray(const StelPainter::ArrayDesc& a
 	return ret;
 }
 
-// Light methods
-
-void StelPainterLight::setPosition(const Vec4f& v)
-{
-	position = v;
-}
-
-void StelPainterLight::setDiffuse(const Vec4f& v)
-{
-	diffuse = v;
-}
-
-void StelPainterLight::setSpecular(const Vec4f& v)
-{
-	specular = v;
-}
-
-void StelPainterLight::setAmbient(const Vec4f& v)
-{
-	ambient = v;
-}
-
-void StelPainterLight::setEnable(bool v)
-{
-	if (v)
-		enable();
-	else
-		disable();
-}
-
-void StelPainterLight::enable()
-{
-	enabled = true;
-}
-
-void StelPainterLight::disable()
-{
-	enabled = false;
-}
-
-
-// material functions
-StelPainterMaterial::StelPainterMaterial()
-        : specular(0, 0, 0, 1), ambient(0.2, 0.2, 0.2, 1.0), emission(0, 0, 0, 1), shininess(0)
-{
-}
-
-void StelPainterMaterial::setSpecular(const Vec4f& v)
-{
-        specular = v;
-}
-
-void StelPainterMaterial::setAmbient(const Vec4f& v)
-{
-        ambient = v;
-}
-
-void StelPainterMaterial::setEmission(const Vec4f& v)
-{
-        emission = v;
-}
-
-void StelPainterMaterial::setShininess(float v)
-{
-        shininess = v;
-}

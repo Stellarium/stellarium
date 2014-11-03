@@ -17,6 +17,7 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
+#include "config.h"
 #include "StelViewportEffect.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
@@ -25,11 +26,12 @@
 #include "StelFileMgr.hpp"
 #include "StelMovementMgr.hpp"
 
-#include <QGLFramebufferObject>
+#include <QOpenGLFramebufferObject>
 #include <QSettings>
 #include <QFile>
+#include <QDir>
 
-void StelViewportEffect::paintViewportBuffer(const QGLFramebufferObject* buf) const
+void StelViewportEffect::paintViewportBuffer(const QOpenGLFramebufferObject* buf) const
 {
 	StelPainter sPainter(StelApp::getInstance().getCore()->getProjection2d());
 	sPainter.setColor(1,1,1);
@@ -45,10 +47,11 @@ struct VertexPoint
 	double h;
 };
 
-StelViewportDistorterFisheyeToSphericMirror::StelViewportDistorterFisheyeToSphericMirror(int screen_w,int screen_h) :
-		screen_w(screen_w), screen_h(screen_h),
-		originalProjectorParams(StelApp::getInstance().getCore()->getCurrentStelProjectorParams()),
-		texture_point_array(NULL)
+StelViewportDistorterFisheyeToSphericMirror::StelViewportDistorterFisheyeToSphericMirror(int screen_w,int screen_h)
+	: screen_w(screen_w)
+	, screen_h(screen_h)
+	, originalProjectorParams(StelApp::getInstance().getCore()->getCurrentStelProjectorParams())
+	, texture_point_array(NULL)
 {
 	QSettings& conf = *StelApp::getInstance().getSettings();
 	StelCore* core = StelApp::getInstance().getCore();
@@ -96,11 +99,8 @@ StelViewportDistorterFisheyeToSphericMirror::StelViewportDistorterFisheyeToSpher
 	// diameter of the FOV-disk in pixels
 	newProjectorParams.viewportFovDiameter = conf.value("spheric_mirror/viewport_fov_diameter", qMin(newProjectorParams.viewportXywh[2],newProjectorParams.viewportXywh[3])).toFloat();
 
-	texture_wh = 1;
-	while (texture_wh < newProjectorParams.viewportXywh[2] || texture_wh < newProjectorParams.viewportXywh[3])
-		texture_wh <<= 1;
-	viewport_texture_offset[0] = (texture_wh-newProjectorParams.viewportXywh[2])>>1;
-	viewport_texture_offset[1] = (texture_wh-newProjectorParams.viewportXywh[3])>>1;
+	viewport_texture_offset[0] = (screen_w-newProjectorParams.viewportXywh[2])>>1;
+	viewport_texture_offset[1] = (screen_h-newProjectorParams.viewportXywh[3])>>1;
 
 	newProjectorParams.viewportXywh[0] = (screen_w-newProjectorParams.viewportXywh[2]) >> 1;
 	newProjectorParams.viewportXywh[1] = (screen_h-newProjectorParams.viewportXywh[3]) >> 1;
@@ -160,13 +160,53 @@ StelViewportDistorterFisheyeToSphericMirror::StelViewportDistorterFisheyeToSpher
 				//      if (y < 0.f) {y=0.f;vertex_point.h=0;}
 				//      else if (y > newProjectorParams.viewportXywh[3]) {y=newProjectorParams.viewportXywh[3];vertex_point.h=0;}
 
-				texture_point[0] = (viewport_texture_offset[0]+x)/texture_wh;
-				texture_point[1] = (viewport_texture_offset[1]+y)/texture_wh;
+				texture_point[0] = (viewport_texture_offset[0]+x)/screen_w;
+				texture_point[1] = (viewport_texture_offset[1]+y)/screen_h;
 
 				if (vertex_point.h > max_h) max_h = vertex_point.h;
 			}
 		}
 		for (int j=0;j<=max_y;j++)
+	
+	// FIXME: Comment out with /**/ after testing. --BM
+	/*qDebug() << "StelViewportDistorterFisheyeToSphericMirror():" 
+	         << "screen_w:" << this->screenWidth
+	         << "screen_h:" << this->screenHeight << endl
+	         << "originalProjectorParams.viewportXywh:" 
+	         << originalProjectorParams.viewportXywh[0] 
+	         << originalProjectorParams.viewportXywh[1] 
+	         << originalProjectorParams.viewportXywh[2] 
+	         << originalProjectorParams.viewportXywh[3] << endl
+	         << "newProjectorParams.viewportXywh:"
+	         << newProjectorParams.viewportXywh[0] 
+	         << newProjectorParams.viewportXywh[1] 
+	         << newProjectorParams.viewportXywh[2]
+	         << newProjectorParams.viewportXywh[3] << endl 
+	         << "originalProjectorParams.fov:"
+	         << originalProjectorParams.fov << endl 
+	         << "newProjectorParams.fov:" << newProjectorParams.fov << endl
+	         << "originalProjectorParams.viewportCenter:"
+	         << originalProjectorParams.viewportCenter[0] 
+	         << originalProjectorParams.viewportCenter[1] << endl
+	         << "newProjectorParams.viewportCenter:" 
+	         << newProjectorParams.viewportCenter[0] 
+	         << newProjectorParams.viewportCenter[1] << endl
+	         << "originalProjectorParams.viewportFovDiameter:" 
+	         << originalProjectorParams.viewportFovDiameter << endl
+	         << "newProjectorParams.viewportFovDiameter:"
+	         << newProjectorParams.viewportFovDiameter << endl
+	         << "originalProjectorParams.zNear,zFar:" 
+	         << originalProjectorParams.zNear 
+	         << originalProjectorParams.zFar << endl
+	         << "newProjectorParams.zNear,zFar:" 
+	         << newProjectorParams.zNear 
+	         << newProjectorParams.zFar << endl
+	         //<< "viewport_texture_offset:" 
+	         //<< viewport_texture_offset[0]
+	         //<< viewport_texture_offset[1] << endl
+	         << "texture_h:" << texture_h << endl
+	         << "max_x:" << maxGridX << endl
+	         << "max_y:" << maxGridY;*/
 		{
 			for (int i=0;i<=max_x;i++)
 			{
@@ -181,17 +221,16 @@ StelViewportDistorterFisheyeToSphericMirror::StelViewportDistorterFisheyeToSpher
 	{
 		QFile file;
 		QTextStream in;
-		try
+		QString fName = StelFileMgr::findFile(custom_distortion_file);
+		if (fName.isEmpty())
+			qWarning() << "WARNING: could not open custom_distortion_file:" << custom_distortion_file;
+		else
 		{
-			file.setFileName(StelFileMgr::findFile(custom_distortion_file));
-			file.open(QIODevice::ReadOnly);
-			if (file.error() != QFile::NoError)
-				throw("failed to open file");
-			in.setDevice(&file);
-		}
-		catch (std::runtime_error& e)
-		{
-			qWarning() << "WARNING: could not open custom_distortion_file:" << custom_distortion_file << e.what();
+			file.setFileName(fName);
+			if(file.open(QIODevice::ReadOnly))
+				in.setDevice(&file);
+			else
+				qWarning() << "WARNING: could not open custom_distortion_file:" << custom_distortion_file;
 		}
 		Q_ASSERT(file.error()!=QFile::NoError);
 		in >> max_x >> max_y;
@@ -212,8 +251,8 @@ StelViewportDistorterFisheyeToSphericMirror::StelViewportDistorterFisheyeToSpher
 				in >> x >> y >> vertex_point.color[0] >> vertex_point.color[1] >> vertex_point.color[2];
 				vertex_point.color[3] = 1.0f;
 				Q_ASSERT(in.status()!=QTextStream::Ok);
-				texture_point[0] = (viewport_texture_offset[0]+x)/texture_wh;
-				texture_point[1] = (viewport_texture_offset[1]+y)/texture_wh;
+				texture_point[0] = (viewport_texture_offset[0]+x)/screen_w;
+				texture_point[1] = (viewport_texture_offset[1]+y)/screen_h;
 			}
 		}
 	}
@@ -325,16 +364,18 @@ void StelViewportDistorterFisheyeToSphericMirror::distortXY(float& x, float& y) 
 		}
 	}
 
-	x = texture_wh*texture_x - viewport_texture_offset[0] + newProjectorParams.viewportXywh[0];
-	y = texture_wh*texture_y - viewport_texture_offset[1] + newProjectorParams.viewportXywh[1];
+	x = screen_w*texture_x - viewport_texture_offset[0] + newProjectorParams.viewportXywh[0];
+	y = screen_h*texture_y - viewport_texture_offset[1] + newProjectorParams.viewportXywh[1];
 }
 
 
-void StelViewportDistorterFisheyeToSphericMirror::paintViewportBuffer(const QGLFramebufferObject* buf) const
+void StelViewportDistorterFisheyeToSphericMirror::paintViewportBuffer(const QOpenGLFramebufferObject* buf) const
 {
 	StelPainter sPainter(StelApp::getInstance().getCore()->getProjection2d());
 	sPainter.enableTexture2d(true);
 	glBindTexture(GL_TEXTURE_2D, buf->texture());
+	GL(glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR));
+	GL(glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR));
 	glDisable(GL_BLEND);
 
 	sPainter.enableClientStates(true, true, true);
@@ -343,8 +384,11 @@ void StelViewportDistorterFisheyeToSphericMirror::paintViewportBuffer(const QGLF
 	sPainter.setTexCoordPointer(2, GL_FLOAT, displayTexCoordList.constData());
 	for (int j=0;j<max_y;j++)
 	{
+		glDrawArrays(GL_TRIANGLE_STRIP, j*(max_x+1)*2, (max_x+1)*2);
 		sPainter.drawFromArray(StelPainter::TriangleStrip, (max_x+1)*2, j*(max_x+1)*2, false);
 	}
 	sPainter.enableClientStates(false);
+	GL(glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST));
+	GL(glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST));
 }
 

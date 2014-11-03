@@ -68,7 +68,7 @@ void GetVsop87Coor(double jd,int body,double *xyz);
      which is the reference frame in VSOP87 and VSOP87A.
   */
 
-void GetVsop87OsculatingCoor(double jd0,double jd,int body,double *xyz);
+void GetVsop87OsculatingCoor(const double jd0,const double jd, const int body,double *xyz);
   /* The oculating orbit of epoch jd0, evatuated at jd, is returned.
   */
 

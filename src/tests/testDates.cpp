@@ -1,3 +1,23 @@
+/*
+ * Stellarium
+ * Copyright (C) 2009 Matthew Gates
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
+ */
+
+#include "tests/testDates.hpp"
 
 #include <QString>
 #include <QDateTime>
@@ -6,13 +26,13 @@
 #include <QList>
 #include <QtGlobal>
 #include <QLocale>
-#include <QtDebug>
+#include <QDebug>
+
 #include "StelUtils.hpp"
-#include "tests/testDates.hpp"
 
 #define IGREG 2299161
 
-QTEST_MAIN(TestDates);
+QTEST_MAIN(TestDates)
 
 void TestDates::dateRoundTrip()
 {
@@ -58,6 +78,7 @@ void TestDates::dateRoundTrip()
 	map[-1930712.0] ="-9999-12-31T12:00:00";
 
 	bool ok;
+	Q_UNUSED(ok);
 	for (QMap<double, QString>::ConstIterator i=map.constBegin();i!=map.constEnd();++i)
 	{
 		QCOMPARE(StelUtils::julianDayToISO8601String(i.key()), i.value());
@@ -73,8 +94,6 @@ void TestDates::dateRoundTrip()
 
 void TestDates::formatting()
 {
-	QLocale usEN;
-
 	// test formatting of StelUtils::localeDateString, the fall-back if QDateTime cannot do it.
 	QLocale::setDefault(QLocale::German);
 	QVERIFY2(QString::compare(StelUtils::localeDateString(2008, 03, 10, 0), QString("10.03.08")) == 0,
@@ -91,14 +110,18 @@ void TestDates::formatting()
 	QVERIFY2(-18 == (-5118 % 100), qPrintable("modulus arithmetic works diff: " + QString("%1").arg(-5118 % 100)));
 
 	// test arbitrary fmt
-	QLocale::setDefault(usEN);
+	// This is useless, as StelUtils::localeDateString() formats dates
+	// according to the *system* locale. On systems where it is not English,
+	// this test fails.
+	// See https://bugreports.qt-project.org/browse/QTBUG-27789. --BM
+//	QLocale::setDefault(QLocale::English);
 
-	QString easyLong("d dd ddd dddd M MM MMM MMMM yy yyyy");
-	QVERIFY2(QString::compare(QString("9 09 Sun Sunday 3 03 Mar March 08 2008"), StelUtils::localeDateString(2008, 3, 9, 6, easyLong)) == 0,
-			 qPrintable("formatter1 not working: " + StelUtils::localeDateString(2008, 3, 9, 6, easyLong)));
-	QString hardLong("dddddddd '''doh' ''yyyyyyy");
-	QVERIFY2(QString::compare(QString("SundaySunday 'doh '200808y"), StelUtils::localeDateString(2008, 3, 9, 6, hardLong)) == 0,
-			 qPrintable("formatter2 not working: " + StelUtils::localeDateString(2008, 3, 9, 6, hardLong)));
+//	QString easyLong("d dd ddd dddd M MM MMM MMMM yy yyyy");
+//	QVERIFY2(QString::compare(QString("9 09 Sun Sunday 3 03 Mar March 08 2008"), StelUtils::localeDateString(2008, 3, 9, 6, easyLong)) == 0,
+//			 qPrintable("formatter1 not working: " + StelUtils::localeDateString(2008, 3, 9, 6, easyLong)));
+//	QString hardLong("dddddddd '''doh' ''yyyyyyy");
+//	QVERIFY2(QString::compare(QString("SundaySunday 'doh '200808y"), StelUtils::localeDateString(2008, 3, 9, 6, hardLong)) == 0,
+//			 qPrintable("formatter2 not working: " + StelUtils::localeDateString(2008, 3, 9, 6, hardLong)));
 
 	// test detection of offset from UTC.
 	double mar122008 = QDate(2008,3,12).toJulianDay();
@@ -341,8 +364,8 @@ void TestDates::testJulianDays()
 {
 	testJulianDaysRange( 400000000,  400001000);
 	testJulianDaysRange( 200000000,  200001000);
-	testJulianDaysRange(   2299200,    2299161);
-	testJulianDaysRange(   2299160,    2299000);
+	testJulianDaysRange(   2299200,    2299161);	
+	testJulianDaysRange(   2299160,    2299000);	
 	testJulianDaysRange(   2211000,    2210000);
 	testJulianDaysRange(   1721789,    1721788);
 	testJulianDaysRange(   1721424,    1721423);
@@ -358,7 +381,7 @@ void TestDates::testJulianDays()
 	testJulianDaysRange(  -2301000,   -2300000);
 	testJulianDaysRange( -99001000,  -99000000);
 	testJulianDaysRange(-200001000, -200000000);
-	testJulianDaysRange(-400001000, -400000000);
+	testJulianDaysRange(-400001000, -400000000);	
 }
 
 #define TJ1 (2450000)

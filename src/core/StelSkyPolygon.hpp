@@ -21,38 +21,10 @@
 
 #include "StelSphereGeometry.hpp"
 #include "MultiLevelJsonBase.hpp"
-
+#include "StelSkyImageTile.hpp"
 #include <QTimeLine>
 
 class StelCore;
-
-//! Contain all the credits for a given server hosting the data
-class ServerCredits
-{
-public:
-	//! Very short credit to display in the loading bar
-	QString shortCredits;
-
-	//! Full credits
-	QString fullCredits;
-
-	//! The URL where to get more info about the server
-	QString infoURL;
-};
-
-//! Contains all the credits for the creator of the polygon collection
-class DataSetCredits
-{
-public:
-	//! Very short credit to display in the loading bar
-	QString shortCredits;
-
-	//! Full credits
-	QString fullCredits;
-
-	//! The URL where to get more info about the data collection
-	QString infoURL;
-};
 
 //! Base class for any polygon with a fixed position in the sky
 class StelSkyPolygon : public MultiLevelJsonBase

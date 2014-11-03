@@ -22,16 +22,20 @@
 #include <QSettings>
 
 Telescope::Telescope()
+	: m_diameter(0.)
+	, m_focalLength(0.)
+	, m_hFlipped(false)
+	, m_vFlipped(false)
 {
 }
 
 Telescope::Telescope(const QObject& other)
+	: m_name(other.property("name").toString())
+	, m_diameter(other.property("diameter").toDouble())
+	, m_focalLength(other.property("focalLength").toDouble())
+	, m_hFlipped(other.property("hFlipped").toBool())
+	, m_vFlipped(other.property("vFlipped").toBool())
 {
-	this->m_diameter = other.property("diameter").toDouble();
-	this->m_focalLength = other.property("focalLength").toDouble();
-	this->m_hFlipped = other.property("hFlipped").toBool();
-	this->m_vFlipped = other.property("vFlipped").toBool();
-	this->m_name = other.property("name").toString();
 }
 
 Telescope::~Telescope()
@@ -106,6 +110,16 @@ bool Telescope::isVFlipped() const
 void Telescope::setVFlipped(bool flipped)
 {
 	m_vFlipped = flipped;
+}
+
+void Telescope::writeToSettings(QSettings * settings, const int index)
+{
+	QString prefix = "telescope/" + QVariant(index).toString() + "/";
+	settings->setValue(prefix + "name", this->name());
+	settings->setValue(prefix + "focalLength", this->focalLength());
+	settings->setValue(prefix + "diameter", this->diameter());
+	settings->setValue(prefix + "hFlip", this->isHFlipped());
+	settings->setValue(prefix + "vFlip", this->isVFlipped());
 }
 
 /* ********************************************************************* */

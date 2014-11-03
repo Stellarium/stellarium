@@ -35,7 +35,7 @@ public:
 	StelGuiBase();
 	virtual ~StelGuiBase() {;}
 
-	virtual void init(QGraphicsWidget* topLevelGraphicsWidget, class StelAppGraphicsWidget* stelAppGraphicsWidget);
+	virtual void init(QGraphicsWidget *atopLevelGraphicsWidget);
 
 	//! Load color scheme matchin the section name.
 	virtual void setStelStyle(const QString& section) =0;
@@ -43,26 +43,6 @@ public:
 	//! Get a pointer on the info panel used to display selected object info
 	virtual void setInfoTextFilters(const StelObject::InfoStringGroup& aflags) =0;
 	virtual const StelObject::InfoStringGroup& getInfoTextFilters() const =0;
-
-	//! Add a new progress bar in the lower right corner of the screen.
-	//! When the progress bar is deleted  the layout is automatically rearranged.
-	//! @return a pointer to the progress bar.
-	virtual class QProgressBar* addProgressBar() =0;
-
-	//! Add a new action managed by the GUI. This method should be used to add new shortcuts to the program
-	//! @param actionName qt object name. Used as a reference for later uses
-	//! @param text the text to display when hovering, or in the help window
-	//! @param shortCut the qt shortcut to use
-	//! @param helpGroup hint on how to group the text in the help window
-	//! @param checkable whether the action should be checkable
-	//! @param autoRepeat whether the action should be autorepeated
-	//! @param global whether the action should be global (affect in dialogs)
-	virtual QAction* addGuiActions(const QString& actionName, const QString& text, const QString& shortCut, const QString& helpGroup, bool checkable=true, bool autoRepeat=false, bool global=false);
-
-	//! Get a pointer on an action managed by the GUI
-	//! @param actionName qt object name for this action
-	//! @return a pointer on the QAction object or NULL if don't exist
-	virtual QAction* getGuiActions(const QString& actionName);
 
 	virtual void forceRefreshGui() {;}
 
@@ -74,13 +54,6 @@ public:
 	//! Show wether the Gui is currently used.
 	//! This can then be used to optimize the rendering to increase reactivity.
 	virtual bool isCurrentlyUsed() const =0;
-
-
-protected:
-	class StelAppGraphicsWidget* stelAppGraphicsWidget;
-	//! Translate all texts to the new Locale.
-	void updateI18n();
-	
 };
 
 //! @class StelGuiPluginInterface
@@ -94,7 +67,7 @@ public:
 	//! Get the instance of StelGuiBase implmenting the GUI.
 	virtual class StelGuiBase* getStelGuiBase() const = 0;
 };
-Q_DECLARE_INTERFACE(StelGuiPluginInterface, "stellarium.StelGuiPluginInterface/1.0");
+Q_DECLARE_INTERFACE(StelGuiPluginInterface, "stellarium.StelGuiPluginInterface/1.0")
 
 
 #endif // _STELGUIBASE_HPP_

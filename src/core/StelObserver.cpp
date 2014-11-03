@@ -27,6 +27,7 @@
 
 #include "StelLocationMgr.hpp"
 #include "StelModuleMgr.hpp"
+#include "LandscapeMgr.hpp"
 
 #include <QDebug>
 #include <QSettings>
@@ -47,8 +48,7 @@ private:
 };
 
 ArtificialPlanet::ArtificialPlanet(const PlanetP& orig) :
-		Planet("", 0, 0, 0, Vec3f(0,0,0), 0, "",
-		NULL, NULL, 0, false, true, false), dest(0),
+		Planet("", 0, 0, 0, Vec3f(0,0,0), 0, "", "", NULL, NULL, 0, false, true, false, true, ""), dest(0),
 		orig_name(orig->getEnglishName()), orig_name_i18n(orig->getNameI18n())
 {
 	radius = 0;
@@ -203,7 +203,13 @@ Mat4d StelObserver::getRotAltAzToEquatorial(double jd) const
 	// This is a kludge
 	if( lat > 90.0 )  lat = 90.0;
 	if( lat < -90.0 ) lat = -90.0;
-	return Mat4d::zrotation((getHomePlanet()->getSiderealTime(jd)+currentLocation.longitude)*M_PI/180.)
+	// Include a DeltaT correction. Sidereal time and longitude here are both in degrees, but DeltaT in seconds of time.
+	// 360 degrees = 24hrs; 15 degrees = 1hr = 3600s; 1 degree = 240s
+	// Apply DeltaT correction only for Earth
+	double deltaT = 0.;
+	if (getHomePlanet()->getEnglishName()=="Earth")
+		deltaT = StelApp::getInstance().getCore()->getDeltaT(jd)/240.;
+	return Mat4d::zrotation((getHomePlanet()->getSiderealTime(jd)+currentLocation.longitude-deltaT)*M_PI/180.)
 		* Mat4d::yrotation((90.-lat)*M_PI/180.);
 }
 
@@ -255,6 +261,20 @@ void SpaceShipObserver::update(double deltaTime)
 	{
 		timeToGo = 0.;
 		currentLocation = moveTargetLocation;
+		LandscapeMgr* ls = GETSTELMODULE(LandscapeMgr);
+		SolarSystem* ss = GETSTELMODULE(SolarSystem);
+		if (ls->getFlagLandscapeAutoSelection())
+		{
+			QString pType = ss->getPlanetType(currentLocation.planetName);
+			// If we have a landscape for target planet then set it or check and use
+			// landscape type of target planet, otherwise use default landscape
+			if (ls->getAllLandscapeNames().indexOf(currentLocation.planetName)>0)
+				ls->setCurrentLandscapeName(currentLocation.planetName);
+			else if (ls->getAllLandscapeIDs().indexOf(pType)>0)
+				ls->setCurrentLandscapeID(pType);
+			else
+				ls->setCurrentLandscapeID(ls->getDefaultLandscapeID());
+		}
 	}
 	else
 	{
@@ -262,7 +282,8 @@ void SpaceShipObserver::update(double deltaTime)
 		{
 			// Update SpaceShip position
 			static_cast<ArtificialPlanet*>(artificialPlanet.data())->computeAverage(timeToGo/(timeToGo + deltaTime));
-			currentLocation.planetName = q_("SpaceShip");
+			// TRANSLATORS: "Planet name" displayed when "flying" to another planet with Ctrl+G.
+			currentLocation.planetName = N_("SpaceShip");
 			currentLocation.name = q_(moveStartLocation.planetName) + " -> " + q_(moveTargetLocation.planetName);
 		}
 		else

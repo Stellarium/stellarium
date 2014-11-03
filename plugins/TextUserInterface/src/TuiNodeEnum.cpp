@@ -22,7 +22,7 @@
 
 TuiNodeEnum::TuiNodeEnum(const QString& text, QObject* receiver, const char* method, QStringList items,
                          QString defValue, TuiNode* parent, TuiNode* prev)
-	: TuiNodeEditable(text, parent, prev), stringList(items)
+    : TuiNodeEditable(text, parent, prev), stringList(items), defValue(defValue)
 {
 	this->connect(this, SIGNAL(setValue(QString)), receiver, method);
 
@@ -68,15 +68,20 @@ TuiNodeResponse TuiNodeEnum::handleEditingKey(int key)
 
 QString TuiNodeEnum::getDisplayText() 
 {
-	QString value = q_(stringList.at(currentIdx));
-	if (!editing)
-	{
-		return prefixText + q_(displayText) + QString(":  %1").arg(value);
-	}
-	else
-	{
-		return prefixText + q_(displayText) + QString(": >%1<").arg(value);
-	}
+    if (!stringList.isEmpty())
+    {
+        QString value = q_(stringList.at(currentIdx));
+        if (!editing)
+        {
+            return prefixText + q_(displayText) + QString(":  %1").arg(value);
+        }
+        else
+        {
+            return prefixText + q_(displayText) + QString(": >%1<").arg(value);
+        }
+    }
+    else
+    {
+        return prefixText + q_(displayText) + QString(":  %1").arg(defValue);
+    }
 }
-
-

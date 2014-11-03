@@ -22,7 +22,7 @@ attribute mediump vec2 skyVertex;
 attribute highp vec4 skyColor;
 
 // The output variable passed to the fragment shader
-varying mediump vec4 resultSkyColor;
+varying mediump vec3 resultSkyColor;
 
 void main()
 {
@@ -68,11 +68,11 @@ void main()
 	{
 		// special case for s = 0 (x=0.25, y=0.25)
 		color[2] *= 0.5121445;
-		color[2] = pow(color[2]*pi*0.0001, alphaWaOverAlphaDa*oneOverGamma)* term2TimesOneOverMaxdLpOneOverGamma;
+		color[2] = pow(abs(color[2]*pi*0.0001), alphaWaOverAlphaDa*oneOverGamma)* term2TimesOneOverMaxdLpOneOverGamma;
 		color[0] = 0.787077*color[2];
 		color[1] = 0.9898434*color[2];
 		color[2] *= 1.9256125;
-		resultSkyColor = color*brightnessScale;
+		resultSkyColor = color.xyz*brightnessScale;
 	}
 	else
 	{
@@ -92,12 +92,12 @@ void main()
 
 		// 2. Adapt the luminance value and scale it to fit in the RGB range [2]
 		// color[2] = std::pow(adaptLuminanceScaled(color[2]), oneOverGamma);
-		color[2] = pow(color[2]*pi*0.0001, alphaWaOverAlphaDa*oneOverGamma)* term2TimesOneOverMaxdLpOneOverGamma;
+		color[2] = pow(abs(color[2]*pi*0.0001), alphaWaOverAlphaDa*oneOverGamma)* term2TimesOneOverMaxdLpOneOverGamma;
 
 		// Convert from xyY to XZY
 		// Use a XYZ to Adobe RGB (1998) matrix which uses a D65 reference white
 		mediump vec3 tmp = vec3(color[0] * color[2] / color[1], color[2], (1. - color[0] - color[1]) * color[2] / color[1]);
-		resultSkyColor = vec4(2.04148*tmp.x-0.564977*tmp.y-0.344713*tmp.z, -0.969258*tmp.x+1.87599*tmp.y+0.0415557*tmp.z, 0.0134455*tmp.x-0.118373*tmp.y+1.01527*tmp.z, 1.);
+		resultSkyColor = vec3(2.04148*tmp.x-0.564977*tmp.y-0.344713*tmp.z, -0.969258*tmp.x+1.87599*tmp.y+0.0415557*tmp.z, 0.0134455*tmp.x-0.118373*tmp.y+1.01527*tmp.z);
 		resultSkyColor*=brightnessScale;
 	}
 }

@@ -21,14 +21,15 @@
 #ifndef _NEBULAMGR_HPP_
 #define _NEBULAMGR_HPP_
 
-#include <QString>
-#include <QStringList>
-#include <QFont>
 #include "StelObjectType.hpp"
 #include "StelFader.hpp"
 #include "StelSphericalIndex.hpp"
 #include "StelObjectModule.hpp"
 #include "StelTextureTypes.hpp"
+
+#include <QString>
+#include <QStringList>
+#include <QFont>
 
 class Nebula;
 class StelTranslator;
@@ -41,9 +42,14 @@ typedef QSharedPointer<Nebula> NebulaP;
 //! @class NebulaMgr
 //! Manage a collection of nebulae. This class is used
 //! to display the NGC catalog with information, and textures for some of them.
+// GZ: This doc seems outdated/misleading - photo textures are not mamaged here but in StelSkyImageTile
+
 class NebulaMgr : public StelObjectModule
 {
 	Q_OBJECT
+	Q_PROPERTY(bool flagHintDisplayed
+			   READ getFlagHints
+			   WRITE setFlagHints)
 
 public:
 	NebulaMgr();
@@ -90,13 +96,32 @@ public:
 	//! Find and return the list of at most maxNbItem objects auto-completing the passed object I18n name.
 	//! @param objPrefix the case insensitive first letters of the searched object
 	//! @param maxNbItem the maximum number of returned object names
+	//! @param useStartOfWords the autofill mode for returned objects names
 	//! @return a list of matching object name by order of relevance, or an empty list if nothing match
-	virtual QStringList listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem=5) const;
+	virtual QStringList listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false) const;
+	//! Find and return the list of at most maxNbItem objects auto-completing the passed object English name.
+	//! @param objPrefix the case insensitive first letters of the searched object
+	//! @param maxNbItem the maximum number of returned object names
+	//! @param useStartOfWords the autofill mode for returned objects names
+	//! @return a list of matching object name by order of relevance, or an empty list if nothing match
+	virtual QStringList listMatchingObjects(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false) const;
+	//! @note Loading deep-sky objects with the proper names only.
+	virtual QStringList listAllObjects(bool inEnglish) const;
+	virtual QStringList listAllObjectsByType(const QString& objType, bool inEnglish) const;
+	virtual QString getName() const { return "Deep-sky objects"; }
 
+	//! Compute the maximum magntiude for which hints will be displayed.
+	float computeMaxMagHint(const class StelSkyDrawer* skyDrawer) const;
+	
 	///////////////////////////////////////////////////////////////////////////
 	// Properties setters and getters
 public slots:
-	//! Set the color used to draw the nebula circles.
+	//! Set the color used to draw the nebula symbols (circles, boxes. etc).
+	//! @param c The color of the nebula symbols
+	//! @code
+	//! // example of usage in scripts
+	//! NebulaMgr.setCirclesColor(Vec3f(1.0,0.0,0.0));
+	//! @endcode
 	void setCirclesColor(const Vec3f& c);
 	//! Get current value of the nebula circle color.
 	const Vec3f& getCirclesColor(void) const;
@@ -107,6 +132,7 @@ public slots:
 	float getCircleScale(void) const;
 
 	//! Set how long it takes for nebula hints to fade in and out when turned on and off.
+	//! @param duration given in seconds
 	void setHintsFadeDuration(float duration) {hintsFader.setDuration((int) (duration * 1000.f));}
 
 	//! Set flag for displaying Nebulae Hints.
@@ -120,6 +146,11 @@ public slots:
 	bool getFlagShow(void) const { return flagShow; }
 
 	//! Set the color used to draw nebula labels.
+	//! @param c The color of the nebula labels
+	//! @code
+	//! // example of usage in scripts
+	//! NebulaMgr.setLabelsColor(Vec3f(1.0,0.0,0.0));
+	//! @endcode
 	void setLabelsColor(const Vec3f& c);
 	//! Get current value of the nebula label color.
 	const Vec3f& getLabelsColor(void) const;
@@ -152,6 +183,7 @@ private slots:
 	
 
 private:
+	
 	//! Search for a nebula object by name. e.g. M83, NGC 1123, IC 1234.
 	NebulaP search(const QString& name);
 
@@ -172,6 +204,7 @@ private:
 	NebulaP searchM(unsigned int M);
 	NebulaP searchNGC(unsigned int NGC);
 	NebulaP searchIC(unsigned int IC);
+	NebulaP searchC(unsigned int C);
 	bool loadNGC(const QString& fileName);
 	bool loadNGCOld(const QString& catNGC);
 	bool loadNGCNames(const QString& fileName);

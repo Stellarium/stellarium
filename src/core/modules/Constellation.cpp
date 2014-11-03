@@ -18,12 +18,6 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#include <algorithm>
-#include <QString>
-#include <QTextStream>
-#include <QDebug>
-#include <QFontMetrics>
-
 #include "StelProjector.hpp"
 #include "Constellation.hpp"
 #include "StarMgr.hpp"
@@ -33,18 +27,27 @@
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 
+#include <algorithm>
+#include <QString>
+#include <QTextStream>
+#include <QDebug>
+#include <QFontMetrics>
+
 Vec3f Constellation::lineColor = Vec3f(0.4,0.4,0.8);
 Vec3f Constellation::labelColor = Vec3f(0.4,0.4,0.8);
 Vec3f Constellation::boundaryColor = Vec3f(0.8,0.3,0.3);
 bool Constellation::singleSelected = false;
+bool Constellation::seasonalRuleEnabled = false;
 
-Constellation::Constellation() : asterism(NULL)
+Constellation::Constellation()
+	: numberOfSegments(0)
+	, asterism(NULL)
 {
 }
 
 Constellation::~Constellation()
 {
-	if (asterism) delete[] asterism;
+	delete[] asterism;
 	asterism = NULL;
 }
 
@@ -101,17 +104,20 @@ void Constellation::drawOptim(StelPainter& sPainter, const StelCore* core, const
 	if (lineFader.getInterstate()<=0.0001f)
 		return;
 
-	sPainter.setColor(lineColor[0], lineColor[1], lineColor[2], lineFader.getInterstate());
-
-	Vec3d star1;
-	Vec3d star2;
-	for (unsigned int i=0;i<numberOfSegments;++i)
+	if (checkVisibility())
 	{
-		star1=asterism[2*i]->getJ2000EquatorialPos(core);
-		star2=asterism[2*i+1]->getJ2000EquatorialPos(core);
-		star1.normalize();
-		star2.normalize();
-		sPainter.drawGreatCircleArc(star1, star2, &viewportHalfspace);
+		sPainter.setColor(lineColor[0], lineColor[1], lineColor[2], lineFader.getInterstate());
+
+		Vec3d star1;
+		Vec3d star2;
+		for (unsigned int i=0;i<numberOfSegments;++i)
+		{
+			star1=asterism[2*i]->getJ2000EquatorialPos(core);
+			star2=asterism[2*i+1]->getJ2000EquatorialPos(core);
+			star1.normalize();
+			star2.normalize();
+			sPainter.drawGreatCircleArc(star1, star2, &viewportHalfspace);
+		}
 	}
 }
 
@@ -119,25 +125,29 @@ void Constellation::drawName(StelPainter& sPainter) const
 {
 	if (!nameFader.getInterstate())
 		return;
-	sPainter.setColor(labelColor[0], labelColor[1], labelColor[2], nameFader.getInterstate());
-	sPainter.drawText(XYname[0], XYname[1], nameI18, 0., -sPainter.getFontMetrics().width(nameI18)/2, 0, false);
+
+	if (checkVisibility())
+	{
+		sPainter.setColor(labelColor[0], labelColor[1], labelColor[2], nameFader.getInterstate());
+		sPainter.drawText(XYname[0], XYname[1], nameI18, 0., -sPainter.getFontMetrics().width(nameI18)/2, 0, false);
+	}
 }
 
 void Constellation::drawArtOptim(StelPainter& sPainter, const SphericalRegion& region) const
 {
-	const float intensity = artFader.getInterstate();
-	if (artTexture && intensity && region.intersects(boundingCap))
+	if (checkVisibility())
 	{
-		if (StelApp::getInstance().getVisionModeNight())
-			sPainter.setColor(intensity, 0.0, 0.0);
-		else
+		const float intensity = artFader.getInterstate();
+		if (artTexture && intensity && region.intersects(boundingCap))
+		{
 			sPainter.setColor(intensity,intensity,intensity);
 
-		// The texture is not fully loaded
-		if (artTexture->bind()==false)
-			return;
+			// The texture is not fully loaded
+			if (artTexture->bind()==false)
+				return;
 
-		sPainter.drawStelVertexArray(artPolygon);
+			sPainter.drawStelVertexArray(artPolygon);
+		}
 	}
 }
 
@@ -216,6 +226,32 @@ void Constellation::drawBoundaryOptim(StelPainter& sPainter) const
 	}
 }
 
+bool Constellation::checkVisibility() const
+{
+	// Is supported seasonal rules by current starlore?
+	if (!seasonalRuleEnabled)
+		return true;
+
+	bool visible = false;
+	int year, month, day;
+	// Get the current month
+	StelUtils::getDateFromJulianDay(StelApp::getInstance().getCore()->getJDay(), &year, &month, &day);
+	if (endSeason >= beginSeason)
+	{
+		// OK, it's a "normal" season rule...
+		if ((month >= beginSeason) && (month <= endSeason))
+			visible = true;
+	}
+	else
+	{
+		// ...oops, it's a "inverted" season rule
+		if (((month>=1) && (month<=endSeason)) || ((month>=beginSeason) && (month<=12)))
+			visible = true;
+
+	}
+	return visible;
+}
+
 StelObjectP Constellation::getBrightestStarInConstellation(void) const
 {
 	float maxMag = 99.f;
@@ -224,7 +260,7 @@ StelObjectP Constellation::getBrightestStarInConstellation(void) const
 	// so check all segment endpoints:
 	for (int i=2*numberOfSegments-1;i>=0;i--)
 	{
-		const float Mag = asterism[i]->getVMagnitude(0, false);
+		const float Mag = asterism[i]->getVMagnitude(0);
 		if (Mag < maxMag)
 		{
 			brightest = asterism[i];
