@@ -45,31 +45,52 @@
 class Extinction
 {
 public:
+	//! Define the extinction strategy for rendering underground objects (useful when ground is not rendered)
+	enum UndergroundExtinctionMode {
+		UndergroundExtinctionZero = 0,	//!< Zero extinction: stars visible in full brightness
+		UndergroundExtinctionMax = 1,   //!< Maximum extinction: coef 42, i.e practically invisible
+		UndergroundExtinctionMirror = 2 //!< Mirror the extinction for the same altutide above the ground.
+	};
+	
 	Extinction();
+	
 	//! Compute extinction effect for arrays of size @param num position vectors and magnitudes.
-	//! @param altAzPos are the NORMALIZED (!!) (apparent) star position vectors, and their z components sin(apparent_altitude).
-	//! This call must therefore be done after application of Refraction, and only if atmospheric effects are on.
+	//! @param altAzPos are the NORMALIZED (!!) (geometrical) star position vectors, and their z components sin(apparent_altitude).
+	//! This call must therefore be done before application of Refraction if atmospheric effects are on.
 	//! Note that forward/backward are no absolute reverse operations!
-	void forward(const Vec3d *altAzPos, float *mag, const int num=1) const;
-	void forward(const Vec3f *altAzPos, float *mag, const int num=1) const;
-	void forward(const double *sinAlt,  float *mag, const int num) const;
-	void forward(const float  *sinAlt,  float *mag, const int num) const;
-	void forward(const double *sinAlt,  float *mag) const;
-	void forward(const float  *sinAlt,  float *mag) const;
+	void forward(const Vec3d& altAzPos, float* mag) const
+	{
+		Q_ASSERT(std::fabs(altAzPos.length()-1.f)<0.001f);
+		*mag += airmass(altAzPos[2], false) * ext_coeff;
+	}
+	
+	void forward(const Vec3f& altAzPos, float* mag) const
+	{
+		Q_ASSERT(std::fabs(altAzPos.length()-1.f)<0.001f);
+		*mag += airmass(altAzPos[2], false) * ext_coeff;
+	}
 
 	//! Compute inverse extinction effect for arrays of size @param num position vectors and magnitudes.
-	//! @param altAzPos are the NORMALIZED (!!) (apparent) star position vectors, and their z components sin(apparent_altitude).
+	//! @param altAzPos are the NORMALIZED (!!) (geometrical) star position vectors, and their z components sin(apparent_altitude).
 	//! Note that forward/backward are no absolute reverse operations!
-	void backward(const Vec3d *altAzPos, float *mag, const int num=1) const;
-	void backward(const Vec3f *altAzPos, float *mag, const int num=1) const;
-	void backward(const double *sinAlt,  float *mag, const int num=1) const;
-	void backward(const float  *sinAlt,  float *mag, const int num=1) const;
+	void backward(const Vec3d& altAzPos, float* mag) const
+	{
+		*mag -= airmass(altAzPos[2], false) * ext_coeff;
+	}
+	
+	void backward(const Vec3f& altAzPos, float* mag) const
+	{
+		*mag -= airmass(altAzPos[2], false) * ext_coeff;
+	}
 
 	//! Set visual extinction coefficient (mag/airmass), influences extinction computation.
 	//! @param k= 0.1 for highest mountains, 0.2 for very good lowland locations, 0.35 for typical lowland, 0.5 in humid climates.
 	void setExtinctionCoefficient(float k) { ext_coeff=k; }
 	float getExtinctionCoefficient() const {return ext_coeff;}
 
+	void setUndergroundExtinctionMode(UndergroundExtinctionMode mode) {undergroundExtinctionMode=mode;}
+	UndergroundExtinctionMode getUndergroundExtinctionMode() const {return undergroundExtinctionMode;}
+	
 private:
 	//! airmass computation for @param cosZ = cosine of zenith angle z (=sin(altitude)!).
 	//! The default (@param apparent_z = true) is computing airmass from observed altitude, following Rozenberg (1966) [X(90)~40].
@@ -78,13 +99,13 @@ private:
 	//! A problem ist that refraction depends on air pressure and temperature, but Young's formula assumes T=15C, p=1013.25mbar.
 	//! So, it seems better to compute refraction first, and then use the Rozenberg formula here.
 	//! Rozenberg is infinite at Z=92.17 deg, Young at Z=93.6 deg, so this function RETURNS SUBHORIZONTAL_AIRMASS BELOW -2 DEGREES!
-	float airmass(const float cosZ, const bool apparent_z=true) const;
+	float airmass(float cosZ, const bool apparent_z=true) const;
 
 	//! k, magnitudes/airmass, in [0.00, ... 1.00], (default 0.20).
 	float ext_coeff;
-	//! should be either 0.0 (stars visible in full brightness below horizon) or 40.0 (or 42? ;-) practically invisible)
-	//! Maybe make this a user-configurable option?
-	static float SUBHORIZONTAL_AIRMASS;
+
+	//! Define what we are going to do for underground stars when ground is not rendered
+	UndergroundExtinctionMode undergroundExtinctionMode;
 };
 
 //! @class Refraction
@@ -147,6 +168,9 @@ private:
 	//! Update precomputed variables.
 	void updatePrecomputed();
 
+	void innerRefractionForward(Vec3d& altAzPos) const;
+	void innerRefractionBackward(Vec3d& altAzPos) const;
+	
 	//! These 3 Atmosphere parameters can be controlled by GUI.
 	//! Pressure[mbar] (1013)
 	float pressure;
@@ -156,24 +180,6 @@ private:
 	float press_temp_corr_Saemundson;
 	//! Numerator of refraction formula, to be cached for speed.
 	float press_temp_corr_Bennett;
-
-	//! These constants are usable for experiments with the limits of refraction effects.
-	static const double MIN_GEO_ALTITUDE_DEG;
-	static const double MIN_GEO_ALTITUDE_RAD;
-	static const double MIN_GEO_ALTITUDE_SIN;
-	static const double MIN_APP_ALTITUDE_DEG;
-	static const double MIN_APP_ALTITUDE_RAD;
-	static const double MIN_APP_ALTITUDE_SIN;
-	static const float MIN_GEO_ALTITUDE_DEG_F;
-	static const float MIN_GEO_ALTITUDE_RAD_F;
-	static const float MIN_GEO_ALTITUDE_SIN_F;
-	static const float MIN_APP_ALTITUDE_DEG_F;
-	static const float MIN_APP_ALTITUDE_RAD_F;
-	static const float MIN_APP_ALTITUDE_SIN_F;
-	static const double TRANSITION_WIDTH_GEO_DEG;
-	static const double TRANSITION_WIDTH_GEO_DEG_F;
-	static const double TRANSITION_WIDTH_APP_DEG;
-	static const double TRANSITION_WIDTH_APP_DEG_F;
 
 	//! Used to pretransform coordinates into AltAz frame.
 	Mat4d preTransfoMat;

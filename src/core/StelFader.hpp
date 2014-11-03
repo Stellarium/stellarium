@@ -20,6 +20,8 @@
 #ifndef _STELFADER_HPP_
 #define _STELFADER_HPP_
 
+#include "config.h"
+
 #include <QtGlobal>
 
 //! @class StelFader
@@ -80,6 +82,9 @@ public:
 	// Create and initialise to default
 	LinearFader(int _duration=1000, float minimumValue=0.f, float maximumValue=1.f, bool initialState=false)
 		: StelFader(initialState, minimumValue, maximumValue)
+		, startValue(0.)
+		, targetValue(0.)
+		, counter(0)
 	{
 		isTransiting = false;
 		duration = _duration;

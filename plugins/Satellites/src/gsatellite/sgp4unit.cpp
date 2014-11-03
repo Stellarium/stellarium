@@ -48,7 +48,6 @@
 
 #include "sgp4unit.h"
 
-const char help = 'n';
 FILE *dbgfile;
 
 
@@ -225,6 +224,7 @@ static void dpper
 
      /* kill warning */
      inclo = 0.;
+     static_cast<void>(inclo);
 
      /* ---------------------- constants ----------------------------- */
      zns   = 1.19459e-5;
@@ -711,7 +711,7 @@ static void dsinit
           ses   , sgs   , sghl  , sghs  , shs   , shll  , sis   ,
           sini2 , sls   , temp  , temp1 , theta , xno2  , q22   ,
           q31   , q33   , root22, root44, root54, rptim , root32,
-          root52, x2o3  , xke   , znl   , emo   , zns   , emsqo,
+          root52, x2o3  , xke=0   , znl   , emo   , zns   , emsqo,
           tumin, mu, radiusearthkm, j2, j3, j4, j3oj2;
 
      q22    = 1.7891679e-6;
@@ -1051,7 +1051,8 @@ static void dspace
                delt = stepn;
 
          iretn = 381; // added for do loop
-         iret  =   0; // added for loop
+	 iret  =   0; // added for loop
+	 static_cast<void>(iret);
          while (iretn == 381)
            {
              /* ------------------- dot terms calculated ------------- */
@@ -1091,7 +1092,7 @@ static void dspace
              // sgp4fix move end checks to end of routine
              if (fabs(t - atime) >= stepp)
                {
-                 iret  = 0;
+		 iret  = 0;
                  iretn = 381;
                }
                else // exit here
@@ -1189,11 +1190,12 @@ static void initl
      )
 {
      /* --------------------- local variables ------------------------ */
-     double ak, d1, del, adel, po, x2o3, j2, xke,
+     double ak, d1, del, adel, po, x2o3, j2=0, xke=0,
             tumin, mu, radiusearthkm, j3, j4, j3oj2;
 
      /* kill warning */
      satn = 0;
+     static_cast<void>(satn);
 
      // sgp4fix use old way of finding gst
      double ds70;
@@ -1359,8 +1361,8 @@ bool sgp4init
           tc    , temp  , temp1 , temp2 , temp3 , tsi   , xpidot,
           xhdot1, z1    , z2    , z3    , z11   , z12   , z13   ,
           z21   , z22   , z23   , z31   , z32   , z33,
-          qzms2t, ss, j2, j3oj2, j4, x2o3, r[3], v[3],
-          tumin, mu, radiusearthkm, xke, j3;
+          qzms2t, ss, j2=0, j3oj2=0, j4=0, x2o3, r[3], v[3],
+          tumin, mu, radiusearthkm=0, xke, j3;
 
      /* ------------------------ initialization --------------------- */
      // sgp4fix divisor for divide by zero check on inclination
@@ -1711,7 +1713,7 @@ bool sgp4
          uy   , uz    , vx   , vy    ,  vz    , inclm , mm  ,
          nm   , nodem, xinc , xincp ,  xl    , xlm   , mp  ,
          xmdf , xmx   , xmy  , nodedf, xnode , nodep, tc  , dndt,
-         twopi, x2o3  , j2   , j3    , tumin, j4 , xke   , j3oj2, radiusearthkm,
+         twopi, x2o3  , j2=0   , j3    , tumin, j4=0 , xke=0   , j3oj2=0, radiusearthkm=0,
          mu, vkmpersec;
      int ktr;
 

@@ -20,12 +20,13 @@
 #ifndef _STELOBJECTMODULE_HPP_
 #define _STELOBJECTMODULE_HPP_
 
-#include <QList>
-#include <QString>
-#include <QStringList>
 #include "StelModule.hpp"
 #include "StelObjectType.hpp"
 #include "VecMath.hpp"
+
+#include <QList>
+#include <QString>
+#include <QStringList>
 
 //! @class StelObjectModule
 //! Specialization of StelModule which manages a collection of StelObject.
@@ -58,8 +59,22 @@ public:
 	//! Find and return the list of at most maxNbItem objects auto-completing passed object I18 name
 	//! @param objPrefix the first letters of the searched object
 	//! @param maxNbItem the maximum number of returned object names
+	//! @param useStartOfWords the autofill mode for returned objects names
 	//! @return a list of matching object name by order of relevance, or an empty list if nothing matches
-	virtual QStringList listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem=5) const = 0;
+	virtual QStringList listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false) const = 0;
+
+	//! Find and return the list of at most maxNbItem objects auto-completing passed object English name
+	//! @param objPrefix the first letters of the searched object
+	//! @param maxNbItem the maximum number of returned object names
+	//! @param useStartOfWords the autofill mode for returned objects names
+	//! @return a list of matching object name by order of relevance, or an empty list if nothing matches
+	virtual QStringList listMatchingObjects(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false) const = 0;
+
+	virtual QStringList listAllObjects(bool inEnglish) const = 0;
+
+	virtual QStringList listAllObjectsByType(const QString& objType, bool inEnglish) const = 0;
+
+	virtual QString getName() const = 0;
 };
 
 #endif // _STELOBJECTMODULE_HPP_

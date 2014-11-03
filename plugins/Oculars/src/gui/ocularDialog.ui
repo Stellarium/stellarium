@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>505</width>
-    <height>400</height>
+    <width>650</width>
+    <height>433</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -16,17 +16,20 @@
     <verstretch>0</verstretch>
    </sizepolicy>
   </property>
-  <property name="minimumSize">
-   <size>
-    <width>300</width>
-    <height>400</height>
-   </size>
-  </property>
   <layout class="QVBoxLayout" name="verticalLayout_2">
    <property name="spacing">
     <number>0</number>
    </property>
-   <property name="margin">
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
     <number>0</number>
    </property>
    <item>
@@ -66,7 +69,7 @@
        <number>0</number>
       </property>
       <item>
-       <spacer name="spacer_2">
+       <spacer name="leftSpacer">
         <property name="orientation">
          <enum>Qt::Horizontal</enum>
         </property>
@@ -86,7 +89,7 @@
        </widget>
       </item>
       <item>
-       <spacer name="spacer">
+       <spacer name="rightSpacer">
         <property name="orientation">
          <enum>Qt::Horizontal</enum>
         </property>
@@ -131,25 +134,36 @@
        <verstretch>0</verstretch>
       </sizepolicy>
      </property>
-     <property name="frameShape">
-      <enum>QFrame::StyledPanel</enum>
-     </property>
-     <property name="frameShadow">
-      <enum>QFrame::Raised</enum>
-     </property>
      <layout class="QVBoxLayout" name="verticalLayout_4">
       <property name="spacing">
        <number>0</number>
       </property>
-      <property name="margin">
+      <property name="leftMargin">
+       <number>0</number>
+      </property>
+      <property name="topMargin">
+       <number>0</number>
+      </property>
+      <property name="rightMargin">
+       <number>0</number>
+      </property>
+      <property name="bottomMargin">
        <number>0</number>
       </property>
       <item>
        <widget class="QTabWidget" name="Tabs">
+        <property name="font">
+         <font>
+          <pointsize>11</pointsize>
+         </font>
+        </property>
         <property name="currentIndex">
          <number>0</number>
         </property>
-        <widget class="QWidget" name="General">
+        <property name="usesScrollButtons">
+         <bool>false</bool>
+        </property>
+        <widget class="QWidget" name="generalTab">
          <attribute name="title">
           <string>General</string>
          </attribute>
@@ -157,7 +171,16 @@
           <property name="spacing">
            <number>0</number>
           </property>
-          <property name="margin">
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
            <number>0</number>
           </property>
           <item>
@@ -166,7 +189,16 @@
              <string>Ocular view</string>
             </property>
             <layout class="QVBoxLayout" name="verticalLayout_7">
-             <property name="margin">
+             <property name="leftMargin">
+              <number>0</number>
+             </property>
+             <property name="topMargin">
+              <number>0</number>
+             </property>
+             <property name="rightMargin">
+              <number>0</number>
+             </property>
+             <property name="bottomMargin">
               <number>0</number>
              </property>
              <item>
@@ -183,6 +215,16 @@
                </property>
               </widget>
              </item>
+             <item>
+              <widget class="QCheckBox" name="limitStellarMagnitudeCheckBox">
+               <property name="toolTip">
+                <string>Apply limits stellar magnitude for different apertures of telescopes</string>
+               </property>
+               <property name="text">
+                <string>Limit stellar magnitude</string>
+               </property>
+              </widget>
+             </item>
             </layout>
            </widget>
           </item>
@@ -192,7 +234,19 @@
              <string>Key mappings</string>
             </property>
             <layout class="QFormLayout" name="formLayout_3">
-             <property name="margin">
+             <property name="fieldGrowthPolicy">
+              <enum>QFormLayout::FieldsStayAtSizeHint</enum>
+             </property>
+             <property name="leftMargin">
+              <number>0</number>
+             </property>
+             <property name="topMargin">
+              <number>0</number>
+             </property>
+             <property name="rightMargin">
+              <number>0</number>
+             </property>
+             <property name="bottomMargin">
               <number>0</number>
              </property>
              <item row="0" column="0">
@@ -265,7 +319,16 @@
              <string>Interface</string>
             </property>
             <layout class="QVBoxLayout" name="verticalLayout_8">
-             <property name="margin">
+             <property name="leftMargin">
+              <number>0</number>
+             </property>
+             <property name="topMargin">
+              <number>0</number>
+             </property>
+             <property name="rightMargin">
+              <number>0</number>
+             </property>
+             <property name="bottomMargin">
               <number>0</number>
              </property>
              <item>
@@ -279,6 +342,26 @@
               <widget class="QCheckBox" name="checkBoxDecimalDegrees">
                <property name="text">
                 <string>Use degrees and minutes for FOV of CCD</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QCheckBox" name="checkBoxSensorsZooming">
+               <property name="toolTip">
+                <string>Please enable it for avoiding of flips the whole sky from the telescope's settings.</string>
+               </property>
+               <property name="text">
+                <string>Disable zoom keys for CCD</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QCheckBox" name="checkBoxInitialFOV">
+               <property name="toolTip">
+                <string>Mark it if you want the FOV value the same like at the startup of Stellarium.</string>
+               </property>
+               <property name="text">
+                <string>Restore FOV to initial values</string>
                </property>
               </widget>
              </item>
@@ -300,7 +383,7 @@
           </item>
          </layout>
         </widget>
-        <widget class="QWidget" name="Eyepieces">
+        <widget class="QWidget" name="ocularsTab">
          <attribute name="title">
           <string>Eyepieces</string>
          </attribute>
@@ -321,7 +404,7 @@
            <number>12</number>
           </property>
           <item>
-           <widget class="QFrame" name="frame">
+           <widget class="QFrame" name="ocularListFrame">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
               <horstretch>0</horstretch>
@@ -338,11 +421,20 @@
              <property name="spacing">
               <number>0</number>
              </property>
-             <property name="margin">
+             <property name="leftMargin">
+              <number>0</number>
+             </property>
+             <property name="topMargin">
+              <number>0</number>
+             </property>
+             <property name="rightMargin">
+              <number>0</number>
+             </property>
+             <property name="bottomMargin">
               <number>0</number>
              </property>
              <item>
-              <widget class="QLabel" name="label">
+              <widget class="QLabel" name="ocularListLabel">
                <property name="text">
                 <string>Eyepieces</string>
                </property>
@@ -356,6 +448,9 @@
                <property name="isWrapping" stdset="0">
                 <bool>false</bool>
                </property>
+               <property name="resizeMode">
+                <enum>QListView::Fixed</enum>
+               </property>
                <property name="viewMode">
                 <enum>QListView::ListMode</enum>
                </property>
@@ -365,7 +460,7 @@
               </widget>
              </item>
              <item>
-              <widget class="QFrame" name="frame_4">
+              <widget class="QFrame" name="ocularButtonsFrame">
                <property name="frameShape">
                 <enum>QFrame::StyledPanel</enum>
                </property>
@@ -412,6 +507,10 @@
                     <height>24</height>
                    </size>
                   </property>
+                  <property name="icon">
+                   <iconset resource="../../../../data/gui/guiRes.qrc">
+                    <normaloff>:/graphicGui/spinup.png</normaloff>:/graphicGui/spinup.png</iconset>
+                  </property>
                  </widget>
                 </item>
                 <item>
@@ -427,6 +526,10 @@
                     <width>24</width>
                     <height>24</height>
                    </size>
+                  </property>
+                  <property name="icon">
+                   <iconset resource="../../../../data/gui/guiRes.qrc">
+                    <normaloff>:/graphicGui/spindown.png</normaloff>:/graphicGui/spindown.png</iconset>
                   </property>
                  </widget>
                 </item>
@@ -461,7 +564,16 @@
              <property name="spacing">
               <number>0</number>
              </property>
-             <property name="margin">
+             <property name="leftMargin">
+              <number>0</number>
+             </property>
+             <property name="topMargin">
+              <number>0</number>
+             </property>
+             <property name="rightMargin">
+              <number>0</number>
+             </property>
+             <property name="bottomMargin">
               <number>0</number>
              </property>
              <item>
@@ -472,10 +584,7 @@
                <property name="frameShadow">
                 <enum>QFrame::Raised</enum>
                </property>
-               <layout class="QFormLayout" name="formLayout">
-                <property name="fieldGrowthPolicy">
-                 <enum>QFormLayout::FieldsStayAtSizeHint</enum>
-                </property>
+               <layout class="QGridLayout" name="gridLayout_2">
                 <item row="0" column="0">
                  <widget class="QLabel" name="label_3">
                   <property name="text">
@@ -510,21 +619,15 @@
                  </widget>
                 </item>
                 <item row="1" column="1">
-                 <widget class="QLineEdit" name="ocularAFov">
-                  <property name="sizePolicy">
-                   <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                   </sizepolicy>
+                 <widget class="QDoubleSpinBox" name="ocularAFov">
+                  <property name="decimals">
+                   <number>1</number>
                   </property>
-                  <property name="baseSize">
-                   <size>
-                    <width>100</width>
-                    <height>22</height>
-                   </size>
+                  <property name="maximum">
+                   <double>120.000000000000000</double>
                   </property>
-                  <property name="maxLength">
-                   <number>5</number>
+                  <property name="singleStep">
+                   <double>0.100000000000000</double>
                   </property>
                  </widget>
                 </item>
@@ -535,19 +638,6 @@
                   </property>
                  </widget>
                 </item>
-                <item row="2" column="1">
-                 <widget class="QLineEdit" name="ocularFL">
-                  <property name="baseSize">
-                   <size>
-                    <width>100</width>
-                    <height>22</height>
-                   </size>
-                  </property>
-                  <property name="maxLength">
-                   <number>6</number>
-                  </property>
-                 </widget>
-                </item>
                 <item row="3" column="0">
                  <widget class="QLabel" name="label_10">
                   <property name="text">
@@ -555,23 +645,52 @@
                   </property>
                  </widget>
                 </item>
-                <item row="3" column="1">
-                 <widget class="QLineEdit" name="ocularFieldStop">
-                  <property name="baseSize">
-                   <size>
-                    <width>100</width>
-                    <height>22</height>
-                   </size>
+                <item row="2" column="1">
+                 <widget class="QDoubleSpinBox" name="ocularFL">
+                  <property name="decimals">
+                   <number>1</number>
                   </property>
-                  <property name="maxLength">
-                   <number>6</number>
+                  <property name="minimum">
+                   <double>1.000000000000000</double>
+                  </property>
+                  <property name="maximum">
+                   <double>99.000000000000000</double>
+                  </property>
+                  <property name="singleStep">
+                   <double>0.100000000000000</double>
                   </property>
                  </widget>
                 </item>
-                <item row="4" column="0" colspan="2">
+                <item row="3" column="1">
+                 <widget class="QDoubleSpinBox" name="ocularFieldStop">
+                  <property name="decimals">
+                   <number>2</number>
+                  </property>
+                  <property name="minimum">
+                   <double>0.000000000000000</double>
+                  </property>
+                  <property name="maximum">
+                   <double>99.000000000000000</double>
+                  </property>
+                  <property name="singleStep">
+                   <double>0.100000000000000</double>
+                  </property>
+                  <property name="value">
+                   <double>0.000000000000000</double>
+                  </property>
+                 </widget>
+                </item>
+                <item row="4" column="0">
                  <widget class="QCheckBox" name="binocularsCheckBox">
                   <property name="text">
                    <string>Binoculars</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="4" column="1">
+                 <widget class="QCheckBox" name="permanentCrosshairCheckBox">
+                  <property name="text">
+                   <string>Has a permanent cross-hairs</string>
                   </property>
                  </widget>
                 </item>
@@ -596,7 +715,289 @@
           </item>
          </layout>
         </widget>
-        <widget class="QWidget" name="CCD">
+        <widget class="QWidget" name="lensesTab">
+         <attribute name="title">
+          <string>Lenses</string>
+         </attribute>
+         <layout class="QHBoxLayout" name="horizontalLayout_4">
+          <property name="spacing">
+           <number>0</number>
+          </property>
+          <property name="leftMargin">
+           <number>12</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>12</number>
+          </property>
+          <property name="bottomMargin">
+           <number>12</number>
+          </property>
+          <item>
+           <widget class="QFrame" name="lensListFrame">
+            <property name="frameShape">
+             <enum>QFrame::StyledPanel</enum>
+            </property>
+            <property name="frameShadow">
+             <enum>QFrame::Raised</enum>
+            </property>
+            <layout class="QVBoxLayout" name="verticalLayout_10">
+             <property name="spacing">
+              <number>0</number>
+             </property>
+             <property name="leftMargin">
+              <number>0</number>
+             </property>
+             <property name="topMargin">
+              <number>0</number>
+             </property>
+             <property name="rightMargin">
+              <number>0</number>
+             </property>
+             <property name="bottomMargin">
+              <number>0</number>
+             </property>
+             <item>
+              <widget class="QLabel" name="lensListLabel">
+               <property name="enabled">
+                <bool>true</bool>
+               </property>
+               <property name="text">
+                <string>Lenses</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QListView" name="lensListView">
+               <property name="editTriggers">
+                <set>QAbstractItemView::NoEditTriggers</set>
+               </property>
+               <property name="isWrapping" stdset="0">
+                <bool>false</bool>
+               </property>
+               <property name="resizeMode">
+                <enum>QListView::Fixed</enum>
+               </property>
+               <property name="viewMode">
+                <enum>QListView::ListMode</enum>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QFrame" name="lensButtonsFrame">
+               <property name="frameShape">
+                <enum>QFrame::StyledPanel</enum>
+               </property>
+               <property name="frameShadow">
+                <enum>QFrame::Raised</enum>
+               </property>
+               <layout class="QHBoxLayout" name="horizontalLayout_3">
+                <property name="leftMargin">
+                 <number>0</number>
+                </property>
+                <property name="topMargin">
+                 <number>5</number>
+                </property>
+                <property name="rightMargin">
+                 <number>0</number>
+                </property>
+                <property name="bottomMargin">
+                 <number>0</number>
+                </property>
+                <item>
+                 <widget class="QPushButton" name="addLens">
+                  <property name="minimumSize">
+                   <size>
+                    <width>0</width>
+                    <height>24</height>
+                   </size>
+                  </property>
+                  <property name="text">
+                   <string>Add</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QPushButton" name="pushButtonMoveLensUp">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="minimumSize">
+                   <size>
+                    <width>24</width>
+                    <height>24</height>
+                   </size>
+                  </property>
+                  <property name="icon">
+                   <iconset resource="../../../../data/gui/guiRes.qrc">
+                    <normaloff>:/graphicGui/spinup.png</normaloff>:/graphicGui/spinup.png</iconset>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QPushButton" name="pushButtonMoveLensDown">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="minimumSize">
+                   <size>
+                    <width>24</width>
+                    <height>24</height>
+                   </size>
+                  </property>
+                  <property name="icon">
+                   <iconset resource="../../../../data/gui/guiRes.qrc">
+                    <normaloff>:/graphicGui/spindown.png</normaloff>:/graphicGui/spindown.png</iconset>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QPushButton" name="deleteLens">
+                  <property name="minimumSize">
+                   <size>
+                    <width>0</width>
+                    <height>24</height>
+                   </size>
+                  </property>
+                  <property name="text">
+                   <string>Delete</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item>
+           <widget class="QFrame" name="LensData">
+            <property name="frameShape">
+             <enum>QFrame::StyledPanel</enum>
+            </property>
+            <property name="frameShadow">
+             <enum>QFrame::Raised</enum>
+            </property>
+            <layout class="QVBoxLayout" name="verticalLayout_9">
+             <property name="spacing">
+              <number>0</number>
+             </property>
+             <property name="leftMargin">
+              <number>0</number>
+             </property>
+             <property name="topMargin">
+              <number>0</number>
+             </property>
+             <property name="rightMargin">
+              <number>0</number>
+             </property>
+             <property name="bottomMargin">
+              <number>0</number>
+             </property>
+             <item>
+              <widget class="QFrame" name="frame_2">
+               <layout class="QFormLayout" name="gridLayout_3">
+                <item row="0" column="0">
+                 <widget class="QLabel" name="label_7">
+                  <property name="text">
+                   <string>Name:</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="1">
+                 <widget class="QLineEdit" name="lensName">
+                  <property name="baseSize">
+                   <size>
+                    <width>100</width>
+                    <height>22</height>
+                   </size>
+                  </property>
+                  <property name="maxLength">
+                   <number>50</number>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="0">
+                 <widget class="QLabel" name="label_13">
+                  <property name="text">
+                   <string>Multiplier:</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="1">
+                 <widget class="QDoubleSpinBox" name="lensMultipler">
+                  <property name="decimals">
+                   <number>2</number>
+                  </property>
+                  <property name="maximum">
+                   <double>9.000000000000000</double>
+                  </property>
+                  <property name="singleStep">
+                   <double>0.010000000000000</double>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="lensNote">
+               <property name="toolTip">
+                <string notr="true"/>
+               </property>
+               <property name="statusTip">
+                <string notr="true"/>
+               </property>
+               <property name="accessibleName">
+                <string notr="true"/>
+               </property>
+               <property name="accessibleDescription">
+                <string notr="true"/>
+               </property>
+               <property name="text">
+                <string>Values of multiplicity &gt;1 expand the focal length (Barlow lens). Values of multiplicity &lt;1 reduce the focal length (Shapley lens).</string>
+               </property>
+               <property name="textFormat">
+                <enum>Qt::AutoText</enum>
+               </property>
+               <property name="scaledContents">
+                <bool>false</bool>
+               </property>
+               <property name="wordWrap">
+                <bool>true</bool>
+               </property>
+               <property name="indent">
+                <number>9</number>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <spacer name="verticalSpacer_4">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>20</width>
+                 <height>40</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+            </layout>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="sensorsTab">
          <attribute name="title">
           <string>Sensors</string>
          </attribute>
@@ -617,7 +1018,7 @@
            <number>12</number>
           </property>
           <item>
-           <widget class="QFrame" name="CCDListFrame">
+           <widget class="QFrame" name="sensorListFrame">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
               <horstretch>0</horstretch>
@@ -634,11 +1035,20 @@
              <property name="spacing">
               <number>0</number>
              </property>
-             <property name="margin">
+             <property name="leftMargin">
+              <number>0</number>
+             </property>
+             <property name="topMargin">
+              <number>0</number>
+             </property>
+             <property name="rightMargin">
+              <number>0</number>
+             </property>
+             <property name="bottomMargin">
               <number>0</number>
              </property>
              <item>
-              <widget class="QLabel" name="CCDlabel">
+              <widget class="QLabel" name="sensorListLabel">
                <property name="text">
                 <string>Sensors</string>
                </property>
@@ -661,7 +1071,7 @@
               </widget>
              </item>
              <item>
-              <widget class="QFrame" name="CCDframe_add_remove">
+              <widget class="QFrame" name="sensorsButtonFrame">
                <property name="frameShape">
                 <enum>QFrame::StyledPanel</enum>
                </property>
@@ -708,6 +1118,10 @@
                     <height>24</height>
                    </size>
                   </property>
+                  <property name="icon">
+                   <iconset resource="../../../../data/gui/guiRes.qrc">
+                    <normaloff>:/graphicGui/spinup.png</normaloff>:/graphicGui/spinup.png</iconset>
+                  </property>
                  </widget>
                 </item>
                 <item>
@@ -723,6 +1137,10 @@
                     <width>24</width>
                     <height>24</height>
                    </size>
+                  </property>
+                  <property name="icon">
+                   <iconset resource="../../../../data/gui/guiRes.qrc">
+                    <normaloff>:/graphicGui/spindown.png</normaloff>:/graphicGui/spindown.png</iconset>
                   </property>
                  </widget>
                 </item>
@@ -757,7 +1175,16 @@
              <property name="spacing">
               <number>0</number>
              </property>
-             <property name="margin">
+             <property name="leftMargin">
+              <number>0</number>
+             </property>
+             <property name="topMargin">
+              <number>0</number>
+             </property>
+             <property name="rightMargin">
+              <number>0</number>
+             </property>
+             <property name="bottomMargin">
               <number>0</number>
              </property>
              <item>
@@ -768,10 +1195,7 @@
                <property name="frameShadow">
                 <enum>QFrame::Raised</enum>
                </property>
-               <layout class="QFormLayout" name="CCDformLayout">
-                <property name="fieldGrowthPolicy">
-                 <enum>QFormLayout::FieldsStayAtSizeHint</enum>
-                </property>
+               <layout class="QGridLayout" name="gridLayout_4">
                 <item row="0" column="0">
                  <widget class="QLabel" name="CCDName_lbl">
                   <property name="text">
@@ -806,21 +1230,12 @@
                  </widget>
                 </item>
                 <item row="1" column="1">
-                 <widget class="QLineEdit" name="ccdResX">
-                  <property name="sizePolicy">
-                   <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                   </sizepolicy>
+                 <widget class="QSpinBox" name="ccdResX">
+                  <property name="minimum">
+                   <number>1</number>
                   </property>
-                  <property name="baseSize">
-                   <size>
-                    <width>100</width>
-                    <height>22</height>
-                   </size>
-                  </property>
-                  <property name="maxLength">
-                   <number>5</number>
+                  <property name="maximum">
+                   <number>9999</number>
                   </property>
                  </widget>
                 </item>
@@ -832,21 +1247,12 @@
                  </widget>
                 </item>
                 <item row="2" column="1">
-                 <widget class="QLineEdit" name="ccdResY">
-                  <property name="sizePolicy">
-                   <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                   </sizepolicy>
+                 <widget class="QSpinBox" name="ccdResY">
+                  <property name="minimum">
+                   <number>1</number>
                   </property>
-                  <property name="baseSize">
-                   <size>
-                    <width>100</width>
-                    <height>22</height>
-                   </size>
-                  </property>
-                  <property name="maxLength">
-                   <number>5</number>
+                  <property name="maximum">
+                   <number>9999</number>
                   </property>
                  </widget>
                 </item>
@@ -858,21 +1264,18 @@
                  </widget>
                 </item>
                 <item row="3" column="1">
-                 <widget class="QLineEdit" name="ccdChipX">
-                  <property name="sizePolicy">
-                   <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                   </sizepolicy>
+                 <widget class="QDoubleSpinBox" name="ccdChipX">
+                  <property name="decimals">
+                   <number>1</number>
                   </property>
-                  <property name="baseSize">
-                   <size>
-                    <width>100</width>
-                    <height>22</height>
-                   </size>
+                  <property name="minimum">
+                   <double>0.100000000000000</double>
                   </property>
-                  <property name="maxLength">
-                   <number>5</number>
+                  <property name="maximum">
+                   <double>9999.000000000000000</double>
+                  </property>
+                  <property name="singleStep">
+                   <double>0.100000000000000</double>
                   </property>
                  </widget>
                 </item>
@@ -884,21 +1287,18 @@
                  </widget>
                 </item>
                 <item row="4" column="1">
-                 <widget class="QLineEdit" name="ccdChipY">
-                  <property name="sizePolicy">
-                   <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                   </sizepolicy>
+                 <widget class="QDoubleSpinBox" name="ccdChipY">
+                  <property name="decimals">
+                   <number>1</number>
                   </property>
-                  <property name="baseSize">
-                   <size>
-                    <width>100</width>
-                    <height>22</height>
-                   </size>
+                  <property name="minimum">
+                   <double>0.100000000000000</double>
                   </property>
-                  <property name="maxLength">
-                   <number>5</number>
+                  <property name="maximum">
+                   <double>9999.000000000000000</double>
+                  </property>
+                  <property name="singleStep">
+                   <double>0.100000000000000</double>
                   </property>
                  </widget>
                 </item>
@@ -910,21 +1310,18 @@
                  </widget>
                 </item>
                 <item row="5" column="1">
-                 <widget class="QLineEdit" name="ccdPixelX">
-                  <property name="sizePolicy">
-                   <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                   </sizepolicy>
+                 <widget class="QDoubleSpinBox" name="ccdPixelX">
+                  <property name="decimals">
+                   <number>1</number>
                   </property>
-                  <property name="baseSize">
-                   <size>
-                    <width>100</width>
-                    <height>22</height>
-                   </size>
+                  <property name="minimum">
+                   <double>0.100000000000000</double>
                   </property>
-                  <property name="maxLength">
-                   <number>5</number>
+                  <property name="maximum">
+                   <double>99.000000000000000</double>
+                  </property>
+                  <property name="singleStep">
+                   <double>0.100000000000000</double>
                   </property>
                  </widget>
                 </item>
@@ -936,21 +1333,18 @@
                  </widget>
                 </item>
                 <item row="6" column="1">
-                 <widget class="QLineEdit" name="ccdPixelY">
-                  <property name="sizePolicy">
-                   <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                   </sizepolicy>
+                 <widget class="QDoubleSpinBox" name="ccdPixelY">
+                  <property name="decimals">
+                   <number>1</number>
                   </property>
-                  <property name="baseSize">
-                   <size>
-                    <width>100</width>
-                    <height>22</height>
-                   </size>
+                  <property name="minimum">
+                   <double>0.100000000000000</double>
                   </property>
-                  <property name="maxLength">
-                   <number>5</number>
+                  <property name="maximum">
+                   <double>99.000000000000000</double>
+                  </property>
+                  <property name="singleStep">
+                   <double>0.100000000000000</double>
                   </property>
                  </widget>
                 </item>
@@ -975,7 +1369,7 @@
           </item>
          </layout>
         </widget>
-        <widget class="QWidget" name="Telescopes">
+        <widget class="QWidget" name="telescopesTab">
          <attribute name="title">
           <string>Telescopes</string>
          </attribute>
@@ -996,7 +1390,7 @@
            <number>12</number>
           </property>
           <item>
-           <widget class="QFrame" name="ScopeListFrame">
+           <widget class="QFrame" name="telescopeListFrame">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
               <horstretch>0</horstretch>
@@ -1013,11 +1407,20 @@
              <property name="spacing">
               <number>0</number>
              </property>
-             <property name="margin">
+             <property name="leftMargin">
+              <number>0</number>
+             </property>
+             <property name="topMargin">
+              <number>0</number>
+             </property>
+             <property name="rightMargin">
+              <number>0</number>
+             </property>
+             <property name="bottomMargin">
               <number>0</number>
              </property>
              <item>
-              <widget class="QLabel" name="label_2">
+              <widget class="QLabel" name="telescopeListLabel">
                <property name="text">
                 <string>Telescopes</string>
                </property>
@@ -1034,7 +1437,7 @@
               </widget>
              </item>
              <item>
-              <widget class="QFrame" name="frame_3">
+              <widget class="QFrame" name="telescopeButtonsFrame">
                <layout class="QHBoxLayout" name="horizontalLayout">
                 <property name="leftMargin">
                  <number>0</number>
@@ -1075,6 +1478,10 @@
                     <height>24</height>
                    </size>
                   </property>
+                  <property name="icon">
+                   <iconset resource="../../../../data/gui/guiRes.qrc">
+                    <normaloff>:/graphicGui/spinup.png</normaloff>:/graphicGui/spinup.png</iconset>
+                  </property>
                  </widget>
                 </item>
                 <item>
@@ -1090,6 +1497,10 @@
                     <width>24</width>
                     <height>24</height>
                    </size>
+                  </property>
+                  <property name="icon">
+                   <iconset resource="../../../../data/gui/guiRes.qrc">
+                    <normaloff>:/graphicGui/spindown.png</normaloff>:/graphicGui/spindown.png</iconset>
                   </property>
                  </widget>
                 </item>
@@ -1124,12 +1535,21 @@
              <property name="spacing">
               <number>0</number>
              </property>
-             <property name="margin">
+             <property name="leftMargin">
+              <number>0</number>
+             </property>
+             <property name="topMargin">
+              <number>0</number>
+             </property>
+             <property name="rightMargin">
+              <number>0</number>
+             </property>
+             <property name="bottomMargin">
               <number>0</number>
              </property>
              <item>
               <widget class="QFrame" name="ScopeInfo">
-               <layout class="QFormLayout" name="formLayout_2">
+               <layout class="QFormLayout" name="gridLayout_5">
                 <item row="0" column="0">
                  <widget class="QLabel" name="label_8">
                   <property name="text">
@@ -1152,9 +1572,18 @@
                  </widget>
                 </item>
                 <item row="1" column="1">
-                 <widget class="QLineEdit" name="telescopeFL">
-                  <property name="maxLength">
-                   <number>5</number>
+                 <widget class="QDoubleSpinBox" name="telescopeFL">
+                  <property name="decimals">
+                   <number>1</number>
+                  </property>
+                  <property name="minimum">
+                   <double>1.000000000000000</double>
+                  </property>
+                  <property name="maximum">
+                   <double>99999.000000000000000</double>
+                  </property>
+                  <property name="singleStep">
+                   <double>0.100000000000000</double>
                   </property>
                  </widget>
                 </item>
@@ -1166,9 +1595,18 @@
                  </widget>
                 </item>
                 <item row="2" column="1">
-                 <widget class="QLineEdit" name="telescopeDiameter">
-                  <property name="maxLength">
-                   <number>8</number>
+                 <widget class="QDoubleSpinBox" name="telescopeDiameter">
+                  <property name="decimals">
+                   <number>1</number>
+                  </property>
+                  <property name="minimum">
+                   <double>1.000000000000000</double>
+                  </property>
+                  <property name="maximum">
+                   <double>9999.000000000000000</double>
+                  </property>
+                  <property name="singleStep">
+                   <double>0.100000000000000</double>
                   </property>
                  </widget>
                 </item>
@@ -1207,12 +1645,21 @@
           </item>
          </layout>
         </widget>
-        <widget class="QWidget" name="About">
+        <widget class="QWidget" name="aboutTab">
          <attribute name="title">
           <string comment="tab in plugin windows">About</string>
          </attribute>
          <layout class="QGridLayout" name="gridLayout">
-          <property name="margin">
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
            <number>0</number>
           </property>
           <item row="0" column="0">
@@ -1254,7 +1701,6 @@
   <tabstop>ocularAFov</tabstop>
   <tabstop>ocularFL</tabstop>
   <tabstop>ocularFieldStop</tabstop>
-  <tabstop>binocularsCheckBox</tabstop>
   <tabstop>ccdListView</tabstop>
   <tabstop>addCCD</tabstop>
   <tabstop>pushButtonMoveSensorUp</tabstop>
@@ -1279,6 +1725,8 @@
   <tabstop>telescopeVFlip</tabstop>
   <tabstop>textBrowser</tabstop>
  </tabstops>
- <resources/>
+ <resources>
+  <include location="../../../../data/gui/guiRes.qrc"/>
+ </resources>
  <connections/>
 </ui>

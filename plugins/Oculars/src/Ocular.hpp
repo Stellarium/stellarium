@@ -25,43 +25,54 @@
 #include <QSettings>
 
 class Telescope;
+class Lens;
 
 class Ocular : public QObject
 {
 	Q_OBJECT
-	Q_PROPERTY(QString name READ name WRITE setName)
+	Q_PROPERTY(bool binoculars READ isBinoculars WRITE setBinoculars)
+	Q_PROPERTY(bool permanentCrosshair READ hasPermanentCrosshair WRITE setPermanentCrosshair)
 	Q_PROPERTY(double appearentFOV READ appearentFOV WRITE setAppearentFOV)
 	Q_PROPERTY(double effectiveFocalLength READ effectiveFocalLength WRITE setEffectiveFocalLength)
 	Q_PROPERTY(double fieldStop READ fieldStop WRITE setFieldStop)
-	Q_PROPERTY(bool binoculars READ isBinoculars WRITE setBinoculars)
+	Q_PROPERTY(QString name READ name WRITE setName)
+	Q_PROPERTY(QString reticlePath READ reticlePath WRITE setReticlePath)
 public:
 	Ocular();
 	Q_INVOKABLE Ocular(const QObject& other);
 	virtual ~Ocular();
-	static Ocular* ocularFromSettings(QSettings* theSettings, int ocularIndex);
-	static Ocular* ocularModel();
+	static Ocular * ocularFromSettings(const QSettings * theSettings, const int ocularIndex);
+	void writeToSettings(QSettings * settings, const int index);
+	static Ocular * ocularModel(void);
 
-	const QString name() const;
-	void setName(QString aName);
-	double appearentFOV() const;
-	void setAppearentFOV(double fov);
-	double effectiveFocalLength() const;
-	void setEffectiveFocalLength(double fl);
-	double fieldStop() const;
-	void setFieldStop(double fs);
-	bool isBinoculars() const;
-	void setBinoculars(bool flag);
+	bool isBinoculars(void) const;
+	void setBinoculars(const bool flag);
+	bool hasPermanentCrosshair(void) const;
+	void setPermanentCrosshair(const bool flag);
+	double appearentFOV(void) const;
+	void setAppearentFOV(const double fov);
+	double effectiveFocalLength(void) const;
+	void setEffectiveFocalLength(const double fl);
+	double fieldStop(void) const;
+	void setFieldStop(const double fs);
+	QString name(void) const;
+	void setName(const QString aName);
+	QString reticlePath(void) const;
+	void setReticlePath(const QString path);
 
-	double actualFOV(Telescope *telescope) const;
-	double magnification(Telescope *telescope) const;
-	QMap<int, QString> propertyMap();
+	double actualFOV(const Telescope * telescope, const Lens *lens) const;
+	double magnification(const Telescope * telescope, const Lens *lens) const;
+	QMap<int, QString> propertyMap(void);
 
 private:
-	QString m_name;
+	bool m_binoculars;
+	bool m_permanetCrosshair;
 	double m_appearentFOV;
 	double m_effectiveFocalLength;
 	double m_fieldStop;
-	bool m_binoculars;
+	QString m_name;
+	QString m_reticlePath;
+	double m_reticleFOV;
 };
 
 

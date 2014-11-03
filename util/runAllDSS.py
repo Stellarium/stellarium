@@ -1,6 +1,8 @@
 #!/usr/bin/python
+#
 # Simple script which convert the FITS headers associated to Brian McLean DSS images into simplified JSON files
 # Fabien Chereau fchereau@eso.org
+#
 
 import sys
 import os

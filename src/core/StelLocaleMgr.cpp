@@ -34,33 +34,39 @@
 
 QMap<QString, QString> StelLocaleMgr::countryCodeToStringMap;
 
-StelLocaleMgr::StelLocaleMgr() : skyTranslator("stellarium", StelFileMgr::getLocaleDir(), ""), GMTShift(0)
+StelLocaleMgr::StelLocaleMgr()
+	: skyTranslator(NULL)
+	, timeFormat()
+	, dateFormat()
+	, timeZoneMode()
+	, GMTShift(0)
 {
 	//generateCountryList();
 
 	// Load from file
-	QString path;
-	try
+	QString path = StelFileMgr::findFile("data/countryCodes.dat");
+	if (path.isEmpty())
 	{
-		path = StelFileMgr::findFile("data/countryCodes.dat");
-	}
-	catch (std::runtime_error& e)
-	{
-		qWarning() << "ERROR - could not find country code data file." << e.what();
+		qWarning() << "ERROR - could not find country code data file.";
 		return;
 	}
 
 	QFile file(path);
-	file.open(QIODevice::ReadOnly);
-	QDataStream in(&file);	// read the data serialized from the file
-	in.setVersion(QDataStream::Qt_4_5);
-	in >> countryCodeToStringMap;
-	file.close();
+	if(file.open(QIODevice::ReadOnly))
+	{
+		QDataStream in(&file);	// read the data serialized from the file
+		in.setVersion(QDataStream::Qt_4_5);
+		in >> countryCodeToStringMap;
+		file.close();
+	}
 }
 
 
 StelLocaleMgr::~StelLocaleMgr()
-{}
+{
+	delete skyTranslator;
+	skyTranslator=0;
+}
 
 // Mehtod which generates and save the map between 2 letters country code and english country names
 void StelLocaleMgr::generateCountryList()
@@ -68,23 +74,27 @@ void StelLocaleMgr::generateCountryList()
 	// Load ISO 3166-1 two-letter country codes from file (slow)
 	// The format is "[code][tab][country name containing spaces][newline]"
 	QFile textFile("data/iso3166-1-alpha-2.utf8");
-	textFile.open(QFile::ReadOnly | QFile::Text);
-	QTextStream list(&textFile);
-	QString line;
-	while(!(line = list.readLine()).isNull())
+	if(textFile.open(QFile::ReadOnly | QFile::Text))
 	{
-		qDebug() << line.section(QChar('\t'), 0, 0) << ":" << line.section(QChar('\t'), 1, 1);
-		countryCodeToStringMap.insert(line.section(QChar('\t'), 0, 0), line.section(QChar('\t'), 1, 1));
+		QTextStream list(&textFile);
+		QString line;
+		while(!(line = list.readLine()).isNull())
+		{
+			qDebug() << line.section(QChar('\t'), 0, 0) << ":" << line.section(QChar('\t'), 1, 1);
+			countryCodeToStringMap.insert(line.section(QChar('\t'), 0, 0), line.section(QChar('\t'), 1, 1));
+		}
+		textFile.close();
 	}
-	textFile.close();
 
 	// Save to binary file
 	QFile binaryFile("data/countryCodes.dat");
-	binaryFile.open(QIODevice::WriteOnly);
-	QDataStream out(&binaryFile);    // save the data serialized to the file
-	out.setVersion(QDataStream::Qt_4_5);
-	out << countryCodeToStringMap;
-	binaryFile.close();
+	if(binaryFile.open(QIODevice::WriteOnly))
+	{
+		QDataStream out(&binaryFile);    // save the data serialized to the file
+		out.setVersion(QDataStream::Qt_4_5);
+		out << countryCodeToStringMap;
+		binaryFile.close();
+	}
 }
 
 void StelLocaleMgr::init()
@@ -92,8 +102,8 @@ void StelLocaleMgr::init()
 	QSettings* conf = StelApp::getInstance().getSettings();
 	Q_ASSERT(conf);
 
-	setSkyLanguage(conf->value("localization/sky_locale", "system").toString());
-	setAppLanguage(conf->value("localization/app_locale", "system").toString());
+	setSkyLanguage(conf->value("localization/sky_locale", "system").toString(), false);
+	setAppLanguage(conf->value("localization/app_locale", "system").toString(), false);
 
 	timeFormat = stringToSTimeFormat(conf->value("localization/time_display_format", "system_default").toString());
 	dateFormat = stringToSDateFormat(conf->value("localization/date_display_format", "system_default").toString());
@@ -104,7 +114,11 @@ void StelLocaleMgr::init()
 	{
 		timeZoneMode = STzSystemDefault;
 		// Set the program global intern timezones variables from the system locale
+		#ifdef _MSC_BUILD
+		_tzset();
+		#else
 		tzset();
+		#endif
 	}
 	else
 	{
@@ -125,23 +139,28 @@ void StelLocaleMgr::init()
 /*************************************************************************
  Set the application locale. This apply to GUI, console messages etc..
 *************************************************************************/
-void StelLocaleMgr::setAppLanguage(const QString& newAppLanguageName)
+void StelLocaleMgr::setAppLanguage(const QString& newAppLanguageName, bool refreshAll)
 {
 	// Update the translator with new locale name
-	StelTranslator::globalTranslator = StelTranslator("stellarium", StelFileMgr::getLocaleDir(), newAppLanguageName);
-	qDebug() << "Application language is " << StelTranslator::globalTranslator.getTrueLocaleName();
-	StelApp::getInstance().updateI18n();
+	Q_ASSERT(StelTranslator::globalTranslator);
+	delete StelTranslator::globalTranslator;
+	StelTranslator::globalTranslator = new StelTranslator("stellarium", newAppLanguageName);
+	qDebug() << "Application language is " << StelTranslator::globalTranslator->getTrueLocaleName();
+	if (refreshAll)
+		StelApp::getInstance().updateI18n();
 }
 
 /*************************************************************************
  Set the sky language.
 *************************************************************************/
-void StelLocaleMgr::setSkyLanguage(const QString& newSkyLanguageName)
+void StelLocaleMgr::setSkyLanguage(const QString& newSkyLanguageName, bool refreshAll)
 {
+	delete skyTranslator;
 	// Update the translator with new locale name
-	skyTranslator = StelTranslator("stellarium-skycultures", StelFileMgr::getLocaleDir(), newSkyLanguageName);
-	qDebug() << "Sky language is " << skyTranslator.getTrueLocaleName();
-	StelApp::getInstance().updateI18n();
+	skyTranslator = new StelTranslator("stellarium-skycultures", newSkyLanguageName);
+	qDebug() << "Sky language is " << skyTranslator->getTrueLocaleName();
+	if (refreshAll)
+		StelApp::getInstance().updateI18n();
 }
 
 /*************************************************************************
@@ -149,18 +168,18 @@ void StelLocaleMgr::setSkyLanguage(const QString& newSkyLanguageName)
 *************************************************************************/
 QString StelLocaleMgr::getSkyLanguage() const
 {
-	return skyTranslator.getTrueLocaleName();
+	return skyTranslator->getTrueLocaleName();
 }
 
 // Get the StelTranslator currently used for sky objects.
-StelTranslator& StelLocaleMgr::getSkyTranslator()
+const StelTranslator& StelLocaleMgr::getSkyTranslator() const
 {
-	return skyTranslator;
+	return *skyTranslator;
 }
 
-StelTranslator& StelLocaleMgr::getAppStelTranslator() const
+const StelTranslator &StelLocaleMgr::getAppStelTranslator() const
 {
-	return StelTranslator::globalTranslator;
+	return *StelTranslator::globalTranslator;
 }
 
 
@@ -257,14 +276,14 @@ QString StelLocaleMgr::getPrintableTimeLocal(double JD) const
 	switch (timeFormat)
 	{
 		case STimeSystemDefault:
-		return t.toString();
+			return t.toString();
 		case STime24h:
-		return t.toString("hh:mm:ss");
+			return t.toString("hh:mm:ss");
 		case STime12h:
-		return t.toString("hh:mm:ss ap");
+			return t.toString("hh:mm:ss ap");
 		default:
 			qWarning() << "WARNING: unknown date format, fallback to system default";
-		return t.toString(Qt::LocaleDate);
+			return t.toString(Qt::LocaleDate);
 	}
 }
 
@@ -316,9 +335,14 @@ void StelLocaleMgr::setCustomTzName(const QString& tzname)
 	if( customTzName != "")
 	{
 		// set the TZ environement variable and update c locale stuff
+		#ifdef _MSC_BUILD
+		_putenv(_strdup(qPrintable("TZ=" + customTzName)));
+		_tzset();
+		#else
 		putenv(strdup(qPrintable("TZ=" + customTzName)));
 		tzset();
-	}
+		#endif
+    }
 }
 
 float StelLocaleMgr::getGMTShift(double JD) const

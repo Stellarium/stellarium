@@ -45,13 +45,19 @@ using namespace TelescopeControlGlobals;
 
 
 TelescopeDialog::TelescopeDialog()
+	: telescopeCount(0)
+	, configuredSlot(0)
+	, configuredTelescopeIsNew(false)
 {
+	telescopeStatus[0] = StatusNA;
+	telescopeType[0] = ConnectionNA;
+
 	ui = new Ui_telescopeDialogForm;
-	
+
 	//TODO: Fix this - it's in the same plugin
 	telescopeManager = GETSTELMODULE(TelescopeControl);
 	telescopeListModel = new QStandardItemModel(0, ColumnCount);
-	
+
 	//TODO: This shouldn't be a hash...
 	statusString[StatusNA] = QString(N_("N/A"));
 	statusString[StatusStarting] = QString(N_("Starting"));
@@ -59,8 +65,6 @@ TelescopeDialog::TelescopeDialog()
 	statusString[StatusConnected] = QString(N_("Connected"));
 	statusString[StatusDisconnected] = QString(N_("Disconnected"));
 	statusString[StatusStopped] = QString(N_("Stopped"));
-	
-	telescopeCount = 0;
 }
 
 TelescopeDialog::~TelescopeDialog()
@@ -95,6 +99,13 @@ void TelescopeDialog::createDialogContent()
 {
 	ui->setupUi(dialog);
 	
+#ifdef Q_OS_WIN
+	//Kinetic scrolling for tablet pc and pc
+	QList<QWidget *> addscroll;
+	addscroll << ui->telescopeTreeView << ui->textBrowserHelp << ui->textBrowserAbout;
+	installKineticScrolling(addscroll);
+#endif
+
 	//Inherited connect
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
@@ -138,8 +149,8 @@ void TelescopeDialog::createDialogContent()
 	setHeaderNames();
 	
 	ui->telescopeTreeView->setModel(telescopeListModel);
-	ui->telescopeTreeView->header()->setMovable(false);
-	ui->telescopeTreeView->header()->setResizeMode(ColumnSlot, QHeaderView::ResizeToContents);
+	ui->telescopeTreeView->header()->setSectionsMovable(false);
+	ui->telescopeTreeView->header()->setSectionResizeMode(ColumnSlot, QHeaderView::ResizeToContents);
 	ui->telescopeTreeView->header()->setStretchLastSection(true);
 	
 	//Populating the list
@@ -197,7 +208,7 @@ void TelescopeDialog::createDialogContent()
 	if(telescopeCount > 0)
 	{
 		ui->telescopeTreeView->setFocus();
-		ui->telescopeTreeView->header()->setResizeMode(ColumnType, QHeaderView::ResizeToContents);
+		ui->telescopeTreeView->header()->setSectionResizeMode(ColumnType, QHeaderView::ResizeToContents);
 	}
 	else
 	{
@@ -238,16 +249,20 @@ void TelescopeDialog::setAboutText()
 	aboutPage += QString("<h2>%1</h2>").arg(q_("Telescope Control plug-in"));
 	aboutPage += "<h3>" + QString(q_("Version %1")).arg(TELESCOPE_CONTROL_VERSION) + "</h3>";
 	QFile aboutFile(":/telescopeControl/about.utf8");
-	aboutFile.open(QFile::ReadOnly | QFile::Text);
-	aboutPage += aboutFile.readAll();
-	aboutFile.close();
+	if(aboutFile.open(QFile::ReadOnly | QFile::Text))
+	{
+		aboutPage += aboutFile.readAll();
+		aboutFile.close();
+	}
 	aboutPage += "</body></html>";
 	
 	QString helpPage = "<html><head></head><body>";
 	QFile helpFile(":/telescopeControl/help.utf8");
-	helpFile.open(QFile::ReadOnly | QFile::Text);
-	helpPage += helpFile.readAll();
-	helpFile.close();
+	if(helpFile.open(QFile::ReadOnly | QFile::Text))
+	{
+		helpPage += helpFile.readAll();
+		helpFile.close();
+	}
 	helpPage += "</body></html>";
 	
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
@@ -550,7 +565,7 @@ void TelescopeDialog::buttonRemovePressed()
 	
 	//Make sure that the header section keeps it size
 	if(telescopeCount == 0)
-		ui->telescopeTreeView->header()->setResizeMode(ColumnType, QHeaderView::Interactive);
+		ui->telescopeTreeView->header()->setSectionResizeMode(ColumnType, QHeaderView::Interactive);
 	
 	//Remove the telescope from the table/tree
 	telescopeListModel->removeRow(ui->telescopeTreeView->currentIndex().row());
@@ -628,7 +643,7 @@ void TelescopeDialog::saveChanges(QString name, ConnectionType type)
 		ui->pushButtonChangeStatus->setEnabled(false);
 		ui->pushButtonConfigure->setEnabled(false);
 		ui->pushButtonRemove->setEnabled(false);
-		ui->telescopeTreeView->header()->setResizeMode(ColumnType, QHeaderView::Interactive);
+		ui->telescopeTreeView->header()->setSectionResizeMode(ColumnType, QHeaderView::Interactive);
 	}
 	else
 	{
@@ -636,7 +651,7 @@ void TelescopeDialog::saveChanges(QString name, ConnectionType type)
 		ui->telescopeTreeView->setCurrentIndex(telescopeListModel->index(0,0));
 		ui->pushButtonConfigure->setEnabled(true);
 		ui->pushButtonRemove->setEnabled(true);
-		ui->telescopeTreeView->header()->setResizeMode(ColumnType, QHeaderView::ResizeToContents);
+		ui->telescopeTreeView->header()->setSectionResizeMode(ColumnType, QHeaderView::ResizeToContents);
 	}
 	updateWarningTexts();
 	

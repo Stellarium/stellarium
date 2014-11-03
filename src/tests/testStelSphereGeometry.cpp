@@ -17,16 +17,20 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
+
+#include "config.h"
+#include "tests/testStelSphereGeometry.hpp"
+
 #include <QObject>
 #include <QtDebug>
-#include <QtTest>
+#include <QBuffer>
+#include <QTest>
+
 #include <stdexcept>
 
 #include "StelJsonParser.hpp"
 #include "StelSphereGeometry.hpp"
 #include "StelUtils.hpp"
-
-#include "tests/testStelSphereGeometry.hpp"
 
 QTEST_MAIN(TestStelSphericalGeometry)
 
@@ -81,6 +85,7 @@ void TestStelSphericalGeometry::initTestCase()
 	southPoleSquare.setContour(cpole);
 }
 
+//FIXME: Doesn't pass on Windows
 void TestStelSphericalGeometry::testSphericalCap()
 {
 	Vec3d p0(1,0,0);
@@ -320,8 +325,8 @@ void TestStelSphericalGeometry::testSphericalPolygon()
 	QVERIFY(smallSquare.contains(v0));
 	QVERIFY(bigSquareConvex.contains(v0));
 	QVERIFY(bigSquare.contains(v0));
-	// TODO fix
-	// QVERIFY(!holySquare.contains(v0));
+	// FIXME: '!holySquare.contains(v0)' returned FALSE.
+	//QVERIFY(!holySquare.contains(v0));
 
 	QVERIFY(!smallSquare.contains(v1));
 	QVERIFY(bigSquare.contains(v1));
@@ -367,8 +372,8 @@ void TestStelSphericalGeometry::testLoading()
 	QVERIFY(reg->getType()==SphericalRegion::Polygon);
 	qDebug() << reg->getArea()*180./M_PI*180/M_PI;
 
-	StelVertexArray vertexAr = reg->getOutlineVertexArray();
-	QVERIFY(vertexAr.primitiveType==StelVertexArray::Lines && vertexAr.vertex.size()%2==0);
+	//StelVertexArray vertexAr = reg->getOutlineVertexArray();
+	//QVERIFY(vertexAr.primitiveType==StelVertexArray::Lines && vertexAr.vertex.size()%2==0);
 }
 
 void TestStelSphericalGeometry::benchmarkContains()
@@ -416,10 +421,10 @@ void TestStelSphericalGeometry::testOctahedronPolygon()
 	OctahedronPolygon splittedSub(contour);
 	QCOMPARE(splittedSub.getArea(), smallSquareConvex.getArea());
 
-	QVector<Vec3d> va = northPoleSquare.getOutlineVertexArray().vertex;
-	QCOMPARE(va.size(),16);
-	va = southPoleSquare.getOutlineVertexArray().vertex;
-	QCOMPARE(va.size(),16);
+	//QVector<Vec3d> va = northPoleSquare.getOutlineVertexArray().vertex;
+	//QCOMPARE(va.size(),16);
+	//va = southPoleSquare.getOutlineVertexArray().vertex;
+	//QCOMPARE(va.size(),16);
 
 	// Copy
 	OctahedronPolygon splittedSubCopy;

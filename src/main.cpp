@@ -18,49 +18,70 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#include "StelMainWindow.hpp"
+#include "StelMainView.hpp"
 #include "StelTranslator.hpp"
 #include "StelLogger.hpp"
 #include "StelFileMgr.hpp"
 #include "CLIProcessor.hpp"
 #include "StelIniParser.hpp"
+#include "StelUtils.hpp"
+#ifndef DISABLE_SCRIPTING
+#include "StelScriptOutput.hpp"
+#endif
 
 #include <QDebug>
-#include <QApplication>
-#include <QMessageBox>
-#include <QTranslator>
-#include <QGLFormat>
-#include <QPlastiqueStyle>
+
+#ifndef USE_QUICKVIEW
+	#include <QApplication>
+	#include <QMessageBox>
+	#include <QStyleFactory>
+#else
+	#include <QGuiApplication>
+#endif
+#include <QCoreApplication>
+#include <QDir>
+#include <QFile>
 #include <QFileInfo>
 #include <QFontDatabase>
+#include <QGLFormat>
+#include <QGuiApplication>
+#include <QSettings>
+#include <QSplashScreen>
+#include <QString>
+#include <QStringList>
+#include <QTextStream>
+#include <QTranslator>
+#include <QNetworkDiskCache>
+
+#include <clocale>
+
 #ifdef Q_OS_WIN
-#include <windows.h>
+	#include <windows.h>
+	#ifdef _MSC_BUILD
+		#include <MMSystem.h>
+		#pragma comment(lib,"Winmm.lib")
+		#pragma comment(linker, "/SUBSYSTEM:windows /ENTRY:mainCRTStartup") // Hide console
+	#endif
 #endif //Q_OS_WIN
 
-//! @class GettextStelTranslator
-//! Provides i18n support through gettext.
-class GettextStelTranslator : public QTranslator
+//! @class CustomQTranslator
+//! Provides custom i18n support.
+class CustomQTranslator : public QTranslator
 {
+	using QTranslator::translate;
 public:
 	virtual bool isEmpty() const { return false; }
 
 	//! Overrides QTranslator::translate().
 	//! Calls StelTranslator::qtranslate().
-	//! Can handle the Qt disambiguation strings of translatable
-	//! widgets from compiled .ui files - they are interpreted as
-	//! gettext context strings. See http://www.gnu.org/software/gettext/manual/gettext.html#Contexts 
 	//! @param context Qt context string - IGNORED.
 	//! @param sourceText the source message.
-	//! @param comment optional parameter, Qt disambiguation
-	//! comment string is interpreted as a gettext context.
-	//! (msgctxt) string.
-	virtual QString translate(const char* context, const char* sourceText, const char* comment=0) const
+	//! @param comment optional parameter
+	virtual QString translate(const char *context, const char *sourceText, const char *disambiguation = 0, int n = -1) const
 	{
 		Q_UNUSED(context);
-		if (comment)
-			return StelTranslator::globalTranslator.qtranslate(sourceText, comment);
-		else
-			return q_(sourceText);
+		Q_UNUSED(n);
+		return StelTranslator::globalTranslator->qtranslate(sourceText, disambiguation);
 	}
 };
 
@@ -70,23 +91,25 @@ public:
 //! name specified on the command line located in the user data directory.
 void copyDefaultConfigFile(const QString& newPath)
 {
-	QString defaultConfigFilePath;
-	try
-	{
-		defaultConfigFilePath = StelFileMgr::findFile("data/default_config.ini");
-	}
-	catch (std::runtime_error& e)
-	{
+	QString defaultConfigFilePath = StelFileMgr::findFile("data/default_config.ini");
+	if (defaultConfigFilePath.isEmpty())
 		qFatal("ERROR copyDefaultConfigFile failed to locate data/default_config.ini. Please check your installation.");
-	}
 	QFile::copy(defaultConfigFilePath, newPath);
 	if (!StelFileMgr::exists(newPath))
 	{
 		qFatal("ERROR copyDefaultConfigFile failed to copy file %s  to %s. You could try to copy it by hand.",
 			qPrintable(defaultConfigFilePath), qPrintable(newPath));
 	}
+	QFile::setPermissions(newPath, QFile::permissions(newPath) | QFileDevice::WriteOwner);
 }
 
+//! Removes all items from the cache.
+void clearCache()
+{
+	QNetworkDiskCache* cacheMgr = new QNetworkDiskCache();
+	cacheMgr->setCacheDirectory(StelFileMgr::getCacheDir());
+	cacheMgr->clear(); // Removes all items from the cache.
+}
 
 // Main stellarium procedure
 int main(int argc, char **argv)
@@ -103,38 +126,43 @@ int main(int argc, char **argv)
 			timerGrain = 0;
 	}
 #endif
+#ifdef Q_OS_MAC
+	 char ** newArgv = (char**) malloc((argc + 2) * sizeof(*newArgv));
+	 memmove(newArgv, argv, sizeof(*newArgv) * argc);
+	 char * option = new char[20];
+	 char * value = new char[21];
+	 strcpy( option, "-platformpluginpath");
+	 strcpy( value, "../plugins/platforms");
+	 newArgv[argc++] = option;
+	 newArgv[argc++] = value;
+	 argv = newArgv;
+
+#endif
 
 	QCoreApplication::setApplicationName("stellarium");
 	QCoreApplication::setApplicationVersion(StelUtils::getApplicationVersion());
 	QCoreApplication::setOrganizationDomain("stellarium.org");
 	QCoreApplication::setOrganizationName("stellarium");
 
-#ifndef BUILD_FOR_MAEMO
-	QApplication::setStyle(new QPlastiqueStyle());
-#endif
+	// LP:1335611: Avoid troubles with search of the paths of the plugins (deployments troubles) --AW
+	#if QT_VERSION>=QT_VERSION_CHECK(5, 3, 1)
+	QCoreApplication::addLibraryPath(".");
+	#endif
+	
+	QGuiApplication::setDesktopSettingsAware(false);
 
-	// Handle command line options for alternative Qt graphics system types.
-	// DEFAULT_GRAPHICS_SYSTEM is defined per platform in the main CMakeLists.txt file.
-	// Avoid overriding if the user already specified the mode on the CLI.
-	bool doSetDefaultGraphicsSystem=true;
-	for (int i = 1; i < argc; ++i)
-	{
-		//QApplication accepts -graphicssystem only if
-		//its value is a separate argument (the next value in argv)
-		if (QString(argv[i]) == "-graphicssystem")
-		{
-			doSetDefaultGraphicsSystem = false;
-		}
-	}
-	// If the user didn't set the graphics-system on the command line, use the one provided at compile time.
-	if (doSetDefaultGraphicsSystem)
-	{
-		qDebug() << "Using default graphics system specified at build time: " << DEFAULT_GRAPHICS_SYSTEM;
-		QApplication::setGraphicsSystem(DEFAULT_GRAPHICS_SYSTEM);
-	}
-
+#ifndef USE_QUICKVIEW
+	QApplication::setStyle(QStyleFactory::create("Fusion"));
 	// The QApplication MUST be created before the StelFileMgr is initialized.
 	QApplication app(argc, argv);
+#else
+	QGuiApplication::setDesktopSettingsAware(false);
+	QGuiApplication app(argc, argv);
+#endif
+	QPixmap pixmap(":/splash.png");
+	QSplashScreen splash(pixmap);
+	splash.show();
+	app.processEvents();
 
 	// QApplication sets current locale, but
 	// we need scanf()/printf() and friends to always work in the C locale,
@@ -163,18 +191,18 @@ int main(int argc, char **argv)
 	// OK we start the full program.
 	// Print the console splash and get on with loading the program
 	QString versionLine = QString("This is %1 - http://www.stellarium.org").arg(StelUtils::getApplicationName());
-	QString copyrightLine = QString("Copyright (C) 2000-2012 Fabien Chereau et al");
+	QString copyrightLine = QString("Copyright (C) 2000-2014 Fabien Chereau et al");
 	int maxLength = qMax(versionLine.size(), copyrightLine.size());
 	qDebug() << qPrintable(QString(" %1").arg(QString().fill('-', maxLength+2)));
 	qDebug() << qPrintable(QString("[ %1 ]").arg(versionLine.leftJustified(maxLength, ' ')));
 	qDebug() << qPrintable(QString("[ %1 ]").arg(copyrightLine.leftJustified(maxLength, ' ')));
 	qDebug() << qPrintable(QString(" %1").arg(QString().fill('-', maxLength+2)));
-	qDebug() << "Writing log file to:" << StelLogger::getLogFileName();
+	qDebug() << "Writing log file to:" << QDir::toNativeSeparators(StelLogger::getLogFileName());
 	qDebug() << "File search paths:";
 	int n=0;
-	foreach (QString i, StelFileMgr::getSearchPaths())
+	foreach (const QString& i, StelFileMgr::getSearchPaths())
 	{
-		qDebug() << " " << n << ". " << i;
+		qDebug() << " " << n << ". " << QDir::toNativeSeparators(i);
 		++n;
 	}
 
@@ -190,21 +218,12 @@ int main(int argc, char **argv)
 		configName = "config.ini";
 	}
 
-	QString configFileFullPath;
-	try
+	QString configFileFullPath = StelFileMgr::findFile(configName, StelFileMgr::Flags(StelFileMgr::Writable|StelFileMgr::File));
+	if (configFileFullPath.isEmpty())
 	{
-		configFileFullPath = StelFileMgr::findFile(configName, StelFileMgr::Flags(StelFileMgr::Writable|StelFileMgr::File));
-	}
-	catch (std::runtime_error& e)
-	{
-		try
-		{
-			configFileFullPath = StelFileMgr::findFile(configName, StelFileMgr::New);
-		}
-		catch (std::runtime_error& e)
-		{
+		configFileFullPath = StelFileMgr::findFile(configName, StelFileMgr::New);
+		if (configFileFullPath.isEmpty())
 			qFatal("Could not create configuration file %s.", qPrintable(configName));
-		}
 	}
 
 	QSettings* confSettings = NULL;
@@ -243,6 +262,9 @@ int main(int argc, char **argv)
 				else
 				{
 					qDebug() << "Attempting to use an existing older config file.";
+					confSettings->setValue("main/version", QString(PACKAGE_VERSION)); // Upgrade version of config.ini
+					clearCache();
+					qDebug() << "Clear cache and update config.ini...";
 				}
 			}
 		}
@@ -256,112 +278,121 @@ int main(int argc, char **argv)
 			QFile(configFileFullPath).rename(backupFile);
 			copyDefaultConfigFile(configFileFullPath);
 			confSettings = new QSettings(configFileFullPath, StelIniFormat);
-			qWarning() << "Resetting defaults config file. Previous config file was backed up in " << backupFile;
+			qWarning() << "Resetting defaults config file. Previous config file was backed up in " << QDir::toNativeSeparators(backupFile);
+			clearCache();
 		}
 	}
 	else
 	{
-		qDebug() << "Config file " << configFileFullPath << " does not exist. Copying the default file.";
+		qDebug() << "Config file " << QDir::toNativeSeparators(configFileFullPath) << " does not exist. Copying the default file.";
 		copyDefaultConfigFile(configFileFullPath);
 		confSettings = new QSettings(configFileFullPath, StelIniFormat);
 	}
 
 	Q_ASSERT(confSettings);
-	qDebug() << "Config file is: " << configFileFullPath;
+	qDebug() << "Config file is: " << QDir::toNativeSeparators(configFileFullPath);
+
+	#ifndef DISABLE_SCRIPTING
+	QString outputFile = StelFileMgr::getUserDir()+"/output.txt";
+	if (confSettings->value("main/use_separate_output_file", false).toBool())
+		outputFile = StelFileMgr::getUserDir()+"/output-"+QDateTime::currentDateTime().toString("yyyyMMdd-HHmmss")+".txt";
+	StelScriptOutput::init(outputFile);
+	#endif
+
 
 	// Override config file values from CLI.
 	CLIProcessor::parseCLIArgsPostConfig(argList, confSettings);
 
-#ifdef Q_OS_WIN
-	bool safeMode = false; // used in Q_OS_WIN, but need the QGL::setPreferredPaintEngine() call here.
-#endif
-	if (!confSettings->value("main/use_qpaintenginegl2", true).toBool()
-		|| qApp->property("onetime_safe_mode").isValid()) {
-		// The user explicitely request to use the older paint engine.
-		QGL::setPreferredPaintEngine(QPaintEngine::OpenGL);
-#ifdef Q_OS_WIN
-		safeMode = true;
-#endif
-	}
+	// Support hi-dpi pixmaps
+	app.setAttribute(Qt::AA_UseHighDpiPixmaps);
 
-#ifdef Q_OS_MAC
-	// On Leopard (10.5) + ppc architecture, text display is buggy if OpenGL2 Qt paint engine is used.
-	if ((QSysInfo::MacintoshVersion == QSysInfo::MV_LEOPARD) && (QSysInfo::ByteOrder == QSysInfo::BigEndian))
-		QGL::setPreferredPaintEngine(QPaintEngine::OpenGL);
-#endif
-
-// On maemo we'll use the standard OS font
-#ifndef BUILD_FOR_MAEMO
 	// Add the DejaVu font that we use everywhere in the program
-	try
+	const QString& fName = StelFileMgr::findFile("data/DejaVuSans.ttf");
+	if (!fName.isEmpty())
+		QFontDatabase::addApplicationFont(fName);
+	
+	QString fileFont = confSettings->value("gui/base_font_file", "").toString();
+	if (!fileFont.isEmpty())
 	{
-		const QString& fName = StelFileMgr::findFile("data/DejaVuSans.ttf");
-		if (!fName.isEmpty())
-			QFontDatabase::addApplicationFont(fName);
-	}
-	catch (std::runtime_error& e)
-	{
-		// Removed this warning practically allowing to package the program without the font file.
-		// This is useful for distribution having already a package for DejaVu font.
-		// qWarning() << "ERROR while loading font DejaVuSans : " << e.what();
+		const QString& afName = StelFileMgr::findFile(QString("data/%1").arg(fileFont));
+		if (!afName.isEmpty() && !afName.contains("file not found"))
+			QFontDatabase::addApplicationFont(afName);
+		else
+			qWarning() << "ERROR while loading custom font " << QDir::toNativeSeparators(fileFont);
 	}
 
 	// Set the default application font and font size.
 	// Note that style sheet will possibly override this setting.
 #ifdef Q_OS_WIN
-
-	// On windows use Verdana font, to avoid unresolved bug with OpenGL1 Qt paint engine.
-	// See Launchpad question #111823 for more info
-	QFont tmpFont(safeMode ? "Verdana" : "DejaVu Sans");
+	// Let's try avoid ugly font rendering on Windows.
+	// Details: https://sourceforge.net/p/stellarium/discussion/278769/thread/810a1e5c/
+	QString baseFont = confSettings->value("gui/base_font_name", "Verdana").toString();
+	QFont tmpFont(baseFont);
 	tmpFont.setStyleHint(QFont::AnyStyle, QFont::OpenGLCompatible);
-
-	// Activate verdana by defaut for all win32 builds to see if it improves things.
-	// -> this seems to bring crippled arabic fonts with OpenGL2 paint engine..
-	// QFont tmpFont("Verdana");
 #else
-#ifdef Q_OS_MAC
-	QFont tmpFont("Verdana");
-#else
-	QFont tmpFont("DejaVu Sans");
-#endif
+	QString baseFont = confSettings->value("gui/base_font_name", "DejaVu Sans").toString();
+	QFont tmpFont(baseFont);
 #endif
 	tmpFont.setPixelSize(confSettings->value("gui/base_font_size", 13).toInt());
-//tmpFont.setFamily("Verdana");
-//tmpFont.setBold(true);
-	QApplication::setFont(tmpFont);
-#endif
+	QGuiApplication::setFont(tmpFont);
 
 	// Initialize translator feature
-	try
-	{
-		StelTranslator::init(StelFileMgr::findFile("data/iso639-1.utf8"));
-	}
-	catch (std::runtime_error& e)
-	{
-		qWarning() << "ERROR while loading translations: " << e.what() << endl;
-	}
-	// Use our gettext translator for Qt translations as well
-	GettextStelTranslator trans;
+	StelTranslator::init(StelFileMgr::getInstallationDir() + "/data/iso639-1.utf8");
+	
+	// Use our custom translator for Qt translations as well
+	CustomQTranslator trans;
 	app.installTranslator(&trans);
 
-	if (!QGLFormat::hasOpenGL())
-	{
+	StelMainView mainWin;
+
+	bool appCanRun = true;
+	// some basic diagnostics
+	if (!QGLFormat::hasOpenGL()){
+		qWarning() << "Oops... This system does not support OpenGL.";
 		QMessageBox::warning(0, "Stellarium", q_("This system does not support OpenGL."));
+		appCanRun = false;
 	}
 
-	StelMainWindow mainWin;
-	mainWin.init(confSettings);
-	app.exec();
-	mainWin.deinit();
+	if (!(QGLFormat::openGLVersionFlags() & QGLFormat::OpenGL_Version_2_1) && !(QGLFormat::openGLVersionFlags() & QGLFormat::OpenGL_ES_Version_2_0)) // Check supported version of OpenGL
+	{
+		// OK, minimal required version of OpenGL is 2.1 and OpenGL Shading Language is 1.20 (or OpenGL ES is 2.0 and GLSL ES is 2.0).
+		// Recommended OpenGL 3.0 and OpenGL Shading Language 1.30 and above.
+		// If platform does not support this version then say to user about troubles and quit from application.
+		#ifdef Q_OS_WIN
+		qWarning() << "Oops... Insufficient OpenGL version. Please update drivers, graphics hardware, or use MESA (or ANGLE) version.";
+		QMessageBox::warning(0, "Stellarium", q_("Insufficient OpenGL version. Please update drivers, graphics hardware, or use MESA (or ANGLE) version."));
+		#else
+		qWarning() << "Oops... Insufficient OpenGL version. Please update drivers, or graphics hardware.";
+		QMessageBox::warning(0, "Stellarium", q_("Insufficient OpenGL version. Please update drivers, or graphics hardware."));
+		#endif
+		appCanRun = false;
+	}
 
-	delete confSettings;
-	StelLogger::deinit();
+	if (appCanRun)
+	{
+		mainWin.init(confSettings);
+		splash.finish(&mainWin);
+		app.exec();
+		mainWin.deinit();
 
-	#ifdef Q_OS_WIN
-	if(timerGrain)
-		timeEndPeriod(timerGrain);
-	#endif //Q_OS_WIN
+		delete confSettings;
+		StelLogger::deinit();
 
-	return 0;
+		#ifdef Q_OS_WIN
+		if(timerGrain)
+			timeEndPeriod(timerGrain);
+		#endif //Q_OS_WIN
+		#ifdef Q_OS_MAC
+		delete(newArgv);
+		delete(option);
+		delete(value);
+		#endif
+
+		return 0;
+	}
+	else
+	{
+		app.quit();
+	}
 }
 

@@ -30,32 +30,23 @@
 #include <QDebug>
 #include <QMap>
 #include <QMapIterator>
+#include <QDir>
 
 StelSkyCultureMgr::StelSkyCultureMgr()
 {
-	QSet<QString> cultureDirNames;
-	
-	try
-	{
-		cultureDirNames = StelFileMgr::listContents("skycultures",StelFileMgr::Directory);
-	}
-	catch (std::runtime_error& e)
-	{
-		qWarning() << "ERROR while trying list sky cultures:" << e.what();	
-	}
+	QSet<QString> cultureDirNames = StelFileMgr::listContents("skycultures",StelFileMgr::Directory);
 	
 	foreach (const QString& dir, cultureDirNames)
 	{
-		try
+		QString pdFile = StelFileMgr::findFile("skycultures/" + dir + "/info.ini");
+		if (pdFile.isEmpty())
 		{
-			QSettings pd(StelFileMgr::findFile("skycultures/" + dir + "/info.ini"), StelIniFormat);
-			dirToNameEnglish[dir].englishName = pd.value("info/name").toString();
-			dirToNameEnglish[dir].author = pd.value("info/author").toString();
+			qWarning() << "WARNING: unable to successfully read info.ini file from skyculture dir" << QDir::toNativeSeparators(dir);
+			return;
 		}
-		catch (std::runtime_error& e)
-		{
-			qWarning() << "WARNING: unable to successfully read info.ini file from skyculture dir" << dir;
-		}
+		QSettings pd(pdFile, StelIniFormat);
+		dirToNameEnglish[dir].englishName = pd.value("info/name").toString();
+		dirToNameEnglish[dir].author = pd.value("info/author").toString();
 	}	
 }
 
@@ -78,7 +69,7 @@ bool StelSkyCultureMgr::setCurrentSkyCultureID(const QString& cultureDir)
 	// make sure culture definition exists before attempting or will die
 	if (directoryToSkyCultureEnglish(cultureDir) == "")
 	{
-		qWarning() << "Invalid sky culture directory: " << cultureDir;
+		qWarning() << "Invalid sky culture directory: " << QDir::toNativeSeparators(cultureDir);
 		return false;
 	}
 	currentSkyCultureDir = cultureDir;
@@ -105,6 +96,8 @@ bool StelSkyCultureMgr::setDefaultSkyCultureID(const QString& id)
 	
 QString StelSkyCultureMgr::getCurrentSkyCultureNameI18() const {return q_(currentSkyCulture.englishName);}
 
+QString StelSkyCultureMgr::getCurrentSkyCultureEnglishName() const {return currentSkyCulture.englishName;}
+
 //! returns newline delimited list of human readable culture names in english
 QString StelSkyCultureMgr::getSkyCultureListEnglish(void)
 {
@@ -128,6 +121,8 @@ QStringList StelSkyCultureMgr::getSkyCultureListI18(void)
 		i.next();
 		cultures += q_(i.value().englishName);
 	}
+	// Sort for GUI use. Note that e.g. German Umlauts are sorted after Z. TODO: Fix this!
+	cultures.sort(Qt::CaseInsensitive);
 	return cultures;
 }
 
@@ -147,7 +142,7 @@ QString StelSkyCultureMgr::directoryToSkyCultureI18(const QString& directory) co
 	if (culture=="")
 	{
 		qWarning() << "WARNING: StelSkyCultureMgr::directoryToSkyCultureI18(\""
-		           << directory << "\"): could not find directory";
+			   << QDir::toNativeSeparators(directory) << "\"): could not find directory";
 		return "";
 	}
 	return q_(culture);

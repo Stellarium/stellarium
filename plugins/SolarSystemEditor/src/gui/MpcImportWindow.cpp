@@ -29,8 +29,9 @@
 #include "StelModuleMgr.hpp"
 #include "StelTranslator.hpp"
 #include "SolarSystem.hpp"
+#include "StelProgressController.hpp"
 
-#include <QApplication>
+#include <QGuiApplication>
 #include <QClipboard>
 #include <QDesktopServices>
 #include <QFileDialog>
@@ -45,12 +46,16 @@
 #include <QTemporaryFile>
 #include <QTimer>
 #include <QUrl>
+#include <QUrlQuery>
+#include <QDir>
 
-MpcImportWindow::MpcImportWindow() :
-    downloadReply(0),
-    queryReply(0),
-    downloadProgressBar(0),
-    queryProgressBar(0)
+MpcImportWindow::MpcImportWindow()
+	: importType(ImportType())
+	, downloadReply(0)
+	, queryReply(0)
+	, downloadProgressBar(0)
+	, queryProgressBar(0)
+	, countdown(0)
 {
 	ui = new Ui_mpcImportWindow();
 	ssoManager = GETSTELMODULE(SolarSystemEditor);
@@ -78,9 +83,9 @@ MpcImportWindow::~MpcImportWindow()
 	if (queryReply)
 		queryReply->deleteLater();
 	if (downloadProgressBar)
-		downloadProgressBar->deleteLater();
+		StelApp::getInstance().removeProgressBar(downloadProgressBar);
 	if (queryProgressBar)
-		queryProgressBar->deleteLater();
+		StelApp::getInstance().removeProgressBar(queryProgressBar);
 }
 
 void MpcImportWindow::createDialogContent()
@@ -311,15 +316,14 @@ void MpcImportWindow::discardObjects()
 
 void MpcImportWindow::pasteClipboardURL()
 {
-	ui->lineEditURL->setText(QApplication::clipboard()->text());
+	ui->lineEditURL->setText(QGuiApplication::clipboard()->text());
 }
 
 void MpcImportWindow::selectFile()
 {
-	QString directory = QDesktopServices::storageLocation(QDesktopServices::DesktopLocation);
-	if (directory.isEmpty())
-		directory = QDesktopServices::storageLocation(QDesktopServices::HomeLocation);
-        QString filePath = QFileDialog::getOpenFileName(NULL, "Select a text file", directory);
+	QStringList directories = QStandardPaths::standardLocations(QStandardPaths::DesktopLocation) +
+							  QStandardPaths::standardLocations(QStandardPaths::HomeLocation) << "/";
+	QString filePath = QFileDialog::getOpenFileName(NULL, "Select a text file", directories[0]);
 	ui->lineEditFilePath->setText(filePath);
 }
 
@@ -438,11 +442,11 @@ SsoElements MpcImportWindow::readElementsFromString (QString elements)
 
 	switch (importType)
 	{
-	case MpcComets:
-		return ssoManager->readMpcOneLineCometElements(elements);
-	case MpcMinorPlanets:
-	default:
-		return ssoManager->readMpcOneLineMinorPlanetElements(elements);
+		case MpcComets:
+			return ssoManager->readMpcOneLineCometElements(elements);
+		case MpcMinorPlanets:
+		default:
+			return ssoManager->readMpcOneLineMinorPlanetElements(elements);
 	}
 }
 
@@ -452,11 +456,11 @@ QList<SsoElements> MpcImportWindow::readElementsFromFile(ImportType type, QStrin
 
 	switch (type)
 	{
-	case MpcComets:
-		return ssoManager->readMpcOneLineCometElementsFromFile(filePath);
-	case MpcMinorPlanets:
-	default:
-		return ssoManager->readMpcOneLineMinorPlanetElementsFromFile(filePath);
+		case MpcComets:
+			return ssoManager->readMpcOneLineCometElementsFromFile(filePath);
+		case MpcMinorPlanets:
+		default:
+			return ssoManager->readMpcOneLineMinorPlanetElementsFromFile(filePath);
 	}
 }
 
@@ -527,15 +531,15 @@ void MpcImportWindow::updateDownloadProgress(qint64 bytesReceived, qint64 bytesT
 		//Round to the greatest possible derived unit
 		while (bytesTotal > 1024)
 		{
-			bytesReceived = std::floor(bytesReceived / 1024);
-			bytesTotal    = std::floor(bytesTotal / 1024);
+			bytesReceived = std::floor(bytesReceived / 1024.);
+			bytesTotal    = std::floor(bytesTotal / 1024.);
 		}
 		currentValue = bytesReceived;
 		endValue = bytesTotal;
 	}
 
 	downloadProgressBar->setValue(currentValue);
-	downloadProgressBar->setMaximum(endValue);
+	downloadProgressBar->setRange(0, endValue);
 }
 
 void MpcImportWindow::updateQueryProgress(qint64, qint64)
@@ -545,7 +549,7 @@ void MpcImportWindow::updateQueryProgress(qint64, qint64)
 
 	//Just show activity
 	queryProgressBar->setValue(0);
-	queryProgressBar->setMaximum(0);
+	queryProgressBar->setRange(0, 0);
 }
 
 void MpcImportWindow::startDownload(QString urlString)
@@ -567,11 +571,9 @@ void MpcImportWindow::startDownload(QString urlString)
 
 	//TODO: Interface changes!
 
-	downloadProgressBar = StelApp::getInstance().getGui()->addProgressBar();
+	downloadProgressBar = StelApp::getInstance().addProgressBar();
 	downloadProgressBar->setValue(0);
-	downloadProgressBar->setMaximum(0);
-	//downloadProgressBar->setFormat("%v/%m");
-	downloadProgressBar->setVisible(true);
+	downloadProgressBar->setRange(0, 0);
 
 	//TODO: Better handling of the interface
 	//dialog->setVisible(false);
@@ -679,8 +681,7 @@ void MpcImportWindow::deleteDownloadProgressBar()
 
 	if (downloadProgressBar)
 	{
-		downloadProgressBar->setVisible(false);
-		downloadProgressBar->deleteLater();
+		StelApp::getInstance().removeProgressBar(downloadProgressBar);
 		downloadProgressBar = NULL;
 	}
 }
@@ -695,11 +696,10 @@ void MpcImportWindow::sendQuery()
 		return;
 
 	//Progress bar
-	queryProgressBar = StelApp::getInstance().getGui()->addProgressBar();
+	queryProgressBar = StelApp::getInstance().addProgressBar();
 	queryProgressBar->setValue(0);
-	queryProgressBar->setMaximum(0);
-        queryProgressBar->setFormat("Searching...");
-	queryProgressBar->setVisible(true);
+	queryProgressBar->setRange(0, 0);
+	queryProgressBar->setFormat("Searching...");
 
 	//TODO: Better handling of the interface
 	enableInterface(false);
@@ -714,42 +714,43 @@ void MpcImportWindow::sendQuery()
 
 void MpcImportWindow::sendQueryToUrl(QUrl url)
 {
-	//QUrl url;
-	url.addQueryItem("ty","e");//Type: ephemerides
-	url.addQueryItem("TextArea", query);//Object name query
-	//url.addQueryItem("e", "-1");//Elements format: MPC 1-line
+	QUrlQuery q(url);
+	q.addQueryItem("ty","e");//Type: ephemerides
+	q.addQueryItem("TextArea", query);//Object name query
+	//q.addQueryItem("e", "-1");//Elements format: MPC 1-line
 	//XEphem's format is used instead because it doesn't truncate object names.
-	url.addQueryItem("e", "3");//Elements format: XEphem
+	q.addQueryItem("e", "3");//Elements format: XEphem
 	//Yes, all of the rest are necessary
-	url.addQueryItem("d","");
-	url.addQueryItem("l","");
-	url.addQueryItem("i","");
-	url.addQueryItem("u","d");
-	url.addQueryItem("uto", "0");
-	url.addQueryItem("c", "");
-	url.addQueryItem("long", "");
-	url.addQueryItem("lat", "");
-	url.addQueryItem("alt", "");
-	url.addQueryItem("raty", "a");
-	url.addQueryItem("s", "t");
-	url.addQueryItem("m", "m");
-	url.addQueryItem("adir", "S");
-	url.addQueryItem("oed", "");
-	url.addQueryItem("resoc", "");
-	url.addQueryItem("tit", "");
-	url.addQueryItem("bu", "");
-	url.addQueryItem("ch", "c");
-	url.addQueryItem("ce", "f");
-	url.addQueryItem("js", "f");
+	q.addQueryItem("d","");
+	q.addQueryItem("l","");
+	q.addQueryItem("i","");
+	q.addQueryItem("u","d");
+	q.addQueryItem("uto", "0");
+	q.addQueryItem("c", "");
+	q.addQueryItem("long", "");
+	q.addQueryItem("lat", "");
+	q.addQueryItem("alt", "");
+	q.addQueryItem("raty", "a");
+	q.addQueryItem("s", "t");
+	q.addQueryItem("m", "m");
+	q.addQueryItem("adir", "S");
+	q.addQueryItem("oed", "");
+	q.addQueryItem("resoc", "");
+	q.addQueryItem("tit", "");
+	q.addQueryItem("bu", "");
+	q.addQueryItem("ch", "c");
+	q.addQueryItem("ce", "f");
+	q.addQueryItem("js", "f");
+	url.setQuery(q);
 
 	QNetworkRequest request(url);
 	request.setHeader(QNetworkRequest::ContentTypeHeader,
 	                  "application/x-www-form-urlencoded");//Is this really necessary?
 	request.setHeader(QNetworkRequest::ContentLengthHeader,
-	                  url.encodedQuery().length());
+	                  url.query(QUrl::FullyEncoded).length());
 
 	connect(networkManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(receiveQueryReply(QNetworkReply*)));
-	queryReply = networkManager->post(request, url.encodedQuery());
+	queryReply = networkManager->post(request, url.query(QUrl::FullyEncoded).toUtf8());
 	connect(queryReply, SIGNAL(downloadProgress(qint64,qint64)), this, SLOT(updateQueryProgress(qint64,qint64)));
 }
 
@@ -883,8 +884,7 @@ void MpcImportWindow::deleteQueryProgressBar()
 	disconnect(this, SLOT(updateQueryProgress(qint64,qint64)));
 	if (queryProgressBar)
 	{
-		queryProgressBar->setVisible(false);
-		queryProgressBar->deleteLater();
+		StelApp::getInstance().removeProgressBar(queryProgressBar);
 		queryProgressBar = NULL;
 	}
 }
@@ -970,9 +970,16 @@ void MpcImportWindow::loadBookmarks()
 
 	//Initialize with hard-coded values
 	bookmarks[MpcMinorPlanets].insert("MPC's list of bright minor planets at opposition in 2011", "http://www.minorplanetcenter.net/iau/Ephemerides/Bright/2011/Soft00Bright.txt");
+	bookmarks[MpcMinorPlanets].insert("MPC's list of bright minor planets at opposition in 2013", "http://www.minorplanetcenter.net/iau/Ephemerides/Bright/2013/Soft00Bright.txt");
+	bookmarks[MpcMinorPlanets].insert("MPC's list of bright minor planets at opposition in 2014", "http://www.minorplanetcenter.net/iau/Ephemerides/Bright/2014/Soft00Bright.txt");
+	bookmarks[MpcMinorPlanets].insert("MPC's list of observable distant minor planets", "http://www.minorplanetcenter.net/iau/Ephemerides/Distant/Soft00Distant.txt");
 	bookmarks[MpcMinorPlanets].insert("MPCORB: near-Earth asteroids (NEAs)", "http://www.minorplanetcenter.net/iau/MPCORB/NEA.txt");
 	bookmarks[MpcMinorPlanets].insert("MPCORB: potentially hazardous asteroids (PHAs)", "http://www.minorplanetcenter.net/iau/MPCORB/PHA.txt");
+	bookmarks[MpcMinorPlanets].insert("MPCORB: TNOs, Centaurs and SDOs", "http://www.minorplanetcenter.net/iau/MPCORB/Distant.txt");
+	bookmarks[MpcMinorPlanets].insert("MPCORB: other unusual objects", "http://www.minorplanetcenter.net/iau/MPCORB/Unusual.txt");
+	bookmarks[MpcMinorPlanets].insert("MPCORB: orbits from the latest DOU MPEC", "http://www.minorplanetcenter.net/iau/MPCORB/DAILY.DAT");
 	bookmarks[MpcComets].insert("MPC's list of observable comets", "http://www.minorplanetcenter.net/iau/Ephemerides/Comets/Soft00Cmt.txt");
+	bookmarks[MpcComets].insert("MPCORB: comets", "http://www.minorplanetcenter.net/iau/MPCORB/CometEls.txt");
 
 	//Try to save them to a file
 	saveBookmarks();
@@ -1027,12 +1034,12 @@ void MpcImportWindow::saveBookmarks()
 			StelJsonParser::write(jsonRoot, &bookmarksFile);
 			bookmarksFile.close();
 
-			qDebug() << "Bookmarks file saved to" << bookmarksFilePath;
+			qDebug() << "Bookmarks file saved to" << QDir::toNativeSeparators(bookmarksFilePath);
 			return;
 		}
 		else
 		{
-			qDebug() << "Unable to write bookmarks file to" << bookmarksFilePath;
+			qDebug() << "Unable to write bookmarks file to" << QDir::toNativeSeparators(bookmarksFilePath);
 		}
 	}
 	catch (std::exception & e)

@@ -18,6 +18,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 */
 
+#include "config.h"
+
 #include <QDebug>
 #include <QTimer>
 #include <QDateTime>
@@ -33,11 +35,13 @@
 #include "StelMovementMgr.hpp"
 #include "StelStyle.hpp"
 #include "StelGui.hpp"
-#include "StelMainGraphicsView.hpp"
+#include "StelMainView.hpp"
 #include "StelFileMgr.hpp"
 #include "StelTranslator.hpp"
 
-PulsarsDialog::PulsarsDialog() : updateTimer(NULL)
+PulsarsDialog::PulsarsDialog()
+	: psr(NULL)
+	, updateTimer(NULL)
 {
 	ui = new Ui_pulsarsDialog;
 }
@@ -66,18 +70,32 @@ void PulsarsDialog::retranslate()
 // Initialize the dialog widgets and connect the signals/slots
 void PulsarsDialog::createDialogContent()
 {
+	psr = GETSTELMODULE(Pulsars);
 	ui->setupUi(dialog);
 	ui->tabs->setCurrentIndex(0);	
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()),
 		this, SLOT(retranslate()));
 
+#ifdef Q_OS_WIN
+	//Kinetic scrolling for tablet pc and pc
+	QList<QWidget *> addscroll;
+	addscroll << ui->aboutTextBrowser;
+	installKineticScrolling(addscroll);
+#endif
+
 	// Settings tab / updates group
-	ui->displayModeCheckBox->setChecked(GETSTELMODULE(Pulsars)->getDisplayMode());
+	ui->displayModeCheckBox->setChecked(psr->getDisplayMode());
 	connect(ui->displayModeCheckBox, SIGNAL(stateChanged(int)), this, SLOT(setDistributionEnabled(int)));
+	ui->displayAtStartupCheckBox->setChecked(psr->getEnableAtStartup());
+	connect(ui->displayAtStartupCheckBox, SIGNAL(stateChanged(int)), this, SLOT(setDisplayAtStartupEnabled(int)));
+	ui->displayShowPulsarsButton->setChecked(psr->getFlagShowPulsarsButton());
+	ui->displaySeparateColorsCheckBox->setChecked(psr->getGlitchFlag());
+	connect(ui->displaySeparateColorsCheckBox, SIGNAL(stateChanged(int)), this, SLOT(setSeparateColorsFlag(int)));
+	connect(ui->displayShowPulsarsButton, SIGNAL(stateChanged(int)), this, SLOT(setDisplayShowPulsarsButton(int)));
 	connect(ui->internetUpdatesCheckbox, SIGNAL(stateChanged(int)), this, SLOT(setUpdatesEnabled(int)));
 	connect(ui->updateButton, SIGNAL(clicked()), this, SLOT(updateJSON()));
-	connect(GETSTELMODULE(Pulsars), SIGNAL(updateStateChanged(Pulsars::UpdateState)), this, SLOT(updateStateReceiver(Pulsars::UpdateState)));
-	connect(GETSTELMODULE(Pulsars), SIGNAL(jsonUpdateComplete(void)), this, SLOT(updateCompleteReceiver(void)));
+	connect(psr, SIGNAL(updateStateChanged(Pulsars::UpdateState)), this, SLOT(updateStateReceiver(Pulsars::UpdateState)));
+	connect(psr, SIGNAL(jsonUpdateComplete(void)), this, SLOT(updateCompleteReceiver(void)));
 	connect(ui->updateFrequencySpinBox, SIGNAL(valueChanged(int)), this, SLOT(setUpdateValues(int)));
 	refreshUpdateValues(); // fetch values for last updated and so on
 	// if the state didn't change, setUpdatesEnabled will not be called, so we force it
@@ -95,8 +113,8 @@ void PulsarsDialog::createDialogContent()
 	// About tab
 	setAboutHtml();
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-	Q_ASSERT(gui);
-	ui->aboutTextBrowser->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
+	if(gui!=NULL)
+		ui->aboutTextBrowser->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
 
 	updateGuiFromSettings();
 
@@ -114,6 +132,7 @@ void PulsarsDialog::setAboutHtml(void)
 	html += "<p>" + QString(q_("Pulsar data is derived from 'The ATNF Pulsar Catalogue'  (Manchester, R. N., Hobbs, G. B., Teoh, A. & Hobbs, M., Astron. J., 129, 1993-2006 (2005) (%1astro-ph/0412641%2))."))
 			.arg("<a href=\"http://arxiv.org/abs/astro-ph/0412641\">")
 			.arg("</a>") + "</p>";
+	html += "<p>" + q_("Current catalog contains info about %1 pulsars.").arg(psr->getCountPulsars()) + "</p>";
 	html += "<p>" + QString("<strong>%1:</strong> %2")
 			.arg(q_("Note"))
 			.arg(q_("pulsar identifiers have the prefix 'PSR'")) + "</p>";
@@ -143,22 +162,24 @@ void PulsarsDialog::setAboutHtml(void)
 	html += "</ul></p></body></html>";
 
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-	Q_ASSERT(gui);
-	QString htmlStyleSheet(gui->getStelStyle().htmlStyleSheet);
-	ui->aboutTextBrowser->document()->setDefaultStyleSheet(htmlStyleSheet);
+	if(gui!=NULL)
+	{
+		QString htmlStyleSheet(gui->getStelStyle().htmlStyleSheet);
+		ui->aboutTextBrowser->document()->setDefaultStyleSheet(htmlStyleSheet);
+	}
 
 	ui->aboutTextBrowser->setHtml(html);
 }
 
 void PulsarsDialog::refreshUpdateValues(void)
 {
-	ui->lastUpdateDateTimeEdit->setDateTime(GETSTELMODULE(Pulsars)->getLastUpdate());
-	ui->updateFrequencySpinBox->setValue(GETSTELMODULE(Pulsars)->getUpdateFrequencyDays());
-	int secondsToUpdate = GETSTELMODULE(Pulsars)->getSecondsToUpdate();
-	ui->internetUpdatesCheckbox->setChecked(GETSTELMODULE(Pulsars)->getUpdatesEnabled());
-	if (!GETSTELMODULE(Pulsars)->getUpdatesEnabled())
+	ui->lastUpdateDateTimeEdit->setDateTime(psr->getLastUpdate());
+	ui->updateFrequencySpinBox->setValue(psr->getUpdateFrequencyDays());
+	int secondsToUpdate = psr->getSecondsToUpdate();
+	ui->internetUpdatesCheckbox->setChecked(psr->getUpdatesEnabled());
+	if (!psr->getUpdatesEnabled())
 		ui->nextUpdateLabel->setText(q_("Internet updates disabled"));
-	else if (GETSTELMODULE(Pulsars)->getUpdateState() == Pulsars::Updating)
+	else if (psr->getUpdateState() == Pulsars::Updating)
 		ui->nextUpdateLabel->setText(q_("Updating now..."));
 	else if (secondsToUpdate <= 60)
 		ui->nextUpdateLabel->setText(q_("Next update: < 1 minute"));
@@ -172,14 +193,14 @@ void PulsarsDialog::refreshUpdateValues(void)
 
 void PulsarsDialog::setUpdateValues(int days)
 {
-	GETSTELMODULE(Pulsars)->setUpdateFrequencyDays(days);
+	psr->setUpdateFrequencyDays(days);
 	refreshUpdateValues();
 }
 
 void PulsarsDialog::setUpdatesEnabled(int checkState)
 {
 	bool b = checkState != Qt::Unchecked;
-	GETSTELMODULE(Pulsars)->setUpdatesEnabled(b);
+	psr->setUpdatesEnabled(b);
 	ui->updateFrequencySpinBox->setEnabled(b);
 	if(b)
 		ui->updateButton->setText(q_("Update now"));
@@ -192,7 +213,25 @@ void PulsarsDialog::setUpdatesEnabled(int checkState)
 void PulsarsDialog::setDistributionEnabled(int checkState)
 {
 	bool b = checkState != Qt::Unchecked;
-	GETSTELMODULE(Pulsars)->setDisplayMode(b);
+	psr->setDisplayMode(b);
+}
+
+void PulsarsDialog::setDisplayAtStartupEnabled(int checkState)
+{
+	bool b = checkState != Qt::Unchecked;
+	psr->setEnableAtStartup(b);
+}
+
+void PulsarsDialog::setDisplayShowPulsarsButton(int checkState)
+{
+	bool b = checkState != Qt::Unchecked;
+	psr->setFlagShowPulsarsButton(b);
+}
+
+void PulsarsDialog::setSeparateColorsFlag(int checkState)
+{
+	bool b = checkState != Qt::Unchecked;
+	psr->setGlitchFlag(b);
 }
 
 void PulsarsDialog::updateStateReceiver(Pulsars::UpdateState state)
@@ -212,7 +251,7 @@ void PulsarsDialog::updateCompleteReceiver(void)
 	ui->nextUpdateLabel->setText(QString(q_("Pulsars is updated")));
 	// display the status for another full interval before refreshing status
 	updateTimer->start();
-	ui->lastUpdateDateTimeEdit->setDateTime(GETSTELMODULE(Pulsars)->getLastUpdate());
+	ui->lastUpdateDateTimeEdit->setDateTime(psr->getLastUpdate());
 	QTimer *timer = new QTimer(this);
 	connect(timer, SIGNAL(timeout()), this, SLOT(refreshUpdateValues()));
 }
@@ -220,26 +259,26 @@ void PulsarsDialog::updateCompleteReceiver(void)
 void PulsarsDialog::restoreDefaults(void)
 {
 	qDebug() << "Pulsars::restoreDefaults";
-	GETSTELMODULE(Pulsars)->restoreDefaults();
-	GETSTELMODULE(Pulsars)->readSettingsFromConfig();
+	psr->restoreDefaults();
+	psr->readSettingsFromConfig();
 	updateGuiFromSettings();
 }
 
 void PulsarsDialog::updateGuiFromSettings(void)
 {
-	ui->internetUpdatesCheckbox->setChecked(GETSTELMODULE(Pulsars)->getUpdatesEnabled());
+	ui->internetUpdatesCheckbox->setChecked(psr->getUpdatesEnabled());
 	refreshUpdateValues();
 }
 
 void PulsarsDialog::saveSettings(void)
 {
-	GETSTELMODULE(Pulsars)->saveSettingsToConfig();
+	psr->saveSettingsToConfig();
 }
 
 void PulsarsDialog::updateJSON(void)
 {
-	if(GETSTELMODULE(Pulsars)->getUpdatesEnabled())
+	if(psr->getUpdatesEnabled())
 	{
-		GETSTELMODULE(Pulsars)->updateJSON();
+		psr->updateJSON();
 	}
 }

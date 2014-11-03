@@ -17,31 +17,31 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#include <QDebug>
-#include <QFile>
-#ifdef Q_OS_WIN
-#include <io.h>
-#include <windows.h>
-#endif
-
 #include "ZoneArray.hpp"
 #include "StelApp.hpp"
 #include "StelFileMgr.hpp"
 #include "StelGeodesicGrid.hpp"
 #include "StelObject.hpp"
+#include "StelPainter.hpp"
 
-static unsigned int stel_bswap_32(unsigned int val) {
-  return (((val) & 0xff000000) >> 24) | (((val) & 0x00ff0000) >>  8) |
-	(((val) & 0x0000ff00) <<  8) | (((val) & 0x000000ff) << 24);
-}
+#include <QDebug>
+#include <QFile>
+#include <QDir>
+#ifdef Q_OS_WIN
+#include <io.h>
+#include <windows.h>
+#endif
 
-namespace BigStarCatalogExtension
+
+static unsigned int stel_bswap_32(unsigned int val)
 {
+	return (((val) & 0xff000000) >> 24) | (((val) & 0x00ff0000) >>  8) |
+	       (((val) & 0x0000ff00) <<  8) | (((val) & 0x000000ff) << 24);
+}
 
 static const Vec3f north(0,0,1);
 
-void ZoneArray::initTriangle(int index, const Vec3f &c0, const Vec3f &c1,
-							 const Vec3f &c2)
+void ZoneArray::initTriangle(int index, const Vec3f &c0, const Vec3f &c1, const Vec3f &c2)
 {
 	// initialize center,axis0,axis1:
 	ZoneData &z(zones[index]);
@@ -50,28 +50,31 @@ void ZoneArray::initTriangle(int index, const Vec3f &c0, const Vec3f &c1,
 	z.axis0 = north ^ z.center;
 	z.axis0.normalize();
 	z.axis1 = z.center ^ z.axis0;
-	// initialize star_position_scale:
-	double mu0,mu1,f,h;
+	
+	// Initialize star_position_scale. This scale is used to multiply stars position
+	// encoded as integers so that it optimize precision over the triangle.
+	// It has to be computed for each triangle because the relative orientation of the 2 axis is different for each triangle.
+	float mu0,mu1,f,h;
 	mu0 = (c0-z.center)*z.axis0;
 	mu1 = (c0-z.center)*z.axis1;
-	f = 1.0/sqrt(1.0-mu0*mu0-mu1*mu1);
-	h = fabs(mu0)*f;
+	f = 1.f/std::sqrt(1.f-mu0*mu0-mu1*mu1);
+	h = std::fabs(mu0)*f;
 	if (star_position_scale < h) star_position_scale = h;
-	h = fabs(mu1)*f;
+	h = std::fabs(mu1)*f;
 	if (star_position_scale < h) star_position_scale = h;
 	mu0 = (c1-z.center)*z.axis0;
 	mu1 = (c1-z.center)*z.axis1;
-	f = 1.0/sqrt(1.0-mu0*mu0-mu1*mu1);
-	h = fabs(mu0)*f;
+	f = 1.f/std::sqrt(1.f-mu0*mu0-mu1*mu1);
+	h = std::fabs(mu0)*f;
 	if (star_position_scale < h) star_position_scale = h;
-	h = fabs(mu1)*f;
+	h = std::fabs(mu1)*f;
 	if (star_position_scale < h) star_position_scale = h;
 	mu0 = (c2-z.center)*z.axis0;
 	mu1 = (c2-z.center)*z.axis1;
-	f = 1.0/sqrt(1.0-mu0*mu0-mu1*mu1);
-	h = fabs(mu0)*f;
+	f = 1.f/std::sqrt(1.f-mu0*mu0-mu1*mu1);
+	h = std::fabs(mu0)*f;
 	if (star_position_scale < h) star_position_scale = h;
-	h = fabs(mu1)*f;
+	h = std::fabs(mu1)*f;
 	if (star_position_scale < h) star_position_scale = h;
 }
 
@@ -82,7 +85,9 @@ static inline int ReadInt(QFile& file, unsigned int &x)
 }
 
 #if (!defined(__GNUC__))
+#ifndef _MSC_BUILD
 #warning Star catalogue loading has only been tested with gcc
+#endif
 #endif
 
 ZoneArray* ZoneArray::create(const QString& catalogFilePath, bool use_mmap)
@@ -91,10 +96,10 @@ ZoneArray* ZoneArray::create(const QString& catalogFilePath, bool use_mmap)
 	QFile* file = new QFile(catalogFilePath);
 	if (!file->open(QIODevice::ReadOnly))
 	{
-		qWarning() << "Error while loading " << catalogFilePath << ": failed to open file.";
+		qWarning() << "Error while loading " << QDir::toNativeSeparators(catalogFilePath) << ": failed to open file.";
 		return 0;
 	}
-	dbStr = "Loading \"" + catalogFilePath + "\": ";
+	dbStr = "Loading \"" + QDir::toNativeSeparators(catalogFilePath) + "\": ";
 	unsigned int magic,major,minor,type,level,mag_min,mag_range,mag_steps;
 	if (ReadInt(*file,magic) < 0 ||
 			ReadInt(*file,type) < 0 ||
@@ -137,12 +142,11 @@ ZoneArray* ZoneArray::create(const QString& catalogFilePath, bool use_mmap)
 	else if (magic == FILE_MAGIC)
 	{
 		// ok, FILE_MAGIC
-#if (!defined(__GNUC__))
+#if (!defined(__GNUC__) && !defined(_MSC_BUILD))
 		if (use_mmap)
 		{
 			// mmap only with gcc:
-			dbStr += "warning - you must convert catalogue "
-				  += "to native format before mmap loading";
+			dbStr += "warning - you must convert catalogue to native format before mmap loading";
 			qDebug(qPrintable(dbStr));
 
 			return 0;
@@ -164,66 +168,70 @@ ZoneArray* ZoneArray::create(const QString& catalogFilePath, bool use_mmap)
 
 	switch (type)
 	{
-	case 0:
-		if (major > MAX_MAJOR_FILE_VERSION)
-		{
-			dbStr += "warning - unsupported version ";
-		}
-		else
-		{
-			// When this assertion fails you must redefine Star1
-			// for your compiler.
-			// Because your compiler does not pack the data,
-			// which is crucial for this application.
-			Q_ASSERT(sizeof(Star1) == 28);
-			rval = new HipZoneArray(file, byte_swap, use_mmap, level, mag_min, mag_range, mag_steps);
-			if (rval == 0)
+		case 0:
+			if (major > MAX_MAJOR_FILE_VERSION)
 			{
-				dbStr += "error - no memory ";
+				dbStr += "warning - unsupported version ";
 			}
-		}
-		break;
-	case 1:
-		if (major > MAX_MAJOR_FILE_VERSION)
-		{
-			dbStr += "warning - unsupported version ";
-		}
-		else
-		{
-			// When this assertion fails you must redefine Star2
-			// for your compiler.
-			// Because your compiler does not pack the data,
-			// which is crucial for this application.
-			Q_ASSERT(sizeof(Star2) == 10);
-			rval = new SpecialZoneArray<Star2>(file, byte_swap, use_mmap, level, mag_min, mag_range, mag_steps);
-			if (rval == 0)
+			else
 			{
-				dbStr += "error - no memory ";
+				// When this assertion fails you must redefine Star1
+				// for your compiler.
+				// Because your compiler does not pack the data,
+				// which is crucial for this application.
+				Q_ASSERT(sizeof(Star1) == 28);
+				rval = new HipZoneArray(file, byte_swap, use_mmap, level, mag_min, mag_range, mag_steps);
+				if (rval == 0)
+				{
+					dbStr += "error - no memory ";
+				}
 			}
-		}
-		break;
-	case 2:
-		if (major > MAX_MAJOR_FILE_VERSION)
-		{
-			dbStr += "warning - unsupported version ";
-		}
-		else
-		{
-			// When this assertion fails you must redefine Star3
-			// for your compiler.
-			// Because your compiler does not pack the data,
-			// which is crucial for this application.
-			Q_ASSERT(sizeof(Star3) == 6);
-			rval = new SpecialZoneArray<Star3>(file, byte_swap, use_mmap, level, mag_min, mag_range, mag_steps);
-			if (rval == 0)
+			break;
+		case 1:
+			if (major > MAX_MAJOR_FILE_VERSION)
 			{
-				dbStr += "error - no memory ";
+				dbStr += "warning - unsupported version ";
 			}
-		}
-		break;
-	default:
-		dbStr += "error - bad file type ";
-		break;
+			else
+			{
+				// When this assertion fails you must redefine Star2
+				// for your compiler.
+				// Because your compiler does not pack the data,
+				// which is crucial for this application.
+#ifndef _MSC_BUILD
+				Q_ASSERT(sizeof(Star2) == 10);
+#endif
+				rval = new SpecialZoneArray<Star2>(file, byte_swap, use_mmap, level, mag_min, mag_range, mag_steps);
+				if (rval == 0)
+				{
+					dbStr += "error - no memory ";
+				}
+			}
+			break;
+		case 2:
+			if (major > MAX_MAJOR_FILE_VERSION)
+			{
+				dbStr += "warning - unsupported version ";
+			}
+			else
+			{
+				// When this assertion fails you must redefine Star3
+				// for your compiler.
+				// Because your compiler does not pack the data,
+				// which is crucial for this application.
+#ifndef _MSC_BUILD
+				Q_ASSERT(sizeof(Star3) == 6);
+#endif
+				rval = new SpecialZoneArray<Star3>(file, byte_swap, use_mmap, level, mag_min, mag_range, mag_steps);
+				if (rval == 0)
+				{
+					dbStr += "error - no memory ";
+				}
+			}
+			break;
+		default:
+			dbStr += "error - bad file type ";
+			break;
 	}
 	if (rval && rval->isInitialized())
 	{
@@ -281,7 +289,7 @@ void HipZoneArray::updateHipIndex(HipIndexStruct hipIndex[]) const
 	{
 		for (const Star1 *s = z->getStars()+z->size-1;s>=z->getStars();s--)
 		{
-			const int hip = s->hip;
+			const int hip = s->getHip();
 			if (hip < 0 || NR_OF_HIP < hip)
 			{
 				qDebug() << "ERROR: HipZoneArray::updateHipIndex: invalid HIP number:" << hip;
@@ -298,7 +306,7 @@ void HipZoneArray::updateHipIndex(HipIndexStruct hipIndex[]) const
 }
 
 template<class Star>
-void SpecialZoneArray<Star>::scaleAxis(void)
+void SpecialZoneArray<Star>::scaleAxis()
 {
 	star_position_scale /= Star::MaxPosVal;
 	for (ZoneData *z=zones+(nr_of_zones-1);z>=zones;z--)
@@ -417,32 +425,12 @@ SpecialZoneArray<Star>::SpecialZoneArray(QFile* file, bool byte_swap,bool use_mm
 						getZones()[z].stars = s;
 						s += getZones()[z].size;
 					}
-					if (
-#if (!defined(__GNUC__))
-						true
-#else
-						byte_swap
-#endif
-					)
-					{
-						s = stars;
-						for (unsigned int i=0;i<nr_of_stars;i++,s++)
-						{
-							s->repack(
-#if Q_BYTE_ORDER == Q_BIG_ENDIAN
-								// need for byte_swap on a BE machine means that catalog is LE
-								!byte_swap
-#else
-								// need for byte_swap on a LE machine means that catalog is BE
-								byte_swap
-#endif
-							);
-						}
-					}
 				}
 				file->close();
 			}
 		}
+		// GZ: Some diagnostics to understand the undocumented vars around mag.
+		// qDebug() << "SpecialZoneArray: mag_min=" << mag_min << ", mag_steps=" << mag_steps << ", mag_range=" << mag_range ;
 	}
 }
 
@@ -472,46 +460,86 @@ SpecialZoneArray<Star>::~SpecialZoneArray(void)
 }
 
 template<class Star>
-void SpecialZoneArray<Star>::draw(StelPainter* sPainter, int index, bool is_inside, const float *rcmag_table, StelCore* core, unsigned int maxMagStarName,
-				  float names_brightness) const
+void SpecialZoneArray<Star>::draw(StelPainter* sPainter, int index, bool isInsideViewport, const RCMag* rcmag_table,
+	int limitMagIndex, StelCore* core, int maxMagStarName, float names_brightness, const QVector<SphericalCap> &boundingCaps) const
 {
     StelSkyDrawer* drawer = core->getSkyDrawer();
-    SpecialZoneData<Star> *const z = getZones() + index;
     Vec3f vf;
-    const Star *const end = z->getStars() + z->size;
     static const double d2000 = 2451545.0;
-    const double movementFactor = (M_PI/180)*(0.0001/3600) * ((core->getJDay()-d2000)/365.25) / star_position_scale;
-    const float* tmpRcmag; // will point to precomputed rC in table
+    const float movementFactor = (M_PI/180)*(0.0001/3600) * ((core->getJDay()-d2000)/365.25) / star_position_scale;
+    
     // GZ, added for extinction
-    Extinction extinction=core->getSkyDrawer()->getExtinction();
-    const bool withExtinction=(drawer->getFlagHasAtmosphere() && extinction.getExtinctionCoefficient()>=0.01f);
-    const float k = (0.001f*mag_range)/mag_steps; // from StarMgr.cpp line 654
-
-    // go through all stars, which are sorted by magnitude (bright stars first)
-    for (const Star *s=z->getStars();s<end;++s)
+    const Extinction& extinction=core->getSkyDrawer()->getExtinction();
+    const bool withExtinction=drawer->getFlagHasAtmosphere() && extinction.getExtinctionCoefficient()>=0.01f;
+    const float k = 0.001f*mag_range/mag_steps; // from StarMgr.cpp line 654
+	
+	// Allow artificial cutoff:
+	// find the (integer) mag at which is just bright enough to be drawn.
+	int cutoffMagStep=limitMagIndex;
+	if (drawer->getFlagStarMagnitudeLimit())
+	{
+		cutoffMagStep = ((int)(drawer->getCustomStarMagnitudeLimit()*1000.f) - mag_min)*mag_steps/mag_range;
+		if (cutoffMagStep>limitMagIndex)
+			cutoffMagStep = limitMagIndex;
+	}
+	Q_ASSERT(cutoffMagStep<RCMAG_TABLE_SIZE);
+    
+	// Go through all stars, which are sorted by magnitude (bright stars first)
+	const SpecialZoneData<Star>* zoneToDraw = getZones() + index;
+	const Star* lastStar = zoneToDraw->getStars() + zoneToDraw->size;
+    for (const Star* s=zoneToDraw->getStars();s<lastStar;++s)
     {
-	tmpRcmag = rcmag_table+2*s->mag;
-	if (*tmpRcmag<=0.f) break; // no size for this and following (even dimmer, unextincted) stars? --> early exit
-	s->getJ2000Pos(z,movementFactor, vf);
+		// Artifical cutoff per magnitude
+		if (s->getMag() > cutoffMagStep)
+			break;
+    
+		// Because of the test above, the star should always be visible from this point.
+		
+		// Array of 2 numbers containing radius and magnitude
+		const RCMag* tmpRcmag = &rcmag_table[s->getMag()];
+		
+		// Get the star position from the array
+		s->getJ2000Pos(zoneToDraw, movementFactor, vf);
+		
+		// If the star zone is not strictly contained inside the viewport, eliminate from the 
+		// beginning the stars actually outside viewport.
+		if (!isInsideViewport)
+		{
+			vf.normalize();
+			bool isVisible = true;
+			foreach (const SphericalCap& cap, boundingCaps)
+			{
+				if (!cap.contains(vf))
+				{
+					isVisible = false;
+					continue;
+				}
+			}
+			if (!isVisible)
+				continue;
+		}
 
-	// GZ new:
-	if (withExtinction)
-	{
-	    //GZ: We must compute position first, then shift magnitude.
-	    Vec3d altAz=core->j2000ToAltAz(Vec3d(vf[0], vf[1], vf[2]), StelCore::RefractionOn);
-	    float extMagShift=0.0f;
-	    extinction.forward(&altAz, &extMagShift);
-            int extMagShiftStep=qMin((int)floor(extMagShift/k), 4096-mag_steps); // this number muist be equal StarMgr.cpp line 649
-	    tmpRcmag = rcmag_table+2*(s->mag+extMagShiftStep);
-	}
-
-	if (drawer->drawPointSource(sPainter, Vec3d(vf[0], vf[1], vf[2]), tmpRcmag, s->bV, !is_inside) && s->hasName() && s->mag < maxMagStarName && s->hasComponentID()<=1)
-	{
-	    const float offset = *tmpRcmag*0.7f;
-	    const Vec3f& colorr = (StelApp::getInstance().getVisionModeNight() ? Vec3f(0.8f, 0.0f, 0.0f) : StelSkyDrawer::indexToColor(s->bV))*0.75f;
-	    sPainter->setColor(colorr[0], colorr[1], colorr[2],names_brightness);
-	    sPainter->drawText(Vec3d(vf[0], vf[1], vf[2]), s->getNameI18n(), 0, offset, offset, false);
-	}
+		int extinctedMagIndex = s->getMag();
+		if (withExtinction)
+		{
+			Vec3f altAz(vf);
+			altAz.normalize();
+			core->j2000ToAltAzInPlaceNoRefraction(&altAz);
+			float extMagShift=0.0f;
+			extinction.forward(altAz, &extMagShift);
+			extinctedMagIndex = s->getMag() + (int)(extMagShift/k);
+			if (extinctedMagIndex >= cutoffMagStep) // i.e., if extincted it is dimmer than cutoff, so remove
+				continue;
+			tmpRcmag = &rcmag_table[extinctedMagIndex];
+		}
+	
+		if (drawer->drawPointSource(sPainter, vf, *tmpRcmag, s->getBVIndex(), !isInsideViewport) && s->hasName() && extinctedMagIndex < maxMagStarName && s->hasComponentID()<=1)
+		{
+			const float offset = tmpRcmag->radius*0.7f;
+			const Vec3f colorr = StelSkyDrawer::indexToColor(s->getBVIndex())*0.75f;
+			sPainter->setColor(colorr[0], colorr[1], colorr[2],names_brightness);
+			sPainter->drawText(Vec3d(vf[0], vf[1], vf[2]), s->getNameI18n(), 0, offset, offset, false);
+		}
     }
 }
 
@@ -536,4 +564,3 @@ void SpecialZoneArray<Star>::searchAround(const StelCore* core, int index, const
 	}
 }
 
-} // namespace BigStarCatalogExtension

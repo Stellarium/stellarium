@@ -21,14 +21,14 @@
 #ifndef _CONSTELLATIONMGR_HPP_
 #define _CONSTELLATIONMGR_HPP_
 
+#include "StelObjectType.hpp"
+#include "StelObjectModule.hpp"
+#include "StelProjectorType.hpp"
+
 #include <vector>
 #include <QString>
 #include <QStringList>
 #include <QFont>
-
-#include "StelObjectType.hpp"
-#include "StelObjectModule.hpp"
-#include "StelProjectorType.hpp"
 
 class StelToneReproducer;
 class StarMgr;
@@ -47,15 +47,15 @@ class ConstellationMgr : public StelObjectModule
 			   READ getFlagArt
 			   WRITE setFlagArt
 			   NOTIFY artDisplayedChanged)
-	Q_PROPERTY(bool artFadeDuration
+	Q_PROPERTY(float artFadeDuration
 			   READ getArtFadeDuration
 			   WRITE setArtFadeDuration
 			   NOTIFY artFadeDurationChanged)
-	Q_PROPERTY(bool artIntensity
+	Q_PROPERTY(float artIntensity
 			   READ getArtIntensity
 			   WRITE setArtIntensity
 			   NOTIFY artIntensityChanged)
-	Q_PROPERTY(bool boundariesColor
+	Q_PROPERTY(Vec3f boundariesColor
 			   READ getBoundariesColor
 			   WRITE setBoundariesColor
 			   NOTIFY boundariesColorChanged)
@@ -63,7 +63,7 @@ class ConstellationMgr : public StelObjectModule
 			   READ getFlagBoundaries
 			   WRITE setFlagBoundaries
 			   NOTIFY boundariesDisplayedChanged)
-	Q_PROPERTY(bool fontSize
+	Q_PROPERTY(float fontSize
 			   READ getFontSize
 			   WRITE setFontSize
 			   NOTIFY fontSizeChanged)
@@ -71,7 +71,7 @@ class ConstellationMgr : public StelObjectModule
 			   READ getFlagIsolateSelected
 			   WRITE setFlagIsolateSelected
 			   NOTIFY isolateSelectedChanged)
-	Q_PROPERTY(bool linesColor
+	Q_PROPERTY(Vec3f linesColor
 			   READ getLinesColor
 			   WRITE setLinesColor
 			   NOTIFY linesColorChanged)
@@ -79,7 +79,7 @@ class ConstellationMgr : public StelObjectModule
 			   READ getFlagLines
 			   WRITE setFlagLines
 			   NOTIFY linesDisplayedChanged)
-	Q_PROPERTY(bool namesColor
+	Q_PROPERTY(Vec3f namesColor
 			   READ getLabelsColor
 			   WRITE setLabelsColor
 			   NOTIFY namesColorChanged)
@@ -127,8 +127,18 @@ public:
 	//! Find and return the list of at most maxNbItem objects auto-completing the passed object I18n name.
 	//! @param objPrefix the case insensitive first letters of the searched object
 	//! @param maxNbItem the maximum number of returned object names
+	//! @param useStartOfWords the autofill mode for returned objects names
 	//! @return a vector of matching object name by order of relevance, or an empty vector if nothing match
-	virtual QStringList listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem=5) const;
+	virtual QStringList listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false) const;
+	//! Find and return the list of at most maxNbItem objects auto-completing the passed object English name.
+	//! @param objPrefix the case insensitive first letters of the searched object
+	//! @param maxNbItem the maximum number of returned object names
+	//! @param useStartOfWords the autofill mode for returned objects names
+	//! @return a vector of matching object name by order of relevance, or an empty vector if nothing match
+	virtual QStringList listMatchingObjects(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false) const;
+	virtual QStringList listAllObjects(bool inEnglish) const;
+	virtual QStringList listAllObjectsByType(const QString& objType, bool inEnglish) const { Q_UNUSED(objType) Q_UNUSED(inEnglish) return QStringList(); }
+	virtual QString getName() const { return "Constellations"; }
 
 	///////////////////////////////////////////////////////////////////////////
 	// Properties setters and getters
@@ -149,6 +159,11 @@ public slots:
 	double getArtIntensity() const;
 
 	//! Define boundary color
+	//! @param color The color of boundaries
+	//! @code
+	//! // example of usage in scripts
+	//! ConstellationMgr.setBoundariesColor(Vec3f(1.0,0.0,0.0));
+	//! @endcode
 	void setBoundariesColor(const Vec3f& color);
 	//! Get current boundary color
 	Vec3f getBoundariesColor() const;
@@ -164,6 +179,11 @@ public slots:
 	bool getFlagIsolateSelected(void) const;
 
 	//! Define line color
+	//! @param color The color of lines
+	//! @code
+	//! // example of usage in scripts
+	//! ConstellationMgr.setLinesColor(Vec3f(1.0,0.0,0.0));
+	//! @endcode
 	void setLinesColor(const Vec3f& color);
 	//! Get line color
 	Vec3f getLinesColor() const;
@@ -174,6 +194,11 @@ public slots:
 	bool getFlagLines(void) const;
 
 	//! Set label color for names
+	//! @param color The color of labels
+	//! @code
+	//! // example of usage in scripts
+	//! ConstellationMgr.setLabelsColor(Vec3f(1.0,0.0,0.0));
+	//! @endcode
 	void setLabelsColor(const Vec3f& color);
 	//! Get label color for names
 	Vec3f getLabelsColor() const;
@@ -246,6 +271,11 @@ private:
 	//!    the boundary separates.
 	//! @param conCatFile the path to the file which contains the constellation boundary data.
 	bool loadBoundaries(const QString& conCatFile);
+
+	//! Read seasonal rules for displaying constellations from the given file.
+	//! @param rulesFile Name of the file containing the seasonal rules
+	void loadSeasonalRules(const QString& rulesFile);
+
         //! Draw the constellation lines at the epoch given by the StelCore.
 	void drawLines(StelPainter& sPainter, const StelCore* core) const;
 	//! Draw the constellation art.

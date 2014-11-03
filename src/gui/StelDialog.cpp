@@ -19,12 +19,18 @@
 
 
 #include "StelDialog.hpp"
-#include "StelMainGraphicsView.hpp"
+#include "StelMainView.hpp"
+#include "StelGui.hpp"
+#include "StelApp.hpp"
 
 #include <QDebug>
 #include <QDialog>
 #include <QGraphicsProxyWidget>
 #include <QStyleOptionGraphicsItem>
+#include <QSettings>
+#ifdef Q_OS_WIN
+	#include <QScroller>
+#endif
 
 class CustomProxy : public QGraphicsProxyWidget
 {
@@ -46,20 +52,32 @@ class CustomProxy : public QGraphicsProxyWidget
 
 		virtual bool event(QEvent* event)
 		{
-			if (event->type()==QEvent::WindowDeactivate)
+			if (StelApp::getInstance().getSettings()->value("gui/flag_use_window_transparency", true).toBool())
 			{
-				widget()->setWindowOpacity(0.4);
-			}
-			if (event->type()==QEvent::WindowActivate)
-			{
-				widget()->setWindowOpacity(0.9);
+				switch (event->type())
+				{
+					case QEvent::WindowDeactivate:
+						widget()->setWindowOpacity(0.4);
+						break;
+					case QEvent::WindowActivate:
+					case QEvent::GrabMouse:
+						widget()->setWindowOpacity(0.9);
+						break;
+					default:
+						break;
+				}
 			}
 			return QGraphicsProxyWidget::event(event);
 		}
 };
 
-StelDialog::StelDialog(QObject* parent) : QObject(parent), dialog(NULL)
+StelDialog::StelDialog(QObject* parent)
+	: QObject(parent)
+	, dialog(NULL)
+	, proxy(NULL)
 {
+	if (parent == NULL)
+		setParent(StelMainView::getInstance().getGuiWidget());
 }
 
 StelDialog::~StelDialog()
@@ -70,8 +88,6 @@ StelDialog::~StelDialog()
 void StelDialog::close()
 {
 	setVisible(false);
-	StelMainGraphicsView::getInstance().scene()->setActiveWindow(0);
-	((QGraphicsWidget*)StelMainGraphicsView::getInstance().getStelAppGraphicsWidget())->setFocus(Qt::OtherFocusReason);
 }
 
 bool StelDialog::visible() const
@@ -83,11 +99,11 @@ void StelDialog::setVisible(bool v)
 {
 	if (v)
 	{
-		QSize screenSize = StelMainGraphicsView::getInstance().size();
+		QSize screenSize = StelMainView::getInstance().size();
 		if (dialog)
 		{
 			dialog->show();
-			StelMainGraphicsView::getInstance().scene()->setActiveWindow(proxy);
+			StelMainView::getInstance().scene()->setActiveWindow(proxy);
 			// If the main window has been resized, it is possible the dialog
 			// will be off screen.  Check for this and move it to a visible
 			// position if necessary
@@ -102,12 +118,18 @@ void StelDialog::setVisible(bool v)
 			proxy->setFocus();
 			return;
 		}
+
+		QGraphicsWidget* parent = qobject_cast<QGraphicsWidget*>(this->parent());
 		dialog = new QDialog(NULL);
+		// dialog->setParent(parent);
+		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+		Q_ASSERT(gui);
 		//dialog->setAttribute(Qt::WA_OpaquePaintEvent, true);
 		connect(dialog, SIGNAL(rejected()), this, SLOT(close()));
 		createDialogContent();
+		dialog->setStyleSheet(gui->getStelStyle().qtStyleSheet);
 
-		proxy = new CustomProxy(NULL, Qt::Tool);
+		proxy = new CustomProxy(parent, Qt::Tool);
 		proxy->setWidget(dialog);
 		QSizeF size = proxy->size();
 
@@ -118,7 +140,6 @@ void StelDialog::setVisible(bool v)
 		if (newY <-0)
 			newY = 0;
 		proxy->setPos(newX, newY);
-		StelMainGraphicsView::getInstance().scene()->addItem(proxy);
 		proxy->setWindowFrameMargins(2,0,2,2);
 		// (this also changes the bounding rectangle size)
 
@@ -126,7 +147,7 @@ void StelDialog::setVisible(bool v)
 		proxy->setCacheMode(QGraphicsItem::ItemCoordinateCache);
 
 		proxy->setZValue(100);
-		StelMainGraphicsView::getInstance().scene()->setActiveWindow(proxy);
+		StelMainView::getInstance().scene()->setActiveWindow(proxy);
 		proxy->setFocus();
 	}
 	else
@@ -134,6 +155,22 @@ void StelDialog::setVisible(bool v)
 		dialog->hide();
 		emit visibleChanged(false);
 		//proxy->clearFocus();
-		StelMainGraphicsView::getInstance().scene()->setActiveWindow(0);
+		StelMainView::getInstance().focusSky();
 	}
 }
+
+#ifdef Q_OS_WIN
+void StelDialog::installKineticScrolling(QList<QWidget *> addscroll)
+{
+	return; // Temporary disable feature, bug in Qt: https://bugreports.qt-project.org/browse/QTBUG-41299
+
+	if (StelApp::getInstance().getSettings()->value("gui/flag_enable_kinetic_scrolling", true).toBool() == false)
+		return;
+
+	foreach(QWidget * w, addscroll)
+	{
+		QScroller::grabGesture(w, QScroller::LeftMouseButtonGesture);
+		QScroller::scroller(w);
+	}
+}
+#endif

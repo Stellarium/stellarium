@@ -20,6 +20,8 @@
 #ifndef STELLOGGER_HPP
 #define STELLOGGER_HPP
 
+#include "config.h"
+
 #include <QString>
 #include <QFile>
 
@@ -39,7 +41,7 @@ public:
 	static void deinit();
 
 	//! Handler for qDebug() and friends. Writes message to log file at $USERDIR/log.txt and echoes to stderr.
-	static void debugLogHandler(QtMsgType, const char*);
+	static void debugLogHandler(QtMsgType, const QMessageLogContext&, const QString& str);
 
 	//! Return a copy of text of the log file.
 	static const QString& getLog() {return log;}
@@ -55,6 +57,8 @@ public:
 private:
 	static QFile logFile;
 	static QString log;
+	
+	static QString getMsvcVersionString(int ver);
 };
 
 #endif // STELLOGGER_HPP

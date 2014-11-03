@@ -20,13 +20,14 @@
 #ifndef _STELDIALOG_HPP_
 #define _STELDIALOG_HPP_
 
+#include "config.h"
 #include <QObject>
 
 //! @class StelDialog
 //! Base class for all the GUI windows in Stellarium.
 //! 
 //! Windows in Stellarium are actually basic QWidgets that have to be wrapped in
-//! a QGraphicsProxyWidget (CustomProxy) to be displayed by StelMainGraphicsView
+//! a QGraphicsProxyWidget (CustomProxy) to be displayed by StelMainView
 //! (which is derived from QGraphicsView). See the Qt documentation for details.
 //! 
 //! The base widget needs to be populated with controls in the implementation
@@ -44,6 +45,7 @@
 class StelDialog : public QObject
 {
 	Q_OBJECT
+	Q_PROPERTY(bool visible READ visible WRITE setVisible NOTIFY visibleChanged)
 public:
 	StelDialog(QObject* parent=NULL);
 	virtual ~StelDialog();
@@ -76,6 +78,11 @@ protected:
 	//! The main dialog
 	QWidget* dialog;
 	class CustomProxy* proxy;
+
+#ifdef Q_OS_WIN
+	//! Kinetic scrolling for lists.
+	void installKineticScrolling(QList<QWidget *> addscroll);
+#endif
 };
 
 #endif // _STELDIALOG_HPP_

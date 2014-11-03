@@ -230,17 +230,9 @@ QPushButton:hover#closeStelWindow {
 
 QPushButton#pushButtonGotoSearchSkyObject {
         border-radius: 0px;
-        border-left: none;
+        /* border-left: none; */
         padding: 2px;
         image: url(:/graphicGui/nv_searchButtonImage.png);
-}
-
-QPushButton#pushButtonMoveSensorUp, QPushButton#pushButtonMoveOcularUp, QPushButton#pushButtonMoveTelescopeUp {
-        image: url(:/graphicGui/nv_spinup.png);
-}
-
-QPushButton#pushButtonMoveSensorDown, QPushButton#pushButtonMoveOcularDown, QPushButton#pushButtonMoveTelescopeDown {
-        image: url(:/graphicGui/nv_spindown.png);
 }
 
 QPushButton#removeSatellitesButton, QPushButton#deleteSourceButton {
@@ -546,6 +538,10 @@ QCheckBox::indicator:checked {
 	image: url(:/graphicGui/nv_checkbox-checked.png);
 }
 
+QCheckBox::indicator:indeterminate {
+	image: url(:/graphicGui/nv_checkbox-partial.png);
+}
+
 QCheckBox::indicator:unchecked {
 	image: url(:/graphicGui/nv_checkbox-unchecked.png);
 }
@@ -558,8 +554,19 @@ QGroupBox::indicator:unchecked {
 	image: url(:/graphicGui/nv_checkbox-unchecked.png);
 }
 
+QListWidget::indicator, QListView::indicator {
+	width: 16px;
+	height: 16px;
+	margin: 0px;
+	background: none;
+}
+
 QListWidget::indicator:checked, QListView::indicator:checked {
 	image: url(:/graphicGui/nv_checkbox-checked.png);
+}
+
+QListWidget::indicator:indeterminate, QListView::indicator:indeterminate {
+	image: url(:/graphicGui/nv_checkbox-partial.png);
 }
 
 QListWidget::indicator:unchecked, QListView::indicator:unchecked {
@@ -747,6 +754,18 @@ QListView#listViewVoResources {
 	color: rgb(143, 143, 143);
 	font-size: 12px;
 }
+
+QTreeView::branch:has-children:!has-siblings:closed,
+QTreeView::branch:closed:has-children:has-siblings {
+         border-image: none;
+         image: url(:/graphicGui/nv_spinright.png);
+}
+
+QTreeView::branch:open:has-children:!has-siblings,
+QTreeView::branch:open:has-children:has-siblings  {
+         border-image: none;
+         image: url(:/graphicGui/nv_spindown.png);
+ }
 
 QDateEdit {
 	padding-right: 20px; /* make room for the arrows */

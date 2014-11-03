@@ -24,6 +24,7 @@
 #include "StelCore.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelMovementMgr.hpp"
+#include "StelLocaleMgr.hpp"
 #include "StelTranslator.hpp"
 
 #include "StelObjectMgr.hpp"
@@ -36,9 +37,12 @@
 #include <QSettings>
 #include <QString>
 #include <QStringList>
+#include <QtAlgorithms>
 #include <QTextEdit>
 #include <QLineEdit>
 #include <QComboBox>
+#include <QMenu>
+#include <QMetaEnum>
 
 #include "SimbadSearcher.hpp"
 
@@ -120,7 +124,7 @@ void CompletionLabel::updateText()
 
 const char* SearchDialog::DEF_SIMBAD_URL = "http://simbad.u-strasbg.fr/";
 
-SearchDialog::SearchDialog() : simbadReply(NULL)
+SearchDialog::SearchDialog(QObject* parent) : StelDialog(parent), simbadReply(NULL)
 {
 	ui = new Ui_searchDialogForm;
 	simbadSearcher = new SimbadSearcher(this);
@@ -158,10 +162,11 @@ SearchDialog::SearchDialog() : simbadReply(NULL)
 	greekLetters.insert("psi", QString(QChar(0x03C8)));
 	greekLetters.insert("omega", QString(QChar(0x03C9)));
 
-	QSettings* conf = StelApp::getInstance().getSettings();
-	Q_ASSERT(conf);
+	conf = StelApp::getInstance().getSettings();
 	useSimbad = conf->value("search/flag_search_online", true).toBool();	
+	useStartOfWords = conf->value("search/flag_start_words", false).toBool();
 	simbadServerUrl = conf->value("search/simbad_server_url", DEF_SIMBAD_URL).toString();
+	setCurrentCoordinateSystemKey(conf->value("search/coordinate_system", "equatorialJ2000").toString());
 }
 
 SearchDialog::~SearchDialog()
@@ -182,12 +187,102 @@ void SearchDialog::retranslate()
 		ui->retranslateUi(dialog);
 		ui->lineEditSearchSkyObject->setText(text);
 		populateSimbadServerList();
+		populateCoordinateSystemsList();
+		populateCoordinateAxis();
+		updateListTab();
 	}
 }
 
 void SearchDialog::styleChanged()
 {
 	// Nothing for now
+}
+
+void SearchDialog::setCurrentCoordinateSystemKey(QString key)
+{
+	const QMetaEnum& en = metaObject()->enumerator(metaObject()->indexOfEnumerator("CoordinateSystem"));
+	CoordinateSystem coordSystem = (CoordinateSystem)en.keyToValue(key.toLatin1().data());
+	if (coordSystem<0)
+	{
+		qWarning() << "[Search Tool] Unknown coordinate system: " << key << "setting \"equatorialJ2000\" instead";
+		coordSystem = equatorialJ2000;
+	}
+	setCurrentCoordinateSystem(coordSystem);
+}
+
+QString SearchDialog::getCurrentCoordinateSystemKey() const
+{
+	return metaObject()->enumerator(metaObject()->indexOfEnumerator("CoordinateSystem")).key(currentCoordinateSystem);
+}
+
+void SearchDialog::populateCoordinateSystemsList()
+{
+	Q_ASSERT(ui->coordinateSystemComboBox);
+
+	QComboBox* csys = ui->coordinateSystemComboBox;
+
+	//Save the current selection to be restored later
+	csys->blockSignals(true);
+	int index = csys->currentIndex();
+	QVariant selectedSystemId = csys->itemData(index);
+	csys->clear();
+	//For each coordinate system, display the localized name and store the key as user
+	//data. Unfortunately, there's no other way to do this than with a cycle.
+	csys->addItem(qc_("Equatorial (J2000.0)", "coordinate system"), "equatorialJ2000");
+	csys->addItem(qc_("Equatorial", "coordinate system"), "equatorial");
+	csys->addItem(qc_("Horizontal", "coordinate system"), "horizontal");
+	csys->addItem(qc_("Galactic", "coordinate system"), "galactic");
+
+	//Restore the selection
+	index = csys->findData(selectedSystemId, Qt::UserRole, Qt::MatchCaseSensitive);
+	csys->setCurrentIndex(index);
+	csys->blockSignals(false);
+}
+
+void SearchDialog::populateCoordinateAxis()
+{
+	switch (getCurrentCoordinateSystem()) {
+		case equatorialJ2000:
+		case equatorial:
+		{
+			ui->AxisXLabel->setText(q_("Right ascension"));
+			ui->AxisXSpinBox->setDisplayFormat(AngleSpinBox::HMSLetters);
+			ui->AxisYLabel->setText(q_("Declination"));
+			ui->AxisYSpinBox->setDisplayFormat(AngleSpinBox::DMSSymbols);
+			ui->AxisYSpinBox->setPrefixType(AngleSpinBox::NormalPlus);
+			break;
+		}
+		case horizontal:
+		{
+			ui->AxisXLabel->setText(q_("Azimuth"));
+			ui->AxisXSpinBox->setDisplayFormat(AngleSpinBox::DMSLetters);
+			ui->AxisXSpinBox->setPrefixType(AngleSpinBox::NormalPlus);
+			ui->AxisYLabel->setText(q_("Altitude"));
+			ui->AxisYSpinBox->setDisplayFormat(AngleSpinBox::DMSSymbols);
+			ui->AxisYSpinBox->setPrefixType(AngleSpinBox::NormalPlus);
+			break;
+		}
+		case galactic:
+		{
+			ui->AxisXLabel->setText(q_("Longitude"));
+			ui->AxisXSpinBox->setDisplayFormat(AngleSpinBox::DMSLetters);
+			ui->AxisXSpinBox->setPrefixType(AngleSpinBox::NormalPlus);
+			ui->AxisYLabel->setText(q_("Latitude"));
+			ui->AxisYSpinBox->setDisplayFormat(AngleSpinBox::DMSSymbols);
+			ui->AxisYSpinBox->setPrefixType(AngleSpinBox::NormalPlus);
+			break;
+		}
+	}
+}
+
+void SearchDialog::setCoordinateSystem(int csID)
+{
+	QString currentCoordinateSystemID = ui->coordinateSystemComboBox->itemData(csID).toString();
+	setCurrentCoordinateSystemKey(currentCoordinateSystemID);
+	populateCoordinateAxis();
+	ui->AxisXSpinBox->setRadians(0.);
+	ui->AxisYSpinBox->setRadians(0.);
+	conf->setValue("search/coordinate_system", currentCoordinateSystemID);
 }
 
 // Initialize the dialog widgets and connect the signals/slots
@@ -202,14 +297,29 @@ void SearchDialog::createDialogContent()
 	onSearchTextChanged(ui->lineEditSearchSkyObject->text());
 	connect(ui->lineEditSearchSkyObject, SIGNAL(returnPressed()), this, SLOT(gotoObject()));
 	connect(ui->lineEditSearchSkyObject, SIGNAL(selectionChanged()), this, SLOT(setHasSelectedFlag()));
+	connect(ui->lineEditSearchSkyObject, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(showContextMenu(QPoint)));
 
-	ui->lineEditSearchSkyObject->installEventFilter(this);
-	ui->RAAngleSpinBox->setDisplayFormat(AngleSpinBox::HMSLetters);
-	ui->DEAngleSpinBox->setDisplayFormat(AngleSpinBox::DMSSymbols);
-	ui->DEAngleSpinBox->setPrefixType(AngleSpinBox::NormalPlus);
+	ui->lineEditSearchSkyObject->installEventFilter(this);	
 
-	connect(ui->RAAngleSpinBox, SIGNAL(valueChanged()), this, SLOT(manualPositionChanged()));
-	connect(ui->DEAngleSpinBox, SIGNAL(valueChanged()), this, SLOT(manualPositionChanged()));
+#ifdef Q_OS_WIN
+	//Kinetic scrolling for tablet pc and pc
+	QList<QWidget *> addscroll;
+	addscroll << ui->objectsListWidget;
+	installKineticScrolling(addscroll);
+#endif
+
+	populateCoordinateSystemsList();
+	populateCoordinateAxis();
+	int idx = ui->coordinateSystemComboBox->findData(getCurrentCoordinateSystemKey(), Qt::UserRole, Qt::MatchCaseSensitive);
+	if (idx==-1)
+	{
+		// Use equatorialJ2000 as default
+		idx = ui->coordinateSystemComboBox->findData(QVariant("equatorialJ2000"), Qt::UserRole, Qt::MatchCaseSensitive);
+	}
+	ui->coordinateSystemComboBox->setCurrentIndex(idx);
+	connect(ui->coordinateSystemComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(setCoordinateSystem(int)));
+	connect(ui->AxisXSpinBox, SIGNAL(valueChanged()), this, SLOT(manualPositionChanged()));
+	connect(ui->AxisYSpinBox, SIGNAL(valueChanged()), this, SLOT(manualPositionChanged()));
     
 	connect(ui->alphaPushButton, SIGNAL(clicked(bool)), this, SLOT(greekLetterClicked()));
 	connect(ui->betaPushButton, SIGNAL(clicked(bool)), this, SLOT(greekLetterClicked()));
@@ -236,20 +346,31 @@ void SearchDialog::createDialogContent()
 	connect(ui->psiPushButton, SIGNAL(clicked(bool)), this, SLOT(greekLetterClicked()));
 	connect(ui->omegaPushButton, SIGNAL(clicked(bool)), this, SLOT(greekLetterClicked()));
 
-	connect(ui->checkBoxUseSimbad, SIGNAL(clicked(bool)),
-		this, SLOT(enableSimbadSearch(bool)));
+	connect(ui->checkBoxUseSimbad, SIGNAL(clicked(bool)), this, SLOT(enableSimbadSearch(bool)));
 	ui->checkBoxUseSimbad->setChecked(useSimbad);
 
 	populateSimbadServerList();
-	int idx = ui->serverListComboBox->findData(simbadServerUrl, Qt::UserRole, Qt::MatchCaseSensitive);
+	idx = ui->serverListComboBox->findData(simbadServerUrl, Qt::UserRole, Qt::MatchCaseSensitive);
 	if (idx==-1)
 	{
 		// Use University of Strasbourg as default
 		idx = ui->serverListComboBox->findData(QVariant(DEF_SIMBAD_URL), Qt::UserRole, Qt::MatchCaseSensitive);
 	}
 	ui->serverListComboBox->setCurrentIndex(idx);
-	connect(ui->serverListComboBox, SIGNAL(currentIndexChanged(int)),
-	        this, SLOT(selectSimbadServer(int)));
+	connect(ui->serverListComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(selectSimbadServer(int)));
+
+	connect(ui->checkBoxUseStartOfWords, SIGNAL(clicked(bool)), this, SLOT(enableStartOfWordsAutofill(bool)));
+	ui->checkBoxUseStartOfWords->setChecked(useStartOfWords);
+
+	// list views initialization
+	connect(ui->objectTypeComboBox, SIGNAL(activated(int)), this, SLOT(updateListWidget(int)));
+	connect(ui->searchInListLineEdit, SIGNAL(textChanged(QString)), this, SLOT(searchListChanged(QString)));
+	connect(ui->searchInEnglishCheckBox, SIGNAL(toggled(bool)), this, SLOT(updateListTab()));
+	updateListTab();
+
+	// Set the focus directly on the line edit
+	if (ui->lineEditSearchSkyObject->isEnabled())
+		ui->lineEditSearchSkyObject->setFocus();
 }
 
 void SearchDialog::setHasSelectedFlag()
@@ -259,37 +380,63 @@ void SearchDialog::setHasSelectedFlag()
 
 void SearchDialog::enableSimbadSearch(bool enable)
 {
-	useSimbad = enable;
-	
-	QSettings* conf = StelApp::getInstance().getSettings();
-	Q_ASSERT(conf);
+	useSimbad = enable;	
 	conf->setValue("search/flag_search_online", useSimbad);	
 }
 
-void SearchDialog::setVisible(bool v)
+void SearchDialog::enableStartOfWordsAutofill(bool enable)
 {
-	StelDialog::setVisible(v);
-
-	// Set the focus directly on the line edit
-	if (ui->lineEditSearchSkyObject->isVisible())
-		ui->lineEditSearchSkyObject->setFocus();
+	useStartOfWords = enable;
+	conf->setValue("search/flag_start_words", useStartOfWords);
 }
 
 void SearchDialog::setSimpleStyle()
 {
-	ui->RAAngleSpinBox->setVisible(false);
-	ui->DEAngleSpinBox->setVisible(false);
+	ui->AxisXSpinBox->setVisible(false);
+	ui->AxisXSpinBox->setVisible(false);
 	ui->simbadStatusLabel->setVisible(false);
-	ui->raDecLabel->setVisible(false);
+	ui->AxisXLabel->setVisible(false);
+	ui->AxisYLabel->setVisible(false);
+	ui->coordinateSystemLabel->setVisible(false);
+	ui->coordinateSystemComboBox->setVisible(false);
 }
 
 
 void SearchDialog::manualPositionChanged()
 {
 	ui->completionLabel->clearValues();
-	StelMovementMgr* mvmgr = GETSTELMODULE(StelMovementMgr);
+	StelCore* core = StelApp::getInstance().getCore();
+	StelMovementMgr* mvmgr = GETSTELMODULE(StelMovementMgr);	
 	Vec3d pos;
-	StelUtils::spheToRect(ui->RAAngleSpinBox->valueRadians(), ui->DEAngleSpinBox->valueRadians(), pos);
+	switch (getCurrentCoordinateSystem()) {
+		case equatorialJ2000:
+		{
+			StelUtils::spheToRect(ui->AxisXSpinBox->valueRadians(), ui->AxisYSpinBox->valueRadians(), pos);
+			break;
+		}
+		case equatorial:
+		{
+			StelUtils::spheToRect(ui->AxisXSpinBox->valueRadians(), ui->AxisYSpinBox->valueRadians(), pos);
+			pos = core->equinoxEquToJ2000(pos);
+			break;
+		}
+		case horizontal:
+		{
+			double cx;
+			cx = 3.*M_PI - ui->AxisXSpinBox->valueRadians(); // N is zero, E is 90 degrees
+			if (cx > M_PI*2)
+				cx -= M_PI*2;
+			StelUtils::spheToRect(cx, ui->AxisYSpinBox->valueRadians(), pos);
+			pos = core->altAzToJ2000(pos);
+			break;
+		}
+		case galactic:
+		{
+			StelUtils::spheToRect(ui->AxisXSpinBox->valueRadians(), ui->AxisYSpinBox->valueRadians(), pos);
+			pos = core->galacticToJ2000(pos);
+			break;
+		}
+	}
 	mvmgr->setFlagTracking(false);
 	mvmgr->moveToJ2000(pos, 0.05);
 }
@@ -327,11 +474,22 @@ void SearchDialog::onSearchTextChanged(const QString& text)
 		QString greekText = substituteGreek(trimmedText);
 		QStringList matches;
 		if(greekText != trimmedText) {
-			matches = objectMgr->listMatchingObjectsI18n(trimmedText, 3);
-			matches += objectMgr->listMatchingObjectsI18n(greekText, (5 - matches.size()));
+			matches = objectMgr->listMatchingObjectsI18n(trimmedText, 3, useStartOfWords);
+			matches += objectMgr->listMatchingObjects(trimmedText, 3, useStartOfWords);
+			matches += objectMgr->listMatchingObjectsI18n(greekText, (8 - matches.size()), useStartOfWords);
 		} else {
-			matches = objectMgr->listMatchingObjectsI18n(trimmedText, 5);
+			matches = objectMgr->listMatchingObjectsI18n(trimmedText, 5, useStartOfWords);
+			matches += objectMgr->listMatchingObjects(trimmedText, 5, useStartOfWords);
 		}
+
+		// remove possible duplicates from completion list
+		matches.removeDuplicates();
+
+		matches.sort(Qt::CaseInsensitive);
+		// objects with short names should be searched first
+		// examples: Moon, Hydra (moon); Jupiter, Ghost of Jupiter
+		stringLengthCompare comparator;
+		qSort(matches.begin(), matches.end(), comparator);
 
 		ui->completionLabel->setValues(matches);
 		ui->completionLabel->selectFirst();
@@ -340,6 +498,7 @@ void SearchDialog::onSearchTextChanged(const QString& text)
 		ui->pushButtonGotoSearchSkyObject->setEnabled(true);
 	}
 }
+
 
 // Called when the current simbad query status changes
 void SearchDialog::onSimbadStatusChanged()
@@ -400,21 +559,25 @@ void SearchDialog::greekLetterClicked()
 void SearchDialog::gotoObject()
 {
 	QString name = ui->completionLabel->getSelected();
+	gotoObject(name);
+}
 
-	if (name.isEmpty())
+void SearchDialog::gotoObject(const QString &nameI18n)
+{
+	if (nameI18n.isEmpty())
 		return;
 
 	StelMovementMgr* mvmgr = GETSTELMODULE(StelMovementMgr);
-	if (simbadResults.contains(name))
+	if (simbadResults.contains(nameI18n))
 	{
 		close();
-		Vec3d pos = simbadResults[name];
+		Vec3d pos = simbadResults[nameI18n];
 		objectMgr->unSelect();
 		mvmgr->moveToJ2000(pos, mvmgr->getAutoMoveDuration());
 		ui->lineEditSearchSkyObject->clear();
 		ui->completionLabel->clearValues();
 	}
-	else if (objectMgr->findAndSelectI18n(name))
+	else if (objectMgr->findAndSelectI18n(nameI18n) || objectMgr->findAndSelect(nameI18n))
 	{
 		const QList<StelObjectP> newSelected = objectMgr->getSelectedObject();
 		if (!newSelected.empty())
@@ -422,7 +585,7 @@ void SearchDialog::gotoObject()
 			close();
 			ui->lineEditSearchSkyObject->clear();
 			ui->completionLabel->clearValues();
-			// Can't point to home planet			
+			// Can't point to home planet
 			if (newSelected[0]->getEnglishName()!=StelApp::getInstance().getCore()->getCurrentLocation().planetName)
 			{
 				mvmgr->moveToObject(newSelected[0], mvmgr->getAutoMoveDuration());
@@ -435,6 +598,23 @@ void SearchDialog::gotoObject()
 		}
 	}
 	simbadResults.clear();
+}
+
+void SearchDialog::gotoObject(QListWidgetItem *item)
+{
+	QString objName = item->text();
+	gotoObject(objName);
+}
+
+void SearchDialog::searchListChanged(const QString &newText)
+{
+	QList<QListWidgetItem*> items = ui->objectsListWidget->findItems(newText, Qt::MatchStartsWith);
+	ui->objectsListWidget->clearSelection();
+	if (!items.isEmpty())
+	{
+		items.at(0)->setSelected(true);
+		ui->objectsListWidget->scrollToItem(items.at(0));
+	}
 }
 
 bool SearchDialog::eventFilter(QObject*, QEvent *event)
@@ -494,7 +674,6 @@ QString SearchDialog::getGreekLetterByName(const QString& potentialGreekLetterNa
 
 void SearchDialog::populateSimbadServerList()
 {
-	Q_ASSERT(ui);
 	Q_ASSERT(ui->serverListComboBox);
 
 	QComboBox* servers = ui->serverListComboBox;
@@ -521,7 +700,55 @@ void SearchDialog::selectSimbadServer(int index)
 	else
 		simbadServerUrl = ui->serverListComboBox->itemData(index).toString();
 
-	QSettings* conf = StelApp::getInstance().getSettings();
-	Q_ASSERT(conf);
 	conf->setValue("search/simbad_server_url", simbadServerUrl);
+}
+
+void SearchDialog::updateListWidget(int index)
+{
+	QString moduleId = ui->objectTypeComboBox->itemData(index).toString();
+	ui->objectsListWidget->clear();
+	bool englishNames = ui->searchInEnglishCheckBox->isChecked();
+	ui->objectsListWidget->addItems(objectMgr->listAllModuleObjects(moduleId, englishNames));
+	ui->objectsListWidget->sortItems(Qt::AscendingOrder);
+	connect(ui->objectsListWidget, SIGNAL(itemClicked(QListWidgetItem*)), this, SLOT(gotoObject(QListWidgetItem*)));
+}
+
+void SearchDialog::updateListTab()
+{
+	if (StelApp::getInstance().getLocaleMgr().getAppLanguage().startsWith("en"))
+	{
+		// hide "names in English" checkbox
+		ui->searchInEnglishCheckBox->hide();
+	}
+	else
+	{
+		ui->searchInEnglishCheckBox->show();
+	}
+	ui->objectTypeComboBox->clear();
+	QMap<QString, QString> modulesMap = objectMgr->objectModulesMap();
+	for (QMap<QString, QString>::const_iterator it = modulesMap.begin(); it != modulesMap.end(); ++it)
+	{
+		if (!objectMgr->listAllModuleObjects(it.key(), ui->searchInEnglishCheckBox->isChecked()).isEmpty())
+		{
+			QString moduleName = (ui->searchInEnglishCheckBox->isChecked() ? it.value(): q_(it.value()));
+			ui->objectTypeComboBox->addItem(moduleName, QVariant(it.key()));
+		}
+	}
+	updateListWidget(ui->objectTypeComboBox->currentIndex());
+}
+
+void SearchDialog::showContextMenu(const QPoint &pt)
+{
+	QMenu *menu = ui->lineEditSearchSkyObject->createStandardContextMenu();
+	menu->addSeparator();
+	menu->addAction(q_("Paste and Search"), this, SLOT(pasteAndGo()));
+	menu->exec(ui->lineEditSearchSkyObject->mapToGlobal(pt));
+	delete menu;
+}
+
+void SearchDialog::pasteAndGo()
+{
+	ui->lineEditSearchSkyObject->clear(); // clear current text
+	ui->lineEditSearchSkyObject->paste(); // paste text from clipboard
+	gotoObject(); // go to first finded object
 }

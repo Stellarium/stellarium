@@ -6,6 +6,9 @@
 #  ICONV_LIBRARIES - Link these to use Iconv 
 #  ICONV_SECOND_ARGUMENT_IS_CONST - the second argument for iconv() is const
 # 
+# As of 7/27/2012 the version of libiconv.2.dyld in /usr/lib is incompatible with libintl.8.dylib in /opt/local/lib
+# HINTS are used before looking in the usual places...
+
 include(CheckCXXSourceCompiles)
 
 IF (ICONV_INCLUDE_DIR AND ICONV_LIBRARIES)
@@ -13,17 +16,26 @@ IF (ICONV_INCLUDE_DIR AND ICONV_LIBRARIES)
   SET(ICONV_FIND_QUIETLY TRUE)
 ENDIF (ICONV_INCLUDE_DIR AND ICONV_LIBRARIES)
 
-FIND_PATH(ICONV_INCLUDE_DIR iconv.h 
-  /usr/include 
-  /usr/local/include 
-) 
- 
-FIND_LIBRARY(ICONV_LIBRARIES NAMES iconv c
-  PATHS 
-  /usr/lib/
-  /usr/local/lib
-  ) 
- 
+IF(APPLE)
+    FIND_PATH(ICONV_INCLUDE_DIR iconv.h 
+        HINTS
+        /opt/local/include
+        /sw/include
+    )
+ELSE(NOT APPLE)
+    FIND_PATH(ICONV_INCLUDE_DIR iconv.h)
+ENDIF(APPLE)
+
+IF(APPLE)
+    FIND_LIBRARY(ICONV_LIBRARIES NAMES iconv
+        HINTS
+        /opt/local/lib
+        /sw/include
+    ) 
+ELSE(NOT APPLE)
+    FIND_LIBRARY(ICONV_LIBRARIES NAMES iconv c)
+ENDIF(APPLE)
+
 IF(ICONV_INCLUDE_DIR AND ICONV_LIBRARIES) 
    SET(ICONV_FOUND TRUE) 
 ENDIF(ICONV_INCLUDE_DIR AND ICONV_LIBRARIES) 

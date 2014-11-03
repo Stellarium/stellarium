@@ -23,7 +23,6 @@
 #include "StelObject.hpp"
 #include "StelFader.hpp"
 #include "StelTextureTypes.hpp"
-#include "StelPainter.hpp"
 #include "Exoplanet.hpp"
 #include <QFont>
 #include <QVariantMap>
@@ -33,12 +32,10 @@
 
 class QNetworkAccessManager;
 class QNetworkReply;
-class QProgressBar;
 class QSettings;
 class QTimer;
 class ExoplanetsDialog;
 class StelPainter;
-class QPixmap;
 class StelButton;
 
 typedef QSharedPointer<Exoplanet> ExoplanetP;
@@ -47,6 +44,7 @@ typedef QSharedPointer<Exoplanet> ExoplanetP;
 class Exoplanets : public StelObjectModule
 {
 	Q_OBJECT
+	Q_PROPERTY(bool showExoplanets READ getFlagShowExoplanets WRITE setFlagShowExoplanets)
 public:	
 	//! @enum UpdateState
 	//! Used for keeping for track of the download/update status
@@ -90,8 +88,21 @@ public:
 	//! Find and return the list of at most maxNbItem objects auto-completing the passed object I18n name.
 	//! @param objPrefix the case insensitive first letters of the searched object
 	//! @param maxNbItem the maximum number of returned object names
+	//! @param useStartOfWords the autofill mode for returned objects names
 	//! @return a list of matching object name by order of relevance, or an empty list if nothing match
-	virtual QStringList listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem=5) const;
+	virtual QStringList listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false) const;
+
+	//! Find and return the list of at most maxNbItem objects auto-completing the passed object English name.
+	//! @param objPrefix the case insensitive first letters of the searched object
+	//! @param maxNbItem the maximum number of returned object names
+	//! @param useStartOfWords the autofill mode for returned objects names
+	//! @return a list of matching object name by order of relevance, or an empty list if nothing match
+	virtual QStringList listMatchingObjects(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false) const;
+
+	virtual QStringList listAllObjects(bool inEnglish) const;
+	virtual QStringList listAllObjectsByType(const QString& objType, bool inEnglish) const { Q_UNUSED(objType) Q_UNUSED(inEnglish) return QStringList(); }
+
+	virtual QString getName() const { return "Exoplanets"; }
 
 	//! get a exoplanet object by identifier
 	ExoplanetP getByID(const QString& id);
@@ -107,10 +118,10 @@ public:
 
 	//! Read (or re-read) settings from the main config file.  This will be called from init and also
 	//! when restoring defaults (i.e. from the configuration dialog / restore defaults button).
-	void readSettingsFromConfig(void);
+	void loadConfiguration(void);
 
 	//! Save the settings to the main configuration file.
-	void saveSettingsToConfig(void);
+	void saveConfiguration(void);
 
 	//! get whether or not the plugin will try to update TLE data from the internet
 	//! @return true if updates are set to be done, false otherwise
@@ -118,6 +129,21 @@ public:
 	//! set whether or not the plugin will try to update TLE data from the internet
 	//! @param b if true, updates will be enabled, else they will be disabled
 	void setUpdatesEnabled(bool b) {updatesEnabled=b;}
+
+	bool getDisplayMode(void);
+	void setDisplayMode(bool b);
+
+	bool getTimelineMode(void);
+	void setTimelineMode(bool b);
+
+	bool getHabitableMode(void);
+	void setHabitableMode(bool b);
+
+	QString getMarkerColor(bool habitable);
+	void setMarkerColor(QString c, bool h);
+
+	void setEnableAtStartup(bool b) { enableAtStartup=b; }
+	bool getEnableAtStartup(void) { return enableAtStartup; }
 
 	//! get the date and time the TLE elements were updated
 	QDateTime getLastUpdate(void) {return lastUpdate;}
@@ -131,6 +157,24 @@ public:
 
 	//! Get the current updateState
 	UpdateState getUpdateState(void) {return updateState;}
+
+	//! Get count of planetary systems from catalog
+	int getCountPlanetarySystems(void) const
+	{
+		return PSCount;
+	}
+
+	//! Get count of exoplanets from catalog
+	int getCountAllExoplanets(void) const
+	{
+		return EPCountAll;
+	}
+
+	//! Get count of potentially habitable exoplanets from catalog
+	int getCountHabitableExoplanets(void) const
+	{
+		return EPCountPH;
+	}
 
 signals:
 	//! @param state the new update state.
@@ -147,6 +191,10 @@ public slots:
 	void setFlagShowExoplanets(bool b) { flagShowExoplanets=b; }
 	bool getFlagShowExoplanets(void) { return flagShowExoplanets; }
 
+	//! Define whether the button toggling exoplanets should be visible
+	void setFlagShowExoplanetsButton(bool b);
+	bool getFlagShowExoplanetsButton(void) { return flagShowExoplanetsButton; }
+
 	//! Display a message. This is used for plugin-specific warnings and such
 	void displayMessage(const QString& message, const QString hexColor="#999999");
 	void messageTimeout(void);
@@ -156,7 +204,10 @@ private:
 	QFont font;
 
 	// if existing, delete Satellites section in main config.ini, then create with default values
-	void restoreDefaultConfigIni(void);
+	void resetConfiguration(void);
+
+	// Upgrade config.ini: rename old key settings to new
+	void upgradeConfigIni(void);
 
 	//! replace the json file with the default from the compiled-in resource
 	void restoreDefaultJsonFile(void);
@@ -169,9 +220,13 @@ private:
 	//! @return true on OK, false on failure
 	bool backupJsonFile(bool deleteOriginal=false);
 
-	//! Get the version of catalog format from the "version" value in the exoplanets.json file
+	//! Get the version of catalog format from the "version of the format" value in the exoplanets.json file
 	//! @return version string, e.g. "1"
-	int getJsonFileVersion(void);
+	int getJsonFileFormatVersion(void);
+
+	//! Check format of the catalog of exoplanets
+	//! @return valid boolean, e.g. "true"
+	bool checkJsonFileFormat(void);
 
 	//! parse JSON file and load exoplanets to map
 	QVariantMap loadEPMap(QString path=QString());
@@ -181,31 +236,33 @@ private:
 
 	QString jsonCatalogPath;
 
+	int PSCount;
+	int EPCountAll;
+	int EPCountPH;
+
 	StelTextureSP texPointer;
 	QList<ExoplanetP> ep;
 
 	// variables and functions for the updater
 	UpdateState updateState;
 	QNetworkAccessManager* downloadMgr;
-	QString updateUrl;
-	QString updateFile;	
+	QString updateUrl;	
 	QTimer* updateTimer;
 	QTimer* messageTimer;
 	QList<int> messageIDs;
 	bool updatesEnabled;
 	QDateTime lastUpdate;
-	int updateFrequencyHours;
+	int updateFrequencyHours;	
+	bool enableAtStartup;
 
 	QSettings* conf;
 
 	// GUI
 	ExoplanetsDialog* exoplanetsConfigDialog;
 	bool flagShowExoplanets;
-	QPixmap* OnIcon;
-	QPixmap* OffIcon;
-	QPixmap* GlowIcon;
+	bool flagShowExoplanetsButton;
 	StelButton* toolbarButton;
-	QProgressBar* progressBar;
+	class StelProgressController* progressBar;
 
 private slots:
 	//! check to see if an update is required.  This is called periodically by a timer
@@ -217,7 +274,7 @@ private slots:
 };
 
 
-#include "fixx11h.h"
+
 #include <QObject>
 #include "StelPluginInterface.hpp"
 
@@ -225,6 +282,7 @@ private slots:
 class ExoplanetsStelPluginInterface : public QObject, public StelPluginInterface
 {
 	Q_OBJECT
+	Q_PLUGIN_METADATA(IID "stellarium.StelGuiPluginInterface/1.0")
 	Q_INTERFACES(StelPluginInterface)
 public:
 	virtual StelModule* getStelModule() const;

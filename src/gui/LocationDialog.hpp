@@ -31,7 +31,7 @@ class LocationDialog : public StelDialog
 {
 	Q_OBJECT
 public:
-	LocationDialog();
+	LocationDialog(QObject* parent);
 	virtual ~LocationDialog();
 	//! Notify that the application style changed
 	void styleChanged();
@@ -82,6 +82,7 @@ private slots:
 	void updateFromProgram(const StelLocation& location);
 	
 	//! Called when the map is clicked.
+	//! create new list for places nearby and feed into location list box.
 	void setPositionFromMap(double longitude, double latitude);
 	
 	//! Called when the user activates an item from the locations list.
@@ -97,14 +98,21 @@ private slots:
 	
 	//! Called when the user clicks on the delete button
 	void deleteCurrentLocationFromList();
+
+	//! filter city list to show entries from single country only
+	void filterSitesByCountry();
+
+	//! reset city list to complete list (may have been reduced to picked list)
+	void resetCompleteList();
+
+	//! called when the user wants get location from network
+	void ipQueryLocation(bool state);
 	
 	//! Called when the user wants to use the current location as default
-	void setDefaultLocation();
+	void setDefaultLocation(bool state);
 	
 private:
-	QString lastPlanet;	
-	bool lastVisionMode;
-	
+	QString lastPlanet;
 	//! Updates the check state and the enabled/disabled status.
 	void updateDefaultLocationControls(bool currentIsDefault);
 };

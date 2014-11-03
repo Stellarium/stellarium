@@ -19,7 +19,7 @@ Stellarium comes with ABSOLUTELY NO WARRANTY.  See the COPYING file for details.
 1. INTRODUCTION
 --------------------------------------------------------------------------------
 Stellarium is a free GPL software which renders realistic skies in real time
-with openGL. It is available for Linux/Unix, Windows and MacOSX. With
+with OpenGL. It is available for Linux/Unix, Windows and MacOSX. With
 Stellarium, you really see what you can see with your eyes, binoculars or a
 small telescope.
 
@@ -29,10 +29,13 @@ small telescope.
 Please see the INSTALL file.
 
 --------------------------------------------------------------------------------
-3. REQUIREMENT
+3. REQUIREMENTS
 --------------------------------------------------------------------------------
 Windows or linux/POSIX or CYGWIN or MACOSX environment
-A 3d openGL acceleration card and a good CPU.
+A 3d OpenGL 2.1+ acceleration card with GLSL1.30 and a good CPU.
+On Windows, ANGLE can be used if graphics card supports DirectX9+ with PS_3_0.
+If all else fails, MESA can be used to emulate the graphics card, 
+of course with a massive slowdown.
 
 --------------------------------------------------------------------------------
 4. QUICK START
@@ -87,7 +90,7 @@ for more details on the location of the user data directory for your OS.
 
 	Norbert Zacharias from USNO for kindly sending a cut of the NOMAD
 	  catalogue on 4 DVD, answering NOMAD related questions, and finally
-	  copying the entiere NOMAD catalogue onto a disk.
+	  copying the entire NOMAD catalogue onto a disk.
 
 	The Trolltech Qt team for its incredible library.
 
@@ -119,7 +122,7 @@ for more details on the location of the user data directory for your OS.
 7. NOTE
 --------------------------------------------------------------------------------
 	This program is free, but if you have nothing to do with your
-	money, just go there and do something usefull with it :
+	money, just go there and do something useful with it :
 	https://www.greenpeace.com/forms/gpicontr.html
 
 
@@ -152,18 +155,70 @@ for more details on the location of the user data directory for your OS.
 		1998 _Sky & Telescope_,	"To the Visual Limits". The basic
 		sources are available on the Sky and Telescope web site.
 		(code "offered as-is and without support.")
+	1.4 The Delta-T calculations
+		For implementation of calculation routines for Delta-T we used the following sources:
+		[1] Delta-T webpage by Rob van Gent: http://www.staff.science.uu.nl/~gent0113/deltat/deltat.htm
+		[2] "Five Millennium Canon of Solar Eclipses", Espenak and Meeus
+		    http://eclipse.gsfc.nasa.gov/SEhelp/deltatpoly2004.html
+		[3] "On the system of astronomical constants", Clemence, G. M.,
+		    Astronomical Journal, Vol. 53, p. 169
+		    http://adsabs.harvard.edu/abs/1948AJ.....53..169C
+		[4] "The Rotation of the Earth, and the Secular Accelerations of the Sun, Moon and Planets",
+		    Spencer Jones, Monthly Notices of the Royal Astronomical Society, 99 (1939), 541-558
+		    http://adsabs.harvard.edu/abs/1939MNRAS..99..541S
+		[5] "Polynomial approximations for the correction delta T E.T.-U.T. in the period 1800-1975",
+		    Schmadel, L. D.; Zech, G., Acta Astronomica, vol. 29, no. 1, 1979, p. 101-104.
+		    http://adsabs.harvard.edu/abs/1979AcA....29..101S
+		[6] "ELP 2000-85 and the dynamic time-universal time relation", Borkowski, K. M.,
+		    Astronomy and Astrophysics (ISSN 0004-6361), vol. 205, no. 1-2, Oct. 1988, p. L8-L10.
+		    http://adsabs.harvard.edu/abs/1988A&A...205L...8B
+		[7] "Empirical Transformations from U.T. to E.T. for the Period 1800-1988", 
+		    Schmadel, L. D.; Zech, G., Astronomische Nachrichten 309, 219-221
+		    http://adsabs.harvard.edu/abs/1988AN....309..219S
+		[8] "Historical values of the Earth's clock error DeltaT and the calculation of eclipses",
+		    Morrison, L. V.; Stephenson, F. R., Journal for the History of Astronomy (ISSN 0021-8286), 
+		    Vol. 35, Part 3, No. 120, p. 327 - 336 (2004)
+		    http://adsabs.harvard.edu/abs/2004JHA....35..327M
+		[9] "Addendum: Historical values of the Earth's clock error", Morrison, L. V.; Stephenson, F. R.,
+		    Journal for the History of Astronomy (ISSN 0021-8286), Vol. 36, Part 3, No. 124, p. 339 (2005)
+		    http://adsabs.harvard.edu/abs/2005JHA....36..339M
+		[10] "Polynomial approximations to Delta T, 1620-2000 AD", Meeus, J.; Simons, L.,
+		    Journal of the British Astronomical Association, vol.110, no.6, 323
+		    http://adsabs.harvard.edu/abs/2000JBAA..110..323M
+		[11] "Einstein's Theory of Relativity Confirmed by Ancient Solar Eclipses", Henriksson G.,
+		    http://adsabs.harvard.edu/abs/2009ASPC..409..166H
+		[12] "Canon of Solar Eclipses" by Mucke & Meeus (1983)
+		[13] "The accelerations of the earth and moon from early astronomical observations", 
+		     Muller P. M., Stephenson F. R.,
+		     http://adsabs.harvard.edu/abs/1975grhe.conf..459M
+		[14] "Pre-Telescopic Astronomical Observations", Stephenson F. R.,
+		    http://adsabs.harvard.edu/abs/1978tfer.conf....5S
+		[15] "Long-term changes in the rotation of the earth - 700 B.C. to A.D. 1980", 
+		     Stephenson F. R., Morrison L. V., 
+		     Philosophical Transactions, Series A (ISSN 0080-4614), vol. 313, no. 1524, Nov. 27, 1984, p. 47-70.
+		     http://adsabs.harvard.edu/abs/1984RSPTA.313...47S
+		[16] "Long-Term Fluctuations in the Earth's Rotation: 700 BC to AD 1990",
+		    Stephenson F. R., Morrison L. V., 
+		    Philosophical Transactions: Physical Sciences and Engineering, Volume 351, Issue 1695, pp. 165-202
+		    http://adsabs.harvard.edu/abs/1995RSPTA.351..165S
+		[17] "Historical Eclipses and Earth's Rotation" by F. R. Stephenson (1997)
+		    http://ebooks.cambridge.org/ebook.jsf?bid=CBO9780511525186
+		[18] "Astronomical Algorithms" by J. Meeus (2nd ed., 1998)
+		[19] "Astronomy on the Personal Computer" by O. Montenbruck & T. Pfleger (4nd ed., 2000)
+		[20] "Calendrical Calculations" by E. M. Reingold & N. Dershowitz (2nd ed., 2001)
+		[21] DeltaT webpage by V. Reijs: http://www.iol.ie/~geniet/eng/DeltaTeval.htm
 
 2. Included source code
-	2.1 Some computation of the sideral time (sideral_time.h/c) and pluto
-        orbit contains code from the libnova library (LGPL) by Liam Girdwood.
+	2.1 Some computation of the sideral time (sidereal_time.h/c) and pluto
+		orbit contains code from the libnova library (LGPL) by Liam Girdwood.
 	2.2 The orbit.cpp/h and solve.h files are directly borrowed from
 		Celestia (Chris Laurel). (GPL license)
 	2.3 Several implementations of IMCCE theories for planet and satellite
 		movement by Johannes Gajdosik (MIT-style license,
 		see the corresponding files for the license text)
-    2.4 The tesselation algorithms were originally extracted from the glues 
-        library version 1.4 Mike Gorchak <mike@malva.ua> (SGI FREE SOFTWARE
-        LICENSE B).
+	2.4 The tesselation algorithms were originally extracted from the glues 
+		library version 1.4 Mike Gorchak <mike@malva.ua> (SGI FREE SOFTWARE
+		LICENSE B).
 
 3. Data
 	3.1 The Hipparcos star catalog
@@ -210,6 +265,12 @@ for more details on the location of the user data directory for your OS.
 		estimated from r or b magnitude.  When there is no b- or v-
 		magnitude, the color B-V is estimated from the other magnitudes.
 		Also proper motions of faint stars are neglected at all.
+	3.8 Stellarium's Catalog of Variable Stars based on General Catalog of Variable 
+		Stars (GCVS) version 2013Apr.
+		http://www.sai.msu.su/gcvs/gcvs/
+		Samus N.N., Durlevich O.V., Kazarovets E V., Kireeva N.N., Pastukhova E.N., 
+		Zharova A.V., et al., General Catalogue of Variable Stars (Samus+ 2007-2012)
+		http://cdsarc.u-strasbg.fr/viz-bin/Cat?cat=B%2Fgcvs&
 
 4. Graphics
 	4.1 All graphics are copyrighted by the Stellarium's Team (GPL) except
@@ -218,23 +279,43 @@ for more details on the location of the user data directory for your OS.
 		Observatory) using data from the MODIS instrument aboard the
 		Terra satellite (Public Domain). See chapter 10.1 for full
 		credits.
-	4.4 Moon texture map is Courtesy USGS Astrogeology Research Program,
-		http://astrogeology.usgs.gov. (Public Domain, DFSG-free)
-	4.5a Jupiter map, Saturn map and ring textures created by Björn Jónsson:
+	4.4 Moon texture map was combined from maps by USGS Astrogeology Research Program,
+		http://astrogeology.usgs.gov (Public Domain, DFSG-free) and by Lunar 
+		surface textures from Celestia, based on Clementine data (Public Domain).
+	4.5a Saturn map and ring textures created by Björn Jónsson:
 		"All the planetary maps available on these pages are publicly
 		available. You do not need a special permission to use them but if
 		you do then please mention their origin in your work [..]"
-	4.5b The Rhea, Amalthea, Proteus and Triton maps and rings of Uranus and 
-		Neptune	are from Celestia (http://shatters.net/celestia/) under the 
+	4.5b Jupiter map created by James Hastings-Trew from Cassini data. "The 
+		maps are free to download and use as source material or resource
+		in artwork or rendering (CGI or real time)."
+	4.5c The Venus, Amalthea, Proteus, Iapetus and Phoebe maps and rings of Uranus
+		and Neptune are from Celestia (http://shatters.net/celestia/) under the 
 		GNU General Purpose License, version 2 or any later version:
+		- Venus is from Björn Jónsson and modified by RVS.
 		- Amalthea is a shaded relief map by Phil Stooke, colored by
-		  Wm. Robert Johnston 
+		  Wm. Robert Johnston. 
 		  (http://www.johnstonsarchive.net/spaceart/cylmaps.html),
 		  and further modified by Jens Meyer and Grant Hutchison.
 		- The Proteus map is from Phil Stooke.
 		- Triton is probably from David Seal's site (see below),
-                  modified by Chris Laurel and Grant Hutchison.
-	4.5 All other planet maps from David Seal's site:
+		  modified by Chris Laurel and Grant Hutchison.
+		- Iapetus and Phoebe maps are from dr. Fridger Schrempp (t00fri).
+	4.5d Mercury map is produced by NASA from Messenger data and modified 
+		and colored by RVS.
+	4.5e Europa, Io and Callisto maps are created by John van Vliet from PDS 
+		data and modified by RVS. License: cc-by-sa.
+	4.5f Ganymede map is from USGS and modified by RVS. Public domain.
+	4.5g Tethys, Dione, Rhea, Enceladus and Mimas maps are created by NASA 
+		(CICLOPS team) from Cassini data, colored by RVS. Public domain.
+	4.5h Hyperion map created by John van Vliet from PDS data, modified by 
+		RVS. License: cc-by-sa.
+	4.5i Triton: Image selection, radiometric calibration, geographic registration and 
+		photometric correction, and final mosaic assembly were performed by Dr. Paul 
+		Schenk at the Lunar and Planetary Institute, Houston, Texas. Image data from 
+		Voyager 2 (NASA, JPL). Original texture has "white spots", which was filled by 
+		Dizel777 (http://spaceengine.org/forum/19-563-25069-16-1409101585).
+	4.5j All other planet maps from David Seal's site:
 		http://maps.jpl.nasa.gov/   see license in section 10.3
 	4.6 The fullsky milky way panorama is created by Axel Mellinger,
 		University of Potsdam, Germany. Further information and more
@@ -251,25 +332,66 @@ for more details on the location of the user data directory for your OS.
 		http://home.att.net/~hermperez/default.htm
 		License: "Feel free to use these images, if you use them in a
 		commercial setting please attribute the source."
-	4.9 Images of M8, M20, M33, NGC253, NGC1499, NGC2244, IC343 from
-		Jean-Pierre Bousquet
+	4.9 Images of M8, M33, NGC253, NGC1499, NGC2244 
+		from Jean-Pierre Bousquet
 	4.10 Images of M1, M15, M16, M27, M42, M57, M97, NGC6946 from Stephane Dumont	
 	4.11 Images of M17, M44, NGC856, NGC884 from Maxime Spano
 	4.12 Constellation art, GUI buttons, logo created by Johan Meuris
 		(Jomejome) (jomejome at users.sourceforge.net)
-		http://users.pandora.be/jomejom/
+		http://www.johanmeuris.eu/
 		License: released under the Free Art License
 		(http://artlibre.org/licence.php/lalgb.html)
+		Icon created by Johan Meuris
+		License: Creative Commons Attribution-ShareAlike 3.0 Unported
 	4.13 The "earth-clouds" texture includes imagery owned by NASA.
-	See NASA's Visible Earth project at http://visibleearth.nasa.gov/
-	License: 1. The imagery is free of licensing fees
-		 2. NASA requires that they be provided a credit as the owners
-			of the imagery
+		See NASA's Visible Earth project at http://visibleearth.nasa.gov/
+		License: 1. The imagery is free of licensing fees
+			 2. NASA requires that they be provided a credit as the owners
+			    of the imagery
 		The cloud texturing was taken from Celestia (GPL),
 		http://www.shatters.net/celestia/
 	4.14 The folder icon derived from the Tango Desktop Project, used under
 		the terms of the Creative Commons Attribution Share-Alike
 		license.
+	4.15 Images of NGC281, NGC5139, NGC6543, NGC6960, NGC7023, NGC7317, NGC7319, 
+		NGC7320
+		from Andrey Kuznetsov, Kepler Observatory
+		http://kepler-observatorium.ru
+		License: Creative Commons Attribution 3.0 Unported
+	4.16 Images of NGC891, NGC1333, NGC2903, NGC3185, NGC3187, NGC3189, NGC3190, 
+		NGC3193, NGC3718, NGC3729, NGC4490, NGC5981, NGC5982, NGC5985, NGC7129 
+		from Oleg Bryzgalov 
+		http://olegbr.astroclub.kiev.ua/
+		License: Creative Commons Attribution 3.0 Unported
+	4.17 Image of eta Carinae 
+		from Georg Zotti
+		http://www.waa.at/
+		License: Creative Commons Attribution 3.0 Unported
+	4.18 Images of IC1805, IC1848, NGC6888
+		from Steve Tuttle
+		http://www.stuttle1.com/
+	4.19 Images of IC4628, M20, M21, M47, NGC2467, IC2948, NGC3324, NGC3293, 
+		NGC7590, RCW158
+		from Trevor Gerdes
+		http://www.sarcasmogerdes.com/
+	4.20 Images of IC2118, NGC1532
+		from users of Ice In Space
+		http://www.iceinspace.com.au/
+	4.21 Image of IC5146 from James A Weier
+	4.22 Images of SMC, LMC (Magellanic Clouds) and rho Oph from Albert Van Donkelaar
+	4.23 Images of NGC55, NGC300, NGC1365, NGC3628, NGC4945, NGC5128, NGC6726,
+		NGC6744, NGC6752, NGC6822, NGC7293, NGC2070
+		from Philip Montgomery
+		http://www.kenthurst.bigpondhosting.com/
+	4.24 The Vesta map from NASA's Photojournal site:
+		http://photojournal.jpl.nasa.gov/   see license in section 10.3
+	4.25 Images of NGC7318, NGC7331, M3, M13, M51, M63, M64, M74, M78, M81, M82,
+		M96, M101, M105, Barnard 22, Barnard 142, Barnard 173, IC405, IC443,
+		NGC1514, NGC1961, NGC2371, NGC2403, NGC246, NGC2841, NGC3310, NGC3938,
+		NGC4559, NGC7008, NGC7380, NGC7479, NGC7635, Sh2-101
+		from Peter Vasey, Plover Hill Observatory
+		http://www.madpc.co.uk/~peterv/
+	4.26 Image of IC434 from Marc Aragnou
 
 --------------------------------------------------------------------------------
 9. LICENSE

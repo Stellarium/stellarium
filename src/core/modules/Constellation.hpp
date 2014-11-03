@@ -21,15 +21,15 @@
 #ifndef _CONSTELLATION_HPP_
 #define _CONSTELLATION_HPP_
 
-#include <vector>
-#include <QString>
-#include <QFont>
-
 #include "StelObject.hpp"
 #include "StelUtils.hpp"
 #include "StelFader.hpp"
 #include "StelTextureTypes.hpp"
 #include "StelSphereGeometry.hpp"
+
+#include <vector>
+#include <QString>
+#include <QFont>
 
 class StarMgr;
 class StelPainter;
@@ -136,6 +136,10 @@ private:
 	//! @return true if Constellation art rendering it turned on, else false.
 	bool getFlagArt() const {return artFader;}
 
+	//! Check visibility of starlore elements (using for seasonal rules)
+	//! @return true if starlore elements rendering it turned on, else false.
+	bool checkVisibility() const;
+
 	//! International name (translated using gettext)
 	QString nameI18;
 	//! Name in english
@@ -149,6 +153,10 @@ private:
 	Vec3d XYname;
 	//! Number of segments in the lines
 	unsigned int numberOfSegments;
+	//! Month of start visibility of constellation (seasonal rules)
+	int beginSeason;
+	//! Month of end visibility of constellation (seasonal rules)
+	int endSeason;
 	//! List of stars forming the segments
 	StelObjectP* asterism;
 
@@ -166,7 +174,8 @@ private:
 	static Vec3f labelColor;
 	static Vec3f boundaryColor;
 
-	static bool singleSelected;
+	static bool singleSelected;	
+	static bool seasonalRuleEnabled;
 };
 
 #endif // _CONSTELLATION_HPP_

@@ -18,77 +18,16 @@
  */
 
 #include "StelGuiBase.hpp"
-#include "StelAppGraphicsWidget.hpp"
+#include "StelMainView.hpp"
 #include "StelTranslator.hpp"
 #include <QAction>
 
 
-StelGuiBase::StelGuiBase() : stelAppGraphicsWidget(NULL)
+StelGuiBase::StelGuiBase()
 {
 }
 
-void StelGuiBase::init(QGraphicsWidget* atopLevelGraphicsWidget, StelAppGraphicsWidget* astelAppGraphicsWidget)
+void StelGuiBase::init(QGraphicsWidget *atopLevelGraphicsWidget)
 {
 	Q_UNUSED(atopLevelGraphicsWidget);
-	stelAppGraphicsWidget = astelAppGraphicsWidget;
-}
-
-void StelGuiBase::updateI18n()
-{
-	// Translate all action texts
-	foreach (QObject* obj, stelAppGraphicsWidget->children())
-	{
-		QAction* a = qobject_cast<QAction*>(obj);
-		if (a)
-		{
-			const QString& englishText = a->property("englishText").toString();
-			if (!englishText.isEmpty())
-			{
-				a->setText(q_(englishText));
-			}
-		}
-	}
-}
-
-// Note: "text" and "helpGroup" must be in English -- this method and the help
-// dialog take care of translating them. Of course, they still have to be
-// marked for translation using the N_() macro.
-QAction* StelGuiBase::addGuiActions(const QString& actionName, const QString& text, const QString& shortCut, const QString& helpGroup, bool checkable, bool autoRepeat, bool global)
-{
-	Q_UNUSED(helpGroup);
-	QAction* a;
-	a = new QAction(stelAppGraphicsWidget);
-	a->setObjectName(actionName);
-	a->setText(q_(text));
-	QList<QKeySequence> shortcuts;
-	QRegExp shortCutSplitRegEx(",(?!,|$)");
-	QStringList shortcutStrings = shortCut.split(shortCutSplitRegEx);
-	for (int i = 0; i < shortcutStrings.size(); ++i)
-		shortcuts << QKeySequence(shortcutStrings.at(i).trimmed());
-
-	a->setShortcuts(shortcuts);
-	a->setCheckable(checkable);
-	a->setAutoRepeat(autoRepeat);
-	a->setProperty("englishText", QVariant(text));
-	if (global)
-	{
-		a->setShortcutContext(Qt::ApplicationShortcut);
-	}
-	else
-	{
-		a->setShortcutContext(Qt::WidgetShortcut);
-	}
-	stelAppGraphicsWidget->addAction(a);
-	return a;
-}
-
-QAction* StelGuiBase::getGuiActions(const QString& actionName)
-{
-	QAction* a = stelAppGraphicsWidget->findChild<QAction*>(actionName);
-	if (!a)
-	{
-		qWarning() << "Can't find action " << actionName;
-		return NULL;
-	}
-	return a;
 }

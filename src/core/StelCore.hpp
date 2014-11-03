@@ -47,41 +47,82 @@ class StelCore : public QObject
 {
 	Q_OBJECT
 	Q_ENUMS(ProjectionType)
+	Q_ENUMS(DeltaTAlgorithm)
+	Q_PROPERTY(bool flipHorz READ getFlipHorz WRITE setFlipHorz)
+	Q_PROPERTY(bool flipVert READ getFlipVert WRITE setFlipVert)
 
 public:
 	//! @enum FrameType
 	//! Supported reference frame types
 	enum FrameType
 	{
-		FrameAltAz,                   //!< Altazimuthal reference frame centered on observer.
-		FrameHeliocentricEcliptic,    //!< Ecliptic reference frame centered on the Sun
-		FrameObservercentricEcliptic, //!< Ecliptic reference frame centered on the Observer
-		FrameEquinoxEqu,              //!< Equatorial reference frame at the current equinox centered on the observer.
-									  //! The north pole follows the precession of the planet on which the observer is located.
-		FrameJ2000,                   //!< Equatorial reference frame at the J2000 equinox centered on the observer.
-									  //! This is also the ICRS reference frame.
-		FrameGalactic                 //! Galactic reference frame centered on observer.
+		FrameUninitialized,		//!< Reference frame is not set (FMajerech: Added to avoid condition on uninitialized value in StelSkyLayerMgr::draw())
+		FrameAltAz,			//!< Altazimuthal reference frame centered on observer.
+		FrameHeliocentricEcliptic,	//!< Ecliptic reference frame centered on the Sun
+		FrameObservercentricEcliptic,	//!< Ecliptic reference frame centered on the Observer
+		FrameEquinoxEqu,		//!< Equatorial reference frame at the current equinox centered on the observer.
+						//! The north pole follows the precession of the planet on which the observer is located.
+		FrameJ2000,			//!< Equatorial reference frame at the J2000 equinox centered on the observer.
+						//! This is also the ICRS reference frame.
+		FrameGalactic			//! Galactic reference frame centered on observer.
 	};
 
+	//! @enum ProjectionType
 	//! Available projection types. A value of 1000 indicate the default projection
 	enum ProjectionType
 	{
-		ProjectionPerspective,    //!< Perspective projection
-		ProjectionEqualArea,      //!< Equal Area projection
-		ProjectionStereographic,  //!< Stereograhic projection
-		ProjectionFisheye,	      //!< Fisheye projection
-		ProjectionHammer,         //!< Hammer-Aitoff projection
-		ProjectionCylinder,	      //!< Cylinder projection
-		ProjectionMercator,	      //!< Mercator projection
-		ProjectionOrthographic	  //!< Orthographic projection
+		ProjectionPerspective,		//!< Perspective projection
+		ProjectionEqualArea,		//!< Equal Area projection
+		ProjectionStereographic,	//!< Stereograhic projection
+		ProjectionFisheye,		//!< Fisheye projection
+		ProjectionHammer,		//!< Hammer-Aitoff projection
+		ProjectionCylinder,		//!< Cylinder projection
+		ProjectionMercator,		//!< Mercator projection
+		ProjectionOrthographic		//!< Orthographic projection
 	};
 
+	//! @enum RefractionMode
 	//! Available refraction mode.
 	enum RefractionMode
 	{
 		RefractionAuto,			//!< Automatically decide to add refraction if atmosphere is activated
 		RefractionOn,			//!< Always add refraction (i.e. apparent coordinates)
 		RefractionOff			//!< Never add refraction (i.e. geometric coordinates)
+	};
+
+	//! @enum DeltaTAlgorithm
+	//! Available DeltaT algorithms
+	enum DeltaTAlgorithm
+	{
+		WithoutCorrection,              //!< Without correction, DeltaT is Zero. Like Stellarium versions before 0.12.
+		Schoch,                         //!< Schoch (1931) algorithm for DeltaT
+		Clemence,                       //!< Clemence (1948) algorithm for DeltaT
+		IAU,                            //!< IAU (1952) algorithm for DeltaT (based on observations by Spencer Jones (1939))
+		AstronomicalEphemeris,          //!< Astronomical Ephemeris (1960) algorithm for DeltaT
+		TuckermanGoldstine,             //!< Tuckerman (1962, 1964) & Goldstine (1973) algorithm for DeltaT
+		MullerStephenson,               //!< Muller & Stephenson (1975) algorithm for DeltaT
+		Stephenson1978,                 //!< Stephenson (1978) algorithm for DeltaT
+		SchmadelZech1979,               //!< Schmadel & Zech (1979) algorithm for DeltaT
+		MorrisonStephenson1982,         //!< Morrison & Stephenson (1982) algorithm for DeltaT (used by RedShift)
+		StephensonMorrison1984,         //!< Stephenson & Morrison (1984) algorithm for DeltaT
+		StephensonHoulden,              //!< Stephenson & Houlden (1986) algorithm for DeltaT
+		Espenak,                        //!< Espenak (1987, 1989) algorithm for DeltaT
+		Borkowski,                      //!< Borkowski (1988) algorithm for DeltaT
+		SchmadelZech1988,               //!< Schmadel & Zech (1988) algorithm for DeltaT
+		ChaprontTouze,                  //!< Chapront-Touzé & Chapront (1991) algorithm for DeltaT
+		StephensonMorrison1995,         //!< Stephenson & Morrison (1995) algorithm for DeltaT
+		Stephenson1997,                 //!< Stephenson (1997) algorithm for DeltaT		
+		ChaprontMeeus,                  //!< Chapront, Chapront-Touze & Francou (1997) & Meeus (1998) algorithm for DeltaT
+		JPLHorizons,                    //!< JPL Horizons algorithm for DeltaT
+		MeeusSimons,                    //!< Meeus & Simons (2000) algorithm for DeltaT
+		MontenbruckPfleger,             //!< Montenbruck & Pfleger (2000) algorithm for DeltaT
+		ReingoldDershowitz,             //!< Reingold & Dershowitz (2002, 2007) algorithm for DeltaT
+		MorrisonStephenson2004,         //!< Morrison & Stephenson (2004, 2005) algorithm for DeltaT
+		Reijs,                          //!< Reijs (2006) algorithm for DeltaT
+		EspenakMeeus,                   //!< Espenak & Meeus (2006) algorithm for DeltaT (Recommended, default)
+		Banjevic,			//!< Banjevic (2006) algorithm for DeltaT
+		IslamSadiqQureshi,		//!< Islam, Sadiq & Qureshi (2008 + revisited 2013) algorithm for DeltaT (6 polynomials)
+		Custom                          //!< User defined coefficients for quadratic equation for DeltaT
 	};
 
 	StelCore();
@@ -156,6 +197,7 @@ public:
 	Vec3d equinoxEquToAltAz(const Vec3d& v, RefractionMode refMode=RefractionAuto) const;
 	Vec3d altAzToJ2000(const Vec3d& v, RefractionMode refMode=RefractionAuto) const;
 	Vec3d j2000ToAltAz(const Vec3d& v, RefractionMode refMode=RefractionAuto) const;
+	void j2000ToAltAzInPlaceNoRefraction(Vec3f* v) const {v->transfo4d(matJ2000ToAltAz);}
 	Vec3d galacticToJ2000(const Vec3d& v) const;
 	Vec3d equinoxEquToJ2000(const Vec3d& v) const;
 	Vec3d j2000ToEquinoxEqu(const Vec3d& v) const;
@@ -203,6 +245,10 @@ public:
 	//! Get the informations on the current location
 	const StelLocation& getCurrentLocation() const;
 
+	const QSharedPointer<class Planet> getCurrentPlanet() const;
+
+	SphericalCap getVisibleSkyArea() const;
+	
 	//! Smoothly move the observer to the given location
 	//! @param target the target location
 	//! @param duration direction of view move duration in s
@@ -215,17 +261,39 @@ public:
 	static const double JD_MINUTE;
 	static const double JD_HOUR;
 	static const double JD_DAY;
+	static const double ONE_OVER_JD_SECOND;
 
-	//! Get the sideral time shifted by the observer longitude
-	//! @return the locale sideral time in radian
-	double getLocalSideralTime() const;
+	//! Get the sidereal time shifted by the observer longitude
+	//! @return the local sidereal time in radian
+	double getLocalSiderealTime() const;
 
-	//! Get the duration of a sideral day for the current observer in day.
-	double getLocalSideralDayLength() const;
+	//! Get the duration of a sidereal day for the current observer in day.
+	double getLocalSiderealDayLength() const;
+
+	//! Get the duration of a sidereal year for the current observer in days.
+	double getLocalSiderealYearLength() const;
 
 	//! Return the startup mode, can be preset|Preset or anything else
 	QString getStartupTimeMode();
 	void setStartupTimeMode(const QString& s);
+
+	//! Get Delta-T estimation for a given date.
+	//! @param jDay the date and time expressed as a julian day
+	//! @return Delta-T in seconds
+	//! @note Thanks to Rob van Gent which create a collection from many formulas for calculation of Delta-T: http://www.staff.science.uu.nl/~gent0113/deltat/deltat.htm
+	double getDeltaT(double jDay) const;
+
+	//! Get info about valid range for current algorithm for calculation of Delta-T
+	//! @param jDay the JD
+	//! @param marker the marker for valid range
+	//! @return valid range
+	QString getCurrentDeltaTAlgorithmValidRange(double jDay, QString* marker) const;
+
+	//! Checks for current time of day - it's night or day?
+	bool isDay() const;
+
+	//! Get value of the current Julian epoch
+	double getCurrentEpoch() const;
 
 public slots:
 	//! Set the current ProjectionType to use
@@ -239,6 +307,17 @@ public slots:
 
 	//! Get the list of all the available projections
 	QStringList getAllProjectionTypeKeys() const;
+
+	//! Set the current algorithm for time correction (DeltaT)
+	void setCurrentDeltaTAlgorithm(DeltaTAlgorithm algorithm) { currentDeltaTAlgorithm=algorithm; }
+	//! Get the current algorithm for time correction (DeltaT)
+	DeltaTAlgorithm getCurrentDeltaTAlgorithm() const { return currentDeltaTAlgorithm; }
+	//! Get description of the current algorithm for time correction
+	QString getCurrentDeltaTAlgorithmDescription(void) const;
+	//! Get the current algorithm used by the DeltaT
+	QString getCurrentDeltaTAlgorithmKey(void) const;
+	//! Set the current algorithm to use from its key
+	void setCurrentDeltaTAlgorithmKey(QString type);
 
 	//! Set the mask type.
 	void setMaskType(StelProjector::StelProjectorMaskType m);
@@ -274,6 +353,11 @@ public slots:
 	void setJDay(double JD);
 	//! Get the current date in Julian Day
 	double getJDay() const;
+
+	//! Set the current date in Modified Julian Day
+	void setMJDay(double MJD);
+	//! Get the current date in Modified Julian Day
+	double getMJDay() const;
 
 	//! Return the preset sky time in JD
 	double getPresetSkyTime() const;
@@ -327,15 +411,21 @@ public slots:
 	//! Add one sidereal day to the simulation time. The length of time depends
 	//! on the current planetary body on which the observer is located.
 	void addSiderealDay();
-	//! Add one sidereal week to the simulation time. The length of time depends
-	//! on the current planetary body on which the observer is located.
+	//! Add one sidereal week (7 sidereal days) to the simulation time. The length
+	//! of time depends on the current planetary body on which the observer is located.
 	void addSiderealWeek();
-	//! Add one sidereal month to the simulation time. The length of time depends
-	//! on the current planetary body on which the observer is located.
+	//! Add one sidereal month (1/12 of sidereal year) to the simulation time. The length
+	//! of time depends on the current planetary body on which the observer is located.
+	//! Sidereal year connected to orbital period of planets.
 	void addSiderealMonth();
 	//! Add one sidereal year to the simulation time. The length of time depends
-	//! on the current planetary body on which the observer is located.
+	//! on the current planetary body on which the observer is located. Sidereal year
+	//! connected to orbital period of planets.
 	void addSiderealYear();
+	//! Add one sidereal century (100 sidereal years) to the simulation time. The length
+	//! of time depends on the current planetary body on which the observer is located.
+	//! Sidereal year connected to orbital period of planets.
+	void addSiderealCentury();
 
 	//! Subtract one [Earth, solar] hour to the current simulation time.
 	void subtractHour();
@@ -347,15 +437,57 @@ public slots:
 	//! Subtract one sidereal day to the simulation time. The length of time depends
 	//! on the current planetary body on which the observer is located.
 	void subtractSiderealDay();
-	//! Subtract one sidereal week to the simulation time. The length of time depends
-	//! on the current planetary body on which the observer is located.
+	//! Subtract one sidereal week (7 sidereal days) to the simulation time. The length
+	//! of time depends on the current planetary body on which the observer is located.
 	void subtractSiderealWeek();
-	//! Subtract one sidereal month to the simulation time. The length of time depends
-	//! on the current planetary body on which the observer is located.
+	//! Subtract one sidereal month (1/12 of sidereal year) to the simulation time. The length
+	//! of time depends on the current planetary body on which the observer is located.
+	//! Sidereal year connected to orbital period of planets.
 	void subtractSiderealMonth();
 	//! Subtract one sidereal year to the simulation time. The length of time depends
-	//! on the current planetary body on which the observer is located.
+	//! on the current planetary body on which the observer is located. Sidereal year
+	//! connected to orbital period of planets.
 	void subtractSiderealYear();
+	//! Subtract one sidereal century (100 sidereal years) to the simulation time. The length
+	//! of time depends on the current planetary body on which the observer is located.
+	//! Sidereal year connected to orbital period of planets.
+	void subtractSiderealCentury();
+
+	//! Add one synodic month to the simulation time.
+	void addSynodicMonth();
+
+	//! Add one draconic year to the simulation time.
+	void addDraconicYear();
+	//! Add one draconic month to the simulation time.
+	void addDraconicMonth();
+
+	//! Add one anomalistic month to the simulation time.
+	void addAnomalisticMonth();
+
+	//! Add one mean tropical month to the simulation time.
+	void addTropicalMonth();
+	//! Add one mean tropical year to the simulation time.
+	void addTropicalYear();
+	//! Add one mean tropical century to the simulation time.
+	void addTropicalCentury();
+
+	//! Subtract one synodic month to the simulation time.
+	void subtractSynodicMonth();
+
+	//! Subtract one draconic year to the simulation time.
+	void subtractDraconicYear();
+	//! Subtract one draconic month to the simulation time.
+	void subtractDraconicMonth();
+
+	//! Subtract one anomalistic month to the simulation time.
+	void subtractAnomalisticMonth();
+
+	//! Subtract one mean tropical month to the simulation time.
+	void subtractTropicalMonth();
+	//! Subtract one mean tropical year to the simulation time.
+	void subtractTropicalYear();
+	//! Subtract one mean tropical century to the simulation time.
+	void subtractTropicalCentury();
 
 	//! Add a number of Earth Solar days to the current simulation time
 	//! @param d the decimal number of days to add (use negative values to subtract)
@@ -368,6 +500,23 @@ public slots:
 	//! Move the observer to the selected object. This will only do something if
 	//! the selected object is of the correct type - i.e. a planet.
 	void moveObserverToSelected();
+
+	//! Set year for custom equation for calculation of Delta-T
+	//! @param y the year, e.g. 1820
+	void setDeltaTCustomYear(float y) { deltaTCustomYear=y; }
+	//! Set n-dot for custom equation for calculation of Delta-T
+	//! @param y the n-dot value, e.g. -26.0
+	void setDeltaTCustomNDot(float v) { deltaTCustomNDot=v; }
+	//! Set coefficients for custom equation for calculation of Delta-T
+	//! @param y the coefficients, e.g. -20,0,32
+	void setDeltaTCustomEquationCoefficients(Vec3f c) { deltaTCustomEquationCoeff=c; }
+
+	//! Get year for custom equation for calculation of Delta-T
+	float getDeltaTCustomYear() const { return deltaTCustomYear; }
+	//! Get n-dot for custom equation for calculation of Delta-T
+	float getDeltaTCustomNDot() const { return deltaTCustomNDot; }
+	//! Get coefficients for custom equation for calculation of Delta-T
+	Vec3f getDeltaTCustomEquationCoefficients() const { return deltaTCustomEquationCoeff; }
 
 signals:
 	//! This signal is emitted when the observer location has changed.
@@ -386,11 +535,15 @@ private:
 	// The currently used projection type
 	ProjectionType currentProjectionType;
 
+	// The currentrly used time correction (DeltaT)
+	DeltaTAlgorithm currentDeltaTAlgorithm;
+
 	// Parameters to use when creating new instances of StelProjector
 	StelProjector::StelProjectorParams currentProjectorParams;
 
 	void updateTransformMatrices();
 	void updateTime(double deltaTime);
+	void resetSync();
 
 	// Matrices used for every coordinate transfo
 	Mat4d matHeliocentricEclipticToAltAz;      // Transform from heliocentric ecliptic (Vsop87) to observer-centric altazimuthal coordinate
@@ -416,6 +569,14 @@ private:
 	double presetSkyTime;
 	QTime initTodayTime;
 	QString startupTimeMode;
+	double secondsOfLastJDayUpdate;         // Time in seconds when the time rate or time last changed
+	double JDayOfLastJDayUpdate;         // JDay when the time rate or time last changed
+
+	// Variables for custom equation of Delta-T
+	Vec3f deltaTCustomEquationCoeff;
+	float deltaTCustomNDot;
+	float deltaTCustomYear;
+
 };
 
 #endif // _STELCORE_HPP_

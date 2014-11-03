@@ -19,6 +19,8 @@
 
 #ifndef _STELPAINTER_HPP_
 #define _STELPAINTER_HPP_
+
+#include "StelOpenGL.hpp"
 #include "VecMath.hpp"
 #include "StelSphereGeometry.hpp"
 #include "StelProjectorType.hpp"
@@ -27,71 +29,7 @@
 #include <QVarLengthArray>
 #include <QFontMetrics>
 
-#ifdef USE_OPENGL_ES2
- #define STELPAINTER_GL2 1
-#endif
-
-#ifdef STELPAINTER_GL2
-class QGLShaderProgram;
-#endif
-
-class QPainter;
-class QGLContext;
-
-class StelPainterLight
-{
-public:
-	StelPainterLight(int alight=0) : light(alight), enabled(false) {}
-
-	void setPosition(const Vec4f& v);
-	Vec4f& getPosition() {return position;}
-
-	void setDiffuse(const Vec4f& v);
-	Vec4f& getDiffuse() {return diffuse;}
-
-	void setSpecular(const Vec4f& v);
-	Vec4f& getSpecular() {return specular;}
-
-	void setAmbient(const Vec4f& v);
-	Vec4f& getAmbient() {return ambient;}
-
-	void setEnable(bool v);
-	void enable();
-	void disable();
-	bool isEnabled() const {return enabled;}
-
-private:
-	int light;
-	Vec4f position;
-	Vec4f diffuse;
-	Vec4f specular;
-	Vec4f ambient;
-	bool enabled;
-};
-
-
-class StelPainterMaterial
-{
-public:
-        StelPainterMaterial();
-
-        void setSpecular(const Vec4f& v);
-	Vec4f& getSpecular() {return specular;}
-
-        void setAmbient(const Vec4f& v);
-        Vec4f& getAmbient() {return ambient;}
-
-        void setEmission(const Vec4f& v);
-	Vec4f& getEmission() {return emission;}
-
-	void setShininess(float v);
-        float getShininess() {return shininess;}
-private:
-	Vec4f specular;
-        Vec4f ambient;
-        Vec4f emission;
-        float shininess;
-};
+class QOpenGLShaderProgram;
 
 //! @class StelPainter
 //! Provides functions for performing openGL drawing operations.
@@ -107,16 +45,10 @@ public:
 	//! Define the drawing mode when drawing polygons
 	enum SphericalPolygonDrawMode
 	{
-		SphericalPolygonDrawModeFill=0,			//!< Draw the interior of the polygon
-		SphericalPolygonDrawModeBoundary=1,		//!< Draw the boundary of the polygon
-		SphericalPolygonDrawModeTextureFill=2	//!< Draw the interior of the polygon filled with the current texture
-	};
-
-	//! Define the shade model when interpolating polygons
-	enum ShadeModel
-	{
-		ShadeModelFlat=0x1D00,		//!< GL_FLAT
-		ShadeModelSmooth=0x1D01	//!< GL_SMOOTH
+		SphericalPolygonDrawModeFill=0,				//!< Draw the interior of the polygon
+		SphericalPolygonDrawModeBoundary=1,			//!< Draw the boundary of the polygon
+		SphericalPolygonDrawModeTextureFill=2,			//!< Draw the interior of the polygon filled with the current texture
+		SphericalPolygonDrawModeTextureFillColormodulated=3	//!< Draw the interior of the polygon filled with the current texture multiplied by vertex colors
 	};
 
 	//! Define the drawing mode when drawing vertex
@@ -150,10 +82,11 @@ public:
 	//! @param xshift shift in pixel in the rotated x direction.
 	//! @param yshift shift in pixel in the rotated y direction.
 	//! @param noGravity don't take into account the fact that the text should be written with gravity.
+	//! @param v direction vector of object to draw. GZ20120826: Will draw only if this is in the visible hemisphere.
 	void drawText(float x, float y, const QString& str, float angleDeg=0.f,
-			  float xshift=0.f, float yshift=0.f, bool noGravity=true);
-	void drawText(const Vec3d& v, const QString& str, float angleDeg=0.f,
-			  float xshift=0.f, float yshift=0.f, bool noGravity=true);
+			  float xshift=0.f, float yshift=0.f, const bool noGravity=true);
+	void drawText(const Vec3d& v, const QString& str, const float angleDeg=0.f,
+			  const float xshift=0.f, const float yshift=0.f, const bool noGravity=true);
 
 	//! Draw the given SphericalRegion.
 	//! @param region The SphericalRegion to draw.
@@ -165,7 +98,7 @@ public:
 
 	void drawGreatCircleArcs(const StelVertexArray& va, const SphericalCap* clippingCap=NULL);
 
-	void drawSphericalTriangles(const StelVertexArray& va, bool textured, const SphericalCap* clippingCap=NULL, bool doSubDivide=true, double maxSqDistortion=5.);
+	void drawSphericalTriangles(const StelVertexArray& va, const bool textured, const bool colored, const SphericalCap* clippingCap=NULL, const bool doSubDivide=true, const double maxSqDistortion=5.);
 
 	//! Draw a small circle arc between points start and stop with rotation point in rotCenter.
 	//! The angle between start and stop must be < 180 deg.
@@ -184,16 +117,20 @@ public:
 	void drawGreatCircleArc(const Vec3d& start, const Vec3d& stop, const SphericalCap* clippingCap=NULL, void (*viewportEdgeIntersectCallback)(const Vec3d& screenPos, const Vec3d& direction, void* userData)=NULL, void* userData=NULL);
 
 	//! Draw a simple circle, 2d viewport coordinates in pixel
-	void drawCircle(float x, float y, float r);
+	void drawCircle(const float x, const float y, float r);
 
 	//! Draw a square using the current texture at the given projected 2d position.
 	//! This method is not thread safe.
 	//! @param x x position in the viewport in pixel.
 	//! @param y y position in the viewport in pixel.
 	//! @param radius the half size of a square side in pixel.
-	void drawSprite2dMode(float x, float y, float radius);
-	void drawSprite2dMode(const Vec3d& v, float radius);
+	//! @param v direction vector of object to draw. GZ20120826: Will draw only if this is in the visible hemisphere.
+	void drawSprite2dMode(const float x, const float y, float radius);
+	void drawSprite2dMode(const Vec3d& v, const float radius);
 
+	//! Same as drawSprite2dMode but don't scale according to display device scaling. 
+	void drawSprite2dModeNoDeviceScale(const float x, const float y, const float radius);
+	
 	//! Draw a rotated square using the current texture at the given projected 2d position.
 	//! This method is not thread safe.
 	//! @param x x position in the viewport in pixel.
@@ -205,14 +142,14 @@ public:
 	//! Draw a GL_POINT at the given position.
 	//! @param x x position in the viewport in pixels.
 	//! @param y y position in the viewport in pixels.
-	void drawPoint2d(float x, float y);
+	void drawPoint2d(const float x, const float y);
 
 	//! Draw a line between the 2 points.
 	//! @param x1 x position of point 1 in the viewport in pixels.
 	//! @param y1 y position of point 1 in the viewport in pixels.
 	//! @param x2 x position of point 2 in the viewport in pixels.
 	//! @param y2 y position of point 2 in the viewport in pixels.
-	void drawLine2d(float x1, float y1, float x2, float y2);
+	void drawLine2d(const float x1, const float y1, const float x2, const float y2);
 
 	//! Draw a rectangle using the current texture at the given projected 2d position.
 	//! This method is not thread safe.
@@ -221,32 +158,56 @@ public:
 	//! @param width width in pixel.
 	//! @param height height in pixel.
 	//! @param textured whether the current texture should be used for painting.
-	void drawRect2d(float x, float y, float width, float height, bool textured=true);
+	void drawRect2d(const float x, const float y, const float width, const float height, const bool textured=true);
 
 	//! Re-implementation of gluSphere : glu is overridden for non-standard projection.
-	void sSphere(float radius, float oneMinusOblateness, int slices, int stacks, int orientInside = 0, bool flipTexture = false);
+	//! @param radius
+	//! @param oneMinusOblateness
+	//! @param slices: number of vertical segments ("meridian zones")
+	//! @param stacks: number of horizontal segments ("latitude zones")
+	//! @param orientInside: 1 to have normals point inside, e.g. for landscape horizons
+	//! @param flipTexture: if texture should be mapped to inside of sphere, e.g. landscape horizons.
+	//! @param topAngle GZ: new parameter. An opening angle [radians] at top of the sphere. Useful if there is an empty
+	//!        region around the top pole, like for a spherical equirectangular horizon panorama (@class SphericalLandscape).
+	//!        Example: your horizon line (pano photo) goes up to 26 degrees altitude (highest mountains/trees):
+	//!        topAngle = 64 degrees = 64*M_PI/180.0f
+	//! @param bottomAngle GZ: new parameter. An opening angle [radians] at bottom of the sphere. Useful if there is an empty
+	//!        region around the bottom pole, like for a spherical equirectangular horizon panorama (SphericalLandscape class).
+	//!        Example: your light pollution image (pano photo) goes down to just -5 degrees altitude (lowest street lamps below you):
+	//!        bottomAngle = 95 degrees = 95*M_PI/180.0f
+	void sSphere(const float radius, const float oneMinusOblateness, const int slices, const int stacks, const int orientInside = 0, const bool flipTexture = false,
+				 const float topAngle=0.0f, const float bottomAngle=M_PI);
 
 	//! Generate a StelVertexArray for a sphere.
-	static StelVertexArray computeSphereNoLight(float radius, float oneMinusOblateness, int slices, int stacks, int orientInside = 0, bool flipTexture = false);
+	//! @param radius
+	//! @param oneMinusOblateness
+	//! @param slices: number of vertical segments ("meridian zones")
+	//! @param stacks: number of horizontal segments ("latitude zones")
+	//! @param orientInside: 1 to have normals point inside, e.g. for Milky Way, Zodiacal Light, etc.
+	//! @param flipTexture: if texture should be mapped to inside of sphere, e.g. Milky Way.
+	//! @param topAngle GZ: new parameter. An opening angle [radians] at top of the sphere. Useful if there is an empty
+	//!        region around the top pole, like North Galactic Pole.
+	//! @param bottomAngle GZ: new parameter. An opening angle [radians] at bottom of the sphere. Useful if there is an empty
+	//!        region around the bottom pole, like South Galactic Pole.
+	static StelVertexArray computeSphereNoLight(const float radius, const float oneMinusOblateness, const int slices, const int stacks,
+						    const int orientInside = 0, const bool flipTexture = false,
+						    const float topAngle=0.0f, const float bottomAngle=M_PI);
 
 	//! Re-implementation of gluCylinder : glu is overridden for non-standard projection.
-	void sCylinder(float radius, float height, int slices, int orientInside = 0);
+	void sCylinder(const float radius, const float height, const int slices, const int orientInside = 0);
 
 	//! Draw a disk with a special texturing mode having texture center at center of disk.
 	//! The disk is made up of concentric circles with increasing refinement.
 	//! The number of slices of the outmost circle is (innerFanSlices<<level).
 	//! @param radius the radius of the disk.
 	//! @param innerFanSlices the number of slices.
-	//! @param level the numbe of concentric circles.
+	//! @param level the number of concentric circles.
 	//! @param vertexArr the vertex array in which the resulting vertices are returned.
 	//! @param texCoordArr the vertex array in which the resulting texture coordinates are returned.
 	static void computeFanDisk(float radius, int innerFanSlices, int level, QVector<double>& vertexArr, QVector<float>& texCoordArr);
 
-	//! Draw a ring with a radial texturing.
-	void sRing(float rMin, float rMax, int slices, int stacks, int orientInside);
-
 	//! Draw a fisheye texture in a sphere.
-	void sSphereMap(float radius, int slices, int stacks, float textureFov = 2.f*M_PI, int orientInside = 0);
+	void sSphereMap(const float radius, const int slices, const int stacks, const float textureFov = 2.f*M_PI, const int orientInside = 0);
 
 	//! Set the font to use for subsequent text drawing.
 	void setFont(const QFont& font);
@@ -257,90 +218,88 @@ public:
 	//! Get the color currently used for drawing.
 	Vec4f getColor() const;
 
-	//! Get the light
-	StelPainterLight& getLight() {return light;}
-
-	//! Get the material
-	StelPainterMaterial& getMaterial() {return material;}
-
 	//! Get the font metrics for the current font.
 	QFontMetrics getFontMetrics() const;
 
-	//! Get some informations about the OS openGL capacities and set the GLContext which will be used by Stellarium.
+	//! Create the OpenGL shaders programs used by the StelPainter.
 	//! This method needs to be called once at init.
-	static void initSystemGLInfo(QGLContext* ctx);
-
-	//! Set the QPainter to use for performing some drawing operations.
-	static void setQPainter(QPainter* qPainter);
-
-	//! Swap the OpenGL buffers. You normally don't need to do that.
-	static void swapBuffer();
-
-	//! Make sure that our GL context is current and valid.
-	static void makeMainGLContextCurrent();
-
-	// The following methods try to reflect the API of the incoming QGLPainter class
-
-	//! Sets the point size to use with draw().
-	//! This function has no effect if a shader program is in use, or on OpenGL/ES 2.0. Shader programs must set the
-	//! point size in the vertex shader.
-	void setPointSize(qreal size);
-
-	//! Define the current shade model used when interpolating between vertex.
-	void setShadeModel(ShadeModel m);
+	static void initGLShaders();
+	
+	//! Delete the OpenGL shaders objects.
+	//! This method needs to be called once before exit.
+	static void deinitGLShaders();
 
 	//! Set whether texturing is enabled.
-	void enableTexture2d(bool b);
+	void enableTexture2d(const bool b);
 
 	// Thoses methods should eventually be replaced by a single setVertexArray
 	//! use instead of glVertexPointer
-	void setVertexPointer(int size, int type, const void* pointer) {
+	void setVertexPointer(const int size, const int type, const void* pointer) {
 		vertexArray.size = size; vertexArray.type = type; vertexArray.pointer = pointer;
 	}
 
 	//! use instead of glTexCoordPointer
-	void setTexCoordPointer(int size, int type, const void* pointer)
+	void setTexCoordPointer(const int size, const int type, const void* pointer)
 	{
 		texCoordArray.size = size; texCoordArray.type = type; texCoordArray.pointer = pointer;
 	}
 
 	//! use instead of glColorPointer
-	void setColorPointer(int size, int type, const void* pointer)
+	void setColorPointer(const int size, const int type, const void* pointer)
 	{
 		colorArray.size = size; colorArray.type = type; colorArray.pointer = pointer;
 	}
 
 	//! use instead of glNormalPointer
-	void setNormalPointer(int type, const void* pointer)
+	void setNormalPointer(const int type, const void* pointer)
 	{
 		normalArray.size = 3; normalArray.type = type; normalArray.pointer = pointer;
-        }
+	}
 
 	//! use instead of glEnableClient
-        void enableClientStates(bool vertex, bool texture=false, bool color=false, bool normal=false);
+	void enableClientStates(const bool vertex, const bool texture=false, const bool color=false, const bool normal=false);
 
 	//! convenience method that enable and set all the given arrays.
 	//! It is equivalent to calling enableClientState and set the array pointer for each arrays.
-        void setArrays(const Vec3d* vertice, const Vec2f* texCoords=NULL, const Vec3f* colorArray=NULL, const Vec3f* normalArray=NULL);
+	void setArrays(const Vec3d* vertices, const Vec2f* texCoords=NULL, const Vec3f* colorArray=NULL, const Vec3f* normalArray=NULL);
+	void setArrays(const Vec3f* vertices, const Vec2f* texCoords=NULL, const Vec3f* colorArray=NULL, const Vec3f* normalArray=NULL);
 
 	//! Draws primitives using vertices from the arrays specified by setVertexArray().
-	//! The type of primitive to draw is specified by mode.
-	//! If indices is NULL, this operation will consume count values from the enabled arrays, starting at offset.
-	//! Else it will consume count elements of indices, starting at offset, which are used to index into the
+	//! @param mode The type of primitive to draw.
+	//! If @param indices is NULL, this operation will consume @param count values from the enabled arrays, starting at @param offset.
+	//! Else it will consume @param count elements of @param indices, starting at @param offset, which are used to index into the
 	//! enabled arrays.
-        void drawFromArray(DrawingMode mode, int count, int offset=0, bool doProj=true, const unsigned int* indices=NULL, int stride=0);
+	void drawFromArray(const DrawingMode mode, const int count, const int offset=0, const bool doProj=true, const unsigned short *indices=NULL);
 
 	//! Draws the primitives defined in the StelVertexArray.
 	//! @param checkDiscontinuity will check and suppress discontinuities if necessary.
-	void drawStelVertexArray(const StelVertexArray& arr, bool checkDiscontinuity=true);
+	void drawStelVertexArray(const StelVertexArray& arr, const bool checkDiscontinuity=true);
+
+	//! Link an opengl program and show a message in case of error or warnings.
+	//! @return true if the link was successful.
+	static bool linkProg(class QOpenGLShaderProgram* prog, const QString& name);
 
 private:
 
 	friend class StelTextureMgr;
 	friend class StelTexture;
-	//! Struct describing one opengl array
-	typedef struct
+
+	//! RAII class used to store and restore the opengl state.
+	//! to use it we just need to instanciate it at the beginning of a method that might change the state.
+	class GLState
 	{
+	public:
+		GLState();
+		~GLState();
+	private:
+		bool blend;
+		int blendSrcRGB, blendDstRGB, blendSrcAlpha, blendDstAlpha;
+	};
+
+	//! Struct describing one opengl array
+	typedef struct ArrayDesc
+	{
+		ArrayDesc() : size(0), type(0), pointer(NULL), enabled(false) {}
 		int size;				// The number of coordinates per vertex.
 		int type;				// The data type of each coordinate (GL_SHORT, GL_INT, GL_FLOAT, or GL_DOUBLE).
 		const void* pointer;	// Pointer to the first coordinate of the first vertex in the array.
@@ -349,7 +308,7 @@ private:
 
 	//! Project an array using the current projection.
 	//! @return a descriptor of the new array
-	ArrayDesc projectArray(const ArrayDesc& array, int offset, int count, const unsigned int* indices=NULL);
+	ArrayDesc projectArray(const ArrayDesc& array, int offset, int count, const unsigned short *indices=NULL);
 
 	//! Project the passed triangle on the screen ensuring that it will look smooth, even for non linear distortion
 	//! by splitting it into subtriangles. The resulting vertex arrays are appended to the passed out* ones.
@@ -357,11 +316,14 @@ private:
 	//! @param vertices a pointer to an array of 3 vertices.
 	//! @param edgeFlags a pointer to an array of 3 flags indicating whether the next segment is an edge.
 	//! @param texturePos a pointer to an array of 3 texture coordinates, or NULL if the triangle should not be textured.
+	//! @param colors a pointer to an array of 3 colors, or NULL if the triangle should not be vertex-colored. If texture and color coords are present, texture is modulated by vertex colors. (e.g. extinction)
 	void projectSphericalTriangle(const SphericalCap* clippingCap, const Vec3d* vertices, QVarLengthArray<Vec3f, 4096>* outVertices,
-			const Vec2f* texturePos=NULL, QVarLengthArray<Vec2f, 4096>* outTexturePos=NULL, double maxSqDistortion=5., int nbI=0,
-			bool checkDisc1=true, bool checkDisc2=true, bool checkDisc3=true) const;
+			const Vec2f* texturePos=NULL, QVarLengthArray<Vec2f, 4096>* outTexturePos=NULL,
+			const Vec3f* colors=NULL, QVarLengthArray<Vec3f, 4096>* outColors=NULL,
+			const double maxSqDistortion=5., const int nbI=0,
+			const bool checkDisc1=true, const bool checkDisc2=true, const bool checkDisc3=true) const;
 
-	void drawTextGravity180(float x, float y, const QString& str, float xshift = 0, float yshift = 0);
+	void drawTextGravity180(float x, float y, const QString& str, const float xshift = 0, const float yshift = 0);
 
 	// Used by the method below
 	static QVector<Vec2f> smallCircleVertexArray;
@@ -375,24 +337,24 @@ private:
 	static class QMutex* globalMutex;
 #endif
 
-	//! The QPainter to use for some drawing operations.
-	static QPainter* qPainter;
+	//! The used for text drawing
+	QFont currentFont;
 
-	//! The main GL Context used by Stellarium.
-	static QGLContext* glContext;
-
-#ifdef STELPAINTER_GL2
 	Vec4f currentColor;
 	bool texture2dEnabled;
-	static QGLShaderProgram* basicShaderProgram;
+	
+	static QOpenGLShaderProgram* basicShaderProgram;
 	struct BasicShaderVars {
 		int projectionMatrix;
 		int color;
 		int vertex;
 	};
 	static BasicShaderVars basicShaderVars;
-	static QGLShaderProgram* colorShaderProgram;
-	static QGLShaderProgram* texturesShaderProgram;
+
+	static QOpenGLShaderProgram* colorShaderProgram;
+	static BasicShaderVars colorShaderVars;
+
+	static QOpenGLShaderProgram* texturesShaderProgram;
 	struct TexturesShaderVars {
 		int projectionMatrix;
 		int texCoord;
@@ -401,7 +363,7 @@ private:
 		int texture;
 	};
 	static TexturesShaderVars texturesShaderVars;
-	static QGLShaderProgram* texturesColorShaderProgram;
+	static QOpenGLShaderProgram* texturesColorShaderProgram;
 	struct TexturesColorShaderVars {
 		int projectionMatrix;
 		int texCoord;
@@ -410,7 +372,7 @@ private:
 		int texture;
 	};
 	static TexturesColorShaderVars texturesColorShaderVars;
-#endif
+
 
 	//! The descriptor for the current opengl vertex array
 	ArrayDesc vertexArray;
@@ -419,13 +381,7 @@ private:
 	//! The descriptor for the current opengl normal array
 	ArrayDesc normalArray;
 	//! The descriptor for the current opengl color array
-        ArrayDesc colorArray;
-
-	//! the single light used by the painter
-	StelPainterLight light;
-
-	//! The material used by the painter
-	StelPainterMaterial material;
+	ArrayDesc colorArray;
 };
 
 #endif // _STELPAINTER_HPP_

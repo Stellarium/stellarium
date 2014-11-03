@@ -22,42 +22,55 @@
 
 #include <QString>
 #include <QObject>
-#include <QMultiMap>
-#include <QPair>
-#include <QHash>
+#include <QSettings>
 
 #include "StelDialog.hpp"
 
 class Ui_helpDialogForm;
 class QListWidgetItem;
+class QNetworkAccessManager;
+class QNetworkReply;
 
 class HelpDialog : public StelDialog
 {
 	Q_OBJECT
 public:
-	HelpDialog();
+	//! @enum UpdateState
+	//! Used for keeping for track of the download/update status
+	enum UpdateState {
+		Updating,		//!< Update in progress
+		CompleteNoUpdates,	//!< Update completed, there we no updates
+		CompleteUpdates,	//!< Update completed, there were updates
+		DownloadError,		//!< Error during download phase
+		OtherError		//!< Other error
+	};
+
+	HelpDialog(QObject* parent);
 	~HelpDialog();
-
-	//! Set a key and description.
-	//!
-	//! @note @a group and @a description must be in English; this function takes
-	//! care of translating them. Of course, they still have to be marked for
-	//! translation using the <tt>N_()</tt> macro.
-	//!
-	//! @param group is the help group.  e.g. "Movement" or "Time & Date"
-	//! @param oldKey is the textual representation of the old key binding (in the
-	//!        case or re-mapping), e.g. "CTRL + H".  Can be an empty string
-	//! @param newKey is the textual representation of the key binding, e.g. "CTRL + H"
-	//! @param description is a short description of what the key does
-	void setKey(QString group, QString oldKey, QString newKey, QString description);
-
 
 	//! Notify that the application style changed
 	void styleChanged();
 
+	//! get whether or not the plugin will try to update data from the internet
+	//! @return true if updates are set to be done, false otherwise
+	bool getUpdatesEnabled(void) {return updatesEnabled;}
+	//! set whether or not the plugin will try to update data from the internet
+	//! @param b if true, updates will be enabled, else they will be disabled
+	void setUpdatesEnabled(bool b) {updatesEnabled=b;}
+	//! Get the current updateState
+	UpdateState getUpdateState(void) {return updateState;}
+	//! Get the version from the "latestVersion" value in the updates.json file
+	//! @return version string, e.g. "0.12.4"
+	QString getLatestVersionFromJson(void);
+	int getRequiredOpenGLVersionFromJson(void);
+	void setUpdatesMessage(bool hasUpdates, QString version="", int OpenGL=0);
+	QString getUpdatesMessage();
+
 public slots:
 	void retranslate();
-	void updateIconsColor();
+	//! Download JSON from web recources described in the module section of the
+	//! module.ini file and update the local JSON file.
+	void updateJSON(void);
 
 protected:
 	//! Initialize the dialog widgets and connect the signals/slots
@@ -65,9 +78,15 @@ protected:
 
 	Ui_helpDialogForm* ui;
 
+signals:
+	//! @param state the new update state.
+	void updateStateChanged(HelpDialog::UpdateState state);
+
 private slots:
-	//! Slot that's called when the current tab changes. Updates log file
-	//! if Log tab is selected.
+	//! Show/bring to foreground the shortcut editor window.
+	void showShortcutsWindow();
+	
+	//! On tab change, if the Log tab is selected, call refreshLog().
 	void updateLog(int);
 
 	//! Sync the displayed log.
@@ -75,32 +94,34 @@ private slots:
 
 	void changePage(QListWidgetItem *current, QListWidgetItem *previous);
 
-private:
-	//! Return the header text.
-	QString getHeaderText(void);
+	//! check to see if an update is required.  This is called periodically by a timer
+	//! if the last update was longer than updateFrequencyHours ago then the update is
+	//! done.
+	void updateDownloadComplete(QNetworkReply* reply);
 
-	//! Return the footer text.
-	QString getFooterText(void);
+private:
+	//! Return the help text with keys description and external links.
+	QString getHelpText(void);
 
 	//! This function concatenates the header, key codes and footer to build
 	//! up the help text.
 	void updateText(void);
 
-	//! This uses the group key description as the key to the map, and a
-	//! containing the helpGroup and description as the map value.
-	//! code and description.
-	QMultiMap<QString, QPair<QString, QString> > keyData;
+	//! replace the json file with the default from the compiled-in resource
+	void restoreDefaultJsonFile(void);
 
-	//! A hash that maps some special keys to translatable strings.
-	QHash<QString, QString> specialKeys;
+	//! read the json file.
+	void readJsonFile(void);
 
-	//! Sort function for qSort to compare QPair<QString,QString> values.
-	//! This is used when displaying the hlp text to sort the items in a group
-	//! by the key code (first item of the QPair)
-	static bool helpItemSort(const QPair<QString, QString>& p1, const QPair<QString, QString>& p2);
-
-	//! Sort function for putting the Misc group at the end of the list of groups
-	static bool helpGroupSort(const QString& s1, const QString& s2);
+	// variables and functions for the updater
+	UpdateState updateState;
+	QSettings* conf;
+	QNetworkAccessManager* downloadMgr;
+	QString updateUrl;	
+	bool updatesEnabled;
+	QString jsonDataPath;
+	QString currentVersion;
+	QString updatesMessage;
 };
 
 #endif /*_HELPDIALOG_HPP_*/

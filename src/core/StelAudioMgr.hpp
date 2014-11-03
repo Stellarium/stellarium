@@ -19,13 +19,11 @@
 #ifndef _STELAUDIOMGR_HPP_
 #define _STELAUDIOMGR_HPP_
 
-#ifdef HAVE_QT_PHONON
-#include <phonon/mediaobject.h>
-#endif
-
 #include <QObject>
 #include <QMap>
 #include <QString>
+
+class QMediaPlayer;
 
 class StelAudioMgr : public QObject
 {
@@ -43,10 +41,7 @@ public slots:
 	void dropSound(const QString& id);
 
 private:
-#ifdef HAVE_QT_PHONON
-	QMap<QString, Phonon::MediaObject*> audioObjects;
-#endif
-
+	QMap<QString, QMediaPlayer*> audioObjects;
 };
 
 #endif // _STELAUDIOMGR_HPP_

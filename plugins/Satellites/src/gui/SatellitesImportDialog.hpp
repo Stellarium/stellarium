@@ -74,7 +74,7 @@ private:
 	QList<QNetworkReply*> activeDownloads;
 	QStringList sourceUrls;
 	QList<QFile*> sourceFiles;
-	QProgressBar* progressBar;
+	class StelProgressController* progressBar;
 	
 	QStandardItemModel* newSatellitesModel;
 	QSortFilterProxyModel * filterProxyModel;

@@ -17,12 +17,12 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
+#include "config.h"
 #include <QString>
 #include <QTextBrowser>
 #include <QVBoxLayout>
 #include <QWidget>
 #include <QFrame>
-#include <QSettings>
 #include <QResizeEvent>
 #include <QSize>
 #include <QMultiMap>
@@ -31,56 +31,45 @@
 #include <QPair>
 #include <QtAlgorithms>
 #include <QDebug>
+#include <QNetworkAccessManager>
+#include <QNetworkReply>
+#include <QFileInfo>
+#include <QFile>
+#include <QDir>
+#include <QProcess>
+#include <QSysInfo>
+#include <QGLFormat>
 
 #include "ui_helpDialogGui.h"
-
 #include "HelpDialog.hpp"
+
+#include "StelUtils.hpp"
 #include "StelApp.hpp"
 #include "StelFileMgr.hpp"
-#include "StelLocaleMgr.hpp"
-#include "StelStyle.hpp"
-#include "StelLogger.hpp"
 #include "StelGui.hpp"
 #include "StelGuiItems.hpp"
+#include "StelLocaleMgr.hpp"
+#include "StelLogger.hpp"
+#include "StelStyle.hpp"
+#include "StelActionMgr.hpp"
+#include "StelJsonParser.hpp"
 
-HelpDialog::HelpDialog()
+HelpDialog::HelpDialog(QObject* parent)
+	: StelDialog(parent)
+	, updateState(CompleteNoUpdates)
+	, downloadMgr(NULL)
 {
 	ui = new Ui_helpDialogForm;
 
-	// Make some key and mouse bindings translatable. Keys starting with
-	// "!NUMBER-" are made up; the number is there to keep the entries
-	// sorted (at least relative to each other).
-	specialKeys["Space"] = N_("Space");
-	specialKeys["!01-arrows-and-left-drag"] = N_("Arrow keys & left mouse drag");
-	specialKeys["!02-page-up/down"] = N_("Page Up/Down");
-	specialKeys["!03-ctrl+up/down"] = N_("CTRL + Up/Down");
-	specialKeys["!04-left-click"] = N_("Left click");
-	specialKeys["!05-right-click"] = N_("Right click");
-	specialKeys["!06-ctrl+left-click"] = N_("CTRL + Left click");
+	conf = StelApp::getInstance().getSettings();
+	setUpdatesEnabled(conf->value("main/check_updates_enabled", true).toBool()); // Enable check for updates by default
+	QString lang = conf->value("localization/app_locale", "en").toString();
+	if (lang=="system" || lang=="C")
+		lang = "en";
+	updateUrl = QString("http://www.stellarium.org/%1/updates.php").arg(lang);
+	currentVersion = StelUtils::getApplicationVersion();
 
-	// Add keys for those keys which do not have actions.
-	QString group = N_("Movement and Selection");
-	setKey(group, "", "!01-arrows-and-left-drag", N_("Pan view around the sky"));
-	setKey(group, "", "!02-page-up/down", N_("Zoom in/out"));
-	setKey(group, "", "!03-ctrl+up/down", N_("Zoom in/out"));
-	setKey(group, "", "!04-left-click", N_("Select object"));
-	setKey(group, "", "!05-right-click", N_("Clear selection"));
-#ifdef Q_OS_MAC
-	setKey(group, "", "!06-ctrl+left-click", N_("Clear selection"));
-#endif
-
-	group = N_("When a Script is Running");
-
-	setKey(group, "", "4", N_("Stop currently running script"));
-	setKey(group, "", "5", N_("Pause script execution"));
-	setKey(group, "", "6", N_("Resume script execution"));
-	setKey(group, "", "J", N_("Slow down the script execution rate"));
-	setKey(group, "", "L", N_("Speed up the script execution rate"));
-	setKey(group, "", "K", N_("Set the normal script execution rate"));
-
-        // Add keys for those plugins which do not have GUI actions.
-        group = N_("Plugin Key Bindings");
-        setKey(group, "", "Alt+M", N_("Text User Interface"));
+	conf->setValue("main/check_updates_enabled", getUpdatesEnabled());
 }
 
 HelpDialog::~HelpDialog()
@@ -106,47 +95,260 @@ void HelpDialog::styleChanged()
 	}
 }
 
-void HelpDialog::updateIconsColor()
-{
-	QPixmap pixmap(50, 50);
-	QStringList icons;
-	icons << "help" << "info" << "logs";
-	bool redIcon = false;
-	if (StelApp::getInstance().getVisionModeNight())
-		redIcon = true;
-
-	foreach(const QString &iconName, icons)
-	{
-		pixmap.load(":/graphicGui/tabicon-" + iconName +".png");
-		if (redIcon)
-			pixmap = StelButton::makeRed(pixmap);
-
-		ui->stackListWidget->item(icons.indexOf(iconName))->setIcon(QIcon(pixmap));
-	}
-}
-
 void HelpDialog::createDialogContent()
 {
 	ui->setupUi(dialog);
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
-	connect(&StelApp::getInstance(), SIGNAL(colorSchemeChanged(QString)), this, SLOT(updateIconsColor()));
 	ui->stackedWidget->setCurrentIndex(0);
-	updateIconsColor();
 	ui->stackListWidget->setCurrentRow(0);
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 
-	updateText();
+	setUpdatesMessage(false);
+	if (getUpdatesEnabled())
+	{
+		StelFileMgr::makeSureDirExistsAndIsWritable(StelFileMgr::getUserDir()+"/data");
+		jsonDataPath = StelFileMgr::findFile("data", (StelFileMgr::Flags)(StelFileMgr::Directory|StelFileMgr::Writable)) + "/updates.json";
 
+		// If the json file does not already exist, create it from the resource in the Qt resource
+		if(!QFileInfo(jsonDataPath).exists())
+		{
+			//qDebug() << "HelpDialog::createDialogContent() updates.json does not exist - copying default file to " << QDir::toNativeSeparators(jsonDataPath);
+			restoreDefaultJsonFile();
+		}
+
+		//qDebug() << "HelpDialog::createDialogContent() using file: " << QDir::toNativeSeparators(jsonDataPath);
+
+		// Set up download manager and the update schedule
+		downloadMgr = new QNetworkAccessManager(this);
+		connect(downloadMgr, SIGNAL(finished(QNetworkReply*)), this, SLOT(updateDownloadComplete(QNetworkReply*)));
+		updateState = CompleteNoUpdates;
+		updateJSON();
+	}
+
+#ifdef Q_OS_WIN
+	//Kinetic scrolling for tablet pc and pc
+	QList<QWidget *> addscroll;
+	addscroll << ui->helpBrowser << ui->aboutBrowser << ui->logBrowser;
+	installKineticScrolling(addscroll);
+#endif
+
+	// Help page
+	updateText();
+	connect(ui->editShortcutsButton, SIGNAL(clicked()), this, SLOT(showShortcutsWindow()));
+
+	// Log page
 	ui->logPathLabel->setText(QString("%1/log.txt:").arg(StelFileMgr::getUserDir()));
 	connect(ui->stackedWidget, SIGNAL(currentChanged(int)), this, SLOT(updateLog(int)));
 	connect(ui->refreshButton, SIGNAL(clicked()), this, SLOT(refreshLog()));
 
 	connect(ui->stackListWidget, SIGNAL(currentItemChanged(QListWidgetItem *, QListWidgetItem *)), this, SLOT(changePage(QListWidgetItem *, QListWidgetItem*)));
+
+}
+
+void HelpDialog::updateDownloadComplete(QNetworkReply *reply)
+{
+	// check the download worked, and save the data to file if this is the case.
+	if (reply->error() != QNetworkReply::NoError)
+	{
+		qWarning() << "HelpDialog::updateDownloadComplete() FAILED to download" << reply->url() << " Error: " << reply->errorString();
+	}
+	else
+	{
+		// download completed successfully.
+		QString jsonFilePath = StelFileMgr::findFile("data", StelFileMgr::Flags(StelFileMgr::Writable|StelFileMgr::Directory)) + "/updates.json";
+		if (jsonFilePath.isEmpty())
+		{
+			qWarning() << "HelpDialog::updateDownloadComplete(): cannot write JSON data to file data/updates.json";
+			return;
+		}
+		QFile jsonFile(jsonFilePath);
+		if (jsonFile.exists())
+			jsonFile.remove();
+
+		if(jsonFile.open(QIODevice::WriteOnly | QIODevice::Text))
+		{
+			jsonFile.write(reply->readAll());
+			jsonFile.close();
+		}
+	}
+}
+
+void HelpDialog::updateJSON(void)
+{
+	if (updateState==HelpDialog::Updating)
+	{
+		qWarning() << "HelpDialog: already updating...  will not start again current update is complete.";
+		return;
+	}
+
+	updateState = HelpDialog::Updating;
+	emit(updateStateChanged(updateState));
+
+	// Get info about operating system
+	QString OS = StelUtils::getOperatingSystemInfo();
+	if (OS.contains("Linux"))
+		OS = "Linux";
+	// Set user agent as "Stellarium/$version$ ($platform$)"
+	QString UserAgent = QString("Stellarium/%1 (%2)").arg(currentVersion).arg(OS);
+	QNetworkRequest request;
+	request.setUrl(QUrl(updateUrl));
+	request.setRawHeader("User-Agent", UserAgent.toUtf8());
+	downloadMgr->get(request);
+
+	updateState = HelpDialog::CompleteUpdates;
+	emit(updateStateChanged(updateState));
+	readJsonFile();
+}
+
+QString HelpDialog::getLatestVersionFromJson()
+{
+	QString jsonVersion("unknown");
+	QFile jsonDataFile(jsonDataPath);
+	if (!jsonDataFile.open(QIODevice::ReadOnly))
+	{
+		qWarning() << "HelpDialog::getLatestVersionFromJson() cannot open " << QDir::toNativeSeparators(jsonDataPath);
+		return jsonVersion;
+	}
+
+	QVariantMap map;
+	try
+	{
+		map = StelJsonParser::parse(&jsonDataFile).toMap();
+		if (map.contains("latestVersion"))
+		{
+			jsonVersion = map.value("latestVersion").toString();
+		}
+		jsonDataFile.close();
+	}
+	catch(std::runtime_error& e)
+	{
+		qDebug() << "HelpDialog::getLatestVersionFromJson() error:" << e.what();
+	}
+
+	//qDebug() << "HelpDialog::getLatestVersionFromJson() latest version from file:" << jsonVersion;
+	return jsonVersion;
+}
+
+int HelpDialog::getRequiredOpenGLVersionFromJson()
+{
+	int jsonVersion = 0;
+	QFile jsonDataFile(jsonDataPath);
+	if (!jsonDataFile.open(QIODevice::ReadOnly))
+	{
+		qWarning() << "HelpDialog::getRequiredOpenGLVersionFromJson() cannot open " << QDir::toNativeSeparators(jsonDataPath);
+		return jsonVersion;
+	}
+
+	QVariantMap map;
+	try
+	{
+		map = StelJsonParser::parse(&jsonDataFile).toMap();
+		if (map.contains("requiredOpenGLVersion"))
+		{
+			jsonVersion = map.value("requiredOpenGLVersion").toInt();
+		}
+		jsonDataFile.close();
+	}
+	catch(std::runtime_error& e)
+	{
+		qDebug() << "HelpDialog::getRequiredOpenGLVersionFromJson() error:" << e.what();
+	}
+
+	//qDebug() << "HelpDialog::getRequiredOpenGLVersionFromJson() required OpenGL version from file:" << jsonVersion;
+	return jsonVersion;
+}
+
+/*
+  Replace the JSON file with the default from the compiled-in resource
+*/
+void HelpDialog::restoreDefaultJsonFile(void)
+{
+	QFile src(StelFileMgr::findFile("data/updates.json"));
+	if (!src.copy(jsonDataPath))
+	{
+		qWarning() << "HelpDialog::restoreDefaultJsonFile() cannot copy json resource to " + QDir::toNativeSeparators(jsonDataPath);
+	}
+	else
+	{
+		//qDebug() << "HelpDialog::restoreDefaultJsonFile() copied default updates.json to " << QDir::toNativeSeparators(jsonDataPath);
+		// The resource is read only, and the new file inherits this...  make sure the new file
+		// is writable by the Stellarium process so that updates can be done.
+		QFile dest(jsonDataPath);
+		dest.setPermissions(dest.permissions() | QFile::WriteOwner);
+	}
+}
+
+void HelpDialog::readJsonFile()
+{
+	QString version = getLatestVersionFromJson();
+	unsigned int OpenGLversion = getRequiredOpenGLVersionFromJson();
+	if (version!=currentVersion)
+	{
+		setUpdatesMessage(true, version, OpenGLversion);
+	}
+}
+
+void HelpDialog::setUpdatesMessage(bool hasUpdates, QString version, int OpenGL)
+{
+	if (version.contains("unknown"))
+	{
+		// TRANSLATORS: This message will be displayed for users if Stellarium can't get info about version from stellarium.org
+		updatesMessage = q_("Oops... Stellarium can't check latest version.");
+		return;
+	}
+	int cVMajor = 0, cVMinor = 0, cVPatch = 0, rVMajor = 0, rVMinor = 0, rVPatch = 0;
+	QRegExp vRx("(\\d+)\\.(\\d+)\\.(\\d+)");
+	if (vRx.exactMatch(currentVersion))
+	{
+		cVMajor = vRx.capturedTexts().at(1).toInt();
+		cVMinor = vRx.capturedTexts().at(2).toInt();
+		cVPatch = vRx.capturedTexts().at(3).toInt();
+	}
+	if (vRx.exactMatch(version))
+	{
+		rVMajor = vRx.capturedTexts().at(1).toInt();
+		rVMinor = vRx.capturedTexts().at(2).toInt();
+		rVPatch = vRx.capturedTexts().at(3).toInt();
+	}
+	if (hasUpdates)
+	{
+		if ((cVMajor>rVMajor) || (cVMinor>rVMinor) || (cVPatch>rVPatch))
+		{
+			// TRANSLATORS: This message will be displayed for users if current version of Stellarium is bigger than version from stellarium.org
+			updatesMessage = q_("Looks like you are using the development version of Stellarium.");
+		}
+		else
+		{
+			// TRANSLATORS: This message will be displayed for users if current version of Stellarium is smaller than version from stellarium.org
+			updatesMessage = q_("This version of Stellarium is outdated! Latest version is %1.").arg(version);
+			if (!(QGLFormat::openGLVersionFlags() & OpenGL))
+			{
+				updatesMessage.append(q_(" Sorry, your hardware is not compatible with newest version of Stellarium!"));
+			}
+		}		
+	}
+	else
+	{
+		// TRANSLATORS: This message will be displayed for users if current version of Stellarium is equals with version from stellarium.org
+		updatesMessage = q_("This is latest stable version of Stellarium.");
+	}
+}
+
+QString HelpDialog::getUpdatesMessage()
+{
+	return updatesMessage;
+}
+
+void HelpDialog::showShortcutsWindow()
+{
+	StelAction* action = StelApp::getInstance().getStelActionManager()->findAction("actionShow_Shortcuts_Window_Global");
+	if (action)
+		action->setChecked(true);
 }
 
 void HelpDialog::updateLog(int)
 {
-	if(ui->stackedWidget->currentWidget() == ui->page_3)
+	if (ui->stackedWidget->currentWidget() == ui->pageLog)
 		refreshLog();
 }
 
@@ -155,146 +357,126 @@ void HelpDialog::refreshLog()
 	ui->logBrowser->setPlainText(StelLogger::getLog());
 }
 
-void HelpDialog::setKey(QString group, QString oldKey, QString newKey, QString description)
+QString HelpDialog::getHelpText(void)
 {
-	// For adding keys like this, the choice of a QMultiMap seems like
-	// madness.  However, when we update the text it does the grouping
-	// for us... we have to live with ugliness in one of these functions
-	// and it seems easier here.
+	QString htmlText = "<html><head><title>";
+	htmlText += q_("Stellarium Help").toHtmlEscaped();
+	htmlText += "</title></head><body>\n";
+	
+	// WARNING! Section titles are re-used below!
+	htmlText += "<p align=\"center\"><a href=\"#keys\">" +
+		    q_("Keys").toHtmlEscaped() +
+	            "</a> &bull; <a href=\"#links\">" +
+		    q_("Further Reading").toHtmlEscaped() +
+	            "</a></p>\n";
+	
+	htmlText += "<h2 id='keys'>" + q_("Keys").toHtmlEscaped() + "</h2>\n";
+	htmlText += "<table cellpadding=\"10%\">\n";
+	// Describe keys for those keys which do not have actions.
+	// navigate
+	htmlText += "<tr><td>" + q_("Pan view around the sky").toHtmlEscaped() + "</td>";
+	htmlText += "<td><b>" + q_("Arrow keys & left mouse drag").toHtmlEscaped() + "</b></td></tr>\n";
+	// zoom in/out
+	htmlText += "<tr><td rowspan='2'>" + q_("Zoom in/out").toHtmlEscaped() +
+	            "</td>";
+	htmlText += "<td><b>" + q_("Page Up/Down").toHtmlEscaped() +
+	            "</b></td></tr>\n";
+	htmlText += "<tr><td><b>" + q_("CTRL + Up/Down").toHtmlEscaped() +
+	            "</b></td></tr>\n";
+	// select object
+	htmlText += "<tr><td>" + q_("Select object").toHtmlEscaped() + "</td>";
+	htmlText += "<td><b>" + q_("Left click").toHtmlEscaped() + "</b></td></tr>\n";
+	// clear selection
+	htmlText += "<tr>";
+#ifdef Q_OS_MAC
+	htmlText += "<td rowspan='2'>";
+#else
+	htmlText += "<td>";
+#endif
+	htmlText += q_("Clear selection").toHtmlEscaped() + "</td>";
+	htmlText += "<td><b>" + q_("Right click").toHtmlEscaped() + "</b></td></tr>\n";
+#ifdef Q_OS_MAC
+	htmlText += "<tr><td><b>" + q_("CTRL + Left click").toHtmlEscaped() + "</b></td></tr>\n";
+	//htmlText += "<td>" + E("Clear selection") + "</td>";
+#endif
+	
+	htmlText += "</table>\n<p>" +
+	                q_("Below are listed only the actions with assigned keys. Further actions may be available via the \"%1\" button.")
+	                .arg(ui->editShortcutsButton->text()).toHtmlEscaped() +
+	            "</p><table cellpadding=\"10%\">\n";
 
-	// For new key bindings we just insert and return
-	if (oldKey.isEmpty())
+	// Append all StelAction shortcuts.
+	StelActionMgr* actionMgr = StelApp::getInstance().getStelActionManager();
+	typedef QPair<QString, QString> KeyDescription;
+	foreach (QString group, actionMgr->getGroupList())
 	{
-		keyData.insert(group, QPair<QString, QString>(newKey, description));
-		// if (ui->helpBrowser!=NULL)
-		// 	this->updateText();
-		return;
-	}
-
-	// Else delete the old entry if we can find it, and then insert the
-	// new entry.  Here's where the multimap makes us wince...
-	QMultiMap<QString, QPair<QString, QString> >::iterator i = keyData.begin();
-	while (i != keyData.end()) {
-		QMultiMap<QString, QPair<QString, QString> >::iterator prev = i;
-		++i;
-		if (prev.value().first == oldKey)
+		QList<KeyDescription> descriptions;
+		foreach (StelAction* action, actionMgr->getActionList(group))
 		{
-			keyData.erase(prev);
+			if (action->getShortcut().isEmpty())
+				continue;
+			QString text = action->getText();
+			QString key =  action->getShortcut().toString(QKeySequence::NativeText);
+			descriptions.append(KeyDescription(text, key));
+		}
+		qSort(descriptions);
+		htmlText += "<tr></tr><tr><td><b><u>" + q_(group) +
+		            ":</u></b></td></tr>\n";
+		foreach (const KeyDescription& desc, descriptions)
+		{
+			htmlText += "<tr><td>" + desc.first.toHtmlEscaped() + "</td>";
+			htmlText += "<td><b>" + desc.second.toHtmlEscaped() +
+			            "</b></td></tr>\n";
 		}
 	}
 
-	keyData.insert(group, QPair<QString, QString>(newKey, description));
-	// if (ui->helpBrowser!=NULL)
-	// 	this->updateText();
-}
+	// edit shortcuts
+//	htmlText += "<tr><td><b>" + Qt::escape(q_("F7")) + "</b></td>";
+//	htmlText += "<td>" + Qt::escape(q_("Show and edit all keyboard shortcuts")) + "</td></tr>\n";
+	htmlText += "</table>";
 
-QString HelpDialog::getHeaderText(void)
-{
-	return "<html><head><title>" + Qt::escape(q_("Stellarium Help")) + "</title></head><body>\n"
-		+ "<h2>" + Qt::escape(q_("Keys")) + "</h2>\n";
-}
-
-QString HelpDialog::getFooterText(void)
-{
 	// Regexp to replace {text} with an HTML link.
 	QRegExp a_rx = QRegExp("[{]([^{]*)[}]");
 
-	QString footer = "<h2>" + Qt::escape(q_("Further Reading")) + "</h2>\n";
-	footer += Qt::escape(q_("The following links are external web links, and will launch your web browser:\n"));
-	footer += "<p><a href=\"http://stellarium.org/wiki/index.php/Category:User%27s_Guide\">" + Qt::escape(q_("The Stellarium User Guide")) + "</a>";
+	// WARNING! Section titles are re-used above!
+	htmlText += "<h2 id=\"links\">" + q_("Further Reading").toHtmlEscaped() + "</h2>\n";
+	htmlText += q_("The following links are external web links, and will launch your web browser:\n").toHtmlEscaped();
+	htmlText += "<p><a href=\"http://stellarium.org/wiki/index.php/Category:User%27s_Guide\">" + q_("The Stellarium User Guide").toHtmlEscaped() + "</a>";
 
-	footer += "<p>";
+	htmlText += "<p>";
 	// TRANSLATORS: The text between braces is the text of an HTML link.
-	footer += Qt::escape(q_("{Frequently Asked Questions} about Stellarium.  Answers too.")).replace(a_rx, "<a href=\"http://www.stellarium.org/wiki/index.php/FAQ\">\\1</a>");
-	footer += "</p>\n";
+	htmlText += q_("{Frequently Asked Questions} about Stellarium.  Answers too.").toHtmlEscaped().replace(a_rx, "<a href=\"http://www.stellarium.org/wiki/index.php/FAQ\">\\1</a>");
+	htmlText += "</p>\n";
 
-	footer += "<p>";
+	htmlText += "<p>";
 	// TRANSLATORS: The text between braces is the text of an HTML link.
-	footer += Qt::escape(q_("{The Stellarium Wiki} - General information.  You can also find user-contributed landscapes and scripts here.")).replace(a_rx, "<a href=\"http://stellarium.org/wiki/\">\\1</a>");
-	footer += "</p>\n";
+	htmlText += q_("{The Stellarium Wiki} - General information.  You can also find user-contributed landscapes and scripts here.").toHtmlEscaped().replace(a_rx, "<a href=\"http://stellarium.org/wiki/\">\\1</a>");
+	htmlText += "</p>\n";
 
-	footer += "<p>";
+	htmlText += "<p>";
 	// TRANSLATORS: The text between braces is the text of an HTML link.
-	footer += Qt::escape(q_("{Support ticket system} - if you need help using Stellarium, post a support request here and we'll try to help.")).replace(a_rx, "<a href=\"http://answers.launchpad.net/stellarium/+addquestion\">\\1</a>");
-	footer += "</p>\n";
+	htmlText += q_("{Support ticket system} - if you need help using Stellarium, post a support request here and we'll try to help.").toHtmlEscaped().replace(a_rx, "<a href=\"http://answers.launchpad.net/stellarium/+addquestion\">\\1</a>");
+	htmlText += "</p>\n";
 
-	footer += "<p>";
+	htmlText += "<p>";
 	// TRANSLATORS: The text between braces is the text of an HTML link.
-	footer += Qt::escape(q_("{Bug reporting and feature request system} - if something doesn't work properly or is missing and is not listed in the tracker, you can open bug reports here.")).replace(a_rx, "<a href=\"http://bugs.launchpad.net/stellarium/\">\\1</a>");
-	footer += "</p>\n";
+	htmlText += q_("{Bug reporting and feature request system} - if something doesn't work properly or is missing and is not listed in the tracker, you can open bug reports here.").toHtmlEscaped().replace(a_rx, "<a href=\"http://bugs.launchpad.net/stellarium/\">\\1</a>");
+	htmlText += "</p>\n";
 
-	footer += "<p>";
+	htmlText += "<p>";
 	// TRANSLATORS: The text between braces is the text of an HTML link.
-	footer += Qt::escape(q_("{Forums} - discuss Stellarium with other users.")).replace(a_rx, "<a href=\"http://sourceforge.net/forum/forum.php?forum_id=278769\">\\1</a>");
-	footer += "</p>\n";
+	htmlText += q_("{Forums} - discuss Stellarium with other users.").toHtmlEscaped().replace(a_rx, "<a href=\"http://sourceforge.net/forum/forum.php?forum_id=278769\">\\1</a>");
+	htmlText += "</p>\n";
 
-	footer += "</body></html>\n";
+	htmlText += "</body></html>\n";
 
-	return footer;
+	return htmlText;
+#undef E
 }
 
 void HelpDialog::updateText(void)
 {
-	// Here's how we will build the help text for the keys:
-	// 1.  Get a unique list of groups by asking for the keys and then converting the
-	//     resulting QList into a QSet.
-	// 2   Converet back to a QList, sort and move the empty string to the end of the
-	//     list if it is present (this is the miscellaneous group).
-	// 3   Iterate over the QSet of groups names doing:
-	// 3.1  add the group title
-	// 3.2  Use QMultiMap::values(key) to get a list of QPair<QString, QString>
-	//      which describe the key binding (QPair::first) and the help text for
-	//      that key binding (QPair::second).
-	// 3.3  Sort this list by the first value in the pait, courtesy of qSort and
-	//      HelpDialog::helpItemSort
-	// 3.4  Iterate over the sorted list adding key and description for each item
-
-	QString newHtml(getHeaderText());
-	newHtml += "<table cellpadding=\"10%\">\n";
-
-	QList<QString> groups = keyData.keys().toSet().toList(); // 1 + 2
-	qSort(groups.begin(), groups.end(), HelpDialog::helpGroupSort);
-
-	// 3
-	QString lastGroup;  // to group "" and "Miscellaneous into one
-	foreach (QString group, groups)
-	{
-		QString groupDescription = group;
-		if (group.isEmpty())
-			groupDescription = N_("Miscellaneous");
-
-		if (lastGroup!=groupDescription)
-		{
-			// 3.1
-			newHtml += "<tr></tr><tr><td><b><u>" + Qt::escape(q_(groupDescription)) + ":</u></b></td></tr>\n";
-		}
-		lastGroup = groupDescription;
-
-		// 3.2
-		QList< QPair<QString, QString> > keys = keyData.values(group);
-
-		// 3.3
-		qSort(keys.begin(), keys.end(), HelpDialog::helpItemSort);
-
-		// 3.4
-		for(int i=0; i<keys.size(); i++)
-		{
-			QString key = keys.at(i).first; // the string which holds the key, e.g. "F1"
-
-			// For some keys we need to translate from th QT string to something
-			// more readable
-			QString specKey = specialKeys[key];
-			if (!specKey.isEmpty())
-				key = q_(specKey);
-
-			// Finally, add HTML table data for the key as it's help text
-			newHtml += "<tr><td><b>" + Qt::escape(key) + "</b></td>";
-			newHtml += "<td>" + Qt::escape(q_( keys.at(i).second)) + "</td></tr>\n";
-		}
-	}
-
-	newHtml += "</table>";
-	newHtml += getFooterText();
+	QString newHtml = getHelpText();
 	ui->helpBrowser->clear();
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 	Q_ASSERT(gui);
@@ -305,7 +487,9 @@ void HelpDialog::updateText(void)
 	// populate About tab
 	newHtml = "<h1>" + StelUtils::getApplicationName() + "</h1>";
 	// Note: this legal notice is not suitable for traslation
-	newHtml += "<h3>Copyright &copy; 2000-2012 Stellarium Developers</h3>";
+	newHtml += "<h3>Copyright &copy; 2000-2014 Stellarium Developers</h3>";
+	if (getUpdatesEnabled())
+		newHtml += "<p><strong>" + getUpdatesMessage() + "</strong></p>";
 	newHtml += "<p>This program is free software; you can redistribute it and/or ";
 	newHtml += "modify it under the terms of the GNU General Public License ";
 	newHtml += "as published by the Free Software Foundation; either version 2 ";
@@ -321,59 +505,34 @@ void HelpDialog::updateText(void)
 	newHtml += "51 Franklin Street, Suite 500\n";
 	newHtml += "Boston, MA  02110-1335, USA.\n</pre>";
 	newHtml += "<p><a href=\"http://www.fsf.org\">www.fsf.org</a></p>";
-	newHtml += "<h3>" + Qt::escape(q_("Developers")) + "</h3><ul>";
-	newHtml += "<li>" + Qt::escape(q_("Project coordinator & lead developer: %1").arg(QString("Fabien Ch%1reau").arg(QChar(0x00E9)))) + "</li>";
-	newHtml += "<li>" + Qt::escape(q_("Doc author/developer: %1").arg(QString("Matthew Gates"))) + "</li>";
-	newHtml += "<li>" + Qt::escape(q_("Developer: %1").arg(QString("Bogdan Marinov"))) + "</li>";
-	newHtml += "<li>" + Qt::escape(q_("Developer: %1").arg(QString("Timothy Reaves"))) + "</li>";
-	newHtml += "<li>" + Qt::escape(q_("Developer: %1").arg(QString("Guillaume Ch%1reau").arg(QChar(0x00E9)))) + "</li>";
-	newHtml += "<li>" + Qt::escape(q_("Developer: %1").arg(QString("Georg Zotti"))) + "</li>";
-	newHtml += "<li>" + Qt::escape(q_("Developer: %1").arg(QString("Alexander Wolf"))) + "</li>";
-	newHtml += "<li>" + Qt::escape(q_("Tester: %1").arg(QString("Barry Gerdes"))) + "</li>";
-	newHtml += "<li>" + Qt::escape(q_("Tester: %1").arg(QString("Khalid AlAjaji"))) + "</li></ul>";
-	newHtml += "<h3>" + Qt::escape(q_("Past Developers")) + "</h3>";
-	newHtml += "<p>"  + Qt::escape(q_("Several people have made significant contributions, but are no longer active. Their work has made a big difference to the project:")) + "</p><ul>";
-	newHtml += "<li>" + Qt::escape(q_("Graphic/other designer: %1").arg(QString("Johan Meuris"))) + "</li>";
-	newHtml += "<li>" + Qt::escape(q_("Developer: %1").arg(QString("Johannes Gajdosik"))) + "</li>";
-	newHtml += "<li>" + Qt::escape(q_("Developer: %1").arg(QString("Rob Spearman"))) + "</li>";
-	newHtml += "<li>" + Qt::escape(q_("Developer: %1").arg(QString("Andr%1s Mohari").arg(QChar(0x00E1)))) + "</li>";
-	newHtml += "<li>" + Qt::escape(q_("Developer: %1").arg(QString("Mike Storm"))) + "</li>";
-	newHtml += "<li>" + Qt::escape(q_("OSX Developer: %1").arg(QString("Nigel Kerr"))) + "</li>";
-	newHtml += "<li>" + Qt::escape(q_("OSX Developer: %1").arg(QString("Diego Marcos"))) + "</li></ul>";
+	newHtml += "<h3>" + q_("Developers").toHtmlEscaped() + "</h3><ul>";
+	newHtml += "<li>" + q_("Project coordinator & lead developer: %1").arg(QString("Fabien Ch%1reau").arg(QChar(0x00E9))).toHtmlEscaped() + "</li>";
+	newHtml += "<li>" + q_("Doc author/developer: %1").arg(QString("Matthew Gates")).toHtmlEscaped() + "</li>";
+	newHtml += "<li>" + q_("Developer: %1").arg(QString("Bogdan Marinov")).toHtmlEscaped() + "</li>";
+	newHtml += "<li>" + q_("Developer: %1").arg(QString("Timothy Reaves")).toHtmlEscaped() + "</li>";
+	newHtml += "<li>" + q_("Developer: %1").arg(QString("Guillaume Ch%1reau").arg(QChar(0x00E9))).toHtmlEscaped() + "</li>";
+	newHtml += "<li>" + q_("Developer: %1").arg(QString("Georg Zotti")).toHtmlEscaped() + "</li>";
+	newHtml += "<li>" + q_("Developer: %1").arg(QString("Alexander Wolf")).toHtmlEscaped() + "</li>";
+	newHtml += "<li>" + q_("Developer: %1").arg(QString("Marcos Cardinot")).toHtmlEscaped() + "</li>";
+	newHtml += "<li>" + q_("Developer: %1").arg(QString("Ferdinand Majerech")).toHtmlEscaped() + "</li>";
+	newHtml += "<li>" + q_("Developer: %1").arg(QString("Jörg Müller")).toHtmlEscaped() + "</li>";
+	newHtml += "<li>" + q_("Continuous Integration: %1").arg(QString("Hans Lambermont")).toHtmlEscaped() + "</li>";
+	newHtml += "<li>" + q_("Tester: %1").arg(QString("Barry Gerdes")).toHtmlEscaped() + "</li>";
+	newHtml += "<li>" + q_("Tester: %1").arg(QString("Khalid AlAjaji")).toHtmlEscaped() + "</li></ul>";
+	newHtml += "<h3>" + q_("Past Developers").toHtmlEscaped() + "</h3>";
+	newHtml += "<p>"  + q_("Several people have made significant contributions, but are no longer active. Their work has made a big difference to the project:").toHtmlEscaped() + "</p><ul>";
+	newHtml += "<li>" + q_("Graphic/other designer: %1").arg(QString("Johan Meuris")).toHtmlEscaped() + "</li>";
+	newHtml += "<li>" + q_("Developer: %1").arg(QString("Johannes Gajdosik")).toHtmlEscaped() + "</li>";
+	newHtml += "<li>" + q_("Developer: %1").arg(QString("Rob Spearman")).toHtmlEscaped() + "</li>";
+	newHtml += "<li>" + q_("Developer: %1").arg(QString("Andr%1s Mohari").arg(QChar(0x00E1))).toHtmlEscaped() + "</li>";
+	newHtml += "<li>" + q_("Developer: %1").arg(QString("Mike Storm")).toHtmlEscaped() + "</li>";
+	newHtml += "<li>" + q_("OSX Developer: %1").arg(QString("Nigel Kerr")).toHtmlEscaped() + "</li>";
+	newHtml += "<li>" + q_("OSX Developer: %1").arg(QString("Diego Marcos")).toHtmlEscaped() + "</li></ul>";
 	newHtml += "<p>";
 	ui->aboutBrowser->clear();
 	ui->aboutBrowser->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
 	ui->aboutBrowser->insertHtml(newHtml);
 	ui->aboutBrowser->scrollToAnchor("top");
-}
-
-bool HelpDialog::helpItemSort(const QPair<QString, QString>& p1, const QPair<QString, QString>& p2)
-{
-	// To be 100% proper, we should sort F1 F2 F11 F12 in that order, although
-	// right now we will get F1 F11 F12 F2.  However, at time of writing, no group
-	// of keys has F1-F9, and one from F10-F12 in it, so it doesn't really matter.
-	// -MNG 2008-06-01
-	if (p1.first.split(",").at(0).size()!=p2.first.split(",").at(0).size())
-		return p1.first.size() < p2.first.size();
-	else
-		return p1.first < p2.first;
-}
-
-bool HelpDialog::helpGroupSort(const QString& s1, const QString& s2)
-{
-	QString s1c = s1.toUpper();
-	QString s2c = s2.toUpper();
-
-	if (s1c=="" || s1c==QString(N_("Miscellaneous")).toUpper())
-		s1c = "ZZZ" + s1c;
-	if (s2c=="" || s2c==QString(N_("Miscellaneous")).toUpper())
-		s2c = "ZZZ" + s2c;
-	if (s1c=="DEBUG")
-		s1c = "ZZZZ" + s1c;
-	if (s2c=="DEBUG")
-		s2c = "ZZZZ" + s2c;
-
-	return s1c < s2c;
 }
 
 void HelpDialog::changePage(QListWidgetItem *current, QListWidgetItem *previous)

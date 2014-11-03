@@ -18,6 +18,7 @@
 
 #include "CCD.hpp"
 #include "Telescope.hpp"
+#include "Lens.hpp"
 
 #include <QDebug>
 #include <QSettings>
@@ -27,18 +28,24 @@
 #define RADIAN_TO_DEGREES 57.2957795131
 
 CCD::CCD()
+	: m_resolutionX(0)
+	, m_resolutionY(0)
+	, m_chipWidth(0.)
+	, m_chipHeight(0.)
+	, m_pixelWidth(0.)
+	, m_pixelHeight(0.)
 {
 }
 
 CCD::CCD(const QObject& other)
+	: m_name(other.property("name").toString())
+	, m_resolutionX(other.property("resolutionX").toInt())
+	, m_resolutionY(other.property("resolutionY").toInt())
+	, m_chipWidth(other.property("chipWidth").toFloat())
+	, m_chipHeight(other.property("chipHeight").toFloat())
+	, m_pixelWidth(other.property("pixelWidth").toFloat())
+	, m_pixelHeight(other.property("pixelHeight").toFloat())
 {
-	this->m_name = other.property("name").toString();
-	this->m_chipHeight = other.property("chipHeight").toFloat();
-	this->m_chipWidth = other.property("chipWidth").toFloat();
-	this->m_pixelHeight = other.property("pixelHeight").toFloat();
-	this->m_pixelWidth = other.property("pixelWidth").toFloat();
-	this->m_resolutionX = other.property("resolutionX").toInt();
-	this->m_resolutionY = other.property("resolutionY").toInt();
 }
 
 CCD::~CCD()
@@ -140,18 +147,31 @@ void CCD::setPixelHeight(double height)
 	m_pixelHeight = height;
 }
 
-double CCD::getActualFOVx(Telescope *telescope) const
+double CCD::getActualFOVx(Telescope *telescope, Lens *lens) const
 {
-	double FOVx = RADIAN_TO_DEGREES * this->chipHeight() / telescope->focalLength();
+	const double lens_multipler = (lens != NULL ? lens->multipler() : 1.0f);
+	double FOVx = RADIAN_TO_DEGREES * this->chipHeight() / (telescope->focalLength() * lens_multipler);
 	return FOVx;
 }
 
-double CCD::getActualFOVy(Telescope *telescope) const
+double CCD::getActualFOVy(Telescope *telescope, Lens *lens) const
 {
-	double FOVy = RADIAN_TO_DEGREES * this->chipWidth() / telescope->focalLength();
+	const double lens_multipler = (lens != NULL ? lens->multipler() : 1.0f);
+	double FOVy = RADIAN_TO_DEGREES * this->chipWidth() / (telescope->focalLength() * lens_multipler);
 	return FOVy;
 }
 
+void CCD::writeToSettings(QSettings * settings, const int index)
+{
+	QString prefix = "ccd/" + QVariant(index).toString() + "/";
+	settings->setValue(prefix + "name", this->name());
+	settings->setValue(prefix + "resolutionX", this->resolutionX());
+	settings->setValue(prefix + "resolutionY", this->resolutionY());
+	settings->setValue(prefix + "chip_width", this->chipWidth());
+	settings->setValue(prefix + "chip_height", this->chipHeight());
+	settings->setValue(prefix + "pixel_width", this->pixelWidth());
+	settings->setValue(prefix + "pixel_height", this->pixelWidth());
+}
 /* ********************************************************************* */
 #if 0
 #pragma mark -

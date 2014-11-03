@@ -1,6 +1,7 @@
 /*
  * Stellarium
- * This file Copyright (C) 2004 Robert Spearman
+ * Copyright (C) 2004 Robert Spearman
+ * Copyright (C) 2014 Marcos Cardinot
  * 
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,7 +21,12 @@
 #ifndef _METEOR_HPP_
 #define _METEOR_HPP_
 
+#include "StelTextureTypes.hpp"
 #include "VecMath.hpp"
+
+#include <QList>
+#include <QPair>
+
 class StelCore;
 class StelPainter;
 
@@ -34,14 +40,26 @@ class StelPainter;
 //! Models a single meteor.
 //! Control of the meteor rate is performed in the MeteorMgr class.  Once
 //! created, a meteor object only lasts for some amount of time, and then
-//! "dies", after which, the update() member returns false.  The live/dead
-//! status of a meteor may also be determined using the isAlive member.
+//! "dies", after which, the update() member returns false.
 class Meteor
 {
 public:
+	struct MeteorModel
+	{
+		Vec3d obs;         //! observer position
+		Vec3d position;    //! equatorial coordinate position
+		Vec3d posTrain;    //! end of train
+		float xydistance; //! Distance in XY plane (orthogonal to meteor path) from observer to meteor
+		float minDist;    //! Nearest point to observer along path
+		float startH;     //! Start height above center of earth
+		float endH;       //! End height
+		float mag;	   //! Apparent magnitude at head, 0-1
+		int firstBrightSegment; //! First bright segment of the train
+	};
+
 	//! Create a Meteor object.
 	//! @param v the velocity of the meteor in km/s.
-	Meteor(const StelCore*, double v);
+	Meteor(const StelCore*, float v);
 	virtual ~Meteor();
 	
 	//! Updates the position of the meteor, and expires it if necessary.
@@ -50,31 +68,55 @@ public:
 	
 	//! Draws the meteor.
 	void draw(const StelCore* core, StelPainter& sPainter);
-	
-	//! Determine if a meteor is alive or has burned out.
+
+	//! Draws the meteor train. (useful to be reused in MeteorShowers plugin)
+	static void drawTrain(const StelCore* core, StelPainter& sPainter, const MeteorModel& mm,
+			      const Mat4d& viewMatrix, const float thickness, const int segments,
+			      QList<Vec4f> lineColorArray, QList<Vec4f> trainColorArray);
+
+	//! Draws the meteor bolide. (useful to be reused in MeteorShowers plugin)
+	static void drawBolide(const StelCore* core, StelPainter &sPainter, const MeteorModel& mm,
+			       const Mat4d& viewMatrix, const float bolideSize);
+
+	//! Calculates the train thickness and bolide size.
+	static void calculateThickness(const StelCore* core, float &thickness, float &bolideSize);
+
+	//! <colorName, intensity>
+	typedef QPair<QString, int> colorPair;
+
+	//! Updates parameters of meteor model. (useful to be reused in MeteorShowers plugin)
+	//! @return true of the meteor is still alive, else false.
+	static bool updateMeteorModel(double deltaTime, double speed, MeteorModel &mm);
+
+	//! Builds Meteor Model
 	//! @return true if alive, else false.
-	bool isAlive(void);
-	
+	static bool initMeteorModel(const StelCore *core, const int segments,
+				    const Mat4d viewMatrix, MeteorModel &mm);
+
+	//! Determine color arrays of line and prism used to draw meteor train.
+	static void buildColorArrays(const int segments,
+				     const QList<colorPair> colors,
+				     QList<Vec4f> &lineColorArray,
+				     QList<Vec4f> &trainColorArray);
+
+	static StelTextureSP bolideTexture;
+
 private:
-	Mat4d mmat; // tranformation matrix to align radiant with earth direction of travel
-	Vec3d obs;  // observer position in meteor coord. system
-	Vec3d position;  // equatorial coordinate position
-	Vec3d posInternal;  // middle of train
-	Vec3d posTrain;  // end of train
-	bool train;      // point or train visible?
-	double startH;  // start height above center of earth
-	double endH;    // end height
-	double velocity; // km/s
-	bool alive;      // is it still visible?
-	float mag;	   // Apparent magnitude at head, 0-1
-	float maxMag;  // 0-1
-	float absMag;  // absolute magnitude
-	float visMag;  // visual magnitude at observer
-	double xydistance; // distance in XY plane (orthogonal to meteor path) from observer to meteor
-	double initDist;  // initial distance from observer
-	double minDist;  // nearest point to observer along path
-	double distMultiplier;  // scale magnitude due to changes in distance 
-	
+	static void insertVertex(const StelCore* core, const Mat4d& viewMatrix,
+				 QVector<Vec3d> &vertexArray, Vec3d vertex);
+	static Vec4f getColorFromName(QString colorName);
+	QList<colorPair> getRandColor();
+
+	bool m_alive;        //! Indicate if the meteor it still visible
+
+	float m_speed;      //! Velocity of meteor in km/s
+	Mat4d m_viewMatrix;  //! tranformation matrix to align radiant with earth direction of travel
+	MeteorModel meteor;  //! Parameters of meteor model
+	double m_distMultiplier;  //! Scale magnitude due to changes in distance
+
+	QList<Vec4f> m_trainColorArray;
+	QList<Vec4f> m_lineColorArray;
+	const int m_segments;     //! Number of segments along the train (useful to curve along projection distortions)
 };
 
 

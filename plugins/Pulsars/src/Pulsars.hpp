@@ -23,7 +23,6 @@
 #include "StelObject.hpp"
 #include "StelFader.hpp"
 #include "StelTextureTypes.hpp"
-#include "StelPainter.hpp"
 #include "Pulsar.hpp"
 #include <QFont>
 #include <QVariantMap>
@@ -33,9 +32,10 @@
 
 class QNetworkAccessManager;
 class QNetworkReply;
-class QProgressBar;
 class QSettings;
 class QTimer;
+class QPixmap;
+class StelButton;
 class PulsarsDialog;
 
 class StelPainter;
@@ -46,6 +46,7 @@ typedef QSharedPointer<Pulsar> PulsarP;
 class Pulsars : public StelObjectModule
 {
 	Q_OBJECT
+	Q_PROPERTY(bool pulsarsVisible READ getFlagShowPulsars WRITE setFlagShowPulsars)
 public:	
 	//! @enum UpdateState
 	//! Used for keeping for track of the download/update status
@@ -89,8 +90,18 @@ public:
 	//! Find and return the list of at most maxNbItem objects auto-completing the passed object I18n name.
 	//! @param objPrefix the case insensitive first letters of the searched object
 	//! @param maxNbItem the maximum number of returned object names
+	//! @param useStartOfWords the autofill mode for returned objects names
 	//! @return a list of matching object name by order of relevance, or an empty list if nothing match
-	virtual QStringList listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem=5) const;
+	virtual QStringList listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false) const;
+	//! Find and return the list of at most maxNbItem objects auto-completing the passed object English name.
+	//! @param objPrefix the case insensitive first letters of the searched object
+	//! @param maxNbItem the maximum number of returned object names
+	//! @param useStartOfWords the autofill mode for returned objects names
+	//! @return a list of matching object name by order of relevance, or an empty list if nothing match
+	virtual QStringList listMatchingObjects(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false) const;
+	virtual QStringList listAllObjects(bool inEnglish) const;
+	virtual QStringList listAllObjectsByType(const QString& objType, bool inEnglish) const { Q_UNUSED(objType) Q_UNUSED(inEnglish) return QStringList(); }
+	virtual QString getName() const { return "Pulsars"; }
 
 	//! get a Pulsar object by identifier
 	PulsarP getByID(const QString& id);
@@ -118,10 +129,19 @@ public:
 	//! @param b if true, updates will be enabled, else they will be disabled
 	void setUpdatesEnabled(bool b) {updatesEnabled=b;}
 
-	bool getDisplayMode(void) {return distributionEnabled;}
-	void setDisplayMode(bool b) {distributionEnabled=b;}
+	bool getDisplayMode(void);
+	void setDisplayMode(bool b);
 
-	//! get the date and time the TLE elements were updated
+	bool getGlitchFlag(void);
+	void setGlitchFlag(bool b);
+
+	QString getMarkerColor(bool mtype = true);
+	void setMarkerColor(QString c, bool mtype = true);
+
+	void setEnableAtStartup(bool b) { enableAtStartup=b; }
+	bool getEnableAtStartup(void) { return enableAtStartup; }
+
+	//! get the date and time the pulsars were updated
 	QDateTime getLastUpdate(void) {return lastUpdate;}
 
 	//! get the update frequency in days
@@ -133,6 +153,9 @@ public:
 
 	//! Get the current updateState
 	UpdateState getUpdateState(void) {return updateState;}
+
+	//! Get count of pulsars from catalog
+	int getCountPulsars(void) {return PsrCount;}
 
 signals:
 	//! @param state the new update state.
@@ -146,9 +169,17 @@ public slots:
 	//! module.ini file and update the local JSON file.
 	void updateJSON(void);
 
+	void setFlagShowPulsars(bool b) { flagShowPulsars=b; }
+	bool getFlagShowPulsars(void) { return flagShowPulsars; }
+
 	//! Display a message. This is used for plugin-specific warnings and such
 	void displayMessage(const QString& message, const QString hexColor="#999999");
 	void messageTimeout(void);
+
+	//! Define whether the button toggling pulsars should be visible
+	void setFlagShowPulsarsButton(bool b);
+	bool getFlagShowPulsarsButton(void) { return flagShowPulsarsButton; }
+
 
 private:
 	// Font used for displaying our text
@@ -156,6 +187,9 @@ private:
 
 	// if existing, delete Satellites section in main config.ini, then create with default values
 	void restoreDefaultConfigIni(void);
+
+	// Upgrade config.ini: rename old key settings to new
+	void upgradeConfigIni(void);
 
 	//! replace the json file with the default from the compiled-in resource
 	void restoreDefaultJsonFile(void);
@@ -168,9 +202,13 @@ private:
 	//! @return true on OK, false on failure
 	bool backupJsonFile(bool deleteOriginal=false);
 
-	//! Get the version from the "version" value in the pulsars.json file
+	//! Get the version from the "version of the format" value in the pulsars.json file
 	//! @return version string, e.g. "2"
-	int getJsonFileVersion(void);
+	int getJsonFileFormatVersion(void);
+
+	//! Check format of the catalog of pulsars
+	//! @return valid boolean, e.g. "true"
+	bool checkJsonFileFormat(void);
 
 	//! parse JSON file and load pulsars to map
 	QVariantMap loadPSRMap(QString path=QString());
@@ -183,24 +221,32 @@ private:
 	StelTextureSP texPointer;
 	QList<PulsarP> psr;
 
+	int PsrCount;
+
 	// variables and functions for the updater
 	UpdateState updateState;
 	QNetworkAccessManager* downloadMgr;
-	QString updateUrl;
-	QString updateFile;
-	QProgressBar* progressBar;
+	QString updateUrl;	
 	QTimer* updateTimer;
 	QTimer* messageTimer;
 	QList<int> messageIDs;
 	bool updatesEnabled;
 	QDateTime lastUpdate;
-	int updateFrequencyDays;
-	bool distributionEnabled;
+	int updateFrequencyDays;	
+	bool enableAtStartup;
 
 	QSettings* conf;
 
 	// GUI
 	PulsarsDialog* configDialog;
+	bool flagShowPulsars;
+	bool flagShowPulsarsButton;
+	QPixmap* OnIcon;
+	QPixmap* OffIcon;
+	QPixmap* GlowIcon;
+	StelButton* toolbarButton;
+	class StelProgressController* progressBar;
+
 
 private slots:
 	//! check to see if an update is required.  This is called periodically by a timer
@@ -212,7 +258,7 @@ private slots:
 };
 
 
-#include "fixx11h.h"
+
 #include <QObject>
 #include "StelPluginInterface.hpp"
 
@@ -220,6 +266,7 @@ private slots:
 class PulsarsStelPluginInterface : public QObject, public StelPluginInterface
 {
 	Q_OBJECT
+	Q_PLUGIN_METADATA(IID "stellarium.StelGuiPluginInterface/1.0")
 	Q_INTERFACES(StelPluginInterface)
 public:
 	virtual StelModule* getStelModule() const;

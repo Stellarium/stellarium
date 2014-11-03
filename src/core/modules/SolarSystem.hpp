@@ -25,10 +25,11 @@
 #undef sun
 #endif
 
-#include <QFont>
 #include "StelObjectModule.hpp"
 #include "StelTextureTypes.hpp"
 #include "Planet.hpp"
+
+#include <QFont>
 
 class Orbit;
 class StelTranslator;
@@ -45,6 +46,15 @@ typedef QSharedPointer<Planet> PlanetP;
 class SolarSystem : public StelObjectModule
 {
 	Q_OBJECT
+	Q_PROPERTY(bool labelsDisplayed
+			   READ getFlagLabels
+			   WRITE setFlagLabels)
+	Q_PROPERTY(bool orbitsDisplayed
+			   READ getFlagOrbits
+			   WRITE setFlagOrbits)
+	Q_PROPERTY(bool trailsDisplayed
+			   READ getFlagTrails
+			   WRITE setFlagTrails)
 
 public:
 	SolarSystem();
@@ -59,6 +69,8 @@ public:
 	//! - set display options from application settings
 	virtual void init();
 
+	virtual void deinit();
+	
 	//! Draw SolarSystem objects (planets).
 	//! @param core The StelCore object.
 	//! @return The maximum squared distance in pixels that any SolarSystem object
@@ -99,8 +111,20 @@ public:
 	//! the passed object I18n name.
 	//! @param objPrefix the case insensitive first letters of the searched object.
 	//! @param maxNbItem the maximum number of returned object names.
+	//! @param useStartOfWords the autofill mode for returned objects names.
 	//! @return a list of matching object name by order of relevance, or an empty list if nothing matches.
-	virtual QStringList listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem=5) const;
+	virtual QStringList listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false) const;
+	//! Find objects by translated name prefix.
+	//! Find and return the list of at most maxNbItem objects auto-completing
+	//! the passed object English name.
+	//! @param objPrefix the case insensitive first letters of the searched object.
+	//! @param maxNbItem the maximum number of returned object names.
+	//! @param useStartOfWords the autofill mode for returned objects names.
+	//! @return a list of matching object name by order of relevance, or an empty list if nothing matches.
+	virtual QStringList listMatchingObjects(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false) const;
+	virtual QStringList listAllObjects(bool inEnglish) const { Q_UNUSED(inEnglish) return QStringList(); }
+	virtual QStringList listAllObjectsByType(const QString& objType, bool inEnglish) const;
+	virtual QString getName() const { return "Solar System"; }
 
 public slots:
 	///////////////////////////////////////////////////////////////////////////
@@ -139,6 +163,11 @@ public slots:
 	//! Get the current value of the flag which determines if planet orbits are drawn or hidden.
 	bool getFlagOrbits() const {return flagOrbits;}
 
+	//! Set flag which determines if planet markers are drawn or hidden.
+	void setFlagMarkers(bool b) { flagMarker=b; }
+	//! Get the current value of the flag which determines if planet markers are drawn or hidden.
+	bool getFlagMarkers() const {return flagMarker;}
+
 	//! Set flag which determines if the light travel time calculation is used or not.
 	void setFlagLightTravelTime(bool b);
 	//! Get the current value of the flag which determines if light travel time
@@ -149,19 +178,44 @@ public slots:
 	void setFontSize(float newFontSize);
 
 	//! Set the color used to draw planet labels.
+	//! @param c The color of the planet labels
+	//! @code
+	//! // example of usage in scripts
+	//! SolarSystem.setLabelsColor(Vec3f(1.0,0.0,0.0));
+	//! @endcode
 	void setLabelsColor(const Vec3f& c);
 	//! Get the current color used to draw planet labels.
 	const Vec3f& getLabelsColor(void) const;
 
 	//! Set the color used to draw planet orbit lines.
+	//! @param c The color of the planet orbit lines
+	//! @code
+	//! // example of usage in scripts
+	//! SolarSystem.setOrbitsColor(Vec3f(1.0,0.0,0.0));
+	//! @endcode
 	void setOrbitsColor(const Vec3f& c);
 	//! Get the current color used to draw planet orbit lines.
 	Vec3f getOrbitsColor(void) const;
 
 	//! Set the color used to draw planet trails lines.
+	//! @param c The color of the planet trails lines
+	//! @code
+	//! // example of usage in scripts
+	//! SolarSystem.setTrailsColor(Vec3f(1.0,0.0,0.0));
+	//! @endcode
 	void setTrailsColor(const Vec3f& c) {trailColor=c;}
 	//! Get the current color used to draw planet trails lines.
 	Vec3f getTrailsColor() const {return trailColor;}
+
+	//! Set the color used to draw planet pointers.
+	//! @param c The color of the planet pointers
+	//! @code
+	//! // example of usage in scripts
+	//! SolarSystem.setPointersColor(Vec3f(1.0,0.0,0.0));
+	//! @endcode
+	void setPointersColor(const Vec3f& c) {pointerColor=c;}
+	//! Get the current color used to draw planet pointers.
+	Vec3f getPointersColor() const {return pointerColor;}
 
 	//! Set flag which determines if Earth's moon is scaled or not.
 	void setFlagMoonScale(bool b);
@@ -169,7 +223,7 @@ public slots:
 	bool getFlagMoonScale(void) const {return flagMoonScale;}
 
 	//! Set the display scaling factor for Earth's moon.
-	void setMoonScale(float f);
+	void setMoonScale(double f);
 	//! Get the display scaling factor for Earth's oon.
 	float getMoonScale(void) const {return moonScale;}
 
@@ -181,6 +235,49 @@ public slots:
 	//! @param withExtinction the flag for use extinction effect for magnitudes (default not use)
 	//! @return a magnitude
 	float getPlanetVMagnitude(QString planetName, bool withExtinction=false) const;
+
+	//! Get type for Solar system bodies from scripts
+	//! @param planetName the case in-sensistive English planet name.
+	//! @return a type of planet (planet, moon, asteroid, comet, plutoid)
+	QString getPlanetType(QString planetName) const;
+
+	//! Get distance to Solar system bodies from scripts
+	//! @param planetName the case in-sensistive English planet name.
+	//! @return a distance (in AU)
+	double getDistanceToPlanet(QString planetName) const;
+
+	//! Get elongation for Solar system bodies from scripts
+	//! @param planetName the case in-sensistive English planet name.
+	//! @return a elongation (in radians)
+	double getElongationForPlanet(QString planetName) const;
+
+	//! Get phase angle for Solar system bodies from scripts
+	//! @param planetName the case in-sensistive English planet name.
+	//! @return a phase angle (in radians)
+	double getPhaseAngleForPlanet(QString planetName) const;
+
+	//! Get phase for Solar system bodies from scripts
+	//! @param planetName the case in-sensistive English planet name.
+	//! @return a phase
+	float getPhaseForPlanet(QString planetName) const;
+
+	//! Set the algorithm for computation of apparent magnitudes for planets in case observer on the Earth.
+	//! Possible values:
+	//! * Planesas (algorithm provided by Pere Planesas (Observatorio Astronomico Nacional))
+	//! * Mueller (G. Mueller, based on visual observations 1877-91. [Expl.Suppl.1961])
+	//! * Harris (Astronomical Almanac 1984 and later. These give V (instrumental) magnitudes)
+	//! Details:
+	//! J. Meeus "Astronomical Algorithms" (2nd ed., with corrections as of August 10, 2009) p.283-286.
+	//! O. Montenbruck, T. Pfleger "Astronomy on the Personal Computer" (4th ed.) p.143-145.
+	//! Daniel L. Harris "Photometry and Colorimetry of Planets and Satellites" http://adsabs.harvard.edu/abs/1961plsa.book..272H
+	//! Hint: Default option in config.ini: astro/apparent_magnitude_algorithm = Harris
+	//! @param algorithm the case in-sensitive algorithm name
+	//! @note: The structure of algorithms is almost identical, just the numbers are different! You should activate
+	//! Mueller's algorithm for simulate the eye's impression. (Esp. Venus!)
+	void setApparentMagnitudeAlgorithmOnEarth(QString algorithm);
+
+	//! Get the algorithm used for computation of apparent magnitudes for planets in case  observer on the Earth
+	QString getApparentMagnitudeAlgorithmOnEarth() const;
 
 public:
 	///////////////////////////////////////////////////////////////////////////
@@ -264,6 +361,9 @@ private:
 
 	void recreateTrails();
 
+
+	//! Used to count how many planets actually need shadow information
+	int shadowPlanetCount;
 	PlanetP sun;
 	PlanetP moon;
 	PlanetP earth;
@@ -298,10 +398,12 @@ private:
 	StelTextureSP texPointer;
 
 	bool flagShow;
+	bool flagMarker;
 
 	class TrailGroup* allTrails;
 	LinearFader trailFader;
 	Vec3f trailColor;
+	Vec3f pointerColor;
 
 	//////////////////////////////////////////////////////////////////////////////////
 	// DEPRECATED

@@ -17,7 +17,7 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _STELFILEMGR_HPP
+#ifndef _STELFILEMGR_HPP_
 #define _STELFILEMGR_HPP_
 
 #define CHECK_FILE "data/ssystem.ini"
@@ -26,6 +26,8 @@
 #include <QSet>
 #include <QString>
 #include <QStringList>
+
+class QFileInfo;
 
 //! Provides utilities for locating and handling files.
 //! StelFileMgr provides functions for locating files.  It maintains a list of
@@ -42,13 +44,12 @@ class StelFileMgr
 public:
 	//! @enum Flags used as named bitfield flags as specifiers to filter results of StelFileMgr methods.
 	enum Flags {
-		RemovableMedia = 0x00000001,  //!< Search on removable media if present (default is not to).
-		Writable       = 0x00000002,  //!< Only return writable paths. For directories this means
-									  //!< that it is possible to create files within the directory.
-		Directory      = 0x00000004, //!< Exclude non-directories.
-		File           = 0x00000008, //!< Exclude non-files.
-		New            = 0x00000010, //!< Exclude existing paths.
-		Hidden         = 0x00000020  //!< Include "hidden" paths (starting with a . on POSIX systems).
+		RemovableMedia = 0x00000001,	//!< Search on removable media if present (default is not to).
+		Writable       = 0x00000002,	//!< Only return writable paths. For directories this means
+						//!< that it is possible to create files within the directory.
+		Directory      = 0x00000004,	//!< Exclude non-directories.
+		File           = 0x00000008,	//!< Exclude non-files.
+		New            = 0x00000010	//!< Exclude existing paths.
 	};
 
 	//! Initialize the directories.
@@ -63,7 +64,7 @@ public:
 	//! of the specified path.  By specifying a flags parameter it is possible to constrain
 	//! the results to those matching various criteria.
 	//! If the path argument is a complete path (is a full path on single root OSes, or
-	//! unanbigiously identifies one and only one file on multi-root OSes), it will
+	//! unambigiously identifies one and only one file on multi-root OSes), it will
 	//! be tested for compliance with other conditions - the regular search path will
 	//! not be tested.
 	//! If you wish to search for a non-exiting file which is not in the search path
@@ -72,13 +73,9 @@ public:
 	//! @param path the name of the file to search for, for example "textures/fog.png".
 	//! @param flags options which constrain the result.
 	//! @return returns a full path of the file if found, else return an empty path.
-	//! @exception std::runtime_error what() -> "file not found: [filename]"
-	//! @exception std::runtime_error what() -> "file does not match flags: [fullpath]".
-	//! 		This exception occurs if a full path is passes at the path argument, but
-	//!		that path does not match the flags specified.
-	static QString findFile(const QString& path, const Flags& flags=(Flags)0);
+	static QString findFile(const QString& path, Flags flags=(Flags)0);
 
-	//! List all paths witihin the search paths that match the argument.
+	//! List all paths within the search paths that match the argument.
 	//! Similar to findFile(), but unlike it this function doesn't stop
 	//! at the first instance. Instead, it returns a list of paths to all
 	//! instances. The list is ordered, starting with the most external path
@@ -89,7 +86,7 @@ public:
 	//! @param path the path to search inside, e.g. "landscapes"
 	//! @param flags options which constrain the result
 	//! @param recursive if true, all sub-directories are walked recursively
-	//! @return returns a QSet of file and.or directory names, which are available
+	//! @return returns a QSet of file and/or directory names, which are available
 	//! in any of the search paths + path.  Returns empty set if none were found
 	//! or the path is invalid (not a directory / not existing).
 	static QSet<QString> listContents(const QString& path, const Flags& flags=(Flags)0, bool recursive=false);
@@ -153,13 +150,8 @@ public:
 
 	//! Get the user's Desktop directory.
 	//! This is a portable way to retrieve the directory for the user's desktop.
-	//! On Linux and OSX this is $HOME/Desktop.  For Windows, the system is queried
-	//! using SHGetSpecialFolderLocation.  If that doesn't work, the USERPROFILE
-	//! environment variable is checked, and if set, \\Desktop is appended, else
-	//! C:\\Windows\\Desktop is used.
-	//! @return the path to the user's desktop directory
-	//! @exception NOT_FOUND when the directory cannot be determined, or the
-	//!            OS doesn't provide one.
+	//! On Linux and OSX this is $HOME/Desktop. For Windows, we rely on Qt.
+	//! @return the path to the user's desktop directory or empty string if it can't be found.
 	static QString getDesktopDir();
 
 	//! Returns the path to the user directory.
@@ -168,14 +160,12 @@ public:
 	//! It will be the first directory in the path which is used when
 	//! trying to find most data files
 	//! @return the path to the user private data directory
-	//! @exception NOT_FOUND if the directory could not be found
 	static QString getUserDir();
 
-	//! Returns the path to the installation directory
+	//! Returns the path to the installation directory.
 	//! This is the directory where we expect to find scripts, nebulae, stars,
 	//! skycultures etc, and will be added at the end of the search path
-	//! @return the path to the installation data directory
-	//! @exception NOT_FOUND if the directory could not be found
+	//! @return the full path to the installation data directory
 	static QString getInstallationDir();
 
 	//! Returns the path to the cache directory. Note that subdirectories may need to be created for specific caches.
@@ -214,7 +204,7 @@ private:
 	//! @param flags a set of StelFileMgr::Flags to test against path
 	//! @return true if path passes all flag tests, else false
 	//! @exception misc
-	static bool fileFlagsCheck(const QString& path, const Flags& flags=(Flags)0);
+	static bool fileFlagsCheck(const QFileInfo& thePath, const Flags& flags=(Flags)0);
 
 	static QStringList fileLocations;
 
@@ -224,6 +214,9 @@ private:
 	//! Used to store the screenshot directory
 	static QString screenshotDir;
 
+	//! Used to store the screenshot directory
+	static QString installDir;
+	
 #ifdef Q_OS_WIN
 	//! For internal use - retreives windows special named directories.
 	//! @param csidlId identifier for directoy, e.g. CSIDL_APPDATA
