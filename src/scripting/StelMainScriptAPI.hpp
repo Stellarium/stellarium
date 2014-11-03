@@ -169,6 +169,15 @@ public slots:
 	//! - size-deg : angular size in decimal degrees (formatted string)
 	//! - size-dms : angular size in DMS format
 	//! - localized-name : localized name
+	//! - distance : distance to object in AU (for Solar system objects only!)
+	//! - phase : phase of object (for Solar system objects only!)
+	//! - illumination : phase of object in percentages (for Solar system objects only!)
+	//! - phase-angle : phase angle of object in radians (for Solar system objects only!)
+	//! - phase-angle-dms : phase angle of object in DMS (for Solar system objects only!)
+	//! - phase-angle-deg : phase angle of object in decimal degrees (for Solar system objects only!)
+	//! - elongation : elongation of object in radians (for Solar system objects only!)
+	//! - elongation-dms : elongation of object in DMS (for Solar system objects only!)
+	//! - elongation-deg : elongation of object in decimal degrees (for Solar system objects only!)
 	QVariantMap getObjectInfo(const QString& name);
 
 	//! Fetch a map with data about an latest selected object's position, magnitude and so on
@@ -191,6 +200,15 @@ public slots:
 	//! - size-dms : angular size in DMS format
 	//! - name : english name
 	//! - localized-name : localized name
+	//! - distance : distance to object in AU (for Solar system objects only!)
+	//! - phase : phase of object (for Solar system objects only!)
+	//! - illumination : phase of object in percentages (for Solar system objects only!)
+	//! - phase-angle : phase angle of object in radians (for Solar system objects only!)
+	//! - phase-angle-dms : phase angle of object in DMS (for Solar system objects only!)
+	//! - phase-angle-deg : phase angle of object in decimal degrees (for Solar system objects only!)
+	//! - elongation : elongation of object in radians (for Solar system objects only!)
+	//! - elongation-dms : elongation of object in DMS (for Solar system objects only!)
+	//! - elongation-deg : elongation of object in decimal degrees (for Solar system objects only!)
 	QVariantMap getSelectedObjectInfo();
 
 	//! Clear the display options, setting a "standard" view.
