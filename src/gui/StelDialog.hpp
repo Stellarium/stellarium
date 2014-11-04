@@ -20,7 +20,6 @@
 #ifndef _STELDIALOG_HPP_
 #define _STELDIALOG_HPP_
 
-#include "config.h"
 #include <QObject>
 
 //! @class StelDialog

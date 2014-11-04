@@ -20,8 +20,6 @@
 #ifndef _STELMAINSCRIPTAPIPROXY_HPP_
 #define _STELMAINSCRIPTAPIPROXY_HPP_
 
-#include "config.h"
-
 #include <QObject>
 
 //! @class StelMainScriptAPIProxy

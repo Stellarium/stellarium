@@ -20,8 +20,6 @@
 #ifndef _STELFADER_HPP_
 #define _STELFADER_HPP_
 
-#include "config.h"
-
 #include <QtGlobal>
 
 //! @class StelFader

@@ -48,10 +48,6 @@
 #include <QGraphicsLinearLayout>
 #include <QSettings>
 
-#ifdef _MSC_BUILD
-#define round(dbl) dbl >= 0.0 ? (int)(dbl + 0.5) : ((dbl - (double)(int)dbl) <= -0.5 ? (int)dbl : (int)(dbl - 0.5))
-#endif
-
 void StelButton::initCtor(const QPixmap& apixOn,
                           const QPixmap& apixOff,
                           const QPixmap& apixNoChange,
@@ -245,7 +241,7 @@ void LeftStelBar::addButton(StelButton* button)
 	}
 	button->setParentItem(this);
 	button->prepareGeometryChange(); // could possibly be removed when qt 4.6 become stable
-	button->setPos(0., round(posY+10.5));
+    button->setPos(0., qRound(posY+10.5));
 
 	connect(button, SIGNAL(hoverChanged(bool)), this, SLOT(buttonHoverChanged(bool)));
 }
@@ -294,7 +290,7 @@ void LeftStelBar::buttonHoverChanged(bool b)
 				tip += "  [" + shortcut + "]";
 			}
 			helpLabel->setText(tip);
-			helpLabel->setPos(round(boundingRectNoHelpLabel().width()+15.5),round(button->pos().y()+button->pixmap().size().height()/2-8));
+            helpLabel->setPos(qRound(boundingRectNoHelpLabel().width()+15.5),qRound(button->pos().y()+button->pixmap().size().height()/2-8));
 		}
 	}
 	else
