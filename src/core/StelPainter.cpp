@@ -512,7 +512,7 @@ struct StringTexture
 	}
 };
 
-void StelPainter::drawText(float x, float y, const QString& str, float angleDeg, float xshift, float yshift, const bool noGravity)
+void StelPainter::drawText(float x, float y, const QString& str, float angleDeg, float xshift, float yshift, bool noGravity)
 {
 	StelPainter::GLState state; // Will restore the opengl state at the end of the function.
 	if (prj->gravityLabels && !noGravity)
