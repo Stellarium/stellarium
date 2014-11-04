@@ -238,7 +238,6 @@ SET(stellarium_lib_SRCS
 	CLIProcessor.hpp
 	CLIProcessor.cpp
 	translations.h
-	config.h
 )
 
 # On windows, QZipReader is already included in the lib

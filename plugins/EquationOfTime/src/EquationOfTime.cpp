@@ -127,7 +127,7 @@ void EquationOfTime::draw(StelCore *core)
 
 	if (getFlagMsFormat())
 	{
-		double seconds = std::abs(round((time - (int)time)*60));
+        double seconds = std::abs(qRound((time - (int)time)*60));
 		QString messageSecondsValue;
 		if (seconds<10.)
 			messageSecondsValue = QString("0%1").arg(QString::number(seconds, 'f', 0));

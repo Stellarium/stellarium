@@ -19,8 +19,6 @@
 #ifndef _STELTONEREPRODUCER_HPP_
 #define _STELTONEREPRODUCER_HPP_
 
-#include "config.h"
-
 #include <cmath>
 
 //! Converts tones in function of the eye adaptation to luminance.
