@@ -20,8 +20,6 @@
 #ifndef ANGLEMEASURE_HPP_
 #define ANGLEMEASURE_HPP_
 
-#include "config.h"
-
 #include <QFont>
 #include "VecMath.hpp"
 #include "StelModule.hpp"

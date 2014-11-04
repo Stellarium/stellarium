@@ -20,8 +20,6 @@
 #ifndef _OCTAHEDRON_REGION_HPP_
 #define _OCTAHEDRON_REGION_HPP_
 
-#include "config.h"
-
 #include "StelVertexArray.hpp"
 #include "VecMath.hpp"
 

@@ -21,8 +21,6 @@
 #include <cmath>
 #include <QDebug>
 
-#define stelpow10f(x) std::exp((x) * 2.3025850930f)
-
 #include "Skybright.hpp"
 #include "StelUtils.hpp"
 

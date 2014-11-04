@@ -20,7 +20,6 @@
 #ifndef _STELAPP_HPP_
 #define _STELAPP_HPP_
 
-#include "config.h"
 #include <QString>
 #include <QObject>
 
