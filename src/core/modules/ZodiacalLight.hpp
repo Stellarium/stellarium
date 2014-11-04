@@ -29,17 +29,23 @@
 //! @class ZodiacalLight 
 //! Manages the displaying of the Zodiacal Light. The brightness values follow the paper:
 //! S. M. Kwon, S. S. Hong, J. L. Weinberg
-//! An observational model of the zzodiacal light brightness distribution
+//! An observational model of the zodiacal light brightness distribution
 //! New Astronomy 10 (2004) 91-107. doi:10.1016/j.newast.2004.05.004
-//! I hand-edited the table in Excel, filling the hole aroud the sun with values based on
-//! Leinert 1975: Zodiacal Light - A Measure of the Interplanetary Environment. Space Science Reviews 18, 281-339.
-//! From the combined table, a texture was created using ArcGIS:
-//! 3D Analyst Toolbox -> From File -> ASCII 3D to Feature Class
-//! 3D Analyst Toolbox -> Raster Interpolation -> IDW: cell size: 1 (degree), power:2, distance:8(fixed), min:10pts.
-//! This float32 texture with values 57..1E6 had to be converted to a regular 8bit grayscale texture.
-//! V1: Linear texture: values over about 2100 can be full-white. (val-55)/8
-//! V2: computation that balances S10 better: Use a Gamma value of 2.5 to convert: (val-55)^0.4
-//! NO, all these textures look bad. I will edit them as 3D landscape...
+// GZ OCRed and hand-edited the table in Excel, first filling the missing data around the sun with values based on
+// Leinert 1975: Zodiacal Light - A Measure of the Interplanetary Environment. Space Science Reviews 18, 281-339.
+// From the combined table, I tried to create a texture. Image editing hides the numbers, so I finally exported the
+// data (power 0.75) into a 3D surface which I edited in Sketchup: fill the data hole "mountain" with believeable values.
+// Export to OBJ, extract and mirror vertices. Then, in ArcGIS10,
+// 3D Analyst Toolbox -> From File -> ASCII 3D to Feature Class
+// 3D Analyst Toolbox -> Raster Interpolation -> IDW: cell size: 1 (degree), power:2, var.dist., 12points.
+// Spatial Analyst Tools -> Math -> Power: 1.3333 (to invert the 0.75 above)
+// This float32 texture was then exported to a regular 8bit grayscale PNG texture.
+// It turned out that the original distribution had a quite boxy appearance around the data hole.
+// I had to do more editing, finally also within the data values, but I think much of the error is in these published data values.
+// There are "shoulders" which almost look like sundogs, these are the max. values given 30 degrees from the sun.
+// The true values would massively concentrate further around the sun, but a single 8bit texture cannot deliver more dynamic range in brightness.
+// The current solution matches my own observations in a very dark location in Namibia, May 2014, and photos taken in Libya in March 2006.
+
 class ZodiacalLight : public StelModule
 {
 	Q_OBJECT

@@ -19,10 +19,12 @@
  */
 
 #include "ZodiacalLight.hpp"
+#include "SolarSystem.hpp"
 #include "StelFader.hpp"
 #include "StelTexture.hpp"
 #include "StelUtils.hpp"
 #include "StelFileMgr.hpp"
+#include "StelModuleMgr.hpp"
 
 #include "StelProjector.hpp"
 #include "StelToneReproducer.hpp"
@@ -61,14 +63,8 @@ void ZodiacalLight::init()
 	Q_ASSERT(conf);
 
 	// The Paper describes brightness values over the complete sky, so also the texture covers the full sky. 
-
-	// The value range from the paper is 57..1670, but show a hole around the sun where it is much brighter.
-	// pixel arithmetics used to prepare 8bit gray map: (val-50)/6.36 to keep brightness from overflowing.
-	// TODO (maybe later): split this object into a spherical component with hole 60x80degrees around the sun, and a brighter mesh 60x80.
-	// By separating these meshes there should be no texture overlap problems. However, I have no good data for this hole.
-	//tex = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/zodiacal_2004_pwr0p2_M2_mul18.png");
+	// The data hole around the sun has been filled by useful values.
 	tex = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/zodiacallight_2004.png");
-//	tex = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/zodiacal_2004_m55by8.png");
 	setFlagShow(conf->value("astro/flag_zodiacal_light", true).toBool());
 	setIntensity(conf->value("astro/zodiacal_light_intensity",1.f).toFloat());
 
@@ -97,7 +93,8 @@ void ZodiacalLight::update(double deltaTime)
 	{
 		// update vertices
 		Vec3d obsPos=core->getObserverHeliocentricEclipticPos();
-		double solarLongitude=atan2(obsPos[1], obsPos[0]) + 0.5*M_PI;
+		// For solar-centered texture, take minus, else plus:
+		double solarLongitude=atan2(obsPos[1], obsPos[0]) - 0.5*M_PI;
 		Mat4d transMat=core->matVsop87ToJ2000 * Mat4d::zrotation(solarLongitude);
 		for (int i=0; i<eclipticalVertices.size(); ++i)
 		{
@@ -125,29 +122,39 @@ void ZodiacalLight::draw(StelCore* core)
 
 	StelProjector::ModelViewTranformP transfo = core->getJ2000ModelViewTransform();
 
-	const StelProjectorP prj = core->getProjection(transfo); // GZ: Maybe this can be simplified?
+	const StelProjectorP prj = core->getProjection(transfo);
 	StelToneReproducer* eye = core->getToneReproducer();
 
 	Q_ASSERT(tex);	// A texture must be loaded before calling this
 
-	// This RGB color corresponds to the night blue scotopic color = 0.25, 0.25 in xyY mode.
-	// since Zodiacal Light is always seen white RGB value in the texture (1.0,1.0,1.0)
-	// GZ: This taken from MilkyWay. Z.L. is redder, maybe adapt?
-	//Vec3f c = Vec3f(0.34165f, 0.429666f, 0.63586f);
+	// Default ZL color is white (sunlight)
 	Vec3f c = Vec3f(1.0f, 1.0f, 1.0f);
 
 	// ZL is quite sensitive to light pollution. I scale to make it less visible.
-	float lum = core->getSkyDrawer()->surfacebrightnessToLuminance(5.0f*+0.5*bortle);
+	float lum = core->getSkyDrawer()->surfacebrightnessToLuminance(8.0f*+0.5*bortle);
+
 
 	// Get the luminance scaled between 0 and 1
 	float aLum =eye->adaptLuminanceScaled(lum*fader->getInterstate());
 
-	// Bound a maximum luminance (minimum?)
-	aLum = qMin(0.38f, aLum*2.f);
-	//aLum = qMin(0.1f, aLum*2.f); // value 0.1 pure guessing!
+	// Bound a maximum luminance
+	aLum = qMin(0.25f, aLum*2.f);
 
 	// intensity of 1.0 is "proper", but allow boost for dim screens
 	c*=aLum*intensity;
+
+	// In brighter twilight we should tune brightness down. So for sun above -18 degrees, we must tweak here:
+	const Vec3d& sunPos = GETSTELMODULE(SolarSystem)->getSun()->getAltAzPosGeometric(core);
+	if (core->getSkyDrawer()->getFlagHasAtmosphere())
+	{
+		if (sunPos[2] > -0.1) return; // Make ZL invisible during civil twilight and daylight.
+		if (sunPos[2] > -0.3)
+		{ // scale twilight down for sun altitude -18..-6, i.e. scale -0.3..-0.1 to 1..0,
+			float twilightScale= -5.0f* (sunPos[2]+0.1)  ; // 0(if bright)..1(dark)
+			c*=twilightScale;
+		}
+	}
+
 
 	if (c[0]<0) c[0]=0;
 	if (c[1]<0) c[1]=0;
