@@ -1427,7 +1427,7 @@ void StelPainter::drawSprite2dMode(float x, float y, float radius)
 	enableClientStates(false);
 }
 
-void StelPainter::drawSprite2dModeNoDeviceScale(const float x, const float y, const float radius)
+void StelPainter::drawSprite2dModeNoDeviceScale(float x, float y, float radius)
 {
 	drawSprite2dMode(x, y, radius/(prj->getDevicePixelsPerPixel()*StelApp::getInstance().getGlobalScalingRatio()));
 }
