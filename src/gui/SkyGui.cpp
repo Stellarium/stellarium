@@ -259,7 +259,7 @@ void SkyGui::updateBarsPos()
 	const qreal newWinBarY = hh-winBar->boundingRectNoHelpLabel().height()-buttonBar->boundingRectNoHelpLabel().height()-20;
 	if (winBar->pos().x()!=newWinBarX || winBar->pos().y()!=newWinBarY)
 	{
-        winBar->setPos(round(newWinBarX), qRound(newWinBarY));
+		winBar->setPos(qRound(newWinBarX), qRound(newWinBarY));
 		updatePath = true;
 	}
 
@@ -268,7 +268,7 @@ void SkyGui::updateBarsPos()
 	const qreal newButtonBarY = hh-buttonBar->boundingRectNoHelpLabel().height()-buttonBarPath->getRoundSize()+0.5+(1.-animBottomBarTimeLine->currentValue())*rangeY;
 	if (buttonBar->pos().x()!=newButtonBarX || buttonBar->pos().y()!=newButtonBarY)
 	{
-        buttonBar->setPos(round(newButtonBarX), qRound(newButtonBarY));
+		buttonBar->setPos(qRound(newButtonBarX), qRound(newButtonBarY));
 		updatePath = true;
 	}
 
