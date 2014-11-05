@@ -1124,7 +1124,7 @@ void Planet::initShader()
 		"        highp float R = asin(sunRadius / L);\n"
 		"        for (int i = 0; i < 4; ++i)\n"
 		"        {\n"
-		"            if (shadowCount>=i)\n"
+		"            if (shadowCount>i)\n"
 		"            {\n"
 		"                highp vec3 satellitePosition = shadowData[0].xyz;\n"
 		"                highp float satelliteRadius = shadowData[0].w;\n"
