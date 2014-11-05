@@ -96,7 +96,7 @@ public:
 	///////////////////////////////////////////////////////////////////////////
 	// Method specific to the landscape manager
 	//! Return the global landscape luminance [0..1], for being used e.g for setting eye adaptation.
-	//! GZ 2014-01-03: THIS IS MISLEADING. Returns 1 if atmosphere drawing is on and no eclipse underway, 0 if atmosphere is switched off.
+	//! It returns 1 if atmosphere drawing is on and no eclipse underway, 0 if atmosphere is switched off.
 	//! The actual brightness is of no concern here. You may use getAtmosphereAverageLuminance() for this.
 	float getLuminance() const;
 	//! return average luminance [cd/m^2] of atmosphere. Around 10 at sunset, 6400 in daylight, >0 in dark night.

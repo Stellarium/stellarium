@@ -25,6 +25,7 @@
 #include "StelUtils.hpp"
 #include "StelFileMgr.hpp"
 #include "StelModuleMgr.hpp"
+#include "LandscapeMgr.hpp"
 
 #include "StelProjector.hpp"
 #include "StelToneReproducer.hpp"
@@ -131,30 +132,37 @@ void ZodiacalLight::draw(StelCore* core)
 	Vec3f c = Vec3f(1.0f, 1.0f, 1.0f);
 
 	// ZL is quite sensitive to light pollution. I scale to make it less visible.
-	float lum = core->getSkyDrawer()->surfacebrightnessToLuminance(8.0f*+0.5*bortle);
+	float lum = core->getSkyDrawer()->surfacebrightnessToLuminance(13.5f + 0.5f*bortle); // (8.0f + 0.5*bortle);
 
 
 	// Get the luminance scaled between 0 and 1
 	float aLum =eye->adaptLuminanceScaled(lum*fader->getInterstate());
 
 	// Bound a maximum luminance
-	aLum = qMin(0.25f, aLum*2.f);
+	aLum = qMin(0.15f, aLum*2.f); // 2*aLum at dark sky with mag13.5 at Bortle=1 gives 0.13
+	//qDebug() << "aLum=" << aLum;
 
 	// intensity of 1.0 is "proper", but allow boost for dim screens
 	c*=aLum*intensity;
 
-	// In brighter twilight we should tune brightness down. So for sun above -18 degrees, we must tweak here:
-	const Vec3d& sunPos = GETSTELMODULE(SolarSystem)->getSun()->getAltAzPosGeometric(core);
-	if (core->getSkyDrawer()->getFlagHasAtmosphere())
-	{
-		if (sunPos[2] > -0.1) return; // Make ZL invisible during civil twilight and daylight.
-		if (sunPos[2] > -0.3)
-		{ // scale twilight down for sun altitude -18..-6, i.e. scale -0.3..-0.1 to 1..0,
-			float twilightScale= -5.0f* (sunPos[2]+0.1)  ; // 0(if bright)..1(dark)
-			c*=twilightScale;
-		}
-	}
+//	// In brighter twilight we should tune brightness down. So for sun above -18 degrees, we must tweak here:
+//	const Vec3d& sunPos = GETSTELMODULE(SolarSystem)->getSun()->getAltAzPosGeometric(core);
+//	if (core->getSkyDrawer()->getFlagHasAtmosphere())
+//	{
+//		if (sunPos[2] > -0.1) return; // Make ZL invisible during civil twilight and daylight.
+//		if (sunPos[2] > -0.3)
+//		{ // scale twilight down for sun altitude -18..-6, i.e. scale -0.3..-0.1 to 1..0,
+//			float twilightScale= -5.0f* (sunPos[2]+0.1)  ; // 0(if bright)..1(dark)
+//			c*=twilightScale;
+//		}
+//	}
 
+	// Better: adapt brightness by atmospheric brightness
+	const float atmLum = GETSTELMODULE(LandscapeMgr)->getAtmosphereAverageLuminance();
+	if (atmLum>0.5f) return; // 10cd/m^2 at sunset, 3.3 at civil twilight (sun at -6deg). 0.0145 sun at -12, 0.0004 sun at -18,  0.01 at Full Moon!?
+	//qDebug() << "AtmLum: " << atmLum;
+	float atmFactor=2.0f*(0.5f-atmLum);
+	c*=atmFactor*atmFactor;
 
 	if (c[0]<0) c[0]=0;
 	if (c[1]<0) c[1]=0;
