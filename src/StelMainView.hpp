@@ -147,7 +147,8 @@ private:
 	//! Start the display loop
 	void startMainLoop();
 	
-	QString getSupportedOpenGLVersion() const;
+	//QString getSupportedOpenGLVersion() const;
+	//QPair getSupportedOpenGLVersion() const;
 	//! provide extensive OpenGL dignostics in logfile.
 	void dumpOpenGLdiagnostics() const;
 

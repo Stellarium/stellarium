@@ -346,7 +346,10 @@ void StelMainView::init(QSettings* conf)
 	glWidget->makeCurrent();
 
 	// Debug info about supported version of OpenGL and vendor/renderer
-	qDebug() << "OpenGL versions supported:" << getSupportedOpenGLVersion();
+	QOpenGLContext* context=QOpenGLContext::currentContext();
+	QSurfaceFormat format=context->format();
+
+	qDebug() << "Current OpenGL version supported:" << format.majorVersion() << "." << format.minorVersion();
 	qDebug() << "Driver version string:" << QString(reinterpret_cast<const char*>(glGetString(GL_VERSION)));
 	qDebug() << "GL vendor is" << QString(reinterpret_cast<const char*>(glGetString(GL_VENDOR)));
 	qDebug() << "GL renderer is" << QString(reinterpret_cast<const char*>(glGetString(GL_RENDERER)));
@@ -356,6 +359,31 @@ void StelMainView::init(QSettings* conf)
 	// Only give extended info if called on command line, for diagnostic.
 	if (qApp->property("dump_OpenGL_details").toBool())
 		dumpOpenGLdiagnostics();
+
+	// moved from main.cpp: Basic tests. This test is actually included in the next test. Remove?
+	if (format.majorVersion() < 2){
+		qWarning() << "Oops... This system does not even support OpenGL2.";
+		QMessageBox::critical(0, "Stellarium", q_("This system does not support OpenGL2."), QMessageBox::Abort, QMessageBox::Abort);
+		exit(0);
+	}
+
+	if ( ((format.renderableType()==QSurfaceFormat::OpenGL  ) && (format.version() < QPair<int, int>(2, 1))) ||
+	     ((format.renderableType()==QSurfaceFormat::OpenGLES) && (format.version() < QPair<int, int>(2, 0)))   )
+		//openGLVersionFlags() & QGLFormat::OpenGL_Version_2_1) && !(QGLFormat::openGLVersionFlags() & QGLFormat::OpenGL_ES_Version_2_0)) // Check supported version of OpenGL
+	{
+		// Minimal required version of OpenGL for Qt5 is 2.1 and OpenGL Shading Language may be 1.20 (or OpenGL ES is 2.0 and GLSL ES is 2.0).
+		// As of V0.13.0..1, we use OpenGL Shading Language 1.30, i.e. we need in fact OpenGL 3.0 and above.
+		// If platform does not even support minimal OpenGL version for Qt5, then tell the user about troubles and quit from application.
+		#ifdef Q_OS_WIN
+		qWarning() << "Oops... Insufficient OpenGL version. Please update drivers, graphics hardware, or use MESA (or ANGLE) version.";
+		QMessageBox::critical(0, "Stellarium", q_("Insufficient OpenGL version. Please update drivers, graphics hardware, or use MESA (or ANGLE) version."), QMessageBox::Abort, QMessageBox::Abort);
+		#else
+		qWarning() << "Oops... Insufficient OpenGL version. Please update drivers, or graphics hardware.";
+		QMessageBox::critical(0, "Stellarium", q_("Insufficient OpenGL version. Please update drivers, or graphics hardware."), QMessageBox::Abort, QMessageBox::Abort);
+		#endif
+		exit(0);
+	}
+
 
 	// If GLSL version is less than 1.30, Stellarium cannot run properly. Depending on whatever driver/implementation details,
 	// Stellarium may crash or show only minor graphical errors. We show a soft-crash panel that can be suppressed by a startup option.
@@ -454,54 +482,61 @@ void StelMainView::init(QSettings* conf)
 	startMainLoop();
 }
 
-QString StelMainView::getSupportedOpenGLVersion() const
-{
-	int version = QGLFormat::openGLVersionFlags();
-	QStringList ver;
+//QPair StelMainView::getSupportedOpenGLVersion() const
+//{
 
-	if (version&QGLFormat::OpenGL_Version_1_1)
-		ver << "1.1";
-	if (version&QGLFormat::OpenGL_Version_1_2)
-		ver << "1.2";
-	if (version&QGLFormat::OpenGL_Version_1_3)
-		ver << "1.3";
-	if (version&QGLFormat::OpenGL_Version_1_4)
-		ver << "1.4";
-	if (version&QGLFormat::OpenGL_Version_1_5)
-		ver << "1.5";
-	if (version&QGLFormat::OpenGL_Version_2_0)
-		ver << "2.0";
-	if (version&QGLFormat::OpenGL_Version_2_1)
-		ver << "2.1";
-	if (version&QGLFormat::OpenGL_Version_3_0)
-		ver << "3.0";
-	if (version&QGLFormat::OpenGL_Version_3_1)
-		ver << "3.1";
-	if (version&QGLFormat::OpenGL_Version_3_2)
-		ver << "3.2";
-	if (version&QGLFormat::OpenGL_Version_3_3)
-		ver << "3.3";
-	if (version&QGLFormat::OpenGL_Version_4_0)
-		ver << "4.0";
-	if (version&QGLFormat::OpenGL_Version_4_1)
-		ver << "4.1";
-	if (version&QGLFormat::OpenGL_Version_4_2)
-		ver << "4.2";
-	if (version&QGLFormat::OpenGL_Version_4_3)
-		ver << "4.3";
-	if (version&QGLFormat::OpenGL_ES_CommonLite_Version_1_0)
-		ver << "1.0 (ES CL)";
-	if (version&QGLFormat::OpenGL_ES_CommonLite_Version_1_1)
-		ver << "1.1 (ES CL)";
-	if (version&QGLFormat::OpenGL_ES_Common_Version_1_0)
-		ver << "1.0 (ES C)";
-	if (version&QGLFormat::OpenGL_ES_Common_Version_1_1)
-		ver << "1.1 (ES C)";
-	if (version&QGLFormat::OpenGL_ES_Version_2_0)
-		ver << "2.0 (ES)";
+//	// GZ: replace QGLFormat by QOpenGLContext
+//	QOpenGLContext* context=QOpenGLContext::currentContext();
+//	QSurfaceFormat format=context->format();
+//	return format.version();
+//	return QString("%1.%2").arg(format.majorVersion()).arg(format.minorVersion());
 
-	return ver.join(", ");
-}
+//	int version = QGLFormat::openGLVersionFlags();
+//	QStringList ver;
+
+//	if (version&QGLFormat::OpenGL_Version_1_1)
+//		ver << "1.1";
+//	if (version&QGLFormat::OpenGL_Version_1_2)
+//		ver << "1.2";
+//	if (version&QGLFormat::OpenGL_Version_1_3)
+//		ver << "1.3";
+//	if (version&QGLFormat::OpenGL_Version_1_4)
+//		ver << "1.4";
+//	if (version&QGLFormat::OpenGL_Version_1_5)
+//		ver << "1.5";
+//	if (version&QGLFormat::OpenGL_Version_2_0)
+//		ver << "2.0";
+//	if (version&QGLFormat::OpenGL_Version_2_1)
+//		ver << "2.1";
+//	if (version&QGLFormat::OpenGL_Version_3_0)
+//		ver << "3.0";
+//	if (version&QGLFormat::OpenGL_Version_3_1)
+//		ver << "3.1";
+//	if (version&QGLFormat::OpenGL_Version_3_2)
+//		ver << "3.2";
+//	if (version&QGLFormat::OpenGL_Version_3_3)
+//		ver << "3.3";
+//	if (version&QGLFormat::OpenGL_Version_4_0)
+//		ver << "4.0";
+//	if (version&QGLFormat::OpenGL_Version_4_1)
+//		ver << "4.1";
+//	if (version&QGLFormat::OpenGL_Version_4_2)
+//		ver << "4.2";
+//	if (version&QGLFormat::OpenGL_Version_4_3)
+//		ver << "4.3";
+//	if (version&QGLFormat::OpenGL_ES_CommonLite_Version_1_0)
+//		ver << "1.0 (ES CL)";
+//	if (version&QGLFormat::OpenGL_ES_CommonLite_Version_1_1)
+//		ver << "1.1 (ES CL)";
+//	if (version&QGLFormat::OpenGL_ES_Common_Version_1_0)
+//		ver << "1.0 (ES C)";
+//	if (version&QGLFormat::OpenGL_ES_Common_Version_1_1)
+//		ver << "1.1 (ES C)";
+//	if (version&QGLFormat::OpenGL_ES_Version_2_0)
+//		ver << "2.0 (ES)";
+
+//	return ver.join(", ");
+//
 
 void StelMainView::dumpOpenGLdiagnostics() const
 {
