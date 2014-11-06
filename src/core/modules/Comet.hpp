@@ -32,6 +32,7 @@
 	2013-12: GZ: New algorithms for position computation following Paul Heafner: Fundamental Ephemeris Computations (Willmann-Bell 1999).
 	2014-01: GZ: Parabolic tails appropriately scaled/rotated. Much is currently empirical, leaving room for physics-based improvements.
 	2014-08: GZ: speedup in case hundreds of comets are loaded.
+	2014-11: GZ: tail extinction, better brightness balance.
   */
 class Comet : public Planet
 {
@@ -91,10 +92,14 @@ public:
 	virtual double getSiderealPeriod() const;
 
 	//! GZ: override from Planet: extend with tail details.
-	virtual void computePosition(const double date);
+	//virtual void computePosition(const double date);
 
 	//! re-implementation of Planet's draw()
 	virtual void draw(StelCore* core, float maxMagLabels, const QFont& planetNameFont);
+
+	// re-implementation of Planet's update() to prepare tails (extinction etc). @param deltaTime: ms (since last call)
+	// TODO: computePosition can be removed and things added here!
+	virtual void update(int deltaTime);
 
 private:
 	//! @returns estimates for (Coma diameter [AU], gas tail length [AU]).
@@ -129,7 +134,8 @@ private:
 	Vec2f tailFactors; // result of latest call to getComaDiameterAndTailLengthAU(); Results cached here for infostring. [0]=Coma diameter, [1] gas tail length.
 	bool tailActive;		//! true if there is a tail worth bothering (longer than COMET_MIN_TAIL_LENGTH_AU)? Drawing tails is quite costly.
 	double deltaJDtail;             //! like deltaJD, but time difference between tail geometry updates.
-	double lastJDtail;             //! like lastJD, but time of last tail geometry update.
+	double lastJDtail;              //! like lastJD, but time of last tail geometry update.
+	double lastJDextinction;        //! GZ NEW time of last extinction update. (computed every 5 minutes)
 	Mat4d gasTailRot;		//! rotation matrix for gas tail parabola
 	Mat4d dustTailRot;		//! rotation matrix for the skewed dust tail parabola
 	float dustTailWidthFactor;      //!< empirical individual broadening of the dust tail end, compared to the gas tail end. Actually, dust tail width=2*comaWidth*dustTailWidthFactor. Default 1.5
@@ -144,6 +150,8 @@ private:
 
 	QVector<double> gastailVertexArr;  // computed frequently, describes parabolic shape (along z axis) of gas tail.
 	QVector<double> dusttailVertexArr; // computed frequently, describes parabolic shape (along z axis) of dust tail.
+	QVector<Vec3f> gastailColorArr;    // NEW computed for every 5 mins, modulates gas tail brightness for extinction
+	QVector<Vec3f> dusttailColorArr;   // NEW computed for every 5 mins, modulates dust tail brightness for extinction
 	static QVector<float> tailTexCoordArr; // computed only once for all comets!
 	static QVector<unsigned short> tailIndices; // computed only once for all comets!
 	static StelTextureSP comaTexture;

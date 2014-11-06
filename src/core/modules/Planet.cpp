@@ -667,7 +667,7 @@ void Planet::setHeliocentricEclipticPos(const Vec3d &pos)
 double Planet::computeDistance(const Vec3d& obsHelioPos)
 {
 	distance = (obsHelioPos-getHeliocentricEclipticPos()).length();
-	// GZ: improve fps by juggling updates for asteroids. They must be fast if close to observer, but can be slow if further away.
+	// improve fps by juggling updates for asteroids. They must be fast if close to observer, but can be slow if further away.
 	if (pType == Planet::isAsteroid)
 			deltaJD=distance*StelCore::JD_SECOND;
 	return distance;

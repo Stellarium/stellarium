@@ -179,7 +179,8 @@ public:
 
 	// Compute the position in the parent Planet coordinate system
 	void computePositionWithoutOrbits(const double dateJD);
-	virtual void computePosition(const double dateJD);// GZ: gets overridden in Comet!
+	//virtual void computePosition(const double dateJD);// GZ: gets overridden in Comet!
+	void computePosition(const double dateJD);// GZ: gets overridden in Comet!
 
 	// Compute the transformation matrix from the local Planet coordinate to the parent Planet coordinate
 	void computeTransMatrix(double date);
@@ -224,8 +225,8 @@ public:
 	static void setLabelColor(const Vec3f& lc) {labelColor = lc;}
 	static const Vec3f& getLabelColor(void) {return labelColor;}
 
-	// update displayed elements. @param deltaTime: ms (?)
-	void update(int deltaTime);
+	// update displayed elements. @param deltaTime: ms (since last call)
+	virtual void update(int deltaTime);
 
 	void setFlagHints(bool b){hintFader = b;}
 	bool getFlagHints(void) const {return hintFader;}
