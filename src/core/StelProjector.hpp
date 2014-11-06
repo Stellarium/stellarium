@@ -45,7 +45,7 @@ public:
 	//! Shared pointer on a ModelViewTranform instance (implement reference counting)
 	typedef QSharedPointer<ModelViewTranform> ModelViewTranformP;
 
-	//! @class PreModelViewFunc
+	//! @class ModelViewTranform
 	//! Allows to define non linear operations in addition to the standard linear (Matrix 4d) ModelView transformation.
 	class ModelViewTranform
 	{
@@ -317,7 +317,7 @@ protected:
 	Vec2f viewportCenter;               // Viewport center in screen pixel
 	float viewportFovDiameter;          // diameter of the FOV disk in pixel
 	bool gravityLabels;                 // should label text align with the horizon?
-	float defautAngleForGravityText;    // a rotation angle to apply to gravity text (only if gravityLabels is set to false)
+	float defautAngleForGravityText;   // a rotation angle to apply to gravity text (only if gravityLabels is set to false)
 	SphericalCap boundingCap;           // Bounding cap of the whole viewport
 	float devicePixelsPerPixel;         // The number of device pixel per "Device Independent Pixels" (value is usually 1, but 2 for mac retina screens)
 
