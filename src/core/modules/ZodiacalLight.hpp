@@ -39,10 +39,10 @@
 // 3D Analyst Toolbox -> From File -> ASCII 3D to Feature Class
 // 3D Analyst Toolbox -> Raster Interpolation -> IDW: cell size: 1 (degree), power:2, var.dist., 12points.
 // Spatial Analyst Tools -> Math -> Power: 1.3333 (to invert the 0.75 above)
+// Spatial Analyst Tools -> Math -> Log2 (to provide better scaling, matches better with visual impression)
 // This float32 texture was then exported to a regular 8bit grayscale PNG texture.
 // It turned out that the original distribution had a quite boxy appearance around the data hole.
 // I had to do more editing, finally also within the data values, but I think much of the error is in these published data values.
-// There are "shoulders" which almost look like sundogs, these are the max. values given 30 degrees from the sun.
 // The true values would massively concentrate further around the sun, but a single 8bit texture cannot deliver more dynamic range in brightness.
 // The current solution matches my own observations in a very dark location in Namibia, May 2014, and photos taken in Libya in March 2006.
 
