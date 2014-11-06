@@ -1188,7 +1188,7 @@ void Planet::initShader()
 	QOpenGLShader ringFragmentShader(QOpenGLShader::Fragment);
 	ringFragmentShader.compileSourceCode(arr.constData());
 	if (!ringFragmentShader.log().isEmpty()) { qWarning() << "Planet: Warnings while compiling ringFragmentShader: " << ringFragmentShader.log(); }
-	
+
 	ringPlanetShaderProgram = new QOpenGLShaderProgram(QOpenGLContext::currentContext());
 	ringPlanetShaderProgram->addShader(&vshader);
 	ringPlanetShaderProgram->addShader(&ringFragmentShader);
@@ -1214,7 +1214,7 @@ void Planet::initShader()
 	QOpenGLShader moonFragmentShader(QOpenGLShader::Fragment);
 	moonFragmentShader.compileSourceCode(arr.constData());
 	if (!moonFragmentShader.log().isEmpty()) { qWarning() << "Planet: Warnings while compiling moonFragmentShader: " << moonFragmentShader.log(); }
-	
+
 	moonShaderProgram = new QOpenGLShaderProgram(QOpenGLContext::currentContext());
 	moonShaderProgram->addShader(&moonVertexShader);
 	moonShaderProgram->addShader(&moonFragmentShader);
