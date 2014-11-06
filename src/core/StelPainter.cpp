@@ -544,7 +544,7 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 
 		// Translate/rotate
 		if (!noGravity)
-			angleDeg += prj->defautAngleForGravityText;
+			angleDeg += prj->defaultAngleForGravityText;
 
 		if (std::fabs(angleDeg)>1.f)
 		{
