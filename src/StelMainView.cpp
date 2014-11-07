@@ -350,7 +350,7 @@ void StelMainView::init(QSettings* conf)
 	QSurfaceFormat format=context->format();
 
 	qDebug() << "Detected:" << (format.renderableType()==QSurfaceFormat::OpenGL  ? "OpenGL" : (format.renderableType()==QSurfaceFormat::OpenGLES ? "OpenGL ES" : "Unsupported Format!" ));
-	qDebug() << "Current version supported:" << format.majorVersion() << "." << format.minorVersion();
+	qDebug() << "Current version supported:" << QString("%1.%2").arg(format.majorVersion()).arg(format.minorVersion());
 	qDebug() << "Driver version string:" << QString(reinterpret_cast<const char*>(glGetString(GL_VERSION)));
 	qDebug() << "GL vendor is" << QString(reinterpret_cast<const char*>(glGetString(GL_VENDOR)));
 	QString glRenderer(reinterpret_cast<const char*>(glGetString(GL_RENDERER)));
@@ -425,7 +425,6 @@ void StelMainView::init(QSettings* conf)
 				qDebug() << "vs/ps version is fine, we should not see a graphics problem.";
 		}
 		else
-
 		{
 			qDebug() << "Cannot parse ANGLE shader version string. This may indicate future problems.";
 			qDebug() << "Please send a bug report that includes this log file and states if Stellarium runs or has problems.";
