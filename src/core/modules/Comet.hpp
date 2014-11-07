@@ -122,7 +122,7 @@ private:
 	//! @param colorArr vertex colors (if not textured) r0, g0, b0, r1, g1, b1, ...
 	//! @param indices into the former arrays (zero-starting), triplets forming triangles: t0,0, t0,1, t0,2, t1,0, t1,1, t1,2, ...
 	//! @param xOffset for the dust tail, this may introduce a bend. Units are x per sqrt(z).
-	void computeParabola(const float parameter, const float topradius, const float zshift, QVector<double>& vertexArr, QVector<float>& texCoordArr, QVector<unsigned short>& indices, const float xOffset=0.0f);
+	void computeParabola(const float parameter, const float topradius, const float zshift, QVector<Vec3d>& vertexArr, QVector<float>& texCoordArr, QVector<unsigned short>& indices, const float xOffset=0.0f);
 
 	double absoluteMagnitude;
 	double slopeParameter;
@@ -148,8 +148,8 @@ private:
 	static bool createTailIndices;
 	static bool createTailTextureCoords;
 
-	QVector<double> gastailVertexArr;  // computed frequently, describes parabolic shape (along z axis) of gas tail.
-	QVector<double> dusttailVertexArr; // computed frequently, describes parabolic shape (along z axis) of dust tail.
+	QVector<Vec3d> gastailVertexArr;  // computed frequently, describes parabolic shape (along z axis) of gas tail.
+	QVector<Vec3d> dusttailVertexArr; // computed frequently, describes parabolic shape (along z axis) of dust tail.
 	QVector<Vec3f> gastailColorArr;    // NEW computed for every 5 mins, modulates gas tail brightness for extinction
 	QVector<Vec3f> dusttailColorArr;   // NEW computed for every 5 mins, modulates dust tail brightness for extinction
 	static QVector<float> tailTexCoordArr; // computed only once for all comets!

@@ -299,6 +299,12 @@ void Comet::update(int deltaTime)
 	StelCore* core=StelApp::getInstance().getCore();
 	double date=core->getJDay();
 
+	// The CometOrbit is in fact available in userDataPtr!
+	CometOrbit* orbit=(CometOrbit*)userDataPtr;
+	Q_ASSERT(orbit);
+	if (!orbit->objectDateValid(core->getJDay())) return; // don't do anything if out of useful date range. This allows having hundreds of comet elements.
+
+
 	//GZ: I think we can make deltaJDtail adaptive, depending on distance to sun! For some reason though, this leads to a crash!
 	//deltaJDtail=StelCore::JD_SECOND * qMax(1.0, qMin(eclipticPos.length(), 20.0));
 
@@ -329,8 +335,10 @@ void Comet::update(int deltaTime)
 
 				// Find valid parameters to create paraboloid vertex arrays: dustTail, gasTail.
 				computeParabola(gasparameter, gasTailEndRadius, -0.5f*gasparameter, gastailVertexArr,  tailTexCoordArr, tailIndices);
+				//gastailColorArr.fill(Vec3f(0.3,0.3,0.3), gastailVertexArr.length());
 				// Now we make a skewed parabola. Skew factor (xOffset, last arg) is rather ad-hoc/empirical. TBD later: Find physically correct solution.
 				computeParabola(dustparameter, dustTailWidthFactor*gasTailEndRadius, -0.5f*dustparameter, dusttailVertexArr, tailTexCoordArr, tailIndices, 25.0f*orbit->getVelocity().length());
+				//dusttailColorArr.fill(Vec3f(0.3,0.3,0.3), dusttailVertexArr.length());
 
 
 				// 2014-08 for 0.13.1 Moved from drawTail() to save lots of computation per frame (There *are* folks downloading all 730 MPC current comet elements...)
@@ -357,15 +365,17 @@ void Comet::update(int deltaTime)
 			orbit->setUpdateTails(false); // don't update until position has been recalculated elsewhere
 		}
 	}
-	// And also update extinction here. Enough to do so every 2 minutes.
-	if (fabs(lastJDextinction-date)> 2.0*StelCore::JD_MINUTE)
-	{
-		// TODO: THIS SHOULD GO INTO UPDATE!
+	// And also update magnitude and tail extinction here. Enough to do so for every minute.
+//	if (fabs(lastJDextinction-date) > StelCore::JD_MINUTE)
+//	{
+		lastJDextinction = date;
 		// GZ: If we use getVMagnitudeWithExtinction(), a head extincted in the horizon mist can completely hide an otherwise frighteningly long tail.
 		// we must use unextincted mag, but mix/dim with atmosphere/sky brightness.
 		// In addition, light falloff is a bit reduced for better visibility. Power basis should be 0.4, we use 0.6.
 		float magFactor=std::pow(0.6f , getVMagnitude(core));
-		if (core->getSkyDrawer()->getFlagHasAtmosphere())
+		const bool withExtinction=(core->getSkyDrawer()->getFlagHasAtmosphere());
+
+		if (withExtinction)
 		{
 			// Mix with sky brightness and light pollution: This is very ad-hoc, if someone finds a better solution, please go ahead!
 			// Light pollution:
@@ -382,16 +392,77 @@ void Comet::update(int deltaTime)
 		float dustMagFactor=dustTailBrightnessFactor*magFactor;
 		Vec3f gasColor(0.15f*gasMagFactor,0.15f*gasMagFactor,0.6f*gasMagFactor);
 		Vec3f dustColor(dustMagFactor, dustMagFactor,0.6f*dustMagFactor);
-		gastailColorArr.clear();
-		dusttailColorArr.clear();
-		for (int i=0; i<gastailVertexArr.size()/3; ++i)
+
+		if (magFactor<0.004)
 		{
-			gastailColorArr.append(Vec3f(gasColor));
-			dusttailColorArr.append(Vec3f(dustColor));
+			// Far too dim: don't even show tail...
+			tailActive=false;
+			return;
 		}
-	}
+
+		if (withExtinction)
+		{
+			Extinction extinction=core->getSkyDrawer()->getExtinction();
+			//int bortle=core->getSkyDrawer()->getBortleScaleIndex();
+			gastailColorArr.clear();
+			dusttailColorArr.clear();
+			for (int i=0; i<gastailVertexArr.size(); ++i)
+			{
+				// Gastail extinction:
+				Vec3d vertAltAz=core->j2000ToAltAz(gastailVertexArr.at(i), StelCore::RefractionOn);
+				vertAltAz.normalize();
+				Q_ASSERT(fabs(vertAltAz.lengthSquared()-1.0) < 0.001);
+				float oneMag=0.0f;
+				extinction.forward(vertAltAz, &oneMag);
+				float extinctionFactor=std::pow(0.4f , oneMag); // * (1.1f-bortle*0.1f); // drop of one magnitude: factor 2.5 or 40%
+				Vec3f thisColor= gasColor*extinctionFactor;
+				gastailColorArr.append(thisColor);
+
+				// dusttail extinction:
+				vertAltAz=core->j2000ToAltAz(dusttailVertexArr.at(i), StelCore::RefractionOn);
+				vertAltAz.normalize();
+				Q_ASSERT(fabs(vertAltAz.lengthSquared()-1.0) < 0.001);
+				oneMag=0.0f;
+				extinction.forward(vertAltAz, &oneMag);
+				extinctionFactor=std::pow(0.4f , oneMag); // * (1.1f-bortle*0.1f); // drop of one magnitude: factor 2.5 or 40%
+				thisColor= dustColor*extinctionFactor;
+				dusttailColorArr.append(thisColor);
+			}
+		}
+		else // no atmosphere: set all vertices to same brightness. TODO: WE MUST CATCH A-TOGGLE!
+		{
+			gastailColorArr.fill(gasColor,   gastailVertexArr.length());
+			dusttailColorArr.fill(dustColor, dusttailVertexArr.length());
+		}
+		qDebug() << "Comet " << getEnglishName() <<  "JD: " << date << "gasR" << gasColor[0] << " dustR" << dustColor[0];
+//	}
 }
 
+/* TEMPLATE from MilkyWay
+
+
+if (withExtinction)
+{
+	// We must process the vertices to find geometric altitudes in order to compute vertex colors.
+	// Note that there is a visible boost of extinction for higher Bortle indices. I must reflect that as well.
+	Extinction extinction=core->getSkyDrawer()->getExtinction();
+	vertexArray->colors.clear();
+
+	for (int i=0; i<vertexArray->vertex.size(); ++i)
+	{
+		Vec3d vertAltAz=core->j2000ToAltAz(vertexArray->vertex.at(i), StelCore::RefractionOn);
+		Q_ASSERT(vertAltAz.lengthSquared()-1.0 < 0.001f);
+
+		float oneMag=0.0f;
+		extinction.forward(vertAltAz, &oneMag);
+		float extinctionFactor=std::pow(0.4f , oneMag) * (1.1f-bortle*0.1f); // drop of one magnitude: factor 2.5 or 40%
+		Vec3f thisColor=Vec3f(c[0]*extinctionFactor, c[1]*extinctionFactor, c[2]*extinctionFactor);
+		vertexArray->colors.append(thisColor);
+	}
+}
+else
+	vertexArray->colors.fill(Vec3f(c[0], c[1], c[2]));
+*/
 
 
 // Draw the Comet and all the related infos: name, circle etc... GZ: Taken from Planet.cpp 2013-11-05 and extended
@@ -546,11 +617,13 @@ void Comet::computeComa(const float diameter)
 // Parabola equation: z=x²/2p.
 // xOffset for the dust tail, this may introduce a bend. Units are x per sqrt(z).
 void Comet::computeParabola(const float parameter, const float radius, const float zshift,
-			    QVector<double>& vertexArr, QVector<float>& texCoordArr, QVector<unsigned short> &indices, const float xOffset) {
+			    QVector<Vec3d>& vertexArr, QVector<float>& texCoordArr, QVector<unsigned short> &indices, const float xOffset) {
 
 	// GZ: keep the array and replace contents. However, using replace() is only slightly faster.
-	if (vertexArr.length() < (3*(COMET_TAIL_SLICES*COMET_TAIL_STACKS+1)))
-		vertexArr.resize(3*(COMET_TAIL_SLICES*COMET_TAIL_STACKS+1));
+//	if (vertexArr.length() < (3*(COMET_TAIL_SLICES*COMET_TAIL_STACKS+1)))
+//		vertexArr.resize(3*(COMET_TAIL_SLICES*COMET_TAIL_STACKS+1));
+	if (vertexArr.length() < ((COMET_TAIL_SLICES*COMET_TAIL_STACKS+1)))
+		vertexArr.resize((COMET_TAIL_SLICES*COMET_TAIL_STACKS+1));
 	if (createTailIndices) indices.clear();
 	if (createTailTextureCoords) texCoordArr.clear();
 	int i;
@@ -566,8 +639,9 @@ void Comet::computeParabola(const float parameter, const float radius, const flo
 		ya[i]=cos(i*da);
 	}
 	
-	vertexArr.replace(0, 0.0); vertexArr.replace(1, 0.0); vertexArr.replace(2, zshift);
-	int vertexArrIndex=3;
+	//vertexArr.replace(0, 0.0); vertexArr.replace(1, 0.0); vertexArr.replace(2, zshift);
+	vertexArr.replace(0, Vec3d(0.0, 0.0, zshift));
+	int vertexArrIndex=1;
 	if (createTailTextureCoords) texCoordArr << 0.5f << 0.5f;
 	// define the indices lying on circles, starting at 1: odd rings have 1/slices+1/2slices, even-numbered rings straight 1/slices
 	// inner ring#1
@@ -578,9 +652,9 @@ void Comet::computeParabola(const float parameter, const float radius, const flo
 		for (i=ring & 1; i<2*COMET_TAIL_SLICES; i+=2) { // i.e., ring1 has shifted vertices, ring2 has even ones.
 			x=xa[i]*radius*ring/COMET_TAIL_STACKS;
 			y=ya[i]*radius*ring/COMET_TAIL_STACKS;
-			vertexArr.replace(vertexArrIndex++, x+xShift);
-			vertexArr.replace(vertexArrIndex++, y);
-			vertexArr.replace(vertexArrIndex++, z);
+			vertexArr.replace(vertexArrIndex++, Vec3d(x+xShift, y, z));
+			//vertexArr.replace(vertexArrIndex++, y);
+			//vertexArr.replace(vertexArrIndex++, z);
 			if (createTailTextureCoords) texCoordArr << 0.5+ 0.5*x/radius << 0.5+0.5*y/radius;
 		}
 	}
