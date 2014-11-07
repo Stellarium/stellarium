@@ -355,20 +355,13 @@ void StelMainView::init(QSettings* conf)
 	qDebug() << "GL vendor is" << QString(reinterpret_cast<const char*>(glGetString(GL_VENDOR)));
 	QString glRenderer(reinterpret_cast<const char*>(glGetString(GL_RENDERER)));
 	qDebug() << "GL renderer is" << glRenderer;
-	QString glslString(reinterpret_cast<const char*>(glGetString(GL_SHADING_LANGUAGE_VERSION)));
-	qDebug() << "GL Shading Language version is" << glslString;
-	
-	// Only give extended info if called on command line, for diagnostic.
-	if (qApp->property("dump_OpenGL_details").toBool())
-		dumpOpenGLdiagnostics();
 
-
+	// Minimal required version of OpenGL for Qt5 is 2.1 and OpenGL Shading Language may be 1.20 (or OpenGL ES is 2.0 and GLSL ES is 1.0).
+	// As of V0.13.0..1, we use OpenGL Shading Language 1.30, i.e. we need in fact OpenGL 3.0 and above.
+	// If platform does not even support minimal OpenGL version for Qt5, then tell the user about troubles and quit from application.
 	if ( ((format.renderableType()==QSurfaceFormat::OpenGL  ) && (format.version() < QPair<int, int>(2, 1))) ||
 	     ((format.renderableType()==QSurfaceFormat::OpenGLES) && (format.version() < QPair<int, int>(2, 0)))   )
 	{
-		// Minimal required version of OpenGL for Qt5 is 2.1 and OpenGL Shading Language may be 1.20 (or OpenGL ES is 2.0 and GLSL ES is 1.0).
-		// As of V0.13.0..1, we use OpenGL Shading Language 1.30, i.e. we need in fact OpenGL 3.0 and above.
-		// If platform does not even support minimal OpenGL version for Qt5, then tell the user about troubles and quit from application.
 		#ifdef Q_OS_WIN
 		qWarning() << "Oops... Insufficient OpenGL version. Please update drivers, graphics hardware, or use MESA (or ANGLE) version.";
 		QMessageBox::critical(0, "Stellarium", q_("Insufficient OpenGL version. Please update drivers, graphics hardware, or use MESA (or ANGLE) version."), QMessageBox::Abort, QMessageBox::Abort);
@@ -378,6 +371,15 @@ void StelMainView::init(QSettings* conf)
 		#endif
 		exit(0);
 	}
+	// This call requires OpenGL2+.
+	QString glslString(reinterpret_cast<const char*>(glGetString(GL_SHADING_LANGUAGE_VERSION)));
+	qDebug() << "GL Shading Language version is" << glslString;
+
+	// Only give extended info if called on command line, for diagnostic.
+	if (qApp->property("dump_OpenGL_details").toBool())
+		dumpOpenGLdiagnostics();
+
+	bool openGLerror=false;
 
 #ifdef Q_OS_WIN
 	// If we have ANGLE, check esp. for insufficient ps_2 level.
@@ -394,6 +396,7 @@ void StelMainView::init(QSettings* conf)
 			qDebug() << "PS Version Number after parsing: " << psVersion;
 			if ((vsVersion<2.0) || (psVersion<3.0))
 			{
+				openGLerror=true;
 				qDebug() << "This is not enough: we need DirectX9 with vs_2_0 and ps_3_0 or later.";
 				qDebug() << "You should update graphics drivers, graphics hardware, or use the OpenGL-MESA version.";
 				qDebug() << "Else, please try to use an older version like 0.12.4, and try there with --safe-mode";
@@ -429,8 +432,6 @@ void StelMainView::init(QSettings* conf)
 			qDebug() << "Cannot parse ANGLE shader version string. This may indicate future problems.";
 			qDebug() << "Please send a bug report that includes this log file and states if Stellarium runs or has problems.";
 		}
-
-
 	}
 #endif
 
@@ -448,6 +449,7 @@ void StelMainView::init(QSettings* conf)
 		qDebug() << "GLSL Version Number after parsing: " << glslVersion;
 		if (glslVersion<1.3)
 		{
+			openGLerror=true;
 			qDebug() << "This is not enough: we need GLSL1.30 or later.";
 			qDebug() << "You should update graphics drivers, graphics hardware, or use the MESA version.";
 			qDebug() << "Else, please try to use an older version like 0.12.4, and try there with --safe-mode";
@@ -484,6 +486,7 @@ void StelMainView::init(QSettings* conf)
 		qDebug() << "GLSL ES Version Number after parsing: " << glslesVersion;
 		if (glslesVersion<1.0)
 		{
+			openGLerror=true;
 			qDebug() << "This is not enough: we need GLSL ES 1.00 or later.";
 			qDebug() << "You should update graphics drivers, graphics hardware, or use the OpenGL-MESA version.";
 			qDebug() << "Else, please try to use an older version like 0.12.4, and try there with --safe-mode";
@@ -512,12 +515,17 @@ void StelMainView::init(QSettings* conf)
 			}
 		}
 		else
-			qDebug() << "GLSL ES version is fine, we should not see a graphics problem.";
+		{
+			if (openGLerror)
+				qDebug() << "GLSL ES version is OK, but there were previous errors, expect problems.";
+			else
+				qDebug() << "GLSL ES version is fine, we should not see a graphics problem.";
+		}
 	}
 	else
 	{
 		qDebug() << "Cannot parse GLSL (ES) version string. This may indicate future problems.";
-		qDebug() << "Please send a bug report that includes this log file and states if Stellarium runs or has problems.";
+		qDebug() << "Please send a bug report that includes this log file and states if Stellarium works or has problems.";
 	}
 
 	stelApp= new StelApp();
