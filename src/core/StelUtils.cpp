@@ -1236,8 +1236,8 @@ double calculateSiderealPeriod(const double SemiMajorAxis)
 QString hoursToHmsStr(const double hours)
 {
 	int h = (int)hours;
-	int m = (int)((std::abs(hours)-std::abs(double(h)))*60);
-	float s = (((std::abs(hours)-std::abs(double(h)))*60)-m)*60;
+	int m = (int)((qAbs(hours)-qAbs(double(h)))*60);
+	float s = (((qAbs(hours)-qAbs(double(h)))*60)-m)*60;
 
 	return QString("%1h%2m%3s").arg(h).arg(m).arg(QString::number(s, 'f', 1));
 }
@@ -1842,7 +1842,7 @@ double getMoonSecularAcceleration(const double jDay, const double nd)
 	double t = (yeardec-1955.5)/100.0;
 	// n.dot for secular acceleration of the Moon in ELP2000-82B
 	// have value -23.8946 "/cy/cy
-	return -0.91072 * (-23.8946 + std::abs(nd))*t*t;
+	return -0.91072 * (-23.8946 + qAbs(nd))*t*t;
 }
 
 double getDeltaTStandardError(const double jDay)

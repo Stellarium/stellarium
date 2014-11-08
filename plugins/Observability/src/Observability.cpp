@@ -341,7 +341,7 @@ void Observability::draw(StelCore* core)
 	double RefracAlt = std::asin(TempRefr[2]);
 
 	// If the diference is larger than 1 arcminute...
-	if (std::abs(refractedHorizonAlt-RefracAlt)>2.91e-4)
+	if (qAbs(refractedHorizonAlt-RefracAlt)>2.91e-4)
 	{
 		//... configuration for refraction changed notably.
 		refractedHorizonAlt = RefracAlt;
@@ -492,12 +492,12 @@ void Observability::draw(StelCore* core)
 			
 			// Returns false if the calculation fails...
 			solvedMoon = calculateSolarSystemEvents(core, type);
-			currH = std::abs(24.*(MoonCulm-myJD)/TFrac);
+			currH = qAbs(24.*(MoonCulm-myJD)/TFrac);
 			transit = MoonCulm-myJD<0.0;
 			if (solvedMoon)
 			{  // If failed, Set and Rise will be dummy.
-				settingTime = std::abs(24.*(MoonSet-myJD)/TFrac);
-				risingTime = std::abs(24.*(MoonRise-myJD)/TFrac);
+				settingTime = qAbs(24.*(MoonSet-myJD)/TFrac);
+				risingTime = qAbs(24.*(MoonRise-myJD)/TFrac);
 			}
 		}
 		else if (horizH>0.0)
@@ -588,7 +588,7 @@ void Observability::draw(StelCore* core)
 		
 		if (isStar)
 		{
-			culmAlt = std::abs(mylat-selDec); // 90.-altitude at transit.
+			culmAlt = qAbs(mylat-selDec); // 90.-altitude at transit.
 			transit = LocPos[1]<0.0;
 		};
 		
@@ -749,8 +749,8 @@ void Observability::draw(StelCore* core)
 					for (int i=0; i<nDays; i++)
 					{
 
-						poleNight = sunSidT[0][i]<0.0 && std::abs(sunDec[i]-mylat)>=halfpi; // Is it night during 24h?
-						twiGood = (poleNight && std::abs(objectDec[i]-mylat)<halfpi)?true:CheckRise(i);
+						poleNight = sunSidT[0][i]<0.0 && qAbs(sunDec[i]-mylat)>=halfpi; // Is it night during 24h?
+						twiGood = (poleNight && qAbs(objectDec[i]-mylat)<halfpi)?true:CheckRise(i);
 						
 						if (twiGood && bestBegun == false)
 						{
@@ -860,7 +860,7 @@ double Observability::calculateHourAngle(double latitude,
 	double denom = std::cos(latitude)*std::cos(declination);
 	double numer = (std::sin(elevation)-std::sin(latitude)*std::sin(declination));
 
-	if ( std::abs(numer) > std::abs(denom) ) 
+	if ( qAbs(numer) > qAbs(denom) )
 	{
 		return -0.5/86400.; // Source doesn't reach that altitude.
 	}
@@ -899,11 +899,11 @@ double Observability::HourAngle2(double RA, double ST)
 void Observability::double2hms(double hfloat, int &h1, int &h2, int &h3)
 {
 	double f1,f2,f3;
-	hfloat = std::abs(hfloat);
+	hfloat = qAbs(hfloat);
 	double ffrac = std::modf(hfloat,&f1);
 	double ffrac2 = std::modf(60.*ffrac,&f2);
 	ffrac2 = std::modf(3600.*(ffrac-f2/60.),&f3);
-	h1 = (int)f1 ; h2 = (int)std::abs(f2+0.0*ffrac2) ; h3 = (int)std::abs(f3);
+	h1 = (int)f1 ; h2 = (int)qAbs(f2+0.0*ffrac2) ; h3 = (int)qAbs(f3);
 } 
 ////////////////////////////////////
 
@@ -1080,7 +1080,7 @@ bool Observability::CheckRise(int day)
 	{
 		hour = toUnsignedRA(sunSidT[1][day]+deltaT*(double)j - objectRA[day]);
 		hour -= (hour>12.) ? 24.0 : 0.0;
-		if (std::abs(hour)<objectH0[day] || (objectH0[day] < 0.0 && alti>0.0))
+		if (qAbs(hour)<objectH0[day] || (objectH0[day] < 0.0 && alti>0.0))
 			return true;
 	}
 
@@ -1121,26 +1121,26 @@ int Observability::calculateAcroCos(int &acroRise, int &acroSet,
 			hourDiffAcroSet -= sunSidT[3][i];
 			
 			// Acronychal rise/set:
-			if (std::abs(hourDiffAcroRise) < bestDiffAcroRise) 
+			if (qAbs(hourDiffAcroRise) < bestDiffAcroRise)
 			{
-				bestDiffAcroRise = std::abs(hourDiffAcroRise);
+				bestDiffAcroRise = qAbs(hourDiffAcroRise);
 				acroRise = i;
 			};
-			if (std::abs(hourDiffAcroSet) < bestDiffAcroSet) 
+			if (qAbs(hourDiffAcroSet) < bestDiffAcroSet)
 			{
-				bestDiffAcroSet = std::abs(hourDiffAcroSet);
+				bestDiffAcroSet = qAbs(hourDiffAcroSet);
 				acroSet = i;
 			};
 			
 			// Cosmical Rise/Set:
-			if (std::abs(hourDiffCosRise) < bestDiffCosRise) 
+			if (qAbs(hourDiffCosRise) < bestDiffCosRise)
 			{
-				bestDiffCosRise = std::abs(hourDiffCosRise);
+				bestDiffCosRise = qAbs(hourDiffCosRise);
 				cosRise = i;
 			};
-			if (std::abs(hourCosDiffSet) < bestDiffCosSet) 
+			if (qAbs(hourCosDiffSet) < bestDiffCosSet)
 			{
-				bestDiffCosSet = std::abs(hourCosDiffSet);
+				bestDiffCosSet = qAbs(hourCosDiffSet);
 				cosSet = i;
 			};
 		};
@@ -1315,7 +1315,7 @@ bool Observability::calculateSolarSystemEvents(StelCore* core, int bodyType)
 
 // Only recompute ephemeris from second to second (at least)
 // or if the source has changed (i.e., Sun <-> Moon). This saves resources:
-	if (std::abs(myJD-lastJDMoon)>JDsec || lastType!=bodyType || souChanged)
+	if (qAbs(myJD-lastJDMoon)>JDsec || lastType!=bodyType || souChanged)
 	{
 
 //		qDebug() << q_("%1  %2   %3   %4").arg(Kind).arg(LastObject).arg(myJD,0,'f',5).arg(lastJDMoon,0,'f',5);
@@ -1403,7 +1403,7 @@ bool Observability::calculateSolarSystemEvents(StelCore* core, int bodyType)
 				tempH = (-hHoriz-Hcurr)*TFrac;
 				if (hasRisen==false) tempH += (tempH<0.0)?24.0:0.0;
 			// Check convergence:
-				if (std::abs(tempH-tempEphH)<JDsec) break;
+				if (qAbs(tempH-tempEphH)<JDsec) break;
 			// Update rise-time estimate:
 				tempEphH = tempH;
 				MoonRise = myJD + (tempEphH/24.);
@@ -1438,7 +1438,7 @@ bool Observability::calculateSolarSystemEvents(StelCore* core, int bodyType)
 				if (!hasRisen)
 					tempH -= (tempH>0.0)?24.0:0.0;
 		// Check convergence:
-				if (std::abs(tempH-tempEphH)<JDsec)
+				if (qAbs(tempH-tempEphH)<JDsec)
 					break;
 		// Update set-time estimate:
 				tempEphH = tempH;
@@ -1480,10 +1480,10 @@ bool Observability::calculateSolarSystemEvents(StelCore* core, int bodyType)
 	// Compute eph. times for mod. coordinates:
 			tempH = -Hcurr*TFrac;
 	// Check convergence:
-			if (std::abs(tempH-tempEphH)<JDsec) break;
+			if (qAbs(tempH-tempEphH)<JDsec) break;
 			tempEphH = tempH;
 			MoonCulm = myJD + (tempEphH/24.);
-			culmAlt = std::abs(mylat-dec); // 90 - altitude at transit. 
+			culmAlt = qAbs(mylat-dec); // 90 - altitude at transit.
 		};
 
 //		qDebug() << q_("%1").arg(MoonCulm,0,'f',5);
@@ -1491,7 +1491,7 @@ bool Observability::calculateSolarSystemEvents(StelCore* core, int bodyType)
 
 	lastJDMoon = myJD;
 
-	}; // Comes from if (std::abs(myJD-lastJDMoon)>JDsec || LastObject!=Kind)
+	}; // Comes from if (qAbs(myJD-lastJDMoon)>JDsec || LastObject!=Kind)
 
 
 
@@ -1554,7 +1554,7 @@ bool Observability::calculateSolarSystemEvents(StelCore* core, int bodyType)
 				//	qDebug() << QString("%1 %2 %3 %4 ").arg(Sec1).arg(Sec2).arg(Temp1).arg(Temp2);	
 
 
-					if (std::abs(Sec2-Sec1) < 10.*dT)  // 1 minute accuracy; convergence.
+					if (qAbs(Sec2-Sec1) < 10.*dT)  // 1 minute accuracy; convergence.
 					{
 						TempFullMoon = (Sec1+Sec2)/2.;
 				//		qDebug() << QString("%1%2 ").arg(TempFullMoon);	

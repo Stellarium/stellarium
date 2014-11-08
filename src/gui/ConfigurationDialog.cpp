@@ -605,7 +605,7 @@ void ConfigurationDialog::saveCurrentViewOptions()
 		conf->setValue("flag_show_magnitude",
 		               (bool) (flags & StelObject::Magnitude));
 		conf->setValue("flag_show_absolutemagnitude",
-		               (bool) (flags & StelObject::AbsoluteMagnitude));
+			       (bool) (flags & StelObject::AbsoluteMagnitude));
 		conf->setValue("flag_show_radecj2000",
 		               (bool) (flags & StelObject::RaDecJ2000));
 		conf->setValue("flag_show_radecofdate",

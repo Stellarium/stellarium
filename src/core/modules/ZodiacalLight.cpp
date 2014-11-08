@@ -90,7 +90,7 @@ void ZodiacalLight::update(double deltaTime)
 	if (core->getCurrentLocation().planetName != "Earth") return;
 
 	double currentJD=core->getJDay();
-	if (abs(currentJD - lastJD) > 0.25) // should be enough to update position every 6 hours.
+	if (qAbs(currentJD - lastJD) > 0.25f) // should be enough to update position every 6 hours.
 	{
 		// update vertices
 		Vec3d obsPos=core->getObserverHeliocentricEclipticPos();
@@ -106,8 +106,15 @@ void ZodiacalLight::update(double deltaTime)
 	}
 }
 
-void ZodiacalLight::setFlagShow(bool b){*fader = b;}
-bool ZodiacalLight::getFlagShow() const {return *fader;}
+void ZodiacalLight::setFlagShow(bool b)
+{
+	*fader = b;
+}
+
+bool ZodiacalLight::getFlagShow() const
+{
+	return *fader;
+}
 
 void ZodiacalLight::draw(StelCore* core)
 {
