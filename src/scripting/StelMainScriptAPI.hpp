@@ -673,6 +673,18 @@ public slots:
 	//! @return value of Milky Way intensity, e.g. "1.2"
 	double getMilkyWayIntensity();
 
+	//! Show or hide the Zodiacal Light.
+	//! @param b if true, show the Zodiacal Light, if false, hide the Zodiacal Light.
+	void setZodiacalLightVisible(bool b);
+
+	//! Set Zodiacal Light intensity.
+	//! @param i value of intensity for the Zodiacal Light
+	void setZodiacalLightIntensity(double i);
+
+	//! Get Zodiacal Light intensity.
+	//! @return value of Zodiacal Light intensity, e.g. "1.2"
+	double getZodiacalLightIntensity();
+
 	//! For use in setDate and waitFor
 	//! For parameter descriptions see setDate().
 	//! @returns Julian day.
