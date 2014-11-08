@@ -912,9 +912,12 @@ void Observability::double2hms(double hfloat, int &h1, int &h2, int &h3)
 // Adds/subtracts 24hr to ensure a RA between 0 and 24hr:
 double Observability::toUnsignedRA(double RA)
 {
-	double tempRA,tempmod;
-	//FIXME: tempmod is unused variable; need fix
-	if (RA<0.0) {tempmod = std::modf(-RA/24.,&tempRA); RA += 24.*(tempRA+1.0)+0.0*tempmod;};
+	double tempRA,tempmod;	
+	if (RA<0.0)
+	{
+		tempmod = std::modf(-RA/24.,&tempRA);
+		RA += 24.*(tempRA+1.0)+0.0*tempmod;
+	};
 	double auxRA = 24.*std::modf(RA/24.,&tempRA);
 	auxRA += (auxRA<0.0)?24.0:((auxRA>24.0)?-24.0:0.0);
 	return auxRA;

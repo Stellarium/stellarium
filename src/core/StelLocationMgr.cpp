@@ -82,7 +82,6 @@ QMap<QString, StelLocation> StelLocationMgr::loadCitiesBin(const QString& fileNa
 
 	if (fileName.endsWith(".gz"))
 	{
-		// FIXME: This code doesn't work with MSVC2012 -- need fix! --AW
 		QDataStream in(StelUtils::uncompress(sourcefile.readAll()));
 		in.setVersion(QDataStream::Qt_4_6);
 		in >> res;

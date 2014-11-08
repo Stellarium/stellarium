@@ -1528,7 +1528,7 @@ double getDeltaTByChaprontTouze(const double jDay)
 
 // Implementation of algorithm by JPL Horizons for DeltaT computation
 double getDeltaTByJPLHorizons(const double jDay)
-{ // TODO: FIXME! It does not make sense to have zeros after 1620 in a JPL Horizons compatible implementation!
+{ // FIXME: It does not make sense to have zeros after 1620 in a JPL Horizons compatible implementation!
 	int year, month, day;
 	double u;
 	double deltaT = 0.;
