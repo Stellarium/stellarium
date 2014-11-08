@@ -1,4 +1,5 @@
 #include "AABB.hpp"
+#include "StelOpenGL.hpp"
 #include <limits>
 
 AABB::AABB()
