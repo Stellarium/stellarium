@@ -148,7 +148,8 @@ public:
 	void update(double deltaTime);
 
 	//! Draw all registered StelModule in the order defined by the order lists.
-	//! @return the max squared distance in pixels that any object has travelled since the last update.
+	// 2014-11: OLD COMMENT? What does a void return?
+	// @return the max squared distance in pixels that any object has travelled since the last update.
 	void draw();
 
 	//! Call this when the size of the GL window has changed.
