@@ -142,14 +142,16 @@ public slots:
 	const QString& getCurrentLandscapeID() const {return currentLandscapeID;}
 	//! Change the current landscape to the landscape with the ID specified.
 	//! @param id the ID of the new landscape
+	//! @param changeLocationDuration the duration of the transition animation
 	//! @return false if the new landscape could not be set (e.g. no landscape of that ID was found).
-	bool setCurrentLandscapeID(const QString& id);
+	bool setCurrentLandscapeID(const QString& id, const double changeLocationDuration = 1.0);
 	
 	//! Get the current landscape name.
 	QString getCurrentLandscapeName() const;
 	//! Change the current landscape to the landscape with the name specified.
 	//! @param name the name of the new landscape, as found in the landscape:name key of the landscape.ini file.
-	bool setCurrentLandscapeName(const QString& name);
+	//! @param changeLocationDuration the duration of the transition animation
+	bool setCurrentLandscapeName(const QString& name, const double changeLocationDuration = 1.0);
 
 	//! Get the default landscape ID.
 	const QString& getDefaultLandscapeID() const {return defaultLandscapeID;}

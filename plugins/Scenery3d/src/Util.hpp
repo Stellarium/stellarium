@@ -11,6 +11,8 @@
 
 #include "VecMath.hpp"
 
+//TODO FS: ditch most of these functions and replace them with QString's versions
+
 //! Split string into list of strings.
 //! Example: splitStr("Hello World!", " ") results in {"Hello", "World!"}.
 //! @param line String to split.
