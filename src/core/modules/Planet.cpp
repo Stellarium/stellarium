@@ -889,11 +889,11 @@ void Planet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFon
 {
 	if (hidden)
 		return;
-	// GZ: Try to improve speed for minor planets: test if visible at all.
+	// Try to improve speed for minor planets: test if visible at all.
 	// For a full catalog of NEAs (11000 objects), with this and resetting deltaJD according to distance, rendering time went 4.5fps->12fps.	
-	// AW: Apply this rule to asteroids only
-	// Note that taking away the asteroids at this stage breaks dim-asteroid occultation of stars!
-	if (((getVMagnitude(core)-1.0f) > core->getSkyDrawer()->getLimitMagnitude()) && pType==Planet::isAsteroid)
+	// TBD: Note that taking away the asteroids at this stage breaks dim-asteroid occultation of stars!
+	//      Maybe make another configurable flag for those interested?
+	if (((getVMagnitude(core)+1.0f) > core->getSkyDrawer()->getLimitMagnitude()) && pType==Planet::isAsteroid)
 	{
 		return;
 	}
