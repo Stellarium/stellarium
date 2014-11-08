@@ -58,7 +58,7 @@ void TestConversions::testHMSToRad()
 		m = data.takeFirst().toInt();
 		s = data.takeFirst().toInt();
 		rad = data.takeFirst().toDouble();		
-		QVERIFY2(std::abs(StelUtils::hmsToRad(h, m, s)-rad)<=ERROR_LIMIT, qPrintable(QString("%1h%2m%3s=%4").arg(h).arg(m).arg(s).arg(rad)));
+		QVERIFY2(qAbs(StelUtils::hmsToRad(h, m, s)-rad)<=ERROR_LIMIT, qPrintable(QString("%1h%2m%3s=%4").arg(h).arg(m).arg(s).arg(rad)));
 	}
 }
 
@@ -90,7 +90,7 @@ void TestConversions::testDMSToRad()
 		min = data.takeFirst().toInt();
 		sec = data.takeFirst().toInt();
 		rad = data.takeFirst().toDouble();
-		QVERIFY2(std::abs(StelUtils::dmsToRad(deg, min, sec)-rad)<=ERROR_LIMIT, qPrintable(QString("%1d%2m%3s=%4").arg(deg).arg(min).arg(sec).arg(rad)));
+		QVERIFY2(qAbs(StelUtils::dmsToRad(deg, min, sec)-rad)<=ERROR_LIMIT, qPrintable(QString("%1d%2m%3s=%4").arg(deg).arg(min).arg(sec).arg(rad)));
 	}
 }
 
@@ -115,7 +115,7 @@ void TestConversions::testRadToHMS()
 		t1 = s+m*60+h*3600;
 		StelUtils::radToHms(rad, ho, mo, so);
 		t2 = so+mo*60+ho*3600;
-		QVERIFY2(std::abs(t1-t2)<=0.1, qPrintable(QString("%1rad=%2h%3m%4s").arg(rad).arg(ho).arg(mo).arg(so)));
+		QVERIFY2(qAbs(t1-t2)<=0.1, qPrintable(QString("%1rad=%2h%3m%4s").arg(rad).arg(ho).arg(mo).arg(so)));
 	}
 }
 
@@ -157,7 +157,7 @@ void TestConversions::testRadToDMS()
 		if (deg>=0)
 			angle1 = sec+min*60+deg*3600;
 		else
-			angle1 = -1*(sec+min*60+std::abs((double)deg)*3600);
+			angle1 = -1*(sec+min*60+qAbs((double)deg)*3600);
 		StelUtils::radToDms(rad, sign, dego, mino, seco);
 		angle2 = seco+mino*60+dego*3600;
 		if (!sign)
@@ -167,7 +167,7 @@ void TestConversions::testRadToDMS()
 		}
 		else
 			s = "+";
-		QVERIFY2(std::abs(angle1-angle2)<=ERROR_LIMIT, qPrintable(QString("%1rad=%2%3d%4m%5s").arg(rad).arg(s).arg(dego).arg(mino).arg(seco)));
+		QVERIFY2(qAbs(angle1-angle2)<=ERROR_LIMIT, qPrintable(QString("%1rad=%2%3d%4m%5s").arg(rad).arg(s).arg(dego).arg(mino).arg(seco)));
 	}
 }
 
@@ -200,7 +200,7 @@ void TestConversions::testDDToDMS()
 		if (angle>=0)
 			angle1 = sec+min*60+deg*3600;
 		else
-			angle1 = -1*(sec+min*60+std::abs((double)deg)*3600);
+			angle1 = -1*(sec+min*60+qAbs((double)deg)*3600);
 		StelUtils::decDegToDms(angle, sign, dego, mino, seco);
 		angle2 = seco+mino*60+dego*3600;
 		if (!sign)
@@ -208,6 +208,6 @@ void TestConversions::testDDToDMS()
 			angle2 *= -1;
 			s = "-";
 		}
-		QVERIFY2(std::abs(angle1-angle2)<=ERROR_LIMIT, qPrintable(QString("%1degrees=%2%3d%4m%5s").arg(angle).arg(s).arg(dego).arg(mino).arg(seco)));
+		QVERIFY2(qAbs(angle1-angle2)<=ERROR_LIMIT, qPrintable(QString("%1degrees=%2%3d%4m%5s").arg(angle).arg(s).arg(dego).arg(mino).arg(seco)));
 	}
 }

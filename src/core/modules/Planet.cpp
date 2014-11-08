@@ -249,10 +249,10 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 		{
 			// TRANSLATORS: Sidereal (orbital) period for solar system bodies in days and in Julian years (symbol: a)
 			oss << q_("Sidereal period: %1 days (%2 a)").arg(QString::number(siderealPeriod, 'f', 2)).arg(QString::number(siderealPeriod/365.25, 'f', 3)) << "<br>";
-			if (std::abs(siderealDay)>0)
+			if (qAbs(siderealDay)>0)
 			{
-				oss << q_("Sidereal day: %1").arg(StelUtils::hoursToHmsStr(std::abs(siderealDay*24))) << "<br>";
-				oss << q_("Mean solar day: %1").arg(StelUtils::hoursToHmsStr(std::abs(getMeanSolarDay()*24))) << "<br>";
+				oss << q_("Sidereal day: %1").arg(StelUtils::hoursToHmsStr(qAbs(siderealDay*24))) << "<br>";
+				oss << q_("Mean solar day: %1").arg(StelUtils::hoursToHmsStr(qAbs(getMeanSolarDay()*24))) << "<br>";
 			}
 		}
 		if (englishName.compare("Sun")!=0)
@@ -588,7 +588,7 @@ double Planet::getSiderealTime(double jd) const
 	if (englishName=="Jupiter")
 	{
 		// use semi-empirical coefficient for GRS drift
-		return remainder * 360. + re.offset - 0.2483 * std::abs(jd - 2456172);
+		return remainder * 360. + re.offset - 0.2483 * qAbs(jd - 2456172);
 	}
 	else
 		return remainder * 360. + re.offset;
@@ -602,7 +602,7 @@ double Planet::getMeanSolarDay() const
 		return msd;
 
 	double sday = getSiderealDay();	
-	double coeff = std::abs(sday/getSiderealPeriod());
+	double coeff = qAbs(sday/getSiderealPeriod());
 	float sign = 1;
 	// planets with retrograde rotation
 	if (englishName=="Venus" || englishName=="Uranus" || englishName=="Pluto")
@@ -703,7 +703,7 @@ float Planet::getPhase(const Vec3d& obsPos) const
 	const double planetRq = planetHelioPos.lengthSquared();
 	const double observerPlanetRq = (obsPos - planetHelioPos).lengthSquared();
 	const double cos_chi = (observerPlanetRq + planetRq - observerRq)/(2.0*sqrt(observerPlanetRq*planetRq));
-	return 0.5f * std::abs(1.f + cos_chi);
+	return 0.5f * qAbs(1.f + cos_chi);
 }
 
 // Get the elongation angle (radians) for an observer at pos obsPos in heliocentric coordinates (dist in AU)
