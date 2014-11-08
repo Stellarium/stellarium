@@ -433,7 +433,7 @@ void Comet::update(int deltaTime)
 		gastailColorArr.fill(gasColor,   gastailVertexArr.length());
 		dusttailColorArr.fill(dustColor, dusttailVertexArr.length());
 	}
-	qDebug() << "Comet " << getEnglishName() <<  "JD: " << date << "gasR" << gasColor[0] << " dustR" << dustColor[0];
+	//qDebug() << "Comet " << getEnglishName() <<  "JD: " << date << "gasR" << gasColor[0] << " dustR" << dustColor[0];
 }
 
 
