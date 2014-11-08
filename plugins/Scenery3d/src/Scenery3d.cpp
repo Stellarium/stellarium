@@ -20,42 +20,33 @@
 
 
 
-// GZ: Apparently Qt4.8 conflicts with GLee, but provides QGLFunctions.
-// This solution here works at least for Qt4.8.1/QCreator/Win32/NVidia.
 #include <QtGlobal>
-#if QT_VERSION >= 0x040800
-#include <GLee.h>
-#include <GL/gl.h>
-#include <GL/glext.h>
-#include <GL/glu.h>
-#else
-#include <GLee.h>
-#endif
+
 
 #include "Scenery3d.hpp"
 
 #include "StelApp.hpp"
 #include "StelCore.hpp"
+#include "StelFileMgr.hpp"
+#include "StelOpenGL.hpp"
 #include "StelPainter.hpp"
-//#include "StelFileMgr.hpp"
-#include "Scenery3dMgr.hpp"
-#include "StelMovementMgr.hpp"
-#include "StelUtils.hpp"
-#include "SolarSystem.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelMovementMgr.hpp"
+#include "StelUtils.hpp"
 
-#include <QAction>
-#include <QString>
-#include <QDebug>
+#include "SolarSystem.hpp"
+
+#include "Scenery3dMgr.hpp"
+#include "AABB.hpp"
+
 #include <QSettings>
 #include <stdexcept>
 #include <cmath>
+#include <QOpenGLShaderProgram>
+#include <QOpenGLFramebufferObject>
 
 #include <limits>
 #include <sstream>
-
-#include "AABB.hpp"
 
 #include <iostream>
 #include <fstream>
@@ -81,15 +72,16 @@
 #define FARZ 15000.0f
 
 
+static const float AMBIENT_BRIGHTNESS_FACTOR=0.05f;
+static const float LUNAR_BRIGHTNESS_FACTOR=0.2f;
+static const float VENUS_BRIGHTNESS_FACTOR=0.005f;
+
+
 Scenery3d::Scenery3d(int cubemapSize, int shadowmapSize, float torchBrightness)
     :absolutePosition(0.0, 0.0, 0.0), // 1.E-12, 1.E-12, 1.E-12), // these values signify "set default values"
     movement_x(0.0f), movement_y(0.0f), movement_z(0.0f),core(NULL),
     objModel(NULL), groundModel(NULL), heightmap(NULL), location(NULL)
 {
-#if QT_VERSION >= 0x040800
-     initializeGLFunctions();
-#endif
-
     this->cubemapSize=cubemapSize;
     this->shadowmapSize=shadowmapSize;
     this->torchBrightness=torchBrightness;
@@ -407,7 +399,7 @@ void Scenery3d::loadModel()
         }
 
         QString modelFile = StelFileMgr::findFile(Scenery3dMgr::MODULE_PATH + id + "/" + modelSceneryFile);
-        if(!objModel->load(modelFile.toAscii(), objVertexOrder, sceneryGenNormals))
+        if(!objModel->load(modelFile, objVertexOrder, sceneryGenNormals))
             throw std::runtime_error("Failed to load OBJ file.");
 
         hasModels = objModel->hasStelModels();
@@ -438,7 +430,7 @@ void Scenery3d::loadModel()
             }
 
             modelFile = StelFileMgr::findFile(Scenery3dMgr::MODULE_PATH + id + "/" + modelGroundFile);
-            if(!groundModel->load(modelFile.toAscii(), objVertexOrder, groundGenNormals))
+            if(!groundModel->load(modelFile, objVertexOrder, groundGenNormals))
                 throw std::runtime_error("Failed to load OBJ file.");
 
             groundModel->transform(zRotateMatrix*obj2gridMatrix);
@@ -607,9 +599,10 @@ void Scenery3d::renderSceneAABB(StelPainter& painter)
     };
 
     glPolygonMode( GL_FRONT_AND_BACK, GL_LINE );
-    debugShader->use();
-    painter.setArrays(aabb, __null, __null, __null);
-    painter.drawFromArray(StelPainter::Triangles, 36, 0, false, inds);
+    debugShader->bind();
+    painter.setArrays(aabb, NULL, NULL, NULL);
+    //TODO FS fix
+    //painter.drawFromArray(StelPainter::Triangles, 36, 0, false, inds);
     //Done. Unbind shader
     glUseProgram(0);
     glPolygonMode( GL_FRONT_AND_BACK, GL_FILL );
@@ -617,7 +610,7 @@ void Scenery3d::renderSceneAABB(StelPainter& painter)
 
 void Scenery3d::renderFrustum(StelPainter &painter)
 {
-    debugShader->use();
+    debugShader->bind();
 
     for(int i=0; i<frustumSplits; i++)
     {
@@ -719,7 +712,7 @@ void Scenery3d::renderFrustum(StelPainter &painter)
             glVertex3f(b.v[0],b.v[1],b.v[2]);
         glEnd();
         //Done. Unbind shader
-        glUseProgram(0);
+        debugShader->release();
     }
 }
 
@@ -845,7 +838,8 @@ void Scenery3d::drawArrays(StelPainter& painter, bool textures)
             painter.setArrays(&objModel->getVertexArray()->position, NULL, NULL, &objModel->getVertexArray()->normal);
         }
 
-        painter.drawFromArray(StelPainter::Triangles, pStelModel->triangleCount*3, pStelModel->startIndex, false, objModel->getIndexArray(), objModel->getVertexSize());
+        //TODO FS: fix
+        //painter.drawFromArray(StelPainter::Triangles, pStelModel->triangleCount*3, pStelModel->startIndex, false, objModel->getIndexArray(), objModel->getVertexSize());
 
         if(pMaterial->illum == OBJ::TRANSLUCENT)
         {
@@ -879,28 +873,16 @@ void Scenery3d::drawArrays(StelPainter& painter, bool textures)
 
 void Scenery3d::sendToShader(const OBJ::StelModel* pStelModel, Effect cur, bool& tangEnabled, int& tangLocation)
 {
-    int location;
     tangEnabled = false;
 
     if(cur != No)
     {
-        location = curShader->uniformLocation("boolDebug");
-        curShader->setUniform(location, debugEnabled);
-
-        location = curShader->uniformLocation("fTransparencyThresh");
-        curShader->setUniform(location, fTransparencyThresh);
-
-        location = curShader->uniformLocation("alpha");
-        curShader->setUniform(location, pStelModel->pMaterial->alpha);
-
-        location = curShader->uniformLocation("boolFilterHQ");
-        curShader->setUniform(location, filterHQ);
-
-        location = curShader->uniformLocation("boolFilterShadows");
-        curShader->setUniform(location, filterShadowsEnabled);
-
-        location = curShader->uniformLocation("boolVenus");
-        curShader->setUniform(location, venusOn);
+        curShader->setUniformValue("boolDebug", debugEnabled);
+        curShader->setUniformValue("fTransparencyThresh", fTransparencyThresh);
+        curShader->setUniformValue("alpha", pStelModel->pMaterial->alpha);
+        curShader->setUniformValue("boolFilterHQ", filterHQ);
+        curShader->setUniformValue("boolFilterShadows", filterShadowsEnabled);
+        curShader->setUniformValue("boolVenus", venusOn);
 
         int iIllum = pStelModel->pMaterial->illum;
         if(iIllum < 0 || iIllum > 2)
@@ -913,8 +895,7 @@ void Scenery3d::sendToShader(const OBJ::StelModel* pStelModel, Effect cur, bool&
             }
         }
 
-        location = curShader->uniformLocation("iIllum");
-        curShader->setUniform(location, iIllum);
+        curShader->setUniformValue("iIllum", iIllum);
 
         if (pStelModel->pMaterial->texture)
         {
@@ -922,23 +903,16 @@ void Scenery3d::sendToShader(const OBJ::StelModel* pStelModel, Effect cur, bool&
             pStelModel->pMaterial->texture.data()->bind();
 
             //Send texture to shader
-            location = curShader->uniformLocation("tex");
-            curShader->setUniform(location, 0);
-
+            curShader->setUniformValue("tex", 0);
             //Indicate that we are in texture Mode
-            location = curShader->uniformLocation("onlyColor");
-            curShader->setUniform(location, false);
+            curShader->setUniformValue("onlyColor", false);
         }
         else
         {
             //No texture, send color and indication
-            location = curShader->uniformLocation("vecColor");
-            curShader->setUniform(location, pStelModel->pMaterial->diffuse[0], pStelModel->pMaterial->diffuse[1], pStelModel->pMaterial->diffuse[2], pStelModel->pMaterial->diffuse[3]);
-
-            location = curShader->uniformLocation("onlyColor");
-            curShader->setUniform(location, true);
+            curShader->setUniformValue("vecColor", pStelModel->pMaterial->diffuse[0], pStelModel->pMaterial->diffuse[1], pStelModel->pMaterial->diffuse[2], pStelModel->pMaterial->diffuse[3]);
+            curShader->setUniformValue("onlyColor", true);
         }
-
 
         //Bump Mapping
         if(cur == BumpMapping || cur == All)
@@ -952,16 +926,7 @@ void Scenery3d::sendToShader(const OBJ::StelModel* pStelModel, Effect cur, bool&
                 tangEnabled = true;
             }
 
-            //Flag for bumped lighting
-            location = curShader->uniformLocation("boolBump");
-            curShader->setUniform(location, false);
-
-            //Flag for parallax mapping
-            location = curShader->uniformLocation("boolHeight");
-            curShader->setUniform(location, false);
-
-            location = curShader->uniformLocation("s");
-            curShader->setUniform(location, parallaxScale);
+            curShader->setUniformValue("s", parallaxScale);
 
             if (pStelModel->pMaterial->bump_texture)
             {
@@ -969,12 +934,13 @@ void Scenery3d::sendToShader(const OBJ::StelModel* pStelModel, Effect cur, bool&
                 pStelModel->pMaterial->bump_texture.data()-> bind();
 
                 //Send bump map to shader
-                location = curShader->uniformLocation("bmap");
-                curShader->setUniform(location, 1);
-
+                curShader->setUniformValue("bmap", 1);
                 //Flag for bumped lighting
-                location = curShader->uniformLocation("boolBump");
-                curShader->setUniform(location, true);
+                curShader->setUniformValue("boolBump", true);
+            }
+            else
+            {
+                curShader->setUniformValue("boolBump", false);
             }
 
             if (pStelModel->pMaterial->height_texture)
@@ -983,17 +949,20 @@ void Scenery3d::sendToShader(const OBJ::StelModel* pStelModel, Effect cur, bool&
                 pStelModel->pMaterial->height_texture.data()-> bind();
 
                 //Send bump map to shader
-                location = curShader->uniformLocation("hmap");
-                curShader->setUniform(location, 2);
+                curShader->setUniformValue("hmap", 2);
 
                 //Flag for parallax mapping
-                location = curShader->uniformLocation("boolHeight");
-                curShader->setUniform(location, true);
+                curShader->setUniformValue("boolHeight", true);
+            }
+            else
+            {
+                curShader->setUniformValue("boolHeight", false);
             }
         }
     }
     else // No-shader code, more classical OpenGL pipeline
     {
+        //TODO FS: remove
         glActiveTexture(GL_TEXTURE0);
         if (pStelModel->pMaterial->texture)
         {
@@ -1025,7 +994,7 @@ void Scenery3d::bindShader()
     else if(shadowsEnabled && bumpsEnabled){ curShader = univShader; curEffect = All; }
 
     //Bind the selected shader
-    if(curShader != 0) curShader->use();
+    if(curShader != 0) curShader->bind();
 }
 
 void Scenery3d::generateCubeMap_drawSceneWithShadows(StelPainter& painter)
@@ -1057,18 +1026,15 @@ void Scenery3d::generateCubeMap_drawSceneWithShadows(StelPainter& painter)
         Mat4f texMat = biasMatrix * shadowCPM[i];
 
         //Send to shader
-        std::string smapLoc = "smap_"+toString(i);
-        location = curShader->uniformLocation(smapLoc.c_str());
-        curShader->setUniform(location, 3+i);
+        QString smapLoc = "smap_"+ QString::number(i);
+        curShader->setUniformValue(smapLoc.toLatin1().constData(), 3+i);
 
-        std::string texMatLoc = "texmat_"+toString(i);
-        location = curShader->uniformLocation(texMatLoc.c_str());
-        curShader->setUniform(location, texMat);
+        QString texMatLoc = "texmat_"+ QString::number(i);
+        curShader->setUniformValue(texMatLoc.toLatin1().constData(), QMatrix4x4(texMat.r));
     }
 
     //Send squared splits to the shader
-    location = curShader->uniformLocation("vecSplits");
-    curShader->setUniform(location, squaredSplits.v[0], squaredSplits.v[1], squaredSplits.v[2], squaredSplits.v[3]);
+    curShader->setUniformValue("vecSplits", squaredSplits.v[0], squaredSplits.v[1], squaredSplits.v[2], squaredSplits.v[3]);
 
     //Activate normal texturing
     glActiveTexture(GL_TEXTURE0);
@@ -1311,7 +1277,9 @@ void Scenery3d::analyzeViewSamples(StelPainter &painter)
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
     Vec3d l = viewPos + viewDir;
-    gluLookAt(viewPos.v[0], viewPos.v[1], viewPos.v[2], l.v[0], l.v[1], l.v[2], viewUp.v[0], viewUp.v[1], viewUp.v[2]);
+    nogluLookAt(viewPos.v[0], viewPos.v[1], viewPos.v[2],
+            l.v[0],l.v[1],l.v[2],
+            viewUp.v[0],viewUp.v[1],viewUp.v[2]);
 
     //Bind FBO
     glBindFramebuffer(GL_FRAMEBUFFER, camDepthFBO);
@@ -1334,11 +1302,10 @@ void Scenery3d::analyzeViewSamples(StelPainter &painter)
     drawArrays(painter, false);
 
     //Switch to the minMax reduction shader
-    minMaxShader->use();
+    minMaxShader->bind();
 
     //Send the depth map as base level to the min/max shader
-    int location = curShader->uniformLocation("tex");
-    curShader->setUniform(location, 7);
+    curShader->setUniformValue("tex", 7);
 
     //Calculate dimensions of the next level
     int outDim = shadowmapSize/2;
@@ -1360,9 +1327,8 @@ void Scenery3d::analyzeViewSamples(StelPainter &painter)
         glViewport(0, 0, outDim, outDim);
 
         //Send the previously generated texture as current level to the shader
-        glActiveTexture(GL_TEXTURE8+readTex);
-        location = curShader->uniformLocation("tex");
-        curShader->setUniform(location, 8+readTex);
+        glActiveTexture(GL_TEXTURE8+readTex);;
+        curShader->setUniformValue("tex", 8+readTex);
 
         //Output will be written in writeTex
         glDrawBuffer(attachments[writeTex]);
@@ -1472,21 +1438,21 @@ void Scenery3d::generateShadowMap(StelCore* core)
     //Select view position based on which planet is visible
     if (sunPosition[2]>0)
     {
-        gluLookAt (sunPosition[0], sunPosition[1], sunPosition[2], 0, 0, 0, 0, 0, 1);
+        nogluLookAt (sunPosition[0], sunPosition[1], sunPosition[2], 0, 0, 0, 0, 0, 1);
         lightDir = Vec3f(sunPosition[0], sunPosition[1], sunPosition[2]);
         lightDir.normalize();
         venusOn = false;
     }
     else if (moonPosition[2]>0)
     {
-        gluLookAt (moonPosition[0], moonPosition[1], moonPosition[2], 0, 0, 0, 0, 0, 1);
+        nogluLookAt (moonPosition[0], moonPosition[1], moonPosition[2], 0, 0, 0, 0, 0, 1);
         lightDir = Vec3f(moonPosition[0], moonPosition[1], moonPosition[2]);
         lightDir.normalize();
         venusOn = false;
     }
     else
     {
-        gluLookAt(venusPosition[0], venusPosition[1], venusPosition[2], 0, 0, 0, 0, 0, 1);
+        nogluLookAt(venusPosition[0], venusPosition[1], venusPosition[2], 0, 0, 0, 0, 0, 1);
         lightDir = Vec3f(venusPosition[0], venusPosition[1], venusPosition[2]);
         lightDir.normalize();
         venusOn = true;
@@ -1716,8 +1682,8 @@ void Scenery3d::generateCubeMap(StelCore* core)
 
     for (int i=0; i<6; i++) {
         if (cubeMap[i] == NULL) {
-            cubeMap[i] = new QGLFramebufferObject(cubemapSize, cubemapSize, QGLFramebufferObject::Depth, GL_TEXTURE_2D);
-            if (cubeMap[i]->attachment() != QGLFramebufferObject::Depth){
+            cubeMap[i] = new QOpenGLFramebufferObject(cubemapSize, cubemapSize, QOpenGLFramebufferObject::Depth);
+            if (cubeMap[i]->attachment() != QOpenGLFramebufferObject::Depth){
                 qWarning()<< "Scenery3d: Framebuffer failed to aquire depth buffer. Try smaller cubemap_size!";
             }
             glBindTexture(GL_TEXTURE_2D, cubeMap[i]->texture());
@@ -1903,27 +1869,27 @@ void Scenery3d::drawFromCubeMap(StelCore* core)
 
     //front
     glBindTexture(GL_TEXTURE_2D, cubeMap[0]->texture());
-    painter.drawSphericalTriangles(cubePlaneFront, true, __null, false);
+    painter.drawSphericalTriangles(cubePlaneFront, true, NULL, false);
 
     //right
     glBindTexture(GL_TEXTURE_2D, cubeMap[1]->texture());
-    painter.drawSphericalTriangles(cubePlaneRight, true, __null, false);
+    painter.drawSphericalTriangles(cubePlaneRight, true, NULL, false);
 
     //left
     glBindTexture(GL_TEXTURE_2D, cubeMap[2]->texture());
-    painter.drawSphericalTriangles(cubePlaneLeft, true, __null, false);
+    painter.drawSphericalTriangles(cubePlaneLeft, true, NULL, false);
 
     //back
     glBindTexture(GL_TEXTURE_2D, cubeMap[3]->texture());
-    painter.drawSphericalTriangles(cubePlaneBack, true, __null, false);
+    painter.drawSphericalTriangles(cubePlaneBack, true, NULL, false);
 
     //top
     glBindTexture(GL_TEXTURE_2D, cubeMap[4]->texture());
-    painter.drawSphericalTriangles(cubePlaneTop, true, __null, false);
+    painter.drawSphericalTriangles(cubePlaneTop, true, NULL, false);
 
     //bottom
     glBindTexture(GL_TEXTURE_2D, cubeMap[5]->texture());
-    painter.drawSphericalTriangles(cubePlaneBottom, true, __null, false);
+    painter.drawSphericalTriangles(cubePlaneBottom, true, NULL, false);
 
     glDisable(GL_CULL_FACE);
     glDisable(GL_TEXTURE_2D);
@@ -2123,7 +2089,7 @@ void Scenery3d::initShadowMapping()
 
     //Generate FBO - has to be QGLFramebufferObject for some reason.. Generating a normal one lead to bizzare texture results
     //We use handle() to get the id and work as if we created a normal FBO. This is because QGLFramebufferObject doesn't support attaching a texture to the FBO
-    QGLFramebufferObject *qglFBO=new QGLFramebufferObject(shadowmapSize, shadowmapSize, QGLFramebufferObject::Depth, GL_TEXTURE_2D);
+    QOpenGLFramebufferObject *qglFBO=new QOpenGLFramebufferObject(shadowmapSize, shadowmapSize, QOpenGLFramebufferObject::Depth);
     shadowFBO = qglFBO->handle();
     //if (shadowFBO->attachment() != QGLFramebufferObject::Depth){
     //    qWarning()<< "Scenery3d: Framebuffer failed to aquire depth buffer. Try smaller shadowmap_size!";
@@ -2181,7 +2147,7 @@ void Scenery3d::initShadowMapping()
 
     //Generate FBO - has to be QGLFramebufferObject for some reason.. Generating a normal one lead to bizzare texture results
     //We use handle() to get the id and work as if we created a normal FBO. This is because QGLFramebufferObject doesn't support attaching a texture to the FBO
-    QGLFramebufferObject *qglCamFBO=new QGLFramebufferObject(shadowmapSize, shadowmapSize, QGLFramebufferObject::Depth, GL_TEXTURE_2D);
+    QOpenGLFramebufferObject *qglCamFBO=new QOpenGLFramebufferObject(shadowmapSize, shadowmapSize, QOpenGLFramebufferObject::Depth);
     camDepthFBO = qglCamFBO->handle();
 
     if (qglFBO->isValid())
@@ -2285,4 +2251,20 @@ void Scenery3d::draw(StelCore* core)
     {
         drawDebugText(core);
     }
+}
+
+// Replacement for gluLookAt. See http://www.opengl.org/sdk/docs/man2/xhtml/gluLookAt.xml
+void Scenery3d::nogluLookAt(double eyeX,  double eyeY,  double eyeZ,  double centerX,  double centerY,  double centerZ,  double upX,  double upY,  double upZ)
+{
+    Vec3d f(centerX-eyeX, centerY-eyeY, centerZ-eyeZ);
+    Vec3d up(upX, upY, upZ);
+    f.normalize();
+    up.normalize();
+    Vec3d s=f ^ up;   // f x up cross product
+    Vec3d snorm=s;
+    snorm.normalize();
+    Vec3d u=snorm ^ f;
+    Mat4f M(s[0], s[1], s[2], 0.0f, u[0], u[1], u[2], 0.0f, -f[0], -f[1], -f[2], 0.0f, 0.0f, 0.0f, 0.0f, 1.0f);
+    glMultMatrixf(M.r);
+    glTranslated(-eyeX, -eyeY, -eyeZ);
 }

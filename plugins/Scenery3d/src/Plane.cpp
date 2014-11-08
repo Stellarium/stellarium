@@ -20,7 +20,6 @@
 
 #include "Plane.hpp"
 #include "Util.hpp"
-#include <QtOpenGL>
 
 Plane::Plane()
 {

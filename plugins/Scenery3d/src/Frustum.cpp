@@ -1,6 +1,6 @@
 #include "Frustum.hpp"
 #include "Util.hpp"
-#include <QtOpenGL>
+#include "StelOpenGL.hpp"
 #include <limits>
 
 Frustum::Frustum()

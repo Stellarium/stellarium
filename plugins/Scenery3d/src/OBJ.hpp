@@ -45,16 +45,19 @@
 #ifndef _OBJ_HPP_
 #define _OBJ_HPP_
 
+#include <QFile>
+
 #include "StelTexture.hpp"
-#include "StelTextureMgr.hpp"
-#include "StelFileMgr.hpp"
-#include "StelLogger.hpp"
 #include "VecMath.hpp"
-#include "Util.hpp"
 #include "AABB.hpp"
 
 class Heightmap;
 
+//! A basic Wavefront .OBJ format model loader.
+//!
+//! FS: The internal loader still is not very robust, uses many C IO functions (fopen,fscanf...) 
+//! and will have serious problems handling a malformed file including many potential buffer overflows. 
+//! Meaning: **Do NOT use for untrusted, downloaded files!**
 class OBJ
 {
 public:
@@ -94,7 +97,7 @@ public:
             height_texture.clear();
         }
         //! Material name
-        std::string name;
+        QString name;
         //! Ka, Kd, Ks, Ke
         float ambient[4];
         float diffuse[4];
@@ -107,15 +110,15 @@ public:
         //!< illumination model, copied from MTL.
         Illum illum;
         //! Texture name
-        std::string textureName;
+        QString textureName;
         //!< Shared pointer to texture of the model. This can be null.
         StelTextureSP texture;
         //! Bump map name
-        std::string bumpMapName;
+        QString bumpMapName;
         //!< Shared pointer to bump map texture of the model. This can be null.
         StelTextureSP bump_texture;
         //! Height map name
-        std::string heightMapName;
+        QString heightMapName;
         //!< Shared pointer to height map texture of the model. This can be null.
         StelTextureSP height_texture;
     };
@@ -148,7 +151,7 @@ public:
     //! Cleanup, will be called inside the destructor
     void clean();
     //! Loads the given obj file and, if specified rebuilds normals
-    bool load(const char* filename, const enum vertexOrder order, bool rebuildNormals = false);
+    bool load(const QString& filename, const enum vertexOrder order, bool rebuildNormals = false);
     //! Transform all the vertices through multiplication with a 4x4 matrix.
     //! @param mat Matrix to multiply vertices with.
     void transform(Mat4d mat);
@@ -208,14 +211,14 @@ private:
     //! Generates tangents (and bitangents/binormals) (useful for NormalMapping, Parallax Mapping, ...)
     void generateTangents();
     //! First pass - scans the file for memory allocation
-    void importFirstPass(FILE* pFile);
+    void importFirstPass(QFile& pFile);
     //! Second pass - actual parsing step
-    void importSecondPass(FILE* pFile, const enum vertexOrder order);
+    void importSecondPass(FILE *pFile, const enum vertexOrder order);
     //! Imports material file and fills the material datastructure
-    bool importMaterials(const char* filename);
+    bool importMaterials(const QString& filename);
     //! Uploads the textures to GL
     void uploadTexturesGL();
-    std::string absolutePath(std::string path);
+    QString absolutePath(QString path);
     //! Determine the bounding box extrema
     void bounds();
 
@@ -239,20 +242,20 @@ private:
     Mat4d m;
 
     //! Base path to this file
-    std::string m_basePath;
+    QString m_basePath;
 
     //! Datastructures
-    std::vector<StelModel> m_stelModels;
-    std::vector<Material> m_materials;
-    std::vector<Vertex> m_vertexArray;
-    std::vector<unsigned int> m_indexArray;
-    std::vector<int> m_attributeArray;
-    std::vector<double> m_vertexCoords;
-    std::vector<float> m_textureCoords;
-    std::vector<float> m_normals;
+    QVector<StelModel> m_stelModels;
+    QVector<Material> m_materials;
+    QVector<Vertex> m_vertexArray;
+    QVector<unsigned int> m_indexArray;
+    QVector<int> m_attributeArray;
+    QVector<double> m_vertexCoords;
+    QVector<float> m_textureCoords;
+    QVector<float> m_normals;
 
-    std::map<std::string, int> m_materialCache;
-    std::map<int, std::vector<int> > m_vertexCache;
+    QMap<QString, int> m_materialCache;
+    QMap<int, QVector<int> > m_vertexCache;
 
     //! Heightmap
     friend class Heightmap;
@@ -295,6 +298,6 @@ inline bool OBJ::hasStelModels() const { return m_hasStelModels; }
 //inline const OBJ::BoundingBox* OBJ::getBoundingBox() const { return pBoundingBox; }
 inline AABB* OBJ::getBoundingBox() {return pBoundingBox; }
 
-inline std::string OBJ::absolutePath(std::string path) { return m_basePath + path; }
+inline QString OBJ::absolutePath(QString path) { return m_basePath + path; }
 
 #endif

@@ -6,9 +6,14 @@
 #include "StelApp.hpp"
 #include "StelGui.hpp"
 
-Scenery3dDialog::Scenery3dDialog()
+Scenery3dDialog::Scenery3dDialog(QObject* parent) : StelDialog(parent)
 {
     ui = new Ui_scenery3dDialogForm;
+}
+
+Scenery3dDialog::~Scenery3dDialog()
+{
+	delete ui;
 }
 
 void Scenery3dDialog::retranslate()

@@ -3,7 +3,6 @@
 
 #include <vector>
 #include "VecMath.hpp"
-#include "QtOpenGL"
 #include "Util.hpp"
 
 class AABB

@@ -25,21 +25,31 @@
 #include <QStringList>
 #include <QFont>
 
+#include "StelCore.hpp"
+#include "StelPluginInterface.hpp"
 #include "StelModule.hpp"
 #include "StelUtils.hpp"
-#include "gui/Scenery3dDialog.hpp"
-#include "StelCore.hpp"
 #include "StelFader.hpp"
-#include "StelShader.hpp"
+
+#include "gui/Scenery3dDialog.hpp"
 
 class Scenery3d;
 class QSettings;
 class StelButton;
 
+class QOpenGLShaderProgram;
+
 //! Main class of the module, inherits from StelModule
 class Scenery3dMgr : public StelModule
 {
     Q_OBJECT
+
+    // toggle to switch it off completely.
+    Q_PROPERTY(bool scenery3dEnabled
+               READ isScenery3dEnabled
+               WRITE setScenery3dEnabled
+               NOTIFY scenery3dEnabledChanged)
+
 public:
     Scenery3dMgr();
     virtual ~Scenery3dMgr();
@@ -53,6 +63,9 @@ public:
     virtual bool configureGui(bool show);
     virtual void handleKeys(QKeyEvent* e);
 
+    //! Loads (or reloads) the required shaders from the shader files.
+    void loadShaders();
+    bool loadShader(QOpenGLShaderProgram& program, const QString& vShader, const QString& fShader);
     bool load(QMap<QString, QString>& param);
     Scenery3d* createFromFile(const QString& file, const QString& id);
 
@@ -76,9 +89,13 @@ public:
 
     static const QString MODULE_PATH;
 
+signals:
+    void scenery3dEnabledChanged(const bool val);
+
 public slots:
-    //! GZ: for switching on/off
-    void enableScenery3d(bool enable);
+    //! Enables/Disables the plugin
+    void setScenery3dEnabled(const bool val);
+    bool isScenery3dEnabled() const;
 
     QStringList getAllScenery3dNames() const;
     QStringList getAllScenery3dIDs() const;
@@ -97,7 +114,6 @@ public slots:
 
 private slots:
     void clearMessage();
-//signals:
 
 private:
     QString nameToID(const QString& name);
@@ -106,7 +122,7 @@ private:
     //! Display text message on screen, fade out automatically
     void showMessage(const QString& message);
 
-    bool flagEnabled;  // toggle to switch it off completely.
+
     int cubemapSize;   // configurable via config.ini:Scenery3d/cubemapSize
     int shadowmapSize; // configurable via config.ini:Scenery3d/shadowmapSize
     float torchBrightness; // configurable via config.ini:Scenery3d/extralight_brightness
@@ -114,6 +130,7 @@ private:
     Scenery3dDialog* scenery3dDialog;
     QString currentScenery3dID;
     QString defaultScenery3dID;
+    bool flagEnabled;
     bool enableShadows;          // toggle shadow mapping
     bool enableBumps;            // toggle bump mapping
     bool enableShadowsFilter;    // toggle shadow filtering
@@ -123,10 +140,10 @@ private:
     StelCore::ProjectionType oldProjectionType;
 
     //Shader for shadow mapping
-    StelShader* shadowShader;
-    StelShader* bumpShader;
-    StelShader* univShader;
-    StelShader* debugShader;
+    QOpenGLShaderProgram* shadowShader;
+    QOpenGLShaderProgram* bumpShader;
+    QOpenGLShaderProgram* univShader;
+    QOpenGLShaderProgram* debugShader;
 
     //screen messages (taken largely from AngleMeasure as of 2012-01-21)
     LinearFader messageFader;
@@ -137,18 +154,18 @@ private:
 };
 
 
-#include "fixx11h.h"
 #include <QObject>
 #include "StelPluginInterface.hpp"
 
 //! This class is used by Qt to manage a plug-in interface
 class Scenery3dStelPluginInterface : public QObject, public StelPluginInterface
 {
-	Q_OBJECT
-	Q_INTERFACES(StelPluginInterface)
+    Q_OBJECT
+    Q_PLUGIN_METADATA(IID "stellarium.StelGuiPluginInterface/1.0")
+    Q_INTERFACES(StelPluginInterface)
 public:
-	virtual StelModule* getStelModule() const;
-	virtual StelPluginInfo getPluginInfo() const;
+    virtual StelModule* getStelModule() const;
+    virtual StelPluginInfo getPluginInfo() const;
 };
 
 

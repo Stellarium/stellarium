@@ -47,6 +47,8 @@
 #include <cmath>
 #include <iostream>
 #include <limits>
+#include "StelFileMgr.hpp"
+#include <StelTextureMgr.hpp>
 
 namespace
 {
@@ -109,20 +111,23 @@ void OBJ::clean()
     m_vertexCache.clear();
 }
 
-bool OBJ::load(const char* filename, const enum vertexOrder order, bool rebuildNormals)
+bool OBJ::load(const QString& filename, const enum vertexOrder order, bool rebuildNormals)
 {
-    FILE* pFile = fopen(filename, "r");
-
-    if(!pFile)
+    QFile qtFile(filename);
+    if(!qtFile.open(QIODevice::ReadOnly))
         return false;
 
     //Extract the base path, will be used to load the MTL file later on
     m_basePath.clear();
-    m_basePath = std::string(StelFileMgr::dirName(filename).toAscii() + "/");
+    m_basePath = StelFileMgr::dirName(filename) + "/";
 
     //Parse the file
-    importFirstPass(pFile);
-    rewind(pFile);
+    importFirstPass(qtFile);
+    qtFile.close();
+
+    //TODO make the second pass support Qt IO (unicode file handling, etc.)
+    QByteArray ba = filename.toLocal8Bit();
+    FILE* pFile = fopen(ba.constData(), "r");
     importSecondPass(pFile, order);
 
     //Done parsing, close file
@@ -302,26 +307,26 @@ void OBJ::addTrianglePosTexCoordNormal(unsigned int index, int material, int v0,
 int OBJ::addVertex(int hash, const Vertex *pVertex)
 {
     unsigned int index = -1;
-    std::map<int, std::vector<int> >::const_iterator iter = m_vertexCache.find(hash);
+    QMap<int,QVector<int>>::const_iterator iter = m_vertexCache.find(hash);
 
     if (iter == m_vertexCache.end())
     {
         // Vertex hash doesn't exist in the cache.
         index = static_cast<int>(m_vertexArray.size());
         m_vertexArray.push_back(*pVertex);
-        m_vertexCache.insert(std::make_pair(hash, std::vector<int>(1, index)));
+        m_vertexCache.insert(hash, QVector<int>(1, index));
     }
     else
     {
         // One or more vertices have been hashed to this entry in the cache.
-        const std::vector<int> &vertices = iter->second;
+        const QVector<int> &vertices = iter.value();
         const Vertex *pCachedVertex = 0;
         bool found = false;
 
-        for (std::vector<int>::const_iterator i = vertices.begin(); i != vertices.end(); ++i)
+        for (QVector<int>::const_iterator i = vertices.begin(); i != vertices.end(); ++i)
         {
             index = *i;
-            pCachedVertex = &m_vertexArray[index];
+            pCachedVertex = &m_vertexArray.at(index);
 
             if (memcmp(pCachedVertex, pVertex, sizeof(Vertex)) == 0)
             {
@@ -637,8 +642,10 @@ void OBJ::generateTangents()
     m_hasTangents = true;
 }
 
-void OBJ::importFirstPass(FILE *pFile)
+//! The first pass finds out how many triangles and vertices the model has, and imports the materials.
+void OBJ::importFirstPass(QFile& pFile)
 {
+
     m_hasTextureCoords = false;
     m_hasNormals = false;
 
@@ -647,90 +654,77 @@ void OBJ::importFirstPass(FILE *pFile)
     m_numberOfNormals = 0;
     m_numberOfTriangles = 0;
 
-    unsigned int v = 0;
-    unsigned int vt = 0;
-    unsigned int vn = 0;
-    char buffer[256] = {0};
-    std::string name;
+    QString line;
+    QString buffer;
+    QString name;
 
-    while (fscanf(pFile, "%s", buffer) != EOF)
+    QTextStream fileStream(&pFile),lineStream;
+
+    //read a line while !EOF
+    while ( !(line = fileStream.readLine()).isNull() )
     {
-        switch (buffer[0])
+        lineStream.setString(&line,QIODevice::ReadOnly);
+
+        //read the first word of the line
+        lineStream>>buffer;
+
+		//check if the line is empty
+		if (buffer.isEmpty())
+			continue;
+
+        //check the first char of the line
+        switch (buffer.at(0).toLatin1())
         {
         case 'f':   //! v, v//vn, v/vt or v/vt/vn.
-            fscanf(pFile, "%s", buffer);
+            //hit a face definition
+            //this can have a variable number of vertices
 
-            if (strstr(buffer, "//"))   //! v//vn
+            //TODO: make this more robust against invalid files
+            //the old version was not better, really
+
+            //read first triangle
+            lineStream>>buffer;
+            lineStream>>buffer;
+            lineStream>>buffer;
+            ++m_numberOfTriangles;
+
+            //each VTX added now is a new triangle
+            while(!lineStream.atEnd())
             {
-                sscanf(buffer, "%d//%d", &v, &vn);
-                fscanf(pFile, "%d//%d", &v, &vn);
-                fscanf(pFile, "%d//%d", &v, &vn);
+                lineStream>>buffer;
                 ++m_numberOfTriangles;
-
-                while (fscanf(pFile, "%d//%d", &v, &vn) > 0)
-                    ++m_numberOfTriangles;
             }
-            else if (sscanf(buffer, "%d/%d/%d", &v, &vt, &vn) == 3) //! v/vt/vn
-            {
-                fscanf(pFile, "%d/%d/%d", &v, &vt, &vn);
-                fscanf(pFile, "%d/%d/%d", &v, &vt, &vn);
-                ++m_numberOfTriangles;
 
-                while (fscanf(pFile, "%d/%d/%d", &v, &vt, &vn) > 0)
-                    ++m_numberOfTriangles;
-            }
-            else if (sscanf(buffer, "%d/%d", &v, &vt) == 2) //! v/vt
-            {
-                fscanf(pFile, "%d/%d", &v, &vt);
-                fscanf(pFile, "%d/%d", &v, &vt);
-                ++m_numberOfTriangles;
-
-                while (fscanf(pFile, "%d/%d", &v, &vt) > 0)
-                    ++m_numberOfTriangles;
-            }
-            else // v
-            {
-                fscanf(pFile, "%d", &v);
-                fscanf(pFile, "%d", &v);
-                ++m_numberOfTriangles;
-
-                while (fscanf(pFile, "%d", &v) > 0)
-                    ++m_numberOfTriangles;
-            }
             break;
 
         case 'm':   //! mtllib
-            fgets(buffer, sizeof(buffer), pFile);
-            sscanf(buffer, "%s %s", buffer, buffer);
+            //found material, load it
+            lineStream>>buffer;
             name = m_basePath;
             name += buffer;
-            importMaterials(name.c_str());
+            importMaterials(name);
             break;
 
         case 'v':   //! v, vt, or vn
-            switch (buffer[1])
-            {
-            case '\0':
-                fgets(buffer, sizeof(buffer), pFile);
-                ++m_numberOfVertexCoords;
-                break;
-
-            case 'n':
-                fgets(buffer, sizeof(buffer), pFile);
-                ++m_numberOfNormals;
-                break;
-
-            case 't':
-                fgets(buffer, sizeof(buffer), pFile);
-                ++m_numberOfTextureCoords;
-
-            default:
-                break;
-            }
+            //hit a vertex, texture or normal, add 1 to counter
+			if (buffer.size()==1)
+				++m_numberOfVertexCoords;
+			else
+			{
+				switch (buffer.at(1).toLatin1())
+				{
+				case 't':
+					++m_numberOfTextureCoords;
+					break;
+				case 'n':
+					++m_numberOfNormals;
+					break;
+				}
+			}
             break;
 
         default:
-            fgets(buffer, sizeof(buffer), pFile);
+            //noop
             break;
         }
     }
@@ -756,8 +750,10 @@ void OBJ::importFirstPass(FILE *pFile)
     }
 }
 
-void OBJ::importSecondPass(FILE *pFile, const vertexOrder order)
+void OBJ::importSecondPass(FILE* pFile, const vertexOrder order)
 {
+    //TODO convert to Qt IO functions (QFile)
+
     unsigned int v[3] = {0};
     unsigned int vt[3] = {0};
     unsigned int vn[3] = {0};
@@ -767,8 +763,8 @@ void OBJ::importSecondPass(FILE *pFile, const vertexOrder order)
     unsigned int numTriangles = 0;
     int activeMaterial = 0;
     char buffer[256] = {0};
-    std::string name;
-    std::map<std::string, int>::const_iterator iter;
+    QString name;
+    QMap<QString,int>::const_iterator iter;
 
     float fTmp[3] = {0.0f};
     double dTmp[3] = {0.0};
@@ -923,7 +919,7 @@ void OBJ::importSecondPass(FILE *pFile, const vertexOrder order)
             sscanf(buffer, "%s %s", buffer, buffer);
             name = buffer;
             iter = m_materialCache.find(buffer);
-            activeMaterial = (iter == m_materialCache.end()) ? 0 : iter->second;
+            activeMaterial = (iter == m_materialCache.end()) ? 0 : iter.value();
             break;
 
         case 'v': //! v, vn, or vt.
@@ -991,9 +987,11 @@ void OBJ::importSecondPass(FILE *pFile, const vertexOrder order)
     }
 }
 
-bool OBJ::importMaterials(const char *filename)
+bool OBJ::importMaterials(const QString& filename)
 {
-    FILE* pFile = fopen(filename, "r");
+    //TODO convert to Qt IO functions (Unicode filenames, type safety, security...)
+    QByteArray ba = filename.toLatin1();
+    FILE* pFile = fopen(ba.constData(), "r");
 
     if (!pFile)
         return false;
@@ -1115,9 +1113,10 @@ bool OBJ::importMaterials(const char *filename)
                 fgets(buffer, sizeof(buffer), pFile);
                 sscanf("%[^\n]", buffer);
 
+                //TODO convert to QString
                 std::string tex;
                 parseTextureString(buffer, tex);
-                pMaterial->textureName = tex;
+                pMaterial->textureName.fromStdString(tex);
             }
             else if (strstr(buffer, "map_bump") != 0)
             {
@@ -1126,7 +1125,7 @@ bool OBJ::importMaterials(const char *filename)
 
                 std::string bump;
                 parseTextureString(buffer, bump);
-                pMaterial->bumpMapName = bump;
+                pMaterial->bumpMapName.fromStdString(bump);
             }
             else if (strstr(buffer, "map_height") != 0)
             {
@@ -1135,7 +1134,7 @@ bool OBJ::importMaterials(const char *filename)
 
                 std::string height;
                 parseTextureString(buffer, height);
-                pMaterial->heightMapName = height;
+                pMaterial->heightMapName.fromStdString(height);
             }
             else
             {
@@ -1204,44 +1203,44 @@ void OBJ::uploadTexturesGL()
 
 //        qDebug() << getTime() << "[Scenery3d] Uploading textures for Material: " << pMaterial->name.c_str();
 //        qDebug() << getTime() << "[Scenery3d] Texture:" << pMaterial->textureName.c_str();
-        if(!pMaterial->textureName.empty())
+        if(!pMaterial->textureName.isEmpty())
         {
-            StelTextureSP tex = textureMgr.createTexture(QString(absolutePath(pMaterial->textureName).c_str()), StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT));
+            StelTextureSP tex = textureMgr.createTexture(absolutePath(pMaterial->textureName), StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT));
             if(!tex.isNull())
             {
                 pMaterial->texture = tex;
             }
             else
             {
-                qWarning() << getTime() << "[Scenery3d] Failed to load Texture:" << pMaterial->textureName.c_str();
+                qWarning() << getTime() << "[Scenery3d] Failed to load Texture:" << pMaterial->textureName;
             }
         }
 
-        //qDebug() << getTime() << "[Scenery3d] Normal Map:" << pMaterial->bumpMapName.c_str();
-        if(!pMaterial->bumpMapName.empty())
+        //qDebug() << getTime() << "[Scenery3d] Normal Map:" << pMaterial->bumpMapName;
+        if(!pMaterial->bumpMapName.isEmpty())
         {
-            StelTextureSP bumpTex = textureMgr.createTexture(QString(absolutePath(pMaterial->bumpMapName).c_str()), StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT));
+            StelTextureSP bumpTex = textureMgr.createTexture(absolutePath(pMaterial->bumpMapName), StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT));
             if(!bumpTex.isNull())
             {
                 pMaterial->bump_texture = bumpTex;
             }
             else
             {
-                qWarning() << getTime() << "[Scenery3d] Failed to load Normal Map:" << pMaterial->bumpMapName.c_str();
+                qWarning() << getTime() << "[Scenery3d] Failed to load Normal Map:" << pMaterial->bumpMapName;
             }
         }
 
-        qDebug() << getTime() << "[Scenery3d] Height Map:" << pMaterial->heightMapName.c_str();
-        if(!pMaterial->heightMapName.empty())
+        //qDebug() << getTime() << "[Scenery3d] Height Map:" << pMaterial->heightMapName;
+        if(!pMaterial->heightMapName.isEmpty())
         {
-            StelTextureSP heightTex = textureMgr.createTexture(QString(absolutePath(pMaterial->heightMapName).c_str()), StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT));
+            StelTextureSP heightTex = textureMgr.createTexture(absolutePath(pMaterial->heightMapName), StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT));
             if(!heightTex.isNull())
             {
                 pMaterial->height_texture = heightTex;
             }
             else
             {
-                qWarning() << getTime() << "[Scenery3d] Failed to load Height Map:" << pMaterial->heightMapName.c_str();
+                qWarning() << getTime() << "[Scenery3d] Failed to load Height Map:" << pMaterial->heightMapName;
             }
         }
     }
@@ -1251,7 +1250,7 @@ void OBJ::transform(Mat4d mat)
 {
     m = mat;
     pBoundingBox->min = Vec3f(std::numeric_limits<float>::max());
-    pBoundingBox->max = Vec3f(-std::numeric_limits<float>::max());
+    pBoundingBox->max = Vec3f(std::numeric_limits<float>::lowest());
 
     //Transform all vertices and normals by mat
     for(int i=0; i<getNumberOfVertices(); ++i)
@@ -1296,7 +1295,7 @@ void OBJ::bounds()
 {
     //Find Bounding Box for entire Scene
     pBoundingBox->min = Vec3f(std::numeric_limits<float>::max());
-    pBoundingBox->max = Vec3f(-std::numeric_limits<float>::max());
+    pBoundingBox->max = Vec3f(std::numeric_limits<float>::lowest());
 
     for(int i=0; i<getNumberOfVertices(); ++i)
     {
@@ -1315,7 +1314,7 @@ void OBJ::bounds()
     for(unsigned int i=0; i<m_numberOfStelModels; ++i)
     {
         StelModel* pStelModel = &m_stelModels[i];
-        pStelModel->bbox = new AABB(Vec3f(std::numeric_limits<float>::max()), Vec3f(-std::numeric_limits<float>::max()));
+        pStelModel->bbox = new AABB(Vec3f(std::numeric_limits<float>::max()), Vec3f(std::numeric_limits<float>::lowest()));
 
         for(int j=pStelModel->startIndex; j<pStelModel->triangleCount*3; ++j)
         {

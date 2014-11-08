@@ -21,7 +21,6 @@
 #ifndef _SCENERY3D_HPP_
 #define _SCENERY3D_HPP_
 
-#include "fixx11h.h"
 #include "StelGui.hpp"
 #include "StelModule.hpp"
 #include "StelPainter.hpp"
@@ -31,23 +30,11 @@
 #include "Frustum.hpp"
 #include "Polyhedron.hpp"
 
-#include <QString>
-//#include <vector>
-#include <QGLFramebufferObject>
-// Preparation for some changes to come with Qt4.8+.
-#if QT_VERSION >= 0x040800
-#include <QGLFunctions>
-#endif
-#include "StelShader.hpp"
-
-using std::vector;
+//predeclarations
+class QOpenGLFramebufferObject;
 
 //! Representation of a complete 3D scenery
-#if QT_VERSION >= 0x040800
-class Scenery3d: protected QGLFunctions
-#else
 class Scenery3d
-#endif
 {
 public:
     //! Initializes an empty Scenery3d object.
@@ -56,7 +43,7 @@ public:
     virtual ~Scenery3d();
 
     //! Sets the shaders for the plugin
-    void setShaders(StelShader* shadowShader = 0, StelShader* bumpShader = 0, StelShader* univShader = 0, StelShader* debugShader = 0)
+    void setShaders(QOpenGLShaderProgram* shadowShader = 0, QOpenGLShaderProgram* bumpShader = 0, QOpenGLShaderProgram* univShader = 0, QOpenGLShaderProgram* debugShader = 0)
     {
         this->shadowShader = shadowShader;
         this->bumpShader = bumpShader;
@@ -132,10 +119,6 @@ public:
     int drawn;
 
 private:
-    static const float AMBIENT_BRIGHTNESS_FACTOR=0.05;
-    static const float LUNAR_BRIGHTNESS_FACTOR=0.2;
-    static const float VENUS_BRIGHTNESS_FACTOR=0.005;
-
     double eyeLevel;
     float torchBrightness; // ^L toggle light brightness
 
@@ -183,13 +166,13 @@ private:
     Mat4f projectionMatrix;
     Mat4f lightViewMatrix;
     Mat4f lightProjectionMatrix;
-    QGLFramebufferObject* shadowMapFbo;
-    QGLFramebufferObject* cubeMap[6]; // front, right, left, back, top, bottom
+    QOpenGLFramebufferObject* shadowMapFbo;
+    QOpenGLFramebufferObject* cubeMap[6]; // front, right, left, back, top, bottom
     StelVertexArray cubePlaneFront, cubePlaneBack,
                 cubePlaneLeft, cubePlaneRight,
                 cubePlaneTop, cubePlaneBottom;
 
-    vector<OBJ::StelModel> objModelArrays;
+    QVector<OBJ::StelModel> objModelArrays;
 
     QString id;
     QString name;
@@ -218,15 +201,15 @@ private:
     Mat4d zRot2Grid;
 
     //Currently selected Shader
-    StelShader* curShader;
+    QOpenGLShaderProgram* curShader;
     //Shadow mapping shader + per pixel lighting
-    StelShader* shadowShader;
+    QOpenGLShaderProgram* shadowShader;
     //Bump mapping shader
-    StelShader* bumpShader;
+    QOpenGLShaderProgram* bumpShader;
     //Universal shader: shadow + bump mapping
-    StelShader* univShader;
+    QOpenGLShaderProgram* univShader;
     //Debug shader
-    StelShader* debugShader;
+    QOpenGLShaderProgram* debugShader;
     //Depth texture id
     GLuint shadowMapTexture;
     //Shadow Map FBO handle
@@ -297,8 +280,10 @@ private:
     int writeTex, readTex;
     GLenum *attachments;
 
-    StelShader *minMaxShader;
+    QOpenGLShaderProgram *minMaxShader;
 
     void drawFullscreenQuad(int dim);
+    //TODO FS: only temporary, will be removed
+    void nogluLookAt(double eyeX,  double eyeY,  double eyeZ,  double centerX,  double centerY,  double centerZ,  double upX,  double upY,  double upZ);
 };
 #endif

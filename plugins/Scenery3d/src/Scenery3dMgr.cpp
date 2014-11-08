@@ -23,29 +23,34 @@
 #include <QString>
 #include <QDir>
 #include <QFile>
+#include <QTimer>
+#include <QOpenGLShaderProgram>
 
 #include <stdexcept>
-
-#include <GLee.h>
 
 #include "Scenery3dMgr.hpp"
 #include "Scenery3d.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
+#include "StelActionMgr.hpp"
 #include "StelMovementMgr.hpp"
 #include "StelGui.hpp"
 #include "StelGuiItems.hpp"
-//#include "StelFileMgr.hpp"
+#include "StelFileMgr.hpp"
 #include "StelIniParser.hpp"
 #include "StelPainter.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelTranslator.hpp"
 #include "LandscapeMgr.hpp"
 
-//const QString Scenery3dMgr::MODULE_PATH("modules/scenery3d/");
 const QString Scenery3dMgr::MODULE_PATH("scenery3d/");
 
-Scenery3dMgr::Scenery3dMgr() : scenery3d(NULL)
+Scenery3dMgr::Scenery3dMgr() :
+    scenery3d(NULL),
+    shadowShader(NULL),
+    bumpShader(NULL),
+    univShader(NULL),
+    debugShader(NULL)
 {
     setObjectName("Scenery3dMgr");
     scenery3dDialog = new Scenery3dDialog();
@@ -60,38 +65,43 @@ Scenery3dMgr::Scenery3dMgr() : scenery3d(NULL)
     messageTimer->setInterval(2000);
     messageTimer->setSingleShot(true);
     connect(messageTimer, SIGNAL(timeout()), this, SLOT(clearMessage()));
-
-
 }
 
 Scenery3dMgr::~Scenery3dMgr()
 {
+    //the deletion of many objects can be handled by Qt automatically, if a parent of QObject is set
+    //scenery3d is no QObject
     delete scenery3d;
     scenery3d = NULL;
-    delete scenery3dDialog;
-    messageTimer->stop();
-    delete messageTimer;
-    delete shadowShader;
-    delete bumpShader;
-    delete univShader;
-    delete debugShader;
+
+	delete scenery3dDialog;
 }
 
-void Scenery3dMgr::enableScenery3d(bool enable)
+void Scenery3dMgr::setScenery3dEnabled(const bool enable)
 {
-    flagEnabled=enable;
-    if (cubemapSize==0)
+    if(enable!=flagEnabled)
     {
-        if (flagEnabled)
+        flagEnabled=enable;
+        if (cubemapSize==0)
         {
-            oldProjectionType= StelApp::getInstance().getCore()->getCurrentProjectionType();
-            StelApp::getInstance().getCore()->setCurrentProjectionType(StelCore::ProjectionPerspective);
+            //TODO FS: remove this?
+            if (flagEnabled)
+            {
+                oldProjectionType= StelApp::getInstance().getCore()->getCurrentProjectionType();
+                StelApp::getInstance().getCore()->setCurrentProjectionType(StelCore::ProjectionPerspective);
+            }
+            else
+                StelApp::getInstance().getCore()->setCurrentProjectionType(oldProjectionType);
         }
-        else
-            StelApp::getInstance().getCore()->setCurrentProjectionType(oldProjectionType);
-     }
+
+        emit scenery3dEnabledChanged(flagEnabled);
+    }
 }
 
+bool Scenery3dMgr::isScenery3dEnabled() const
+{
+    return flagEnabled;
+}
 
 double Scenery3dMgr::getCallOrder(StelModuleActionName actionName) const
 {
@@ -129,15 +139,9 @@ void Scenery3dMgr::handleKeys(QKeyEvent* e)
                         e->accept();
                         break;
                     case Qt::Key_B:
-                        if (GLEE_VERSION_1_5)
-                        {
-                            enableBumps   = !enableBumps;
-                            scenery3d->setBumpsEnabled(enableBumps);
-                            showMessage(QString(N_("Surface bumps %1")).arg(enableBumps? N_("on") : N_("off")));
-                        } else
-                        {
-                            showMessage(QString(N_("Normal mapping not supported on this hardware.")));
-                        }
+                        enableBumps   = !enableBumps;
+                        scenery3d->setBumpsEnabled(enableBumps);
+                        showMessage(QString(N_("Surface bumps %1")).arg(enableBumps? N_("on") : N_("off")));
                         e->accept();
                         break;
 
@@ -217,7 +221,10 @@ void Scenery3dMgr::init()
 
     // graphics hardware without FrameBufferObj extension cannot use the cubemap rendering and shadow mapping.
     // In this case, set cubemapSize to 0 to signal auto-switch to perspective projection.
-    if (! GLEE_EXT_framebuffer_object) {
+    if ( !QOpenGLContext::currentContext()->hasExtension("GL_EXT_framebuffer_object")) {
+
+        //TODO FS: it seems like the current stellarium requires a working framebuffer extension anyway, so skip this check?
+
         qWarning() << "Scenery3d: Your hardware does not support EXT_framebuffer_object.";
         qWarning() << "           Shadow mapping disabled, and display limited to perspective projection.";
         cubemapSize=0;
@@ -225,96 +232,54 @@ void Scenery3dMgr::init()
     }    
     //cubemapSize = 0;
     // create action for enable/disable & hook up signals
-    StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-    Q_ASSERT(gui);
 
-    qDebug() << "call gui->addGuiActions()";
-    gui->addGuiActions("actionShow_Scenery3d",
-                       N_("Scenery3d: 3D landscapes"),
-                       "Ctrl+3", // hotkey
-                       N_("Show astronomical alignments"), // help
-                       true); // checkable; autorepeat=false.
-    connect(gui->getGuiActions("actionShow_Scenery3d"), SIGNAL(toggled(bool)), this, SLOT(enableScenery3d(bool)));
+    //hook up some signals
+    StelApp *app = &StelApp::getInstance();
+    connect(app, SIGNAL(languageChanged()), this, SLOT(updateI18n()));
+    connect(app, SIGNAL(colorSchemeChanged(const QString&)), this, SLOT(setStelStyle(const QString&)));
+    connect(this, SIGNAL(enabledChanged(bool)), this, SLOT(setEnabled(bool)));
 
-    gui->addGuiActions("actionShow_Scenery3d_window",
-                       N_("Scenery3d configuration window"),
-                       "Ctrl+Shift+3", // hotkey
-                       N_("Scenery3d Selection and Settings"), // help
-                       true); // checkable; autorepeat=false.
-    connect(gui->getGuiActions("actionShow_Scenery3d_window"), SIGNAL(toggled(bool)), scenery3dDialog, SLOT(setVisible(bool)));
-    connect(scenery3dDialog, SIGNAL(visibleChanged(bool)), gui->getGuiActions("actionShow_Scenery3d_window"), SLOT(setChecked(bool)));
+    qDebug() << "call addActions()";
+
+    addAction("actionShow_Scenery3d",
+              N_("Scenery3d: 3D landscapes"),
+              N_("Show 3D landscape"),
+              this,
+              "scenery3dEnabled",
+              "Ctrl+3");
+
+    addAction("actionShow_Scenery3d_dialog",       // ID
+              N_("Scenery3d: 3D landscapes"),        // Group ID (for help)
+              N_("Show settings dialog"),                 // help text
+              scenery3dDialog,                       // target
+              "visible",          // slot
+              "Ctrl+Shift+3");                       // shortcut1
 
     // Add 2 toolbar buttons (copy/paste widely from AngleMeasure): activate, and settings.
     try
     {
-        //qDebug() << "trying buttons\n";
+        StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+
         toolbarEnableButton = new StelButton(NULL, QPixmap(":/Scenery3d/bt_scenery3d_on.png"),
-                                      QPixmap(":/Scenery3d/bt_scenery3d_off.png"),
-                                      QPixmap(":/graphicGui/glow32x32.png"),
-                                      gui->getGuiActions("actionShow_Scenery3d"));
+                                             QPixmap(":/Scenery3d/bt_scenery3d_off.png"),
+                                             QPixmap(":/graphicGui/glow32x32.png"),
+                                             "actionShow_Scenery3d");
         toolbarSettingsButton = new StelButton(NULL, QPixmap(":/Scenery3d/bt_scenery3d_settings_on.png"),
-                                      QPixmap(":/Scenery3d/bt_scenery3d_settings_off.png"),
-                                      QPixmap(":/graphicGui/glow32x32.png"),
-                                      gui->getGuiActions("actionShow_Scenery3d_window"));
+                                               QPixmap(":/Scenery3d/bt_scenery3d_settings_off.png"),
+                                               QPixmap(":/graphicGui/glow32x32.png"),
+                                               "actionShow_Scenery3d_dialog");
 
-       //qDebug() << "call getButtonBar etc.\n";
-
-       gui->getButtonBar()->addButton(toolbarEnableButton, "065-pluginsGroup");
-       gui->getButtonBar()->addButton(toolbarSettingsButton, "065-pluginsGroup");
+        gui->getButtonBar()->addButton(toolbarEnableButton, "065-pluginsGroup");
+        gui->getButtonBar()->addButton(toolbarSettingsButton, "065-pluginsGroup");
     }
     catch (std::runtime_error& e)
     {
-        qDebug() << "catch exc.\n";
-            qWarning() << "WARNING: unable to create toolbar buttons for Scenery3d plugin: " << e.what();
+        qWarning() << "WARNING: unable to create toolbar buttons for Scenery3d plugin: " << e.what();
     }
 
+    loadShaders();
 
-    //Create a shadow shader and load the files
-    this->shadowShader = new StelShader();
-    this->bumpShader = new StelShader();
-    this->univShader = new StelShader();
-    this->debugShader = new StelShader();
 
-    //Alex Wolf loading patch : ) Thanks!
-    QStringList lst =  QStringList(StelFileMgr::findFileInAllPaths("data/shaders/",(StelFileMgr::Flags)(StelFileMgr::Directory)));
-    QByteArray vsshader = (QString(lst.first()) + "smap.v.glsl").toLocal8Bit();
-    QByteArray fsshader = (QString(lst.first()) + "smap.f.glsl").toLocal8Bit();
-
-    if (!(shadowShader->load(vsshader.data(), fsshader.data())))
-    {
-        qWarning() << "WARNING [Scenery3d]: unable to load shadow mapping shader files.\n";
-        shadowShader = 0;
-    }
-
-    lst =  QStringList(StelFileMgr::findFileInAllPaths("data/shaders/",(StelFileMgr::Flags)(StelFileMgr::Directory)));
-    vsshader = (QString(lst.first()) + "bmap.v.glsl").toLocal8Bit();
-    fsshader = (QString(lst.first()) + "bmap.f.glsl").toLocal8Bit();
-
-    if (!(bumpShader->load(vsshader.data(), fsshader.data())))
-    {
-        qWarning() << "WARNING [Scenery3d]: unable to load bump mapping shader files.\n";
-        bumpShader  = 0;
-    }
-
-    lst =  QStringList(StelFileMgr::findFileInAllPaths("data/shaders/",(StelFileMgr::Flags)(StelFileMgr::Directory)));
-    vsshader = (QString(lst.first()) + "univ.v.glsl").toLocal8Bit();
-    fsshader = (QString(lst.first()) + "univ.f.glsl").toLocal8Bit();
-
-    if (!(univShader->load(vsshader.data(), fsshader.data())))
-    {
-        qWarning() << "WARNING [Scenery3d]: unable to load universal shader files.\n";
-        univShader  = 0;
-    }
-
-    lst =  QStringList(StelFileMgr::findFileInAllPaths("data/shaders/",(StelFileMgr::Flags)(StelFileMgr::Directory)));
-    vsshader = (QString(lst.first()) + "debug.v.glsl").toLocal8Bit();
-    fsshader = (QString(lst.first()) + "debug.f.glsl").toLocal8Bit();
-
-    if (!(debugShader->load(vsshader.data(), fsshader.data())))
-    {
-        qWarning() << "WARNING [Scenery3d]: unable to load bump mapping shader files.\n";
-        debugShader  = 0;
-    }
 
     qWarning() << "init scenery3d object...";
     scenery3d = new Scenery3d(cubemapSize, shadowmapSize, torchBrightness);
@@ -335,15 +300,85 @@ void Scenery3dMgr::init()
     qWarning() << "init scenery3d object shadowmapping...done\n";
 }
 
-bool Scenery3dMgr::configureGui(bool show)
+void Scenery3dMgr::loadShaders()
 {
-    if (show)
+    qDebug()<<"(Re)loading Scenery3d shaders";
+    //create shader objects, if not existing
+    //the shaders get this manager as parent, so we dont have to manage deletion ourselves, it is done by Qt.
+    if(!shadowShader)
+        shadowShader = new QOpenGLShaderProgram(this);
+    if(!bumpShader)
+        bumpShader = new QOpenGLShaderProgram(this);
+    if(!univShader)
+        univShader = new QOpenGLShaderProgram(this);
+    if(!debugShader)
+        debugShader = new QOpenGLShaderProgram(this);
+
+
+    loadShader(*shadowShader,"smap.v.glsl","smap.f.glsl");
+    loadShader(*bumpShader,"bmap.v.glsl","bmap.f.glsl");
+    loadShader(*univShader,"univ.v.glsl","univ.f.glsl");
+    loadShader(*debugShader,"debug.v.glsl","debug.f.glsl");
+}
+
+bool Scenery3dMgr::loadShader(QOpenGLShaderProgram& program, const QString& vShader, const QString& fShader)
+{
+    qDebug()<<"Loading Scenery3d shader: '"<<vShader<<"', '"<<fShader<<"'";
+
+    //clear old shader data, if exists
+    program.removeAllShaders();
+
+    QDir dir("data/shaders/");
+    QString vs = StelFileMgr::findFile(dir.filePath(vShader),StelFileMgr::File);
+
+    if(!program.addShaderFromSourceFile(QOpenGLShader::Vertex,vs))
     {
-            StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-            Q_ASSERT(gui);
-            gui->getGuiActions("actionShow_Scenery3d_window")->setChecked(true);
+        qCritical() << "Scenery3d: unable to compile " << vs << " vertex shader file";
+        qCritical() << program.log();
+        return false;
+    }
+    else
+    {
+        QString log = program.log().trimmed();
+        if(!log.isEmpty())
+        {
+            qWarning()<<vShader<<" warnings:";
+            qWarning()<<log;
+        }
     }
 
+    QString fs = StelFileMgr::findFile(dir.filePath(fShader),StelFileMgr::File);
+    if(!program.addShaderFromSourceFile(QOpenGLShader::Fragment,fs))
+    {
+        qCritical() << "Scenery3d: unable to compile " << fs << " fragment shader file";
+        qCritical() << program.log();
+        return false;
+    }
+    else
+    {
+        QString log = program.log().trimmed();
+        if(!log.isEmpty())
+        {
+            qWarning()<<fShader<<" warnings:";
+            qWarning()<<log;
+        }
+    }
+
+    //link program
+    if(!program.link())
+    {
+        qCritical()<<"Scenery3d: unable to link shader files "<<vShader<<", "<<fShader;
+        qCritical()<<program.log();
+        return false;
+    }
+
+    return true;
+}
+
+bool Scenery3dMgr::configureGui(bool show)
+{
+	if (show)
+		scenery3dDialog->setVisible(show);
     return true;
 }
 
@@ -677,18 +712,16 @@ StelModule* Scenery3dStelPluginInterface::getStelModule() const
 
 StelPluginInfo Scenery3dStelPluginInterface::getPluginInfo() const
 {
-	// Allow to load the resources when used as a static plugin
-        Q_INIT_RESOURCE(Scenery3d);
-	
-	StelPluginInfo info;
-	info.id = "Scenery3dMgr";
-	info.displayedName = "Scenery3d";
-        info.authors = "Simon Parzer, Peter Neubauer, Georg Zotti, Andrei Borza";
-        info.contact = "Georg.Zotti@univie.ac.at";
-        info.description = "OBJ landscape renderer. Walk around and find possible astronomical alignments in temple models.";
-	return info;
-}
+    // Allow to load the resources when used as a static plugin
+    Q_INIT_RESOURCE(Scenery3d);
 
-Q_EXPORT_PLUGIN2(Scenery3dMgr, Scenery3dStelPluginInterface)
+    StelPluginInfo info;
+    info.id = "Scenery3dMgr"; // TBD: Find way to call it just Scenery3d? [cosmetic]
+    info.displayedName = N_("3D Sceneries");
+    info.authors = "Georg Zotti, Simon Parzer, Peter Neubauer, Andrei Borza";
+    info.contact = "Georg.Zotti@univie.ac.at";
+    info.description = N_("3D foreground renderer. Walk around, find and avoid obstructions in your garden, find and demonstrate possible astronomical alignments in temples, see shadows on sundials etc.");
+    return info;
+}
 /////////////////////////////////////////////////////////////////////
 
