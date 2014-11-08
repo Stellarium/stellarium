@@ -132,10 +132,10 @@ private:
 
 	//GZ Tail additions
 	Vec2f tailFactors; // result of latest call to getComaDiameterAndTailLengthAU(); Results cached here for infostring. [0]=Coma diameter, [1] gas tail length.
-	bool tailActive;		//! true if there is a tail worth bothering (longer than COMET_MIN_TAIL_LENGTH_AU)? Drawing tails is quite costly.
+	bool tailActive;		//! true if there is a tail long enough to be worth drawing. Drawing tails is quite costly.
+	bool tailBright;		//! true if tail is bright enough to draw.
 	double deltaJDtail;             //! like deltaJD, but time difference between tail geometry updates.
 	double lastJDtail;              //! like lastJD, but time of last tail geometry update.
-	double lastJDextinction;        //! GZ NEW time of last extinction update. (computed every 5 minutes)
 	Mat4d gasTailRot;		//! rotation matrix for gas tail parabola
 	Mat4d dustTailRot;		//! rotation matrix for the skewed dust tail parabola
 	float dustTailWidthFactor;      //!< empirical individual broadening of the dust tail end, compared to the gas tail end. Actually, dust tail width=2*comaWidth*dustTailWidthFactor. Default 1.5
