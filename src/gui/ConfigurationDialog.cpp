@@ -49,6 +49,7 @@
 #include "NebulaMgr.hpp"
 #include "GridLinesMgr.hpp"
 #include "MilkyWay.hpp"
+#include "ZodiacalLight.hpp"
 #ifndef DISABLE_SCRIPTING
 #include "StelScriptMgr.hpp"
 #endif
@@ -528,6 +529,7 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	conf->setValue("viewing/moon_scale", ssmgr->getMoonScale());
 	conf->setValue("astro/meteor_rate", mmgr->getZHR());
 	conf->setValue("astro/milky_way_intensity", GETSTELMODULE(MilkyWay)->getIntensity());
+	conf->setValue("astro/zodiacal_light_intensity", GETSTELMODULE(ZodiacalLight)->getIntensity());
 
 	// view dialog / markings tab settings
 	conf->setValue("viewing/flag_azimuthal_grid", glmgr->getFlagAzimuthalGrid());

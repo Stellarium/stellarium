@@ -37,6 +37,7 @@
 #include "NebulaMgr.hpp"
 #include "MeteorMgr.hpp"
 #include "MilkyWay.hpp"
+#include "ZodiacalLight.hpp"
 #include "ConstellationMgr.hpp"
 #include "StelStyle.hpp"
 #include "StelSkyLayerMgr.hpp"
@@ -151,6 +152,10 @@ void ViewDialog::createDialogContent()
 	MilkyWay* mw = GETSTELMODULE(MilkyWay);
 	ui->milkyWayBrightnessDoubleSpinBox->setValue(mw->getIntensity());
 	connect(ui->milkyWayBrightnessDoubleSpinBox, SIGNAL(valueChanged(double)), mw, SLOT(setIntensity(double)));
+
+	ZodiacalLight* zl = GETSTELMODULE(ZodiacalLight);
+	ui->zodiacalLightBrightnessDoubleSpinBox->setValue(zl->getIntensity());
+	connect(ui->zodiacalLightBrightnessDoubleSpinBox, SIGNAL(valueChanged(double)), zl, SLOT(setIntensity(double)));
 
 	ui->starTwinkleAmountDoubleSpinBox->setValue(StelApp::getInstance().getCore()->getSkyDrawer()->getTwinkleAmount());
 	connect(ui->starTwinkleAmountDoubleSpinBox, SIGNAL(valueChanged(double)), StelApp::getInstance().getCore()->getSkyDrawer(), SLOT(setTwinkleAmount(double)));

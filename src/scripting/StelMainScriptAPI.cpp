@@ -51,6 +51,7 @@
 #include "StelUtils.hpp"
 #include "StelGuiBase.hpp"
 #include "MilkyWay.hpp"
+#include "ZodiacalLight.hpp"
 
 #include <QDateTime>
 #include <QDebug>
@@ -1176,4 +1177,19 @@ void StelMainScriptAPI::setMilkyWayIntensity(double i)
 double StelMainScriptAPI::getMilkyWayIntensity()
 {
 	return GETSTELMODULE(MilkyWay)->getIntensity();
+}
+
+void StelMainScriptAPI::setZodiacalLightVisible(bool b)
+{
+	GETSTELMODULE(ZodiacalLight)->setFlagShow(b);
+}
+
+void StelMainScriptAPI::setZodiacalLightIntensity(double i)
+{
+	GETSTELMODULE(ZodiacalLight)->setIntensity(i);
+}
+
+double StelMainScriptAPI::getZodiacalLightIntensity()
+{
+	return GETSTELMODULE(ZodiacalLight)->getIntensity();
 }
