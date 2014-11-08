@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-10-26 14:07+0600\n"
-"PO-Revision-Date: 2014-05-03 01:41+0000\n"
-"Last-Translator: ShunjinZHENG <zhengshunjin@gmail.com>\n"
+"PO-Revision-Date: 2014-11-07 09:11+0000\n"
+"Last-Translator: Sizhuang Liu <Unknown>\n"
 "Language-Team: Chinese (Hong Kong) <zh_HK@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-10-27 06:04+0000\n"
-"X-Generator: Launchpad (build 17203)\n"
+"X-Launchpad-Export-Date: 2014-11-08 05:40+0000\n"
+"X-Generator: Launchpad (build 17231)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:106 src/core/modules/StarMgr.cpp:346
 #: src/core/modules/GridLinesMgr.cpp:727 src/core/modules/LandscapeMgr.cpp:355
@@ -936,7 +936,7 @@ msgstr "平均误差小于1秒，最大误差1.9秒，其余都是超出范围�
 #: src/core/StelCore.cpp:1695 src/core/StelCore.cpp:1700
 #: src/core/StelCore.cpp:1727 src/core/StelCore.cpp:1732
 msgid "with zero values outside this range"
-msgstr ""
+msgstr "此范围之外的值为零"
 
 #: src/core/StelCore.cpp:1705
 msgid "with a typical 1-second accuracy and zero values outside this range"
@@ -1043,7 +1043,7 @@ msgstr "正射投影类似透视投影，但是投影点位在无限远的距离
 #: src/core/StelObject.cpp:121 src/core/StelObject.cpp:123
 #: src/core/StelObject.cpp:131 src/core/StelObject.cpp:133
 msgid "RA/Dec"
-msgstr ""
+msgstr "赤经/赤纬"
 
 #: src/core/StelObject.cpp:145 src/core/StelObject.cpp:149
 #, qt-format
@@ -1064,7 +1064,7 @@ msgstr "方位角/高度角: %1/%2"
 #: src/core/StelObject.cpp:190 src/core/StelObject.cpp:192
 #: src/core/StelObject.cpp:198 src/core/StelObject.cpp:200
 msgid "Ecliptic longitude/latitude"
-msgstr ""
+msgstr "黄经/黄纬"
 
 #: src/core/StelObject.cpp:208 src/core/StelObject.cpp:210
 #, qt-format
@@ -1375,7 +1375,7 @@ msgstr "Stellarium无法获取最新版本信息。"
 #. TRANSLATORS: This message will be displayed for users if current version of Stellarium is bigger than version from stellarium.org
 #: src/gui/HelpDialog.cpp:316
 msgid "Looks like you are using the development version of Stellarium."
-msgstr ""
+msgstr "您正在使用的似乎是Stellarium的开发版本。"
 
 #. TRANSLATORS: This message will be displayed for users if current version of Stellarium is smaller than version from stellarium.org
 #: src/gui/HelpDialog.cpp:321
@@ -1391,7 +1391,7 @@ msgstr ""
 #. TRANSLATORS: This message will be displayed for users if current version of Stellarium is equals with version from stellarium.org
 #: src/gui/HelpDialog.cpp:331
 msgid "This is latest stable version of Stellarium."
-msgstr ""
+msgstr "您当前使用的是Stellarium的最新版本。"
 
 #: src/gui/HelpDialog.cpp:361
 msgid "Stellarium Help"
@@ -1648,51 +1648,51 @@ msgstr "帧每秒"
 #. TRANSLATORS: Short description for Class 1 of the Bortle scale
 #: src/gui/ViewDialog.cpp:331
 msgid "Excellent dark-sky site"
-msgstr ""
+msgstr "完美的黑暗天空观测地"
 
 #. TRANSLATORS: Short description for Class 2 of the Bortle scale
 #: src/gui/ViewDialog.cpp:333
 msgid "Typical truly dark site"
-msgstr ""
+msgstr "典型的真正黑暗观测地"
 
 #. TRANSLATORS: Short description for Class 3 of the Bortle scale
 #: src/gui/ViewDialog.cpp:335
 msgid "Rural sky"
-msgstr ""
+msgstr "乡村的星空"
 
 #. TRANSLATORS: Short description for Class 4 of the Bortle scale
 #: src/gui/ViewDialog.cpp:337
 msgid "Rural/suburban transition"
-msgstr ""
+msgstr "乡村/郊区的过渡"
 
 #. TRANSLATORS: Short description for Class 5 of the Bortle scale
 #: src/gui/ViewDialog.cpp:339
 msgid "Suburban sky"
-msgstr ""
+msgstr "郊区的天空"
 
 #. TRANSLATORS: Short description for Class 6 of the Bortle scale
 #: src/gui/ViewDialog.cpp:341
 msgid "Bright suburban sky"
-msgstr ""
+msgstr "明亮郊区的天空"
 
 #. TRANSLATORS: Short description for Class 7 of the Bortle scale
 #: src/gui/ViewDialog.cpp:343
 msgid "Suburban/urban transition"
-msgstr ""
+msgstr "郊区/城市过渡"
 
 #. TRANSLATORS: Short description for Class 8 of the Bortle scale
 #: src/gui/ViewDialog.cpp:345
 msgid "City sky"
-msgstr ""
+msgstr "城市天空"
 
 #. TRANSLATORS: Short description for Class 9 of the Bortle scale
 #: src/gui/ViewDialog.cpp:347
 msgid "Inner-city sky"
-msgstr ""
+msgstr "市中心的天空"
 
 #: src/gui/ViewDialog.cpp:361
 msgid "The naked-eye limiting magnitude is"
-msgstr ""
+msgstr "祼眼极限星等"
 
 #: src/gui/ViewDialog.cpp:493
 msgid "No description"
@@ -1708,7 +1708,7 @@ msgstr "日常频率"
 
 #: src/gui/ViewDialog.cpp:592
 msgid "Standard Orionids rate"
-msgstr ""
+msgstr "猎户座流星雨的一般速率"
 
 #: src/gui/ViewDialog.cpp:595
 msgid "Standard Perseids rate"
@@ -1716,7 +1716,7 @@ msgstr "标准英仙座流星雨频率"
 
 #: src/gui/ViewDialog.cpp:598
 msgid "Standard Geminids rate"
-msgstr ""
+msgstr "双子座流星雨的一般速率"
 
 #: src/gui/ViewDialog.cpp:601
 msgid "Exceptional Perseid rate"
