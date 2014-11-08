@@ -240,7 +240,7 @@ double EquationOfTime::getSolutionEquationOfTime(const double JDay) const
 
 	double equation = 4*(sunMeanLongitude - 0.0057183 - alpha + get_nutation_longitude(JDay)*cos(get_mean_ecliptical_obliquity(JDay)));
 	// The equation of time is always smaller 20 minutes in absolute value
-	if (std::abs(equation)>20)
+	if (qAbs(equation)>20)
 	{
 		// If absolute value of the equation of time appears to be too large, add 24 hours (1440 minutes) to or subtract it from our result
 		if (equation>0.)
