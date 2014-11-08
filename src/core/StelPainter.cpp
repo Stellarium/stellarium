@@ -544,7 +544,7 @@ void StelPainter::drawText(float x, float y, const QString& str, float angleDeg,
 
 		// Translate/rotate
 		if (!noGravity)
-			angleDeg += prj->defautAngleForGravityText;
+			angleDeg += prj->defaultAngleForGravityText;
 
 		if (std::fabs(angleDeg)>1.f)
 		{
@@ -1357,6 +1357,7 @@ void StelPainter::drawSphericalRegion(const SphericalRegion* poly, SphericalPoly
 			break;
 		case SphericalPolygonDrawModeFill:
 		case SphericalPolygonDrawModeTextureFill:
+		case SphericalPolygonDrawModeTextureFillColormodulated:
 			glEnable(GL_CULL_FACE);
 			// The polygon is already tesselated as triangles
 			if (doSubDivise || prj->intersectViewportDiscontinuity(poly->getBoundingCap()))
