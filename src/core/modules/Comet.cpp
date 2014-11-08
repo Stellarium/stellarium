@@ -1,6 +1,7 @@
 /*
  * Stellarium
  * Copyright (C) 2010 Bogdan Marinov
+ * Copyright (C) 2014 Georg Zotti (Tails)
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -26,6 +27,7 @@
 
 #include "StelTexture.hpp"
 #include "StelTextureMgr.hpp"
+#include "StelToneReproducer.hpp"
 #include "StelTranslator.hpp"
 #include "StelUtils.hpp"
 #include "StelFileMgr.hpp"
@@ -71,6 +73,7 @@ Comet::Comet(const QString& englishName,
 		  true, //halo
 		  pTypeStr),
 	  tailActive(false),
+	  tailBright(false),
 	  dustTailWidthFactor(dustTailWidthFact),
 	  dustTailLengthFactor(dustTailLengthFact),
 	  dustTailBrightnessFactor(dustTailBrightnessFact)
@@ -283,14 +286,6 @@ float Comet::getVMagnitude(const StelCore* core) const
 	return apparentMagnitude;
 }
 
-// Compute the position in the parent Planet coordinate system
-// Actually call the provided function to compute the ecliptical position, and buildup the tails!
-// TBD: THIS SHOULD COME INTO UPDATE()!
-//void Comet::computePosition(const double date)
-//{
-//	Planet::computePosition(date);
-//}
-
 void Comet::update(int deltaTime)
 {
 	Planet::update(deltaTime);
@@ -365,104 +360,81 @@ void Comet::update(int deltaTime)
 			orbit->setUpdateTails(false); // don't update until position has been recalculated elsewhere
 		}
 	}
-	// And also update magnitude and tail extinction here. Enough to do so for every minute.
-//	if (fabs(lastJDextinction-date) > StelCore::JD_MINUTE)
-//	{
-		lastJDextinction = date;
-		// GZ: If we use getVMagnitudeWithExtinction(), a head extincted in the horizon mist can completely hide an otherwise frighteningly long tail.
-		// we must use unextincted mag, but mix/dim with atmosphere/sky brightness.
-		// In addition, light falloff is a bit reduced for better visibility. Power basis should be 0.4, we use 0.6.
-		float magFactor=std::pow(0.6f , getVMagnitude(core));
-		const bool withExtinction=(core->getSkyDrawer()->getFlagHasAtmosphere());
 
-		if (withExtinction)
-		{
-			// Mix with sky brightness and light pollution: This is very ad-hoc, if someone finds a better solution, please go ahead!
-			// Light pollution:
-			float bortleIndexFactor=0.1f * (11 - core->getSkyDrawer()->getBortleScaleIndex());
-			magFactor*= bortleIndexFactor*bortleIndexFactor; // GZ-Guesstimate for light pollution influence
-			// sky brightness: This is about 10 at sunset where bright comet tails should already be visible. Dark night is close to 0.
-			float avgAtmLum=GETSTELMODULE(LandscapeMgr)->getAtmosphereAverageLuminance();
-			float atmLumFactor=(15.0f-avgAtmLum)/15.0f;  if (atmLumFactor<0.05f) atmLumFactor=0.05f;    //atmLumFactor=std::sqrt(atmLumFactor);
-			magFactor*=atmLumFactor*atmLumFactor;
-		}
-		//magFactor*=(gas? 0.9 : dustTailBrightnessFactor); // TBD: empirical adjustment for texture brightness.
-		magFactor=qMin(magFactor, 1.05f); // Limit excessively bright display.
-		float gasMagFactor=0.9*magFactor;
-		float dustMagFactor=dustTailBrightnessFactor*magFactor;
-		Vec3f gasColor(0.15f*gasMagFactor,0.15f*gasMagFactor,0.6f*gasMagFactor);
-		Vec3f dustColor(dustMagFactor, dustMagFactor,0.6f*dustMagFactor);
+	// And also update magnitude and tail brightness/extinction here.
+	const bool withExtinction=(core->getSkyDrawer()->getFlagHasAtmosphere());
 
-		if (magFactor<0.004)
-		{
-			// Far too dim: don't even show tail...
-			tailActive=false;
-			return;
-		}
-
-		if (withExtinction)
-		{
-			Extinction extinction=core->getSkyDrawer()->getExtinction();
-			//int bortle=core->getSkyDrawer()->getBortleScaleIndex();
-			gastailColorArr.clear();
-			dusttailColorArr.clear();
-			for (int i=0; i<gastailVertexArr.size(); ++i)
-			{
-				// Gastail extinction:
-				Vec3d vertAltAz=core->j2000ToAltAz(gastailVertexArr.at(i), StelCore::RefractionOn);
-				vertAltAz.normalize();
-				Q_ASSERT(fabs(vertAltAz.lengthSquared()-1.0) < 0.001);
-				float oneMag=0.0f;
-				extinction.forward(vertAltAz, &oneMag);
-				float extinctionFactor=std::pow(0.4f , oneMag); // * (1.1f-bortle*0.1f); // drop of one magnitude: factor 2.5 or 40%
-				Vec3f thisColor= gasColor*extinctionFactor;
-				gastailColorArr.append(thisColor);
-
-				// dusttail extinction:
-				vertAltAz=core->j2000ToAltAz(dusttailVertexArr.at(i), StelCore::RefractionOn);
-				vertAltAz.normalize();
-				Q_ASSERT(fabs(vertAltAz.lengthSquared()-1.0) < 0.001);
-				oneMag=0.0f;
-				extinction.forward(vertAltAz, &oneMag);
-				extinctionFactor=std::pow(0.4f , oneMag); // * (1.1f-bortle*0.1f); // drop of one magnitude: factor 2.5 or 40%
-				thisColor= dustColor*extinctionFactor;
-				dusttailColorArr.append(thisColor);
-			}
-		}
-		else // no atmosphere: set all vertices to same brightness. TODO: WE MUST CATCH A-TOGGLE!
-		{
-			gastailColorArr.fill(gasColor,   gastailVertexArr.length());
-			dusttailColorArr.fill(dustColor, dusttailVertexArr.length());
-		}
-		qDebug() << "Comet " << getEnglishName() <<  "JD: " << date << "gasR" << gasColor[0] << " dustR" << dustColor[0];
-//	}
-}
-
-/* TEMPLATE from MilkyWay
+	StelToneReproducer* eye = core->getToneReproducer();
+	float lum = core->getSkyDrawer()->surfacebrightnessToLuminance(getVMagnitude(core)+13.0f); // How to calibrate?
+	// Get the luminance scaled between 0 and 1
+	float aLum =eye->adaptLuminanceScaled(lum);
 
 
-if (withExtinction)
-{
-	// We must process the vertices to find geometric altitudes in order to compute vertex colors.
-	// Note that there is a visible boost of extinction for higher Bortle indices. I must reflect that as well.
-	Extinction extinction=core->getSkyDrawer()->getExtinction();
-	vertexArray->colors.clear();
+	// To make comet more apparent in overviews, take field of view into account:
+	const float fov=core->getProjection(core->getAltAzModelViewTransform())->getFov();
+	if (fov>20)
+		aLum*= (fov/20.0f);
 
-	for (int i=0; i<vertexArray->vertex.size(); ++i)
+	// Now inhibit tail drawing if still too dim.
+	if (aLum<0.002f)
 	{
-		Vec3d vertAltAz=core->j2000ToAltAz(vertexArray->vertex.at(i), StelCore::RefractionOn);
-		Q_ASSERT(vertAltAz.lengthSquared()-1.0 < 0.001f);
+		// Far too dim: don't even show tail...
+		tailBright=false;
+		return;
+	} else
+		tailBright=true;
 
-		float oneMag=0.0f;
-		extinction.forward(vertAltAz, &oneMag);
-		float extinctionFactor=std::pow(0.4f , oneMag) * (1.1f-bortle*0.1f); // drop of one magnitude: factor 2.5 or 40%
-		Vec3f thisColor=Vec3f(c[0]*extinctionFactor, c[1]*extinctionFactor, c[2]*extinctionFactor);
-		vertexArray->colors.append(thisColor);
+	// Separate factors, but avoid overly bright tails. I limit to about 0.7 for overlapping both tails which should not exceed full-white.
+	float gasMagFactor=qMin(0.9f*aLum, 0.7f);
+	float dustMagFactor=qMin(dustTailBrightnessFactor*aLum, 0.7f);
+
+	Vec3f gasColor(0.15f*gasMagFactor,0.35f*gasMagFactor,0.6f*gasMagFactor); // Orig color 0.15/0.15/0.6
+	Vec3f dustColor(dustMagFactor, dustMagFactor,0.6f*dustMagFactor);
+
+	if (withExtinction)
+	{
+		Extinction extinction=core->getSkyDrawer()->getExtinction();
+
+		// Not only correct the color values for extinction, but for twilight conditions, also make tail end less visible.
+		// I consider sky brightness over 1cd/m^2 as reason to shorten tail.
+		// Just counting through the vertices might make a spiral apperance. Maybe even better than stackwise? Let's see...
+		float avgAtmLum=GETSTELMODULE(LandscapeMgr)->getAtmosphereAverageLuminance();
+		const float brightnessDecreasePerVertexFromHead=1.0f/(COMET_TAIL_SLICES*COMET_TAIL_STACKS)  * avgAtmLum;
+		float brightnessPerVertexFromHead=1.0f;
+
+		gastailColorArr.clear();
+		dusttailColorArr.clear();
+		for (int i=0; i<gastailVertexArr.size(); ++i)
+		{
+			// Gastail extinction:
+			Vec3d vertAltAz=core->j2000ToAltAz(gastailVertexArr.at(i), StelCore::RefractionOn);
+			vertAltAz.normalize();
+			Q_ASSERT(fabs(vertAltAz.lengthSquared()-1.0) < 0.001);
+			float oneMag=0.0f;
+			extinction.forward(vertAltAz, &oneMag);
+			float extinctionFactor=std::pow(0.4f, oneMag); // drop of one magnitude: factor 2.5 or 40%
+			gastailColorArr.append(gasColor*extinctionFactor* brightnessPerVertexFromHead);
+
+			// dusttail extinction:
+			vertAltAz=core->j2000ToAltAz(dusttailVertexArr.at(i), StelCore::RefractionOn);
+			vertAltAz.normalize();
+			Q_ASSERT(fabs(vertAltAz.lengthSquared()-1.0) < 0.001);
+			oneMag=0.0f;
+			extinction.forward(vertAltAz, &oneMag);
+			extinctionFactor=std::pow(0.4f, oneMag); // drop of one magnitude: factor 2.5 or 40%
+			dusttailColorArr.append(dustColor*extinctionFactor * brightnessPerVertexFromHead);
+
+			brightnessPerVertexFromHead-=brightnessDecreasePerVertexFromHead;
+		}
 	}
+	else // no atmosphere: set all vertices to same brightness.
+	{
+		gastailColorArr.fill(gasColor,   gastailVertexArr.length());
+		dusttailColorArr.fill(dustColor, dusttailVertexArr.length());
+	}
+	qDebug() << "Comet " << getEnglishName() <<  "JD: " << date << "gasR" << gasColor[0] << " dustR" << dustColor[0];
 }
-else
-	vertexArray->colors.fill(Vec3f(c[0], c[1], c[2]));
-*/
+
 
 
 // Draw the Comet and all the related infos: name, circle etc... GZ: Taken from Planet.cpp 2013-11-05 and extended
@@ -476,7 +448,7 @@ void Comet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFont
 	}
 
 	// If comet is too faint to be seen, don't bother rendering. (Massive speedup if people have hundreds of comets!)
-	if ((getVMagnitude(core)-2.0f) > core->getSkyDrawer()->getLimitMagnitude())
+	if ((getVMagnitude(core)+2.0f) > core->getSkyDrawer()->getLimitMagnitude())
 	{
 		return;
 	}
@@ -520,7 +492,7 @@ void Comet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFont
 		draw3dModel(core,transfo,screenSz);
 	}
 	// but tails should also be drawn if comet core is off-screen...
-	if (tailActive)
+	if (tailActive && tailBright)
 	{
 		drawTail(core,transfo,true);  // gas tail
 		drawTail(core,transfo,false); // dust tail
@@ -531,30 +503,23 @@ void Comet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFont
 }
 
 void Comet::drawTail(StelCore* core, StelProjector::ModelViewTranformP transfo, bool gas)
-{
+{	
 	StelPainter* sPainter = new StelPainter(core->getProjection(transfo));
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_ONE, GL_ONE);
 	glDisable(GL_CULL_FACE);
 
-
 	tailTexture->bind();
 
-	// Maybe: TODO: If tail is short, use one color. If tail is long, compute vertex-based extinction with the separate color array.
-	// It appears safe to assume that we can compute extinction "stack"-wise (saves 15/16!)
 	if (gas) {
-		//sPainter->setColor(0.15f*magFactor,0.15f*magFactor,0.6f*magFactor);
 		sPainter->setArrays((Vec3d*)gastailVertexArr.constData(), (Vec2f*)tailTexCoordArr.constData(), (Vec3f*)gastailColorArr.constData());
 		sPainter->drawFromArray(StelPainter::Triangles, tailIndices.size(), 0, true, tailIndices.constData());
 
 	} else {
-		//sPainter->setColor(magFactor, magFactor,0.6f*magFactor);
 		sPainter->setArrays((Vec3d*)dusttailVertexArr.constData(), (Vec2f*)tailTexCoordArr.constData(), (Vec3f*)dusttailColorArr.constData());
 		sPainter->drawFromArray(StelPainter::Triangles, tailIndices.size(), 0, true, tailIndices.constData());
 	}
 	glDisable(GL_BLEND);
-
-
 
 	if (sPainter)
 		delete sPainter;
@@ -579,11 +544,11 @@ void Comet::drawComa(StelCore* core, StelProjector::ModelViewTranformP transfo)
 	float minSkyMag=core->getSkyDrawer()->getLimitMagnitude();
 	float mag100pct=minSkyMag-6.0f; // should be 5, but let us draw it a bit brighter.
 	float magDrop=getVMagnitudeWithExtinction(core)-mag100pct;
-	float magFactor=std::pow(0.6f , magDrop);
-	magFactor=qMin(magFactor, 2.0f); // Limit excessively bright display.
+	float magFactor=std::pow(0.4f , magDrop);
+	magFactor=qMin(magFactor, 1.0f); // Limit excessively bright display.
 
 	comaTexture->bind();
-	sPainter->setColor(magFactor,magFactor,0.6f*magFactor);
+	sPainter->setColor(0.3f*magFactor,0.7*magFactor,magFactor);
 	sPainter->setArrays((Vec3d*)comaVertexArr.constData(), (Vec2f*)comaTexCoordArr.constData());
 	sPainter->drawFromArray(StelPainter::Triangles, comaVertexArr.size()/3);
 
@@ -619,9 +584,7 @@ void Comet::computeComa(const float diameter)
 void Comet::computeParabola(const float parameter, const float radius, const float zshift,
 			    QVector<Vec3d>& vertexArr, QVector<float>& texCoordArr, QVector<unsigned short> &indices, const float xOffset) {
 
-	// GZ: keep the array and replace contents. However, using replace() is only slightly faster.
-//	if (vertexArr.length() < (3*(COMET_TAIL_SLICES*COMET_TAIL_STACKS+1)))
-//		vertexArr.resize(3*(COMET_TAIL_SLICES*COMET_TAIL_STACKS+1));
+	// keep the array and replace contents. However, using replace() is only slightly faster.
 	if (vertexArr.length() < ((COMET_TAIL_SLICES*COMET_TAIL_STACKS+1)))
 		vertexArr.resize((COMET_TAIL_SLICES*COMET_TAIL_STACKS+1));
 	if (createTailIndices) indices.clear();
@@ -639,7 +602,6 @@ void Comet::computeParabola(const float parameter, const float radius, const flo
 		ya[i]=cos(i*da);
 	}
 	
-	//vertexArr.replace(0, 0.0); vertexArr.replace(1, 0.0); vertexArr.replace(2, zshift);
 	vertexArr.replace(0, Vec3d(0.0, 0.0, zshift));
 	int vertexArrIndex=1;
 	if (createTailTextureCoords) texCoordArr << 0.5f << 0.5f;
@@ -653,8 +615,6 @@ void Comet::computeParabola(const float parameter, const float radius, const flo
 			x=xa[i]*radius*ring/COMET_TAIL_STACKS;
 			y=ya[i]*radius*ring/COMET_TAIL_STACKS;
 			vertexArr.replace(vertexArrIndex++, Vec3d(x+xShift, y, z));
-			//vertexArr.replace(vertexArrIndex++, y);
-			//vertexArr.replace(vertexArrIndex++, z);
 			if (createTailTextureCoords) texCoordArr << 0.5+ 0.5*x/radius << 0.5+0.5*y/radius;
 		}
 	}
@@ -696,5 +656,5 @@ bool Comet::createTailIndices=true;
 bool Comet::createTailTextureCoords=true;
 StelTextureSP Comet::comaTexture;
 StelTextureSP Comet::tailTexture;
-QVector<float> Comet::tailTexCoordArr; // computed only once FOR ALL COMETS!
-QVector<unsigned short> Comet::tailIndices; // computed only once FOR ALL COMETS!
+QVector<float> Comet::tailTexCoordArr; // computed only once for all Comets.
+QVector<unsigned short> Comet::tailIndices; // computed only once for all Comets.
