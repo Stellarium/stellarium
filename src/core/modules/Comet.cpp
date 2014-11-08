@@ -362,7 +362,7 @@ void Comet::update(int deltaTime)
 	}
 
 	// And also update magnitude and tail brightness/extinction here.
-	const bool withExtinction=(core->getSkyDrawer()->getFlagHasAtmosphere());
+	const bool withAtmosphere=(core->getSkyDrawer()->getFlagHasAtmosphere());
 
 	StelToneReproducer* eye = core->getToneReproducer();
 	float lum = core->getSkyDrawer()->surfacebrightnessToLuminance(getVMagnitude(core)+13.0f); // How to calibrate?
@@ -391,14 +391,15 @@ void Comet::update(int deltaTime)
 	Vec3f gasColor(0.15f*gasMagFactor,0.35f*gasMagFactor,0.6f*gasMagFactor); // Orig color 0.15/0.15/0.6
 	Vec3f dustColor(dustMagFactor, dustMagFactor,0.6f*dustMagFactor);
 
-	if (withExtinction)
+	if (withAtmosphere)
 	{
 		Extinction extinction=core->getSkyDrawer()->getExtinction();
 
 		// Not only correct the color values for extinction, but for twilight conditions, also make tail end less visible.
 		// I consider sky brightness over 1cd/m^2 as reason to shorten tail.
+		// Below this brightness, the tail brightness loss by this method is insignificant:
 		// Just counting through the vertices might make a spiral apperance. Maybe even better than stackwise? Let's see...
-		float avgAtmLum=GETSTELMODULE(LandscapeMgr)->getAtmosphereAverageLuminance();
+		const float avgAtmLum=GETSTELMODULE(LandscapeMgr)->getAtmosphereAverageLuminance();
 		const float brightnessDecreasePerVertexFromHead=1.0f/(COMET_TAIL_SLICES*COMET_TAIL_STACKS)  * avgAtmLum;
 		float brightnessPerVertexFromHead=1.0f;
 
@@ -434,7 +435,6 @@ void Comet::update(int deltaTime)
 	}
 	qDebug() << "Comet " << getEnglishName() <<  "JD: " << date << "gasR" << gasColor[0] << " dustR" << dustColor[0];
 }
-
 
 
 // Draw the Comet and all the related infos: name, circle etc... GZ: Taken from Planet.cpp 2013-11-05 and extended
@@ -539,14 +539,11 @@ void Comet::drawComa(StelCore* core, StelProjector::ModelViewTranformP transfo)
 	glBlendFunc(GL_ONE, GL_ONE);
 	glDisable(GL_CULL_FACE);
 
-	// For the coma, we can use global extinction by atmosphere.
-	// In addition, light falloff is a bit reduced for better visibility. Power basis should be 0.4, we use 0.6.
-	float minSkyMag=core->getSkyDrawer()->getLimitMagnitude();
-	float mag100pct=minSkyMag-6.0f; // should be 5, but let us draw it a bit brighter.
-	float magDrop=getVMagnitudeWithExtinction(core)-mag100pct;
-	float magFactor=std::pow(0.4f , magDrop);
-	magFactor=qMin(magFactor, 1.0f); // Limit excessively bright display.
-
+	StelToneReproducer* eye = core->getToneReproducer();
+	float lum = core->getSkyDrawer()->surfacebrightnessToLuminance(getVMagnitudeWithExtinction(core)+11.0f); // How to calibrate?
+	// Get the luminance scaled between 0 and 1
+	float aLum =eye->adaptLuminanceScaled(lum);
+	float magFactor=qMin(qMax(aLum, 0.25f), 2.0f);
 	comaTexture->bind();
 	sPainter->setColor(0.3f*magFactor,0.7*magFactor,magFactor);
 	sPainter->setArrays((Vec3d*)comaVertexArr.constData(), (Vec2f*)comaTexCoordArr.constData());
