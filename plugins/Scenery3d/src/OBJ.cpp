@@ -1116,7 +1116,7 @@ bool OBJ::importMaterials(const QString& filename)
                 //TODO convert to QString
                 std::string tex;
                 parseTextureString(buffer, tex);
-                pMaterial->textureName.fromStdString(tex);
+		pMaterial->textureName = QString::fromStdString(tex);
             }
             else if (strstr(buffer, "map_bump") != 0)
             {
@@ -1125,7 +1125,7 @@ bool OBJ::importMaterials(const QString& filename)
 
                 std::string bump;
                 parseTextureString(buffer, bump);
-                pMaterial->bumpMapName.fromStdString(bump);
+		pMaterial->bumpMapName = QString::fromStdString(bump);
             }
             else if (strstr(buffer, "map_height") != 0)
             {
@@ -1134,7 +1134,7 @@ bool OBJ::importMaterials(const QString& filename)
 
                 std::string height;
                 parseTextureString(buffer, height);
-                pMaterial->heightMapName.fromStdString(height);
+		pMaterial->heightMapName = QString::fromStdString(height);
             }
             else
             {
