@@ -124,10 +124,10 @@ private:
 
     void drawObjModel(StelCore* core);
     void generateShadowMap(StelCore* core);
-    void generateCubeMap(StelCore* core);
-    void generateCubeMap_drawScene(StelPainter& painter);
-    void generateCubeMap_drawSceneWithShadows(StelPainter& painter);
-    void drawArrays(StelPainter& painter, bool textures=true);
+    void generateCubeMap();
+    void generateCubeMap_drawScene();
+    void generateCubeMap_drawSceneWithShadows();
+    void drawArrays(bool textures=true);
     void drawFromCubeMap(StelCore* core);
 
     //! @return height at -absolutePosition, which is the current eye point.

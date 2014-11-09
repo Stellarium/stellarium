@@ -773,8 +773,10 @@ float Scenery3d::groundHeight()
     }
 }
 
-void Scenery3d::drawArrays(StelPainter& painter, bool textures)
+void Scenery3d::drawArrays(bool textures)
 {
+	//TODO FS: ditch fixed-function PL and client side state, replace with shader-based OpenGL and buffers!
+
     drawn = 0;
 
     const GLfloat zero[] = {0.0f, 0.0f, 0.0f, 1.0f};
@@ -831,15 +833,28 @@ void Scenery3d::drawArrays(StelPainter& painter, bool textures)
             glLightModeli(GL_LIGHT_MODEL_LOCAL_VIEWER, 0);
         }        
 
+	int stride = objModel->getVertexSize();
+	const OBJ::Vertex* vtxArray = objModel->getVertexArray();
+
         if(pStelModel->pMaterial->texture)
         {
-            painter.setArrays(&objModel->getVertexArray()->position, &objModel->getVertexArray()->texCoord, NULL, &objModel->getVertexArray()->normal);
-        } else {
-            painter.setArrays(&objModel->getVertexArray()->position, NULL, NULL, &objModel->getVertexArray()->normal);
-        }
+		glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+		glTexCoordPointer(2, GL_FLOAT, stride, &vtxArray->texCoord);
+	}
 
-        //TODO FS: fix
-        //painter.drawFromArray(StelPainter::Triangles, pStelModel->triangleCount*3, pStelModel->startIndex, false, objModel->getIndexArray(), objModel->getVertexSize());
+	glEnableClientState(GL_VERTEX_ARRAY);
+	glVertexPointer(3, GL_DOUBLE, stride, &vtxArray->position);
+	glEnableClientState(GL_NORMAL_ARRAY);
+	glNormalPointer(GL_FLOAT, stride, &vtxArray->normal);
+
+	glDrawElements(GL_TRIANGLES, pStelModel->triangleCount * 3, GL_UNSIGNED_INT, objModel->getIndexArray() + pStelModel->startIndex);
+
+	if(pStelModel->pMaterial->texture)
+	{
+		glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+	}
+	glDisableClientState(GL_VERTEX_ARRAY);
+	glDisableClientState(GL_NORMAL_ARRAY);
 
         if(pMaterial->illum == OBJ::TRANSLUCENT)
         {
@@ -854,8 +869,8 @@ void Scenery3d::drawArrays(StelPainter& painter, bool textures)
 
     }
 
-    cFrust.drawFrustum();
-    renderFrustum(painter);
+    //cFrust.drawFrustum();
+    //renderFrustum(painter);
     //renderSceneAABB(painter);
 
 //    for(unsigned int i=0; i<focusBodies.size() && textures; i++)
@@ -972,12 +987,12 @@ void Scenery3d::sendToShader(const OBJ::StelModel* pStelModel, Effect cur, bool&
     }
 }
 
-void Scenery3d::generateCubeMap_drawScene(StelPainter& painter)
+void Scenery3d::generateCubeMap_drawScene()
 {
     //Bind shader based on selected effect flags
     bindShader();
 
-    drawArrays(painter, true);
+    drawArrays(true);
 
     //Unbind
     glUseProgram(0);
@@ -997,7 +1012,7 @@ void Scenery3d::bindShader()
     if(curShader != 0) curShader->bind();
 }
 
-void Scenery3d::generateCubeMap_drawSceneWithShadows(StelPainter& painter)
+void Scenery3d::generateCubeMap_drawSceneWithShadows()
 {    
     //Bind the shader
     bindShader();
@@ -1041,7 +1056,7 @@ void Scenery3d::generateCubeMap_drawSceneWithShadows(StelPainter& painter)
     glBindTexture(GL_TEXTURE_2D, 0);
 
     //Draw
-    drawArrays(painter, true);
+    drawArrays(true);
 
     //Done. Unbind shader
     glUseProgram(0);
@@ -1299,7 +1314,7 @@ void Scenery3d::analyzeViewSamples(StelPainter &painter)
     glClear(GL_DEPTH_BUFFER_BIT);
 
     //Draw the scene
-    drawArrays(painter, false);
+    drawArrays(false);
 
     //Switch to the minMax reduction shader
     minMaxShader->bind();
@@ -1392,9 +1407,6 @@ void Scenery3d::generateShadowMap(StelCore* core)
     //Nothing to draw
     if(!hasModels)
         return;
-
-    const StelProjectorP prj = core->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
-    StelPainter painter(prj);
 
     //Adjust the frustum to the scene before analyzing the view samples
     adjustFrustum();
@@ -1506,7 +1518,7 @@ void Scenery3d::generateShadowMap(StelCore* core)
             glClear(GL_DEPTH_BUFFER_BIT);
 
             //Draw the scene
-            drawArrays(painter, false);
+	    drawArrays(false);
 
             //Store the new projection * lightView for later
             glMatrixMode(GL_PROJECTION);
@@ -1672,13 +1684,10 @@ Scenery3d::ShadowCaster  Scenery3d::setupLights(float &ambientBrightness, float 
     return shadowcaster;
 }
 
-void Scenery3d::generateCubeMap(StelCore* core)
+void Scenery3d::generateCubeMap()
 {
     if(!hasModels)
         return;
-
-    const StelProjectorP prj = core->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
-    StelPainter painter(prj);
 
     for (int i=0; i<6; i++) {
         if (cubeMap[i] == NULL) {
@@ -1735,8 +1744,8 @@ void Scenery3d::generateCubeMap(StelCore* core)
     #define DRAW_SCENE  glLightfv(GL_LIGHT0, GL_POSITION, LightPosition);\
                         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);\
                         setLights(ambientBrightness, directionalBrightness);\
-                        if(shadows){generateCubeMap_drawSceneWithShadows(painter);}\
-                        else{generateCubeMap_drawScene(painter);}\
+			if(shadows){generateCubeMap_drawSceneWithShadows();}\
+			else{generateCubeMap_drawScene();}\
 
     //front
     glPushMatrix();
@@ -1816,6 +1825,8 @@ void Scenery3d::drawFromCubeMap(StelCore* core)
     glEnable(GL_TEXTURE_2D);
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    //depth test and culling is necessary for correct display,
+    //because the cube faces can be projected in quite "weird" ways
     glEnable(GL_DEPTH_TEST);
     glDepthFunc(GL_LESS);
     glDepthMask(GL_TRUE);
@@ -1823,30 +1834,36 @@ void Scenery3d::drawFromCubeMap(StelCore* core)
 
     glClear(GL_DEPTH_BUFFER_BIT);
 
+    glActiveTexture(GL_TEXTURE0);
+    painter.setColor(1,0,1,1);
+
     //Show some debug aids
     if(debugEnabled)
     {
         float debugTextureSize = 128.0f;
         const QFont font("Courier", 12);
-        painter.setFont(font);
+	painter.setFont(font);
 
         float screen_x = prj->getViewportWidth() - debugTextureSize - 30;
         float screen_y = prj->getViewportHeight() - debugTextureSize - 30;
 
-        for(int i=0; i<frustumSplits; i++)
-        {
-            std::string cap = "SM "+toString(i);
-            painter.drawText(screen_x+70, screen_y+130, QString(cap.c_str()));
+	if(shadowsEnabled)
+	{
+		for(int i=0; i<frustumSplits; i++)
+		{
+			std::string cap = "SM "+toString(i);
+			painter.drawText(screen_x+70, screen_y+130, QString(cap.c_str()));
 
-            glBindTexture(GL_TEXTURE_2D, shadowMapsArray[i]);
-            painter.drawSprite2dMode(screen_x, screen_y, debugTextureSize);
+			glBindTexture(GL_TEXTURE_2D, shadowMapsArray[i]);
+			painter.drawSprite2dMode(screen_x, screen_y, debugTextureSize);
 
-            int tmp = screen_y - debugTextureSize-30;
-            painter.drawText(screen_x-100, tmp, QString("zNear: %1").arg(frustumArray[i].zNear, 7, 'f', 2));
-            painter.drawText(screen_x-100, tmp-15.0f, QString("zFar: %1").arg(frustumArray[i].zFar, 7, 'f', 2));
+			int tmp = screen_y - debugTextureSize-30;
+			painter.drawText(screen_x-100, tmp, QString("zNear: %1").arg(frustumArray[i].zNear, 7, 'f', 2));
+			painter.drawText(screen_x-100, tmp-15.0f, QString("zFar: %1").arg(frustumArray[i].zFar, 7, 'f', 2));
 
-            screen_x -= 280;
-        }
+			screen_x -= 280;
+		}
+	}
 
         painter.drawText(screen_x+250.0f, screen_y-200.0f, QString("Splitweight: %1").arg(splitWeight, 3, 'f', 2));
     }
@@ -1867,29 +1884,32 @@ void Scenery3d::drawFromCubeMap(StelCore* core)
         painter.drawSprite2dMode(screen_x, screen_y, debugTextureSize);
     }
 
+    //painter's color is multiplied with the texture
+    painter.setColor(1.0f,1.0f,1.0f,1.0f);
+
     //front
     glBindTexture(GL_TEXTURE_2D, cubeMap[0]->texture());
-    painter.drawSphericalTriangles(cubePlaneFront, true, NULL, false);
+    painter.drawSphericalTriangles(cubePlaneFront, true, false, NULL, false);
 
     //right
     glBindTexture(GL_TEXTURE_2D, cubeMap[1]->texture());
-    painter.drawSphericalTriangles(cubePlaneRight, true, NULL, false);
+    painter.drawSphericalTriangles(cubePlaneRight, true, false, NULL, false);
 
     //left
     glBindTexture(GL_TEXTURE_2D, cubeMap[2]->texture());
-    painter.drawSphericalTriangles(cubePlaneLeft, true, NULL, false);
+    painter.drawSphericalTriangles(cubePlaneLeft, true, false, NULL, false);
 
     //back
     glBindTexture(GL_TEXTURE_2D, cubeMap[3]->texture());
-    painter.drawSphericalTriangles(cubePlaneBack, true, NULL, false);
+    painter.drawSphericalTriangles(cubePlaneBack, true, false, NULL, false);
 
     //top
     glBindTexture(GL_TEXTURE_2D, cubeMap[4]->texture());
-    painter.drawSphericalTriangles(cubePlaneTop, true, NULL, false);
+    painter.drawSphericalTriangles(cubePlaneTop, true, false, NULL, false);
 
     //bottom
     glBindTexture(GL_TEXTURE_2D, cubeMap[5]->texture());
-    painter.drawSphericalTriangles(cubePlaneBottom, true, NULL, false);
+    painter.drawSphericalTriangles(cubePlaneBottom, true, false, NULL, false);
 
     glDisable(GL_CULL_FACE);
     glDisable(GL_TEXTURE_2D);
@@ -1903,7 +1923,8 @@ void Scenery3d::drawObjModel(StelCore* core) // for Perspective Projection only!
         return;
 
     const StelProjectorP prj = core->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
-    StelPainter painter(prj);
+
+    //TODO FS remove matrix stack, replace with manual MV and P matrices
 
     //glEnable(GL_MULTISAMPLE); // enabling multisampling aka Anti-Aliasing
     glEnable(GL_BLEND);
@@ -1956,9 +1977,9 @@ void Scenery3d::drawObjModel(StelCore* core) // for Perspective Projection only!
     //testMethod();
     //GZ: The following calls apparently require the full cubemap. TODO: Verify and simplify
     if (shadows) {
-        generateCubeMap_drawSceneWithShadows(painter);
+	generateCubeMap_drawSceneWithShadows();
     } else {
-        generateCubeMap_drawScene(painter);
+	generateCubeMap_drawScene();
     }
 
     glMatrixMode(GL_MODELVIEW);
@@ -1983,6 +2004,7 @@ void Scenery3d::drawCoordinatesText(StelCore* core)
     StelPainter painter(prj);
     const QFont font("Courier", 12);
     painter.setFont(font);
+    painter.setColor(1.0f,0.0f,1.0f);
     float screen_x = prj->getViewportWidth()  - 240.0f;
     float screen_y = prj->getViewportHeight() -  60.0f;
     QString str;
@@ -2234,7 +2256,7 @@ void Scenery3d::draw(StelCore* core)
 {
     if (shadowsEnabled)
     {
-        generateShadowMap(core);
+	generateShadowMap(core);
     }
 
     if (core->getCurrentProjectionType() == StelCore::ProjectionPerspective)
@@ -2243,7 +2265,7 @@ void Scenery3d::draw(StelCore* core)
     }
     else
     {
-        generateCubeMap(core);
+	generateCubeMap();
         drawFromCubeMap(core);
     }
     if (textEnabled) drawCoordinatesText(core);
