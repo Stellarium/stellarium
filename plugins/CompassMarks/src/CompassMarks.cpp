@@ -123,7 +123,7 @@ void CompassMarks::draw(StelCore* core)
 {
 	if (markFader.getInterstate() <= 0.0) { return; }
 
-	Vec3d pos;
+	Vec3d pos, screenPos;
 	StelProjectorP prj = core->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
 	StelPainter painter(prj);
 	painter.setFont(font);
@@ -155,9 +155,13 @@ void CompassMarks::draw(StelCore* core)
 			h = -0.01;  // the size of the mark every 5 degrees
 		}
 
-		glDisable(GL_TEXTURE_2D);
-		painter.drawGreatCircleArc(pos, Vec3d(pos[0], pos[1], h), NULL);		
-		glEnable(GL_TEXTURE_2D);
+		// Limit arcs to those that are visible for improved performance
+		if (prj->project(pos, screenPos) && 
+		     screenPos[0]>prj->getViewportPosX() && screenPos[0] < prj->getViewportPosX() + prj->getViewportWidth()) {
+			glDisable(GL_TEXTURE_2D);
+			painter.drawGreatCircleArc(pos, Vec3d(pos[0], pos[1], h), NULL);
+			glEnable(GL_TEXTURE_2D);
+		}
 	}
 	// OpenGL ES 2.0 doesn't have GL_LINE_SMOOTH
 	// glDisable(GL_LINE_SMOOTH);
