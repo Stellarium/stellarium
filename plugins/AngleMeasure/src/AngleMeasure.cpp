@@ -189,12 +189,10 @@ void AngleMeasure::drawOne(StelCore *core, const StelCore::FrameType frameType, 
 	StelPainter painter(prj);
 	painter.setFont(font);
 
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	glEnable(GL_BLEND);
 	if (lineVisible.getInterstate() > 0.000001f)
 	{
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-		glEnable(GL_BLEND);
-		glEnable(GL_TEXTURE_2D);
-
 		Vec3d xy;
 		QString displayedText;
 		if (frameType==StelCore::FrameEquinoxEqu)
@@ -221,11 +219,9 @@ void AngleMeasure::drawOne(StelCore *core, const StelCore::FrameType frameType, 
 				painter.drawText(xy[0], xy[1], displayedText, 0, 15, -5);
 			}
 		}
-
-		glDisable(GL_TEXTURE_2D);
 		// OpenGL ES 2.0 doesn't have GL_LINE_SMOOTH
-		// glEnable(GL_LINE_SMOOTH);
-		glEnable(GL_BLEND);
+		if (QOpenGLContext::currentContext()->format().renderableType()==QSurfaceFormat::OpenGL)
+			glEnable(GL_LINE_SMOOTH);
 
 		// main line is a great circle
 		painter.setColor(lineColor[0], lineColor[1], lineColor[2], lineVisible.getInterstate());
@@ -245,6 +241,9 @@ void AngleMeasure::drawOne(StelCore *core, const StelCore::FrameType frameType, 
 			painter.drawGreatCircleArc(perp1StartPointHor, perp1EndPointHor, NULL);
 			painter.drawGreatCircleArc(perp2StartPointHor, perp2EndPointHor, NULL);
 		}
+		// OpenGL ES 2.0 doesn't have GL_LINE_SMOOTH
+		if (QOpenGLContext::currentContext()->format().renderableType()==QSurfaceFormat::OpenGL)
+			glDisable(GL_LINE_SMOOTH);
 	}
 	if (messageFader.getInterstate() > 0.000001f)
 	{
@@ -258,8 +257,7 @@ void AngleMeasure::drawOne(StelCore *core, const StelCore::FrameType frameType, 
 		y -= ls;
 		painter.drawText(x, y, messageRightButton);
 	}
-
-
+	glDisable(GL_BLEND);
 }
 
 //! Draw any parts on the screen which are for our module
@@ -282,13 +280,6 @@ QString AngleMeasure::calculatePositionAngle(const Vec3d p1, const Vec3d p2) con
 	double y = cos(p2.latitude())*sin(p2.longitude()-p1.longitude());
 	double x = cos(p1.latitude())*sin(p2.latitude()) - sin(p1.latitude())*cos(p2.latitude())*cos(p2.longitude()-p1.longitude());
 	double r = std::atan2(y,x);
-	// GZ ATAN2 makes many tests unnecessary...
-//	if (x<0)
-//		r += M_PI;
-//	if (y<0)
-//		r += 2*M_PI;
-//	if (r>(2*M_PI))
-//		r -= 2*M_PI;
 	if (r<0)
 		r+= 2*M_PI;
 
@@ -412,7 +403,7 @@ void AngleMeasure::calculateEndsOneLine(const Vec3d start, const Vec3d end, Vec3
 	angle = start.angle(end);
 }
 
-// GZ Misnomer! should be called formatAngleString()
+// Misnomer! should be called formatAngleString()
 QString AngleMeasure::calculateAngle(bool horizontal) const
 {
 	unsigned int d, m;
