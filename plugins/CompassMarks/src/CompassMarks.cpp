@@ -133,7 +133,8 @@ void CompassMarks::draw(StelCore* core)
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glEnable(GL_BLEND);
 	// OpenGL ES 2.0 doesn't have GL_LINE_SMOOTH
-	// glEnable(GL_LINE_SMOOTH);
+	if (QOpenGLContext::currentContext()->format().renderableType()==QSurfaceFormat::OpenGL)
+		glEnable(GL_LINE_SMOOTH);
 
 	for(int i=0; i<360; i++)
 	{
@@ -158,13 +159,15 @@ void CompassMarks::draw(StelCore* core)
 		// Limit arcs to those that are visible for improved performance
 		if (prj->project(pos, screenPos) && 
 		     screenPos[0]>prj->getViewportPosX() && screenPos[0] < prj->getViewportPosX() + prj->getViewportWidth()) {
-			glDisable(GL_TEXTURE_2D);
+			// This has been disabled above already...
+			//glDisable(GL_TEXTURE_2D);
 			painter.drawGreatCircleArc(pos, Vec3d(pos[0], pos[1], h), NULL);
-			glEnable(GL_TEXTURE_2D);
+			//glEnable(GL_TEXTURE_2D);
 		}
 	}
 	// OpenGL ES 2.0 doesn't have GL_LINE_SMOOTH
-	// glDisable(GL_LINE_SMOOTH);
+	if (QOpenGLContext::currentContext()->format().renderableType()==QSurfaceFormat::OpenGL)
+		glDisable(GL_LINE_SMOOTH);
 	glDisable(GL_BLEND);
 	glEnable(GL_TEXTURE_2D);
 
