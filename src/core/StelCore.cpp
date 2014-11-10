@@ -786,11 +786,12 @@ void StelCore::returnToHome()
 		moveObserverTo(loc, 0.);
 
 	PlanetP p = GETSTELMODULE(SolarSystem)->searchByEnglishName(loc.planetName);
+	QSettings* conf = StelApp::getInstance().getSettings();
 
 	LandscapeMgr* landscapeMgr = GETSTELMODULE(LandscapeMgr);
 	landscapeMgr->setCurrentLandscapeID(landscapeMgr->getDefaultLandscapeID());
-	landscapeMgr->setFlagAtmosphere(p->hasAtmosphere());
-	landscapeMgr->setFlagFog(p->hasAtmosphere());
+	landscapeMgr->setFlagAtmosphere(p->hasAtmosphere() && conf->value("landscape/flag_atmosphere", true).toBool());
+	landscapeMgr->setFlagFog(p->hasAtmosphere() && conf->value("landscape/flag_fog", true).toBool());
 
 	GETSTELMODULE(StelObjectMgr)->unSelect();
 
