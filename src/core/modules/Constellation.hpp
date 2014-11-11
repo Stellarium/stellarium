@@ -37,8 +37,12 @@ class StelPainter;
 //! @class Constellation
 //! The Constellation class models a grouping of stars in a Sky Culture.
 //! Each Constellation consists of a list of stars identified by their
-//! Hipparcos catalogue numbers, a name and optionally an abbreviated name,
-//! boundary shape and an artistic pictorial representation.
+//! @var abbreviation and Hipparcos catalogue numbers (taken from @file: constellationship.fab),
+//! another entry in @file constellation_names.eng.fab with the defining abbreviated name,
+//! @var nativeName, and translatable @var englishName,
+//! boundary shape from @file constellations_boundaries.dat and an (optional) artistic pictorial representation.
+//! GZ NEW: The @var nativeName should be accessible in a GUI option, so that e.g. original names as written in a
+//! concrete book where a skyculture has been taken from can be assured even when translation is available.
 class Constellation : public StelObject
 {
 	friend class ConstellationMgr;
@@ -50,9 +54,9 @@ private:
 	//! Get a string with data about the Constellation.
 	//! Constellations support the following InfoStringGroup flags:
 	//! - Name
-	//! @param core the Stelore object
+	//! @param core the StelCore object
 	//! @param flags a set of InfoStringGroup items to include in the return value.
-	//! @return a QString a description of the Planet.
+	//! @return a QString a description of the constellation.
 	virtual QString getInfoString(const StelCore*, const InfoStringGroup& flags) const
 	{
 		if (flags&Name) return getNameI18n() + "(" + getShortName() + ")";
@@ -70,8 +74,8 @@ private:
 
 	//! @param record string containing the following whitespace
 	//! separated fields: abbreviation - a three character abbreviation
-	//! for the constellation, a number of lines, and a list of Hipparcos
-	//! catalogue numbers which, when connected form the lines of the
+	//! for the constellation, a number of lines (pairs), and a list of Hipparcos
+	//! catalogue numbers which, when connected pairwise, form the lines of the
 	//! constellation.
 	//! @param starMgr a pointer to the StarManager object.
 	//! @return false if can't parse record, else true.
@@ -104,10 +108,10 @@ private:
 	//! Get the short name for the Constellation (returns the abbreviation).
 	QString getShortName() const {return abbreviation;}
 	//! Draw the lines for the Constellation.
-	//! This method uses the coords of the stars (optimized for use thru
+	//! This method uses the coords of the stars (optimized for use through
 	//! the class ConstellationMgr only).
 	void drawOptim(StelPainter& sPainter, const StelCore* core, const SphericalCap& viewportHalfspace) const;
-	//! Draw the art texture, optimized function to be called thru a constellation manager only.
+	//! Draw the art texture, optimized function to be called through a constellation manager only.
 	void drawArtOptim(StelPainter& sPainter, const SphericalRegion& region) const;
 	//! Update fade levels according to time since various events.
 	void update(int deltaTime);
@@ -147,6 +151,7 @@ private:
 	//! Name in native language
 	QString nativeName;
 	//! Abbreviation (of the latin name for western constellations)
+	//! For non-western, a skyculture designer must invent it. (usually 2-4 letters)
 	QString abbreviation;
 	//! Direction vector pointing on constellation name drawing position
 	Vec3d XYZname;

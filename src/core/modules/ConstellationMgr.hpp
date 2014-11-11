@@ -121,20 +121,22 @@ public:
 	virtual StelObjectP searchByNameI18n(const QString& nameI18n) const;
 
 	//! Return the matching constellation if exists or NULL
-	//! @param name The case in-sensistive standard program name (three letter abbreviation)
+	//! @param name The case in-sensitive standard program name (three letter abbreviation)
 	virtual StelObjectP searchByName(const QString& name) const;
 
+	// GZ: I see dubious descriptions and non-fitting var names: objPrefix should just be "string" or "obj",
+	// and useStartOfWord likely should be described as "decide if start of word is searched"  (2x)
 	//! Find and return the list of at most maxNbItem objects auto-completing the passed object I18n name.
 	//! @param objPrefix the case insensitive first letters of the searched object
 	//! @param maxNbItem the maximum number of returned object names
 	//! @param useStartOfWords the autofill mode for returned objects names
-	//! @return a vector of matching object name by order of relevance, or an empty vector if nothing match
+	//! @return a vector of matching object name by order of relevance, or an empty vector if nothing matches
 	virtual QStringList listMatchingObjectsI18n(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false) const;
 	//! Find and return the list of at most maxNbItem objects auto-completing the passed object English name.
 	//! @param objPrefix the case insensitive first letters of the searched object
 	//! @param maxNbItem the maximum number of returned object names
 	//! @param useStartOfWords the autofill mode for returned objects names
-	//! @return a vector of matching object name by order of relevance, or an empty vector if nothing match
+	//! @return a vector of matching object name by order of relevance, or an empty vector if nothing matches
 	virtual QStringList listMatchingObjects(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false) const;
 	virtual QStringList listAllObjects(bool inEnglish) const;
 	virtual QStringList listAllObjectsByType(const QString& objType, bool inEnglish) const { Q_UNUSED(objType) Q_UNUSED(inEnglish) return QStringList(); }
@@ -188,9 +190,9 @@ public slots:
 	//! Get line color
 	Vec3f getLinesColor() const;
 
-	//! Set whether constellation path lines will be displayed
+	//! Set whether constellation lines will be displayed
 	void setFlagLines(const bool displayed);
-	//! Get whether constellation path lines are displayed
+	//! Get whether constellation lines are displayed
 	bool getFlagLines(void) const;
 
 	//! Set label color for names
@@ -204,7 +206,7 @@ public slots:
 	Vec3f getLabelsColor() const;
 
 	//! Set whether constellation names will be displayed
-	void setFlagLabels(bool displayed);
+	void setFlagLabels(const bool displayed);
 	//! Set whether constellation names are displayed
 	bool getFlagLabels(void) const;
 
@@ -248,13 +250,16 @@ private slots:
 
 private:
 	//! Read constellation names from the given file.
-	//! @param namesFile Name of the file containing the constellation names in english
+	//! @param namesFile Name of the file containing the constellation names
+	//!        in a format consisting of abbreviation, native name and translatable english name.
+	//! @note The abbreviation must occur in the lines file loaded first in @name loadLinesAndArt()!
 	void loadNames(const QString& namesFile);
 
 	//! Load constellation line shapes, art textures and boundaries shapes from data files.
 	//! @param fileName The name of the constellation data file
 	//! @param artFileName The name of the constellation art data file
 	//! @param cultureName A string ID of the current skyculture
+	//! @note The abbreviation used in @param filename is required for cross-identifying translatable names in @name loadNames():
 	void loadLinesAndArt(const QString& fileName, const QString& artfileName, const QString& cultureName);
 
 	//! Load the constellation boundary file.
@@ -263,7 +268,7 @@ private:
 	//! data file consists of whitespace separated values (space, tab or newline).
 	//! Each boundary may span multiple lines, and consists of the following ordered
 	//! data items:
-	//!  - The number of vertexes which make up in the boundary (integer).
+	//!  - The number of vertices which make up in the boundary (integer).
 	//!  - For each vertex, two floating point numbers describing the ra and dec
 	//!    of the vertex.
 	//!  - The number of constellations which this boundary separates (always 2).
