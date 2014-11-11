@@ -157,12 +157,12 @@ void ConstellationMgr::updateSkyCulture(const QString& skyCultureDir)
 	updateI18n();
 
 	// load constellation boundaries
-	// First try load constellation boundaries from sky culture
+	// First try load constellation boundaries from sky culture. You may inhibit borders with an empty file.
 	fic = StelFileMgr::findFile("skycultures/" + skyCultureDir + "/constellations_boundaries.dat");
 	bool existBoundaries = false;
 	if (fic.isEmpty())
 	{
-		qWarning() << "ERROR loading constellation boundaries file in sky culture: " << skyCultureDir;
+		qWarning() << "No separate constellation boundaries file in sky culture: " << skyCultureDir << "- Using generic IAU boundaries.";
 		// OK, Second try load generic constellation boundaries
 		fic = StelFileMgr::findFile("data/constellations_boundaries.dat");
 		if (fic.isEmpty())
@@ -340,7 +340,7 @@ void ConstellationMgr::loadLinesAndArt(const QString &fileName, const QString &a
 	asterisms.clear();
 	Constellation *cons = NULL;
 
-	// read the file, adding a record per non-comment line
+	// read the file of line patterns, adding a record per non-comment line
 	int currentLineNumber = 0;	// line in file
 	int readOk = 0;			// count of records processed OK
 	while (!in.atEnd())
@@ -363,7 +363,7 @@ void ConstellationMgr::loadLinesAndArt(const QString &fileName, const QString &a
 		}
 		else
 		{
-			qWarning() << "ERROR reading constellation rec at line " << currentLineNumber << "for culture" << cultureName;
+			qWarning() << "ERROR reading constellation lines record at line " << currentLineNumber << "for culture" << cultureName;
 			delete cons;
 		}
 	}
@@ -650,7 +650,7 @@ void ConstellationMgr::loadNames(const QString& namesFile)
 
 		if (!recRx.exactMatch(record))
 		{
-			qWarning() << "ERROR - cannot parse record at line" << lineNumber << "in constellation names file" << QDir::toNativeSeparators(namesFile);
+			qWarning() << "ERROR - cannot parse record at line" << lineNumber << "in constellation names file" << QDir::toNativeSeparators(namesFile) << ":" << record;
 		}
 		else
 		{
@@ -902,7 +902,7 @@ bool ConstellationMgr::getFlagArt(void) const
 	return artDisplayed;
 }
 
-void ConstellationMgr::setFlagLabels(bool displayed)
+void ConstellationMgr::setFlagLabels(const bool displayed)
 {
 	if (namesDisplayed != displayed)
 	{
@@ -1037,8 +1037,6 @@ void ConstellationMgr::setSelectedConst(Constellation * c)
 
 		// And remove all selections
 		selected.clear();
-
-
 	}
 }
 
@@ -1225,7 +1223,8 @@ QStringList ConstellationMgr::listMatchingObjectsI18n(const QString& objPrefix, 
 		find = false;
 		if (useStartOfWords)
 		{
-			if (objPrefix.toUpper()==cn.mid(0, objPrefix.size()).toUpper())
+			//if (objPrefix.toUpper()==cn.mid(0, objPrefix.size()).toUpper())  // WHY SO LONG?
+			if (cn.startsWith(objPrefix, Qt::CaseInsensitive))
 				find = true;
 		}
 		else
@@ -1257,7 +1256,8 @@ QStringList ConstellationMgr::listMatchingObjects(const QString& objPrefix, int 
 		find = false;
 		if (useStartOfWords)
 		{
-			if (objPrefix.toUpper()==cn.mid(0, objPrefix.size()).toUpper())
+			//if (objPrefix.toUpper()==cn.mid(0, objPrefix.size()).toUpper())  // WHY SO LONG?
+			if (cn.startsWith(objPrefix, Qt::CaseInsensitive))
 				find = true;
 		}
 		else
