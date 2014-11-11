@@ -302,9 +302,27 @@ StelMainView::StelMainView(QWidget* parent)
 
 	lastEventTimeSec = 0;
 
+
+	// Primary test for OpenGL existence
+	if (QGLFormat::openGLVersionFlags() < QGLFormat::OpenGL_Version_2_1)
+	{
+		qWarning() << "No OpenGL 2.1 support on this system. Aborting.";
+		QMessageBox::critical(0, "Stellarium", q_("No OpenGL 2 found on this system. Please upgrade hardware or use MESA or an older version."), QMessageBox::Abort, QMessageBox::Abort);
+		exit(0);
+	}
+
 	// Create an openGL viewport
 	QGLFormat glFormat(QGL::StencilBuffer | QGL::DepthBuffer | QGL::DoubleBuffer);
-	glWidget = new StelQGLWidget(new QGLContext(glFormat), this);
+	QGLContext* context=new QGLContext(glFormat);
+
+	if (context->format() != glFormat)
+	{
+		qWarning() << "Cannot provide OpenGL context. Apparently insufficient OpenGL resources on this system.";
+		QMessageBox::critical(0, "Stellarium", q_("Cannot acquire necessary OpenGL resouces."), QMessageBox::Abort, QMessageBox::Abort);
+		exit(0);
+	}
+
+	glWidget = new StelQGLWidget(context, this);
 	setViewport(glWidget);
 
 	// Workaround (see Bug #940638) Although we have already explicitly set
