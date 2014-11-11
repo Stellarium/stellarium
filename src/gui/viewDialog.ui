@@ -346,7 +346,7 @@
       <item alignment="Qt::AlignTop">
        <widget class="QStackedWidget" name="stackedWidget">
         <property name="currentIndex">
-         <number>0</number>
+         <number>3</number>
         </property>
         <widget class="QWidget" name="page">
          <layout class="QGridLayout" name="gridLayout">
@@ -1910,6 +1910,19 @@
               <widget class="QCheckBox" name="useAsDefaultSkyCultureCheckBox">
                <property name="text">
                 <string>Use this sky culture as default</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QCheckBox" name="useUntranslatedStarloreNamesCheckBox">
+               <property name="enabled">
+                <bool>true</bool>
+               </property>
+               <property name="toolTip">
+                <string>Use fixed names, regardless of language settings.</string>
+               </property>
+               <property name="text">
+                <string>Do not translate constellation and star names</string>
                </property>
               </widget>
              </item>

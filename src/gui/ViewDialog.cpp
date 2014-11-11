@@ -295,6 +295,8 @@ void ViewDialog::createDialogContent()
 	const bool b = StelApp::getInstance().getSkyCultureMgr().getCurrentSkyCultureID()==StelApp::getInstance().getSkyCultureMgr().getDefaultSkyCultureID();
 	ui->useAsDefaultSkyCultureCheckBox->setChecked(b);
 	ui->useAsDefaultSkyCultureCheckBox->setEnabled(!b);
+	// GZ NEW Inhibit translation. TODO: finish other connections?
+	connect(ui->useUntranslatedStarloreNamesCheckBox, SIGNAL(clicked(bool)), this, SLOT(setDontTranslateStarlore(bool)));
 
 	// Sky layers
 	populateSkyLayersList();
