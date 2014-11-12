@@ -219,9 +219,6 @@ void AngleMeasure::drawOne(StelCore *core, const StelCore::FrameType frameType, 
 				painter.drawText(xy[0], xy[1], displayedText, 0, 15, -5);
 			}
 		}
-		// OpenGL ES 2.0 doesn't have GL_LINE_SMOOTH
-		if (QOpenGLContext::currentContext()->format().renderableType()==QSurfaceFormat::OpenGL)
-			glEnable(GL_LINE_SMOOTH);
 
 		// main line is a great circle
 		painter.setColor(lineColor[0], lineColor[1], lineColor[2], lineVisible.getInterstate());
@@ -240,10 +237,7 @@ void AngleMeasure::drawOne(StelCore *core, const StelCore::FrameType frameType, 
 			// End lines
 			painter.drawGreatCircleArc(perp1StartPointHor, perp1EndPointHor, NULL);
 			painter.drawGreatCircleArc(perp2StartPointHor, perp2EndPointHor, NULL);
-		}
-		// OpenGL ES 2.0 doesn't have GL_LINE_SMOOTH
-		if (QOpenGLContext::currentContext()->format().renderableType()==QSurfaceFormat::OpenGL)
-			glDisable(GL_LINE_SMOOTH);
+		}		
 	}
 	if (messageFader.getInterstate() > 0.000001f)
 	{
