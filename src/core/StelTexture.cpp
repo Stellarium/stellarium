@@ -266,8 +266,36 @@ bool StelTexture::glLoad(const GLData& data)
 	glBindTexture(GL_TEXTURE_2D, id);
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, loadParams.filtering);
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, loadParams.filtering);
+
+	//the conversion from QImage may result in tightly packed scanlines that are no longer 4-byte aligned!
+	//--> we have to set the GL_UNPACK_ALIGNMENT accordingly
+
+	//remember current alignment
+	GLint oldalignment;
+	glGetIntegerv(GL_UNPACK_ALIGNMENT,&oldalignment);
+
+	switch(data.format)
+	{
+		case GL_RGBA:
+			//RGBA pixels are always in 4 byte aligned rows
+			glPixelStorei(GL_UNPACK_ALIGNMENT, 4);
+			break;
+		case GL_LUMINANCE_ALPHA:
+			//these ones are at least always in 2 byte aligned rows, but may also be 4 aligned
+			glPixelStorei(GL_UNPACK_ALIGNMENT, 2);
+			break;
+		default:
+			//for the other cases, they may be on any alignment (depending on image width)
+			glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+	}
+
+	//do pixel transfer
 	glTexImage2D(GL_TEXTURE_2D, 0, data.format, width, height, 0, data.format,
 				 data.type, data.data.constData());
+
+	//restore old value
+	glPixelStorei(GL_UNPACK_ALIGNMENT, oldalignment);
+
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, loadParams.wrapMode);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, loadParams.wrapMode);
 	if (loadParams.generateMipmaps)
