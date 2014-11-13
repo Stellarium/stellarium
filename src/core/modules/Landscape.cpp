@@ -727,13 +727,31 @@ void LandscapePolygonal::draw(StelCore* core)
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glEnable(GL_CULL_FACE);
 	glEnable(GL_BLEND);
+	//#ifdef GL_POLYGON_SMOOTH
+	// OpenGL ES 2.0 doesn't have GL_LINE_SMOOTH. Anyway, Polygon smoothing makes the triangles visible. May be Interesting for debugging only.
+	//if (QOpenGLContext::currentContext()->format().renderableType()==QSurfaceFormat::OpenGL)
+	//	glEnable(GL_POLYGON_SMOOTH);
+	//#endif
 	sPainter.setColor(landscapeBrightness*groundColor[0], landscapeBrightness*groundColor[1], landscapeBrightness*groundColor[2], landFader.getInterstate());
 	sPainter.drawSphericalRegion(horizonPolygon.data(), StelPainter::SphericalPolygonDrawModeFill);
+	//#ifdef GL_POLYGON_SMOOTH
+	//if (QOpenGLContext::currentContext()->format().renderableType()==QSurfaceFormat::OpenGL)
+	//	glDisable(GL_POLYGON_SMOOTH);
+	//#endif
 
 	if (horizonPolygonLineColor[0] >= 0)
 	{
+		// OpenGL ES 2.0 doesn't have GL_LINE_SMOOTH
+		#ifdef GL_LINE_SMOOTH
+		if (QOpenGLContext::currentContext()->format().renderableType()==QSurfaceFormat::OpenGL)
+			glEnable(GL_LINE_SMOOTH);
+		#endif
 		sPainter.setColor(horizonPolygonLineColor[0], horizonPolygonLineColor[1], horizonPolygonLineColor[2], landFader.getInterstate());
 		sPainter.drawSphericalRegion(horizonPolygon.data(), StelPainter::SphericalPolygonDrawModeBoundary);
+		#ifdef GL_LINE_SMOOTH
+		if (QOpenGLContext::currentContext()->format().renderableType()==QSurfaceFormat::OpenGL)
+			glDisable(GL_LINE_SMOOTH);
+		#endif
 	}
 	glDisable(GL_CULL_FACE);
 }

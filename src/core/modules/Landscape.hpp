@@ -40,11 +40,11 @@ class StelPainter;
 //! @class Landscape
 //! Store and manages the displaying of the Landscape.
 //! Don't use this class directly, use the LandscapeMgr.
-//! A landscape's most important element is a photo panorama.
+//! A landscape's most important element is a photo panorama, or at least a polygon that describes the true horizon visible from your observing location.
 //! Optional components include:
 //!  - A fog texture that is displayed with the Fog [F] command (displayed only if atmosphere is on!).
 //!  - A location. It is possible to auto-move to the location when loading.
-//!  - Atmospheric conditions: temperature/pressure/extinction coefficients.
+//!  - Atmospheric conditions: temperature/pressure/extinction coefficients. These influence refraction and extinction.
 //!  - Light pollution information (Bortle index)
 //!  - A night texture that gets blended over the dimmed daylight panorama. (All landscapes except Polygonal.)
 //!  - A polygonal horizon line (required for PolygonalLandscape). If present, defines a measured horizon line, which can be plotted or queried for rise/set predictions.
