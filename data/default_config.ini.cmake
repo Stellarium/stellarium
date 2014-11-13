@@ -182,10 +182,10 @@ flag_atmosphere                     = true
 flag_landscape_sets_location        = false
 atmosphere_fade_duration            = 0.5
 # This is for people who require some minimum visibility for the landscapes
-minimal_brightness                  = 0.01
+minimal_brightness                  = 0.10
 flag_minimal_brightness             = false
 # This allows use of a minimum value even given in the respective landscape.ini
-flag_landscape_sets_minimal_brightness = false
+flag_landscape_sets_minimal_brightness = true
 flag_enable_illumination_layer      = true
 
 [viewing]
