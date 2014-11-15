@@ -38,8 +38,7 @@ class Scenery3d
 {
 public:
     //! Initializes an empty Scenery3d object.
-    //! @param cbmSize Size of the cubemap to use for indirect rendering.
-    Scenery3d(int cubemapSize=1024, int shadowmapSize=1024, float torchBrightness=0.5f);
+    Scenery3d();
     virtual ~Scenery3d();
 
     //! Sets the shaders for the plugin
@@ -69,23 +68,34 @@ public:
     //! Draw observer grid coordinates as text.
     void drawCoordinatesText(StelCore* core);
     //! Draw some text output. This can be filled as needed by development.
-    void drawDebugText(StelCore* core);
+    void drawDebug(StelCore* core);
 
     //! Draw scenery, called by Scenery3dMgr.
     void draw(StelCore* core);
     //! Initializes shadow mapping
     void initShadowMapping();
 
-    bool getShadowsEnabled(void) { return shadowsEnabled; }
+    bool getDebugEnabled() const { return debugEnabled; }
+    void setDebugEnabled(bool debugEnabled) { this->debugEnabled = debugEnabled; }
+    bool getShadowsEnabled(void) const { return shadowsEnabled; }
     void setShadowsEnabled(bool shadowsEnabled) { this->shadowsEnabled = shadowsEnabled; }
-    bool getBumpsEnabled(void) { return bumpsEnabled; }
+    bool getBumpsEnabled(void) const { return bumpsEnabled; }
     void setBumpsEnabled(bool bumpsEnabled) { this->bumpsEnabled = bumpsEnabled; }
-    bool getTorchEnabled(void) { return torchEnabled;}
+    bool getTorchEnabled(void) const { return torchEnabled;}
     void setTorchEnabled(bool torchEnabled) { this->torchEnabled = torchEnabled; }
-    bool getShadowsFilterEnabled(void) { return filterShadowsEnabled; }
+    bool getShadowsFilterEnabled(void) const { return filterShadowsEnabled; }
     void setShadowsFilterEnabled(bool filterShadowsEnabled) { this->filterShadowsEnabled = filterShadowsEnabled; }
-    bool getShadowsFilterHQEnabled(void) { return filterHQ; }
+    bool getShadowsFilterHQEnabled(void) const { return filterHQ; }
     void setShadowsFilterHQEnabled(bool filterHQ) { this->filterHQ = filterHQ; }
+    bool getLocationInfoEnabled(void) const { return textEnabled; }
+    void setLocationInfoEnabled(bool locationinfoenabled) { this->textEnabled = locationinfoenabled; }
+
+    uint getCubemapSize() const { return cubemapSize; }
+    void setCubemapSize(uint size) { cubemapSize = size; }
+    uint getShadowmapSize() const { return shadowmapSize; }
+    void setShadowmapSize(uint size) { shadowmapSize = size; }
+    float getTorchBrightness() const { return torchBrightness; }
+    void setTorchBrightness(float brightness) { torchBrightness = brightness; }
 
     //! @return Name of the scenery.
     QString getName() const { return name; }
@@ -272,7 +282,6 @@ private:
     void analyzeViewSamples(StelPainter &painter);
     GLuint camDepthFBO;
     GLuint camDepthTex;
-    bool analyzeDebug;
     float parallaxScale;
     int vpWidth, vpHeight;
     GLuint camDepthPBO;
@@ -281,6 +290,8 @@ private:
     GLenum *attachments;
 
     QOpenGLShaderProgram *minMaxShader;
+
+    QFont debugTextFont;
 
     void drawFullscreenQuad(int dim);
     //TODO FS: only temporary, will be removed
