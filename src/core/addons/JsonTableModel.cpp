@@ -36,7 +36,7 @@ JsonTableModel::JsonTableModel(AddOn::Type type, QMap<qint64, AddOn*> addons, QO
 int JsonTableModel::rowCount(const QModelIndex &parent) const
 {
 	Q_UNUSED(parent);
-	return m_addons.size();
+	return m_addons.size() * 2;
 }
 
 int JsonTableModel::columnCount(const QModelIndex &parent) const
@@ -47,13 +47,16 @@ int JsonTableModel::columnCount(const QModelIndex &parent) const
 
 QVariant JsonTableModel::data(const QModelIndex &index, int role) const
 {
-	if (!index.isValid() || index.row() >= m_addons.size() || index.row() < 0 || role != Qt::DisplayRole)
+	if (!index.isValid() ||
+		index.row() < 0 ||
+		index.row() % 2 != 0 ||
+		role != Qt::DisplayRole)
 	{
 		return QVariant();
 	}
 
 	QVariant value;
-	AddOn* addon = m_addons.values().at(index.row());
+	AddOn* addon = m_addons.values().at(index.row() / 2);
 	Column column = m_iColumns.at(index.column());
 	switch (column) {
 		case Title:
