@@ -50,57 +50,33 @@ Scenery3dMgr::Scenery3dMgr() :
     shadowShader(NULL),
     bumpShader(NULL),
     univShader(NULL),
-    debugShader(NULL)
+    debugShader(NULL),
+    cleanedUp(false),
+    flagEnabled(false)
 {
     setObjectName("Scenery3dMgr");
     scenery3dDialog = new Scenery3dDialog();
-    enableShadows=false;
-    enableBumps=false;
-    enableShadowsFilter=true;
-    enableShadowsFilterHQ=false;
-    // taken from AngleMeasure:
-    textColor = StelUtils::strToVec3f(StelApp::getInstance().getSettings()->value("options/text_color", "0,0.5,1").toString());
+
     font.setPixelSize(16);
+    messageFader.setDuration(500);
     messageTimer = new QTimer(this);
     messageTimer->setInterval(2000);
     messageTimer->setSingleShot(true);
     connect(messageTimer, SIGNAL(timeout()), this, SLOT(clearMessage()));
+
+    //create scenery3d object
+    //TODO FS: only 1 scenery3d object should be created throughout the lifetime of the app!
+    scenery3d = new Scenery3d();
 }
 
 Scenery3dMgr::~Scenery3dMgr()
 {
-    //the deletion of many objects can be handled by Qt automatically, if a parent of QObject is set
-    //scenery3d is no QObject
-    delete scenery3d;
-    scenery3d = NULL;
+	qDebug()<<"Scenery3dMgr destructor";
+
+	if(!cleanedUp)
+		deinit();
 
 	delete scenery3dDialog;
-}
-
-void Scenery3dMgr::setScenery3dEnabled(const bool enable)
-{
-    if(enable!=flagEnabled)
-    {
-        flagEnabled=enable;
-        if (cubemapSize==0)
-        {
-            //TODO FS: remove this?
-            if (flagEnabled)
-            {
-                oldProjectionType= StelApp::getInstance().getCore()->getCurrentProjectionType();
-                StelApp::getInstance().getCore()->setCurrentProjectionType(StelCore::ProjectionPerspective);
-            }
-            else
-                StelApp::getInstance().getCore()->setCurrentProjectionType(oldProjectionType);
-        }
-
-        emit scenery3dEnabledChanged(flagEnabled);
-    }
-}
-
-bool Scenery3dMgr::isScenery3dEnabled() const
-{
-    return flagEnabled;
 }
 
 double Scenery3dMgr::getCallOrder(StelModuleActionName actionName) const
@@ -116,188 +92,160 @@ double Scenery3dMgr::getCallOrder(StelModuleActionName actionName) const
 
 void Scenery3dMgr::handleKeys(QKeyEvent* e)
 {
-    if (flagEnabled)
-    {
-        scenery3d->handleKeys(e);
-        if (!e->isAccepted()) {
-            // handle keys for CTRL-SPACE and CTRL-B. Allows easier interaction with GUI.
-
-            if ((e->type() == QKeyEvent::KeyPress) && (e->modifiers() & Qt::ControlModifier))
-            {
-                switch (e->key())
-                {
-                    case Qt::Key_Space:
-                        if (shadowmapSize)
-                        {
-                            enableShadows = !enableShadows;
-                            scenery3d->setShadowsEnabled(enableShadows);
-                            showMessage(QString(N_("Shadows %1")).arg(enableShadows? N_("on") : N_("off")));
-                        } else
-                        {
-                            showMessage(QString(N_("Shadows deactivated or not possible.")));
-                        }
-                        e->accept();
-                        break;
-                    case Qt::Key_B:
-                        enableBumps   = !enableBumps;
-                        scenery3d->setBumpsEnabled(enableBumps);
-                        showMessage(QString(N_("Surface bumps %1")).arg(enableBumps? N_("on") : N_("off")));
-                        e->accept();
-                        break;
-
-                    case Qt::Key_I:
-                        if(enableShadows)
-                        {
-                            enableShadowsFilter = !enableShadowsFilter;
-                            scenery3d->setShadowsFilterEnabled(enableShadowsFilter);
-                            showMessage(QString(N_("Filtering shadows %1")).arg(enableShadowsFilter? N_("on") : N_("off")));
-                        } else
-                        {
-                            showMessage(QString(N_("Please activate shadows first.")));
-                        }
-                        e->accept();
-                        break;
-                    case Qt::Key_U:
-                        if(enableShadows)
-                        {
-                            if(enableShadowsFilter)
-                            {
-                                enableShadowsFilterHQ = !enableShadowsFilterHQ;
-                                scenery3d->setShadowsFilterHQEnabled(enableShadowsFilterHQ);
-                                showMessage(QString(N_("Improved shadows filtering %1")).arg(enableShadowsFilterHQ? N_("on") : N_("off")));
-                            } else
-                            {
-                                showMessage(QString(N_("Please activate shadows filtering first.")));
-                            }
-                        } else
-                        {
-                            showMessage(QString(N_("Please activate shadows first.")));
-                        }
-                        e->accept();
-                        break;
-
-                }
-            }
-        }
-    }
+	if (flagEnabled)
+	{
+		//pass event on to scenery3d obj
+		scenery3d->handleKeys(e);
+	}
 }
 
 
 void Scenery3dMgr::update(double deltaTime)
 {
-    if (flagEnabled)
-    {
-        scenery3d->update(deltaTime);
-        messageFader.update((int)(deltaTime*1000));
-    }
+	if (flagEnabled)
+	{
+		scenery3d->update(deltaTime);
+	}
+
+	messageFader.update((int)(deltaTime*1000));
 }
 
 void Scenery3dMgr::draw(StelCore* core)
 {
-    if (flagEnabled)
-    {
-        scenery3d->draw(core);
-        if (messageFader.getInterstate() > 0.000001f)
-        {
+	if (flagEnabled)
+	{
+		scenery3d->draw(core);
+	}
 
-            const StelProjectorP prj = core->getProjection(StelCore::FrameEquinoxEqu);
-            StelPainter painter(prj);
-            painter.setFont(font);
-            painter.setColor(textColor[0], textColor[1], textColor[2], messageFader.getInterstate());
-            painter.drawText(83, 120, currentMessage);
-        }
-    }
+	//the message is always drawn
+	if (messageFader.getInterstate() > 0.000001f)
+	{
+
+		const StelProjectorP prj = core->getProjection(StelCore::FrameEquinoxEqu);
+		StelPainter painter(prj);
+		painter.setFont(font);
+		painter.setColor(textColor[0], textColor[1], textColor[2], messageFader.getInterstate());
+		painter.drawText(83, 120, currentMessage);
+	}
+
 }
 
 void Scenery3dMgr::init()
 {
     qDebug() << "Scenery3d plugin - press KGA button to toggle 3D scenery, KGA tool button for settings";
 
-    QSettings* conf = StelApp::getInstance().getSettings();
-    Q_ASSERT(conf);
-    cubemapSize=conf->value("Scenery3d/cubemapSize", 2048).toInt();
-    shadowmapSize=conf->value("Scenery3d/shadowmapSize", 1024).toInt();
-    torchBrightness=conf->value("Scenery3d/extralight_brightness", 0.5f).toFloat();
+	//load config and create interface actions
+	loadConfig();
+	createActions();
 
-    // graphics hardware without FrameBufferObj extension cannot use the cubemap rendering and shadow mapping.
-    // In this case, set cubemapSize to 0 to signal auto-switch to perspective projection.
-    if ( !QOpenGLContext::currentContext()->hasExtension("GL_EXT_framebuffer_object")) {
+	//on startup, make this not checkable because no scene is loaded
+	this->enableAction->setCheckable(false);
 
-        //TODO FS: it seems like the current stellarium requires a working framebuffer extension anyway, so skip this check?
+	// graphics hardware without FrameBufferObj extension cannot use the cubemap rendering and shadow mapping.
+	// In this case, set cubemapSize to 0 to signal auto-switch to perspective projection.
+	if ( !QOpenGLContext::currentContext()->hasExtension("GL_EXT_framebuffer_object")) {
 
-        qWarning() << "Scenery3d: Your hardware does not support EXT_framebuffer_object.";
-        qWarning() << "           Shadow mapping disabled, and display limited to perspective projection.";
-        cubemapSize=0;
-        shadowmapSize=0;
-    }    
-    //cubemapSize = 0;
-    // create action for enable/disable & hook up signals
+		//TODO FS: it seems like the current stellarium requires a working framebuffer extension anyway, so skip this check?
 
-    //hook up some signals
-    StelApp *app = &StelApp::getInstance();
-    connect(app, SIGNAL(languageChanged()), this, SLOT(updateI18n()));
-    connect(app, SIGNAL(colorSchemeChanged(const QString&)), this, SLOT(setStelStyle(const QString&)));
-    connect(this, SIGNAL(enabledChanged(bool)), this, SLOT(setEnabled(bool)));
+		qWarning() << "Scenery3d: Your hardware does not support EXT_framebuffer_object.";
+		qWarning() << "           Shadow mapping disabled, and display limited to perspective projection.";
 
-    qDebug() << "call addActions()";
+		scenery3d->setCubemapSize(0);
+		scenery3d->setShadowmapSize(0);
+	}
 
-    addAction("actionShow_Scenery3d",
-              N_("Scenery3d: 3D landscapes"),
-              N_("Show 3D landscape"),
-              this,
-              "scenery3dEnabled",
-              "Ctrl+3");
+	loadShaders();
+	setEnableShadows(false);
+	setEnableShadowsFilter(true);
+	setEnableShadowsFilterHQ(false);
 
-    addAction("actionShow_Scenery3d_dialog",       // ID
-              N_("Scenery3d: 3D landscapes"),        // Group ID (for help)
-              N_("Show settings dialog"),                 // help text
-              scenery3dDialog,                       // target
-              "visible",          // slot
-              "Ctrl+Shift+3");                       // shortcut1
+	//Initialize Shadow Mapping
+	qWarning() << "init scenery3d object shadowmapping.";
+	if(scenery3d->getShadowmapSize()){
+	    scenery3d->initShadowMapping();
+	}
+	else
+	    qWarning() << "Note: shadowmapping disabled by zero size.\n";
 
-    // Add 2 toolbar buttons (copy/paste widely from AngleMeasure): activate, and settings.
-    try
-    {
-        StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+	qWarning() << "init scenery3d object shadowmapping...done\n";
 
-        toolbarEnableButton = new StelButton(NULL, QPixmap(":/Scenery3d/bt_scenery3d_on.png"),
-                                             QPixmap(":/Scenery3d/bt_scenery3d_off.png"),
-                                             QPixmap(":/graphicGui/glow32x32.png"),
-                                             "actionShow_Scenery3d");
-        toolbarSettingsButton = new StelButton(NULL, QPixmap(":/Scenery3d/bt_scenery3d_settings_on.png"),
-                                               QPixmap(":/Scenery3d/bt_scenery3d_settings_off.png"),
-                                               QPixmap(":/graphicGui/glow32x32.png"),
-                                               "actionShow_Scenery3d_dialog");
+	// Add 2 toolbar buttons (copy/paste widely from AngleMeasure): activate, and settings.
+	try
+	{
+		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 
-        gui->getButtonBar()->addButton(toolbarEnableButton, "065-pluginsGroup");
-        gui->getButtonBar()->addButton(toolbarSettingsButton, "065-pluginsGroup");
-    }
-    catch (std::runtime_error& e)
-    {
-        qWarning() << "WARNING: unable to create toolbar buttons for Scenery3d plugin: " << e.what();
-    }
+		StelButton* toolbarEnableButton = new StelButton(NULL, QPixmap(":/Scenery3d/bt_scenery3d_on.png"),
+								 QPixmap(":/Scenery3d/bt_scenery3d_off.png"),
+								 QPixmap(":/graphicGui/glow32x32.png"),
+								 "actionShow_Scenery3d");
+		StelButton* toolbarSettingsButton = new StelButton(NULL, QPixmap(":/Scenery3d/bt_scenery3d_settings_on.png"),
+								   QPixmap(":/Scenery3d/bt_scenery3d_settings_off.png"),
+								   QPixmap(":/graphicGui/glow32x32.png"),
+								   "actionShow_Scenery3d_dialog");
 
-    loadShaders();
+		gui->getButtonBar()->addButton(toolbarEnableButton, "065-pluginsGroup");
+		gui->getButtonBar()->addButton(toolbarSettingsButton, "065-pluginsGroup");
+	}
+	catch (std::runtime_error& e)
+	{
+		qWarning() << "WARNING: unable to create toolbar buttons for Scenery3d plugin: " << e.what();
+	}
+}
 
+void Scenery3dMgr::deinit()
+{
+	qDebug()<<"Scenery3dMgr deinit";
 
+	//this is correct the place to delete all OpenGL related stuff, not the destructor
+	if(scenery3d != NULL)
+	{
+		delete scenery3d;
+		scenery3d = NULL;
+	}
 
-    qWarning() << "init scenery3d object...";
-    scenery3d = new Scenery3d(cubemapSize, shadowmapSize, torchBrightness);
-    scenery3d->setShaders(shadowShader, bumpShader, univShader, debugShader);
+	//delete shaders
+	if(!shadowShader)
+	    delete shadowShader;
+	if(!bumpShader)
+	    delete bumpShader;
+	if(!univShader)
+	    delete univShader;
+	if(!debugShader)
+	    delete debugShader;
 
-    qWarning() << "init scenery3d object...done.\n";
-    scenery3d->setShadowsEnabled(enableShadows);
-    scenery3d->setBumpsEnabled(enableBumps);
+	cleanedUp = true;
+}
 
-    //Initialize Shadow Mapping
-    qWarning() << "init scenery3d object shadowmapping.";
-    if(shadowmapSize){
-        scenery3d->initShadowMapping();
-    }
-    else
-        qWarning() << "Note: shadowmapping disabled by zero size.\n";
+void Scenery3dMgr::loadConfig()
+{
+	QSettings* conf = StelApp::getInstance().getSettings();
 
-    qWarning() << "init scenery3d object shadowmapping...done\n";
+	conf->beginGroup("Scenery3d");
+
+	textColor = StelUtils::strToVec3f(conf->value("text_color", "0.5,0.5,1").toString());
+	scenery3d->setCubemapSize(conf->value("cubemapSize",2048).toInt());
+	scenery3d->setShadowmapSize(conf->value("shadowmapSize", 1024).toInt());
+	scenery3d->setTorchBrightness(conf->value("extralight_brightness", 0.5f).toFloat());
+
+	conf->endGroup();
+}
+
+void Scenery3dMgr::createActions()
+{
+	QString groupName = N_("Scenery3d: 3D landscapes");
+
+	//TODO make some of these a GUI setting instead of a switch (quality options, etc)
+	//also add cubemap/shadowmap size (=quality) options to GUI?
+
+	//enable action will be set checkable if a scene was loaded
+	this->enableAction = addAction("actionShow_Scenery3d", groupName, N_("Toggle 3D landscape"),this,"enableScene","Ctrl+3");
+	addAction("actionShow_Scenery3d_dialog", groupName, N_("Show settings dialog"), scenery3dDialog, "visible", "Ctrl+Shift+3");
+	addAction("actionShow_Scenery3d_shadows", groupName, N_("Toggle shadows"), this, "enableShadows","Ctrl+R, S");
+	addAction("actionSwitch_Scenery3d_shadowfilter", groupName, N_("Toggle shadow filtering"), this, "enableShadowsFilter","Ctrl+R, F");
+	addAction("actionSwitch_Scenery3d_shadowfilterhq", groupName, N_("Toggle shadow filtering quality"), this, "enableShadowsFilterHQ","Ctrl+R, Q");
+	addAction("actionShow_Scenery3d_debuginfo", groupName, N_("Toggle debug information"), this, "enableDebugInfo","Ctrl+R, D");
+	addAction("actionShow_Scenery3d_locationinfo", groupName, N_("Toggle location text"), this, "enableLocationInfo","Ctrl+R, T");
+	addAction("actionShow_Scenery3d_torchlight", groupName, N_("Toggle torchlight"), this, "enableTorchLight", "Ctrl+R, L");
 }
 
 void Scenery3dMgr::loadShaders()
@@ -306,19 +254,21 @@ void Scenery3dMgr::loadShaders()
     //create shader objects, if not existing
     //the shaders get this manager as parent, so we dont have to manage deletion ourselves, it is done by Qt.
     if(!shadowShader)
-        shadowShader = new QOpenGLShaderProgram(this);
+	shadowShader = new QOpenGLShaderProgram(this);
     if(!bumpShader)
-        bumpShader = new QOpenGLShaderProgram(this);
+	bumpShader = new QOpenGLShaderProgram(this);
     if(!univShader)
-        univShader = new QOpenGLShaderProgram(this);
+	univShader = new QOpenGLShaderProgram(this);
     if(!debugShader)
-        debugShader = new QOpenGLShaderProgram(this);
+	debugShader = new QOpenGLShaderProgram(this);
 
 
     loadShader(*shadowShader,"smap.v.glsl","smap.f.glsl");
     loadShader(*bumpShader,"bmap.v.glsl","bmap.f.glsl");
     loadShader(*univShader,"univ.v.glsl","univ.f.glsl");
     loadShader(*debugShader,"debug.v.glsl","debug.f.glsl");
+
+    scenery3d->setShaders(shadowShader,bumpShader,univShader,debugShader);
 }
 
 bool Scenery3dMgr::loadShader(QOpenGLShaderProgram& program, const QString& vShader, const QString& fShader)
@@ -333,43 +283,43 @@ bool Scenery3dMgr::loadShader(QOpenGLShaderProgram& program, const QString& vSha
 
     if(!program.addShaderFromSourceFile(QOpenGLShader::Vertex,vs))
     {
-        qCritical() << "Scenery3d: unable to compile " << vs << " vertex shader file";
-        qCritical() << program.log();
-        return false;
+	qCritical() << "Scenery3d: unable to compile " << vs << " vertex shader file";
+	qCritical() << program.log();
+	return false;
     }
     else
     {
-        QString log = program.log().trimmed();
-        if(!log.isEmpty())
-        {
-            qWarning()<<vShader<<" warnings:";
-            qWarning()<<log;
-        }
+	QString log = program.log().trimmed();
+	if(!log.isEmpty())
+	{
+	    qWarning()<<vShader<<" warnings:";
+	    qWarning()<<log;
+	}
     }
 
     QString fs = StelFileMgr::findFile(dir.filePath(fShader),StelFileMgr::File);
     if(!program.addShaderFromSourceFile(QOpenGLShader::Fragment,fs))
     {
-        qCritical() << "Scenery3d: unable to compile " << fs << " fragment shader file";
-        qCritical() << program.log();
-        return false;
+	qCritical() << "Scenery3d: unable to compile " << fs << " fragment shader file";
+	qCritical() << program.log();
+	return false;
     }
     else
     {
-        QString log = program.log().trimmed();
-        if(!log.isEmpty())
-        {
-            qWarning()<<fShader<<" warnings:";
-            qWarning()<<log;
-        }
+	QString log = program.log().trimmed();
+	if(!log.isEmpty())
+	{
+	    qWarning()<<fShader<<" warnings:";
+	    qWarning()<<log;
+	}
     }
 
     //link program
     if(!program.link())
     {
-        qCritical()<<"Scenery3d: unable to link shader files "<<vShader<<", "<<fShader;
-        qCritical()<<program.log();
-        return false;
+	qCritical()<<"Scenery3d: unable to link shader files "<<vShader<<", "<<fShader;
+	qCritical()<<program.log();
+	return false;
     }
 
     return true;
@@ -382,28 +332,26 @@ bool Scenery3dMgr::configureGui(bool show)
     return true;
 }
 
-void Scenery3dMgr::setStelStyle(const QString& section)
-{
-	(void)section; // disable compiler warning (unused var)
-}
-
 bool Scenery3dMgr::setCurrentScenery3dID(const QString& id)
 {
     if (id.isEmpty())
-        return false;
+	return false;
 
     Scenery3d* newScenery3d = NULL;
     try
     {
-        newScenery3d = createFromFile(StelFileMgr::findFile(MODULE_PATH + id + "/scenery3d.ini"), id);
+	newScenery3d = createFromFile(StelFileMgr::findFile(MODULE_PATH + id + "/scenery3d.ini"), id);
     }
     catch (std::runtime_error& e)
     {
-        qWarning() << "ERROR while loading 3D scenery " << MODULE_PATH + id + "/scenery3d.ini" << ", (" << e.what() << ")";
+	qCritical() << "ERROR while loading 3D scenery " << MODULE_PATH + id + "/scenery3d.ini" << ", (" << e.what() << ")";
     }
 
     if (!newScenery3d)
-        return false;
+    {
+	    showMessage("Could not load scene, please check log for error messages!");
+	return false;
+    }
 
     LandscapeMgr* lmgr = GETSTELMODULE(LandscapeMgr);
     bool landscapeSetsLocation=lmgr->getFlagLandscapeSetsLocation();
@@ -417,8 +365,8 @@ bool Scenery3dMgr::setCurrentScenery3dID(const QString& id)
 
     if (scenery3d)
     {
-        delete scenery3d;
-        scenery3d = NULL;
+	delete scenery3d;
+	scenery3d = NULL;
     }
     // Loading may take a while...
     showMessage(QString(N_("Loading scenery3d. Please be patient!")));
@@ -449,38 +397,37 @@ bool Scenery3dMgr::setCurrentScenery3dID(const QString& id)
     scenery3d = newScenery3d;
     currentScenery3dID = id;
 
+    enableAction->setCheckable(true);
+    setEnableScene(true);
+
     return true;
 }
 
 bool Scenery3dMgr::setCurrentScenery3dName(const QString& name)
 {
     if (name.isEmpty())
-        return false;
+	return false;
 
     QMap<QString, QString> nameToDirMap = getNameToDirMap();
     if (nameToDirMap.find(name) != nameToDirMap.end())
     {
-        return setCurrentScenery3dID(nameToDirMap[name]);
+	return setCurrentScenery3dID(nameToDirMap[name]);
     }
     else
     {
-        qWarning() << "Can't find a 3D scenery with name=" << name;
-        return false;
+	qWarning() << "Can't find a 3D scenery with name=" << name;
+	return false;
     }
 }
 
 bool Scenery3dMgr::setDefaultScenery3dID(const QString& id)
 {
     if (id.isEmpty())
-        return false;
+	return false;
     defaultScenery3dID = id;
     QSettings* conf = StelApp::getInstance().getSettings();
     conf->setValue("init_location/scenery3d_name", id);
     return true;
-}
-
-void Scenery3dMgr::updateI18n()
-{
 }
 
 QStringList Scenery3dMgr::getAllScenery3dNames() const
@@ -490,7 +437,7 @@ QStringList Scenery3dMgr::getAllScenery3dNames() const
 
     foreach (QString i, nameToDirMap.keys())
     {
-        result += i;
+	result += i;
     }
     return result;
 }
@@ -502,7 +449,7 @@ QStringList Scenery3dMgr::getAllScenery3dIDs() const
 
     foreach (QString i, nameToDirMap.values())
     {
-        result += i;
+	result += i;
     }
     return result;
 }
@@ -515,21 +462,23 @@ QString Scenery3dMgr::getCurrentScenery3dName() const
 Scenery3d* Scenery3dMgr::createFromFile(const QString& scenery3dFile, const QString& scenery3dID)
 {
     QSettings scenery3dIni(scenery3dFile, StelIniFormat);
-    QString s;
-    Scenery3d* newScenery3d = new Scenery3d(cubemapSize, shadowmapSize, torchBrightness);
-    newScenery3d->setShaders(shadowShader, bumpShader, univShader, debugShader);
-    newScenery3d->setShadowsEnabled(enableShadows);
-    newScenery3d->setBumpsEnabled(enableBumps);
-    if(shadowmapSize) newScenery3d->initShadowMapping();
     if (scenery3dIni.status() != QSettings::NoError)
     {
-        qWarning() << "ERROR parsing scenery3d.ini file: " << scenery3dFile;
-        s = "";
+	qCritical() << "ERROR parsing scenery3d.ini file: " << scenery3dFile;
+	return NULL;
     }
-    else
-    {
-        newScenery3d->loadConfig(scenery3dIni, scenery3dID);
-    }
+
+    //TODO FS: remove the creation of a new scenery3d object
+    //TODO FS: make the scene metadata a struct so that the loading of it is independent of the Scenery3d class.
+    Scenery3d* newScenery3d = new Scenery3d();
+    newScenery3d->setCubemapSize(scenery3d->getCubemapSize());
+    newScenery3d->setShadowmapSize(scenery3d->getShadowmapSize());
+    newScenery3d->setTorchBrightness(scenery3d->getTorchBrightness());
+    newScenery3d->setShaders(shadowShader, bumpShader, univShader, debugShader);
+    newScenery3d->setShadowsEnabled(scenery3d->getShadowsEnabled());
+    newScenery3d->setBumpsEnabled(scenery3d->getBumpsEnabled());
+    if(scenery3d->getShadowmapSize()) newScenery3d->initShadowMapping();
+	newScenery3d->loadConfig(scenery3dIni, scenery3dID);
     return newScenery3d;
 }
 
@@ -539,12 +488,12 @@ QString Scenery3dMgr::nameToID(const QString& name)
 
     if (nameToDirMap.find(name) != nameToDirMap.end())
     {
-        Q_ASSERT(0);
-        return "error";
+	Q_ASSERT(0);
+	return "error";
     }
     else
     {
-        return nameToDirMap[name];
+	return nameToDirMap[name];
     }
 }
 
@@ -555,25 +504,25 @@ QMap<QString, QString> Scenery3dMgr::getNameToDirMap() const
     QMap<QString, QString> result;
     try
     {
-        scenery3dDirs = StelFileMgr::listContents(MODULE_PATH, StelFileMgr::Directory);
-        qDebug() << "dirs " << scenery3dDirs;
+	scenery3dDirs = StelFileMgr::listContents(MODULE_PATH, StelFileMgr::Directory);
+	qDebug() << "dirs " << scenery3dDirs;
     }
     catch (std::runtime_error& e)
     {
-        qDebug() << "ERROR while trying to list 3D sceneries:" << e.what();
+	qDebug() << "ERROR while trying to list 3D sceneries:" << e.what();
     }
 
     foreach (const QString& dir, scenery3dDirs)
     {
-        try
-        {
-            QSettings scenery3dIni(StelFileMgr::findFile(MODULE_PATH + dir + "/scenery3d.ini"), StelIniFormat);
-            QString k = scenery3dIni.value("model/name").toString();
-            result[k] = dir;
-        }
-        catch (std::runtime_error& e)
-        {
-        }
+	try
+	{
+	    QSettings scenery3dIni(StelFileMgr::findFile(MODULE_PATH + dir + "/scenery3d.ini"), StelIniFormat);
+	    QString k = scenery3dIni.value("model/name").toString();
+	    result[k] = dir;
+	}
+	catch (std::runtime_error& e)
+	{
+	}
     }
     return result;
 }
@@ -583,17 +532,17 @@ QString Scenery3dMgr::getScenery3dPath(QString scenery3dID)
     QString result;
     if (scenery3dID.isEmpty())
     {
-        return result;
+	return result;
     }
 
     try
     {
-        result = StelFileMgr::findFile(MODULE_PATH + scenery3dID, StelFileMgr::Directory);
+	result = StelFileMgr::findFile(MODULE_PATH + scenery3dID, StelFileMgr::Directory);
     }
     catch (std::runtime_error &e)
     {
-        qWarning() << "Scenery3dMgr: Error! Unable to find " << scenery3dID << ": " << e.what();
-        return result;
+	qWarning() << "Scenery3dMgr: Error! Unable to find " << scenery3dID << ": " << e.what();
+	return result;
     }
 
     return result;
@@ -604,26 +553,26 @@ QString Scenery3dMgr::loadScenery3dName(QString scenery3dID)
     QString scenery3dName;
     if (scenery3dID.isEmpty())
     {
-        qWarning() << "Scenery3dMgr: Error! No scenery3d ID passed to loadScenery3dName().";
-        return scenery3dName;
+	qWarning() << "Scenery3dMgr: Error! No scenery3d ID passed to loadScenery3dName().";
+	return scenery3dName;
     }
 
     QString scenery3dPath = getScenery3dPath(scenery3dID);
     if (scenery3dPath.isEmpty())
-        return scenery3dName;
+	return scenery3dName;
 
     QDir scenery3dDir(scenery3dPath);
     if (scenery3dDir.exists("scenery3d.ini"))
     {
-        QString scenery3dSettingsPath = scenery3dDir.filePath("scenery3d.ini");
-        QSettings scenery3dSettings(scenery3dSettingsPath, StelIniFormat);
-        scenery3dName = scenery3dSettings.value("model/name").toString();
+	QString scenery3dSettingsPath = scenery3dDir.filePath("scenery3d.ini");
+	QSettings scenery3dSettings(scenery3dSettingsPath, StelIniFormat);
+	scenery3dName = scenery3dSettings.value("model/name").toString();
     }
     else
     {
-        qWarning() << "Scenery3dMgr: Error! Scenery3d directory" << scenery3dPath << "does not contain a 'scenery3d.ini' file";
+	qWarning() << "Scenery3dMgr: Error! Scenery3d directory" << scenery3dPath << "does not contain a 'scenery3d.ini' file";
     }
-    
+
     return scenery3dName;
 }
 
@@ -632,18 +581,18 @@ quint64 Scenery3dMgr::loadScenery3dSize(QString scenery3dID)
     quint64 scenery3dSize = 0;
     if (scenery3dID.isEmpty())
     {
-        qWarning() << "Scenery3dMgr: Error! No scenery3d ID passed to loadScenery3dSize().";
-        return scenery3dSize;
+	qWarning() << "Scenery3dMgr: Error! No scenery3d ID passed to loadScenery3dSize().";
+	return scenery3dSize;
     }
 
     QString scenery3dPath = getScenery3dPath(scenery3dID);
     if (scenery3dPath.isEmpty())
-        return scenery3dSize;
+	return scenery3dSize;
 
     QDir scenery3dDir(scenery3dPath);
     foreach (QFileInfo file, scenery3dDir.entryInfoList(QDir::Files | QDir::NoDotAndDotDot))
     {
-        scenery3dSize += file.size();
+	scenery3dSize += file.size();
     }
     return scenery3dSize;
 }
@@ -658,37 +607,135 @@ QString Scenery3dMgr::getCurrentScenery3dHtmlDescription() const
     return desc;
 }
 
-void Scenery3dMgr::setEnableShadows(bool enableShadows)
+void Scenery3dMgr::setEnableScene(const bool enable)
 {
-    this->enableShadows = enableShadows;
-    if (scenery3d != NULL) {
-        scenery3d->setShadowsEnabled(enableShadows);
-    }
-}
-
-void Scenery3dMgr::setEnableBumps(bool enableBumps)
-{
-    this->enableBumps = enableBumps;
-    if(scenery3d != NULL)
+    if(enable!=flagEnabled)
     {
-        scenery3d->setBumpsEnabled(enableBumps);
+	flagEnabled=enable;
+	if (scenery3d->getCubemapSize()==0)
+	{
+	    //TODO FS: remove this?
+	    if (flagEnabled)
+	    {
+		oldProjectionType= StelApp::getInstance().getCore()->getCurrentProjectionType();
+		StelApp::getInstance().getCore()->setCurrentProjectionType(StelCore::ProjectionPerspective);
+	    }
+	    else
+		StelApp::getInstance().getCore()->setCurrentProjectionType(oldProjectionType);
+	}
+
+	emit enableSceneChanged(flagEnabled);
     }
 }
 
-void Scenery3dMgr::setEnableShadowsFilter(bool enableShadowsFilter)
+bool Scenery3dMgr::getEnableShadows() const
 {
-    this->enableShadowsFilter = enableShadowsFilter;
-    if (scenery3d != NULL) {
-        scenery3d->setShadowsFilterEnabled(enableShadowsFilter);
-    }
+	return scenery3d->getShadowsEnabled();
 }
 
-void Scenery3dMgr::setEnableShadowsFilterHQ(bool enableShadowsFilterHQ)
+void Scenery3dMgr::setEnableShadows(const bool enableShadows)
 {
-    this->enableShadowsFilterHQ = enableShadowsFilterHQ;
-    if (scenery3d != NULL) {
-        scenery3d->setShadowsFilterHQEnabled(enableShadowsFilterHQ);
-    }
+	if(enableShadows != getEnableShadows())
+	{
+		if (scenery3d->getShadowmapSize())
+		{
+			showMessage(QString(N_("Shadows %1")).arg(enableShadows? N_("on") : N_("off")));
+			scenery3d->setShadowsEnabled(enableShadows);
+			emit enableShadowsChanged(enableShadows);
+		} else
+		{
+			showMessage(QString(N_("Shadows deactivated or not possible.")));
+			scenery3d->setShadowsEnabled(false);
+			emit enableShadowsChanged(false);
+		}
+	}
+}
+
+bool Scenery3dMgr::getEnableBumps() const
+{
+	return scenery3d->getBumpsEnabled();
+}
+
+void Scenery3dMgr::setEnableBumps(const bool enableBumps)
+{
+	if(enableBumps != getEnableBumps())
+	{
+		showMessage(QString(N_("Surface bumps %1")).arg(enableBumps? N_("on") : N_("off")));
+		scenery3d->setBumpsEnabled(enableBumps);
+		emit enableBumpsChanged(enableBumps);
+	}
+}
+
+bool Scenery3dMgr::getEnableShadowsFilter() const
+{
+	return scenery3d->getShadowsFilterEnabled();
+}
+
+void Scenery3dMgr::setEnableShadowsFilter(const bool enableShadowsFilter)
+{
+	if(enableShadowsFilter != getEnableShadowsFilter())
+	{
+		showMessage(QString(N_("Filtering shadows %1")).arg(enableShadowsFilter? N_("on") : N_("off")));
+		scenery3d->setShadowsFilterEnabled(enableShadowsFilter);
+		emit enableShadowsFilterChanged(enableShadowsFilter);
+	}
+}
+
+bool Scenery3dMgr::getEnableShadowsFilterHQ() const
+{
+	return scenery3d->getShadowsFilterHQEnabled();
+}
+
+void Scenery3dMgr::setEnableShadowsFilterHQ(const bool enableShadowsFilterHQ)
+{
+	if(enableShadowsFilterHQ != getEnableShadowsFilterHQ())
+	{
+		showMessage(QString(N_("Shadow filtering quality %1")).arg(enableShadowsFilterHQ? N_("high") : N_("low")));
+		scenery3d->setShadowsFilterHQEnabled(enableShadowsFilterHQ);
+		emit enableShadowsFilterHQChanged(enableShadowsFilterHQ);
+	}
+}
+
+bool Scenery3dMgr::getEnableDebugInfo() const
+{
+	return scenery3d->getDebugEnabled();
+}
+
+void Scenery3dMgr::setEnableDebugInfo(const bool debugEnabled)
+{
+	if(debugEnabled != getEnableDebugInfo())
+	{
+		scenery3d->setDebugEnabled(debugEnabled);
+		emit enableDebugInfoChanged(debugEnabled);
+	}
+}
+
+bool Scenery3dMgr::getEnableLocationInfo() const
+{
+	return scenery3d->getLocationInfoEnabled();
+}
+
+void Scenery3dMgr::setEnableLocationInfo(const bool enableLocationInfo)
+{
+	if(enableLocationInfo != getEnableLocationInfo())
+	{
+		scenery3d->setLocationInfoEnabled(enableLocationInfo);
+		emit enableLocationInfoChanged(enableLocationInfo);
+	}
+}
+
+bool Scenery3dMgr::getEnableTorchLight() const
+{
+	return scenery3d->getTorchEnabled();
+}
+
+void Scenery3dMgr::setEnableTorchLight(const bool enableTorchLight)
+{
+	if(enableTorchLight != getEnableTorchLight())
+	{
+		scenery3d->setTorchEnabled(enableTorchLight);
+		emit enableTorchLightChanged(enableTorchLight);
+	}
 }
 
 void Scenery3dMgr::showMessage(const QString& message)
@@ -700,8 +747,8 @@ void Scenery3dMgr::showMessage(const QString& message)
 
 void Scenery3dMgr::clearMessage()
 {
-        qDebug() << "Scenery3dMgr::clearMessage";
-        messageFader = false;
+	qDebug() << "Scenery3dMgr::clearMessage";
+	messageFader = false;
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -717,6 +764,7 @@ StelPluginInfo Scenery3dStelPluginInterface::getPluginInfo() const
 
     StelPluginInfo info;
     info.id = "Scenery3dMgr"; // TBD: Find way to call it just Scenery3d? [cosmetic]
+    info.version = SCENERY3D_PLUGIN_VERSION;
     info.displayedName = N_("3D Sceneries");
     info.authors = "Georg Zotti, Simon Parzer, Peter Neubauer, Andrei Borza";
     info.contact = "Georg.Zotti@univie.ac.at";

@@ -30,6 +30,7 @@
 #include "StelModule.hpp"
 #include "StelUtils.hpp"
 #include "StelFader.hpp"
+#include "StelActionMgr.hpp"
 
 #include "gui/Scenery3dDialog.hpp"
 
@@ -42,60 +43,75 @@ class QOpenGLShaderProgram;
 //! Main class of the module, inherits from StelModule
 class Scenery3dMgr : public StelModule
 {
-    Q_OBJECT
+	Q_OBJECT
 
-    // toggle to switch it off completely.
-    Q_PROPERTY(bool scenery3dEnabled
-               READ isScenery3dEnabled
-               WRITE setScenery3dEnabled
-               NOTIFY scenery3dEnabledChanged)
+	// toggle to switch it off completely.
+	Q_PROPERTY(bool enableScene  READ getEnableScene WRITE setEnableScene NOTIFY enableSceneChanged)
+	Q_PROPERTY(bool enableShadows READ getEnableShadows WRITE setEnableShadows NOTIFY enableShadowsChanged)
+	Q_PROPERTY(bool enableBumps READ getEnableBumps WRITE setEnableBumps NOTIFY enableBumpsChanged)
+	Q_PROPERTY(bool enableShadowsFilter READ getEnableShadowsFilter WRITE setEnableShadowsFilter NOTIFY enableShadowsFilterChanged)
+	Q_PROPERTY(bool enableShadowsFilterHQ READ getEnableShadowsFilterHQ WRITE setEnableShadowsFilterHQ NOTIFY enableShadowsFilterHQChanged)
+	Q_PROPERTY(bool enableDebugInfo READ getEnableDebugInfo WRITE setEnableDebugInfo NOTIFY enableDebugInfoChanged)
+	Q_PROPERTY(bool enableLocationInfo READ getEnableLocationInfo WRITE setEnableLocationInfo NOTIFY enableLocationInfoChanged)
+	Q_PROPERTY(bool enableTorchLight READ getEnableTorchLight WRITE setEnableTorchLight NOTIFY enableTorchLightChanged)
 
 public:
     Scenery3dMgr();
     virtual ~Scenery3dMgr();
 
+    //StelModule members
     virtual void init();
+    virtual void deinit();
     virtual void draw(StelCore* core);
     virtual void update(double deltaTime);
-    virtual void updateI18n();
-    virtual void setStelStyle(const QString& section);
     virtual double getCallOrder(StelModuleActionName actionName) const;
     virtual bool configureGui(bool show);
     virtual void handleKeys(QKeyEvent* e);
 
-    //! Loads (or reloads) the required shaders from the shader files.
-    void loadShaders();
-    bool loadShader(QOpenGLShaderProgram& program, const QString& vShader, const QString& fShader);
-    bool load(QMap<QString, QString>& param);
-    Scenery3d* createFromFile(const QString& file, const QString& id);
-
-    //! Use this to set/get the enableShadows flag.
-    //! If set to true, shadow mapping is enabled for the 3D scene.
-    void setEnableShadows(bool enableShadows);
-    bool getEnableShadows(void){return enableShadows;}
-    //! Use this to set/get the enableBumps flag.
-    //! If set to true, bump mapping is enabled for the 3D scene.
-    void setEnableBumps(bool enableBumps);
-    bool getEnableBumps(void){return enableBumps;}
-    //! Use this to set/get the enableFilter flag.
-    //! If set to true, the shadows in the 3D scene are filtered.
-    void setEnableShadowsFilter(bool enableShadowsFilter);
-    bool getEnableShadowsFilter(void){return enableShadowsFilter;}
-    //! Use this to set/get the enableFilter flag.
-    //! If set to true, the shadows in the 3D scene are filtered using more taps per pass.
-    void setEnableShadowsFilterHQ(bool enableShadowsFilterHQ);
-    bool getEnableShadowsFilterHQ(void){return enableShadowsFilterHQ;}
-
-
     static const QString MODULE_PATH;
 
 signals:
-    void scenery3dEnabledChanged(const bool val);
+    void enableSceneChanged(const bool val);
+    void enableShadowsChanged(const bool val);
+    void enableBumpsChanged(const bool val);
+    void enableShadowsFilterChanged(const bool val);
+    void enableShadowsFilterHQChanged(const bool val);
+    void enableDebugInfoChanged(const bool val);
+    void enableLocationInfoChanged(const bool val);
+    void enableTorchLightChanged(const bool val);
 
 public slots:
+    //! Loads (or reloads) the required shaders from the shader files.
+    void loadShaders();
+
     //! Enables/Disables the plugin
-    void setScenery3dEnabled(const bool val);
-    bool isScenery3dEnabled() const;
+    void setEnableScene(const bool val);
+    bool getEnableScene() const {return flagEnabled; }
+    //! Use this to set/get the enableShadows flag.
+    //! If set to true, shadow mapping is enabled for the 3D scene.
+    void setEnableShadows(const bool enableShadows);
+    bool getEnableShadows(void) const;
+    //! Use this to set/get the enableBumps flag.
+    //! If set to true, bump mapping is enabled for the 3D scene.
+    void setEnableBumps(const bool enableBumps);
+    bool getEnableBumps(void) const;
+    //! Use this to set/get the enableFilter flag.
+    //! If set to true, the shadows in the 3D scene are filtered.
+    void setEnableShadowsFilter(const bool enableShadowsFilter);
+    bool getEnableShadowsFilter(void) const;
+    //! Use this to set/get the enableFilter flag.
+    //! If set to true, the shadows in the 3D scene are filtered using more taps per pass.
+    void setEnableShadowsFilterHQ(const bool enableShadowsFilterHQ);
+    bool getEnableShadowsFilterHQ(void) const;
+    //! Set to true to show some rendering debug information
+    void setEnableDebugInfo(const bool debugEnabled);
+    bool getEnableDebugInfo() const;
+    //! Set to true to show the current standing positin as text on screen.
+    void setEnableLocationInfo(const bool enableLocationInfo);
+    bool getEnableLocationInfo() const;
+    //! Set to true to add an additional light source centered at the current position, useful in night scenes.
+    void setEnableTorchLight(const bool enableTorchLight);
+    bool getEnableTorchLight() const;
 
     QStringList getAllScenery3dNames() const;
     QStringList getAllScenery3dIDs() const;
@@ -122,21 +138,25 @@ private:
     //! Display text message on screen, fade out automatically
     void showMessage(const QString& message);
 
+    //! Loads config values from app settings
+    void loadConfig();
+    //! Creates all actions required by the plugin
+    void createActions();
 
-    int cubemapSize;   // configurable via config.ini:Scenery3d/cubemapSize
-    int shadowmapSize; // configurable via config.ini:Scenery3d/shadowmapSize
-    float torchBrightness; // configurable via config.ini:Scenery3d/extralight_brightness
+    //! Loads a Scenery3d scene from file
+    Scenery3d* createFromFile(const QString& file, const QString& id);
+
+    //! Loads the given vertex and fragment shaders into the given program.
+    bool loadShader(QOpenGLShaderProgram& program, const QString& vShader, const QString& fShader);
+
     Scenery3d* scenery3d;
     Scenery3dDialog* scenery3dDialog;
     QString currentScenery3dID;
     QString defaultScenery3dID;
     bool flagEnabled;
-    bool enableShadows;          // toggle shadow mapping
-    bool enableBumps;            // toggle bump mapping
-    bool enableShadowsFilter;    // toggle shadow filtering
-    bool enableShadowsFilterHQ;  // toggle shadow filtering HQ
-    StelButton* toolbarEnableButton;
-    StelButton* toolbarSettingsButton;
+    bool cleanedUp;
+
+    StelAction* enableAction;
     StelCore::ProjectionType oldProjectionType;
 
     //Shader for shadow mapping

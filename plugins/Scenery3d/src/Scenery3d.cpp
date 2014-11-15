@@ -77,14 +77,13 @@ static const float LUNAR_BRIGHTNESS_FACTOR=0.2f;
 static const float VENUS_BRIGHTNESS_FACTOR=0.005f;
 
 
-Scenery3d::Scenery3d(int cubemapSize, int shadowmapSize, float torchBrightness)
+Scenery3d::Scenery3d()
     :absolutePosition(0.0, 0.0, 0.0), // 1.E-12, 1.E-12, 1.E-12), // these values signify "set default values"
     movement_x(0.0f), movement_y(0.0f), movement_z(0.0f),core(NULL),
-    objModel(NULL), groundModel(NULL), heightmap(NULL), location(NULL)
+    objModel(NULL), groundModel(NULL), heightmap(NULL), location(NULL),
+    cubemapSize(1024),shadowmapSize(1024),torchBrightness(0.5f)
 {
-    this->cubemapSize=cubemapSize;
-    this->shadowmapSize=shadowmapSize;
-    this->torchBrightness=torchBrightness;
+	qDebug()<<"Scenery3d constructor...";
     objModel = new OBJ();
     groundModel = new OBJ();
     eyeLevel=1.65;
@@ -168,7 +167,6 @@ Scenery3d::Scenery3d(int cubemapSize, int shadowmapSize, float torchBrightness)
 
     camDepthFBO = 0;
     camDepthTex = 0;
-    analyzeDebug = false;
 
     writeTex = 0;
     readTex = 1;
@@ -187,6 +185,10 @@ Scenery3d::Scenery3d(int cubemapSize, int shadowmapSize, float torchBrightness)
     PLANE(cubePlaneTop, Mat4d::xrotation(-M_PI_2))
     PLANE(cubePlaneBottom, Mat4d::xrotation(M_PI_2))
 #undef PLANE
+
+	debugTextFont.setFamily("Courier");
+	debugTextFont.setPixelSize(16);
+	qDebug()<<"Scenery3d constructor...done";
 }
 
 Scenery3d::~Scenery3d()
@@ -235,6 +237,7 @@ Scenery3d::~Scenery3d()
 
 void Scenery3d::loadConfig(const QSettings& scenery3dIni, const QString& scenery3dID)
 {
+	//TODO FS: make the scenery3d metadata its own struct, so that the scene data remains independent of renderer data!
     id = scenery3dID;
     name = scenery3dIni.value("model/name").toString();
     authorName = scenery3dIni.value("model/author").toString();
@@ -508,22 +511,14 @@ void Scenery3d::handleKeys(QKeyEvent* e)
         float speedup=((e->modifiers() & Qt::ShiftModifier)? 10.0f : 1.0f);
         speedup *= ((e->modifiers() & Qt::AltModifier)? 5.0f : 1.0f);
         switch (e->key())
-        {
-            //case Qt::Key_Space:     shadowsEnabled = !shadowsEnabled; e->accept(); break;
-            //case Qt::Key_B:         bumpsEnabled = !bumpsEnabled; e->accept(); break;
-            case Qt::Key_L:         torchEnabled = !torchEnabled; e->accept(); break;
-            case Qt::Key_K:         textEnabled  = !textEnabled;  e->accept(); break;
+	{
             case Qt::Key_PageUp:    movement_z = -1.0f * speedup; e->accept(); break;
             case Qt::Key_PageDown:  movement_z =  1.0f * speedup; e->accept(); break;
             case Qt::Key_Up:        movement_y = -1.0f * speedup; e->accept(); break;
             case Qt::Key_Down:      movement_y =  1.0f * speedup; e->accept(); break;
             case Qt::Key_Right:     movement_x =  1.0f * speedup; e->accept(); break;
             case Qt::Key_Left:      movement_x = -1.0f * speedup; e->accept(); break;
-            case Qt::Key_P:         saveFrusts(); e->accept(); break;
-            case Qt::Key_D:         debugEnabled = !debugEnabled; e->accept(); break;
-            case Qt::Key_H:         analyzeDebug = !analyzeDebug; e->accept(); break;
-            //case Qt::Key_I:         filterShadowsEnabled = ! filterShadowsEnabled; e->accept(); break;
-            //case Qt::Key_U:         filterHQ = !filterHQ; e->accept(); break;
+	    case Qt::Key_P:         saveFrusts(); e->accept(); break;
         }
     }
     else if ((e->type() == QKeyEvent::KeyRelease) && (e->modifiers() & Qt::ControlModifier))
@@ -1817,7 +1812,7 @@ void Scenery3d::generateCubeMap()
 void Scenery3d::drawFromCubeMap(StelCore* core)
 {
     if(!hasModels)
-        return;
+	return;
 
     const StelProjectorP prj = core->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
     StelPainter painter(prj);
@@ -1835,54 +1830,6 @@ void Scenery3d::drawFromCubeMap(StelCore* core)
     glClear(GL_DEPTH_BUFFER_BIT);
 
     glActiveTexture(GL_TEXTURE0);
-    painter.setColor(1,0,1,1);
-
-    //Show some debug aids
-    if(debugEnabled)
-    {
-        float debugTextureSize = 128.0f;
-        const QFont font("Courier", 12);
-	painter.setFont(font);
-
-        float screen_x = prj->getViewportWidth() - debugTextureSize - 30;
-        float screen_y = prj->getViewportHeight() - debugTextureSize - 30;
-
-	if(shadowsEnabled)
-	{
-		for(int i=0; i<frustumSplits; i++)
-		{
-			std::string cap = "SM "+toString(i);
-			painter.drawText(screen_x+70, screen_y+130, QString(cap.c_str()));
-
-			glBindTexture(GL_TEXTURE_2D, shadowMapsArray[i]);
-			painter.drawSprite2dMode(screen_x, screen_y, debugTextureSize);
-
-			int tmp = screen_y - debugTextureSize-30;
-			painter.drawText(screen_x-100, tmp, QString("zNear: %1").arg(frustumArray[i].zNear, 7, 'f', 2));
-			painter.drawText(screen_x-100, tmp-15.0f, QString("zFar: %1").arg(frustumArray[i].zFar, 7, 'f', 2));
-
-			screen_x -= 280;
-		}
-	}
-
-        painter.drawText(screen_x+250.0f, screen_y-200.0f, QString("Splitweight: %1").arg(splitWeight, 3, 'f', 2));
-    }
-
-    if(analyzeDebug)
-    {
-        float debugTextureSize = 128.0f;
-        const QFont font("Courier", 12);
-        painter.setFont(font);
-
-        float screen_x = prj->getViewportWidth() - debugTextureSize - 30;
-        float screen_y = prj->getViewportHeight() - debugTextureSize - 30;
-
-        std::string cap = "Camera depth";
-        painter.drawText(screen_x-150, screen_y+130, QString(cap.c_str()));
-
-        glBindTexture(GL_TEXTURE_2D, camDepthTex);
-        painter.drawSprite2dMode(screen_x, screen_y, debugTextureSize);
-    }
 
     //painter's color is multiplied with the texture
     painter.setColor(1.0f,1.0f,1.0f,1.0f);
@@ -2002,8 +1949,7 @@ void Scenery3d::drawCoordinatesText(StelCore* core)
 
     const StelProjectorP prj = core->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
     StelPainter painter(prj);
-    const QFont font("Courier", 12);
-    painter.setFont(font);
+    painter.setFont(debugTextFont);
     painter.setColor(1.0f,0.0f,1.0f);
     float screen_x = prj->getViewportWidth()  - 240.0f;
     float screen_y = prj->getViewportHeight() -  60.0f;
@@ -2050,15 +1996,15 @@ void Scenery3d::drawCoordinatesText(StelCore* core)
     //*/
 }
 
-void Scenery3d::drawDebugText(StelCore* core)
+void Scenery3d::drawDebug(StelCore* core)
 {
     if(!hasModels)
         return;
 
     const StelProjectorP prj = core->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
     StelPainter painter(prj);
-    const QFont font("Courier", 12);
-    painter.setFont(font);
+    painter.setFont(debugTextFont);
+    painter.setColor(1,0,1,1);
     // For now, these messages print light mixture values.
     painter.drawText(20, 160, lightMessage);
     painter.drawText(20, 145, lightMessage2);
@@ -2067,6 +2013,40 @@ void Scenery3d::drawDebugText(StelCore* core)
 
     float screen_x = prj->getViewportWidth()  - 500.0f;
     float screen_y = prj->getViewportHeight() - 300.0f;
+
+    //Show some debug aids
+    if(debugEnabled)
+    {
+	float debugTextureSize = 128.0f;
+	float screen_x = prj->getViewportWidth() - debugTextureSize - 30;
+	float screen_y = prj->getViewportHeight() - debugTextureSize - 30;
+
+//	std::string cap = "Camera depth";
+//	painter.drawText(screen_x-150, screen_y+130, QString(cap.c_str()));
+
+//	glBindTexture(GL_TEXTURE_2D, camDepthTex);
+//	painter.drawSprite2dMode(screen_x, screen_y, debugTextureSize);
+
+	if(shadowsEnabled)
+	{
+		for(int i=0; i<frustumSplits; i++)
+		{
+			std::string cap = "SM "+toString(i);
+			painter.drawText(screen_x+70, screen_y+130, QString(cap.c_str()));
+
+			glBindTexture(GL_TEXTURE_2D, shadowMapsArray[i]);
+			painter.drawSprite2dMode(screen_x, screen_y, debugTextureSize);
+
+			int tmp = screen_y - debugTextureSize-30;
+			painter.drawText(screen_x-100, tmp, QString("zNear: %1").arg(frustumArray[i].zNear, 7, 'f', 2));
+			painter.drawText(screen_x-100, tmp-15.0f, QString("zFar: %1").arg(frustumArray[i].zFar, 7, 'f', 2));
+
+			screen_x -= 280;
+		}
+	}
+
+	painter.drawText(screen_x+250.0f, screen_y-200.0f, QString("Splitweight: %1").arg(splitWeight, 3, 'f', 2));
+    }
 
     screen_y -= 100.f;
     QString str = QString("Drawn: %1").arg(drawn);
@@ -2271,7 +2251,7 @@ void Scenery3d::draw(StelCore* core)
     if (textEnabled) drawCoordinatesText(core);
     if (debugEnabled)
     {
-        drawDebugText(core);
+	drawDebug(core);
     }
 }
 
