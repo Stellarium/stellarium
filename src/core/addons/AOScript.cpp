@@ -40,9 +40,9 @@ QStringList AOScript::checkInstalledAddOns() const
 	return dir.entryList();
 }
 
-int AOScript::installFromFile(const QString& idInstall,
-			      const QString& downloadedFilepath,
-			      const QStringList& selectedFiles) const
+AddOn::Status AOScript::installFromFile(const QString& idInstall,
+					const QString& downloadedFilepath,
+					const QStringList& selectedFiles) const
 {
 	Q_UNUSED(selectedFiles); // not applicable - always install all files
 
@@ -66,8 +66,8 @@ int AOScript::installFromFile(const QString& idInstall,
 	return AddOn::FullyInstalled;
 }
 
-int AOScript::uninstallAddOn(const QString& idInstall,
-			     const QStringList& selectedFiles) const
+AddOn::Status AOScript::uninstallAddOn(const QString& idInstall,
+				       const QStringList& selectedFiles) const
 {
 	Q_UNUSED(selectedFiles); // not applicable - always install all files
 

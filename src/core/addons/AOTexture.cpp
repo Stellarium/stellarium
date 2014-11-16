@@ -52,31 +52,30 @@ QStringList AOTexture::checkInstalledAddOns() const
 	return res;
 }
 
-int AOTexture::installFromFile(const QString& idInstall,
-			       const QString& downloadedFilepath,
-			       const QStringList& selectedFiles) const
+AddOn::Status AOTexture::installFromFile(const QString& idInstall,
+					 const QString& downloadedFilepath,
+					 const QStringList& selectedFiles) const
 {
-	int installed;
+	AddOn::Status status;
 	QString suffix = QFileInfo(downloadedFilepath).suffix();
 	if (suffix == "zip")
 	{
-		installed = installFromZip(idInstall, downloadedFilepath, selectedFiles);
+		status = installFromZip(idInstall, downloadedFilepath, selectedFiles);
 	}
 	else if (suffix == "png")
 	{
-		installed = installFromImg(idInstall, downloadedFilepath);
+		status = installFromImg(idInstall, downloadedFilepath);
 	}
 	else
 	{
 		qWarning() << "Add-On Texture: Unable to intall" << idInstall
 			   << "The file found is not a .zip or .png";
-		installed = AddOn::InvalidFormat;
+		status = AddOn::InvalidFormat;
 	}
-
-	return installed;
+	return status;
 }
 
-int AOTexture::installFromZip(QString idInstall, QString downloadedFilepath, QStringList selectedFiles) const
+AddOn::Status AOTexture::installFromZip(QString idInstall, QString downloadedFilepath, QStringList selectedFiles) const
 {
 	QZipReader reader(downloadedFilepath);
 	if (reader.status() != QZipReader::NoError)
@@ -86,7 +85,7 @@ int AOTexture::installFromZip(QString idInstall, QString downloadedFilepath, QSt
 		return AddOn::UnableToRead;
 	}
 
-	int installed = AddOn::FullyInstalled;
+	AddOn::Status status = AddOn::FullyInstalled;
 	QList<QZipReader::FileInfo> infoList = reader.fileInfoList();
 	foreach(QZipReader::FileInfo info, infoList)
 	{
@@ -102,7 +101,7 @@ int AOTexture::installFromZip(QString idInstall, QString downloadedFilepath, QSt
 		{
 			if (!selectedFiles.contains(info.filePath) && !file.exists())
 			{
-				installed = AddOn::PartiallyInstalled;
+				status = AddOn::PartiallyInstalled;
 				continue;
 			}
 		}
@@ -117,11 +116,10 @@ int AOTexture::installFromZip(QString idInstall, QString downloadedFilepath, QSt
 
 		qDebug() << "Add-On Texture: New texture installed:" << info.filePath;
 	}
-
-	return installed;
+	return status;
 }
 
-int AOTexture::installFromImg(QString idInstall, QString downloadedFilepath) const
+AddOn::Status AOTexture::installFromImg(QString idInstall, QString downloadedFilepath) const
 {
 	QString filename = QFileInfo(downloadedFilepath).fileName();
 	QString destination = m_sTexturesInstallDir % filename;
@@ -138,8 +136,8 @@ int AOTexture::installFromImg(QString idInstall, QString downloadedFilepath) con
 	return AddOn::FullyInstalled;
 }
 
-int AOTexture::uninstallAddOn(const QString& idInstall,
-			      const QStringList& selectedFiles) const
+AddOn::Status AOTexture::uninstallAddOn(const QString& idInstall,
+					const QStringList& selectedFiles) const
 {
 	int filesRemoved = 0;
 	foreach (QString texture, m_pInstalledTextures->allKeys())

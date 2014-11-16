@@ -303,7 +303,7 @@ void StelAddOnDAO::updateAddOnStatus(QString idInstall, int installed)
 
 StelAddOnDAO::AddOnInfo StelAddOnDAO::getAddOnInfo(int addonId)
 {
-	if (addonId < 1) {
+/*	if (addonId < 1) {
 		qWarning() << "Add-On DAO getAddOnInfo: invalid addon id!";
 		return AddOnInfo();
 	}
@@ -348,7 +348,7 @@ StelAddOnDAO::AddOnInfo StelAddOnDAO::getAddOnInfo(int addonId)
 		addonInfo.filepath = categoryDir % addonInfo.filename;
 		return addonInfo;
 	}
-
+*/
 	return AddOnInfo();
 }
 

@@ -54,9 +54,9 @@ QStringList AOLanguagePack::checkInstalledAddOns() const
 	return checksums;
 }
 
-int AOLanguagePack::installFromFile(const QString& idInstall,
-				    const QString& downloadedFilepath,
-				    const QStringList& selectedFiles) const
+AddOn::Status AOLanguagePack::installFromFile(const QString& idInstall,
+					      const QString& downloadedFilepath,
+					      const QStringList& selectedFiles) const
 {
 	Q_UNUSED(selectedFiles); // not applicable - always install all files
 
@@ -79,8 +79,8 @@ int AOLanguagePack::installFromFile(const QString& idInstall,
 	return AddOn::FullyInstalled;
 }
 
-int AOLanguagePack::uninstallAddOn(const QString &idInstall,
-				   const QStringList& selectedFiles) const
+AddOn::Status AOLanguagePack::uninstallAddOn(const QString &idInstall,
+					     const QStringList& selectedFiles) const
 {
 	Q_UNUSED(selectedFiles); // not applicable - always install all files
 

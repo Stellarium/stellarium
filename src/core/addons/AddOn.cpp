@@ -72,10 +72,6 @@ AddOn::AddOn(const qint64 addOnId, const QVariantMap& map)
 		return;
 	}
 
-	// filepath
-	QString categoryDir = StelApp::getInstance().getStelAddOnMgr().getDirectory(m_eCategory);
-	m_sDownloadFilepath = categoryDir % m_sDownloadFilename;
-
 	if (map.contains("authors"))
 	{
 		foreach (const QVariant& author, map.value("authors").toList())
@@ -178,4 +174,10 @@ QString AddOn::getStatusString() {
 		default:
 			return "Not installed";
 	}
+}
+
+QString AddOn::getDownloadFilepath()
+{
+	QString categoryDir = StelApp::getInstance().getStelAddOnMgr().getDirectory(m_eCategory);
+	return categoryDir % m_sDownloadFilename;
 }

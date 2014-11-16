@@ -33,13 +33,13 @@ public:
 	virtual QStringList checkInstalledAddOns() const;
 
 	// install catalog.
-	virtual int installFromFile(const QString& idInstall,
-				     const QString& downloadedFilepath,
-				     const QStringList& selectedFiles) const;
+	virtual AddOn::Status installFromFile(const QString& idInstall,
+					      const QString& downloadedFilepath,
+					      const QStringList& selectedFiles) const;
 
 	// uninstall catalog
-	virtual int uninstallAddOn(const QString& idInstall,
-				   const QStringList& selectedFiles) const;
+	virtual AddOn::Status uninstallAddOn(const QString& idInstall,
+					     const QStringList& selectedFiles) const;
 };
 
 #endif // _AOCATALOG_HPP_

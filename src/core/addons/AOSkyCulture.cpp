@@ -37,9 +37,9 @@ QStringList AOSkyCulture::checkInstalledAddOns() const
 	return dir.entryList();
 }
 
-int AOSkyCulture::installFromFile(const QString& idInstall,
-				  const QString& downloadedFilepath,
-				  const QStringList& selectedFiles) const
+AddOn::Status AOSkyCulture::installFromFile(const QString& idInstall,
+					    const QString& downloadedFilepath,
+					    const QStringList& selectedFiles) const
 {
 	Q_UNUSED(selectedFiles); // not applicable - always install all files
 
@@ -64,8 +64,8 @@ int AOSkyCulture::installFromFile(const QString& idInstall,
 	return AddOn::FullyInstalled;
 }
 
-int AOSkyCulture::uninstallAddOn(const QString &idInstall,
-				 const QStringList& selectedFiles) const
+AddOn::Status AOSkyCulture::uninstallAddOn(const QString &idInstall,
+					   const QStringList& selectedFiles) const
 {
 	Q_UNUSED(selectedFiles); // not applicable - always install all files
 

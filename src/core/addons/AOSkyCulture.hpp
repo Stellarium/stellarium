@@ -33,13 +33,13 @@ public:
 	virtual QStringList checkInstalledAddOns() const;
 
 	// install starlore from a zip file.
-	virtual int installFromFile(const QString& idInstall,
-				    const QString& downloadedFilepath,
-				    const QStringList& selectedFiles) const;
+	virtual AddOn::Status installFromFile(const QString& idInstall,
+					      const QString& downloadedFilepath,
+					      const QStringList& selectedFiles) const;
 
 	// uninstall starlore
-	virtual int uninstallAddOn(const QString& idInstall,
-				   const QStringList& selectedFiles) const;
+	virtual AddOn::Status uninstallAddOn(const QString& idInstall,
+					     const QStringList& selectedFiles) const;
 
 signals:
 	void skyCulturesChanged() const;

@@ -59,7 +59,7 @@ AddOnWidget::AddOnWidget(QWidget* parent, int row, AddOn* addon)
 	ui->txtLicense->setText(addon->getLicenseName() % " <" % addon->getLicenseURL() % ">");
 
 	// Download Size
-	ui->txtSize->setText(addon->getDownloadSize() % " MB");
+	ui->txtSize->setText(QString::number(addon->getDownloadSize()) % " KBytes");
 
 	// Thumbnail
 	QString thumbnailDir = StelApp::getInstance().getStelAddOnMgr().getThumbnailDir();

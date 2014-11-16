@@ -34,13 +34,13 @@ public:
 	virtual QStringList checkInstalledAddOns() const;
 
 	// install texture from a zip file.
-	virtual int installFromFile(const QString& idInstall,
-				    const QString& downloadedFilepath,
-				    const QStringList& selectedFiles) const;
+	virtual AddOn::Status installFromFile(const QString& idInstall,
+					      const QString& downloadedFilepath,
+					      const QStringList& selectedFiles) const;
 
 	// uninstall texture
-	virtual int uninstallAddOn(const QString& idInstall,
-				    const QStringList& selectedFiles) const;
+	virtual AddOn::Status uninstallAddOn(const QString& idInstall,
+					     const QStringList& selectedFiles) const;
 
 private:
 	const QString m_sTexturesInstallDir;
@@ -49,8 +49,8 @@ private:
 	// it will store the texture name and the id_install (enough to identify the source)
 	QSettings* m_pInstalledTextures; // .ini file
 
-	int installFromZip(QString idInstall, QString downloadedFilepath, QStringList filesToInstall) const;
-	int installFromImg(QString idInstall, QString downloadedFilepath) const;
+	AddOn::Status installFromZip(QString idInstall, QString downloadedFilepath, QStringList filesToInstall) const;
+	AddOn::Status installFromImg(QString idInstall, QString downloadedFilepath) const;
 };
 
 #endif // _AOTEXTURE_HPP_

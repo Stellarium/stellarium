@@ -33,13 +33,13 @@ public:
 	virtual QStringList checkInstalledAddOns() const;
 
 	// install language pack from a .qm file.
-	virtual int installFromFile(const QString& idInstall,
-				    const QString& downloadedFilepath,
-				    const QStringList& selectedFiles) const;
+	virtual AddOn::Status installFromFile(const QString& idInstall,
+					      const QString& downloadedFilepath,
+					      const QStringList& selectedFiles) const;
 
 	// uninstall language pack
-	virtual int uninstallAddOn(const QString& idInstall,
-				   const QStringList& selectedFiles) const;
+	virtual AddOn::Status uninstallAddOn(const QString& idInstall,
+					     const QStringList& selectedFiles) const;
 
 private:
 	const QString m_sLocaleInstallDir;

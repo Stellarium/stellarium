@@ -36,7 +36,7 @@ StelAddOnMgr::StelAddOnMgr()
 	: m_db(QSqlDatabase::addDatabase("QSQLITE"))
 	, m_pStelAddOnDAO(new StelAddOnDAO(m_db))
 	, m_pConfig(StelApp::getInstance().getSettings())
-	, m_iDownloadingId(0)
+	, m_downloadingAddOn(NULL)
 	, m_pAddOnNetworkReply(NULL)
 	, m_currentDownloadFile(NULL)
 	, m_progressBar(NULL)
@@ -51,6 +51,19 @@ StelAddOnMgr::StelAddOnMgr()
 	// creating addon dir
 	StelFileMgr::makeSureDirExistsAndIsWritable(m_sAddOnDir);
 	StelFileMgr::makeSureDirExistsAndIsWritable(m_sThumbnailDir);
+
+	// creating sub-dirs
+	m_dirs.insert(AddOn::CATALOG, m_sAddOnDir % CATEGORY_CATALOG % "/");
+	m_dirs.insert(AddOn::LANDSCAPE, m_sAddOnDir % CATEGORY_LANDSCAPE % "/");
+	m_dirs.insert(AddOn::LANGUAGEPACK, m_sAddOnDir % CATEGORY_LANGUAGE_PACK % "/");
+	m_dirs.insert(AddOn::SCRIPT, m_sAddOnDir % CATEGORY_SCRIPT % "/");
+	m_dirs.insert(AddOn::STARLORE, m_sAddOnDir % CATEGORY_SKY_CULTURE % "/");
+	m_dirs.insert(AddOn::TEXTURE, m_sAddOnDir % CATEGORY_TEXTURE % "/");
+	QHashIterator<AddOn::Category, QString> it(m_dirs);
+	while (it.hasNext()) {
+		it.next();
+		StelFileMgr::makeSureDirExistsAndIsWritable(it.value());
+	}
 
 	// Initialize settings in the main config file
 	if (m_pConfig->childGroups().contains("AddOn"))
@@ -107,28 +120,15 @@ StelAddOnMgr::StelAddOnMgr()
 	// Init database
 	m_pStelAddOnDAO->init();
 
-	// creating sub-dirs
-	m_dirs.insert(CATEGORY_CATALOG, m_sAddOnDir % CATEGORY_CATALOG % "/");
-	m_dirs.insert(CATEGORY_LANDSCAPE, m_sAddOnDir % CATEGORY_LANDSCAPE % "/");
-	m_dirs.insert(CATEGORY_LANGUAGE_PACK, m_sAddOnDir % CATEGORY_LANGUAGE_PACK % "/");
-	m_dirs.insert(CATEGORY_SCRIPT, m_sAddOnDir % CATEGORY_SCRIPT % "/");
-	m_dirs.insert(CATEGORY_SKY_CULTURE, m_sAddOnDir % CATEGORY_SKY_CULTURE % "/");
-	m_dirs.insert(CATEGORY_TEXTURE, m_sAddOnDir % CATEGORY_TEXTURE % "/");
-	QHashIterator<QString, QString> it(m_dirs);
-	while (it.hasNext()) {
-		it.next();
-		StelFileMgr::makeSureDirExistsAndIsWritable(it.value());
-	}
-
 	// Init sub-classes
-	m_pStelAddOns.insert(CATEGORY_CATALOG, new AOCatalog());
-	m_pStelAddOns.insert(CATEGORY_LANDSCAPE, new AOLandscape());
-	m_pStelAddOns.insert(CATEGORY_LANGUAGE_PACK, new AOLanguagePack());
-	m_pStelAddOns.insert(CATEGORY_SCRIPT, new AOScript());
-	m_pStelAddOns.insert(CATEGORY_SKY_CULTURE, new AOSkyCulture());
-	m_pStelAddOns.insert(CATEGORY_TEXTURE, new AOTexture());
+	m_pStelAddOns.insert(AddOn::CATALOG, new AOCatalog());
+	m_pStelAddOns.insert(AddOn::LANDSCAPE, new AOLandscape());
+	m_pStelAddOns.insert(AddOn::LANGUAGEPACK, new AOLanguagePack());
+	m_pStelAddOns.insert(AddOn::SCRIPT, new AOScript());
+	m_pStelAddOns.insert(AddOn::STARLORE, new AOSkyCulture());
+	m_pStelAddOns.insert(AddOn::TEXTURE, new AOTexture());
 
-	connect(m_pStelAddOns.value(CATEGORY_SKY_CULTURE), SIGNAL(skyCulturesChanged()),
+	connect(m_pStelAddOns.value(AddOn::STARLORE), SIGNAL(skyCulturesChanged()),
 		this, SIGNAL(skyCulturesChanged()));
 
 	// refresh add-ons statuses (it checks which are installed or not)
@@ -179,6 +179,7 @@ void StelAddOnMgr::readJsonObject(const QJsonObject& addOns)
 			AddOnMap amap;
 			amap.insert(addOnId, addOn);
 			m_addons.insert(addOn->getType(), amap);
+			m_addonsByMd5.insert(addOn->getChecksum(), addOn);
 		}
 	}
 }
@@ -213,7 +214,7 @@ void StelAddOnMgr::refreshAddOnStatuses()
 	m_pStelAddOnDAO->markAllAddOnsAsUninstalled();
 
 	// check add-ons which are already installed
-	QHashIterator<QString, StelAddOn*> aos(m_pStelAddOns);
+	QHashIterator<AddOn::Category, StelAddOn*> aos(m_pStelAddOns);
 	while (aos.hasNext())
 	{
 		aos.next();
@@ -223,11 +224,11 @@ void StelAddOnMgr::refreshAddOnStatuses()
 			continue;
 		}
 
-		if (aos.key() == CATEGORY_CATALOG || aos.key() == CATEGORY_LANGUAGE_PACK)
+		if (aos.key() == AddOn::CATALOG || aos.key() == AddOn::LANGUAGEPACK)
 		{
 			m_pStelAddOnDAO->markAddOnsAsInstalledFromMd5(list);
 		}
-		else if (aos.key() == CATEGORY_TEXTURE)
+		else if (aos.key() == AddOn::TEXTURE)
 		{
 			m_pStelAddOnDAO->markTexturesAsInstalled(list);
 		}
@@ -300,98 +301,87 @@ void StelAddOnMgr::downloadThumbnailFinished()
 	downloadNextThumbnail();
 }
 
-void StelAddOnMgr::installAddOn(const int addonId, const QStringList selectedFiles)
+void StelAddOnMgr::installAddOn(AddOn* addon, const QStringList selectedFiles)
 {
-	if (m_downloadQueue.contains(addonId) || addonId < 1)
+	if (!addon || !addon->isValid() || m_downloadQueue.contains(addon))
 	{
 		return;
 	}
 
-	StelAddOnDAO::AddOnInfo addonInfo = m_pStelAddOnDAO->getAddOnInfo(addonId);
-	if (!installFromFile(addonInfo, selectedFiles))
+	AddOn::Status s = installFromFile(addon, selectedFiles);
+	if (s == AddOn::NotInstalled || s == AddOn::Corrupted)
 	{
 		// something goes wrong (file not found OR corrupt),
 		// try downloading it...
-		m_pStelAddOnDAO->updateAddOnStatus(addonInfo.idInstall, AddOn::Installing);
-		emit (dataUpdated(addonInfo.category));
-		m_downloadQueue.insert(addonId, selectedFiles);
+		addon->setStatus(AddOn::Installing);
+		emit (dataUpdated(addon->getCategory()));
+		m_downloadQueue.insert(addon, selectedFiles);
 		downloadNextAddOn();
 	}
 }
 
-bool StelAddOnMgr::installFromFile(const StelAddOnDAO::AddOnInfo addonInfo,
-				   const QStringList selectedFiles)
+AddOn::Status StelAddOnMgr::installFromFile(AddOn* addon, const QStringList selectedFiles)
 {
-	QFile file(addonInfo.filepath);
+	QFile file(addon->getDownloadFilepath());
 	// checking if we have this file in the add-on dir (local disk)
 	if (!file.exists())
 	{
-		return false;
+		return AddOn::NotInstalled;
 	}
 
 	// checking integrity
-	int status;
-	if (addonInfo.checksum == calculateMd5(file))
+	AddOn::Status status;
+	if (addon->getChecksum() == calculateMd5(file))
 	{
 		// installing files
-		status = m_pStelAddOns.value(addonInfo.category)
-				->installFromFile(addonInfo.idInstall,
-						  addonInfo.filepath,
+		status = m_pStelAddOns.value(addon->getCategory())
+				->installFromFile(addon->getInstallId(),
+						  addon->getDownloadFilepath(),
 						  selectedFiles);
 	}
 	else
 	{
 		status = AddOn::Corrupted;
 		qWarning() << "Add-On Mgr: Error: File "
-			   << addonInfo.filename
+			   << addon->getDownloadFilepath()
 			   << " is corrupt, MD5 mismatch!";
 	}
 
 	if ((status == AddOn::PartiallyInstalled || status == AddOn::FullyInstalled) &&
-		(addonInfo.category == CATEGORY_LANGUAGE_PACK || addonInfo.category == CATEGORY_TEXTURE))
+		(addon->getCategory() == AddOn::LANGUAGEPACK || addon->getCategory() == AddOn::TEXTURE))
 	{
 		emit (addOnMgrMsg(RestartRequired));
 	}
 
-	m_pStelAddOnDAO->updateAddOnStatus(addonInfo.idInstall, status);
-	emit (dataUpdated(addonInfo.category));
+	addon->setStatus(status);
+	emit (dataUpdated(addon->getCategory()));
 	return status;
 }
 
 void StelAddOnMgr::installFromFile(const QString& filePath)
 {
 	QFile file(filePath);
-	int addonId = m_pStelAddOnDAO->getAddOnId(calculateMd5(file));
-	StelAddOnDAO::AddOnInfo addonInfo;
-	if (addonId > 0)
-	{
-		addonInfo = m_pStelAddOnDAO->getAddOnInfo(addonId);
-	}
-
-	if (!addonInfo.isCompatible)
+	AddOn* addon = m_addonsByMd5.value(calculateMd5(file));
+	if (!addon || !addon->isValid())
 	{
 		qWarning() << "Add-On InstallFromFile : Unable to install"
 			   << filePath << "File is not compatible!";
 		return;
 	}
-
-	installFromFile(addonInfo, QStringList());
+	installFromFile(addon, QStringList());
 }
 
-void StelAddOnMgr::removeAddOn(const int addonId, const QStringList selectedFiles)
+void StelAddOnMgr::removeAddOn(AddOn* addon, const QStringList selectedFiles)
 {
-	if (addonId < 1)
+	if (!addon || !addon->isValid())
 	{
 		return;
 	}
 
-	StelAddOnDAO::AddOnInfo addonInfo = m_pStelAddOnDAO->getAddOnInfo(addonId);
+	addon->setStatus(m_pStelAddOns.value(addon->getCategory())->uninstallAddOn(addon->getInstallId(), selectedFiles));
+	emit (dataUpdated(addon->getCategory()));
 
-	int status = m_pStelAddOns.value(addonInfo.category)->uninstallAddOn(addonInfo.idInstall, selectedFiles);
-	m_pStelAddOnDAO->updateAddOnStatus(addonInfo.idInstall, status);
-	emit (dataUpdated(addonInfo.category));
-
-	if (addonInfo.category == CATEGORY_LANGUAGE_PACK || addonInfo.category == CATEGORY_TEXTURE)
+	if (addon->getCategory() == AddOn::LANGUAGEPACK || addon->getCategory() == AddOn::TEXTURE)
 	{
 		emit (addOnMgrMsg(RestartRequired));
 	}
@@ -433,7 +423,7 @@ bool StelAddOnMgr::isCompatible(QString first, QString last)
 
 void StelAddOnMgr::downloadNextAddOn()
 {
-	if (m_iDownloadingId)
+	if (m_downloadingAddOn)
 	{
 		return;
 	}
@@ -442,19 +432,18 @@ void StelAddOnMgr::downloadNextAddOn()
 	Q_ASSERT(m_currentDownloadFile==NULL);
 	Q_ASSERT(m_progressBar==NULL);
 
-	m_iDownloadingId = m_downloadQueue.firstKey();
-	m_currentDownloadInfo = m_pStelAddOnDAO->getAddOnInfo(m_iDownloadingId);
-	m_currentDownloadFile = new QFile(m_currentDownloadInfo.filepath);
+	m_downloadingAddOn = m_downloadQueue.firstKey();
+	m_currentDownloadFile = new QFile(m_downloadingAddOn->getDownloadFilepath());
 	if (!m_currentDownloadFile->open(QIODevice::WriteOnly))
 	{
 		qWarning() << "Can't open a writable file: "
-			   << QDir::toNativeSeparators(m_currentDownloadInfo.filepath);
+			   << QDir::toNativeSeparators(m_downloadingAddOn->getDownloadFilepath());
 		cancelAllDownloads();
 		emit (addOnMgrMsg(UnableToWriteFiles));
 		return;
 	}
 
-	QNetworkRequest req(m_currentDownloadInfo.url);
+	QNetworkRequest req(m_downloadingAddOn->getDownloadURL());
 	req.setAttribute(QNetworkRequest::CacheSaveControlAttribute, false);
 	req.setAttribute(QNetworkRequest::RedirectionTargetAttribute, false);
 	req.setRawHeader("User-Agent", StelUtils::getApplicationName().toLatin1());
@@ -465,8 +454,8 @@ void StelAddOnMgr::downloadNextAddOn()
 
 	m_progressBar = StelApp::getInstance().addProgressBar();
 	m_progressBar->setValue(0);
-	m_progressBar->setRange(0, m_currentDownloadInfo.size*1024);
-	m_progressBar->setFormat(QString("%1: %p%").arg(m_currentDownloadInfo.filename));
+	m_progressBar->setRange(0, m_downloadingAddOn->getDownloadSize()*1024);
+	m_progressBar->setFormat(QString("%1: %p%").arg(m_downloadingAddOn->getDownloadFilename()));
 }
 
 void StelAddOnMgr::newDownloadedData()
@@ -506,20 +495,19 @@ void StelAddOnMgr::downloadAddOnFinished()
 			return;
 		}
 		finishCurrentDownload();
-		installFromFile(m_currentDownloadInfo, m_downloadQueue.value(m_iDownloadingId));
+		installFromFile(m_downloadingAddOn, m_downloadQueue.value(m_downloadingAddOn));
 	}
 	else
 	{
 		qWarning() << "Add-on Mgr: FAILED to download" << m_pAddOnNetworkReply->url()
 			   << " Error:" << m_pAddOnNetworkReply->errorString();
-		m_pStelAddOnDAO->updateAddOnStatus(m_currentDownloadInfo.idInstall, AddOn::DownloadFailed);
-		emit (dataUpdated(m_currentDownloadInfo.category));
+		m_pStelAddOnDAO->updateAddOnStatus(m_downloadingAddOn->getInstallId(), AddOn::DownloadFailed);
+		emit (dataUpdated(m_downloadingAddOn->getCategory()));
 		finishCurrentDownload();
 	}
 
-	m_currentDownloadInfo = StelAddOnDAO::AddOnInfo();
-	m_downloadQueue.remove(m_iDownloadingId);
-	m_iDownloadingId = 0;
+	m_downloadQueue.remove(m_downloadingAddOn);
+	m_downloadingAddOn = NULL;
 	if (!m_downloadQueue.isEmpty())
 	{
 		// next download
@@ -553,7 +541,7 @@ void StelAddOnMgr::cancelAllDownloads()
 {
 	qDebug() << "Add-On Mgr: Canceling all downloads!";
 	finishCurrentDownload();
-	m_iDownloadingId = 0;
+	m_downloadingAddOn = NULL;
 	m_downloadQueue.clear();
 	emit(updateTableViews());
 }

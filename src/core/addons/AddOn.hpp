@@ -89,9 +89,12 @@ public:
 	QString getDescription() { return m_sDescription; }
 	QString getLicenseName() { return m_sLicense; }
 	QString getLicenseURL() { return m_sLicenseURL; }
-	QString getDownloadFilepath() { return m_sDownloadFilepath; }
-	QString getDownloadSize() { return m_sDownloadSize; }
+	QString getDownloadFilename() { return m_sDownloadFilename; }
+	QString getDownloadFilepath();
+	quint64 getDownloadSize() { return m_sDownloadSize.toLongLong(); }
+	QString getDownloadURL() { return m_sDownloadURL; }
 	QString getInstallId() { return m_sInstallId; }
+	QString getChecksum() { return m_sChecksum; }
 	QString getDate() { return m_dateTime.toString("dd MMM yyyy - hh:mm:ss"); }
 
 	Status getStatus() { return m_eStatus; }
@@ -119,7 +122,6 @@ private:
 	QDateTime m_dateTime;
 
 	bool m_bIsValid;
-	QString m_sDownloadFilepath;
 	Category m_eCategory;
 	Status m_eStatus;
 

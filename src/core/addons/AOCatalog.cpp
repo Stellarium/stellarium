@@ -57,7 +57,7 @@ QStringList AOCatalog::checkInstalledAddOns() const
 	return checksums;
 }
 
-int AOCatalog::installFromFile(const QString& idInstall,
+AddOn::Status AOCatalog::installFromFile(const QString& idInstall,
 			       const QString& downloadedFilepath,
 			       const QStringList& selectedFiles) const
 {
@@ -83,8 +83,8 @@ int AOCatalog::installFromFile(const QString& idInstall,
 	return AddOn::FullyInstalled;
 }
 
-int AOCatalog::uninstallAddOn(const QString &idInstall,
-			      const QStringList& selectedFiles) const
+AddOn::Status AOCatalog::uninstallAddOn(const QString &idInstall,
+					const QStringList& selectedFiles) const
 {
 	Q_UNUSED(selectedFiles); // not applicable - always install all files
 

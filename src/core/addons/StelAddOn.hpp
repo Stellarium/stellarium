@@ -20,13 +20,13 @@
 #ifndef _STELADDON_HPP_
 #define _STELADDON_HPP_
 
+#include <QDir>
 #include <QObject>
 #include <QStringBuilder>
 #include <QtDebug>
 
 #include "AddOn.hpp"
 #include "StelApp.hpp"
-#include "StelAddOnDAO.hpp"
 #include "StelFileMgr.hpp"
 #include "StelModuleMgr.hpp"
 #include "qzipreader.h"
@@ -40,13 +40,13 @@ public:
 	virtual QStringList checkInstalledAddOns() const = 0;
 
 	// install add-on from a available file
-	virtual int installFromFile(const QString& idInstall,
-				    const QString& downloadedFilepath,
-				    const QStringList& selectedFiles) const = 0;
+	virtual AddOn::Status installFromFile(const QString& idInstall,
+					      const QString& downloadedFilepath,
+					      const QStringList& selectedFiles) const = 0;
 
 	// uninstall add-on
-	virtual int uninstallAddOn(const QString& idInstall,
-				   const QStringList& selectedFiles) const = 0;
+	virtual AddOn::Status uninstallAddOn(const QString& idInstall,
+					     const QStringList& selectedFiles) const = 0;
 };
 
 #endif // _STELADDON_HPP_

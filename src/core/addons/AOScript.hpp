@@ -33,13 +33,13 @@ public:
 	virtual QStringList checkInstalledAddOns() const;
 
 	// install script from a .ssc or .sts file.
-	virtual int installFromFile(const QString& idInstall,
-				    const QString& downloadedFilepath,
-				    const QStringList& selectedFiles) const;
+	virtual AddOn::Status installFromFile(const QString& idInstall,
+					      const QString& downloadedFilepath,
+					      const QStringList& selectedFiles) const;
 
 	// uninstall script
-	virtual int uninstallAddOn(const QString& idInstall,
-				   const QStringList& selectedFiles) const;
+	virtual AddOn::Status uninstallAddOn(const QString& idInstall,
+					     const QStringList& selectedFiles) const;
 
 private:
 	const QString m_sScriptInstallDir;

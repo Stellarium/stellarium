@@ -65,12 +65,11 @@ public:
 	AddOnMap getAddOnMap(AddOn::Type type) { return m_addons.value(type); }
 	QHash<AddOn::Type, AddOnMap> getAddOnHash() { return m_addons; }
 	QString getThumbnailDir() { return m_sThumbnailDir; }
-	QString getDirectory(QString category) { return m_dirs.value(category, ""); }
-	void installAddOn(const int addonId, const QStringList selectedFiles);
-	bool installFromFile(const StelAddOnDAO::AddOnInfo addonInfo,
-			     const QStringList selectedFiles);
+	QString getDirectory(AddOn::Category c) { return m_dirs.value(c, ""); }
+	void installAddOn(AddOn *addon, const QStringList selectedFiles);
+	AddOn::Status installFromFile(AddOn* addon, const QStringList selectedFiles);
 	void installFromFile(const QString& filePath);
-	void removeAddOn(const int addonId, const QStringList files);
+	void removeAddOn(AddOn *addon, const QStringList files);
 	bool isCompatible(QString first, QString last);
 	bool updateCatalog(QString webresult);
 	void setUpdateFrequencyDays(int days);
@@ -86,11 +85,11 @@ public:
 	int getUpdateFrequencyHour() { return m_iUpdateFrequencyHour; }
 	QString getUrlForUpdates() { return m_sUrlUpdate; }
 	StelAddOnDAO* getStelAddOnDAO() { return m_pStelAddOnDAO; }
-	StelAddOn* getStelAddOnInstance(QString category) { return m_pStelAddOns.value(category); }
+	StelAddOn* getStelAddOnInstance(AddOn::Category c) { return m_pStelAddOns.value(c); }
 
 signals:
 	void addOnMgrMsg(StelAddOnMgr::AddOnMgrMsg);
-	void dataUpdated(const QString& category);
+	void dataUpdated(AddOn::Category category);
 	void updateTableViews();
 	void skyCulturesChanged();
 
@@ -104,11 +103,10 @@ private:
 	StelAddOnDAO* m_pStelAddOnDAO;
 	QSettings* m_pConfig;
 
-	int m_iDownloadingId;
-	QMap<int, QStringList> m_downloadQueue; // <addonId, selectedFiles>
+	AddOn* m_downloadingAddOn;
+	QMap<AddOn*, QStringList> m_downloadQueue;
 	QNetworkReply* m_pAddOnNetworkReply;
 	QFile* m_currentDownloadFile;
-	StelAddOnDAO::AddOnInfo m_currentDownloadInfo;
 
 	class StelProgressController* m_progressBar;
 	qint64 m_iLastUpdate;
@@ -123,13 +121,14 @@ private:
 	// addon directories
 	const QString m_sAddOnDir;
 	const QString m_sThumbnailDir;
-	QHash<QString, QString> m_dirs;
+	QHash<AddOn::Category, QString> m_dirs;
 
 	QString m_sJsonPath;
 	QHash<AddOn::Type, AddOnMap> m_addons;
+	QHash<QString, AddOn*> m_addonsByMd5;
 
 	// sub-classes
-	QHash<QString, StelAddOn*> m_pStelAddOns;
+	QHash<AddOn::Category, StelAddOn*> m_pStelAddOns;
 
 	void restoreDefaultJsonFile();
 	void readJsonObject(const QJsonObject& addOns);

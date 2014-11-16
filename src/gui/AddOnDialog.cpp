@@ -262,7 +262,7 @@ void AddOnDialog::installFromFile()
 void AddOnDialog::installSelectedRows()
 {
 	AddOnTableView* view = m_tableViews.value((AddOn::Category)ui->stackedWidget->currentIndex());
-	QHashIterator<int, QStringList> i(view->getSelectedAddonsToInstall());
+	QHashIterator<AddOn*, QStringList> i(view->getSelectedAddonsToInstall());
 	while (i.hasNext()) {
 		i.next();
 		StelApp::getInstance().getStelAddOnMgr().installAddOn(i.key(), i.value());
@@ -273,7 +273,7 @@ void AddOnDialog::installSelectedRows()
 void AddOnDialog::removeSelectedRows()
 {
 	AddOnTableView* view = m_tableViews.value((AddOn::Category)ui->stackedWidget->currentIndex());
-	QHashIterator<int, QStringList> i(view->getSelectedAddonsToRemove());
+	QHashIterator<AddOn*, QStringList> i(view->getSelectedAddonsToRemove());
 	while (i.hasNext()) {
 		i.next();
 		StelApp::getInstance().getStelAddOnMgr().removeAddOn(i.key(), i.value());

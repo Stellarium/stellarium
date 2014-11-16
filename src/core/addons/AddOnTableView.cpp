@@ -217,7 +217,6 @@ void AddOnTableView::slotRowChecked(int pRow, bool checked)
 	AddOnWidget* widget = insertAddOnWidget(pRow+1);
 	JsonTableModel* model = (JsonTableModel*) this->model();
 	AddOn* addon = model->getAddOn(pRow);
-	int addOnId = addon->getAddOnId();
 	if (checked)
 	{
 		QStringList selectedFilesToInstall = widget->getSelectedFilesToInstall();
@@ -225,39 +224,39 @@ void AddOnTableView::slotRowChecked(int pRow, bool checked)
 
 		if (addon->getStatus() == AddOn::FullyInstalled)
 		{
-			m_iSelectedAddOnsToRemove.insert(addOnId, selectedFilesToRemove);
+			m_iSelectedAddOnsToRemove.insert(addon, selectedFilesToRemove);
 		}
 		else if (addon->getStatus() == AddOn::PartiallyInstalled)
 		{
 			if (selectedFilesToInstall.isEmpty())
-				m_iSelectedAddOnsToInstall.remove(addOnId);
+				m_iSelectedAddOnsToInstall.remove(addon);
 			else
-				m_iSelectedAddOnsToInstall.insert(addOnId, selectedFilesToInstall);
+				m_iSelectedAddOnsToInstall.insert(addon, selectedFilesToInstall);
 
 			if (selectedFilesToRemove.isEmpty())
-				m_iSelectedAddOnsToRemove.remove(addOnId);
+				m_iSelectedAddOnsToRemove.remove(addon);
 			else
-				m_iSelectedAddOnsToRemove.insert(addOnId, selectedFilesToRemove);
+				m_iSelectedAddOnsToRemove.insert(addon, selectedFilesToRemove);
 		}
 		else
 		{
-			m_iSelectedAddOnsToInstall.insert(addOnId, selectedFilesToInstall);
+			m_iSelectedAddOnsToInstall.insert(addon, selectedFilesToInstall);
 		}
 	}
 	else
 	{
 		if (addon->getStatus() == AddOn::FullyInstalled)
 		{
-			m_iSelectedAddOnsToRemove.remove(addOnId);
+			m_iSelectedAddOnsToRemove.remove(addon);
 		}
 		else if (addon->getStatus() == AddOn::PartiallyInstalled)
 		{
-			m_iSelectedAddOnsToInstall.remove(addOnId);
-			m_iSelectedAddOnsToRemove.remove(addOnId);
+			m_iSelectedAddOnsToInstall.remove(addon);
+			m_iSelectedAddOnsToRemove.remove(addon);
 		}
 		else
 		{
-			m_iSelectedAddOnsToInstall.remove(addOnId);
+			m_iSelectedAddOnsToInstall.remove(addon);
 		}
 	}
 

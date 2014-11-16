@@ -40,8 +40,8 @@ public:
 	void selectionChanged(const QItemSelection& selected, const QItemSelection& deselected);
 	void setModel(QAbstractItemModel* model);
 
-	QHash<int, QStringList> getSelectedAddonsToInstall() { return m_iSelectedAddOnsToInstall; }
-	QHash<int, QStringList> getSelectedAddonsToRemove() { return m_iSelectedAddOnsToRemove; }
+	QHash<AddOn*, QStringList> getSelectedAddonsToInstall() { return m_iSelectedAddOnsToInstall; }
+	QHash<AddOn*, QStringList> getSelectedAddonsToRemove() { return m_iSelectedAddOnsToRemove; }
 	QCheckBox* getCheckBox(int pRow) { return (QCheckBox*) m_pCheckboxGroup->button(pRow); }
 
 signals:
@@ -63,8 +63,8 @@ private:
 	CheckedHeader* m_pCheckedHeader;
 	QButtonGroup* m_pCheckboxGroup;
 	QHash<int, AddOnWidget*> m_widgets;
-	QHash<int, QStringList> m_iSelectedAddOnsToInstall;
-	QHash<int, QStringList> m_iSelectedAddOnsToRemove;
+	QHash<AddOn*, QStringList> m_iSelectedAddOnsToInstall;
+	QHash<AddOn*, QStringList> m_iSelectedAddOnsToRemove;
 	AddOnWidget* insertAddOnWidget(int wRow);
 	bool isCompatible(QString first, QString last);
 };
