@@ -214,11 +214,11 @@ void JsonTableView::setAllChecked(bool checked)
 
 void JsonTableView::slotRowChecked(int pRow, bool checked)
 {
-	/*
 	AddOnWidget* widget = insertAddOnWidget(pRow+1);
-	AddOnTableProxyModel* model = (AddOnTableProxyModel*) this->model();
-	int addOnId = model->findIndex(pRow, COLUMN_ADDONID).data().toInt();
-	int installed = model->findIndex(pRow, COLUMN_INSTALLED).data(Qt::EditRole).toInt();
+	JsonTableModel* model = (JsonTableModel*) this->model();
+	AddOn* addon = model->getAddOn(pRow);
+	int addOnId = addon->getAddOnId();
+	int installed = addon->getStatus();
 	if (checked)
 	{
 		QStringList selectedFilesToInstall = widget->getSelectedFilesToInstall();
@@ -274,12 +274,11 @@ void JsonTableView::slotRowChecked(int pRow, bool checked)
 				countChecked++;
 		}
 
-		if (countChecked == model->sourceModel()->rowCount()) // all rows checked ?
+		if (countChecked == model->rowCount() / 2) // all rows checked ?
 		{
 			m_pCheckedHeader->setChecked(true);
 		} else if (countChecked == 0){
 			m_pCheckedHeader->setChecked(false);
 		}
 	}
-	*/
 }
