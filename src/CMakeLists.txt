@@ -242,10 +242,6 @@ SET(stellarium_lib_SRCS
 	core/addons/JsonTableModel.hpp
 	core/addons/AddOnTableView.cpp
 	core/addons/AddOnTableView.hpp
-	core/addons/AddOnTableModel.cpp
-	core/addons/AddOnTableModel.hpp
-	core/addons/AddOnTableProxyModel.cpp
-	core/addons/AddOnTableProxyModel.hpp
 	core/addons/StelAddOn.hpp
 	core/addons/AOCatalog.cpp
 	core/addons/AOCatalog.hpp
