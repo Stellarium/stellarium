@@ -152,9 +152,9 @@ QString AddOn::getStatusString() {
 	switch (m_eStatus)
 	{
 		case PartiallyInstalled:
-			return "Partially";
+			return "Partially Installed";
 		case FullyInstalled:
-			return "Yes";
+			return "Installed";
 		case Installing:
 			return "Installing";
 		case Corrupted:
