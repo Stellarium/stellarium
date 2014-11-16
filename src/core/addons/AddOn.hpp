@@ -43,6 +43,15 @@ public:
 		INVALID
 	};
 
+	//! @enum Status
+	//! Installation Status
+	enum Status
+	{
+		NotInstalled,
+		PartiallyInstalled,
+		Installed
+	};
+
 	typedef struct
 	{
 		QString name;
@@ -62,6 +71,8 @@ public:
 	QString getLicenseURL() { return m_sLicenseURL; }
 	QString getDownloadSize() { return m_sDownloadSize; }
 	QString getInstallId() { return m_sInstallId; }
+	int getStatus() { return m_iStatus; }
+	void setStatus(int status) { m_iStatus = status; }
 
 private:
 	qint64 m_iAddOnId;
@@ -83,6 +94,7 @@ private:
 	QList<Authors> m_authors;
 
 	bool m_bIsValid;
+	int m_iStatus;
 
 	Type fromStringToType(QString string);
 };

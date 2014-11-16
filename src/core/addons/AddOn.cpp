@@ -28,6 +28,7 @@ AddOn::AddOn(const qint64 addOnId, const QVariantMap& map)
 	: m_iAddOnId(addOnId)
 	, m_eType(INVALID)
 	, m_bIsValid(false)
+	, m_iStatus(NotInstalled)
 {
 	m_eType = fromStringToType(map.value("type").toString());
 	m_sInstallId = map.value("install-id").toString();
