@@ -20,10 +20,10 @@
 #include <QtDebug>
 #include <QStringBuilder>
 
-#include "JsonTableModel.hpp"
+#include "AddOnTableModel.hpp"
 #include "StelTranslator.hpp"
 
-JsonTableModel::JsonTableModel(AddOn::Category category, QHash<AddOn::Type, StelAddOnMgr::AddOnMap> addons, QObject* parent)
+AddOnTableModel::AddOnTableModel(AddOn::Category category, QHash<AddOn::Type, StelAddOnMgr::AddOnMap> addons, QObject* parent)
 	: QAbstractTableModel(parent)
 {
 	switch (category) {
@@ -69,19 +69,19 @@ JsonTableModel::JsonTableModel(AddOn::Category category, QHash<AddOn::Type, Stel
 	m_iColumns << Status << Checkbox;
 }
 
-int JsonTableModel::rowCount(const QModelIndex &parent) const
+int AddOnTableModel::rowCount(const QModelIndex &parent) const
 {
 	Q_UNUSED(parent);
 	return m_addons.size() * 2;
 }
 
-int JsonTableModel::columnCount(const QModelIndex &parent) const
+int AddOnTableModel::columnCount(const QModelIndex &parent) const
 {
 	Q_UNUSED(parent);
 	return m_iColumns.size();
 }
 
-QVariant JsonTableModel::data(const QModelIndex &index, int role) const
+QVariant AddOnTableModel::data(const QModelIndex &index, int role) const
 {
 	if (role == Qt::TextAlignmentRole)
 	{
@@ -122,7 +122,7 @@ QVariant JsonTableModel::data(const QModelIndex &index, int role) const
 	return qVariantFromValue(value);
 }
 
-QVariant JsonTableModel::headerData(int section, Qt::Orientation orientation, int role) const
+QVariant AddOnTableModel::headerData(int section, Qt::Orientation orientation, int role) const
 {
 	if (role != Qt::DisplayRole || orientation != Qt::Horizontal)
 	{

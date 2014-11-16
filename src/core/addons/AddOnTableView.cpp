@@ -21,7 +21,7 @@
 #include <QScrollBar>
 #include <QStringBuilder>
 
-#include "JsonTableModel.hpp"
+#include "AddOnTableModel.hpp"
 #include "AddOnTableView.hpp"
 #include "StelAddOnMgr.hpp"
 #include "StelUtils.hpp"
@@ -180,7 +180,7 @@ AddOnWidget* AddOnTableView::insertAddOnWidget(int wRow)
 	{
 		return m_widgets.value(wRow);
 	}
-	JsonTableModel* model = (JsonTableModel*) this->model();
+	AddOnTableModel* model = (AddOnTableModel*) this->model();
 	AddOnWidget* widget = new AddOnWidget(this, wRow, model->getAddOn(wRow-1));
 	setRowHeight(wRow, widget->height());
 	setIndexWidget(model->index(wRow, 0), widget);
@@ -215,7 +215,7 @@ void AddOnTableView::setAllChecked(bool checked)
 void AddOnTableView::slotRowChecked(int pRow, bool checked)
 {
 	AddOnWidget* widget = insertAddOnWidget(pRow+1);
-	JsonTableModel* model = (JsonTableModel*) this->model();
+	AddOnTableModel* model = (AddOnTableModel*) this->model();
 	AddOn* addon = model->getAddOn(pRow);
 	if (checked)
 	{

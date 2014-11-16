@@ -17,8 +17,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _JSONTABLEMODEL_HPP_
-#define _JSONTABLEMODEL_HPP_
+#ifndef _ADDONTABLEMODEL_HPP_
+#define _ADDONTABLEMODEL_HPP_
 
 #include <QAbstractTableModel>
 
@@ -26,11 +26,11 @@
 #include "AddOnDialog.hpp"
 #include "StelAddOnMgr.hpp"
 
-class JsonTableModel : public QAbstractTableModel
+class AddOnTableModel : public QAbstractTableModel
 {
 	Q_OBJECT
 public:
-	JsonTableModel(AddOn::Category category, QHash<AddOn::Type, StelAddOnMgr::AddOnMap> addons, QObject *parent=0);
+	AddOnTableModel(AddOn::Category category, QHash<AddOn::Type, StelAddOnMgr::AddOnMap> addons, QObject *parent=0);
 
 	int rowCount(const QModelIndex &parent = QModelIndex()) const;
 	int columnCount(const QModelIndex &parent = QModelIndex()) const;
@@ -52,4 +52,4 @@ private:
 	QList<Column> m_iColumns;
 };
 
-#endif // _JSONTABLEMODEL_HPP_
+#endif // _ADDONTABLEMODEL_HPP_

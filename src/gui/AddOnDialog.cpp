@@ -22,12 +22,12 @@
 #include <QStringBuilder>
 
 #include "AddOnDialog.hpp"
+#include "AddOnTableModel.hpp"
 #include "AddOnWidget.hpp"
 #include "StelApp.hpp"
 #include "StelGui.hpp"
 #include "StelTranslator.hpp"
 #include "ui_addonDialog.h"
-#include <addons/JsonTableModel.hpp>
 
 AddOnDialog::AddOnDialog(QObject* parent)
 	: StelDialog(parent)
@@ -189,7 +189,7 @@ void AddOnDialog::populateTables()
 	for (int itab=0; itab<6; itab++) {
 		AddOn::Category tab = (AddOn::Category)itab;
 		AddOnTableView* view = m_tableViews.value(tab);
-		view->setModel(new JsonTableModel(tab, StelApp::getInstance().getStelAddOnMgr().getAddOnHash()));
+		view->setModel(new AddOnTableModel(tab, StelApp::getInstance().getStelAddOnMgr().getAddOnHash()));
 	}
 }
 
