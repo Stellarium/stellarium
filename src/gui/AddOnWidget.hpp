@@ -32,10 +32,9 @@ class AddOnWidget : public QWidget
 {
 Q_OBJECT
 public:
-	AddOnWidget(QWidget* parent, int row);
+	AddOnWidget(QWidget* parent, int row, AddOn *addon);
 	virtual ~AddOnWidget();
 
-	void init(int addonId);
 	QStringList getSelectedFilesToInstall() { return m_sSelectedFilesToInstall; }
 	QStringList getSelectedFilesToRemove() { return m_sSelectedFilesToRemove; }
 
@@ -51,8 +50,6 @@ private slots:
 private:
 	const int m_iRow;
 	Ui_AddOnWidget* ui;
-	StelAddOnDAO* m_pStelAddOnDAO;
-	QString m_sThumbnailDir;
 	QStringList m_sSelectedFilesToInstall;
 	QStringList m_sSelectedFilesToRemove;
 };

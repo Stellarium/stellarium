@@ -197,7 +197,7 @@ AddOnWidget* AddOnTableView::insertAddOnWidget(int wRow)
 	{
 		return m_widgets.value(wRow);
 	}
-	AddOnTableProxyModel* model = (AddOnTableProxyModel*) this->model();
+/*	AddOnTableProxyModel* model = (AddOnTableProxyModel*) this->model();
 	int addOnId = model->findIndex(wRow, COLUMN_ADDONID).data().toInt();
 	AddOnWidget* widget = new AddOnWidget(this, wRow);
 	widget->init(addOnId);
@@ -209,7 +209,7 @@ AddOnWidget* AddOnTableView::insertAddOnWidget(int wRow)
 	{
 		connect(widget, SIGNAL(checkRow(int, int)),
 			this, SLOT(slotCheckRow(int, int)));
-	}
+	}*/
 	return m_widgets.value(wRow);
 }
 

@@ -25,64 +25,45 @@
 #include "AddOnWidget.hpp"
 #include "ui_addonWidget.h"
 
-AddOnWidget::AddOnWidget(QWidget* parent, int row)
+AddOnWidget::AddOnWidget(QWidget* parent, int row, AddOn* addon)
 	: QWidget(parent)
 	, m_iRow(row)
 	, ui(new Ui_AddOnWidget)
-	, m_pStelAddOnDAO(StelApp::getInstance().getStelAddOnMgr().getStelAddOnDAO())
-	, m_sThumbnailDir(StelApp::getInstance().getStelAddOnMgr().getThumbnailDir())
 {
 	ui->setupUi(this);
 	connect(ui->listWidget, SIGNAL(itemChanged(QListWidgetItem*)),
 		this, SLOT(slotItemChanged(QListWidgetItem*)));
 	connect(((AddOnTableView*)parent), SIGNAL(rowChecked(int, bool)),
 		this, SLOT(slotCheckAllFiles(int, bool)));
-}
-
-AddOnWidget::~AddOnWidget()
-{
-	delete ui;
-	ui = NULL;
-}
-
-void AddOnWidget::paintEvent(QPaintEvent*)
-{
-	QStyleOption opt;
-	opt.init(this);
-	QPainter p(this);
-	style()->drawPrimitive(QStyle::PE_Widget, &opt, &p, this);
-}
-
-void AddOnWidget::init(int addonId)
-{
-	StelAddOnDAO::WidgetInfo info = m_pStelAddOnDAO->getAddOnWidgetInfo(addonId);
 
 	// Authors (name, email and url)
-	QString author1 = info.a1Name;
-	if (!info.a1Url.isEmpty())
-		author1 = author1 % " <" % info.a1Url % ">";
-	if (!info.a1Email.isEmpty())
-		author1 = author1 % " <" % info.a1Email % ">";
-
-	QString author2 = info.a2Name;
-	if (!info.a2Url.isEmpty())
-		author2 = author2 % " <" % info.a2Url % ">";
-	if (!info.a2Email.isEmpty())
-		author2 = author2 % " <" % info.a2Email % ">";
-
-	ui->txtAuthor->setText(author2.isEmpty() ? author1 : author1 % "\n" % author2);
+	QStringList authors;
+	foreach (AddOn::Authors a, addon->getAuthors()) {
+		QString author = a.name;
+		if (!a.url.isEmpty())
+		{
+			author = author % " <" % a.url % ">";
+		}
+		if (!a.email.isEmpty())
+		{
+			author = author % " <" % a.email % ">";
+		}
+		authors.append(author);
+	}
+	ui->txtAuthor->setText(authors.join("\n"));
 
 	// Description
-	ui->txtDescription->setText(info.description);
+	ui->txtDescription->setText(addon->getDescription());
 
 	// License (name and url)
-	ui->txtLicense->setText(info.licenseName % " <" % info.licenseUrl % ">");
+	ui->txtLicense->setText(addon->getLicenseName() % " <" % addon->getLicenseURL() % ">");
 
 	// Download Size
-	ui->txtSize->setText(info.downloadSize % " MB");
+	ui->txtSize->setText(addon->getDownloadSize() % " MB");
 
 	// Thumbnail
-	QPixmap thumbnail(m_sThumbnailDir % info.idInstall % ".jpg");
+	QString thumbnailDir = StelApp::getInstance().getStelAddOnMgr().getThumbnailDir();
+	QPixmap thumbnail(thumbnailDir % addon->getInstallId() % ".jpg");
 	if (thumbnail.isNull())
 	{
 		ui->thumbnail->setVisible(false);
@@ -99,6 +80,7 @@ void AddOnWidget::init(int addonId)
 	m_sSelectedFilesToInstall.clear();
 	m_sSelectedFilesToRemove.clear();
 	ui->listWidget->setVisible(false);
+	/*
 	if (parentWidget()->objectName() == "texturesTableView")
 	{
 		QStringList textures = m_pStelAddOnDAO->getListOfTextures(addonId);
@@ -125,7 +107,21 @@ void AddOnWidget::init(int addonId)
 			}
 			ui->listWidget->setVisible(true);
 		}
-	}
+	}*/
+}
+
+AddOnWidget::~AddOnWidget()
+{
+	delete ui;
+	ui = NULL;
+}
+
+void AddOnWidget::paintEvent(QPaintEvent*)
+{
+	QStyleOption opt;
+	opt.init(this);
+	QPainter p(this);
+	style()->drawPrimitive(QStyle::PE_Widget, &opt, &p, this);
 }
 
 void AddOnWidget::slotCheckAllFiles(int pRow, bool checked)
