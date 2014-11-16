@@ -43,6 +43,16 @@ public:
 		INVALID
 	};
 
+	//! @enum categories
+	enum Category {
+		CATALOG,
+		LANDSCAPE,
+		LANGUAGEPACK,
+		SCRIPT,
+		STARLORE,
+		TEXTURE
+	};
+
 	//! @enum Status
 	//! Installation Status
 	enum Status
