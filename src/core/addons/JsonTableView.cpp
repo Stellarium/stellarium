@@ -21,6 +21,7 @@
 #include <QScrollBar>
 #include <QStringBuilder>
 
+#include "JsonTableModel.hpp"
 #include "JsonTableView.hpp"
 #include "StelAddOnMgr.hpp"
 #include "StelUtils.hpp"
@@ -175,16 +176,12 @@ void JsonTableView::selectionChanged(const QItemSelection& selected, const QItem
 
 AddOnWidget* JsonTableView::insertAddOnWidget(int wRow)
 {
-	return NULL;
-	/* TODO
 	if (m_widgets.contains(wRow))
 	{
 		return m_widgets.value(wRow);
 	}
-	AddOnTableProxyModel* model = (AddOnTableProxyModel*) this->model();
-	int addOnId = model->findIndex(wRow, COLUMN_ADDONID).data().toInt();
-	AddOnWidget* widget = new AddOnWidget(this, wRow);
-	widget->init(addOnId);
+	JsonTableModel* model = (JsonTableModel*) this->model();
+	AddOnWidget* widget = new AddOnWidget(this, wRow, model->getAddOn(wRow-1));
 	setRowHeight(wRow, widget->height());
 	setIndexWidget(model->index(wRow, 0), widget);
 	widget->setVisible(false);
@@ -195,7 +192,6 @@ AddOnWidget* JsonTableView::insertAddOnWidget(int wRow)
 			this, SLOT(slotCheckRow(int, int)));
 	}
 	return m_widgets.value(wRow);
-	*/
 }
 
 void JsonTableView::slotCheckRow(int pRow, int checked)
