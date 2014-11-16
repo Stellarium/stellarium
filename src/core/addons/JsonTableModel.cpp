@@ -113,7 +113,7 @@ QVariant JsonTableModel::data(const QModelIndex &index, int role) const
 			value = addon->getDate();
 			break;
 		case Status:
-			value = addon->getStatusString();
+			value = q_(addon->getStatusString());
 			break;
 		case Checkbox:
 			value = "";
