@@ -20,7 +20,6 @@
 #include <QCryptographicHash>
 
 #include "AOLanguagePack.hpp"
-#include "StelAddOnMgr.hpp"
 
 AOLanguagePack::AOLanguagePack()
 	: m_sLocaleInstallDir(StelFileMgr::getLocaleUserDir())
@@ -65,7 +64,7 @@ int AOLanguagePack::installFromFile(const QString& idInstall,
 	{
 		qWarning() << "Add-On Language: Unable to intall" << idInstall
 			   << "The file found is not a .qm";
-		return StelAddOnMgr::InvalidFormat;
+		return AddOn::InvalidFormat;
 	}
 
 	QString destination = m_sLocaleInstallDir % "/" % idInstall % ".qm";
@@ -73,11 +72,11 @@ int AOLanguagePack::installFromFile(const QString& idInstall,
 	if (!QFile(downloadedFilepath).copy(destination))
 	{
 		qWarning() << "Add-On Language: Unable to install" << idInstall;
-		return StelAddOnMgr::UnableToWrite;
+		return AddOn::UnableToWrite;
 	}
 
 	qDebug() << "Add-On Language: New language installed:" << idInstall;
-	return StelAddOnMgr::FullyInstalled;
+	return AddOn::FullyInstalled;
 }
 
 int AOLanguagePack::uninstallAddOn(const QString &idInstall,
@@ -96,8 +95,8 @@ int AOLanguagePack::uninstallAddOn(const QString &idInstall,
 	{
 		qWarning() << "Add-On Language : Error! " << idInstall
 			   << "could not be removed. ";
-		return StelAddOnMgr::UnableToRemove;
+		return AddOn::UnableToRemove;
 	}
 	qDebug() << "Add-On Language : Successfully removed" << idInstall;
-	return StelAddOnMgr::NotInstalled;
+	return AddOn::NotInstalled;
 }

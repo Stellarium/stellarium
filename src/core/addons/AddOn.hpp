@@ -54,13 +54,21 @@ public:
 		TEXTURE
 	};
 
-	//! @enum Status
-	//! Installation Status
+	//! @enum AddOnStatus
+	//! Used for keeping track of the download/update status
 	enum Status
 	{
 		NotInstalled,
 		PartiallyInstalled,
-		Installed
+		FullyInstalled,
+		Installing,
+		Corrupted,
+		InvalidFormat,
+		UnableToWrite,
+		UnableToRead,
+		UnableToRemove,
+		PartiallyRemoved,
+		DownloadFailed
 	};
 
 	typedef struct
@@ -83,8 +91,9 @@ public:
 	QString getDownloadSize() { return m_sDownloadSize; }
 	QString getInstallId() { return m_sInstallId; }
 	QString getDate() { return m_dateTime.toString("dd MMM yyyy - hh:mm:ss"); }
-	int getStatus() { return m_iStatus; }
-	void setStatus(int status) { m_iStatus = status; }
+	Status getStatus() { return m_eStatus; }
+	QString getStatusString();
+	void setStatus(Status status) { m_eStatus = status; }
 
 private:
 	qint64 m_iAddOnId;
@@ -107,7 +116,7 @@ private:
 	QDateTime m_dateTime;
 
 	bool m_bIsValid;
-	int m_iStatus;
+	Status m_eStatus;
 
 	Type fromStringToType(QString string);
 };

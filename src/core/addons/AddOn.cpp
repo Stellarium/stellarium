@@ -28,7 +28,7 @@ AddOn::AddOn(const qint64 addOnId, const QVariantMap& map)
 	: m_iAddOnId(addOnId)
 	, m_eType(INVALID)
 	, m_bIsValid(false)
-	, m_iStatus(NotInstalled)
+	, m_eStatus(NotInstalled)
 {
 	m_eType = fromStringToType(map.value("type").toString());
 	m_sInstallId = map.value("install-id").toString();
@@ -124,5 +124,33 @@ AddOn::Type AddOn::fromStringToType(QString string)
 	else
 	{
 		return INVALID;
+	}
+}
+
+QString AddOn::getStatusString() {
+	switch (m_eStatus)
+	{
+		case PartiallyInstalled:
+			return "Partially";
+		case FullyInstalled:
+			return "Yes";
+		case Installing:
+			return "Installing";
+		case Corrupted:
+			return "Corrupted";
+		case InvalidFormat:
+			return "Invalid format";
+		case UnableToWrite:
+			return "Unable to write";
+		case UnableToRead:
+			return "Unable to read";
+		case UnableToRemove:
+			return "Unable to remove";
+		case PartiallyRemoved:
+			return "Partially removed";
+		case DownloadFailed:
+			return "Download failed";
+		default:
+			return "Not installed";
 	}
 }

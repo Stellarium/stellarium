@@ -51,7 +51,7 @@ int AOScript::installFromFile(const QString& idInstall,
 	{
 		qWarning() << "Add-On Script: Unable to intall" << idInstall
 			   << "The file found is not a .ssc or .sts";
-		return StelAddOnMgr::InvalidFormat;
+		return AddOn::InvalidFormat;
 	}
 
 	QString destination = m_sScriptInstallDir % "/" % idInstall % suffix;
@@ -59,11 +59,11 @@ int AOScript::installFromFile(const QString& idInstall,
 	if (!QFile(downloadedFilepath).copy(destination))
 	{
 		qWarning() << "Add-On Script: Unable to install" << idInstall;
-		return StelAddOnMgr::UnableToWrite;
+		return AddOn::UnableToWrite;
 	}
 
 	qDebug() << "Add-On Script: New script installed:" << idInstall;
-	return StelAddOnMgr::FullyInstalled;
+	return AddOn::FullyInstalled;
 }
 
 int AOScript::uninstallAddOn(const QString& idInstall,
@@ -88,9 +88,9 @@ int AOScript::uninstallAddOn(const QString& idInstall,
 	{
 		qWarning() << "Add-On Scripts : Error! " << idInstall
 			   << "could not be removed. ";
-		return StelAddOnMgr::UnableToRemove;
+		return AddOn::UnableToRemove;
 	}
 
 	qDebug() << "Add-On Scripts : Successfully removed" << idInstall;
-	return StelAddOnMgr::NotInstalled;
+	return AddOn::NotInstalled;
 }

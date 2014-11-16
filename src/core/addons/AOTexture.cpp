@@ -70,7 +70,7 @@ int AOTexture::installFromFile(const QString& idInstall,
 	{
 		qWarning() << "Add-On Texture: Unable to intall" << idInstall
 			   << "The file found is not a .zip or .png";
-		installed = StelAddOnMgr::InvalidFormat;
+		installed = AddOn::InvalidFormat;
 	}
 
 	return installed;
@@ -83,10 +83,10 @@ int AOTexture::installFromZip(QString idInstall, QString downloadedFilepath, QSt
 	{
 		qWarning() << "Add-On Texture: Unable to open the ZIP archive:"
 			   << QDir::toNativeSeparators(downloadedFilepath);
-		return StelAddOnMgr::UnableToRead;
+		return AddOn::UnableToRead;
 	}
 
-	int installed = StelAddOnMgr::FullyInstalled;
+	int installed = AddOn::FullyInstalled;
 	QList<QZipReader::FileInfo> infoList = reader.fileInfoList();
 	foreach(QZipReader::FileInfo info, infoList)
 	{
@@ -102,7 +102,7 @@ int AOTexture::installFromZip(QString idInstall, QString downloadedFilepath, QSt
 		{
 			if (!selectedFiles.contains(info.filePath) && !file.exists())
 			{
-				installed = StelAddOnMgr::PartiallyInstalled;
+				installed = AddOn::PartiallyInstalled;
 				continue;
 			}
 		}
@@ -129,13 +129,13 @@ int AOTexture::installFromImg(QString idInstall, QString downloadedFilepath) con
 	if (!QFile(downloadedFilepath).copy(destination))
 	{
 		qWarning() << "Add-On Texture: Unable to install" << filename;
-		return StelAddOnMgr::UnableToWrite;
+		return AddOn::UnableToWrite;
 	}
 
 	m_pInstalledTextures->setValue(filename, idInstall);
 
 	qDebug() << "Add-On Texture: New texture installed:" << filename;
-	return StelAddOnMgr::FullyInstalled;
+	return AddOn::FullyInstalled;
 }
 
 int AOTexture::uninstallAddOn(const QString& idInstall,
@@ -168,13 +168,13 @@ int AOTexture::uninstallAddOn(const QString& idInstall,
 	if (filesRemoved == selectedFiles.count())
 	{
 		qDebug() << "Add-On Textures : Successfully removed" << idInstall;
-		return StelAddOnMgr::NotInstalled;
+		return AddOn::NotInstalled;
 	}
 	else if (filesRemoved > 0)
 	{
 		qDebug() << "Add-On Textures : Partially removed" << idInstall;
-		return StelAddOnMgr::PartiallyInstalled;
+		return AddOn::PartiallyInstalled;
 	}
 
-	return StelAddOnMgr::UnableToRemove; // failed!
+	return AddOn::UnableToRemove; // failed!
 }

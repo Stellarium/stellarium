@@ -48,7 +48,7 @@ int AOSkyCulture::installFromFile(const QString& idInstall,
 	{
 		qWarning() << "Add-On SkyCultures: Unable to open the ZIP archive:"
 			   << QDir::toNativeSeparators(downloadedFilepath);
-		return StelAddOnMgr::UnableToRead;
+		return AddOn::UnableToRead;
 	}
 
 	QString destination = m_sSkyCultureInstallDir % idInstall;
@@ -56,12 +56,12 @@ int AOSkyCulture::installFromFile(const QString& idInstall,
 
 	if (!reader.extractAll(destination)) {
 		qWarning() << "Add-On SkyCultures: Unable to install the new sky culture!";
-		return StelAddOnMgr::UnableToRead;
+		return AddOn::UnableToRead;
 	}
 
 	qWarning() << "Add-On SkyCultures: New sky culture" << idInstall << "installed!";
 	emit(skyCulturesChanged());
-	return StelAddOnMgr::FullyInstalled;
+	return AddOn::FullyInstalled;
 }
 
 int AOSkyCulture::uninstallAddOn(const QString &idInstall,
@@ -78,9 +78,9 @@ int AOSkyCulture::uninstallAddOn(const QString &idInstall,
 			   << endl
 			   << "Add-On SkyCultures : You can delete manually"
 			   << dir.absolutePath();
-		return StelAddOnMgr::PartiallyRemoved;
+		return AddOn::PartiallyRemoved;
 	}
 	qDebug() << "Add-On SkyCultures : Successfully removed" << dir.absolutePath();
 	emit(skyCulturesChanged());
-	return StelAddOnMgr::NotInstalled;
+	return AddOn::NotInstalled;
 }

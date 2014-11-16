@@ -59,23 +59,6 @@ public:
 		UnableToWriteFiles
 	};
 
-	//! @enum AddOnStatus
-	//! Used for keeping track of the download/update status
-	enum AddOnStatus
-	{
-		NotInstalled,
-		PartiallyInstalled,
-		FullyInstalled,
-		Installing,
-		Corrupted,
-		InvalidFormat,
-		UnableToWrite,
-		UnableToRead,
-		UnableToRemove,
-		PartiallyRemoved,
-		DownloadFailed
-	};
-
 	StelAddOnMgr();
 	virtual ~StelAddOnMgr();
 

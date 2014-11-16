@@ -68,7 +68,7 @@ int AOCatalog::installFromFile(const QString& idInstall,
 	{
 		qWarning() << "Add-On Catalog: Unable to intall" << idInstall
 			   << "The file found is not a .cat or .json";
-		return StelAddOnMgr::InvalidFormat;
+		return AddOn::InvalidFormat;
 	}
 
 	QString destination = StelFileMgr::getUserDir() % "/" % idInstall % suffix;
@@ -76,11 +76,11 @@ int AOCatalog::installFromFile(const QString& idInstall,
 	if (!QFile(downloadedFilepath).copy(destination))
 	{
 		qWarning() << "Add-On Catalog: Unable to install" << idInstall;
-		return StelAddOnMgr::UnableToWrite;
+		return AddOn::UnableToWrite;
 	}
 
 	qDebug() << "Add-On Catalog: New catalog installed:" << idInstall;
-	return StelAddOnMgr::FullyInstalled;
+	return AddOn::FullyInstalled;
 }
 
 int AOCatalog::uninstallAddOn(const QString &idInstall,
@@ -104,8 +104,8 @@ int AOCatalog::uninstallAddOn(const QString &idInstall,
 	{
 		qWarning() << "Add-On Catalog : Error! " << idInstall
 			   << "could not be removed. ";
-		return StelAddOnMgr::UnableToRemove;
+		return AddOn::UnableToRemove;
 	}
 	qDebug() << "Add-On Catalog : Successfully removed" << idInstall;
-	return StelAddOnMgr::NotInstalled;
+	return AddOn::NotInstalled;
 }

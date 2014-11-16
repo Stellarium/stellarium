@@ -49,9 +49,9 @@ int AOLandscape::installFromFile(const QString& idInstall,
 	QString landscapeId = m_pLandscapeMgr->installLandscapeFromArchive(downloadedFilepath);
 	if (landscapeId.isEmpty())
 	{
-		return StelAddOnMgr::NotInstalled;
+		return AddOn::NotInstalled;
 	}
-	return StelAddOnMgr::FullyInstalled;
+	return AddOn::FullyInstalled;
 }
 
 int AOLandscape::uninstallAddOn(const QString& idInstall,
@@ -61,7 +61,7 @@ int AOLandscape::uninstallAddOn(const QString& idInstall,
 
 	if(!m_pLandscapeMgr->removeLandscape(idInstall))
 	{
-		return StelAddOnMgr::UnableToRemove;
+		return AddOn::UnableToRemove;
 	}
-	return StelAddOnMgr::NotInstalled;
+	return AddOn::NotInstalled;
 }

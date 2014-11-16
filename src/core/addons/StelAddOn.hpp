@@ -24,6 +24,7 @@
 #include <QStringBuilder>
 #include <QtDebug>
 
+#include "AddOn.hpp"
 #include "StelApp.hpp"
 #include "StelAddOnDAO.hpp"
 #include "StelFileMgr.hpp"

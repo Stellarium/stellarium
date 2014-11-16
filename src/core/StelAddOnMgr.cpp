@@ -312,7 +312,7 @@ void StelAddOnMgr::installAddOn(const int addonId, const QStringList selectedFil
 	{
 		// something goes wrong (file not found OR corrupt),
 		// try downloading it...
-		m_pStelAddOnDAO->updateAddOnStatus(addonInfo.idInstall, Installing);
+		m_pStelAddOnDAO->updateAddOnStatus(addonInfo.idInstall, AddOn::Installing);
 		emit (dataUpdated(addonInfo.category));
 		m_downloadQueue.insert(addonId, selectedFiles);
 		downloadNextAddOn();
@@ -341,13 +341,13 @@ bool StelAddOnMgr::installFromFile(const StelAddOnDAO::AddOnInfo addonInfo,
 	}
 	else
 	{
-		status = Corrupted;
+		status = AddOn::Corrupted;
 		qWarning() << "Add-On Mgr: Error: File "
 			   << addonInfo.filename
 			   << " is corrupt, MD5 mismatch!";
 	}
 
-	if ((status == PartiallyInstalled || status == FullyInstalled) &&
+	if ((status == AddOn::PartiallyInstalled || status == AddOn::FullyInstalled) &&
 		(addonInfo.category == CATEGORY_LANGUAGE_PACK || addonInfo.category == CATEGORY_TEXTURE))
 	{
 		emit (addOnMgrMsg(RestartRequired));
@@ -512,7 +512,7 @@ void StelAddOnMgr::downloadAddOnFinished()
 	{
 		qWarning() << "Add-on Mgr: FAILED to download" << m_pAddOnNetworkReply->url()
 			   << " Error:" << m_pAddOnNetworkReply->errorString();
-		m_pStelAddOnDAO->updateAddOnStatus(m_currentDownloadInfo.idInstall, DownloadFailed);
+		m_pStelAddOnDAO->updateAddOnStatus(m_currentDownloadInfo.idInstall, AddOn::DownloadFailed);
 		emit (dataUpdated(m_currentDownloadInfo.category));
 		finishCurrentDownload();
 	}

@@ -102,34 +102,34 @@ QVariant AddOnTableModel::data(const QModelIndex& index, int role) const
 	{
 		switch (value.toInt())
 		{
-			case StelAddOnMgr::PartiallyInstalled:
+			case AddOn::PartiallyInstalled:
 				value = qVariantFromValue(q_("Partially"));
 				break;
-			case StelAddOnMgr::FullyInstalled:
+			case AddOn::FullyInstalled:
 				value = qVariantFromValue(q_("Yes"));
 				break;
-			case StelAddOnMgr::Installing:
+			case AddOn::Installing:
 				value = qVariantFromValue(q_("Installing"));
 				break;
-			case StelAddOnMgr::Corrupted:
+			case AddOn::Corrupted:
 				value = qVariantFromValue(q_("Corrupted"));
 				break;
-			case StelAddOnMgr::InvalidFormat:
+			case AddOn::InvalidFormat:
 				value = qVariantFromValue(q_("Invalid format"));
 				break;
-			case StelAddOnMgr::UnableToWrite:
+			case AddOn::UnableToWrite:
 				value = qVariantFromValue(q_("Unable to write"));
 				break;
-			case StelAddOnMgr::UnableToRead:
+			case AddOn::UnableToRead:
 				value = qVariantFromValue(q_("Unable to read"));
 				break;
-			case StelAddOnMgr::UnableToRemove:
+			case AddOn::UnableToRemove:
 				value = qVariantFromValue(q_("Unable to remove"));
 				break;
-			case StelAddOnMgr::PartiallyRemoved:
+			case AddOn::PartiallyRemoved:
 				value = qVariantFromValue(q_("Partially removed"));
 				break;
-			case StelAddOnMgr::DownloadFailed:
+			case AddOn::DownloadFailed:
 				value = qVariantFromValue(q_("Download failed"));
 				break;
 			default:
