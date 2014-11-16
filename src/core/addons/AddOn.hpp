@@ -20,6 +20,7 @@
 #ifndef _ADDON_HPP_
 #define _ADDON_HPP_
 
+#include <QDateTime>
 #include <QObject>
 
 class AddOn : public QObject
@@ -81,6 +82,7 @@ public:
 	QString getLicenseURL() { return m_sLicenseURL; }
 	QString getDownloadSize() { return m_sDownloadSize; }
 	QString getInstallId() { return m_sInstallId; }
+	QString getDate() { return m_dateTime.toString("dd MMM yyyy - hh:mm:ss"); }
 	int getStatus() { return m_iStatus; }
 	void setStatus(int status) { m_iStatus = status; }
 
@@ -102,6 +104,7 @@ private:
 	QString m_sChecksum;
 	QString m_sThumbnail;
 	QList<Authors> m_authors;
+	QDateTime m_dateTime;
 
 	bool m_bIsValid;
 	int m_iStatus;

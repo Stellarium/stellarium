@@ -45,6 +45,7 @@ AddOn::AddOn(const qint64 addOnId, const QVariantMap& map)
 	m_sInstalledSize = map.value("installed-size").toString();
 	m_sChecksum = map.value("checksum").toString();
 	m_sThumbnail = map.value("thumbnail").toString();
+	m_dateTime = QDateTime::fromString(QString::number(m_iAddOnId), "yyyymmddhhmmss");
 
 	if (m_eType == INVALID)
 	{
