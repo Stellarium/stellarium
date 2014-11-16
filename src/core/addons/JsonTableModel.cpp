@@ -83,6 +83,11 @@ int JsonTableModel::columnCount(const QModelIndex &parent) const
 
 QVariant JsonTableModel::data(const QModelIndex &index, int role) const
 {
+	if (role == Qt::TextAlignmentRole)
+	{
+		return Qt::AlignCenter;
+	}
+
 	if (!index.isValid() ||
 		index.row() < 0 ||
 		index.row() % 2 != 0 ||
