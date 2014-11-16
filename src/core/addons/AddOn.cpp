@@ -31,6 +31,7 @@ AddOn::AddOn(const qint64 addOnId, const QVariantMap& map)
 	, m_eStatus(NotInstalled)
 {
 	m_eType = fromStringToType(map.value("type").toString());
+	m_eCategory = getCategoryFromType(m_eType);
 	m_sInstallId = map.value("install-id").toString();
 	m_sTitle = map.value("title").toString();
 	m_sDescription = map.value("description").toString();
@@ -70,6 +71,10 @@ AddOn::AddOn(const qint64 addOnId, const QVariantMap& map)
 	{
 		return;
 	}
+
+	// filepath
+	QString categoryDir = StelApp::getInstance().getStelAddOnMgr().getDirectory(m_eCategory);
+	m_sDownloadFilepath = categoryDir % m_sDownloadFilename;
 
 	if (map.contains("authors"))
 	{
@@ -124,6 +129,26 @@ AddOn::Type AddOn::fromStringToType(QString string)
 	else
 	{
 		return INVALID;
+	}
+}
+
+AddOn::Category AddOn::getCategoryFromType(Type type)
+{
+	switch (type) {
+		case Landscape:
+			return LANDSCAPE;
+		case Language_Pack:
+			return LANGUAGEPACK;
+		case Plugin_Catalog:
+			return CATALOG;
+		case Script:
+			return SCRIPT;
+		case Sky_Culture:
+			return STARLORE;
+		case Star_Catalog:
+			return CATALOG;
+		case Texture:
+			return TEXTURE;
 	}
 }
 

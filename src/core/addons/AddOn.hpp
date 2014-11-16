@@ -83,14 +83,17 @@ public:
 	quint64 getAddOnId() { return m_iAddOnId; }
 	QString getTitle() { return m_sTitle; }
 	Type getType() { return m_eType; }
+	Category getCategory() { return m_eCategory; }
 	QString getVersion() { return m_sVersion; }
 	QList<Authors> getAuthors() { return m_authors; }
 	QString getDescription() { return m_sDescription; }
 	QString getLicenseName() { return m_sLicense; }
 	QString getLicenseURL() { return m_sLicenseURL; }
+	QString getDownloadFilepath() { return m_sDownloadFilepath; }
 	QString getDownloadSize() { return m_sDownloadSize; }
 	QString getInstallId() { return m_sInstallId; }
 	QString getDate() { return m_dateTime.toString("dd MMM yyyy - hh:mm:ss"); }
+
 	Status getStatus() { return m_eStatus; }
 	QString getStatusString();
 	void setStatus(Status status) { m_eStatus = status; }
@@ -116,8 +119,11 @@ private:
 	QDateTime m_dateTime;
 
 	bool m_bIsValid;
+	QString m_sDownloadFilepath;
+	Category m_eCategory;
 	Status m_eStatus;
 
+	Category getCategoryFromType(Type type);
 	Type fromStringToType(QString string);
 };
 
