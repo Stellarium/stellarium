@@ -34,7 +34,6 @@
 
 StelAddOnMgr::StelAddOnMgr()
 	: m_db(QSqlDatabase::addDatabase("QSQLITE"))
-	, m_pStelAddOnDAO(new StelAddOnDAO(m_db))
 	, m_pConfig(StelApp::getInstance().getSettings())
 	, m_downloadingAddOn(NULL)
 	, m_pAddOnNetworkReply(NULL)
@@ -116,9 +115,6 @@ StelAddOnMgr::StelAddOnMgr()
 		qWarning() << "Add-On Mgr: Couldn't open addons.json file!"
 			   << QDir::toNativeSeparators(m_sJsonPath);
 	}
-
-	// Init database
-	m_pStelAddOnDAO->init();
 
 	// Init sub-classes
 	m_pStelAddOns.insert(AddOn::CATALOG, new AOCatalog());
@@ -210,6 +206,7 @@ void StelAddOnMgr::setUpdateFrequencyHour(int hour) {
 
 void StelAddOnMgr::refreshAddOnStatuses()
 {
+	/* TODO
 	// mark all add-ons as uninstalled
 	m_pStelAddOnDAO->markAllAddOnsAsUninstalled();
 
@@ -237,10 +234,12 @@ void StelAddOnMgr::refreshAddOnStatuses()
 			m_pStelAddOnDAO->markAddOnsAsInstalled(list);
 		}
 	}
+	*/
 }
 
 bool StelAddOnMgr::updateCatalog(QString webresult)
 {
+	/*
 	QStringList queries = webresult.split("<br>");
 	queries.removeFirst();
 	foreach (QString insert, queries)
@@ -267,7 +266,7 @@ bool StelAddOnMgr::updateCatalog(QString webresult)
 
 	// check add-ons which are already installed
 	refreshAddOnStatuses();
-
+*/
 	return true;
 }
 
@@ -501,7 +500,7 @@ void StelAddOnMgr::downloadAddOnFinished()
 	{
 		qWarning() << "Add-on Mgr: FAILED to download" << m_pAddOnNetworkReply->url()
 			   << " Error:" << m_pAddOnNetworkReply->errorString();
-		m_pStelAddOnDAO->updateAddOnStatus(m_downloadingAddOn->getInstallId(), AddOn::DownloadFailed);
+		m_downloadingAddOn->setStatus(AddOn::DownloadFailed);
 		emit (dataUpdated(m_downloadingAddOn->getCategory()));
 		finishCurrentDownload();
 	}

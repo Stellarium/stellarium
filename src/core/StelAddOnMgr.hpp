@@ -32,7 +32,6 @@
 #include "AOScript.hpp"
 #include "AOSkyCulture.hpp"
 #include "AOTexture.hpp"
-#include "StelAddOnDAO.hpp"
 #include "addons/AddOn.hpp"
 
 #define ADDON_MANAGER_VERSION "0.0.2"
@@ -84,7 +83,6 @@ public:
 	int getUpdateFrequencyDays() { return m_iUpdateFrequencyDays; }
 	int getUpdateFrequencyHour() { return m_iUpdateFrequencyHour; }
 	QString getUrlForUpdates() { return m_sUrlUpdate; }
-	StelAddOnDAO* getStelAddOnDAO() { return m_pStelAddOnDAO; }
 	StelAddOn* getStelAddOnInstance(AddOn::Category c) { return m_pStelAddOns.value(c); }
 
 signals:
@@ -100,7 +98,6 @@ private slots:
 
 private:
 	QSqlDatabase m_db;
-	StelAddOnDAO* m_pStelAddOnDAO;
 	QSettings* m_pConfig;
 
 	AddOn* m_downloadingAddOn;
