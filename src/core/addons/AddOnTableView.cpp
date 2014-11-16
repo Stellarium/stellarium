@@ -218,17 +218,16 @@ void AddOnTableView::slotRowChecked(int pRow, bool checked)
 	JsonTableModel* model = (JsonTableModel*) this->model();
 	AddOn* addon = model->getAddOn(pRow);
 	int addOnId = addon->getAddOnId();
-	int installed = addon->getStatus();
 	if (checked)
 	{
 		QStringList selectedFilesToInstall = widget->getSelectedFilesToInstall();
 		QStringList selectedFilesToRemove = widget->getSelectedFilesToRemove();
 
-		if (installed == 2)
+		if (addon->getStatus() == AddOn::FullyInstalled)
 		{
 			m_iSelectedAddOnsToRemove.insert(addOnId, selectedFilesToRemove);
 		}
-		else if (installed == 1) // partially
+		else if (addon->getStatus() == AddOn::PartiallyInstalled)
 		{
 			if (selectedFilesToInstall.isEmpty())
 				m_iSelectedAddOnsToInstall.remove(addOnId);
@@ -247,11 +246,11 @@ void AddOnTableView::slotRowChecked(int pRow, bool checked)
 	}
 	else
 	{
-		if (installed == 2)
+		if (addon->getStatus() == AddOn::FullyInstalled)
 		{
 			m_iSelectedAddOnsToRemove.remove(addOnId);
 		}
-		else if (installed == 1) // partially
+		else if (addon->getStatus() == AddOn::PartiallyInstalled)
 		{
 			m_iSelectedAddOnsToInstall.remove(addOnId);
 			m_iSelectedAddOnsToRemove.remove(addOnId);
