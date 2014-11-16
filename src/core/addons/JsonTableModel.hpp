@@ -30,8 +30,8 @@ class JsonTableModel : public QAbstractTableModel
 public:
 	JsonTableModel(AddOn::Type type, QMap<qint64, AddOn*> addons, QObject *parent=0);
 
-	int rowCount(const QModelIndex &parent) const;
-	int columnCount(const QModelIndex &parent) const;
+	int rowCount(const QModelIndex &parent = QModelIndex()) const;
+	int columnCount(const QModelIndex &parent = QModelIndex()) const;
 	QVariant data(const QModelIndex& index, int role = Qt :: DisplayRole) const;
 	QVariant headerData(int section, Qt::Orientation orientation, int role) const;
 	AddOn* getAddOn(int row) { return m_addons.values().at(row); }
