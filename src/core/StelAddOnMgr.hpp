@@ -80,6 +80,7 @@ public:
 	virtual ~StelAddOnMgr();
 
 	AddOnMap getAddOnMap(AddOn::Type type) { return m_addons.value(type); }
+	QHash<AddOn::Type, AddOnMap> getAddOnHash() { return m_addons; }
 	QString getThumbnailDir() { return m_sThumbnailDir; }
 	QString getDirectory(QString category) { return m_dirs.value(category, ""); }
 	void installAddOn(const int addonId, const QStringList selectedFiles);
