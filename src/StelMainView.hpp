@@ -28,11 +28,16 @@
 #include <QOpenGLContext>
 
 class QDeclarativeItem;
+#if QT_VERSION < 0x050400
 class QGLWidget;
+class StelQGLWidget;
+#else
+class QOpenGLWidget;
+class StelQOpenGLWidget;
+#endif
 class QMoveEvent;
 class QResizeEvent;
 class StelGuiBase;
-class StelQGLWidget;
 class QMoveEvent;
 
 //! @class StelMainView
@@ -147,8 +152,6 @@ private:
 	//! Start the display loop
 	void startMainLoop();
 	
-	//QString getSupportedOpenGLVersion() const;
-	//QPair getSupportedOpenGLVersion() const;
 	//! provide extensive OpenGL dignostics in logfile.
 	void dumpOpenGLdiagnostics() const;
 
@@ -161,7 +164,11 @@ private:
 	QDeclarativeItem* skyItem;
 
 	//! The openGL window
+#if QT_VERSION < 0x050400
 	StelQGLWidget* glWidget;
+#else
+	StelQOpenGLWidget* glWidget;
+#endif
 	StelGuiBase* gui;
 	class StelApp* stelApp;
 
