@@ -72,7 +72,6 @@ QVariant JsonTableModel::data(const QModelIndex &index, int role) const
 			value = "";
 			break;
 	}
-
 	return qVariantFromValue(value);
 }
 
@@ -98,6 +97,5 @@ QVariant JsonTableModel::headerData(int section, Qt::Orientation orientation, in
 			value = "";
 			break;
 	}
-
 	return qVariantFromValue(value);
 }
