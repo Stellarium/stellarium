@@ -33,7 +33,11 @@
 #include <QDeclarativeItem>
 #include <QDebug>
 #include <QDir>
+#if QT_VERSION >= 0x050400
+#include <QOpenGLWidget>
+#else
 #include <QGLWidget>
+#endif
 #include <QGuiApplication>
 #include <QFileInfo>
 #include <QIcon>
@@ -239,12 +243,13 @@ StelGuiItem::StelGuiItem(QDeclarativeItem* parent) : QDeclarativeItem(parent)
 
 void StelGuiItem::onSizeChanged()
 {
-	// I whish I could find a way to let Qt automatically resize the widget
+    // I wish I could find a way to let Qt automatically resize the widget
 	// when the QDeclarativeItem size changes.
 	widget->setGeometry(0, 0, width(), height());
 	StelApp::getInstance().getGui()->forceRefreshGui();
 }
 
+#if QT_VERSION < 0x050400
 class StelQGLWidget : public QGLWidget
 {
 public:
@@ -274,6 +279,43 @@ protected:
 	}
 
 };
+#else
+class StelQOpenGLWidget : public QOpenGLWidget
+{
+public:
+    StelQOpenGLWidget(QWidget* parent) : QOpenGLWidget(parent)
+    {
+	// TODO: Unclear if tese attributes make sense?
+	setAttribute(Qt::WA_PaintOnScreen);
+	setAttribute(Qt::WA_NoSystemBackground);
+	setAttribute(Qt::WA_OpaquePaintEvent);
+    }
+
+protected:
+    virtual void initializeGL()
+    {
+	qDebug() << "It appears this was never called?";
+	qDebug() << "OpenGL supported version: " << QString((char*)glGetString(GL_VERSION));
+
+	QOpenGLWidget::initializeGL();
+	this->makeCurrent(); // Do we need this?
+	// GZ I have no idea how to proceed, sorry.
+	QSurfaceFormat format=this->format();
+	qDebug() << "Current Format: " << this->format();
+	// TODO: Test something? The old tests may be obsolete as all OpenGL2 formats/contexts have these?
+    }
+    virtual void paintGL()
+    {
+	// TODO: what shall this do exactly?
+    }
+    virtual void resizeGL()
+    {
+	// TODO: what shall this do exactly?
+    }
+
+};
+#endif
+
 
 StelMainView::StelMainView(QWidget* parent)
 	: QDeclarativeView(parent), gui(NULL),
@@ -302,7 +344,7 @@ StelMainView::StelMainView(QWidget* parent)
 
 	lastEventTimeSec = 0;
 
-
+#if QT_VERSION < 0x050400
 	// Primary test for OpenGL existence
 	if (QGLFormat::openGLVersionFlags() < QGLFormat::OpenGL_Version_2_1)
 	{
@@ -321,8 +363,24 @@ StelMainView::StelMainView(QWidget* parent)
 		QMessageBox::critical(0, "Stellarium", q_("Cannot acquire necessary OpenGL resouces."), QMessageBox::Abort, QMessageBox::Abort);
 		exit(0);
 	}
-
 	glWidget = new StelQGLWidget(context, this);
+#else
+	// Primary test for OpenGL existence
+	if (QSurfaceFormat::defaultFormat().majorVersion() < 2)
+	{
+		qWarning() << "No OpenGL 2 support on this system. Aborting.";
+		QMessageBox::critical(0, "Stellarium", q_("No OpenGL 2 found on this system. Please upgrade hardware or use MESA or an older version."), QMessageBox::Abort, QMessageBox::Abort);
+		exit(0);
+	}
+
+	//QSurfaceFormat format();
+	//// TBD: What options shall be default?
+	//QSurfaceFormat::setDefaultFormat(format);
+	////QOpenGLContext* context=new QOpenGLContext::create();
+	glWidget = new StelQOpenGLWidget(this);
+	//glWidget->setFormat(format);
+#endif
+
 	setViewport(glWidget);
 
 	// Workaround (see Bug #940638) Although we have already explicitly set
@@ -360,8 +418,13 @@ void StelMainView::init(QSettings* conf)
 	}
 	Q_ASSERT(gui);
 
+#if QT_VERSION < 0x050400
 	Q_ASSERT(glWidget->isValid());
 	glWidget->makeCurrent();
+#else
+	//glWidget->initializeGL(); // protected...
+	//Q_ASSERT(glWidget->isValid());
+#endif
 
 	// Find out lots of debug info about supported version of OpenGL and vendor/renderer
 	QOpenGLContext* context=QOpenGLContext::currentContext();
@@ -858,7 +921,11 @@ void StelMainView::saveScreenShot(const QString& filePrefix, const QString& save
 void StelMainView::doScreenshot(void)
 {
 	QFileInfo shotDir;
+#if QT_VERSION < 0x050400
 	QImage im = glWidget->grabFrameBuffer();
+#else
+	QImage im = glWidget->grabFramebuffer();
+#endif
 	if (flagInvertScreenShotColors)
 		im.invertPixels();
 
