@@ -43,14 +43,6 @@ public:
 		INVALID
 	};
 
-	bool isValid() { return m_bIsValid; }
-
-	quint64 getAddOnId() { return m_iAddOnId; }
-	QString getTitle() { return m_sTitle; }
-	Type getType() { return m_eType; }
-	QString getVersion() { return m_sVersion; }
-
-private:
 	typedef struct
 	{
 		QString name;
@@ -58,6 +50,20 @@ private:
 		QString url;
 	} Authors;
 
+	bool isValid() { return m_bIsValid; }
+
+	quint64 getAddOnId() { return m_iAddOnId; }
+	QString getTitle() { return m_sTitle; }
+	Type getType() { return m_eType; }
+	QString getVersion() { return m_sVersion; }
+	QList<Authors> getAuthors() { return m_authors; }
+	QString getDescription() { return m_sDescription; }
+	QString getLicenseName() { return m_sLicense; }
+	QString getLicenseURL() { return m_sLicenseURL; }
+	QString getDownloadSize() { return m_sDownloadSize; }
+	QString getInstallId() { return m_sInstallId; }
+
+private:
 	qint64 m_iAddOnId;
 	Type m_eType;
 	QString m_sInstallId;
