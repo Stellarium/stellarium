@@ -24,7 +24,6 @@
 #include <QFile>
 #include <QNetworkReply>
 #include <QObject>
-#include <QSqlDatabase>
 
 #include "AOCatalog.hpp"
 #include "AOLandscape.hpp"
@@ -97,7 +96,6 @@ private slots:
 	void newDownloadedData();
 
 private:
-	QSqlDatabase m_db;
 	QSettings* m_pConfig;
 
 	AddOn* m_downloadingAddOn;

@@ -33,8 +33,7 @@
 #include "StelProgressController.hpp"
 
 StelAddOnMgr::StelAddOnMgr()
-	: m_db(QSqlDatabase::addDatabase("QSQLITE"))
-	, m_pConfig(StelApp::getInstance().getSettings())
+	: m_pConfig(StelApp::getInstance().getSettings())
 	, m_downloadingAddOn(NULL)
 	, m_pAddOnNetworkReply(NULL)
 	, m_currentDownloadFile(NULL)
