@@ -83,14 +83,6 @@ void AddOnDialog::createDialogContent()
 	m_tableViews.insert(AddOn::STARLORE, ui->starloreTableView);
 	m_tableViews.insert(AddOn::TEXTURE, ui->texturesTableView);
 
-	// mapping enum_tab to table names
-	m_tabToTableName.insert(AddOn::CATALOG, TABLE_CATALOG);
-	m_tabToTableName.insert(AddOn::LANDSCAPE, TABLE_LANDSCAPE);
-	m_tabToTableName.insert(AddOn::LANGUAGEPACK, TABLE_LANGUAGE_PACK);
-	m_tabToTableName.insert(AddOn::SCRIPT, TABLE_SCRIPT);
-	m_tabToTableName.insert(AddOn::STARLORE, TABLE_SKY_CULTURE);
-	m_tabToTableName.insert(AddOn::TEXTURE, TABLE_TEXTURE);
-
 	// build and populate all tableviews
 	populateTables();
 

@@ -68,7 +68,6 @@ private:
 
 	QNetworkReply* m_pUpdateCatalogReply;
 	QHash<AddOn::Category, AddOnTableView*> m_tableViews;
-	QMap<AddOn::Category, QString> m_tabToTableName;
 
 	void updateTabBarListWidgetWidth();
 };
