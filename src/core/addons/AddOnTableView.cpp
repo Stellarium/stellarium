@@ -19,10 +19,9 @@
 
 #include <QHeaderView>
 #include <QScrollBar>
-#include <QSqlQuery>
 #include <QStringBuilder>
 
-#include "AddOnTableProxyModel.hpp"
+#include "JsonTableModel.hpp"
 #include "AddOnTableView.hpp"
 #include "StelAddOnMgr.hpp"
 #include "StelUtils.hpp"
@@ -70,7 +69,8 @@ AddOnTableView::~AddOnTableView()
 void AddOnTableView::slotDataUpdated(const QString& category) {
 	if (objectName() == category)
 	{
-		((AddOnTableProxyModel*) model())->sourceModel()->query().exec();
+		// TODO
+		//((AddOnTableProxyModel*) model())->sourceModel()->query().exec();
 		update();
 	}
 }
@@ -101,32 +101,15 @@ void AddOnTableView::setModel(QAbstractItemModel* model)
 	connect(m_pCheckedHeader, SIGNAL(toggled(bool)),
 		this, SLOT(setAllChecked(bool)), Qt::UniqueConnection);
 
-	// Hide imcompatible add-ons
 	// Insert checkboxes to the checkboxgroup (rows)
 	for (int row=0; row < model->rowCount(); row=row+2)
 	{
-		QString first = model->index(row, 2).data().toString();
-		QString last = model->index(row, 3).data().toString();
-		if (StelApp::getInstance().getStelAddOnMgr().isCompatible(first, last))
-		{
-			QCheckBox* cbox = new QCheckBox();
-			cbox->setStyleSheet("QCheckBox { margin-left: 8px; margin-right: 8px; margin-bottom: 2px; }");
-			cbox->setAutoFillBackground(true);
-			setIndexWidget(model->index(row, lastColumn), cbox);
-			m_pCheckboxGroup->addButton(cbox, row);
-		}
-		else
-		{
-			hideRow(row);
-		}
+		QCheckBox* cbox = new QCheckBox();
+		cbox->setStyleSheet("QCheckBox { margin-left: 8px; margin-right: 8px; margin-bottom: 2px; }");
+		cbox->setAutoFillBackground(true);
+		setIndexWidget(model->index(row, lastColumn), cbox);
+		m_pCheckboxGroup->addButton(cbox, row);
 	}
-
-	// Hide internal columns
-	AddOnTableProxyModel* proxy = (AddOnTableProxyModel*) model;
-	hideColumn(proxy->findColumn(COLUMN_ID));
-	hideColumn(proxy->findColumn(COLUMN_ADDONID));
-	hideColumn(proxy->findColumn(COLUMN_FIRST_STEL));
-	hideColumn(proxy->findColumn(COLUMN_LAST_STEL));
 
 	// Hide and span empty rows
 	for (int row=1; row < model->rowCount(); row=row+2)
@@ -197,10 +180,8 @@ AddOnWidget* AddOnTableView::insertAddOnWidget(int wRow)
 	{
 		return m_widgets.value(wRow);
 	}
-/*	AddOnTableProxyModel* model = (AddOnTableProxyModel*) this->model();
-	int addOnId = model->findIndex(wRow, COLUMN_ADDONID).data().toInt();
-	AddOnWidget* widget = new AddOnWidget(this, wRow);
-	widget->init(addOnId);
+	JsonTableModel* model = (JsonTableModel*) this->model();
+	AddOnWidget* widget = new AddOnWidget(this, wRow, model->getAddOn(wRow-1));
 	setRowHeight(wRow, widget->height());
 	setIndexWidget(model->index(wRow, 0), widget);
 	widget->setVisible(false);
@@ -209,7 +190,7 @@ AddOnWidget* AddOnTableView::insertAddOnWidget(int wRow)
 	{
 		connect(widget, SIGNAL(checkRow(int, int)),
 			this, SLOT(slotCheckRow(int, int)));
-	}*/
+	}
 	return m_widgets.value(wRow);
 }
 
@@ -234,9 +215,10 @@ void AddOnTableView::setAllChecked(bool checked)
 void AddOnTableView::slotRowChecked(int pRow, bool checked)
 {
 	AddOnWidget* widget = insertAddOnWidget(pRow+1);
-	AddOnTableProxyModel* model = (AddOnTableProxyModel*) this->model();
-	int addOnId = model->findIndex(pRow, COLUMN_ADDONID).data().toInt();
-	int installed = model->findIndex(pRow, COLUMN_INSTALLED).data(Qt::EditRole).toInt();
+	JsonTableModel* model = (JsonTableModel*) this->model();
+	AddOn* addon = model->getAddOn(pRow);
+	int addOnId = addon->getAddOnId();
+	int installed = addon->getStatus();
 	if (checked)
 	{
 		QStringList selectedFilesToInstall = widget->getSelectedFilesToInstall();
@@ -292,7 +274,7 @@ void AddOnTableView::slotRowChecked(int pRow, bool checked)
 				countChecked++;
 		}
 
-		if (countChecked == model->sourceModel()->rowCount()) // all rows checked ?
+		if (countChecked == model->rowCount() / 2) // all rows checked ?
 		{
 			m_pCheckedHeader->setChecked(true);
 		} else if (countChecked == 0){
