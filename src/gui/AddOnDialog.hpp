@@ -64,23 +64,11 @@ private slots:
 	void populateTables();
 
 private:
-	//! All categories sorted according to the tab index.
-	//! @enum tab
-	enum Tab {
-		CATALOG,
-		LANDSCAPE,
-		LANGUAGEPACK,
-		SCRIPT,
-		STARLORE,
-		TEXTURE,
-		COUNT
-	};
-
 	AddOnSettingsDialog* m_pSettingsDialog;
 
 	QNetworkReply* m_pUpdateCatalogReply;
-	QHash<Tab, AddOnTableView*> m_tableViews;
-	QMap<Tab, QString> m_tabToTableName;
+	QHash<AddOn::Category, AddOnTableView*> m_tableViews;
+	QMap<AddOn::Category, QString> m_tabToTableName;
 
 	void updateTabBarListWidgetWidth();
 };
