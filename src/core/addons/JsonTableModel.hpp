@@ -22,13 +22,15 @@
 
 #include <QAbstractTableModel>
 
-#include "addons/AddOn.hpp"
+#include "AddOn.hpp"
+#include "AddOnDialog.hpp"
+#include "StelAddOnMgr.hpp"
 
 class JsonTableModel : public QAbstractTableModel
 {
 	Q_OBJECT
 public:
-	JsonTableModel(AddOn::Type type, QMap<qint64, AddOn*> addons, QObject *parent=0);
+	JsonTableModel(AddOn::Category category, QHash<AddOn::Type, StelAddOnMgr::AddOnMap> addons, QObject *parent=0);
 
 	int rowCount(const QModelIndex &parent = QModelIndex()) const;
 	int columnCount(const QModelIndex &parent = QModelIndex()) const;

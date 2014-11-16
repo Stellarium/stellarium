@@ -23,13 +23,48 @@
 #include "JsonTableModel.hpp"
 #include "StelTranslator.hpp"
 
-JsonTableModel::JsonTableModel(AddOn::Type type, QMap<qint64, AddOn*> addons, QObject* parent)
+JsonTableModel::JsonTableModel(AddOn::Category category, QHash<AddOn::Type, StelAddOnMgr::AddOnMap> addons, QObject* parent)
 	: QAbstractTableModel(parent)
-	, m_addons(addons)
 {
-	switch (type) {
-		default:
+	switch (category) {
+		case AddOn::CATALOG:
+		{
+			QMap<qint64, AddOn*> plugin = addons.value(AddOn::Plugin_Catalog);
+			QMap<qint64, AddOn*> star = addons.value(AddOn::Star_Catalog);
+			m_addons = plugin.unite(star);
 			m_iColumns << Title << Type << Version << Checkbox;
+			break;
+		}
+		case AddOn::LANDSCAPE:
+		{
+			m_addons = addons.value(AddOn::Landscape);
+			m_iColumns << Title << Type << Version << Checkbox;
+			break;
+		}
+		case AddOn::LANGUAGEPACK:
+		{
+			m_addons = addons.value(AddOn::Language_Pack);
+			m_iColumns << Title << Type << Version << Checkbox;
+			break;
+		}
+		case AddOn::SCRIPT:
+		{
+			m_addons = addons.value(AddOn::Script);
+			m_iColumns << Title << Type << Version << Checkbox;
+			break;
+		}
+		case AddOn::STARLORE:
+		{
+			m_addons = addons.value(AddOn::Sky_Culture);
+			m_iColumns << Title << Type << Version << Checkbox;
+			break;
+		}
+		case AddOn::TEXTURE:
+		{
+			m_addons = addons.value(AddOn::Texture);
+			m_iColumns << Title << Type << Version << Checkbox;
+			break;
+		}
 	}
 }
 
