@@ -18,7 +18,6 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 */
 
-#include "config.h"
 
 #include <QDebug>
 #include <QTimer>
@@ -77,6 +76,13 @@ void ExoplanetsDialog::createDialogContent()
 	ui->tabs->setCurrentIndex(0);	
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()),
 		this, SLOT(retranslate()));
+
+#ifdef Q_OS_WIN
+	//Kinetic scrolling for tablet pc and pc
+	QList<QWidget *> addscroll;
+	addscroll << ui->aboutTextBrowser << ui->infoTextBrowser << ui->websitesTextBrowser;
+	installKineticScrolling(addscroll);
+#endif
 
 	// Settings tab / updates group
 	ui->displayAtStartupCheckBox->setChecked(ep->getEnableAtStartup());

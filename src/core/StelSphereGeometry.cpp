@@ -709,7 +709,8 @@ struct TriangleSerializer
 
 	TriangleSerializer() {}
 	inline void operator()(const Vec3d* v1, const Vec3d* v2, const Vec3d* v3,
-						   const Vec2f* , const Vec2f* , const Vec2f* ,
+			       const Vec2f* , const Vec2f* , const Vec2f* ,
+			       const Vec3f* , const Vec3f* , const Vec3f* , // GZ NEW
 						   unsigned int , unsigned int , unsigned int )
 	{
 		QVariantList triangle;
@@ -1151,7 +1152,8 @@ struct TriangleDumper
 
 	TriangleDumper() {}
 	inline void operator()(const Vec3d* v1, const Vec3d* v2, const Vec3d* v3,
-						   const Vec2f* , const Vec2f* , const Vec2f* ,
+			       const Vec2f* , const Vec2f* , const Vec2f* ,
+			       const Vec3f* , const Vec3f* , const Vec3f* , // GZ NEW
 						   unsigned int , unsigned int , unsigned int )
 	{
 		QVector<Vec3d> triangle;

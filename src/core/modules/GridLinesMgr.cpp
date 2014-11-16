@@ -38,7 +38,6 @@
 
 //! @class SkyGrid
 //! Class which manages a grid to display in the sky.
-//! TODO needs support for DMS/DMS labelling, not only HMS/DMS
 class SkyGrid
 {
 public:

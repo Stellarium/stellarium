@@ -16,16 +16,19 @@ Comment[fr]=Planétarium
 Comment[ru]=Планетарий
 Keywords=astronomy;planetarium;
 
-Actions=Window;Fullscreen;Safemode;
+Actions=Window;Fullscreen;Debugmode;
 
 [Desktop Action Window]
 Name=Open in window
 Name[ru]=Открыть в окне
 Exec=stellarium -f no
-OnlyShowIn=Unity;
 
 [Desktop Action Fullscreen]
 Name=Open in fullscreen
 Name[ru]=Открыть в полноэкранном режиме
 Exec=stellarium -f yes
-OnlyShowIn=Unity;
+
+[Desktop Action Debugmode]
+Name=Open in debug mode
+Name[ru]=Открыть в режиме отладки
+Exec=stellarium --dump-opengl-details

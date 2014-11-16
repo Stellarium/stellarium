@@ -23,7 +23,6 @@
 #ifndef _ATMOSPHEREDIALOG_HPP_
 #define _ATMOSPHEREDIALOG_HPP_
 
-#include "config.h"
 #include <QObject>
 #include "StelDialog.hpp"
 #include "RefractionExtinction.hpp"

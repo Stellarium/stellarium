@@ -93,10 +93,12 @@ void SatellitesDialog::createDialogContent()
 	        this, SLOT(retranslate()));
 	Satellites* plugin = GETSTELMODULE(Satellites);
 
+#ifdef Q_OS_WIN
 	//Kinetic scrolling for tablet pc and pc
 	QList<QWidget *> addscroll;
 	addscroll << ui->satellitesList << ui->sourceList << ui->aboutTextBrowser;
 	installKineticScrolling(addscroll);
+#endif
 
 	// Settings tab / updates group
 	// These controls are refreshed by updateSettingsPage(), which in

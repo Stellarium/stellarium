@@ -16,7 +16,6 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#include "config.h"
 
 #include "VecMath.hpp"
 #include "StelProjector.hpp"
@@ -124,7 +123,7 @@ void CompassMarks::draw(StelCore* core)
 {
 	if (markFader.getInterstate() <= 0.0) { return; }
 
-	Vec3d pos;
+	Vec3d pos, screenPos;
 	StelProjectorP prj = core->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
 	StelPainter painter(prj);
 	painter.setFont(font);
@@ -133,8 +132,6 @@ void CompassMarks::draw(StelCore* core)
 	glDisable(GL_TEXTURE_2D);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glEnable(GL_BLEND);
-	// OpenGL ES 2.0 doesn't have GL_LINE_SMOOTH
-	// glEnable(GL_LINE_SMOOTH);
 
 	for(int i=0; i<360; i++)
 	{
@@ -156,12 +153,15 @@ void CompassMarks::draw(StelCore* core)
 			h = -0.01;  // the size of the mark every 5 degrees
 		}
 
-		glDisable(GL_TEXTURE_2D);
-		painter.drawGreatCircleArc(pos, Vec3d(pos[0], pos[1], h), NULL);		
-		glEnable(GL_TEXTURE_2D);
+		// Limit arcs to those that are visible for improved performance
+		if (prj->project(pos, screenPos) && 
+		     screenPos[0]>prj->getViewportPosX() && screenPos[0] < prj->getViewportPosX() + prj->getViewportWidth()) {
+			// This has been disabled above already...
+			//glDisable(GL_TEXTURE_2D);
+			painter.drawGreatCircleArc(pos, Vec3d(pos[0], pos[1], h), NULL);
+			//glEnable(GL_TEXTURE_2D);
+		}
 	}
-	// OpenGL ES 2.0 doesn't have GL_LINE_SMOOTH
-	// glDisable(GL_LINE_SMOOTH);
 	glDisable(GL_BLEND);
 	glEnable(GL_TEXTURE_2D);
 

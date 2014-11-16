@@ -19,6 +19,7 @@ RemovePluginsConfig=Remove plug-ins' configuration files
 RemoveSolarConfig=Remove Solar System file
 RemoveUILandscapes=Remove user-installed landscapes
 RemoveShortcutsConfig=Remove shortcut's configuration file
+RemoveCache=Remove cache files
 LastRunLog=Last run log
 ChangeLog=Change log
 FallbackMode=(fallback mode)

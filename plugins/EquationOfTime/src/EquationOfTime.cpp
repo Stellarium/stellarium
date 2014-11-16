@@ -127,12 +127,13 @@ void EquationOfTime::draw(StelCore *core)
 
 	if (getFlagMsFormat())
 	{
-		double seconds = std::abs(round((time - (int)time)*60));
+        int seconds = qRound((time - (int)time)*60);
+        seconds = seconds>=0 ? seconds : -seconds;
 		QString messageSecondsValue;
-		if (seconds<10.)
-			messageSecondsValue = QString("0%1").arg(QString::number(seconds, 'f', 0));
+        if (seconds<10)
+            messageSecondsValue = QString("0%1").arg(QString::number(seconds));
 		else
-			messageSecondsValue = QString("%1").arg(QString::number(seconds, 'f', 0));
+            messageSecondsValue = QString("%1").arg(QString::number(seconds));
 
 		timeText = QString("%1: %2%3%4%5").arg(messageEquation, QString::number((int)time), messageEquationMinutes, messageSecondsValue, messageEquationSeconds);
 	}
@@ -239,7 +240,7 @@ double EquationOfTime::getSolutionEquationOfTime(const double JDay) const
 
 	double equation = 4*(sunMeanLongitude - 0.0057183 - alpha + get_nutation_longitude(JDay)*cos(get_mean_ecliptical_obliquity(JDay)));
 	// The equation of time is always smaller 20 minutes in absolute value
-	if (std::abs(equation)>20)
+	if (qAbs(equation)>20)
 	{
 		// If absolute value of the equation of time appears to be too large, add 24 hours (1440 minutes) to or subtract it from our result
 		if (equation>0.)

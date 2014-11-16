@@ -20,7 +20,6 @@
 #ifndef _STELDIALOG_HPP_
 #define _STELDIALOG_HPP_
 
-#include "config.h"
 #include <QObject>
 
 //! @class StelDialog
@@ -79,8 +78,10 @@ protected:
 	QWidget* dialog;
 	class CustomProxy* proxy;
 
+#ifdef Q_OS_WIN
 	//! Kinetic scrolling for lists.
 	void installKineticScrolling(QList<QWidget *> addscroll);
+#endif
 };
 
 #endif // _STELDIALOG_HPP_

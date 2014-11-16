@@ -24,8 +24,6 @@
 #ifndef _VECMATH_H_
 #define _VECMATH_H_
 
-#include "config.h"
-
 #include <cmath>
 #include <QString>
 

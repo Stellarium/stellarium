@@ -49,6 +49,7 @@ private:
 
 	void updateAboutText();
 	void populateValues();
+	void setCustomCoordinatesAccess(QString place);
 
 private slots:
 	void saveCoordinatesSettings();
@@ -58,6 +59,7 @@ private slots:
 	void populateCoordinateSystemsList();
 	void setCoordinatesPlace(int placeID);
 	void setCoordinateSystem(int csID);
+	void setCustomCoordinatesPlace();
 };
 
 

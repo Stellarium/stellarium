@@ -20,8 +20,6 @@
 #ifndef STELSCRIPTOUTPUT_HPP
 #define STELSCRIPTOUTPUT_HPP
 
-#include "config.h"
-
 #include <QString>
 #include <QFile>
 

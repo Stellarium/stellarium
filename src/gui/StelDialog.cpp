@@ -28,7 +28,9 @@
 #include <QGraphicsProxyWidget>
 #include <QStyleOptionGraphicsItem>
 #include <QSettings>
-#include <QScroller>
+#ifdef Q_OS_WIN
+	#include <QScroller>
+#endif
 
 class CustomProxy : public QGraphicsProxyWidget
 {
@@ -157,6 +159,7 @@ void StelDialog::setVisible(bool v)
 	}
 }
 
+#ifdef Q_OS_WIN
 void StelDialog::installKineticScrolling(QList<QWidget *> addscroll)
 {
 	return; // Temporary disable feature, bug in Qt: https://bugreports.qt-project.org/browse/QTBUG-41299
@@ -170,3 +173,4 @@ void StelDialog::installKineticScrolling(QList<QWidget *> addscroll)
 		QScroller::scroller(w);
 	}
 }
+#endif

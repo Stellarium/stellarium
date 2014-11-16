@@ -18,8 +18,6 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 */
 
-#include "config.h"
-
 #include <QDebug>
 #include <QFileDialog>
 
@@ -66,10 +64,12 @@ void ObservabilityDialog::createDialogContent()
 
 	Observability* plugin = GETSTELMODULE(Observability);
 
+#ifdef Q_OS_WIN
 	//Kinetic scrolling for tablet pc and pc
 	QList<QWidget *> addscroll;
 	addscroll << ui->aboutTextBrowser;
 	installKineticScrolling(addscroll);
+#endif
 
 	// Settings:
 	

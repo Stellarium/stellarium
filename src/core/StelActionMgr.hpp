@@ -20,8 +20,6 @@
 #ifndef _STELACTIONMGR_HPP_
 #define _STELACTIONMGR_HPP_
 
-#include "config.h"
-
 #include <QObject>
 #include <QKeySequence>
 #include <QList>
@@ -40,7 +38,10 @@ public:
 		, checked(false)
 		, global(false)
 		, target(NULL)
-		, property(NULL) {}
+		, property(NULL)
+	#ifndef USE_QUICKVIEW
+		, qAction(NULL) {}
+	#endif
 
 	StelAction(const QString& actionId,
 	           const QString& groupId,

@@ -22,7 +22,6 @@
 #ifndef _STELSCRIPTSYNTAXHIGHLIGHTER_HPP_
 #define _STELSCRIPTSYNTAXHIGHLIGHTER_HPP_
 
-#include "config.h"
 #include <QSyntaxHighlighter>
 #include <QHash>
 #include <QTextCharFormat>

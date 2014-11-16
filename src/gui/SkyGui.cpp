@@ -31,10 +31,6 @@
 #include <QSettings>
 #include <QTextDocument>
 
-#ifdef _MSC_BUILD
-#define round(dbl) dbl >= 0.0 ? (int)(dbl + 0.5) : ((dbl - (double)(int)dbl) <= -0.5 ? (int)dbl : (int)(dbl - 0.5))
-#endif
-
 InfoPanel::InfoPanel(QGraphicsItem* parent) : QGraphicsTextItem("", parent)
 {
 	QSettings* conf = StelApp::getInstance().getSettings();
@@ -263,7 +259,7 @@ void SkyGui::updateBarsPos()
 	const qreal newWinBarY = hh-winBar->boundingRectNoHelpLabel().height()-buttonBar->boundingRectNoHelpLabel().height()-20;
 	if (winBar->pos().x()!=newWinBarX || winBar->pos().y()!=newWinBarY)
 	{
-		winBar->setPos(round(newWinBarX), round(newWinBarY));
+		winBar->setPos(qRound(newWinBarX), qRound(newWinBarY));
 		updatePath = true;
 	}
 
@@ -272,7 +268,7 @@ void SkyGui::updateBarsPos()
 	const qreal newButtonBarY = hh-buttonBar->boundingRectNoHelpLabel().height()-buttonBarPath->getRoundSize()+0.5+(1.-animBottomBarTimeLine->currentValue())*rangeY;
 	if (buttonBar->pos().x()!=newButtonBarX || buttonBar->pos().y()!=newButtonBarY)
 	{
-		buttonBar->setPos(round(newButtonBarX), round(newButtonBarY));
+		buttonBar->setPos(qRound(newButtonBarX), qRound(newButtonBarY));
 		updatePath = true;
 	}
 

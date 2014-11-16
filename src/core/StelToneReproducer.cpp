@@ -17,7 +17,7 @@
  */
 
 #include "StelToneReproducer.hpp"
-
+#include "StelUtils.hpp"
 #include <cmath>
 
 /*********************************************************************
@@ -68,7 +68,7 @@ void StelToneReproducer::setDisplayAdaptationLuminance(float _Lda)
 
 	// Update terms
 	alphaWaOverAlphaDa = alphaWa/alphaDa;
-	term2 = (float) (pow10((betaWa-betaDa)/alphaDa) / (M_PI*0.0001f));
+    term2 = (float) (stelpow10f((betaWa-betaDa)/alphaDa) / (M_PI*0.0001f));
 	lnTerm2 = std::log(term2);
 	term2TimesOneOverMaxdLpOneOverGamma = std::pow(term2*oneOverMaxdL, oneOverGamma);
 }
@@ -87,7 +87,7 @@ void StelToneReproducer::setWorldAdaptationLuminance(float _Lwa)
 
 	// Update terms
 	alphaWaOverAlphaDa = alphaWa/alphaDa;
-	term2 = (float) (pow10((betaWa-betaDa)/alphaDa) / (M_PI*0.0001f));
+    term2 = (float) (stelpow10f((betaWa-betaDa)/alphaDa) / (M_PI*0.0001f));
 	lnTerm2 = std::log(term2);
 	term2TimesOneOverMaxdLpOneOverGamma = std::pow(term2*oneOverMaxdL, oneOverGamma);
 }

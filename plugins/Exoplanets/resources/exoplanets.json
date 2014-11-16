@@ -3836,7 +3836,7 @@
 			{
 				"mass": 1.741,
 				"radius": 1.431,
-				"period": 2.20473506,
+				"period": 2.2047298,
 				"semiAxis": 0.0379,
 				"eccentricity": 0.0,
 				"inclination": 84.1,
@@ -5846,6 +5846,29 @@
 			"effectiveTemp": 4700.0,
 			"RA": "15h35m16s",
 			"DE": "53d55m19.9s"
+		},
+		"HD 14067":
+		{
+			"exoplanets":
+			[
+			{
+				"mass": 7.8,
+				"period": 1455.0,
+				"semiAxis": 3.4,
+				"eccentricity": 0.533,
+				"discovered": 2014,
+				"planetName": "b"
+			}
+			],
+			"distance": 163.4,
+			"stype": "G9 III",
+			"smass": 2.4,
+			"smetal": -0.1,
+			"Vmag": 6.51,
+			"sradius": 12.4,
+			"effectiveTemp": 4815.0,
+			"RA": "2h17m10.4s",
+			"DE": "23d46m4.1s"
 		},
 		"HD 141399":
 		{
@@ -12769,6 +12792,29 @@
 			"RA": "12h57m31.9s",
 			"DE": "-65d38m47s"
 		},
+		"HIP 67851":
+		{
+			"exoplanets":
+			[
+			{
+				"mass": 1.44,
+				"period": 88.8,
+				"semiAxis": 0.46,
+				"eccentricity": 0.09,
+				"discovered": 2014,
+				"planetName": "b"
+			}
+			],
+			"distance": 65.96,
+			"stype": "KOIII",
+			"smass": 1.63,
+			"smetal": 0.0,
+			"Vmag": 6.17,
+			"sradius": 5.52,
+			"effectiveTemp": 4890.0,
+			"RA": "13h53m52s",
+			"DE": "-35d18m52s"
+		},
 		"HIP 70849":
 		{
 			"exoplanets":
@@ -12896,6 +12942,29 @@
 			"effectiveTemp": 5519.0,
 			"RA": "18h36m53s",
 			"DE": "61d42m9s"
+		},
+		"HIP 97233":
+		{
+			"exoplanets":
+			[
+			{
+				"mass": 20.0,
+				"period": 1058.8,
+				"semiAxis": 2.55,
+				"eccentricity": 0.61,
+				"discovered": 2014,
+				"planetName": "b"
+			}
+			],
+			"distance": 106.5,
+			"stype": "K0",
+			"smass": 1.93,
+			"smetal": 0.29,
+			"Vmag": 7.34,
+			"sradius": 5.34,
+			"effectiveTemp": 5020.0,
+			"RA": "19h45m41s",
+			"DE": "0d41m48s"
 		},
 		"HN Peg":
 		{
@@ -23499,6 +23568,76 @@
 			"RA": "18h53m1.6s",
 			"DE": "45d5m15.9s"
 		},
+		"Kepler-422":
+		{
+			"exoplanets":
+			[
+			{
+				"mass": 0.43,
+				"radius": 1.15,
+				"period": 7.8914483,
+				"semiAxis": 0.082,
+				"discovered": 2014,
+				"planetName": "b"
+			}
+			],
+			"smass": 1.15,
+			"smetal": 0.23,
+			"Vmag": 13.642,
+			"sradius": 1.24,
+			"effectiveTemp": 5972.0,
+			"RA": "18h50m31.1s",
+			"DE": "46d19m24.1s"
+		},
+		"Kepler-423":
+		{
+			"exoplanets":
+			[
+			{
+				"mass": 0.72,
+				"radius": 1.2,
+				"period": 2.68432848,
+				"semiAxis": 0.0396,
+				"discovered": 2014,
+				"planetName": "b"
+			}
+			],
+			"smass": 1.07,
+			"smetal": 0.26,
+			"Vmag": 14.499,
+			"sradius": 0.99,
+			"effectiveTemp": 5790.0,
+			"RA": "19h31m25.3s",
+			"DE": "46d23m28.2s"
+		},
+		"Kepler-424":
+		{
+			"exoplanets":
+			[
+			{
+				"mass": 1.03,
+				"radius": 0.89,
+				"period": 3.3118644,
+				"semiAxis": 0.044,
+				"discovered": 2014,
+				"planetName": "b"
+			},
+			{
+				"mass": 6.97,
+				"period": 223.3,
+				"semiAxis": 0.73,
+				"discovered": 2014,
+				"planetName": "c"
+			}
+			],
+			"smass": 1.01,
+			"smetal": 0.44,
+			"Vmag": 14.497,
+			"sradius": 0.94,
+			"effectiveTemp": 5460.0,
+			"RA": "19h54m29.9s",
+			"DE": "48d34m38.8s"
+		},
 		"Kepler-43":
 		{
 			"exoplanets":
@@ -23520,7 +23659,7 @@
 			"smass": 1.32,
 			"smetal": 0.33,
 			"Vmag": 14.0,
-			"sradius": 1.2,
+			"sradius": 1.42,
 			"effectiveTemp": 6041.0,
 			"RA": "19h0m58s",
 			"DE": "46d40m5.9s"
@@ -25545,11 +25684,20 @@
 			"exoplanets":
 			[
 			{
-				"mass": 2.3,
-				"period": 2900.0,
-				"semiAxis": 3.3,
+				"mass": 2.78,
+				"period": 2987.745,
+				"semiAxis": 3.39,
+				"inclination": 81.0,
 				"discovered": 2011,
 				"planetName": "b"
+			},
+			{
+				"mass": 4.49,
+				"period": 9861.75,
+				"semiAxis": 7.54,
+				"inclination": 81.0,
+				"discovered": 2011,
+				"planetName": "c"
 			}
 			],
 			"stype": "B D",
@@ -28468,6 +28616,51 @@
 			"effectiveTemp": 6430.0,
 			"RA": "21h2m7.9s",
 			"DE": "7d3m24.1s"
+		},
+		"WASP-94 A":
+		{
+			"exoplanets":
+			[
+			{
+				"mass": 0.452,
+				"radius": 1.72,
+				"period": 3.9501907,
+				"semiAxis": 0.055,
+				"eccentricity": 0.0,
+				"inclination": 88.7,
+				"discovered": 2014,
+				"planetName": "b"
+			}
+			],
+			"stype": "F8",
+			"smass": 1.29,
+			"smetal": 0.26,
+			"Vmag": 10.1,
+			"sradius": 1.36,
+			"effectiveTemp": 6170.0,
+			"RA": "20h55m7.9s",
+			"DE": "-34d8m7.9s"
+		},
+		"WASP-94 B":
+		{
+			"exoplanets":
+			[
+			{
+				"mass": 0.618,
+				"period": 2.00839,
+				"semiAxis": 0.0335,
+				"discovered": 2014,
+				"planetName": "b"
+			}
+			],
+			"stype": "F9",
+			"smass": 1.24,
+			"smetal": 0.23,
+			"Vmag": 10.5,
+			"sradius": 1.35,
+			"effectiveTemp": 6040.0,
+			"RA": "20h55m9.1s",
+			"DE": "-34d8m7.9s"
 		},
 		"WASP-95":
 		{

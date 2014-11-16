@@ -58,6 +58,10 @@ class LandscapeMgr : public StelModule
 			   READ getFlagLandscape
 			   WRITE setFlagLandscape
 			   NOTIFY landscapeDisplayedChanged)
+	Q_PROPERTY(bool illuminationDisplayed
+			   READ getFlagIllumination
+			   WRITE setFlagIllumination
+			   NOTIFY illuminationDisplayedChanged)
 	Q_PROPERTY(bool databaseUsage
 			READ getFlagUseLightPollutionFromDatabase
 			WRITE setFlagUseLightPollutionFromDatabase
@@ -72,7 +76,7 @@ public:
 	//! Initialize the LandscapeManager class.
 	//! Operations performed:
 	//! - Load the default landscape as specified in the application configuration
-	//! - Set up landscape-releated display flags from ini parser object
+	//! - Set up landscape-related display flags from ini parser object
 	virtual void init();
 
 	//! Draw the landscape graphics, cardinal points and atmosphere.
@@ -81,19 +85,19 @@ public:
 	//! Update time-dependent state.
 	//! Includes:
 	//! - Landscape, atmosphere and cardinal point on/off fading.
-	//! - Atmophere colour calulation based on location, position of sun
+	//! - Atmophere colour calculation based on location, position of sun
 	//!   and moon.
-	//! - updates adaptation lumenescence lased on visible bright objects.
+	//! - updates adaptation luminescence based on visible bright objects.
 	virtual void update(double deltaTime);
 
-	//! Get the order in which this module will draw it's objects relative to other modules.
+	//! Get the order in which this module will draw its objects relative to other modules.
 	virtual double getCallOrder(StelModuleActionName actionName) const;
 
 
 	///////////////////////////////////////////////////////////////////////////
 	// Method specific to the landscape manager
 	//! Return the global landscape luminance [0..1], for being used e.g for setting eye adaptation.
-	//! GZ 2014-01-03: THIS IS MISLEADING. Returns 1 if atmosphere drawing is on and no eclipse underway, 0 if atmosphere is switched off.
+	//! It returns 1 if atmosphere drawing is on and no eclipse underway, 0 if atmosphere is switched off.
 	//! The actual brightness is of no concern here. You may use getAtmosphereAverageLuminance() for this.
 	float getLuminance() const;
 	//! return average luminance [cd/m^2] of atmosphere. Around 10 at sunset, 6400 in daylight, >0 in dark night.
@@ -159,10 +163,10 @@ public slots:
 	//! @return false if the new landscape could not be set (e.g. no landscape of that ID was found). True on success.
 	bool setDefaultLandscapeID(const QString& id);
 
-	//! Return a pseudo HTML formated string with all informations on the current landscape
+	//! Return a pseudo HTML formatted string with all informations on the current landscape
 	QString getCurrentLandscapeHtmlDescription() const;
 
-	//! Return a pseudo HTML formated string with information from description or ini file
+	//! Return a pseudo HTML formatted string with information from description or ini file
 	QString getDescription() const;
 
 	//! Get flag for displaying Landscape.
@@ -177,6 +181,10 @@ public slots:
 	bool getFlagFog() const;
 	//! Set flag for displaying Fog.
 	void setFlagFog(const bool displayed);
+	//! Get flag for displaying illumination layer
+	bool getFlagIllumination() const;
+	//! Set flag for displaying illumination layer
+	void setFlagIllumination(const bool on);
 
 	//! Return the value of the flag determining if a change of landscape will update the observer location.
 	bool getFlagLandscapeSetsLocation() const {return flagLandscapeSetsLocation;}
@@ -290,7 +298,7 @@ public slots:
 	//! If the function encounters any file that can't be deleted
 	//! it aborts the operation (previously deleted files are not restored).
 	//! Landscapes that were packaged with Stellarium can't be removed,
-	//! thanks to the #packagedtLandscapeIDs list.
+	//! thanks to the #packagedLandscapeIDs list.
 	//! @param landscapeID an installed landscape's identifier (the folder name)
 	//! @todo Find a better way to pass error messages.
 	bool removeLandscape(const QString landscapeID);
@@ -317,11 +325,14 @@ public slots:
 	//! Set flag for auto-enable atmosphere for planets with atmospheres in location window
 	void setFlagAtmosphereAutoEnable(bool b);
 
+
+
 signals:
 	void atmosphereDisplayedChanged(const bool displayed);
 	void cardinalsPointsDisplayedChanged(const bool displayed);
 	void fogDisplayedChanged(const bool displayed);
 	void landscapeDisplayedChanged(const bool displayed);
+	void illuminationDisplayedChanged(const bool displayed);
 	void lightPollutionUsageChanged(const bool usage);
 
 	//! Emitted when a landscape has been installed or un-installed.
@@ -363,6 +374,7 @@ private:
 	float getAtmosphereLightPollutionLuminance() const;
 	//! Set light pollution luminance level.
 	void setAtmosphereLightPollutionLuminance(const float f);
+
 
 	//! For a given landscape name, return the landscape ID.
 	//! This takes a name of the landscape, as described in the landscape:name item in the

@@ -164,7 +164,7 @@ float Supernova::getVMagnitude(const StelCore* core) const
 {
 	double vmag = 20;
 	double currentJD = core->getJDay();
-	double deltaJD = std::abs(peakJD-currentJD);
+	double deltaJD = qAbs(peakJD-currentJD);
 
 	// Use supernova light curve model from here - http://www.astronet.ru/db/msg/1188703
 

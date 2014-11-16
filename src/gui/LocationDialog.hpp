@@ -82,7 +82,7 @@ private slots:
 	void updateFromProgram(const StelLocation& location);
 	
 	//! Called when the map is clicked.
-	//! GZ_New: create new list for places nearby and feed into location list box.
+	//! create new list for places nearby and feed into location list box.
 	void setPositionFromMap(double longitude, double latitude);
 	
 	//! Called when the user activates an item from the locations list.

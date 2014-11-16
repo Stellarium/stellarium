@@ -63,6 +63,6 @@ public:
 	virtual StelPluginInfo getPluginInfo() const = 0;
 };
 
-Q_DECLARE_INTERFACE(StelPluginInterface, "stellarium.StelPluginInterface/2.0");
+Q_DECLARE_INTERFACE(StelPluginInterface, "stellarium.StelPluginInterface/2.0")
 
 #endif // _STELPLUGININTERFACE_HPP_

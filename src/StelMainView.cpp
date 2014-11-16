@@ -47,7 +47,9 @@
 #include <QWidget>
 #include <QWindow>
 #include <QDeclarativeContext>
-#include <QPinchGesture>
+#ifdef Q_OS_WIN
+	#include <QPinchGesture>
+#endif
 #include <QOpenGLShader>
 #include <QOpenGLShaderProgram>
 
@@ -69,12 +71,16 @@ protected:
 	void wheelEvent(QGraphicsSceneWheelEvent *event);
 	void keyPressEvent(QKeyEvent *event);
 	void keyReleaseEvent(QKeyEvent *event);
+#ifdef Q_OS_WIN
 	bool event(QEvent * e);
+#endif
 private:
 	double previousPaintTime;
 	void onSizeChanged();
+#ifdef Q_OS_WIN
 	void pinchTriggered(QPinchGesture *gesture);
 	bool gestureEvent(QGestureEvent *event);
+#endif
 };
 
 //! Initialize and render Stellarium gui.
@@ -93,8 +99,10 @@ StelSkyItem::StelSkyItem(QDeclarativeItem* parent)
 	setObjectName("SkyItem");
 	setFlag(QGraphicsItem::ItemHasNoContents, false);
 	setAcceptHoverEvents(true);
+#ifdef Q_OS_WIN
 	setAcceptTouchEvents(true);
 	grabGesture(Qt::PinchGesture);
+#endif
 	setAcceptedMouseButtons(Qt::LeftButton | Qt::RightButton | Qt::MiddleButton);
 	connect(this, &StelSkyItem::widthChanged, this, &StelSkyItem::onSizeChanged);
 	connect(this, &StelSkyItem::heightChanged, this, &StelSkyItem::onSizeChanged);
@@ -159,6 +167,7 @@ void StelSkyItem::wheelEvent(QGraphicsSceneWheelEvent *event)
 	StelApp::getInstance().handleWheel(&newEvent);
 }
 
+#ifdef Q_OS_WIN
 bool StelSkyItem::event(QEvent * e)
 {
 	switch (e->type()){
@@ -205,6 +214,7 @@ void StelSkyItem::pinchTriggered(QPinchGesture *gesture)
 		}
 	}
 }
+#endif
 
 void StelSkyItem::keyPressEvent(QKeyEvent* event)
 {

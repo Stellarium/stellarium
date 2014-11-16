@@ -23,8 +23,6 @@
 //! @file StelTranslator.hpp
 //! Define some translation macros.
 
-#include "config.h"
-
 #include <QMap>
 #include <QString>
 

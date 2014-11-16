@@ -16,8 +16,6 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#include "config.h"
-
 #include "Nova.hpp"
 #include "StelObject.hpp"
 #include "StelApp.hpp"
@@ -170,7 +168,7 @@ float Nova::getVMagnitude(const StelCore* core) const
 	// OK, start from minimal brightness
 	double vmag = minMagnitude;
 	double currentJD = core->getJDay();
-	double deltaJD = std::abs(peakJD-currentJD);
+	double deltaJD = qAbs(peakJD-currentJD);
     
 	// Fill "default" values for mX
 	int t2 = m2;

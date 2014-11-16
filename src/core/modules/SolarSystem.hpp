@@ -261,6 +261,24 @@ public slots:
 	//! @return a phase
 	float getPhaseForPlanet(QString planetName) const;
 
+	//! Set the algorithm for computation of apparent magnitudes for planets in case observer on the Earth.
+	//! Possible values:
+	//! * Planesas (algorithm provided by Pere Planesas (Observatorio Astronomico Nacional))
+	//! * Mueller (G. Mueller, based on visual observations 1877-91. [Expl.Suppl.1961])
+	//! * Harris (Astronomical Almanac 1984 and later. These give V (instrumental) magnitudes)
+	//! Details:
+	//! J. Meeus "Astronomical Algorithms" (2nd ed., with corrections as of August 10, 2009) p.283-286.
+	//! O. Montenbruck, T. Pfleger "Astronomy on the Personal Computer" (4th ed.) p.143-145.
+	//! Daniel L. Harris "Photometry and Colorimetry of Planets and Satellites" http://adsabs.harvard.edu/abs/1961plsa.book..272H
+	//! Hint: Default option in config.ini: astro/apparent_magnitude_algorithm = Harris
+	//! @param algorithm the case in-sensitive algorithm name
+	//! @note: The structure of algorithms is almost identical, just the numbers are different! You should activate
+	//! Mueller's algorithm for simulate the eye's impression. (Esp. Venus!)
+	void setApparentMagnitudeAlgorithmOnEarth(QString algorithm);
+
+	//! Get the algorithm used for computation of apparent magnitudes for planets in case  observer on the Earth
+	QString getApparentMagnitudeAlgorithmOnEarth() const;
+
 public:
 	///////////////////////////////////////////////////////////////////////////
 	// Other public methods
