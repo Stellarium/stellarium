@@ -125,7 +125,8 @@ QVariant JsonTableModel::headerData(int section, Qt::Orientation orientation, in
 	}
 
 	QString value;
-	switch ((Column) section) {
+	Column column = m_iColumns.at(section);
+	switch (column) {
 		case Title:
 			value = q_("Title");
 			break;
