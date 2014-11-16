@@ -32,40 +32,41 @@ JsonTableModel::JsonTableModel(AddOn::Category category, QHash<AddOn::Type, Stel
 			QMap<qint64, AddOn*> plugin = addons.value(AddOn::Plugin_Catalog);
 			QMap<qint64, AddOn*> star = addons.value(AddOn::Star_Catalog);
 			m_addons = plugin.unite(star);
-			m_iColumns << Title << Type << Version << Checkbox;
+			m_iColumns << Title << Type << Version;
 			break;
 		}
 		case AddOn::LANDSCAPE:
 		{
 			m_addons = addons.value(AddOn::Landscape);
-			m_iColumns << Title << Type << Version << Checkbox;
+			m_iColumns << Title << Version;
 			break;
 		}
 		case AddOn::LANGUAGEPACK:
 		{
 			m_addons = addons.value(AddOn::Language_Pack);
-			m_iColumns << Title << Type << Version << Checkbox;
+			m_iColumns << Title << Type << LastUpdate;
 			break;
 		}
 		case AddOn::SCRIPT:
 		{
 			m_addons = addons.value(AddOn::Script);
-			m_iColumns << Title << Type << Version << Checkbox;
+			m_iColumns << Title << Version;
 			break;
 		}
 		case AddOn::STARLORE:
 		{
 			m_addons = addons.value(AddOn::Sky_Culture);
-			m_iColumns << Title << Type << Version << Checkbox;
+			m_iColumns << Title << LastUpdate;
 			break;
 		}
 		case AddOn::TEXTURE:
 		{
 			m_addons = addons.value(AddOn::Texture);
-			m_iColumns << Title << Type << Version << Checkbox;
+			m_iColumns << Title << Type << Version;
 			break;
 		}
 	}
+	m_iColumns << Status << Checkbox;
 }
 
 int JsonTableModel::rowCount(const QModelIndex &parent) const
@@ -103,6 +104,12 @@ QVariant JsonTableModel::data(const QModelIndex &index, int role) const
 		case Version:
 			value = addon->getVersion();
 			break;
+		case LastUpdate:
+			value = addon->getDate();
+			break;
+		case Status:
+			value = addon->getStatus();
+			break;
 		case Checkbox:
 			value = "";
 			break;
@@ -127,6 +134,12 @@ QVariant JsonTableModel::headerData(int section, Qt::Orientation orientation, in
 			break;
 		case Version:
 			value = q_("Version");
+			break;
+		case LastUpdate:
+			value = q_("Last Update");
+			break;
+		case Status:
+			value = q_("Status");
 			break;
 		case Checkbox:
 			value = "";

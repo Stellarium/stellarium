@@ -43,6 +43,8 @@ private:
 		Title,
 		Type,
 		Version,
+		LastUpdate,
+		Status,
 		Checkbox
 	};
 
