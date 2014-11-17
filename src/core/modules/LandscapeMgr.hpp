@@ -195,9 +195,9 @@ public slots:
 	//! Sets the value of the flag determining if the minimal brightness should be taken from landscape.ini
 	void setFlagLandscapeSetsMinimalBrightness(bool b) {flagLandscapeSetsMinimalBrightness=b;}
 	//! Return the minimal brightness value of the landscape
-	float getDefaultMinimalBrightness() const {return defaultMinimalBrightness;}
+	double getDefaultMinimalBrightness() const {return defaultMinimalBrightness;}
 	//! Set the minimal brightness value of the landscape.
-	void setDefaultMinimalBrightness(const float b) {defaultMinimalBrightness=b;}
+	void setDefaultMinimalBrightness(const double b) {defaultMinimalBrightness=b;}
 	//! Sets the value of the flag usage light pollution (and bortle index) from locations database.
 	void setFlagUseLightPollutionFromDatabase(const bool usage);
 	//! Return the value of flag usage light pollution (and bortle index) from locations database.
