@@ -573,6 +573,9 @@ void ConfigurationDialog::saveCurrentViewOptions()
         conf->setValue("landscape/atmospheric_extinction_coefficient", core->getSkyDrawer()->getExtinctionCoefficient());
         conf->setValue("landscape/pressure_mbar", core->getSkyDrawer()->getAtmospherePressure());
         conf->setValue("landscape/temperature_C", core->getSkyDrawer()->getAtmosphereTemperature());
+	conf->setValue("landscape/flag_minimal_brightness", lmgr->getFlagLandscapeUseMinimalBrightness());
+	conf->setValue("landscape/flag_landscape_sets_minimal_brightness", lmgr->getFlagLandscapeSetsMinimalBrightness());
+	conf->setValue("landscape/minimal_brightness", lmgr->getDefaultMinimalBrightness());
 
 	// view dialog / starlore tab
 	StelApp::getInstance().getSkyCultureMgr().setDefaultSkyCultureID(StelApp::getInstance().getSkyCultureMgr().getCurrentSkyCultureID());
