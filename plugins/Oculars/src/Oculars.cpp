@@ -148,7 +148,7 @@ Oculars::Oculars():
 	actualFOV(0),
 	initialFOV(0),
 	flagInitFOVUsage(false),
-	flagDisableZoomForCCD(true),
+	flagUseFlipForCCD(false),
 	reticleRotation(0)
 {
 	// Font size is 14
@@ -586,7 +586,7 @@ void Oculars::init()
 		setFlagDecimalDegrees(settings->value("use_decimal_degrees", false).toBool());
 		setFlagLimitMagnitude(settings->value("limit_stellar_magnitude", true).toBool());
 		setFlagInitFovUsage(settings->value("use_initial_fov", false).toBool());
-		setFlagDisableZoomForCCD(settings->value("disable_zoom_keys", true).toBool());
+		setFlagUseFlipForCCD(settings->value("use_ccd_flip", false).toBool());
 	} catch (std::runtime_error& e) {
 		qWarning() << "WARNING: unable to locate ocular.ini file or create a default one for Ocular plugin: " << e.what();
 		ready = false;
@@ -1236,10 +1236,7 @@ void Oculars::toggleCCD(bool show)
 			selectedCCDIndex = 0;
 		}
 		flagShowCCD = true;
-		setScreenFOVForCCD();
-		bool flag = getFlagDisableZoomForCCD();
-		movementManager->setFlagEnableZoomKeys(!flag);
-		movementManager->setFlagEnableMouseNavigation(!flag);
+		setScreenFOVForCCD();		
 
 		if (guiPanel) {
 			guiPanel->showCcdGui();
@@ -1250,13 +1247,12 @@ void Oculars::toggleCCD(bool show)
 		//Zoom out		
 		movementManager->zoomTo(movementManager->getInitFov());
 		movementManager->setFlagTracking(false);
-		if (getFlagDisableZoomForCCD())
+
+		if (getFlagUseFlipForCCD())
 		{
-			movementManager->setFlagEnableZoomKeys(true);
-			movementManager->setFlagEnableMouseNavigation(true);
+			core->setFlipHorz(false);
+			core->setFlipVert(false);
 		}
-		core->setFlipHorz(false);
-		core->setFlipVert(false);
 
 		if (guiPanel) {
 			guiPanel->foldGui();
@@ -1394,12 +1390,23 @@ void Oculars::paintCCDBounds()
 			StelPainter painter(projector);
 			painter.setColor(0.77f, 0.14f, 0.16f, 1.0f);
 			Telescope *telescope = telescopes[selectedTelescopeIndex];
-			// flip are needed?
-			core->setFlipHorz(telescope->isHFlipped());
-			core->setFlipVert(telescope->isVFlipped());
 
 			const double ccdXRatio = ccd->getActualFOVx(telescope, lens) / screenFOV;
 			const double ccdYRatio = ccd->getActualFOVy(telescope, lens) / screenFOV;
+
+			// flip are needed and allowed?
+			const float ratioLimit = 0.125f;
+			if (getFlagUseFlipForCCD() && (ccdXRatio>=ratioLimit || ccdYRatio>=ratioLimit))
+			{
+				core->setFlipHorz(telescope->isHFlipped());
+				core->setFlipVert(telescope->isVFlipped());
+			}
+			else
+			{
+				core->setFlipHorz(false);
+				core->setFlipVert(false);
+			}
+
 			// As the FOV is based on the narrow aspect of the screen, we need to calculate
 			// height & width based soley off of that dimension.
 			int aspectIndex = 2;
@@ -2010,16 +2017,16 @@ bool Oculars::getFlagInitFovUsage() const
 	return flagInitFOVUsage;
 }
 
-void Oculars::setFlagDisableZoomForCCD(const bool b)
+void Oculars::setFlagUseFlipForCCD(const bool b)
 {
-	flagDisableZoomForCCD = b;
-	settings->setValue("disable_zoom_keys", b);
+	flagUseFlipForCCD = b;
+	settings->setValue("use_ccd_flip", b);
 	settings->sync();
 }
 
-bool Oculars::getFlagDisableZoomForCCD() const
+bool Oculars::getFlagUseFlipForCCD() const
 {
-	return flagDisableZoomForCCD;
+	return flagUseFlipForCCD;
 }
 
 QString Oculars::getDimensionsString(double fovX, double fovY) const

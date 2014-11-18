@@ -123,8 +123,8 @@ public slots:
 	void setFlagInitFovUsage(const bool b);
 	bool getFlagInitFovUsage(void) const;
 
-	void setFlagDisableZoomForCCD(const bool b);
-	bool getFlagDisableZoomForCCD(void) const;
+	void setFlagUseFlipForCCD(const bool b);
+	bool getFlagUseFlipForCCD(void) const;
 
 signals:
 	void selectedCCDChanged();
@@ -275,7 +275,7 @@ private:
 	double actualFOV;		//!< Holds the FOV of the ocular/tescope/lens cobination; what the screen is zoomed to.
 	double initialFOV;		//!< Holds the initial FOV
 	bool flagInitFOVUsage;		//!< Flag used to track if we use default initial FOV (value at the startup of planetarium).
-	bool flagDisableZoomForCCD;	//!< Flag used to track disabling zoom keys and mouse navigation for CCD (zooming FOV for sensors mode)
+	bool flagUseFlipForCCD;		//!< Flag used to track if we use flips for CCD
 	double reticleRotation;
 };
 
