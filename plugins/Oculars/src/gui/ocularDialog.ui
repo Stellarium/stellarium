@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>650</width>
-    <height>433</height>
+    <width>668</width>
+    <height>478</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -152,11 +152,6 @@
       </property>
       <item>
        <widget class="QTabWidget" name="Tabs">
-        <property name="font">
-         <font>
-          <pointsize>11</pointsize>
-         </font>
-        </property>
         <property name="currentIndex">
          <number>0</number>
         </property>
@@ -339,6 +334,37 @@
               </widget>
              </item>
              <item>
+              <widget class="QCheckBox" name="checkBoxInitialFOV">
+               <property name="toolTip">
+                <string>Mark it if you want the FOV value the same like at the startup of Stellarium.</string>
+               </property>
+               <property name="text">
+                <string>Restore FOV to initial values</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item>
+           <widget class="QGroupBox" name="groupBoxSensorOptions">
+            <property name="title">
+             <string>Sensor view</string>
+            </property>
+            <layout class="QVBoxLayout" name="verticalLayout_11">
+             <property name="leftMargin">
+              <number>0</number>
+             </property>
+             <property name="topMargin">
+              <number>0</number>
+             </property>
+             <property name="rightMargin">
+              <number>0</number>
+             </property>
+             <property name="bottomMargin">
+              <number>0</number>
+             </property>
+             <item>
               <widget class="QCheckBox" name="checkBoxDecimalDegrees">
                <property name="text">
                 <string>Use degrees and minutes for FOV of CCD</string>
@@ -346,22 +372,12 @@
               </widget>
              </item>
              <item>
-              <widget class="QCheckBox" name="checkBoxSensorsZooming">
+              <widget class="QCheckBox" name="checkBoxUseFlipForCCD">
                <property name="toolTip">
-                <string>Please enable it for avoiding of flips the whole sky from the telescope's settings.</string>
+                <string>This setting will allow to flip CCD with telescope, who has flip setting</string>
                </property>
                <property name="text">
-                <string>Disable zoom keys for CCD</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QCheckBox" name="checkBoxInitialFOV">
-               <property name="toolTip">
-                <string>Mark it if you want the FOV value the same like at the startup of Stellarium.</string>
-               </property>
-               <property name="text">
-                <string>Restore FOV to initial values</string>
+                <string>Use flip for CCD</string>
                </property>
               </widget>
              </item>
