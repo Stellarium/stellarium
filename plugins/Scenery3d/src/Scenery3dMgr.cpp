@@ -43,8 +43,6 @@
 #include "StelTranslator.hpp"
 #include "LandscapeMgr.hpp"
 
-const QString Scenery3dMgr::MODULE_PATH("scenery3d/");
-
 Scenery3dMgr::Scenery3dMgr() :
     scenery3d(NULL),
     shadowShader(NULL),
@@ -65,7 +63,6 @@ Scenery3dMgr::Scenery3dMgr() :
     connect(messageTimer, SIGNAL(timeout()), this, SLOT(clearMessage()));
 
     //create scenery3d object
-    //TODO FS: only 1 scenery3d object should be created throughout the lifetime of the app!
     scenery3d = new Scenery3d();
 }
 
@@ -82,7 +79,7 @@ Scenery3dMgr::~Scenery3dMgr()
 double Scenery3dMgr::getCallOrder(StelModuleActionName actionName) const
 {
     if (actionName == StelModule::ActionDraw)
-        return StelApp::getInstance().getModuleMgr().getModule("LandscapeMgr")->getCallOrder(actionName) + 5; // between Landscape and compass marks!
+	return StelApp::getInstance().getModuleMgr().getModule("LandscapeMgr")->getCallOrder(actionName) + 5; // between Landscape and compass marks!
     if (actionName == StelModule::ActionUpdate)
         return StelApp::getInstance().getModuleMgr().getModule("LandscapeMgr")->getCallOrder(actionName) + 10;
     if (actionName == StelModule::ActionHandleKeys)
@@ -218,7 +215,7 @@ void Scenery3dMgr::deinit()
 
 void Scenery3dMgr::loadConfig()
 {
-	QSettings* conf = StelApp::getInstance().getSettings();
+	conf = StelApp::getInstance().getSettings();
 
 	conf->beginGroup("Scenery3d");
 
@@ -332,92 +329,98 @@ bool Scenery3dMgr::configureGui(bool show)
     return true;
 }
 
+QString Scenery3dMgr::getCurrentScenery3dID() const
+{
+	return scenery3d->getCurrentScene().id;
+}
+
+bool Scenery3dMgr::loadScene(const SceneInfo& scene)
+{
+	//move to the location specified by the scene
+	LandscapeMgr* lmgr = GETSTELMODULE(LandscapeMgr);
+	bool landscapeSetsLocation=lmgr->getFlagLandscapeSetsLocation();
+	lmgr->setFlagLandscapeSetsLocation(true);
+	lmgr->setCurrentLandscapeName(scene.landscapeName, 0.); // took a second, implicitly.
+	// Switched to immediate landscape loading: Else,
+	// Landscape and Navigator at this time have old coordinates! But it should be possible to
+	// delay rot_z computation up to this point and live without an own location section even
+	// with meridian_convergence=from_grid.
+	lmgr->setFlagLandscapeSetsLocation(landscapeSetsLocation); // restore
+
+	// Loading may take a while...
+	showMessage(QString(N_("Loading scenery3d. Please be patient!")));
+	QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
+	scenery3d->loadScene(scene);
+	clearMessage();
+	QApplication::restoreOverrideCursor();
+
+	if (scene.hasLocation())
+	{
+		qDebug() << "Scenery3D: Setting location to given coordinates.";
+		StelApp::getInstance().getCore()->moveObserverTo(*(scene.location.data()), 0., 0.);
+	}
+	else qDebug() << "Scenery3D: No coordinates given in scenery3d.";
+
+	if (scene.hasLookAtFOV())
+	{
+		qDebug() << "Scenery3D: Setting orientation.";
+		StelMovementMgr* mm=StelApp::getInstance().getCore()->getMovementMgr();
+		Vec3f lookat=scene.lookAt_fov;
+		// This vector is (az_deg, alt_deg, fov_deg)
+		Vec3d v;
+		StelUtils::spheToRect(lookat[0]*M_PI/180.0, lookat[1]*M_PI/180.0, v);
+		mm->setViewDirectionJ2000(StelApp::getInstance().getCore()->altAzToJ2000(v, StelCore::RefractionOff));
+		mm->zoomTo(lookat[2], 3.);
+	} else qDebug() << "Scenery3D: Not setting orientation, no data.";
+
+	enableAction->setCheckable(true);
+	setEnableScene(true);
+
+	return true;
+}
+
 bool Scenery3dMgr::setCurrentScenery3dID(const QString& id)
 {
-    if (id.isEmpty())
-	return false;
+	if (id.isEmpty())
+		return false;
 
-    Scenery3d* newScenery3d = NULL;
-    try
-    {
-	newScenery3d = createFromFile(StelFileMgr::findFile(MODULE_PATH + id + "/scenery3d.ini"), id);
-    }
-    catch (std::runtime_error& e)
-    {
-	qCritical() << "ERROR while loading 3D scenery " << MODULE_PATH + id + "/scenery3d.ini" << ", (" << e.what() << ")";
-    }
+	SceneInfo scene;
+	try
+	{
+		if(!SceneInfo::loadByID(id,scene))
+		{
+			showMessage("Could not load scene, please check log for error messages!");
+			return false;
+		}
+	}
+	catch (std::runtime_error& e)
+	{
+		qCritical() << "ERROR while loading 3D scenery with id " <<  id  << ", (" << e.what() << ")";
+	}
 
-    if (!newScenery3d)
-    {
-	    showMessage("Could not load scene, please check log for error messages!");
-	return false;
-    }
-
-    LandscapeMgr* lmgr = GETSTELMODULE(LandscapeMgr);
-    bool landscapeSetsLocation=lmgr->getFlagLandscapeSetsLocation();
-    lmgr->setFlagLandscapeSetsLocation(true);
-    lmgr->setCurrentLandscapeName(newScenery3d->getLandscapeName(), 0.); // took a second, implicitly.
-    // Switched to immediate landscape loading: Else,
-    // Landscape and Navigator at this time have old coordinates! But it should be possible to
-    // delay rot_z computation up to this point and live without an own location section even
-    // with meridian_convergence=from_grid.
-    lmgr->setFlagLandscapeSetsLocation(landscapeSetsLocation); // restore
-
-    if (scenery3d)
-    {
-	delete scenery3d;
-	scenery3d = NULL;
-    }
-    // Loading may take a while...
-    showMessage(QString(N_("Loading scenery3d. Please be patient!")));
-    QApplication::setOverrideCursor(QCursor(Qt::WaitCursor));
-    newScenery3d->loadModel();
-    clearMessage();
-    QApplication::restoreOverrideCursor();
-
-    if (newScenery3d->hasLocation())
-    {
-	qDebug() << "Scenery3D: Setting location to given coordinates.";
-	StelApp::getInstance().getCore()->moveObserverTo(newScenery3d->getLocation(), 0., 0.);
-    }
-    else qDebug() << "Scenery3D: No coordinates given in scenery3d.";
-
-    if (newScenery3d->hasLookat())
-    {
-	qDebug() << "Scenery3D: Setting orientation.";
-	StelMovementMgr* mm=StelApp::getInstance().getCore()->getMovementMgr();
-	Vec3f lookat=newScenery3d->getLookat();
-	// This vector is (az_deg, alt_deg, fov_deg)
-	Vec3d v;
-	StelUtils::spheToRect(lookat[0]*M_PI/180.0, lookat[1]*M_PI/180.0, v);
-	mm->setViewDirectionJ2000(StelApp::getInstance().getCore()->altAzToJ2000(v, StelCore::RefractionOff));
-	mm->zoomTo(lookat[2], 3.);
-    } else qDebug() << "Scenery3D: Not setting orientation, no data.";
-
-    scenery3d = newScenery3d;
-    currentScenery3dID = id;
-
-    enableAction->setCheckable(true);
-    setEnableScene(true);
-
-    return true;
+	return loadScene(scene);
 }
 
 bool Scenery3dMgr::setCurrentScenery3dName(const QString& name)
 {
-    if (name.isEmpty())
-	return false;
+	if (name.isEmpty())
+	    return false;
 
-    QMap<QString, QString> nameToDirMap = getNameToDirMap();
-    if (nameToDirMap.find(name) != nameToDirMap.end())
-    {
-	return setCurrentScenery3dID(nameToDirMap[name]);
-    }
-    else
-    {
-	qWarning() << "Can't find a 3D scenery with name=" << name;
-	return false;
-    }
+	SceneInfo scene;
+	try
+	{
+	    if(!SceneInfo::loadByName(name,scene))
+	    {
+		    showMessage("Could not load scene, please check log for error messages!");
+		    return false;
+	    }
+	}
+	catch (std::runtime_error& e)
+	{
+	    qCritical() << "ERROR while loading 3D scenery with name " <<  name  << ", (" << e.what() << ")";
+	}
+
+	return loadScene(scene);
 }
 
 bool Scenery3dMgr::setDefaultScenery3dID(const QString& id)
@@ -425,185 +428,24 @@ bool Scenery3dMgr::setDefaultScenery3dID(const QString& id)
     if (id.isEmpty())
 	return false;
     defaultScenery3dID = id;
-    QSettings* conf = StelApp::getInstance().getSettings();
+
     conf->setValue("init_location/scenery3d_name", id);
     return true;
 }
 
-QStringList Scenery3dMgr::getAllScenery3dNames() const
-{
-    QMap<QString, QString> nameToDirMap = getNameToDirMap();
-    QStringList result;
-
-    foreach (QString i, nameToDirMap.keys())
-    {
-	result += i;
-    }
-    return result;
-}
-
-QStringList Scenery3dMgr::getAllScenery3dIDs() const
-{
-    QMap<QString, QString> nameToDirMap = getNameToDirMap();
-    QStringList result;
-
-    foreach (QString i, nameToDirMap.values())
-    {
-	result += i;
-    }
-    return result;
-}
-
 QString Scenery3dMgr::getCurrentScenery3dName() const
 {
-    return scenery3d->getName();
-}
-
-Scenery3d* Scenery3dMgr::createFromFile(const QString& scenery3dFile, const QString& scenery3dID)
-{
-    QSettings scenery3dIni(scenery3dFile, StelIniFormat);
-    if (scenery3dIni.status() != QSettings::NoError)
-    {
-	qCritical() << "ERROR parsing scenery3d.ini file: " << scenery3dFile;
-	return NULL;
-    }
-
-    //TODO FS: remove the creation of a new scenery3d object
-    //TODO FS: make the scene metadata a struct so that the loading of it is independent of the Scenery3d class.
-    Scenery3d* newScenery3d = new Scenery3d();
-    newScenery3d->setCubemapSize(scenery3d->getCubemapSize());
-    newScenery3d->setShadowmapSize(scenery3d->getShadowmapSize());
-    newScenery3d->setTorchBrightness(scenery3d->getTorchBrightness());
-    newScenery3d->setShaders(shadowShader, bumpShader, univShader, debugShader);
-    newScenery3d->setShadowsEnabled(scenery3d->getShadowsEnabled());
-    newScenery3d->setBumpsEnabled(scenery3d->getBumpsEnabled());
-    if(scenery3d->getShadowmapSize()) newScenery3d->initShadowMapping();
-	newScenery3d->loadConfig(scenery3dIni, scenery3dID);
-    return newScenery3d;
-}
-
-QString Scenery3dMgr::nameToID(const QString& name)
-{
-    QMap<QString, QString> nameToDirMap = getNameToDirMap();
-
-    if (nameToDirMap.find(name) != nameToDirMap.end())
-    {
-	Q_ASSERT(0);
-	return "error";
-    }
-    else
-    {
-	return nameToDirMap[name];
-    }
-}
-
-QMap<QString, QString> Scenery3dMgr::getNameToDirMap() const
-{
-    qDebug() << "Scenery3dMgr::getNameToDirMap(): ";
-    QSet<QString> scenery3dDirs;
-    QMap<QString, QString> result;
-    try
-    {
-	scenery3dDirs = StelFileMgr::listContents(MODULE_PATH, StelFileMgr::Directory);
-	qDebug() << "dirs " << scenery3dDirs;
-    }
-    catch (std::runtime_error& e)
-    {
-	qDebug() << "ERROR while trying to list 3D sceneries:" << e.what();
-    }
-
-    foreach (const QString& dir, scenery3dDirs)
-    {
-	try
-	{
-	    QSettings scenery3dIni(StelFileMgr::findFile(MODULE_PATH + dir + "/scenery3d.ini"), StelIniFormat);
-	    QString k = scenery3dIni.value("model/name").toString();
-	    result[k] = dir;
-	}
-	catch (std::runtime_error& e)
-	{
-	}
-    }
-    return result;
-}
-
-QString Scenery3dMgr::getScenery3dPath(QString scenery3dID)
-{
-    QString result;
-    if (scenery3dID.isEmpty())
-    {
-	return result;
-    }
-
-    try
-    {
-	result = StelFileMgr::findFile(MODULE_PATH + scenery3dID, StelFileMgr::Directory);
-    }
-    catch (std::runtime_error &e)
-    {
-	qWarning() << "Scenery3dMgr: Error! Unable to find " << scenery3dID << ": " << e.what();
-	return result;
-    }
-
-    return result;
-}
-
-QString Scenery3dMgr::loadScenery3dName(QString scenery3dID)
-{
-    QString scenery3dName;
-    if (scenery3dID.isEmpty())
-    {
-	qWarning() << "Scenery3dMgr: Error! No scenery3d ID passed to loadScenery3dName().";
-	return scenery3dName;
-    }
-
-    QString scenery3dPath = getScenery3dPath(scenery3dID);
-    if (scenery3dPath.isEmpty())
-	return scenery3dName;
-
-    QDir scenery3dDir(scenery3dPath);
-    if (scenery3dDir.exists("scenery3d.ini"))
-    {
-	QString scenery3dSettingsPath = scenery3dDir.filePath("scenery3d.ini");
-	QSettings scenery3dSettings(scenery3dSettingsPath, StelIniFormat);
-	scenery3dName = scenery3dSettings.value("model/name").toString();
-    }
-    else
-    {
-	qWarning() << "Scenery3dMgr: Error! Scenery3d directory" << scenery3dPath << "does not contain a 'scenery3d.ini' file";
-    }
-
-    return scenery3dName;
-}
-
-quint64 Scenery3dMgr::loadScenery3dSize(QString scenery3dID)
-{
-    quint64 scenery3dSize = 0;
-    if (scenery3dID.isEmpty())
-    {
-	qWarning() << "Scenery3dMgr: Error! No scenery3d ID passed to loadScenery3dSize().";
-	return scenery3dSize;
-    }
-
-    QString scenery3dPath = getScenery3dPath(scenery3dID);
-    if (scenery3dPath.isEmpty())
-	return scenery3dSize;
-
-    QDir scenery3dDir(scenery3dPath);
-    foreach (QFileInfo file, scenery3dDir.entryInfoList(QDir::Files | QDir::NoDotAndDotDot))
-    {
-	scenery3dSize += file.size();
-    }
-    return scenery3dSize;
+    return scenery3d->getCurrentScene().name;
 }
 
 QString Scenery3dMgr::getCurrentScenery3dHtmlDescription() const
 {
-    QString desc = QString("<h3>%1</h3>").arg(scenery3d->getName());
-    desc += scenery3d->getDescription();
+	SceneInfo si = scenery3d->getCurrentScene();
+    QString desc = QString("<h3>%1</h3>").arg(si.name);
+    desc += si.description;
     desc+="<br><br>";
     desc+="<b>"+q_("Author: ")+"</b>";
-    desc+= scenery3d->getAuthorName();
+    desc+= si.author;
     return desc;
 }
 
