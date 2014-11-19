@@ -1487,9 +1487,6 @@ void Oculars::paintOcularMask(const StelCore *core)
 	StelPainter painter(prj);
 	StelProjector::StelProjectorParams params = core->getCurrentStelProjectorParams();
 
-	// Draw the ocular outline, as GLUT is not working
-	painter.setColor(0.0, 0.5, 0.25, 1.0);
-
 	double inner = 0.5 * params.viewportFovDiameter * params.devicePixelsPerPixel;
 	// See if we need to scale the mask
 	if (useMaxEyepieceAngle
@@ -1497,9 +1494,6 @@ void Oculars::paintOcularMask(const StelCore *core)
 		 && !oculars[selectedOcularIndex]->isBinoculars()) {
 		inner = oculars[selectedOcularIndex]->appearentFOV() * inner / maxEyepieceAngle;
 	}
-	painter.drawCircle(params.viewportCenter[0] * params.devicePixelsPerPixel,
-							 params.viewportCenter[1]* params.devicePixelsPerPixel,
-							 inner);
 
 	// Paint the reticale, if needed
 	if (!reticleTexture.isNull()){
