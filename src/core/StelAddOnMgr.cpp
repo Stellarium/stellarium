@@ -175,6 +175,7 @@ void StelAddOnMgr::readJsonObject(const QJsonObject& addOns)
 			amap.insert(addOnId, addOn);
 			m_addons.insert(addOn->getType(), amap);
 			m_addonsByMd5.insert(addOn->getChecksum(), addOn);
+			m_addonsByIdInstallId.insert(addOn->getInstallId(), addOn);
 		}
 	}
 }
@@ -212,14 +213,13 @@ void StelAddOnMgr::refreshAddOnStatuses()
 	// check add-ons which are already installed
 	QHashIterator<AddOn::Category, StelAddOn*> aos(m_pStelAddOns);
 	while (aos.hasNext())
-	{
+
 		aos.next();
 		QStringList list = aos.value()->checkInstalledAddOns();
 		if (list.isEmpty())
 		{
 			continue;
 		}
-
 		if (aos.key() == AddOn::CATALOG || aos.key() == AddOn::LANGUAGEPACK)
 		{
 			m_pStelAddOnDAO->markAddOnsAsInstalledFromMd5(list);

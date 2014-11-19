@@ -121,6 +121,7 @@ private:
 	QString m_sJsonPath;
 	QHash<AddOn::Type, AddOnMap> m_addons;
 	QHash<QString, AddOn*> m_addonsByMd5;
+	QHash<QString, AddOn*> m_addonsByIdInstallId;
 
 	// sub-classes
 	QHash<AddOn::Category, StelAddOn*> m_pStelAddOns;
