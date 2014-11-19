@@ -1775,7 +1775,7 @@ void Oculars::unzoomOcular()
 	movementManager->setFlagEnableMouseNavigation(true);
 
 	// Set the screen display
-	// core->setMaskType(StelProjector::MaskNone);
+	core->setMaskType(StelProjector::MaskNone);
 	core->setFlipHorz(false);
 	core->setFlipVert(false);
 
@@ -1861,6 +1861,7 @@ void Oculars::zoomOcular()
 	}
 
 	// Set the screen display
+	core->setMaskType(StelProjector::MaskDisk);
 	Ocular * ocular = oculars[selectedOcularIndex];
 	Telescope * telescope = NULL;
 	Lens * lens = NULL;
