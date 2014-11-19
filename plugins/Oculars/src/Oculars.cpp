@@ -1520,10 +1520,10 @@ void Oculars::paintOcularMask(const StelCore *core)
 										 reticleRotation);
 	}
 
-	if (oculars[selectedOcularIndex]->hasPermanentCrosshair())
-	{
+	if (oculars[selectedOcularIndex]->hasPermanentCrosshair()) {
 		paintCrosshairs();
 	}
+	painter.drawViewportShape(inner);
 }
 
 void Oculars::paintText(const StelCore* core)
