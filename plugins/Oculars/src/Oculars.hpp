@@ -159,7 +159,6 @@ private:
 	//! Renders the three Telrad circles, but only if not in ocular mode.
 	void paintTelrad();
 
-
 	//! Paints the text about the current object selections to the upper right hand of the screen.
 	//! Should only be called from a 'ready' state; currently from the draw() method.
 	void paintText(const StelCore * core);
