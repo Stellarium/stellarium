@@ -79,6 +79,7 @@ OBJ::OBJ()
 OBJ::~OBJ()
 {
     clean();
+    delete pBoundingBox;
 }
 
 void OBJ::clean()
@@ -95,7 +96,8 @@ void OBJ::clean()
     m_numberOfMaterials = 0;
     m_numberOfStelModels = 0;
 
-    delete pBoundingBox;
+    pBoundingBox->min = Vec3f(0.0f);
+    pBoundingBox->max = Vec3f(0.0f);
 
     m_stelModels.clear();
     m_materials.clear();
@@ -1205,7 +1207,7 @@ void OBJ::uploadTexturesGL()
 //        qDebug() << getTime() << "[Scenery3d] Texture:" << pMaterial->textureName.c_str();
         if(!pMaterial->textureName.isEmpty())
         {
-            StelTextureSP tex = textureMgr.createTexture(absolutePath(pMaterial->textureName), StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT));
+	    StelTextureSP tex = textureMgr.createTexture(absolutePath(pMaterial->textureName), StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT, true));
             if(!tex.isNull())
             {
                 pMaterial->texture = tex;

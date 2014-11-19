@@ -46,12 +46,15 @@ public:
 	//! Contains the parameters defining how a texture is created.
 	struct StelTextureParams
 	{
-		StelTextureParams(bool qgenerateMipmaps=false, GLint afiltering=GL_LINEAR, GLint awrapMode=GL_CLAMP_TO_EDGE) :
+		StelTextureParams(bool qgenerateMipmaps=false, GLint afiltering=GL_LINEAR, GLint awrapMode=GL_CLAMP_TO_EDGE, bool qfilterMipmaps=false) :
 				generateMipmaps(qgenerateMipmaps),
 				filtering(afiltering),
-				wrapMode(awrapMode) {;}
+				wrapMode(awrapMode),
+				filterMipmaps(qfilterMipmaps){;}
 		//! Define if mipmaps must be created.
 		bool generateMipmaps;
+		//! If true, mipmapped textures are filtered with GL_LINEAR_MIPMAP_LINEAR instead of GL_LINEAR_MIPMAP_NEAREST (i.e. enabling "trilinear" filtering)
+		bool filterMipmaps;
 		//! Define the scaling filter to use. Must be one of GL_NEAREST or GL_LINEAR
 		GLint filtering;
 		//! Define the wrapping mode to use. Must be one of GL_CLAMP_TO_EDGE, or GL_REPEAT.
