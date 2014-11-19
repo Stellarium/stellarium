@@ -20,6 +20,8 @@ SET(Scenery3d_SRCS
     SPolygon.cpp
     Polyhedron.hpp
     Polyhedron.cpp
+    SceneInfo.hpp
+    SceneInfo.cpp
     Scenery3d.hpp
     Scenery3d.cpp
     Scenery3dMgr.hpp

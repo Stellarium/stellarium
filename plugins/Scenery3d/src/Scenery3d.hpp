@@ -29,6 +29,7 @@
 #include "Heightmap.hpp"
 #include "Frustum.hpp"
 #include "Polyhedron.hpp"
+#include "SceneInfo.hpp"
 
 //predeclarations
 class QOpenGLFramebufferObject;
@@ -50,12 +51,9 @@ public:
         this->debugShader = debugShader;
     }
 
-    //! Loads configuration values from a scenery3d.ini file.
-    void loadConfig(const QSettings& scenery3dIni, const QString& scenery3dID);
-    //! Loads the model given in the scenery3d.ini file.
-    //! Make sure to call .loadConfig() before this.
-    void loadModel();
-	
+    //! Loads the specified scene
+    void loadScene(const SceneInfo& scene);
+
     //! Walk/Fly Navigation with Ctrl+Cursor and Ctrl+PgUp/Dn keys.
     //! Pressing Ctrl-Alt: 5x, Ctrl-Shift: 10x speedup; Ctrl-Shift-Alt: 50x!
     //! To allow fine control, zoom in.
@@ -74,6 +72,9 @@ public:
     void draw(StelCore* core);
     //! Initializes shadow mapping
     void initShadowMapping();
+
+    //! Gets the current scene's metadata
+    SceneInfo getCurrentScene() { return currentScene; }
 
     bool getDebugEnabled() const { return debugEnabled; }
     void setDebugEnabled(bool debugEnabled) { this->debugEnabled = debugEnabled; }
@@ -97,27 +98,6 @@ public:
     float getTorchBrightness() const { return torchBrightness; }
     void setTorchBrightness(float brightness) { torchBrightness = brightness; }
 
-    //! @return Name of the scenery.
-    QString getName() const { return name; }
-    //! @return Author of the scenery.
-    QString getAuthorName() const { return authorName; }
-    //! @return Description of the scenery.
-    QString getDescription() const { return description; }
-    //! @return Name of the landscape associated with the scenery.
-    QString getLandscapeName() const { return landscapeName; }
-    //! @return Flag, whether scenery provides location data or only inherits from its linked Landscape.
-    bool hasLocation() const { return (location != NULL); }
-    //! @return Location data. These are valid only if written in the @file scenery3d.ini, section location.
-    //! Else, returns NULL. You can also check with .hasLocation() before calling.
-    const StelLocation& getLocation() const {return *location; }
-    //! @return Flag, whether scenery provides default/startup looking direction.
-    bool hasLookat() const { return (lookAt_fov[2]!=-1000.0f); }
-    //! @return default looking direction and field-of-view (altazimuthal, 0=North).
-    //! Valid only if written in the @file scenery3d.ini, value: coord/start_az_alt_fov.
-    //! Else, returns NULL. You can also check with .hasLookup() before calling.
-    const Vec3f& getLookat() const {return lookAt_fov; }
-
-
     enum ShadowCaster { None, Sun, Moon, Venus };
     enum Effect { No, BumpMapping, ShadowMapping, All};
     Mat4d mv;
@@ -129,7 +109,8 @@ public:
     int drawn;
 
 private:
-    double eyeLevel;
+    SceneInfo currentScene;
+
     float torchBrightness; // ^L toggle light brightness
 
     void drawObjModel(StelCore* core);
@@ -150,8 +131,6 @@ private:
     bool torchEnabled;          // switchable value (^L): adds artificial ambient light
     bool debugEnabled;          // switchable value (^D): display debug graphics and debug texts on screen
     bool lightCamEnabled;       // switchable value: switches camera to light camera
-    bool sceneryGenNormals;     // Config flag, true generates normals for the given OBJ
-    bool groundGenNormals;      // Config flag, true generates normals for the given ground Model
     bool frustEnabled;
     bool filterShadowsEnabled;  // switchable value (^I): Filter shadows
     bool filterHQ;              // switchable value (^U): 64 tap filter shadows
@@ -164,8 +143,7 @@ private:
     float movement_x;           // speed values for moving around the scenery
     float movement_y;
     float movement_z;
-
-    float fTransparencyThresh;  // Threshold for discarding transparent texels
+    float eye_height;
 
     StelCore* core;
     OBJ* objModel;
@@ -184,30 +162,12 @@ private:
 
     QVector<OBJ::StelModel> objModelArrays;
 
-    QString id;
-    QString name;
-    QString authorName;
-    QString description;
-    QString landscapeName;
-    QString modelSceneryFile;
-    QString modelGroundFile;
-    StelLocation* location;
-    Vec3f lookAt_fov; // (az_deg, alt_deg, fov_deg)
-    Vec3d modelWorldOffset; // required for coordinate display
-    QString gridName;
-    double gridCentralMeridian;
-    double groundNullHeight; // Used as height value outside the model ground, or if ground=NULL
+
     QString lightMessage; // DEBUG/TEST ONLY. contains on-screen info on ambient/directional light strength and source.
     QString lightMessage2; // DEBUG/TEST ONLY. contains on-screen info on ambient/directional light strength and source.
     QString lightMessage3; // DEBUG/TEST ONLY. contains on-screen info on ambient/directional light strength and source.
 
-    // used to apply the rotation from model/grid coordinates to Stellarium coordinates.
-    // In the OBJ files, X=Grid-East, Y=Grid-North, Z=height.
-    Mat4d zRotateMatrix;
-    // if only a non-georeferenced OBJ can be provided, you can specify a matrix via .ini/[model]/obj_world_trafo.
-    // This will be applied to make sure that X=Grid-East, Y=Grid-North, Z=height.
-    Mat4d obj2gridMatrix;
-    //Combines the two previous matrices into one
+    //Combines zRot and rot2grid from scene metadata
     Mat4d zRot2Grid;
 
     //Currently selected Shader
@@ -293,6 +253,8 @@ private:
 
     QFont debugTextFont;
 
+    //! Loads the model contained in the current scene
+    void loadModel();
     void drawFullscreenQuad(int dim);
     //TODO FS: only temporary, will be removed
     void nogluLookAt(double eyeX,  double eyeY,  double eyeZ,  double centerX,  double centerY,  double centerZ,  double upX,  double upY,  double upZ);
