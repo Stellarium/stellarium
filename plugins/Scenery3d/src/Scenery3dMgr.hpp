@@ -37,6 +37,7 @@
 class Scenery3d;
 class QSettings;
 class StelButton;
+struct SceneInfo;
 
 class QOpenGLShaderProgram;
 
@@ -67,8 +68,6 @@ public:
     virtual double getCallOrder(StelModuleActionName actionName) const;
     virtual bool configureGui(bool show);
     virtual void handleKeys(QKeyEvent* e);
-
-    static const QString MODULE_PATH;
 
 signals:
     void enableSceneChanged(const bool val);
@@ -113,28 +112,18 @@ public slots:
     void setEnableTorchLight(const bool enableTorchLight);
     bool getEnableTorchLight() const;
 
-    QStringList getAllScenery3dNames() const;
-    QStringList getAllScenery3dIDs() const;
-
-    const QString& getCurrentScenery3dID() const { return currentScenery3dID; }
+    QString getCurrentScenery3dID() const;
     bool setCurrentScenery3dID(const QString& id);
     QString getCurrentScenery3dName() const;
     bool setCurrentScenery3dName(const QString& name);
-    const QString& getDefaultScenery3dID() const { return defaultScenery3dID; }
+    QString getDefaultScenery3dID() const { return defaultScenery3dID; }
     bool setDefaultScenery3dID(const QString& id);
     QString getCurrentScenery3dHtmlDescription() const;
-
-    QString getScenery3dPath(QString scenery3dID);
-    QString loadScenery3dName(QString scenery3dID);
-    quint64 loadScenery3dSize(QString scenery3dID);
 
 private slots:
     void clearMessage();
 
 private:
-    QString nameToID(const QString& name);
-    QMap<QString, QString> getNameToDirMap() const;
-
     //! Display text message on screen, fade out automatically
     void showMessage(const QString& message);
 
@@ -143,15 +132,15 @@ private:
     //! Creates all actions required by the plugin
     void createActions();
 
-    //! Loads a Scenery3d scene from file
-    Scenery3d* createFromFile(const QString& file, const QString& id);
-
     //! Loads the given vertex and fragment shaders into the given program.
     bool loadShader(QOpenGLShaderProgram& program, const QString& vShader, const QString& fShader);
 
+    bool loadScene(const SceneInfo& scene);
+
     Scenery3d* scenery3d;
     Scenery3dDialog* scenery3dDialog;
-    QString currentScenery3dID;
+
+    QSettings* conf;
     QString defaultScenery3dID;
     bool flagEnabled;
     bool cleanedUp;

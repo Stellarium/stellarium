@@ -1,10 +1,12 @@
-#include <QTimer>
-
 #include "Scenery3dDialog.hpp"
 #include "Scenery3dMgr.hpp"
+#include "SceneInfo.hpp"
+
 #include "StelModuleMgr.hpp"
 #include "StelApp.hpp"
 #include "StelGui.hpp"
+
+#include <QTimer>
 
 Scenery3dDialog::Scenery3dDialog(QObject* parent) : StelDialog(parent)
 {
@@ -57,7 +59,7 @@ void Scenery3dDialog::createDialogContent()
     l->blockSignals(true);
     l->clear();
 
-    l->addItems(mgr->getAllScenery3dNames());
+    l->addItems( SceneInfo::getAllSceneNames() );
     QList<QListWidgetItem*> currentItems = l->findItems(mgr->getCurrentScenery3dName(), Qt::MatchExactly);
     if (currentItems.size() > 0) {
         l->setCurrentItem(currentItems.at(0));
