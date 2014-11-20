@@ -66,6 +66,22 @@ AddOn::AddOn(const qint64 addOnId, const QVariantMap& map)
 		return;
 	}
 
+	if (m_eType == Texture)
+	{
+		m_textureslist = map.value("textures").toString().split("/");
+		// a texture must have "textures"
+		if (m_textureslist.isEmpty())
+		{
+			qWarning() << "Add-On Catalog : Error! Texture" << m_iAddOnId
+				   << "does not have the field \"textures\"!";
+			return;
+		}
+		foreach (QString name, m_textureslist)
+		{
+			m_textures.insert(name, 0); // not installed
+		}
+	}
+
 	// checking compatibility
 	if (!StelApp::getInstance().getStelAddOnMgr().isCompatible(m_sFirstStel, m_sLastStel))
 	{

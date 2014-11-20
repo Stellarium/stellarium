@@ -100,6 +100,8 @@ public:
 	Status getStatus() { return m_eStatus; }
 	QString getStatusString();
 	void setStatus(Status status) { m_eStatus = status; }
+	void setTextureStatus(QString name, int installed) { m_textures.insert(name, installed); }
+	QStringList getTextures() { return m_textureslist; }
 
 private:
 	qint64 m_iAddOnId;
@@ -120,6 +122,8 @@ private:
 	QString m_sThumbnail;
 	QList<Authors> m_authors;
 	QDateTime m_dateTime;
+	QStringList m_textureslist;
+	QHash<QString, int> m_textures; // <texture_name, installed>
 
 	bool m_bIsValid;
 	Category m_eCategory;
