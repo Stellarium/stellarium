@@ -246,6 +246,7 @@ void Scenery3d::loadModel()
         if(objModel != NULL)
         {
 	    objModel->clean();
+	    qDebug()<<"OBJ memory after clean: "<<objModel->memoryUsage();
         }
 
 	QString modelFile = StelFileMgr::findFile( currentScene.fullPath+ "/" + currentScene.modelScenery);
@@ -256,6 +257,8 @@ void Scenery3d::loadModel()
 	//transform the vertices of the model to match the grid
 	objModel->transform( zRot2Grid );
         //objModel->transform(obj2gridMatrix);
+
+	qDebug()<<"OBJ memory after load: "<<objModel->memoryUsage();
 
 
         /* We could re-create zRotateMatrix here if needed: We may have "default" conditions with landscape coordinates
@@ -686,7 +689,7 @@ void Scenery3d::drawArrays(bool textures)
 	}
 
 	glEnableClientState(GL_VERTEX_ARRAY);
-	glVertexPointer(3, GL_DOUBLE, stride, &vtxArray->position);
+	glVertexPointer(3, GL_FLOAT, stride, &vtxArray->position);
 	glEnableClientState(GL_NORMAL_ARRAY);
 	glNormalPointer(GL_FLOAT, stride, &vtxArray->normal);
 

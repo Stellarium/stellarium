@@ -139,7 +139,7 @@ bool OBJ::load(const QString& filename, const enum vertexOrder order, bool rebui
     buildStelModels();
     m_hasStelModels = m_numberOfStelModels > 0;
     //Find bounding extrema
-    bounds();
+    findBounds();
 
     //Create vertex normals if specified or required
     if(rebuildNormals)
@@ -378,6 +378,7 @@ void OBJ::buildStelModels()
         {
             materialId = m_attributeArray[i];
             pStelModel = &m_stelModels[numStelModels++];
+			pStelModel->triangleCount = 0;
             pStelModel->pMaterial = &m_materials[materialId];
             pStelModel->startIndex = i*3;
             ++pStelModel->triangleCount;
@@ -1293,7 +1294,7 @@ void OBJ::transform(Mat4d mat)
     }
 }
 
-void OBJ::bounds()
+void OBJ::findBounds()
 {
     //Find Bounding Box for entire Scene
     pBoundingBox->min = Vec3f(std::numeric_limits<float>::max());
@@ -1316,20 +1317,20 @@ void OBJ::bounds()
     for(unsigned int i=0; i<m_numberOfStelModels; ++i)
     {
         StelModel* pStelModel = &m_stelModels[i];
-        pStelModel->bbox = new AABB(Vec3f(std::numeric_limits<float>::max()), Vec3f(std::numeric_limits<float>::lowest()));
+	pStelModel->bbox = AABB(Vec3f(std::numeric_limits<float>::max()), Vec3f(std::numeric_limits<float>::lowest()));
 
         for(int j=pStelModel->startIndex; j<pStelModel->triangleCount*3; ++j)
         {
             unsigned int vertexIndex = m_indexArray[j];
             Vertex* pVertex = &m_vertexArray[vertexIndex];
 
-            pStelModel->bbox->min = Vec3f(std::min(static_cast<float>(pVertex->position[0]), pStelModel->bbox->min[0]),
-                                          std::min(static_cast<float>(pVertex->position[1]), pStelModel->bbox->min[1]),
-                                          std::min(static_cast<float>(pVertex->position[2]), pStelModel->bbox->min[2]));
+	    pStelModel->bbox.min = Vec3f(std::min(static_cast<float>(pVertex->position[0]), pStelModel->bbox.min[0]),
+					  std::min(static_cast<float>(pVertex->position[1]), pStelModel->bbox.min[1]),
+					  std::min(static_cast<float>(pVertex->position[2]), pStelModel->bbox.min[2]));
 
-            pStelModel->bbox->max = Vec3f(std::max(static_cast<float>(pVertex->position[0]), pStelModel->bbox->max[0]),
-                                          std::max(static_cast<float>(pVertex->position[1]), pStelModel->bbox->max[1]),
-                                          std::max(static_cast<float>(pVertex->position[2]), pStelModel->bbox->max[2]));
+	    pStelModel->bbox.max = Vec3f(std::max(static_cast<float>(pVertex->position[0]), pStelModel->bbox.max[0]),
+					  std::max(static_cast<float>(pVertex->position[1]), pStelModel->bbox.max[1]),
+					  std::max(static_cast<float>(pVertex->position[2]), pStelModel->bbox.max[2]));
         }
     }
 }
@@ -1339,6 +1340,21 @@ void OBJ::renderAABBs()
     for(unsigned int i=0; i<m_numberOfStelModels; ++i)
     {
         StelModel* pStelModel = &m_stelModels[i];
-        pStelModel->bbox->render(&m);
+	pStelModel->bbox.render(&m);
     }
+}
+
+size_t OBJ::memoryUsage()
+{
+	size_t sz = sizeof(this);
+	sz+= m_stelModels.capacity() * (sizeof(StelModel) );
+	sz+= m_materials.capacity() * sizeof(Material);
+	sz+= m_vertexArray.capacity() * sizeof(Vertex);
+	sz+= m_indexArray.capacity() * sizeof(unsigned int);
+	sz+= m_attributeArray.capacity() * sizeof(int);
+	sz+= m_vertexCoords.capacity() * sizeof(float);
+	sz+= m_textureCoords.capacity() * sizeof(float);
+	sz+= m_normals.capacity() * sizeof(float);
+
+	return sz;
 }
