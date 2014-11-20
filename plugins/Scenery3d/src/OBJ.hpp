@@ -127,7 +127,7 @@ public:
     struct Vertex
     {
         Vertex() : position(0.0f), texCoord(0.0f), normal(0.0f), tangent(0.0f), bitangent(0.0f) {}
-        Vec3d position;
+	Vec3f position;
         Vec2f texCoord;
         Vec3f normal;
         Vec4f tangent;
@@ -139,8 +139,10 @@ public:
     struct StelModel
     {
         int startIndex, triangleCount;
+	//materials are managed by OBJ
         const Material* pMaterial;
-        AABB* bbox;
+	//AABB is managed by this
+	AABB bbox;
     };
 
     //! Initializes values
@@ -191,6 +193,9 @@ public:
 
     void renderAABBs();
 
+    //! Returns an estimate of the memory usage of this instance (not fully accurate, but good enough)
+    size_t memoryUsage();
+
 private:
     void addTrianglePos(unsigned int index, int material, int v0, int v1, int v2);
     void addTrianglePosNormal(unsigned int index, int material,
@@ -220,7 +225,7 @@ private:
     void uploadTexturesGL();
     QString absolutePath(QString path);
     //! Determine the bounding box extrema
-    void bounds();
+    void findBounds();
 
     //! Flags
     bool m_hasPositions;
@@ -250,7 +255,7 @@ private:
     QVector<Vertex> m_vertexArray;
     QVector<unsigned int> m_indexArray;
     QVector<int> m_attributeArray;
-    QVector<double> m_vertexCoords;
+    QVector<float> m_vertexCoords;
     QVector<float> m_textureCoords;
     QVector<float> m_normals;
 
