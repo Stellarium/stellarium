@@ -197,30 +197,38 @@ public:
     size_t memoryUsage();
 
 private:
-    void addTrianglePos(unsigned int index, int material, int v0, int v1, int v2);
-    void addTrianglePosNormal(unsigned int index, int material,
-                              int v0, int v1, int v2,
-                              int vn0, int vn1, int vn2);
-    void addTrianglePosTexCoord(unsigned int index, int material,
-                                int v0, int v1, int v2,
-                                int vt0, int vt1, int vt2);
-    void addTrianglePosTexCoordNormal(unsigned int index, int material,
-                                      int v0, int v1, int v2,
-                                      int vt0, int vt1, int vt2,
-                                      int vn0, int vn1, int vn2);
-    int addVertex(int hash, const Vertex* pVertex);
+    typedef QVector<int> IntVector;
+    typedef QVector<Vec3f> VF3Vector;
+    typedef QVector<Vec2f> VF2Vector;
+    typedef Vec3f VPos;
+    typedef QVector<Vec3f> PosVector;
+    typedef QMap<QString,int> MatCacheT;
+    typedef QMap<int, QVector<int>> VertCacheT;
+
+    void addTrianglePos(const PosVector& vertexCoords, IntVector& attributeArray, VertCacheT &vertexCache, unsigned int index, int material, int v0, int v1, int v2);
+    void addTrianglePosNormal(const PosVector &vertexCoords,const VF3Vector& normals, IntVector &attributeArray, VertCacheT &vertexCache, unsigned int index, int material,
+			      int v0, int v1, int v2,
+			      int vn0, int vn1, int vn2);
+    void addTrianglePosTexCoord(const PosVector &vertexCoords,const VF2Vector &textureCoords, IntVector &attributeArray, VertCacheT &vertexCache, unsigned int index, int material,
+				int v0, int v1, int v2,
+				int vt0, int vt1, int vt2);
+    void addTrianglePosTexCoordNormal(PosVector &vertexCoords,const VF2Vector &textureCoords,const VF3Vector &normals, IntVector &attributeArray, VertCacheT &vertexCache, unsigned int index, int material,
+				      int v0, int v1, int v2,
+				      int vt0, int vt1, int vt2,
+				      int vn0, int vn1, int vn2);
+    int addVertex(VertCacheT &vertexCache, int hash, const Vertex* pVertex);
     //! Builds the StelModels based on material
-    void buildStelModels();
+    void buildStelModels(const IntVector &attributeArray);
     //! Generates normals in case they aren't specified/need rebuild
     void generateNormals();
     //! Generates tangents (and bitangents/binormals) (useful for NormalMapping, Parallax Mapping, ...)
     void generateTangents();
     //! First pass - scans the file for memory allocation
-    void importFirstPass(QFile& pFile);
+    void importFirstPass(QFile& pFile, MatCacheT &materialCache);
     //! Second pass - actual parsing step
-    void importSecondPass(FILE *pFile, const enum vertexOrder order);
+    void importSecondPass(FILE *pFile, const enum vertexOrder order, const MatCacheT &materialCache);
     //! Imports material file and fills the material datastructure
-    bool importMaterials(const QString& filename);
+    bool importMaterials(const QString& filename, MatCacheT& materialCache);
     //! Uploads the textures to GL
     void uploadTexturesGL();
     QString absolutePath(QString path);
@@ -254,13 +262,6 @@ private:
     QVector<Material> m_materials;
     QVector<Vertex> m_vertexArray;
     QVector<unsigned int> m_indexArray;
-    QVector<int> m_attributeArray;
-    QVector<float> m_vertexCoords;
-    QVector<float> m_textureCoords;
-    QVector<float> m_normals;
-
-    QMap<QString, int> m_materialCache;
-    QMap<int, QVector<int> > m_vertexCache;
 
     //! Heightmap
     friend class Heightmap;
