@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-11-18 22:12+0600\n"
-"PO-Revision-Date: 2014-11-17 13:48+0000\n"
+"PO-Revision-Date: 2014-11-19 17:47+0000\n"
 "Last-Translator: Andi Chandler <Unknown>\n"
 "Language-Team: English (United Kingdom) <en_GB@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-11-19 05:56+0000\n"
+"X-Launchpad-Export-Date: 2014-11-20 05:32+0000\n"
 "X-Generator: Launchpad (build 17252)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:106 src/core/modules/StarMgr.cpp:346
@@ -4575,24 +4575,25 @@ msgstr "Use this landscape as default"
 
 #: src/ui_viewDialog.h:1314
 msgid "Use minimal brightness to leave landscape visible also in darkness"
-msgstr ""
+msgstr "Use minimal brightness to leave landscape visible also in darkness"
 
 #: src/ui_viewDialog.h:1316
 msgid "Minimal brightness:"
-msgstr ""
+msgstr "Minimal brightness:"
 
 #: src/ui_viewDialog.h:1318
 msgid ""
 "Value range 0..1 (landscape is black at night - landscape is fully bright)"
 msgstr ""
+"Value range 0..1 (landscape is black at night - landscape is fully bright)"
 
 #: src/ui_viewDialog.h:1321
 msgid "Use minimal brightness as may be specified in landscape.ini"
-msgstr ""
+msgstr "Use minimal brightness as may be specified in landscape.ini"
 
 #: src/ui_viewDialog.h:1323
 msgid "from landscape, if given"
-msgstr ""
+msgstr "from landscape, if given"
 
 #: src/ui_viewDialog.h:1324
 msgid "Add/remove landscapes..."
@@ -5917,7 +5918,7 @@ msgstr "Restore FOV to initial values"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1088
 msgid "Sensor view"
-msgstr ""
+msgstr "Sensor view"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1089
 msgid "Use degrees and minutes for FOV of CCD"
@@ -5927,10 +5928,11 @@ msgstr "Use degrees and minutes for FOV of CCD"
 msgid ""
 "This setting will allow to flip CCD with telescope, who has flip setting"
 msgstr ""
+"This setting will allow to flip CCD with telescope, who has flip setting"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1093
 msgid "Use flip for CCD"
-msgstr ""
+msgstr "Use flip for CCD"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1094
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:225
