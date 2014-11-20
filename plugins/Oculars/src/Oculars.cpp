@@ -343,10 +343,10 @@ double Oculars::getCallOrder(StelModuleActionName actionName) const
 const StelStyle Oculars::getModuleStyleSheet(const StelStyle& style)
 {
 	StelStyle pluginStyle(style);
-	if (style.confSectionName == "color") {
-		pluginStyle.qtStyleSheet.append(normalStyleSheet);
-	} else{
+	if (StelApp::getInstance().getVisionModeNight()) {
 		pluginStyle.qtStyleSheet.append(nightStyleSheet);
+	} else{
+		pluginStyle.qtStyleSheet.append(normalStyleSheet);
 	}
 	return pluginStyle;
 }
@@ -385,11 +385,9 @@ void Oculars::handleKeys(QKeyEvent* event)
 	StelCore *core = StelApp::getInstance().getCore();
 	StelMovementMgr *movementManager = core->getMovementMgr();
 	
-	if (event->type() == QEvent::KeyPress)
-	{
+	if (event->type() == QEvent::KeyPress) {
 		// Direction and zoom replacements
-		switch (event->key())
-		{
+		switch (event->key()) {
 			case Qt::Key_Left:
 				movementManager->turnLeft(true);
 				consumeEvent = true;
@@ -426,16 +424,13 @@ void Oculars::handleKeys(QKeyEvent* event)
 				break;
 			case Qt::Key_M:
 				double multiplier = 1.0;
-				if (event->modifiers().testFlag(Qt::ControlModifier))
-				{
+				if (event->modifiers().testFlag(Qt::ControlModifier)) {
 					multiplier = 0.1;
 				}
-				if (event->modifiers().testFlag(Qt::AltModifier))
-				{
+				if (event->modifiers().testFlag(Qt::AltModifier)) {
 					multiplier = 5.0;
 				}
-				if (event->modifiers().testFlag(Qt::ShiftModifier))
-				{
+				if (event->modifiers().testFlag(Qt::ShiftModifier)) {
 					reticleRotation += (1.0 * multiplier);
 				} else {
 					reticleRotation -= (1.0 * multiplier);
@@ -446,8 +441,7 @@ void Oculars::handleKeys(QKeyEvent* event)
 		}
 	} else {
 		// When a deplacement key is released stop mooving
-		switch (event->key())
-		{
+		switch (event->key()) {
 			case Qt::Key_Left:
 				movementManager->turnLeft(false);
 				consumeEvent = true;
@@ -477,14 +471,12 @@ void Oculars::handleKeys(QKeyEvent* event)
 				consumeEvent = true;
 				break;
 		}
-		if (consumeEvent)
-		{
+		if (consumeEvent) {
 			// We don't want to re-center the object; just hold the current position.
 			movementManager->setFlagLockEquPos(true);
 		}
 	}
-	if (consumeEvent)
-	{
+	if (consumeEvent) {
 		event->accept();
 	} else {
 		event->setAccepted(false);
@@ -928,28 +920,26 @@ void Oculars::decrementLensIndex()
 
 void Oculars::displayPopupMenu()
 {
-	QMenu* popup = new QMenu(&StelMainView::getInstance());
+	QMenu * popup = new QMenu(&StelMainView::getInstance());
+	StelGui * gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+	Q_ASSERT(gui);
+	qDebug() <<this->getModuleStyleSheet(gui->getStelStyle()).qtStyleSheet;
+	popup->setStyleSheet(this->getModuleStyleSheet(gui->getStelStyle()).qtStyleSheet);
 
-	if (flagShowOculars)
-	{
+	if (flagShowOculars) {
 		// We are in Oculars mode
 		// We want to show all of the Oculars, and if the current ocular is not a binocular,
 		// we will also show the telescopes.
-		if (!oculars.isEmpty())
-		{
+		if (!oculars.isEmpty())	{
 			popup->addAction(q_("&Previous ocular"), this, SLOT(decrementOcularIndex()));
 			popup->addAction(q_("&Next ocular"), this, SLOT(incrementOcularIndex()));
 			QMenu* submenu = new QMenu(q_("Select &ocular"), popup);
 			int availableOcularCount = 0;
-			for (int index = 0; index < oculars.count(); ++index)
-			{
+			for (int index = 0; index < oculars.count(); ++index) {
 				QString label;
-				if (availableOcularCount < 10)
-				{
+				if (availableOcularCount < 10) {
 					label = QString("&%1: %2").arg(availableOcularCount).arg(oculars[index]->name());
-				}
-				else
-				{
+				} else {
 					label = oculars[index]->name();
 				}
 				//BM: Does this happen at all any more?
@@ -965,8 +955,7 @@ void Oculars::displayPopupMenu()
 					availableOcularCount++;
 					ocularsSignalMapper->setMapping(action, QString("%1").arg(index));
 				}
-				if (action && index == selectedOcularIndex)
-				{
+				if (action && index == selectedOcularIndex) {
 					action->setCheckable(true);
 					action->setChecked(true);
 				}
@@ -977,8 +966,7 @@ void Oculars::displayPopupMenu()
 
 		// If there is more than one telescope, show the prev/next/list complex.
 		// If the selected ocular is a binoculars, show nothing.
-		if (telescopes.count() > 1 && (selectedOcularIndex > -1 && !oculars[selectedOcularIndex]->isBinoculars()))
-		{
+		if (telescopes.count() > 1 && (selectedOcularIndex > -1 && !oculars[selectedOcularIndex]->isBinoculars())) {
 			QMenu* submenu = addTelescopeSubmenu(popup);
 			popup->addMenu(submenu);
 			submenu = addLensSubmenu(popup);
@@ -1016,25 +1004,19 @@ void Oculars::displayPopupMenu()
 		}
 		
 		popup->addSeparator();
-		if (flagShowCCD && selectedCCDIndex > -1 && selectedTelescopeIndex > -1)
-		{
+		if (flagShowCCD && selectedCCDIndex > -1 && selectedTelescopeIndex > -1) {
 			popup->addAction(q_("&Previous CCD"), this, SLOT(decrementCCDIndex()));
 			popup->addAction(q_("&Next CCD"), this, SLOT(incrementCCDIndex()));
 			QMenu* submenu = new QMenu(q_("&Select CCD"), popup);
-			for (int index = 0; index < ccds.count(); ++index)
-			{
+			for (int index = 0; index < ccds.count(); ++index) {
 				QString label;
-				if (index < 10)
-				{
+				if (index < 10) {
 					label = QString("&%1: %2").arg(index).arg(ccds[index]->name());
-				}
-				else
-				{
+				} else {
 					label = ccds[index]->name();
 				}
 				QAction* action = submenu->addAction(label, ccdsSignalMapper, SLOT(map()));
-				if (index == selectedCCDIndex)
-				{
+				if (index == selectedCCDIndex) {
 					action->setCheckable(true);
 					action->setChecked(true);
 				}
@@ -1069,8 +1051,7 @@ void Oculars::displayPopupMenu()
 			
 			popup->addSeparator();
 		}
-		if (flagShowCCD && selectedCCDIndex > -1 && telescopes.count() > 1)
-		{
+		if (flagShowCCD && selectedCCDIndex > -1 && telescopes.count() > 1) {
 			QMenu* submenu = addTelescopeSubmenu(popup);
 			popup->addMenu(submenu);
 			submenu = addLensSubmenu(popup);
@@ -1897,8 +1878,7 @@ void Oculars::zoomOcular()
 
 void Oculars::hideUsageMessageIfDisplayed()
 {
-	if (usageMessageLabelID > -1)
-	{
+	if (usageMessageLabelID > -1) {
 		LabelMgr *labelManager = GETSTELMODULE(LabelMgr);
 		labelManager->setLabelShow(usageMessageLabelID, false);
 		labelManager->deleteLabel(usageMessageLabelID);
@@ -1908,9 +1888,10 @@ void Oculars::hideUsageMessageIfDisplayed()
 
 Lens* Oculars::selectedLens()
 {
-    if (selectedLensIndex >= 0 && selectedLensIndex < lense.count())
-	return lense[selectedLensIndex];
-    return NULL;
+	if (selectedLensIndex >= 0 && selectedLensIndex < lense.count()) {
+		return lense[selectedLensIndex];
+	}
+	return NULL;
 }
 
 QMenu* Oculars::addLensSubmenu(QMenu* parent)
