@@ -206,34 +206,61 @@ void StelAddOnMgr::setUpdateFrequencyHour(int hour) {
 
 void StelAddOnMgr::refreshAddOnStatuses()
 {
-	/* TODO
-	// mark all add-ons as uninstalled
-	m_pStelAddOnDAO->markAllAddOnsAsUninstalled();
-
 	// check add-ons which are already installed
 	QHashIterator<AddOn::Category, StelAddOn*> aos(m_pStelAddOns);
 	while (aos.hasNext())
-
+	{
 		aos.next();
 		QStringList list = aos.value()->checkInstalledAddOns();
 		if (list.isEmpty())
 		{
 			continue;
 		}
+
 		if (aos.key() == AddOn::CATALOG || aos.key() == AddOn::LANGUAGEPACK)
 		{
-			m_pStelAddOnDAO->markAddOnsAsInstalledFromMd5(list);
+			foreach (QString a, list) {
+				AddOn* addon = m_addonsByMd5.value(a);
+				if (addon)
+				{
+					addon->setStatus(AddOn::FullyInstalled);
+				}
+			}
 		}
 		else if (aos.key() == AddOn::TEXTURE)
 		{
-			m_pStelAddOnDAO->markTexturesAsInstalled(list);
+			AddOnMap textures = m_addons.value(AddOn::Texture);
+			QMap<qint64, AddOn*>::iterator i;
+			for (i = textures.begin(); i != textures.end(); ++i)
+			{
+				int countInstalled = 0;
+				foreach (QString t, list) {
+					QStringList tL = t.split("/");
+					if (tL[0] == i.value()->getInstallId())
+					{
+						list.removeOne(t);
+						i.value()->setTextureStatus(tL[0], 1);
+						i.value()->setStatus(AddOn::PartiallyInstalled);
+						countInstalled++;
+					}
+				}
+				if (countInstalled == i.value()->getTextures().size())
+				{
+					i.value()->setStatus(AddOn::FullyInstalled);
+				}
+			}
 		}
 		else
 		{
-			m_pStelAddOnDAO->markAddOnsAsInstalled(list);
+			foreach (QString a, list) {
+				AddOn* addon = m_addonsByIdInstallId.value(a);
+				if (addon)
+				{
+					addon->setStatus(AddOn::FullyInstalled);
+				}
+			}
 		}
 	}
-	*/
 }
 
 bool StelAddOnMgr::updateCatalog(QString webresult)
