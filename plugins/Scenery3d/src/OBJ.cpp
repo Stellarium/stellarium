@@ -103,14 +103,6 @@ void OBJ::clean()
     m_materials.clear();
     m_vertexArray.clear();
     m_indexArray.clear();
-    m_attributeArray.clear();
-
-    m_vertexCoords.clear();
-    m_textureCoords.clear();
-    m_normals.clear();
-
-    m_materialCache.clear();
-    m_vertexCache.clear();
 }
 
 bool OBJ::load(const QString& filename, const enum vertexOrder order, bool rebuildNormals)
@@ -123,21 +115,21 @@ bool OBJ::load(const QString& filename, const enum vertexOrder order, bool rebui
     m_basePath.clear();
     m_basePath = StelFileMgr::dirName(filename) + "/";
 
+    MatCacheT materialCache;
+
     //Parse the file
-    importFirstPass(qtFile);
+    importFirstPass(qtFile,materialCache);
     qtFile.close();
 
     //TODO make the second pass support Qt IO (unicode file handling, etc.)
     QByteArray ba = filename.toLocal8Bit();
     FILE* pFile = fopen(ba.constData(), "r");
-    importSecondPass(pFile, order);
+    importSecondPass(pFile, order, materialCache);
 
     //Done parsing, close file
     fclose(pFile);
 
-    //Build the StelModels
-    buildStelModels();
-    m_hasStelModels = m_numberOfStelModels > 0;
+
     //Find bounding extrema
     findBounds();
 
@@ -161,7 +153,7 @@ bool OBJ::load(const QString& filename, const enum vertexOrder order, bool rebui
     //Loaded
     qDebug() << getTime() << "[Scenery3d] Loaded OBJ successfully: " << filename;
     qDebug() << getTime() << "[Scenery3d] Triangles#: " << m_numberOfTriangles;
-    qDebug() << getTime() << "[Scenery3d] Vertices#: " << m_numberOfVertexCoords;
+    qDebug() << getTime() << "[Scenery3d] Vertices#: " << m_numberOfVertexCoords<<" unique / "<< m_vertexArray.size()<<" total";
     qDebug() << getTime() << "[Scenery3d] Normals#: " << m_numberOfNormals;
     qDebug() << getTime() << "[Scenery3d] StelModels#: " << m_numberOfStelModels;
     qDebug() << getTime() << "[Scenery3d] Bounding Box";
@@ -172,151 +164,112 @@ bool OBJ::load(const QString& filename, const enum vertexOrder order, bool rebui
     return true;
 }
 
-void OBJ::addTrianglePos(unsigned int index, int material, int v0, int v1, int v2)
+void OBJ::addTrianglePos(const PosVector &vertexCoords, IntVector& attributeArray, VertCacheT& vertexCache, unsigned int index, int material, int v0, int v1, int v2)
 {
     Vertex vertex;
 
     //Add the material index to the index for grouping models
-    m_attributeArray[index] = material;
+    attributeArray[index] = material;
 
     //Add v0
-    vertex.position[0] = m_vertexCoords[v0*3];
-    vertex.position[1] = m_vertexCoords[v0*3+1];
-    vertex.position[2] = m_vertexCoords[v0*3+2];
-    m_indexArray[index*3] = addVertex(v0, &vertex);
+    vertex.position = vertexCoords[v0];
+    m_indexArray[index*3] = addVertex(vertexCache, v0, &vertex);
 
     //Add v1
-    vertex.position[0] = m_vertexCoords[v1*3];
-    vertex.position[1] = m_vertexCoords[v1*3+1];
-    vertex.position[2] = m_vertexCoords[v1*3+2];
-    m_indexArray[index*3+1] = addVertex(v1, &vertex);
+    vertex.position = vertexCoords[v1];
+    m_indexArray[index*3+1] = addVertex(vertexCache, v1, &vertex);
 
     //Add v2
-    vertex.position[0] = m_vertexCoords[v2*3];
-    vertex.position[1] = m_vertexCoords[v2*3+1];
-    vertex.position[2] = m_vertexCoords[v2*3+2];
-    m_indexArray[index*3+2] = addVertex(v2, &vertex);
+    vertex.position = vertexCoords[v2];
+    m_indexArray[index*3+2] = addVertex(vertexCache, v2, &vertex);
 }
 
-void OBJ::addTrianglePosNormal(unsigned int index, int material, int v0, int v1, int v2, int vn0, int vn1, int vn2)
+void OBJ::addTrianglePosNormal(const PosVector &vertexCoords, const VF3Vector &normals, IntVector& attributeArray, VertCacheT& vertexCache,
+			       unsigned int index, int material, int v0, int v1, int v2, int vn0, int vn1, int vn2)
 {
     Vertex vertex;
 
     //Add the material index to the index for grouping models
-    m_attributeArray[index] = material;
+    attributeArray[index] = material;
 
     //Add v0//vn0
-    vertex.position[0] = m_vertexCoords[v0*3];
-    vertex.position[1] = m_vertexCoords[v0*3+1];
-    vertex.position[2] = m_vertexCoords[v0*3+2];
-    vertex.normal[0] = m_normals[vn0*3];
-    vertex.normal[1] = m_normals[vn0*3+1];
-    vertex.normal[2] = m_normals[vn0*3+2];
-    m_indexArray[index*3] = addVertex(v0, &vertex);
+    vertex.position = vertexCoords[v0];
+    vertex.normal = normals[vn0];
+    m_indexArray[index*3] = addVertex(vertexCache, v0, &vertex);
 
     //Add v1//n1
-    vertex.position[0] = m_vertexCoords[v1*3];
-    vertex.position[1] = m_vertexCoords[v1*3+1];
-    vertex.position[2] = m_vertexCoords[v1*3+2];
-    vertex.normal[0] = m_normals[vn1*3];
-    vertex.normal[1] = m_normals[vn1*3+1];
-    vertex.normal[2] = m_normals[vn1*3+2];
-    m_indexArray[index*3+1] = addVertex(v1, &vertex);
+    vertex.position = vertexCoords[v1];
+    vertex.normal = normals[vn1];
+    m_indexArray[index*3+1] = addVertex(vertexCache, v1, &vertex);
 
     //Add v2//n2
-    vertex.position[0] = m_vertexCoords[v2*3];
-    vertex.position[1] = m_vertexCoords[v2*3+1];
-    vertex.position[2] = m_vertexCoords[v2*3+2];
-    vertex.normal[0] = m_normals[vn2*3];
-    vertex.normal[1] = m_normals[vn2*3+1];
-    vertex.normal[2] = m_normals[vn2*3+2];
-    m_indexArray[index*3+2] = addVertex(v2, &vertex);
+    vertex.position = vertexCoords[v2];
+    vertex.normal = normals[vn2];
+    m_indexArray[index*3+2] = addVertex(vertexCache, v2, &vertex);
 }
 
-void OBJ::addTrianglePosTexCoord(unsigned int index, int material, int v0, int v1, int v2, int vt0, int vt1, int vt2)
+void OBJ::addTrianglePosTexCoord(const PosVector &vertexCoords, const VF2Vector &textureCoords, IntVector& attributeArray, VertCacheT& vertexCache,
+				 unsigned int index, int material, int v0, int v1, int v2, int vt0, int vt1, int vt2)
 {
     Vertex vertex;
 
     //Add the material index to the index for grouping models
-    m_attributeArray[index] = material;
+    attributeArray[index] = material;
 
     //Add v0/vt0
-    vertex.position[0] = m_vertexCoords[v0*3];
-    vertex.position[1] = m_vertexCoords[v0*3+1];
-    vertex.position[2] = m_vertexCoords[v0*3+2];
-    vertex.texCoord[0] = m_textureCoords[vt0*2];
-    vertex.texCoord[1] = m_textureCoords[vt0*2+1];
-    m_indexArray[index*3] = addVertex(v0, &vertex);
+    vertex.position = vertexCoords[v0];
+    vertex.texCoord = textureCoords[vt0];
+    m_indexArray[index*3] = addVertex(vertexCache, v0, &vertex);
 
     //Add v1/vt1
-    vertex.position[0] = m_vertexCoords[v1*3];
-    vertex.position[1] = m_vertexCoords[v1*3+1];
-    vertex.position[2] = m_vertexCoords[v1*3+2];
-    vertex.texCoord[0] = m_textureCoords[vt1*2];
-    vertex.texCoord[1] = m_textureCoords[vt1*2+1];
-    m_indexArray[index*3+1] = addVertex(v1, &vertex);
+    vertex.position = vertexCoords[v1];
+    vertex.texCoord = textureCoords[vt1];
+    m_indexArray[index*3+1] = addVertex(vertexCache, v1, &vertex);
 
     //Add v2/vt2
-    vertex.position[0] = m_vertexCoords[v2*3];
-    vertex.position[1] = m_vertexCoords[v2*3+1];
-    vertex.position[2] = m_vertexCoords[v2*3+2];
-    vertex.texCoord[0] = m_textureCoords[vt2*2];
-    vertex.texCoord[1] = m_textureCoords[vt2*2+1];
-    m_indexArray[index*3+2] = addVertex(v2, &vertex);
+    vertex.position = vertexCoords[v2];
+    vertex.texCoord = textureCoords[vt2];
+    m_indexArray[index*3+2] = addVertex(vertexCache, v2, &vertex);
 }
 
-void OBJ::addTrianglePosTexCoordNormal(unsigned int index, int material, int v0, int v1, int v2, int vt0, int vt1, int vt2, int vn0, int vn1, int vn2)
+void OBJ::addTrianglePosTexCoordNormal(PosVector& vertexCoords, const VF2Vector &textureCoords, const VF3Vector &normals, IntVector& attributeArray, VertCacheT& vertexCache,
+				       unsigned int index, int material, int v0, int v1, int v2, int vt0, int vt1, int vt2, int vn0, int vn1, int vn2)
 {
     Vertex vertex;
 
     //Add the material index to the index for grouping models
-    m_attributeArray[index] = material;
+    attributeArray[index] = material;
 
     //Add v0/vt0/vn0
-    vertex.position[0] = m_vertexCoords[v0*3];
-    vertex.position[1] = m_vertexCoords[v0*3+1];
-    vertex.position[2] = m_vertexCoords[v0*3+2];
-    vertex.texCoord[0] = m_textureCoords[vt0*2];
-    vertex.texCoord[1] = m_textureCoords[vt0*2+1];
-    vertex.normal[0] = m_normals[vn0*3];
-    vertex.normal[1] = m_normals[vn0*3+1];
-    vertex.normal[2] = m_normals[vn0*3+2];
-    m_indexArray[index*3] = addVertex(v0, &vertex);
+    vertex.position = vertexCoords[v0];
+    vertex.texCoord = textureCoords[vt0];
+    vertex.normal = normals[vn0];
+    m_indexArray[index*3] = addVertex(vertexCache, v0, &vertex);
 
     //Add v1/vt1/vn1
-    vertex.position[0] = m_vertexCoords[v1*3];
-    vertex.position[1] = m_vertexCoords[v1*3+1];
-    vertex.position[2] = m_vertexCoords[v1*3+2];
-    vertex.texCoord[0] = m_textureCoords[vt1*2];
-    vertex.texCoord[1] = m_textureCoords[vt1*2+1];
-    vertex.normal[0] = m_normals[vn1*3];
-    vertex.normal[1] = m_normals[vn1*3+1];
-    vertex.normal[2] = m_normals[vn1*3+2];
-    m_indexArray[index*3+1] = addVertex(v1, &vertex);
+    vertex.position = vertexCoords[v1];
+    vertex.texCoord = textureCoords[vt1];
+    vertex.normal = normals[vn1];
+    m_indexArray[index*3+1] = addVertex(vertexCache, v1, &vertex);
 
     //Add v2/vt2/vn2
-    vertex.position[0] = m_vertexCoords[v2*3];
-    vertex.position[1] = m_vertexCoords[v2*3+1];
-    vertex.position[2] = m_vertexCoords[v2*3+2];
-    vertex.texCoord[0] = m_textureCoords[vt2*2];
-    vertex.texCoord[1] = m_textureCoords[vt2*2+1];
-    vertex.normal[0] = m_normals[vn2*3];
-    vertex.normal[1] = m_normals[vn2*3+1];
-    vertex.normal[2] = m_normals[vn2*3+2];
-    m_indexArray[index*3+2] = addVertex(v2, &vertex);
+    vertex.position = vertexCoords[v2];
+    vertex.texCoord = textureCoords[vt2];
+    vertex.normal = normals[vn2];
+    m_indexArray[index*3+2] = addVertex(vertexCache, v2, &vertex);
 }
 
-int OBJ::addVertex(int hash, const Vertex *pVertex)
+int OBJ::addVertex(VertCacheT& vertexCache, int hash, const Vertex *pVertex)
 {
     unsigned int index = -1;
-    QMap<int,QVector<int>>::const_iterator iter = m_vertexCache.find(hash);
+    QMap<int,QVector<int>>::const_iterator iter = vertexCache.find(hash);
 
-    if (iter == m_vertexCache.end())
+    if (iter == vertexCache.end())
     {
         // Vertex hash doesn't exist in the cache.
         index = static_cast<int>(m_vertexArray.size());
         m_vertexArray.push_back(*pVertex);
-        m_vertexCache.insert(hash, QVector<int>(1, index));
+	vertexCache.insert(hash, QVector<int>(1, index));
     }
     else
     {
@@ -341,14 +294,14 @@ int OBJ::addVertex(int hash, const Vertex *pVertex)
         {
             index = static_cast<int>(m_vertexArray.size());
             m_vertexArray.push_back(*pVertex);
-            m_vertexCache[hash].push_back(index);
+	    vertexCache[hash].push_back(index);
         }
     }
 
     return index;
 }
 
-void OBJ::buildStelModels()
+void OBJ::buildStelModels(const IntVector& attributeArray)
 {
     //Group model's triangles based on material
     StelModel* pStelModel = 0;
@@ -356,11 +309,11 @@ void OBJ::buildStelModels()
     int numStelModels = 0;
 
     // Count the number of meshes.
-    for (int i=0; i<static_cast<int>(m_attributeArray.size()); ++i)
+    for (int i=0; i<static_cast<int>(attributeArray.size()); ++i)
     {
-        if (m_attributeArray[i] != materialId)
+	if (attributeArray[i] != materialId)
         {
-            materialId = m_attributeArray[i];
+	    materialId = attributeArray[i];
             ++numStelModels;
         }
     }
@@ -372,11 +325,11 @@ void OBJ::buildStelModels()
     materialId = -1;
 
     // Build the StelModel. One StelModel for each unique material.
-    for (int i=0; i<static_cast<int>(m_attributeArray.size()); ++i)
+    for (int i=0; i<static_cast<int>(attributeArray.size()); ++i)
     {
-        if (m_attributeArray[i] != materialId)
+	if (attributeArray[i] != materialId)
         {
-            materialId = m_attributeArray[i];
+	    materialId = attributeArray[i];
             pStelModel = &m_stelModels[numStelModels++];
 			pStelModel->triangleCount = 0;
             pStelModel->pMaterial = &m_materials[materialId];
@@ -646,7 +599,7 @@ void OBJ::generateTangents()
 }
 
 //! The first pass finds out how many triangles and vertices the model has, and imports the materials.
-void OBJ::importFirstPass(QFile& pFile)
+void OBJ::importFirstPass(QFile& pFile, MatCacheT& materialCache)
 {
 
     m_hasTextureCoords = false;
@@ -705,7 +658,7 @@ void OBJ::importFirstPass(QFile& pFile)
             lineStream>>buffer;
             name = m_basePath;
             name += buffer;
-            importMaterials(name);
+	    importMaterials(name, materialCache);
             break;
 
         case 'v':   //! v, vt, or vn
@@ -736,12 +689,7 @@ void OBJ::importFirstPass(QFile& pFile)
     m_hasNormals = m_numberOfNormals > 0;
     m_hasTextureCoords = m_numberOfTextureCoords > 0;
 
-    // Allocate memory for the OBJ model data.
-    m_vertexCoords.resize(m_numberOfVertexCoords * 3);
-    m_textureCoords.resize(m_numberOfTextureCoords * 2);
-    m_normals.resize(m_numberOfNormals * 3);
     m_indexArray.resize(m_numberOfTriangles * 3);
-    m_attributeArray.resize(m_numberOfTriangles);
 
     // Define a default material if no materials were loaded.
     if (m_numberOfMaterials == 0)
@@ -749,11 +697,11 @@ void OBJ::importFirstPass(QFile& pFile)
         Material defaultMaterial;
 
         m_materials.push_back(defaultMaterial);
-        m_materialCache[defaultMaterial.name] = 0;
+	materialCache[defaultMaterial.name] = 0;
     }
 }
 
-void OBJ::importSecondPass(FILE* pFile, const vertexOrder order)
+void OBJ::importSecondPass(FILE* pFile, const vertexOrder order, const MatCacheT& materialCache)
 {
     //TODO convert to Qt IO functions (QFile)
 
@@ -768,6 +716,13 @@ void OBJ::importSecondPass(FILE* pFile, const vertexOrder order)
     char buffer[256] = {0};
     QString name;
     QMap<QString,int>::const_iterator iter;
+
+    //these were member variables before, but were only used during loading, so we just define them here to save some memory
+    IntVector attributeArray(m_numberOfTriangles);
+    PosVector vertexCoords(m_numberOfVertexCoords);
+    VF2Vector textureCoords(m_numberOfTextureCoords);
+    VF3Vector normals(m_numberOfNormals);
+    VertCacheT vertexCache;
 
     float fTmp[3] = {0.0f};
     double dTmp[3] = {0.0};
@@ -797,7 +752,8 @@ void OBJ::importSecondPass(FILE* pFile, const vertexOrder order)
                 vn[1] = (vn[1] < 0) ? vn[1]+numNormals-1 : vn[1]-1;
                 vn[2] = (vn[2] < 0) ? vn[2]+numNormals-1 : vn[2]-1;
 
-                addTrianglePosNormal(numTriangles++, activeMaterial,
+		addTrianglePosNormal(vertexCoords,normals,attributeArray,vertexCache,
+					numTriangles++, activeMaterial,
                                      v[0], v[1], v[2],
                                      vn[0], vn[1], vn[2]);
 
@@ -809,7 +765,8 @@ void OBJ::importSecondPass(FILE* pFile, const vertexOrder order)
                     v[2] = (v[2] < 0) ? v[2]+numVertices-1 : v[2]-1;
                     vn[2] = (vn[2] < 0) ? vn[2]+numNormals-1 : vn[2]-1;
 
-                    addTrianglePosNormal(numTriangles++, activeMaterial,
+		    addTrianglePosNormal(vertexCoords,normals,attributeArray,vertexCache,
+					    numTriangles++, activeMaterial,
                                          v[0], v[1], v[2],
                                          vn[0], vn[1], vn[2]);
 
@@ -834,7 +791,8 @@ void OBJ::importSecondPass(FILE* pFile, const vertexOrder order)
                 vn[1] = (vn[1] < 0) ? vn[1]+numNormals-1 : vn[1]-1;
                 vn[2] = (vn[2] < 0) ? vn[2]+numNormals-1 : vn[2]-1;
 
-                addTrianglePosTexCoordNormal(numTriangles++, activeMaterial,
+		addTrianglePosTexCoordNormal(vertexCoords,textureCoords,normals,attributeArray,vertexCache,
+					     numTriangles++, activeMaterial,
                                              v[0], v[1], v[2],
                                              vt[0], vt[1], vt[2],
                                              vn[0], vn[1], vn[2]);
@@ -849,7 +807,8 @@ void OBJ::importSecondPass(FILE* pFile, const vertexOrder order)
                     vt[2] = (vt[2] < 0) ? vt[2]+numTexCoords-1 : vt[2]-1;
                     vn[2] = (vn[2] < 0) ? vn[2]+numNormals-1 : vn[2]-1;
 
-                    addTrianglePosTexCoordNormal(numTriangles++, activeMaterial,
+		    addTrianglePosTexCoordNormal(vertexCoords,textureCoords,normals,attributeArray,vertexCache,
+						 numTriangles++, activeMaterial,
                                                  v[0], v[1], v[2],
                                                  vt[0], vt[1], vt[2],
                                                  vn[0], vn[1], vn[2]);
@@ -872,7 +831,8 @@ void OBJ::importSecondPass(FILE* pFile, const vertexOrder order)
                 vt[1] = (vt[1] < 0) ? vt[1]+numTexCoords-1 : vt[1]-1;
                 vt[2] = (vt[2] < 0) ? vt[2]+numTexCoords-1 : vt[2]-1;
 
-                addTrianglePosTexCoord(numTriangles++, activeMaterial,
+		addTrianglePosTexCoord(vertexCoords,textureCoords,attributeArray,vertexCache,
+				       numTriangles++, activeMaterial,
                                        v[0], v[1], v[2],
                                        vt[0], vt[1], vt[2]);
 
@@ -884,7 +844,8 @@ void OBJ::importSecondPass(FILE* pFile, const vertexOrder order)
                     v[2] = (v[2] < 0) ? v[2]+numVertices-1 : v[2]-1;
                     vt[2] = (vt[2] < 0) ? vt[2]+numTexCoords-1 : vt[2]-1;
 
-                    addTrianglePosTexCoord(numTriangles++, activeMaterial,
+		    addTrianglePosTexCoord(vertexCoords,textureCoords,attributeArray,vertexCache,
+					   numTriangles++, activeMaterial,
                                            v[0], v[1], v[2],
                                            vt[0], vt[1], vt[2]);
 
@@ -902,7 +863,7 @@ void OBJ::importSecondPass(FILE* pFile, const vertexOrder order)
                 v[1] = (v[1] < 0) ? v[1]+numVertices-1 : v[1]-1;
                 v[2] = (v[2] < 0) ? v[2]+numVertices-1 : v[2]-1;
 
-                addTrianglePos(numTriangles++, activeMaterial, v[0], v[1], v[2]);
+		addTrianglePos(vertexCoords, attributeArray, vertexCache, numTriangles++, activeMaterial, v[0], v[1], v[2]);
 
                 v[1] = v[2];
 
@@ -910,7 +871,7 @@ void OBJ::importSecondPass(FILE* pFile, const vertexOrder order)
                 {
                     v[2] = (v[2] < 0) ? v[2]+numVertices-1 : v[2]-1;
 
-                    addTrianglePos(numTriangles++, activeMaterial, v[0], v[1], v[2]);
+		    addTrianglePos(vertexCoords, attributeArray, vertexCache, numTriangles++, activeMaterial, v[0], v[1], v[2]);
 
                     v[1] = v[2];
                 }
@@ -921,8 +882,8 @@ void OBJ::importSecondPass(FILE* pFile, const vertexOrder order)
             fgets(buffer, sizeof(buffer), pFile);
             sscanf(buffer, "%s %s", buffer, buffer);
             name = buffer;
-            iter = m_materialCache.find(buffer);
-            activeMaterial = (iter == m_materialCache.end()) ? 0 : iter.value();
+	    iter = materialCache.find(buffer);
+	    activeMaterial = (iter == materialCache.end()) ? 0 : iter.value();
             break;
 
         case 'v': //! v, vn, or vt.
@@ -933,16 +894,12 @@ void OBJ::importSecondPass(FILE* pFile, const vertexOrder order)
 
                 switch(order)
                 {
-                case XZY:
-                    m_vertexCoords[3*numVertices] = dTmp[0];
-                    m_vertexCoords[3*numVertices+1] = -dTmp[2];
-                    m_vertexCoords[3*numVertices+2] = dTmp[1];
+		case XZY:
+			vertexCoords[numVertices] = VPos(dTmp[0],-dTmp[2],dTmp[1]);
                     break;
 
                 default: //! XYZ
-                    m_vertexCoords[3*numVertices] = dTmp[0];
-                    m_vertexCoords[3*numVertices+1] = dTmp[1];
-                    m_vertexCoords[3*numVertices+2] = dTmp[2];
+			vertexCoords[numVertices] = VPos(dTmp[0],dTmp[1],dTmp[2]);
                     break;
                 }
 
@@ -955,15 +912,11 @@ void OBJ::importSecondPass(FILE* pFile, const vertexOrder order)
                 switch(order)
                 {
                 case XZY:
-                    m_normals[3*numNormals] = fTmp[0];
-                    m_normals[3*numNormals+1] = -fTmp[2];
-                    m_normals[3*numNormals+2] = fTmp[1];
+			normals[numNormals] = Vec3f(fTmp[0], -fTmp[2], fTmp[1]);
                     break;
 
                 default: //! XYZ
-                    m_normals[3*numNormals] = fTmp[0];
-                    m_normals[3*numNormals+1] = fTmp[1];
-                    m_normals[3*numNormals+2] = fTmp[2];
+			normals[numNormals] = Vec3f(fTmp[0],fTmp[1],fTmp[2]);
                     break;
                 }
 
@@ -971,9 +924,8 @@ void OBJ::importSecondPass(FILE* pFile, const vertexOrder order)
                 break;
 
             case 't': //! vt
-                fscanf(pFile, "%f %f",
-                       &m_textureCoords[2*numTexCoords],
-                       &m_textureCoords[2*numTexCoords+1]);
+		fscanf(pFile, "%f %f", &fTmp[0], &fTmp[1]);
+		textureCoords[numTexCoords] = Vec2f(fTmp[0],fTmp[1]);
                 ++numTexCoords;
                 break;
 
@@ -988,9 +940,13 @@ void OBJ::importSecondPass(FILE* pFile, const vertexOrder order)
             break;
         }
     }
+
+    //Build the StelModels
+    buildStelModels(attributeArray);
+    m_hasStelModels = m_numberOfStelModels > 0;
 }
 
-bool OBJ::importMaterials(const QString& filename)
+bool OBJ::importMaterials(const QString& filename, MatCacheT& materialCache)
 {
     //TODO convert to Qt IO functions (Unicode filenames, type safety, security...)
     QByteArray ba = filename.toLatin1();
@@ -1173,7 +1129,7 @@ bool OBJ::importMaterials(const QString& filename)
             pMaterial->height_texture.clear();
 
 
-            m_materialCache[pMaterial->name] = numMaterials;
+	    materialCache[pMaterial->name] = numMaterials;
             ++numMaterials;
             break;
 
@@ -1351,10 +1307,6 @@ size_t OBJ::memoryUsage()
 	sz+= m_materials.capacity() * sizeof(Material);
 	sz+= m_vertexArray.capacity() * sizeof(Vertex);
 	sz+= m_indexArray.capacity() * sizeof(unsigned int);
-	sz+= m_attributeArray.capacity() * sizeof(int);
-	sz+= m_vertexCoords.capacity() * sizeof(float);
-	sz+= m_textureCoords.capacity() * sizeof(float);
-	sz+= m_normals.capacity() * sizeof(float);
 
 	return sz;
 }
