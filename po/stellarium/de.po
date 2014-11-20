@@ -10,13 +10,13 @@ msgstr ""
 "Project-Id-Version: de\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-11-18 22:12+0600\n"
-"PO-Revision-Date: 2014-11-09 00:19+0000\n"
+"PO-Revision-Date: 2014-11-19 14:57+0000\n"
 "Last-Translator: gzotti <Georg.Zotti@univie.ac.at>\n"
 "Language-Team: <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-11-19 05:41+0000\n"
+"X-Launchpad-Export-Date: 2014-11-20 05:31+0000\n"
 "X-Generator: Launchpad (build 17252)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:106 src/core/modules/StarMgr.cpp:346
@@ -2723,7 +2723,7 @@ msgstr "Großmugl"
 #. TRANSLATORS: Name of landscape
 #: src/translations.h:268
 msgid "Zero Horizon"
-msgstr ""
+msgstr "Null-Horizont"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:274
@@ -4613,24 +4613,24 @@ msgstr "Benutze die momentane Landschaft als Standard"
 
 #: src/ui_viewDialog.h:1314
 msgid "Use minimal brightness to leave landscape visible also in darkness"
-msgstr ""
+msgstr "Erhelle Landschaft auch im Dunkeln"
 
 #: src/ui_viewDialog.h:1316
 msgid "Minimal brightness:"
-msgstr ""
+msgstr "Minimalhelligkeit:"
 
 #: src/ui_viewDialog.h:1318
 msgid ""
 "Value range 0..1 (landscape is black at night - landscape is fully bright)"
-msgstr ""
+msgstr "Wertebereich 0..1 (Landschaft ist schwarz - Landschaft ist taghell)"
 
 #: src/ui_viewDialog.h:1321
 msgid "Use minimal brightness as may be specified in landscape.ini"
-msgstr ""
+msgstr "Verwende Minimalhelligkeit aus landscape.ini"
 
 #: src/ui_viewDialog.h:1323
 msgid "from landscape, if given"
-msgstr ""
+msgstr "aus Landschaft, wenn angegeben"
 
 #: src/ui_viewDialog.h:1324
 msgid "Add/remove landscapes..."
