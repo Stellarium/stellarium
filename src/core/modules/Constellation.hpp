@@ -2,6 +2,7 @@
  * Stellarium
  * Copyright (C) 2002 Fabien Chereau
  * Copyright (C) 2012 Timothy Reaves
+ * Copyright (C) 2014 Georg Zotti
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -26,6 +27,7 @@
 #include "StelFader.hpp"
 #include "StelTextureTypes.hpp"
 #include "StelSphereGeometry.hpp"
+#include "ConstellationMgr.hpp"
 
 #include <vector>
 #include <QString>
@@ -43,6 +45,8 @@ class StelPainter;
 //! boundary shape from @file constellations_boundaries.dat and an (optional) artistic pictorial representation.
 //! GZ NEW: The @var nativeName should be accessible in a GUI option, so that e.g. original names as written in a
 //! concrete book where a skyculture has been taken from can be assured even when translation is available.
+//! There is now a distinction between constellations and asterisms, which are "inofficial" figures within a sky culture.
+//! For example, Western sky culture has a "Big Dipper", "Coathanger", etc. These would be nice to see, but in different style.
 class Constellation : public StelObject
 {
 	friend class ConstellationMgr;
@@ -82,7 +86,7 @@ private:
 	bool read(const QString& record, StarMgr *starMgr);
 
 	//! Draw the constellation name
-	void drawName(StelPainter& sPainter) const;
+	void drawName(StelPainter& sPainter, ConstellationMgr::ConstellationDisplayStyle style) const;
 	//! Draw the constellation art
 	void drawArt(StelPainter& sPainter) const;
 	//! Draw the constellation boundary
@@ -148,10 +152,12 @@ private:
 	QString nameI18;
 	//! Name in english
 	QString englishName;
-	//! Name in native language
+	//! Name in native language. According to practice as of V0.13.1, this may be an empty string.
+	//! TODO: If empty, fill with untranslated third string.
 	QString nativeName;
 	//! Abbreviation (of the latin name for western constellations)
-	//! For non-western, a skyculture designer must invent it. (usually 2-4 letters)
+	//! For non-western, a skyculture designer must invent it. (usually 2-5 letters)
+	//! This MUST be filled and unique within a sky culture.
 	QString abbreviation;
 	//! Direction vector pointing on constellation name drawing position
 	Vec3d XYZname;

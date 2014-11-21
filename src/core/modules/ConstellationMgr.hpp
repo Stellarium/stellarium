@@ -87,6 +87,11 @@ class ConstellationMgr : public StelObjectModule
 			   READ getFlagLabels
 			   WRITE setFlagLabels
 			   NOTIFY namesDisplayedChanged)
+	Q_PROPERTY(ConstellationDisplayStyle constellationDisplayStyle
+			   READ getConstellationDisplayStyle
+			   WRITE setConstellationDisplayStyle
+			   NOTIFY constellationsDisplayStyleChanged)
+
 
 public:
 	//! Constructor
@@ -141,6 +146,13 @@ public:
 	virtual QStringList listAllObjects(bool inEnglish) const;
 	virtual QStringList listAllObjectsByType(const QString& objType, bool inEnglish) const { Q_UNUSED(objType) Q_UNUSED(inEnglish) return QStringList(); }
 	virtual QString getName() const { return "Constellations"; }
+	//! Describes how to display constellation labels. The viewDialog GUI has a combobox which corresponds to these values.
+	enum ConstellationDisplayStyle
+	{
+		constellationsAbbreviated = 0,
+		constellationsOriginal    = 1,
+		constellationsTranslated  = 2
+	};
 
 	///////////////////////////////////////////////////////////////////////////
 	// Properties setters and getters
@@ -215,6 +227,13 @@ public slots:
 	//! Get the font size used for constellation names display
 	float getFontSize() const;
 
+	//! set the way how contellation names are displayed: abbbreviated/as-given/translated
+	//! @param style acceptable values 0=abbreviated, 1=untranslated, 2=translated.
+	//! @note Will be cast to enum'ed value, but usually receives value from a QComboBox in the GUI.
+	void setConstellationDisplayStyle(int style);
+	//! get the way how contellation names are displayed: abbbreviated/as-given/translated
+	ConstellationDisplayStyle getConstellationDisplayStyle();
+
 signals:
 	void artDisplayedChanged(const bool displayed) const;
 	void artFadeDurationChanged(const float duration) const;
@@ -227,6 +246,7 @@ signals:
 	void linesDisplayedChanged(const bool displayed) const;
 	void namesColorChanged(const Vec3f & color) const;
 	void namesDisplayedChanged(const bool displayed) const;
+	void constellationsDisplayStyleChanged(const ConstellationDisplayStyle style) const;
 
 private slots:
 	//! Limit the number of constellations to draw based on selected stars.
@@ -320,6 +340,9 @@ private:
 	std::vector<std::vector<Vec3f> *> allBoundarySegments;
 
 	QString lastLoadedSkyCulture;	// Store the last loaded sky culture directory name
+
+	//! this controls how constellations (and also star names) are printed: Abbreviated/as-given/translated
+	ConstellationDisplayStyle constellationDisplayStyle;
 
 	// These are THE master settings - individual constellation settings can vary based on selection status
 	float artFadeDuration;

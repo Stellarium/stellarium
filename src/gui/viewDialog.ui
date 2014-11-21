@@ -346,7 +346,7 @@
       <item alignment="Qt::AlignTop">
        <widget class="QStackedWidget" name="stackedWidget">
         <property name="currentIndex">
-         <number>3</number>
+         <number>4</number>
         </property>
         <widget class="QWidget" name="page">
          <layout class="QGridLayout" name="gridLayout">
@@ -1893,7 +1893,10 @@
             <property name="title">
              <string>Options</string>
             </property>
-            <layout class="QVBoxLayout" name="verticalLayout_8">
+            <layout class="QFormLayout" name="formLayout_2">
+             <property name="fieldGrowthPolicy">
+              <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
+             </property>
              <property name="leftMargin">
               <number>0</number>
              </property>
@@ -1906,23 +1909,27 @@
              <property name="bottomMargin">
               <number>0</number>
              </property>
-             <item>
+             <item row="0" column="0">
               <widget class="QCheckBox" name="useAsDefaultSkyCultureCheckBox">
                <property name="text">
                 <string>Use this sky culture as default</string>
                </property>
               </widget>
              </item>
-             <item>
-              <widget class="QCheckBox" name="useUntranslatedStarloreNamesCheckBox">
-               <property name="enabled">
-                <bool>true</bool>
-               </property>
-               <property name="toolTip">
-                <string>Use fixed names, regardless of language settings.</string>
-               </property>
+             <item row="1" column="0">
+              <widget class="QLabel" name="label">
                <property name="text">
-                <string>Do not translate constellation and star names</string>
+                <string>Show names</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="QComboBox" name="skyCultureNamesStyleComboBox">
+               <property name="toolTip">
+                <string>Select if you want names abbreviated, original or translated</string>
+               </property>
+               <property name="currentText">
+                <string/>
                </property>
               </widget>
              </item>
