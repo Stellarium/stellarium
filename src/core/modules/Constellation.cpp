@@ -26,6 +26,8 @@
 #include "StelPainter.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
+#include "StelModuleMgr.hpp"
+#include "ConstellationMgr.hpp"
 
 #include <algorithm>
 #include <QString>
@@ -121,15 +123,30 @@ void Constellation::drawOptim(StelPainter& sPainter, const StelCore* core, const
 	}
 }
 
-void Constellation::drawName(StelPainter& sPainter) const
+void Constellation::drawName(StelPainter& sPainter, ConstellationMgr::ConstellationDisplayStyle style) const
 {
 	if (!nameFader.getInterstate())
 		return;
 
 	if (checkVisibility())
 	{
+		QString name;
+		switch (style)
+		{
+			case ConstellationMgr::constellationsTranslated:
+				name=nameI18;
+				break;
+			case ConstellationMgr::constellationsOriginal:
+				name=englishName;
+				break;
+			case ConstellationMgr::constellationsAbbreviated:
+				name=abbreviation;
+				break;
+			Q_ASSERT(0);
+		}
+
 		sPainter.setColor(labelColor[0], labelColor[1], labelColor[2], nameFader.getInterstate());
-		sPainter.drawText(XYname[0], XYname[1], nameI18, 0., -sPainter.getFontMetrics().width(nameI18)/2, 0, false);
+		sPainter.drawText(XYname[0], XYname[1], name, 0., -sPainter.getFontMetrics().width(name)/2, 0, false);
 	}
 }
 

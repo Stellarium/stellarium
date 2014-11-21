@@ -49,6 +49,7 @@ using namespace std;
 // constructor which loads all data from appropriate files
 ConstellationMgr::ConstellationMgr(StarMgr *_hip_stars)
 	: hipStarMgr(_hip_stars),
+	  constellationDisplayStyle(ConstellationMgr::constellationsTranslated),
 	  artFadeDuration(1.),
 	  artIntensity(0),
 	  artDisplayed(0),
@@ -93,6 +94,26 @@ void ConstellationMgr::init()
 	setFlagArt(conf->value("viewing/flag_constellation_art").toBool());
 	setFlagIsolateSelected(conf->value("viewing/flag_constellation_isolate_selected",
 			       conf->value("viewing/flag_constellation_pick", false).toBool() ).toBool());
+
+	QString starloreDisplayStyle=conf->value("viewing/constellation_name_style", "translated").toString();
+	if (starloreDisplayStyle=="translated")
+	{
+		setConstellationDisplayStyle(constellationsTranslated);
+	}
+	else 	if (starloreDisplayStyle=="original")
+	{
+		setConstellationDisplayStyle(constellationsOriginal);
+	}
+	else 	if (starloreDisplayStyle=="abbreviated")
+	{
+		setConstellationDisplayStyle(constellationsAbbreviated);
+	}
+	else
+	{
+		qDebug() << "Warning: viewing/constellation_name_style (" << starloreDisplayStyle << ") invalid. Using translated style.";
+		conf->setValue("viewing/constellation_name_style", "translated");
+		setConstellationDisplayStyle(constellationsTranslated);
+	}
 
 	StelObjectMgr *objectManager = GETSTELMODULE(StelObjectMgr);
 	objectManager->registerStelObjectMgr(this);
@@ -311,6 +332,23 @@ float ConstellationMgr::getFontSize() const
 {
 	return asterFont.pixelSize();
 }
+
+void ConstellationMgr::setConstellationDisplayStyle(int style)
+{
+	constellationDisplayStyle=(ConstellationMgr::ConstellationDisplayStyle) style;
+
+	QSettings* conf = StelApp::getInstance().getSettings();
+	Q_ASSERT(conf);
+	conf->setValue("viewing/constellation_name_style",
+		       (constellationDisplayStyle == constellationsAbbreviated ? "abbreviated" : (constellationDisplayStyle == constellationsOriginal ? "original" : "translated")));
+	emit constellationsDisplayStyleChanged(constellationDisplayStyle);
+}
+
+ConstellationMgr::ConstellationDisplayStyle ConstellationMgr::getConstellationDisplayStyle()
+{
+	return constellationDisplayStyle;
+}
+
 
 void ConstellationMgr::loadLinesAndArt(const QString &fileName, const QString &artfileName, const QString& cultureName)
 {
@@ -563,7 +601,7 @@ void ConstellationMgr::drawNames(StelPainter& sPainter) const
 	{
 		// Check if in the field of view
 		if (sPainter.getProjector()->projectCheck((*iter)->XYZname, (*iter)->XYname))
-			(*iter)->drawName(sPainter);
+			(*iter)->drawName(sPainter, constellationDisplayStyle);
 	}
 }
 
