@@ -65,7 +65,6 @@ relative_scale                      = 1.0
 absolute_scale                      = 1.0
 star_twinkle_amount                 = 0.2
 flag_star_twinkle                   = true
-flag_point_star                     = false
 
 #Johannes:
 #I recommend setting mag_converter_max_fov to 180, so that the sky gets not so
