@@ -249,17 +249,8 @@ void ViewDialog::createDialogContent()
 	ui->autoChangeLandscapesCheckBox->setChecked(lmgr->getFlagLandscapeAutoSelection());
 	connect(ui->autoChangeLandscapesCheckBox, SIGNAL(toggled(bool)), lmgr, SLOT(setFlagLandscapeAutoSelection(bool)));
 	
-	// GZ: changes for refraction
-	//ui->pressureDoubleSpinBox->setValue(StelApp::getInstance().getCore()->getSkyDrawer()->getAtmospherePressure());
-	//connect(ui->pressureDoubleSpinBox, SIGNAL(valueChanged(double)), StelApp::getInstance().getCore()->getSkyDrawer(), SLOT(setAtmospherePressure(double)));
-	//ui->temperatureDoubleSpinBox->setValue(StelApp::getInstance().getCore()->getSkyDrawer()->getAtmosphereTemperature());
-	//connect(ui->temperatureDoubleSpinBox, SIGNAL(valueChanged(double)), StelApp::getInstance().getCore()->getSkyDrawer(), SLOT(setAtmosphereTemperature(double)));
-	//ui->extinctionDoubleSpinBox->setValue(StelApp::getInstance().getCore()->getSkyDrawer()->getExtinctionCoefficient());
-	//connect(ui->extinctionDoubleSpinBox, SIGNAL(valueChanged(double)), StelApp::getInstance().getCore()->getSkyDrawer(), SLOT(setExtinctionCoefficient(double)));
-	//// instead
+	// atmosphere details
 	connect(ui->pushButtonAtmosphereDetails, SIGNAL(clicked()), this, SLOT(showAtmosphereDialog()));
-	// GZ: Done
-
 
 	ui->useAsDefaultLandscapeCheckBox->setChecked(lmgr->getCurrentLandscapeID()==lmgr->getDefaultLandscapeID());
 	ui->useAsDefaultLandscapeCheckBox->setEnabled(lmgr->getCurrentLandscapeID()!=lmgr->getDefaultLandscapeID());
@@ -295,10 +286,11 @@ void ViewDialog::createDialogContent()
 	const bool b = StelApp::getInstance().getSkyCultureMgr().getCurrentSkyCultureID()==StelApp::getInstance().getSkyCultureMgr().getDefaultSkyCultureID();
 	ui->useAsDefaultSkyCultureCheckBox->setChecked(b);
 	ui->useAsDefaultSkyCultureCheckBox->setEnabled(!b);
-	// GZ NEW Inhibit translation. TODO: finish other connections?
-	connect(ui->useUntranslatedStarloreNamesCheckBox, SIGNAL(clicked(bool)), this, SLOT(setDontTranslateStarlore(bool)));
+	// GZ NEW allow to display short names and inhibit translation. TODO: finish other connections?
+	//connect(ui->skyCultureNamesStyleComboBox, SIGNAL(currentIndexChanged(int)), cmgr, SLOT(setConstellationDisplayStyle(ConstellationMgr::ConstellationDisplayStyle)));
+	connect(ui->skyCultureNamesStyleComboBox, SIGNAL(currentIndexChanged(int)), cmgr, SLOT(setConstellationDisplayStyle(int)));
 
-	// Sky layers
+	// Sky layers. This not yet finished and not visible in releases.
 	populateSkyLayersList();
 	connect(this, SIGNAL(visibleChanged(bool)), this, SLOT(populateSkyLayersList()));
 	connect(ui->skyLayerListWidget, SIGNAL(currentTextChanged(const QString&)), this, SLOT(skyLayersSelectionChanged(const QString&)));
@@ -383,6 +375,25 @@ void ViewDialog::populateLists()
 	l->setCurrentItem(l->findItems(StelApp::getInstance().getSkyCultureMgr().getCurrentSkyCultureNameI18(), Qt::MatchExactly).at(0));
 	l->blockSignals(false);
 	updateSkyCultureText();
+
+	// populate language printing combo. (taken from DeltaT combo)
+	ConstellationMgr* cmgr=GETSTELMODULE(ConstellationMgr);
+	Q_ASSERT(cmgr);
+	Q_ASSERT(ui->skyCultureNamesStyleComboBox);
+	QComboBox* cultureNamesStyleComboBox = ui->skyCultureNamesStyleComboBox;
+	//Save the current selection to be restored later
+	cultureNamesStyleComboBox->blockSignals(true);
+	int index; // = cultureNamesStyleComboBox->currentIndex();
+	QVariant selectedStyleId = cmgr->getConstellationDisplayStyle();
+	cultureNamesStyleComboBox->clear();
+	cultureNamesStyleComboBox->addItem(q_("Abbreviated"), ConstellationMgr::constellationsAbbreviated);
+	cultureNamesStyleComboBox->addItem(q_("Original"),    ConstellationMgr::constellationsOriginal);
+	cultureNamesStyleComboBox->addItem(q_("Translated"),  ConstellationMgr::constellationsTranslated);
+	//Restore the selection
+	index = cultureNamesStyleComboBox->findData(selectedStyleId, Qt::UserRole, Qt::MatchCaseSensitive);
+	if (index==-1) index=2; // Default: Translated
+	cultureNamesStyleComboBox->setCurrentIndex(index);
+	cultureNamesStyleComboBox->blockSignals(false);
 
 	const StelCore* core = StelApp::getInstance().getCore();	
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
@@ -472,6 +483,7 @@ void ViewDialog::skyCultureChanged(const QString& cultureName)
 	ui->useAsDefaultSkyCultureCheckBox->setEnabled(!b);
 }
 
+// fill the description text window, not the names in the sky.
 void ViewDialog::updateSkyCultureText()
 {
 	StelApp& app = StelApp::getInstance();
