@@ -254,6 +254,10 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 				oss << q_("Sidereal day: %1").arg(StelUtils::hoursToHmsStr(qAbs(siderealDay*24))) << "<br>";
 				oss << q_("Mean solar day: %1").arg(StelUtils::hoursToHmsStr(qAbs(getMeanSolarDay()*24))) << "<br>";
 			}
+			else if (re.period==0.)
+			{
+				oss << q_("The period of rotation is chaotic") << "<br>";
+			}
 		}
 		if (englishName.compare("Sun")!=0)
 		{
@@ -580,7 +584,12 @@ double Planet::getSiderealTime(double jd) const
 	}
 
 	double t = jd - re.epoch;
-	double rotations = t / (double) re.period;
+	// oops... avoid division by zero (typical case for moons with chaotic period of rotation)
+	double rotations = 1.f; // NOTE: Maybe 1e-3 will be better?
+	if (re.period!=0.) // OK, it's not a moon with chaotic period of rotation :)
+	{
+		rotations = t / (double) re.period;
+	}
 	double wholeRotations = floor(rotations);
 	double remainder = rotations - wholeRotations;
 
