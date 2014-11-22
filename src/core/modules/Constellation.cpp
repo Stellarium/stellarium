@@ -136,7 +136,10 @@ void Constellation::drawName(StelPainter& sPainter, ConstellationMgr::Constellat
 			case ConstellationMgr::constellationsTranslated:
 				name=nameI18;
 				break;
-			case ConstellationMgr::constellationsOriginal:
+			case ConstellationMgr::constellationsNative:
+				name=nativeName;
+				break;
+			case ConstellationMgr::constellationsEnglish:
 				name=englishName;
 				break;
 			case ConstellationMgr::constellationsAbbreviated:
