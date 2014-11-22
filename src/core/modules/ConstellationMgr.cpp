@@ -100,13 +100,17 @@ void ConstellationMgr::init()
 	{
 		setConstellationDisplayStyle(constellationsTranslated);
 	}
-	else 	if (starloreDisplayStyle=="original")
+	else if (starloreDisplayStyle=="native")
 	{
 		setConstellationDisplayStyle(constellationsNative);
 	}
-	else 	if (starloreDisplayStyle=="abbreviated")
+	else if (starloreDisplayStyle=="abbreviated")
 	{
 		setConstellationDisplayStyle(constellationsAbbreviated);
+	}
+	else if (starloreDisplayStyle=="english")
+	{
+		setConstellationDisplayStyle(constellationsEnglish);
 	}
 	else
 	{
@@ -340,7 +344,7 @@ void ConstellationMgr::setConstellationDisplayStyle(int style)
 	QSettings* conf = StelApp::getInstance().getSettings();
 	Q_ASSERT(conf);
 	conf->setValue("viewing/constellation_name_style",
-		       (constellationDisplayStyle == constellationsAbbreviated ? "abbreviated" : (constellationDisplayStyle == constellationsNative ? "original" : "translated")));
+		       (constellationDisplayStyle == constellationsAbbreviated ? "abbreviated" : (constellationDisplayStyle == constellationsNative ? "native" : "translated")));
 	emit constellationsDisplayStyleChanged(constellationDisplayStyle);
 }
 
@@ -622,13 +626,19 @@ Constellation *ConstellationMgr::isStarIn(const StelObject* s) const
 Constellation* ConstellationMgr::findFromAbbreviation(const QString& abbreviation) const
 {
 	// search in uppercase only
-	QString tname = abbreviation.toUpper();
+	//QString tname = abbreviation.toUpper();
 
 	vector < Constellation * >::const_iterator iter;
 	for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
 	{
-		if ((*iter)->abbreviation == tname)
+		//if ((*iter)->abbreviation.toUpper() == tname)
+		if ((*iter)->abbreviation.compare(abbreviation, Qt::CaseInsensitive) == 0)
+		{
+			//if ((*iter)->abbreviation != abbreviation)
+			//	qDebug() << "ConstellationMgr::findFromAbbreviation: not a perfect match, but sufficient:" << (*iter)->abbreviation << "vs." << abbreviation;
 			return (*iter);
+		}
+		//else qDebug() << "Comparison mismatch: " << abbreviation << "vs." << (*iter)->abbreviation;
 	}
 	return NULL;
 }
