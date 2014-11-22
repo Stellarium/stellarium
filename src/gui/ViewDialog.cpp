@@ -381,17 +381,16 @@ void ViewDialog::populateLists()
 	Q_ASSERT(cmgr);
 	Q_ASSERT(ui->skyCultureNamesStyleComboBox);
 	QComboBox* cultureNamesStyleComboBox = ui->skyCultureNamesStyleComboBox;
-	//Save the current selection to be restored later
 	cultureNamesStyleComboBox->blockSignals(true);
-	int index; // = cultureNamesStyleComboBox->currentIndex();
 	QVariant selectedStyleId = cmgr->getConstellationDisplayStyle();
 	cultureNamesStyleComboBox->clear();
-	cultureNamesStyleComboBox->addItem(q_("Abbreviated"), ConstellationMgr::constellationsAbbreviated);
-	cultureNamesStyleComboBox->addItem(q_("Original"),    ConstellationMgr::constellationsOriginal);
-	cultureNamesStyleComboBox->addItem(q_("Translated"),  ConstellationMgr::constellationsTranslated);
+	cultureNamesStyleComboBox->addItem(q_("Abbreviated"),  ConstellationMgr::constellationsAbbreviated);
+	cultureNamesStyleComboBox->addItem(q_("Native"),       ConstellationMgr::constellationsNative);  // Please still make this always a transcript into European letters!
+	cultureNamesStyleComboBox->addItem(q_("Translated"),   ConstellationMgr::constellationsTranslated);
+	//cultureNamesStyleComboBox->addItem(q_("English"),    ConstellationMgr::constellationsEnglish); // This is not useful.
 	//Restore the selection
-	index = cultureNamesStyleComboBox->findData(selectedStyleId, Qt::UserRole, Qt::MatchCaseSensitive);
-	if (index==-1) index=2; // Default: Translated
+	int index = cultureNamesStyleComboBox->findData(selectedStyleId, Qt::UserRole, Qt::MatchCaseSensitive);
+	if (index==-1) index=3; // Default: Translated
 	cultureNamesStyleComboBox->setCurrentIndex(index);
 	cultureNamesStyleComboBox->blockSignals(false);
 

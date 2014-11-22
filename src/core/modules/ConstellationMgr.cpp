@@ -102,7 +102,7 @@ void ConstellationMgr::init()
 	}
 	else 	if (starloreDisplayStyle=="original")
 	{
-		setConstellationDisplayStyle(constellationsOriginal);
+		setConstellationDisplayStyle(constellationsNative);
 	}
 	else 	if (starloreDisplayStyle=="abbreviated")
 	{
@@ -340,7 +340,7 @@ void ConstellationMgr::setConstellationDisplayStyle(int style)
 	QSettings* conf = StelApp::getInstance().getSettings();
 	Q_ASSERT(conf);
 	conf->setValue("viewing/constellation_name_style",
-		       (constellationDisplayStyle == constellationsAbbreviated ? "abbreviated" : (constellationDisplayStyle == constellationsOriginal ? "original" : "translated")));
+		       (constellationDisplayStyle == constellationsAbbreviated ? "abbreviated" : (constellationDisplayStyle == constellationsNative ? "original" : "translated")));
 	emit constellationsDisplayStyleChanged(constellationDisplayStyle);
 }
 
@@ -700,6 +700,9 @@ void ConstellationMgr::loadNames(const QString& namesFile)
 				aster->nativeName = recRx.capturedTexts().at(2);
 				aster->englishName = recRx.capturedTexts().at(3);
 				readOk++;
+				// Some skycultures already have empty nativeNames. Fill those.
+				if (aster->nativeName.isEmpty())
+					aster->nativeName=aster->englishName;
 			}
 			else
 			{
