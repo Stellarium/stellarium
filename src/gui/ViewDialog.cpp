@@ -286,8 +286,7 @@ void ViewDialog::createDialogContent()
 	const bool b = StelApp::getInstance().getSkyCultureMgr().getCurrentSkyCultureID()==StelApp::getInstance().getSkyCultureMgr().getDefaultSkyCultureID();
 	ui->useAsDefaultSkyCultureCheckBox->setChecked(b);
 	ui->useAsDefaultSkyCultureCheckBox->setEnabled(!b);
-	// GZ NEW allow to display short names and inhibit translation. TODO: finish other connections?
-	//connect(ui->skyCultureNamesStyleComboBox, SIGNAL(currentIndexChanged(int)), cmgr, SLOT(setConstellationDisplayStyle(ConstellationMgr::ConstellationDisplayStyle)));
+	// GZ NEW allow to display short names and inhibit translation.
 	connect(ui->skyCultureNamesStyleComboBox, SIGNAL(currentIndexChanged(int)), cmgr, SLOT(setConstellationDisplayStyle(int)));
 
 	// Sky layers. This not yet finished and not visible in releases.
@@ -382,15 +381,14 @@ void ViewDialog::populateLists()
 	Q_ASSERT(ui->skyCultureNamesStyleComboBox);
 	QComboBox* cultureNamesStyleComboBox = ui->skyCultureNamesStyleComboBox;
 	cultureNamesStyleComboBox->blockSignals(true);
-	QVariant selectedStyleId = cmgr->getConstellationDisplayStyle();
 	cultureNamesStyleComboBox->clear();
 	cultureNamesStyleComboBox->addItem(q_("Abbreviated"),  ConstellationMgr::constellationsAbbreviated);
-	cultureNamesStyleComboBox->addItem(q_("Native"),       ConstellationMgr::constellationsNative);  // Please still make this always a transcript into European letters!
+	cultureNamesStyleComboBox->addItem(q_("Native"),       ConstellationMgr::constellationsNative);  // Please make this always a transcript into European letters!
 	cultureNamesStyleComboBox->addItem(q_("Translated"),   ConstellationMgr::constellationsTranslated);
 	//cultureNamesStyleComboBox->addItem(q_("English"),    ConstellationMgr::constellationsEnglish); // This is not useful.
 	//Restore the selection
-	int index = cultureNamesStyleComboBox->findData(selectedStyleId, Qt::UserRole, Qt::MatchCaseSensitive);
-	if (index==-1) index=3; // Default: Translated
+	int index = cultureNamesStyleComboBox->findData(cmgr->getConstellationDisplayStyle(), Qt::UserRole, Qt::MatchCaseSensitive);
+	if (index==-1) index=2; // Default: Translated
 	cultureNamesStyleComboBox->setCurrentIndex(index);
 	cultureNamesStyleComboBox->blockSignals(false);
 
