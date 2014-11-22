@@ -67,7 +67,9 @@ bool Constellation::read(const QString& record, StarMgr *starMgr)
 	if (istr.status()!=QTextStream::Ok)
 		return false;
 
-	abbreviation = abb.toUpper();
+	// GZ: It's better to allow mixed-case abbreviations now that they can be displayed on screen. Maybe we then need toUpper() in comparisons, later?
+	//abbreviation = abb.toUpper();
+	abbreviation=abb;
 
 	asterism = new StelObjectP[numberOfSegments*2];
 	for (unsigned int i=0;i<numberOfSegments*2;++i)
