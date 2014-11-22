@@ -41,7 +41,7 @@ class StelPainter;
 //! Each Constellation consists of a list of stars identified by their
 //! @var abbreviation and Hipparcos catalogue numbers (taken from @file: constellationship.fab),
 //! another entry in @file constellation_names.eng.fab with the defining abbreviated name,
-//! @var nativeName, and translatable @var englishName,
+//! @var nativeName, and translatable @var englishName (translation goes into @var nameI18),
 //! boundary shape from @file constellations_boundaries.dat and an (optional) artistic pictorial representation.
 //! GZ NEW: The @var nativeName should be accessible in a GUI option, so that e.g. original names as written in a
 //! concrete book where a skyculture has been taken from can be assured even when translation is available.
@@ -150,14 +150,15 @@ private:
 
 	//! International name (translated using gettext)
 	QString nameI18;
-	//! Name in english
+	//! Name in english (column 3 in constellation_names.eng.fab)
 	QString englishName;
-	//! Name in native language. According to practice as of V0.13.1, this may be an empty string.
-	//! TODO: If empty, fill with untranslated third string.
+	//! Name in native language (column 2 in constellation_names.eng.fab).
+	//! According to practice as of V0.13.1, this may be an empty string.
+	//! If empty, will be filled with englishName.
 	QString nativeName;
 	//! Abbreviation (of the latin name for western constellations)
 	//! For non-western, a skyculture designer must invent it. (usually 2-5 letters)
-	//! This MUST be filled and unique within a sky culture.
+	//! This MUST be filled and be unique within a sky culture.
 	QString abbreviation;
 	//! Direction vector pointing on constellation name drawing position
 	Vec3d XYZname;

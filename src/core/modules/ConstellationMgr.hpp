@@ -150,8 +150,9 @@ public:
 	enum ConstellationDisplayStyle
 	{
 		constellationsAbbreviated = 0,
-		constellationsOriginal    = 1,
-		constellationsTranslated  = 2
+		constellationsNative      = 1,
+		constellationsTranslated  = 2,
+		constellationsEnglish     = 3 // Maybe this is not useful?
 	};
 
 	///////////////////////////////////////////////////////////////////////////
