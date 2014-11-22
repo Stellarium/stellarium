@@ -62,7 +62,7 @@ AddOnTableModel::AddOnTableModel(AddOn::Category category, QHash<AddOn::Type, St
 		case AddOn::TEXTURE:
 		{
 			m_addons = addons.value(AddOn::Texture);
-			m_iColumns << Title << Type << Version;
+			m_iColumns << Title << Version;
 			break;
 		}
 	}
