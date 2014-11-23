@@ -8,19 +8,19 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Stellarium 0.10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-11-09 00:56+0600\n"
+"POT-Creation-Date: 2014-11-22 01:40+0600\n"
 "PO-Revision-Date: 2014-09-28 16:12+0000\n"
 "Last-Translator: misibacsi <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-11-09 05:50+0000\n"
-"X-Generator: Launchpad (build 17231)\n"
+"X-Launchpad-Export-Date: 2014-11-22 05:06+0000\n"
+"X-Generator: Launchpad (build 17252)\n"
 "X-Poedit-Language: Hungarian\n"
 
 #: src/core/modules/ConstellationMgr.cpp:106 src/core/modules/StarMgr.cpp:346
-#: src/core/modules/GridLinesMgr.cpp:727 src/core/modules/LandscapeMgr.cpp:355
+#: src/core/modules/GridLinesMgr.cpp:726 src/core/modules/LandscapeMgr.cpp:355
 #: src/core/modules/NebulaMgr.cpp:126 src/core/modules/SolarSystem.cpp:159
 #: src/core/StelApp.cpp:487 src/core/StelCore.cpp:185
 #: src/core/StelSkyLayerMgr.cpp:87 src/StelMainView.cpp:363
@@ -47,8 +47,8 @@ msgstr "Csillagképek nevei"
 msgid "Constellation boundaries"
 msgstr "Csillagképek határai"
 
-#: src/core/modules/StarMgr.cpp:347 src/ui_viewDialog.h:1191
-#: src/ui_viewDialog.h:1223 src/ui_viewDialog.h:1249
+#: src/core/modules/StarMgr.cpp:347 src/ui_viewDialog.h:1210
+#: src/ui_viewDialog.h:1242 src/ui_viewDialog.h:1268
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:245
 msgid "Stars"
 msgstr "Csillagok"
@@ -57,75 +57,75 @@ msgstr "Csillagok"
 msgid "Stars labels"
 msgstr "Csillagok neve"
 
-#: src/core/modules/GridLinesMgr.cpp:578 src/ui_viewDialog.h:1273
+#: src/core/modules/GridLinesMgr.cpp:577 src/ui_viewDialog.h:1292
 msgid "Meridian"
 msgstr "Meridián"
 
-#: src/core/modules/GridLinesMgr.cpp:582 src/ui_viewDialog.h:1281
+#: src/core/modules/GridLinesMgr.cpp:581 src/ui_viewDialog.h:1300
 msgid "Ecliptic"
 msgstr "Ekliptika"
 
-#: src/core/modules/GridLinesMgr.cpp:586 src/ui_viewDialog.h:1269
+#: src/core/modules/GridLinesMgr.cpp:585 src/ui_viewDialog.h:1288
 msgid "Equator"
 msgstr "Egyenlítő"
 
-#: src/core/modules/GridLinesMgr.cpp:590 src/ui_viewDialog.h:1277
+#: src/core/modules/GridLinesMgr.cpp:589 src/ui_viewDialog.h:1296
 msgid "Horizon"
 msgstr "Horizont"
 
-#: src/core/modules/GridLinesMgr.cpp:594
+#: src/core/modules/GridLinesMgr.cpp:593
 msgid "Galactic Equator"
 msgstr "Galaktikus egyenlítő"
 
-#: src/core/modules/GridLinesMgr.cpp:728
+#: src/core/modules/GridLinesMgr.cpp:727
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:331
 msgid "Equatorial grid"
 msgstr "Egyenlítői rács"
 
-#: src/core/modules/GridLinesMgr.cpp:729 src/ui_viewDialog.h:1264
+#: src/core/modules/GridLinesMgr.cpp:728 src/ui_viewDialog.h:1283
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:326
 msgid "Azimuthal grid"
 msgstr "Azimut háló"
 
-#: src/core/modules/GridLinesMgr.cpp:730
+#: src/core/modules/GridLinesMgr.cpp:729
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:346
 msgid "Ecliptic line"
 msgstr "Ekliptika vonala"
 
-#: src/core/modules/GridLinesMgr.cpp:731
+#: src/core/modules/GridLinesMgr.cpp:730
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:341
 msgid "Equator line"
 msgstr "Egyenlítő vonala"
 
-#: src/core/modules/GridLinesMgr.cpp:732
+#: src/core/modules/GridLinesMgr.cpp:731
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:321
 msgid "Meridian line"
 msgstr "Meridiánvonal"
 
-#: src/core/modules/GridLinesMgr.cpp:733
+#: src/core/modules/GridLinesMgr.cpp:732
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:360
 msgid "Horizon line"
 msgstr "Horizontvonal"
 
-#: src/core/modules/GridLinesMgr.cpp:734
+#: src/core/modules/GridLinesMgr.cpp:733
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:336
 msgid "Equatorial J2000 grid"
 msgstr "Egyenlítői rács (J2000)"
 
-#: src/core/modules/GridLinesMgr.cpp:735
+#: src/core/modules/GridLinesMgr.cpp:734
 msgid "Ecliptic J2000 grid"
 msgstr "Ekliptikus rács J2000"
 
-#: src/core/modules/GridLinesMgr.cpp:736 src/ui_viewDialog.h:1265
+#: src/core/modules/GridLinesMgr.cpp:735 src/ui_viewDialog.h:1284
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:365
 msgid "Galactic grid"
 msgstr "Galaktikus hálózat"
 
-#: src/core/modules/GridLinesMgr.cpp:737 src/ui_viewDialog.h:1285
+#: src/core/modules/GridLinesMgr.cpp:736 src/ui_viewDialog.h:1304
 msgid "Galactic equator"
 msgstr "Galaktikus egyenlítő"
 
-#: src/core/modules/LandscapeMgr.cpp:356 src/ui_viewDialog.h:1213
+#: src/core/modules/LandscapeMgr.cpp:356 src/ui_viewDialog.h:1232
 msgid "Atmosphere"
 msgstr "Légkör"
 
@@ -133,7 +133,7 @@ msgstr "Légkör"
 msgid "Fog"
 msgstr "Köd"
 
-#: src/core/modules/LandscapeMgr.cpp:358 src/ui_viewDialog.h:1286
+#: src/core/modules/LandscapeMgr.cpp:358 src/ui_viewDialog.h:1305
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:303
 msgid "Cardinal points"
 msgstr "Égtájak"
@@ -150,16 +150,16 @@ msgstr ""
 msgid "Author: "
 msgstr "Szerző: "
 
-#: src/core/modules/LandscapeMgr.cpp:604
+#: src/core/modules/LandscapeMgr.cpp:607
 msgid "Location: "
 msgstr "Hely: "
 
-#: src/core/modules/LandscapeMgr.cpp:609
+#: src/core/modules/LandscapeMgr.cpp:612
 #, qt-format
 msgid ", %1 m"
 msgstr ", %1 m"
 
-#: src/core/modules/LandscapeMgr.cpp:613
+#: src/core/modules/LandscapeMgr.cpp:616
 msgid "Planet: "
 msgstr "Égi objektum: "
 
@@ -302,22 +302,26 @@ msgstr "Sziderikus nap: %1"
 msgid "Mean solar day: %1"
 msgstr "Középnap: %1"
 
-#: src/core/modules/Planet.cpp:261
+#: src/core/modules/Planet.cpp:259
+msgid "The period of rotation is chaotic"
+msgstr ""
+
+#: src/core/modules/Planet.cpp:265
 #, qt-format
 msgid "Phase Angle: %1"
 msgstr "Fázisszög: %1"
 
-#: src/core/modules/Planet.cpp:262
+#: src/core/modules/Planet.cpp:266
 #, qt-format
 msgid "Elongation: %1"
 msgstr "Elongáció: %1"
 
-#: src/core/modules/Planet.cpp:263
+#: src/core/modules/Planet.cpp:267
 #, qt-format
 msgid "Phase: %1"
 msgstr "Fázis: %1"
 
-#: src/core/modules/Planet.cpp:264
+#: src/core/modules/Planet.cpp:268
 #, qt-format
 msgid "Illuminated: %1%"
 msgstr "Megvilágítva: %1%"
@@ -659,11 +663,11 @@ msgstr "Kép tükrözése vízszintesen"
 msgid "Flip scene vertically"
 msgstr "Kép tükrözése függőlegesen"
 
-#: src/core/StelCore.cpp:1507
+#: src/core/StelCore.cpp:1508
 msgid "Correction is disabled. Use only if you know what you are doing!"
 msgstr "Korrekció kikapcsolva. Csak akkor alkalmazd, ha tudod mit csinálsz."
 
-#: src/core/StelCore.cpp:1510
+#: src/core/StelCore.cpp:1511
 #, qt-format
 msgid ""
 "This historical formula was obtained by C. Schoch in 1931 and was used by G. "
@@ -674,7 +678,7 @@ msgstr ""
 "az  <em>Einstein's Theory of Relativity Confirmed by Ancient Solar "
 "Eclipses</em> (%1) című cikkében. További információk %2itt%3."
 
-#: src/core/StelCore.cpp:1513
+#: src/core/StelCore.cpp:1514
 #, qt-format
 msgid ""
 "This empirical equation was published by G. M. Clemence in the article "
@@ -683,7 +687,7 @@ msgstr ""
 "Ezt a gyakorlati képletet  G. M. Clemence adta meg <em>On the system of "
 "astronomical constants</em> című cikkében (%1)."
 
-#: src/core/StelCore.cpp:1516
+#: src/core/StelCore.cpp:1517
 #, qt-format
 msgid ""
 "This formula is based on a study of post-1650 observations of the Sun, the "
@@ -696,7 +700,7 @@ msgstr ""
 "Formulae for Calculators</em> című munkájában. Az eljárást a PC-re írt "
 "SunTracker Pro program is használja."
 
-#: src/core/StelCore.cpp:1520
+#: src/core/StelCore.cpp:1521
 msgid ""
 "This is a slightly modified version of the IAU (1952) formula which was "
 "adopted in the <em>Astronomical Ephemeris</em> and in the <em>Canon of Solar "
@@ -706,7 +710,7 @@ msgstr ""
 "az 1983  <em>Astronomical Ephemeris</em> és a <em>Canon of Solar "
 "Eclipses</em> című munkáikban felhasználtak."
 
-#: src/core/StelCore.cpp:1524
+#: src/core/StelCore.cpp:1525
 msgid ""
 "The tables of Tuckerman (1962, 1964) list the positions of the Sun, the Moon "
 "and the planets at 5- and 10-day intervals from 601 BCE to 1649 CE. The same "
@@ -718,7 +722,7 @@ msgstr ""
 "ig. Ugyanezt az összefüggést alkalmazta   Goldstine a szembeállásokat megadó "
 "táblázatában (1973)."
 
-#: src/core/StelCore.cpp:1528
+#: src/core/StelCore.cpp:1529
 #, qt-format
 msgid ""
 "This equation was published by P. M. Muller and F. R. Stephenson in the "
@@ -729,7 +733,7 @@ msgstr ""
 "accelerations of the earth and moon from early astronomical "
 "observations</em> című cikkében (%1)."
 
-#: src/core/StelCore.cpp:1531
+#: src/core/StelCore.cpp:1532
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson in the article <em>Pre-"
@@ -738,7 +742,7 @@ msgstr ""
 "Ezt a képletet F. R. Stephenson publikálta  a <em>Pre-Telescopic "
 "Astronomical Observations</em> című cikkében (%1)."
 
-#: src/core/StelCore.cpp:1534
+#: src/core/StelCore.cpp:1535
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation (outdated and superseded by Schmadel & "
@@ -751,7 +755,7 @@ msgstr ""
 "1975</em> (%1) című cikkében.   Korszerűbb és pontosabb változatát Schmadel "
 "& Zech közölte 1988-ban."
 
-#: src/core/StelCore.cpp:1537
+#: src/core/StelCore.cpp:1538
 msgid ""
 "This algorithm was adopted in P. Bretagnon & L. Simon's <em>Planetary "
 "Programs and Tables from -4000 to +2800</em> (1986) and in the PC "
@@ -761,7 +765,7 @@ msgstr ""
 "and Tables from -4000 to +2800</em> (1986) című cikkében és a RedShift nevű "
 "PC-s planetáriumprogram is ezt használja."
 
-#: src/core/StelCore.cpp:1540
+#: src/core/StelCore.cpp:1541
 #, qt-format
 msgid ""
 "This formula was published by F. R. Stephenson and L. V. Morrison in the "
@@ -772,12 +776,12 @@ msgstr ""
 "changes in the rotation of the earth - 700 B.C. to A.D. 1980</em> (%1) című "
 "cikkében."
 
-#: src/core/StelCore.cpp:1543
+#: src/core/StelCore.cpp:1544
 msgid "This algorithm is used in the PC planetarium program Guide 7."
 msgstr ""
 "Ezt az algoritmust használja a Guide 7 nevű PC-s planetárium-program."
 
-#: src/core/StelCore.cpp:1546
+#: src/core/StelCore.cpp:1547
 msgid ""
 "This algorithm was given by F. Espenak in his <em>Fifty Year Canon of Solar "
 "Eclipses: 1986-2035</em> (1987) and in his <em>Fifty Year Canon of Lunar "
@@ -787,7 +791,7 @@ msgstr ""
 "Eclipses: 1986-2035</em> (1987) című, és a <em>Fifty Year Canon of Lunar "
 "Eclipses: 1986-2035</em> (1989) című cikkében."
 
-#: src/core/StelCore.cpp:1549
+#: src/core/StelCore.cpp:1550
 #, qt-format
 msgid ""
 "This formula was obtained by K.M. Borkowski (%1) from an analysis of 31 "
@@ -796,7 +800,7 @@ msgstr ""
 "Ezt a képletet K.M. Borkowski (%1) adta meg 31 napfogyatkozás adatainak "
 "elemzése után  (i.e. 2137 és i.e. 1715 között)."
 
-#: src/core/StelCore.cpp:1552
+#: src/core/StelCore.cpp:1553
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation was published by L. D. Schmadel and G. "
@@ -809,7 +813,7 @@ msgstr ""
 "cikkében, ezek az adatok illeszkedtek legjobban a Stephenson és Morrison "
 "(1984) által megadott értékekhez."
 
-#: src/core/StelCore.cpp:1555
+#: src/core/StelCore.cpp:1556
 msgid ""
 "This formula was adopted by M. Chapront-Touze & J. Chapront in the shortened "
 "version of the ELP 2000-85 lunar theory in their <em>Lunar Tables and "
@@ -819,7 +823,7 @@ msgstr ""
 "rövidített változata alapján. Cikkük <em>Lunar Tables and Programs from 4000 "
 "B.C. to A.D. 8000</em> (1991) címmel jelent meg."
 
-#: src/core/StelCore.cpp:1558
+#: src/core/StelCore.cpp:1559
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson and L. V. Morrison in the "
@@ -830,7 +834,7 @@ msgstr ""
 "Fluctuations in the Earth's Rotation: 700 BC to AD 1990</em> (%1) című "
 "cikkben közölték."
 
-#: src/core/StelCore.cpp:1561
+#: src/core/StelCore.cpp:1562
 #, qt-format
 msgid ""
 "F. R. Stephenson published this formula in his book <em>Historical Eclipses "
@@ -839,7 +843,7 @@ msgstr ""
 "F. R. Stephenson publikálta ezt a képletet  a <em>Historical Eclipses and "
 "Earth's Rotation</em> (%1) című könyvében."
 
-#: src/core/StelCore.cpp:1564
+#: src/core/StelCore.cpp:1565
 msgid ""
 "From J. Meeus, <em>Astronomical Algorithms</em> (2nd ed., 1998), and widely "
 "used. Table for 1620..2000, and includes a variant of Chapront, Chapront-"
@@ -850,7 +854,7 @@ msgstr ""
 "Chapront, Chapront-Touze és Francou (1997) kiegészítésével az  ezen kívüli "
 "időszakokra."
 
-#: src/core/StelCore.cpp:1567
+#: src/core/StelCore.cpp:1568
 #, qt-format
 msgid ""
 "The JPL Solar System Dynamics Group of the NASA Jet Propulsion Laboratory "
@@ -859,7 +863,7 @@ msgstr ""
 "A JPL Solar System Dynamics Group (NASA), és a Jet Propulsion Laboratory "
 "használja ezt a képletet interaktív weboldalukon: %1JPL Horizons%2."
 
-#: src/core/StelCore.cpp:1570
+#: src/core/StelCore.cpp:1571
 #, qt-format
 msgid ""
 "This polynome was published by J. Meeus and L. Simons in article "
@@ -868,7 +872,7 @@ msgstr ""
 "Ezt a polinomot J. Meeus és L. Simons közli  a <em>Polynomial approximations "
 "to Delta T, 1620-2000 AD</em> (%1) című cikkében."
 
-#: src/core/StelCore.cpp:1573
+#: src/core/StelCore.cpp:1574
 msgid ""
 "The fourth edition of O. Montenbruck & T. Pfleger's <em>Astronomy on the "
 "Personal Computer</em> (2000) provides simple 3rd-order polynomial data fits "
@@ -879,7 +883,7 @@ msgstr ""
 "fokú képletet  is megadnak, ami jól illeszkedik a legutóbbi időszak "
 "adataihoz."
 
-#: src/core/StelCore.cpp:1576
+#: src/core/StelCore.cpp:1577
 msgid ""
 "E. M. Reingold & N. Dershowitz present this polynomial data fit in "
 "<em>Calendrical Calculations</em> (3rd ed. 2007) and in their "
@@ -891,7 +895,7 @@ msgstr ""
 "(2002) című könyvükben. A képlet Jean Meeus <em>Astronomical Algorithms</em> "
 "(1991) című munkáján alapszik."
 
-#: src/core/StelCore.cpp:1579
+#: src/core/StelCore.cpp:1580
 #, qt-format
 msgid ""
 "This important solution was published by L. V. Morrison and F. R. Stephenson "
@@ -902,7 +906,7 @@ msgstr ""
 "values of the Earth's clock error %1T and the calculation of eclipses</em> "
 "(%2)  című cikkében jelent meg. Kiegészítés:  (%3)."
 
-#: src/core/StelCore.cpp:1582
+#: src/core/StelCore.cpp:1583
 #, qt-format
 msgid ""
 "From the Length of Day (LOD; as determined by Stephenson & Morrison (%2)), "
@@ -911,7 +915,7 @@ msgid ""
 "by Stephenson (%2). See for more info %3here%4."
 msgstr ""
 
-#: src/core/StelCore.cpp:1585
+#: src/core/StelCore.cpp:1586
 #, qt-format
 msgid ""
 "This solution by F. Espenak and J. Meeus, based on Morrison & Stephenson "
@@ -927,11 +931,11 @@ msgstr ""
 "alkalmazza a Nap, a Hold és a bolygók efemeriszét számító SOLEX "
 "csillagászati program is."
 
-#: src/core/StelCore.cpp:1585
+#: src/core/StelCore.cpp:1586
 msgid "Used by default."
 msgstr "Alapértelmezés."
 
-#: src/core/StelCore.cpp:1588
+#: src/core/StelCore.cpp:1589
 #, qt-format
 msgid ""
 "This solution by B. Banjevic, based on Stephenson & Morrison (1984), was "
@@ -942,7 +946,7 @@ msgstr ""
 "megjelent az <em>Ancient eclipses and dating the fall of Babylon</em> "
 "cikkben  (%1)."
 
-#: src/core/StelCore.cpp:1591
+#: src/core/StelCore.cpp:1592
 #, qt-format
 msgid ""
 "This solution by S. Islam, M. Sadiq and M. S. Qureshi, based on Meeus & "
@@ -953,42 +957,42 @@ msgstr ""
 "munkáján alapul, ez <em>Error Minimization of Polynomial Approximation of "
 "DeltaT</em> (%1) címmel jelent meg, átdolgozva Sana Islam által 2013-ban."
 
-#: src/core/StelCore.cpp:1594
+#: src/core/StelCore.cpp:1595
 #, qt-format
 msgid ""
 "This is a quadratic formula for calculation of %1T with coefficients defined "
 "by the user."
 msgstr ""
 
-#: src/core/StelCore.cpp:1597 src/core/SimbadSearcher.cpp:133
+#: src/core/StelCore.cpp:1598 src/core/SimbadSearcher.cpp:133
 msgid "Error"
 msgstr "Hiba"
 
-#: src/core/StelCore.cpp:1647
+#: src/core/StelCore.cpp:1648
 msgid "with meaningless values outside this range"
 msgstr ""
 
-#: src/core/StelCore.cpp:1673
+#: src/core/StelCore.cpp:1674
 msgid ""
 "with a mean error of less than one second, max. error 1.9s, and meaningless "
 "values outside this range"
 msgstr ""
 
-#: src/core/StelCore.cpp:1695 src/core/StelCore.cpp:1700
-#: src/core/StelCore.cpp:1727 src/core/StelCore.cpp:1732
+#: src/core/StelCore.cpp:1696 src/core/StelCore.cpp:1701
+#: src/core/StelCore.cpp:1728 src/core/StelCore.cpp:1733
 msgid "with zero values outside this range"
 msgstr ""
 
-#: src/core/StelCore.cpp:1705
+#: src/core/StelCore.cpp:1706
 msgid "with a typical 1-second accuracy and zero values outside this range"
 msgstr ""
 
-#: src/core/StelCore.cpp:1742
+#: src/core/StelCore.cpp:1743
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2, %3."
 msgstr "Érvényes időtartomány %1 és %2, %3 között."
 
-#: src/core/StelCore.cpp:1744
+#: src/core/StelCore.cpp:1745
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2."
 msgstr "Érvényességi időszak: %1 és %2 év között"
@@ -1183,26 +1187,26 @@ msgstr "Elérhető"
 msgid "Select screenshot directory"
 msgstr "Válaszd ki a rögzített képek mappáját"
 
-#: src/gui/ConfigurationDialog.cpp:687
+#: src/gui/ConfigurationDialog.cpp:690
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr "Kezdeti látószög: %1%2"
 
-#: src/gui/ConfigurationDialog.cpp:695
+#: src/gui/ConfigurationDialog.cpp:698
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "Kezdeti látóirány Az/Alt: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:752
+#: src/gui/ConfigurationDialog.cpp:755
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:392
 msgid "Authors"
 msgstr "Szerzők"
 
-#: src/gui/ConfigurationDialog.cpp:753 src/gui/ViewDialog.cpp:452
+#: src/gui/ConfigurationDialog.cpp:756 src/gui/ViewDialog.cpp:456
 msgid "Contact"
 msgstr "Kapcsolat"
 
-#: src/gui/ConfigurationDialog.cpp:755
+#: src/gui/ConfigurationDialog.cpp:758
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:89
 #: plugins/Oculars/src/gui/OcularDialog.cpp:505
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:391
@@ -1216,7 +1220,7 @@ msgstr "Kapcsolat"
 msgid "Version"
 msgstr "Verzió"
 
-#: src/gui/ConfigurationDialog.cpp:838
+#: src/gui/ConfigurationDialog.cpp:841
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:90
 #: plugins/Oculars/src/gui/OcularDialog.cpp:506
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:118
@@ -1229,23 +1233,23 @@ msgstr "Verzió"
 msgid "Author"
 msgstr "Szerző"
 
-#: src/gui/ConfigurationDialog.cpp:842
+#: src/gui/ConfigurationDialog.cpp:845
 msgid "License"
 msgstr "Licensz"
 
-#: src/gui/ConfigurationDialog.cpp:846
+#: src/gui/ConfigurationDialog.cpp:849
 msgid "Shortcut"
 msgstr "Gyorsmenü"
 
-#: src/gui/ConfigurationDialog.cpp:870
+#: src/gui/ConfigurationDialog.cpp:873
 msgid "Running script: "
 msgstr "Futó szkript: "
 
-#: src/gui/ConfigurationDialog.cpp:877
+#: src/gui/ConfigurationDialog.cpp:880
 msgid "Running script: [none]"
 msgstr "Futó szkript [nincs]:"
 
-#: src/gui/ConfigurationDialog.cpp:942
+#: src/gui/ConfigurationDialog.cpp:945
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
@@ -1253,23 +1257,23 @@ msgstr ""
 "Csillag katalógusok letöltve!\n"
 "Indítsa újra a Stellariumot, hogy láthatóvá váljanak!"
 
-#: src/gui/ConfigurationDialog.cpp:946
+#: src/gui/ConfigurationDialog.cpp:949
 msgid "All available star catalogs have been installed."
 msgstr "Az összes elérhető csillagkatalógus sikeresen telepítve."
 
-#: src/gui/ConfigurationDialog.cpp:951
+#: src/gui/ConfigurationDialog.cpp:954
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "A(z) %1 katalógus beszerzése %2 -ból"
 
-#: src/gui/ConfigurationDialog.cpp:958
+#: src/gui/ConfigurationDialog.cpp:961
 #, qt-format
 msgid ""
 "Downloading %1...\n"
 "(You can close this window.)"
 msgstr "Letöltés %1..."
 
-#: src/gui/ConfigurationDialog.cpp:965
+#: src/gui/ConfigurationDialog.cpp:968
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -1280,7 +1284,7 @@ msgstr ""
 "Csillagszámláló: %2 Millió\n"
 "Fényintenzitási skála: %3 - %4"
 
-#: src/gui/ConfigurationDialog.cpp:1008 src/gui/ConfigurationDialog.cpp:1042
+#: src/gui/ConfigurationDialog.cpp:1011 src/gui/ConfigurationDialog.cpp:1045
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -1289,11 +1293,11 @@ msgstr ""
 "Hiba a letöltésben %1:\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:1095
+#: src/gui/ConfigurationDialog.cpp:1098
 msgid "Verifying file integrity..."
 msgstr "Az állomány épségének ellenőrzése"
 
-#: src/gui/ConfigurationDialog.cpp:1099
+#: src/gui/ConfigurationDialog.cpp:1102
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -1303,123 +1307,123 @@ msgstr ""
 "Sérült állomány"
 
 #. TRANSLATORS: Full phrase is "Algorithm of DeltaT"
-#: src/gui/ConfigurationDialog.cpp:1172
+#: src/gui/ConfigurationDialog.cpp:1175
 msgid "Algorithm of"
 msgstr "DeltaT algoritmusa,"
 
-#: src/gui/ConfigurationDialog.cpp:1183
+#: src/gui/ConfigurationDialog.cpp:1186
 msgid "Without correction"
 msgstr "Korrekció nélkül"
 
-#: src/gui/ConfigurationDialog.cpp:1184
+#: src/gui/ConfigurationDialog.cpp:1187
 msgid "Schoch (1931)"
 msgstr "Schoch (1931)"
 
-#: src/gui/ConfigurationDialog.cpp:1185
+#: src/gui/ConfigurationDialog.cpp:1188
 msgid "Clemence (1948)"
 msgstr "Clemence (1948)"
 
-#: src/gui/ConfigurationDialog.cpp:1186
+#: src/gui/ConfigurationDialog.cpp:1189
 msgid "IAU (1952)"
 msgstr "IAU (1952)"
 
-#: src/gui/ConfigurationDialog.cpp:1187
+#: src/gui/ConfigurationDialog.cpp:1190
 msgid "Astronomical Ephemeris (1960)"
 msgstr "Astronomical Ephemeris (1960)"
 
-#: src/gui/ConfigurationDialog.cpp:1188
+#: src/gui/ConfigurationDialog.cpp:1191
 msgid "Tuckerman (1962, 1964) & Goldstine (1973)"
 msgstr "Tuckerman (1962, 1964) & Goldstine (1973)"
 
-#: src/gui/ConfigurationDialog.cpp:1189
+#: src/gui/ConfigurationDialog.cpp:1192
 msgid "Muller & Stephenson (1975)"
 msgstr "Muller & Stephenson (1975)"
 
-#: src/gui/ConfigurationDialog.cpp:1190
+#: src/gui/ConfigurationDialog.cpp:1193
 msgid "Stephenson (1978)"
 msgstr "Stephenson (1978)"
 
-#: src/gui/ConfigurationDialog.cpp:1191
+#: src/gui/ConfigurationDialog.cpp:1194
 msgid "Schmadel & Zech (1979)"
 msgstr "Schmadel & Zech (1979)"
 
-#: src/gui/ConfigurationDialog.cpp:1192
+#: src/gui/ConfigurationDialog.cpp:1195
 msgid "Morrison & Stephenson (1982)"
 msgstr "Morrison & Stephenson (1982)"
 
-#: src/gui/ConfigurationDialog.cpp:1193
+#: src/gui/ConfigurationDialog.cpp:1196
 msgid "Stephenson & Morrison (1984)"
 msgstr "Stephenson & Morrison (1984)"
 
-#: src/gui/ConfigurationDialog.cpp:1194
+#: src/gui/ConfigurationDialog.cpp:1197
 msgid "Stephenson & Houlden (1986)"
 msgstr "Stephenson & Houlden (1986)"
 
-#: src/gui/ConfigurationDialog.cpp:1195
+#: src/gui/ConfigurationDialog.cpp:1198
 msgid "Espenak (1987, 1989)"
 msgstr "Espenak (1987, 1989)"
 
-#: src/gui/ConfigurationDialog.cpp:1196
+#: src/gui/ConfigurationDialog.cpp:1199
 msgid "Borkowski (1988)"
 msgstr "Borkowski (1988)"
 
-#: src/gui/ConfigurationDialog.cpp:1197
+#: src/gui/ConfigurationDialog.cpp:1200
 msgid "Schmadel & Zech (1988)"
 msgstr "Schmadel & Zech (1988)"
 
-#: src/gui/ConfigurationDialog.cpp:1198
+#: src/gui/ConfigurationDialog.cpp:1201
 msgid "Chapront-Touze & Chapront (1991)"
 msgstr "Chapront-Touze & Chapront (1991)"
 
-#: src/gui/ConfigurationDialog.cpp:1199
+#: src/gui/ConfigurationDialog.cpp:1202
 msgid "Stephenson & Morrison (1995)"
 msgstr "Stephenson & Morrison (1995)"
 
-#: src/gui/ConfigurationDialog.cpp:1200
+#: src/gui/ConfigurationDialog.cpp:1203
 msgid "Stephenson (1997)"
 msgstr "Stephenson (1997)"
 
-#: src/gui/ConfigurationDialog.cpp:1202
+#: src/gui/ConfigurationDialog.cpp:1205
 msgid "Meeus (1998) (with Chapront, Chapront-Touze & Francou (1997))"
 msgstr "Meeus (1998) (továbbá Chapront, Chapront-Touze & Francou (1997))"
 
-#: src/gui/ConfigurationDialog.cpp:1203
+#: src/gui/ConfigurationDialog.cpp:1206
 msgid "JPL Horizons"
 msgstr "JPL Horizons"
 
-#: src/gui/ConfigurationDialog.cpp:1204
+#: src/gui/ConfigurationDialog.cpp:1207
 msgid "Meeus & Simons (2000)"
 msgstr "Meeus & Simons (2000)"
 
-#: src/gui/ConfigurationDialog.cpp:1205
+#: src/gui/ConfigurationDialog.cpp:1208
 msgid "Montenbruck & Pfleger (2000)"
 msgstr "Montenbruck & Pfleger (2000)"
 
-#: src/gui/ConfigurationDialog.cpp:1206
+#: src/gui/ConfigurationDialog.cpp:1209
 msgid "Reingold & Dershowitz (2002, 2007)"
 msgstr "Reingold & Dershowitz (2002, 2007)"
 
-#: src/gui/ConfigurationDialog.cpp:1207
+#: src/gui/ConfigurationDialog.cpp:1210
 msgid "Morrison & Stephenson (2004, 2005)"
 msgstr "Morrison & Stephenson (2004, 2005)"
 
-#: src/gui/ConfigurationDialog.cpp:1209
+#: src/gui/ConfigurationDialog.cpp:1212
 msgid "Espenak & Meeus (2006)"
 msgstr "Espenak & Meeus (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:1210
+#: src/gui/ConfigurationDialog.cpp:1213
 msgid "Reijs (2006)"
 msgstr "Reijs (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:1211
+#: src/gui/ConfigurationDialog.cpp:1214
 msgid "Banjevic (2006)"
 msgstr "Banjevic (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:1212
+#: src/gui/ConfigurationDialog.cpp:1215
 msgid "Islam, Sadiq & Qureshi (2008, 2013)"
 msgstr "Islam, Sadiq & Qureshi (2008, 2013)"
 
-#: src/gui/ConfigurationDialog.cpp:1213
+#: src/gui/ConfigurationDialog.cpp:1216
 #, qt-format
 msgid "Custom equation of %1T"
 msgstr "%1T egyéni kiszámítása"
@@ -1715,99 +1719,99 @@ msgid "Frames per second"
 msgstr "Másodpercenkénti képkockaszám"
 
 #. TRANSLATORS: Short description for Class 1 of the Bortle scale
-#: src/gui/ViewDialog.cpp:338
+#: src/gui/ViewDialog.cpp:342
 msgid "Excellent dark-sky site"
 msgstr "Kivételesen sötét égbolt"
 
 #. TRANSLATORS: Short description for Class 2 of the Bortle scale
-#: src/gui/ViewDialog.cpp:340
+#: src/gui/ViewDialog.cpp:344
 msgid "Typical truly dark site"
 msgstr "Átlagosan sötét égbolt"
 
 #. TRANSLATORS: Short description for Class 3 of the Bortle scale
-#: src/gui/ViewDialog.cpp:342
+#: src/gui/ViewDialog.cpp:346
 msgid "Rural sky"
 msgstr "Vidéki égbolt"
 
 #. TRANSLATORS: Short description for Class 4 of the Bortle scale
-#: src/gui/ViewDialog.cpp:344
+#: src/gui/ViewDialog.cpp:348
 msgid "Rural/suburban transition"
 msgstr "Vidéki/kertvárosi átmenet"
 
 #. TRANSLATORS: Short description for Class 5 of the Bortle scale
-#: src/gui/ViewDialog.cpp:346
+#: src/gui/ViewDialog.cpp:350
 msgid "Suburban sky"
 msgstr "Külvárosi égbolt"
 
 #. TRANSLATORS: Short description for Class 6 of the Bortle scale
-#: src/gui/ViewDialog.cpp:348
+#: src/gui/ViewDialog.cpp:352
 msgid "Bright suburban sky"
 msgstr "Világos külvárosi égbolt"
 
 #. TRANSLATORS: Short description for Class 7 of the Bortle scale
-#: src/gui/ViewDialog.cpp:350
+#: src/gui/ViewDialog.cpp:354
 msgid "Suburban/urban transition"
 msgstr "Külvárosi/városi átmenet"
 
 #. TRANSLATORS: Short description for Class 8 of the Bortle scale
-#: src/gui/ViewDialog.cpp:352
+#: src/gui/ViewDialog.cpp:356
 msgid "City sky"
 msgstr "Városi égbolt"
 
 #. TRANSLATORS: Short description for Class 9 of the Bortle scale
-#: src/gui/ViewDialog.cpp:354
+#: src/gui/ViewDialog.cpp:358
 msgid "Inner-city sky"
 msgstr "Nagyvárosi égbolt"
 
-#: src/gui/ViewDialog.cpp:368
+#: src/gui/ViewDialog.cpp:372
 msgid "The naked-eye limiting magnitude is"
 msgstr "A szabadszemes megfigyelés magnitúdó-határa"
 
-#: src/gui/ViewDialog.cpp:500
+#: src/gui/ViewDialog.cpp:504
 msgid "No description"
 msgstr "Nincs leírás"
 
-#: src/gui/ViewDialog.cpp:588
+#: src/gui/ViewDialog.cpp:592
 msgid "No shooting stars"
 msgstr "Nincsenek hullócsillagok"
 
-#: src/gui/ViewDialog.cpp:596
+#: src/gui/ViewDialog.cpp:600
 msgid "Normal rate"
 msgstr "Normál gyakoriság"
 
-#: src/gui/ViewDialog.cpp:599
+#: src/gui/ViewDialog.cpp:603
 msgid "Standard Orionids rate"
 msgstr "Átlagos Orionidák gyakoriság"
 
-#: src/gui/ViewDialog.cpp:602
+#: src/gui/ViewDialog.cpp:606
 msgid "Standard Perseids rate"
 msgstr "Szokásos Perzeida-gyakoriság"
 
-#: src/gui/ViewDialog.cpp:605
+#: src/gui/ViewDialog.cpp:609
 msgid "Standard Geminids rate"
 msgstr "Átlagos Geminidák gyakoriság"
 
-#: src/gui/ViewDialog.cpp:608
+#: src/gui/ViewDialog.cpp:612
 msgid "Exceptional Perseid rate"
 msgstr "Kivételes Perseidák gyakoriság"
 
-#: src/gui/ViewDialog.cpp:611
+#: src/gui/ViewDialog.cpp:615
 msgid "Meteor storm rate"
 msgstr "Meteorzáporok gyakorisága"
 
-#: src/gui/ViewDialog.cpp:614
+#: src/gui/ViewDialog.cpp:618
 msgid "Exceptional Draconid rate"
 msgstr "Kivételes Drakonidák gyakoriság"
 
-#: src/gui/ViewDialog.cpp:617
+#: src/gui/ViewDialog.cpp:621
 msgid "Exceptional Leonid rate"
 msgstr "Rendkívüli Leonida-gyakoriság"
 
-#: src/gui/ViewDialog.cpp:620
+#: src/gui/ViewDialog.cpp:624
 msgid "Very high rate (1966 Leonids)"
 msgstr "Nagyon nagy gyakoriság (1966-os Leonidák)"
 
-#: src/gui/ViewDialog.cpp:623
+#: src/gui/ViewDialog.cpp:627
 msgid "Highest rate ever (1833 Leonids)"
 msgstr "Az eddigi legnagyobb gyakoriság (1833-as Leonidák)"
 
@@ -2504,7 +2508,7 @@ msgid "plutoid"
 msgstr "plutoida"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:189 src/ui_viewDialog.h:1192
+#: src/translations.h:189 src/ui_viewDialog.h:1211
 msgid "Planets"
 msgstr "Bolygók"
 
@@ -2691,170 +2695,175 @@ msgstr "Genf"
 msgid "Grossmugl"
 msgstr "Grossmugl"
 
+#. TRANSLATORS: Name of landscape
+#: src/translations.h:268
+msgid "Zero Horizon"
+msgstr ""
+
 #. TRANSLATORS: Name of script
-#: src/translations.h:273
+#: src/translations.h:274
 msgid "Landscape Tour"
 msgstr "Tájkép túra"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:275
+#: src/translations.h:276
 msgid "Partial Lunar Eclipse"
 msgstr "Részleges holdfogyatkozás"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:277
+#: src/translations.h:278
 msgid "Total Lunar Eclipse"
 msgstr "Teljes holdfogyatkozás"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:279
+#: src/translations.h:280
 msgid "Screensaver"
 msgstr "Képernyőkímélő"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:281
+#: src/translations.h:282
 msgid "Solar Eclipse 2009"
 msgstr "2009-es napfogyatkozás"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:283
+#: src/translations.h:284
 msgid "Startup Script"
 msgstr "Induló szkript"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:285
+#: src/translations.h:286
 msgid "Zodiac"
 msgstr "Zodiákus"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:287
+#: src/translations.h:288
 msgid "Mercury Triple Sunrise and Sunset"
 msgstr "A Merkúr háromszoros napfelkeltéje és naplementéje"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:289
+#: src/translations.h:290
 msgid "Double eclipse from Deimos in 2017"
 msgstr "Kettős fogyatkozás a Deimosról 2017-ben"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:291
+#: src/translations.h:292
 msgid "Double eclipse from Deimos in 2031"
 msgstr "Kettős fogyatkozás a Deimosról 2031-ben"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:293
+#: src/translations.h:294
 msgid "Eclipse from Olympus Mons Jan 10 2068"
 msgstr "Fogyatkozás az Olympus Monsról nézve 2068. január 10-én"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:295
+#: src/translations.h:296
 msgid "Occultation of Earth and Jupiter 2048"
 msgstr "A Föld és a Jupiter együttállása 2048-ban"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:297
+#: src/translations.h:298
 msgid "3 Transits and 2 Eclipses from Deimos 2027"
 msgstr ""
 "A Deimoszról látható 2027-es háromszori áthaladás és kétszeri fogyatkozás"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:299
+#: src/translations.h:300
 msgid "Solar System Screensaver"
 msgstr "Naprendszer képernyőkímélő"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:301
+#: src/translations.h:302
 msgid "Constellations Tour"
 msgstr "Csillagkép túra"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:303
+#: src/translations.h:304
 msgid "Sun from different planets"
 msgstr "A Nap különböző bolygókról nézve"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:305
+#: src/translations.h:306
 msgid "Earth best views from other bodies"
 msgstr "A Föld legjobb nézetei más objektumokról"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:307
+#: src/translations.h:308
 msgid "Transit of Venus"
 msgstr "Vénuszátvonulás"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:309
+#: src/translations.h:310
 msgid "Analemma"
 msgstr "Analemma"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:311
+#: src/translations.h:312
 msgid "Sky Culture Tour"
 msgstr "Égi kultúrák túrája"
 
 #. TRANSLATORS: Name and description of script
-#: src/translations.h:313
+#: src/translations.h:314
 msgid "Earth Events from Mercury"
 msgstr "Földi események a Merkúrról nézve"
 
 #. TRANSLATORS: Name and description of script
-#: src/translations.h:315
+#: src/translations.h:316
 msgid "Earth Events from a floating city on Venus"
 msgstr "Földi események egy Vénusz légkörében lebegő városból"
 
 #. TRANSLATORS: Name and description of script
-#: src/translations.h:317
+#: src/translations.h:318
 msgid "Earth Events from Mars"
 msgstr "Földi események a Marsról nézve"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:319
+#: src/translations.h:320
 msgid "Earth and Venus Greatest Elongations and Brilliancies from Mars"
 msgstr ""
 "A Föld és a Vénusz legnagyobb látszó távolsága és fényessége a Marsról nézve"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:321
+#: src/translations.h:322
 msgid "Earth and Mars Greatest Elongations and Transits from Callisto"
 msgstr ""
 "A Föld és a Mars legnagyobb látszó távolsága és átvonulása a Callistóról "
 "nézve"
 
 #. TRANSLATORS: Description of the landscape tour script.
-#: src/translations.h:327
+#: src/translations.h:328
 msgid "Look around each installed landscape."
 msgstr "Mindegyik felrakott tájkép megtekintése"
 
 #. TRANSLATORS: Description of the sky culture tour script.
-#: src/translations.h:329
+#: src/translations.h:330
 msgid "Look at each installed sky culture."
 msgstr "A rendelkezésre álló égi kultúrák bemutatása."
 
-#: src/translations.h:330
+#: src/translations.h:331
 msgid "Script to demonstrate a partial lunar eclipse."
 msgstr "Részleges holdfogyatkozás bemutatása"
 
-#: src/translations.h:331
+#: src/translations.h:332
 msgid "Script to demonstrate a total lunar eclipse."
 msgstr "Teljes holdfogyatkozás bemutatása"
 
-#: src/translations.h:332
+#: src/translations.h:333
 msgid "A slow, infinite tour of the sky, looking at random objects."
 msgstr ""
 "Az égbolt lassú, vég nélküli bejárása, véletlenszerűen választott "
 "objektumokkal"
 
-#: src/translations.h:333
+#: src/translations.h:334
 msgid ""
 "Script to demonstrate a total solar eclipse which has happened in 2009 "
 "(location=Rangpur, Bangladesh)."
 msgstr "Teljes napfogyatkozás bemutatása (2009, Rangpur, Banglades)"
 
-#: src/translations.h:334
+#: src/translations.h:335
 msgid "Script which runs automatically at startup"
 msgstr "Induláskor automatikusan lefutó szkript"
 
-#: src/translations.h:335
+#: src/translations.h:336
 msgid ""
 "This script displays the constellations of the Zodiac. That means the "
 "constellations which lie along the line which the Sun traces across the "
@@ -2863,7 +2872,7 @@ msgstr ""
 "Ez a szkript az Állatövi csillagképeket mutatja be, ahogy a Nap áthalad "
 "rajtuk az év során."
 
-#: src/translations.h:336
+#: src/translations.h:337
 msgid ""
 "Due to the quirks in Mercury's orbit and rotation at certain spots the sun "
 "will rise & set 3 different times in one Mercury day."
@@ -2871,7 +2880,7 @@ msgstr ""
 "A Merkúr sajátos pályája és forgása miatt a Nap bizonyos helyeken napi "
 "háromszor látszik felkelni és lenyugodni."
 
-#: src/translations.h:337
+#: src/translations.h:338
 msgid ""
 "Just before Mars eclipses the sun, Phobos pops out from behind and eclipses "
 "it first. Takes place between Scorpio and Sagittarius on April 26, 2017."
@@ -2879,7 +2888,7 @@ msgstr ""
 "Épp mielőtt a Mars eltakarná a Napot, a Phobosz előkerül. 2017. április 26-"
 "án, a Skorpió és a Nyilas között."
 
-#: src/translations.h:338
+#: src/translations.h:339
 msgid ""
 "Just before Mars eclipses the sun, Phobos pops out from behind and eclipses "
 "it first. Takes place between Taurus and Gemini on July 23, 2031."
@@ -2887,11 +2896,11 @@ msgstr ""
 "Épp mielőtt a Mars eltakarná a Napot, a Phobosz előkerül. 2031. július 23-"
 "án, a Bika és az Ikrek között."
 
-#: src/translations.h:339
+#: src/translations.h:340
 msgid "Phobos eclipsing the Sun as seen from Olympus Mons on Jan 10, 2068."
 msgstr "A Phobos a Nap előtt az Olympus Monsról nézve 2068. január 10-én."
 
-#: src/translations.h:340
+#: src/translations.h:341
 msgid ""
 "Phobos occultations of Earth are common, as are occultations of Jupiter. But "
 "occultations of both on the same day are very rare. Here's one that takes "
@@ -2901,7 +2910,7 @@ msgstr ""
 "mindkettővel egyszerre ritkán. Egy ilyen esemény 2048. január 23-án lesz. "
 "Tényleges sebességgel mutatva."
 
-#: src/translations.h:341
+#: src/translations.h:342
 msgid ""
 "Phobos races ahead of Mars and transits the sun, passes through it and then "
 "retrogrades back towards the sun and just partially transits it again (only "
@@ -2916,35 +2925,35 @@ msgstr ""
 "sötétségben halad a Mars és a Deimos között. Amikor a Phobos előtűnik a Mars "
 "mögül, fogyatkozásban látszik a Mars árnyéka miatt."
 
-#: src/translations.h:342
+#: src/translations.h:343
 msgid ""
 "Screensaver of various happenings in the Solar System. 232 events in all!"
 msgstr "A Naprendszer 232 eseményét mutató képernyőkímélő program."
 
-#: src/translations.h:343
+#: src/translations.h:344
 msgid "A tour of the western constellations."
 msgstr "Nyugati csillagképek meglátogatása"
 
-#: src/translations.h:344
+#: src/translations.h:345
 msgid "Look at the Sun from big planets of Solar System and Pluto."
 msgstr "A Nap a nagyobb bolygókról és a Plutóról nézve."
 
-#: src/translations.h:345
+#: src/translations.h:346
 msgid ""
 "Best views of Earth from other Solar System bodies in the 21st Century."
 msgstr "A Föld legjobb látványa a Naprendszer égitestjeiről a 21. században."
 
-#: src/translations.h:346
+#: src/translations.h:347
 msgid "Transit of Venus as seen from Sydney Australia, 6th June 2012."
 msgstr "Vénuszátvonulás, Sydney, Ausztrália, 2012. június 6."
 
-#: src/translations.h:347
+#: src/translations.h:348
 msgid ""
 "A demonstration of the analemma - the path of the Sun across the sky during "
 "the year."
 msgstr "Az analemma bemutatása - a Nap útja az égbolton az év során."
 
-#: src/translations.h:348
+#: src/translations.h:349
 msgid ""
 "Flash of the supernova observed by Tycho Brahe in 1572. The Supernovae "
 "plugin has to be enabled."
@@ -2952,14 +2961,14 @@ msgstr ""
 "A Tycho Brahe által megfigyelt szupernóva fellobbanása 1572-ben.  (a "
 "\"szupernóva\" bővítményt be kell tölteni hozzá)"
 
-#: src/translations.h:349
+#: src/translations.h:350
 msgid ""
 "Earth and Venus Greatest Elongations and Brilliancies from Mars 2000-3000"
 msgstr ""
 "A Föld és a Vénusz legnagyobb látszó távolsága és fényessége a Marsról nézve "
 "2000-3000 között"
 
-#: src/translations.h:350
+#: src/translations.h:351
 msgid ""
 "Earth Greatest Elongations and Transits from Callisto 2000-3000. Why "
 "Callisto? Well of the 4 Galilean Moons, Callisto is the only one outside of "
@@ -2971,1048 +2980,1048 @@ msgstr ""
 "melyik a Jupiter sugárzási övezetén kívül van, így egy lehetséges emberi "
 "kolonizáció célpontja."
 
-#: src/translations.h:354
+#: src/translations.h:355
 msgid "Andorra"
 msgstr "Andorra"
 
-#: src/translations.h:355
+#: src/translations.h:356
 msgid "United Arab Emirates"
 msgstr "Egyesült Arab Emírségek"
 
-#: src/translations.h:356
+#: src/translations.h:357
 msgid "Afghanistan"
 msgstr "Afganisztán"
 
-#: src/translations.h:357
+#: src/translations.h:358
 msgid "Antigua and Barbuda"
 msgstr "Antigua és Barbuda"
 
-#: src/translations.h:358
+#: src/translations.h:359
 msgid "Anguilla"
 msgstr "Anguilla"
 
-#: src/translations.h:359
+#: src/translations.h:360
 msgid "Albania"
 msgstr "Albánia"
 
-#: src/translations.h:360
+#: src/translations.h:361
 msgid "Armenia"
 msgstr "Örményország"
 
-#: src/translations.h:361
+#: src/translations.h:362
 msgid "Netherlands Antilles"
 msgstr "Holland Antillák"
 
-#: src/translations.h:362
+#: src/translations.h:363
 msgid "Angola"
 msgstr "Angola"
 
-#: src/translations.h:363
+#: src/translations.h:364
 msgid "Antarctica"
 msgstr "Antarktisz"
 
-#: src/translations.h:364
+#: src/translations.h:365
 msgid "Argentina"
 msgstr "Argentína"
 
-#: src/translations.h:365
+#: src/translations.h:366
 msgid "American Samoa"
 msgstr "Amerikai Szamoa"
 
-#: src/translations.h:366
+#: src/translations.h:367
 msgid "Austria"
 msgstr "Ausztria"
 
-#: src/translations.h:367
+#: src/translations.h:368
 msgid "Australia"
 msgstr "Ausztrália"
 
-#: src/translations.h:368
+#: src/translations.h:369
 msgid "Aruba"
 msgstr "Aruba"
 
-#: src/translations.h:369
+#: src/translations.h:370
 msgid "Azerbaijan"
 msgstr "Azerbajdzsán"
 
-#: src/translations.h:370
+#: src/translations.h:371
 msgid "Bosnia and Herzegowina"
 msgstr "Bosznia és Hercegovina"
 
-#: src/translations.h:371
+#: src/translations.h:372
 msgid "Barbados"
 msgstr "Barbados"
 
-#: src/translations.h:372
+#: src/translations.h:373
 msgid "Bangladesh"
 msgstr "Banglades"
 
-#: src/translations.h:373
+#: src/translations.h:374
 msgid "Belgium"
 msgstr "Belgium"
 
-#: src/translations.h:374
+#: src/translations.h:375
 msgid "Burkina Faso"
 msgstr "Burkina Faso"
 
-#: src/translations.h:375
+#: src/translations.h:376
 msgid "Bulgaria"
 msgstr "Bulgária"
 
-#: src/translations.h:376
+#: src/translations.h:377
 msgid "Bahrain"
 msgstr "Bahrein"
 
-#: src/translations.h:377
+#: src/translations.h:378
 msgid "Burundi"
 msgstr "Burundi"
 
-#: src/translations.h:378
+#: src/translations.h:379
 msgid "Benin"
 msgstr "Benin"
 
-#: src/translations.h:379
+#: src/translations.h:380
 msgid "Bermuda"
 msgstr "Bermuda-szigetek"
 
-#: src/translations.h:380
+#: src/translations.h:381
 msgid "Brunei Darussalam"
 msgstr "Brunei Szultanátus"
 
-#: src/translations.h:381
+#: src/translations.h:382
 msgid "Bolivia"
 msgstr "Bolívia"
 
-#: src/translations.h:382
+#: src/translations.h:383
 msgid "Brazil"
 msgstr "Brazília"
 
-#: src/translations.h:383
+#: src/translations.h:384
 msgid "Bahamas"
 msgstr "Bahama-szigetek"
 
-#: src/translations.h:384
+#: src/translations.h:385
 msgid "Bhutan"
 msgstr "Bhután"
 
-#: src/translations.h:385
+#: src/translations.h:386
 msgid "Bouvet Island"
 msgstr "Bouvet-sziget"
 
-#: src/translations.h:386
+#: src/translations.h:387
 msgid "Botswana"
 msgstr "Botswana"
 
-#: src/translations.h:387
+#: src/translations.h:388
 msgid "Belarus"
 msgstr "Fehéroroszország"
 
-#: src/translations.h:388
+#: src/translations.h:389
 msgid "Belize"
 msgstr "Belize"
 
-#: src/translations.h:389
+#: src/translations.h:390
 msgid "Canada"
 msgstr "Kanada"
 
-#: src/translations.h:390
+#: src/translations.h:391
 msgid "Cocos Islands"
 msgstr "Kókusz-szigetek"
 
-#: src/translations.h:391
+#: src/translations.h:392
 msgid "Democratic Republic of the Congo"
 msgstr "Kongói Demokratikus Köztársaság"
 
-#: src/translations.h:392
+#: src/translations.h:393
 msgid "Central African Republic"
 msgstr "Közép-afrikai Köztársaság"
 
-#: src/translations.h:393
+#: src/translations.h:394
 msgid "Republic of the Congo"
 msgstr "Kongói Köztársaság"
 
-#: src/translations.h:394
+#: src/translations.h:395
 msgid "Switzerland"
 msgstr "Svájc"
 
-#: src/translations.h:395
+#: src/translations.h:396
 msgid "Cote d'Ivoire"
 msgstr "Elefántcsontpart"
 
-#: src/translations.h:396
+#: src/translations.h:397
 msgid "Cook Islands"
 msgstr "Cook-szigetek"
 
-#: src/translations.h:397
+#: src/translations.h:398
 msgid "Chile"
 msgstr "Chile"
 
-#: src/translations.h:398
+#: src/translations.h:399
 msgid "Cameroon"
 msgstr "Kamerun"
 
-#: src/translations.h:399
+#: src/translations.h:400
 msgid "China"
 msgstr "Kína"
 
-#: src/translations.h:400
+#: src/translations.h:401
 msgid "Colombia"
 msgstr "Kolumbia"
 
-#: src/translations.h:401
+#: src/translations.h:402
 msgid "Costa Rica"
 msgstr "Costa Rica"
 
-#: src/translations.h:402
+#: src/translations.h:403
 msgid "Serbia and Montenegro"
 msgstr "Szerbia és Montenegro"
 
-#: src/translations.h:403
+#: src/translations.h:404
 msgid "Cuba"
 msgstr "Kuba"
 
-#: src/translations.h:404
+#: src/translations.h:405
 msgid "Cape Verde"
 msgstr "Zöld-foki Köztársaság"
 
-#: src/translations.h:405
+#: src/translations.h:406
 msgid "Christmas Island"
 msgstr "Karácsony-sziget"
 
-#: src/translations.h:406
+#: src/translations.h:407
 msgid "Cyprus"
 msgstr "Ciprus"
 
-#: src/translations.h:407
+#: src/translations.h:408
 msgid "Czech Republic"
 msgstr "Cseh Köztársaság"
 
-#: src/translations.h:408
+#: src/translations.h:409
 msgid "Germany"
 msgstr "Németország"
 
-#: src/translations.h:409
+#: src/translations.h:410
 msgid "Djibouti"
 msgstr "Dzsibuti"
 
-#: src/translations.h:410
+#: src/translations.h:411
 msgid "Denmark"
 msgstr "Dánia"
 
-#: src/translations.h:411
+#: src/translations.h:412
 msgid "Dominica"
 msgstr "Dominika"
 
-#: src/translations.h:412
+#: src/translations.h:413
 msgid "Dominican Republic"
 msgstr "Dominikai Köztársaság"
 
-#: src/translations.h:413
+#: src/translations.h:414
 msgid "Algeria"
 msgstr "Algéria"
 
-#: src/translations.h:414
+#: src/translations.h:415
 msgid "Ecuador"
 msgstr "Ecuador"
 
-#: src/translations.h:415
+#: src/translations.h:416
 msgid "Estonia"
 msgstr "Észtország"
 
-#: src/translations.h:416
+#: src/translations.h:417
 msgid "Egypt"
 msgstr "Egyiptom"
 
-#: src/translations.h:417
+#: src/translations.h:418
 msgid "Western Sahara"
 msgstr "Nyugat-Szahara"
 
-#: src/translations.h:418
+#: src/translations.h:419
 msgid "Eritrea"
 msgstr "Eritrea"
 
-#: src/translations.h:419
+#: src/translations.h:420
 msgid "Spain"
 msgstr "Spanyolország"
 
-#: src/translations.h:420
+#: src/translations.h:421
 msgid "Ethiopia"
 msgstr "Etiópia"
 
-#: src/translations.h:421
+#: src/translations.h:422
 msgid "Finland"
 msgstr "Finnország"
 
-#: src/translations.h:422
+#: src/translations.h:423
 msgid "Fiji"
 msgstr "Fidzsi-szigetek"
 
-#: src/translations.h:423
+#: src/translations.h:424
 msgid "Falkland Islands"
 msgstr "Falkland-szigetek"
 
-#: src/translations.h:424
+#: src/translations.h:425
 msgid "Micronesia"
 msgstr "Mikronézia"
 
-#: src/translations.h:425
+#: src/translations.h:426
 msgid "Faroe Islands"
 msgstr "Feröer-szigetek"
 
-#: src/translations.h:426
+#: src/translations.h:427
 msgid "France"
 msgstr "Franciaország"
 
-#: src/translations.h:427
+#: src/translations.h:428
 msgid "Gabon"
 msgstr "Gabon"
 
-#: src/translations.h:428
+#: src/translations.h:429
 msgid "United Kingdom"
 msgstr "Egyesült Királyság"
 
-#: src/translations.h:429
+#: src/translations.h:430
 msgid "Grenada"
 msgstr "Grenada"
 
-#: src/translations.h:430
+#: src/translations.h:431
 msgid "Georgia"
 msgstr "Grúzia"
 
-#: src/translations.h:431
+#: src/translations.h:432
 msgid "French Guiana"
 msgstr "Francia Guyana"
 
-#: src/translations.h:432
+#: src/translations.h:433
 msgid "Ghana"
 msgstr "Ghána"
 
-#: src/translations.h:433
+#: src/translations.h:434
 msgid "Gibraltar"
 msgstr "Gibraltár"
 
-#: src/translations.h:434
+#: src/translations.h:435
 msgid "Greenland"
 msgstr "Grönland"
 
-#: src/translations.h:435
+#: src/translations.h:436
 msgid "Gambia"
 msgstr "Gambia"
 
-#: src/translations.h:436
+#: src/translations.h:437
 msgid "Guinea"
 msgstr "Guinea"
 
-#: src/translations.h:437
+#: src/translations.h:438
 msgid "Guadeloupe"
 msgstr "Guadeloupe"
 
-#: src/translations.h:438
+#: src/translations.h:439
 msgid "Equatorial Guinea"
 msgstr "Egyenlítői-Guinea"
 
-#: src/translations.h:439
+#: src/translations.h:440
 msgid "Greece"
 msgstr "Görögország"
 
-#: src/translations.h:440
+#: src/translations.h:441
 msgid "South Georgia and the South Sandwich Islands"
 msgstr "Dél-Georgia és a Dél-Sandwich-szigetek"
 
-#: src/translations.h:441
+#: src/translations.h:442
 msgid "Guatemala"
 msgstr "Guatemala"
 
-#: src/translations.h:442
+#: src/translations.h:443
 msgid "Guam"
 msgstr "Guam"
 
-#: src/translations.h:443
+#: src/translations.h:444
 msgid "Guinea-Bissau"
 msgstr "Bissau-Guinea"
 
-#: src/translations.h:444
+#: src/translations.h:445
 msgid "Guyana"
 msgstr "Guyana"
 
-#: src/translations.h:445
+#: src/translations.h:446
 msgid "Hong Kong"
 msgstr "Hongkong"
 
-#: src/translations.h:446
+#: src/translations.h:447
 msgid "Heard Island and McDonald Islands"
 msgstr "Heard-sziget és McDonald-szigetek"
 
-#: src/translations.h:447
+#: src/translations.h:448
 msgid "Honduras"
 msgstr "Honduras"
 
-#: src/translations.h:448
+#: src/translations.h:449
 msgid "Croatia"
 msgstr "Horvátország"
 
-#: src/translations.h:449
+#: src/translations.h:450
 msgid "Haiti"
 msgstr "Haiti"
 
-#: src/translations.h:450
+#: src/translations.h:451
 msgid "Hungary"
 msgstr "Magyarország"
 
-#: src/translations.h:451
+#: src/translations.h:452
 msgid "Indonesia"
 msgstr "Indonézia"
 
-#: src/translations.h:452
+#: src/translations.h:453
 msgid "Ireland"
 msgstr "Írország"
 
-#: src/translations.h:453
+#: src/translations.h:454
 msgid "Israel"
 msgstr "Izrael"
 
-#: src/translations.h:454
+#: src/translations.h:455
 msgid "India"
 msgstr "India"
 
-#: src/translations.h:455
+#: src/translations.h:456
 msgid "British Indian Ocean Territory"
 msgstr "Brit Indiai-óceáni terület"
 
-#: src/translations.h:456
+#: src/translations.h:457
 msgid "Iraq"
 msgstr "Irak"
 
-#: src/translations.h:457
+#: src/translations.h:458
 msgid "Iran"
 msgstr "Irán"
 
-#: src/translations.h:458
+#: src/translations.h:459
 msgid "Iceland"
 msgstr "Izland"
 
-#: src/translations.h:459
+#: src/translations.h:460
 msgid "Italy"
 msgstr "Olaszország"
 
-#: src/translations.h:460
+#: src/translations.h:461
 msgid "Jamaica"
 msgstr "Jamaika"
 
-#: src/translations.h:461
+#: src/translations.h:462
 msgid "Jordan"
 msgstr "Jordánia"
 
-#: src/translations.h:462
+#: src/translations.h:463
 msgid "Japan"
 msgstr "Japán"
 
-#: src/translations.h:463
+#: src/translations.h:464
 msgid "Kenya"
 msgstr "Kenya"
 
-#: src/translations.h:464
+#: src/translations.h:465
 msgid "Kyrgyzstan"
 msgstr "Kirgizisztán"
 
-#: src/translations.h:465
+#: src/translations.h:466
 msgid "Cambodia"
 msgstr "Kambodzsa"
 
-#: src/translations.h:466
+#: src/translations.h:467
 msgid "Kiribati"
 msgstr "Kiribati"
 
-#: src/translations.h:467
+#: src/translations.h:468
 msgid "Comoros"
 msgstr "Comore-szigetek"
 
-#: src/translations.h:468
+#: src/translations.h:469
 msgid "Saint Kitts and Nevis"
 msgstr "Saint Kitts és Nevis"
 
-#: src/translations.h:469
+#: src/translations.h:470
 msgid "Democratic People's Republic of Korea"
 msgstr "Észak-Korea"
 
-#: src/translations.h:470
+#: src/translations.h:471
 msgid "Republic of Korea"
 msgstr "Dél-Korea"
 
-#: src/translations.h:471
+#: src/translations.h:472
 msgid "Kuwait"
 msgstr "Kuwait"
 
-#: src/translations.h:472
+#: src/translations.h:473
 msgid "Cayman Islands"
 msgstr "Kajmán-szigetek"
 
-#: src/translations.h:473
+#: src/translations.h:474
 msgid "Kazakhstan"
 msgstr "Kazahsztán"
 
-#: src/translations.h:474
+#: src/translations.h:475
 msgid "Lao"
 msgstr ""
 
-#: src/translations.h:475
+#: src/translations.h:476
 msgid "Lebanon"
 msgstr "Libanon"
 
-#: src/translations.h:476
+#: src/translations.h:477
 msgid "Saint Lucia"
 msgstr "Saint Lucia"
 
-#: src/translations.h:477
+#: src/translations.h:478
 msgid "Liechtenstein"
 msgstr "Liechtenstein"
 
-#: src/translations.h:478
+#: src/translations.h:479
 msgid "Sri Lanka"
 msgstr "Srí Lanka"
 
-#: src/translations.h:479
+#: src/translations.h:480
 msgid "Liberia"
 msgstr "Libéria"
 
-#: src/translations.h:480
+#: src/translations.h:481
 msgid "Lesotho"
 msgstr "Lesotho"
 
-#: src/translations.h:481
+#: src/translations.h:482
 msgid "Lithuania"
 msgstr "Litvánia"
 
-#: src/translations.h:482
+#: src/translations.h:483
 msgid "Luxembourg"
 msgstr "Luxemburg"
 
-#: src/translations.h:483
+#: src/translations.h:484
 msgid "Latvia"
 msgstr "Lettország"
 
-#: src/translations.h:484
+#: src/translations.h:485
 msgid "Libyan Arab Jamahiriya"
 msgstr "Líbia"
 
-#: src/translations.h:485
+#: src/translations.h:486
 msgid "Morocco"
 msgstr "Marokkó"
 
-#: src/translations.h:486
+#: src/translations.h:487
 msgid "Monaco"
 msgstr "Monaco"
 
-#: src/translations.h:487
+#: src/translations.h:488
 msgid "Moldova"
 msgstr "Moldova"
 
-#: src/translations.h:488
+#: src/translations.h:489
 msgid "Madagascar"
 msgstr "Madagaszkár"
 
-#: src/translations.h:489
+#: src/translations.h:490
 msgid "Marshall Islands"
 msgstr "Marshall-szigetek"
 
-#: src/translations.h:490
+#: src/translations.h:491
 msgid "Macedonia"
 msgstr "Macedónia"
 
-#: src/translations.h:491
+#: src/translations.h:492
 msgid "Mali"
 msgstr "Mali"
 
-#: src/translations.h:492
+#: src/translations.h:493
 msgid "Myanmar"
 msgstr "Mianmar"
 
-#: src/translations.h:493
+#: src/translations.h:494
 msgid "Mongolia"
 msgstr "Mongólia"
 
-#: src/translations.h:494
+#: src/translations.h:495
 msgid "Macau"
 msgstr "Makaó"
 
-#: src/translations.h:495
+#: src/translations.h:496
 msgid "Northern Mariana Islands"
 msgstr "Északi Mariana-szigetek"
 
-#: src/translations.h:496
+#: src/translations.h:497
 msgid "Martinique"
 msgstr "Martinique"
 
-#: src/translations.h:497
+#: src/translations.h:498
 msgid "Mauritania"
 msgstr "Mauritánia"
 
-#: src/translations.h:498
+#: src/translations.h:499
 msgid "Montserrat"
 msgstr "Montserrat"
 
-#: src/translations.h:499
+#: src/translations.h:500
 msgid "Malta"
 msgstr "Málta"
 
-#: src/translations.h:500
+#: src/translations.h:501
 msgid "Mauritius"
 msgstr "Mauritius"
 
-#: src/translations.h:501
+#: src/translations.h:502
 msgid "Maldives"
 msgstr "Maldív-szigetek"
 
-#: src/translations.h:502
+#: src/translations.h:503
 msgid "Malawi"
 msgstr "Malawi"
 
-#: src/translations.h:503
+#: src/translations.h:504
 msgid "Mexico"
 msgstr "Mexikó"
 
-#: src/translations.h:504
+#: src/translations.h:505
 msgid "Malaysia"
 msgstr "Malajzia"
 
-#: src/translations.h:505
+#: src/translations.h:506
 msgid "Mozambique"
 msgstr "Mozambik"
 
-#: src/translations.h:506
+#: src/translations.h:507
 msgid "Namibia"
 msgstr "Namíbia"
 
-#: src/translations.h:507
+#: src/translations.h:508
 msgid "New Caledonia"
 msgstr "Új-Kaledónia"
 
-#: src/translations.h:508
+#: src/translations.h:509
 msgid "Niger"
 msgstr "Niger"
 
-#: src/translations.h:509
+#: src/translations.h:510
 msgid "Norfolk Island"
 msgstr "Norfolk-sziget"
 
-#: src/translations.h:510
+#: src/translations.h:511
 msgid "Nigeria"
 msgstr "Nigéria"
 
-#: src/translations.h:511
+#: src/translations.h:512
 msgid "Nicaragua"
 msgstr "Nicaragua"
 
-#: src/translations.h:512
+#: src/translations.h:513
 msgid "Netherlands"
 msgstr "Hollandia"
 
-#: src/translations.h:513
+#: src/translations.h:514
 msgid "Norway"
 msgstr "Norvégia"
 
-#: src/translations.h:514
+#: src/translations.h:515
 msgid "Nepal"
 msgstr "Nepál"
 
-#: src/translations.h:515
+#: src/translations.h:516
 msgid "Nauru"
 msgstr "Nauru"
 
-#: src/translations.h:516
+#: src/translations.h:517
 msgid "Niue"
 msgstr "Niue"
 
-#: src/translations.h:517
+#: src/translations.h:518
 msgid "New Zealand"
 msgstr "Új-Zéland"
 
-#: src/translations.h:518
+#: src/translations.h:519
 msgid "Oman"
 msgstr "Omán"
 
-#: src/translations.h:519
+#: src/translations.h:520
 msgid "Panama"
 msgstr "Panama"
 
-#: src/translations.h:520
+#: src/translations.h:521
 msgid "Peru"
 msgstr "Peru"
 
-#: src/translations.h:521
+#: src/translations.h:522
 msgid "French Polynesia"
 msgstr "Francia Polinézia"
 
-#: src/translations.h:522
+#: src/translations.h:523
 msgid "Papua New Guinea"
 msgstr "Pápua Új-Guinea"
 
-#: src/translations.h:523
+#: src/translations.h:524
 msgid "Philippines"
 msgstr "Fülöp-szigetek"
 
-#: src/translations.h:524
+#: src/translations.h:525
 msgid "Pakistan"
 msgstr "Pakisztán"
 
-#: src/translations.h:525
+#: src/translations.h:526
 msgid "Poland"
 msgstr "Lengyelország"
 
-#: src/translations.h:526
+#: src/translations.h:527
 msgid "Saint Pierre and Miquelon"
 msgstr "Saint Pierre és Miquelon"
 
-#: src/translations.h:527
+#: src/translations.h:528
 msgid "Pitcairn"
 msgstr "Pitcairn-szigetek"
 
-#: src/translations.h:528
+#: src/translations.h:529
 msgid "Puerto Rico"
 msgstr "Puerto Rico"
 
-#: src/translations.h:529
+#: src/translations.h:530
 msgid "Palestinian Territories"
 msgstr "Palesztin Területek"
 
-#: src/translations.h:530
+#: src/translations.h:531
 msgid "Portugal"
 msgstr "Portugália"
 
-#: src/translations.h:531
+#: src/translations.h:532
 msgid "Palau"
 msgstr "Palau"
 
-#: src/translations.h:532
+#: src/translations.h:533
 msgid "Paraguay"
 msgstr "Paraguay"
 
-#: src/translations.h:533
+#: src/translations.h:534
 msgid "Qatar"
 msgstr "Katar"
 
-#: src/translations.h:534
+#: src/translations.h:535
 msgid "Réunion"
 msgstr "Réunion"
 
-#: src/translations.h:535
+#: src/translations.h:536
 msgid "Romania"
 msgstr "Románia"
 
-#: src/translations.h:536
+#: src/translations.h:537
 msgid "Serbia"
 msgstr "Szerbia"
 
-#: src/translations.h:537
+#: src/translations.h:538
 msgid "Russian Federation"
 msgstr "Orosz Föderáció"
 
-#: src/translations.h:538
+#: src/translations.h:539
 msgid "Rwanda"
 msgstr "Ruanda"
 
-#: src/translations.h:539
+#: src/translations.h:540
 msgid "Saudi Arabia"
 msgstr "Szaúd-Arábia"
 
-#: src/translations.h:540
+#: src/translations.h:541
 msgid "Solomon Islands"
 msgstr "Salamon-szigetek"
 
-#: src/translations.h:541
+#: src/translations.h:542
 msgid "Seychelles"
 msgstr "Seychelles-szigetek"
 
-#: src/translations.h:542
+#: src/translations.h:543
 msgid "Sudan"
 msgstr "Szudán"
 
-#: src/translations.h:543
+#: src/translations.h:544
 msgid "Sweden"
 msgstr "Svédország"
 
-#: src/translations.h:544
+#: src/translations.h:545
 msgid "Singapore"
 msgstr "Szingapúr"
 
-#: src/translations.h:545
+#: src/translations.h:546
 msgid "Saint Helena"
 msgstr "Szent-Heléna"
 
-#: src/translations.h:546
+#: src/translations.h:547
 msgid "Slovenia"
 msgstr "Szlovénia"
 
-#: src/translations.h:547
+#: src/translations.h:548
 msgid "Svalbard and Jan Mayen"
 msgstr "Spitzbergák és Jan Mayen-sziget"
 
-#: src/translations.h:548
+#: src/translations.h:549
 msgid "Slovakia"
 msgstr "Szlovákia"
 
-#: src/translations.h:549
+#: src/translations.h:550
 msgid "Sierra Leone"
 msgstr "Sierra Leone"
 
-#: src/translations.h:550
+#: src/translations.h:551
 msgid "San Marino"
 msgstr "San Marino"
 
-#: src/translations.h:551
+#: src/translations.h:552
 msgid "Senegal"
 msgstr "Szenegál"
 
-#: src/translations.h:552
+#: src/translations.h:553
 msgid "Somalia"
 msgstr "Szomália"
 
-#: src/translations.h:553
+#: src/translations.h:554
 msgid "Suriname"
 msgstr "Suriname"
 
-#: src/translations.h:554
+#: src/translations.h:555
 msgid "Sao Tome and Principe"
 msgstr "São Tomé és Príncipe"
 
-#: src/translations.h:555
+#: src/translations.h:556
 msgid "El Salvador"
 msgstr "Salvador"
 
-#: src/translations.h:556
+#: src/translations.h:557
 msgid "Syrian Arab Republic"
 msgstr "Szíriai Arab Köztársaság"
 
-#: src/translations.h:557
+#: src/translations.h:558
 msgid "Swaziland"
 msgstr "Szváziföld"
 
-#: src/translations.h:558
+#: src/translations.h:559
 msgid "Turks and Caicos Islands"
 msgstr "Turks és Caicos-szigetek"
 
-#: src/translations.h:559
+#: src/translations.h:560
 msgid "Chad"
 msgstr "Csád"
 
-#: src/translations.h:560
+#: src/translations.h:561
 msgid "French Southern Territories"
 msgstr "Francia déli és antarktiszi területek"
 
-#: src/translations.h:561
+#: src/translations.h:562
 msgid "Togo"
 msgstr "Togó"
 
-#: src/translations.h:562
+#: src/translations.h:563
 msgid "Thailand"
 msgstr "Thaiföld"
 
-#: src/translations.h:563
+#: src/translations.h:564
 msgid "Tajikistan"
 msgstr "Tadzsikisztán"
 
-#: src/translations.h:564
+#: src/translations.h:565
 msgid "Tokelau"
 msgstr "Tokelau-szigetek"
 
-#: src/translations.h:565
+#: src/translations.h:566
 msgid "East Timor"
 msgstr "Kelet-Timor"
 
-#: src/translations.h:566
+#: src/translations.h:567
 msgid "Turkmenistan"
 msgstr "Türkmenisztán"
 
-#: src/translations.h:567
+#: src/translations.h:568
 msgid "Tunisia"
 msgstr "Tunézia"
 
-#: src/translations.h:568
+#: src/translations.h:569
 msgid "Tonga"
 msgstr "Tonga"
 
-#: src/translations.h:569
+#: src/translations.h:570
 msgid "Turkey"
 msgstr "Törökország"
 
-#: src/translations.h:570
+#: src/translations.h:571
 msgid "Trinidad and Tobago"
 msgstr "Trinidad és Tobago"
 
-#: src/translations.h:571
+#: src/translations.h:572
 msgid "Tuvalu"
 msgstr "Tuvalu"
 
-#: src/translations.h:572
+#: src/translations.h:573
 msgid "Taiwan"
 msgstr "Tajvan"
 
-#: src/translations.h:573
+#: src/translations.h:574
 msgid "Tanzania"
 msgstr "Tanzánia"
 
-#: src/translations.h:574
+#: src/translations.h:575
 msgid "Ukraine"
 msgstr "Ukrajna"
 
-#: src/translations.h:575
+#: src/translations.h:576
 msgid "Uganda"
 msgstr "Uganda"
 
-#: src/translations.h:576
+#: src/translations.h:577
 msgid "United States Minor Outlying Islands"
 msgstr "Az Amerikai Egyesült Államok külbirtokai"
 
-#: src/translations.h:577
+#: src/translations.h:578
 msgid "United States"
 msgstr "Amerikai Egyesült Államok"
 
-#: src/translations.h:578
+#: src/translations.h:579
 msgid "Uruguay"
 msgstr "Uruguay"
 
-#: src/translations.h:579
+#: src/translations.h:580
 msgid "Uzbekistan"
 msgstr "Üzbegisztán"
 
-#: src/translations.h:580
+#: src/translations.h:581
 msgid "Vatican City State"
 msgstr "Vatikán Állam"
 
-#: src/translations.h:581
+#: src/translations.h:582
 msgid "Saint Vincent and the Grenadines"
 msgstr "Saint Vincent és a Grenadine-szigetek"
 
-#: src/translations.h:582
+#: src/translations.h:583
 msgid "Venezuela"
 msgstr "Venezuela"
 
-#: src/translations.h:583
+#: src/translations.h:584
 msgid "British Virgin Islands"
 msgstr "Brit Virgin-szigetek"
 
-#: src/translations.h:584
+#: src/translations.h:585
 msgid "United States Virgin Islands"
 msgstr "Egyesült Államok Virgin-szigetek"
 
-#: src/translations.h:585
+#: src/translations.h:586
 msgid "Viet Nam"
 msgstr "Vietnam"
 
-#: src/translations.h:586
+#: src/translations.h:587
 msgid "Vanuatu"
 msgstr "Vanuatu"
 
-#: src/translations.h:587
+#: src/translations.h:588
 msgid "Wallis and Futuna"
 msgstr "Wallis és Futuna"
 
-#: src/translations.h:588
+#: src/translations.h:589
 msgid "Samoa"
 msgstr "Szamoa"
 
-#: src/translations.h:589
+#: src/translations.h:590
 msgid "Yemen"
 msgstr "Jemen"
 
-#: src/translations.h:590
+#: src/translations.h:591
 msgid "Mayotte"
 msgstr "Mayotte"
 
-#: src/translations.h:591
+#: src/translations.h:592
 msgid "Yugoslavia"
 msgstr "Jugoszlávia (volt)"
 
-#: src/translations.h:592
+#: src/translations.h:593
 msgid "South Africa"
 msgstr "Dél-afrikai Köztársaság"
 
-#: src/translations.h:593
+#: src/translations.h:594
 msgid "Zambia"
 msgstr "Zambia"
 
-#: src/translations.h:594
+#: src/translations.h:595
 msgid "Zimbabwe"
 msgstr "Zimbabwe"
 
-#: src/translations.h:598
+#: src/translations.h:599
 msgid "&Undo"
 msgstr "&Visszavonás"
 
-#: src/translations.h:599
+#: src/translations.h:600
 msgid "&Redo"
 msgstr ""
 
-#: src/translations.h:600
+#: src/translations.h:601
 msgid "Cu&t"
 msgstr "Ki&vágás"
 
-#: src/translations.h:601
+#: src/translations.h:602
 msgid "&Copy"
 msgstr "&Másolás"
 
-#: src/translations.h:602
+#: src/translations.h:603
 msgid "&Paste"
 msgstr "&Beillesztés"
 
-#: src/translations.h:603 src/ui_locationDialogGui.h:432
-#: plugins/Oculars/src/ui_ocularDialog.h:1089
-#: plugins/Oculars/src/ui_ocularDialog.h:1099
-#: plugins/Oculars/src/ui_ocularDialog.h:1106
-#: plugins/Oculars/src/ui_ocularDialog.h:1117
+#: src/translations.h:604 src/ui_locationDialogGui.h:432
+#: plugins/Oculars/src/ui_ocularDialog.h:1094
+#: plugins/Oculars/src/ui_ocularDialog.h:1104
+#: plugins/Oculars/src/ui_ocularDialog.h:1111
+#: plugins/Oculars/src/ui_ocularDialog.h:1122
 msgid "Delete"
 msgstr "Törlés"
 
-#: src/translations.h:604
+#: src/translations.h:605
 msgid "Select All"
 msgstr "Összes kijelölése"
 
-#: src/translations.h:605
+#: src/translations.h:606
 msgid "Look in:"
 msgstr "Keresés:"
 
-#: src/translations.h:606
+#: src/translations.h:607
 msgid "Directory:"
 msgstr "Mappa:"
 
-#: src/translations.h:607
+#: src/translations.h:608
 msgid "Folder"
 msgstr "Mappa"
 
-#: src/translations.h:608
+#: src/translations.h:609
 msgid "&Choose"
 msgstr ""
 
-#: src/translations.h:609 src/ui_configurationDialog.h:1176
+#: src/translations.h:610 src/ui_configurationDialog.h:1176
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:516
 msgid "Cancel"
 msgstr "Mégsem"
 
-#: src/translations.h:610
+#: src/translations.h:611
 msgid "Files of type:"
 msgstr "Fájltípus:"
 
-#: src/translations.h:611
+#: src/translations.h:612
 msgid "Date Modified"
 msgstr "Módosítás dátuma"
 
-#: src/translations.h:612
+#: src/translations.h:613
 msgid "Directories"
 msgstr "Mappák"
 
-#: src/translations.h:613
+#: src/translations.h:614
 msgid "Computer"
 msgstr "Számítógép"
 
-#: src/translations.h:614
+#: src/translations.h:615
 msgid "&Open"
 msgstr ""
 
-#: src/translations.h:615
+#: src/translations.h:616
 msgid "File &name:"
 msgstr "Fájl&név:"
 
-#: src/translations.h:616
+#: src/translations.h:617
 msgid "Copy &Link Location"
 msgstr ""
 
@@ -4301,92 +4310,92 @@ msgstr "Keresési opciók"
 msgid "Use autofill only from the beginning of words"
 msgstr "Automatikus kitöltés csak a szó elejétől"
 
-#: src/ui_searchDialogGui.h:708 src/ui_viewDialog.h:1288
-#: src/ui_viewDialog.h:1296 src/ui_viewDialog.h:1298
+#: src/ui_searchDialogGui.h:708 src/ui_viewDialog.h:1307
+#: src/ui_viewDialog.h:1325 src/ui_viewDialog.h:1327
 #: src/ui_configurationDialog.h:1177 src/ui_configurationDialog.h:1188
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:417
 msgid "Options"
 msgstr "Beállítások"
 
-#: src/ui_viewDialog.h:1175
+#: src/ui_viewDialog.h:1194
 msgid "View"
 msgstr "Nézet"
 
-#: src/ui_viewDialog.h:1181
+#: src/ui_viewDialog.h:1200
 msgid "Sky"
 msgstr "Ég"
 
-#: src/ui_viewDialog.h:1183
+#: src/ui_viewDialog.h:1202
 msgid "Markings"
 msgstr "Jelölések"
 
-#: src/ui_viewDialog.h:1185
+#: src/ui_viewDialog.h:1204
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:406
 msgid "Landscape"
 msgstr "Tájkép"
 
-#: src/ui_viewDialog.h:1187
+#: src/ui_viewDialog.h:1206
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:228
 msgid "Starlore"
 msgstr "Csillaghagyomány"
 
-#: src/ui_viewDialog.h:1190
+#: src/ui_viewDialog.h:1209
 msgid "Labels and Markers"
 msgstr "Címkék és jelölések"
 
-#: src/ui_viewDialog.h:1194
+#: src/ui_viewDialog.h:1213
 msgid ""
 "Labels and markers for deep-sky objects (star clusters, galaxies and nebulas)"
 msgstr ""
 "Feliratok és jelölések a mélyég-objektumokhoz (csillaghalmazok, galaxisok és "
 "ködök)"
 
-#: src/ui_viewDialog.h:1196 src/ui_viewDialog.h:1253
+#: src/ui_viewDialog.h:1215 src/ui_viewDialog.h:1272
 msgctxt "Deep-sky objects"
 msgid "DSOs"
 msgstr "Mélyég objektumok"
 
-#: src/ui_viewDialog.h:1197
+#: src/ui_viewDialog.h:1216
 msgid "Planets and satellites"
 msgstr "Bolygók és holdak"
 
-#: src/ui_viewDialog.h:1198
+#: src/ui_viewDialog.h:1217
 msgid "Show planets"
 msgstr "Bolygók mutatása"
 
-#: src/ui_viewDialog.h:1199
+#: src/ui_viewDialog.h:1218
 msgid "Show planet markers"
 msgstr "Bolygók jelölése"
 
-#: src/ui_viewDialog.h:1200
+#: src/ui_viewDialog.h:1219
 msgid "Show planet orbits"
 msgstr "Bolygópályák mutatása"
 
-#: src/ui_viewDialog.h:1201
+#: src/ui_viewDialog.h:1220
 msgid "Simulate light speed"
 msgstr "Fénysebesség szimulálása"
 
-#: src/ui_viewDialog.h:1202
+#: src/ui_viewDialog.h:1221
 msgid "Scale Moon"
 msgstr "Hold nagyítása"
 
-#: src/ui_viewDialog.h:1204
+#: src/ui_viewDialog.h:1223
 msgid "Scale factor"
 msgstr "Méretezési tényező"
 
-#: src/ui_viewDialog.h:1207
+#: src/ui_viewDialog.h:1226
 msgid "Automatic change of landscape when planet is changed"
 msgstr "A tájkép automatikus cseréje, ha a bolygó változik"
 
-#: src/ui_viewDialog.h:1209
+#: src/ui_viewDialog.h:1228
 msgid "Auto select landscapes"
 msgstr "Tájkép automatikus kiválasztása"
 
-#: src/ui_viewDialog.h:1211
+#: src/ui_viewDialog.h:1230
 msgid "Show atmosphere"
 msgstr "Légkör mutatása"
 
-#: src/ui_viewDialog.h:1215
+#: src/ui_viewDialog.h:1234
 msgid ""
 "Use light pollution data from locations database and ignore settings for "
 "light pollution below"
@@ -4394,188 +4403,205 @@ msgstr ""
 "Fényszennyezési értékek használata adatbázisból, figyelmen kívül hagyva a "
 "lenti beállítást"
 
-#: src/ui_viewDialog.h:1217
+#: src/ui_viewDialog.h:1236
 msgid "Light pollution data from locations database"
 msgstr "Fényszennyezési értékek használata adatbázisból"
 
-#: src/ui_viewDialog.h:1218
+#: src/ui_viewDialog.h:1237
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:401
 msgid "Light pollution:"
 msgstr "Fényszennyezés"
 
-#: src/ui_viewDialog.h:1220
+#: src/ui_viewDialog.h:1239
 msgid "pressure, temperature, extinction coefficient"
 msgstr "nyomás, hőmérséklet, kioltás együtthatója"
 
-#: src/ui_viewDialog.h:1222
+#: src/ui_viewDialog.h:1241
 msgid "Refraction/Extinction settings..."
 msgstr "Visszaverődési/kioltási beállítások"
 
-#: src/ui_viewDialog.h:1224
+#: src/ui_viewDialog.h:1243
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:258
 msgid "Absolute scale:"
 msgstr "Abszolút méret:"
 
-#: src/ui_viewDialog.h:1225
+#: src/ui_viewDialog.h:1244
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:252
 msgid "Relative scale:"
 msgstr "Relatív méret:"
 
-#: src/ui_viewDialog.h:1226
+#: src/ui_viewDialog.h:1245
 msgid "Milky Way brightness:"
 msgstr "A Tejút fényessége:"
 
-#: src/ui_viewDialog.h:1227
+#: src/ui_viewDialog.h:1246
 msgid "Zodiacal Light brightness:"
 msgstr ""
 
-#: src/ui_viewDialog.h:1228
+#: src/ui_viewDialog.h:1247
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:264
 msgid "Twinkle:"
 msgstr "Vibrálás:"
 
-#: src/ui_viewDialog.h:1230
+#: src/ui_viewDialog.h:1249
 msgid "Dim faint stars when a very bright object is visible"
 msgstr "A halvány csillagok elhalványulnak egy nagyon fényes égitest mellett"
 
-#: src/ui_viewDialog.h:1232
+#: src/ui_viewDialog.h:1251
 msgid "Dynamic eye adaptation"
 msgstr "Dinamikus szem adaptálása"
 
-#: src/ui_viewDialog.h:1234
+#: src/ui_viewDialog.h:1253
 msgid "Settings for sporadic meteors"
 msgstr "Sporadikus meteorok beállításai"
 
-#: src/ui_viewDialog.h:1236
+#: src/ui_viewDialog.h:1255
 msgid "Shooting Stars"
 msgstr "Hullócsillagok"
 
-#: src/ui_viewDialog.h:1238
+#: src/ui_viewDialog.h:1257
 msgid "Hourly zenith rate"
 msgstr "Óránkénti zenit változás"
 
-#: src/ui_viewDialog.h:1240
+#: src/ui_viewDialog.h:1259
 msgctxt "Zenithal Hourly Rate"
 msgid "ZHR:"
 msgstr "ZHR:"
 
-#: src/ui_viewDialog.h:1243
+#: src/ui_viewDialog.h:1262
 msgid "Limit Magnitudes (for unaided/binocular observers)"
 msgstr "Magnitúdó korlátozása (szabad szemes/binokuláros megfigyelés)"
 
-#: src/ui_viewDialog.h:1245
+#: src/ui_viewDialog.h:1264
 msgid "Limit Magnitudes"
 msgstr "Határmagnitúdók"
 
-#: src/ui_viewDialog.h:1247
+#: src/ui_viewDialog.h:1266
 msgid "Limit the magnitude of stars"
 msgstr "Csillagok fényességének határa"
 
-#: src/ui_viewDialog.h:1251
+#: src/ui_viewDialog.h:1270
 msgid ""
 "Limit the magnitude of deep-sky objects (star clusters, galaxies and nebulas)"
 msgstr ""
 "Mélyég objektumok fényességének határa (csillaghalmaz, galaxis, csillagköd)"
 
-#: src/ui_viewDialog.h:1254
+#: src/ui_viewDialog.h:1273
 msgid "Constellations"
 msgstr "Csillagképek"
 
-#: src/ui_viewDialog.h:1255
+#: src/ui_viewDialog.h:1274
 msgid "Show lines"
 msgstr "Vonalak mutatása"
 
-#: src/ui_viewDialog.h:1256
+#: src/ui_viewDialog.h:1275
 msgid "Show labels"
 msgstr "Címkék mutatása"
 
-#: src/ui_viewDialog.h:1257
+#: src/ui_viewDialog.h:1276
 msgid "Show boundaries"
 msgstr "Határok mutatása"
 
-#: src/ui_viewDialog.h:1258
+#: src/ui_viewDialog.h:1277
 msgid "Show art"
 msgstr "Ábrák mutatása"
 
 #. TRANSLATORS: Refers to constellation art
-#: src/ui_viewDialog.h:1259
+#: src/ui_viewDialog.h:1278
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:296
 msgid "Art brightness:"
 msgstr "Rajzok fényessége"
 
-#: src/ui_viewDialog.h:1260
+#: src/ui_viewDialog.h:1279
 msgid "Celestial Sphere"
 msgstr "Éggömb"
 
-#: src/ui_viewDialog.h:1261
+#: src/ui_viewDialog.h:1280
 msgid "Equatorial grid (on J2000)"
 msgstr "Egyenlítői háló (J2000)"
 
-#: src/ui_viewDialog.h:1262
+#: src/ui_viewDialog.h:1281
 msgid "Equatorial grid (on date)"
 msgstr "Egyenlítői háló (dátum szerint)"
 
-#: src/ui_viewDialog.h:1263
+#: src/ui_viewDialog.h:1282
 msgid "Ecliptic grid (on J2000)"
 msgstr "Ekliptikus háló (J2000)"
 
-#: src/ui_viewDialog.h:1267
+#: src/ui_viewDialog.h:1286
 msgid "Show equator line"
 msgstr "Egyenlítő mutatása"
 
-#: src/ui_viewDialog.h:1271
+#: src/ui_viewDialog.h:1290
 msgid "Show meridian line"
 msgstr "Meridián mutatása"
 
-#: src/ui_viewDialog.h:1275
+#: src/ui_viewDialog.h:1294
 msgid "Show horizon line"
 msgstr "Horizont mutatása"
 
-#: src/ui_viewDialog.h:1279
+#: src/ui_viewDialog.h:1298
 msgid "Show ecliptic line"
 msgstr "Ekliptika vonala"
 
-#: src/ui_viewDialog.h:1283
+#: src/ui_viewDialog.h:1302
 msgid "Show Galactic equator line"
 msgstr "Galaktikus egyenlítő mutatása"
 
-#: src/ui_viewDialog.h:1287
+#: src/ui_viewDialog.h:1306
 msgid "Projection"
 msgstr "Vetület"
 
-#: src/ui_viewDialog.h:1289
-msgid "Show ground"
-msgstr "Felszín mutatása"
-
-#: src/ui_viewDialog.h:1290
+#: src/ui_viewDialog.h:1308
 msgid "Show fog"
 msgstr "Köd mutatása"
 
-#: src/ui_viewDialog.h:1291
+#: src/ui_viewDialog.h:1309
 msgid "Use associated planet and position"
 msgstr "Ugrás a tájképhez társított bolygóra és helyre"
 
-#: src/ui_viewDialog.h:1292
-msgid "Use this landscape as default"
-msgstr "Tájkép beállítása alapértelmezettnek"
-
-#: src/ui_viewDialog.h:1293
-msgid "Use brightness settings for landscapes"
-msgstr "Tájképek fényesség beállítása"
-
-#: src/ui_viewDialog.h:1294
+#: src/ui_viewDialog.h:1310
 msgid "Show illumination layer (bright windows, light pollution, etc.)"
 msgstr ""
 
-#: src/ui_viewDialog.h:1295
+#: src/ui_viewDialog.h:1311
+msgid "Show ground"
+msgstr "Felszín mutatása"
+
+#: src/ui_viewDialog.h:1312
+msgid "Use this landscape as default"
+msgstr "Tájkép beállítása alapértelmezettnek"
+
+#: src/ui_viewDialog.h:1314
+msgid "Use minimal brightness to leave landscape visible also in darkness"
+msgstr ""
+
+#: src/ui_viewDialog.h:1316
+msgid "Minimal brightness:"
+msgstr ""
+
+#: src/ui_viewDialog.h:1318
+msgid ""
+"Value range 0..1 (landscape is black at night - landscape is fully bright)"
+msgstr ""
+
+#: src/ui_viewDialog.h:1321
+msgid "Use minimal brightness as may be specified in landscape.ini"
+msgstr ""
+
+#: src/ui_viewDialog.h:1323
+msgid "from landscape, if given"
+msgstr ""
+
+#: src/ui_viewDialog.h:1324
 msgid "Add/remove landscapes..."
 msgstr "Tájkép hozzáadása/törlése..."
 
-#: src/ui_viewDialog.h:1297
+#: src/ui_viewDialog.h:1326
 msgid "Use this sky culture as default"
 msgstr "Kultúrkör beállítása alapértelmezettnek"
 
-#: src/ui_viewDialog.h:1299
+#: src/ui_viewDialog.h:1328
 msgid "Visible"
 msgstr "Látható"
 
@@ -4662,7 +4688,7 @@ msgstr "Minden elérhető"
 msgid "Display no information"
 msgstr "Információ elrejtése"
 
-#: src/ui_configurationDialog.h:1036 plugins/Oculars/src/Oculars.cpp:1922
+#: src/ui_configurationDialog.h:1036 plugins/Oculars/src/Oculars.cpp:1905
 #: plugins/Observability/src/Observability.cpp:201
 msgid "None"
 msgstr "Semmi"
@@ -5183,22 +5209,22 @@ msgid "Angle measure"
 msgstr "szögmérés"
 
 #. TRANSLATORS: instructions for using the AngleMeasure plugin.
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:492
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:477
 msgid "The Angle Measure is enabled:"
 msgstr "Szögmérés engedélyezve:"
 
 #. TRANSLATORS: instructions for using the AngleMeasure plugin.
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:494
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:479
 msgid "Drag with the left button to measure, left-click to clear."
 msgstr "Bal gombbal húzni, bal gombbal kattintás törli."
 
 #. TRANSLATORS: instructions for using the AngleMeasure plugin.
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:496
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:481
 msgid "Right-clicking changes the end point only."
 msgstr "Jobb gombbal kattintás csak a végpontot változtatja."
 
 #. TRANSLATORS: PA is abbreviation for phrase "Position Angle"
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:498
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:483
 msgid "PA="
 msgstr ""
 
@@ -5379,7 +5405,7 @@ msgid "Save settings as default"
 msgstr "Beállítások alapértelmezetté tétele"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:245
-#: plugins/Oculars/src/ui_ocularDialog.h:1124
+#: plugins/Oculars/src/ui_ocularDialog.h:1129
 #: plugins/Satellites/src/ui_satellitesDialog.h:762
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:419
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:405
@@ -5411,8 +5437,8 @@ msgstr "Iránytű jeleket rajzol a horizontnál."
 msgid "Compass marks"
 msgstr "iránytű jelzések"
 
-#: plugins/Oculars/src/Oculars.cpp:79 plugins/Oculars/src/Oculars.cpp:1320
-#: plugins/Oculars/src/ui_ocularDialog.h:1062
+#: plugins/Oculars/src/Oculars.cpp:79 plugins/Oculars/src/Oculars.cpp:1297
+#: plugins/Oculars/src/ui_ocularDialog.h:1069
 msgid "Oculars"
 msgstr "Okulárok"
 
@@ -5426,205 +5452,205 @@ msgstr ""
 "Csak a nagyítás és a látótér nagysága állítható. Mutatja a képszenzor "
 "keretét és a Telradot is."
 
-#: plugins/Oculars/src/Oculars.cpp:848
+#: plugins/Oculars/src/Oculars.cpp:840
 msgid "Please select an object before switching to ocular view."
 msgstr "Válasszon objektumot az okulár nézetbe kapcsolás előtt."
 
-#: plugins/Oculars/src/Oculars.cpp:940
+#: plugins/Oculars/src/Oculars.cpp:934
 msgid "&Previous ocular"
 msgstr "&Előző okulár"
 
-#: plugins/Oculars/src/Oculars.cpp:941
+#: plugins/Oculars/src/Oculars.cpp:935
 msgid "&Next ocular"
 msgstr "&Következő okulár"
 
-#: plugins/Oculars/src/Oculars.cpp:942
+#: plugins/Oculars/src/Oculars.cpp:936
 msgid "Select &ocular"
 msgstr "&Okulár választása"
 
-#: plugins/Oculars/src/Oculars.cpp:989
+#: plugins/Oculars/src/Oculars.cpp:977
 msgid "Toggle &crosshair"
 msgstr "&Célkereszt be/ki"
 
-#: plugins/Oculars/src/Oculars.cpp:997
+#: plugins/Oculars/src/Oculars.cpp:985
 msgid "Configure &Oculars"
 msgstr "&Okulárok beállításai"
 
-#: plugins/Oculars/src/Oculars.cpp:1005
+#: plugins/Oculars/src/Oculars.cpp:993
 msgid "Toggle &CCD"
 msgstr "&CCD be/ki"
 
-#: plugins/Oculars/src/Oculars.cpp:1012
+#: plugins/Oculars/src/Oculars.cpp:1000
 msgid "Toggle &Telrad"
 msgstr "&Telrad ki/be"
 
-#: plugins/Oculars/src/Oculars.cpp:1021
+#: plugins/Oculars/src/Oculars.cpp:1008
 msgid "&Previous CCD"
 msgstr "&Előző CCD"
 
-#: plugins/Oculars/src/Oculars.cpp:1022
+#: plugins/Oculars/src/Oculars.cpp:1009
 msgid "&Next CCD"
 msgstr "&Következő CCD"
 
-#: plugins/Oculars/src/Oculars.cpp:1023
+#: plugins/Oculars/src/Oculars.cpp:1010
 msgid "&Select CCD"
 msgstr "CCD kivála&sztása"
 
-#: plugins/Oculars/src/Oculars.cpp:1045
+#: plugins/Oculars/src/Oculars.cpp:1027
 msgid "&Rotate CCD"
 msgstr "CCD fo&rgatása"
 
-#: plugins/Oculars/src/Oculars.cpp:1067
+#: plugins/Oculars/src/Oculars.cpp:1049
 msgid "&Reset rotation"
 msgstr "Forgatás &reszet"
 
-#: plugins/Oculars/src/Oculars.cpp:1321
-#: plugins/Oculars/src/ui_ocularDialog.h:1064
+#: plugins/Oculars/src/Oculars.cpp:1298
+#: plugins/Oculars/src/ui_ocularDialog.h:1071
 msgid "Ocular view"
 msgstr "okulárnézet"
 
-#: plugins/Oculars/src/Oculars.cpp:1338
+#: plugins/Oculars/src/Oculars.cpp:1315
 msgid "Oculars popup menu"
 msgstr "okulár menü"
 
-#: plugins/Oculars/src/Oculars.cpp:1339
+#: plugins/Oculars/src/Oculars.cpp:1316
 msgid "Show crosshairs"
 msgstr "célkereszt mutatása"
 
-#: plugins/Oculars/src/Oculars.cpp:1340
+#: plugins/Oculars/src/Oculars.cpp:1317
 msgid "Image sensor frame"
 msgstr "Képérzékelő"
 
-#: plugins/Oculars/src/Oculars.cpp:1341
+#: plugins/Oculars/src/Oculars.cpp:1318
 msgid "Telrad sight"
 msgstr "Telrad nézet"
 
-#: plugins/Oculars/src/Oculars.cpp:1342
+#: plugins/Oculars/src/Oculars.cpp:1319
 msgid "Oculars plugin configuration"
 msgstr "Okulár bővítmény beállításai"
 
-#: plugins/Oculars/src/Oculars.cpp:1344
+#: plugins/Oculars/src/Oculars.cpp:1321
 msgid "Select next telescope"
 msgstr "Következő távcső"
 
-#: plugins/Oculars/src/Oculars.cpp:1346
+#: plugins/Oculars/src/Oculars.cpp:1323
 msgid "Select previous telescope"
 msgstr "Előző távcső"
 
-#: plugins/Oculars/src/Oculars.cpp:1348
+#: plugins/Oculars/src/Oculars.cpp:1325
 msgid "Select next eyepiece"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1350
+#: plugins/Oculars/src/Oculars.cpp:1327
 msgid "Select previous eyepiece"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1560
+#: plugins/Oculars/src/Oculars.cpp:1542
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:500
 #, qt-format
 msgid "Ocular #%1"
 msgstr "Okulár #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:1565
+#: plugins/Oculars/src/Oculars.cpp:1547
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:504
 #, qt-format
 msgid "Ocular #%1: %2"
 msgstr "Okulár #%1: %2"
 
 #. TRANSLATORS: FL = Focal length
-#: plugins/Oculars/src/Oculars.cpp:1579
+#: plugins/Oculars/src/Oculars.cpp:1561
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:541
 #, qt-format
 msgid "Ocular FL: %1 mm"
 msgstr "Okulár FL: %1 mm"
 
 #. TRANSLATORS: aFOV = apparent field of view
-#: plugins/Oculars/src/Oculars.cpp:1586
+#: plugins/Oculars/src/Oculars.cpp:1568
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:551
 #, qt-format
 msgid "Ocular aFOV: %1"
 msgstr "Okulár aFOV: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1598
+#: plugins/Oculars/src/Oculars.cpp:1580
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:581
 #, qt-format
 msgid "Lens #%1"
 msgstr "Lencse #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:1602
+#: plugins/Oculars/src/Oculars.cpp:1584
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:585
 #, qt-format
 msgid "Lens #%1: %2"
 msgstr "Lencse #%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:1607
+#: plugins/Oculars/src/Oculars.cpp:1589
 msgid "Lens: none"
 msgstr "Lencse: nincs"
 
-#: plugins/Oculars/src/Oculars.cpp:1617 plugins/Oculars/src/Oculars.cpp:1674
+#: plugins/Oculars/src/Oculars.cpp:1599 plugins/Oculars/src/Oculars.cpp:1656
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:738
 #, qt-format
 msgid "Telescope #%1"
 msgstr "Távcső #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:1622 plugins/Oculars/src/Oculars.cpp:1679
+#: plugins/Oculars/src/Oculars.cpp:1604 plugins/Oculars/src/Oculars.cpp:1661
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:742
 #, qt-format
 msgid "Telescope #%1: %2"
 msgstr "Távcső #%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:1633
+#: plugins/Oculars/src/Oculars.cpp:1615
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:818
 #, qt-format
 msgid "Magnification: %1"
 msgstr "Nagyítás: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1641
+#: plugins/Oculars/src/Oculars.cpp:1623
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:827
 #, qt-format
 msgid "FOV: %1"
 msgstr "FOV: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1651
+#: plugins/Oculars/src/Oculars.cpp:1633
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:683
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:780
 #, qt-format
 msgid "Dimensions: %1"
 msgstr "Dimenziók: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1656
+#: plugins/Oculars/src/Oculars.cpp:1638
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:643
 #, qt-format
 msgid "Sensor #%1"
 msgstr "Szenzor #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:1660
+#: plugins/Oculars/src/Oculars.cpp:1642
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:647
 #, qt-format
 msgid "Sensor #%1: %2"
 msgstr "Szenzor #%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:1918
+#: plugins/Oculars/src/Oculars.cpp:1901
 msgid "&Lens"
 msgstr "&Lencsék"
 
-#: plugins/Oculars/src/Oculars.cpp:1919
+#: plugins/Oculars/src/Oculars.cpp:1902
 msgid "&Previous lens"
 msgstr "&Előző lencse"
 
-#: plugins/Oculars/src/Oculars.cpp:1920
+#: plugins/Oculars/src/Oculars.cpp:1903
 msgid "&Next lens"
 msgstr "&Következő lencse"
 
-#: plugins/Oculars/src/Oculars.cpp:1950
+#: plugins/Oculars/src/Oculars.cpp:1933
 msgid "&Telescope"
 msgstr "&Távcső"
 
-#: plugins/Oculars/src/Oculars.cpp:1951
+#: plugins/Oculars/src/Oculars.cpp:1934
 msgid "&Previous telescope"
 msgstr "&Előző távcső"
 
-#: plugins/Oculars/src/Oculars.cpp:1952
+#: plugins/Oculars/src/Oculars.cpp:1935
 msgid "&Next telescope"
 msgstr "&Következő távcső"
 
@@ -5819,174 +5845,172 @@ msgstr "Az okulár nézetet kapcsolja be/ki."
 msgid "Opens the pop-up navigation menu."
 msgstr "A navigációs menüt nyitja meg."
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1065
+#: plugins/Oculars/src/ui_ocularDialog.h:1072
 msgid "Enable only if an object is selected"
 msgstr "Csak ha ki van választva objektum"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1066
+#: plugins/Oculars/src/ui_ocularDialog.h:1073
 msgid "Scale image circle"
 msgstr "Kép méretének skálázása"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1068
+#: plugins/Oculars/src/ui_ocularDialog.h:1075
 msgid "Apply limits stellar magnitude for different apertures of telescopes"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1070
+#: plugins/Oculars/src/ui_ocularDialog.h:1077
 msgid "Limit stellar magnitude"
 msgstr "Csillagok fényességének korlátozása"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1071
+#: plugins/Oculars/src/ui_ocularDialog.h:1078
 msgid "Key mappings"
 msgstr "Billentyűbeállítás"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1072
+#: plugins/Oculars/src/ui_ocularDialog.h:1079
 msgid "Toggle ocular view:"
 msgstr "Okulárnézet:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1074
+#: plugins/Oculars/src/ui_ocularDialog.h:1081
 msgid "Open pop-up navigation menu:"
 msgstr "Felugró navigációs menü megnyitása:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1075
+#: plugins/Oculars/src/ui_ocularDialog.h:1082
 msgid "Interface"
 msgstr "Kezelőfelület"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1076
+#: plugins/Oculars/src/ui_ocularDialog.h:1083
 msgid "On-screen control panel"
 msgstr "Beállítópanel"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1077
-msgid "Use degrees and minutes for FOV of CCD"
-msgstr "Fok és perc használata a FOV és a CCD számára"
-
-#: plugins/Oculars/src/ui_ocularDialog.h:1079
-msgid ""
-"Please enable it for avoiding of flips the whole sky from the telescope's "
-"settings."
-msgstr ""
-
-#: plugins/Oculars/src/ui_ocularDialog.h:1081
-msgid "Disable zoom keys for CCD"
-msgstr ""
-
-#: plugins/Oculars/src/ui_ocularDialog.h:1083
+#: plugins/Oculars/src/ui_ocularDialog.h:1085
 msgid ""
 "Mark it if you want the FOV value the same like at the startup of Stellarium."
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1085
+#: plugins/Oculars/src/ui_ocularDialog.h:1087
 msgid "Restore FOV to initial values"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1086
+#: plugins/Oculars/src/ui_ocularDialog.h:1088
+msgid "Sensor view"
+msgstr ""
+
+#: plugins/Oculars/src/ui_ocularDialog.h:1089
+msgid "Use degrees and minutes for FOV of CCD"
+msgstr "Fok és perc használata a FOV és a CCD számára"
+
+#: plugins/Oculars/src/ui_ocularDialog.h:1090
+msgid "Use flip for CCD"
+msgstr ""
+
+#: plugins/Oculars/src/ui_ocularDialog.h:1091
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:225
 msgid "General"
 msgstr "Általános"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1087
-#: plugins/Oculars/src/ui_ocularDialog.h:1096
+#: plugins/Oculars/src/ui_ocularDialog.h:1092
+#: plugins/Oculars/src/ui_ocularDialog.h:1101
 msgid "Eyepieces"
 msgstr "Szemlencsék"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1088
-#: plugins/Oculars/src/ui_ocularDialog.h:1098
-#: plugins/Oculars/src/ui_ocularDialog.h:1105
-#: plugins/Oculars/src/ui_ocularDialog.h:1116
+#: plugins/Oculars/src/ui_ocularDialog.h:1093
+#: plugins/Oculars/src/ui_ocularDialog.h:1103
+#: plugins/Oculars/src/ui_ocularDialog.h:1110
+#: plugins/Oculars/src/ui_ocularDialog.h:1121
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:219
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:403
 msgid "Add"
 msgstr "Hozzáad"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1090
-#: plugins/Oculars/src/ui_ocularDialog.h:1100
-#: plugins/Oculars/src/ui_ocularDialog.h:1107
-#: plugins/Oculars/src/ui_ocularDialog.h:1118
+#: plugins/Oculars/src/ui_ocularDialog.h:1095
+#: plugins/Oculars/src/ui_ocularDialog.h:1105
+#: plugins/Oculars/src/ui_ocularDialog.h:1112
+#: plugins/Oculars/src/ui_ocularDialog.h:1123
 #: plugins/Satellites/src/ui_satellitesDialog.h:731
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:483
 msgid "Name:"
 msgstr "Név:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1091
+#: plugins/Oculars/src/ui_ocularDialog.h:1096
 msgid "aFOV:"
 msgstr "aFOV:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1092
-#: plugins/Oculars/src/ui_ocularDialog.h:1119
+#: plugins/Oculars/src/ui_ocularDialog.h:1097
+#: plugins/Oculars/src/ui_ocularDialog.h:1124
 msgid "Focal length:"
 msgstr "Fókusztávolság:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1093
+#: plugins/Oculars/src/ui_ocularDialog.h:1098
 msgid "Field stop:"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1094
+#: plugins/Oculars/src/ui_ocularDialog.h:1099
 msgid "Binoculars"
 msgstr "Binokulárok"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1095
+#: plugins/Oculars/src/ui_ocularDialog.h:1100
 msgid "Has a permanent cross-hairs"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1097
-#: plugins/Oculars/src/ui_ocularDialog.h:1103
+#: plugins/Oculars/src/ui_ocularDialog.h:1102
+#: plugins/Oculars/src/ui_ocularDialog.h:1108
 msgid "Lenses"
 msgstr "Lencsék"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1101
+#: plugins/Oculars/src/ui_ocularDialog.h:1106
 msgid "Multiplier:"
 msgstr "Szorzó:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1102
+#: plugins/Oculars/src/ui_ocularDialog.h:1107
 msgid ""
 "Values of multiplicity >1 expand the focal length (Barlow lens). Values of "
 "multiplicity <1 reduce the focal length (Shapley lens)."
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1104
-#: plugins/Oculars/src/ui_ocularDialog.h:1114
+#: plugins/Oculars/src/ui_ocularDialog.h:1109
+#: plugins/Oculars/src/ui_ocularDialog.h:1119
 msgid "Sensors"
 msgstr "Szenzorok"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1108
+#: plugins/Oculars/src/ui_ocularDialog.h:1113
 msgid "Resolution x (pixels):"
 msgstr "X felbontás (pixel):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1109
+#: plugins/Oculars/src/ui_ocularDialog.h:1114
 msgid "Resolution y (pixels):"
 msgstr "Y felbontás (pixel):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1110
+#: plugins/Oculars/src/ui_ocularDialog.h:1115
 msgid "Chip width (mm):"
 msgstr "Csipméret (mm):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1111
+#: plugins/Oculars/src/ui_ocularDialog.h:1116
 msgid "Chip height (mm):"
 msgstr "Csipmagasság (mm):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1112
+#: plugins/Oculars/src/ui_ocularDialog.h:1117
 msgid "Pixel width (micron):"
 msgstr "Pixelszélesség (mikron):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1113
+#: plugins/Oculars/src/ui_ocularDialog.h:1118
 msgid "Pixel height (micron):"
 msgstr "Pixelmagasság (mikron):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1115
-#: plugins/Oculars/src/ui_ocularDialog.h:1123
+#: plugins/Oculars/src/ui_ocularDialog.h:1120
+#: plugins/Oculars/src/ui_ocularDialog.h:1128
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:392
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:408
 msgid "Telescopes"
 msgstr "Távcsövek"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1120
+#: plugins/Oculars/src/ui_ocularDialog.h:1125
 msgid "Diameter:"
 msgstr "Átmérő:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1121
+#: plugins/Oculars/src/ui_ocularDialog.h:1126
 msgid "Horizontal flip"
 msgstr "Vízszintes tükrözés"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1122
+#: plugins/Oculars/src/ui_ocularDialog.h:1127
 msgid "Vertical flip"
 msgstr "Függőleges tükrözés"
 
@@ -10608,6 +10632,9 @@ msgstr ""
 
 #~ msgid "1000"
 #~ msgstr "1000"
+
+#~ msgid "Use brightness settings for landscapes"
+#~ msgstr "Tájképek fényesség beállítása"
 
 #~ msgid ""
 #~ "Screensaver of various happenings in the Solar System. 187 events in all!"

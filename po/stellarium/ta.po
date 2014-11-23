@@ -7,18 +7,18 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-11-09 00:56+0600\n"
+"POT-Creation-Date: 2014-11-22 01:40+0600\n"
 "PO-Revision-Date: 2014-08-20 20:37+0000\n"
 "Last-Translator: Balaji பாலாஜி <Unknown>\n"
 "Language-Team: Tamil <ta@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-11-09 05:59+0000\n"
-"X-Generator: Launchpad (build 17231)\n"
+"X-Launchpad-Export-Date: 2014-11-22 05:15+0000\n"
+"X-Generator: Launchpad (build 17252)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:106 src/core/modules/StarMgr.cpp:346
-#: src/core/modules/GridLinesMgr.cpp:727 src/core/modules/LandscapeMgr.cpp:355
+#: src/core/modules/GridLinesMgr.cpp:726 src/core/modules/LandscapeMgr.cpp:355
 #: src/core/modules/NebulaMgr.cpp:126 src/core/modules/SolarSystem.cpp:159
 #: src/core/StelApp.cpp:487 src/core/StelCore.cpp:185
 #: src/core/StelSkyLayerMgr.cpp:87 src/StelMainView.cpp:363
@@ -45,8 +45,8 @@ msgstr "விண்மீன் குழு விவரக்குறிப�
 msgid "Constellation boundaries"
 msgstr "விண்மீன் குழு எல்லைகள்"
 
-#: src/core/modules/StarMgr.cpp:347 src/ui_viewDialog.h:1191
-#: src/ui_viewDialog.h:1223 src/ui_viewDialog.h:1249
+#: src/core/modules/StarMgr.cpp:347 src/ui_viewDialog.h:1210
+#: src/ui_viewDialog.h:1242 src/ui_viewDialog.h:1268
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:245
 msgid "Stars"
 msgstr "நட்சத்திரங்கள்"
@@ -55,75 +55,75 @@ msgstr "நட்சத்திரங்கள்"
 msgid "Stars labels"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:578 src/ui_viewDialog.h:1273
+#: src/core/modules/GridLinesMgr.cpp:577 src/ui_viewDialog.h:1292
 msgid "Meridian"
 msgstr "உச்சநெடுங்கோடு"
 
-#: src/core/modules/GridLinesMgr.cpp:582 src/ui_viewDialog.h:1281
+#: src/core/modules/GridLinesMgr.cpp:581 src/ui_viewDialog.h:1300
 msgid "Ecliptic"
 msgstr "சூரிய வீதி"
 
-#: src/core/modules/GridLinesMgr.cpp:586 src/ui_viewDialog.h:1269
+#: src/core/modules/GridLinesMgr.cpp:585 src/ui_viewDialog.h:1288
 msgid "Equator"
 msgstr "நிலநடுக்கோடு"
 
-#: src/core/modules/GridLinesMgr.cpp:590 src/ui_viewDialog.h:1277
+#: src/core/modules/GridLinesMgr.cpp:589 src/ui_viewDialog.h:1296
 msgid "Horizon"
 msgstr "தொடுவானம்"
 
-#: src/core/modules/GridLinesMgr.cpp:594
+#: src/core/modules/GridLinesMgr.cpp:593
 msgid "Galactic Equator"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:728
+#: src/core/modules/GridLinesMgr.cpp:727
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:331
 msgid "Equatorial grid"
 msgstr "மத்தியகோட்டிற்குரிய கட்டம்"
 
-#: src/core/modules/GridLinesMgr.cpp:729 src/ui_viewDialog.h:1264
+#: src/core/modules/GridLinesMgr.cpp:728 src/ui_viewDialog.h:1283
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:326
 msgid "Azimuthal grid"
 msgstr "திசைவில் கட்டம்"
 
-#: src/core/modules/GridLinesMgr.cpp:730
+#: src/core/modules/GridLinesMgr.cpp:729
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:346
 msgid "Ecliptic line"
 msgstr "கிரகணத்திற்குரியகோடு"
 
-#: src/core/modules/GridLinesMgr.cpp:731
+#: src/core/modules/GridLinesMgr.cpp:730
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:341
 msgid "Equator line"
 msgstr "பூமத்திய ரேகை"
 
-#: src/core/modules/GridLinesMgr.cpp:732
+#: src/core/modules/GridLinesMgr.cpp:731
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:321
 msgid "Meridian line"
 msgstr "உச்சநெடுங்கோடு"
 
-#: src/core/modules/GridLinesMgr.cpp:733
+#: src/core/modules/GridLinesMgr.cpp:732
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:360
 msgid "Horizon line"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:734
+#: src/core/modules/GridLinesMgr.cpp:733
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:336
 msgid "Equatorial J2000 grid"
 msgstr "பூமத்திய ரேகை J2000 கட்டம்"
 
-#: src/core/modules/GridLinesMgr.cpp:735
+#: src/core/modules/GridLinesMgr.cpp:734
 msgid "Ecliptic J2000 grid"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:736 src/ui_viewDialog.h:1265
+#: src/core/modules/GridLinesMgr.cpp:735 src/ui_viewDialog.h:1284
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:365
 msgid "Galactic grid"
 msgstr "அண்ட கட்டம்"
 
-#: src/core/modules/GridLinesMgr.cpp:737 src/ui_viewDialog.h:1285
+#: src/core/modules/GridLinesMgr.cpp:736 src/ui_viewDialog.h:1304
 msgid "Galactic equator"
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:356 src/ui_viewDialog.h:1213
+#: src/core/modules/LandscapeMgr.cpp:356 src/ui_viewDialog.h:1232
 msgid "Atmosphere"
 msgstr "வளிமண்டலம்"
 
@@ -131,7 +131,7 @@ msgstr "வளிமண்டலம்"
 msgid "Fog"
 msgstr "மூடு பனி"
 
-#: src/core/modules/LandscapeMgr.cpp:358 src/ui_viewDialog.h:1286
+#: src/core/modules/LandscapeMgr.cpp:358 src/ui_viewDialog.h:1305
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:303
 msgid "Cardinal points"
 msgstr "சிறப்பியல்புப் புள்ளிகள்"
@@ -148,16 +148,16 @@ msgstr ""
 msgid "Author: "
 msgstr "எழுதியவர் "
 
-#: src/core/modules/LandscapeMgr.cpp:604
+#: src/core/modules/LandscapeMgr.cpp:607
 msgid "Location: "
 msgstr "இடம்: "
 
-#: src/core/modules/LandscapeMgr.cpp:609
+#: src/core/modules/LandscapeMgr.cpp:612
 #, qt-format
 msgid ", %1 m"
 msgstr ", %1 m"
 
-#: src/core/modules/LandscapeMgr.cpp:613
+#: src/core/modules/LandscapeMgr.cpp:616
 msgid "Planet: "
 msgstr "கோள் "
 
@@ -300,22 +300,26 @@ msgstr "உடுநாள்: %1"
 msgid "Mean solar day: %1"
 msgstr "சராசரி சூரிய நாள்: %1"
 
-#: src/core/modules/Planet.cpp:261
+#: src/core/modules/Planet.cpp:259
+msgid "The period of rotation is chaotic"
+msgstr ""
+
+#: src/core/modules/Planet.cpp:265
 #, qt-format
 msgid "Phase Angle: %1"
 msgstr "நிலைமைக் கோணம்: %1"
 
-#: src/core/modules/Planet.cpp:262
+#: src/core/modules/Planet.cpp:266
 #, qt-format
 msgid "Elongation: %1"
 msgstr "நீட்டிப்பு: %1"
 
-#: src/core/modules/Planet.cpp:263
+#: src/core/modules/Planet.cpp:267
 #, qt-format
 msgid "Phase: %1"
 msgstr "நிலைமை: %1"
 
-#: src/core/modules/Planet.cpp:264
+#: src/core/modules/Planet.cpp:268
 #, qt-format
 msgid "Illuminated: %1%"
 msgstr "ஒளியூட்டப்பட்டது: %1%"
@@ -657,11 +661,11 @@ msgstr "கிடைமட்டமாக காட்சியை திரு�
 msgid "Flip scene vertically"
 msgstr "செங்குத்தாக காட்சியை திருப்பு"
 
-#: src/core/StelCore.cpp:1507
+#: src/core/StelCore.cpp:1508
 msgid "Correction is disabled. Use only if you know what you are doing!"
 msgstr ""
 
-#: src/core/StelCore.cpp:1510
+#: src/core/StelCore.cpp:1511
 #, qt-format
 msgid ""
 "This historical formula was obtained by C. Schoch in 1931 and was used by G. "
@@ -669,14 +673,14 @@ msgid ""
 "Ancient Solar Eclipses</em> (%1). See for more info %2here%3."
 msgstr ""
 
-#: src/core/StelCore.cpp:1513
+#: src/core/StelCore.cpp:1514
 #, qt-format
 msgid ""
 "This empirical equation was published by G. M. Clemence in the article "
 "<em>On the system of astronomical constants</em> (%1)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1516
+#: src/core/StelCore.cpp:1517
 #, qt-format
 msgid ""
 "This formula is based on a study of post-1650 observations of the Sun, the "
@@ -685,14 +689,14 @@ msgid ""
 "PC program SunTracker Pro."
 msgstr ""
 
-#: src/core/StelCore.cpp:1520
+#: src/core/StelCore.cpp:1521
 msgid ""
 "This is a slightly modified version of the IAU (1952) formula which was "
 "adopted in the <em>Astronomical Ephemeris</em> and in the <em>Canon of Solar "
 "Eclipses</em> by Mucke & Meeus (1983)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1524
+#: src/core/StelCore.cpp:1525
 msgid ""
 "The tables of Tuckerman (1962, 1964) list the positions of the Sun, the Moon "
 "and the planets at 5- and 10-day intervals from 601 BCE to 1649 CE. The same "
@@ -700,7 +704,7 @@ msgid ""
 "(1973)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1528
+#: src/core/StelCore.cpp:1529
 #, qt-format
 msgid ""
 "This equation was published by P. M. Muller and F. R. Stephenson in the "
@@ -708,14 +712,14 @@ msgid ""
 "observations</em> (%1)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1531
+#: src/core/StelCore.cpp:1532
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson in the article <em>Pre-"
 "Telescopic Astronomical Observations</em> (%1)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1534
+#: src/core/StelCore.cpp:1535
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation (outdated and superseded by Schmadel & "
@@ -724,14 +728,14 @@ msgid ""
 "period 1800-1975</em> (%1) as fit through data published by Brouwer (1952)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1537
+#: src/core/StelCore.cpp:1538
 msgid ""
 "This algorithm was adopted in P. Bretagnon & L. Simon's <em>Planetary "
 "Programs and Tables from -4000 to +2800</em> (1986) and in the PC "
 "planetarium program RedShift."
 msgstr ""
 
-#: src/core/StelCore.cpp:1540
+#: src/core/StelCore.cpp:1541
 #, qt-format
 msgid ""
 "This formula was published by F. R. Stephenson and L. V. Morrison in the "
@@ -739,25 +743,25 @@ msgid ""
 "A.D. 1980</em> (%1)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1543
+#: src/core/StelCore.cpp:1544
 msgid "This algorithm is used in the PC planetarium program Guide 7."
 msgstr ""
 
-#: src/core/StelCore.cpp:1546
+#: src/core/StelCore.cpp:1547
 msgid ""
 "This algorithm was given by F. Espenak in his <em>Fifty Year Canon of Solar "
 "Eclipses: 1986-2035</em> (1987) and in his <em>Fifty Year Canon of Lunar "
 "Eclipses: 1986-2035</em> (1989)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1549
+#: src/core/StelCore.cpp:1550
 #, qt-format
 msgid ""
 "This formula was obtained by K.M. Borkowski (%1) from an analysis of 31 "
 "solar eclipse records dating between 2137 BCE and 1715 CE."
 msgstr ""
 
-#: src/core/StelCore.cpp:1552
+#: src/core/StelCore.cpp:1553
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation was published by L. D. Schmadel and G. "
@@ -766,14 +770,14 @@ msgid ""
 "Morrison (1984)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1555
+#: src/core/StelCore.cpp:1556
 msgid ""
 "This formula was adopted by M. Chapront-Touze & J. Chapront in the shortened "
 "version of the ELP 2000-85 lunar theory in their <em>Lunar Tables and "
 "Programs from 4000 B.C. to A.D. 8000</em> (1991)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1558
+#: src/core/StelCore.cpp:1559
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson and L. V. Morrison in the "
@@ -781,42 +785,42 @@ msgid ""
 "1990</em> (%1)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1561
+#: src/core/StelCore.cpp:1562
 #, qt-format
 msgid ""
 "F. R. Stephenson published this formula in his book <em>Historical Eclipses "
 "and Earth's Rotation</em> (%1)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1564
+#: src/core/StelCore.cpp:1565
 msgid ""
 "From J. Meeus, <em>Astronomical Algorithms</em> (2nd ed., 1998), and widely "
 "used. Table for 1620..2000, and includes a variant of Chapront, Chapront-"
 "Touze & Francou (1997) for dates outside 1620..2000."
 msgstr ""
 
-#: src/core/StelCore.cpp:1567
+#: src/core/StelCore.cpp:1568
 #, qt-format
 msgid ""
 "The JPL Solar System Dynamics Group of the NASA Jet Propulsion Laboratory "
 "use this formula in their interactive website %1JPL Horizons%2."
 msgstr ""
 
-#: src/core/StelCore.cpp:1570
+#: src/core/StelCore.cpp:1571
 #, qt-format
 msgid ""
 "This polynome was published by J. Meeus and L. Simons in article "
 "<em>Polynomial approximations to Delta T, 1620-2000 AD</em> (%1)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1573
+#: src/core/StelCore.cpp:1574
 msgid ""
 "The fourth edition of O. Montenbruck & T. Pfleger's <em>Astronomy on the "
 "Personal Computer</em> (2000) provides simple 3rd-order polynomial data fits "
 "for the recent past."
 msgstr ""
 
-#: src/core/StelCore.cpp:1576
+#: src/core/StelCore.cpp:1577
 msgid ""
 "E. M. Reingold & N. Dershowitz present this polynomial data fit in "
 "<em>Calendrical Calculations</em> (3rd ed. 2007) and in their "
@@ -824,7 +828,7 @@ msgid ""
 "<em>Astronomical Algorithms</em> (1991)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1579
+#: src/core/StelCore.cpp:1580
 #, qt-format
 msgid ""
 "This important solution was published by L. V. Morrison and F. R. Stephenson "
@@ -832,7 +836,7 @@ msgid ""
 "calculation of eclipses</em> (%2) with addendum in (%3)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1582
+#: src/core/StelCore.cpp:1583
 #, qt-format
 msgid ""
 "From the Length of Day (LOD; as determined by Stephenson & Morrison (%2)), "
@@ -841,7 +845,7 @@ msgid ""
 "by Stephenson (%2). See for more info %3here%4."
 msgstr ""
 
-#: src/core/StelCore.cpp:1585
+#: src/core/StelCore.cpp:1586
 #, qt-format
 msgid ""
 "This solution by F. Espenak and J. Meeus, based on Morrison & Stephenson "
@@ -851,11 +855,11 @@ msgid ""
 "solar, lunar and planetary ephemeris program SOLEX."
 msgstr ""
 
-#: src/core/StelCore.cpp:1585
+#: src/core/StelCore.cpp:1586
 msgid "Used by default."
 msgstr ""
 
-#: src/core/StelCore.cpp:1588
+#: src/core/StelCore.cpp:1589
 #, qt-format
 msgid ""
 "This solution by B. Banjevic, based on Stephenson & Morrison (1984), was "
@@ -863,7 +867,7 @@ msgid ""
 "Babylon</em> (%1)."
 msgstr ""
 
-#: src/core/StelCore.cpp:1591
+#: src/core/StelCore.cpp:1592
 #, qt-format
 msgid ""
 "This solution by S. Islam, M. Sadiq and M. S. Qureshi, based on Meeus & "
@@ -871,42 +875,42 @@ msgid ""
 "Approximation of DeltaT</em> (%1) and revisited by Sana Islam in 2013."
 msgstr ""
 
-#: src/core/StelCore.cpp:1594
+#: src/core/StelCore.cpp:1595
 #, qt-format
 msgid ""
 "This is a quadratic formula for calculation of %1T with coefficients defined "
 "by the user."
 msgstr ""
 
-#: src/core/StelCore.cpp:1597 src/core/SimbadSearcher.cpp:133
+#: src/core/StelCore.cpp:1598 src/core/SimbadSearcher.cpp:133
 msgid "Error"
 msgstr "பிழை"
 
-#: src/core/StelCore.cpp:1647
+#: src/core/StelCore.cpp:1648
 msgid "with meaningless values outside this range"
 msgstr ""
 
-#: src/core/StelCore.cpp:1673
+#: src/core/StelCore.cpp:1674
 msgid ""
 "with a mean error of less than one second, max. error 1.9s, and meaningless "
 "values outside this range"
 msgstr ""
 
-#: src/core/StelCore.cpp:1695 src/core/StelCore.cpp:1700
-#: src/core/StelCore.cpp:1727 src/core/StelCore.cpp:1732
+#: src/core/StelCore.cpp:1696 src/core/StelCore.cpp:1701
+#: src/core/StelCore.cpp:1728 src/core/StelCore.cpp:1733
 msgid "with zero values outside this range"
 msgstr ""
 
-#: src/core/StelCore.cpp:1705
+#: src/core/StelCore.cpp:1706
 msgid "with a typical 1-second accuracy and zero values outside this range"
 msgstr ""
 
-#: src/core/StelCore.cpp:1742
+#: src/core/StelCore.cpp:1743
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2, %3."
 msgstr ""
 
-#: src/core/StelCore.cpp:1744
+#: src/core/StelCore.cpp:1745
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2."
 msgstr ""
@@ -1087,26 +1091,26 @@ msgstr "கிடைத்தது"
 msgid "Select screenshot directory"
 msgstr "திரைப்பிடிப்பு அடைவை தேர்வு செய்க"
 
-#: src/gui/ConfigurationDialog.cpp:687
+#: src/gui/ConfigurationDialog.cpp:690
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr "தொடக்க பார்வைப் புலம்: %1%2"
 
-#: src/gui/ConfigurationDialog.cpp:695
+#: src/gui/ConfigurationDialog.cpp:698
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "தொடங்களின்ப் பொழுது பார்வை திசை திசைவில்/உயரம்: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:752
+#: src/gui/ConfigurationDialog.cpp:755
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:392
 msgid "Authors"
 msgstr "படைப்பாளர்கள்"
 
-#: src/gui/ConfigurationDialog.cpp:753 src/gui/ViewDialog.cpp:452
+#: src/gui/ConfigurationDialog.cpp:756 src/gui/ViewDialog.cpp:456
 msgid "Contact"
 msgstr "தொடர்புகொள்"
 
-#: src/gui/ConfigurationDialog.cpp:755
+#: src/gui/ConfigurationDialog.cpp:758
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:89
 #: plugins/Oculars/src/gui/OcularDialog.cpp:505
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:391
@@ -1120,7 +1124,7 @@ msgstr "தொடர்புகொள்"
 msgid "Version"
 msgstr "பதிப்பு"
 
-#: src/gui/ConfigurationDialog.cpp:838
+#: src/gui/ConfigurationDialog.cpp:841
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:90
 #: plugins/Oculars/src/gui/OcularDialog.cpp:506
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:118
@@ -1133,23 +1137,23 @@ msgstr "பதிப்பு"
 msgid "Author"
 msgstr "படைப்பாளர்"
 
-#: src/gui/ConfigurationDialog.cpp:842
+#: src/gui/ConfigurationDialog.cpp:845
 msgid "License"
 msgstr "உரிமம்"
 
-#: src/gui/ConfigurationDialog.cpp:846
+#: src/gui/ConfigurationDialog.cpp:849
 msgid "Shortcut"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:870
+#: src/gui/ConfigurationDialog.cpp:873
 msgid "Running script: "
 msgstr "குறுநிரலை இயக்குகிறது: "
 
-#: src/gui/ConfigurationDialog.cpp:877
+#: src/gui/ConfigurationDialog.cpp:880
 msgid "Running script: [none]"
 msgstr "குறுநிரலை இயக்குகிறது: [எதுவுமில்லை]"
 
-#: src/gui/ConfigurationDialog.cpp:942
+#: src/gui/ConfigurationDialog.cpp:945
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
@@ -1157,16 +1161,16 @@ msgstr ""
 "புது நட்சத்திரங்களின் விவர ஏடுகள் பதிவிறக்கம் செய்யப்பட்டுவிட்டது!\n"
 "அவைகளை காட்சிக்கு வைக்க மறுதொடக்கம் செய்யவும்."
 
-#: src/gui/ConfigurationDialog.cpp:946
+#: src/gui/ConfigurationDialog.cpp:949
 msgid "All available star catalogs have been installed."
 msgstr "இருக்ககூடிய எல்லா விண்மீன் விவர ஏடுகளும் உள்ளீடு செய்யப்பட்டுள்ளது."
 
-#: src/gui/ConfigurationDialog.cpp:951
+#: src/gui/ConfigurationDialog.cpp:954
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "விவர ஏட்டை பெறு %1 யில் %2"
 
-#: src/gui/ConfigurationDialog.cpp:958
+#: src/gui/ConfigurationDialog.cpp:961
 #, qt-format
 msgid ""
 "Downloading %1...\n"
@@ -1175,7 +1179,7 @@ msgstr ""
 "பதிவிறக்கம் நடைப்பெறுகிறது %1 \n"
 "(நீங்கள் இந்த சாளரத்தை மூடலாம்)"
 
-#: src/gui/ConfigurationDialog.cpp:965
+#: src/gui/ConfigurationDialog.cpp:968
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -1186,7 +1190,7 @@ msgstr ""
 "நட்சத்திர எண்ணிக்கை: %2 மில்லியன் \n"
 "எண் மதிப்பு வரையறை: %3- %4"
 
-#: src/gui/ConfigurationDialog.cpp:1008 src/gui/ConfigurationDialog.cpp:1042
+#: src/gui/ConfigurationDialog.cpp:1011 src/gui/ConfigurationDialog.cpp:1045
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -1195,11 +1199,11 @@ msgstr ""
 "பதிவிறக்கத்தில் பிழை %1:\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:1095
+#: src/gui/ConfigurationDialog.cpp:1098
 msgid "Verifying file integrity..."
 msgstr "கோப்பு ஒழுங்கமைவு பரிசோதிக்கபடுகிறது..."
 
-#: src/gui/ConfigurationDialog.cpp:1099
+#: src/gui/ConfigurationDialog.cpp:1102
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -1209,123 +1213,123 @@ msgstr ""
 "கோப்பு பழுதுபட்டுள்ளது."
 
 #. TRANSLATORS: Full phrase is "Algorithm of DeltaT"
-#: src/gui/ConfigurationDialog.cpp:1172
+#: src/gui/ConfigurationDialog.cpp:1175
 msgid "Algorithm of"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1183
+#: src/gui/ConfigurationDialog.cpp:1186
 msgid "Without correction"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1184
+#: src/gui/ConfigurationDialog.cpp:1187
 msgid "Schoch (1931)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1185
+#: src/gui/ConfigurationDialog.cpp:1188
 msgid "Clemence (1948)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1186
+#: src/gui/ConfigurationDialog.cpp:1189
 msgid "IAU (1952)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1187
+#: src/gui/ConfigurationDialog.cpp:1190
 msgid "Astronomical Ephemeris (1960)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1188
+#: src/gui/ConfigurationDialog.cpp:1191
 msgid "Tuckerman (1962, 1964) & Goldstine (1973)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1189
+#: src/gui/ConfigurationDialog.cpp:1192
 msgid "Muller & Stephenson (1975)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1190
+#: src/gui/ConfigurationDialog.cpp:1193
 msgid "Stephenson (1978)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1191
+#: src/gui/ConfigurationDialog.cpp:1194
 msgid "Schmadel & Zech (1979)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1192
+#: src/gui/ConfigurationDialog.cpp:1195
 msgid "Morrison & Stephenson (1982)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1193
+#: src/gui/ConfigurationDialog.cpp:1196
 msgid "Stephenson & Morrison (1984)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1194
+#: src/gui/ConfigurationDialog.cpp:1197
 msgid "Stephenson & Houlden (1986)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1195
+#: src/gui/ConfigurationDialog.cpp:1198
 msgid "Espenak (1987, 1989)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1196
+#: src/gui/ConfigurationDialog.cpp:1199
 msgid "Borkowski (1988)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1197
+#: src/gui/ConfigurationDialog.cpp:1200
 msgid "Schmadel & Zech (1988)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1198
+#: src/gui/ConfigurationDialog.cpp:1201
 msgid "Chapront-Touze & Chapront (1991)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1199
+#: src/gui/ConfigurationDialog.cpp:1202
 msgid "Stephenson & Morrison (1995)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1200
+#: src/gui/ConfigurationDialog.cpp:1203
 msgid "Stephenson (1997)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1202
+#: src/gui/ConfigurationDialog.cpp:1205
 msgid "Meeus (1998) (with Chapront, Chapront-Touze & Francou (1997))"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1203
+#: src/gui/ConfigurationDialog.cpp:1206
 msgid "JPL Horizons"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1204
+#: src/gui/ConfigurationDialog.cpp:1207
 msgid "Meeus & Simons (2000)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1205
+#: src/gui/ConfigurationDialog.cpp:1208
 msgid "Montenbruck & Pfleger (2000)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1206
+#: src/gui/ConfigurationDialog.cpp:1209
 msgid "Reingold & Dershowitz (2002, 2007)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1207
+#: src/gui/ConfigurationDialog.cpp:1210
 msgid "Morrison & Stephenson (2004, 2005)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1209
+#: src/gui/ConfigurationDialog.cpp:1212
 msgid "Espenak & Meeus (2006)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1210
+#: src/gui/ConfigurationDialog.cpp:1213
 msgid "Reijs (2006)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1211
+#: src/gui/ConfigurationDialog.cpp:1214
 msgid "Banjevic (2006)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1212
+#: src/gui/ConfigurationDialog.cpp:1215
 msgid "Islam, Sadiq & Qureshi (2008, 2013)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1213
+#: src/gui/ConfigurationDialog.cpp:1216
 #, qt-format
 msgid "Custom equation of %1T"
 msgstr ""
@@ -1613,99 +1617,99 @@ msgid "Frames per second"
 msgstr ""
 
 #. TRANSLATORS: Short description for Class 1 of the Bortle scale
-#: src/gui/ViewDialog.cpp:338
+#: src/gui/ViewDialog.cpp:342
 msgid "Excellent dark-sky site"
 msgstr ""
 
 #. TRANSLATORS: Short description for Class 2 of the Bortle scale
-#: src/gui/ViewDialog.cpp:340
+#: src/gui/ViewDialog.cpp:344
 msgid "Typical truly dark site"
 msgstr ""
 
 #. TRANSLATORS: Short description for Class 3 of the Bortle scale
-#: src/gui/ViewDialog.cpp:342
+#: src/gui/ViewDialog.cpp:346
 msgid "Rural sky"
 msgstr ""
 
 #. TRANSLATORS: Short description for Class 4 of the Bortle scale
-#: src/gui/ViewDialog.cpp:344
+#: src/gui/ViewDialog.cpp:348
 msgid "Rural/suburban transition"
 msgstr ""
 
 #. TRANSLATORS: Short description for Class 5 of the Bortle scale
-#: src/gui/ViewDialog.cpp:346
+#: src/gui/ViewDialog.cpp:350
 msgid "Suburban sky"
 msgstr ""
 
 #. TRANSLATORS: Short description for Class 6 of the Bortle scale
-#: src/gui/ViewDialog.cpp:348
+#: src/gui/ViewDialog.cpp:352
 msgid "Bright suburban sky"
 msgstr ""
 
 #. TRANSLATORS: Short description for Class 7 of the Bortle scale
-#: src/gui/ViewDialog.cpp:350
+#: src/gui/ViewDialog.cpp:354
 msgid "Suburban/urban transition"
 msgstr ""
 
 #. TRANSLATORS: Short description for Class 8 of the Bortle scale
-#: src/gui/ViewDialog.cpp:352
+#: src/gui/ViewDialog.cpp:356
 msgid "City sky"
 msgstr ""
 
 #. TRANSLATORS: Short description for Class 9 of the Bortle scale
-#: src/gui/ViewDialog.cpp:354
+#: src/gui/ViewDialog.cpp:358
 msgid "Inner-city sky"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:368
+#: src/gui/ViewDialog.cpp:372
 msgid "The naked-eye limiting magnitude is"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:500
+#: src/gui/ViewDialog.cpp:504
 msgid "No description"
 msgstr "விவரணம் இல்லை"
 
-#: src/gui/ViewDialog.cpp:588
+#: src/gui/ViewDialog.cpp:592
 msgid "No shooting stars"
 msgstr "எரிநட்சத்திரங்கள் இல்லை"
 
-#: src/gui/ViewDialog.cpp:596
+#: src/gui/ViewDialog.cpp:600
 msgid "Normal rate"
 msgstr "வழக்கமான வேகம்"
 
-#: src/gui/ViewDialog.cpp:599
+#: src/gui/ViewDialog.cpp:603
 msgid "Standard Orionids rate"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:602
+#: src/gui/ViewDialog.cpp:606
 msgid "Standard Perseids rate"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:605
+#: src/gui/ViewDialog.cpp:609
 msgid "Standard Geminids rate"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:608
+#: src/gui/ViewDialog.cpp:612
 msgid "Exceptional Perseid rate"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:611
+#: src/gui/ViewDialog.cpp:615
 msgid "Meteor storm rate"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:614
+#: src/gui/ViewDialog.cpp:618
 msgid "Exceptional Draconid rate"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:617
+#: src/gui/ViewDialog.cpp:621
 msgid "Exceptional Leonid rate"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:620
+#: src/gui/ViewDialog.cpp:624
 msgid "Very high rate (1966 Leonids)"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:623
+#: src/gui/ViewDialog.cpp:627
 msgid "Highest rate ever (1833 Leonids)"
 msgstr ""
 
@@ -2397,7 +2401,7 @@ msgid "plutoid"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:189 src/ui_viewDialog.h:1192
+#: src/translations.h:189 src/ui_viewDialog.h:1211
 msgid "Planets"
 msgstr "கோள்கள்"
 
@@ -2584,154 +2588,159 @@ msgstr ""
 msgid "Grossmugl"
 msgstr ""
 
+#. TRANSLATORS: Name of landscape
+#: src/translations.h:268
+msgid "Zero Horizon"
+msgstr ""
+
 #. TRANSLATORS: Name of script
-#: src/translations.h:273
+#: src/translations.h:274
 msgid "Landscape Tour"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:275
+#: src/translations.h:276
 msgid "Partial Lunar Eclipse"
 msgstr "பகுதி சந்திர கிரகணம்"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:277
+#: src/translations.h:278
 msgid "Total Lunar Eclipse"
 msgstr "முழு சந்திர கிரகணம்"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:279
+#: src/translations.h:280
 msgid "Screensaver"
 msgstr "திரைசேமிப்பி"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:281
+#: src/translations.h:282
 msgid "Solar Eclipse 2009"
 msgstr "சூரிய கிரகணம் 2009"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:283
+#: src/translations.h:284
 msgid "Startup Script"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:285
+#: src/translations.h:286
 msgid "Zodiac"
 msgstr "இராசி மண்டலம்"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:287
+#: src/translations.h:288
 msgid "Mercury Triple Sunrise and Sunset"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:289
+#: src/translations.h:290
 msgid "Double eclipse from Deimos in 2017"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:291
+#: src/translations.h:292
 msgid "Double eclipse from Deimos in 2031"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:293
+#: src/translations.h:294
 msgid "Eclipse from Olympus Mons Jan 10 2068"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:295
+#: src/translations.h:296
 msgid "Occultation of Earth and Jupiter 2048"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:297
+#: src/translations.h:298
 msgid "3 Transits and 2 Eclipses from Deimos 2027"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:299
+#: src/translations.h:300
 msgid "Solar System Screensaver"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:301
+#: src/translations.h:302
 msgid "Constellations Tour"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:303
+#: src/translations.h:304
 msgid "Sun from different planets"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:305
+#: src/translations.h:306
 msgid "Earth best views from other bodies"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:307
+#: src/translations.h:308
 msgid "Transit of Venus"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:309
+#: src/translations.h:310
 msgid "Analemma"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:311
+#: src/translations.h:312
 msgid "Sky Culture Tour"
 msgstr ""
 
 #. TRANSLATORS: Name and description of script
-#: src/translations.h:313
+#: src/translations.h:314
 msgid "Earth Events from Mercury"
 msgstr ""
 
 #. TRANSLATORS: Name and description of script
-#: src/translations.h:315
+#: src/translations.h:316
 msgid "Earth Events from a floating city on Venus"
 msgstr ""
 
 #. TRANSLATORS: Name and description of script
-#: src/translations.h:317
+#: src/translations.h:318
 msgid "Earth Events from Mars"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:319
+#: src/translations.h:320
 msgid "Earth and Venus Greatest Elongations and Brilliancies from Mars"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:321
+#: src/translations.h:322
 msgid "Earth and Mars Greatest Elongations and Transits from Callisto"
 msgstr ""
 
 #. TRANSLATORS: Description of the landscape tour script.
-#: src/translations.h:327
+#: src/translations.h:328
 msgid "Look around each installed landscape."
 msgstr ""
 
 #. TRANSLATORS: Description of the sky culture tour script.
-#: src/translations.h:329
+#: src/translations.h:330
 msgid "Look at each installed sky culture."
 msgstr ""
 
-#: src/translations.h:330
+#: src/translations.h:331
 msgid "Script to demonstrate a partial lunar eclipse."
 msgstr ""
 
-#: src/translations.h:331
+#: src/translations.h:332
 msgid "Script to demonstrate a total lunar eclipse."
 msgstr ""
 
-#: src/translations.h:332
+#: src/translations.h:333
 msgid "A slow, infinite tour of the sky, looking at random objects."
 msgstr ""
 
-#: src/translations.h:333
+#: src/translations.h:334
 msgid ""
 "Script to demonstrate a total solar eclipse which has happened in 2009 "
 "(location=Rangpur, Bangladesh)."
@@ -2739,47 +2748,47 @@ msgstr ""
 "2009ல் நடந்த முழு சூரிய கிறகணத்தின் தொகுப்பு (நடைபெற்ற இடம்: இரங்கபூர், "
 "வங்காளதேசம்)"
 
-#: src/translations.h:334
+#: src/translations.h:335
 msgid "Script which runs automatically at startup"
 msgstr ""
 
-#: src/translations.h:335
+#: src/translations.h:336
 msgid ""
 "This script displays the constellations of the Zodiac. That means the "
 "constellations which lie along the line which the Sun traces across the "
 "celestial sphere over the course of a year."
 msgstr ""
 
-#: src/translations.h:336
+#: src/translations.h:337
 msgid ""
 "Due to the quirks in Mercury's orbit and rotation at certain spots the sun "
 "will rise & set 3 different times in one Mercury day."
 msgstr ""
 
-#: src/translations.h:337
+#: src/translations.h:338
 msgid ""
 "Just before Mars eclipses the sun, Phobos pops out from behind and eclipses "
 "it first. Takes place between Scorpio and Sagittarius on April 26, 2017."
 msgstr ""
 
-#: src/translations.h:338
+#: src/translations.h:339
 msgid ""
 "Just before Mars eclipses the sun, Phobos pops out from behind and eclipses "
 "it first. Takes place between Taurus and Gemini on July 23, 2031."
 msgstr ""
 
-#: src/translations.h:339
+#: src/translations.h:340
 msgid "Phobos eclipsing the Sun as seen from Olympus Mons on Jan 10, 2068."
 msgstr ""
 
-#: src/translations.h:340
+#: src/translations.h:341
 msgid ""
 "Phobos occultations of Earth are common, as are occultations of Jupiter. But "
 "occultations of both on the same day are very rare. Here's one that takes "
 "place 1/23/2048. In real speed."
 msgstr ""
 
-#: src/translations.h:341
+#: src/translations.h:342
 msgid ""
 "Phobos races ahead of Mars and transits the sun, passes through it and then "
 "retrogrades back towards the sun and just partially transits it again (only "
@@ -2789,46 +2798,46 @@ msgid ""
 "light up later."
 msgstr ""
 
-#: src/translations.h:342
+#: src/translations.h:343
 msgid ""
 "Screensaver of various happenings in the Solar System. 232 events in all!"
 msgstr ""
 
-#: src/translations.h:343
+#: src/translations.h:344
 msgid "A tour of the western constellations."
 msgstr ""
 
-#: src/translations.h:344
+#: src/translations.h:345
 msgid "Look at the Sun from big planets of Solar System and Pluto."
 msgstr ""
 
-#: src/translations.h:345
+#: src/translations.h:346
 msgid ""
 "Best views of Earth from other Solar System bodies in the 21st Century."
 msgstr ""
 
-#: src/translations.h:346
+#: src/translations.h:347
 msgid "Transit of Venus as seen from Sydney Australia, 6th June 2012."
 msgstr ""
 
-#: src/translations.h:347
+#: src/translations.h:348
 msgid ""
 "A demonstration of the analemma - the path of the Sun across the sky during "
 "the year."
 msgstr ""
 
-#: src/translations.h:348
+#: src/translations.h:349
 msgid ""
 "Flash of the supernova observed by Tycho Brahe in 1572. The Supernovae "
 "plugin has to be enabled."
 msgstr ""
 
-#: src/translations.h:349
+#: src/translations.h:350
 msgid ""
 "Earth and Venus Greatest Elongations and Brilliancies from Mars 2000-3000"
 msgstr ""
 
-#: src/translations.h:350
+#: src/translations.h:351
 msgid ""
 "Earth Greatest Elongations and Transits from Callisto 2000-3000. Why "
 "Callisto? Well of the 4 Galilean Moons, Callisto is the only one outside of "
@@ -2836,1048 +2845,1048 @@ msgid ""
 "moons, Callisto will be the one."
 msgstr ""
 
-#: src/translations.h:354
+#: src/translations.h:355
 msgid "Andorra"
 msgstr "அன்டோரா"
 
-#: src/translations.h:355
+#: src/translations.h:356
 msgid "United Arab Emirates"
 msgstr "யுனைடெட் அரபி எமிரேட்ஸ்"
 
-#: src/translations.h:356
+#: src/translations.h:357
 msgid "Afghanistan"
 msgstr "ஆப்கானிஸ்தான்"
 
-#: src/translations.h:357
+#: src/translations.h:358
 msgid "Antigua and Barbuda"
 msgstr "ஆன்டிகுவா மற்றும் பார்புடா"
 
-#: src/translations.h:358
+#: src/translations.h:359
 msgid "Anguilla"
 msgstr "அங்க்யூலா"
 
-#: src/translations.h:359
+#: src/translations.h:360
 msgid "Albania"
 msgstr "அல்பானியா"
 
-#: src/translations.h:360
+#: src/translations.h:361
 msgid "Armenia"
 msgstr "அர்மேனியா"
 
-#: src/translations.h:361
+#: src/translations.h:362
 msgid "Netherlands Antilles"
 msgstr "நெதர்லாந்து அன்டில்ஸ்"
 
-#: src/translations.h:362
+#: src/translations.h:363
 msgid "Angola"
 msgstr "அங்கோலா"
 
-#: src/translations.h:363
+#: src/translations.h:364
 msgid "Antarctica"
 msgstr "அன்டார்டிக்கா"
 
-#: src/translations.h:364
+#: src/translations.h:365
 msgid "Argentina"
 msgstr "அர்ஜன்டைனா"
 
-#: src/translations.h:365
+#: src/translations.h:366
 msgid "American Samoa"
 msgstr "அமெரிகன் ஸமோவா"
 
-#: src/translations.h:366
+#: src/translations.h:367
 msgid "Austria"
 msgstr "ஆஸ்த்திரியா"
 
-#: src/translations.h:367
+#: src/translations.h:368
 msgid "Australia"
 msgstr "ஆஸ்த்திரேலியா"
 
-#: src/translations.h:368
+#: src/translations.h:369
 msgid "Aruba"
 msgstr "அரூபா"
 
-#: src/translations.h:369
+#: src/translations.h:370
 msgid "Azerbaijan"
 msgstr "அஸர்பைஜான்"
 
-#: src/translations.h:370
+#: src/translations.h:371
 msgid "Bosnia and Herzegowina"
 msgstr "போஸ்னியா மற்றும் ஹெர்ஷகோவினா"
 
-#: src/translations.h:371
+#: src/translations.h:372
 msgid "Barbados"
 msgstr "பார்பேடோஸ்"
 
-#: src/translations.h:372
+#: src/translations.h:373
 msgid "Bangladesh"
 msgstr "வங்காளதேசம்"
 
-#: src/translations.h:373
+#: src/translations.h:374
 msgid "Belgium"
 msgstr "பெல்ஜியம்"
 
-#: src/translations.h:374
+#: src/translations.h:375
 msgid "Burkina Faso"
 msgstr "புர்கினா ஃபாஸோ"
 
-#: src/translations.h:375
+#: src/translations.h:376
 msgid "Bulgaria"
 msgstr "பல்கேரியா"
 
-#: src/translations.h:376
+#: src/translations.h:377
 msgid "Bahrain"
 msgstr "பஹ்ரைன்"
 
-#: src/translations.h:377
+#: src/translations.h:378
 msgid "Burundi"
 msgstr "புரென்டி"
 
-#: src/translations.h:378
+#: src/translations.h:379
 msgid "Benin"
 msgstr "பெனின்"
 
-#: src/translations.h:379
+#: src/translations.h:380
 msgid "Bermuda"
 msgstr "பெர்முடா"
 
-#: src/translations.h:380
+#: src/translations.h:381
 msgid "Brunei Darussalam"
 msgstr "புருனெ டர்ஸ்சலாம்"
 
-#: src/translations.h:381
+#: src/translations.h:382
 msgid "Bolivia"
 msgstr "பொலிவியா"
 
-#: src/translations.h:382
+#: src/translations.h:383
 msgid "Brazil"
 msgstr "பிரேசில்"
 
-#: src/translations.h:383
+#: src/translations.h:384
 msgid "Bahamas"
 msgstr "பஹாமாஸ்"
 
-#: src/translations.h:384
+#: src/translations.h:385
 msgid "Bhutan"
 msgstr "பூடான்"
 
-#: src/translations.h:385
+#: src/translations.h:386
 msgid "Bouvet Island"
 msgstr "போவெட் தீவு"
 
-#: src/translations.h:386
+#: src/translations.h:387
 msgid "Botswana"
 msgstr "போட்ஸ்வானா"
 
-#: src/translations.h:387
+#: src/translations.h:388
 msgid "Belarus"
 msgstr "பெலாரஸ்"
 
-#: src/translations.h:388
+#: src/translations.h:389
 msgid "Belize"
 msgstr "பெலிஸ்"
 
-#: src/translations.h:389
+#: src/translations.h:390
 msgid "Canada"
 msgstr "கனடா"
 
-#: src/translations.h:390
+#: src/translations.h:391
 msgid "Cocos Islands"
 msgstr "கோகோஸ் தீவுகள்"
 
-#: src/translations.h:391
+#: src/translations.h:392
 msgid "Democratic Republic of the Congo"
 msgstr ""
 
-#: src/translations.h:392
+#: src/translations.h:393
 msgid "Central African Republic"
 msgstr "மத்திய ஆப்பிரிக்க குடியரசு"
 
-#: src/translations.h:393
+#: src/translations.h:394
 msgid "Republic of the Congo"
 msgstr "காங்கோ குடியரசு"
 
-#: src/translations.h:394
+#: src/translations.h:395
 msgid "Switzerland"
 msgstr "சுவிட்சர்லாந்து"
 
-#: src/translations.h:395
+#: src/translations.h:396
 msgid "Cote d'Ivoire"
 msgstr "கோட் டில்வொரி"
 
-#: src/translations.h:396
+#: src/translations.h:397
 msgid "Cook Islands"
 msgstr "கூக் தீவு"
 
-#: src/translations.h:397
+#: src/translations.h:398
 msgid "Chile"
 msgstr "சிலி"
 
-#: src/translations.h:398
+#: src/translations.h:399
 msgid "Cameroon"
 msgstr "கேமரூன்"
 
-#: src/translations.h:399
+#: src/translations.h:400
 msgid "China"
 msgstr "சீனா"
 
-#: src/translations.h:400
+#: src/translations.h:401
 msgid "Colombia"
 msgstr "கொலம்பியா"
 
-#: src/translations.h:401
+#: src/translations.h:402
 msgid "Costa Rica"
 msgstr "கோஸ்டா ரிகா"
 
-#: src/translations.h:402
+#: src/translations.h:403
 msgid "Serbia and Montenegro"
 msgstr "செர்பியா மற்றும் மோன்டே நெக்ரோ குடியரசு"
 
-#: src/translations.h:403
+#: src/translations.h:404
 msgid "Cuba"
 msgstr "கியூபா"
 
-#: src/translations.h:404
+#: src/translations.h:405
 msgid "Cape Verde"
 msgstr "காப் வெர்டே"
 
-#: src/translations.h:405
+#: src/translations.h:406
 msgid "Christmas Island"
 msgstr "கிறிஸ்துமஸ் தீவு"
 
-#: src/translations.h:406
+#: src/translations.h:407
 msgid "Cyprus"
 msgstr "சைப்ரஸ்"
 
-#: src/translations.h:407
+#: src/translations.h:408
 msgid "Czech Republic"
 msgstr "செக் குடியரசு"
 
-#: src/translations.h:408
+#: src/translations.h:409
 msgid "Germany"
 msgstr "ஜெர்மனி"
 
-#: src/translations.h:409
+#: src/translations.h:410
 msgid "Djibouti"
 msgstr "டிஜ்பொட்டி"
 
-#: src/translations.h:410
+#: src/translations.h:411
 msgid "Denmark"
 msgstr "டென்மார்க்"
 
-#: src/translations.h:411
+#: src/translations.h:412
 msgid "Dominica"
 msgstr "டொமினிக்கா"
 
-#: src/translations.h:412
+#: src/translations.h:413
 msgid "Dominican Republic"
 msgstr "டொமினிக்கன் குடியரசு"
 
-#: src/translations.h:413
+#: src/translations.h:414
 msgid "Algeria"
 msgstr "அல்ஜீரியா"
 
-#: src/translations.h:414
+#: src/translations.h:415
 msgid "Ecuador"
 msgstr "ஈக்குவேடோர்"
 
-#: src/translations.h:415
+#: src/translations.h:416
 msgid "Estonia"
 msgstr "எஸ்டோனியா"
 
-#: src/translations.h:416
+#: src/translations.h:417
 msgid "Egypt"
 msgstr "எகிப்து"
 
-#: src/translations.h:417
+#: src/translations.h:418
 msgid "Western Sahara"
 msgstr "மேற்கு சஹாரா"
 
-#: src/translations.h:418
+#: src/translations.h:419
 msgid "Eritrea"
 msgstr "எரிட்ரியா"
 
-#: src/translations.h:419
+#: src/translations.h:420
 msgid "Spain"
 msgstr "ஸ்பெயின்"
 
-#: src/translations.h:420
+#: src/translations.h:421
 msgid "Ethiopia"
 msgstr "எத்தியோப்பியா"
 
-#: src/translations.h:421
+#: src/translations.h:422
 msgid "Finland"
 msgstr "ஃபின்லாந்து"
 
-#: src/translations.h:422
+#: src/translations.h:423
 msgid "Fiji"
 msgstr "ஃபிஜி"
 
-#: src/translations.h:423
+#: src/translations.h:424
 msgid "Falkland Islands"
 msgstr "ஃபால்க் தீவு"
 
-#: src/translations.h:424
+#: src/translations.h:425
 msgid "Micronesia"
 msgstr "மிக்ரோநேஷியா"
 
-#: src/translations.h:425
+#: src/translations.h:426
 msgid "Faroe Islands"
 msgstr "ஃபரோ தீவுகள்"
 
-#: src/translations.h:426
+#: src/translations.h:427
 msgid "France"
 msgstr "ஃபிரான்ஸ்"
 
-#: src/translations.h:427
+#: src/translations.h:428
 msgid "Gabon"
 msgstr "காபோன்"
 
-#: src/translations.h:428
+#: src/translations.h:429
 msgid "United Kingdom"
 msgstr "பிரிடிஷ் கூட்டரசு"
 
-#: src/translations.h:429
+#: src/translations.h:430
 msgid "Grenada"
 msgstr "கிரெனடா"
 
-#: src/translations.h:430
+#: src/translations.h:431
 msgid "Georgia"
 msgstr "ஜார்ஜியா"
 
-#: src/translations.h:431
+#: src/translations.h:432
 msgid "French Guiana"
 msgstr "ஃப்ரெஞ்ச் கையானா"
 
-#: src/translations.h:432
+#: src/translations.h:433
 msgid "Ghana"
 msgstr "கஹானா"
 
-#: src/translations.h:433
+#: src/translations.h:434
 msgid "Gibraltar"
 msgstr "கிப்ரால்டர்"
 
-#: src/translations.h:434
+#: src/translations.h:435
 msgid "Greenland"
 msgstr "கிரீன்லாந்து"
 
-#: src/translations.h:435
+#: src/translations.h:436
 msgid "Gambia"
 msgstr "காம்பியா"
 
-#: src/translations.h:436
+#: src/translations.h:437
 msgid "Guinea"
 msgstr "கினியா"
 
-#: src/translations.h:437
+#: src/translations.h:438
 msgid "Guadeloupe"
 msgstr "க்வாடெல்போப்"
 
-#: src/translations.h:438
+#: src/translations.h:439
 msgid "Equatorial Guinea"
 msgstr "ஈகோடோரியல் க்யுனியா"
 
-#: src/translations.h:439
+#: src/translations.h:440
 msgid "Greece"
 msgstr "கிரீஸ்"
 
-#: src/translations.h:440
+#: src/translations.h:441
 msgid "South Georgia and the South Sandwich Islands"
 msgstr "தெற்கு ஜார்ஜியா மற்றும் தெற்கு சான்விச் தீவுகள்"
 
-#: src/translations.h:441
+#: src/translations.h:442
 msgid "Guatemala"
 msgstr "க்வாதிமாலா"
 
-#: src/translations.h:442
+#: src/translations.h:443
 msgid "Guam"
 msgstr "க்வாம்"
 
-#: src/translations.h:443
+#: src/translations.h:444
 msgid "Guinea-Bissau"
 msgstr "கினியா-பிஸ்ஸாவ்"
 
-#: src/translations.h:444
+#: src/translations.h:445
 msgid "Guyana"
 msgstr "கயானா"
 
-#: src/translations.h:445
+#: src/translations.h:446
 msgid "Hong Kong"
 msgstr "ஹாங் காங்"
 
-#: src/translations.h:446
+#: src/translations.h:447
 msgid "Heard Island and McDonald Islands"
 msgstr "ஹெர்ட் தீவு மற்றும் மெக் டொனால்ட் தீவுகள்"
 
-#: src/translations.h:447
+#: src/translations.h:448
 msgid "Honduras"
 msgstr "ஹான்டுராஸ்"
 
-#: src/translations.h:448
+#: src/translations.h:449
 msgid "Croatia"
 msgstr "க்ரோடியா"
 
-#: src/translations.h:449
+#: src/translations.h:450
 msgid "Haiti"
 msgstr "ஹைதி"
 
-#: src/translations.h:450
+#: src/translations.h:451
 msgid "Hungary"
 msgstr "ஹங்கேரி"
 
-#: src/translations.h:451
+#: src/translations.h:452
 msgid "Indonesia"
 msgstr "இந்தோனேஷியா"
 
-#: src/translations.h:452
+#: src/translations.h:453
 msgid "Ireland"
 msgstr "அயர்லாந்து"
 
-#: src/translations.h:453
+#: src/translations.h:454
 msgid "Israel"
 msgstr "இஸ்ரேல்"
 
-#: src/translations.h:454
+#: src/translations.h:455
 msgid "India"
 msgstr "இந்தியா"
 
-#: src/translations.h:455
+#: src/translations.h:456
 msgid "British Indian Ocean Territory"
 msgstr "ப்ரிட்டிஷ் இந்திய பெருங்கடல் பிரதேசம்"
 
-#: src/translations.h:456
+#: src/translations.h:457
 msgid "Iraq"
 msgstr "ஈராக்"
 
-#: src/translations.h:457
+#: src/translations.h:458
 msgid "Iran"
 msgstr "ஈரான்"
 
-#: src/translations.h:458
+#: src/translations.h:459
 msgid "Iceland"
 msgstr "ஐஸ்லேன்ட்"
 
-#: src/translations.h:459
+#: src/translations.h:460
 msgid "Italy"
 msgstr "இத்தாலி"
 
-#: src/translations.h:460
+#: src/translations.h:461
 msgid "Jamaica"
 msgstr "ஜமைக்கா"
 
-#: src/translations.h:461
+#: src/translations.h:462
 msgid "Jordan"
 msgstr "ஜோர்டான்"
 
-#: src/translations.h:462
+#: src/translations.h:463
 msgid "Japan"
 msgstr "ஜப்பான்"
 
-#: src/translations.h:463
+#: src/translations.h:464
 msgid "Kenya"
 msgstr "கென்யா"
 
-#: src/translations.h:464
+#: src/translations.h:465
 msgid "Kyrgyzstan"
 msgstr "கிரைகிஸ்த்தான்"
 
-#: src/translations.h:465
+#: src/translations.h:466
 msgid "Cambodia"
 msgstr "கம்போடியா"
 
-#: src/translations.h:466
+#: src/translations.h:467
 msgid "Kiribati"
 msgstr "கிரிபாட்டி"
 
-#: src/translations.h:467
+#: src/translations.h:468
 msgid "Comoros"
 msgstr "கோமொரோஸ்"
 
-#: src/translations.h:468
+#: src/translations.h:469
 msgid "Saint Kitts and Nevis"
 msgstr "செயின்ட் கிட்ஸ் மற்றும் நிவிஸ்"
 
-#: src/translations.h:469
+#: src/translations.h:470
 msgid "Democratic People's Republic of Korea"
 msgstr "கொரிய ஜனநாயக மக்கள் குடியரசு"
 
-#: src/translations.h:470
+#: src/translations.h:471
 msgid "Republic of Korea"
 msgstr "கொரிய குடியரசு"
 
-#: src/translations.h:471
+#: src/translations.h:472
 msgid "Kuwait"
 msgstr "குவைத்"
 
-#: src/translations.h:472
+#: src/translations.h:473
 msgid "Cayman Islands"
 msgstr "கேய்மன் தீவு"
 
-#: src/translations.h:473
+#: src/translations.h:474
 msgid "Kazakhstan"
 msgstr "கஜஸ்தான்`"
 
-#: src/translations.h:474
+#: src/translations.h:475
 msgid "Lao"
 msgstr "லாவோ"
 
-#: src/translations.h:475
+#: src/translations.h:476
 msgid "Lebanon"
 msgstr "லெபனான்"
 
-#: src/translations.h:476
+#: src/translations.h:477
 msgid "Saint Lucia"
 msgstr "செயின்ட் லூசியா"
 
-#: src/translations.h:477
+#: src/translations.h:478
 msgid "Liechtenstein"
 msgstr "லிச்டெண்ஸ்டீன்"
 
-#: src/translations.h:478
+#: src/translations.h:479
 msgid "Sri Lanka"
 msgstr "இலங்கை"
 
-#: src/translations.h:479
+#: src/translations.h:480
 msgid "Liberia"
 msgstr "லிபெரியா"
 
-#: src/translations.h:480
+#: src/translations.h:481
 msgid "Lesotho"
 msgstr "லஸொதோ"
 
-#: src/translations.h:481
+#: src/translations.h:482
 msgid "Lithuania"
 msgstr "லித்துவேனியா"
 
-#: src/translations.h:482
+#: src/translations.h:483
 msgid "Luxembourg"
 msgstr "லக்ஸம்பர்க்"
 
-#: src/translations.h:483
+#: src/translations.h:484
 msgid "Latvia"
 msgstr "லட்வியா"
 
-#: src/translations.h:484
+#: src/translations.h:485
 msgid "Libyan Arab Jamahiriya"
 msgstr "லிபரியன் அராபிய ஜமாஹிரியா"
 
-#: src/translations.h:485
+#: src/translations.h:486
 msgid "Morocco"
 msgstr "மொரோக்கோ"
 
-#: src/translations.h:486
+#: src/translations.h:487
 msgid "Monaco"
 msgstr "மொனாக்கோ"
 
-#: src/translations.h:487
+#: src/translations.h:488
 msgid "Moldova"
 msgstr "மோல்டோவா"
 
-#: src/translations.h:488
+#: src/translations.h:489
 msgid "Madagascar"
 msgstr "மடகஸ்கார்"
 
-#: src/translations.h:489
+#: src/translations.h:490
 msgid "Marshall Islands"
 msgstr "மார்ஷல் தீவுகள்"
 
-#: src/translations.h:490
+#: src/translations.h:491
 msgid "Macedonia"
 msgstr "மாசிடோ னியா"
 
-#: src/translations.h:491
+#: src/translations.h:492
 msgid "Mali"
 msgstr "மாலி"
 
-#: src/translations.h:492
+#: src/translations.h:493
 msgid "Myanmar"
 msgstr "மயான்மார்"
 
-#: src/translations.h:493
+#: src/translations.h:494
 msgid "Mongolia"
 msgstr "மங்கோலியா"
 
-#: src/translations.h:494
+#: src/translations.h:495
 msgid "Macau"
 msgstr "மக்காவ்"
 
-#: src/translations.h:495
+#: src/translations.h:496
 msgid "Northern Mariana Islands"
 msgstr "வட மரியானா தீவுகள்"
 
-#: src/translations.h:496
+#: src/translations.h:497
 msgid "Martinique"
 msgstr "மார்டினீக்கு"
 
-#: src/translations.h:497
+#: src/translations.h:498
 msgid "Mauritania"
 msgstr "மொரிசியேனியா"
 
-#: src/translations.h:498
+#: src/translations.h:499
 msgid "Montserrat"
 msgstr "மோன்ஸிராட்"
 
-#: src/translations.h:499
+#: src/translations.h:500
 msgid "Malta"
 msgstr "மால்டா"
 
-#: src/translations.h:500
+#: src/translations.h:501
 msgid "Mauritius"
 msgstr "மொரீஷியஸ்"
 
-#: src/translations.h:501
+#: src/translations.h:502
 msgid "Maldives"
 msgstr "மாலத்தீவுகள்"
 
-#: src/translations.h:502
+#: src/translations.h:503
 msgid "Malawi"
 msgstr "மலவி"
 
-#: src/translations.h:503
+#: src/translations.h:504
 msgid "Mexico"
 msgstr "மெக்சிகோ"
 
-#: src/translations.h:504
+#: src/translations.h:505
 msgid "Malaysia"
 msgstr "மலேசியா"
 
-#: src/translations.h:505
+#: src/translations.h:506
 msgid "Mozambique"
 msgstr "மோசாம்பிக்"
 
-#: src/translations.h:506
+#: src/translations.h:507
 msgid "Namibia"
 msgstr "நாமிபியா"
 
-#: src/translations.h:507
+#: src/translations.h:508
 msgid "New Caledonia"
 msgstr "நியூ கலிடோனியா"
 
-#: src/translations.h:508
+#: src/translations.h:509
 msgid "Niger"
 msgstr "நைகர்"
 
-#: src/translations.h:509
+#: src/translations.h:510
 msgid "Norfolk Island"
 msgstr "நார்போக் தீவு"
 
-#: src/translations.h:510
+#: src/translations.h:511
 msgid "Nigeria"
 msgstr "நைஜீரியா"
 
-#: src/translations.h:511
+#: src/translations.h:512
 msgid "Nicaragua"
 msgstr "நிகராகுவே"
 
-#: src/translations.h:512
+#: src/translations.h:513
 msgid "Netherlands"
 msgstr "நெதர்லாந்து"
 
-#: src/translations.h:513
+#: src/translations.h:514
 msgid "Norway"
 msgstr "நார்வே"
 
-#: src/translations.h:514
+#: src/translations.h:515
 msgid "Nepal"
 msgstr "நேபாளம்"
 
-#: src/translations.h:515
+#: src/translations.h:516
 msgid "Nauru"
 msgstr "நௌரு"
 
-#: src/translations.h:516
+#: src/translations.h:517
 msgid "Niue"
 msgstr "நீயு"
 
-#: src/translations.h:517
+#: src/translations.h:518
 msgid "New Zealand"
 msgstr "நீயூசீலாந்து"
 
-#: src/translations.h:518
+#: src/translations.h:519
 msgid "Oman"
 msgstr "ஓமன்"
 
-#: src/translations.h:519
+#: src/translations.h:520
 msgid "Panama"
 msgstr "பனாமா"
 
-#: src/translations.h:520
+#: src/translations.h:521
 msgid "Peru"
 msgstr "பெரு"
 
-#: src/translations.h:521
+#: src/translations.h:522
 msgid "French Polynesia"
 msgstr "பிரெஞ்ச் பொலினேஷியா"
 
-#: src/translations.h:522
+#: src/translations.h:523
 msgid "Papua New Guinea"
 msgstr "பாப்பா நியூ ஜினியா"
 
-#: src/translations.h:523
+#: src/translations.h:524
 msgid "Philippines"
 msgstr "பிலிப்பைன்ஸ்"
 
-#: src/translations.h:524
+#: src/translations.h:525
 msgid "Pakistan"
 msgstr "பாகிஸ்தான்"
 
-#: src/translations.h:525
+#: src/translations.h:526
 msgid "Poland"
 msgstr "போலாந்து"
 
-#: src/translations.h:526
+#: src/translations.h:527
 msgid "Saint Pierre and Miquelon"
 msgstr "செயின்ட் பியரி மற்றும் மிக்யுலன்"
 
-#: src/translations.h:527
+#: src/translations.h:528
 msgid "Pitcairn"
 msgstr "பிட்கெர்ய்ன்"
 
-#: src/translations.h:528
+#: src/translations.h:529
 msgid "Puerto Rico"
 msgstr "போர்ட்டோ ரீக்கோ"
 
-#: src/translations.h:529
+#: src/translations.h:530
 msgid "Palestinian Territories"
 msgstr "பாலஸ்தீன பிரதேசங்கள்"
 
-#: src/translations.h:530
+#: src/translations.h:531
 msgid "Portugal"
 msgstr "போர்ச்சுகல்"
 
-#: src/translations.h:531
+#: src/translations.h:532
 msgid "Palau"
 msgstr "பலாவ்"
 
-#: src/translations.h:532
+#: src/translations.h:533
 msgid "Paraguay"
 msgstr "பராகுவே"
 
-#: src/translations.h:533
+#: src/translations.h:534
 msgid "Qatar"
 msgstr "கத்தார்"
 
-#: src/translations.h:534
+#: src/translations.h:535
 msgid "Réunion"
 msgstr "ரியூனியன்"
 
-#: src/translations.h:535
+#: src/translations.h:536
 msgid "Romania"
 msgstr "ரோமானியா"
 
-#: src/translations.h:536
+#: src/translations.h:537
 msgid "Serbia"
 msgstr "செர்பியா"
 
-#: src/translations.h:537
+#: src/translations.h:538
 msgid "Russian Federation"
 msgstr "ரஷ்யன் கூட்டமைப்பு"
 
-#: src/translations.h:538
+#: src/translations.h:539
 msgid "Rwanda"
 msgstr "ருவாண்டா"
 
-#: src/translations.h:539
+#: src/translations.h:540
 msgid "Saudi Arabia"
 msgstr "சவுதி அரேபியா"
 
-#: src/translations.h:540
+#: src/translations.h:541
 msgid "Solomon Islands"
 msgstr "சாலமன் தீவுகள்"
 
-#: src/translations.h:541
+#: src/translations.h:542
 msgid "Seychelles"
 msgstr "சேஷல்ஸ்"
 
-#: src/translations.h:542
+#: src/translations.h:543
 msgid "Sudan"
 msgstr "சூடான்"
 
-#: src/translations.h:543
+#: src/translations.h:544
 msgid "Sweden"
 msgstr "ஸ்வீடன்"
 
-#: src/translations.h:544
+#: src/translations.h:545
 msgid "Singapore"
 msgstr "சிங்கப்பூர்"
 
-#: src/translations.h:545
+#: src/translations.h:546
 msgid "Saint Helena"
 msgstr "செயின்ட் ஹெலினா"
 
-#: src/translations.h:546
+#: src/translations.h:547
 msgid "Slovenia"
 msgstr "ஸ்லோவேனியா"
 
-#: src/translations.h:547
+#: src/translations.h:548
 msgid "Svalbard and Jan Mayen"
 msgstr "ஸ்வால்பார்ட் அண்ட் ஜன் மேயன்"
 
-#: src/translations.h:548
+#: src/translations.h:549
 msgid "Slovakia"
 msgstr "ஸ்லோவாக்கியா"
 
-#: src/translations.h:549
+#: src/translations.h:550
 msgid "Sierra Leone"
 msgstr "சியரா லியோன்"
 
-#: src/translations.h:550
+#: src/translations.h:551
 msgid "San Marino"
 msgstr "சான் மெரினோ"
 
-#: src/translations.h:551
+#: src/translations.h:552
 msgid "Senegal"
 msgstr "செனெகல்"
 
-#: src/translations.h:552
+#: src/translations.h:553
 msgid "Somalia"
 msgstr "சோமாலியா"
 
-#: src/translations.h:553
+#: src/translations.h:554
 msgid "Suriname"
 msgstr "சுரினேம்"
 
-#: src/translations.h:554
+#: src/translations.h:555
 msgid "Sao Tome and Principe"
 msgstr "சாவோ டோம் அண்ட் பிரின்சிபி"
 
-#: src/translations.h:555
+#: src/translations.h:556
 msgid "El Salvador"
 msgstr "எல் சால்வடார்"
 
-#: src/translations.h:556
+#: src/translations.h:557
 msgid "Syrian Arab Republic"
 msgstr "சிரியன் அரபு குடியரசு"
 
-#: src/translations.h:557
+#: src/translations.h:558
 msgid "Swaziland"
 msgstr "ஸ்வாசிலாந்து"
 
-#: src/translations.h:558
+#: src/translations.h:559
 msgid "Turks and Caicos Islands"
 msgstr "டர்க்ஸ் மற்றும் கைகாஸ் தீவு"
 
-#: src/translations.h:559
+#: src/translations.h:560
 msgid "Chad"
 msgstr "சாட்"
 
-#: src/translations.h:560
+#: src/translations.h:561
 msgid "French Southern Territories"
 msgstr "ஃப்ரென்ச் தெற்கு  பிரதேசங்கள்"
 
-#: src/translations.h:561
+#: src/translations.h:562
 msgid "Togo"
 msgstr "டோகோ"
 
-#: src/translations.h:562
+#: src/translations.h:563
 msgid "Thailand"
 msgstr "தாய்லாந்து"
 
-#: src/translations.h:563
+#: src/translations.h:564
 msgid "Tajikistan"
 msgstr "தஜிகிஸ்தான்"
 
-#: src/translations.h:564
+#: src/translations.h:565
 msgid "Tokelau"
 msgstr "டொகேலா"
 
-#: src/translations.h:565
+#: src/translations.h:566
 msgid "East Timor"
 msgstr "கிழக்கு தைமோர்"
 
-#: src/translations.h:566
+#: src/translations.h:567
 msgid "Turkmenistan"
 msgstr "துருக்மேனிஸ்தான்"
 
-#: src/translations.h:567
+#: src/translations.h:568
 msgid "Tunisia"
 msgstr "துனீசியா"
 
-#: src/translations.h:568
+#: src/translations.h:569
 msgid "Tonga"
 msgstr "டோங்கா"
 
-#: src/translations.h:569
+#: src/translations.h:570
 msgid "Turkey"
 msgstr "துருக்கி"
 
-#: src/translations.h:570
+#: src/translations.h:571
 msgid "Trinidad and Tobago"
 msgstr "ட்ரினிடாட் மற்றும் டோபாகோ"
 
-#: src/translations.h:571
+#: src/translations.h:572
 msgid "Tuvalu"
 msgstr "துவாலு"
 
-#: src/translations.h:572
+#: src/translations.h:573
 msgid "Taiwan"
 msgstr "தாய்வான்"
 
-#: src/translations.h:573
+#: src/translations.h:574
 msgid "Tanzania"
 msgstr "தான்சானியா"
 
-#: src/translations.h:574
+#: src/translations.h:575
 msgid "Ukraine"
 msgstr "உக்ரெய்ன்"
 
-#: src/translations.h:575
+#: src/translations.h:576
 msgid "Uganda"
 msgstr "உகாண்டா"
 
-#: src/translations.h:576
+#: src/translations.h:577
 msgid "United States Minor Outlying Islands"
 msgstr "அமெரிக்க ஐக்கிய மைனர் அவுட்லேயிங் தீவுகள்"
 
-#: src/translations.h:577
+#: src/translations.h:578
 msgid "United States"
 msgstr "ஐக்கிய அமெரிக்கா"
 
-#: src/translations.h:578
+#: src/translations.h:579
 msgid "Uruguay"
 msgstr "உருகுவே"
 
-#: src/translations.h:579
+#: src/translations.h:580
 msgid "Uzbekistan"
 msgstr "உஸ்பெகிஸ்தான்"
 
-#: src/translations.h:580
+#: src/translations.h:581
 msgid "Vatican City State"
 msgstr "வேடிக்கன் நகர மாநிலம்"
 
-#: src/translations.h:581
+#: src/translations.h:582
 msgid "Saint Vincent and the Grenadines"
 msgstr "செய்ன்ட் வின்சென்ட் மற்றும் க்ரினடின்ஸ்"
 
-#: src/translations.h:582
+#: src/translations.h:583
 msgid "Venezuela"
 msgstr "வெனிசூலா"
 
-#: src/translations.h:583
+#: src/translations.h:584
 msgid "British Virgin Islands"
 msgstr "ப்ரிடீஷ் விர்ஜின் தீவுகள்"
 
-#: src/translations.h:584
+#: src/translations.h:585
 msgid "United States Virgin Islands"
 msgstr "யுனைட்டட் ஸ்டேட்ஸ்  வெர்ஜின் தீவுகள்"
 
-#: src/translations.h:585
+#: src/translations.h:586
 msgid "Viet Nam"
 msgstr "வியட்நாம்"
 
-#: src/translations.h:586
+#: src/translations.h:587
 msgid "Vanuatu"
 msgstr "வனாட்டு"
 
-#: src/translations.h:587
+#: src/translations.h:588
 msgid "Wallis and Futuna"
 msgstr "வாலிஸ் அண்ட் ஃபுடுனா"
 
-#: src/translations.h:588
+#: src/translations.h:589
 msgid "Samoa"
 msgstr "சமோ"
 
-#: src/translations.h:589
+#: src/translations.h:590
 msgid "Yemen"
 msgstr "யேமன்"
 
-#: src/translations.h:590
+#: src/translations.h:591
 msgid "Mayotte"
 msgstr "மயோட்டி"
 
-#: src/translations.h:591
+#: src/translations.h:592
 msgid "Yugoslavia"
 msgstr "யுகோஸ்லோவிவா"
 
-#: src/translations.h:592
+#: src/translations.h:593
 msgid "South Africa"
 msgstr "தென் ஆப்ரிக்கா"
 
-#: src/translations.h:593
+#: src/translations.h:594
 msgid "Zambia"
 msgstr "ஜாம்பியா"
 
-#: src/translations.h:594
+#: src/translations.h:595
 msgid "Zimbabwe"
 msgstr "ஜிம்பாபே"
 
-#: src/translations.h:598
+#: src/translations.h:599
 msgid "&Undo"
 msgstr ""
 
-#: src/translations.h:599
+#: src/translations.h:600
 msgid "&Redo"
 msgstr ""
 
-#: src/translations.h:600
+#: src/translations.h:601
 msgid "Cu&t"
 msgstr ""
 
-#: src/translations.h:601
+#: src/translations.h:602
 msgid "&Copy"
 msgstr ""
 
-#: src/translations.h:602
+#: src/translations.h:603
 msgid "&Paste"
 msgstr ""
 
-#: src/translations.h:603 src/ui_locationDialogGui.h:432
-#: plugins/Oculars/src/ui_ocularDialog.h:1089
-#: plugins/Oculars/src/ui_ocularDialog.h:1099
-#: plugins/Oculars/src/ui_ocularDialog.h:1106
-#: plugins/Oculars/src/ui_ocularDialog.h:1117
+#: src/translations.h:604 src/ui_locationDialogGui.h:432
+#: plugins/Oculars/src/ui_ocularDialog.h:1094
+#: plugins/Oculars/src/ui_ocularDialog.h:1104
+#: plugins/Oculars/src/ui_ocularDialog.h:1111
+#: plugins/Oculars/src/ui_ocularDialog.h:1122
 msgid "Delete"
 msgstr "நீக்கு"
 
-#: src/translations.h:604
+#: src/translations.h:605
 msgid "Select All"
 msgstr ""
 
-#: src/translations.h:605
+#: src/translations.h:606
 msgid "Look in:"
 msgstr ""
 
-#: src/translations.h:606
+#: src/translations.h:607
 msgid "Directory:"
 msgstr ""
 
-#: src/translations.h:607
+#: src/translations.h:608
 msgid "Folder"
 msgstr ""
 
-#: src/translations.h:608
+#: src/translations.h:609
 msgid "&Choose"
 msgstr ""
 
-#: src/translations.h:609 src/ui_configurationDialog.h:1176
+#: src/translations.h:610 src/ui_configurationDialog.h:1176
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:516
 msgid "Cancel"
 msgstr "ரத்து"
 
-#: src/translations.h:610
+#: src/translations.h:611
 msgid "Files of type:"
 msgstr ""
 
-#: src/translations.h:611
+#: src/translations.h:612
 msgid "Date Modified"
 msgstr ""
 
-#: src/translations.h:612
+#: src/translations.h:613
 msgid "Directories"
 msgstr ""
 
-#: src/translations.h:613
+#: src/translations.h:614
 msgid "Computer"
 msgstr ""
 
-#: src/translations.h:614
+#: src/translations.h:615
 msgid "&Open"
 msgstr ""
 
-#: src/translations.h:615
+#: src/translations.h:616
 msgid "File &name:"
 msgstr ""
 
-#: src/translations.h:616
+#: src/translations.h:617
 msgid "Copy &Link Location"
 msgstr ""
 
@@ -4160,276 +4169,293 @@ msgstr ""
 msgid "Use autofill only from the beginning of words"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:708 src/ui_viewDialog.h:1288
-#: src/ui_viewDialog.h:1296 src/ui_viewDialog.h:1298
+#: src/ui_searchDialogGui.h:708 src/ui_viewDialog.h:1307
+#: src/ui_viewDialog.h:1325 src/ui_viewDialog.h:1327
 #: src/ui_configurationDialog.h:1177 src/ui_configurationDialog.h:1188
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:417
 msgid "Options"
 msgstr "விருப்பங்கள்"
 
-#: src/ui_viewDialog.h:1175
+#: src/ui_viewDialog.h:1194
 msgid "View"
 msgstr "பார்வையிடு"
 
-#: src/ui_viewDialog.h:1181
+#: src/ui_viewDialog.h:1200
 msgid "Sky"
 msgstr "வானம்"
 
-#: src/ui_viewDialog.h:1183
+#: src/ui_viewDialog.h:1202
 msgid "Markings"
 msgstr "குறியிடுதல்"
 
-#: src/ui_viewDialog.h:1185
+#: src/ui_viewDialog.h:1204
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:406
 msgid "Landscape"
 msgstr "நிலக்காட்சி"
 
-#: src/ui_viewDialog.h:1187
+#: src/ui_viewDialog.h:1206
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:228
 msgid "Starlore"
 msgstr ""
 
-#: src/ui_viewDialog.h:1190
+#: src/ui_viewDialog.h:1209
 msgid "Labels and Markers"
 msgstr ""
 
-#: src/ui_viewDialog.h:1194
+#: src/ui_viewDialog.h:1213
 msgid ""
 "Labels and markers for deep-sky objects (star clusters, galaxies and nebulas)"
 msgstr ""
 
-#: src/ui_viewDialog.h:1196 src/ui_viewDialog.h:1253
+#: src/ui_viewDialog.h:1215 src/ui_viewDialog.h:1272
 msgctxt "Deep-sky objects"
 msgid "DSOs"
 msgstr ""
 
-#: src/ui_viewDialog.h:1197
+#: src/ui_viewDialog.h:1216
 msgid "Planets and satellites"
 msgstr "கோள் மற்றும் துணைக்கோள்"
 
-#: src/ui_viewDialog.h:1198
+#: src/ui_viewDialog.h:1217
 msgid "Show planets"
 msgstr "கோள்களைக் காட்டு"
 
-#: src/ui_viewDialog.h:1199
+#: src/ui_viewDialog.h:1218
 msgid "Show planet markers"
 msgstr "கோள் குறியீட்டை காட்டு"
 
-#: src/ui_viewDialog.h:1200
+#: src/ui_viewDialog.h:1219
 msgid "Show planet orbits"
 msgstr "கோள் சுற்றுபாதையை காட்டு"
 
-#: src/ui_viewDialog.h:1201
+#: src/ui_viewDialog.h:1220
 msgid "Simulate light speed"
 msgstr "ஒளி வேகத்தை ஒப்புருவாக்கு"
 
-#: src/ui_viewDialog.h:1202
+#: src/ui_viewDialog.h:1221
 msgid "Scale Moon"
 msgstr "நிலவின் அளவு"
 
-#: src/ui_viewDialog.h:1204
+#: src/ui_viewDialog.h:1223
 msgid "Scale factor"
 msgstr ""
 
-#: src/ui_viewDialog.h:1207
+#: src/ui_viewDialog.h:1226
 msgid "Automatic change of landscape when planet is changed"
 msgstr ""
 
-#: src/ui_viewDialog.h:1209
+#: src/ui_viewDialog.h:1228
 msgid "Auto select landscapes"
 msgstr ""
 
-#: src/ui_viewDialog.h:1211
+#: src/ui_viewDialog.h:1230
 msgid "Show atmosphere"
 msgstr "வளிமண்டலத்தை காட்டு"
 
-#: src/ui_viewDialog.h:1215
+#: src/ui_viewDialog.h:1234
 msgid ""
 "Use light pollution data from locations database and ignore settings for "
 "light pollution below"
 msgstr ""
 
-#: src/ui_viewDialog.h:1217
+#: src/ui_viewDialog.h:1236
 msgid "Light pollution data from locations database"
 msgstr ""
 
-#: src/ui_viewDialog.h:1218
+#: src/ui_viewDialog.h:1237
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:401
 msgid "Light pollution:"
 msgstr "ஒளி மாசு"
 
-#: src/ui_viewDialog.h:1220
+#: src/ui_viewDialog.h:1239
 msgid "pressure, temperature, extinction coefficient"
 msgstr ""
 
-#: src/ui_viewDialog.h:1222
+#: src/ui_viewDialog.h:1241
 msgid "Refraction/Extinction settings..."
 msgstr ""
 
-#: src/ui_viewDialog.h:1224
+#: src/ui_viewDialog.h:1243
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:258
 msgid "Absolute scale:"
 msgstr ""
 
-#: src/ui_viewDialog.h:1225
+#: src/ui_viewDialog.h:1244
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:252
 msgid "Relative scale:"
 msgstr "சார்ந்த அளவுகோல்"
 
-#: src/ui_viewDialog.h:1226
+#: src/ui_viewDialog.h:1245
 msgid "Milky Way brightness:"
 msgstr ""
 
-#: src/ui_viewDialog.h:1227
+#: src/ui_viewDialog.h:1246
 msgid "Zodiacal Light brightness:"
 msgstr ""
 
-#: src/ui_viewDialog.h:1228
+#: src/ui_viewDialog.h:1247
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:264
 msgid "Twinkle:"
 msgstr "மினுமினுப்பு"
 
-#: src/ui_viewDialog.h:1230
+#: src/ui_viewDialog.h:1249
 msgid "Dim faint stars when a very bright object is visible"
 msgstr "பிரகாசமான பொருள் தெரியும் பொழுது மங்களான நட்சத்திரத்தை மங்கமாக்கவும்"
 
-#: src/ui_viewDialog.h:1232
+#: src/ui_viewDialog.h:1251
 msgid "Dynamic eye adaptation"
 msgstr ""
 
-#: src/ui_viewDialog.h:1234
+#: src/ui_viewDialog.h:1253
 msgid "Settings for sporadic meteors"
 msgstr ""
 
-#: src/ui_viewDialog.h:1236
+#: src/ui_viewDialog.h:1255
 msgid "Shooting Stars"
 msgstr "எரிநட்சத்திரங்கள்"
 
-#: src/ui_viewDialog.h:1238
+#: src/ui_viewDialog.h:1257
 msgid "Hourly zenith rate"
 msgstr ""
 
-#: src/ui_viewDialog.h:1240
+#: src/ui_viewDialog.h:1259
 msgctxt "Zenithal Hourly Rate"
 msgid "ZHR:"
 msgstr ""
 
-#: src/ui_viewDialog.h:1243
+#: src/ui_viewDialog.h:1262
 msgid "Limit Magnitudes (for unaided/binocular observers)"
 msgstr ""
 
-#: src/ui_viewDialog.h:1245
+#: src/ui_viewDialog.h:1264
 msgid "Limit Magnitudes"
 msgstr ""
 
-#: src/ui_viewDialog.h:1247
+#: src/ui_viewDialog.h:1266
 msgid "Limit the magnitude of stars"
 msgstr ""
 
-#: src/ui_viewDialog.h:1251
+#: src/ui_viewDialog.h:1270
 msgid ""
 "Limit the magnitude of deep-sky objects (star clusters, galaxies and nebulas)"
 msgstr ""
 
-#: src/ui_viewDialog.h:1254
+#: src/ui_viewDialog.h:1273
 msgid "Constellations"
 msgstr "நட்சத்திரக்கூட்டம்"
 
-#: src/ui_viewDialog.h:1255
+#: src/ui_viewDialog.h:1274
 msgid "Show lines"
 msgstr "கோடுகளை காட்டு"
 
-#: src/ui_viewDialog.h:1256
+#: src/ui_viewDialog.h:1275
 msgid "Show labels"
 msgstr "அட்டவணையை காண்பிக்கவும்"
 
-#: src/ui_viewDialog.h:1257
+#: src/ui_viewDialog.h:1276
 msgid "Show boundaries"
 msgstr "எல்லையை காட்டு"
 
-#: src/ui_viewDialog.h:1258
+#: src/ui_viewDialog.h:1277
 msgid "Show art"
 msgstr ""
 
 #. TRANSLATORS: Refers to constellation art
-#: src/ui_viewDialog.h:1259
+#: src/ui_viewDialog.h:1278
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:296
 msgid "Art brightness:"
 msgstr ""
 
-#: src/ui_viewDialog.h:1260
+#: src/ui_viewDialog.h:1279
 msgid "Celestial Sphere"
 msgstr ""
 
-#: src/ui_viewDialog.h:1261
+#: src/ui_viewDialog.h:1280
 msgid "Equatorial grid (on J2000)"
 msgstr ""
 
-#: src/ui_viewDialog.h:1262
+#: src/ui_viewDialog.h:1281
 msgid "Equatorial grid (on date)"
 msgstr ""
 
-#: src/ui_viewDialog.h:1263
+#: src/ui_viewDialog.h:1282
 msgid "Ecliptic grid (on J2000)"
 msgstr ""
 
-#: src/ui_viewDialog.h:1267
+#: src/ui_viewDialog.h:1286
 msgid "Show equator line"
 msgstr ""
 
-#: src/ui_viewDialog.h:1271
+#: src/ui_viewDialog.h:1290
 msgid "Show meridian line"
 msgstr ""
 
-#: src/ui_viewDialog.h:1275
+#: src/ui_viewDialog.h:1294
 msgid "Show horizon line"
 msgstr ""
 
-#: src/ui_viewDialog.h:1279
+#: src/ui_viewDialog.h:1298
 msgid "Show ecliptic line"
 msgstr ""
 
-#: src/ui_viewDialog.h:1283
+#: src/ui_viewDialog.h:1302
 msgid "Show Galactic equator line"
 msgstr ""
 
-#: src/ui_viewDialog.h:1287
+#: src/ui_viewDialog.h:1306
 msgid "Projection"
 msgstr ""
 
-#: src/ui_viewDialog.h:1289
-msgid "Show ground"
-msgstr "நிலத்தை காட்டு"
-
-#: src/ui_viewDialog.h:1290
+#: src/ui_viewDialog.h:1308
 msgid "Show fog"
 msgstr "முடுபனியை காட்டு"
 
-#: src/ui_viewDialog.h:1291
+#: src/ui_viewDialog.h:1309
 msgid "Use associated planet and position"
 msgstr "சார்ந்த கிரகத்தையும் அதன் இடத்தையும் பயன்படுத்து"
 
-#: src/ui_viewDialog.h:1292
-msgid "Use this landscape as default"
-msgstr ""
-
-#: src/ui_viewDialog.h:1293
-msgid "Use brightness settings for landscapes"
-msgstr ""
-
-#: src/ui_viewDialog.h:1294
+#: src/ui_viewDialog.h:1310
 msgid "Show illumination layer (bright windows, light pollution, etc.)"
 msgstr ""
 
-#: src/ui_viewDialog.h:1295
+#: src/ui_viewDialog.h:1311
+msgid "Show ground"
+msgstr "நிலத்தை காட்டு"
+
+#: src/ui_viewDialog.h:1312
+msgid "Use this landscape as default"
+msgstr ""
+
+#: src/ui_viewDialog.h:1314
+msgid "Use minimal brightness to leave landscape visible also in darkness"
+msgstr ""
+
+#: src/ui_viewDialog.h:1316
+msgid "Minimal brightness:"
+msgstr ""
+
+#: src/ui_viewDialog.h:1318
+msgid ""
+"Value range 0..1 (landscape is black at night - landscape is fully bright)"
+msgstr ""
+
+#: src/ui_viewDialog.h:1321
+msgid "Use minimal brightness as may be specified in landscape.ini"
+msgstr ""
+
+#: src/ui_viewDialog.h:1323
+msgid "from landscape, if given"
+msgstr ""
+
+#: src/ui_viewDialog.h:1324
 msgid "Add/remove landscapes..."
 msgstr "landscapeக்களை சேர்/நீக்கு..."
 
-#: src/ui_viewDialog.h:1297
+#: src/ui_viewDialog.h:1326
 msgid "Use this sky culture as default"
 msgstr ""
 
-#: src/ui_viewDialog.h:1299
+#: src/ui_viewDialog.h:1328
 msgid "Visible"
 msgstr "பார்க்கக்கூடியது"
 
@@ -4510,7 +4536,7 @@ msgstr "எல்லாம் இருக்கிறது"
 msgid "Display no information"
 msgstr "தகவல்களை காட்ட வேண்டாம்"
 
-#: src/ui_configurationDialog.h:1036 plugins/Oculars/src/Oculars.cpp:1922
+#: src/ui_configurationDialog.h:1036 plugins/Oculars/src/Oculars.cpp:1905
 #: plugins/Observability/src/Observability.cpp:201
 msgid "None"
 msgstr "எதுவுமில்லை"
@@ -5017,22 +5043,22 @@ msgid "Angle measure"
 msgstr "கோண அளவு"
 
 #. TRANSLATORS: instructions for using the AngleMeasure plugin.
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:492
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:477
 msgid "The Angle Measure is enabled:"
 msgstr ""
 
 #. TRANSLATORS: instructions for using the AngleMeasure plugin.
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:494
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:479
 msgid "Drag with the left button to measure, left-click to clear."
 msgstr ""
 
 #. TRANSLATORS: instructions for using the AngleMeasure plugin.
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:496
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:481
 msgid "Right-clicking changes the end point only."
 msgstr ""
 
 #. TRANSLATORS: PA is abbreviation for phrase "Position Angle"
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:498
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:483
 msgid "PA="
 msgstr ""
 
@@ -5211,7 +5237,7 @@ msgid "Save settings as default"
 msgstr ""
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:245
-#: plugins/Oculars/src/ui_ocularDialog.h:1124
+#: plugins/Oculars/src/ui_ocularDialog.h:1129
 #: plugins/Satellites/src/ui_satellitesDialog.h:762
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:419
 #: plugins/TimeZoneConfiguration/src/ui_timeZoneConfigurationWindow.h:405
@@ -5243,8 +5269,8 @@ msgstr ""
 msgid "Compass marks"
 msgstr "திசைக்காட்டி குறிகள்"
 
-#: plugins/Oculars/src/Oculars.cpp:79 plugins/Oculars/src/Oculars.cpp:1320
-#: plugins/Oculars/src/ui_ocularDialog.h:1062
+#: plugins/Oculars/src/Oculars.cpp:79 plugins/Oculars/src/Oculars.cpp:1297
+#: plugins/Oculars/src/ui_ocularDialog.h:1069
 msgid "Oculars"
 msgstr ""
 
@@ -5255,205 +5281,205 @@ msgid ""
 "frame and a Telrad sight."
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:848
+#: plugins/Oculars/src/Oculars.cpp:840
 msgid "Please select an object before switching to ocular view."
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:940
+#: plugins/Oculars/src/Oculars.cpp:934
 msgid "&Previous ocular"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:941
+#: plugins/Oculars/src/Oculars.cpp:935
 msgid "&Next ocular"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:942
+#: plugins/Oculars/src/Oculars.cpp:936
 msgid "Select &ocular"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:989
+#: plugins/Oculars/src/Oculars.cpp:977
 msgid "Toggle &crosshair"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:997
+#: plugins/Oculars/src/Oculars.cpp:985
 msgid "Configure &Oculars"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1005
+#: plugins/Oculars/src/Oculars.cpp:993
 msgid "Toggle &CCD"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1012
+#: plugins/Oculars/src/Oculars.cpp:1000
 msgid "Toggle &Telrad"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1021
+#: plugins/Oculars/src/Oculars.cpp:1008
 msgid "&Previous CCD"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1022
+#: plugins/Oculars/src/Oculars.cpp:1009
 msgid "&Next CCD"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1023
+#: plugins/Oculars/src/Oculars.cpp:1010
 msgid "&Select CCD"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1045
+#: plugins/Oculars/src/Oculars.cpp:1027
 msgid "&Rotate CCD"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1067
+#: plugins/Oculars/src/Oculars.cpp:1049
 msgid "&Reset rotation"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1321
-#: plugins/Oculars/src/ui_ocularDialog.h:1064
+#: plugins/Oculars/src/Oculars.cpp:1298
+#: plugins/Oculars/src/ui_ocularDialog.h:1071
 msgid "Ocular view"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1338
+#: plugins/Oculars/src/Oculars.cpp:1315
 msgid "Oculars popup menu"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1339
+#: plugins/Oculars/src/Oculars.cpp:1316
 msgid "Show crosshairs"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1340
+#: plugins/Oculars/src/Oculars.cpp:1317
 msgid "Image sensor frame"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1341
+#: plugins/Oculars/src/Oculars.cpp:1318
 msgid "Telrad sight"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1342
+#: plugins/Oculars/src/Oculars.cpp:1319
 msgid "Oculars plugin configuration"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1344
+#: plugins/Oculars/src/Oculars.cpp:1321
 msgid "Select next telescope"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1346
+#: plugins/Oculars/src/Oculars.cpp:1323
 msgid "Select previous telescope"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1348
+#: plugins/Oculars/src/Oculars.cpp:1325
 msgid "Select next eyepiece"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1350
+#: plugins/Oculars/src/Oculars.cpp:1327
 msgid "Select previous eyepiece"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1560
+#: plugins/Oculars/src/Oculars.cpp:1542
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:500
 #, qt-format
 msgid "Ocular #%1"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1565
+#: plugins/Oculars/src/Oculars.cpp:1547
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:504
 #, qt-format
 msgid "Ocular #%1: %2"
 msgstr ""
 
 #. TRANSLATORS: FL = Focal length
-#: plugins/Oculars/src/Oculars.cpp:1579
+#: plugins/Oculars/src/Oculars.cpp:1561
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:541
 #, qt-format
 msgid "Ocular FL: %1 mm"
 msgstr ""
 
 #. TRANSLATORS: aFOV = apparent field of view
-#: plugins/Oculars/src/Oculars.cpp:1586
+#: plugins/Oculars/src/Oculars.cpp:1568
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:551
 #, qt-format
 msgid "Ocular aFOV: %1"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1598
+#: plugins/Oculars/src/Oculars.cpp:1580
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:581
 #, qt-format
 msgid "Lens #%1"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1602
+#: plugins/Oculars/src/Oculars.cpp:1584
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:585
 #, qt-format
 msgid "Lens #%1: %2"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1607
+#: plugins/Oculars/src/Oculars.cpp:1589
 msgid "Lens: none"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1617 plugins/Oculars/src/Oculars.cpp:1674
+#: plugins/Oculars/src/Oculars.cpp:1599 plugins/Oculars/src/Oculars.cpp:1656
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:738
 #, qt-format
 msgid "Telescope #%1"
 msgstr "தொலைநோக்கி #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:1622 plugins/Oculars/src/Oculars.cpp:1679
+#: plugins/Oculars/src/Oculars.cpp:1604 plugins/Oculars/src/Oculars.cpp:1661
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:742
 #, qt-format
 msgid "Telescope #%1: %2"
 msgstr "தொலைநோக்கி #%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:1633
+#: plugins/Oculars/src/Oculars.cpp:1615
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:818
 #, qt-format
 msgid "Magnification: %1"
 msgstr "உருப்பெருக்கம்: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1641
+#: plugins/Oculars/src/Oculars.cpp:1623
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:827
 #, qt-format
 msgid "FOV: %1"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1651
+#: plugins/Oculars/src/Oculars.cpp:1633
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:683
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:780
 #, qt-format
 msgid "Dimensions: %1"
 msgstr "அளவு  %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1656
+#: plugins/Oculars/src/Oculars.cpp:1638
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:643
 #, qt-format
 msgid "Sensor #%1"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1660
+#: plugins/Oculars/src/Oculars.cpp:1642
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:647
 #, qt-format
 msgid "Sensor #%1: %2"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1918
+#: plugins/Oculars/src/Oculars.cpp:1901
 msgid "&Lens"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1919
+#: plugins/Oculars/src/Oculars.cpp:1902
 msgid "&Previous lens"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1920
+#: plugins/Oculars/src/Oculars.cpp:1903
 msgid "&Next lens"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1950
+#: plugins/Oculars/src/Oculars.cpp:1933
 msgid "&Telescope"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1951
+#: plugins/Oculars/src/Oculars.cpp:1934
 msgid "&Previous telescope"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1952
+#: plugins/Oculars/src/Oculars.cpp:1935
 msgid "&Next telescope"
 msgstr ""
 
@@ -5636,174 +5662,172 @@ msgstr ""
 msgid "Opens the pop-up navigation menu."
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1065
+#: plugins/Oculars/src/ui_ocularDialog.h:1072
 msgid "Enable only if an object is selected"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1066
+#: plugins/Oculars/src/ui_ocularDialog.h:1073
 msgid "Scale image circle"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1068
+#: plugins/Oculars/src/ui_ocularDialog.h:1075
 msgid "Apply limits stellar magnitude for different apertures of telescopes"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1070
+#: plugins/Oculars/src/ui_ocularDialog.h:1077
 msgid "Limit stellar magnitude"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1071
+#: plugins/Oculars/src/ui_ocularDialog.h:1078
 msgid "Key mappings"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1072
+#: plugins/Oculars/src/ui_ocularDialog.h:1079
 msgid "Toggle ocular view:"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1074
+#: plugins/Oculars/src/ui_ocularDialog.h:1081
 msgid "Open pop-up navigation menu:"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1075
+#: plugins/Oculars/src/ui_ocularDialog.h:1082
 msgid "Interface"
 msgstr "இடைமுகப்பு"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1076
+#: plugins/Oculars/src/ui_ocularDialog.h:1083
 msgid "On-screen control panel"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1077
-msgid "Use degrees and minutes for FOV of CCD"
-msgstr ""
-
-#: plugins/Oculars/src/ui_ocularDialog.h:1079
-msgid ""
-"Please enable it for avoiding of flips the whole sky from the telescope's "
-"settings."
-msgstr ""
-
-#: plugins/Oculars/src/ui_ocularDialog.h:1081
-msgid "Disable zoom keys for CCD"
-msgstr ""
-
-#: plugins/Oculars/src/ui_ocularDialog.h:1083
+#: plugins/Oculars/src/ui_ocularDialog.h:1085
 msgid ""
 "Mark it if you want the FOV value the same like at the startup of Stellarium."
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1085
+#: plugins/Oculars/src/ui_ocularDialog.h:1087
 msgid "Restore FOV to initial values"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1086
+#: plugins/Oculars/src/ui_ocularDialog.h:1088
+msgid "Sensor view"
+msgstr ""
+
+#: plugins/Oculars/src/ui_ocularDialog.h:1089
+msgid "Use degrees and minutes for FOV of CCD"
+msgstr ""
+
+#: plugins/Oculars/src/ui_ocularDialog.h:1090
+msgid "Use flip for CCD"
+msgstr ""
+
+#: plugins/Oculars/src/ui_ocularDialog.h:1091
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:225
 msgid "General"
 msgstr "பொது"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1087
-#: plugins/Oculars/src/ui_ocularDialog.h:1096
+#: plugins/Oculars/src/ui_ocularDialog.h:1092
+#: plugins/Oculars/src/ui_ocularDialog.h:1101
 msgid "Eyepieces"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1088
-#: plugins/Oculars/src/ui_ocularDialog.h:1098
-#: plugins/Oculars/src/ui_ocularDialog.h:1105
-#: plugins/Oculars/src/ui_ocularDialog.h:1116
+#: plugins/Oculars/src/ui_ocularDialog.h:1093
+#: plugins/Oculars/src/ui_ocularDialog.h:1103
+#: plugins/Oculars/src/ui_ocularDialog.h:1110
+#: plugins/Oculars/src/ui_ocularDialog.h:1121
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:219
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:403
 msgid "Add"
 msgstr "சேர்"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1090
-#: plugins/Oculars/src/ui_ocularDialog.h:1100
-#: plugins/Oculars/src/ui_ocularDialog.h:1107
-#: plugins/Oculars/src/ui_ocularDialog.h:1118
+#: plugins/Oculars/src/ui_ocularDialog.h:1095
+#: plugins/Oculars/src/ui_ocularDialog.h:1105
+#: plugins/Oculars/src/ui_ocularDialog.h:1112
+#: plugins/Oculars/src/ui_ocularDialog.h:1123
 #: plugins/Satellites/src/ui_satellitesDialog.h:731
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:483
 msgid "Name:"
 msgstr "பெயர்:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1091
+#: plugins/Oculars/src/ui_ocularDialog.h:1096
 msgid "aFOV:"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1092
-#: plugins/Oculars/src/ui_ocularDialog.h:1119
+#: plugins/Oculars/src/ui_ocularDialog.h:1097
+#: plugins/Oculars/src/ui_ocularDialog.h:1124
 msgid "Focal length:"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1093
+#: plugins/Oculars/src/ui_ocularDialog.h:1098
 msgid "Field stop:"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1094
+#: plugins/Oculars/src/ui_ocularDialog.h:1099
 msgid "Binoculars"
 msgstr "இருகண் நோக்கிகள்"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1095
+#: plugins/Oculars/src/ui_ocularDialog.h:1100
 msgid "Has a permanent cross-hairs"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1097
-#: plugins/Oculars/src/ui_ocularDialog.h:1103
+#: plugins/Oculars/src/ui_ocularDialog.h:1102
+#: plugins/Oculars/src/ui_ocularDialog.h:1108
 msgid "Lenses"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1101
+#: plugins/Oculars/src/ui_ocularDialog.h:1106
 msgid "Multiplier:"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1102
+#: plugins/Oculars/src/ui_ocularDialog.h:1107
 msgid ""
 "Values of multiplicity >1 expand the focal length (Barlow lens). Values of "
 "multiplicity <1 reduce the focal length (Shapley lens)."
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1104
-#: plugins/Oculars/src/ui_ocularDialog.h:1114
+#: plugins/Oculars/src/ui_ocularDialog.h:1109
+#: plugins/Oculars/src/ui_ocularDialog.h:1119
 msgid "Sensors"
 msgstr "உணரிகள்"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1108
+#: plugins/Oculars/src/ui_ocularDialog.h:1113
 msgid "Resolution x (pixels):"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1109
+#: plugins/Oculars/src/ui_ocularDialog.h:1114
 msgid "Resolution y (pixels):"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1110
+#: plugins/Oculars/src/ui_ocularDialog.h:1115
 msgid "Chip width (mm):"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1111
+#: plugins/Oculars/src/ui_ocularDialog.h:1116
 msgid "Chip height (mm):"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1112
+#: plugins/Oculars/src/ui_ocularDialog.h:1117
 msgid "Pixel width (micron):"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1113
+#: plugins/Oculars/src/ui_ocularDialog.h:1118
 msgid "Pixel height (micron):"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1115
-#: plugins/Oculars/src/ui_ocularDialog.h:1123
+#: plugins/Oculars/src/ui_ocularDialog.h:1120
+#: plugins/Oculars/src/ui_ocularDialog.h:1128
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:392
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:408
 msgid "Telescopes"
 msgstr "தொலைநோக்கிகள்"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1120
+#: plugins/Oculars/src/ui_ocularDialog.h:1125
 msgid "Diameter:"
 msgstr "விட்டம்"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1121
+#: plugins/Oculars/src/ui_ocularDialog.h:1126
 msgid "Horizontal flip"
 msgstr "கிடைமட்டமாக திருப்பு"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1122
+#: plugins/Oculars/src/ui_ocularDialog.h:1127
 msgid "Vertical flip"
 msgstr "செங்குத்தாக திருப்பு"
 
