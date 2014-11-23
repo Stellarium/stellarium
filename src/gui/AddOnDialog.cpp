@@ -198,14 +198,9 @@ void AddOnDialog::updateCatalog()
 	ui->btnUpdate->setEnabled(false);
 	ui->txtLastUpdate->setText(q_("Updating catalog..."));
 
-	QUrl url(StelApp::getInstance().getStelAddOnMgr().getUrlForUpdates());
-	url.setQuery(QString("time=%1").arg(StelApp::getInstance().getStelAddOnMgr().getLastUpdate()));
-
-	QNetworkRequest req(url);
+	QNetworkRequest req;
+	req.setUrl(QUrl(StelApp::getInstance().getStelAddOnMgr().getUrlForUpdates()));
 	req.setRawHeader("User-Agent", StelUtils::getApplicationName().toLatin1());
-	m_pUpdateCatalogReply = StelApp::getInstance().getNetworkAccessManager()->get(req);
-	m_pUpdateCatalogReply->setReadBufferSize(1024*1024*2);
-
 	m_pUpdateCatalogReply = StelApp::getInstance().getNetworkAccessManager()->get(req);
 	connect(m_pUpdateCatalogReply, SIGNAL(finished()), this, SLOT(downloadFinished()));
 }
@@ -213,33 +208,39 @@ void AddOnDialog::updateCatalog()
 void AddOnDialog::downloadFinished()
 {
 	ui->btnUpdate->setEnabled(true);
-	if (m_pUpdateCatalogReply->error() != QNetworkReply::NoError)
+	QByteArray result(m_pUpdateCatalogReply->readAll());
+	if (m_pUpdateCatalogReply->error() == QNetworkReply::NoError && !result.isEmpty())
+	{
+		QFile jsonFile(StelApp::getInstance().getStelAddOnMgr().getJsonPath());
+		if(jsonFile.exists())
+		{
+			jsonFile.remove();
+		}
+
+		if (jsonFile.open(QIODevice::WriteOnly | QIODevice::Text))
+		{
+			jsonFile.write(result);
+			jsonFile.close();
+
+			qint64 currentTime = QDateTime::currentMSecsSinceEpoch() / 1000;
+			StelApp::getInstance().getStelAddOnMgr().setLastUpdate(currentTime);
+			ui->txtLastUpdate->setText(StelApp::getInstance().getStelAddOnMgr().getLastUpdateString());
+			populateTables();
+		}
+		else
+		{
+			qWarning() << "AddOnDialog : unable to update the database! cannot write json file";
+			ui->txtLastUpdate->setText(q_("Database update failed!"));
+		}
+	}
+	else
 	{
 		qWarning() << "AddOnDialog : unable to update the database!" << m_pUpdateCatalogReply->errorString();
 		ui->txtLastUpdate->setText(q_("Database update failed!"));
-
-		m_pUpdateCatalogReply->deleteLater();
-		m_pUpdateCatalogReply = NULL;
-		return;
 	}
 
-	QString result(m_pUpdateCatalogReply->readAll());
 	m_pUpdateCatalogReply->deleteLater();
 	m_pUpdateCatalogReply = NULL;
-
-	if (!result.isEmpty())
-	{
-		if(!StelApp::getInstance().getStelAddOnMgr().updateCatalog(result))
-		{
-			ui->txtLastUpdate->setText(q_("Database update failed!"));
-			return;
-		}
-	}
-
-	qint64 currentTime = QDateTime::currentMSecsSinceEpoch()/1000;
-	StelApp::getInstance().getStelAddOnMgr().setLastUpdate(currentTime);
-	ui->txtLastUpdate->setText(StelApp::getInstance().getStelAddOnMgr().getLastUpdateString());
-	populateTables();
 }
 
 void AddOnDialog::installFromFile()

@@ -83,6 +83,7 @@ public:
 	int getUpdateFrequencyHour() { return m_iUpdateFrequencyHour; }
 	QString getUrlForUpdates() { return m_sUrlUpdate; }
 	StelAddOn* getStelAddOnInstance(AddOn::Category c) { return m_pStelAddOns.value(c); }
+	QString getJsonPath() { return m_sJsonPath; }
 
 signals:
 	void addOnMgrMsg(StelAddOnMgr::AddOnMgrMsg);
