@@ -243,6 +243,9 @@ void Scenery3d::loadScene(const SceneInfo &scene)
 
 void Scenery3d::loadModel()
 {
+	//TODO FS: introduce background loading of models!
+	//Everything that OBJ does could probably be moved to a background thread, except upload of OpenGL objects which should happen in main thread.
+
         if(objModel != NULL)
         {
 	    objModel->clean();
@@ -257,6 +260,10 @@ void Scenery3d::loadModel()
 	//transform the vertices of the model to match the grid
 	objModel->transform( zRot2Grid );
         //objModel->transform(obj2gridMatrix);
+
+	//upload data to GL
+	objModel->uploadTexturesGL();
+	objModel->uploadBuffersGL();
 
 	qDebug()<<"OBJ memory after load: "<<objModel->memoryUsage();
 
@@ -287,6 +294,8 @@ void Scenery3d::loadModel()
                 throw std::runtime_error("Failed to load OBJ file.");
 
 	    groundModel->transform( zRot2Grid );
+
+	    //the ground model needs no opengl uploads, so we skip them
         }
 
 	if (currentScene.hasLocation())
@@ -306,7 +315,7 @@ void Scenery3d::loadModel()
 
         if (groundModel)
         {
-            heightmap = new Heightmap(*groundModel);
+	    heightmap = new Heightmap(groundModel);
 	    heightmap->setNullHeight(currentScene.groundNullHeight);
         }
 
@@ -679,28 +688,9 @@ void Scenery3d::drawArrays(bool textures)
             glLightModeli(GL_LIGHT_MODEL_LOCAL_VIEWER, 0);
         }        
 
-	int stride = objModel->getVertexSize();
-	const OBJ::Vertex* vtxArray = objModel->getVertexArray();
-
-        if(pStelModel->pMaterial->texture)
-        {
-		glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-		glTexCoordPointer(2, GL_FLOAT, stride, &vtxArray->texCoord);
-	}
-
-	glEnableClientState(GL_VERTEX_ARRAY);
-	glVertexPointer(3, GL_FLOAT, stride, &vtxArray->position);
-	glEnableClientState(GL_NORMAL_ARRAY);
-	glNormalPointer(GL_FLOAT, stride, &vtxArray->normal);
-
-	glDrawElements(GL_TRIANGLES, pStelModel->triangleCount * 3, GL_UNSIGNED_INT, objModel->getIndexArray() + pStelModel->startIndex);
-
-	if(pStelModel->pMaterial->texture)
-	{
-		glDisableClientState(GL_TEXTURE_COORD_ARRAY);
-	}
-	glDisableClientState(GL_VERTEX_ARRAY);
-	glDisableClientState(GL_NORMAL_ARRAY);
+	objModel->bindGLFixedFunction();
+	glDrawElements(GL_TRIANGLES, pStelModel->triangleCount * 3, GL_UNSIGNED_INT, reinterpret_cast<const void*>(pStelModel->startIndex * sizeof(unsigned int)));
+	objModel->unbindGLFixedFunction();
 
         if(pMaterial->illum == OBJ::TRANSLUCENT)
         {
@@ -1930,8 +1920,12 @@ void Scenery3d::drawDebug(StelCore* core)
     painter.drawText(screen_x, screen_y, str);
 }
 
-void Scenery3d::initShadowMapping()
+void Scenery3d::init()
 {
+	OBJ::setupGL();
+
+	if(shadowmapSize>0)
+	{
     //Query how many texture units we have at disposal
     GLint maxTex, maxComb;
     glGetIntegerv(GL_MAX_TEXTURE_COORDS, &maxTex);
@@ -2081,6 +2075,9 @@ void Scenery3d::initShadowMapping()
     //Done. Unbind and switch to normal texture unit 0
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
     glActiveTexture(GL_TEXTURE0);
+	}
+	else
+		qWarning()<<"Scenery3d init: shadowmapping not supported or disabled";
 }
 
 void Scenery3d::draw(StelCore* core)

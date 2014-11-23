@@ -70,8 +70,8 @@ public:
 
     //! Draw scenery, called by Scenery3dMgr.
     void draw(StelCore* core);
-    //! Initializes shadow mapping
-    void initShadowMapping();
+    //! Performs initialization that requires an valid OpenGL context
+    void init();
 
     //! Gets the current scene's metadata
     SceneInfo getCurrentScene() { return currentScene; }
