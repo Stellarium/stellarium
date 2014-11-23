@@ -1766,6 +1766,9 @@
                </item>
                <item>
                 <widget class="QDoubleSpinBox" name="landscapeBrightnessSpinBox">
+                 <property name="enabled">
+                  <bool>false</bool>
+                 </property>
                  <property name="toolTip">
                   <string>Value range 0..1 (landscape is black at night - landscape is fully bright)</string>
                  </property>
@@ -1779,6 +1782,9 @@
                </item>
                <item>
                 <widget class="QCheckBox" name="localLandscapeBrightnessCheckBox">
+                 <property name="enabled">
+                  <bool>false</bool>
+                 </property>
                  <property name="toolTip">
                   <string>Use minimal brightness as may be specified in landscape.ini</string>
                  </property>

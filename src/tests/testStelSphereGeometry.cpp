@@ -119,7 +119,7 @@ void TestStelSphericalGeometry::testSphericalCap()
 	QVERIFY(h2.intersects(h2));
 	QVERIFY(h3.intersects(h3));
 	QVERIFY(h4.intersects(h4));
-	//QVERIFY(h5.intersects(h5)); // FIXME: return FAIL on Windows/MinGW GCC. Why?
+	QVERIFY(h5.intersects(h5));
 	QVERIFY(h6.intersects(h0));
 	QVERIFY(h0.intersects(h6));
 
