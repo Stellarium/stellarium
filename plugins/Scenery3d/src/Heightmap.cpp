@@ -7,19 +7,17 @@
 #define INF (std::numeric_limits<float>::max())
 #define NO_HEIGHT (-INF)
 
-Heightmap::Heightmap(OBJ& obj) : obj(obj), nullHeight(0)
+Heightmap::Heightmap(OBJ* obj) : obj(obj), nullHeight(0)
 {
     this->xMin = INF;
     this->xMax = -INF;
     this->yMin = INF;
     this->yMax = -INF;
 
-    this->obj = obj;
-
-    xMin = std::min(obj.pBoundingBox->min[0], xMin);
-    yMin = std::min(obj.pBoundingBox->min[1], yMin);
-    xMax = std::max(obj.pBoundingBox->max[0], xMax);
-    yMax = std::max(obj.pBoundingBox->max[1], yMax);
+    xMin = std::min(obj->pBoundingBox->min[0], xMin);
+    yMin = std::min(obj->pBoundingBox->min[1], yMin);
+    xMax = std::max(obj->pBoundingBox->max[0], xMax);
+    yMax = std::max(obj->pBoundingBox->max[1], yMax);
 
     this->initGrid();
 }
@@ -43,7 +41,7 @@ float Heightmap::getHeight(const float x, const float y) const
     }
     else
     {
-        float h = space->getHeight(obj, x, y);
+	float h = space->getHeight(*obj, x, y);
         if (h == NO_HEIGHT)
         {
             return nullHeight;
@@ -60,13 +58,13 @@ float Heightmap::getHeight(const float x, const float y) const
  * for intersection with the observer coords is limited to faces
  * intersecting this grid space.
  */
-float Heightmap::GridSpace::getHeight(OBJ& obj, const float x, const float y) const
+float Heightmap::GridSpace::getHeight(const OBJ& obj, const float x, const float y) const
 {
     float h = NO_HEIGHT;
 
     for(unsigned int i=0; i<obj.m_numberOfTriangles; ++i)
     {
-        unsigned int* pTriangle = &obj.m_indexArray[i*3];
+	const unsigned int* pTriangle = &obj.m_indexArray[i*3];
 
         float face_h = face_height_at(obj, pTriangle, x, y);
         if(face_h > h)
@@ -97,10 +95,10 @@ void Heightmap::initGrid()
 
             FaceVector* faces = &grid[y*GRID_LENGTH + x].faces;
 
-            for(unsigned int i=0; i<obj.m_numberOfTriangles; ++i)
+	    for(unsigned int i=0; i<obj->m_numberOfTriangles; ++i)
             {
-                unsigned int* pTriangle = &obj.m_indexArray[i*3];
-                if(face_in_area(obj, pTriangle, xmin, ymin, xmax, ymax))
+		const unsigned int* pTriangle = &(obj->m_indexArray[i*3]);
+		if(face_in_area(*obj, pTriangle, xmin, ymin, xmax, ymax))
                 {
                     faces->push_back(*pTriangle);
                 }
@@ -131,12 +129,12 @@ Heightmap::GridSpace* Heightmap::getSpace(const float x, const float y) const
  * Returns the height of the face at the given point or -inf if
  * the coordinates are outside the bounds of the face.
  */
-float Heightmap::GridSpace::face_height_at(OBJ& obj, unsigned int* pTriangle, const float x, const float y)
+float Heightmap::GridSpace::face_height_at(const OBJ& obj,const unsigned int* pTriangle, const float x, const float y)
 {
     //Vertices in triangle
-    OBJ::Vertex* pV0 = &obj.m_vertexArray[pTriangle[0]];
-    OBJ::Vertex* pV1 = &obj.m_vertexArray[pTriangle[1]];
-    OBJ::Vertex* pV2 = &obj.m_vertexArray[pTriangle[2]];
+    const OBJ::Vertex* pV0 = &obj.m_vertexArray[pTriangle[0]];
+    const OBJ::Vertex* pV1 = &obj.m_vertexArray[pTriangle[1]];
+    const OBJ::Vertex* pV2 = &obj.m_vertexArray[pTriangle[2]];
 
     float pVertex0[3];
     pVertex0[0] = static_cast<float>(pV0->position[0]);
@@ -185,7 +183,7 @@ float Heightmap::GridSpace::face_height_at(OBJ& obj, unsigned int* pTriangle, co
 /**
  * Returns true if the given face intersects the given area.
  */
-bool Heightmap::face_in_area(OBJ& obj, const unsigned int* pTriangle, const float xmin, const float ymin, const float xmax, const float ymax) const
+bool Heightmap::face_in_area(const OBJ& obj, const unsigned int* pTriangle, const float xmin, const float ymin, const float xmax, const float ymax) const
 {
     // current implementation: use face's bounding box
     double f_xmin = xmax;
@@ -195,7 +193,7 @@ bool Heightmap::face_in_area(OBJ& obj, const unsigned int* pTriangle, const floa
 
     for(int i=0; i<3; i++)
     {
-        OBJ::Vertex* pVertex = &obj.m_vertexArray[pTriangle[i]];
+	const OBJ::Vertex* pVertex = &obj.m_vertexArray[pTriangle[i]];
         if(pVertex->position[0] < f_xmin) f_xmin = pVertex->position[0];
         if(pVertex->position[1] < f_ymin) f_ymin = pVertex->position[1];
         if(pVertex->position[0] > f_xmax) f_xmax = pVertex->position[0];

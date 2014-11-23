@@ -157,14 +157,9 @@ void Scenery3dMgr::init()
 	setEnableShadowsFilterHQ(false);
 
 	//Initialize Shadow Mapping
-	qWarning() << "init scenery3d object shadowmapping.";
-	if(scenery3d->getShadowmapSize()){
-	    scenery3d->initShadowMapping();
-	}
-	else
-	    qWarning() << "Note: shadowmapping disabled by zero size.\n";
-
-	qWarning() << "init scenery3d object shadowmapping...done\n";
+	qWarning() << "init scenery3d object.";
+	scenery3d->init();
+	qWarning() << "init scenery3d object...done\n";
 
 	// Add 2 toolbar buttons (copy/paste widely from AngleMeasure): activate, and settings.
 	try
