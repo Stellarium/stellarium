@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-11-22 01:40+0600\n"
-"PO-Revision-Date: 2014-11-08 22:45+0000\n"
+"PO-Revision-Date: 2014-11-22 19:45+0000\n"
 "Last-Translator: Tuomas Teipainen <tmsteipainen1@gmail.com>\n"
 "Language-Team: Finnish <fi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-11-22 05:02+0000\n"
+"X-Launchpad-Export-Date: 2014-11-23 04:39+0000\n"
 "X-Generator: Launchpad (build 17252)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:106 src/core/modules/StarMgr.cpp:346
@@ -302,7 +302,7 @@ msgstr "Keskiaurinkovuorokausi: %1"
 
 #: src/core/modules/Planet.cpp:259
 msgid "The period of rotation is chaotic"
-msgstr ""
+msgstr "Pyörähdysaika on kaoottinen"
 
 #: src/core/modules/Planet.cpp:265
 #, qt-format
@@ -2709,7 +2709,7 @@ msgstr "Grossmugl"
 #. TRANSLATORS: Name of landscape
 #: src/translations.h:268
 msgid "Zero Horizon"
-msgstr ""
+msgstr "Nollahorisontti"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:274
@@ -4586,15 +4586,18 @@ msgstr "Käytä tätä maisemaa oletuksena"
 #: src/ui_viewDialog.h:1314
 msgid "Use minimal brightness to leave landscape visible also in darkness"
 msgstr ""
+"Käytä vähimmäiskirkkauden asetusta jättääksesi maisema näkyviin myös pimeässä"
 
 #: src/ui_viewDialog.h:1316
 msgid "Minimal brightness:"
-msgstr ""
+msgstr "Vähimmäiskirkkaus:"
 
 #: src/ui_viewDialog.h:1318
 msgid ""
 "Value range 0..1 (landscape is black at night - landscape is fully bright)"
 msgstr ""
+"Arvo välillä 0.. 1 (maisema on täysin pimeä yöllä - maisema on täysin "
+"valaistu)"
 
 #: src/ui_viewDialog.h:1321
 msgid "Use minimal brightness as may be specified in landscape.ini"

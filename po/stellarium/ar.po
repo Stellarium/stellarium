@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-11-22 01:40+0600\n"
-"PO-Revision-Date: 2014-10-13 07:31+0000\n"
-"Last-Translator: Alexander Wolf <Unknown>\n"
+"PO-Revision-Date: 2014-11-22 18:21+0000\n"
+"Last-Translator: Khalid AlAjaji <Unknown>\n"
 "Language-Team: Arabic <ar@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-11-22 04:56+0000\n"
+"X-Launchpad-Export-Date: 2014-11-23 04:39+0000\n"
 "X-Generator: Launchpad (build 17252)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:106 src/core/modules/StarMgr.cpp:346
@@ -142,7 +142,7 @@ msgstr "الأرض"
 
 #: src/core/modules/LandscapeMgr.cpp:360
 msgid "Illumination"
-msgstr ""
+msgstr "الإضاءة"
 
 #: src/core/modules/LandscapeMgr.cpp:601
 msgid "Author: "
@@ -302,7 +302,7 @@ msgstr "‎اليوم الشمسي المتوسط‎: %1"
 
 #: src/core/modules/Planet.cpp:259
 msgid "The period of rotation is chaotic"
-msgstr ""
+msgstr "فترة الدوران مضطربة"
 
 #: src/core/modules/Planet.cpp:265
 #, qt-format
@@ -347,12 +347,12 @@ msgstr "‎السرعة‎: %1 كم في الثانية"
 #: src/core/modules/Comet.cpp:225
 #, no-c-format, qt-format
 msgid "Coma diameter (estimate): %1 km"
-msgstr ""
+msgstr "كم %1 :(تقديري) قطر غلاف المذنب"
 
 #: src/core/modules/Comet.cpp:229
 #, no-c-format, qt-format
 msgid "Gas tail length (estimate): %1 Mio km"
-msgstr ""
+msgstr "مليون كم %1 :(تقديري) طول ذيل المذنب الغازي"
 
 #: src/core/modules/SolarSystem.cpp:160
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:308
@@ -430,7 +430,7 @@ msgstr "‎نطاق قدر اللمعان:‎ <b>%1</b>%2<b>%3/%4</b> (‎الن
 #: plugins/Exoplanets/src/Exoplanet.cpp:206
 #, qt-format
 msgid "Distance: %1 ly"
-msgstr ""
+msgstr "سنة ضوئية %1 :المسافة"
 
 #: src/core/modules/StarWrapper.cpp:224
 #: plugins/Exoplanets/src/Exoplanet.cpp:200
@@ -1098,7 +1098,7 @@ msgstr ""
 #: src/core/StelObject.cpp:121 src/core/StelObject.cpp:123
 #: src/core/StelObject.cpp:131 src/core/StelObject.cpp:133
 msgid "RA/Dec"
-msgstr "صعود/ميلان"
+msgstr "الميل / المطلع المستقيم"
 
 #: src/core/StelObject.cpp:145 src/core/StelObject.cpp:149
 #, qt-format
@@ -1119,7 +1119,7 @@ msgstr "‎ارتفاع زاوي / سمتي:‎ %1/%2"
 #: src/core/StelObject.cpp:190 src/core/StelObject.cpp:192
 #: src/core/StelObject.cpp:198 src/core/StelObject.cpp:200
 msgid "Ecliptic longitude/latitude"
-msgstr ""
+msgstr "العرض الكسوفي / الطول الكسوفي"
 
 #: src/core/StelObject.cpp:208 src/core/StelObject.cpp:210
 #, qt-format
@@ -1916,7 +1916,7 @@ msgstr "وضع خرائط النجوم"
 #: src/gui/SearchDialog.cpp:231
 msgctxt "coordinate system"
 msgid "Equatorial (J2000.0)"
-msgstr ""
+msgstr "(J2000) استوائي"
 
 #: src/gui/SearchDialog.cpp:232
 msgctxt "coordinate system"
@@ -2016,11 +2016,17 @@ msgid ""
 "Insufficient OpenGL version. Please update drivers, graphics hardware, or "
 "use MESA (or ANGLE) version."
 msgstr ""
+"Insufficient OpenGL version. Please update drivers, graphics hardware, or "
+"use MESA (or ANGLE) version.  نسخة أوبن جي إل ليست حديثة، الرجاء تحديث "
+"الدرايفر لكرت الشاشة أو استخدام نسخ ستيللاريوم التي تعتمد على ميسا أو آنجل"
 
 #: src/main.cpp:366
 msgid ""
 "Insufficient OpenGL version. Please update drivers, or graphics hardware."
 msgstr ""
+"نسخة أوبن جي إل ليست حديثة، الرجاء تحديث الدرايفر لكرت الشاشة أو استخدم كرت "
+"شاشة حديث. Insufficient OpenGL version. Please update drivers, or graphics "
+"hardware."
 
 #: src/StelMainView.cpp:362
 msgid "Save screenshot"
@@ -2570,12 +2576,12 @@ msgstr "عناقيد مرتبطة بسدم"
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:218
 msgid "Messier Catalogue"
-msgstr ""
+msgstr "دليل ميسييه"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:220
 msgid "Caldwell Catalogue"
-msgstr ""
+msgstr "دليل كالدويل"
 
 #: src/translations.h:224
 msgid "Arabic"
@@ -2587,7 +2593,7 @@ msgstr "الأزتك"
 
 #: src/translations.h:226
 msgid "Boorong"
-msgstr ""
+msgstr "البورونج"
 
 #: src/translations.h:227
 msgid "Chinese"
@@ -2619,7 +2625,7 @@ msgstr "الماوري"
 
 #: src/translations.h:234
 msgid "Mongolian"
-msgstr ""
+msgstr "المنغولي"
 
 #: src/translations.h:235
 msgid "Navajo"
@@ -2691,7 +2697,7 @@ msgstr "جروسمجل"
 #. TRANSLATORS: Name of landscape
 #: src/translations.h:268
 msgid "Zero Horizon"
-msgstr ""
+msgstr "الأفق الصفري"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:274
@@ -4013,11 +4019,11 @@ msgstr "انسخ موقع &الرابط"
 
 #: src/ui_dateTimeDialogGui.h:369
 msgid "Julian Date"
-msgstr ""
+msgstr "التاريخ اليولياني"
 
 #: src/ui_dateTimeDialogGui.h:372
 msgid "Modified Julian Date"
-msgstr ""
+msgstr "التاريخ اليولياني المعدّل"
 
 #: src/ui_helpDialogGui.h:277 src/ui_helpDialogGui.h:283
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:418
@@ -4053,11 +4059,11 @@ msgstr ""
 
 #: src/ui_locationDialogGui.h:414
 msgid "Reset location list to show all known locations"
-msgstr ""
+msgstr "أرجع القائمة لعرض جميع المواقع المعروفة"
 
 #: src/ui_locationDialogGui.h:416
 msgid "Reset Location List"
-msgstr ""
+msgstr "أعد قائمة المواقع لوضعها الأولي"
 
 #: src/ui_locationDialogGui.h:417
 msgid "Current location information"
@@ -4096,7 +4102,7 @@ msgstr " متر"
 
 #: src/ui_locationDialogGui.h:431
 msgid "Return to default location"
-msgstr ""
+msgstr "عد إلى الموقع الأصلي"
 
 #: src/ui_locationDialogGui.h:433
 msgid "Add to list"
@@ -4120,11 +4126,11 @@ msgstr "الكوكب"
 
 #: src/ui_locationDialogGui.h:438
 msgid "Use current location as default"
-msgstr ""
+msgstr "اجعل الموقع الحالي هو موقعك الأصلي"
 
 #: src/ui_locationDialogGui.h:439
 msgid "Get location from Network"
-msgstr ""
+msgstr "أحصل على الموقع من شبكة الإنترنت"
 
 #: src/ui_searchDialogGui.h:606
 msgid "Find Object"
@@ -4250,7 +4256,7 @@ msgstr "نظام الإحداثيات"
 #: src/ui_searchDialogGui.h:695
 msgid ""
 "Note: this tool doesn't apply the refraction correction for coordinates."
-msgstr ""
+msgstr "ملاحظة: هذه الأداة لاتطبق تصحيح الانكسار على الإحداثيات"
 
 #: src/ui_searchDialogGui.h:696
 msgid "Position"
@@ -4418,7 +4424,7 @@ msgstr "سطوع درب التبّانة"
 
 #: src/ui_viewDialog.h:1246
 msgid "Zodiacal Light brightness:"
-msgstr ""
+msgstr "سطوع الضوء البروجي - الفجر الكاذب"
 
 #: src/ui_viewDialog.h:1247
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:264
@@ -4528,7 +4534,7 @@ msgstr "أظهر الخط الكسوفي"
 
 #: src/ui_viewDialog.h:1302
 msgid "Show Galactic equator line"
-msgstr ""
+msgstr "أظهر خط الاستواء المجرّي"
 
 #: src/ui_viewDialog.h:1306
 msgid "Projection"
@@ -4544,7 +4550,7 @@ msgstr "استخدم الكوكب و الموقع للمنظر الطبيعي ل
 
 #: src/ui_viewDialog.h:1310
 msgid "Show illumination layer (bright windows, light pollution, etc.)"
-msgstr ""
+msgstr "أظهر طبقة الإضاءة - النوافذ المضيئة، التلوث الضوئي ، إلخ"
 
 #: src/ui_viewDialog.h:1311
 msgid "Show ground"
@@ -4556,24 +4562,24 @@ msgstr "اجعل هذا المشهد الطبيعي هو الافتراضي"
 
 #: src/ui_viewDialog.h:1314
 msgid "Use minimal brightness to leave landscape visible also in darkness"
-msgstr ""
+msgstr "استخدم أقل قدر للإضاءة لجعل المنظر الأرضي مرئياً أثناء الليل"
 
 #: src/ui_viewDialog.h:1316
 msgid "Minimal brightness:"
-msgstr ""
+msgstr "الإضاءة الدنيا"
 
 #: src/ui_viewDialog.h:1318
 msgid ""
 "Value range 0..1 (landscape is black at night - landscape is fully bright)"
-msgstr ""
+msgstr "القيم داخل النطاق 0..1 حيث يكون منظر الأرض مظلم تماماً - مضيء تماماً"
 
 #: src/ui_viewDialog.h:1321
 msgid "Use minimal brightness as may be specified in landscape.ini"
-msgstr ""
+msgstr "landscape.ini استخدم الإضاءة الدنيا حسب ماهو موجود في ملف"
 
 #: src/ui_viewDialog.h:1323
 msgid "from landscape, if given"
-msgstr ""
+msgstr "من منظر الرصد الأرضي، إذا كان معطىً"
 
 #: src/ui_viewDialog.h:1324
 msgid "Add/remove landscapes..."
@@ -4785,6 +4791,7 @@ msgstr "المسافة"
 #: src/ui_configurationDialog.h:1081
 msgid "Ecliptic coordinates, equinox of date and J2000 (only for Earth)"
 msgstr ""
+"الإحداثيات الكسوفية، الاعتدال حسب الحقبة الحالية و حقبة عام 2000 - فقط للأرض"
 
 #: src/ui_configurationDialog.h:1083
 msgid "Ecliptic coordinates"
@@ -4950,11 +4957,11 @@ msgstr "تفعيل تلقائي للغلاف الجوي"
 
 #: src/ui_configurationDialog.h:1157
 msgid "Use decimal degrees for coordinates"
-msgstr ""
+msgstr "استخدم الدرجات العشرية للإحداثيات"
 
 #: src/ui_configurationDialog.h:1159
 msgid "Use decimal degrees"
-msgstr ""
+msgstr "استخدم الدرجات العشرية"
 
 #: src/ui_configurationDialog.h:1160
 msgid "Screenshots"
@@ -5135,7 +5142,7 @@ msgstr "احفظ السكربت في ملف"
 
 #: src/ui_scriptConsole.h:366
 msgid "clear"
-msgstr ""
+msgstr "امسح"
 
 #: src/ui_scriptConsole.h:370
 msgid "pre-process script using SSC preprocessor"
@@ -5235,6 +5242,9 @@ msgid ""
 "which may be helpful to keep relations between landscape and some celestial "
 "object or (with both linked) for Dobsonian starhopping."
 msgstr ""
+"نقاط البداية والنهاية في الإحداثيات الأفقية يمكن ربطها مع دوران السماء، حيث "
+"تساعد في حفظ العلاقة بين المنظر الأرضي وبعض الأجرام السماوية أو عندما تربط "
+"كلا النقطتين في استخدام التلسكوب الدوبسوني للتنقل بين النجوم"
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:96
 msgid ""
@@ -5340,35 +5350,35 @@ msgstr "إعدادات قياس البعد الزاوي"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:231
 msgid "Show in Equatorial Coordinates"
-msgstr ""
+msgstr "إعرض باستخدام الإحداثيات الاستوائية"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:232
 msgid "Display with position angle"
-msgstr ""
+msgstr "إعرض زاوية الاتجاه"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:233
 msgid "Show in Horizontal Coordinates"
-msgstr ""
+msgstr "إعرض باستخدام الإحداثيات الأفقية"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:235
 msgid "(e.g. for Dobson starhopping)"
-msgstr ""
+msgstr "مثلاً عند استخدام تلسكوب دوبسوني للتنقل من نجم إلى نجم"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:237
 msgid "Display with position angle "
-msgstr ""
+msgstr "إعرض زاوية الاتجاه "
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:238
 msgid "Attach start point to rotating sky"
-msgstr ""
+msgstr "أرفق نقطة بدء لدوران السماء"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:239
 msgid "Attach end point to rotating sky"
-msgstr ""
+msgstr "أرفق نقطة نهاية لدوران السماء"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:240
 msgid "Format"
-msgstr ""
+msgstr "نسق العرض"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:241
 msgid "Use dms format for angles"
@@ -5898,7 +5908,7 @@ msgstr "استرجع قيمة حقل الرؤية الأصلية"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1088
 msgid "Sensor view"
-msgstr ""
+msgstr "منظر المستشعر"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1089
 msgid "Use degrees and minutes for FOV of CCD"
@@ -5906,7 +5916,7 @@ msgstr "استخدم الدرجات والدقائق لحقل الرؤية ال�
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1090
 msgid "Use flip for CCD"
-msgstr ""
+msgstr "استخدم قلب المشهد للسي سي دي"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1091
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:225
@@ -5955,7 +5965,7 @@ msgstr "المنظار الثنائي"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1100
 msgid "Has a permanent cross-hairs"
-msgstr ""
+msgstr "لها شعرتان متقاطعتان ثابتتان"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1102
 #: plugins/Oculars/src/ui_ocularDialog.h:1108
@@ -7469,7 +7479,7 @@ msgstr "علامات السدم"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:370
 msgid "Galactic equator line"
-msgstr ""
+msgstr "خط الاستواء المجرّي"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:399
 msgid "Effects"
@@ -10040,37 +10050,37 @@ msgstr "هذه الإضافة تعرض إحداثيات مؤشر الفأرة"
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:97
 msgid "Show coordinates of the mouse pointer"
-msgstr ""
+msgstr "أظهر إحداثيات المؤشر"
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:137
 msgctxt "abbreviated in the plugin"
 msgid "RA/Dec (J2000.0)"
-msgstr ""
+msgstr "‎الميل / المطلع المستقيم‎ (J2000.0)"
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:153
 msgctxt "abbreviated in the plugin"
 msgid "RA/Dec"
-msgstr ""
+msgstr "‎الميل / المطلع المستقيم‎"
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:173
 msgctxt "abbreviated in the plugin"
 msgid "Az/Alt"
-msgstr ""
+msgstr "‎الارتفاع الزاوي / السمت‎"
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:189
 msgctxt "abbreviated in the plugin"
 msgid "Gal. Long/Lat"
-msgstr ""
+msgstr "‎العرض المجرّي / الطول المجرّي‎"
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:208
 msgctxt "abbreviated in the plugin"
 msgid "Ecl. Long/Lat (J2000.0)"
-msgstr ""
+msgstr "‎العرض الكسوفي / الطول الكسوفي‎(J2000.0)‎"
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:226
 msgctxt "abbreviated in the plugin"
 msgid "HA/Dec"
-msgstr ""
+msgstr "‎الميل / زاوية الساعة‎"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:109
 msgid "Pointer Coordinates plug-in"
@@ -10090,31 +10100,31 @@ msgstr "الركن الأيمن السفلي من الشاشة"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:141
 msgid "Custom position"
-msgstr ""
+msgstr "موضع مختار"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:162
 msgid "Right ascension/Declination (J2000.0)"
-msgstr ""
+msgstr "(J2000) الميل / المطلع المستقيم"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:163
 msgid "Right ascension/Declination"
-msgstr ""
+msgstr "الميل / المطلع المستقيم"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:165
 msgid "Ecliptic Longitude/Latitude (J2000.0)"
-msgstr ""
+msgstr "(J2000) العرض الكسوفي / الطول الكسوفي"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:167
 msgid "Galactic Longitude/Latitude"
-msgstr ""
+msgstr "العرض المجرّي / الطول المجرّي"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:197
 msgid "Coordinates of custom position:"
-msgstr ""
+msgstr "إحداثيات الموضع المختار"
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:336
 msgid "Show coordinates of the mouse cursor on the screen."
-msgstr ""
+msgstr "أظهر إحداثيات موقع المؤشر على الشاشة"
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:337
 msgid "Enable display of coordinates at startup"
@@ -10126,11 +10136,11 @@ msgstr "أظهر زر هذه الإضافة على الشريط السفلي"
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:340
 msgid "Which coordinate system will be used for displaying"
-msgstr ""
+msgstr "اختر نظام الإحداثيات لعرض موقع المؤشر"
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:342
 msgid "Coordinates:"
-msgstr ""
+msgstr "الإحداثيات"
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:345
 msgid "Place of the string with coordinates of the mouse pointer"
@@ -10142,11 +10152,11 @@ msgstr "موضع عرض الإحداثيات"
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:349
 msgid "Coordinate X"
-msgstr ""
+msgstr "الإحداثي الأفقي"
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:353
 msgid "Coordinate Y"
-msgstr ""
+msgstr "الإحداثي الرأسي"
 
 #~ msgid "Equatorial Grid"
 #~ msgstr "الشبكة الاستوائية"
