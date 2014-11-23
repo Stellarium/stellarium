@@ -43,12 +43,16 @@
 //-----------------------------------------------------------------------------
 
 #include "OBJ.hpp"
+#include "StelFileMgr.hpp"
+#include "StelTextureMgr.hpp"
+
+#include <QOpenGLVertexArrayObject>
+
 #include <algorithm>
+#include <cstddef>
 #include <cmath>
 #include <iostream>
 #include <limits>
-#include "StelFileMgr.hpp"
-#include <StelTextureMgr.hpp>
 
 namespace
 {
@@ -58,7 +62,26 @@ namespace
     }
 }
 
-OBJ::OBJ()
+bool OBJ::vertexArraysSupported=false;
+
+//static function
+void OBJ::setupGL()
+{
+	//find out if VAOs are supported, simplest way is just trying to create one
+	//Qt has the necessary checks inside the create method
+	QOpenGLVertexArrayObject testObj;
+	if( (OBJ::vertexArraysSupported = testObj.create()) )
+	{
+		qDebug()<<"[Scenery3d] Vertex Array Objects are supported";
+	}
+	else
+	{
+		qWarning()<<"[Scenery3d] Vertex Array Objects are not supported on your hardware";
+	}
+	testObj.destroy();
+}
+
+OBJ::OBJ() : m_vertexBuffer(QOpenGLBuffer::VertexBuffer), m_indexBuffer(QOpenGLBuffer::IndexBuffer)
 {
     //Iinitialize this OBJ
     m_hasPositions = false;
@@ -74,12 +97,15 @@ OBJ::OBJ()
     m_numberOfStelModels = 0;
 
     pBoundingBox = new AABB(Vec3f(0.0f), Vec3f(0.0f));
+    //the constructor does no GL stuff, so it is always safe even if VAOs are not supported
+    m_vertexArrayObject = new QOpenGLVertexArrayObject();
 }
 
 OBJ::~OBJ()
 {
     clean();
     delete pBoundingBox;
+    delete m_vertexArrayObject;
 }
 
 void OBJ::clean()
@@ -98,6 +124,13 @@ void OBJ::clean()
 
     pBoundingBox->min = Vec3f(0.0f);
     pBoundingBox->max = Vec3f(0.0f);
+
+    //note that the wrappers still remain usable, the opengl objs are recreated automatically
+    m_vertexBuffer.destroy();
+    m_indexBuffer.destroy();
+
+    if(vertexArraysSupported)
+	    m_vertexArrayObject->destroy();
 
     m_stelModels.clear();
     m_materials.clear();
@@ -146,9 +179,6 @@ bool OBJ::load(const QString& filename, const enum vertexOrder order, bool rebui
 
     //Create tangents
     generateTangents();
-
-    //Upload the textures to GL and set the StelTextureSP
-    uploadTexturesGL();
 
     //Loaded
     qDebug() << getTime() << "[Scenery3d] Loaded OBJ successfully: " << filename;
@@ -1203,6 +1233,128 @@ void OBJ::uploadTexturesGL()
             }
         }
     }
+
+    qDebug()<<"[Scenery3d] Uploaded OBJ textures to GL";
+}
+
+void OBJ::uploadBuffersGL()
+{
+	if(vertexArraysSupported)
+	{
+		m_vertexArrayObject->create();
+		m_vertexArrayObject->bind();
+	}
+
+	m_vertexBuffer.create();
+	m_vertexBuffer.bind();
+	m_vertexBuffer.setUsagePattern(QOpenGLBuffer::StaticDraw);
+	//this is the upload
+	m_vertexBuffer.allocate(m_vertexArray.constData(), sizeof(Vertex) * m_vertexArray.size());
+	m_vertexBuffer.release();
+
+	m_indexBuffer.create();
+	m_indexBuffer.bind();
+	m_indexBuffer.setUsagePattern(QOpenGLBuffer::StaticDraw);
+	m_indexBuffer.allocate(m_indexArray.constData(), sizeof(unsigned int) * m_indexArray.size());
+	m_indexBuffer.release();
+
+	if(vertexArraysSupported)
+	{
+		//binding and setting vertex attribs, stored in VAO
+		bindBuffersGL();
+		m_vertexArrayObject->release();
+		unbindBuffersGL();
+	}
+	//TODO maybe release the client-side memory
+
+	qDebug()<<"[Scenery3d] Uploaded OBJ vertex and index data to GL";
+}
+
+void OBJ::bindGL()
+{
+	if(vertexArraysSupported)
+		m_vertexArrayObject->bind();
+	else
+		bindBuffersGL();
+}
+
+void OBJ::unbindGL()
+{
+	if(vertexArraysSupported)
+		m_vertexArrayObject->release();
+	else
+	{
+		unbindBuffersGL();
+	}
+}
+
+void OBJ::bindGLFixedFunction()
+{
+	m_vertexBuffer.bind();
+
+	const GLsizei stride = sizeof(Vertex);
+	glEnableClientState(GL_VERTEX_ARRAY);
+	glVertexPointer(3, GL_FLOAT, stride, reinterpret_cast<const void *>(offsetof(struct Vertex, position)));
+	glEnableClientState(GL_NORMAL_ARRAY);
+	glNormalPointer(GL_FLOAT, stride, reinterpret_cast<const void *>(offsetof(struct Vertex, normal)));
+	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+	glTexCoordPointer(2, GL_FLOAT, stride, reinterpret_cast<const void *>(offsetof(struct Vertex, texCoord)));
+
+	m_vertexBuffer.release();
+
+	m_indexBuffer.bind();
+}
+
+void OBJ::unbindGLFixedFunction()
+{
+	m_indexBuffer.release();
+
+	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+	glDisableClientState(GL_VERTEX_ARRAY);
+	glDisableClientState(GL_NORMAL_ARRAY);
+}
+
+void OBJ::bindBuffersGL()
+{
+	m_vertexBuffer.bind();
+
+	//using qt wrappers here is not possible because the only implementation is in QOpenGLShaderProgram, which requires a shader program instance
+	//this is a bit incorrect, because the following is global state that does not depend on a shader
+	//(but may be stored in a VAO to enable faster binding/unbinding)
+
+	//enable the attrib arrays
+	glEnableVertexAttribArray(ATTLOC_VERTEX);
+	glEnableVertexAttribArray(ATTLOC_TEXTURE);
+	glEnableVertexAttribArray(ATTLOC_NORMAL);
+	glEnableVertexAttribArray(ATTLOC_TANGENT);
+	glEnableVertexAttribArray(ATTLOC_BITANGENT);
+
+	const GLsizei stride = sizeof(Vertex);
+
+	glVertexAttribPointer(ATTLOC_VERTEX,   3,GL_FLOAT,GL_FALSE,stride,reinterpret_cast<const void *>(offsetof(struct Vertex, position)));
+	glVertexAttribPointer(ATTLOC_TEXTURE,  2,GL_FLOAT,GL_FALSE,stride,reinterpret_cast<const void *>(offsetof(struct Vertex, texCoord)));
+	glVertexAttribPointer(ATTLOC_NORMAL,   3,GL_FLOAT,GL_FALSE,stride,reinterpret_cast<const void *>(offsetof(struct Vertex, normal)));
+	glVertexAttribPointer(ATTLOC_TANGENT,  4,GL_FLOAT,GL_FALSE,stride,reinterpret_cast<const void *>(offsetof(struct Vertex, tangent)));
+	glVertexAttribPointer(ATTLOC_BITANGENT,3,GL_FLOAT,GL_FALSE,stride,reinterpret_cast<const void *>(offsetof(struct Vertex, bitangent)));
+
+	//vertex buffer does not need to remain bound, because the binding is stored by glVertexAttribPointer
+	m_vertexBuffer.release();
+
+	//index buffer must remain bound
+	m_indexBuffer.bind();
+}
+
+void OBJ::unbindBuffersGL()
+{
+	//unbind the index buffer (vertex buffer is NOT bound by bindBuffersGL
+	m_indexBuffer.release();
+
+	//disable our attribute arrays
+	glDisableVertexAttribArray(ATTLOC_VERTEX);
+	glDisableVertexAttribArray(ATTLOC_TEXTURE);
+	glDisableVertexAttribArray(ATTLOC_NORMAL);
+	glDisableVertexAttribArray(ATTLOC_TANGENT);
+	glDisableVertexAttribArray(ATTLOC_BITANGENT);
 }
 
 void OBJ::transform(Mat4d mat)

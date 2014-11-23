@@ -46,12 +46,14 @@
 #define _OBJ_HPP_
 
 #include <QFile>
+#include <QOpenGLBuffer>
 
 #include "StelTexture.hpp"
 #include "VecMath.hpp"
 #include "AABB.hpp"
 
 class Heightmap;
+class QOpenGLVertexArrayObject;
 
 //! A basic Wavefront .OBJ format model loader.
 //!
@@ -157,10 +159,6 @@ public:
     //! Transform all the vertices through multiplication with a 4x4 matrix.
     //! @param mat Matrix to multiply vertices with.
     void transform(Mat4d mat);
-    //! Returns the index array
-    const unsigned int* getIndexArray() const;
-    //! Returns the size of an index
-    unsigned int getIndexSize() const;
     //! Returns a Material
     Material &getMaterial(int i);
     //! Returns a StelModel
@@ -196,6 +194,33 @@ public:
     //! Returns an estimate of the memory usage of this instance (not fully accurate, but good enough)
     size_t memoryUsage();
 
+    //! Uploads the textures to GL (requires valid context)
+    void uploadTexturesGL();
+    //! Uploads the vertex and index data to GL buffers (requires valid context)
+    void uploadBuffersGL();
+
+    //! Binds the necessary GL objects, making the OBJ ready for drawing. Uses a VAO if the platform supports it.
+    void bindGL();
+    //! Unbinds this object's GL objects
+    void unbindGL();
+
+    //! Legacy fixed-function binding, will be removed when changing to shader-based render
+    void bindGLFixedFunction();
+    void unbindGLFixedFunction();
+
+    //! This is the OpenGL attribute location where vertex positions are mapped to
+    const GLint ATTLOC_VERTEX  = 0;
+    //! This is the OpenGL attribute location where vertex texture coordinates are mapped to
+    const GLint ATTLOC_TEXTURE = 1;
+    //! This is the OpenGL attribute location where vertex normals are mapped to
+    const GLint ATTLOC_NORMAL  = 2;
+    //! This is the OpenGL attribute location where vertex tangents are mapped to
+    const GLint ATTLOC_TANGENT = 3;
+    //! This is the OpenGL attribute location where vertex bitangents are mapped to
+    const GLint ATTLOC_BITANGENT = 4;
+
+    //! Set up some stuff that requires a valid OpenGL context.
+    static void setupGL();
 private:
     typedef QVector<int> IntVector;
     typedef QVector<Vec3f> VF3Vector;
@@ -229,11 +254,13 @@ private:
     void importSecondPass(FILE *pFile, const enum vertexOrder order, const MatCacheT &materialCache);
     //! Imports material file and fills the material datastructure
     bool importMaterials(const QString& filename, MatCacheT& materialCache);
-    //! Uploads the textures to GL
-    void uploadTexturesGL();
     QString absolutePath(QString path);
     //! Determine the bounding box extrema
     void findBounds();
+    //! Binds the GL buffers to the vertex attributes
+    void bindBuffersGL();
+    //! Releases vertex attribute bindings and buffers
+    void unbindBuffersGL();
 
     //! Flags
     bool m_hasPositions;
@@ -241,6 +268,7 @@ private:
     bool m_hasNormals;
     bool m_hasTangents;
     bool m_hasStelModels;
+    static bool vertexArraysSupported;
 
     //! Structure sizes
     unsigned int m_numberOfVertexCoords;
@@ -263,13 +291,14 @@ private:
     QVector<Vertex> m_vertexArray;
     QVector<unsigned int> m_indexArray;
 
+    //! OpenGL objects
+    QOpenGLBuffer m_vertexBuffer;
+    QOpenGLBuffer m_indexBuffer;
+    QOpenGLVertexArrayObject* m_vertexArrayObject;
+
     //! Heightmap
     friend class Heightmap;
 };
-
-inline const unsigned int* OBJ::getIndexArray() const { return &m_indexArray[0]; }
-
-inline unsigned int OBJ::getIndexSize() const { return static_cast<unsigned int>(sizeof(unsigned int)); }
 
 inline OBJ::Material& OBJ::getMaterial(int i) { return m_materials[i]; }
 
