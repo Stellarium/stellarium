@@ -156,7 +156,7 @@ void ConstellationMgr::updateSkyCulture(const QString& skyCultureDir)
 	QString conArtFile = StelFileMgr::findFile("skycultures/"+skyCultureDir+"/constellationsart.fab");
 	if (conArtFile.isEmpty())
 	{
-		qDebug() << "No constellationsart.fab file found for sky culture " << QDir::toNativeSeparators(skyCultureDir);
+		qDebug() << "No constellationsart.fab file found for sky culture dir" << QDir::toNativeSeparators(skyCultureDir);
 	}
 
 	// first of all, remove constellations from the list of selected objects in StelObjectMgr, since we are going to delete them
@@ -182,12 +182,12 @@ void ConstellationMgr::updateSkyCulture(const QString& skyCultureDir)
 	updateI18n();
 
 	// load constellation boundaries
-	// First try load constellation boundaries from sky culture. You may inhibit borders with an empty file.
+	// First try loading constellation boundaries from sky culture. You may inhibit borders with an empty file.
 	fic = StelFileMgr::findFile("skycultures/" + skyCultureDir + "/constellations_boundaries.dat");
 	bool existBoundaries = false;
 	if (fic.isEmpty())
 	{
-		qWarning() << "No separate constellation boundaries file in sky culture: " << skyCultureDir << "- Using generic IAU boundaries.";
+		qWarning() << "No separate constellation boundaries file in sky culture dir" << skyCultureDir << "- Using generic IAU boundaries.";
 		// OK, Second try load generic constellation boundaries
 		fic = StelFileMgr::findFile("data/constellations_boundaries.dat");
 		if (fic.isEmpty())
@@ -675,7 +675,8 @@ void ConstellationMgr::loadNames(const QString& namesFile)
 
 	// lines which look like records - we use the RE to extract the fields
 	// which will be available in recRx.capturedTexts()
-	QRegExp recRx("^\\s*(\\w+)\\s+\"(.*)\"\\s+_[(]\"(.*)\"[)]\\n");
+	// abbreviation is allowed to start with a dot to mark as "hidden".
+	QRegExp recRx("^\\s*(\\.?\\w+)\\s+\"(.*)\"\\s+_[(]\"(.*)\"[)]\\n");
 
 	// Some more variables to use in the parsing
 	Constellation *aster;
