@@ -69,6 +69,7 @@ private slots:
         void showAtmosphereDialog();
 
 	void populateLightPollution();
+	void populateLandscapeMinimalBrightness();
 
 	void populateSkyLayersList();
 	void skyLayersSelectionChanged(const QString&);
