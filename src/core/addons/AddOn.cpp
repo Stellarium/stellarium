@@ -31,6 +31,13 @@ AddOn::AddOn(const qint64 addOnId, const QVariantMap& map)
 	, m_eStatus(NotInstalled)
 {
 	m_eType = fromStringToType(map.value("type").toString());
+	if (m_eType == INVALID)
+	{
+		qWarning() << "Add-On Catalog : Error! Add-on" << m_iAddOnId
+			   << "does not have a valid type!";
+		return;
+	}
+
 	m_eCategory = getCategoryFromType(m_eType);
 	m_sInstallId = map.value("install-id").toString();
 	m_sTitle = map.value("title").toString();
@@ -47,13 +54,6 @@ AddOn::AddOn(const qint64 addOnId, const QVariantMap& map)
 	m_sChecksum = map.value("checksum").toString();
 	m_sThumbnail = map.value("thumbnail").toString();
 	m_dateTime = QDateTime::fromString(QString::number(m_iAddOnId), "yyyymmddhhmmss");
-
-	if (m_eType == INVALID)
-	{
-		qWarning() << "Add-On Catalog : Error! Add-on" << m_iAddOnId
-			   << "does not have a valid type!";
-		return;
-	}
 
 	// early returns if the mandatory fields are not present
 	if (m_sInstallId.isEmpty() || m_sTitle.isEmpty()
