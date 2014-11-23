@@ -340,11 +340,14 @@ void StelLocationMgr::changeLocationFromNetworkLookup()
 		//success
 		// Tested with and without working network connection.
 		QByteArray answer=networkReply->readAll();
-		// answer/splitline example: "222.222.222.222","AT","Austria","","","","","47.3333","13.3333","",""
+		qDebug() << "IP answer:" << answer;
+		// answer/splitline example:     "222.222.222.222","AT","Austria","","","","","47.3333","13.3333","",""
 		// The parts from freegeoip are: ip,country_code,country_name,region_code,region_name,city,zipcode,latitude,longitude,metro_code,area_code
+		// Changed before 2014-11-21 to: 222.222.222.222,AT,Austria,"","","","",Europe/Vienna,47.33,13.33,0<CR><LF> (i.e., only empty strings have "")
+		//                          Now: ip,country_code,country_name,region_code,region_name,city,zipcode,Timezone_name,latitude,longitude,metro_code
 		// longitude and latitude should always be filled.
 		// A few tests:
-		if ((answer.count('"') != 22 ) || (answer.count(',') != 10 ))
+		if (answer.count(',') != 10 )
 		{
 			qDebug() << "StelLocationMgr: Malformatted answer in IP-based location lookup: \n\t" << answer;
 			qDebug() << "StelLocationMgr: Will not change location.";
@@ -359,19 +362,22 @@ void StelLocationMgr::changeLocationFromNetworkLookup()
 			networkReply->deleteLater();
 			return;
 		}
-		if ((splitline.at(7)=="\"\"") || (splitline.at(8)=="\"\"")) // empty coordinates?
+		// KEEP FOR DEBUGGING:
+		//for (int i=0; i<splitline.count(); ++i)
+		//	qDebug() << "Component" << i << "length:" << splitline.at(i).length() << ":" << splitline.at(i);
+		if ((splitline.at(8)=="\"\"") || (splitline.at(9)=="\"\"")) // empty coordinates?
 		{
 			qDebug() << "StelLocationMgr: Invalid coordinates from IP-based lookup. Ignoring: \n\t" << answer;
 			networkReply->deleteLater();
 			return;
 		}
-		float latitude=splitline.at(7).mid(1, splitline.at(7).length()-2).toFloat();
-		float longitude=splitline.at(8).mid(1, splitline.at(8).length()-2).toFloat();
+		float latitude=splitline.at(8).toFloat();
+		float longitude=splitline.at(9).toFloat();
 		QString locLine= // we re-pack into a new line that will be parsed back by StelLocation...
 				QString("%1\t%2\t%3\t%4\t%5\t%6\t%7\t0")
-				.arg(splitline.at(5).length()>2 ? splitline.at(5).mid(1, splitline.at(5).length()-2)  : QString("IP%1").arg(splitline.at(0).mid(1, splitline.at(0).length()-2)))
-				.arg(splitline.at(4).length()>2 ? splitline.at(4).mid(1, splitline.at(4).length()-2)  : "IPregion")
-				.arg(splitline.at(2).length()>2 ? splitline.at(2).mid(1, splitline.at(2).length()-2) : "IPcountry") // country
+				.arg(splitline.at(5) == "\"\"" ? QString("%1, %2").arg(latitude).arg(longitude) : splitline.at(5))
+				.arg(splitline.at(4) == "\"\"" ? "IPregion"  : splitline.at(4))
+				.arg(splitline.at(2) == "\"\"" ? "IPcountry" : splitline.at(2)) // countryCode
 				.arg("X") // role: X=user-defined
 				.arg(0)   // population: unknown
 				.arg(latitude<0 ? QString("%1S").arg(-latitude, 0, 'f', 6) : QString("%1N").arg(latitude, 0, 'f', 6))
@@ -379,12 +385,13 @@ void StelLocationMgr::changeLocationFromNetworkLookup()
 		location=StelLocation::createFromLine(locLine); // in lack of a regular constructor ;-)
 		core->moveObserverTo(location, 0.0f, 0.0f);
 		QSettings* conf = StelApp::getInstance().getSettings();
-		conf->setValue("init_location/last_location", QString("%1, %2").arg(latitude).arg(longitude));
+		conf->setValue("init_location/last_location", QString("%1,%2").arg(latitude).arg(longitude));
 	}
 	else
 	{
 		qDebug() << "Failure getting IP-based location: \n\t" <<networkReply->errorString();
-		core->moveObserverTo(lastResortLocation, 0.0f, 0.0f);
+		// If there is a problem, this must not change to some other location!
+		//core->moveObserverTo(lastResortLocation, 0.0f, 0.0f);
 	}
 	networkReply->deleteLater();
 }
