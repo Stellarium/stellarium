@@ -67,7 +67,7 @@ bool Constellation::read(const QString& record, StarMgr *starMgr)
 	if (istr.status()!=QTextStream::Ok)
 		return false;
 
-	// GZ: It's better to allow mixed-case abbreviations now that they can be displayed on screen. Maybe we then need toUpper() in comparisons, later?
+	// It's better to allow mixed-case abbreviations now that they can be displayed on screen. We then need toUpper() in comparisons.
 	//abbreviation = abb.toUpper();
 	abbreviation=abb;
 
@@ -145,7 +145,7 @@ void Constellation::drawName(StelPainter& sPainter, ConstellationMgr::Constellat
 				name=englishName;
 				break;
 			case ConstellationMgr::constellationsAbbreviated:
-				name=abbreviation;
+				name=(abbreviation.startsWith('.') ? "" : abbreviation);
 				break;
 			Q_ASSERT(0);
 		}
