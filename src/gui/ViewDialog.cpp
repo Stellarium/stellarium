@@ -234,17 +234,17 @@ void ViewDialog::createDialogContent()
 	ui->landscapePositionCheckBox->setChecked(lmgr->getFlagLandscapeSetsLocation());
 	connect(ui->landscapePositionCheckBox, SIGNAL(toggled(bool)), lmgr, SLOT(setFlagLandscapeSetsLocation(bool)));
 
-	ui->landscapeBrightnessCheckBox->setChecked(lmgr->getFlagLandscapeUseMinimalBrightness());
-	connect(ui->landscapeBrightnessCheckBox, SIGNAL(toggled(bool)), lmgr, SLOT(setFlagLandscapeUseMinimalBrightness(bool)));
 	ui->landscapeBrightnessSpinBox->setValue(lmgr->getDefaultMinimalBrightness());
 	connect(ui->landscapeBrightnessSpinBox, SIGNAL(valueChanged(double)), lmgr, SLOT(setDefaultMinimalBrightness(double)));
 	ui->localLandscapeBrightnessCheckBox->setChecked(lmgr->getFlagLandscapeSetsMinimalBrightness());
 	connect(ui->localLandscapeBrightnessCheckBox, SIGNAL(toggled(bool)), lmgr, SLOT(setFlagLandscapeSetsMinimalBrightness(bool)));
+	ui->landscapeBrightnessCheckBox->setChecked(lmgr->getFlagLandscapeUseMinimalBrightness());
+	connect(ui->landscapeBrightnessCheckBox, SIGNAL(toggled(bool)), this, SLOT(setFlagLandscapeUseMinimalBrightness(bool)));
 
 	// Light pollution
 	populateLightPollution();
 	ui->useLocationDataCheckBox->setChecked(lmgr->getFlagUseLightPollutionFromDatabase());
-	connect(ui->useLocationDataCheckBox, SIGNAL(toggled(bool)), lmgr, SLOT(setFlagUseLightPollutionFromDatabase(bool)));	
+	connect(ui->useLocationDataCheckBox, SIGNAL(toggled(bool)), lmgr, SLOT(setFlagUseLightPollutionFromDatabase(bool)));
 	connect(lmgr, SIGNAL(lightPollutionUsageChanged(bool)), this, SLOT(populateLightPollution()));
 	connect(ui->lightPollutionSpinBox, SIGNAL(valueChanged(int)), lmgr, SLOT(setAtmosphereBortleLightPollution(int)));
 	connect(ui->lightPollutionSpinBox, SIGNAL(valueChanged(int)), StelApp::getInstance().getCore()->getSkyDrawer(), SLOT(setBortleScaleIndex(int)));
@@ -310,6 +310,23 @@ void ViewDialog::createDialogContent()
 	QTimer* refreshTimer = new QTimer(this);
 	connect(refreshTimer, SIGNAL(timeout()), this, SLOT(updateFromProgram()));
 	refreshTimer->start(200);
+}
+
+void ViewDialog::setFlagLandscapeUseMinimalBrightness(bool b)
+{
+	LandscapeMgr* lmgr = GETSTELMODULE(LandscapeMgr);
+	lmgr->setFlagLandscapeUseMinimalBrightness(b);
+
+	if (ui->landscapeBrightnessCheckBox->isChecked())
+	{
+		ui->localLandscapeBrightnessCheckBox->setEnabled(true);
+		ui->landscapeBrightnessSpinBox->setEnabled(true);
+	}
+	else
+	{
+		ui->localLandscapeBrightnessCheckBox->setEnabled(false);
+		ui->landscapeBrightnessSpinBox->setEnabled(false);
+	}
 }
 
 void ViewDialog::populateLightPollution()
