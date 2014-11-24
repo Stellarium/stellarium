@@ -195,16 +195,16 @@ void Observability::updateMessageText()
 	msgCulminatesAt	= q_("Culminates at %1 (in %2) at %3 deg.");
 	msgCulminatedAt	= q_("Culminated at %1 (%2 ago) at %3 deg.");
 	msgSrcNotObs	= q_("Source is not observable.");
-	msgNoACRise	= q_("No acronychal nor cosmical rise/set.");
+	msgNoACRise	= q_("No Acronychal nor Heliacal rise/set.");
 	msgGreatElong	= q_("Greatest elongation: %1 (at %2 deg.)");
 	msgLargSSep	= q_("Largest Sun separation: %1 (at %2 deg.)");
 	msgNone		= q_("None");
 	// TRANSLATORS: The space at the end is significant - another sentence may follow.
-	msgAcroRise	= q_("Acronychal rise/set: %1/%2. ");
+	msgAcroRise	= q_("Heliacal rise/set: %1/%2. ");
 	// TRANSLATORS: The space at the end is significant - another sentence may follow.
-	msgNoAcroRise	= q_("No acronychal rise/set. ");
-	msgCosmRise	= q_("Cosmical rise/set: %1/%2.");
-	msgNoCosmRise	= q_("No cosmical rise/set.");
+	msgNoAcroRise	= q_("No Heliacal rise/set. ");
+	msgCosmRise	= q_("Acronycal rise/set: %1/%2.");
+	msgNoCosmRise	= q_("No Acronycal rise/set.");
 	msgWholeYear	= q_("Observable during the whole year.");
 	msgNotObs	= q_("Not observable at dark night.");
 	msgAboveHoriz	= q_("Nights above horizon: %1");
@@ -1112,16 +1112,16 @@ int Observability::calculateAcroCos(int &acroRise, int &acroSet,
 
 	for (int i=0; i<366; i++)
 	{
-		if (objectH0[i]>0.0 && sunSidT[2][i]>0.0 && sunSidT[3][i]>0.0)
+		if (objectH0[i]>0.0 && sunSidT[0][i]>0.0 && sunSidT[1][i]>0.0)
 		{
 			success = true;
 			hourDiffAcroRise = toUnsignedRA(objectRA[i] - objectH0[i]);
-			hourDiffCosRise = hourDiffAcroRise-sunSidT[3][i];
-			hourDiffAcroRise -= sunSidT[2][i];
+			hourDiffCosRise = hourDiffAcroRise-sunSidT[1][i];
+			hourDiffAcroRise -= sunSidT[0][i];
 			
 			hourDiffAcroSet = toUnsignedRA(objectRA[i] + objectH0[i]);
-			hourCosDiffSet = hourDiffAcroSet - sunSidT[2][i];
-			hourDiffAcroSet -= sunSidT[3][i];
+			hourCosDiffSet = hourDiffAcroSet - sunSidT[0][i];
+			hourDiffAcroSet -= sunSidT[1][i];
 			
 			// Acronychal rise/set:
 			if (qAbs(hourDiffAcroRise) < bestDiffAcroRise)
