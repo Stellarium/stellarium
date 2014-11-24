@@ -293,7 +293,6 @@ float MinorPlanet::getVMagnitude(const StelCore* core) const
 	//Calculate phase angle
 	//(Code copied from Planet::getVMagnitude())
 	//(this is actually vector subtraction + the cosine theorem :))
-	// GZ Try now in float... speed difference is negligible, though.
 	const Vec3d& observerHelioPos = core->getObserverHeliocentricEclipticPos();
 	const float observerRq = observerHelioPos.lengthSquared();
 	const Vec3d& planetHelioPos = getHeliocentricEclipticPos();

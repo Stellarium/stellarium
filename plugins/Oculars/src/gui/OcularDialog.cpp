@@ -357,7 +357,7 @@ void OcularDialog::createDialogContent()
 	connect(ui->checkBoxControlPanel, SIGNAL(clicked(bool)), plugin, SLOT(enableGuiPanel(bool)));
 	connect(ui->checkBoxDecimalDegrees, SIGNAL(clicked(bool)), plugin, SLOT(setFlagDecimalDegrees(bool)));
 	connect(ui->checkBoxInitialFOV, SIGNAL(clicked(bool)), plugin, SLOT(setFlagInitFovUsage(bool)));
-	connect(ui->checkBoxSensorsZooming, SIGNAL(clicked(bool)), plugin, SLOT(setFlagDisableZoomForCCD(bool)));
+	connect(ui->checkBoxUseFlipForCCD, SIGNAL(clicked(bool)), plugin, SLOT(setFlagUseFlipForCCD(bool)));
 	
 	// The add & delete buttons
 	connect(ui->addCCD, SIGNAL(clicked()), this, SLOT(insertNewCCD()));
@@ -487,9 +487,9 @@ void OcularDialog::createDialogContent()
 	{
 		ui->checkBoxInitialFOV->setChecked(true);
 	}
-	if (settings->value("disable_zoom_keys", true).toBool())
+	if (settings->value("use_ccd_flip", true).toBool())
 	{
-		ui->checkBoxSensorsZooming->setChecked(true);
+		ui->checkBoxUseFlipForCCD->setChecked(true);
 	}
 
 	//Initialize the style

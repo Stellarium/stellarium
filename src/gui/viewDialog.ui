@@ -947,6 +947,62 @@
               </widget>
              </item>
              <item>
+              <widget class="QFrame" name="frameZodiacalLight">
+               <property name="frameShape">
+                <enum>QFrame::StyledPanel</enum>
+               </property>
+               <property name="frameShadow">
+                <enum>QFrame::Raised</enum>
+               </property>
+               <layout class="QHBoxLayout" name="horizontalLayout_ZL">
+                <property name="leftMargin">
+                 <number>0</number>
+                </property>
+                <property name="topMargin">
+                 <number>0</number>
+                </property>
+                <property name="rightMargin">
+                 <number>0</number>
+                </property>
+                <property name="bottomMargin">
+                 <number>0</number>
+                </property>
+                <item>
+                 <widget class="QLabel" name="labelZodiacalLight">
+                  <property name="text">
+                   <string>Zodiacal Light brightness:</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QDoubleSpinBox" name="zodiacalLightBrightnessDoubleSpinBox">
+                  <property name="maximumSize">
+                   <size>
+                    <width>70</width>
+                    <height>16777215</height>
+                   </size>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignCenter</set>
+                  </property>
+                  <property name="decimals">
+                   <number>1</number>
+                  </property>
+                  <property name="maximum">
+                   <double>10.000000000000000</double>
+                  </property>
+                  <property name="singleStep">
+                   <double>0.100000000000000</double>
+                  </property>
+                  <property name="value">
+                   <double>1.000000000000000</double>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </widget>
+             </item>
+             <item>
               <widget class="QFrame" name="frame_12">
                <property name="frameShape">
                 <enum>QFrame::StyledPanel</enum>
@@ -1657,55 +1713,22 @@
             <property name="checkable">
              <bool>false</bool>
             </property>
-            <layout class="QGridLayout">
-             <property name="leftMargin">
-              <number>0</number>
-             </property>
-             <property name="topMargin">
-              <number>0</number>
-             </property>
-             <property name="rightMargin">
-              <number>0</number>
-             </property>
-             <property name="bottomMargin">
-              <number>0</number>
-             </property>
-             <item row="0" column="0">
-              <widget class="QCheckBox" name="showGroundCheckBox">
-               <property name="text">
-                <string>Show ground</string>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="0">
+            <layout class="QGridLayout" name="gridLayout_7">
+             <item row="1" column="0" colspan="2">
               <widget class="QCheckBox" name="showFogCheckBox">
                <property name="text">
                 <string>Show fog</string>
                </property>
               </widget>
              </item>
-             <item row="2" column="0">
+             <item row="2" column="0" colspan="2">
               <widget class="QCheckBox" name="landscapePositionCheckBox">
                <property name="text">
                 <string>Use associated planet and position</string>
                </property>
               </widget>
              </item>
-             <item row="3" column="0">
-              <widget class="QCheckBox" name="useAsDefaultLandscapeCheckBox">
-               <property name="text">
-                <string>Use this landscape as default</string>
-               </property>
-              </widget>
-             </item>
-             <item row="4" column="0">
-              <widget class="QCheckBox" name="landscapeBrightnessCheckBox">
-               <property name="text">
-                <string>Use brightness settings for landscapes</string>
-               </property>
-              </widget>
-             </item>
-             <item row="5" column="0">
+             <item row="6" column="0" colspan="2">
               <widget class="QCheckBox" name="landscapeIlluminationCheckBox">
                <property name="text">
                 <string>Show illumination layer (bright windows, light pollution, etc.)</string>
@@ -1714,6 +1737,63 @@
                 <bool>true</bool>
                </property>
               </widget>
+             </item>
+             <item row="0" column="0" colspan="2">
+              <widget class="QCheckBox" name="showGroundCheckBox">
+               <property name="text">
+                <string>Show ground</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="0" rowspan="2" colspan="2">
+              <widget class="QCheckBox" name="useAsDefaultLandscapeCheckBox">
+               <property name="text">
+                <string>Use this landscape as default</string>
+               </property>
+              </widget>
+             </item>
+             <item row="5" column="0">
+              <layout class="QHBoxLayout" name="horizontalLayout_11">
+               <item>
+                <widget class="QCheckBox" name="landscapeBrightnessCheckBox">
+                 <property name="toolTip">
+                  <string>Use minimal brightness to leave landscape visible also in darkness</string>
+                 </property>
+                 <property name="text">
+                  <string>Minimal brightness:</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QDoubleSpinBox" name="landscapeBrightnessSpinBox">
+                 <property name="enabled">
+                  <bool>false</bool>
+                 </property>
+                 <property name="toolTip">
+                  <string>Value range 0..1 (landscape is black at night - landscape is fully bright)</string>
+                 </property>
+                 <property name="maximum">
+                  <double>1.000000000000000</double>
+                 </property>
+                 <property name="singleStep">
+                  <double>0.010000000000000</double>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QCheckBox" name="localLandscapeBrightnessCheckBox">
+                 <property name="enabled">
+                  <bool>false</bool>
+                 </property>
+                 <property name="toolTip">
+                  <string>Use minimal brightness as may be specified in landscape.ini</string>
+                 </property>
+                 <property name="text">
+                  <string>from landscape, if given</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
              </item>
             </layout>
            </widget>

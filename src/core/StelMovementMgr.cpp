@@ -798,7 +798,7 @@ void StelMovementMgr::moveToJ2000(const Vec3d& aim, float moveDuration, int zoom
 	move.aim=aim;
 	move.aim.normalize();
 	move.aim*=2.;
-	move.start=viewDirectionJ2000;
+	move.start=viewDirectionJ2000;	
 	move.start.normalize();
 	move.speed=1.f/(moveDuration*1000);
 	move.coef=0.;

@@ -51,6 +51,7 @@
 #include "StelUtils.hpp"
 #include "StelGuiBase.hpp"
 #include "MilkyWay.hpp"
+#include "ZodiacalLight.hpp"
 
 #include <QDateTime>
 #include <QDebug>
@@ -784,7 +785,33 @@ QVariantMap StelMainScriptAPI::getObjectInfo(const QString& name)
 	map.insert("vmage", obj->getVMagnitudeWithExtinction(core));
 
 	// angular size
-	map.insert("size", obj->getAngularSize(core));
+	double angularSize = 2.*obj->getAngularSize(core)*M_PI/180.;
+	bool sign;
+	double deg;
+	StelUtils::radToDecDeg(angularSize, sign, deg);
+	if (!sign)
+		deg *= -1;
+	map.insert("size", angularSize);
+	map.insert("size-dd", deg);
+	map.insert("size-deg", StelUtils::radToDecDegStr(angularSize, 5));
+	map.insert("size-dms", StelUtils::radToDmsStr(angularSize, true));
+
+	if (obj->getType().toLower()=="planet" && name!="Sun")
+	{
+		SolarSystem* ssmgr = GETSTELMODULE(SolarSystem);
+		map.insert("distance", obj->getJ2000EquatorialPos(core).length());
+		double phase = ssmgr->getPhaseForPlanet(name);
+		map.insert("phase", phase);
+		map.insert("illumination", 100.*phase);
+		double phaseAngle = ssmgr->getPhaseAngleForPlanet(name);
+		map.insert("phase-angle", phaseAngle);
+		map.insert("phase-angle-dms", StelUtils::radToDmsStr(phaseAngle));
+		map.insert("phase-angle-deg", StelUtils::radToDecDegStr(phaseAngle));
+		double elongation = ssmgr->getElongationForPlanet(name);
+		map.insert("elongation", elongation);
+		map.insert("elongation-dms", StelUtils::radToDmsStr(elongation));
+		map.insert("elongation-deg", StelUtils::radToDecDegStr(elongation));
+	}
 
 	// localized name
 	map.insert("localized-name", obj->getNameI18n());
@@ -864,7 +891,33 @@ QVariantMap StelMainScriptAPI::getSelectedObjectInfo()
 	map.insert("vmage", obj->getVMagnitudeWithExtinction(core));
 
 	// angular size
-	map.insert("size", obj->getAngularSize(core));
+	double angularSize = 2.*obj->getAngularSize(core)*M_PI/180.;
+	bool sign;
+	double deg;
+	StelUtils::radToDecDeg(angularSize, sign, deg);
+	if (!sign)
+		deg *= -1;
+	map.insert("size", angularSize);
+	map.insert("size-dd", deg);
+	map.insert("size-deg", StelUtils::radToDecDegStr(angularSize, 5));
+	map.insert("size-dms", StelUtils::radToDmsStr(angularSize, true));
+
+	if (obj->getType().toLower()=="planet" && obj->getEnglishName()!="Sun")
+	{
+		SolarSystem* ssmgr = GETSTELMODULE(SolarSystem);
+		map.insert("distance", obj->getJ2000EquatorialPos(core).length());
+		double phase = ssmgr->getPhaseForPlanet(obj->getEnglishName());
+		map.insert("phase", phase);
+		map.insert("illumination", 100.*phase);
+		double phaseAngle = ssmgr->getPhaseAngleForPlanet(obj->getEnglishName());
+		map.insert("phase-angle", phaseAngle);
+		map.insert("phase-angle-dms", StelUtils::radToDmsStr(phaseAngle));
+		map.insert("phase-angle-deg", StelUtils::radToDecDegStr(phaseAngle));
+		double elongation = ssmgr->getElongationForPlanet(obj->getEnglishName());
+		map.insert("elongation", elongation);
+		map.insert("elongation-dms", StelUtils::radToDmsStr(elongation));
+		map.insert("elongation-deg", StelUtils::radToDecDegStr(elongation));
+	}
 
 	// english name or designation & localized name
 	map.insert("name", obj->getEnglishName());
@@ -1124,4 +1177,19 @@ void StelMainScriptAPI::setMilkyWayIntensity(double i)
 double StelMainScriptAPI::getMilkyWayIntensity()
 {
 	return GETSTELMODULE(MilkyWay)->getIntensity();
+}
+
+void StelMainScriptAPI::setZodiacalLightVisible(bool b)
+{
+	GETSTELMODULE(ZodiacalLight)->setFlagShow(b);
+}
+
+void StelMainScriptAPI::setZodiacalLightIntensity(double i)
+{
+	GETSTELMODULE(ZodiacalLight)->setIntensity(i);
+}
+
+double StelMainScriptAPI::getZodiacalLightIntensity()
+{
+	return GETSTELMODULE(ZodiacalLight)->getIntensity();
 }

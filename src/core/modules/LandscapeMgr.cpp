@@ -601,19 +601,26 @@ QString LandscapeMgr::getCurrentLandscapeHtmlDescription() const
 	desc+="<b>"+q_("Author: ")+"</b>";
 	desc+=landscape->getAuthorName();
 	desc+="<br>";
-	desc+="<b>"+q_("Location: ")+"</b>";
-	if (landscape->getLocation().longitude>-500.0 && landscape->getLocation().latitude>-500.0)
+	// This previously showed 0/0 for locationless landscapes!
+	if (landscape->hasLocation())
 	{
-		desc += StelUtils::radToDmsStrAdapt(landscape->getLocation().longitude * M_PI/180.);
-		desc += "/" + StelUtils::radToDmsStrAdapt(landscape->getLocation().latitude *M_PI/180.);
-		desc += QString(q_(", %1 m")).arg(landscape->getLocation().altitude);
-		QString planetName = landscape->getLocation().planetName;
-		if (!planetName.isEmpty())
-		{
-			desc += "<br><b>"+q_("Planet: ")+"</b>"+ q_(planetName);
-		}
+		desc+="<b>"+q_("Location: ")+"</b>";
+		//if (landscape->getLocation().longitude>-500.0 && landscape->getLocation().latitude>-500.0)
+		//{
+			desc += StelUtils::radToDmsStrAdapt(landscape->getLocation().longitude * M_PI/180.);
+			desc += "/" + StelUtils::radToDmsStrAdapt(landscape->getLocation().latitude *M_PI/180.);
+			desc += QString(q_(", %1 m")).arg(landscape->getLocation().altitude);
+			QString planetName = landscape->getLocation().planetName;
+			//if (!planetName.isEmpty())
+			//{
+				desc += "<br><b>"+q_("Planet: ")+"</b>"+ q_(planetName);
+			//}
+		//}
 		desc += "<br><br>";
 	}
+	// TBD: Activate this or delete?
+	//else
+	//	desc+="<b>"+q_("Location: ")+"</b>" + q_("not specified (just decoration)") + "<br><br>";
 	return desc;
 }
 

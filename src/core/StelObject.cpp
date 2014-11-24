@@ -172,7 +172,7 @@ QString StelObject::getPositionInfoString(const StelCore *core, const InfoString
 		else
 		{
 			if (withDecimalDegree)
-				res += q_("Az/Alt: %1/%2").arg(StelUtils::radToDecDegStr(az,false,true), StelUtils::radToDecDegStr(alt)) + " " + "<br>";
+				res += q_("Az/Alt: %1/%2").arg(StelUtils::radToDecDegStr(az), StelUtils::radToDecDegStr(alt)) + " " + "<br>";
 			else
 				res += q_("Az/Alt: %1/%2").arg(StelUtils::radToDmsStr(az,true), StelUtils::radToDmsStr(alt,true)) + " " + "<br>";
 		}
