@@ -19,6 +19,7 @@
 
 // This file contains translations for all translatable strings stored within data files
 // It is not meant to be compiled but just parsed by gettext
+// names of celestial objects for screen display (Sky language) have been taken to translations_skycultures.h
 
 class Translations
 {
@@ -28,7 +29,7 @@ class Translations
 	{
 		// Generate Gettext strings for traduction
 		Q_ASSERT(0);
-		
+ /*		
 		// Planets and satellites from ssystem.ini
 		N_("Sun");
 		N_("Mercury");
@@ -164,7 +165,7 @@ class Translations
 		N_("Tycho's Supernova");
 		// TRANSLATORS: Name of supernova SN 1604A
 		N_("Kepler's Supernova");
-		
+ */		
 		// Cardinals names
 		N_("N");	// North
 		N_("S");	// South
@@ -240,6 +241,7 @@ class Translations
 		N_("Tupi-Guarani");
 		N_("Tongan");
 		N_("Western");
+		N_("Western (H.A.Rey)");
 
 		
 		// =====================================================================
