@@ -51,7 +51,8 @@ public:
 		LANGUAGEPACK,
 		SCRIPT,
 		STARLORE,
-		TEXTURE
+		TEXTURE,
+		INVALID_CATEGORY
 	};
 
 	//! @enum AddOnStatus

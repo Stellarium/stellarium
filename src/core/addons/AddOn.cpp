@@ -161,6 +161,8 @@ AddOn::Category AddOn::getCategoryFromType(Type type)
 			return CATALOG;
 		case Texture:
 			return TEXTURE;
+		default:
+			return INVALID_CATEGORY;
 	}
 }
 

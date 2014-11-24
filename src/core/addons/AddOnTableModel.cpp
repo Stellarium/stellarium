@@ -65,6 +65,10 @@ AddOnTableModel::AddOnTableModel(AddOn::Category category, QHash<AddOn::Type, St
 			m_iColumns << Title << Version;
 			break;
 		}
+		default:
+		{
+			qWarning() << "AddOnTableModel : Invalid category!";
+		}
 	}
 	m_iColumns << Status << Checkbox;
 }
