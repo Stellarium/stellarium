@@ -881,7 +881,7 @@ void Scenery3d::generateCubeMap_drawSceneWithShadows()
         curShader->setUniformValue(smapLoc.toLatin1().constData(), 3+i);
 
         QString texMatLoc = "texmat_"+ QString::number(i);
-        curShader->setUniformValue(texMatLoc.toLatin1().constData(), QMatrix4x4(texMat.r));
+	glUniformMatrix4fv(curShader->uniformLocation(texMatLoc),1,GL_FALSE,texMat.r);
     }
 
     //Send squared splits to the shader
