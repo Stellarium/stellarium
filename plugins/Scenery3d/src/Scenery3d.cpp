@@ -76,12 +76,11 @@ static const float VENUS_BRIGHTNESS_FACTOR=0.005f;
 Scenery3d::Scenery3d()
     :absolutePosition(0.0, 0.0, 0.0), // 1.E-12, 1.E-12, 1.E-12), // these values signify "set default values"
     movement_x(0.0f), movement_y(0.0f), movement_z(0.0f),core(NULL),
-    objModel(NULL), groundModel(NULL), heightmap(NULL), currentScene(),
+    heightmap(NULL), currentScene(),
     cubemapSize(1024),shadowmapSize(1024),torchBrightness(0.5f)
 {
 	qDebug()<<"Scenery3d constructor...";
-    objModel = new OBJ();
-    groundModel = new OBJ();
+
     shadowMapTexture = 0;
     for (int i=0; i<6; i++) {
         cubeMap[i] = NULL;
@@ -204,17 +203,6 @@ Scenery3d::~Scenery3d()
             cubeMap[i] = NULL;
         }
     }
-    if (groundModel != objModel)
-    {
-        delete groundModel;
-        groundModel = NULL;
-    }
-
-    if (objModel)
-    {
-        delete objModel;
-        objModel = NULL;
-    }
 
     for(unsigned int i=0; i<focusBodies.size(); i++)
     {
@@ -246,26 +234,24 @@ void Scenery3d::loadModel()
 	//TODO FS: introduce background loading of models!
 	//Everything that OBJ does could probably be moved to a background thread, except upload of OpenGL objects which should happen in main thread.
 
-        if(objModel != NULL)
-        {
-	    objModel->clean();
-	    qDebug()<<"OBJ memory after clean: "<<objModel->memoryUsage();
-        }
+	objModel.clean();
+	qDebug()<<"OBJ memory after clean: "<<objModel.memoryUsage();
+	groundModel.clean();
 
 	QString modelFile = StelFileMgr::findFile( currentScene.fullPath+ "/" + currentScene.modelScenery);
-	if(!objModel->load(modelFile, objVertexOrder, currentScene.sceneryGenerateNormals))
+	if(!objModel.load(modelFile, objVertexOrder, currentScene.sceneryGenerateNormals))
             throw std::runtime_error("Failed to load OBJ file.");
 
-        hasModels = objModel->hasStelModels();
+	hasModels = objModel.hasStelModels();
 	//transform the vertices of the model to match the grid
-	objModel->transform( zRot2Grid );
+	objModel.transform( zRot2Grid );
         //objModel->transform(obj2gridMatrix);
 
 	//upload data to GL
-	objModel->uploadTexturesGL();
-	objModel->uploadBuffersGL();
+	objModel.uploadTexturesGL();
+	objModel.uploadBuffersGL();
 
-	qDebug()<<"OBJ memory after load: "<<objModel->memoryUsage();
+	qDebug()<<"OBJ memory after load: "<<objModel.memoryUsage();
 
 
         /* We could re-create zRotateMatrix here if needed: We may have "default" conditions with landscape coordinates
@@ -279,21 +265,14 @@ void Scenery3d::loadModel()
         //} */
 
 	if (currentScene.modelGround.isEmpty())
-            groundModel=objModel;
-	else if (!currentScene.modelGround.compare("NULL"))
-            groundModel=NULL;
-        else
+	    groundModel=objModel;
+	else if(currentScene.modelGround != "NULL")
         {
-            if(groundModel != NULL)
-            {
-		groundModel->clean();
-            }
-
 	    modelFile = StelFileMgr::findFile(currentScene.fullPath + "/" + currentScene.modelGround);
-	    if(!groundModel->load(modelFile, objVertexOrder, currentScene.groundGenerateNormals))
+	    if(!groundModel.load(modelFile, objVertexOrder, currentScene.groundGenerateNormals))
                 throw std::runtime_error("Failed to load OBJ file.");
 
-	    groundModel->transform( zRot2Grid );
+	    groundModel.transform( zRot2Grid );
 
 	    //the ground model needs no opengl uploads, so we skip them
         }
@@ -301,30 +280,37 @@ void Scenery3d::loadModel()
 	if (currentScene.hasLocation())
 	{ if (currentScene.altitudeFromModel) // previouslay marked meaningless
           {
-		currentScene.location->altitude=static_cast<int>(0.5*(objModel->getBoundingBox()->min[2]+objModel->getBoundingBox()->max[2])+currentScene.modelWorldOffset[2]);
+		currentScene.location->altitude=static_cast<int>(0.5*(objModel.getBoundingBox().min[2]+objModel.getBoundingBox().max[2])+currentScene.modelWorldOffset[2]);
           }
         }
 
 	if (currentScene.groundNullHeightFromModel)
         {
-	    currentScene.groundNullHeight=((groundModel!=NULL) ? groundModel->getBoundingBox()->min[2] : objModel->getBoundingBox()->min[2]);
+	    currentScene.groundNullHeight=((groundModel.isLoaded()) ? groundModel.getBoundingBox().min[2] : objModel.getBoundingBox().min[2]);
             //groundNullHeight = objModel->getBoundingBox()->min[2];
 	    qDebug() << "Ground outside model is " << currentScene.groundNullHeight  << "m high (in model coordinates)";
         }
 	else qDebug() << "Ground outside model stays " << currentScene.groundNullHeight  << "m high (in model coordinates)";
 
-        if (groundModel)
-        {
-	    heightmap = new Heightmap(groundModel);
+	//delete old heightmap
+	if(heightmap)
+	{
+		delete heightmap;
+		heightmap = NULL;
+	}
+
+	if (groundModel.isLoaded())
+        {	
+	    heightmap = new Heightmap(&groundModel);
 	    heightmap->setNullHeight(currentScene.groundNullHeight);
         }
 
 	if(currentScene.startPositionFromModel)
 	{
-		absolutePosition.v[0] = -(objModel->getBoundingBox()->max[0]+objModel->getBoundingBox()->min[0])/2.0;
-		qDebug() << "Setting Easting  to BBX center: " << objModel->getBoundingBox()->min[0] << ".." << objModel->getBoundingBox()->max[0] << ": " << absolutePosition.v[0];
-		absolutePosition.v[1] = -(objModel->getBoundingBox()->max[1]+objModel->getBoundingBox()->min[1])/2.0;
-		qDebug() << "Setting Northing to BBX center: " << objModel->getBoundingBox()->min[1] << ".." << objModel->getBoundingBox()->max[1] << ": " << -absolutePosition.v[1];
+		absolutePosition.v[0] = -(objModel.getBoundingBox().max[0]+objModel.getBoundingBox().min[0])/2.0;
+		qDebug() << "Setting Easting  to BBX center: " << objModel.getBoundingBox().min[0] << ".." << objModel.getBoundingBox().max[0] << ": " << absolutePosition.v[0];
+		absolutePosition.v[1] = -(objModel.getBoundingBox().max[1]+objModel.getBoundingBox().min[1])/2.0;
+		qDebug() << "Setting Northing to BBX center: " << objModel.getBoundingBox().min[1] << ".." << objModel.getBoundingBox().max[1] << ": " << -absolutePosition.v[1];
 	}
 	else
 	{
@@ -333,13 +319,13 @@ void Scenery3d::loadModel()
 	}
 	eye_height = currentScene.eyeLevel;
 
-        OBJ* cur = objModel;
+	OBJ* cur = &objModel;
 #if GROUND_MODEL
-        cur = groundModel;
+	cur = &groundModel;
 #endif
 
         //Set the scene's AABB
-        setSceneAABB(cur->getBoundingBox());
+	setSceneAABB(cur->getBoundingBox());
 
         //finally, set core to enable update().
         this->core=StelApp::getInstance().getCore();
@@ -417,9 +403,9 @@ void Scenery3d::setLights(float ambientBrightness, float diffuseBrightness)
     glLightfv(GL_LIGHT0, GL_DIFFUSE, LightDiffuse);
 }
 
-void Scenery3d::setSceneAABB(AABB* bbox)
+void Scenery3d::setSceneAABB(const AABB& bbox)
 {
-    sceneBoundingBox = AABB(bbox->min, bbox->max);
+    sceneBoundingBox = bbox;
 }
 
 void Scenery3d::renderSceneAABB(StelPainter& painter)
@@ -641,9 +627,9 @@ void Scenery3d::drawArrays(bool textures)
     bool tangEnabled = false;
     int tangLocation;
 
-    for(int i=0; i<objModel->getNumberOfStelModels(); i++)
+    for(int i=0; i<objModel.getNumberOfStelModels(); i++)
     {
-        const OBJ::StelModel* pStelModel = &objModel->getStelModel(i);
+	const OBJ::StelModel* pStelModel = &objModel.getStelModel(i);
         const OBJ::Material* pMaterial = pStelModel->pMaterial;
 
         if(textures)
@@ -688,9 +674,9 @@ void Scenery3d::drawArrays(bool textures)
             glLightModeli(GL_LIGHT_MODEL_LOCAL_VIEWER, 0);
         }        
 
-	objModel->bindGLFixedFunction();
+	objModel.bindGLFixedFunction();
 	glDrawElements(GL_TRIANGLES, pStelModel->triangleCount * 3, GL_UNSIGNED_INT, reinterpret_cast<const void*>(pStelModel->startIndex * sizeof(unsigned int)));
-	objModel->unbindGLFixedFunction();
+	objModel.unbindGLFixedFunction();
 
         if(pMaterial->illum == OBJ::TRANSLUCENT)
         {
@@ -769,11 +755,11 @@ void Scenery3d::sendToShader(const OBJ::StelModel* pStelModel, Effect cur, bool&
         if(cur == BumpMapping || cur == All)
         {
             //Send tangents to shader
-            if(objModel->hasTangents())
+	    if(objModel.hasTangents())
             {
                 tangLocation = curShader->attributeLocation("vecTangent");
                 glEnableVertexAttribArray(tangLocation);
-                glVertexAttribPointer(tangLocation, 4, GL_FLOAT, 0, objModel->getVertexSize(), objModel->getVertexArray()->tangent);
+		glVertexAttribPointer(tangLocation, 4, GL_FLOAT, 0, objModel.getVertexSize(), objModel.getVertexArray()->tangent);
                 tangEnabled = true;
             }
 
@@ -1108,7 +1094,7 @@ void Scenery3d::adjustFrustum()
     }
 }
 
-void Scenery3d::analyzeViewSamples(StelPainter &painter)
+void Scenery3d::analyzeViewSamples()
 {
     float f = 2.0 / tan(camFOV * M_PI / 360.0);
     Mat4f camProj = Mat4f(f / camAspect, 0, 0, 0,
@@ -1233,7 +1219,7 @@ void Scenery3d::drawFullscreenQuad(int dim)
     }
 }
 
-void Scenery3d::generateShadowMap(StelCore* core)
+void Scenery3d::generateShadowMap()
 {
     //Needed so we can actually adjust the frustum upwards after it was already adjusted downwards.
     //This resets it and they'll be recomputed in adjustFrustum();
@@ -1247,7 +1233,7 @@ void Scenery3d::generateShadowMap(StelCore* core)
     //Adjust the frustum to the scene before analyzing the view samples
     adjustFrustum();
     //Further adjust
-    //analyzeViewSamples(painter);
+    //analyzeViewSamples();
 
     //Determine sun position
     SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
@@ -1650,7 +1636,7 @@ void Scenery3d::generateCubeMap()
     glDisable(GL_BLEND);
 }
 
-void Scenery3d::drawFromCubeMap(StelCore* core)
+void Scenery3d::drawFromCubeMap()
 {
     if(!hasModels)
 	return;
@@ -1705,7 +1691,7 @@ void Scenery3d::drawFromCubeMap(StelCore* core)
     //glDisable(GL_BLEND);
 }
 
-void Scenery3d::drawObjModel(StelCore* core) // for Perspective Projection only!
+void Scenery3d::drawObjModel() // for Perspective Projection only!
 {
     if(!hasModels)
         return;
@@ -1783,7 +1769,7 @@ void Scenery3d::drawObjModel(StelCore* core) // for Perspective Projection only!
     //glDisable(GL_BLEND);
 }
 
-void Scenery3d::drawCoordinatesText(StelCore* core)
+void Scenery3d::drawCoordinatesText()
 {
     if(!hasModels)
         return;
@@ -1837,7 +1823,7 @@ void Scenery3d::drawCoordinatesText(StelCore* core)
     //*/
 }
 
-void Scenery3d::drawDebug(StelCore* core)
+void Scenery3d::drawDebug()
 {
     if(!hasModels)
         return;
@@ -2084,22 +2070,22 @@ void Scenery3d::draw(StelCore* core)
 {
     if (shadowsEnabled)
     {
-	generateShadowMap(core);
+	generateShadowMap();
     }
 
     if (core->getCurrentProjectionType() == StelCore::ProjectionPerspective)
     {
-        drawObjModel(core);
+	drawObjModel();
     }
     else
     {
 	generateCubeMap();
-        drawFromCubeMap(core);
+	drawFromCubeMap();
     }
-    if (textEnabled) drawCoordinatesText(core);
+    if (textEnabled) drawCoordinatesText();
     if (debugEnabled)
     {
-	drawDebug(core);
+	drawDebug();
     }
 }
 
