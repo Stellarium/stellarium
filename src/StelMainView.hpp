@@ -27,13 +27,18 @@
 #include <QEventLoop>
 #include <QOpenGLContext>
 
+// This define (only used here and in StelMainView.cpp) is temporarily used
+// to allow uncompromised compiling while the migration to the new QOpenGL... classes
+// has not been done. As soon as Qt5.4 is out, we should finish this migration process!
+#define STEL_USE_NEW_OPENGL_WIDGETS false
+
 class QDeclarativeItem;
-#if QT_VERSION < 0x050400
-class QGLWidget;
-class StelQGLWidget;
-#else
+#if STEL_USE_NEW_OPENGL_WIDGETS
 class QOpenGLWidget;
 class StelQOpenGLWidget;
+#else
+class QGLWidget;
+class StelQGLWidget;
 #endif
 class QMoveEvent;
 class QResizeEvent;
@@ -164,10 +169,10 @@ private:
 	QDeclarativeItem* skyItem;
 
 	//! The openGL window
-#if QT_VERSION < 0x050400
-	StelQGLWidget* glWidget;
-#else
+#if STEL_USE_NEW_OPENGL_WIDGETS
 	StelQOpenGLWidget* glWidget;
+#else
+	StelQGLWidget* glWidget;
 #endif
 	StelGuiBase* gui;
 	class StelApp* stelApp;
