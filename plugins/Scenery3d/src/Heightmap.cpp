@@ -14,10 +14,10 @@ Heightmap::Heightmap(OBJ* obj) : obj(obj), nullHeight(0)
     this->yMin = INF;
     this->yMax = -INF;
 
-    xMin = std::min(obj->pBoundingBox->min[0], xMin);
-    yMin = std::min(obj->pBoundingBox->min[1], yMin);
-    xMax = std::max(obj->pBoundingBox->max[0], xMax);
-    yMax = std::max(obj->pBoundingBox->max[1], yMax);
+    xMin = std::min(obj->pBoundingBox.min[0], xMin);
+    yMin = std::min(obj->pBoundingBox.min[1], yMin);
+    xMax = std::max(obj->pBoundingBox.max[0], xMax);
+    yMax = std::max(obj->pBoundingBox.max[1], yMax);
 
     this->initGrid();
 }
@@ -97,7 +97,7 @@ void Heightmap::initGrid()
 
 	    for(unsigned int i=0; i<obj->m_numberOfTriangles; ++i)
             {
-		const unsigned int* pTriangle = &(obj->m_indexArray[i*3]);
+		const unsigned int* pTriangle = &(obj->m_indexArray.at(i*3));
 		if(face_in_area(*obj, pTriangle, xmin, ymin, xmax, ymax))
                 {
                     faces->push_back(*pTriangle);
@@ -132,24 +132,24 @@ Heightmap::GridSpace* Heightmap::getSpace(const float x, const float y) const
 float Heightmap::GridSpace::face_height_at(const OBJ& obj,const unsigned int* pTriangle, const float x, const float y)
 {
     //Vertices in triangle
-    const OBJ::Vertex* pV0 = &obj.m_vertexArray[pTriangle[0]];
-    const OBJ::Vertex* pV1 = &obj.m_vertexArray[pTriangle[1]];
-    const OBJ::Vertex* pV2 = &obj.m_vertexArray[pTriangle[2]];
+    const OBJ::Vertex& pV0 = obj.m_vertexArray.at(pTriangle[0]);
+    const OBJ::Vertex& pV1 = obj.m_vertexArray.at(pTriangle[1]);
+    const OBJ::Vertex& pV2 = obj.m_vertexArray.at(pTriangle[2]);
 
     float pVertex0[3];
-    pVertex0[0] = static_cast<float>(pV0->position[0]);
-    pVertex0[1] = static_cast<float>(pV0->position[1]);
-    pVertex0[2] = static_cast<float>(pV0->position[2]);
+    pVertex0[0] = static_cast<float>(pV0.position[0]);
+    pVertex0[1] = static_cast<float>(pV0.position[1]);
+    pVertex0[2] = static_cast<float>(pV0.position[2]);
 
     float pVertex1[3];
-    pVertex1[0] = static_cast<float>(pV1->position[0]);
-    pVertex1[1] = static_cast<float>(pV1->position[1]);
-    pVertex1[2] = static_cast<float>(pV1->position[2]);
+    pVertex1[0] = static_cast<float>(pV1.position[0]);
+    pVertex1[1] = static_cast<float>(pV1.position[1]);
+    pVertex1[2] = static_cast<float>(pV1.position[2]);
 
     float pVertex2[3];
-    pVertex2[0] = static_cast<float>(pV2->position[0]);
-    pVertex2[1] = static_cast<float>(pV2->position[1]);
-    pVertex2[2] = static_cast<float>(pV2->position[2]);
+    pVertex2[0] = static_cast<float>(pV2.position[0]);
+    pVertex2[1] = static_cast<float>(pV2.position[1]);
+    pVertex2[2] = static_cast<float>(pV2.position[2]);
 
     // Weight of those vertices is used to calculate exact height at (x,y), using barycentric coordinates, see also
     // http://en.wikipedia.org/wiki/Barycentric_coordinate_system_(mathematics)#Converting_to_barycentric_coordinates
@@ -193,11 +193,11 @@ bool Heightmap::face_in_area(const OBJ& obj, const unsigned int* pTriangle, cons
 
     for(int i=0; i<3; i++)
     {
-	const OBJ::Vertex* pVertex = &obj.m_vertexArray[pTriangle[i]];
-        if(pVertex->position[0] < f_xmin) f_xmin = pVertex->position[0];
-        if(pVertex->position[1] < f_ymin) f_ymin = pVertex->position[1];
-        if(pVertex->position[0] > f_xmax) f_xmax = pVertex->position[0];
-        if(pVertex->position[1] > f_ymax) f_ymax = pVertex->position[1];
+	const OBJ::Vertex& pVertex = obj.m_vertexArray.at(pTriangle[i]);
+	if(pVertex.position[0] < f_xmin) f_xmin = pVertex.position[0];
+	if(pVertex.position[1] < f_ymin) f_ymin = pVertex.position[1];
+	if(pVertex.position[0] > f_xmax) f_xmax = pVertex.position[0];
+	if(pVertex.position[1] > f_ymax) f_ymax = pVertex.position[1];
     }
 
     if ((f_xmin < xmax) && (f_ymin < ymax) && (f_xmax > xmin) && (f_ymax > ymin))

@@ -47,13 +47,13 @@
 
 #include <QFile>
 #include <QOpenGLBuffer>
+#include <QOpenGLVertexArrayObject>
 
 #include "StelTexture.hpp"
 #include "VecMath.hpp"
 #include "AABB.hpp"
 
 class Heightmap;
-class QOpenGLVertexArrayObject;
 
 //! A basic Wavefront .OBJ format model loader.
 //!
@@ -179,6 +179,7 @@ public:
     int getVertexSize() const;
 
     //! Returns flags
+    bool isLoaded() const;
     bool hasPositions() const;
     bool hasTextureCoords() const;
     bool hasNormals() const;
@@ -187,7 +188,7 @@ public:
 
     //! Returns the bounding box for this OBJ
     //const BoundingBox* getBoundingBox() const;
-    AABB* getBoundingBox();
+    const AABB& getBoundingBox();
 
     void renderAABBs();
 
@@ -221,6 +222,9 @@ public:
 
     //! Set up some stuff that requires a valid OpenGL context.
     static void setupGL();
+
+    //! Copy assignment operator. No deep copies are performed, but QVectors have copy-on-write semantics, so this is no problem. Does not copy GL objects.
+    OBJ& OBJ::operator=(const OBJ& other);
 private:
     typedef QVector<int> IntVector;
     typedef QVector<Vec3f> VF3Vector;
@@ -263,6 +267,7 @@ private:
     void unbindBuffersGL();
 
     //! Flags
+    bool m_loaded;
     bool m_hasPositions;
     bool m_hasTextureCoords;
     bool m_hasNormals;
@@ -279,7 +284,7 @@ private:
     unsigned int m_numberOfStelModels;
 
     //! Bounding box for the entire scene
-    AABB* pBoundingBox;
+    AABB pBoundingBox;
     Mat4d m;
 
     //! Base path to this file
@@ -320,6 +325,8 @@ inline const OBJ::Vertex* OBJ::getVertexArray() const { return &m_vertexArray[0]
 
 inline int OBJ::getVertexSize() const { return static_cast<int>(sizeof(Vertex)); }
 
+inline bool OBJ::isLoaded() const{ return m_loaded; }
+
 inline bool OBJ::hasNormals() const{ return m_hasNormals; }
 
 inline bool OBJ::hasPositions() const { return m_hasPositions; }
@@ -331,7 +338,7 @@ inline bool OBJ::hasTextureCoords() const { return m_hasTextureCoords; }
 inline bool OBJ::hasStelModels() const { return m_hasStelModels; }
 
 //inline const OBJ::BoundingBox* OBJ::getBoundingBox() const { return pBoundingBox; }
-inline AABB* OBJ::getBoundingBox() {return pBoundingBox; }
+inline const AABB &OBJ::getBoundingBox() {return pBoundingBox; }
 
 inline QString OBJ::absolutePath(QString path) { return m_basePath + path; }
 

@@ -64,9 +64,9 @@ public:
     //! Shifts observer position due to movement through the landscape.
     void update(double deltaTime);
     //! Draw observer grid coordinates as text.
-    void drawCoordinatesText(StelCore* core);
+    void drawCoordinatesText();
     //! Draw some text output. This can be filled as needed by development.
-    void drawDebug(StelCore* core);
+    void drawDebug();
 
     //! Draw scenery, called by Scenery3dMgr.
     void draw(StelCore* core);
@@ -113,13 +113,13 @@ private:
 
     float torchBrightness; // ^L toggle light brightness
 
-    void drawObjModel(StelCore* core);
-    void generateShadowMap(StelCore* core);
+    void drawObjModel();
+    void generateShadowMap();
     void generateCubeMap();
     void generateCubeMap_drawScene();
     void generateCubeMap_drawSceneWithShadows();
     void drawArrays(bool textures=true);
-    void drawFromCubeMap(StelCore* core);
+    void drawFromCubeMap();
 
     //! @return height at -absolutePosition, which is the current eye point.
     float groundHeight();
@@ -146,8 +146,8 @@ private:
     float eye_height;
 
     StelCore* core;
-    OBJ* objModel;
-    OBJ* groundModel;
+    OBJ objModel;
+    OBJ groundModel;
     Heightmap* heightmap;
     OBJ::vertexOrder objVertexOrder; // some OBJ files have left-handed coordinate counting or swapped axes. Allows accounting for those.
 
@@ -159,8 +159,6 @@ private:
     StelVertexArray cubePlaneFront, cubePlaneBack,
                 cubePlaneLeft, cubePlaneRight,
                 cubePlaneTop, cubePlaneBottom;
-
-    QVector<OBJ::StelModel> objModelArrays;
 
 
     QString lightMessage; // DEBUG/TEST ONLY. contains on-screen info on ambient/directional light strength and source.
@@ -199,7 +197,7 @@ private:
     //Current sun position
     Vec3d sunPosition;
     //Sets the scenes' AABB
-    void setSceneAABB(AABB* bbox);
+    void setSceneAABB(const AABB &bbox);
     //Renders the Scene's AABB
     void renderSceneAABB(StelPainter &painter);
     //Renders the Frustum
@@ -239,7 +237,7 @@ private:
     //Said values
     float dim, dimNear, dimFar;
     //Analyzes the view samples to find even tighter fitting near and far planes
-    void analyzeViewSamples(StelPainter &painter);
+    void analyzeViewSamples();
     GLuint camDepthFBO;
     GLuint camDepthTex;
     float parallaxScale;
