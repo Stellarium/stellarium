@@ -2114,7 +2114,7 @@ void Scenery3d::nogluLookAt(double eyeX,  double eyeY,  double eyeZ,  double cen
     Vec3d snorm=s;
     snorm.normalize();
     Vec3d u=snorm ^ f;
-    Mat4f M(s[0], s[1], s[2], 0.0f, u[0], u[1], u[2], 0.0f, -f[0], -f[1], -f[2], 0.0f, 0.0f, 0.0f, 0.0f, 1.0f);
+    Mat4f M(s[0], u[0], -f[0], 0.0f, s[1], u[1], -f[1], 0.0f, s[2], u[2], -f[2], 0.0f, 0.0f, 0.0f, 0.0f, 1.0f);
     glMultMatrixf(M.r);
     glTranslated(-eyeX, -eyeY, -eyeZ);
 }
