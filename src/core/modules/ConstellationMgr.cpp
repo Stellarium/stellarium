@@ -955,7 +955,8 @@ bool ConstellationMgr::getFlagIsolateSelected(void) const
 	return isolateSelected;
 }
 
-StelObject* ConstellationMgr::getSelected(void) const {
+StelObject* ConstellationMgr::getSelected(void) const
+{
 	return *selected.begin();  // TODO return all or just remove this method
 }
 

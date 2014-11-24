@@ -60,6 +60,7 @@ private slots:
 	void starsLabelsValueChanged(int);
 	void setCurrentLandscapeAsDefault(void);
 	void setCurrentCultureAsDefault(void);
+	void setFlagLandscapeUseMinimalBrightness(bool b);
 	//! Update the widget to make sure it is synchrone if a value was changed programmatically
 	//! This function should be called repeatidly with e.g. a timer
 	void updateFromProgram();
@@ -68,6 +69,7 @@ private slots:
         void showAtmosphereDialog();
 
 	void populateLightPollution();
+	void populateLandscapeMinimalBrightness();
 
 	void populateSkyLayersList();
 	void skyLayersSelectionChanged(const QString&);

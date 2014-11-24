@@ -164,8 +164,20 @@ public slots:
 	//! - glatJ2000 : galactic latitude in (J2000 frame) decimal degrees
 	//! - vmag : visual magnitude
 	//! - vmage : visual magnitude (extincted)
-	//! - size : angular size in decimal degrees
+	//! - size: angular size in radians
+	//! - size-dd : angular size in decimal degrees
+	//! - size-deg : angular size in decimal degrees (formatted string)
+	//! - size-dms : angular size in DMS format
 	//! - localized-name : localized name
+	//! - distance : distance to object in AU (for Solar system objects only!)
+	//! - phase : phase of object (for Solar system objects only!)
+	//! - illumination : phase of object in percentages (for Solar system objects only!)
+	//! - phase-angle : phase angle of object in radians (for Solar system objects only!)
+	//! - phase-angle-dms : phase angle of object in DMS (for Solar system objects only!)
+	//! - phase-angle-deg : phase angle of object in decimal degrees (for Solar system objects only!)
+	//! - elongation : elongation of object in radians (for Solar system objects only!)
+	//! - elongation-dms : elongation of object in DMS (for Solar system objects only!)
+	//! - elongation-deg : elongation of object in decimal degrees (for Solar system objects only!)
 	QVariantMap getObjectInfo(const QString& name);
 
 	//! Fetch a map with data about an latest selected object's position, magnitude and so on
@@ -181,10 +193,22 @@ public slots:
 	//! - glongJ2000 : galactic longitude (J2000 frame) in decimal degrees
 	//! - glatJ2000 : galactic latitude in (J2000 frame) decimal degrees
 	//! - vmag : visual magnitude
-	//! - vmage : visual magnitude (extincted)
-	//! - size : angular size in decimal degrees
+	//! - vmage : visual magnitude (extincted)	
+	//! - size: angular size in radians
+	//! - size-dd : angular size in decimal degrees
+	//! - size-deg : angular size in decimal degrees (formatted string)
+	//! - size-dms : angular size in DMS format
 	//! - name : english name
 	//! - localized-name : localized name
+	//! - distance : distance to object in AU (for Solar system objects only!)
+	//! - phase : phase of object (for Solar system objects only!)
+	//! - illumination : phase of object in percentages (for Solar system objects only!)
+	//! - phase-angle : phase angle of object in radians (for Solar system objects only!)
+	//! - phase-angle-dms : phase angle of object in DMS (for Solar system objects only!)
+	//! - phase-angle-deg : phase angle of object in decimal degrees (for Solar system objects only!)
+	//! - elongation : elongation of object in radians (for Solar system objects only!)
+	//! - elongation-dms : elongation of object in DMS (for Solar system objects only!)
+	//! - elongation-deg : elongation of object in decimal degrees (for Solar system objects only!)
 	QVariantMap getSelectedObjectInfo();
 
 	//! Clear the display options, setting a "standard" view.
@@ -648,6 +672,18 @@ public slots:
 	//! Get Milky Way intensity.
 	//! @return value of Milky Way intensity, e.g. "1.2"
 	double getMilkyWayIntensity();
+
+	//! Show or hide the Zodiacal Light.
+	//! @param b if true, show the Zodiacal Light, if false, hide the Zodiacal Light.
+	void setZodiacalLightVisible(bool b);
+
+	//! Set Zodiacal Light intensity.
+	//! @param i value of intensity for the Zodiacal Light
+	void setZodiacalLightIntensity(double i);
+
+	//! Get Zodiacal Light intensity.
+	//! @return value of Zodiacal Light intensity, e.g. "1.2"
+	double getZodiacalLightIntensity();
 
 	//! For use in setDate and waitFor
 	//! For parameter descriptions see setDate().
