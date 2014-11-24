@@ -49,6 +49,7 @@
 #include "NebulaMgr.hpp"
 #include "GridLinesMgr.hpp"
 #include "MilkyWay.hpp"
+#include "ZodiacalLight.hpp"
 #ifndef DISABLE_SCRIPTING
 #include "StelScriptMgr.hpp"
 #endif
@@ -528,6 +529,7 @@ void ConfigurationDialog::saveCurrentViewOptions()
 	conf->setValue("viewing/moon_scale", ssmgr->getMoonScale());
 	conf->setValue("astro/meteor_rate", mmgr->getZHR());
 	conf->setValue("astro/milky_way_intensity", GETSTELMODULE(MilkyWay)->getIntensity());
+	conf->setValue("astro/zodiacal_light_intensity", GETSTELMODULE(ZodiacalLight)->getIntensity());
 
 	// view dialog / markings tab settings
 	conf->setValue("viewing/flag_azimuthal_grid", glmgr->getFlagAzimuthalGrid());
@@ -571,6 +573,9 @@ void ConfigurationDialog::saveCurrentViewOptions()
         conf->setValue("landscape/atmospheric_extinction_coefficient", core->getSkyDrawer()->getExtinctionCoefficient());
         conf->setValue("landscape/pressure_mbar", core->getSkyDrawer()->getAtmospherePressure());
         conf->setValue("landscape/temperature_C", core->getSkyDrawer()->getAtmosphereTemperature());
+	conf->setValue("landscape/flag_minimal_brightness", lmgr->getFlagLandscapeUseMinimalBrightness());
+	conf->setValue("landscape/flag_landscape_sets_minimal_brightness", lmgr->getFlagLandscapeSetsMinimalBrightness());
+	conf->setValue("landscape/minimal_brightness", lmgr->getDefaultMinimalBrightness());
 
 	// view dialog / starlore tab
 	StelApp::getInstance().getSkyCultureMgr().setDefaultSkyCultureID(StelApp::getInstance().getSkyCultureMgr().getCurrentSkyCultureID());
@@ -603,7 +608,7 @@ void ConfigurationDialog::saveCurrentViewOptions()
 		conf->setValue("flag_show_magnitude",
 		               (bool) (flags & StelObject::Magnitude));
 		conf->setValue("flag_show_absolutemagnitude",
-		               (bool) (flags & StelObject::AbsoluteMagnitude));
+			       (bool) (flags & StelObject::AbsoluteMagnitude));
 		conf->setValue("flag_show_radecj2000",
 		               (bool) (flags & StelObject::RaDecJ2000));
 		conf->setValue("flag_show_radecofdate",

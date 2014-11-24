@@ -20,8 +20,7 @@
 #ifndef _STELUTILS_HPP_
 #define _STELUTILS_HPP_
 
-#include "config.h"
-
+#include <cmath>
 #include "VecMath.hpp"
 
 #include <QVariantMap>
@@ -35,6 +34,8 @@
 #define PARSEC 30.857e12
 // speed of light (km/sec)
 #define SPEED_OF_LIGHT 299792.458
+
+#define stelpow10f(x) std::exp((x) * 2.3025850930f)
 
 //! @namespace StelUtils contains general purpose utility functions.
 namespace StelUtils
@@ -617,6 +618,15 @@ namespace StelUtils
 
 	//! Uncompress gzip or zlib compressed data.
 	QByteArray uncompress(const QByteArray& data);
+
+#ifdef _MSC_BUILD
+    inline double trunc(double x)
+    {
+        return (x < 0 ? std::ceil(x) : std::floor(x));
+    }
+#else
+    inline double trunc(double x) { return trunc(x); }
+#endif
 }
 
 #endif // _STELUTILS_HPP_

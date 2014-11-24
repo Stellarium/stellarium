@@ -19,8 +19,6 @@
 #ifndef _STELLOCATION_HPP_
 #define _STELLOCATION_HPP_
 
-#include "config.h"
-
 #include <QString>
 
 //! @class StelLocation
