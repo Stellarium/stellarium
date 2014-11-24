@@ -84,6 +84,7 @@ void OBJ::setupGL()
 OBJ::OBJ() : m_vertexBuffer(QOpenGLBuffer::VertexBuffer), m_indexBuffer(QOpenGLBuffer::IndexBuffer)
 {
     //Iinitialize this OBJ
+    m_loaded = false;
     m_hasPositions = false;
     m_hasNormals = false;
     m_hasTextureCoords = false;
@@ -96,7 +97,7 @@ OBJ::OBJ() : m_vertexBuffer(QOpenGLBuffer::VertexBuffer), m_indexBuffer(QOpenGLB
     m_numberOfMaterials = 0;
     m_numberOfStelModels = 0;
 
-    pBoundingBox = new AABB(Vec3f(0.0f), Vec3f(0.0f));
+    pBoundingBox = AABB(Vec3f(0.0f), Vec3f(0.0f));
     //the constructor does no GL stuff, so it is always safe even if VAOs are not supported
     m_vertexArrayObject = new QOpenGLVertexArrayObject();
 }
@@ -104,12 +105,12 @@ OBJ::OBJ() : m_vertexBuffer(QOpenGLBuffer::VertexBuffer), m_indexBuffer(QOpenGLB
 OBJ::~OBJ()
 {
     clean();
-    delete pBoundingBox;
     delete m_vertexArrayObject;
 }
 
 void OBJ::clean()
 {
+    m_loaded = false;
     m_hasPositions = false;
     m_hasNormals = false;
     m_hasTextureCoords = false;
@@ -122,8 +123,8 @@ void OBJ::clean()
     m_numberOfMaterials = 0;
     m_numberOfStelModels = 0;
 
-    pBoundingBox->min = Vec3f(0.0f);
-    pBoundingBox->max = Vec3f(0.0f);
+    pBoundingBox.min = Vec3f(0.0f);
+    pBoundingBox.max = Vec3f(0.0f);
 
     //note that the wrappers still remain usable, the opengl objs are recreated automatically
     m_vertexBuffer.destroy();
@@ -187,10 +188,11 @@ bool OBJ::load(const QString& filename, const enum vertexOrder order, bool rebui
     qDebug() << getTime() << "[Scenery3d] Normals#: " << m_numberOfNormals;
     qDebug() << getTime() << "[Scenery3d] StelModels#: " << m_numberOfStelModels;
     qDebug() << getTime() << "[Scenery3d] Bounding Box";
-    qDebug() << getTime() << "[Scenery3d] X: [" << pBoundingBox->min[0] << ", " << pBoundingBox->max[0] << "] ";
-    qDebug() << getTime() << "[Scenery3d] Y: [" << pBoundingBox->min[1] << ", " << pBoundingBox->max[1] << "] ";
-    qDebug() << getTime() << "[Scenery3d] Z: [" << pBoundingBox->min[2] << ", " << pBoundingBox->max[2] << "] ";
+    qDebug() << getTime() << "[Scenery3d] X: [" << pBoundingBox.min[0] << ", " << pBoundingBox.max[0] << "] ";
+    qDebug() << getTime() << "[Scenery3d] Y: [" << pBoundingBox.min[1] << ", " << pBoundingBox.max[1] << "] ";
+    qDebug() << getTime() << "[Scenery3d] Z: [" << pBoundingBox.min[2] << ", " << pBoundingBox.max[2] << "] ";
 
+    m_loaded = true;
     return true;
 }
 
@@ -1360,8 +1362,8 @@ void OBJ::unbindBuffersGL()
 void OBJ::transform(Mat4d mat)
 {
     m = mat;
-    pBoundingBox->min = Vec3f(std::numeric_limits<float>::max());
-    pBoundingBox->max = Vec3f(std::numeric_limits<float>::lowest());
+    pBoundingBox.min = Vec3f(std::numeric_limits<float>::max());
+    pBoundingBox.max = Vec3f(std::numeric_limits<float>::lowest());
 
     //Transform all vertices and normals by mat
     for(int i=0; i<getNumberOfVertices(); ++i)
@@ -1392,33 +1394,33 @@ void OBJ::transform(Mat4d mat)
         pVertex->bitangent.v[2] = biTang.v[2];
 
         //Update bounding box in case it changed
-        pBoundingBox->min = Vec3f(std::min(static_cast<float>(pVertex->position[0]), pBoundingBox->min[0]),
-                                  std::min(static_cast<float>(pVertex->position[1]), pBoundingBox->min[1]),
-                                  std::min(static_cast<float>(pVertex->position[2]), pBoundingBox->min[2]));
+	pBoundingBox.min = Vec3f( std::min(static_cast<float>(pVertex->position[0]), pBoundingBox.min[0]),
+				  std::min(static_cast<float>(pVertex->position[1]), pBoundingBox.min[1]),
+				  std::min(static_cast<float>(pVertex->position[2]), pBoundingBox.min[2]));
 
-        pBoundingBox->max = Vec3f(std::max(static_cast<float>(pVertex->position[0]), pBoundingBox->max[0]),
-                                  std::max(static_cast<float>(pVertex->position[1]), pBoundingBox->max[1]),
-                                  std::max(static_cast<float>(pVertex->position[2]), pBoundingBox->max[2]));
+	pBoundingBox.max = Vec3f( std::max(static_cast<float>(pVertex->position[0]), pBoundingBox.max[0]),
+				  std::max(static_cast<float>(pVertex->position[1]), pBoundingBox.max[1]),
+				  std::max(static_cast<float>(pVertex->position[2]), pBoundingBox.max[2]));
     }
 }
 
 void OBJ::findBounds()
 {
     //Find Bounding Box for entire Scene
-    pBoundingBox->min = Vec3f(std::numeric_limits<float>::max());
-    pBoundingBox->max = Vec3f(std::numeric_limits<float>::lowest());
+    pBoundingBox.min = Vec3f(std::numeric_limits<float>::max());
+    pBoundingBox.max = Vec3f(std::numeric_limits<float>::lowest());
 
     for(int i=0; i<getNumberOfVertices(); ++i)
     {
         Vertex* pVertex = &m_vertexArray[i];
 
-        pBoundingBox->min = Vec3f(std::min(static_cast<float>(pVertex->position[0]), pBoundingBox->min[0]),
-                                  std::min(static_cast<float>(pVertex->position[1]), pBoundingBox->min[1]),
-                                  std::min(static_cast<float>(pVertex->position[2]), pBoundingBox->min[2]));
+	pBoundingBox.min = Vec3f( std::min(static_cast<float>(pVertex->position[0]), pBoundingBox.min[0]),
+				  std::min(static_cast<float>(pVertex->position[1]), pBoundingBox.min[1]),
+				  std::min(static_cast<float>(pVertex->position[2]), pBoundingBox.min[2]));
 
-        pBoundingBox->max = Vec3f(std::max(static_cast<float>(pVertex->position[0]), pBoundingBox->max[0]),
-                                  std::max(static_cast<float>(pVertex->position[1]), pBoundingBox->max[1]),
-                                  std::max(static_cast<float>(pVertex->position[2]), pBoundingBox->max[2]));
+	pBoundingBox.max = Vec3f( std::max(static_cast<float>(pVertex->position[0]), pBoundingBox.max[0]),
+				  std::max(static_cast<float>(pVertex->position[1]), pBoundingBox.max[1]),
+				  std::max(static_cast<float>(pVertex->position[2]), pBoundingBox.max[2]));
     }
 
     //Find AABB per Stel Model
@@ -1432,11 +1434,11 @@ void OBJ::findBounds()
             unsigned int vertexIndex = m_indexArray[j];
             Vertex* pVertex = &m_vertexArray[vertexIndex];
 
-	    pStelModel->bbox.min = Vec3f(std::min(static_cast<float>(pVertex->position[0]), pStelModel->bbox.min[0]),
+	    pStelModel->bbox.min = Vec3f( std::min(static_cast<float>(pVertex->position[0]), pStelModel->bbox.min[0]),
 					  std::min(static_cast<float>(pVertex->position[1]), pStelModel->bbox.min[1]),
 					  std::min(static_cast<float>(pVertex->position[2]), pStelModel->bbox.min[2]));
 
-	    pStelModel->bbox.max = Vec3f(std::max(static_cast<float>(pVertex->position[0]), pStelModel->bbox.max[0]),
+	    pStelModel->bbox.max = Vec3f( std::max(static_cast<float>(pVertex->position[0]), pStelModel->bbox.max[0]),
 					  std::max(static_cast<float>(pVertex->position[1]), pStelModel->bbox.max[1]),
 					  std::max(static_cast<float>(pVertex->position[2]), pStelModel->bbox.max[2]));
         }
@@ -1461,4 +1463,35 @@ size_t OBJ::memoryUsage()
 	sz+= m_indexArray.capacity() * sizeof(unsigned int);
 
 	return sz;
+}
+
+OBJ& OBJ::operator=(const OBJ& other)
+{
+	clean();
+
+	m_loaded = other.m_loaded;
+	m_hasPositions = other.m_hasPositions;
+	m_hasTextureCoords = other.m_hasTextureCoords;
+	m_hasNormals = other.m_hasNormals;
+	m_hasTangents = other.m_hasTangents;
+	m_hasStelModels = other.m_hasStelModels;
+
+	m_numberOfVertexCoords = other.m_numberOfVertexCoords;
+	m_numberOfTextureCoords = other.m_numberOfTextureCoords;
+	m_numberOfNormals = other.m_numberOfNormals;
+	m_numberOfTriangles = other.m_numberOfTriangles;
+	m_numberOfMaterials = other.m_numberOfMaterials;
+	m_numberOfStelModels = other.m_numberOfStelModels;
+
+	pBoundingBox = other.pBoundingBox;
+	m = other.m;
+
+	m_basePath = other.m_basePath;
+
+	m_stelModels = other.m_stelModels;
+	m_materials = other.m_materials;
+	m_vertexArray = other.m_vertexArray;
+	m_indexArray = other.m_indexArray;
+
+	return *this;
 }
