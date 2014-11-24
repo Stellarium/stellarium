@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-11-22 01:40+0600\n"
-"PO-Revision-Date: 2012-08-23 12:07+0000\n"
-"Last-Translator: Alexander Wolf <Unknown>\n"
+"PO-Revision-Date: 2014-11-24 00:30+0000\n"
+"Last-Translator: gzotti <Georg.Zotti@univie.ac.at>\n"
 "Language-Team: Latin <la@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-11-22 05:08+0000\n"
+"X-Launchpad-Export-Date: 2014-11-24 05:35+0000\n"
 "X-Generator: Launchpad (build 17252)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:106 src/core/modules/StarMgr.cpp:346
@@ -23,27 +23,27 @@ msgstr ""
 #: src/core/StelApp.cpp:487 src/core/StelCore.cpp:185
 #: src/core/StelSkyLayerMgr.cpp:87 src/StelMainView.cpp:363
 msgid "Display Options"
-msgstr ""
+msgstr "Selectio indicationum"
 
 #: src/core/modules/ConstellationMgr.cpp:107
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:279
 msgid "Constellation lines"
-msgstr ""
+msgstr "Delineationes constellationum"
 
 #: src/core/modules/ConstellationMgr.cpp:108
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:289
 msgid "Constellation art"
-msgstr ""
+msgstr "Effigies constellationum"
 
 #: src/core/modules/ConstellationMgr.cpp:109
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:284
 msgid "Constellation labels"
-msgstr ""
+msgstr "Designationes constellationum"
 
 #: src/core/modules/ConstellationMgr.cpp:110
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:290
 msgid "Constellation boundaries"
-msgstr ""
+msgstr "Limites constellationum"
 
 #: src/core/modules/StarMgr.cpp:347 src/ui_viewDialog.h:1210
 #: src/ui_viewDialog.h:1242 src/ui_viewDialog.h:1268
@@ -53,11 +53,11 @@ msgstr "Stellas"
 
 #: src/core/modules/StarMgr.cpp:348
 msgid "Stars labels"
-msgstr ""
+msgstr "Designationes stellarum"
 
 #: src/core/modules/GridLinesMgr.cpp:577 src/ui_viewDialog.h:1292
 msgid "Meridian"
-msgstr ""
+msgstr "Meridianum"
 
 #: src/core/modules/GridLinesMgr.cpp:581 src/ui_viewDialog.h:1300
 msgid "Ecliptic"
@@ -65,63 +65,63 @@ msgstr "Eclipticae"
 
 #: src/core/modules/GridLinesMgr.cpp:585 src/ui_viewDialog.h:1288
 msgid "Equator"
-msgstr ""
+msgstr "Aequator"
 
 #: src/core/modules/GridLinesMgr.cpp:589 src/ui_viewDialog.h:1296
 msgid "Horizon"
-msgstr ""
+msgstr "Horizon"
 
 #: src/core/modules/GridLinesMgr.cpp:593
 msgid "Galactic Equator"
-msgstr ""
+msgstr "Aequator galacticus"
 
 #: src/core/modules/GridLinesMgr.cpp:727
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:331
 msgid "Equatorial grid"
-msgstr ""
+msgstr "Reticulum aequatoriale"
 
 #: src/core/modules/GridLinesMgr.cpp:728 src/ui_viewDialog.h:1283
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:326
 msgid "Azimuthal grid"
-msgstr ""
+msgstr "Reticulum azimutale"
 
 #: src/core/modules/GridLinesMgr.cpp:729
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:346
 msgid "Ecliptic line"
-msgstr ""
+msgstr "Linea Ecliptica"
 
 #: src/core/modules/GridLinesMgr.cpp:730
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:341
 msgid "Equator line"
-msgstr ""
+msgstr "Linea Aequatoris"
 
 #: src/core/modules/GridLinesMgr.cpp:731
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:321
 msgid "Meridian line"
-msgstr ""
+msgstr "Linea meridionalis"
 
 #: src/core/modules/GridLinesMgr.cpp:732
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:360
 msgid "Horizon line"
-msgstr ""
+msgstr "Linea horizontalis"
 
 #: src/core/modules/GridLinesMgr.cpp:733
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:336
 msgid "Equatorial J2000 grid"
-msgstr ""
+msgstr "Reticulum aequatoriale J2000.0"
 
 #: src/core/modules/GridLinesMgr.cpp:734
 msgid "Ecliptic J2000 grid"
-msgstr ""
+msgstr "Reticulum eclipticale J2000.0"
 
 #: src/core/modules/GridLinesMgr.cpp:735 src/ui_viewDialog.h:1284
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:365
 msgid "Galactic grid"
-msgstr ""
+msgstr "Reticulum viae lacteae"
 
 #: src/core/modules/GridLinesMgr.cpp:736 src/ui_viewDialog.h:1304
 msgid "Galactic equator"
-msgstr ""
+msgstr "Aequator viae lacteae"
 
 #: src/core/modules/LandscapeMgr.cpp:356 src/ui_viewDialog.h:1232
 msgid "Atmosphere"
@@ -134,15 +134,15 @@ msgstr "Nebula"
 #: src/core/modules/LandscapeMgr.cpp:358 src/ui_viewDialog.h:1305
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:303
 msgid "Cardinal points"
-msgstr ""
+msgstr "Indices cardinales"
 
 #: src/core/modules/LandscapeMgr.cpp:359
 msgid "Ground"
-msgstr ""
+msgstr "Fundus"
 
 #: src/core/modules/LandscapeMgr.cpp:360
 msgid "Illumination"
-msgstr ""
+msgstr "Illuminatio"
 
 #: src/core/modules/LandscapeMgr.cpp:601
 msgid "Author: "
@@ -150,16 +150,16 @@ msgstr "Auctor: "
 
 #: src/core/modules/LandscapeMgr.cpp:607
 msgid "Location: "
-msgstr ""
+msgstr "Locatio: "
 
 #: src/core/modules/LandscapeMgr.cpp:612
 #, qt-format
 msgid ", %1 m"
-msgstr ""
+msgstr ", %1 m"
 
 #: src/core/modules/LandscapeMgr.cpp:616
 msgid "Planet: "
-msgstr ""
+msgstr "Stella errans: "
 
 #: src/core/modules/Nebula.cpp:104 src/core/modules/Planet.cpp:180
 #: src/core/modules/MinorPlanet.cpp:208 src/core/modules/Comet.cpp:151
@@ -170,7 +170,7 @@ msgstr ""
 #: plugins/Pulsars/src/Pulsar.cpp:155 plugins/Exoplanets/src/Exoplanet.cpp:176
 #, qt-format
 msgid "Type: <b>%1</b>"
-msgstr ""
+msgstr "Typus: <b>%1</b>"
 
 #: src/core/modules/Nebula.cpp:109 src/core/modules/Planet.cpp:186
 #: src/core/modules/MinorPlanet.cpp:214 src/core/modules/Comet.cpp:157
@@ -179,7 +179,7 @@ msgstr ""
 #: plugins/Quasars/src/Quasar.cpp:104 plugins/Exoplanets/src/Exoplanet.cpp:185
 #, qt-format
 msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>)"
-msgstr ""
+msgstr "Magnitudo: <b>%1</b> (exstincta ad: <b>%2</b>)"
 
 #: src/core/modules/Nebula.cpp:112 src/core/modules/Planet.cpp:189
 #: src/core/modules/MinorPlanet.cpp:217 src/core/modules/Comet.cpp:160
@@ -188,26 +188,26 @@ msgstr ""
 #: plugins/Quasars/src/Quasar.cpp:109 plugins/Exoplanets/src/Exoplanet.cpp:190
 #, qt-format
 msgid "Magnitude: <b>%1</b>"
-msgstr ""
+msgstr "Magnitudo: <b>%1</b>"
 
 #: src/core/modules/Nebula.cpp:119
 #, qt-format
 msgid "Surface brightness: <b>%1</b> (extincted to: <b>%2</b>)"
-msgstr ""
+msgstr "Magnitudo arealis: <b>%1</b> (exstincta ad: <b>%2</b>)"
 
 #: src/core/modules/Nebula.cpp:125
 #, qt-format
 msgid "Surface brightness: <b>%1</b>"
-msgstr ""
+msgstr "Magnitudo arealis: <b>%1</b>"
 
 #: src/core/modules/Nebula.cpp:131
 #, qt-format
 msgid "Size: %1"
-msgstr ""
+msgstr "Dimensio: %1"
 
 #: src/core/modules/Nebula.cpp:375
 msgid "Galaxy"
-msgstr ""
+msgstr "Galaxia"
 
 #: src/core/modules/Nebula.cpp:378
 msgid "Open cluster"
@@ -219,7 +219,7 @@ msgstr ""
 
 #: src/core/modules/Nebula.cpp:384
 msgid "Nebula"
-msgstr ""
+msgstr "Nebula"
 
 #: src/core/modules/Nebula.cpp:387
 msgid "Planetary nebula"
@@ -231,7 +231,7 @@ msgstr ""
 
 #: src/core/modules/Nebula.cpp:393
 msgid "Irregular galaxy"
-msgstr ""
+msgstr "Galaxia irregularis"
 
 #: src/core/modules/Nebula.cpp:396
 msgid "Cluster associated with nebulosity"
@@ -243,7 +243,7 @@ msgstr "Ignotum"
 
 #: src/core/modules/Nebula.cpp:402
 msgid "Undocumented type"
-msgstr ""
+msgstr "Typus incognitus"
 
 #: src/core/modules/NebulaMgr.cpp:126
 msgid "Deep-sky objects"
@@ -254,34 +254,34 @@ msgstr ""
 #: src/core/modules/StarWrapper.cpp:187 plugins/Quasars/src/Quasar.cpp:113
 #, qt-format
 msgid "Absolute Magnitude: %1"
-msgstr ""
+msgstr "Magnitudo absoluta: %1"
 
 #: src/core/modules/Planet.cpp:201
 #, qt-format
 msgid "Obliquity (of date, for Earth): %1"
-msgstr ""
+msgstr "Obliquitas (datum, terrestris): %1"
 
 #: src/core/modules/Planet.cpp:213 src/core/modules/MinorPlanet.cpp:244
 #: src/core/modules/Comet.cpp:199
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 km)"
-msgstr ""
+msgstr "Distantia: %1UA (%2 km)"
 
 #: src/core/modules/Planet.cpp:220 src/core/modules/MinorPlanet.cpp:251
 #: src/core/modules/Comet.cpp:206
 #, no-c-format, qt-format
 msgid "Distance: %1AU (%2 Mio km)"
-msgstr ""
+msgstr "Distantia: %1UA (%2 Mio km)"
 
 #: src/core/modules/Planet.cpp:233
 #, qt-format
 msgid "Apparent diameter: %1, with rings: %2"
-msgstr ""
+msgstr "Diametrus apparens : %1, cum anulis: %2"
 
 #: src/core/modules/Planet.cpp:239 src/core/modules/MinorPlanet.cpp:259
 #, qt-format
 msgid "Apparent diameter: %1"
-msgstr ""
+msgstr "Diametrus apparens: %1"
 
 #. TRANSLATORS: Sidereal (orbital) period for solar system bodies in days and in Julian years (symbol: a)
 #: src/core/modules/Planet.cpp:251 src/core/modules/MinorPlanet.cpp:266
@@ -293,7 +293,7 @@ msgstr ""
 #: src/core/modules/Planet.cpp:254
 #, qt-format
 msgid "Sidereal day: %1"
-msgstr ""
+msgstr "Dies siderealis: %1"
 
 #: src/core/modules/Planet.cpp:255
 #, qt-format
@@ -312,7 +312,7 @@ msgstr ""
 #: src/core/modules/Planet.cpp:266
 #, qt-format
 msgid "Elongation: %1"
-msgstr ""
+msgstr "Elongatio: %1"
 
 #: src/core/modules/Planet.cpp:267
 #, qt-format
@@ -322,7 +322,7 @@ msgstr ""
 #: src/core/modules/Planet.cpp:268
 #, qt-format
 msgid "Illuminated: %1%"
-msgstr ""
+msgstr "Fractio illuminata: %1%"
 
 #: src/core/modules/MinorPlanet.cpp:201
 #, qt-format
@@ -332,37 +332,37 @@ msgstr ""
 #: src/core/modules/Comet.cpp:182
 #, no-c-format, qt-format
 msgid "Distance from Sun: %1AU (%2 km)"
-msgstr ""
+msgstr "Distantia ab sole: %1UA (%2 km)"
 
 #: src/core/modules/Comet.cpp:189
 #, no-c-format, qt-format
 msgid "Distance from Sun: %1AU (%2 Mio km)"
-msgstr ""
+msgstr "Distantia ab sole: %1UA (%2 Mio km)"
 
 #: src/core/modules/Comet.cpp:216
 #, no-c-format, qt-format
 msgid "Speed: %1 km/s"
-msgstr ""
+msgstr "Velocitas: %1 km/s"
 
 #: src/core/modules/Comet.cpp:225
 #, no-c-format, qt-format
 msgid "Coma diameter (estimate): %1 km"
-msgstr ""
+msgstr "Diametrus comae (estimata): %1 km"
 
 #: src/core/modules/Comet.cpp:229
 #, no-c-format, qt-format
 msgid "Gas tail length (estimate): %1 Mio km"
-msgstr ""
+msgstr "Longitudo caudae (estimata): %1 Mio km"
 
 #: src/core/modules/SolarSystem.cpp:160
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:308
 msgid "Planet labels"
-msgstr ""
+msgstr "Designationes stellarum errantum"
 
 #: src/core/modules/SolarSystem.cpp:161
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:312
 msgid "Planet orbits"
-msgstr ""
+msgstr "Viae stellarum errantum"
 
 #: src/core/modules/SolarSystem.cpp:162
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:316
@@ -373,7 +373,7 @@ msgstr ""
 #: src/core/modules/StarWrapper.cpp:50 src/core/modules/StarWrapper.cpp:163
 #: src/translations.h:177
 msgid "star"
-msgstr ""
+msgstr "stella"
 
 #: src/core/modules/StarWrapper.cpp:65 src/core/modules/StarWrapper.cpp:191
 #: plugins/Quasars/src/Quasar.cpp:119
@@ -383,15 +383,15 @@ msgstr ""
 
 #: src/core/modules/StarWrapper.cpp:144
 msgid "eruptive variable star"
-msgstr ""
+msgstr "stella variabilis eruptiva"
 
 #: src/core/modules/StarWrapper.cpp:146
 msgid "pulsating variable star"
-msgstr ""
+msgstr "stella variabilis micanda"
 
 #: src/core/modules/StarWrapper.cpp:148
 msgid "rotating variable star"
-msgstr ""
+msgstr "stella variabilis volvens"
 
 #: src/core/modules/StarWrapper.cpp:150
 msgid "cataclysmic variable star"
@@ -403,26 +403,27 @@ msgstr ""
 
 #: src/core/modules/StarWrapper.cpp:157
 msgid "variable star"
-msgstr ""
+msgstr "stella variabilis"
 
 #: src/core/modules/StarWrapper.cpp:161
 msgid "double star"
-msgstr ""
+msgstr "stella duplex"
 
 #: src/core/modules/StarWrapper.cpp:168
 #, qt-format
 msgid "Type: <b>%1, %2</b>"
-msgstr ""
+msgstr "Typus: <b>%1, %2</b>"
 
 #: src/core/modules/StarWrapper.cpp:207
 #, qt-format
 msgid "Magnitude range: <b>%1</b>%2<b>%3</b> (Photometric system: %4)"
-msgstr ""
+msgstr "Magnitudinum regio: <b>%1</b>%2<b>%3</b> (Systema photometrica: %4)"
 
 #: src/core/modules/StarWrapper.cpp:209
 #, qt-format
 msgid "Magnitude range: <b>%1</b>%2<b>%3/%4</b> (Photometric system: %5)"
 msgstr ""
+"Magnitudinum regio: <b>%1</b>%2<b>%3/%4</b> (Systema photometrica: %5)"
 
 #. TRANSLATORS: Unit of measure for distance - Light Years
 #: src/core/modules/StarWrapper.cpp:218
@@ -430,18 +431,18 @@ msgstr ""
 #: plugins/Exoplanets/src/Exoplanet.cpp:206
 #, qt-format
 msgid "Distance: %1 ly"
-msgstr ""
+msgstr "Distantia: %1 al"
 
 #: src/core/modules/StarWrapper.cpp:224
 #: plugins/Exoplanets/src/Exoplanet.cpp:200
 #, qt-format
 msgid "Spectral Type: %1"
-msgstr ""
+msgstr "Typus spectralis: %1"
 
 #: src/core/modules/StarWrapper.cpp:227
 #, qt-format
 msgid "Parallax: %1\""
-msgstr ""
+msgstr "Parallaxia: %1\""
 
 #: src/core/modules/StarWrapper.cpp:233
 #, qt-format
@@ -480,22 +481,22 @@ msgstr ""
 
 #: src/core/StelApp.cpp:487
 msgid "Night mode"
-msgstr ""
+msgstr "Modus nocturnalis"
 
 #. TRANSLATORS: "Planet name" displayed when "flying" to another planet with Ctrl+G.
 #: src/core/StelObserver.cpp:286
 msgid "SpaceShip"
-msgstr ""
+msgstr "Naviculum astronauticum"
 
 #: src/core/StelCore.cpp:183 src/gui/StelGui.cpp:184
 #: src/ui_dateTimeDialogGui.h:365
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:172
 msgid "Date and Time"
-msgstr ""
+msgstr "Datum et tempus"
 
 #: src/core/StelCore.cpp:184 src/core/StelMovementMgr.cpp:129
 msgid "Movement and Selection"
-msgstr ""
+msgstr "Motio et selectio"
 
 #: src/core/StelCore.cpp:187
 msgid "Increase time speed"
@@ -1256,73 +1257,73 @@ msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:1199
 msgid "Borkowski (1988)"
-msgstr ""
+msgstr "Borkowski (1988)"
 
 #: src/gui/ConfigurationDialog.cpp:1200
 msgid "Schmadel & Zech (1988)"
-msgstr ""
+msgstr "Schmadel & Zech (1988)"
 
 #: src/gui/ConfigurationDialog.cpp:1201
 msgid "Chapront-Touze & Chapront (1991)"
-msgstr ""
+msgstr "Chapront-Touze & Chapront (1991)"
 
 #: src/gui/ConfigurationDialog.cpp:1202
 msgid "Stephenson & Morrison (1995)"
-msgstr ""
+msgstr "Stephenson & Morrison (1995)"
 
 #: src/gui/ConfigurationDialog.cpp:1203
 msgid "Stephenson (1997)"
-msgstr ""
+msgstr "Stephenson (1997)"
 
 #: src/gui/ConfigurationDialog.cpp:1205
 msgid "Meeus (1998) (with Chapront, Chapront-Touze & Francou (1997))"
-msgstr ""
+msgstr "Meeus (1998) (cum Chapront, Chapront-Touze & Francou (1997))"
 
 #: src/gui/ConfigurationDialog.cpp:1206
 msgid "JPL Horizons"
-msgstr ""
+msgstr "JPL Horizons"
 
 #: src/gui/ConfigurationDialog.cpp:1207
 msgid "Meeus & Simons (2000)"
-msgstr ""
+msgstr "Meeus & Simons (2000)"
 
 #: src/gui/ConfigurationDialog.cpp:1208
 msgid "Montenbruck & Pfleger (2000)"
-msgstr ""
+msgstr "Montenbruck & Pfleger (2000)"
 
 #: src/gui/ConfigurationDialog.cpp:1209
 msgid "Reingold & Dershowitz (2002, 2007)"
-msgstr ""
+msgstr "Reingold & Dershowitz (2002, 2007)"
 
 #: src/gui/ConfigurationDialog.cpp:1210
 msgid "Morrison & Stephenson (2004, 2005)"
-msgstr ""
+msgstr "Morrison & Stephenson (2004, 2005)"
 
 #: src/gui/ConfigurationDialog.cpp:1212
 msgid "Espenak & Meeus (2006)"
-msgstr ""
+msgstr "Espenak & Meeus (2006)"
 
 #: src/gui/ConfigurationDialog.cpp:1213
 msgid "Reijs (2006)"
-msgstr ""
+msgstr "Reijs (2006)"
 
 #: src/gui/ConfigurationDialog.cpp:1214
 msgid "Banjevic (2006)"
-msgstr ""
+msgstr "Banjevic (2006)"
 
 #: src/gui/ConfigurationDialog.cpp:1215
 msgid "Islam, Sadiq & Qureshi (2008, 2013)"
-msgstr ""
+msgstr "Islam, Sadiq & Qureshi (2008, 2013)"
 
 #: src/gui/ConfigurationDialog.cpp:1216
 #, qt-format
 msgid "Custom equation of %1T"
-msgstr ""
+msgstr "Aequatio propria pro %1T"
 
 #. TRANSLATORS: This message will be displayed for users if Stellarium can't get info about version from stellarium.org
 #: src/gui/HelpDialog.cpp:295
 msgid "Oops... Stellarium can't check latest version."
-msgstr ""
+msgstr "Oiei! --- Stellarium non potest probare editio novissima."
 
 #. TRANSLATORS: This message will be displayed for users if current version of Stellarium is bigger than version from stellarium.org
 #: src/gui/HelpDialog.cpp:317
@@ -1333,25 +1334,25 @@ msgstr ""
 #: src/gui/HelpDialog.cpp:322
 #, qt-format
 msgid "This version of Stellarium is outdated! Latest version is %1."
-msgstr ""
+msgstr "Editio ista Stellarii veta est. Editio novissima est %1."
 
 #: src/gui/HelpDialog.cpp:325
 msgid ""
 " Sorry, your hardware is not compatible with newest version of Stellarium!"
-msgstr ""
+msgstr " Oiei! -- Machina inapta est!"
 
 #. TRANSLATORS: This message will be displayed for users if current version of Stellarium is equals with version from stellarium.org
 #: src/gui/HelpDialog.cpp:332
 msgid "This is latest stable version of Stellarium."
-msgstr ""
+msgstr "Ista versio Stellarii est novissima."
 
 #: src/gui/HelpDialog.cpp:362
 msgid "Stellarium Help"
-msgstr ""
+msgstr "Instructiones"
 
 #: src/gui/HelpDialog.cpp:367 src/gui/HelpDialog.cpp:372
 msgid "Keys"
-msgstr ""
+msgstr "Claves"
 
 #: src/gui/HelpDialog.cpp:369 src/gui/HelpDialog.cpp:441
 msgid "Further Reading"
@@ -1478,7 +1479,7 @@ msgstr ""
 #: src/gui/HelpDialog.cpp:519 src/gui/HelpDialog.cpp:520
 #, qt-format
 msgid "Tester: %1"
-msgstr ""
+msgstr "Examinator: %1"
 
 #: src/gui/HelpDialog.cpp:521
 msgid "Past Developers"
@@ -3998,95 +3999,95 @@ msgstr ""
 
 #: src/ui_searchDialogGui.h:622
 msgid "alpha"
-msgstr ""
+msgstr "alpha"
 
 #: src/ui_searchDialogGui.h:625
 msgid "beta"
-msgstr ""
+msgstr "beta"
 
 #: src/ui_searchDialogGui.h:628
 msgid "gamma"
-msgstr ""
+msgstr "gamma"
 
 #: src/ui_searchDialogGui.h:631
 msgid "delta"
-msgstr ""
+msgstr "delta"
 
 #: src/ui_searchDialogGui.h:634
 msgid "epsilon"
-msgstr ""
+msgstr "epsilon"
 
 #: src/ui_searchDialogGui.h:637
 msgid "zeta"
-msgstr ""
+msgstr "zeta"
 
 #: src/ui_searchDialogGui.h:640
 msgid "eta"
-msgstr ""
+msgstr "eta"
 
 #: src/ui_searchDialogGui.h:643
 msgid "theta"
-msgstr ""
+msgstr "theta"
 
 #: src/ui_searchDialogGui.h:646
 msgid "kappa"
-msgstr ""
+msgstr "kappa"
 
 #: src/ui_searchDialogGui.h:649
 msgid "lambda"
-msgstr ""
+msgstr "lambda"
 
 #: src/ui_searchDialogGui.h:652
 msgid "mu"
-msgstr ""
+msgstr "mu"
 
 #: src/ui_searchDialogGui.h:655
 msgid "nu"
-msgstr ""
+msgstr "nu"
 
 #: src/ui_searchDialogGui.h:658
 msgid "xi"
-msgstr ""
+msgstr "xi"
 
 #: src/ui_searchDialogGui.h:661
 msgid "omicron"
-msgstr ""
+msgstr "omicron"
 
 #: src/ui_searchDialogGui.h:664
 msgid "pi"
-msgstr ""
+msgstr "pi"
 
 #: src/ui_searchDialogGui.h:667
 msgid "rho"
-msgstr ""
+msgstr "rho"
 
 #: src/ui_searchDialogGui.h:670
 msgid "sigma"
-msgstr ""
+msgstr "sigma"
 
 #: src/ui_searchDialogGui.h:673
 msgid "tau"
-msgstr ""
+msgstr "tau"
 
 #: src/ui_searchDialogGui.h:676
 msgid "upsilon"
-msgstr ""
+msgstr "upsilon"
 
 #: src/ui_searchDialogGui.h:679
 msgid "phi"
-msgstr ""
+msgstr "phi"
 
 #: src/ui_searchDialogGui.h:682
 msgid "chi"
-msgstr ""
+msgstr "chi"
 
 #: src/ui_searchDialogGui.h:685
 msgid "psi"
-msgstr ""
+msgstr "psi"
 
 #: src/ui_searchDialogGui.h:688
 msgid "omega"
-msgstr ""
+msgstr "omega"
 
 #: src/ui_searchDialogGui.h:690
 msgid "Greek letters for Bayer designations"
@@ -4108,7 +4109,7 @@ msgstr ""
 
 #: src/ui_searchDialogGui.h:696
 msgid "Position"
-msgstr ""
+msgstr "Positio"
 
 #: src/ui_searchDialogGui.h:698
 msgid "Some objects may be found after activation respective plug-ins"
@@ -4137,7 +4138,7 @@ msgstr ""
 
 #: src/ui_searchDialogGui.h:705
 msgid "Server:"
-msgstr ""
+msgstr "Machina servilis:"
 
 #: src/ui_searchDialogGui.h:706
 msgid "Search options"
@@ -4160,7 +4161,7 @@ msgstr "Videre"
 
 #: src/ui_viewDialog.h:1200
 msgid "Sky"
-msgstr ""
+msgstr "Caelum"
 
 #: src/ui_viewDialog.h:1202
 msgid "Markings"
@@ -4169,38 +4170,38 @@ msgstr ""
 #: src/ui_viewDialog.h:1204
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:406
 msgid "Landscape"
-msgstr ""
+msgstr "Prospectus"
 
 #: src/ui_viewDialog.h:1206
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:228
 msgid "Starlore"
-msgstr ""
+msgstr "Fabulae"
 
 #: src/ui_viewDialog.h:1209
 msgid "Labels and Markers"
-msgstr ""
+msgstr "Nomina et signa"
 
 #: src/ui_viewDialog.h:1213
 msgid ""
 "Labels and markers for deep-sky objects (star clusters, galaxies and nebulas)"
-msgstr ""
+msgstr "Nomina et signa rerum cosmicum (cumuli, galaxiae, nebulae)"
 
 #: src/ui_viewDialog.h:1215 src/ui_viewDialog.h:1272
 msgctxt "Deep-sky objects"
 msgid "DSOs"
-msgstr ""
+msgstr "Res cosmicae"
 
 #: src/ui_viewDialog.h:1216
 msgid "Planets and satellites"
-msgstr ""
+msgstr "Stellae errantes et satellites"
 
 #: src/ui_viewDialog.h:1217
 msgid "Show planets"
-msgstr ""
+msgstr "Expone stellae errantes"
 
 #: src/ui_viewDialog.h:1218
 msgid "Show planet markers"
-msgstr ""
+msgstr "Expone index stellarum errantium"
 
 #: src/ui_viewDialog.h:1219
 msgid "Show planet orbits"
@@ -7625,15 +7626,15 @@ msgstr ""
 #: plugins/MeteorShowers/src/MeteorShower.cpp:344
 #, qt-format
 msgid "Type: <b>%1</b> (%2)"
-msgstr ""
+msgstr "Typus: <b>%1</b> (%2)"
 
 #: plugins/Novae/src/Nova.cpp:133
 msgid "nova"
-msgstr ""
+msgstr "nova"
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:115
 msgid "Bright Novae Plug-in"
-msgstr ""
+msgstr "Lucidae Novae additamentum"
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:121
 msgid ""
@@ -7683,11 +7684,11 @@ msgstr ""
 
 #: plugins/Novae/src/ui_novaeDialog.h:232
 msgid "Bright Novae Configuration"
-msgstr ""
+msgstr "Configuratio Novarum Lucidarum"
 
 #: plugins/Novae/src/ui_novaeDialog.h:233
 msgid "Bright Novae Plug-in Configuration"
-msgstr ""
+msgstr "Configuratio additamenti Novarum Lucidarum"
 
 #: plugins/Quasars/src/Quasars.cpp:72 plugins/Quasars/src/Quasars.cpp:169
 #: plugins/Quasars/src/Quasars.cpp:170
@@ -8754,7 +8755,7 @@ msgstr ""
 
 #: plugins/NavStars/src/NavStars.cpp:50 plugins/NavStars/src/NavStars.cpp:119
 msgid "Navigational Stars"
-msgstr ""
+msgstr "Stellae Navigationales"
 
 #. TRANSLATORS: The emphasis tags mark a book title.
 #: plugins/NavStars/src/NavStars.cpp:54
@@ -8777,7 +8778,7 @@ msgstr ""
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:269
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:278
 msgid "Equation of Time"
-msgstr ""
+msgstr "Aequatio Temporis"
 
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:58
 msgid "This plugin shows the solution of the equation of time."
@@ -8791,17 +8792,17 @@ msgstr ""
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:259
 msgctxt "time"
 msgid "m"
-msgstr ""
+msgstr "m"
 
 #. TRANSLATORS: seconds.
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:261
 msgctxt "time"
 msgid "s"
-msgstr ""
+msgstr "s"
 
 #: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:80
 msgid "Equation of Time plug-in"
-msgstr ""
+msgstr "Aequatio Temporis additamentum"
 
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:270
 msgid ""
@@ -8865,307 +8866,307 @@ msgstr ""
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1240
 msgid "Quadrantids"
-msgstr ""
+msgstr "Quadrantides"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1242
 msgid "Lyrids"
-msgstr ""
+msgstr "Lyrides"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1244
 msgid "α-Centaurids"
-msgstr ""
+msgstr "α-Centaurides"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1246
 msgid "γ-Normids"
-msgstr ""
+msgstr "γ-Normides"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1248
 msgid "η-Aquariids"
-msgstr ""
+msgstr "η-Aquariides"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1250
 msgid "June Bootids"
-msgstr ""
+msgstr "Iunii Bootides"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1252
 msgid "Piscis Austrinids"
-msgstr ""
+msgstr "Piscis Austrinides"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1254
 msgid "Southern δ-Aquariids"
-msgstr ""
+msgstr "δ-Aquariides Meridionales"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1256
 msgid "α-Capricornids"
-msgstr ""
+msgstr "α-Capricornides"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1258
 msgid "α-Aurigids"
-msgstr ""
+msgstr "α-Aurigides"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1260
 msgid "September ε-Perseids"
-msgstr ""
+msgstr "September ε-Perseides"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1262
 msgid "Draconids"
-msgstr ""
+msgstr "Draconides"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1264
 msgid "Leonids"
-msgstr ""
+msgstr "Leonides"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1266
 msgid "Phoenicids"
-msgstr ""
+msgstr "Phoenicides"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1268
 msgid "Puppid-Velids"
-msgstr ""
+msgstr "Puppid-Velides"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1270
 msgid "Ursids"
-msgstr ""
+msgstr "Ursides"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1272
 msgid "Perseids"
-msgstr ""
+msgstr "Perseides"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1274
 msgid "δ-Leonids"
-msgstr ""
+msgstr "δ-Leonides"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1276
 msgid "π-Puppids"
-msgstr ""
+msgstr "π-Puppides"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1278
 msgid "June Lyrids"
-msgstr ""
+msgstr "Iunii Lyrides"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1280
 msgid "κ-Cygnids"
-msgstr ""
+msgstr "κ-Cygnides"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1282
 msgid "ε-Lyrids"
-msgstr ""
+msgstr "ε-Lyrides"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1284
 msgid "δ-Aurigids"
-msgstr ""
+msgstr "δ-Aurigides"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1286
 msgid "ε-Geminids"
-msgstr ""
+msgstr "ε-Geminides"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1288
 msgid "Southern Taurids"
-msgstr ""
+msgstr "Taurides Meridionales"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1290
 msgid "Northern Taurids"
-msgstr ""
+msgstr "Taurides Septemtrionales"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1292
 msgid "Monocerotids"
-msgstr ""
+msgstr "Monocerotides"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1294
 msgid "α-Monocerotids"
-msgstr ""
+msgstr "α-Monocerotides"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1296
 msgid "σ-Hydrids"
-msgstr ""
+msgstr "σ-Hydrides"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1298
 msgid "Geminids"
-msgstr ""
+msgstr "Geminides"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1300
 msgid "Leonis Minorids"
-msgstr ""
+msgstr "Leonis Minorides"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1302
 msgid "December Leonis Minorids"
-msgstr ""
+msgstr "December Leonis Minorides"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1304
 msgid "Comae Berenicids"
-msgstr ""
+msgstr "Comae Berenicides"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1306
 msgid "Orionids"
-msgstr ""
+msgstr "Orionides"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1308
 msgid "Andromedids"
-msgstr ""
+msgstr "Andromedides"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1310
 msgid "η-Lyrids"
-msgstr ""
+msgstr "η-Lyrides"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1312
 msgid "α-Scorpiids"
-msgstr ""
+msgstr "α-Scorpiides"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1314
 msgid "Ophiuchids"
-msgstr ""
+msgstr "Ophiuchides"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1316
 msgid "θ-Ophiuchids"
-msgstr ""
+msgstr "θ-Ophiuchides"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1318
 msgid "κ-Serpentids"
-msgstr ""
+msgstr "κ-Serpentides"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1320
 msgid "θ-Centaurids"
-msgstr ""
+msgstr "θ-Centaurides"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1322
 msgid "ω-Cetids"
-msgstr ""
+msgstr "ω-Cetides"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1324
 msgid "Southern ω-Scorpiids"
-msgstr ""
+msgstr "ω-Scorpiides Meridionales"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1326
 msgid "Northern ω-Scorpiids"
-msgstr ""
+msgstr "ω-Scorpiides Septemtrionales"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1328
 msgid "Arietids"
-msgstr ""
+msgstr "Arietides"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1330
 msgid "π-Cetids"
-msgstr ""
+msgstr "π-Cetides"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1332
 msgid "δ-Cancrids"
-msgstr ""
+msgstr "δ-Cancrides"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1334
 msgid "τ-Herculids"
-msgstr ""
+msgstr "τ-Herculides"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1336
 msgid "ρ-Geminids"
-msgstr ""
+msgstr "ρ-Geminides"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1338
 msgid "η-Carinids"
-msgstr ""
+msgstr "η-Carinides"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1340
 msgid "η-Craterids"
-msgstr ""
+msgstr "η-Craterides"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1342
 msgid "π-Virginids"
-msgstr ""
+msgstr "π-Virginides"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1344
 msgid "θ-Virginids"
-msgstr ""
+msgstr "θ-Virginides"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1346
 msgid "May Librids"
-msgstr ""
+msgstr "Maii Librides"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1348
 msgid "June Scutids"
-msgstr ""
+msgstr "Iunii Scutides"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1350
 msgid "α-Pisces Australids"
-msgstr ""
+msgstr "α-Pisces Australides"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1352
 msgid "Southern ι-Aquariids"
-msgstr ""
+msgstr "ι-Aquariides Meridionales"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1354
 msgid "Northern ι-Aquariids"
-msgstr ""
+msgstr "ι-Aquariides Septemtrionales"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1356
 msgid "γ-Aquariids"
-msgstr ""
+msgstr "γ-Aquariides"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1358
 msgid "Autumn Arietids"
-msgstr ""
+msgstr "Arietides Autumnales"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1360
 msgid "χ-Orionids"
-msgstr ""
+msgstr "χ-Orionides"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1364
