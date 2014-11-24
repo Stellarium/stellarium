@@ -9,13 +9,13 @@ msgstr ""
 "Project-Id-Version: Stellarium 0.10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-11-22 01:40+0600\n"
-"PO-Revision-Date: 2014-09-28 16:12+0000\n"
+"PO-Revision-Date: 2014-11-23 13:34+0000\n"
 "Last-Translator: misibacsi <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-11-22 05:06+0000\n"
+"X-Launchpad-Export-Date: 2014-11-24 05:35+0000\n"
 "X-Generator: Launchpad (build 17252)\n"
 "X-Poedit-Language: Hungarian\n"
 
@@ -144,7 +144,7 @@ msgstr "Felszín"
 
 #: src/core/modules/LandscapeMgr.cpp:360
 msgid "Illumination"
-msgstr ""
+msgstr "Megvilágítás"
 
 #: src/core/modules/LandscapeMgr.cpp:601
 msgid "Author: "
@@ -304,7 +304,7 @@ msgstr "Középnap: %1"
 
 #: src/core/modules/Planet.cpp:259
 msgid "The period of rotation is chaotic"
-msgstr ""
+msgstr "A forgási periódus kaotikus"
 
 #: src/core/modules/Planet.cpp:265
 #, qt-format
@@ -1106,7 +1106,7 @@ msgstr ""
 #: src/core/StelObject.cpp:121 src/core/StelObject.cpp:123
 #: src/core/StelObject.cpp:131 src/core/StelObject.cpp:133
 msgid "RA/Dec"
-msgstr ""
+msgstr "RA/Dekl."
 
 #: src/core/StelObject.cpp:145 src/core/StelObject.cpp:149
 #, qt-format
@@ -1127,7 +1127,7 @@ msgstr "Az/Alt: %1/%2"
 #: src/core/StelObject.cpp:190 src/core/StelObject.cpp:192
 #: src/core/StelObject.cpp:198 src/core/StelObject.cpp:200
 msgid "Ecliptic longitude/latitude"
-msgstr ""
+msgstr "Ekliptikus hosszúság/szélesség"
 
 #: src/core/StelObject.cpp:208 src/core/StelObject.cpp:210
 #, qt-format
@@ -2594,7 +2594,7 @@ msgstr "Azték"
 
 #: src/translations.h:226
 msgid "Boorong"
-msgstr ""
+msgstr "Boorong"
 
 #: src/translations.h:227
 msgid "Chinese"
@@ -4436,7 +4436,7 @@ msgstr "A Tejút fényessége:"
 
 #: src/ui_viewDialog.h:1246
 msgid "Zodiacal Light brightness:"
-msgstr ""
+msgstr "Állatövi fény fényessége:"
 
 #: src/ui_viewDialog.h:1247
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:264
@@ -4578,12 +4578,12 @@ msgstr ""
 
 #: src/ui_viewDialog.h:1316
 msgid "Minimal brightness:"
-msgstr ""
+msgstr "Minimális fényesség:"
 
 #: src/ui_viewDialog.h:1318
 msgid ""
 "Value range 0..1 (landscape is black at night - landscape is fully bright)"
-msgstr ""
+msgstr "Értéktartomány 0...1 (a táj teljesen sötét - jól megvilágított)"
 
 #: src/ui_viewDialog.h:1321
 msgid "Use minimal brightness as may be specified in landscape.ini"
@@ -5346,7 +5346,7 @@ msgstr ""
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:231
 msgid "Show in Equatorial Coordinates"
-msgstr ""
+msgstr "Egyenlítői koordinátákkal"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:232
 msgid "Display with position angle"
@@ -5354,11 +5354,11 @@ msgstr ""
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:233
 msgid "Show in Horizontal Coordinates"
-msgstr ""
+msgstr "Horizontális koordinátákkal"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:235
 msgid "(e.g. for Dobson starhopping)"
-msgstr ""
+msgstr "(pl. Dobson starhopping)"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:237
 msgid "Display with position angle "
@@ -5374,7 +5374,7 @@ msgstr ""
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:240
 msgid "Format"
-msgstr ""
+msgstr "Formátum"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:241
 msgid "Use dms format for angles"
@@ -5892,7 +5892,7 @@ msgstr ""
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1088
 msgid "Sensor view"
-msgstr ""
+msgstr "Szenzornézet"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1089
 msgid "Use degrees and minutes for FOV of CCD"
@@ -7929,7 +7929,7 @@ msgstr ""
 #: plugins/Novae/src/gui/NovaeDialog.cpp:126
 #, qt-format
 msgid "All those novae are brighter than %1 at peak of brightness."
-msgstr ""
+msgstr "Minden nóva csúcsértékben fényesebb, mint %1"
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:128
 msgid ""
@@ -9604,7 +9604,7 @@ msgstr "Schwassmann-Wachmann 3 üstökös"
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1394
 msgid "Minor planet 2003 EH1 and Comet C/1490 Y1"
-msgstr ""
+msgstr "2003 EH1 kisbolygó és C/1490 Y1 üstökös"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1396
@@ -9946,7 +9946,7 @@ msgstr "Esemény keresése"
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:335
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:358
 msgid "Pointer Coordinates"
-msgstr ""
+msgstr "A mutató koordinátái"
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:58
 msgid "This plugin shows the coordinates of the mouse pointer."
@@ -9954,7 +9954,7 @@ msgstr ""
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:97
 msgid "Show coordinates of the mouse pointer"
-msgstr ""
+msgstr "Az egérmutató koordinátáinak kijelzése"
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:137
 msgctxt "abbreviated in the plugin"
@@ -10028,7 +10028,7 @@ msgstr ""
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:336
 msgid "Show coordinates of the mouse cursor on the screen."
-msgstr ""
+msgstr "Megjeleníti az egérmutató koordinátáit"
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:337
 msgid "Enable display of coordinates at startup"
@@ -10056,11 +10056,11 @@ msgstr "Szöveg helye:"
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:349
 msgid "Coordinate X"
-msgstr ""
+msgstr "X koordináta"
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:353
 msgid "Coordinate Y"
-msgstr ""
+msgstr "Y koordináta"
 
 #~ msgid "Equatorial Grid"
 #~ msgstr "Egyenlítői rács"
