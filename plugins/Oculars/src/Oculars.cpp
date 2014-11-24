@@ -1430,7 +1430,7 @@ void Oculars::paintCrosshairs()
 	// Center of screen
 	Vec2i centerScreen(projector->getViewportPosX()+projector->getViewportWidth()/2,
 					   projector->getViewportPosY()+projector->getViewportHeight()/2);
-	GLdouble length = 0.5 * params.viewportFovDiameter;
+	float length = 0.5 * params.viewportFovDiameter;
 	// See if we need to scale the length
 	if (useMaxEyepieceAngle && oculars[selectedOcularIndex]->appearentFOV() > 0.0) {
 		length = oculars[selectedOcularIndex]->appearentFOV() * length / maxEyepieceAngle;
