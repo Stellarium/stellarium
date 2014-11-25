@@ -8,14 +8,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nb\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-11-22 01:40+0600\n"
+"POT-Creation-Date: 2014-11-24 20:17+0600\n"
 "PO-Revision-Date: 2014-11-23 17:38+0000\n"
 "Last-Translator: FreewareTips <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-11-24 05:35+0000\n"
+"X-Launchpad-Export-Date: 2014-11-25 06:08+0000\n"
 "X-Generator: Launchpad (build 17252)\n"
 "X-Poedit-Country: NORWAY\n"
 "X-Poedit-Language: Norwegian\n"
@@ -48,8 +48,8 @@ msgstr "Stjernebildenavn"
 msgid "Constellation boundaries"
 msgstr "Stjernebildegrenser"
 
-#: src/core/modules/StarMgr.cpp:347 src/ui_viewDialog.h:1210
-#: src/ui_viewDialog.h:1242 src/ui_viewDialog.h:1268
+#: src/core/modules/StarMgr.cpp:347 src/ui_viewDialog.h:1212
+#: src/ui_viewDialog.h:1244 src/ui_viewDialog.h:1270
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:245
 msgid "Stars"
 msgstr "Stjerner"
@@ -58,19 +58,19 @@ msgstr "Stjerner"
 msgid "Stars labels"
 msgstr "Stjernepåskrifter"
 
-#: src/core/modules/GridLinesMgr.cpp:577 src/ui_viewDialog.h:1292
+#: src/core/modules/GridLinesMgr.cpp:577 src/ui_viewDialog.h:1294
 msgid "Meridian"
 msgstr "Meridian"
 
-#: src/core/modules/GridLinesMgr.cpp:581 src/ui_viewDialog.h:1300
+#: src/core/modules/GridLinesMgr.cpp:581 src/ui_viewDialog.h:1302
 msgid "Ecliptic"
 msgstr "Ekliptikken"
 
-#: src/core/modules/GridLinesMgr.cpp:585 src/ui_viewDialog.h:1288
+#: src/core/modules/GridLinesMgr.cpp:585 src/ui_viewDialog.h:1290
 msgid "Equator"
 msgstr "Ekvator"
 
-#: src/core/modules/GridLinesMgr.cpp:589 src/ui_viewDialog.h:1296
+#: src/core/modules/GridLinesMgr.cpp:589 src/ui_viewDialog.h:1298
 msgid "Horizon"
 msgstr "Horisont"
 
@@ -83,7 +83,7 @@ msgstr "Galaktisk ekvator"
 msgid "Equatorial grid"
 msgstr "Ekvatorialnett"
 
-#: src/core/modules/GridLinesMgr.cpp:728 src/ui_viewDialog.h:1283
+#: src/core/modules/GridLinesMgr.cpp:728 src/ui_viewDialog.h:1285
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:326
 msgid "Azimuthal grid"
 msgstr "Asimutnett"
@@ -117,16 +117,16 @@ msgstr "Ekvatorialnett (J2000)"
 msgid "Ecliptic J2000 grid"
 msgstr "Ekliptisk nett (J2000)"
 
-#: src/core/modules/GridLinesMgr.cpp:735 src/ui_viewDialog.h:1284
+#: src/core/modules/GridLinesMgr.cpp:735 src/ui_viewDialog.h:1286
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:365
 msgid "Galactic grid"
 msgstr "Galaktisk nett"
 
-#: src/core/modules/GridLinesMgr.cpp:736 src/ui_viewDialog.h:1304
+#: src/core/modules/GridLinesMgr.cpp:736 src/ui_viewDialog.h:1306
 msgid "Galactic equator"
 msgstr "Galaktisk ekvator"
 
-#: src/core/modules/LandscapeMgr.cpp:356 src/ui_viewDialog.h:1232
+#: src/core/modules/LandscapeMgr.cpp:356 src/ui_viewDialog.h:1234
 msgid "Atmosphere"
 msgstr "Atmosfære"
 
@@ -134,7 +134,7 @@ msgstr "Atmosfære"
 msgid "Fog"
 msgstr "Dis"
 
-#: src/core/modules/LandscapeMgr.cpp:358 src/ui_viewDialog.h:1305
+#: src/core/modules/LandscapeMgr.cpp:358 src/ui_viewDialog.h:1307
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:303
 msgid "Cardinal points"
 msgstr "Himmelretninger"
@@ -1137,7 +1137,7 @@ msgstr "Visningsretning ved oppstart Az/Alt: %1/%2"
 msgid "Authors"
 msgstr "Utviklere"
 
-#: src/gui/ConfigurationDialog.cpp:756 src/gui/ViewDialog.cpp:456
+#: src/gui/ConfigurationDialog.cpp:756 src/gui/ViewDialog.cpp:478
 msgid "Contact"
 msgstr "Kontakt"
 
@@ -1655,99 +1655,99 @@ msgid "Frames per second"
 msgstr "Bilder pr. sekund"
 
 #. TRANSLATORS: Short description for Class 1 of the Bortle scale
-#: src/gui/ViewDialog.cpp:342
+#: src/gui/ViewDialog.cpp:364
 msgid "Excellent dark-sky site"
 msgstr "Utmerket sted for mørk himmel"
 
 #. TRANSLATORS: Short description for Class 2 of the Bortle scale
-#: src/gui/ViewDialog.cpp:344
+#: src/gui/ViewDialog.cpp:366
 msgid "Typical truly dark site"
 msgstr "Typisk virkelig mørkt sted"
 
 #. TRANSLATORS: Short description for Class 3 of the Bortle scale
-#: src/gui/ViewDialog.cpp:346
+#: src/gui/ViewDialog.cpp:368
 msgid "Rural sky"
 msgstr "Landlig himmel"
 
 #. TRANSLATORS: Short description for Class 4 of the Bortle scale
-#: src/gui/ViewDialog.cpp:348
+#: src/gui/ViewDialog.cpp:370
 msgid "Rural/suburban transition"
 msgstr "Landlig/forstads-overgang"
 
 #. TRANSLATORS: Short description for Class 5 of the Bortle scale
-#: src/gui/ViewDialog.cpp:350
+#: src/gui/ViewDialog.cpp:372
 msgid "Suburban sky"
 msgstr "Forstadshimmel"
 
 #. TRANSLATORS: Short description for Class 6 of the Bortle scale
-#: src/gui/ViewDialog.cpp:352
+#: src/gui/ViewDialog.cpp:374
 msgid "Bright suburban sky"
 msgstr "Lys forstadshimmel"
 
 #. TRANSLATORS: Short description for Class 7 of the Bortle scale
-#: src/gui/ViewDialog.cpp:354
+#: src/gui/ViewDialog.cpp:376
 msgid "Suburban/urban transition"
 msgstr "Forstads/by-overgang"
 
 #. TRANSLATORS: Short description for Class 8 of the Bortle scale
-#: src/gui/ViewDialog.cpp:356
+#: src/gui/ViewDialog.cpp:378
 msgid "City sky"
 msgstr "Byhimmel"
 
 #. TRANSLATORS: Short description for Class 9 of the Bortle scale
-#: src/gui/ViewDialog.cpp:358
+#: src/gui/ViewDialog.cpp:380
 msgid "Inner-city sky"
 msgstr "Bysentrum-himmel"
 
-#: src/gui/ViewDialog.cpp:372
+#: src/gui/ViewDialog.cpp:394
 msgid "The naked-eye limiting magnitude is"
 msgstr "Avgrensingsmagnituden for det blotte øye er"
 
-#: src/gui/ViewDialog.cpp:504
+#: src/gui/ViewDialog.cpp:526
 msgid "No description"
 msgstr "Ingen beskrivelse"
 
-#: src/gui/ViewDialog.cpp:592
+#: src/gui/ViewDialog.cpp:614
 msgid "No shooting stars"
 msgstr "Ingen stjerneskudd"
 
-#: src/gui/ViewDialog.cpp:600
+#: src/gui/ViewDialog.cpp:622
 msgid "Normal rate"
 msgstr "Normal rate"
 
-#: src/gui/ViewDialog.cpp:603
+#: src/gui/ViewDialog.cpp:625
 msgid "Standard Orionids rate"
 msgstr "Standard Orioniderate"
 
-#: src/gui/ViewDialog.cpp:606
+#: src/gui/ViewDialog.cpp:628
 msgid "Standard Perseids rate"
 msgstr "Standard Perseiderate"
 
-#: src/gui/ViewDialog.cpp:609
+#: src/gui/ViewDialog.cpp:631
 msgid "Standard Geminids rate"
 msgstr "Standard Geminiderate"
 
-#: src/gui/ViewDialog.cpp:612
+#: src/gui/ViewDialog.cpp:634
 msgid "Exceptional Perseid rate"
 msgstr "Eksepsjonell Perseiderate"
 
-#: src/gui/ViewDialog.cpp:615
+#: src/gui/ViewDialog.cpp:637
 msgid "Meteor storm rate"
 msgstr "Meteorstormrate"
 
-#: src/gui/ViewDialog.cpp:618
+#: src/gui/ViewDialog.cpp:640
 msgid "Exceptional Draconid rate"
 msgstr "Eksepsjonell Draconiderate"
 
-#: src/gui/ViewDialog.cpp:621
+#: src/gui/ViewDialog.cpp:643
 msgid "Exceptional Leonid rate"
 msgstr "Eksepsjonell Leoniderate"
 
-#: src/gui/ViewDialog.cpp:624
+#: src/gui/ViewDialog.cpp:646
 msgid "Very high rate (1966 Leonids)"
 msgstr "Veldig høy rate (Leonidene 1966)"
 
-#: src/gui/ViewDialog.cpp:627
+#: src/gui/ViewDialog.cpp:649
 msgid "Highest rate ever (1833 Leonids)"
 msgstr "Høyeste rate noensinne (Leonidene 1833)"
 
@@ -2444,7 +2444,7 @@ msgid "plutoid"
 msgstr "Plutoide"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:189 src/ui_viewDialog.h:1211
+#: src/translations.h:189 src/ui_viewDialog.h:1213
 msgid "Planets"
 msgstr "Planeter"
 
@@ -4244,92 +4244,92 @@ msgstr "Søkealternativer"
 msgid "Use autofill only from the beginning of words"
 msgstr "Søk bare fra ordenes begynnelse"
 
-#: src/ui_searchDialogGui.h:708 src/ui_viewDialog.h:1307
-#: src/ui_viewDialog.h:1325 src/ui_viewDialog.h:1327
+#: src/ui_searchDialogGui.h:708 src/ui_viewDialog.h:1309
+#: src/ui_viewDialog.h:1327 src/ui_viewDialog.h:1329
 #: src/ui_configurationDialog.h:1177 src/ui_configurationDialog.h:1188
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:417
 msgid "Options"
 msgstr "Alternativer"
 
-#: src/ui_viewDialog.h:1194
+#: src/ui_viewDialog.h:1196
 msgid "View"
 msgstr "Visning"
 
-#: src/ui_viewDialog.h:1200
+#: src/ui_viewDialog.h:1202
 msgid "Sky"
 msgstr "Himmel"
 
-#: src/ui_viewDialog.h:1202
+#: src/ui_viewDialog.h:1204
 msgid "Markings"
 msgstr "Markeringer"
 
-#: src/ui_viewDialog.h:1204
+#: src/ui_viewDialog.h:1206
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:406
 msgid "Landscape"
 msgstr "Landskap"
 
-#: src/ui_viewDialog.h:1206
+#: src/ui_viewDialog.h:1208
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:228
 msgid "Starlore"
 msgstr "Stjernemyter"
 
-#: src/ui_viewDialog.h:1209
+#: src/ui_viewDialog.h:1211
 msgid "Labels and Markers"
 msgstr "Påskrifter og markører"
 
-#: src/ui_viewDialog.h:1213
+#: src/ui_viewDialog.h:1215
 msgid ""
 "Labels and markers for deep-sky objects (star clusters, galaxies and nebulas)"
 msgstr ""
 "Påskrifter og markeringer for deep-sky-objekter (stjernehoper, galakser og "
 "stjernetåker)"
 
-#: src/ui_viewDialog.h:1215 src/ui_viewDialog.h:1272
+#: src/ui_viewDialog.h:1217 src/ui_viewDialog.h:1274
 msgctxt "Deep-sky objects"
 msgid "DSOs"
 msgstr "DSO"
 
-#: src/ui_viewDialog.h:1216
+#: src/ui_viewDialog.h:1218
 msgid "Planets and satellites"
 msgstr "Planeter og satellitter"
 
-#: src/ui_viewDialog.h:1217
+#: src/ui_viewDialog.h:1219
 msgid "Show planets"
 msgstr "Vis planeter"
 
-#: src/ui_viewDialog.h:1218
+#: src/ui_viewDialog.h:1220
 msgid "Show planet markers"
 msgstr "Vis planetmarkører"
 
-#: src/ui_viewDialog.h:1219
+#: src/ui_viewDialog.h:1221
 msgid "Show planet orbits"
 msgstr "Vis planetbaner"
 
-#: src/ui_viewDialog.h:1220
+#: src/ui_viewDialog.h:1222
 msgid "Simulate light speed"
 msgstr "Simuler lyshastighet"
 
-#: src/ui_viewDialog.h:1221
+#: src/ui_viewDialog.h:1223
 msgid "Scale Moon"
 msgstr "Forstørr månen"
 
-#: src/ui_viewDialog.h:1223
+#: src/ui_viewDialog.h:1225
 msgid "Scale factor"
 msgstr "Skaleringsfaktor"
 
-#: src/ui_viewDialog.h:1226
+#: src/ui_viewDialog.h:1228
 msgid "Automatic change of landscape when planet is changed"
 msgstr "Automatisk endring av landskap når planet endres"
 
-#: src/ui_viewDialog.h:1228
+#: src/ui_viewDialog.h:1230
 msgid "Auto select landscapes"
 msgstr "Velg automatisk landskaper"
 
-#: src/ui_viewDialog.h:1230
+#: src/ui_viewDialog.h:1232
 msgid "Show atmosphere"
 msgstr "Vis atmosfære"
 
-#: src/ui_viewDialog.h:1234
+#: src/ui_viewDialog.h:1236
 msgid ""
 "Use light pollution data from locations database and ignore settings for "
 "light pollution below"
@@ -4337,210 +4337,210 @@ msgstr ""
 "Bruk lysforurensningsdata fra stedsdatabase og ignorer innstillingene for "
 "lysforurensning nedenfor"
 
-#: src/ui_viewDialog.h:1236
+#: src/ui_viewDialog.h:1238
 msgid "Light pollution data from locations database"
 msgstr "Lysforurensningsdata fra stedsdatabase"
 
-#: src/ui_viewDialog.h:1237
+#: src/ui_viewDialog.h:1239
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:401
 msgid "Light pollution:"
 msgstr "Lysforurensning:"
 
-#: src/ui_viewDialog.h:1239
+#: src/ui_viewDialog.h:1241
 msgid "pressure, temperature, extinction coefficient"
 msgstr "trykk, temperatur, ekstinksjonskoeffisient"
 
-#: src/ui_viewDialog.h:1241
+#: src/ui_viewDialog.h:1243
 msgid "Refraction/Extinction settings..."
 msgstr "Still inn refraksjon/ekstinksjon"
 
-#: src/ui_viewDialog.h:1243
+#: src/ui_viewDialog.h:1245
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:258
 msgid "Absolute scale:"
 msgstr "Absolutt skala:"
 
-#: src/ui_viewDialog.h:1244
+#: src/ui_viewDialog.h:1246
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:252
 msgid "Relative scale:"
 msgstr "Relativ skala:"
 
-#: src/ui_viewDialog.h:1245
+#: src/ui_viewDialog.h:1247
 msgid "Milky Way brightness:"
 msgstr "Lysstyrke på Melkeveien:"
 
-#: src/ui_viewDialog.h:1246
+#: src/ui_viewDialog.h:1248
 msgid "Zodiacal Light brightness:"
 msgstr "Lysstyrke på zodiakallyset:"
 
-#: src/ui_viewDialog.h:1247
+#: src/ui_viewDialog.h:1249
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:264
 msgid "Twinkle:"
 msgstr "Blinke:"
 
-#: src/ui_viewDialog.h:1249
+#: src/ui_viewDialog.h:1251
 msgid "Dim faint stars when a very bright object is visible"
 msgstr "Demp svake stjerner når et veldig lyst objekt er synlig"
 
-#: src/ui_viewDialog.h:1251
+#: src/ui_viewDialog.h:1253
 msgid "Dynamic eye adaptation"
 msgstr "Dynamisk øyetilpasning"
 
-#: src/ui_viewDialog.h:1253
+#: src/ui_viewDialog.h:1255
 msgid "Settings for sporadic meteors"
 msgstr "Innstillinger for sporadiske meteorer"
 
-#: src/ui_viewDialog.h:1255
+#: src/ui_viewDialog.h:1257
 msgid "Shooting Stars"
 msgstr "Meteorer"
 
-#: src/ui_viewDialog.h:1257
+#: src/ui_viewDialog.h:1259
 msgid "Hourly zenith rate"
 msgstr "Timerate i senit"
 
-#: src/ui_viewDialog.h:1259
+#: src/ui_viewDialog.h:1261
 msgctxt "Zenithal Hourly Rate"
 msgid "ZHR:"
 msgstr "ZHR:"
 
-#: src/ui_viewDialog.h:1262
+#: src/ui_viewDialog.h:1264
 msgid "Limit Magnitudes (for unaided/binocular observers)"
 msgstr ""
 "Høyeste magnitudeverdier (for observatører med kikkert eller uten "
 "hjelpemiddel)"
 
-#: src/ui_viewDialog.h:1264
+#: src/ui_viewDialog.h:1266
 msgid "Limit Magnitudes"
 msgstr "Avgrensingsmagnituder"
 
-#: src/ui_viewDialog.h:1266
+#: src/ui_viewDialog.h:1268
 msgid "Limit the magnitude of stars"
 msgstr "Avgrens magnituden til stjerner"
 
-#: src/ui_viewDialog.h:1270
+#: src/ui_viewDialog.h:1272
 msgid ""
 "Limit the magnitude of deep-sky objects (star clusters, galaxies and nebulas)"
 msgstr ""
 "Avgrens magnituden til deep-sky-objekter (stjernehoper, galakser og "
 "stjernetåker)"
 
-#: src/ui_viewDialog.h:1273
+#: src/ui_viewDialog.h:1275
 msgid "Constellations"
 msgstr "Stjernebilder"
 
-#: src/ui_viewDialog.h:1274
+#: src/ui_viewDialog.h:1276
 msgid "Show lines"
 msgstr "Vis linjer"
 
-#: src/ui_viewDialog.h:1275
+#: src/ui_viewDialog.h:1277
 msgid "Show labels"
 msgstr "Vis navn"
 
-#: src/ui_viewDialog.h:1276
+#: src/ui_viewDialog.h:1278
 msgid "Show boundaries"
 msgstr "Vis grenser"
 
-#: src/ui_viewDialog.h:1277
+#: src/ui_viewDialog.h:1279
 msgid "Show art"
 msgstr "Vis kunst"
 
 #. TRANSLATORS: Refers to constellation art
-#: src/ui_viewDialog.h:1278
+#: src/ui_viewDialog.h:1280
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:296
 msgid "Art brightness:"
 msgstr "Lysstyrke på kunst:"
 
-#: src/ui_viewDialog.h:1279
+#: src/ui_viewDialog.h:1281
 msgid "Celestial Sphere"
 msgstr "Himmelhvelving"
 
-#: src/ui_viewDialog.h:1280
+#: src/ui_viewDialog.h:1282
 msgid "Equatorial grid (on J2000)"
 msgstr "Ekvatorialnett (J2000)"
 
-#: src/ui_viewDialog.h:1281
+#: src/ui_viewDialog.h:1283
 msgid "Equatorial grid (on date)"
 msgstr "Ekvatorialnett (på dato)"
 
-#: src/ui_viewDialog.h:1282
+#: src/ui_viewDialog.h:1284
 msgid "Ecliptic grid (on J2000)"
 msgstr "Ekliptisk nett (J2000)"
 
-#: src/ui_viewDialog.h:1286
+#: src/ui_viewDialog.h:1288
 msgid "Show equator line"
 msgstr "Vis ekvatorlinje"
 
-#: src/ui_viewDialog.h:1290
+#: src/ui_viewDialog.h:1292
 msgid "Show meridian line"
 msgstr "Vis meridianlinje"
 
-#: src/ui_viewDialog.h:1294
+#: src/ui_viewDialog.h:1296
 msgid "Show horizon line"
 msgstr "Vis horisontlinje"
 
-#: src/ui_viewDialog.h:1298
+#: src/ui_viewDialog.h:1300
 msgid "Show ecliptic line"
 msgstr "Vis ekliptikken"
 
-#: src/ui_viewDialog.h:1302
+#: src/ui_viewDialog.h:1304
 msgid "Show Galactic equator line"
 msgstr "Vis galaktisk ekvator"
 
-#: src/ui_viewDialog.h:1306
+#: src/ui_viewDialog.h:1308
 msgid "Projection"
 msgstr "Projeksjon"
 
-#: src/ui_viewDialog.h:1308
+#: src/ui_viewDialog.h:1310
 msgid "Show fog"
 msgstr "Vis dis"
 
-#: src/ui_viewDialog.h:1309
+#: src/ui_viewDialog.h:1311
 msgid "Use associated planet and position"
 msgstr "Bruk tilhørende planet og posisjon"
 
-#: src/ui_viewDialog.h:1310
+#: src/ui_viewDialog.h:1312
 msgid "Show illumination layer (bright windows, light pollution, etc.)"
 msgstr "Vis belysningslag (lyse vinduer, lysforurensning etc.)"
 
-#: src/ui_viewDialog.h:1311
+#: src/ui_viewDialog.h:1313
 msgid "Show ground"
 msgstr "Vis landskap"
 
-#: src/ui_viewDialog.h:1312
+#: src/ui_viewDialog.h:1314
 msgid "Use this landscape as default"
 msgstr "Bruk dette landskapet som standard"
 
-#: src/ui_viewDialog.h:1314
+#: src/ui_viewDialog.h:1316
 msgid "Use minimal brightness to leave landscape visible also in darkness"
 msgstr "Bruk minimum lysstyrke for lysere landskap også i mørke"
 
-#: src/ui_viewDialog.h:1316
+#: src/ui_viewDialog.h:1318
 msgid "Minimal brightness:"
 msgstr "Minimum lysstyrke:"
 
-#: src/ui_viewDialog.h:1318
+#: src/ui_viewDialog.h:1320
 msgid ""
 "Value range 0..1 (landscape is black at night - landscape is fully bright)"
 msgstr ""
 "Verdiområde 0..1 (landskap veldig mørkt om natten - landskap som ved høylys "
 "dag)"
 
-#: src/ui_viewDialog.h:1321
+#: src/ui_viewDialog.h:1323
 msgid "Use minimal brightness as may be specified in landscape.ini"
 msgstr "Bruk minimum lysstyrke som spesifisert i landscape.ini"
 
-#: src/ui_viewDialog.h:1323
+#: src/ui_viewDialog.h:1325
 msgid "from landscape, if given"
 msgstr "fra landskap, hvis gitt"
 
-#: src/ui_viewDialog.h:1324
+#: src/ui_viewDialog.h:1326
 msgid "Add/remove landscapes..."
 msgstr "Legg til/fjern landskaper..."
 
-#: src/ui_viewDialog.h:1326
+#: src/ui_viewDialog.h:1328
 msgid "Use this sky culture as default"
 msgstr "Bruk denne himmelkulturen som standard"
 
-#: src/ui_viewDialog.h:1328
+#: src/ui_viewDialog.h:1330
 msgid "Visible"
 msgstr "Synlig"
 
@@ -8762,8 +8762,8 @@ msgid "Source is not observable."
 msgstr "Objekt er ikke observerbart."
 
 #: plugins/Observability/src/Observability.cpp:198
-msgid "No acronychal nor cosmical rise/set."
-msgstr "Ingen akronisk eller kosmisk oppgang/nedgang."
+msgid "No Acronychal nor Heliacal rise/set."
+msgstr ""
 
 #: plugins/Observability/src/Observability.cpp:199
 #, qt-format
@@ -8778,22 +8778,22 @@ msgstr "Største separasjon til solen: %1 (ved %2 grd.)"
 #. TRANSLATORS: The space at the end is significant - another sentence may follow.
 #: plugins/Observability/src/Observability.cpp:203
 #, qt-format
-msgid "Acronychal rise/set: %1/%2. "
-msgstr "Akronisk oppgang/nedgang: %1/%2. "
+msgid "Heliacal rise/set: %1/%2. "
+msgstr ""
 
 #. TRANSLATORS: The space at the end is significant - another sentence may follow.
 #: plugins/Observability/src/Observability.cpp:205
-msgid "No acronychal rise/set. "
-msgstr "Ingen akronisk oppgang/nedgang. "
+msgid "No Heliacal rise/set. "
+msgstr ""
 
 #: plugins/Observability/src/Observability.cpp:206
 #, qt-format
-msgid "Cosmical rise/set: %1/%2."
-msgstr "Kosmisk oppgang/nedgang: %1/%2."
+msgid "Acronycal rise/set: %1/%2."
+msgstr ""
 
 #: plugins/Observability/src/Observability.cpp:207
-msgid "No cosmical rise/set."
-msgstr "Ingen kosmisk oppgang/nedgang."
+msgid "No Acronycal rise/set."
+msgstr ""
 
 #: plugins/Observability/src/Observability.cpp:208
 msgid "Observable during the whole year."
@@ -8916,25 +8916,18 @@ msgstr "Akronisk/Kosmisk oppgang/nedgang:"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:144
 msgid ""
-"The Acronychal rise (or set) of an object happens when the object rises (or "
-"sets) just when the Sun sets (or rises), respectively. The exact dates of "
-"these ephemeris depend on the Observer's location. The dates between the "
+"The days of Heliacal rise and Cosmical set of an object are estimated as the "
+"days when the object rises (or sets) together with the Sun's astronomical "
+"rise/set (i.e., at the astronomical twilight). The exact dates of these "
+"ephemeris depend on the Observer's location.  On the contrary, the Acronycal "
+"rise (or set) happens when the star rises/sets with the setting/rising of "
+"the Sun (i.e., opposite to the Sun). On the one hand, it is obvious that the "
+"source is hardly observable (or not observable at all) in the dates between "
+"Cosmical set and Heliacal rise. On the other hand, the dates around the "
 "Acronychal set and rise are those when the altitude of the celestial object "
 "uses to be high when the Sun is well below the horizon (hence the object can "
-"be well observed). On the contrary, the Cosmical rise (or set) happens when "
-"both, the object and the Sun, rise (or set) simultaneously. It is obvious "
-"that the source is hardly observable (or not observable at all) in the dates "
-"between Cosmical set and rise."
+"be well observed)."
 msgstr ""
-"Den akroniske oppgangen (eller nedgangen) til et objekt er når objektet går "
-"opp (eller ned) akkurat når solen går ned (eller opp). De eksakte "
-"efemeridedatoene avhenger av observatørens plassering. Datoene mellom den "
-"akroniske nedgangen og oppgangen er de som er når høyden på himmelobjektet "
-"pleier å være høy når solen er godt under horisonten (følgelig kan objektet "
-"fint observeres). I motsetning til den kosmiske oppgangen (eller nedgangen) "
-"som skjer når både objektet og solen stiger opp (eller ned) samtidig. Det er "
-"åpenbart at kilden knapt er observerbar (eller ikke observerbar i det hele "
-"tatt) i datoene mellom kosmisk nedgang og oppgang."
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:145
 msgid "Largest Sun separation:"
@@ -9227,412 +9220,412 @@ msgstr ""
 "Den gamle showers.json-filen er ikke lenger kompatibel - bruker standardfil"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1240
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1245
 msgid "Quadrantids"
 msgstr "Quadrantidene"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1242
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1247
 msgid "Lyrids"
 msgstr "Lyridene"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1244
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1249
 msgid "α-Centaurids"
 msgstr "Alfa-Centauridene"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1246
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1251
 msgid "γ-Normids"
 msgstr "Gamma-Normidene"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1248
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1253
 msgid "η-Aquariids"
 msgstr "Eta-Aquaridene"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1250
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1255
 msgid "June Bootids"
 msgstr "Juni-Bootidene"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1252
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1257
 msgid "Piscis Austrinids"
 msgstr "Piscis-Austrinidene"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1254
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1259
 msgid "Southern δ-Aquariids"
 msgstr "Sørlige Delta-Aquaridene"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1256
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1261
 msgid "α-Capricornids"
 msgstr "Alfa-Capricornidene"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1258
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1263
 msgid "α-Aurigids"
 msgstr "Alfa-Aurigidene"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1260
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1265
 msgid "September ε-Perseids"
 msgstr "September-Perseidene"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1262
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1267
 msgid "Draconids"
 msgstr "Draconidene"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1264
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1269
 msgid "Leonids"
 msgstr "Leonidene"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1266
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1271
 msgid "Phoenicids"
 msgstr "Phoenicidene"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1268
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1273
 msgid "Puppid-Velids"
 msgstr "Puppid-velidene"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1270
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1275
 msgid "Ursids"
 msgstr "Ursidene"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1272
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1277
 msgid "Perseids"
 msgstr "Perseidene"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1274
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1279
 msgid "δ-Leonids"
 msgstr "Delta-Leonidene"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1276
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1281
 msgid "π-Puppids"
 msgstr "Pi-Puppidene"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1278
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1283
 msgid "June Lyrids"
 msgstr "Juni-Lyridene"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1280
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1285
 msgid "κ-Cygnids"
 msgstr "Kappa-Cygnidene"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1282
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1287
 msgid "ε-Lyrids"
 msgstr "Epsilon-Lyridene"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1284
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1289
 msgid "δ-Aurigids"
 msgstr "Delta-Aurigidene"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1286
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1291
 msgid "ε-Geminids"
 msgstr "Epsilon-Geminidene"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1288
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1293
 msgid "Southern Taurids"
 msgstr "Sørlige Tauridene"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1290
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1295
 msgid "Northern Taurids"
 msgstr "Nordlige Tauridene"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1292
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1297
 msgid "Monocerotids"
 msgstr "Monocerotidene"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1294
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1299
 msgid "α-Monocerotids"
 msgstr "Alfa-Monocerotidene"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1296
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1301
 msgid "σ-Hydrids"
 msgstr "Sigma-Hydridene"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1298
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1303
 msgid "Geminids"
 msgstr "Geminidene"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1300
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1305
 msgid "Leonis Minorids"
 msgstr "Leo-Minoridene"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1302
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1307
 msgid "December Leonis Minorids"
 msgstr "Desember-Leo-Minoridene"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1304
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1309
 msgid "Comae Berenicids"
 msgstr "Coma-Berenicidene"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1306
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1311
 msgid "Orionids"
 msgstr "Orionidene"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1308
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1313
 msgid "Andromedids"
 msgstr "Andromedidene"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1310
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1315
 msgid "η-Lyrids"
 msgstr "Eta-Lyridene"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1312
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1317
 msgid "α-Scorpiids"
 msgstr "Alfa-Scorpidene"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1314
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1319
 msgid "Ophiuchids"
 msgstr "Ophiuchidene"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1316
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1321
 msgid "θ-Ophiuchids"
 msgstr "Theta-Ophiuchidene"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1318
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1323
 msgid "κ-Serpentids"
 msgstr "Kappa-Serpentidene"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1320
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1325
 msgid "θ-Centaurids"
 msgstr "Theta-Centauridene"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1322
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1327
 msgid "ω-Cetids"
 msgstr "Omega-Cetidene"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1324
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1329
 msgid "Southern ω-Scorpiids"
 msgstr "Sørlige Omega-Scorpidene"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1326
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1331
 msgid "Northern ω-Scorpiids"
 msgstr "Nordlige Omega-Scorpidene"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1328
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1333
 msgid "Arietids"
 msgstr "Arietidene"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1330
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1335
 msgid "π-Cetids"
 msgstr "Pi-Cetidene"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1332
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1337
 msgid "δ-Cancrids"
 msgstr "Delta-Cancridene"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1334
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1339
 msgid "τ-Herculids"
 msgstr "Tau-Herkulidene"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1336
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1341
 msgid "ρ-Geminids"
 msgstr "Rho-Geminidene"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1338
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1343
 msgid "η-Carinids"
 msgstr "Eta-Carinidene"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1340
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1345
 msgid "η-Craterids"
 msgstr "Eta-Crateridene"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1342
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1347
 msgid "π-Virginids"
 msgstr "Pi-Virginidene"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1344
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1349
 msgid "θ-Virginids"
 msgstr "Theta-Virginidene"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1346
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1351
 msgid "May Librids"
 msgstr "Mai-Libridene"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1348
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1353
 msgid "June Scutids"
 msgstr "Juni-Scutidene"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1350
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1355
 msgid "α-Pisces Australids"
 msgstr "Alfa-Pisces-Australidene"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1352
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1357
 msgid "Southern ι-Aquariids"
 msgstr "Sørlige Iota-Aquaridene"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1354
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1359
 msgid "Northern ι-Aquariids"
 msgstr "Nordlige Iota-Aquaridene"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1356
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1361
 msgid "γ-Aquariids"
 msgstr "Gamma-Aquaridene"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1358
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1363
 msgid "Autumn Arietids"
 msgstr "Høst-Arietidene"
 
 #. TRANSLATORS: Name of meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1360
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1365
 msgid "χ-Orionids"
 msgstr "Chi-Orionidene"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1364
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1369
 msgid "Comet 1P/Halley"
 msgstr "Komet 1P/Halley"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1366
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1371
 msgid "Comet 7P/Pons-Winnecke"
 msgstr "Komet 7P/Pons-Winnecke"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1368
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1373
 msgid "Comet 55P/Tempel-Tuttle"
 msgstr "Komet 55P/Tempel-Tuttle"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1370
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1375
 msgid "Comet 96P/Machholz"
 msgstr "Komet 96P/Machholz"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1372
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1377
 msgid "Comet 109P/Swift-Tuttle"
 msgstr "Komet 109P/Swift-Tuttle"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1374
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1379
 msgid "Comet Thatcher (1861 I)"
 msgstr "Komet Thatcher (1861 I)"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1376
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1381
 msgid "Comet 26P/Grigg-Skjellerup"
 msgstr "Komet 26P/Grigg-Skjellerup"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1378
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1383
 msgid "Comet 21P/Giacobini-Zinner"
 msgstr "Komet 21P/Giacobini-Zinner"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1380
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1385
 msgid "Comet 169P/NEAT"
 msgstr "Komet 169P/NEAT"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1382
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1387
 msgid "Comet 289P/Blanpain"
 msgstr "Komet 289P/Blanpain"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1384
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1389
 msgid "Comet 8P/Tuttle"
 msgstr "Komet 8P/Tuttle"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1386
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1391
 msgid "Comet 3D/Biela"
 msgstr "Komet 3D/Biela"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1388
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1393
 msgid "Comet C/1917 F1 (Mellish)"
 msgstr "Komet C/1917 F1 (Mellish)"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1390
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1395
 msgid "Comet C/1964 N1 (Ikeya)"
 msgstr "Komet C/1964 N1 (Ikeya)"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1392
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1397
 msgid "Comet Schwassmann-Wachmann 3"
 msgstr "Komet Schwassmann-Wachmann 3"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1394
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1399
 msgid "Minor planet 2003 EH1 and Comet C/1490 Y1"
 msgstr "Småplanet 2003 EH1 og komet C/1490 Y1"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1396
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1401
 msgid "Minor planet (4450) Pan"
 msgstr "Småplanet (4450) Pan"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1398
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1403
 msgid "Minor planet 2008 ED69"
 msgstr "Småplanet 2008 ED69"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1400
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1405
 msgid "Comet 2P/Encke"
 msgstr "Komet 2P/Encke"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1402
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1407
 msgid "Minor planet 2004 TG10"
 msgstr "Småplanet 2004 TG10"
 
 #. TRANSLATORS: Name of parent object for meteor shower
-#: plugins/MeteorShowers/src/MeteorShowers.cpp:1404
+#: plugins/MeteorShowers/src/MeteorShowers.cpp:1409
 msgid "Minor planet (3200) Phaethon"
 msgstr "Småplanet (3200) Phaethon"
 
@@ -10788,6 +10781,27 @@ msgstr "Koordinat Y"
 #~ msgstr ""
 #~ "Hvis du vil lese fullstendig informasjon om dette programtillegget, dets "
 #~ "historikk og katalogformat, kan du %1få informasjon her%2."
+
+#~ msgid ""
+#~ "The Acronychal rise (or set) of an object happens when the object rises (or "
+#~ "sets) just when the Sun sets (or rises), respectively. The exact dates of "
+#~ "these ephemeris depend on the Observer's location. The dates between the "
+#~ "Acronychal set and rise are those when the altitude of the celestial object "
+#~ "uses to be high when the Sun is well below the horizon (hence the object can "
+#~ "be well observed). On the contrary, the Cosmical rise (or set) happens when "
+#~ "both, the object and the Sun, rise (or set) simultaneously. It is obvious "
+#~ "that the source is hardly observable (or not observable at all) in the dates "
+#~ "between Cosmical set and rise."
+#~ msgstr ""
+#~ "Den akroniske oppgangen (eller nedgangen) til et objekt er når objektet går "
+#~ "opp (eller ned) akkurat når solen går ned (eller opp). De eksakte "
+#~ "efemeridedatoene avhenger av observatørens plassering. Datoene mellom den "
+#~ "akroniske nedgangen og oppgangen er de som er når høyden på himmelobjektet "
+#~ "pleier å være høy når solen er godt under horisonten (følgelig kan objektet "
+#~ "fint observeres). I motsetning til den kosmiske oppgangen (eller nedgangen) "
+#~ "som skjer når både objektet og solen stiger opp (eller ned) samtidig. Det er "
+#~ "åpenbart at kilden knapt er observerbar (eller ikke observerbar i det hele "
+#~ "tatt) i datoene mellom kosmisk nedgang og oppgang."
 
 #~ msgid "Horizon altitude: 0 deg."
 #~ msgstr "Horisonthøyde: 0 grd."
