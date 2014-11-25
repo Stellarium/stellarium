@@ -154,6 +154,7 @@ void SolarSystem::init()
 	
 	StelApp *app = &StelApp::getInstance();
 	connect(app, SIGNAL(languageChanged()), this, SLOT(updateI18n()));
+	connect(app, SIGNAL(skyCultureChanged(QString)), this, SLOT(updateSkyCulture(QString)));
 	connect(app, SIGNAL(colorSchemeChanged(const QString&)), this, SLOT(setStelStyle(const QString&)));
 
 	QString displayGroup = N_("Display Options");
@@ -177,6 +178,92 @@ void SolarSystem::recreateTrails()
 	{
 		allTrails->addObject((QSharedPointer<StelObject>)p, &trailColor);
 	}
+}
+
+
+void SolarSystem::updateSkyCulture(const QString& skyCultureDir)
+{
+	planetPrimeNamesMap.clear();
+	planetSecondNamesMap.clear();
+
+	QString namesFile = StelFileMgr::findFile("skycultures/" + skyCultureDir + "/planet_names.fab");
+
+	if (namesFile.isEmpty())
+	{
+		foreach (const PlanetP& p, getSun()->satellites)
+		{
+			if (p->getPlanetType()==Planet::isPlanet)
+				p->setNativeName("");
+		}
+		updateI18n();
+		return;
+	}
+
+	// Open file
+	QFile planetNamesFile(namesFile);
+	if (!planetNamesFile.open(QIODevice::ReadOnly | QIODevice::Text))
+	{
+		qDebug() << "Cannot open file" << QDir::toNativeSeparators(namesFile);
+		return;
+	}
+
+	// Now parse the file
+	// lines to ignore which start with a # or are empty
+	QRegExp commentRx("^(\\s*#.*|\\s*)$");
+
+	// lines which look like records - we use the RE to extract the fields
+	// which will be available in recRx.capturedTexts()
+	QRegExp recRx("^\\s*(\\w+)\\s+\"(\\w+)\"\\s+_[(]\"(\\w+)\"[)]\\s*(\\w*)\\n");
+
+	QString record, planetId, nativeName;
+	int nativeNameType;
+
+	// keep track of how many records we processed.
+	int totalRecords=0;
+	int readOk=0;
+	int lineNumber=0;
+	while (!planetNamesFile.atEnd())
+	{
+		record = QString::fromUtf8(planetNamesFile.readLine());
+		lineNumber++;
+
+		// Skip comments
+		if (commentRx.exactMatch(record))
+			continue;
+
+		totalRecords++;
+
+		if (!recRx.exactMatch(record))
+		{
+			qWarning() << "ERROR - cannot parse record at line" << lineNumber << "in planet names file" << QDir::toNativeSeparators(namesFile);
+		}
+		else
+		{
+			planetId = recRx.capturedTexts().at(1).trimmed();
+			nativeName = recRx.capturedTexts().at(2).trimmed();
+			nativeNameType = recRx.capturedTexts().at(4).toInt();
+
+			// Type of native name of the planet:
+			//	0 - outer planet or inner planet (evening visibility)
+			//	1 - inner planet (morning visibility)
+			if (nativeNameType==0)
+				planetPrimeNamesMap[planetId] = nativeName;
+			else
+				planetSecondNamesMap[planetId] = nativeName;
+
+			readOk++;
+		}
+	}
+	planetNamesFile.close();
+	qDebug() << "Loaded" << readOk << "/" << totalRecords << "native names of planets";
+
+	foreach (const PlanetP& p, getSun()->satellites)
+	{
+		if (p->getPlanetType()==Planet::isPlanet)
+			p->setNativeName(planetPrimeNamesMap[p->getEnglishName()]);
+	}
+
+	updateI18n();
 }
 
 void SolarSystem::drawPointer(const StelCore* core)
@@ -1181,8 +1268,7 @@ QString SolarSystem::getPlanetHashString(void)
 		{
 			oss << p->getParent()->getEnglishName() << " : ";
 		}
-		oss << p->getEnglishName() << endl;
-		oss << p->getEnglishName() << endl;
+		oss << p->getEnglishName() << endl;		
 	}
 	return str;
 }
