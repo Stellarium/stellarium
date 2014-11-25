@@ -129,9 +129,11 @@ class Translations
 		// TRANSLATORS: Name of landscape
 		N_("Geneva");
 		// TRANSLATORS: Name of landscape
+		// TRANSLATORS: Name of landscape
 		N_("Grossmugl");
 		// TRANSLATORS: Name of landscape
 		N_("Zero Horizon");
+
 		
 		// =====================================================================
 		// Script names
