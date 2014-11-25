@@ -9,6 +9,7 @@ IF(${XGETTEXT_FOUND})
 		${GETTEXT_XGETTEXT_EXECUTABLE}
 			-o stellarium-skycultures.pot
 			--keyword=_
+			--keyword=N_
 			-C
 			--directory=${PROJECT_SOURCE_DIR}
 			--files-from=POTFILES.in

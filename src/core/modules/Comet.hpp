@@ -77,6 +77,11 @@ public:
 	//virtual QString getType() const {return "Comet";}
 	//! \todo Find better sources for the g,k system
 	virtual float getVMagnitude(const StelCore* core) const;
+	//! sets the nameI18 property with the appropriate translation.
+	//! Function overriden to handle the problem with name conflicts.
+	virtual void translateName(const StelTranslator& trans);
+	virtual QString getEnglishName(void) const {return englishName;}
+	virtual QString getNameI18n(void) const {return nameI18;}
 
 	//! \brief sets absolute magnitude and slope parameter.
 	//! These are the parameters in the IAU's two-parameter magnitude system
