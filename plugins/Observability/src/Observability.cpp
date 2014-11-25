@@ -195,16 +195,18 @@ void Observability::updateMessageText()
 	msgCulminatesAt	= q_("Culminates at %1 (in %2) at %3 deg.");
 	msgCulminatedAt	= q_("Culminated at %1 (%2 ago) at %3 deg.");
 	msgSrcNotObs	= q_("Source is not observable.");
-	msgNoACRise	= q_("No Acronychal nor Heliacal rise/set.");
+	msgNoACRise	= q_("No Acronychal nor Cosmical rise/set.");
 	msgGreatElong	= q_("Greatest elongation: %1 (at %2 deg.)");
 	msgLargSSep	= q_("Largest Sun separation: %1 (at %2 deg.)");
 	msgNone		= q_("None");
 	// TRANSLATORS: The space at the end is significant - another sentence may follow.
-	msgAcroRise	= q_("Heliacal rise/set: %1/%2. ");
+	msgAcroRise	= q_("Acronycal rise/set: %1/%2. ");
+	msgHeliRise	= q_("Heliacal rise/set: %1/%2. ");
+	msgNoHeliRise	= q_("No Heliacal rise/set. ");
 	// TRANSLATORS: The space at the end is significant - another sentence may follow.
-	msgNoAcroRise	= q_("No Heliacal rise/set. ");
-	msgCosmRise	= q_("Acronycal rise/set: %1/%2.");
-	msgNoCosmRise	= q_("No Acronycal rise/set.");
+	msgNoAcroRise	= q_("No Acronycal rise/set. ");
+	msgCosmRise	= q_("Cosmical rise/set: %1/%2.");
+	msgNoCosmRise	= q_("No Cosmical rise/set.");
 	msgWholeYear	= q_("Observable during the whole year.");
 	msgNotObs	= q_("Not observable at dark night.");
 	msgAboveHoriz	= q_("Nights above horizon: %1");
@@ -665,6 +667,7 @@ void Observability::draw(StelCore* core)
 				//AcroCos = q_("No Acronychal nor Cosmical rise/set.");
 				lineObservableRange = msgSrcNotObs;
 				lineAcroCos = msgNoACRise;
+				lineHeli = msgNoHeliRise;
 			}
 			else
 			{ // Source can be seen.
@@ -706,16 +709,23 @@ void Observability::draw(StelCore* core)
 
 				if (show_AcroCos)
 				{
-					int acroRise, acroSet, cosRise, cosSet;
+					int acroRise, acroSet, cosRise, cosSet, heliRise, heliSet;
+
 					int result = calculateAcroCos(acroRise, acroSet,
 					                              cosRise, cosSet);
+					int resultHeli = calculateHeli(0,heliRise,heliSet);
+
 					QString acroRiseStr, acroSetStr;
 					QString cosRiseStr, cosSetStr;
+					QString heliRiseStr, heliSetStr;
 					// TODO: Possible error? Day 0 is 1 Jan.
 					acroRiseStr = (acroRise>0)?formatAsDate(acroRise):msgNone;
 					acroSetStr = (acroSet>0)?formatAsDate(acroSet):msgNone;
 					cosRiseStr = (cosRise>0)?formatAsDate(cosRise):msgNone;
 					cosSetStr = (cosSet>0)?formatAsDate(cosSet):msgNone;
+					heliRiseStr = (heliRise>0)?formatAsDate(heliRise):msgNone;
+					heliSetStr = (heliSet>0)?formatAsDate(heliSet):msgNone;
+
 
 					if (result==3 || result==1)
 						lineAcroCos =  msgAcroRise
@@ -730,6 +740,13 @@ void Observability::draw(StelCore* core)
 						               .arg(cosSetStr);
 					else
 						lineAcroCos += msgNoCosmRise;
+
+					if (resultHeli==1)
+						lineHeli = msgHeliRise.arg(heliRiseStr).arg(heliSetStr);
+					else
+						lineHeli = msgNoHeliRise;
+
+
 				}
 
 
@@ -840,6 +857,8 @@ void Observability::draw(StelCore* core)
 		{
 			yLine -= lineSpacing;
 			painter.drawText(xLine + fontSize, yLine, lineAcroCos);
+			yLine -= lineSpacing;
+			painter.drawText(xLine + fontSize, yLine, lineHeli);
 		}
 	}
 }
@@ -1092,6 +1111,62 @@ bool Observability::CheckRise(int day)
 ///////////////////////////////////////////
 
 
+
+
+///////////////////////////////////////////
+// Finds the dates of Acronichal (Rise, Set) and Cosmical (Rise2, Set2) dates.
+int Observability::calculateHeli(int imethod, int &heliRise, int &heliSet)
+{
+
+	heliRise = -1;
+	heliSet = -1;
+
+	double bestDiffHeliRise = 12.0;
+	double bestDiffHeliSet = 12.0;
+
+	double hourDiffHeliRise, hourDiffHeliSet;
+	bool success = false;
+
+	for (int i=0; i<366; i++)
+	{
+		if (objectH0[i]>0.0 && sunSidT[0][i]>0.0 && sunSidT[1][i]>0.0)
+		{
+			success = true;
+			hourDiffHeliRise = toUnsignedRA(objectRA[i] - objectH0[i]);
+		//	hourDiffCosRise = hourDiffAcroRise-sunSidT[0][i];
+			hourDiffHeliRise -= sunSidT[0][i];
+			
+			hourDiffHeliSet = toUnsignedRA(objectRA[i] + objectH0[i]);
+		//	hourCosDiffSet = hourDiffAcroSet - sunSidT[1][i];
+			hourDiffHeliSet -= sunSidT[1][i];
+			
+			// Heliacal rise/set:
+			if (qAbs(hourDiffHeliRise) < bestDiffHeliRise)
+			{
+				bestDiffHeliRise = qAbs(hourDiffHeliRise);
+				heliRise = i;
+			};
+			if (qAbs(hourDiffHeliSet) < bestDiffHeliSet)
+			{
+				bestDiffHeliSet = qAbs(hourDiffHeliSet);
+				heliSet = i;
+			};
+			
+		};
+	};
+
+	heliRise *= (bestDiffHeliRise > 0.083)?-1:1; // Check that difference is lower than 5 minutes.
+	heliSet *= (bestDiffHeliSet > 0.083)?-1:1; // Check that difference is lower than 5 minutes.
+	int result = (heliRise>0 || heliSet>0) ? 1 : 0;
+	return (success) ? result : 0;
+
+
+};
+
+
+
+
+
 ///////////////////////////////////////////
 // Finds the dates of Acronichal (Rise, Set) and Cosmical (Rise2, Set2) dates.
 int Observability::calculateAcroCos(int &acroRise, int &acroSet,
@@ -1112,16 +1187,16 @@ int Observability::calculateAcroCos(int &acroRise, int &acroSet,
 
 	for (int i=0; i<366; i++)
 	{
-		if (objectH0[i]>0.0 && sunSidT[0][i]>0.0 && sunSidT[1][i]>0.0)
+		if (objectH0[i]>0.0 && sunSidT[2][i]>0.0 && sunSidT[3][i]>0.0)
 		{
 			success = true;
 			hourDiffAcroRise = toUnsignedRA(objectRA[i] - objectH0[i]);
-			hourDiffCosRise = hourDiffAcroRise-sunSidT[1][i];
-			hourDiffAcroRise -= sunSidT[0][i];
+			hourDiffCosRise = hourDiffAcroRise-sunSidT[3][i];
+			hourDiffAcroRise -= sunSidT[2][i];
 			
 			hourDiffAcroSet = toUnsignedRA(objectRA[i] + objectH0[i]);
-			hourCosDiffSet = hourDiffAcroSet - sunSidT[0][i];
-			hourDiffAcroSet -= sunSidT[1][i];
+			hourCosDiffSet = hourDiffAcroSet - sunSidT[2][i];
+			hourDiffAcroSet -= sunSidT[3][i];
 			
 			// Acronychal rise/set:
 			if (qAbs(hourDiffAcroRise) < bestDiffAcroRise)
