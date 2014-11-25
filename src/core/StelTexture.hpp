@@ -48,9 +48,9 @@ public:
 	{
 		StelTextureParams(bool qgenerateMipmaps=false, GLint afiltering=GL_LINEAR, GLint awrapMode=GL_CLAMP_TO_EDGE, bool qfilterMipmaps=false) :
 				generateMipmaps(qgenerateMipmaps),
+				filterMipmaps(qfilterMipmaps),
 				filtering(afiltering),
-				wrapMode(awrapMode),
-				filterMipmaps(qfilterMipmaps){;}
+				wrapMode(awrapMode){;}
 		//! Define if mipmaps must be created.
 		bool generateMipmaps;
 		//! If true, mipmapped textures are filtered with GL_LINEAR_MIPMAP_LINEAR instead of GL_LINEAR_MIPMAP_NEAREST (i.e. enabling "trilinear" filtering)
