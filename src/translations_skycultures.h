@@ -22,9 +22,9 @@
 // Currently these are only names of solar system objects.
 // It is not meant to be compiled but just parsed by gettext
 
-class Translations_skycultures
+class TranslationsSkycultures
 {
-	void Translations(){;}
+	void TranslationsSkycultures(){;}
 
 	static translationList()
 	{
@@ -162,7 +162,7 @@ class Translations_skycultures
 		// TRANSLATORS: Proper name of comet C/1680 V1
 		N_("Great Comet of 1680 (C/1680 V1)");
 		
-		// TRANSLATORS: Name of supernova SN 1572A and script name
+		// TRANSLATORS: Name of supernova SN 1572A
 		N_("Tycho's Supernova");
 		// TRANSLATORS: Name of supernova SN 1604A
 		N_("Kepler's Supernova");
