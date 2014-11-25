@@ -302,7 +302,7 @@ private:
 	//! @param rulesFile Name of the file containing the seasonal rules
 	void loadSeasonalRules(const QString& rulesFile);
 
-        //! Draw the constellation lines at the epoch given by the StelCore.
+	//! Draw the constellation lines at the epoch given by the StelCore.
 	void drawLines(StelPainter& sPainter, const StelCore* core) const;
 	//! Draw the constellation art.
 	void drawArt(StelPainter& sPainter) const;
