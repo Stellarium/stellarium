@@ -129,6 +129,11 @@ void Comet::setAbsoluteMagnitudeAndSlope(const double magnitude, const double sl
 	slopeParameter = slope;
 }
 
+void Comet::translateName(const StelTranslator &translator)
+{
+	nameI18 = translator.qtranslate(englishName);
+}
+
 QString Comet::getInfoString(const StelCore *core, const InfoStringGroup &flags) const
 {
 	//Mostly copied from Planet::getInfoString():
@@ -138,7 +143,7 @@ QString Comet::getInfoString(const StelCore *core, const InfoStringGroup &flags)
 	if (flags&Name)
 	{
 		oss << "<h2>";
-		oss << q_(englishName);  // UI translation can differ from sky translation
+		oss << getNameI18n();  // UI translation can differ from sky translation
 		oss.setRealNumberNotation(QTextStream::FixedNotation);
 		oss.setRealNumberPrecision(1);
 		if (sphereScale != 1.f)
