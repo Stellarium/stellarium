@@ -183,16 +183,15 @@ void SolarSystem::recreateTrails()
 
 void SolarSystem::updateSkyCulture(const QString& skyCultureDir)
 {
-	planetPrimeNamesMap.clear();
-	planetSecondNamesMap.clear();
+	planetNativeNamesMap.clear();
 
 	QString namesFile = StelFileMgr::findFile("skycultures/" + skyCultureDir + "/planet_names.fab");
 
 	if (namesFile.isEmpty())
 	{
-		foreach (const PlanetP& p, getSun()->satellites)
+		foreach (const PlanetP& p, systemPlanets)
 		{
-			if (p->getPlanetType()==Planet::isPlanet)
+			if (p->getPlanetType()==Planet::isPlanet || p->getPlanetType()==Planet::isMoon || p->getPlanetType()==Planet::isStar)
 				p->setNativeName("");
 		}
 		updateI18n();
@@ -213,10 +212,9 @@ void SolarSystem::updateSkyCulture(const QString& skyCultureDir)
 
 	// lines which look like records - we use the RE to extract the fields
 	// which will be available in recRx.capturedTexts()
-	QRegExp recRx("^\\s*(\\w+)\\s+\"(\\w+)\"\\s+_[(]\"(\\w+)\"[)]\\s*(\\w*)\\n");
+	QRegExp recRx("^\\s*(\\w+)\\s+\"(.+)\"\\s+_[(]\"(.+)\"[)]\\n");
 
 	QString record, planetId, nativeName;
-	int nativeNameType;
 
 	// keep track of how many records we processed.
 	int totalRecords=0;
@@ -241,26 +239,17 @@ void SolarSystem::updateSkyCulture(const QString& skyCultureDir)
 		{
 			planetId = recRx.capturedTexts().at(1).trimmed();
 			nativeName = recRx.capturedTexts().at(2).trimmed();
-			nativeNameType = recRx.capturedTexts().at(4).toInt();
-
-			// Type of native name of the planet:
-			//	0 - outer planet or inner planet (evening visibility)
-			//	1 - inner planet (morning visibility)
-			if (nativeNameType==0)
-				planetPrimeNamesMap[planetId] = nativeName;
-			else
-				planetSecondNamesMap[planetId] = nativeName;
-
+			planetNativeNamesMap[planetId] = nativeName;
 			readOk++;
 		}
 	}
 	planetNamesFile.close();
 	qDebug() << "Loaded" << readOk << "/" << totalRecords << "native names of planets";
 
-	foreach (const PlanetP& p, getSun()->satellites)
+	foreach (const PlanetP& p, systemPlanets)
 	{
-		if (p->getPlanetType()==Planet::isPlanet)
-			p->setNativeName(planetPrimeNamesMap[p->getEnglishName()]);
+		if (p->getPlanetType()==Planet::isPlanet || p->getPlanetType()==Planet::isMoon || p->getPlanetType()==Planet::isStar)
+			p->setNativeName(planetNativeNamesMap[p->getEnglishName()]);
 	}
 
 	updateI18n();

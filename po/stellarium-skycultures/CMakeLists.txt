@@ -11,6 +11,7 @@ IF(${XGETTEXT_FOUND})
 			--keyword=_
 			--keyword=N_
 			-C
+			--add-comments=TRANSLATORS:
 			--directory=${PROJECT_SOURCE_DIR}
 			--files-from=POTFILES.in
 			--copyright-holder=Stellarium's\ team
