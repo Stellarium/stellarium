@@ -294,7 +294,8 @@ protected:
 
 	QString englishName;             // english planet name
 	QString nameI18;                 // International translated name
-	QString texMapName;              // Texture file path	
+	QString nativeName;              // Can be used in a skyculture
+	QString texMapName;              // Texture file path
 	QString normalMapName;              // Texture file path
 	int flagLighting;                // Set whether light computation has to be proceed
 	RotationElements re;             // Rotation param
@@ -331,7 +332,6 @@ protected:
 	bool atmosphere;                 // Does the planet have an atmosphere?
 	bool halo;                       // Does the planet have a halo?	
 	PlanetType pType;                // Type of body
-	QString nativeName;
 
 	ApparentMagnitudeAlgorithm vMagAlgorithm;
 
