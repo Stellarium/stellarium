@@ -1117,6 +1117,7 @@ bool Observability::CheckRise(int day)
 // Finds the dates of Acronichal (Rise, Set) and Cosmical (Rise2, Set2) dates.
 int Observability::calculateHeli(int imethod, int &heliRise, int &heliSet)
 {
+	Q_UNUSED(imethod)
 
 	heliRise = -1;
 	heliSet = -1;
