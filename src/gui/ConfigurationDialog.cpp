@@ -157,7 +157,7 @@ void ConfigurationDialog::createDialogContent()
 	updateCurrentLanguage();
 	connect(cb->lineEdit(), SIGNAL(editingFinished()), this, SLOT(updateCurrentLanguage()));
 	connect(cb, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(selectLanguage(const QString&)));
-	// GZ Do the same for sky language:
+	// Do the same for sky language:
 	cb = ui->skycultureLanguageComboBox;
 	cb->clear();
 	cb->addItems(StelTranslator::globalTranslator->getAvailableLanguagesNamesNative(StelFileMgr::getLocaleDir()));
