@@ -408,8 +408,7 @@ private:
 	Vec3f trailColor;
 	Vec3f pointerColor;
 
-	QHash<QString, QString> planetPrimeNamesMap;
-	QHash<QString, QString> planetSecondNamesMap;
+	QHash<QString, QString> planetNativeNamesMap;
 
 	//////////////////////////////////////////////////////////////////////////////////
 	// DEPRECATED
