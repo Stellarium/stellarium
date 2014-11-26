@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-11-24 20:17+0600\n"
+"POT-Creation-Date: 2014-11-26 13:54+0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -8457,7 +8457,7 @@ msgid "Source is not observable."
 msgstr ""
 
 #: plugins/Observability/src/Observability.cpp:198
-msgid "No Acronychal nor Heliacal rise/set."
+msgid "No Acronychal nor Cosmical rise/set."
 msgstr ""
 
 #: plugins/Observability/src/Observability.cpp:199
@@ -8473,62 +8473,71 @@ msgstr ""
 #. TRANSLATORS: The space at the end is significant - another sentence may follow.
 #: plugins/Observability/src/Observability.cpp:203
 #, qt-format
+msgid "Acronycal rise/set: %1/%2. "
+msgstr ""
+
+#: plugins/Observability/src/Observability.cpp:204
+#, qt-format
 msgid "Heliacal rise/set: %1/%2. "
 msgstr ""
 
-#. TRANSLATORS: The space at the end is significant - another sentence may follow.
 #: plugins/Observability/src/Observability.cpp:205
 msgid "No Heliacal rise/set. "
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:206
-#, qt-format
-msgid "Acronycal rise/set: %1/%2."
-msgstr ""
-
+#. TRANSLATORS: The space at the end is significant - another sentence may follow.
 #: plugins/Observability/src/Observability.cpp:207
-msgid "No Acronycal rise/set."
+msgid "No Acronycal rise/set. "
 msgstr ""
 
 #: plugins/Observability/src/Observability.cpp:208
-msgid "Observable during the whole year."
+#, qt-format
+msgid "Cosmical rise/set: %1/%2."
 msgstr ""
 
 #: plugins/Observability/src/Observability.cpp:209
-msgid "Not observable at dark night."
+msgid "No Cosmical rise/set."
 msgstr ""
 
 #: plugins/Observability/src/Observability.cpp:210
+msgid "Observable during the whole year."
+msgstr ""
+
+#: plugins/Observability/src/Observability.cpp:211
+msgid "Not observable at dark night."
+msgstr ""
+
+#: plugins/Observability/src/Observability.cpp:212
 #, qt-format
 msgid "Nights above horizon: %1"
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:211
+#: plugins/Observability/src/Observability.cpp:213
 msgid "TODAY:"
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:212
+#: plugins/Observability/src/Observability.cpp:214
 msgid "THIS YEAR:"
 msgstr ""
 
 #. TRANSLATORS: The space at the end is significant - another sentence may follow.
-#: plugins/Observability/src/Observability.cpp:214
+#: plugins/Observability/src/Observability.cpp:216
 #, qt-format
 msgid "Previous Full Moon: %1 %2 at %3:%4. "
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:215
+#: plugins/Observability/src/Observability.cpp:217
 #, qt-format
 msgid "Next Full Moon: %1 %2 at %3:%4. "
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:230
-#: plugins/Observability/src/Observability.cpp:231
-#: plugins/Observability/src/Observability.cpp:235
+#: plugins/Observability/src/Observability.cpp:232
+#: plugins/Observability/src/Observability.cpp:233
+#: plugins/Observability/src/Observability.cpp:237
 msgid "Observability"
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:236
+#: plugins/Observability/src/Observability.cpp:238
 msgid "Observability configuration window"
 msgstr ""
 
@@ -8587,22 +8596,28 @@ msgid ""
 msgstr ""
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:144
-msgid "Acronychal/Cosmical rise/set:"
+msgid "Acronychal/Cosmical/Heliacal rise/set:"
 msgstr ""
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:144
 msgid ""
-"The days of Heliacal rise and Cosmical set of an object are estimated as the "
-"days when the object rises (or sets) together with the Sun's astronomical "
-"rise/set (i.e., at the astronomical twilight). The exact dates of these "
-"ephemeris depend on the Observer's location.  On the contrary, the Acronycal "
-"rise (or set) happens when the star rises/sets with the setting/rising of "
-"the Sun (i.e., opposite to the Sun). On the one hand, it is obvious that the "
-"source is hardly observable (or not observable at all) in the dates between "
-"Cosmical set and Heliacal rise. On the other hand, the dates around the "
-"Acronychal set and rise are those when the altitude of the celestial object "
-"uses to be high when the Sun is well below the horizon (hence the object can "
-"be well observed)."
+"The days of Cosmical rise/set of an object are estimated as the days when "
+"the object rises (or sets) together with the rise/set of the Sun. The exact "
+"dates of these ephemeris depend on the Observer's location.  On the "
+"contrary, the Acronycal rise (or set) happens when the star rises/sets with "
+"the setting/rising of the Sun (i.e., opposite to the Sun). On the one hand, "
+"it is obvious that the source is hardly observable (or not observable at "
+"all) in the dates between Cosmical set and Cosmical rise. On the other hand, "
+"the dates around the Acronychal set and rise are those when the altitude of "
+"the celestial object uses to be high when the Sun is well below the horizon "
+"(hence the object can be well observed). The date of Heliacal rise is the "
+"first day of the year when a star becomes visible. It happens when the star "
+"is close to the eastern horizon roughly before the end of the astronomical "
+"night (i.e., at the astronomical twilight). In the following nights, the "
+"star will be visibile during longer periods of time, until it reaches its "
+"Heliacal set (i.e., the last night of the year when the star is still "
+"visible). At the Heliacal set, the star sets roughly after the beginning of "
+"the astronomical night."
 msgstr ""
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:145
@@ -8706,7 +8721,7 @@ msgid "Today's ephemeris (rise, set, and transit times)"
 msgstr ""
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:353
-msgid "Dates of Acronychal and Cosmical rise/set"
+msgid "Dates of Acronychal/Cosmical/Heliacal rise/set"
 msgstr ""
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:354
