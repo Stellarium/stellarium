@@ -227,8 +227,6 @@ void AngleMeasure::drawOne(StelCore *core, const StelCore::FrameType frameType, 
 			glEnable(GL_LINE_SMOOTH);
 		#endif
 
-		glEnable(GL_BLEND);
-
 		// main line is a great circle
 		painter.setColor(lineColor[0], lineColor[1], lineColor[2], lineVisible.getInterstate());
 		if (frameType==StelCore::FrameEquinoxEqu)
