@@ -99,7 +99,8 @@ class TranslationsSkycultures
 		N_("Laomedeia");
 		N_("Neso");
 		N_("Solar System Observer");
-		//TNO's that are in the default ssystem.ini
+		
+		// TNO's that are in the default ssystem.ini
 		// TRANSLATORS: TNO/Asteroid (90377) Sedna
 		N_("Sedna");
 		// TRANSLATORS: TNO/Asteroid (50000) Quaoar
@@ -108,7 +109,8 @@ class TranslationsSkycultures
 		N_("Orcus");
 		// TRANSLATORS: TNO/Asteroid (136108) Haumea
 		N_("Haumea");
-		//Asteroids that are not in the default ssystem.ini
+		
+		// Asteroids that are not in the default ssystem.ini
 		// TRANSLATORS: Asteroid (5) Astraea
 		N_("Astraea");
 		// TRANSLATORS: Asteroid (6) Hebe
@@ -118,7 +120,7 @@ class TranslationsSkycultures
 		// TRANSLATORS: Asteroid (8) Flora
 		N_("Flora");
 		// TRANSLATORS: Asteroid (9) Metis
-		N_("Metis");
+		N_("Metis (asteroid)");
 		// TRANSLATORS: Asteroid (10) Hygiea
 		N_("Hygiea");
 		// TRANSLATORS: Asteroid (41) Daphne
@@ -162,6 +164,7 @@ class TranslationsSkycultures
 		// TRANSLATORS: Proper name of comet C/1680 V1
 		N_("Great Comet of 1680 (C/1680 V1)");
 		
+		// Supernovae from Historical Supernovae plugin
 		// TRANSLATORS: Name of supernova SN 1572A
 		N_("Tycho's Supernova");
 		// TRANSLATORS: Name of supernova SN 1604A
