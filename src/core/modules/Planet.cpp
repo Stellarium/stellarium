@@ -113,6 +113,7 @@ Planet::Planet(const QString& englishName,
 	normalMap = StelApp::getInstance().getTextureManager().createTextureThread(StelFileMgr::getInstallationDir()+"/textures/"+normalMapName, StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT));
 
 	nameI18 = englishName;
+	nativeName = "";
 	if (englishName!="Pluto")
 	{
 		deltaJD = 0.001*StelCore::JD_SECOND;
@@ -156,7 +157,20 @@ Planet::~Planet()
 
 void Planet::translateName(const StelTranslator& trans)
 {
-	nameI18 = trans.qtranslate(englishName);
+	if (nativeName.isEmpty())
+		nameI18 = trans.qtranslate(englishName);
+	else
+		nameI18 = trans.qtranslate(nativeName);
+}
+
+QString Planet::getEnglishName() const
+{
+	return englishName;
+}
+
+QString Planet::getNameI18n() const
+{
+	return nameI18;
 }
 
 // Return the information string "ready to print" :)
@@ -167,7 +181,7 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 
 	if (flags&Name)
 	{
-		oss << "<h2>" << q_(englishName);  // UI translation can differ from sky translation
+		oss << "<h2>" << getNameI18n();  // UI translation can differ from sky translation
 		oss.setRealNumberNotation(QTextStream::FixedNotation);
 		oss.setRealNumberPrecision(1);
 		if (sphereScale != 1.f)
@@ -280,7 +294,7 @@ QString Planet::getSkyLabel(const StelCore*) const
 	QString str;
 	QTextStream oss(&str);
 	oss.setRealNumberPrecision(2);
-	oss << nameI18;
+	oss << getNameI18n();
 
 	if (sphereScale != 1.f)
 	{

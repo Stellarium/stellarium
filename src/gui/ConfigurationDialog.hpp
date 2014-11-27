@@ -84,7 +84,9 @@ private slots:
 	void setSelectedInfoFromCheckBoxes();
 
 	void updateCurrentLanguage();
+	void updateCurrentSkyLanguage();
 	void selectLanguage(const QString& languageCode);
+	void selectSkyLanguage(const QString& languageCode);
 	void setStartupTimeMode();
 	//! Show/bring to foreground the shortcut editor window.
 	void showShortcutsWindow();
