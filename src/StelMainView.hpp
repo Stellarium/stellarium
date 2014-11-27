@@ -28,7 +28,7 @@
 // This define (only used here and in StelMainView.cpp) is temporarily used
 // to allow uncompromised compiling while the migration to the new QOpenGL... classes
 // has not been done. As soon as Qt5.4 is out, we should finish this migration process!
-#define STEL_USE_NEW_OPENGL_WIDGETS false
+#define STEL_USE_NEW_OPENGL_WIDGETS 0
 
 class QDeclarativeItem;
 #if STEL_USE_NEW_OPENGL_WIDGETS
