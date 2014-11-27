@@ -1294,6 +1294,10 @@ void Planet::deinitShader()
 {
 	delete planetShaderProgram;
 	planetShaderProgram = NULL;
+	delete ringPlanetShaderProgram;
+	ringPlanetShaderProgram = NULL;
+	delete moonShaderProgram;
+	moonShaderProgram = NULL;
 }
 
 void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP transfo, float screenSz, bool drawOnlyRing)
