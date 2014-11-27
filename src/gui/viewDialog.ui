@@ -1917,7 +1917,10 @@
             <property name="title">
              <string>Options</string>
             </property>
-            <layout class="QVBoxLayout" name="verticalLayout_8">
+            <layout class="QFormLayout" name="formLayout_2">
+             <property name="fieldGrowthPolicy">
+              <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
+             </property>
              <property name="leftMargin">
               <number>0</number>
              </property>
@@ -1930,10 +1933,27 @@
              <property name="bottomMargin">
               <number>0</number>
              </property>
-             <item>
+             <item row="0" column="0">
               <widget class="QCheckBox" name="useAsDefaultSkyCultureCheckBox">
                <property name="text">
                 <string>Use this sky culture as default</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QLabel" name="label">
+               <property name="text">
+                <string>Show names</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="QComboBox" name="skyCultureNamesStyleComboBox">
+               <property name="toolTip">
+                <string>Select if you want names abbreviated, original or translated</string>
+               </property>
+               <property name="currentText">
+                <string/>
                </property>
               </widget>
              </item>

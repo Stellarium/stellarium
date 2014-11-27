@@ -71,6 +71,7 @@ private slots:
 	void populateLightPollution();
 	void populateLandscapeMinimalBrightness();
 
+	// WHAT IS THE SKY LAYER? hidden, under development?
 	void populateSkyLayersList();
 	void skyLayersSelectionChanged(const QString&);
 	void skyLayersEnabledChanged(int);

@@ -219,7 +219,7 @@ public:
 	//! Get the (English) common name for a star with a specified
 	//! Hipparcos catalogue number.
 	//! @param hip The Hipparcos number of star
-	//! @return translated common name of star
+	//! @return common name of star (from skyculture @file star_names.fab)
 	static QString getCommonEnglishName(int hip);
 
 	//! Get the type of variability for a variable star with a specified
@@ -352,10 +352,10 @@ private:
 					  const Vec3f &c1,
 					  const Vec3f &c2);
 
-	HipIndexStruct *hipIndex; // array of hiparcos stars
+	HipIndexStruct *hipIndex; // array of Hipparcos stars
 
-	static QHash<int, QString> commonNamesMap;
-	static QHash<int, QString> commonNamesMapI18n;
+	static QHash<int, QString> commonNamesMap;     // the original names from skyculture (star_names.fab)
+	static QHash<int, QString> commonNamesMapI18n; // translated names
 	static QMap<QString, int> commonNamesIndexI18n;
 	static QMap<QString, int> commonNamesIndex;
 

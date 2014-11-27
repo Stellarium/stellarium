@@ -334,6 +334,10 @@ private slots:
 	//! Load a color scheme
 	void setStelStyle(const QString& section);
 
+	//! Called when the sky culture is updated.
+	//! Loads native names of planets for a given sky culture.
+	//! @param skyCultureDir the name of the directory containing the sky culture to use.
+	void updateSkyCulture(const QString& skyCultureDir);
 
 private:
 	//! Search for SolarSystem objects which are close to the position given
@@ -360,7 +364,6 @@ private:
 	bool loadPlanets(const QString& filePath);
 
 	void recreateTrails();
-
 
 	//! Used to count how many planets actually need shadow information
 	int shadowPlanetCount;
@@ -404,6 +407,8 @@ private:
 	LinearFader trailFader;
 	Vec3f trailColor;
 	Vec3f pointerColor;
+
+	QHash<QString, QString> planetNativeNamesMap;
 
 	//////////////////////////////////////////////////////////////////////////////////
 	// DEPRECATED
