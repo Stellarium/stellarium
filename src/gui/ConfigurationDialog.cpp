@@ -157,6 +157,16 @@ void ConfigurationDialog::createDialogContent()
 	updateCurrentLanguage();
 	connect(cb->lineEdit(), SIGNAL(editingFinished()), this, SLOT(updateCurrentLanguage()));
 	connect(cb, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(selectLanguage(const QString&)));
+	// Do the same for sky language:
+	cb = ui->skycultureLanguageComboBox;
+	cb->clear();
+	cb->addItems(StelTranslator::globalTranslator->getAvailableLanguagesNamesNative(StelFileMgr::getLocaleDir()));
+	cb->model()->sort(0);
+	updateCurrentSkyLanguage();
+	connect(cb->lineEdit(), SIGNAL(editingFinished()), this, SLOT(updateCurrentSkyLanguage()));
+	connect(cb, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(selectSkyLanguage(const QString&)));
+
+
 
 	ui->groupBoxUpdates->setChecked(StelApp::getInstance().getSettings()->value("main/check_updates_enabled", true).toBool());
 	connect(ui->groupBoxUpdates, SIGNAL(toggled(bool)), this, SLOT(setUpdatesFlag(bool)));
@@ -331,12 +341,40 @@ void ConfigurationDialog::updateCurrentLanguage()
 		cb->setCurrentIndex(lt);
 }
 
+void ConfigurationDialog::updateCurrentSkyLanguage()
+{
+	QComboBox* cb = ui->skycultureLanguageComboBox;
+	QString skyLang = StelApp::getInstance().getLocaleMgr().getSkyLanguage();
+	QString l2 = StelTranslator::iso639_1CodeToNativeName(skyLang);
+
+	if (cb->currentText() == l2)
+		return;
+
+	int lt = cb->findText(l2, Qt::MatchExactly);
+	if (lt == -1 && skyLang.contains('_'))
+	{
+		l2 = skyLang.left(skyLang.indexOf('_'));
+		l2=StelTranslator::iso639_1CodeToNativeName(l2);
+		lt = cb->findText(l2, Qt::MatchExactly);
+	}
+	if (lt!=-1)
+		cb->setCurrentIndex(lt);
+}
+
 void ConfigurationDialog::selectLanguage(const QString& langName)
 {
 	QString code = StelTranslator::nativeNameToIso639_1Code(langName);
 	StelApp::getInstance().getLocaleMgr().setAppLanguage(code);
-	StelApp::getInstance().getLocaleMgr().setSkyLanguage(code);
+//	StelApp::getInstance().getLocaleMgr().setSkyLanguage(code);
 	StelMainView::getInstance().initTitleI18n();
+}
+
+void ConfigurationDialog::selectSkyLanguage(const QString& langName)
+{
+	QString code = StelTranslator::nativeNameToIso639_1Code(langName);
+//	StelApp::getInstance().getLocaleMgr().setAppLanguage(code);
+	StelApp::getInstance().getLocaleMgr().setSkyLanguage(code);
+//	StelMainView::getInstance().initTitleI18n();
 }
 
 void ConfigurationDialog::setStartupTimeMode()
