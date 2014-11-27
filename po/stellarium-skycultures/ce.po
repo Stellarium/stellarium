@@ -7,15 +7,441 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-11-23 19:56+0600\n"
+"POT-Creation-Date: 2014-11-27 11:30+0600\n"
 "PO-Revision-Date: 2012-05-08 17:12+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Chechen <ce@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-11-24 05:39+0000\n"
-"X-Generator: Launchpad (build 17252)\n"
+"X-Launchpad-Export-Date: 2014-11-27 06:19+0000\n"
+"X-Generator: Launchpad (build 17261)\n"
+
+#: src/translations_skycultures.h:35
+#: skycultures/korean/constellation_names.eng.fab:30
+msgid "Sun"
+msgstr ""
+
+#: src/translations_skycultures.h:36
+msgid "Mercury"
+msgstr ""
+
+#: src/translations_skycultures.h:37
+msgid "Venus"
+msgstr ""
+
+#: src/translations_skycultures.h:38
+msgid "Earth"
+msgstr ""
+
+#: src/translations_skycultures.h:39
+#: skycultures/korean/constellation_names.eng.fab:125
+msgid "Moon"
+msgstr ""
+
+#: src/translations_skycultures.h:40
+msgid "Mars"
+msgstr ""
+
+#: src/translations_skycultures.h:41
+msgid "Deimos"
+msgstr ""
+
+#: src/translations_skycultures.h:42
+msgid "Phobos"
+msgstr ""
+
+#: src/translations_skycultures.h:43
+msgid "Ceres"
+msgstr ""
+
+#: src/translations_skycultures.h:44
+msgid "Pallas"
+msgstr ""
+
+#: src/translations_skycultures.h:45
+msgid "Juno"
+msgstr ""
+
+#: src/translations_skycultures.h:46
+msgid "Vesta"
+msgstr ""
+
+#: src/translations_skycultures.h:47
+msgid "Jupiter"
+msgstr ""
+
+#: src/translations_skycultures.h:48
+msgid "Io"
+msgstr ""
+
+#: src/translations_skycultures.h:49
+msgid "Europa"
+msgstr ""
+
+#: src/translations_skycultures.h:50
+msgid "Ganymede"
+msgstr ""
+
+#: src/translations_skycultures.h:51
+msgid "Callisto"
+msgstr ""
+
+#: src/translations_skycultures.h:52
+msgid "Amalthea"
+msgstr ""
+
+#: src/translations_skycultures.h:53
+msgid "Himalia"
+msgstr ""
+
+#: src/translations_skycultures.h:54
+msgid "Elara"
+msgstr ""
+
+#: src/translations_skycultures.h:55
+msgid "Pasiphae"
+msgstr ""
+
+#: src/translations_skycultures.h:56
+msgid "Sinope"
+msgstr ""
+
+#: src/translations_skycultures.h:57
+msgid "Lysithea"
+msgstr ""
+
+#: src/translations_skycultures.h:58
+msgid "Carme"
+msgstr ""
+
+#: src/translations_skycultures.h:59
+msgid "Ananke"
+msgstr ""
+
+#: src/translations_skycultures.h:60
+msgid "Leda"
+msgstr ""
+
+#: src/translations_skycultures.h:61
+msgid "Thebe"
+msgstr ""
+
+#: src/translations_skycultures.h:62
+msgid "Adrastea"
+msgstr ""
+
+#: src/translations_skycultures.h:63
+msgid "Metis"
+msgstr ""
+
+#: src/translations_skycultures.h:64
+msgid "Saturn"
+msgstr ""
+
+#: src/translations_skycultures.h:65
+msgid "Mimas"
+msgstr ""
+
+#: src/translations_skycultures.h:66
+msgid "Enceladus"
+msgstr ""
+
+#: src/translations_skycultures.h:67
+msgid "Tethys"
+msgstr ""
+
+#: src/translations_skycultures.h:68
+msgid "Dione"
+msgstr ""
+
+#: src/translations_skycultures.h:69
+msgid "Rhea"
+msgstr ""
+
+#: src/translations_skycultures.h:70
+msgid "Titan"
+msgstr ""
+
+#: src/translations_skycultures.h:71
+msgid "Hyperion"
+msgstr ""
+
+#: src/translations_skycultures.h:72
+msgid "Iapetus"
+msgstr ""
+
+#: src/translations_skycultures.h:73
+msgid "Phoebe"
+msgstr ""
+
+#: src/translations_skycultures.h:74
+msgid "Neptune"
+msgstr ""
+
+#: src/translations_skycultures.h:75
+msgid "Uranus"
+msgstr ""
+
+#: src/translations_skycultures.h:76
+msgid "Miranda"
+msgstr ""
+
+#: src/translations_skycultures.h:77
+msgid "Ariel"
+msgstr ""
+
+#: src/translations_skycultures.h:78
+msgid "Umbriel"
+msgstr ""
+
+#: src/translations_skycultures.h:79
+msgid "Titania"
+msgstr ""
+
+#: src/translations_skycultures.h:80
+msgid "Oberon"
+msgstr ""
+
+#: src/translations_skycultures.h:81
+msgid "Pluto"
+msgstr ""
+
+#: src/translations_skycultures.h:82
+msgid "Charon"
+msgstr ""
+
+#. TRANSLATORS: Moon of Pluto (II)
+#: src/translations_skycultures.h:84
+msgid "Nix"
+msgstr ""
+
+#. TRANSLATORS: Moon of Pluto (III)
+#: src/translations_skycultures.h:86
+msgid "Hydra (moon)"
+msgstr ""
+
+#: src/translations_skycultures.h:87
+msgid "Eris"
+msgstr ""
+
+#: src/translations_skycultures.h:88
+msgid "Triton"
+msgstr ""
+
+#: src/translations_skycultures.h:89
+msgid "Nereid"
+msgstr ""
+
+#: src/translations_skycultures.h:90
+msgid "Naiad"
+msgstr ""
+
+#: src/translations_skycultures.h:91
+msgid "Thalassa"
+msgstr ""
+
+#: src/translations_skycultures.h:92
+msgid "Despina"
+msgstr ""
+
+#: src/translations_skycultures.h:93
+msgid "Galatea"
+msgstr ""
+
+#: src/translations_skycultures.h:94
+msgid "Larissa"
+msgstr ""
+
+#: src/translations_skycultures.h:95
+msgid "Proteus"
+msgstr ""
+
+#: src/translations_skycultures.h:96
+msgid "Halimede"
+msgstr ""
+
+#: src/translations_skycultures.h:97
+msgid "Psamathe"
+msgstr ""
+
+#: src/translations_skycultures.h:98
+msgid "Sao"
+msgstr ""
+
+#: src/translations_skycultures.h:99
+msgid "Laomedeia"
+msgstr ""
+
+#: src/translations_skycultures.h:100
+msgid "Neso"
+msgstr ""
+
+#: src/translations_skycultures.h:101
+msgid "Solar System Observer"
+msgstr ""
+
+#. TRANSLATORS: TNO/Asteroid (90377) Sedna
+#: src/translations_skycultures.h:105
+msgid "Sedna"
+msgstr ""
+
+#. TRANSLATORS: TNO/Asteroid (50000) Quaoar
+#: src/translations_skycultures.h:107
+msgid "Quaoar"
+msgstr ""
+
+#. TRANSLATORS: TNO/Asteroid (90482) Orcus
+#: src/translations_skycultures.h:109
+msgid "Orcus"
+msgstr ""
+
+#. TRANSLATORS: TNO/Asteroid (136108) Haumea
+#: src/translations_skycultures.h:111
+msgid "Haumea"
+msgstr ""
+
+#. TRANSLATORS: Asteroid (5) Astraea
+#: src/translations_skycultures.h:115
+msgid "Astraea"
+msgstr ""
+
+#. TRANSLATORS: Asteroid (6) Hebe
+#: src/translations_skycultures.h:117
+msgid "Hebe"
+msgstr ""
+
+#. TRANSLATORS: Asteroid (7) Iris
+#: src/translations_skycultures.h:119
+msgid "Iris"
+msgstr ""
+
+#. TRANSLATORS: Asteroid (8) Flora
+#: src/translations_skycultures.h:121
+msgid "Flora"
+msgstr ""
+
+#. TRANSLATORS: Asteroid (9) Metis
+#: src/translations_skycultures.h:123
+msgid "Metis (asteroid)"
+msgstr ""
+
+#. TRANSLATORS: Asteroid (10) Hygiea
+#: src/translations_skycultures.h:125
+msgid "Hygiea"
+msgstr ""
+
+#. TRANSLATORS: Asteroid (41) Daphne
+#: src/translations_skycultures.h:127
+msgid "Daphne"
+msgstr ""
+
+#. TRANSLATORS: Asteroid (1221) Amor
+#: src/translations_skycultures.h:129
+msgid "Amor"
+msgstr ""
+
+#. TRANSLATORS: Asteroid (99942) Apophis
+#: src/translations_skycultures.h:131
+msgid "Apophis"
+msgstr ""
+
+#. TRANSLATORS: Asteroid (2060) Chiron
+#: src/translations_skycultures.h:133
+msgid "Chiron"
+msgstr ""
+
+#. TRANSLATORS: Asteroid (433) Eros
+#: src/translations_skycultures.h:135
+msgid "Eros"
+msgstr ""
+
+#. TRANSLATORS: Asteroid (624) Hektor
+#: src/translations_skycultures.h:137
+msgid "Hektor"
+msgstr ""
+
+#. TRANSLATORS: Asteroid (20000) Varuna
+#: src/translations_skycultures.h:139
+msgid "Varuna"
+msgstr ""
+
+#. TRANSLATORS: Asteroid (136472) Makemake
+#: src/translations_skycultures.h:141
+msgid "Makemake"
+msgstr ""
+
+#. TRANSLATORS: Asteroid (3200) Phaethon
+#: src/translations_skycultures.h:143
+msgid "Phaethon"
+msgstr ""
+
+#. TRANSLATORS: Asteroid (1866) Sisyphus
+#: src/translations_skycultures.h:145
+msgid "Sisyphus"
+msgstr ""
+
+#. TRANSLATORS: Asteroid (1864) Daedalus
+#: src/translations_skycultures.h:147
+msgid "Daedalus"
+msgstr ""
+
+#. TRANSLATORS: Asteroid (1566) Icarus
+#: src/translations_skycultures.h:149
+msgid "Icarus"
+msgstr ""
+
+#. TRANSLATORS: Asteroid (1809) Prometheus
+#: src/translations_skycultures.h:151
+msgid "Prometheus"
+msgstr ""
+
+#: src/translations_skycultures.h:152
+msgid "Prometheus (moon)"
+msgstr ""
+
+#. TRANSLATORS: Asteroid (1810) Epimetheus
+#: src/translations_skycultures.h:154
+msgid "Epimetheus"
+msgstr ""
+
+#: src/translations_skycultures.h:155
+msgid "Epimetheus (moon)"
+msgstr ""
+
+#. TRANSLATORS: Asteroid (951) Gaspra
+#: src/translations_skycultures.h:157
+msgid "Gaspra"
+msgstr ""
+
+#. TRANSLATORS: Asteroid (243) Ida
+#: src/translations_skycultures.h:159
+msgid "Ida"
+msgstr ""
+
+#. TRANSLATORS: Asteroid (218) Bianca
+#: src/translations_skycultures.h:161
+msgid "Bianca"
+msgstr ""
+
+#: src/translations_skycultures.h:162
+msgid "Bianca (moon)"
+msgstr ""
+
+#. TRANSLATORS: Proper name of comet C/1680 V1
+#: src/translations_skycultures.h:165
+msgid "Great Comet of 1680 (C/1680 V1)"
+msgstr ""
+
+#. TRANSLATORS: Name of supernova SN 1572A
+#: src/translations_skycultures.h:169
+msgid "Tycho's Supernova"
+msgstr ""
+
+#. TRANSLATORS: Name of supernova SN 1604A
+#: src/translations_skycultures.h:171
+msgid "Kepler's Supernova"
+msgstr ""
 
 #: nebulae/default/ngc2000names.dat:218
 msgid "47 Tuc"
@@ -218,6 +644,7 @@ msgid "Maia nebula"
 msgstr ""
 
 #: nebulae/default/ngc2000names.dat:280
+#: skycultures/western_rey/star_names.fab:26
 msgid "Pleiades"
 msgstr ""
 
@@ -773,6 +1200,7 @@ msgstr ""
 
 #: skycultures/arabic/constellation_names.eng.fab:15
 #: skycultures/western/constellation_names.eng.fab:6
+#: skycultures/western_rey/constellation_names.eng.fab:140
 msgid "Cetus"
 msgstr ""
 
@@ -2040,6 +2468,22 @@ msgstr ""
 msgid "Unurgunite"
 msgstr ""
 
+#: skycultures/boorong/planet_names.fab:1
+msgid "Day"
+msgstr ""
+
+#: skycultures/boorong/planet_names.fab:2
+msgid "Quoll"
+msgstr ""
+
+#: skycultures/boorong/planet_names.fab:3
+msgid "Elder sister"
+msgstr ""
+
+#: skycultures/boorong/planet_names.fab:4
+msgid "Sulphur-crested white cockatoo"
+msgstr ""
+
 #: skycultures/chinese/constellation_names.eng.fab:1
 #: skycultures/korean/constellation_names.eng.fab:219
 msgid "Northern Dipper"
@@ -3147,10 +3591,6 @@ msgstr ""
 msgid "Chamberlain"
 msgstr ""
 
-#: skycultures/korean/constellation_names.eng.fab:30
-msgid "Sun"
-msgstr ""
-
 #: skycultures/korean/constellation_names.eng.fab:31
 msgid "West Road"
 msgstr ""
@@ -3503,10 +3943,6 @@ msgstr ""
 
 #: skycultures/korean/constellation_names.eng.fab:124
 msgid "Ear and Eye of"
-msgstr ""
-
-#: skycultures/korean/constellation_names.eng.fab:125
-msgid "Moon"
 msgstr ""
 
 #: skycultures/korean/constellation_names.eng.fab:126
@@ -4479,6 +4915,50 @@ msgstr ""
 msgid "1.Rat / 8.Sheep/Goat"
 msgstr ""
 
+#: skycultures/mongolian/planet_names.fab:1
+msgid "Nar"
+msgstr ""
+
+#: skycultures/mongolian/planet_names.fab:2
+msgid "Sar"
+msgstr ""
+
+#: skycultures/mongolian/planet_names.fab:3
+msgid "Bud"
+msgstr ""
+
+#: skycultures/mongolian/planet_names.fab:4
+msgid "Sugar"
+msgstr ""
+
+#: skycultures/mongolian/planet_names.fab:5
+msgid "Delkhii"
+msgstr ""
+
+#: skycultures/mongolian/planet_names.fab:6
+msgid "Angarag"
+msgstr ""
+
+#: skycultures/mongolian/planet_names.fab:7
+msgid "Barhasbadi"
+msgstr ""
+
+#: skycultures/mongolian/planet_names.fab:8
+msgid "Sanchir"
+msgstr ""
+
+#: skycultures/mongolian/planet_names.fab:9
+msgid "Tengeriin-van"
+msgstr ""
+
+#: skycultures/mongolian/planet_names.fab:10
+msgid "Dalai-van"
+msgstr ""
+
+#: skycultures/mongolian/planet_names.fab:11
+msgid "Dalkhii-van"
+msgstr ""
+
 #: skycultures/navajo/constellation_names.eng.fab:1
 msgid "Revolving Male"
 msgstr ""
@@ -4547,43 +5027,43 @@ msgstr ""
 msgid "South Star"
 msgstr ""
 
-#: skycultures/polynesian/constellation_names.eng.fab:1
+#: skycultures/polynesian/constellation_names.eng.fab:2
 msgid "Bailer"
 msgstr ""
 
-#: skycultures/polynesian/constellation_names.eng.fab:2
+#: skycultures/polynesian/constellation_names.eng.fab:3
 msgid "Cat's Cradle"
 msgstr ""
 
-#: skycultures/polynesian/constellation_names.eng.fab:3
+#: skycultures/polynesian/constellation_names.eng.fab:4
 msgid "Voice of Joy"
 msgstr ""
 
-#: skycultures/polynesian/constellation_names.eng.fab:4
+#: skycultures/polynesian/constellation_names.eng.fab:5
 msgid "The Seven"
 msgstr ""
 
-#: skycultures/polynesian/constellation_names.eng.fab:5
+#: skycultures/polynesian/constellation_names.eng.fab:6
 msgid "Maui's Fishhook"
 msgstr ""
 
-#: skycultures/polynesian/constellation_names.eng.fab:6
+#: skycultures/polynesian/constellation_names.eng.fab:7
 msgid "Navigator's Triangle"
 msgstr ""
 
-#: skycultures/polynesian/constellation_names.eng.fab:7
+#: skycultures/polynesian/constellation_names.eng.fab:8
 msgid "Kite of Kawelo"
 msgstr ""
 
-#: skycultures/polynesian/constellation_names.eng.fab:8
+#: skycultures/polynesian/constellation_names.eng.fab:9
 msgid "Frigate Bird"
 msgstr ""
 
-#: skycultures/polynesian/constellation_names.eng.fab:9
+#: skycultures/polynesian/constellation_names.eng.fab:10
 msgid "Cared for by Moon"
 msgstr ""
 
-#: skycultures/polynesian/constellation_names.eng.fab:10
+#: skycultures/polynesian/constellation_names.eng.fab:11
 msgid "Dolphin"
 msgstr ""
 
@@ -4879,6 +5359,7 @@ msgstr ""
 
 #: skycultures/romanian/star_names.fab:11
 #: skycultures/western/star_names.fab:16
+#: skycultures/western_rey/star_names.fab:53
 msgid "Achernar"
 msgstr ""
 
@@ -4918,6 +5399,7 @@ msgstr ""
 
 #: skycultures/romanian/star_names.fab:19
 #: skycultures/western/star_names.fab:26
+#: skycultures/western_rey/star_names.fab:48
 msgid "Mira"
 msgstr ""
 
@@ -4942,6 +5424,7 @@ msgstr ""
 
 #: skycultures/romanian/star_names.fab:24
 #: skycultures/western/star_names.fab:36
+#: skycultures/western_rey/star_names.fab:24
 msgid "Algol"
 msgstr ""
 
@@ -5051,11 +5534,13 @@ msgstr ""
 
 #: skycultures/romanian/star_names.fab:46
 #: skycultures/western/star_names.fab:72
+#: skycultures/western_rey/star_names.fab:35
 msgid "Rigel"
 msgstr ""
 
 #: skycultures/romanian/star_names.fab:47
 #: skycultures/western/star_names.fab:73
+#: skycultures/western_rey/star_names.fab:31
 msgid "Capella"
 msgstr ""
 
@@ -5116,6 +5601,7 @@ msgstr ""
 
 #: skycultures/romanian/star_names.fab:59
 #: skycultures/western/star_names.fab:88
+#: skycultures/western_rey/star_names.fab:34
 msgid "Betelgeuse"
 msgstr ""
 
@@ -5146,6 +5632,7 @@ msgstr ""
 
 #: skycultures/romanian/star_names.fab:66
 #: skycultures/western/star_names.fab:97
+#: skycultures/western_rey/star_names.fab:52
 msgid "Canopus"
 msgstr ""
 
@@ -5215,6 +5702,7 @@ msgstr ""
 
 #: skycultures/romanian/star_names.fab:80
 #: skycultures/western/star_names.fab:115
+#: skycultures/western_rey/star_names.fab:32
 msgid "Procyon"
 msgstr ""
 
@@ -5284,6 +5772,7 @@ msgstr ""
 
 #: skycultures/romanian/star_names.fab:94
 #: skycultures/western/star_names.fab:134
+#: skycultures/western_rey/star_names.fab:38
 msgid "Alphard"
 msgstr ""
 
@@ -5304,6 +5793,7 @@ msgstr ""
 
 #: skycultures/romanian/star_names.fab:98
 #: skycultures/western/star_names.fab:140
+#: skycultures/western_rey/star_names.fab:12
 msgid "Regulus"
 msgstr ""
 
@@ -5369,6 +5859,7 @@ msgstr ""
 
 #: skycultures/romanian/star_names.fab:111
 #: skycultures/western/star_names.fab:159
+#: skycultures/western_rey/star_names.fab:13
 msgid "Denebola"
 msgstr ""
 
@@ -5406,6 +5897,7 @@ msgstr ""
 
 #: skycultures/romanian/star_names.fab:118
 #: skycultures/western/star_names.fab:167
+#: skycultures/western_rey/star_names.fab:55
 msgid "Acrux"
 msgstr ""
 
@@ -5441,6 +5933,7 @@ msgstr ""
 
 #: skycultures/romanian/star_names.fab:125
 #: skycultures/western/star_names.fab:177
+#: skycultures/western_rey/star_names.fab:14
 msgid "Cor Caroli"
 msgstr ""
 
@@ -5451,11 +5944,13 @@ msgstr ""
 
 #: skycultures/romanian/star_names.fab:127
 #: skycultures/western/star_names.fab:180
+#: skycultures/western_rey/star_names.fab:7
 msgid "Mizar"
 msgstr ""
 
 #: skycultures/romanian/star_names.fab:128
 #: skycultures/western/star_names.fab:181
+#: skycultures/western_rey/star_names.fab:40
 msgid "Spica"
 msgstr ""
 
@@ -5475,6 +5970,7 @@ msgstr ""
 
 #: skycultures/romanian/star_names.fab:133
 #: skycultures/western/star_names.fab:187
+#: skycultures/western_rey/star_names.fab:10
 msgid "Thuban"
 msgstr ""
 
@@ -5485,6 +5981,7 @@ msgstr ""
 
 #: skycultures/romanian/star_names.fab:135
 #: skycultures/western/star_names.fab:189
+#: skycultures/western_rey/star_names.fab:16
 msgid "Arcturus"
 msgstr ""
 
@@ -5604,6 +6101,7 @@ msgstr ""
 
 #: skycultures/romanian/star_names.fab:159
 #: skycultures/western/star_names.fab:229
+#: skycultures/western_rey/star_names.fab:42
 msgid "Antares"
 msgstr ""
 
@@ -5757,6 +6255,7 @@ msgstr ""
 
 #: skycultures/romanian/star_names.fab:190
 #: skycultures/western/star_names.fab:278
+#: skycultures/western_rey/star_names.fab:19
 msgid "Albireo"
 msgstr ""
 
@@ -5777,6 +6276,7 @@ msgstr ""
 
 #: skycultures/romanian/star_names.fab:194
 #: skycultures/western/star_names.fab:286
+#: skycultures/western_rey/star_names.fab:44
 msgid "Altair"
 msgstr ""
 
@@ -5817,6 +6317,7 @@ msgstr ""
 
 #: skycultures/romanian/star_names.fab:202
 #: skycultures/western/star_names.fab:301
+#: skycultures/western_rey/star_names.fab:20
 msgid "Deneb"
 msgstr ""
 
@@ -5937,6 +6438,7 @@ msgstr ""
 
 #: skycultures/romanian/star_names.fab:227
 #: skycultures/western/star_names.fab:334
+#: skycultures/western_rey/star_names.fab:46
 msgid "Fomalhaut"
 msgstr ""
 
@@ -6063,6 +6565,22 @@ msgstr ""
 msgid "Motuliki"
 msgstr ""
 
+#: skycultures/tongan/planet_names.fab:1
+msgid "La'a"
+msgstr ""
+
+#: skycultures/tongan/planet_names.fab:2
+msgid "Mahina"
+msgstr ""
+
+#: skycultures/tongan/planet_names.fab:3
+msgid "Tapukitea"
+msgstr ""
+
+#: skycultures/tongan/planet_names.fab:4
+msgid "Matamemea"
+msgstr ""
+
 #: skycultures/tupi/constellation_names.eng.fab:1
 msgid "White Ostrich"
 msgstr ""
@@ -6096,214 +6614,267 @@ msgid "Quira-Rupia"
 msgstr ""
 
 #: skycultures/western/constellation_names.eng.fab:1
+#: skycultures/western_rey/constellation_names.eng.fab:114
 msgid "Aquila"
 msgstr ""
 
 #: skycultures/western/constellation_names.eng.fab:2
+#: skycultures/western_rey/constellation_names.eng.fab:49
 msgid "Andromeda"
 msgstr ""
 
 #: skycultures/western/constellation_names.eng.fab:3
+#: skycultures/western_rey/constellation_names.eng.fab:142
 msgid "Sculptor"
 msgstr ""
 
 #: skycultures/western/constellation_names.eng.fab:4
+#: skycultures/western_rey/constellation_names.eng.fab:179
 msgid "Ara"
 msgstr ""
 
 #: skycultures/western/constellation_names.eng.fab:5
+#: skycultures/western_rey/constellation_names.eng.fab:91
 msgid "Libra"
 msgstr ""
 
 #: skycultures/western/constellation_names.eng.fab:7
+#: skycultures/western_rey/constellation_names.eng.fab:58
 msgid "Aries"
 msgstr ""
 
 #: skycultures/western/constellation_names.eng.fab:8
+#: skycultures/western_rey/constellation_names.eng.fab:145
 msgid "Pyxis"
 msgstr ""
 
 #: skycultures/western/constellation_names.eng.fab:9
+#: skycultures/western_rey/constellation_names.eng.fab:29
 msgid "Bootes"
 msgstr ""
 
 #: skycultures/western/constellation_names.eng.fab:10
+#: skycultures/western_rey/constellation_names.eng.fab:191
 msgid "Caelum"
 msgstr ""
 
 #: skycultures/western/constellation_names.eng.fab:11
+#: skycultures/western_rey/constellation_names.eng.fab:182
 msgid "Chamaeleon"
 msgstr ""
 
 #: skycultures/western/constellation_names.eng.fab:12
+#: skycultures/western_rey/constellation_names.eng.fab:71
 msgid "Cancer"
 msgstr ""
 
 #: skycultures/western/constellation_names.eng.fab:13
+#: skycultures/western_rey/constellation_names.eng.fab:132
 msgid "Capricornus"
 msgstr ""
 
 #: skycultures/western/constellation_names.eng.fab:14
+#: skycultures/western_rey/constellation_names.eng.fab:147
 msgid "Carina"
 msgstr ""
 
 #: skycultures/western/constellation_names.eng.fab:15
+#: skycultures/western_rey/constellation_names.eng.fab:15
 msgid "Cassiopeia"
 msgstr ""
 
 #: skycultures/western/constellation_names.eng.fab:16
+#: skycultures/western_rey/constellation_names.eng.fab:168
 msgid "Centaurus"
 msgstr ""
 
 #: skycultures/western/constellation_names.eng.fab:17
+#: skycultures/western_rey/constellation_names.eng.fab:16
 msgid "Cepheus"
 msgstr ""
 
 #: skycultures/western/constellation_names.eng.fab:18
+#: skycultures/western_rey/constellation_names.eng.fab:34
 msgid "Coma Berenices"
 msgstr ""
 
 #: skycultures/western/constellation_names.eng.fab:19
+#: skycultures/western_rey/constellation_names.eng.fab:26
 msgid "Canes Venatici"
 msgstr ""
 
 #: skycultures/western/constellation_names.eng.fab:20
+#: skycultures/western_rey/constellation_names.eng.fab:67
 msgid "Auriga"
 msgstr ""
 
 #: skycultures/western/constellation_names.eng.fab:21
+#: skycultures/western_rey/constellation_names.eng.fab:155
 msgid "Columba"
 msgstr ""
 
 #: skycultures/western/constellation_names.eng.fab:22
+#: skycultures/western_rey/constellation_names.eng.fab:177
 msgid "Circinus"
 msgstr ""
 
 #: skycultures/western/constellation_names.eng.fab:23
+#: skycultures/western_rey/constellation_names.eng.fab:84
 msgid "Crater"
 msgstr ""
 
 #: skycultures/western/constellation_names.eng.fab:24
+#: skycultures/western_rey/constellation_names.eng.fab:125
 msgid "Corona Australis"
 msgstr ""
 
 #: skycultures/western/constellation_names.eng.fab:25
+#: skycultures/western_rey/constellation_names.eng.fab:33
 msgid "Corona Borealis"
 msgstr ""
 
 #: skycultures/western/constellation_names.eng.fab:26
+#: skycultures/western_rey/constellation_names.eng.fab:92
 msgid "Corvus"
 msgstr ""
 
 #: skycultures/western/constellation_names.eng.fab:27
+#: skycultures/western_rey/constellation_names.eng.fab:175
 msgid "Crux"
 msgstr ""
 
 #: skycultures/western/constellation_names.eng.fab:28
+#: skycultures/western_rey/constellation_names.eng.fab:36
 msgid "Cygnus"
 msgstr ""
 
 #: skycultures/western/constellation_names.eng.fab:29
+#: skycultures/western_rey/constellation_names.eng.fab:113
 msgid "Delphinus"
 msgstr ""
 
 #: skycultures/western/constellation_names.eng.fab:30
+#: skycultures/western_rey/constellation_names.eng.fab:154
 msgid "Dorado"
 msgstr ""
 
 #: skycultures/western/constellation_names.eng.fab:31
+#: skycultures/western_rey/constellation_names.eng.fab:10
 msgid "Draco"
 msgstr ""
 
 #: skycultures/western/constellation_names.eng.fab:32
+#: skycultures/western_rey/constellation_names.eng.fab:176
 msgid "Norma"
 msgstr ""
 
 #: skycultures/western/constellation_names.eng.fab:33
+#: skycultures/western_rey/constellation_names.eng.fab:80
 msgid "Eridanus"
 msgstr ""
 
 #: skycultures/western/constellation_names.eng.fab:34
+#: skycultures/western_rey/constellation_names.eng.fab:112
 msgid "Sagitta"
 msgstr ""
 
 #: skycultures/western/constellation_names.eng.fab:35
+#: skycultures/western_rey/constellation_names.eng.fab:163
 msgid "Fornax"
 msgstr ""
 
 #: skycultures/western/constellation_names.eng.fab:36
+#: skycultures/western_rey/constellation_names.eng.fab:69
 msgid "Gemini"
 msgstr ""
 
 #: skycultures/western/constellation_names.eng.fab:37
+#: skycultures/western_rey/constellation_names.eng.fab:17
 msgid "Camelopardalis"
 msgstr ""
 
 #: skycultures/western/constellation_names.eng.fab:38
+#: skycultures/western_rey/constellation_names.eng.fab:79
 msgid "Canis Major"
 msgstr ""
 
 #: skycultures/western/constellation_names.eng.fab:39
+#: skycultures/western_rey/constellation_names.eng.fab:19
 msgid "Ursa Major"
 msgstr ""
 
 #: skycultures/western/constellation_names.eng.fab:40
+#: skycultures/western_rey/constellation_names.eng.fab:134
 msgid "Grus"
 msgstr ""
 
 #: skycultures/western/constellation_names.eng.fab:41
+#: skycultures/western_rey/constellation_names.eng.fab:43
 msgid "Hercules"
 msgstr ""
 
 #: skycultures/western/constellation_names.eng.fab:42
+#: skycultures/western_rey/constellation_names.eng.fab:162
 msgid "Horologium"
 msgstr ""
 
 #: skycultures/western/constellation_names.eng.fab:43
+#: skycultures/western_rey/constellation_names.eng.fab:82
 msgid "Hydra"
 msgstr ""
 
 #: skycultures/western/constellation_names.eng.fab:44
+#: skycultures/western_rey/constellation_names.eng.fab:159
 msgid "Hydrus"
 msgstr ""
 
 #: skycultures/western/constellation_names.eng.fab:45
+#: skycultures/western_rey/constellation_names.eng.fab:187
 msgid "Indus"
 msgstr ""
 
 #: skycultures/western/constellation_names.eng.fab:46
+#: skycultures/western_rey/constellation_names.eng.fab:47
 msgid "Lacerta"
 msgstr ""
 
 #: skycultures/western/constellation_names.eng.fab:47
+#: skycultures/western_rey/constellation_names.eng.fab:73
 msgid "Monoceros"
 msgstr ""
 
 #: skycultures/western/constellation_names.eng.fab:48
+#: skycultures/western_rey/constellation_names.eng.fab:78
 msgid "Lepus"
 msgstr ""
 
 #: skycultures/western/constellation_names.eng.fab:49
+#: skycultures/western_rey/constellation_names.eng.fab:23
 msgid "Leo"
 msgstr ""
 
 #: skycultures/western/constellation_names.eng.fab:50
+#: skycultures/western_rey/constellation_names.eng.fab:165
 msgid "Lupus"
 msgstr ""
 
 #: skycultures/western/constellation_names.eng.fab:51
+#: skycultures/western_rey/constellation_names.eng.fab:68
 msgid "Lynx"
 msgstr ""
 
 #: skycultures/western/constellation_names.eng.fab:52
+#: skycultures/western_rey/constellation_names.eng.fab:41
 msgid "Lyra"
 msgstr ""
 
 #: skycultures/western/constellation_names.eng.fab:53
+#: skycultures/western_rey/constellation_names.eng.fab:85
 msgid "Antlia"
 msgstr ""
 
 #: skycultures/western/constellation_names.eng.fab:54
+#: skycultures/western_rey/constellation_names.eng.fab:190
 msgid "Microscopium"
 msgstr ""
 
@@ -6312,50 +6883,62 @@ msgid "Musca"
 msgstr ""
 
 #: skycultures/western/constellation_names.eng.fab:56
+#: skycultures/western_rey/constellation_names.eng.fab:185
 msgid "Octans"
 msgstr ""
 
 #: skycultures/western/constellation_names.eng.fab:57
+#: skycultures/western_rey/constellation_names.eng.fab:181
 msgid "Apus"
 msgstr ""
 
 #: skycultures/western/constellation_names.eng.fab:58
+#: skycultures/western_rey/constellation_names.eng.fab:100
 msgid "Ophiuchus"
 msgstr ""
 
 #: skycultures/western/constellation_names.eng.fab:59
+#: skycultures/western_rey/constellation_names.eng.fab:74
 msgid "Orion"
 msgstr ""
 
 #: skycultures/western/constellation_names.eng.fab:60
+#: skycultures/western_rey/constellation_names.eng.fab:184
 msgid "Pavo"
 msgstr ""
 
 #: skycultures/western/constellation_names.eng.fab:61
+#: skycultures/western_rey/constellation_names.eng.fab:52
 msgid "Pegasus"
 msgstr ""
 
 #: skycultures/western/constellation_names.eng.fab:62
+#: skycultures/western_rey/constellation_names.eng.fab:160
 msgid "Pictor"
 msgstr ""
 
 #: skycultures/western/constellation_names.eng.fab:63
+#: skycultures/western_rey/constellation_names.eng.fab:57
 msgid "Perseus"
 msgstr ""
 
 #: skycultures/western/constellation_names.eng.fab:64
+#: skycultures/western_rey/constellation_names.eng.fab:127
 msgid "Equuleus"
 msgstr ""
 
 #: skycultures/western/constellation_names.eng.fab:65
+#: skycultures/western_rey/constellation_names.eng.fab:70
 msgid "Canis Minor"
 msgstr ""
 
 #: skycultures/western/constellation_names.eng.fab:66
+#: skycultures/western_rey/constellation_names.eng.fab:27
 msgid "Leo Minor"
 msgstr ""
 
 #: skycultures/western/constellation_names.eng.fab:67
+#: skycultures/western_rey/constellation_names.eng.fab:42
 msgid "Vulpecula"
 msgstr ""
 
@@ -6364,38 +6947,47 @@ msgid "Ursa Minor"
 msgstr ""
 
 #: skycultures/western/constellation_names.eng.fab:69
+#: skycultures/western_rey/constellation_names.eng.fab:135
 msgid "Phoenix"
 msgstr ""
 
 #: skycultures/western/constellation_names.eng.fab:70
+#: skycultures/western_rey/constellation_names.eng.fab:137
 msgid "Pisces"
 msgstr ""
 
 #: skycultures/western/constellation_names.eng.fab:71
+#: skycultures/western_rey/constellation_names.eng.fab:133
 msgid "Piscis Austrinus"
 msgstr ""
 
 #: skycultures/western/constellation_names.eng.fab:72
+#: skycultures/western_rey/constellation_names.eng.fab:151
 msgid "Volans"
 msgstr ""
 
 #: skycultures/western/constellation_names.eng.fab:73
+#: skycultures/western_rey/constellation_names.eng.fab:149
 msgid "Puppis"
 msgstr ""
 
 #: skycultures/western/constellation_names.eng.fab:74
+#: skycultures/western_rey/constellation_names.eng.fab:161
 msgid "Reticulum"
 msgstr ""
 
 #: skycultures/western/constellation_names.eng.fab:75
+#: skycultures/western_rey/constellation_names.eng.fab:120
 msgid "Sagittarius"
 msgstr ""
 
 #: skycultures/western/constellation_names.eng.fab:76
+#: skycultures/western_rey/constellation_names.eng.fab:107
 msgid "Scorpius"
 msgstr ""
 
 #: skycultures/western/constellation_names.eng.fab:77
+#: skycultures/western_rey/constellation_names.eng.fab:119
 msgid "Scutum"
 msgstr ""
 
@@ -6404,42 +6996,52 @@ msgid "Serpens"
 msgstr ""
 
 #: skycultures/western/constellation_names.eng.fab:79
+#: skycultures/western_rey/constellation_names.eng.fab:193
 msgid "Sextans"
 msgstr ""
 
 #: skycultures/western/constellation_names.eng.fab:80
+#: skycultures/western_rey/constellation_names.eng.fab:192
 msgid "Mensa"
 msgstr ""
 
 #: skycultures/western/constellation_names.eng.fab:81
+#: skycultures/western_rey/constellation_names.eng.fab:61
 msgid "Taurus"
 msgstr ""
 
 #: skycultures/western/constellation_names.eng.fab:82
+#: skycultures/western_rey/constellation_names.eng.fab:188
 msgid "Telescopium"
 msgstr ""
 
 #: skycultures/western/constellation_names.eng.fab:83
+#: skycultures/western_rey/constellation_names.eng.fab:186
 msgid "Tucana"
 msgstr ""
 
 #: skycultures/western/constellation_names.eng.fab:84
+#: skycultures/western_rey/constellation_names.eng.fab:48
 msgid "Triangulum"
 msgstr ""
 
 #: skycultures/western/constellation_names.eng.fab:85
+#: skycultures/western_rey/constellation_names.eng.fab:178
 msgid "Triangulum Australe"
 msgstr ""
 
 #: skycultures/western/constellation_names.eng.fab:86
+#: skycultures/western_rey/constellation_names.eng.fab:128
 msgid "Aquarius"
 msgstr ""
 
 #: skycultures/western/constellation_names.eng.fab:87
+#: skycultures/western_rey/constellation_names.eng.fab:88
 msgid "Virgo"
 msgstr ""
 
 #: skycultures/western/constellation_names.eng.fab:88
+#: skycultures/western_rey/constellation_names.eng.fab:144
 msgid "Vela"
 msgstr ""
 
@@ -6532,6 +7134,7 @@ msgid "Theemim"
 msgstr ""
 
 #: skycultures/western/star_names.fab:62
+#: skycultures/western_rey/star_names.fab:27
 msgid "Aldebaran"
 msgstr ""
 
@@ -6592,6 +7195,7 @@ msgid "Plaskett's star"
 msgstr ""
 
 #: skycultures/western/star_names.fab:101
+#: skycultures/western_rey/star_names.fab:36
 msgid "Sirius"
 msgstr ""
 
@@ -6604,6 +7208,7 @@ msgid "Tureis"
 msgstr ""
 
 #: skycultures/western/star_names.fab:113
+#: skycultures/western_rey/star_names.fab:29
 msgid "Castor"
 msgstr ""
 
@@ -6612,6 +7217,7 @@ msgid "Markeb"
 msgstr ""
 
 #: skycultures/western/star_names.fab:116
+#: skycultures/western_rey/star_names.fab:30
 msgid "Pollux"
 msgstr ""
 
@@ -6688,6 +7294,7 @@ msgid "Diadem"
 msgstr ""
 
 #: skycultures/western/star_names.fab:182
+#: skycultures/western_rey/star_names.fab:8
 msgid "Alcor"
 msgstr ""
 
@@ -6716,6 +7323,7 @@ msgid "Rijl al Awwa"
 msgstr ""
 
 #: skycultures/western/star_names.fab:202
+#: skycultures/western_rey/star_names.fab:6
 msgid "Kochab"
 msgstr ""
 
@@ -6812,6 +7420,7 @@ msgid "Alathfar"
 msgstr ""
 
 #: skycultures/western/star_names.fab:262
+#: skycultures/western_rey/star_names.fab:21
 msgid "Vega"
 msgstr ""
 
@@ -6921,4 +7530,237 @@ msgstr ""
 
 #: skycultures/western/star_names.fab:336
 msgid "Fum al Samakah"
+msgstr ""
+
+#: skycultures/western_rey/constellation_names.eng.fab:6
+msgid "Big Dipper"
+msgstr ""
+
+#: skycultures/western_rey/constellation_names.eng.fab:7
+msgid "Pointers"
+msgstr ""
+
+#: skycultures/western_rey/constellation_names.eng.fab:8
+msgid "Little Dipper"
+msgstr ""
+
+#: skycultures/western_rey/constellation_names.eng.fab:9
+msgid "Guardians"
+msgstr ""
+
+#: skycultures/western_rey/constellation_names.eng.fab:11
+#: skycultures/western_rey/constellation_names.eng.fab:39
+#: skycultures/western_rey/constellation_names.eng.fab:90
+msgid "feet"
+msgstr ""
+
+#: skycultures/western_rey/constellation_names.eng.fab:12
+#: skycultures/western_rey/constellation_names.eng.fab:20
+#: skycultures/western_rey/constellation_names.eng.fab:24
+#: skycultures/western_rey/constellation_names.eng.fab:31
+#: skycultures/western_rey/constellation_names.eng.fab:53
+#: skycultures/western_rey/constellation_names.eng.fab:59
+#: skycultures/western_rey/constellation_names.eng.fab:62
+#: skycultures/western_rey/constellation_names.eng.fab:89
+#: skycultures/western_rey/constellation_names.eng.fab:99
+#: skycultures/western_rey/constellation_names.eng.fab:102
+#: skycultures/western_rey/constellation_names.eng.fab:115
+#: skycultures/western_rey/constellation_names.eng.fab:121
+#: skycultures/western_rey/constellation_names.eng.fab:129
+#: skycultures/western_rey/constellation_names.eng.fab:156
+#: skycultures/western_rey/constellation_names.eng.fab:169
+msgid "head"
+msgstr ""
+
+#: skycultures/western_rey/constellation_names.eng.fab:13
+#: skycultures/western_rey/constellation_names.eng.fab:25
+#: skycultures/western_rey/constellation_names.eng.fab:54
+#: skycultures/western_rey/constellation_names.eng.fab:60
+#: skycultures/western_rey/constellation_names.eng.fab:65
+#: skycultures/western_rey/constellation_names.eng.fab:95
+#: skycultures/western_rey/constellation_names.eng.fab:109
+#: skycultures/western_rey/constellation_names.eng.fab:118
+#: skycultures/western_rey/constellation_names.eng.fab:141
+#: skycultures/western_rey/constellation_names.eng.fab:157
+#: skycultures/western_rey/constellation_names.eng.fab:166
+msgid "tail"
+msgstr ""
+
+#: skycultures/western_rey/constellation_names.eng.fab:21
+#: skycultures/western_rey/constellation_names.eng.fab:22
+msgid "paws"
+msgstr ""
+
+#: skycultures/western_rey/constellation_names.eng.fab:30
+#: skycultures/western_rey/constellation_names.eng.fab:101
+#: skycultures/western_rey/constellation_names.eng.fab:122
+#: skycultures/western_rey/constellation_names.eng.fab:172
+msgid "body"
+msgstr ""
+
+#: skycultures/western_rey/constellation_names.eng.fab:32
+msgid "pipe"
+msgstr ""
+
+#: skycultures/western_rey/constellation_names.eng.fab:37
+#: skycultures/western_rey/constellation_names.eng.fab:38
+#: skycultures/western_rey/constellation_names.eng.fab:55
+#: skycultures/western_rey/constellation_names.eng.fab:116
+#: skycultures/western_rey/constellation_names.eng.fab:117
+#: skycultures/western_rey/constellation_names.eng.fab:152
+#: skycultures/western_rey/constellation_names.eng.fab:153
+#: skycultures/western_rey/constellation_names.eng.fab:158
+msgid "wing"
+msgstr ""
+
+#: skycultures/western_rey/constellation_names.eng.fab:40
+msgid "outstretched neck"
+msgstr ""
+
+#: skycultures/western_rey/constellation_names.eng.fab:44
+#: skycultures/western_rey/constellation_names.eng.fab:76
+msgid "club"
+msgstr ""
+
+#: skycultures/western_rey/constellation_names.eng.fab:45
+msgid "Keystone"
+msgstr ""
+
+#: skycultures/western_rey/constellation_names.eng.fab:50
+msgid "the chain"
+msgstr ""
+
+#: skycultures/western_rey/constellation_names.eng.fab:51
+msgid "Great Square"
+msgstr ""
+
+#: skycultures/western_rey/constellation_names.eng.fab:63
+#: skycultures/western_rey/constellation_names.eng.fab:64
+msgid "horn"
+msgstr ""
+
+#: skycultures/western_rey/constellation_names.eng.fab:75
+msgid "belt"
+msgstr ""
+
+#: skycultures/western_rey/constellation_names.eng.fab:77
+msgid "shield"
+msgstr ""
+
+#: skycultures/western_rey/constellation_names.eng.fab:83
+msgid "Hydra's head"
+msgstr ""
+
+#: skycultures/western_rey/constellation_names.eng.fab:87
+msgid "Hydra's tail"
+msgstr ""
+
+#: skycultures/western_rey/constellation_names.eng.fab:93
+msgid "bill"
+msgstr ""
+
+#: skycultures/western_rey/constellation_names.eng.fab:94
+#: skycultures/western_rey/constellation_names.eng.fab:105
+#: skycultures/western_rey/constellation_names.eng.fab:106
+msgid "foot"
+msgstr ""
+
+#: skycultures/western_rey/constellation_names.eng.fab:97
+msgid "Serpens Cauda"
+msgstr ""
+
+#: skycultures/western_rey/constellation_names.eng.fab:98
+msgid "Serpens Caput"
+msgstr ""
+
+#: skycultures/western_rey/constellation_names.eng.fab:103
+#: skycultures/western_rey/constellation_names.eng.fab:104
+#: skycultures/western_rey/constellation_names.eng.fab:130
+#: skycultures/western_rey/constellation_names.eng.fab:170
+#: skycultures/western_rey/constellation_names.eng.fab:171
+msgid "arm"
+msgstr ""
+
+#: skycultures/western_rey/constellation_names.eng.fab:108
+msgid "claws"
+msgstr ""
+
+#: skycultures/western_rey/constellation_names.eng.fab:110
+msgid "cat's eyes"
+msgstr ""
+
+#: skycultures/western_rey/constellation_names.eng.fab:123
+msgid "skirt"
+msgstr ""
+
+#: skycultures/western_rey/constellation_names.eng.fab:124
+msgid "the bow"
+msgstr ""
+
+#: skycultures/western_rey/constellation_names.eng.fab:131
+msgid "vessel"
+msgstr ""
+
+#: skycultures/western_rey/constellation_names.eng.fab:138
+msgid "Northern Fish"
+msgstr ""
+
+#: skycultures/western_rey/constellation_names.eng.fab:139
+msgid "Circlet"
+msgstr ""
+
+#: skycultures/western_rey/constellation_names.eng.fab:146
+msgid "False Cross"
+msgstr ""
+
+#: skycultures/western_rey/constellation_names.eng.fab:148
+msgid "figurehead"
+msgstr ""
+
+#: skycultures/western_rey/constellation_names.eng.fab:150
+msgid "transom"
+msgstr ""
+
+#: skycultures/western_rey/constellation_names.eng.fab:167
+msgid "ears"
+msgstr ""
+
+#: skycultures/western_rey/constellation_names.eng.fab:173
+msgid "front legs"
+msgstr ""
+
+#: skycultures/western_rey/constellation_names.eng.fab:174
+msgid "hind legs"
+msgstr ""
+
+#: skycultures/western_rey/constellation_names.eng.fab:180
+msgid "Fly"
+msgstr ""
+
+#: skycultures/western_rey/constellation_names.eng.fab:183
+msgid "eyes"
+msgstr ""
+
+#: skycultures/western_rey/star_names.fab:5
+msgid "Pole Star"
+msgstr ""
+
+#: skycultures/western_rey/star_names.fab:17
+msgid "Gemma"
+msgstr ""
+
+#: skycultures/western_rey/star_names.fab:49
+msgid "Tau Ceti"
+msgstr ""
+
+#: skycultures/western_rey/star_names.fab:50
+msgid "Knot"
+msgstr ""
+
+#: skycultures/western_rey/star_names.fab:56
+msgid "Alpha Centauri"
+msgstr ""
+
+#: skycultures/western_rey/star_names.fab:57
+msgid "Beta Centauri"
 msgstr ""
