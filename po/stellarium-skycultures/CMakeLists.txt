@@ -11,11 +11,12 @@ IF(${XGETTEXT_FOUND})
 			--keyword=_
 			--keyword=N_
 			-C
+			--language=Perl
 			--add-comments=TRANSLATORS:
 			--directory=${PROJECT_SOURCE_DIR}
 			--files-from=POTFILES.in
 			--copyright-holder=Stellarium's\ team
-		--from-code=utf-8
+			--from-code=utf-8
 		WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
 		COMMENT "Generating stellarium-skycultures.pot"
 		VERBATIM
