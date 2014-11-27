@@ -11,7 +11,6 @@ IF(${XGETTEXT_FOUND})
 			--keyword=_
 			--keyword=N_
 			-C
-			--language=Perl
 			--add-comments=TRANSLATORS:
 			--directory=${PROJECT_SOURCE_DIR}
 			--files-from=POTFILES.in
