@@ -1,0 +1,158 @@
+# This file contains translations for all translatable strings stored within data files
+# which relate to displayable celestial objects. These need a translation separate from the App translations.
+# Currently these are only names of solar system objects.
+# It is not meant to be compiled but just parsed by gettext
+
+#
+# Planets and satellites from ssystem.ini
+#
+_("Sun");
+_("Mercury");
+_("Venus");
+_("Earth");
+_("Moon");
+_("Mars");
+_("Deimos");
+_("Phobos");
+_("Ceres");
+_("Pallas");
+_("Juno");
+_("Vesta");
+_("Jupiter");
+_("Io");
+_("Europa");
+_("Ganymede");
+_("Callisto");
+_("Amalthea");
+_("Himalia");
+_("Elara");
+_("Pasiphae");
+_("Sinope");
+_("Lysithea");
+_("Carme");
+_("Ananke");
+_("Leda");
+_("Thebe");
+_("Adrastea");
+_("Saturn");
+_("Mimas");
+_("Enceladus");
+_("Tethys");
+_("Dione");
+_("Rhea");
+_("Titan");
+_("Hyperion");
+_("Iapetus");
+_("Phoebe");
+_("Neptune");
+_("Uranus");
+_("Miranda");
+_("Ariel");
+_("Umbriel");
+_("Titania");
+_("Oberon");
+_("Pluto");
+_("Charon");
+# TRANSLATORS: Moon of Pluto (II)
+_("Nix");
+_("Eris");
+_("Triton");
+_("Nereid");
+_("Naiad");
+_("Thalassa");
+_("Despina");
+_("Galatea");
+_("Larissa");
+_("Proteus");
+_("Halimede");
+_("Psamathe");
+_("Sao");
+_("Laomedeia");
+_("Neso");
+_("Prometheus (moon)");
+_("Epimetheus (moon)");
+_("Bianca (moon)");
+_("Metis (moon)");
+# TRANSLATORS: Moon of Pluto (III)
+_("Hydra (moon)");
+_("Solar System Observer");
+
+#
+# TNO's that are in the default ssystem.ini
+#
+# TRANSLATORS: TNO/Asteroid (90377) Sedna
+_("Sedna");
+# TRANSLATORS: TNO/Asteroid (50000) Quaoar
+_("Quaoar");
+# TRANSLATORS: TNO/Asteroid (90482) Orcus
+_("Orcus");
+# TRANSLATORS: TNO/Asteroid (136108) Haumea
+_("Haumea");
+# TRANSLATORS: TNO/Asteroid (20000) Varuna
+_("Varuna");
+# TRANSLATORS: TNO/Asteroid (136472) Makemake
+_("Makemake");
+
+#
+# Asteroids that are not in the default ssystem.ini
+#
+# TRANSLATORS: Asteroid (5) Astraea
+_("Astraea");
+# TRANSLATORS: Asteroid (6) Hebe
+_("Hebe");
+# TRANSLATORS: Asteroid (7) Iris
+_("Iris");
+# TRANSLATORS: Asteroid (8) Flora
+_("Flora");
+# TRANSLATORS: Asteroid (9) Metis
+_("Metis");
+# TRANSLATORS: Asteroid (10) Hygiea
+_("Hygiea");
+# TRANSLATORS: Asteroid (41) Daphne
+_("Daphne");
+# TRANSLATORS: Asteroid (1221) Amor
+_("Amor");
+# TRANSLATORS: Asteroid (99942) Apophis
+_("Apophis");
+# TRANSLATORS: Asteroid (2060) Chiron
+_("Chiron");
+# TRANSLATORS: Asteroid (433) Eros
+_("Eros");
+# TRANSLATORS: Asteroid (624) Hektor
+_("Hektor");
+# TRANSLATORS: Asteroid (3200) Phaethon
+_("Phaethon");
+# TRANSLATORS: Asteroid (1866) Sisyphus
+_("Sisyphus");
+# TRANSLATORS: Asteroid (1864) Daedalus
+_("Daedalus");
+# TRANSLATORS: Asteroid (1566) Icarus
+_("Icarus");
+# TRANSLATORS: Asteroid (1809) Prometheus
+_("Prometheus");
+# TRANSLATORS: Asteroid (1810) Epimetheus
+_("Epimetheus");
+# TRANSLATORS: Asteroid (951) Gaspra
+_("Gaspra");
+# TRANSLATORS: Asteroid (243) Ida
+_("Ida");
+# TRANSLATORS: Asteroid (218) Bianca
+_("Bianca");
+
+#
+# Comets
+#
+# TRANSLATORS: Proper name of comet C/1680 V1
+_("Great Comet of 1680 (C/1680 V1)");
+
+#################################################
+#                 EXTRA DATA                    #
+#################################################
+
+#
+# Supernovae from Historical Supernovae plugin
+#
+# TRANSLATORS: Name of supernova SN 1572A
+_("Tycho's Supernova");
+# TRANSLATORS: Name of supernova SN 1604A
+_("Kepler's Supernova");
