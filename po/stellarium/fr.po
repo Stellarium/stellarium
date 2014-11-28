@@ -18,13 +18,13 @@ msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-11-27 09:11+0600\n"
-"PO-Revision-Date: 2014-11-26 17:35+0000\n"
+"PO-Revision-Date: 2014-11-27 18:04+0000\n"
 "Last-Translator: Nicolas Martignoni <Unknown>\n"
 "Language-Team: <fr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-11-27 05:54+0000\n"
+"X-Launchpad-Export-Date: 2014-11-28 05:42+0000\n"
 "X-Generator: Launchpad (build 17261)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:131 src/core/modules/StarMgr.cpp:353
@@ -1808,15 +1808,15 @@ msgstr "La magnitude limite à l'oeil nu est"
 
 #: src/gui/ViewDialog.cpp:411
 msgid "Abbreviated"
-msgstr ""
+msgstr "Abrégé"
 
 #: src/gui/ViewDialog.cpp:412
 msgid "Native"
-msgstr ""
+msgstr "Natif"
 
 #: src/gui/ViewDialog.cpp:413
 msgid "Translated"
-msgstr ""
+msgstr "Traduit"
 
 #: src/gui/ViewDialog.cpp:537
 msgid "No description"
@@ -2290,7 +2290,7 @@ msgstr "Occidentale"
 
 #: src/translations.h:108
 msgid "Western (H.A.Rey)"
-msgstr ""
+msgstr "Occidentale (H.A. Rey)"
 
 #. TRANSLATORS: Name of landscape
 #: src/translations.h:114
@@ -4276,7 +4276,7 @@ msgstr "Utiliser cette mythologie par défaut"
 
 #: src/ui_viewDialog.h:1343
 msgid "Show names"
-msgstr ""
+msgstr "Afficher les noms"
 
 #: src/ui_viewDialog.h:1345
 msgid "Select if you want names abbreviated, original or translated"
@@ -4292,11 +4292,11 @@ msgstr "Configuration"
 
 #: src/ui_configurationDialog.h:1038
 msgid "Language settings"
-msgstr ""
+msgstr "Paramètres de langue"
 
 #: src/ui_configurationDialog.h:1039
 msgid "Program Language"
-msgstr ""
+msgstr "Langue par défaut"
 
 #: src/ui_configurationDialog.h:1040
 msgid "Sky Culture Language"
@@ -11029,42 +11029,6 @@ msgstr "Coordonnée Y"
 #, qt-format
 #~ msgid "Ecliptic Topocentric (of J2000): %1/%2"
 #~ msgstr "Écliptique topocentrique (J2000)  %1/%2"
-
-#~ msgid "Daedalus"
-#~ msgstr "Dédale"
-
-#~ msgid "Sisyphus"
-#~ msgstr "Sisyphe"
-
-#~ msgid "Phaethon"
-#~ msgstr "Phaéton"
-
-#~ msgid "Icarus"
-#~ msgstr "Icare"
-
-#~ msgid "Bianca (moon)"
-#~ msgstr "Bianca (lune)"
-
-#~ msgid "Epimetheus (moon)"
-#~ msgstr "Épiméthée (lune)"
-
-#~ msgid "Bianca"
-#~ msgstr "Bianca"
-
-#~ msgid "Prometheus (moon)"
-#~ msgstr "Prométhée (lune)"
-
-#~ msgid "Prometheus"
-#~ msgstr "Prométhée"
-
-#~ msgid "Epimetheus"
-#~ msgstr "Épiméthée"
-
-#~ msgid "Gaspra"
-#~ msgstr "Gaspra"
-
-#~ msgid "Ida"
-#~ msgstr "Ida"
 
 #, qt-format
 #~ msgid "RA/DE (of date): %1/%2"
