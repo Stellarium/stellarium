@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-11-27 09:11+0600\n"
-"PO-Revision-Date: 2014-10-30 12:12+0000\n"
-"Last-Translator: windazol <ys11791@gmail.com>\n"
+"PO-Revision-Date: 2014-11-29 04:37+0000\n"
+"Last-Translator: nada <hb7701@naver.com>\n"
 "Language-Team: Korean <ko@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-11-28 05:47+0000\n"
-"X-Generator: Launchpad (build 17261)\n"
+"X-Launchpad-Export-Date: 2014-11-29 05:35+0000\n"
+"X-Generator: Launchpad (build 17267)\n"
 "Language: ko\n"
 
 #: src/core/modules/ConstellationMgr.cpp:131 src/core/modules/StarMgr.cpp:353
@@ -408,7 +408,7 @@ msgstr "변광성"
 
 #: src/core/modules/StarWrapper.cpp:161
 msgid "double star"
-msgstr "이중성"
+msgstr "쌍성"
 
 #: src/core/modules/StarWrapper.cpp:168
 #, qt-format
@@ -1729,7 +1729,7 @@ msgstr "육안 한계등급은"
 
 #: src/gui/ViewDialog.cpp:411
 msgid "Abbreviated"
-msgstr ""
+msgstr "생략됨"
 
 #: src/gui/ViewDialog.cpp:412
 msgid "Native"
@@ -1737,7 +1737,7 @@ msgstr ""
 
 #: src/gui/ViewDialog.cpp:413
 msgid "Translated"
-msgstr ""
+msgstr "변역됨"
 
 #: src/gui/ViewDialog.cpp:537
 msgid "No description"
@@ -3976,7 +3976,7 @@ msgstr "은하수 밝기:"
 
 #: src/ui_viewDialog.h:1262
 msgid "Zodiacal Light brightness:"
-msgstr ""
+msgstr "황도광 밝기:"
 
 #: src/ui_viewDialog.h:1263
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:264
@@ -4117,7 +4117,7 @@ msgstr ""
 
 #: src/ui_viewDialog.h:1332
 msgid "Minimal brightness:"
-msgstr ""
+msgstr "최소 밝기:"
 
 #: src/ui_viewDialog.h:1334
 msgid ""
@@ -4142,7 +4142,7 @@ msgstr "이 하늘 문화를 기본값으로 사용"
 
 #: src/ui_viewDialog.h:1343
 msgid "Show names"
-msgstr ""
+msgstr "이름 표시"
 
 #: src/ui_viewDialog.h:1345
 msgid "Select if you want names abbreviated, original or translated"
@@ -4158,15 +4158,15 @@ msgstr "설정"
 
 #: src/ui_configurationDialog.h:1038
 msgid "Language settings"
-msgstr ""
+msgstr "언어 설정"
 
 #: src/ui_configurationDialog.h:1039
 msgid "Program Language"
-msgstr ""
+msgstr "프로그램 언어"
 
 #: src/ui_configurationDialog.h:1040
 msgid "Sky Culture Language"
-msgstr ""
+msgstr "하늘 문화 언어"
 
 #: src/ui_configurationDialog.h:1041
 msgid "Check updates"
@@ -8141,7 +8141,7 @@ msgstr "웹사이트"
 
 #: plugins/Observability/src/Observability.cpp:67
 msgid "Observability Analysis"
-msgstr ""
+msgstr "관측 가능성 분석"
 
 #: plugins/Observability/src/Observability.cpp:70
 msgid ""
@@ -8498,7 +8498,7 @@ msgstr ""
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:206
 #, qt-format
 msgid "Horizon altitude: %1 deg."
-msgstr ""
+msgstr "수평 고도:%1 (도)"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:342
 msgid "Observability Configuration"
@@ -8534,7 +8534,7 @@ msgstr "관측상태"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:351
 msgid "Showing options"
-msgstr ""
+msgstr "선택 사항 보이기"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:352
 msgid "Today's ephemeris (rise, set, and transit times)"
@@ -8560,7 +8560,7 @@ msgstr "이전과 다음 보름달의 날짜"
 #: plugins/FOV/src/ui_fovWindow.h:383 plugins/FOV/src/ui_fovWindow.h:385
 #: plugins/FOV/src/ui_fovWindow.h:404
 msgid "Field of View"
-msgstr ""
+msgstr "시야각"
 
 #: plugins/FOV/src/FOV.cpp:43
 msgid ""
@@ -8571,11 +8571,11 @@ msgstr ""
 #: plugins/FOV/src/FOV.cpp:83
 #, qt-format
 msgid "Set FOV to %1%2"
-msgstr ""
+msgstr "시야각을 %1%2로 설정"
 
 #: plugins/FOV/src/gui/FOVWindow.cpp:78
 msgid "Field of View plug-in"
-msgstr ""
+msgstr "시야각 확장기능"
 
 #: plugins/FOV/src/ui_fovWindow.h:403
 msgid ""
@@ -8588,7 +8588,7 @@ msgstr ""
 
 #: plugins/NavStars/src/NavStars.cpp:50 plugins/NavStars/src/NavStars.cpp:119
 msgid "Navigational Stars"
-msgstr ""
+msgstr "길잡이 별"
 
 #. TRANSLATORS: The emphasis tags mark a book title.
 #: plugins/NavStars/src/NavStars.cpp:54
@@ -8602,7 +8602,7 @@ msgstr ""
 
 #: plugins/NavStars/src/NavStars.cpp:120
 msgid "Mark the navigational stars"
-msgstr ""
+msgstr "길잡이 별 표시하기"
 
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:55
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:96
@@ -8625,13 +8625,13 @@ msgstr ""
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:259
 msgctxt "time"
 msgid "m"
-msgstr ""
+msgstr "분"
 
 #. TRANSLATORS: seconds.
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:261
 msgctxt "time"
 msgid "s"
-msgstr ""
+msgstr "초"
 
 #: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:80
 msgid "Equation of Time plug-in"
@@ -8652,11 +8652,11 @@ msgstr ""
 
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:272
 msgid "Show plug-ins button on toolbar"
-msgstr ""
+msgstr "확장 기능들을 도구 막대의 버튼에서 보이기"
 
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:273
 msgid "Use minutes and seconds"
-msgstr ""
+msgstr "분과 초를 사용하기"
 
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:274
 msgid "Change sign of equation"
@@ -8665,12 +8665,12 @@ msgstr ""
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:275
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:343
 msgid "Font size:"
-msgstr ""
+msgstr "글꼴 크기:"
 
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:63
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:163
 msgid "Meteor Showers"
-msgstr ""
+msgstr "유성우"
 
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:66
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:265
@@ -8681,15 +8681,15 @@ msgstr ""
 
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:164
 msgid "Show meteor showers"
-msgstr ""
+msgstr "유성우 보이기"
 
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:165
 msgid "Radiant labels"
-msgstr ""
+msgstr "복사점 이름"
 
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:166
 msgid "Meteor Shower configuration window"
-msgstr ""
+msgstr "유성우 설정 창"
 
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:193
 msgid ""
@@ -8699,17 +8699,17 @@ msgstr ""
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1245
 msgid "Quadrantids"
-msgstr ""
+msgstr "사분의자리 유성우"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1247
 msgid "Lyrids"
-msgstr ""
+msgstr "거문고자리 유성우"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1249
 msgid "α-Centaurids"
-msgstr ""
+msgstr "알파 센타우리 유성우"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1251
@@ -8729,7 +8729,7 @@ msgstr ""
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1257
 msgid "Piscis Austrinids"
-msgstr ""
+msgstr "남쪽물고기자리 유성우"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1259
@@ -8754,12 +8754,12 @@ msgstr ""
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1267
 msgid "Draconids"
-msgstr ""
+msgstr "용자리 유성우"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1269
 msgid "Leonids"
-msgstr ""
+msgstr "사자자리 유성우"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:1271
@@ -9125,7 +9125,7 @@ msgstr ""
 #: plugins/MeteorShowers/src/MeteorShower.cpp:360
 #, qt-format
 msgid "Geocentric meteoric velocity: %1 km/s"
-msgstr ""
+msgstr "지구 기준 유성 속도: %1 km/s"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:365
 #, qt-format
@@ -9135,7 +9135,7 @@ msgstr ""
 #: plugins/MeteorShowers/src/MeteorShower.cpp:370
 #, qt-format
 msgid "Parent body: %1"
-msgstr ""
+msgstr "모천체: %1"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:376
 msgid "Active"
@@ -9168,15 +9168,15 @@ msgstr ""
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:175
 msgid "Peak"
-msgstr ""
+msgstr "극대기"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:186
 msgid "Start date greater than end date!"
-msgstr ""
+msgstr "시작일과 종료일"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:190
 msgid "Time interval must be less than one year!"
-msgstr ""
+msgstr "시간 주기는 1년보다 반드시 짧아야 합니다!"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:210
 msgid "Variable"
@@ -9192,7 +9192,7 @@ msgstr ""
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:260
 msgid "Meteor Showers Plug-in"
-msgstr ""
+msgstr "유성우 확장 기능"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:266
 msgid "Terms"
@@ -9200,7 +9200,7 @@ msgstr ""
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:267
 msgid "Meteor shower"
-msgstr ""
+msgstr "유성우"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:268
 msgid ""
@@ -9268,7 +9268,7 @@ msgstr ""
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:277
 msgid "Notes"
-msgstr ""
+msgstr "비고"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:278
 msgid ""
@@ -9277,7 +9277,7 @@ msgstr ""
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:279
 msgid "Info"
-msgstr ""
+msgstr "정보"
 
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:280
 msgid "Info about meteor showers you can get here:"
@@ -9309,11 +9309,11 @@ msgstr ""
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:515
 msgid "Update data from Internet"
-msgstr ""
+msgstr "인터넷에서 갱신된 날짜"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:523
 msgid "Meteor showers"
-msgstr ""
+msgstr "유성우"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:524
 msgid "Show meteor showers button on toolbar"
@@ -9321,7 +9321,7 @@ msgstr ""
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:525
 msgid "Enable display of meteor showers at startup"
-msgstr ""
+msgstr "시작시 유성우 보이기"
 
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:529
 msgid "Color of radiants markers"
@@ -9410,12 +9410,12 @@ msgstr ""
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:137
 msgctxt "abbreviated in the plugin"
 msgid "RA/Dec (J2000.0)"
-msgstr ""
+msgstr "적경/적위 (J2000.0)"
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:153
 msgctxt "abbreviated in the plugin"
 msgid "RA/Dec"
-msgstr ""
+msgstr "적경/적위"
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:173
 msgctxt "abbreviated in the plugin"
@@ -9425,7 +9425,7 @@ msgstr ""
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:189
 msgctxt "abbreviated in the plugin"
 msgid "Gal. Long/Lat"
-msgstr ""
+msgstr "은경/은위"
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:208
 msgctxt "abbreviated in the plugin"
@@ -9483,7 +9483,7 @@ msgstr ""
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:337
 msgid "Enable display of coordinates at startup"
-msgstr ""
+msgstr "시작시 좌표 표시"
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:338
 msgid "Show plug-in button on toolbar"
@@ -9495,7 +9495,7 @@ msgstr ""
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:342
 msgid "Coordinates:"
-msgstr ""
+msgstr "좌표계:"
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:345
 msgid "Place of the string with coordinates of the mouse pointer"
@@ -9503,15 +9503,15 @@ msgstr ""
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:347
 msgid "Place of the string:"
-msgstr ""
+msgstr "시작 위치"
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:349
 msgid "Coordinate X"
-msgstr ""
+msgstr "X축 좌표"
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:353
 msgid "Coordinate Y"
-msgstr ""
+msgstr "Y축 좌표"
 
 #~ msgid "Equatorial Grid"
 #~ msgstr "적위 격자"
