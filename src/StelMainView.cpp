@@ -374,8 +374,6 @@ StelMainView::StelMainView(QWidget* parent)
 
 	// Create an openGL viewport
 	QGLFormat glFormat(QGL::StencilBuffer | QGL::DepthBuffer | QGL::DoubleBuffer);
-	glFormat.setVersion(3, 2);
-	glFormat.setProfile(QGLFormat::CoreProfile);
 	QGLContext* context=new QGLContext(glFormat);
 
 	if (context->format() != glFormat)
