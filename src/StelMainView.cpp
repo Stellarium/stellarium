@@ -374,12 +374,14 @@ StelMainView::StelMainView(QWidget* parent)
 
 	// Create an openGL viewport
 	QGLFormat glFormat(QGL::StencilBuffer | QGL::DepthBuffer | QGL::DoubleBuffer);
+	glFormat.setVersion(3, 2);
+	glFormat.setProfile(QGLFormat::CoreProfile);
 	QGLContext* context=new QGLContext(glFormat);
 
 	if (context->format() != glFormat)
 	{
 		qWarning() << "Cannot provide OpenGL context. Apparently insufficient OpenGL resources on this system.";
-		QMessageBox::critical(0, "Stellarium", q_("Cannot acquire necessary OpenGL resouces."), QMessageBox::Abort, QMessageBox::Abort);
+		QMessageBox::critical(0, "Stellarium", q_("Cannot acquire necessary OpenGL resources."), QMessageBox::Abort, QMessageBox::Abort);
 		exit(1);
 	}
 	glWidget = new StelQGLWidget(context, this);
