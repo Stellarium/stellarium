@@ -291,6 +291,8 @@ void ViewDialog::createDialogContent()
 	const bool b = StelApp::getInstance().getSkyCultureMgr().getCurrentSkyCultureID()==StelApp::getInstance().getSkyCultureMgr().getDefaultSkyCultureID();
 	ui->useAsDefaultSkyCultureCheckBox->setChecked(b);
 	ui->useAsDefaultSkyCultureCheckBox->setEnabled(!b);
+	connect(ui->nativeNameCheckBox, SIGNAL(clicked(bool)), ssmgr, SLOT(setFlagNativeNames(bool)));
+	ui->nativeNameCheckBox->setChecked(ssmgr->getFlagNativeNames());
 	// GZ NEW allow to display short names and inhibit translation.
 	connect(ui->skyCultureNamesStyleComboBox, SIGNAL(currentIndexChanged(int)), cmgr, SLOT(setConstellationDisplayStyle(int)));
 
