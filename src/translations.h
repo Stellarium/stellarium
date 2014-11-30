@@ -87,6 +87,7 @@ class Translations
 		// =====================================================================
 		// Constellation cultures
 		N_("Arabic");
+		N_("Arabic Moon Stations");
 		N_("Aztec");
 		N_("Boorong");
 		N_("Chinese");
@@ -114,7 +115,7 @@ class Translations
 		N_("Guereins");
 		// TRANSLATORS: Name of landscape
 		N_("Trees");
-		// TRANSLATORS: Name of landscape and Earth's satellite
+		// TRANSLATORS: Name of landscape
 		N_("Moon");
 		// TRANSLATORS: Landscape name: Hurricane Ridge
 		N_("Hurricane");
@@ -128,7 +129,6 @@ class Translations
 		N_("Saturn");
 		// TRANSLATORS: Name of landscape
 		N_("Geneva");
-		// TRANSLATORS: Name of landscape
 		// TRANSLATORS: Name of landscape
 		N_("Grossmugl");
 		// TRANSLATORS: Name of landscape

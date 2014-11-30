@@ -34,6 +34,7 @@
 #include "StelCore.hpp"
 #include "StelPainter.hpp"
 #include "StelSkyDrawer.hpp"
+#include "SolarSystem.hpp"
 
 #include <vector>
 #include <QDebug>
@@ -340,12 +341,18 @@ float ConstellationMgr::getFontSize() const
 void ConstellationMgr::setConstellationDisplayStyle(int style)
 {
 	constellationDisplayStyle=(ConstellationMgr::ConstellationDisplayStyle) style;
+	if (constellationDisplayStyle==constellationsTranslated)
+		GETSTELMODULE(SolarSystem)->setFlagTranslatedNames(true);
+	else
+		GETSTELMODULE(SolarSystem)->setFlagTranslatedNames(false);
 
-	QSettings* conf = StelApp::getInstance().getSettings();
-	Q_ASSERT(conf);
-	conf->setValue("viewing/constellation_name_style",
-		       (constellationDisplayStyle == constellationsAbbreviated ? "abbreviated" : (constellationDisplayStyle == constellationsNative ? "native" : "translated")));
 	emit constellationsDisplayStyleChanged(constellationDisplayStyle);
+}
+
+QString ConstellationMgr::getConstellationDisplayStyleString()
+{
+	ConstellationDisplayStyle displayStyle = getConstellationDisplayStyle();
+	return (displayStyle == constellationsAbbreviated ? "abbreviated" : (displayStyle == constellationsNative ? "native" : "translated"));
 }
 
 ConstellationMgr::ConstellationDisplayStyle ConstellationMgr::getConstellationDisplayStyle()

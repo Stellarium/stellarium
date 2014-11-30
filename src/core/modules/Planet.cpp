@@ -119,6 +119,8 @@ Planet::Planet(const QString& englishName,
 		deltaJD = 0.001*StelCore::JD_SECOND;
 	}
 	flagLabels = true;
+	flagNativeName = true;
+	flagTranslatedName = true;
 }
 
 // called in SolarSystem::init() before first planet is created. Loads pTypeMap.
@@ -157,10 +159,20 @@ Planet::~Planet()
 
 void Planet::translateName(const StelTranslator& trans)
 {
-	if (nativeName.isEmpty())
-		nameI18 = trans.qtranslate(englishName);
+	if (!nativeName.isEmpty() && getFlagNativeName())
+	{
+		if (getFlagTranslatedName())
+			nameI18 = trans.qtranslate(nativeName);
+		else
+			nameI18 = nativeName;
+	}
 	else
-		nameI18 = trans.qtranslate(nativeName);
+	{
+		if (getFlagTranslatedName())
+			nameI18 = trans.qtranslate(englishName);
+		else
+			nameI18 = englishName;
+	}
 }
 
 QString Planet::getEnglishName() const
@@ -1294,6 +1306,10 @@ void Planet::deinitShader()
 {
 	delete planetShaderProgram;
 	planetShaderProgram = NULL;
+	delete ringPlanetShaderProgram;
+	ringPlanetShaderProgram = NULL;
+	delete moonShaderProgram;
+	moonShaderProgram = NULL;
 }
 
 void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP transfo, float screenSz, bool drawOnlyRing)

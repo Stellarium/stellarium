@@ -1,10 +1,12 @@
 # Proper names of celestial bodies
-src/translations_skycultures.h
+skycultures/translations.fab
 # Proper names of deep-sky objects
 nebulae/default/ngc2000names.dat
-# Sky cultures (include proper names of the stars)
+# Sky cultures (include proper names of the stars and native names of the planets)
 skycultures/arabic/constellation_names.eng.fab
 skycultures/arabic/star_names.fab
+skycultures/arabic_moon_stations/constellation_names.eng.fab
+skycultures/arabic_moon_stations/star_names.fab
 skycultures/aztec/constellation_names.eng.fab
 skycultures/aztec/star_names.fab
 skycultures/boorong/constellation_names.eng.fab
