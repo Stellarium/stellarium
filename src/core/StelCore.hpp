@@ -518,6 +518,15 @@ public slots:
 	//! Get coefficients for custom equation for calculation of Delta-T
 	Vec3f getDeltaTCustomEquationCoefficients() const { return deltaTCustomEquationCoeff; }
 
+	//! GZ NEW: return JDE of event "object setting on landscape horizon", modulated by some options.
+	//! @param obj the object in question
+	//! @param setting true for seting, false for rising
+	//! @param offsetMin returned JDE is so many minutes different from setting event.
+	//! @param onLandscape consider current landscape for horizon, not math. horizon.
+	//! @retval eventOK object reached this altitude/time. False in cases of circumpolarity or altitude ot reached. The returned time then is closest approach.
+	//! @returns JDE of event. This time can then be used to setJD and show e.g. the sun 4 minutes before setting.
+	double jdeForObjNearHorizon(const StelObjectP obj, const bool setting, const double offsetMin, const bool onLandscape, bool eventOK);
+
 signals:
 	//! This signal is emitted when the observer location has changed.
 	void locationChanged(StelLocation);
