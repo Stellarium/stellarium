@@ -337,7 +337,7 @@ void SkyGrid::draw(const StelCore* core) const
 	const SphericalCap& viewPortSphericalCap = prj->getBoundingCap();
 
 	// Compute the first grid starting point. This point is close to the center of the screen
-	// and lays at the intersection of a meridien and a parallel
+	// and lies at the intersection of a meridian and a parallel
 	lon2 = gridStepMeridianRad*((int)(lon2/gridStepMeridianRad+0.5));
 	lat2 = gridStepParallelRad*((int)(lat2/gridStepParallelRad+0.5));
 	Vec3d firstPoint;
@@ -346,10 +346,15 @@ void SkyGrid::draw(const StelCore* core) const
 
 	// Q_ASSERT(viewPortSphericalCap.contains(firstPoint));
 
-	// Initialize a painter and set openGL state
+	// Initialize a painter and set OpenGL state
 	StelPainter sPainter(prj);
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
+	// OpenGL ES 2.0 doesn't have GL_LINE_SMOOTH
+	#ifdef GL_LINE_SMOOTH
+	if (QOpenGLContext::currentContext()->format().renderableType()==QSurfaceFormat::OpenGL)
+		glEnable(GL_LINE_SMOOTH);
+	#endif
 	Vec4f textColor(color[0], color[1], color[2], 0);
 	sPainter.setColor(color[0],color[1],color[2], fader.getInterstate());
 
@@ -547,6 +552,11 @@ void SkyGrid::draw(const StelCore* core) const
 			fpt.transfo4d(rotLon);
 		}
 	}
+	// OpenGL ES 2.0 doesn't have GL_LINE_SMOOTH
+	#ifdef GL_LINE_SMOOTH
+	if (QOpenGLContext::currentContext()->format().renderableType()==QSurfaceFormat::OpenGL)
+		glDisable(GL_LINE_SMOOTH);
+	#endif
 }
 
 

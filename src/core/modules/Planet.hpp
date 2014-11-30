@@ -249,6 +249,14 @@ public:
 	void setFlagLabels(bool b){flagLabels = b;}
 	bool getFlagLabels(void) const {return flagLabels;}
 
+	bool flagNativeName;
+	void setFlagNativeName(bool b) { flagNativeName = b; }
+	bool getFlagNativeName(void) { return flagNativeName; }
+
+	bool flagTranslatedName;
+	void setFlagTranslatedName(bool b) { flagTranslatedName = b; }
+	bool getFlagTranslatedName(void) { return flagTranslatedName; }
+
 	///////////////////////////////////////////////////////////////////////////
 	// DEPRECATED
 	///// Orbit related code
