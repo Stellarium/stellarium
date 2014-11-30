@@ -149,6 +149,12 @@
 # define GL(line) line
 #endif
 
+// In ANGLE and other OpenGL ES systems, GL_LINE_SMOOTH is undefined.
+// We can define it here to not break compilation, but must test for real OpenGL context before calling.
+# ifndef GL_LINE_SMOOTH
+#  define GL_LINE_SMOOTH 0x0B20
+# endif
+
 const char* getGLErrorText(int code);
 int checkGLErrors(const char *file, int line);
 

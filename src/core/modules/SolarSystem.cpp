@@ -139,6 +139,7 @@ void SolarSystem::init()
 	// Set the algorithm from Astronomical Almanac for computation of apparent magnitudes for
 	// planets in case  observer on the Earth by default
 	setApparentMagnitudeAlgorithmOnEarth(conf->value("astro/apparent_magnitude_algorithm", "Harris").toString());
+	setFlagNativeNames(conf->value("viewing/flag_planets_native_names", true).toBool());
 
 	recreateTrails();
 
@@ -1491,6 +1492,32 @@ void SolarSystem::setFlagPlanets(bool b)
 
 bool SolarSystem::getFlagPlanets(void) const {return flagShow;}
 
+void SolarSystem::setFlagNativeNames(bool b)
+{
+	flagNativeNames=b;
+	foreach (const PlanetP& p, systemPlanets)
+	{
+		if (p->getPlanetType()==Planet::isPlanet || p->getPlanetType()==Planet::isMoon || p->getPlanetType()==Planet::isStar)
+			p->setFlagNativeName(flagNativeNames);
+	}
+	updateI18n();
+}
+
+bool SolarSystem::getFlagNativeNames() const {return flagNativeNames; }
+
+void SolarSystem::setFlagTranslatedNames(bool b)
+{
+	flagTranslatedNames=b;
+	foreach (const PlanetP& p, systemPlanets)
+	{
+		if (p->getPlanetType()==Planet::isPlanet || p->getPlanetType()==Planet::isMoon || p->getPlanetType()==Planet::isStar)
+			p->setFlagTranslatedName(flagTranslatedNames);
+	}
+	updateI18n();
+}
+
+bool SolarSystem::getFlagTranslatedNames() const {return flagTranslatedNames; }
+
 // Set/Get planets names color
 void SolarSystem::setLabelsColor(const Vec3f& c) {Planet::setLabelColor(c);}
 const Vec3f& SolarSystem::getLabelsColor(void) const {return Planet::getLabelColor();}
@@ -1547,6 +1574,8 @@ void SolarSystem::reloadPlanets()
 	bool flagHints = getFlagHints();
 	bool flagLabels = getFlagLabels();
 	bool flagOrbits = getFlagOrbits();
+	bool flagNative = getFlagNativeNames();
+	bool flagTrans = getFlagTranslatedNames();
 	
 	// Save observer location (fix for LP bug # 969211)
 	// TODO: This can probably be done better with a better understanding of StelObserver --BM
@@ -1594,6 +1623,8 @@ void SolarSystem::reloadPlanets()
 	setFlagHints(flagHints);
 	setFlagLabels(flagLabels);
 	setFlagOrbits(flagOrbits);
+	setFlagNativeNames(flagNative);
+	setFlagTranslatedNames(flagTrans);
 
 	// Restore translations
 	updateI18n();

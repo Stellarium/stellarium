@@ -279,6 +279,12 @@ public slots:
 	//! Get the algorithm used for computation of apparent magnitudes for planets in case  observer on the Earth
 	QString getApparentMagnitudeAlgorithmOnEarth() const;
 
+	void setFlagNativeNames(bool b);
+	bool getFlagNativeNames(void) const;
+
+	void setFlagTranslatedNames(bool b);
+	bool getFlagTranslatedNames(void) const;
+
 public:
 	///////////////////////////////////////////////////////////////////////////
 	// Other public methods
@@ -402,6 +408,8 @@ private:
 
 	bool flagShow;
 	bool flagMarker;
+	bool flagNativeNames;
+	bool flagTranslatedNames;
 
 	class TrailGroup* allTrails;
 	LinearFader trailFader;
