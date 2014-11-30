@@ -7,21 +7,21 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-11-27 09:11+0600\n"
-"PO-Revision-Date: 2014-11-19 17:47+0000\n"
+"POT-Creation-Date: 2014-11-29 20:37+0600\n"
+"PO-Revision-Date: 2014-11-29 11:03+0000\n"
 "Last-Translator: Andi Chandler <Unknown>\n"
 "Language-Team: English (United Kingdom) <en_GB@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-11-27 06:13+0000\n"
-"X-Generator: Launchpad (build 17261)\n"
+"X-Launchpad-Export-Date: 2014-11-30 05:16+0000\n"
+"X-Generator: Launchpad (build 17267)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:131 src/core/modules/StarMgr.cpp:353
-#: src/core/modules/GridLinesMgr.cpp:726 src/core/modules/LandscapeMgr.cpp:355
+#: src/core/modules/GridLinesMgr.cpp:736 src/core/modules/LandscapeMgr.cpp:355
 #: src/core/modules/NebulaMgr.cpp:126 src/core/modules/SolarSystem.cpp:160
 #: src/core/StelApp.cpp:487 src/core/StelCore.cpp:185
-#: src/core/StelSkyLayerMgr.cpp:87 src/StelMainView.cpp:363
+#: src/core/StelSkyLayerMgr.cpp:87 src/StelMainView.cpp:682
 msgid "Display Options"
 msgstr "Display Options"
 
@@ -55,71 +55,71 @@ msgstr "Stars"
 msgid "Stars labels"
 msgstr "Stars labels"
 
-#: src/core/modules/GridLinesMgr.cpp:577 src/ui_viewDialog.h:1308
+#: src/core/modules/GridLinesMgr.cpp:587 src/ui_viewDialog.h:1308
 msgid "Meridian"
 msgstr "Meridian"
 
-#: src/core/modules/GridLinesMgr.cpp:581 src/ui_viewDialog.h:1316
+#: src/core/modules/GridLinesMgr.cpp:591 src/ui_viewDialog.h:1316
 msgid "Ecliptic"
 msgstr "Ecliptic"
 
-#: src/core/modules/GridLinesMgr.cpp:585 src/ui_viewDialog.h:1304
+#: src/core/modules/GridLinesMgr.cpp:595 src/ui_viewDialog.h:1304
 msgid "Equator"
 msgstr "Equator"
 
-#: src/core/modules/GridLinesMgr.cpp:589 src/ui_viewDialog.h:1312
+#: src/core/modules/GridLinesMgr.cpp:599 src/ui_viewDialog.h:1312
 msgid "Horizon"
 msgstr "Horizon"
 
-#: src/core/modules/GridLinesMgr.cpp:593
+#: src/core/modules/GridLinesMgr.cpp:603
 msgid "Galactic Equator"
 msgstr "Galactic Equator"
 
-#: src/core/modules/GridLinesMgr.cpp:727
+#: src/core/modules/GridLinesMgr.cpp:737
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:331
 msgid "Equatorial grid"
 msgstr "Equatorial grid"
 
-#: src/core/modules/GridLinesMgr.cpp:728 src/ui_viewDialog.h:1299
+#: src/core/modules/GridLinesMgr.cpp:738 src/ui_viewDialog.h:1299
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:326
 msgid "Azimuthal grid"
 msgstr "Azimuthal grid"
 
-#: src/core/modules/GridLinesMgr.cpp:729
+#: src/core/modules/GridLinesMgr.cpp:739
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:346
 msgid "Ecliptic line"
 msgstr "Ecliptic line"
 
-#: src/core/modules/GridLinesMgr.cpp:730
+#: src/core/modules/GridLinesMgr.cpp:740
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:341
 msgid "Equator line"
 msgstr "Equator line"
 
-#: src/core/modules/GridLinesMgr.cpp:731
+#: src/core/modules/GridLinesMgr.cpp:741
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:321
 msgid "Meridian line"
 msgstr "Meridian line"
 
-#: src/core/modules/GridLinesMgr.cpp:732
+#: src/core/modules/GridLinesMgr.cpp:742
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:360
 msgid "Horizon line"
 msgstr "Horizon line"
 
-#: src/core/modules/GridLinesMgr.cpp:733
+#: src/core/modules/GridLinesMgr.cpp:743
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:336
 msgid "Equatorial J2000 grid"
 msgstr "Equatorial J2000 grid"
 
-#: src/core/modules/GridLinesMgr.cpp:734
+#: src/core/modules/GridLinesMgr.cpp:744
 msgid "Ecliptic J2000 grid"
 msgstr "Ecliptic J2000 grid"
 
-#: src/core/modules/GridLinesMgr.cpp:735 src/ui_viewDialog.h:1300
+#: src/core/modules/GridLinesMgr.cpp:745 src/ui_viewDialog.h:1300
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:365
 msgid "Galactic grid"
 msgstr "Galactic grid"
 
-#: src/core/modules/GridLinesMgr.cpp:736 src/ui_viewDialog.h:1320
+#: src/core/modules/GridLinesMgr.cpp:746 src/ui_viewDialog.h:1320
 msgid "Galactic equator"
 msgstr "Galactic equator"
 
@@ -302,7 +302,7 @@ msgstr "Mean solar day: %1"
 
 #: src/core/modules/Planet.cpp:273
 msgid "The period of rotation is chaotic"
-msgstr ""
+msgstr "The period of rotation is chaotic"
 
 #: src/core/modules/Planet.cpp:279
 #, qt-format
@@ -1143,7 +1143,7 @@ msgid "Deep-sky objects background images"
 msgstr "Deep-sky objects background images"
 
 #: src/core/StelMovementMgr.cpp:130 src/gui/StelGui.cpp:186
-#: src/StelMainView.cpp:362
+#: src/StelMainView.cpp:681
 msgid "Miscellaneous"
 msgstr "Miscellaneous"
 
@@ -1777,15 +1777,15 @@ msgstr "The naked-eye limiting magnitude is"
 
 #: src/gui/ViewDialog.cpp:411
 msgid "Abbreviated"
-msgstr ""
+msgstr "Abbreviated"
 
 #: src/gui/ViewDialog.cpp:412
 msgid "Native"
-msgstr ""
+msgstr "Native"
 
 #: src/gui/ViewDialog.cpp:413
 msgid "Translated"
-msgstr ""
+msgstr "Translated"
 
 #: src/gui/ViewDialog.cpp:537
 msgid "No description"
@@ -2030,11 +2030,19 @@ msgstr "where"
 msgid "year"
 msgstr "year"
 
-#: src/main.cpp:352
-msgid "This system does not support OpenGL."
-msgstr "This system does not support OpenGL."
+#: src/StelMainView.cpp:356 src/StelMainView.cpp:371
+msgid ""
+"No OpenGL 2 found on this system. Please upgrade hardware or use MESA or an "
+"older version."
+msgstr ""
+"No OpenGL 2 found on this system. Please upgrade hardware or use MESA or an "
+"older version."
 
-#: src/main.cpp:363
+#: src/StelMainView.cpp:384
+msgid "Cannot acquire necessary OpenGL resources."
+msgstr ""
+
+#: src/StelMainView.cpp:466
 msgid ""
 "Insufficient OpenGL version. Please update drivers, graphics hardware, or "
 "use MESA (or ANGLE) version."
@@ -2042,21 +2050,61 @@ msgstr ""
 "Insufficient OpenGL version. Please update drivers, graphics hardware, or "
 "use MESA (or ANGLE) version."
 
-#: src/main.cpp:366
+#: src/StelMainView.cpp:469
 msgid ""
 "Insufficient OpenGL version. Please update drivers, or graphics hardware."
 msgstr ""
 "Insufficient OpenGL version. Please update drivers, or graphics hardware."
 
-#: src/StelMainView.cpp:362
+#: src/StelMainView.cpp:510
+msgid ""
+"Your DirectX/OpenGL ES subsystem has problems. See log for details.\n"
+"Ignore and suppress this notice in the future and try to continue in "
+"degraded mode anyway?"
+msgstr ""
+"Your DirectX/OpenGL ES subsystem has problems. See log for details.\n"
+"Ignore and suppress this notice in the future and try to continue in "
+"degraded mode anyway?"
+
+#: src/StelMainView.cpp:561
+msgid ""
+"Your OpenGL/Mesa subsystem has problems. See log for details.\n"
+"Ignore and suppress this notice in the future and try to continue in "
+"degraded mode anyway?"
+msgstr ""
+"Your OpenGL/Mesa subsystem has problems. See log for details.\n"
+"Ignore and suppress this notice in the future and try to continue in "
+"degraded mode anyway?"
+
+#: src/StelMainView.cpp:612
+msgid ""
+"Your OpenGL subsystem has problems. See log for details.\n"
+"Ignore and suppress this notice in the future and try to continue in "
+"degraded mode anyway?"
+msgstr ""
+"Your OpenGL subsystem has problems. See log for details.\n"
+"Ignore and suppress this notice in the future and try to continue in "
+"degraded mode anyway?"
+
+#: src/StelMainView.cpp:649
+msgid ""
+"Your OpenGL ES subsystem has problems. See log for details.\n"
+"Ignore and suppress this notice in the future and try to continue in "
+"degraded mode anyway?"
+msgstr ""
+"Your OpenGL ES subsystem has problems. See log for details.\n"
+"Ignore and suppress this notice in the future and try to continue in "
+"degraded mode anyway?"
+
+#: src/StelMainView.cpp:681
 msgid "Save screenshot"
 msgstr "Save screenshot"
 
-#: src/StelMainView.cpp:363
+#: src/StelMainView.cpp:682
 msgid "Full-screen mode"
 msgstr "Full-screen mode"
 
-#: src/StelMainView.cpp:535
+#: src/StelMainView.cpp:807
 #, qt-format
 msgid "Stellarium %1"
 msgstr "Stellarium %1"
@@ -2184,127 +2232,130 @@ msgid "Arabic"
 msgstr "Arabic"
 
 #: src/translations.h:90
+msgid "Arabic Moon Stations"
+msgstr "Arabic Moon Stations"
+
+#: src/translations.h:91
 msgid "Aztec"
 msgstr "Aztec"
 
-#: src/translations.h:91
+#: src/translations.h:92
 msgid "Boorong"
 msgstr "Boorong"
 
-#: src/translations.h:92
+#: src/translations.h:93
 msgid "Chinese"
 msgstr "Chinese"
 
-#: src/translations.h:93
+#: src/translations.h:94
 msgid "Egyptian"
 msgstr "Egyptian"
 
-#: src/translations.h:94
+#: src/translations.h:95
 msgid "Inuit"
 msgstr "Inuit"
 
-#: src/translations.h:95
+#: src/translations.h:96
 msgid "Indian Vedic"
 msgstr "Indian Vedic"
 
-#: src/translations.h:96
+#: src/translations.h:97
 msgid "Korean"
 msgstr "Korean"
 
-#: src/translations.h:97
+#: src/translations.h:98
 msgid "Lakota"
 msgstr "Lakota"
 
-#: src/translations.h:98
+#: src/translations.h:99
 msgid "Maori"
 msgstr "Maori"
 
-#: src/translations.h:99
+#: src/translations.h:100
 msgid "Mongolian"
 msgstr "Mongolian"
 
-#: src/translations.h:100
+#: src/translations.h:101
 msgid "Navajo"
 msgstr "Navajo"
 
-#: src/translations.h:101
+#: src/translations.h:102
 msgid "Norse"
 msgstr "Norse"
 
-#: src/translations.h:102
+#: src/translations.h:103
 msgid "Polynesian"
 msgstr "Polynesian"
 
-#: src/translations.h:103
+#: src/translations.h:104
 msgid "Romanian"
 msgstr "Romanian"
 
-#: src/translations.h:104
+#: src/translations.h:105
 msgid "Sami"
 msgstr "Sami"
 
-#: src/translations.h:105
+#: src/translations.h:106
 msgid "Tupi-Guarani"
 msgstr "Tupi-Guarani"
 
-#: src/translations.h:106
+#: src/translations.h:107
 msgid "Tongan"
 msgstr "Tongan"
 
-#: src/translations.h:107
+#: src/translations.h:108
 msgid "Western"
 msgstr "Western"
 
-#: src/translations.h:108
+#: src/translations.h:109
 msgid "Western (H.A.Rey)"
-msgstr ""
+msgstr "Western (H.A.Rey)"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:114
+#: src/translations.h:115
 msgid "Guereins"
 msgstr "Guereins"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:116
+#: src/translations.h:117
 msgid "Trees"
 msgstr "Trees"
 
-#. TRANSLATORS: Name of landscape and Earth's satellite
-#: src/translations.h:118
+#. TRANSLATORS: Name of landscape
+#: src/translations.h:119
 msgid "Moon"
 msgstr "Moon"
 
 #. TRANSLATORS: Landscape name: Hurricane Ridge
-#: src/translations.h:120
+#: src/translations.h:121
 msgid "Hurricane"
 msgstr "Hurricane"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:122
+#: src/translations.h:123
 msgid "Ocean"
 msgstr "Ocean"
 
 #. TRANSLATORS: Landscape name: Garching bei Munchen
-#: src/translations.h:124
+#: src/translations.h:125
 msgid "Garching"
 msgstr "Garching"
 
 #. TRANSLATORS: Name of landscape and planet
-#: src/translations.h:126
+#: src/translations.h:127
 msgid "Mars"
 msgstr "Mars"
 
 #. TRANSLATORS: Name of landscape and planet
-#: src/translations.h:128
+#: src/translations.h:129
 msgid "Saturn"
 msgstr "Saturn"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:130
+#: src/translations.h:131
 msgid "Geneva"
 msgstr "Geneva"
 
-#. TRANSLATORS: Name of landscape
 #. TRANSLATORS: Name of landscape
 #: src/translations.h:133
 msgid "Grossmugl"
@@ -4222,11 +4273,11 @@ msgstr "Use this sky culture as default"
 
 #: src/ui_viewDialog.h:1343
 msgid "Show names"
-msgstr ""
+msgstr "Show names"
 
 #: src/ui_viewDialog.h:1345
 msgid "Select if you want names abbreviated, original or translated"
-msgstr ""
+msgstr "Select if you want names abbreviated, original or translated"
 
 #: src/ui_viewDialog.h:1349
 msgid "Visible"
@@ -4238,15 +4289,15 @@ msgstr "Configuration"
 
 #: src/ui_configurationDialog.h:1038
 msgid "Language settings"
-msgstr ""
+msgstr "Language settings"
 
 #: src/ui_configurationDialog.h:1039
 msgid "Program Language"
-msgstr ""
+msgstr "Program Language"
 
 #: src/ui_configurationDialog.h:1040
 msgid "Sky Culture Language"
-msgstr ""
+msgstr "Sky Culture Language"
 
 #: src/ui_configurationDialog.h:1041
 msgid "Check updates"
@@ -4845,22 +4896,22 @@ msgid "Angle measure"
 msgstr "Angle measure"
 
 #. TRANSLATORS: instructions for using the AngleMeasure plugin.
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:477
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:488
 msgid "The Angle Measure is enabled:"
 msgstr "The Angle Measure is enabled:"
 
 #. TRANSLATORS: instructions for using the AngleMeasure plugin.
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:479
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:490
 msgid "Drag with the left button to measure, left-click to clear."
 msgstr "Drag with the left button to measure, left-click to clear."
 
 #. TRANSLATORS: instructions for using the AngleMeasure plugin.
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:481
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:492
 msgid "Right-clicking changes the end point only."
 msgstr "Right-clicking changes the end point only."
 
 #. TRANSLATORS: PA is abbreviation for phrase "Position Angle"
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:483
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:494
 msgid "PA="
 msgstr "PA="
 
@@ -8511,26 +8562,26 @@ msgstr "Largest Sun separation: %1 (at %2 deg.)"
 #: plugins/Observability/src/Observability.cpp:203
 #, qt-format
 msgid "Acronycal rise/set: %1/%2. "
-msgstr ""
+msgstr "Acronycal rise/set: %1/%2. "
 
 #: plugins/Observability/src/Observability.cpp:204
 #, qt-format
 msgid "Heliacal rise/set: %1/%2. "
-msgstr ""
+msgstr "Heliacal rise/set: %1/%2. "
 
 #: plugins/Observability/src/Observability.cpp:205
 msgid "No Heliacal rise/set. "
-msgstr ""
+msgstr "No Heliacal rise/set. "
 
 #. TRANSLATORS: The space at the end is significant - another sentence may follow.
 #: plugins/Observability/src/Observability.cpp:207
 msgid "No Acronycal rise/set. "
-msgstr ""
+msgstr "No Acronycal rise/set. "
 
 #: plugins/Observability/src/Observability.cpp:208
 #, qt-format
 msgid "Cosmical rise/set: %1/%2."
-msgstr ""
+msgstr "Cosmical rise/set: %1/%2."
 
 #: plugins/Observability/src/Observability.cpp:209
 msgid "No Cosmical rise/set."
@@ -8652,7 +8703,7 @@ msgstr ""
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:144
 msgid "Acronychal/Cosmical/Heliacal rise/set:"
-msgstr ""
+msgstr "Acronychal/Cosmical/Heliacal rise/set:"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:144
 msgid ""
@@ -8674,6 +8725,23 @@ msgid ""
 "visible). At the Heliacal set, the star sets roughly after the beginning of "
 "the astronomical night."
 msgstr ""
+"The days of Cosmical rise/set of an object are estimated as the days when "
+"the object rises (or sets) together with the rise/set of the Sun. The exact "
+"dates of these ephemeris depend on the Observer's location.  On the "
+"contrary, the Acronycal rise (or set) happens when the star rises/sets with "
+"the setting/rising of the Sun (i.e., opposite to the Sun). On the one hand, "
+"it is obvious that the source is hardly observable (or not observable at "
+"all) in the dates between Cosmical set and Cosmical rise. On the other hand, "
+"the dates around the Acronychal set and rise are those when the altitude of "
+"the celestial object uses to be high when the Sun is well below the horizon "
+"(hence the object can be well observed). The date of Heliacal rise is the "
+"first day of the year when a star becomes visible. It happens when the star "
+"is close to the eastern horizon roughly before the end of the astronomical "
+"night (i.e., at the astronomical twilight). In the following nights, the "
+"star will be visibile during longer periods of time, until it reaches its "
+"Heliacal set (i.e., the last night of the year when the star is still "
+"visible). At the Heliacal set, the star sets roughly after the beginning of "
+"the astronomical night."
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:145
 msgid "Largest Sun separation:"
@@ -8803,7 +8871,7 @@ msgstr "Today's ephemeris (rise, set, and transit times)"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:353
 msgid "Dates of Acronychal/Cosmical/Heliacal rise/set"
-msgstr ""
+msgstr "Dates of Acronychal/Cosmical/Heliacal rise/set"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:354
 msgid "Date of largest separation to the Sun"
@@ -10124,6 +10192,9 @@ msgstr "Coordinate Y"
 #~ msgid "Correct for light travel time: "
 #~ msgstr "Correct for light travel time: "
 
+#~ msgid "This system does not support OpenGL."
+#~ msgstr "This system does not support OpenGL."
+
 #~ msgid "10"
 #~ msgstr "10"
 
@@ -10870,39 +10941,3 @@ msgstr "Coordinate Y"
 #~ "Ecliptic topocentric coordinates, equinox of date and J2000 (only for Earth)"
 #~ msgstr ""
 #~ "Ecliptic topocentric coordinates, equinox of date and J2000 (only for Earth)"
-
-#~ msgid "Epimetheus (moon)"
-#~ msgstr "Epimetheus (moon)"
-
-#~ msgid "Sisyphus"
-#~ msgstr "Sisyphus"
-
-#~ msgid "Phaethon"
-#~ msgstr "Phaethon"
-
-#~ msgid "Daedalus"
-#~ msgstr "Daedalus"
-
-#~ msgid "Prometheus (moon)"
-#~ msgstr "Prometheus (moon)"
-
-#~ msgid "Prometheus"
-#~ msgstr "Prometheus"
-
-#~ msgid "Gaspra"
-#~ msgstr "Gaspra"
-
-#~ msgid "Epimetheus"
-#~ msgstr "Epimetheus"
-
-#~ msgid "Bianca (moon)"
-#~ msgstr "Bianca (moon)"
-
-#~ msgid "Bianca"
-#~ msgstr "Bianca"
-
-#~ msgid "Ida"
-#~ msgstr "Ida"
-
-#~ msgid "Icarus"
-#~ msgstr "Icarus"
