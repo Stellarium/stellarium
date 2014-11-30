@@ -7,21 +7,21 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-11-27 09:11+0600\n"
+"POT-Creation-Date: 2014-11-29 20:37+0600\n"
 "PO-Revision-Date: 2014-09-15 16:40+0000\n"
 "Last-Translator: Alexander Wolf <Unknown>\n"
 "Language-Team: Bulgarian <bg@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-11-27 05:51+0000\n"
-"X-Generator: Launchpad (build 17261)\n"
+"X-Launchpad-Export-Date: 2014-11-30 04:58+0000\n"
+"X-Generator: Launchpad (build 17267)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:131 src/core/modules/StarMgr.cpp:353
-#: src/core/modules/GridLinesMgr.cpp:726 src/core/modules/LandscapeMgr.cpp:355
+#: src/core/modules/GridLinesMgr.cpp:736 src/core/modules/LandscapeMgr.cpp:355
 #: src/core/modules/NebulaMgr.cpp:126 src/core/modules/SolarSystem.cpp:160
 #: src/core/StelApp.cpp:487 src/core/StelCore.cpp:185
-#: src/core/StelSkyLayerMgr.cpp:87 src/StelMainView.cpp:363
+#: src/core/StelSkyLayerMgr.cpp:87 src/StelMainView.cpp:682
 msgid "Display Options"
 msgstr "Настройки на изгледа"
 
@@ -55,71 +55,71 @@ msgstr "Звезди"
 msgid "Stars labels"
 msgstr "Етикети на звездите"
 
-#: src/core/modules/GridLinesMgr.cpp:577 src/ui_viewDialog.h:1308
+#: src/core/modules/GridLinesMgr.cpp:587 src/ui_viewDialog.h:1308
 msgid "Meridian"
 msgstr "Меридиан"
 
-#: src/core/modules/GridLinesMgr.cpp:581 src/ui_viewDialog.h:1316
+#: src/core/modules/GridLinesMgr.cpp:591 src/ui_viewDialog.h:1316
 msgid "Ecliptic"
 msgstr "Еклиптика"
 
-#: src/core/modules/GridLinesMgr.cpp:585 src/ui_viewDialog.h:1304
+#: src/core/modules/GridLinesMgr.cpp:595 src/ui_viewDialog.h:1304
 msgid "Equator"
 msgstr "Екватор"
 
-#: src/core/modules/GridLinesMgr.cpp:589 src/ui_viewDialog.h:1312
+#: src/core/modules/GridLinesMgr.cpp:599 src/ui_viewDialog.h:1312
 msgid "Horizon"
 msgstr "Хоризонт"
 
-#: src/core/modules/GridLinesMgr.cpp:593
+#: src/core/modules/GridLinesMgr.cpp:603
 msgid "Galactic Equator"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:727
+#: src/core/modules/GridLinesMgr.cpp:737
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:331
 msgid "Equatorial grid"
 msgstr "Екваториална мрежа"
 
-#: src/core/modules/GridLinesMgr.cpp:728 src/ui_viewDialog.h:1299
+#: src/core/modules/GridLinesMgr.cpp:738 src/ui_viewDialog.h:1299
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:326
 msgid "Azimuthal grid"
 msgstr "Азимутна мрежа"
 
-#: src/core/modules/GridLinesMgr.cpp:729
+#: src/core/modules/GridLinesMgr.cpp:739
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:346
 msgid "Ecliptic line"
 msgstr "Линия на еклиптиката"
 
-#: src/core/modules/GridLinesMgr.cpp:730
+#: src/core/modules/GridLinesMgr.cpp:740
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:341
 msgid "Equator line"
 msgstr "Линия на екватора"
 
-#: src/core/modules/GridLinesMgr.cpp:731
+#: src/core/modules/GridLinesMgr.cpp:741
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:321
 msgid "Meridian line"
 msgstr "Линия на меридиана на наблюдателя"
 
-#: src/core/modules/GridLinesMgr.cpp:732
+#: src/core/modules/GridLinesMgr.cpp:742
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:360
 msgid "Horizon line"
 msgstr "Линия на хоризонта"
 
-#: src/core/modules/GridLinesMgr.cpp:733
+#: src/core/modules/GridLinesMgr.cpp:743
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:336
 msgid "Equatorial J2000 grid"
 msgstr "Екваториална мрежа (J2000)"
 
-#: src/core/modules/GridLinesMgr.cpp:734
+#: src/core/modules/GridLinesMgr.cpp:744
 msgid "Ecliptic J2000 grid"
 msgstr "Еклиптична мрежа (J2000)"
 
-#: src/core/modules/GridLinesMgr.cpp:735 src/ui_viewDialog.h:1300
+#: src/core/modules/GridLinesMgr.cpp:745 src/ui_viewDialog.h:1300
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:365
 msgid "Galactic grid"
 msgstr "Галактическа мрежа"
 
-#: src/core/modules/GridLinesMgr.cpp:736 src/ui_viewDialog.h:1320
+#: src/core/modules/GridLinesMgr.cpp:746 src/ui_viewDialog.h:1320
 msgid "Galactic equator"
 msgstr ""
 
@@ -1067,7 +1067,7 @@ msgid "Deep-sky objects background images"
 msgstr "Изображения на обекти от дълбокото небе"
 
 #: src/core/StelMovementMgr.cpp:130 src/gui/StelGui.cpp:186
-#: src/StelMainView.cpp:362
+#: src/StelMainView.cpp:681
 msgid "Miscellaneous"
 msgstr "Други"
 
@@ -1949,30 +1949,64 @@ msgstr ""
 msgid "year"
 msgstr "година"
 
-#: src/main.cpp:352
-msgid "This system does not support OpenGL."
-msgstr "Системата не поддържа OpenGL."
+#: src/StelMainView.cpp:356 src/StelMainView.cpp:371
+msgid ""
+"No OpenGL 2 found on this system. Please upgrade hardware or use MESA or an "
+"older version."
+msgstr ""
 
-#: src/main.cpp:363
+#: src/StelMainView.cpp:384
+msgid "Cannot acquire necessary OpenGL resources."
+msgstr ""
+
+#: src/StelMainView.cpp:466
 msgid ""
 "Insufficient OpenGL version. Please update drivers, graphics hardware, or "
 "use MESA (or ANGLE) version."
 msgstr ""
 
-#: src/main.cpp:366
+#: src/StelMainView.cpp:469
 msgid ""
 "Insufficient OpenGL version. Please update drivers, or graphics hardware."
 msgstr ""
 
-#: src/StelMainView.cpp:362
+#: src/StelMainView.cpp:510
+msgid ""
+"Your DirectX/OpenGL ES subsystem has problems. See log for details.\n"
+"Ignore and suppress this notice in the future and try to continue in "
+"degraded mode anyway?"
+msgstr ""
+
+#: src/StelMainView.cpp:561
+msgid ""
+"Your OpenGL/Mesa subsystem has problems. See log for details.\n"
+"Ignore and suppress this notice in the future and try to continue in "
+"degraded mode anyway?"
+msgstr ""
+
+#: src/StelMainView.cpp:612
+msgid ""
+"Your OpenGL subsystem has problems. See log for details.\n"
+"Ignore and suppress this notice in the future and try to continue in "
+"degraded mode anyway?"
+msgstr ""
+
+#: src/StelMainView.cpp:649
+msgid ""
+"Your OpenGL ES subsystem has problems. See log for details.\n"
+"Ignore and suppress this notice in the future and try to continue in "
+"degraded mode anyway?"
+msgstr ""
+
+#: src/StelMainView.cpp:681
 msgid "Save screenshot"
 msgstr "Записване на снимка на екрана"
 
-#: src/StelMainView.cpp:363
+#: src/StelMainView.cpp:682
 msgid "Full-screen mode"
 msgstr "Цял екран"
 
-#: src/StelMainView.cpp:535
+#: src/StelMainView.cpp:807
 #, qt-format
 msgid "Stellarium %1"
 msgstr ""
@@ -2100,127 +2134,130 @@ msgid "Arabic"
 msgstr "Арабска"
 
 #: src/translations.h:90
+msgid "Arabic Moon Stations"
+msgstr ""
+
+#: src/translations.h:91
 msgid "Aztec"
 msgstr "Ацтекска"
 
-#: src/translations.h:91
+#: src/translations.h:92
 msgid "Boorong"
 msgstr ""
 
-#: src/translations.h:92
+#: src/translations.h:93
 msgid "Chinese"
 msgstr "Китайска"
 
-#: src/translations.h:93
+#: src/translations.h:94
 msgid "Egyptian"
 msgstr "Египетска"
 
-#: src/translations.h:94
+#: src/translations.h:95
 msgid "Inuit"
 msgstr "Ескимоска"
 
-#: src/translations.h:95
+#: src/translations.h:96
 msgid "Indian Vedic"
 msgstr ""
 
-#: src/translations.h:96
+#: src/translations.h:97
 msgid "Korean"
 msgstr "Корейска"
 
-#: src/translations.h:97
+#: src/translations.h:98
 msgid "Lakota"
 msgstr "Лакотска"
 
-#: src/translations.h:98
+#: src/translations.h:99
 msgid "Maori"
 msgstr "Маорска"
 
-#: src/translations.h:99
+#: src/translations.h:100
 msgid "Mongolian"
 msgstr "Монголска"
 
-#: src/translations.h:100
+#: src/translations.h:101
 msgid "Navajo"
 msgstr "Навахо"
 
-#: src/translations.h:101
+#: src/translations.h:102
 msgid "Norse"
 msgstr "Норвежка"
 
-#: src/translations.h:102
+#: src/translations.h:103
 msgid "Polynesian"
 msgstr "Полинезийска"
 
-#: src/translations.h:103
+#: src/translations.h:104
 msgid "Romanian"
 msgstr "Румънска"
 
-#: src/translations.h:104
+#: src/translations.h:105
 msgid "Sami"
 msgstr "Сами"
 
-#: src/translations.h:105
+#: src/translations.h:106
 msgid "Tupi-Guarani"
 msgstr "Тупи-гуарани"
 
-#: src/translations.h:106
+#: src/translations.h:107
 msgid "Tongan"
 msgstr ""
 
-#: src/translations.h:107
+#: src/translations.h:108
 msgid "Western"
 msgstr "Западна"
 
-#: src/translations.h:108
+#: src/translations.h:109
 msgid "Western (H.A.Rey)"
 msgstr ""
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:114
+#: src/translations.h:115
 msgid "Guereins"
 msgstr "Герен"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:116
+#: src/translations.h:117
 msgid "Trees"
 msgstr "Дървета"
 
-#. TRANSLATORS: Name of landscape and Earth's satellite
-#: src/translations.h:118
+#. TRANSLATORS: Name of landscape
+#: src/translations.h:119
 msgid "Moon"
 msgstr "Луна"
 
 #. TRANSLATORS: Landscape name: Hurricane Ridge
-#: src/translations.h:120
+#: src/translations.h:121
 msgid "Hurricane"
 msgstr "Хърикейн"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:122
+#: src/translations.h:123
 msgid "Ocean"
 msgstr "Океан"
 
 #. TRANSLATORS: Landscape name: Garching bei Munchen
-#: src/translations.h:124
+#: src/translations.h:125
 msgid "Garching"
 msgstr "Гархинг"
 
 #. TRANSLATORS: Name of landscape and planet
-#: src/translations.h:126
+#: src/translations.h:127
 msgid "Mars"
 msgstr "Марс"
 
 #. TRANSLATORS: Name of landscape and planet
-#: src/translations.h:128
+#: src/translations.h:129
 msgid "Saturn"
 msgstr "Сатурн"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:130
+#: src/translations.h:131
 msgid "Geneva"
 msgstr "Женева"
 
-#. TRANSLATORS: Name of landscape
 #. TRANSLATORS: Name of landscape
 #: src/translations.h:133
 msgid "Grossmugl"
@@ -4737,22 +4774,22 @@ msgid "Angle measure"
 msgstr "Ъгломер"
 
 #. TRANSLATORS: instructions for using the AngleMeasure plugin.
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:477
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:488
 msgid "The Angle Measure is enabled:"
 msgstr "Ъгломерът е включен:"
 
 #. TRANSLATORS: instructions for using the AngleMeasure plugin.
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:479
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:490
 msgid "Drag with the left button to measure, left-click to clear."
 msgstr "Завлачете с левия бутон за измерване, щракнете с него за изчистване."
 
 #. TRANSLATORS: instructions for using the AngleMeasure plugin.
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:481
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:492
 msgid "Right-clicking changes the end point only."
 msgstr "Щракване с десния бутон сменя само крайната точка."
 
 #. TRANSLATORS: PA is abbreviation for phrase "Position Angle"
-#: plugins/AngleMeasure/src/AngleMeasure.cpp:483
+#: plugins/AngleMeasure/src/AngleMeasure.cpp:494
 msgid "PA="
 msgstr ""
 
@@ -9733,6 +9770,9 @@ msgstr ""
 
 #~ msgid "Shut Down: "
 #~ msgstr "Затваряне: "
+
+#~ msgid "This system does not support OpenGL."
+#~ msgstr "Системата не поддържа OpenGL."
 
 #~ msgid "10"
 #~ msgstr "10"
