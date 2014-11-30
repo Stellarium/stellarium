@@ -234,6 +234,7 @@ public slots:
 	void setConstellationDisplayStyle(int style);
 	//! get the way how contellation names are displayed: abbbreviated/as-given/translated
 	ConstellationDisplayStyle getConstellationDisplayStyle();
+	QString getConstellationDisplayStyleString();
 
 signals:
 	void artDisplayedChanged(const bool displayed) const;
