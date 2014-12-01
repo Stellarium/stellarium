@@ -42,6 +42,7 @@ class QMoveEvent;
 class QResizeEvent;
 class StelGuiBase;
 class QMoveEvent;
+class QSettings;
 
 //! @class StelMainView
 //! Reimplement a QGraphicsView for Stellarium.
@@ -155,8 +156,11 @@ private:
 	//! Start the display loop
 	void startMainLoop();
 	
-	//! provide extensive OpenGL dignostics in logfile.
+	//! provide extended OpenGL diagnostics in logfile.
 	void dumpOpenGLdiagnostics() const;
+	//! Startup diagnostics, providing test for various circumstances of bad OS/OpenGL driver combinations
+	//! to provide feedback to the user about bad OpenGL drivers.
+	void processOpenGLdiagnosticsAndWarnings(QSettings *conf) const;
 
 	//! The StelMainView singleton
 	static StelMainView* singleton;
