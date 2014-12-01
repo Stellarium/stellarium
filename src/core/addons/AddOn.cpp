@@ -68,17 +68,14 @@ AddOn::AddOn(const qint64 addOnId, const QVariantMap& map)
 
 	if (m_eType == Texture)
 	{
-		m_textureslist = map.value("textures").toString().split("/");
+		m_InstalledTextures.clear();
+		m_AllTextures = map.value("textures").toString().split("/").toSet();
 		// a texture must have "textures"
-		if (m_textureslist.isEmpty())
+		if (m_AllTextures.isEmpty())
 		{
 			qWarning() << "Add-On Catalog : Error! Texture" << m_iAddOnId
 				   << "does not have the field \"textures\"!";
 			return;
-		}
-		foreach (QString name, m_textureslist)
-		{
-			m_textures.insert(name, 0); // not installed
 		}
 	}
 
@@ -198,4 +195,18 @@ QString AddOn::getDownloadFilepath()
 {
 	QString categoryDir = StelApp::getInstance().getStelAddOnMgr().getDirectory(m_eCategory);
 	return categoryDir % m_sDownloadFilename;
+}
+
+void AddOn::setTextureStatus(QString name, bool installed)
+{
+	if (!m_AllTextures.contains(name))
+	{
+		return;
+	}
+
+	m_InstalledTextures.remove(name);
+	if (installed)
+	{
+		m_InstalledTextures.insert(name);
+	}
 }

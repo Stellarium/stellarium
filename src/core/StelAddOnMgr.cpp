@@ -233,18 +233,16 @@ void StelAddOnMgr::refreshAddOnStatuses()
 			QMap<qint64, AddOn*>::iterator i;
 			for (i = textures.begin(); i != textures.end(); ++i)
 			{
-				int countInstalled = 0;
 				foreach (QString t, list) {
 					QStringList tL = t.split("/");
 					if (tL[0] == i.value()->getInstallId())
 					{
 						list.removeOne(t);
-						i.value()->setTextureStatus(tL[0], 1);
+						i.value()->setTextureStatus(tL[0], true);
 						i.value()->setStatus(AddOn::PartiallyInstalled);
-						countInstalled++;
 					}
 				}
-				if (countInstalled == i.value()->getTextures().size())
+				if (i.value()->getAllTextures().size() == i.value()->getInstalledTextures().size())
 				{
 					i.value()->setStatus(AddOn::FullyInstalled);
 				}
