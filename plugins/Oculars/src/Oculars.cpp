@@ -1399,7 +1399,8 @@ void Oculars::paintCCDBounds()
 
 			if (width > 0.0 && height > 0.0) {
 				QPoint a, b;
-				QTransform transform = QTransform().translate(params.viewportCenter[0], params.viewportCenter[1]).rotate(-ccdRotationAngle);
+				QTransform transform = QTransform().translate(params.viewportCenter[0] * params.devicePixelsPerPixel,
+						params.viewportCenter[1] * params.devicePixelsPerPixel).rotate(-ccdRotationAngle);
 				// bottom line
 				a = transform.map(QPoint(-width/2.0, -height/2.0));
 				b = transform.map(QPoint(width/2.0, -height/2.0));
