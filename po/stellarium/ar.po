@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-11-30 17:51+0600\n"
-"PO-Revision-Date: 2014-11-29 13:12+0000\n"
+"PO-Revision-Date: 2014-12-01 09:58+0000\n"
 "Last-Translator: Khalid AlAjaji <Unknown>\n"
 "Language-Team: Arabic <ar@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-12-01 05:35+0000\n"
+"X-Launchpad-Export-Date: 2014-12-02 05:44+0000\n"
 "X-Generator: Launchpad (build 17274)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:132 src/core/modules/StarMgr.cpp:353
@@ -1765,15 +1765,15 @@ msgstr "حد قدر اللمعان الذي تراه العين المجردة �
 
 #: src/gui/ViewDialog.cpp:413
 msgid "Abbreviated"
-msgstr ""
+msgstr "مختصرة"
 
 #: src/gui/ViewDialog.cpp:414
 msgid "Native"
-msgstr ""
+msgstr "باللغة الأصلية"
 
 #: src/gui/ViewDialog.cpp:415
 msgid "Translated"
-msgstr ""
+msgstr "مترجمة"
 
 #: src/gui/ViewDialog.cpp:539
 msgid "No description"
@@ -2024,10 +2024,16 @@ msgid ""
 "No OpenGL 2 found on this system. Please upgrade hardware or use MESA or an "
 "older version."
 msgstr ""
+"لايوجد الإصدار الثاني من مكتبة الرسومات المفتوحة. الرجاء تحديث جهازك أو "
+"استخدام إصدار قديم من ستيللاريوم أو إصدار يتضمن مكتبة ميسا للرسومات. No "
+"OpenGL 2 found on this system. Please upgrade hardware or use MESA or an "
+"older version."
 
 #: src/StelMainView.cpp:382
 msgid "Cannot acquire necessary OpenGL resources."
 msgstr ""
+"لم يتمكن البرنامج من الحصول على الموارد الضرورية في مكتبة الرسومات المفتوحة. "
+"Cannot acquire necessary OpenGL resources."
 
 #: src/StelMainView.cpp:464
 msgid ""
@@ -2052,6 +2058,8 @@ msgid ""
 "Ignore and suppress this notice in the future and try to continue in "
 "degraded mode anyway?"
 msgstr ""
+"التفاصيل في السجل. . DirectX/OpenGL ES لديك مشاكل في النظام الفرعي\n"
+"تجاهل هذه الرسالة في المستقبل وحاول الاستمرار بالنسق المخفض على أي حال؟"
 
 #: src/StelMainView.cpp:559
 msgid ""
@@ -2059,6 +2067,8 @@ msgid ""
 "Ignore and suppress this notice in the future and try to continue in "
 "degraded mode anyway?"
 msgstr ""
+"التفاصيل في السجل. . OpenGL/Mesa لديك مشاكل في النظام الفرعي\n"
+"تجاهل هذه الرسالة في المستقبل وحاول الاستمرار بالنسق المخفض على أي حال؟"
 
 #: src/StelMainView.cpp:610
 msgid ""
@@ -2066,6 +2076,8 @@ msgid ""
 "Ignore and suppress this notice in the future and try to continue in "
 "degraded mode anyway?"
 msgstr ""
+"التفاصيل في السجل. . OpenGL لديك مشاكل في النظام الفرعي\n"
+"تجاهل هذه الرسالة في المستقبل وحاول الاستمرار بالنسق المخفض على أي حال؟"
 
 #: src/StelMainView.cpp:647
 msgid ""
@@ -2073,6 +2085,8 @@ msgid ""
 "Ignore and suppress this notice in the future and try to continue in "
 "degraded mode anyway?"
 msgstr ""
+"التفاصيل في السجل. . OpenGL ES لديك مشاكل في النظام الفرعي\n"
+"تجاهل هذه الرسالة في المستقبل وحاول الاستمرار بالنسق المخفض على أي حال؟"
 
 #: src/StelMainView.cpp:679
 msgid "Save screenshot"
@@ -4241,15 +4255,15 @@ msgstr "اجعل التراث الفلكي الحالي هو الافتراضي"
 
 #: src/ui_viewDialog.h:1349
 msgid "Show names"
-msgstr ""
+msgstr "اعرض الأسماء"
 
 #: src/ui_viewDialog.h:1351
 msgid "Select if you want names abbreviated, original or translated"
-msgstr ""
+msgstr "اختر إذا كنت تريد عرض السماء مختصرة، باللغة الصلية أو مترجمة"
 
 #: src/ui_viewDialog.h:1354
 msgid "Use native names for planets from current culture"
-msgstr ""
+msgstr "استخدم أسماء الكواكب باللغة الأصلية للتراث الفلكي الحالي"
 
 #: src/ui_viewDialog.h:1356
 msgid "Visible"
@@ -4261,15 +4275,15 @@ msgstr "الإعدادات"
 
 #: src/ui_configurationDialog.h:1038
 msgid "Language settings"
-msgstr ""
+msgstr "إعدادات اللغة"
 
 #: src/ui_configurationDialog.h:1039
 msgid "Program Language"
-msgstr ""
+msgstr "لغة البرنامج"
 
 #: src/ui_configurationDialog.h:1040
 msgid "Sky Culture Language"
-msgstr ""
+msgstr "لغة التراث الفلكي"
 
 #: src/ui_configurationDialog.h:1041
 msgid "Check updates"
@@ -8539,26 +8553,26 @@ msgstr "البعد الزاوي الأعظم عن الشمس: %1 (عند زاو�
 #: plugins/Observability/src/Observability.cpp:203
 #, qt-format
 msgid "Acronycal rise/set: %1/%2. "
-msgstr ""
+msgstr "الطلوع/الغياب المقابل للشمس: %1/%2. "
 
 #: plugins/Observability/src/Observability.cpp:204
 #, qt-format
 msgid "Heliacal rise/set: %1/%2. "
-msgstr ""
+msgstr "الطلوع/الاستسرار(الكنّة): %1/%2. "
 
 #: plugins/Observability/src/Observability.cpp:205
 msgid "No Heliacal rise/set. "
-msgstr ""
+msgstr "ليس له طلوع ولا استسرار "
 
 #. TRANSLATORS: The space at the end is significant - another sentence may follow.
 #: plugins/Observability/src/Observability.cpp:207
 msgid "No Acronycal rise/set. "
-msgstr ""
+msgstr "ليس له طلوع ولاغياب مقابل للشمس "
 
 #: plugins/Observability/src/Observability.cpp:208
 #, qt-format
 msgid "Cosmical rise/set: %1/%2."
-msgstr ""
+msgstr "الطلوع/الغياب الموافق للشمس: %1/%2."
 
 #: plugins/Observability/src/Observability.cpp:209
 msgid "No Cosmical rise/set."
@@ -8659,7 +8673,8 @@ msgid ""
 "Minimum observable altitude (due to mountains, buildings, or just a limited "
 "telescope mount)."
 msgstr ""
-"أقل ارتفاع يمكن رصده - بسبب الجبال، أو المباني، أو بسبب حامل تلسكوب محدود"
+"أقل ارتفاع يمكن رصده - بسبب الجبال، أو المباني، أو بسبب حامل تلسكوب محدود "
+"الارتفاع"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:143
 msgid "Today ephemeris:"
@@ -8677,7 +8692,7 @@ msgstr ""
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:144
 msgid "Acronychal/Cosmical/Heliacal rise/set:"
-msgstr ""
+msgstr "الطلوع والغياب الموافق للشمس والمقابل لها ووقت الطلوع وبداية الكنة"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:144
 msgid ""
@@ -8699,6 +8714,19 @@ msgid ""
 "visible). At the Heliacal set, the star sets roughly after the beginning of "
 "the astronomical night."
 msgstr ""
+"<P DIR=RTL> الطلوع الموافق للشمس هو اليوم الذي يكون فيه طلوع النجم وشروق "
+"الشمس في نفس الوقت، والغياب الموافق للشمس هو اليوم الذي يكون فيه غياب النجم "
+"وغياب الشمس في نغس الوقت. تواريخ هذه الأيام تعتمد على مكان الراصد. ومن ناحية "
+"أخرى فإن الطلوع المقابل للشمس يحدث في اليوم الذي يكون طلوع النجم فيه في نفس "
+"وقت غياب الشمس بينما الغياب المقابل للشمس يحدث عندما يكون غياب النجم في نفس "
+"الوقت الذي تطلع فيه الشمس. من هذا نعرف أن النجم لايمكن رصده في الأيام التي "
+"تقع بين غيابه الموافق للشمس وطلوعه الموافق للشمس. وفي الأيام التي تقع حوالي "
+"المدة بين الغياب المقابل للشمس والطلوع المقابل للشمس يكون رصده سهلا لارتفاعه "
+"في السماء ليلاً. أما وقت الطلوع فهو أول يوم من السنة يمكن فيها رصد النجم ، "
+"وهذا يحدث عندما يكون النجم في الأفق الشرقي في نهاية الليل الفلكي أو بمعنى "
+"آخر عند نهاية الشفق الفلكي، وفي الأيام التالية تزيد المدة التي يمكن فيها رصد "
+"النجم حتى يصل إلى يوم غيابه أو بداية كنّته، وهي آخر ليلة من السنة يرى فيها "
+"هذا النجم، ويغيب النجم في هذه الليلة تقريبا بعد بداية الليل الفلكي."
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:145
 msgid "Largest Sun separation:"
@@ -8826,6 +8854,8 @@ msgstr "التقويم الفلكي لهذا اليوم - وقت الطلوع و
 #: plugins/Observability/src/ui_ObservabilityDialog.h:353
 msgid "Dates of Acronychal/Cosmical/Heliacal rise/set"
 msgstr ""
+"تواريخ أوقات الطلوع والغياب الموافق للشمس والمقابل للشمس وبداية طلوع وبداية "
+"كنّة النجم"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:354
 msgid "Date of largest separation to the Sun"
