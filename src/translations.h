@@ -103,6 +103,7 @@ class Translations
 		N_("Polynesian");
 		N_("Romanian");
 		N_("Sami");
+		N_("Siberian");
 		N_("Tupi-Guarani");
 		N_("Tongan");
 		N_("Western");
