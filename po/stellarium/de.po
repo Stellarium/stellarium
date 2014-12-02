@@ -10,13 +10,13 @@ msgstr ""
 "Project-Id-Version: de\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-11-30 17:51+0600\n"
-"PO-Revision-Date: 2014-11-24 23:51+0000\n"
+"PO-Revision-Date: 2014-12-01 13:13+0000\n"
 "Last-Translator: gzotti <Georg.Zotti@univie.ac.at>\n"
 "Language-Team: <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-12-01 05:41+0000\n"
+"X-Launchpad-Export-Date: 2014-12-02 05:44+0000\n"
 "X-Generator: Launchpad (build 17274)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:132 src/core/modules/StarMgr.cpp:353
@@ -1793,15 +1793,15 @@ msgstr "Freiäugige Grenzgröße ist"
 
 #: src/gui/ViewDialog.cpp:413
 msgid "Abbreviated"
-msgstr ""
+msgstr "Abgekürzt"
 
 #: src/gui/ViewDialog.cpp:414
 msgid "Native"
-msgstr ""
+msgstr "Original"
 
 #: src/gui/ViewDialog.cpp:415
 msgid "Translated"
-msgstr ""
+msgstr "Übersetzt"
 
 #: src/gui/ViewDialog.cpp:539
 msgid "No description"
@@ -2056,10 +2056,12 @@ msgid ""
 "No OpenGL 2 found on this system. Please upgrade hardware or use MESA or an "
 "older version."
 msgstr ""
+"Kein OpenGL 2 auf diesem System. Bitte Hardware ergänzen, die MESA-Version "
+"verwenden, oder auf eine ältere Stellarium-Version zurückgehen."
 
 #: src/StelMainView.cpp:382
 msgid "Cannot acquire necessary OpenGL resources."
-msgstr ""
+msgstr "Kann nötige OpenGL-Ressourcen nicht bereitstellen."
 
 #: src/StelMainView.cpp:464
 msgid ""
@@ -2082,6 +2084,9 @@ msgid ""
 "Ignore and suppress this notice in the future and try to continue in "
 "degraded mode anyway?"
 msgstr ""
+"Das DirectX/OpenGL ES-Subsystem hat Probleme. Details im Logfile.\n"
+"Diese Meldung ignorieren und nicht wieder anzeigen, und versuchen trotz der "
+"Probleme fortzufahren?"
 
 #: src/StelMainView.cpp:559
 msgid ""
@@ -2089,6 +2094,9 @@ msgid ""
 "Ignore and suppress this notice in the future and try to continue in "
 "degraded mode anyway?"
 msgstr ""
+"Das OpenGL/Mesa-Subsystem hat Probleme. Details im Logfile.\n"
+"Diese Meldung ignorieren und nicht wieder anzeigen, und versuchen trotz der "
+"Probleme fortzufahren?"
 
 #: src/StelMainView.cpp:610
 msgid ""
@@ -2096,6 +2104,9 @@ msgid ""
 "Ignore and suppress this notice in the future and try to continue in "
 "degraded mode anyway?"
 msgstr ""
+"Das OpenGL-Subsystem hat Probleme. Details im Logfile.\n"
+"Diese Meldung ignorieren und nicht wieder anzeigen, und versuchen trotz der "
+"Probleme fortzufahren?"
 
 #: src/StelMainView.cpp:647
 msgid ""
@@ -2103,6 +2114,9 @@ msgid ""
 "Ignore and suppress this notice in the future and try to continue in "
 "degraded mode anyway?"
 msgstr ""
+"Das OpenGL ES-Subsystem hat Probleme. Details im Logfile.\n"
+"Diese Meldung ignorieren und nicht wieder anzeigen, und versuchen trotz der "
+"Probleme fortzufahren?"
 
 #: src/StelMainView.cpp:679
 msgid "Save screenshot"
@@ -2241,7 +2255,7 @@ msgstr "Arabisch"
 
 #: src/translations.h:90
 msgid "Arabic Moon Stations"
-msgstr ""
+msgstr "Arabische Mondstationen"
 
 #: src/translations.h:91
 msgid "Aztec"
@@ -2317,7 +2331,7 @@ msgstr "Westlich"
 
 #: src/translations.h:109
 msgid "Western (H.A.Rey)"
-msgstr ""
+msgstr "Westlich (H.A.Rey)"
 
 #. TRANSLATORS: Name of landscape
 #: src/translations.h:115
@@ -4296,15 +4310,17 @@ msgstr "Benutze diese Sternbilddarstellung als Standardvorgabe"
 
 #: src/ui_viewDialog.h:1349
 msgid "Show names"
-msgstr ""
+msgstr "Namen anzeigen"
 
 #: src/ui_viewDialog.h:1351
 msgid "Select if you want names abbreviated, original or translated"
 msgstr ""
+"Auswahl, ob abgekürzte Namen, Bezeichnungen in Originalsprache oder "
+"Übersetzungen angezeigt werden."
 
 #: src/ui_viewDialog.h:1354
 msgid "Use native names for planets from current culture"
-msgstr ""
+msgstr "Planetennamen in Originalsprache der aktuellen Sternbilderkultur"
 
 #: src/ui_viewDialog.h:1356
 msgid "Visible"
@@ -4316,15 +4332,15 @@ msgstr "Konfiguration"
 
 #: src/ui_configurationDialog.h:1038
 msgid "Language settings"
-msgstr ""
+msgstr "Spracheinstellungen"
 
 #: src/ui_configurationDialog.h:1039
 msgid "Program Language"
-msgstr ""
+msgstr "Programmsprache"
 
 #: src/ui_configurationDialog.h:1040
 msgid "Sky Culture Language"
-msgstr ""
+msgstr "Sprache für Sternbildkultur"
 
 #: src/ui_configurationDialog.h:1041
 msgid "Check updates"
@@ -5639,7 +5655,7 @@ msgstr "Gesichtsfeld auf Anfangswert setzen"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1088
 msgid "Sensor view"
-msgstr ""
+msgstr "Sensordarstellung"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1089
 msgid "Use degrees and minutes for FOV of CCD"
@@ -8619,7 +8635,7 @@ msgstr "Größter Abstand zur Sonne: %1 (bei %2°)"
 #: plugins/Observability/src/Observability.cpp:203
 #, qt-format
 msgid "Acronycal rise/set: %1/%2. "
-msgstr ""
+msgstr "Akronychischer Auf-/Untergang: %1/%2. "
 
 #: plugins/Observability/src/Observability.cpp:204
 #, qt-format
@@ -8633,12 +8649,12 @@ msgstr "Kein Heliakischer Aufgang. "
 #. TRANSLATORS: The space at the end is significant - another sentence may follow.
 #: plugins/Observability/src/Observability.cpp:207
 msgid "No Acronycal rise/set. "
-msgstr ""
+msgstr "Kein akronychischer Auf-/Untergang. "
 
 #: plugins/Observability/src/Observability.cpp:208
 #, qt-format
 msgid "Cosmical rise/set: %1/%2."
-msgstr ""
+msgstr "Kosmischer Auf-/Untergang: %1/%2."
 
 #: plugins/Observability/src/Observability.cpp:209
 msgid "No Cosmical rise/set."
@@ -8762,7 +8778,7 @@ msgstr ""
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:144
 msgid "Acronychal/Cosmical/Heliacal rise/set:"
-msgstr ""
+msgstr "Akronychische/kosmische/heliakische Auf-/Untergänge:"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:144
 msgid ""
@@ -8784,6 +8800,21 @@ msgid ""
 "visible). At the Heliacal set, the star sets roughly after the beginning of "
 "the astronomical night."
 msgstr ""
+"Der akronychische Aufgang (bzw. Untergang) eines Objekts bedeutet Aufgang "
+"(bzw. Untergang) bei Sonnenuntergang (bzw. -aufgang). (Sonne und Objekt "
+"stehen einander ungefähr gegenüber. ) Die genauen Daten sind abhängig vom "
+"Beobachtungsort. Zwischen akronychischem Unter- (am Morgenhimmel) und "
+"Aufgang (am Abendhimmel) ist das Objekt im allgemeinen am besten "
+"beobachtbar, es steht am höchsten wenn die Sonne unter dem Horizont ist. Im "
+"Gegensatz dazu gehen Objekt und Sonne beim kosmischen Auf- bzw. Untergang "
+"gleichzeitig auf bzw. unter. Dieses Phänomen entzieht sich wegen der alles "
+"überstrahlenden Sonne in der Regel der freisichtigen Beobachtung. Zwischen "
+"kosmischem Unter- und Aufgang ist ein Objekt im allgemeinen unbeobachtbar. "
+"Der Heliakische Aufgang ist das erste Sichtbarwerden eines Sterns in der "
+"Morgendämmerung am Osthimmel, nach seiner Sonnennähe. Der Stern ist nun "
+"täglich früher sichtbar. Der Heliakische Untergang bezeichnet das letzte "
+"kurzzeitige Erscheinen eines Sterns in der Abenddämmerung vor seinem "
+"Untergang."
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:145
 msgid "Largest Sun separation:"
@@ -8906,7 +8937,7 @@ msgstr "Heutige Sichtbarkeit (Aufgang, Untergang, Meridiantransit)"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:353
 msgid "Dates of Acronychal/Cosmical/Heliacal rise/set"
-msgstr ""
+msgstr "Daten von akronychischen/kosmischen/heliakischen Auf-/Untergängen"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:354
 msgid "Date of largest separation to the Sun"
