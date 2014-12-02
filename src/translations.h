@@ -103,6 +103,7 @@ class Translations
 		N_("Polynesian");
 		N_("Romanian");
 		N_("Sami");
+		// TRANSLATORS: Name of the sky culture
 		N_("Siberian");
 		N_("Tupi-Guarani");
 		N_("Tongan");
