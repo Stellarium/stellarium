@@ -69,7 +69,6 @@ public:
 	void installFromFile(const QString& filePath);
 	void removeAddOn(AddOn *addon, const QStringList files);
 	bool isCompatible(QString first, QString last);
-	bool updateCatalog(QString webresult);
 	void setUpdateFrequencyDays(int days);
 	void setUpdateFrequencyHour(int hour);
 	void setLastUpdate(qint64 time);

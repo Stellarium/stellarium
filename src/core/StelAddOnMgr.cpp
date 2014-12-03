@@ -261,39 +261,6 @@ void StelAddOnMgr::refreshAddOnStatuses()
 	}
 }
 
-bool StelAddOnMgr::updateCatalog(QString webresult)
-{
-	/*
-	QStringList queries = webresult.split("<br>");
-	queries.removeFirst();
-	foreach (QString insert, queries)
-	{
-		if (!m_pStelAddOnDAO->insertOnDatabase(insert))
-		{
-			return false;
-		}
-	}
-
-	// download thumbnails
-	m_thumbnails = m_pStelAddOnDAO->getThumbnails(CATEGORY_LANDSCAPE);
-	m_thumbnails = m_thumbnails.unite(m_pStelAddOnDAO->getThumbnails(CATEGORY_SCRIPT));
-	m_thumbnails = m_thumbnails.unite(m_pStelAddOnDAO->getThumbnails(CATEGORY_TEXTURE));
-	QHashIterator<QString, QString> i(m_thumbnails); // <id_install, url>
-	while (i.hasNext()) {
-	    i.next();
-	    if (!QFile(m_sThumbnailDir % i.key() % ".jpg").exists())
-	    {
-		    m_thumbnailQueue.append(i.value());
-	    }
-	}
-	downloadNextThumbnail();
-
-	// check add-ons which are already installed
-	refreshAddOnStatuses();
-*/
-	return true;
-}
-
 void StelAddOnMgr::downloadNextThumbnail()
 {
 	if (m_thumbnailQueue.isEmpty()) {
