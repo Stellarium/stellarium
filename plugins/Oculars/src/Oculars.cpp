@@ -1196,6 +1196,7 @@ void Oculars::toggleCCD(bool show)
 	StelCore *core = StelApp::getInstance().getCore();
 	StelMovementMgr *movementManager = core->getMovementMgr();	
 	if (show) {
+		initialFOV = movementManager->getCurrentFov();
 		//Mutually exclusive with the ocular mode
 		hideUsageMessageIfDisplayed();
 		if (flagShowOculars) {
@@ -1225,9 +1226,12 @@ void Oculars::toggleCCD(bool show)
 	} else {
 		flagShowCCD = false;
 
-		//Zoom out		
-		movementManager->zoomTo(movementManager->getInitFov());
 		movementManager->setFlagTracking(false);
+		//Zoom out		
+		if (getFlagInitFovUsage())
+			movementManager->zoomTo(movementManager->getInitFov());
+		else
+			movementManager->zoomTo(initialFOV);
 
 		if (getFlagUseFlipForCCD())
 		{
