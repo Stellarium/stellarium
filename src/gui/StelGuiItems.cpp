@@ -581,13 +581,14 @@ void BottomStelBar::updateText(bool updatePos)
 
 	QString newLocation = "";
 	const StelLocation* loc = &core->getCurrentLocation();
+	const StelTranslator& trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
 	if (getFlagShowLocation() && !loc->name.isEmpty())
 	{
-		newLocation = q_(loc->planetName) +", "+loc->name + ", "+q_("%1m").arg(loc->altitude);
+		newLocation = trans.qtranslate(loc->planetName) +", "+loc->name + ", "+q_("%1m").arg(loc->altitude);
 	}
 	if (getFlagShowLocation() && loc->name.isEmpty())
 	{
-		newLocation = q_(loc->planetName)+", "+StelUtils::decDegToDmsStr(loc->latitude)+", "+StelUtils::decDegToDmsStr(loc->longitude);
+		newLocation = trans.qtranslate(loc->planetName)+", "+StelUtils::decDegToDmsStr(loc->latitude)+", "+StelUtils::decDegToDmsStr(loc->longitude);
 	}
 	if (location->text()!=newLocation)
 	{
