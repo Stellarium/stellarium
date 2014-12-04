@@ -625,7 +625,7 @@ namespace StelUtils
         return (x < 0 ? std::ceil(x) : std::floor(x));
     }
 #else
-    inline double trunc(double x) { return trunc(x); }
+    inline double trunc(double x) { return ::trunc(x); }
 #endif
 }
 
