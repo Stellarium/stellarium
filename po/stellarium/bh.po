@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-12-02 13:41+0600\n"
+"POT-Creation-Date: 2014-12-03 22:27+0600\n"
 "PO-Revision-Date: 2012-05-08 17:10+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Bihari <bh@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-12-03 05:39+0000\n"
+"X-Launchpad-Export-Date: 2014-12-04 05:36+0000\n"
 "X-Generator: Launchpad (build 17274)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:132 src/core/modules/StarMgr.cpp:353
@@ -488,7 +488,7 @@ msgid "SpaceShip"
 msgstr ""
 
 #: src/core/StelCore.cpp:183 src/gui/StelGui.cpp:184
-#: src/ui_dateTimeDialogGui.h:365
+#: src/ui_dateTimeDialogGui.h:374 src/ui_dateTimeDialogGui.h:377
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:172
 msgid "Date and Time"
 msgstr ""
@@ -1580,20 +1580,20 @@ msgstr ""
 msgid "Auto hide vertical button bar"
 msgstr ""
 
-#: src/gui/StelGuiItems.cpp:289 src/gui/StelGuiItems.cpp:728
+#: src/gui/StelGuiItems.cpp:289 src/gui/StelGuiItems.cpp:729
 msgid "Space"
 msgstr ""
 
-#: src/gui/StelGuiItems.cpp:586
+#: src/gui/StelGuiItems.cpp:587
 #, c-format, qt-format
 msgid "%1m"
 msgstr ""
 
-#: src/gui/StelGuiItems.cpp:635
+#: src/gui/StelGuiItems.cpp:636
 msgid "Field of view"
 msgstr ""
 
-#: src/gui/StelGuiItems.cpp:653
+#: src/gui/StelGuiItems.cpp:654
 msgid "Frames per second"
 msgstr ""
 
@@ -3523,11 +3523,15 @@ msgstr ""
 msgid "Copy &Link Location"
 msgstr ""
 
-#: src/ui_dateTimeDialogGui.h:369
+#: src/ui_dateTimeDialogGui.h:378
+msgid "Date and Time in Gregorian calendar"
+msgstr ""
+
+#: src/ui_dateTimeDialogGui.h:380 src/ui_dateTimeDialogGui.h:385
 msgid "Julian Date"
 msgstr ""
 
-#: src/ui_dateTimeDialogGui.h:372
+#: src/ui_dateTimeDialogGui.h:383
 msgid "Modified Julian Date"
 msgstr ""
 
