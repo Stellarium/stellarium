@@ -94,6 +94,7 @@ public:
 	QString getDownloadFilepath();
 	quint64 getDownloadSize() { return m_sDownloadSize.toLongLong(); }
 	QString getDownloadURL() { return m_sDownloadURL; }
+	QString getThumbnail() { return m_sThumbnail; }
 	QString getInstallId() { return m_sInstallId; }
 	QString getChecksum() { return m_sChecksum; }
 	QString getDate() { return m_dateTime.toString("dd MMM yyyy - hh:mm:ss"); }
