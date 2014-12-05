@@ -83,6 +83,7 @@ public:
 	QString getUrlForUpdates() { return m_sUrlUpdate; }
 	StelAddOn* getStelAddOnInstance(AddOn::Category c) { return m_pStelAddOns.value(c); }
 	QString getJsonPath() { return m_sJsonPath; }
+	void reloadJsonFile();
 
 signals:
 	void addOnMgrMsg(StelAddOnMgr::AddOnMgrMsg);
@@ -126,10 +127,12 @@ private:
 	// sub-classes
 	QHash<AddOn::Category, StelAddOn*> m_pStelAddOns;
 
+	void refreshAddOnStatuses();
+	void refreshThumbnailQueue();
+
 	void restoreDefaultJsonFile();
 	void readJsonObject(const QJsonObject& addOns);
 
-	void refreshAddOnStatuses();
 	void downloadNextAddOn();
 	void finishCurrentDownload();
 	void cancelAllDownloads();

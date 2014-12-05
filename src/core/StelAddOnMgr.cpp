@@ -95,6 +95,26 @@ StelAddOnMgr::StelAddOnMgr()
 	}
 
 	// loading json file
+	reloadJsonFile();
+
+	// Init sub-classes
+	m_pStelAddOns.insert(AddOn::CATALOG, new AOCatalog());
+	m_pStelAddOns.insert(AddOn::LANDSCAPE, new AOLandscape());
+	m_pStelAddOns.insert(AddOn::LANGUAGEPACK, new AOLanguagePack());
+	m_pStelAddOns.insert(AddOn::SCRIPT, new AOScript());
+	m_pStelAddOns.insert(AddOn::STARLORE, new AOSkyCulture());
+	m_pStelAddOns.insert(AddOn::TEXTURE, new AOTexture());
+
+	connect(m_pStelAddOns.value(AddOn::STARLORE), SIGNAL(skyCulturesChanged()),
+		this, SIGNAL(skyCulturesChanged()));
+}
+
+StelAddOnMgr::~StelAddOnMgr()
+{
+}
+
+void StelAddOnMgr::reloadJsonFile()
+{
 	QFile jsonFile(m_sJsonPath);
 	if (jsonFile.open(QIODevice::ReadOnly))
 	{
@@ -115,23 +135,10 @@ StelAddOnMgr::StelAddOnMgr()
 			   << QDir::toNativeSeparators(m_sJsonPath);
 	}
 
-	// Init sub-classes
-	m_pStelAddOns.insert(AddOn::CATALOG, new AOCatalog());
-	m_pStelAddOns.insert(AddOn::LANDSCAPE, new AOLandscape());
-	m_pStelAddOns.insert(AddOn::LANGUAGEPACK, new AOLanguagePack());
-	m_pStelAddOns.insert(AddOn::SCRIPT, new AOScript());
-	m_pStelAddOns.insert(AddOn::STARLORE, new AOSkyCulture());
-	m_pStelAddOns.insert(AddOn::TEXTURE, new AOTexture());
-
-	connect(m_pStelAddOns.value(AddOn::STARLORE), SIGNAL(skyCulturesChanged()),
-		this, SIGNAL(skyCulturesChanged()));
+	refreshThumbnailQueue();
 
 	// refresh add-ons statuses (it checks which are installed or not)
 	refreshAddOnStatuses();
-}
-
-StelAddOnMgr::~StelAddOnMgr()
-{
 }
 
 void StelAddOnMgr::restoreDefaultJsonFile()
@@ -259,6 +266,21 @@ void StelAddOnMgr::refreshAddOnStatuses()
 			}
 		}
 	}
+}
+
+void StelAddOnMgr::refreshThumbnailQueue()
+{
+	QHashIterator<QString, AddOn*> aos(m_addonsByIdInstallId);
+	while (aos.hasNext())
+	{
+		aos.next();
+		m_thumbnails.insert(aos.key(), aos.value()->getThumbnail());
+		if (!QFile(m_sThumbnailDir % aos.key() % ".png").exists())
+		{
+			m_thumbnailQueue.append(aos.value()->getThumbnail());
+		}
+	}
+	downloadNextThumbnail();
 }
 
 void StelAddOnMgr::downloadNextThumbnail()
