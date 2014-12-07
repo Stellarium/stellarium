@@ -287,19 +287,14 @@ IF(NOT RELEASE_BUILD)
     IF(BZR_REVISION)
         SET(PACKAGE_VERSION "bzr${BZR_REVISION}")
         ADD_DEFINITIONS(-DBZR_REVISION="${BZR_REVISION}")
-    ELSE()
-        FIND_PACKAGE(Subversion)
-        IF(Subversion_FOUND)
-            Subversion_WC_INFO(${PROJECT_SOURCE_DIR} StelSvn)
-            SET(SVN_REVISION ${StelSvn_WC_REVISION})
-            ADD_DEFINITIONS(-DSVN_REVISION="${SVN_REVISION}")
-        ENDIF()
     ENDIF()
 ENDIF()
 
 IF(ENABLE_STRATOSCRIPT_COMPAT)
     ADD_DEFINITIONS(-DENABLE_STRATOSCRIPT_COMPAT)
 ENDIF()
+
+CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/data/stellarium.exe.manifest.cmake ${CMAKE_SOURCE_DIR}/data/stellarium.exe.manifest @ONLY)
 
 ### [Optional] Embed icon in the Windows executable ###
 IF(WIN32)
@@ -314,6 +309,14 @@ IF(WIN32)
             MESSAGE(STATUS "Found .rc compiler: ${RC_COMPILER_PATH}")
         ENDIF(RC_COMPILER_PATH)
     ENDIF(ENABLE_WINDOWS_EXE_ICON AND NOT RC_COMPILER_PATH)
+    IF (MSVC)
+	ADD_CUSTOM_COMMAND(
+	    TARGET ${TARGET_TARGETNAME}
+	    POST_BUILD
+	    COMMAND "mt.exe" -manifest \"${CMAKE_SOURCE_DIR}\\data\\stellarium.exe.manifest\" -outputresource:\"$<TARGET_FILE:${TARGET_TARGETNAME}>\"\;\#1
+	    COMMENT "Embed manifest..." 
+	)
+    ENDIF(MSVC)
 ENDIF()
 
 ### Generate an Inno Setup project file ###
