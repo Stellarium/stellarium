@@ -309,14 +309,6 @@ IF(WIN32)
             MESSAGE(STATUS "Found .rc compiler: ${RC_COMPILER_PATH}")
         ENDIF(RC_COMPILER_PATH)
     ENDIF(ENABLE_WINDOWS_EXE_ICON AND NOT RC_COMPILER_PATH)
-    IF (MSVC)
-	ADD_CUSTOM_COMMAND(
-	    TARGET ${TARGET_TARGETNAME}
-	    POST_BUILD
-	    COMMAND "mt.exe" -manifest \"${CMAKE_SOURCE_DIR}\\data\\stellarium.exe.manifest\" -outputresource:\"$<TARGET_FILE:${TARGET_TARGETNAME}>\"\;\#1
-	    COMMENT "Embed manifest..." 
-	)
-    ENDIF(MSVC)
 ENDIF()
 
 ### Generate an Inno Setup project file ###
