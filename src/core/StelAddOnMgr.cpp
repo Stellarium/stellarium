@@ -94,9 +94,6 @@ StelAddOnMgr::StelAddOnMgr()
 		restoreDefaultJsonFile();
 	}
 
-	// loading json file
-	reloadJsonFile();
-
 	// Init sub-classes
 	m_pStelAddOns.insert(AddOn::CATALOG, new AOCatalog());
 	m_pStelAddOns.insert(AddOn::LANDSCAPE, new AOLandscape());
@@ -107,6 +104,9 @@ StelAddOnMgr::StelAddOnMgr()
 
 	connect(m_pStelAddOns.value(AddOn::STARLORE), SIGNAL(skyCulturesChanged()),
 		this, SIGNAL(skyCulturesChanged()));
+
+	// loading json file
+	reloadJsonFile();
 }
 
 StelAddOnMgr::~StelAddOnMgr()
