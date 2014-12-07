@@ -840,3 +840,34 @@ void Exoplanets::setMarkerColor(QString c, bool h)
 	else
 		Exoplanet::exoplanetMarkerColor = nc;
 }
+
+void Exoplanets::translations()
+{
+#if 0
+	// TRANSLATORS: Habitable zone
+	N_("Hot");
+	// TRANSLATORS: Habitable zone
+	N_("Warm");
+	// TRANSLATORS: Habitable zone
+	N_("Cold");
+
+	// TRANSLATORS: Planet size
+	N_("Miniterran");
+	// TRANSLATORS: Planet size
+	N_("Subterran");
+	// TRANSLATORS: Planet size
+	N_("Terran");
+	// TRANSLATORS: Planet size
+	N_("Superterran");
+	// TRANSLATORS: Planet size
+	N_("Jovian");
+	// TRANSLATORS: Planet size
+	N_("Neptunian");
+
+	/* For copy/paste:
+	// TRANSLATORS:
+	N_("");
+	*/
+
+#endif
+}

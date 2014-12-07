@@ -47,7 +47,7 @@ $dbuser	= "exoplanet";
 $dbpass	= "exoplanet";
 
 $UA = LWP::UserAgent->new(keep_alive => 1, timeout => 360);
-$UA->agent("Mozilla/5.0 (Stellarium Exoplanets Catalog Updater 2.1; http://stellarium.org/)");
+$UA->agent("Mozilla/5.0 (Stellarium Exoplanets Catalog Updater 2.5; http://stellarium.org/)");
 $request = HTTP::Request->new('GET', $URL);
 $responce = $UA->request($request);
 
@@ -248,17 +248,19 @@ for ($i=1;$i<scalar(@catalog);$i++) {
 		}
 		
 		$hclass = '';
+		$hptype = '';
 		$mstemp = -1;
+		$eqtemp = -1;
 		$esi    = -1;
 		
 		$key = $starName." ".$pname;
 		if (exists($hp{$key})) {
 			$status  = $csvdata->parse($hp{$key});
-			($hsname,$hpname,$hclass,$mstemp,$esi) = $csvdata->fields();
+			($hsname,$hpname,$hptype,$hclass,$mstemp,$eqtemp,$esi) = $csvdata->fields();
 		}
 		
 		# insert planet data
-		$sth = $dbh->do(q{INSERT INTO planets (sid,pname,pmass,pradius,pperiod,psemiaxis,pecc,pinc,padistance,discovered,hclass,mstemp,esi) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)}, undef, $starID, $pname, $pmass, $pradius, $pperiod, $paxis, $pecc, $pincl, $angdist, $discovered, $hclass, $mstemp, $esi);
+		$sth = $dbh->do(q{INSERT INTO planets (sid,pname,pmass,pradius,pperiod,psemiaxis,pecc,pinc,padistance,discovered,hptype,hclass,mstemp,eqtemp,esi) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}, undef, $starID, $pname, $pmass, $pradius, $pperiod, $paxis, $pecc, $pincl, $angdist, $discovered, $hptype, $hclass, $mstemp, $eqtemp, $esi);
 	}
 #	else
 #	{
@@ -319,9 +321,11 @@ while (@stars = $sth->fetchrow_array()) {
 		$pinc		= $planets[8];
 		$angdist	= $planets[9];
 		$discovered	= $planets[10];
-		$habitclass	= $planets[11];
-		$meanstemp	= $planets[12];
-		$esindex	= $planets[13];
+		$hpltype	= $planets[11];
+		$habitclass	= $planets[12];
+		$meanstemp	= $planets[13];
+		$eqktemp	= $planets[14];
+		$esindex	= $planets[15];
 	
 		$out .= "\t\t\t{\n";
 		if ($pmass ne '') {
@@ -348,11 +352,17 @@ while (@stars = $sth->fetchrow_array()) {
 		if ($discovered ne '') {
 			$out .= "\t\t\t\t\"discovered\": ".$discovered.",\n";
 		}
+		if ($hpltype ne '') {
+			$out .= "\t\t\t\t\"pclass\": \"".$hpltype."\",\n";
+		}
 		if ($habitclass ne '') {
 			$out .= "\t\t\t\t\"hclass\": \"".$habitclass."\",\n";
 		}
 		if ($meanstemp > 0) {
 			$out .= "\t\t\t\t\"MSTemp\": ".$meanstemp.",\n";
+		}
+		if ($eqktemp > 0) {
+			$out .= "\t\t\t\t\"EqTemp\": ".$eqktemp.",\n";
 		}
 		if ($esindex > 0) {
 			$out .= "\t\t\t\t\"ESI\": ".$esindex.",\n";
