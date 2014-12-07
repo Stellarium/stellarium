@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-11-29 18:04+0600\n"
-"PO-Revision-Date: 2014-11-27 19:26+0000\n"
-"Last-Translator: Alexander Wolf <Unknown>\n"
+"POT-Creation-Date: 2014-12-02 13:19+0600\n"
+"PO-Revision-Date: 2014-11-30 13:34+0000\n"
+"Last-Translator: Nadanomics <hb7701@naver.com>\n"
 "Language-Team: Korean <ko@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-11-30 05:27+0000\n"
-"X-Generator: Launchpad (build 17267)\n"
+"X-Launchpad-Export-Date: 2014-12-03 06:11+0000\n"
+"X-Generator: Launchpad (build 17274)\n"
 
 #: skycultures/translations.fab:9
 #: skycultures/korean/constellation_names.eng.fab:30
@@ -61,7 +61,7 @@ msgstr "팔라스"
 
 #: skycultures/translations.fab:19
 msgid "Juno"
-msgstr "유노"
+msgstr "주노"
 
 #: skycultures/translations.fab:20
 msgid "Vesta"
@@ -201,7 +201,7 @@ msgstr "오베론"
 
 #: skycultures/translations.fab:54
 msgid "Pluto"
-msgstr "명왕성(134340 플루토)"
+msgstr "명왕성(134340 Pluto)"
 
 #: skycultures/translations.fab:55
 msgid "Charon"
@@ -270,7 +270,7 @@ msgstr "네소"
 
 #: skycultures/translations.fab:72
 msgid "Metis (moon)"
-msgstr ""
+msgstr "메티스(위성)"
 
 #: skycultures/translations.fab:73
 msgid "Prometheus (moon)"
@@ -336,7 +336,7 @@ msgstr "헤베"
 #. TRANSLATORS: Asteroid (7) Iris
 #: skycultures/translations.fab:104
 msgid "Iris"
-msgstr "이리스"
+msgstr "아이리스"
 
 #. TRANSLATORS: Asteroid (8) Flora
 #: skycultures/translations.fab:106
@@ -391,7 +391,7 @@ msgstr "파에톤"
 #. TRANSLATORS: Asteroid (1866) Sisyphus
 #: skycultures/translations.fab:126
 msgid "Sisyphus"
-msgstr "시지프스"
+msgstr "시시포스"
 
 #. TRANSLATORS: Asteroid (1864) Daedalus
 #: skycultures/translations.fab:128
@@ -469,7 +469,7 @@ msgstr "검은눈 은하"
 
 #: nebulae/default/ngc2000names.dat:225
 msgid "Blinking planetary"
-msgstr "깜빡임 행성"
+msgstr ""
 
 #: nebulae/default/ngc2000names.dat:226
 msgid "Blue Snowball"
@@ -477,7 +477,7 @@ msgstr "푸른 눈사람(NGC 7662)"
 
 #: nebulae/default/ngc2000names.dat:227
 msgid "Blue planetary"
-msgstr "푸른 행성"
+msgstr ""
 
 #: nebulae/default/ngc2000names.dat:228
 msgid "Bode's nebulae"
@@ -537,7 +537,7 @@ msgstr "콘 성운"
 #: nebulae/default/ngc2000names.dat:248 nebulae/default/ngc2000names.dat:249
 #: nebulae/default/ngc2000names.dat:250
 msgid "Copeland's Septet"
-msgstr "코플랜드의 칠 중주곡"
+msgstr ""
 
 #: nebulae/default/ngc2000names.dat:251
 msgid "Crab nebula"
@@ -573,7 +573,7 @@ msgstr ""
 
 #: nebulae/default/ngc2000names.dat:261
 msgid "Filamentary nebula"
-msgstr "필라멘타리 성운"
+msgstr "섬유상 성운"
 
 #: nebulae/default/ngc2000names.dat:262
 msgid "Flaming Star nebula"
@@ -581,7 +581,7 @@ msgstr "불꽃 별 성운"
 
 #: nebulae/default/ngc2000names.dat:263
 msgid "Ghost of Jupiter"
-msgstr "목성의 유령"
+msgstr ""
 
 #: nebulae/default/ngc2000names.dat:264
 msgid "Great Cluster in Hercules"
@@ -698,7 +698,7 @@ msgstr "천문학"
 
 #: nebulae/default/ngc2000names.dat:294
 msgid "Ring nebula in Lyra"
-msgstr "백조자리의 고리성운"
+msgstr "백조자리 고리성운"
 
 #: nebulae/default/ngc2000names.dat:295 nebulae/default/ngc2000names.dat:296
 #: nebulae/default/ngc2000names.dat:297 nebulae/default/ngc2000names.dat:298
@@ -736,7 +736,7 @@ msgstr ""
 #: nebulae/default/ngc2000names.dat:307 nebulae/default/ngc2000names.dat:308
 #: nebulae/default/ngc2000names.dat:309 nebulae/default/ngc2000names.dat:310
 msgid "Stephan's Quintet"
-msgstr "스테판의 5개 은하"
+msgstr "스테판 4중주"
 
 #: nebulae/default/ngc2000names.dat:311
 msgid "Struve's Lost nebula"
@@ -5287,6 +5287,7 @@ msgid "Animal"
 msgstr "동물"
 
 #: skycultures/lakota/constellation_names.eng.fab:7
+#: skycultures/siberian/constellation_names.eng.fab:1
 msgid "Elk"
 msgstr "엘크"
 
@@ -7106,6 +7107,23 @@ msgstr "갈라"
 #: skycultures/sami/constellation_names.eng.fab:10
 msgid "The Ski Runners"
 msgstr "스키 경주자"
+
+#: skycultures/siberian/constellation_names.eng.fab:2
+msgid "Threshers"
+msgstr ""
+
+#: skycultures/siberian/constellation_names.eng.fab:3
+msgid "Duck Nest"
+msgstr ""
+
+#: skycultures/siberian/star_names.fab:1
+msgid "Golden stake"
+msgstr ""
+
+#. TRANSLATORS: Native name of Venus in Siberian culture (in English words)
+#: skycultures/siberian/planet_names.fab:2
+msgid "Night Star"
+msgstr ""
 
 #: skycultures/tongan/constellation_names.eng.fab:1
 msgid "Toloatonga"
