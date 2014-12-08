@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-12-03 22:27+0600\n"
+"POT-Creation-Date: 2014-12-08 01:07+0600\n"
 "PO-Revision-Date: 2014-08-03 03:01+0000\n"
 "Last-Translator: abuyop <Unknown>\n"
 "Language-Team: Malay <ms@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-12-04 05:47+0000\n"
+"X-Launchpad-Export-Date: 2014-12-08 05:58+0000\n"
 "X-Generator: Launchpad (build 17274)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:132 src/core/modules/StarMgr.cpp:353
@@ -167,7 +167,7 @@ msgstr "Planet "
 #: src/core/modules/StarWrapper.cpp:173
 #: plugins/Satellites/src/Satellite.cpp:252
 #: plugins/Supernovae/src/Supernova.cpp:127 plugins/Quasars/src/Quasar.cpp:98
-#: plugins/Pulsars/src/Pulsar.cpp:155 plugins/Exoplanets/src/Exoplanet.cpp:176
+#: plugins/Pulsars/src/Pulsar.cpp:155 plugins/Exoplanets/src/Exoplanet.cpp:180
 #, qt-format
 msgid "Type: <b>%1</b>"
 msgstr "Jenis: <b>%1</b>"
@@ -176,7 +176,7 @@ msgstr "Jenis: <b>%1</b>"
 #: src/core/modules/MinorPlanet.cpp:214 src/core/modules/Comet.cpp:162
 #: src/core/modules/StarWrapper.cpp:56 src/core/modules/StarWrapper.cpp:180
 #: plugins/Supernovae/src/Supernova.cpp:132 plugins/Novae/src/Nova.cpp:138
-#: plugins/Quasars/src/Quasar.cpp:104 plugins/Exoplanets/src/Exoplanet.cpp:185
+#: plugins/Quasars/src/Quasar.cpp:104 plugins/Exoplanets/src/Exoplanet.cpp:189
 #, qt-format
 msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>)"
 msgstr "Magnitud: <b>%1</b> (pupus pada: <b>%2</b>)"
@@ -185,7 +185,7 @@ msgstr "Magnitud: <b>%1</b> (pupus pada: <b>%2</b>)"
 #: src/core/modules/MinorPlanet.cpp:217 src/core/modules/Comet.cpp:165
 #: src/core/modules/StarWrapper.cpp:60 src/core/modules/StarWrapper.cpp:183
 #: plugins/Supernovae/src/Supernova.cpp:134 plugins/Novae/src/Nova.cpp:141
-#: plugins/Quasars/src/Quasar.cpp:109 plugins/Exoplanets/src/Exoplanet.cpp:190
+#: plugins/Quasars/src/Quasar.cpp:109 plugins/Exoplanets/src/Exoplanet.cpp:194
 #, qt-format
 msgid "Magnitude: <b>%1</b>"
 msgstr "Magnitud: <b>%1</b>"
@@ -427,13 +427,13 @@ msgstr "Julat magnitud: <b>%1</b>%2<b>%3/%4</b> (Sistem fotometrik: %5)"
 #. TRANSLATORS: Unit of measure for distance - Light Years
 #: src/core/modules/StarWrapper.cpp:218
 #: plugins/Supernovae/src/Supernova.cpp:147 plugins/Novae/src/Nova.cpp:153
-#: plugins/Exoplanets/src/Exoplanet.cpp:206
+#: plugins/Exoplanets/src/Exoplanet.cpp:210
 #, qt-format
 msgid "Distance: %1 ly"
 msgstr ""
 
 #: src/core/modules/StarWrapper.cpp:224
-#: plugins/Exoplanets/src/Exoplanet.cpp:200
+#: plugins/Exoplanets/src/Exoplanet.cpp:204
 #, qt-format
 msgid "Spectral Type: %1"
 msgstr "Jenis Spektrum: %1"
@@ -4377,7 +4377,7 @@ msgstr "Semua yang ada"
 msgid "Display no information"
 msgstr "Jangan paparkan maklumat"
 
-#: src/ui_configurationDialog.h:1067 plugins/Oculars/src/Oculars.cpp:1906
+#: src/ui_configurationDialog.h:1067 plugins/Oculars/src/Oculars.cpp:1910
 #: plugins/Observability/src/Observability.cpp:201
 msgid "None"
 msgstr "Tiada"
@@ -5139,7 +5139,7 @@ msgstr "Papar tanda bering kompas sepanjang ufuk"
 msgid "Compass marks"
 msgstr "Tanda kompas"
 
-#: plugins/Oculars/src/Oculars.cpp:79 plugins/Oculars/src/Oculars.cpp:1297
+#: plugins/Oculars/src/Oculars.cpp:79 plugins/Oculars/src/Oculars.cpp:1301
 #: plugins/Oculars/src/ui_ocularDialog.h:1069
 msgid "Oculars"
 msgstr "Okular"
@@ -5206,153 +5206,153 @@ msgstr "P&utar CCD"
 msgid "&Reset rotation"
 msgstr "T&etap semula putaran"
 
-#: plugins/Oculars/src/Oculars.cpp:1298
+#: plugins/Oculars/src/Oculars.cpp:1302
 #: plugins/Oculars/src/ui_ocularDialog.h:1071
 msgid "Ocular view"
 msgstr "Paparan okular"
 
-#: plugins/Oculars/src/Oculars.cpp:1315
+#: plugins/Oculars/src/Oculars.cpp:1319
 msgid "Oculars popup menu"
 msgstr "Menu timbul okular"
 
-#: plugins/Oculars/src/Oculars.cpp:1316
+#: plugins/Oculars/src/Oculars.cpp:1320
 msgid "Show crosshairs"
 msgstr "Papar rerambut silang"
 
-#: plugins/Oculars/src/Oculars.cpp:1317
+#: plugins/Oculars/src/Oculars.cpp:1321
 msgid "Image sensor frame"
 msgstr "Bingkai penderia imej"
 
-#: plugins/Oculars/src/Oculars.cpp:1318
+#: plugins/Oculars/src/Oculars.cpp:1322
 msgid "Telrad sight"
 msgstr "Pandangan telrad"
 
-#: plugins/Oculars/src/Oculars.cpp:1319
+#: plugins/Oculars/src/Oculars.cpp:1323
 msgid "Oculars plugin configuration"
 msgstr "Konfigurasi pemalam okular"
 
-#: plugins/Oculars/src/Oculars.cpp:1321
+#: plugins/Oculars/src/Oculars.cpp:1325
 msgid "Select next telescope"
 msgstr "Pilih teleskop berikutnya"
 
-#: plugins/Oculars/src/Oculars.cpp:1323
+#: plugins/Oculars/src/Oculars.cpp:1327
 msgid "Select previous telescope"
 msgstr "Pilih teleskop terdahulu"
 
-#: plugins/Oculars/src/Oculars.cpp:1325
+#: plugins/Oculars/src/Oculars.cpp:1329
 msgid "Select next eyepiece"
 msgstr "Pilih kanta mata berikutnya"
 
-#: plugins/Oculars/src/Oculars.cpp:1327
+#: plugins/Oculars/src/Oculars.cpp:1331
 msgid "Select previous eyepiece"
 msgstr "Pilih kanta mata terdahulu"
 
-#: plugins/Oculars/src/Oculars.cpp:1543
+#: plugins/Oculars/src/Oculars.cpp:1547
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:500
 #, qt-format
 msgid "Ocular #%1"
 msgstr "Okular #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:1548
+#: plugins/Oculars/src/Oculars.cpp:1552
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:504
 #, qt-format
 msgid "Ocular #%1: %2"
 msgstr "Okular #%1: %2"
 
 #. TRANSLATORS: FL = Focal length
-#: plugins/Oculars/src/Oculars.cpp:1562
+#: plugins/Oculars/src/Oculars.cpp:1566
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:541
 #, qt-format
 msgid "Ocular FL: %1 mm"
 msgstr "JF Ocular: %1 mm"
 
 #. TRANSLATORS: aFOV = apparent field of view
-#: plugins/Oculars/src/Oculars.cpp:1569
+#: plugins/Oculars/src/Oculars.cpp:1573
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:551
 #, qt-format
 msgid "Ocular aFOV: %1"
 msgstr "aFOV Ocular: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1581
+#: plugins/Oculars/src/Oculars.cpp:1585
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:581
 #, qt-format
 msgid "Lens #%1"
 msgstr "Kanta #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:1585
+#: plugins/Oculars/src/Oculars.cpp:1589
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:585
 #, qt-format
 msgid "Lens #%1: %2"
 msgstr "Kanta #%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:1590
+#: plugins/Oculars/src/Oculars.cpp:1594
 msgid "Lens: none"
 msgstr "Kanta: tiada"
 
-#: plugins/Oculars/src/Oculars.cpp:1600 plugins/Oculars/src/Oculars.cpp:1657
+#: plugins/Oculars/src/Oculars.cpp:1604 plugins/Oculars/src/Oculars.cpp:1661
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:738
 #, qt-format
 msgid "Telescope #%1"
 msgstr "Teleskop #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:1605 plugins/Oculars/src/Oculars.cpp:1662
+#: plugins/Oculars/src/Oculars.cpp:1609 plugins/Oculars/src/Oculars.cpp:1666
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:742
 #, qt-format
 msgid "Telescope #%1: %2"
 msgstr "Teleskop #%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:1616
+#: plugins/Oculars/src/Oculars.cpp:1620
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:818
 #, qt-format
 msgid "Magnification: %1"
 msgstr "Pembesaran: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1624
+#: plugins/Oculars/src/Oculars.cpp:1628
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:827
 #, qt-format
 msgid "FOV: %1"
 msgstr "FOV: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1634
+#: plugins/Oculars/src/Oculars.cpp:1638
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:683
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:780
 #, qt-format
 msgid "Dimensions: %1"
 msgstr "Dimensi: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1639
+#: plugins/Oculars/src/Oculars.cpp:1643
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:643
 #, qt-format
 msgid "Sensor #%1"
 msgstr "Penderia #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:1643
+#: plugins/Oculars/src/Oculars.cpp:1647
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:647
 #, qt-format
 msgid "Sensor #%1: %2"
 msgstr "Penderia #%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:1902
+#: plugins/Oculars/src/Oculars.cpp:1906
 msgid "&Lens"
 msgstr "K&anta"
 
-#: plugins/Oculars/src/Oculars.cpp:1903
+#: plugins/Oculars/src/Oculars.cpp:1907
 msgid "&Previous lens"
 msgstr "Kanta t&erdahulu"
 
-#: plugins/Oculars/src/Oculars.cpp:1904
+#: plugins/Oculars/src/Oculars.cpp:1908
 msgid "&Next lens"
 msgstr "Kanta &berikutnya"
 
-#: plugins/Oculars/src/Oculars.cpp:1934
+#: plugins/Oculars/src/Oculars.cpp:1938
 msgid "&Telescope"
 msgstr "&Teleskop"
 
-#: plugins/Oculars/src/Oculars.cpp:1935
+#: plugins/Oculars/src/Oculars.cpp:1939
 msgid "&Previous telescope"
 msgstr "Teleskop &terdahulu"
 
-#: plugins/Oculars/src/Oculars.cpp:1936
+#: plugins/Oculars/src/Oculars.cpp:1940
 msgid "&Next telescope"
 msgstr "Teleskop &berikutnya"
 
@@ -6032,7 +6032,7 @@ msgstr "Rujuk %1 dokumen ini %2 untuk perincian."
 #: plugins/Novae/src/gui/NovaeDialog.cpp:163
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:156
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:179
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:225
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:232
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:309
 msgid "Internet updates disabled"
 msgstr "Kemaskini Internet dilumpuhkan"
@@ -6047,8 +6047,8 @@ msgstr "Kemaskini Internet dilumpuhkan"
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:210
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:181
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:239
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:227
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:289
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:234
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:296
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:311
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:339
 msgid "Updating now..."
@@ -6059,7 +6059,7 @@ msgstr "Mengemaskini sekarang..."
 #: plugins/Novae/src/gui/NovaeDialog.cpp:167
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:160
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:183
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:229
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:236
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:313
 msgid "Next update: < 1 minute"
 msgstr "Kemaskini Berikutnya: < 1 minit"
@@ -6069,7 +6069,7 @@ msgstr "Kemaskini Berikutnya: < 1 minit"
 #: plugins/Novae/src/gui/NovaeDialog.cpp:169
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:162
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:185
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:231
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:238
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:315
 #, qt-format
 msgid "Next update: %1 minutes"
@@ -6080,7 +6080,7 @@ msgstr "Kemaskini Berikutnya: %1 minit"
 #: plugins/Novae/src/gui/NovaeDialog.cpp:171
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:164
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:187
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:233
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:240
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:317
 #, qt-format
 msgid "Next update: %1 hours"
@@ -6091,7 +6091,7 @@ msgstr "Kemaskini Berikutnya: %1 jam"
 #: plugins/Novae/src/gui/NovaeDialog.cpp:202
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:213
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:242
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:292
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:299
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:342
 msgid "Update error"
 msgstr "Ralat kemaskini"
@@ -6120,7 +6120,7 @@ msgstr "[sumber baru]"
 #: plugins/Quasars/src/ui_quasarsDialog.h:265
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:204
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:271
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:278
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:285
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:311
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:330
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:519
@@ -6132,7 +6132,7 @@ msgstr "Kemaskini sekarang"
 #: plugins/Novae/src/gui/NovaeDialog.cpp:190
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:183
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:206
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:280
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:287
 msgid "Update from files"
 msgstr "Kemaskini dari fail"
 
@@ -8080,86 +8080,140 @@ msgstr "Papar exoplanet"
 msgid "Exoplanets configuration window"
 msgstr "Tetingkap konfigurasi eksoplanet"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:176
+#. TRANSLATORS: Habitable zone
+#: plugins/Exoplanets/src/Exoplanets.cpp:848
+msgid "Hot"
+msgstr ""
+
+#. TRANSLATORS: Habitable zone
+#: plugins/Exoplanets/src/Exoplanets.cpp:850
+msgid "Warm"
+msgstr ""
+
+#. TRANSLATORS: Habitable zone
+#: plugins/Exoplanets/src/Exoplanets.cpp:852
+msgid "Cold"
+msgstr ""
+
+#. TRANSLATORS: Planet size
+#: plugins/Exoplanets/src/Exoplanets.cpp:855
+msgid "Miniterran"
+msgstr ""
+
+#. TRANSLATORS: Planet size
+#: plugins/Exoplanets/src/Exoplanets.cpp:857
+msgid "Subterran"
+msgstr ""
+
+#. TRANSLATORS: Planet size
+#: plugins/Exoplanets/src/Exoplanets.cpp:859
+msgid "Terran"
+msgstr ""
+
+#. TRANSLATORS: Planet size
+#: plugins/Exoplanets/src/Exoplanets.cpp:861
+msgid "Superterran"
+msgstr ""
+
+#. TRANSLATORS: Planet size
+#: plugins/Exoplanets/src/Exoplanets.cpp:863
+msgid "Jovian"
+msgstr ""
+
+#. TRANSLATORS: Planet size
+#: plugins/Exoplanets/src/Exoplanets.cpp:865
+msgid "Neptunian"
+msgstr ""
+
+#: plugins/Exoplanets/src/Exoplanet.cpp:180
 msgid "planetary system"
 msgstr "sistem planet"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:213
+#: plugins/Exoplanets/src/Exoplanet.cpp:217
 msgid "Metallicity"
 msgstr "Kelogaman"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:217
-#: plugins/Exoplanets/src/Exoplanet.cpp:231
+#: plugins/Exoplanets/src/Exoplanet.cpp:221
+#: plugins/Exoplanets/src/Exoplanet.cpp:235
 msgid "Mass"
 msgstr "Jisim"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:217
 #: plugins/Exoplanets/src/Exoplanet.cpp:221
+#: plugins/Exoplanets/src/Exoplanet.cpp:225
 msgid "Sun"
 msgstr "Matahari"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:221
-#: plugins/Exoplanets/src/Exoplanet.cpp:232
+#: plugins/Exoplanets/src/Exoplanet.cpp:225
+#: plugins/Exoplanets/src/Exoplanet.cpp:236
 msgid "Radius"
 msgstr "Jejari"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:225
+#: plugins/Exoplanets/src/Exoplanet.cpp:229
 #, qt-format
 msgid "Effective temperature: %1 K"
 msgstr "Suhu efektif: %1 K"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:229
+#: plugins/Exoplanets/src/Exoplanet.cpp:233
 msgid "Exoplanet"
 msgstr "Eksoplanet"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:230
+#: plugins/Exoplanets/src/Exoplanet.cpp:234
 msgid "Period"
 msgstr "Tempoh"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:230
+#: plugins/Exoplanets/src/Exoplanet.cpp:234
 msgid "days"
 msgstr "hari"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:231
-#: plugins/Exoplanets/src/Exoplanet.cpp:232
+#: plugins/Exoplanets/src/Exoplanet.cpp:235
+#: plugins/Exoplanets/src/Exoplanet.cpp:236
 msgid "Jup"
 msgstr "Jup"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:233
+#: plugins/Exoplanets/src/Exoplanet.cpp:237
 msgid "Semi-Major Axis"
 msgstr "Paksi Semi-Major"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:233
+#: plugins/Exoplanets/src/Exoplanet.cpp:237
 msgid "AU"
 msgstr "AU"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:234
+#: plugins/Exoplanets/src/Exoplanet.cpp:238
 msgid "Eccentricity"
 msgstr "Ketakpusatan"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:235
+#: plugins/Exoplanets/src/Exoplanet.cpp:239
 msgid "Inclination"
 msgstr "Kecondongan"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:236
+#: plugins/Exoplanets/src/Exoplanet.cpp:240
 msgid "Angle Distance"
 msgstr "Jarak Sudut"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:237
+#: plugins/Exoplanets/src/Exoplanet.cpp:241
 msgid "Discovered year"
 msgstr "Tahun ditemui"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:238
+#: plugins/Exoplanets/src/Exoplanet.cpp:242
+msgid "Planetary class"
+msgstr ""
+
+#: plugins/Exoplanets/src/Exoplanet.cpp:243
 msgid "Habitable class"
 msgstr "Kelas boleh didiami"
 
 #. TRANSLATORS: Full phrase is "Mean Surface Temperature"
-#: plugins/Exoplanets/src/Exoplanet.cpp:240
+#: plugins/Exoplanets/src/Exoplanet.cpp:245
 msgid "Mean surface temp."
 msgstr "Suhu permukaan min."
 
+#. TRANSLATORS: Full phrase is "Equilibrium Temperature"
+#: plugins/Exoplanets/src/Exoplanet.cpp:247
+msgid "Equilibrium temp."
+msgstr ""
+
 #. TRANSLATORS: ESI = Earth Similarity Index
-#: plugins/Exoplanets/src/Exoplanet.cpp:242
+#: plugins/Exoplanets/src/Exoplanet.cpp:249
 msgid "ESI"
 msgstr "ESI"
 
@@ -8216,18 +8270,25 @@ msgstr "Ekso-planet boleh didiami berpotensi"
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:169
 msgid ""
 "This plugin can display potential habitable exoplanets (orange marker) and "
-"some information about those planets - habitable class, mean surface "
-"temperature and Earth Similarity Index."
+"some information about those planets."
 msgstr ""
-"Pemalam ini boleh paparkan ekso-planet boleh didiami berpotensi (penanda "
-"jingga) dan beberapa maklumat mengenai planet tersebut - kelas boleh "
-"didiami, suhu permukaan min dan Indeks Keserupaan Bumi."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:170
+msgid "Planetary Class"
+msgstr ""
+
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:170
+msgid ""
+"Planet classification from host star spectral type (F, G, K, M), habitable "
+"zone (hot, warm, cold) and size (miniterran, subterran, terran, superterran, "
+"jovian, neptunian) (Earth = G-Warm Terran)."
+msgstr ""
+
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:171
 msgid "Habitable Class"
 msgstr "Kelas Boleh Didiami"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:170
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:171
 msgid ""
 "Classifies habitable planets based on temperature: hypopsychroplanets (O or "
 "hP) = very cold (less −50°C); psychroplanets (P) = cold; mesoplanets (M) = "
@@ -8243,11 +8304,11 @@ msgstr ""
 "kompleks, manakala kelas O atau E hanya menyokong hidupan ektremofilik. "
 "Planet tidak boleh didiami hanya dikelaskan dengan kelas X (atau NH)."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:171
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:172
 msgid "Mean Surface Temperature"
 msgstr "Suhu Permukaan Min"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:171
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:172
 msgid ""
 "Temperature in (°C) based on a similar terrestrial atmosphere to planet mass "
 "ratio and a greenhouse effect due to 1 percent of CO2 (assuming an albedo of "
@@ -8257,11 +8318,23 @@ msgstr ""
 "planet dan kesan rumah hijau disebabkan 1 peratus CO2 (menganggap albedo 0.3 "
 "dalam semua situasi)."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:172
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:173
+msgid "Equilibrium Temperature"
+msgstr ""
+
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:173
+msgid ""
+"The planetary equilibrium temperature is a theoretical temperature in (°C) "
+"that the planet would be at when considered simply as if it were a black "
+"body being heated only by its parent star (assuming a 0.3 bond albedo). As "
+"example the planetary equilibrium temperature of Earth is -18.15°C (255 K)."
+msgstr ""
+
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:174
 msgid "Earth Similarity Index (ESI)"
 msgstr "Indeks Keserupaan Bumi (ESI)"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:172
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:174
 msgid ""
 "Similarity to Earth on a scale from 0 to 1, with 1 being the most Earth-"
 "like. ESI depends on the planet's radius, density, escape velocity, and "
@@ -8271,89 +8344,109 @@ msgstr ""
 "Bumi. ESI bergantung pada jejari, ketumpatan, halaju keluar, dan suhu "
 "permukaan planet."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:187
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:175
+msgid "Additional info"
+msgstr ""
+
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:176
+msgid "Circumstellar habitable zone"
+msgstr ""
+
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:177
+msgid "Planetary equilibrium temperature"
+msgstr ""
+
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:178
+msgid "Planetary habitability"
+msgstr ""
+
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:179
+msgid "Earth Similarity Index"
+msgstr ""
+
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:194
 msgid "General professional Web sites relevant to extrasolar planets"
 msgstr ""
 "Laman Sesawang profesional umum yang berkaitan dengan planet ekstra-solar"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:188
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:195
 msgid "Exoplanets: an interactive version of XKCD 1071"
 msgstr "Exoplanet: merupakan versi interaktif XKCD 1071"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:189
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:196
 msgid "HEK (The Hunt for Exomoons with Kepler)"
 msgstr "HEK (The Hunt for Exomoons with Kepler)"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:190
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:197
 msgid "Exoplanets in binaries and multiple systems (Richard Schwarz)"
 msgstr "Exolanet dalam sistem binari dan berbilang (Richard Schwarz)"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:191
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:198
 msgid "Naming exoplanets (IAU)"
 msgstr "Exoplanet bernama (IAU)"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:192
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:199
 msgid "Some Astronomers and Groups active in extrasolar planets studies"
 msgstr ""
 "Sesetengah Ahli Astronomi dan Kumpulan aktif dalam kajian planet luar suria"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:192
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:199
 msgid "update: 16 April 2012"
 msgstr "kemaskini: 16 April 2012"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:193
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:200
 msgid "The Exoplanet Data Explorer"
 msgstr "Penjelajah Data Exoplanet"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:194
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:201
 msgid "The Anglo-Australian Planet Search"
 msgstr "Pencarian Planet Anglo-Australia"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:195
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:202
 msgid "Geneva Extrasolar Planet Search Programmes"
 msgstr "Program Pencarian Planet Luar Suria Geneva"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:196
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:203
 msgid "OLBIN (Optical Long-Baseline Interferometry News)"
 msgstr "OLBIN (Optical Long-Baseline Interferometry News)"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:197
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:204
 msgid "NASA's Exoplanet Exploration Program"
 msgstr "Program Penjelajahan Exoplanet NASA"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:198
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:205
 msgid "Pulsar planets"
 msgstr "Planet pulsar"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:199
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:206
 msgid "The NASA Exoplanet Archive"
 msgstr "Arkib Exoplanet NASA"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:200
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:207
 msgid "IAU Commission 53: Extrasolar Planets"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:201
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:208
 msgid "ExoMol"
 msgstr "ExoMol"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:202
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:209
 msgid "The Habitable Zone Gallery"
 msgstr "Galeri Zon Sesuai Didiami"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:203
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:210
 msgid "PlanetQuest - The Search for Another Earth"
 msgstr "PlanetQuest - Pencarian Bumi Lain"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:204
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:211
 msgid "Open Exoplanet Catalogue"
 msgstr "Buka Katalog Exoplanet"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:205
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:212
 msgid "The Habitable Exoplanets Catalog"
 msgstr "Katalog Exoplanet Boleh Didiami"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:299
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:306
 msgid "Exoplanets is updated"
 msgstr "Eksopanet telah dikemaskini"
 
@@ -10888,6 +10981,15 @@ msgstr ""
 
 #~ msgid "Great Comet of 1680 (C/1680 V1)"
 #~ msgstr "Komet Besar 1680 (C/1680 V1)"
+
+#~ msgid ""
+#~ "This plugin can display potential habitable exoplanets (orange marker) and "
+#~ "some information about those planets - habitable class, mean surface "
+#~ "temperature and Earth Similarity Index."
+#~ msgstr ""
+#~ "Pemalam ini boleh paparkan ekso-planet boleh didiami berpotensi (penanda "
+#~ "jingga) dan beberapa maklumat mengenai planet tersebut - kelas boleh "
+#~ "didiami, suhu permukaan min dan Indeks Keserupaan Bumi."
 
 #~ msgid ""
 #~ "Ecliptic topocentric coordinates, equinox of date and J2000 (only for Earth)"
