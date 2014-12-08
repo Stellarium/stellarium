@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-12-03 22:27+0600\n"
-"PO-Revision-Date: 2014-12-03 17:22+0000\n"
+"POT-Creation-Date: 2014-12-08 01:07+0600\n"
+"PO-Revision-Date: 2014-12-07 20:27+0000\n"
 "Last-Translator: Alexander Wolf <Unknown>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-12-04 05:49+0000\n"
+"X-Launchpad-Export-Date: 2014-12-08 06:02+0000\n"
 "X-Generator: Launchpad (build 17274)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:132 src/core/modules/StarMgr.cpp:353
@@ -167,7 +167,7 @@ msgstr "Планета: "
 #: src/core/modules/StarWrapper.cpp:173
 #: plugins/Satellites/src/Satellite.cpp:252
 #: plugins/Supernovae/src/Supernova.cpp:127 plugins/Quasars/src/Quasar.cpp:98
-#: plugins/Pulsars/src/Pulsar.cpp:155 plugins/Exoplanets/src/Exoplanet.cpp:176
+#: plugins/Pulsars/src/Pulsar.cpp:155 plugins/Exoplanets/src/Exoplanet.cpp:180
 #, qt-format
 msgid "Type: <b>%1</b>"
 msgstr "Тип: <b>%1</b>"
@@ -176,7 +176,7 @@ msgstr "Тип: <b>%1</b>"
 #: src/core/modules/MinorPlanet.cpp:214 src/core/modules/Comet.cpp:162
 #: src/core/modules/StarWrapper.cpp:56 src/core/modules/StarWrapper.cpp:180
 #: plugins/Supernovae/src/Supernova.cpp:132 plugins/Novae/src/Nova.cpp:138
-#: plugins/Quasars/src/Quasar.cpp:104 plugins/Exoplanets/src/Exoplanet.cpp:185
+#: plugins/Quasars/src/Quasar.cpp:104 plugins/Exoplanets/src/Exoplanet.cpp:189
 #, qt-format
 msgid "Magnitude: <b>%1</b> (extincted to: <b>%2</b>)"
 msgstr "Звёздная величина: <b>%1</b> (ослаблена до <b>%2</b>)"
@@ -185,7 +185,7 @@ msgstr "Звёздная величина: <b>%1</b> (ослаблена до <b
 #: src/core/modules/MinorPlanet.cpp:217 src/core/modules/Comet.cpp:165
 #: src/core/modules/StarWrapper.cpp:60 src/core/modules/StarWrapper.cpp:183
 #: plugins/Supernovae/src/Supernova.cpp:134 plugins/Novae/src/Nova.cpp:141
-#: plugins/Quasars/src/Quasar.cpp:109 plugins/Exoplanets/src/Exoplanet.cpp:190
+#: plugins/Quasars/src/Quasar.cpp:109 plugins/Exoplanets/src/Exoplanet.cpp:194
 #, qt-format
 msgid "Magnitude: <b>%1</b>"
 msgstr "Звёздная величина: <b>%1</b>"
@@ -430,13 +430,13 @@ msgstr ""
 #. TRANSLATORS: Unit of measure for distance - Light Years
 #: src/core/modules/StarWrapper.cpp:218
 #: plugins/Supernovae/src/Supernova.cpp:147 plugins/Novae/src/Nova.cpp:153
-#: plugins/Exoplanets/src/Exoplanet.cpp:206
+#: plugins/Exoplanets/src/Exoplanet.cpp:210
 #, qt-format
 msgid "Distance: %1 ly"
 msgstr "Расстояние: %1 св. лет"
 
 #: src/core/modules/StarWrapper.cpp:224
-#: plugins/Exoplanets/src/Exoplanet.cpp:200
+#: plugins/Exoplanets/src/Exoplanet.cpp:204
 #, qt-format
 msgid "Spectral Type: %1"
 msgstr "Спектральный класс: %1"
@@ -4410,7 +4410,7 @@ msgstr "Вся доступная"
 msgid "Display no information"
 msgstr "Не отображать информации"
 
-#: src/ui_configurationDialog.h:1067 plugins/Oculars/src/Oculars.cpp:1906
+#: src/ui_configurationDialog.h:1067 plugins/Oculars/src/Oculars.cpp:1910
 #: plugins/Observability/src/Observability.cpp:201
 msgid "None"
 msgstr "Отключена"
@@ -5177,7 +5177,7 @@ msgstr "Этот плагин позволяет показывать румбы
 msgid "Compass marks"
 msgstr "Компас"
 
-#: plugins/Oculars/src/Oculars.cpp:79 plugins/Oculars/src/Oculars.cpp:1297
+#: plugins/Oculars/src/Oculars.cpp:79 plugins/Oculars/src/Oculars.cpp:1301
 #: plugins/Oculars/src/ui_ocularDialog.h:1069
 msgid "Oculars"
 msgstr "Окуляры"
@@ -5244,153 +5244,153 @@ msgstr "По&вернуть ПЗС"
 msgid "&Reset rotation"
 msgstr "&Сбросить поворот"
 
-#: plugins/Oculars/src/Oculars.cpp:1298
+#: plugins/Oculars/src/Oculars.cpp:1302
 #: plugins/Oculars/src/ui_ocularDialog.h:1071
 msgid "Ocular view"
 msgstr "Вид в окуляр"
 
-#: plugins/Oculars/src/Oculars.cpp:1315
+#: plugins/Oculars/src/Oculars.cpp:1319
 msgid "Oculars popup menu"
 msgstr "Контекстное меню окуляров"
 
-#: plugins/Oculars/src/Oculars.cpp:1316
+#: plugins/Oculars/src/Oculars.cpp:1320
 msgid "Show crosshairs"
 msgstr "Показывать перекрестия"
 
-#: plugins/Oculars/src/Oculars.cpp:1317
+#: plugins/Oculars/src/Oculars.cpp:1321
 msgid "Image sensor frame"
 msgstr "Кадр сенсора"
 
-#: plugins/Oculars/src/Oculars.cpp:1318
+#: plugins/Oculars/src/Oculars.cpp:1322
 msgid "Telrad sight"
 msgstr "Поле зрения Telrad"
 
-#: plugins/Oculars/src/Oculars.cpp:1319
+#: plugins/Oculars/src/Oculars.cpp:1323
 msgid "Oculars plugin configuration"
 msgstr "Конфигурация плагина"
 
-#: plugins/Oculars/src/Oculars.cpp:1321
+#: plugins/Oculars/src/Oculars.cpp:1325
 msgid "Select next telescope"
 msgstr "Выбрать следующий телескоп"
 
-#: plugins/Oculars/src/Oculars.cpp:1323
+#: plugins/Oculars/src/Oculars.cpp:1327
 msgid "Select previous telescope"
 msgstr "Выбрать предыдущий телескоп"
 
-#: plugins/Oculars/src/Oculars.cpp:1325
+#: plugins/Oculars/src/Oculars.cpp:1329
 msgid "Select next eyepiece"
 msgstr "Выбрать следующий окуляр"
 
-#: plugins/Oculars/src/Oculars.cpp:1327
+#: plugins/Oculars/src/Oculars.cpp:1331
 msgid "Select previous eyepiece"
 msgstr "Выбрать предыдущий окуляр"
 
-#: plugins/Oculars/src/Oculars.cpp:1543
+#: plugins/Oculars/src/Oculars.cpp:1547
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:500
 #, qt-format
 msgid "Ocular #%1"
 msgstr "Окуляр #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:1548
+#: plugins/Oculars/src/Oculars.cpp:1552
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:504
 #, qt-format
 msgid "Ocular #%1: %2"
 msgstr "Окуляр #%1: %2"
 
 #. TRANSLATORS: FL = Focal length
-#: plugins/Oculars/src/Oculars.cpp:1562
+#: plugins/Oculars/src/Oculars.cpp:1566
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:541
 #, qt-format
 msgid "Ocular FL: %1 mm"
 msgstr "ФР окуляра: %1 мм"
 
 #. TRANSLATORS: aFOV = apparent field of view
-#: plugins/Oculars/src/Oculars.cpp:1569
+#: plugins/Oculars/src/Oculars.cpp:1573
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:551
 #, qt-format
 msgid "Ocular aFOV: %1"
 msgstr "Видимое ПЗ окуляра: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1581
+#: plugins/Oculars/src/Oculars.cpp:1585
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:581
 #, qt-format
 msgid "Lens #%1"
 msgstr "Линза #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:1585
+#: plugins/Oculars/src/Oculars.cpp:1589
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:585
 #, qt-format
 msgid "Lens #%1: %2"
 msgstr "Линза #%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:1590
+#: plugins/Oculars/src/Oculars.cpp:1594
 msgid "Lens: none"
 msgstr "Линза: нет"
 
-#: plugins/Oculars/src/Oculars.cpp:1600 plugins/Oculars/src/Oculars.cpp:1657
+#: plugins/Oculars/src/Oculars.cpp:1604 plugins/Oculars/src/Oculars.cpp:1661
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:738
 #, qt-format
 msgid "Telescope #%1"
 msgstr "Телескоп #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:1605 plugins/Oculars/src/Oculars.cpp:1662
+#: plugins/Oculars/src/Oculars.cpp:1609 plugins/Oculars/src/Oculars.cpp:1666
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:742
 #, qt-format
 msgid "Telescope #%1: %2"
 msgstr "Телескоп #%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:1616
+#: plugins/Oculars/src/Oculars.cpp:1620
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:818
 #, qt-format
 msgid "Magnification: %1"
 msgstr "Увеличение: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1624
+#: plugins/Oculars/src/Oculars.cpp:1628
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:827
 #, qt-format
 msgid "FOV: %1"
 msgstr "Поле зрения: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1634
+#: plugins/Oculars/src/Oculars.cpp:1638
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:683
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:780
 #, qt-format
 msgid "Dimensions: %1"
 msgstr "Размеры: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1639
+#: plugins/Oculars/src/Oculars.cpp:1643
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:643
 #, qt-format
 msgid "Sensor #%1"
 msgstr "Сенсор #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:1643
+#: plugins/Oculars/src/Oculars.cpp:1647
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:647
 #, qt-format
 msgid "Sensor #%1: %2"
 msgstr "Сенсор #%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:1902
+#: plugins/Oculars/src/Oculars.cpp:1906
 msgid "&Lens"
 msgstr "&Линза"
 
-#: plugins/Oculars/src/Oculars.cpp:1903
+#: plugins/Oculars/src/Oculars.cpp:1907
 msgid "&Previous lens"
 msgstr "&Предыдущая линза"
 
-#: plugins/Oculars/src/Oculars.cpp:1904
+#: plugins/Oculars/src/Oculars.cpp:1908
 msgid "&Next lens"
 msgstr "&Следующая линза"
 
-#: plugins/Oculars/src/Oculars.cpp:1934
+#: plugins/Oculars/src/Oculars.cpp:1938
 msgid "&Telescope"
 msgstr "&Телескоп"
 
-#: plugins/Oculars/src/Oculars.cpp:1935
+#: plugins/Oculars/src/Oculars.cpp:1939
 msgid "&Previous telescope"
 msgstr "&Предыдущий телескоп"
 
-#: plugins/Oculars/src/Oculars.cpp:1936
+#: plugins/Oculars/src/Oculars.cpp:1940
 msgid "&Next telescope"
 msgstr "&Следующий телескоп"
 
@@ -6081,7 +6081,7 @@ msgstr "Смотри %1этот документ%2 для получения п�
 #: plugins/Novae/src/gui/NovaeDialog.cpp:163
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:156
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:179
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:225
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:232
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:309
 msgid "Internet updates disabled"
 msgstr "Обновление через интернет выключено"
@@ -6096,8 +6096,8 @@ msgstr "Обновление через интернет выключено"
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:210
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:181
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:239
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:227
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:289
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:234
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:296
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:311
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:339
 msgid "Updating now..."
@@ -6108,7 +6108,7 @@ msgstr "Обновляется..."
 #: plugins/Novae/src/gui/NovaeDialog.cpp:167
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:160
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:183
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:229
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:236
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:313
 msgid "Next update: < 1 minute"
 msgstr "Следующее обновление через: менее минуты"
@@ -6118,7 +6118,7 @@ msgstr "Следующее обновление через: менее мину�
 #: plugins/Novae/src/gui/NovaeDialog.cpp:169
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:162
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:185
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:231
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:238
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:315
 #, qt-format
 msgid "Next update: %1 minutes"
@@ -6129,7 +6129,7 @@ msgstr "Следующее обновление через: %1 м."
 #: plugins/Novae/src/gui/NovaeDialog.cpp:171
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:164
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:187
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:233
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:240
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:317
 #, qt-format
 msgid "Next update: %1 hours"
@@ -6140,7 +6140,7 @@ msgstr "Следующее обновление через: %1 ч."
 #: plugins/Novae/src/gui/NovaeDialog.cpp:202
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:213
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:242
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:292
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:299
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:342
 msgid "Update error"
 msgstr "Ошибка обновления"
@@ -6169,7 +6169,7 @@ msgstr "[новый источник]"
 #: plugins/Quasars/src/ui_quasarsDialog.h:265
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:204
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:271
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:278
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:285
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:311
 #: plugins/MeteorShowers/src/gui/MeteorShowerDialog.cpp:330
 #: plugins/MeteorShowers/src/ui_meteorShowerDialog.h:519
@@ -6181,7 +6181,7 @@ msgstr "Обновить сейчас"
 #: plugins/Novae/src/gui/NovaeDialog.cpp:190
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:183
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:206
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:280
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:287
 msgid "Update from files"
 msgstr "Обновить из файлов"
 
@@ -8129,86 +8129,140 @@ msgstr "Показывать экзопланеты"
 msgid "Exoplanets configuration window"
 msgstr "Окно настройки плагина \"Экзопланеты\""
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:176
+#. TRANSLATORS: Habitable zone
+#: plugins/Exoplanets/src/Exoplanets.cpp:848
+msgid "Hot"
+msgstr "Горяч."
+
+#. TRANSLATORS: Habitable zone
+#: plugins/Exoplanets/src/Exoplanets.cpp:850
+msgid "Warm"
+msgstr "Тёпл."
+
+#. TRANSLATORS: Habitable zone
+#: plugins/Exoplanets/src/Exoplanets.cpp:852
+msgid "Cold"
+msgstr "Холод."
+
+#. TRANSLATORS: Planet size
+#: plugins/Exoplanets/src/Exoplanets.cpp:855
+msgid "Miniterran"
+msgstr "миниземля"
+
+#. TRANSLATORS: Planet size
+#: plugins/Exoplanets/src/Exoplanets.cpp:857
+msgid "Subterran"
+msgstr "субземля"
+
+#. TRANSLATORS: Planet size
+#: plugins/Exoplanets/src/Exoplanets.cpp:859
+msgid "Terran"
+msgstr "земля"
+
+#. TRANSLATORS: Planet size
+#: plugins/Exoplanets/src/Exoplanets.cpp:861
+msgid "Superterran"
+msgstr "суперземля"
+
+#. TRANSLATORS: Planet size
+#: plugins/Exoplanets/src/Exoplanets.cpp:863
+msgid "Jovian"
+msgstr "юпитер"
+
+#. TRANSLATORS: Planet size
+#: plugins/Exoplanets/src/Exoplanets.cpp:865
+msgid "Neptunian"
+msgstr "нептун"
+
+#: plugins/Exoplanets/src/Exoplanet.cpp:180
 msgid "planetary system"
 msgstr "планетная система"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:213
+#: plugins/Exoplanets/src/Exoplanet.cpp:217
 msgid "Metallicity"
 msgstr "Металличность"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:217
-#: plugins/Exoplanets/src/Exoplanet.cpp:231
+#: plugins/Exoplanets/src/Exoplanet.cpp:221
+#: plugins/Exoplanets/src/Exoplanet.cpp:235
 msgid "Mass"
 msgstr "Масса"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:217
 #: plugins/Exoplanets/src/Exoplanet.cpp:221
+#: plugins/Exoplanets/src/Exoplanet.cpp:225
 msgid "Sun"
 msgstr "Солнце"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:221
-#: plugins/Exoplanets/src/Exoplanet.cpp:232
+#: plugins/Exoplanets/src/Exoplanet.cpp:225
+#: plugins/Exoplanets/src/Exoplanet.cpp:236
 msgid "Radius"
 msgstr "Радиус"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:225
+#: plugins/Exoplanets/src/Exoplanet.cpp:229
 #, qt-format
 msgid "Effective temperature: %1 K"
 msgstr "Эффективная температура: %1 K"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:229
+#: plugins/Exoplanets/src/Exoplanet.cpp:233
 msgid "Exoplanet"
 msgstr "Экзопланета"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:230
+#: plugins/Exoplanets/src/Exoplanet.cpp:234
 msgid "Period"
 msgstr "Период"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:230
+#: plugins/Exoplanets/src/Exoplanet.cpp:234
 msgid "days"
 msgstr "дней"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:231
-#: plugins/Exoplanets/src/Exoplanet.cpp:232
+#: plugins/Exoplanets/src/Exoplanet.cpp:235
+#: plugins/Exoplanets/src/Exoplanet.cpp:236
 msgid "Jup"
 msgstr "Юп."
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:233
+#: plugins/Exoplanets/src/Exoplanet.cpp:237
 msgid "Semi-Major Axis"
 msgstr "Большая полуось орбиты"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:233
+#: plugins/Exoplanets/src/Exoplanet.cpp:237
 msgid "AU"
 msgstr "а. е."
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:234
+#: plugins/Exoplanets/src/Exoplanet.cpp:238
 msgid "Eccentricity"
 msgstr "Эксцентриситет"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:235
+#: plugins/Exoplanets/src/Exoplanet.cpp:239
 msgid "Inclination"
 msgstr "Наклон орбиты"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:236
+#: plugins/Exoplanets/src/Exoplanet.cpp:240
 msgid "Angle Distance"
 msgstr "Угловое расстояние"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:237
+#: plugins/Exoplanets/src/Exoplanet.cpp:241
 msgid "Discovered year"
 msgstr "Год открытия"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:238
+#: plugins/Exoplanets/src/Exoplanet.cpp:242
+msgid "Planetary class"
+msgstr "Класс планеты"
+
+#: plugins/Exoplanets/src/Exoplanet.cpp:243
 msgid "Habitable class"
 msgstr "Класс жизнепригодности"
 
 #. TRANSLATORS: Full phrase is "Mean Surface Temperature"
-#: plugins/Exoplanets/src/Exoplanet.cpp:240
+#: plugins/Exoplanets/src/Exoplanet.cpp:245
 msgid "Mean surface temp."
 msgstr "Ср. температура поверхности"
 
+#. TRANSLATORS: Full phrase is "Equilibrium Temperature"
+#: plugins/Exoplanets/src/Exoplanet.cpp:247
+msgid "Equilibrium temp."
+msgstr "Равновесная темп."
+
 #. TRANSLATORS: ESI = Earth Similarity Index
-#: plugins/Exoplanets/src/Exoplanet.cpp:242
+#: plugins/Exoplanets/src/Exoplanet.cpp:249
 msgid "ESI"
 msgstr "ИПЗ"
 
@@ -8265,18 +8319,25 @@ msgstr "Потенциально жизнепригодные экзоплане
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:169
 msgid ""
 "This plugin can display potential habitable exoplanets (orange marker) and "
-"some information about those planets - habitable class, mean surface "
-"temperature and Earth Similarity Index."
+"some information about those planets."
 msgstr ""
-"Этот плагин может отображать потенциально жизнепригодные экзопланеты "
-"(оранжевый маркер) и некоторую информацию об этих планетах - класс "
-"жизнепригодности, среднюю температуру поверхности и индекс подобия Земле."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:170
+msgid "Planetary Class"
+msgstr "Класс планеты"
+
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:170
+msgid ""
+"Planet classification from host star spectral type (F, G, K, M), habitable "
+"zone (hot, warm, cold) and size (miniterran, subterran, terran, superterran, "
+"jovian, neptunian) (Earth = G-Warm Terran)."
+msgstr ""
+
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:171
 msgid "Habitable Class"
 msgstr "Класс жизнепригодности"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:170
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:171
 msgid ""
 "Classifies habitable planets based on temperature: hypopsychroplanets (O or "
 "hP) = very cold (less −50°C); psychroplanets (P) = cold; mesoplanets (M) = "
@@ -8295,11 +8356,11 @@ msgstr ""
 "для экстремофилов. Класс X (или NH) применяется для обозначения непригодных "
 "для жизни планет."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:171
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:172
 msgid "Mean Surface Temperature"
 msgstr "Средняя температура поверхности"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:171
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:172
 msgid ""
 "Temperature in (°C) based on a similar terrestrial atmosphere to planet mass "
 "ratio and a greenhouse effect due to 1 percent of CO2 (assuming an albedo of "
@@ -8309,11 +8370,23 @@ msgstr ""
 "подобную земной с парниковым эффектом за счет наличия 1 процента углекислого "
 "газа и при альбедо 0,3."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:172
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:173
+msgid "Equilibrium Temperature"
+msgstr "Равновесная температура"
+
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:173
+msgid ""
+"The planetary equilibrium temperature is a theoretical temperature in (°C) "
+"that the planet would be at when considered simply as if it were a black "
+"body being heated only by its parent star (assuming a 0.3 bond albedo). As "
+"example the planetary equilibrium temperature of Earth is -18.15°C (255 K)."
+msgstr ""
+
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:174
 msgid "Earth Similarity Index (ESI)"
 msgstr "Индекс подобия Земле (ИПЗ)"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:172
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:174
 msgid ""
 "Similarity to Earth on a scale from 0 to 1, with 1 being the most Earth-"
 "like. ESI depends on the planet's radius, density, escape velocity, and "
@@ -8324,88 +8397,108 @@ msgstr ""
 "Земле). ИПЗ является функцией от радиуса планеты, её плотности, второй "
 "космической скорости и температуры поверхности."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:187
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:175
+msgid "Additional info"
+msgstr "Дополнительная информация"
+
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:176
+msgid "Circumstellar habitable zone"
+msgstr "Зона обитаемости"
+
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:177
+msgid "Planetary equilibrium temperature"
+msgstr "Планетарная равновесная температура"
+
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:178
+msgid "Planetary habitability"
+msgstr "Планетарная обитаемость"
+
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:179
+msgid "Earth Similarity Index"
+msgstr "Индекс подобия Земле"
+
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:194
 msgid "General professional Web sites relevant to extrasolar planets"
 msgstr ""
 "Основные профессиональные веб-сайты, имеющие отношение к экзопланетам"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:188
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:195
 msgid "Exoplanets: an interactive version of XKCD 1071"
 msgstr "Экзопланеты: интерактивная версия XKCD 1071"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:189
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:196
 msgid "HEK (The Hunt for Exomoons with Kepler)"
 msgstr "HEK (Охота за экзолунами с Кеплером)"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:190
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:197
 msgid "Exoplanets in binaries and multiple systems (Richard Schwarz)"
 msgstr "Экзопланеты в двойных и кратных системах (Ричард Шварц)"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:191
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:198
 msgid "Naming exoplanets (IAU)"
 msgstr "Именование экзопланет (МАС)"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:192
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:199
 msgid "Some Astronomers and Groups active in extrasolar planets studies"
 msgstr "Некоторые астрономы и группы, исследующие экзопланеты"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:192
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:199
 msgid "update: 16 April 2012"
 msgstr "обновлено: 16 апреля 2012"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:193
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:200
 msgid "The Exoplanet Data Explorer"
 msgstr "Исследователь данных экзопланет"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:194
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:201
 msgid "The Anglo-Australian Planet Search"
 msgstr "Англо-австралийский поиск планет"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:195
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:202
 msgid "Geneva Extrasolar Planet Search Programmes"
 msgstr "Женевские программы поиска внесолнечных планет"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:196
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:203
 msgid "OLBIN (Optical Long-Baseline Interferometry News)"
 msgstr "OLBIN (Новости оптического интерферометра с длинной базой)"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:197
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:204
 msgid "NASA's Exoplanet Exploration Program"
 msgstr "Программа исследования экзопланет NASA"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:198
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:205
 msgid "Pulsar planets"
 msgstr "Планеты у пульсаров"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:199
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:206
 msgid "The NASA Exoplanet Archive"
 msgstr "Архив экзопланет NASA"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:200
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:207
 msgid "IAU Commission 53: Extrasolar Planets"
 msgstr "Комиссия 53 МАС: Внесолнечные планеты"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:201
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:208
 msgid "ExoMol"
 msgstr "ЭкзоМол"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:202
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:209
 msgid "The Habitable Zone Gallery"
 msgstr "Галерея жизнепригодных зон"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:203
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:210
 msgid "PlanetQuest - The Search for Another Earth"
 msgstr "PlanetQuest - Поиск других земель"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:204
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:211
 msgid "Open Exoplanet Catalogue"
 msgstr "Открытый каталог экзопланет"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:205
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:212
 msgid "The Habitable Exoplanets Catalog"
 msgstr "Каталог жизнепригодных экзопланет"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:299
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:306
 msgid "Exoplanets is updated"
 msgstr "Экзопланеты обновляются"
 
@@ -10996,6 +11089,15 @@ msgstr "Координата Y"
 
 #~ msgid "Return to default"
 #~ msgstr "Вернуться к началу"
+
+#~ msgid ""
+#~ "This plugin can display potential habitable exoplanets (orange marker) and "
+#~ "some information about those planets - habitable class, mean surface "
+#~ "temperature and Earth Similarity Index."
+#~ msgstr ""
+#~ "Этот плагин может отображать потенциально жизнепригодные экзопланеты "
+#~ "(оранжевый маркер) и некоторую информацию об этих планетах - класс "
+#~ "жизнепригодности, среднюю температуру поверхности и индекс подобия Земле."
 
 #~ msgid "Great Comet of 1680 (C/1680 V1)"
 #~ msgstr "Большая комета 1680 года (C/1680 V1)"
