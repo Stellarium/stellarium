@@ -25,6 +25,8 @@
 #include "StelTranslator.hpp"
 
 #include <QString>
+#include <QColor>
+#include <QColorDialog>
 
 class Ui_archaeoLinesDialog;
 class ArchaeoLines;
@@ -40,6 +42,22 @@ public:
 
 public slots:
 	void retranslate();
+	// actions to be called by the color dialog
+	// These must also forward the colors in float format to the ArchaeoLines object.
+	void setEquinoxColor(QColor color){equinoxColor=color;}
+	void setSolsticeColor(QColor color){solsticeColor=color;}
+	void setCrossquarterColor(QColor color){crossquarterColor=color;}
+	void setMajorStandstillColor(QColor color){majorStandstillColor=color;}
+	void setMinorStandstillColor(QColor color){minorStandstillColor=color;}
+	void setZenithPassageColor(QColor color){zenithPassageColor=color;}
+	void setNadirPassageColor(QColor color){nadirPassageColor=color;}
+	void askEquinoxColor();
+	void askSolsticeColor();
+	void askCrossquarterColor();
+	void askMajorStandstillColor();
+	void askMinorStandstillColor();
+	void askZenithPassageColor();
+	void askNadirPassageColor();
 
 protected:
 	void createDialogContent();
@@ -47,13 +65,26 @@ protected:
 private:
 	Ui_archaeoLinesDialog* ui;
 	ArchaeoLines* al;
-
+	QColorDialog colorDialog;
+	// These are colors to be settable with a QColorDialog.
+	QColor equinoxColor;
+	QColor solsticeColor;
+	QColor crossquarterColor;
+	QColor majorStandstillColor;
+	QColor minorStandstillColor;
+	QColor zenithPassageColor;
+	QColor nadirPassageColor;
+	QPixmap equinoxColorPixmap;
+	QPixmap solsticeColorPixmap;
+	QPixmap crossquarterColorPixmap;
+	QPixmap majorStandstillColorPixmap;
+	QPixmap minorStandstillColorPixmap;
+	QPixmap zenithPassageColorPixmap;
+	QPixmap nadirPassageColorPixmap;
 	void setAboutHtml();
 
 private slots:
-	void saveArchaeoLinesSettings();
 	void resetArchaeoLinesSettings();
 };
-
 
 #endif /* _ARCHAEOLINESDIALOG_HPP_ */
