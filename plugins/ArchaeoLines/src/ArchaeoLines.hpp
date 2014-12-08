@@ -20,6 +20,8 @@
 #define ARCHAEOLINES_HPP_
 
 #include <QFont>
+#include <QColor>
+#include <QKeyEvent>
 #include "VecMath.hpp"
 #include "StelModule.hpp"
 #include "StelFader.hpp"
@@ -29,13 +31,60 @@ class QTimer;
 class QPixmap;
 class StelButton;
 class ArchaeoLinesDialog;
+class ArchaeoLine;
 
-//! Main class of the Angle Measure plug-in.
-//! Provides an on-screen angle measuring tool.
-//! GZ extended in 2014-09, enough to call it V4.0
-//! Equatorial Mode (original): mark start,end: distance/position angle in the sky, line rotates with sky, spherical angles influenced by refraction (numbers given on celestial sphere).
-//! Horizontal Mode: mark start,end: distance/position angle in alt/azimuthal coordinates, line stays fixed in alt-az system. Angle may be different near to horizon because of refraction!
-//! It is possible to link start and/or end to the sky. Distance/position angle still always in alt/azimuthal coordinates.
+
+//! @class ArchaeoLine
+//! Class which manages a line (small circle) to display around the sky like the solstices line.
+//! Modelled after @class SkyLine found in GridLinesMgr.cpp at V0.13.2, but with small-circle drawing.
+class ArchaeoLine : QObject
+{
+	Q_OBJECT
+	Q_PROPERTY(Vec3f color READ getColor WRITE setColor)
+	Q_PROPERTY(bool flagLabel READ isLabelVisible WRITE setLabelVisible)
+public:
+	enum Line {
+		Equinox,
+		Solstices,
+		Crossquarters,
+		MajorStandstill,
+		MinorStandstill,
+		ZenithPassage,
+		NadirPassage
+	};
+	ArchaeoLine(ArchaeoLine::Line lineType, double declination);
+	virtual ~ArchaeoLine(){}
+	void draw(StelCore* core, float intensity=1.0f) const;
+	const Vec3f& getColor() {return color;}
+	bool isDisplayed(void) const {return fader;}
+
+public slots:
+	void setColor(const Vec3f& c) {color = c;}
+	void update(double deltaTime) {fader.update((int)(deltaTime*1000));}
+	void setFadeDuration(float duration) {fader.setDuration((int)(duration*1000.f));}
+	void setDisplayed(const bool displayed){fader = displayed;}
+	void setFontSize(double newSize){font.setPixelSize(newSize);}
+	//! Re-translates the label.
+	void updateLabel();
+	void setLabelVisible(bool b){flagLabel=b;}
+	//! reset declination (degrees) of this small arc.
+	void setDeclination(double decl){declination=decl;}
+	bool isLabelVisible() const{return flagLabel;}
+
+private:
+	ArchaeoLine::Line lineType;
+	double declination;
+	Vec3f color;
+	StelCore::FrameType frameType;
+	bool flagLabel; //! show the label. (some should be permanently silent)
+	QString label;
+	LinearFader fader;
+	QFont font;
+};
+
+//! Main class of the ArchaeoLines plug-in.
+//! Provides an on-screen visualisation of several small circles relevant mainly to archaeoastronomy.
+//! GZ 2014-12
 class ArchaeoLines : public StelModule
 {
 	Q_OBJECT
@@ -45,86 +94,82 @@ class ArchaeoLines : public StelModule
 	Q_PROPERTY(bool dmsFormat
 		   READ isDmsFormat
 		   WRITE useDmsFormat)
-//	Q_PROPERTY(bool paDisplayed
-//		   READ isPaDisplayed
-//		   WRITE showPositionAngle)
-	  Q_PROPERTY(bool flagShowSolstices
-				 READ       isSolsticesDisplayed
-				 WRITE    showSolstices)
-	  Q_PROPERTY(bool flagShowCrossquarters
-				 READ       isCrossquartersDisplayed
-				 WRITE    showCrossquarters)
-	  Q_PROPERTY(bool flagShowMajorStandstills
-				 READ       isMajorStandstillsDisplayed
-				 WRITE    showMajorStandstills)
-	  Q_PROPERTY(bool flagShowMinorStandstills
-				 READ       isMinorStandstillsDisplayed
-				 WRITE    showMinorStandstills)
-	  Q_PROPERTY(bool flagShowSolarZenith
-				 READ       isSolarZenithDisplayed
-				 WRITE    showSolarZenith)
-	  Q_PROPERTY(bool flagShowSolarNadir
-				 READ       isSolarNadirDisplayed
-				 WRITE    showSolarNadir)
+	Q_PROPERTY(bool flagShowEquinox
+				READ    isEquinoxDisplayed
+				WRITE showEquinox)
+	Q_PROPERTY(bool flagShowSolstices
+				READ    isSolsticesDisplayed
+				WRITE showSolstices)
+	Q_PROPERTY(bool flagShowCrossquarters
+				READ    isCrossquartersDisplayed
+				WRITE showCrossquarters)
+	Q_PROPERTY(bool flagShowMajorStandstills
+				READ    isMajorStandstillsDisplayed
+				WRITE showMajorStandstills)
+	Q_PROPERTY(bool flagShowMinorStandstills
+				READ    isMinorStandstillsDisplayed
+				WRITE showMinorStandstills)
+	Q_PROPERTY(bool flagShowZenithPassage
+				READ    isZenithPassageDisplayed
+				WRITE showZenithPassage)
+	Q_PROPERTY(bool flagShowNadirPassage
+				READ    isNadirPassageDisplayed
+				WRITE showNadirPassage)
 
 public:
 	ArchaeoLines();
 	virtual ~ArchaeoLines();
 	
+
+
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelModule class
 	virtual void init();
 	virtual void update(double deltaTime);
 	virtual void draw(StelCore* core);
 	virtual double getCallOrder(StelModuleActionName actionName) const;
-	virtual void handleKeys(class QKeyEvent* event);
-	//virtual void handleMouseClicks(class QMouseEvent* event);
-	//virtual bool handleMouseMoves(int x, int y, Qt::MouseButtons b);
+	virtual void handleKeys(class QKeyEvent* event){event->setAccepted(false);}
 	virtual bool configureGui(bool show=true);
 	bool isEnabled() const {return flagShowArchaeoLines;}
-	bool isDmsFormat() const { return flagUseDmsFormat; }
+	bool isDmsFormat() const { return flagUseDmsFormat; } // NOT SURE IF USEFUL
+	bool isEquinoxDisplayed() const {return flagShowEquinox;}
 	bool isSolsticesDisplayed() const {return flagShowSolstices;}
 	bool isCrossquartersDisplayed() const {return flagShowCrossquarters;}
 	bool isMajorStandstillsDisplayed() const {return flagShowMajorStandstills;}
 	bool isMinorStandstillsDisplayed() const {return flagShowMinorStandstills;}
-	bool isSolarZenithDisplayed() const {return flagShowSolarZenith;}
-	bool isSolarNadirDisplayed() const {return flagShowSolarNadir;}
+	bool isZenithPassageDisplayed() const {return flagShowZenithPassage;}
+	bool isNadirPassageDisplayed() const {return flagShowNadirPassage;}
 
 	//! Restore the plug-in's settings to the default state.
 	//! Replace the plug-in's settings in Stellarium's configuration file
 	//! with the default values and re-load them.
-	//! Uses internally loadSettings() and saveSettings().
+	//! Uses internally loadSettings().
 	void restoreDefaultSettings();
 
 	//! Load the plug-in's settings from the configuration file.
 	//! Settings are kept in the "ArchaeoLines" section in Stellarium's
 	//! configuration file. If no such section exists, it will load default
 	//! values.
-	//! @see saveSettings(), restoreSettings()
+	//! @see restoreDefaultSettings()
 	void loadSettings();
 
-	//! Save the plug-in's settings to the configuration file.
-	//! @warning textColor and lineColor are not saved, probably because
-	//! they can't be changed by the user in-program.
-	//! @todo find a way to save color values without "rounding drift"
-	//! (this is especially important for restoring default color values).
-	//! @see loadSettings(), restoreSettings()
-	void saveSettings();
 
 public slots:
 	void enableArchaeoLines(bool b);
 	void useDmsFormat(bool b);
 
-	void showSolstices(bool b){ flagShowSolstices=b; }
-	void showCrossquarters(bool b){ flagShowCrossquarters=b;}
-	void showMajorStandstills(bool b){ flagShowMajorStandstills=b;}
-	void showMinorStandstills(bool b){flagShowMinorStandstills=b;}
-	void showSolarZenith(bool b){flagShowSolarZenith=b;}
-	void showSolarNadir(bool b){flagShowSolarNadir=b;}
+	void showEquinox(bool b);
+	void showSolstices(bool b);
+	void showCrossquarters(bool b);
+	void showMajorStandstills(bool b);
+	void showMinorStandstills(bool b);
+	void showZenithPassage(bool b);
+	void showNadirPassage(bool b);
 
-private slots:
-	void updateMessageText();
-	void clearMessage();
+	// called by the dialog GUI, converts GUI's QColor (0..255) to Stellarium's Vec3f float color.
+	void setLineColor(ArchaeoLine::Line whichLine, QColor color);
+	// called by the dialog UI, converts Stellarium's Vec3f float color to QColor (0..255).
+	QColor getLineColor(ArchaeoLine::Line whichLine);
 
 private:
 	QFont font;
@@ -132,28 +177,42 @@ private:
 	bool withDecimalDegree;
 	bool flagUseDmsFormat;
 	LinearFader lineFader;
-	LinearFader messageFader;
-	QTimer* messageTimer;
-	QString messageEnabled;
-  //	QString messageLeftButton;
-  //	QString messageRightButton;
-	QString messagePA;
 
-	Vec3f textColor;
-	Vec3f lineColor;
+	Vec3f equinoxColor;
+	Vec3f solsticesColor;
+	Vec3f crossquartersColor;
+	Vec3f majorStandstillColor;
+	Vec3f minorStandstillColor;
+	Vec3f zenithPassageColor;
+	Vec3f nadirPassageColor;
 
 
+
+	bool flagShowEquinox;
 	bool flagShowSolstices;
 	bool flagShowCrossquarters;
 	bool flagShowMajorStandstills;
 	bool flagShowMinorStandstills;
-	bool flagShowSolarZenith;
-	bool flagShowSolarNadir;
+	bool flagShowZenithPassage;
+	bool flagShowNadirPassage;
+	// These should go into ArchaeoLine single-line class!
 	double lastJD; // cache last-time-computed to 1/month or so?
-	float lunarMajorNorth;
-	float lunarMajorSouth;
-	float lunarMinorNorth;
-	float lunarMinorSouth;
+
+	ArchaeoLine * equinoxLine;
+	ArchaeoLine * northernSolsticeLine;
+	ArchaeoLine * southernSolsticeLine;
+	ArchaeoLine * northernCrossquarterLine;
+	ArchaeoLine * southernCrossquarterLine;
+	ArchaeoLine * northernMajorStandstillLine0;
+	ArchaeoLine * northernMajorStandstillLine1;
+	ArchaeoLine * northernMinorStandstillLine2;
+	ArchaeoLine * northernMinorStandstillLine3;
+	ArchaeoLine * southernMinorStandstillLine4;
+	ArchaeoLine * southernMinorStandstillLine5;
+	ArchaeoLine * southernMajorStandstillLine6;
+	ArchaeoLine * southernMajorStandstillLine7;
+	ArchaeoLine * zenithPassageLine;
+	ArchaeoLine * nadirPassageLine;
 
 	StelButton* toolbarButton;
 
@@ -164,12 +223,13 @@ private:
 	//! @param refractionMode usually StelCore::RefractionAuto
 	//! @param txtColor color used for any text printed regarding this line
 	//! @param lineColor color used for this line
-	void drawOne(StelCore *core, const float declination, const StelCore::FrameType frameType, const StelCore::RefractionMode refractionMode, const Vec3f txtColor, const Vec3f lineColor);
+//	void drawOne(StelCore *core, const float declination, const StelCore::FrameType frameType, const StelCore::RefractionMode refractionMode, const Vec3f txtColor, const Vec3f lineColor);
   
 	QSettings* conf;
 
 	// GUI
 	ArchaeoLinesDialog* configDialog;
+	StelCore* core; // used quite often, better keep a reference...
 };
 
 

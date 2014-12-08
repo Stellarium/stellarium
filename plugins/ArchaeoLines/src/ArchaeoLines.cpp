@@ -29,13 +29,14 @@
 #include "StelVertexArray.hpp"
 #include "ArchaeoLines.hpp"
 #include "ArchaeoLinesDialog.hpp"
+#include "SolarSystem.hpp"
 
 #include <QDebug>
 #include <QTimer>
 #include <QPixmap>
+#include <QColor>
 #include <QtNetwork>
 #include <QSettings>
-#include <QKeyEvent>
 #include <QMouseEvent>
 #include <cmath>
 
@@ -56,7 +57,7 @@ StelPluginInfo ArchaeoLinesStelPluginInterface::getPluginInfo() const
 	info.displayedName = N_("ArchaeoLines");
 	info.authors = "Georg Zotti";
 	info.contact = "http://homepage.univie.ac.at/Georg.Zotti";
-	info.description = N_("Provides a tool for archaeoastronomical alignment studies");
+	info.description = N_("A tool for archaeoastronomical alignment studies");
 	info.version = ARCHAEOLINES_VERSION;
 	return info;
 }
@@ -65,30 +66,65 @@ ArchaeoLines::ArchaeoLines()
 	: flagShowArchaeoLines(false)
 	, withDecimalDegree(false)
 	, flagUseDmsFormat(false)
+	, flagShowEquinox(false)
 	, flagShowSolstices(false)
 	, flagShowCrossquarters(false)
 	, flagShowMajorStandstills(false)
 	, flagShowMinorStandstills(false)
-	, flagShowSolarZenith(false)
-	, flagShowSolarNadir(false)
+	, flagShowZenithPassage(false)
+	, flagShowNadirPassage(false)
 	, toolbarButton(NULL)
 {
 	setObjectName("ArchaeoLines");
 	font.setPixelSize(16);
+	core=StelApp::getInstance().getCore();
+	Q_ASSERT(core);
+
+	// optimize readabiity so that each upper line of the lunistice doubles is labeled.
+	equinoxLine = new ArchaeoLine(ArchaeoLine::Equinox, 0.0);
+	northernSolsticeLine = new ArchaeoLine(ArchaeoLine::Solstices, 23.50);
+	southernSolsticeLine = new ArchaeoLine(ArchaeoLine::Solstices, -23.50);
+	northernCrossquarterLine = new ArchaeoLine(ArchaeoLine::Crossquarters, 16.50);
+	southernCrossquarterLine = new ArchaeoLine(ArchaeoLine::Crossquarters, -16.50);
+	northernMajorStandstillLine0 = new ArchaeoLine(ArchaeoLine::MajorStandstill, 23.5+5.1);
+	northernMajorStandstillLine1 = new ArchaeoLine(ArchaeoLine::MajorStandstill, 23.5+5.1);
+	northernMajorStandstillLine0->setLabelVisible(false);
+	northernMinorStandstillLine2 = new ArchaeoLine(ArchaeoLine::MinorStandstill, 23.5-5.1);
+	northernMinorStandstillLine3 = new ArchaeoLine(ArchaeoLine::MinorStandstill, 23.5-5.1);
+	northernMinorStandstillLine2->setLabelVisible(false);
+	southernMinorStandstillLine4 = new ArchaeoLine(ArchaeoLine::MinorStandstill, -23.5+5.1);
+	southernMinorStandstillLine5 = new ArchaeoLine(ArchaeoLine::MinorStandstill, -23.5+5.1);
+	southernMinorStandstillLine4->setLabelVisible(false);
+	southernMajorStandstillLine6 = new ArchaeoLine(ArchaeoLine::MajorStandstill, -23.5-5.1);
+	southernMajorStandstillLine7 = new ArchaeoLine(ArchaeoLine::MajorStandstill, -23.5-5.1);
+	southernMajorStandstillLine6->setLabelVisible(false);
+	zenithPassageLine = new ArchaeoLine(ArchaeoLine::ZenithPassage, 48.0);
+	nadirPassageLine = new ArchaeoLine(ArchaeoLine::NadirPassage, 42.0);
 
 	configDialog = new ArchaeoLinesDialog();
 	conf = StelApp::getInstance().getSettings();
 
-	messageTimer = new QTimer(this);
-	messageTimer->setInterval(7000);
-	messageTimer->setSingleShot(true);
-
-	connect(messageTimer, SIGNAL(timeout()), this, SLOT(clearMessage()));
 }
 
 ArchaeoLines::~ArchaeoLines()
 {
-	delete configDialog;
+	delete equinoxLine; equinoxLine=NULL;
+	delete northernSolsticeLine; northernSolsticeLine=NULL;
+	delete southernSolsticeLine; southernSolsticeLine=NULL;
+	delete northernCrossquarterLine; northernCrossquarterLine=NULL;
+	delete southernCrossquarterLine; southernCrossquarterLine=NULL;
+	delete northernMajorStandstillLine0; northernMajorStandstillLine0=NULL;
+	delete northernMajorStandstillLine1; northernMajorStandstillLine1=NULL;
+	delete northernMinorStandstillLine2; northernMinorStandstillLine2=NULL;
+	delete northernMinorStandstillLine3; northernMinorStandstillLine3=NULL;
+	delete southernMinorStandstillLine4; southernMinorStandstillLine4=NULL;
+	delete southernMinorStandstillLine5; southernMinorStandstillLine5=NULL;
+	delete southernMajorStandstillLine6; southernMajorStandstillLine6=NULL;
+	delete southernMajorStandstillLine7; southernMajorStandstillLine7=NULL;
+	delete zenithPassageLine; zenithPassageLine=NULL;
+	delete nadirPassageLine; nadirPassageLine=NULL;
+
+	delete configDialog; configDialog=NULL;
 }
 
 bool ArchaeoLines::configureGui(bool show)
@@ -103,13 +139,27 @@ double ArchaeoLines::getCallOrder(StelModuleActionName actionName) const
 {
 	if (actionName==StelModule::ActionDraw)
 	  return StelApp::getInstance().getModuleMgr().getModule("LandscapeMgr")->getCallOrder(actionName)-10.; // negative: draw earlier than landscape!
-	//if (actionName==StelModule::ActionHandleMouseClicks)
-	//	return -11;
 	return 0;
 }
 
 void ArchaeoLines::init()
 {
+	Q_ASSERT(equinoxLine);
+	Q_ASSERT(northernSolsticeLine);
+	Q_ASSERT(southernSolsticeLine);
+	Q_ASSERT(northernCrossquarterLine);
+	Q_ASSERT(southernCrossquarterLine);
+	Q_ASSERT(northernMajorStandstillLine0);
+	Q_ASSERT(northernMajorStandstillLine1);
+	Q_ASSERT(northernMinorStandstillLine2);
+	Q_ASSERT(northernMinorStandstillLine3);
+	Q_ASSERT(southernMinorStandstillLine4);
+	Q_ASSERT(southernMinorStandstillLine5);
+	Q_ASSERT(southernMajorStandstillLine6);
+	Q_ASSERT(southernMajorStandstillLine7);
+	Q_ASSERT(zenithPassageLine);
+	Q_ASSERT(nadirPassageLine);
+
 	if (!conf->childGroups().contains("ArchaeoLines"))
 		restoreDefaultSettings();
 
@@ -119,10 +169,6 @@ void ArchaeoLines::init()
 
 	// Create action for enable/disable & hook up signals	
 	addAction("actionShow_Archaeo_Lines", N_("ArchaeoLines"), N_("ArchaeoLines"), "enabled", "Ctrl+U");
-
-	// Initialize the message strings and make sure they are translated when the language changes.
-	updateMessageText();
-	connect(&app, SIGNAL(languageChanged()), this, SLOT(updateMessageText()));
 
 	// Add a toolbar button
 	try
@@ -146,98 +192,137 @@ void ArchaeoLines::init()
 
 void ArchaeoLines::update(double deltaTime)
 {
-	messageFader.update((int)(deltaTime*1000));
+	static const double lunarI=5.145396; // inclination of lunar orbit
+	// compute min and max distance values for horizontal parallax.
+	// Meeus, AstrAlg 98, p342.
+	static const double meanDist=385000.56; // km earth-moon.
+	static const double addedValues=20905.355+3699.111+2955.968+569.925+48.888+3.149+246.158+152.138+170.733+
+			204.586+129.620+108.743+104.755+10.321+79.661+34.782+23.210+21.636+24.208+30.824+8.379+
+			16.675+12.831+10.445+11.650+14.403+7.003+10.056+6.322+9.884;
+	static const double minDist=meanDist-addedValues;
+	static const double maxDist=meanDist+addedValues;
+	static const double sinPiMin=6378.14/maxDist;
+	static const double sinPiMax=6378.14/minDist; // maximal parallax at min. distance!
+	static double eps;
+
+	double newJD=core->getJDay();
+	if ((newJD-lastJD) > 10.0) // enough to compute this every 10 days?
+	{
+		static SolarSystem *ssystem=GETSTELMODULE(SolarSystem);
+		eps= ssystem->getEarth()->getRotObliquity(core->getJDay()) *180.0/M_PI;
+		static const double invSqrt2=1.0/std::sqrt(2.0);
+		northernSolsticeLine->setDeclination(eps);
+		southernSolsticeLine->setDeclination(-eps);
+		northernCrossquarterLine->setDeclination(eps*invSqrt2);
+		southernCrossquarterLine->setDeclination(-eps*invSqrt2);
+		lastJD=newJD;
+	}
+	StelLocation loc=core->getCurrentLocation();
+
+	// compute parallax correction with Meeus 40.6. First, find H from h=0, then add corrections.
+
+	static const double b_over_a=0.99664719;
+	double latRad=loc.latitude*M_PI/180.0;
+	double u=std::atan(b_over_a*std::tan(latRad));
+	double rhoSinPhiP=b_over_a*std::sin(u)+loc.altitude/6378140.0*std::sin(latRad);
+	double rhoCosPhiP=         std::cos(u)+loc.altitude/6378140.0*std::cos(latRad);
+
+	QVector<double> lunarDE(8), sinPi(8);
+	lunarDE[0]=(eps+lunarI)*M_PI/180.0; // min_distance=max_parallax
+	lunarDE[1]=(eps+lunarI)*M_PI/180.0;
+	lunarDE[2]=(eps-lunarI)*M_PI/180.0;
+	lunarDE[3]=(eps-lunarI)*M_PI/180.0;
+	lunarDE[4]=(-eps+lunarI)*M_PI/180.0;
+	lunarDE[5]=(-eps+lunarI)*M_PI/180.0;
+	lunarDE[6]=(-eps-lunarI)*M_PI/180.0;
+	lunarDE[7]=(-eps-lunarI)*M_PI/180.0;
+	for (int i=0; i<8; i+=2){
+		sinPi[i]=sinPiMax;
+		sinPi[i+1]=sinPiMin;
+	}
+
+	// In the following we compute parallax-corrected declinations of the setting moon for max and min distances.
+	// odd indices for max_distance=min_parallax, even indices for min_distance=max_parallax. References are for Meeus AstrAlg 1998.
+	QVector<double> cosHo(8), sinHo(8); // setting hour angles.
+	for (int i=0; i<8; i++){
+		cosHo[i]=qMax(-1.0, qMin(1.0, -std::tan(latRad)*std::tan(lunarDE[i])));
+		sinHo[i]=std::sin(std::acos(cosHo[i]));
+	}
+
+	// 40.6
+	QVector<double> A(8), B(8), C(8), q(8), lunarDEtopo(8);
+	for (int i=0; i<8; i++){
+		A[i]=std::cos(lunarDE[i])*sinHo[i];
+		B[i]=std::cos(lunarDE[i])*cosHo[i]-rhoCosPhiP*sinPi[i];
+		C[i]=std::sin(lunarDE[i])-rhoSinPhiP*sinPi[i];
+		q[i]=std::sqrt(A[i]*A[i]+B[i]*B[i]+C[i]*C[i]);
+		lunarDEtopo[i]=std::asin(C[i]/q[i]);
+	}
+	northernMajorStandstillLine0->setDeclination(lunarDEtopo[0] *180.0/M_PI);
+	northernMajorStandstillLine1->setDeclination(lunarDEtopo[1] *180.0/M_PI);
+	northernMinorStandstillLine2->setDeclination(lunarDEtopo[2] *180.0/M_PI);
+	northernMinorStandstillLine3->setDeclination(lunarDEtopo[3] *180.0/M_PI);
+	southernMinorStandstillLine4->setDeclination(lunarDEtopo[4] *180.0/M_PI);
+	southernMinorStandstillLine5->setDeclination(lunarDEtopo[5] *180.0/M_PI);
+	southernMajorStandstillLine6->setDeclination(lunarDEtopo[6] *180.0/M_PI);
+	southernMajorStandstillLine7->setDeclination(lunarDEtopo[7] *180.0/M_PI);
+
+	zenithPassageLine->setDeclination(loc.latitude);
+	nadirPassageLine->setDeclination(-loc.latitude);
+
 	lineFader.update((int)(deltaTime*1000));
-	static StelCore *core=StelApp::getInstance().getCore();
+	equinoxLine->update(deltaTime);
+	northernSolsticeLine->update(deltaTime);
+	southernSolsticeLine->update(deltaTime);
+	northernCrossquarterLine->update(deltaTime);
+	southernCrossquarterLine->update(deltaTime);
+	northernMajorStandstillLine0->update(deltaTime);
+	northernMajorStandstillLine1->update(deltaTime);
+	northernMinorStandstillLine2->update(deltaTime);
+	northernMinorStandstillLine3->update(deltaTime);
+	southernMinorStandstillLine4->update(deltaTime);
+	southernMinorStandstillLine5->update(deltaTime);
+	southernMajorStandstillLine6->update(deltaTime);
+	southernMajorStandstillLine7->update(deltaTime);
+	zenithPassageLine->update(deltaTime);
+	nadirPassageLine->update(deltaTime);
 
 	withDecimalDegree = dynamic_cast<StelGui*>(StelApp::getInstance().getGui())->getFlagShowDecimalDegrees();
 }
 
 
-void ArchaeoLines::drawOne(StelCore *core, const float declination, const StelCore::FrameType frameType, const StelCore::RefractionMode refractionMode, const Vec3f txtColor, const Vec3f lineColor)
-{
-	const StelProjectorP prj = core->getProjection(frameType, refractionMode);
-	StelPainter painter(prj);
-	painter.setFont(font);
-
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	glEnable(GL_BLEND);
-	if (lineFader.getInterstate() > 0.000001f)
-	{
-		painter.setColor(lineColor[0], lineColor[1], lineColor[1], lineFader.getInterstate());
-	// TODO: COPY&PASTE code from GrisLinesMgr
-
-	}
-	if (messageFader.getInterstate() > 0.000001f)
-	{
-		painter.setColor(txtColor[0], txtColor[1], txtColor[2], messageFader.getInterstate());
-		int x = 83;
-		int y = 120;
-		painter.drawText(x, y, messageEnabled);
-	}
-	glDisable(GL_BLEND);
-}
-
 //! Draw any parts on the screen which are for our module
 void ArchaeoLines::draw(StelCore* core)
 {
-	if (lineFader.getInterstate() < 0.000001f && messageFader.getInterstate() < 0.000001f)
-		return;
-	if (flagShowSolstices)
-	{
-		drawOne(core, 23.5, StelCore::FrameEquinoxEqu, StelCore::RefractionAuto, textColor, lineColor);
-		drawOne(core, -23.5, StelCore::FrameEquinoxEqu, StelCore::RefractionAuto, textColor, lineColor);
-	}
-	if (flagShowSolarZenith)
-	{
-		drawOne(core, 48.5, StelCore::FrameEquinoxEqu, StelCore::RefractionAuto, textColor, lineColor);
-	}
+	equinoxLine->draw(core, lineFader.getInterstate());
+	northernSolsticeLine->draw(core, lineFader.getInterstate());
+	southernSolsticeLine->draw(core, lineFader.getInterstate());
+	northernCrossquarterLine->draw(core, lineFader.getInterstate());
+	southernCrossquarterLine->draw(core, lineFader.getInterstate());
+	northernMajorStandstillLine0->draw(core, lineFader.getInterstate());
+	northernMajorStandstillLine1->draw(core, lineFader.getInterstate());
+	northernMinorStandstillLine2->draw(core, lineFader.getInterstate());
+	northernMinorStandstillLine3->draw(core, lineFader.getInterstate());
+	southernMinorStandstillLine4->draw(core, lineFader.getInterstate());
+	southernMinorStandstillLine5->draw(core, lineFader.getInterstate());
+	southernMajorStandstillLine6->draw(core, lineFader.getInterstate());
+	southernMajorStandstillLine7->draw(core, lineFader.getInterstate());
+	zenithPassageLine->draw(core, lineFader.getInterstate());
+	nadirPassageLine->draw(core, lineFader.getInterstate());
 }
-
-
-
-void ArchaeoLines::handleKeys(QKeyEvent* event)
-{
-	event->setAccepted(false);
-}
-
 
 
 void ArchaeoLines::enableArchaeoLines(bool b)
 {
 	flagShowArchaeoLines = b;
 	lineFader = b;
-	messageFader = b;
-	if (b)
-	{
-		//qDebug() << "ArchaeoLines::enableArchaeoLines starting timer";
-		messageTimer->start();
-	}
 }
-
 
 
 void ArchaeoLines::useDmsFormat(bool b)
 {
 	flagUseDmsFormat=b;
-}
-
-void ArchaeoLines::updateMessageText()
-{
-	// TRANSLATORS: instructions for using the ArchaeoLines plugin.
-	messageEnabled = q_("ArchaeoLines enabled.");
-	//// TRANSLATORS: instructions for using the ArchaeoLines plugin.
-	//messageLeftButton = q_("Drag with the left button to measure, left-click to clear.");
-	//// TRANSLATORS: instructions for using the ArchaeoLines plugin.
-	//messageRightButton = q_("Right-clicking changes the end point only.");
-	// TRANSLATORS: PA is abbreviation for phrase "Position Angle"
-	messagePA = q_("PA=");
-}
-
-void ArchaeoLines::clearMessage()
-{
-	//qDebug() << "ArchaeoLines::clearMessage";
-	messageFader = false;
+	conf->setValue("ArchaeoLines/angle_format_dms",       isDmsFormat());
 }
 
 void ArchaeoLines::restoreDefaultSettings()
@@ -247,46 +332,369 @@ void ArchaeoLines::restoreDefaultSettings()
 	conf->remove("ArchaeoLines");
 	// ...load the default values...
 	loadSettings();
-	// ...and then save them.
-	saveSettings();
-	// But this doesn't save the colors, so:
-	conf->beginGroup("ArchaeoLines");
-	conf->setValue("text_color", "0,0.5,1");
-	conf->setValue("line_color", "0,0.5,1");
-	conf->endGroup();
 }
 
 void ArchaeoLines::loadSettings()
 {
-	conf->beginGroup("ArchaeoLines");
+	useDmsFormat(conf->value("ArchaeoLines/angle_format_dms", false).toBool());
 
-	useDmsFormat(conf->value("angle_format_dms", false).toBool());
-	textColor = StelUtils::strToVec3f(conf->value("text_color", "0,0.5,1").toString());
-	lineColor = StelUtils::strToVec3f(conf->value("line_color", "0,0.5,1").toString());
-	// 4 solar limits
-	flagShowSolstices = conf->value("show_solstices", true).toBool();
-	flagShowCrossquarters = conf->value("show_crossquarters", false).toBool();
+	equinoxColor         = StelUtils::strToVec3f(conf->value("ArchaeoLines/color_equinox",          "1.00,1.00,0.5").toString());
+	equinoxLine->setColor(equinoxColor);
+	solsticesColor       = StelUtils::strToVec3f(conf->value("ArchaeoLines/color_solstices",        "1.00,1.00,0.25").toString());
+	northernSolsticeLine->setColor(solsticesColor);
+	southernSolsticeLine->setColor(solsticesColor);
+	crossquartersColor   = StelUtils::strToVec3f(conf->value("ArchaeoLines/color_crossquarters",    "1.00,0.75,0.25").toString());
+	northernCrossquarterLine->setColor(crossquartersColor);
+	southernCrossquarterLine->setColor(crossquartersColor);
+	majorStandstillColor = StelUtils::strToVec3f(conf->value("ArchaeoLines/color_major_standstill", "0.25,1.00,0.25").toString());
+	northernMajorStandstillLine0->setColor(majorStandstillColor);
+	northernMajorStandstillLine1->setColor(majorStandstillColor);
+	southernMajorStandstillLine6->setColor(majorStandstillColor);
+	southernMajorStandstillLine7->setColor(majorStandstillColor);
+	minorStandstillColor = StelUtils::strToVec3f(conf->value("ArchaeoLines/color_minor_standstill", "0.20,0.75,0.20").toString());
+	northernMinorStandstillLine2->setColor(minorStandstillColor);
+	northernMinorStandstillLine3->setColor(minorStandstillColor);
+	southernMinorStandstillLine4->setColor(minorStandstillColor);
+	southernMinorStandstillLine5->setColor(minorStandstillColor);
+	zenithPassageColor   = StelUtils::strToVec3f(conf->value("ArchaeoLines/color_zenith_passage",   "1.00,0.75,0.75").toString());
+	zenithPassageLine->setColor(zenithPassageColor);
+	nadirPassageColor    = StelUtils::strToVec3f(conf->value("ArchaeoLines/color_nadir_passage",    "1.00,0.75,0.75").toString());
+	nadirPassageLine->setColor(nadirPassageColor);
+
+	// 5 solar limits
+	showEquinox(conf->value("ArchaeoLines/show_equinox", true).toBool());
+	showSolstices(conf->value("ArchaeoLines/show_solstices", true).toBool());
+	showCrossquarters(conf->value("ArchaeoLines/show_crossquarters", true).toBool());
 	// 4 lunar limits
-	flagShowMajorStandstills = conf->value("show_major_standstills", false).toBool();
-	flagShowMinorStandstills = conf->value("show_minor_standstills", false).toBool();
+	showMajorStandstills(conf->value("ArchaeoLines/show_major_standstills", true).toBool());
+	showMinorStandstills(conf->value("ArchaeoLines/show_minor_standstills", true).toBool());
 	// Mesoamerica
-	flagShowSolarZenith = conf->value("show_solar_zenith", false).toBool();
-	flagShowSolarNadir  = conf->value("show_solar_nadir",  false).toBool();
+	showZenithPassage(conf->value("ArchaeoLines/show_zenith_passage", true).toBool());
+	showNadirPassage(conf->value("ArchaeoLines/show_nadir_passage",  true).toBool());
 
-	conf->endGroup();
+//	qDebug() << "Loadsettings finished";
 }
 
-void ArchaeoLines::saveSettings()
+void ArchaeoLines::showEquinox(bool b)
 {
-	conf->beginGroup("ArchaeoLines");
+	flagShowEquinox=b;
+	conf->setValue("ArchaeoLines/show_equinox",         isEquinoxDisplayed());
+	equinoxLine->setDisplayed(b);
+}
+void ArchaeoLines::showSolstices(bool b)
+{
+	flagShowSolstices=b;
+	conf->setValue("ArchaeoLines/show_solstices",         isSolsticesDisplayed());
+	northernSolsticeLine->setDisplayed(b);
+	southernSolsticeLine->setDisplayed(b);
+}
+void ArchaeoLines::showCrossquarters(bool b)
+{
+	flagShowCrossquarters=b;
+	conf->setValue("ArchaeoLines/show_crossquarters",     isCrossquartersDisplayed());
+	northernCrossquarterLine->setDisplayed(b);
+	southernCrossquarterLine->setDisplayed(b);
+}
+void ArchaeoLines::showMajorStandstills(bool b)
+{
+	flagShowMajorStandstills=b;
+	conf->setValue("ArchaeoLines/show_major_standstills", isMajorStandstillsDisplayed());
+	northernMajorStandstillLine0->setDisplayed(b);
+	northernMajorStandstillLine1->setDisplayed(b);
+	southernMajorStandstillLine6->setDisplayed(b);
+	southernMajorStandstillLine7->setDisplayed(b);
+}
+void ArchaeoLines::showMinorStandstills(bool b)
+{
+	flagShowMinorStandstills=b;
+	conf->setValue("ArchaeoLines/show_minor_standstills", isMinorStandstillsDisplayed());
+	northernMinorStandstillLine2->setDisplayed(b);
+	northernMinorStandstillLine3->setDisplayed(b);
+	southernMinorStandstillLine4->setDisplayed(b);
+	southernMinorStandstillLine5->setDisplayed(b);
+}
+void ArchaeoLines::showZenithPassage(bool b)
+{
+	flagShowZenithPassage=b;
+	conf->setValue("ArchaeoLines/show_zenith_passage",      isZenithPassageDisplayed());
+	zenithPassageLine->setDisplayed(b);
+}
+void ArchaeoLines::showNadirPassage(bool b)
+{
+	flagShowNadirPassage=b;
+	conf->setValue("ArchaeoLines/show_nadir_passage",       isNadirPassageDisplayed());
+	nadirPassageLine->setDisplayed(b);
+}
 
-	conf->setValue("angle_format_dms",       isDmsFormat());
-	conf->setValue("show_solstices",         isSolsticesDisplayed());
-	conf->setValue("show_crossquarters",     isCrossquartersDisplayed());
-	conf->setValue("show_minor_standstills", isMinorStandstillsDisplayed());
-	conf->setValue("show_major_standstills", isMajorStandstillsDisplayed());
-	conf->setValue("show_solar_zenith",      isSolarZenithDisplayed());
-	conf->setValue("show_solar_nadir",       isSolarNadirDisplayed());
 
-	conf->endGroup();
+// called by the dialog UI, converts QColor (0..255) to Stellarium's Vec3f float color.
+void ArchaeoLines::setLineColor(ArchaeoLine::Line whichLine, QColor color)
+{
+	//qDebug() << "ArchaeoLines::setLineColor()";
+
+	switch (whichLine){
+		case ArchaeoLine::Equinox:
+			equinoxColor.set(color.redF(), color.greenF(), color.blueF());
+			conf->setValue("ArchaeoLines/color_equinox",        QString("%1,%2,%3").arg(equinoxColor.v[0]).arg(equinoxColor.v[1]).arg(equinoxColor.v[2]));
+			equinoxLine->setColor(equinoxColor);
+			break;
+		case ArchaeoLine::Solstices:
+			solsticesColor.set(color.redF(), color.greenF(), color.blueF());
+			conf->setValue("ArchaeoLines/color_solstices",        QString("%1,%2,%3").arg(solsticesColor.v[0]).arg(solsticesColor.v[1]).arg(solsticesColor.v[2]));
+			northernSolsticeLine->setColor(solsticesColor);
+			southernSolsticeLine->setColor(solsticesColor);
+			break;
+		case ArchaeoLine::Crossquarters:
+			crossquartersColor.set(color.redF(), color.greenF(), color.blueF());
+			conf->setValue("ArchaeoLines/color_crossquarters",    QString("%1,%2,%3").arg(crossquartersColor.v[0]).arg(crossquartersColor.v[1]).arg(crossquartersColor.v[2]));
+			northernCrossquarterLine->setColor(crossquartersColor);
+			southernCrossquarterLine->setColor(crossquartersColor);
+			break;
+		case ArchaeoLine::MajorStandstill:
+			majorStandstillColor.set(color.redF(), color.greenF(), color.blueF());
+			conf->setValue("ArchaeoLines/color_major_standstill", QString("%1,%2,%3").arg(majorStandstillColor.v[0]).arg(majorStandstillColor.v[1]).arg(majorStandstillColor.v[2]));
+			northernMajorStandstillLine0->setColor(majorStandstillColor);
+			southernMajorStandstillLine7->setColor(majorStandstillColor);
+			northernMajorStandstillLine1->setColor(majorStandstillColor);
+			southernMajorStandstillLine6->setColor(majorStandstillColor);
+			break;
+		case ArchaeoLine::MinorStandstill:
+			minorStandstillColor.set(color.redF(), color.greenF(), color.blueF());
+			conf->setValue("ArchaeoLines/color_minor_standstill", QString("%1,%2,%3").arg(minorStandstillColor.v[0]).arg(minorStandstillColor.v[1]).arg(minorStandstillColor.v[2]));
+			northernMinorStandstillLine2->setColor(minorStandstillColor);
+			southernMinorStandstillLine4->setColor(minorStandstillColor);
+			northernMinorStandstillLine3->setColor(minorStandstillColor);
+			southernMinorStandstillLine5->setColor(minorStandstillColor);
+			break;
+		case ArchaeoLine::ZenithPassage:
+			zenithPassageColor.set(color.redF(), color.greenF(), color.blueF());
+			conf->setValue("ArchaeoLines/color_zenith_passage",     QString("%1,%2,%3").arg(zenithPassageColor.v[0]).arg(zenithPassageColor.v[1]).arg(zenithPassageColor.v[2]));
+			zenithPassageLine->setColor(zenithPassageColor);
+			break;
+		case ArchaeoLine::NadirPassage:
+			nadirPassageColor.set(color.redF(), color.greenF(), color.blueF());
+			conf->setValue("ArchaeoLines/color_nadir_passage",      QString("%1,%2,%3").arg(nadirPassageColor.v[0]).arg(nadirPassageColor.v[1]).arg(nadirPassageColor.v[2]));
+			nadirPassageLine->setColor(nadirPassageColor);
+			break;
+		default:
+			Q_ASSERT(0);
+	}
+}
+
+// called by the dialog UI, converts Stellarium's Vec3f float color to QColor (0..255).
+QColor ArchaeoLines::getLineColor(ArchaeoLine::Line whichLine)
+{
+	QColor color(0,0,0);
+	Vec3f* vColor;
+	switch (whichLine){
+		case ArchaeoLine::Equinox:
+			vColor=&equinoxColor;
+			break;
+		case ArchaeoLine::Solstices:
+			vColor=&solsticesColor;
+			break;
+		case ArchaeoLine::Crossquarters:
+			vColor=&crossquartersColor;
+			break;
+		case ArchaeoLine::MajorStandstill:
+			vColor=&majorStandstillColor;
+			break;
+		case ArchaeoLine::MinorStandstill:
+			vColor=&minorStandstillColor;
+			break;
+		case ArchaeoLine::ZenithPassage:
+			vColor=&zenithPassageColor;
+			break;
+		case ArchaeoLine::NadirPassage:
+			vColor=&nadirPassageColor;
+			break;
+		default:
+			Q_ASSERT(0);
+	}
+	color.setRgbF(vColor->v[0], vColor->v[1], vColor->v[2]);
+	return color;
+}
+
+
+// callback stuff shamelessly taken from GridLinesMgr. Changes: Text MUST be filled, can also be empty for no label!
+struct ALViewportEdgeIntersectCallbackData
+{
+	ALViewportEdgeIntersectCallbackData(StelPainter* p)
+		: sPainter(p)
+	{;}
+	StelPainter* sPainter;
+	//Vec4f textColor;
+	QString text;		// Label to display at the intersection of the lines and screen side
+};
+
+// Callback which draws the label of the grid
+void alViewportEdgeIntersectCallback(const Vec3d& screenPos, const Vec3d& direction, void* userData)
+{
+	// TODO: decide whether to use different color for labels.
+	// Currently label color is equal to line color, and provisions for changing that are commented away.
+
+	ALViewportEdgeIntersectCallbackData* d = static_cast<ALViewportEdgeIntersectCallbackData*>(userData);
+	Vec3d direc(direction);
+	direc.normalize();
+	//const Vec4f tmpColor = d->sPainter->getColor();
+	//d->sPainter->setColor(d->textColor[0], d->textColor[1], d->textColor[2], d->textColor[3]);
+
+	QString text = d->text; // original text-from-coordinates taken out!
+	if (text.isEmpty())
+		return;
+
+	double angleDeg = std::atan2(-direc[1], -direc[0])*180./M_PI;
+	float xshift=6.f;
+	if (angleDeg>90. || angleDeg<-90.)
+	{
+		angleDeg+=180.;
+		xshift=-d->sPainter->getFontMetrics().width(text)-6.f;
+	}
+
+	d->sPainter->drawText(screenPos[0], screenPos[1], text, angleDeg, xshift, 3);
+	//d->sPainter->setColor(tmpColor[0], tmpColor[1], tmpColor[2], tmpColor[3]); // RESTORE
+}
+
+
+ArchaeoLine::ArchaeoLine(ArchaeoLine::Line lineType, double declination) :
+	lineType(lineType), declination(declination), color(0.f, 0.f, 1.f), frameType(StelCore::FrameEquinoxEqu), flagLabel(true)
+{
+	// Font size is 14
+	font.setPixelSize(StelApp::getInstance().getBaseFontSize()+1);
+	updateLabel();
+	fader.setDuration(1000);
+	// Initialize the message strings and make sure they are translated when the language changes.
+	StelApp& app = StelApp::getInstance();
+	//updateLabel(); // WHY AGAIN??
+	connect(&app, SIGNAL(languageChanged()), this, SLOT(updateLabel()));
+
+}
+
+void ArchaeoLine::updateLabel()
+{
+	// TODO: decide whether showing declinations in addition.
+	switch (lineType)
+	{
+		case ArchaeoLine::Equinox:
+			label = q_("Equinox");
+			break;
+		case ArchaeoLine::Solstices:
+			label = q_("Solstice");
+			break;
+		case ArchaeoLine::Crossquarters:
+			label = q_("Crossquarter");
+			break;
+		case ArchaeoLine::MajorStandstill:
+			label = q_("Major Lunar Standstill");
+			break;
+		case ArchaeoLine::MinorStandstill:
+			label = q_("Minor Lunar Standstill");
+			break;
+		case ArchaeoLine::ZenithPassage:
+			label = q_("Zenith Passage");
+			break;
+		case ArchaeoLine::NadirPassage:
+			label = q_("Nadir Passage");
+			break;
+		default:
+			Q_ASSERT(0);
+	}
+}
+
+
+void ArchaeoLine::draw(StelCore *core, float intensity) const
+{
+	// borrowed largely from GridLinesMgr.
+	if (intensity*fader.getInterstate() < 0.000001f)
+		return;
+
+	StelProjectorP prj = core->getProjection(frameType, StelCore::RefractionAuto);
+
+	// Get the bounding halfspace
+	const SphericalCap& viewPortSphericalCap = prj->getBoundingCap();
+
+	// Initialize a painter and set OpenGL state
+	StelPainter sPainter(prj);
+	sPainter.setColor(color[0], color[1], color[2], intensity*fader.getInterstate());
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Normal transparency mode
+	glDisable(GL_TEXTURE_2D);
+	glEnable(GL_BLEND);
+
+	// OpenGL ES 2.0 doesn't have GL_LINE_SMOOTH
+	#ifdef GL_LINE_SMOOTH
+	if (QOpenGLContext::currentContext()->format().renderableType()==QSurfaceFormat::OpenGL)
+		glEnable(GL_LINE_SMOOTH);
+	#endif
+
+	//Vec4f textColor(color[0], color[1], color[2], intensity*fader.getInterstate());
+
+	ALViewportEdgeIntersectCallbackData userData(&sPainter);
+	sPainter.setFont(font);
+	//userData.textColor = textColor;
+	userData.text = (isLabelVisible() ? label : "");
+	/////////////////////////////////////////////////
+	// Draw the line
+	const double lat=declination*M_PI/180.0;
+	SphericalCap declinationCap(Vec3d(0,0,1), std::sin(lat));
+	const Vec3d rotCenter(0,0,declinationCap.d);
+
+	Vec3d p1, p2;
+	if (!SphericalCap::intersectionPoints(viewPortSphericalCap, declinationCap, p1, p2))
+	{
+		if ((viewPortSphericalCap.d<declinationCap.d && viewPortSphericalCap.contains(declinationCap.n))
+			|| (viewPortSphericalCap.d<-declinationCap.d && viewPortSphericalCap.contains(-declinationCap.n)))
+		{
+			// The line is fully included in the viewport, draw it in 3 sub-arcs to avoid length > 180.
+			Vec3d pt1;
+			Vec3d pt2;
+			Vec3d pt3;
+			const double lon1=0.0;
+			const double lon2=120.0*M_PI/180.0;
+			const double lon3=240.0*M_PI/180.0;
+			StelUtils::spheToRect(lon1, lat, pt1); pt1.normalize();
+			StelUtils::spheToRect(lon2, lat, pt2); pt2.normalize();
+			StelUtils::spheToRect(lon3, lat, pt3); pt3.normalize();
+
+			sPainter.drawSmallCircleArc(pt1, pt2, rotCenter, alViewportEdgeIntersectCallback, &userData);
+			sPainter.drawSmallCircleArc(pt2, pt3, rotCenter, alViewportEdgeIntersectCallback, &userData);
+			sPainter.drawSmallCircleArc(pt3, pt1, rotCenter, alViewportEdgeIntersectCallback, &userData);
+			#ifdef GL_LINE_SMOOTH
+			if (QOpenGLContext::currentContext()->format().renderableType()==QSurfaceFormat::OpenGL)
+				glDisable(GL_LINE_SMOOTH);
+			#endif
+			glDisable(GL_BLEND);
+			return;
+		}
+		else
+		{
+			#ifdef GL_LINE_SMOOTH
+			if (QOpenGLContext::currentContext()->format().renderableType()==QSurfaceFormat::OpenGL)
+				glDisable(GL_LINE_SMOOTH);
+			#endif
+			glDisable(GL_BLEND);
+			return;
+		}
+	}
+	// Draw the arc in 2 sub-arcs to avoid lengths > 180 deg
+	Vec3d middlePoint = p1-rotCenter+p2-rotCenter;
+	middlePoint.normalize();
+	middlePoint*=(p1-rotCenter).length();
+	middlePoint+=rotCenter;
+	if (!viewPortSphericalCap.contains(middlePoint))
+	{
+		middlePoint-=rotCenter;
+		middlePoint*=-1.;
+		middlePoint+=rotCenter;
+	}
+
+	sPainter.drawSmallCircleArc(p1, middlePoint, rotCenter,alViewportEdgeIntersectCallback, &userData);
+	sPainter.drawSmallCircleArc(p2, middlePoint, rotCenter, alViewportEdgeIntersectCallback, &userData);
+
+	// OpenGL ES 2.0 doesn't have GL_LINE_SMOOTH
+	#ifdef GL_LINE_SMOOTH
+	if (QOpenGLContext::currentContext()->format().renderableType()==QSurfaceFormat::OpenGL)
+		glDisable(GL_LINE_SMOOTH);
+	#endif
+
+	glDisable(GL_BLEND);
 }

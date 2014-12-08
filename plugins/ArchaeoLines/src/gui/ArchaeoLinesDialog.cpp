@@ -64,13 +64,70 @@ void ArchaeoLinesDialog::createDialogContent()
 	ui->useDmsFormatCheckBox->setChecked(al->isDmsFormat());
 	connect(ui->useDmsFormatCheckBox, SIGNAL(toggled(bool)), al, SLOT(useDmsFormat(bool)));
 
-	ui->solarZenithCheckBox->setChecked(al->isSolarZenithDisplayed());
-	connect(ui->solarZenithCheckBox, SIGNAL(toggled(bool)), al, SLOT(showSolarZenith(bool)));
+	ui->equinoxCheckBox->setChecked(al->isEquinoxDisplayed());
+	connect(ui->equinoxCheckBox, SIGNAL(toggled(bool)), al, SLOT(showEquinox(bool)));
+	ui->solsticesCheckBox->setChecked(al->isSolsticesDisplayed());
+	connect(ui->solsticesCheckBox, SIGNAL(toggled(bool)), al, SLOT(showSolstices(bool)));
+	ui->crossquarterCheckBox->setChecked(al->isCrossquartersDisplayed());
+	connect(ui->crossquarterCheckBox, SIGNAL(toggled(bool)), al, SLOT(showCrossquarters(bool)));
+	ui->majorStandstillCheckBox->setChecked(al->isMajorStandstillsDisplayed());
+	connect(ui->majorStandstillCheckBox, SIGNAL(toggled(bool)), al, SLOT(showMajorStandstills(bool)));
+	ui->minorStandstillCheckBox->setChecked(al->isMinorStandstillsDisplayed());
+	connect(ui->minorStandstillCheckBox, SIGNAL(toggled(bool)), al, SLOT(showMinorStandstills(bool)));
+	ui->zenithPassageCheckBox->setChecked(al->isZenithPassageDisplayed());
+	connect(ui->zenithPassageCheckBox, SIGNAL(toggled(bool)), al, SLOT(showZenithPassage(bool)));
+	ui->nadirPassageCheckBox->setChecked(al->isNadirPassageDisplayed());
+	connect(ui->nadirPassageCheckBox, SIGNAL(toggled(bool)), al, SLOT(showNadirPassage(bool)));
 
 
-	connect(ui->saveSettingsButton, SIGNAL(clicked()), this, SLOT(saveArchaeoLinesSettings()));
+	equinoxColor         = al->getLineColor(ArchaeoLine::Equinox);
+	solsticeColor        = al->getLineColor(ArchaeoLine::Solstices);
+	crossquarterColor    = al->getLineColor(ArchaeoLine::Crossquarters);
+	majorStandstillColor = al->getLineColor(ArchaeoLine::MajorStandstill);
+	minorStandstillColor = al->getLineColor(ArchaeoLine::MinorStandstill);
+	zenithPassageColor   = al->getLineColor(ArchaeoLine::ZenithPassage);
+	nadirPassageColor    = al->getLineColor(ArchaeoLine::NadirPassage);
+	equinoxColorPixmap=QPixmap(48, 12);
+	equinoxColorPixmap.fill(equinoxColor);
+	ui->equinoxColorToolButton->setIconSize(QSize(48, 12));
+	ui->equinoxColorToolButton->setIcon(QIcon(equinoxColorPixmap));
+	solsticeColorPixmap=QPixmap(48, 12);
+	solsticeColorPixmap.fill(solsticeColor);
+	ui->solsticesColorToolButton->setIconSize(QSize(48, 12));
+	ui->solsticesColorToolButton->setIcon(QIcon(solsticeColorPixmap));
+	crossquarterColorPixmap=QPixmap(48, 12);
+	crossquarterColorPixmap.fill(crossquarterColor);
+	ui->crossquarterColorToolButton->setIconSize(QSize(48, 12));
+	ui->crossquarterColorToolButton->setIcon(QIcon(crossquarterColorPixmap));
+	minorStandstillColorPixmap=QPixmap(48, 12);
+	minorStandstillColorPixmap.fill(minorStandstillColor);
+	ui->minorStandstillColorToolButton->setIconSize(QSize(48, 12));
+	ui->minorStandstillColorToolButton->setIcon(QIcon(minorStandstillColorPixmap));
+	majorStandstillColorPixmap=QPixmap(48, 12);
+	majorStandstillColorPixmap.fill(majorStandstillColor);
+	ui->majorStandstillColorToolButton->setIconSize(QSize(48, 12));
+	ui->majorStandstillColorToolButton->setIcon(QIcon(majorStandstillColorPixmap));
+	zenithPassageColorPixmap=QPixmap(48, 12);
+	zenithPassageColorPixmap.fill(zenithPassageColor);
+	ui->zenithPassageColorToolButton->setIconSize(QSize(48, 12));
+	ui->zenithPassageColorToolButton->setIcon(QIcon(zenithPassageColorPixmap));
+	nadirPassageColorPixmap=QPixmap(48, 12);
+	nadirPassageColorPixmap.fill(nadirPassageColor);
+	ui->nadirPassageColorToolButton->setIconSize(QSize(48, 12));
+	ui->nadirPassageColorToolButton->setIcon(QIcon(nadirPassageColorPixmap));
+
+
+	connect(ui->equinoxColorToolButton,         SIGNAL(released()), this, SLOT(askEquinoxColor()));
+	connect(ui->solsticesColorToolButton,       SIGNAL(released()), this, SLOT(askSolsticeColor()));
+	connect(ui->crossquarterColorToolButton,    SIGNAL(released()), this, SLOT(askCrossquarterColor()));
+	connect(ui->majorStandstillColorToolButton, SIGNAL(released()), this, SLOT(askMajorStandstillColor()));
+	connect(ui->minorStandstillColorToolButton, SIGNAL(released()), this, SLOT(askMinorStandstillColor()));
+	connect(ui->zenithPassageColorToolButton,   SIGNAL(released()), this, SLOT(askZenithPassageColor()));
+	connect(ui->nadirPassageColorToolButton,    SIGNAL(released()), this, SLOT(askNadirPassageColor()));
+
 	connect(ui->restoreDefaultsButton, SIGNAL(clicked()), this, SLOT(resetArchaeoLinesSettings()));
 
+	ui->formatDisplayBox->hide();
 	setAboutHtml();
 }
 
@@ -83,13 +140,14 @@ void ArchaeoLinesDialog::setAboutHtml(void)
 	//html += "<tr><td><strong>" + q_("Contributors") + ":</strong></td><td> List with br separators </td></tr>";
 	html += "</table>";
 
-	html += "<p>" + q_("The ArchaeoLines plugin is a small tool which displays declination arcs most relevant to archaeoastronomical studies.") + "</p>";
-	html += "<ul><li>" + q_("Declinations of the solstices") + "</li>";
+	html += "<p>" + q_("The ArchaeoLines plugin displays declination arcs most relevant to archaeoastronomical studies.") + "</p>";
+	html += "<ul><li>" + q_("Declinations of equinoxes (i.e. equator) and the solstices") + "</li>";
 	html += "<li>" + q_("Declinations of the crossquarter days (days right between solstices and equinoxes)") + "</li>";
-	html += "<li>" + q_("Declinations of the Major Lunar Standstills (including horizon parallax effects)") + "</li>";
-	html += "<li>" + q_("Declinations of the Minor Lunar Standstills (including horizon parallax effects)") + "</li>";
-	html += "<li>" + q_("Declinations of the Solar Zenith passage (if applicable for current location)") + "</li>";
-	html += "<li>" + q_("Declinations of the Solar Nadir passage (if applicable for current location)") + "</li></ul>";
+	html += "<li>" + q_("Declinations of the Major Lunar Standstills") + "</li>";
+	html += "<li>" + q_("Declinations of the Minor Lunar Standstills") + "</li>";
+	html += "<li>" + q_("Declination of the Zenith passage") + "</li>";
+	html += "<li>" + q_("Declination of the Nadir passage") + "</li></ul>";
+	html += "<p>" + q_("The lunar lines include horizon parallax effects. There are two lines each drawn, for maximum and minimum distance of the moon.") + "</p>";
 
 	html += "<h3>" + q_("Links") + "</h3>";
 	html += "<p>" + QString(q_("Support is provided via the Launchpad website.  Be sure to put \"%1\" in the subject when posting.")).arg("ArchaeoLines plugin") + "</p>";
@@ -114,12 +172,126 @@ void ArchaeoLinesDialog::setAboutHtml(void)
 	ui->aboutTextBrowser->setHtml(html);
 }
 
-void ArchaeoLinesDialog::saveArchaeoLinesSettings()
-{
-	al->saveSettings();
-}
 
 void ArchaeoLinesDialog::resetArchaeoLinesSettings()
 {
 	al->restoreDefaultSettings();
+	equinoxColor         = al->getLineColor(ArchaeoLine::Equinox);
+	solsticeColor        = al->getLineColor(ArchaeoLine::Solstices);
+	crossquarterColor    = al->getLineColor(ArchaeoLine::Crossquarters);
+	majorStandstillColor = al->getLineColor(ArchaeoLine::MajorStandstill);
+	minorStandstillColor = al->getLineColor(ArchaeoLine::MinorStandstill);
+	zenithPassageColor   = al->getLineColor(ArchaeoLine::ZenithPassage);
+	nadirPassageColor    = al->getLineColor(ArchaeoLine::NadirPassage);
+	equinoxColorPixmap.fill(equinoxColor);
+	ui->equinoxColorToolButton->setIcon(QIcon(equinoxColorPixmap));
+	solsticeColorPixmap.fill(solsticeColor);
+	ui->solsticesColorToolButton->setIcon(QIcon(solsticeColorPixmap));
+	crossquarterColorPixmap.fill(crossquarterColor);
+	ui->crossquarterColorToolButton->setIcon(QIcon(crossquarterColorPixmap));
+	minorStandstillColorPixmap.fill(minorStandstillColor);
+	ui->minorStandstillColorToolButton->setIcon(QIcon(minorStandstillColorPixmap));
+	majorStandstillColorPixmap.fill(majorStandstillColor);
+	ui->majorStandstillColorToolButton->setIcon(QIcon(majorStandstillColorPixmap));
+	zenithPassageColorPixmap.fill(zenithPassageColor);
+	ui->zenithPassageColorToolButton->setIcon(QIcon(zenithPassageColorPixmap));
+	nadirPassageColorPixmap.fill(nadirPassageColor);
+	ui->nadirPassageColorToolButton->setIcon(QIcon(nadirPassageColorPixmap));
+
+	ui->equinoxCheckBox->setChecked(al->isEquinoxDisplayed());
+	ui->solsticesCheckBox->setChecked(al->isSolsticesDisplayed());
+	ui->crossquarterCheckBox->setChecked(al->isCrossquartersDisplayed());
+	ui->majorStandstillCheckBox->setChecked(al->isMajorStandstillsDisplayed());
+	ui->minorStandstillCheckBox->setChecked(al->isMinorStandstillsDisplayed());
+	ui->zenithPassageCheckBox->setChecked(al->isZenithPassageDisplayed());
+	ui->nadirPassageCheckBox->setChecked(al->isNadirPassageDisplayed());
+
+
 }
+
+// These are called by the respective buttons.
+void ArchaeoLinesDialog::askEquinoxColor()
+{
+	QColor c=QColorDialog::getColor(equinoxColor, NULL, q_("Select color for equinox line"));
+	if (c.isValid())
+	{
+		equinoxColor=c;
+		al->setLineColor(ArchaeoLine::Equinox, c);
+		equinoxColorPixmap.fill(c);
+		ui->equinoxColorToolButton->setIcon(QIcon(equinoxColorPixmap));
+	}
+}
+
+void ArchaeoLinesDialog::askSolsticeColor()
+{
+	QColor c=QColorDialog::getColor(solsticeColor, NULL, q_("Select color for solstice lines"));
+	if (c.isValid())
+	{
+		solsticeColor=c;
+		al->setLineColor(ArchaeoLine::Solstices, c);
+		solsticeColorPixmap.fill(c);
+		ui->solsticesColorToolButton->setIcon(QIcon(solsticeColorPixmap));
+	}
+}
+
+void ArchaeoLinesDialog::askCrossquarterColor()
+{
+	QColor c=QColorDialog::getColor(crossquarterColor, NULL, q_("Select color for crossquarter lines"));
+	if (c.isValid())
+	{
+		crossquarterColor=c;
+		al->setLineColor(ArchaeoLine::Crossquarters, c);
+		crossquarterColorPixmap.fill(c);
+		ui->crossquarterColorToolButton->setIcon(QIcon(crossquarterColorPixmap));
+	}
+}
+
+void ArchaeoLinesDialog::askMajorStandstillColor()
+{
+	QColor c=QColorDialog::getColor(majorStandstillColor, NULL, q_("Select color for major standstill lines"));
+	if (c.isValid())
+	{
+		majorStandstillColor=c;
+		al->setLineColor(ArchaeoLine::MajorStandstill, c);
+		majorStandstillColorPixmap.fill(c);
+		ui->majorStandstillColorToolButton->setIcon(QIcon(majorStandstillColorPixmap));
+	}
+}
+
+void ArchaeoLinesDialog::askMinorStandstillColor()
+{
+	QColor c=QColorDialog::getColor(minorStandstillColor, NULL, q_("Select color for minor standstill lines"));
+	if (c.isValid())
+	{
+		minorStandstillColor=c;
+		al->setLineColor(ArchaeoLine::MinorStandstill, c);
+		minorStandstillColorPixmap.fill(c);
+		ui->minorStandstillColorToolButton->setIcon(QIcon(minorStandstillColorPixmap));
+	}
+}
+
+void ArchaeoLinesDialog::askZenithPassageColor()
+{
+	QColor c=QColorDialog::getColor(zenithPassageColor, NULL, q_("Select color for zenith passage line"));
+	if (c.isValid())
+	{
+		zenithPassageColor=c;
+		al->setLineColor(ArchaeoLine::ZenithPassage, c);
+		zenithPassageColorPixmap.fill(c);
+		ui->zenithPassageColorToolButton->setIcon(QIcon(zenithPassageColorPixmap));
+
+	}
+}
+
+void ArchaeoLinesDialog::askNadirPassageColor()
+{
+	QColor c=QColorDialog::getColor(nadirPassageColor, NULL, q_("Select color for nadir passage line"));
+	if (c.isValid())
+	{
+		nadirPassageColor=c;
+		al->setLineColor(ArchaeoLine::NadirPassage, c);
+		nadirPassageColorPixmap.fill(c);
+		ui->nadirPassageColorToolButton->setIcon(QIcon(nadirPassageColorPixmap));
+	}
+}
+

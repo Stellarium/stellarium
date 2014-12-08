@@ -146,49 +146,122 @@
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_3">
        <item>
-        <widget class="QCheckBox" name="solsticesCheckBox">
+        <widget class="QLabel" name="label">
          <property name="text">
-          <string>Solstice Lines</string>
+          <string>To change colors you must switch to windowed mode!</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QCheckBox" name="crosssquarterCheckBox">
-         <property name="text">
-          <string>Crossquarter Lines</string>
-         </property>
-        </widget>
+        <layout class="QFormLayout" name="formLayout">
+         <item row="0" column="0">
+          <widget class="QCheckBox" name="equinoxCheckBox">
+           <property name="text">
+            <string>Equinox line (Equator)</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1">
+          <widget class="QToolButton" name="equinoxColorToolButton">
+           <property name="text">
+            <string>EquinoxColor...</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="0">
+          <widget class="QCheckBox" name="solsticesCheckBox">
+           <property name="text">
+            <string>Solstice Lines</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="1">
+          <widget class="QToolButton" name="solsticesColorToolButton">
+           <property name="text">
+            <string>SolsticeColor...</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="0">
+          <widget class="QCheckBox" name="crossquarterCheckBox">
+           <property name="text">
+            <string>Crossquarter Lines</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="1">
+          <widget class="QToolButton" name="crossquarterColorToolButton">
+           <property name="toolTip">
+            <string>Change color</string>
+           </property>
+           <property name="text">
+            <string>CrossquarterColor...</string>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="0">
+          <widget class="QCheckBox" name="majorStandstillCheckBox">
+           <property name="text">
+            <string>Major Lunar Standstill lines</string>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="0">
+          <widget class="QCheckBox" name="minorStandstillCheckBox">
+           <property name="text">
+            <string>Minor Lunar Standstill lines</string>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="1">
+          <widget class="QToolButton" name="majorStandstillColorToolButton">
+           <property name="text">
+            <string>majorLunarStandstillColor...</string>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="1">
+          <widget class="QToolButton" name="minorStandstillColorToolButton">
+           <property name="text">
+            <string>minorLunarStandstillColor...</string>
+           </property>
+          </widget>
+         </item>
+         <item row="5" column="0">
+          <widget class="QCheckBox" name="zenithPassageCheckBox">
+           <property name="text">
+            <string>Declination of Zenith passage</string>
+           </property>
+          </widget>
+         </item>
+         <item row="6" column="0">
+          <widget class="QCheckBox" name="nadirPassageCheckBox">
+           <property name="text">
+            <string>Declination of Nadir passage</string>
+           </property>
+          </widget>
+         </item>
+         <item row="5" column="1">
+          <widget class="QToolButton" name="zenithPassageColorToolButton">
+           <property name="text">
+            <string>zenithPassageColor...</string>
+           </property>
+          </widget>
+         </item>
+         <item row="6" column="1">
+          <widget class="QToolButton" name="nadirPassageColorToolButton">
+           <property name="text">
+            <string>NadirPassageColor...</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
        </item>
        <item>
-        <widget class="QCheckBox" name="majorLunarStandstillCheckBox">
-         <property name="text">
-          <string>Major Lunar Standstill lines</string>
+        <widget class="QGroupBox" name="formatDisplayBox">
+         <property name="enabled">
+          <bool>false</bool>
          </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QCheckBox" name="minorLunarStandstillCheckBox">
-         <property name="text">
-          <string>Minor Lunar Standstill lines</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QCheckBox" name="solarZenithCheckBox">
-         <property name="text">
-          <string>Solar Zenith passage (if applicable for location)</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QCheckBox" name="solarNadirCheckBox">
-         <property name="text">
-          <string>Solar declination of Nadir passage (if applicable for location)</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QGroupBox" name="displayBox">
          <property name="title">
           <string>Format</string>
          </property>
@@ -231,19 +304,6 @@
            </property>
            <property name="text">
             <string>Restore default settings</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QPushButton" name="saveSettingsButton">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="text">
-            <string>Save settings as default</string>
            </property>
           </widget>
          </item>
