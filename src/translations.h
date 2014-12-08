@@ -163,6 +163,7 @@ class Translations
 		// =====================================================================
 		// Constellation cultures
 		N_("Arabic");
+		N_("Arabic Moon Stations");
 		N_("Aztec");
 		N_("Chinese");
 		N_("Egyptian");
@@ -175,9 +176,11 @@ class Translations
 		N_("Norse");
 		N_("Polynesian");
 		N_("Sami");
+		N_("Siberian");
 		N_("Tupi-Guarani");
 		N_("Tongan");
 		N_("Western");
+		N_("Western (H.A.Rey)");
 
 		
 		// =====================================================================
