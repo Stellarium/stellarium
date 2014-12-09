@@ -24,6 +24,7 @@
 #include "StelProjectorType.hpp"
 #include "StelLocation.hpp"
 #include "StelSkyDrawer.hpp"
+#include "StelObject.hpp"
 #include <QString>
 #include <QStringList>
 #include <QTime>
@@ -519,13 +520,16 @@ public slots:
 	Vec3f getDeltaTCustomEquationCoefficients() const { return deltaTCustomEquationCoeff; }
 
 	//! GZ NEW: return JDE of event "object setting on landscape horizon", modulated by some options.
-	//! @param obj the object in question
-	//! @param setting true for seting, false for rising
+	//! this works with the current selection of StelObjectMgr.
+	//! @param setting true for setting, false for rising
 	//! @param offsetMin returned JDE is so many minutes different from setting event.
 	//! @param onLandscape consider current landscape for horizon, not math. horizon.
-	//! @retval eventOK object reached this altitude/time. False in cases of circumpolarity or altitude ot reached. The returned time then is closest approach.
-	//! @returns JDE of event. This time can then be used to setJD and show e.g. the sun 4 minutes before setting.
-	double jdeForObjNearHorizon(const StelObjectP obj, const bool setting, const double offsetMin, const bool onLandscape, bool eventOK);
+	//! @param jde: in: start date of search. out: receives final time of event, if event happens.
+	//!         This time can then be used to setJD and show e.g. the sun 4 minutes before setting.
+	//! @param setThisTime true if you really want to go there, false for only returning time in jde.
+	//! @returns true if object reached this altitude/time. False in cases of circumpolarity or altitude ot reached. The returned time then is closest approach, e.g. Northern transit.
+	//!
+//	bool putSelectedNearHorizon(const bool setting, const double offsetMin, const bool onLandscape, double &jde, const bool setThisTime=true);
 
 signals:
 	//! This signal is emitted when the observer location has changed.
@@ -574,7 +578,7 @@ private:
 
 	// Time variables
 	double timeSpeed;                  // Positive : forward, Negative : Backward, 1 = 1sec/sec
-	double JDay;                       // Curent time in Julian day
+	double JDay;                       // Current time in Julian day.
 	double presetSkyTime;
 	QTime initTodayTime;
 	QString startupTimeMode;
