@@ -69,8 +69,9 @@ AddOnTableView::~AddOnTableView()
 void AddOnTableView::slotDataUpdated(const QString& category) {
 	if (objectName() == category)
 	{
-		// TODO
-		//((AddOnTableProxyModel*) model())->sourceModel()->query().exec();
+		QModelIndex top = ((AddOnTableModel*) model())->index(0, 0);
+		QModelIndex bottom = ((AddOnTableModel*) model())->index(model()->rowCount(), model()->columnCount());
+		((AddOnTableModel*) model())->dataChanged(top, bottom);
 		update();
 	}
 }
