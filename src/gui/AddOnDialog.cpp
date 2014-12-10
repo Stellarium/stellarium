@@ -68,12 +68,12 @@ void AddOnDialog::createDialogContent()
 	connect(ui->btnSettings, SIGNAL(clicked(bool)), this, SLOT(slotOpenSettings()));
 
 	// naming tables according to the category
-	ui->catalogsTableView->setObjectName(CATEGORY_CATALOG);
-	ui->landscapeTableView->setObjectName(CATEGORY_LANDSCAPE);
-	ui->languageTableView->setObjectName(CATEGORY_LANGUAGE_PACK);
-	ui->scriptsTableView->setObjectName(CATEGORY_SCRIPT);
-	ui->starloreTableView->setObjectName(CATEGORY_SKY_CULTURE);
-	ui->texturesTableView->setObjectName(CATEGORY_TEXTURE);
+	ui->catalogsTableView->setCategory(AddOn::CATALOG);
+	ui->landscapeTableView->setCategory(AddOn::LANDSCAPE);
+	ui->languageTableView->setCategory(AddOn::LANGUAGEPACK);
+	ui->scriptsTableView->setCategory(AddOn::SCRIPT);
+	ui->starloreTableView->setCategory(AddOn::STARLORE);
+	ui->texturesTableView->setCategory(AddOn::TEXTURE);
 
 	// hashing all tableViews
 	m_tableViews.insert(AddOn::CATALOG, ui->catalogsTableView);
