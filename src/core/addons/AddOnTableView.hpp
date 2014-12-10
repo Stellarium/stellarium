@@ -39,6 +39,7 @@ public:
 	void mouseDoubleClickEvent(QMouseEvent* e);
 	void selectionChanged(const QItemSelection& selected, const QItemSelection& deselected);
 	void setModel(QAbstractItemModel* model);
+	void setCategory(AddOn::Category category) { m_category = category; }
 
 	QHash<AddOn*, QStringList> getSelectedAddonsToInstall() { return m_iSelectedAddOnsToInstall; }
 	QHash<AddOn*, QStringList> getSelectedAddonsToRemove() { return m_iSelectedAddOnsToRemove; }
@@ -60,6 +61,7 @@ private slots:
 	void slotRowChecked(int pRow, bool checked);
 
 private:
+	AddOn::Category m_category;
 	CheckedHeader* m_pCheckedHeader;
 	QButtonGroup* m_pCheckboxGroup;
 	QHash<int, AddOnWidget*> m_widgets;
