@@ -17,15 +17,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: fr\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-12-08 01:07+0600\n"
-"PO-Revision-Date: 2014-12-03 17:17+0000\n"
+"POT-Creation-Date: 2014-12-09 23:15+0600\n"
+"PO-Revision-Date: 2014-12-09 19:46+0000\n"
 "Last-Translator: Nicolas Martignoni <Unknown>\n"
 "Language-Team: <fr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-12-08 05:49+0000\n"
-"X-Generator: Launchpad (build 17274)\n"
+"X-Launchpad-Export-Date: 2014-12-10 05:39+0000\n"
+"X-Generator: Launchpad (build 17283)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:132 src/core/modules/StarMgr.cpp:353
 #: src/core/modules/GridLinesMgr.cpp:736 src/core/modules/LandscapeMgr.cpp:355
@@ -1130,33 +1130,37 @@ msgstr ""
 "La projection orthographique est une projection azimutale dont le point de "
 "perspective se trouve à l'infini."
 
-#: src/core/StelObject.cpp:121 src/core/StelObject.cpp:123
-#: src/core/StelObject.cpp:131 src/core/StelObject.cpp:133
+#: src/core/StelObject.cpp:115
+msgid "on date"
+msgstr "de la date"
+
+#: src/core/StelObject.cpp:127 src/core/StelObject.cpp:129
+#: src/core/StelObject.cpp:137 src/core/StelObject.cpp:139
 msgid "RA/Dec"
 msgstr "AD/Déc"
 
-#: src/core/StelObject.cpp:145 src/core/StelObject.cpp:149
+#: src/core/StelObject.cpp:151 src/core/StelObject.cpp:155
 #, qt-format
 msgid "Hour angle/DE: %1/%2"
 msgstr "Angle horaire/dec : %1/%2"
 
-#: src/core/StelObject.cpp:145 src/core/StelObject.cpp:168
-#: src/core/StelObject.cpp:170
+#: src/core/StelObject.cpp:151 src/core/StelObject.cpp:174
+#: src/core/StelObject.cpp:176
 msgid "(apparent)"
 msgstr "(apparent)"
 
-#: src/core/StelObject.cpp:168 src/core/StelObject.cpp:170
-#: src/core/StelObject.cpp:175 src/core/StelObject.cpp:177
+#: src/core/StelObject.cpp:174 src/core/StelObject.cpp:176
+#: src/core/StelObject.cpp:181 src/core/StelObject.cpp:183
 #, qt-format
 msgid "Az/Alt: %1/%2"
 msgstr "Az/Haut : %1/%2"
 
-#: src/core/StelObject.cpp:190 src/core/StelObject.cpp:192
-#: src/core/StelObject.cpp:198 src/core/StelObject.cpp:200
+#: src/core/StelObject.cpp:196 src/core/StelObject.cpp:198
+#: src/core/StelObject.cpp:204 src/core/StelObject.cpp:206
 msgid "Ecliptic longitude/latitude"
 msgstr "Longitude/latitude écliptique"
 
-#: src/core/StelObject.cpp:208 src/core/StelObject.cpp:210
+#: src/core/StelObject.cpp:214 src/core/StelObject.cpp:216
 #, qt-format
 msgid "Galactic longitude/latitude: %1/%2"
 msgstr "Longitude/latitude galactique : %1/%2"
@@ -8200,47 +8204,47 @@ msgstr "Fenêtre de configuration des exoplanètes"
 #. TRANSLATORS: Habitable zone
 #: plugins/Exoplanets/src/Exoplanets.cpp:848
 msgid "Hot"
-msgstr ""
+msgstr "très chaude"
 
 #. TRANSLATORS: Habitable zone
 #: plugins/Exoplanets/src/Exoplanets.cpp:850
 msgid "Warm"
-msgstr ""
+msgstr "chaude"
 
 #. TRANSLATORS: Habitable zone
 #: plugins/Exoplanets/src/Exoplanets.cpp:852
 msgid "Cold"
-msgstr ""
+msgstr "froide"
 
 #. TRANSLATORS: Planet size
 #: plugins/Exoplanets/src/Exoplanets.cpp:855
 msgid "Miniterran"
-msgstr ""
+msgstr "mercurienne"
 
 #. TRANSLATORS: Planet size
 #: plugins/Exoplanets/src/Exoplanets.cpp:857
 msgid "Subterran"
-msgstr ""
+msgstr "sous-terrienne"
 
 #. TRANSLATORS: Planet size
 #: plugins/Exoplanets/src/Exoplanets.cpp:859
 msgid "Terran"
-msgstr ""
+msgstr "terrienne"
 
 #. TRANSLATORS: Planet size
 #: plugins/Exoplanets/src/Exoplanets.cpp:861
 msgid "Superterran"
-msgstr ""
+msgstr "super-terrienne"
 
 #. TRANSLATORS: Planet size
 #: plugins/Exoplanets/src/Exoplanets.cpp:863
 msgid "Jovian"
-msgstr ""
+msgstr "jovienne"
 
 #. TRANSLATORS: Planet size
 #: plugins/Exoplanets/src/Exoplanets.cpp:865
 msgid "Neptunian"
-msgstr ""
+msgstr "neptunienne"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:180
 msgid "planetary system"
@@ -8313,7 +8317,7 @@ msgstr "Année de découverte"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:242
 msgid "Planetary class"
-msgstr ""
+msgstr "Classe planétaire"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:243
 msgid "Habitable class"
@@ -8327,7 +8331,7 @@ msgstr "Temp. moyenne de surface"
 #. TRANSLATORS: Full phrase is "Equilibrium Temperature"
 #: plugins/Exoplanets/src/Exoplanet.cpp:247
 msgid "Equilibrium temp."
-msgstr ""
+msgstr "Temp. d'équilibre"
 
 #. TRANSLATORS: ESI = Earth Similarity Index
 #: plugins/Exoplanets/src/Exoplanet.cpp:249
@@ -8390,10 +8394,12 @@ msgid ""
 "This plugin can display potential habitable exoplanets (orange marker) and "
 "some information about those planets."
 msgstr ""
+"Ce plugin peut afficher les exoplanètes potentiellement habitable (marqueur "
+"orange) et des informations y relatives."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:170
 msgid "Planetary Class"
-msgstr ""
+msgstr "Classe planétaire"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:170
 msgid ""
@@ -8401,6 +8407,11 @@ msgid ""
 "zone (hot, warm, cold) and size (miniterran, subterran, terran, superterran, "
 "jovian, neptunian) (Earth = G-Warm Terran)."
 msgstr ""
+"Classification de la planète en fonction du type spectral de l'étoile hôte "
+"(F, G, K, M), de sa zone thermique (très chaude, chaude, froide) et de sa "
+"taille (mercurienne, sous-terrienne, terrienne, super-terrienne, jovienne, "
+"neptunienne). À titre d'exemple, la classification de la Terre est G-chaude "
+"terrienne."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:171
 msgid "Habitable Class"
@@ -8440,7 +8451,7 @@ msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:173
 msgid "Equilibrium Temperature"
-msgstr ""
+msgstr "Température d'équilibre"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:173
 msgid ""
@@ -8449,6 +8460,10 @@ msgid ""
 "body being heated only by its parent star (assuming a 0.3 bond albedo). As "
 "example the planetary equilibrium temperature of Earth is -18.15°C (255 K)."
 msgstr ""
+"La température d'équilibre d'une planète est la température théorique en °C "
+"que la planète aurait si on la considère comme un corps noir uniquement "
+"chauffé par son étoile hôte, en supposant un albédo de 0.3). Par exemple, la "
+"température d'équilibre de la Terre est de –18.15 °C (255 K)."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:174
 msgid "Earth Similarity Index (ESI)"
@@ -8467,23 +8482,23 @@ msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:175
 msgid "Additional info"
-msgstr ""
+msgstr "Informations supplémentaires"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:176
 msgid "Circumstellar habitable zone"
-msgstr ""
+msgstr "Zone habitable circumstellaire"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:177
 msgid "Planetary equilibrium temperature"
-msgstr ""
+msgstr "Température d'équilibre planétaire"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:178
 msgid "Planetary habitability"
-msgstr ""
+msgstr "Habitabilité planétaire"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:179
 msgid "Earth Similarity Index"
-msgstr ""
+msgstr "Indice de similarité avec la Terre"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:194
 msgid "General professional Web sites relevant to extrasolar planets"

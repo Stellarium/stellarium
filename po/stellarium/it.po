@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-12-08 01:07+0600\n"
-"PO-Revision-Date: 2014-11-24 19:10+0000\n"
+"POT-Creation-Date: 2014-12-09 23:15+0600\n"
+"PO-Revision-Date: 2014-12-09 19:57+0000\n"
 "Last-Translator: Gio <gio.scino@gmail.com>\n"
 "Language-Team: Italian <it@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-12-08 05:53+0000\n"
-"X-Generator: Launchpad (build 17274)\n"
+"X-Launchpad-Export-Date: 2014-12-10 05:42+0000\n"
+"X-Generator: Launchpad (build 17283)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:132 src/core/modules/StarMgr.cpp:353
 #: src/core/modules/GridLinesMgr.cpp:736 src/core/modules/LandscapeMgr.cpp:355
@@ -1117,33 +1117,37 @@ msgstr ""
 "La proiezione ortografica è correlata alla proiezione prospettica, ma il "
 "punto di prospettiva è impostato a una distanza infinita."
 
-#: src/core/StelObject.cpp:121 src/core/StelObject.cpp:123
-#: src/core/StelObject.cpp:131 src/core/StelObject.cpp:133
+#: src/core/StelObject.cpp:115
+msgid "on date"
+msgstr "alla data"
+
+#: src/core/StelObject.cpp:127 src/core/StelObject.cpp:129
+#: src/core/StelObject.cpp:137 src/core/StelObject.cpp:139
 msgid "RA/Dec"
 msgstr "RA/Dec"
 
-#: src/core/StelObject.cpp:145 src/core/StelObject.cpp:149
+#: src/core/StelObject.cpp:151 src/core/StelObject.cpp:155
 #, qt-format
 msgid "Hour angle/DE: %1/%2"
 msgstr "Angolo orario/DE: %1/%2"
 
-#: src/core/StelObject.cpp:145 src/core/StelObject.cpp:168
-#: src/core/StelObject.cpp:170
+#: src/core/StelObject.cpp:151 src/core/StelObject.cpp:174
+#: src/core/StelObject.cpp:176
 msgid "(apparent)"
 msgstr "(apparente)"
 
-#: src/core/StelObject.cpp:168 src/core/StelObject.cpp:170
-#: src/core/StelObject.cpp:175 src/core/StelObject.cpp:177
+#: src/core/StelObject.cpp:174 src/core/StelObject.cpp:176
+#: src/core/StelObject.cpp:181 src/core/StelObject.cpp:183
 #, qt-format
 msgid "Az/Alt: %1/%2"
 msgstr "Az/Alt: %1/%2"
 
-#: src/core/StelObject.cpp:190 src/core/StelObject.cpp:192
-#: src/core/StelObject.cpp:198 src/core/StelObject.cpp:200
+#: src/core/StelObject.cpp:196 src/core/StelObject.cpp:198
+#: src/core/StelObject.cpp:204 src/core/StelObject.cpp:206
 msgid "Ecliptic longitude/latitude"
 msgstr "Longitudine eclittica/latitudine"
 
-#: src/core/StelObject.cpp:208 src/core/StelObject.cpp:210
+#: src/core/StelObject.cpp:214 src/core/StelObject.cpp:216
 #, qt-format
 msgid "Galactic longitude/latitude: %1/%2"
 msgstr "Longitudine/latitudine galattica: %1/%2"
@@ -1789,15 +1793,15 @@ msgstr "La magnitudine ad occhio nudo è"
 
 #: src/gui/ViewDialog.cpp:413
 msgid "Abbreviated"
-msgstr ""
+msgstr "abbreviato"
 
 #: src/gui/ViewDialog.cpp:414
 msgid "Native"
-msgstr ""
+msgstr "Nativo"
 
 #: src/gui/ViewDialog.cpp:415
 msgid "Translated"
-msgstr ""
+msgstr "Tradotto"
 
 #: src/gui/ViewDialog.cpp:539
 msgid "No description"
@@ -2048,10 +2052,12 @@ msgid ""
 "No OpenGL 2 found on this system. Please upgrade hardware or use MESA or an "
 "older version."
 msgstr ""
+"OpenGL 2 non trovato in questo sistema. Si prega di aggiornare l'hardware o "
+"utilizzare MESA o una versione precedente."
 
 #: src/StelMainView.cpp:382
 msgid "Cannot acquire necessary OpenGL resources."
-msgstr ""
+msgstr "Impossibile acquisire le risorse necessarie OpenGL."
 
 #: src/StelMainView.cpp:441
 msgid "Save screenshot"
@@ -2298,7 +2304,7 @@ msgstr "Sami"
 #. TRANSLATORS: Name of the sky culture
 #: src/translations.h:107
 msgid "Siberian"
-msgstr ""
+msgstr "Siberiano"
 
 #: src/translations.h:108
 msgid "Tupi-Guarani"
@@ -4272,7 +4278,7 @@ msgstr ""
 
 #: src/ui_viewDialog.h:1338
 msgid "Minimal brightness:"
-msgstr ""
+msgstr "Luminosità minima:"
 
 #: src/ui_viewDialog.h:1340
 msgid ""
@@ -4297,7 +4303,7 @@ msgstr "Utilizza questa cultura del cielo come predefinita"
 
 #: src/ui_viewDialog.h:1349
 msgid "Show names"
-msgstr ""
+msgstr "Mostra i nomi"
 
 #: src/ui_viewDialog.h:1351
 msgid "Select if you want names abbreviated, original or translated"
@@ -4317,7 +4323,7 @@ msgstr "Configurazione"
 
 #: src/ui_configurationDialog.h:1038
 msgid "Language settings"
-msgstr ""
+msgstr "Impostazioni lingua"
 
 #: src/ui_configurationDialog.h:1039
 msgid "Program Language"
@@ -5111,7 +5117,7 @@ msgstr ""
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:240
 msgid "Format"
-msgstr ""
+msgstr "Formato"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:241
 msgid "Use dms format for angles"
