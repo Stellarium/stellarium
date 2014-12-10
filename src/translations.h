@@ -94,6 +94,7 @@ class Translations
 		N_("Egyptian");
 		N_("Inuit");
 		N_("Indian Vedic");
+		N_("Japanese Moon Stations");
 		N_("Korean");
 		N_("Lakota");
 		N_("Maori");
