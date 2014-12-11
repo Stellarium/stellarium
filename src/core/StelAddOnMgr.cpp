@@ -51,12 +51,12 @@ StelAddOnMgr::StelAddOnMgr()
 	StelFileMgr::makeSureDirExistsAndIsWritable(m_sThumbnailDir);
 
 	// creating sub-dirs
-	m_dirs.insert(AddOn::CATALOG, m_sAddOnDir % CATEGORY_CATALOG % "/");
-	m_dirs.insert(AddOn::LANDSCAPE, m_sAddOnDir % CATEGORY_LANDSCAPE % "/");
-	m_dirs.insert(AddOn::LANGUAGEPACK, m_sAddOnDir % CATEGORY_LANGUAGE_PACK % "/");
-	m_dirs.insert(AddOn::SCRIPT, m_sAddOnDir % CATEGORY_SCRIPT % "/");
-	m_dirs.insert(AddOn::STARLORE, m_sAddOnDir % CATEGORY_SKY_CULTURE % "/");
-	m_dirs.insert(AddOn::TEXTURE, m_sAddOnDir % CATEGORY_TEXTURE % "/");
+	m_dirs.insert(AddOn::CATALOG, m_sAddOnDir % "catalog/");
+	m_dirs.insert(AddOn::LANDSCAPE, m_sAddOnDir % "landscape/");
+	m_dirs.insert(AddOn::LANGUAGEPACK, m_sAddOnDir % "language_pack/");
+	m_dirs.insert(AddOn::SCRIPT, m_sAddOnDir % "script/");
+	m_dirs.insert(AddOn::STARLORE, m_sAddOnDir % "sky_culture/");
+	m_dirs.insert(AddOn::TEXTURE, m_sAddOnDir % "texture/");
 	QHashIterator<AddOn::Category, QString> it(m_dirs);
 	while (it.hasNext()) {
 		it.next();
