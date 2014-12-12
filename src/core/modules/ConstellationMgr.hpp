@@ -193,10 +193,10 @@ public slots:
 	//! Get whether selected constellation is displayed alone
 	bool getFlagIsolateSelected(void) const;
 
-	//! Set whether selected constellation must be displayed alone in starry stories mode (some sequence of constellations)
-	void setFlagStarryStories(const bool mode);
-	//! Get whether selected constellation is displayed alone in starry stories mode (some sequence of constellations)
-	bool getFlagStarryStories(void) const;
+	//! Set whether only one selected constellation must be displayed
+	void setFlagConstellationPick(const bool mode);
+	//! Get whether only one selected constellation is displayed
+	bool getFlagConstellationPick(void) const;
 
 	//! Define line color
 	//! @param color The color of lines
@@ -344,7 +344,7 @@ private:
 	StarMgr* hipStarMgr;
 
 	bool isolateSelected;
-	bool starryStoriesEnabled;
+	bool constellationPickEnabled;
 	std::vector<std::vector<Vec3f> *> allBoundarySegments;
 
 	QString lastLoadedSkyCulture;	// Store the last loaded sky culture directory name
