@@ -60,7 +60,7 @@ ConstellationMgr::ConstellationMgr(StarMgr *_hip_stars)
 {
 	setObjectName("ConstellationMgr");
 	Q_ASSERT(hipStarMgr);
-	isolateSelected = false;
+	isolateSelected = false;	
 }
 
 ConstellationMgr::~ConstellationMgr()
@@ -94,7 +94,7 @@ void ConstellationMgr::init()
 	setArtFadeDuration(conf->value("viewing/constellation_art_fade_duration",2.f).toFloat());
 	setFlagArt(conf->value("viewing/flag_constellation_art").toBool());
 	setFlagIsolateSelected(conf->value("viewing/flag_constellation_isolate_selected", false).toBool());
-	setFlagStarryStories(conf->value("viewing/flag_starry_stories", true).toBool());
+	setFlagConstellationPick(conf->value("viewing/flag_constellation_pick", false).toBool());
 
 	QString starloreDisplayStyle=conf->value("viewing/constellation_name_style", "translated").toString();
 	if (starloreDisplayStyle=="translated")
@@ -1014,14 +1014,14 @@ bool ConstellationMgr::getFlagIsolateSelected(void) const
 	return isolateSelected;
 }
 
-void ConstellationMgr::setFlagStarryStories(const bool mode)
+void ConstellationMgr::setFlagConstellationPick(const bool mode)
 {
-	starryStoriesEnabled = mode;
+	constellationPickEnabled = mode;
 }
 
-bool ConstellationMgr::getFlagStarryStories(void) const
+bool ConstellationMgr::getFlagConstellationPick(void) const
 {
-	return starryStoriesEnabled;
+	return constellationPickEnabled;
 }
 
 StelObject* ConstellationMgr::getSelected(void) const
@@ -1055,7 +1055,7 @@ void ConstellationMgr::setSelectedConst(Constellation * c)
 
 		if (isolateSelected)
 		{
-			if (getFlagStarryStories())
+			if (!getFlagConstellationPick())
 			{
 				// Propagate current settings to newly selected constellation
 				c->setFlagLines(getFlagLines());
