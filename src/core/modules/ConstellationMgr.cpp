@@ -1043,40 +1043,25 @@ void ConstellationMgr::setSelectedConst(Constellation * c)
 	{
 		selected.push_back(c);
 
-		// Propagate current settings to newly selected constellation
-		c->setFlagLines(getFlagLines());
-		c->setFlagLabels(getFlagLabels());
-		c->setFlagArt(getFlagArt());
-		c->setFlagBoundaries(getFlagBoundaries());
-
 		if (isolateSelected)
 		{
 			vector < Constellation * >::const_iterator iter;
 			for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
 			{
-
-				bool match = 0;
-				vector < Constellation * >::const_iterator s_iter;
-				for (s_iter = selected.begin(); s_iter != selected.end(); ++s_iter)
-				{
-					if( (*iter)==(*s_iter) )
-					{
-						match=true; // this is a selected constellation
-						break;
-					}
-				}
-
-				if(!match)
-				{
-					// Not selected constellation
-					(*iter)->setFlagLines(false);
-					(*iter)->setFlagLabels(false);
-					(*iter)->setFlagArt(false);
-					(*iter)->setFlagBoundaries(false);
-					}
-					}
-			Constellation::singleSelected = true;  // For boundaries
+				(*iter)->setFlagLines(false);
+				(*iter)->setFlagLabels(false);
+				(*iter)->setFlagArt(false);
+				(*iter)->setFlagBoundaries(false);
 			}
+
+			// Propagate current settings to newly selected constellation
+			c->setFlagLines(getFlagLines());
+			c->setFlagLabels(getFlagLabels());
+			c->setFlagArt(getFlagArt());
+			c->setFlagBoundaries(getFlagBoundaries());
+
+			Constellation::singleSelected = true;  // For boundaries
+		}
 		else
 			Constellation::singleSelected = false; // For boundaries
 	}

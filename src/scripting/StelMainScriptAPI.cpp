@@ -938,6 +938,7 @@ void StelMainScriptAPI::clear(const QString& state)
 	NebulaMgr* nmgr = GETSTELMODULE(NebulaMgr);
 	GridLinesMgr* glmgr = GETSTELMODULE(GridLinesMgr);
 	StelMovementMgr* movmgr = GETSTELMODULE(StelMovementMgr);
+	ZodiacalLight* zl = GETSTELMODULE(ZodiacalLight);
 
 	if (state.toLower() == "natural")
 	{
@@ -970,12 +971,13 @@ void StelMainScriptAPI::clear(const QString& state)
 		lmgr->setFlagLandscape(true);
 		lmgr->setFlagAtmosphere(true);
 		lmgr->setFlagFog(true);
+		zl->setFlagShow(true);
 	}
 	else if (state.toLower() == "starchart")
 	{
 		movmgr->setMountMode(StelMovementMgr::MountEquinoxEquatorial);
 		skyd->setFlagTwinkle(false);
-		skyd->setFlagLuminanceAdaptation(false);
+		skyd->setFlagLuminanceAdaptation(false);		
 		ssmgr->setFlagPlanets(true);
 		ssmgr->setFlagHints(false);
 		ssmgr->setFlagOrbits(false);
@@ -998,10 +1000,11 @@ void StelMainScriptAPI::clear(const QString& state)
 		cmgr->setFlagArt(false);
 		smgr->setFlagLabels(true);
 		ssmgr->setFlagLabels(true);
-		nmgr->setFlagHints(true);
+		nmgr->setFlagHints(true);		
 		lmgr->setFlagLandscape(false);
 		lmgr->setFlagAtmosphere(false);
 		lmgr->setFlagFog(false);
+		zl->setFlagShow(false);
 	}
 	else if (state.toLower() == "deepspace")
 	{
@@ -1034,6 +1037,7 @@ void StelMainScriptAPI::clear(const QString& state)
 		lmgr->setFlagLandscape(false);
 		lmgr->setFlagAtmosphere(false);
 		lmgr->setFlagFog(false);
+		zl->setFlagShow(false);
 	}
 	else
 	{
