@@ -70,7 +70,7 @@ class ConstellationMgr : public StelObjectModule
 	Q_PROPERTY(bool isolateSelected
 			   READ getFlagIsolateSelected
 			   WRITE setFlagIsolateSelected
-			   NOTIFY isolateSelectedChanged)
+			   NOTIFY isolateSelectedChanged)	
 	Q_PROPERTY(Vec3f linesColor
 			   READ getLinesColor
 			   WRITE setLinesColor
@@ -193,6 +193,11 @@ public slots:
 	//! Get whether selected constellation is displayed alone
 	bool getFlagIsolateSelected(void) const;
 
+	//! Set whether selected constellation must be displayed alone in starry stories mode (some sequence of constellations)
+	void setFlagStarryStories(const bool mode);
+	//! Get whether selected constellation is displayed alone in starry stories mode (some sequence of constellations)
+	bool getFlagStarryStories(void) const;
+
 	//! Define line color
 	//! @param color The color of lines
 	//! @code
@@ -243,7 +248,7 @@ signals:
 	void boundariesColorChanged(const Vec3f & color) const;
 	void boundariesDisplayedChanged(const bool displayed) const;
 	void fontSizeChanged(const float newSize) const;
-	void isolateSelectedChanged(const bool isolate) const;
+	void isolateSelectedChanged(const bool isolate) const;	
 	void linesColorChanged(const Vec3f & color) const;
 	void linesDisplayedChanged(const bool displayed) const;
 	void namesColorChanged(const Vec3f & color) const;
@@ -339,6 +344,7 @@ private:
 	StarMgr* hipStarMgr;
 
 	bool isolateSelected;
+	bool starryStoriesEnabled;
 	std::vector<std::vector<Vec3f> *> allBoundarySegments;
 
 	QString lastLoadedSkyCulture;	// Store the last loaded sky culture directory name
