@@ -36,14 +36,6 @@
 #define ADDON_MANAGER_VERSION "0.0.2"
 #define ADDON_MANAGER_CATALOG_VERSION 1
 
-// categories (database column addon.category)
-const QString CATEGORY_CATALOG = "catalog";
-const QString CATEGORY_LANDSCAPE = "landscape";
-const QString CATEGORY_LANGUAGE_PACK = "language_pack";
-const QString CATEGORY_SCRIPT = "script";
-const QString CATEGORY_SKY_CULTURE = "sky_culture";
-const QString CATEGORY_TEXTURE = "texture";
-
 class StelAddOnMgr : public QObject
 {
 	Q_OBJECT
