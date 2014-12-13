@@ -967,7 +967,7 @@ void Planet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFon
 	// For a full catalog of NEAs (11000 objects), with this and resetting deltaJD according to distance, rendering time went 4.5fps->12fps.	
 	// TBD: Note that taking away the asteroids at this stage breaks dim-asteroid occultation of stars!
 	//      Maybe make another configurable flag for those interested?
-	if (((getVMagnitude(core)+1.0f) > core->getSkyDrawer()->getLimitMagnitude()) && pType==Planet::isAsteroid)
+	if (((getVMagnitude(core)-1.0f) > core->getSkyDrawer()->getLimitMagnitude()) && pType==Planet::isAsteroid)
 	{
 		return;
 	}
