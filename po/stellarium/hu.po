@@ -9,14 +9,14 @@ msgstr ""
 "Project-Id-Version: Stellarium 0.10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-12-10 21:31+0600\n"
-"PO-Revision-Date: 2014-11-23 13:34+0000\n"
+"PO-Revision-Date: 2014-12-12 13:48+0000\n"
 "Last-Translator: misibacsi <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-12-11 05:56+0000\n"
-"X-Generator: Launchpad (build 17283)\n"
+"X-Launchpad-Export-Date: 2014-12-13 05:47+0000\n"
+"X-Generator: Launchpad (build 17286)\n"
 "X-Poedit-Language: Hungarian\n"
 
 #: src/core/modules/ConstellationMgr.cpp:132 src/core/modules/StarMgr.cpp:353
@@ -195,7 +195,7 @@ msgstr "Fényesség: <b>%1</b>"
 #: src/core/modules/Nebula.cpp:119
 #, qt-format
 msgid "Surface brightness: <b>%1</b> (extincted to: <b>%2</b>)"
-msgstr ""
+msgstr "Felszíni fényesség: <b>%1</b> (kioltva: <b>%2</b>)"
 
 #: src/core/modules/Nebula.cpp:125
 #, qt-format
@@ -420,11 +420,13 @@ msgstr "Típus: <b>%1, %2</b>"
 #, qt-format
 msgid "Magnitude range: <b>%1</b>%2<b>%3</b> (Photometric system: %4)"
 msgstr ""
+"Magnitúdó tartomány: <b>%1</b>%2<b>%3</b> (fotometrikus rendszer: %4)"
 
 #: src/core/modules/StarWrapper.cpp:209
 #, qt-format
 msgid "Magnitude range: <b>%1</b>%2<b>%3/%4</b> (Photometric system: %5)"
 msgstr ""
+"Magnitúdó tartomány: <b>%1</b>%2<b>%3/%4</b>  (fotometrikus rendszer: %5)"
 
 #. TRANSLATORS: Unit of measure for distance - Light Years
 #: src/core/modules/StarWrapper.cpp:218
@@ -914,6 +916,10 @@ msgid ""
 "cosine and square function. This is based on a possible periodicy described "
 "by Stephenson (%2). See for more info %3here%4."
 msgstr ""
+"A nap hossza (\"LOD\"; meghatározta Stephenson & Morrison (%2)), Victor "
+"Reijs levezette a %1T képletet, szimplex koszinuszos optimalizálást "
+"használva. Ez egy lehetséges periodicitáson alapszik, amit Stephenson (%2) "
+"írt le. További infó %3itt%4."
 
 #: src/core/StelCore.cpp:1586
 #, qt-format
@@ -963,6 +969,8 @@ msgid ""
 "This is a quadratic formula for calculation of %1T with coefficients defined "
 "by the user."
 msgstr ""
+"A  %1T képlet kvadratikus kiszámítása, ahol a paramétereket a felhasználó "
+"adja meg."
 
 #: src/core/StelCore.cpp:1598 src/core/SimbadSearcher.cpp:133
 msgid "Error"
@@ -970,22 +978,25 @@ msgstr "Hiba"
 
 #: src/core/StelCore.cpp:1648
 msgid "with meaningless values outside this range"
-msgstr ""
+msgstr "a tartományon kívül az értékek nincsenek értelmezve"
 
 #: src/core/StelCore.cpp:1674
 msgid ""
 "with a mean error of less than one second, max. error 1.9s, and meaningless "
 "values outside this range"
 msgstr ""
+"a közepes hiba kisebb, mint 1 másodperc, a legnagyobb hiba 1,9s, a "
+"tartományon kívül az értékek nincsenek értelmezve"
 
 #: src/core/StelCore.cpp:1696 src/core/StelCore.cpp:1701
 #: src/core/StelCore.cpp:1728 src/core/StelCore.cpp:1733
 msgid "with zero values outside this range"
-msgstr ""
+msgstr "a tartományon kívül az értékek nullák"
 
 #: src/core/StelCore.cpp:1706
 msgid "with a typical 1-second accuracy and zero values outside this range"
 msgstr ""
+"tipikus 1 másodperces pontosság,  a tartományon kívül az értékek nullák"
 
 #: src/core/StelCore.cpp:1743
 #, qt-format
@@ -1105,7 +1116,7 @@ msgstr ""
 
 #: src/core/StelObject.cpp:115
 msgid "on date"
-msgstr ""
+msgstr "dátum szerint"
 
 #: src/core/StelObject.cpp:127 src/core/StelObject.cpp:129
 #: src/core/StelObject.cpp:137 src/core/StelObject.cpp:139
@@ -1773,15 +1784,15 @@ msgstr "A szabadszemes megfigyelés magnitúdó-határa"
 
 #: src/gui/ViewDialog.cpp:413
 msgid "Abbreviated"
-msgstr ""
+msgstr "Rövidítve"
 
 #: src/gui/ViewDialog.cpp:414
 msgid "Native"
-msgstr ""
+msgstr "Natív"
 
 #: src/gui/ViewDialog.cpp:415
 msgid "Translated"
-msgstr ""
+msgstr "Lefordítva"
 
 #: src/gui/ViewDialog.cpp:539
 msgid "No description"
@@ -2031,10 +2042,12 @@ msgid ""
 "No OpenGL 2 found on this system. Please upgrade hardware or use MESA or an "
 "older version."
 msgstr ""
+"Nem található OpenGL 2 a rendszeren. Kérjük használjon új hardvert, vagy "
+"használja a MESA-t."
 
 #: src/StelMainView.cpp:382
 msgid "Cannot acquire necessary OpenGL resources."
-msgstr ""
+msgstr "Nem található a szükséges OpenGL 2 erőforrás."
 
 #: src/StelMainView.cpp:441
 msgid "Save screenshot"
@@ -2065,6 +2078,9 @@ msgid ""
 "Ignore and suppress this notice in the future and try to continue in "
 "degraded mode anyway?"
 msgstr ""
+"Problémák vannak a DirectX/OpenGL ES alrendszerrel. További infó a log "
+"fájlban. \n"
+"Hagyjuk figyelmen kívül az üzenetet, és folytassuk alacsonyabb módban?"
 
 #: src/StelMainView.cpp:629
 msgid ""
@@ -2072,6 +2088,8 @@ msgid ""
 "Ignore and suppress this notice in the future and try to continue in "
 "degraded mode anyway?"
 msgstr ""
+"Az OpenGL/Mesa alrendszerrel problémák vannak. További infó a log fájlban. \n"
+"Hagyjuk figyelmen kívül az üzenetet, és folytassuk alacsonyabb módban?"
 
 #: src/StelMainView.cpp:684
 msgid ""
@@ -2079,6 +2097,8 @@ msgid ""
 "Ignore and suppress this notice in the future and try to continue in "
 "degraded mode anyway?"
 msgstr ""
+"Az OpenGL alrendszerrel problémák vannak. További infó a log fájlban. \n"
+"Hagyjuk figyelmen kívül az üzenetet, és folytassuk alacsonyabb módban?"
 
 #: src/StelMainView.cpp:721
 msgid ""
@@ -2086,6 +2106,8 @@ msgid ""
 "Ignore and suppress this notice in the future and try to continue in "
 "degraded mode anyway?"
 msgstr ""
+"Az OpenGL ES alrendszerrel problémák vannak. További infó a log fájlban. \n"
+"Hagyjuk figyelmen kívül az üzenetet, és folytassuk alacsonyabb módban?"
 
 #: src/StelMainView.cpp:830
 #, qt-format
@@ -2285,7 +2307,7 @@ msgstr "Számi"
 #. TRANSLATORS: Name of the sky culture
 #: src/translations.h:108
 msgid "Siberian"
-msgstr ""
+msgstr "Szibériai"
 
 #: src/translations.h:109
 msgid "Tupi-Guarani"
@@ -2356,7 +2378,7 @@ msgstr "Grossmugl"
 #. TRANSLATORS: Name of landscape
 #: src/translations.h:138
 msgid "Zero Horizon"
-msgstr ""
+msgstr "Zéró horizont"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:144
@@ -3690,7 +3712,7 @@ msgstr ""
 
 #: src/ui_dateTimeDialogGui.h:378
 msgid "Date and Time in Gregorian calendar"
-msgstr ""
+msgstr "Dátum és idő Gergely naptár szerint"
 
 #: src/ui_dateTimeDialogGui.h:380 src/ui_dateTimeDialogGui.h:385
 msgid "Julian Date"
@@ -3933,7 +3955,7 @@ msgstr "Koordináta-rendszer:"
 #: src/ui_searchDialogGui.h:695
 msgid ""
 "Note: this tool doesn't apply the refraction correction for coordinates."
-msgstr ""
+msgstr "Ez az eszköz nem korrigálja a koordinátákat refrakció szerint."
 
 #: src/ui_searchDialogGui.h:696
 msgid "Position"
@@ -4229,7 +4251,7 @@ msgstr "Ugrás a tájképhez társított bolygóra és helyre"
 
 #: src/ui_viewDialog.h:1332
 msgid "Show illumination layer (bright windows, light pollution, etc.)"
-msgstr ""
+msgstr "Megvilágítási réteg mutatása (fényesség ablak, fényszennyezés, stb)"
 
 #: src/ui_viewDialog.h:1333
 msgid "Show ground"
@@ -4242,6 +4264,7 @@ msgstr "Tájkép beállítása alapértelmezettnek"
 #: src/ui_viewDialog.h:1336
 msgid "Use minimal brightness to leave landscape visible also in darkness"
 msgstr ""
+"Minimális fényesség alkalmazása, hogy a horizont látható legyen sötétben is"
 
 #: src/ui_viewDialog.h:1338
 msgid "Minimal brightness:"
@@ -4255,6 +4278,7 @@ msgstr "Értéktartomány 0...1 (a táj teljesen sötét - jól megvilágított)
 #: src/ui_viewDialog.h:1343
 msgid "Use minimal brightness as may be specified in landscape.ini"
 msgstr ""
+"Minimális fényesség alkalmazása, a  landscape.ini fájlban megadottak szerint"
 
 #: src/ui_viewDialog.h:1345
 msgid "from landscape, if given"
@@ -4270,15 +4294,17 @@ msgstr "Kultúrkör beállítása alapértelmezettnek"
 
 #: src/ui_viewDialog.h:1349
 msgid "Show names"
-msgstr ""
+msgstr "A nevek megjelenítése"
 
 #: src/ui_viewDialog.h:1351
 msgid "Select if you want names abbreviated, original or translated"
 msgstr ""
+"Válassza ki, hogy a neveket eredetiben, rövidítve vagy lefordítva akarja "
+"látni"
 
 #: src/ui_viewDialog.h:1354
 msgid "Use native names for planets from current culture"
-msgstr ""
+msgstr "A bolygók eredeti nevei az adott kultúrában"
 
 #: src/ui_viewDialog.h:1356
 msgid "Visible"
@@ -4290,15 +4316,15 @@ msgstr "Beállítások"
 
 #: src/ui_configurationDialog.h:1038
 msgid "Language settings"
-msgstr ""
+msgstr "Nyelvi beállítások"
 
 #: src/ui_configurationDialog.h:1039
 msgid "Program Language"
-msgstr ""
+msgstr "A program nyelve"
 
 #: src/ui_configurationDialog.h:1040
 msgid "Sky Culture Language"
-msgstr ""
+msgstr "Az égbolt kultúrájának nyelve"
 
 #: src/ui_configurationDialog.h:1041
 msgid "Check updates"
@@ -4488,6 +4514,7 @@ msgstr "Távolság"
 #: src/ui_configurationDialog.h:1112
 msgid "Ecliptic coordinates, equinox of date and J2000 (only for Earth)"
 msgstr ""
+"Ekliptikus koordináták, napéjegyenlőség és J2000 (csak a Föld számára)"
 
 #: src/ui_configurationDialog.h:1114
 msgid "Ecliptic coordinates"
@@ -4917,7 +4944,7 @@ msgstr ""
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:88
 msgid "Angle Measure Plug-in"
-msgstr ""
+msgstr "Szögmérő bővítmény"
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:91
 #: plugins/Oculars/src/gui/OcularDialog.cpp:507
@@ -4930,6 +4957,8 @@ msgid ""
 "angular distance between two points on the sky (and calculation of position "
 "angle between those two points)."
 msgstr ""
+"A szögmérő bővítmény egy eszköz a szögtávolság megállapítására két pont "
+"között az égbolton."
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:95
 msgid ""
@@ -5029,7 +5058,7 @@ msgstr "Pulzárok beállításai"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:229
 msgid "Angle Measure Plug-in Configuration"
-msgstr ""
+msgstr "A szögmérő bővítmény beállításai"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:231
 msgid "Show in Equatorial Coordinates"
@@ -5065,7 +5094,7 @@ msgstr "Formátum"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:241
 msgid "Use dms format for angles"
-msgstr ""
+msgstr "Szögek dms formátumban"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:242
 #: plugins/Satellites/src/ui_satellitesDialog.h:714
@@ -7611,7 +7640,7 @@ msgstr ""
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:123
 msgid "This plugin allows you to see recent bright novae: "
-msgstr ""
+msgstr "Bővítmény a közelmúlt nováinak megtekintésére: "
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:126
 #, qt-format
@@ -7699,6 +7728,9 @@ msgid ""
 "visual magnitude 16. The catalogue of quasars was compiled from \"Quasars "
 "and Active Galactic Nuclei\" (13th Ed.)"
 msgstr ""
+"A bővítmény megjelenít néhány 16-os magnitúdónál fényesebb kvazárt. A "
+"katalógus a \"Quasars and Active Galactic Nuclei\" (13th Ed.) alapján "
+"készült."
 
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:123
 msgid "Veron+ 2010"
@@ -7715,7 +7747,7 @@ msgstr "A jelenlegi katalógus %1 kvazárról tartalmaz információt."
 msgid ""
 "If you want to read full information about this plugin, its history and "
 "format of the catalog, you can %1get info here%2."
-msgstr ""
+msgstr "További információk a bővítményről %1itt olvashatók%2."
 
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:220
 msgid "Quasars is updated"
@@ -8008,22 +8040,22 @@ msgstr "Exobolygó beállító ablak"
 #. TRANSLATORS: Habitable zone
 #: plugins/Exoplanets/src/Exoplanets.cpp:848
 msgid "Hot"
-msgstr ""
+msgstr "Forró"
 
 #. TRANSLATORS: Habitable zone
 #: plugins/Exoplanets/src/Exoplanets.cpp:850
 msgid "Warm"
-msgstr ""
+msgstr "Meleg"
 
 #. TRANSLATORS: Habitable zone
 #: plugins/Exoplanets/src/Exoplanets.cpp:852
 msgid "Cold"
-msgstr ""
+msgstr "Hideg"
 
 #. TRANSLATORS: Planet size
 #: plugins/Exoplanets/src/Exoplanets.cpp:855
 msgid "Miniterran"
-msgstr ""
+msgstr "Kis Föld"
 
 #. TRANSLATORS: Planet size
 #: plugins/Exoplanets/src/Exoplanets.cpp:857
@@ -8033,22 +8065,22 @@ msgstr ""
 #. TRANSLATORS: Planet size
 #: plugins/Exoplanets/src/Exoplanets.cpp:859
 msgid "Terran"
-msgstr ""
+msgstr "Földi"
 
 #. TRANSLATORS: Planet size
 #: plugins/Exoplanets/src/Exoplanets.cpp:861
 msgid "Superterran"
-msgstr ""
+msgstr "Szuperföld"
 
 #. TRANSLATORS: Planet size
 #: plugins/Exoplanets/src/Exoplanets.cpp:863
 msgid "Jovian"
-msgstr ""
+msgstr "Jupiteri"
 
 #. TRANSLATORS: Planet size
 #: plugins/Exoplanets/src/Exoplanets.cpp:865
 msgid "Neptunian"
-msgstr ""
+msgstr "Neptunuszi"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:180
 msgid "planetary system"
@@ -8121,7 +8153,7 @@ msgstr "Felfedezés éve"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:242
 msgid "Planetary class"
-msgstr ""
+msgstr "Bolygóosztály"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:243
 msgid "Habitable class"
@@ -8135,7 +8167,7 @@ msgstr "Átlagos felszíni hőm."
 #. TRANSLATORS: Full phrase is "Equilibrium Temperature"
 #: plugins/Exoplanets/src/Exoplanet.cpp:247
 msgid "Equilibrium temp."
-msgstr ""
+msgstr "Egyensúlyi hőm."
 
 #. TRANSLATORS: ESI = Earth Similarity Index
 #: plugins/Exoplanets/src/Exoplanet.cpp:249
@@ -8195,10 +8227,12 @@ msgid ""
 "This plugin can display potential habitable exoplanets (orange marker) and "
 "some information about those planets."
 msgstr ""
+"A bővítmény a lehetséges lakható bolygókat mutatja (narancsszínű jelzés) és "
+"néhány információt ezekről az exobolygókról."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:170
 msgid "Planetary Class"
-msgstr ""
+msgstr "Bolygóosztály"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:170
 msgid ""
@@ -8206,6 +8240,8 @@ msgid ""
 "zone (hot, warm, cold) and size (miniterran, subterran, terran, superterran, "
 "jovian, neptunian) (Earth = G-Warm Terran)."
 msgstr ""
+"A bolygók osztályozásának szempontjai: a központi csillag színképe (F, G, K, "
+"M), a lakható zóna hőmérséklete és a bolygó mérete."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:171
 msgid "Habitable Class"
@@ -8231,10 +8267,13 @@ msgid ""
 "ratio and a greenhouse effect due to 1 percent of CO2 (assuming an albedo of "
 "0.3 in all cases)."
 msgstr ""
+"A hőmérséklet számítása a földihez hasonló légkört vesz alapul a bolygó "
+"tömegéhez viszonyítva, hasonló üvegházhatást 1% szén-dioxidnak megfelelően "
+"és 0,3 albedót."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:173
 msgid "Equilibrium Temperature"
-msgstr ""
+msgstr "Egyensúlyi hőmérséklet"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:173
 msgid ""
@@ -8260,23 +8299,23 @@ msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:175
 msgid "Additional info"
-msgstr ""
+msgstr "További információ"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:176
 msgid "Circumstellar habitable zone"
-msgstr ""
+msgstr "Lakható zóna"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:177
 msgid "Planetary equilibrium temperature"
-msgstr ""
+msgstr "A bolygó egyensúlyi hőmérséklete"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:178
 msgid "Planetary habitability"
-msgstr ""
+msgstr "A bolygó lakhatósága"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:179
 msgid "Earth Similarity Index"
-msgstr ""
+msgstr "Földhasonlósági index"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:194
 msgid "General professional Web sites relevant to extrasolar planets"
@@ -8574,26 +8613,26 @@ msgstr "Legnagyobb Naptávolság: %1 (%2 foknál)"
 #: plugins/Observability/src/Observability.cpp:203
 #, qt-format
 msgid "Acronycal rise/set: %1/%2. "
-msgstr ""
+msgstr "Akronikus kelés/nyugvás: %1/%2 "
 
 #: plugins/Observability/src/Observability.cpp:204
 #, qt-format
 msgid "Heliacal rise/set: %1/%2. "
-msgstr ""
+msgstr "Helikális kelés/nyugvás: %1/%2 "
 
 #: plugins/Observability/src/Observability.cpp:205
 msgid "No Heliacal rise/set. "
-msgstr ""
+msgstr "Nincs helikális kelés/nyugvás "
 
 #. TRANSLATORS: The space at the end is significant - another sentence may follow.
 #: plugins/Observability/src/Observability.cpp:207
 msgid "No Acronycal rise/set. "
-msgstr ""
+msgstr "Nincs akronikus kelés/nyugvás "
 
 #: plugins/Observability/src/Observability.cpp:208
 #, qt-format
 msgid "Cosmical rise/set: %1/%2."
-msgstr ""
+msgstr "Kozmikus kelés/nyugvás: %1/%2"
 
 #: plugins/Observability/src/Observability.cpp:209
 msgid "No Cosmical rise/set."
@@ -8710,7 +8749,7 @@ msgstr ""
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:144
 msgid "Acronychal/Cosmical/Heliacal rise/set:"
-msgstr ""
+msgstr "Akronikus/kozmikus/helikális kelés/nyugvás:"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:144
 msgid ""
@@ -8851,7 +8890,7 @@ msgstr "Mai efemeriszek (kelés, nyugvás, áthaladás)"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:353
 msgid "Dates of Acronychal/Cosmical/Heliacal rise/set"
-msgstr ""
+msgstr "Akronikus/kozmikus/helikális kelés/nyugvás dátumai"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:354
 msgid "Date of largest separation to the Sun"
@@ -8968,7 +9007,7 @@ msgstr ""
 
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:272
 msgid "Show plug-ins button on toolbar"
-msgstr ""
+msgstr "Bővítmények gombjai az eszköztáron"
 
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:273
 msgid "Use minutes and seconds"
@@ -9745,7 +9784,7 @@ msgstr "A mutató koordinátái"
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:58
 msgid "This plugin shows the coordinates of the mouse pointer."
-msgstr ""
+msgstr "Ez a bővítmény az egérmutató koordinátáit írja ki"
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:97
 msgid "Show coordinates of the mouse pointer"
@@ -9783,7 +9822,7 @@ msgstr "HA/Dec"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:109
 msgid "Pointer Coordinates plug-in"
-msgstr ""
+msgstr "Az egérmutató koordinátái"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:138
 msgid "The top center of the screen"
@@ -9831,7 +9870,7 @@ msgstr "Koordináták mutatása induláskor"
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:338
 msgid "Show plug-in button on toolbar"
-msgstr ""
+msgstr "Bővítmény gombja az eszköztáron"
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:340
 msgid "Which coordinate system will be used for displaying"
