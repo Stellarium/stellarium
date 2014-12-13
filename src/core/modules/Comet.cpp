@@ -452,11 +452,13 @@ void Comet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFont
 		return;
 	}
 
+	// This test seemed necessary for reasonable fps in case too many comet elements are loaded.
+	// Problematic: Early-out here of course disables the wanted hint circles for dim comets.
 	// If comet is too faint to be seen, don't bother rendering. (Massive speedup if people have hundreds of comets!)
-	if ((getVMagnitude(core)-2.0f) > core->getSkyDrawer()->getLimitMagnitude())
-	{
-		return;
-	}
+//	if ((getVMagnitude(core)-8.0f) > core->getSkyDrawer()->getLimitMagnitude())
+//	{
+//		return;
+//	}
 	// The CometOrbit is in fact available in userDataPtr!
 	CometOrbit* orbit=(CometOrbit*)userDataPtr;
 	Q_ASSERT(orbit);
@@ -496,6 +498,14 @@ void Comet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFont
 
 		draw3dModel(core,transfo,screenSz);
 	}
+
+	// If comet is too faint to be seen, don't bother rendering. (Massive speedup if people have hundreds of comets!)
+	// This test moved here so that hints are still drawn.
+	if ((getVMagnitude(core)-3.0f) > core->getSkyDrawer()->getLimitMagnitude())
+	{
+		return;
+	}
+
 	// but tails should also be drawn if comet core is off-screen...
 	if (tailActive && tailBright)
 	{
