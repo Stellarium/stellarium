@@ -447,6 +447,7 @@ void Comet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFont
 {
 	if (hidden)
 		return;
+
 	if (getEnglishName() == core->getCurrentLocation().planetName)
 	{ // Maybe even don't do that? E.g., draw tail while riding the comet? Decide later.
 		return;
