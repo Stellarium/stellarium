@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-12-15 18:22+0600\n"
+"POT-Creation-Date: 2014-12-15 22:16+0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -354,17 +354,23 @@ msgstr ""
 msgid "Gas tail length (estimate): %1 Mio km"
 msgstr ""
 
-#: src/core/modules/SolarSystem.cpp:162
+#. TRANSLATORS: Type of objects (for "Lists" in the search tool)
+#: src/core/modules/SolarSystem.cpp:162 src/translations.h:54
+#: src/ui_viewDialog.h:1233
+msgid "Planets"
+msgstr ""
+
+#: src/core/modules/SolarSystem.cpp:163
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:308
 msgid "Planet labels"
 msgstr ""
 
-#: src/core/modules/SolarSystem.cpp:163
+#: src/core/modules/SolarSystem.cpp:164
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:312
 msgid "Planet orbits"
 msgstr ""
 
-#: src/core/modules/SolarSystem.cpp:164
+#: src/core/modules/SolarSystem.cpp:165
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:316
 msgid "Planet trails"
 msgstr ""
@@ -2004,11 +2010,6 @@ msgstr ""
 #. TRANSLATORS: Type of object
 #: src/translations.h:52
 msgid "plutoid"
-msgstr ""
-
-#. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:54 src/ui_viewDialog.h:1233
-msgid "Planets"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
