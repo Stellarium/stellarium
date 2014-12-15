@@ -790,7 +790,15 @@ float Planet::getVMagnitude(const StelCore* core) const
 			if (d>=radius)
 			{
 				// The satellite is totally inside the inner shadow.
-				shadowFactor = 1e-9;
+				if (englishName=="Moon")
+				{
+					// Fit a more realistic magnitude for the Moon case.
+					// I used some empirical data for fitting. --AW
+					// TODO: This factor should be improved!
+					shadowFactor = 2.718e-5;
+				}
+				else
+					shadowFactor = 1e-9;
 			}
 			else if (d>-radius)
 			{
