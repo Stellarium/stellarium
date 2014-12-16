@@ -190,7 +190,7 @@ private:
     //Array holding the split frustums
     QVector<Frustum> frustumArray;
     //Vector holding the convex split bodies for focused shadow mapping
-    std::vector<Polyhedron*> focusBodies;
+    QVector<Polyhedron> focusBodies;
     //Camera values
     float camNear, camFar, camFOV, camAspect;
     //Holds the light direction of the current light

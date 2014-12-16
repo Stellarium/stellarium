@@ -28,7 +28,6 @@
 #include "Frustum.hpp"
 #include "Plane.hpp"
 #include "SPolygon.hpp"
-#include <vector>
 
 class Polyhedron
 {
@@ -37,14 +36,14 @@ public:
     ~Polyhedron();
 
     //! Vector holding all polygons of this polyhedron
-    std::vector<SPolygon*> polygons;
+    QVector<SPolygon> polygons;
 
     //! Adds a frustum to this polyhedron
-    void add(Frustum &f);
+    void add(const Frustum& f);
     //! Adds a polygon to this polyhedron
-    void add(SPolygon *p);
+    void add(const SPolygon& p);
     //! Adds a polygon to this polyhedron
-    void add(const std::vector<Vec3f> &verts, const Vec3f &normal);
+    void add(const QVector<Vec3f> &verts, const Vec3f &normal);
 
     //! Intersect this polyhedron with the specified bounding box
     void intersect(const AABB &bb);
@@ -55,19 +54,19 @@ public:
     //! Clear up
     void clear();
     //! Returns the unique vertices count
-    unsigned int getVertCount();
+    int getVertCount() const;
     //! Returns the unique vertices
-    const std::vector<Vec3f> &getVerts() const;
+    const QVector<Vec3f> &getVerts() const;
     //! Makes the unique vertices vector
     void makeUniqueVerts();
 
 private:
     //! Vector holding all unique vertices of this polyhedron
-    std::vector<Vec3f> uniqueVerts;
+    QVector<Vec3f> uniqueVerts;
     //! Adds the vertex if it's unique
     void addUniqueVert(const Vec3f &v);
     //! Intersect for extrude()
-    void intersect(const Line &l, const Vec3f &min, const Vec3f &max, std::vector<Vec3f> &vertices);
+    void intersect(const Line &l, const Vec3f &min, const Vec3f &max, QVector<Vec3f> &vertices);
     //! Clip for extrude()
     bool clip(float p, float q, float &u1, float &u2) const;
 };
