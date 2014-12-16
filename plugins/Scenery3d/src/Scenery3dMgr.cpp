@@ -45,12 +45,12 @@
 
 Scenery3dMgr::Scenery3dMgr() :
     scenery3d(NULL),
+    flagEnabled(false),
+    cleanedUp(false),
     shadowShader(NULL),
     bumpShader(NULL),
     univShader(NULL),
-    debugShader(NULL),
-    cleanedUp(false),
-    flagEnabled(false)
+    debugShader(NULL)
 {
     setObjectName("Scenery3dMgr");
     scenery3dDialog = new Scenery3dDialog();

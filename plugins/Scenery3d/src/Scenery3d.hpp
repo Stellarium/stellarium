@@ -113,17 +113,6 @@ private:
 
     float torchBrightness; // ^L toggle light brightness
 
-    void drawObjModel();
-    void generateShadowMap();
-    void generateCubeMap();
-    void generateCubeMap_drawScene();
-    void generateCubeMap_drawSceneWithShadows();
-    void drawArrays(bool textures=true);
-    void drawFromCubeMap();
-
-    //! @return height at -absolutePosition, which is the current eye point.
-    float groundHeight();
-
     bool hasModels;             // flag to see if there's anything to draw
     bool shadowsEnabled;        // switchable value (^SPACE): Use shadow mapping
     bool bumpsEnabled;          // switchable value (^B): Use bump mapping
@@ -140,9 +129,7 @@ private:
     unsigned int shadowmapSize;
 
     Vec3d absolutePosition;     // current eyepoint in model
-    float movement_x;           // speed values for moving around the scenery
-    float movement_y;
-    float movement_z;
+    Vec3f movement;		// speed values for moving around the scenery
     float eye_height;
 
     StelCore* core;
@@ -184,30 +171,15 @@ private:
     GLuint shadowFBO;
     //Currently selected effect
     Effect curEffect;
-    //Sends texture data to the shader based on which effect is selected;
-    void sendToShader(const OBJ::StelModel* pStelModel, Effect cur, bool& tangEnabled, int& tangLocation);
-    //Binds the shader for the selected effect
-    void bindShader();
-    //Prepare ambient and directional light components from Sun, Moon, Venus.
-    Scenery3d::ShadowCaster setupLights(float &ambientBrightness, float &diffuseBrightness, Vec3f &lightsourcePosition);
-    //Set independent brightness factors (allow e.g. solar twilight ambient&lunar specular). Call setupLights first!
-    void setLights(float ambientBrightness, float diffuseBrightness);
+
     //Current Model View Matrix
     Mat4f modelView;
     //Current sun position
     Vec3d sunPosition;
-    //Sets the scenes' AABB
-    void setSceneAABB(const AABB &bbox);
-    //Renders the Scene's AABB
-    void renderSceneAABB(StelPainter &painter);
-    //Renders the Frustum
-    void renderFrustum(StelPainter &painter);
     //Scene AABB
     AABB sceneBoundingBox;
     //Camera Frustum
     Frustum cFrust;
-    //Save the Frustum to be able to move away from it and analyze it
-    void saveFrusts();
     //Holds the shadow maps
     GLuint* shadowMapsArray;
     //Holds the shadow transformation matrix per split
@@ -224,20 +196,10 @@ private:
     float camNear, camFar, camFOV, camAspect;
     //Holds the light direction of the current light
     Vec3f lightDir;
-    //Adjust the frustum to the loaded scene bounding box according to Zhang et al.
-    void adjustFrustum();
-    //Computes the frustum splits
-    void computeZDist(float zNear, float zFar);
-    //Computes the focus body for given split
-    void computePolyhedron(int splitIndex);
-    //Computes the crop matrix to focus the light
-    void computeCropMatrix(int frustumIndex);
-    //Computes the light projection values
-    void computeOrthoProjVals();
-    //Said values
+
+    //light projection values
     float dim, dimNear, dimFar;
-    //Analyzes the view samples to find even tighter fitting near and far planes
-    void analyzeViewSamples();
+
     GLuint camDepthFBO;
     GLuint camDepthTex;
     float parallaxScale;
@@ -250,6 +212,51 @@ private:
     QOpenGLShaderProgram *minMaxShader;
 
     QFont debugTextFont;
+
+    void drawObjModel();
+    void generateShadowMap();
+    void generateCubeMap();
+    void generateCubeMap_drawScene();
+    void generateCubeMap_drawSceneWithShadows();
+    void drawArrays(bool textures=true);
+    void drawFromCubeMap();
+
+    //! @return height at -absolutePosition, which is the current eye point.
+    float groundHeight();
+
+    //Sets the scenes' AABB
+    void setSceneAABB(const AABB &bbox);
+    //Renders the Scene's AABB
+    void renderSceneAABB(StelPainter &painter);
+    //Renders the Frustum
+    void renderFrustum(StelPainter &painter);
+
+    //Save the Frustum to be able to move away from it and analyze it
+    void saveFrusts();
+
+    //Sends texture data to the shader based on which effect is selected;
+    void sendToShader(const OBJ::StelModel* pStelModel, Effect cur, bool& tangEnabled, int& tangLocation);
+    //Binds the shader for the selected effect
+    void bindShader();
+    //Prepare ambient and directional light components from Sun, Moon, Venus.
+    Scenery3d::ShadowCaster setupLights(float &ambientBrightness, float &diffuseBrightness, Vec3f &lightsourcePosition);
+    //Set independent brightness factors (allow e.g. solar twilight ambient&lunar specular). Call setupLights first!
+    void setLights(float ambientBrightness, float diffuseBrightness);
+
+    //Adjust the frustum to the loaded scene bounding box according to Zhang et al.
+    void adjustFrustum();
+    //Computes the frustum splits
+    void computeZDist(float zNear, float zFar);
+    //Computes the focus body for given split
+    void computePolyhedron(int splitIndex);
+    //Computes the crop matrix to focus the light
+    void computeCropMatrix(int frustumIndex);
+    //Computes the light projection values
+    void computeOrthoProjVals();
+
+    //Analyzes the view samples to find even tighter fitting near and far planes
+    void analyzeViewSamples();
+
 
     //! Loads the model contained in the current scene
     void loadModel();

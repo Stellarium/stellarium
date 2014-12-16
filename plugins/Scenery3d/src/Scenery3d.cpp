@@ -74,10 +74,8 @@ static const float VENUS_BRIGHTNESS_FACTOR=0.005f;
 
 
 Scenery3d::Scenery3d()
-    :absolutePosition(0.0, 0.0, 0.0), // 1.E-12, 1.E-12, 1.E-12), // these values signify "set default values"
-    movement_x(0.0f), movement_y(0.0f), movement_z(0.0f),core(NULL),
-    heightmap(NULL), currentScene(),
-    cubemapSize(1024),shadowmapSize(1024),torchBrightness(0.5f)
+    : currentScene(),torchBrightness(0.5f),cubemapSize(1024),shadowmapSize(1024),
+      absolutePosition(0.0, 0.0, 0.0), movement(0.0f,0.0f,0.0f),core(NULL),heightmap(NULL)
 {
 	qDebug()<<"Scenery3d constructor...";
 
@@ -87,9 +85,12 @@ Scenery3d::Scenery3d()
     }
     shadowMapFbo = NULL;
     shadowFBO = 0;
-    int sub = 20;
-    double d_sub_v = 2.0 / sub;
-    double d_sub_tex = 1.0 / sub;
+
+    //create the front cubemap face vertices
+    //created a 20x20 subdivision to give a good approximation of non-linear projections
+    const int sub = 20;
+    const double d_sub_v = 2.0 / sub;
+    const double d_sub_tex = 1.0 / sub;
     for (int y = 0; y < sub; y++) {
         for (int x = 0; x < sub; x++) {
             double x0 = -1.0 + x * d_sub_v;
@@ -120,6 +121,19 @@ Scenery3d::Scenery3d()
                                 << Vec2f(tx0, ty1);
         }
     }
+
+    //create the other cube faces by rotating the front face
+    Mat4d matrix;
+#define PLANE(_VAR_, _MAT_) matrix=_MAT_; _VAR_=StelVertexArray(cubePlaneFront.vertex,StelVertexArray::Triangles,cubePlaneFront.texCoords);\
+			for(int i=0;i<_VAR_.vertex.size();i++){ matrix.transfo(_VAR_.vertex[i]); }
+    PLANE(cubePlaneRight, Mat4d::zrotation(-M_PI_2))
+    PLANE(cubePlaneLeft, Mat4d::zrotation(M_PI_2))
+    PLANE(cubePlaneBack, Mat4d::zrotation(M_PI))
+    PLANE(cubePlaneTop, Mat4d::xrotation(-M_PI_2))
+    PLANE(cubePlaneBottom, Mat4d::xrotation(M_PI_2))
+#undef PLANE
+
+
     shadowsEnabled = false;
     bumpsEnabled = false;
     torchEnabled = false;
@@ -163,17 +177,6 @@ Scenery3d::Scenery3d()
     attachments[0] = GL_COLOR_ATTACHMENT0;
     attachments[1] = GL_COLOR_ATTACHMENT1;
     pingpongTex = new GLuint[2];
-
-
-    Mat4d matrix;
-#define PLANE(_VAR_, _MAT_) matrix=_MAT_; _VAR_=StelVertexArray(cubePlaneFront.vertex,StelVertexArray::Triangles,cubePlaneFront.texCoords);\
-                        for(int i=0;i<_VAR_.vertex.size();i++){ matrix.transfo(_VAR_.vertex[i]); }
-    PLANE(cubePlaneRight, Mat4d::zrotation(-M_PI_2))
-    PLANE(cubePlaneLeft, Mat4d::zrotation(M_PI_2))
-    PLANE(cubePlaneBack, Mat4d::zrotation(M_PI))
-    PLANE(cubePlaneTop, Mat4d::xrotation(-M_PI_2))
-    PLANE(cubePlaneBottom, Mat4d::xrotation(M_PI_2))
-#undef PLANE
 
 	debugTextFont.setFamily("Courier");
 	debugTextFont.setPixelSize(16);
@@ -358,12 +361,12 @@ void Scenery3d::handleKeys(QKeyEvent* e)
         speedup *= ((e->modifiers() & Qt::AltModifier)? 5.0f : 1.0f);
         switch (e->key())
 	{
-            case Qt::Key_PageUp:    movement_z = -1.0f * speedup; e->accept(); break;
-            case Qt::Key_PageDown:  movement_z =  1.0f * speedup; e->accept(); break;
-            case Qt::Key_Up:        movement_y = -1.0f * speedup; e->accept(); break;
-            case Qt::Key_Down:      movement_y =  1.0f * speedup; e->accept(); break;
-            case Qt::Key_Right:     movement_x =  1.0f * speedup; e->accept(); break;
-            case Qt::Key_Left:      movement_x = -1.0f * speedup; e->accept(); break;
+	    case Qt::Key_PageUp:    movement[2] = -1.0f * speedup; e->accept(); break;
+	    case Qt::Key_PageDown:  movement[2] =  1.0f * speedup; e->accept(); break;
+	    case Qt::Key_Up:        movement[1] = -1.0f * speedup; e->accept(); break;
+	    case Qt::Key_Down:      movement[1] =  1.0f * speedup; e->accept(); break;
+	    case Qt::Key_Right:     movement[0] =  1.0f * speedup; e->accept(); break;
+	    case Qt::Key_Left:      movement[0] = -1.0f * speedup; e->accept(); break;
 	    case Qt::Key_P:         saveFrusts(); e->accept(); break;
         }
     }
@@ -373,7 +376,7 @@ void Scenery3d::handleKeys(QKeyEvent* e)
             e->key() == Qt::Key_Up     || e->key() == Qt::Key_Down     ||
             e->key() == Qt::Key_Left   || e->key() == Qt::Key_Right     )
             {
-                movement_x = movement_y = movement_z = 0.0f;
+		movement[0] = movement[1] = movement[2] = 0.0f;
                 e->accept();
             }
     }
@@ -424,6 +427,7 @@ void Scenery3d::renderSceneAABB(StelPainter& painter)
     aabb[6] = vecfToDouble(this->sceneBoundingBox.getCorner(AABB::MaxMaxMax));
     aabb[7] = vecfToDouble(this->sceneBoundingBox.getCorner(AABB::MinMaxMax));
 
+    /* commented out for compiler warning
     unsigned int inds[36] = {
         3, 2, 0,
         2, 1, 0,
@@ -437,7 +441,7 @@ void Scenery3d::renderSceneAABB(StelPainter& painter)
         4, 5, 0,
         3, 2, 7,
         7, 6, 3
-    };
+    };*/
 
     glPolygonMode( GL_FRONT_AND_BACK, GL_LINE );
     debugShader->bind();
@@ -568,9 +572,9 @@ void Scenery3d::update(double deltaTime)
         double alt, az;
         StelUtils::rectToSphe(&az, &alt, viewDirectionAltAz);
 
-        Vec3d move(( movement_x * std::cos(az) + movement_y * std::sin(az)),
-                   ( movement_x * std::sin(az) - movement_y * std::cos(az)),
-                   movement_z);
+	Vec3d move(( movement[0] * std::cos(az) + movement[1] * std::sin(az)),
+		   ( movement[0] * std::sin(az) - movement[1] * std::cos(az)),
+		   movement[2]);
 
         move *= deltaTime * 0.01 * qMax(5.0, stelMovementMgr->getCurrentFov());
 
@@ -838,8 +842,6 @@ void Scenery3d::generateCubeMap_drawSceneWithShadows()
 {    
     //Bind the shader
     bindShader();
-
-    int location;
 
     //Calculate texture matrix for projection
     //This matrix takes us from eye space to the light's clip space
