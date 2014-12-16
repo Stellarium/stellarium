@@ -18,7 +18,10 @@
 
 #include "StelLocation.hpp"
 #include "StelLocaleMgr.hpp"
+#include "StelUtils.hpp"
 #include <QStringList>
+
+const int StelLocation::DEFAULT_BORTLE_SCALE_INDEX = 2;
 
 // Output the location as a string ready to be stored in the user_location file
 QString StelLocation::serializeToLine() const
@@ -36,6 +39,18 @@ QString StelLocation::serializeToLine() const
 			.arg("")		// Reserve for time zone
 			.arg(planetName)
 			.arg(landscapeKey);
+}
+
+QString StelLocation::getID() const
+{
+	if (name.isEmpty())
+	{
+		return QString("%1,%2").arg(latitude).arg(longitude);
+	}
+	QString ret = name;
+	if (!country.isEmpty())
+		ret += ", " + country;
+	return ret;
 }
 
 QDataStream& operator<<(QDataStream& out, const StelLocation& loc)
@@ -83,10 +98,10 @@ StelLocation StelLocation::createFromLine(const QString& rawline)
 		bool ok;
 		loc.bortleScaleIndex = splitline.at(8).toInt(&ok);
 		if (ok==false)
-			loc.bortleScaleIndex = 2.f;
+			loc.bortleScaleIndex = DEFAULT_BORTLE_SCALE_INDEX;
 	}
 	else
-		loc.bortleScaleIndex = 2.f;
+		loc.bortleScaleIndex = DEFAULT_BORTLE_SCALE_INDEX;
 
 	// Reserve for TimeZone
 	// if (splitline.size()>9) {}
@@ -110,3 +125,10 @@ StelLocation StelLocation::createFromLine(const QString& rawline)
 	return loc;
 }
 
+// Compute great-circle distance between two locations
+float StelLocation::distanceDegrees(const float long1, const float lat1, const float long2, const float lat2)
+{
+	const float DEGREES=M_PI/180.0f;
+	return std::acos( std::sin(lat1*DEGREES)*std::sin(lat2*DEGREES) +
+					  std::cos(lat1*DEGREES)*std::cos(lat2*DEGREES)*std::cos((long1-long2)*DEGREES) ) / DEGREES;
+}

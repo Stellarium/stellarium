@@ -29,12 +29,6 @@ QString StelModule::getModuleVersion() const
 	return PACKAGE_VERSION;
 }
 
-bool StelModule::drawPartial(StelCore* core)
-{
-	draw(core);
-	return false;
-}
-
 class StelAction* StelModule::addAction(const QString& id, const QString& groupId, const QString& text,
                                         QObject* target, const char* slot,
                                         const QString& shortcut, const QString& altShortcut)

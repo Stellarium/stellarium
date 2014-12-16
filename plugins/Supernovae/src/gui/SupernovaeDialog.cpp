@@ -37,7 +37,9 @@
 #include "StelFileMgr.hpp"
 #include "StelTranslator.hpp"
 
-SupernovaeDialog::SupernovaeDialog() : updateTimer(NULL)
+SupernovaeDialog::SupernovaeDialog()
+	: sn(NULL)
+	, updateTimer(NULL)
 {
 	ui = new Ui_supernovaeDialog;
 }
@@ -66,16 +68,24 @@ void SupernovaeDialog::retranslate()
 // Initialize the dialog widgets and connect the signals/slots
 void SupernovaeDialog::createDialogContent()
 {
+	sn = GETSTELMODULE(Supernovae);
 	ui->setupUi(dialog);
 	ui->tabs->setCurrentIndex(0);	
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()),
 		this, SLOT(retranslate()));
 
+#ifdef Q_OS_WIN
+	//Kinetic scrolling for tablet pc and pc
+	QList<QWidget *> addscroll;
+	addscroll << ui->aboutTextBrowser;
+	installKineticScrolling(addscroll);
+#endif
+
 	// Settings tab / updates group
 	connect(ui->internetUpdatesCheckbox, SIGNAL(stateChanged(int)), this, SLOT(setUpdatesEnabled(int)));
 	connect(ui->updateButton, SIGNAL(clicked()), this, SLOT(updateJSON()));
-	connect(GETSTELMODULE(Supernovae), SIGNAL(updateStateChanged(Supernovae::UpdateState)), this, SLOT(updateStateReceiver(Supernovae::UpdateState)));
-	connect(GETSTELMODULE(Supernovae), SIGNAL(jsonUpdateComplete(void)), this, SLOT(updateCompleteReceiver(void)));
+	connect(sn, SIGNAL(updateStateChanged(Supernovae::UpdateState)), this, SLOT(updateStateReceiver(Supernovae::UpdateState)));
+	connect(sn, SIGNAL(jsonUpdateComplete(void)), this, SLOT(updateCompleteReceiver(void)));
 	connect(ui->updateFrequencySpinBox, SIGNAL(valueChanged(int)), this, SLOT(setUpdateValues(int)));
 	refreshUpdateValues(); // fetch values for last updated and so on
 	// if the state didn't change, setUpdatesEnabled will not be called, so we force it
@@ -92,9 +102,9 @@ void SupernovaeDialog::createDialogContent()
 
 	// About tab
 	setAboutHtml();
-	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-	Q_ASSERT(gui);
-	ui->aboutTextBrowser->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
+	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());	
+	if(gui!=NULL)
+		ui->aboutTextBrowser->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
 
 	updateGuiFromSettings();
 
@@ -109,8 +119,9 @@ void SupernovaeDialog::setAboutHtml(void)
 	html += "</table>";
 
 	html += "<p>" + q_("This plugin allows you to see some bright historical supernovae: ");
-	html += GETSTELMODULE(Supernovae)->getSupernovaeList();
-	html += ". " + q_("All those supernovae are brighter %1 at peak of brightness.").arg(QString::number(GETSTELMODULE(Supernovae)->getLowerLimitBrightness(), 'f', 2) + "<sup>m</sup>") + "</p>";
+	html += sn->getSupernovaeList();
+	html += ". " + q_("This list altogether contains %1 stars.").arg(sn->getCountSupernovae());
+	html += " " + q_("All those supernovae are brighter %1 at peak of brightness.").arg(QString::number(sn->getLowerLimitBrightness(), 'f', 2) + "<sup>m</sup>") + "</p>";
 
 	html += "<h3>" + q_("Light curves") + "</h3>";
 	html += "<p>" + QString(q_("This plugin implements a simple model of light curves for different supernovae. Typical views of light curves for type I and type II supernova can be seen %1here%2 (right scale in days), and this model is used for this plugin.")).arg("<a href=\"http://stellarium.org/wiki/index.php/Historical_Supernovae_plugin#Light_curves\">").arg("</a>") + "</p>";
@@ -136,22 +147,24 @@ void SupernovaeDialog::setAboutHtml(void)
 	html += "</ul></p></body></html>";
 
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-	Q_ASSERT(gui);
-	QString htmlStyleSheet(gui->getStelStyle().htmlStyleSheet);
-	ui->aboutTextBrowser->document()->setDefaultStyleSheet(htmlStyleSheet);
+	if(gui!=NULL)
+	{
+		QString htmlStyleSheet(gui->getStelStyle().htmlStyleSheet);
+		ui->aboutTextBrowser->document()->setDefaultStyleSheet(htmlStyleSheet);
+	}
 
 	ui->aboutTextBrowser->setHtml(html);
 }
 
 void SupernovaeDialog::refreshUpdateValues(void)
 {
-	ui->lastUpdateDateTimeEdit->setDateTime(GETSTELMODULE(Supernovae)->getLastUpdate());
-	ui->updateFrequencySpinBox->setValue(GETSTELMODULE(Supernovae)->getUpdateFrequencyDays());
-	int secondsToUpdate = GETSTELMODULE(Supernovae)->getSecondsToUpdate();
-	ui->internetUpdatesCheckbox->setChecked(GETSTELMODULE(Supernovae)->getUpdatesEnabled());
-	if (!GETSTELMODULE(Supernovae)->getUpdatesEnabled())
+	ui->lastUpdateDateTimeEdit->setDateTime(sn->getLastUpdate());
+	ui->updateFrequencySpinBox->setValue(sn->getUpdateFrequencyDays());
+	int secondsToUpdate = sn->getSecondsToUpdate();
+	ui->internetUpdatesCheckbox->setChecked(sn->getUpdatesEnabled());
+	if (!sn->getUpdatesEnabled())
 		ui->nextUpdateLabel->setText(q_("Internet updates disabled"));
-	else if (GETSTELMODULE(Supernovae)->getUpdateState() == Supernovae::Updating)
+	else if (sn->getUpdateState() == Supernovae::Updating)
 		ui->nextUpdateLabel->setText(q_("Updating now..."));
 	else if (secondsToUpdate <= 60)
 		ui->nextUpdateLabel->setText(q_("Next update: < 1 minute"));
@@ -165,14 +178,14 @@ void SupernovaeDialog::refreshUpdateValues(void)
 
 void SupernovaeDialog::setUpdateValues(int days)
 {
-	GETSTELMODULE(Supernovae)->setUpdateFrequencyDays(days);
+	sn->setUpdateFrequencyDays(days);
 	refreshUpdateValues();
 }
 
 void SupernovaeDialog::setUpdatesEnabled(int checkState)
 {
 	bool b = checkState != Qt::Unchecked;
-	GETSTELMODULE(Supernovae)->setUpdatesEnabled(b);
+	sn->setUpdatesEnabled(b);
 	ui->updateFrequencySpinBox->setEnabled(b);
 	if(b)
 		ui->updateButton->setText(q_("Update now"));
@@ -199,7 +212,7 @@ void SupernovaeDialog::updateCompleteReceiver(void)
 	ui->nextUpdateLabel->setText(QString(q_("Historical supernovae is updated")));
 	// display the status for another full interval before refreshing status
 	updateTimer->start();
-	ui->lastUpdateDateTimeEdit->setDateTime(GETSTELMODULE(Supernovae)->getLastUpdate());
+	ui->lastUpdateDateTimeEdit->setDateTime(sn->getLastUpdate());
 	QTimer *timer = new QTimer(this);
 	connect(timer, SIGNAL(timeout()), this, SLOT(refreshUpdateValues()));
 }
@@ -207,26 +220,26 @@ void SupernovaeDialog::updateCompleteReceiver(void)
 void SupernovaeDialog::restoreDefaults(void)
 {
 	qDebug() << "Supernovae::restoreDefaults";
-	GETSTELMODULE(Supernovae)->restoreDefaults();
-	GETSTELMODULE(Supernovae)->readSettingsFromConfig();
+	sn->restoreDefaults();
+	sn->readSettingsFromConfig();
 	updateGuiFromSettings();
 }
 
 void SupernovaeDialog::updateGuiFromSettings(void)
 {
-	ui->internetUpdatesCheckbox->setChecked(GETSTELMODULE(Supernovae)->getUpdatesEnabled());
+	ui->internetUpdatesCheckbox->setChecked(sn->getUpdatesEnabled());
 	refreshUpdateValues();
 }
 
 void SupernovaeDialog::saveSettings(void)
 {
-	GETSTELMODULE(Supernovae)->saveSettingsToConfig();
+	sn->saveSettingsToConfig();
 }
 
 void SupernovaeDialog::updateJSON(void)
 {
-	if(GETSTELMODULE(Supernovae)->getUpdatesEnabled())
+	if(sn->getUpdatesEnabled())
 	{
-		GETSTELMODULE(Supernovae)->updateJSON();
+		sn->updateJSON();
 	}
 }

@@ -18,10 +18,6 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#include <QTextStream>
-#include <QFile>
-#include <QString>
-
 #include "Nebula.hpp"
 #include "NebulaMgr.hpp"
 #include "StelTexture.hpp"
@@ -32,6 +28,10 @@
 #include "StelModuleMgr.hpp"
 #include "StelCore.hpp"
 #include "StelPainter.hpp"
+
+#include <QTextStream>
+#include <QFile>
+#include <QString>
 
 #include <QDebug>
 #include <QBuffer>
@@ -48,11 +48,13 @@ float Nebula::hintsBrightness = 0;
 Vec3f Nebula::labelColor = Vec3f(0.4,0.3,0.5);
 Vec3f Nebula::circleColor = Vec3f(0.8,0.8,0.1);
 
-Nebula::Nebula() :
-		M_nb(0),
-		NGC_nb(0),
-		IC_nb(0),
-		C_nb(0)
+Nebula::Nebula()
+	: M_nb(0)
+	, NGC_nb(0)
+	, IC_nb(0)
+	, C_nb(0)
+	, mag(99.)
+	, nType()
 {
 	nameI18 = "";
 	angularSize = -1;
@@ -98,16 +100,30 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 	if ((flags&Name) || (flags&CatalogNumber))
 		oss << "</h2>";
 
-	if (flags&Extra)
+	if (flags&ObjectType)
 		oss << q_("Type: <b>%1</b>").arg(getTypeString()) << "<br>";
 
 	if (mag < 50 && flags&Magnitude)
 	{
-	    if (core->getSkyDrawer()->getFlagHasAtmosphere())
-		oss << q_("Magnitude: <b>%1</b> (extincted to: <b>%2</b>)").arg(QString::number(getVMagnitude(core), 'f', 2),
-										QString::number(getVMagnitudeWithExtinction(core), 'f', 2)) << "<br>";
-	    else
-		oss << q_("Magnitude: <b>%1</b>").arg(getVMagnitude(core), 0, 'f', 2) << "<br>";
+		if (core->getSkyDrawer()->getFlagHasAtmosphere())
+			oss << q_("Magnitude: <b>%1</b> (extincted to: <b>%2</b>)").arg(QString::number(getVMagnitude(core), 'f', 2),
+											QString::number(getVMagnitudeWithExtinction(core), 'f', 2)) << "<br>";
+		else
+			oss << q_("Magnitude: <b>%1</b>").arg(getVMagnitude(core), 0, 'f', 2) << "<br>";
+	}
+	if (mag < 50 && flags&Extra)
+	{
+		if (core->getSkyDrawer()->getFlagHasAtmosphere())
+		{
+			if (getSurfaceBrightness(core)<99 && getSurfaceBrightnessWithExtinction(core)<99)
+				oss << q_("Surface brightness: <b>%1</b> (extincted to: <b>%2</b>)").arg(QString::number(getSurfaceBrightness(core), 'f', 2),
+													 QString::number(getSurfaceBrightnessWithExtinction(core), 'f', 2)) << "<br>";
+		}
+		else
+		{
+			if (getSurfaceBrightness(core)<99)
+				oss << q_("Surface brightness: <b>%1</b>").arg(QString::number(getSurfaceBrightness(core), 'f', 2)) << "<br>";
+		}
 	}
 	oss << getPositionInfoString(core, flags);
 
@@ -128,16 +144,17 @@ float Nebula::getVMagnitude(const StelCore* core) const
 
 float Nebula::getSelectPriority(const StelCore* core) const
 {
-	if( ((NebulaMgr*)StelApp::getInstance().getModuleMgr().getModule("NebulaMgr"))->getFlagHints() )
-	{
-		// make very easy to select IF LABELED
+	const NebulaMgr* nebMgr = ((NebulaMgr*)StelApp::getInstance().getModuleMgr().getModule("NebulaMgr"));
+	if (!nebMgr->getFlagHints())
+		return StelObject::getSelectPriority(core)-2.f;
+	
+	const float maxMagHint = nebMgr->computeMaxMagHint(core->getSkyDrawer());
+	// make very easy to select if labeled
+	if (std::min(15.f, getVMagnitude(core))<maxMagHint)
 		return -10.f;
-	}
 	else
-	{
-		if (getVMagnitude(core)>20.f) return 20.f;
-		return getVMagnitude(core);
-	}
+		return StelObject::getSelectPriority(core)-2.f;
+
 }
 
 Vec3f Nebula::getInfoColor(void) const
@@ -148,6 +165,22 @@ Vec3f Nebula::getInfoColor(void) const
 double Nebula::getCloseViewFov(const StelCore*) const
 {
 	return angularSize>0 ? angularSize * 4 : 1;
+}
+
+float Nebula::getSurfaceBrightness(const StelCore* core) const
+{
+	if (getVMagnitude(core)<99 && angularSize>0)
+		return getVMagnitude(core) + 2.5*log10(M_PI*pow((angularSize*M_PI/180.)*1800,2));
+	else
+		return 99;
+}
+
+float Nebula::getSurfaceBrightnessWithExtinction(const StelCore* core) const
+{
+	if (getVMagnitudeWithExtinction(core)<99 && angularSize>0)
+		return getVMagnitudeWithExtinction(core) + 2.5*log10(M_PI*pow((angularSize*M_PI/180.)*1800,2));
+	else
+		return 99;
 }
 
 void Nebula::drawHints(StelPainter& sPainter, float maxMagHints)
@@ -167,7 +200,8 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints)
 	Vec3f col(circleColor[0]*lum*hintsBrightness, circleColor[1]*lum*hintsBrightness, circleColor[2]*lum*hintsBrightness);
 
 	sPainter.setColor(col[0], col[1], col[2], 1);
-	switch (nType) {
+	switch (nType)
+	{
 		case NebGx:
 			Nebula::texGalaxy->bind();
 			break;
@@ -353,7 +387,10 @@ QString Nebula::getTypeString(void) const
 			wsType = q_("Planetary nebula");
 			break;
 		case NebDn:
-			wsType = q_("Dark Nebula");
+			wsType = q_("Dark nebula");
+			break;
+		case NebIg:
+			wsType = q_("Irregular galaxy");
 			break;
 		case NebCn:
 			wsType = q_("Cluster associated with nebulosity");

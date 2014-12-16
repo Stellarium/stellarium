@@ -23,7 +23,6 @@
 #include "StelObject.hpp"
 #include "StelFader.hpp"
 #include "StelTextureTypes.hpp"
-#include "StelPainter.hpp"
 #include "Pulsar.hpp"
 #include <QFont>
 #include <QVariantMap>
@@ -101,6 +100,7 @@ public:
 	//! @return a list of matching object name by order of relevance, or an empty list if nothing match
 	virtual QStringList listMatchingObjects(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false) const;
 	virtual QStringList listAllObjects(bool inEnglish) const;
+	virtual QStringList listAllObjectsByType(const QString& objType, bool inEnglish) const { Q_UNUSED(objType) Q_UNUSED(inEnglish) return QStringList(); }
 	virtual QString getName() const { return "Pulsars"; }
 
 	//! get a Pulsar object by identifier
@@ -129,13 +129,19 @@ public:
 	//! @param b if true, updates will be enabled, else they will be disabled
 	void setUpdatesEnabled(bool b) {updatesEnabled=b;}
 
-	bool getDisplayMode(void) {return distributionEnabled;}
-	void setDisplayMode(bool b) {distributionEnabled=b;}
+	bool getDisplayMode(void);
+	void setDisplayMode(bool b);
+
+	bool getGlitchFlag(void);
+	void setGlitchFlag(bool b);
+
+	QString getMarkerColor(bool mtype = true);
+	void setMarkerColor(QString c, bool mtype = true);
 
 	void setEnableAtStartup(bool b) { enableAtStartup=b; }
 	bool getEnableAtStartup(void) { return enableAtStartup; }
 
-	//! get the date and time the TLE elements were updated
+	//! get the date and time the pulsars were updated
 	QDateTime getLastUpdate(void) {return lastUpdate;}
 
 	//! get the update frequency in days
@@ -147,6 +153,9 @@ public:
 
 	//! Get the current updateState
 	UpdateState getUpdateState(void) {return updateState;}
+
+	//! Get count of pulsars from catalog
+	int getCountPulsars(void) {return PsrCount;}
 
 signals:
 	//! @param state the new update state.
@@ -212,6 +221,8 @@ private:
 	StelTextureSP texPointer;
 	QList<PulsarP> psr;
 
+	int PsrCount;
+
 	// variables and functions for the updater
 	UpdateState updateState;
 	QNetworkAccessManager* downloadMgr;
@@ -221,8 +232,7 @@ private:
 	QList<int> messageIDs;
 	bool updatesEnabled;
 	QDateTime lastUpdate;
-	int updateFrequencyDays;
-	bool distributionEnabled;
+	int updateFrequencyDays;	
 	bool enableAtStartup;
 
 	QSettings* conf;

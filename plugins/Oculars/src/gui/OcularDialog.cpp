@@ -38,8 +38,16 @@
 #include <QStandardItemModel>
 #include <limits>
 
-OcularDialog::OcularDialog(Oculars* pluginPtr, QList<CCD *>* ccds, QList<Ocular *>* oculars, QList<Telescope *>* telescopes, QList<Lens *> *lense) :
-	plugin(pluginPtr)
+OcularDialog::OcularDialog(Oculars* pluginPtr,
+			   QList<CCD *>* ccds,
+			   QList<Ocular *>* oculars,
+			   QList<Telescope *>* telescopes,
+			   QList<Lens *> *lense)
+	: plugin(pluginPtr)
+	, ccdMapper(NULL)
+	, ocularMapper(NULL)
+	, telescopeMapper(NULL)
+	, lensMapper(NULL)
 {
 	ui = new Ui_ocularDialogForm;
 	this->ccds = ccds;
@@ -68,13 +76,6 @@ OcularDialog::OcularDialog(Oculars* pluginPtr, QList<CCD *>* ccds, QList<Ocular 
 			     lensModel,
 			     lensModel->propertyMap());
 
-	validatorPositiveInt = new QIntValidator(0, std::numeric_limits<int>::max(), this);
-	validatorPositiveDouble = new QDoubleValidator(.0, std::numeric_limits<double>::max(), 24, this);
-	validatorOcularAFOV = new QDoubleValidator(1.0, 120.0, 3, this);
-	validatorOcularEFL = new QDoubleValidator(1.0, 60.0, 3, this);
-	validatorTelescopeDiameter = new QDoubleValidator(1.0, 1000.0, 1, this);
-	validatorTelescopeFL = new QDoubleValidator(1.0, 10000.0, 1, this);
-	validatorLensMultipler = new QDoubleValidator(1.0, 6.0, 4, this);
 	QRegExp nameExp("^\\S.*");
 	validatorName = new QRegExpValidator(nameExp, this);
 }
@@ -340,6 +341,13 @@ void OcularDialog::createDialogContent()
 	ui->ocularListView->setModel(ocularTableModel);
 	ui->telescopeListView->setModel(telescopeTableModel);
 	ui->lensListView->setModel(lensTableModel);
+
+#ifdef Q_OS_WIN
+	//Kinetic scrolling for tablet pc and pc
+	QList<QWidget *> addscroll;
+	addscroll << ui->textBrowser << ui->telescopeListView << ui->ccdListView << ui->ocularListView << ui->lensListView;
+	installKineticScrolling(addscroll);
+#endif
 	
 	//Now the rest of the actions.
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
@@ -348,6 +356,8 @@ void OcularDialog::createDialogContent()
 	connect(ui->limitStellarMagnitudeCheckBox, SIGNAL(clicked(bool)), plugin, SLOT(setFlagLimitMagnitude(bool)));
 	connect(ui->checkBoxControlPanel, SIGNAL(clicked(bool)), plugin, SLOT(enableGuiPanel(bool)));
 	connect(ui->checkBoxDecimalDegrees, SIGNAL(clicked(bool)), plugin, SLOT(setFlagDecimalDegrees(bool)));
+	connect(ui->checkBoxInitialFOV, SIGNAL(clicked(bool)), plugin, SLOT(setFlagInitFovUsage(bool)));
+	connect(ui->checkBoxUseFlipForCCD, SIGNAL(clicked(bool)), plugin, SLOT(setFlagUseFlipForCCD(bool)));
 	
 	// The add & delete buttons
 	connect(ui->addCCD, SIGNAL(clicked()), this, SLOT(insertNewCCD()));
@@ -361,22 +371,10 @@ void OcularDialog::createDialogContent()
 
 	// Validators
 	ui->ccdName->setValidator(validatorName);
-	ui->ccdResX->setValidator(validatorPositiveInt);
-	ui->ccdResY->setValidator(validatorPositiveInt);
-	ui->ccdChipX->setValidator(validatorPositiveDouble);
-	ui->ccdChipY->setValidator(validatorPositiveDouble);
-	ui->ccdPixelX->setValidator(validatorPositiveDouble);
-	ui->ccdPixelY->setValidator(validatorPositiveDouble);
-	ui->ocularAFov->setValidator(validatorOcularAFOV);
-	ui->ocularFL->setValidator(validatorOcularEFL);
-	ui->ocularFieldStop->setValidator(validatorOcularEFL);
-	ui->telescopeFL->setValidator(validatorTelescopeFL);
-	ui->telescopeDiameter->setValidator(validatorTelescopeDiameter);
 	ui->ocularName->setValidator(validatorName);
 	ui->telescopeName->setValidator(validatorName);
 	ui->lensName->setValidator(validatorName);
-	ui->lensMultipler->setValidator(validatorLensMultipler);
-	
+
 	// The key bindings
 	QString bindingString = Oculars::appSettings()->value("bindings/toggle_oculars", "Ctrl+O").toString();
 	ui->togglePluginLineEdit->setText(bindingString);
@@ -435,6 +433,7 @@ void OcularDialog::createDialogContent()
 	ocularMapper->addMapping(ui->ocularFL, 2);
 	ocularMapper->addMapping(ui->ocularFieldStop, 3);
 	ocularMapper->addMapping(ui->binocularsCheckBox, 4, "checked");
+	ocularMapper->addMapping(ui->permanentCrosshairCheckBox, 5, "checked");
 	ocularMapper->toFirst();
 	connect(ui->ocularListView->selectionModel() , SIGNAL(currentRowChanged(QModelIndex, QModelIndex)),
 					ocularMapper, SLOT(setCurrentModelIndex(QModelIndex)));
@@ -466,22 +465,31 @@ void OcularDialog::createDialogContent()
 	ui->telescopeListView->setCurrentIndex(telescopeTableModel->index(0, 1));
 
 	// set the initial state
-	if (Oculars::appSettings()->value("require_selection_to_zoom", 1.0).toBool()) {
+	QSettings *settings = Oculars::appSettings();
+	if (settings->value("require_selection_to_zoom", 1.0).toBool()) {
 		ui->requireSelectionCheckBox->setCheckState(Qt::Checked);
 	}
-	if (Oculars::appSettings()->value("use_max_exit_circle", 0.0).toBool()) {
+	if (settings->value("use_max_exit_circle", 0.0).toBool()) {
 		ui->scaleImageCircleCheckBox->setCheckState(Qt::Checked);
 	}
-	if (Oculars::appSettings()->value("limit_stellar_magnitude", true).toBool()) {
+	if (settings->value("limit_stellar_magnitude", true).toBool()) {
 		ui->limitStellarMagnitudeCheckBox->setCheckState(Qt::Checked);
 	}
-	if (Oculars::appSettings()->value("enable_control_panel", false).toBool())
+	if (settings->value("enable_control_panel", false).toBool())
 	{
 		ui->checkBoxControlPanel->setChecked(true);
 	}
-	if (Oculars::appSettings()->value("use_decimal_degrees", false).toBool())
+	if (settings->value("use_decimal_degrees", false).toBool())
 	{
 		ui->checkBoxDecimalDegrees->setChecked(true);
+	}
+	if (settings->value("use_initial_fov", false).toBool())
+	{
+		ui->checkBoxInitialFOV->setChecked(true);
+	}
+	if (settings->value("use_ccd_flip", true).toBool())
+	{
+		ui->checkBoxUseFlipForCCD->setChecked(true);
 	}
 
 	//Initialize the style
@@ -495,7 +503,8 @@ void OcularDialog::initAboutText()
 
 	html += "<h2>" + q_("Oculars Plug-in") + "</h2><table width=\"90%\">";
 	html += "<tr width=\"30%\"><td><strong>" + q_("Version") + ":</strong></td><td>" + OCULARS_PLUGIN_VERSION + "</td></tr>";
-	html += "<tr><td><strong>" + q_("Authors") + ":</strong></td><td>Timothy Reaves &lt;treaves@silverfieldstech.com&gt;<br />Bogdan Marinov<br />Pawel Stolowski (" + q_("Barlow lens feature") + ")</td></tr>";
+	html += "<tr><td><strong>" + q_("Author") + ":</strong></td><td>Timothy Reaves &lt;treaves@silverfieldstech.com&gt;</td></tr>";
+	html += "<tr><td><strong>" + q_("Contributors") + ":</strong></td><td>Bogdan Marinov<br />Pawel Stolowski (" + q_("Barlow lens feature") + ")<br />Alexander Wolf</td></tr>";
 	html += "</table>";
 
 	//Overview

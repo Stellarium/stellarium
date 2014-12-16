@@ -32,7 +32,16 @@ public:
 	Q_PROPERTY(bool checked READ isChecked WRITE setChecked NOTIFY toggled)
 
 	//! Don't use this constructor, this is just there to ease the migration from QAction.
-	StelAction(QObject *parent): QObject(parent) {}
+	StelAction(QObject *parent)
+		: QObject(parent)
+		, checkable(false)
+		, checked(false)
+		, global(false)
+		, target(NULL)
+		, property(NULL)
+	#ifndef USE_QUICKVIEW
+		, qAction(NULL) {}
+	#endif
 
 	StelAction(const QString& actionId,
 	           const QString& groupId,
@@ -108,8 +117,12 @@ public:
 	//! @param text Short human-readable description in English.
 	//! @param shortcut Default shortcut.
 	//! @param target The QObject the action is linked to.
-	//! @param slot Either a slot name, in that case the action is not checkable,
-	//! either a property name, in that case the action is checkable.
+	//! @param slot The target slot or property that the action will trigger.
+	//!             Either a slot name of the form 'func()' and in that case the
+	//!             action is made non checkable, a slot name of the form
+	//!             'func(bool)' and in that case the action is made checkable,
+	//!             or a property name and in that case the action is made
+	//!             checkable.
 	StelAction* addAction(const QString& id, const QString& groupId, const QString& text,
 						  QObject* target, const char* slot,
 						  const QString& shortcut="", const QString& altShortcut="",

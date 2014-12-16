@@ -23,8 +23,7 @@
 #include "StelModuleMgr.hpp"
 #include "SimpleDrawLine.hpp"
 #include "StelUtils.hpp"
-#include "renderer/StelRenderer.hpp"
-#include "renderer/StelCircleArcRenderer.hpp"
+#include "StelPainter.hpp"
 
 #include <QDebug>
 
@@ -47,9 +46,6 @@ StelPluginInfo SimpleDrawLineStelPluginInterface::getPluginInfo() const
 	info.description = "An minimal plugin example for drawing lines.";
 	return info;
 }
-
-Q_EXPORT_PLUGIN2(SimpleDrawLine, SimpleDrawLineStelPluginInterface)
-
 
 /*************************************************************************
  Constructor
@@ -89,9 +85,10 @@ void SimpleDrawLine::init()
 /*************************************************************************
  Draw our module. This should draw line in the main window
 *************************************************************************/
-void SimpleDrawLine::draw(StelCore* core, StelRenderer* renderer)
+void SimpleDrawLine::draw(StelCore* core)
 {
 	const StelProjectorP prj = core->getProjection(StelCore::FrameAltAz);
+	StelPainter painter(prj);
 	Vec3d startPoint, endPoint;
 	double lon1, lat1, lon2, lat2;
 	lon1 = StelUtils::getDecAngle("10d");
@@ -100,8 +97,7 @@ void SimpleDrawLine::draw(StelCore* core, StelRenderer* renderer)
 	lat2 = StelUtils::getDecAngle("80d");
 	StelUtils::spheToRect(lon1,lat1,startPoint);
 	StelUtils::spheToRect(lon2,lat2,endPoint);
-	renderer->setGlobalColor(1.f, 0.5f, 0.5f, 1.f);
-	StelCircleArcRenderer circleArcRenderer = StelCircleArcRenderer(renderer, prj);
-	circleArcRenderer.drawGreatCircleArc(startPoint, endPoint);
+	painter.setColor(1.f, 0.5f, 0.5f, 1.f);
+	painter.drawGreatCircleArc(startPoint, endPoint);
 }
 

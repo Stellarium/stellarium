@@ -16,19 +16,13 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#include <cmath>
-#include <QDebug>
 #include "StelUtils.hpp"
 
-
-#define stelpow10f(x) std::exp((x) * 2.3025850930f)
+#include <cmath>
+#include <QDebug>
 
 #include "Skybright.hpp"
 #include "StelUtils.hpp"
-
-#if defined(__NetBSD__) || defined(__SUNOS__)
-#undef FS
-#endif
 
 Skybright::Skybright() : SN(1.f)
 {
@@ -39,33 +33,35 @@ Skybright::Skybright() : SN(1.f)
 
 // month : 1=Jan, 12=Dec
 // moonPhase in radian 0=Full Moon, PI/2=First Quadrant/Last Quadran, PI=No Moon
-void Skybright::setDate(int year, int month, float moonPhase)
+void Skybright::setDate(const int year, const int month, const float moonPhase)
 {
 	magMoon = -12.73f + 1.4896903f * std::fabs(moonPhase) + 0.04310727f * std::pow(moonPhase, 4.f);
 
+	// GZ: Bah, a very crude estimate for the solar position...
 	RA = (month - 3.f) * 0.52359878f;
 
-	// Term for dark sky brightness computation
+	// Term for dark sky brightness computation.
+	// GZ: This works for a few 11-year solar cycles around 1992...
 	bNightTerm = 1.0e-13 + 0.3e-13 * std::cos(0.57118f * (year-1992.f));
 }
 
 
-void Skybright::setLocation(float latitude, float altitude, float temperature, float relativeHumidity)
+void Skybright::setLocation(const float latitude, const float altitude, const float temperature, const float relativeHumidity)
 {
 	float sign_latitude = (latitude>=0.f) * 2.f - 1.f;
 
 	// extinction Coefficient for V band
-	float KR = 0.1066f * std::exp(-altitude/8200.f);
+	float KR = 0.1066f * std::exp(-altitude/8200.f); // Rayleigh
 	float KA = 0.1f * std::exp(-altitude/1500.f) * std::pow(1.f - 0.32f/std::log(relativeHumidity/100.f) ,1.33f) *
-		(1.f + 0.33f * sign_latitude * std::sin(RA));
-	float KO = 0.031f * std::exp(-altitude/8200.f) * ( 3.f + 0.4f * (latitude * std::cos(RA) - std::cos(3.f*latitude)) )/3.f;
-	float KW = 0.031f * 0.94f * (relativeHumidity/100.f) * std::exp(temperature/15.f) * std::exp(-altitude/8200.f);
-	K = KR + KA + KO + KW;
+		(1.f + 0.33f * sign_latitude * std::sin(RA)); // Aerosol
+	float KO = 0.031f * std::exp(-altitude/8200.f) * ( 3.f + 0.4f * (latitude * std::cos(RA) - std::cos(3.f*latitude)) )/3.f; // Ozone
+	float KW = 0.031f * 0.94f * (relativeHumidity/100.f) * std::exp(temperature/15.f) * std::exp(-altitude/8200.f); // Water
+	K = KR + KA + KO + KW; // Total extinction coefficient
 }
 
 // Set the moon and sun zenith angular distance (cosin given)
 // and precompute what can be
-void Skybright::setSunMoon(float cosDistMoonZenith, float cosDistSunZenith)
+void Skybright::setSunMoon(const float cosDistMoonZenith, const float cosDistSunZenith)
 {
 	// Air mass for Moon
 	if (cosDistMoonZenith<0) airMassMoon = 40.f;
@@ -95,19 +91,19 @@ void Skybright::setSunMoon(float cosDistMoonZenith, float cosDistSunZenith)
 // Inputs : cosDistMoon = cos(angular distance between moon and the position)
 //			cosDistSun  = cos(angular distance between sun  and the position)
 //			cosDistZenith = cos(angular distance between zenith and the position)
-float Skybright::getLuminance(float cosDistMoon,
-                               float cosDistSun,
-                               float cosDistZenith) const
+float Skybright::getLuminance( float cosDistMoon,
+                               const float cosDistSun,
+                               const float cosDistZenith) const
 {
 	// Air mass
 	const float bKX = stelpow10f(-0.4f * K * (1.f / (cosDistZenith + 0.025f*StelUtils::fastExp(-11.f*cosDistZenith))));
 
 	// Daylight brightness
 	const float distSun = StelUtils::fastAcos(cosDistSun);
-	const float FS = 18886.28f / (distSun*distSun + 0.0007f)
+	const float FSv = 18886.28f / (distSun*distSun + 0.0007f)
 	               + stelpow10f(6.15f - (distSun+0.001f)* 1.43239f)
 	               + 229086.77f * ( 1.06f + cosDistSun*cosDistSun );
-	const float b_daylight = 9.289663e-12f * (1.f - bKX) * (FS * C4 + 440000.f * (1.f - C4));
+	const float b_daylight = 9.289663e-12f * (1.f - bKX) * (FSv * C4 + 440000.f * (1.f - C4));
 
 	//Twilight brightness
 	const float b_twilight = stelpow10f(bTwilightTerm + 0.063661977f * StelUtils::fastAcos(cosDistZenith)/(K> 0.05f ? K : 0.05f)) * (1.7453293f / distSun) * (1.f-bKX);

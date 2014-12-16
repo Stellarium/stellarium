@@ -17,7 +17,16 @@
    <property name="spacing">
     <number>0</number>
    </property>
-   <property name="margin">
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
     <number>0</number>
    </property>
    <item>
@@ -256,6 +265,13 @@
            <widget class="QCheckBox" name="displayShowPulsarsButton">
             <property name="text">
              <string>Show pulsars button on toolbar</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="displaySeparateColorsCheckBox">
+            <property name="text">
+             <string>Use separate color for pulsars with glitches</string>
             </property>
            </widget>
           </item>

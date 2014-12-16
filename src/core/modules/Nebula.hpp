@@ -21,14 +21,16 @@
 #ifndef _NEBULA_HPP_
 #define _NEBULA_HPP_
 
-#include <QString>
 #include "StelObject.hpp"
 #include "StelTranslator.hpp"
 #include "StelTextureTypes.hpp"
 
+#include <QString>
+
 class StelPainter;
 class QDataStream;
 
+// This only draws nebula icons. For the DSO images, see StelSkylayerMgr and StelSkyImageTile.
 class Nebula : public StelObject
 {
 friend class NebulaMgr;
@@ -68,6 +70,9 @@ public:
 	//! Get the printable nebula Type.
 	//! @return the nebula type code.
 	QString getTypeString() const;
+
+	float getSurfaceBrightness(const StelCore* core) const;
+	float getSurfaceBrightnessWithExtinction(const StelCore* core) const;
 
 private:
 	friend struct DrawNebulaFuncObject;

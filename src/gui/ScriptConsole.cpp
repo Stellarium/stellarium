@@ -89,6 +89,7 @@ void ScriptConsole::createDialogContent()
 	connect(ui->quickrunCombo, SIGNAL(currentIndexChanged(int)), this, SLOT(quickRun(int)));
 	connect(&StelApp::getInstance().getScriptMgr(), SIGNAL(scriptStopped()), this, SLOT(scriptEnded()));
 	connect(&StelApp::getInstance().getScriptMgr(), SIGNAL(scriptDebug(const QString&)), this, SLOT(appendLogLine(const QString&)));
+	connect(&StelApp::getInstance().getScriptMgr(), SIGNAL(scriptOutput(const QString&)), this, SLOT(appendOutputLine(const QString&)));
 #ifndef ENABLE_STRATOSCRIPT_COMPAT
 	ui->preprocessSTSButton->setHidden(true);
 #else
@@ -140,6 +141,8 @@ void ScriptConsole::clearButtonPressed()
 	if (ui->tabs->currentIndex() == 0)
 		ui->scriptEdit->clear();
 	else if (ui->tabs->currentIndex() == 1)
+		ui->logBrowser->clear();
+	else if (ui->tabs->currentIndex() == 2)
 		ui->outputBrowser->clear();
 }
 
@@ -154,25 +157,24 @@ void ScriptConsole::preprocessScript()
 		QTextStream out(&src);
 		out << ui->scriptEdit->toPlainText();
 		srcName = src.fileName();
-		src.close();
-		src.open();
 
-			if (sender() == ui->preprocessSSCButton)
-			{
-				qDebug() << "Preprocessing with SSC proprocessor";
-				StelApp::getInstance().getScriptMgr().preprocessScript(src, dest, ui->includeEdit->text());
-			}
+		if (sender() == ui->preprocessSSCButton)
+		{
+			qDebug() << "Preprocessing with SSC proprocessor";
+			StelApp::getInstance().getScriptMgr().preprocessScript(src, dest, ui->includeEdit->text());
+		}
 #ifdef ENABLE_STRATOSCRIPT_COMPAT
-			else if (sender() == ui->preprocessSTSButton)
-			{
-				qDebug() << "Preprocessing with STS proprocessor";
-				StelApp::getInstance().getScriptMgr().preprocessStratoScript(src, dest, ui->includeEdit->text());
-			}
+		else if (sender() == ui->preprocessSTSButton)
+		{
+			qDebug() << "Preprocessing with STS proprocessor";
+			StelApp::getInstance().getScriptMgr().preprocessStratoScript(src, dest, ui->includeEdit->text());
+		}
 #endif
-			else
-				qWarning() << "WARNING: unknown preprocessor type";
+		else
+			qWarning() << "WARNING: unknown preprocessor type";
 
-			ui->scriptEdit->setPlainText(dest);
+		ui->scriptEdit->setPlainText(dest);
+		src.close();
 	}
 	ui->tabs->setCurrentIndex(0);
 }
@@ -180,7 +182,7 @@ void ScriptConsole::preprocessScript()
 void ScriptConsole::runScript()
 {
 	ui->tabs->setCurrentIndex(1);
-	ui->outputBrowser->setHtml("");
+	ui->logBrowser->setHtml("");
 	QTemporaryFile file(QDir::tempPath() + "/stelscriptXXXXXX.ssc");
 	QString fileName;
 	if (file.open()) {
@@ -222,13 +224,24 @@ void ScriptConsole::runScript()
 void ScriptConsole::scriptEnded()
 {
 	qDebug() << "ScriptConsole::scriptEnded";
-	QString html = ui->outputBrowser->toHtml();
+	QString html = ui->logBrowser->toHtml();
 	appendLogLine(QString("Script finished at %1").arg(QDateTime::currentDateTime().toString()));
 	ui->runButton->setEnabled(true);
 	ui->stopButton->setEnabled(false);
 }
 
 void ScriptConsole::appendLogLine(const QString& s)
+{
+	QString html = ui->logBrowser->toHtml();
+	html.replace(QRegExp("^\\s+"), "");
+	// if (html!="")
+	// 	html += "<br />";
+
+	html += s;
+	ui->logBrowser->setHtml(html);
+}
+
+void ScriptConsole::appendOutputLine(const QString& s)
 {
 	QString html = ui->outputBrowser->toHtml();
 	html.replace(QRegExp("^\\s+"), "");
@@ -238,6 +251,7 @@ void ScriptConsole::appendLogLine(const QString& s)
 	html += s;
 	ui->outputBrowser->setHtml(html);
 }
+
 
 void ScriptConsole::includeBrowse()
 {

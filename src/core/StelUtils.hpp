@@ -20,18 +20,22 @@
 #ifndef _STELUTILS_HPP_
 #define _STELUTILS_HPP_
 
+#include <cmath>
 #include "VecMath.hpp"
 
 #include <QVariantMap>
 #include <QDateTime>
 #include <QString>
 
-// astonomical unit (km)
+// astronomical unit (km)
 #define AU 149597870.691
+#define AU_KM (1.0/149597870.691)
 // Parsec (km)
 #define PARSEC 30.857e12
 // speed of light (km/sec)
 #define SPEED_OF_LIGHT 299792.458
+
+#define stelpow10f(x) std::exp((x) * 2.3025850930f)
 
 //! @namespace StelUtils contains general purpose utility functions.
 namespace StelUtils
@@ -41,6 +45,9 @@ namespace StelUtils
 
 	//! Return the version of stellarium, i.e. "0.9.0"
 	QString getApplicationVersion();
+
+	//! Return the name and the version of operating system, i.e. "Mac OS X 10.7"
+	QString getOperatingSystemInfo();
 
 	//! Convert an angle in hms format to radian.
 	//! @param h hour component
@@ -71,6 +78,19 @@ namespace StelUtils
 	//! @param s second component
 	void radToDms(double rad, bool& sign, unsigned int& d, unsigned int& m, double& s);
 
+	//! Convert an angle in radian to decimal degree.
+	//! @param rad input angle in radian
+	//! @param sign true if positive, false otherwise
+	//! @param deg decimal degree
+	void radToDecDeg(double rad, bool& sign, double& deg);
+
+	//! Convert an angle in radian to a decimal degree string.
+	//! @param angle input angle in radian
+	//! @param precision
+	//! @param useD Define if letter "d" must be used instead of deg sign
+	//! @param useC Define if function should use 0-360 degrees
+	QString radToDecDegStr(const double angle, const int precision = 4, const bool useD=false, const bool useC=false);
+
 	//! Convert an angle in radian to a hms formatted string.
 	//! If the second, minute part is == 0, it is not output
 	//! @param angle input angle in radian
@@ -93,8 +113,20 @@ namespace StelUtils
 	//! @param decimal output decimal second value
 	QString radToDmsStr(const double angle, const bool decimal=false, const bool useD=false);
 
+	//! Convert an angle in decimal degree to +-dms format.
+	//! @param angle input angle in decimal degree
+	//! @param sign true if positive, false otherwise
+	//! @param d degree component
+	//! @param m minute component
+	//! @param s second component
+	void decDegToDms(double angle, bool& sign, unsigned int& d, unsigned int& m, double& s);
+
+	//! Convert an angle in decimal degrees to a dms formatted string.
+	//! @param angle input angle in decimal degrees
+	QString decDegToDmsStr(const double angle);
+
 	//! Convert a dms formatted string to an angle in radian
-	//! @param dsm The input string
+	//! @param s The input string
 	double dmsStrToRad(const QString& s);
 
 	//! Obtains a Vec3f from a string.
@@ -143,10 +175,8 @@ namespace StelUtils
 	//! @param v the input 3D vector
 	void rectToSphe(float *lng, float *lat, const Vec3f& v);
 
-	// GZ: some additions. I need those just for quick conversions for text display.
 	//! Coordinate Transformation from equatorial to ecliptical
 	void ctRadec2Ecl(const double raRad, const double decRad, const double eclRad, double *lambdaRad, double *betaRad);
-	// GZ: done
 
 	//! Convert a string longitude, latitude, RA or Declination angle
 	//! to radians.
@@ -560,6 +590,43 @@ namespace StelUtils
 	//! @return sigma in seconds
 	double getDeltaTStandardError(const double jDay);
 
+	//! Sign function from http://stackoverflow.com/questions/1903954/is-there-a-standard-sign-function-signum-sgn-in-c-c
+	template <typename T> int sign(T val) {
+		return (T(0) < val) - (val < T(0));
+	}
+	
+	//! Compute cosines and sines around a circle which is split in "segments" parts.
+	//! Values are stored in the global static array cos_sin_theta.
+	//! Used for the sin/cos values along a latitude circle, equator, etc. for a spherical mesh.
+	//! @param slices number of partitions (elsewhere called "segments") for the circle
+	float *ComputeCosSinTheta(const int slices);
+	
+	//! Compute cosines and sines around a half-circle which is split in "segments" parts.
+	//! Values are stored in the global static array cos_sin_rho.
+	//! Used for the sin/cos values along a meridian for a spherical mesh.
+	//! @param segments number of partitions (elsewhere called "stacks") for the half-circle
+	float *ComputeCosSinRho(const int segments);
+	
+	//! Compute cosines and sines around part of a circle (from top to bottom) which is split in "segments" parts.
+	//! Values are stored in the global static array cos_sin_rho.
+	//! Used for the sin/cos values along a meridian.
+	//! This allows leaving away pole caps. The array now contains values for the region minAngle+segments*phi
+	//! @param dRho a difference angle between the stops
+	//! @param segments number of segments
+	//! @param minAngle start angle inside the half-circle. maxAngle=minAngle+segments*phi
+	float* ComputeCosSinRhoZone(const float dRho, const int segments, const float minAngle);
+
+	//! Uncompress gzip or zlib compressed data.
+	QByteArray uncompress(const QByteArray& data);
+
+#ifdef _MSC_BUILD
+    inline double trunc(double x)
+    {
+        return (x < 0 ? std::ceil(x) : std::floor(x));
+    }
+#else
+    inline double trunc(double x) { return ::trunc(x); }
+#endif
 }
 
 #endif // _STELUTILS_HPP_

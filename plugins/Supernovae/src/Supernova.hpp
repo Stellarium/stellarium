@@ -28,7 +28,6 @@
 
 #include "StelObject.hpp"
 #include "StelTextureTypes.hpp"
-#include "StelPainter.hpp"
 #include "StelFader.hpp"
 
 class StelPainter;
@@ -54,7 +53,6 @@ public:
 	{
 		return "Supernova";
 	}
-	virtual float getSelectPriority(const StelCore* core) const;
 
 	//! Get an HTML string to describe the object
 	//! @param core A pointer to the core

@@ -104,14 +104,7 @@ private:
 	QDataWidgetMapper*		lensMapper;
 	QList<Lens *>*			lense;
 	PropertyBasedTableModel*	lensTableModel;
-	QDoubleValidator*		validatorOcularAFOV;
-	QDoubleValidator*		validatorOcularEFL;
-	QDoubleValidator*		validatorTelescopeDiameter;
-	QDoubleValidator*		validatorTelescopeFL;
-	QDoubleValidator*		validatorLensMultipler;
 	QRegExpValidator*		validatorName;
-	QIntValidator*			validatorPositiveInt;
-	QDoubleValidator*		validatorPositiveDouble;
 };
 
 #endif // _OCULARDIALOG_HPP_

@@ -36,7 +36,9 @@
 #include "StelFileMgr.hpp"
 #include "StelTranslator.hpp"
 
-NovaeDialog::NovaeDialog() : updateTimer(NULL)
+NovaeDialog::NovaeDialog()
+	: nova(NULL)
+	, updateTimer(NULL)
 {
 	ui = new Ui_novaeDialog;
 }
@@ -65,16 +67,24 @@ void NovaeDialog::retranslate()
 // Initialize the dialog widgets and connect the signals/slots
 void NovaeDialog::createDialogContent()
 {
+	nova = GETSTELMODULE(Novae);
 	ui->setupUi(dialog);
 	ui->tabs->setCurrentIndex(0);	
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()),
 		this, SLOT(retranslate()));
 
+#ifdef Q_OS_WIN
+	//Kinetic scrolling for tablet pc and pc
+	QList<QWidget *> addscroll;
+	addscroll << ui->aboutTextBrowser;
+	installKineticScrolling(addscroll);
+#endif
+
 	// Settings tab / updates group
 	connect(ui->internetUpdatesCheckbox, SIGNAL(stateChanged(int)), this, SLOT(setUpdatesEnabled(int)));
 	connect(ui->updateButton, SIGNAL(clicked()), this, SLOT(updateJSON()));
-	connect(GETSTELMODULE(Novae), SIGNAL(updateStateChanged(Novae::UpdateState)), this, SLOT(updateStateReceiver(Novae::UpdateState)));
-	connect(GETSTELMODULE(Novae), SIGNAL(jsonUpdateComplete(void)), this, SLOT(updateCompleteReceiver(void)));
+	connect(nova, SIGNAL(updateStateChanged(Novae::UpdateState)), this, SLOT(updateStateReceiver(Novae::UpdateState)));
+	connect(nova, SIGNAL(jsonUpdateComplete(void)), this, SLOT(updateCompleteReceiver(void)));
 	connect(ui->updateFrequencySpinBox, SIGNAL(valueChanged(int)), this, SLOT(setUpdateValues(int)));
 	refreshUpdateValues(); // fetch values for last updated and so on
 	// if the state didn't change, setUpdatesEnabled will not be called, so we force it
@@ -92,8 +102,8 @@ void NovaeDialog::createDialogContent()
 	// About tab
 	setAboutHtml();
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-	Q_ASSERT(gui);
-	ui->aboutTextBrowser->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
+	if(gui!=NULL)
+		ui->aboutTextBrowser->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
 
 	updateGuiFromSettings();
 
@@ -110,6 +120,10 @@ void NovaeDialog::setAboutHtml(void)
 	html += "<p>" + q_("A plugin that shows some bright novae in the Milky Way galaxy.");
 	html += " " + q_("You can find novae via search tool by entering designation of nova or its common name (e.g. 'Nova Cygni 1975' or 'V1500 Cyg').") + "</p>";
 
+	html += "<p>" + q_("This plugin allows you to see recent bright novae: ");
+	html += nova->getNovaeList();
+	html += ". " + q_("This list altogether contains %1 stars.").arg(nova->getCountNovae());
+	html += " " + q_("All those novae are brighter than %1 at peak of brightness.").arg(QString::number(nova->getLowerLimitBrightness(), 'f', 2) + "<sup>m</sup>") + "</p>";
 	html += "<h3>" + q_("Light curves") + "</h3>";
 	html += q_("This plugin uses a very simple model for calculation of light curves for novae stars.") + " ";
 	html += q_("This model is based on time for decay by %1 magnitudes from the maximum value, where %1 is 2, 3, 6 and 9.").arg("<em>N</em>") + " ";
@@ -130,22 +144,24 @@ void NovaeDialog::setAboutHtml(void)
 	html += "</ul></p></body></html>";
 
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-	Q_ASSERT(gui);
-	QString htmlStyleSheet(gui->getStelStyle().htmlStyleSheet);
-	ui->aboutTextBrowser->document()->setDefaultStyleSheet(htmlStyleSheet);
+	if(gui!=NULL)
+	{
+		QString htmlStyleSheet(gui->getStelStyle().htmlStyleSheet);
+		ui->aboutTextBrowser->document()->setDefaultStyleSheet(htmlStyleSheet);
+	}
 
 	ui->aboutTextBrowser->setHtml(html);
 }
 
 void NovaeDialog::refreshUpdateValues(void)
 {
-	ui->lastUpdateDateTimeEdit->setDateTime(GETSTELMODULE(Novae)->getLastUpdate());
-	ui->updateFrequencySpinBox->setValue(GETSTELMODULE(Novae)->getUpdateFrequencyDays());
-	int secondsToUpdate = GETSTELMODULE(Novae)->getSecondsToUpdate();
-	ui->internetUpdatesCheckbox->setChecked(GETSTELMODULE(Novae)->getUpdatesEnabled());
-	if (!GETSTELMODULE(Novae)->getUpdatesEnabled())
+	ui->lastUpdateDateTimeEdit->setDateTime(nova->getLastUpdate());
+	ui->updateFrequencySpinBox->setValue(nova->getUpdateFrequencyDays());
+	int secondsToUpdate = nova->getSecondsToUpdate();
+	ui->internetUpdatesCheckbox->setChecked(nova->getUpdatesEnabled());
+	if (!nova->getUpdatesEnabled())
 		ui->nextUpdateLabel->setText(q_("Internet updates disabled"));
-	else if (GETSTELMODULE(Novae)->getUpdateState() == Novae::Updating)
+	else if (nova->getUpdateState() == Novae::Updating)
 		ui->nextUpdateLabel->setText(q_("Updating now..."));
 	else if (secondsToUpdate <= 60)
 		ui->nextUpdateLabel->setText(q_("Next update: < 1 minute"));
@@ -159,14 +175,14 @@ void NovaeDialog::refreshUpdateValues(void)
 
 void NovaeDialog::setUpdateValues(int days)
 {
-	GETSTELMODULE(Novae)->setUpdateFrequencyDays(days);
+	nova->setUpdateFrequencyDays(days);
 	refreshUpdateValues();
 }
 
 void NovaeDialog::setUpdatesEnabled(int checkState)
 {
 	bool b = checkState != Qt::Unchecked;
-	GETSTELMODULE(Novae)->setUpdatesEnabled(b);
+	nova->setUpdatesEnabled(b);
 	ui->updateFrequencySpinBox->setEnabled(b);
 	if(b)
 		ui->updateButton->setText(q_("Update now"));
@@ -193,7 +209,7 @@ void NovaeDialog::updateCompleteReceiver(void)
 	ui->nextUpdateLabel->setText(QString(q_("Novae is updated")));
 	// display the status for another full interval before refreshing status
 	updateTimer->start();
-	ui->lastUpdateDateTimeEdit->setDateTime(GETSTELMODULE(Novae)->getLastUpdate());
+	ui->lastUpdateDateTimeEdit->setDateTime(nova->getLastUpdate());
 	QTimer *timer = new QTimer(this);
 	connect(timer, SIGNAL(timeout()), this, SLOT(refreshUpdateValues()));
 }
@@ -201,26 +217,26 @@ void NovaeDialog::updateCompleteReceiver(void)
 void NovaeDialog::restoreDefaults(void)
 {
 	qDebug() << "Novae::restoreDefaults";
-	GETSTELMODULE(Novae)->restoreDefaults();
-	GETSTELMODULE(Novae)->readSettingsFromConfig();
+	nova->restoreDefaults();
+	nova->readSettingsFromConfig();
 	updateGuiFromSettings();
 }
 
 void NovaeDialog::updateGuiFromSettings(void)
 {
-	ui->internetUpdatesCheckbox->setChecked(GETSTELMODULE(Novae)->getUpdatesEnabled());
+	ui->internetUpdatesCheckbox->setChecked(nova->getUpdatesEnabled());
 	refreshUpdateValues();
 }
 
 void NovaeDialog::saveSettings(void)
 {
-	GETSTELMODULE(Novae)->saveSettingsToConfig();
+	nova->saveSettingsToConfig();
 }
 
 void NovaeDialog::updateJSON(void)
 {
-	if(GETSTELMODULE(Novae)->getUpdatesEnabled())
+	if(nova->getUpdatesEnabled())
 	{
-		GETSTELMODULE(Novae)->updateJSON();
+		nova->updateJSON();
 	}
 }

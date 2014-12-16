@@ -16,14 +16,9 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#include <cmath>
-#ifndef HAVE_POW10
-# define HAVE_POW10 1
-//# define pow10(x) pow(10,(x))
-# define pow10(x) std::exp((x) * 2.3025850930)
-#endif
-
 #include "StelToneReproducer.hpp"
+#include "StelUtils.hpp"
+#include <cmath>
 
 /*********************************************************************
  Constructor: Set some default values to prevent bugs in case of bad use
@@ -73,7 +68,7 @@ void StelToneReproducer::setDisplayAdaptationLuminance(float _Lda)
 
 	// Update terms
 	alphaWaOverAlphaDa = alphaWa/alphaDa;
-	term2 = pow10((betaWa-betaDa)/alphaDa) / (M_PI*0.0001f);
+    term2 = (float) (stelpow10f((betaWa-betaDa)/alphaDa) / (M_PI*0.0001f));
 	lnTerm2 = std::log(term2);
 	term2TimesOneOverMaxdLpOneOverGamma = std::pow(term2*oneOverMaxdL, oneOverGamma);
 }
@@ -92,7 +87,7 @@ void StelToneReproducer::setWorldAdaptationLuminance(float _Lwa)
 
 	// Update terms
 	alphaWaOverAlphaDa = alphaWa/alphaDa;
-	term2 = pow10((betaWa-betaDa)/alphaDa) / (M_PI*0.0001f);
+    term2 = (float) (stelpow10f((betaWa-betaDa)/alphaDa) / (M_PI*0.0001f));
 	lnTerm2 = std::log(term2);
 	term2TimesOneOverMaxdLpOneOverGamma = std::pow(term2*oneOverMaxdL, oneOverGamma);
 }
@@ -113,8 +108,8 @@ void StelToneReproducer::xyYToRGB(float* color) const
 		// special case for s = 0 (x=0.25, y=0.25)
 		color[2] *= 0.5121445;
 		color[2] = std::pow((float)(color[2]*M_PI*0.0001f), alphaWaOverAlphaDa*oneOverGamma)* term2TimesOneOverMaxdLpOneOverGamma;
-		color[0] = 0.787077*color[2];
-		color[1] = 0.9898434*color[2];
+		color[0] = 0.787077f*color[2];
+		color[1] = 0.9898434f*color[2];
 		color[2] *= 1.9256125;
 		return;
 	}

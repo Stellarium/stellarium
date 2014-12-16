@@ -17,6 +17,13 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
+#include "ZoneArray.hpp"
+#include "StelApp.hpp"
+#include "StelFileMgr.hpp"
+#include "StelGeodesicGrid.hpp"
+#include "StelObject.hpp"
+#include "StelPainter.hpp"
+
 #include <QDebug>
 #include <QFile>
 #include <QDir>
@@ -25,15 +32,11 @@
 #include <windows.h>
 #endif
 
-#include "ZoneArray.hpp"
-#include "StelApp.hpp"
-#include "StelFileMgr.hpp"
-#include "StelGeodesicGrid.hpp"
-#include "StelObject.hpp"
 
-static unsigned int stel_bswap_32(unsigned int val) {
-  return (((val) & 0xff000000) >> 24) | (((val) & 0x00ff0000) >>  8) |
-	(((val) & 0x0000ff00) <<  8) | (((val) & 0x000000ff) << 24);
+static unsigned int stel_bswap_32(unsigned int val)
+{
+	return (((val) & 0xff000000) >> 24) | (((val) & 0x00ff0000) >>  8) |
+	       (((val) & 0x0000ff00) <<  8) | (((val) & 0x000000ff) << 24);
 }
 
 static const Vec3f north(0,0,1);
@@ -165,70 +168,70 @@ ZoneArray* ZoneArray::create(const QString& catalogFilePath, bool use_mmap)
 
 	switch (type)
 	{
-	case 0:
-		if (major > MAX_MAJOR_FILE_VERSION)
-		{
-			dbStr += "warning - unsupported version ";
-		}
-		else
-		{
-			// When this assertion fails you must redefine Star1
-			// for your compiler.
-			// Because your compiler does not pack the data,
-			// which is crucial for this application.
-			Q_ASSERT(sizeof(Star1) == 28);
-			rval = new HipZoneArray(file, byte_swap, use_mmap, level, mag_min, mag_range, mag_steps);
-			if (rval == 0)
+		case 0:
+			if (major > MAX_MAJOR_FILE_VERSION)
 			{
-				dbStr += "error - no memory ";
+				dbStr += "warning - unsupported version ";
 			}
-		}
-		break;
-	case 1:
-		if (major > MAX_MAJOR_FILE_VERSION)
-		{
-			dbStr += "warning - unsupported version ";
-		}
-		else
-		{
-			// When this assertion fails you must redefine Star2
-			// for your compiler.
-			// Because your compiler does not pack the data,
-			// which is crucial for this application.
+			else
+			{
+				// When this assertion fails you must redefine Star1
+				// for your compiler.
+				// Because your compiler does not pack the data,
+				// which is crucial for this application.
+				Q_ASSERT(sizeof(Star1) == 28);
+				rval = new HipZoneArray(file, byte_swap, use_mmap, level, mag_min, mag_range, mag_steps);
+				if (rval == 0)
+				{
+					dbStr += "error - no memory ";
+				}
+			}
+			break;
+		case 1:
+			if (major > MAX_MAJOR_FILE_VERSION)
+			{
+				dbStr += "warning - unsupported version ";
+			}
+			else
+			{
+				// When this assertion fails you must redefine Star2
+				// for your compiler.
+				// Because your compiler does not pack the data,
+				// which is crucial for this application.
 #ifndef _MSC_BUILD
-			Q_ASSERT(sizeof(Star2) == 10);
+				Q_ASSERT(sizeof(Star2) == 10);
 #endif
-			rval = new SpecialZoneArray<Star2>(file, byte_swap, use_mmap, level, mag_min, mag_range, mag_steps);
-			if (rval == 0)
-			{
-				dbStr += "error - no memory ";
+				rval = new SpecialZoneArray<Star2>(file, byte_swap, use_mmap, level, mag_min, mag_range, mag_steps);
+				if (rval == 0)
+				{
+					dbStr += "error - no memory ";
+				}
 			}
-		}
-		break;
-	case 2:
-		if (major > MAX_MAJOR_FILE_VERSION)
-		{
-			dbStr += "warning - unsupported version ";
-		}
-		else
-		{
-			// When this assertion fails you must redefine Star3
-			// for your compiler.
-			// Because your compiler does not pack the data,
-			// which is crucial for this application.
+			break;
+		case 2:
+			if (major > MAX_MAJOR_FILE_VERSION)
+			{
+				dbStr += "warning - unsupported version ";
+			}
+			else
+			{
+				// When this assertion fails you must redefine Star3
+				// for your compiler.
+				// Because your compiler does not pack the data,
+				// which is crucial for this application.
 #ifndef _MSC_BUILD
-			Q_ASSERT(sizeof(Star3) == 6);
+				Q_ASSERT(sizeof(Star3) == 6);
 #endif
-			rval = new SpecialZoneArray<Star3>(file, byte_swap, use_mmap, level, mag_min, mag_range, mag_steps);
-			if (rval == 0)
-			{
-				dbStr += "error - no memory ";
+				rval = new SpecialZoneArray<Star3>(file, byte_swap, use_mmap, level, mag_min, mag_range, mag_steps);
+				if (rval == 0)
+				{
+					dbStr += "error - no memory ";
+				}
 			}
-		}
-		break;
-	default:
-		dbStr += "error - bad file type ";
-		break;
+			break;
+		default:
+			dbStr += "error - bad file type ";
+			break;
 	}
 	if (rval && rval->isInitialized())
 	{
@@ -286,7 +289,7 @@ void HipZoneArray::updateHipIndex(HipIndexStruct hipIndex[]) const
 	{
 		for (const Star1 *s = z->getStars()+z->size-1;s>=z->getStars();s--)
 		{
-			const int hip = s->hip;
+			const int hip = s->getHip();
 			if (hip < 0 || NR_OF_HIP < hip)
 			{
 				qDebug() << "ERROR: HipZoneArray::updateHipIndex: invalid HIP number:" << hip;
@@ -422,28 +425,6 @@ SpecialZoneArray<Star>::SpecialZoneArray(QFile* file, bool byte_swap,bool use_mm
 						getZones()[z].stars = s;
 						s += getZones()[z].size;
 					}
-					if (
-#if (!defined(__GNUC__))
-						true
-#else
-						byte_swap
-#endif
-					)
-					{
-						s = stars;
-						for (unsigned int i=0;i<nr_of_stars;i++,s++)
-						{
-							s->repack(
-#if Q_BYTE_ORDER == Q_BIG_ENDIAN
-								// need for byte_swap on a BE machine means that catalog is LE
-								!byte_swap
-#else
-								// need for byte_swap on a LE machine means that catalog is BE
-								byte_swap
-#endif
-							);
-						}
-					}
 				}
 				file->close();
 			}
@@ -509,13 +490,13 @@ void SpecialZoneArray<Star>::draw(StelPainter* sPainter, int index, bool isInsid
     for (const Star* s=zoneToDraw->getStars();s<lastStar;++s)
     {
 		// Artifical cutoff per magnitude
-		if (s->mag > cutoffMagStep)
+		if (s->getMag() > cutoffMagStep)
 			break;
     
 		// Because of the test above, the star should always be visible from this point.
 		
 		// Array of 2 numbers containing radius and magnitude
-		const RCMag* tmpRcmag = &rcmag_table[s->mag];
+		const RCMag* tmpRcmag = &rcmag_table[s->getMag()];
 		
 		// Get the star position from the array
 		s->getJ2000Pos(zoneToDraw, movementFactor, vf);
@@ -524,12 +505,11 @@ void SpecialZoneArray<Star>::draw(StelPainter* sPainter, int index, bool isInsid
 		// beginning the stars actually outside viewport.
 		if (!isInsideViewport)
 		{
+			vf.normalize();
 			bool isVisible = true;
 			foreach (const SphericalCap& cap, boundingCaps)
 			{
-				// Don't use if (!cap.contains(vf)) here because we don't want to normalize the vector yet, but know
-				// that it's almost normalized, enough for manually computing the intersection avoiding the assert.
-				if (vf[0]*static_cast<float>(cap.n[0])+vf[1]*static_cast<float>(cap.n[1])+vf[2]*static_cast<float>(cap.n[2])<static_cast<float>(cap.d))
+				if (!cap.contains(vf))
 				{
 					isVisible = false;
 					continue;
@@ -539,7 +519,7 @@ void SpecialZoneArray<Star>::draw(StelPainter* sPainter, int index, bool isInsid
 				continue;
 		}
 
-		int extinctedMagIndex = s->mag;
+		int extinctedMagIndex = s->getMag();
 		if (withExtinction)
 		{
 			Vec3f altAz(vf);
@@ -547,16 +527,16 @@ void SpecialZoneArray<Star>::draw(StelPainter* sPainter, int index, bool isInsid
 			core->j2000ToAltAzInPlaceNoRefraction(&altAz);
 			float extMagShift=0.0f;
 			extinction.forward(altAz, &extMagShift);
-			extinctedMagIndex = s->mag + (int)(extMagShift/k);
+			extinctedMagIndex = s->getMag() + (int)(extMagShift/k);
 			if (extinctedMagIndex >= cutoffMagStep) // i.e., if extincted it is dimmer than cutoff, so remove
 				continue;
 			tmpRcmag = &rcmag_table[extinctedMagIndex];
 		}
 	
-		if (drawer->drawPointSource(sPainter, vf, *tmpRcmag, s->bV, !isInsideViewport) && s->hasName() && extinctedMagIndex < maxMagStarName && s->hasComponentID()<=1)
+		if (drawer->drawPointSource(sPainter, vf, *tmpRcmag, s->getBVIndex(), !isInsideViewport) && s->hasName() && extinctedMagIndex < maxMagStarName && s->hasComponentID()<=1)
 		{
 			const float offset = tmpRcmag->radius*0.7f;
-			const Vec3f colorr = StelSkyDrawer::indexToColor(s->bV)*0.75f;
+			const Vec3f colorr = StelSkyDrawer::indexToColor(s->getBVIndex())*0.75f;
 			sPainter->setColor(colorr[0], colorr[1], colorr[2],names_brightness);
 			sPainter->drawText(Vec3d(vf[0], vf[1], vf[2]), s->getNameI18n(), 0, offset, offset, false);
 		}

@@ -90,6 +90,7 @@ StelPluginInfo TextUserInterfaceStelPluginInterface::getPluginInfo() const
 	info.authors = "Matthew Gates";
 	info.contact = "http://porpoisehead.net/";
 	info.description = N_("Plugin implementation of 0.9.x series Text User Interface (TUI), used in planetarium systems");
+	info.version = TUI_PLUGIN_VERSION;
 	return info;
 }
 
@@ -98,7 +99,12 @@ StelPluginInfo TextUserInterfaceStelPluginInterface::getPluginInfo() const
  Constructor
 *************************************************************************/
 TextUserInterface::TextUserInterface()
-	: dummyDialog(this), tuiActive(false), currentNode(NULL)
+	: dummyDialog(this)
+	, tuiActive(false)
+	, tuiDateTime(false)
+	, tuiObjInfo(false)
+	, tuiGravityUi(false)
+	, currentNode(NULL)
 {
 	setObjectName("TextUserInterface");	
 }
@@ -361,10 +367,10 @@ void TextUserInterface::init()
 					 SLOT(setColorGalacticGrid(Vec3f)),
 					 gridLinesMgr->getColorGalacticGrid(),
 					 m5, m5_18);
-	TuiNode* m5_20 = new TuiNodeColor(N_("Galactic plane line"),
+	TuiNode* m5_20 = new TuiNodeColor(N_("Galactic equator line"),
 					 gridLinesMgr,
-					 SLOT(setColorGalacticPlaneLine(Vec3f)),
-					 gridLinesMgr->getColorGalacticPlaneLine(),
+					 SLOT(setColorGalacticEquatorLine(Vec3f)),
+					 gridLinesMgr->getColorGalacticEquatorLine(),
 					 m5, m5_19);
 
 	m5_1->setNextNode(m5_2);
@@ -517,12 +523,15 @@ void TextUserInterface::draw(StelCore* core)
 	bool fovMaskDisk = false;
 
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-	if (gui->getVisible())
+	if (gui!=NULL)
 	{
-		QGraphicsItem* bottomBar = dynamic_cast<QGraphicsItem*>(gui->getButtonBar());
-		LeftStelBar* sideBar = gui->getWindowsButtonBar();			
-		x = (sideBar) ? sideBar->boundingRectNoHelpLabel().right() : 50;
-		y = (bottomBar) ? bottomBar->boundingRect().height() : 50;
+		if (gui->getVisible())
+		{
+			QGraphicsItem* bottomBar = dynamic_cast<QGraphicsItem*>(gui->getButtonBar());
+			LeftStelBar* sideBar = gui->getWindowsButtonBar();
+			x = (sideBar) ? sideBar->boundingRectNoHelpLabel().right() : 50;
+			y = (bottomBar) ? bottomBar->boundingRect().height() : 50;
+		}
 	}
 
 	// Alternate x,y for Disk viewport
@@ -532,8 +541,8 @@ void TextUserInterface::draw(StelCore* core)
 		StelProjector::StelProjectorParams projParams = core->getCurrentStelProjectorParams();
 		xVc = projParams.viewportCenter[0];
 		yVc = projParams.viewportCenter[1];
-		fovOffsetX = projParams.viewportFovDiameter*std::sin(20)/2;
-		fovOffsetY = projParams.viewportFovDiameter*std::cos(20)/2;
+		fovOffsetX = projParams.viewportFovDiameter*std::sin(20.f)/2;
+		fovOffsetY = projParams.viewportFovDiameter*std::cos(20.f)/2;
 	}
 	else 
 	{
@@ -829,5 +838,5 @@ void TextUserInterface::setBortleScale(int bortle)
 	LandscapeMgr* landscapeMgr = GETSTELMODULE(LandscapeMgr);
 	StelSkyDrawer* skyDrawer = StelApp::getInstance().getCore()->getSkyDrawer();
 	landscapeMgr->setAtmosphereBortleLightPollution(bortle);
-	skyDrawer->setBortleScale(bortle);
+	skyDrawer->setBortleScaleIndex(bortle);
 }

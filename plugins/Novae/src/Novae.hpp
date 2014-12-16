@@ -116,6 +116,7 @@ public:
 	//! @return a list of matching object name by order of relevance, or an empty list if nothing match
 	virtual QStringList listMatchingObjects(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false) const;
 	virtual QStringList listAllObjects(bool inEnglish) const;
+	virtual QStringList listAllObjectsByType(const QString& objType, bool inEnglish) const { Q_UNUSED(objType) Q_UNUSED(inEnglish) return QStringList(); }
 	virtual QString getName() const { return "Bright Novae"; }
 
 	//! get a nova object by identifier
@@ -157,6 +158,15 @@ public:
 	//! Get the current updateState
 	UpdateState getUpdateState(void) {return updateState;}
 
+	//! Get list of novae
+	QString getNovaeList();
+
+	//! Get lower limit of  brightness for displayed novae
+	float getLowerLimitBrightness();
+
+	//! Get count of novae from catalog
+	int getCountNovae(void) {return NovaCnt;}
+
 signals:
 	//! @param state the new update state.
 	void updateStateChanged(Novae::UpdateState state);
@@ -179,7 +189,7 @@ private:
 	// Font used for displaying our text
 	QFont font;
 
-	// if existing, delete Satellites section in main config.ini, then create with default values
+	// if existing, delete Novae section in main config.ini, then create with default values
 	void restoreDefaultConfigIni(void);
 
 	//! Replace the JSON file with the default from the compiled-in resource
@@ -208,6 +218,8 @@ private:
 	void setNovaeMap(const QVariantMap& map);
 
 	QString novaeJsonPath;
+
+	int NovaCnt;
 
 	StelTextureSP texPointer;
 	QList<NovaP> nova;

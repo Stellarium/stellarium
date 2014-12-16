@@ -36,9 +36,12 @@
 #include <QTemporaryFile>
 #include <QDir>
 
-SatellitesImportDialog::SatellitesImportDialog() :
-    downloadMgr(0),
-    progressBar(0)
+SatellitesImportDialog::SatellitesImportDialog()
+	: isGettingData(false)
+	, numberDownloadsComplete(0)
+	, downloadMgr(0)
+	, progressBar(0)
+	, filterProxyModel(NULL)
 {
 	ui = new Ui_satellitesImportDialog;
 	newSatellitesModel = new QStandardItemModel(this);
@@ -81,6 +84,13 @@ void SatellitesImportDialog::setVisible(bool visible)
 void SatellitesImportDialog::createDialogContent()
 {
 	ui->setupUi(dialog);
+
+#ifdef Q_OS_WIN
+	//Kinetic scrolling for tablet pc and pc
+	QList<QWidget *> addscroll;
+	addscroll << ui->listView;
+	installKineticScrolling(addscroll);
+#endif
 	
 	connect(ui->closeStelWindow, SIGNAL(clicked()),
 	        this, SLOT(close()));

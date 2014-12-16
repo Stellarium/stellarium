@@ -37,7 +37,15 @@
 #include <QList>
 
 Supernova::Supernova(const QVariantMap& map)
-		: initialized(false)
+		: initialized(false),
+		  designation(""),
+		  sntype(""),
+		  maxMagnitude(21.),
+		  peakJD(0.),
+		  snra(0.),
+		  snde(0.),
+		  note(""),
+		  distance(0.)
 {
 	// return initialized if the mandatory fields are not present
 	if (!map.contains("designation"))
@@ -75,17 +83,12 @@ QVariantMap Supernova::getMap(void)
 	return map;
 }
 
-float Supernova::getSelectPriority(const StelCore* core) const
-{
-	//Same as StarWrapper::getSelectPriority()
-        return getVMagnitude(core);
-}
-
 QString Supernova::getNameI18n(void) const
 {
 	QString name = designation;
+	const StelTranslator& trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
 	if (note.size()!=0)
-		name = QString("%1 (%2)").arg(name).arg(q_(note));
+		name = QString("%1 (%2)").arg(name).arg(trans.qtranslate(note));
 
 	return name;
 }
@@ -94,7 +97,7 @@ QString Supernova::getEnglishName(void) const
 {
 	QString name = designation;
 	if (note.size()!=0)
-		name = QString("%1 (%2)").arg(name).arg(note);
+		name = QString("%1 (%2)").arg(name).arg(note);	
 
 	return name;
 }
@@ -106,29 +109,29 @@ QString Supernova::getMaxBrightnessDate(const double JD) const
 
 QString Supernova::getInfoString(const StelCore* core, const InfoStringGroup& flags) const
 {
-	QString str;
+	float maglimit = 21.f;
+	QString str, mag = "--", mage = "--";
 	QTextStream oss(&str);
-	double mag = getVMagnitude(core);
+	if (getVMagnitude(core) <= maglimit)
+	{
+		mag  = QString::number(getVMagnitude(core), 'f', 2);
+		mage = QString::number(getVMagnitudeWithExtinction(core), 'f', 2);
+	}
 
 	if (flags&Name)
 	{
-		oss << "<h2>" << designation;
-		if (note.size()!=0)
-		    oss << " (" << q_(note) << ")";
-		
-		oss << "</h2>";
+		oss << "<h2>" << getNameI18n() << "</h2>";
 	}
 
-	if (flags&Extra)
+	if (flags&ObjectType)
 		oss << q_("Type: <b>%1</b>").arg(q_("supernova")) << "<br />";
 
-	if (flags&Magnitude && mag <= core->getSkyDrawer()->getLimitMagnitude())
+	if (flags&Magnitude)
 	{
-	    if (core->getSkyDrawer()->getFlagHasAtmosphere())
-		oss << q_("Magnitude: <b>%1</b> (extincted to: <b>%2</b>)").arg(QString::number(getVMagnitude(core), 'f', 2),
-									       QString::number(getVMagnitudeWithExtinction(core), 'f', 2)) << "<br>";
+	    if (core->getSkyDrawer()->getFlagHasAtmosphere() && getVMagnitude(core) <= maglimit)
+		oss << q_("Magnitude: <b>%1</b> (extincted to: <b>%2</b>)").arg(mag, mage) << "<br>";
 	    else
-		oss << q_("Magnitude: <b>%1</b>").arg(mag, 0, 'f', 2) << "<br>";
+		oss << q_("Magnitude: <b>%1</b>").arg(mag) << "<br>";
 	}
 
 	// Ra/Dec etc.
@@ -139,7 +142,10 @@ QString Supernova::getInfoString(const StelCore* core, const InfoStringGroup& fl
 		oss << q_("Type of supernova: %1").arg(sntype) << "<br>";
 		oss << q_("Maximum brightness: %1").arg(getMaxBrightnessDate(peakJD)) << "<br>";
 		if (distance>0)
-			oss << q_("Distance: %1 Light Years").arg(distance*1000) << "<br>";
+		{
+			//TRANSLATORS: Unit of measure for distance - Light Years
+			oss << q_("Distance: %1 ly").arg(distance*1000) << "<br>";
+		}
 	}
 
 	postProcessInfoString(str, flags);
@@ -155,7 +161,7 @@ float Supernova::getVMagnitude(const StelCore* core) const
 {
 	double vmag = 20;
 	double currentJD = core->getJDay();
-	double deltaJD = std::abs(peakJD-currentJD);
+	double deltaJD = qAbs(peakJD-currentJD);
 
 	// Use supernova light curve model from here - http://www.astronet.ru/db/msg/1188703
 

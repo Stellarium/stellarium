@@ -20,15 +20,6 @@
 
 // class used to manage groups of Nebulas
 
-#include <algorithm>
-#include <QDebug>
-#include <QFile>
-#include <QSettings>
-#include <QString>
-#include <QStringList>
-#include <QRegExp>
-#include <QDir>
-
 #include "StelApp.hpp"
 #include "NebulaMgr.hpp"
 #include "Nebula.hpp"
@@ -48,6 +39,15 @@
 #include "RefractionExtinction.hpp"
 #include "StelActionMgr.hpp"
 
+#include <algorithm>
+#include <QDebug>
+#include <QFile>
+#include <QSettings>
+#include <QString>
+#include <QStringList>
+#include <QRegExp>
+#include <QDir>
+
 void NebulaMgr::setLabelsColor(const Vec3f& c) {Nebula::labelColor = c;}
 const Vec3f &NebulaMgr::getLabelsColor(void) const {return Nebula::labelColor;}
 void NebulaMgr::setCirclesColor(const Vec3f& c) {Nebula::circleColor = c;}
@@ -56,7 +56,10 @@ void NebulaMgr::setCircleScale(float scale) {Nebula::circleScale = scale;}
 float NebulaMgr::getCircleScale(void) const {return Nebula::circleScale;}
 
 
-NebulaMgr::NebulaMgr(void) : nebGrid(200)
+NebulaMgr::NebulaMgr(void)
+	: nebGrid(200),
+	  hintsAmount(0),
+	  labelsAmount(0)
 {
 	setObjectName("NebulaMgr");
 }
@@ -97,7 +100,7 @@ void NebulaMgr::init()
 	QSettings* conf = StelApp::getInstance().getSettings();
 	Q_ASSERT(conf);
 
-	nebulaFont.setPixelSize(StelApp::getInstance().getSettings()->value("gui/base_font_size", 13).toInt());
+	nebulaFont.setPixelSize(StelApp::getInstance().getBaseFontSize());
 	Nebula::texCircle			= StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/neb.png");		// Load circle texture
 	Nebula::texGalaxy			= StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/neb_gal.png");	// Load ellipse texture
 	Nebula::texOpenCluster			= StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/neb_ocl.png");	// Load open cluster marker texture
@@ -152,6 +155,11 @@ struct DrawNebulaFuncObject
 	bool checkMaxMagHints;
 };
 
+float NebulaMgr::computeMaxMagHint(const StelSkyDrawer* skyDrawer) const
+{
+	return skyDrawer->getLimitMagnitude()*1.2f-2.f+(hintsAmount *1.2f)-2.f;
+}
+
 // Draw all the Nebulae
 void NebulaMgr::draw(StelCore* core)
 {
@@ -171,7 +179,7 @@ void NebulaMgr::draw(StelCore* core)
 	const SphericalRegionP& p = prj->getViewportConvexPolygon(margin, margin);
 
 	// Print all the nebulae of all the selected zones
-	float maxMagHints  = skyDrawer->getLimitMagnitude()*1.2f-2.f+(hintsAmount *1.2f)-2.f;
+	float maxMagHints  = computeMaxMagHint(skyDrawer);
 	float maxMagLabels = skyDrawer->getLimitMagnitude()     -2.f+(labelsAmount*1.2f)-2.f;
 	sPainter.setFont(nebulaFont);
 	DrawNebulaFuncObject func(maxMagHints, maxMagLabels, &sPainter, core, hintsFader.getInterstate()>0.0001);
@@ -185,7 +193,7 @@ void NebulaMgr::drawPointer(const StelCore* core, StelPainter& sPainter)
 {
 	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
 
-	const QList<StelObjectP> newSelected = GETSTELMODULE(StelObjectMgr)->getSelectedObject("Nebula");
+	const QList<StelObjectP> newSelected = GETSTELMODULE(StelObjectMgr)->getSelectedObject("Nebula");	
 	if (!newSelected.empty())
 	{
 		const StelObjectP obj = newSelected[0];
@@ -870,6 +878,88 @@ QStringList NebulaMgr::listMatchingObjects(const QString& objPrefix, int maxNbIt
 		if (result.size()>maxNbItem) result.erase(result.begin()+maxNbItem, result.end());
 	}
 
+	return result;
+}
+
+QStringList NebulaMgr::listAllObjects(bool inEnglish) const
+{
+	QStringList result;
+	foreach(const NebulaP& n, nebArray)
+	{		
+		if (!n->getEnglishName().isEmpty())
+		{
+			if (inEnglish)
+				result << n->getEnglishName();
+			else
+				result << n->getNameI18n();
+		}
+	}
+	return result;
+}
+
+QStringList NebulaMgr::listAllObjectsByType(const QString &objType, bool inEnglish) const
+{
+	QStringList result;
+	int type = objType.toInt();
+	switch (type)
+	{
+		case 0: // Bright galaxies?
+			foreach(const NebulaP& n, nebArray)
+			{
+				if (n->nType==type && n->mag<=10.)
+				{
+					if (!n->getEnglishName().isEmpty())
+					{
+						if (inEnglish)
+							result << n->getEnglishName();
+						else
+							result << n->getNameI18n();
+					}
+					else if (n->NGC_nb>0)
+						result << QString("NGC %1").arg(n->NGC_nb);
+					else
+						result << QString("IC %1").arg(n->IC_nb);
+
+				}
+			}
+			break;
+		case 10: // Messier Catalogue?
+			foreach(const NebulaP& n, nebArray)
+			{
+				if (n->M_nb>0)
+					result << QString("M%1").arg(n->M_nb);
+			}
+			break;
+		case 11: // Caldwell Catalogue?
+			foreach(const NebulaP& n, nebArray)
+			{
+				if (n->C_nb>0)
+					result << QString("C%1").arg(n->C_nb);
+			}
+			break;
+		default:
+			foreach(const NebulaP& n, nebArray)
+			{
+				if (n->nType==type)
+				{
+					if (!n->getEnglishName().isEmpty())
+					{
+						if (inEnglish)
+							result << n->getEnglishName();
+						else
+							result << n->getNameI18n();
+					}
+					else if (n->NGC_nb>0)
+						result << QString("NGC %1").arg(n->NGC_nb);
+					else
+						result << QString("IC %1").arg(n->IC_nb);
+
+				}
+			}
+			break;
+	}
+
+	result.removeDuplicates();
 	return result;
 }
 

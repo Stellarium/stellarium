@@ -16,9 +16,9 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
-#include <cstdlib>
-#include "StelTextureMgr.hpp"
+
 #include "StelTexture.hpp"
+#include "StelTextureMgr.hpp"
 #include "glues.h"
 #include "StelFileMgr.hpp"
 #include "StelApp.hpp"
@@ -35,11 +35,12 @@
 #include <QFuture>
 #include <QtConcurrent>
 
+#include <cstdlib>
+
 StelTexture::StelTexture() : networkReply(NULL), loader(NULL), errorOccured(false), id(0), avgLuminance(-1.f)
 {
 	width = -1;
 	height = -1;
-	initializeOpenGLFunctions();
 }
 
 StelTexture::~StelTexture()
@@ -48,7 +49,7 @@ StelTexture::~StelTexture()
 	{
 		if (glIsTexture(id)==GL_FALSE)
 		{
-			qDebug() << "WARNING: in StelTexture::~StelTexture() tried to delete invalid texture with ID=" << id << " Current GL ERROR status is " << glGetError();
+			qDebug() << "WARNING: in StelTexture::~StelTexture() tried to delete invalid texture with ID=" << id << "Current GL ERROR status is" << glGetError() << "(" << getGLErrorText(glGetError()) << ")";
 		}
 		else
 		{
@@ -80,7 +81,7 @@ void StelTexture::reportError(const QString& aerrorMessage)
 
 StelTexture::GLData StelTexture::imageToGLData(const QImage &image)
 {
-	GLData ret;
+	GLData ret = GLData();
 	if (image.isNull())
 		return ret;
 	ret.width = image.width();
@@ -106,12 +107,12 @@ StelTexture::GLData StelTexture::loadFromData(const QByteArray& data)
  Bind the texture so that it can be used for openGL drawing (calls glBindTexture)
  *************************************************************************/
 
-bool StelTexture::bind()
+bool StelTexture::bind(int slot)
 {
 	if (id != 0)
 	{
 		// The texture is already fully loaded, just bind and return true;
-		glActiveTexture(GL_TEXTURE0);
+		glActiveTexture(GL_TEXTURE0 + slot);
 		glBindTexture(GL_TEXTURE_2D, id);
 		return true;
 	}

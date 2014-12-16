@@ -30,6 +30,8 @@ class StelObjectMgr;
 class StelLocaleMgr;
 class StelModuleMgr;
 class StelSkyCultureMgr;
+class StelViewportEffect;
+class QOpenGLFramebufferObject;
 class QSettings;
 class QNetworkAccessManager;
 class QNetworkReply;
@@ -146,14 +148,9 @@ public:
 	void update(double deltaTime);
 
 	//! Draw all registered StelModule in the order defined by the order lists.
-	//! @return the max squared distance in pixels that any object has travelled since the last update.
+	// 2014-11: OLD COMMENT? What does a void return?
+	// @return the max squared distance in pixels that any object has travelled since the last update.
 	void draw();
-
-	//! Iterate through the drawing sequence.
-	//! This allow us to split the slow drawing operation into small parts,
-	//! we can then decide to pause the painting for this frame and used the cached image instead.
-	//! @return true if we should continue drawing (by calling the method again)
-	bool drawPartial();
 
 	//! Call this when the size of the GL window has changed.
 	void glWindowHasBeenResized(float x, float y, float w, float h);
@@ -168,6 +165,10 @@ public:
 	//! computer screen with 96 pixel per inch (reference for tuning sizes).
 	float getGlobalScalingRatio() const {return globalScalingRatio;}
 	void setGlobalScalingRatio(float r) {globalScalingRatio=r;}
+
+	//! Get the size of font
+	int getBaseFontSize() const { return baseFontSize; }
+	void setBaseFontSize(int s) { baseFontSize=s; }
 	
 	//! Get the GUI instance implementing the abstract GUI interface.
 	StelGuiBase* getGui() const {return stelGui;}
@@ -190,6 +191,12 @@ public:
 	//! The StelApp instance remains the owner of the controller.
 	StelProgressController* addProgressBar();
 	void removeProgressBar(StelProgressController* p);
+
+	//! Define the type of viewport effect to use
+	//! @param effectName must be one of 'none', 'framebufferOnly', 'sphericMirrorDistorter'
+	void setViewportEffect(const QString& effectName);
+	//! Get the type of viewport effect currently used
+	QString getViewportEffect() const;
 	
 	///////////////////////////////////////////////////////////////////////////
 	// Scriptable methods
@@ -210,7 +217,9 @@ public slots:
 	//! Report that a download occured. This is used for statistics purposes.
 	//! Connect this slot to QNetworkAccessManager::finished() slot to obtain statistics at the end of the program.
 	void reportFileDownloadFinished(QNetworkReply* reply);
-	
+
+	//! do some cleanup and call QCoreApplication::exit(0)
+	void quit();
 signals:
 	void visionNightModeChanged(bool);
 	void colorSchemeChanged(const QString&);
@@ -221,6 +230,8 @@ signals:
 	void progressBarAdded(const StelProgressController*);
 	//! Called just before a progress bar is removed.
 	void progressBarRemoved(const StelProgressController*);
+	//! Called just before we exit Qt mainloop.
+	void aboutToQuit();
 
 private:
 
@@ -229,11 +240,16 @@ private:
 	//! Handle mouse wheel.
 	void handleWheel(class QWheelEvent* event);
 	//! Handle mouse move.
-	void handleMove(int x, int y, Qt::MouseButtons b);
+	void handleMove(float x, float y, Qt::MouseButtons b);
 	//! Handle key press and release.
 	void handleKeys(class QKeyEvent* event);
+	//! Handle pinch on multi touch devices.
+	void handlePinch(qreal scale, bool started);
 
 	void initScriptMgr(QSettings* conf);
+
+	void prepareRenderBuffer();
+	void applyRenderBuffer();
 
 	// The StelApp singleton
 	static StelApp* singleton;
@@ -298,13 +314,16 @@ private:
 	// Used to collect wheel events
 	QTimer * wheelEventTimer;
 
+	// Accumulated horizontal and vertical wheel event deltas
+	int wheelEventDelta[2];
+
 	float fps;
 	int frame;
 	double timefr, timeBase;		// Used for fps counter
 
 	//! Define whether we are in night vision mode
 	bool flagNightVision;
-	
+
 	QSettings* confSettings;
 
 	// Define whether the StelApp instance has completed initialization
@@ -327,10 +346,14 @@ private:
 	//! Store the summed size of all downloaded files read from the cache in bytes.
 	qint64 totalUsedCacheSize;
 
-	//! The state of the drawing sequence
-	int drawState;
-	
 	QList<StelProgressController*> progressControllers;
+
+	int baseFontSize;
+
+	// Framebuffer object used for viewport effects.
+	QOpenGLFramebufferObject* renderBuffer;
+
+	StelViewportEffect* viewportEffect;
 };
 
 #endif // _STELAPP_HPP_

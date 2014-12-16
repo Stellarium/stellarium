@@ -23,7 +23,6 @@
 #include "StelObject.hpp"
 #include "StelFader.hpp"
 #include "StelTextureTypes.hpp"
-#include "StelPainter.hpp"
 #include "Exoplanet.hpp"
 #include <QFont>
 #include <QVariantMap>
@@ -37,7 +36,6 @@ class QSettings;
 class QTimer;
 class ExoplanetsDialog;
 class StelPainter;
-class QPixmap;
 class StelButton;
 
 typedef QSharedPointer<Exoplanet> ExoplanetP;
@@ -102,6 +100,7 @@ public:
 	virtual QStringList listMatchingObjects(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false) const;
 
 	virtual QStringList listAllObjects(bool inEnglish) const;
+	virtual QStringList listAllObjectsByType(const QString& objType, bool inEnglish) const { Q_UNUSED(objType) Q_UNUSED(inEnglish) return QStringList(); }
 
 	virtual QString getName() const { return "Exoplanets"; }
 
@@ -119,10 +118,10 @@ public:
 
 	//! Read (or re-read) settings from the main config file.  This will be called from init and also
 	//! when restoring defaults (i.e. from the configuration dialog / restore defaults button).
-	void readSettingsFromConfig(void);
+	void loadConfiguration(void);
 
 	//! Save the settings to the main configuration file.
-	void saveSettingsToConfig(void);
+	void saveConfiguration(void);
 
 	//! get whether or not the plugin will try to update TLE data from the internet
 	//! @return true if updates are set to be done, false otherwise
@@ -131,11 +130,17 @@ public:
 	//! @param b if true, updates will be enabled, else they will be disabled
 	void setUpdatesEnabled(bool b) {updatesEnabled=b;}
 
-	bool getDisplayMode(void) {return distributionEnabled;}
-	void setDisplayMode(bool b) {distributionEnabled=b;}
+	bool getDisplayMode(void);
+	void setDisplayMode(bool b);
 
-	bool getTimelineMode(void) {return timelineEnabled;}
-	void setTimelineMode(bool b) {timelineEnabled=b;}
+	bool getTimelineMode(void);
+	void setTimelineMode(bool b);
+
+	bool getHabitableMode(void);
+	void setHabitableMode(bool b);
+
+	QString getMarkerColor(bool habitable);
+	void setMarkerColor(QString c, bool h);
 
 	void setEnableAtStartup(bool b) { enableAtStartup=b; }
 	bool getEnableAtStartup(void) { return enableAtStartup; }
@@ -152,6 +157,24 @@ public:
 
 	//! Get the current updateState
 	UpdateState getUpdateState(void) {return updateState;}
+
+	//! Get count of planetary systems from catalog
+	int getCountPlanetarySystems(void) const
+	{
+		return PSCount;
+	}
+
+	//! Get count of exoplanets from catalog
+	int getCountAllExoplanets(void) const
+	{
+		return EPCountAll;
+	}
+
+	//! Get count of potentially habitable exoplanets from catalog
+	int getCountHabitableExoplanets(void) const
+	{
+		return EPCountPH;
+	}
 
 signals:
 	//! @param state the new update state.
@@ -181,7 +204,7 @@ private:
 	QFont font;
 
 	// if existing, delete Satellites section in main config.ini, then create with default values
-	void restoreDefaultConfigIni(void);
+	void resetConfiguration(void);
 
 	// Upgrade config.ini: rename old key settings to new
 	void upgradeConfigIni(void);
@@ -211,7 +234,17 @@ private:
 	//! set items for list of struct from data map
 	void setEPMap(const QVariantMap& map);
 
+	//! A fake method for strings marked for translation.
+	//! Use it instead of translations.h for N_() strings, except perhaps for
+	//! keyboard action descriptions. (It's better for them to be in a single
+	//! place.)
+	static void translations();
+
 	QString jsonCatalogPath;
+
+	int PSCount;
+	int EPCountAll;
+	int EPCountPH;
 
 	StelTextureSP texPointer;
 	QList<ExoplanetP> ep;
@@ -225,9 +258,7 @@ private:
 	QList<int> messageIDs;
 	bool updatesEnabled;
 	QDateTime lastUpdate;
-	int updateFrequencyHours;
-	bool distributionEnabled;
-	bool timelineEnabled;
+	int updateFrequencyHours;	
 	bool enableAtStartup;
 
 	QSettings* conf;
@@ -236,9 +267,6 @@ private:
 	ExoplanetsDialog* exoplanetsConfigDialog;
 	bool flagShowExoplanets;
 	bool flagShowExoplanetsButton;
-	QPixmap* OnIcon;
-	QPixmap* OffIcon;
-	QPixmap* GlowIcon;
 	StelButton* toolbarButton;
 	class StelProgressController* progressBar;
 

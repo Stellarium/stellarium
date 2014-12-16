@@ -37,6 +37,7 @@
 #include "NebulaMgr.hpp"
 #include "MeteorMgr.hpp"
 #include "MilkyWay.hpp"
+#include "ZodiacalLight.hpp"
 #include "ConstellationMgr.hpp"
 #include "StelStyle.hpp"
 #include "StelSkyLayerMgr.hpp"
@@ -52,6 +53,7 @@
 #include <QSettings>
 #include <QTimer>
 #include <QDialog>
+#include <QStringList>
 
 ViewDialog::ViewDialog(QObject* parent) : StelDialog(parent)
 {
@@ -75,7 +77,7 @@ void ViewDialog::retranslate()
 	if (dialog)
 	{
 		ui->retranslateUi(dialog);
-		setZhrFromControls();
+		updateZhrDescription();
 		populateLists();
 
 		//Hack to shrink the tabs to optimal size after language change
@@ -101,6 +103,15 @@ void ViewDialog::connectCheckBox(QCheckBox* checkBox, const QString& actionId)
 	connect(checkBox, SIGNAL(toggled(bool)), action, SLOT(setChecked(bool)));
 }
 
+void ViewDialog::connectGroupBox(QGroupBox* groupBox, const QString& actionId)
+{
+	StelAction* action = StelApp::getInstance().getStelActionManager()->findAction(actionId);
+	Q_ASSERT(action);
+	groupBox->setChecked(action->isChecked());
+	connect(action, SIGNAL(toggled(bool)), groupBox, SLOT(setChecked(bool)));
+	connect(groupBox, SIGNAL(toggled(bool)), action, SLOT(setChecked(bool)));
+}
+
 void ViewDialog::createDialogContent()
 {
 	ui->setupUi(dialog);
@@ -111,6 +122,13 @@ void ViewDialog::createDialogContent()
 	ui->stackListWidget->setCurrentRow(0);
 
 	//ui->viewTabWidget->removeTab(4);
+
+#ifdef Q_OS_WIN
+	//Kinetic scrolling for tablet pc and pc
+	QList<QWidget *> addscroll;
+	addscroll << ui->projectionListWidget << ui->culturesListWidget << ui->skyCultureTextBrowser << ui->landscapesListWidget;
+	StelDialog::installKineticScrolling(addscroll);
+#endif
 
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 
@@ -134,6 +152,10 @@ void ViewDialog::createDialogContent()
 	MilkyWay* mw = GETSTELMODULE(MilkyWay);
 	ui->milkyWayBrightnessDoubleSpinBox->setValue(mw->getIntensity());
 	connect(ui->milkyWayBrightnessDoubleSpinBox, SIGNAL(valueChanged(double)), mw, SLOT(setIntensity(double)));
+
+	ZodiacalLight* zl = GETSTELMODULE(ZodiacalLight);
+	ui->zodiacalLightBrightnessDoubleSpinBox->setValue(zl->getIntensity());
+	connect(ui->zodiacalLightBrightnessDoubleSpinBox, SIGNAL(valueChanged(double)), zl, SLOT(setIntensity(double)));
 
 	ui->starTwinkleAmountDoubleSpinBox->setValue(StelApp::getInstance().getCore()->getSkyDrawer()->getTwinkleAmount());
 	connect(ui->starTwinkleAmountDoubleSpinBox, SIGNAL(valueChanged(double)), StelApp::getInstance().getCore()->getSkyDrawer(), SLOT(setTwinkleAmount(double)));
@@ -169,6 +191,8 @@ void ViewDialog::createDialogContent()
 
 	ui->planetScaleMoonCheckBox->setChecked(ssmgr->getFlagMoonScale());
 	connect(ui->planetScaleMoonCheckBox, SIGNAL(toggled(bool)), ssmgr, SLOT(setFlagMoonScale(bool)));
+	ui->moonScaleFactor->setValue(ssmgr->getMoonScale());
+	connect(ui->moonScaleFactor, SIGNAL(valueChanged(double)), ssmgr, SLOT(setMoonScale(double)));
 
 	ui->planetOrbitCheckBox->setChecked(ssmgr->getFlagOrbits());
 	connect(ui->planetOrbitCheckBox, SIGNAL(toggled(bool)), ssmgr, SLOT(setFlagOrbits(bool)));
@@ -179,21 +203,15 @@ void ViewDialog::createDialogContent()
 	// Shooting stars section
 	MeteorMgr* mmgr = GETSTELMODULE(MeteorMgr);
 	Q_ASSERT(mmgr);
-	updateZhrControls(mmgr->getZHR());
-	connect(mmgr, SIGNAL(zhrChanged(int)),
-					this, SLOT(updateZhrControls(int)));
-	connect(ui->zhrNone, SIGNAL(clicked()), this, SLOT(setZhrFromControls()));
-	connect(ui->zhr10, SIGNAL(clicked()), this, SLOT(setZhrFromControls()));
-	connect(ui->zhr80, SIGNAL(clicked()), this, SLOT(setZhrFromControls()));
-	connect(ui->zhr1000, SIGNAL(clicked()), this, SLOT(setZhrFromControls()));
-	connect(ui->zhr10000, SIGNAL(clicked()), this, SLOT(setZhrFromControls()));
-	connect(ui->zhr144000, SIGNAL(clicked()), this, SLOT(setZhrFromControls()));
+
+	ui->zhrSpinBox->setValue(mmgr->getZHR());
+	connect(mmgr, SIGNAL(zhrChanged(int)), this, SLOT(updateZhrControls(int)));
+	connect(ui->zhrSpinBox, SIGNAL(valueChanged(int)), this, SLOT(setZhrFromControls(int)));
+	updateZhrDescription();
 
 	// Labels section
 	StarMgr* smgr = GETSTELMODULE(StarMgr);
-	ui->starLabelCheckBox->setChecked(smgr->getFlagLabels());
-	connect(ui->starLabelCheckBox, SIGNAL(toggled(bool)), smgr, SLOT(setFlagLabels(bool)));
-
+	connectCheckBox(ui->starLabelCheckBox, "actionShow_Stars_Labels");
 	connectCheckBox(ui->nebulaLabelCheckBox, "actionShow_Nebulas");
 	connectCheckBox(ui->planetLabelCheckBox, "actionShow_Planets_Labels");
 
@@ -210,32 +228,34 @@ void ViewDialog::createDialogContent()
 	LandscapeMgr* lmgr = GETSTELMODULE(LandscapeMgr);
 	connectCheckBox(ui->showGroundCheckBox, "actionShow_Ground");
 	connectCheckBox(ui->showFogCheckBox, "actionShow_Fog");
-	connectCheckBox(ui->showAtmosphereCheckBox, "actionShow_Atmosphere");
+	connectGroupBox(ui->atmosphereGroupBox, "actionShow_Atmosphere");
+	connectCheckBox(ui->landscapeIlluminationCheckBox, "actionShow_LandscapeIllumination");
 
 	ui->landscapePositionCheckBox->setChecked(lmgr->getFlagLandscapeSetsLocation());
 	connect(ui->landscapePositionCheckBox, SIGNAL(toggled(bool)), lmgr, SLOT(setFlagLandscapeSetsLocation(bool)));
 
-	ui->landscapeBrightnessCheckBox->setChecked(lmgr->getFlagLandscapeNightBrightness());
-	connect(ui->landscapeBrightnessCheckBox, SIGNAL(toggled(bool)), lmgr, SLOT(setFlagLandscapeNightBrightness(bool)));
+	ui->landscapeBrightnessCheckBox->setChecked(lmgr->getFlagLandscapeUseMinimalBrightness());
+	connect(ui->landscapeBrightnessCheckBox, SIGNAL(toggled(bool)), this, SLOT(setFlagLandscapeUseMinimalBrightness(bool)));
+	ui->landscapeBrightnessSpinBox->setValue(lmgr->getDefaultMinimalBrightness());
+	connect(ui->landscapeBrightnessSpinBox, SIGNAL(valueChanged(double)), lmgr, SLOT(setDefaultMinimalBrightness(double)));
+	ui->localLandscapeBrightnessCheckBox->setChecked(lmgr->getFlagLandscapeSetsMinimalBrightness());
+	connect(ui->localLandscapeBrightnessCheckBox, SIGNAL(toggled(bool)), lmgr, SLOT(setFlagLandscapeSetsMinimalBrightness(bool)));
+	populateLandscapeMinimalBrightness();
 
-	ui->lightPollutionSpinBox->setValue(StelApp::getInstance().getCore()->getSkyDrawer()->getBortleScale());
+	// Light pollution
+	populateLightPollution();
+	ui->useLocationDataCheckBox->setChecked(lmgr->getFlagUseLightPollutionFromDatabase());
+	connect(ui->useLocationDataCheckBox, SIGNAL(toggled(bool)), lmgr, SLOT(setFlagUseLightPollutionFromDatabase(bool)));
+	connect(lmgr, SIGNAL(lightPollutionUsageChanged(bool)), this, SLOT(populateLightPollution()));
 	connect(ui->lightPollutionSpinBox, SIGNAL(valueChanged(int)), lmgr, SLOT(setAtmosphereBortleLightPollution(int)));
-	connect(ui->lightPollutionSpinBox, SIGNAL(valueChanged(int)), StelApp::getInstance().getCore()->getSkyDrawer(), SLOT(setBortleScale(int)));
+	connect(ui->lightPollutionSpinBox, SIGNAL(valueChanged(int)), StelApp::getInstance().getCore()->getSkyDrawer(), SLOT(setBortleScaleIndex(int)));
+	connect(ui->lightPollutionSpinBox, SIGNAL(valueChanged(int)), this, SLOT(setBortleScaleToolTip(int)));
 
 	ui->autoChangeLandscapesCheckBox->setChecked(lmgr->getFlagLandscapeAutoSelection());
 	connect(ui->autoChangeLandscapesCheckBox, SIGNAL(toggled(bool)), lmgr, SLOT(setFlagLandscapeAutoSelection(bool)));
 	
-	// GZ: changes for refraction
-	//ui->pressureDoubleSpinBox->setValue(StelApp::getInstance().getCore()->getSkyDrawer()->getAtmospherePressure());
-	//connect(ui->pressureDoubleSpinBox, SIGNAL(valueChanged(double)), StelApp::getInstance().getCore()->getSkyDrawer(), SLOT(setAtmospherePressure(double)));
-	//ui->temperatureDoubleSpinBox->setValue(StelApp::getInstance().getCore()->getSkyDrawer()->getAtmosphereTemperature());
-	//connect(ui->temperatureDoubleSpinBox, SIGNAL(valueChanged(double)), StelApp::getInstance().getCore()->getSkyDrawer(), SLOT(setAtmosphereTemperature(double)));
-	//ui->extinctionDoubleSpinBox->setValue(StelApp::getInstance().getCore()->getSkyDrawer()->getExtinctionCoefficient());
-	//connect(ui->extinctionDoubleSpinBox, SIGNAL(valueChanged(double)), StelApp::getInstance().getCore()->getSkyDrawer(), SLOT(setExtinctionCoefficient(double)));
-	//// instead
+	// atmosphere details
 	connect(ui->pushButtonAtmosphereDetails, SIGNAL(clicked()), this, SLOT(showAtmosphereDialog()));
-	// GZ: Done
-
 
 	ui->useAsDefaultLandscapeCheckBox->setChecked(lmgr->getCurrentLandscapeID()==lmgr->getDefaultLandscapeID());
 	ui->useAsDefaultLandscapeCheckBox->setEnabled(lmgr->getCurrentLandscapeID()!=lmgr->getDefaultLandscapeID());
@@ -251,7 +271,7 @@ void ViewDialog::createDialogContent()
 	connectCheckBox(ui->showHorizonLineCheckBox, "actionShow_Horizon_Line");
 	connectCheckBox(ui->showEquatorialGridCheckBox, "actionShow_Equatorial_Grid");
 	connectCheckBox(ui->showGalacticGridCheckBox, "actionShow_Galactic_Grid");
-	connectCheckBox(ui->showGalacticPlaneLineCheckBox, "actionShow_Galactic_Plane_Line");
+	connectCheckBox(ui->showGalacticEquatorLineCheckBox, "actionShow_Galactic_Equator_Line");
 	connectCheckBox(ui->showAzimuthalGridCheckBox, "actionShow_Azimuthal_Grid");
 	connectCheckBox(ui->showEquatorialJ2000GridCheckBox, "actionShow_Equatorial_J2000_Grid");
 	connectCheckBox(ui->showEclipticGridJ2000CheckBox, "actionShow_Ecliptic_J2000_Grid");
@@ -271,8 +291,12 @@ void ViewDialog::createDialogContent()
 	const bool b = StelApp::getInstance().getSkyCultureMgr().getCurrentSkyCultureID()==StelApp::getInstance().getSkyCultureMgr().getDefaultSkyCultureID();
 	ui->useAsDefaultSkyCultureCheckBox->setChecked(b);
 	ui->useAsDefaultSkyCultureCheckBox->setEnabled(!b);
+	connect(ui->nativeNameCheckBox, SIGNAL(clicked(bool)), ssmgr, SLOT(setFlagNativeNames(bool)));
+	ui->nativeNameCheckBox->setChecked(ssmgr->getFlagNativeNames());
+	// GZ NEW allow to display short names and inhibit translation.
+	connect(ui->skyCultureNamesStyleComboBox, SIGNAL(currentIndexChanged(int)), cmgr, SLOT(setConstellationDisplayStyle(int)));
 
-	// Sky layers
+	// Sky layers. This not yet finished and not visible in releases.
 	populateSkyLayersList();
 	connect(this, SIGNAL(visibleChanged(bool)), this, SLOT(populateSkyLayersList()));
 	connect(ui->skyLayerListWidget, SIGNAL(currentTextChanged(const QString&)), this, SLOT(skyLayersSelectionChanged(const QString&)));
@@ -282,6 +306,90 @@ void ViewDialog::createDialogContent()
 	QTimer* refreshTimer = new QTimer(this);
 	connect(refreshTimer, SIGNAL(timeout()), this, SLOT(updateFromProgram()));
 	refreshTimer->start(200);
+}
+
+void ViewDialog::setFlagLandscapeUseMinimalBrightness(bool b)
+{
+	LandscapeMgr* lmgr = GETSTELMODULE(LandscapeMgr);
+	lmgr->setFlagLandscapeUseMinimalBrightness(b);
+	populateLandscapeMinimalBrightness();
+}
+
+void ViewDialog::populateLandscapeMinimalBrightness()
+{
+	if (ui->landscapeBrightnessCheckBox->isChecked())
+	{
+		ui->localLandscapeBrightnessCheckBox->setEnabled(true);
+		ui->landscapeBrightnessSpinBox->setEnabled(true);
+	}
+	else
+	{
+		ui->localLandscapeBrightnessCheckBox->setEnabled(false);
+		ui->landscapeBrightnessSpinBox->setEnabled(false);
+	}
+}
+
+void ViewDialog::populateLightPollution()
+{
+	StelCore *core = StelApp::getInstance().getCore();
+	LandscapeMgr *lmgr = GETSTELMODULE(LandscapeMgr);
+	int bIdx = core->getSkyDrawer()->getBortleScaleIndex();
+	if (lmgr->getFlagUseLightPollutionFromDatabase())
+	{
+		StelLocation loc = core->getCurrentLocation();
+		bIdx = loc.bortleScaleIndex;
+		if (!loc.planetName.contains("Earth")) // location not on Earth...
+			bIdx = 1;
+		if (bIdx<1) // ...or it observatory, or it unknown location
+			bIdx = loc.DEFAULT_BORTLE_SCALE_INDEX;
+		ui->lightPollutionSpinBox->setEnabled(false);
+	}
+	else
+		ui->lightPollutionSpinBox->setEnabled(true);
+
+	ui->lightPollutionSpinBox->setValue(bIdx);
+	setBortleScaleToolTip(bIdx);
+}
+
+void ViewDialog::setBortleScaleToolTip(int Bindex)
+{
+	int i = Bindex-1;
+	QStringList list, nelm;
+	//TRANSLATORS: Short description for Class 1 of the Bortle scale
+	list.append(q_("Excellent dark-sky site"));
+	//TRANSLATORS: Short description for Class 2 of the Bortle scale
+	list.append(q_("Typical truly dark site"));
+	//TRANSLATORS: Short description for Class 3 of the Bortle scale
+	list.append(q_("Rural sky"));
+	//TRANSLATORS: Short description for Class 4 of the Bortle scale
+	list.append(q_("Rural/suburban transition"));
+	//TRANSLATORS: Short description for Class 5 of the Bortle scale
+	list.append(q_("Suburban sky"));
+	//TRANSLATORS: Short description for Class 6 of the Bortle scale
+	list.append(q_("Bright suburban sky"));
+	//TRANSLATORS: Short description for Class 7 of the Bortle scale
+	list.append(q_("Suburban/urban transition"));
+	//TRANSLATORS: Short description for Class 8 of the Bortle scale
+	list.append(q_("City sky"));
+	//TRANSLATORS: Short description for Class 9 of the Bortle scale
+	list.append(q_("Inner-city sky"));
+
+	nelm.append("7.6–8.0");
+	nelm.append("7.1–7.5");
+	nelm.append("6.6–7.0");
+	nelm.append("6.1–6.5");
+	nelm.append("5.6–6.0");
+	nelm.append("5.1-5.5");
+	nelm.append("4.6–5.0");
+	nelm.append("4.1–4.5");
+	nelm.append("4.0");
+
+	QString tooltip = QString("%1 (%2 %3)")
+			.arg(list.at(i).toLocal8Bit().constData())
+			.arg(q_("The naked-eye limiting magnitude is"))
+			.arg(nelm.at(i).toLocal8Bit().constData());
+
+	ui->lightPollutionSpinBox->setToolTip(tooltip);
 }
 
 void ViewDialog::populateLists()
@@ -294,6 +402,23 @@ void ViewDialog::populateLists()
 	l->setCurrentItem(l->findItems(StelApp::getInstance().getSkyCultureMgr().getCurrentSkyCultureNameI18(), Qt::MatchExactly).at(0));
 	l->blockSignals(false);
 	updateSkyCultureText();
+
+	// populate language printing combo. (taken from DeltaT combo)
+	ConstellationMgr* cmgr=GETSTELMODULE(ConstellationMgr);
+	Q_ASSERT(cmgr);
+	Q_ASSERT(ui->skyCultureNamesStyleComboBox);
+	QComboBox* cultureNamesStyleComboBox = ui->skyCultureNamesStyleComboBox;
+	cultureNamesStyleComboBox->blockSignals(true);
+	cultureNamesStyleComboBox->clear();
+	cultureNamesStyleComboBox->addItem(q_("Abbreviated"),  ConstellationMgr::constellationsAbbreviated);
+	cultureNamesStyleComboBox->addItem(q_("Native"),       ConstellationMgr::constellationsNative);  // Please make this always a transcript into European letters!
+	cultureNamesStyleComboBox->addItem(q_("Translated"),   ConstellationMgr::constellationsTranslated);
+	//cultureNamesStyleComboBox->addItem(q_("English"),    ConstellationMgr::constellationsEnglish); // This is not useful.
+	//Restore the selection
+	int index = cultureNamesStyleComboBox->findData(cmgr->getConstellationDisplayStyle(), Qt::UserRole, Qt::MatchCaseSensitive);
+	if (index==-1) index=2; // Default: Translated
+	cultureNamesStyleComboBox->setCurrentIndex(index);
+	cultureNamesStyleComboBox->blockSignals(false);
 
 	const StelCore* core = StelApp::getInstance().getCore();	
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
@@ -319,17 +444,18 @@ void ViewDialog::populateLists()
 	l->clear();
 	LandscapeMgr* lmgr = GETSTELMODULE(LandscapeMgr);
 	QStringList landscapeList = lmgr->getAllLandscapeNames();
-	foreach (const QString landscapeId, landscapeList)
+	foreach (const QString landscapeName, landscapeList)
 	{
-		QString label = q_(landscapeId);
+		QString label = q_(landscapeName);
 		QListWidgetItem* item = new QListWidgetItem(label);
-		item->setData(Qt::UserRole, landscapeId);
+		item->setData(Qt::UserRole, landscapeName);
 		l->addItem(item);
 	}
-	QString selectedLandscapeId = lmgr->getCurrentLandscapeName();
+	l->sortItems(); // they may have been translated!
+	QString selectedLandscapeName = lmgr->getCurrentLandscapeName();
 	for (int i = 0; i < l->count(); i++)
 	{
-		if (l->item(i)->data(Qt::UserRole).toString() == selectedLandscapeId)
+		if (l->item(i)->data(Qt::UserRole).toString() == selectedLandscapeName)
 		{
 			l->setCurrentRow(i);
 			break;
@@ -382,6 +508,7 @@ void ViewDialog::skyCultureChanged(const QString& cultureName)
 	ui->useAsDefaultSkyCultureCheckBox->setEnabled(!b);
 }
 
+// fill the description text window, not the names in the sky.
 void ViewDialog::updateSkyCultureText()
 {
 	StelApp& app = StelApp::getInstance();
@@ -414,8 +541,12 @@ void ViewDialog::updateSkyCultureText()
 	else
 	{
 		QFile f(descPath);
-		f.open(QIODevice::ReadOnly);
-		QString htmlFile = QString::fromUtf8(f.readAll());
+		QString htmlFile;
+		if(f.open(QIODevice::ReadOnly))
+		{
+			htmlFile = QString::fromUtf8(f.readAll());
+			f.close();
+		}
 		ui->skyCultureTextBrowser->setHtml(htmlFile);
 	}
 }
@@ -443,7 +574,7 @@ void ViewDialog::landscapeChanged(QListWidgetItem* item)
 	//StelSkyDrawer *drawer=StelApp::getInstance().getSkyDrawer();
 	// GZ: Reset values that might have changed.
 	ui->showFogCheckBox->setChecked(lmgr->getFlagFog());
-	ui->lightPollutionSpinBox->setValue(StelApp::getInstance().getCore()->getSkyDrawer()->getBortleScale());
+	ui->lightPollutionSpinBox->setValue(StelApp::getInstance().getCore()->getSkyDrawer()->getBortleScaleIndex());
 }
 
 void ViewDialog::showAddRemoveLandscapesDialog()
@@ -466,78 +597,73 @@ void ViewDialog::showAtmosphereDialog()
 }
 
 
-void ViewDialog::setZhrFromControls()
+void ViewDialog::setZhrFromControls(int zhr)
 {
-	MeteorMgr* mmgr = GETSTELMODULE(MeteorMgr);
-	int zhr=-1;
-	if (ui->zhrNone->isChecked())
+	MeteorMgr* mmgr = GETSTELMODULE(MeteorMgr);	
+	if (zhr==0)
 	{
 		mmgr->setFlagShow(false);
-		zhr = 0;
 	}
 	else
 	{
 		mmgr->setFlagShow(true);
-	}
-	if (ui->zhr10->isChecked())
-		zhr = 10;
-	if (ui->zhr80->isChecked())
-		zhr = 80;
-	if (ui->zhr1000->isChecked())
-		zhr = 1000;
-	if (ui->zhr10000->isChecked())
-		zhr = 10000;
-	if (ui->zhr144000->isChecked())
-		zhr = 144000;
-	if (zhr!=mmgr->getZHR())
-	{
 		mmgr->setZHR(zhr);
 	}
-	
-	updateZhrDescription(zhr);
+	updateZhrDescription();
 }
 
 void ViewDialog::updateZhrControls(int zhr)
 {
-	// As the radio buttons are tied to the clicked() signal,
-	// it won't be triggered by setting the value programmatically.
-	switch(zhr)
-	{
-		case 0: ui->zhrNone->setChecked(true); break;
-		case 80: ui->zhr80->setChecked(true); break;
-		case 1000: ui->zhr1000->setChecked(true); break;
-		case 10000: ui->zhr10000->setChecked(true); break;
-		case 144000: ui->zhr144000->setChecked(true); break;
-		default: ui->zhr10->setChecked(true); break;
-	}
-	
-	updateZhrDescription(zhr);
+	ui->zhrSpinBox->setValue(zhr);
+	updateZhrDescription();
 }
 
-void ViewDialog::updateZhrDescription(int zhr)
+void ViewDialog::updateZhrDescription()
 {
+	int zhr = ui->zhrSpinBox->value();
 	switch (zhr)
 	{
 		case 0:
 			ui->zhrLabel->setText("<small><i>"+q_("No shooting stars")+"</i></small>");
 			break;
+		case 5:
+		case 6:
+		case 7:
+		case 8:
+		case 9:
 		case 10:
 			ui->zhrLabel->setText("<small><i>"+q_("Normal rate")+"</i></small>");
 			break;
-		case 80:
+		case 25:
+			ui->zhrLabel->setText("<small><i>"+q_("Standard Orionids rate")+"</i></small>");
+			break;
+		case 100:
 			ui->zhrLabel->setText("<small><i>"+q_("Standard Perseids rate")+"</i></small>");
+			break;
+		case 120:
+			ui->zhrLabel->setText("<small><i>"+q_("Standard Geminids rate")+"</i></small>");
+			break;
+		case 200:
+			ui->zhrLabel->setText("<small><i>"+q_("Exceptional Perseid rate")+"</i></small>");
 			break;
 		case 1000:
 			ui->zhrLabel->setText("<small><i>"+q_("Meteor storm rate")+"</i></small>");
+			break;
+		case 6000:
+			ui->zhrLabel->setText("<small><i>"+q_("Exceptional Draconid rate")+"</i></small>");
 			break;
 		case 10000:
 			ui->zhrLabel->setText("<small><i>"+q_("Exceptional Leonid rate")+"</i></small>");
 			break;
 		case 144000:
-			ui->zhrLabel->setText("<small><i>"+q_("Highest rate ever (1966 Leonids)")+"</i></small>");
+			ui->zhrLabel->setText("<small><i>"+q_("Very high rate (1966 Leonids)")+"</i></small>");
+			break;
+		case 240000:
+			ui->zhrLabel->setText("<small><i>"+q_("Highest rate ever (1833 Leonids)")+"</i></small>");
 			break;
 		default:
-			ui->zhrLabel->setText(QString("<small><i>")+"Error"+"</i></small>");
+			ui->zhrLabel->setText("");
+			break;
 	}
 }
 

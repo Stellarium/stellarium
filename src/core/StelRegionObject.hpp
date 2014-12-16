@@ -19,8 +19,9 @@
 #ifndef _STELREGIONOBJECT_HPP_
 #define _STELREGIONOBJECT_HPP_
 
-#include <QSharedPointer>
 #include "StelSphereGeometry.hpp"
+
+#include <QSharedPointer>
 
 //! Simple abstract class defining basic methods implemented by all objects that need
 //! to be stored in a StelSphericalIndex.

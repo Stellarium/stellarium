@@ -70,9 +70,8 @@ public slots:
 	bool getFlagShow(void) const;
 	
 private:
-	float radius;
 	StelTextureSP tex;
-	Vec3f color;
+	Vec3f color; // global color
 	float intensity;
 	class LinearFader* fader;
 
