@@ -8,14 +8,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Stellarium 0.10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-12-10 21:31+0600\n"
+"POT-Creation-Date: 2014-12-15 22:16+0600\n"
 "PO-Revision-Date: 2014-12-12 13:48+0000\n"
 "Last-Translator: misibacsi <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-12-13 05:47+0000\n"
+"X-Launchpad-Export-Date: 2014-12-16 06:15+0000\n"
 "X-Generator: Launchpad (build 17286)\n"
 "X-Poedit-Language: Hungarian\n"
 
@@ -356,17 +356,23 @@ msgstr "A kóma átmérője (becsült érték): %1 km"
 msgid "Gas tail length (estimate): %1 Mio km"
 msgstr "A gázcsóva hossza  (becsült érték): %1 km"
 
-#: src/core/modules/SolarSystem.cpp:162
+#. TRANSLATORS: Type of objects (for "Lists" in the search tool)
+#: src/core/modules/SolarSystem.cpp:162 src/translations.h:54
+#: src/ui_viewDialog.h:1233
+msgid "Planets"
+msgstr "Bolygók"
+
+#: src/core/modules/SolarSystem.cpp:163
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:308
 msgid "Planet labels"
 msgstr "Bolygók neve"
 
-#: src/core/modules/SolarSystem.cpp:163
+#: src/core/modules/SolarSystem.cpp:164
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:312
 msgid "Planet orbits"
 msgstr "Bolygópályák"
 
-#: src/core/modules/SolarSystem.cpp:164
+#: src/core/modules/SolarSystem.cpp:165
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:316
 msgid "Planet trails"
 msgstr "Bolygók pályája"
@@ -2154,11 +2160,6 @@ msgstr "hold"
 #: src/translations.h:52
 msgid "plutoid"
 msgstr "plutoida"
-
-#. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:54 src/ui_viewDialog.h:1233
-msgid "Planets"
-msgstr "Bolygók"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:56
@@ -4503,7 +4504,7 @@ msgid "Horizontal coordinates"
 msgstr "Horizontális koordináták"
 
 #: src/ui_configurationDialog.h:1109
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:166
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:167
 msgid "Altitude/Azimuth"
 msgstr "Magasság/Azimut"
 
@@ -9812,10 +9813,15 @@ msgstr "Gal. Long/Lat"
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:208
 msgctxt "abbreviated in the plugin"
+msgid "Ecl. Long/Lat"
+msgstr ""
+
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:227
+msgctxt "abbreviated in the plugin"
 msgid "Ecl. Long/Lat (J2000.0)"
 msgstr "Ecl. Long/Lat (J2000.0)"
 
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:226
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:245
 msgctxt "abbreviated in the plugin"
 msgid "HA/Dec"
 msgstr "HA/Dec"
@@ -9849,14 +9855,18 @@ msgid "Right ascension/Declination"
 msgstr "Rektaszcenzió/deklináció"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:165
+msgid "Ecliptic Longitude/Latitude"
+msgstr ""
+
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:166
 msgid "Ecliptic Longitude/Latitude (J2000.0)"
 msgstr "Ekliptikus hosszúság/szélesség (J2000.0)"
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:167
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:168
 msgid "Galactic Longitude/Latitude"
 msgstr "Galaktikus hosszúság/szélesség"
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:197
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:198
 msgid "Coordinates of custom position:"
 msgstr ""
 
