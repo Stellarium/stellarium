@@ -34,13 +34,13 @@ SPolygon::SPolygon(const Vec3f &c0, const Vec3f &c1, const Vec3f &c2, const Vec3
 
 SPolygon::~SPolygon() {}
 
-void SPolygon::intersect(const Plane &p, std::vector<Vec3f> &intersectionPoints)
+void SPolygon::intersect(const Plane &p, QVector<Vec3f> &intersectionPoints)
 {
     if(vertices.size() < 3) return;
 
-    std::vector<Vec3f> newVerts;
+    QVector<Vec3f> newVerts;
 
-    for(unsigned int i=0; i<vertices.size(); i++)
+    for(int i=0; i<vertices.size(); i++)
     {
         unsigned int next = (i+1) % vertices.size();
 
@@ -59,11 +59,11 @@ void SPolygon::intersect(const Plane &p, std::vector<Vec3f> &intersectionPoints)
             if(p.intersect(line, val))
             {
                 Vec3f intersection = line.getPoint(val);
-                newVerts.push_back(intersection);
-                intersectionPoints.push_back(intersection);
+		newVerts.append(intersection);
+		intersectionPoints.append(intersection);
             }
 
-            newVerts.push_back(vertices[next]);
+	    newVerts.append(vertices[next]);
             continue;
         }
 
@@ -73,15 +73,15 @@ void SPolygon::intersect(const Plane &p, std::vector<Vec3f> &intersectionPoints)
             if(p.intersect(line, val))
             {
                 Vec3f intersection = line.getPoint(val);
-                newVerts.push_back(intersection);
-                intersectionPoints.push_back(intersection);
+		newVerts.append(intersection);
+		intersectionPoints.append(intersection);
             }
 
             continue;
         }
 
         //since both are inside, just add the next vertex
-        newVerts.push_back(vertices[next]);
+	newVerts.append(vertices[next]);
     }
 
     vertices.clear();
@@ -105,13 +105,13 @@ void SPolygon::addUniqueVert(const Vec3f &v)
 {
     bool flag = true;
 
-    for(unsigned int i=0; i<vertices.size() && flag; i++)
+    for(int i=0; i<vertices.size() && flag; i++)
     {
         flag = !(CompareVerts(v, vertices[i]));
     }
 
     if(flag)
     {
-        vertices.push_back(v);
+	vertices.append(v);
     }
 }
