@@ -79,12 +79,9 @@ Scenery3d::Scenery3d()
 {
 	qDebug()<<"Scenery3d constructor...";
 
-    shadowMapTexture = 0;
     for (int i=0; i<6; i++) {
         cubeMap[i] = NULL;
     }
-    shadowMapFbo = NULL;
-    shadowFBO = 0;
 
     //create the front cubemap face vertices
     //created a 20x20 subdivision to give a good approximation of non-linear projections
@@ -153,10 +150,7 @@ Scenery3d::Scenery3d()
     frustumSplits = 4;
     //Make sure we dont exceed MAXSPLITS or go below 1
     frustumSplits = qMax(qMin(frustumSplits, MAXSPLITS), 1);
-    //Define shadow maps array - holds MAXSPLITS textures
-    shadowMapsArray = new GLuint[frustumSplits];
-    shadowCPM = new Mat4f[frustumSplits];
-    frustumArray = new Frustum[frustumSplits];
+
 
     camFOV = 90.0f;
     camAspect = 1.0f;
@@ -167,16 +161,6 @@ Scenery3d::Scenery3d()
     dimFar = dimNear+1.0f;
 
     parallaxScale = 0.015f;
-
-    camDepthFBO = 0;
-    camDepthTex = 0;
-
-    writeTex = 0;
-    readTex = 1;
-    attachments = new GLenum[2];
-    attachments[0] = GL_COLOR_ATTACHMENT0;
-    attachments[1] = GL_COLOR_ATTACHMENT1;
-    pingpongTex = new GLuint[2];
 
 	debugTextFont.setFamily("Courier");
 	debugTextFont.setPixelSize(16);
@@ -189,16 +173,8 @@ Scenery3d::~Scenery3d()
         delete heightmap;
         heightmap = NULL;
     }
-    for(int i=0; i<frustumSplits; i++)
-    {
-	    if(shadowMapsArray[i] != 0)
-	    {
-		    glDeleteTextures(1, &shadowMapsArray[i]);
-		    shadowMapsArray[i] = 0;
-	    }
-    }
-    delete shadowMapFbo;
-    shadowMapFbo = NULL;
+
+	deleteShadowmapping();
 
     for (int i=0; i<6; i++) {
         if (cubeMap[i] != NULL) {
@@ -213,6 +189,7 @@ Scenery3d::~Scenery3d()
     }
 
     focusBodies.clear();
+
 }
 
 void Scenery3d::loadScene(const SceneInfo &scene)
@@ -855,14 +832,14 @@ void Scenery3d::generateCubeMap_drawSceneWithShadows()
     Vec4f squaredSplits = Vec4f(0.0f);
     for(int i=0; i<frustumSplits; i++)
     {
-        squaredSplits.v[i] = frustumArray[i].zFar * frustumArray[i].zFar;
+	squaredSplits.v[i] = frustumArray.at(i).zFar * frustumArray.at(i).zFar;
 
         //Bind current depth map texture
         glActiveTexture(GL_TEXTURE3+i);
-        glBindTexture(GL_TEXTURE_2D, shadowMapsArray[i]);
+	glBindTexture(GL_TEXTURE_2D, shadowMapsArray.at(i));
 
         //Compute texture matrix
-        Mat4f texMat = biasMatrix * shadowCPM[i];
+	Mat4f texMat = biasMatrix * shadowCPM.at(i);
 
         //Send to shader
         QString smapLoc = "smap_"+ QString::number(i);
@@ -1172,9 +1149,6 @@ void Scenery3d::generateShadowMap()
     /* eyeX,eyeY,eyeZ,centerX,centerY,centerZ,upX,upY,upZ)*/
     glGetFloatv(GL_MODELVIEW_MATRIX, lightViewMatrix); // save light view for further render passes
 
-    //Bind FBO
-    glBindFramebuffer(GL_FRAMEBUFFER, shadowFBO);
-
     //No shader needed for generating the depth map
     glUseProgram(0);
 
@@ -1195,7 +1169,7 @@ void Scenery3d::generateShadowMap()
     for(int i=0; i<frustumSplits; i++)
     {
         //Calculate the Frustum for this split
-        frustumArray[i].calcFrustum(viewPos, viewDir, viewUp);
+	frustumArray[i].calcFrustum(viewPos, viewDir, viewUp);
 
         //Find the convex body that encompasses all shadow receivers and casters for this split
         focusBodies[i]->clear();
@@ -1209,9 +1183,7 @@ void Scenery3d::generateShadowMap()
             //This alters the ProjectionMatrix of the light
             computeCropMatrix(i);
 
-            //Activate texture unit as usual
-            glActiveTexture(GL_TEXTURE3+i);
-            glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, shadowMapsArray[i], 0);
+	    glBindFramebuffer(GL_FRAMEBUFFER,shadowFBOs.at(i));
 
             //Clear everything
             glClear(GL_DEPTH_BUFFER_BIT);
@@ -1222,7 +1194,7 @@ void Scenery3d::generateShadowMap()
             //Store the new projection * lightView for later
             glMatrixMode(GL_PROJECTION);
             glMultMatrixf(lightViewMatrix);
-            glGetFloatv(GL_PROJECTION_MATRIX, shadowCPM[i]);
+	    glGetFloatv(GL_PROJECTION_MATRIX, shadowCPM[i]);
         }
     }
 
@@ -1236,7 +1208,7 @@ void Scenery3d::generateShadowMap()
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
     //Switch back to normal texturing
-    glActiveTexture(GL_TEXTURE0);
+    //glActiveTexture(GL_TEXTURE0);
 
     glMatrixMode(GL_PROJECTION);
     glPopMatrix();
@@ -1786,161 +1758,87 @@ void Scenery3d::drawDebug()
 void Scenery3d::init()
 {
 	OBJ::setupGL();
+	initShadowmapping();
+}
+
+void Scenery3d::deleteShadowmapping()
+{
+
+	if(shadowFBOs.size()>0) //kinda hack that finds out if shadowmap related objects have been created
+	{
+		//we can delete them all at once then
+		glDeleteFramebuffers(shadowFBOs.size(),shadowFBOs.constData());
+		glDeleteTextures(shadowMapsArray.size(),shadowMapsArray.constData());
+	}
+	shadowFBOs.clear();
+	shadowMapsArray.clear();
+	shadowCPM.clear();
+	frustumArray.clear();
+}
+
+void Scenery3d::initShadowmapping()
+{
+	deleteShadowmapping();
 
 	if(shadowmapSize>0)
 	{
-    //Query how many texture units we have at disposal
-    GLint maxTex, maxComb;
-    glGetIntegerv(GL_MAX_TEXTURE_COORDS, &maxTex);
-    glGetIntegerv(GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS, &maxComb);
+		//Define shadow maps array - holds MAXSPLITS textures
+		shadowFBOs.resize(frustumSplits);
+		shadowMapsArray.resize(frustumSplits);
+		shadowCPM.resize(frustumSplits);
+		frustumArray.resize(frustumSplits);
 
-    qDebug() << "Available texture units:" << std::max(maxTex, maxComb);
+		//Query how many texture units we have at disposal
+		GLint maxTex, maxComb;
+		glGetIntegerv(GL_MAX_TEXTURE_COORDS, &maxTex);
+		glGetIntegerv(GL_MAX_COMBINED_TEXTURE_IMAGE_UNITS, &maxComb);
 
+		qDebug() << "Available texture units:" << std::max(maxTex, maxComb);
 
-    //Generate FBO - has to be QGLFramebufferObject for some reason.. Generating a normal one lead to bizzare texture results
-    //We use handle() to get the id and work as if we created a normal FBO. This is because QGLFramebufferObject doesn't support attaching a texture to the FBO
-    QOpenGLFramebufferObject *qglFBO=new QOpenGLFramebufferObject(shadowmapSize, shadowmapSize, QOpenGLFramebufferObject::Depth);
-    shadowFBO = qglFBO->handle();
-    //if (shadowFBO->attachment() != QGLFramebufferObject::Depth){
-    //    qWarning()<< "Scenery3d: Framebuffer failed to aquire depth buffer. Try smaller shadowmap_size!";
-    //}
+		//For shadowmapping, we use create 1 SM FBO for each frustum split - this seems to be the optimal solution on modern GPUs,
+		//see http://www.reddit.com/r/opengl/comments/1rsnhy/most_efficient_fbo_usage_in_multipass_pipeline/
+		//The point seems to be that switching attachments may cause re-validation of the FB.
 
-    if (qglFBO->isValid())
-        qWarning() << "[Scenery3D] initShadowMapping() qglFBO valid\n";
-    else
-        qWarning() << "[Scenery3D] initShadowMapping() qglFBO invalid\n";
+		//Generate the FBO ourselves. We do this because Qt does not support depth-only FBOs to save some memory.
+		glGenFramebuffers(frustumSplits,shadowFBOs.data());
+		glGenTextures(frustumSplits,shadowMapsArray.data());
 
+		for(int i=0; i<frustumSplits; i++)
+		{
+			//Bind the FBO
+			glBindFramebuffer(GL_FRAMEBUFFER, shadowFBOs.at(i));
 
-    //Bind the FBO
-    glBindFramebuffer(GL_FRAMEBUFFER, shadowFBO);
-    for(int i=0; i<frustumSplits; i++)
-    {
-        //Generate the depth maps
-        glGenTextures(1, &shadowMapsArray[i]);
-        //Activate the texture unit - we want sahdows + textures so this is crucial with the current Stellarium pipeline - we start at unit 3
-        glActiveTexture(GL_TEXTURE3+i);
+			//Activate the texture unit - we want sahdows + textures so this is crucial with the current Stellarium pipeline - we start at unit 3
+			glActiveTexture(GL_TEXTURE3+i);
 
-        //Bind the depth map and setup parameters
-        glBindTexture(GL_TEXTURE_2D, shadowMapsArray[i]);
+			//Bind the depth map and setup parameters
+			glBindTexture(GL_TEXTURE_2D, shadowMapsArray.at(i));
 
-#if QT_VERSION >= 0x040800
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, shadowmapSize, shadowmapSize, 0, GL_DEPTH_COMPONENT, GL_FLOAT, 0);
-#else
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT32, shadowmapSize, shadowmapSize, 0, GL_DEPTH_COMPONENT, GL_FLOAT, 0);
-#endif
+			//initialize depth map, OpenGL ES 2 does require the OES_depth_texture extension, check for it maybe?
+			glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, shadowmapSize, shadowmapSize, 0, GL_DEPTH_COMPONENT, GL_UNSIGNED_BYTE, NULL);
 
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
-        float ones[] = {1.0f, 1.0f, 1.0f, 1.0f};
-        glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_BORDER_COLOR, ones);
-        //Attach the depthmap to the Buffer
-        glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, shadowMapsArray[i], 0);
-    }
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
+			const float ones[] = {1.0f, 1.0f, 1.0f, 1.0f};
+			glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_BORDER_COLOR, ones);
+			//Attach the depthmap to the Buffer
+			glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, shadowMapsArray[i], 0);
+			glDrawBuffer(GL_NONE); // essential for depth-only FBOs!!!
+			glReadBuffer(GL_NONE);
 
-    glDrawBuffer(GL_NONE); // essential for depth-only FBOs!!!
-    glReadBuffer(GL_NONE); // essential for depth-only FBOs!!!
+			if(glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
+				qWarning() << "[Scenery3D] glCheckFramebufferStatus failed, can't use FBO";
+		}
 
-#if QT_VERSION >= 0x040800
-    if(glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
-#else
-    if(glCheckFramebufferStatusEXT(GL_FRAMEBUFFER_EXT) != GL_FRAMEBUFFER_COMPLETE)
-#endif
-        qWarning() << "[Scenery3D] GL_FRAMEBUFFER_COMPLETE failed, can't use FBO";
+		//Done. Unbind and switch to normal texture unit 0
+		glBindFramebuffer(GL_FRAMEBUFFER, 0);
+		glActiveTexture(GL_TEXTURE0);
 
-    //Done. Unbind and switch to normal texture unit 0
-    glBindFramebuffer(GL_FRAMEBUFFER, 0);
-    glActiveTexture(GL_TEXTURE0);
-
-
-
-    //Generate FBO - has to be QGLFramebufferObject for some reason.. Generating a normal one lead to bizzare texture results
-    //We use handle() to get the id and work as if we created a normal FBO. This is because QGLFramebufferObject doesn't support attaching a texture to the FBO
-    QOpenGLFramebufferObject *qglCamFBO=new QOpenGLFramebufferObject(shadowmapSize, shadowmapSize, QOpenGLFramebufferObject::Depth);
-    camDepthFBO = qglCamFBO->handle();
-
-    if (qglFBO->isValid())
-        qWarning() << "[Scenery3D] initShadowMapping() qglCamFBO valid\n";
-    else
-        qWarning() << "[Scenery3D] initShadowMapping() qglCamFBO invalid\n";
-
-
-    //Bind the FBO
-    glBindFramebuffer(GL_FRAMEBUFFER, camDepthFBO);
-
-    //Generate the depth maps and color maps for min/max
-    glGenTextures(1, &camDepthTex);
-    glGenTextures(2, pingpongTex);
-
-    //Activate the texture unit
-    glActiveTexture(GL_TEXTURE7);
-    //Bind the depth map and setup parameters
-    glBindTexture(GL_TEXTURE_2D, camDepthTex);
-
-#if QT_VERSION >= 0x040800
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, shadowmapSize, shadowmapSize, 0, GL_DEPTH_COMPONENT, GL_FLOAT, 0);
-#else
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT32, shadowmapSize, shadowmapSize, 0, GL_DEPTH_COMPONENT, GL_FLOAT, 0);
-#endif
-
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
-    float ones[] = {1.0f, 1.0f, 1.0f, 1.0f};
-    glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_BORDER_COLOR, ones);
-    glGenerateMipmap(GL_TEXTURE_2D);
-
-    //Setup Color attachment 0 and 1
-    glActiveTexture(GL_TEXTURE8);
-    glBindTexture(GL_TEXTURE_2D, pingpongTex[writeTex]);
-    //turn off filtering and wrap modes
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
-    //define texture with floating point format
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, shadowmapSize, shadowmapSize, 0, GL_RGBA, GL_FLOAT,0);
-
-    glActiveTexture(GL_TEXTURE9);
-    glBindTexture(GL_TEXTURE_2D, pingpongTex[readTex]);
-    //turn off filtering and wrap modes
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
-    //define texture with floating point format
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, shadowmapSize, shadowmapSize, 0, GL_RGBA, GL_FLOAT,0);
-
-    //Attach to the Buffer
-    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, camDepthTex, 0);
-    glFramebufferTexture2D(GL_FRAMEBUFFER, attachments[writeTex], GL_TEXTURE_2D, pingpongTex[writeTex], 0);
-    glFramebufferTexture2D(GL_FRAMEBUFFER, attachments[readTex], GL_TEXTURE_2D, pingpongTex[readTex], 0);
-
-    glDrawBuffer(GL_NONE); // essential for depth-only FBOs!!!
-    glReadBuffer(GL_NONE); // essential for depth-only FBOs!!!
-
-#if QT_VERSION >= 0x040800
-    if(glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
-#else
-    if(glCheckFramebufferStatusEXT(GL_FRAMEBUFFER_EXT) != GL_FRAMEBUFFER_COMPLETE)
-#endif
-        qWarning() << "[Scenery3D] GL_FRAMEBUFFER_COMPLETE failed, can't use FBO";
-
-    //Create PBO for readback when analyzing the depth buffer
-    glGenBuffers(1, &camDepthPBO);
-    glBindBuffer(GL_PIXEL_PACK_BUFFER, camDepthPBO);
-    glBufferData(GL_PIXEL_PACK_BUFFER, shadowmapSize*shadowmapSize*sizeof(GLfloat), NULL, GL_STREAM_READ);
-    //Done. Unbind
-    glBindBuffer(GL_PIXEL_PACK_BUFFER, 0);
-
-    //Done. Unbind and switch to normal texture unit 0
-    glBindFramebuffer(GL_FRAMEBUFFER, 0);
-    glActiveTexture(GL_TEXTURE0);
+		qDebug()<<"[Scenery3D] shadowmapping initialized";
 	}
-	else
-		qWarning()<<"Scenery3d init: shadowmapping not supported or disabled";
+	else qWarning()<<"[Scenery3D] shadowmapping not supported or disabled";
 }
 
 void Scenery3d::draw(StelCore* core)
