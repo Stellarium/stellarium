@@ -141,7 +141,6 @@ private:
     Mat4f projectionMatrix;
     Mat4f lightViewMatrix;
     Mat4f lightProjectionMatrix;
-    QOpenGLFramebufferObject* shadowMapFbo;
     QOpenGLFramebufferObject* cubeMap[6]; // front, right, left, back, top, bottom
     StelVertexArray cubePlaneFront, cubePlaneBack,
                 cubePlaneLeft, cubePlaneRight,
@@ -165,10 +164,7 @@ private:
     QOpenGLShaderProgram* univShader;
     //Debug shader
     QOpenGLShaderProgram* debugShader;
-    //Depth texture id
-    GLuint shadowMapTexture;
-    //Shadow Map FBO handle
-    GLuint shadowFBO;
+
     //Currently selected effect
     Effect curEffect;
 
@@ -180,16 +176,19 @@ private:
     AABB sceneBoundingBox;
     //Camera Frustum
     Frustum cFrust;
-    //Holds the shadow maps
-    GLuint* shadowMapsArray;
+
+    //Shadow Map FBO handles
+    QVector<GLuint> shadowFBOs;
+    //Holds the shadow textures
+    QVector<GLuint> shadowMapsArray;
     //Holds the shadow transformation matrix per split
-    Mat4f* shadowCPM;
+    QVector<Mat4f> shadowCPM;
     //Number of splits for CSM
     int frustumSplits;
     //Weight for splitting the frustums
     float splitWeight;
     //Array holding the split frustums
-    Frustum* frustumArray;
+    QVector<Frustum> frustumArray;
     //Vector holding the convex split bodies for focused shadow mapping
     std::vector<Polyhedron*> focusBodies;
     //Camera values
@@ -200,14 +199,7 @@ private:
     //light projection values
     float dim, dimNear, dimFar;
 
-    GLuint camDepthFBO;
-    GLuint camDepthTex;
     float parallaxScale;
-    int vpWidth, vpHeight;
-    GLuint camDepthPBO;
-    GLuint *pingpongTex;
-    int writeTex, readTex;
-    GLenum *attachments;
 
     QFont debugTextFont;
 
@@ -231,6 +223,11 @@ private:
 
     //Save the Frustum to be able to move away from it and analyze it
     void saveFrusts();
+
+    ///! Re-initializes shadowmapping related objects
+    void initShadowmapping();
+    ///! Cleans up shadowmapping related objects
+    void deleteShadowmapping();
 
     //Sends texture data to the shader based on which effect is selected;
     void sendToShader(const OBJ::StelModel* pStelModel, Effect cur, bool& tangEnabled, int& tangLocation);
