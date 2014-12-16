@@ -294,7 +294,7 @@ void OBJ::addTrianglePosTexCoordNormal(PosVector& vertexCoords, const VF2Vector 
 int OBJ::addVertex(VertCacheT& vertexCache, int hash, const Vertex *pVertex)
 {
     unsigned int index = -1;
-    QMap<int,QVector<int>>::const_iterator iter = vertexCache.find(hash);
+    QMap<int,QVector<int> >::const_iterator iter = vertexCache.find(hash);
 
     if (iter == vertexCache.end())
     {
@@ -1363,7 +1363,7 @@ void OBJ::transform(Mat4d mat)
 {
     m = mat;
     pBoundingBox.min = Vec3f(std::numeric_limits<float>::max());
-    pBoundingBox.max = Vec3f(std::numeric_limits<float>::lowest());
+    pBoundingBox.max = Vec3f(-std::numeric_limits<float>::max()); //numeric_limits<T>::lowest() is C++11, but this is the same
 
     //Transform all vertices and normals by mat
     for(int i=0; i<getNumberOfVertices(); ++i)
@@ -1408,7 +1408,7 @@ void OBJ::findBounds()
 {
     //Find Bounding Box for entire Scene
     pBoundingBox.min = Vec3f(std::numeric_limits<float>::max());
-    pBoundingBox.max = Vec3f(std::numeric_limits<float>::lowest());
+    pBoundingBox.max = Vec3f(-std::numeric_limits<float>::max());
 
     for(int i=0; i<getNumberOfVertices(); ++i)
     {
@@ -1427,7 +1427,7 @@ void OBJ::findBounds()
     for(unsigned int i=0; i<m_numberOfStelModels; ++i)
     {
         StelModel* pStelModel = &m_stelModels[i];
-	pStelModel->bbox = AABB(Vec3f(std::numeric_limits<float>::max()), Vec3f(std::numeric_limits<float>::lowest()));
+    pStelModel->bbox = AABB(Vec3f(std::numeric_limits<float>::max()), Vec3f(-std::numeric_limits<float>::max()));
 
         for(int j=pStelModel->startIndex; j<pStelModel->triangleCount*3; ++j)
         {

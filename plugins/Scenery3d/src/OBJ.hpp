@@ -209,22 +209,26 @@ public:
     void bindGLFixedFunction();
     void unbindGLFixedFunction();
 
-    //! This is the OpenGL attribute location where vertex positions are mapped to
-    const GLint ATTLOC_VERTEX  = 0;
-    //! This is the OpenGL attribute location where vertex texture coordinates are mapped to
-    const GLint ATTLOC_TEXTURE = 1;
-    //! This is the OpenGL attribute location where vertex normals are mapped to
-    const GLint ATTLOC_NORMAL  = 2;
-    //! This is the OpenGL attribute location where vertex tangents are mapped to
-    const GLint ATTLOC_TANGENT = 3;
-    //! This is the OpenGL attribute location where vertex bitangents are mapped to
-    const GLint ATTLOC_BITANGENT = 4;
+    //! Enum for OpenGL shader attribute locations
+    enum ATTLOC
+    {
+	    //! This is the OpenGL attribute location where vertex positions are mapped to
+	    ATTLOC_VERTEX,
+	    //! This is the OpenGL attribute location where vertex texture coordinates are mapped to
+	    ATTLOC_TEXTURE,
+	    //! This is the OpenGL attribute location where vertex normals are mapped to
+	    ATTLOC_NORMAL,
+	    //! This is the OpenGL attribute location where vertex tangents are mapped to
+	    ATTLOC_TANGENT,
+	    //! This is the OpenGL attribute location where vertex bitangents are mapped to
+	    ATTLOC_BITANGENT
+    };
 
     //! Set up some stuff that requires a valid OpenGL context.
     static void setupGL();
 
     //! Copy assignment operator. No deep copies are performed, but QVectors have copy-on-write semantics, so this is no problem. Does not copy GL objects.
-    OBJ& OBJ::operator=(const OBJ& other);
+    OBJ& operator=(const OBJ& other);
 private:
     typedef QVector<int> IntVector;
     typedef QVector<Vec3f> VF3Vector;
@@ -232,7 +236,7 @@ private:
     typedef Vec3f VPos;
     typedef QVector<Vec3f> PosVector;
     typedef QMap<QString,int> MatCacheT;
-    typedef QMap<int, QVector<int>> VertCacheT;
+    typedef QMap<int, QVector<int> > VertCacheT;
 
     void addTrianglePos(const PosVector& vertexCoords, IntVector& attributeArray, VertCacheT &vertexCache, unsigned int index, int material, int v0, int v1, int v2);
     void addTrianglePosNormal(const PosVector &vertexCoords,const VF3Vector& normals, IntVector &attributeArray, VertCacheT &vertexCache, unsigned int index, int material,
