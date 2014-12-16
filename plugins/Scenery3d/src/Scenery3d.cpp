@@ -182,14 +182,6 @@ Scenery3d::~Scenery3d()
             cubeMap[i] = NULL;
         }
     }
-
-    for(unsigned int i=0; i<focusBodies.size(); i++)
-    {
-        delete focusBodies[i];
-    }
-
-    focusBodies.clear();
-
 }
 
 void Scenery3d::loadScene(const SceneInfo &scene)
@@ -886,7 +878,7 @@ void Scenery3d::computeZDist(float zNear, float zFar)
 void Scenery3d::computePolyhedron(int splitIndex)
 {
     //Building a convex body for directional lights according to Wimmer et al. 2006
-    Polyhedron &body = *focusBodies[splitIndex];
+    Polyhedron &body = focusBodies[splitIndex];
 
     //Add the Frustum to begin with
     body.add(frustumArray[splitIndex]);
@@ -965,15 +957,13 @@ void Scenery3d::computeCropMatrix(int frustumIndex)
     //! Uncomment this and the other marked lines to get no artifacts (but way worse shadow quality
     //! making the second split pretty much useless
     AABB bb;
-    for(unsigned int i=0; i<focusBodies[frustumIndex]->getVertCount(); i++)
-        bb.expand(focusBodies[frustumIndex]->getVerts()[i]);
+    for(int i=0; i<focusBodies.at(frustumIndex).getVertCount(); i++)
+	bb.expand(focusBodies.at(frustumIndex).getVerts().at(i));
 
     //Project the frustum into light space and find the boundaries
-    for(unsigned int i=0; i<focusBodies[frustumIndex]->getVertCount(); i++)
-    //for(unsigned int i=0; i<AABB::CORNERCOUNT; i++)
+    for(int i=0; i<focusBodies.at(frustumIndex).getVertCount(); i++)
     {
-        Vec3f tmp = focusBodies[frustumIndex]->getVerts()[i];
-        //Vec3f tmp = bb.getCorner(static_cast<AABB::Corner>(i));
+	const Vec3f tmp = focusBodies.at(frustumIndex).getVerts().at(i);
         Vec4f transf = lightMVP*Vec4f(tmp.v[0], tmp.v[1], tmp.v[2], 1.0f);
 
         transf.v[0] /= transf.v[3];
@@ -1045,8 +1035,8 @@ void Scenery3d::adjustFrustum()
     Vec3f vDir = vecdToFloat(viewDir);
     vDir.normalize();
 
-    const std::vector<Vec3f> &verts = p.getVerts();
-    for(unsigned int i=0; i<p.getVertCount(); i++)
+    const QVector<Vec3f> &verts = p.getVerts();
+    for(int i=0; i<p.getVertCount(); i++)
     {
         //Find the distance to the camera
         Vec3f v = verts[i];
@@ -1061,15 +1051,10 @@ void Scenery3d::adjustFrustum()
     camNear = std::max(minZ, 1.0f);
     camFar = std::max(maxZ, camNear+1.0f);
 
-    //Clear the previous bodies
-    focusBodies.clear();
-
     //Setup the subfrusta
     for(int i=0; i<frustumSplits; i++)
     {
         frustumArray[i].setCamInternals(camFOV, camAspect, camNear, camFar);
-        focusBodies.push_back(new Polyhedron());
-        focusBodies[i]->clear();
     }
 }
 
@@ -1172,12 +1157,12 @@ void Scenery3d::generateShadowMap()
 	frustumArray[i].calcFrustum(viewPos, viewDir, viewUp);
 
         //Find the convex body that encompasses all shadow receivers and casters for this split
-        focusBodies[i]->clear();
+	focusBodies[i].clear();
         computePolyhedron(i);
 
         //qDebug() << i << ".split vert count:" << focusBodies[i]->getVertCount();
 
-        if(focusBodies[i]->getVertCount())
+	if(focusBodies[i].getVertCount())
         {
             //Calculate the crop matrix so that the light's frustum is tightly fit to the current split's PSR+PSC polyhedron
             //This alters the ProjectionMatrix of the light
@@ -1774,6 +1759,7 @@ void Scenery3d::deleteShadowmapping()
 	shadowMapsArray.clear();
 	shadowCPM.clear();
 	frustumArray.clear();
+	focusBodies.clear();
 }
 
 void Scenery3d::initShadowmapping()
@@ -1787,6 +1773,7 @@ void Scenery3d::initShadowmapping()
 		shadowMapsArray.resize(frustumSplits);
 		shadowCPM.resize(frustumSplits);
 		frustumArray.resize(frustumSplits);
+		focusBodies.resize(frustumSplits);
 
 		//Query how many texture units we have at disposal
 		GLint maxTex, maxComb;

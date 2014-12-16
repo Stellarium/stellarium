@@ -37,60 +37,54 @@ Polyhedron::~Polyhedron()
 
 void Polyhedron::clear()
 {
-    for(unsigned int i=0; i<static_cast<unsigned int>(polygons.size()); i++)
-    {
-        delete polygons[i];
-    }
-
     polygons.clear();
     uniqueVerts.clear();
 }
 
-void Polyhedron::add(Frustum &f)
+void Polyhedron::add(const Frustum &f)
 {
     //Front
-    add(new SPolygon(f.getCorner(Frustum::NBL), f.getCorner(Frustum::NBR), f.getCorner(Frustum::NTR), f.getCorner(Frustum::NTL)));
+    polygons.append(SPolygon(f.getCorner(Frustum::NBL), f.getCorner(Frustum::NBR), f.getCorner(Frustum::NTR), f.getCorner(Frustum::NTL)));
     //Back
-    add(new SPolygon(f.getCorner(Frustum::FTL), f.getCorner(Frustum::FTR), f.getCorner(Frustum::FBR), f.getCorner(Frustum::FBL)));
+    polygons.append(SPolygon(f.getCorner(Frustum::FTL), f.getCorner(Frustum::FTR), f.getCorner(Frustum::FBR), f.getCorner(Frustum::FBL)));
     //Left
-    add(new SPolygon(f.getCorner(Frustum::NBL), f.getCorner(Frustum::NTL), f.getCorner(Frustum::FTL), f.getCorner(Frustum::FBL)));
+    polygons.append(SPolygon(f.getCorner(Frustum::NBL), f.getCorner(Frustum::NTL), f.getCorner(Frustum::FTL), f.getCorner(Frustum::FBL)));
     //Right
-    add(new SPolygon(f.getCorner(Frustum::NBR), f.getCorner(Frustum::FBR), f.getCorner(Frustum::FTR), f.getCorner(Frustum::NTR)));
+    polygons.append(SPolygon(f.getCorner(Frustum::NBR), f.getCorner(Frustum::FBR), f.getCorner(Frustum::FTR), f.getCorner(Frustum::NTR)));
     //Bottom
-    add(new SPolygon(f.getCorner(Frustum::FBL), f.getCorner(Frustum::FBR), f.getCorner(Frustum::NBR), f.getCorner(Frustum::NBL)));
+    polygons.append(SPolygon(f.getCorner(Frustum::FBL), f.getCorner(Frustum::FBR), f.getCorner(Frustum::NBR), f.getCorner(Frustum::NBL)));
     //Top
-    add(new SPolygon(f.getCorner(Frustum::FTR), f.getCorner(Frustum::FTL), f.getCorner(Frustum::NTL), f.getCorner(Frustum::NTR)));
+    polygons.append(SPolygon(f.getCorner(Frustum::FTR), f.getCorner(Frustum::FTL), f.getCorner(Frustum::NTL), f.getCorner(Frustum::NTR)));
 }
 
-void Polyhedron::add(SPolygon *p)
+void Polyhedron::add(const SPolygon& p)
 {
-    if(p) polygons.push_back(p);
+	polygons.append(p);
 }
 
-void Polyhedron::add(const std::vector<Vec3f> &verts, const Vec3f &normal)
+void Polyhedron::add(const QVector<Vec3f> &verts, const Vec3f &normal)
 {
     if(verts.size() < 3) return;
 
-    SPolygon *p = new SPolygon();
+    SPolygon p;
 
-    for(unsigned int i=0; i<verts.size(); i++)
+    for(int i=0; i<verts.size(); i++)
     {
-        p->addUniqueVert(verts[i]);
+	p.addUniqueVert(verts[i]);
     }
 
-    if(p->vertices.size() < 3)
+    if(p.vertices.size() < 3)
     {
-        delete p;
         return;
     }
 
     //Check normal direction
-    Plane polyPlane(p->vertices[0], p->vertices[1], p->vertices[2], SPolygon::CCW);
+    Plane polyPlane(p.vertices[0], p.vertices[1], p.vertices[2], SPolygon::CCW);
 
     //Might need to reverse the vertex order
-    if(polyPlane.normal.dot(normal) < 0.0f) p->reverseOrder();
+    if(polyPlane.normal.dot(normal) < 0.0f) p.reverseOrder();
 
-    polygons.push_back(p);
+    polygons.append(p);
 }
 
 void Polyhedron::intersect(const AABB &bb)
@@ -104,18 +98,17 @@ void Polyhedron::intersect(const AABB &bb)
 void Polyhedron::intersect(const Plane &p)
 {
     //Save intersection points
-    std::vector<Vec3f> intersectionPoints;
+    QVector<Vec3f> intersectionPoints;
 
     //Iterate over this polyhedron's polygons
-    for(std::vector<SPolygon*>::iterator it = polygons.begin(); it != polygons.end();)
+    for(QVector<SPolygon>::iterator it = polygons.begin(); it != polygons.end();)
     {
         //Retrive the polygon and intersect it with the specified plane, save the intersection points
-        (*it)->intersect(p, intersectionPoints);
+	(*it).intersect(p, intersectionPoints);
 
         //If all vertices were clipped, remove the polygon
-        if(!(*it)->vertices.size())
-        {
-            delete (*it);
+	if(!(*it).vertices.size())
+	{
             it = polygons.erase(it);
         }
         else
@@ -128,7 +121,7 @@ void Polyhedron::intersect(const Plane &p)
     if(intersectionPoints.size()) add(intersectionPoints, p.normal);
 }
 
-void Polyhedron::intersect(const Line &l, const Vec3f &min, const Vec3f &max, std::vector<Vec3f> &vertices)
+void Polyhedron::intersect(const Line &l, const Vec3f &min, const Vec3f &max, QVector<Vec3f> &vertices)
 {
     const Vec3f &dir = l.direction;
     const Vec3f &p = l.startPoint;
@@ -158,7 +151,7 @@ void Polyhedron::intersect(const Line &l, const Vec3f &min, const Vec3f &max, st
         intersect = true;
     }
 
-    if(intersect) vertices.push_back(newPoint);
+    if(intersect) vertices.append(newPoint);
 }
 
 bool Polyhedron::clip(float p, float q, float &u1, float &u2) const
@@ -227,11 +220,11 @@ void Polyhedron::makeUniqueVerts()
 {
     uniqueVerts.clear();
 
-    for(unsigned int i=0; i<polygons.size(); i++)
+    for(int i=0; i<polygons.size(); i++)
     {
-        std::vector<Vec3f> &verts = polygons[i]->vertices;
+	QVector<Vec3f> &verts = polygons[i].vertices;
 
-        for(unsigned int j=0; j<verts.size(); j++)
+	for(int j=0; j<verts.size(); j++)
         {
             addUniqueVert(verts[j]);
         }
@@ -242,7 +235,7 @@ void Polyhedron::addUniqueVert(const Vec3f &v)
 {
     bool flag = true;
 
-    for(unsigned int i=0; i<uniqueVerts.size() && flag; i++)
+    for(int i=0; i<uniqueVerts.size() && flag; i++)
     {
         flag = !(CompareVerts(v, uniqueVerts[i]));
     }
@@ -250,12 +243,12 @@ void Polyhedron::addUniqueVert(const Vec3f &v)
     if(flag) uniqueVerts.push_back(v);
 }
 
-unsigned int Polyhedron::getVertCount()
+int Polyhedron::getVertCount() const
 {
-    return static_cast<unsigned int>(uniqueVerts.size());
+    return uniqueVerts.size();
 }
 
-const std::vector<Vec3f> &Polyhedron::getVerts() const
+const QVector<Vec3f> &Polyhedron::getVerts() const
 {
     return uniqueVerts;
 }
