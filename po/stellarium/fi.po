@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-12-10 21:31+0600\n"
+"POT-Creation-Date: 2014-12-15 22:16+0600\n"
 "PO-Revision-Date: 2014-12-14 14:03+0000\n"
 "Last-Translator: Tuomas Teipainen <tmsteipainen1@gmail.com>\n"
 "Language-Team: Finnish <fi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-12-15 05:43+0000\n"
+"X-Launchpad-Export-Date: 2014-12-16 06:11+0000\n"
 "X-Generator: Launchpad (build 17286)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:132 src/core/modules/StarMgr.cpp:353
@@ -354,17 +354,23 @@ msgstr "Koman halkaisija (arvio): %1 km"
 msgid "Gas tail length (estimate): %1 Mio km"
 msgstr "Kaasupyrstön pituus (arvio): %1 milj. km"
 
-#: src/core/modules/SolarSystem.cpp:162
+#. TRANSLATORS: Type of objects (for "Lists" in the search tool)
+#: src/core/modules/SolarSystem.cpp:162 src/translations.h:54
+#: src/ui_viewDialog.h:1233
+msgid "Planets"
+msgstr "Planeetat"
+
+#: src/core/modules/SolarSystem.cpp:163
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:308
 msgid "Planet labels"
 msgstr "Planeettojen nimet"
 
-#: src/core/modules/SolarSystem.cpp:163
+#: src/core/modules/SolarSystem.cpp:164
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:312
 msgid "Planet orbits"
 msgstr "Planeettojen radat"
 
-#: src/core/modules/SolarSystem.cpp:164
+#: src/core/modules/SolarSystem.cpp:165
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:316
 msgid "Planet trails"
 msgstr "Planeettojen radat"
@@ -2158,11 +2164,6 @@ msgstr "kuu"
 #: src/translations.h:52
 msgid "plutoid"
 msgstr "plutoidi"
-
-#. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:54 src/ui_viewDialog.h:1233
-msgid "Planets"
-msgstr "Planeetat"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:56
@@ -4510,7 +4511,7 @@ msgid "Horizontal coordinates"
 msgstr "Horisontaaliset koordinaatit"
 
 #: src/ui_configurationDialog.h:1109
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:166
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:167
 msgid "Altitude/Azimuth"
 msgstr "Korkeus/atsimuutti"
 
@@ -9950,10 +9951,15 @@ msgstr "Gal. Pituus/Leveys"
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:208
 msgctxt "abbreviated in the plugin"
+msgid "Ecl. Long/Lat"
+msgstr ""
+
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:227
+msgctxt "abbreviated in the plugin"
 msgid "Ecl. Long/Lat (J2000.0)"
 msgstr "Ekl. Pituus/Leveys (J2000.0)"
 
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:226
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:245
 msgctxt "abbreviated in the plugin"
 msgid "HA/Dec"
 msgstr "Tuntik./Dek."
@@ -9987,14 +9993,18 @@ msgid "Right ascension/Declination"
 msgstr "Rektaskensio/Deklinaatio"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:165
+msgid "Ecliptic Longitude/Latitude"
+msgstr ""
+
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:166
 msgid "Ecliptic Longitude/Latitude (J2000.0)"
 msgstr "Ekliptinen Pituus/Leveys (J2000.0)"
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:167
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:168
 msgid "Galactic Longitude/Latitude"
 msgstr "Galaktinen Pituus/Leveys"
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:197
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:198
 msgid "Coordinates of custom position:"
 msgstr "Mukautetun paikan koordinaatit:"
 

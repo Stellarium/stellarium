@@ -9,15 +9,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium-uk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-12-10 21:31+0600\n"
-"PO-Revision-Date: 2014-12-10 20:55+0000\n"
+"POT-Creation-Date: 2014-12-15 22:16+0600\n"
+"PO-Revision-Date: 2014-12-15 14:17+0000\n"
 "Last-Translator: Yuri Chornoivan <yurchor@gmail.com>\n"
 "Language-Team: Ukrainian <translation@linux.org.ua>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-12-11 06:11+0000\n"
-"X-Generator: Launchpad (build 17283)\n"
+"X-Launchpad-Export-Date: 2014-12-16 06:29+0000\n"
+"X-Generator: Launchpad (build 17286)\n"
 "X-Poedit-Country: UKRAINE\n"
 "Language: uk\n"
 "X-Poedit-Language: Ukrainian\n"
@@ -360,17 +360,23 @@ msgstr "Діаметр коми (приблизний): %1 км"
 msgid "Gas tail length (estimate): %1 Mio km"
 msgstr "Довжина газового хвоста (приблизна): %1 млн. км"
 
-#: src/core/modules/SolarSystem.cpp:162
+#. TRANSLATORS: Type of objects (for "Lists" in the search tool)
+#: src/core/modules/SolarSystem.cpp:162 src/translations.h:54
+#: src/ui_viewDialog.h:1233
+msgid "Planets"
+msgstr "Планети"
+
+#: src/core/modules/SolarSystem.cpp:163
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:308
 msgid "Planet labels"
 msgstr "Мітки планет"
 
-#: src/core/modules/SolarSystem.cpp:163
+#: src/core/modules/SolarSystem.cpp:164
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:312
 msgid "Planet orbits"
 msgstr "Орбіти планет"
 
-#: src/core/modules/SolarSystem.cpp:164
+#: src/core/modules/SolarSystem.cpp:165
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:316
 msgid "Planet trails"
 msgstr "Траєкторії планет"
@@ -2186,11 +2192,6 @@ msgstr "місяць"
 #: src/translations.h:52
 msgid "plutoid"
 msgstr "плутоїд"
-
-#. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:54 src/ui_viewDialog.h:1233
-msgid "Planets"
-msgstr "Планети"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:56
@@ -4548,7 +4549,7 @@ msgid "Horizontal coordinates"
 msgstr "Горизонтальні координати"
 
 #: src/ui_configurationDialog.h:1109
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:166
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:167
 msgid "Altitude/Azimuth"
 msgstr "Висота/Азимут"
 
@@ -10041,10 +10042,15 @@ msgstr "Гал. довг./шир."
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:208
 msgctxt "abbreviated in the plugin"
+msgid "Ecl. Long/Lat"
+msgstr "Екл. довг./шир."
+
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:227
+msgctxt "abbreviated in the plugin"
 msgid "Ecl. Long/Lat (J2000.0)"
 msgstr "Екл. довг./шир. (J2000.0)"
 
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:226
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:245
 msgctxt "abbreviated in the plugin"
 msgid "HA/Dec"
 msgstr "ПС/Схил"
@@ -10078,14 +10084,18 @@ msgid "Right ascension/Declination"
 msgstr "Пряме сходження/Схилення"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:165
+msgid "Ecliptic Longitude/Latitude"
+msgstr "Екліптична довгота/широта"
+
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:166
 msgid "Ecliptic Longitude/Latitude (J2000.0)"
 msgstr "Екліптична довгота/широта (J2000.0)"
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:167
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:168
 msgid "Galactic Longitude/Latitude"
 msgstr "Галактична довгота/широта"
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:197
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:198
 msgid "Coordinates of custom position:"
 msgstr "Координати нетипової позиції:"
 

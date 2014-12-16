@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-12-10 21:31+0600\n"
+"POT-Creation-Date: 2014-12-15 22:16+0600\n"
 "PO-Revision-Date: 2014-11-29 09:12+0000\n"
 "Last-Translator: Manuel Rosales <manuel.rosales@mundo-r.com>\n"
 "Language-Team: Galician <gl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-12-11 05:54+0000\n"
-"X-Generator: Launchpad (build 17283)\n"
+"X-Launchpad-Export-Date: 2014-12-16 06:13+0000\n"
+"X-Generator: Launchpad (build 17286)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:132 src/core/modules/StarMgr.cpp:353
 #: src/core/modules/GridLinesMgr.cpp:736 src/core/modules/LandscapeMgr.cpp:355
@@ -354,17 +354,23 @@ msgstr "Diámetro de coma (estimado): %1 km"
 msgid "Gas tail length (estimate): %1 Mio km"
 msgstr "Lonxitude da cola de gas (estimada): %1 Mio km"
 
-#: src/core/modules/SolarSystem.cpp:162
+#. TRANSLATORS: Type of objects (for "Lists" in the search tool)
+#: src/core/modules/SolarSystem.cpp:162 src/translations.h:54
+#: src/ui_viewDialog.h:1233
+msgid "Planets"
+msgstr "Planetas"
+
+#: src/core/modules/SolarSystem.cpp:163
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:308
 msgid "Planet labels"
 msgstr "Etiquetas de planetas"
 
-#: src/core/modules/SolarSystem.cpp:163
+#: src/core/modules/SolarSystem.cpp:164
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:312
 msgid "Planet orbits"
 msgstr "Órbitas planetarias"
 
-#: src/core/modules/SolarSystem.cpp:164
+#: src/core/modules/SolarSystem.cpp:165
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:316
 msgid "Planet trails"
 msgstr "Trazas dos planetas"
@@ -2142,11 +2148,6 @@ msgstr "lúa"
 #: src/translations.h:52
 msgid "plutoid"
 msgstr "plutoide"
-
-#. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:54 src/ui_viewDialog.h:1233
-msgid "Planets"
-msgstr "Planetas"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:56
@@ -4498,7 +4499,7 @@ msgid "Horizontal coordinates"
 msgstr "Coordenadas horizontais"
 
 #: src/ui_configurationDialog.h:1109
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:166
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:167
 msgid "Altitude/Azimuth"
 msgstr "Altitude/Azimuth"
 
@@ -9965,10 +9966,15 @@ msgstr "Gal. Lonx/Lat"
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:208
 msgctxt "abbreviated in the plugin"
+msgid "Ecl. Long/Lat"
+msgstr ""
+
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:227
+msgctxt "abbreviated in the plugin"
 msgid "Ecl. Long/Lat (J2000.0)"
 msgstr "Ecl. Lonx/Lat (J2000.0)"
 
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:226
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:245
 msgctxt "abbreviated in the plugin"
 msgid "HA/Dec"
 msgstr "HA/Dec"
@@ -10002,14 +10008,18 @@ msgid "Right ascension/Declination"
 msgstr "Ascensión recta/Declinación"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:165
+msgid "Ecliptic Longitude/Latitude"
+msgstr ""
+
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:166
 msgid "Ecliptic Longitude/Latitude (J2000.0)"
 msgstr "Lonxitude/Latitude da Eclíptica (J2000.0)"
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:167
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:168
 msgid "Galactic Longitude/Latitude"
 msgstr "Lonxitude/Latitude galáctica"
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:197
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:198
 msgid "Coordinates of custom position:"
 msgstr "Coordenadas da posición personalizada:"
 
