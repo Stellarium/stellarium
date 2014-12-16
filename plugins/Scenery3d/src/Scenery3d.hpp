@@ -209,8 +209,6 @@ private:
     int writeTex, readTex;
     GLenum *attachments;
 
-    QOpenGLShaderProgram *minMaxShader;
-
     QFont debugTextFont;
 
     void drawObjModel();
@@ -254,13 +252,9 @@ private:
     //Computes the light projection values
     void computeOrthoProjVals();
 
-    //Analyzes the view samples to find even tighter fitting near and far planes
-    void analyzeViewSamples();
-
 
     //! Loads the model contained in the current scene
     void loadModel();
-    void drawFullscreenQuad(int dim);
     //TODO FS: only temporary, will be removed
     void nogluLookAt(double eyeX,  double eyeY,  double eyeZ,  double centerX,  double centerY,  double centerZ,  double upX,  double upY,  double upZ);
 };
