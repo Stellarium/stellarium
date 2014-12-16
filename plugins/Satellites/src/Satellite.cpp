@@ -49,6 +49,7 @@ int Satellite::orbitLineSegments = 90;
 int Satellite::orbitLineFadeSegments = 4;
 int Satellite::orbitLineSegmentDuration = 20;
 bool Satellite::orbitLinesFlag = true;
+bool Satellite::realisticModeFlag = false;
 
 
 Satellite::Satellite(const QString& identifier, const QVariantMap& map)
@@ -58,18 +59,28 @@ Satellite::Satellite(const QString& identifier, const QVariantMap& map)
       userDefined(false),
       newlyAdded(false),
       orbitValid(false),
-      hintColor(0.0,0.0,0.0),
+      jdLaunchYearJan1(0),
+      stdMag(99.),
+      height(0.),
+      range(0.),
+      rangeRate(0.),
+      hintColor(0.0,0.0,0.0),            
       lastUpdated(),
-      pSatWrapper(NULL)
+      pSatWrapper(NULL),
+      visibility(0),
+      phaseAngle(0.),
+      lastEpochCompForOrbit(0.),
+      epochTime(0.)
+
 {
 	// return initialized if the mandatory fields are not present
 	if (identifier.isEmpty())
 		return;
 	if (!map.contains("name") || !map.contains("tle1") || !map.contains("tle2"))
 		return;
-	QOpenGLFunctions_1_2::initializeOpenGLFunctions();
 
-	font.setPixelSize(16);
+	// Font size is 16
+	font.setPixelSize(StelApp::getInstance().getBaseFontSize()+3);
 
 	id = identifier;
 	name  = map.value("name").toString();
@@ -82,7 +93,7 @@ Satellite::Satellite(const QString& identifier, const QVariantMap& map)
 	displayed = map.value("visible", displayed).toBool();
 	orbitDisplayed = map.value("orbitVisible", orbitDisplayed).toBool();
 	userDefined = map.value("userDefined", userDefined).toBool();
-
+	stdMag = map.value("stdMag", 99.f).toDouble();
 	// Satellite hint color
 	QVariantList list = map.value("hintColor", QVariantList()).toList();
 	if (list.count() == 3)
@@ -160,7 +171,8 @@ double Satellite::roundToDp(float n, int dp)
 QVariantMap Satellite::getMap(void)
 {
 	QVariantMap map;
-	map["name"] = name;
+	map["name"] = name;	
+	map["stdMag"] = stdMag;
 	map["tle1"] = tleElements.first.data();
 	map["tle2"] = tleElements.second.data();
 
@@ -235,11 +247,16 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 		oss << catalogNumbers << "<br/><br/>";
 	}
 
-	if (flags & Extra)
+	if (flags & ObjectType)
 	{
 		oss << q_("Type: <b>%1</b>").arg(q_("artificial satellite")) << "<br/>";
 	}
 	
+	if ((flags & Magnitude) && (stdMag!=99.f))
+	{
+		oss << q_("Approx. magnitude: <b>%1</b>").arg(QString::number(getVMagnitude(core), 'f', 2)) << "<br/>";
+	}
+
 	// Ra/Dec etc.
 	oss << getPositionInfoString(core, flags);
 	
@@ -285,20 +302,20 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 		//TODO: Move to a more prominent place.
 		switch (visibility)
 		{
-		case RADAR_SUN:
-			oss << q_("The satellite and the observer are in sunlight.") << "<br/>";
-			break;
-		case VISIBLE:
-			oss << q_("The satellite is visible.") << "<br/>";
-			break;
-		case RADAR_NIGHT:
-			oss << q_("The satellite is eclipsed.") << "<br/>";
-			break;
-		case NOT_VISIBLE:
-			oss << q_("The satellite is not visible") << "<br/>";
-			break;
-		default:
-			break;
+			case RADAR_SUN:
+				oss << q_("The satellite and the observer are in sunlight.") << "<br/>";
+				break;
+			case VISIBLE:
+				oss << q_("The satellite is visible.") << "<br/>";
+				break;
+			case RADAR_NIGHT:
+				oss << q_("The satellite is eclipsed.") << "<br/>";
+				break;
+			case NOT_VISIBLE:
+				oss << q_("The satellite is not visible") << "<br/>";
+				break;
+			default:
+				break;
 		}
 
 		if (comms.size() > 0)
@@ -344,8 +361,34 @@ Vec3f Satellite::getInfoColor(void) const
 }
 
 float Satellite::getVMagnitude(const StelCore* core) const
+{	
+	Q_UNUSED(core);
+	float vmag = 7.f; // Optimistic value of magnitude for artificial satellite without data for standard magnitude
+	if (!realisticModeFlag)
+		vmag = 5.0;
+
+	if (stdMag!=99.f)
+	{
+		// OK, artificial satellite has value for standard magnitude
+		if (visibility==VISIBLE)
+		{
+			// Calculation of approx. visual magnitude for artificial satellites
+			// described here: http://www.prismnet.com/~mmccants/tles/mccdesc.html
+			double fracil = calculateIlluminatedFraction();
+			if (fracil==0)
+				fracil = 0.000001;
+			vmag = stdMag - 15.75 + 2.5 * std::log10(range * range / fracil);
+		}
+		else
+			vmag = 17.f; // Artificial satellite is invisible and 17 is hypothetical value of magnitude
+	}
+	return vmag;
+}
+
+// Calculate illumination fraction of artifical satellite
+float Satellite::calculateIlluminatedFraction() const
 {
-    return 5.0;
+	return (1 + cos(phaseAngle))/2;
 }
 
 double Satellite::getAngularSize(const StelCore*) const
@@ -404,6 +447,7 @@ void Satellite::update(double)
 
 		pSatWrapper->getSlantRange(range, rangeRate);
 		visibility = pSatWrapper->getVisibilityPredict();
+		phaseAngle = pSatWrapper->getPhaseAngle();
 
 		// Compute orbit points to draw orbit line.
 		if (orbitDisplayed) computeOrbitPoints();
@@ -491,29 +535,57 @@ bool Satellite::operator <(const Satellite& another) const
 		return false;
 }
 
-void Satellite::draw(const StelCore* core, StelPainter& painter, float)
+void Satellite::draw(StelCore* core, StelPainter& painter, float)
 {
 	if (core->getJDay() < jdLaunchYearJan1) return;
 
 	XYZ = getJ2000EquatorialPos(core);
-	Vec3f drawColor;
-	(visibility==RADAR_NIGHT) ? drawColor = Vec3f(0.2f,0.2f,0.2f) : drawColor = hintColor;
-	glColor4f(drawColor[0],drawColor[1],drawColor[2], Satellite::hintBrightness);
+	StelSkyDrawer* sd = core->getSkyDrawer();
+	Vec3f drawColor(0.2f,0.2f,0.2f);
+	if (visibility != RADAR_NIGHT)
+		drawColor = hintColor;
+	painter.setColor(drawColor[0], drawColor[1], drawColor[2], hintBrightness);
 
 	StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
 
-	Vec3d xy;
-	if (prj->project(XYZ,xy))
+	if (realisticModeFlag)
 	{
-		if (Satellite::showLabels)
-		{
-			painter.drawText(xy[0], xy[1], name, 0, 10, 10, false);
-			Satellite::hintTexture->bind();
-		}
-		painter.drawSprite2dMode(xy[0], xy[1], 11);
+		double mag = getVMagnitude(core);
+		RCMag rcMag;
+		Vec3f color = Vec3f(1.f,1.f,1.f);
 
-		if (orbitDisplayed && Satellite::orbitLinesFlag) drawOrbit(painter);
+		StelProjectorP origP = painter.getProjector(); // Save projector state
+		painter.setProjector(prj);
+
+		sd->preDrawPointSource(&painter);
+		if (mag <= sd->getLimitMagnitude())
+		{
+			sd->computeRCMag(mag, &rcMag);
+			sd->drawPointSource(&painter, Vec3f(XYZ[0], XYZ[1], XYZ[2]), rcMag, color, true);
+			painter.setColor(color[0], color[1], color[2], 1);
+
+			if (Satellite::showLabels)
+				painter.drawText(XYZ, name, 0, 10, 10, false);
+
+		}
+
+		sd->postDrawPointSource(&painter);
+
+		painter.setProjector(origP); // Restrore projector state
 	}
+	else
+	{
+		Vec3d xy;
+		if (prj->project(XYZ,xy))
+		{
+			if (Satellite::showLabels)
+				painter.drawText(xy[0], xy[1], name, 0, 10, 10, false);
+
+			Satellite::hintTexture->bind();
+			painter.drawSprite2dMode(xy[0], xy[1], 11);
+		}
+	}
+	if (orbitDisplayed && Satellite::orbitLinesFlag) drawOrbit(painter);
 }
 
 

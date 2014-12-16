@@ -27,8 +27,7 @@ Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 
 #include <QtGlobal>
 
-#ifdef Q_OS_WIN32
-
+#ifdef Q_OS_WIN
 #include <winsock2.h>
 #include <fcntl.h>
 

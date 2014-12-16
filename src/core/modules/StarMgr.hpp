@@ -81,11 +81,13 @@ class StarMgr : public StelObjectModule
 {
 	Q_OBJECT
 	Q_PROPERTY(bool flagStarsDisplayed
-			   READ getFlagStars
-			   WRITE setFlagStars)
+		   READ getFlagStars
+		   WRITE setFlagStars
+		   NOTIFY starsDisplayedChanged)
 	Q_PROPERTY(bool flagLabelsDisplayed
-			   READ getFlagLabels
-			   WRITE setFlagLabels)
+		   READ getFlagLabels
+		   WRITE setFlagLabels
+		   NOTIFY starLabelsDisplayedChanged)
 
 public:
 	StarMgr(void);
@@ -138,14 +140,20 @@ public:
 	//! @param useStartOfWords the autofill mode for returned objects names
 	//! @return a list of matching object name by order of relevance, or an empty list if nothing match
 	virtual QStringList listMatchingObjects(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false) const;
-	// empty, as there's too much stars for displaying at once
-	virtual QStringList listAllObjects(bool inEnglish) const { Q_UNUSED(inEnglish) return QStringList(); }
+	//! @note Loading stars with the common names only.
+	virtual QStringList listAllObjects(bool inEnglish) const;	
+	virtual QStringList listAllObjectsByType(const QString& objType, bool inEnglish) const { Q_UNUSED(objType) Q_UNUSED(inEnglish) return QStringList(); }
 	virtual QString getName() const { return "Stars"; }
 
 public slots:
 	///////////////////////////////////////////////////////////////////////////
 	// Methods callable from script and GUI
 	//! Set the color used to label bright stars.
+	//! @param c The color of the bright stars labels
+	//! @code
+	//! // example of usage in scripts
+	//! StarMgr.setLabelColor(Vec3f(1.0,0.0,0.0));
+	//! @endcode
 	void setLabelColor(const Vec3f& c) {labelColor = c;}
 	//! Get the current color used to label bright stars.
 	Vec3f getLabelColor(void) const {return labelColor;}
@@ -186,50 +194,81 @@ public:
 
 	//! Get the (translated) common name for a star with a specified
 	//! Hipparcos catalogue number.
+	//! @param hip The Hipparcos number of star
+	//! @return translated common name of star
 	static QString getCommonName(int hip);
 
 	//! Get the (translated) scientific name for a star with a specified
 	//! Hipparcos catalogue number.
+	//! @param hip The Hipparcos number of star
+	//! @return translated scientific name of star
 	static QString getSciName(int hip);
 
 	//! Get the (translated) additional scientific name for a star with a
 	//! specified Hipparcos catalogue number.
+	//! @param hip The Hipparcos number of star
+	//! @return translated additional scientific name of star
 	static QString getSciAdditionalName(int hip);
 
 	//! Get the (translated) scientific name for a variable star with a specified
 	//! Hipparcos catalogue number.
+	//! @param hip The Hipparcos number of star
+	//! @return translated scientific name of variable star
 	static QString getGcvsName(int hip);
+
+	//! Get the (English) common name for a star with a specified
+	//! Hipparcos catalogue number.
+	//! @param hip The Hipparcos number of star
+	//! @return common name of star (from skyculture @file star_names.fab)
+	static QString getCommonEnglishName(int hip);
 
 	//! Get the type of variability for a variable star with a specified
 	//! Hipparcos catalogue number.
+	//! @param hip The Hipparcos number of star
+	//! @return type of variability
 	static QString getGcvsVariabilityType(int hip);
 
 	//! Get the magnitude at maximum brightness for a variable star with a specified
 	//! Hipparcos catalogue number.
+	//! @param hip The Hipparcos number of star
+	//! @return the magnitude at maximum brightness for a variable star
 	static float getGcvsMaxMagnitude(int hip);
 
 	//! Get the magnitude flag code for a variable star with a specified
 	//! Hipparcos catalogue number.
+	//! @param hip The Hipparcos number of star
+	//! @return the magnitude flag code for a variable star
 	static int getGcvsMagnitudeFlag(int hip);
 
 	//! Get the minimum magnitude or amplitude for a variable star with a specified
 	//! Hipparcos catalogue number.
+	//! @param hip The Hipparcos number of star
+	//! @param firstMinimumFlag
+	//! @return the minimum magnitude or amplitude for a variable star
 	static float getGcvsMinMagnitude(int hip, bool firstMinimumFlag=true);
 
 	//! Get the photometric system for a variable star with a specified
 	//! Hipparcos catalogue number.
+	//! @param hip The Hipparcos number of star
+	//! @return the photometric system for a variable star
 	static QString getGcvsPhotometricSystem(int hip);
 
 	//! Get Epoch for maximum light for a variable star with a specified
 	//! Hipparcos catalogue number.
+	//! @param hip The Hipparcos number of star
+	//! @return Epoch for maximum light for a variable star
 	static double getGcvsEpoch(int hip);
 
 	//! Get the period for a variable star with a specified
 	//! Hipparcos catalogue number.
+	//! @param hip The Hipparcos number of star
+	//! @return the period of variable star
 	static double getGcvsPeriod(int hip);
 
 	//! Get the rising time or duration of eclipse for a variable star with a
 	//! specified Hipparcos catalogue number.
+	//! @param hip The Hipparcos number of star
+	//! @return the rising time or duration of eclipse for variable star
 	static int getGcvsMM(int hip);
 
 	static QString convertToSpectralType(int index);
@@ -252,6 +291,10 @@ private slots:
 	//! @param skyCultureDir the name of the directory containing the sky culture to use.
 	void updateSkyCulture(const QString& skyCultureDir);
 
+signals:
+	void starLabelsDisplayedChanged(const bool displayed);
+	void starsDisplayedChanged(const bool displayed);
+
 private:
 
 	void setCheckFlag(const QString& catalogId, bool b);
@@ -261,6 +304,7 @@ private:
 	//! Loads common names for stars from a file.
 	//! Called when the SkyCulture is updated.
 	//! @param the path to a file containing the common names for bright stars.
+	//! @note Stellarium doesn't support sky cultures made prior version 0.10.6 now!
 	int loadCommonNames(const QString& commonNameFile);
 
 	//! Loads scientific names for stars from a file.
@@ -308,10 +352,10 @@ private:
 					  const Vec3f &c1,
 					  const Vec3f &c2);
 
-	HipIndexStruct *hipIndex; // array of hiparcos stars
+	HipIndexStruct *hipIndex; // array of Hipparcos stars
 
-	static QHash<int, QString> commonNamesMap;
-	static QHash<int, QString> commonNamesMapI18n;
+	static QHash<int, QString> commonNamesMap;     // the original names from skyculture (star_names.fab)
+	static QHash<int, QString> commonNamesMapI18n; // translated names
 	static QMap<QString, int> commonNamesIndexI18n;
 	static QMap<QString, int> commonNamesIndex;
 

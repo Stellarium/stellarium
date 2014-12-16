@@ -28,7 +28,6 @@
 
 #include "StelObject.hpp"
 #include "StelTextureTypes.hpp"
-#include "StelPainter.hpp"
 #include "StelFader.hpp"
 
 typedef struct
@@ -42,8 +41,10 @@ typedef struct
 	float inclination;	//! Exoplanet orbit inclination
 	float angleDistance;	//! Exoplanet angle distance
 	int discovered;		//! Exoplanet discovered year
+	QString pclass;		//! Exoplanet classification from host star spectral type (F, G, K, M), habitable zone (hot, warm, cold) and size (miniterran, subterran, terran, superterran, jovian, neptunian)
 	QString hclass;		//! Exoplanet habitable class
 	int MSTemp;		//! Exoplanet mean surface temperature (Kelvin)
+	int EqTemp;		//! Exoplanet equilibrium temperature in kelvins (K) assuming a 0.3 bond albedo (Earth = 255 K).
 	int ESI;		//! Exoplanet Earth Similarity Index
 } exoplanetData;
 
@@ -71,6 +72,7 @@ public:
 	{
 		return "Exoplanet";
 	}
+
 	virtual float getSelectPriority(const StelCore* core) const;
 
 	//! Get an HTML string to describe the object
@@ -98,15 +100,35 @@ public:
 
 	void update(double deltaTime);
 
+	int getCountExoplanets(void) const
+	{
+		return EPCount;
+	}
+	int getCountHabitableExoplanets(void) const
+	{
+		return PHEPCount;
+	}
+
 private:
+
+	QString getPlanetaryClassI18n(QString ptype) const;
+
 	bool initialized;
 
 	Vec3d XYZ;                         // holds J2000 position	
 
 	static StelTextureSP hintTexture;
 	static StelTextureSP markerTexture;
+	static Vec3f habitableExoplanetMarkerColor;
+	static Vec3f exoplanetMarkerColor;
+	static bool distributionMode;
+	static bool timelineMode;
+	static bool habitableMode;
 
-	void draw(StelCore* core, StelPainter& painter);
+	void draw(StelCore* core, StelPainter *painter);
+
+	int EPCount;
+	int PHEPCount;
 
 	//! Variables for description of properties of exoplanets
 	QString designation;			//! The designation of the host star

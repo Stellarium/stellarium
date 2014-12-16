@@ -21,14 +21,15 @@
 #ifndef _NEBULAMGR_HPP_
 #define _NEBULAMGR_HPP_
 
-#include <QString>
-#include <QStringList>
-#include <QFont>
 #include "StelObjectType.hpp"
 #include "StelFader.hpp"
 #include "StelSphericalIndex.hpp"
 #include "StelObjectModule.hpp"
 #include "StelTextureTypes.hpp"
+
+#include <QString>
+#include <QStringList>
+#include <QFont>
 
 class Nebula;
 class StelTranslator;
@@ -104,14 +105,23 @@ public:
 	//! @param useStartOfWords the autofill mode for returned objects names
 	//! @return a list of matching object name by order of relevance, or an empty list if nothing match
 	virtual QStringList listMatchingObjects(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false) const;
-	// empty for now
-	virtual QStringList listAllObjects(bool inEnglish) const { Q_UNUSED(inEnglish) return QStringList(); }
-	virtual QString getName() const { return "Nebulae"; }
+	//! @note Loading deep-sky objects with the proper names only.
+	virtual QStringList listAllObjects(bool inEnglish) const;
+	virtual QStringList listAllObjectsByType(const QString& objType, bool inEnglish) const;
+	virtual QString getName() const { return "Deep-sky objects"; }
 
+	//! Compute the maximum magntiude for which hints will be displayed.
+	float computeMaxMagHint(const class StelSkyDrawer* skyDrawer) const;
+	
 	///////////////////////////////////////////////////////////////////////////
 	// Properties setters and getters
 public slots:
 	//! Set the color used to draw the nebula symbols (circles, boxes. etc).
+	//! @param c The color of the nebula symbols
+	//! @code
+	//! // example of usage in scripts
+	//! NebulaMgr.setCirclesColor(Vec3f(1.0,0.0,0.0));
+	//! @endcode
 	void setCirclesColor(const Vec3f& c);
 	//! Get current value of the nebula circle color.
 	const Vec3f& getCirclesColor(void) const;
@@ -136,6 +146,11 @@ public slots:
 	bool getFlagShow(void) const { return flagShow; }
 
 	//! Set the color used to draw nebula labels.
+	//! @param c The color of the nebula labels
+	//! @code
+	//! // example of usage in scripts
+	//! NebulaMgr.setLabelsColor(Vec3f(1.0,0.0,0.0));
+	//! @endcode
 	void setLabelsColor(const Vec3f& c);
 	//! Get current value of the nebula label color.
 	const Vec3f& getLabelsColor(void) const;
@@ -168,6 +183,7 @@ private slots:
 	
 
 private:
+	
 	//! Search for a nebula object by name. e.g. M83, NGC 1123, IC 1234.
 	NebulaP search(const QString& name);
 

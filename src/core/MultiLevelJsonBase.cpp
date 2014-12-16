@@ -22,7 +22,6 @@
 #include "StelFileMgr.hpp"
 #include "StelProjector.hpp"
 #include "StelCore.hpp"
-#include "kfilterdev.h"
 #include "StelUtils.hpp"
 
 #include <QDebug>
@@ -135,21 +134,23 @@ void MultiLevelJsonBase::initFromUrl(const QString& url)
 		QFileInfo finf(fileName);
 		baseUrl = finf.absolutePath()+'/';
 		QFile f(fileName);
-		f.open(QIODevice::ReadOnly);
-		const bool compressed = fileName.endsWith(".qZ");
-		const bool gzCompressed = fileName.endsWith(".gz");
-		try
+		if(f.open(QIODevice::ReadOnly))
 		{
-			loadFromQVariantMap(loadFromJSON(f, compressed, gzCompressed));
-		}
-		catch (std::runtime_error e)
-		{
-			qWarning() << "WARNING : Can't parse JSON description: " << QDir::toNativeSeparators(fileName) << ": " << e.what();
-			errorOccured = true;
+			const bool compressed = fileName.endsWith(".qZ");
+			const bool gzCompressed = fileName.endsWith(".gz");
+			try
+			{
+				loadFromQVariantMap(loadFromJSON(f, compressed, gzCompressed));
+			}
+			catch (std::runtime_error e)
+			{
+				qWarning() << "WARNING : Can't parse JSON description: " << QDir::toNativeSeparators(fileName) << ": " << e.what();
+				errorOccured = true;
+				f.close();
+				return;
+			}
 			f.close();
-			return;
 		}
-		f.close();
 	}
 	else
 	{
@@ -272,11 +273,9 @@ QVariantMap MultiLevelJsonBase::loadFromJSON(QIODevice& input, bool qZcompressed
 	}
 	else if (gzCompressed)
 	{
-		QIODevice* d = KFilterDev::device(&input, "application/x-gzip", false);
-		d->open(QIODevice::ReadOnly);
-		map = parser.parse(d).toMap();
-		d->close();
-		delete d;
+		QByteArray ar = StelUtils::uncompress(input.readAll());
+		input.close();
+		map = parser.parse(ar).toMap();
 	}
 	else
 	{

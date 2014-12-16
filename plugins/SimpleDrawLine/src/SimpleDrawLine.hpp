@@ -33,7 +33,7 @@ public:
 	// Methods defined in the StelModule class
 	virtual void init();
 	virtual void update(double) {;}
-	virtual void draw(StelCore* core, class StelRenderer* renderer);
+	virtual void draw(StelCore* core);
 	virtual double getCallOrder(StelModuleActionName actionName) const;
 private:
 	// Font used for displaying our text
@@ -41,7 +41,6 @@ private:
 };
 
 
-#include "fixx11h.h"
 #include <QObject>
 #include "StelPluginInterface.hpp"
 

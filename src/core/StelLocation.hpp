@@ -26,16 +26,12 @@
 class StelLocation
 {
 public:
-	StelLocation() : longitude(0.f), latitude(0.f), altitude(0), bortleScaleIndex(2.f), role('X'), isUserLocation(true) {;}
+	StelLocation() : longitude(0.f), latitude(0.f), altitude(0), bortleScaleIndex(2.f), population(0.f), role('X'), isUserLocation(true) {;}
 
 	//! Return a short string which can be used in a list view.
-	QString getID() const
-	{
-		if (country.isEmpty())
-			return name;
-		else
-			return name + ", " +country;
-	}
+	QString getID() const;
+
+	bool isValid() const {return role!='!';}
 
 	//! Output the location as a string ready to be stored in the user_location file
 	QString serializeToLine() const;
@@ -44,7 +40,7 @@ public:
 	QString name;
 	//! English country name or empty string
 	QString country;
-	//! State/region name (usefull if 2 locations of the same country have the same name)
+	//! State/region name (useful if 2 locations of the same country have the same name)
 	QString state;
 	//! English planet name
 	QString planetName;
@@ -70,13 +66,19 @@ public:
 	//! - \p I is a spacecraft impact
 	//! - \p A is a spacecraft crash
 	//! - \p X is an unknown or user-defined location (the default value).
+	//! - \p ! is an invalid location.
 	QChar role;
 
 	//! Parse a location from a line serialization
 	static StelLocation createFromLine(const QString& line);
 
+	//! Compute great-circle distance between two locations
+	static float distanceDegrees(const float long1, const float lat1, const float long2, const float lat2);
+
 	//! Used privately by the StelLocationMgr
 	bool isUserLocation;
+
+	static const int DEFAULT_BORTLE_SCALE_INDEX;
 };
 
 //! Serialize the passed StelLocation into a binary blob.

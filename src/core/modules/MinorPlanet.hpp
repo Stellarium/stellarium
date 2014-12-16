@@ -1,6 +1,7 @@
 /*
  * Stellarium
  * Copyright (C) 2010 Bogdan Marinov
+ * Copyright (C) 2013-14 Georg Zotti (accuracy&speedup)
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -49,7 +50,7 @@ public:
 		    OsculatingFunctType *osculatingFunc,
 		    bool closeOrbit,
 		    bool hidden,
-		    const QString &pType);
+		    const QString &pTypeStr);
 
 	~MinorPlanet();
 
@@ -75,6 +76,8 @@ public:
 	//! sets the nameI18 property with the appropriate translation.
 	//! Function overriden to handle the problem with name conflicts.
 	virtual void translateName(const StelTranslator& trans);
+	virtual QString getEnglishName(void) const {return englishName;}
+	virtual QString getNameI18n(void) const {return nameI18;}
 
 	//! set the minor planet's number, if any.
 	//! The number should be specified as an additional parameter, as
@@ -110,8 +113,8 @@ public:
 
 private:
 	int minorPlanetNumber;
-	double absoluteMagnitude;
-	double slopeParameter;
+	float absoluteMagnitude;
+	float  slopeParameter;
 	double semiMajorAxis;
 
 	bool nameIsProvisionalDesignation;

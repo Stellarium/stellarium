@@ -43,11 +43,12 @@
 #include "StelTranslator.hpp"
 #include "StelActionMgr.hpp"
 
-SatellitesDialog::SatellitesDialog() :
-    updateTimer(0),
-    importWindow(0),
-    filterModel(0),
-    checkStateRole(Qt::UserRole)
+SatellitesDialog::SatellitesDialog()
+	: satelliteModified(false)
+	, updateTimer(0)
+	, importWindow(0)
+	, filterModel(0)
+	, checkStateRole(Qt::UserRole)
 {
 	ui = new Ui_satellitesDialog;
 }
@@ -92,6 +93,13 @@ void SatellitesDialog::createDialogContent()
 	        this, SLOT(retranslate()));
 	Satellites* plugin = GETSTELMODULE(Satellites);
 
+#ifdef Q_OS_WIN
+	//Kinetic scrolling for tablet pc and pc
+	QList<QWidget *> addscroll;
+	addscroll << ui->satellitesList << ui->sourceList << ui->aboutTextBrowser;
+	installKineticScrolling(addscroll);
+#endif
+
 	// Settings tab / updates group
 	// These controls are refreshed by updateSettingsPage(), which in
 	// turn is triggered by setting any of these values. Because 
@@ -128,6 +136,10 @@ void SatellitesDialog::createDialogContent()
 	connect(ui->saveSettingsButton, SIGNAL(clicked()),
 	        this, SLOT(saveSettings()));
 
+	// Settings tab / realistic mode group
+	connect(ui->realisticGroup, SIGNAL(clicked(bool)),
+		plugin, SLOT(setFlagRelisticMode(bool)));
+
 	// Settings tab / orbit lines group
 	connect(ui->orbitLinesGroup, SIGNAL(clicked(bool)),
 	        plugin, SLOT(setOrbitLinesFlag(bool)));
@@ -142,7 +154,7 @@ void SatellitesDialog::createDialogContent()
 	filterModel = new SatellitesListFilterModel(this);
 	filterModel->setSourceModel(GETSTELMODULE(Satellites)->getSatellitesListModel());
 	filterModel->setFilterCaseSensitivity(Qt::CaseInsensitive);
-	ui->satellitesList->setModel(filterModel);
+	ui->satellitesList->setModel(filterModel);	
 	connect(ui->lineEditSearch, SIGNAL(textEdited(QString)),
 	        filterModel, SLOT(setFilterWildcard(QString)));
 	
@@ -153,7 +165,7 @@ void SatellitesDialog::createDialogContent()
 	        SLOT(updateSatelliteData()));
 	connect(ui->satellitesList, SIGNAL(doubleClicked(QModelIndex)),
 	        this, SLOT(trackSatellite(QModelIndex)));
-	
+
 	// Two-state input, three-state display
 	connect(ui->displayedCheckbox, SIGNAL(clicked(bool)),
 	        ui->displayedCheckbox, SLOT(setChecked(bool)));
@@ -195,12 +207,20 @@ void SatellitesDialog::createDialogContent()
 	connect(ui->addSourceButton, SIGNAL(clicked()), this, SLOT(addSourceRow()));
 	connect(plugin, SIGNAL(settingsChanged()),
 	        this, SLOT(toggleCheckableSources()));
+	connect(ui->sourceList, SIGNAL(currentRowChanged(int)), this, SLOT(repaintSourceList()));
 
 	// About tab
 	populateAboutPage();
 
 	populateFilterMenu();
 	populateSourcesList();
+}
+
+void SatellitesDialog::repaintSourceList()
+{
+	// Enable force repaint sourceList to avoiding artifacts
+	// Seems bug in Qt5. Details: https://bugs.launchpad.net/stellarium/+bug/1350669
+	ui->sourceList->repaint();
 }
 
 void SatellitesDialog::filterListByGroup(int index)
@@ -274,6 +294,10 @@ void SatellitesDialog::updateSatelliteData()
 		ui->tleSecondLineEdit->setCursorPosition(0);
 	}
 	
+	// Enable force repaint satellitesList to avoiding artifacts
+	// Seems bug in Qt5. Details: https://bugs.launchpad.net/stellarium/+bug/1350669
+	ui->satellitesList->repaint();
+
 	// TODO: Fix the comms button...
 //	ui->commsButton->setEnabled(sat->comms.count()>0);
 	
@@ -611,6 +635,8 @@ void SatellitesDialog::updateSettingsPage()
 	ui->orbitSegmentsSpin->setValue(Satellite::orbitLineSegments);
 	ui->orbitFadeSpin->setValue(Satellite::orbitLineFadeSegments);
 	ui->orbitDurationSpin->setValue(Satellite::orbitLineSegmentDuration);
+
+	ui->realisticGroup->setChecked(plugin->getFlagRealisticMode());
 }
 
 void SatellitesDialog::populateFilterMenu()
@@ -681,14 +707,12 @@ void SatellitesDialog::populateSourcesList()
 }
 
 void SatellitesDialog::addSpecialGroupItem()
-{
-	if (ui->groupsListWidget->count() == 0)
-		return;
-	
+{	
 	// TRANSLATORS: Displayed in the satellite group selection box.
 	QListWidgetItem* item = new QListWidgetItem(q_("New group..."));
 	item->setFlags(Qt::ItemIsEnabled|Qt::ItemIsEditable|Qt::ItemIsSelectable);
-	QFont font = ui->groupsListWidget->item(0)->font();
+	// Assuming this is also the font used for the list items...
+	QFont font = ui->groupsListWidget->font();
 	font.setItalic(true);
 	item->setFont(font);
 	ui->groupsListWidget->insertItem(0, item);

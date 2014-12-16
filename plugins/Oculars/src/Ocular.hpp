@@ -31,6 +31,7 @@ class Ocular : public QObject
 {
 	Q_OBJECT
 	Q_PROPERTY(bool binoculars READ isBinoculars WRITE setBinoculars)
+	Q_PROPERTY(bool permanentCrosshair READ hasPermanentCrosshair WRITE setPermanentCrosshair)
 	Q_PROPERTY(double appearentFOV READ appearentFOV WRITE setAppearentFOV)
 	Q_PROPERTY(double effectiveFocalLength READ effectiveFocalLength WRITE setEffectiveFocalLength)
 	Q_PROPERTY(double fieldStop READ fieldStop WRITE setFieldStop)
@@ -46,6 +47,8 @@ public:
 
 	bool isBinoculars(void) const;
 	void setBinoculars(const bool flag);
+	bool hasPermanentCrosshair(void) const;
+	void setPermanentCrosshair(const bool flag);
 	double appearentFOV(void) const;
 	void setAppearentFOV(const double fov);
 	double effectiveFocalLength(void) const;
@@ -63,6 +66,7 @@ public:
 
 private:
 	bool m_binoculars;
+	bool m_permanetCrosshair;
 	double m_appearentFOV;
 	double m_effectiveFocalLength;
 	double m_fieldStop;

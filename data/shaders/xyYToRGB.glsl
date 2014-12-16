@@ -68,7 +68,7 @@ void main()
 	{
 		// special case for s = 0 (x=0.25, y=0.25)
 		color[2] *= 0.5121445;
-		color[2] = pow(color[2]*pi*0.0001, alphaWaOverAlphaDa*oneOverGamma)* term2TimesOneOverMaxdLpOneOverGamma;
+		color[2] = pow(abs(color[2]*pi*0.0001), alphaWaOverAlphaDa*oneOverGamma)* term2TimesOneOverMaxdLpOneOverGamma;
 		color[0] = 0.787077*color[2];
 		color[1] = 0.9898434*color[2];
 		color[2] *= 1.9256125;
@@ -92,7 +92,7 @@ void main()
 
 		// 2. Adapt the luminance value and scale it to fit in the RGB range [2]
 		// color[2] = std::pow(adaptLuminanceScaled(color[2]), oneOverGamma);
-		color[2] = pow(color[2]*pi*0.0001, alphaWaOverAlphaDa*oneOverGamma)* term2TimesOneOverMaxdLpOneOverGamma;
+		color[2] = pow(abs(color[2]*pi*0.0001), alphaWaOverAlphaDa*oneOverGamma)* term2TimesOneOverMaxdLpOneOverGamma;
 
 		// Convert from xyY to XZY
 		// Use a XYZ to Adobe RGB (1998) matrix which uses a D65 reference white

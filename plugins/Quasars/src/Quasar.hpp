@@ -28,7 +28,6 @@
 
 #include "StelObject.hpp"
 #include "StelTextureTypes.hpp"
-#include "StelPainter.hpp"
 #include "StelFader.hpp"
 
 class StelPainter;
@@ -54,7 +53,8 @@ public:
 	{
 		return "Quasar";
 	}
-	virtual float getSelectPriority(const StelCore* core) const;
+
+	virtual float getSelectPriority(const StelCore *core) const;
 
 	//! Get an HTML string to describe the object
 	//! @param core A pointer to the core
@@ -85,6 +85,8 @@ private:
 
 	static StelTextureSP hintTexture;
 	static StelTextureSP markerTexture;
+	static bool distributionMode;
+	static Vec3f markerColor;
 
 	void draw(StelCore* core, StelPainter& painter);
 	//! Calculate a color of quasar

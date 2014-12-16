@@ -20,11 +20,12 @@
 #ifndef _STELOBJECT_HPP_
 #define _STELOBJECT_HPP_
 
-#include <QFlags>
-#include <QString>
 #include "VecMath.hpp"
 #include "StelObjectType.hpp"
 #include "StelRegionObject.hpp"
+
+#include <QFlags>
+#include <QString>
 
 class StelCore;
 
@@ -51,16 +52,18 @@ public:
 		Distance		= 0x00000040, //!< Info about an object's distance
 		Size			= 0x00000080, //!< Info about an object's size
 		Extra			= 0x00000100, //!< Derived class-specific extra fields
-		PlainText		= 0x00000200, //!< Strip HTML tags from output
-		HourAngle		= 0x00000400, //!< The hour angle + DE (of date)
-		AbsoluteMagnitude	= 0x00000800, //!< The absolute magnitude
-		GalacticCoord		= 0x00001000  //!< The galactic position
+		HourAngle		= 0x00000200, //!< The hour angle + DE (of date)
+		AbsoluteMagnitude	= 0x00000400, //!< The absolute magnitude
+		GalacticCoord		= 0x00000800, //!< The galactic position
+		ObjectType		= 0x00001000, //!< The type of the object (star, planet, etc.)
+		EclipticCoord		= 0x00002000, //!< The ecliptic position
+		PlainText		= 0x00004000  //!< Strip HTML tags from output
 	};
 	typedef QFlags<InfoStringGroupFlags> InfoStringGroup;
 	Q_FLAGS(InfoStringGroup)
 
 	//! A pre-defined set of specifiers for the getInfoString flags argument to getInfoString
-	static const InfoStringGroupFlags AllInfo = (InfoStringGroupFlags)(Name|CatalogNumber|Magnitude|RaDecJ2000|RaDecOfDate|AltAzi|Distance|Size|Extra|HourAngle|AbsoluteMagnitude|GalacticCoord);
+	static const InfoStringGroupFlags AllInfo = (InfoStringGroupFlags)(Name|CatalogNumber|Magnitude|RaDecJ2000|RaDecOfDate|AltAzi|Distance|Size|Extra|HourAngle|AbsoluteMagnitude|GalacticCoord|ObjectType|EclipticCoord);
 	//! A pre-defined set of specifiers for the getInfoString flags argument to getInfoString
 	static const InfoStringGroupFlags ShortInfo = (InfoStringGroupFlags)(Name|CatalogNumber|Magnitude|RaDecJ2000);
 
@@ -105,12 +108,12 @@ public:
 	//! Get observer-centered hour angle + declination (at current equinox)
 	//! It is the geometric position, i.e. without taking refraction effect into account.
 	//! The frame has its Z axis at the planet's current rotation axis
-	Vec3d getSideralPosGeometric(const StelCore* core) const;
+	Vec3d getSiderealPosGeometric(const StelCore* core) const;
 
 	//! Get observer-centered hour angle + declination (at current equinox)
 	//! It is the apparent position, i.e. taking the refraction effect into account.
 	//! The frame has its Z axis at the planet's current rotation axis
-	Vec3d getSideralPosApparent(const StelCore* core) const;
+	Vec3d getSiderealPosApparent(const StelCore* core) const;
 
 	//! Get observer-centered alt/az position
 	//! It is the geometric position, i.e. without taking refraction effect into account.
@@ -131,11 +134,12 @@ public:
 	virtual float getVMagnitude(const StelCore* core) const;
 	
 	//! Return object's apparent V magnitude as seen from observer including extinction.
+	//! Extinction obviously only if atmosphere=on.
 	float getVMagnitudeWithExtinction(const StelCore* core) const;
 
 	//! Return a priority value which is used to discriminate objects by priority
 	//! As for magnitudes, the lower is the higher priority
-	virtual float getSelectPriority(const StelCore*) const {return 99;}
+	virtual float getSelectPriority(const StelCore*) const;
 
 	//! Get a color used to display info about the object
 	virtual Vec3f getInfoColor() const {return Vec3f(1,1,1);}

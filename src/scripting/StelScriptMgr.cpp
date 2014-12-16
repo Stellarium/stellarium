@@ -19,6 +19,7 @@
  */
 
 
+#include "StelScriptOutput.hpp"
 #include "StelScriptMgr.hpp"
 #include "StelMainScriptAPI.hpp"
 #include "StelModuleMgr.hpp"
@@ -78,6 +79,7 @@ QScriptValue createVec3f(QScriptContext* context, QScriptEngine *engine)
 
 StelScriptMgr::StelScriptMgr(QObject *parent): QObject(parent)
 {
+	connect(&StelApp::getInstance(), SIGNAL(aboutToQuit()), this, SLOT(stopScript()), Qt::DirectConnection);
 	// Scripting images
 	ScreenImageMgr* scriptImages = new ScreenImageMgr();
 	scriptImages->init();
@@ -101,15 +103,7 @@ StelScriptMgr::StelScriptMgr(QObject *parent): QObject(parent)
 					"do {curDate = new Date();}"
 					"    while(curDate-date < sleepDurationSec*1000/scriptRateReadOnly);}");
 	engine.evaluate("core['wait'] = mywait__;");
-	
-	//! Waits until a specified simulation date/time.  This function
-	//! will take into account the rate (and direction) in which simulation
-	//! time is passing. e.g. if a future date is specified and the
-	//! time is moving backwards, the function will return immediately.
-	//! If the time rate is 0, the function will not wait.  This is to
-	//! prevent infinite wait time.
-	//! @param dt the date string to use
-	//! @param spec "local" or "utc"
+
 	engine.evaluate("function mywaitFor__(dt, spec) {if (!spec) spec=\"utc\";"
 	"	var JD = core.jdFromDateString(dt, spec);"
 	"	var timeSpeed = core.getTimeRate();"
@@ -142,9 +136,10 @@ void StelScriptMgr::initActions()
 	QSignalMapper* mapper = new QSignalMapper(this);
 	foreach(const QString script, getScriptList())
 	{
+		QString shortcut = getShortcut(script);
 		QString actionId = "actionScript/" + script;
 		StelAction* action = actionMgr->addAction(
-			    actionId, N_("Scripts"), q_(getName(script).trimmed()), mapper, "map()");
+		    actionId, N_("Scripts"), q_(getName(script).trimmed()), mapper, "map()", shortcut);
 		mapper->setMapping(action, script);
 	}
 	connect(mapper, SIGNAL(mapped(QString)), this, SLOT(runScript(QString)));
@@ -236,6 +231,11 @@ const QString StelScriptMgr::getAuthor(const QString& s)
 const QString StelScriptMgr::getLicense(const QString& s)
 {
 	return getHeaderSingleLineCommentText(s, "License", "");
+}
+
+const QString StelScriptMgr::getShortcut(const QString& s)
+{
+	return getHeaderSingleLineCommentText(s, "Shortcut", "").trimmed();
 }
 
 const QString StelScriptMgr::getDescription(const QString& s)
@@ -414,6 +414,12 @@ double StelScriptMgr::getScriptRate()
 void StelScriptMgr::debug(const QString& msg)
 {
 	emit(scriptDebug(msg));
+}
+
+void StelScriptMgr::output(const QString &msg)
+{
+	StelScriptOutput::writeLog(msg);
+	emit(scriptOutput(msg));
 }
 
 void StelScriptMgr::scriptEnded()

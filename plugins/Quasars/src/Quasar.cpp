@@ -37,8 +37,18 @@
 
 StelTextureSP Quasar::markerTexture;
 
+bool Quasar::distributionMode = false;
+Vec3f Quasar::markerColor = Vec3f(1.0f,0.5f,0.4f);
+
 Quasar::Quasar(const QVariantMap& map)
-		: initialized(false)
+		: initialized(false),
+		  designation(""),
+		  VMagnitude(21.),
+		  AMagnitude(21.),
+		  bV(0.),
+		  qRA(0.),
+		  qDE(0.),
+		  redshift(0.)
 {
 	// return initialized if the mandatory fields are not present
 	if (!map.contains("designation"))
@@ -74,12 +84,6 @@ QVariantMap Quasar::getMap(void)
 	return map;
 }
 
-float Quasar::getSelectPriority(const StelCore* core) const
-{
-	//Same as StarWrapper::getSelectPriority()
-        return getVMagnitude(core);
-}
-
 QString Quasar::getInfoString(const StelCore* core, const InfoStringGroup& flags) const
 {
 	QString str;
@@ -90,35 +94,19 @@ QString Quasar::getInfoString(const StelCore* core, const InfoStringGroup& flags
 	{
 		oss << "<h2>" << designation << "</h2>";
 	}
-	if (flags&Extra)
+	if (flags&ObjectType)
 		oss << q_("Type: <b>%1</b>").arg(q_("quasar")) << "<br />";
 
 	if (flags&Magnitude)
 	{
 		if (core->getSkyDrawer()->getFlagHasAtmosphere())
 		{
-			if (bV!=0)
-			{
-				oss << q_("Magnitude: <b>%1</b> (extincted to: <b>%2</b>. B-V: <b>%3</b>)").arg(QString::number(mag, 'f', 2),
-														QString::number(getVMagnitudeWithExtinction(core),  'f', 2),
-														QString::number(bV, 'f', 2)) << "<br />";
-			}
-			else
-			{
-				oss << q_("Magnitude: <b>%1</b> (extincted to: <b>%2</b>)").arg(QString::number(mag, 'f', 2),
-												QString::number(getVMagnitudeWithExtinction(core),  'f', 2)) << "<br />";
-			}
+			oss << q_("Magnitude: <b>%1</b> (extincted to: <b>%2</b>)").arg(QString::number(mag, 'f', 2),
+											QString::number(getVMagnitudeWithExtinction(core),  'f', 2)) << "<br />";
 		}
 		else
 		{
-			if (bV!=0)
-			{
-				oss << q_("Magnitude: <b>%1</b> (B-V: <b>%2</b>)").arg(mag, 0, 'f', 2).arg(bV, 0, 'f', 2) << "<br />";
-			}
-			else
-			{
-				oss << q_("Magnitude: <b>%1</b>").arg(mag, 0, 'f', 2) << "<br />";
-			}
+			oss << q_("Magnitude: <b>%1</b>").arg(mag, 0, 'f', 2) << "<br />";
 		}
 		if (AMagnitude!=0)
 		{
@@ -126,6 +114,11 @@ QString Quasar::getInfoString(const StelCore* core, const InfoStringGroup& flags
 		}
 	}
 
+	if (flags&Extra)
+	{
+		oss << q_("Color Index (B-V): <b>%1</b>").arg(QString::number(bV, 'f', 2)) << "<br>";
+	}
+	
 	// Ra/Dec etc.
 	oss << getPositionInfoString(core, flags);
 
@@ -157,6 +150,14 @@ double Quasar::getAngularSize(const StelCore*) const
 	return 0.00001;
 }
 
+float Quasar::getSelectPriority(const StelCore* core) const
+{
+	float mag = getVMagnitudeWithExtinction(core);
+	if (distributionMode)
+		mag = 4.f;
+	return mag;
+}
+
 void Quasar::update(double deltaTime)
 {
 	labelsFader.update((int)(deltaTime*1000));
@@ -166,8 +167,7 @@ void Quasar::draw(StelCore* core, StelPainter& painter)
 {
 	StelSkyDrawer* sd = core->getSkyDrawer();
 
-	Vec3f color = sd->indexToColor(BvToColorIndex(bV))*0.75f;
-	Vec3f dcolor = Vec3f(1.0f,0.5f,0.4f);
+	Vec3f color = sd->indexToColor(BvToColorIndex(bV))*0.75f;	
 	RCMag rcMag;
 	float size, shift=0;
 	double mag;
@@ -175,11 +175,11 @@ void Quasar::draw(StelCore* core, StelPainter& painter)
 	StelUtils::spheToRect(qRA, qDE, XYZ);
 	mag = getVMagnitudeWithExtinction(core);	
 
-	if (GETSTELMODULE(Quasars)->getDisplayMode())
+	if (distributionMode)
 	{
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_ONE, GL_ONE);
-		painter.setColor(dcolor[0], dcolor[1], dcolor[2], 1);
+		painter.setColor(markerColor[0], markerColor[1], markerColor[2], 1);
 
 		Quasar::markerTexture->bind();
 		//size = getAngularSize(NULL)*M_PI/180.*painter.getProjector()->getPixelPerRadAtCenter();
@@ -195,7 +195,7 @@ void Quasar::draw(StelCore* core, StelPainter& painter)
 		if (mag <= sd->getLimitMagnitude())
 		{
 			sd->computeRCMag(mag, &rcMag);
-			sd->drawPointSource(&painter, Vec3f(XYZ[0], XYZ[1], XYZ[2]), rcMag, sd->indexToColor(BvToColorIndex(bV)), false);
+			sd->drawPointSource(&painter, Vec3f(XYZ[0], XYZ[1], XYZ[2]), rcMag, sd->indexToColor(BvToColorIndex(bV)), true);
 			painter.setColor(color[0], color[1], color[2], 1);
 			size = getAngularSize(NULL)*M_PI/180.*painter.getProjector()->getPixelPerRadAtCenter();
 			shift = 6.f + size/1.8f;

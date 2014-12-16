@@ -144,7 +144,8 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 	fieldLensMultipler = new QGraphicsTextItem(lensControls);
 
 	QFont newFont = font();
-	newFont.setPixelSize(12);
+	// Font size is 12
+	newFont.setPixelSize(StelApp::getInstance().getBaseFontSize()-1);
 	setControlsFont(newFont);
 	//setControlsColor(QColor::fromRgbF(0.9, 0.91, 0.95, 0.9));
 
@@ -511,7 +512,7 @@ void OcularsGuiPanel::updateOcularControls()
 
 	//Prev button
 	qreal heightAdjustment = (fieldOcularName->boundingRect().height() - prevOcularButton->boundingRect().height()) / 2.;
-	prevOcularButton->setPos(posX, round(posY + heightAdjustment));
+    prevOcularButton->setPos(posX, qRound(posY + heightAdjustment));
 	posX += prevOcularButton->boundingRect().width();
 	widgetWidth += prevOcularButton->boundingRect().width();
 
@@ -602,7 +603,7 @@ void OcularsGuiPanel::updateLensControls()
 
 	//Prev button
 	qreal heightAdjustment = (fieldLensName->boundingRect().height() - prevLensButton->boundingRect().height()) / 2.;
-	prevLensButton->setPos(posX, round(posY + heightAdjustment));
+    prevLensButton->setPos(posX, qRound(posY + heightAdjustment));
 	posX += prevLensButton->boundingRect().width();
 	widgetWidth += prevLensButton->boundingRect().width();
 
@@ -963,7 +964,7 @@ void OcularsGuiPanel::updateMainButtonsPositions()
 	{
 		qreal parentWidth = buttonOcular->parentItem()->boundingRect().width();
 		int nGaps = n - 1;//n buttons have n-1 gaps
-		spacing = round((parentWidth-width)/nGaps);
+        spacing = qRound((parentWidth-width)/nGaps);
 	}
 	buttonOcular->setPos(posX, posY);
 	posX += buttonOcular->getButtonPixmapWidth() + spacing;

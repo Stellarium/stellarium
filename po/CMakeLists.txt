@@ -22,16 +22,18 @@
 
 ADD_CUSTOM_TARGET(translations)
 
-# These packages are now used only to generate .pot and .po files
-FIND_PACKAGE(Gettext)
-FIND_PACKAGE(XGettext)
+IF(NOT MSVC)
+    # These packages are now used only to generate .pot and .po files
+    FIND_PACKAGE(Gettext)
+    FIND_PACKAGE(XGettext)
 
-IF(${XGETTEXT_FOUND})
-    ADD_CUSTOM_TARGET(generate-pot)
-ENDIF()
+    IF(${XGETTEXT_FOUND})
+	ADD_CUSTOM_TARGET(generate-pot)
+    ENDIF()
 
-IF(${GETTEXT_FOUND})
-    ADD_CUSTOM_TARGET(update-po)
+    IF(${GETTEXT_FOUND})
+	ADD_CUSTOM_TARGET(update-po)
+    ENDIF()
 ENDIF()
 
 FIND_PACKAGE(Qt5LinguistTools REQUIRED)

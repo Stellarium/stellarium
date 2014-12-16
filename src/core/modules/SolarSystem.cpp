@@ -59,12 +59,17 @@
 #include <QDir>
 
 SolarSystem::SolarSystem()
-	: moonScale(1.),
-	  flagOrbits(false),
-	  flagLightTravelTime(false),
-	  allTrails(NULL)
+	: shadowPlanetCount(0)
+	, flagMoonScale(false)
+	, moonScale(1.)
+	, labelsAmount(false)
+	, flagOrbits(false)
+	, flagLightTravelTime(false)
+	, flagShow(false)
+	, flagMarker(false)
+	, allTrails(NULL)
 {
-	planetNameFont.setPixelSize(StelApp::getInstance().getSettings()->value("gui/base_font_size", 13).toInt());
+	planetNameFont.setPixelSize(StelApp::getInstance().getBaseFontSize());
 	setObjectName("SolarSystem");
 }
 
@@ -114,6 +119,7 @@ void SolarSystem::init()
 	QSettings* conf = StelApp::getInstance().getSettings();
 	Q_ASSERT(conf);
 
+	Planet::init();
 	loadPlanets();	// Load planets data
 
 	// Compute position and matrix of sun and all the satellites (ie planets)
@@ -122,7 +128,7 @@ void SolarSystem::init()
 
 	setSelected("");	// Fix a bug on macosX! Thanks Fumio!
 	setFlagMoonScale(conf->value("viewing/flag_moon_scaled", conf->value("viewing/flag_init_moon_scaled", "false").toBool()).toBool());  // name change
-	setMoonScale(conf->value("viewing/moon_scale", 5.0).toFloat());
+	setMoonScale(conf->value("viewing/moon_scale", 4.0).toFloat());
 	setFlagPlanets(conf->value("astro/flag_planets").toBool());
 	setFlagHints(conf->value("astro/flag_planets_hints").toBool());
 	setFlagLabels(conf->value("astro/flag_planets_labels", true).toBool());
@@ -130,6 +136,10 @@ void SolarSystem::init()
 	setFlagOrbits(conf->value("astro/flag_planets_orbits").toBool());
 	setFlagLightTravelTime(conf->value("astro/flag_light_travel_time", false).toBool());
 	setFlagMarkers(conf->value("astro/flag_planets_markers", true).toBool());
+	// Set the algorithm from Astronomical Almanac for computation of apparent magnitudes for
+	// planets in case  observer on the Earth by default
+	setApparentMagnitudeAlgorithmOnEarth(conf->value("astro/apparent_magnitude_algorithm", "Harris").toString());
+	setFlagNativeNames(conf->value("viewing/flag_planets_native_names", true).toBool());
 
 	recreateTrails();
 
@@ -142,15 +152,22 @@ void SolarSystem::init()
 
 	texPointer = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/pointeur4.png");
 	Planet::hintCircleTex = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/planet-indicator.png");
-
+	
 	StelApp *app = &StelApp::getInstance();
 	connect(app, SIGNAL(languageChanged()), this, SLOT(updateI18n()));
+	connect(app, SIGNAL(skyCultureChanged(QString)), this, SLOT(updateSkyCulture(QString)));
 	connect(app, SIGNAL(colorSchemeChanged(const QString&)), this, SLOT(setStelStyle(const QString&)));
 
 	QString displayGroup = N_("Display Options");
-	addAction("actionShow_Planets_Labels", displayGroup, N_("Planet labels"), "labelsDisplayed", "P");
+	addAction("actionShow_Planets", displayGroup, N_("Planets"), "planetsDisplayed", "P");
+	addAction("actionShow_Planets_Labels", displayGroup, N_("Planet labels"), "labelsDisplayed", "Alt+P");
 	addAction("actionShow_Planets_Orbits", displayGroup, N_("Planet orbits"), "orbitsDisplayed", "O");
 	addAction("actionShow_Planets_Trails", displayGroup, N_("Planet trails"), "trailsDisplayed", "Shift+T");
+}
+
+void SolarSystem::deinit()
+{
+	Planet::deinitShader();
 }
 
 void SolarSystem::recreateTrails()
@@ -163,6 +180,81 @@ void SolarSystem::recreateTrails()
 	{
 		allTrails->addObject((QSharedPointer<StelObject>)p, &trailColor);
 	}
+}
+
+
+void SolarSystem::updateSkyCulture(const QString& skyCultureDir)
+{
+	planetNativeNamesMap.clear();
+
+	QString namesFile = StelFileMgr::findFile("skycultures/" + skyCultureDir + "/planet_names.fab");
+
+	if (namesFile.isEmpty())
+	{
+		foreach (const PlanetP& p, systemPlanets)
+		{
+			if (p->getPlanetType()==Planet::isPlanet || p->getPlanetType()==Planet::isMoon || p->getPlanetType()==Planet::isStar)
+				p->setNativeName("");
+		}
+		updateI18n();
+		return;
+	}
+
+	// Open file
+	QFile planetNamesFile(namesFile);
+	if (!planetNamesFile.open(QIODevice::ReadOnly | QIODevice::Text))
+	{
+		qDebug() << "Cannot open file" << QDir::toNativeSeparators(namesFile);
+		return;
+	}
+
+	// Now parse the file
+	// lines to ignore which start with a # or are empty
+	QRegExp commentRx("^(\\s*#.*|\\s*)$");
+
+	// lines which look like records - we use the RE to extract the fields
+	// which will be available in recRx.capturedTexts()
+	QRegExp recRx("^\\s*(\\w+)\\s+\"(.+)\"\\s+_[(]\"(.+)\"[)]\\n");
+
+	QString record, planetId, nativeName;
+
+	// keep track of how many records we processed.
+	int totalRecords=0;
+	int readOk=0;
+	int lineNumber=0;
+	while (!planetNamesFile.atEnd())
+	{
+		record = QString::fromUtf8(planetNamesFile.readLine());
+		lineNumber++;
+
+		// Skip comments
+		if (commentRx.exactMatch(record))
+			continue;
+
+		totalRecords++;
+
+		if (!recRx.exactMatch(record))
+		{
+			qWarning() << "ERROR - cannot parse record at line" << lineNumber << "in planet names file" << QDir::toNativeSeparators(namesFile);
+		}
+		else
+		{
+			planetId = recRx.capturedTexts().at(1).trimmed();
+			nativeName = recRx.capturedTexts().at(2).trimmed();
+			planetNativeNamesMap[planetId] = nativeName;
+			readOk++;
+		}
+	}
+	planetNamesFile.close();
+	qDebug() << "Loaded" << readOk << "/" << totalRecords << "native names of planets";
+
+	foreach (const PlanetP& p, systemPlanets)
+	{
+		if (p->getPlanetType()==Planet::isPlanet || p->getPlanetType()==Planet::isMoon || p->getPlanetType()==Planet::isStar)
+			p->setNativeName(planetNativeNamesMap[p->getEnglishName()]);
+	}
+
+	updateI18n();
 }
 
 void SolarSystem::drawPointer(const StelCore* core)
@@ -186,7 +278,9 @@ void SolarSystem::drawPointer(const StelCore* core)
 		sPainter.setColor(color[0],color[1],color[2]);
 
 		float size = obj->getAngularSize(core)*M_PI/180.*prj->getPixelPerRadAtCenter()*2.;
-		size+=40.f + 10.f*std::sin(2.f * StelApp::getInstance().getTotalRunTime());
+		
+		const float scale = prj->getDevicePixelsPerPixel()*StelApp::getInstance().getGlobalScalingRatio();
+		size+= scale * (45.f + 10.f*std::sin(2.f * StelApp::getInstance().getTotalRunTime()));
 
 		texPointer->bind();
 
@@ -357,7 +451,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 	{
 		totalPlanets++;
 		const QString secname = orderedSections.at(i);
-		const QString englishName = pd.value(secname+"/name").toString();
+		const QString englishName = pd.value(secname+"/name").toString().simplified();
 		const QString strParent = pd.value(secname+"/parent").toString();
 		PlanetP parent;
 		if (strParent!="none")
@@ -451,7 +545,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 
 			// when the parent is the sun use ecliptic rather than sun equator:
 			const double parentRotObliquity = parent->getParent()
-											  ? parent->getRotObliquity()
+											  ? parent->getRotObliquity(2451545.0)
 											  : 0.0;
 			const double parent_rot_asc_node = parent->getParent()
 											  ? parent->getRotAscendingnode()
@@ -527,11 +621,14 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 					} else {
 						// in case of parent=sun: use Gaussian gravitational constant
 						// for calculating meanMotion:
-						meanMotion = (eccentricity >= 0.9999 && eccentricity <= 1.0)
-									? 0.01720209895 * (1.5/pericenterDistance) * sqrt(0.5/pericenterDistance)
-									: (semi_major_axis > 0.0)
-									? 0.01720209895 / (semi_major_axis*sqrt(semi_major_axis))
-									: 0.01720209895 / (-semi_major_axis*sqrt(-semi_major_axis));
+						//meanMotion = (eccentricity >= 0.9999 && eccentricity <= 1.0)
+						//			? 0.01720209895 * (1.5/pericenterDistance) * sqrt(0.5/pericenterDistance)
+						//			: (semi_major_axis > 0.0)
+						//			? 0.01720209895 / (semi_major_axis*sqrt(semi_major_axis))
+						//			: 0.01720209895 / (-semi_major_axis*sqrt(-semi_major_axis));
+						meanMotion = (eccentricity == 1.0)
+									? 0.01720209895 * (1.5/pericenterDistance) * sqrt(0.5/pericenterDistance)  // GZ: This is Heafner's W / dt
+									: 0.01720209895 / (fabs(semi_major_axis)*sqrt(fabs(semi_major_axis)));
 					}
 				} else {
 					meanMotion = 2.0*M_PI/period;
@@ -554,10 +651,11 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 					time_at_pericenter = epoch - mean_anomaly / meanMotion;
 				}
 			}
+			const double orbitGoodDays=pd.value(secname+"/orbit_good", 1000).toDouble();
 			const double inclination = pd.value(secname+"/orbit_Inclination").toDouble()*(M_PI/180.0);
 			const double arg_of_pericenter = pd.value(secname+"/orbit_ArgOfPericenter").toDouble()*(M_PI/180.0);
 			const double ascending_node = pd.value(secname+"/orbit_AscendingNode").toDouble()*(M_PI/180.0);
-			const double parentRotObliquity = parent->getParent() ? parent->getRotObliquity() : 0.0;
+			const double parentRotObliquity = parent->getParent() ? parent->getRotObliquity(2451545.0) : 0.0;
 			const double parent_rot_asc_node = parent->getParent() ? parent->getRotAscendingnode() : 0.0;
 			double parent_rot_j2000_longitude = 0.0;
 						if (parent->getParent()) {
@@ -573,12 +671,14 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 							J2000NodeOrigin.normalize();
 							parent_rot_j2000_longitude = atan2(J2000NodeOrigin*OrbitAxis1,J2000NodeOrigin*OrbitAxis0);
 						}
+			//qDebug() << "Creating CometOrbit for" << englishName;
 			CometOrbit *orb = new CometOrbit(pericenterDistance,
 							 eccentricity,
 							 inclination,
 							 ascending_node,
 							 arg_of_pericenter,
 							 time_at_pericenter,
+							 orbitGoodDays,
 							 meanMotion,
 							 parentRotObliquity,
 							 parent_rot_asc_node,
@@ -702,10 +802,10 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 		}
 
 		// Create the Solar System body and add it to the list
-		QString type = pd.value(secname+"/type").toString();
+		QString type = pd.value(secname+"/type").toString();		
 		PlanetP p;
-		// New class objects, named "plutoid", has properties similar asteroids and we should calculate their
-		// positions like for asteroids. Plutoids having one exception - Pluto - we should use special
+		// New class objects, named "plutoid", has properties similar to asteroids and we should calculate their
+		// positions like for asteroids. Plutoids have one exception: Pluto - we should use special
 		// function for calculation of orbit of Pluto.
 		if ((type == "asteroid" || type == "plutoid") && !englishName.contains("Pluto"))
 		{
@@ -720,7 +820,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 						    userDataPtr,
 						    osculatingFunc,
 						    closeOrbit,
-						    pd.value(secname+"/hidden", 0).toBool(),
+						    pd.value(secname+"/hidden", 0).toBool(),						    
 						    type));
 
 			QSharedPointer<MinorPlanet> mp =  p.dynamicCast<MinorPlanet>();
@@ -729,7 +829,6 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 			int minorPlanetNumber = pd.value(secname+"/minor_planet_number", 0).toInt();
 			if (minorPlanetNumber)
 			{
-
 				mp->setMinorPlanetNumber(minorPlanetNumber);
 			}
 
@@ -771,8 +870,12 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 			               userDataPtr,
 			               osculatingFunc,
 			               closeOrbit,
-				       pd.value(secname+"/hidden", 0).toBool(),
-				       type));
+						   pd.value(secname+"/hidden", 0).toBool(),
+						   type,
+						   pd.value(secname+"/dust_widthfactor", 1.5f).toFloat(),
+						   pd.value(secname+"/dust_lengthfactor", 0.4f).toFloat(),
+						   pd.value(secname+"/dust_brightnessfactor", 1.5f).toFloat()
+						  ));
 
 			QSharedPointer<Comet> mp =  p.dynamicCast<Comet>();
 
@@ -796,6 +899,10 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 		}
 		else
 		{
+			// Set possible default name of the normal map for avoiding yin-yang shaped moon
+			// phase when normal map key not exists. Example: moon_normals.png
+			// Details: https://bugs.launchpad.net/stellarium/+bug/1335609
+			QString normalMapName = englishName.toLower().append("_normals.png");
 			p = PlanetP(new Planet(englishName,
 					       pd.value(secname+"/lighting").toBool(),
 					       pd.value(secname+"/radius").toDouble()/AU,
@@ -803,12 +910,14 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 					       StelUtils::strToVec3f(pd.value(secname+"/color").toString()),
 					       pd.value(secname+"/albedo").toFloat(),
 					       pd.value(secname+"/tex_map").toString(),
+					       pd.value(secname+"/normals_map", normalMapName).toString(),
 					       posfunc,
 					       userDataPtr,
 					       osculatingFunc,
 					       closeOrbit,
 					       pd.value(secname+"/hidden", 0).toBool(),
 					       pd.value(secname+"/atmosphere", false).toBool(),
+					       pd.value(secname+"/halo", 0).toBool(),
 					       type));
 		}
 
@@ -877,6 +986,12 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 
 	// special case: load earth shadow texture
 	Planet::texEarthShadow = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/earth-shadow.png");
+
+	// GZ: Also comets just have static textures.
+	Comet::comaTexture = StelApp::getInstance().getTextureManager().createTextureThread(StelFileMgr::getInstallationDir()+"/textures/cometComa.png", StelTexture::StelTextureParams(true, GL_LINEAR, GL_CLAMP_TO_EDGE));
+	//GZ: tail textures. We use a paraboloid tail body, textured like a fisheye sphere, i.e. center=head. The texture should be something like a mottled star to give some structure.
+	Comet::tailTexture = StelApp::getInstance().getTextureManager().createTextureThread(StelFileMgr::getInstallationDir()+"/textures/cometTail.png", StelTexture::StelTextureParams(true, GL_LINEAR, GL_CLAMP_TO_EDGE));
+	//GZ: I think we need only one texture for the tails.
 
 	return true;
 }
@@ -1022,12 +1137,21 @@ StelObjectP SolarSystem::searchByName(const QString& name) const
 	return StelObjectP();
 }
 
-float SolarSystem::getPlanetVMagnitude(QString planetName) const
+float SolarSystem::getPlanetVMagnitude(QString planetName, bool withExtinction) const
 {
 	PlanetP p = searchByEnglishName(planetName);
 	float r = 0.f;
-	r = p->getVMagnitude(StelApp::getInstance().getCore());
+	if (withExtinction)
+		r = p->getVMagnitudeWithExtinction(StelApp::getInstance().getCore());
+	else
+		r = p->getVMagnitude(StelApp::getInstance().getCore());
 	return r;
+}
+
+QString SolarSystem::getPlanetType(QString planetName) const
+{
+	PlanetP p = searchByEnglishName(planetName);
+	return p->getPlanetTypeString();
 }
 
 double SolarSystem::getDistanceToPlanet(QString planetName) const
@@ -1117,10 +1241,10 @@ QList<StelObjectP> SolarSystem::searchAround(const Vec3d& vv, double limitFov, c
 	return result;
 }
 
-// Update i18 names from english names according to current translator
+// Update i18 names from english names according to current sky culture translator
 void SolarSystem::updateI18n()
 {
-	const StelTranslator& trans = StelApp::getInstance().getLocaleMgr().getAppStelTranslator();
+	const StelTranslator& trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
 	foreach (PlanetP p, systemPlanets)
 		p->translateName(trans);
 }
@@ -1135,8 +1259,7 @@ QString SolarSystem::getPlanetHashString(void)
 		{
 			oss << p->getParent()->getEnglishName() << " : ";
 		}
-		oss << p->getEnglishName() << endl;
-		oss << p->getEnglishName() << endl;
+		oss << p->getEnglishName() << endl;		
 	}
 	return str;
 }
@@ -1333,21 +1456,23 @@ QStringList SolarSystem::listMatchingObjects(const QString& objPrefix, int maxNb
 	return result;
 }
 
-QStringList SolarSystem::listAllObjects(bool inEnglish) const
+QStringList SolarSystem::listAllObjectsByType(const QString &objType, bool inEnglish) const
 {
 	QStringList result;
 	if (inEnglish)
 	{
 		foreach(const PlanetP& p, systemPlanets)
 		{
-			result << p->getEnglishName();
+			if (p->getPlanetTypeString()==objType)
+				result << p->getEnglishName();
 		}
 	}
 	else
 	{
 		foreach(const PlanetP& p, systemPlanets)
 		{
-			result << p->getNameI18n();
+			if (p->getPlanetTypeString()==objType)
+				result << p->getNameI18n();
 		}
 	}
 	return result;
@@ -1368,6 +1493,32 @@ void SolarSystem::setFlagPlanets(bool b)
 
 bool SolarSystem::getFlagPlanets(void) const {return flagShow;}
 
+void SolarSystem::setFlagNativeNames(bool b)
+{
+	flagNativeNames=b;
+	foreach (const PlanetP& p, systemPlanets)
+	{
+		if (p->getPlanetType()==Planet::isPlanet || p->getPlanetType()==Planet::isMoon || p->getPlanetType()==Planet::isStar)
+			p->setFlagNativeName(flagNativeNames);
+	}
+	updateI18n();
+}
+
+bool SolarSystem::getFlagNativeNames() const {return flagNativeNames; }
+
+void SolarSystem::setFlagTranslatedNames(bool b)
+{
+	flagTranslatedNames=b;
+	foreach (const PlanetP& p, systemPlanets)
+	{
+		if (p->getPlanetType()==Planet::isPlanet || p->getPlanetType()==Planet::isMoon || p->getPlanetType()==Planet::isStar)
+			p->setFlagTranslatedName(flagTranslatedNames);
+	}
+	updateI18n();
+}
+
+bool SolarSystem::getFlagTranslatedNames() const {return flagTranslatedNames; }
+
 // Set/Get planets names color
 void SolarSystem::setLabelsColor(const Vec3f& c) {Planet::setLabelColor(c);}
 const Vec3f& SolarSystem::getLabelsColor(void) const {return Planet::getLabelColor();}
@@ -1385,7 +1536,7 @@ void SolarSystem::setFlagMoonScale(bool b)
 }
 
 // Set/Get Moon display scaling factor
-void SolarSystem::setMoonScale(float f)
+void SolarSystem::setMoonScale(double f)
 {
 	moonScale = f;
 	if (flagMoonScale)
@@ -1424,6 +1575,8 @@ void SolarSystem::reloadPlanets()
 	bool flagHints = getFlagHints();
 	bool flagLabels = getFlagLabels();
 	bool flagOrbits = getFlagOrbits();
+	bool flagNative = getFlagNativeNames();
+	bool flagTrans = getFlagTranslatedNames();
 	
 	// Save observer location (fix for LP bug # 969211)
 	// TODO: This can probably be done better with a better understanding of StelObserver --BM
@@ -1471,7 +1624,21 @@ void SolarSystem::reloadPlanets()
 	setFlagHints(flagHints);
 	setFlagLabels(flagLabels);
 	setFlagOrbits(flagOrbits);
+	setFlagNativeNames(flagNative);
+	setFlagTranslatedNames(flagTrans);
 
 	// Restore translations
 	updateI18n();
+}
+
+// Set the algorithm for computation of apparent magnitudes for planets in case  observer on the Earth
+void SolarSystem::setApparentMagnitudeAlgorithmOnEarth(QString algorithm)
+{
+	getEarth()->setApparentMagnitudeAlgorithm(algorithm);
+}
+
+// Get the algorithm used for computation of apparent magnitudes for planets in case  observer on the Earth
+QString SolarSystem::getApparentMagnitudeAlgorithmOnEarth() const
+{
+	return getEarth()->getApparentMagnitudeAlgorithmString();
 }

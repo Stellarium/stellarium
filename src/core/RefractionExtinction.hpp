@@ -45,7 +45,7 @@
 class Extinction
 {
 public:
-	//! Define the extinction strategy for rendering underground objects (usefull when ground is not rendered)
+	//! Define the extinction strategy for rendering underground objects (useful when ground is not rendered)
 	enum UndergroundExtinctionMode {
 		UndergroundExtinctionZero = 0,	//!< Zero extinction: stars visible in full brightness
 		UndergroundExtinctionMax = 1,   //!< Maximum extinction: coef 42, i.e practically invisible
@@ -168,8 +168,8 @@ private:
 	//! Update precomputed variables.
 	void updatePrecomputed();
 
-	void innerRefractionForward(Vec3f& altAzPos) const;
-	void innerRefractionBackward(Vec3f& altAzPos) const;
+	void innerRefractionForward(Vec3d& altAzPos) const;
+	void innerRefractionBackward(Vec3d& altAzPos) const;
 	
 	//! These 3 Atmosphere parameters can be controlled by GUI.
 	//! Pressure[mbar] (1013)

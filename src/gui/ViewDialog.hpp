@@ -20,8 +20,9 @@
 #ifndef _VIEWDIALOG_HPP_
 #define _VIEWDIALOG_HPP_
 
-#include <QObject>
 #include "StelDialog.hpp"
+
+#include <QObject>
 
 class Ui_viewDialogForm;
 class QListWidgetItem;
@@ -50,14 +51,16 @@ private slots:
 	void skyCultureChanged(const QString& cultureName);
 	void projectionChanged(const QString& projectionName);
 	void landscapeChanged(QListWidgetItem* item);
-	void setZhrFromControls();
+	void setZhrFromControls(int zhr);
+	void updateZhrDescription();
 	void updateZhrControls(int zhr);
-	void updateZhrDescription(int zhr);
 	void planetsLabelsValueChanged(int);
 	void nebulasLabelsValueChanged(int);
+	void setBortleScaleToolTip(int Bindex);
 	void starsLabelsValueChanged(int);
 	void setCurrentLandscapeAsDefault(void);
 	void setCurrentCultureAsDefault(void);
+	void setFlagLandscapeUseMinimalBrightness(bool b);
 	//! Update the widget to make sure it is synchrone if a value was changed programmatically
 	//! This function should be called repeatidly with e.g. a timer
 	void updateFromProgram();
@@ -65,6 +68,10 @@ private slots:
 	void showAddRemoveLandscapesDialog();
         void showAtmosphereDialog();
 
+	void populateLightPollution();
+	void populateLandscapeMinimalBrightness();
+
+	// WHAT IS THE SKY LAYER? hidden, under development?
 	void populateSkyLayersList();
 	void skyLayersSelectionChanged(const QString&);
 	void skyLayersEnabledChanged(int);
@@ -73,6 +80,7 @@ private slots:
 private:
 	//! convenience method to link a checkbox to a StelAction.
 	void connectCheckBox(class QCheckBox* checkBox, const QString& actionId);
+	void connectGroupBox(class QGroupBox* groupBox, const QString& actionId);
 	void updateSkyCultureText();
 
 	AddRemoveLandscapesDialog * addRemoveLandscapesDialog;

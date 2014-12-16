@@ -19,6 +19,8 @@
 #ifndef _STELTONEREPRODUCER_HPP_
 #define _STELTONEREPRODUCER_HPP_
 
+#include <cmath>
+
 //! Converts tones in function of the eye adaptation to luminance.
 //! The aim is to get on the screen something which is perceptualy accurate,
 //! ie. to compress high dynamic range luminance to CRT display range.
@@ -50,10 +52,10 @@ class StelToneReproducer
 {
 public:
 	//! Constructor
-    StelToneReproducer();
+	StelToneReproducer();
 	
 	//! Desctructor
-    virtual ~StelToneReproducer();
+	virtual ~StelToneReproducer();
 
 	//! Set the eye adaptation luminance for the display (and precompute what can be)
 	//! Usual luminance range is 1-100 cd/m^2 for a CRT screen
@@ -68,29 +70,42 @@ public:
 	//! Sun Light       : 100000 cd/m^2
 	void setWorldAdaptationLuminance(float worldAdaptationLuminance);
 	//! Get the eye adaptation luminance for the world
-	float getWorldAdaptationLuminance() const {return Lwa;}
+	float getWorldAdaptationLuminance() const
+	{
+		return Lwa;
+	}
 	
 	//! Set the global scale applied to input lumiances, i.e before the adaptation
 	//! It is the parameter to modify to simulate aperture*exposition time
 	//! @param scale the global input scale
 	void setInputScale(float scale=1.f);
-	//! Get the global scale applied to input lumiances, i.e before the adaptation
-	float getInputScale() const {return inputScale;}
+	//! Get the global scale applied to input luminances, i.e before the adaptation
+	float getInputScale() const
+	{
+		return inputScale;
+	}
 	
 	//! Set the maximum luminance of the display (CRT, screen etc..)
 	//! This value is used to scale the RGB range
 	//! @param maxdL the maximum lumiance in cd/m^2. Initial default value is 120 cd/m^2
 	void setMaxDisplayLuminance(float maxdL)
-	{oneOverMaxdL = 1.f/maxdL; lnOneOverMaxdL=std::log(oneOverMaxdL); term2TimesOneOverMaxdLpOneOverGamma = std::pow(term2*oneOverMaxdL, oneOverGamma);}
+	{
+		oneOverMaxdL = 1.f/maxdL; lnOneOverMaxdL=std::log(oneOverMaxdL); term2TimesOneOverMaxdLpOneOverGamma = std::pow(term2*oneOverMaxdL, oneOverGamma);
+	}
 
 	//! Get the display gamma
 	//! @return the display gamma. Default value is 2.2222 for a CRT
-	float getDisplayGamma() const {return 1.f/oneOverGamma;}
+	float getDisplayGamma() const
+	{
+		return 1.f/oneOverGamma;
+	}
 	
 	//! Set the display gamma
 	//! @param gamma the gamma. Initial default value is 2.2222
 	void setDisplayGamma(float gamma)
-	{oneOverGamma = 1.f/gamma; term2TimesOneOverMaxdLpOneOverGamma = std::pow(term2*oneOverMaxdL, oneOverGamma);}
+	{
+		oneOverGamma = 1.f/gamma; term2TimesOneOverMaxdLpOneOverGamma = std::pow(term2*oneOverMaxdL, oneOverGamma);
+	}
 
 	//! Return adapted luminance from world to display
 	//! @param worldLuminance the world luminance to convert in cd/m^2
@@ -105,19 +120,19 @@ public:
 	//! @return the converted world luminance in cd/m^2
 	float reverseAdaptLuminance(float displayLuminance) const
 	{
-		return std::pow((float)(displayLuminance/term2),1.f/alphaWaOverAlphaDa)/(inputScale*M_PI*0.0001f);
+		return (float) std::pow((float)(displayLuminance/term2),1.f/alphaWaOverAlphaDa)/(inputScale*M_PI*0.0001f);
 	}
 	
 	//! Return adapted luminance from world to display with 1 corresponding to full display white
 	//! @param worldLuminance the world luminance to convert in cd/m^2
-	//! @return the converted display luminance with 1 corresponding to full display white. The value can be more than 1 when saturation..
+	//! @return the converted display luminance with 1 corresponding to full display white. The value can be more than 1 when saturated.
 	float adaptLuminanceScaled(float worldLuminance) const
 	{
 		return adaptLuminance(worldLuminance)*oneOverMaxdL;
 	}
 	
 	//! Return adapted luminance from display to world with 1 corresponding to full display white
-	//! @param displayLuminance the display luminance with 1 corresponding to full display white. The value can be more than 1 when saturation..
+	//! @param displayLuminance the display luminance with 1 corresponding to full display white. The value can be more than 1 when saturated.
 	//! @return the converted world luminance in cd/m^2
 	float reverseAdaptLuminanceScaled(float displayLuminance) const
 	{
@@ -126,8 +141,8 @@ public:
 	
 	//! Return adapted ln(luminance) from world to display with 1 corresponding to full display white
 	//! @param lnWorldLuminance the world luminance to convert in ln(cd/m^2)
-	//! @param pFact the power at whihc the result should be set. The default is 0.5 and therefore return the square root of the adapted luminance
-	//! @return the converted display set at the pFact power. Luminance with 1 corresponding to full display white. The value can be more than 1 when saturation..
+	//! @param pFact the power at which the result should be set. The default is 0.5 and therefore return the square root of the adapted luminance
+	//! @return the converted display set at the pFact power. Luminance with 1 corresponding to full display white. The value can be more than 1 when saturated.
 	float adaptLuminanceScaledLn(float lnWorldLuminance, float pFact=0.5f) const
 	{
 		const float lnPix0p0001 = -8.0656104861f;

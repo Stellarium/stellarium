@@ -1,0 +1,29 @@
+# Trivial zero-line horizon for Stellarium
+# avoid spurious vertical lines/triangles by small offset from north/south!
+# The cardinal directions are marked by low spikes for technical reasons.  
+# Note that we should start the horizon line at 90 degrees - this indicates a polygon bug!
+
+90.1 0
+92 0
+95 0
+100 0
+105 0
+135 0
+179.9 0
+180 0.01
+180.1 0
+185 0
+200 0 
+205 0
+215 0
+225 0
+269.9 0
+270.0 0.01
+270.1 0
+315 0
+359.9 0
+0.0 0.01
+0.1 0
+45 0
+89.9 0
+90 0.01

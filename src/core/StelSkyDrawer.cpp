@@ -24,8 +24,6 @@
  #define GL_VERTEX_PROGRAM_POINT_SIZE 0x8642
 #endif
 
-#include <QOpenGLShaderProgram>
-
 #include "StelSkyDrawer.hpp"
 #include "StelProjector.hpp"
 #include "StelFileMgr.hpp"
@@ -38,6 +36,8 @@
 #include "StelMovementMgr.hpp"
 #include "StelPainter.hpp"
 
+#include <QOpenGLContext>
+#include <QOpenGLShaderProgram>
 #include <QStringList>
 #include <QSettings>
 #include <QDebug>
@@ -47,25 +47,25 @@
 #define EYE_RESOLUTION (0.25f)
 #define MAX_LINEAR_RADIUS 8.f
 
-StelSkyDrawer::StelSkyDrawer(StelCore* acore) : core(acore)
+StelSkyDrawer::StelSkyDrawer(StelCore* acore) :
+	core(acore),
+	eye(acore->getToneReproducer()),
+	maxAdaptFov(180.f),
+	minAdaptFov(0.1f),
+	lnfovFactor(0.f),
+	starRelativeScale(1.f),
+	starAbsoluteScaleF(1.f),
+	starLinearScale(19.569f),
+	limitMagnitude(-100.f),
+	limitLuminance(0.f),
+	bortleScaleIndex(3),
+	inScale(1.f),
+	starShaderProgram(NULL),
+	starShaderVars(StarShaderVars()),
+	maxLum(0.f),
+	oldLum(-1.f),
+	big3dModelHaloRadius(150.f)
 {
-	eye = core->getToneReproducer();
-
-	inScale = 1.f;
-	bortleScaleIndex = 3;
-	limitMagnitude = -100.f;
-	limitLuminance = 0;
-	oldLum=-1.f;
-	maxLum = 0.f;
-	setMaxAdaptFov(180.f);
-	setMinAdaptFov(0.1f);
-
-	starAbsoluteScaleF = 1.f;
-	starRelativeScale = 1.f;
-	starLinearScale = 19.569f;
-
-	big3dModelHaloRadius = 150.f;
-
 	QSettings* conf = StelApp::getInstance().getSettings();
 	initColorTableFromConfigFile(conf);
 
@@ -83,9 +83,9 @@ StelSkyDrawer::StelSkyDrawer(StelCore* acore) : core(acore)
 
 	bool ok=true;
 
-	setBortleScale(conf->value("stars/init_bortle_scale",2).toInt(&ok));
+	setBortleScaleIndex(conf->value("stars/init_bortle_scale",2).toInt(&ok));
 	if (!ok)
-		setBortleScale(2);
+		setBortleScaleIndex(2);
 
 	setRelativeStarScale(conf->value("stars/relative_scale",1.0).toFloat(&ok));
 	if (!ok)
@@ -182,11 +182,7 @@ void StelSkyDrawer::init()
 	starShaderProgram = new QOpenGLShaderProgram(QOpenGLContext::currentContext());
 	starShaderProgram->addShader(&vshader);
 	starShaderProgram->addShader(&fshader);
-	starShaderProgram->link();
-	if (!starShaderProgram->log().isEmpty()) {
-	  qWarning() << "StelSkyDrawer::init(): Warnings while linking starShaderProgram: " << starShaderProgram->log();
-	}
-
+	StelPainter::linkProg(starShaderProgram, "starShader");
 	starShaderVars.projectionMatrix = starShaderProgram->uniformLocation("projectionMatrix");
 	starShaderVars.texCoord = starShaderProgram->attributeLocation("texCoord");
 	starShaderVars.pos = starShaderProgram->attributeLocation("pos");
@@ -443,7 +439,7 @@ bool StelSkyDrawer::drawPointSource(StelPainter* sPainter, const Vec3f& v, const
 		glBlendFunc(GL_ONE, GL_ONE);
 		glEnable(GL_BLEND);				
 		sPainter->setColor(color[0]*cmag, color[1]*cmag, color[2]*cmag);
-		sPainter->drawSprite2dMode(win[0], win[1], rmag);
+		sPainter->drawSprite2dModeNoDeviceScale(win[0], win[1], rmag);
 	}
 
 	unsigned char starColor[3] = {0, 0, 0};
@@ -494,7 +490,7 @@ void StelSkyDrawer::postDrawSky3dModel(StelPainter* painter, const Vec3f& v, flo
 		Vec3f win;
 		painter->getProjector()->project(v, win);
 		painter->setColor(color[0]*cmag, color[1]*cmag, color[2]*cmag);
-		painter->drawSprite2dMode(win[0], win[1], rmag);
+		painter->drawSprite2dModeNoDeviceScale(win[0], win[1], rmag);
 		noStarHalo = true;
 	}
 
@@ -625,19 +621,19 @@ void StelSkyDrawer::preDraw()
 }
 
 
-// Set the parameters so that the stars disapear at about the limit given by the bortle scale
+// Set the parameters so that the stars disappear at about the limit given by the bortle scale
 // See http://en.wikipedia.org/wiki/Bortle_Dark-Sky_Scale
-void StelSkyDrawer::setBortleScale(int bIndex)
+void StelSkyDrawer::setBortleScaleIndex(int bIndex)
 {
 	// Associate the Bortle index (1 to 9) to inScale value
 	if (bIndex<1)
 	{
-		qWarning() << "WARING: Bortle scale index range is [1;9], given" << bIndex;
+		qWarning() << "WARNING: Bortle scale index range is [1;9], given" << bIndex;
 		bIndex = 1;
 	}
 	if (bIndex>9)
 	{
-		qWarning() << "WARING: Bortle scale index range is [1;9], given" << bIndex;
+		qWarning() << "WARNING: Bortle scale index range is [1;9], given" << bIndex;
 		bIndex = 9;
 	}
 

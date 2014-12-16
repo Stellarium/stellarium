@@ -40,7 +40,6 @@
 
 #include "StelObjectType.hpp"
 #include "StelObject.hpp"
-#include "StelProjector.hpp"
 #include "SolarSystem.hpp"
 #include "StelSkyLayerMgr.hpp"
 #include "StelStyle.hpp"
@@ -83,31 +82,40 @@ StelGuiBase* StelStandardGuiPluginInterface::getStelGuiBase() const
 	return new StelGui();
 }
 
-StelGui::StelGui() :
-	topLevelGraphicsWidget(NULL),
-	locationDialog(0),
-	helpDialog(0),
-	dateTimeDialog(0),
-	searchDialog(0),
-	viewDialog(0),
-	shortcutsDialog(0),
-	configurationDialog(0),
+StelGui::StelGui()
+	: topLevelGraphicsWidget(NULL)
+	, skyGui(NULL)
+	, buttonTimeRewind(NULL)
+	, buttonTimeRealTimeSpeed(NULL)
+	, buttonTimeCurrent(NULL)
+	, buttonTimeForward(NULL)
+	, buttonGotoSelectedObject(NULL)
+	, locationDialog(0)
+	, helpDialog(0)
+	, dateTimeDialog(0)
+	, searchDialog(0)
+	, viewDialog(0)
+	, shortcutsDialog(0)
+	, configurationDialog(0)
 #ifdef ENABLE_SCRIPT_CONSOLE
-    scriptConsole(0),
+	, scriptConsole(0)
 #endif
-    initDone(false)
+	, flagShowFlipButtons(false)
+	, flipVert(NULL)
+	, flipHoriz(NULL)
+	, flagShowNebulaBackgroundButton(false)
+	, btShowNebulaeBackground(NULL)
+	, initDone(false)
+	, flagShowDecimalDegrees(false)
 {
 	// QPixmapCache::setCacheLimit(30000); ?
-	flipHoriz = NULL;
-	flipVert = NULL;
-	btShowNebulaeBackground = NULL;
 }
 
 StelGui::~StelGui()
 {
 	delete skyGui;
 	skyGui = NULL;
-	
+
 	if (locationDialog)
 	{
 		delete locationDialog;
@@ -351,6 +359,8 @@ void StelGui::init(QGraphicsWidget *atopLevelGraphicsWidget)
 	setFlagShowFlipButtons(conf->value("gui/flag_show_flip_buttons", false).toBool());
 	setFlagShowNebulaBackgroundButton(conf->value("gui/flag_show_nebulae_background_button", false).toBool());
 
+	setFlagShowDecimalDegrees(conf->value("gui/flag_show_decimal_degrees", false).toBool());
+
 	///////////////////////////////////////////////////////////////////////
 	// Create the main base widget
 	skyGui->init(this);
@@ -386,10 +396,7 @@ void StelGui::init(QGraphicsWidget *atopLevelGraphicsWidget)
 
 void StelGui::quit()
 {
-#ifndef DISABLE_SCRIPTING
-	StelApp::getInstance().getScriptMgr().stopScript();
-#endif
-	QCoreApplication::exit();
+	StelApp::getInstance().quit();
 }
 
 //! Reload the current Qt Style Sheet (Debug only)
@@ -422,12 +429,18 @@ void StelGui::setStelStyle(const QString& section)
 
 		// Load Qt style sheet
 		QFile styleFile(qtStyleFileName);
-		styleFile.open(QIODevice::ReadOnly);
-		currentStelStyle.qtStyleSheet = styleFile.readAll();
+		if(styleFile.open(QIODevice::ReadOnly))
+		{
+			currentStelStyle.qtStyleSheet = styleFile.readAll();
+			styleFile.close();
+		}
 
 		QFile htmlStyleFile(htmlStyleFileName);
-		htmlStyleFile.open(QIODevice::ReadOnly);
-		currentStelStyle.htmlStyleSheet = htmlStyleFile.readAll();
+		if(htmlStyleFile.open(QIODevice::ReadOnly))
+		{
+			currentStelStyle.htmlStyleSheet = htmlStyleFile.readAll();
+			htmlStyleFile.close();
+		}
 	}
 	
 	locationDialog->styleChanged();
@@ -625,6 +638,11 @@ void StelGui::setFlagShowNebulaBackgroundButton(bool b)
 	flagShowNebulaBackgroundButton = b;
 }
 
+void StelGui::setFlagShowDecimalDegrees(bool b)
+{
+	flagShowDecimalDegrees=b;
+}
+
 void StelGui::setVisible(bool b)
 {
 	skyGui->setVisible(b);
@@ -701,6 +719,11 @@ bool StelGui::getFlagShowFlipButtons() const
 bool StelGui::getFlagShowNebulaBackgroundButton() const
 {
 	return flagShowNebulaBackgroundButton;
+}
+
+bool StelGui::getFlagShowDecimalDegrees() const
+{
+	return flagShowDecimalDegrees;
 }
 
 bool StelGui::initComplete(void) const

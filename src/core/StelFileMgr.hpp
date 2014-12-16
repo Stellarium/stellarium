@@ -44,12 +44,12 @@ class StelFileMgr
 public:
 	//! @enum Flags used as named bitfield flags as specifiers to filter results of StelFileMgr methods.
 	enum Flags {
-		RemovableMedia = 0x00000001,  //!< Search on removable media if present (default is not to).
-		Writable       = 0x00000002,  //!< Only return writable paths. For directories this means
-									  //!< that it is possible to create files within the directory.
-		Directory      = 0x00000004, //!< Exclude non-directories.
-		File           = 0x00000008, //!< Exclude non-files.
-		New            = 0x00000010 //!< Exclude existing paths.
+		RemovableMedia = 0x00000001,	//!< Search on removable media if present (default is not to).
+		Writable       = 0x00000002,	//!< Only return writable paths. For directories this means
+						//!< that it is possible to create files within the directory.
+		Directory      = 0x00000004,	//!< Exclude non-directories.
+		File           = 0x00000008,	//!< Exclude non-files.
+		New            = 0x00000010	//!< Exclude existing paths.
 	};
 
 	//! Initialize the directories.
@@ -75,7 +75,7 @@ public:
 	//! @return returns a full path of the file if found, else return an empty path.
 	static QString findFile(const QString& path, Flags flags=(Flags)0);
 
-	//! List all paths witihin the search paths that match the argument.
+	//! List all paths within the search paths that match the argument.
 	//! Similar to findFile(), but unlike it this function doesn't stop
 	//! at the first instance. Instead, it returns a list of paths to all
 	//! instances. The list is ordered, starting with the most external path
@@ -86,7 +86,7 @@ public:
 	//! @param path the path to search inside, e.g. "landscapes"
 	//! @param flags options which constrain the result
 	//! @param recursive if true, all sub-directories are walked recursively
-	//! @return returns a QSet of file and.or directory names, which are available
+	//! @return returns a QSet of file and/or directory names, which are available
 	//! in any of the search paths + path.  Returns empty set if none were found
 	//! or the path is invalid (not a directory / not existing).
 	static QSet<QString> listContents(const QString& path, const Flags& flags=(Flags)0, bool recursive=false);

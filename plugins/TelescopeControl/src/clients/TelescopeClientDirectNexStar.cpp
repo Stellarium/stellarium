@@ -34,9 +34,14 @@
 #include <QRegExp>
 #include <QStringList>
 
-TelescopeClientDirectNexStar::TelescopeClientDirectNexStar(const QString &name, const QString &parameters, Equinox eq) :
-		TelescopeClient(name),
-		equinox(eq)
+TelescopeClientDirectNexStar::TelescopeClientDirectNexStar(const QString &name, const QString &parameters, Equinox eq)
+	: TelescopeClient(name)
+	, time_delay(0)
+	, equinox(eq)
+	, nexstar(NULL)
+	, last_ra(0)
+	, queue_get_position(true)
+	, next_pos_time(0)
 {
 	interpolatedPosition.reset();
 	

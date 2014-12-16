@@ -67,6 +67,7 @@ public:
 		FrameGalactic			//! Galactic reference frame centered on observer.
 	};
 
+	//! @enum ProjectionType
 	//! Available projection types. A value of 1000 indicate the default projection
 	enum ProjectionType
 	{
@@ -80,6 +81,7 @@ public:
 		ProjectionOrthographic		//!< Orthographic projection
 	};
 
+	//! @enum RefractionMode
 	//! Available refraction mode.
 	enum RefractionMode
 	{
@@ -259,16 +261,17 @@ public:
 	static const double JD_MINUTE;
 	static const double JD_HOUR;
 	static const double JD_DAY;
+	static const double ONE_OVER_JD_SECOND;
 
 	//! Get the sidereal time shifted by the observer longitude
 	//! @return the local sidereal time in radian
-	double getLocalSideralTime() const;
+	double getLocalSiderealTime() const;
 
 	//! Get the duration of a sidereal day for the current observer in day.
-	double getLocalSideralDayLength() const;
+	double getLocalSiderealDayLength() const;
 
 	//! Get the duration of a sidereal year for the current observer in days.
-	double getLocalSideralYearLength() const;
+	double getLocalSiderealYearLength() const;
 
 	//! Return the startup mode, can be preset|Preset or anything else
 	QString getStartupTimeMode();
@@ -285,6 +288,12 @@ public:
 	//! @param marker the marker for valid range
 	//! @return valid range
 	QString getCurrentDeltaTAlgorithmValidRange(double jDay, QString* marker) const;
+
+	//! Checks for current time of day - it's night or day?
+	bool isDay() const;
+
+	//! Get value of the current Julian epoch
+	double getCurrentEpoch() const;
 
 public slots:
 	//! Set the current ProjectionType to use
@@ -534,6 +543,7 @@ private:
 
 	void updateTransformMatrices();
 	void updateTime(double deltaTime);
+	void resetSync();
 
 	// Matrices used for every coordinate transfo
 	Mat4d matHeliocentricEclipticToAltAz;      // Transform from heliocentric ecliptic (Vsop87) to observer-centric altazimuthal coordinate
@@ -559,6 +569,8 @@ private:
 	double presetSkyTime;
 	QTime initTodayTime;
 	QString startupTimeMode;
+	double secondsOfLastJDayUpdate;         // Time in seconds when the time rate or time last changed
+	double JDayOfLastJDayUpdate;         // JDay when the time rate or time last changed
 
 	// Variables for custom equation of Delta-T
 	Vec3f deltaTCustomEquationCoeff;

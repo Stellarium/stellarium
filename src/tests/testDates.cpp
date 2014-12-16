@@ -17,6 +17,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
+#include "tests/testDates.hpp"
+
 #include <QString>
 #include <QDateTime>
 #include <QDate>
@@ -25,8 +27,8 @@
 #include <QtGlobal>
 #include <QLocale>
 #include <QDebug>
+
 #include "StelUtils.hpp"
-#include "tests/testDates.hpp"
 
 #define IGREG 2299161
 
@@ -77,8 +79,6 @@ void TestDates::dateRoundTrip()
 
 	bool ok;
 	Q_UNUSED(ok);
-	//FIXME: This unit test should be fixed
-	/*
 	for (QMap<double, QString>::ConstIterator i=map.constBegin();i!=map.constEnd();++i)
 	{
 		QCOMPARE(StelUtils::julianDayToISO8601String(i.key()), i.value());
@@ -89,7 +89,6 @@ void TestDates::dateRoundTrip()
 		else
 			qFuzzyCompare(i.key()+1.0, tmp+1.0);
 	}
-	*/
 }
 
 

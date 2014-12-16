@@ -20,11 +20,12 @@
 #ifndef _OCTAHEDRON_REGION_HPP_
 #define _OCTAHEDRON_REGION_HPP_
 
+#include "StelVertexArray.hpp"
+#include "VecMath.hpp"
+
 #include <QVector>
 #include <QDebug>
 #include <QVarLengthArray>
-#include "VecMath.hpp"
-#include "StelVertexArray.hpp"
 
 //! @struct EdgeVertex
 //! Describe a vertex composing polygon contours, and whether it belong to an edge or not.
@@ -55,7 +56,7 @@ public:
 	QString toJSON() const;
 };
 
-//! @class OctahedronContour
+//! @class OctahedronPolygon
 //! Manage a non-convex polygon which can extends on more than 180 deg.
 //! The contours defining the polygon are splitted and projected on the 8 sides of an Octahedron to enable 2D geometry
 //! algorithms to be used.
@@ -65,7 +66,7 @@ public:
 	OctahedronPolygon() : fillCachedVertexArray(StelVertexArray::Triangles), outlineCachedVertexArray(StelVertexArray::Lines), capN(1,0,0), capD(-2.)
 	{sides.resize(8);}
 
-	//! Create the OctahedronContour by splitting the passed SubContour on the 8 sides of the octahedron.
+	//! Create the OctahedronPolygon by splitting the passed SubContour on the 8 sides of the octahedron.
 	OctahedronPolygon(const SubContour& subContour);
 	OctahedronPolygon(const QVector<QVector<Vec3d> >& contours);
 	OctahedronPolygon(const QVector<Vec3d>& contour);
@@ -81,11 +82,11 @@ public:
 
 	void getBoundingCap(Vec3d& v, double& d) const {v=capN; d=capD;}
 
-	//! Set this OctahedronContourOctahedronPolygonion of itself with the given OctahedronContour.
+	//! Set this OctahedronPolygon as the intersection of itself with the given OctahedronPolygon.
 	void inPlaceIntersection(const OctahedronPolygon& mpoly);
-	//! Set this OctahedronContour as the union of itself with the given OctahedronContour.
+	//! Set this OctahedronPolygon as the union of itself with the given OctahedronPolygon.
 	void inPlaceUnion(const OctahedronPolygon& mpoly);
-	//! Set this OctahedronContour as the subtraction of itself with the given OctahedronContour.
+	//! Set this OctahedronPolygon as the subtraction of itself with the given OctahedronPolygon.
 	void inPlaceSubtraction(const OctahedronPolygon& mpoly);
 
 	bool intersects(const OctahedronPolygon& mpoly) const;
@@ -132,7 +133,7 @@ private:
 
 	bool sideContains2D(const Vec3d& p, int sideNb) const;
 
-	//! Tesselate the contours per side, producing a list of triangles subcontours according to the given rule.
+	//! Tesselate the contours per side, producing (in @var sides) a list of triangles subcontours according to the given rule.
 	void tesselate(TessWindingRule rule);
 
 	QVector<SubContour> tesselateOneSideLineLoop(struct GLUEStesselator* tess, int sidenb) const;

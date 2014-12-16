@@ -23,7 +23,6 @@
 #include <QDateTime>
 #include <QFont>
 #include <QList>
-#include <QOpenGLFunctions_1_2>
 #include <QSharedPointer>
 #include <QString>
 #include <QStringList>
@@ -32,8 +31,6 @@
 #include "StelObject.hpp"
 #include "StelTextureTypes.hpp"
 #include "StelSphereGeometry.hpp"
-
-#include "StelPainter.hpp"
 #include "gSatWrapper.hpp"
 
 
@@ -86,7 +83,7 @@ Q_DECLARE_METATYPE(SatFlags)
 //! 
 //! Thanks to operator<() overloading, container classes (QList, QMap, etc)
 //! with Satellite or SatelliteP objects can be sorted by satellite name/ID.
-class Satellite : public StelObject, protected QOpenGLFunctions_1_2
+class Satellite : public StelObject
 {
 	friend class Satellites;
 	friend class SatellitesDialog;
@@ -119,7 +116,7 @@ public:
 	virtual QString getInfoString(const StelCore *core, const InfoStringGroup& flags) const;
 	virtual Vec3f getInfoColor(void) const;
 	virtual Vec3d getJ2000EquatorialPos(const StelCore*) const;
-	virtual float getVMagnitude(const StelCore* core=NULL) const;
+	virtual float getVMagnitude(const StelCore* core) const;
 	virtual double getAngularSize(const StelCore* core) const;
 	virtual QString getNameI18n(void) const
 	{
@@ -162,6 +159,9 @@ public:
 	//! Compares #name fields. If equal, #id fields, which can't be.
 	bool operator<(const Satellite& another) const;
 
+	//! Calculation of illuminated fraction of the satellite.
+	float calculateIlluminatedFraction() const;
+
 private:
 	//draw orbits methods
 	void computeOrbitPoints();
@@ -202,6 +202,8 @@ private:
 	//! Extracted from TLE set with parseInternationalDesignator().
 	//! It defaults to 1 Jan 1957 if extraction fails.
 	double jdLaunchYearJan1;
+	//! Standard visual magnitude of the satellite.
+	double stdMag;
 	//! Contains the J2000 position.
 	Vec3d XYZ;
 	QPair< QByteArray, QByteArray > tleElements;
@@ -221,18 +223,20 @@ private:
 	static int   orbitLineFadeSegments;
 	static int   orbitLineSegmentDuration; //measured in seconds
 	static bool  orbitLinesFlag;
+	static bool  realisticModeFlag;
 	//! Mask controlling which info display flags should be honored.
 	static StelObject::InfoStringGroupFlags flagsMask;
 
-	void draw(const StelCore* core, StelPainter& painter, float maxMagHints);
+	void draw(StelCore *core, StelPainter& painter, float maxMagHints);
 
-        //Satellite Orbit Position calculation
-        gSatWrapper *pSatWrapper;
-        Vec3d position;
-        Vec3d velocity;
-        Vec3d latLongSubPointPosition;
-        Vec3d elAzPosition;
-        int   visibility;
+	//Satellite Orbit Position calculation
+	gSatWrapper *pSatWrapper;
+	Vec3d	position;
+	Vec3d	velocity;
+	Vec3d	latLongSubPointPosition;
+	Vec3d	elAzPosition;
+	int	visibility;
+	double	phaseAngle; // phase angle for the satellite
 
 	//Satellite Orbit Draw
 	QFont     font;

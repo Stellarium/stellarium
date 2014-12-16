@@ -48,8 +48,7 @@ private:
 };
 
 ArtificialPlanet::ArtificialPlanet(const PlanetP& orig) :
-		Planet("", 0, 0, 0, Vec3f(0,0,0), 0, "",
-		       NULL, NULL, 0, false, true, false, ""), dest(0),
+		Planet("", 0, 0, 0, Vec3f(0,0,0), 0, "", "", NULL, NULL, 0, false, true, false, true, ""), dest(0),
 		orig_name(orig->getEnglishName()), orig_name_i18n(orig->getNameI18n())
 {
 	radius = 0;
@@ -263,11 +262,16 @@ void SpaceShipObserver::update(double deltaTime)
 		timeToGo = 0.;
 		currentLocation = moveTargetLocation;
 		LandscapeMgr* ls = GETSTELMODULE(LandscapeMgr);
+		SolarSystem* ss = GETSTELMODULE(SolarSystem);
 		if (ls->getFlagLandscapeAutoSelection())
 		{
-			// If we have a landscape for target planet then set it, otherwise use default landscape
+			QString pType = ss->getPlanetType(currentLocation.planetName);
+			// If we have a landscape for target planet then set it or check and use
+			// landscape type of target planet, otherwise use default landscape
 			if (ls->getAllLandscapeNames().indexOf(currentLocation.planetName)>0)
 				ls->setCurrentLandscapeName(currentLocation.planetName);
+			else if (ls->getAllLandscapeIDs().indexOf(pType)>0)
+				ls->setCurrentLandscapeID(pType);
 			else
 				ls->setCurrentLandscapeID(ls->getDefaultLandscapeID());
 		}

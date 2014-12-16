@@ -79,18 +79,23 @@ StelPluginInfo TelescopeControlStelPluginInterface::getPluginInfo() const
 	info.authors = "Bogdan Marinov, Johannes Gajdosik";
 	info.contact = "http://stellarium.org";
 	info.description = N_("This plug-in allows Stellarium to send \"slew\" commands to a telescope on a computerized mount (a \"GoTo telescope\").");
+	info.version = TELESCOPE_CONTROL_VERSION;
 	return info;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // Constructor and destructor
 TelescopeControl::TelescopeControl()
-	: actionGroupId("PluginTelescopeControl")
+	: toolbarButton(NULL)
+	, useTelescopeServerLogs(false)
+	, useServerExecutables(false)
+	, telescopeDialog(NULL)
+	, slewDialog(NULL)
+	, actionGroupId("PluginTelescopeControl")
 	, moveToSelectedActionId("actionMove_Telescope_To_Selection_%1")
 	, moveToCenterActionId("actionSlew_Telescope_To_Direction_%1")
 {
 	setObjectName("TelescopeControl");
-	QOpenGLFunctions_1_2::initializeOpenGLFunctions();
 
 	connectionTypeNames.insert(ConnectionVirtual, "virtual");
 	connectionTypeNames.insert(ConnectionInternal, "internal");
@@ -144,8 +149,6 @@ void TelescopeControl::init()
 		//Load OpenGL textures
 		reticleTexture = StelApp::getInstance().getTextureManager().createTexture(":/telescopeControl/telescope_reticle.png");
 		selectionTexture = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/pointeur2.png");
-		
-		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 
 		//Create telescope key bindings
 		/* StelAction-s with these key bindings existed in Stellarium prior to
@@ -175,11 +178,16 @@ void TelescopeControl::init()
 		addAction("actionShow_Slew_Window", N_("Telescope Control"), N_("Move a telescope to a given set of coordinates"), slewDialog, "visible", "Ctrl+0");
 
 		//Create toolbar button
-		pixmapHover =	new QPixmap(":/graphicGui/glow32x32.png");
-		pixmapOnIcon =	new QPixmap(":/telescopeControl/button_Slew_Dialog_on.png");
-		pixmapOffIcon =	new QPixmap(":/telescopeControl/button_Slew_Dialog_off.png");
-		toolbarButton =	new StelButton(NULL, *pixmapOnIcon, *pixmapOffIcon, *pixmapHover, "actionShow_Slew_Window");
-		gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
+		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+		if (gui!=NULL)
+		{
+			toolbarButton =	new StelButton(NULL,
+						       QPixmap(":/telescopeControl/button_Slew_Dialog_on.png"),
+						       QPixmap(":/telescopeControl/button_Slew_Dialog_off.png"),
+						       QPixmap(":/graphicGui/glow32x32.png"),
+						       "actionShow_Slew_Window");
+			gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
+		}
 	}
 	catch (std::runtime_error &e)
 	{
@@ -269,7 +277,7 @@ void TelescopeControl::draw(StelCore* core)
 				//Telescope circles appear synchronously with markers
 				if (circleFader.getInterstate() >= 0)
 				{
-					glColor4f(circleColor[0], circleColor[1], circleColor[2], circleFader.getInterstate());
+					sPainter.setColor(circleColor[0], circleColor[1], circleColor[2], circleFader.getInterstate());
 					glDisable(GL_TEXTURE_2D);
 					foreach (double circle, telescope->getOculars())
 					{
@@ -279,12 +287,12 @@ void TelescopeControl::draw(StelCore* core)
 				}
 				if (reticleFader.getInterstate() >= 0)
 				{
-					glColor4f(reticleColor[0], reticleColor[1], reticleColor[2], reticleFader.getInterstate());
+					sPainter.setColor(reticleColor[0], reticleColor[1], reticleColor[2], reticleFader.getInterstate());
 					sPainter.drawSprite2dMode(XY[0],XY[1],15.f);
 				}
 				if (labelFader.getInterstate() >= 0)
 				{
-					glColor4f(labelColor[0], labelColor[1], labelColor[2], labelFader.getInterstate());
+					sPainter.setColor(labelColor[0], labelColor[1], labelColor[2], labelFader.getInterstate());
 					//TODO: Different position of the label if circles are shown?
 					//TODO: Remove magic number (text spacing)
 					sPainter.drawText(XY[0], XY[1], telescope->getNameI18n(), 0, 6 + 10, -4, false);

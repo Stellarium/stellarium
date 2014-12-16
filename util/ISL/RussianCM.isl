@@ -21,7 +21,9 @@ RemovePluginsConfig=Удалить конфигурационные файлы плагинов
 RemoveSolarConfig=Удалить файл тел Солнечной системы
 RemoveUILandscapes=Удалить пользовательские ландшафты
 RemoveShortcutsConfig=Удалить конфигурацию клавиатурных сокращений
+RemoveCache=Удалить файлы кэша
 LastRunLog=Журнал последнего запуска
 ChangeLog=Журнал изменений
 FallbackMode=(режим совместимости)
-
+DebugMode=(режим отладки)
+RedistRun=Установка библиотеки времени выполнения Microsoft C/C++...

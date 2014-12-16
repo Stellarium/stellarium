@@ -20,12 +20,14 @@
 #ifndef _STELOBSERVER_HPP_
 #define _STELOBSERVER_HPP_
 
+#include "Planet.hpp"
 #include "StelLocation.hpp"
+#include "VecMath.hpp"
+
 #include <QObject>
 #include <QString>
 #include <QSharedPointer>
-#include "VecMath.hpp"
-#include "Planet.hpp"
+
 
 class ArtificialPlanet;
 class StelObserver;

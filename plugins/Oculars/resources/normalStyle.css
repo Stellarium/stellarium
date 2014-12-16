@@ -4,6 +4,22 @@ based on Stellarium's main stylesheet.
 
 Styles for the "normal mode" (as opposed to the "night mode").
 */
+QMenu {
+	background-color: rgb(86, 87, 90); /* sets background of the menu */
+	border: 1px solid rgb(0, 0, 0);
+	color: rgb(222, 222, 222);
+}
+
+QMenu::item {
+	/* sets background of menu item. set this to something non-transparent
+	if you want menu color and menu item color to be different */
+	background-color: rgb(66, 67, 70);
+}
+
+QMenu::item:selected { /* when user selects item using mouse or keyboard */
+	background-color: rgb(101, 99, 33);
+}
+
 
 QTabBar {
 	background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(31, 33, 36), stop: 1 rgb(0, 0, 0));

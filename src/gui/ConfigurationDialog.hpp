@@ -72,6 +72,8 @@ private:
 	QFile* currentDownloadFile;
 	class StelProgressController* progressBar;
 
+	QString userAgent;
+
 private slots:
 	void setNoSelectedInfo();
 	void setAllSelectedInfo();
@@ -80,8 +82,11 @@ private slots:
 	//! Called when any of the boxes has been clicked. Sets the
 	//! "selected info" mode to "Custom".
 	void setSelectedInfoFromCheckBoxes();
-	
+
+	void updateCurrentLanguage();
+	void updateCurrentSkyLanguage();
 	void selectLanguage(const QString& languageCode);
+	void selectSkyLanguage(const QString& languageCode);
 	void setStartupTimeMode();
 	//! Show/bring to foreground the shortcut editor window.
 	void showShortcutsWindow();
@@ -115,9 +120,11 @@ private slots:
 	void setDefaultViewOptions();
 
 	void populatePluginsList();
-	void pluginsSelectionChanged(const QString&);
+	void pluginsSelectionChanged(QListWidgetItem *item, QListWidgetItem *previousItem);
 	void pluginConfigureCurrentSelection();
 	void loadAtStartupChanged(int);
+
+	void setUpdatesFlag(bool b);
 
 	void populateDeltaTAlgorithmsList();
 	void setDeltaTAlgorithm(int algorithmID);

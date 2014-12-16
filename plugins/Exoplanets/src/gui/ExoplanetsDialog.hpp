@@ -27,6 +27,7 @@
 
 class Ui_exoplanetsDialog;
 class QTimer;
+class Exoplanets;
 
 class ExoplanetsDialog : public StelDialog
 {
@@ -49,6 +50,7 @@ private slots:
 	void setUpdatesEnabled(int checkState);
 	void setDistributionEnabled(int checkState);
 	void setTimelineEnabled(int checkState);
+	void setHabitableEnabled(int checkState);
 	void setDisplayAtStartupEnabled(int checkState);
 	void setDisplayShowExoplanetsButton(int checkState);
 	void updateStateReceiver(Exoplanets::UpdateState state);
@@ -59,6 +61,7 @@ private slots:
 
 private:
         Ui_exoplanetsDialog* ui;
+	Exoplanets* ep;
 	void setAboutHtml(void);
 	void setInfoHtml(void);
 	void setWebsitesHtml(void);
