@@ -36,7 +36,20 @@
 #include <QList>
 
 Nova::Nova(const QVariantMap& map)
-		: initialized(false)
+		: initialized(false),
+		  designation(""),
+		  novaName(""),
+		  novaType(""),
+		  maxMagnitude(21.),
+		  minMagnitude(21.),
+		  peakJD(0.),
+		  m2(-1),
+		  m3(-1),
+		  m6(-1),
+		  m9(-1),
+		  RA(0.),
+		  Dec(0.),
+		  distance(0.)
 {
 	// return initialized if the mandatory fields are not present
 	if (!map.contains("designation"))
@@ -84,12 +97,6 @@ QVariantMap Nova::getMap(void)
 	return map;
 }
 
-float Nova::getSelectPriority(const StelCore* core) const
-{
-	//Same as StarWrapper::getSelectPriority()
-	return getVMagnitude(core);
-}
-
 QString Nova::getEnglishName() const
 {
 	return novaName;
@@ -122,7 +129,7 @@ QString Nova::getInfoString(const StelCore* core, const InfoStringGroup& flags) 
 		oss << name;
 	}
 
-	if (flags&Extra)
+	if (flags&ObjectType)
 		oss << q_("Type: <b>%1</b> (%2)").arg(q_("nova")).arg(novaType) << "<br />";
 
 	if (flags&Magnitude)
@@ -141,7 +148,10 @@ QString Nova::getInfoString(const StelCore* core, const InfoStringGroup& flags) 
 	{
 		oss << q_("Maximum brightness: %1").arg(getMaxBrightnessDate(peakJD)) << "<br>";
 		if (distance>0)
-			oss << q_("Distance: %1 Light Years").arg(distance*1000) << "<br>";
+		{
+			//TRANSLATORS: Unit of measure for distance - Light Years
+			oss << q_("Distance: %1 ly").arg(distance*1000) << "<br>";
+		}
 	}
 
 	postProcessInfoString(str, flags);
@@ -158,7 +168,7 @@ float Nova::getVMagnitude(const StelCore* core) const
 	// OK, start from minimal brightness
 	double vmag = minMagnitude;
 	double currentJD = core->getJDay();
-	double deltaJD = std::abs(peakJD-currentJD);
+	double deltaJD = qAbs(peakJD-currentJD);
     
 	// Fill "default" values for mX
 	int t2 = m2;

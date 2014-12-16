@@ -24,6 +24,7 @@
 #include "SphericMirrorCalculator.hpp"
 #include "StelFileMgr.hpp"
 #include "StelMovementMgr.hpp"
+#include "StelUtils.hpp"
 
 #include <QOpenGLFramebufferObject>
 #include <QSettings>
@@ -46,10 +47,11 @@ struct VertexPoint
 	double h;
 };
 
-StelViewportDistorterFisheyeToSphericMirror::StelViewportDistorterFisheyeToSphericMirror(int screen_w,int screen_h) :
-		screen_w(screen_w), screen_h(screen_h),
-		originalProjectorParams(StelApp::getInstance().getCore()->getCurrentStelProjectorParams()),
-		texture_point_array(NULL)
+StelViewportDistorterFisheyeToSphericMirror::StelViewportDistorterFisheyeToSphericMirror(int screen_w,int screen_h)
+	: screen_w(screen_w)
+	, screen_h(screen_h)
+	, originalProjectorParams(StelApp::getInstance().getCore()->getCurrentStelProjectorParams())
+	, texture_point_array(NULL)
 {
 	QSettings& conf = *StelApp::getInstance().getSettings();
 	StelCore* core = StelApp::getInstance().getCore();
@@ -97,11 +99,8 @@ StelViewportDistorterFisheyeToSphericMirror::StelViewportDistorterFisheyeToSpher
 	// diameter of the FOV-disk in pixels
 	newProjectorParams.viewportFovDiameter = conf.value("spheric_mirror/viewport_fov_diameter", qMin(newProjectorParams.viewportXywh[2],newProjectorParams.viewportXywh[3])).toFloat();
 
-	// Vestigial mirror texture dimensions: used to be a single value,
-	while (texture_wh < newProjectorParams.viewportXywh[2] || texture_wh < newProjectorParams.viewportXywh[3])
-		texture_wh <<= 1;
-	viewport_texture_offset[0] = (texture_wh-newProjectorParams.viewportXywh[2])>>1;
-	viewport_texture_offset[1] = (texture_wh-newProjectorParams.viewportXywh[3])>>1;
+	viewport_texture_offset[0] = (screen_w-newProjectorParams.viewportXywh[2])>>1;
+	viewport_texture_offset[1] = (screen_h-newProjectorParams.viewportXywh[3])>>1;
 
 	newProjectorParams.viewportXywh[0] = (screen_w-newProjectorParams.viewportXywh[2]) >> 1;
 	newProjectorParams.viewportXywh[1] = (screen_h-newProjectorParams.viewportXywh[3]) >> 1;
@@ -118,9 +117,9 @@ StelViewportDistorterFisheyeToSphericMirror::StelViewportDistorterFisheyeToSpher
 			texture_triangle_base_length = 256.f;
 		else if (texture_triangle_base_length < 2.f)
 			texture_triangle_base_length = 2.f;
-		max_x = (int)trunc(0.5 + screen_w/texture_triangle_base_length);
+        max_x = (int)StelUtils::trunc(0.5 + screen_w/texture_triangle_base_length);
 		step_x = screen_w / (double)(max_x-0.5);
-		max_y = (int)trunc(screen_h/(texture_triangle_base_length*0.5*sqrt(3.0)));
+        max_y = (int)StelUtils::trunc(screen_h/(texture_triangle_base_length*0.5*sqrt(3.0)));
 		step_y = screen_h/ (double)max_y;
 
 		double gamma = conf.value("spheric_mirror/projector_gamma",0.45).toDouble();
@@ -161,8 +160,8 @@ StelViewportDistorterFisheyeToSphericMirror::StelViewportDistorterFisheyeToSpher
 				//      if (y < 0.f) {y=0.f;vertex_point.h=0;}
 				//      else if (y > newProjectorParams.viewportXywh[3]) {y=newProjectorParams.viewportXywh[3];vertex_point.h=0;}
 
-				texture_point[0] = (viewport_texture_offset[0]+x)/texture_wh;
-				texture_point[1] = (viewport_texture_offset[1]+y)/texture_wh;
+				texture_point[0] = (viewport_texture_offset[0]+x)/screen_w;
+				texture_point[1] = (viewport_texture_offset[1]+y)/screen_h;
 
 				if (vertex_point.h > max_h) max_h = vertex_point.h;
 			}
@@ -205,7 +204,6 @@ StelViewportDistorterFisheyeToSphericMirror::StelViewportDistorterFisheyeToSpher
 	         //<< "viewport_texture_offset:" 
 	         //<< viewport_texture_offset[0]
 	         //<< viewport_texture_offset[1] << endl
-	         << "texture_w:" << texture_w << endl
 	         << "texture_h:" << texture_h << endl
 	         << "max_x:" << maxGridX << endl
 	         << "max_y:" << maxGridY;*/
@@ -217,12 +215,6 @@ StelViewportDistorterFisheyeToSphericMirror::StelViewportDistorterFisheyeToSpher
 											(vertex_point.h<=0.0) ? 0.0 : exp(gamma*log(vertex_point.h/max_h));
 				vertex_point.color[3] = 1.0f;
 			}
-#ifdef _MSC_BUILD // MSVC does not have a trunc function
-	maxGridX = (int)floor(0.5 + screenWidth / triangleBaseLength);
-	maxGridY = (int)floor(screenHeight / (triangleBaseLength * 0.5 * sqrt(3.0)));
-#else
-#endif
-//	stepX = screenWidth / (double)(maxGridX - 0.5);
 		}
 	}
 	else
@@ -235,11 +227,10 @@ StelViewportDistorterFisheyeToSphericMirror::StelViewportDistorterFisheyeToSpher
 		else
 		{
 			file.setFileName(fName);
-			file.open(QIODevice::ReadOnly);
-			if (file.error() != QFile::NoError)
-				qWarning() << "WARNING: could not open custom_distortion_file:" << custom_distortion_file;
-			else
+			if(file.open(QIODevice::ReadOnly))
 				in.setDevice(&file);
+			else
+				qWarning() << "WARNING: could not open custom_distortion_file:" << custom_distortion_file;
 		}
 		Q_ASSERT(file.error()!=QFile::NoError);
 		in >> max_x >> max_y;
@@ -260,8 +251,8 @@ StelViewportDistorterFisheyeToSphericMirror::StelViewportDistorterFisheyeToSpher
 				in >> x >> y >> vertex_point.color[0] >> vertex_point.color[1] >> vertex_point.color[2];
 				vertex_point.color[3] = 1.0f;
 				Q_ASSERT(in.status()!=QTextStream::Ok);
-				texture_point[0] = (viewport_texture_offset[0]+x)/texture_wh;
-				texture_point[1] = (viewport_texture_offset[1]+y)/texture_wh;
+				texture_point[0] = (viewport_texture_offset[0]+x)/screen_w;
+				texture_point[1] = (viewport_texture_offset[1]+y)/screen_h;
 			}
 		}
 	}
@@ -373,8 +364,8 @@ void StelViewportDistorterFisheyeToSphericMirror::distortXY(float& x, float& y) 
 		}
 	}
 
-	x = texture_wh*texture_x - viewport_texture_offset[0] + newProjectorParams.viewportXywh[0];
-	y = texture_wh*texture_y - viewport_texture_offset[1] + newProjectorParams.viewportXywh[1];
+	x = screen_w*texture_x - viewport_texture_offset[0] + newProjectorParams.viewportXywh[0];
+	y = screen_h*texture_y - viewport_texture_offset[1] + newProjectorParams.viewportXywh[1];
 }
 
 
@@ -383,6 +374,8 @@ void StelViewportDistorterFisheyeToSphericMirror::paintViewportBuffer(const QOpe
 	StelPainter sPainter(StelApp::getInstance().getCore()->getProjection2d());
 	sPainter.enableTexture2d(true);
 	glBindTexture(GL_TEXTURE_2D, buf->texture());
+	GL(glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR));
+	GL(glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR));
 	glDisable(GL_BLEND);
 
 	sPainter.enableClientStates(true, true, true);
@@ -391,8 +384,11 @@ void StelViewportDistorterFisheyeToSphericMirror::paintViewportBuffer(const QOpe
 	sPainter.setTexCoordPointer(2, GL_FLOAT, displayTexCoordList.constData());
 	for (int j=0;j<max_y;j++)
 	{
+		glDrawArrays(GL_TRIANGLE_STRIP, j*(max_x+1)*2, (max_x+1)*2);
 		sPainter.drawFromArray(StelPainter::TriangleStrip, (max_x+1)*2, j*(max_x+1)*2, false);
 	}
 	sPainter.enableClientStates(false);
+	GL(glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST));
+	GL(glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST));
 }
 

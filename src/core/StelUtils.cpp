@@ -17,8 +17,6 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#include <cmath> // std::fmod
-
 #ifdef CYGWIN
  #include <malloc.h>
 #endif
@@ -32,6 +30,10 @@
 #include <QDebug>
 #include <QLocale>
 #include <QRegExp>
+#include <QProcess>
+#include <QSysInfo>
+#include <cmath> // std::fmod
+#include <zlib.h>
 
 namespace StelUtils
 {
@@ -51,6 +53,120 @@ QString getApplicationVersion()
 #else
 	return QString(PACKAGE_VERSION);
 #endif
+}
+
+QString getOperatingSystemInfo()
+{
+	QString OS = "Unknown operating system";
+
+	#ifdef Q_OS_WIN
+	switch(QSysInfo::WindowsVersion)
+	{
+		case QSysInfo::WV_95:
+			OS = "Windows 95";
+			break;
+		case QSysInfo::WV_98:
+			OS = "Windows 98";
+			break;
+		case QSysInfo::WV_Me:
+			OS = "Windows Me";
+			break;
+		case QSysInfo::WV_NT:
+			OS = "Windows NT";
+			break;
+		case QSysInfo::WV_2000:
+			OS = "Windows 2000";
+			break;
+		case QSysInfo::WV_XP:
+			OS = "Windows XP";
+			break;
+		case QSysInfo::WV_2003:
+			OS = "Windows Server 2003";
+			break;
+		case QSysInfo::WV_VISTA:
+			OS = "Windows Vista";
+			break;
+		case QSysInfo::WV_WINDOWS7:
+			OS = "Windows 7";
+			break;
+		#ifdef WV_WINDOWS8
+		case QSysInfo::WV_WINDOWS8:
+			OS = "Windows 8";
+			break;
+		#endif
+		#ifdef WV_WINDOWS8_1
+		case QSysInfo::WV_WINDOWS8_1:
+			OS = "Windows 8.1";
+			break;
+		#endif
+		#ifdef WV_WINDOWS10
+		case QSysInfo::WV_WINDOWS10:
+			OS = "Windows 10";
+			break;
+		#endif
+		default:
+			OS = "Unsupported Windows version";
+			break;
+	}
+
+	// somebody writing something useful for Macs would be great here
+	#elif defined Q_OS_MAC
+	switch(QSysInfo::MacintoshVersion)
+	{
+		case QSysInfo::MV_PANTHER:
+			OS = "Mac OS X 10.3 series";
+			break;
+		case QSysInfo::MV_TIGER:
+			OS = "Mac OS X 10.4 series";
+			break;
+		case QSysInfo::MV_LEOPARD:
+			OS = "Mac OS X 10.5 series";
+			break;
+		case QSysInfo::MV_SNOWLEOPARD:
+			OS = "Mac OS X 10.6 series";
+			break;
+		case QSysInfo::MV_LION:
+			OS = "Mac OS X 10.7 series";
+			break;
+		case QSysInfo::MV_MOUNTAINLION:
+			OS = "Mac OS X 10.8 series";
+			break;
+		case QSysInfo::MV_MAVERICKS:
+			OS = "Mac OS X 10.9 series";
+			break;
+		#ifdef MV_YOSEMITE
+		case QSysInfo::MV_YOSEMITE:
+			OS = "Mac OS X 10.10 series";
+			break;
+		#endif
+		default:
+			OS = "Unsupported Mac version";
+			break;
+	}
+
+	#elif defined Q_OS_LINUX
+	QFile procVersion("/proc/version");
+	if(!procVersion.open(QIODevice::ReadOnly | QIODevice::Text))
+		OS = "Unknown Linux version";
+	else
+	{
+		QString version = procVersion.readAll();
+		if(version.right(1) == "\n")
+			version.chop(1);
+		OS = version;
+		procVersion.close();
+	}
+	#elif defined Q_OS_BSD4
+	// Check FreeBSD, NetBSD, OpenBSD and DragonFly BSD
+	QProcess uname;
+	uname.start("/usr/bin/uname -srm");
+	uname.waitForStarted();
+	uname.waitForFinished();
+	const QString BSDsystem = uname.readAllStandardOutput();
+	OS = BSDsystem.trimmed();
+	#endif
+
+	return OS;
 }
 
 double hmsToRad(const unsigned int h, const unsigned int m, const double s )
@@ -98,23 +214,52 @@ void radToDms(double angle, bool& sign, unsigned int& d, unsigned int& m, double
 	d = (unsigned int)angle;
 	m = (unsigned int)((angle - d)*60);
 	s = (angle-d)*3600-60*m;
-	// workaround for rounding numbers
+	// workaround for rounding numbers	
 	if (s>59.9)
 	{
 		s = 0.;
-		if (sign)
-			m += 1;
-		else
-			m -= 1;
+		m += 1;
 	}
 	if (m==60)
 	{
 		m = 0.;
-		if (sign)
-			d += 1;
-		else
-			d -= 1;
+		d += 1;
+	}	
+}
+
+void radToDecDeg(double rad, bool &sign, double &deg)
+{
+	rad = std::fmod(rad,2.0*M_PI);
+	sign=true;
+	if (rad<0)
+	{
+		rad *= -1;
+		sign = false;
 	}
+	deg = rad*180./M_PI;
+}
+
+QString radToDecDegStr(const double angle, const int precision, const bool useD, const bool useC)
+{
+	QChar degsign('d');
+	QString str;	
+	if (!useD)
+	{
+		degsign = 0x00B0;		
+	}
+	bool sign;
+	double deg;
+	StelUtils::radToDecDeg(angle, sign, deg);
+	str = QString("%1%2%3").arg((sign?"+":"-"), QString::number(deg, 'f', precision), degsign);
+	if (useC)
+	{
+		if (!sign)
+			deg = 360. - deg;
+
+		str = QString("+%1%2").arg(QString::number(deg, 'f', precision), degsign);
+	}
+
+	return str;
 }
 
 /*************************************************************************
@@ -166,15 +311,15 @@ QString radToHmsStr(const double angle, const bool decimal)
 	QString carry;
 	if (decimal)
 	{
-		width=4;
-		precision=1;
-		carry="60.0";
+		width=5;
+		precision=2;
+		carry="60.00";
 	}
 	else
 	{
-		width=2;
-		precision=0;
-		carry="60";
+		width=4;
+		precision=1;
+		carry="60.0";
 	}
 
 	// handle carry case (when seconds are rounded up)
@@ -265,6 +410,40 @@ QString radToDmsStr(const double angle, const bool decimal, const bool useD)
 	return str;
 }
 
+void decDegToDms(double angle, bool &sign, unsigned int &d, unsigned int &m, double &s)
+{
+	sign = true;
+	if (angle<0.)
+	{
+		sign = false;
+		angle *= -1;
+	}
+
+	d = (unsigned int)angle;
+	m = (unsigned int)((angle-d)*60);
+	s = (angle-d)*3600.-60.*m;
+
+	if (s==60.)
+	{
+		s = 0.;
+		m += 1;
+	}
+	if (m==60)
+	{
+		m = 0;
+		d += 1;
+	}
+}
+
+// Convert an angle in decimal degrees to a dms formatted string
+QString decDegToDmsStr(const double angle)
+{
+	bool sign;
+	double s;
+	unsigned int d, m;
+	decDegToDms(angle, sign, d, m, s);
+	return QString("%1%2%3%4\'%5\"").arg(sign?'+':'-').arg(d).arg(QChar(0x00B0)).arg(m,2,10,QLatin1Char('0')).arg((unsigned int)s,2,10,QLatin1Char('0'));
+}
 
 // Convert a dms formatted string to an angle in radian
 double dmsStrToRad(const QString& s)
@@ -367,13 +546,11 @@ void rectToSphe(double *lng, double *lat, const Vec3f& v)
 	*lng = atan2(v[1],v[0]);
 }
 
-// GZ: some additions. I need those just for quick conversions for text display.
 void ctRadec2Ecl(const double raRad, const double decRad, const double eclRad, double *lambdaRad, double *betaRad)
 {
 	*lambdaRad=std::atan2(std::sin(raRad)*std::cos(eclRad)+std::tan(decRad)*std::sin(eclRad), std::cos(raRad));
 	*betaRad=std::asin(std::sin(decRad)*std::cos(eclRad)-std::cos(decRad)*std::sin(eclRad)*std::sin(raRad));
 }
-// GZ: done
 
 double getDecAngle(const QString& str)
 {
@@ -430,7 +607,13 @@ int getBiggerPowerOfTwo(int value)
 // Return the inverse sinus hyperbolic of z
 double asinh(const double z)
 {
-	return std::log(z+std::sqrt(z*z+1));
+	double returned;
+	if(z>0)
+	   returned = std::log(z + std::sqrt(z*z+1));
+	else
+	   returned = -std::log(-z + std::sqrt(z*z+1));
+
+	return returned;
 }
 
 /*************************************************************************
@@ -453,8 +636,6 @@ QDateTime jdToQDateTime(const double& jd)
 
 void getDateFromJulianDay(const double jd, int *yy, int *mm, int *dd)
 {
-	//WARNING: Algorithm below give wrong data for dates before 1582 year (before Gregorian calendar) with Qt5 --AW
-
 	/*
 	 * This algorithm is taken from
 	 * "Numerical Recipes in c, 2nd Ed." (1992), pp. 14-15
@@ -513,7 +694,7 @@ void getDateFromJulianDay(const double jd, int *yy, int *mm, int *dd)
 	if (julian < 0)
 	{
 		*yy -= 100 * (1 - julian / 36525);
-	}	
+	}
 }
 
 void getTimeFromJulianDay(const double julianDay, int *hour, int *minute, int *second)
@@ -739,7 +920,8 @@ bool getJDFromDate(double* newjd, const int y, const int m, const int d, const i
 	double deltaTime = (h / 24.0) + (min / (24.0*60.0)) + (s / (24.0 * 60.0 * 60.0)) - 0.5;
 	QDate test((y <= 0 ? y-1 : y), m, d);
 	// if QDate will oblige, do so.
-	if ( test.isValid() )
+	// added hook for Julian calendar, because he has been removed from Qt5 --AW
+	if ( test.isValid() && y>1582)
 	{
 		double qdjd = (double)test.toJulianDay();
 		qdjd += deltaTime;
@@ -1054,8 +1236,8 @@ double calculateSiderealPeriod(const double SemiMajorAxis)
 QString hoursToHmsStr(const double hours)
 {
 	int h = (int)hours;
-	int m = (int)((std::abs(hours)-std::abs(double(h)))*60);
-	float s = (((std::abs(hours)-std::abs(double(h)))*60)-m)*60;
+	int m = (int)((qAbs(hours)-qAbs(double(h)))*60);
+	float s = (((qAbs(hours)-qAbs(double(h)))*60)-m)*60;
 
 	return QString("%1h%2m%3s").arg(h).arg(m).arg(QString::number(s, 'f', 1));
 }
@@ -1081,8 +1263,6 @@ double getDeltaTByEspenakMeeus(const double jDay)
 	// "Five Millennium Canon of Solar Eclipses" [Espenak and Meeus, 2006]
 	// A summary is described here:
 	// http://eclipse.gsfc.nasa.gov/SEhelp/deltatpoly2004.html
-	// GZ: I replaced the std::pow() calls by Horner's scheme with reversed factors, it's more accurate and efficient.
-	//     Old code left for readability, but can also be deleted.
 
 	double y = year+((month-1)*30.5+day/31*30.5)/366;
 
@@ -1348,7 +1528,7 @@ double getDeltaTByChaprontTouze(const double jDay)
 
 // Implementation of algorithm by JPL Horizons for DeltaT computation
 double getDeltaTByJPLHorizons(const double jDay)
-{ // GZ: TODO: FIXME! It does not make sense to have zeros after 1620 in a JPL Horizons compatible implementation!
+{ // FIXME: It does not make sense to have zeros after 1620 in a JPL Horizons compatible implementation!
 	int year, month, day;
 	double u;
 	double deltaT = 0.;
@@ -1532,16 +1712,16 @@ double getDeltaTByMeeusSimons(const double jDay)
 }
 
 // Implementation of algorithm by Reingold & Dershowitz (Cal. Calc. 1997, 2001, 2007, Cal. Tab. 2002) for DeltaT computation.
-// GZ: Created as yet another multi-segment polynomial fit through the table in Meeus: Astronomical Algorithms (1991).
-// GZ: Note that only the Third edition (2007) adds the 1700-1799 term.
-// GZ: More efficient reimplementation with stricter adherence to the source.
+// Created as yet another multi-segment polynomial fit through the table in Meeus: Astronomical Algorithms (1991).
+// Note that only the Third edition (2007) adds the 1700-1799 term.
+// More efficient reimplementation with stricter adherence to the source.
 double getDeltaTByReingoldDershowitz(const double jDay)
 {
 	int year, month, day;	
 	getDateFromJulianDay(jDay, &year, &month, &day);
-	// GZ: R&D don't use a float-fraction year, but explicitly only the integer year! And R&D use a proleptic Gregorian year before 1582.
-	// GZ: We cannot do that, but the difference is negligible.
-	// GZ: FIXME: why are displayed values so far off the computed values? It seems currently broken!
+	// R&D don't use a float-fraction year, but explicitly only the integer year! And R&D use a proleptic Gregorian year before 1582.
+	// We cannot do that, but the difference is negligible.
+	// FIXME: why are displayed values so far off the computed values? It seems currently broken!
 	double deltaT=0.0; // If it returns 0, there is a bug!
 
 	if ((year >= 2019) || (year < 1620))
@@ -1662,7 +1842,7 @@ double getMoonSecularAcceleration(const double jDay, const double nd)
 	double t = (yeardec-1955.5)/100.0;
 	// n.dot for secular acceleration of the Moon in ELP2000-82B
 	// have value -23.8946 "/cy/cy
-	return -0.91072 * (-23.8946 + std::abs(nd))*t*t;
+	return -0.91072 * (-23.8946 + qAbs(nd))*t*t;
 }
 
 double getDeltaTStandardError(const double jDay)
@@ -1680,6 +1860,143 @@ double getDeltaTStandardError(const double jDay)
 		sigma = 0.8 * cDiff1820 * cDiff1820;
 	}
 	return sigma;
+}
+
+
+// Arrays to keep cos/sin of angles and multiples of angles. rho and theta are delta angles, and these arrays
+#define MAX_STACKS 4096
+static float cos_sin_rho[2*(MAX_STACKS+1)];
+#define MAX_SLICES 4096
+static float cos_sin_theta[2*(MAX_SLICES+1)];
+
+//! Compute cosines and sines around a circle which is split in "segments" parts.
+//! Values are stored in the global static array cos_sin_theta.
+//! Used for the sin/cos values along a latitude circle, equator, etc. for a spherical mesh.
+//! @param slices number of partitions (elsewhere called "segments") for the circle
+float* ComputeCosSinTheta(const int slices)
+{
+	Q_ASSERT(slices<=MAX_SLICES);
+	
+	// Difference angle between the stops. Always use 2*M_PI/slices!
+	const float dTheta = 2.f * M_PI / slices;
+	float *cos_sin = cos_sin_theta;
+	float *cos_sin_rev = cos_sin + 2*(slices+1);
+	const float c = std::cos(dTheta);
+	const float s = std::sin(dTheta);
+	*cos_sin++ = 1.f;
+	*cos_sin++ = 0.f;
+	*--cos_sin_rev = -cos_sin[-1];
+	*--cos_sin_rev =  cos_sin[-2];
+	*cos_sin++ = c;
+	*cos_sin++ = s;
+	*--cos_sin_rev = -cos_sin[-1];
+	*--cos_sin_rev =  cos_sin[-2];
+	while (cos_sin < cos_sin_rev)   // compares array address indices only!
+	{
+		// avoid expensive trig functions by use of the addition theorem.
+		cos_sin[0] = cos_sin[-2]*c - cos_sin[-1]*s;
+		cos_sin[1] = cos_sin[-2]*s + cos_sin[-1]*c;
+		cos_sin += 2;
+		*--cos_sin_rev = -cos_sin[-1];
+		*--cos_sin_rev =  cos_sin[-2];
+	}
+	return cos_sin_theta;
+}
+
+//! Compute cosines and sines around a half-circle which is split in "segments" parts.
+//! Values are stored in the global static array cos_sin_rho.
+//! Used for the sin/cos values along a meridian for a spherical mesh.
+//! @param segments number of partitions (elsewhere called "stacks") for the half-circle
+float* ComputeCosSinRho(const int segments)
+{
+	Q_ASSERT(segments<=MAX_STACKS);
+	
+	// Difference angle between the stops. Always use M_PI/segments!
+	const float dRho = M_PI / segments;
+	float *cos_sin = cos_sin_rho;
+	float *cos_sin_rev = cos_sin + 2*(segments+1);
+	const float c = std::cos(dRho);
+	const float s = std::sin(dRho);
+	*cos_sin++ = 1.f;
+	*cos_sin++ = 0.f;
+	*--cos_sin_rev =  cos_sin[-1];
+	*--cos_sin_rev = -cos_sin[-2];
+	*cos_sin++ = c;
+	*cos_sin++ = s;
+	*--cos_sin_rev =  cos_sin[-1];
+	*--cos_sin_rev = -cos_sin[-2];
+	while (cos_sin < cos_sin_rev)    // compares array address indices only!
+	{
+		// avoid expensive trig functions by use of the addition theorem.
+		cos_sin[0] = cos_sin[-2]*c - cos_sin[-1]*s;
+		cos_sin[1] = cos_sin[-2]*s + cos_sin[-1]*c;
+		cos_sin += 2;
+		*--cos_sin_rev =  cos_sin[-1];
+		*--cos_sin_rev = -cos_sin[-2];
+	}
+	
+	return cos_sin_rho;
+}
+
+//! Compute cosines and sines around part of a circle (from top to bottom) which is split in "segments" parts.
+//! Values are stored in the global static array cos_sin_rho.
+//! Used for the sin/cos values along a meridian.
+//! This allows leaving away pole caps. The array now contains values for the region minAngle+segments*phi
+//! @param dRho a difference angle between the stops
+//! @param segments number of segments
+//! @param minAngle start angle inside the half-circle. maxAngle=minAngle+segments*phi
+float *ComputeCosSinRhoZone(const float dRho, const int segments, const float minAngle)
+{
+	float *cos_sin = cos_sin_rho;
+	const float c = cos(dRho);
+	const float s = sin(dRho);
+	*cos_sin++ = cos(minAngle);
+	*cos_sin++ = sin(minAngle);
+	for (int i=0; i<segments; ++i) // we cannot mirror this, it may be unequal.
+	{   // efficient computation, avoid expensive trig functions by use of the addition theorem.
+		cos_sin[0] = cos_sin[-2]*c - cos_sin[-1]*s;
+		cos_sin[1] = cos_sin[-2]*s + cos_sin[-1]*c;
+		cos_sin += 2;
+	}
+	return cos_sin_rho;
+}
+
+//! Uncompress gzip or zlib compressed data.
+QByteArray uncompress(const QByteArray& data)
+{
+	if (data.size() <= 4)
+		return QByteArray();
+	static const int CHUNK = 1024;
+	QByteArray buffer(CHUNK, 0);
+	QByteArray out;
+	z_stream strm;
+	strm.zalloc = Z_NULL;
+	strm.zfree = Z_NULL;
+	strm.opaque = Z_NULL;
+	strm.avail_in = data.size();
+	strm.next_in = (Bytef*)(data.data());
+
+	// 15 + 32 for gzip automatic header detection.
+	int ret = inflateInit2(&strm, 15 +  32);
+	if (ret != Z_OK) return QByteArray();
+
+	do
+	{
+		strm.avail_out = CHUNK;
+		strm.next_out = (Bytef*)(buffer.data());
+		ret = inflate(&strm, Z_NO_FLUSH);
+		Q_ASSERT(ret != Z_STREAM_ERROR);
+		if (ret < 0)
+		{
+			out.clear();
+			break;
+		}
+		out.append(buffer.data(), CHUNK - strm.avail_out);
+	}
+	while (strm.avail_out == 0);
+
+    inflateEnd(&strm);
+	return out;
 }
 
 } // end of the StelUtils namespace

@@ -22,7 +22,6 @@
 #include "StelObjectModule.hpp"
 #include "StelObject.hpp"
 #include "StelTextureTypes.hpp"
-#include "StelPainter.hpp"
 #include "Quasar.hpp"
 #include <QFont>
 #include <QVariantMap>
@@ -102,6 +101,8 @@ public:
 	virtual QStringList listMatchingObjects(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false) const;
 
 	virtual QStringList listAllObjects(bool inEnglish) const;
+	virtual QStringList listAllObjectsByType(const QString& objType, bool inEnglish) const { Q_UNUSED(objType) Q_UNUSED(inEnglish) return QStringList(); }
+
 	virtual QString getName() const { return "Quasars"; }
 
 	//! get a Quasar object by identifier
@@ -130,8 +131,10 @@ public:
 	//! @param b if true, updates will be enabled, else they will be disabled
 	void setUpdatesEnabled(bool b) {updatesEnabled=b;}
 
-	bool getDisplayMode(void) {return distributionEnabled;}
-	void setDisplayMode(bool b) {distributionEnabled=b;}
+	bool getDisplayMode(void);
+	void setDisplayMode(bool b);
+	QString getMarkerColor(void);
+	void setMarkerColor(QString c);
 	void setEnableAtStartup(bool b) { enableAtStartup=b; }
 	bool getEnableAtStartup(void) { return enableAtStartup; }
 
@@ -147,6 +150,9 @@ public:
 
 	//! Get the current updateState
 	UpdateState getUpdateState(void) {return updateState;}
+
+	//! Get count of quasars from catalog
+	int getCountQuasars(void) {return QsrCount;}
 
 signals:
 	//! @param state the new update state.
@@ -208,6 +214,8 @@ private:
 
 	QString catalogJsonPath;
 
+	int QsrCount;
+
 	StelTextureSP texPointer;
 	QList<QuasarP> QSO;
 
@@ -220,8 +228,7 @@ private:
 	QList<int> messageIDs;
 	bool updatesEnabled;
 	QDateTime lastUpdate;
-	int updateFrequencyDays;
-	bool distributionEnabled;
+	int updateFrequencyDays;	
 	bool enableAtStartup;
 
 	QSettings* conf;

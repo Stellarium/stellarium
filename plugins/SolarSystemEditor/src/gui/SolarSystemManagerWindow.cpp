@@ -58,6 +58,13 @@ void SolarSystemManagerWindow::createDialogContent()
 {
 	ui->setupUi(dialog);
 
+#ifdef Q_OS_WIN
+	//Kinetic scrolling for tablet pc and pc
+	QList<QWidget *> addscroll;
+	addscroll << ui->listWidgetObjects;
+	installKineticScrolling(addscroll);
+#endif
+
 	//Signals
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()),
 	        this, SLOT(retranslate()));
@@ -71,6 +78,8 @@ void SolarSystemManagerWindow::createDialogContent()
 	connect(ssoManager, SIGNAL(solarSystemChanged()), this, SLOT(populateSolarSystemList()));
 	connect(ui->pushButtonReset, SIGNAL(clicked()), ssoManager, SLOT(resetSolarSystemToDefault()));
 
+	connect(ui->listWidgetObjects, SIGNAL(currentRowChanged(int)), this, SLOT(repaintSolarSystemList()));
+
 	updateTexts();
 
 	Q_ASSERT(mpcImportWindow);
@@ -79,6 +88,13 @@ void SolarSystemManagerWindow::createDialogContent()
 
 	ui->lineEditUserFilePath->setText(ssoManager->getCustomSolarSystemFilePath());
 	populateSolarSystemList();
+}
+
+void SolarSystemManagerWindow::repaintSolarSystemList()
+{
+	// Enable force repaint listEvents to avoiding artifacts
+	// Seems bug in Qt5. Details: https://bugs.launchpad.net/stellarium/+bug/1350669
+	ui->listWidgetObjects->repaint();
 }
 
 void SolarSystemManagerWindow::updateTexts()

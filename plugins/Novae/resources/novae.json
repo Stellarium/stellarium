@@ -1,5 +1,6 @@
 {
 	"version": "1",
+	"limit": 8.6,
 	"shortName": "List of bright novae in the Milky Way galaxy",
 	"nova":
 	{
@@ -517,6 +518,21 @@
 			"RA": "23h12m06s",
 			"Dec": "47d28m20s"
 		},
+		"V382 Vel":
+		{
+			"name": "Nova Velorum 1999",
+			"type": "NA",
+			"maxMagnitude": 2.5,
+			"minMagnitude": 15,
+			"peakJD": 2451321,
+			"m2": 6,
+			"m3": 11,
+			"m6": 132,
+			"m9": 497,
+			"distance": 5.542,
+			"RA": "10h44m48.40s",
+			"Dec": "-52d25m31.1s"
+		},
 		"V0445 Pup":
 		{
 			"name": "Nova Puppis 2000",
@@ -549,7 +565,7 @@
 			"RA": "04h47m54.2s",
 			"Dec": "-10d10m43s"
 		},
-		"PNV J20233073+2046041":
+		"V339 Del":
 		{
 			"name": "Nova Delphini 2013",
 			"type": "NA",
@@ -560,6 +576,16 @@
 			"m3": 20,
 			"RA": "20h23m30.68s",
 			"Dec": "20d46m03.8s"
+		},
+		"V1369 Cen":
+		{
+			"name": "Nova Centauri 2013",
+			"type": "NB",
+			"maxMagnitude": 3.3,
+			"minMagnitude": 11,
+			"peakJD": 2456640.95833,
+			"RA": "13h54m45.34s",
+			"Dec": "-59d09m04.2s"
 		}
 	}
 }

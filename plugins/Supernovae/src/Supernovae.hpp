@@ -23,7 +23,6 @@
 #include "StelObject.hpp"
 #include "StelFader.hpp"
 #include "StelTextureTypes.hpp"
-#include "StelPainter.hpp"
 #include "Supernova.hpp"
 #include <QFont>
 #include <QVariantMap>
@@ -117,6 +116,7 @@ public:
 	//! @return a list of matching object name by order of relevance, or an empty list if nothing match
 	virtual QStringList listMatchingObjects(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false) const;
 	virtual QStringList listAllObjects(bool inEnglish) const;
+	virtual QStringList listAllObjectsByType(const QString& objType, bool inEnglish) const { Q_UNUSED(objType) Q_UNUSED(inEnglish) return QStringList(); }
 	virtual QString getName() const { return "Historical Supernovae"; }
 
 	//! get a supernova object by identifier
@@ -163,6 +163,9 @@ public:
 
 	//! Get lower limit of  brightness for displayed supernovae
 	float getLowerLimitBrightness();
+
+	//! Get count of supernovae from catalog
+	int getCountSupernovae(void) {return SNCount;}
 
 signals:
 	//! @param state the new update state.
@@ -215,6 +218,8 @@ private:
 	void setSNeMap(const QVariantMap& map);
 
 	QString sneJsonPath;
+
+	int SNCount;
 
 	StelTextureSP texPointer;
 	QList<SupernovaP> snstar;

@@ -42,13 +42,14 @@ StelPluginInfo TimeZoneConfigurationStelPluginInterface::getPluginInfo() const
 	info.authors = "Bogdan Marinov";
 	info.contact = "http://stellarium.org";
 	info.description = N_("A convenient interface for some of the more obscure options in Stellarium's configuration file. Allows setting the time zone and changing the way the time and the date are displayed in the bottom bar.");
+	info.version = TIME_ZONE_CONFIGURATION_VERSION;
 	return info;
 }
 
 TimeZoneConfiguration::TimeZoneConfiguration()
 {
 	setObjectName("TimeZoneConfiguration");
-
+	mainWindow = new TimeZoneConfigurationWindow();
 	//
 }
 
@@ -59,7 +60,7 @@ TimeZoneConfiguration::~TimeZoneConfiguration()
 
 void TimeZoneConfiguration::init()
 {
-	mainWindow = new TimeZoneConfigurationWindow();
+	//
 }
 
 void TimeZoneConfiguration::deinit()

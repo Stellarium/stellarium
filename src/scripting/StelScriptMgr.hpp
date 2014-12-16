@@ -98,6 +98,14 @@ public slots:
 	//! Empty string will be returned.
 	const QString getDescription(const QString& s);
 
+	//! Gets the default shortcut of the script.
+	//! @param s the file name of the script whose name is to be returned.
+	//! @return text following a comment with Shortcut: at the start.
+	//! If no such comment is found, QString("") is returned.
+	//! If the file is not found or cannot be opened for some reason, an
+	//! Empty string will be returned.
+	const QString getShortcut(const QString& s);
+
 	//! Run the prprocessed script
 	//! @param preprocessedScript the string containing the preprocessed script.
 	//! @return false if the given script could not be run, true otherwise
@@ -128,9 +136,13 @@ public slots:
 	//! execution rate.
 	double getScriptRate();
 
-	//! cause the emission of the scriptDebug signal.  This is so that functions in
+	//! cause the emission of the scriptDebug signal. This is so that functions in
 	//! StelMainScriptAPI can explicitly send information to the ScriptConsole
 	void debug(const QString& msg);
+
+	//! cause the emission of the scriptOutput signal. This is so that functions in
+	//! StelMainScriptAPI can explicitly send information to the ScriptConsole
+	void output(const QString& msg);
 
 	//! Pause a running script.
 	void pauseScript();
@@ -147,7 +159,9 @@ signals:
 	//! Notification when a script has stopped running 
 	void scriptStopped();
 	//! Notification of a script event - warnings, current execution line etc.
-	void scriptDebug(const QString&);
+	void scriptDebug(const QString&);	
+	//! Notification of a script event - output line.
+	void scriptOutput(const QString&);
 
 private:
 	// Utility functions for preprocessor

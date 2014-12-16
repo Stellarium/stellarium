@@ -22,13 +22,12 @@
 
 #include "VecMath.hpp"
 #include "StelProjector.hpp"
-#include <QOpenGLFunctions>
 
 class QOpenGLFramebufferObject;
 
 //! @class StelViewportEffect
 //! Allow to apply visual effects on the whole Stellarium viewport.
-class StelViewportEffect: protected QOpenGLFunctions
+class StelViewportEffect
 {
 public:
 	StelViewportEffect() {;}
@@ -61,7 +60,6 @@ private:
 	const StelProjector::StelProjectorParams originalProjectorParams;
 	StelProjector::StelProjectorParams newProjectorParams;
 	int viewport_texture_offset[2];
-	int texture_wh;
 
 	Vec2f *texture_point_array;
 	int max_x,max_y;

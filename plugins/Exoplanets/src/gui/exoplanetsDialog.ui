@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>528</width>
-    <height>441</height>
+    <width>530</width>
+    <height>501</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,7 +17,16 @@
    <property name="spacing">
     <number>0</number>
    </property>
-   <property name="margin">
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
     <number>0</number>
    </property>
    <item>
@@ -252,6 +261,16 @@
             </property>
             <property name="text">
              <string>Enable timeline discovery of exoplanets</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="habitableModeCheckBox">
+            <property name="toolTip">
+             <string>Display of the planetary systems, which contains the potential habitable exoplanets</string>
+            </property>
+            <property name="text">
+             <string>Enable display of the potential habitable exoplanets only</string>
             </property>
            </widget>
           </item>

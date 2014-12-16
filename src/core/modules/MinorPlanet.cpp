@@ -2,6 +2,7 @@
  * Stellarium
  * Copyright (C) 2002 Fabien Chereau (some old code from the Planet class)
  * Copyright (C) 2010 Bogdan Marinov
+ * Copyright (C) 2013-14 Georg Zotti (accuracy&speedup)
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -44,7 +45,7 @@ MinorPlanet::MinorPlanet(const QString& englishName,
 			 OsculatingFunctType *osculatingFunc,
 			 bool acloseOrbit,
 			 bool hidden,
-			 const QString &pType)
+			 const QString &pTypeStr)
 	: Planet (englishName,
 		  flagLighting,
 		  radius,
@@ -52,19 +53,22 @@ MinorPlanet::MinorPlanet(const QString& englishName,
 		  color,
 		  albedo,
 		  atexMapName,
+		  "",
 		  coordFunc,
 		  auserDataPtr,
 		  osculatingFunc,
 		  acloseOrbit,
 		  hidden,
 		  false, //No atmosphere
-		  pType)
+		  true,  //Halo
+		  pTypeStr)
 {
 	texMapName = atexMapName;
 	lastOrbitJD =0;
 	deltaJD = StelCore::JD_SECOND;
 	orbitCached = 0;
 	closeOrbit = acloseOrbit;
+	semiMajorAxis = 0.;
 
 	eclipticPos=Vec3d(0.,0.,0.);
 	rotLocalToParent = Mat4d::identity();
@@ -138,16 +142,8 @@ MinorPlanet::~MinorPlanet()
 void MinorPlanet::setSemiMajorAxis(double value)
 {
 	semiMajorAxis = value;
-	// GZ: patched for 2012DA14 and other NEA rendez-vous:
-	if (semiMajorAxis < 1.666)
-	{
-		deltaJD = 0.1*StelCore::JD_SECOND;
-	}
-	if (semiMajorAxis < 1.25)
-	{
-		deltaJD = 0.001*StelCore::JD_SECOND;
-	}
-
+	// GZ: in case we have very many asteroids, this helps improving speed usually without sacrificing accuracy:
+	deltaJD = 2.0*semiMajorAxis*StelCore::JD_SECOND;
 }
 
 void MinorPlanet::setMinorPlanetNumber(int number)
@@ -194,7 +190,7 @@ QString MinorPlanet::getInfoString(const StelCore *core, const InfoStringGroup &
 		if (nameIsProvisionalDesignation)
 			oss << provisionalDesignationHtml;
 		else
-			oss << q_(properName);  // UI translation can differ from sky translation
+			oss << getNameI18n();  // UI translation can differ from sky translation
 		oss.setRealNumberNotation(QTextStream::FixedNotation);
 		oss.setRealNumberPrecision(1);
 		if (sphereScale != 1.f)
@@ -207,10 +203,9 @@ QString MinorPlanet::getInfoString(const StelCore *core, const InfoStringGroup &
 		}
 	}
 
-	if (flags&Extra)
+	if (flags&ObjectType)
 	{
-		if (pType.length()>0)
-			oss << q_("Type: <b>%1</b>").arg(q_(pType)) << "<br />";
+		oss << q_("Type: <b>%1</b>").arg(q_(getPlanetTypeString())) << "<br />";
 	}
 
 	if (flags&Magnitude)
@@ -242,18 +237,20 @@ QString MinorPlanet::getInfoString(const StelCore *core, const InfoStringGroup &
 	if (flags&Distance)
 	{
 		double distanceAu = getJ2000EquatorialPos(core).length();
+		double distanceKm = AU * distanceAu;
 		if (distanceAu < 0.1)
 		{
-			double distanceKm = AU * distanceAu;
 			// xgettext:no-c-format
 			oss << QString(q_("Distance: %1AU (%2 km)"))
-			       .arg(distanceAu, 0, 'f', 8)
-			       .arg(distanceKm, 0, 'f', 0);
+				   .arg(distanceAu, 0, 'f', 6)
+				   .arg(distanceKm, 0, 'f', 3);
 		}
 		else
 		{
 			// xgettext:no-c-format
-			oss << q_("Distance: %1AU").arg(distanceAu, 0, 'f', 8);
+			oss << QString(q_("Distance: %1AU (%2 Mio km)"))
+				   .arg(distanceAu, 0, 'f', 3)
+				   .arg(distanceKm / 1.0e6, 0, 'f', 3);
 		}
 		oss << "<br>";
 	}
@@ -268,12 +265,6 @@ QString MinorPlanet::getInfoString(const StelCore *core, const InfoStringGroup &
 		// TRANSLATORS: Sidereal (orbital) period for solar system bodies in days and in Julian years (symbol: a)
 		oss << q_("Sidereal period: %1 days (%2 a)").arg(QString::number(siderealPeriod, 'f', 2)).arg(QString::number(siderealPeriod/365.25, 'f', 3)) << "<br>";
 	}
-
-	//This doesn't work, even if setOpenExternalLinks(true) is used in InfoPanel
-	/*
-	if (flags&Extra)
-		oss << QString("<br><a href=\"http://ssd.jpl.nasa.gov/sbdb.cgi?sstr=%1\">JPL Small-Body Database Browser</a>").arg( (minorPlanetNumber) ? QString::number(minorPlanetNumber) : englishName );
-	*/
 
 	postProcessInfoString(str, flags);
 
@@ -301,24 +292,24 @@ float MinorPlanet::getVMagnitude(const StelCore* core) const
 
 	//Calculate phase angle
 	//(Code copied from Planet::getVMagnitude())
-	//(LOL, this is actually vector subtraction + the cosine theorem :))
+	//(this is actually vector subtraction + the cosine theorem :))
 	const Vec3d& observerHelioPos = core->getObserverHeliocentricEclipticPos();
-	const double observerRq = observerHelioPos.lengthSquared();
+	const float observerRq = observerHelioPos.lengthSquared();
 	const Vec3d& planetHelioPos = getHeliocentricEclipticPos();
-	const double planetRq = planetHelioPos.lengthSquared();
-	const double observerPlanetRq = (observerHelioPos - planetHelioPos).lengthSquared();
-	const double cos_chi = (observerPlanetRq + planetRq - observerRq)/(2.0*sqrt(observerPlanetRq*planetRq));
-	double phaseAngle = std::acos(cos_chi);
+	const float planetRq = planetHelioPos.lengthSquared();
+	const float observerPlanetRq = (observerHelioPos - planetHelioPos).lengthSquared();
+	const float cos_chi = (observerPlanetRq + planetRq - observerRq)/(2.0*std::sqrt(observerPlanetRq*planetRq));
+	const float phaseAngle = std::acos(cos_chi);
 
 	//Calculate reduced magnitude (magnitude without the influence of distance)
 	//Source of the formulae: http://www.britastro.org/asteroids/dymock4.pdf
-	const double phi1 = std::exp(-3.33 * std::pow(std::tan(phaseAngle/2), 0.63));
-	const double phi2 = std::exp(-1.87 * std::pow(std::tan(phaseAngle/2), 1.22));
-	double reducedMagnitude = absoluteMagnitude - 2.5 * std::log10( (1 - slopeParameter) * phi1 + slopeParameter * phi2 );
+	const float tanPhaseAngleHalf=std::tan(phaseAngle*0.5f);
+	const float phi1 = std::exp(-3.33f * std::pow(tanPhaseAngleHalf, 0.63f));
+	const float phi2 = std::exp(-1.87f * std::pow(tanPhaseAngleHalf, 1.22f));
+	float reducedMagnitude = absoluteMagnitude - 2.5f * std::log10( (1.0f - slopeParameter) * phi1 + slopeParameter * phi2 );
 
 	//Calculate apparent magnitude
-	//TODO: See if you can "collapse" some calculations
-	double apparentMagnitude = reducedMagnitude + 5 * std::log10(std::sqrt(planetRq * observerPlanetRq));
+	float apparentMagnitude = reducedMagnitude + 5.0f * std::log10(std::sqrt(planetRq * observerPlanetRq));
 
 	return apparentMagnitude;
 }
@@ -350,8 +341,6 @@ QString MinorPlanet::renderProvisionalDesignationinHtml(QString plainTextName)
 	}
 	else
 	{
-		//qDebug() << "renderProvisionalDesignationinHtml():" << plainTextName
-		//         << "is not a provisional designation in plain text.";
 		return QString();
 	}
 }

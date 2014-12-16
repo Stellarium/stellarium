@@ -20,15 +20,6 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#include <QTextStream>
-#include <QFile>
-#include <QSettings>
-#include <QString>
-#include <QRegExp>
-#include <QDebug>
-#include <QFileInfo>
-#include <QDir>
-#include <QCryptographicHash>
 
 #include "StelProjector.hpp"
 #include "StarMgr.hpp"
@@ -39,7 +30,6 @@
 #include "StelToneReproducer.hpp"
 #include "StelTranslator.hpp"
 #include "StelGeodesicGrid.hpp"
-#include "StelTranslator.hpp"
 #include "StelApp.hpp"
 #include "StelTextureMgr.hpp"
 #include "StelObjectMgr.hpp"
@@ -54,13 +44,20 @@
 #include "ZoneArray.hpp"
 #include "StelSkyDrawer.hpp"
 #include "RefractionExtinction.hpp"
+#include "StelModuleMgr.hpp"
+#include "ConstellationMgr.hpp"
+
+#include <QTextStream>
+#include <QFile>
+#include <QSettings>
+#include <QString>
+#include <QRegExp>
+#include <QDebug>
+#include <QFileInfo>
+#include <QDir>
+#include <QCryptographicHash>
 
 #include <errno.h>
-#ifndef Q_OS_WIN
-#include <unistd.h>
-#else
-#include "kdewin32/unistd.h"
-#endif
 
 static QStringList spectral_array;
 static QStringList component_array;
@@ -68,7 +65,7 @@ static QStringList component_array;
 // This number must be incremented each time the content or file format of the stars catalogs change
 // It can also be incremented when the defaultStarsConfig.json file change.
 // It should always matchs the version field of the defaultStarsConfig.json file
-static const int StarCatalogFormatVersion = 4;
+static const int StarCatalogFormatVersion = 7;
 
 // Initialise statics
 bool StarMgr::flagSciNames = true;
@@ -127,7 +124,11 @@ void StarMgr::initTriangle(int lev,int index, const Vec3f &c0, const Vec3f &c1, 
 }
 
 
-StarMgr::StarMgr(void) : hipIndex(new HipIndexStruct[NR_OF_HIP+1])
+StarMgr::StarMgr(void)
+	: flagStarName(false)
+	, labelsAmount(0.)
+	, gravityLabel(false)
+	, hipIndex(new HipIndexStruct[NR_OF_HIP+1])
 {
 	setObjectName("StarMgr");
 	if (hipIndex == 0)
@@ -135,8 +136,7 @@ StarMgr::StarMgr(void) : hipIndex(new HipIndexStruct[NR_OF_HIP+1])
 		qFatal("ERROR: StarMgr::StarMgr: no memory");
 	}
 	maxGeodesicGridLevel = -1;
-	lastMaxSearchLevel = -1;
-	starFont.setPixelSize(StelApp::getInstance().getSettings()->value("gui/base_font_size", 13).toInt());
+	lastMaxSearchLevel = -1;	
 	objectMgr = GETSTELMODULE(StelObjectMgr);
 	Q_ASSERT(objectMgr);
 }
@@ -161,13 +161,27 @@ StarMgr::~StarMgr(void)
 		delete[] hipIndex;
 }
 
+// Allow untranslated name here if set in constellationMgr!
 QString StarMgr::getCommonName(int hip)
 {
+	ConstellationMgr* cmgr=GETSTELMODULE(ConstellationMgr);
+	if (cmgr->getConstellationDisplayStyle() == ConstellationMgr::constellationsNative)
+		return getCommonEnglishName(hip);
+
 	QHash<int,QString>::const_iterator it(commonNamesMapI18n.find(hip));
 	if (it!=commonNamesMapI18n.end())
 		return it.value();
 	return QString();
 }
+
+QString StarMgr::getCommonEnglishName(int hip)
+{
+	QHash<int,QString>::const_iterator it(commonNamesMap.find(hip));
+	if (it!=commonNamesMap.end())
+		return it.value();
+	return QString();
+}
+
 
 QString StarMgr::getSciName(int hip)
 {
@@ -298,9 +312,11 @@ void StarMgr::init()
 	}
 
 	QFile fic(starConfigFileFullPath);
-	fic.open(QIODevice::ReadOnly);
-	starSettings = StelJsonParser::parse(&fic).toMap();
-	fic.close();
+	if(fic.open(QIODevice::ReadOnly))
+	{
+		starSettings = StelJsonParser::parse(&fic).toMap();
+		fic.close();
+	}
 
 	// Increment the 1 each time any star catalog file change
 	if (starSettings.value("version").toInt()!=StarCatalogFormatVersion)
@@ -309,13 +325,15 @@ void StarMgr::init()
 		fic.remove();
 		copyDefaultConfigFile();
 		QFile fic2(starConfigFileFullPath);
-		fic2.open(QIODevice::ReadOnly);
-		starSettings = StelJsonParser::parse(&fic2).toMap();
-		fic2.close();
+		if(fic2.open(QIODevice::ReadOnly))
+		{
+			starSettings = StelJsonParser::parse(&fic2).toMap();
+			fic2.close();
+		}
 	}
 
 	loadData(starSettings);
-	starFont.setPixelSize(StelApp::getInstance().getSettings()->value("gui/base_font_size", 13).toInt());
+	starFont.setPixelSize(StelApp::getInstance().getBaseFontSize());
 
 	setFlagStars(conf->value("astro/flag_stars", true).toBool());
 	setFlagLabels(conf->value("astro/flag_star_name",true).toBool());
@@ -403,38 +421,40 @@ bool StarMgr::checkAndLoadCatalog(const QVariantMap& catDesc)
 		qWarning() << "Found file " << QDir::toNativeSeparators(catalogFilePath) << ", checking md5sum..";
 
 		QFile fic(catalogFilePath);
-		fic.open(QIODevice::ReadOnly | QIODevice::Unbuffered);
-		// Compute the MD5 sum
-		QCryptographicHash md5Hash(QCryptographicHash::Md5);
-		const qint64 cat_sz = fic.size();
-		qint64 maxStarBufMd5 = qMin(cat_sz, 9223372036854775807LL);
-		uchar *cat = maxStarBufMd5 ? fic.map(0, maxStarBufMd5) : NULL;
-		if (!cat)
+		if(fic.open(QIODevice::ReadOnly | QIODevice::Unbuffered))
 		{
-			// The OS was not able to map the file, revert to slower not mmap based method
-			static const qint64 maxStarBufMd5 = 1024*1024*8;
-			char* mmd5buf = (char*)malloc(maxStarBufMd5);
-			while (!fic.atEnd())
+			// Compute the MD5 sum
+			QCryptographicHash md5Hash(QCryptographicHash::Md5);
+			const qint64 cat_sz = fic.size();
+			qint64 maxStarBufMd5 = qMin(cat_sz, 9223372036854775807LL);
+			uchar *cat = maxStarBufMd5 ? fic.map(0, maxStarBufMd5) : NULL;
+			if (!cat)
 			{
-				qint64 sz = fic.read(mmd5buf, maxStarBufMd5);
-				md5Hash.addData(mmd5buf, sz);
+				// The OS was not able to map the file, revert to slower not mmap based method
+				static const qint64 maxStarBufMd5 = 1024*1024*8;
+				char* mmd5buf = (char*)malloc(maxStarBufMd5);
+				while (!fic.atEnd())
+				{
+					qint64 sz = fic.read(mmd5buf, maxStarBufMd5);
+					md5Hash.addData(mmd5buf, sz);
+				}
+				free(mmd5buf);
 			}
-			free(mmd5buf);
+			else
+			{
+				md5Hash.addData((const char*)cat, cat_sz);
+				fic.unmap(cat);
+			}
+			fic.close();
+			if (md5Hash.result().toHex()!=catDesc.value("checksum").toByteArray())
+			{
+				qWarning() << "Error: File " << QDir::toNativeSeparators(catalogFileName) << " is corrupt, MD5 mismatch! Found " << md5Hash.result().toHex() << " expected " << catDesc.value("checksum").toByteArray();
+				fic.remove();
+				return false;
+			}
+			qWarning() << "MD5 sum correct!";
+			setCheckFlag(catDesc.value("id").toString(), true);
 		}
-		else
-		{
-			md5Hash.addData((const char*)cat, cat_sz);
-			fic.unmap(cat);
-		}
-		fic.close();
-		if (md5Hash.result().toHex()!=catDesc.value("checksum").toByteArray())
-		{
-			qWarning() << "Error: File " << QDir::toNativeSeparators(catalogFileName) << " is corrupt, MD5 mismatch! Found " << md5Hash.result().toHex() << " expected " << catDesc.value("checksum").toByteArray();
-			fic.remove();
-			return false;
-		}
-		qWarning() << "MD5 sum correct!";
-		setCheckFlag(catDesc.value("id").toString(), true);
 	}
 
 	ZoneArray* z = ZoneArray::create(catalogFilePath, true);
@@ -471,9 +491,11 @@ void StarMgr::setCheckFlag(const QString& catId, bool b)
 		catalogsDescription[idx-1]=m;
 		starSettings["catalogs"]=catalogsDescription;
 		QFile tmp(starConfigFileFullPath);
-		tmp.open(QIODevice::WriteOnly);
-		StelJsonParser::write(starSettings, &tmp);
-		tmp.close();
+		if(tmp.open(QIODevice::WriteOnly))
+		{
+			StelJsonParser::write(starSettings, &tmp);
+			tmp.close();
+		}
 	}
 }
 
@@ -552,13 +574,15 @@ int StarMgr::loadCommonNames(const QString& commonNameFile)
 	int totalRecords=0;
 	int lineNumber=0;
 	QString record;
+	// Allow empty and comment lines where first char (after optional blanks) is #
 	QRegExp commentRx("^(\\s*#.*|\\s*)$");
 	// record structure is delimited with a | character.  We will
 	// use a QRegExp to extract the fields. with whitespace padding permitted
 	// (i.e. it will be stripped automatically) Example record strings:
-	// " 10819|c_And"
-	// "113726|1_And"
-	QRegExp recordRx("^\\s*(\\d+)\\s*\\|(.*)\\n");
+	// "   677|_("Alpheratz")"
+	// "113368|_("Fomalhaut")"
+	// Note: Stellarium doesn't support sky cultures made prior version 0.10.6 now!
+	QRegExp recordRx("^\\s*(\\d+)\\s*\\|_[(]\"(.*)\"[)]\\s*\\n");
 
 	while(!cnFile.atEnd())
 	{
@@ -593,9 +617,7 @@ int StarMgr::loadCommonNames(const QString& commonNameFile)
 				continue;
 			}
 
-			// Fix for translate star names 
-			// englishCommonName.replace('_', ' ');
-			const QString commonNameI18n = q_(englishCommonName);
+			const QString commonNameI18n = englishCommonName;
 			QString commonNameI18n_cap = commonNameI18n.toUpper();
 
 			commonNamesMap[hip] = englishCommonName;
@@ -933,17 +955,13 @@ QList<StelObjectP > StarMgr::searchAround(const Vec3d& vv, double limFov, const 
 //! The translation is done using gettext with translated strings defined in translations.h
 void StarMgr::updateI18n()
 {
-	QRegExp transRx("_[(]\"(.*)\"[)]");
 	const StelTranslator& trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
 	commonNamesMapI18n.clear();
 	commonNamesIndexI18n.clear();
 	for (QHash<int,QString>::ConstIterator it(commonNamesMap.constBegin());it!=commonNamesMap.constEnd();it++)
 	{
 		const int i = it.key();
-		transRx.exactMatch(it.value());
-		QString tt = transRx.capturedTexts().at(1);
-		const QString t = trans.qtranslate(tt);
-		//const QString t(trans.qtranslate(it.value()));
+		const QString t(trans.qtranslate(it.value()));
 		commonNamesMapI18n[i] = t;
 		commonNamesIndexI18n[t.toUpper()] = i;
 	}
@@ -1020,18 +1038,25 @@ StelObjectP StarMgr::searchByName(const QString& name) const
 		return searchHP(rx.capturedTexts().at(2).toInt());
 	}
 
-	// Search by sci name
-	QMap<QString,int>::const_iterator it = sciNamesIndexI18n.find(objw);
-	if (it!=sciNamesIndexI18n.end())
+	// Search by I18n common name
+	QMap<QString,int>::const_iterator it(commonNamesIndex.find(objw));
+	if (it!=commonNamesIndex.end())
 	{
 		return searchHP(it.value());
 	}
 
-	// Search by additional sci name
-	QMap<QString,int>::const_iterator it2 = sciAdditionalNamesIndexI18n.find(objw);
-	if (it2!=sciAdditionalNamesIndexI18n.end())
+	// Search by sci name
+	QMap<QString,int>::const_iterator it2 = sciNamesIndexI18n.find(objw);
+	if (it2!=sciNamesIndexI18n.end())
 	{
 		return searchHP(it2.value());
+	}
+
+	// Search by additional sci name
+	QMap<QString,int>::const_iterator it3 = sciAdditionalNamesIndexI18n.find(objw);
+	if (it3!=sciAdditionalNamesIndexI18n.end())
+	{
+		return searchHP(it3.value());
 	}
 
 	return StelObjectP();
@@ -1165,7 +1190,7 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 			{
 				if (maxNbItem==0)
 					break;
-				result << getCommonName(it.value());
+				result << getCommonEnglishName(it.value());
 				--maxNbItem;
 			}
 			else
@@ -1182,7 +1207,7 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 			{
 				if (maxNbItem==0)
 					break;
-				result << getCommonName(i.value());
+				result << getCommonEnglishName(i.value());
 				--maxNbItem;
 			}
 		}
@@ -1290,4 +1315,28 @@ void StarMgr::updateSkyCulture(const QString& skyCultureDir)
 	// Turn on sci names/catalog names for western culture only
 	setFlagSciNames(skyCultureDir.startsWith("western"));
 	updateI18n();
+}
+
+QStringList StarMgr::listAllObjects(bool inEnglish) const
+{
+	QStringList result;
+	if (inEnglish)
+	{
+		QMapIterator<QString, int> i(commonNamesIndex);
+		while (i.hasNext())
+		{
+			i.next();
+			result << getCommonEnglishName(i.value());
+		}
+	}
+	else
+	{
+		QMapIterator<QString, int> i(commonNamesIndexI18n);
+		while (i.hasNext())
+		{
+			i.next();
+			result << getCommonName(i.value());
+		}
+	}
+	return result;
 }

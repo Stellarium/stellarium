@@ -27,6 +27,7 @@
 
 class Ui_supernovaeDialog;
 class QTimer;
+class Supernovae;
 
 class SupernovaeDialog : public StelDialog
 {
@@ -55,6 +56,7 @@ private slots:
 
 private:
 	Ui_supernovaeDialog* ui;
+	Supernovae* sn;
 	void setAboutHtml(void);
 	void updateGuiFromSettings(void);
 	QTimer* updateTimer;

@@ -66,6 +66,9 @@ public:
 	void init(class StelGui* stelGui);
 	
 	virtual void paint(QPainter*, const QStyleOptionGraphicsItem*, QWidget* = 0);
+
+	int getSkyGuiWidth() const;
+	int getSkyGuiHeight() const;
 	
 protected:
 	virtual void resizeEvent(QGraphicsSceneResizeEvent* event);

@@ -17,19 +17,19 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
+#include "tests/testStelFileMgr.hpp"
+
 #include <QObject>
 #include <QFileInfo>
 #include <QFile>
 #include <QDir>
 #include <QString>
 #include <QStringList>
-
 #include <QDebug>
 #include <QTest>
 #include <QRegExp>
 
 #include "StelFileMgr.hpp"
-#include "tests/testStelFileMgr.hpp"
 
 QTEST_MAIN(TestStelFileMgr)
 
@@ -210,21 +210,15 @@ void TestStelFileMgr::testListContentsVanilla()
 	resultSetEmptyQuery = StelFileMgr::listContents("");
 	resultSetDotQuery = StelFileMgr::listContents(".");
 	resultSetEmptyQueryExpected << "config.ini" << "landscapes" << "inboth.txt";
-	//FIXME: unit test not work
-	/*
 	QVERIFY(resultSetEmptyQuery==resultSetEmptyQueryExpected);
 	QVERIFY(resultSetDotQuery==resultSetEmptyQueryExpected);
-	*/
 
 	// now for some path within the hierarchy
 	QSet<QString> resultSetQuery;
 	QSet<QString> resultSetQueryExpected;
 	resultSetQuery = StelFileMgr::listContents("landscapes");
 	resultSetQueryExpected << "ls1" << "ls2" << "ls3" << "emptydir" << "dummy.txt";
-	//FIXME: unit test not work
-	/*
 	QVERIFY(resultSetQuery==resultSetQueryExpected);
-	*/
 }
 
 void TestStelFileMgr::testListContentsVanillaAbs()
@@ -244,21 +238,15 @@ void TestStelFileMgr::testListContentsFile()
 	resultSetEmptyQuery = StelFileMgr::listContents("", StelFileMgr::File);
 	resultSetDotQuery = StelFileMgr::listContents(".", StelFileMgr::File);
 	resultSetEmptyQueryExpected << "config.ini" << "inboth.txt";
-	//FIXME: unit test not work
-	/*
 	QVERIFY(resultSetEmptyQuery==resultSetEmptyQueryExpected);
 	QVERIFY(resultSetDotQuery==resultSetEmptyQueryExpected);
-	*/
 
 	// now for some path within the hierarchy
 	QSet<QString> resultSetQuery;
 	QSet<QString> resultSetQueryExpected;
 	resultSetQuery = StelFileMgr::listContents("landscapes/ls1", StelFileMgr::File);
 	resultSetQueryExpected << "landscape.ini";
-	//FIXME: unit test not work
-	/*
 	QVERIFY(resultSetQuery==resultSetQueryExpected);
-	*/
 }
 
 void TestStelFileMgr::testListContentsFileAbs()
@@ -278,21 +266,15 @@ void TestStelFileMgr::testListContentsDir()
 	resultSetEmptyQuery = StelFileMgr::listContents("", StelFileMgr::Directory);
 	resultSetDotQuery = StelFileMgr::listContents(".", StelFileMgr::Directory);
 	resultSetEmptyQueryExpected << "landscapes";
-	//FIXME: unit test not work
-	/*
 	QVERIFY(resultSetEmptyQuery==resultSetEmptyQueryExpected);
 	QVERIFY(resultSetDotQuery==resultSetEmptyQueryExpected);
-	*/
 
 	// now for some path within the hierarchy
 	QSet<QString> resultSetQuery;
 	QSet<QString> resultSetQueryExpected;
 	resultSetQuery = StelFileMgr::listContents("landscapes", StelFileMgr::Directory);
 	resultSetQueryExpected << "ls1" << "ls2" << "ls3" << "emptydir";
-	//FIXME: unit test not work
-	/*
 	QVERIFY(resultSetQuery==resultSetQueryExpected);
-	*/
 }
 
 void TestStelFileMgr::testListContentsDirAbs()

@@ -20,10 +20,10 @@
 #ifndef _STELSKYDRAWER_HPP_
 #define _STELSKYDRAWER_HPP_
 
+#include "RefractionExtinction.hpp"
 #include "StelTextureTypes.hpp"
 #include "StelProjectorType.hpp"
 #include "VecMath.hpp"
-#include "RefractionExtinction.hpp"
 
 #include <QObject>
 
@@ -144,12 +144,12 @@ public slots:
 	//! Get flag for source twinkling.
 	bool getFlagTwinkle() const {return flagStarTwinkle;}
 
-	//! Set the parameters so that the stars disapear at about the limit given by the bortle scale
+	//! Set the parameters so that the stars disappear at about the limit given by the bortle scale
 	//! The limit is valid only at a given zoom level (around 60 deg)
 	//! See http://en.wikipedia.org/wiki/Bortle_Dark-Sky_Scale
-	void setBortleScale(int index);
+	void setBortleScaleIndex(int index);
 	//! Get the current Bortle scale index
-	int getBortleScale() const {return bortleScaleIndex;}
+	int getBortleScaleIndex() const {return bortleScaleIndex;}
 
 	//! Get the magnitude of the currently faintest visible point source
 	//! It depends on the zoom level, on the eye adapation and on the point source rendering parameters
@@ -211,9 +211,9 @@ public slots:
 	//! Get atmospheric (ground) pressure in mbar (for refraction).
 	double getAtmospherePressure() const {return refraction.getPressure();}
 
-	//! Get the current valid extinction computation class.
+	//! Get the current valid extinction computation object.
 	const Extinction& getExtinction() const {return extinction;}
-	//! Get the current valid fefraction computation class.
+	//! Get the current valid refraction computation object.
 	const Refraction& getRefraction() const {return refraction;}
 
 	//! Get the radius of the big halo texture used when a 3d model is very bright.

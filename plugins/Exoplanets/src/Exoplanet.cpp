@@ -16,6 +16,7 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
+
 #include "Exoplanet.hpp"
 #include "Exoplanets.hpp"
 #include "StelObject.hpp"
@@ -28,6 +29,7 @@
 #include "StelModuleMgr.hpp"
 #include "StelSkyDrawer.hpp"
 #include "StelLocaleMgr.hpp"
+#include "StarMgr.hpp"
 
 #include <QTextStream>
 #include <QDebug>
@@ -37,9 +39,27 @@
 #include <QList>
 
 StelTextureSP Exoplanet::markerTexture;
+bool Exoplanet::distributionMode = false;
+bool Exoplanet::timelineMode = false;
+bool Exoplanet::habitableMode = false;
+Vec3f Exoplanet::exoplanetMarkerColor = Vec3f(0.4f,0.9f,0.5f);
+Vec3f Exoplanet::habitableExoplanetMarkerColor = Vec3f(1.f,0.5f,0.f);
 
 Exoplanet::Exoplanet(const QVariantMap& map)
-		: initialized(false)
+		: initialized(false),
+		  EPCount(0),
+		  PHEPCount(0),
+		  designation(""),
+		  RA(0.),
+		  DE(0.),
+		  distance(0.),
+		  stype(""),
+		  smass(0.),
+		  smetal(0.),
+		  Vmag(99.),
+		  sradius(0.),
+		  effectiveTemp(0),
+		  hasHabitableExoplanets(false)
 {
 	// return initialized if the mandatory fields are not present
 	if (!map.contains("designation"))
@@ -57,12 +77,15 @@ Exoplanet::Exoplanet(const QVariantMap& map)
 	effectiveTemp = map.value("effectiveTemp").toInt();
 	hasHabitableExoplanets = map.value("hasHP", false).toBool();
 
+	EPCount=0;
+	PHEPCount=0;
 	if (map.contains("exoplanets"))
 	{
 		foreach(const QVariant &expl, map.value("exoplanets").toList())
 		{
 			QVariantMap exoplanetMap = expl.toMap();
 			exoplanetData p;
+			EPCount++;
 			if (exoplanetMap.contains("planetName")) p.planetName = exoplanetMap.value("planetName").toString();
 			p.period = exoplanetMap.value("period", -1.f).toFloat();
 			p.mass = exoplanetMap.value("mass", -1.f).toFloat();
@@ -72,8 +95,12 @@ Exoplanet::Exoplanet(const QVariantMap& map)
 			p.inclination = exoplanetMap.value("inclination", -1.f).toFloat();
 			p.angleDistance = exoplanetMap.value("angleDistance", -1.f).toFloat();
 			p.discovered = exoplanetMap.value("discovered", 0).toInt();
+			p.pclass = exoplanetMap.value("pclass", "").toString();
 			p.hclass = exoplanetMap.value("hclass", "").toString();
+			if (!p.hclass.isEmpty())
+				PHEPCount++;
 			p.MSTemp = exoplanetMap.value("MSTemp", -1).toInt();
+			p.EqTemp = exoplanetMap.value("EqTemp", -1).toInt();
 			p.ESI = exoplanetMap.value("ESI", -1).toInt();
 			exoplanets.append(p);
 		}
@@ -114,8 +141,10 @@ QVariantMap Exoplanet::getMap(void)
 		if (p.eccentricity > -1.f) explMap["eccentricity"] = p.eccentricity;
 		if (p.angleDistance > -1.f) explMap["angleDistance"] = p.angleDistance;
 		if (p.discovered > 0) explMap["discovered"] = p.discovered;
+		if (!p.pclass.isEmpty()) explMap["pclass"] = p.pclass;
 		if (!p.hclass.isEmpty()) explMap["hclass"] = p.hclass;
 		if (p.MSTemp > 0) explMap["MSTemp"] = p.MSTemp;
+		if (p.EqTemp > 0) explMap["EqTemp"] = p.EqTemp;
 		if (p.ESI > 0) explMap["ESI"] = p.ESI;
 		exoplanetList << explMap;
 	}
@@ -124,16 +153,9 @@ QVariantMap Exoplanet::getMap(void)
 	return map;
 }
 
-float Exoplanet::getSelectPriority(const StelCore* core) const
+float Exoplanet::getSelectPriority(const StelCore *core) const
 {
-	if (getVMagnitude(core)>20.f)
-	{
-		return 20.f;
-	}
-	else
-	{
-		return getVMagnitude(core) - 1.f;
-	}
+	return StelObject::getSelectPriority(core)-2.f;
 }
 
 QString Exoplanet::getNameI18n(void) const
@@ -149,14 +171,18 @@ QString Exoplanet::getInfoString(const StelCore* core, const InfoStringGroup& fl
 	QTextStream oss(&str);
 
 	if (flags&Name)
-	{		
-
+	{
 		oss << "<h2>" << getNameI18n() << "</h2>";
+	}
+	
+	if (flags&ObjectType)
+	{
+		oss << q_("Type: <b>%1</b>").arg(q_("planetary system")) << "<br />";
 	}
 
 	if (flags&Magnitude)
 	{
-		if (Vmag<99 && !GETSTELMODULE(Exoplanets)->getDisplayMode())
+		if (Vmag<99 && !distributionMode)
 		{
 			if (core->getSkyDrawer()->getFlagHasAtmosphere())
 			{
@@ -173,14 +199,15 @@ QString Exoplanet::getInfoString(const StelCore* core, const InfoStringGroup& fl
 	// Ra/Dec etc.
 	oss << getPositionInfoString(core, flags);
 
-	if (flags&Extra)
+	if (flags&Extra && !stype.isEmpty())
 	{
 		oss << q_("Spectral Type: %1").arg(stype) << "<br>";
 	}
 
-	if (flags&Distance)
+	if (flags&Distance && distance>0)
 	{
-		oss << q_("Distance: %1 Light Years").arg(QString::number(distance/0.306601, 'f', 2)) << "<br>";
+		//TRANSLATORS: Unit of measure for distance - Light Years
+		oss << q_("Distance: %1 ly").arg(QString::number(distance/0.306601, 'f', 2)) << "<br>";
 	}
 
 	if (flags&Extra)
@@ -212,9 +239,12 @@ QString Exoplanet::getInfoString(const StelCore* core, const InfoStringGroup& fl
 			QString inclinationLabel = QString("<td style=\"padding: 0 2px 0 0;\">%1 (%2)</td>").arg(q_("Inclination")).arg(QChar(0x00B0));
 			QString angleDistanceLabel = QString("<td style=\"padding: 0 2px 0 0;\">%1 (\")</td>").arg(q_("Angle Distance"));
 			QString discoveredLabel = QString("<td style=\"padding: 0 2px 0 0;\">%1</td>").arg(q_("Discovered year"));
-			QString hClassLabel = QString("<td style=\"padding: 0 2px 0 0;\">%1</td>").arg(q_("Habitable class"));
+			QString pClassLabel = QString("<td style=\"padding: 0 2px 0 0;\">%1</td>").arg(q_("Planetary class"));
+			QString hClassLabel = QString("<td style=\"padding: 0 2px 0 0;\">%1</td>").arg(q_("Habitable class"));			
 			//TRANSLATORS: Full phrase is "Mean Surface Temperature"
 			QString meanSurfaceTempLabel = QString("<td style=\"padding: 0 2px 0 0;\">%1 (%2C)</td>").arg(q_("Mean surface temp.")).arg(QChar(0x00B0));
+			//TRANSLATORS: Full phrase is "Equilibrium Temperature"
+			QString equilibriumTempLabel = QString("<td style=\"padding: 0 2px 0 0;\">%1 (%2C)</td>").arg(q_("Equilibrium temp.")).arg(QChar(0x00B0));
 			//TRANSLATORS: ESI = Earth Similarity Index
 			QString ESILabel = QString("<td style=\"padding: 0 2px 0 0;\">%1</td>").arg(q_("ESI"));
 			foreach(const exoplanetData &p, exoplanets)
@@ -291,6 +321,14 @@ QString Exoplanet::getInfoString(const StelCore* core, const InfoStringGroup& fl
 				{
 					discoveredLabel.append("<td style=\"padding:0 2px;\">&mdash;</td>");
 				}
+				if (!p.pclass.isEmpty())
+				{
+					pClassLabel.append("<td style=\"padding:0 2px;\">").append(getPlanetaryClassI18n(p.pclass)).append("</td>");
+				}
+				else
+				{
+					pClassLabel.append("<td style=\"padding:0 2px;\">&mdash;</td>");
+				}
 				if (!p.hclass.isEmpty())
 				{
 					hClassLabel.append("<td style=\"padding:0 2px;\">").append(p.hclass).append("</td>");
@@ -306,6 +344,14 @@ QString Exoplanet::getInfoString(const StelCore* core, const InfoStringGroup& fl
 				else
 				{
 					meanSurfaceTempLabel.append("<td style=\"padding:0 2px;\">&mdash;</td>");
+				}
+				if (p.EqTemp > 0)
+				{
+					equilibriumTempLabel.append("<td style=\"padding:0 2px;\">").append(QString::number(p.EqTemp - 273.15, 'f', 2)).append("</td>");
+				}
+				else
+				{
+					equilibriumTempLabel.append("<td style=\"padding:0 2px;\">&mdash;</td>");
 				}
 				if (p.ESI > 0)
 				{
@@ -328,8 +374,10 @@ QString Exoplanet::getInfoString(const StelCore* core, const InfoStringGroup& fl
 			oss << "<tr>" << discoveredLabel << "</tr>";
 			if (hasHabitableExoplanets)
 			{
+				oss << "<tr>" << pClassLabel << "</tr>";
 				oss << "<tr>" << hClassLabel << "</tr>";
 				oss << "<tr>" << meanSurfaceTempLabel << "</tr>";
+				oss << "<tr>" << equilibriumTempLabel << "</tr>";
 				oss << "<tr>" << ESILabel << "</tr>";
 			}
 			oss << "</table>";
@@ -340,6 +388,24 @@ QString Exoplanet::getInfoString(const StelCore* core, const InfoStringGroup& fl
 	return str;
 }
 
+QString Exoplanet::getPlanetaryClassI18n(QString ptype) const
+{
+	QString result = "";
+	QRegExp dataRx("^(\\w)-(\\w+)\\s(\\w+)$");
+	if (dataRx.exactMatch(ptype))
+	{
+		QString spectral = dataRx.capturedTexts().at(1).trimmed();
+		QString zone = dataRx.capturedTexts().at(2).trimmed();
+		QString size = dataRx.capturedTexts().at(3).trimmed();
+
+		result = QString("%1-%2 %3")
+				.arg(spectral)
+				.arg(q_(zone))
+				.arg(q_(size));
+	}
+	return result;
+}
+
 Vec3f Exoplanet::getInfoColor(void) const
 {
 	return Vec3f(1.0, 1.0, 1.0);
@@ -348,7 +414,7 @@ Vec3f Exoplanet::getInfoColor(void) const
 float Exoplanet::getVMagnitude(const StelCore* core) const
 {
 	Q_UNUSED(core);
-	if (GETSTELMODULE(Exoplanets)->getDisplayMode())
+	if (distributionMode)
 	{
 		return 4.f;
 	}
@@ -401,24 +467,24 @@ void Exoplanet::update(double deltaTime)
 	labelsFader.update((int)(deltaTime*1000));
 }
 
-void Exoplanet::draw(StelCore* core, StelPainter& painter)
+void Exoplanet::draw(StelCore* core, StelPainter *painter)
 {
 	bool visible;
 	StelSkyDrawer* sd = core->getSkyDrawer();
+	StarMgr* smgr = GETSTELMODULE(StarMgr); // It's need for checking displaying of labels for stars
 
-	//TODO: Store color of markers into config.ini file
-	Vec3f color = Vec3f(0.4f,0.9f,0.5f);
+	Vec3f color = exoplanetMarkerColor;
 	if (hasHabitableExoplanets)
-		color = Vec3f(1.f,0.5f,0.f);
-
-	double mag = getVMagnitudeWithExtinction(core);
+		color = habitableExoplanetMarkerColor;
 
 	StelUtils::spheToRect(RA, DE, XYZ);
+	double mag = getVMagnitudeWithExtinction(core);
+
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_ONE, GL_ONE);
-	painter.setColor(color[0], color[1], color[2], 1);
+	painter->setColor(color[0], color[1], color[2], 1);
 
-	if (GETSTELMODULE(Exoplanets)->getTimelineMode())
+	if (timelineMode)
 	{
 		visible = isDiscovered(core);
 	}
@@ -427,25 +493,29 @@ void Exoplanet::draw(StelCore* core, StelPainter& painter)
 		visible = true;
 	}
 
-	if(!visible) {return;}
-
-	if (mag <= sd->getLimitMagnitude())
+	if (habitableMode)
 	{
+		if (!hasHabitableExoplanets)
+			return;
+	}
 
+	Vec3d win;
+	// Check visibility of exoplanet system
+	if(!visible || !(painter->getProjector()->projectCheck(XYZ, win))) {return;}
+
+	float mlimit = sd->getLimitMagnitude();
+
+	if (mag <= mlimit)
+	{		
 		Exoplanet::markerTexture->bind();
-		float size = getAngularSize(NULL)*M_PI/180.*painter.getProjector()->getPixelPerRadAtCenter();
+		float size = getAngularSize(NULL)*M_PI/180.*painter->getProjector()->getPixelPerRadAtCenter();
 		float shift = 5.f + size/1.6f;
-		if (labelsFader.getInterstate()<=0.f)
+
+		painter->drawSprite2dMode(XYZ, distributionMode ? 4.f : 5.f);
+
+		if (labelsFader.getInterstate()<=0.f && !distributionMode && (mag+1.f)<mlimit && smgr->getFlagLabels())
 		{
-			if (GETSTELMODULE(Exoplanets)->getDisplayMode())
-			{
-				painter.drawSprite2dMode(XYZ, 4);
-			}
-			else
-			{
-				painter.drawSprite2dMode(XYZ, 5);
-				painter.drawText(XYZ, designation, 0, shift, shift, false);
-			}
+			painter->drawText(XYZ, designation, 0, shift, shift, false);
 		}
 	}
 }

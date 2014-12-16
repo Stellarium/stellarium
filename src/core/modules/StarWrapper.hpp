@@ -20,13 +20,14 @@
 #ifndef _STARWRAPPER_HPP_
 #define _STARWRAPPER_HPP_
 
-#include <QString>
 #include "StelObject.hpp"
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StarMgr.hpp"
 #include "Star.hpp"
 #include "StelSkyDrawer.hpp"
+
+#include <QString>
 
 template <class Star> class SpecialZoneArray;
 template <class Star> struct SpecialZoneData;
@@ -81,14 +82,13 @@ protected:
 	}
 	Vec3f getInfoColor(void) const
 	{
-		return StelSkyDrawer::indexToColor(s->bV);
+		return StelSkyDrawer::indexToColor(s->getBVIndex());
 	}
 	float getVMagnitude(const StelCore* core) const
 	{
 		Q_UNUSED(core);
-		return 0.001f*a->mag_min + s->mag*(0.001f*a->mag_range)/a->mag_steps;
+		return 0.001f*a->mag_min + s->getMag()*(0.001f*a->mag_range)/a->mag_steps;
 	}
-	float getSelectPriority(const StelCore* core) const {return getVMagnitude(core);}
 	float getBV(void) const {return s->getBV();}
 	QString getEnglishName(void) const {return QString();}
 	QString getNameI18n(void) const {return s->getNameI18n();}

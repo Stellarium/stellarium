@@ -16,6 +16,7 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
+
 #include "StelProjector.hpp"
 #include "StelPainter.hpp"
 #include "StelApp.hpp"
@@ -72,6 +73,7 @@ StelPluginInfo QuasarsStelPluginInterface::getPluginInfo() const
 	info.authors = "Alexander Wolf";
 	info.contact = "alex.v.wolf@gmail.com";
 	info.description = N_("A plugin that shows some quasars brighter than 16 visual magnitude. A catalogue of quasars compiled from 'Quasars and Active Galactic Nuclei' (13th Ed.) (Veron+ 2010) =2010A&A...518A..10V");
+	info.version = QUASARS_PLUGIN_VERSION;
 	return info;
 }
 
@@ -79,17 +81,27 @@ StelPluginInfo QuasarsStelPluginInterface::getPluginInfo() const
  Constructor
 */
 Quasars::Quasars()
-	: flagShowQuasars(false)
+	: QsrCount(0)
+	, updateState(CompleteNoUpdates)
+	, downloadMgr(NULL)
+	, updateTimer(0)
+	, messageTimer(0)
+	, updatesEnabled(false)
+	, updateFrequencyDays(0)
+	, enableAtStartup(false)
+	, flagShowQuasars(false)
+	, flagShowQuasarsButton(false)
 	, OnIcon(NULL)
 	, OffIcon(NULL)
 	, GlowIcon(NULL)
 	, toolbarButton(NULL)
 	, progressBar(NULL)
+
 {
 	setObjectName("Quasars");
 	configDialog = new QuasarsDialog();
 	conf = StelApp::getInstance().getSettings();
-	font.setPixelSize(conf->value("gui/base_font_size", 13).toInt());
+	font.setPixelSize(StelApp::getInstance().getBaseFontSize());
 }
 
 /*
@@ -139,7 +151,7 @@ void Quasars::init()
 		// If no settings in the main config file, create with defaults
 		if (!conf->childGroups().contains("Quasars"))
 		{
-			qDebug() << "Quasars::init no Quasars section exists in main config file - creating with defaults";
+			qDebug() << "Quasars: no Quasars section exists in main config file - creating with defaults";
 			restoreDefaultConfigIni();
 		}
 
@@ -157,7 +169,7 @@ void Quasars::init()
 		addAction("actionShow_Quasars", N_("Quasars"), N_("Show quasars"), "quasarsVisible", "Ctrl+Alt+Q");
 		addAction("actionShow_Quasars_ConfigDialog", N_("Quasars"), N_("Quasars configuration window"), configDialog, "visible");
 
-		GlowIcon = new QPixmap(":/graphicsGui/glow32x32.png");
+		GlowIcon = new QPixmap(":/graphicGui/glow32x32.png");
 		OnIcon = new QPixmap(":/Quasars/btQuasars-on.png");
 		OffIcon = new QPixmap(":/Quasars/btQuasars-off.png");
 
@@ -166,7 +178,7 @@ void Quasars::init()
 	}
 	catch (std::runtime_error &e)
 	{
-		qWarning() << "Quasars::init error: " << e.what();
+		qWarning() << "Quasars: init error:" << e.what();
 		return;
 	}
 
@@ -187,11 +199,11 @@ void Quasars::init()
 	}
 	else
 	{
-		qDebug() << "Quasars::init quasars.json does not exist - copying default file to " << QDir::toNativeSeparators(catalogJsonPath);
+		qDebug() << "Quasars: quasars.json does not exist - copying default file to" << QDir::toNativeSeparators(catalogJsonPath);
 		restoreDefaultJsonFile();
 	}
 
-	qDebug() << "Quasars::init using file: " << QDir::toNativeSeparators(catalogJsonPath);
+	qDebug() << "Quasars: loading catalog file:" << QDir::toNativeSeparators(catalogJsonPath);
 
 	readJsonFile();
 
@@ -420,11 +432,11 @@ void Quasars::restoreDefaultJsonFile(void)
 	QFile src(":/Quasars/quasars.json");
 	if (!src.copy(catalogJsonPath))
 	{
-		qWarning() << "Quasars::restoreDefaultJsonFile cannot copy json resource to " + QDir::toNativeSeparators(catalogJsonPath);
+		qWarning() << "Quasars: cannot copy json resource to" + QDir::toNativeSeparators(catalogJsonPath);
 	}
 	else
 	{
-		qDebug() << "Quasars::init copied default catalog.json to " << QDir::toNativeSeparators(catalogJsonPath);
+		qDebug() << "Quasars: copied default quasars.json to" << QDir::toNativeSeparators(catalogJsonPath);
 		// The resource is read only, and the new file inherits this...  make sure the new file
 		// is writable by the Stellarium process so that updates can be done.
 		QFile dest(catalogJsonPath);
@@ -440,14 +452,14 @@ void Quasars::restoreDefaultJsonFile(void)
 }
 
 /*
-  Creates a backup of the Quasars.json file called Quasars.json.old
+  Creates a backup of the quasars.json file called quasars.json.old
 */
 bool Quasars::backupJsonFile(bool deleteOriginal)
 {
 	QFile old(catalogJsonPath);
 	if (!old.exists())
 	{
-		qWarning() << "Quasars::backupJsonFile no file to backup";
+		qWarning() << "Quasars: no file to backup";
 		return false;
 	}
 
@@ -461,14 +473,14 @@ bool Quasars::backupJsonFile(bool deleteOriginal)
 		{
 			if (!old.remove())
 			{
-				qWarning() << "Quasars::backupJsonFile WARNING - could not remove old quasars.json file";
+				qWarning() << "Quasars: WARNING - could not remove old quasars.json file";
 				return false;
 			}
 		}
 	}
 	else
 	{
-		qWarning() << "Quasars::backupJsonFile WARNING - failed to copy quasars.json to quasars.json.old";
+		qWarning() << "Quasars: WARNING - failed to copy quasars.json to quasars.json.old";
 		return false;
 	}
 
@@ -494,11 +506,12 @@ QVariantMap Quasars::loadQSOMap(QString path)
 	QVariantMap map;
 	QFile jsonFile(path);
 	if (!jsonFile.open(QIODevice::ReadOnly))
-	    qWarning() << "Quasars::loadQSOMap cannot open " << QDir::toNativeSeparators(path);
+		qWarning() << "Quasars: cannot open" << QDir::toNativeSeparators(path);
 	else
-	    map = StelJsonParser::parse(jsonFile.readAll()).toMap();
-
-	jsonFile.close();
+	{
+		map = StelJsonParser::parse(jsonFile.readAll()).toMap();
+		jsonFile.close();
+	}
 	return map;
 }
 
@@ -508,11 +521,14 @@ QVariantMap Quasars::loadQSOMap(QString path)
 void Quasars::setQSOMap(const QVariantMap& map)
 {
 	QSO.clear();
+	QsrCount = 0;
 	QVariantMap qsoMap = map.value("quasars").toMap();
 	foreach(QString qsoKey, qsoMap.keys())
 	{
 		QVariantMap qsoData = qsoMap.value(qsoKey).toMap();
 		qsoData["designation"] = qsoKey;
+
+		QsrCount++;
 
 		QuasarP quasar(new Quasar(qsoData));
 		if (quasar->initialized)
@@ -527,7 +543,7 @@ int Quasars::getJsonFileFormatVersion(void)
 	QFile catalogJsonFile(catalogJsonPath);
 	if (!catalogJsonFile.open(QIODevice::ReadOnly))
 	{
-		qWarning() << "Quasars::init cannot open " << QDir::toNativeSeparators(catalogJsonPath);
+		qWarning() << "Quasars: cannot open" << QDir::toNativeSeparators(catalogJsonPath);
 		return jsonVersion;
 	}
 
@@ -539,7 +555,7 @@ int Quasars::getJsonFileFormatVersion(void)
 	}
 
 	catalogJsonFile.close();
-	qDebug() << "Quasars::getJsonFileFormatVersion() version of format from file:" << jsonVersion;
+	qDebug() << "Quasars: version of the format of the catalog:" << jsonVersion;
 	return jsonVersion;
 }
 
@@ -548,7 +564,7 @@ bool Quasars::checkJsonFileFormat()
 	QFile catalogJsonFile(catalogJsonPath);
 	if (!catalogJsonFile.open(QIODevice::ReadOnly))
 	{
-		qWarning() << "Quasars::checkJsonFileFormat(): cannot open " << QDir::toNativeSeparators(catalogJsonPath);
+		qWarning() << "Quasars: cannot open" << QDir::toNativeSeparators(catalogJsonPath);
 		return false;
 	}
 
@@ -560,8 +576,7 @@ bool Quasars::checkJsonFileFormat()
 	}
 	catch (std::runtime_error& e)
 	{
-		qDebug() << "Quasars::checkJsonFileFormat(): file format is wrong!";
-		qDebug() << "Quasars::checkJsonFileFormat() error:" << e.what();
+		qDebug() << "Quasars: file format is wrong! Error:" << e.what();
 		return false;
 	}
 
@@ -606,6 +621,7 @@ void Quasars::restoreDefaultConfigIni(void)
 	conf->setValue("url", "http://stellarium.org/json/quasars.json");
 	conf->setValue("update_frequency_days", 100);
 	conf->setValue("flag_show_quasars_button", true);
+	conf->setValue("marker_color", "1.0,0.5,0.4");
 	conf->endGroup();
 }
 
@@ -617,7 +633,8 @@ void Quasars::readSettingsFromConfig(void)
 	updateFrequencyDays = conf->value("update_frequency_days", 100).toInt();
 	lastUpdate = QDateTime::fromString(conf->value("last_update", "2012-05-24T12:00:00").toString(), Qt::ISODate);
 	updatesEnabled = conf->value("updates_enabled", true).toBool();
-	distributionEnabled = conf->value("distribution_enabled", false).toBool();
+	setDisplayMode(conf->value("distribution_enabled", false).toBool());
+	setMarkerColor(conf->value("marker_color", "1.0,0.5,0.4").toString());
 	enableAtStartup = conf->value("enable_at_startup", false).toBool();
 	flagShowQuasarsButton = conf->value("flag_show_quasars_button", true).toBool();
 
@@ -631,9 +648,10 @@ void Quasars::saveSettingsToConfig(void)
 	conf->setValue("url", updateUrl);
 	conf->setValue("update_frequency_days", updateFrequencyDays);
 	conf->setValue("updates_enabled", updatesEnabled );
-	conf->setValue("distribution_enabled", distributionEnabled);
+	conf->setValue("distribution_enabled", getDisplayMode());
 	conf->setValue("enable_at_startup", enableAtStartup);
 	conf->setValue("flag_show_quasars_button", flagShowQuasarsButton);
+	conf->setValue("marker_color", getMarkerColor());
 
 	conf->endGroup();
 }
@@ -690,7 +708,7 @@ void Quasars::updateDownloadComplete(QNetworkReply* reply)
 	// check the download worked, and save the data to file if this is the case.
 	if (reply->error() != QNetworkReply::NoError)
 	{
-		qWarning() << "Quasars::updateDownloadComplete FAILED to download" << reply->url() << " Error: " << reply->errorString();
+		qWarning() << "Quasars: FAILED to download" << reply->url() << " Error: " << reply->errorString();
 	}
 	else
 	{
@@ -698,16 +716,18 @@ void Quasars::updateDownloadComplete(QNetworkReply* reply)
 		QString jsonFilePath = StelFileMgr::findFile("modules/Quasars", StelFileMgr::Flags(StelFileMgr::Writable|StelFileMgr::Directory)) + "/quasars.json";
 		if (jsonFilePath.isEmpty())
 		{
-			qWarning() << "Quasars::updateDownloadComplete: cannot write JSON data to file: modules/Quasars/quasars.json";
+			qWarning() << "Quasars: cannot write JSON data to file:" << QDir::toNativeSeparators(jsonFilePath);
 			return;
 		}
 		QFile jsonFile(jsonFilePath);
 		if (jsonFile.exists())
 			jsonFile.remove();
 
-		jsonFile.open(QIODevice::WriteOnly | QIODevice::Text);
-		jsonFile.write(reply->readAll());
-		jsonFile.close();
+		if(jsonFile.open(QIODevice::WriteOnly | QIODevice::Text))
+		{
+			jsonFile.write(reply->readAll());
+			jsonFile.close();
+		}
 	}
 
 	if (progressBar)
@@ -748,14 +768,38 @@ void Quasars::upgradeConfigIni(void)
 void Quasars::setFlagShowQuasarsButton(bool b)
 {
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-	if (b==true) {
-		if (toolbarButton==NULL) {
-			// Create the quasars button
-			toolbarButton = new StelButton(NULL, *OnIcon, *OffIcon, *GlowIcon, "actionShow_Quasars");
+	if (gui!=NULL)
+	{
+		if (b==true) {
+			if (toolbarButton==NULL) {
+				// Create the quasars button
+				toolbarButton = new StelButton(NULL, *OnIcon, *OffIcon, *GlowIcon, "actionShow_Quasars");
+			}
+			gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
+		} else {
+			gui->getButtonBar()->hideButton("actionShow_Quasars");
 		}
-		gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
-	} else {
-		gui->getButtonBar()->hideButton("actionShow_Quasars");
 	}
 	flagShowQuasarsButton = b;
+}
+
+bool Quasars::getDisplayMode()
+{
+	return Quasar::distributionMode;
+}
+
+void Quasars::setDisplayMode(bool b)
+{
+	Quasar::distributionMode=b;
+}
+
+QString Quasars::getMarkerColor()
+{
+	Vec3f c = Quasar::markerColor;
+	return QString("%1,%2,%3").arg(c[0]).arg(c[1]).arg(c[2]);
+}
+
+void Quasars::setMarkerColor(QString c)
+{
+	Quasar::markerColor = StelUtils::strToVec3f(c);
 }

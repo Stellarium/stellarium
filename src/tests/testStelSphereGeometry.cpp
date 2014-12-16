@@ -17,17 +17,18 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
+#include "tests/testStelSphereGeometry.hpp"
+
 #include <QObject>
 #include <QtDebug>
 #include <QBuffer>
 #include <QTest>
+
 #include <stdexcept>
 
 #include "StelJsonParser.hpp"
 #include "StelSphereGeometry.hpp"
 #include "StelUtils.hpp"
-
-#include "tests/testStelSphereGeometry.hpp"
 
 QTEST_MAIN(TestStelSphericalGeometry)
 
@@ -82,6 +83,7 @@ void TestStelSphericalGeometry::initTestCase()
 	southPoleSquare.setContour(cpole);
 }
 
+//FIXME: Doesn't pass on Windows
 void TestStelSphericalGeometry::testSphericalCap()
 {
 	Vec3d p0(1,0,0);

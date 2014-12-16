@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>648</width>
-    <height>511</height>
+    <width>659</width>
+    <height>554</height>
    </rect>
   </property>
   <property name="font">
@@ -23,7 +23,16 @@
    <property name="spacing">
     <number>0</number>
    </property>
-   <property name="margin">
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
     <number>0</number>
    </property>
    <item>
@@ -218,7 +227,16 @@
       <property name="spacing">
        <number>0</number>
       </property>
-      <property name="margin">
+      <property name="leftMargin">
+       <number>0</number>
+      </property>
+      <property name="topMargin">
+       <number>0</number>
+      </property>
+      <property name="rightMargin">
+       <number>0</number>
+      </property>
+      <property name="bottomMargin">
        <number>0</number>
       </property>
       <item>
@@ -328,11 +346,20 @@
       <item alignment="Qt::AlignTop">
        <widget class="QStackedWidget" name="stackedWidget">
         <property name="currentIndex">
-         <number>2</number>
+         <number>0</number>
         </property>
         <widget class="QWidget" name="page">
          <layout class="QGridLayout" name="gridLayout">
-          <property name="margin">
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
            <number>0</number>
           </property>
           <property name="spacing">
@@ -352,13 +379,6 @@
               <height>150</height>
              </size>
             </property>
-            <property name="font">
-             <font>
-              <pointsize>10</pointsize>
-              <weight>50</weight>
-              <bold>false</bold>
-             </font>
-            </property>
             <property name="title">
              <string>Labels and Markers</string>
             </property>
@@ -366,7 +386,16 @@
              <bool>false</bool>
             </property>
             <layout class="QGridLayout" name="gridLayoutx">
-             <property name="margin">
+             <property name="leftMargin">
+              <number>0</number>
+             </property>
+             <property name="topMargin">
+              <number>0</number>
+             </property>
+             <property name="rightMargin">
+              <number>0</number>
+             </property>
+             <property name="bottomMargin">
               <number>0</number>
              </property>
              <item row="0" column="0">
@@ -464,13 +493,6 @@
           </item>
           <item row="0" column="1">
            <widget class="QGroupBox" name="planetsGroupBox">
-            <property name="font">
-             <font>
-              <pointsize>10</pointsize>
-              <weight>50</weight>
-              <bold>false</bold>
-             </font>
-            </property>
             <property name="title">
              <string>Planets and satellites</string>
             </property>
@@ -478,7 +500,16 @@
              <bool>false</bool>
             </property>
             <layout class="QVBoxLayout" name="verticalLayout_2">
-             <property name="margin">
+             <property name="leftMargin">
+              <number>0</number>
+             </property>
+             <property name="topMargin">
+              <number>0</number>
+             </property>
+             <property name="rightMargin">
+              <number>0</number>
+             </property>
+             <property name="bottomMargin">
               <number>0</number>
              </property>
              <item>
@@ -519,11 +550,37 @@
               </widget>
              </item>
              <item>
-              <widget class="QCheckBox" name="planetScaleMoonCheckBox">
-               <property name="text">
-                <string>Scale Moon</string>
-               </property>
-              </widget>
+              <layout class="QHBoxLayout" name="horizontalLayout">
+               <item>
+                <widget class="QCheckBox" name="planetScaleMoonCheckBox">
+                 <property name="text">
+                  <string>Scale Moon</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QDoubleSpinBox" name="moonScaleFactor">
+                 <property name="toolTip">
+                  <string>Scale factor</string>
+                 </property>
+                 <property name="decimals">
+                  <number>1</number>
+                 </property>
+                 <property name="minimum">
+                  <double>1.000000000000000</double>
+                 </property>
+                 <property name="maximum">
+                  <double>20.000000000000000</double>
+                 </property>
+                 <property name="singleStep">
+                  <double>0.100000000000000</double>
+                 </property>
+                 <property name="value">
+                  <double>4.000000000000000</double>
+                 </property>
+                </widget>
+               </item>
+              </layout>
              </item>
              <item>
               <widget class="QCheckBox" name="autoChangeLandscapesCheckBox">
@@ -540,24 +597,38 @@
           </item>
           <item row="1" column="0">
            <widget class="QGroupBox" name="atmosphereGroupBox">
-            <property name="font">
-             <font>
-              <pointsize>10</pointsize>
-              <weight>50</weight>
-              <bold>false</bold>
-             </font>
+            <property name="toolTip">
+             <string>Show atmosphere</string>
             </property>
             <property name="title">
              <string>Atmosphere</string>
             </property>
+            <property name="flat">
+             <bool>true</bool>
+            </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
             <layout class="QVBoxLayout" name="verticalLayout_3">
-             <property name="margin">
+             <property name="leftMargin">
+              <number>0</number>
+             </property>
+             <property name="topMargin">
+              <number>0</number>
+             </property>
+             <property name="rightMargin">
+              <number>0</number>
+             </property>
+             <property name="bottomMargin">
               <number>0</number>
              </property>
              <item>
-              <widget class="QCheckBox" name="showAtmosphereCheckBox">
+              <widget class="QCheckBox" name="useLocationDataCheckBox">
+               <property name="toolTip">
+                <string>Use light pollution data from locations database and ignore settings for light pollution below</string>
+               </property>
                <property name="text">
-                <string>Show atmosphere</string>
+                <string>Light pollution data from locations database</string>
                </property>
               </widget>
              </item>
@@ -590,6 +661,9 @@
              </item>
              <item>
               <widget class="QPushButton" name="pushButtonAtmosphereDetails">
+               <property name="focusPolicy">
+                <enum>Qt::NoFocus</enum>
+               </property>
                <property name="toolTip">
                 <string>pressure, temperature, extinction coefficient</string>
                </property>
@@ -619,13 +693,6 @@
           </item>
           <item row="0" column="0" alignment="Qt::AlignTop">
            <widget class="QGroupBox" name="starGroupBox">
-            <property name="font">
-             <font>
-              <pointsize>10</pointsize>
-              <weight>50</weight>
-              <bold>false</bold>
-             </font>
-            </property>
             <property name="title">
              <string>Stars</string>
             </property>
@@ -642,7 +709,16 @@
              <bool>false</bool>
             </property>
             <layout class="QVBoxLayout" name="verticalLayout">
-             <property name="margin">
+             <property name="leftMargin">
+              <number>0</number>
+             </property>
+             <property name="topMargin">
+              <number>0</number>
+             </property>
+             <property name="rightMargin">
+              <number>0</number>
+             </property>
+             <property name="bottomMargin">
               <number>0</number>
              </property>
              <item>
@@ -651,7 +727,16 @@
                 <enum>QFrame::StyledPanel</enum>
                </property>
                <layout class="QHBoxLayout" name="horizontalLayout_2">
-                <property name="margin">
+                <property name="leftMargin">
+                 <number>0</number>
+                </property>
+                <property name="topMargin">
+                 <number>0</number>
+                </property>
+                <property name="rightMargin">
+                 <number>0</number>
+                </property>
+                <property name="bottomMargin">
                  <number>0</number>
                 </property>
                 <item>
@@ -719,7 +804,16 @@
                 <enum>QFrame::StyledPanel</enum>
                </property>
                <layout class="QHBoxLayout" name="horizontalLayout_3">
-                <property name="margin">
+                <property name="leftMargin">
+                 <number>0</number>
+                </property>
+                <property name="topMargin">
+                 <number>0</number>
+                </property>
+                <property name="rightMargin">
+                 <number>0</number>
+                </property>
+                <property name="bottomMargin">
                  <number>0</number>
                 </property>
                 <item>
@@ -805,7 +899,16 @@
                 <enum>QFrame::Raised</enum>
                </property>
                <layout class="QHBoxLayout" name="horizontalLayout_8">
-                <property name="margin">
+                <property name="leftMargin">
+                 <number>0</number>
+                </property>
+                <property name="topMargin">
+                 <number>0</number>
+                </property>
+                <property name="rightMargin">
+                 <number>0</number>
+                </property>
+                <property name="bottomMargin">
                  <number>0</number>
                 </property>
                 <item>
@@ -844,12 +947,77 @@
               </widget>
              </item>
              <item>
+              <widget class="QFrame" name="frameZodiacalLight">
+               <property name="frameShape">
+                <enum>QFrame::StyledPanel</enum>
+               </property>
+               <property name="frameShadow">
+                <enum>QFrame::Raised</enum>
+               </property>
+               <layout class="QHBoxLayout" name="horizontalLayout_ZL">
+                <property name="leftMargin">
+                 <number>0</number>
+                </property>
+                <property name="topMargin">
+                 <number>0</number>
+                </property>
+                <property name="rightMargin">
+                 <number>0</number>
+                </property>
+                <property name="bottomMargin">
+                 <number>0</number>
+                </property>
+                <item>
+                 <widget class="QLabel" name="labelZodiacalLight">
+                  <property name="text">
+                   <string>Zodiacal Light brightness:</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QDoubleSpinBox" name="zodiacalLightBrightnessDoubleSpinBox">
+                  <property name="maximumSize">
+                   <size>
+                    <width>70</width>
+                    <height>16777215</height>
+                   </size>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignCenter</set>
+                  </property>
+                  <property name="decimals">
+                   <number>1</number>
+                  </property>
+                  <property name="maximum">
+                   <double>10.000000000000000</double>
+                  </property>
+                  <property name="singleStep">
+                   <double>0.100000000000000</double>
+                  </property>
+                  <property name="value">
+                   <double>1.000000000000000</double>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </widget>
+             </item>
+             <item>
               <widget class="QFrame" name="frame_12">
                <property name="frameShape">
                 <enum>QFrame::StyledPanel</enum>
                </property>
                <layout class="QHBoxLayout" name="horizontalLayout_9">
-                <property name="margin">
+                <property name="leftMargin">
+                 <number>0</number>
+                </property>
+                <property name="topMargin">
+                 <number>0</number>
+                </property>
+                <property name="rightMargin">
+                 <number>0</number>
+                </property>
+                <property name="bottomMargin">
                  <number>0</number>
                 </property>
                 <item>
@@ -911,12 +1079,8 @@
               <verstretch>0</verstretch>
              </sizepolicy>
             </property>
-            <property name="font">
-             <font>
-              <pointsize>10</pointsize>
-              <weight>50</weight>
-              <bold>false</bold>
-             </font>
+            <property name="toolTip">
+             <string>Settings for sporadic meteors</string>
             </property>
             <property name="title">
              <string>Shooting Stars</string>
@@ -925,131 +1089,63 @@
              <bool>false</bool>
             </property>
             <layout class="QHBoxLayout" name="horizontalLayout_6">
-             <property name="margin">
+             <property name="leftMargin">
+              <number>0</number>
+             </property>
+             <property name="topMargin">
+              <number>0</number>
+             </property>
+             <property name="rightMargin">
+              <number>0</number>
+             </property>
+             <property name="bottomMargin">
               <number>0</number>
              </property>
              <item>
-              <widget class="QFrame" name="frame_9">
-               <property name="frameShape">
-                <enum>QFrame::StyledPanel</enum>
+              <layout class="QFormLayout" name="formLayout">
+               <property name="fieldGrowthPolicy">
+                <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
                </property>
-               <layout class="QVBoxLayout" name="verticalLayout_4">
-                <property name="margin">
-                 <number>0</number>
-                </property>
-                <item>
-                 <widget class="QLabel" name="label_14">
-                  <property name="toolTip">
-                   <string>Hourly zenith rate</string>
-                  </property>
-                  <property name="text">
-                   <string comment="Zenithal Hourly Rate">ZHR:</string>
-                  </property>
-                  <property name="textFormat">
-                   <enum>Qt::PlainText</enum>
-                  </property>
-                  <property name="alignment">
-                   <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
-                  </property>
-                 </widget>
-                </item>
-               </layout>
-              </widget>
-             </item>
-             <item>
-              <widget class="QFrame" name="frame_11">
-               <property name="frameShape">
-                <enum>QFrame::StyledPanel</enum>
-               </property>
-               <layout class="QVBoxLayout" name="verticalLayout_9">
-                <property name="margin">
-                 <number>0</number>
-                </property>
-                <item alignment="Qt::AlignTop">
-                 <widget class="QFrame" name="frame_8">
-                  <property name="frameShape">
-                   <enum>QFrame::StyledPanel</enum>
-                  </property>
-                  <layout class="QHBoxLayout" name="horizontalLayout_7">
-                   <property name="margin">
-                    <number>0</number>
-                   </property>
-                   <item>
-                    <widget class="QRadioButton" name="zhrNone">
-                     <property name="text">
-                      <string notr="true">0</string>
-                     </property>
-                    </widget>
-                   </item>
-                   <item>
-                    <widget class="QRadioButton" name="zhr10">
-                     <property name="text">
-                      <string notr="true">10</string>
-                     </property>
-                     <property name="checked">
-                      <bool>true</bool>
-                     </property>
-                    </widget>
-                   </item>
-                   <item>
-                    <widget class="QRadioButton" name="zhr80">
-                     <property name="text">
-                      <string notr="true">80</string>
-                     </property>
-                    </widget>
-                   </item>
-                   <item>
-                    <widget class="QRadioButton" name="zhr1000">
-                     <property name="text">
-                      <string>1000</string>
-                     </property>
-                    </widget>
-                   </item>
-                   <item>
-                    <widget class="QRadioButton" name="zhr10000">
-                     <property name="text">
-                      <string notr="true">10000</string>
-                     </property>
-                    </widget>
-                   </item>
-                   <item>
-                    <widget class="QRadioButton" name="zhr144000">
-                     <property name="text">
-                      <string notr="true">144000</string>
-                     </property>
-                    </widget>
-                   </item>
-                  </layout>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QLabel" name="zhrLabel">
-                  <property name="text">
-                   <string/>
-                  </property>
-                  <property name="textFormat">
-                   <enum>Qt::RichText</enum>
-                  </property>
-                  <property name="scaledContents">
-                   <bool>false</bool>
-                  </property>
-                 </widget>
-                </item>
-               </layout>
-              </widget>
-             </item>
-             <item>
-              <spacer name="horizontalSpacer">
-               <property name="orientation">
-                <enum>Qt::Horizontal</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>40</width>
-                 <height>20</height>
-                </size>
-               </property>
-              </spacer>
+               <item row="1" column="0">
+                <widget class="QLabel" name="label_14">
+                 <property name="toolTip">
+                  <string>Hourly zenith rate</string>
+                 </property>
+                 <property name="text">
+                  <string comment="Zenithal Hourly Rate">ZHR:</string>
+                 </property>
+                 <property name="textFormat">
+                  <enum>Qt::PlainText</enum>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="1">
+                <widget class="QSpinBox" name="zhrSpinBox">
+                 <property name="maximum">
+                  <number>240000</number>
+                 </property>
+                 <property name="value">
+                  <number>10</number>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="1">
+                <widget class="QLabel" name="zhrLabel">
+                 <property name="text">
+                  <string/>
+                 </property>
+                 <property name="textFormat">
+                  <enum>Qt::RichText</enum>
+                 </property>
+                 <property name="scaledContents">
+                  <bool>false</bool>
+                 </property>
+                </widget>
+               </item>
+              </layout>
              </item>
             </layout>
            </widget>
@@ -1068,13 +1164,6 @@
               <height>0</height>
              </size>
             </property>
-            <property name="font">
-             <font>
-              <pointsize>10</pointsize>
-              <weight>50</weight>
-              <bold>false</bold>
-             </font>
-            </property>
             <property name="toolTip">
              <string>Limit Magnitudes (for unaided/binocular observers)</string>
             </property>
@@ -1085,7 +1174,16 @@
              <bool>false</bool>
             </property>
             <layout class="QGridLayout" name="gridLayout_6">
-             <property name="margin">
+             <property name="leftMargin">
+              <number>0</number>
+             </property>
+             <property name="topMargin">
+              <number>0</number>
+             </property>
+             <property name="rightMargin">
+              <number>0</number>
+             </property>
+             <property name="bottomMargin">
               <number>0</number>
              </property>
              <item row="1" column="0">
@@ -1207,7 +1305,16 @@
         </widget>
         <widget class="QWidget" name="page_2">
          <layout class="QGridLayout" name="gridLayout_2">
-          <property name="margin">
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
            <number>0</number>
           </property>
           <property name="spacing">
@@ -1215,13 +1322,6 @@
           </property>
           <item row="0" column="2">
            <widget class="QGroupBox" name="constellationGroupBox">
-            <property name="font">
-             <font>
-              <pointsize>10</pointsize>
-              <weight>50</weight>
-              <bold>false</bold>
-             </font>
-            </property>
             <property name="title">
              <string>Constellations</string>
             </property>
@@ -1229,7 +1329,16 @@
              <bool>false</bool>
             </property>
             <layout class="QVBoxLayout" name="verticalLayout_11">
-             <property name="margin">
+             <property name="leftMargin">
+              <number>0</number>
+             </property>
+             <property name="topMargin">
+              <number>0</number>
+             </property>
+             <property name="rightMargin">
+              <number>0</number>
+             </property>
+             <property name="bottomMargin">
               <number>0</number>
              </property>
              <item>
@@ -1299,13 +1408,6 @@
           </item>
           <item row="0" column="0" colspan="2">
            <widget class="QGroupBox" name="celestialSphereGroupBox">
-            <property name="font">
-             <font>
-              <pointsize>10</pointsize>
-              <weight>50</weight>
-              <bold>false</bold>
-             </font>
-            </property>
             <property name="title">
              <string>Celestial Sphere</string>
             </property>
@@ -1313,7 +1415,16 @@
              <bool>false</bool>
             </property>
             <layout class="QVBoxLayout" name="verticalLayout_10">
-             <property name="margin">
+             <property name="leftMargin">
+              <number>0</number>
+             </property>
+             <property name="topMargin">
+              <number>0</number>
+             </property>
+             <property name="rightMargin">
+              <number>0</number>
+             </property>
+             <property name="bottomMargin">
               <number>0</number>
              </property>
              <item>
@@ -1323,21 +1434,21 @@
                  <item>
                   <widget class="QCheckBox" name="showEquatorialJ2000GridCheckBox">
                    <property name="text">
-                    <string>Equatorial J2000 grid</string>
+                    <string>Equatorial grid (on J2000)</string>
                    </property>
                   </widget>
                  </item>
                  <item>
                   <widget class="QCheckBox" name="showEquatorialGridCheckBox">
                    <property name="text">
-                    <string>Equatorial grid</string>
+                    <string>Equatorial grid (on date)</string>
                    </property>
                   </widget>
                  </item>
                  <item>
                   <widget class="QCheckBox" name="showEclipticGridJ2000CheckBox">
                    <property name="text">
-                    <string>Ecliptic J2000 grid</string>
+                    <string>Ecliptic grid (on J2000)</string>
                    </property>
                   </widget>
                  </item>
@@ -1400,12 +1511,12 @@
                   </widget>
                  </item>
                  <item>
-                  <widget class="QCheckBox" name="showGalacticPlaneLineCheckBox">
+                  <widget class="QCheckBox" name="showGalacticEquatorLineCheckBox">
                    <property name="toolTip">
-                    <string>Show Galactic plane line</string>
+                    <string>Show Galactic equator line</string>
                    </property>
                    <property name="text">
-                    <string>Galactic plane</string>
+                    <string>Galactic equator</string>
                    </property>
                   </widget>
                  </item>
@@ -1455,7 +1566,16 @@
              <bool>false</bool>
             </property>
             <layout class="QHBoxLayout" name="horizontalLayout_10">
-             <property name="margin">
+             <property name="leftMargin">
+              <number>0</number>
+             </property>
+             <property name="topMargin">
+              <number>0</number>
+             </property>
+             <property name="rightMargin">
+              <number>0</number>
+             </property>
+             <property name="bottomMargin">
               <number>0</number>
              </property>
              <item>
@@ -1503,7 +1623,16 @@
         </widget>
         <widget class="QWidget" name="page_3">
          <layout class="QGridLayout" name="gridLayout_3">
-          <property name="margin">
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
            <number>0</number>
           </property>
           <property name="spacing">
@@ -1570,6 +1699,105 @@
             </property>
            </widget>
           </item>
+          <item row="1" column="1">
+           <widget class="QGroupBox" name="landscapeOptionsGroupBox">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="title">
+             <string>Options</string>
+            </property>
+            <property name="checkable">
+             <bool>false</bool>
+            </property>
+            <layout class="QGridLayout" name="gridLayout_7">
+             <item row="1" column="0" colspan="2">
+              <widget class="QCheckBox" name="showFogCheckBox">
+               <property name="text">
+                <string>Show fog</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="0" colspan="2">
+              <widget class="QCheckBox" name="landscapePositionCheckBox">
+               <property name="text">
+                <string>Use associated planet and position</string>
+               </property>
+              </widget>
+             </item>
+             <item row="6" column="0" colspan="2">
+              <widget class="QCheckBox" name="landscapeIlluminationCheckBox">
+               <property name="text">
+                <string>Show illumination layer (bright windows, light pollution, etc.)</string>
+               </property>
+               <property name="checked">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="0" colspan="2">
+              <widget class="QCheckBox" name="showGroundCheckBox">
+               <property name="text">
+                <string>Show ground</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="0" rowspan="2" colspan="2">
+              <widget class="QCheckBox" name="useAsDefaultLandscapeCheckBox">
+               <property name="text">
+                <string>Use this landscape as default</string>
+               </property>
+              </widget>
+             </item>
+             <item row="5" column="0">
+              <layout class="QHBoxLayout" name="horizontalLayout_11">
+               <item>
+                <widget class="QCheckBox" name="landscapeBrightnessCheckBox">
+                 <property name="toolTip">
+                  <string>Use minimal brightness to leave landscape visible also in darkness</string>
+                 </property>
+                 <property name="text">
+                  <string>Minimal brightness:</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QDoubleSpinBox" name="landscapeBrightnessSpinBox">
+                 <property name="enabled">
+                  <bool>false</bool>
+                 </property>
+                 <property name="toolTip">
+                  <string>Value range 0..1 (landscape is black at night - landscape is fully bright)</string>
+                 </property>
+                 <property name="maximum">
+                  <double>1.000000000000000</double>
+                 </property>
+                 <property name="singleStep">
+                  <double>0.010000000000000</double>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QCheckBox" name="localLandscapeBrightnessCheckBox">
+                 <property name="enabled">
+                  <bool>false</bool>
+                 </property>
+                 <property name="toolTip">
+                  <string>Use minimal brightness as may be specified in landscape.ini</string>
+                 </property>
+                 <property name="text">
+                  <string>from landscape, if given</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+            </layout>
+           </widget>
+          </item>
           <item row="2" column="1">
            <widget class="QPushButton" name="pushButtonAddRemoveLandscapes">
             <property name="minimumSize">
@@ -1586,74 +1814,20 @@
             </property>
            </widget>
           </item>
-          <item row="1" column="1">
-           <widget class="QGroupBox" name="landscapeOptionsGroupBox">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="font">
-             <font>
-              <pointsize>10</pointsize>
-              <weight>50</weight>
-              <bold>false</bold>
-             </font>
-            </property>
-            <property name="title">
-             <string>Options</string>
-            </property>
-            <property name="checkable">
-             <bool>false</bool>
-            </property>
-            <layout class="QGridLayout">
-             <property name="margin">
-              <number>0</number>
-             </property>
-             <item row="0" column="0">
-              <widget class="QCheckBox" name="showGroundCheckBox">
-               <property name="text">
-                <string>Show ground</string>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="0">
-              <widget class="QCheckBox" name="showFogCheckBox">
-               <property name="text">
-                <string>Show fog</string>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="0">
-              <widget class="QCheckBox" name="landscapePositionCheckBox">
-               <property name="text">
-                <string>Use associated planet and position</string>
-               </property>
-              </widget>
-             </item>
-             <item row="3" column="0">
-              <widget class="QCheckBox" name="useAsDefaultLandscapeCheckBox">
-               <property name="text">
-                <string>Use this landscape as default</string>
-               </property>
-              </widget>
-             </item>
-             <item row="4" column="0">
-              <widget class="QCheckBox" name="landscapeBrightnessCheckBox">
-               <property name="text">
-                <string>Use brightness settings for landscapes</string>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </widget>
-          </item>
          </layout>
         </widget>
         <widget class="QWidget" name="page_4">
          <layout class="QGridLayout" name="gridLayout_4">
-          <property name="margin">
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
            <number>0</number>
           </property>
           <property name="spacing">
@@ -1740,24 +1914,53 @@
               <height>0</height>
              </size>
             </property>
-            <property name="font">
-             <font>
-              <pointsize>10</pointsize>
-              <weight>50</weight>
-              <bold>false</bold>
-             </font>
-            </property>
             <property name="title">
              <string>Options</string>
             </property>
-            <layout class="QVBoxLayout" name="verticalLayout_8">
-             <property name="margin">
+            <layout class="QFormLayout" name="formLayout_2">
+             <property name="fieldGrowthPolicy">
+              <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
+             </property>
+             <property name="leftMargin">
               <number>0</number>
              </property>
-             <item>
+             <property name="topMargin">
+              <number>0</number>
+             </property>
+             <property name="rightMargin">
+              <number>0</number>
+             </property>
+             <property name="bottomMargin">
+              <number>0</number>
+             </property>
+             <item row="0" column="0">
               <widget class="QCheckBox" name="useAsDefaultSkyCultureCheckBox">
                <property name="text">
                 <string>Use this sky culture as default</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="0">
+              <widget class="QLabel" name="label">
+               <property name="text">
+                <string>Show names</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="1">
+              <widget class="QComboBox" name="skyCultureNamesStyleComboBox">
+               <property name="toolTip">
+                <string>Select if you want names abbreviated, original or translated</string>
+               </property>
+               <property name="currentText">
+                <string/>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QCheckBox" name="nativeNameCheckBox">
+               <property name="text">
+                <string>Use native names for planets from current culture</string>
                </property>
               </widget>
              </item>
@@ -1771,7 +1974,16 @@
           <property name="spacing">
            <number>0</number>
           </property>
-          <property name="margin">
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
            <number>0</number>
           </property>
           <item>
@@ -1786,7 +1998,16 @@
              <property name="spacing">
               <number>0</number>
              </property>
-             <property name="margin">
+             <property name="leftMargin">
+              <number>0</number>
+             </property>
+             <property name="topMargin">
+              <number>0</number>
+             </property>
+             <property name="rightMargin">
+              <number>0</number>
+             </property>
+             <property name="bottomMargin">
               <number>0</number>
              </property>
              <item>
@@ -1811,7 +2032,16 @@
                 <property name="spacing">
                  <number>0</number>
                 </property>
-                <property name="margin">
+                <property name="leftMargin">
+                 <number>0</number>
+                </property>
+                <property name="topMargin">
+                 <number>0</number>
+                </property>
+                <property name="rightMargin">
+                 <number>0</number>
+                </property>
+                <property name="bottomMargin">
                  <number>0</number>
                 </property>
                 <item>
@@ -1830,7 +2060,16 @@
                    <string>Options</string>
                   </property>
                   <layout class="QGridLayout" name="gridLayout_5">
-                   <property name="margin">
+                   <property name="leftMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="topMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="rightMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="bottomMargin">
                     <number>0</number>
                    </property>
                    <item row="0" column="0">
@@ -1876,8 +2115,7 @@
   <tabstop>planetMarkerCheckBox</tabstop>
   <tabstop>planetOrbitCheckBox</tabstop>
   <tabstop>planetLightSpeedCheckBox</tabstop>
-  <tabstop>planetScaleMoonCheckBox</tabstop>
-  <tabstop>showAtmosphereCheckBox</tabstop>
+  <tabstop>useLocationDataCheckBox</tabstop>
   <tabstop>lightPollutionSpinBox</tabstop>
   <tabstop>starLabelCheckBox</tabstop>
   <tabstop>starsLabelsHorizontalSlider</tabstop>
@@ -1885,11 +2123,6 @@
   <tabstop>nebulasLabelsHorizontalSlider</tabstop>
   <tabstop>planetLabelCheckBox</tabstop>
   <tabstop>planetsLabelsHorizontalSlider</tabstop>
-  <tabstop>zhrNone</tabstop>
-  <tabstop>zhr10</tabstop>
-  <tabstop>zhr80</tabstop>
-  <tabstop>zhr10000</tabstop>
-  <tabstop>zhr144000</tabstop>
   <tabstop>showEquatorialJ2000GridCheckBox</tabstop>
   <tabstop>showEquatorialGridCheckBox</tabstop>
   <tabstop>showEclipticGridJ2000CheckBox</tabstop>
@@ -1900,7 +2133,7 @@
   <tabstop>showMeridianLineCheckBox</tabstop>
   <tabstop>showHorizonLineCheckBox</tabstop>
   <tabstop>showEclipticLineCheckBox</tabstop>
-  <tabstop>showGalacticPlaneLineCheckBox</tabstop>
+  <tabstop>showGalacticEquatorLineCheckBox</tabstop>
   <tabstop>showConstellationLinesCheckBox</tabstop>
   <tabstop>showConstellationLabelsCheckBox</tabstop>
   <tabstop>showConstellationBoundariesCheckBox</tabstop>

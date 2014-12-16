@@ -30,6 +30,14 @@
 // pre declaration of the ui class
 class Ui_searchDialogForm;
 
+struct stringLengthCompare
+{
+	bool operator()(const QString &s1, const QString &s2) const
+	{
+		return s1.length() < s2.length();
+	}
+};
+
 //! @class CompletionLabel
 //! Display a list of results matching the search string, and allow to
 //! tab through those selections.
@@ -65,18 +73,48 @@ QT_FORWARD_DECLARE_CLASS(QListWidgetItem)
 class SearchDialog : public StelDialog
 {
 	Q_OBJECT
+	Q_ENUMS(CoordinateSystem)
 
 public:
+	//! @enum CoordinateSystem
+	//! Available coordinate systems
+	enum CoordinateSystem
+	{
+		equatorialJ2000,
+		equatorial,
+		horizontal,
+		galactic
+	};
+
 	SearchDialog(QObject* parent);
 	virtual ~SearchDialog();
 	//! Notify that the application style changed
 	void styleChanged();
 	bool eventFilter(QObject *object, QEvent *event);
-	
+
 public slots:
 	void retranslate();
 	//! This style only displays the text search field and the search button
 	void setSimpleStyle();
+
+	//! Set the current coordinate system
+	void setCurrentCoordinateSystem(CoordinateSystem cs)
+	{
+		currentCoordinateSystem = cs;
+	}
+	//! Get the current coordinate system
+	CoordinateSystem getCurrentCoordinateSystem() const
+	{
+		return currentCoordinateSystem;
+	}
+	//! Get the current coordinate system key
+	QString getCurrentCoordinateSystemKey(void) const;
+	//! Set the current coordinate system from its key
+	void setCurrentCoordinateSystemKey(QString key);
+
+	void setCoordinateSystem(int csID);
+	void populateCoordinateSystemsList();
+	void populateCoordinateAxis();
 
 protected:
 	Ui_searchDialogForm* ui;
@@ -118,18 +156,23 @@ private slots:
 	// retranslate/recreate tab
 	void updateListTab();
 
+	void showContextMenu(const QPoint &pt);
+
+	void pasteAndGo();
+
 private:
 	class SimbadSearcher* simbadSearcher;
 	class SimbadLookupReply* simbadReply;
 	QMap<QString, Vec3d> simbadResults;
 	class StelObjectMgr* objectMgr;
+	class QSettings* conf;
 	
 	QString substituteGreek(const QString& keyString);
 	QString getGreekLetterByName(const QString& potentialGreekLetterName);
 	QHash<QString, QString> greekLetters;
 	//! Used when substituting text with a Greek letter.
 	bool flagHasSelectedText;
-	
+
 	bool useStartOfWords;
 	bool useSimbad;
 	//! URL of the server used for SIMBAD queries. 
@@ -137,6 +180,9 @@ private:
 	void populateSimbadServerList();
 	//! URL of the default SIMBAD server (Strasbourg).
 	static const char* DEF_SIMBAD_URL;
+
+	// The current coordinate system
+	CoordinateSystem currentCoordinateSystem;
 };
 
 #endif // _SEARCHDIALOG_HPP_

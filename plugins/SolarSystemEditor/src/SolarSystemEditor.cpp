@@ -58,6 +58,7 @@ StelPluginInfo SolarSystemEditorStelPluginInterface::getPluginInfo() const
 	info.authors = "Bogdan Marinov";
 	info.contact = "http://stellarium.org";
 	info.description = N_("An interface for adding asteroids and comets to Stellarium. It can download object lists from the Minor Planet Center's website and perform searches in its online database. Still a work in progress.");
+	info.version = SOLARSYSTEMEDITOR_VERSION;
 	return info;
 }
 
@@ -418,6 +419,7 @@ bool SolarSystemEditor::removeSsoWithName(QString name)
 SsoElements SolarSystemEditor::readMpcOneLineCometElements(QString oneLineElements)
 {
 	SsoElements result;
+	//qDebug() << "readMpcOneLineCometElements started..."; // GZ
 
 	QRegExp mpcParser("^\\s*(\\d{4})?([A-Z])((?:\\w{6}|\\s{6})?[0a-zA-Z])?\\s+(\\d{4})\\s+(\\d{2})\\s+(\\d{1,2}\\.\\d{3,4})\\s+(\\d{1,2}\\.\\d{5,6})\\s+(\\d\\.\\d{5,6})\\s+(\\d{1,3}\\.\\d{3,4})\\s+(\\d{1,3}\\.\\d{3,4})\\s+(\\d{1,3}\\.\\d{3,4})\\s+(?:(\\d{4})(\\d\\d)(\\d\\d))?\\s+(\\-?\\d{1,2}\\.\\d)\\s+(\\d{1,2}\\.\\d)\\s+(\\S.{1,54}\\S)(?:\\s+(\\S.*))?$");//
 
@@ -469,6 +471,8 @@ SsoElements SolarSystemEditor::readMpcOneLineCometElements(QString oneLineElemen
 	//"comet_orbit" is used for all cases:
 	//"ell_orbit" interprets distances as kilometers, not AUs
 	result.insert("coord_func","comet_orbit");
+	// GZ: moved next line below!
+	//result.insert("orbit_good", 1000); // default validity for osculating elements, days
 
 	result.insert("lighting", false);
 	result.insert("color", "1.0, 1.0, 1.0");
@@ -507,6 +511,18 @@ SsoElements SolarSystemEditor::readMpcOneLineCometElements(QString oneLineElemen
 	double inclination = mpcParser.cap(11).toDouble(&ok);
 	result.insert("orbit_Inclination", inclination);
 
+	// GZ: We should reduce orbit_good for elliptical orbits to one half period before/after perihel!
+	if (eccentricity < 1.0)
+	{
+		// Heafner, p.71
+		const double mu=(0.01720209895*0.01720209895); // GAUSS_GRAV_CONST^2
+		const double meanMotion=std::sqrt(mu/(perihelionDistance*perihelionDistance*perihelionDistance)); // radians/day
+		double period=M_PI*2.0 / meanMotion; // period, days
+		result.insert("orbit_good", qMin(1000, (int) floor(0.5*period))); // validity for elliptical osculating elements, days. Goes from aphel to next aphel or max 1000 days.
+	}
+	else
+		result.insert("orbit_good", 1000); // default validity for osculating elements, days
+
 	double absoluteMagnitude = mpcParser.cap(15).toDouble(&ok);
 	result.insert("absolute_magnitude", absoluteMagnitude);
 
@@ -516,8 +532,11 @@ SsoElements SolarSystemEditor::readMpcOneLineCometElements(QString oneLineElemen
 
 	double radius = 5; //Fictitious
 	result.insert("radius", radius);
-	result.insert("albedo", 1);
-
+	result.insert("albedo", 0.1); // GZ 2014-01-10: Comets are very dark, should even be 0.03!
+	result.insert("dust_lengthfactor", 0.4); // dust tail length w.r.t. gas tail length
+	result.insert("dust_brightnessfactor", 1.5); // dust tail brightness w.r.t. gas tail.
+	result.insert("dust_widthfactor", 1.5); // opening w.r.t. gas tail opening width.
+	//qDebug() << "readMpcOneLineCometElements done\n";
 	return result;
 }
 
@@ -1148,6 +1167,7 @@ QList<SsoElements> SolarSystemEditor::readXEphemOneLineElementsFromFile(QString 
 
 bool SolarSystemEditor::appendToSolarSystemConfigurationFile(QList<SsoElements> objectList)
 {
+	qDebug() << "appendToSolarSystemConfigurationFile begin ... "; // GZ
 	if (objectList.isEmpty())
 	{
 		return false;
@@ -1229,6 +1249,8 @@ bool SolarSystemEditor::appendToSolarSystemConfigurationFile(QList<SsoElements> 
 		}
 
 		solarSystemConfigurationFile.close();
+		qDebug() << "appendToSolarSystemConfigurationFile appended: " << appendedAtLeastOne; // GZ
+
 		return appendedAtLeastOne;
 	}
 	else
@@ -1282,6 +1304,10 @@ bool SolarSystemEditor::updateSolarSystemConfigurationFile(QList<SsoElements> ob
 			<< "orbit_AscendingNode"
 			<< "orbit_Eccentricity"
 			<< "orbit_Epoch"
+			<< "orbit_good"                                // GZ ADDITION (4x)
+			<< "dust_lengthfactor"
+			<< "dust_brightnessfactor"
+			<< "dust_widthfactor"
 			<< "orbit_Inclination"
 			<< "orbit_LongOfPericenter"
 			<< "orbit_MeanAnomaly"

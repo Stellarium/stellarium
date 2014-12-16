@@ -30,7 +30,6 @@
 #include "VecMath.hpp"
 
 #include <QFont>
-#include <QOpenGLFunctions_1_2>
 #include <QSettings>
 
 #define MIN_OCULARS_INI_VERSION 2
@@ -48,7 +47,7 @@ class StelButton;
 class StelAction;
 
 //! Main class of the Oculars plug-in.
-class Oculars : public StelModule, protected QOpenGLFunctions_1_2
+class Oculars : public StelModule
 {
 	Q_OBJECT
 	//BM: Temporary, until the GUI is finalized and some other method of getting
@@ -121,6 +120,12 @@ public slots:
 	void setFlagLimitMagnitude(const bool b);
 	bool getFlagLimitMagnitude(void) const;
 
+	void setFlagInitFovUsage(const bool b);
+	bool getFlagInitFovUsage(void) const;
+
+	void setFlagUseFlipForCCD(const bool b);
+	bool getFlagUseFlipForCCD(void) const;
+
 signals:
 	void selectedCCDChanged();
 	void selectedOcularChanged();
@@ -153,7 +158,6 @@ private:
 	void paintOcularMask(const StelCore * core);
 	//! Renders the three Telrad circles, but only if not in ocular mode.
 	void paintTelrad();
-
 
 	//! Paints the text about the current object selections to the upper right hand of the screen.
 	//! Should only be called from a 'ready' state; currently from the draw() method.
@@ -216,7 +220,7 @@ private:
 	bool flagEclipticJ2000Grid;	//!< Flag to track if EclipticJ2000Grid was displayed at activation.
 	bool flagMeridianLine;		//!< Flag to track if MeridianLine was displayed at activation.
 	bool flagHorizonLine;		//!< Flag to track if HorizonLine was displayed at activation.
-	bool flagGalacticPlaneLine;	//!< Flag to track if GalacticPlaneLine was displayed at activation.
+	bool flagGalacticEquatorLine;	//!< Flag to track if GalacticEquatorLine was displayed at activation.
 	bool flagAdaptation;		//!< Flag to track if adaptationCheckbox was enabled at activation.
 
 	bool flagLimitStars;		//!< Flag to track limit magnitude for stars
@@ -267,7 +271,10 @@ private:
 
 	//Reticle
 	StelTextureSP reticleTexture;
-	double actualFOV; //!< Holds the FOV of the ocular/tescope/lens cobination; what the screen is zoomed to.
+	double actualFOV;		//!< Holds the FOV of the ocular/tescope/lens cobination; what the screen is zoomed to.
+	double initialFOV;		//!< Holds the initial FOV
+	bool flagInitFOVUsage;		//!< Flag used to track if we use default initial FOV (value at the startup of planetarium).
+	bool flagUseFlipForCCD;		//!< Flag used to track if we use flips for CCD
 	double reticleRotation;
 };
 

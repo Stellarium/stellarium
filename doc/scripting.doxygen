@@ -27,7 +27,7 @@
 @section intro_scripts Introduction
 
 Since version 0.10.1, Stellarium includes a scripting feature based on the 
-<a href="http://qt-project.org/doc/qt-4.8/qtscript.html">Qt Scripting Engine</a>.  
+<a href="http://doc.qt.io/qt-5/qtscript-index.html">Qt Scripting Engine</a>.  
 This makes it possible to write small programs within Stellarium to produce 
 presentations, set up custom configurations, and to automate repetitive 
 tasks.  Prior to version 0.10.0, Stellarium used a different scripting engine 
@@ -85,6 +85,7 @@ core.wait(...);
    - SolarSystem
    - StarMgr
    - StelAudioMgr
+   - StelVideoMgr
    - StelMovementMgr
    - StelSkyDrawer
    - StelSkyLayerMgr
@@ -95,6 +96,16 @@ core.wait(...);
 LandscapeMgr.setFlagAtmosphere(true);
 \endcode
   Note: All of these except for StelSkyDrawer are StelModule classes.
+
+@section include_scripts Includes
+
+Stellarium provides mechanism for splitting scripts on different files. Typical functions or 
+list of variables can be stored in separate \b .inc file and used within script through \b include() 
+command:
+\code
+include("common_objects.inc");
+\endcode
+Note: Detailed example can be found <a href="http://bazaar.launchpad.net/~stellarium/stellarium/trunk/view/head:/scripts/constellations_tour.ssc">in Constellations Tour script</a>.
 
 @section script_console Script Console
 

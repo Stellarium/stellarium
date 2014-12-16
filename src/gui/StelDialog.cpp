@@ -27,6 +27,10 @@
 #include <QDialog>
 #include <QGraphicsProxyWidget>
 #include <QStyleOptionGraphicsItem>
+#include <QSettings>
+#ifdef Q_OS_WIN
+	#include <QScroller>
+#endif
 
 class CustomProxy : public QGraphicsProxyWidget
 {
@@ -48,23 +52,29 @@ class CustomProxy : public QGraphicsProxyWidget
 
 		virtual bool event(QEvent* event)
 		{
-			switch (event->type())
+			if (StelApp::getInstance().getSettings()->value("gui/flag_use_window_transparency", true).toBool())
 			{
-				case QEvent::WindowDeactivate:
-					widget()->setWindowOpacity(0.4);
-					break;
-				case QEvent::WindowActivate:
-				case QEvent::GrabMouse:
-					widget()->setWindowOpacity(0.9);
-					break;
-				default:
-					break;
+				switch (event->type())
+				{
+					case QEvent::WindowDeactivate:
+						widget()->setWindowOpacity(0.4);
+						break;
+					case QEvent::WindowActivate:
+					case QEvent::GrabMouse:
+						widget()->setWindowOpacity(0.9);
+						break;
+					default:
+						break;
+				}
 			}
 			return QGraphicsProxyWidget::event(event);
 		}
 };
 
-StelDialog::StelDialog(QObject* parent) : QObject(parent), dialog(NULL)
+StelDialog::StelDialog(QObject* parent)
+	: QObject(parent)
+	, dialog(NULL)
+	, proxy(NULL)
 {
 	if (parent == NULL)
 		setParent(StelMainView::getInstance().getGuiWidget());
@@ -148,3 +158,19 @@ void StelDialog::setVisible(bool v)
 		StelMainView::getInstance().focusSky();
 	}
 }
+
+#ifdef Q_OS_WIN
+void StelDialog::installKineticScrolling(QList<QWidget *> addscroll)
+{
+	return; // Temporary disable feature, bug in Qt: https://bugreports.qt-project.org/browse/QTBUG-41299
+
+	if (StelApp::getInstance().getSettings()->value("gui/flag_enable_kinetic_scrolling", true).toBool() == false)
+		return;
+
+	foreach(QWidget * w, addscroll)
+	{
+		QScroller::grabGesture(w, QScroller::LeftMouseButtonGesture);
+		QScroller::scroller(w);
+	}
+}
+#endif

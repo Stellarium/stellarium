@@ -27,6 +27,8 @@
 /* ********************************************************************* */
 PropertyBasedTableModel::PropertyBasedTableModel(QObject *parent)
 	: QAbstractTableModel(parent)
+	, content(NULL)
+	, modelObject(NULL)
 {
 }
 

@@ -45,7 +45,7 @@ public:
 	//! Shared pointer on a ModelViewTranform instance (implement reference counting)
 	typedef QSharedPointer<ModelViewTranform> ModelViewTranformP;
 
-	//! @class PreModelViewFunc
+	//! @class ModelViewTranform
 	//! Allows to define non linear operations in addition to the standard linear (Matrix 4d) ModelView transformation.
 	class ModelViewTranform
 	{
@@ -93,15 +93,20 @@ public:
 	//! Contains all the param needed to initialize a StelProjector
 	struct StelProjectorParams
 	{
-		StelProjectorParams() : viewportXywh(0, 0, 256, 256),
-										fov(60.f),
-										gravityLabels(false),
-										defautAngleForGravityText(0.f),
-										maskType(MaskNone),
-										viewportCenter(128.f, 128.f),
-										flipHorz(false),
-										flipVert(false),
-										devicePixelsPerPixel(1.f) {;}
+		StelProjectorParams()
+			: viewportXywh(0, 0, 256, 256)
+			, fov(60.f)
+			, gravityLabels(false)
+			, defautAngleForGravityText(0.f)
+			, maskType(MaskNone)
+			, zNear(0.f)
+			, zFar(0.f)
+			, viewportCenter(128.f, 128.f)
+			, viewportFovDiameter(0.f)
+			, flipHorz(false)
+			, flipVert(false)
+			, devicePixelsPerPixel(1.f) {;}
+
 		Vector4<int> viewportXywh;      //! posX, posY, width, height
 		float fov;                      //! FOV in degrees
 		bool gravityLabels;             //! the flag to use gravity labels or not
@@ -276,7 +281,18 @@ public:
 
 protected:
 	//! Private constructor. Only StelCore can create instances of StelProjector.
-	StelProjector(ModelViewTranformP amodelViewTransform) : modelViewTransform(amodelViewTransform) {;}
+	StelProjector(ModelViewTranformP amodelViewTransform)
+		: modelViewTransform(amodelViewTransform),
+		  flipHorz(0.f),
+		  flipVert(0.f),
+		  pixelPerRad(0.f),
+		  maskType(MaskNone),
+		  zNear(0.f),
+		  oneOverZNearMinusZFar(0.f),
+		  viewportFovDiameter(0.f),
+		  gravityLabels(true),
+		  defaultAngleForGravityText(0.f),
+		  devicePixelsPerPixel(1.f) {;}
 
 	//! Return whether the projection presents discontinuities. Used for optimization.
 	virtual bool hasDiscontinuity() const =0;
@@ -301,7 +317,7 @@ protected:
 	Vec2f viewportCenter;               // Viewport center in screen pixel
 	float viewportFovDiameter;          // diameter of the FOV disk in pixel
 	bool gravityLabels;                 // should label text align with the horizon?
-	float defautAngleForGravityText;    // a rotation angle to apply to gravity text (only if gravityLabels is set to false)
+	float defaultAngleForGravityText;   // a rotation angle to apply to gravity text (only if gravityLabels is set to false)
 	SphericalCap boundingCap;           // Bounding cap of the whole viewport
 	float devicePixelsPerPixel;         // The number of device pixel per "Device Independent Pixels" (value is usually 1, but 2 for mac retina screens)
 

@@ -23,13 +23,26 @@
 #include <QDeclarativeView>
 #include <QCoreApplication>
 #include <QEventLoop>
+#include <QOpenGLContext>
 
+// This define (only used here and in StelMainView.cpp) is temporarily used
+// to allow uncompromised compiling while the migration to the new QOpenGL... classes
+// has not been done. As soon as Qt5.4 is out, we should finish this migration process!
+#define STEL_USE_NEW_OPENGL_WIDGETS 0
+
+class QDeclarativeItem;
+#if STEL_USE_NEW_OPENGL_WIDGETS
+class QOpenGLWidget;
+class StelQOpenGLWidget;
+#else
 class QGLWidget;
+class StelQGLWidget;
+#endif
 class QMoveEvent;
 class QResizeEvent;
 class StelGuiBase;
-class StelQGLWidget;
 class QMoveEvent;
+class QSettings;
 
 //! @class StelMainView
 //! Reimplement a QGraphicsView for Stellarium.
@@ -37,6 +50,7 @@ class QMoveEvent;
 class StelMainView : public QDeclarativeView
 {
 	friend class StelGuiItem;
+	friend class StelSkyItem;
 	Q_OBJECT
 	Q_PROPERTY(bool fullScreen READ isFullScreen WRITE setFullScreen)
 
@@ -104,10 +118,13 @@ public slots:
 	//! Get the current maximum frames per second.
 	float getMaxFps() {return maxfps;}
 
+	void maxFpsSceneUpdate();
 	//! Updates the scene and process all events
-	void updateScene() {
-		scene()->update();
-	}
+	void updateScene();
+
+	//! Notify that an event was handled by the program and therefore the
+	//! FPS should be maximized for a couple of seconds.
+	void thereWasAnEvent();
 
 protected:
 	virtual void mouseMoveEvent(QMouseEvent* event);
@@ -117,6 +134,7 @@ protected:
 	virtual void keyReleaseEvent(QKeyEvent* event);
 	virtual void wheelEvent(QWheelEvent* wheelEvent);
 	virtual void moveEvent(QMoveEvent* event);
+	virtual void closeEvent(QCloseEvent* event);
 
 	//! Update the mouse pointer state and schedule next redraw.
 	//! This method is called automatically by Qt.
@@ -137,6 +155,12 @@ private slots:
 private:
 	//! Start the display loop
 	void startMainLoop();
+	
+	//! provide extended OpenGL diagnostics in logfile.
+	void dumpOpenGLdiagnostics() const;
+	//! Startup diagnostics, providing test for various circumstances of bad OS/OpenGL driver combinations
+	//! to provide feedback to the user about bad OpenGL drivers.
+	void processOpenGLdiagnosticsAndWarnings(QSettings *conf) const;
 
 	//! The StelMainView singleton
 	static StelMainView* singleton;
@@ -144,9 +168,14 @@ private:
 	//! This is created by the StelGuiItem, but need to be publicly
 	//! accessible so that StelDialog instances can reparent to it.
 	QGraphicsWidget *guiWidget;
+	QDeclarativeItem* skyItem;
 
 	//! The openGL window
+#if STEL_USE_NEW_OPENGL_WIDGETS
+	StelQOpenGLWidget* glWidget;
+#else
 	StelQGLWidget* glWidget;
+#endif
 	StelGuiBase* gui;
 	class StelApp* stelApp;
 
@@ -159,13 +188,10 @@ private:
 	float cursorTimeout;
 	bool flagCursorTimeout;
 
-	//! Notify that an event was handled by the program and therefore the
-	//! FPS should be maximized for a couple of seconds.
-	void thereWasAnEvent();
-
 	double lastEventTimeSec;
 
 	QTimer* minFpsTimer;
+	bool flagMaxFpsUpdatePending;
 	//! The minimum desired frame rate in frame per second.
 	float minfps;
 	//! The maximum desired frame rate in frame per second.
