@@ -32,7 +32,7 @@
 //! and can be loaded from special .ini files in a scene's folder.
 struct SceneInfo
 {
-	SceneInfo() : location(),id(),name(),description()
+	SceneInfo() : id(),name(),description(),location()
 	{}
 	//! ID of the scene (relative directory)
 	QString id;
