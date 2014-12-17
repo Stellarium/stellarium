@@ -83,6 +83,9 @@ public slots:
     //! Loads (or reloads) the required shaders from the shader files.
     void loadShaders();
 
+    //! Display text message on screen, fade out automatically
+    void showMessage(const QString& message);
+
     //! Enables/Disables the plugin
     void setEnableScene(const bool val);
     bool getEnableScene() const {return flagEnabled; }
@@ -124,9 +127,6 @@ private slots:
     void clearMessage();
 
 private:
-    //! Display text message on screen, fade out automatically
-    void showMessage(const QString& message);
-
     //! Loads config values from app settings
     void loadConfig();
     //! Creates all actions required by the plugin

@@ -63,7 +63,7 @@ Scenery3dMgr::Scenery3dMgr() :
     connect(messageTimer, SIGNAL(timeout()), this, SLOT(clearMessage()));
 
     //create scenery3d object
-    scenery3d = new Scenery3d();
+    scenery3d = new Scenery3d(this);
 }
 
 Scenery3dMgr::~Scenery3dMgr()
@@ -238,6 +238,7 @@ void Scenery3dMgr::createActions()
 	addAction("actionShow_Scenery3d_debuginfo", groupName, N_("Toggle debug information"), this, "enableDebugInfo","Ctrl+R, D");
 	addAction("actionShow_Scenery3d_locationinfo", groupName, N_("Toggle location text"), this, "enableLocationInfo","Ctrl+R, T");
 	addAction("actionShow_Scenery3d_torchlight", groupName, N_("Toggle torchlight"), this, "enableTorchLight", "Ctrl+R, L");
+	addAction("actionReload_Scenery3d_shaders", groupName, N_("Reload shaders"), this, "loadShaders", "Ctrl+R, P");
 }
 
 void Scenery3dMgr::loadShaders()
