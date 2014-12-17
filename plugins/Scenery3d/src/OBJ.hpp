@@ -89,7 +89,7 @@ public:
             emission[2] = 0.0f;
             emission[3] = 0.0f;
             shininess = 0.0f;
-            alpha = 0.0f;
+	    alpha = 1.0f;
             illum = DIFFUSE;
             textureName.clear();
             texture.clear();
@@ -101,6 +101,7 @@ public:
         //! Material name
         QString name;
         //! Ka, Kd, Ks, Ke
+	//TODO remove 4. component, not used anyway and obj only supports 3 components.
         float ambient[4];
         float diffuse[4];
         float specular[4];
@@ -208,21 +209,6 @@ public:
     //! Legacy fixed-function binding, will be removed when changing to shader-based render
     void bindGLFixedFunction();
     void unbindGLFixedFunction();
-
-    //! Enum for OpenGL shader attribute locations
-    enum ATTLOC
-    {
-	    //! This is the OpenGL attribute location where vertex positions are mapped to
-	    ATTLOC_VERTEX,
-	    //! This is the OpenGL attribute location where vertex texture coordinates are mapped to
-	    ATTLOC_TEXTURE,
-	    //! This is the OpenGL attribute location where vertex normals are mapped to
-	    ATTLOC_NORMAL,
-	    //! This is the OpenGL attribute location where vertex tangents are mapped to
-	    ATTLOC_TANGENT,
-	    //! This is the OpenGL attribute location where vertex bitangents are mapped to
-	    ATTLOC_BITANGENT
-    };
 
     //! Set up some stuff that requires a valid OpenGL context.
     static void setupGL();

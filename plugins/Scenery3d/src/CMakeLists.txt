@@ -28,6 +28,8 @@ SET(Scenery3d_SRCS
     Scenery3dMgr.cpp
     gui/Scenery3dDialog.hpp
     gui/Scenery3dDialog.cpp
+	ShaderManager.hpp
+	ShaderManager.cpp
     OBJ.hpp
     OBJ.cpp
     Util.hpp

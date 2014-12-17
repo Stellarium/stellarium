@@ -30,16 +30,20 @@
 #include "Frustum.hpp"
 #include "Polyhedron.hpp"
 #include "SceneInfo.hpp"
+#include "ShaderManager.hpp"
+
+#include <QMatrix4x4>
 
 //predeclarations
 class QOpenGLFramebufferObject;
+class Scenery3dMgr;
 
 //! Representation of a complete 3D scenery
 class Scenery3d
 {
 public:
     //! Initializes an empty Scenery3d object.
-    Scenery3d();
+    Scenery3d(Scenery3dMgr *parent);
     virtual ~Scenery3d();
 
     //! Sets the shaders for the plugin
@@ -109,7 +113,9 @@ public:
     int drawn;
 
 private:
+    Scenery3dMgr* parent;
     SceneInfo currentScene;
+    ShaderManager shaderManager;
 
     float torchBrightness; // ^L toggle light brightness
 
@@ -174,8 +180,6 @@ private:
     Vec3d sunPosition;
     //Scene AABB
     AABB sceneBoundingBox;
-    //Camera Frustum
-    Frustum cFrust;
 
     //Shadow Map FBO handles
     QVector<GLuint> shadowFBOs;
@@ -208,7 +212,7 @@ private:
     void generateCubeMap();
     void generateCubeMap_drawScene();
     void generateCubeMap_drawSceneWithShadows();
-    void drawArrays(bool textures=true);
+    void drawArrays(bool shading=true);
     void drawFromCubeMap();
 
     //! @return height at -absolutePosition, which is the current eye point.
@@ -229,12 +233,17 @@ private:
     ///! Cleans up shadowmapping related objects
     void deleteShadowmapping();
 
+    //! Sets up shader uniforms constant over the whole frame (except transformations)
+    void setupFrameUniforms(QOpenGLShaderProgram *shader);
+    //! Sets up shader uniforms specific to one material
+    void setupMaterialUniforms(QOpenGLShaderProgram *shader, const OBJ::Material& mat);
+
     //Sends texture data to the shader based on which effect is selected;
     void sendToShader(const OBJ::StelModel* pStelModel, Effect cur, bool& tangEnabled, int& tangLocation);
     //Binds the shader for the selected effect
     void bindShader();
-    //Prepare ambient and directional light components from Sun, Moon, Venus.
-    Scenery3d::ShadowCaster setupLights(float &ambientBrightness, float &diffuseBrightness, Vec3f &lightsourcePosition);
+    //! Finds the correct light source out of Sun, Moon, Venus, and returns ambient and directional light components.
+    Scenery3d::ShadowCaster calculateLightSource(float &ambientBrightness, float &diffuseBrightness, Vec3f &lightsourcePosition);
     //Set independent brightness factors (allow e.g. solar twilight ambient&lunar specular). Call setupLights first!
     void setLights(float ambientBrightness, float diffuseBrightness);
 
@@ -249,10 +258,20 @@ private:
     //Computes the light projection values
     void computeOrthoProjVals();
 
+    inline QMatrix4x4 convertToQMatrix(const Mat4d& mat);
 
     //! Loads the model contained in the current scene
     void loadModel();
     //TODO FS: only temporary, will be removed
     void nogluLookAt(double eyeX,  double eyeY,  double eyeZ,  double centerX,  double centerY,  double centerZ,  double upX,  double upY,  double upZ);
 };
+
+QMatrix4x4 Scenery3d::convertToQMatrix(const Mat4d &mat)
+{
+	return QMatrix4x4( mat.r[0], mat.r[4], mat.r[8],mat.r[12],
+			   mat.r[1], mat.r[5], mat.r[9],mat.r[13],
+			   mat.r[2], mat.r[6],mat.r[10],mat.r[14],
+			   mat.r[3], mat.r[7],mat.r[11],mat.r[15] );
+}
+
 #endif

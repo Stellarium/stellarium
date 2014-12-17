@@ -67,14 +67,16 @@
 //If FARZ is too small for your model change it up
 #define FARZ 15000.0f
 
+//macro for easier uniform setting
+#define SET_UNIFORM(shd,uni,val) shd->setUniformValue(shaderManager.getUniformLocation(shd,ShaderManager::uni),val)
 
 static const float AMBIENT_BRIGHTNESS_FACTOR=0.05f;
 static const float LUNAR_BRIGHTNESS_FACTOR=0.2f;
 static const float VENUS_BRIGHTNESS_FACTOR=0.005f;
 
 
-Scenery3d::Scenery3d()
-    : currentScene(),torchBrightness(0.5f),cubemapSize(1024),shadowmapSize(1024),
+Scenery3d::Scenery3d(Scenery3dMgr* parent)
+    : parent(parent), currentScene(),torchBrightness(0.5f),cubemapSize(1024),shadowmapSize(1024),
       absolutePosition(0.0, 0.0, 0.0), movement(0.0f,0.0f,0.0f),core(NULL),heightmap(NULL)
 {
 	qDebug()<<"Scenery3d constructor...";
@@ -302,9 +304,6 @@ void Scenery3d::loadModel()
         //finally, set core to enable update().
         this->core=StelApp::getInstance().getCore();
 
-	//Add matrix to get into grid space
-        cFrust.m = zRot2Grid;
-
         //Find a good splitweight based on the scene's size
         float maxSize = -std::numeric_limits<float>::max();
         maxSize = std::max(sceneBoundingBox.max.v[0], maxSize);
@@ -323,6 +322,8 @@ void Scenery3d::loadModel()
 
 void Scenery3d::handleKeys(QKeyEvent* e)
 {
+	//TODO FS maybe move this to Mgr, so that input is separate from rendering and scene management?
+
     if ((e->type() == QKeyEvent::KeyPress) && (e->modifiers() & Qt::ControlModifier))
     {
         // Pressing CTRL+ALT: 5x, CTRL+SHIFT: 10x speedup; CTRL+SHIFT+ALT: 50x!
@@ -363,7 +364,8 @@ void Scenery3d::saveFrusts()
 }
 
 void Scenery3d::setLights(float ambientBrightness, float diffuseBrightness)
-{   // N.B. ambientBrightness for flat shading, diffuse brightness also casts shadows!
+{
+    //if the night vision mode is on, use red-tinted lighting
     bool red=StelApp::getInstance().getVisionModeNight();
     //lightBrightness *= 0.5f; // GZ: WE WILL SEE...
     //GZ: to achieve brighter surfaces and shadow effect, we use sqrt(diffuseBrightness):
@@ -572,9 +574,6 @@ void Scenery3d::update(double deltaTime)
 
         //View Position is already in world-grid space
         viewPos = -absolutePosition;
-
-        //Calculate the Frustum for the current camera
-        cFrust.calcFrustum(viewPos, viewDir, viewUp);
     }
 }
 
@@ -587,98 +586,119 @@ float Scenery3d::groundHeight()
     }
 }
 
-void Scenery3d::drawArrays(bool textures)
+void Scenery3d::setupFrameUniforms(QOpenGLShaderProgram *shader)
 {
-	//TODO FS: ditch fixed-function PL and client side state, replace with shader-based OpenGL and buffers!
+	//Lighting setup
 
+	//calculate which light source we need + intensity
+	float ambientBrightness, directionalBrightness; // was: lightBrightness;
+	Vec3f lightsourcePosition; //should be normalized already
+	ShadowCaster caster = calculateLightSource(ambientBrightness, directionalBrightness, lightsourcePosition);
+
+	//if the night vision mode is on, use red-tinted lighting
+	bool red=StelApp::getInstance().getVisionModeNight();
+
+	//for now, lighting is only white
+	QVector3D ambient(ambientBrightness,ambientBrightness, ambientBrightness);
+	QVector3D diffuse(directionalBrightness,directionalBrightness,directionalBrightness);
+
+	if(red)
+	{
+		ambient = QVector3D(ambientBrightness,0,0);
+		diffuse = QVector3D(directionalBrightness,0,0);
+	}
+
+
+	SET_UNIFORM(shader,ShaderManager::UNIFORM_LIGHT_DIRECTION,QVector3D(lightsourcePosition.v[0],lightsourcePosition.v[1],lightsourcePosition.v[2]));
+	SET_UNIFORM(shader,ShaderManager::UNIFORM_LIGHT_AMBIENT,ambient);
+	SET_UNIFORM(shader,ShaderManager::UNIFORM_LIGHT_DIFFUSE,diffuse);
+
+	if(caster != None && shadowsEnabled)
+	{
+		//setup shadow related state
+
+		//Calculate texture matrix for projection
+		//This matrix takes us from eye space to the light's clip space
+		//It is postmultiplied by the inverse of the current view matrix when specifying texgen
+		static Mat4f biasMatrix(0.5f, 0.0f, 0.0f, 0.0f,
+					0.0f, 0.5f, 0.0f, 0.0f,
+					0.0f, 0.0f, 0.5f, 0.0f,
+					0.5f, 0.5f, 0.5f, 1.0f);	//bias from [-1, 1] to [0, 1]
+
+		//Holds the squared frustum splits necessary for the lookup in the shader
+		Vec4f squaredSplits = Vec4f(0.0f);
+		for(int i=0; i<frustumSplits; i++)
+		{
+		    squaredSplits.v[i] = frustumArray.at(i).zFar * frustumArray.at(i).zFar;
+
+		    //Bind current depth map texture
+		    glActiveTexture(GL_TEXTURE3+i);
+		    glBindTexture(GL_TEXTURE_2D, shadowMapsArray.at(i));
+
+		    //Compute texture matrix
+		    Mat4f texMat = biasMatrix * shadowCPM.at(i);
+
+		    //Send to shader
+		    //SET_UNIFORM(curShader,ShaderManager::UNIFORM_TEX_SHADOW0+i, 3+i);
+		    //glUniformMatrix4fv( ShaderManager::getUniformLocation(curShader,ShaderManager::UNIFORM_MAT_SHADOW0 +i),1,GL_FALSE,texMat.r);
+		}
+	}
+}
+
+void Scenery3d::setupMaterialUniforms(QOpenGLShaderProgram* shader, const OBJ::Material &mat)
+{
+	//send off material parameters without further changes for now
+	glUniform3fv(shaderManager.getUniformLocation(shader,ShaderManager::UNIFORM_MTL_AMBIENT),1,mat.ambient);
+	glUniform3fv(shaderManager.getUniformLocation(shader,ShaderManager::UNIFORM_MTL_DIFFUSE),1,mat.diffuse);
+	glUniform3fv(shaderManager.getUniformLocation(shader,ShaderManager::UNIFORM_MTL_SPECULAR),1,mat.specular);
+
+	//set alpha
+	SET_UNIFORM(shader,ShaderManager::UNIFORM_MTL_ALPHA,mat.alpha);
+
+	if(mat.texture)
+	{
+		glActiveTexture(GL_TEXTURE0);
+		mat.texture->bind();
+		SET_UNIFORM(shader,ShaderManager::UNIFORM_TEX_DIFFUSE,0);
+		//shader->setUniformValue(shaderManager.getUniformLocation(shader,ShaderManager::UNIFORM_TEX_DIFFUSE),0);
+	}
+}
+
+void Scenery3d::drawArrays(bool shading)
+{
     drawn = 0;
 
-    const GLfloat zero[] = {0.0f, 0.0f, 0.0f, 1.0f};
-    const GLfloat amb[] = {0.025f, 0.025f, 0.025f, 1.0f};
-    glLightModelfv(GL_LIGHT_MODEL_AMBIENT, amb); // tiny overall background light
-
-    bool tangEnabled = false;
-    int tangLocation;
+    //bind VAO
+    objModel.bindGL();
 
     for(int i=0; i<objModel.getNumberOfStelModels(); i++)
     {
+	    //TODO optimize: clump models with same material together when first loading to minimize state changes
 	const OBJ::StelModel* pStelModel = &objModel.getStelModel(i);
         const OBJ::Material* pMaterial = pStelModel->pMaterial;
 
-        if(textures)
+	if(shading)
         {
-            sendToShader(pStelModel, curEffect, tangEnabled, tangLocation);
+		setupMaterialUniforms(curShader,*pMaterial);
         }
 
-        if(pMaterial->illum == OBJ::TRANSLUCENT)
+	if(shading && pMaterial->illum == OBJ::TRANSLUCENT)
         {
-            glMaterialfv(GL_FRONT, GL_SPECULAR, zero);
-            glMaterialf(GL_FRONT, GL_SHININESS, 0.0f);
             glEnable(GL_BLEND);
             glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-            glColorMaterial(GL_FRONT, GL_AMBIENT_AND_DIFFUSE);
-            glEnable(GL_COLOR_MATERIAL);
-            glColor4f(pMaterial->diffuse[0], pMaterial->diffuse[1], pMaterial->diffuse[2], pMaterial->alpha);
-        }
-        else
-        {
-            glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, pMaterial->diffuse);
-            glMaterialfv(GL_FRONT, GL_SPECULAR, zero);
-            glMaterialf(GL_FRONT, GL_SHININESS, 0.0f);
-        }
+	}
 
-        if(pMaterial->illum == OBJ::DIFFUSE_AND_AMBIENT) // May make funny effects! [Note the reversed logic!]
-        {
-            glMaterialfv(GL_FRONT, GL_AMBIENT, pMaterial->ambient);
-        }
-
-        if(pMaterial->illum == OBJ::SPECULAR)
-        {
-            glMaterialfv(GL_FRONT, GL_AMBIENT, pMaterial->ambient);
-            // GZ: This should enable specular color effects with colored and textured models.
-            glMaterialfv(GL_FRONT, GL_SPECULAR, pMaterial->specular);
-            glMaterialf(GL_FRONT, GL_SHININESS, pMaterial->shininess);
-            glLightModeli(GL_LIGHT_MODEL_COLOR_CONTROL, GL_SEPARATE_SPECULAR_COLOR); // test how expensive this is.
-            glLightModeli(GL_LIGHT_MODEL_LOCAL_VIEWER, 1); // Useful for Specular effects, change to 0 if too expensive
-        }
-        else
-        {
-            glLightModeli(GL_LIGHT_MODEL_COLOR_CONTROL, GL_SINGLE_COLOR);
-            glLightModeli(GL_LIGHT_MODEL_LOCAL_VIEWER, 0);
-        }        
-
-	objModel.bindGLFixedFunction();
 	glDrawElements(GL_TRIANGLES, pStelModel->triangleCount * 3, GL_UNSIGNED_INT, reinterpret_cast<const void*>(pStelModel->startIndex * sizeof(unsigned int)));
-	objModel.unbindGLFixedFunction();
 
-        if(pMaterial->illum == OBJ::TRANSLUCENT)
+	if(shading && pMaterial->illum == OBJ::TRANSLUCENT)
         {
-            glDisable(GL_BLEND);
-            glDisable(GL_COLOR_MATERIAL);
-        }
-
-        if(tangEnabled)
-        {
-            glDisableVertexAttribArray(tangLocation);
+	    glDisable(GL_BLEND);
         }
 
     }
 
-    //cFrust.drawFrustum();
-    //renderFrustum(painter);
-    //renderSceneAABB(painter);
-
-//    for(unsigned int i=0; i<focusBodies.size() && textures; i++)
-//    {
-//        if(focusBodies[i]->getVertCount())
-//        {
-//            AABB bb;
-//            for(unsigned int j=0; j<focusBodies[i]->getVertCount(); j++)
-//                bb.expand(focusBodies[i]->getVerts()[j]);
-
-//            bb.render();
-//        }
-//    }
+    //release VAO
+    objModel.unbindGL();
 }
 
 void Scenery3d::sendToShader(const OBJ::StelModel* pStelModel, Effect cur, bool& tangEnabled, int& tangLocation)
@@ -785,12 +805,12 @@ void Scenery3d::sendToShader(const OBJ::StelModel* pStelModel, Effect cur, bool&
 void Scenery3d::generateCubeMap_drawScene()
 {
     //Bind shader based on selected effect flags
-    bindShader();
+    //bindShader();
 
     drawArrays(true);
 
     //Unbind
-    glUseProgram(0);
+    //glUseProgram(0);
 }
 
 void Scenery3d::bindShader()
@@ -1209,7 +1229,7 @@ void Scenery3d::generateShadowMap()
     glColorMask(1, 1, 1, 1);
 }
 
-Scenery3d::ShadowCaster  Scenery3d::setupLights(float &ambientBrightness, float &directionalBrightness, Vec3f &lightsourcePosition)
+Scenery3d::ShadowCaster  Scenery3d::calculateLightSource(float &ambientBrightness, float &directionalBrightness, Vec3f &lightsourcePosition)
 {
     SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
     Vec3d sunPosition = ssystem->getSun()->getAltAzPosAuto(core);
@@ -1370,7 +1390,7 @@ void Scenery3d::generateCubeMap()
 
     float ambientBrightness, directionalBrightness;
     Vec3f lightsourcePosition;
-    ShadowCaster shadows=setupLights(ambientBrightness, directionalBrightness, lightsourcePosition);
+    ShadowCaster shadows=calculateLightSource(ambientBrightness, directionalBrightness, lightsourcePosition);
     // GZ: These signs were suspiciously -/-/+ before.
     const GLfloat LightPosition[]= {lightsourcePosition.v[0], lightsourcePosition.v[1], lightsourcePosition.v[2], 0.0f} ;// signs determined by experiment
 
@@ -1383,8 +1403,6 @@ void Scenery3d::generateCubeMap()
                     0, f, 0, 0,
                     0, 0, (zFar + zNear) / (zNear - zFar), 2.0 * zFar * zNear / (zNear - zFar),
                     0, 0, -1, 0);
-
-    cFrust.setCamInternals(fov, aspect, 1.0, 10000.0);
 
     glPushAttrib(GL_VIEWPORT_BIT);
     glViewport(0, 0, cubemapSize, cubemapSize);
@@ -1530,77 +1548,58 @@ void Scenery3d::drawObjModel() // for Perspective Projection only!
     if(!hasModels)
         return;
 
+    //we only need 1 shader for this
+    curShader->bind();
+
+    //calculate standard perspective projection matrix, use QMatrix4x4 for that
     const StelProjectorP prj = core->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
-
-    //TODO FS remove matrix stack, replace with manual MV and P matrices
-
-    //glEnable(GL_MULTISAMPLE); // enabling multisampling aka Anti-Aliasing
-    glEnable(GL_BLEND);
-    glEnable(GL_TEXTURE_2D);
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-    glEnable(GL_DEPTH_TEST);
-    glDepthFunc(GL_LEQUAL);
-    glDepthMask(GL_TRUE);
-    glEnable(GL_LIGHTING);
-    glEnable(GL_LIGHT0);
-    glShadeModel(GL_SMOOTH);
-
-    float ambientBrightness, directionalBrightness; // was: lightBrightness;
-    Vec3f lightsourcePosition;
-    ShadowCaster shadows=setupLights(ambientBrightness, directionalBrightness, lightsourcePosition);
-
-    // GZ: These were -/-/+ before!
-    const GLfloat LightPosition[]= {lightsourcePosition.v[0], lightsourcePosition.v[1], lightsourcePosition.v[2], 0.0f} ;// signs determined by experiment
-
-    glClear(GL_DEPTH_BUFFER_BIT);
-
     float fov = prj->getFov();
     float aspect = (float)prj->getViewportWidth() / (float)prj->getViewportHeight();
     float zNear = 1.0f;
     float zFar = 10000.0f;
     float f = 2.0 / tan(fov * M_PI / 360.0);
-    Mat4d projMatd(f / aspect, 0, 0, 0,
-                   0, f, 0, 0,
-                   0, 0, (zFar + zNear) / (zNear - zFar), 2.0 * zFar * zNear / (zNear - zFar),
-                   0, 0, -1, 0);
+    QMatrix4x4 proj(f / aspect, 0, 0, 0,
+		    0, f, 0, 0,
+		    0, 0, (zFar + zNear) / (zNear - zFar), -1,
+		    0, 0, 2.0 * zFar * zNear / (zNear - zFar), 0  );
 
-    StelProjector::StelProjectorParams projectorParams = core->getCurrentStelProjectorParams();
-    cFrust.setCamInternals(projectorParams.fov, aspect, projectorParams.zNear, 30);
+    curShader->setUniformValue(shaderManager.getUniformLocation(curShader,ShaderManager::UNIFORM_MAT_PROJECTION), proj);
 
-    glMatrixMode(GL_PROJECTION);
-    glPushMatrix();
-    glLoadIdentity();
-    glMultMatrixd(projMatd);
-    glMatrixMode(GL_MODELVIEW);
-    glPushMatrix();
-    glLoadIdentity();
-    //glMultMatrixd(prj->getModelViewMatrix());
-    glMultMatrixd(prj->getModelViewTransform()->getApproximateLinearTransfo());
-    glTranslated(absolutePosition.v[0], absolutePosition.v[1], absolutePosition.v[2]);
+    //set modelview transform
+    QMatrix4x4 mv = convertToQMatrix( prj->getModelViewTransform()->getApproximateLinearTransfo() );
+    mv.optimize();
+    mv.translate(absolutePosition.v[0],absolutePosition.v[1],absolutePosition.v[2]);
+    curShader->setUniformValue(shaderManager.getUniformLocation(curShader,ShaderManager::UNIFORM_MAT_MODELVIEW), mv);
 
-    glLightfv(GL_LIGHT0, GL_POSITION, LightPosition);
+    QMatrix3x3 normal = mv.normalMatrix();
+    //this macro saves a bit of writing
+    SET_UNIFORM(curShader,ShaderManager::UNIFORM_MAT_NORMAL,normal);
 
-    setLights(ambientBrightness, directionalBrightness);
+    //setup other frame-constant uniforms (ex. lighting)
+    setupFrameUniforms(curShader);
+
+
+    // GZ: These were -/-/+ before!
+    //const GLfloat LightPosition[]= {lightsourcePosition.v[0], lightsourcePosition.v[1], lightsourcePosition.v[2], 0.0f} ;// signs determined by experiment
+
+    //depth test needs enabling, clear depth buffer
+    glEnable(GL_DEPTH_TEST);
+    glDepthFunc(GL_LEQUAL);
+    glDepthMask(GL_TRUE);
+    glClear(GL_DEPTH_BUFFER_BIT);
 
     //testMethod();
     //GZ: The following calls apparently require the full cubemap. TODO: Verify and simplify
-    if (shadows) {
-	generateCubeMap_drawSceneWithShadows();
-    } else {
+    //if (shadows) {
+//	generateCubeMap_drawSceneWithShadows();
+  //  } else {
 	generateCubeMap_drawScene();
-    }
+//    }
 
-    glMatrixMode(GL_MODELVIEW);
-    glPopMatrix();
-    glMatrixMode(GL_PROJECTION);
-    glPopMatrix();
-
-    glDisable(GL_LIGHT0);
-    glDisable(GL_LIGHTING);
     glDepthMask(GL_FALSE);
     glDisable(GL_DEPTH_TEST);
-    glDisable(GL_TEXTURE_2D);
-    //glDisable(GL_BLEND);
+
+    curShader->release();
 }
 
 void Scenery3d::drawCoordinatesText()
@@ -1830,6 +1829,16 @@ void Scenery3d::initShadowmapping()
 
 void Scenery3d::draw(StelCore* core)
 {
+	//get a shader from shadermgr that fits the current state
+	curShader = shaderManager.getShader(false,shadowsEnabled,bumpsEnabled);
+
+	if(!curShader)
+	{
+		//shader invalid, can't draw
+		parent->showMessage("Scenery3d shader error, can't draw. Check debug output for details.");
+		return;
+	}
+
     if (shadowsEnabled)
     {
 	generateShadowMap();
