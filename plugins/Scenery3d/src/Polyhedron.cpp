@@ -27,16 +27,17 @@
 
 Polyhedron::Polyhedron()
 {
-    clear();
+
 }
 
 Polyhedron::~Polyhedron()
 {
-    clear();
+
 }
 
 void Polyhedron::clear()
 {
+	//TODO this frees the used memory, but about the same number of objects will get re-added soon after in a loop, leading to unnecssary reallocations. optimize?
     polygons.clear();
     uniqueVerts.clear();
 }
