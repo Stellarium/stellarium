@@ -363,20 +363,6 @@ void Scenery3d::saveFrusts()
     }
 }
 
-void Scenery3d::setLights(float ambientBrightness, float diffuseBrightness)
-{
-    //if the night vision mode is on, use red-tinted lighting
-    bool red=StelApp::getInstance().getVisionModeNight();
-    //lightBrightness *= 0.5f; // GZ: WE WILL SEE...
-    //GZ: to achieve brighter surfaces and shadow effect, we use sqrt(diffuseBrightness):
-    // NO LONGER - this had been done already...
-    //float diffBrightness=std::sqrt(diffuseBrightness);
-    const GLfloat LightAmbient[] = {ambientBrightness, (red? 0 : ambientBrightness), (red? 0 : ambientBrightness), 1.0f};
-    const GLfloat LightDiffuse[] = {diffuseBrightness, (red? 0 : diffuseBrightness), (red? 0 : diffuseBrightness), 1.0f};
-    glLightfv(GL_LIGHT0, GL_AMBIENT, LightAmbient);
-    glLightfv(GL_LIGHT0, GL_DIFFUSE, LightDiffuse);
-}
-
 void Scenery3d::setSceneAABB(const AABB& bbox)
 {
     sceneBoundingBox = bbox;
@@ -586,45 +572,18 @@ float Scenery3d::groundHeight()
     }
 }
 
-void Scenery3d::setupFrameUniforms(QOpenGLShaderProgram *shader)
+void Scenery3d::setupPassUniforms(QOpenGLShaderProgram *shader)
 {
-	//transform setup
-	//this macro saves a bit of writing
-	SET_UNIFORM(shader,ShaderManager::UNIFORM_MAT_MODELVIEW, modelViewMatrix);
-	//this macro saves a bit of writing
-	SET_UNIFORM(shader,ShaderManager::UNIFORM_MAT_NORMAL, normalMatrix);
+	//send projection matrix
+	SET_UNIFORM(shader,ShaderManager::UNIFORM_MAT_PROJECTION, projectionMatrix);
 
-	//Lighting setup
+	//send light strength
+	SET_UNIFORM(shader,ShaderManager::UNIFORM_LIGHT_AMBIENT,lightInfo.ambient);
+	SET_UNIFORM(shader,ShaderManager::UNIFORM_LIGHT_DIFFUSE,lightInfo.directional);
 
-	//calculate which light source we need + intensity
-	float ambientBrightness, directionalBrightness; // was: lightBrightness;
-	Vec3f lightsourcePosition; //should be normalized already
-	ShadowCaster caster = calculateLightSource(ambientBrightness, directionalBrightness, lightsourcePosition);
-
-	//light direction must be transformed into view space, do this here instead of in shader for each vtx
-	QVector3D lightDirView = normalMatrix * QVector3D(lightsourcePosition.v[0],lightsourcePosition.v[1],lightsourcePosition.v[2]);
-
-	//if the night vision mode is on, use red-tinted lighting
-	bool red=StelApp::getInstance().getVisionModeNight();
-
-	//for now, lighting is only white
-	QVector3D ambient(ambientBrightness,ambientBrightness, ambientBrightness);
-	QVector3D diffuse(directionalBrightness,directionalBrightness,directionalBrightness);
-
-	if(red)
+	//-- Shadowing setup --
+	if(lightInfo.source != None && shadowsEnabled)
 	{
-		ambient = QVector3D(ambientBrightness,0,0);
-		diffuse = QVector3D(directionalBrightness,0,0);
-	}
-
-	SET_UNIFORM(shader,ShaderManager::UNIFORM_LIGHT_DIRECTION,lightDirView);
-	SET_UNIFORM(shader,ShaderManager::UNIFORM_LIGHT_AMBIENT,ambient);
-	SET_UNIFORM(shader,ShaderManager::UNIFORM_LIGHT_DIFFUSE,diffuse);
-
-	if(caster != None && shadowsEnabled)
-	{
-		//setup shadow related state
-
 		//Calculate texture matrix for projection
 		//This matrix takes us from eye space to the light's clip space
 		//It is postmultiplied by the inverse of the current view matrix when specifying texgen
@@ -653,6 +612,36 @@ void Scenery3d::setupFrameUniforms(QOpenGLShaderProgram *shader)
 	}
 }
 
+void Scenery3d::setupFrameUniforms(QOpenGLShaderProgram *shader)
+{
+	//-- Transform setup --
+	//check if shader wants a MVP or separate matrices
+	GLint loc = shaderManager.getUniformLocation(shader,ShaderManager::UNIFORM_MAT_MVP);
+	if(loc>=0)
+	{
+		shader->setUniformValue(loc,projectionMatrix * modelViewMatrix);
+	}
+	else
+	{
+		//note that we DO NOT set the projection matrix here, done in setupPassUniforms already
+
+		//this macro saves a bit of writing
+		SET_UNIFORM(shader,ShaderManager::UNIFORM_MAT_MODELVIEW, modelViewMatrix);
+	}
+
+	//-- Lighting setup --
+	//check if we require a normal matrix
+	loc = shaderManager.getUniformLocation(shader,ShaderManager::UNIFORM_MAT_NORMAL);
+	if(loc>=0)
+	{
+		QMatrix3x3 normalMatrix = modelViewMatrix.normalMatrix();
+		shader->setUniformValue(loc,normalMatrix);
+
+		//assume light direction is only required when normal matrix is also used (would not make much sense alone)
+		SET_UNIFORM(shader,ShaderManager::UNIFORM_LIGHT_DIRECTION, normalMatrix * lightInfo.lightDirectionWorld);
+	}
+}
+
 void Scenery3d::setupMaterialUniforms(QOpenGLShaderProgram* shader, const OBJ::Material &mat)
 {
 	//send off material parameters without further changes for now
@@ -672,46 +661,65 @@ void Scenery3d::setupMaterialUniforms(QOpenGLShaderProgram* shader, const OBJ::M
 	}
 }
 
-void Scenery3d::drawArrays(bool shading)
+void Scenery3d::drawArrays(bool shading, bool blendAlphaAdditive)
 {
-    drawn = 0;
+	drawn = 0;
 
-    //bind VAO
-    objModel.bindGL();
+	//bind VAO
+	objModel.bindGL();
 
-    for(int i=0; i<objModel.getNumberOfStelModels(); i++)
-    {
-	    //TODO optimize: clump models with same material together when first loading to minimize state changes
-	const OBJ::StelModel* pStelModel = &objModel.getStelModel(i);
-        const OBJ::Material* pMaterial = pStelModel->pMaterial;
+	//TODO optimize: clump models with same material together when first loading to minimize state changes
+	const OBJ::Material* lastMaterial = NULL;
+	bool blendEnabled = false;
+	for(int i=0; i<objModel.getNumberOfStelModels(); i++)
+	{
 
-	if(shading)
-        {
-		setupMaterialUniforms(curShader,*pMaterial);
-        }
+		const OBJ::StelModel* pStelModel = &objModel.getStelModel(i);
+		const OBJ::Material* pMaterial = pStelModel->pMaterial;
 
-	if(shading && pMaterial->illum == OBJ::TRANSLUCENT)
-        {
-            glEnable(GL_BLEND);
-            glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		if(shading && lastMaterial!=pMaterial)
+		{
+			setupMaterialUniforms(curShader,*pMaterial);
+			lastMaterial = pMaterial;
+
+			if(pMaterial->illum == OBJ::TRANSLUCENT )
+			{
+				//TODO provide Z-sorting for transparent objects (center of bounding box should be fine)
+				if(!blendEnabled)
+				{
+					glEnable(GL_BLEND);
+					if(blendAlphaAdditive)
+						glBlendFuncSeparate(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
+					else //traditional direct blending
+						glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+					blendEnabled = true;
+				}
+			}
+			else
+			{
+				if(blendEnabled)
+				{
+					glDisable(GL_BLEND);
+					blendEnabled=false;
+				}
+			}
+		}
+
+		glDrawElements(GL_TRIANGLES, pStelModel->triangleCount * 3, GL_UNSIGNED_INT, reinterpret_cast<const void*>(pStelModel->startIndex * sizeof(unsigned int)));
+
 	}
 
-	glDrawElements(GL_TRIANGLES, pStelModel->triangleCount * 3, GL_UNSIGNED_INT, reinterpret_cast<const void*>(pStelModel->startIndex * sizeof(unsigned int)));
+	if(blendEnabled)
+		glDisable(GL_BLEND);
 
-	if(shading && pMaterial->illum == OBJ::TRANSLUCENT)
-        {
-	    glDisable(GL_BLEND);
-        }
-
-    }
-
-    //release VAO
-    objModel.unbindGL();
+	//release VAO
+	objModel.unbindGL();
 }
 
 void Scenery3d::sendToShader(const OBJ::StelModel* pStelModel, Effect cur, bool& tangEnabled, int& tangLocation)
 {
     tangEnabled = false;
+    //TODO move this to setupXXXUniforms
 
     if(cur != No)
     {
@@ -808,79 +816,6 @@ void Scenery3d::sendToShader(const OBJ::StelModel* pStelModel, Effect cur, bool&
             pStelModel->pMaterial->texture.data()->bind();
         }
     }
-}
-
-void Scenery3d::generateCubeMap_drawScene()
-{
-    //Bind shader based on selected effect flags
-    //bindShader();
-
-    drawArrays(true);
-
-    //Unbind
-    //glUseProgram(0);
-}
-
-void Scenery3d::bindShader()
-{
-    //No Shader, No effect
-    curEffect = No;
-    curShader = 0;
-
-    if(shadowsEnabled && !bumpsEnabled){ curShader = shadowShader; curEffect = ShadowMapping; }
-    else if(!shadowsEnabled && bumpsEnabled){ curShader = bumpShader; curEffect = BumpMapping; }
-    else if(shadowsEnabled && bumpsEnabled){ curShader = univShader; curEffect = All; }
-
-    //Bind the selected shader
-    if(curShader != 0) curShader->bind();
-}
-
-void Scenery3d::generateCubeMap_drawSceneWithShadows()
-{    
-    //Bind the shader
-    bindShader();
-
-    //Calculate texture matrix for projection
-    //This matrix takes us from eye space to the light's clip space
-    //It is postmultiplied by the inverse of the current view matrix when specifying texgen
-    static Mat4f biasMatrix(0.5f, 0.0f, 0.0f, 0.0f,
-                            0.0f, 0.5f, 0.0f, 0.0f,
-                            0.0f, 0.0f, 0.5f, 0.0f,
-                            0.5f, 0.5f, 0.5f, 1.0f);	//bias from [-1, 1] to [0, 1]
-
-    //Holds the squared frustum splits necessary for the lookup in the shader
-    Vec4f squaredSplits = Vec4f(0.0f);
-    for(int i=0; i<frustumSplits; i++)
-    {
-	squaredSplits.v[i] = frustumArray.at(i).zFar * frustumArray.at(i).zFar;
-
-        //Bind current depth map texture
-        glActiveTexture(GL_TEXTURE3+i);
-	glBindTexture(GL_TEXTURE_2D, shadowMapsArray.at(i));
-
-        //Compute texture matrix
-	Mat4f texMat = biasMatrix * shadowCPM.at(i);
-
-        //Send to shader
-        QString smapLoc = "smap_"+ QString::number(i);
-        curShader->setUniformValue(smapLoc.toLatin1().constData(), 3+i);
-
-        QString texMatLoc = "texmat_"+ QString::number(i);
-	glUniformMatrix4fv(curShader->uniformLocation(texMatLoc),1,GL_FALSE,texMat.r);
-    }
-
-    //Send squared splits to the shader
-    curShader->setUniformValue("vecSplits", squaredSplits.v[0], squaredSplits.v[1], squaredSplits.v[2], squaredSplits.v[3]);
-
-    //Activate normal texturing
-    glActiveTexture(GL_TEXTURE0);
-    glBindTexture(GL_TEXTURE_2D, 0);
-
-    //Draw
-    drawArrays(true);
-
-    //Done. Unbind shader
-    glUseProgram(0);
 }
 
 void Scenery3d::computeZDist(float zNear, float zFar)
@@ -1093,10 +1028,6 @@ void Scenery3d::generateShadowMap()
     camNear = NEARZ;
     camFar = FARZ;
 
-    //Nothing to draw
-    if(!hasModels)
-        return;
-
     //Adjust the frustum to the scene before analyzing the view samples
     adjustFrustum();
     //Further adjust
@@ -1237,6 +1168,29 @@ void Scenery3d::generateShadowMap()
     glColorMask(1, 1, 1, 1);
 }
 
+void Scenery3d::calculateLighting()
+{
+	//calculate which light source we need + intensity
+	float ambientBrightness, directionalBrightness; // was: lightBrightness;
+	Vec3f lightsourcePosition; //should be normalized already
+	lightInfo.source = calculateLightSource(ambientBrightness, directionalBrightness, lightsourcePosition);
+	lightInfo.lightDirectionWorld = QVector3D(lightsourcePosition.v[0],lightsourcePosition.v[1],lightsourcePosition.v[2]);
+
+	//if the night vision mode is on, use red-tinted lighting
+	bool red=StelApp::getInstance().getVisionModeNight();
+
+	//for now, lighting is only white
+	lightInfo.ambient = QVector3D(ambientBrightness,ambientBrightness, ambientBrightness);
+	lightInfo.directional = QVector3D(directionalBrightness,directionalBrightness,directionalBrightness);
+
+	if(red)
+	{
+		lightInfo.ambient     = QVector3D(ambientBrightness,0,0);
+		lightInfo.directional = QVector3D(directionalBrightness,0,0);
+	}
+
+}
+
 Scenery3d::ShadowCaster  Scenery3d::calculateLightSource(float &ambientBrightness, float &directionalBrightness, Vec3f &lightsourcePosition)
 {
     SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
@@ -1370,143 +1324,97 @@ Scenery3d::ShadowCaster  Scenery3d::calculateLightSource(float &ambientBrightnes
 
 void Scenery3d::generateCubeMap()
 {
-    if(!hasModels)
-        return;
+	//bind shader
+	curShader->bind();
 
-    for (int i=0; i<6; i++) {
-        if (cubeMap[i] == NULL) {
-            cubeMap[i] = new QOpenGLFramebufferObject(cubemapSize, cubemapSize, QOpenGLFramebufferObject::Depth);
-            if (cubeMap[i]->attachment() != QOpenGLFramebufferObject::Depth){
-                qWarning()<< "Scenery3d: Framebuffer failed to aquire depth buffer. Try smaller cubemap_size!";
-            }
-            glBindTexture(GL_TEXTURE_2D, cubeMap[i]->texture());
-            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-        }
-    }
+	//setup projection matrix - this is a 90-degree quadratic perspective
+	float zNear = 1.0f;
+	float zFar = 10000.0f;
+	projectionMatrix.setToIdentity();
+	projectionMatrix.perspective(90.0f,1.0f,zNear,zFar);
 
-    glEnable(GL_BLEND);
-    glEnable(GL_TEXTURE_2D);
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-    glEnable(GL_DEPTH_TEST);
-    glDepthFunc(GL_LEQUAL);
-    glDepthMask(GL_TRUE);
-    glEnable(GL_LIGHTING);
-    glEnable(GL_LIGHT0);
-    glShadeModel(GL_SMOOTH);
+	//recalc lighting info
+	calculateLighting();
 
+	//set pass uniforms
+	setupPassUniforms(curShader);
 
-    float ambientBrightness, directionalBrightness;
-    Vec3f lightsourcePosition;
-    ShadowCaster shadows=calculateLightSource(ambientBrightness, directionalBrightness, lightsourcePosition);
-    // GZ: These signs were suspiciously -/-/+ before.
-    const GLfloat LightPosition[]= {lightsourcePosition.v[0], lightsourcePosition.v[1], lightsourcePosition.v[2], 0.0f} ;// signs determined by experiment
+	//set opengl viewport to the size of cubemap
+	glViewport(0, 0, cubemapSize, cubemapSize);
 
-    float fov = 90.0f;
-    float aspect = 1.0f;
-    float zNear = 1.0f;
-    float zFar = 10000.0f;
-    float f = 2.0 / tan(fov * M_PI / 360.0);
-    Mat4f camProj = Mat4f(f / aspect, 0, 0, 0,
-                    0, f, 0, 0,
-                    0, 0, (zFar + zNear) / (zNear - zFar), 2.0 * zFar * zNear / (zNear - zFar),
-                    0, 0, -1, 0);
+	QMatrix4x4 stackBase;
+	stackBase.rotate(90.0f,-1.0f,0.0f,0.0f);
 
-    glPushAttrib(GL_VIEWPORT_BIT);
-    glViewport(0, 0, cubemapSize, cubemapSize);
-    glMatrixMode(GL_PROJECTION);
-    glPushMatrix();
-    glLoadIdentity();
-    glMultMatrixf(camProj);
-    glMatrixMode(GL_MODELVIEW);
-    glPushMatrix();
-    glLoadIdentity();
-    glRotated(90.0f, -1.0f, 0.0f, 0.0f);
+	//set GL state - we want depth test + culling
+	glEnable(GL_DEPTH_TEST);
+	glDepthFunc(GL_LEQUAL);
+	glDepthMask(GL_TRUE);
+	glEnable(GL_CULL_FACE);
 
-    #define DRAW_SCENE  glLightfv(GL_LIGHT0, GL_POSITION, LightPosition);\
-                        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);\
-                        setLights(ambientBrightness, directionalBrightness);\
-			if(shadows){generateCubeMap_drawSceneWithShadows();}\
-			else{generateCubeMap_drawScene();}\
+#define DRAW_SCENE(a) cubeMap[a]->bind(); \
+	setupFrameUniforms(curShader); \
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);\
+	drawArrays(true,true)
 
-    //front
-    glPushMatrix();
-    glTranslated(absolutePosition.v[0], absolutePosition.v[1], absolutePosition.v[2]);
-    cubeMap[0]->bind();
-    DRAW_SCENE
-    cubeMap[0]->release();
-    glPopMatrix();
+	//front
+	modelViewMatrix = stackBase;
+	modelViewMatrix.translate(absolutePosition.v[0], absolutePosition.v[1], absolutePosition.v[2]);
+	DRAW_SCENE(0);
 
-    //right
-    glPushMatrix();
-    glRotated(90.0f, 0.0f, 0.0f, 1.0f);
-    glTranslated(absolutePosition.v[0], absolutePosition.v[1], absolutePosition.v[2]);
-    cubeMap[1]->bind();
-    DRAW_SCENE
-    cubeMap[1]->release();
-    glPopMatrix();
+	//right
+	modelViewMatrix = stackBase;
+	modelViewMatrix.rotate(90.0f,0.0f,0.0f,1.0f);
+	modelViewMatrix.translate(absolutePosition.v[0], absolutePosition.v[1], absolutePosition.v[2]);
+	DRAW_SCENE(1);
 
-    //left
-    glPushMatrix();
-    glRotated(90.0f, 0.0f, 0.0f, -1.0f);
-    glTranslated(absolutePosition.v[0], absolutePosition.v[1], absolutePosition.v[2]);
-    cubeMap[2]->bind();
-    DRAW_SCENE
-    cubeMap[2]->release();
-    glPopMatrix();
+	//left
+	modelViewMatrix = stackBase;
+	modelViewMatrix.rotate(90.0f,0.0f,0.0f,-1.0f);
+	modelViewMatrix.translate(absolutePosition.v[0], absolutePosition.v[1], absolutePosition.v[2]);
+	DRAW_SCENE(2);
 
-    //back
-    glPushMatrix();
-    glRotated(180.0f, 0.0f, 0.0f, 1.0f);
-    glTranslated(absolutePosition.v[0], absolutePosition.v[1], absolutePosition.v[2]);
-    cubeMap[3]->bind();
-    DRAW_SCENE
-    cubeMap[3]->release();
-    glPopMatrix();
+	//back
+	modelViewMatrix = stackBase;
+	modelViewMatrix.rotate(180.0f,0.0f,0.0f,1.0f);
+	modelViewMatrix.translate(absolutePosition.v[0], absolutePosition.v[1], absolutePosition.v[2]);
+	DRAW_SCENE(3);
 
-    //top
-    glPushMatrix();
-    glRotated(90.0f, 1.0f, 0.0f, 0.0f);
-    glTranslated(absolutePosition.v[0], absolutePosition.v[1], absolutePosition.v[2]);
-    cubeMap[4]->bind();
-    DRAW_SCENE
-    cubeMap[4]->release();
-    glPopMatrix();
+	//top
+	modelViewMatrix = stackBase;
+	modelViewMatrix.rotate(90.0f,1.0f,0.0f,0.0f);
+	modelViewMatrix.translate(absolutePosition.v[0], absolutePosition.v[1], absolutePosition.v[2]);
+	DRAW_SCENE(4);
 
-    //bottom
-    glPushMatrix();
-    glRotated(90.0f, -1.0f, 0.0f, 0.0f);
-    glTranslated(absolutePosition.v[0], absolutePosition.v[1], absolutePosition.v[2]);
-    cubeMap[5]->bind();
-    DRAW_SCENE
-    cubeMap[5]->release();
-    glPopMatrix();
+	//bottom
+	modelViewMatrix = stackBase;
+	modelViewMatrix.rotate(90.0f,-1.0f,0.0f,0.0f);
+	modelViewMatrix.translate(absolutePosition.v[0], absolutePosition.v[1], absolutePosition.v[2]);
+	DRAW_SCENE(5);
 
-    glMatrixMode(GL_MODELVIEW);
-    glPopMatrix();
-    glMatrixMode(GL_PROJECTION);
-    glPopMatrix();
-    glPopAttrib();
+	//last cubemap fbo must be released because macro does not do that (unnecessary because rebind happens immediately aferwards)
+	cubeMap[5]->release();
 
-    glDisable(GL_LIGHT0);
-    glDisable(GL_LIGHTING);
-    glDepthMask(GL_FALSE);
-    glDisable(GL_DEPTH_TEST);
-    glDisable(GL_TEXTURE_2D);
-    glDisable(GL_BLEND);
+	//reset GL state
+	glDepthMask(GL_FALSE);
+	glDisable(GL_DEPTH_TEST);
+	glDisable(GL_CULL_FACE);
+
+	//reset viewport (see StelPainter::setProjector)
+	const Vec4i& vp = altAzProjector->getViewport();
+	glViewport(vp[0], vp[1], vp[2], vp[3]);
+
+	//unbind shader
+	curShader->release();
 }
 
 void Scenery3d::drawFromCubeMap()
 {
-    if(!hasModels)
-	return;
+	//cube map drawing uses the StelPainter for correct warping (i.e. transforms happen on CPU side)
+    StelPainter painter(altAzProjector);
 
-    const StelProjectorP prj = core->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
-    StelPainter painter(prj);
-
-    glEnable(GL_TEXTURE_2D);
     glEnable(GL_BLEND);
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    //note that GL_ONE is required here for correct blending (see drawArrays)
+    glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
     //depth test and culling is necessary for correct display,
     //because the cube faces can be projected in quite "weird" ways
     glEnable(GL_DEPTH_TEST);
@@ -1546,48 +1454,40 @@ void Scenery3d::drawFromCubeMap()
     painter.drawSphericalTriangles(cubePlaneBottom, true, false, NULL, false);
 
     glDisable(GL_CULL_FACE);
-    glDisable(GL_TEXTURE_2D);
     glDisable(GL_DEPTH_TEST);
-    //glDisable(GL_BLEND);
+    glDisable(GL_BLEND);
 }
 
-void Scenery3d::drawObjModel() // for Perspective Projection only!
+void Scenery3d::drawDirect() // for Perspective Projection only!
 {
-    if(!hasModels)
-        return;
-
     //we only need 1 shader for this
     curShader->bind();
 
     //calculate standard perspective projection matrix, use QMatrix4x4 for that
-    const StelProjectorP prj = core->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
-    float fov = prj->getFov();
-    float aspect = (float)prj->getViewportWidth() / (float)prj->getViewportHeight();
+    float fov = altAzProjector->getFov();
+    float aspect = (float)altAzProjector->getViewportWidth() / (float)altAzProjector->getViewportHeight();
     float zNear = 1.0f;
     float zFar = 10000.0f;
     float f = 2.0 / tan(fov * M_PI / 360.0);
-    QMatrix4x4 proj(f / aspect, 0, 0, 0,
+    projectionMatrix = QMatrix4x4 (
+		    f / aspect, 0, 0, 0,
 		    0, f, 0, 0,
 		    0, 0, (zFar + zNear) / (zNear - zFar), -1,
 		    0, 0, 2.0 * zFar * zNear / (zNear - zFar), 0  );
 
-    //set perspective projection matrix
-    curShader->setUniformValue(shaderManager.getUniformLocation(curShader,ShaderManager::UNIFORM_MAT_PROJECTION), proj);
+    //recalculate lighting info
+    calculateLighting();
+    //set pass uniforms (proj + const. lighting info)
+    setupPassUniforms(curShader);
 
     //calc modelview transform
-    modelViewMatrix = convertToQMatrix( prj->getModelViewTransform()->getApproximateLinearTransfo() );
+    modelViewMatrix = convertToQMatrix( altAzProjector->getModelViewTransform()->getApproximateLinearTransfo() );
     modelViewMatrix.optimize(); //may make inversion faster?
     modelViewMatrix.translate(absolutePosition.v[0],absolutePosition.v[1],absolutePosition.v[2]);
 
-    //calculate normal matrix, qt makes this easy
-    normalMatrix = modelViewMatrix.normalMatrix();
-
-    //setup other frame-constant uniforms (ex. lighting)
+    //setup other frame-constant uniforms (modelview dependant)
+    //normal matrix and MVP are automatically created here if necessary
     setupFrameUniforms(curShader);
-
-
-    // GZ: These were -/-/+ before!
-    //const GLfloat LightPosition[]= {lightsourcePosition.v[0], lightsourcePosition.v[1], lightsourcePosition.v[2], 0.0f} ;// signs determined by experiment
 
     //depth test needs enabling, clear depth buffer, color buffer already contains background so it stays
     glEnable(GL_DEPTH_TEST);
@@ -1598,13 +1498,8 @@ void Scenery3d::drawObjModel() // for Perspective Projection only!
     //enable backface culling for increased performance
     glEnable(GL_CULL_FACE);
 
-    //testMethod();
-    //GZ: The following calls apparently require the full cubemap. TODO: Verify and simplify
-    //if (shadows) {
-//	generateCubeMap_drawSceneWithShadows();
-  //  } else {
-	generateCubeMap_drawScene();
-//    }
+    //only 1 call needed here
+    drawArrays(true);
 
     glDepthMask(GL_FALSE);
     glDisable(GL_DEPTH_TEST);
@@ -1613,17 +1508,19 @@ void Scenery3d::drawObjModel() // for Perspective Projection only!
     curShader->release();
 }
 
+void Scenery3d::drawWithCubeMap()
+{
+	generateCubeMap();
+	drawFromCubeMap();
+}
+
 void Scenery3d::drawCoordinatesText()
 {
-    if(!hasModels)
-        return;
-
-    const StelProjectorP prj = core->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
-    StelPainter painter(prj);
+    StelPainter painter(altAzProjector);
     painter.setFont(debugTextFont);
     painter.setColor(1.0f,0.0f,1.0f);
-    float screen_x = prj->getViewportWidth()  - 240.0f;
-    float screen_y = prj->getViewportHeight() -  60.0f;
+    float screen_x = altAzProjector->getViewportWidth()  - 240.0f;
+    float screen_y = altAzProjector->getViewportHeight() -  60.0f;
     QString str;
 
     // model_pos is the observer position (camera eye position) in model-grid coordinates
@@ -1633,7 +1530,7 @@ void Scenery3d::drawCoordinatesText()
     // world_pos is the observer position (camera eye position) in grid coordinates, e.g. Gauss-Krueger or UTM.
     Vec3d world_pos= model_pos + currentScene.modelWorldOffset;
     // problem: long grid names!
-    painter.drawText(prj->getViewportWidth()-10-qMax(240, painter.getFontMetrics().boundingRect(currentScene.gridName).width()),
+    painter.drawText(altAzProjector->getViewportWidth()-10-qMax(240, painter.getFontMetrics().boundingRect(currentScene.gridName).width()),
 		     screen_y, currentScene.gridName);
     screen_y -= 17.0f;
     str = QString("East:   %1m").arg(world_pos[0], 10, 'f', 2);
@@ -1669,11 +1566,7 @@ void Scenery3d::drawCoordinatesText()
 
 void Scenery3d::drawDebug()
 {
-    if(!hasModels)
-        return;
-
-    const StelProjectorP prj = core->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
-    StelPainter painter(prj);
+    StelPainter painter(altAzProjector);
     painter.setFont(debugTextFont);
     painter.setColor(1,0,1,1);
     // For now, these messages print light mixture values.
@@ -1682,15 +1575,15 @@ void Scenery3d::drawDebug()
     painter.drawText(20, 130, lightMessage3);
     // PRINT OTHER MESSAGES HERE:
 
-    float screen_x = prj->getViewportWidth()  - 500.0f;
-    float screen_y = prj->getViewportHeight() - 300.0f;
+    float screen_x = altAzProjector->getViewportWidth()  - 500.0f;
+    float screen_y = altAzProjector->getViewportHeight() - 300.0f;
 
     //Show some debug aids
     if(debugEnabled)
     {
 	float debugTextureSize = 128.0f;
-	float screen_x = prj->getViewportWidth() - debugTextureSize - 30;
-	float screen_y = prj->getViewportHeight() - debugTextureSize - 30;
+	float screen_x = altAzProjector->getViewportWidth() - debugTextureSize - 30;
+	float screen_y = altAzProjector->getViewportHeight() - debugTextureSize - 30;
 
 //	std::string cap = "Camera depth";
 //	painter.drawText(screen_x-150, screen_y+130, QString(cap.c_str()));
@@ -1754,6 +1647,19 @@ void Scenery3d::init()
 {
 	OBJ::setupGL();
 	initShadowmapping();
+
+	//init cubemaps
+	for (int i=0; i<6; i++) {
+	    if (cubeMap[i] == NULL) {
+		cubeMap[i] = new QOpenGLFramebufferObject(cubemapSize, cubemapSize, QOpenGLFramebufferObject::Depth);
+		if (cubeMap[i]->attachment() != QOpenGLFramebufferObject::Depth){
+		    qWarning()<< "Scenery3d: Framebuffer failed to aquire depth buffer. Try smaller cubemap_size!";
+		}
+		glBindTexture(GL_TEXTURE_2D, cubeMap[i]->texture());
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	    }
+	}
 }
 
 void Scenery3d::deleteShadowmapping()
@@ -1840,9 +1746,15 @@ void Scenery3d::initShadowmapping()
 
 void Scenery3d::draw(StelCore* core)
 {
-	//get a shader from shadermgr that fits the current state
-	curShader = shaderManager.getShader(false,shadowsEnabled,bumpsEnabled);
+	//cant draw if no models
+	if(!hasModels)
+		return;
 
+	//update projector from core
+	altAzProjector = core->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
+
+	//get a shader from shadermgr that fits the current state (but do not bind it here)
+	curShader = shaderManager.getShader(false,shadowsEnabled,bumpsEnabled);
 	if(!curShader)
 	{
 		//shader invalid, can't draw
@@ -1850,25 +1762,29 @@ void Scenery3d::draw(StelCore* core)
 		return;
 	}
 
-    if (shadowsEnabled)
-    {
-	generateShadowMap();
-    }
+	if (shadowsEnabled)
+	{
+		generateShadowMap();
+	}
 
-    if (core->getCurrentProjectionType() == StelCore::ProjectionPerspective)
-    {
-	drawObjModel();
-    }
-    else
-    {
-	generateCubeMap();
-	drawFromCubeMap();
-    }
-    if (textEnabled) drawCoordinatesText();
-    if (debugEnabled)
-    {
-	drawDebug();
-    }
+	//turn off blending, because it seems to be enabled somewhere we do not have access
+	glDisable(GL_BLEND);
+
+	if (core->getCurrentProjectionType() == StelCore::ProjectionPerspective)
+	{
+		//when Stellarium uses perspective projection we can use the fast direct method
+		drawDirect();
+	}
+	else
+	{
+		//we have to use a workaround using cubemapping
+		drawWithCubeMap();
+	}
+	if (textEnabled) drawCoordinatesText();
+	if (debugEnabled)
+	{
+		drawDebug();
+	}
 }
 
 // Replacement for gluLookAt. See http://www.opengl.org/sdk/docs/man2/xhtml/gluLookAt.xml

@@ -34,6 +34,7 @@ ShaderManager::ShaderManager()
 		//initialize the strings
 		uniformStrings["u_mModelView"] = UNIFORM_MAT_MODELVIEW;
 		uniformStrings["u_mProjection"] = UNIFORM_MAT_PROJECTION;
+		uniformStrings["u_mMVP"] = UNIFORM_MAT_MVP;
 		uniformStrings["u_mNormal"] = UNIFORM_MAT_NORMAL;
 
 		uniformStrings["u_texDiffuse"] = UNIFORM_TEX_DIFFUSE;
