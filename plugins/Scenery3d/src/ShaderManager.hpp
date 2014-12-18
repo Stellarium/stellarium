@@ -55,6 +55,8 @@ public:
 		UNIFORM_MAT_MODELVIEW,
 		//! Defines the Projection matrix
 		UNIFORM_MAT_PROJECTION,
+		//! Defines the combined ModelViewProjection matrix, used if shader needs no separation of the 2 for a bit of a speedup
+		UNIFORM_MAT_MVP,
 		//! Defines the 3x3 Normal matrix (transpose of the inverse MV matrix)
 		UNIFORM_MAT_NORMAL,
 		//! The first shadow matrix
@@ -110,11 +112,11 @@ private:
 	typedef QMap<QString,UNIFORM> t_UniformStrings;
 	static t_UniformStrings uniformStrings;
 
-	enum Features
+	enum FeatureFlags
 	{
 		PIXEL_LIGHTING  = 0x1u,
 		SHADOWS         = 0x2u,
-		BUMP            = 0x4u
+		BUMP            = 0x4u,
 	};
 
 	QString getVShaderName(uint flags);
