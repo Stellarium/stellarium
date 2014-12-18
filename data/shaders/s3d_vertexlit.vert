@@ -31,7 +31,7 @@ uniform mat4 u_mProjection;
 uniform mat3 u_mNormal;
 
 //light info
-uniform vec3 u_vLightDirection; //in world space
+uniform vec3 u_vLightDirection; //in view space
 uniform vec3 u_vLightAmbient;
 uniform vec3 u_vLightDiffuse;
 

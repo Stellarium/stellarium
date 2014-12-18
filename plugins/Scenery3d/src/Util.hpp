@@ -8,6 +8,7 @@
 #include <QString>
 #include <QDebug>
 #include <QTime>
+#include <QMatrix4x4>
 
 #include "VecMath.hpp"
 
@@ -52,5 +53,22 @@ extern std::string toString(int i);
 extern bool CompareVerts(const Vec3f &v1, const Vec3f &v2);
 //! Compares two floats to eachother
 extern bool CompareFloats(float c1, float c2);
+
+//! Provide Qt 3x3 matrix-vector multiplication, which does not exist for some reason
+inline QVector3D operator*(const QMatrix3x3& mat, const QVector3D& vec)
+{
+	float x,y,z;
+	x =	vec.x() * mat(0,0) +
+		vec.y() * mat(0,1) +
+		vec.z() * mat(0,2);
+	y =	vec.x() * mat(1,0) +
+		vec.y() * mat(1,1) +
+		vec.z() * mat(1,2);
+	z =	vec.x() * mat(2,0) +
+		vec.y() * mat(2,1) +
+		vec.z() * mat(2,2);
+	return QVector3D(x,y,z);
+}
+
 #endif
 
