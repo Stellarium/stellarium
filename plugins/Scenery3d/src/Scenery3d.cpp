@@ -588,12 +588,21 @@ float Scenery3d::groundHeight()
 
 void Scenery3d::setupFrameUniforms(QOpenGLShaderProgram *shader)
 {
+	//transform setup
+	//this macro saves a bit of writing
+	SET_UNIFORM(shader,ShaderManager::UNIFORM_MAT_MODELVIEW, modelViewMatrix);
+	//this macro saves a bit of writing
+	SET_UNIFORM(shader,ShaderManager::UNIFORM_MAT_NORMAL, normalMatrix);
+
 	//Lighting setup
 
 	//calculate which light source we need + intensity
 	float ambientBrightness, directionalBrightness; // was: lightBrightness;
 	Vec3f lightsourcePosition; //should be normalized already
 	ShadowCaster caster = calculateLightSource(ambientBrightness, directionalBrightness, lightsourcePosition);
+
+	//light direction must be transformed into view space, do this here instead of in shader for each vtx
+	QVector3D lightDirView = normalMatrix * QVector3D(lightsourcePosition.v[0],lightsourcePosition.v[1],lightsourcePosition.v[2]);
 
 	//if the night vision mode is on, use red-tinted lighting
 	bool red=StelApp::getInstance().getVisionModeNight();
@@ -608,8 +617,7 @@ void Scenery3d::setupFrameUniforms(QOpenGLShaderProgram *shader)
 		diffuse = QVector3D(directionalBrightness,0,0);
 	}
 
-
-	SET_UNIFORM(shader,ShaderManager::UNIFORM_LIGHT_DIRECTION,QVector3D(lightsourcePosition.v[0],lightsourcePosition.v[1],lightsourcePosition.v[2]));
+	SET_UNIFORM(shader,ShaderManager::UNIFORM_LIGHT_DIRECTION,lightDirView);
 	SET_UNIFORM(shader,ShaderManager::UNIFORM_LIGHT_AMBIENT,ambient);
 	SET_UNIFORM(shader,ShaderManager::UNIFORM_LIGHT_DIFFUSE,diffuse);
 
@@ -1563,17 +1571,16 @@ void Scenery3d::drawObjModel() // for Perspective Projection only!
 		    0, 0, (zFar + zNear) / (zNear - zFar), -1,
 		    0, 0, 2.0 * zFar * zNear / (zNear - zFar), 0  );
 
+    //set perspective projection matrix
     curShader->setUniformValue(shaderManager.getUniformLocation(curShader,ShaderManager::UNIFORM_MAT_PROJECTION), proj);
 
-    //set modelview transform
-    QMatrix4x4 mv = convertToQMatrix( prj->getModelViewTransform()->getApproximateLinearTransfo() );
-    mv.optimize();
-    mv.translate(absolutePosition.v[0],absolutePosition.v[1],absolutePosition.v[2]);
-    curShader->setUniformValue(shaderManager.getUniformLocation(curShader,ShaderManager::UNIFORM_MAT_MODELVIEW), mv);
+    //calc modelview transform
+    modelViewMatrix = convertToQMatrix( prj->getModelViewTransform()->getApproximateLinearTransfo() );
+    modelViewMatrix.optimize(); //may make inversion faster?
+    modelViewMatrix.translate(absolutePosition.v[0],absolutePosition.v[1],absolutePosition.v[2]);
 
-    QMatrix3x3 normal = mv.normalMatrix();
-    //this macro saves a bit of writing
-    SET_UNIFORM(curShader,ShaderManager::UNIFORM_MAT_NORMAL,normal);
+    //calculate normal matrix, qt makes this easy
+    normalMatrix = modelViewMatrix.normalMatrix();
 
     //setup other frame-constant uniforms (ex. lighting)
     setupFrameUniforms(curShader);
@@ -1582,11 +1589,14 @@ void Scenery3d::drawObjModel() // for Perspective Projection only!
     // GZ: These were -/-/+ before!
     //const GLfloat LightPosition[]= {lightsourcePosition.v[0], lightsourcePosition.v[1], lightsourcePosition.v[2], 0.0f} ;// signs determined by experiment
 
-    //depth test needs enabling, clear depth buffer
+    //depth test needs enabling, clear depth buffer, color buffer already contains background so it stays
     glEnable(GL_DEPTH_TEST);
     glDepthFunc(GL_LEQUAL);
     glDepthMask(GL_TRUE);
     glClear(GL_DEPTH_BUFFER_BIT);
+
+    //enable backface culling for increased performance
+    glEnable(GL_CULL_FACE);
 
     //testMethod();
     //GZ: The following calls apparently require the full cubemap. TODO: Verify and simplify
@@ -1598,6 +1608,7 @@ void Scenery3d::drawObjModel() // for Perspective Projection only!
 
     glDepthMask(GL_FALSE);
     glDisable(GL_DEPTH_TEST);
+    glDisable(GL_CULL_FACE);
 
     curShader->release();
 }

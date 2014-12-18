@@ -104,13 +104,7 @@ public:
 
     enum ShadowCaster { None, Sun, Moon, Venus };
     enum Effect { No, BumpMapping, ShadowMapping, All};
-    Mat4d mv;
-    Mat4d mp;
-    Mat4f mv2;
-    Vec3d viewUp;
-    Vec3d viewDir;
-    Vec3d viewPos;
-    int drawn;
+
 
 private:
     Scenery3dMgr* parent;
@@ -144,9 +138,12 @@ private:
     Heightmap* heightmap;
     OBJ::vertexOrder objVertexOrder; // some OBJ files have left-handed coordinate counting or swapped axes. Allows accounting for those.
 
-    Mat4f projectionMatrix;
+    Vec3d viewUp;
+    Vec3d viewDir;
+    Vec3d viewPos;
+    int drawn;
+
     Mat4f lightViewMatrix;
-    Mat4f lightProjectionMatrix;
     QOpenGLFramebufferObject* cubeMap[6]; // front, right, left, back, top, bottom
     StelVertexArray cubePlaneFront, cubePlaneBack,
                 cubePlaneLeft, cubePlaneRight,
@@ -159,6 +156,11 @@ private:
 
     //Combines zRot and rot2grid from scene metadata
     Mat4d zRot2Grid;
+
+    //final model view matrix for shader upload
+    QMatrix4x4 modelViewMatrix;
+    //final normal matrix for shader upload
+    QMatrix3x3 normalMatrix;
 
     //Currently selected Shader
     QOpenGLShaderProgram* curShader;
@@ -174,8 +176,6 @@ private:
     //Currently selected effect
     Effect curEffect;
 
-    //Current Model View Matrix
-    Mat4f modelView;
     //Current sun position
     Vec3d sunPosition;
     //Scene AABB
@@ -233,7 +233,7 @@ private:
     ///! Cleans up shadowmapping related objects
     void deleteShadowmapping();
 
-    //! Sets up shader uniforms constant over the whole frame (except transformations)
+    //! Sets up shader uniforms constant over the whole frame (except projection matrix)
     void setupFrameUniforms(QOpenGLShaderProgram *shader);
     //! Sets up shader uniforms specific to one material
     void setupMaterialUniforms(QOpenGLShaderProgram *shader, const OBJ::Material& mat);
