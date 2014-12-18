@@ -133,6 +133,7 @@ private:
     float eye_height;
 
     StelCore* core;
+    StelProjectorP altAzProjector;
     OBJ objModel;
     OBJ groundModel;
     Heightmap* heightmap;
@@ -157,10 +158,21 @@ private:
     //Combines zRot and rot2grid from scene metadata
     Mat4d zRot2Grid;
 
+
+    /// ---- Rendering information ----
     //final model view matrix for shader upload
     QMatrix4x4 modelViewMatrix;
-    //final normal matrix for shader upload
-    QMatrix3x3 normalMatrix;
+    //currently valid projection matrix for shader upload
+    QMatrix4x4 projectionMatrix;
+
+    // a struct which encapsulates lighting info
+    struct LightParameters
+    {
+	    ShadowCaster source;
+	    QVector3D lightDirectionWorld;
+	    QVector3D ambient;
+	    QVector3D directional;
+    } lightInfo;
 
     //Currently selected Shader
     QOpenGLShaderProgram* curShader;
@@ -207,13 +219,40 @@ private:
 
     QFont debugTextFont;
 
-    void drawObjModel();
+    // --- initialization
+    ///! Re-initializes shadowmapping related objects
+    void initShadowmapping();
+    ///! Cleans up shadowmapping related objects
+    void deleteShadowmapping();
+
+    // --- drawing methods ---
+    //! Basic setup for default perspective drawing. Standard OpenGL forward rendering.
+    void drawDirect();
+    //! When another projection than perspective is selected, rendering is performed using a cubemap.
+    void drawWithCubeMap();
     void generateShadowMap();
+    //! Generates a 6-sided cube map by drawing a view in each direction
     void generateCubeMap();
-    void generateCubeMap_drawScene();
-    void generateCubeMap_drawSceneWithShadows();
-    void drawArrays(bool shading=true);
+    //! Uses the StelPainter to draw a warped cube textured with our cubemap
     void drawFromCubeMap();
+    //! This is the method that performs the actual drawing. Submits material for each model to shader, and submits 1 draw call for each StelModel.
+    void drawArrays(bool shading=true, bool blendAlphaAdditive=false);
+
+
+    // --- shading related stuff ---
+    //! Calculates lighting related stuff and puts it in the lightInfo structure
+    void calculateLighting();
+    //! Sets uniforms constant over the whole pass (=projection matrix, lighting & shadow info)
+    void setupPassUniforms(QOpenGLShaderProgram *shader);
+    //! Sets up shader uniforms constant over the whole frame/side of cubemap (=modelview dependent stuff)
+    void setupFrameUniforms(QOpenGLShaderProgram *shader);
+    //! Sets up shader uniforms specific to one material
+    void setupMaterialUniforms(QOpenGLShaderProgram *shader, const OBJ::Material& mat);
+
+    //Sends texture data to the shader based on which effect is selected;
+    void sendToShader(const OBJ::StelModel* pStelModel, Effect cur, bool& tangEnabled, int& tangLocation);
+    //! Finds the correct light source out of Sun, Moon, Venus, and returns ambient and directional light components.
+    Scenery3d::ShadowCaster calculateLightSource(float &ambientBrightness, float &diffuseBrightness, Vec3f &lightsourcePosition);
 
     //! @return height at -absolutePosition, which is the current eye point.
     float groundHeight();
@@ -227,25 +266,6 @@ private:
 
     //Save the Frustum to be able to move away from it and analyze it
     void saveFrusts();
-
-    ///! Re-initializes shadowmapping related objects
-    void initShadowmapping();
-    ///! Cleans up shadowmapping related objects
-    void deleteShadowmapping();
-
-    //! Sets up shader uniforms constant over the whole frame (except projection matrix)
-    void setupFrameUniforms(QOpenGLShaderProgram *shader);
-    //! Sets up shader uniforms specific to one material
-    void setupMaterialUniforms(QOpenGLShaderProgram *shader, const OBJ::Material& mat);
-
-    //Sends texture data to the shader based on which effect is selected;
-    void sendToShader(const OBJ::StelModel* pStelModel, Effect cur, bool& tangEnabled, int& tangLocation);
-    //Binds the shader for the selected effect
-    void bindShader();
-    //! Finds the correct light source out of Sun, Moon, Venus, and returns ambient and directional light components.
-    Scenery3d::ShadowCaster calculateLightSource(float &ambientBrightness, float &diffuseBrightness, Vec3f &lightsourcePosition);
-    //Set independent brightness factors (allow e.g. solar twilight ambient&lunar specular). Call setupLights first!
-    void setLights(float ambientBrightness, float diffuseBrightness);
 
     //Adjust the frustum to the loaded scene bounding box according to Zhang et al.
     void adjustFrustum();

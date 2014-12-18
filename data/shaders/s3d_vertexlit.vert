@@ -26,8 +26,7 @@ This is a shader for basic vertex lighting. This should be the minimum quality s
 #version 120
 
 //matrices
-uniform mat4 u_mModelView;
-uniform mat4 u_mProjection;
+uniform mat4 u_mMVP;
 uniform mat3 u_mNormal;
 
 //light info
@@ -66,5 +65,5 @@ void main(void)
 	
 	v_illumination = vec4(calcLighting(normal), u_vMatAlpha);	
 	v_texcoord = a_texcoord;
-	gl_Position = u_mProjection * u_mModelView * a_vertex;
+	gl_Position = u_mMVP * a_vertex;
 }
