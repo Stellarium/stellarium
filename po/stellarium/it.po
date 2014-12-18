@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-12-15 22:16+0600\n"
-"PO-Revision-Date: 2014-12-09 19:57+0000\n"
+"PO-Revision-Date: 2014-12-17 18:20+0000\n"
 "Last-Translator: Gio <gio.scino@gmail.com>\n"
 "Language-Team: Italian <it@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-12-16 06:16+0000\n"
+"X-Launchpad-Export-Date: 2014-12-18 05:46+0000\n"
 "X-Generator: Launchpad (build 17286)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:132 src/core/modules/StarMgr.cpp:353
@@ -2094,6 +2094,10 @@ msgid ""
 "Ignore and suppress this notice in the future and try to continue in "
 "degraded mode anyway?"
 msgstr ""
+"Il sottosistema DirectX / OpenGL ES ha problemi. Vedere il login per i "
+"dettagli.\n"
+"Ignorare e sopprimere questo avviso in futuro e cercare di continuare "
+"comunque in modalità degradata?"
 
 #: src/StelMainView.cpp:629
 msgid ""
@@ -2101,6 +2105,9 @@ msgid ""
 "Ignore and suppress this notice in the future and try to continue in "
 "degraded mode anyway?"
 msgstr ""
+"Il sottosistema OpenGL/Mesa ha problemi. Vedere il login per i dettagli.\n"
+"Ignorare e sopprimere questo avviso in futuro e cercare di continuare "
+"comunque in modalità degradata?"
 
 #: src/StelMainView.cpp:684
 msgid ""
@@ -2108,6 +2115,9 @@ msgid ""
 "Ignore and suppress this notice in the future and try to continue in "
 "degraded mode anyway?"
 msgstr ""
+"Il sottosistema OpenGL ha problemi. Vedere il login per i dettagli.\n"
+"Ignorare e sopprimere questo avviso in futuro e cercare di continuare "
+"comunque in modalità degradata?"
 
 #: src/StelMainView.cpp:721
 msgid ""
@@ -2115,6 +2125,9 @@ msgid ""
 "Ignore and suppress this notice in the future and try to continue in "
 "degraded mode anyway?"
 msgstr ""
+"Il sottosistema OpenGL ES ha problemi. Vedere il login per i dettagli.\n"
+"Ignorare e sopprimere questo avviso in futuro e cercare di continuare "
+"comunque in modalità degradata?"
 
 #: src/StelMainView.cpp:830
 #, qt-format
@@ -3724,7 +3737,7 @@ msgstr "Copia indirizzo del collegamento (&L)"
 
 #: src/ui_dateTimeDialogGui.h:378
 msgid "Date and Time in Gregorian calendar"
-msgstr ""
+msgstr "Data e ora in calendario gregoriano"
 
 #: src/ui_dateTimeDialogGui.h:380 src/ui_dateTimeDialogGui.h:385
 msgid "Julian Date"
@@ -4296,7 +4309,7 @@ msgstr ""
 
 #: src/ui_viewDialog.h:1345
 msgid "from landscape, if given"
-msgstr ""
+msgstr "dal paesaggio, se fornito"
 
 #: src/ui_viewDialog.h:1346
 msgid "Add/remove landscapes..."
@@ -4312,7 +4325,7 @@ msgstr "Mostra i nomi"
 
 #: src/ui_viewDialog.h:1351
 msgid "Select if you want names abbreviated, original or translated"
-msgstr ""
+msgstr "Selezionare se si desiderano i nomi abbreviati, originali o tradotti"
 
 #: src/ui_viewDialog.h:1354
 msgid "Use native names for planets from current culture"
@@ -4332,7 +4345,7 @@ msgstr "Impostazioni lingua"
 
 #: src/ui_configurationDialog.h:1039
 msgid "Program Language"
-msgstr ""
+msgstr "Lingua programma"
 
 #: src/ui_configurationDialog.h:1040
 msgid "Sky Culture Language"
@@ -5653,7 +5666,7 @@ msgstr "Ripristina campo visivo ai valori iniziali"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1088
 msgid "Sensor view"
-msgstr ""
+msgstr "Vista sensore"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1089
 msgid "Use degrees and minutes for FOV of CCD"
@@ -8151,17 +8164,17 @@ msgstr "Finestra di configurazione degli esopianeti"
 #. TRANSLATORS: Habitable zone
 #: plugins/Exoplanets/src/Exoplanets.cpp:848
 msgid "Hot"
-msgstr ""
+msgstr "Caldo"
 
 #. TRANSLATORS: Habitable zone
 #: plugins/Exoplanets/src/Exoplanets.cpp:850
 msgid "Warm"
-msgstr ""
+msgstr "Tiepido"
 
 #. TRANSLATORS: Habitable zone
 #: plugins/Exoplanets/src/Exoplanets.cpp:852
 msgid "Cold"
-msgstr ""
+msgstr "Freddo"
 
 #. TRANSLATORS: Planet size
 #: plugins/Exoplanets/src/Exoplanets.cpp:855
@@ -8176,22 +8189,22 @@ msgstr ""
 #. TRANSLATORS: Planet size
 #: plugins/Exoplanets/src/Exoplanets.cpp:859
 msgid "Terran"
-msgstr ""
+msgstr "Terrestre"
 
 #. TRANSLATORS: Planet size
 #: plugins/Exoplanets/src/Exoplanets.cpp:861
 msgid "Superterran"
-msgstr ""
+msgstr "Superterrestre"
 
 #. TRANSLATORS: Planet size
 #: plugins/Exoplanets/src/Exoplanets.cpp:863
 msgid "Jovian"
-msgstr ""
+msgstr "Gioviano"
 
 #. TRANSLATORS: Planet size
 #: plugins/Exoplanets/src/Exoplanets.cpp:865
 msgid "Neptunian"
-msgstr ""
+msgstr "Nettuniano"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:180
 msgid "planetary system"
@@ -8415,7 +8428,7 @@ msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:175
 msgid "Additional info"
-msgstr ""
+msgstr "Informazione aggiuntiva"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:176
 msgid "Circumstellar habitable zone"
@@ -10009,7 +10022,7 @@ msgstr "L'angolo in basso a destra dello schermo"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:141
 msgid "Custom position"
-msgstr ""
+msgstr "Posizione personalizzata"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:162
 msgid "Right ascension/Declination (J2000.0)"
@@ -10033,7 +10046,7 @@ msgstr "Latitudine/Longitudine galattica"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:198
 msgid "Coordinates of custom position:"
-msgstr ""
+msgstr "Coordinate della posizione personalizzata:"
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:336
 msgid "Show coordinates of the mouse cursor on the screen."
@@ -10065,11 +10078,11 @@ msgstr "Posizione della stringa:"
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:349
 msgid "Coordinate X"
-msgstr ""
+msgstr "Coordinate X"
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:353
 msgid "Coordinate Y"
-msgstr ""
+msgstr "Coordinate Y"
 
 #~ msgid "Equator Line"
 #~ msgstr "Linea dell'Equatore"
