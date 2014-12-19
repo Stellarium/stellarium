@@ -68,10 +68,23 @@ bool OBJ::vertexArraysSupported=false;
 //static function
 void OBJ::setupGL()
 {
-	//find out if VAOs are supported, simplest way is just trying to create one
-	//Qt has the necessary checks inside the create method
-	QOpenGLVertexArrayObject testObj;
-	if( (OBJ::vertexArraysSupported = testObj.create()) )
+	//disable VAOs on Intel because of serious bugs in their implemenation...
+	QString vendor(reinterpret_cast<const char*>(glGetString(GL_VENDOR)));
+	if(vendor.contains("Intel",Qt::CaseInsensitive))
+	{
+		OBJ::vertexArraysSupported = false;
+		qWarning()<<"[Scenery3d] Disabling VAO usage because of Intel bugs";
+	}
+	else
+	{
+		//find out if VAOs are supported, simplest way is just trying to create one
+		//Qt has the necessary checks inside the create method
+		QOpenGLVertexArrayObject testObj;
+		OBJ::vertexArraysSupported = testObj.create();
+		testObj.destroy();
+	}
+
+	if( OBJ::vertexArraysSupported )
 	{
 		qDebug()<<"[Scenery3d] Vertex Array Objects are supported";
 	}
@@ -79,7 +92,6 @@ void OBJ::setupGL()
 	{
 		qWarning()<<"[Scenery3d] Vertex Array Objects are not supported on your hardware";
 	}
-	testObj.destroy();
 }
 
 OBJ::OBJ() : m_vertexBuffer(QOpenGLBuffer::VertexBuffer), m_indexBuffer(QOpenGLBuffer::IndexBuffer)
