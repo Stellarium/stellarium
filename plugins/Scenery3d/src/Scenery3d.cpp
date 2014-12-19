@@ -68,7 +68,7 @@
 #define FARZ 15000.0f
 
 //macro for easier uniform setting
-#define SET_UNIFORM(shd,uni,val) shd->setUniformValue(shaderManager.getUniformLocation(shd,ShaderManager::uni),val)
+#define SET_UNIFORM(shd,uni,val) shd->setUniformValue(shaderManager.getUniformLocation(shd,uni),val)
 
 static const float AMBIENT_BRIGHTNESS_FACTOR=0.05f;
 static const float LUNAR_BRIGHTNESS_FACTOR=0.2f;
@@ -1648,6 +1648,7 @@ void Scenery3d::init()
 	OBJ::setupGL();
 	initShadowmapping();
 
+	qDebug()<<"[Scenery3d] Initializing cubemap...";
 	//init cubemaps
 	for (int i=0; i<6; i++) {
 	    if (cubeMap[i] == NULL) {
@@ -1660,6 +1661,7 @@ void Scenery3d::init()
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	    }
 	}
+	qDebug()<<"[Scenery3d] Initializing cubemap...done!";
 }
 
 void Scenery3d::deleteShadowmapping()

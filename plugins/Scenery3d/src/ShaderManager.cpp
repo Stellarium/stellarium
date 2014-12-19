@@ -96,6 +96,10 @@ QOpenGLShaderProgram* ShaderManager::getShader(bool pixelLighting, bool shadows,
 		prog = NULL;
 		qCritical()<<"[Scenery3d] ERROR: Shader '"<<flags<<"' could not be created. Fix errors and reload shaders or restart program.";
 	}
+	else
+	{
+		qDebug()<<"[Scenery3d] Shader '"<<flags<<"' created";
+	}
 
 	//may put null in cache on fail
 	m_shaderCache[flags] = prog;
@@ -234,7 +238,8 @@ void ShaderManager::buildUniformCache(QOpenGLShaderProgram &program)
 		glGetActiveUniform(prog,i,bufSize,&length,&size,&type,buf.data());
 		QString str(buf);
 		str = str.trimmed(); // no idea if this is required
-		qDebug()<<i<<str<<size<<type;
+
+		GLint loc = program.uniformLocation(str);
 
 		t_UniformStrings::iterator it = uniformStrings.find(str);
 
@@ -244,7 +249,13 @@ void ShaderManager::buildUniformCache(QOpenGLShaderProgram &program)
 		{
 			//this is uniform we recognize
 			//need to get the uniforms location (!= index)
-			m_uniformCache[&program][*it] = program.uniformLocation(str);
+			m_uniformCache[&program][*it] = loc;
+
+			qDebug()<<i<<loc<<str<<size<<type<<" mapped to "<<*it;
+		}
+		else
+		{
+			qWarning()<<i<<loc<<str<<size<<type<<" UNKNOWN!!!";
 		}
 	}
 }
