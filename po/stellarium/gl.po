@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-12-15 22:16+0600\n"
-"PO-Revision-Date: 2014-11-29 09:12+0000\n"
+"PO-Revision-Date: 2014-12-18 19:50+0000\n"
 "Last-Translator: Manuel Rosales <manuel.rosales@mundo-r.com>\n"
 "Language-Team: Galician <gl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-12-16 06:13+0000\n"
+"X-Launchpad-Export-Date: 2014-12-19 05:47+0000\n"
 "X-Generator: Launchpad (build 17286)\n"
 
 #: src/core/modules/ConstellationMgr.cpp:132 src/core/modules/StarMgr.cpp:353
@@ -2048,10 +2048,12 @@ msgid ""
 "No OpenGL 2 found on this system. Please upgrade hardware or use MESA or an "
 "older version."
 msgstr ""
+"Non se atopou OpenGl neste sistema. Actualiza o hardware, ou usa MESA ou "
+"unha versión anterior."
 
 #: src/StelMainView.cpp:382
 msgid "Cannot acquire necessary OpenGL resources."
-msgstr ""
+msgstr "Non se puido acceder ós recursos necesarios de OpenGl."
 
 #: src/StelMainView.cpp:441
 msgid "Save screenshot"
@@ -2102,6 +2104,9 @@ msgid ""
 "Ignore and suppress this notice in the future and try to continue in "
 "degraded mode anyway?"
 msgstr ""
+"O subsistema OpenGL ES ten problemas. Mira o arquivo log para máis detalles\n"
+"Ignorar e suprimir esta mensaxe no futuro e intentar continuar igualmente en "
+"modo degradado?"
 
 #: src/StelMainView.cpp:830
 #, qt-format
@@ -2227,7 +2232,7 @@ msgstr "Árabe"
 
 #: src/translations.h:90
 msgid "Arabic Moon Stations"
-msgstr ""
+msgstr "Estacións lunares árabes"
 
 #: src/translations.h:91
 msgid "Aztec"
@@ -2255,7 +2260,7 @@ msgstr "Indian Vedic"
 
 #: src/translations.h:97
 msgid "Japanese Moon Stations"
-msgstr ""
+msgstr "Estacións lunares xaponesas"
 
 #: src/translations.h:98
 msgid "Korean"
@@ -2296,7 +2301,7 @@ msgstr "Sami"
 #. TRANSLATORS: Name of the sky culture
 #: src/translations.h:108
 msgid "Siberian"
-msgstr ""
+msgstr "Siberiano/a"
 
 #: src/translations.h:109
 msgid "Tupi-Guarani"
@@ -3705,7 +3710,7 @@ msgstr "Copiar e Localizar a ligazón"
 
 #: src/ui_dateTimeDialogGui.h:378
 msgid "Date and Time in Gregorian calendar"
-msgstr ""
+msgstr "Data e tempo no calendario gregoriano"
 
 #: src/ui_dateTimeDialogGui.h:380 src/ui_dateTimeDialogGui.h:385
 msgid "Julian Date"
@@ -4300,7 +4305,7 @@ msgstr ""
 
 #: src/ui_viewDialog.h:1354
 msgid "Use native names for planets from current culture"
-msgstr ""
+msgstr "Usar nomes nativos da cultura actual para os planetas"
 
 #: src/ui_viewDialog.h:1356
 msgid "Visible"
@@ -8127,47 +8132,47 @@ msgstr "Fiestra de configuración de exoplanetas"
 #. TRANSLATORS: Habitable zone
 #: plugins/Exoplanets/src/Exoplanets.cpp:848
 msgid "Hot"
-msgstr ""
+msgstr "Quente"
 
 #. TRANSLATORS: Habitable zone
 #: plugins/Exoplanets/src/Exoplanets.cpp:850
 msgid "Warm"
-msgstr ""
+msgstr "Morno"
 
 #. TRANSLATORS: Habitable zone
 #: plugins/Exoplanets/src/Exoplanets.cpp:852
 msgid "Cold"
-msgstr ""
+msgstr "Frío"
 
 #. TRANSLATORS: Planet size
 #: plugins/Exoplanets/src/Exoplanets.cpp:855
 msgid "Miniterran"
-msgstr ""
+msgstr "Moito menor cá Terra"
 
 #. TRANSLATORS: Planet size
 #: plugins/Exoplanets/src/Exoplanets.cpp:857
 msgid "Subterran"
-msgstr ""
+msgstr "Menor cá Terra"
 
 #. TRANSLATORS: Planet size
 #: plugins/Exoplanets/src/Exoplanets.cpp:859
 msgid "Terran"
-msgstr ""
+msgstr "Coma a Terra"
 
 #. TRANSLATORS: Planet size
 #: plugins/Exoplanets/src/Exoplanets.cpp:861
 msgid "Superterran"
-msgstr ""
+msgstr "Maior cá Terra"
 
 #. TRANSLATORS: Planet size
 #: plugins/Exoplanets/src/Exoplanets.cpp:863
 msgid "Jovian"
-msgstr ""
+msgstr "Coma Xúpiter"
 
 #. TRANSLATORS: Planet size
 #: plugins/Exoplanets/src/Exoplanets.cpp:865
 msgid "Neptunian"
-msgstr ""
+msgstr "Coma Neptuno"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:180
 msgid "planetary system"
@@ -8240,7 +8245,7 @@ msgstr "Ano de descuberta"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:242
 msgid "Planetary class"
-msgstr ""
+msgstr "Tipo de planeta"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:243
 msgid "Habitable class"
@@ -8254,7 +8259,7 @@ msgstr "Temp. media da superficie"
 #. TRANSLATORS: Full phrase is "Equilibrium Temperature"
 #: plugins/Exoplanets/src/Exoplanet.cpp:247
 msgid "Equilibrium temp."
-msgstr ""
+msgstr "Equilibrio temp."
 
 #. TRANSLATORS: ESI = Earth Similarity Index
 #: plugins/Exoplanets/src/Exoplanet.cpp:249
@@ -8316,10 +8321,12 @@ msgid ""
 "This plugin can display potential habitable exoplanets (orange marker) and "
 "some information about those planets."
 msgstr ""
+"Este engadido pode mostrar exoplanetas potencialmente habitables (marcados "
+"en cor laranxa) e algunha información sobre eses planetas."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:170
 msgid "Planetary Class"
-msgstr ""
+msgstr "Tipo de planeta"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:170
 msgid ""
@@ -8365,7 +8372,7 @@ msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:173
 msgid "Equilibrium Temperature"
-msgstr ""
+msgstr "Equilibrio de temperatura"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:173
 msgid ""
@@ -8374,6 +8381,10 @@ msgid ""
 "body being heated only by its parent star (assuming a 0.3 bond albedo). As "
 "example the planetary equilibrium temperature of Earth is -18.15°C (255 K)."
 msgstr ""
+"O equilibrio de temperatura planetario é unha temperatura teórica en (ºC) no "
+"que o planeta sería considerado simplemente coma se fose un corpo negro só "
+"quecido pola súa estrela nai (asumindo un albedo de 0,3). Como exemplo, a "
+"temperatura de equilibrio planetario da Terra é -18,15 ° C (255 K)."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:174
 msgid "Earth Similarity Index (ESI)"
@@ -8391,23 +8402,23 @@ msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:175
 msgid "Additional info"
-msgstr ""
+msgstr "Información adicional"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:176
 msgid "Circumstellar habitable zone"
-msgstr ""
+msgstr "Zona habitable arredor da estrela"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:177
 msgid "Planetary equilibrium temperature"
-msgstr ""
+msgstr "Temperatura de equilibrio planetario"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:178
 msgid "Planetary habitability"
-msgstr ""
+msgstr "Habitabilidade planetaria"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:179
 msgid "Earth Similarity Index"
-msgstr ""
+msgstr "Índice de semellanza coa Terra"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:194
 msgid "General professional Web sites relevant to extrasolar planets"
@@ -9967,7 +9978,7 @@ msgstr "Gal. Lonx/Lat"
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:208
 msgctxt "abbreviated in the plugin"
 msgid "Ecl. Long/Lat"
-msgstr ""
+msgstr "Ecl. Lonx/Lat"
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:227
 msgctxt "abbreviated in the plugin"
@@ -10009,7 +10020,7 @@ msgstr "Ascensión recta/Declinación"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:165
 msgid "Ecliptic Longitude/Latitude"
-msgstr ""
+msgstr "Ecliptic Lonxitude/Latitude"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:166
 msgid "Ecliptic Longitude/Latitude (J2000.0)"
