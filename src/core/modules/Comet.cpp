@@ -151,7 +151,7 @@ QString Comet::getInfoString(const StelCore *core, const InfoStringGroup &flags)
 		oss << "</h2>";
 	}
 
-	if (flags&ObjectType)
+	if (flags&ObjectType && getPlanetType()!=isUNDEFINED)
 	{
 		oss << q_("Type: <b>%1</b>").arg(q_(getPlanetTypeString())) << "<br />";
 	}
