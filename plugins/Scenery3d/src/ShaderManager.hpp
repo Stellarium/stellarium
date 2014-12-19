@@ -27,11 +27,12 @@
 class QOpenGLShaderProgram;
 
 //! A simple shader cache class that gives us the correct shader depending on desired configuration.
-class ShaderManager
+//! It also contains a uniform cache to avoid unnecessary glUniformLocation calls
+class ShaderMgr
 {
 public:
-	ShaderManager();
-	~ShaderManager();
+	ShaderMgr();
+	~ShaderMgr();
 
 	//! Enum for OpenGL shader attribute locations
 	enum ATTLOC
@@ -64,10 +65,6 @@ public:
 		UNIFORM_MAT_SHADOW1,
 		UNIFORM_MAT_SHADOW2,
 		UNIFORM_MAT_SHADOW3,
-		UNIFORM_MAT_SHADOW4,
-		UNIFORM_MAT_SHADOW5,
-		UNIFORM_MAT_SHADOW6,
-		UNIFORM_MAT_SHADOW7,
 
 		//! Defines the Diffuse texture slot
 		UNIFORM_TEX_DIFFUSE,
@@ -76,10 +73,6 @@ public:
 		UNIFORM_TEX_SHADOW1,
 		UNIFORM_TEX_SHADOW2,
 		UNIFORM_TEX_SHADOW3,
-		UNIFORM_TEX_SHADOW4,
-		UNIFORM_TEX_SHADOW5,
-		UNIFORM_TEX_SHADOW6,
-		UNIFORM_TEX_SHADOW7,
 
 		//! Material ambient color
 		UNIFORM_MTL_AMBIENT,
@@ -96,14 +89,20 @@ public:
 		UNIFORM_LIGHT_AMBIENT,
 		//! Light diffuse intensity
 		UNIFORM_LIGHT_DIFFUSE,
+
+		//! Squared frustum splits (vec4)
+		UNIFORM_VEC_SQUAREDSPLITS,
 	};
 
 	//! Returns a shader that supports the specified operations. Must be called within a GL context.
-	QOpenGLShaderProgram* getShader(bool pixelLighting,bool shadows,bool bump);
+	inline QOpenGLShaderProgram* getShader(bool pixelLighting,bool shadows,bool bump);
+
+	//! Returns a shader that can only transform geometry, nothing else
+	inline QOpenGLShaderProgram* getTransformShader();
 
 	//! Returns the location of this uniform for this shader, or -1 if this uniform does not exist.
 	//! This is cached to elimate the overhead of the glGet calls
-	inline GLint getUniformLocation(const QOpenGLShaderProgram* shad,UNIFORM uni);
+	inline GLint uniformLocation(const QOpenGLShaderProgram* shad,UNIFORM uni);
 
 	//! Clears the shaders that have been created by this manager. Must be called within a GL context.
 	void clearCache();
@@ -112,16 +111,27 @@ private:
 	typedef QMap<QString,UNIFORM> t_UniformStrings;
 	static t_UniformStrings uniformStrings;
 
+	//A Bitflag enum which contains features that shaders can implement, and which this manager can dynamically select
 	enum FeatureFlags
 	{
-		PIXEL_LIGHTING  = 0x1u,
-		SHADOWS         = 0x2u,
-		BUMP            = 0x4u,
+		//Transform-only shader (all flags off) (use for depth-only render)
+		TRANSFORM	= 0,
+		//The shader has some sort of color output
+		SHADING		= (1<<0),
+		//Per-pixel lighting
+		PIXEL_LIGHTING  = (1<<1),
+		//Shader applies shadows from shadow maps
+		SHADOWS         = (1<<2),
+		//Shader applies bump/normal maps
+		BUMP            = (1<<3),
+		//Shader applies alpha testing (w. fragment discard)
+		ALPHATEST	= (1<<4),
 	};
 
 	QString getVShaderName(uint flags);
 	QString getGShaderName(uint flags);
 	QString getFShaderName(uint flags);
+	QOpenGLShaderProgram* findOrLoadShader(uint flags);
 	bool loadShader(QOpenGLShaderProgram& program, const QString& vShader, const QString& gShader, const QString& fShader);
 	void buildUniformCache(QOpenGLShaderProgram& program);
 
@@ -132,7 +142,21 @@ private:
 	t_UniformCache m_uniformCache;
 };
 
-GLint ShaderManager::getUniformLocation(const QOpenGLShaderProgram *shad, UNIFORM uni)
+QOpenGLShaderProgram* ShaderMgr::getShader(bool pixelLighting, bool shadows, bool bump)
+{
+	//Build bitflags from bools. Some stuff requires pixelLighting to be enabled, so check it too.
+	return findOrLoadShader(SHADING |
+			(pixelLighting & PIXEL_LIGHTING)|
+			(pixelLighting & shadows & SHADOWS)|
+			(pixelLighting & bump & BUMP));
+}
+
+QOpenGLShaderProgram* ShaderMgr::getTransformShader()
+{
+	return findOrLoadShader(TRANSFORM);
+}
+
+GLint ShaderMgr::uniformLocation(const QOpenGLShaderProgram *shad, UNIFORM uni)
 {
 	t_UniformCache::iterator it = m_uniformCache.find(shad);
 	if(it!=m_uniformCache.end())
