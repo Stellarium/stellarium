@@ -203,7 +203,7 @@ QString MinorPlanet::getInfoString(const StelCore *core, const InfoStringGroup &
 		}
 	}
 
-	if (flags&ObjectType)
+	if (flags&ObjectType && getPlanetType()!=isUNDEFINED)
 	{
 		oss << q_("Type: <b>%1</b>").arg(q_(getPlanetTypeString())) << "<br />";
 	}
