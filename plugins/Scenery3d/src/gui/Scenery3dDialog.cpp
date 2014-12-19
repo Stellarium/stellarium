@@ -26,7 +26,7 @@ void Scenery3dDialog::retranslate()
 
 void Scenery3dDialog::createDialogContent()
 {
-	//manager should be created here
+	//manager should be created at this point
 	mgr = GETSTELMODULE(Scenery3dMgr);
 	Q_ASSERT(mgr);
 
@@ -39,16 +39,19 @@ void Scenery3dDialog::createDialogContent()
 		SLOT(scenery3dChanged(QListWidgetItem*)));
 
 	//checkboxes can connect directly to manager
+	connect(ui->checkBoxEnablePixelLight, SIGNAL(clicked(bool)),mgr,
+		SLOT(setEnablePixelLighting(bool)));
 	connect(ui->checkBoxEnableShadows, SIGNAL(clicked(bool)), mgr,
 		SLOT(setEnableShadows(bool)));
 	connect(ui->checkBoxEnableBump, SIGNAL(clicked(bool)), mgr,
 		SLOT(setEnableBumps(bool)));
-	connect(ui->checkBoxEnableFiltering, SIGNAL(clicked(bool)), mgr,
-		SLOT(setEnableShadowsFilter(bool)));
-	connect(ui->checkBoxFilterHQ, SIGNAL(clicked(bool)), mgr,
-		SLOT(setEnableShadowsFilterHQ(bool)));
+
+	//connectSlotsByName does not work in our case
+	connect(ui->comboBoxShadowFiltering, SIGNAL(currentIndexChanged(int)),this,
+		SLOT(on_comboBoxShadowFiltering_currentIndexChanged(int)));
 
 	//connect Scenery3d update events
+	connect(mgr, SIGNAL(enablePixelLightingChanged(bool)), SLOT(updateFromManager()));
 	connect(mgr, SIGNAL(enableShadowsChanged(bool)), SLOT(updateFromManager()));
 	connect(mgr, SIGNAL(enableBumpsChanged(bool)), SLOT(updateFromManager()));
 	connect(mgr, SIGNAL(enableShadowsFilterChanged(bool)), SLOT(updateFromManager()));
@@ -70,6 +73,24 @@ void Scenery3dDialog::createDialogContent()
     updateFromManager();
 }
 
+void Scenery3dDialog::on_comboBoxShadowFiltering_currentIndexChanged(int index)
+{
+	qDebug()<<index;
+	switch(index)
+	{
+		case 0:
+			mgr->setEnableShadowsFilter(false);
+			mgr->setEnableShadowsFilterHQ(false);
+			break;
+		case 1:
+			mgr->setEnableShadowsFilterHQ(false);
+			mgr->setEnableShadowsFilter(true);
+			break;
+		case 2:
+			mgr->setEnableShadowsFilterHQ(true);
+	}
+}
+
 
 void Scenery3dDialog::scenery3dChanged(QListWidgetItem* item)
 {
@@ -83,8 +104,18 @@ void Scenery3dDialog::scenery3dChanged(QListWidgetItem* item)
 // Update the widget to make sure it is synchrone if a value was changed programmatically
 void Scenery3dDialog::updateFromManager()
 {
-    ui->checkBoxEnableBump->setChecked(mgr->getEnableBumps());
-    ui->checkBoxEnableShadows->setChecked(mgr->getEnableShadows());
-    ui->checkBoxEnableFiltering->setChecked(mgr->getEnableShadowsFilter());
-    ui->checkBoxFilterHQ->setChecked(mgr->getEnableShadowsFilterHQ());
+	bool pix = mgr->getEnablePixelLighting();
+	ui->checkBoxEnablePixelLight->setChecked(pix);
+
+	ui->checkBoxEnableBump->setChecked(mgr->getEnableBumps());
+	ui->checkBoxEnableBump->setEnabled(pix);
+	ui->checkBoxEnableShadows->setChecked(mgr->getEnableShadows());
+	ui->checkBoxEnableShadows->setEnabled(pix);
+
+	if(mgr->getEnableShadowsFilterHQ() && mgr->getEnableShadowsFilter())
+		ui->comboBoxShadowFiltering->setCurrentIndex(2);
+	else if (mgr->getEnableShadowsFilter())
+		ui->comboBoxShadowFiltering->setCurrentIndex(1);
+	else
+		ui->comboBoxShadowFiltering->setCurrentIndex(0);
 }

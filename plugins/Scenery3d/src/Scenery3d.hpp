@@ -47,11 +47,8 @@ public:
     virtual ~Scenery3d();
 
     //! Sets the shaders for the plugin
-    void setShaders(QOpenGLShaderProgram* shadowShader = 0, QOpenGLShaderProgram* bumpShader = 0, QOpenGLShaderProgram* univShader = 0, QOpenGLShaderProgram* debugShader = 0)
+    void setShaders(QOpenGLShaderProgram* debugShader = 0)
     {
-        this->shadowShader = shadowShader;
-        this->bumpShader = bumpShader;
-        this->univShader = univShader;
         this->debugShader = debugShader;
     }
 
@@ -82,6 +79,8 @@ public:
 
     bool getDebugEnabled() const { return debugEnabled; }
     void setDebugEnabled(bool debugEnabled) { this->debugEnabled = debugEnabled; }
+    bool getPixelLightingEnabled() const { return pixelLighting; }
+    void setPixelLightingEnabled(const bool val) { pixelLighting = val; }
     bool getShadowsEnabled(void) const { return shadowsEnabled; }
     void setShadowsEnabled(bool shadowsEnabled) { this->shadowsEnabled = shadowsEnabled; }
     bool getBumpsEnabled(void) const { return bumpsEnabled; }
@@ -95,6 +94,7 @@ public:
     bool getLocationInfoEnabled(void) const { return textEnabled; }
     void setLocationInfoEnabled(bool locationinfoenabled) { this->textEnabled = locationinfoenabled; }
 
+
     uint getCubemapSize() const { return cubemapSize; }
     void setCubemapSize(uint size) { cubemapSize = size; }
     uint getShadowmapSize() const { return shadowmapSize; }
@@ -105,6 +105,8 @@ public:
     enum ShadowCaster { None, Sun, Moon, Venus };
     enum Effect { No, BumpMapping, ShadowMapping, All};
 
+    //! Returns the shader manager this instance uses
+    ShaderMgr& getShaderManager()    {	    return shaderManager;    }
 
 private:
     Scenery3dMgr* parent;
@@ -114,6 +116,7 @@ private:
     float torchBrightness; // ^L toggle light brightness
 
     bool hasModels;             // flag to see if there's anything to draw
+    bool pixelLighting;         // true if per-pixel lighting should be used
     bool shadowsEnabled;        // switchable value (^SPACE): Use shadow mapping
     bool bumpsEnabled;          // switchable value (^B): Use bump mapping
     bool textEnabled;           // switchable value (^K): display coordinates on screen. THIS IS NOT FOR DEBUGGING, BUT A PROGRAM FEATURE!
@@ -175,12 +178,6 @@ private:
 
     //Currently selected Shader
     QOpenGLShaderProgram* curShader;
-    //Shadow mapping shader + per pixel lighting
-    QOpenGLShaderProgram* shadowShader;
-    //Bump mapping shader
-    QOpenGLShaderProgram* bumpShader;
-    //Universal shader: shadow + bump mapping
-    QOpenGLShaderProgram* univShader;
     //Debug shader
     QOpenGLShaderProgram* debugShader;
 

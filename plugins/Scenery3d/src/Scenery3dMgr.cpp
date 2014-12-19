@@ -37,7 +37,6 @@
 #include "StelGui.hpp"
 #include "StelGuiItems.hpp"
 #include "StelFileMgr.hpp"
-#include "StelIniParser.hpp"
 #include "StelPainter.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelTranslator.hpp"
@@ -47,9 +46,6 @@ Scenery3dMgr::Scenery3dMgr() :
     scenery3d(NULL),
     flagEnabled(false),
     cleanedUp(false),
-    shadowShader(NULL),
-    bumpShader(NULL),
-    univShader(NULL),
     debugShader(NULL)
 {
     setObjectName("Scenery3dMgr");
@@ -151,7 +147,7 @@ void Scenery3dMgr::init()
 		scenery3d->setShadowmapSize(0);
 	}
 
-	loadShaders();
+	reloadShaders();
 	setEnableShadows(false);
 	setEnableShadowsFilter(true);
 	setEnableShadowsFilterHQ(false);
@@ -196,14 +192,11 @@ void Scenery3dMgr::deinit()
 	}
 
 	//delete shaders
-	if(!shadowShader)
-	    delete shadowShader;
-	if(!bumpShader)
-	    delete bumpShader;
-	if(!univShader)
-	    delete univShader;
 	if(!debugShader)
-	    delete debugShader;
+	{
+		delete debugShader;
+		debugShader = NULL;
+	}
 
 	cleanedUp = true;
 }
@@ -238,30 +231,23 @@ void Scenery3dMgr::createActions()
 	addAction("actionShow_Scenery3d_debuginfo", groupName, N_("Toggle debug information"), this, "enableDebugInfo","Ctrl+R, D");
 	addAction("actionShow_Scenery3d_locationinfo", groupName, N_("Toggle location text"), this, "enableLocationInfo","Ctrl+R, T");
 	addAction("actionShow_Scenery3d_torchlight", groupName, N_("Toggle torchlight"), this, "enableTorchLight", "Ctrl+R, L");
-	addAction("actionReload_Scenery3d_shaders", groupName, N_("Reload shaders"), this, "loadShaders", "Ctrl+R, P");
+	addAction("actionReload_Scenery3d_shaders", groupName, N_("Reload shaders"), this, "reloadShaders()", "Ctrl+R, P");
 }
 
-void Scenery3dMgr::loadShaders()
+void Scenery3dMgr::reloadShaders()
 {
-    qDebug()<<"(Re)loading Scenery3d shaders";
-    //create shader objects, if not existing
-    //the shaders get this manager as parent, so we dont have to manage deletion ourselves, it is done by Qt.
-    if(!shadowShader)
-	shadowShader = new QOpenGLShaderProgram(this);
-    if(!bumpShader)
-	bumpShader = new QOpenGLShaderProgram(this);
-    if(!univShader)
-	univShader = new QOpenGLShaderProgram(this);
-    if(!debugShader)
-	debugShader = new QOpenGLShaderProgram(this);
+	showMessage(N_("Scenery3d shaders reloaded"));
 
+	qDebug()<<"(Re)loading Scenery3d shaders";
+	//create shader objects, if not existing
+	//the shaders get this manager as parent, so we dont have to manage deletion ourselves, it is done by Qt.
+	if(!debugShader)
+		debugShader = new QOpenGLShaderProgram(this);
 
-    loadShader(*shadowShader,"smap.v.glsl","smap.f.glsl");
-    loadShader(*bumpShader,"bmap.v.glsl","bmap.f.glsl");
-    loadShader(*univShader,"univ.v.glsl","univ.f.glsl");
-    loadShader(*debugShader,"debug.v.glsl","debug.f.glsl");
+	loadShader(*debugShader,"debug.v.glsl","debug.f.glsl");
 
-    scenery3d->setShaders(shadowShader,bumpShader,univShader,debugShader);
+	scenery3d->setShaders(debugShader);
+	scenery3d->getShaderManager().clearCache();
 }
 
 bool Scenery3dMgr::loadShader(QOpenGLShaderProgram& program, const QString& vShader, const QString& fShader)
@@ -466,6 +452,27 @@ void Scenery3dMgr::setEnableScene(const bool enable)
     }
 }
 
+bool Scenery3dMgr::getEnablePixelLighting() const
+{
+	return scenery3d->getPixelLightingEnabled();
+}
+
+void Scenery3dMgr::setEnablePixelLighting(const bool val)
+{
+	if(val != getEnablePixelLighting())
+	{
+		if(!val)
+		{
+			setEnableBumps(false);
+			setEnableShadows(false);
+		}
+		showMessage(QString(N_("Per-Pixel shading %1")).arg(val? N_("on") : N_("off")));
+
+		scenery3d->setPixelLightingEnabled(val);
+		emit enablePixelLightingChanged(val);
+	}
+}
+
 bool Scenery3dMgr::getEnableShadows() const
 {
 	return scenery3d->getShadowsEnabled();
@@ -513,7 +520,7 @@ void Scenery3dMgr::setEnableShadowsFilter(const bool enableShadowsFilter)
 {
 	if(enableShadowsFilter != getEnableShadowsFilter())
 	{
-		showMessage(QString(N_("Filtering shadows %1")).arg(enableShadowsFilter? N_("on") : N_("off")));
+		showMessage(QString(N_("Shadow filter quality: %1")).arg(enableShadowsFilter? (getEnableShadowsFilterHQ() ? N_("high"):N_("low")) : N_("off")));
 		scenery3d->setShadowsFilterEnabled(enableShadowsFilter);
 		emit enableShadowsFilterChanged(enableShadowsFilter);
 	}
@@ -528,8 +535,10 @@ void Scenery3dMgr::setEnableShadowsFilterHQ(const bool enableShadowsFilterHQ)
 {
 	if(enableShadowsFilterHQ != getEnableShadowsFilterHQ())
 	{
-		showMessage(QString(N_("Shadow filtering quality %1")).arg(enableShadowsFilterHQ? N_("high") : N_("low")));
 		scenery3d->setShadowsFilterHQEnabled(enableShadowsFilterHQ);
+		showMessage(QString(N_("Shadow filter quality: %1")).arg(getEnableShadowsFilter()? (enableShadowsFilterHQ ? N_("high"):N_("low")) : N_("off")));
+		if(enableShadowsFilterHQ) // turn on normal filtering
+			setEnableShadowsFilter(true);
 		emit enableShadowsFilterHQChanged(enableShadowsFilterHQ);
 	}
 }
