@@ -109,7 +109,7 @@ public:
 private:
     Scenery3dMgr* parent;
     SceneInfo currentScene;
-    ShaderManager shaderManager;
+    ShaderMgr shaderManager;
 
     float torchBrightness; // ^L toggle light brightness
 
@@ -144,7 +144,6 @@ private:
     Vec3d viewPos;
     int drawn;
 
-    Mat4f lightViewMatrix;
     QOpenGLFramebufferObject* cubeMap[6]; // front, right, left, back, top, bottom
     StelVertexArray cubePlaneFront, cubePlaneBack,
                 cubePlaneLeft, cubePlaneRight,
@@ -197,8 +196,8 @@ private:
     QVector<GLuint> shadowFBOs;
     //Holds the shadow textures
     QVector<GLuint> shadowMapsArray;
-    //Holds the shadow transformation matrix per split
-    QVector<Mat4f> shadowCPM;
+    //Holds the shadow transformation matrix per split (Crop/Projection/View)
+    QVector<QMatrix4x4> shadowCPM;
     //Number of splits for CSM
     int frustumSplits;
     //Weight for splitting the frustums
@@ -209,11 +208,7 @@ private:
     QVector<Polyhedron> focusBodies;
     //Camera values
     float camNear, camFar, camFOV, camAspect;
-    //Holds the light direction of the current light
-    Vec3f lightDir;
 
-    //light projection values
-    float dim, dimNear, dimFar;
 
     float parallaxScale;
 
@@ -230,7 +225,10 @@ private:
     void drawDirect();
     //! When another projection than perspective is selected, rendering is performed using a cubemap.
     void drawWithCubeMap();
-    void generateShadowMap();
+    //! Setup shadow map information + render
+    bool generateShadowMap();
+    //! Performs the actual rendering of the shadow map
+    bool renderShadowMaps(const Vec3f &shadowDir);
     //! Generates a 6-sided cube map by drawing a view in each direction
     void generateCubeMap();
     //! Uses the StelPainter to draw a warped cube textured with our cubemap
@@ -270,13 +268,13 @@ private:
     //Adjust the frustum to the loaded scene bounding box according to Zhang et al.
     void adjustFrustum();
     //Computes the frustum splits
-    void computeZDist(float zNear, float zFar);
-    //Computes the focus body for given split
-    void computePolyhedron(int splitIndex);
+    void computeFrustumSplits(float zNear, float zFar);
+    //Computes the focus body for given frustum
+    void computePolyhedron(Polyhedron& body, const Frustum& frustum, const Vec3f &shadowDir);
     //Computes the crop matrix to focus the light
-    void computeCropMatrix(int frustumIndex);
+    void computeCropMatrix(int frustumIndex, const Vec3f &shadowDir);
     //Computes the light projection values
-    void computeOrthoProjVals();
+    void computeOrthoProjVals(const Vec3f shadowDir, float &orthoExtent, float &orthoNear, float &orthoFar);
 
     inline QMatrix4x4 convertToQMatrix(const Mat4d& mat);
 

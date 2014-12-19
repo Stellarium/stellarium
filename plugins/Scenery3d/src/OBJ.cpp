@@ -1338,19 +1338,19 @@ void OBJ::bindBuffersGL()
 	//(but may be stored in a VAO to enable faster binding/unbinding)
 
 	//enable the attrib arrays
-	glEnableVertexAttribArray(ShaderManager::ATTLOC_VERTEX);
-	glEnableVertexAttribArray(ShaderManager::ATTLOC_NORMAL);
-	glEnableVertexAttribArray(ShaderManager::ATTLOC_TEXTURE);
-	glEnableVertexAttribArray(ShaderManager::ATTLOC_TANGENT);
-	glEnableVertexAttribArray(ShaderManager::ATTLOC_BITANGENT);
+	glEnableVertexAttribArray(ShaderMgr::ATTLOC_VERTEX);
+	glEnableVertexAttribArray(ShaderMgr::ATTLOC_NORMAL);
+	glEnableVertexAttribArray(ShaderMgr::ATTLOC_TEXTURE);
+	glEnableVertexAttribArray(ShaderMgr::ATTLOC_TANGENT);
+	glEnableVertexAttribArray(ShaderMgr::ATTLOC_BITANGENT);
 
 	const GLsizei stride = sizeof(Vertex);
 
-	glVertexAttribPointer(ShaderManager::ATTLOC_VERTEX,   3,GL_FLOAT,GL_FALSE,stride,reinterpret_cast<const void *>(offsetof(struct Vertex, position)));
-	glVertexAttribPointer(ShaderManager::ATTLOC_NORMAL,   3,GL_FLOAT,GL_FALSE,stride,reinterpret_cast<const void *>(offsetof(struct Vertex, normal)));
-	glVertexAttribPointer(ShaderManager::ATTLOC_TEXTURE,  2,GL_FLOAT,GL_FALSE,stride,reinterpret_cast<const void *>(offsetof(struct Vertex, texCoord)));
-	glVertexAttribPointer(ShaderManager::ATTLOC_TANGENT,  4,GL_FLOAT,GL_FALSE,stride,reinterpret_cast<const void *>(offsetof(struct Vertex, tangent)));
-	glVertexAttribPointer(ShaderManager::ATTLOC_BITANGENT,3,GL_FLOAT,GL_FALSE,stride,reinterpret_cast<const void *>(offsetof(struct Vertex, bitangent)));
+	glVertexAttribPointer(ShaderMgr::ATTLOC_VERTEX,   3,GL_FLOAT,GL_FALSE,stride,reinterpret_cast<const void *>(offsetof(struct Vertex, position)));
+	glVertexAttribPointer(ShaderMgr::ATTLOC_NORMAL,   3,GL_FLOAT,GL_FALSE,stride,reinterpret_cast<const void *>(offsetof(struct Vertex, normal)));
+	glVertexAttribPointer(ShaderMgr::ATTLOC_TEXTURE,  2,GL_FLOAT,GL_FALSE,stride,reinterpret_cast<const void *>(offsetof(struct Vertex, texCoord)));
+	glVertexAttribPointer(ShaderMgr::ATTLOC_TANGENT,  4,GL_FLOAT,GL_FALSE,stride,reinterpret_cast<const void *>(offsetof(struct Vertex, tangent)));
+	glVertexAttribPointer(ShaderMgr::ATTLOC_BITANGENT,3,GL_FLOAT,GL_FALSE,stride,reinterpret_cast<const void *>(offsetof(struct Vertex, bitangent)));
 
 	//vertex buffer does not need to remain bound, because the binding is stored by glVertexAttribPointer
 	m_vertexBuffer.release();
@@ -1365,11 +1365,11 @@ void OBJ::unbindBuffersGL()
 	m_indexBuffer.release();
 
 	//disable our attribute arrays
-	glDisableVertexAttribArray(ShaderManager::ATTLOC_VERTEX);
-	glDisableVertexAttribArray(ShaderManager::ATTLOC_NORMAL);
-	glDisableVertexAttribArray(ShaderManager::ATTLOC_TEXTURE);
-	glDisableVertexAttribArray(ShaderManager::ATTLOC_TANGENT);
-	glDisableVertexAttribArray(ShaderManager::ATTLOC_BITANGENT);
+	glDisableVertexAttribArray(ShaderMgr::ATTLOC_VERTEX);
+	glDisableVertexAttribArray(ShaderMgr::ATTLOC_NORMAL);
+	glDisableVertexAttribArray(ShaderMgr::ATTLOC_TEXTURE);
+	glDisableVertexAttribArray(ShaderMgr::ATTLOC_TANGENT);
+	glDisableVertexAttribArray(ShaderMgr::ATTLOC_BITANGENT);
 }
 
 void OBJ::transform(Mat4d mat)

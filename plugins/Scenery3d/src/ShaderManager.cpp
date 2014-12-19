@@ -25,9 +25,9 @@
 #include <QDir>
 #include <QOpenGLShaderProgram>
 
-ShaderManager::t_UniformStrings ShaderManager::uniformStrings;
+ShaderMgr::t_UniformStrings ShaderMgr::uniformStrings;
 
-ShaderManager::ShaderManager()
+ShaderMgr::ShaderMgr()
 {
 	if(uniformStrings.size()==0)
 	{
@@ -52,12 +52,12 @@ ShaderManager::ShaderManager()
 	}
 }
 
-ShaderManager::~ShaderManager()
+ShaderMgr::~ShaderMgr()
 {
 	clearCache();
 }
 
-void ShaderManager::clearCache()
+void ShaderMgr::clearCache()
 {
 	for(t_ShaderCache::iterator it = m_shaderCache.begin();it!=m_shaderCache.end();++it)
 	{
@@ -70,13 +70,8 @@ void ShaderManager::clearCache()
 	qDebug()<<"[Scenery3d] Shader cache cleared";
 }
 
-QOpenGLShaderProgram* ShaderManager::getShader(bool pixelLighting, bool shadows, bool bump)
+QOpenGLShaderProgram* ShaderMgr::findOrLoadShader(uint flags)
 {
-	//Build bitflags from bools. Some stuff requires pixelLighting to be enabled, so check it too.
-	uint flags = (pixelLighting & PIXEL_LIGHTING)|
-			(pixelLighting & shadows & SHADOWS)|
-			(pixelLighting & bump & BUMP);
-
 	t_ShaderCache::iterator it = m_shaderCache.find(flags);
 
 	// This may also return NULL if the load failed.
@@ -107,28 +102,38 @@ QOpenGLShaderProgram* ShaderManager::getShader(bool pixelLighting, bool shadows,
 	return prog;
 }
 
-QString ShaderManager::getVShaderName(uint flags)
+QString ShaderMgr::getVShaderName(uint flags)
 {
-	if (! (flags & PIXEL_LIGHTING ))
-		return "s3d_vertexlit.vert";
+	if(flags & SHADING)
+	{
+		if (! (flags & PIXEL_LIGHTING ))
+			return "s3d_vertexlit.vert";
+	}
+	else
+	{
+		return "s3d_transform.vert";
+	}
 	return QString();
 }
 
-QString ShaderManager::getGShaderName(uint flags)
+QString ShaderMgr::getGShaderName(uint flags)
 {
 	Q_UNUSED(flags);
 	//currently no Gshaders used
 	return QString();
 }
 
-QString ShaderManager::getFShaderName(uint flags)
+QString ShaderMgr::getFShaderName(uint flags)
 {
-	if (! (flags & PIXEL_LIGHTING ))
-		return "s3d_vertexlit.frag";
+	if(flags & SHADING)
+	{
+		if (! (flags & PIXEL_LIGHTING ))
+			return "s3d_vertexlit.frag";
+	}
 	return QString();
 }
 
-bool ShaderManager::loadShader(QOpenGLShaderProgram& program, const QString& vShader, const QString& gShader, const QString& fShader)
+bool ShaderMgr::loadShader(QOpenGLShaderProgram& program, const QString& vShader, const QString& gShader, const QString& fShader)
 {
 	qDebug()<<"Loading Scenery3d shader: vs:"<<vShader<<", gs:"<<gShader<<", fs:"<<fShader<<"";
 
@@ -219,7 +224,7 @@ bool ShaderManager::loadShader(QOpenGLShaderProgram& program, const QString& vSh
 	return true;
 }
 
-void ShaderManager::buildUniformCache(QOpenGLShaderProgram &program)
+void ShaderMgr::buildUniformCache(QOpenGLShaderProgram &program)
 {
 	//this enumerates all available uniforms of this shader, and stores their locations in a map
 	GLuint prog = program.programId();
