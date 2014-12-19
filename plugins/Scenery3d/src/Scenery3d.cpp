@@ -1016,6 +1016,13 @@ void Scenery3d::adjustFrustum()
 
 bool Scenery3d::generateShadowMap()
 {
+	//test if shadow mapping has been initialized
+	if(shadowFBOs.size()==0)
+	{
+		if(!initShadowmapping())
+			return false; //can't use shadowmaps
+	}
+
 	//Needed so we can actually adjust the frustum upwards after it was already adjusted downwards.
 	//This resets it and they'll be recomputed in adjustFrustum();
 	camNear = NEARZ;
@@ -1078,7 +1085,7 @@ bool Scenery3d::renderShadowMaps(const Vec3f& shadowDir)
 	QOpenGLShaderProgram* tfshd = shaderManager.getTransformShader();
 	if(!tfshd)
 	{
-		parent->showMessage("Transformation shader can not be used, can not use shadows.");
+		parent->showMessage("Shadow transformation shader can not be used, can not use shadows. Check log for details.");
 		return false;
 	}
 	tfshd->bind();
@@ -1628,10 +1635,14 @@ void Scenery3d::drawDebug()
 void Scenery3d::init()
 {
 	OBJ::setupGL();
-	initShadowmapping();
 
-	qDebug()<<"[Scenery3d] Initializing cubemap...";
+	//shadow map init happens on first usage of shadows
+
 	//init cubemaps
+	qDebug()<<"[Scenery3d] Initializing cubemap...";
+
+	//TODO make this use a REAL GL_TEXTURE_CUBE_MAP, this is supported since GL 1.3, we use newer stuff
+	// probably needs some adaptation in StelPainter for that (drawSphericalCubemap or sth. like that)
 	for (int i=0; i<6; i++) {
 	    if (cubeMap[i] == NULL) {
 		cubeMap[i] = new QOpenGLFramebufferObject(cubemapSize, cubemapSize, QOpenGLFramebufferObject::Depth);
@@ -1648,23 +1659,27 @@ void Scenery3d::init()
 
 void Scenery3d::deleteShadowmapping()
 {
-
 	if(shadowFBOs.size()>0) //kinda hack that finds out if shadowmap related objects have been created
 	{
 		//we can delete them all at once then
 		glDeleteFramebuffers(shadowFBOs.size(),shadowFBOs.constData());
 		glDeleteTextures(shadowMapsArray.size(),shadowMapsArray.constData());
+
+		shadowFBOs.clear();
+		shadowMapsArray.clear();
+		shadowCPM.clear();
+		frustumArray.clear();
+		focusBodies.clear();
+
+		qDebug()<<"[Scenery3d] Shadowmapping objects cleaned up";
 	}
-	shadowFBOs.clear();
-	shadowMapsArray.clear();
-	shadowCPM.clear();
-	frustumArray.clear();
-	focusBodies.clear();
 }
 
-void Scenery3d::initShadowmapping()
+bool Scenery3d::initShadowmapping()
 {
 	deleteShadowmapping();
+
+	bool valid = false;
 
 	if(shadowmapSize>0)
 	{
@@ -1716,7 +1731,14 @@ void Scenery3d::initShadowmapping()
 			glReadBuffer(GL_NONE);
 
 			if(glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
+			{
 				qWarning() << "[Scenery3D] glCheckFramebufferStatus failed, can't use FBO";
+				break;
+			}
+			else if (i==frustumSplits-1)
+			{
+				valid = true;
+			}
 		}
 
 		//Done. Unbind and switch to normal texture unit 0
@@ -1725,7 +1747,16 @@ void Scenery3d::initShadowmapping()
 
 		qDebug()<<"[Scenery3D] shadowmapping initialized";
 	}
-	else qWarning()<<"[Scenery3D] shadowmapping not supported or disabled";
+	else
+	{
+		qWarning()<<"[Scenery3D] shadowmapping not supported or disabled";
+	}
+
+	if(!valid)
+	{
+		parent->showMessage("Shadow mapping can not be used on your hardware, check logs for details");
+	}
+	return valid;
 }
 
 void Scenery3d::draw(StelCore* core)
@@ -1757,6 +1788,11 @@ void Scenery3d::draw(StelCore* core)
 	{
 		if(!generateShadowMap())
 			return;
+	}
+	else
+	{
+		//remove the shadow mapping stuff if not in use, this is only done once
+		deleteShadowmapping();
 	}
 
 	if (core->getCurrentProjectionType() == StelCore::ProjectionPerspective)

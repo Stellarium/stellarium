@@ -216,7 +216,7 @@ private:
 
     // --- initialization
     ///! Re-initializes shadowmapping related objects
-    void initShadowmapping();
+    bool initShadowmapping();
     ///! Cleans up shadowmapping related objects
     void deleteShadowmapping();
 
