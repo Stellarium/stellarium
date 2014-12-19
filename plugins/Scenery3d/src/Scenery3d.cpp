@@ -68,7 +68,7 @@
 #define FARZ 15000.0f
 
 //macro for easier uniform setting
-#define SET_UNIFORM(shd,uni,val) shd->setUniformValue(shaderManager.getUniformLocation(shd,uni),val)
+#define SET_UNIFORM(shd,uni,val) shd->setUniformValue(shaderManager.uniformLocation(shd,uni),val)
 
 static const float AMBIENT_BRIGHTNESS_FACTOR=0.05f;
 static const float LUNAR_BRIGHTNESS_FACTOR=0.2f;
@@ -158,9 +158,6 @@ Scenery3d::Scenery3d(Scenery3dMgr* parent)
     camAspect = 1.0f;
     camNear = NEARZ;
     camFar = FARZ;
-    dim = 1.0f;
-    dimNear = 1.0f;
-    dimFar = dimNear+1.0f;
 
     parallaxScale = 0.015f;
 
@@ -575,22 +572,24 @@ float Scenery3d::groundHeight()
 void Scenery3d::setupPassUniforms(QOpenGLShaderProgram *shader)
 {
 	//send projection matrix
-	SET_UNIFORM(shader,ShaderManager::UNIFORM_MAT_PROJECTION, projectionMatrix);
+	SET_UNIFORM(shader,ShaderMgr::UNIFORM_MAT_PROJECTION, projectionMatrix);
 
 	//send light strength
-	SET_UNIFORM(shader,ShaderManager::UNIFORM_LIGHT_AMBIENT,lightInfo.ambient);
-	SET_UNIFORM(shader,ShaderManager::UNIFORM_LIGHT_DIFFUSE,lightInfo.directional);
+	SET_UNIFORM(shader,ShaderMgr::UNIFORM_LIGHT_AMBIENT,lightInfo.ambient);
+	SET_UNIFORM(shader,ShaderMgr::UNIFORM_LIGHT_DIFFUSE,lightInfo.directional);
 
-	//-- Shadowing setup --
-	if(lightInfo.source != None && shadowsEnabled)
+	//-- Shadowing setup -- this was previously in generateCubeMap_drawSceneWithShadows
+	//first check if shader supports shadows
+	GLint loc = shaderManager.uniformLocation(shader,ShaderMgr::UNIFORM_VEC_SQUAREDSPLITS);
+	if(lightInfo.source != None && shadowsEnabled && loc >= 0)
 	{
 		//Calculate texture matrix for projection
 		//This matrix takes us from eye space to the light's clip space
 		//It is postmultiplied by the inverse of the current view matrix when specifying texgen
-		static Mat4f biasMatrix(0.5f, 0.0f, 0.0f, 0.0f,
-					0.0f, 0.5f, 0.0f, 0.0f,
-					0.0f, 0.0f, 0.5f, 0.0f,
-					0.5f, 0.5f, 0.5f, 1.0f);	//bias from [-1, 1] to [0, 1]
+		static const QMatrix4x4 biasMatrix(0.5f, 0.0f, 0.0f, 0.5f,
+					     0.0f, 0.5f, 0.0f, 0.5f,
+					     0.0f, 0.0f, 0.5f, 0.5f,
+					     0.0f, 0.0f, 0.0f, 1.0f);	//bias from [-1, 1] to [0, 1]
 
 		//Holds the squared frustum splits necessary for the lookup in the shader
 		Vec4f squaredSplits = Vec4f(0.0f);
@@ -603,12 +602,15 @@ void Scenery3d::setupPassUniforms(QOpenGLShaderProgram *shader)
 		    glBindTexture(GL_TEXTURE_2D, shadowMapsArray.at(i));
 
 		    //Compute texture matrix
-		    Mat4f texMat = biasMatrix * shadowCPM.at(i);
+		    QMatrix4x4 texMat = biasMatrix * shadowCPM.at(i);
 
 		    //Send to shader
-		    //SET_UNIFORM(curShader,ShaderManager::UNIFORM_TEX_SHADOW0+i, 3+i);
-		    //glUniformMatrix4fv( ShaderManager::getUniformLocation(curShader,ShaderManager::UNIFORM_MAT_SHADOW0 +i),1,GL_FALSE,texMat.r);
+		    SET_UNIFORM(shader,static_cast<ShaderMgr::UNIFORM>(ShaderMgr::UNIFORM_TEX_SHADOW0+i), 3+i);
+		    SET_UNIFORM(shader,static_cast<ShaderMgr::UNIFORM>(ShaderMgr::UNIFORM_MAT_SHADOW0+i),texMat);
 		}
+
+		//Send squared splits to the shader
+		shader->setUniformValue(loc, squaredSplits.v[0], squaredSplits.v[1], squaredSplits.v[2], squaredSplits.v[3]);
 	}
 }
 
@@ -616,7 +618,7 @@ void Scenery3d::setupFrameUniforms(QOpenGLShaderProgram *shader)
 {
 	//-- Transform setup --
 	//check if shader wants a MVP or separate matrices
-	GLint loc = shaderManager.getUniformLocation(shader,ShaderManager::UNIFORM_MAT_MVP);
+	GLint loc = shaderManager.uniformLocation(shader,ShaderMgr::UNIFORM_MAT_MVP);
 	if(loc>=0)
 	{
 		shader->setUniformValue(loc,projectionMatrix * modelViewMatrix);
@@ -626,37 +628,37 @@ void Scenery3d::setupFrameUniforms(QOpenGLShaderProgram *shader)
 		//note that we DO NOT set the projection matrix here, done in setupPassUniforms already
 
 		//this macro saves a bit of writing
-		SET_UNIFORM(shader,ShaderManager::UNIFORM_MAT_MODELVIEW, modelViewMatrix);
+		SET_UNIFORM(shader,ShaderMgr::UNIFORM_MAT_MODELVIEW, modelViewMatrix);
 	}
 
 	//-- Lighting setup --
 	//check if we require a normal matrix
-	loc = shaderManager.getUniformLocation(shader,ShaderManager::UNIFORM_MAT_NORMAL);
+	loc = shaderManager.uniformLocation(shader,ShaderMgr::UNIFORM_MAT_NORMAL);
 	if(loc>=0)
 	{
 		QMatrix3x3 normalMatrix = modelViewMatrix.normalMatrix();
 		shader->setUniformValue(loc,normalMatrix);
 
 		//assume light direction is only required when normal matrix is also used (would not make much sense alone)
-		SET_UNIFORM(shader,ShaderManager::UNIFORM_LIGHT_DIRECTION, normalMatrix * lightInfo.lightDirectionWorld);
+		SET_UNIFORM(shader,ShaderMgr::UNIFORM_LIGHT_DIRECTION, normalMatrix * lightInfo.lightDirectionWorld);
 	}
 }
 
 void Scenery3d::setupMaterialUniforms(QOpenGLShaderProgram* shader, const OBJ::Material &mat)
 {
 	//send off material parameters without further changes for now
-	glUniform3fv(shaderManager.getUniformLocation(shader,ShaderManager::UNIFORM_MTL_AMBIENT),1,mat.ambient);
-	glUniform3fv(shaderManager.getUniformLocation(shader,ShaderManager::UNIFORM_MTL_DIFFUSE),1,mat.diffuse);
-	glUniform3fv(shaderManager.getUniformLocation(shader,ShaderManager::UNIFORM_MTL_SPECULAR),1,mat.specular);
+	glUniform3fv(shaderManager.uniformLocation(shader,ShaderMgr::UNIFORM_MTL_AMBIENT),1,mat.ambient);
+	glUniform3fv(shaderManager.uniformLocation(shader,ShaderMgr::UNIFORM_MTL_DIFFUSE),1,mat.diffuse);
+	glUniform3fv(shaderManager.uniformLocation(shader,ShaderMgr::UNIFORM_MTL_SPECULAR),1,mat.specular);
 
 	//set alpha
-	SET_UNIFORM(shader,ShaderManager::UNIFORM_MTL_ALPHA,mat.alpha);
+	SET_UNIFORM(shader,ShaderMgr::UNIFORM_MTL_ALPHA,mat.alpha);
 
 	if(mat.texture)
 	{
 		glActiveTexture(GL_TEXTURE0);
 		mat.texture->bind();
-		SET_UNIFORM(shader,ShaderManager::UNIFORM_TEX_DIFFUSE,0);
+		SET_UNIFORM(shader,ShaderMgr::UNIFORM_TEX_DIFFUSE,0);
 		//shader->setUniformValue(shaderManager.getUniformLocation(shader,ShaderManager::UNIFORM_TEX_DIFFUSE),0);
 	}
 }
@@ -818,7 +820,7 @@ void Scenery3d::sendToShader(const OBJ::StelModel* pStelModel, Effect cur, bool&
     }
 }
 
-void Scenery3d::computeZDist(float zNear, float zFar)
+void Scenery3d::computeFrustumSplits(float zNear, float zFar)
 {
     float ratio = zFar/zNear;
 
@@ -838,27 +840,27 @@ void Scenery3d::computeZDist(float zNear, float zFar)
     frustumArray[frustumSplits-1].zFar = zFar;
 }
 
-void Scenery3d::computePolyhedron(int splitIndex)
+void Scenery3d::computePolyhedron(Polyhedron& body,const Frustum& frustum,const Vec3f& shadowDir)
 {
     //Building a convex body for directional lights according to Wimmer et al. 2006
-    Polyhedron &body = focusBodies[splitIndex];
+
 
     //Add the Frustum to begin with
-    body.add(frustumArray[splitIndex]);
+    body.add(frustum);
     //Intersect with the scene AABB
     body.intersect(sceneBoundingBox);
     //Extrude towards light direction
-    body.extrude(lightDir, sceneBoundingBox);
+    body.extrude(shadowDir, sceneBoundingBox);
 }
 
-void Scenery3d::computeOrthoProjVals()
+void Scenery3d::computeOrthoProjVals(const Vec3f shadowDir,float& orthoExtent,float& orthoNear,float& orthoFar)
 {
     //Focus the light first on the entire scene
     float maxZ = 0.0f;
     float minZ = std::numeric_limits<float>::max();
-    dim = 0.0f;
+    orthoExtent = 0.0f;
 
-    Vec3f eye = lightDir;
+    Vec3f eye = shadowDir;
     Vec3f vDir = -eye;
     vDir.normalize();
     Vec3f up = Vec3f(0.0f, 0.0f, 1.0f);
@@ -876,39 +878,34 @@ void Scenery3d::computeOrthoProjVals()
         maxZ = std::max(dist, maxZ);
         minZ = std::min(dist, minZ);
 
-        dim = std::max(std::abs(toCam.dot(left)), dim);
-        dim = std::max(std::abs(toCam.dot(right)), dim);
-        dim = std::max(std::abs(toCam.dot(up)), dim);
-        dim = std::max(std::abs(toCam.dot(down)), dim);
+	orthoExtent = std::max(std::abs(toCam.dot(left)), orthoExtent);
+	orthoExtent = std::max(std::abs(toCam.dot(right)), orthoExtent);
+	orthoExtent = std::max(std::abs(toCam.dot(up)), orthoExtent);
+	orthoExtent = std::max(std::abs(toCam.dot(down)), orthoExtent);
     }
 
     //Make sure planes arent too small
-    dimNear = std::max(minZ, 1.0f);
-    dimFar = std::max(maxZ, dimNear + 1.0f);
+    orthoNear = std::max(minZ, 1.0f);
+    orthoFar = std::max(maxZ, orthoNear + 1.0f);
 }
 
-void Scenery3d::computeCropMatrix(int frustumIndex)
+void Scenery3d::computeCropMatrix(int frustumIndex,const Vec3f& shadowDir)
 {
     //Compute the light frustum, only need to do this once because we're just cropping it afterwards
+	static float orthoExtent,orthoFar,orthoNear;
     if(frustumIndex == 0)
     {
-        computeOrthoProjVals();
+	computeOrthoProjVals(shadowDir,orthoExtent,orthoNear,orthoFar);
     }
 
     //Calculating a fitting Projection Matrix for the light
-    Mat4f lightProj, lightMVP, c;
+    QMatrix4x4 lightProj;
+    //Mat4f lightProj, lightMVP, c;
 
     //Setup the Ortho Projection based on found z values
-    glMatrixMode(GL_PROJECTION);
-    glLoadIdentity();
-    glOrtho(-dim, dim, -dim, dim, dimNear, dimFar);
-    //Save it for later use
-    glGetFloatv(GL_PROJECTION_MATRIX, lightProj);
-    glPushMatrix();
-    glMultMatrixf(lightViewMatrix);
-    //Save the light's ModelViewProjection Matrix for later use
-    glGetFloatv(GL_PROJECTION_MATRIX, lightMVP);
-    glPopMatrix();
+    lightProj.ortho(-orthoExtent,orthoExtent,-orthoExtent,orthoExtent,orthoNear,orthoFar);
+
+    QMatrix4x4 lightMVP = lightProj*modelViewMatrix;
 
     float maxX = -std::numeric_limits<float>::max();
     float maxY = maxX;
@@ -927,18 +924,15 @@ void Scenery3d::computeCropMatrix(int frustumIndex)
     for(int i=0; i<focusBodies.at(frustumIndex).getVertCount(); i++)
     {
 	const Vec3f tmp = focusBodies.at(frustumIndex).getVerts().at(i);
-        Vec4f transf = lightMVP*Vec4f(tmp.v[0], tmp.v[1], tmp.v[2], 1.0f);
+	QVector4D transf4 = lightMVP*QVector4D(tmp.v[0], tmp.v[1], tmp.v[2], 1.0f);
+	QVector3D transf = transf4.toVector3DAffine();
 
-        transf.v[0] /= transf.v[3];
-        transf.v[1] /= transf.v[3];
-        transf.v[2] /= transf.v[3];
-
-        if(transf.v[0] > maxX) maxX = transf.v[0];
-        if(transf.v[0] < minX) minX = transf.v[0];
-        if(transf.v[1] > maxY) maxY = transf.v[1];
-        if(transf.v[1] < minY) minY = transf.v[1];
-        if(transf.v[2] > maxZ) maxZ = transf.v[2];
-        if(transf.v[2] < minZ) minZ = transf.v[2];
+	if(transf.x() > maxX) maxX = transf.x();
+	if(transf.x() < minX) minX = transf.x();
+	if(transf.y() > maxY) maxY = transf.y();
+	if(transf.y() < minY) minY = transf.y();
+	if(transf.z() > maxZ) maxZ = transf.z();
+	if(transf.z() < minZ) minZ = transf.z();
     }
 
     //To avoid artifacts and far plane clipping
@@ -964,16 +958,15 @@ void Scenery3d::computeCropMatrix(int frustumIndex)
     offsetY = std::ceil(offsetY*halfTex)/halfTex;
 
     //Making the crop matrix
-    c = Mat4f(scaleX, 0.0f,   0.0f, offsetX,
-              0.0f,   scaleY, 0.0f, offsetY,
-              0.0f,   0.0f,   scaleZ, offsetZ,
-              0.0f,   0.0f,   0.0f, 1.0f);
-
-    c = c.transpose();
+    QMatrix4x4 crop(scaleX, 0.0f,   0.0f, offsetX,
+		    0.0f,   scaleY, 0.0f, offsetY,
+		    0.0f,   0.0f,   scaleZ, offsetZ,
+		    0.0f,   0.0f,   0.0f, 1.0f);
 
     //Crop the light projection matrix
-    glLoadMatrixf(c);
-    glMultMatrixf(lightProj);
+    projectionMatrix = crop * lightProj;
+    //store final matrix for retrieval later
+    shadowCPM[frustumIndex] = projectionMatrix * modelViewMatrix;
 }
 
 void Scenery3d::adjustFrustum()
@@ -1021,151 +1014,145 @@ void Scenery3d::adjustFrustum()
     }
 }
 
-void Scenery3d::generateShadowMap()
+bool Scenery3d::generateShadowMap()
 {
-    //Needed so we can actually adjust the frustum upwards after it was already adjusted downwards.
-    //This resets it and they'll be recomputed in adjustFrustum();
-    camNear = NEARZ;
-    camFar = FARZ;
+	//Needed so we can actually adjust the frustum upwards after it was already adjusted downwards.
+	//This resets it and they'll be recomputed in adjustFrustum();
+	camNear = NEARZ;
+	camFar = FARZ;
 
-    //Adjust the frustum to the scene before analyzing the view samples
-    adjustFrustum();
-    //Further adjust
-    //analyzeViewSamples();
+	//Adjust the frustum to the scene before analyzing the view samples
+	adjustFrustum();
 
-    //Determine sun position
-    SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
-    sunPosition = ssystem->getSun()->getAltAzPosAuto(core);
-    //zRotateMatrix.transfo(sunPosition); // GZ: These rotations were commented out - testing 20120122->correct!
-    sunPosition.normalize();
-    // GZ: at night, a near-full Moon can cast good shadows.
-    Vec3d moonPosition = ssystem->getMoon()->getAltAzPosAuto(core);
-    //zRotateMatrix.transfo(moonPosition);
-    moonPosition.normalize();
-    Vec3d venusPosition = ssystem->searchByName("Venus")->getAltAzPosAuto(core);
-    //zRotateMatrix.transfo(venusPosition);
-    venusPosition.normalize();
+	//Determine sun position
+	SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
+	sunPosition = ssystem->getSun()->getAltAzPosAuto(core);
+	//zRotateMatrix.transfo(sunPosition); // GZ: These rotations were commented out - testing 20120122->correct!
+	sunPosition.normalize();
+	// GZ: at night, a near-full Moon can cast good shadows.
+	Vec3d moonPosition = ssystem->getMoon()->getAltAzPosAuto(core);
+	//zRotateMatrix.transfo(moonPosition);
+	moonPosition.normalize();
+	Vec3d venusPosition = ssystem->searchByName("Venus")->getAltAzPosAuto(core);
+	//zRotateMatrix.transfo(venusPosition);
+	venusPosition.normalize();
 
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-    glEnable(GL_DEPTH_TEST);
-    glDepthFunc(GL_LESS);
-    glDepthMask(GL_TRUE);
-    glEnable(GL_CULL_FACE);
-    //Backface culling for ESM!
-    glCullFace(GL_FRONT);
-    glColorMask(0, 0, 0, 0); // disable color writes (increase performance?)
+	//find the direction the shadow is cast (= light direction)
+	Vec3f shadowDirV3f;
 
-    glMatrixMode(GL_PROJECTION);
-    glPushMatrix();
+	//Select view position based on which planet is visible
+	if (sunPosition[2]>0)
+	{
+		shadowDirV3f = Vec3f(sunPosition.v[0],sunPosition.v[1],sunPosition.v[2]);
+		venusOn = false;
+	}
+	else if (moonPosition[2]>0)
+	{
+		shadowDirV3f = Vec3f(moonPosition.v[0],moonPosition.v[1],moonPosition.v[2]);
+		venusOn = false;
+	}
+	else
+	{
+		shadowDirV3f = Vec3f(venusPosition.v[0],venusPosition.v[1],venusPosition.v[2]);
+		venusOn = true;
+	}
 
-    glMatrixMode(GL_MODELVIEW);
-    //glPushMatrix();
-    //glLoadIdentity();
-    //glRotated(90.0f, -1.0f, 0.0f, 0.0f);
+	QVector3D shadowDir(shadowDirV3f.v[0],shadowDirV3f.v[1],shadowDirV3f.v[2]);
+	static const QVector3D vZero = QVector3D();
+	static const QVector3D vZeroZeroOne = QVector3D(0,0,1);
 
-    //front
-    glPushMatrix();
-    glLoadIdentity();
+	//calculate lights modelview matrix
+	modelViewMatrix.setToIdentity();
+	modelViewMatrix.lookAt(shadowDir,vZero,vZeroZeroOne);
 
-    //Select view position based on which planet is visible
-    if (sunPosition[2]>0)
-    {
-        nogluLookAt (sunPosition[0], sunPosition[1], sunPosition[2], 0, 0, 0, 0, 0, 1);
-        lightDir = Vec3f(sunPosition[0], sunPosition[1], sunPosition[2]);
-        lightDir.normalize();
-        venusOn = false;
-    }
-    else if (moonPosition[2]>0)
-    {
-        nogluLookAt (moonPosition[0], moonPosition[1], moonPosition[2], 0, 0, 0, 0, 0, 1);
-        lightDir = Vec3f(moonPosition[0], moonPosition[1], moonPosition[2]);
-        lightDir.normalize();
-        venusOn = false;
-    }
-    else
-    {
-        nogluLookAt(venusPosition[0], venusPosition[1], venusPosition[2], 0, 0, 0, 0, 0, 1);
-        lightDir = Vec3f(venusPosition[0], venusPosition[1], venusPosition[2]);
-        lightDir.normalize();
-        venusOn = true;
-    }
+	//Compute and set z-distances for each split
+	computeFrustumSplits(camNear, camFar);
 
-    /* eyeX,eyeY,eyeZ,centerX,centerY,centerZ,upX,upY,upZ)*/
-    glGetFloatv(GL_MODELVIEW_MATRIX, lightViewMatrix); // save light view for further render passes
+	//perform actual rendering
+	return renderShadowMaps(shadowDirV3f);
+}
 
-    //No shader needed for generating the depth map
-    glUseProgram(0);
+bool Scenery3d::renderShadowMaps(const Vec3f& shadowDir)
+{
+	//bind transform shader
+	QOpenGLShaderProgram* tfshd = shaderManager.getTransformShader();
+	if(!tfshd)
+	{
+		parent->showMessage("Transformation shader can not be used, can not use shadows.");
+		return false;
+	}
+	tfshd->bind();
 
-    //Fix selfshadowing
-    //glEnable(GL_POLYGON_OFFSET_FILL);
-    //glPolygonOffset(1.1f,4.0f);
-    //! This is now done in shader via a bias. If that's ever a problem uncomment this part and the disabling farther down and change
-    //! glCullFace(GL_FRONT) to GL_BACK (farther up from here)
+	//Fix selfshadowing
+	//glEnable(GL_POLYGON_OFFSET_FILL);
+	//glPolygonOffset(1.1f,4.0f);
+	//! This is now done in shader via a bias. If that's ever a problem uncomment this part and the disabling farther down and change
+	//! glCullFace(GL_FRONT) to GL_BACK (farther up from here)
 
-    //Set viewport
-    glPushAttrib(GL_VIEWPORT_BIT);
-    glViewport(0, 0, shadowmapSize, shadowmapSize);
+	//GL state
+	//enable depth + front face culling
+	glEnable(GL_DEPTH_TEST);
+	//glDepthFunc(GL_LESS);
+	glDepthMask(GL_TRUE);
+	glEnable(GL_CULL_FACE);
+	//frontface culling for ESM!
+	glCullFace(GL_FRONT);
 
-    //Compute and set z-distances for each split
-    computeZDist(camNear, camFar);
+	//Set viewport to shadowmap
+	glViewport(0, 0, shadowmapSize, shadowmapSize);
 
-    //For each split
-    for(int i=0; i<frustumSplits; i++)
-    {
-        //Calculate the Frustum for this split
-	frustumArray[i].calcFrustum(viewPos, viewDir, viewUp);
+	//For each split
+	for(int i=0; i<frustumSplits; i++)
+	{
+		//Calculate the Frustum for this split
+		frustumArray[i].calcFrustum(viewPos, viewDir, viewUp);
 
-        //Find the convex body that encompasses all shadow receivers and casters for this split
-	focusBodies[i].clear();
-        computePolyhedron(i);
+		//Find the convex body that encompasses all shadow receivers and casters for this split
+		focusBodies[i].clear();
+		computePolyhedron(focusBodies[i],frustumArray[i],shadowDir);
 
-        //qDebug() << i << ".split vert count:" << focusBodies[i]->getVertCount();
+		//qDebug() << i << ".split vert count:" << focusBodies[i]->getVertCount();
 
-	if(focusBodies[i].getVertCount())
-        {
-            //Calculate the crop matrix so that the light's frustum is tightly fit to the current split's PSR+PSC polyhedron
-            //This alters the ProjectionMatrix of the light
-            computeCropMatrix(i);
+		if(focusBodies[i].getVertCount())
+		{
+			//Calculate the crop matrix so that the light's frustum is tightly fit to the current split's PSR+PSC polyhedron
+			//This alters the ProjectionMatrix of the light
+			//the final light matrix is stored in shadowCPM
+			computeCropMatrix(i,shadowDir);
 
-	    glBindFramebuffer(GL_FRAMEBUFFER,shadowFBOs.at(i));
+			//really only mvp required, so only call this
+			setupFrameUniforms(tfshd);
 
-            //Clear everything
-            glClear(GL_DEPTH_BUFFER_BIT);
+			glBindFramebuffer(GL_FRAMEBUFFER,shadowFBOs.at(i));
 
-            //Draw the scene
-	    drawArrays(false);
+			//Clear everything
+			glClear(GL_DEPTH_BUFFER_BIT);
 
-            //Store the new projection * lightView for later
-            glMatrixMode(GL_PROJECTION);
-            glMultMatrixf(lightViewMatrix);
-	    glGetFloatv(GL_PROJECTION_MATRIX, shadowCPM[i]);
-        }
-    }
+			//Draw the scene
+			drawArrays(false);
+		}
+	}
 
-    //Reset Viewportbit
-    glPopAttrib();
 
-    //Move polygons back to normal position
-    //glDisable(GL_POLYGON_OFFSET_FILL);
+	//Unbind
+	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
-    //Unbind
-    glBindFramebuffer(GL_FRAMEBUFFER, 0);
+	//reset viewport (see StelPainter::setProjector)
+	const Vec4i& vp = altAzProjector->getViewport();
+	glViewport(vp[0], vp[1], vp[2], vp[3]);
 
-    //Switch back to normal texturing
-    //glActiveTexture(GL_TEXTURE0);
+	//Move polygons back to normal position
+	//glDisable(GL_POLYGON_OFFSET_FILL);
 
-    glMatrixMode(GL_PROJECTION);
-    glPopMatrix();
-    glMatrixMode(GL_MODELVIEW);
-    glPopMatrix();
-    //glPopMatrix();
+	//Reset
+	glDepthMask(GL_FALSE);
+	glDisable(GL_DEPTH_TEST);
+	glCullFace(GL_BACK);
+	glDisable(GL_CULL_FACE);
 
-    //Reset
-    glDepthMask(GL_FALSE);
-    glDisable(GL_DEPTH_TEST);
-    glCullFace(GL_BACK);
-    glDisable(GL_CULL_FACE);
-    glColorMask(1, 1, 1, 1);
+	tfshd->release();
+
+	return true;
 }
 
 void Scenery3d::calculateLighting()
@@ -1333,9 +1320,6 @@ void Scenery3d::generateCubeMap()
 	projectionMatrix.setToIdentity();
 	projectionMatrix.perspective(90.0f,1.0f,zNear,zFar);
 
-	//recalc lighting info
-	calculateLighting();
-
 	//set pass uniforms
 	setupPassUniforms(curShader);
 
@@ -1347,7 +1331,7 @@ void Scenery3d::generateCubeMap()
 
 	//set GL state - we want depth test + culling
 	glEnable(GL_DEPTH_TEST);
-	glDepthFunc(GL_LEQUAL);
+	//glDepthFunc(GL_LEQUAL);
 	glDepthMask(GL_TRUE);
 	glEnable(GL_CULL_FACE);
 
@@ -1418,7 +1402,7 @@ void Scenery3d::drawFromCubeMap()
     //depth test and culling is necessary for correct display,
     //because the cube faces can be projected in quite "weird" ways
     glEnable(GL_DEPTH_TEST);
-    glDepthFunc(GL_LESS);
+    //glDepthFunc(GL_LESS);
     glDepthMask(GL_TRUE);
     glEnable(GL_CULL_FACE);
 
@@ -1475,8 +1459,6 @@ void Scenery3d::drawDirect() // for Perspective Projection only!
 		    0, 0, (zFar + zNear) / (zNear - zFar), -1,
 		    0, 0, 2.0 * zFar * zNear / (zNear - zFar), 0  );
 
-    //recalculate lighting info
-    calculateLighting();
     //set pass uniforms (proj + const. lighting info)
     setupPassUniforms(curShader);
 
@@ -1491,7 +1473,7 @@ void Scenery3d::drawDirect() // for Perspective Projection only!
 
     //depth test needs enabling, clear depth buffer, color buffer already contains background so it stays
     glEnable(GL_DEPTH_TEST);
-    glDepthFunc(GL_LEQUAL);
+    //glDepthFunc(GL_LEQUAL);
     glDepthMask(GL_TRUE);
     glClear(GL_DEPTH_BUFFER_BIT);
 
@@ -1764,13 +1746,18 @@ void Scenery3d::draw(StelCore* core)
 		return;
 	}
 
-	if (shadowsEnabled)
-	{
-		generateShadowMap();
-	}
-
 	//turn off blending, because it seems to be enabled somewhere we do not have access
 	glDisable(GL_BLEND);
+
+
+	//recalculate lighting info
+	calculateLighting();
+
+	if (shadowsEnabled)
+	{
+		if(!generateShadowMap())
+			return;
+	}
 
 	if (core->getCurrentProjectionType() == StelCore::ProjectionPerspective)
 	{
