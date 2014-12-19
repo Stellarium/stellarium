@@ -48,6 +48,7 @@ class Scenery3dMgr : public StelModule
 
 	// toggle to switch it off completely.
 	Q_PROPERTY(bool enableScene  READ getEnableScene WRITE setEnableScene NOTIFY enableSceneChanged)
+	Q_PROPERTY(bool enablePixelLighting READ getEnablePixelLighting WRITE setEnablePixelLighting NOTIFY enablePixelLightingChanged)
 	Q_PROPERTY(bool enableShadows READ getEnableShadows WRITE setEnableShadows NOTIFY enableShadowsChanged)
 	Q_PROPERTY(bool enableBumps READ getEnableBumps WRITE setEnableBumps NOTIFY enableBumpsChanged)
 	Q_PROPERTY(bool enableShadowsFilter READ getEnableShadowsFilter WRITE setEnableShadowsFilter NOTIFY enableShadowsFilterChanged)
@@ -71,6 +72,7 @@ public:
 
 signals:
     void enableSceneChanged(const bool val);
+    void enablePixelLightingChanged(const bool val);
     void enableShadowsChanged(const bool val);
     void enableBumpsChanged(const bool val);
     void enableShadowsFilterChanged(const bool val);
@@ -80,8 +82,8 @@ signals:
     void enableTorchLightChanged(const bool val);
 
 public slots:
-    //! Loads (or reloads) the required shaders from the shader files.
-    void loadShaders();
+    //! Clears the shader cache, forcing a reload of shaders on use
+    void reloadShaders();
 
     //! Display text message on screen, fade out automatically
     void showMessage(const QString& message);
@@ -89,6 +91,8 @@ public slots:
     //! Enables/Disables the plugin
     void setEnableScene(const bool val);
     bool getEnableScene() const {return flagEnabled; }
+    void setEnablePixelLighting(const bool val);
+    bool getEnablePixelLighting(void) const;
     //! Use this to set/get the enableShadows flag.
     //! If set to true, shadow mapping is enabled for the 3D scene.
     void setEnableShadows(const bool enableShadows);
@@ -148,10 +152,6 @@ private:
     StelAction* enableAction;
     StelCore::ProjectionType oldProjectionType;
 
-    //Shader for shadow mapping
-    QOpenGLShaderProgram* shadowShader;
-    QOpenGLShaderProgram* bumpShader;
-    QOpenGLShaderProgram* univShader;
     QOpenGLShaderProgram* debugShader;
 
     //screen messages (taken largely from AngleMeasure as of 2012-01-21)

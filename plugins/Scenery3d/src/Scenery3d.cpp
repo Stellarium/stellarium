@@ -132,7 +132,7 @@ Scenery3d::Scenery3d(Scenery3dMgr* parent)
     PLANE(cubePlaneBottom, Mat4d::xrotation(M_PI_2))
 #undef PLANE
 
-
+		    pixelLighting = false;
     shadowsEnabled = false;
     bumpsEnabled = false;
     torchEnabled = false;
