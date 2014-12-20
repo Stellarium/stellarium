@@ -80,6 +80,8 @@ public:
 		UNIFORM_MTL_DIFFUSE,
 		//! Material specular color
 		UNIFORM_MTL_SPECULAR,
+		//! Material specular shininess (exponent)
+		UNIFORM_MTL_SHININESS,
 		//! Material global transparency
 		UNIFORM_MTL_ALPHA,
 
@@ -145,10 +147,12 @@ private:
 QOpenGLShaderProgram* ShaderMgr::getShader(bool pixelLighting, bool shadows, bool bump)
 {
 	//Build bitflags from bools. Some stuff requires pixelLighting to be enabled, so check it too.
-	return findOrLoadShader(SHADING |
-			(pixelLighting & PIXEL_LIGHTING)|
-			(pixelLighting & shadows & SHADOWS)|
-			(pixelLighting & bump & BUMP));
+	uint flags = SHADING;
+	if(pixelLighting)            flags|= PIXEL_LIGHTING;
+	if(pixelLighting && shadows) flags|= SHADOWS;
+	if(pixelLighting && bump)    flags|= BUMP;
+
+	return findOrLoadShader(flags);
 }
 
 QOpenGLShaderProgram* ShaderMgr::getTransformShader()

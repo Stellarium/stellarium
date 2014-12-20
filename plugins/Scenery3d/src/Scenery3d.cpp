@@ -650,8 +650,7 @@ void Scenery3d::setupMaterialUniforms(QOpenGLShaderProgram* shader, const OBJ::M
 	glUniform3fv(shaderManager.uniformLocation(shader,ShaderMgr::UNIFORM_MTL_AMBIENT),1,mat.ambient);
 	glUniform3fv(shaderManager.uniformLocation(shader,ShaderMgr::UNIFORM_MTL_DIFFUSE),1,mat.diffuse);
 	glUniform3fv(shaderManager.uniformLocation(shader,ShaderMgr::UNIFORM_MTL_SPECULAR),1,mat.specular);
-
-	//set alpha
+	SET_UNIFORM(shader,ShaderMgr::UNIFORM_MTL_SHININESS,mat.shininess);
 	SET_UNIFORM(shader,ShaderMgr::UNIFORM_MTL_ALPHA,mat.alpha);
 
 	if(mat.texture)
@@ -1769,7 +1768,7 @@ void Scenery3d::draw(StelCore* core)
 	altAzProjector = core->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
 
 	//get a shader from shadermgr that fits the current state (but do not bind it here)
-	curShader = shaderManager.getShader(false,shadowsEnabled,bumpsEnabled);
+	curShader = shaderManager.getShader(pixelLighting,shadowsEnabled,bumpsEnabled);
 	if(!curShader)
 	{
 		//shader invalid, can't draw
