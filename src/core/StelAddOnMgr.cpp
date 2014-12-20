@@ -245,7 +245,7 @@ void StelAddOnMgr::refreshAddOnStatuses()
 					if (tL[0] == i.value()->getInstallId())
 					{
 						list.removeOne(t);
-						i.value()->setTextureStatus(tL[0], true);
+						i.value()->setTextureStatus(tL[1], true);
 						i.value()->setStatus(AddOn::PartiallyInstalled);
 					}
 				}
