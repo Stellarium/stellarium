@@ -26,6 +26,7 @@
 #include <QOpenGLShaderProgram>
 
 ShaderMgr::t_UniformStrings ShaderMgr::uniformStrings;
+ShaderMgr::t_FeatureFlagStrings ShaderMgr::featureFlagsStrings;
 
 ShaderMgr::ShaderMgr()
 {
@@ -36,8 +37,17 @@ ShaderMgr::ShaderMgr()
 		uniformStrings["u_mProjection"] = UNIFORM_MAT_PROJECTION;
 		uniformStrings["u_mMVP"] = UNIFORM_MAT_MVP;
 		uniformStrings["u_mNormal"] = UNIFORM_MAT_NORMAL;
+		uniformStrings["u_mShadow0"] = UNIFORM_MAT_SHADOW0;
+		uniformStrings["u_mShadow1"] = UNIFORM_MAT_SHADOW1;
+		uniformStrings["u_mShadow2"] = UNIFORM_MAT_SHADOW2;
+		uniformStrings["u_mShadow3"] = UNIFORM_MAT_SHADOW3;
 
+		//textures
 		uniformStrings["u_texDiffuse"] = UNIFORM_TEX_DIFFUSE;
+		uniformStrings["u_texShadow0"] = UNIFORM_TEX_SHADOW0;
+		uniformStrings["u_texShadow1"] = UNIFORM_TEX_SHADOW1;
+		uniformStrings["u_texShadow2"] = UNIFORM_TEX_SHADOW2;
+		uniformStrings["u_texShadow3"] = UNIFORM_TEX_SHADOW3;
 
 		//materials
 		uniformStrings["u_vMatAmbient"] = UNIFORM_MTL_AMBIENT;
@@ -50,6 +60,23 @@ ShaderMgr::ShaderMgr()
 		uniformStrings["u_vLightDirection"] = UNIFORM_LIGHT_DIRECTION;
 		uniformStrings["u_vLightAmbient"] = UNIFORM_LIGHT_AMBIENT;
 		uniformStrings["u_vLightDiffuse"] = UNIFORM_LIGHT_DIFFUSE;
+
+		//others
+		uniformStrings["u_vSquaredSplits"] = UNIFORM_VEC_SQUAREDSPLITS;
+	}
+	if(featureFlagsStrings.size()==0)
+	{
+		featureFlagsStrings["TRANSFORM"] = TRANSFORM;
+		featureFlagsStrings["SHADING"] = SHADING;
+		featureFlagsStrings["PIXEL_LIGHTING"] = PIXEL_LIGHTING;
+		featureFlagsStrings["SHADOWS"] = SHADOWS;
+		featureFlagsStrings["BUMP"] = BUMP;
+		featureFlagsStrings["ALPHATEST"] = ALPHATEST;
+		featureFlagsStrings["SHADOW_FILTER"] = SHADOW_FILTER;
+		featureFlagsStrings["SHADOW_FILTER_HQ"] = SHADOW_FILTER_HQ;
+		featureFlagsStrings["MAT_AMBIENT"] = MAT_AMBIENT;
+		featureFlagsStrings["MAT_SPECULAR"] = MAT_SPECULAR;
+		featureFlagsStrings["MAT_DIFFUSETEX"] = MAT_DIFFUSETEX;
 	}
 }
 
@@ -60,6 +87,7 @@ ShaderMgr::~ShaderMgr()
 
 void ShaderMgr::clearCache()
 {
+	qDebug()<<"[Scenery3d] Clearing"<<m_shaderCache.size()<<"shaders";
 	for(t_ShaderCache::iterator it = m_shaderCache.begin();it!=m_shaderCache.end();++it)
 	{
 		if((*it))
@@ -86,7 +114,7 @@ QOpenGLShaderProgram* ShaderMgr::findOrLoadShader(uint flags)
 	QString fShader = getFShaderName(flags);
 
 	QOpenGLShaderProgram *prog = new QOpenGLShaderProgram();
-	if(!loadShader(*prog,vShader,gShader,fShader))
+	if(!loadShader(*prog,vShader,gShader,fShader,flags))
 	{
 		delete prog;
 		prog = NULL;
@@ -138,7 +166,55 @@ QString ShaderMgr::getFShaderName(uint flags)
 	return QString();
 }
 
-bool ShaderMgr::loadShader(QOpenGLShaderProgram& program, const QString& vShader, const QString& gShader, const QString& fShader)
+QByteArray ShaderMgr::preprocessShader(const QString &fileName, uint flags)
+{
+	//open and load file
+	QFile file(fileName);
+	if(!file.open(QFile::ReadOnly))
+	{
+		qWarning()<<"Could not open file"<<fileName;
+		return QByteArray();
+	}
+
+	QByteArray ret;
+	ret.reserve(file.size());
+
+	//use a text stream for "parsing"
+	QTextStream in(&file),lineStream;
+
+	QString line,word;
+	while(!in.atEnd())
+	{
+		line = in.readLine();
+		lineStream.setString(&line,QIODevice::ReadOnly);
+
+		QString write = line;
+
+		//read first word
+		lineStream>>word;
+		if(word == "#define")
+		{
+			//read second word
+			lineStream>>word;
+
+			//try to find it in our flags list
+			t_FeatureFlagStrings::iterator it = featureFlagsStrings.find(word);
+			if(it!=featureFlagsStrings.end())
+			{
+				bool val = it.value() & flags;
+				write = "#define " + word + (val?" 1":" 0");
+				qDebug()<<"preprocess match: "<<line <<" --> "<<write;
+			}
+		}
+
+		//write output
+		ret.append(write);
+		ret.append('\n');
+	}
+	return ret;
+}
+
+bool ShaderMgr::loadShader(QOpenGLShaderProgram& program, const QString& vShader, const QString& gShader, const QString& fShader, const uint flags)
 {
 	qDebug()<<"Loading Scenery3d shader: vs:"<<vShader<<", gs:"<<gShader<<", fs:"<<fShader<<"";
 
@@ -151,7 +227,11 @@ bool ShaderMgr::loadShader(QOpenGLShaderProgram& program, const QString& vShader
 	{
 		QString vs = StelFileMgr::findFile(dir.filePath(vShader),StelFileMgr::File);
 
-		if(!program.addShaderFromSourceFile(QOpenGLShader::Vertex,vs))
+		QByteArray code = preprocessShader(vs,flags);
+		if(code.isEmpty())
+			return false;
+
+		if(!program.addShaderFromSourceCode(QOpenGLShader::Vertex,code))
 		{
 			qCritical() << "Scenery3d: unable to compile " << vs << " vertex shader file";
 			qCritical() << program.log();
@@ -171,7 +251,12 @@ bool ShaderMgr::loadShader(QOpenGLShaderProgram& program, const QString& vShader
 	if(!gShader.isEmpty())
 	{
 		QString gs = StelFileMgr::findFile(dir.filePath(gShader),StelFileMgr::File);
-		if(!program.addShaderFromSourceFile(QOpenGLShader::Geometry,gs))
+
+		QByteArray code = preprocessShader(gs,flags);
+		if(code.isEmpty())
+			return false;
+
+		if(!program.addShaderFromSourceCode(QOpenGLShader::Geometry,code))
 		{
 			qCritical() << "Scenery3d: unable to compile " << gs << " geometry shader file";
 			qCritical() << program.log();
@@ -191,7 +276,12 @@ bool ShaderMgr::loadShader(QOpenGLShaderProgram& program, const QString& vShader
 	if(!fShader.isEmpty())
 	{
 		QString fs = StelFileMgr::findFile(dir.filePath(fShader),StelFileMgr::File);
-		if(!program.addShaderFromSourceFile(QOpenGLShader::Fragment,fs))
+
+		QByteArray code = preprocessShader(fs,flags);
+		if(code.isEmpty())
+			return false;
+
+		if(!program.addShaderFromSourceCode(QOpenGLShader::Fragment,code))
 		{
 			qCritical() << "Scenery3d: unable to compile " << fs << " fragment shader file";
 			qCritical() << program.log();
@@ -242,7 +332,7 @@ void ShaderMgr::buildUniformCache(QOpenGLShaderProgram &program)
 	GLint size;
 	GLenum type;
 
-	qDebug()<<"Shader has "<<numUniforms<<" uniforms";
+	qDebug()<<"Shader has"<<numUniforms<<"uniforms";
 	for(int i =0;i<numUniforms;++i)
 	{
 		glGetActiveUniform(prog,i,bufSize,&length,&size,&type,buf.data());

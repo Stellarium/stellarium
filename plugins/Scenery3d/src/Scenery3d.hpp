@@ -79,18 +79,18 @@ public:
 
     bool getDebugEnabled() const { return debugEnabled; }
     void setDebugEnabled(bool debugEnabled) { this->debugEnabled = debugEnabled; }
-    bool getPixelLightingEnabled() const { return pixelLighting; }
-    void setPixelLightingEnabled(const bool val) { pixelLighting = val; }
-    bool getShadowsEnabled(void) const { return shadowsEnabled; }
-    void setShadowsEnabled(bool shadowsEnabled) { this->shadowsEnabled = shadowsEnabled; }
-    bool getBumpsEnabled(void) const { return bumpsEnabled; }
-    void setBumpsEnabled(bool bumpsEnabled) { this->bumpsEnabled = bumpsEnabled; }
+    bool getPixelLightingEnabled() const { return shaderParameters.pixelLighting; }
+    void setPixelLightingEnabled(const bool val) { shaderParameters.pixelLighting = val; }
+    bool getShadowsEnabled(void) const { return shaderParameters.shadows; }
+    void setShadowsEnabled(bool shadowsEnabled) { shaderParameters.shadows = shadowsEnabled; }
+    bool getBumpsEnabled(void) const { return shaderParameters.bump; }
+    void setBumpsEnabled(bool bumpsEnabled) { shaderParameters.bump = bumpsEnabled; }
     bool getTorchEnabled(void) const { return torchEnabled;}
     void setTorchEnabled(bool torchEnabled) { this->torchEnabled = torchEnabled; }
-    bool getShadowsFilterEnabled(void) const { return filterShadowsEnabled; }
-    void setShadowsFilterEnabled(bool filterShadowsEnabled) { this->filterShadowsEnabled = filterShadowsEnabled; }
-    bool getShadowsFilterHQEnabled(void) const { return filterHQ; }
-    void setShadowsFilterHQEnabled(bool filterHQ) { this->filterHQ = filterHQ; }
+    bool getShadowsFilterEnabled(void) const { return shaderParameters.shadowFilter; }
+    void setShadowsFilterEnabled(bool filterShadowsEnabled) { shaderParameters.shadowFilter = filterShadowsEnabled; }
+    bool getShadowsFilterHQEnabled(void) const { return shaderParameters.shadowFilterHQ; }
+    void setShadowsFilterHQEnabled(bool filterHQ) { shaderParameters.shadowFilterHQ = filterHQ; }
     bool getLocationInfoEnabled(void) const { return textEnabled; }
     void setLocationInfoEnabled(bool locationinfoenabled) { this->textEnabled = locationinfoenabled; }
 
@@ -116,16 +116,11 @@ private:
     float torchBrightness; // ^L toggle light brightness
 
     bool hasModels;             // flag to see if there's anything to draw
-    bool pixelLighting;         // true if per-pixel lighting should be used
-    bool shadowsEnabled;        // switchable value (^SPACE): Use shadow mapping
-    bool bumpsEnabled;          // switchable value (^B): Use bump mapping
     bool textEnabled;           // switchable value (^K): display coordinates on screen. THIS IS NOT FOR DEBUGGING, BUT A PROGRAM FEATURE!
     bool torchEnabled;          // switchable value (^L): adds artificial ambient light
     bool debugEnabled;          // switchable value (^D): display debug graphics and debug texts on screen
     bool lightCamEnabled;       // switchable value: switches camera to light camera
     bool frustEnabled;
-    bool filterShadowsEnabled;  // switchable value (^I): Filter shadows
-    bool filterHQ;              // switchable value (^U): 64 tap filter shadows
     bool venusOn;
 
     unsigned int cubemapSize;            // configurable values, typically 512/1024/2048/4096
@@ -170,22 +165,21 @@ private:
     // a struct which encapsulates lighting info
     struct LightParameters
     {
-	    ShadowCaster source;
+	    ShadowCaster lightSource;
+	    ShadowCaster shadowCaster;
 	    QVector3D lightDirectionWorld;
 	    QVector3D ambient;
 	    QVector3D directional;
     } lightInfo;
 
-    //Currently selected Shader
-    QOpenGLShaderProgram* curShader;
+    GlobalShaderParameters shaderParameters;
+
     //Debug shader
     QOpenGLShaderProgram* debugShader;
 
     //Currently selected effect
     Effect curEffect;
 
-    //Current sun position
-    Vec3d sunPosition;
     //Scene AABB
     AABB sceneBoundingBox;
 
@@ -230,7 +224,8 @@ private:
     void generateCubeMap();
     //! Uses the StelPainter to draw a warped cube textured with our cubemap
     void drawFromCubeMap();
-    //! This is the method that performs the actual drawing. Submits material for each model to shader, and submits 1 draw call for each StelModel.
+    //! This is the method that performs the actual drawing.
+    //! If shading is true, a suitable shader for each material is selected and initialized. Submits 1 draw call for each StelModel.
     void drawArrays(bool shading=true, bool blendAlphaAdditive=false);
 
 

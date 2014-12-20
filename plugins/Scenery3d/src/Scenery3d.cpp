@@ -56,8 +56,8 @@
 {                                                       \
     GLenum err = glGetError();                          \
     if (err != GL_NO_ERROR) {                           \
-    fprintf(stderr, "[line %d] GL Error: %s\n",         \
-    __LINE__, gluErrorString(err));                     \
+    fprintf(stderr, "[line %d] GL Error: %d\n",         \
+    __LINE__, err);                     \
     fflush(stderr);                                     \
     }                                                   \
 }
@@ -132,20 +132,22 @@ Scenery3d::Scenery3d(Scenery3dMgr* parent)
     PLANE(cubePlaneBottom, Mat4d::xrotation(M_PI_2))
 #undef PLANE
 
-		    pixelLighting = false;
-    shadowsEnabled = false;
-    bumpsEnabled = false;
+
+	shaderParameters.pixelLighting = false;
+	shaderParameters.shadows = false;
+	shaderParameters.bump = false;
+	shaderParameters.shadowFilter = true;
+	shaderParameters.shadowFilterHQ = false;
+
     torchEnabled = false;
     textEnabled = false;
     debugEnabled = false;
     curEffect = No;
-    curShader = 0;
     lightCamEnabled = false;
     hasModels = false;
     sceneBoundingBox = AABB(Vec3f(0.0f), Vec3f(0.0f));
     frustEnabled = false;
-    filterShadowsEnabled = true;
-    filterHQ = false;
+
     venusOn = false;
 
     //Preset frustumSplits
@@ -581,7 +583,10 @@ void Scenery3d::setupPassUniforms(QOpenGLShaderProgram *shader)
 	//-- Shadowing setup -- this was previously in generateCubeMap_drawSceneWithShadows
 	//first check if shader supports shadows
 	GLint loc = shaderManager.uniformLocation(shader,ShaderMgr::UNIFORM_VEC_SQUAREDSPLITS);
-	if(lightInfo.source != None && shadowsEnabled && loc >= 0)
+
+	//ALWAYS update the shader matrices, even if "no" shadow is cast
+	//this fixes weird time-dependent crashes (this was fun to debug)
+	if(shaderParameters.shadows && loc >= 0)
 	{
 		//Calculate texture matrix for projection
 		//This matrix takes us from eye space to the light's clip space
@@ -655,8 +660,7 @@ void Scenery3d::setupMaterialUniforms(QOpenGLShaderProgram* shader, const OBJ::M
 
 	if(mat.texture)
 	{
-		glActiveTexture(GL_TEXTURE0);
-		mat.texture->bind();
+		mat.texture->bind(0); //this already sets glActiveTexture(0)
 		SET_UNIFORM(shader,ShaderMgr::UNIFORM_TEX_DIFFUSE,0);
 		//shader->setUniformValue(shaderManager.getUniformLocation(shader,ShaderManager::UNIFORM_TEX_DIFFUSE),0);
 	}
@@ -665,6 +669,9 @@ void Scenery3d::setupMaterialUniforms(QOpenGLShaderProgram* shader, const OBJ::M
 void Scenery3d::drawArrays(bool shading, bool blendAlphaAdditive)
 {
 	drawn = 0;
+
+	QOpenGLShaderProgram* curShader = NULL;
+	QSet<QOpenGLShaderProgram*> initialized;
 
 	//bind VAO
 	objModel.bindGL();
@@ -677,9 +684,34 @@ void Scenery3d::drawArrays(bool shading, bool blendAlphaAdditive)
 
 		const OBJ::StelModel* pStelModel = &objModel.getStelModel(i);
 		const OBJ::Material* pMaterial = pStelModel->pMaterial;
+		Q_ASSERT(pMaterial);
 
 		if(shading && lastMaterial!=pMaterial)
 		{
+			//get a shader from shadermgr that fits the current state + material combo
+			QOpenGLShaderProgram* newShader = shaderManager.getShader(shaderParameters,pMaterial);
+			if(!newShader)
+			{
+				//shader invalid, can't draw
+				parent->showMessage("Scenery3d shader error, can't draw. Check debug output for details.");
+				break;
+			}
+			if(newShader!=curShader)
+			{
+				curShader = newShader;
+				curShader->bind();
+				if(!initialized.contains(curShader))
+				{
+					//needs init
+					setupPassUniforms(curShader);
+					setupFrameUniforms(curShader);
+
+					//rebind vao
+					//objModel.bindGL();
+					initialized.insert(curShader);
+				}
+			}
+
 			setupMaterialUniforms(curShader,*pMaterial);
 			lastMaterial = pMaterial;
 
@@ -707,8 +739,10 @@ void Scenery3d::drawArrays(bool shading, bool blendAlphaAdditive)
 		}
 
 		glDrawElements(GL_TRIANGLES, pStelModel->triangleCount * 3, GL_UNSIGNED_INT, reinterpret_cast<const void*>(pStelModel->startIndex * sizeof(unsigned int)));
-
 	}
+
+	if(shading&&curShader)
+		curShader->release();
 
 	if(blendEnabled)
 		glDisable(GL_BLEND);
@@ -722,13 +756,13 @@ void Scenery3d::sendToShader(const OBJ::StelModel* pStelModel, Effect cur, bool&
     tangEnabled = false;
     //TODO move this to setupXXXUniforms
 
+    //dummy for now
+    QOpenGLShaderProgram* curShader=NULL;
     if(cur != No)
     {
         curShader->setUniformValue("boolDebug", debugEnabled);
 	curShader->setUniformValue("fTransparencyThresh", currentScene.transparencyThreshold);
-        curShader->setUniformValue("alpha", pStelModel->pMaterial->alpha);
-        curShader->setUniformValue("boolFilterHQ", filterHQ);
-        curShader->setUniformValue("boolFilterShadows", filterShadowsEnabled);
+
         curShader->setUniformValue("boolVenus", venusOn);
 
         int iIllum = pStelModel->pMaterial->illum;
@@ -1032,7 +1066,7 @@ bool Scenery3d::generateShadowMap()
 
 	//Determine sun position
 	SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
-	sunPosition = ssystem->getSun()->getAltAzPosAuto(core);
+	Vec3d sunPosition = ssystem->getSun()->getAltAzPosAuto(core);
 	//zRotateMatrix.transfo(sunPosition); // GZ: These rotations were commented out - testing 20120122->correct!
 	sunPosition.normalize();
 	// GZ: at night, a near-full Moon can cast good shadows.
@@ -1050,16 +1084,20 @@ bool Scenery3d::generateShadowMap()
 	if (sunPosition[2]>0)
 	{
 		shadowDirV3f = Vec3f(sunPosition.v[0],sunPosition.v[1],sunPosition.v[2]);
+		lightInfo.shadowCaster = Sun;
 		venusOn = false;
 	}
 	else if (moonPosition[2]>0)
 	{
 		shadowDirV3f = Vec3f(moonPosition.v[0],moonPosition.v[1],moonPosition.v[2]);
+		lightInfo.shadowCaster = Moon;
 		venusOn = false;
 	}
 	else
 	{
+		//TODO fix case where not even Venus is visible, led to problems for me today
 		shadowDirV3f = Vec3f(venusPosition.v[0],venusPosition.v[1],venusPosition.v[2]);
+		lightInfo.shadowCaster = Venus;
 		venusOn = true;
 	}
 
@@ -1090,8 +1128,8 @@ bool Scenery3d::renderShadowMaps(const Vec3f& shadowDir)
 	tfshd->bind();
 
 	//Fix selfshadowing
-	//glEnable(GL_POLYGON_OFFSET_FILL);
-	//glPolygonOffset(1.1f,4.0f);
+	glEnable(GL_POLYGON_OFFSET_FILL);
+	glPolygonOffset(1.1f,4.0f);
 	//! This is now done in shader via a bias. If that's ever a problem uncomment this part and the disabling farther down and change
 	//! glCullFace(GL_FRONT) to GL_BACK (farther up from here)
 
@@ -1148,7 +1186,8 @@ bool Scenery3d::renderShadowMaps(const Vec3f& shadowDir)
 	glViewport(vp[0], vp[1], vp[2], vp[3]);
 
 	//Move polygons back to normal position
-	//glDisable(GL_POLYGON_OFFSET_FILL);
+	glDisable(GL_POLYGON_OFFSET_FILL);
+	glPolygonOffset(0.0f,0.0f);
 
 	//Reset
 	glDepthMask(GL_FALSE);
@@ -1166,7 +1205,7 @@ void Scenery3d::calculateLighting()
 	//calculate which light source we need + intensity
 	float ambientBrightness, directionalBrightness; // was: lightBrightness;
 	Vec3f lightsourcePosition; //should be normalized already
-	lightInfo.source = calculateLightSource(ambientBrightness, directionalBrightness, lightsourcePosition);
+	lightInfo.lightSource = calculateLightSource(ambientBrightness, directionalBrightness, lightsourcePosition);
 	lightInfo.lightDirectionWorld = QVector3D(lightsourcePosition.v[0],lightsourcePosition.v[1],lightsourcePosition.v[2]);
 
 	//if the night vision mode is on, use red-tinted lighting
@@ -1246,7 +1285,7 @@ Scenery3d::ShadowCaster  Scenery3d::calculateLightSource(float &ambientBrightnes
     {
         directionalBrightness=qMin(0.7, sqrt(sinSunAngle+0.1)); // limit to 0.7 in order to keep total below 1.
         lightsourcePosition.set(sunPosition.v[0], sunPosition.v[1], sunPosition.v[2]);
-        if (shadowsEnabled) shadowcaster = Sun;
+	if (shaderParameters.shadows) shadowcaster = Sun;
         directionalSourceString="Sun";
     }
  /*   else if (sinSunAngle> -0.3f) // sun above -18: create shadowless directional pseudo-light from solar azimuth
@@ -1263,7 +1302,7 @@ Scenery3d::ShadowCaster  Scenery3d::calculateLightSource(float &ambientBrightnes
         if (directionalBrightness > 0)
         {
             lightsourcePosition.set(moonPosition.v[0], moonPosition.v[1], moonPosition.v[2]);
-            if (shadowsEnabled) shadowcaster = Moon;
+	    if (shaderParameters.shadows) shadowcaster = Moon;
             directionalSourceString="Moon";
         } else directionalSourceString="Moon";
         //Alternately, construct a term around lunar brightness, like
@@ -1277,7 +1316,7 @@ Scenery3d::ShadowCaster  Scenery3d::calculateLightSource(float &ambientBrightnes
         if (directionalBrightness > 0)
         {
             lightsourcePosition.set(venusPosition.v[0], venusPosition.v[1], venusPosition.v[2]);
-            if (shadowsEnabled) shadowcaster = Venus;
+	    if (shaderParameters.shadows) shadowcaster = Venus;
             directionalSourceString="Venus";
         } else directionalSourceString="(Venus, flooded by ambient)";
         //Alternately, construct a term around Venus brightness, like
@@ -1317,17 +1356,11 @@ Scenery3d::ShadowCaster  Scenery3d::calculateLightSource(float &ambientBrightnes
 
 void Scenery3d::generateCubeMap()
 {
-	//bind shader
-	curShader->bind();
-
 	//setup projection matrix - this is a 90-degree quadratic perspective
 	float zNear = 1.0f;
 	float zFar = 10000.0f;
 	projectionMatrix.setToIdentity();
 	projectionMatrix.perspective(90.0f,1.0f,zNear,zFar);
-
-	//set pass uniforms
-	setupPassUniforms(curShader);
 
 	//set opengl viewport to the size of cubemap
 	glViewport(0, 0, cubemapSize, cubemapSize);
@@ -1342,9 +1375,8 @@ void Scenery3d::generateCubeMap()
 	glEnable(GL_CULL_FACE);
 
 #define DRAW_SCENE(a) cubeMap[a]->bind(); \
-	setupFrameUniforms(curShader); \
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);\
-	drawArrays(true,true)
+	drawArrays(true,true);\
 
 	//front
 	modelViewMatrix = stackBase;
@@ -1392,9 +1424,6 @@ void Scenery3d::generateCubeMap()
 	//reset viewport (see StelPainter::setProjector)
 	const Vec4i& vp = altAzProjector->getViewport();
 	glViewport(vp[0], vp[1], vp[2], vp[3]);
-
-	//unbind shader
-	curShader->release();
 }
 
 void Scenery3d::drawFromCubeMap()
@@ -1450,9 +1479,6 @@ void Scenery3d::drawFromCubeMap()
 
 void Scenery3d::drawDirect() // for Perspective Projection only!
 {
-    //we only need 1 shader for this
-    curShader->bind();
-
     //calculate standard perspective projection matrix, use QMatrix4x4 for that
     float fov = altAzProjector->getFov();
     float aspect = (float)altAzProjector->getViewportWidth() / (float)altAzProjector->getViewportHeight();
@@ -1465,17 +1491,10 @@ void Scenery3d::drawDirect() // for Perspective Projection only!
 		    0, 0, (zFar + zNear) / (zNear - zFar), -1,
 		    0, 0, 2.0 * zFar * zNear / (zNear - zFar), 0  );
 
-    //set pass uniforms (proj + const. lighting info)
-    setupPassUniforms(curShader);
-
     //calc modelview transform
     modelViewMatrix = convertToQMatrix( altAzProjector->getModelViewTransform()->getApproximateLinearTransfo() );
     modelViewMatrix.optimize(); //may make inversion faster?
     modelViewMatrix.translate(absolutePosition.v[0],absolutePosition.v[1],absolutePosition.v[2]);
-
-    //setup other frame-constant uniforms (modelview dependant)
-    //normal matrix and MVP are automatically created here if necessary
-    setupFrameUniforms(curShader);
 
     //depth test needs enabling, clear depth buffer, color buffer already contains background so it stays
     glEnable(GL_DEPTH_TEST);
@@ -1493,7 +1512,6 @@ void Scenery3d::drawDirect() // for Perspective Projection only!
     glDisable(GL_DEPTH_TEST);
     glDisable(GL_CULL_FACE);
 
-    curShader->release();
 }
 
 void Scenery3d::drawWithCubeMap()
@@ -1579,7 +1597,7 @@ void Scenery3d::drawDebug()
 //	glBindTexture(GL_TEXTURE_2D, camDepthTex);
 //	painter.drawSprite2dMode(screen_x, screen_y, debugTextureSize);
 
-	if(shadowsEnabled)
+	if(shaderParameters.shadows)
 	{
 		for(int i=0; i<frustumSplits; i++)
 		{
@@ -1722,6 +1740,10 @@ bool Scenery3d::initShadowmapping()
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
+			//we use hardware-accelerated depth compare mode
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_MODE, GL_COMPARE_R_TO_TEXTURE);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_FUNC, GL_LESS);
+
 			const float ones[] = {1.0f, 1.0f, 1.0f, 1.0f};
 			glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_BORDER_COLOR, ones);
 			//Attach the depthmap to the Buffer
@@ -1767,23 +1789,13 @@ void Scenery3d::draw(StelCore* core)
 	//update projector from core
 	altAzProjector = core->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
 
-	//get a shader from shadermgr that fits the current state (but do not bind it here)
-	curShader = shaderManager.getShader(pixelLighting,shadowsEnabled,bumpsEnabled);
-	if(!curShader)
-	{
-		//shader invalid, can't draw
-		parent->showMessage("Scenery3d shader error, can't draw. Check debug output for details.");
-		return;
-	}
-
 	//turn off blending, because it seems to be enabled somewhere we do not have access
 	glDisable(GL_BLEND);
-
 
 	//recalculate lighting info
 	calculateLighting();
 
-	if (shadowsEnabled)
+	if (shaderParameters.shadows)
 	{
 		if(!generateShadowMap())
 			return;

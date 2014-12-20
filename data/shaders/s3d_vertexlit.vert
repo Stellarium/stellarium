@@ -25,6 +25,8 @@ This is a shader for basic vertex lighting. This should be the minimum quality s
  
 #version 120
 
+#define MAT_AMBIENT 1
+
 //matrices
 uniform mat4 u_mMVP;
 uniform mat3 u_mNormal;
@@ -35,7 +37,9 @@ uniform vec3 u_vLightAmbient;
 uniform vec3 u_vLightDiffuse;
 
 //material info
+#if MAT_AMBIENT
 uniform vec3 u_vMatAmbient;
+#endif
 uniform vec3 u_vMatDiffuse;
 uniform float u_vMatAlpha;
 
@@ -48,8 +52,12 @@ varying vec4 v_illumination;
 
 vec3 calcLighting(vec3 normal)
 {
+#if MAT_AMBIENT
 	//ambient + small constant lighting
 	vec3 Iamb = (u_vLightAmbient + vec3(0.025,0.025,0.025)) * u_vMatAmbient;
+#else
+	vec3 Iamb = u_vLightAmbient + vec3(0.025,0.025,0.025);
+#endif
 	
 	//basic lambert term
 	float NdotL = dot(normal, u_vLightDirection);
