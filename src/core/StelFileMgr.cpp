@@ -135,7 +135,14 @@ void StelFileMgr::init()
 		else
 			screenshotDir = userDir.append(screenshotDirSuffix);
 	}
-	makeSureDirExistsAndIsWritable(screenshotDir);
+	try
+	{
+		makeSureDirExistsAndIsWritable(screenshotDir);
+	}
+	catch (std::runtime_error &e)
+	{
+		qDebug("Error: cannot create screenshot directory: %s", e.what());
+	}
 }
 
 
