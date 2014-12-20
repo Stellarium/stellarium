@@ -20,11 +20,22 @@
 
 #ifndef _SHADERMANAGER_HPP_
 #define _SHADERMANAGER_HPP_
+#include "OBJ.hpp"
 #include "StelOpenGL.hpp"
 
 #include <QMap>
 
 class QOpenGLShaderProgram;
+
+//! A structure for global shader parameters
+struct GlobalShaderParameters
+{
+	bool pixelLighting;
+	bool bump;
+	bool shadows;
+	bool shadowFilter;
+	bool shadowFilterHQ;
+};
 
 //! A simple shader cache class that gives us the correct shader depending on desired configuration.
 //! It also contains a uniform cache to avoid unnecessary glUniformLocation calls
@@ -96,8 +107,10 @@ public:
 		UNIFORM_VEC_SQUAREDSPLITS,
 	};
 
+
+
 	//! Returns a shader that supports the specified operations. Must be called within a GL context.
-	inline QOpenGLShaderProgram* getShader(bool pixelLighting,bool shadows,bool bump);
+	inline QOpenGLShaderProgram* getShader(const GlobalShaderParameters &globals, const OBJ::Material *mat = NULL);
 
 	//! Returns a shader that can only transform geometry, nothing else
 	inline QOpenGLShaderProgram* getTransformShader();
@@ -128,29 +141,57 @@ private:
 		BUMP            = (1<<3),
 		//Shader applies alpha testing (w. fragment discard)
 		ALPHATEST	= (1<<4),
+		//Shader filters shadows
+		SHADOW_FILTER	= (1<<5),
+		//shader filters shadows (higher quality)
+		SHADOW_FILTER_HQ = (1<<6),
+		//uses ambient material
+		MAT_AMBIENT	= (1<<7),
+		//uses specular material
+		MAT_SPECULAR	= (1<<8),
+		//has diffuse texture
+		MAT_DIFFUSETEX	= (1<<9),
 	};
+
+	typedef QMap<QString,FeatureFlags> t_FeatureFlagStrings;
+	static t_FeatureFlagStrings featureFlagsStrings;
 
 	QString getVShaderName(uint flags);
 	QString getGShaderName(uint flags);
 	QString getFShaderName(uint flags);
 	QOpenGLShaderProgram* findOrLoadShader(uint flags);
-	bool loadShader(QOpenGLShaderProgram& program, const QString& vShader, const QString& gShader, const QString& fShader);
+	//! A simple shader preprocessor that can replace #defines
+	QByteArray preprocessShader(const QString& fileName, uint flags);
+	bool loadShader(QOpenGLShaderProgram& program, const QString& vShader, const QString& gShader, const QString& fShader, const uint flags);
 	void buildUniformCache(QOpenGLShaderProgram& program);
 
-	typedef QMap<uint,QOpenGLShaderProgram*> t_ShaderCache;
-	typedef QMap<UNIFORM,GLuint> t_UniformCacheEntry;
-	typedef QMap<const QOpenGLShaderProgram*, t_UniformCacheEntry> t_UniformCache;
+	typedef QHash<uint,QOpenGLShaderProgram*> t_ShaderCache;
 	t_ShaderCache m_shaderCache;
+
+	typedef QHash<UNIFORM,GLuint> t_UniformCacheEntry;
+	typedef QHash<const QOpenGLShaderProgram*, t_UniformCacheEntry> t_UniformCache;
 	t_UniformCache m_uniformCache;
 };
 
-QOpenGLShaderProgram* ShaderMgr::getShader(bool pixelLighting, bool shadows, bool bump)
+QOpenGLShaderProgram* ShaderMgr::getShader(const GlobalShaderParameters& globals,const OBJ::Material* mat)
 {
 	//Build bitflags from bools. Some stuff requires pixelLighting to be enabled, so check it too.
 	uint flags = SHADING;
-	if(pixelLighting)            flags|= PIXEL_LIGHTING;
-	if(pixelLighting && shadows) flags|= SHADOWS;
-	if(pixelLighting && bump)    flags|= BUMP;
+	if(globals.pixelLighting)            flags|= PIXEL_LIGHTING;
+	if(globals.pixelLighting && globals.shadows) flags|= SHADOWS;
+	if(globals.pixelLighting && globals.bump)    flags|= BUMP;
+	if(globals.pixelLighting && globals.shadows && globals.shadowFilter) flags|= SHADOW_FILTER;
+	if(globals.pixelLighting && globals.shadows && globals.shadowFilter && globals.shadowFilterHQ) flags|= SHADOW_FILTER_HQ;
+
+	if(mat)
+	{
+		if(mat->illum>0)
+			flags|= MAT_AMBIENT;
+		if(mat->illum == OBJ::SPECULAR && globals.pixelLighting)
+			flags|= MAT_SPECULAR;
+		if(mat->texture)
+			flags|= MAT_DIFFUSETEX;
+	}
 
 	return findOrLoadShader(flags);
 }
