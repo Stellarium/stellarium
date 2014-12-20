@@ -43,6 +43,7 @@ ShaderMgr::ShaderMgr()
 		uniformStrings["u_vMatAmbient"] = UNIFORM_MTL_AMBIENT;
 		uniformStrings["u_vMatDiffuse"] = UNIFORM_MTL_DIFFUSE;
 		uniformStrings["u_vMatSpecular"] = UNIFORM_MTL_SPECULAR;
+		uniformStrings["u_vMatShininess"] = UNIFORM_MTL_SHININESS;
 		uniformStrings["u_vMatAlpha"] = UNIFORM_MTL_ALPHA;
 
 		//light
@@ -108,6 +109,8 @@ QString ShaderMgr::getVShaderName(uint flags)
 	{
 		if (! (flags & PIXEL_LIGHTING ))
 			return "s3d_vertexlit.vert";
+		else
+			return "s3d_pixellit.vert";
 	}
 	else
 	{
@@ -129,6 +132,8 @@ QString ShaderMgr::getFShaderName(uint flags)
 	{
 		if (! (flags & PIXEL_LIGHTING ))
 			return "s3d_vertexlit.frag";
+		else
+			return "s3d_pixellit.frag";
 	}
 	return QString();
 }
