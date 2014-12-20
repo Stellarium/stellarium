@@ -25,12 +25,23 @@ This is a shader for phong/per-pixel lighting.
  
 #version 120
 
+//macros that can be set by ShaderManager (simple true/false flags)
+#define SHADOWS 1
+
 //matrices
 uniform mat4 u_mModelView;
 uniform mat4 u_mProjection;
 uniform mat3 u_mNormal;
 
 uniform vec3 u_vLightDirection; //in view space, from point to light
+
+#if SHADOWS
+//shadow transforms
+uniform mat4 u_mShadow0;
+uniform mat4 u_mShadow1;
+uniform mat4 u_mShadow2;
+uniform mat4 u_mShadow3;
+#endif
 
 attribute vec4 a_vertex;
 attribute vec3 a_normal;
@@ -39,6 +50,15 @@ attribute vec2 a_texcoord;
 varying vec3 v_normal; //normal in view space
 varying vec2 v_texcoord;
 varying vec3 v_halfvec; //halfway vector between viewer and light-source, for blinn phong (view space)
+
+#if SHADOWS
+varying vec3 v_viewPos; //position of fragment in view space
+
+varying vec4 v_shadowCoord0;
+varying vec4 v_shadowCoord1;
+varying vec4 v_shadowCoord2;
+varying vec4 v_shadowCoord3;
+#endif
 
 void main(void)
 {
@@ -51,6 +71,15 @@ void main(void)
 	//calc halfway vector
 	vec4 viewPos = u_mModelView * a_vertex;
 	v_halfvec = normalize(-normalize(viewPos.xyz) + u_vLightDirection);
+	
+	#if SHADOWS
+	v_viewPos = viewPos.xyz;
+	//calculate shadowmap coords
+	v_shadowCoord0 = u_mShadow0 * a_vertex;
+	v_shadowCoord1 = u_mShadow1 * a_vertex;
+	v_shadowCoord2 = u_mShadow2 * a_vertex;
+	v_shadowCoord3 = u_mShadow3 * a_vertex;
+	#endif
 	
 	//calc final position
 	gl_Position = u_mProjection * viewPos;
