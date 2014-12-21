@@ -55,10 +55,9 @@ attribute vec4 a_tangent;
 varying vec3 v_normal; //normal in view space
 varying vec2 v_texcoord;
 varying vec3 v_lightVec; //light vector, in VIEW or TBN space according to bump settings
-varying vec3 v_eye; //normalized vector from point to eye in TBN space or view space (depending on if bump mapping is used or not)
+varying vec3 v_viewPos; //position of fragment in view space
 
 #if SHADOWS
-varying vec3 v_viewPos; //position of fragment in view space
 
 varying vec4 v_shadowCoord0;
 varying vec4 v_shadowCoord1;
@@ -70,16 +69,16 @@ varying vec4 v_shadowCoord3;
 void main(void)
 {
 	//transform normal
-	v_normal = u_mNormal * a_normal;
+	v_normal = normalize(u_mNormal * a_normal);
 	
 	//pass on tex coord
 	v_texcoord = a_texcoord;
 	
-	//calc halfway vector
+	//calc vertex pos in view space
 	vec4 viewPos = u_mModelView * a_vertex;
+	v_viewPos = viewPos.xyz;
 	
 	#if SHADOWS
-	v_viewPos = viewPos.xyz;
 	//calculate shadowmap coords
 	v_shadowCoord0 = u_mShadow0 * a_vertex;
 	v_shadowCoord1 = u_mShadow1 * a_vertex;
@@ -97,10 +96,9 @@ void main(void)
 					t.y, b.y, v_normal.y,
 					t.z, b.z, v_normal.z);
 	v_lightVec = TBN * u_vLightDirectionView;
-	v_eye = TBN * normalize(-viewPos.xyz);
+	v_viewPos = TBN * v_viewPos;
 	#else
-	v_lightVec = u_vLightDirectionView;
-	v_eye = normalize(-viewPos.xyz);
+	v_lightVec = normalize(u_vLightDirectionView);
 	#endif
 	
 	//calc final position
