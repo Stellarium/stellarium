@@ -637,7 +637,7 @@ void Scenery3d::setupFrameUniforms(QOpenGLShaderProgram *shader)
 	}
 
 	//-- Lighting setup --
-	//check if we require a normal matrix
+	//check if we require a normal matrix, this is assumed to be required for all "shading" shaders
 	loc = shaderManager.uniformLocation(shader,ShaderMgr::UNIFORM_MAT_NORMAL);
 	if(loc>=0)
 	{
@@ -645,7 +645,13 @@ void Scenery3d::setupFrameUniforms(QOpenGLShaderProgram *shader)
 		shader->setUniformValue(loc,normalMatrix);
 
 		//assume light direction is only required when normal matrix is also used (would not make much sense alone)
-		SET_UNIFORM(shader,ShaderMgr::UNIFORM_LIGHT_DIRECTION, normalMatrix * lightInfo.lightDirectionWorld);
+		SET_UNIFORM(shader,ShaderMgr::UNIFORM_LIGHT_DIRECTION, lightInfo.lightDirectionWorld); //set light dir in world space
+
+		//check if the shader wants view space info
+		loc = shaderManager.uniformLocation(shader,ShaderMgr::UNIFORM_LIGHT_DIRECTION_VIEW);
+		if(loc>=0)
+			shader->setUniformValue(loc,(normalMatrix * lightInfo.lightDirectionWorld));
+
 	}
 }
 
@@ -656,13 +662,23 @@ void Scenery3d::setupMaterialUniforms(QOpenGLShaderProgram* shader, const OBJ::M
 	glUniform3fv(shaderManager.uniformLocation(shader,ShaderMgr::UNIFORM_MTL_DIFFUSE),1,mat.diffuse);
 	glUniform3fv(shaderManager.uniformLocation(shader,ShaderMgr::UNIFORM_MTL_SPECULAR),1,mat.specular);
 	SET_UNIFORM(shader,ShaderMgr::UNIFORM_MTL_SHININESS,mat.shininess);
-	SET_UNIFORM(shader,ShaderMgr::UNIFORM_MTL_ALPHA,mat.alpha);
+	//force alpha to 1 here for non-translucent mats (fixes incorrect blending in cubemap)
+	SET_UNIFORM(shader,ShaderMgr::UNIFORM_MTL_ALPHA, mat.illum == OBJ::TRANSLUCENT? mat.alpha : 1.0f);
 
 	if(mat.texture)
 	{
 		mat.texture->bind(0); //this already sets glActiveTexture(0)
 		SET_UNIFORM(shader,ShaderMgr::UNIFORM_TEX_DIFFUSE,0);
-		//shader->setUniformValue(shaderManager.getUniformLocation(shader,ShaderManager::UNIFORM_TEX_DIFFUSE),0);
+	}
+	if(shaderParameters.bump && mat.bump_texture)
+	{
+		mat.bump_texture->bind(1);
+		SET_UNIFORM(shader,ShaderMgr::UNIFORM_TEX_BUMP,1);
+	}
+	if(shaderParameters.bump && mat.height_texture)
+	{
+		mat.bump_texture->bind(2);
+		SET_UNIFORM(shader,ShaderMgr::UNIFORM_TEX_HEIGHT,2);
 	}
 }
 
@@ -1129,7 +1145,7 @@ bool Scenery3d::renderShadowMaps(const Vec3f& shadowDir)
 
 	//Fix selfshadowing
 	glEnable(GL_POLYGON_OFFSET_FILL);
-	glPolygonOffset(1.1f,4.0f);
+	glPolygonOffset(1.05f,2.0f);
 	//! This is now done in shader via a bias. If that's ever a problem uncomment this part and the disabling farther down and change
 	//! glCullFace(GL_FRONT) to GL_BACK (farther up from here)
 

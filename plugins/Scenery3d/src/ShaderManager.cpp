@@ -44,6 +44,8 @@ ShaderMgr::ShaderMgr()
 
 		//textures
 		uniformStrings["u_texDiffuse"] = UNIFORM_TEX_DIFFUSE;
+		uniformStrings["u_texBump"] = UNIFORM_TEX_BUMP;
+		uniformStrings["u_texHeight"] = UNIFORM_TEX_HEIGHT;
 		uniformStrings["u_texShadow0"] = UNIFORM_TEX_SHADOW0;
 		uniformStrings["u_texShadow1"] = UNIFORM_TEX_SHADOW1;
 		uniformStrings["u_texShadow2"] = UNIFORM_TEX_SHADOW2;
@@ -58,6 +60,7 @@ ShaderMgr::ShaderMgr()
 
 		//light
 		uniformStrings["u_vLightDirection"] = UNIFORM_LIGHT_DIRECTION;
+		uniformStrings["u_vLightDirectionView"] = UNIFORM_LIGHT_DIRECTION_VIEW;
 		uniformStrings["u_vLightAmbient"] = UNIFORM_LIGHT_AMBIENT;
 		uniformStrings["u_vLightDiffuse"] = UNIFORM_LIGHT_DIFFUSE;
 
@@ -71,6 +74,7 @@ ShaderMgr::ShaderMgr()
 		featureFlagsStrings["PIXEL_LIGHTING"] = PIXEL_LIGHTING;
 		featureFlagsStrings["SHADOWS"] = SHADOWS;
 		featureFlagsStrings["BUMP"] = BUMP;
+		featureFlagsStrings["HEIGHT"] = HEIGHT;
 		featureFlagsStrings["ALPHATEST"] = ALPHATEST;
 		featureFlagsStrings["SHADOW_FILTER"] = SHADOW_FILTER;
 		featureFlagsStrings["SHADOW_FILTER_HQ"] = SHADOW_FILTER_HQ;
@@ -204,6 +208,10 @@ QByteArray ShaderMgr::preprocessShader(const QString &fileName, uint flags)
 				bool val = it.value() & flags;
 				write = "#define " + word + (val?" 1":" 0");
 				qDebug()<<"preprocess match: "<<line <<" --> "<<write;
+			}
+			else
+			{
+				qDebug()<<"unknown define, ignoring: "<<line;
 			}
 		}
 

@@ -1163,7 +1163,7 @@ bool OBJ::importMaterials(const QString& filename, MatCacheT& materialCache)
             pMaterial->specular[1] = 0.0f;
             pMaterial->specular[2] = 0.0f;
             pMaterial->specular[3] = 1.0f;
-            pMaterial->shininess = 0.0f;
+	    pMaterial->shininess = 8.0f;
             pMaterial->alpha = 1.0f;
             pMaterial->name = buffer;
             pMaterial->textureName.clear();

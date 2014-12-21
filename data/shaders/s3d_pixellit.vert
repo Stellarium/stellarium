@@ -26,14 +26,16 @@ This is a shader for phong/per-pixel lighting.
 #version 120
 
 //macros that can be set by ShaderManager (simple true/false flags)
-#define SHADOWS 1
+#define SHADOWS 0
+#define BUMP 0
+#define HEIGHT 0
 
 //matrices
 uniform mat4 u_mModelView;
 uniform mat4 u_mProjection;
 uniform mat3 u_mNormal;
 
-uniform vec3 u_vLightDirection; //in view space, from point to light
+uniform vec3 u_vLightDirectionView; //in view space, from point to light
 
 #if SHADOWS
 //shadow transforms
@@ -46,10 +48,14 @@ uniform mat4 u_mShadow3;
 attribute vec4 a_vertex;
 attribute vec3 a_normal;
 attribute vec2 a_texcoord;
+#if BUMP
+attribute vec4 a_tangent;
+#endif
 
 varying vec3 v_normal; //normal in view space
 varying vec2 v_texcoord;
-varying vec3 v_halfvec; //halfway vector between viewer and light-source, for blinn phong (view space)
+varying vec3 v_lightVec; //light vector, in VIEW or TBN space according to bump settings
+varying vec3 v_eye; //normalized vector from point to eye in TBN space or view space (depending on if bump mapping is used or not)
 
 #if SHADOWS
 varying vec3 v_viewPos; //position of fragment in view space
@@ -59,6 +65,7 @@ varying vec4 v_shadowCoord1;
 varying vec4 v_shadowCoord2;
 varying vec4 v_shadowCoord3;
 #endif
+
 
 void main(void)
 {
@@ -70,7 +77,6 @@ void main(void)
 	
 	//calc halfway vector
 	vec4 viewPos = u_mModelView * a_vertex;
-	v_halfvec = normalize(-normalize(viewPos.xyz) + u_vLightDirection);
 	
 	#if SHADOWS
 	v_viewPos = viewPos.xyz;
@@ -79,6 +85,22 @@ void main(void)
 	v_shadowCoord1 = u_mShadow1 * a_vertex;
 	v_shadowCoord2 = u_mShadow2 * a_vertex;
 	v_shadowCoord3 = u_mShadow3 * a_vertex;
+	#endif
+	
+	#if BUMP
+	//create View-->TBN matrix
+	vec3 t = normalize(u_mNormal * a_tangent.xyz);
+	//bitangent recreated from normal and tangent instead passed as attribute for a bit more orthonormality
+	vec3 b = cross(v_normal, t) * a_tangent.w; //w coordinate stores handedness of tangent space
+	
+	mat3 TBN = mat3(t.x, b.x, v_normal.x,
+					t.y, b.y, v_normal.y,
+					t.z, b.z, v_normal.z);
+	v_lightVec = TBN * u_vLightDirectionView;
+	v_eye = TBN * normalize(-viewPos.xyz);
+	#else
+	v_lightVec = u_vLightDirectionView;
+	v_eye = normalize(-viewPos.xyz);
 	#endif
 	
 	//calc final position
