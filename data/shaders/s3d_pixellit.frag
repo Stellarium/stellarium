@@ -161,10 +161,9 @@ uniform sampler2DShadow u_texShadow3;
 varying vec3 v_normal;
 varying vec2 v_texcoord;
 varying vec3 v_lightVec; //light vector, in VIEW or TBN space according to bump settings
-varying vec3 v_eye;
+varying vec3 v_viewPos; //position of fragment in view space
 
 #if SHADOWS
-varying vec3 v_viewPos; //position of fragment in view space
 varying vec4 v_shadowCoord0;
 varying vec4 v_shadowCoord1;
 varying vec4 v_shadowCoord2;
@@ -216,7 +215,7 @@ float getShadow()
 }
 #endif
 
-void calcLighting(in vec3 normal,out vec3 texCol,out vec3 specCol)
+void calcLighting(in vec3 normal,in vec3 eye,out vec3 texCol,out vec3 specCol)
 {
 	vec3 L = normalize(v_lightVec);
 	
@@ -238,7 +237,7 @@ void calcLighting(in vec3 normal,out vec3 texCol,out vec3 specCol)
 		//calculate phong reflection vector
 		vec3 R = reflect(-L,normal);
 		
-		float RdotE = dot(normalize(R), normalize(v_eye));
+		float RdotE = dot(normalize(R), eye);
 		
 		if(RdotE>0.0)
 		{
@@ -271,13 +270,15 @@ const float heightScale = 0.015f; //const for now
 void main(void)
 {
 	vec2 texCoords = v_texcoord;
+	vec3 eye = normalize(-v_viewPos);
+	
 	#if HEIGHT
 	//pertube texture coords with heightmap
 	float height = texture2D(u_texHeight, texCoords).r;
 	//*scale +bias
 	height = height * heightScale - 0.5*heightScale;
 		
-	texCoords = texCoords + (height * normalize(v_eye).xz);
+	texCoords = texCoords + (height * eye.xz);
 	#endif
 	
 	#if BUMP
@@ -287,7 +288,7 @@ void main(void)
 	#endif
 
 	vec3 texCol,specCol;
-	calcLighting(normalize(normal),texCol,specCol);
+	calcLighting(normalize(normal),eye,texCol,specCol);
 	
 	#if MAT_DIFFUSETEX
 	vec4 texVal = texture2D(u_texDiffuse,texCoords);
@@ -295,4 +296,5 @@ void main(void)
 	#else
 	gl_FragColor = vec4(texCol + specCol,u_vMatAlpha);
 	#endif
+	
 }
