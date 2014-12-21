@@ -1,5 +1,20 @@
 #!/usr/bin/python
 
+# This file is part of Stellarium. Stellarium is free software: you can
+# redistribute it and/or modify it under the terms of the GNU General Public
+# License as published by the Free Software Foundation, version 2.
+#
+# This program is distributed in the hope that it will be useful, but WITHOUT
+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+# FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more
+# details.
+#
+# You should have received a copy of the GNU General Public License along with
+# this program; if not, write to the Free Software Foundation, Inc., 51
+# Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+#
+# Copyright Fabien Chereau <fabien.chereau@gmail.com>
+
 import Image, ImageFilter, ImageStat, ImageChops
 import os
 from astLib import astWCS
@@ -12,11 +27,11 @@ from astropy import wcs
 from astropy.io import fits
 import numpy
 
-#-----------------------------------------------------------
+# -----------------------------------------------------------
 # Pre-process zipped plates to extract only necessary data
 # This has to be run once if you don't already have the
 # preprocessed plates
-#-----------------------------------------------------------
+# -----------------------------------------------------------
 # python prepareAllPlates.py
 #
 # input : a directory with all original plates .tgz files (change in code)
