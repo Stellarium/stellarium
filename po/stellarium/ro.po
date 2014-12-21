@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: stellarium\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-12-15 22:16+0600\n"
-"PO-Revision-Date: 2014-07-15 01:20+0000\n"
-"Last-Translator: Stoian Andrei-Marian <javaboy.mc@gmail.com>\n"
+"PO-Revision-Date: 2014-12-21 04:46+0000\n"
+"Last-Translator: Mihai Roharik <roharik@free.fr>\n"
 "Language-Team: Romanian <ro@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-12-16 06:24+0000\n"
+"X-Launchpad-Export-Date: 2014-12-21 05:34+0000\n"
 "X-Generator: Launchpad (build 17286)\n"
 "100 > 19) || ((n % 100 == 0) && (n != 0))) ? 2: 1))\n"
 
@@ -74,7 +74,7 @@ msgstr "Orizont"
 
 #: src/core/modules/GridLinesMgr.cpp:603
 msgid "Galactic Equator"
-msgstr ""
+msgstr "ecuator galactic"
 
 #: src/core/modules/GridLinesMgr.cpp:737
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:331
@@ -122,7 +122,7 @@ msgstr "Grilă galactică"
 
 #: src/core/modules/GridLinesMgr.cpp:746 src/ui_viewDialog.h:1326
 msgid "Galactic equator"
-msgstr ""
+msgstr "ecuator galactic"
 
 #: src/core/modules/LandscapeMgr.cpp:356 src/ui_viewDialog.h:1254
 msgid "Atmosphere"
@@ -303,7 +303,7 @@ msgstr "Ziua solară medie: %1"
 
 #: src/core/modules/Planet.cpp:285
 msgid "The period of rotation is chaotic"
-msgstr ""
+msgstr "Perioada de rotaţie este haotică"
 
 #: src/core/modules/Planet.cpp:291
 #, qt-format
@@ -844,6 +844,10 @@ msgid ""
 "used. Table for 1620..2000, and includes a variant of Chapront, Chapront-"
 "Touze & Francou (1997) for dates outside 1620..2000."
 msgstr ""
+"După J. Meeus, <em>Astronomical Algorithms</em> (<em>Algoritmi "
+"astronomici</em>) (ediţia a 2-a, 1998), şi larg folosit. Tabel pentru "
+"perioada 1620..2000, şi include o variantă a lui Chapront, Chapront-Touze şi "
+" Francou (1997) pentru datele în afara perioadei 1620..2000."
 
 #: src/core/StelCore.cpp:1568
 #, qt-format
@@ -929,6 +933,8 @@ msgid ""
 "This is a quadratic formula for calculation of %1T with coefficients defined "
 "by the user."
 msgstr ""
+"Aceasta este o formulă cuadratică de calcul a lui %1T cu coeficienţi "
+"definiţi de utilizator."
 
 #: src/core/StelCore.cpp:1598 src/core/SimbadSearcher.cpp:133
 msgid "Error"
@@ -959,12 +965,12 @@ msgstr ""
 #: src/core/StelCore.cpp:1743
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2, %3."
-msgstr ""
+msgstr "Interval valid de utilizare: între anii %1 şi %2, %3."
 
 #: src/core/StelCore.cpp:1745
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2."
-msgstr ""
+msgstr "Interval valid de utilizare: între anii %1 şi %2."
 
 #: src/core/StelProjector.cpp:129
 msgid "Maximum FOV: "
@@ -1102,7 +1108,7 @@ msgstr "Azimut/Altitudine: %1/%2"
 #: src/core/StelObject.cpp:196 src/core/StelObject.cpp:198
 #: src/core/StelObject.cpp:204 src/core/StelObject.cpp:206
 msgid "Ecliptic longitude/latitude"
-msgstr ""
+msgstr "longitudine ecliptică / latitudine"
 
 #: src/core/StelObject.cpp:214 src/core/StelObject.cpp:216
 #, qt-format
@@ -1429,7 +1435,7 @@ msgstr ""
 #. TRANSLATORS: This message will be displayed for users if current version of Stellarium is equals with version from stellarium.org
 #: src/gui/HelpDialog.cpp:332
 msgid "This is latest stable version of Stellarium."
-msgstr ""
+msgstr "Aceasta este cea mai recentă versiune stabilă de Stellarium."
 
 #: src/gui/HelpDialog.cpp:362
 msgid "Stellarium Help"
@@ -1693,7 +1699,7 @@ msgstr ""
 
 #: src/gui/StelGuiItems.cpp:654
 msgid "Frames per second"
-msgstr ""
+msgstr "Cadre/secundă"
 
 #. TRANSLATORS: Short description for Class 1 of the Bortle scale
 #: src/gui/ViewDialog.cpp:359
@@ -1708,7 +1714,7 @@ msgstr ""
 #. TRANSLATORS: Short description for Class 3 of the Bortle scale
 #: src/gui/ViewDialog.cpp:363
 msgid "Rural sky"
-msgstr ""
+msgstr "Cer rural"
 
 #. TRANSLATORS: Short description for Class 4 of the Bortle scale
 #: src/gui/ViewDialog.cpp:365
@@ -1718,7 +1724,7 @@ msgstr ""
 #. TRANSLATORS: Short description for Class 5 of the Bortle scale
 #: src/gui/ViewDialog.cpp:367
 msgid "Suburban sky"
-msgstr ""
+msgstr "Cer suburban"
 
 #. TRANSLATORS: Short description for Class 6 of the Bortle scale
 #: src/gui/ViewDialog.cpp:369
@@ -1742,11 +1748,11 @@ msgstr ""
 
 #: src/gui/ViewDialog.cpp:389
 msgid "The naked-eye limiting magnitude is"
-msgstr ""
+msgstr "Magnitudinea limită vizibilă cu ochiul liber este"
 
 #: src/gui/ViewDialog.cpp:413
 msgid "Abbreviated"
-msgstr ""
+msgstr "Abreviat"
 
 #: src/gui/ViewDialog.cpp:414
 msgid "Native"
@@ -1912,7 +1918,7 @@ msgstr ""
 #: src/gui/SearchDialog.cpp:232
 msgctxt "coordinate system"
 msgid "Equatorial"
-msgstr ""
+msgstr "Ecuatorial"
 
 #: src/gui/SearchDialog.cpp:233
 msgctxt "coordinate system"
@@ -1934,7 +1940,7 @@ msgstr ""
 
 #: src/gui/SearchDialog.cpp:257
 msgid "Azimuth"
-msgstr ""
+msgstr "Azimut"
 
 #: src/gui/SearchDialog.cpp:260
 msgid "Altitude"
@@ -1942,11 +1948,11 @@ msgstr ""
 
 #: src/gui/SearchDialog.cpp:267
 msgid "Longitude"
-msgstr ""
+msgstr "Longitudine"
 
 #: src/gui/SearchDialog.cpp:270
 msgid "Latitude"
-msgstr ""
+msgstr "Latitudine"
 
 #: src/gui/SearchDialog.cpp:510
 msgid "Simbad Lookup Error"
@@ -2105,13 +2111,13 @@ msgstr "plutoid"
 #: src/translations.h:56
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:515
 msgid "Comets"
-msgstr ""
+msgstr "Comete"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:58
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:514
 msgid "Asteroids"
-msgstr ""
+msgstr "Asteroizi"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:60
@@ -2156,7 +2162,7 @@ msgstr ""
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:79
 msgid "Irregular galaxies"
-msgstr ""
+msgstr "Galaxii neregulate"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:81
@@ -2166,12 +2172,12 @@ msgstr ""
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:83
 msgid "Messier Catalogue"
-msgstr ""
+msgstr "Catalogul Messier"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/translations.h:85
 msgid "Caldwell Catalogue"
-msgstr ""
+msgstr "Catalogul Caldwell"
 
 #: src/translations.h:89
 msgid "Arabic"
@@ -2506,16 +2512,23 @@ msgid ""
 "Just before Mars eclipses the sun, Phobos pops out from behind and eclipses "
 "it first. Takes place between Scorpio and Sagittarius on April 26, 2017."
 msgstr ""
+"Chiar înainte ca Marte să eclipseze Soarele, Phobos apare din spatele lui "
+"Marte şi îl eclipsează primul. Are loc între Scorpio şi Sagittarius pe 26 "
+"aprilie 2017."
 
 #: src/translations.h:211
 msgid ""
 "Just before Mars eclipses the sun, Phobos pops out from behind and eclipses "
 "it first. Takes place between Taurus and Gemini on July 23, 2031."
 msgstr ""
+"Chiar înainte ca Marte să eclipseze Soarele, Phobos apare din spatele lui "
+"Marte şi îl eclipsează primul. Are loc între Taurus şi Gemini  pe 23 iulie "
+"2031."
 
 #: src/translations.h:212
 msgid "Phobos eclipsing the Sun as seen from Olympus Mons on Jan 10, 2068."
 msgstr ""
+"Phobos eclipsează Soarele privit de pe Olympus Mons pe 10 ianuarie 2068."
 
 #: src/translations.h:213
 msgid ""
@@ -2523,6 +2536,9 @@ msgid ""
 "occultations of both on the same day are very rare. Here's one that takes "
 "place 1/23/2048. In real speed."
 msgstr ""
+"Ocultaţiile Terrei de către Phobos sînt comune, aşa cum sînt şi ocultaţiile "
+"lui Jupiter. Dar ocultaţiile amîndurora într-o aceeaşi zi sînt foarte rare. "
+"Iată una care are loc pe 23 ianuarie 2048. La viteză reală."
 
 #: src/translations.h:214
 msgid ""
@@ -2538,6 +2554,7 @@ msgstr ""
 msgid ""
 "Screensaver of various happenings in the Solar System. 232 events in all!"
 msgstr ""
+"Economizor de ecran cu diferite evenimente în sistemul solar. 232 cu totul!"
 
 #: src/translations.h:216
 msgid "A tour of the western constellations."
@@ -2546,11 +2563,14 @@ msgstr "Un tur al constelaţiilor vestice."
 #: src/translations.h:217
 msgid "Look at the Sun from big planets of Solar System and Pluto."
 msgstr ""
+"Privire spre Soare dinspre planetele mari ale sistemului solar şi Pluto."
 
 #: src/translations.h:218
 msgid ""
 "Best views of Earth from other Solar System bodies in the 21st Century."
 msgstr ""
+"Cele mai bune vederi ale Terrei de pe alte corpuri ale sistemului solar în "
+"secolul 21."
 
 #: src/translations.h:219
 msgid "Transit of Venus as seen from Sydney Australia, 6th June 2012."
@@ -2561,17 +2581,22 @@ msgid ""
 "A demonstration of the analemma - the path of the Sun across the sky during "
 "the year."
 msgstr ""
+"O demonstraţie a analemei - traseul Soarelui pe cer pe durata unui an."
 
 #: src/translations.h:221
 msgid ""
 "Flash of the supernova observed by Tycho Brahe in 1572. The Supernovae "
 "plugin has to be enabled."
 msgstr ""
+"Strălucirea supernovei observată de către Tycho Brahe în 1572. Plugin-ul "
+"Supernove trebuie să fie activat."
 
 #: src/translations.h:222
 msgid ""
 "Earth and Venus Greatest Elongations and Brilliancies from Mars 2000-3000"
 msgstr ""
+"Cele mai mari elongaţii şi străluciri ale Terrei şi ale lui Venus văzute de "
+"pe Marte între anii 2000 şi 3000"
 
 #: src/translations.h:223
 msgid ""
@@ -3583,11 +3608,11 @@ msgstr ""
 
 #: src/translations.h:479
 msgid "Directory:"
-msgstr ""
+msgstr "Dosar:"
 
 #: src/translations.h:480
 msgid "Folder"
-msgstr ""
+msgstr "Dosar"
 
 #: src/translations.h:481
 msgid "&Choose"
@@ -3600,7 +3625,7 @@ msgstr "Anulează"
 
 #: src/translations.h:483
 msgid "Files of type:"
-msgstr ""
+msgstr "Fişiere de tipul:"
 
 #: src/translations.h:484
 msgid "Date Modified"
@@ -3608,7 +3633,7 @@ msgstr ""
 
 #: src/translations.h:485
 msgid "Directories"
-msgstr ""
+msgstr "Dosare"
 
 #: src/translations.h:486
 msgid "Computer"
@@ -3628,15 +3653,15 @@ msgstr ""
 
 #: src/ui_dateTimeDialogGui.h:378
 msgid "Date and Time in Gregorian calendar"
-msgstr ""
+msgstr "Data şi ora după calendarul gregorian"
 
 #: src/ui_dateTimeDialogGui.h:380 src/ui_dateTimeDialogGui.h:385
 msgid "Julian Date"
-msgstr ""
+msgstr "Data după calendarul iulian"
 
 #: src/ui_dateTimeDialogGui.h:383
 msgid "Modified Julian Date"
-msgstr ""
+msgstr "Data iuliană modificată"
 
 #: src/ui_helpDialogGui.h:277 src/ui_helpDialogGui.h:283
 #: plugins/TelescopeControl/src/ui_telescopeDialog.h:418
@@ -3668,14 +3693,15 @@ msgstr "Locație"
 msgid ""
 "Standard list of locations contains only English names (without diacritics!)"
 msgstr ""
+"Lista standard de locaţii conţine numai nume engleze (fără diacritice!)"
 
 #: src/ui_locationDialogGui.h:414
 msgid "Reset location list to show all known locations"
-msgstr ""
+msgstr "Resetaţi lista locaţiilor pentru a arăta toate locaţiile cunoscute."
 
 #: src/ui_locationDialogGui.h:416
 msgid "Reset Location List"
-msgstr ""
+msgstr "Resetaţi lista locaţiilor"
 
 #: src/ui_locationDialogGui.h:417
 msgid "Current location information"
@@ -3742,7 +3768,7 @@ msgstr ""
 
 #: src/ui_locationDialogGui.h:439
 msgid "Get location from Network"
-msgstr ""
+msgstr "Obţineţi locaţia din reţea"
 
 #: src/ui_searchDialogGui.h:606
 msgid "Find Object"
@@ -3863,12 +3889,14 @@ msgstr "Obiect"
 #: src/ui_searchDialogGui.h:693
 #: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:489
 msgid "Coordinate system:"
-msgstr ""
+msgstr "Sistem de coordonate:"
 
 #: src/ui_searchDialogGui.h:695
 msgid ""
 "Note: this tool doesn't apply the refraction correction for coordinates."
 msgstr ""
+"Observaţie: acest instrument nu aplică corecţia de refracţie pentru "
+"coordonate."
 
 #: src/ui_searchDialogGui.h:696
 msgid "Position"
@@ -3877,6 +3905,7 @@ msgstr "Poziție"
 #: src/ui_searchDialogGui.h:698
 msgid "Some objects may be found after activation respective plug-ins"
 msgstr ""
+"Anumite obiecte pot fi găsite după activarea plugin-urilor respective"
 
 #: src/ui_searchDialogGui.h:700
 msgid "names in English"
@@ -3909,7 +3938,7 @@ msgstr ""
 
 #: src/ui_searchDialogGui.h:707
 msgid "Use autofill only from the beginning of words"
-msgstr ""
+msgstr "Folosiţi completarea automată numai de la începutul cuvintelor"
 
 #: src/ui_searchDialogGui.h:708 src/ui_viewDialog.h:1329
 #: src/ui_viewDialog.h:1347 src/ui_viewDialog.h:1355
@@ -3984,11 +4013,11 @@ msgstr ""
 
 #: src/ui_viewDialog.h:1248
 msgid "Automatic change of landscape when planet is changed"
-msgstr ""
+msgstr "Schimbarea automată a peisajului cînd este schimbată planeta"
 
 #: src/ui_viewDialog.h:1250
 msgid "Auto select landscapes"
-msgstr ""
+msgstr "Alegerea automată a peisajelor"
 
 #: src/ui_viewDialog.h:1252
 msgid "Show atmosphere"
@@ -3999,10 +4028,12 @@ msgid ""
 "Use light pollution data from locations database and ignore settings for "
 "light pollution below"
 msgstr ""
+"Folosirea valorilor de poluare luminoasă din baza de date a locaţiilor şi "
+"ignorarea parametrilor de poluare luminoasă de mai jos"
 
 #: src/ui_viewDialog.h:1258
 msgid "Light pollution data from locations database"
-msgstr ""
+msgstr "Valori de poluare luminoasă din baza de date a locaţiilor"
 
 #: src/ui_viewDialog.h:1259
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:401
@@ -4029,11 +4060,11 @@ msgstr "Scară relativă:"
 
 #: src/ui_viewDialog.h:1267
 msgid "Milky Way brightness:"
-msgstr ""
+msgstr "Strălucirea Căii Lactee"
 
 #: src/ui_viewDialog.h:1268
 msgid "Zodiacal Light brightness:"
-msgstr ""
+msgstr "Strălucirea luminii zodiacale"
 
 #: src/ui_viewDialog.h:1269
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:264
@@ -4052,7 +4083,7 @@ msgstr "Adaptare oculară dinamică"
 
 #: src/ui_viewDialog.h:1275
 msgid "Settings for sporadic meteors"
-msgstr ""
+msgstr "Parametri pentru meteori sporadici"
 
 #: src/ui_viewDialog.h:1277
 msgid "Shooting Stars"
@@ -4070,19 +4101,22 @@ msgstr ""
 #: src/ui_viewDialog.h:1284
 msgid "Limit Magnitudes (for unaided/binocular observers)"
 msgstr ""
+"Magnitudini limită (pentru observaţii cu binoclul sau fără instrument)"
 
 #: src/ui_viewDialog.h:1286
 msgid "Limit Magnitudes"
-msgstr ""
+msgstr "Magnitudini limită"
 
 #: src/ui_viewDialog.h:1288
 msgid "Limit the magnitude of stars"
-msgstr ""
+msgstr "Limitează magnitudinile stelelor"
 
 #: src/ui_viewDialog.h:1292
 msgid ""
 "Limit the magnitude of deep-sky objects (star clusters, galaxies and nebulas)"
 msgstr ""
+"Limitează magnitudinile obiectelor de cer profund (roiuri de stele, galaxii "
+"şi nebuloase)"
 
 #: src/ui_viewDialog.h:1295
 msgid "Constellations"
@@ -4144,7 +4178,7 @@ msgstr "Arată linia eclipticii"
 
 #: src/ui_viewDialog.h:1324
 msgid "Show Galactic equator line"
-msgstr ""
+msgstr "Arată linia ecuatorului galactic"
 
 #: src/ui_viewDialog.h:1328
 msgid "Projection"
@@ -4173,10 +4207,12 @@ msgstr "Folosește acest peisaj ca implicit"
 #: src/ui_viewDialog.h:1336
 msgid "Use minimal brightness to leave landscape visible also in darkness"
 msgstr ""
+"Foloseşte strălucirea minimă pentru a permite ca peisajul să fie vizibil şi "
+"în întuneric"
 
 #: src/ui_viewDialog.h:1338
 msgid "Minimal brightness:"
-msgstr ""
+msgstr "Strălucire minimă:"
 
 #: src/ui_viewDialog.h:1340
 msgid ""
@@ -4186,6 +4222,7 @@ msgstr ""
 #: src/ui_viewDialog.h:1343
 msgid "Use minimal brightness as may be specified in landscape.ini"
 msgstr ""
+"Foloseşte strălucire minimă aşa cum poate fi specificat în landscape.ini"
 
 #: src/ui_viewDialog.h:1345
 msgid "from landscape, if given"
@@ -4205,7 +4242,7 @@ msgstr ""
 
 #: src/ui_viewDialog.h:1351
 msgid "Select if you want names abbreviated, original or translated"
-msgstr ""
+msgstr "Alegeţi dacă doriţi numele abreviate, pe cele de origine sau traduse"
 
 #: src/ui_viewDialog.h:1354
 msgid "Use native names for planets from current culture"
@@ -4233,13 +4270,16 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:1041
 msgid "Check updates"
-msgstr ""
+msgstr "Verifică actualizările"
 
 #: src/ui_configurationDialog.h:1042
 msgid ""
 "Enable checking updates of Stellarium via Internet. Info for updates of "
 "stable versions you can look on the tab \"About\" of \"Help\" window."
 msgstr ""
+"Permite verificarea actualizării Stellarium de pe internet. Pentru "
+"informaţii despre actualizările versiunilor stabile puteţi verifica pe "
+"\"Despre\" (\"About\") din fereastra \"Ajutor\" (\"Help\")."
 
 #: src/ui_configurationDialog.h:1043
 msgid "Default options"
@@ -4362,7 +4402,7 @@ msgstr "Magnitudine absolută"
 
 #: src/ui_configurationDialog.h:1088
 msgid "Galactic coordinates"
-msgstr ""
+msgstr "Coordonate galactice"
 
 #: src/ui_configurationDialog.h:1089
 msgid "Visual magnitude"
@@ -4378,7 +4418,7 @@ msgstr "Mărime"
 
 #: src/ui_configurationDialog.h:1095
 msgid "The type of the object (star, planet, etc.)"
-msgstr ""
+msgstr "Tipul de obiect (stea, planetă, etc.)"
 
 #: src/ui_configurationDialog.h:1097
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:283
@@ -4472,7 +4512,7 @@ msgstr "Altele:"
 
 #: src/ui_configurationDialog.h:1138
 msgid "Use current local date and time"
-msgstr ""
+msgstr "Foloseşte data şi ora locale"
 
 #: src/ui_configurationDialog.h:1140
 msgid "use current"
@@ -4502,7 +4542,7 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:1152
 msgid "Edit equation"
-msgstr ""
+msgstr "Editare ecuaţie"
 
 #: src/ui_configurationDialog.h:1154
 msgid "Planetarium options"
@@ -4581,15 +4621,15 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:1186
 msgid "Auto-enabling for the atmosphere"
-msgstr ""
+msgstr "Auto-activare pentru atmosferă"
 
 #: src/ui_configurationDialog.h:1188
 msgid "Use decimal degrees for coordinates"
-msgstr ""
+msgstr "Foloseşte grade zecimale pentru coordonate"
 
 #: src/ui_configurationDialog.h:1190
 msgid "Use decimal degrees"
-msgstr ""
+msgstr "Foloseşte grade zecimale"
 
 #: src/ui_configurationDialog.h:1191
 msgid "Screenshots"
@@ -4779,7 +4819,7 @@ msgstr ""
 
 #: src/ui_scriptConsole.h:376
 msgid "quickly load and run a utility script"
-msgstr ""
+msgstr "încarcă rapid şi execută un script utilitar"
 
 #: src/ui_scriptConsole.h:379
 msgid "run script"
@@ -4803,7 +4843,7 @@ msgstr "Poziția cursorului"
 
 #: src/ui_scriptConsole.h:392
 msgid "Include dir:"
-msgstr ""
+msgstr "Include dosarul:"
 
 #: src/ui_scriptConsole.h:393
 msgid "..."
@@ -4836,7 +4876,7 @@ msgstr ""
 #. TRANSLATORS: instructions for using the AngleMeasure plugin.
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:492
 msgid "Right-clicking changes the end point only."
-msgstr ""
+msgstr "Clic dreapta modifică numai punctul final."
 
 #. TRANSLATORS: PA is abbreviation for phrase "Position Angle"
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:494
@@ -4858,6 +4898,9 @@ msgid ""
 "angular distance between two points on the sky (and calculation of position "
 "angle between those two points)."
 msgstr ""
+"Plugin-ul  Măsură Unghi (Angle Measure) este un instrument folosit pentru a "
+"măsura distanţa unghiulară dintre două puncte de pe cer (şi pentru calculul "
+"unghiului de poziţie între aceste două puncte)."
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:95
 msgid ""
@@ -4947,23 +4990,25 @@ msgid ""
 "If you want to read full information about this plugin and its history, you "
 "can %1get info here%2."
 msgstr ""
+"Dacă doriţi să citiţi informaţii complete despre acest plugin şi despre "
+"istoricul lui, puteţi să %1obţineţi informaţii aici%2."
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:228
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:263
 msgid "Pulsars Configuration"
-msgstr ""
+msgstr "Configurare pulsari"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:229
 msgid "Angle Measure Plug-in Configuration"
-msgstr ""
+msgstr "Configurare plugin măsurare unghiuri"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:231
 msgid "Show in Equatorial Coordinates"
-msgstr ""
+msgstr "Arată în coordonate ecuatoriale"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:232
 msgid "Display with position angle"
-msgstr ""
+msgstr "Afişează cu unghiul de poziţie"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:233
 msgid "Show in Horizontal Coordinates"
@@ -4972,10 +5017,11 @@ msgstr ""
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:235
 msgid "(e.g. for Dobson starhopping)"
 msgstr ""
+"(de exemplu pentru salturi din stea în stea cu telescoape de tip Dobson)"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:237
 msgid "Display with position angle "
-msgstr ""
+msgstr "Afişează cu unghiul de poziţie "
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:238
 msgid "Attach start point to rotating sky"
@@ -4991,7 +5037,7 @@ msgstr ""
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:241
 msgid "Use dms format for angles"
-msgstr ""
+msgstr "Foloseşte formatul grade-minute-secunde pentru unghiuri"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:242
 #: plugins/Satellites/src/ui_satellitesDialog.h:714
@@ -5061,6 +5107,9 @@ msgid ""
 "magnification and field of view are simulated.) It can also show a sensor "
 "frame and a Telrad sight."
 msgstr ""
+"Arată cerul ca şi cum ar fi privit printr-un ocular de telescop. (Sînt "
+"simulate numai mărirea şi cîmpul vizual.) Poate de asemenea arăta cadrul "
+"unui senzor si viziunea unui Telrad."
 
 #: plugins/Oculars/src/Oculars.cpp:840
 msgid "Please select an object before switching to ocular view."
@@ -5122,7 +5171,7 @@ msgstr "Vizualizarea prin ocular"
 
 #: plugins/Oculars/src/Oculars.cpp:1319
 msgid "Oculars popup menu"
-msgstr ""
+msgstr "Meniu oculare"
 
 #: plugins/Oculars/src/Oculars.cpp:1320
 msgid "Show crosshairs"
@@ -5142,19 +5191,19 @@ msgstr "Configuraţia plugin-ului Oculare"
 
 #: plugins/Oculars/src/Oculars.cpp:1325
 msgid "Select next telescope"
-msgstr ""
+msgstr "Alege telescopul următor"
 
 #: plugins/Oculars/src/Oculars.cpp:1327
 msgid "Select previous telescope"
-msgstr ""
+msgstr "Alege telescopul precedent"
 
 #: plugins/Oculars/src/Oculars.cpp:1329
 msgid "Select next eyepiece"
-msgstr ""
+msgstr "Alege ocularul următor"
 
 #: plugins/Oculars/src/Oculars.cpp:1331
 msgid "Select previous eyepiece"
-msgstr ""
+msgstr "Alege ocularul precedent"
 
 #: plugins/Oculars/src/Oculars.cpp:1547
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:500
@@ -5348,7 +5397,7 @@ msgstr ""
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:597
 msgid "Focal length of eyepiece"
-msgstr ""
+msgstr "Focala ocularului"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:691
 #, qt-format
@@ -5365,12 +5414,12 @@ msgstr "Câmpul actual asigurat de aceste binoculare"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:810
 msgid "Magnification provided by this ocular/lens/telescope combination"
-msgstr ""
+msgstr "Mărirea obţinută cu această combinaţie ocular/lentilă/telescop"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:811
 msgid ""
 "Actual field of view provided by this ocular/lens/telescope combination"
-msgstr ""
+msgstr "Cîmpul vizual obţinut cu această combinaţie ocular/lentilă/telescop"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:504
 msgid "Oculars Plug-in"
@@ -5378,7 +5427,7 @@ msgstr "Plugin Oculare"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:507
 msgid "Barlow lens feature"
-msgstr ""
+msgstr "Caracteristici lentilă Barlow"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:511
 msgid "Overview"
@@ -5391,6 +5440,10 @@ msgid ""
 "and telescopes, as well as CCD Sensors.  Your first time running the app "
 "will populate some samples to get your started."
 msgstr ""
+"Acest plugin este destinat simulării a ceea ce s-ar vedea în ocular. Acest "
+"dialog poate fi folosit pentru a adăuga, modifica sau şterge oculare şi "
+"telescoape, precum şi senzori CCD. Prima utilizare va genera cîteva exemple "
+"pentru antrenament."
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:514
 msgid ""
@@ -5409,6 +5462,9 @@ msgid ""
 "aligned to North.  I've been unable to do so.  So currently it aligns to the "
 "top of the screen."
 msgstr ""
+"Puteţi introduce în imagine un reticul. În mod ideal, ar fi trebuit să fie "
+"aliniat cu nordul. Nu am reuşit să fac asta. În prezent este aliniat cu "
+"partea de sus a ecranului."
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:516
 #, qt-format
